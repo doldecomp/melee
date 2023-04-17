@@ -8,19 +8,19 @@
 
 #include <dolphin/mtx/types.h>
 
-static void ftMh_Unk17_80153910(HSD_GObj*);
+static void doAnim(HSD_GObj*);
 
 // 8015386C 15044C
 // https://decomp.me/scratch/dCvLa
-void ftMh_Unk17_8015386C(HSD_GObj* arg0)
+void ftMh_MS_367_Anim(HSD_GObj* arg0)
 {
     if (!ftAnim_IsFramesRemaining(arg0)) {
-        ftMh_Unk17_80153910(arg0);
+        doAnim(arg0);
     }
 }
 
 // 801538A8 150488
-void ftMh_Unk17_801538A8(HSD_GObj* arg0)
+void ftMh_MS_367_IASA(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -29,20 +29,20 @@ void ftMh_Unk17_801538A8(HSD_GObj* arg0)
 }
 
 // 801538EC 1504CC
-void ftMh_Unk17_801538EC(HSD_GObj* gobj)
+void ftMh_MS_367_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
 // 8015390C 1504EC
-void ftMh_Unk17_8015390C(HSD_GObj* gobj)
+void ftMh_MS_367_Coll(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80153910 1504F0
 // https://decomp.me/scratch/AYDbj
-static void ftMh_Unk17_80153910(HSD_GObj* arg0)
+static void doAnim(HSD_GObj* arg0)
 {
     Fighter* fp = GET_FIGHTER(arg0);
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
@@ -60,11 +60,11 @@ static void ftMh_Unk17_80153910(HSD_GObj* arg0)
 
 // 801539A4 150584
 // https://decomp.me/scratch/DVyVs
-void ftMh_Unk17_801539A4(HSD_GObj* arg0)
+void ftMh_MS_368_Anim(HSD_GObj* arg0)
 {
     if (!ftAnim_IsFramesRemaining(arg0)) {
         Fighter* temp_r4 = GET_FIGHTER(arg0);
         temp_r4->x80_self_vel.x = 0.0f;
-        ftMh_Unk18_80153A64(arg0);
+        ftMh_MS_368_80153A64(arg0);
     }
 }

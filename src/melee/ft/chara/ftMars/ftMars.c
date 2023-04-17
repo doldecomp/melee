@@ -12,102 +12,82 @@
 #include <common_structs.h>
 
 MotionState ftMs_Init_MotionStateTable[] = {
-    { 295, 0x00340211, 0x12000000, ftMs_SpecialN_80136844,
-      ftMs_SpecialN_80136914, ftMs_SpecialN_8013691C, ftMs_SpecialN_801369A4,
+    { 295, 0x00340211, 0x12000000, ftMs_SpecialNChargeStart_Anim,
+      ftMs_SpecialNChargeStart_IASA, ftMs_SpecialNChargeStart_Phys,
+      ftMs_SpecialNChargeStart_Coll, ftCamera_UpdateCameraBox },
+    { 296, 0x00340211, 0x12000000, ftMs_SpecialNChargeLoop_Anim,
+      ftMs_SpecialNChargeLoop_IASA, ftMs_SpecialNChargeLoop_Phys,
+      ftMs_SpecialNChargeLoop_Coll, ftCamera_UpdateCameraBox },
+    { 297, 0x00340211, 0x12000000, ftMs_SpecialNChargeEnd_Anim,
+      ftMs_SpecialNChargeEnd_IASA, ftMs_SpecialNChargeEnd_Phys,
+      ftMs_SpecialNChargeEnd_Coll, ftCamera_UpdateCameraBox },
+    { 298, 0x00340211, 0x12000000, ftMs_SpecialNChargeEnd_Anim,
+      ftMs_SpecialNChargeEnd_IASA, ftMs_SpecialNChargeEnd_Phys,
+      ftMs_SpecialNChargeEnd_Coll, ftCamera_UpdateCameraBox },
+    { 299, 0x00340611, 0x12000000, ftMs_SpecialAirNChargeStart_Anim,
+      ftMs_SpecialAirNChargeStart_IASA, ftMs_SpecialAirNChargeStart_Phys,
+      ftMs_SpecialAirNChargeStart_Coll, ftCamera_UpdateCameraBox },
+    { 300, 0x00340611, 0x12000000, ftMs_SpecialAirNChargeLoop_Anim,
+      ftMs_SpecialAirNChargeLoop_IASA, ftMs_SpecialAirNChargeLoop_Phys,
+      ftMs_SpecialAirNChargeLoop_Coll, ftCamera_UpdateCameraBox },
+    { 301, 0x00340611, 0x12000000, ftMs_SpecialAirNChargeEnd_Anim,
+      ftMs_SpecialAirNChargeEnd_IASA, ftMs_SpecialAirNChargeEnd_Phys,
+      ftMs_SpecialAirNChargeEnd_Coll, ftCamera_UpdateCameraBox },
+    { 302, 0x00340611, 0x12000000, ftMs_SpecialAirNChargeEnd_Anim,
+      ftMs_SpecialAirNChargeEnd_IASA, ftMs_SpecialAirNChargeEnd_Phys,
+      ftMs_SpecialAirNChargeEnd_Coll, ftCamera_UpdateCameraBox },
+    { 303, 0x00340212, 0x13000000, ftMs_SpecialS1_Anim, ftMs_SpecialS1_IASA,
+      ftMs_SpecialS1_Phys, ftMs_SpecialS1_Coll, ftCamera_UpdateCameraBox },
+    { 304, 0x00340212, 0x13000000, ftMs_SpecialS2_Anim, ftMs_SpecialS2_IASA,
+      ftMs_SpecialS2_Phys, ftMs_SpecialS2_Coll, ftCamera_UpdateCameraBox },
+    { 305, 0x00340212, 0x13000000, ftMs_SpecialS2_Anim, ftMs_SpecialS2_IASA,
+      ftMs_SpecialS2_Phys, ftMs_SpecialS2_Coll, ftCamera_UpdateCameraBox },
+    { 306, 0x00340212, 0x13000000, ftMs_SpecialS3_Anim, ftMs_SpecialS3_IASA,
+      ftMs_SpecialS3_Phys, ftMs_SpecialS3_Coll, ftCamera_UpdateCameraBox },
+    { 307, 0x00340212, 0x13000000, ftMs_SpecialS3_Anim, ftMs_SpecialS3_IASA,
+      ftMs_SpecialS3_Phys, ftMs_SpecialS3_Coll, ftCamera_UpdateCameraBox },
+    { 308, 0x00340212, 0x13000000, ftMs_SpecialS3_Anim, ftMs_SpecialS3_IASA,
+      ftMs_SpecialS3_Phys, ftMs_SpecialS3_Coll, ftCamera_UpdateCameraBox },
+    { 309, 0x00340212, 0x13000000, ftMs_SpecialS4_Anim, ftMs_SpecialS4_IASA,
+      ftMs_SpecialS4_Phys, ftMs_SpecialS4_Coll, ftCamera_UpdateCameraBox },
+    { 310, 0x00340212, 0x13000000, ftMs_SpecialS4_Anim, ftMs_SpecialS4_IASA,
+      ftMs_SpecialS4_Phys, ftMs_SpecialS4_Coll, ftCamera_UpdateCameraBox },
+    { 311, 0x00340212, 0x13000000, ftMs_SpecialS4_Anim, ftMs_SpecialS4_IASA,
+      ftMs_SpecialS4_Phys, ftMs_SpecialS4_Coll, ftCamera_UpdateCameraBox },
+    { 312, 0x00340612, 0x13000000, ftMs_SpecialS1_Anim, ftMs_SpecialS1_IASA,
+      ftMs_SpecialS1_Phys, ftMs_SpecialS1_Coll, ftCamera_UpdateCameraBox },
+    { 313, 0x00340612, 0x13000000, ftMs_SpecialS2_Anim, ftMs_SpecialS2_IASA,
+      ftMs_SpecialS2_Phys, ftMs_SpecialS2_Coll, ftCamera_UpdateCameraBox },
+    { 314, 0x00340612, 0x13000000, ftMs_SpecialS2_Anim, ftMs_SpecialS2_IASA,
+      ftMs_SpecialS2_Phys, ftMs_SpecialS2_Coll, ftCamera_UpdateCameraBox },
+    { 315, 0x00340612, 0x13000000, ftMs_SpecialS3_Anim, ftMs_SpecialS3_IASA,
+      ftMs_SpecialS3_Phys, ftMs_SpecialS3_Coll, ftCamera_UpdateCameraBox },
+    { 316, 0x00340612, 0x13000000, ftMs_SpecialS3_Anim, ftMs_SpecialS3_IASA,
+      ftMs_SpecialS3_Phys, ftMs_SpecialS3_Coll, ftCamera_UpdateCameraBox },
+    { 317, 0x00340612, 0x13000000, ftMs_SpecialS3_Anim, ftMs_SpecialS3_IASA,
+      ftMs_SpecialS3_Phys, ftMs_SpecialS3_Coll, ftCamera_UpdateCameraBox },
+    { 318, 0x00340612, 0x13000000, ftMs_SpecialS4_Anim, ftMs_SpecialS4_IASA,
+      ftMs_SpecialS4_Phys, ftMs_SpecialS4_Coll, ftCamera_UpdateCameraBox },
+    { 319, 0x00340612, 0x13000000, ftMs_SpecialS4_Anim, ftMs_SpecialS4_IASA,
+      ftMs_SpecialS4_Phys, ftMs_SpecialS4_Coll, ftCamera_UpdateCameraBox },
+    { 320, 0x00340612, 0x13000000, ftMs_SpecialS4_Anim, ftMs_SpecialS4_IASA,
+      ftMs_SpecialS4_Phys, ftMs_SpecialS4_Coll, ftCamera_UpdateCameraBox },
+    { 321, 0x00340213, 0x14000000, ftMs_SpecialHi_Anim, ftMs_SpecialHi_IASA,
+      ftMs_SpecialHi_Phys, ftMs_SpecialHi_Coll, ftCamera_UpdateCameraBox },
+    { 322, 0x00340613, 0x14000000, ftMs_SpecialAirHi_Anim,
+      ftMs_SpecialAirHi_IASA, ftMs_SpecialAirHi_Phys, ftMs_SpecialAirHi_Coll,
       ftCamera_UpdateCameraBox },
-    { 296, 0x00340211, 0x12000000, ftMs_SpecialN_80136ADC,
-      ftMs_SpecialN_80136C8C, ftMs_SpecialN_80136CFC, ftMs_SpecialN_80136D3C,
+    { 323, 0x00340214, 0x15000000, ftMs_SpecialLw_Anim, ftMs_SpecialLw_IASA,
+      ftMs_SpecialLw_Phys, ftMs_SpecialLw_Coll, ftCamera_UpdateCameraBox },
+    { 324, 0x00340214, 0x15000000, ftMs_SpecialLwHit_Anim,
+      ftMs_SpecialLwHit_IASA, ftMs_SpecialLwHit_Phys, ftMs_SpecialLwHit_Coll,
       ftCamera_UpdateCameraBox },
-    { 297, 0x00340211, 0x12000000, ftMs_SpecialN_80136EE4,
-      ftMs_SpecialN_8013713C, ftMs_SpecialN_80137144, ftMs_SpecialN_80137184,
+    { 325, 0x00340614, 0x15000000, ftMs_SpecialAirLw_Anim,
+      ftMs_SpecialAirLw_IASA, ftMs_SpecialAirLw_Phys, ftMs_SpecialAirLw_Coll,
       ftCamera_UpdateCameraBox },
-    { 298, 0x00340211, 0x12000000, ftMs_SpecialN_80136EE4,
-      ftMs_SpecialN_8013713C, ftMs_SpecialN_80137144, ftMs_SpecialN_80137184,
-      ftCamera_UpdateCameraBox },
-    { 299, 0x00340611, 0x12000000, ftMs_SpecialN_801368AC,
-      ftMs_SpecialN_80136918, ftMs_SpecialN_8013695C, ftMs_SpecialN_801369E0,
-      ftCamera_UpdateCameraBox },
-    { 300, 0x00340611, 0x12000000, ftMs_SpecialN_80136BB4,
-      ftMs_SpecialN_80136CC4, ftMs_SpecialN_80136D1C, ftMs_SpecialN_80136D78,
-      ftCamera_UpdateCameraBox },
-    { 301, 0x00340611, 0x12000000, ftMs_SpecialN_80137010,
-      ftMs_SpecialN_80137140, ftMs_SpecialN_80137164, ftMs_SpecialN_801371C0,
-      ftCamera_UpdateCameraBox },
-    { 302, 0x00340611, 0x12000000, ftMs_SpecialN_80137010,
-      ftMs_SpecialN_80137140, ftMs_SpecialN_80137164, ftMs_SpecialN_801371C0,
-      ftCamera_UpdateCameraBox },
-    { 303, 0x00340212, 0x13000000, ftMs_SpecialS_80137558,
-      ftMs_SpecialS_801375B8, ftMs_SpecialS_80137618, ftMs_SpecialS_8013767C,
-      ftCamera_UpdateCameraBox },
-    { 304, 0x00340212, 0x13000000, ftMs_SpecialS_801377B0,
-      ftMs_SpecialS_80137810, ftMs_SpecialS_80137870, ftMs_SpecialS_801378D4,
-      ftCamera_UpdateCameraBox },
-    { 305, 0x00340212, 0x13000000, ftMs_SpecialS_801377B0,
-      ftMs_SpecialS_80137810, ftMs_SpecialS_80137870, ftMs_SpecialS_801378D4,
-      ftCamera_UpdateCameraBox },
-    { 306, 0x00340212, 0x13000000, ftMs_SpecialS_80137B34,
-      ftMs_SpecialS_80137B94, ftMs_SpecialS_80137BF4, ftMs_SpecialS_80137C50,
-      ftCamera_UpdateCameraBox },
-    { 307, 0x00340212, 0x13000000, ftMs_SpecialS_80137B34,
-      ftMs_SpecialS_80137B94, ftMs_SpecialS_80137BF4, ftMs_SpecialS_80137C50,
-      ftCamera_UpdateCameraBox },
-    { 308, 0x00340212, 0x13000000, ftMs_SpecialS_80137B34,
-      ftMs_SpecialS_80137B94, ftMs_SpecialS_80137BF4, ftMs_SpecialS_80137C50,
-      ftCamera_UpdateCameraBox },
-    { 309, 0x00340212, 0x13000000, ftMs_SpecialS_80137ECC,
-      ftMs_SpecialS_80137F2C, ftMs_SpecialS_80137F30, ftMs_SpecialS_80137F8C,
-      ftCamera_UpdateCameraBox },
-    { 310, 0x00340212, 0x13000000, ftMs_SpecialS_80137ECC,
-      ftMs_SpecialS_80137F2C, ftMs_SpecialS_80137F30, ftMs_SpecialS_80137F8C,
-      ftCamera_UpdateCameraBox },
-    { 311, 0x00340212, 0x13000000, ftMs_SpecialS_80137ECC,
-      ftMs_SpecialS_80137F2C, ftMs_SpecialS_80137F30, ftMs_SpecialS_80137F8C,
-      ftCamera_UpdateCameraBox },
-    { 312, 0x00340612, 0x13000000, ftMs_SpecialS_80137558,
-      ftMs_SpecialS_801375B8, ftMs_SpecialS_80137618, ftMs_SpecialS_8013767C,
-      ftCamera_UpdateCameraBox },
-    { 313, 0x00340612, 0x13000000, ftMs_SpecialS_801377B0,
-      ftMs_SpecialS_80137810, ftMs_SpecialS_80137870, ftMs_SpecialS_801378D4,
-      ftCamera_UpdateCameraBox },
-    { 314, 0x00340612, 0x13000000, ftMs_SpecialS_801377B0,
-      ftMs_SpecialS_80137810, ftMs_SpecialS_80137870, ftMs_SpecialS_801378D4,
-      ftCamera_UpdateCameraBox },
-    { 315, 0x00340612, 0x13000000, ftMs_SpecialS_80137B34,
-      ftMs_SpecialS_80137B94, ftMs_SpecialS_80137BF4, ftMs_SpecialS_80137C50,
-      ftCamera_UpdateCameraBox },
-    { 316, 0x00340612, 0x13000000, ftMs_SpecialS_80137B34,
-      ftMs_SpecialS_80137B94, ftMs_SpecialS_80137BF4, ftMs_SpecialS_80137C50,
-      ftCamera_UpdateCameraBox },
-    { 317, 0x00340612, 0x13000000, ftMs_SpecialS_80137B34,
-      ftMs_SpecialS_80137B94, ftMs_SpecialS_80137BF4, ftMs_SpecialS_80137C50,
-      ftCamera_UpdateCameraBox },
-    { 318, 0x00340612, 0x13000000, ftMs_SpecialS_80137ECC,
-      ftMs_SpecialS_80137F2C, ftMs_SpecialS_80137F30, ftMs_SpecialS_80137F8C,
-      ftCamera_UpdateCameraBox },
-    { 319, 0x00340612, 0x13000000, ftMs_SpecialS_80137ECC,
-      ftMs_SpecialS_80137F2C, ftMs_SpecialS_80137F30, ftMs_SpecialS_80137F8C,
-      ftCamera_UpdateCameraBox },
-    { 320, 0x00340612, 0x13000000, ftMs_SpecialS_80137ECC,
-      ftMs_SpecialS_80137F2C, ftMs_SpecialS_80137F30, ftMs_SpecialS_80137F8C,
-      ftCamera_UpdateCameraBox },
-    { 321, 0x00340213, 0x14000000, ftMs_SpecialHi_801382E8,
-      ftMs_SpecialHi_801383A8, ftMs_SpecialHi_80138638,
-      ftMs_SpecialHi_801388B4, ftCamera_UpdateCameraBox },
-    { 322, 0x00340613, 0x14000000, ftMs_SpecialHi_80138348,
-      ftMs_SpecialHi_801384F0, ftMs_SpecialHi_8013873C,
-      ftMs_SpecialHi_80138940, ftCamera_UpdateCameraBox },
-    { 323, 0x00340214, 0x15000000, ftMs_SpecialLw_80138AA8,
-      ftMs_SpecialLw_80138C20, ftMs_SpecialLw_80138C28,
-      ftMs_SpecialLw_80138CC0, ftCamera_UpdateCameraBox },
-    { 324, 0x00340214, 0x15000000, ftMs_SpecialLw_80138E68,
-      ftMs_SpecialLw_80138FC0, ftMs_SpecialLw_80138FC8,
-      ftMs_SpecialLw_80139008, ftCamera_UpdateCameraBox },
-    { 325, 0x00340614, 0x15000000, ftMs_SpecialLw_80138B64,
-      ftMs_SpecialLw_80138C24, ftMs_SpecialLw_80138C5C,
-      ftMs_SpecialLw_80138CFC, ftCamera_UpdateCameraBox },
-    { 326, 0x00340614, 0x15000000, ftMs_SpecialLw_80138F14,
-      ftMs_SpecialLw_80138FC4, ftMs_SpecialLw_80138FE8,
-      ftMs_SpecialLw_80139044, ftCamera_UpdateCameraBox },
+    { 326, 0x00340614, 0x15000000, ftMs_SpecialAirLwHit_Anim,
+      ftMs_SpecialAirLwHit_IASA, ftMs_SpecialAirLwHit_Phys,
+      ftMs_SpecialAirLwHit_Coll, ftCamera_UpdateCameraBox },
 };
 
 char ftMs_Init_DatFilename[] = "PlMs.dat";
@@ -187,7 +167,7 @@ void ftMs_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 
 // 80136474 00133054
 // https://decomp.me/scratch/2TlGi
-void ftMs_OnLoadForRoy(Fighter* fp)
+void ftMs_Init_OnLoadForRoy(Fighter* fp)
 {
     PUSH_ATTRS(fp, MarsAttributes);
 }
@@ -224,7 +204,7 @@ void ftMs_Init_OnKnockbackExit(HSD_GObj* gobj)
 
 // 801365A8 00133188
 // https://decomp.me/scratch/Jqd2A
-void ftMs_Init_801365A8(HSD_GObj* gobj)
+void ftMs_SpecialN_801365A8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     s32 result;
@@ -249,7 +229,7 @@ void ftMs_Init_801365A8(HSD_GObj* gobj)
 
 // 8013666C 0013324C
 // https://decomp.me/scratch/Jqd2A
-void ftMs_Init_8013666C(HSD_GObj* gobj)
+void ftMs_SpecialN_8013666C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     s32 result;
@@ -274,7 +254,7 @@ void ftMs_Init_8013666C(HSD_GObj* gobj)
 
 // 80136730 00133310
 // https://decomp.me/scratch/Jqd2A
-void ftMs_Init_80136730(HSD_GObj* gobj)
+void ftMs_SpecialN_80136730(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->x2200_ftcmd_var0 = 0;

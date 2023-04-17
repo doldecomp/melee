@@ -150,7 +150,7 @@ extern struct gmm_x0 {
     u8 padding_x588[0x1850 - 0x588 - 4];
     /* 0x1850 */ GameRules x1850;
     struct gmm_x1868 thing;
-}* lbl_804D3EE0;
+}* gmMainLib_804D3EE0;
 
 struct gmm_retval_ED98 {
     u8 padding[0xC];

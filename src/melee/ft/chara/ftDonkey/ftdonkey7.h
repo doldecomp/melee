@@ -3,12 +3,12 @@
 
 #include <baselib/gobj.h>
 
-void ftDk_Unk7_800E04A4(HSD_GObj* gobj, s32 arg1);
+void ftDk_MS_348_800E04A4(HSD_GObj* gobj, s32 arg1);
 
-void ftDk_Unk7_800E0464(HSD_GObj* gobj);
-void ftDk_Unk7_800E0484(HSD_GObj* gobj);
-void ftDk_Unk7_800E04A4(HSD_GObj* gobj, s32 arg1);
-void ftDk_Unk7_800E0518(HSD_GObj* gobj);
-void ftDk_Unk7_800E0440(HSD_GObj* gobj);
+void ftDk_MS_348_Phys(HSD_GObj* gobj);
+void ftDk_MS_348_Coll(HSD_GObj* gobj);
+void ftDk_MS_348_800E04A4(HSD_GObj* gobj, s32 arg1);
+void ftDk_MS_346_Anim(HSD_GObj* gobj);
+void ftDk_MS_348_IASA(HSD_GObj* gobj);
 
 #endif

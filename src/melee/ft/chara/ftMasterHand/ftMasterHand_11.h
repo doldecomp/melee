@@ -4,18 +4,18 @@
 #include <baselib/forward.h>
 
 /// 11 Punch
-void ftMh_Unk11_80152370(HSD_GObj* gobj);
+void ftMh_MS_354_80152370(HSD_GObj* gobj);
 
-void ftMh_Unk11_8015247C(HSD_GObj* gobj);
-void ftMh_Unk11_801525E0(HSD_GObj* gobj);
-void ftMh_Unk11_8015236C(HSD_GObj* gobj);
-void ftMh_Unk11_801523BC(HSD_GObj* gobj);
-void ftMh_Unk11_80152414(HSD_GObj* gobj);
-void ftMh_Unk11_80152458(HSD_GObj* arg0);
-void ftMh_Unk11_80152478(HSD_GObj* gobj);
-void ftMh_Unk11_801524C8(HSD_GObj* gobj);
-void ftMh_Unk11_80152544(HSD_GObj* gobj);
-void ftMh_Unk11_80152588(HSD_GObj* gobj);
-void ftMh_Unk11_801525DC(HSD_GObj* gobj);
+void ftMh_MS_355_8015247C(HSD_GObj* gobj);
+void ftMh_MS_356_801525E0(HSD_GObj* gobj);
+void ftMh_MS_354_Coll(HSD_GObj* gobj);
+void ftMh_MS_355_Anim(HSD_GObj* gobj);
+void ftMh_MS_355_IASA(HSD_GObj* gobj);
+void ftMh_MS_355_Phys(HSD_GObj* arg0);
+void ftMh_MS_355_Coll(HSD_GObj* gobj);
+void ftMh_MS_356_Anim(HSD_GObj* gobj);
+void ftMh_MS_356_IASA(HSD_GObj* gobj);
+void ftMh_MS_356_Phys(HSD_GObj* gobj);
+void ftMh_MS_356_Coll(HSD_GObj* gobj);
 
 #endif

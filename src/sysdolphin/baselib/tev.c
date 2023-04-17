@@ -2,16 +2,16 @@
 #include <dolphin/gx/GXLight.h>
 #include <baselib/tev.h>
 
-extern void* lbl_80405B98;
+extern void* HSD_Tev_80405B98;
 
 HSD_ObjAllocData render_alloc_data;
 HSD_ObjAllocData tevreg_alloc_data;
 HSD_ObjAllocData chan_alloc_data;
 
 extern s32 current_tev;
-extern s32 lbl_804D7600;   // state_num_chans
-extern void* lbl_804D7604; // chan_chan
-extern void* lbl_804D760C;
+extern s32 HSD_Tev_804D7600;   // state_num_chans
+extern void* HSD_Tev_804D7604; // chan_chan
+extern void* HSD_Tev_804D760C;
 
 void HSD_RenderInitAllocData(void)
 {
@@ -46,8 +46,8 @@ asm void HSD_SetupChannel(void* ch)
 /* 803620AC 0035EC8C  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 803620B0 0035EC90  BF 61 00 4C */	stmw r27, 0x4c(r1)
 /* 803620B4 0035EC94  7C 7B 1B 79 */	or. r27, r3, r3
-/* 803620B8 0035EC98  3C 60 80 40 */	lis r3, lbl_80405B98@ha
-/* 803620BC 0035EC9C  3B E3 5B 98 */	addi r31, r3, lbl_80405B98@l
+/* 803620B8 0035EC98  3C 60 80 40 */	lis r3, HSD_Tev_80405B98@ha
+/* 803620BC 0035EC9C  3B E3 5B 98 */	addi r31, r3, HSD_Tev_80405B98@l
 /* 803620C0 0035ECA0  41 82 02 FC */	beq lbl_803623BC
 /* 803620C4 0035ECA4  80 7B 00 04 */	lwz r3, 4(r27)
 /* 803620C8 0035ECA8  2C 03 00 FF */	cmpwi r3, 0xff
@@ -64,7 +64,7 @@ lbl_803620D4:
 /* 803620F0 0035ECD0  2C 00 00 00 */	cmpwi r0, 0
 /* 803620F4 0035ECD4  40 82 00 E4 */	bne lbl_803621D8
 /* 803620F8 0035ECD8  57 C0 10 3A */	slwi r0, r30, 2
-/* 803620FC 0035ECDC  38 6D BF 64 */	addi r3, r13, lbl_804D7604
+/* 803620FC 0035ECDC  38 6D BF 64 */	addi r3, r13, HSD_Tev_804D7604
 /* 80362100 0035ECE0  7C 63 02 14 */	add r3, r3, r0
 /* 80362104 0035ECE4  80 03 00 00 */	lwz r0, 0(r3)
 /* 80362108 0035ECE8  2C 00 00 00 */	cmpwi r0, 0
@@ -128,7 +128,7 @@ lbl_803621D8:
 /* 803621DC 0035EDBC  2C 00 00 00 */	cmpwi r0, 0
 /* 803621E0 0035EDC0  40 82 00 E4 */	bne lbl_803622C4
 /* 803621E4 0035EDC4  57 C0 10 3A */	slwi r0, r30, 2
-/* 803621E8 0035EDC8  38 6D BF 6C */	addi r3, r13, lbl_804D760C
+/* 803621E8 0035EDC8  38 6D BF 6C */	addi r3, r13, HSD_Tev_804D760C
 /* 803621EC 0035EDCC  7C 63 02 14 */	add r3, r3, r0
 /* 803621F0 0035EDD0  80 03 00 00 */	lwz r0, 0(r3)
 /* 803621F4 0035EDD4  2C 00 00 00 */	cmpwi r0, 0
@@ -271,7 +271,7 @@ void HSD_SetupChannel(void* ch)
 
 void HSD_StateSetNumChans(s32 num)
 {
-    if (lbl_804D7600 != num) {
+    if (HSD_Tev_804D7600 != num) {
         GXSetNumChans(num & 0xFF);
     }
 }

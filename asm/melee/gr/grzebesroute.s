@@ -13,7 +13,7 @@ grZebesRoute_8020B164:
 /* 8020B16C 00207D4C  94 21 FF F8 */	stwu r1, -8(r1)
 /* 8020B170 00207D50  4B FB 98 89 */	bl Ground_801C49F8
 /* 8020B174 00207D54  3C 80 80 4A */	lis r4, stage_info@ha
-/* 8020B178 00207D58  90 6D B3 C0 */	stw r3, lbl_804D6A60@sda21(r13)
+/* 8020B178 00207D58  90 6D B3 C0 */	stw r3, grZe_Route_804D6A60@sda21(r13)
 /* 8020B17C 00207D5C  38 64 E6 C8 */	addi r3, r4, stage_info@l
 /* 8020B180 00207D60  38 A3 00 8C */	addi r5, r3, 0x8c
 /* 8020B184 00207D64  88 03 00 8C */	lbz r0, 0x8c(r3)
@@ -54,7 +54,7 @@ grZebesRoute_8020B1F4:
 /* 8020B200 00207DE0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8020B204 00207DE4  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8020B208 00207DE8  4B FB FB FD */	bl grZakoGenerator_801CAE04
-/* 8020B20C 00207DEC  80 6D B3 C0 */	lwz r3, lbl_804D6A60@sda21(r13)
+/* 8020B20C 00207DEC  80 6D B3 C0 */	lwz r3, grZe_Route_804D6A60@sda21(r13)
 /* 8020B210 00207DF0  80 63 00 04 */	lwz r3, 4(r3)
 /* 8020B214 00207DF4  2C 03 00 00 */	cmpwi r3, 0
 /* 8020B218 00207DF8  41 82 00 0C */	beq .L_8020B224
@@ -92,8 +92,8 @@ grZebesRoute_8020B260:
 /* 8020B278 00207E58  93 81 00 10 */	stw r28, 0x10(r1)
 /* 8020B27C 00207E5C  3B 83 00 00 */	addi r28, r3, 0
 /* 8020B280 00207E60  1C 1C 00 14 */	mulli r0, r28, 0x14
-/* 8020B284 00207E64  3C 60 80 3E */	lis r3, lbl_803E5DB0@ha
-/* 8020B288 00207E68  3B E3 5D B0 */	addi r31, r3, lbl_803E5DB0@l
+/* 8020B284 00207E64  3C 60 80 3E */	lis r3, grZe_Route_803E5DB0@ha
+/* 8020B288 00207E68  3B E3 5D B0 */	addi r31, r3, grZe_Route_803E5DB0@l
 /* 8020B28C 00207E6C  38 7C 00 00 */	addi r3, r28, 0
 /* 8020B290 00207E70  7F BF 02 14 */	add r29, r31, r0
 /* 8020B294 00207E74  4B FB 62 3D */	bl Ground_801C14D0
@@ -126,7 +126,7 @@ grZebesRoute_8020B260:
 /* 8020B2F8 00207ED8  41 82 00 2C */	beq .L_8020B324
 /* 8020B2FC 00207EDC  38 7E 00 00 */	addi r3, r30, 0
 /* 8020B300 00207EE0  38 A0 00 04 */	li r5, 4
-/* 8020B304 00207EE4  48 18 4A 51 */	bl func_8038FD54
+/* 8020B304 00207EE4  48 18 4A 51 */	bl HSD_GObjProc_8038FD54
 /* 8020B308 00207EE8  48 00 00 1C */	b .L_8020B324
 .L_8020B30C:
 /* 8020B30C 00207EEC  38 DC 00 00 */	addi r6, r28, 0
@@ -209,7 +209,7 @@ grZebesRoute_8020B3C0:
 /* 8020B3F4 00207FD4  38 9F 00 00 */	addi r4, r31, 0
 /* 8020B3F8 00207FD8  38 60 00 01 */	li r3, 1
 /* 8020B3FC 00207FDC  4B E4 CC CD */	bl mpLib_800580C8
-/* 8020B400 00207FE0  80 6D B3 C0 */	lwz r3, lbl_804D6A60@sda21(r13)
+/* 8020B400 00207FE0  80 6D B3 C0 */	lwz r3, grZe_Route_804D6A60@sda21(r13)
 /* 8020B404 00207FE4  80 03 00 00 */	lwz r0, 0(r3)
 /* 8020B408 00207FE8  7C 00 07 34 */	extsh r0, r0
 /* 8020B40C 00207FEC  B0 1F 00 C4 */	sth r0, 0xc4(r31)
@@ -225,12 +225,12 @@ grZebesRoute_8020B424:
 .global grZebesRoute_8020B42C
 grZebesRoute_8020B42C:
 /* 8020B42C 0020800C  7C 08 02 A6 */	mflr r0
-/* 8020B430 00208010  3C 80 80 3C */	lis r4, lbl_803B83A0@ha
+/* 8020B430 00208010  3C 80 80 3C */	lis r4, grZe_Route_803B83A0@ha
 /* 8020B434 00208014  90 01 00 04 */	stw r0, 4(r1)
 /* 8020B438 00208018  94 21 FF D8 */	stwu r1, -0x28(r1)
 /* 8020B43C 0020801C  93 E1 00 24 */	stw r31, 0x24(r1)
 /* 8020B440 00208020  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 8020B444 00208024  84 64 83 A0 */	lwzu r3, lbl_803B83A0@l(r4)
+/* 8020B444 00208024  84 64 83 A0 */	lwzu r3, grZe_Route_803B83A0@l(r4)
 /* 8020B448 00208028  80 04 00 04 */	lwz r0, 0x4(r4)
 /* 8020B44C 0020802C  90 61 00 10 */	stw r3, 0x10(r1)
 /* 8020B450 00208030  90 01 00 14 */	stw r0, 0x14(r1)
@@ -242,12 +242,12 @@ grZebesRoute_8020B42C:
 /* 8020B468 00208048  38 81 00 10 */	addi r4, r1, 0x10
 /* 8020B46C 0020804C  4B E7 B1 D9 */	bl ftLib_80086644
 /* 8020B470 00208050  C0 21 00 14 */	lfs f1, 0x14(r1)
-/* 8020B474 00208054  C0 02 BF 38 */	lfs f0, lbl_804DB918@sda21(r2)
+/* 8020B474 00208054  C0 02 BF 38 */	lfs f0, grZe_Route_804DB918@sda21(r2)
 /* 8020B478 00208058  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 8020B47C 0020805C  40 80 00 08 */	bge .L_8020B484
 /* 8020B480 00208060  D0 01 00 14 */	stfs f0, 0x14(r1)
 .L_8020B484:
-/* 8020B484 00208064  C0 02 BF 3C */	lfs f0, lbl_804DB91C@sda21(r2)
+/* 8020B484 00208064  C0 02 BF 3C */	lfs f0, grZe_Route_804DB91C@sda21(r2)
 /* 8020B488 00208068  D0 01 00 10 */	stfs f0, 0x10(r1)
 /* 8020B48C 0020806C  C0 21 00 10 */	lfs f1, 0x10(r1)
 /* 8020B490 00208070  C0 41 00 14 */	lfs f2, 0x14(r1)
@@ -307,7 +307,7 @@ grZebesRoute_8020B4D4:
 .global grZebesRoute_8020B548
 grZebesRoute_8020B548:
 /* 8020B548 00208128  7C 08 02 A6 */	mflr r0
-/* 8020B54C 0020812C  3C 80 80 3C */	lis r4, lbl_803B83A0@ha
+/* 8020B54C 0020812C  3C 80 80 3C */	lis r4, grZe_Route_803B83A0@ha
 /* 8020B550 00208130  90 01 00 04 */	stw r0, 4(r1)
 /* 8020B554 00208134  94 21 FF 48 */	stwu r1, -0xb8(r1)
 /* 8020B558 00208138  DB E1 00 B0 */	stfd f31, 0xb0(r1)
@@ -316,15 +316,15 @@ grZebesRoute_8020B548:
 /* 8020B564 00208144  DB 81 00 98 */	stfd f28, 0x98(r1)
 /* 8020B568 00208148  DB 61 00 90 */	stfd f27, 0x90(r1)
 /* 8020B56C 0020814C  BF 21 00 74 */	stmw r25, 0x74(r1)
-/* 8020B570 00208150  3B C4 83 A0 */	addi r30, r4, lbl_803B83A0@l
-/* 8020B574 00208154  80 6D C1 84 */	lwz r3, lbl_804D7824@sda21(r13)
+/* 8020B570 00208150  3B C4 83 A0 */	addi r30, r4, grZe_Route_803B83A0@l
+/* 8020B574 00208154  80 6D C1 84 */	lwz r3, HSD_GObj_804D7824@sda21(r13)
 /* 8020B578 00208158  83 23 00 10 */	lwz r25, 0x10(r3)
 /* 8020B57C 0020815C  28 19 00 00 */	cmplwi r25, 0
 /* 8020B580 00208160  40 82 00 18 */	bne .L_8020B598
-/* 8020B584 00208164  3C 60 80 3E */	lis r3, lbl_803E5E64@ha
-/* 8020B588 00208168  38 63 5E 64 */	addi r3, r3, lbl_803E5E64@l
+/* 8020B584 00208164  3C 60 80 3E */	lis r3, grZe_Route_803E5E64@ha
+/* 8020B588 00208168  38 63 5E 64 */	addi r3, r3, grZe_Route_803E5E64@l
 /* 8020B58C 0020816C  38 80 01 69 */	li r4, 0x169
-/* 8020B590 00208170  38 AD 91 A0 */	addi r5, r13, lbl_804D4840@sda21
+/* 8020B590 00208170  38 AD 91 A0 */	addi r5, r13, grZe_Route_804D4840@sda21
 /* 8020B594 00208174  48 17 CC 8D */	bl __assert
 .L_8020B598:
 /* 8020B598 00208178  83 39 00 28 */	lwz r25, 0x28(r25)
@@ -337,18 +337,18 @@ grZebesRoute_8020B548:
 .L_8020B5B4:
 /* 8020B5B4 00208194  80 19 00 0C */	lwz r0, 0xc(r25)
 .L_8020B5B8:
-/* 8020B5B8 00208198  C0 42 BF 4C */	lfs f2, lbl_804DB92C@sda21(r2)
-/* 8020B5BC 0020819C  3C 60 80 3E */	lis r3, lbl_803E5E64@ha
-/* 8020B5C0 002081A0  C0 22 BF 50 */	lfs f1, lbl_804DB930@sda21(r2)
+/* 8020B5B8 00208198  C0 42 BF 4C */	lfs f2, grZe_Route_804DB92C@sda21(r2)
+/* 8020B5BC 0020819C  3C 60 80 3E */	lis r3, grZe_Route_803E5E64@ha
+/* 8020B5C0 002081A0  C0 22 BF 50 */	lfs f1, grZe_Route_804DB930@sda21(r2)
 /* 8020B5C4 002081A4  7C 1A 03 78 */	mr r26, r0
-/* 8020B5C8 002081A8  C0 02 BF 54 */	lfs f0, lbl_804DB934@sda21(r2)
+/* 8020B5C8 002081A8  C0 02 BF 54 */	lfs f0, grZe_Route_804DB934@sda21(r2)
 /* 8020B5CC 002081AC  EF C2 07 F2 */	fmuls f30, f2, f31
-/* 8020B5D0 002081B0  C3 62 BF 60 */	lfs f27, lbl_804DB940@sda21(r2)
+/* 8020B5D0 002081B0  C3 62 BF 60 */	lfs f27, grZe_Route_804DB940@sda21(r2)
 /* 8020B5D4 002081B4  EF A1 07 F2 */	fmuls f29, f1, f31
 /* 8020B5D8 002081B8  3B 61 00 14 */	addi r27, r1, 0x14
 /* 8020B5DC 002081BC  EF 80 07 F2 */	fmuls f28, f0, f31
 /* 8020B5E0 002081C0  3B 81 00 18 */	addi r28, r1, 0x18
-/* 8020B5E4 002081C4  3B E3 5E 64 */	addi r31, r3, lbl_803E5E64@l
+/* 8020B5E4 002081C4  3B E3 5E 64 */	addi r31, r3, grZe_Route_803E5E64@l
 /* 8020B5E8 002081C8  3B A1 00 1C */	addi r29, r1, 0x1c
 /* 8020B5EC 002081CC  3B 20 00 00 */	li r25, 0
 /* 8020B5F0 002081D0  48 00 02 2C */	b .L_8020B81C
@@ -360,7 +360,7 @@ grZebesRoute_8020B548:
 /* 8020B604 002081E4  40 82 00 14 */	bne .L_8020B618
 /* 8020B608 002081E8  38 7F 00 00 */	addi r3, r31, 0
 /* 8020B60C 002081EC  38 80 01 74 */	li r4, 0x174
-/* 8020B610 002081F0  38 AD 91 A8 */	addi r5, r13, lbl_804D4848@sda21
+/* 8020B610 002081F0  38 AD 91 A8 */	addi r5, r13, grZe_Route_804D4848@sda21
 /* 8020B614 002081F4  48 17 CC 0D */	bl __assert
 .L_8020B618:
 /* 8020B618 002081F8  A0 1A 00 08 */	lhz r0, 8(r26)
@@ -371,7 +371,7 @@ grZebesRoute_8020B548:
 /* 8020B62C 0020820C  7F 43 D3 78 */	mr r3, r26
 /* 8020B630 00208210  80 BE 00 10 */	lwz r5, 0x10(r30)
 /* 8020B634 00208214  7F A4 EB 78 */	mr r4, r29
-/* 8020B638 00208218  80 02 BF 40 */	lwz r0, lbl_804DB920@sda21(r2)
+/* 8020B638 00208218  80 02 BF 40 */	lwz r0, grZe_Route_804DB920@sda21(r2)
 /* 8020B63C 0020821C  90 C1 00 4C */	stw r6, 0x4c(r1)
 /* 8020B640 00208220  90 A1 00 50 */	stw r5, 0x50(r1)
 /* 8020B644 00208224  80 BE 00 14 */	lwz r5, 0x14(r30)
@@ -383,7 +383,7 @@ grZebesRoute_8020B548:
 /* 8020B65C 0020823C  80 BE 00 20 */	lwz r5, 0x20(r30)
 /* 8020B660 00208240  90 A1 00 48 */	stw r5, 0x48(r1)
 /* 8020B664 00208244  90 01 00 1C */	stw r0, 0x1c(r1)
-/* 8020B668 00208248  48 15 B6 3D */	bl func_80366CA4
+/* 8020B668 00208248  48 15 B6 3D */	bl HSD_LObj_80366CA4
 /* 8020B66C 0020824C  C0 01 00 4C */	lfs f0, 0x4c(r1)
 /* 8020B670 00208250  38 7A 00 00 */	addi r3, r26, 0
 /* 8020B674 00208254  38 81 00 4C */	addi r4, r1, 0x4c
@@ -408,15 +408,15 @@ grZebesRoute_8020B548:
 /* 8020B6C0 002082A0  EC 00 07 F2 */	fmuls f0, f0, f31
 /* 8020B6C4 002082A4  D0 01 00 48 */	stfs f0, 0x48(r1)
 /* 8020B6C8 002082A8  48 15 B6 E9 */	bl HSD_LObjSetInterest
-/* 8020B6CC 002082AC  C0 22 BF 58 */	lfs f1, lbl_804DB938@sda21(r2)
+/* 8020B6CC 002082AC  C0 22 BF 58 */	lfs f1, grZe_Route_804DB938@sda21(r2)
 /* 8020B6D0 002082B0  38 7A 00 00 */	addi r3, r26, 0
 /* 8020B6D4 002082B4  38 80 00 03 */	li r4, 3
-/* 8020B6D8 002082B8  48 15 B5 E5 */	bl func_80366CBC
+/* 8020B6D8 002082B8  48 15 B5 E5 */	bl HSD_LObj_80366CBC
 /* 8020B6DC 002082BC  FC 20 F0 90 */	fmr f1, f30
-/* 8020B6E0 002082C0  C0 42 BF 5C */	lfs f2, lbl_804DB93C@sda21(r2)
+/* 8020B6E0 002082C0  C0 42 BF 5C */	lfs f2, grZe_Route_804DB93C@sda21(r2)
 /* 8020B6E4 002082C4  38 7A 00 00 */	addi r3, r26, 0
 /* 8020B6E8 002082C8  38 80 00 03 */	li r4, 3
-/* 8020B6EC 002082CC  48 15 B5 E5 */	bl func_80366CD0
+/* 8020B6EC 002082CC  48 15 B5 E5 */	bl HSD_LObj_80366CD0
 /* 8020B6F0 002082D0  48 00 01 10 */	b .L_8020B800
 .L_8020B6F4:
 /* 8020B6F4 002082D4  28 00 00 02 */	cmplwi r0, 2
@@ -428,13 +428,13 @@ grZebesRoute_8020B548:
 /* 8020B70C 002082EC  7F 43 D3 78 */	mr r3, r26
 /* 8020B710 002082F0  80 BE 00 28 */	lwz r5, 0x28(r30)
 /* 8020B714 002082F4  7F 84 E3 78 */	mr r4, r28
-/* 8020B718 002082F8  80 02 BF 44 */	lwz r0, lbl_804DB924@sda21(r2)
+/* 8020B718 002082F8  80 02 BF 44 */	lwz r0, grZe_Route_804DB924@sda21(r2)
 /* 8020B71C 002082FC  90 C1 00 30 */	stw r6, 0x30(r1)
 /* 8020B720 00208300  90 A1 00 34 */	stw r5, 0x34(r1)
 /* 8020B724 00208304  80 BE 00 2C */	lwz r5, 0x2c(r30)
 /* 8020B728 00208308  90 A1 00 38 */	stw r5, 0x38(r1)
 /* 8020B72C 0020830C  90 01 00 18 */	stw r0, 0x18(r1)
-/* 8020B730 00208310  48 15 B5 75 */	bl func_80366CA4
+/* 8020B730 00208310  48 15 B5 75 */	bl HSD_LObj_80366CA4
 /* 8020B734 00208314  C0 01 00 30 */	lfs f0, 0x30(r1)
 /* 8020B738 00208318  38 7A 00 00 */	addi r3, r26, 0
 /* 8020B73C 0020831C  38 81 00 30 */	addi r4, r1, 0x30
@@ -448,10 +448,10 @@ grZebesRoute_8020B548:
 /* 8020B75C 0020833C  D0 01 00 38 */	stfs f0, 0x38(r1)
 /* 8020B760 00208340  48 15 B5 89 */	bl HSD_LObjSetPosition
 /* 8020B764 00208344  FC 20 E8 90 */	fmr f1, f29
-/* 8020B768 00208348  C0 42 BF 64 */	lfs f2, lbl_804DB944@sda21(r2)
+/* 8020B768 00208348  C0 42 BF 64 */	lfs f2, grZe_Route_804DB944@sda21(r2)
 /* 8020B76C 0020834C  38 7A 00 00 */	addi r3, r26, 0
 /* 8020B770 00208350  38 80 00 03 */	li r4, 3
-/* 8020B774 00208354  48 15 B5 5D */	bl func_80366CD0
+/* 8020B774 00208354  48 15 B5 5D */	bl HSD_LObj_80366CD0
 /* 8020B778 00208358  48 00 00 88 */	b .L_8020B800
 .L_8020B77C:
 /* 8020B77C 0020835C  28 00 00 02 */	cmplwi r0, 2
@@ -463,13 +463,13 @@ grZebesRoute_8020B548:
 /* 8020B794 00208374  7F 43 D3 78 */	mr r3, r26
 /* 8020B798 00208378  80 BE 00 34 */	lwz r5, 0x34(r30)
 /* 8020B79C 0020837C  7F 64 DB 78 */	mr r4, r27
-/* 8020B7A0 00208380  80 02 BF 48 */	lwz r0, lbl_804DB928@sda21(r2)
+/* 8020B7A0 00208380  80 02 BF 48 */	lwz r0, grZe_Route_804DB928@sda21(r2)
 /* 8020B7A4 00208384  90 C1 00 20 */	stw r6, 0x20(r1)
 /* 8020B7A8 00208388  90 A1 00 24 */	stw r5, 0x24(r1)
 /* 8020B7AC 0020838C  80 BE 00 38 */	lwz r5, 0x38(r30)
 /* 8020B7B0 00208390  90 A1 00 28 */	stw r5, 0x28(r1)
 /* 8020B7B4 00208394  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8020B7B8 00208398  48 15 B4 ED */	bl func_80366CA4
+/* 8020B7B8 00208398  48 15 B4 ED */	bl HSD_LObj_80366CA4
 /* 8020B7BC 0020839C  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 8020B7C0 002083A0  38 7A 00 00 */	addi r3, r26, 0
 /* 8020B7C4 002083A4  38 81 00 20 */	addi r4, r1, 0x20
@@ -483,10 +483,10 @@ grZebesRoute_8020B548:
 /* 8020B7E4 002083C4  D0 01 00 28 */	stfs f0, 0x28(r1)
 /* 8020B7E8 002083C8  48 15 B5 01 */	bl HSD_LObjSetPosition
 /* 8020B7EC 002083CC  FC 20 E0 90 */	fmr f1, f28
-/* 8020B7F0 002083D0  C0 42 BF 64 */	lfs f2, lbl_804DB944@sda21(r2)
+/* 8020B7F0 002083D0  C0 42 BF 64 */	lfs f2, grZe_Route_804DB944@sda21(r2)
 /* 8020B7F4 002083D4  38 7A 00 00 */	addi r3, r26, 0
 /* 8020B7F8 002083D8  38 80 00 03 */	li r4, 3
-/* 8020B7FC 002083DC  48 15 B4 D5 */	bl func_80366CD0
+/* 8020B7FC 002083DC  48 15 B4 D5 */	bl HSD_LObj_80366CD0
 .L_8020B800:
 /* 8020B800 002083E0  28 1A 00 00 */	cmplwi r26, 0
 /* 8020B804 002083E4  3B 39 00 01 */	addi r25, r25, 1
@@ -525,8 +525,8 @@ grZebesRoute_8020B85C:
 
 .section .rodata
     .balign 8
-.global lbl_803B83A0
-lbl_803B83A0:
+.global grZe_Route_803B83A0
+grZe_Route_803B83A0:
     .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
@@ -547,8 +547,8 @@ lbl_803B83A0:
 
 .section .data
     .balign 8
-.global lbl_803E5DB0
-lbl_803E5DB0:
+.global grZe_Route_803E5DB0
+grZe_Route_803E5DB0:
     .4byte grZebesRoute_8020B348
     .4byte grZebesRoute_8020B374
     .4byte grZebesRoute_8020B37C
@@ -569,16 +569,16 @@ lbl_803E5DB0:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_803E5E00
-lbl_803E5E00:
+.global grZe_Route_803E5E00
+grZe_Route_803E5E00:
     .4byte 0x2F47724E
     .4byte 0x5A722E64
     .4byte 0x61740000
-.global lbl_803E5E0C
-lbl_803E5E0C:
+.global grZe_Route_803E5E0C
+grZe_Route_803E5E0C:
     .4byte 0x00000021
-    .4byte lbl_803E5DB0
-    .4byte lbl_803E5E00
+    .4byte grZe_Route_803E5DB0
+    .4byte grZe_Route_803E5E00
     .4byte grZebesRoute_8020B164
     .4byte grZebesRoute_8020B160
     .4byte grZebesRoute_8020B1D4
@@ -598,66 +598,66 @@ lbl_803E5E0C:
     .4byte 0x2869643D
     .4byte 0x2564290A
     .4byte NULL
-.global lbl_803E5E64
-lbl_803E5E64:
+.global grZe_Route_803E5E64
+grZe_Route_803E5E64:
     .asciz "grzebesroute.c"
     .balign 4
 
 
 .section .sdata
     .balign 8
-.global lbl_804D4840
-lbl_804D4840:
+.global grZe_Route_804D4840
+grZe_Route_804D4840:
     .asciz "gobj"
     .balign 4
-.global lbl_804D4848
-lbl_804D4848:
+.global grZe_Route_804D4848
+grZe_Route_804D4848:
     .asciz "0"
     .balign 4
 
 
 .section .sbss
     .balign 8
-.global lbl_804D6A60
-lbl_804D6A60:
+.global grZe_Route_804D6A60
+grZe_Route_804D6A60:
     .skip 0x4
 
 
 .section .sdata2
     .balign 8
-.global lbl_804DB918
-lbl_804DB918:
+.global grZe_Route_804DB918
+grZe_Route_804DB918:
     .4byte 0xC2480000
-.global lbl_804DB91C
-lbl_804DB91C:
+.global grZe_Route_804DB91C
+grZe_Route_804DB91C:
     .4byte 0x00000000
-.global lbl_804DB920
-lbl_804DB920:
+.global grZe_Route_804DB920
+grZe_Route_804DB920:
     .4byte 0xFFFFCCFF
-.global lbl_804DB924
-lbl_804DB924:
+.global grZe_Route_804DB924
+grZe_Route_804DB924:
     .4byte 0xFDFDBFFF
-.global lbl_804DB928
-lbl_804DB928:
+.global grZe_Route_804DB928
+grZe_Route_804DB928:
     .4byte 0x0000F7FF
-.global lbl_804DB92C
-lbl_804DB92C:
+.global grZe_Route_804DB92C
+grZe_Route_804DB92C:
     .4byte 0x44160000
-.global lbl_804DB930
-lbl_804DB930:
+.global grZe_Route_804DB930
+grZe_Route_804DB930:
     .4byte 0x447A0000
-.global lbl_804DB934
-lbl_804DB934:
+.global grZe_Route_804DB934
+grZe_Route_804DB934:
     .4byte 0x43C80000
-.global lbl_804DB938
-lbl_804DB938:
+.global grZe_Route_804DB938
+grZe_Route_804DB938:
     .4byte 0x42340000
-.global lbl_804DB93C
-lbl_804DB93C:
+.global grZe_Route_804DB93C
+grZe_Route_804DB93C:
     .4byte 0x3F7D70A4
-.global lbl_804DB940
-lbl_804DB940:
+.global grZe_Route_804DB940
+grZe_Route_804DB940:
     .4byte 0x43FA0000
-.global lbl_804DB944
-lbl_804DB944:
+.global grZe_Route_804DB944
+grZe_Route_804DB944:
     .4byte 0x3CF5C28F

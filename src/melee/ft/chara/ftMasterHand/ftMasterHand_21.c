@@ -4,11 +4,11 @@
 #include "ft/inlines.h"
 
 // 801541C4 150DA4
-void ftMh_Unk21_801541C4(HSD_GObj* gobj) {}
+void ftMh_MS_371_Coll(HSD_GObj* gobj) {}
 
 // 801541C8 150DA8
 // https://decomp.me/scratch/WhlXG
-void ftMh_Unk21_801541C8(HSD_GObj* gobj, void* arg1)
+void ftMh_MS_371_801541C8(HSD_GObj* gobj, void* arg1)
 {
     Fighter* r31_fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, 0x174, 0, 0, 0.0f, 1.0f, 0.0f);

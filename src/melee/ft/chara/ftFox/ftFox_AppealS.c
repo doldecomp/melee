@@ -48,7 +48,7 @@ bool ftFx_AppealS_CheckInput(HSD_GObj* gobj)
         ((u8) fp->x682 == true))
     {
         if (ftFox_CheckAppealSCount() == 0) {
-            ftFx_AppealS_Action(gobj);
+            ftFx_AppealS_Enter(gobj);
             pl_80040120(fp->xC_playerID, fp->x221F_flag.bits.b4);
             return true;
         }
@@ -77,7 +77,7 @@ static s32 ASID_AppealS[2][3] = {
     { MS_FOX_APPEALS_START_L, MS_FOX_APPEALS_L, MS_FOX_APPEALS_END_L }
 };
 
-void ftFx_AppealS_Action(HSD_GObj* gobj)
+void ftFx_AppealS_Enter(HSD_GObj* gobj)
 {
     s32 facingDir;
     s32 actionDir;

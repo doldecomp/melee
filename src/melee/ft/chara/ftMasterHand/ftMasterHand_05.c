@@ -9,7 +9,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
 
-u32 ftMh_Unk05_80151428(Vec3* vec)
+u32 ftMh_MS_343_80151428(Vec3* vec)
 {
     HSD_GObj* fetched_gobj = ftBossLib_8015C3E8(0x1B);
 
@@ -42,14 +42,14 @@ inline void func_80151484_inline1(HSD_GObj* gobj)
     lbAudioAx_800236B8(r29_fp->mv.mh.unk0.x2C);
     lbAudioAx_800236B8(r29_fp->mv.mh.unk0.x30);
     if (r29_fp->mv.mh.unk0.x20) {
-        ftMh_Unk34_80155D1C(r29_fp->x1A58_interactedFighter);
+        ftMh_CaptureWaitMasterHand_80155D1C(r29_fp->x1A58_interactedFighter);
     }
     r29_fp->x80_self_vel.y = temp_r30->x14C;
     r29_fp->x80_self_vel.z = temp_r30->x154;
     r29_fp->mv.mh.unk0.x8 = temp_r30->x15C;
 }
 
-void ftMh_Unk05_80151484(HSD_GObj* gobj)
+void ftMh_MS_343_80151484(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -73,7 +73,7 @@ void ftMh_Unk05_80151484(HSD_GObj* gobj)
 
 // 801515B8 14E198
 // https://decomp.me/scratch/I5KfO
-void ftMh_Unk05_801515B8(HSD_GObj* gobj)
+void ftMh_MS_344_Anim(HSD_GObj* gobj)
 {
     s32 temp_r0;
     s32 temp_r3;
@@ -114,7 +114,7 @@ void ftMh_Unk05_801515B8(HSD_GObj* gobj)
 
 // 801516B4 14E294
 // https://decomp.me/scratch/AmIVW
-void ftMh_Unk05_801516B4(HSD_GObj* gobj)
+void ftMh_MS_345_Anim(HSD_GObj* gobj)
 {
     f32 temp_f1;
     s32 temp_r0;

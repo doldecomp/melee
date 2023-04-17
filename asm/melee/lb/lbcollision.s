@@ -5,14 +5,14 @@
 .section .data
     .balign 8
 
-.global lbl_803B9928
-lbl_803B9928:
-    .4byte lbl_804D36AC
-    .4byte lbl_804D36B0
-    .4byte lbl_804D36B4
-    .4byte lbl_804D36B8
-    .4byte lbl_804D36BC
-    .4byte lbl_804D36C0
+.global lbColl_803B9928
+lbColl_803B9928:
+    .4byte lbColl_804D36AC
+    .4byte lbColl_804D36B0
+    .4byte lbColl_804D36B4
+    .4byte lbColl_804D36B8
+    .4byte lbColl_804D36BC
+    .4byte lbColl_804D36C0
     .4byte 0x29CF2D41
     .4byte 0x11512000
     .4byte 0x2D411FFF
@@ -433,108 +433,108 @@ lbl_803B9928:
 
 .section .sdata
     .balign 8
-.global lbl_804D36A0
-lbl_804D36A0:
+.global lbColl_804D36A0
+lbColl_804D36A0:
     .4byte 0xFF000080
 
-.global lbl_804D36A4
-lbl_804D36A4:
+.global lbColl_804D36A4
+lbColl_804D36A4:
     .4byte 0xFF00FF80
 
-.global lbl_804D36A8
-lbl_804D36A8:
+.global lbColl_804D36A8
+lbColl_804D36A8:
     .4byte 0x80000080
 
-.global lbl_804D36AC
-lbl_804D36AC:
+.global lbColl_804D36AC
+lbColl_804D36AC:
     .4byte 0xFFFF0080
 
-.global lbl_804D36B0
-lbl_804D36B0:
+.global lbColl_804D36B0
+lbColl_804D36B0:
     .4byte 0x80800080
 
-.global lbl_804D36B4
-lbl_804D36B4:
+.global lbColl_804D36B4
+lbColl_804D36B4:
     .4byte 0x00FF0080
 
-.global lbl_804D36B8
-lbl_804D36B8:
+.global lbColl_804D36B8
+lbColl_804D36B8:
     .4byte 0x00800080
 
-.global lbl_804D36BC
-lbl_804D36BC:
+.global lbColl_804D36BC
+lbColl_804D36BC:
     .4byte 0x0000FF80
 
-.global lbl_804D36C0
-lbl_804D36C0:
+.global lbColl_804D36C0
+lbColl_804D36C0:
     .4byte 0x00008080
 
-.global lbl_804D36C4
-lbl_804D36C4:
+.global lbColl_804D36C4
+lbColl_804D36C4:
     .4byte 0x00FFFF80
 
-.global lbl_804D36C8
-lbl_804D36C8:
+.global lbColl_804D36C8
+lbColl_804D36C8:
     .4byte 0x00808080
 
-.global lbl_804D36CC
-lbl_804D36CC:
+.global lbColl_804D36CC
+lbColl_804D36CC:
     .4byte 0x00FF8080
 
-.global lbl_804D36D0
-lbl_804D36D0:
+.global lbColl_804D36D0
+lbColl_804D36D0:
     .4byte 0x00804080
 
-.global lbl_804D36D4
-lbl_804D36D4:
+.global lbColl_804D36D4
+lbColl_804D36D4:
     .4byte 0x0080FF80
 
-.global lbl_804D36D8
-lbl_804D36D8:
+.global lbColl_804D36D8
+lbColl_804D36D8:
     .4byte 0x00408080
 
-.global lbl_804D36DC
-lbl_804D36DC:
+.global lbColl_804D36DC
+lbColl_804D36DC:
     .4byte 0xFFFFFF80
 
-.global lbl_804D36E0
-lbl_804D36E0:
+.global lbColl_804D36E0
+lbColl_804D36E0:
     .4byte 0xFF800080
 
-.global lbl_804D36E4
-lbl_804D36E4:
+.global lbColl_804D36E4
+lbColl_804D36E4:
     .4byte 0x80400080
 
-.global lbl_804D36E8
-lbl_804D36E8:
+.global lbColl_804D36E8
+lbColl_804D36E8:
     .4byte 0xFFFFFF80
 
-.global lbl_804D36EC
-lbl_804D36EC:
+.global lbColl_804D36EC
+lbColl_804D36EC:
     .4byte 0x80808080
 
-.global lbl_804D36F0
-lbl_804D36F0:
+.global lbColl_804D36F0
+lbColl_804D36F0:
     .4byte 0xFFFF0080
 
-.global lbl_804D36F4
-lbl_804D36F4:
+.global lbColl_804D36F4
+lbColl_804D36F4:
     .4byte 0x80800080
 
-.global lbl_804D36F8
-lbl_804D36F8:
+.global lbColl_804D36F8
+lbColl_804D36F8:
     .4byte 0xFF000080
 
-.global lbl_804D36FC
-lbl_804D36FC:
+.global lbColl_804D36FC
+lbColl_804D36FC:
     .4byte 0x80000080
 
-.global lbl_804D3700
-lbl_804D3700:
+.global lbColl_804D3700
+lbColl_804D3700:
     .asciz "jobj.h"
     .balign 4
 
-.global lbl_804D3708
-lbl_804D3708:
+.global lbColl_804D3708
+lbColl_804D3708:
     .asciz "jobj"
     .balign 4

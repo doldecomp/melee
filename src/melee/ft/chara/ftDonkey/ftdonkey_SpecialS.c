@@ -6,7 +6,7 @@
 #include "ft/inlines.h"
 #include "ftDonkey/ftdonkey.h"
 
-void ftDk_SpecialS_StartMotion(HSD_GObj* gobj)
+void ftDk_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -21,7 +21,7 @@ void ftDk_SpecialS_StartMotion(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftDk_SpecialLw_8010E0CC;
 }
 
-void ftDk_SpecialAirS_StartMotion(HSD_GObj* gobj)
+void ftDk_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
@@ -33,30 +33,30 @@ void ftDk_SpecialAirS_StartMotion(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftDk_SpecialLw_8010E148;
 }
 
-void ftDk_SpecialS_8010E2BC(HSD_GObj* gobj)
+void ftDk_SpecialS_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
 
-void ftDk_SpecialS_8010E2F8(HSD_GObj* gobj)
+void ftDk_SpecialAirS_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
     }
 }
 
-void ftDk_SpecialS_8010E334(HSD_GObj* gobj) {}
+void ftDk_SpecialS_IASA(HSD_GObj* gobj) {}
 
-void ftDk_SpecialS_8010E338(HSD_GObj* gobj) {}
+void ftDk_SpecialAirS_IASA(HSD_GObj* gobj) {}
 
-void ftDk_SpecialS_8010E33C(HSD_GObj* gobj)
+void ftDk_SpecialS_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftDk_SpecialS_8010E35C(HSD_GObj* gobj)
+void ftDk_SpecialAirS_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     attr* ft_attr = &fp->x110_attr;
@@ -72,7 +72,7 @@ void ftDk_SpecialS_8010E35C(HSD_GObj* gobj)
     }
 }
 
-void ftDk_SpecialS_8010E3BC(HSD_GObj* gobj)
+void ftDk_SpecialS_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2200_ftcmd_var0) {
@@ -84,7 +84,7 @@ void ftDk_SpecialS_8010E3BC(HSD_GObj* gobj)
     }
 }
 
-void ftDk_SpecialS_8010E428(HSD_GObj* gobj)
+void ftDk_SpecialAirS_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
         ftDk_SpecialS_8010E4EC(gobj);

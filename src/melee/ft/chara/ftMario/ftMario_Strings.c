@@ -30,7 +30,7 @@ Fighter_DemoStrings ftMr_Init_DemoMotionFilenames = {
     "ftDemoViWaitMotionFileMario",
 };
 
-char* ftMr_DemoViMotionFilenames[] = {
+char* ftMr_Init_DemoViMotionFilenames[] = {
     "ftDemoVi0102MotionFileMario",
     "ftDemoVi1101MotionFileMario",
 };

@@ -65,8 +65,8 @@ grTLink_802219D0:
 /* 802219E8 0021E5C8  93 81 00 10 */	stw r28, 0x10(r1)
 /* 802219EC 0021E5CC  3B 83 00 00 */	addi r28, r3, 0
 /* 802219F0 0021E5D0  1C 1C 00 14 */	mulli r0, r28, 0x14
-/* 802219F4 0021E5D4  3C 60 80 3F */	lis r3, lbl_803E8D30@ha
-/* 802219F8 0021E5D8  3B E3 8D 30 */	addi r31, r3, lbl_803E8D30@l
+/* 802219F4 0021E5D4  3C 60 80 3F */	lis r3, grTLk_803E8D30@ha
+/* 802219F8 0021E5D8  3B E3 8D 30 */	addi r31, r3, grTLk_803E8D30@l
 /* 802219FC 0021E5DC  38 7C 00 00 */	addi r3, r28, 0
 /* 80221A00 0021E5E0  7F BF 02 14 */	add r29, r31, r0
 /* 80221A04 0021E5E4  4B F9 FA CD */	bl Ground_801C14D0
@@ -99,7 +99,7 @@ grTLink_802219D0:
 /* 80221A68 0021E648  41 82 00 2C */	beq .L_80221A94
 /* 80221A6C 0021E64C  38 7E 00 00 */	addi r3, r30, 0
 /* 80221A70 0021E650  38 A0 00 04 */	li r5, 4
-/* 80221A74 0021E654  48 16 E2 E1 */	bl func_8038FD54
+/* 80221A74 0021E654  48 16 E2 E1 */	bl HSD_GObjProc_8038FD54
 /* 80221A78 0021E658  48 00 00 1C */	b .L_80221A94
 .L_80221A7C:
 /* 80221A7C 0021E65C  38 DC 00 00 */	addi r6, r28, 0
@@ -236,8 +236,8 @@ grTLink_80221C08:
 
 .section .data
     .balign 8
-.global lbl_803E8D30
-lbl_803E8D30:
+.global grTLk_803E8D30
+grTLk_803E8D30:
     .4byte grTLink_80221AB8
     .4byte grTLink_80221AE4
     .4byte grTLink_80221AEC
@@ -258,16 +258,16 @@ lbl_803E8D30:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_803E8D80
-lbl_803E8D80:
+.global grTLk_803E8D80
+grTLk_803E8D80:
     .4byte 0x2F477254
     .4byte 0x4C6B2E64
     .4byte 0x61740000
-.global lbl_803E8D8C
-lbl_803E8D8C:
+.global grTLk_803E8D8C
+grTLk_803E8D8C:
     .4byte 0x00000032
-    .4byte lbl_803E8D30
-    .4byte lbl_803E8D80
+    .4byte grTLk_803E8D30
+    .4byte grTLk_803E8D80
     .4byte grTLink_80221930
     .4byte grTLink_8022192C
     .4byte grTLink_802219A0

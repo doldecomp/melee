@@ -5,13 +5,13 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 
-extern HSD_GObj* lbl_804D7818;
-extern HSD_GObj* lbl_804D781C;
-extern HSD_GObjProc* lbl_804D7830;
-extern HSD_GObjProc* lbl_804D7838;
-extern HSD_GObjProc** lbl_804D7840;
-extern s32 lbl_804D7834;
-extern s32 lbl_804D783C;
+extern HSD_GObj* HSD_GObj_804D7818;
+extern HSD_GObj* HSD_GObj_804D781C;
+extern HSD_GObjProc* HSD_GObj_804D7830;
+extern HSD_GObjProc* HSD_GObj_804D7838;
+extern HSD_GObjProc** HSD_GObj_804D7840;
+extern s32 HSD_GObj_804D7834;
+extern s32 HSD_GObj_804D783C;
 
 inline void GObj_SetFlag1_inline(HSD_GObjProc* proc, u8 value)
 {
@@ -29,33 +29,33 @@ inline void GObj_SetFlag2_inline(HSD_GObjProc* proc, u8 value)
     }
 }
 
-void func_80390C5C(HSD_GObj* gobj)
+void HSD_GObj_80390C5C(HSD_GObj* gobj)
 {
     GObj_SetFlag1_inline(gobj->proc, 1);
 }
 
-void func_80390C84(HSD_GObj* gobj)
+void HSD_GObj_80390C84(HSD_GObj* gobj)
 {
     GObj_SetFlag1_inline(gobj->proc, 0);
 }
 
-void func_80390CAC(HSD_GObj* gobj)
+void HSD_GObj_80390CAC(HSD_GObj* gobj)
 {
     GObj_SetFlag2_inline(gobj->proc, 0);
 }
 
-void func_80390CD4(HSD_GObj* gobj)
+void HSD_GObj_80390CD4(HSD_GObj* gobj)
 {
     HSD_GObjProc* p = gobj->proc;
 
     while (p != NULL) {
-        p->flags_3 = lbl_804D783C;
+        p->flags_3 = HSD_GObj_804D783C;
         p = p->child;
     }
 }
 
 // GObj_RunProcs
-void func_80390CFC(void)
+void HSD_GObj_80390CFC(void)
 {
     s32 i;
     HSD_GObjProc* proc;
@@ -63,72 +63,73 @@ void func_80390CFC(void)
 
     u64 var_r31 =
         HSD_GObjLibInitData.unk_2 != NULL ? *HSD_GObjLibInitData.unk_2 : 0;
-    lbl_804D783C += 1;
-    if (lbl_804D783C > 2) {
-        lbl_804D783C = 0;
+    HSD_GObj_804D783C += 1;
+    if (HSD_GObj_804D783C > 2) {
+        HSD_GObj_804D783C = 0;
     }
 
     for (i = 0; i <= HSD_GObjLibInitData.gproc_pri_max; i++) {
-        lbl_804D7834 = i;
-        proc = lbl_804D7840[i];
+        HSD_GObj_804D7834 = i;
+        proc = HSD_GObj_804D7840[i];
         while (proc != NULL) {
-            lbl_804D7830 = proc->next;
-            if (proc->flags_3 != lbl_804D783C) {
-                proc->flags_3 = lbl_804D783C;
+            HSD_GObj_804D7830 = proc->next;
+            if (proc->flags_3 != HSD_GObj_804D783C) {
+                proc->flags_3 = HSD_GObj_804D783C;
                 gobj = proc->gobj;
                 if (!(var_r31 & (1LL << gobj->p_link)) && !(proc->flags_1) &&
                     !(proc->flags_2))
                 {
-                    lbl_804D781C = gobj;
-                    lbl_804D7838 = proc;
+                    HSD_GObj_804D781C = gobj;
+                    HSD_GObj_804D7838 = proc;
                     proc->on_invoke(proc->gobj);
-                    lbl_804D7830 = proc->next;
-                    if (lbl_804CE3E4.flags != 0) {
-                        lbl_804CE3E4.b0 = 1;
-                        if (lbl_804CE3E4.b1) {
-                            func_80390228(proc->gobj);
+                    HSD_GObj_804D7830 = proc->next;
+                    if (HSD_GObj_804CE3E4.flags != 0) {
+                        HSD_GObj_804CE3E4.b0 = 1;
+                        if (HSD_GObj_804CE3E4.b1) {
+                            HSD_GObjPLink_80390228(proc->gobj);
                         } else {
-                            if (lbl_804CE3E4.b3) {
-                                func_8039032C(lbl_804CE3E4.type, proc->gobj,
-                                              lbl_804CE3E4.p_link,
-                                              lbl_804CE3E4.p_prio,
-                                              lbl_804CE3E4.gobj);
+                            if (HSD_GObj_804CE3E4.b3) {
+                                HSD_GObjPLink_8039032C(
+                                    HSD_GObj_804CE3E4.type, proc->gobj,
+                                    HSD_GObj_804CE3E4.p_link,
+                                    HSD_GObj_804CE3E4.p_prio,
+                                    HSD_GObj_804CE3E4.gobj);
                             }
-                            if (lbl_804CE3E4.b2) {
-                                func_8038FE24(proc);
+                            if (HSD_GObj_804CE3E4.b2) {
+                                HSD_GObjProc_8038FE24(proc);
                             }
                         }
-                        lbl_804CE3E4.flags = 0;
+                        HSD_GObj_804CE3E4.flags = 0;
                     }
-                    lbl_804D781C = NULL;
-                    lbl_804D7838 = NULL;
+                    HSD_GObj_804D781C = NULL;
+                    HSD_GObj_804D7838 = NULL;
                 }
             }
-            proc = lbl_804D7830;
+            proc = HSD_GObj_804D7830;
         }
     }
 }
 
-extern s32 lbl_804085F0[];
+extern s32 HSD_GObj_804085F0[];
 
 // GObj_GetFlagFromArray
-u32 func_80390EB8(s32 i)
+u32 HSD_GObj_80390EB8(s32 i)
 {
-    return lbl_804085F0[i];
+    return HSD_GObj_804085F0[i];
 }
 
-extern HSD_GObj* lbl_804D7814;
+extern HSD_GObj* HSD_GObj_804D7814;
 
 inline void render_gobj(HSD_GObj* cur, s32 i)
 {
-    HSD_GObj* saved = lbl_804D7814;
-    lbl_804D7814 = cur;
+    HSD_GObj* saved = HSD_GObj_804D7814;
+    HSD_GObj_804D7814 = cur;
     cur->render_cb(cur, i);
-    lbl_804D7814 = saved;
+    HSD_GObj_804D7814 = saved;
 }
 
 // GObj_SetTextureCamera
-void func_80390ED0(HSD_GObj* gobj, u32 mask)
+void HSD_GObj_80390ED0(HSD_GObj* gobj, u32 mask)
 {
     s32 i = 0;
     while (mask) {
@@ -138,7 +139,7 @@ void func_80390ED0(HSD_GObj* gobj, u32 mask)
             while (prios) {
                 if (prios & 1) {
                     HSD_GObj* cur;
-                    for (cur = lbl_804D7824[j]; cur != NULL;
+                    for (cur = HSD_GObj_804D7824[j]; cur != NULL;
                          cur = cur->next_gx)
                     {
                         if (cur->render_cb != NULL) {
@@ -156,59 +157,60 @@ void func_80390ED0(HSD_GObj* gobj, u32 mask)
 }
 
 // GObj_RunGXLinkMaxCallbacks
-void func_80390FC0(void)
+void HSD_GObj_80390FC0(void)
 {
     HSD_GObj* saved;
-    HSD_GObj* cur = lbl_804D7824[HSD_GObjLibInitData.gx_link_max + 1];
+    HSD_GObj* cur = HSD_GObj_804D7824[HSD_GObjLibInitData.gx_link_max + 1];
     while (cur != NULL) {
         if (cur->render_cb != NULL) {
-            saved = lbl_804D7818;
-            lbl_804D7818 = cur;
+            saved = HSD_GObj_804D7818;
+            HSD_GObj_804D7818 = cur;
             cur->render_cb(cur, 0);
-            lbl_804D7818 = saved;
+            HSD_GObj_804D7818 = saved;
         }
         cur = cur->next_gx;
     }
 }
 
-void lbl_80391044(HSD_GObj* gobj)
+void HSD_GObj_80391044(HSD_GObj* gobj)
 {
-    func_803668EC(gobj->hsd_obj);
+    HSD_LObj_803668EC(gobj->hsd_obj);
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
 }
 
-void func_80391070(HSD_GObj* gobj, s32 arg1)
+void HSD_GObj_80391070(HSD_GObj* gobj, s32 arg1)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
 
 #ifdef MUST_MATCH
-// don't inline func_80390EB8
-// TODO is there a file boundary between func_80390EB8 and func_80391070?
+// don't inline HSD_GObj_80390EB8
+// TODO is there a file boundary between HSD_GObj_80390EB8 and
+// HSD_GObj_80391070?
 #pragma push
 #pragma dont_inline on
 #endif
 
-    HSD_JObjDispAll(jobj, NULL, func_80390EB8(arg1), 0);
+    HSD_JObjDispAll(jobj, NULL, HSD_GObj_80390EB8(arg1), 0);
 }
 
 #ifdef MUST_MATCH
 #pragma pop
 #endif
 
-void lbl_803910B4(HSD_GObj* gobj)
+void HSD_GObj_803910B4(HSD_GObj* gobj)
 {
     HSD_FogSet(gobj->hsd_obj);
 }
 
-void func_803910D8(HSD_GObj* gobj, Event arg1)
+void HSD_GObj_803910D8(HSD_GObj* gobj, Event arg1)
 {
     if (HSD_CObjSetCurrent(gobj->hsd_obj, arg1)) {
-        func_80390ED0(gobj, 7);
+        HSD_GObj_80390ED0(gobj, 7);
         HSD_CObjEndCurrent();
     }
 }
 
-void lbl_80391120(HSD_Obj* obj)
+void HSD_GObj_80391120(HSD_Obj* obj)
 {
     if (obj != NULL && ref_DEC(obj)) {
         if (obj != NULL) {
@@ -218,9 +220,9 @@ void lbl_80391120(HSD_Obj* obj)
     }
 }
 
-void lbl_803911C0(HSD_Obj* obj)
+void HSD_GObj_803911C0(HSD_Obj* obj)
 {
-    lbl_80391120(obj);
+    HSD_GObj_80391120(obj);
 }
 
 struct _GObjFuncs {
@@ -229,19 +231,19 @@ struct _GObjFuncs {
     void (**funcs)(void);
 };
 
-extern GObjFuncs lbl_80408610;
-extern s8 lbl_804D7848;
-extern s8 lbl_804D7849;
-extern s8 lbl_804D784A;
-extern GObjFuncs lbl_80408620;
+extern GObjFuncs HSD_GObj_80408610;
+extern s8 HSD_GObj_804D7848;
+extern s8 HSD_GObj_804D7849;
+extern s8 HSD_GObj_804D784A;
+extern GObjFuncs HSD_GObj_80408620;
 
-void func_80391260(struct _GObjUnkStruct* arg0)
+void HSD_GObj_80391260(struct _GObjUnkStruct* arg0)
 {
-    u8 count = func_803912A8(arg0, &lbl_80408610);
-    *lbl_804D784B = count++;
-    lbl_804D784A = count++;
-    lbl_804D7849 = count++;
-    lbl_804D7848 = count;
+    u8 count = HSD_GObj_803912A8(arg0, &HSD_GObj_80408610);
+    *HSD_GObj_804D784B = count++;
+    HSD_GObj_804D784A = count++;
+    HSD_GObj_804D7849 = count++;
+    HSD_GObj_804D7848 = count;
 }
 
 struct _GObjUnkStruct {
@@ -249,7 +251,7 @@ struct _GObjUnkStruct {
     GObjFuncs foo;
 };
 
-u8 func_803912A8(GObjUnkStruct* arg0, GObjFuncs* foo)
+u8 HSD_GObj_803912A8(GObjUnkStruct* arg0, GObjFuncs* foo)
 {
     GObjFuncs* cur = &arg0->foo;
     u8 var_r3 = 0;
@@ -262,7 +264,7 @@ u8 func_803912A8(GObjUnkStruct* arg0, GObjFuncs* foo)
     return var_r3;
 }
 
-void func_803912E0(GObjFuncs* arg0)
+void HSD_GObj_803912E0(GObjFuncs* arg0)
 {
-    *arg0 = lbl_80408620;
+    *arg0 = HSD_GObj_80408620;
 }

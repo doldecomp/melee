@@ -557,15 +557,15 @@ grMaterial_801C8E68:
 .global grMaterial_801C8E74
 grMaterial_801C8E74:
 /* 801C8E74 001C5A54  7C 08 02 A6 */	mflr r0
-/* 801C8E78 001C5A58  3C 60 80 3E */	lis r3, lbl_803E0A20@ha
+/* 801C8E78 001C5A58  3C 60 80 3E */	lis r3, grMaterial_803E0A20@ha
 /* 801C8E7C 001C5A5C  90 01 00 04 */	stw r0, 4(r1)
-/* 801C8E80 001C5A60  38 CD 8E C0 */	addi r6, r13, lbl_804D4560@sda21
+/* 801C8E80 001C5A60  38 CD 8E C0 */	addi r6, r13, grMaterial_804D4560@sda21
 /* 801C8E84 001C5A64  38 E0 00 50 */	li r7, 0x50
 /* 801C8E88 001C5A68  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 801C8E8C 001C5A6C  39 00 00 20 */	li r8, 0x20
 /* 801C8E90 001C5A70  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 801C8E94 001C5A74  93 C1 00 08 */	stw r30, 8(r1)
-/* 801C8E98 001C5A78  3B C3 0A 20 */	addi r30, r3, lbl_803E0A20@l
+/* 801C8E98 001C5A78  3B C3 0A 20 */	addi r30, r3, grMaterial_803E0A20@l
 /* 801C8E9C 001C5A7C  3C 60 80 40 */	lis r3, hsdMObj@ha
 /* 801C8EA0 001C5A80  3B E3 5E 28 */	addi r31, r3, hsdMObj@l
 /* 801C8EA4 001C5A84  38 7E 00 00 */	addi r3, r30, 0
@@ -591,12 +591,12 @@ grMaterial_801C8E74:
 /* 801C8EF4 001C5AD4  4E 80 00 20 */	blr
 .L_801C8EF8:
 /* 801C8EF8 001C5AD8  7C 08 02 A6 */	mflr r0
-/* 801C8EFC 001C5ADC  3C 80 80 3E */	lis r4, lbl_803E0A20@ha
+/* 801C8EFC 001C5ADC  3C 80 80 3E */	lis r4, grMaterial_803E0A20@ha
 /* 801C8F00 001C5AE0  90 01 00 04 */	stw r0, 4(r1)
 /* 801C8F04 001C5AE4  94 21 FE B0 */	stwu r1, -0x150(r1)
 /* 801C8F08 001C5AE8  BE E1 01 2C */	stmw r23, 0x12c(r1)
 /* 801C8F0C 001C5AEC  3B 43 00 00 */	addi r26, r3, 0
-/* 801C8F10 001C5AF0  3B E4 0A 20 */	addi r31, r4, lbl_803E0A20@l
+/* 801C8F10 001C5AF0  3B E4 0A 20 */	addi r31, r4, grMaterial_803E0A20@l
 /* 801C8F14 001C5AF4  48 19 95 C5 */	bl HSD_StateInitTev
 /* 801C8F18 001C5AF8  80 7A 00 0C */	lwz r3, 0xc(r26)
 /* 801C8F1C 001C5AFC  38 A1 01 18 */	addi r5, r1, 0x118
@@ -669,7 +669,7 @@ grMaterial_801C8E74:
 /* 801C9010 001C5BF0  80 61 01 24 */	lwz r3, 0x124(r1)
 /* 801C9014 001C5BF4  7F 64 DB 78 */	mr r4, r27
 /* 801C9018 001C5BF8  48 19 66 9D */	bl HSD_TObjSetupVolatileTev
-/* 801C901C 001C5BFC  80 6D C1 74 */	lwz r3, lbl_804D7814@sda21(r13)
+/* 801C901C 001C5BFC  80 6D C1 74 */	lwz r3, HSD_GObj_804D7814@sda21(r13)
 /* 801C9020 001C5C00  83 A3 00 2C */	lwz r29, 0x2c(r3)
 /* 801C9024 001C5C04  88 1D 00 BC */	lbz r0, 0xbc(r29)
 /* 801C9028 001C5C08  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
@@ -719,7 +719,7 @@ grMaterial_801C8E74:
 /* 801C90D0 001C5CB0  48 17 C5 D9 */	bl OSReport
 /* 801C90D4 001C5CB4  38 7F 00 F4 */	addi r3, r31, 0xf4
 /* 801C90D8 001C5CB8  38 80 00 7A */	li r4, 0x7a
-/* 801C90DC 001C5CBC  38 AD 8E C8 */	addi r5, r13, lbl_804D4568@sda21
+/* 801C90DC 001C5CBC  38 AD 8E C8 */	addi r5, r13, grMaterial_804D4568@sda21
 /* 801C90E0 001C5CC0  48 1B F1 41 */	bl __assert
 .L_801C90E4:
 /* 801C90E4 001C5CC4  3B 00 00 01 */	li r24, 1
@@ -755,7 +755,7 @@ grMaterial_801C8E74:
 /* 801C914C 001C5D2C  48 17 C5 5D */	bl OSReport
 /* 801C9150 001C5D30  38 7F 00 F4 */	addi r3, r31, 0xf4
 /* 801C9154 001C5D34  38 80 00 88 */	li r4, 0x88
-/* 801C9158 001C5D38  38 AD 8E C8 */	addi r5, r13, lbl_804D4568@sda21
+/* 801C9158 001C5D38  38 AD 8E C8 */	addi r5, r13, grMaterial_804D4568@sda21
 /* 801C915C 001C5D3C  48 1B F0 C5 */	bl __assert
 .L_801C9160:
 /* 801C9160 001C5D40  3A E0 00 01 */	li r23, 1
@@ -820,7 +820,7 @@ grMaterial_801C8E74:
 /* 801C9234 001C5E14  48 17 C4 75 */	bl OSReport
 /* 801C9238 001C5E18  38 7F 00 F4 */	addi r3, r31, 0xf4
 /* 801C923C 001C5E1C  38 80 00 A7 */	li r4, 0xa7
-/* 801C9240 001C5E20  38 AD 8E C8 */	addi r5, r13, lbl_804D4568@sda21
+/* 801C9240 001C5E20  38 AD 8E C8 */	addi r5, r13, grMaterial_804D4568@sda21
 /* 801C9244 001C5E24  48 1B EF DD */	bl __assert
 .L_801C9248:
 /* 801C9248 001C5E28  38 00 00 05 */	li r0, 5
@@ -879,9 +879,9 @@ grMaterial_801C92C0:
 /* 801C92FC 001C5EDC  41 82 00 60 */	beq .L_801C935C
 /* 801C9300 001C5EE0  7F E3 FB 78 */	mr r3, r31
 /* 801C9304 001C5EE4  48 1A 88 E9 */	bl HSD_JObjGetDObj
-/* 801C9308 001C5EE8  3C 80 80 3E */	lis r4, lbl_803E0A20@ha
+/* 801C9308 001C5EE8  3C 80 80 3E */	lis r4, grMaterial_803E0A20@ha
 /* 801C930C 001C5EEC  3B A3 00 00 */	addi r29, r3, 0
-/* 801C9310 001C5EF0  3B C4 0A 20 */	addi r30, r4, lbl_803E0A20@l
+/* 801C9310 001C5EF0  3B C4 0A 20 */	addi r30, r4, grMaterial_803E0A20@l
 /* 801C9314 001C5EF4  48 00 00 40 */	b .L_801C9354
 .L_801C9318:
 /* 801C9318 001C5EF8  28 1D 00 00 */	cmplwi r29, 0
@@ -915,9 +915,9 @@ grMaterial_801C92C0:
 .L_801C936C:
 /* 801C936C 001C5F4C  80 1F 00 10 */	lwz r0, 0x10(r31)
 .L_801C9370:
-/* 801C9370 001C5F50  3C 60 80 3E */	lis r3, lbl_803E0A20@ha
+/* 801C9370 001C5F50  3C 60 80 3E */	lis r3, grMaterial_803E0A20@ha
 /* 801C9374 001C5F54  7C 1F 03 78 */	mr r31, r0
-/* 801C9378 001C5F58  3B C3 0A 20 */	addi r30, r3, lbl_803E0A20@l
+/* 801C9378 001C5F58  3B C3 0A 20 */	addi r30, r3, grMaterial_803E0A20@l
 /* 801C937C 001C5F5C  48 00 00 D0 */	b .L_801C944C
 .L_801C9380:
 /* 801C9380 001C5F60  28 1F 00 00 */	cmplwi r31, 0
@@ -1018,7 +1018,7 @@ grMaterial_801C9490:
 /* 801C949C 001C607C  38 80 00 01 */	li r4, 1
 /* 801C94A0 001C6080  80 C3 00 2C */	lwz r6, 0x2c(r3)
 /* 801C94A4 001C6084  A0 A5 00 00 */	lhz r5, 0(r5)
-/* 801C94A8 001C6088  C8 22 B3 A0 */	lfd f1, lbl_804DAD80@sda21(r2)
+/* 801C94A8 001C6088  C8 22 B3 A0 */	lfd f1, grMaterial_804DAD80@sda21(r2)
 /* 801C94AC 001C608C  54 A3 F6 3E */	rlwinm r3, r5, 0x1e, 0x18, 0x1f
 /* 801C94B0 001C6090  90 61 00 1C */	stw r3, 0x1c(r1)
 /* 801C94B4 001C6094  90 01 00 18 */	stw r0, 0x18(r1)
@@ -1052,9 +1052,9 @@ grMaterial_801C94D8:
 /* 801C9510 001C60F0  2C 00 00 00 */	cmpwi r0, 0
 /* 801C9514 001C60F4  41 82 00 58 */	beq .L_801C956C
 /* 801C9518 001C60F8  48 1A 86 D5 */	bl HSD_JObjGetDObj
-/* 801C951C 001C60FC  3C 80 80 3E */	lis r4, lbl_803E0A20@ha
+/* 801C951C 001C60FC  3C 80 80 3E */	lis r4, grMaterial_803E0A20@ha
 /* 801C9520 001C6100  3B C3 00 00 */	addi r30, r3, 0
-/* 801C9524 001C6104  3B E4 0A 20 */	addi r31, r4, lbl_803E0A20@l
+/* 801C9524 001C6104  3B E4 0A 20 */	addi r31, r4, grMaterial_803E0A20@l
 /* 801C9528 001C6108  48 00 00 3C */	b .L_801C9564
 .L_801C952C:
 /* 801C952C 001C610C  28 1E 00 00 */	cmplwi r30, 0
@@ -1159,7 +1159,7 @@ grMaterial_801C9604:
 /* 801C966C 001C624C  38 05 FF EB */	addi r0, r5, -21
 /* 801C9670 001C6250  54 00 10 3A */	slwi r0, r0, 2
 /* 801C9674 001C6254  94 21 FF F8 */	stwu r1, -8(r1)
-/* 801C9678 001C6258  38 AD 8E CC */	addi r5, r13, lbl_804D456C@sda21
+/* 801C9678 001C6258  38 AD 8E CC */	addi r5, r13, grMaterial_804D456C@sda21
 /* 801C967C 001C625C  7D 85 00 2E */	lwzx r12, r5, r0
 /* 801C9680 001C6260  7D 88 03 A6 */	mtlr r12
 /* 801C9684 001C6264  4E 80 00 21 */	blrl
@@ -1195,8 +1195,8 @@ grMaterial_801C9698:
 
 .section .data
     .balign 8
-.global lbl_803E0A20
-lbl_803E0A20:
+.global grMaterial_803E0A20
+grMaterial_803E0A20:
     .4byte grMaterial_801C8E74
     .4byte NULL
     .4byte NULL
@@ -1266,22 +1266,22 @@ lbl_803E0A20:
 
 .section .sdata
     .balign 8
-.global lbl_804D4560
-lbl_804D4560:
+.global grMaterial_804D4560
+grMaterial_804D4560:
     .asciz "gr_mobj"
     .balign 4
-.global lbl_804D4568
-lbl_804D4568:
+.global grMaterial_804D4568
+grMaterial_804D4568:
     .asciz "0"
     .balign 4
-.global lbl_804D456C
-lbl_804D456C:
+.global grMaterial_804D456C
+grMaterial_804D456C:
     .4byte grMaterial_801C9470
 
 
 .section .sdata2
     .balign 8
-.global lbl_804DAD80
-lbl_804DAD80:
+.global grMaterial_804DAD80
+grMaterial_804DAD80:
     .4byte 0x43300000
     .4byte 0x00000000

@@ -828,8 +828,8 @@ AXSetVoiceState:
 /* 8035AE18 003579F8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8035AE1C 003579FC  4E 80 00 20 */	blr
 
-.global func_8035AE20
-func_8035AE20:
+.global AXVPB_8035AE20
+AXVPB_8035AE20:
 /* 8035AE20 00357A00  7C 08 02 A6 */	mflr r0
 /* 8035AE24 00357A04  90 01 00 04 */	stw r0, 4(r1)
 /* 8035AE28 00357A08  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1363,7 +1363,7 @@ AXSetVoiceSrcRatio:
 /* 8035B590 00358170  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 8035B594 00358174  7C 7D 1B 78 */	mr r29, r3
 /* 8035B598 00358178  4B FE BD CD */	bl OSDisableInterrupts
-/* 8035B59C 0035817C  C0 02 E9 78 */	lfs f0, lbl_804DE358@sda21(r2)
+/* 8035B59C 0035817C  C0 02 E9 78 */	lfs f0, AXVPB_804DE358@sda21(r2)
 /* 8035B5A0 00358180  7C 7E 1B 78 */	mr r30, r3
 /* 8035B5A4 00358184  EF E0 07 F2 */	fmuls f31, f0, f31
 /* 8035B5A8 00358188  FC 20 F8 90 */	fmr f1, f31
@@ -1471,8 +1471,8 @@ __AXMixCycles:
 
 .section .sdata2
     .balign 8
-.global lbl_804DE358
-lbl_804DE358:
+.global AXVPB_804DE358
+AXVPB_804DE358:
     .4byte 0x47800000
 
 

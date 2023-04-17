@@ -222,7 +222,7 @@ void ifStatus_802F6E1C(int slot);
 void ifStatus_802F6E3C(s32);
 void ifStatus_802F7220(void);
 
-extern HudIndex lbl_804A10C8; // global array of HUD info
+extern HudIndex ifStatus_804A10C8; // global array of HUD info
 
 void ifStatus_802F5B48(void);
 void ifStatus_802F5DE0(HSD_GObj* player, s32 arg1);

@@ -7,7 +7,7 @@
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
 
-void ftDk_Unk6_800E030C(HSD_GObj* gobj)
+void ftDk_MS_347_IASA(HSD_GObj* gobj)
 {
     s32 result = ft_80094EA4(gobj);
     if (result) {
@@ -15,29 +15,29 @@ void ftDk_Unk6_800E030C(HSD_GObj* gobj)
     }
 }
 
-void ftDk_Unk6_800E0330(HSD_GObj* gobj)
+void ftDk_MS_347_Phys(HSD_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-void ftDk_Unk6_800E0350(HSD_GObj* gobj)
+void ftDk_MS_347_Coll(HSD_GObj* gobj)
 {
-    ft_80082C74(gobj, &ftDk_Unk8_800E05E4);
+    ft_80082C74(gobj, &ftDk_MS_346_800E05E4);
 }
 
-bool ftDk_Unk6_800E0378(HSD_GObj* gobj)
+bool ftDk_MS_347_800E0378(HSD_GObj* gobj)
 {
     bool result = ft_800CAE80(gobj);
 
     if (result) {
-        ftDk_Unk7_800E04A4(gobj, result);
+        ftDk_MS_348_800E04A4(gobj, result);
         return true;
     }
 
     return false;
 }
 
-void ftDk_Unk6_800E03C0(HSD_GObj* gobj)
+void ftDk_MS_347_800E03C0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr;

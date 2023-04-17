@@ -6,8 +6,8 @@
 
 extern GXRenderModeObj GXPal528IntDf;
 extern GXRenderModeObj GXMpal480IntDf;
-extern GXRenderModeObj lbl_804011E0;
-extern GXRenderModeObj lbl_804011A4;
+extern GXRenderModeObj GXFrameBuf_804011E0;
+extern GXRenderModeObj GXFrameBuf_804011A4;
 extern GXRenderModeObj GXNtsc480IntDf;
 
 void GXClearBoundingBox(void);

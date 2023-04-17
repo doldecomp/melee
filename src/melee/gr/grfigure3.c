@@ -9,7 +9,7 @@
 #include <dolphin/os/os.h>
 #include <baselib/gobjgxlink.h>
 
-static StageCallbacks lbl_803E63D8[3] = {
+static StageCallbacks grEF2_803E63D8[3] = {
     { grFigure3_8020E690, grFigure3_8020E6BC, grFigure3_8020E6C4,
       grFigure3_8020E6C8, 0UL },
     { grFigure3_8020E6CC, grFigure3_8020E6F8, grFigure3_8020E700,
@@ -18,21 +18,21 @@ static StageCallbacks lbl_803E63D8[3] = {
       grFigure3_8020E784, 0UL }
 };
 
-StageData lbl_803E6420 = { 0x00000046,
-                           lbl_803E63D8,
-                           "/GrEF3.dat",
-                           grFigure3_8020E508,
-                           grFigure3_8020E504,
-                           grFigure3_8020E578,
-                           grFigure3_8020E57C,
-                           grFigure3_8020E5A0,
-                           grFigure3_8020E788,
-                           grFigure3_8020E790,
-                           0x00000001,
-                           NULL,
-                           0UL };
+StageData grEF2_803E6420 = { 0x00000046,
+                             grEF2_803E63D8,
+                             "/GrEF3.dat",
+                             grFigure3_8020E508,
+                             grFigure3_8020E504,
+                             grFigure3_8020E578,
+                             grFigure3_8020E57C,
+                             grFigure3_8020E5A0,
+                             grFigure3_8020E788,
+                             grFigure3_8020E790,
+                             0x00000001,
+                             NULL,
+                             0UL };
 
-void* lbl_804D6A80;
+void* grEF2_804D6A80;
 
 extern StageInfo stage_info;
 
@@ -40,7 +40,7 @@ static void grFigure3_8020E504(int number) {}
 
 static void grFigure3_8020E508(void)
 {
-    lbl_804D6A80 = Ground_801C49F8();
+    grEF2_804D6A80 = Ground_801C49F8();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grFigure3_8020E5A8(0);
@@ -65,7 +65,7 @@ static bool grFigure3_8020E5A0(void)
 static HSD_GObj* grFigure3_8020E5A8(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &lbl_803E63D8[gobj_id];
+    StageCallbacks* callbacks = &grEF2_803E63D8[gobj_id];
 
     gobj = Ground_801C14D0(gobj_id);
 
@@ -81,7 +81,7 @@ static HSD_GObj* grFigure3_8020E5A8(int gobj_id)
             callbacks->callback0(gobj);
         }
         if (callbacks->callback2 != NULL) {
-            func_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grfigure3.c", 195,

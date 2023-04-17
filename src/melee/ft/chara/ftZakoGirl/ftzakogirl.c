@@ -14,7 +14,7 @@ char ftGl_Init_AnimDatFilename[] = "PlGlAJ.dat";
 #pragma force_active on
 #endif
 
-Fighter_DemoStrings ftGl_DemoStrings = {
+Fighter_DemoStrings ftGl_Init_DemoStrings = {
     NULL,
     "ftDemoIntroMotionFileGirl",
     NULL,

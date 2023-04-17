@@ -29,7 +29,7 @@ void ftMt_SpecialLw_RemoveDisable(HSD_GObj* gobj)
 // 0x801461F0
 // https://decomp.me/scratch/WnODY // Mewtwo's grounded Disable Motion State
 // handler
-void ftMt_SpecialLw_StartMotion(HSD_GObj* gobj)
+void ftMt_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -52,7 +52,7 @@ void ftMt_SpecialLw_StartMotion(HSD_GObj* gobj)
 // 0x80146264
 // https://decomp.me/scratch/fX4aP // Mewtwo's aerial Disable Motion State
 // handler
-void ftMt_SpecialAirLw_StartMotion(HSD_GObj* gobj)
+void ftMt_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -135,8 +135,8 @@ inline void ftMewtwo_SpecialLw_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.mt.x222C_disableGObj != NULL) {
-        fp->cb.x21E4_callback_OnDeath2 = ftMt_OnDeath2;
-        fp->cb.x21DC_callback_OnTakeDamage = ftMt_OnTakeDamage;
+        fp->cb.x21E4_callback_OnDeath2 = ftMt_Init_OnDeath2;
+        fp->cb.x21DC_callback_OnTakeDamage = ftMt_Init_OnTakeDamage;
     }
 }
 

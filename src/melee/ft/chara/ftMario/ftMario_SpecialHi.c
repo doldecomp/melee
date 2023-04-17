@@ -11,7 +11,7 @@
 
 #include <baselib/random.h>
 
-void ftMr_SpecialHi_StartMotion(HSD_GObj* gobj)
+void ftMr_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -23,7 +23,7 @@ void ftMr_SpecialHi_StartMotion(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftMr_SpecialAirHi_StartMotion(HSD_GObj* gobj)
+void ftMr_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;

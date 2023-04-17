@@ -210,9 +210,9 @@ HSD_VIPreRetraceCB:
 .L_80375B4C:
 /* 80375B4C 0037272C  2C 1C FF FF */	cmpwi r28, -1
 /* 80375B50 00372730  40 82 00 18 */	bne .L_80375B68
-/* 80375B54 00372734  3C 60 80 40 */	lis r3, lbl_80406CE0@ha
-/* 80375B58 00372738  38 A3 6C E0 */	addi r5, r3, lbl_80406CE0@l
-/* 80375B5C 0037273C  38 6D A7 E8 */	addi r3, r13, lbl_804D5E88@sda21
+/* 80375B54 00372734  3C 60 80 40 */	lis r3, HSD_Video_80406CE0@ha
+/* 80375B58 00372738  38 A3 6C E0 */	addi r5, r3, HSD_Video_80406CE0@l
+/* 80375B5C 0037273C  38 6D A7 E8 */	addi r3, r13, HSD_Video_804D5E88@sda21
 /* 80375B60 00372740  38 80 00 FC */	li r4, 0xfc
 /* 80375B64 00372744  48 01 26 BD */	bl __assert
 .L_80375B68:
@@ -577,7 +577,7 @@ HSD_VICopyEFB2XFBPtr:
 /* 8037602C 00372C0C  3C 60 43 30 */	lis r3, 0x4330
 /* 80376030 00372C10  A0 1E 00 06 */	lhz r0, 6(r30)
 /* 80376034 00372C14  90 81 00 24 */	stw r4, 0x24(r1)
-/* 80376038 00372C18  C8 42 EB C8 */	lfd f2, lbl_804DE5A8@sda21(r2)
+/* 80376038 00372C18  C8 42 EB C8 */	lfd f2, HSD_Video_804DE5A8@sda21(r2)
 /* 8037603C 00372C1C  90 01 00 1C */	stw r0, 0x1c(r1)
 /* 80376040 00372C20  90 61 00 20 */	stw r3, 0x20(r1)
 /* 80376044 00372C24  90 61 00 18 */	stw r3, 0x18(r1)
@@ -602,7 +602,7 @@ HSD_VICopyEFB2XFBPtr:
 /* 8037608C 00372C6C  38 80 00 00 */	li r4, 0
 /* 80376090 00372C70  38 C6 FF FC */	addi r6, r6, -4
 /* 80376094 00372C74  4B FC 73 75 */	bl GXSetDispCopySrc
-/* 80376098 00372C78  C0 22 EB C0 */	lfs f1, lbl_804DE5A0@sda21(r2)
+/* 80376098 00372C78  C0 22 EB C0 */	lfs f1, HSD_Video_804DE5A0@sda21(r2)
 /* 8037609C 00372C7C  4B FC 77 49 */	bl GXSetDispCopyYScale
 /* 803760A0 00372C80  7C 60 1B 78 */	mr r0, r3
 /* 803760A4 00372C84  A0 7E 00 04 */	lhz r3, 4(r30)
@@ -628,7 +628,7 @@ HSD_VICopyEFB2XFBPtr:
 /* 803760F0 00372CD0  38 80 00 00 */	li r4, 0
 /* 803760F4 00372CD4  38 C6 FF FC */	addi r6, r6, -4
 /* 803760F8 00372CD8  4B FC 73 11 */	bl GXSetDispCopySrc
-/* 803760FC 00372CDC  C0 22 EB C0 */	lfs f1, lbl_804DE5A0@sda21(r2)
+/* 803760FC 00372CDC  C0 22 EB C0 */	lfs f1, HSD_Video_804DE5A0@sda21(r2)
 /* 80376100 00372CE0  4B FC 76 E5 */	bl GXSetDispCopyYScale
 /* 80376104 00372CE4  7C 60 1B 78 */	mr r0, r3
 /* 80376108 00372CE8  A0 7E 00 04 */	lhz r3, 4(r30)
@@ -665,9 +665,9 @@ HSD_VICopyEFB2XFBPtr:
 /* 80376184 00372D64  4B FC 79 C9 */	bl GXCopyDisp
 /* 80376188 00372D68  48 00 00 18 */	b .L_803761A0
 .L_8037618C:
-/* 8037618C 00372D6C  3C 60 80 40 */	lis r3, lbl_80406CEC@ha
-/* 80376190 00372D70  38 A3 6C EC */	addi r5, r3, lbl_80406CEC@l
-/* 80376194 00372D74  38 6D A7 E8 */	addi r3, r13, lbl_804D5E88@sda21
+/* 8037618C 00372D6C  3C 60 80 40 */	lis r3, HSD_Video_80406CEC@ha
+/* 80376190 00372D70  38 A3 6C EC */	addi r5, r3, HSD_Video_80406CEC@l
+/* 80376194 00372D74  38 6D A7 E8 */	addi r3, r13, HSD_Video_804D5E88@sda21
 /* 80376198 00372D78  38 80 02 07 */	li r4, 0x207
 /* 8037619C 00372D7C  48 01 20 DD */	bl HSD_Panic
 .L_803761A0:
@@ -717,9 +717,9 @@ HSD_VICopyXFB:
 /* 80376230 00372E10  2C 00 00 03 */	cmpwi r0, 3
 /* 80376234 00372E14  3B E3 00 00 */	addi r31, r3, 0
 /* 80376238 00372E18  41 82 00 18 */	beq .L_80376250
-/* 8037623C 00372E1C  3C 60 80 40 */	lis r3, lbl_80406D10@ha
-/* 80376240 00372E20  38 A3 6D 10 */	addi r5, r3, lbl_80406D10@l
-/* 80376244 00372E24  38 6D A7 E8 */	addi r3, r13, lbl_804D5E88@sda21
+/* 8037623C 00372E1C  3C 60 80 40 */	lis r3, HSD_Video_80406D10@ha
+/* 80376240 00372E20  38 A3 6D 10 */	addi r5, r3, HSD_Video_80406D10@l
+/* 80376244 00372E24  38 6D A7 E8 */	addi r3, r13, HSD_Video_804D5E88@sda21
 /* 80376248 00372E28  38 80 02 4E */	li r4, 0x24e
 /* 8037624C 00372E2C  48 01 1F D5 */	bl __assert
 .L_80376250:
@@ -757,8 +757,8 @@ HSD_VICopyXFB:
 /* 803762BC 00372E9C  7C 08 03 A6 */	mtlr r0
 /* 803762C0 00372EA0  4E 80 00 20 */	blr
 
-.global lbl_803762C4
-lbl_803762C4:
+.global HSD_Video_803762C4
+HSD_Video_803762C4:
 /* 803762C4 00372EA4  7C 08 02 A6 */	mflr r0
 /* 803762C8 00372EA8  90 01 00 04 */	stw r0, 4(r1)
 /* 803762CC 00372EAC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -775,9 +775,9 @@ lbl_803762C4:
 /* 803762F8 00372ED8  3B C3 00 00 */	addi r30, r3, 0
 /* 803762FC 00372EDC  2C 00 00 04 */	cmpwi r0, 4
 /* 80376300 00372EE0  41 82 00 18 */	beq .L_80376318
-/* 80376304 00372EE4  3C 60 80 40 */	lis r3, lbl_80406D3C@ha
-/* 80376308 00372EE8  38 A3 6D 3C */	addi r5, r3, lbl_80406D3C@l
-/* 8037630C 00372EEC  38 6D A7 E8 */	addi r3, r13, lbl_804D5E88@sda21
+/* 80376304 00372EE4  3C 60 80 40 */	lis r3, HSD_Video_80406D3C@ha
+/* 80376308 00372EE8  38 A3 6D 3C */	addi r5, r3, HSD_Video_80406D3C@l
+/* 8037630C 00372EEC  38 6D A7 E8 */	addi r3, r13, HSD_Video_804D5E88@sda21
 /* 80376310 00372EF0  38 80 02 D2 */	li r4, 0x2d2
 /* 80376314 00372EF4  48 01 1F 0D */	bl __assert
 .L_80376318:
@@ -821,8 +821,8 @@ lbl_803762C4:
 /* 80376394 00372F74  7C 08 03 A6 */	mtlr r0
 /* 80376398 00372F78  4E 80 00 20 */	blr
 
-.global func_8037639C
-func_8037639C:
+.global HSD_Video_8037639C
+HSD_Video_8037639C:
 /* 8037639C 00372F7C  7C 08 02 A6 */	mflr r0
 /* 803763A0 00372F80  3C 60 80 4C */	lis r3, HSD_VIData@ha
 /* 803763A4 00372F84  90 01 00 04 */	stw r0, 4(r1)
@@ -902,8 +902,8 @@ func_8037639C:
 /* 803764A0 00373080  7C 08 03 A6 */	mtlr r0
 /* 803764A4 00373084  4E 80 00 20 */	blr
 
-.global func_803764A8
-func_803764A8:
+.global HSD_Video_803764A8
+HSD_Video_803764A8:
 /* 803764A8 00373088  7C 08 02 A6 */	mflr r0
 /* 803764AC 0037308C  3C 60 80 4C */	lis r3, HSD_VIData@ha
 /* 803764B0 00373090  90 01 00 04 */	stw r0, 4(r1)
@@ -979,8 +979,8 @@ func_803764A8:
 /* 803765A0 00373180  7C 08 03 A6 */	mtlr r0
 /* 803765A4 00373184  4E 80 00 20 */	blr
 
-.global func_803765A8
-func_803765A8:
+.global HSD_Video_803765A8
+HSD_Video_803765A8:
 /* 803765A8 00373188  7C 08 02 A6 */	mflr r0
 /* 803765AC 0037318C  90 01 00 04 */	stw r0, 4(r1)
 /* 803765B0 00373190  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1276,20 +1276,20 @@ HSD_VIInit:
 
 .section .data
     .balign 8
-.global lbl_80406CE0
-lbl_80406CE0:
+.global HSD_Video_80406CE0
+HSD_Video_80406CE0:
     .asciz "idx != -1"
     .balign 4
-.global lbl_80406CEC
-lbl_80406CEC:
+.global HSD_Video_80406CEC
+HSD_Video_80406CEC:
     .asciz "unexpected type of render pass.\n"
     .balign 4
-.global lbl_80406D10
-lbl_80406D10:
+.global HSD_Video_80406D10
+HSD_Video_80406D10:
     .asciz "_p->xfb[idx].status == HSD_VI_XFB_DRAWING"
     .balign 4
-.global lbl_80406D3C
-lbl_80406D3C:
+.global HSD_Video_80406D3C
+HSD_Video_80406D3C:
     .asciz "_p->xfb[idx].status == HSD_VI_XFB_WAITDONE"
     .balign 4
 
@@ -1306,8 +1306,8 @@ HSD_VIData:
 
 .section .sdata
     .balign 8
-.global lbl_804D5E88
-lbl_804D5E88:
+.global HSD_Video_804D5E88
+HSD_Video_804D5E88:
     .asciz "video.c"
     .balign 4
 
@@ -1324,11 +1324,11 @@ renew_count:
 
 .section .sdata2
     .balign 8
-.global lbl_804DE5A0
-lbl_804DE5A0:
+.global HSD_Video_804DE5A0
+HSD_Video_804DE5A0:
     .4byte 0x3F800000
     .4byte 0x00000000
-.global lbl_804DE5A8
-lbl_804DE5A8:
+.global HSD_Video_804DE5A8
+HSD_Video_804DE5A8:
     .4byte 0x43300000
     .4byte 0x00000000

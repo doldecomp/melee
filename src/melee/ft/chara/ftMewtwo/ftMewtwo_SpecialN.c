@@ -360,9 +360,9 @@ void ftMt_SpecialN_PlayChargeSFX(HSD_GObj* gobj)
 inline void ftMewtwo_SpecialN_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->cb.x21E4_callback_OnDeath2 = ftMt_OnDeath2;
-    fp->cb.x21DC_callback_OnTakeDamage = ftMt_OnTakeDamage;
-    fp->cb.x21E8_callback_OnDeath3 = ftMt_OnDeath2;
+    fp->cb.x21E4_callback_OnDeath2 = ftMt_Init_OnDeath2;
+    fp->cb.x21DC_callback_OnTakeDamage = ftMt_Init_OnTakeDamage;
+    fp->cb.x21E8_callback_OnDeath3 = ftMt_Init_OnDeath2;
 }
 
 inline void ftMewtwo_SpecialN_ChangeAction(HSD_GObj* gobj)
@@ -402,7 +402,7 @@ inline void ftMewtwo_SpecialN_ChangeAction(HSD_GObj* gobj)
 // 0x80147320
 // https://decomp.me/scratch/zcZ5Y // Mewtwo's grounded Shadow Ball Start
 // Motion State handler
-void ftMt_SpecialN_StartMotion(HSD_GObj* gobj)
+void ftMt_SpecialN_Enter(HSD_GObj* gobj)
 {
     ftMewtwo_SpecialN_ChangeAction(gobj);
 }
@@ -443,7 +443,7 @@ inline void ftMewtwo_SpecialAirN_ChangeAction(HSD_GObj* gobj)
 // 0x801473F4
 // https://decomp.me/scratch/okSqF // Mewtwo's aerial Shadow Ball Start Action
 // State handler
-void ftMt_SpecialAirN_StartMotion(HSD_GObj* gobj)
+void ftMt_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     ftMewtwo_SpecialAirN_ChangeAction(gobj);
 }

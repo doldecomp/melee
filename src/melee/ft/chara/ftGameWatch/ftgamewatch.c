@@ -195,32 +195,32 @@ void ftGw_Init_OnLoad(HSD_GObj* gobj)
     }
 }
 
-void ftGw_OnDamage(HSD_GObj* gobj)
+void ftGw_Init_OnDamage(HSD_GObj* gobj)
 {
-    ftGw_ItemGreenhouseRemove(gobj);
-    ftGw_ItemManholeOnDamage(gobj);
-    ftGw_ItemTorchOnDamage(gobj);
-    ftGw_ItemParachuteRemove(gobj);
-    ftGw_ItemTurtleRemove(gobj);
-    ftGw_ItemSparkyRemove(gobj);
-    ftGw_ItemJudgementRemove(gobj);
-    ftGw_ItemPanicRemove(gobj);
-    ftGw_ItemRescueRemove(gobj);
+    ftGw_Attack11_ItemGreenhouseRemove(gobj);
+    ftGw_AttackLw3_ItemManholeOnDamage(gobj);
+    ftGw_AttackS4_ItemTorchOnDamage(gobj);
+    ftGw_AttackAirN_ItemParachuteRemove(gobj);
+    ftGw_AttackAirN_ItemTurtleRemove(gobj);
+    ftGw_AttackAirN_ItemSparkyRemove(gobj);
+    ftGw_SpecialS_ItemJudgementRemove(gobj);
+    ftGw_SpecialLw_ItemPanicRemove(gobj);
+    ftGw_SpecialHi_ItemRescueRemove(gobj);
 }
 
 void ftGw_Init_8014A538(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Air) {
-        ftGw_ItemGreenhouseRemove(gobj);
-        ftGw_ItemManholeOnDamage(gobj);
-        ftGw_ItemTorchOnDamage(gobj);
-        ftGw_ItemParachuteRemove(gobj);
-        ftGw_ItemTurtleRemove(gobj);
-        ftGw_ItemSparkyRemove(gobj);
-        ftGw_ItemJudgementRemove(gobj);
-        ftGw_ItemPanicRemove(gobj);
-        ftGw_ItemRescueRemove(gobj);
+        ftGw_Attack11_ItemGreenhouseRemove(gobj);
+        ftGw_AttackLw3_ItemManholeOnDamage(gobj);
+        ftGw_AttackS4_ItemTorchOnDamage(gobj);
+        ftGw_AttackAirN_ItemParachuteRemove(gobj);
+        ftGw_AttackAirN_ItemTurtleRemove(gobj);
+        ftGw_AttackAirN_ItemSparkyRemove(gobj);
+        ftGw_SpecialS_ItemJudgementRemove(gobj);
+        ftGw_SpecialLw_ItemPanicRemove(gobj);
+        ftGw_SpecialHi_ItemRescueRemove(gobj);
     }
 }
 
@@ -291,7 +291,7 @@ void ftGw_Init_8014A814(HSD_GObj* gobj, ItemModStruct* item_mod)
 
 // 0x8014A828
 // https://decomp.me/scratch/muS2N // Mr. Game & Watch's OnAbsorb callback
-void ftGw_OnAbsorb(HSD_GObj* gobj)
+void ftGw_Init_OnAbsorb(HSD_GObj* gobj)
 {
-    ftGw_AbsorbThink_DecideAction(gobj);
+    ftGw_SpecialLw_AbsorbThink_DecideAction(gobj);
 }

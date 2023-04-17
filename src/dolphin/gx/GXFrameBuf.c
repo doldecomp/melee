@@ -8,8 +8,8 @@
 #include <dolphin/gx/GXFrameBuf.h>
 #include <dolphin/mtx/types.h>
 
-Vec2 const lbl_804DE220 = { 256.0F, 0.0F };
-Vec2 const lbl_804DE228 = { 176.0F, 0.0F };
+Vec2 const GXFrameBuf_804DE220 = { 256.0F, 0.0F };
+Vec2 const GXFrameBuf_804DE228 = { 176.0F, 0.0F };
 
 GXRenderModeObj GXNtsc480IntDf = {
     0,
@@ -38,7 +38,7 @@ GXRenderModeObj GXNtsc480IntDf = {
     { 8, 8, 10, 12, 10, 8, 8 },
 };
 
-GXRenderModeObj lbl_804011A4 = {
+GXRenderModeObj GXFrameBuf_804011A4 = {
     0,
     640,
     480,
@@ -65,7 +65,7 @@ GXRenderModeObj lbl_804011A4 = {
     { 0, 0, 21, 22, 21, 0, 0 },
 };
 
-GXRenderModeObj lbl_804011E0 = {
+GXRenderModeObj GXFrameBuf_804011E0 = {
     2,
     640,
     480,
@@ -348,7 +348,7 @@ asm u32 GXSetDispCopyYScale(f32)
 /* 8033D7E4 0033A3C4  7C 08 02 A6 */	mflr r0
 /* 8033D7E8 0033A3C8  90 01 00 04 */	stw r0, 4(r1)
 /* 8033D7EC 0033A3CC  94 21 FF D8 */	stwu r1, -0x28(r1)
-/* 8033D7F0 0033A3D0  C0 02 E8 40 */	lfs f0, lbl_804DE220(r2)
+/* 8033D7F0 0033A3D0  C0 02 E8 40 */	lfs f0, GXFrameBuf_804DE220(r2)
 /* 8033D7F4 0033A3D4  EC 20 08 24 */	fdivs f1, f0, f1
 /* 8033D7F8 0033A3D8  4B FE 50 C9 */	bl __cvt_fp2unsigned
 /* 8033D7FC 0033A3DC  38 00 00 61 */	li r0, 0x61
@@ -374,8 +374,8 @@ asm u32 GXSetDispCopyYScale(f32)
 /* 8033D84C 0033A42C  54 84 05 A8 */	rlwinm r4, r4, 0, 0x16, 0x14
 /* 8033D850 0033A430  7C 83 1B 78 */	or r3, r4, r3
 /* 8033D854 0033A434  90 65 00 00 */	stw r3, 0(r5)
-/* 8033D858 0033A438  C8 42 E8 48 */	lfd f2, lbl_804DE228(r2)
-/* 8033D85C 0033A43C  C0 22 E8 40 */	lfs f1, lbl_804DE220(r2)
+/* 8033D858 0033A438  C8 42 E8 48 */	lfd f2, GXFrameBuf_804DE228(r2)
+/* 8033D85C 0033A43C  C0 22 E8 40 */	lfs f1, GXFrameBuf_804DE220(r2)
 /* 8033D860 0033A440  EC 00 10 28 */	fsubs f0, f0, f2
 /* 8033D864 0033A444  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 8033D868 0033A448  80 63 01 E4 */	lwz r3, 0x1e4(r3)

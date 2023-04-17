@@ -19,7 +19,7 @@
 
 extern StageInfo stage_info;
 
-static StageCallbacks lbl_803E26F0[4] = {
+static StageCallbacks grSt_803E26F0[4] = {
     { NULL, NULL, NULL, NULL, 0 },
     { grStory_801E31C0, grStory_801E3224, grStory_801E322C, grStory_801E3230,
       0 },
@@ -34,11 +34,11 @@ static struct {
     f32 unk4;
     f32 unk8;
     f32 vars[7];
-}* lbl_804D69B8;
+}* grSt_804D69B8;
 
-StageData lbl_803E274C = {
+StageData grSt_803E274C = {
     (1 << 1) | (1 << 3),
-    lbl_803E26F0,
+    grSt_803E26F0,
     "/GrSt.dat",
     grStory_801E3030,
     grStory_801E302C,
@@ -56,7 +56,7 @@ static void grStory_801E302C(bool _) {}
 
 void grStory_801E3030(void)
 {
-    lbl_804D69B8 = Ground_801C49F8();
+    grSt_804D69B8 = Ground_801C49F8();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grStory_801E30D8(0);
@@ -82,7 +82,7 @@ bool grStory_801E30D0(void)
 HSD_GObj* grStory_801E30D8(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &lbl_803E26F0[gobj_id];
+    StageCallbacks* callbacks = &grSt_803E26F0[gobj_id];
 
     gobj = Ground_801C14D0(gobj_id);
 
@@ -100,7 +100,7 @@ HSD_GObj* grStory_801E30D8(int gobj_id)
         }
         // 0x94
         if (callbacks->callback2 != NULL) {
-            func_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grstory.c", 220,
@@ -145,7 +145,7 @@ void grStory_801E3234(HSD_GObj* gobj)
     grAnime_801C7FF8(gobj, 0, 7, 0, 0.0f, 1.0f);
     grAnime_801C7FF8(gobj, 5, 7, 1, 0.0f, 1.0f);
 
-    gp->xC8 = lbl_804D69B8->unk0 + randi(lbl_804D69B8->unk4);
+    gp->xC8 = grSt_804D69B8->unk0 + randi(grSt_804D69B8->unk4);
     gp->xC8 = 120;
     gp->x10_flags.b5 = true;
 }
@@ -242,7 +242,7 @@ void grStory_801E3418(HSD_GObj* gobj)
         return;
     }
     // Reset the timer
-    gp->xC8 = lbl_804D69B8->unk0 + randi(lbl_804D69B8->unk4);
+    gp->xC8 = grSt_804D69B8->unk0 + randi(grSt_804D69B8->unk4);
     // This value really is overwritten in the game code.
     // Maybe a leftover hardcoded value from debugging?
     gp->xC8 = 120;
@@ -260,14 +260,14 @@ void grStory_801E3418(HSD_GObj* gobj)
     } else {
         pos.x = 304.0f;
     }
-    pos.y = lbl_804D69B8->vars[spawn_pattern];
+    pos.y = grSt_804D69B8->vars[spawn_pattern];
     pos.z = 2.0f;
 
     {
         s32 temp_r29 = randi(3);
 
         // Spawn either 1, or 3-6 shy guys
-        if (randi(lbl_804D69B8->unk8) == 0) {
+        if (randi(grSt_804D69B8->unk8) == 0) {
             gp->xC4 = randi(3) + 3;
         } else {
             gp->xC4 = 1;
@@ -281,7 +281,7 @@ void grStory_801E3418(HSD_GObj* gobj)
         for (i = 0; i < gp->xC4; i++) {
             it_802D8618(i, &pos, temp_r29, 25.0f * i);
             // Jitter the vertical position of the each subsequent shy guy
-            pos.y = 3.0f * frand_amp1() + lbl_804D69B8->vars[spawn_pattern];
+            pos.y = 3.0f * frand_amp1() + grSt_804D69B8->vars[spawn_pattern];
         }
     }
 }

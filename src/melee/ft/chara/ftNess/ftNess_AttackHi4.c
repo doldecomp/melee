@@ -364,7 +364,7 @@ void ftNs_AttackHi4_YoyoApplySmash(HSD_GObj* gobj)
     fp->x2114_SmashAttr.x2118_frames = 0.0f;
     fp->x2114_SmashAttr.x211C_holdFrame = 60.0f;
     fp->x2114_SmashAttr.x212C = (u8) 0;
-    fp->x2114_SmashAttr.x212D = (u8) ((struct Unknown*) lbl_804D6528)->x4;
+    fp->x2114_SmashAttr.x212D = (u8) ((struct Unknown*) Fighter_804D6528)->x4;
     fp->x2114_SmashAttr.x2128 = colAnimID;
     smashColAnimID = smash_attr->x2128;
 
@@ -621,7 +621,7 @@ void ftNs_AttackHi4_YoyoItemSetUnk2(HSD_GObj* gobj)
     }
 }
 
-void ftNs_AttackHi4_Action(HSD_GObj* gobj)
+void ftNs_AttackHi4_Enter(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -731,7 +731,7 @@ void ftNs_AttackHi4_Anim(HSD_GObj* gobj)
                 phi_r0 = false;
             }
             if (phi_r0 != false) {
-                ftNs_AttackHi4_Charge_Action(gobj);
+                ftNs_AttackHi4Charge_Enter(gobj);
             }
         }
         if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -753,7 +753,7 @@ void ftNs_AttackHi4_IASA(HSD_GObj* gobj) // Ness's Up Smash IASA callback
     }
 
     if (fp->x2218_flag.bits.b0 != 0) {
-        ft_8008A4D4(gobj);
+        ftCo_Wait_IASA(gobj);
     }
 }
 
@@ -810,7 +810,7 @@ static inline HSD_GObj* GetYoyoGObj(Fighter* fp)
 
 // 0x80115F88
 // https://decomp.me/scratch/3Af8Z
-void ftNs_AttackHi4_Charge_Anim(
+void ftNs_AttackHi4Charge_Anim(
     HSD_GObj* gobj) // Ness's Up Smash Charge Animation callback
 {
     f32 unk_float;
@@ -851,24 +851,24 @@ void ftNs_AttackHi4_Charge_Anim(
     if ((f32) fp->mv.ns.attackhi4.yoyoCurrentFrame >=
         ness_attr->xAC_YOYO_CHARGE_DURATION)
     {
-        ftNs_AttackHi4_Release_Action(gobj);
+        ftNs_AttackHi4Release_Enter(gobj);
     }
 }
 
 // 0x801160B4
 // https://decomp.me/scratch/cU6sU
-void ftNs_AttackHi4_Charge_IASA(
+void ftNs_AttackHi4Charge_IASA(
     HSD_GObj* gobj) // Ness's Up Smash Charge IASA callback
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_A) == false) {
-        ftNs_AttackHi4_Release_Action(gobj);
+        ftNs_AttackHi4Release_Enter(gobj);
     }
 }
 
 // 0x801160E4
 // https://decomp.me/scratch/Te2bU
-void ftNs_AttackHi4_Charge_Phys(
+void ftNs_AttackHi4Charge_Phys(
     HSD_GObj* gobj) // Ness's Up Smash Charge Physics callback
 {
     ft_80084F3C(gobj);
@@ -876,7 +876,7 @@ void ftNs_AttackHi4_Charge_Phys(
 
 // 0x80116104
 // https://decomp.me/scratch/TJd8i
-void ftNs_AttackHi4_Charge_Coll(
+void ftNs_AttackHi4Charge_Coll(
     HSD_GObj* gobj) // Ness's Up Smash Charge Collision callback
 {
     Fighter* fp;
@@ -899,7 +899,7 @@ void ftNs_AttackHi4_Charge_Coll(
 
 // 0x80116178
 // https://decomp.me/scratch/dY1wZ
-void ftNs_AttackHi4_Charge_Action(
+void ftNs_AttackHi4Charge_Enter(
     HSD_GObj* gobj) // Ness's Up Smash Charge Motion State handler
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -917,7 +917,7 @@ void ftNs_AttackHi4_Charge_Action(
 
 // 0x8011620C
 // https://decomp.me/scratch/QRdS1
-void ftNs_AttackHi4_Release_Anim(
+void ftNs_AttackHi4Release_Anim(
     HSD_GObj* gobj) // Ness's Up Smash Post-Charge Animation callback
 {
     s32 yoyoRehitTimer;
@@ -948,18 +948,18 @@ void ftNs_AttackHi4_Release_Anim(
 
 // 0x801162B0
 // https://decomp.me/scratch/TowF9
-void ftNs_AttackHi4_Release_IASA(
+void ftNs_AttackHi4Release_IASA(
     HSD_GObj* gobj) // Ness's Up Smash Post-Charge IASA
 {
     Fighter* fp = gobj->user_data;
     if (fp->x2218_flag.bits.b0 != 0) {
-        ft_8008A4D4(gobj);
+        ftCo_Wait_IASA(gobj);
     }
 }
 
 // 0x801162E0
 // https://decomp.me/scratch/U8Bk1
-void ftNs_AttackHi4_Release_Phys(
+void ftNs_AttackHi4Release_Phys(
     HSD_GObj* gobj) // Ness's Up Smash Post-Charge Physics callback
 {
     Vec3 sp30;
@@ -1003,7 +1003,7 @@ void ftNs_AttackHi4_Release_Phys(
 
 // 0x80116420
 // https://decomp.me/scratch/TQPrT
-void ftNs_AttackHi4_Release_Coll(
+void ftNs_AttackHi4Release_Coll(
     HSD_GObj* gobj) // Ness's Up Smash Post-Charge Collision callback
 {
     Fighter* fp;
@@ -1032,7 +1032,7 @@ static itYoyoAttributes* GetYoyoAttr(HSD_GObj* gobj)
     return yoyo_attr;
 }
 
-void ftNs_AttackHi4_Release_Action(HSD_GObj* gobj)
+void ftNs_AttackHi4Release_Enter(HSD_GObj* gobj)
 {
     Vec3 sp34;
     Fighter* fighter_data2;

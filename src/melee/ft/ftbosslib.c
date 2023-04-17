@@ -258,7 +258,7 @@ HSD_GObj* ftBossLib_8015C3E8(FighterKind kind)
     u8 _[8];
 #endif
 
-    for (cur = lbl_804D782C->x20_fighters; cur; cur = cur->next) {
+    for (cur = HSD_GObj_804D782C->x20_fighters; cur; cur = cur->next) {
         if (kind == ftLib_800872A4(cur)) {
             return cur;
         }

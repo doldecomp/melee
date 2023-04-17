@@ -18,7 +18,7 @@ void ftDonkey_SetCallbacks_SpecialHi(HSD_GObj* gobj)
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
 }
 
-void ftDk_SpecialHi_StartMotion(HSD_GObj* gobj)
+void ftDk_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
@@ -37,7 +37,7 @@ void ftDk_SpecialHi_StartMotion(HSD_GObj* gobj)
     efSync_Spawn(0x4CA, gobj, fp->ft_bones[0].x0_jobj);
 }
 
-void ftDk_SpecialAirHi_StartMotion(HSD_GObj* gobj)
+void ftDk_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
@@ -61,14 +61,14 @@ void ftDk_SpecialAirHi_StartMotion(HSD_GObj* gobj)
     efSync_Spawn(0x4CA, gobj, fp->ft_bones[0].x0_jobj);
 }
 
-void ftDk_SpecialN_8010FCD4(HSD_GObj* gobj)
+void ftDk_SpecialHi_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
 
-void ftDk_SpecialHi_8010FD10(HSD_GObj* gobj)
+void ftDk_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
@@ -89,11 +89,11 @@ void ftDk_SpecialHi_8010FD10(HSD_GObj* gobj)
     }
 }
 
-void ftDk_SpecialHi_8010FD9C(HSD_GObj* gobj) {}
+void ftDk_SpecialHi_IASA(HSD_GObj* gobj) {}
 
-void ftDk_SpecialHi_8010FDA0(HSD_GObj* gobj) {}
+void ftDk_SpecialAirHi_IASA(HSD_GObj* gobj) {}
 
-void ftDk_SpecialHi_8010FDA4(HSD_GObj* gobj)
+void ftDk_SpecialHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
@@ -102,7 +102,7 @@ void ftDk_SpecialHi_8010FDA4(HSD_GObj* gobj)
     ftCommon_8007CB74(gobj);
 }
 
-void ftDk_SpecialHi_8010FDEC(HSD_GObj* gobj)
+void ftDk_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -124,7 +124,7 @@ void ftDk_SpecialHi_8010FDEC(HSD_GObj* gobj)
                       donkey_attr->SpecialHi.x58_AERIAL_HORIZONTAL_VELOCITY);
 }
 
-void ftDk_SpecialHi_8010FE60(HSD_GObj* gobj)
+void ftDk_SpecialHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
@@ -139,7 +139,7 @@ void ftDk_SpecialHi_8010FE60(HSD_GObj* gobj)
     }
 }
 
-void ftDk_SpecialHi_8010FF14(HSD_GObj* gobj)
+void ftDk_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;

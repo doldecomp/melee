@@ -179,7 +179,7 @@ void ftFc_Init_OnLoad(HSD_GObj* gobj)
 #endif
 
     fp->x2224_flag.bits.b7 = 1;
-    ftFx_OnLoadForFalco(fp);
+    ftFx_Init_OnLoadForFalco(fp);
 
     sa2 = fp->x2D4_specialAttributes;
     it_8026B3F8(items[0], sa2[7]);

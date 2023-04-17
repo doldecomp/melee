@@ -109,18 +109,18 @@ MotionState ftFx_Init_MotionStateTable[] = {
 
 char ftFx_Init_DatFilename[] = "PlFx.dat";
 char ftFx_Init_DataName[] = "ftDataFox";
-char ftFx_803C7C00[] = "PlFxNr.dat";
-char ftFx_803C7C0C[] = "PlyFox5K_Share_joint";
-char ftFx_803C7C24[] = "PlyFox5K_Share_matanim_joint";
-char ftFx_803C7C44[] = "PlFxOr.dat";
-char ftFx_803C7C50[] = "PlyFox5KOr_Share_joint";
-char ftFx_803C7C68[] = "PlyFox5KOr_Share_matanim_joint";
-char ftFx_803C7C88[] = "PlFxLa.dat";
-char ftFx_803C7C94[] = "PlyFox5KLa_Share_joint";
-char ftFx_803C7CAC[] = "PlyFox5KLa_Share_matanim_joint";
-char ftFx_803C7CCC[] = "PlFxGr.dat";
-char ftFx_803C7CD8[] = "PlyFox5KGr_Share_joint";
-char ftFx_803C7CF0[] = "PlyFox5KGr_Share_matanim_joint";
+char ftFx_Init_803C7C00[] = "PlFxNr.dat";
+char ftFx_Init_803C7C0C[] = "PlyFox5K_Share_joint";
+char ftFx_Init_803C7C24[] = "PlyFox5K_Share_matanim_joint";
+char ftFx_Init_803C7C44[] = "PlFxOr.dat";
+char ftFx_Init_803C7C50[] = "PlyFox5KOr_Share_joint";
+char ftFx_Init_803C7C68[] = "PlyFox5KOr_Share_matanim_joint";
+char ftFx_Init_803C7C88[] = "PlFxLa.dat";
+char ftFx_Init_803C7C94[] = "PlyFox5KLa_Share_joint";
+char ftFx_Init_803C7CAC[] = "PlyFox5KLa_Share_matanim_joint";
+char ftFx_Init_803C7CCC[] = "PlFxGr.dat";
+char ftFx_Init_803C7CD8[] = "PlyFox5KGr_Share_joint";
+char ftFx_Init_803C7CF0[] = "PlyFox5KGr_Share_matanim_joint";
 char ftFx_Init_AnimDatFilename[] = "PlFxAJ.dat";
 
 Fighter_DemoStrings ftFx_Init_DemoMotionFilenames = {
@@ -131,10 +131,10 @@ Fighter_DemoStrings ftFx_Init_DemoMotionFilenames = {
 };
 
 Fighter_CostumeStrings ftFx_Init_CostumeStrings[] = {
-    { ftFx_803C7C00, ftFx_803C7C0C, ftFx_803C7C24 },
-    { ftFx_803C7C44, ftFx_803C7C50, ftFx_803C7C68 },
-    { ftFx_803C7C88, ftFx_803C7C94, ftFx_803C7CAC },
-    { ftFx_803C7CCC, ftFx_803C7CD8, ftFx_803C7CF0 },
+    { ftFx_Init_803C7C00, ftFx_Init_803C7C0C, ftFx_Init_803C7C24 },
+    { ftFx_Init_803C7C44, ftFx_Init_803C7C50, ftFx_Init_803C7C68 },
+    { ftFx_Init_803C7C88, ftFx_Init_803C7C94, ftFx_Init_803C7CAC },
+    { ftFx_Init_803C7CCC, ftFx_Init_803C7CD8, ftFx_Init_803C7CF0 },
 };
 
 bool ftFx_Init_800E5534(HSD_GObj* gobj)
@@ -154,7 +154,7 @@ void ftFx_Init_OnDeath(HSD_GObj* gobj)
 
 void ftFx_Init_800E5588(HSD_GObj* gobj)
 {
-    ftFx_RemoveBlaster(gobj);
+    ftFx_SpecialN_RemoveBlaster(gobj);
 }
 
 void ftFx_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
@@ -177,7 +177,7 @@ void ftFx_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void ftFx_OnLoadForFalco(Fighter* fp)
+void ftFx_Init_OnLoadForFalco(Fighter* fp)
 {
     PUSH_ATTRS(fp, ftFoxAttributes);
 }

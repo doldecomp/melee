@@ -12,12 +12,12 @@
 
 #include <dolphin/mtx/types.h>
 
-static void ftGw_ItemJudgementExitHitlag(HSD_GObj* gobj);
-static void ftGw_ItemJudgementEnterHitlag(HSD_GObj* gobj);
+static void ftGw_SpecialS_ItemJudgementExitHitlag(HSD_GObj* gobj);
+static void ftGw_SpecialS_ItemJudgementEnterHitlag(HSD_GObj* gobj);
 
 // 0x8014C46C
 // https://decomp.me/scratch/ohXu0 // Create Judgement item
-void ftGw_ItemJudgementSetup(HSD_GObj* gobj)
+void ftGw_SpecialS_ItemJudgementSetup(HSD_GObj* gobj)
 {
     Vec3 sp20;
     Vec3 sp14;
@@ -39,22 +39,24 @@ void ftGw_ItemJudgementSetup(HSD_GObj* gobj)
             it_8028FAF4(gobj, &sp20);
         }
         if (fp->fv.gw.x2264_judgementGObj != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = ftGw_OnDamage;
-            fp->cb.x21DC_callback_OnTakeDamage = ftGw_OnDamage;
+            fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
+            fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
         }
-        fp->cb.x21D4_callback_EnterHitlag = ftGw_ItemJudgementEnterHitlag;
-        fp->cb.x21D8_callback_ExitHitlag = ftGw_ItemJudgementExitHitlag;
+        fp->cb.x21D4_callback_EnterHitlag =
+            ftGw_SpecialS_ItemJudgementEnterHitlag;
+        fp->cb.x21D8_callback_ExitHitlag =
+            ftGw_SpecialS_ItemJudgementExitHitlag;
         fp->cb.x21BC_callback_Accessory4 = NULL;
     }
 }
 
 // 0x8014C590
 // https://decomp.me/scratch/KIUEJ // Set Judgement flags + clear pointers
-void ftGw_ItemJudgementSetFlag(HSD_GObj* gobj)
+void ftGw_SpecialS_ItemJudgementSetFlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftGw_ItemJudgementExitHitlag(gobj);
+    ftGw_SpecialS_ItemJudgementExitHitlag(gobj);
     fp->fv.gw.x2264_judgementGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
@@ -62,19 +64,19 @@ void ftGw_ItemJudgementSetFlag(HSD_GObj* gobj)
 
 // 0x8014C5CC
 // https://decomp.me/scratch/jU9ji // Remove Judgement item
-void ftGw_ItemJudgementRemove(HSD_GObj* gobj)
+void ftGw_SpecialS_ItemJudgementRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.gw.x2264_judgementGObj != NULL) {
         it_802C7A84(fp->fv.gw.x2264_judgementGObj);
-        ftGw_ItemJudgementSetFlag(gobj);
+        ftGw_SpecialS_ItemJudgementSetFlag(gobj);
     }
 }
 
 // 0x8014C62C
 // https://decomp.me/scratch/vFist // Apply hitlag to Judgement item
-static void ftGw_ItemJudgementEnterHitlag(HSD_GObj* gobj)
+static void ftGw_SpecialS_ItemJudgementEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.gw.x2264_judgementGObj != NULL) {
@@ -83,7 +85,7 @@ static void ftGw_ItemJudgementEnterHitlag(HSD_GObj* gobj)
 }
 
 // 0x8014C65C - Remove hitlag for Judgement item
-static void ftGw_ItemJudgementExitHitlag(HSD_GObj* gobj)
+static void ftGw_SpecialS_ItemJudgementExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.gw.x2264_judgementGObj != NULL) {
@@ -94,7 +96,7 @@ static void ftGw_ItemJudgementExitHitlag(HSD_GObj* gobj)
 // 0x8014C68C
 // https://decomp.me/scratch/MTdOC // Check if Mr. Game & Watch is in any of
 // his SpecialS Motion States
-bool ftGw_ItemCheckJudgementRemove(HSD_GObj* gobj)
+bool ftGw_SpecialS_ItemCheckJudgementRemove(HSD_GObj* gobj)
 {
     /// @todo @c enum
     enum_t msid = GET_FIGHTER(gobj)->motion_id;
@@ -164,12 +166,12 @@ static inline void ftGameWatch_SpecialS_SetVars(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->cb.x21BC_callback_Accessory4 = ftGw_ItemJudgementSetup;
+    fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialS_ItemJudgementSetup;
 }
 
 // 0x8014C7A0
 // https://decomp.me/scratch/PnafK
-void ftGw_SpecialS_StartMotion(HSD_GObj* gobj)
+void ftGw_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -180,7 +182,7 @@ void ftGw_SpecialS_StartMotion(HSD_GObj* gobj)
 
     GET_FIGHTER(gobj)->x80_self_vel.y = 0.0f;
 
-    /// @todo Shared @c inline with #ftGw_SpecialAirS_StartMotion.
+    /// @todo Shared @c inline with #ftGw_SpecialAirS_Enter.
     ftGw_SpecialS_GetRandomInt(gobj);
     Fighter_ChangeMotionState(gobj,
                               fp->fv.gw.x222C_judgeVar1 + ftGw_MS_SpecialS1, 0,
@@ -191,7 +193,7 @@ void ftGw_SpecialS_StartMotion(HSD_GObj* gobj)
 
 // 0x8014C828
 // https://decomp.me/scratch/IzXqX
-void ftGw_SpecialAirS_StartMotion(HSD_GObj* gobj)
+void ftGw_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;
@@ -314,13 +316,13 @@ static inline void ftGameWatch_SpecialS_SetCall(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.gw.x2264_judgementGObj != NULL) {
-        fp->cb.x21E4_callback_OnDeath2 = ftGw_OnDamage;
-        fp->cb.x21DC_callback_OnTakeDamage = ftGw_OnDamage;
+        fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
+        fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = ftGw_ItemJudgementEnterHitlag;
-    fp->cb.x21D8_callback_ExitHitlag = ftGw_ItemJudgementExitHitlag;
-    fp->cb.x21BC_callback_Accessory4 = ftGw_ItemJudgementSetup;
+    fp->cb.x21D4_callback_EnterHitlag = ftGw_SpecialS_ItemJudgementEnterHitlag;
+    fp->cb.x21D8_callback_ExitHitlag = ftGw_SpecialS_ItemJudgementExitHitlag;
+    fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialS_ItemJudgementSetup;
 }
 
 static Fighter_MotionStateChangeFlags const transition_flags =

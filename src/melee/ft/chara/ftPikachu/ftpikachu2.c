@@ -13,7 +13,7 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftPk_SpecialN_StartMotion(HSD_GObj* gobj)
+void ftPk_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
@@ -24,7 +24,7 @@ void ftPk_SpecialN_StartMotion(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftPk_SpecialAirN_StartMotion(HSD_GObj* gobj)
+void ftPk_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, 0x156, 0, 0, 0.0f, 1.0f, 0.0f);
@@ -35,7 +35,7 @@ void ftPk_SpecialAirN_StartMotion(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftPk_SpecialN_80124908(HSD_GObj* gobj)
+void ftPk_SpecialN_Anim(HSD_GObj* gobj)
 {
     Vec3 sp14;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -72,7 +72,7 @@ void ftPk_SpecialN_80124908(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialN_80124A20(HSD_GObj* gobj)
+void ftPk_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     Vec3 sp14;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -113,21 +113,21 @@ void ftPk_SpecialN_80124A20(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialN_80124B6C(HSD_GObj* arg0) {}
+void ftPk_SpecialN_IASA(HSD_GObj* arg0) {}
 
-void ftPk_SpecialN_80124B70(HSD_GObj* arg0) {}
+void ftPk_SpecialAirN_IASA(HSD_GObj* arg0) {}
 
-void ftPk_SpecialN_80124B74(HSD_GObj* gobj)
+void ftPk_SpecialN_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftPk_SpecialN_80124B94(HSD_GObj* gobj)
+void ftPk_SpecialAirN_Phys(HSD_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-void ftPk_SpecialN_ChangeMotion_Unk0(HSD_GObj* gobj)
+void ftPk_SpecialN_Coll(HSD_GObj* gobj)
 {
     Fighter* fp;
     if (!ft_80082708(gobj)) {
@@ -138,7 +138,7 @@ void ftPk_SpecialN_ChangeMotion_Unk0(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialN_ChangeMotion_Unk1(HSD_GObj* gobj)
+void ftPk_SpecialAirN_Coll(HSD_GObj* gobj)
 {
     Fighter* fp;
     if (ft_80081D0C(gobj) == 1) {

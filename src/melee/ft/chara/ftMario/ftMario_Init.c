@@ -150,5 +150,5 @@ char* ftMr_Init_GetMotionFileString(enum_t arg0)
         offset = 15;
     }
 
-    return ftMr_DemoViMotionFilenames[offset - 14];
+    return ftMr_Init_DemoViMotionFilenames[offset - 14];
 }

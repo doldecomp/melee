@@ -12,7 +12,7 @@ grTGanon_802246DC:
 /* 802246E4 002212C4  94 21 FF F8 */	stwu r1, -8(r1)
 /* 802246E8 002212C8  4B FA 03 11 */	bl Ground_801C49F8
 /* 802246EC 002212CC  3C 80 80 4A */	lis r4, stage_info@ha
-/* 802246F0 002212D0  90 6D B4 78 */	stw r3, lbl_804D6B18@sda21(r13)
+/* 802246F0 002212D0  90 6D B4 78 */	stw r3, grTGn_804D6B18@sda21(r13)
 /* 802246F4 002212D4  38 64 E6 C8 */	addi r3, r4, stage_info@l
 /* 802246F8 002212D8  38 A3 00 8C */	addi r5, r3, 0x8c
 /* 802246FC 002212DC  88 03 00 8C */	lbz r0, 0x8c(r3)
@@ -67,8 +67,8 @@ grTGanon_80224784:
 /* 8022479C 0022137C  93 81 00 10 */	stw r28, 0x10(r1)
 /* 802247A0 00221380  3B 83 00 00 */	addi r28, r3, 0
 /* 802247A4 00221384  1C 1C 00 14 */	mulli r0, r28, 0x14
-/* 802247A8 00221388  3C 60 80 3F */	lis r3, lbl_803E9880@ha
-/* 802247AC 0022138C  3B E3 98 80 */	addi r31, r3, lbl_803E9880@l
+/* 802247A8 00221388  3C 60 80 3F */	lis r3, grTGn_803E9880@ha
+/* 802247AC 0022138C  3B E3 98 80 */	addi r31, r3, grTGn_803E9880@l
 /* 802247B0 00221390  38 7C 00 00 */	addi r3, r28, 0
 /* 802247B4 00221394  7F BF 02 14 */	add r29, r31, r0
 /* 802247B8 00221398  4B F9 CD 19 */	bl Ground_801C14D0
@@ -101,7 +101,7 @@ grTGanon_80224784:
 /* 8022481C 002213FC  41 82 00 2C */	beq .L_80224848
 /* 80224820 00221400  38 7E 00 00 */	addi r3, r30, 0
 /* 80224824 00221404  38 A0 00 04 */	li r5, 4
-/* 80224828 00221408  48 16 B5 2D */	bl func_8038FD54
+/* 80224828 00221408  48 16 B5 2D */	bl HSD_GObjProc_8038FD54
 /* 8022482C 0022140C  48 00 00 1C */	b .L_80224848
 .L_80224830:
 /* 80224830 00221410  38 DC 00 00 */	addi r6, r28, 0
@@ -245,19 +245,19 @@ grTGanon_802249B4:
 /* 802249EC 002215CC  4B E3 02 81 */	bl mpLib_80054C6C
 /* 802249F0 002215D0  2C 03 00 02 */	cmpwi r3, 2
 /* 802249F4 002215D4  40 82 00 10 */	bne .L_80224A04
-/* 802249F8 002215D8  80 6D B4 78 */	lwz r3, lbl_804D6B18@sda21(r13)
+/* 802249F8 002215D8  80 6D B4 78 */	lwz r3, grTGn_804D6B18@sda21(r13)
 /* 802249FC 002215DC  80 63 00 00 */	lwz r3, 0(r3)
 /* 80224A00 002215E0  48 00 00 38 */	b .L_80224A38
 .L_80224A04:
 /* 80224A04 002215E4  2C 03 00 04 */	cmpwi r3, 4
 /* 80224A08 002215E8  40 82 00 10 */	bne .L_80224A18
-/* 80224A0C 002215EC  80 6D B4 78 */	lwz r3, lbl_804D6B18@sda21(r13)
+/* 80224A0C 002215EC  80 6D B4 78 */	lwz r3, grTGn_804D6B18@sda21(r13)
 /* 80224A10 002215F0  80 63 00 04 */	lwz r3, 4(r3)
 /* 80224A14 002215F4  48 00 00 24 */	b .L_80224A38
 .L_80224A18:
 /* 80224A18 002215F8  2C 03 00 08 */	cmpwi r3, 8
 /* 80224A1C 002215FC  40 82 00 10 */	bne .L_80224A2C
-/* 80224A20 00221600  80 6D B4 78 */	lwz r3, lbl_804D6B18@sda21(r13)
+/* 80224A20 00221600  80 6D B4 78 */	lwz r3, grTGn_804D6B18@sda21(r13)
 /* 80224A24 00221604  80 63 00 08 */	lwz r3, 8(r3)
 /* 80224A28 00221608  48 00 00 10 */	b .L_80224A38
 .L_80224A2C:
@@ -279,8 +279,8 @@ grTGanon_80224A4C:
 
 .section .data
     .balign 8
-.global lbl_803E9880
-lbl_803E9880:
+.global grTGn_803E9880
+grTGn_803E9880:
     .4byte grTGanon_8022486C
     .4byte grTGanon_80224898
     .4byte grTGanon_802248A0
@@ -301,15 +301,15 @@ lbl_803E9880:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_803E98D0
-lbl_803E98D0:
+.global grTGn_803E98D0
+grTGn_803E98D0:
     .asciz "/GrTGn.dat"
     .balign 4
-.global lbl_803E98DC
-lbl_803E98DC:
+.global grTGn_803E98DC
+grTGn_803E98DC:
     .4byte 0x00000041
-    .4byte lbl_803E9880
-    .4byte lbl_803E98D0
+    .4byte grTGn_803E9880
+    .4byte grTGn_803E98D0
     .4byte grTGanon_802246DC
     .4byte grTGanon_802246D8
     .4byte grTGanon_80224754
@@ -327,6 +327,6 @@ lbl_803E98DC:
 
 .section .sbss
     .balign 8
-.global lbl_804D6B18
-lbl_804D6B18:
+.global grTGn_804D6B18
+grTGn_804D6B18:
     .skip 0x4

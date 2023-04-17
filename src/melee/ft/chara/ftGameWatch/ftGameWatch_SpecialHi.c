@@ -13,12 +13,12 @@
 
 #include <dolphin/mtx/types.h>
 
-static void ftGw_ItemRescueEnterHitlag(HSD_GObj* gobj);
-static void ftGw_ItemRescueExitHitlag(HSD_GObj* gobj);
+static void ftGw_SpecialHi_ItemRescueEnterHitlag(HSD_GObj* gobj);
+static void ftGw_SpecialHi_ItemRescueExitHitlag(HSD_GObj* gobj);
 
 // 0x8014DEF0
 // https://decomp.me/scratch/6Vtu9 // Create Fire Rescue item
-void ftGw_ItemRescueSetup(HSD_GObj* gobj)
+void ftGw_SpecialHi_ItemRescueSetup(HSD_GObj* gobj)
 {
     Vec3 sp10;
     Fighter* fp;
@@ -32,11 +32,12 @@ void ftGw_ItemRescueSetup(HSD_GObj* gobj)
                                  fp->facing_dir, 2.5f);
         fp->fv.gw.x226C_rescueGObj = rescueGObj;
         if (rescueGObj != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = ftGw_OnDamage;
-            fp->cb.x21DC_callback_OnTakeDamage = ftGw_OnDamage;
+            fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
+            fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
         }
-        fp->cb.x21D4_callback_EnterHitlag = ftGw_ItemRescueEnterHitlag;
-        fp->cb.x21D8_callback_ExitHitlag = ftGw_ItemRescueExitHitlag;
+        fp->cb.x21D4_callback_EnterHitlag =
+            ftGw_SpecialHi_ItemRescueEnterHitlag;
+        fp->cb.x21D8_callback_ExitHitlag = ftGw_SpecialHi_ItemRescueExitHitlag;
         fp->cb.x21BC_callback_Accessory4 = NULL;
     }
 }
@@ -44,7 +45,7 @@ void ftGw_ItemRescueSetup(HSD_GObj* gobj)
 // 0x8014DFB8
 // https://decomp.me/scratch/Wu4WV // Check if Mr. Game & Watch is performing
 // Fire Rescue
-bool ftGw_ItemCheckRescueRemove(HSD_GObj* gobj)
+bool ftGw_SpecialHi_ItemCheckRescueRemove(HSD_GObj* gobj)
 {
     enum_t msid = GET_FIGHTER(gobj)->motion_id;
 
@@ -58,7 +59,7 @@ bool ftGw_ItemCheckRescueRemove(HSD_GObj* gobj)
 }
 
 // 0x8014DFE4 - Set Fire Rescue GObj pointer and callbacks to NULL
-void ftGw_ItemRescueSetNULL(HSD_GObj* gobj)
+void ftGw_SpecialHi_ItemRescueSetNULL(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -68,18 +69,18 @@ void ftGw_ItemRescueSetNULL(HSD_GObj* gobj)
 }
 
 // 0x8014DFFC - Remove Fire Rescue item
-void ftGw_ItemRescueRemove(HSD_GObj* gobj)
+void ftGw_SpecialHi_ItemRescueRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.gw.x226C_rescueGObj != NULL) {
         it_802C8158(fp->fv.gw.x226C_rescueGObj);
-        ftGw_ItemRescueSetNULL(gobj);
+        ftGw_SpecialHi_ItemRescueSetNULL(gobj);
     }
 }
 
 // 0x8014E04C - Apply hitlag to Fire Rescue item
-static void ftGw_ItemRescueEnterHitlag(HSD_GObj* gobj)
+static void ftGw_SpecialHi_ItemRescueEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -89,7 +90,7 @@ static void ftGw_ItemRescueEnterHitlag(HSD_GObj* gobj)
 }
 
 // 0x8014E06C - Remove hitlag for Fire Rescue item
-static void ftGw_ItemRescueExitHitlag(HSD_GObj* gobj)
+static void ftGw_SpecialHi_ItemRescueExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -105,13 +106,13 @@ static inline void ftGameWatch_SpecialHi_SetVars(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->cb.x21BC_callback_Accessory4 = ftGw_ItemRescueSetup;
+    fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialHi_ItemRescueSetup;
 }
 
 // 0x8014E0AC
 // https://decomp.me/scratch/4Dc4b // Mr. Game & Watch's grounded Fire Rescue
 // Motion State handler
-void ftGw_SpecialHi_StartMotion(HSD_GObj* gobj)
+void ftGw_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -131,7 +132,7 @@ void ftGw_SpecialHi_StartMotion(HSD_GObj* gobj)
 }
 
 // 0x8014E158 - Mr. Game & Watch's aerial Fire Rescue Motion State handler
-void ftGw_SpecialAirHi_StartMotion(HSD_GObj* gobj)
+void ftGw_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -255,7 +256,7 @@ void ftGw_SpecialAirHi_Coll(HSD_GObj* gobj)
     if (fp->x894_currentAnimFrame > 4.0f) {
         if (fp->x80_self_vel.y >= 0.0f) {
             if (ft_80081D0C(gobj) != false) {
-                ftGw_ItemRescueRemove(gobj);
+                ftGw_SpecialHi_ItemRescueRemove(gobj);
                 ftCommon_8007D7FC(fp);
                 ft_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
                 fp->cb.x21E4_callback_OnDeath2 = NULL;

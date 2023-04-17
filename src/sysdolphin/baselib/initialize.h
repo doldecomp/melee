@@ -41,7 +41,7 @@ void HSD_GetNextArena(void** lo, void** hi);
 OSHeapHandle HSD_CreateMainHeap(void* lo, void* hi);
 HSD_RenderPass HSD_GetCurrentRenderPass(void);
 void HSD_StartRender(HSD_RenderPass pass);
-void func_803755A8(void);
+void HSD_Init_803755A8(void);
 static void HSD_ObjInit(void);
 void HSD_ObjDumpStat(void);
 bool HSD_SetInitParameter(HSD_InitParam param, ...);

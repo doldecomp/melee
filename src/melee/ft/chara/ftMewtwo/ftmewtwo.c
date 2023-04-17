@@ -129,13 +129,13 @@ void ftMt_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
     return;
 }
 
-void ftMt_OnDeath2(HSD_GObj* gobj)
+void ftMt_Init_OnDeath2(HSD_GObj* gobj)
 {
     ftMt_SpecialLw_RemoveDisable(gobj);
     ftMt_SpecialN_OnTakeDamage(gobj);
 }
 
-void ftMt_OnTakeDamage(HSD_GObj* gobj)
+void ftMt_Init_OnTakeDamage(HSD_GObj* gobj)
 {
     ftMt_SpecialLw_RemoveDisable(gobj);
     ftMt_SpecialN_OnDeath(gobj);

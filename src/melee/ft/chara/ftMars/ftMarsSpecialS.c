@@ -4,7 +4,7 @@
 #include "ftMars/ftMars.h"
 #include "melee/ft/inlines.h"
 
-void ftMs_SpecialS_StartMotion(HSD_GObj* gobj)
+void ftMs_SpecialS_Enter(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -37,7 +37,7 @@ void ftMs_SpecialS_StartMotion(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftMs_SpecialAirS_StartMotion(HSD_GObj* gobj)
+void ftMs_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
     MarsAttributes* attr = getFtSpecialAttrsD(fp0);
@@ -71,7 +71,7 @@ void ftMs_SpecialAirS_StartMotion(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftMs_SpecialS_80137558(HSD_GObj* gobj)
+void ftMs_SpecialS1_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -84,7 +84,7 @@ void ftMs_SpecialS_80137558(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialS_801375B8(HSD_GObj* gobj)
+void ftMs_SpecialS1_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -100,7 +100,7 @@ void ftMs_SpecialS_801375B8(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialS_80137618(HSD_GObj* gobj)
+void ftMs_SpecialS1_Phys(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -120,7 +120,7 @@ void ftMs_SpecialS_80137618(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialS_8013767C(HSD_GObj* gobj)
+void ftMs_SpecialS1_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -169,7 +169,7 @@ void ftMs_SpecialS_80137748(HSD_GObj* gobj)
                               fp->x894_currentAnimFrame, 1, 0);
 }
 
-void ftMs_SpecialS_801377B0(HSD_GObj* gobj)
+void ftMs_SpecialS2_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -184,7 +184,7 @@ void ftMs_SpecialS_801377B0(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialS_80137810(HSD_GObj* gobj)
+void ftMs_SpecialS2_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
@@ -200,7 +200,7 @@ void ftMs_SpecialS_80137810(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialS_80137870(HSD_GObj* gobj)
+void ftMs_SpecialS2_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* attr = getFtSpecialAttrsD(fp);
@@ -220,7 +220,7 @@ void ftMs_SpecialS_80137870(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialS_801378D4(HSD_GObj* gobj)
+void ftMs_SpecialS2_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -318,7 +318,7 @@ void ftMs_SpecialS_80137A9C(HSD_GObj* gobj)
                               0, 0, 1, 0);
 }
 
-void ftMs_SpecialS_80137B34(HSD_GObj* gobj)
+void ftMs_SpecialS3_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -334,7 +334,7 @@ void ftMs_SpecialS_80137B34(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialS_80137B94(HSD_GObj* gobj)
+void ftMs_SpecialS3_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -350,7 +350,7 @@ void ftMs_SpecialS_80137B94(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialS_80137BF4(HSD_GObj* gobj)
+void ftMs_SpecialS3_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* sa = getFtSpecialAttrsD(fp);
@@ -370,7 +370,7 @@ void ftMs_SpecialS_80137BF4(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialS_80137C50(HSD_GObj* gobj)
+void ftMs_SpecialS3_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -474,7 +474,7 @@ void ftMs_SpecialS_80137E0C(HSD_GObj* gobj)
                               0, 0, 1, 0);
 }
 
-void ftMs_SpecialS_80137ECC(HSD_GObj* gobj)
+void ftMs_SpecialS4_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     // FrameTimerCheck
@@ -489,9 +489,9 @@ void ftMs_SpecialS_80137ECC(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialS_80137F2C(HSD_GObj* gobj) {}
+void ftMs_SpecialS4_IASA(HSD_GObj* gobj) {}
 
-void ftMs_SpecialS_80137F30(HSD_GObj* gobj)
+void ftMs_SpecialS4_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* sa = getFtSpecialAttrsD(fp);
@@ -510,7 +510,7 @@ void ftMs_SpecialS_80137F30(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialS_80137F8C(HSD_GObj* gobj)
+void ftMs_SpecialS4_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

@@ -5,7 +5,7 @@
 
 #ifdef MWERKS_GEKKO
 
-static Vec2 const lbl_804DE290 = { 1024.0F, 0.0F };
+static Vec2 const GXBump_804DE290 = { 1024.0F, 0.0F };
 
 // https://decomp.me/scratch/nTyRU // 1150 (70.51%)
 #pragma push
@@ -88,7 +88,7 @@ lbl_8033F838:
 lbl_8033F840:
 /* 8033F840 0033C420  38 00 00 00 */	li r0, 0
 lbl_8033F844:
-/* 8033F844 0033C424  C0 42 E8 B0 */	lfs f2, lbl_804DE290(r2)
+/* 8033F844 0033C424  C0 42 E8 B0 */	lfs f2, GXBump_804DE290(r2)
 /* 8033F848 0033C428  1C 60 00 03 */	mulli r3, r0, 3
 /* 8033F84C 0033C42C  C0 24 00 00 */	lfs f1, 0(r4)
 /* 8033F850 0033C430  C0 04 00 0C */	lfs f0, 0xc(r4)

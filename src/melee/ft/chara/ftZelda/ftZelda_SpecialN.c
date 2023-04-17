@@ -46,7 +46,7 @@ inline void startActionHelper(HSD_GObj* gobj)
     fighter2->mv.zd.specialn.x0 = attributes->x4;
 }
 
-void ftZd_SpecialN_StartMotion(HSD_GObj* gobj)
+void ftZd_SpecialN_Enter(HSD_GObj* gobj)
 {
     f32 temp_f1;
     Fighter* fp; // r31
@@ -65,7 +65,7 @@ void ftZd_SpecialN_StartMotion(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialN_8013A830;
 }
 
-void ftZd_SpecialAirN_StartMotion(HSD_GObj* gobj)
+void ftZd_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftZelda_DatAttrs* sa = fp->x2D4_specialAttributes;
@@ -85,7 +85,7 @@ void ftZd_SpecialAirN_StartMotion(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialN_8013A8AC;
 }
 
-void ftZd_SpecialN_8013AA38(HSD_GObj* gobj)
+void ftZd_SpecialN_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftZelda_DatAttrs* attributes;
@@ -115,7 +115,7 @@ void ftZd_SpecialN_8013AA38(HSD_GObj* gobj)
 
 // 8013AACC - 8013AB60 (0x94 bytes)
 // https://decomp.me/scratch/ttWvN
-void ftZd_SpecialN_8013AACC(HSD_GObj* gobj)
+void ftZd_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftZelda_DatAttrs* attributes;
@@ -143,17 +143,17 @@ void ftZd_SpecialN_8013AACC(HSD_GObj* gobj)
     }
 }
 
-void ftZd_SpecialN_8013AB60(HSD_GObj* gobj)
+void ftZd_SpecialN_IASA(HSD_GObj* gobj)
 {
     return;
 }
-void ftZd_SpecialN_8013AB64(HSD_GObj* gobj)
+void ftZd_SpecialAirN_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
 // 8013AB68 - 8013AB9C (0x34 bytes)
-void ftZd_SpecialN_8013AB68(HSD_GObj* gobj)
+void ftZd_SpecialN_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
     ftColl_8007AEF8(gobj);
@@ -161,7 +161,7 @@ void ftZd_SpecialN_8013AB68(HSD_GObj* gobj)
 
 // 8013AB9C - 8013AC10 (0x74 bytes)
 // https://decomp.me/scratch/juoPH
-void ftZd_SpecialN_8013AB9C(HSD_GObj* gobj)
+void ftZd_SpecialAirN_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -188,7 +188,7 @@ void ftZd_SpecialN_8013AB9C(HSD_GObj* gobj)
 
 // 8013AC10 - 8013AC4C (0x3C bytes)
 // https://decomp.me/scratch/CT7dz
-void ftZd_SpecialN_8013AC10(HSD_GObj* gobj)
+void ftZd_SpecialN_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
         ftZd_SpecialN_8013AC88(gobj);
@@ -197,7 +197,7 @@ void ftZd_SpecialN_8013AC10(HSD_GObj* gobj)
 
 // 8013AC4C - 8013AC88 (0x3C bytes)
 // https://decomp.me/scratch/CT7dz
-void ftZd_SpecialN_8013AC4C(HSD_GObj* gobj)
+void ftZd_SpecialAirN_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != 0) {
         ftZd_SpecialN_8013AD1C(gobj);

@@ -884,8 +884,8 @@ mccInitializeCheck:
 /* 8032D2EC 00329ECC  38 7F 01 C0 */	addi r3, r31, 0x1c0
 /* 8032D2F0 00329ED0  38 80 00 20 */	li r4, 0x20
 /* 8032D2F4 00329ED4  48 01 74 E9 */	bl DCInvalidateRange
-/* 8032D2F8 00329ED8  3C 60 80 40 */	lis r3, lbl_804008F8@ha
-/* 8032D2FC 00329EDC  38 83 08 F8 */	addi r4, r3, lbl_804008F8@l
+/* 8032D2F8 00329ED8  3C 60 80 40 */	lis r3, MCC_804008F8@ha
+/* 8032D2FC 00329EDC  38 83 08 F8 */	addi r4, r3, MCC_804008F8@l
 /* 8032D300 00329EE0  38 7F 01 C0 */	addi r3, r31, 0x1c0
 /* 8032D304 00329EE4  4B FF 85 E5 */	bl strcmp
 /* 8032D308 00329EE8  7C 03 00 D0 */	neg r0, r3
@@ -977,8 +977,8 @@ mccInitializeCheck:
 /* 8032D454 0032A034  38 60 00 01 */	li r3, 1
 /* 8032D458 0032A038  48 00 01 7C */	b .L_8032D5D4
 .L_8032D45C:
-/* 8032D45C 0032A03C  3C 60 80 40 */	lis r3, lbl_804008D8@ha
-/* 8032D460 0032A040  38 83 08 D8 */	addi r4, r3, lbl_804008D8@l
+/* 8032D45C 0032A03C  3C 60 80 40 */	lis r3, MCC_804008D8@ha
+/* 8032D460 0032A040  38 83 08 D8 */	addi r4, r3, MCC_804008D8@l
 /* 8032D464 0032A044  38 7F 01 C0 */	addi r3, r31, 0x1c0
 /* 8032D468 0032A048  4B FF 85 E9 */	bl strcpy
 /* 8032D46C 0032A04C  38 7F 01 C0 */	addi r3, r31, 0x1c0
@@ -2632,12 +2632,12 @@ MCCCheckAsyncDone:
 
 .section .data
     .balign 8
-.global lbl_804008D8
-lbl_804008D8:
+.global MCC_804008D8
+MCC_804008D8:
     .asciz "HUDSON/USB2EXI/INITCODE/TARGET"
     .balign 4
-.global lbl_804008F8
-lbl_804008F8:
+.global MCC_804008F8
+MCC_804008F8:
     .asciz "HUDSON/USB2EXI/INITCODE/HOST"
     .balign 4
 

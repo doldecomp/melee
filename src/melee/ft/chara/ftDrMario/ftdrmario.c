@@ -9,10 +9,10 @@
 #include "it/it_27CF.h"
 
 MotionState ftDr_Init_MotionStateTable[] = {
-    { 239, 0x00000071, 0x01000000, ftDr_Unk2_80149954, ftDr_Unk2_80149A6C,
-      ftDr_Unk2_80149A8C, ftDr_Unk2_80149AAC, ftCamera_UpdateCameraBox },
-    { 240, 0x00000071, 0x01000000, ftDr_Unk2_80149954, ftDr_Unk2_80149A6C,
-      ftDr_Unk2_80149A8C, ftDr_Unk2_80149AAC, ftCamera_UpdateCameraBox },
+    { 239, 0x00000071, 0x01000000, ftDr_Appeal_Anim, ftDr_Appeal_IASA,
+      ftDr_Appeal_Phys, ftDr_Appeal_Coll, ftCamera_UpdateCameraBox },
+    { 240, 0x00000071, 0x01000000, ftDr_Appeal_Anim, ftDr_Appeal_IASA,
+      ftDr_Appeal_Phys, ftDr_Appeal_Coll, ftCamera_UpdateCameraBox },
     { 295, 0x00340111, 0x12000000, ftMr_SpecialN_Anim, ftMr_SpecialN_IASA,
       ftMr_SpecialN_Phys, ftMr_SpecialN_Coll, ftCamera_UpdateCameraBox },
     { 296, 0x00340511, 0x12000000, ftMr_SpecialAirN_Anim,

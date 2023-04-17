@@ -23,7 +23,7 @@
 #define JOBJ_PARENT(jobj) ((jobj) == NULL ? NULL : (jobj)->parent)
 #define JOBJ_CHILD(jobj) ((jobj) == NULL ? NULL : (jobj)->child)
 
-extern HSD_GObj* lbl_804D7814;
+extern HSD_GObj* HSD_GObj_804D7814;
 extern HSD_PerfStat HSD_PerfCurrentStat;
 extern HSD_MObjInfo ftMObj;
 
@@ -39,41 +39,42 @@ HSD_JObjInfo ftIntpJObj = { ftParts_IntpJObjInfoInit };
 HSD_PObjInfo ftPObj = { ftParts_PObjInfoInit };
 
 // .data
-static char lbl_803C09E0[] = "fighter_class_library";
-static char lbl_803C09F8[] = "ft_intp_jobj";
-static char lbl_803C0A08[] = "ftparts.c";
+static char ftParts_803C09E0[] = "fighter_class_library";
+static char ftParts_803C09F8[] = "ft_intp_jobj";
+static char ftParts_803C0A08[] = "ftparts.c";
 
 #ifdef MUST_MATCH
-static char lbl_803C0A14[] = "envelope";
-static char lbl_803C0A20[] = "envelope->jobj";
-static char lbl_803C0A30[] = "jp->envelopemtx";
-static char lbl_803C0A40[] = "fighter parts model dobj num over! player %d\n";
-static char lbl_803C0A70[] = "fighter dobj num over! player %d\n";
+static char ftParts_803C0A14[] = "envelope";
+static char ftParts_803C0A20[] = "envelope->jobj";
+static char ftParts_803C0A30[] = "jp->envelopemtx";
+static char ftParts_803C0A40[] =
+    "fighter parts model dobj num over! player %d\n";
+static char ftParts_803C0A70[] = "fighter dobj num over! player %d\n";
 #endif
 
-static char lbl_803C0A94[] = "fighter parts num over! player %d\n";
-static char lbl_803C0AB8[] = "fighter parts num not match! player %d\n";
+static char ftParts_803C0A94[] = "fighter parts num over! player %d\n";
+static char ftParts_803C0AB8[] = "fighter parts num not match! player %d\n";
 
 #ifdef MWERKS_GEKKO
-static char lbl_803C0AE0[] = "fighter parts model num over!\n";
-static char lbl_803C0B00[] = "can't find tobj!\n";
-static char lbl_803C0B14[] = "fighter parts model dobj num over!\n";
+static char ftParts_803C0AE0[] = "fighter parts model num over!\n";
+static char ftParts_803C0B00[] = "can't find tobj!\n";
+static char ftParts_803C0B14[] = "fighter parts model dobj num over!\n";
 #endif
 
 #ifdef MUST_MATCH
-static char lbl_803C0B38[] = "cant set fighter rot x!\n";
-static char lbl_803C0B54[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
-static char lbl_803C0B7C[] = "cant set fighter rot y!\n";
-static char lbl_803C0B98[] = "cant set fighter rot z!\n";
+static char ftParts_803C0B38[] = "cant set fighter rot x!\n";
+static char ftParts_803C0B54[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
+static char ftParts_803C0B7C[] = "cant set fighter rot y!\n";
+static char ftParts_803C0B98[] = "cant set fighter rot z!\n";
 #endif
 
 #ifdef MWERKS_GEKKO
-static char lbl_803C0BB4[] = "cant get fighter rot x!\n";
-static char lbl_803C0BD0[] = "cant get fighter rot y!\n";
+static char ftParts_803C0BB4[] = "cant get fighter rot x!\n";
+static char ftParts_803C0BD0[] = "cant get fighter rot y!\n";
 #endif
 
 #ifdef MUST_MATCH
-static char lbl_803C0BEC[] = "cant get fighter rot z!\n";
+static char ftParts_803C0BEC[] = "cant get fighter rot z!\n";
 #endif
 
 // .bss
@@ -84,45 +85,45 @@ struct {
 } ft_jobj_scale;
 
 // .sdata
-static char lbl_804D3A30[] = "jobj.h";
-static char lbl_804D3A38[] = "jobj";
-static char lbl_804D3A40[] = "ft_jobj";
+static char ftParts_804D3A30[] = "jobj.h";
+static char ftParts_804D3A38[] = "jobj";
+static char ftParts_804D3A40[] = "ft_jobj";
 
 #ifdef MWERKS_GEKKO
-static char lbl_804D3A48[] = "jp->mtx";
+static char ftParts_804D3A48[] = "jp->mtx";
 #endif
 
-static char lbl_804D3A50[] = "ft_pobj";
-static char lbl_804D3A58[] = "0";
+static char ftParts_804D3A50[] = "ft_pobj";
+static char ftParts_804D3A58[] = "0";
 
 #ifdef MWERKS_GEKKO
-static char lbl_804D3A5C[] = "rotate";
+static char ftParts_804D3A5C[] = "rotate";
 #endif
 
 /// @todo Remove when strings can be reused
 static inline f32 _HSD_JObjGetScaleX(HSD_JObj* jobj)
 {
-    ((jobj) ? ((void) 0) : __assert(lbl_804D3A30, 875, lbl_804D3A38));
+    ((jobj) ? ((void) 0) : __assert(ftParts_804D3A30, 875, ftParts_804D3A38));
     return jobj->scale.x;
 }
 
 /// @todo Remove when strings can be reused
 static inline f32 _HSD_JObjGetScaleY(HSD_JObj* jobj)
 {
-    ((jobj) ? ((void) 0) : __assert(lbl_804D3A30, 888, lbl_804D3A38));
+    ((jobj) ? ((void) 0) : __assert(ftParts_804D3A30, 888, ftParts_804D3A38));
     return jobj->scale.y;
 }
 
 /// @todo Remove when strings can be reused
 static inline f32 _HSD_JObjGetScaleZ(HSD_JObj* jobj)
 {
-    ((jobj) ? ((void) 0) : __assert(lbl_804D3A30, 901, lbl_804D3A38));
+    ((jobj) ? ((void) 0) : __assert(ftParts_804D3A30, 901, ftParts_804D3A38));
     return jobj->scale.z;
 }
 
 void ftParts_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx)
 {
-    Fighter* fighter = (Fighter*) lbl_804D7814->user_data;
+    Fighter* fighter = (Fighter*) HSD_GObj_804D7814->user_data;
 
     hsdJObj.make_pmtx(jobj, mtx, rmtx);
 
@@ -144,7 +145,7 @@ void ftParts_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx)
 void ftParts_JObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&ftJObj), HSD_CLASS_INFO(&hsdJObj),
-                     lbl_803C09E0, lbl_804D3A40, sizeof(HSD_JObjInfo),
+                     ftParts_803C09E0, ftParts_804D3A40, sizeof(HSD_JObjInfo),
                      sizeof(HSD_JObj));
     HSD_JOBJ_INFO(&ftJObj)->make_pmtx = ftParts_JObjMakePositionMtx;
 }
@@ -221,7 +222,7 @@ s32 ftParts_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent)
 void ftParts_IntpJObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&ftIntpJObj), HSD_CLASS_INFO(&hsdJObj),
-                     lbl_803C09E0, lbl_803C09F8, sizeof(HSD_JObjInfo),
+                     ftParts_803C09E0, ftParts_803C09F8, sizeof(HSD_JObjInfo),
                      sizeof(HSD_JObj));
     HSD_JOBJ_INFO(&ftIntpJObj)->load = ftParts_IntpJObjLoad;
 }
@@ -485,9 +486,9 @@ lbl_80073B7C:
 /* 80073B8C 0007076C  28 1B 00 00 */	cmplwi r27, 0
 /* 80073B90 00070770  41 82 00 44 */	beq lbl_80073BD4
 /* 80073B94 00070774  40 82 00 14 */	bne lbl_80073BA8
-/* 80073B98 00070778  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80073B98 00070778  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80073B9C 0007077C  38 80 02 34 */	li r4, 0x234
-/* 80073BA0 00070780  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80073BA0 00070780  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80073BA4 00070784  48 31 46 7D */	bl __assert
 lbl_80073BA8:
 /* 80073BA8 00070788  80 9B 00 14 */	lwz r4, 0x14(r27)
@@ -654,9 +655,9 @@ lbl_80073DA4:
 /* 80073DB8 00070998  28 19 00 00 */	cmplwi r25, 0
 /* 80073DBC 0007099C  41 82 00 44 */	beq lbl_80073E00
 /* 80073DC0 000709A0  40 82 00 14 */	bne lbl_80073DD4
-/* 80073DC4 000709A4  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80073DC4 000709A4  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80073DC8 000709A8  38 80 02 34 */	li r4, 0x234
-/* 80073DCC 000709AC  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80073DCC 000709AC  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80073DD0 000709B0  48 31 44 51 */	bl __assert
 lbl_80073DD4:
 /* 80073DD4 000709B4  80 99 00 14 */	lwz r4, 0x14(r25)
@@ -713,9 +714,9 @@ lbl_80073E80:
 /* 80073E88 00070A68  7C 19 03 78 */	mr r25, r0
 /* 80073E8C 00070A6C  41 82 00 44 */	beq lbl_80073ED0
 /* 80073E90 00070A70  40 82 00 14 */	bne lbl_80073EA4
-/* 80073E94 00070A74  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80073E94 00070A74  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80073E98 00070A78  38 80 02 34 */	li r4, 0x234
-/* 80073E9C 00070A7C  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80073E9C 00070A7C  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80073EA0 00070A80  48 31 43 81 */	bl __assert
 lbl_80073EA4:
 /* 80073EA4 00070A84  80 99 00 14 */	lwz r4, 0x14(r25)
@@ -735,7 +736,7 @@ lbl_80073ED0:
 /* 80073ED4 00070AB4  40 82 00 14 */	bne lbl_80073EE8
 /* 80073ED8 00070AB8  38 7D 01 10 */	addi r3, r29, 0x110
 /* 80073EDC 00070ABC  38 80 01 5F */	li r4, 0x15f
-/* 80073EE0 00070AC0  38 AD 83 A8 */	addi r5, r13, lbl_804D3A48
+/* 80073EE0 00070AC0  38 AD 83 A8 */	addi r5, r13, ftParts_804D3A48
 /* 80073EE4 00070AC4  48 31 43 3D */	bl __assert
 lbl_80073EE8:
 /* 80073EE8 00070AC8  80 19 00 78 */	lwz r0, 0x78(r25)
@@ -909,7 +910,7 @@ lbl_800740D4:
 void ftParts_PObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&ftPObj), HSD_CLASS_INFO(&hsdPObj),
-                     lbl_803C09E0, lbl_804D3A50, sizeof(HSD_PObjInfo),
+                     ftParts_803C09E0, ftParts_804D3A50, sizeof(HSD_PObjInfo),
                      sizeof(HSD_PObj));
     HSD_POBJ_INFO(&ftPObj)->load = lbRefract_PObjLoad;
     HSD_POBJ_INFO(&ftPObj)->setup_mtx = ftParts_PObjSetupMtx;
@@ -1076,7 +1077,7 @@ lbl_800742B8:
 /* 800742D8 00070EB8  48 2D 13 D1 */	bl OSReport
 /* 800742DC 00070EBC  38 7F 01 10 */	addi r3, r31, 0x110
 /* 800742E0 00070EC0  38 80 01 D2 */	li r4, 0x1d2
-/* 800742E4 00070EC4  38 AD 83 B8 */	addi r5, r13, lbl_804D3A58
+/* 800742E4 00070EC4  38 AD 83 B8 */	addi r5, r13, ftParts_804D3A58
 /* 800742E8 00070EC8  48 31 3F 39 */	bl __assert
 lbl_800742EC:
 /* 800742EC 00070ECC  80 1B 00 00 */	lwz r0, 0(r27)
@@ -1118,7 +1119,7 @@ lbl_80074350:
 /* 80074364 00070F44  48 2D 13 45 */	bl OSReport
 /* 80074368 00070F48  38 7F 01 10 */	addi r3, r31, 0x110
 /* 8007436C 00070F4C  38 80 01 E0 */	li r4, 0x1e0
-/* 80074370 00070F50  38 AD 83 B8 */	addi r5, r13, lbl_804D3A58
+/* 80074370 00070F50  38 AD 83 B8 */	addi r5, r13, ftParts_804D3A58
 /* 80074374 00070F54  48 31 3E AD */	bl __assert
 lbl_80074378:
 /* 80074378 00070F58  80 7B 00 00 */	lwz r3, 0(r27)
@@ -1165,8 +1166,8 @@ void ftParts_SetupParts(HSD_GObj* fighter_obj)
     u32 dobj_count = 0;
 
     if (ftPartsTable[fighter->x4_fighterKind]->parts_num > MAX_FT_PARTS) {
-        OSReport(lbl_803C0A94, fighter->xC_playerID);
-        __assert(lbl_803C0A08, 503, lbl_804D3A58);
+        OSReport(ftParts_803C0A94, fighter->xC_playerID);
+        __assert(ftParts_803C0A08, 503, ftParts_804D3A58);
     }
 
     while (jobj != NULL) {
@@ -1221,8 +1222,8 @@ void ftParts_SetupParts(HSD_GObj* fighter_obj)
     fighter->dobj_list.count = dobj_count;
 
     if (part != ftPartsTable[fighter->x4_fighterKind]->parts_num) {
-        OSReport(lbl_803C0AB8, fighter->xC_playerID);
-        __assert(lbl_803C0A08, 546, lbl_804D3A58);
+        OSReport(ftParts_803C0AB8, fighter->xC_playerID);
+        __assert(ftParts_803C0A08, 546, ftParts_804D3A58);
     }
 }
 
@@ -1369,15 +1370,15 @@ lbl_800747C0:
 /* 800747D8 000713B8  80 03 00 08 */	lwz r0, 8(r3)
 /* 800747DC 000713BC  7C 1E 00 40 */	cmplw r30, r0
 /* 800747E0 000713C0  41 82 00 2C */	beq lbl_8007480C
-/* 800747E4 000713C4  3C 60 80 3C */	lis r3, lbl_803C0AB8@ha
+/* 800747E4 000713C4  3C 60 80 3C */	lis r3, ftParts_803C0AB8@ha
 /* 800747E8 000713C8  88 9F 00 0C */	lbz r4, 0xc(r31)
-/* 800747EC 000713CC  38 63 0A B8 */	addi r3, r3, lbl_803C0AB8@l
+/* 800747EC 000713CC  38 63 0A B8 */	addi r3, r3, ftParts_803C0AB8@l
 /* 800747F0 000713D0  4C C6 31 82 */	crclr 6
 /* 800747F4 000713D4  48 2D 0E B5 */	bl OSReport
-/* 800747F8 000713D8  3C 60 80 3C */	lis r3, lbl_803C0A08@ha
-/* 800747FC 000713DC  38 63 0A 08 */	addi r3, r3, lbl_803C0A08@l
+/* 800747F8 000713D8  3C 60 80 3C */	lis r3, ftParts_803C0A08@ha
+/* 800747FC 000713DC  38 63 0A 08 */	addi r3, r3, ftParts_803C0A08@l
 /* 80074800 000713E0  38 80 02 51 */	li r4, 0x251
-/* 80074804 000713E4  38 AD 83 B8 */	addi r5, r13, lbl_804D3A58
+/* 80074804 000713E4  38 AD 83 B8 */	addi r5, r13, ftParts_804D3A58
 /* 80074808 000713E8  48 31 3A 19 */	bl __assert
 lbl_8007480C:
 /* 8007480C 000713EC  80 01 00 24 */	lwz r0, 0x24(r1)
@@ -1458,14 +1459,14 @@ asm void ftParts_8007487C(unk_t item, u32*, u8 costume_id, u32*, u32*)
 /* 800748A8 00071488  80 04 00 00 */	lwz r0, 0(r4)
 /* 800748AC 0007148C  28 00 00 0B */	cmplwi r0, 0xb
 /* 800748B0 00071490  40 81 00 28 */	ble lbl_800748D8
-/* 800748B4 00071494  3C 60 80 3C */	lis r3, lbl_803C0AE0@ha
+/* 800748B4 00071494  3C 60 80 3C */	lis r3, ftParts_803C0AE0@ha
 /* 800748B8 00071498  4C C6 31 82 */	crclr 6
-/* 800748BC 0007149C  38 63 0A E0 */	addi r3, r3, lbl_803C0AE0@l
+/* 800748BC 0007149C  38 63 0A E0 */	addi r3, r3, ftParts_803C0AE0@l
 /* 800748C0 000714A0  48 2D 0D E9 */	bl OSReport
-/* 800748C4 000714A4  3C 60 80 3C */	lis r3, lbl_803C0A08@ha
-/* 800748C8 000714A8  38 63 0A 08 */	addi r3, r3, lbl_803C0A08@l
+/* 800748C4 000714A4  3C 60 80 3C */	lis r3, ftParts_803C0A08@ha
+/* 800748C8 000714A8  38 63 0A 08 */	addi r3, r3, ftParts_803C0A08@l
 /* 800748CC 000714AC  38 80 02 73 */	li r4, 0x273
-/* 800748D0 000714B0  38 AD 83 B8 */	addi r5, r13, lbl_804D3A58
+/* 800748D0 000714B0  38 AD 83 B8 */	addi r5, r13, ftParts_804D3A58
 /* 800748D4 000714B4  48 31 39 4D */	bl __assert
 lbl_800748D8:
 /* 800748D8 000714B8  57 64 20 36 */	slwi r4, r27, 4
@@ -2051,9 +2052,9 @@ asm void ftParts_80074E58(Fighter*)
 /* 80074E74 00071A54  3B C3 00 00 */	addi r30, r3, 0
 /* 80074E78 00071A58  7C 03 03 78 */	mr r3, r0
 /* 80074E7C 00071A5C  48 30 5D 4D */	bl HSD_ObjAlloc
-/* 80074E80 00071A60  3C 80 80 46 */	lis r4, lbl_80459054@ha
+/* 80074E80 00071A60  3C 80 80 46 */	lis r4, Fighter_80459054@ha
 /* 80074E84 00071A64  90 7E 05 E8 */	stw r3, 0x5e8(r30)
-/* 80074E88 00071A68  38 64 90 54 */	addi r3, r4, lbl_80459054@l
+/* 80074E88 00071A68  38 64 90 54 */	addi r3, r4, Fighter_80459054@l
 /* 80074E8C 00071A6C  48 30 5D 3D */	bl HSD_ObjAlloc
 /* 80074E90 00071A70  38 E0 00 00 */	li r7, 0
 /* 80074E94 00071A74  90 7E 05 F0 */	stw r3, 0x5f0(r30)
@@ -2231,7 +2232,7 @@ void ftParts_80075028(void)
 asm u32 ftParts_8007506C(s32 ftkind, u32 part){
     // clang-format off
     nofralloc
-/* 8007506C 00071C4C  80 AD AE A0 */	lwz r5, lbl_804D6540(r13)
+/* 8007506C 00071C4C  80 AD AE A0 */	lwz r5, Fighter_804D6540(r13)
 /* 80075070 00071C50  54 60 10 3A */	slwi r0, r3, 2
 /* 80075074 00071C54  7C 65 00 2E */	lwzx r3, r5, r0
 /* 80075078 00071C58  28 03 00 00 */	cmplwi r3, 0
@@ -2438,14 +2439,14 @@ lbl_800752C0:
 /* 800752C0 00071EA0  80 1B 00 00 */	lwz r0, 0(r27)
 /* 800752C4 00071EA4  7C 1D 00 00 */	cmpw r29, r0
 /* 800752C8 00071EA8  41 80 FF A0 */	blt lbl_80075268
-/* 800752CC 00071EAC  3C 60 80 3C */	lis r3, lbl_803C0B00@ha
+/* 800752CC 00071EAC  3C 60 80 3C */	lis r3, ftParts_803C0B00@ha
 /* 800752D0 00071EB0  4C C6 31 82 */	crclr 6
-/* 800752D4 00071EB4  38 63 0B 00 */	addi r3, r3, lbl_803C0B00@l
+/* 800752D4 00071EB4  38 63 0B 00 */	addi r3, r3, ftParts_803C0B00@l
 /* 800752D8 00071EB8  48 2D 03 D1 */	bl OSReport
-/* 800752DC 00071EBC  3C 60 80 3C */	lis r3, lbl_803C0A08@ha
-/* 800752E0 00071EC0  38 63 0A 08 */	addi r3, r3, lbl_803C0A08@l
+/* 800752DC 00071EBC  3C 60 80 3C */	lis r3, ftParts_803C0A08@ha
+/* 800752E0 00071EC0  38 63 0A 08 */	addi r3, r3, ftParts_803C0A08@l
 /* 800752E4 00071EC4  38 80 03 B4 */	li r4, 0x3b4
-/* 800752E8 00071EC8  38 AD 83 B8 */	addi r5, r13, lbl_804D3A58
+/* 800752E8 00071EC8  38 AD 83 B8 */	addi r5, r13, ftParts_804D3A58
 /* 800752EC 00071ECC  48 31 2F 35 */	bl __assert
 lbl_800752F0:
 /* 800752F0 00071ED0  BB 61 00 1C */	lmw r27, 0x1c(r1)
@@ -2757,15 +2758,15 @@ asm void ftParts_80075650(HSD_GObj* gobj, HSD_JObj*, u32*)
 /* 80075650 00072230  7C 08 02 A6 */	mflr r0
 /* 80075654 00072234  3C 60 80 3C */	lis r3, ftMObj@ha
 /* 80075658 00072238  90 01 00 04 */	stw r0, 4(r1)
-/* 8007565C 0007223C  3C E0 80 3C */	lis r7, lbl_803C0B14@ha
-/* 80075660 00072240  3C C0 80 3C */	lis r6, lbl_803C0A08@ha
+/* 8007565C 0007223C  3C E0 80 3C */	lis r7, ftParts_803C0B14@ha
+/* 80075660 00072240  3C C0 80 3C */	lis r6, ftParts_803C0A08@ha
 /* 80075664 00072244  94 21 FF B8 */	stwu r1, -0x48(r1)
 /* 80075668 00072248  BE E1 00 24 */	stmw r23, 0x24(r1)
 /* 8007566C 0007224C  3B 84 00 00 */	addi r28, r4, 0
 /* 80075670 00072250  3B A5 00 00 */	addi r29, r5, 0
 /* 80075674 00072254  3B 63 69 80 */	addi r27, r3, ftMObj@l
-/* 80075678 00072258  3B 27 0B 14 */	addi r25, r7, lbl_803C0B14@l
-/* 8007567C 0007225C  3B 46 0A 08 */	addi r26, r6, lbl_803C0A08@l
+/* 80075678 00072258  3B 27 0B 14 */	addi r25, r7, ftParts_803C0B14@l
+/* 8007567C 0007225C  3B 46 0A 08 */	addi r26, r6, ftParts_803C0A08@l
 /* 80075680 00072260  3B C0 00 00 */	li r30, 0
 /* 80075684 00072264  3B E0 00 00 */	li r31, 0
 /* 80075688 00072268  48 00 01 A8 */	b lbl_80075830
@@ -2784,7 +2785,7 @@ lbl_8007569C:
 /* 800756B4 00072294  48 2C FF F5 */	bl OSReport
 /* 800756B8 00072298  38 7A 00 00 */	addi r3, r26, 0
 /* 800756BC 0007229C  38 80 04 27 */	li r4, 0x427
-/* 800756C0 000722A0  38 AD 83 B8 */	addi r5, r13, lbl_804D3A58
+/* 800756C0 000722A0  38 AD 83 B8 */	addi r5, r13, ftParts_804D3A58
 /* 800756C4 000722A4  48 31 2B 5D */	bl __assert
 lbl_800756C8:
 /* 800756C8 000722A8  80 7D 00 04 */	lwz r3, 4(r29)
@@ -2939,16 +2940,16 @@ asm void ftParts_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
 /* 80075860 00072440  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 80075864 00072444  7C 7E 1B 79 */	or. r30, r3, r3
 /* 80075868 00072448  40 82 00 14 */	bne lbl_8007587C
-/* 8007586C 0007244C  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 8007586C 0007244C  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075870 00072450  38 80 02 6A */	li r4, 0x26a
-/* 80075874 00072454  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80075874 00072454  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80075878 00072458  48 31 29 A9 */	bl __assert
 lbl_8007587C:
 /* 8007587C 0007245C  28 1F 00 00 */	cmplwi r31, 0
 /* 80075880 00072460  40 82 00 14 */	bne lbl_80075894
-/* 80075884 00072464  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075884 00072464  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075888 00072468  38 80 02 6B */	li r4, 0x26b
-/* 8007588C 0007246C  38 AD 83 BC */	addi r5, r13, lbl_804D3A5C
+/* 8007588C 0007246C  38 AD 83 BC */	addi r5, r13, ftParts_804D3A5C
 /* 80075890 00072470  48 31 29 91 */	bl __assert
 lbl_80075894:
 /* 80075894 00072474  80 7F 00 00 */	lwz r3, 0(r31)
@@ -2965,9 +2966,9 @@ lbl_80075894:
 /* 800758C0 000724A0  28 1E 00 00 */	cmplwi r30, 0
 /* 800758C4 000724A4  41 82 00 44 */	beq lbl_80075908
 /* 800758C8 000724A8  40 82 00 14 */	bne lbl_800758DC
-/* 800758CC 000724AC  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 800758CC 000724AC  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 800758D0 000724B0  38 80 02 34 */	li r4, 0x234
-/* 800758D4 000724B4  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 800758D4 000724B4  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 800758D8 000724B8  48 31 29 49 */	bl __assert
 lbl_800758DC:
 /* 800758DC 000724BC  80 9E 00 14 */	lwz r4, 0x14(r30)
@@ -3041,21 +3042,21 @@ asm void ftParts_8007592C(Fighter*, s32, f32)
 /* 8007599C 0007257C  48 2C FD 0D */	bl OSReport
 /* 800759A0 00072580  38 7F 01 10 */	addi r3, r31, 0x110
 /* 800759A4 00072584  38 80 04 60 */	li r4, 0x460
-/* 800759A8 00072588  38 AD 83 B8 */	addi r5, r13, lbl_804D3A58
+/* 800759A8 00072588  38 AD 83 B8 */	addi r5, r13, ftParts_804D3A58
 /* 800759AC 0007258C  48 31 28 75 */	bl __assert
 lbl_800759B0:
 /* 800759B0 00072590  28 1D 00 00 */	cmplwi r29, 0
 /* 800759B4 00072594  40 82 00 14 */	bne lbl_800759C8
-/* 800759B8 00072598  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 800759B8 00072598  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 800759BC 0007259C  38 80 02 7F */	li r4, 0x27f
-/* 800759C0 000725A0  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 800759C0 000725A0  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 800759C4 000725A4  48 31 28 5D */	bl __assert
 lbl_800759C8:
 /* 800759C8 000725A8  80 1D 00 14 */	lwz r0, 0x14(r29)
 /* 800759CC 000725AC  54 00 03 9D */	rlwinm. r0, r0, 0, 0xe, 0xe
 /* 800759D0 000725B0  41 82 00 14 */	beq lbl_800759E4
 /* 800759D4 000725B4  38 BF 02 5C */	addi r5, r31, 0x25c
-/* 800759D8 000725B8  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 800759D8 000725B8  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 800759DC 000725BC  38 80 02 80 */	li r4, 0x280
 /* 800759E0 000725C0  48 31 28 41 */	bl __assert
 lbl_800759E4:
@@ -3066,9 +3067,9 @@ lbl_800759E4:
 /* 800759F4 000725D4  28 1D 00 00 */	cmplwi r29, 0
 /* 800759F8 000725D8  41 82 00 D4 */	beq lbl_80075ACC
 /* 800759FC 000725DC  40 82 00 14 */	bne lbl_80075A10
-/* 80075A00 000725E0  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075A00 000725E0  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075A04 000725E4  38 80 02 34 */	li r4, 0x234
-/* 80075A08 000725E8  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80075A08 000725E8  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80075A0C 000725EC  48 31 28 15 */	bl __assert
 lbl_80075A10:
 /* 80075A10 000725F0  80 9D 00 14 */	lwz r4, 0x14(r29)
@@ -3087,16 +3088,16 @@ lbl_80075A2C:
 lbl_80075A40:
 /* 80075A40 00072620  28 1D 00 00 */	cmplwi r29, 0
 /* 80075A44 00072624  40 82 00 14 */	bne lbl_80075A58
-/* 80075A48 00072628  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075A48 00072628  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075A4C 0007262C  38 80 02 7F */	li r4, 0x27f
-/* 80075A50 00072630  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80075A50 00072630  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80075A54 00072634  48 31 27 CD */	bl __assert
 lbl_80075A58:
 /* 80075A58 00072638  80 1D 00 14 */	lwz r0, 0x14(r29)
 /* 80075A5C 0007263C  54 00 03 9D */	rlwinm. r0, r0, 0, 0xe, 0xe
 /* 80075A60 00072640  41 82 00 14 */	beq lbl_80075A74
 /* 80075A64 00072644  38 BF 02 5C */	addi r5, r31, 0x25c
-/* 80075A68 00072648  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075A68 00072648  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075A6C 0007264C  38 80 02 80 */	li r4, 0x280
 /* 80075A70 00072650  48 31 27 B1 */	bl __assert
 lbl_80075A74:
@@ -3107,9 +3108,9 @@ lbl_80075A74:
 /* 80075A84 00072664  28 1D 00 00 */	cmplwi r29, 0
 /* 80075A88 00072668  41 82 00 44 */	beq lbl_80075ACC
 /* 80075A8C 0007266C  40 82 00 14 */	bne lbl_80075AA0
-/* 80075A90 00072670  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075A90 00072670  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075A94 00072674  38 80 02 34 */	li r4, 0x234
-/* 80075A98 00072678  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80075A98 00072678  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80075A9C 0007267C  48 31 27 85 */	bl __assert
 lbl_80075AA0:
 /* 80075AA0 00072680  80 9D 00 14 */	lwz r4, 0x14(r29)
@@ -3183,21 +3184,21 @@ asm void ftParts_80075AF0(Fighter*, s32, f32)
 /* 80075B60 00072740  48 2C FB 49 */	bl OSReport
 /* 80075B64 00072744  38 7F 01 10 */	addi r3, r31, 0x110
 /* 80075B68 00072748  38 80 04 73 */	li r4, 0x473
-/* 80075B6C 0007274C  38 AD 83 B8 */	addi r5, r13, lbl_804D3A58
+/* 80075B6C 0007274C  38 AD 83 B8 */	addi r5, r13, ftParts_804D3A58
 /* 80075B70 00072750  48 31 26 B1 */	bl __assert
 lbl_80075B74:
 /* 80075B74 00072754  28 1D 00 00 */	cmplwi r29, 0
 /* 80075B78 00072758  40 82 00 14 */	bne lbl_80075B8C
-/* 80075B7C 0007275C  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075B7C 0007275C  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075B80 00072760  38 80 02 94 */	li r4, 0x294
-/* 80075B84 00072764  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80075B84 00072764  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80075B88 00072768  48 31 26 99 */	bl __assert
 lbl_80075B8C:
 /* 80075B8C 0007276C  80 1D 00 14 */	lwz r0, 0x14(r29)
 /* 80075B90 00072770  54 00 03 9D */	rlwinm. r0, r0, 0, 0xe, 0xe
 /* 80075B94 00072774  41 82 00 14 */	beq lbl_80075BA8
 /* 80075B98 00072778  38 BF 02 5C */	addi r5, r31, 0x25c
-/* 80075B9C 0007277C  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075B9C 0007277C  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075BA0 00072780  38 80 02 95 */	li r4, 0x295
 /* 80075BA4 00072784  48 31 26 7D */	bl __assert
 lbl_80075BA8:
@@ -3208,9 +3209,9 @@ lbl_80075BA8:
 /* 80075BB8 00072798  28 1D 00 00 */	cmplwi r29, 0
 /* 80075BBC 0007279C  41 82 00 D4 */	beq lbl_80075C90
 /* 80075BC0 000727A0  40 82 00 14 */	bne lbl_80075BD4
-/* 80075BC4 000727A4  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075BC4 000727A4  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075BC8 000727A8  38 80 02 34 */	li r4, 0x234
-/* 80075BCC 000727AC  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80075BCC 000727AC  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80075BD0 000727B0  48 31 26 51 */	bl __assert
 lbl_80075BD4:
 /* 80075BD4 000727B4  80 9D 00 14 */	lwz r4, 0x14(r29)
@@ -3229,16 +3230,16 @@ lbl_80075BF0:
 lbl_80075C04:
 /* 80075C04 000727E4  28 1D 00 00 */	cmplwi r29, 0
 /* 80075C08 000727E8  40 82 00 14 */	bne lbl_80075C1C
-/* 80075C0C 000727EC  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075C0C 000727EC  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075C10 000727F0  38 80 02 94 */	li r4, 0x294
-/* 80075C14 000727F4  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80075C14 000727F4  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80075C18 000727F8  48 31 26 09 */	bl __assert
 lbl_80075C1C:
 /* 80075C1C 000727FC  80 1D 00 14 */	lwz r0, 0x14(r29)
 /* 80075C20 00072800  54 00 03 9D */	rlwinm. r0, r0, 0, 0xe, 0xe
 /* 80075C24 00072804  41 82 00 14 */	beq lbl_80075C38
 /* 80075C28 00072808  38 BF 02 5C */	addi r5, r31, 0x25c
-/* 80075C2C 0007280C  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075C2C 0007280C  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075C30 00072810  38 80 02 95 */	li r4, 0x295
 /* 80075C34 00072814  48 31 25 ED */	bl __assert
 lbl_80075C38:
@@ -3249,9 +3250,9 @@ lbl_80075C38:
 /* 80075C48 00072828  28 1D 00 00 */	cmplwi r29, 0
 /* 80075C4C 0007282C  41 82 00 44 */	beq lbl_80075C90
 /* 80075C50 00072830  40 82 00 14 */	bne lbl_80075C64
-/* 80075C54 00072834  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075C54 00072834  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075C58 00072838  38 80 02 34 */	li r4, 0x234
-/* 80075C5C 0007283C  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80075C5C 0007283C  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80075C60 00072840  48 31 25 C1 */	bl __assert
 lbl_80075C64:
 /* 80075C64 00072844  80 9D 00 14 */	lwz r4, 0x14(r29)
@@ -3325,21 +3326,21 @@ asm void ftParts_80075CB4(Fighter*, s32, f32)
 /* 80075D24 00072904  48 2C F9 85 */	bl OSReport
 /* 80075D28 00072908  38 7F 01 10 */	addi r3, r31, 0x110
 /* 80075D2C 0007290C  38 80 04 86 */	li r4, 0x486
-/* 80075D30 00072910  38 AD 83 B8 */	addi r5, r13, lbl_804D3A58
+/* 80075D30 00072910  38 AD 83 B8 */	addi r5, r13, ftParts_804D3A58
 /* 80075D34 00072914  48 31 24 ED */	bl __assert
 lbl_80075D38:
 /* 80075D38 00072918  28 1D 00 00 */	cmplwi r29, 0
 /* 80075D3C 0007291C  40 82 00 14 */	bne lbl_80075D50
-/* 80075D40 00072920  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075D40 00072920  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075D44 00072924  38 80 02 A9 */	li r4, 0x2a9
-/* 80075D48 00072928  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80075D48 00072928  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80075D4C 0007292C  48 31 24 D5 */	bl __assert
 lbl_80075D50:
 /* 80075D50 00072930  80 1D 00 14 */	lwz r0, 0x14(r29)
 /* 80075D54 00072934  54 00 03 9D */	rlwinm. r0, r0, 0, 0xe, 0xe
 /* 80075D58 00072938  41 82 00 14 */	beq lbl_80075D6C
 /* 80075D5C 0007293C  38 BF 02 5C */	addi r5, r31, 0x25c
-/* 80075D60 00072940  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075D60 00072940  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075D64 00072944  38 80 02 AA */	li r4, 0x2aa
 /* 80075D68 00072948  48 31 24 B9 */	bl __assert
 lbl_80075D6C:
@@ -3350,9 +3351,9 @@ lbl_80075D6C:
 /* 80075D7C 0007295C  28 1D 00 00 */	cmplwi r29, 0
 /* 80075D80 00072960  41 82 00 D4 */	beq lbl_80075E54
 /* 80075D84 00072964  40 82 00 14 */	bne lbl_80075D98
-/* 80075D88 00072968  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075D88 00072968  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075D8C 0007296C  38 80 02 34 */	li r4, 0x234
-/* 80075D90 00072970  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80075D90 00072970  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80075D94 00072974  48 31 24 8D */	bl __assert
 lbl_80075D98:
 /* 80075D98 00072978  80 9D 00 14 */	lwz r4, 0x14(r29)
@@ -3371,16 +3372,16 @@ lbl_80075DB4:
 lbl_80075DC8:
 /* 80075DC8 000729A8  28 1D 00 00 */	cmplwi r29, 0
 /* 80075DCC 000729AC  40 82 00 14 */	bne lbl_80075DE0
-/* 80075DD0 000729B0  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075DD0 000729B0  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075DD4 000729B4  38 80 02 A9 */	li r4, 0x2a9
-/* 80075DD8 000729B8  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80075DD8 000729B8  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80075DDC 000729BC  48 31 24 45 */	bl __assert
 lbl_80075DE0:
 /* 80075DE0 000729C0  80 1D 00 14 */	lwz r0, 0x14(r29)
 /* 80075DE4 000729C4  54 00 03 9D */	rlwinm. r0, r0, 0, 0xe, 0xe
 /* 80075DE8 000729C8  41 82 00 14 */	beq lbl_80075DFC
 /* 80075DEC 000729CC  38 BF 02 5C */	addi r5, r31, 0x25c
-/* 80075DF0 000729D0  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075DF0 000729D0  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075DF4 000729D4  38 80 02 AA */	li r4, 0x2aa
 /* 80075DF8 000729D8  48 31 24 29 */	bl __assert
 lbl_80075DFC:
@@ -3391,9 +3392,9 @@ lbl_80075DFC:
 /* 80075E0C 000729EC  28 1D 00 00 */	cmplwi r29, 0
 /* 80075E10 000729F0  41 82 00 44 */	beq lbl_80075E54
 /* 80075E14 000729F4  40 82 00 14 */	bne lbl_80075E28
-/* 80075E18 000729F8  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075E18 000729F8  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075E1C 000729FC  38 80 02 34 */	li r4, 0x234
-/* 80075E20 00072A00  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80075E20 00072A00  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80075E24 00072A04  48 31 23 FD */	bl __assert
 lbl_80075E28:
 /* 80075E28 00072A08  80 9D 00 14 */	lwz r4, 0x14(r29)
@@ -3457,21 +3458,21 @@ asm f32 ftParts_80075E78(Fighter*, bool)
 /* 80075EC0 00072AA0  48 2F BE 29 */	bl HSD_JObjGetFlags
 /* 80075EC4 00072AA4  54 60 03 9D */	rlwinm. r0, r3, 0, 0xe, 0xe
 /* 80075EC8 00072AA8  41 82 00 28 */	beq lbl_80075EF0
-/* 80075ECC 00072AAC  3C 60 80 3C */	lis r3, lbl_803C0BB4@ha
+/* 80075ECC 00072AAC  3C 60 80 3C */	lis r3, ftParts_803C0BB4@ha
 /* 80075ED0 00072AB0  4C C6 31 82 */	crclr 6
-/* 80075ED4 00072AB4  38 63 0B B4 */	addi r3, r3, lbl_803C0BB4@l
+/* 80075ED4 00072AB4  38 63 0B B4 */	addi r3, r3, ftParts_803C0BB4@l
 /* 80075ED8 00072AB8  48 2C F7 D1 */	bl OSReport
-/* 80075EDC 00072ABC  3C 60 80 3C */	lis r3, lbl_803C0A08@ha
-/* 80075EE0 00072AC0  38 63 0A 08 */	addi r3, r3, lbl_803C0A08@l
+/* 80075EDC 00072ABC  3C 60 80 3C */	lis r3, ftParts_803C0A08@ha
+/* 80075EE0 00072AC0  38 63 0A 08 */	addi r3, r3, ftParts_803C0A08@l
 /* 80075EE4 00072AC4  38 80 04 99 */	li r4, 0x499
-/* 80075EE8 00072AC8  38 AD 83 B8 */	addi r5, r13, lbl_804D3A58
+/* 80075EE8 00072AC8  38 AD 83 B8 */	addi r5, r13, ftParts_804D3A58
 /* 80075EEC 00072ACC  48 31 23 35 */	bl __assert
 lbl_80075EF0:
 /* 80075EF0 00072AD0  28 1E 00 00 */	cmplwi r30, 0
 /* 80075EF4 00072AD4  40 82 00 14 */	bne lbl_80075F08
-/* 80075EF8 00072AD8  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075EF8 00072AD8  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075EFC 00072ADC  38 80 02 CB */	li r4, 0x2cb
-/* 80075F00 00072AE0  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80075F00 00072AE0  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80075F04 00072AE4  48 31 23 1D */	bl __assert
 lbl_80075F08:
 /* 80075F08 00072AE8  C0 3E 00 1C */	lfs f1, 0x1c(r30)
@@ -3479,9 +3480,9 @@ lbl_80075F08:
 lbl_80075F10:
 /* 80075F10 00072AF0  28 1E 00 00 */	cmplwi r30, 0
 /* 80075F14 00072AF4  40 82 00 14 */	bne lbl_80075F28
-/* 80075F18 00072AF8  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075F18 00072AF8  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075F1C 00072AFC  38 80 02 CB */	li r4, 0x2cb
-/* 80075F20 00072B00  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80075F20 00072B00  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80075F24 00072B04  48 31 22 FD */	bl __assert
 lbl_80075F28:
 /* 80075F28 00072B08  C0 3E 00 1C */	lfs f1, 0x1c(r30)
@@ -3532,21 +3533,21 @@ asm f32 ftParts_80075F48(Fighter*, s32)
 /* 80075F90 00072B70  48 2F BD 59 */	bl HSD_JObjGetFlags
 /* 80075F94 00072B74  54 60 03 9D */	rlwinm. r0, r3, 0, 0xe, 0xe
 /* 80075F98 00072B78  41 82 00 28 */	beq lbl_80075FC0
-/* 80075F9C 00072B7C  3C 60 80 3C */	lis r3, lbl_803C0BD0@ha
+/* 80075F9C 00072B7C  3C 60 80 3C */	lis r3, ftParts_803C0BD0@ha
 /* 80075FA0 00072B80  4C C6 31 82 */	crclr 6
-/* 80075FA4 00072B84  38 63 0B D0 */	addi r3, r3, lbl_803C0BD0@l
+/* 80075FA4 00072B84  38 63 0B D0 */	addi r3, r3, ftParts_803C0BD0@l
 /* 80075FA8 00072B88  48 2C F7 01 */	bl OSReport
-/* 80075FAC 00072B8C  3C 60 80 3C */	lis r3, lbl_803C0A08@ha
-/* 80075FB0 00072B90  38 63 0A 08 */	addi r3, r3, lbl_803C0A08@l
+/* 80075FAC 00072B8C  3C 60 80 3C */	lis r3, ftParts_803C0A08@ha
+/* 80075FB0 00072B90  38 63 0A 08 */	addi r3, r3, ftParts_803C0A08@l
 /* 80075FB4 00072B94  38 80 04 AC */	li r4, 0x4ac
-/* 80075FB8 00072B98  38 AD 83 B8 */	addi r5, r13, lbl_804D3A58
+/* 80075FB8 00072B98  38 AD 83 B8 */	addi r5, r13, ftParts_804D3A58
 /* 80075FBC 00072B9C  48 31 22 65 */	bl __assert
 lbl_80075FC0:
 /* 80075FC0 00072BA0  28 1E 00 00 */	cmplwi r30, 0
 /* 80075FC4 00072BA4  40 82 00 14 */	bne lbl_80075FD8
-/* 80075FC8 00072BA8  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075FC8 00072BA8  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075FCC 00072BAC  38 80 02 DA */	li r4, 0x2da
-/* 80075FD0 00072BB0  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80075FD0 00072BB0  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80075FD4 00072BB4  48 31 22 4D */	bl __assert
 lbl_80075FD8:
 /* 80075FD8 00072BB8  C0 3E 00 20 */	lfs f1, 0x20(r30)
@@ -3554,9 +3555,9 @@ lbl_80075FD8:
 lbl_80075FE0:
 /* 80075FE0 00072BC0  28 1E 00 00 */	cmplwi r30, 0
 /* 80075FE4 00072BC4  40 82 00 14 */	bne lbl_80075FF8
-/* 80075FE8 00072BC8  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
+/* 80075FE8 00072BC8  38 6D 83 90 */	addi r3, r13, ftParts_804D3A30
 /* 80075FEC 00072BCC  38 80 02 DA */	li r4, 0x2da
-/* 80075FF0 00072BD0  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
+/* 80075FF0 00072BD0  38 AD 83 98 */	addi r5, r13, ftParts_804D3A38
 /* 80075FF4 00072BD4  48 31 22 2D */	bl __assert
 lbl_80075FF8:
 /* 80075FF8 00072BD8  C0 3E 00 20 */	lfs f1, 0x20(r30)

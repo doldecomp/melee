@@ -16,8 +16,8 @@ ftNs_AttackS4_OnReflect:
 /* 80114C1C 001117FC  7C 08 03 A6 */	mtlr r0
 /* 80114C20 00111800  4E 80 00 20 */	blr
 
-.global ftNs_AttackS4_Action
-ftNs_AttackS4_Action:
+.global ftNs_AttackS4_Enter
+ftNs_AttackS4_Enter:
 /* 80114C24 00111804  7C 08 02 A6 */	mflr r0
 /* 80114C28 00111808  38 E0 00 00 */	li r7, 0
 /* 80114C2C 0011180C  90 01 00 04 */	stw r0, 4(r1)

@@ -10,7 +10,7 @@ extern OSErrorHandler __OSErrorTable[];
 
 static bool OnReset(bool);
 
-static OSResetFunctionInfo lbl_80402348 = { OnReset, 127, NULL, NULL };
+static OSResetFunctionInfo OSMemory_80402348 = { OnReset, 127, NULL, NULL };
 
 u32 OSGetPhysicalMemSize(void)
 {
@@ -177,7 +177,7 @@ void __OSInitMemoryProtection(void)
     __OSSetInterruptHandler(2, MEMIntrruptHandler);
     __OSSetInterruptHandler(3, MEMIntrruptHandler);
     __OSSetInterruptHandler(4, MEMIntrruptHandler);
-    OSRegisterResetFunction(&lbl_80402348);
+    OSRegisterResetFunction(&OSMemory_80402348);
     simulated_mem = OSGetConsoleSimulatedMemSize();
     if (simulated_mem < Mem_Size && simulated_mem == 24 * 1024 * 1024) {
         __MEMRegs[20] = 2;

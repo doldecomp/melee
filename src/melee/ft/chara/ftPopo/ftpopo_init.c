@@ -15,57 +15,52 @@
 #include <baselib/gobj.h>
 
 MotionState ftPp_Init_MotionStateTable[] = {
-    { 295, 0x00340111, 0x12800000, ftPp_SpecialN_8011F318,
-      ftPp_SpecialN_8011F390, ftPp_SpecialN_8011F398, ftPp_SpecialN_8011F3D8,
+    { 295, 0x00340111, 0x12800000, ftPp_SpecialN_Anim, ftPp_SpecialN_IASA,
+      ftPp_SpecialN_Phys, ftPp_SpecialN_Coll, ftCamera_UpdateCameraBox },
+    { 296, 0x00340511, 0x12800000, ftPp_SpecialAirN_Anim,
+      ftPp_SpecialAirN_IASA, ftPp_SpecialAirN_Phys, ftPp_SpecialAirN_Coll,
       ftCamera_UpdateCameraBox },
-    { 296, 0x00340511, 0x12800000, ftPp_SpecialN_8011F354,
-      ftPp_SpecialN_8011F394, ftPp_SpecialN_8011F3B8, ftPp_SpecialN_8011F454,
+    { 297, 0x00340212, 0x13800000, ftPp_SpecialS_Anim, ftPp_SpecialS_IASA,
+      ftPp_SpecialS_Phys, ftPp_SpecialS_Coll, ftCamera_UpdateCameraBox },
+    { 298, 0x00340212, 0x13800000, ftPp_SpecialSTogether_Anim,
+      ftPp_SpecialSTogether_IASA, ftPp_SpecialSTogether_Phys,
+      ftPp_SpecialSTogether_Coll, ftCamera_UpdateCameraBox },
+    { 299, 0x00340612, 0x13800000, ftPp_SpecialAirS_Anim,
+      ftPp_SpecialAirS_IASA, ftPp_SpecialAirS_Phys, ftPp_SpecialAirS_Coll,
       ftCamera_UpdateCameraBox },
-    { 297, 0x00340212, 0x13800000, ftPp_SpecialS_8011FC78,
-      ftPp_SpecialS_8011FF40, ftPp_SpecialS_80120080, ftPp_SpecialS_80120660,
+    { 300, 0x00340612, 0x13800000, ftPp_SpecialAirSTogether_Anim,
+      ftPp_SpecialAirSTogether_IASA, ftPp_SpecialAirSTogether_Phys,
+      ftPp_SpecialAirSTogether_Coll, ftCamera_UpdateCameraBox },
+    { 301, 0x00340213, 0x14000000, ftPp_SpecialHiStart_Anim,
+      ftPp_SpecialHiStart_IASA, ftPp_SpecialHiStart_Phys,
+      ftPp_SpecialHiStart_Coll, ftCamera_UpdateCameraBox },
+    { 302, 0x00340213, 0x14000000, ftPp_SpecialHi_Anim, ftPp_SpecialHi_IASA,
+      ftPp_SpecialHi_Phys, ftPp_SpecialHi_Coll, ftCamera_UpdateCameraBox },
+    { 303, 0x00340213, 0x14000000, ftPp_MS_349_Anim, ftPp_MS_349_IASA,
+      ftPp_MS_349_Phys, ftPp_MS_349_Coll, ftCamera_UpdateCameraBox },
+    { 304, 0x00340213, 0x14000000, ftPp_SpecialHiFail_Anim,
+      ftPp_SpecialHiFail_IASA, ftPp_SpecialHiFail_Phys,
+      ftPp_SpecialHiFail_Coll, ftCamera_UpdateCameraBox },
+    { 305, 0x00340213, 0x14000000, ftPp_SpecialHiFailEnd_Anim,
+      ftPp_SpecialHiFailEnd_IASA, ftPp_SpecialHiFailEnd_Phys,
+      ftPp_SpecialHiFailEnd_Coll, ftCamera_UpdateCameraBox },
+    { 306, 0x00340613, 0x14000000, ftPp_SpecialAirHiStart_Anim,
+      ftPp_SpecialAirHiStart_IASA, ftPp_SpecialAirHiStart_Phys,
+      ftPp_SpecialAirHiStart_Coll, ftCamera_UpdateCameraBox },
+    { 307, 0x00340613, 0x14000000, ftPp_SpecialAirHi_Anim,
+      ftPp_SpecialAirHi_IASA, ftPp_SpecialAirHi_Phys, ftPp_SpecialAirHi_Coll,
       ftCamera_UpdateCameraBox },
-    { 298, 0x00340212, 0x13800000, ftPp_SpecialS_8011FCD0,
-      ftPp_SpecialS_8011FF90, ftPp_SpecialS_80120230, ftPp_SpecialS_80120854,
+    { 308, 0x00340613, 0x14000000, ftPp_SpecialAirHiFail_Anim,
+      ftPp_SpecialAirHiFail_IASA, ftPp_SpecialAirHiFail_Phys,
+      ftPp_SpecialAirHiFail_Coll, ftCamera_UpdateCameraBox },
+    { 309, 0x00340613, 0x14000000, ftPp_SpecialAirHiFailEnd_Anim,
+      ftPp_SpecialAirHiFailEnd_IASA, ftPp_SpecialAirHiFailEnd_Phys,
+      ftPp_SpecialAirHiFailEnd_Coll, ftCamera_UpdateCameraBox },
+    { 310, 0x00340613, 0x14000000, ftPp_SpecialLw_Anim, ftPp_SpecialLw_IASA,
+      ftPp_SpecialLw_Phys, ftPp_SpecialLw_Coll, ftCamera_UpdateCameraBox },
+    { 311, 0x00340014, 0x15800000, ftPp_SpecialAirLw_Anim,
+      ftPp_SpecialAirLw_IASA, ftPp_SpecialAirLw_Phys, ftPp_SpecialAirLw_Coll,
       ftCamera_UpdateCameraBox },
-    { 299, 0x00340612, 0x13800000, ftPp_SpecialS_8011FD9C,
-      ftPp_SpecialS_8011FFE0, ftPp_SpecialS_801203E0, ftPp_SpecialS_80120A48,
-      ftCamera_UpdateCameraBox },
-    { 300, 0x00340612, 0x13800000, ftPp_SpecialS_8011FE48,
-      ftPp_SpecialS_80120030, ftPp_SpecialS_80120520, ftPp_SpecialS_80120C58,
-      ftCamera_UpdateCameraBox },
-    { 301, 0x00340213, 0x14000000, ftPp_SpecialHi_801212C4,
-      ftPp_SpecialHi_801214D4, ftPp_SpecialHi_801215DC,
-      ftPp_SpecialHi_80121740, ftCamera_UpdateCameraBox },
-    { 302, 0x00340213, 0x14000000, ftPp_SpecialHi_80121944,
-      ftPp_SpecialHi_80121AC8, ftPp_SpecialHi_80121AD0,
-      ftPp_SpecialHi_80121C34, ftCamera_UpdateCameraBox },
-    { 303, 0x00340213, 0x14000000, ftPp_SpecialHi_801223B8,
-      ftPp_SpecialHi_8012248C, ftPp_SpecialHi_80122494,
-      ftPp_SpecialHi_80122664, ftCamera_UpdateCameraBox },
-    { 304, 0x00340213, 0x14000000, ftPp_SpecialHi_80121E10,
-      ftPp_SpecialHi_80121EB0, ftPp_SpecialHi_80121EB8,
-      ftPp_SpecialHi_80121F2C, ftCamera_UpdateCameraBox },
-    { 305, 0x00340213, 0x14000000, ftPp_SpecialHi_80122110,
-      ftPp_SpecialHi_801221AC, ftPp_SpecialHi_801221B4,
-      ftPp_SpecialHi_80122228, ftCamera_UpdateCameraBox },
-    { 306, 0x00340613, 0x14000000, ftPp_SpecialHi_801213CC,
-      ftPp_SpecialHi_80121558, ftPp_SpecialHi_80121680,
-      ftPp_SpecialHi_8012177C, ftCamera_UpdateCameraBox },
-    { 307, 0x00340613, 0x14000000, ftPp_SpecialHi_801219F4,
-      ftPp_SpecialHi_80121ACC, ftPp_SpecialHi_80121B74,
-      ftPp_SpecialHi_80121C70, ftCamera_UpdateCameraBox },
-    { 308, 0x00340613, 0x14000000, ftPp_SpecialHi_80122410,
-      ftPp_SpecialHi_80122490, ftPp_SpecialHi_80122538,
-      ftPp_SpecialHi_801226A0, ftCamera_UpdateCameraBox },
-    { 309, 0x00340613, 0x14000000, ftPp_SpecialHi_80121E4C,
-      ftPp_SpecialHi_80121EB4, ftPp_SpecialHi_80121ED8,
-      ftPp_SpecialHi_80121F68, ftCamera_UpdateCameraBox },
-    { 310, 0x00340613, 0x14000000, ftPp_SpecialHi_8012214C,
-      ftPp_SpecialHi_801221B0, ftPp_SpecialHi_801221D4,
-      ftPp_SpecialHi_80122264, ftCamera_UpdateCameraBox },
-    { 311, 0x00340014, 0x15800000, ftPp_SpecialLw_80122A0C,
-      ftPp_SpecialLw_80122B0C, ftPp_SpecialLw_80122B14,
-      ftPp_SpecialLw_80122C18, ftCamera_UpdateCameraBox },
     { 312, 0x00340414, 0x15800000, ftPp_SpecialLw_80122A8C,
       ftPp_SpecialLw_80122B10, ftPp_SpecialLw_80122B34,
       ftPp_SpecialLw_80122D04, ftCamera_UpdateCameraBox },
@@ -225,26 +220,26 @@ void ftPp_Init_8011F190(HSD_GObj* gobj)
     ftPp_Init_8011F16C(gobj, fp->fv.nn.x222C);
 }
 
-extern f32 const lbl_804D9838;
-extern f32 const lbl_804D983C;
+extern f32 const ftPp_Init_804D9838;
+extern f32 const ftPp_Init_804D983C;
 
-void ftPp_SpecialN_StartMotion(HSD_GObj* gobj)
+void ftPp_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->fv.nn.x222C = 0;
 
-    Fighter_ChangeMotionState(gobj, 341, 0, NULL, lbl_804D9838, lbl_804D983C,
-                              lbl_804D9838);
+    Fighter_ChangeMotionState(gobj, 341, 0, NULL, ftPp_Init_804D9838,
+                              ftPp_Init_804D983C, ftPp_Init_804D9838);
 
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftPp_SpecialN_8011F500;
 }
 
-extern f32 const lbl_804D9840;
+extern f32 const ftPp_Init_804D9840;
 
-void ftPp_SpecialAirN_StartMotion(HSD_GObj* gobj)
+void ftPp_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -261,47 +256,47 @@ void ftPp_SpecialAirN_StartMotion(HSD_GObj* gobj)
     if ((s32) fp->fv.nn.x224C == false) {
         fp->x80_self_vel.y = icattr->x4;
         fp->fv.nn.x224C = true;
-        fp->fv.nn.x2250 = lbl_804D9838;
+        fp->fv.nn.x2250 = ftPp_Init_804D9838;
     } else {
-        fp->fv.nn.x2250 = lbl_804D9840;
+        fp->fv.nn.x2250 = ftPp_Init_804D9840;
     }
 
-    Fighter_ChangeMotionState(gobj, 342, 0, NULL, lbl_804D9838, lbl_804D983C,
-                              lbl_804D9838);
+    Fighter_ChangeMotionState(gobj, 342, 0, NULL, ftPp_Init_804D9838,
+                              ftPp_Init_804D983C, ftPp_Init_804D9838);
 
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftPp_SpecialN_8011F500;
 }
 
-void ftPp_SpecialN_8011F318(HSD_GObj* gobj)
+void ftPp_SpecialN_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
 
-void ftPp_SpecialN_8011F354(HSD_GObj* gobj)
+void ftPp_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
     }
 }
 
-void ftPp_SpecialN_8011F390(HSD_GObj* arg0) {}
+void ftPp_SpecialN_IASA(HSD_GObj* arg0) {}
 
-void ftPp_SpecialN_8011F394(HSD_GObj* arg0) {}
+void ftPp_SpecialAirN_IASA(HSD_GObj* arg0) {}
 
-void ftPp_SpecialN_8011F398(HSD_GObj* gobj)
+void ftPp_SpecialN_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftPp_SpecialN_8011F3B8(HSD_GObj* gobj)
+void ftPp_SpecialAirN_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
-void ftPp_SpecialN_8011F3D8(HSD_GObj* gobj)
+void ftPp_SpecialN_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
         Fighter* fp1;
@@ -322,7 +317,7 @@ void ftPp_SpecialN_8011F3D8(HSD_GObj* gobj)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPp_SpecialN_8011F454(HSD_GObj*)
+asm void ftPp_SpecialAirN_Coll(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8011F454 0011C034  7C 08 02 A6 */	mflr r0
@@ -357,7 +352,7 @@ lbl_8011F4C0:
 /* 8011F4C4 0011C0A4  90 1F 22 4C */	stw r0, 0x224c(r31)
 /* 8011F4C8 0011C0A8  38 7C 00 00 */	addi r3, r28, 0
 /* 8011F4CC 0011C0AC  38 80 00 00 */	li r4, 0
-/* 8011F4D0 0011C0B0  C0 02 9E 58 */	lfs f0, lbl_804D9838
+/* 8011F4D0 0011C0B0  C0 02 9E 58 */	lfs f0, ftPp_Init_804D9838
 /* 8011F4D4 0011C0B4  D0 1F 22 50 */	stfs f0, 0x2250(r31)
 /* 8011F4D8 0011C0B8  C0 3D 00 08 */	lfs f1, 8(r29)
 /* 8011F4DC 0011C0BC  4B FB 67 D5 */	bl ft_800D5CB0
@@ -487,7 +482,7 @@ lbl_8011F670:
 #pragma pop
 #endif
 
-extern f32 const lbl_804D9848;
+extern f32 const ftPp_Init_804D9848;
 
 #ifdef MWERKS_GEKKO
 #pragma push
@@ -502,7 +497,7 @@ asm void ftPp_SpecialN_8011F68C(HSD_GObj*)
 /* 8011F6A0 0011C280  7C 7F 1B 78 */	mr r31, r3
 /* 8011F6A4 0011C284  93 C1 00 20 */	stw r30, 0x20(r1)
 /* 8011F6A8 0011C288  83 C3 00 2C */	lwz r30, 0x2c(r3)
-/* 8011F6AC 0011C28C  C0 22 9E 68 */	lfs f1, lbl_804D9848
+/* 8011F6AC 0011C28C  C0 22 9E 68 */	lfs f1, ftPp_Init_804D9848
 /* 8011F6B0 0011C290  38 7E 00 00 */	addi r3, r30, 0
 /* 8011F6B4 0011C294  4B F5 62 79 */	bl ftParts_8007592C
 /* 8011F6B8 0011C298  7F E3 FB 78 */	mr r3, r31

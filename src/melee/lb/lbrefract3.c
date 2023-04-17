@@ -4,19 +4,19 @@
 #include <MetroTRK/intrinsics.h>
 
 #pragma region trigf
-extern f32 lbl_80400770[], lbl_80400774[];
+extern f32 MSL_TrigF_80400770[], MSL_TrigF_80400774[];
 #pragma endregion
 
-/* static */ extern const f32 lbl_804D7DB0; // = 0x80000000;
-/* static */ extern const f32 lbl_804D7DB4; // = -1.5707963705062866;
-/* static */ extern const f32 lbl_804D7DB8; // = 3.1415927410125732;
-/* static */ extern const f32 lbl_804D7DBC; // = 0.0;
-/* static */ extern const f32 lbl_804D7DC0; // = 1.5707963705062866;
-/* static */ extern const f32 lbl_804D7DC4; // = 1.0;
-/* static */ extern const f32 lbl_804D7DC8; // = 0.5;
-/* static */ extern const f32 lbl_804D7DCC; // = 3.0;
-/* static */ extern const f32 lbl_804D7DD0; // = 2.4142136573791504;
-/* static */ extern const f32 lbl_804D7DD4; // = 0.4142135679721832;
+/* static */ extern const f32 lbRefract3_804D7DB0; // = 0x80000000;
+/* static */ extern const f32 lbRefract3_804D7DB4; // = -1.5707963705062866;
+/* static */ extern const f32 lbRefract3_804D7DB8; // = 3.1415927410125732;
+/* static */ extern const f32 lbRefract3_804D7DBC; // = 0.0;
+/* static */ extern const f32 lbRefract3_804D7DC0; // = 1.5707963705062866;
+/* static */ extern const f32 lbRefract3_804D7DC4; // = 1.0;
+/* static */ extern const f32 lbRefract3_804D7DC8; // = 0.5;
+/* static */ extern const f32 lbRefract3_804D7DCC; // = 3.0;
+/* static */ extern const f32 lbRefract3_804D7DD0; // = 2.4142136573791504;
+/* static */ extern const f32 lbRefract3_804D7DD4; // = 0.4142135679721832;
 
 #define SIGN_BIT (1 << 31)
 #define BITWISE(f) (*(u32*) &f)
@@ -24,16 +24,16 @@ extern f32 lbl_80400770[], lbl_80400774[];
 #define GET_SIGN_BIT(f) (SIGNED_BITWISE(f) & SIGN_BIT)
 #define BITWISE_PI_2 0x3FC90FDB
 
-#define NEGATIVE_ZERO lbl_804D7DB0
-#define NEGATIVE_PI_2 lbl_804D7DB4
-#define PI lbl_804D7DB8
-#define ZERO lbl_804D7DBC
-#define PI_2 lbl_804D7DC0
-#define ONE lbl_804D7DC4
-#define HALF lbl_804D7DC8
-#define THREE lbl_804D7DCC
-#define NAN lbl_80400770[0]
-#define INF lbl_80400774[0]
+#define NEGATIVE_ZERO lbRefract3_804D7DB0
+#define NEGATIVE_PI_2 lbRefract3_804D7DB4
+#define PI lbRefract3_804D7DB8
+#define ZERO lbRefract3_804D7DBC
+#define PI_2 lbRefract3_804D7DC0
+#define ONE lbRefract3_804D7DC4
+#define HALF lbRefract3_804D7DC8
+#define THREE lbRefract3_804D7DCC
+#define NAN MSL_TrigF_80400770[0]
+#define INF MSL_TrigF_80400774[0]
 
 f32 atan2f(f32 y, f32 x)
 {
@@ -96,12 +96,12 @@ asm f32 acosf(f32)
 lbl_80022D80:
 /* 80022D80 0001F960  FC 05 00 00 */	fcmpu cr0, f5, f0
 /* 80022D84 0001F964  41 82 00 10 */	beq lbl_80022D94
-/* 80022D88 0001F968  3C 60 80 40 */	lis r3, lbl_80400770@ha
-/* 80022D8C 0001F96C  C0 03 07 70 */	lfs f0, lbl_80400770@l(r3)
+/* 80022D88 0001F968  3C 60 80 40 */	lis r3, MSL_TrigF_80400770@ha
+/* 80022D8C 0001F96C  C0 03 07 70 */	lfs f0, MSL_TrigF_80400770@l(r3)
 /* 80022D90 0001F970  48 00 00 0C */	b lbl_80022D9C
 lbl_80022D94:
-/* 80022D94 0001F974  3C 60 80 40 */	lis r3, lbl_80400774@ha
-/* 80022D98 0001F978  C0 03 07 74 */	lfs f0, lbl_80400774@l(r3)
+/* 80022D94 0001F974  3C 60 80 40 */	lis r3, MSL_TrigF_80400774@ha
+/* 80022D98 0001F978  C0 03 07 74 */	lfs f0, MSL_TrigF_80400774@l(r3)
 lbl_80022D9C:
 /* 80022D9C 0001F97C  EC 21 00 32 */	fmuls f1, f1, f0
 /* 80022DA0 0001F980  48 00 00 C9 */	bl atanf
@@ -150,8 +150,8 @@ static inline f32 lbRefract_80022DF8(f32 x)
     return INF;
 }
 
-#define SILVER_RATIO_1 lbl_804D7DD0
-#define SILVER_RATIO_1_CONJUGATE lbl_804D7DD4
+#define SILVER_RATIO_1 lbRefract3_804D7DD0
+#define SILVER_RATIO_1_CONJUGATE lbRefract3_804D7DD4
 
 #define BITWISE_INF 0x7F800000 /* = +Infinity */
 #define BITWISE_0_5 0x3F000000 /* = 0.5f */

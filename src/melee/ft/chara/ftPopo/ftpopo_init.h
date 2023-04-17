@@ -30,16 +30,16 @@ void ftPp_Init_OnKnockbackExit(HSD_GObj* gobj);
 /* static */ void ftPp_SpecialN_8011F68C(HSD_GObj* gobj);
 void ftPp_Init_8011F16C(HSD_GObj* gobj, uint arg1);
 void ftPp_SpecialN_8011F500(HSD_GObj*);
-void ftPp_SpecialN_StartMotion(HSD_GObj* gobj);
-void ftPp_SpecialAirN_StartMotion(HSD_GObj* gobj);
-void ftPp_SpecialN_8011F318(HSD_GObj* gobj);
-void ftPp_SpecialN_8011F354(HSD_GObj* gobj);
-void ftPp_SpecialN_8011F390(HSD_GObj*);
-void ftPp_SpecialN_8011F394(HSD_GObj*);
-void ftPp_SpecialN_8011F398(HSD_GObj*);
-void ftPp_SpecialN_8011F3B8(HSD_GObj*);
-void ftPp_SpecialN_8011F3D8(HSD_GObj*);
-void ftPp_SpecialN_8011F454(HSD_GObj*);
+void ftPp_SpecialN_Enter(HSD_GObj* gobj);
+void ftPp_SpecialAirN_Enter(HSD_GObj* gobj);
+void ftPp_SpecialN_Anim(HSD_GObj* gobj);
+void ftPp_SpecialAirN_Anim(HSD_GObj* gobj);
+void ftPp_SpecialN_IASA(HSD_GObj*);
+void ftPp_SpecialAirN_IASA(HSD_GObj*);
+void ftPp_SpecialN_Phys(HSD_GObj*);
+void ftPp_SpecialAirN_Phys(HSD_GObj*);
+void ftPp_SpecialN_Coll(HSD_GObj*);
+void ftPp_SpecialAirN_Coll(HSD_GObj*);
 bool ftPp_SpecialN_8011F6FC(HSD_GObj*);
 
 #endif

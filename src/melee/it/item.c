@@ -56,65 +56,65 @@ HSD_ObjAllocData itemAllocData;
 /// @private
 HSD_ObjAllocData unkAllocData1;
 
-HSD_ObjAllocData lbl_804A0C38;
-HSD_ObjAllocUnk lbl_804A0C64;
-HSD_ObjAllocUnk2 lbl_804A0CCC;
-S32Vec3 lbl_804A0E24;
+HSD_ObjAllocData Item_804A0C38;
+HSD_ObjAllocUnk Item_804A0C64;
+HSD_ObjAllocUnk2 Item_804A0CCC;
+S32Vec3 Item_804A0E24;
 
 /// Init item struct?
 void Item_80266FCC(void)
 {
     HSD_ObjAllocInit(&itemAllocData, sizeof(Item), 4);
     HSD_ObjAllocInit(&unkAllocData1, sizeof(DynamicBoneTable), 4);
-    HSD_ObjAllocInit(&lbl_804A0C38, sizeof(ItemLink), 4);
+    HSD_ObjAllocInit(&Item_804A0C38, sizeof(ItemLink), 4);
 
-    lbl_804A0C64.x0 = 0;
-    lbl_804A0C64.x8 = 0;
-    lbl_804A0C64.x10 = 0;
-    lbl_804A0C64.x18 = 0;
-    lbl_804A0C64.x1C = 0;
-    lbl_804A0C64.x24 = 0;
-    lbl_804A0C64.x2C = 0;
-    lbl_804A0C64.x34 = 0;
-    lbl_804A0C64.x3C = 0;
-    lbl_804A0C64.x40 = 0;
-    lbl_804A0C64.x48 = 0;
-    lbl_804A0C64.x50 = 0;
-    lbl_804A0C64.x58 = 0;
-    lbl_804A0C64.x60 = 0;
+    Item_804A0C64.x0 = 0;
+    Item_804A0C64.x8 = 0;
+    Item_804A0C64.x10 = 0;
+    Item_804A0C64.x18 = 0;
+    Item_804A0C64.x1C = 0;
+    Item_804A0C64.x24 = 0;
+    Item_804A0C64.x2C = 0;
+    Item_804A0C64.x34 = 0;
+    Item_804A0C64.x3C = 0;
+    Item_804A0C64.x40 = 0;
+    Item_804A0C64.x48 = 0;
+    Item_804A0C64.x50 = 0;
+    Item_804A0C64.x58 = 0;
+    Item_804A0C64.x60 = 0;
 
-    lbl_804A0C64.x4 = lbl_804D6D28->x0;
-    lbl_804A0C64.xC = lbl_804D6D28->x4;
-    lbl_804A0C64.x14 = lbl_804D6D28->x8;
-    lbl_804A0C64.x20 = lbl_804D6D28->xC;
-    lbl_804A0C64.x28 = lbl_804D6D28->x10;
-    lbl_804A0C64.x30 = lbl_804D6D28->x14;
-    lbl_804A0C64.x38 = lbl_804D6D28->x18;
-    lbl_804A0C64.x44 = lbl_804D6D28->x1C;
-    lbl_804A0C64.x4C = lbl_804D6D28->x24;
-    lbl_804A0C64.x54 = lbl_804D6D28->x20;
-    lbl_804A0C64.x5C = lbl_804D6D28->x28;
-    lbl_804A0C64.x64 = lbl_804D6D28->x148;
+    Item_804A0C64.x4 = it_804D6D28->x0;
+    Item_804A0C64.xC = it_804D6D28->x4;
+    Item_804A0C64.x14 = it_804D6D28->x8;
+    Item_804A0C64.x20 = it_804D6D28->xC;
+    Item_804A0C64.x28 = it_804D6D28->x10;
+    Item_804A0C64.x30 = it_804D6D28->x14;
+    Item_804A0C64.x38 = it_804D6D28->x18;
+    Item_804A0C64.x44 = it_804D6D28->x1C;
+    Item_804A0C64.x4C = it_804D6D28->x24;
+    Item_804A0C64.x54 = it_804D6D28->x20;
+    Item_804A0C64.x5C = it_804D6D28->x28;
+    Item_804A0C64.x64 = it_804D6D28->x148;
 
-    lbl_804A0CCC.x154.bits.b0 = true;
-    lbl_804A0CCC.x150 = 1;
+    Item_804A0CCC.x154.bits.b0 = true;
+    Item_804A0CCC.x150 = 1;
 
-    lbl_804A0E24.x = -1;
-    lbl_804A0E24.y = -1;
-    lbl_804A0E24.z = 0;
+    Item_804A0E24.x = -1;
+    Item_804A0E24.y = -1;
+    Item_804A0E24.z = 0;
 
-    lbl_804D6D00 = -1;
-    lbl_804D6D14 = 1;
-    lbl_804D6D10 = 0;
-    lbl_804D6D0C = 0;
-    lbl_804D6D08 = 0;
+    it_804D6D00 = -1;
+    it_804D6D14 = 1;
+    it_804D6D10 = 0;
+    it_804D6D0C = 0;
+    it_804D6D08 = 0;
 
-    lbl_804A0E60.x8 = 0;
-    lbl_804A0E50.x8 = 0;
-    lbl_804A0E30.xC = 0;
-    lbl_804A0E60.x0 = 0;
-    lbl_804A0E50.x0 = 0;
-    lbl_804A0E30.x4 = 0;
+    it_804A0E60.x8 = 0;
+    it_804A0E50.x8 = 0;
+    it_804A0E30.xC = 0;
+    it_804A0E60.x0 = 0;
+    it_804A0E50.x0 = 0;
+    it_804A0E30.x4 = 0;
 }
 
 /// @private
@@ -129,7 +129,7 @@ void ItUnkHoldKind(HSD_GObj* gobj)
     case 7: {
         int temp_r3 = gm_8017E068();
         if (temp_r3 >= 0) {
-            it->xC3C = lbl_804D6D28->x80_float[temp_r3];
+            it->xC3C = it_804D6D28->x80_float[temp_r3];
         }
     }
     }
@@ -199,7 +199,7 @@ void Item_80267130(HSD_GObj* gobj, SpawnItem* spawnItem)
     it_80275E98(gobj, spawnItem);
     it_80274DAC(gobj);
     HSD_JObjSetTranslate(model, &item_data->pos);
-    it_80274658(gobj, lbl_804D6D28->x6C_float);
+    it_80274658(gobj, it_804D6D28->x6C_float);
     it_802725D4(gobj);
     it_80271508(gobj, 0);
     it_80272280(gobj);
@@ -311,48 +311,48 @@ void Item_802675A8(HSD_GObj* gobj)
 
     switch (item_data->hold_kind) {
     case 0:
-        lbl_804A0C64.x0--;
+        Item_804A0C64.x0--;
         break;
     case 1:
-        lbl_804A0C64.x8--;
+        Item_804A0C64.x8--;
         break;
     case 2:
-        lbl_804A0C64.x10--;
+        Item_804A0C64.x10--;
         break;
     case 3:
-        lbl_804A0C64.x58--;
+        Item_804A0C64.x58--;
         break;
     case 4:
-        lbl_804A0C64.x3C--;
+        Item_804A0C64.x3C--;
         break;
     case 5:
-        lbl_804A0C64.x40--;
+        Item_804A0C64.x40--;
         break;
     case 6:
-        lbl_804A0C64.x2C--;
+        Item_804A0C64.x2C--;
         break;
     case 7:
-        lbl_804A0C64.x34--;
+        Item_804A0C64.x34--;
         break;
     case 8:
-        lbl_804A0C64.x18--;
+        Item_804A0C64.x18--;
         break;
     case 9:
-        lbl_804A0C64.x1C--;
+        Item_804A0C64.x1C--;
         break;
     case 10:
-        lbl_804A0C64.x24--;
+        Item_804A0C64.x24--;
         break;
     case 11:
-        lbl_804A0C64.x48--;
+        Item_804A0C64.x48--;
         break;
     case 12:
-        lbl_804A0C64.x50--;
+        Item_804A0C64.x50--;
         break;
     }
 
     if (gm_8018841C() && item_data->x18 == 1) {
-        lbl_804A0C64.x60--;
+        Item_804A0C64.x60--;
     }
 }
 
@@ -362,50 +362,50 @@ void Item_802676F4(HSD_GObj* gobj)
     Item* item_data = gobj->user_data;
     switch (item_data->hold_kind) {
     case 0:
-        lbl_804A0C64.x0++;
+        Item_804A0C64.x0++;
 
         if (item_data->kind == 34) {
-            lbl_804A0C64.x1C++;
+            Item_804A0C64.x1C++;
         }
 
         break;
     case 1:
-        lbl_804A0C64.x8++;
+        Item_804A0C64.x8++;
         break;
     case 2:
-        it_80274EE8(lbl_804A0C64.x10++);
+        it_80274EE8(Item_804A0C64.x10++);
         break;
     case 3:
-        lbl_804A0C64.x58++;
+        Item_804A0C64.x58++;
         break;
     case 4:
-        lbl_804A0C64.x3C++;
+        Item_804A0C64.x3C++;
         break;
     case 5:
-        lbl_804A0C64.x40++;
+        Item_804A0C64.x40++;
         break;
     case 6:
-        lbl_804A0C64.x2C++;
+        Item_804A0C64.x2C++;
         break;
     case 7:
-        lbl_804A0C64.x34++;
+        Item_804A0C64.x34++;
         break;
     case 8:
-        lbl_804A0C64.x18++;
+        Item_804A0C64.x18++;
         break;
     case 10:
-        lbl_804A0C64.x24++;
+        Item_804A0C64.x24++;
         break;
     case 11:
-        lbl_804A0C64.x48++;
+        Item_804A0C64.x48++;
         break;
     case 12:
-        lbl_804A0C64.x50++;
+        Item_804A0C64.x50++;
         break;
     }
 
     if (gm_8018841C() && item_data->x18 == 1) {
-        lbl_804A0C64.x60++;
+        Item_804A0C64.x60++;
     }
 }
 
@@ -418,71 +418,71 @@ bool Item_8026784C(enum_t dropItem, int _)
 
     switch (dropItem) {
     case 0:
-        if (lbl_804A0C64.x0 >= lbl_804A0C64.x4) {
+        if (Item_804A0C64.x0 >= Item_804A0C64.x4) {
             result = true;
         }
 
         break;
 
     case 1:
-        if (lbl_804A0C64.x8 >= lbl_804A0C64.xC) {
+        if (Item_804A0C64.x8 >= Item_804A0C64.xC) {
             result = true;
         }
 
         break;
 
     case 2:
-        if (lbl_804A0C64.x10 >= lbl_804A0C64.x14) {
+        if (Item_804A0C64.x10 >= Item_804A0C64.x14) {
             result = true;
         }
 
         break;
 
     case 3:
-        if (lbl_804A0C64.x58 >= lbl_804A0C64.x5C) {
+        if (Item_804A0C64.x58 >= Item_804A0C64.x5C) {
             result = true;
         }
 
         break;
 
     case 5:
-        if (lbl_804A0C64.x40 >= lbl_804A0C64.x44) {
+        if (Item_804A0C64.x40 >= Item_804A0C64.x44) {
             result = true;
         }
 
         break;
 
     case 7:
-        if (lbl_804A0C64.x34 >= lbl_804A0C64.x38) {
+        if (Item_804A0C64.x34 >= Item_804A0C64.x38) {
             result = true;
         }
 
         break;
 
     case 9:
-        if (lbl_804A0C64.x1C > lbl_804A0C64.x20) {
-            lbl_804A0C64.x1C--;
+        if (Item_804A0C64.x1C > Item_804A0C64.x20) {
+            Item_804A0C64.x1C--;
             result = true;
         }
 
         break;
 
     case 10:
-        if (lbl_804A0C64.x24 >= lbl_804A0C64.x28) {
+        if (Item_804A0C64.x24 >= Item_804A0C64.x28) {
             result = true;
         }
 
         break;
 
     case 11:
-        if (lbl_804A0C64.x48 >= lbl_804A0C64.x4C) {
+        if (Item_804A0C64.x48 >= Item_804A0C64.x4C) {
             result = true;
         }
 
         break;
 
     case 12:
-        if (lbl_804A0C64.x50 >= lbl_804A0C64.x54) {
+        if (Item_804A0C64.x50 >= Item_804A0C64.x54) {
             result = true;
         }
     }
@@ -490,15 +490,15 @@ bool Item_8026784C(enum_t dropItem, int _)
     return result;
 }
 
-extern CommonItemArticles* lbl_804D6D24;
-extern UnkItemArticles* lbl_804D6D38;
-extern UnkItemArticles2* lbl_804D6D30;
-extern UnkItemArticles3 lbl_804A0F60[];
+extern CommonItemArticles* it_804D6D24;
+extern UnkItemArticles* it_804D6D38;
+extern UnkItemArticles2* it_804D6D30;
+extern UnkItemArticles3 it_804A0F60[];
 
-extern struct ItemLogicTable lbl_803F14C4[];
-extern struct ItemLogicTable lbl_803F3100[];
-extern struct ItemLogicTable lbl_803F23CC[];
-extern struct ItemLogicTable lbl_803F4D20[];
+extern struct ItemLogicTable it_803F14C4[];
+extern struct ItemLogicTable it_803F3100[];
+extern struct ItemLogicTable it_803F23CC[];
+extern struct ItemLogicTable it_803F4D20[];
 
 void Item_80267978(HSD_GObj* gobj)
 {
@@ -506,23 +506,23 @@ void Item_80267978(HSD_GObj* gobj)
     if (item_data->kind < It_Kind_Kuriboh) {
         // Common items
         item_data->xC4_article_data =
-            lbl_804D6D24->article_ptr[item_data->kind];
-        item_data->xB8_itemLogicTable = &lbl_803F14C4[item_data->kind];
+            it_804D6D24->article_ptr[item_data->kind];
+        item_data->xB8_itemLogicTable = &it_803F14C4[item_data->kind];
     } else if (item_data->kind < Pokemon_Tosakinto) {
         // Character items
         int idx = item_data->kind - It_Kind_Kuriboh;
-        item_data->xC4_article_data = lbl_804D6D38->unkptr[idx];
-        item_data->xB8_itemLogicTable = &lbl_803F3100[idx];
+        item_data->xC4_article_data = it_804D6D38->unkptr[idx];
+        item_data->xB8_itemLogicTable = &it_803F3100[idx];
     } else if (item_data->kind < It_Kind_Old_Kuri) {
         // Pokemon
         int idx = item_data->kind - Pokemon_Tosakinto;
-        item_data->xC4_article_data = lbl_804D6D30->unkptr[idx];
-        item_data->xB8_itemLogicTable = &lbl_803F23CC[idx];
+        item_data->xC4_article_data = it_804D6D30->unkptr[idx];
+        item_data->xB8_itemLogicTable = &it_803F23CC[idx];
     } else {
         // Stage items
         int idx = item_data->kind - It_Kind_Old_Kuri;
-        item_data->xC4_article_data = lbl_804A0F60->unkptr[idx];
-        item_data->xB8_itemLogicTable = &lbl_803F4D20[idx];
+        item_data->xC4_article_data = it_804A0F60->unkptr[idx];
+        item_data->xB8_itemLogicTable = &it_803F4D20[idx];
         if (item_data->xC4_article_data == NULL) {
             OSReport("not found zako model data! check ground dat file!\n");
             __assert("item.c", 686, "0");
@@ -541,7 +541,7 @@ void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     item_data->kind = spawnItem->kind;
     item_data->hold_kind = spawnItem->hold_kind;
     item_data->x18 = spawnItem->x10;
-    item_data->x1C = lbl_804D6D10++;
+    item_data->x1C = it_804D6D10++;
     item_data->entity = gobj;
     Item_80267978(gobj);
     item_data->msid = -1;
@@ -580,7 +580,7 @@ void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     item_data->xCB8_outDamageDirection = 0.0f;
     item_data->xC68 = 0.0f;
     item_data->xCD0 = 0.0f;
-    it_80275158(gobj, lbl_804D6D28->x30);
+    it_80275158(gobj, it_804D6D28->x30);
     item_data->xDD0_flag.bits.b3 = false;
     item_data->spin_spd = item_data->xCC_item_attr->xC_spin_speed;
     item_data->xDC8_word.flags.x19 = item_data->xCC_item_attr->x1_3;
@@ -704,7 +704,7 @@ void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
 }
 
 extern void PSMTXIdentity(Mtx); /* extern */
-extern u8 lbl_804D7849;
+extern u8 HSD_GObj_804D7849;
 
 /// Setup Item JObj
 void Item_802680CC(HSD_GObj* gobj)
@@ -713,17 +713,17 @@ void Item_802680CC(HSD_GObj* gobj)
 
     if (item_data->xC8_joint != NULL) {
         HSD_JObj* jobj = HSD_JObjLoadJoint(item_data->xC8_joint);
-        func_80390A70(gobj, lbl_804D7849, jobj);
+        HSD_GObjObjet_80390A70(gobj, HSD_GObj_804D7849, jobj);
     } else {
         HSD_JObj* jobj = HSD_JObjAlloc();
         PSMTXIdentity(jobj->mtx);
         jobj->scl = NULL;
-        func_80390A70(gobj, lbl_804D7849, jobj);
+        HSD_GObjObjet_80390A70(gobj, HSD_GObj_804D7849, jobj);
     }
 }
 
 extern HSD_DObj* HSD_JObjGetDObj(HSD_JObj*);
-extern void* lbl_803F1F90[];
+extern void* it_803F1F90[];
 
 /// @private
 void Item_8026814C(HSD_GObj* gobj)
@@ -745,7 +745,7 @@ void Item_8026814C(HSD_GObj* gobj)
         if (var_r29 != NULL) {
             temp_r0 = var_r29->mobj;
             if (temp_r0 != NULL) {
-                hsdChangeClass(temp_r0, &lbl_803F1F90);
+                hsdChangeClass(temp_r0, &it_803F1F90);
             }
             var_r29 = var_r0 = (var_r29 != NULL) ? var_r29->next : NULL;
             goto loop_2;
@@ -882,10 +882,10 @@ void Item_80268560(HSD_GObj* gobj)
 
 extern CameraBox* Camera_80029044(s32);
 extern void ftLib_8008702C(s32);
-extern struct sdata_ItemGXLink lbl_803F1418[];
-extern struct sdata_ItemGXLink lbl_803F2310[];
-extern struct sdata_ItemGXLink lbl_803F2F28[];
-extern struct sdata_ItemGXLink lbl_803F4CA8[];
+extern struct sdata_ItemGXLink it_803F1418[];
+extern struct sdata_ItemGXLink it_803F2310[];
+extern struct sdata_ItemGXLink it_803F2F28[];
+extern struct sdata_ItemGXLink it_803F4CA8[];
 
 void foobar(HSD_GObj* gobj)
 {
@@ -896,7 +896,7 @@ void foobar(HSD_GObj* gobj)
         if (it->xD0C == 2) {
             it->xDD0_flag.bits.b7 = 1;
         }
-        it->xD40 = lbl_804D6D28->x2C;
+        it->xD40 = it_804D6D28->x2C;
         it->xDD0_flag.bits.b6 = 1;
         it_802756D0(gobj);
         it_80279B88(it, 3, 0);
@@ -933,10 +933,10 @@ void foobar3(HSD_GObj* gobj)
         }
         cam_box = it->x520_cameraBox;
         if (cam_box != NULL) {
-            cam_box->x40.x = lbl_804D6D28->x14C;
-            cam_box->x40.y = lbl_804D6D28->x150;
-            cam_box->x48.x = lbl_804D6D28->x154;
-            cam_box->x48.y = lbl_804D6D28->x158;
+            cam_box->x40.x = it_804D6D28->x14C;
+            cam_box->x40.y = it_804D6D28->x150;
+            cam_box->x48.x = it_804D6D28->x154;
+            cam_box->x48.y = it_804D6D28->x158;
         }
     }
 }
@@ -956,24 +956,24 @@ HSD_GObj* Item_8026862C(SpawnItem* spawnItem)
     }
     if (spawnItem->kind < It_Kind_Kuriboh) {
         // Common items
-        GObj_SetupGXLink(gobj, lbl_803F1418[spawnItem->kind].x0_renderFunc, 6,
+        GObj_SetupGXLink(gobj, it_803F1418[spawnItem->kind].x0_renderFunc, 6,
                          0);
     } else if (spawnItem->kind < Pokemon_Tosakinto) {
         // Character items
         int idx = spawnItem->kind - It_Kind_Kuriboh;
-        GObj_SetupGXLink(gobj, lbl_803F2F28[idx].x0_renderFunc, 6, 0);
+        GObj_SetupGXLink(gobj, it_803F2F28[idx].x0_renderFunc, 6, 0);
     } else if (spawnItem->kind < It_Kind_Old_Kuri) {
         // Pokemon
         int idx = spawnItem->kind - Pokemon_Tosakinto;
-        GObj_SetupGXLink(gobj, lbl_803F2310[idx].x0_renderFunc, 6, 0);
+        GObj_SetupGXLink(gobj, it_803F2310[idx].x0_renderFunc, 6, 0);
     } else {
         // Stage items
         int idx = spawnItem->kind - It_Kind_Old_Kuri;
-        GObj_SetupGXLink(gobj, lbl_803F4CA8[idx].x0_renderFunc, 6, 0);
+        GObj_SetupGXLink(gobj, it_803F4CA8[idx].x0_renderFunc, 6, 0);
     }
     user_data = HSD_ObjAlloc(&itemAllocData);
     if (user_data == NULL) {
-        func_80390228(gobj);
+        HSD_GObjPLink_80390228(gobj);
         return NULL;
     }
     GObj_InitUserData(gobj, 6, Item_OnUserDataRemove, user_data);
@@ -984,16 +984,16 @@ HSD_GObj* Item_8026862C(SpawnItem* spawnItem)
         Item_8026849C(gobj);
         it_8027163C(gobj);
         Item_80268560(gobj);
-        func_8038FD54(gobj, Item_802693E4, 0);
-        func_8038FD54(gobj, Item_80269528, 1);
-        func_8038FD54(gobj, Item_802697D4, 4);
-        func_8038FD54(gobj, Item_80269978, 5);
-        func_8038FD54(gobj, Item_80269A9C, 9);
-        func_8038FD54(gobj, Item_80269B60, 11);
-        func_8038FD54(gobj, Item_80269BE4, 12);
-        func_8038FD54(gobj, Item_80269C5C, 13);
-        func_8038FD54(gobj, Item_8026A294, 14);
-        func_8038FD54(gobj, Item_8026A788, 16);
+        HSD_GObjProc_8038FD54(gobj, Item_802693E4, 0);
+        HSD_GObjProc_8038FD54(gobj, Item_80269528, 1);
+        HSD_GObjProc_8038FD54(gobj, Item_802697D4, 4);
+        HSD_GObjProc_8038FD54(gobj, Item_80269978, 5);
+        HSD_GObjProc_8038FD54(gobj, Item_80269A9C, 9);
+        HSD_GObjProc_8038FD54(gobj, Item_80269B60, 11);
+        HSD_GObjProc_8038FD54(gobj, Item_80269BE4, 12);
+        HSD_GObjProc_8038FD54(gobj, Item_80269C5C, 13);
+        HSD_GObjProc_8038FD54(gobj, Item_8026A294, 14);
+        HSD_GObjProc_8038FD54(gobj, Item_8026A788, 16);
         Item_80267130(gobj, spawnItem);
         Item_8026A810(gobj);
         foobar(gobj);
@@ -1001,7 +1001,7 @@ HSD_GObj* Item_8026862C(SpawnItem* spawnItem)
         foobar2(gobj);
         foobar3(gobj);
     } else {
-        func_80390228(gobj);
+        HSD_GObjPLink_80390228(gobj);
         return NULL;
     }
     return gobj;
@@ -1150,7 +1150,7 @@ void Item_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc)
     item_data->x524 = 0.0f;
 }
 
-extern struct r13_ColAnimStruct* lbl_804D6D04;
+extern struct r13_ColAnimStruct* it_804D6D04;
 
 void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
 {
@@ -1194,7 +1194,7 @@ void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
     }
 
     if (!(flags & ITEM_COLANIM_PRESERVE) &&
-        lbl_804D6D04[item_data->x548_colorOverlay.x28_colanim].x5_unk != 0)
+        it_804D6D04[item_data->x548_colorOverlay.x28_colanim].x5_unk != 0)
     {
         it_80279BBC(item_data);
     }
@@ -1351,7 +1351,7 @@ void Item_80269528(HSD_GObj* gobj)
             Item_8026A8EC(gobj);
             return;
         }
-        if (item_data->xD44_lifeTimer <= lbl_804D6D28->x34) {
+        if (item_data->xD44_lifeTimer <= it_804D6D28->x34) {
             it_802728C8(gobj);
         }
     }
@@ -1594,8 +1594,7 @@ bool Item_80269DC8(HSD_GObj* gobj)
 
     if (item_data->xDCE_flag.bits.b5 && item_data->ground_or_air == 1 &&
         (item_data->xDCE_flag.bits.b4 ||
-         item_data->xC54 <
-             (f32) M_PI / 180 * (90 + lbl_804D6D28->unk_degrees)))
+         item_data->xC54 < (f32) M_PI / 180 * (90 + it_804D6D28->unk_degrees)))
     {
         if (item_data->xDCE_flag.bits.b4 == 0) {
             item_data->xC54 -= M_PI / 2;
@@ -1670,8 +1669,8 @@ bool Item_80269F14(HSD_GObj* gobj)
                                temp_item->xC6C +
                            0.99f;
                 var_r27 = temp_f30;
-                if (var_r27 > lbl_804D6D28->xD8) {
-                    var_r27 = lbl_804D6D28->xD8;
+                if (var_r27 > it_804D6D28->xD8) {
+                    var_r27 = it_804D6D28->xD8;
                 }
                 it_80272460(&temp_item->x5D4_hitboxes[i], var_r27, gobj);
             }
@@ -2052,7 +2051,7 @@ void Item_8026A8EC(HSD_GObj* gobj)
 
     Item_8026B0B4(gobj);
     efAsync_80067688(&ip->xBC0);
-    func_80390228(gobj);
+    HSD_GObjPLink_80390228(gobj);
 }
 
 void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* pickup_gfx, u8 pickup_sfx)
@@ -2138,10 +2137,10 @@ void Item_OnUserDataRemove(any_t user_data)
 
 uint Item_8026AE60(void)
 {
-    uint result = lbl_804D6D14++;
+    uint result = it_804D6D14++;
 
-    if (lbl_804D6D14 == 0) {
-        lbl_804D6D14++;
+    if (it_804D6D14 == 0) {
+        it_804D6D14++;
     }
 
     return result;

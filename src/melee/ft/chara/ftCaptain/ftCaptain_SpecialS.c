@@ -39,7 +39,7 @@ static void resetCmdVarsGround(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
 }
 
-void ftCa_SpecialS_StartMotion(HSD_GObj* gobj)
+void ftCa_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -112,7 +112,7 @@ static inline void setupAirStart(HSD_GObj* gobj)
     }
 }
 
-void ftCa_SpecialAirS_StartMotion(HSD_GObj* gobj)
+void ftCa_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     setupAirStart(gobj);

@@ -7,32 +7,32 @@
 #include "ft/ftcommon.h"
 
 // 80155B70 152750
-void ftMh_Unk32_80155B70(HSD_GObj* gobj)
+void ftMh_CaptureMasterHand_Anim(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155B74 152754
-void ftMh_Unk32_80155B74(HSD_GObj* gobj)
+void ftMh_CaptureMasterHand_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155B78 152758
-void ftMh_Unk32_80155B78(HSD_GObj* gobj)
+void ftMh_CaptureMasterHand_Phys(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155B7C 15275C
-void ftMh_Unk32_80155B7C(HSD_GObj* gobj)
+void ftMh_CaptureMasterHand_Coll(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155B80 152760
 // https://decomp.me/scratch/BFD9X
-void ftMh_Unk32_80155B80(HSD_GObj* gobj)
+void ftMh_CaptureMasterHand_80155B80(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -46,14 +46,14 @@ void ftMh_Unk32_80155B80(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftMh_Unk32_80155C20(HSD_GObj* gobj)
+void ftMh_CaptureDamageMasterHand_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
 
     fp = gobj->user_data;
     ftCommon_8007DC08(fp, p_ftCommonData->x3A8);
     if (fp->x1A4C <= 0.0f) {
-        ftMh_Unk33_80155C94(gobj);
-        ftMh_Unk22_8015483C(fp->x1A58_interactedFighter);
+        ftMh_CaptureDamageMasterHand_80155C94(gobj);
+        ftMh_MS_381_8015483C(fp->x1A58_interactedFighter);
     }
 }

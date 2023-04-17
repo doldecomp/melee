@@ -16,8 +16,7 @@ void ftNs_AttackS4_OnReflect(
 
 // 0x80114C24
 // https://decomp.me/scratch/66eaB
-void ftNs_AttackS4_Action(
-    HSD_GObj* gobj) // Ness's F-Smash Motion State handler
+void ftNs_AttackS4_Enter(HSD_GObj* gobj) // Ness's F-Smash Motion State handler
 {
     Fighter* fp;
     HSD_GObj* baseballBatGObj;
@@ -145,7 +144,7 @@ void ftNs_AttackS4_IASA(HSD_GObj* gobj) // Ness's F-Smash IASA Callback
             it_802AD6B8(fp->fv.ns.bat_gobj);
             fp->fv.ns.bat_gobj = NULL;
         }
-        ft_8008A4D4(gobj);
+        ftCo_Wait_IASA(gobj);
     }
 };
 

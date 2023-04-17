@@ -1,11 +1,11 @@
 #include <platform.h>
 
-int lbl_803C5520[] = {
+int ftItemPickup_803C5520[] = {
     81, 78, 75, 82, 79, 76, 83, 80, 77, 89, 88, 87,
     84, 84, 84, 85, 85, 85, 86, 86, 86, 89, 88, 87,
 };
 
-char lbl_803C5580[] = "ftGetImmItem item_gobj is NULL!!\n";
+char ftItemPickup_803C5580[] = "ftGetImmItem item_gobj is NULL!!\n";
 
 #ifdef MUST_MATCH
 #pragma push

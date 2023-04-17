@@ -4,6 +4,6 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-void ftFx_RemoveBlaster(HSD_GObj*);
+void ftFx_SpecialN_RemoveBlaster(HSD_GObj*);
 
 #endif

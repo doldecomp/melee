@@ -207,7 +207,7 @@ static inline void ftGameWatch_SpecialN_SetVars(HSD_GObj* gobj)
 // 0x8014E644
 // https://decomp.me/scratch/VyJIm // Mr. Game & Watch's grounded Chef Action
 // State handler
-void ftGw_SpecialN_StartMotion(HSD_GObj* gobj)
+void ftGw_SpecialN_Enter(HSD_GObj* gobj)
 {
     GET_FIGHTER(gobj)->x80_self_vel.y = 0.0f;
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialN, 0, NULL, 0.0f, 1.0f,
@@ -219,7 +219,7 @@ void ftGw_SpecialN_StartMotion(HSD_GObj* gobj)
 // 0x8014E6C0
 // https://decomp.me/scratch/VyJIm // Mr. Game & Watch's aerial Chef Action
 // State handler
-void ftGw_SpecialAirN_StartMotion(HSD_GObj* gobj)
+void ftGw_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     GET_FIGHTER(gobj)->x80_self_vel.y = 0.0f;
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirN, 0, NULL, 0.0f, 1.0f,

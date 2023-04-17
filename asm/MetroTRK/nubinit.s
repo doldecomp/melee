@@ -80,9 +80,9 @@ TRKTerminateNub:
 .global TRKNubWelcome
 TRKNubWelcome:
 /* 80326BD0 003237B0  7C 08 02 A6 */	mflr r0
-/* 80326BD4 003237B4  3C 60 80 3C */	lis r3, lbl_803B93A0@ha
+/* 80326BD4 003237B4  3C 60 80 3C */	lis r3, MTRK_NubInit_803B93A0@ha
 /* 80326BD8 003237B8  90 01 00 04 */	stw r0, 4(r1)
-/* 80326BDC 003237BC  38 63 93 A0 */	addi r3, r3, lbl_803B93A0@l
+/* 80326BDC 003237BC  38 63 93 A0 */	addi r3, r3, MTRK_NubInit_803B93A0@l
 /* 80326BE0 003237C0  94 21 FF F8 */	stwu r1, -8(r1)
 /* 80326BE4 003237C4  48 00 43 79 */	bl TRK_board_display
 /* 80326BE8 003237C8  38 21 00 08 */	addi r1, r1, 8
@@ -128,8 +128,8 @@ TRKInitializeEndian:
 
 .section .rodata
     .balign 8
-.global lbl_803B93A0
-lbl_803B93A0:
+.global MTRK_NubInit_803B93A0
+MTRK_NubInit_803B93A0:
     .4byte 0x4D657472
     .4byte 0x6F54524B
     .4byte 0x20666F72
@@ -141,14 +141,14 @@ lbl_803B93A0:
 
 
 .section .bss, "wa"
-.global lbl_804A3148
-lbl_804A3148:
+.global MTRK_NubInit_804A3148
+MTRK_NubInit_804A3148:
     .skip 0x28
 .global gTRKBigEndian
 gTRKBigEndian:
     .skip 0x8
-.global lbl_804A3178
-lbl_804A3178:
+.global MTRK_NubInit_804A3178
+MTRK_NubInit_804A3178:
     .skip 0x19B0
 .global gTRKFramingState
 gTRKFramingState:
@@ -156,14 +156,14 @@ gTRKFramingState:
 .global gTRKInputPendingPtr
 gTRKInputPendingPtr:
     .skip 0x4
-.global lbl_804A4B40
-lbl_804A4B40:
+.global MTRK_NubInit_804A4B40
+MTRK_NubInit_804A4B40:
     .skip 0x8
-.global lbl_804A4B48
-lbl_804A4B48:
+.global MTRK_NubInit_804A4B48
+MTRK_NubInit_804A4B48:
     .skip 0x4
-.global lbl_804A4B4C
-lbl_804A4B4C:
+.global MTRK_NubInit_804A4B4C
+MTRK_NubInit_804A4B4C:
     .skip 0x94
 .global TRKvalue128_temp
 TRKvalue128_temp:
@@ -174,8 +174,8 @@ gTRKState:
 .global gTRKCPUState
 gTRKCPUState:
     .skip 0x430
-.global lbl_804A50C8
-lbl_804A50C8:
+.global MTRK_NubInit_804A50C8
+MTRK_NubInit_804A50C8:
     .skip 0x8
 .global TRK_mainError
 TRK_mainError:

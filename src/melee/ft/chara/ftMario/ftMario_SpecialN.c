@@ -45,7 +45,7 @@ int ftMr_SpecialN_VitaminRandom(HSD_GObj* gobj)
     return r3;
 }
 
-void ftMr_SpecialN_StartMotion(HSD_GObj* gobj)
+void ftMr_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
@@ -68,7 +68,7 @@ void ftMr_SpecialN_IASA(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2200_ftcmd_var0 != 0) {
-        ft_8008A4D4(gobj);
+        ftCo_Wait_IASA(gobj);
     }
 }
 
@@ -123,7 +123,7 @@ void ftMr_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
     }
 }
 
-void ftMr_SpecialAirN_StartMotion(HSD_GObj* gobj)
+void ftMr_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;

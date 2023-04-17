@@ -13,7 +13,7 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftMs_SpecialLw_StartMotion(HSD_GObj* gobj)
+void ftMs_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
     fp0->x80_self_vel.y = 0;
@@ -28,7 +28,7 @@ void ftMs_SpecialLw_StartMotion(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialAirLw_StartMotion(HSD_GObj* gobj)
+void ftMs_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -53,7 +53,7 @@ void ftMs_SpecialAirLw_StartMotion(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialLw_80138AA8(HSD_GObj* gobj)
+void ftMs_SpecialLw_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -78,7 +78,7 @@ void ftMs_SpecialLw_80138AA8(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialLw_80138B64(HSD_GObj* gobj)
+void ftMs_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -103,17 +103,17 @@ void ftMs_SpecialLw_80138B64(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialLw_80138C20(HSD_GObj* gobj) {}
+void ftMs_SpecialLw_IASA(HSD_GObj* gobj) {}
 
-void ftMs_SpecialLw_80138C24(HSD_GObj* gobj) {}
+void ftMs_SpecialAirLw_IASA(HSD_GObj* gobj) {}
 
-void ftMs_SpecialLw_80138C28(HSD_GObj* gobj)
+void ftMs_SpecialLw_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
     ftColl_8007AEE0(gobj);
 }
 
-void ftMs_SpecialLw_80138C5C(HSD_GObj* gobj)
+void ftMs_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -129,7 +129,7 @@ void ftMs_SpecialLw_80138C5C(HSD_GObj* gobj)
 
 // 80138CC0 001358A0
 // https://decomp.me/scratch/PQPYD
-void ftMs_SpecialLw_80138CC0(HSD_GObj* gobj)
+void ftMs_SpecialLw_Coll(HSD_GObj* gobj)
 {
     if (ft_800827A0(gobj) == 0) {
         ftMs_SpecialLw_80138D38(gobj);
@@ -138,7 +138,7 @@ void ftMs_SpecialLw_80138CC0(HSD_GObj* gobj)
 
 // 80138CFC 001358DC
 // https://decomp.me/scratch/ZAAJM
-void ftMs_SpecialLw_80138CFC(HSD_GObj* gobj)
+void ftMs_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != 0) {
         ftMs_SpecialLw_80138DD0(gobj);
@@ -195,7 +195,7 @@ void ftMs_SpecialLw_80138DD0(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialLw_80138E68(HSD_GObj* gobj)
+void ftMs_SpecialLwHit_Anim(HSD_GObj* gobj)
 {
     ssize_t idx;
 
@@ -241,7 +241,7 @@ void ftMs_SpecialLw_80138E68(HSD_GObj* gobj)
 }
 
 // https://decomp.me/scratch/Jx7Ov
-void ftMs_SpecialLw_80138F14(HSD_GObj* gobj)
+void ftMs_SpecialAirLwHit_Anim(HSD_GObj* gobj)
 {
     ssize_t idx;
 
@@ -287,28 +287,28 @@ void ftMs_SpecialLw_80138F14(HSD_GObj* gobj)
 }
 
 // 80138FC0 00135BA0
-void ftMs_SpecialLw_80138FC0(HSD_GObj* gobj) {}
+void ftMs_SpecialLwHit_IASA(HSD_GObj* gobj) {}
 
 // 80138FC4 00135BA4
-void ftMs_SpecialLw_80138FC4(HSD_GObj* gobj) {}
+void ftMs_SpecialAirLwHit_IASA(HSD_GObj* gobj) {}
 
 // 80138FC8 00135BA8
 // https://decomp.me/scratch/u66PG
-void ftMs_SpecialLw_80138FC8(HSD_GObj* gobj)
+void ftMs_SpecialLwHit_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
 // 80138FE8 00135BC8
 // https://decomp.me/scratch/QnjxB
-void ftMs_SpecialLw_80138FE8(HSD_GObj* gobj)
+void ftMs_SpecialAirLwHit_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
 // 80139008 00135BE8
 // https://decomp.me/scratch/2SGFK
-void ftMs_SpecialLw_80139008(HSD_GObj* gobj)
+void ftMs_SpecialLwHit_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == 0) {
         ftMs_SpecialLw_80139080(gobj);
@@ -317,7 +317,7 @@ void ftMs_SpecialLw_80139008(HSD_GObj* gobj)
 
 // 80139044 00135C24
 // https://decomp.me/scratch/3W48X
-void ftMs_SpecialLw_80139044(HSD_GObj* gobj)
+void ftMs_SpecialAirLwHit_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != 0) {
         ftMs_SpecialLw_801390E0(gobj);

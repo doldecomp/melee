@@ -6,7 +6,7 @@
 
 // 0x8011659C
 // https://decomp.me/scratch/xVTx7
-void ftNs_AttackLw4_Action(
+void ftNs_AttackLw4_Enter(
     HSD_GObj* gobj) // Ness's Down Smash Motion State handler
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -36,7 +36,7 @@ void ftNs_AttackLw4_Anim(
             ((s32) fp->mv.ns.attacklw4.isChargeDisable == false) &&
             (ftNs_AttackHi4_YoyoCheckNoObstruct(gobj) != false))
         {
-            ftNs_AttackLw4_Charge_Action(gobj);
+            ftNs_AttackLw4Charge_Enter(gobj);
         }
         if (!ftAnim_IsFramesRemaining(gobj)) {
             ft_8008A2BC(gobj);
@@ -54,7 +54,7 @@ void ftNs_AttackLw4_IASA(HSD_GObj* gobj) // Ness's Down Smash IASA callback
         fp->mv.ns.attacklw4.isChargeDisable = true;
     }
     if (fp->x2218_flag.bits.b0 != 0) {
-        ft_8008A4D4(gobj);
+        ftCo_Wait_IASA(gobj);
     }
 }
 
@@ -81,7 +81,7 @@ void ftNs_AttackLw4_Coll(
 
 // 0x80116798
 // https://decomp.me/scratch/H7nP6
-void ftNs_AttackLw4_Charge_Anim(
+void ftNs_AttackLw4Charge_Anim(
     HSD_GObj* gobj) // Ness's Down Smash Charge Animation callback
 {
     s32 yoyoSmashFrameCurr;
@@ -97,25 +97,25 @@ void ftNs_AttackLw4_Charge_Anim(
     if ((f32) fp->mv.ns.attacklw4.yoyoCurrentFrame >=
         ness_attr->xAC_YOYO_CHARGE_DURATION)
     {
-        ftNs_AttackLw4_Release_Action(gobj);
+        ftNs_AttackLw4Release_Enter(gobj);
     }
 }
 
 // 0x80116828
 // https://decomp.me/scratch/803jK
-void ftNs_AttackLw4_Charge_IASA(
+void ftNs_AttackLw4Charge_IASA(
     HSD_GObj* gobj) // Ness's Down Smash Charge IASA callback
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_A) == false) {
-        ftNs_AttackLw4_Release_Action(gobj);
+        ftNs_AttackLw4Release_Enter(gobj);
     }
 }
 
 // 0x80116858
 // https://decomp.me/scratch/aMuVK
-void ftNs_AttackLw4_Charge_Phys(
+void ftNs_AttackLw4Charge_Phys(
     HSD_GObj* gobj) // Ness's Down Smash Charge Physics callback
 {
     ft_80084F3C(gobj);
@@ -123,7 +123,7 @@ void ftNs_AttackLw4_Charge_Phys(
 
 // 0x80116878
 // https://decomp.me/scratch/XNQHN
-void ftNs_AttackLw4_Charge_Coll(
+void ftNs_AttackLw4Charge_Coll(
     HSD_GObj* gobj) // Ness's Down Smash Charge Collision callback
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -136,7 +136,7 @@ void ftNs_AttackLw4_Charge_Coll(
 
 // 0x801168C4
 // https://decomp.me/scratch/KJ6kU
-void ftNs_AttackLw4_Charge_Action(
+void ftNs_AttackLw4Charge_Enter(
     HSD_GObj* gobj) // Ness's Down Smash Charge Motion State handler
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -154,7 +154,7 @@ void ftNs_AttackLw4_Charge_Action(
 
 // 0x80116958
 // https://decomp.me/scratch/zksU7
-void ftNs_AttackLw4_Release_Anim(
+void ftNs_AttackLw4Release_Anim(
     HSD_GObj* gobj) // Ness's Down Smash Post-Charge Animation callback
 {
     s32 yoyoSmashFrameCurr;
@@ -173,18 +173,18 @@ void ftNs_AttackLw4_Release_Anim(
 
 // 0x801169BC
 // https://decomp.me/scratch/dC4m7
-void ftNs_AttackLw4_Release_IASA(
+void ftNs_AttackLw4Release_IASA(
     HSD_GObj* gobj) // Ness's Down Smash Post-Charge IASA callback
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2218_flag.bits.b0 != 0) {
-        ft_8008A4D4(gobj);
+        ftCo_Wait_IASA(gobj);
     }
 }
 
 // 0x801169EC
 // https://decomp.me/scratch/AkDxO
-void ftNs_AttackLw4_Release_Phys(
+void ftNs_AttackLw4Release_Phys(
     HSD_GObj* gobj) // Ness's Down Smash Post-Charge Physics callback
 {
     f32 yoyoSmashUnk;
@@ -213,7 +213,7 @@ void ftNs_AttackLw4_Release_Phys(
 
 // 0x801169EC
 // https://decomp.me/scratch/mD95b
-void ftNs_AttackLw4_Release_Coll(
+void ftNs_AttackLw4Release_Coll(
     HSD_GObj* gobj) // Ness's Down Smash Post-Charge Collision callback
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -226,7 +226,7 @@ void ftNs_AttackLw4_Release_Coll(
 
 // 0x80116AE8
 // https://decomp.me/scratch/qsqMH
-void ftNs_AttackLw4_Release_Action(
+void ftNs_AttackLw4Release_Enter(
     HSD_GObj* gobj) // Ness's Down Smash Post-Charge Motion State handler
 {
     Fighter* fp = GET_FIGHTER(gobj);

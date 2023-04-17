@@ -78,8 +78,8 @@ extern Fighter_DemoStrings ftLg_Init_DemoMotionFilenames;
 
 // Netural Special - Fireball (SpecialN)
 
-void ftLg_SpecialN_StartMotion(HSD_GObj* gobj);
-void ftLg_SpecialAirN_StartMotion(HSD_GObj* gobj);
+void ftLg_SpecialN_Enter(HSD_GObj* gobj);
+void ftLg_SpecialAirN_Enter(HSD_GObj* gobj);
 void ftLg_SpecialN_Anim(HSD_GObj* gobj);
 void ftLg_SpecialAirN_Anim(HSD_GObj* gobj);
 void ftLg_SpecialN_IASA(HSD_GObj* gobj);
@@ -94,8 +94,8 @@ void ftLg_SpecialN_FireSpawn(HSD_GObj* gobj);
 
 void ftLg_SpecialS_SetGFX(HSD_GObj* gobj);
 void ftLg_SpecialS_SetVars(HSD_GObj* gobj);
-void ftLg_SpecialS_StartMotion(HSD_GObj* gobj);
-void ftLg_SpecialAirS_StartMotion(HSD_GObj* gobj);
+void ftLg_SpecialS_Enter(HSD_GObj* gobj);
+void ftLg_SpecialAirS_Enter(HSD_GObj* gobj);
 void ftLg_SpecialS_OnGiveDamage(HSD_GObj* gobj);
 void ftLg_SpecialSStart_Anim(HSD_GObj* gobj);
 void ftLg_SpecialAirSStart_Anim(HSD_GObj* gobj);
@@ -117,8 +117,8 @@ void ftLg_SpecialSHold_Coll(HSD_GObj* gobj);
 void ftLg_SpecialAirSHold_Coll(HSD_GObj* gobj);
 void ftLg_SpecialSHold_GroundToAir(HSD_GObj* gobj);
 void ftLg_SpecialAirSHold_AirToGround(HSD_GObj* gobj);
-void ftLg_SpecialSHold_Action(HSD_GObj* gobj);
-void ftLg_SpecialAirSHold_Action(HSD_GObj* gobj);
+void ftLg_SpecialSHold_Enter(HSD_GObj* gobj);
+void ftLg_SpecialAirSHold_Enter(HSD_GObj* gobj);
 void ftLg_SpecialSLaunch_Anim(HSD_GObj* gobj);
 void ftLg_SpecialAirSLaunch_Anim(HSD_GObj* gobj);
 void ftLg_SpecialSLaunch_IASA(HSD_GObj* gobj);
@@ -129,8 +129,8 @@ void ftLg_SpecialSLaunch_Coll(HSD_GObj* gobj);
 void ftLg_SpecialAirSLaunch_Coll(HSD_GObj* gobj);
 void ftLg_SpecialSLaunch_GroundToAir(HSD_GObj* gobj);
 void ftLg_SpecialAirSLaunch_AirToGround(HSD_GObj* gobj);
-void ftLg_SpecialSLaunch_Action(HSD_GObj* gobj);
-void ftLg_SpecialAirSLaunch_Action(HSD_GObj* gobj);
+void ftLg_SpecialSLaunch_Enter(HSD_GObj* gobj);
+void ftLg_SpecialAirSLaunch_Enter(HSD_GObj* gobj);
 void ftLg_SpecialSMisfire_Anim(HSD_GObj* gobj);
 void ftLg_SpecialAirSMisfire_Anim(HSD_GObj* gobj);
 void ftLg_SpecialSMisfire_IASA(HSD_GObj* gobj);
@@ -141,8 +141,8 @@ void ftLg_SpecialSMisfire_Coll(HSD_GObj* gobj);
 void ftLg_SpecialAirSMisfire_Coll(HSD_GObj* gobj);
 void ftLg_SpecialSMisfire_GroundToAir(HSD_GObj* gobj);
 void ftLg_SpecialAirSMisfire_AirToGround(HSD_GObj* gobj);
-void ftLg_SpecialSMisfire_Action(HSD_GObj* gobj);
-void ftLg_SpecialAirSMisfire_Action(HSD_GObj* gobj);
+void ftLg_SpecialSMisfire_Enter(HSD_GObj* gobj);
+void ftLg_SpecialAirSMisfire_Enter(HSD_GObj* gobj);
 void ftLg_SpecialSFly_Anim(HSD_GObj* gobj);
 void ftLg_SpecialAirSFly_Anim(HSD_GObj* gobj);
 void ftLg_SpecialSFly_IASA(HSD_GObj* gobj);
@@ -151,7 +151,7 @@ void ftLg_SpecialSFly_Phys(HSD_GObj* gobj);
 void ftLg_SpecialAirSFly_Phys(HSD_GObj* gobj);
 void ftLg_SpecialSFly_Coll(HSD_GObj* gobj);
 void ftLg_SpecialAirSFly_Coll(HSD_GObj* gobj);
-void ftLg_SpecialSFly_Action(HSD_GObj* gobj);
+void ftLg_SpecialSFly_Enter(HSD_GObj* gobj);
 void ftLg_SpecialSEnd_Anim(HSD_GObj* gobj);
 void ftLg_SpecialAirSEnd_Anim(HSD_GObj* gobj);
 void ftLg_SpecialSEnd_IASA(HSD_GObj* gobj);
@@ -160,13 +160,13 @@ void ftLg_SpecialSEnd_Phys(HSD_GObj* gobj);
 void ftLg_SpecialAirSEnd_Phys(HSD_GObj* gobj);
 void ftLg_SpecialSEnd_Coll(HSD_GObj* gobj);
 void ftLg_SpecialAirSEnd_Coll(HSD_GObj* gobj);
-void ftLg_SpecialSEnd_Action(HSD_GObj* gobj);
-void ftLg_SpecialAirSEnd_Action(HSD_GObj* gobj);
+void ftLg_SpecialSEnd_Enter(HSD_GObj* gobj);
+void ftLg_SpecialAirSEnd_Enter(HSD_GObj* gobj);
 
 // Up Special - Super Jump Punch (SpecialHi)
 
-void ftLg_SpecialHi_StartMotion(HSD_GObj* gobj);
-void ftLg_SpecialAirHi_StartMotion(HSD_GObj* gobj);
+void ftLg_SpecialHi_Enter(HSD_GObj* gobj);
+void ftLg_SpecialAirHi_Enter(HSD_GObj* gobj);
 void ftLg_SpecialHi_Anim(HSD_GObj* gobj);
 void ftLg_SpecialAirHi_Anim(HSD_GObj* gobj);
 void ftLg_SpecialHi_IASA(HSD_GObj* gobj);
@@ -180,8 +180,8 @@ void ftLg_SpecialAirHi_Coll(HSD_GObj* gobj);
 // Down Special - Luigi Cyclone (SpecialLw)
 
 void ftLg_SpecialLw_UpdateRot(HSD_GObj* gobj);
-void ftLg_SpecialLw_StartMotion(HSD_GObj* gobj);
-void ftLg_SpecialAirLw_StartMotion(HSD_GObj* gobj);
+void ftLg_SpecialLw_Enter(HSD_GObj* gobj);
+void ftLg_SpecialAirLw_Enter(HSD_GObj* gobj);
 void ftLg_SpecialLw_Anim(HSD_GObj* gobj);
 void ftLg_SpecialAirLw_Anim(HSD_GObj* gobj);
 void ftLg_SpecialLw_IASA(HSD_GObj* gobj);

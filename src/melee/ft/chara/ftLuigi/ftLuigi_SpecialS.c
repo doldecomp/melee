@@ -48,14 +48,14 @@ void ftLg_SpecialS_SetVars(HSD_GObj* gobj)
 }
 
 /// Luigi's grounded Green Missile Motion State handler
-void ftLg_SpecialS_StartMotion(HSD_GObj* gobj)
+void ftLg_SpecialS_Enter(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    /// @todo Shared @c inline with #ftLg_SpecialAirS_StartMotion.
+    /// @todo Shared @c inline with #ftLg_SpecialAirS_Enter.
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = fp->x2D4_specialAttributes;
 
@@ -68,7 +68,7 @@ void ftLg_SpecialS_StartMotion(HSD_GObj* gobj)
 }
 
 /// Luigi's aerial Green Missile Motion State handler
-void ftLg_SpecialAirS_StartMotion(HSD_GObj* gobj)
+void ftLg_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -99,14 +99,14 @@ void ftLg_SpecialS_OnGiveDamage(HSD_GObj* gobj)
         fp->x80_self_vel.y = 0;
     }
 
-    ftLg_SpecialAirSEnd_Action(gobj);
+    ftLg_SpecialAirSEnd_Enter(gobj);
 }
 
 /// Luigi's grounded Green Missile Start Animation callback
 void ftLg_SpecialSStart_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftLg_SpecialSHold_Action(gobj);
+        ftLg_SpecialSHold_Enter(gobj);
     }
 }
 
@@ -114,7 +114,7 @@ void ftLg_SpecialSStart_Anim(HSD_GObj* gobj)
 void ftLg_SpecialAirSStart_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftLg_SpecialAirSHold_Action(gobj);
+        ftLg_SpecialAirSHold_Enter(gobj);
     }
 }
 
@@ -220,7 +220,7 @@ void ftLg_SpecialSHold_Anim(HSD_GObj* gobj)
     if (fp->mv.lg.SpecialS.chargeFrames >
         sa->xC_LUIGI_GREENMISSILE_MAX_CHARGE_FRAMES)
     {
-        ftLg_SpecialSLaunch_Action(gobj);
+        ftLg_SpecialSLaunch_Enter(gobj);
     }
 }
 
@@ -245,7 +245,7 @@ void ftLg_SpecialAirSHold_Anim(HSD_GObj* gobj)
     if (fp->mv.lg.SpecialS.chargeFrames >
         sa->xC_LUIGI_GREENMISSILE_MAX_CHARGE_FRAMES)
     {
-        ftLg_SpecialAirSLaunch_Action(gobj);
+        ftLg_SpecialAirSLaunch_Enter(gobj);
     }
 }
 
@@ -254,7 +254,7 @@ void ftLg_SpecialSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
-        ftLg_SpecialSLaunch_Action(gobj);
+        ftLg_SpecialSLaunch_Enter(gobj);
     }
 }
 
@@ -263,7 +263,7 @@ void ftLg_SpecialAirSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
-        ftLg_SpecialAirSLaunch_Action(gobj);
+        ftLg_SpecialAirSLaunch_Enter(gobj);
     }
 }
 
@@ -320,14 +320,14 @@ void ftLg_SpecialAirSHold_AirToGround(HSD_GObj* gobj)
 }
 
 /// Luigi's grounded Green Missile Charge Motion State handler
-void ftLg_SpecialSHold_Action(HSD_GObj* gobj)
+void ftLg_SpecialSHold_Enter(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    /// @todo Shared @c inline with #ftLg_SpecialAirSHold_Action.
+    /// @todo Shared @c inline with #ftLg_SpecialAirSHold_Enter.
 
     Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALS_HOLD,
                               FtStateChange_PreserveSfx, NULL, 0, 1, 0);
@@ -339,7 +339,7 @@ void ftLg_SpecialSHold_Action(HSD_GObj* gobj)
 }
 
 /// Luigi's aerial Green Missile Charge Motion State handler
-void ftLg_SpecialAirSHold_Action(HSD_GObj* gobj)
+void ftLg_SpecialAirSHold_Enter(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -378,7 +378,7 @@ void ftLg_SpecialSLaunch_Anim(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 != 0) {
         ftCommon_8007D5D4(fp);
-        ftLg_SpecialSFly_Action(gobj);
+        ftLg_SpecialSFly_Enter(gobj);
     }
 }
 
@@ -404,7 +404,7 @@ void ftLg_SpecialAirSLaunch_Anim(HSD_GObj* gobj)
     }
 
     if (fp->x2200_ftcmd_var0 != 0) {
-        ftLg_SpecialSFly_Action(gobj);
+        ftLg_SpecialSFly_Enter(gobj);
     }
 }
 
@@ -495,7 +495,7 @@ static inline void ftLuigi_SpecialS_Setup(HSD_GObj* gobj)
 }
 
 /// Luigi's grounded Green Missile Launch Motion State handler
-void ftLg_SpecialSLaunch_Action(HSD_GObj* gobj)
+void ftLg_SpecialSLaunch_Enter(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -505,7 +505,7 @@ void ftLg_SpecialSLaunch_Action(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->mv.lg.SpecialS.isMisfire) {
-        ftLg_SpecialSMisfire_Action(gobj);
+        ftLg_SpecialSMisfire_Enter(gobj);
         return;
     }
 
@@ -517,12 +517,12 @@ void ftLg_SpecialSLaunch_Action(HSD_GObj* gobj)
 }
 
 /// Luigi's aerial Green Missile Launch Motion State handler
-void ftLg_SpecialAirSLaunch_Action(HSD_GObj* gobj)
+void ftLg_SpecialAirSLaunch_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->mv.lg.SpecialS.isMisfire) {
-        ftLg_SpecialAirSMisfire_Action(gobj);
+        ftLg_SpecialAirSMisfire_Enter(gobj);
         return;
     }
 
@@ -556,7 +556,7 @@ void ftLg_SpecialSMisfire_Anim(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 != 0) {
         ftCommon_8007D5D4(fp);
-        ftLg_SpecialSFly_Action(gobj);
+        ftLg_SpecialSFly_Enter(gobj);
     }
 }
 
@@ -582,7 +582,7 @@ void ftLg_SpecialAirSMisfire_Anim(HSD_GObj* gobj)
     }
 
     if (fp->x2200_ftcmd_var0 != 0) {
-        ftLg_SpecialSFly_Action(gobj);
+        ftLg_SpecialSFly_Enter(gobj);
     }
 }
 
@@ -643,7 +643,7 @@ void ftLg_SpecialAirSMisfire_AirToGround(HSD_GObj* gobj)
 }
 
 /// Luigi's grounded Green Missile Misfire Motion State handler
-void ftLg_SpecialSMisfire_Action(HSD_GObj* gobj)
+void ftLg_SpecialSMisfire_Enter(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -658,7 +658,7 @@ void ftLg_SpecialSMisfire_Action(HSD_GObj* gobj)
 }
 
 /// Luigi's aerial Green Missile Misfire Motion State handler
-void ftLg_SpecialAirSMisfire_Action(HSD_GObj* gobj)
+void ftLg_SpecialAirSMisfire_Enter(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -679,7 +679,7 @@ void ftLg_SpecialSFly_Anim(HSD_GObj* gobj) {}
 void ftLg_SpecialAirSFly_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftLg_SpecialAirSEnd_Action(gobj);
+        ftLg_SpecialAirSEnd_Enter(gobj);
     }
 }
 
@@ -728,7 +728,7 @@ void ftLg_SpecialAirSFly_Coll(HSD_GObj* gobj)
     if (ft_80081D0C(gobj)) {
         Fighter* fp1 = fp0;
         ftCommon_8007D7FC(fp1);
-        ftLg_SpecialSEnd_Action(gobj);
+        ftLg_SpecialSEnd_Enter(gobj);
     }
 
     {
@@ -736,7 +736,7 @@ void ftLg_SpecialAirSFly_Coll(HSD_GObj* gobj)
 
         /// @todo Named flags
         if ((env_flags & MPCOLL_RIGHTWALL) || (env_flags & MPCOLL_LEFTWALL)) {
-            ftLg_SpecialAirSEnd_Action(gobj);
+            ftLg_SpecialAirSEnd_Enter(gobj);
         }
     }
 }
@@ -750,7 +750,7 @@ static Fighter_MotionStateChangeFlags const transition_flags3 =
     FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
 
 /// Luigi's Green Missile Fly Setup
-void ftLg_SpecialSFly_Action(HSD_GObj* gobj)
+void ftLg_SpecialSFly_Enter(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -851,12 +851,12 @@ void ftLg_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 
     if (ft_80081D0C(gobj)) {
         ftCommon_8007D7FC(fp);
-        ftLg_SpecialSEnd_Action(gobj);
+        ftLg_SpecialSEnd_Enter(gobj);
     }
 }
 
 /// Luigi's Green Missile End air -> ground Motion State handler
-void ftLg_SpecialSEnd_Action(HSD_GObj* gobj)
+void ftLg_SpecialSEnd_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = fp->x2D4_specialAttributes;
@@ -867,7 +867,7 @@ void ftLg_SpecialSEnd_Action(HSD_GObj* gobj)
 }
 
 /// Luigi's Green Missile End ground -> air Motion State handler
-void ftLg_SpecialAirSEnd_Action(HSD_GObj* gobj)
+void ftLg_SpecialAirSEnd_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = fp->x2D4_specialAttributes;

@@ -17,69 +17,84 @@
 #include <dolphin/os/os.h>
 
 MotionState ftYs_Init_MotionStateTable[] = {
-    { 37, 0x00100000, 0x01000000, ftYs_Unk2_8012C030, ftYs_Unk2_8012C114,
-      ftYs_Unk2_8012C194, ftYs_Unk2_8012C1B4, ftCamera_UpdateCameraBox },
-    { -1, 0x00180000, 0x01000000, ftYs_Unk2_8012C2F4, ftYs_Unk2_8012C3EC,
-      ftYs_Unk2_8012C45C, ftYs_Unk2_8012C47C, ftCamera_UpdateCameraBox },
-    { 39, 0x00100000, 0x01000000, ftYs_Unk2_8012C54C, ftYs_Unk2_8012C59C,
-      ftYs_Unk2_8012C5C0, ftYs_Unk2_8012C5E0, ftCamera_UpdateCameraBox },
-    { 40, 0x00100000, 0x01000000, ftYs_Unk2_8012C7A4, ftYs_Unk2_8012C80C,
-      ftYs_Unk2_8012C810, ftYs_Unk2_8012C830, ftCamera_UpdateCameraBox },
-    { 37, 0x00101073, 0x01000000, ftYs_Unk2_8012CAD0, ftYs_Unk2_8012CBBC,
-      ftYs_Unk2_8012CBDC, ftYs_Unk2_8012CBFC, ftCamera_UpdateCameraBox },
-    { 295, 0x00340011, 0x12000000, ftYs_Unk4_8012D550, NULL,
-      ftYs_Unk4_8012DC30, ftYs_Unk4_8012DD70, ftCamera_UpdateCameraBox },
-    { 296, 0x00340011, 0x12000000, ftYs_Unk4_8012D658, NULL,
-      ftYs_Unk4_8012DC90, ftYs_Unk4_8012DDE8, ftCamera_UpdateCameraBox },
-    { 296, 0x00340011, 0x12000000, ftYs_Unk4_8012D5C8, NULL,
-      ftYs_Unk4_8012DC70, ftYs_Unk4_8012DDC0, ftCamera_UpdateCameraBox },
-    { 297, 0x00340011, 0x12000000, ftYs_Unk4_8012D948, NULL,
-      ftYs_Unk4_8012DD10, ftYs_Unk4_8012DE88, ftCamera_UpdateCameraBox },
-    { 297, 0x00340011, 0x12000000, ftYs_Unk4_8012D7D8, NULL,
-      ftYs_Unk4_8012DCF0, ftYs_Unk4_8012DE60, ftCamera_UpdateCameraBox },
-    { 298, 0x00340411, 0x12000000, ftYs_Unk4_8012D58C, NULL,
-      ftYs_Unk4_8012DC50, ftYs_Unk4_8012DD98, ftCamera_UpdateCameraBox },
-    { 299, 0x00340411, 0x12000000, ftYs_Unk4_8012D760, NULL,
-      ftYs_Unk4_8012DCD0, ftYs_Unk4_8012DE38, ftCamera_UpdateCameraBox },
-    { 299, 0x00340411, 0x12000000, ftYs_Unk4_8012D6D0, NULL,
-      ftYs_Unk4_8012DCB0, ftYs_Unk4_8012DE10, ftCamera_UpdateCameraBox },
-    { 300, 0x00340411, 0x12000000, ftYs_Unk4_8012DB74, NULL,
-      ftYs_Unk4_8012DD50, ftYs_Unk4_8012DED8, ftCamera_UpdateCameraBox },
-    { 300, 0x00340411, 0x12000000, ftYs_Unk4_8012DA04, NULL,
-      ftYs_Unk4_8012DD30, ftYs_Unk4_8012DEB0, ftCamera_UpdateCameraBox },
-    { 301, 0x00340212, 0x13000000, ftYs_Unk4_8012F654, ftYs_Unk4_80130DB8,
-      ftYs_Unk4_801310C4, ftYs_Unk4_801317DC, ftCamera_UpdateCameraBox },
-    { 302, 0x00340212, 0x13000000, ftYs_Unk4_8012F750, ftYs_Unk4_80130DBC,
-      ftYs_Unk4_801310E8, ftYs_Unk4_8013187C, ftCamera_UpdateCameraBox },
-    { 303, 0x00340212, 0x13000000, ftYs_Unk4_8012FAC4, ftYs_Unk4_80130F7C,
-      ftYs_Unk4_801312EC, ftYs_Unk4_80131B60, ftCamera_UpdateCameraBox },
-    { 304, 0x00340212, 0x13000000, ftYs_Unk4_8012FFF4, ftYs_Unk4_80130FD8,
-      ftYs_Unk4_80131618, ftYs_Unk4_80131E74, ftCamera_UpdateCameraBox },
-    { 305, 0x00340612, 0x13000000, ftYs_Unk4_80130368, ftYs_Unk4_80130FDC,
-      ftYs_Unk4_80131654, ftYs_Unk4_80131ED4, ftCamera_UpdateCameraBox },
-    { 306, 0x00340612, 0x13000000, ftYs_Unk4_80130428, ftYs_Unk4_80130FEC,
-      ftYs_Unk4_8013168C, ftYs_Unk4_80131F80, ftCamera_UpdateCameraBox },
-    { 307, 0x00340612, 0x13000000, ftYs_Unk4_801306A8, ftYs_Unk4_80131050,
-      ftYs_Unk4_80131718, ftYs_Unk4_8013245C, ftCamera_UpdateCameraBox },
-    { 308, 0x00340612, 0x13000000, ftYs_Unk4_80130A24, ftYs_Unk4_801310B4,
-      ftYs_Unk4_801317A4, ftYs_Unk4_801328F0, ftCamera_UpdateCameraBox },
-    { 309, 0x00340113, 0x14000000, ftYs_Unk4_8012E4DC, NULL,
-      ftYs_Unk4_8012E594, ftYs_Unk4_8012E5D4, ftCamera_UpdateCameraBox },
-    { 310, 0x00340513, 0x14000000, ftYs_Unk4_8012E538, NULL,
-      ftYs_Unk4_8012E5B4, ftYs_Unk4_8012E5FC, ftCamera_UpdateCameraBox },
-    { 311, 0x00340214, 0x15000000, ftYs_Unk4_8012E814, NULL,
-      ftYs_Unk4_8012E88C, ftYs_Unk4_8012E924, ftCamera_UpdateCameraBox },
-    { 312, 0x00340214, 0x15000000, ftYs_Unk4_8012EA40, NULL,
-      ftYs_Unk4_8012EA7C, ftYs_Unk4_8012EA9C, ftCamera_UpdateCameraBox },
-    { 313, 0x00340614, 0x15000000, ftYs_Unk4_8012E850, NULL,
-      ftYs_Unk4_8012E8CC, ftYs_Unk4_8012E944, ftCamera_UpdateCameraBox },
+    { 37, 0x00100000, 0x01000000, ftYs_MS_341_Anim, ftYs_MS_341_IASA,
+      ftYs_MS_341_Phys, ftYs_MS_341_Coll, ftCamera_UpdateCameraBox },
+    { -1, 0x00180000, 0x01000000, ftYs_ShieldHold_Anim, ftYs_ShieldHold_IASA,
+      ftYs_ShieldHold_Phys, ftYs_ShieldHold_Coll, ftCamera_UpdateCameraBox },
+    { 39, 0x00100000, 0x01000000, ftYs_ShieldRelease_Anim,
+      ftYs_ShieldRelease_IASA, ftYs_ShieldRelease_Phys,
+      ftYs_ShieldRelease_Coll, ftCamera_UpdateCameraBox },
+    { 40, 0x00100000, 0x01000000, ftYs_ShieldDamage_Anim,
+      ftYs_ShieldDamage_IASA, ftYs_ShieldDamage_Phys, ftYs_ShieldDamage_Coll,
+      ftCamera_UpdateCameraBox },
+    { 37, 0x00101073, 0x01000000, ftYs_ShieldStart_Anim, ftYs_ShieldStart_IASA,
+      ftYs_ShieldStart_Phys, ftYs_ShieldStart_Coll, ftCamera_UpdateCameraBox },
+    { 295, 0x00340011, 0x12000000, ftYs_SpecialN_Anim, NULL,
+      ftYs_SpecialN_Phys, ftYs_SpecialN_Coll, ftCamera_UpdateCameraBox },
+    { 296, 0x00340011, 0x12000000, ftYs_SpecialNCatchStart_Anim, NULL,
+      ftYs_SpecialNCatchStart_Phys, ftYs_SpecialNCatchStart_Coll,
+      ftCamera_UpdateCameraBox },
+    { 296, 0x00340011, 0x12000000, ftYs_SpecialNCatch_Anim, NULL,
+      ftYs_SpecialNCatch_Phys, ftYs_SpecialNCatch_Coll,
+      ftCamera_UpdateCameraBox },
+    { 297, 0x00340011, 0x12000000, ftYs_SpecialAirN_Anim, NULL,
+      ftYs_SpecialAirN_Phys, ftYs_SpecialAirN_Coll, ftCamera_UpdateCameraBox },
+    { 297, 0x00340011, 0x12000000, ftYs_SpecialAirNCatchStart_Anim, NULL,
+      ftYs_SpecialAirNCatchStart_Phys, ftYs_SpecialAirNCatchStart_Coll,
+      ftCamera_UpdateCameraBox },
+    { 298, 0x00340411, 0x12000000, ftYs_SpecialAirNCatch_Anim, NULL,
+      ftYs_SpecialAirNCatch_Phys, ftYs_SpecialAirNCatch_Coll,
+      ftCamera_UpdateCameraBox },
+    { 299, 0x00340411, 0x12000000, ftYs_SpecialSStart_Anim, NULL,
+      ftYs_SpecialSStart_Phys, ftYs_SpecialSStart_Coll,
+      ftCamera_UpdateCameraBox },
+    { 299, 0x00340411, 0x12000000, ftYs_SpecialS_Anim, NULL,
+      ftYs_SpecialS_Phys, ftYs_SpecialS_Coll, ftCamera_UpdateCameraBox },
+    { 300, 0x00340411, 0x12000000, ftYs_SpecialSTurn_Anim, NULL,
+      ftYs_SpecialSTurn_Phys, ftYs_SpecialSTurn_Coll,
+      ftCamera_UpdateCameraBox },
+    { 300, 0x00340411, 0x12000000, ftYs_SpecialSEnd_Anim, NULL,
+      ftYs_SpecialSEnd_Phys, ftYs_SpecialSEnd_Coll, ftCamera_UpdateCameraBox },
+    { 301, 0x00340212, 0x13000000, ftYs_SpecialAirSStart_Anim,
+      ftYs_SpecialAirSStart_IASA, ftYs_SpecialAirSStart_Phys,
+      ftYs_SpecialAirSStart_Coll, ftCamera_UpdateCameraBox },
+    { 302, 0x00340212, 0x13000000, ftYs_SpecialAirS_Anim,
+      ftYs_SpecialAirS_IASA, ftYs_SpecialAirS_Phys, ftYs_SpecialAirS_Coll,
+      ftCamera_UpdateCameraBox },
+    { 303, 0x00340212, 0x13000000, ftYs_SpecialAirSRebound_Anim,
+      ftYs_SpecialAirSRebound_IASA, ftYs_SpecialAirSRebound_Phys,
+      ftYs_SpecialAirSRebound_Coll, ftCamera_UpdateCameraBox },
+    { 304, 0x00340212, 0x13000000, ftYs_SpecialAirSEnd_Anim,
+      ftYs_SpecialAirSEnd_IASA, ftYs_SpecialAirSEnd_Phys,
+      ftYs_SpecialAirSEnd_Coll, ftCamera_UpdateCameraBox },
+    { 305, 0x00340612, 0x13000000, ftYs_SpecialHi_Anim, ftYs_SpecialHi_IASA,
+      ftYs_SpecialHi_Phys, ftYs_SpecialHi_Coll, ftCamera_UpdateCameraBox },
+    { 306, 0x00340612, 0x13000000, ftYs_SpecialAirHi_Anim,
+      ftYs_SpecialAirHi_IASA, ftYs_SpecialAirHi_Phys, ftYs_SpecialAirHi_Coll,
+      ftCamera_UpdateCameraBox },
+    { 307, 0x00340612, 0x13000000, ftYs_SpecialLw_Anim, ftYs_SpecialLw_IASA,
+      ftYs_SpecialLw_Phys, ftYs_SpecialLw_Coll, ftCamera_UpdateCameraBox },
+    { 308, 0x00340612, 0x13000000, ftYs_SpecialLwLand_Anim,
+      ftYs_SpecialLwLand_IASA, ftYs_SpecialLwLand_Phys,
+      ftYs_SpecialLwLand_Coll, ftCamera_UpdateCameraBox },
+    { 309, 0x00340113, 0x14000000, ftYs_SpecialAirLw_Anim, NULL,
+      ftYs_SpecialAirLw_Phys, ftYs_SpecialAirLw_Coll,
+      ftCamera_UpdateCameraBox },
+    { 310, 0x00340513, 0x14000000, ftYs_MS_365_Anim, NULL, ftYs_MS_365_Phys,
+      ftYs_MS_365_Coll, ftCamera_UpdateCameraBox },
+    { 311, 0x00340214, 0x15000000, ftYs_MS_366_Anim, NULL, ftYs_MS_366_Phys,
+      ftYs_MS_366_Coll, ftCamera_UpdateCameraBox },
+    { 312, 0x00340214, 0x15000000, ftYs_MS_367_Anim, NULL, ftYs_MS_367_Phys,
+      ftYs_MS_367_Coll, ftCamera_UpdateCameraBox },
+    { 313, 0x00340614, 0x15000000, ftYs_MS_368_Anim, NULL, ftYs_MS_368_Phys,
+      ftYs_MS_368_Coll, ftCamera_UpdateCameraBox },
 };
 
-extern char* lbl_804D3E58;
-extern char* lbl_804D3E60;
-extern char* lbl_804D3E68;
-extern char* lbl_804D3E70;
-extern char* lbl_804D3E78;
+extern char* ftYs_Unk2_804D3E58;
+extern char* ftYs_Unk2_804D3E60;
+extern char* ftYs_Unk2_804D3E68;
+extern char* ftYs_Unk2_804D3E70;
+extern char* ftYs_Unk2_804D3E78;
 
 /// https://decomp.me/scratch/ufrFK
 void ftYs_Init_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
@@ -223,13 +238,13 @@ void ftYs_Init_OnLoad(HSD_GObj* gobj)
     fp->x2226_flag.bits.b1 = 1;
 }
 
-/* static */ void ftYs_Unk4_8012E270(HSD_GObj* gobj);
-/* static */ void ftYs_Unk4_8012DF18(HSD_GObj* gobj);
+/* static */ void ftYs_SpecialS_8012E270(HSD_GObj* gobj);
+/* static */ void ftYs_SpecialS_8012DF18(HSD_GObj* gobj);
 
 void ftYs_Init_8012BA8C(HSD_GObj* gobj)
 {
-    ftYs_Unk4_8012E270(gobj);
-    ftYs_Unk4_8012DF18(gobj);
+    ftYs_SpecialS_8012E270(gobj);
+    ftYs_SpecialS_8012DF18(gobj);
 }
 
 f32 ftYs_Init_8012BAC0(Fighter* fp)
@@ -277,8 +292,8 @@ void ftYs_Init_OnKnockbackExit(HSD_GObj* gobj)
     ftAnim_ApplyPartAnim(gobj, 4, 2, 0.0f);
 }
 
-/* static */ extern f32 const lbl_804D9A28;
-/* static */ extern u8 lbl_803B75C0[];
+/* static */ extern f32 const ftYs_Init_804D9A28;
+/* static */ extern u8 ftYs_Unk1_803B75C0[];
 
 #ifdef MWERKS_GEKKO
 
@@ -294,11 +309,11 @@ asm unk_t ftYs_Init_8012BDA0(void)
 /* 8012BDB4 00128994  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 8012BDB8 00128998  4B F4 F3 09 */	bl ftColl_8007B0C0
 /* 8012BDBC 0012899C  80 9F 01 0C */	lwz r4, 0x10c(r31)
-/* 8012BDC0 001289A0  3C 60 80 3B */	lis r3, lbl_803B75C0@ha
+/* 8012BDC0 001289A0  3C 60 80 3B */	lis r3, ftYs_Unk1_803B75C0@ha
 /* 8012BDC4 001289A4  38 00 00 01 */	li r0, 1
-/* 8012BDC8 001289A8  C0 02 A0 48 */	lfs f0, lbl_804D9A28
+/* 8012BDC8 001289A8  C0 02 A0 48 */	lfs f0, ftYs_Init_804D9A28
 /* 8012BDCC 001289AC  80 84 00 08 */	lwz r4, 8(r4)
-/* 8012BDD0 001289B0  38 E3 75 C0 */	addi r7, r3, lbl_803B75C0@l
+/* 8012BDD0 001289B0  38 E3 75 C0 */	addi r7, r3, ftYs_Unk1_803B75C0@l
 /* 8012BDD4 001289B4  88 A4 00 11 */	lbz r5, 0x11(r4)
 /* 8012BDD8 001289B8  38 7F 00 00 */	addi r3, r31, 0
 /* 8012BDDC 001289BC  38 9F 11 A0 */	addi r4, r31, 0x11a0
@@ -348,8 +363,8 @@ void ftYs_Init_8012BE3C(HSD_GObj* gobj) {
 
 #ifdef MWERKS_GEKKO
 
-/* static */ extern f32 const lbl_804D9A2C;
-/* static */ extern f32 const lbl_804D9A28;
+/* static */ extern f32 const ftYs_Init_804D9A2C;
+/* static */ extern f32 const ftYs_Init_804D9A28;
 
 #pragma push
 asm unk_t ftYs_Init_8012BECC(void)
@@ -366,8 +381,8 @@ ftYs_Init_8012BECC:
 /* 8012BEE8 00128AC8  7C 7F 1B 78 */	mr r31, r3
 /* 8012BEEC 00128ACC  93 C1 00 30 */	stw r30, 0x30(r1)
 /* 8012BEF0 00128AD0  93 A1 00 2C */	stw r29, 0x2c(r1)
-/* 8012BEF4 00128AD4  C0 22 A0 4C */	lfs f1, lbl_804D9A2C(r2)
-/* 8012BEF8 00128AD8  C0 42 A0 48 */	lfs f2, lbl_804D9A28(r2)
+/* 8012BEF4 00128AD4  C0 22 A0 4C */	lfs f1, ftYs_Init_804D9A2C(r2)
+/* 8012BEF8 00128AD8  C0 42 A0 48 */	lfs f2, ftYs_Init_804D9A28(r2)
 /* 8012BEFC 00128ADC  FC 60 08 90 */	fmr f3, f1
 /* 8012BF00 00128AE0  4B F3 D4 AD */	bl Fighter_ChangeMotionState
 /* 8012BF04 00128AE4  7F E3 FB 78 */	mr r3, r31
@@ -380,7 +395,7 @@ ftYs_Init_8012BECC:
 /* 8012BF20 00128B00  4B F4 F1 A1 */	bl ftColl_8007B0C0
 /* 8012BF24 00128B04  38 00 00 00 */	li r0, 0
 /* 8012BF28 00128B08  90 1E 23 4C */	stw r0, 0x234c(r30)
-/* 8012BF2C 00128B0C  C0 22 A0 4C */	lfs f1, lbl_804D9A2C(r2)
+/* 8012BF2C 00128B0C  C0 22 A0 4C */	lfs f1, ftYs_Init_804D9A2C(r2)
 /* 8012BF30 00128B10  D0 3E 23 40 */	stfs f1, 0x2340(r30)
 /* 8012BF34 00128B14  80 6D AE B4 */	lwz r3, p_ftCommonData(r13)
 /* 8012BF38 00128B18  C0 03 02 68 */	lfs f0, 0x268(r3)
@@ -398,9 +413,9 @@ ftYs_Init_8012BECC:
 /* 8012BF68 00128B48  7F A4 00 2E */	lwzx r29, r4, r0
 /* 8012BF6C 00128B4C  28 1D 00 00 */	cmplwi r29, 0
 /* 8012BF70 00128B50  40 82 00 14 */	bne lbl_8012BF84
-/* 8012BF74 00128B54  38 6D 87 B8 */	addi r3, r13, lbl_804D3E58
+/* 8012BF74 00128B54  38 6D 87 B8 */	addi r3, r13, ftYs_Unk2_804D3E58
 /* 8012BF78 00128B58  38 80 03 94 */	li r4, 0x394
-/* 8012BF7C 00128B5C  38 AD 87 C0 */	addi r5, r13, lbl_804D3E60
+/* 8012BF7C 00128B5C  38 AD 87 C0 */	addi r5, r13, ftYs_Unk2_804D3E60
 /* 8012BF80 00128B60  48 25 C2 A1 */	bl __assert
 lbl_8012BF84:
 /* 8012BF84 00128B64  80 61 00 14 */	lwz r3, 0x14(r1)
@@ -415,9 +430,9 @@ lbl_8012BF84:
 /* 8012BFA8 00128B88  28 1D 00 00 */	cmplwi r29, 0
 /* 8012BFAC 00128B8C  41 82 00 44 */	beq lbl_8012BFF0
 /* 8012BFB0 00128B90  40 82 00 14 */	bne lbl_8012BFC4
-/* 8012BFB4 00128B94  38 6D 87 B8 */	addi r3, r13, lbl_804D3E58
+/* 8012BFB4 00128B94  38 6D 87 B8 */	addi r3, r13, ftYs_Unk2_804D3E58
 /* 8012BFB8 00128B98  38 80 02 34 */	li r4, 0x234
-/* 8012BFBC 00128B9C  38 AD 87 C0 */	addi r5, r13, lbl_804D3E60
+/* 8012BFBC 00128B9C  38 AD 87 C0 */	addi r5, r13, ftYs_Unk2_804D3E60
 /* 8012BFC0 00128BA0  48 25 C2 61 */	bl __assert
 lbl_8012BFC4:
 /* 8012BFC4 00128BA4  80 9D 00 14 */	lwz r4, 0x14(r29)

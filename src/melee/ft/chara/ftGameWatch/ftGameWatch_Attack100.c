@@ -8,12 +8,12 @@
 // 0x8014C1E8
 // https://decomp.me/scratch/AyScb // Mr. Game & Watch's Rapid Jab Start Action
 // State handler
-void ftGw_Attack100Start_Action(HSD_GObj* gobj)
+void ftGw_Attack100Start_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     ft_800D6B00(gobj, ftGw_MS_Attack100Start);
-    fp->cb.x21BC_callback_Accessory4 = ftGw_ItemGreenhouseSetup;
+    fp->cb.x21BC_callback_Accessory4 = ftGw_Attack11_ItemGreenhouseSetup;
 }
 
 // 0x8014C224
@@ -22,7 +22,7 @@ void ftGw_Attack100Start_Action(HSD_GObj* gobj)
 void ftGw_Attack100Start_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftGw_Attack100Loop_Action(gobj);
+        ftGw_Attack100Loop_Enter(gobj);
     }
 }
 
@@ -48,7 +48,7 @@ void ftGw_Attack100Start_Coll(HSD_GObj* gobj)
 // 0x8014C2B8
 // https://decomp.me/scratch/npI0e // Mr. Game & Watch's Rapid Jab Loop Acion
 // State handler
-void ftGw_Attack100Loop_Action(HSD_GObj* gobj)
+void ftGw_Attack100Loop_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -62,13 +62,13 @@ void ftGw_Attack100Loop_Action(HSD_GObj* gobj)
 // Animation callback
 void ftGw_Attack100Loop_Anim(HSD_GObj* gobj)
 {
-    ft_800D6C60(gobj, ftGw_Attack100End_Action);
+    ft_800D6C60(gobj, ftGw_Attack100End_Enter);
 }
 
 // 0x8014C330 - Mr. Game & Watch's Rapid Jab Loop IASA callback
 void ftGw_Attack100Loop_IASA(HSD_GObj* gobj)
 {
-    ft_800D6E70(gobj);
+    ftCo_Attack100Loop_IASA(gobj);
 }
 
 // 0x8014C350 - Mr. Game & Watch's Rapid Jab Loop Physics callback
@@ -85,7 +85,7 @@ void ftGw_Attack100Loop_Coll(HSD_GObj* gobj)
 }
 
 // 0x8014C3A4 - Mr. Game & Watch's Rapid Jab End Motion State handler
-void ftGw_Attack100End_Action(HSD_GObj* gobj)
+void ftGw_Attack100End_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -97,7 +97,7 @@ void ftGw_Attack100End_Action(HSD_GObj* gobj)
 // 0x8014C3F4 - Mr. Game & Watch's Rapid Jab End Animation callback
 void ftGw_Attack100End_Anim(HSD_GObj* gobj)
 {
-    ft_800D6E34(gobj);
+    ftCo_Attack100End_Anim(gobj);
 }
 
 // 0x8014C414 - Mr. Game & Watch's Rapid Jab End IASA callback

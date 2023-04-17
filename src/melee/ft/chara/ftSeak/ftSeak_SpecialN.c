@@ -60,9 +60,9 @@ jtbl_t ftSk_SpecialN_803CC604 = {
     ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650,
 };
 
-f32 const ftSk_804D9650 = 0;
-f32 const ftSk_804D9654 = 1;
-f32 const ftSk_804D9658 = 2;
+f32 const ftSk_Init_804D9650 = 0;
+f32 const ftSk_Init_804D9654 = 1;
+f32 const ftSk_Init_804D9658 = 2;
 
 // Sheik_CheckAndDestroyNeedles
 // 80111FBC - 801120D4 (0x118 bytes)

@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftNs_AttackLw4_Release_Action
-ftNs_AttackLw4_Release_Action:
+.global ftNs_AttackLw4Release_Enter
+ftNs_AttackLw4Release_Enter:
 /* 80116AE8 001136C8  7C 08 02 A6 */	mflr r0
 /* 80116AEC 001136CC  38 80 01 5B */	li r4, 0x15b
 /* 80116AF0 001136D0  90 01 00 04 */	stw r0, 4(r1)

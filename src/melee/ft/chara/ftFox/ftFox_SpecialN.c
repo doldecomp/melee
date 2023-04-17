@@ -12,9 +12,9 @@
 #include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
 
-void ftFx_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
+void ftFx_SpecialN_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
 {
-    /// @todo Shared @c inline with #ftFx_ItGetHoldJoint.
+    /// @todo Shared @c inline with #ftFx_SpecialN_ItGetHoldJoint.
     Vec3 sp14;
 
     // Double fp init otherwise this will not match when inlined
@@ -27,7 +27,7 @@ void ftFx_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
     lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x31)].x0_jobj, &sp14, pos);
 }
 
-void ftFx_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
+void ftFx_SpecialN_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
 {
     Vec3 sp14;
     Fighter* fp = fp = GET_FIGHTER(gobj);
@@ -56,7 +56,7 @@ void ftFx_SpecialN_OnChangeAction(HSD_GObj* gobj)
 // 0x800E5DC4
 // https://decomp.me/scratch/A0n4M // Check if Fox/Falco has a Blaster GOBj
 // pointer
-bool ftFx_CheckRemoveBlaster(HSD_GObj* gobj)
+bool ftFx_SpecialN_CheckRemoveBlaster(HSD_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->fv.fx.x222C_blasterGObj == NULL) {
         return true;
@@ -67,7 +67,7 @@ bool ftFx_CheckRemoveBlaster(HSD_GObj* gobj)
 // 0x800E5DE4 - shoutouts to Olifr� for figuring this one out!
 // https://decomp.me/scratch/aatYF // Get msid for Fox/Falco moves that require
 // the Blaster item
-s32 ftFx_GetBlasterAction(HSD_GObj* gobj)
+s32 ftFx_SpecialN_GetBlasterAction(HSD_GObj* gobj)
 {
     s32 msid = 9;
 
@@ -98,7 +98,7 @@ s32 ftFx_GetBlasterAction(HSD_GObj* gobj)
 // 0x800E5E38
 // https://decomp.me/scratch/f6oIX // Check if Fox/Falco is performing a move
 // that requires the Blaster item
-bool ftFx_CheckBlasterAction(HSD_GObj* gobj)
+bool ftFx_SpecialN_CheckBlasterAction(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -132,7 +132,7 @@ inline void ftFox_SpecialN_SetNULL(HSD_GObj* gobj)
 
 // 0x800E5E90
 // https://decomp.me/scratch/4v8j4 // Clear Blaster GObj pointer and callbacks
-void ftFx_ClearBlaster(HSD_GObj* gobj)
+void ftFx_SpecialN_ClearBlaster(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -144,7 +144,7 @@ void ftFx_ClearBlaster(HSD_GObj* gobj)
 
 // 0x800E5EBC
 // https://decomp.me/scratch/WglAb // Remove Blaster item
-void ftFx_RemoveBlaster(HSD_GObj* gobj)
+void ftFx_SpecialN_RemoveBlaster(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -167,7 +167,7 @@ u32 falcoSFX[2] = { 0x18703, 0x18706 };
 
 // 0x800E5F28
 // https://decomp.me/scratch/iPgDc // Create Blaster Shot Item
-void ftFx_CreateBlasterShot(HSD_GObj* gobj)
+void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
 {
     /** @todo Shared @c inline with #ftFx_SpecialNLoop_Anim and
      * #ftFx_SpecialAirNLoop_Anim.
@@ -195,7 +195,7 @@ void ftFx_CreateBlasterShot(HSD_GObj* gobj)
 
     if ((u32) fp->x2208_ftcmd_var2 != 0U) {
         fp->x2208_ftcmd_var2 = 0U;
-        ftFx_FtGetHoldJoint(gobj, &sp2C);
+        ftFx_SpecialN_FtGetHoldJoint(gobj, &sp2C);
         sp2C.z = 0.0f;
 
         if (1.0f == fp->facing_dir) {
@@ -234,7 +234,7 @@ inline void ftFox_SpecialN_SetCall(HSD_GObj* gobj)
 // 0x800E608C
 // https://decomp.me/scratch/B3aTL // Fox & Falco's grounded Blaster Action
 // State handler
-void ftFx_SpecialN_StartMotion(HSD_GObj* gobj)
+void ftFx_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
@@ -276,7 +276,7 @@ void ftFx_SpecialN_StartMotion(HSD_GObj* gobj)
 
 // 0x800E61A8
 // https://decomp.me/scratch/TUDhU
-void ftFx_SpecialAirN_StartMotion(
+void ftFx_SpecialAirN_Enter(
     HSD_GObj* gobj) // Fox & Falco's aerial Blaster Motion State handler
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
@@ -333,7 +333,7 @@ void ftFx_SpecialNStart_Anim(HSD_GObj* gobj)
             (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx), NULL,
             0.0f, 1.0f, 0.0f);
         ftFox_SpecialN_SetCall(gobj);
-        fp->cb.x21BC_callback_Accessory4 = ftFx_CreateBlasterShot;
+        fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialN_CreateBlasterShot;
         it_802ADDD0(fp->fv.fx.x222C_blasterGObj, 1);
     }
 }
@@ -360,7 +360,8 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
                                        FtStateChange_SkipUpdateModel |
                                        FtStateChange_PreserveGfx),
                                       NULL, 0.0f, 1.0f, 0.0f);
-            temp_r28->cb.x21BC_callback_Accessory4 = ftFx_CreateBlasterShot;
+            temp_r28->cb.x21BC_callback_Accessory4 =
+                ftFx_SpecialN_CreateBlasterShot;
             temp_r28->mv.fx.SpecialN.isBlasterLoop = false;
             it_802ADDD0(temp_r28->fv.fx.x222C_blasterGObj, 1);
         } else {
@@ -400,7 +401,7 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
 
         if (fp->x2208_ftcmd_var2 != 0) {
             fp->x2208_ftcmd_var2 = 0;
-            ftFx_FtGetHoldJoint(gobj, &sp2C);
+            ftFx_SpecialN_FtGetHoldJoint(gobj, &sp2C);
             sp2C.z = 0.0f;
 
             if (1.0f == fp->facing_dir) {
@@ -492,7 +493,7 @@ void ftFx_SpecialAirNStart_Anim(HSD_GObj* gobj)
             (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx), NULL,
             0.0f, 1.0f, 0.0f);
         ftFox_SpecialN_SetCall(gobj);
-        fp->cb.x21BC_callback_Accessory4 = ftFx_CreateBlasterShot;
+        fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialN_CreateBlasterShot;
         it_802ADDD0(fp->fv.fx.x222C_blasterGObj, 1);
     }
 }
@@ -520,7 +521,7 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
                                        FtStateChange_PreserveGfx),
                                       NULL, 0.0f, 1.0f, 0.0f);
             ftFox_SpecialN_SetCall(gobj);
-            fp->cb.x21BC_callback_Accessory4 = ftFx_CreateBlasterShot;
+            fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialN_CreateBlasterShot;
             fp->mv.fx.SpecialN.isBlasterLoop = false;
             it_802ADDD0(fp->fv.fx.x222C_blasterGObj, 1);
         } else {
@@ -564,7 +565,7 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
             s32 ftKind;
 
             fp->x2208_ftcmd_var2 = 0U;
-            ftFx_FtGetHoldJoint(gobj, &sp2C);
+            ftFx_SpecialN_FtGetHoldJoint(gobj, &sp2C);
             sp2C.z = 0.0f;
 
             if (1.0f == fp->facing_dir) {
@@ -746,19 +747,19 @@ void ftFx_SpecialNEnd_Coll(HSD_GObj* gobj)
 // 0x800E6C7C - Fox & Falco's aerial Blaster Start Collision callback
 void ftFx_SpecialAirNStart_Coll(HSD_GObj* gobj)
 {
-    ftLk_80082B78(gobj);
+    ftCo_ZairCatch_Coll(gobj);
 }
 
 // 0x800E6C9C - Fox & Falco's aerial Blaster Loop Collision callback
 void ftFx_SpecialAirNLoop_Coll(HSD_GObj* gobj)
 {
-    ftLk_80082B78(gobj);
+    ftCo_ZairCatch_Coll(gobj);
 }
 
 // 0x800E6CBC - Fox & Falco's aerial Blaster End Collision callback
 void ftFx_SpecialAirNEnd_Coll(HSD_GObj* gobj)
 {
-    ftLk_80082B78(gobj);
+    ftCo_ZairCatch_Coll(gobj);
 }
 
 // 0x800E6CDC
@@ -817,8 +818,8 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                     Vec3 sp50;
                     Vec3 sp44;
 
-                    ftFx_FtGetHoldJoint(gobj, &sp50);
-                    ftFx_ItGetHoldJoint(gobj, &sp44);
+                    ftFx_SpecialN_FtGetHoldJoint(gobj, &sp50);
+                    ftFx_SpecialN_ItGetHoldJoint(gobj, &sp44);
 
                     sp44.z = 0.0f;
                     sp50.z = 0.0f;

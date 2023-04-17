@@ -9,7 +9,7 @@
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
 
-void ftDk_SpecialLw_StartMotion(HSD_GObj* gobj)
+void ftDk_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.dk.speciallw.x0 = 0;
@@ -17,7 +17,7 @@ void ftDk_SpecialLw_StartMotion(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftDk_SpecialLw_8010DCD8(HSD_GObj* gobj)
+void ftDk_SpecialLwStart_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -29,21 +29,21 @@ void ftDk_SpecialLw_8010DCD8(HSD_GObj* gobj)
     }
 }
 
-void ftDk_SpecialLw_8010DD14(HSD_GObj* gobj) {}
+void ftDk_SpecialLwStart_IASA(HSD_GObj* gobj) {}
 
-void ftDk_SpecialLw_8010DD18(HSD_GObj* gobj)
+void ftDk_SpecialLwStart_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftDk_SpecialLw_8010DD38(HSD_GObj* gobj)
+void ftDk_SpecialLwStart_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
         ft_800CC730(gobj);
     }
 }
 
-void ftDk_SpecialLw_8010DD74(HSD_GObj* gobj)
+void ftDk_SpecialLwLoop_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -56,7 +56,7 @@ void ftDk_SpecialLw_8010DD74(HSD_GObj* gobj)
     }
 }
 
-void ftDk_SpecialLw_8010DDDC(HSD_GObj* gobj)
+void ftDk_SpecialLwLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & 0x200) {
@@ -64,12 +64,12 @@ void ftDk_SpecialLw_8010DDDC(HSD_GObj* gobj)
     }
 }
 
-void ftDk_SpecialLw_8010DDF8(HSD_GObj* gobj)
+void ftDk_SpecialLwLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftDk_SpecialLw_8010DE18(HSD_GObj* gobj)
+void ftDk_SpecialLwLoop_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
         ft_800CC730(gobj);
@@ -109,7 +109,7 @@ void ftDk_SpecialLw_8010DE88(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftDk_Init_8010DB3C;
 }
 
-void ftDk_SpecialLw_8010DF5C(HSD_GObj* gobj)
+void ftDk_SpecialLwEnd_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -121,14 +121,14 @@ void ftDk_SpecialLw_8010DF5C(HSD_GObj* gobj)
     }
 }
 
-void ftDk_SpecialLw_8010DF98(HSD_GObj* gobj) {}
+void ftDk_SpecialLwEnd_IASA(HSD_GObj* gobj) {}
 
-void ftDk_SpecialLw_8010DF9C(HSD_GObj* gobj)
+void ftDk_SpecialLwEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftDk_SpecialLw_8010DFBC(HSD_GObj* gobj)
+void ftDk_SpecialLwEnd_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
         ft_800CC730(gobj);
@@ -140,21 +140,21 @@ void ftDk_SpecialLw_8010DFF8(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 0x181, 0, NULL, 0.0f, 1.0f, 0.0f);
 }
 
-void ftDk_SpecialLw_8010E030(HSD_GObj* gobj)
+void ftDk_MS_386_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
     }
 }
 
-void ftDk_SpecialLw_8010E06C(HSD_GObj* gobj) {}
+void ftDk_MS_386_IASA(HSD_GObj* gobj) {}
 
-void ftDk_SpecialLw_8010E070(HSD_GObj* gobj)
+void ftDk_MS_386_Phys(HSD_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-void ftDk_SpecialLw_8010E090(HSD_GObj* gobj)
+void ftDk_MS_386_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
         ft_8008A2BC(gobj);

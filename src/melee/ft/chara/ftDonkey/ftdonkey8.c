@@ -7,24 +7,24 @@
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
 
-void ftDk_Unk8_800E0568(HSD_GObj* gobj)
+void ftDk_MS_346_IASA(HSD_GObj* gobj)
 {
     if (!ft_80094EA4(gobj)) {
         ft_800CB59C(gobj);
     }
 }
 
-void ftDk_Unk8_800E05A4(HSD_GObj* gobj)
+void ftDk_MS_346_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftDk_Unk8_800E05C4(HSD_GObj* gobj)
+void ftDk_MS_346_Coll(HSD_GObj* gobj)
 {
-    ftDk_Init_800DFA70(gobj);
+    ftDk_MS_341_Coll(gobj);
 }
 
-void ftDk_Unk8_800E05E4(HSD_GObj* gobj)
+void ftDk_MS_346_800E05E4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
@@ -34,7 +34,7 @@ void ftDk_Unk8_800E05E4(HSD_GObj* gobj)
     ftAnim_SetAnimRate(gobj, 0.0f);
 }
 
-void ftDk_Unk8_800E0648(HSD_GObj* gobj)
+void ftDk_MS_349_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

@@ -10,12 +10,12 @@ lbArq_80014ABC:
 .global lbArq_80014AC4
 lbArq_80014AC4:
 /* 80014AC4 000116A4  7C 08 02 A6 */	mflr r0
-/* 80014AC8 000116A8  3C 80 80 43 */	lis r4, lbl_804316C0@ha
+/* 80014AC8 000116A8  3C 80 80 43 */	lis r4, lbArq_804316C0@ha
 /* 80014ACC 000116AC  90 01 00 04 */	stw r0, 4(r1)
 /* 80014AD0 000116B0  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80014AD4 000116B4  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 80014AD8 000116B8  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 80014ADC 000116BC  3B C4 16 C0 */	addi r30, r4, lbl_804316C0@l
+/* 80014ADC 000116BC  3B C4 16 C0 */	addi r30, r4, lbArq_804316C0@l
 /* 80014AE0 000116C0  83 E3 00 04 */	lwz r31, 4(r3)
 /* 80014AE4 000116C4  48 33 28 81 */	bl OSDisableInterrupts
 /* 80014AE8 000116C8  80 1F 00 04 */	lwz r0, 4(r31)
@@ -89,7 +89,7 @@ lbArq_80014AC4:
 .global lbArq_80014BD0
 lbArq_80014BD0:
 /* 80014BD0 000117B0  7C 08 02 A6 */	mflr r0
-/* 80014BD4 000117B4  3D 00 80 43 */	lis r8, lbl_804316C0@ha
+/* 80014BD4 000117B4  3D 00 80 43 */	lis r8, lbArq_804316C0@ha
 /* 80014BD8 000117B8  90 01 00 04 */	stw r0, 4(r1)
 /* 80014BDC 000117BC  94 21 FF A8 */	stwu r1, -0x58(r1)
 /* 80014BE0 000117C0  BE E1 00 34 */	stmw r23, 0x34(r1)
@@ -100,7 +100,7 @@ lbArq_80014BD0:
 /* 80014BF4 000117D4  3B 07 00 00 */	addi r24, r7, 0
 /* 80014BF8 000117D8  38 7A 00 00 */	addi r3, r26, 0
 /* 80014BFC 000117DC  38 9B 00 00 */	addi r4, r27, 0
-/* 80014C00 000117E0  3B E8 16 C0 */	addi r31, r8, lbl_804316C0@l
+/* 80014C00 000117E0  3B E8 16 C0 */	addi r31, r8, lbArq_804316C0@l
 /* 80014C04 000117E4  48 32 FB D9 */	bl DCInvalidateRange
 /* 80014C08 000117E8  48 33 27 5D */	bl OSDisableInterrupts
 /* 80014C0C 000117EC  83 9F 01 E0 */	lwz r28, 0x1e0(r31)
@@ -108,9 +108,9 @@ lbArq_80014BD0:
 /* 80014C14 000117F4  3B C3 00 00 */	addi r30, r3, 0
 /* 80014C18 000117F8  28 1C 00 00 */	cmplwi r28, 0
 /* 80014C1C 000117FC  40 82 00 14 */	bne .L_80014C30
-/* 80014C20 00011800  38 6D 80 D8 */	addi r3, r13, lbl_804D3778@sda21
+/* 80014C20 00011800  38 6D 80 D8 */	addi r3, r13, lbArq_804D3778@sda21
 /* 80014C24 00011804  38 80 00 67 */	li r4, 0x67
-/* 80014C28 00011808  38 AD 80 E0 */	addi r5, r13, lbl_804D3780@sda21
+/* 80014C28 00011808  38 AD 80 E0 */	addi r5, r13, lbArq_804D3780@sda21
 /* 80014C2C 0001180C  48 37 35 F5 */	bl __assert
 .L_80014C30:
 /* 80014C30 00011810  80 1C 00 00 */	lwz r0, 0(r28)
@@ -188,8 +188,8 @@ lbArq_80014BD0:
 .global lbArq_80014D2C
 lbArq_80014D2C:
 /* 80014D2C 0001190C  94 21 FF D8 */	stwu r1, -0x28(r1)
-/* 80014D30 00011910  3C 60 80 43 */	lis r3, lbl_804316C0@ha
-/* 80014D34 00011914  39 43 16 C0 */	addi r10, r3, lbl_804316C0@l
+/* 80014D30 00011910  3C 60 80 43 */	lis r3, lbArq_804316C0@ha
+/* 80014D34 00011914  39 43 16 C0 */	addi r10, r3, lbArq_804316C0@l
 /* 80014D38 00011918  93 E1 00 24 */	stw r31, 0x24(r1)
 /* 80014D3C 0001191C  39 0A 00 30 */	addi r8, r10, 0x30
 /* 80014D40 00011920  39 20 00 00 */	li r9, 0
@@ -258,17 +258,17 @@ lbArq_80014D2C:
 
 .section .bss, "wa"
     .balign 8
-.global lbl_804316C0
-lbl_804316C0:
+.global lbArq_804316C0
+lbArq_804316C0:
     .skip 0x1F0
 
 
 .section .sdata
     .balign 8
-.global lbl_804D3778
-lbl_804D3778:
+.global lbArq_804D3778
+lbArq_804D3778:
     .asciz "lbarq.c"
     .balign 4
-.global lbl_804D3780
-lbl_804D3780:
+.global lbArq_804D3780
+lbArq_804D3780:
     .asciz "rp"

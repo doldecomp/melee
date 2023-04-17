@@ -95,7 +95,7 @@ f32 return_void3(void)
 }
 
 /// Ness's grounded PK Flash Start Motion State handler
-void ftNs_SpecialNStart_Action(HSD_GObj* gobj)
+void ftNs_SpecialNStart_Enter(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -133,7 +133,7 @@ void ftNs_SpecialNStart_Action(HSD_GObj* gobj)
 }
 
 /// Ness's aerial PK Flash Start Motion State handler
-void ftNs_SpecialAirNStart_Action(HSD_GObj* gobj)
+void ftNs_SpecialAirNStart_Enter(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH

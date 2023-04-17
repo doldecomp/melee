@@ -6,10 +6,10 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-void ftMh_Unk29_80155388(HSD_GObj* gobj);
-void ftMh_Unk29_8015541C(HSD_GObj* gobj);
-void ftMh_Unk29_80155460(HSD_GObj* gobj);
-void ftMh_Unk29_80155480(HSD_GObj* gobj);
-void ftMh_Unk29_80155484(HSD_GObj* gobj);
+void ftMh_MS_383_Anim(HSD_GObj* gobj);
+void ftMh_MS_383_IASA(HSD_GObj* gobj);
+void ftMh_MS_383_Phys(HSD_GObj* gobj);
+void ftMh_MS_383_Coll(HSD_GObj* gobj);
+void ftMh_MS_383_80155484(HSD_GObj* gobj);
 
 #endif

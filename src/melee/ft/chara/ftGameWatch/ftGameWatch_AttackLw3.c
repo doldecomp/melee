@@ -11,12 +11,12 @@
 
 #include <dolphin/mtx/types.h>
 
-static void ftGw_ItemManholeExitHitlag(HSD_GObj*);
-static void ftGw_ItemManholeEnterHitlag(HSD_GObj*);
+static void ftGw_AttackLw3_ItemManholeExitHitlag(HSD_GObj*);
+static void ftGw_AttackLw3_ItemManholeEnterHitlag(HSD_GObj*);
 
 // 0x8014AB48
 // https://decomp.me/scratch/x73Hx // Create Manhole Item
-void ftGw_ItemManholeSetup(HSD_GObj* gobj)
+void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj)
 {
     Vec3 sp10;
     HSD_GObj* manholeGObj;
@@ -42,25 +42,25 @@ void ftGw_ItemManholeSetup(HSD_GObj* gobj)
     }
     if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
         if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = ftGw_OnDamage;
+            fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
         }
         if (fp->cb.x21DC_callback_OnTakeDamage == NULL) {
-            fp->cb.x21DC_callback_OnTakeDamage = ftGw_OnDamage;
+            fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
         }
     }
-    fp->cb.x21D4_callback_EnterHitlag = ftGw_ItemManholeEnterHitlag;
-    fp->cb.x21D8_callback_ExitHitlag = ftGw_ItemManholeExitHitlag;
+    fp->cb.x21D4_callback_EnterHitlag = ftGw_AttackLw3_ItemManholeEnterHitlag;
+    fp->cb.x21D8_callback_ExitHitlag = ftGw_AttackLw3_ItemManholeExitHitlag;
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
 // 0x8014AC40
 // https://decomp.me/scratch/JEvaL // Swap item GObj pointers
-void ftGw_ItemManholeRemove(HSD_GObj* gobj)
+void ftGw_AttackLw3_ItemManholeRemove(HSD_GObj* gobj)
 {
     HSD_GObj* manholeGObj;
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftGw_ItemManholeExitHitlag(gobj);
+    ftGw_AttackLw3_ItemManholeExitHitlag(gobj);
     fp->fv.gw.x2250_manholeGObj2 = NULL;
     manholeGObj = fp->fv.gw.x2248_manholeGObj;
     if (manholeGObj != NULL) {
@@ -74,7 +74,7 @@ void ftGw_ItemManholeRemove(HSD_GObj* gobj)
 
 // 0x8014ACB0
 // https://decomp.me/scratch/09CUB // Remove Manhole on damage
-void ftGw_ItemManholeOnDamage(HSD_GObj* gobj)
+void ftGw_AttackLw3_ItemManholeOnDamage(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -85,13 +85,13 @@ void ftGw_ItemManholeOnDamage(HSD_GObj* gobj)
 
     if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
         it_802C6718(fp->fv.gw.x2250_manholeGObj2);
-        ftGw_ItemManholeRemove(gobj);
+        ftGw_AttackLw3_ItemManholeRemove(gobj);
     }
 }
 
 // 0x8014AD38
 // https://decomp.me/scratch/Kw1d3 // Apply hitlag to Manhole item
-static void ftGw_ItemManholeEnterHitlag(HSD_GObj* gobj)
+static void ftGw_AttackLw3_ItemManholeEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
@@ -100,7 +100,7 @@ static void ftGw_ItemManholeEnterHitlag(HSD_GObj* gobj)
 }
 
 // 0x8014AD68 - Remove hitlag from Manhole item
-static void ftGw_ItemManholeExitHitlag(HSD_GObj* gobj)
+static void ftGw_AttackLw3_ItemManholeExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
@@ -111,7 +111,7 @@ static void ftGw_ItemManholeExitHitlag(HSD_GObj* gobj)
 // 0x8014AD98
 // https://decomp.me/scratch/IERdX // Check if Mr. Game & Watch is performing
 // Down Tilt - remove if returns true
-bool ftGw_ItemCheckManholeRemove(HSD_GObj* gobj)
+bool ftGw_AttackLw3_ItemCheckManholeRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->motion_id == ftGw_MS_AttackLw3) {
@@ -123,7 +123,7 @@ bool ftGw_ItemCheckManholeRemove(HSD_GObj* gobj)
 // 0x8014ADB8
 // https://decomp.me/scratch/rGgyM // Mr. Game & Watch's Down Tilt Motion State
 // Handler
-void ftGw_AttackLw3_Action(HSD_GObj* gobj)
+void ftGw_AttackLw3_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -132,7 +132,7 @@ void ftGw_AttackLw3_Action(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftGw_MS_AttackLw3, 0, NULL, 0.0f, 1.0f,
                                   0.0f);
         ftAnim_8006EBA4(gobj);
-        fp->cb.x21BC_callback_Accessory4 = ftGw_ItemManholeSetup;
+        fp->cb.x21BC_callback_Accessory4 = ftGw_AttackLw3_ItemManholeSetup;
     }
 }
 

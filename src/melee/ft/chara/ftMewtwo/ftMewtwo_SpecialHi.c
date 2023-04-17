@@ -63,7 +63,7 @@ void ftMt_SpecialHi_SetEndGFX(HSD_GObj* gobj)
 }
 
 /// Mewtwo's grounded Teleport Start Motion State handler
-void ftMt_SpecialHi_StartMotion(HSD_GObj* gobj)
+void ftMt_SpecialHiStart_Enter(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
 
@@ -84,7 +84,7 @@ void ftMt_SpecialHi_StartMotion(HSD_GObj* gobj)
 }
 
 /// Mewtwo's aerial Teleport Start Motion State handler
-void ftMt_SpecialAirHi_StartMotion(HSD_GObj* gobj)
+void ftMt_SpecialAirHiStart_Enter(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -110,7 +110,7 @@ void ftMt_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 void ftMt_SpecialHiStart_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftMt_SpecialHi_Action(gobj);
+        ftMt_SpecialHi_Enter(gobj);
     }
 }
 
@@ -118,7 +118,7 @@ void ftMt_SpecialHiStart_Anim(HSD_GObj* gobj)
 void ftMt_SpecialAirHiStart_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftMt_SpecialAirHi_Action(gobj);
+        ftMt_SpecialAirHi_Enter(gobj);
     }
 }
 
@@ -221,7 +221,7 @@ void ftMt_SpecialHi_Anim(HSD_GObj* gobj)
     fp->mv.mt.SpecialHi.travelFrames--;
 
     if (fp->mv.mt.SpecialHi.travelFrames <= 0) {
-        ftMt_SpecialHiLost_Action(gobj);
+        ftMt_SpecialHiLost_Enter(gobj);
     }
 }
 
@@ -232,7 +232,7 @@ void ftMt_SpecialAirHi_Anim(HSD_GObj* gobj)
     fp->mv.mt.SpecialHi.travelFrames--;
 
     if (fp->mv.mt.SpecialHi.travelFrames <= 0) {
-        ftMt_SpecialAirHiLost_Action(gobj);
+        ftMt_SpecialAirHiLost_Enter(gobj);
     }
 }
 
@@ -264,7 +264,7 @@ void ftMt_SpecialHi_Coll(HSD_GObj* gobj)
             u32 env_flags = collData->x134_envFlags;
             if (env_flags & MPCOLL_RIGHTWALL || env_flags & MPCOLL_LEFTWALL) {
                 ftCommon_8007D60C(fp1);
-                ftMt_SpecialAirHiLost_Action(gobj);
+                ftMt_SpecialAirHiLost_Enter(gobj);
                 return;
             } else {
                 ftMt_SpecialHi_GroundToAir(gobj);
@@ -272,7 +272,7 @@ void ftMt_SpecialHi_Coll(HSD_GObj* gobj)
         } else {
             u32 env_flags = collData->x134_envFlags;
             if (env_flags & MPCOLL_RIGHTWALL || env_flags & MPCOLL_LEFTWALL) {
-                ftMt_SpecialHiLost_Action(gobj);
+                ftMt_SpecialHiLost_Enter(gobj);
             }
         }
     }
@@ -328,7 +328,7 @@ void ftMt_SpecialAirHi_Coll(HSD_GObj* gobj)
              DEG_TO_RAD *
                  (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP)))
         {
-            ftMt_SpecialAirHiLost_Action(gobj);
+            ftMt_SpecialAirHiLost_Enter(gobj);
         }
 
         if (collData->x134_envFlags & MPCOLL_RIGHTWALL &&
@@ -337,7 +337,7 @@ void ftMt_SpecialAirHi_Coll(HSD_GObj* gobj)
              DEG_TO_RAD *
                  (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP)))
         {
-            ftMt_SpecialAirHiLost_Action(gobj);
+            ftMt_SpecialAirHiLost_Enter(gobj);
         }
 
         if (collData->x134_envFlags & MPCOLL_LEFTWALL &&
@@ -346,7 +346,7 @@ void ftMt_SpecialAirHi_Coll(HSD_GObj* gobj)
                 DEG_TO_RAD *
                     (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP))
         {
-            ftMt_SpecialAirHiLost_Action(gobj);
+            ftMt_SpecialAirHiLost_Enter(gobj);
         }
     }
 }
@@ -404,9 +404,9 @@ static inline void ftMewtwo_SpecialHi_SetVars(HSD_GObj* gobj)
 }
 
 /// Mewtwo's grounded Teleport Zoom Motion State handler
-void ftMt_SpecialHi_Action(HSD_GObj* gobj)
+void ftMt_SpecialHi_Enter(HSD_GObj* gobj)
 {
-    /// @todo Shared @c inline with #ftMt_SpecialAirHi_Action.
+    /// @todo Shared @c inline with #ftMt_SpecialAirHi_Enter.
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
     CollData* collData = collData = getFtColl(fp);
@@ -471,13 +471,13 @@ void ftMt_SpecialHi_Action(HSD_GObj* gobj)
     }
 
     ftCommon_8007D60C(fp);
-    ftMt_SpecialAirHi_Action(gobj);
+    ftMt_SpecialAirHi_Enter(gobj);
 }
 
 static f32 const stick_epsilon = 0.001;
 
 /// Mewtwo's aerial Teleport Zoom Motion State handler
-void ftMt_SpecialAirHi_Action(HSD_GObj* gobj)
+void ftMt_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
@@ -647,7 +647,7 @@ static inline void ftMewtwo_SpecialHiLost_SetVars(HSD_GObj* gobj)
 }
 
 /// Mewtwo's grounded Teleport End Motion State handler
-void ftMt_SpecialHiLost_Action(HSD_GObj* gobj)
+void ftMt_SpecialHiLost_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
@@ -663,7 +663,7 @@ void ftMt_SpecialHiLost_Action(HSD_GObj* gobj)
 }
 
 /// Mewtwo's aerial Teleport End Motion State handler
-void ftMt_SpecialAirHiLost_Action(HSD_GObj* gobj)
+void ftMt_SpecialAirHiLost_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);

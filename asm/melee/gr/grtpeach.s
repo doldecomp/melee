@@ -65,8 +65,8 @@ grTPeach_80222958:
 /* 80222970 0021F550  93 81 00 10 */	stw r28, 0x10(r1)
 /* 80222974 0021F554  3B 83 00 00 */	addi r28, r3, 0
 /* 80222978 0021F558  1C 1C 00 14 */	mulli r0, r28, 0x14
-/* 8022297C 0021F55C  3C 60 80 3F */	lis r3, lbl_803E90F0@ha
-/* 80222980 0021F560  3B E3 90 F0 */	addi r31, r3, lbl_803E90F0@l
+/* 8022297C 0021F55C  3C 60 80 3F */	lis r3, grTPe_803E90F0@ha
+/* 80222980 0021F560  3B E3 90 F0 */	addi r31, r3, grTPe_803E90F0@l
 /* 80222984 0021F564  38 7C 00 00 */	addi r3, r28, 0
 /* 80222988 0021F568  7F BF 02 14 */	add r29, r31, r0
 /* 8022298C 0021F56C  4B F9 EB 45 */	bl Ground_801C14D0
@@ -99,7 +99,7 @@ grTPeach_80222958:
 /* 802229F0 0021F5D0  41 82 00 2C */	beq .L_80222A1C
 /* 802229F4 0021F5D4  38 7E 00 00 */	addi r3, r30, 0
 /* 802229F8 0021F5D8  38 A0 00 04 */	li r5, 4
-/* 802229FC 0021F5DC  48 16 D3 59 */	bl func_8038FD54
+/* 802229FC 0021F5DC  48 16 D3 59 */	bl HSD_GObjProc_8038FD54
 /* 80222A00 0021F5E0  48 00 00 1C */	b .L_80222A1C
 .L_80222A04:
 /* 80222A04 0021F5E4  38 DC 00 00 */	addi r6, r28, 0
@@ -236,8 +236,8 @@ grTPeach_80222B90:
 
 .section .data
     .balign 8
-.global lbl_803E90F0
-lbl_803E90F0:
+.global grTPe_803E90F0
+grTPe_803E90F0:
     .4byte grTPeach_80222A40
     .4byte grTPeach_80222A6C
     .4byte grTPeach_80222A74
@@ -258,16 +258,16 @@ lbl_803E90F0:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_803E9140
-lbl_803E9140:
+.global grTPe_803E9140
+grTPe_803E9140:
     .4byte 0x2F477254
     .4byte 0x50652E64
     .4byte 0x61740000
-.global lbl_803E914C
-lbl_803E914C:
+.global grTPe_803E914C
+grTPe_803E914C:
     .4byte 0x00000037
-    .4byte lbl_803E90F0
-    .4byte lbl_803E9140
+    .4byte grTPe_803E90F0
+    .4byte grTPe_803E9140
     .4byte grTPeach_802228B8
     .4byte grTPeach_802228B4
     .4byte grTPeach_80222928

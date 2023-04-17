@@ -50,7 +50,7 @@ void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
-void ftFx_SpecialHi_StartMotion(HSD_GObj* gobj)
+void ftFx_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftFoxAttributes* foxAttrs;
@@ -69,7 +69,7 @@ void ftFx_SpecialHi_StartMotion(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialHi_CreateChargeGFX;
 }
 
-void ftFx_SpecialAirHi_StartMotion(HSD_GObj* gobj)
+void ftFx_SpecialAirHiStart_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
@@ -100,7 +100,7 @@ void ftFx_SpecialHiHold_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if ((s32) fp->ground_or_air == GA_Air) {
-            ftFx_SpecialAirHi_Action(gobj);
+            ftFx_SpecialAirHi_Enter(gobj);
             return;
         }
 
@@ -114,7 +114,7 @@ void ftFx_SpecialHiHoldAir_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if ((s32) fp->ground_or_air == GA_Air) {
-            ftFx_SpecialAirHi_Action(gobj);
+            ftFx_SpecialAirHi_Enter(gobj);
             return;
         }
         ftFx_SpecialAirHi_AirToGround(gobj);
@@ -344,7 +344,7 @@ void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
                    (0.01745329238474369f *
                     (90.0f + foxAttrs->x94_FOX_FIREFOX_BOUND_ANGLE)))))
             {
-                ftFx_SpecialHiBound_Action(gobj);
+                ftFx_SpecialHiBound_Enter(gobj);
                 return;
             } else {
                 goto facingDir;
@@ -491,13 +491,13 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
         }
     }
     ftCommon_8007D60C(fp);
-    ftFx_SpecialAirHi_Action(gobj);
+    ftFx_SpecialAirHi_Enter(gobj);
 }
 
 // 0x800E7C98
 // https://decomp.me/scratch/k5tbJ // Fox & Falco's aerial Firefox/Firebird
 // Launch Motion State handler
-void ftFx_SpecialAirHi_Action(HSD_GObj* gobj)
+void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     ftFoxAttributes* foxAttrs;
     attr* ftAttrs;
@@ -644,7 +644,7 @@ void ftFx_SpecialHiFall_Coll(HSD_GObj* gobj)
 #endif
 
     if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_BOTH) != false) {
-        ftFx_SpecialHiFall_Action(gobj);
+        ftFx_SpecialHiFall_Enter(gobj);
         return;
     }
     if (ftCliffCommon_80081298(gobj)) {
@@ -655,7 +655,7 @@ void ftFx_SpecialHiFall_Coll(HSD_GObj* gobj)
 // 0x800E7FF0
 // https://decomp.me/scratch/IQ1YX // Fox & Falco's aerial Firefox/Firebird End
 // Motion State handler
-void ftFx_SpecialHiFall_Action(HSD_GObj* gobj)
+void ftFx_SpecialHiFall_Enter(HSD_GObj* gobj)
 {
     ftCommon_8007D7FC(GET_FIGHTER(gobj));
     Fighter_ChangeMotionState(
@@ -808,7 +808,7 @@ inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* gobj)
 // 0x800E82E4
 // https://decomp.me/scratch/ckSnm // Fox & Falco's Firefox/Firebird Rebound
 // Motion State handler
-void ftFx_SpecialHiBound_Action(HSD_GObj* gobj)
+void ftFx_SpecialHiBound_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;

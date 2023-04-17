@@ -9,7 +9,7 @@
 #include <dolphin/os/os.h>
 #include <baselib/gobjgxlink.h>
 
-static StageCallbacks lbl_803E6278[3] = {
+static StageCallbacks grEF1_803E6278[3] = {
     { grFigure1_8020E168, grFigure1_8020E194, grFigure1_8020E19C,
       grFigure1_8020E1A0, 0 },
     { grFigure1_8020E1A4, grFigure1_8020E1D0, grFigure1_8020E1D8,
@@ -18,9 +18,9 @@ static StageCallbacks lbl_803E6278[3] = {
       grFigure1_8020E25C, 0 }
 };
 
-StageData lbl_803E62C0 = {
+StageData grEF1_803E62C0 = {
     (1 << 2) | (1 << 6),
-    lbl_803E6278,
+    grEF1_803E6278,
     "/GrEF1.dat",
     grFigure1_8020DFE0,
     grFigure1_8020DFDC,
@@ -34,7 +34,7 @@ StageData lbl_803E62C0 = {
     0,
 };
 
-unk_t lbl_804D6A70;
+unk_t grEF1_804D6A70;
 
 extern StageInfo stage_info;
 
@@ -42,7 +42,7 @@ static void grFigure1_8020DFDC(int n) {}
 
 static void grFigure1_8020DFE0(void)
 {
-    lbl_804D6A70 = Ground_801C49F8();
+    grEF1_804D6A70 = Ground_801C49F8();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grFigure1_8020E080(0);
@@ -67,7 +67,7 @@ static bool grFigure1_8020E078(void)
 static HSD_GObj* grFigure1_8020E080(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &lbl_803E6278[gobj_id];
+    StageCallbacks* callbacks = &grEF1_803E6278[gobj_id];
 
     gobj = Ground_801C14D0(gobj_id);
 
@@ -83,7 +83,7 @@ static HSD_GObj* grFigure1_8020E080(int gobj_id)
             callbacks->callback0(gobj);
         }
         if (callbacks->callback2 != NULL) {
-            func_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grfigure1.c", 194,

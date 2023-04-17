@@ -17,8 +17,8 @@ extern HSD_TObj* tobj_head;
 
 extern char lbl_804055B8[];
 
-char lbl_804D5C90[7] = "tobj.c\0";
-char lbl_804D5C98[5] = "tobj\0";
+char HSD_TObj_804D5C90[7] = "tobj.c\0";
+char HSD_TObj_804D5C98[5] = "tobj\0";
 
 void HSD_TObjRemoveAnim(HSD_TObj* tobj)
 {
@@ -140,7 +140,7 @@ static void TObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
     case HSD_A_T_TIMG: {
         int n;
         if (tobj->imagetbl == NULL) {
-            __assert(lbl_804D5C90, 276, "tobj->imagetbl");
+            __assert(HSD_TObj_804D5C90, 276, "tobj->imagetbl");
         }
         n = (int) val->fv;
         if (tobj->imagetbl[n]) {
@@ -286,7 +286,7 @@ HSD_TObj* HSD_TObjLoadDesc(HSD_TObjDesc* td)
         } else {
             tobj = hsdNew(info);
             if (tobj == NULL) {
-                __assert(lbl_804D5C90, 468, lbl_804D5C98);
+                __assert(HSD_TObj_804D5C90, 468, HSD_TObj_804D5C98);
             }
         }
         HSD_TOBJ_METHOD(tobj)->load(tobj, td);
@@ -337,7 +337,7 @@ END:
     return tp;
 }
 
-char lbl_8040562C[23] = "unexpected texmap id.\n\0";
+char HSD_TObj_8040562C[23] = "unexpected texmap id.\n\0";
 
 #ifdef MUST_MATCH
 #pragma push
@@ -364,7 +364,7 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
     case GX_TEXMAP7:
         return GX_PTTEXMTX7;
     default:
-        HSD_Panic(lbl_804D5C90, 574, lbl_8040562C);
+        HSD_Panic(HSD_TObj_804D5C90, 574, HSD_TObj_8040562C);
     }
     return 0;
 }
@@ -392,7 +392,7 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
     }
 
     if (!no_assert) {
-        __assert(lbl_804D5C90, 589, "tobj->repeat_s && tobj->repeat_t");
+        __assert(HSD_TObj_804D5C90, 589, "tobj->repeat_s && tobj->repeat_t");
     }
 
     scale.x = __fabsf(tobj->scale.x) < FLT_EPSILON

@@ -9,11 +9,11 @@
 
 #include <trigf.h>
 
-void ftSs_Unk2_80128944(HSD_GObj* gobj, f32 farg1, f32 farg2)
+void ftSs_Init_80128944(HSD_GObj* gobj, f32 farg1, f32 farg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* attr = fp->x2D4_specialAttributes;
-    f32 float_result = ftSs_Unk2_80128AC8(gobj, farg1, farg2);
+    f32 float_result = ftSs_Init_80128AC8(gobj, farg1, farg2);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -28,16 +28,16 @@ void ftSs_Unk2_80128944(HSD_GObj* gobj, f32 farg1, f32 farg2)
         case 4:
             if ((fp->x2070.x2073 == 0x14) || ((fp->x2070.x2071_b5) == 0)) {
                 if (fp->x5F5 == 2) {
-                    ftSs_Unk2_80128B1C(gobj, float_result, attr->x0, 1.0f);
+                    ftSs_Init_80128B1C(gobj, float_result, attr->x0, 1.0f);
                 } else {
-                    ftSs_Unk2_80128B1C(gobj, float_result, 0.0f, 1.0f);
+                    ftSs_Init_80128B1C(gobj, float_result, 0.0f, 1.0f);
                 }
             }
         }
     }
 }
 
-bool ftSs_Unk2_80128A1C(HSD_GObj* gobj, unk_t arg1, f32 farg1)
+bool ftSs_Init_80128A1C(HSD_GObj* gobj, unk_t arg1, f32 farg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     int i;
@@ -54,7 +54,7 @@ bool ftSs_Unk2_80128A1C(HSD_GObj* gobj, unk_t arg1, f32 farg1)
     return false;
 }
 
-f32 ftSs_Unk2_80128AC8(HSD_GObj* gobj, f32 farg1, f32 farg2)
+f32 ftSs_Init_80128AC8(HSD_GObj* gobj, f32 farg1, f32 farg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* attr = getFtSpecialAttrs(fp);
@@ -80,7 +80,7 @@ inline void ftSamus_80128B1C_inner(HSD_GObj* gobj, f32 angle)
     ftCommon_8007D440(fp, ftAttr->x17C_AerialDriftMax * samus_attr->x10);
 }
 
-void ftSs_Unk2_80128B1C(HSD_GObj* gobj, f32 angle, f32 arg9, f32 argA)
+void ftSs_Init_80128B1C(HSD_GObj* gobj, f32 angle, f32 arg9, f32 argA)
 {
     Fighter* fp;
     Fighter* fighter2;
@@ -103,15 +103,15 @@ void ftSs_Unk2_80128B1C(HSD_GObj* gobj, f32 angle, f32 arg9, f32 argA)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftSs_Unk2_80128C04(HSD_GObj* gobj)
+void ftSs_SpecialLw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->x2200_ftcmd_var0) && (!fp->mv.ss.unk2.x0)) {
-        ftSs_Unk6_8012AEBC(gobj);
+        ftSs_SpecialLw_8012AEBC(gobj);
         fp->mv.ss.unk2.x0 = 1;
     }
     if ((!fp->x2200_ftcmd_var0) && (fp->mv.ss.unk2.x0)) {
-        ftSs_Unk6_8012AF38(gobj);
+        ftSs_SpecialLw_8012AF38(gobj);
         fp->mv.ss.unk2.x0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -119,15 +119,15 @@ void ftSs_Unk2_80128C04(HSD_GObj* gobj)
     }
 }
 
-void ftSs_Unk2_80128CA0(HSD_GObj* gobj)
+void ftSs_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->x2200_ftcmd_var0) && (!fp->mv.ss.unk2.x0)) {
-        ftSs_Unk6_8012AEBC(gobj);
+        ftSs_SpecialLw_8012AEBC(gobj);
         fp->mv.ss.unk2.x0 = 1;
     }
     if ((!fp->x2200_ftcmd_var0) && (fp->mv.ss.unk2.x0)) {
-        ftSs_Unk6_8012AF38(gobj);
+        ftSs_SpecialLw_8012AF38(gobj);
         fp->mv.ss.unk2.x0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -135,7 +135,7 @@ void ftSs_Unk2_80128CA0(HSD_GObj* gobj)
     }
 }
 
-void ftSs_Unk2_80128D3C(HSD_GObj* gobj)
+void ftSs_SpecialLw_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
@@ -193,12 +193,12 @@ void ftSs_Unk2_80128D3C(HSD_GObj* gobj)
     }
 }
 
-void ftSs_Unk2_80128E68(HSD_GObj* gobj)
+void ftSs_SpecialAirLw_IASA(HSD_GObj* gobj)
 {
     ft_800CCAAC(gobj);
 }
 
-void ftSs_Unk2_80128E88(HSD_GObj* gobj)
+void ftSs_SpecialLw_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
@@ -220,7 +220,7 @@ void ftSs_Unk2_80128E88(HSD_GObj* gobj)
     }
 }
 
-void ftSs_Unk2_80128EF8(HSD_GObj* gobj)
+void ftSs_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
@@ -238,7 +238,7 @@ void ftSs_Unk2_80128EF8(HSD_GObj* gobj)
                       ftAttr->x158_JumpHMaxVelocity * samus_attr->x10);
 }
 
-void ftSs_Unk2_80128F60(HSD_GObj* gobj)
+void ftSs_SpecialLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
@@ -253,14 +253,14 @@ void ftSs_Unk2_80128F60(HSD_GObj* gobj)
         if (!ft_80082888(gobj,
                          (ftCollisionBox*) &samus_attr->height_attributes))
         {
-            ftSs_Unk2_80129048(gobj);
+            ftSs_SpecialLw_80129048(gobj);
         }
     } else if (!ft_800827A0(gobj)) {
-        ftSs_Unk2_80129048(gobj);
+        ftSs_SpecialLw_80129048(gobj);
     }
 }
 
-void ftSs_Unk2_80128FD4(HSD_GObj* gobj)
+void ftSs_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
@@ -274,14 +274,14 @@ void ftSs_Unk2_80128FD4(HSD_GObj* gobj)
         if (ft_800824A0(gobj,
                         (ftCollisionBox*) &samus_attr->height_attributes))
         {
-            ftSs_Unk2_801290A4(gobj);
+            ftSs_SpecialLw_801290A4(gobj);
         }
     } else if (ft_80081D0C(gobj)) {
-        ftSs_Unk2_801290A4(gobj);
+        ftSs_SpecialLw_801290A4(gobj);
     }
 }
 
-void ftSs_Unk2_80129048(HSD_GObj* gobj)
+void ftSs_SpecialLw_80129048(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
@@ -289,7 +289,7 @@ void ftSs_Unk2_80129048(HSD_GObj* gobj)
                               fp->x89C_frameSpeedMul, 0.0f);
 }
 
-void ftSs_Unk2_801290A4(HSD_GObj* gobj)
+void ftSs_SpecialLw_801290A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
@@ -297,7 +297,7 @@ void ftSs_Unk2_801290A4(HSD_GObj* gobj)
                               fp->x89C_frameSpeedMul, 0.0f);
 }
 
-int ftSs_Unk2_80129100(HSD_GObj* gobj, s32* arg1, s32* arg2)
+int ftSs_SpecialLw_80129100(HSD_GObj* gobj, s32* arg1, s32* arg2)
 {
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -320,7 +320,7 @@ int ftSs_Unk2_80129100(HSD_GObj* gobj, s32* arg1, s32* arg2)
     return -1;
 }
 
-s32 ftSs_Unk2_80129158(HSD_GObj* gobj)
+s32 ftSs_SpecialLw_80129158(HSD_GObj* gobj)
 {
     if (gobj) {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -343,7 +343,7 @@ s32 ftSs_Unk2_80129158(HSD_GObj* gobj)
     return 1;
 }
 
-s32 ftSs_Unk2_801291A8(HSD_GObj* gobj)
+s32 ftSs_SpecialN_801291A8(HSD_GObj* gobj)
 {
     if (gobj) {
         Fighter* fp = GET_FIGHTER(gobj);

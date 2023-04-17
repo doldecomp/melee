@@ -40,19 +40,19 @@ u32 ftDr_Init_801498EC(HSD_GObj*);
 void ftDr_Init_80149910(HSD_GObj*);
 
 // ftdrmario_2.c
-void ftDr_Unk2_80149954(HSD_GObj*);
-void ftDr_Unk2_80149A6C(HSD_GObj*);
-void ftDr_Unk2_80149A8C(HSD_GObj*);
-void ftDr_Unk2_80149AAC(HSD_GObj*);
+void ftDr_Appeal_Anim(HSD_GObj*);
+void ftDr_Appeal_IASA(HSD_GObj*);
+void ftDr_Appeal_Phys(HSD_GObj*);
+void ftDr_Appeal_Coll(HSD_GObj*);
 
-void ftDr_Unk2_80149954(HSD_GObj*);
-void ftDr_Unk2_80149A6C(HSD_GObj*);
-void ftDr_Unk2_80149A8C(HSD_GObj*);
-void ftDr_Unk2_80149AAC(HSD_GObj*);
-void ftDr_Unk2_80149954(HSD_GObj*);
-void ftDr_Unk2_80149A6C(HSD_GObj*);
-void ftDr_Unk2_80149A8C(HSD_GObj*);
-void ftDr_Unk2_80149AAC(HSD_GObj*);
+void ftDr_Appeal_Anim(HSD_GObj*);
+void ftDr_Appeal_IASA(HSD_GObj*);
+void ftDr_Appeal_Phys(HSD_GObj*);
+void ftDr_Appeal_Coll(HSD_GObj*);
+void ftDr_Appeal_Anim(HSD_GObj*);
+void ftDr_Appeal_IASA(HSD_GObj*);
+void ftDr_Appeal_Phys(HSD_GObj*);
+void ftDr_Appeal_Coll(HSD_GObj*);
 void ftMr_SpecialN_Anim(HSD_GObj*);
 void ftMr_SpecialN_IASA(HSD_GObj*);
 void ftMr_SpecialN_Phys(HSD_GObj*);

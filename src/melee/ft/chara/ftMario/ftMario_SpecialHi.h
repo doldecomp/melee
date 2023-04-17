@@ -3,8 +3,8 @@
 
 #include <baselib/forward.h>
 
-void ftMr_SpecialHi_StartMotion(HSD_GObj* gobj);
-void ftMr_SpecialAirHi_StartMotion(HSD_GObj* gobj);
+void ftMr_SpecialHi_Enter(HSD_GObj* gobj);
+void ftMr_SpecialAirHi_Enter(HSD_GObj* gobj);
 void ftMr_SpecialHi_Anim(HSD_GObj* gobj);
 void ftMr_SpecialAirHi_Anim(HSD_GObj* gobj);
 void ftMr_SpecialHi_IASA(HSD_GObj* gobj);

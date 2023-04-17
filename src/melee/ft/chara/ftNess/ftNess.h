@@ -252,7 +252,7 @@ void ftNs_AttackHi4_YoyoItemSetUnk2(HSD_GObj* gobj);
 // Up Smash Motion State hook
 
 /// Ness's Up Smash Motion State handler
-void ftNs_AttackHi4_Action(HSD_GObj* gobj);
+void ftNs_AttackHi4_Enter(HSD_GObj* gobj);
 
 // Start rehit timer if target is hit
 
@@ -267,42 +267,42 @@ void ftNs_AttackHi4_Anim(HSD_GObj* gobj);
 void ftNs_AttackHi4_IASA(HSD_GObj* gobj);
 void ftNs_AttackHi4_Phys(HSD_GObj* gobj);
 void ftNs_AttackHi4_Coll(HSD_GObj* gobj);
-void ftNs_AttackHi4_Charge_Anim(HSD_GObj* gobj);
-void ftNs_AttackHi4_Charge_IASA(HSD_GObj* gobj);
-void ftNs_AttackHi4_Charge_Phys(HSD_GObj* gobj);
-void ftNs_AttackHi4_Charge_Coll(HSD_GObj* gobj);
-void ftNs_AttackHi4_Charge_Action(HSD_GObj* gobj);
-void ftNs_AttackHi4_Release_Anim(HSD_GObj* gobj);
-void ftNs_AttackHi4_Release_IASA(HSD_GObj* gobj);
-void ftNs_AttackHi4_Release_Phys(HSD_GObj* gobj);
-void ftNs_AttackHi4_Release_Coll(HSD_GObj* gobj);
+void ftNs_AttackHi4Charge_Anim(HSD_GObj* gobj);
+void ftNs_AttackHi4Charge_IASA(HSD_GObj* gobj);
+void ftNs_AttackHi4Charge_Phys(HSD_GObj* gobj);
+void ftNs_AttackHi4Charge_Coll(HSD_GObj* gobj);
+void ftNs_AttackHi4Charge_Enter(HSD_GObj* gobj);
+void ftNs_AttackHi4Release_Anim(HSD_GObj* gobj);
+void ftNs_AttackHi4Release_IASA(HSD_GObj* gobj);
+void ftNs_AttackHi4Release_Phys(HSD_GObj* gobj);
+void ftNs_AttackHi4Release_Coll(HSD_GObj* gobj);
 
 /// Ness's Up Smash Post-Charge Motion State handler
-void ftNs_AttackHi4_Release_Action(HSD_GObj* gobj);
+void ftNs_AttackHi4Release_Enter(HSD_GObj* gobj);
 
 // Down Smash callbacks (AttackLw4)
 
-void ftNs_AttackLw4_Action(HSD_GObj* gobj);
+void ftNs_AttackLw4_Enter(HSD_GObj* gobj);
 void ftNs_AttackLw4_Anim(HSD_GObj* gobj);
 void ftNs_AttackLw4_IASA(HSD_GObj* gobj);
 void ftNs_AttackLw4_Phys(HSD_GObj* gobj);
 void ftNs_AttackLw4_Coll(HSD_GObj* gobj);
-void ftNs_AttackLw4_Charge_Anim(HSD_GObj* gobj);
-void ftNs_AttackLw4_Charge_IASA(HSD_GObj* gobj);
-void ftNs_AttackLw4_Charge_Phys(HSD_GObj* gobj);
-void ftNs_AttackLw4_Charge_Coll(HSD_GObj* gobj);
-void ftNs_AttackLw4_Charge_Action(HSD_GObj* gobj);
-void ftNs_AttackLw4_Release_Anim(HSD_GObj* gobj);
-void ftNs_AttackLw4_Release_IASA(HSD_GObj* gobj);
-void ftNs_AttackLw4_Release_Phys(HSD_GObj* gobj);
-void ftNs_AttackLw4_Release_Coll(HSD_GObj* gobj);
-void ftNs_AttackLw4_Release_Action(HSD_GObj* gobj);
+void ftNs_AttackLw4Charge_Anim(HSD_GObj* gobj);
+void ftNs_AttackLw4Charge_IASA(HSD_GObj* gobj);
+void ftNs_AttackLw4Charge_Phys(HSD_GObj* gobj);
+void ftNs_AttackLw4Charge_Coll(HSD_GObj* gobj);
+void ftNs_AttackLw4Charge_Enter(HSD_GObj* gobj);
+void ftNs_AttackLw4Release_Anim(HSD_GObj* gobj);
+void ftNs_AttackLw4Release_IASA(HSD_GObj* gobj);
+void ftNs_AttackLw4Release_Phys(HSD_GObj* gobj);
+void ftNs_AttackLw4Release_Coll(HSD_GObj* gobj);
+void ftNs_AttackLw4Release_Enter(HSD_GObj* gobj);
 
 // PK Fire callbacks (SpecialS)
 
-void ftNs_SpecialS__ItemPKFireSpawn(HSD_GObj* gobj);
-void ftNs_SpecialS_StartMotion(HSD_GObj* gobj);
-void ftNs_SpecialAirS_Action(HSD_GObj* gobj);
+void ftNs_SpecialS_ItemPKFireSpawn(HSD_GObj* gobj);
+void ftNs_SpecialS_Enter(HSD_GObj* gobj);
+void ftNs_SpecialAirS_Enter(HSD_GObj* gobj);
 void ftNs_SpecialS_Anim(HSD_GObj* gobj);
 void ftNs_SpecialAirS_Anim(HSD_GObj* gobj);
 void ftNs_SpecialS_Phys(HSD_GObj* gobj);
@@ -315,8 +315,8 @@ void ftNs_SpecialAirS_Coll(HSD_GObj* gobj);
 bool ftNs_SpecialN_CheckSpecialNHold(HSD_GObj* gobj);
 void ftNs_SpecialN_SetNULL(HSD_GObj* gobj);
 void ftNs_SpecialN_ItemPKFlushSetNULL(HSD_GObj* gobj);
-void ftNs_SpecialNStart_Action(HSD_GObj* gobj);
-void ftNs_SpecialAirNStart_Action(HSD_GObj* gobj);
+void ftNs_SpecialNStart_Enter(HSD_GObj* gobj);
+void ftNs_SpecialAirNStart_Enter(HSD_GObj* gobj);
 void ftNs_SpecialNStart_Anim(HSD_GObj* gobj);
 void ftNs_SpecialNHold_Anim(HSD_GObj* gobj);
 void ftNs_SpecialNEnd_Anim(HSD_GObj* gobj);
@@ -351,10 +351,10 @@ void ftNs_SpecialHi_ItemPKThunderRemove(HSD_GObj* gobj);
 void ftNs_SpecialHi_TakeDamage(HSD_GObj* gobj);
 void ftNs_SpecialHi_ItemPKThunderCheckOwn(HSD_GObj* gobj, HSD_GObj* gobj2);
 void ftNs_SpecialAirHi_CollisionModVel(HSD_GObj* gobj, CollData* coll_data);
-void ftNs_SpecialHi_StartMotion(HSD_GObj* gobj);
-void ftNs_SpecialAirHiStart_Action(HSD_GObj* gobj);
-void ftNs_SpecialHi_Action(HSD_GObj* gobj);
-void ftNs_SpecialAirHi_Action(HSD_GObj* gobj);
+void ftNs_SpecialHiStart_Enter(HSD_GObj* gobj);
+void ftNs_SpecialAirHiStart_Enter(HSD_GObj* gobj);
+void ftNs_SpecialHi_Enter(HSD_GObj* gobj);
+void ftNs_SpecialAirHi_Enter(HSD_GObj* gobj);
 void ftNs_SpecialHiStart_Anim(HSD_GObj* gobj);
 void ftNs_SpecialHiHold_Anim(HSD_GObj* gobj);
 void ftNs_SpecialHiEnd_Anim(HSD_GObj* gobj);
@@ -394,8 +394,8 @@ void ftNs_SpecialAirHiRebound_Coll(HSD_GObj* gobj);
 
 // PSI Magnet callbacks (SpecialLw)
 
-void ftNs_SpecialLwStart_Action(HSD_GObj* gobj);
-void ftNs_SpecialAirLwStart_Action(HSD_GObj* gobj);
+void ftNs_SpecialLwStart_Enter(HSD_GObj* gobj);
+void ftNs_SpecialAirLwStart_Enter(HSD_GObj* gobj);
 void ftNs_SpecialLwStart_IASA(HSD_GObj* gobj);
 void ftNs_SpecialAirLwStart_IASA(HSD_GObj* gobj);
 void ftNs_SpecialLwStart_Phys(HSD_GObj* gobj);
@@ -413,8 +413,8 @@ void ftNs_SpecialLwHold_Coll(HSD_GObj* gobj);
 void ftNs_SpecialAirLwHold_Coll(HSD_GObj* gobj);
 void ftNs_SpecialLwHold_GroundToAir(HSD_GObj* gobj);
 void ftNs_SpecialAirLwHold_AirToGround(HSD_GObj* gobj);
-void ftNs_SpecialLwHold_Action(HSD_GObj* gobj);
-void ftNs_SpecialAirLwHold_Action(HSD_GObj* gobj);
+void ftNs_SpecialLwHold_Enter(HSD_GObj* gobj);
+void ftNs_SpecialAirLwHold_Enter(HSD_GObj* gobj);
 void ftNs_SpecialLwTurn_Anim(HSD_GObj* gobj);
 void ftNs_SpecialAirLwTurn_Anim(HSD_GObj* gobj);
 void ftNs_SpecialLwTurn_IASA(HSD_GObj* gobj);
@@ -447,7 +447,7 @@ void ftNs_SpecialLwEnd_Coll(HSD_GObj* gobj);
 void ftNs_SpecialAirLwEnd_Coll(HSD_GObj* gobj);
 void ftNs_SpecialLwEnd_GroundToAir(HSD_GObj* gobj);
 void ftNs_SpecialAirLwEnd_AirToGround(HSD_GObj* gobj);
-void ftNs_SpecialLwEnd_Action(HSD_GObj* gobj);
-void ftNs_SpecialAirLwEnd_Action(HSD_GObj* gobj);
+void ftNs_SpecialLwEnd_Enter(HSD_GObj* gobj);
+void ftNs_SpecialAirLwEnd_Enter(HSD_GObj* gobj);
 
 #endif

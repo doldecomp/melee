@@ -173,7 +173,7 @@ bool ftFx_AppealS_CheckIfUsed(Fighter* fp);
 bool ftFx_AppealS_CheckInput(HSD_GObj* gobj);
 
 /// Fox & Falco's Special Taunt Motion State handler
-void ftFx_AppealS_Action(HSD_GObj* gobj);
+void ftFx_AppealS_Enter(HSD_GObj* gobj);
 
 /// Fox & Falco's Special Taunt Start Animation callback
 void ftFx_AppealS_Anim(HSD_GObj* gobj);
@@ -190,21 +190,21 @@ void ftFx_AppealS_Coll(HSD_GObj* gobj);
 // Neutral Special - Blaster (SpecialN)
 
 /// Get Fox/Falco's Item Hold Bone Position for Blaster GFX
-void ftFx_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos);
+void ftFx_SpecialN_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos);
 
 /// Get Fox/Falco's Item Hold Bone Position for Blaster GFX again?
 /// @remarks Used in Blaster's item code.
-void ftFx_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos);
+void ftFx_SpecialN_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos);
 
 void ftFx_SpecialN_OnChangeAction(HSD_GObj* gobj);
-bool ftFx_CheckRemoveBlaster(HSD_GObj* gobj);
-s32 ftFx_GetBlasterAction(HSD_GObj* gobj);
-bool ftFx_CheckBlasterAction(HSD_GObj* gobj);
-void ftFx_ClearBlaster(HSD_GObj* gobj);
-void ftFx_RemoveBlaster(HSD_GObj* gobj);
-void ftFx_CreateBlasterShot(HSD_GObj* gobj);
-void ftFx_SpecialN_StartMotion(HSD_GObj* gobj);
-void ftFx_SpecialAirN_StartMotion(HSD_GObj* gobj);
+bool ftFx_SpecialN_CheckRemoveBlaster(HSD_GObj* gobj);
+s32 ftFx_SpecialN_GetBlasterAction(HSD_GObj* gobj);
+bool ftFx_SpecialN_CheckBlasterAction(HSD_GObj* gobj);
+void ftFx_SpecialN_ClearBlaster(HSD_GObj* gobj);
+void ftFx_SpecialN_RemoveBlaster(HSD_GObj* gobj);
+void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj);
+void ftFx_SpecialN_Enter(HSD_GObj* gobj);
+void ftFx_SpecialAirN_Enter(HSD_GObj* gobj);
 void ftFx_SpecialNStart_Anim(HSD_GObj* gobj);
 void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj);
 void ftFx_SpecialNEnd_Anim(HSD_GObj* gobj);
@@ -243,10 +243,10 @@ void ftFx_SpecialHi_CreateLaunchGFX(HSD_GObj* gobj);
 void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj);
 
 /// Fox & Falco's grounded Firefox/Firebird Start Motion State handler
-void ftFx_SpecialHi_StartMotion(HSD_GObj* gobj);
+void ftFx_SpecialHi_Enter(HSD_GObj* gobj);
 
 /// Fox & Falco's aerial Firefox/Firebird Start Motion State handler
-void ftFx_SpecialAirHi_StartMotion(HSD_GObj* gobj);
+void ftFx_SpecialAirHiStart_Enter(HSD_GObj* gobj);
 
 void ftFox_SpecialHi_RotateModel(HSD_GObj* gobj);
 
@@ -310,7 +310,7 @@ void ftFx_SpecialHi_GroundToAir(HSD_GObj* gobj);
 /// Fox & Falco's grounded Firefox/Firebird Launch Motion State handler
 void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj);
 
-void ftFx_SpecialAirHi_Action(HSD_GObj* gobj);
+void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj);
 void ftFx_SpecialHiLanding_Anim(HSD_GObj* gobj);
 void ftFx_SpecialHiFall_Anim(HSD_GObj* gobj);
 void ftFx_SpecialHiLanding_IASA(HSD_GObj* gobj);
@@ -319,14 +319,14 @@ void ftFx_SpecialHiLanding_Phys(HSD_GObj* gobj);
 void ftFx_SpecialHiFall_Phys(HSD_GObj* gobj);
 void ftFx_SpecialHiLanding_Coll(HSD_GObj* gobj);
 void ftFx_SpecialHiFall_Coll(HSD_GObj* gobj);
-void ftFx_SpecialHiFall_Action(HSD_GObj* gobj);
+void ftFx_SpecialHiFall_Enter(HSD_GObj* gobj);
 void ftFx_SpecialHiFall_AirToGround(HSD_GObj* gobj);
 void ftFx_SpecialHiLanding_GroundToAir(HSD_GObj* gobj);
 void ftFx_SpecialHiBound_Anim(HSD_GObj* gobj);
 void ftFx_SpecialHiBound_IASA(HSD_GObj* gobj);
 void ftFx_SpecialHiBound_Phys(HSD_GObj* gobj);
 void ftFx_SpecialHiBound_Coll(HSD_GObj* gobj);
-void ftFx_SpecialHiBound_Action(HSD_GObj* gobj);
+void ftFx_SpecialHiBound_Enter(HSD_GObj* gobj);
 
 // Down Special - Reflector (SpecialLw)
 
@@ -339,10 +339,10 @@ void ftFx_SpecialLw_CreateStartGFX(HSD_GObj* gobj);
 void ftFx_SpecialLw_CreateReflectGFX(HSD_GObj* gobj);
 
 /// Fox & Falco's grounded Reflector Start Motion State handler
-void ftFx_SpecialLw_StartMotion(HSD_GObj* gobj);
+void ftFx_SpecialLw_Enter(HSD_GObj* gobj);
 
 /// Fox & Falco's aerial Reflector Start Motion State handler
-void ftFx_SpecialAirLw_StartMotion(HSD_GObj* gobj);
+void ftFx_SpecialAirLw_Enter(HSD_GObj* gobj);
 
 void ftFx_SpecialLwStart_Anim(HSD_GObj* gobj);
 void ftFx_SpecialAirLwStart_Anim(HSD_GObj* gobj);
@@ -424,7 +424,7 @@ void ftFx_SpecialAirLwHit_Coll(HSD_GObj* gobj);
 void ftFx_SpecialLwHit_GroundToAir(HSD_GObj* gobj);
 void ftFx_SpecialAirLwHit_AirToGround(HSD_GObj* gobj);
 void ftFx_SpecialLwHit_SetCall(HSD_GObj* gobj);
-void ftFx_SpecialLwHit_Action(HSD_GObj* gobj);
+void ftFx_SpecialLwHit_Enter(HSD_GObj* gobj);
 void ftFx_SpecialLwEnd_Anim(HSD_GObj* gobj);
 void ftFx_SpecialAirLwEnd_Anim(HSD_GObj* gobj);
 void ftFx_SpecialLwEnd_IASA(HSD_GObj* gobj);
@@ -435,8 +435,8 @@ void ftFx_SpecialLwEnd_Coll(HSD_GObj* gobj);
 void ftFx_SpecialAirLwEnd_Coll(HSD_GObj* gobj);
 void ftFx_SpecialLwEnd_GroundToAir(HSD_GObj* gobj);
 void ftFx_SpecialAirLwEnd_AirToGround(HSD_GObj* gobj);
-void ftFx_SpecialLwEnd_Action(HSD_GObj* gobj);
-void ftFx_SpecialAirLwEnd_Action(HSD_GObj* gobj);
+void ftFx_SpecialLwEnd_Enter(HSD_GObj* gobj);
+void ftFx_SpecialAirLwEnd_Enter(HSD_GObj* gobj);
 
 // Side Special - Fox Illusion/Falco Phantasm (SpecialS)
 
@@ -446,8 +446,8 @@ u32 ftFx_SpecialS_GetCmdVar2(HSD_GObj* gobj);
 void ftFx_SpecialS_CopyGhostPosIndexed(HSD_GObj* gobj, s32 index,
                                        Vec3* ghostPos);
 f32 ftFx_SpecialS_ReturnFloatVarIndexed(HSD_GObj* gobj, s32 index);
-void ftFx_SpecialS_StartMotion(HSD_GObj* gobj);
-void ftFx_SpecialAirS_StartMotion(HSD_GObj* gobj);
+void ftFx_SpecialSStart_Enter(HSD_GObj* gobj);
+void ftFx_SpecialAirSStart_Enter(HSD_GObj* gobj);
 void ftFx_SpecialSStart_Anim(HSD_GObj* gobj);
 void ftFx_SpecialAirSStart_Anim(HSD_GObj* gobj);
 void ftFx_SpecialSStart_IASA(HSD_GObj* gobj);
@@ -468,8 +468,8 @@ void ftFx_SpecialS_Coll(HSD_GObj* gobj);
 void ftFx_SpecialAirS_Coll(HSD_GObj* gobj);
 void ftFx_SpecialS_GroundToAir(HSD_GObj* gobj);
 void ftFx_SpecialAirS_AirToGround(HSD_GObj* gobj);
-void ftFx_SpecialS_Action(HSD_GObj* gobj);
-void ftFx_SpecialAirS_Action(HSD_GObj* gobj);
+void ftFx_SpecialS_Enter(HSD_GObj* gobj);
+void ftFx_SpecialAirS_Enter(HSD_GObj* gobj);
 void ftFx_SpecialSEnd_Anim(HSD_GObj* gobj);
 void ftFx_SpecialAirSEnd_Anim(HSD_GObj* gobj);
 void ftFx_SpecialSEnd_IASA(HSD_GObj* gobj);
@@ -478,10 +478,10 @@ void ftFx_SpecialSEnd_Phys(HSD_GObj* gobj);
 void ftFx_SpecialAirSEnd_Phys(HSD_GObj* gobj);
 void ftFx_SpecialSEnd_Coll(HSD_GObj* gobj);
 void ftFx_SpecialAirSEnd_Coll(HSD_GObj* gobj);
-void ftFx_SpecialSEnd_Action(HSD_GObj* gobj);
-void ftFx_SpecialAirSEnd_Action(HSD_GObj* gobj);
+void ftFx_SpecialSEnd_Enter(HSD_GObj* gobj);
+void ftFx_SpecialAirSEnd_Enter(HSD_GObj* gobj);
 void ftFx_Init_LoadSpecialAttrs(HSD_GObj*);
-void ftFx_OnLoadForFalco(Fighter* fp);
+void ftFx_Init_OnLoadForFalco(Fighter* fp);
 
 void ftFx_Init_OnLoad(HSD_GObj* gobj);
 void ftFx_Init_OnKnockbackEnter(HSD_GObj* gobj);

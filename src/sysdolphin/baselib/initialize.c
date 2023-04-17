@@ -21,7 +21,7 @@
 #include <baselib/state.h>
 #include <baselib/tev.h>
 
-extern OSHeapHandle lbl_804D6018;
+extern OSHeapHandle HSD_Synth_804D6018;
 extern GXRenderModeObj GXNtsc480IntDf;
 extern GXRenderModeObj HSD_VIData;
 
@@ -42,7 +42,7 @@ static u32 iparam_fifo_size = HSD_DEFAULT_FIFO_SIZE;
 static int iparam_xfb_max_num = HSD_DEFAULT_XFB_MAX_NUM;
 static int iparam_heap_max_num = 4;
 static u32 iparam_audio_heap_size = HSD_DEFAULT_AUDIO_SIZE;
-static GXColor lbl_804D5E1C = { 0 };
+static GXColor HSD_Init_804D5E1C = { 0 };
 
 void HSD_InitComponent(void)
 {
@@ -69,7 +69,7 @@ void HSD_InitComponent(void)
     HSD_IDSetup();
     VIWaitForRetrace();
     HSD_ObjInit();
-    func_803881E4();
+    HSD_Debug_803881E4();
     init_done = true;
 }
 
@@ -147,7 +147,7 @@ static void HSD_GXInit(void)
     GXInitLightPos(&lightobj, 1, 0, 0);
     GXInitLightDir(&lightobj, 1, 0, 0);
     GXInitLightAttn(&lightobj, 1, 0, 0, 1, 0, 0);
-    GXInitLightColor(&lightobj, lbl_804D5E1C);
+    GXInitLightColor(&lightobj, HSD_Init_804D5E1C);
 
     for (i = 0; i < 8; i++) {
         GXLoadLightObjImm(&lightobj, HSD_Index2LightID(i));
@@ -170,7 +170,7 @@ static void HSD_OSInit(void)
 
     new_arena_lo = OSRoundUp32B(old_arena_lo);
     new_arena_hi = OSRoundDown32B(old_arena_hi);
-    lbl_804D6018 = OSCreateHeap(
+    HSD_Synth_804D6018 = OSCreateHeap(
         (void*) new_arena_lo, (void*) (new_arena_lo + iparam_audio_heap_size));
     new_arena_lo += iparam_audio_heap_size;
     hsd_heap_next_arena_lo = (void*) new_arena_lo;
@@ -247,7 +247,7 @@ void HSD_StartRender(HSD_RenderPass pass)
     GXSetFieldMode(rmode->field_rendering, rmode->xfbHeight < rmode->viHeight);
 }
 
-void func_803755A8(void)
+void HSD_Init_803755A8(void)
 {
     // Does nothing, but need to force a comparison to make this match
     if (current_render_pass == HSD_RP_OFFSCREEN) {

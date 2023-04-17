@@ -9,21 +9,21 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-extern HSD_ObjAllocUnk4 lbl_804A0E30;
-extern HSD_ObjAllocUnk5 lbl_804A0E50;
-extern HSD_ObjAllocUnk6 lbl_804A0E60;
-extern ItemCommonData* lbl_804D6D28;
-extern s8 lbl_804D6D00;
-extern s32 lbl_804D6D08;
-extern s32 lbl_804D6D0C;
-extern u32 lbl_804D6D10;
+extern HSD_ObjAllocUnk4 it_804A0E30;
+extern HSD_ObjAllocUnk5 it_804A0E50;
+extern HSD_ObjAllocUnk6 it_804A0E60;
+extern ItemCommonData* it_804D6D28;
+extern s8 it_804D6D00;
+extern s32 it_804D6D08;
+extern s32 it_804D6D0C;
+extern u32 it_804D6D10;
 
 /// @todo Probably #size_t but that needs to be changed to
 ///       <tt>unsigned int</tt> first.
-extern uint lbl_804D6D14;
+extern uint it_804D6D14;
 
-extern ItemCommonData* lbl_804D6D28;
-extern CommonItemArticles* lbl_804D6D24;
+extern ItemCommonData* it_804D6D28;
+extern CommonItemArticles* it_804D6D24;
 
 void it_8027B4A4(HSD_GObj*, u32);
 void* it_8027B5B0(s32, s32, HSD_JObj*, s32, s32);

@@ -65,8 +65,8 @@ grTZelda_80223ED0:
 /* 80223EE8 00220AC8  93 81 00 10 */	stw r28, 0x10(r1)
 /* 80223EEC 00220ACC  3B 83 00 00 */	addi r28, r3, 0
 /* 80223EF0 00220AD0  1C 1C 00 14 */	mulli r0, r28, 0x14
-/* 80223EF4 00220AD4  3C 60 80 3F */	lis r3, lbl_803E9638@ha
-/* 80223EF8 00220AD8  3B E3 96 38 */	addi r31, r3, lbl_803E9638@l
+/* 80223EF4 00220AD4  3C 60 80 3F */	lis r3, grTZd_803E9638@ha
+/* 80223EF8 00220AD8  3B E3 96 38 */	addi r31, r3, grTZd_803E9638@l
 /* 80223EFC 00220ADC  38 7C 00 00 */	addi r3, r28, 0
 /* 80223F00 00220AE0  7F BF 02 14 */	add r29, r31, r0
 /* 80223F04 00220AE4  4B F9 D5 CD */	bl Ground_801C14D0
@@ -99,7 +99,7 @@ grTZelda_80223ED0:
 /* 80223F68 00220B48  41 82 00 2C */	beq .L_80223F94
 /* 80223F6C 00220B4C  38 7E 00 00 */	addi r3, r30, 0
 /* 80223F70 00220B50  38 A0 00 04 */	li r5, 4
-/* 80223F74 00220B54  48 16 BD E1 */	bl func_8038FD54
+/* 80223F74 00220B54  48 16 BD E1 */	bl HSD_GObjProc_8038FD54
 /* 80223F78 00220B58  48 00 00 1C */	b .L_80223F94
 .L_80223F7C:
 /* 80223F7C 00220B5C  38 DC 00 00 */	addi r6, r28, 0
@@ -236,8 +236,8 @@ grTZelda_80224108:
 
 .section .data
     .balign 8
-.global lbl_803E9638
-lbl_803E9638:
+.global grTZd_803E9638
+grTZd_803E9638:
     .4byte grTZelda_80223FB8
     .4byte grTZelda_80223FE4
     .4byte grTZelda_80223FEC
@@ -258,15 +258,15 @@ lbl_803E9638:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_803E9688
-lbl_803E9688:
+.global grTZd_803E9688
+grTZd_803E9688:
     .asciz "/GrTZd.dat"
     .balign 4
-.global lbl_803E9694
-lbl_803E9694:
+.global grTZd_803E9694
+grTZd_803E9694:
     .4byte 0x0000003E
-    .4byte lbl_803E9638
-    .4byte lbl_803E9688
+    .4byte grTZd_803E9638
+    .4byte grTZd_803E9688
     .4byte grTZelda_80223E30
     .4byte grTZelda_80223E2C
     .4byte grTZelda_80223EA0

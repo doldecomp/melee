@@ -9,7 +9,7 @@
 #include <dolphin/os/os.h>
 #include <baselib/gobjgxlink.h>
 
-static StageCallbacks lbl_803E91B0[] = {
+static StageCallbacks grTPc_803E91B0[] = {
     { grTPichu_80222D24, grTPichu_80222D50, grTPichu_80222D58,
       grTPichu_80222D5C, 0 },
     { grTPichu_80222DF0, grTPichu_80222E40, grTPichu_80222E48,
@@ -19,9 +19,9 @@ static StageCallbacks lbl_803E91B0[] = {
     { NULL, NULL, NULL, NULL, 0 }
 };
 
-StageData lbl_803E920C = {
+StageData grTPc_803E920C = {
     (1 << 3) | (1 << 4) | (1 << 5),
-    lbl_803E91B0,
+    grTPc_803E91B0,
     "/GrTPc.dat",
     grTPichu_80222B9C,
     grTPichu_80222B98,
@@ -67,7 +67,7 @@ static bool grTPichu_80222C34(void)
 static HSD_GObj* grTPichu_80222C3C(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &lbl_803E91B0[gobj_id];
+    StageCallbacks* callbacks = &grTPc_803E91B0[gobj_id];
 
     gobj = Ground_801C14D0(gobj_id);
     if (gobj != NULL) {
@@ -82,7 +82,7 @@ static HSD_GObj* grTPichu_80222C3C(int gobj_id)
             callbacks->callback0(gobj);
         }
         if (callbacks->callback2 != NULL) {
-            func_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtpichu.c", 0xc2,

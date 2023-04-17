@@ -5,8 +5,8 @@
 #include <baselib/forward.h>
 
 void ftMr_SpecialLw_UpdateRot(HSD_GObj* gobj);
-void ftMr_SpecialLw_StartMotion(HSD_GObj* gobj);
-void ftMr_SpecialAirLw_StartMotion(HSD_GObj* gobj);
+void ftMr_SpecialLw_Enter(HSD_GObj* gobj);
+void ftMr_SpecialAirLw_Enter(HSD_GObj* gobj);
 void ftMr_SpecialLw_Anim(HSD_GObj* gobj);
 void ftMr_SpecialAirLw_Anim(HSD_GObj* gobj);
 void ftMr_SpecialLw_IASA(HSD_GObj* gobj);

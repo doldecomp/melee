@@ -5,7 +5,7 @@
 
 ATTRIBUTE_NORETURN void __assert(char*, u32, char*);
 
-void func_803881E4(void);
+void HSD_Debug_803881E4(void);
 ATTRIBUTE_NORETURN void HSD_Panic(char*, u32, char*);
 
 /// @todo Take @c file as another arg, ignore it if @c !MUST_MATCH.
@@ -21,7 +21,7 @@ ATTRIBUTE_NORETURN void HSD_Panic(char*, u32, char*);
 #define HSD_ASSERT2(file, line, msg, cond)                                    \
     ((cond) ? ((void) 0) : __assert((file), (line), (#msg)))
 
-int lbl_8038815C(s32 arg0, s32 arg1, s32* arg2, s32 arg3);
-int lbl_8038815C(s32 arg0, s32 arg1, s32* arg2, s32 arg3);
+int HSD_Debug_8038815C(s32 arg0, s32 arg1, s32* arg2, s32 arg3);
+int HSD_Debug_8038815C(s32 arg0, s32 arg1, s32* arg2, s32 arg3);
 
 #endif

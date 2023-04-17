@@ -4,7 +4,7 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-void ftSk_SpecialHi_StartMotion(HSD_GObj*);
-void ftSk_SpecialAirHi_StartMotion(HSD_GObj*);
+void ftSk_SpecialHi_Enter(HSD_GObj*);
+void ftSk_SpecialAirHi_Enter(HSD_GObj*);
 
 #endif

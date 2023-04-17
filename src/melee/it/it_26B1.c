@@ -48,8 +48,8 @@ f32 it_8026B1D4(HSD_GObj* gobj, itHit* itemHitboxUnk)
                                    ip->x40_vel.y * ip->x40_vel.y +
                                    ip->x40_vel.z * ip->x40_vel.z);
 
-        ret += itemSpeed * lbl_804D6D28->x80_float[5];
-        ret += lbl_804D6D28->x80_float[6];
+        ret += itemSpeed * it_804D6D28->x80_float[5];
+        ret += it_804D6D28->x80_float[6];
         if (ret <= 1.0) {
             return ret = 1;
         }
@@ -155,7 +155,7 @@ int it_8026B3C0(ItemKind kind) // Count identical item GObj entities?
     HSD_GObj* unkItemGObj;
 
     int i = 0;
-    unkItemGObj = lbl_804D782C->x24_items;
+    unkItemGObj = HSD_GObj_804D782C->x24_items;
 
     while (unkItemGObj != NULL) {
         temp_item = unkItemGObj->user_data;
@@ -169,26 +169,26 @@ int it_8026B3C0(ItemKind kind) // Count identical item GObj entities?
     return i;
 }
 
-extern struct r13_ItemTable* lbl_804D6D38;
+extern struct r13_ItemTable* it_804D6D38;
 
 void it_8026B3F8(Article* article,
                  s32 kind) // Store Item article pointer to table
 {
-    lbl_804D6D38->x0_article[kind - It_Kind_Leadead] =
+    it_804D6D38->x0_article[kind - It_Kind_Leadead] =
         article; // This feels very wrong
 }
 
-extern UnkItemArticles3 lbl_804A0F60[];
+extern UnkItemArticles3 it_804A0F60[];
 
 void it_8026B40C(Article* article,
                  s32 kind) // Store Stage Item article pointer to table
 {
-    *lbl_804A0F60[kind - It_Kind_Old_Kuri].unkptr = article;
+    *it_804A0F60[kind - It_Kind_Old_Kuri].unkptr = article;
 }
 
 f32 it_8026B424(s32 damage) // Item Damage Math
 {
-    ItemCommonData* itCommonData = lbl_804D6D28;
+    ItemCommonData* itCommonData = it_804D6D28;
 
     return (f32) (s32) (((f32) damage * itCommonData->xB8) +
                         itCommonData->xBC);
@@ -265,7 +265,7 @@ f32 it_8026B574(HSD_GObj* gobj) // Get unknown float from 0x4 of item's
 
 s32 it_8026B588(void) // Get unknown integer from itCommonData
 {
-    return lbl_804D6D28->xDC;
+    return it_804D6D28->xDC;
 }
 
 /// Check if item can fire projectiles
@@ -460,14 +460,14 @@ s32 it_8026B7CC(HSD_GObj* gobj) // Get 0x1C of Item - something to do
 
 s32 it_8026B7D8(void) // Get unknown var from global data
 {
-    return lbl_804D6D0C;
+    return it_804D6D0C;
 }
 
-extern s32 lbl_804D6D08;
+extern s32 it_804D6D08;
 
 s32 it_8026B7E0(void) // Get unknown var from global data
 {
-    return lbl_804D6D08;
+    return it_804D6D08;
 }
 
 s32 it_8026B7E8(HSD_GObj* gobj) // Get bit 1 of 0xDC8 word
@@ -493,7 +493,7 @@ void it_8026B7F8(HSD_GObj* fighter_gobj)
 #endif
 
     HSD_GObj *cur, *owner;
-    for (cur = lbl_804D782C->x24_items; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObj_804D782C->x24_items; cur != NULL; cur = cur->next) {
         Item* ip = GET_ITEM(cur);
         owner = ip->owner;
         RunCallbackUnk(ip->xB8_itemLogicTable->evt_unk, cur, fighter_gobj);
@@ -1180,7 +1180,7 @@ void it_8026C1B4(HSD_GObj* gobj)
 /// Get unknown var from r13 pointer
 u32 it_8026C1D4(void)
 {
-    return lbl_804D6D24->x40->x4->x0;
+    return it_804D6D24->x40->x4->x0;
 }
 
 /// Check if item has grabbed a GObj?
@@ -1211,7 +1211,7 @@ HSD_GObj* it_8026C258(Vec3* pos, f32 facing_dir)
 {
     f32 min_sq_dist = F32_MAX;
     HSD_GObj *cur, *result = NULL;
-    for (cur = lbl_804D782C->x24_items; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObj_804D782C->x24_items; cur != NULL; cur = cur->next) {
         Item* ip = GET_ITEM(cur);
 
         // Might not actually be (exclusively) hold kind in the end???
@@ -1289,7 +1289,7 @@ void it_8026C368(HSD_GObj* gobj)
 void it_8026C3FC(void)
 {
     HSD_GObj* cur;
-    for (cur = lbl_804D782C->x24_items; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObj_804D782C->x24_items; cur != NULL; cur = cur->next) {
         it_8026B724(cur);
     }
 }
@@ -1298,7 +1298,7 @@ void it_8026C3FC(void)
 void it_8026C42C(void)
 {
     HSD_GObj* cur;
-    for (cur = lbl_804D782C->x24_items; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObj_804D782C->x24_items; cur != NULL; cur = cur->next) {
         Item* ip = GET_ITEM(cur);
 
         if (ip->xDC8_word.flags.x7) {

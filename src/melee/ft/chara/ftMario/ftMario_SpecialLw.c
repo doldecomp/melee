@@ -70,7 +70,7 @@ static void setCmdVar2(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
 }
 
-void ftMr_SpecialLw_StartMotion(HSD_GObj* gobj)
+void ftMr_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
@@ -90,7 +90,7 @@ void ftMr_SpecialLw_StartMotion(HSD_GObj* gobj)
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
 
-void ftMr_SpecialAirLw_StartMotion(HSD_GObj* gobj)
+void ftMr_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
     f32 sub_val;
     Fighter* fp = gobj->user_data;

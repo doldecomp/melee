@@ -4,6 +4,6 @@
 #include <baselib/gobj.h>
 
 void ftNs_AttackS4_ItemNessBatRemove(HSD_GObj*);
-void ftNs_AttackS4_Action(HSD_GObj* gobj);
+void ftNs_AttackS4_Enter(HSD_GObj* gobj);
 
 #endif

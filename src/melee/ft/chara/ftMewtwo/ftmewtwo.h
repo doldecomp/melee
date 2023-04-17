@@ -131,16 +131,16 @@ extern Fighter_DemoStrings ftMt_Init_DemoMotionFilenames;
 // Mewtwo functions
 
 void ftMt_Init_OnDeath(HSD_GObj* gobj);
-void ftMt_OnDeath2(HSD_GObj* gobj);
-void ftMt_OnTakeDamage(HSD_GObj* gobj);
+void ftMt_Init_OnDeath2(HSD_GObj* gobj);
+void ftMt_Init_OnTakeDamage(HSD_GObj* gobj);
 
 // Up Special - Teleport (SpecialHi/SpecialAirHi)
 
 void ftMt_SpecialHi_CreateGFX(HSD_GObj* gobj);
 void ftMt_SpecialHi_SetStartGFX(HSD_GObj* gobj);
 void ftMt_SpecialHi_SetEndGFX(HSD_GObj* gobj);
-void ftMt_SpecialHi_StartMotion(HSD_GObj* gobj);
-void ftMt_SpecialAirHi_StartMotion(HSD_GObj* gobj);
+void ftMt_SpecialHiStart_Enter(HSD_GObj* gobj);
+void ftMt_SpecialAirHiStart_Enter(HSD_GObj* gobj);
 void ftMt_SpecialHiStart_Anim(HSD_GObj* gobj);
 void ftMt_SpecialAirHiStart_Anim(HSD_GObj* gobj);
 void ftMt_SpecialHiStart_IASA(HSD_GObj* gobj);
@@ -161,8 +161,8 @@ void ftMt_SpecialHi_Coll(HSD_GObj* gobj);
 void ftMt_SpecialAirHi_Coll(HSD_GObj* gobj);
 void ftMt_SpecialHi_GroundToAir(HSD_GObj* gobj);
 void ftMt_SpecialAirHi_AirToGround(HSD_GObj* gobj);
-void ftMt_SpecialHi_Action(HSD_GObj* gobj);
-void ftMt_SpecialAirHi_Action(HSD_GObj* gobj);
+void ftMt_SpecialHi_Enter(HSD_GObj* gobj);
+void ftMt_SpecialAirHi_Enter(HSD_GObj* gobj);
 void ftMt_SpecialHiLost_Anim(HSD_GObj* gobj);
 void ftMt_SpecialAirHiLost_Anim(HSD_GObj* gobj);
 void ftMt_SpecialHiLost_IASA(HSD_GObj* gobj);
@@ -172,15 +172,15 @@ void ftMt_SpecialAirHiLost_Phys(HSD_GObj* gobj);
 void ftMt_SpecialHiLost_Coll(HSD_GObj* gobj);
 void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj);
 void ftMt_SpecialHiLost_GroundToAir(HSD_GObj* gobj);
-void ftMt_SpecialHiLost_Action(HSD_GObj* gobj);
-void ftMt_SpecialAirHiLost_Action(HSD_GObj* gobj);
+void ftMt_SpecialHiLost_Enter(HSD_GObj* gobj);
+void ftMt_SpecialAirHiLost_Enter(HSD_GObj* gobj);
 
 // Down Special - Disable (SpecialLw/SpecialAirLw)
 
 void ftMt_SpecialLw_ClearDisableGObj(HSD_GObj* gobj);
 void ftMt_SpecialLw_RemoveDisable(HSD_GObj* gobj);
-void ftMt_SpecialLw_StartMotion(HSD_GObj* gobj);
-void ftMt_SpecialAirLw_StartMotion(HSD_GObj* gobj);
+void ftMt_SpecialLw_Enter(HSD_GObj* gobj);
+void ftMt_SpecialAirLw_Enter(HSD_GObj* gobj);
 void ftMt_SpecialLw_Anim(HSD_GObj* gobj);
 void ftMt_SpecialAirLw_Anim(HSD_GObj* gobj);
 void ftMt_SpecialLw_IASA(HSD_GObj* gobj);
@@ -196,8 +196,8 @@ void ftMt_SpecialLw_CreateDisable(HSD_GObj* gobj);
 // Side Special - Confusion (SpecialS/SpecialAirS)
 
 void ftMt_SpecialS_SetFlags(HSD_GObj* gobj);
-void ftMt_SpecialS_StartMotion(HSD_GObj* gobj);
-void ftMt_SpecialAirS_StartMotion(HSD_GObj* gobj);
+void ftMt_SpecialS_Enter(HSD_GObj* gobj);
+void ftMt_SpecialAirS_Enter(HSD_GObj* gobj);
 void ftMt_SpecialS_Anim(HSD_GObj* gobj);
 void ftMt_SpecialAirS_Anim(HSD_GObj* gobj);
 void ftMt_SpecialS_IASA(HSD_GObj* gobj);
@@ -222,8 +222,8 @@ void ftMt_SpecialN_OnTakeDamage(HSD_GObj* gobj);
 void ftMt_SpecialN_OnDeath(HSD_GObj* gobj);
 void ftMt_SpecialN_ReleaseShadowBall(HSD_GObj* gobj);
 void ftMt_SpecialN_PlayChargeSFX(HSD_GObj* gobj);
-void ftMt_SpecialN_StartMotion(HSD_GObj* gobj);
-void ftMt_SpecialAirN_StartMotion(HSD_GObj* gobj);
+void ftMt_SpecialN_Enter(HSD_GObj* gobj);
+void ftMt_SpecialAirN_Enter(HSD_GObj* gobj);
 void ftMt_SpecialNStart_Anim(HSD_GObj* gobj);
 void ftMt_SpecialNLoop_Anim(HSD_GObj* gobj);
 void ftMt_SpecialNFull_Anim(HSD_GObj* gobj);

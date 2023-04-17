@@ -63,15 +63,15 @@ typedef struct _ftDonkeyAttributes {
 
 void ftDk_Init_800DF980(HSD_GObj* gobj);
 
-bool ftDk_Walk_800DFA98(HSD_GObj* gobj);
+bool ftDk_MS_341_800DFA98(HSD_GObj* gobj);
 
-void ftDk_Walk_800DFAE4(HSD_GObj* gobj, f32);
-void ftDk_Walk_800DFB54(HSD_GObj* gobj);
+void ftDk_MS_341_800DFAE4(HSD_GObj* gobj, f32);
+void ftDk_MS_342_IASA(HSD_GObj* gobj);
 
-void ftDk_Unk4_800E017C(HSD_GObj* gobj);
-void ftDk_Unk5_800E0294(HSD_GObj* gobj);
-void ftDk_Unk8_800E05E4(HSD_GObj* gobj);
-void ftDk_Unk9_800E07B0(HSD_GObj* gobj);
+void ftDk_MS_342_800E017C(HSD_GObj* gobj);
+void ftDk_MS_345_800E0294(HSD_GObj* gobj);
+void ftDk_MS_346_800E05E4(HSD_GObj* gobj);
+void ftDk_MS_349_800E07B0(HSD_GObj* gobj);
 
 void ftDk_Init_8010D774(HSD_GObj* gobj);
 

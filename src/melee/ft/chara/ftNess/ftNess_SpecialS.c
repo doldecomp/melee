@@ -9,7 +9,7 @@
 #include <MSL/trigf.h>
 
 // https://decomp.me/scratch/apf7Y
-void ftNs_SpecialS__ItemPKFireSpawn(
+void ftNs_SpecialS_ItemPKFireSpawn(
     HSD_GObj* gobj) //* Ness's PK Fire spawn function, stored as Accessory4
                     // and summoned with Subaction Event 0x60 *//
 {
@@ -68,7 +68,7 @@ void ftNs_SpecialS__ItemPKFireSpawn(
 
 // 0x80116C94
 // https://decomp.me/scratch/XdzmF
-void ftNs_SpecialS_StartMotion(
+void ftNs_SpecialS_Enter(
     HSD_GObj* gobj) // Ness's grounded PK Fire Motion State handler
 {
     Fighter* fp;
@@ -80,12 +80,12 @@ void ftNs_SpecialS_StartMotion(
                               0.0f);
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 =
-        ftNs_SpecialS__ItemPKFireSpawn; // Store PK Fire spawn function
+        ftNs_SpecialS_ItemPKFireSpawn; // Store PK Fire spawn function
 }
 
 // 0x80116D04
 // https://decomp.me/scratch/fnaSW
-void ftNs_SpecialAirS_Action(
+void ftNs_SpecialAirS_Enter(
     HSD_GObj* gobj) // Ness's aerial PK Fire Motion State handler
 {
     Fighter* fp;
@@ -96,7 +96,7 @@ void ftNs_SpecialAirS_Action(
     Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRS, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftNs_SpecialS__ItemPKFireSpawn;
+    fp->cb.x21BC_callback_Accessory4 = ftNs_SpecialS_ItemPKFireSpawn;
 }
 
 // 0x80116D74

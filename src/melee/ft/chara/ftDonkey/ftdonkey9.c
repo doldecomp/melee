@@ -10,24 +10,24 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftDk_Unk9_800E0698(HSD_GObj* gobj)
+void ftDk_MS_349_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftDk_Unk9_800E06B8(HSD_GObj* gobj)
+void ftDk_MS_349_Coll(HSD_GObj* gobj)
 {
-    ftDk_Init_800DFA70(gobj);
+    ftDk_MS_341_Coll(gobj);
 }
 
-static bool ftDk_Unk9_800E0750(HSD_GObj* gobj);
+static bool ftDk_MS_349_800E0750(HSD_GObj* gobj);
 
-void ftDk_Unk9_800E06D8(HSD_GObj* gobj)
+void ftDk_MS_349_800E06D8(HSD_GObj* gobj)
 {
     Vec3 vec;
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ftDk_Unk9_800E0750(gobj)) {
-        ftDk_Unk9_800E07B0(gobj);
+    if (ftDk_MS_349_800E0750(gobj)) {
+        ftDk_MS_349_800E07B0(gobj);
     } else {
         vec.x = vec.y = vec.z = 0.0f;
         Item_8026ABD8(fp->x1974_heldItem, &vec, 1.0f);
@@ -35,7 +35,7 @@ void ftDk_Unk9_800E06D8(HSD_GObj* gobj)
     }
 }
 
-bool ftDk_Unk9_800E0750(HSD_GObj* gobj)
+bool ftDk_MS_349_800E0750(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -50,32 +50,32 @@ bool ftDk_Unk9_800E0750(HSD_GObj* gobj)
     return false;
 }
 
-void ftDk_Unk9_800E07B0(HSD_GObj* gobj)
+void ftDk_MS_349_800E07B0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2CC;
     ft_8008DCE0(gobj, donkey_attr->motion_state + 9, 0.0f);
 }
 
-void ftDk_Unk9_800E07E4(HSD_GObj* gobj)
+void ftDk_MS_350_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ft_8008F744(gobj);
     if (!fp->x221C_flag.bits.b6) {
         if (fp->ground_or_air == GA_Air) {
-            ftDk_Unk5_800E0294(gobj);
+            ftDk_MS_345_800E0294(gobj);
         } else {
             ftDk_Init_800DF980(gobj);
         }
     }
 }
 
-void ftDk_Unk9_800E0848(HSD_GObj* gobj)
+void ftDk_MS_350_Phys(HSD_GObj* gobj)
 {
-    ft_8008FB18(gobj);
+    ftCo_Damage_Phys(gobj);
 }
 
-void ftDk_Unk9_800E0868(HSD_GObj* gobj)
+void ftDk_MS_350_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Ground) {

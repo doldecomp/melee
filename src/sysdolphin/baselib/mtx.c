@@ -7,8 +7,8 @@
 #define EPSILON 0.0000000001f
 #define FLOAT_MIN 1.1754943E-38f
 
-HSD_ObjAllocData lbl_804C2310;
-HSD_ObjAllocData lbl_804C233C;
+HSD_ObjAllocData HSD_Mtx_804C2310;
+HSD_ObjAllocData HSD_Mtx_804C233C;
 
 // Calculates the determinant of the top 3x3 section of a 3x4 matrix
 inline f32 HSD_CalcDeterminantMatrix3x4(Mtx m)
@@ -357,7 +357,7 @@ void HSD_MkRotationMtx(Mtx arg0, Vec3* arg1)
     arg0[2][3] = 0;
 }
 
-void func_8037A230(Mtx arg0, Quaternion* arg1)
+void HSD_Mtx_8037A230(Mtx arg0, Quaternion* arg1)
 {
     PSMTXQuat(arg0, arg1);
 }
@@ -461,7 +461,7 @@ void HSD_MtxScaledAdd(Mtx arg0, Mtx arg1, Mtx arg2, f32 arg3)
 
 void* HSD_VecAlloc(void)
 {
-    void* vec = HSD_ObjAlloc(&lbl_804C2310);
+    void* vec = HSD_ObjAlloc(&HSD_Mtx_804C2310);
 
     if (vec == NULL) {
         __assert("mtx.c", 0x335, "vec");
@@ -473,7 +473,7 @@ void* HSD_VecAlloc(void)
 void HSD_VecFree(void* arg0)
 {
     if (arg0 != NULL) {
-        HSD_ObjFree(&lbl_804C2310, arg0);
+        HSD_ObjFree(&HSD_Mtx_804C2310, arg0);
     }
 }
 
@@ -481,7 +481,7 @@ void* HSD_MtxAlloc(void)
 {
     void* mtx;
 
-    mtx = HSD_ObjAlloc(&lbl_804C233C);
+    mtx = HSD_ObjAlloc(&HSD_Mtx_804C233C);
     if (mtx == NULL) {
         __assert("mtx.c", 0x354, "mtx");
     }
@@ -491,26 +491,26 @@ void* HSD_MtxAlloc(void)
 void HSD_MtxFree(void* arg0)
 {
     if (arg0 != NULL) {
-        HSD_ObjFree(&lbl_804C233C, arg0);
+        HSD_ObjFree(&HSD_Mtx_804C233C, arg0);
     }
 }
 
 HSD_ObjAllocData* HSD_VecGetAllocData(void)
 {
-    return &lbl_804C2310;
+    return &HSD_Mtx_804C2310;
 }
 
 void HSD_VecInitAllocData(void)
 {
-    HSD_ObjAllocInit(&lbl_804C2310, 0xC, 4);
+    HSD_ObjAllocInit(&HSD_Mtx_804C2310, 0xC, 4);
 }
 
 HSD_ObjAllocData* HSD_MtxGetAllocData(void)
 {
-    return &lbl_804C233C;
+    return &HSD_Mtx_804C233C;
 }
 
 void HSD_MtxInitAllocData(void)
 {
-    HSD_ObjAllocInit(&lbl_804C233C, 0x30, 4);
+    HSD_ObjAllocInit(&HSD_Mtx_804C233C, 0x30, 4);
 }

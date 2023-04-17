@@ -396,8 +396,8 @@ void ftNs_SpecialAirHi_CollisionModVel(
 
 // 0x80118120
 // https://decomp.me/scratch/ARLRd
-void ftNs_SpecialHi_StartMotion(HSD_GObj* gobj) // Ness's grounded PK Thunder
-                                                // Start Motion State handler
+void ftNs_SpecialHiStart_Enter(HSD_GObj* gobj) // Ness's grounded PK Thunder
+                                               // Start Motion State handler
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
@@ -468,7 +468,7 @@ void ftNs_SpecialHi_StartMotion(HSD_GObj* gobj) // Ness's grounded PK Thunder
 
 // 0x80118250
 // https://decomp.me/scratch/D08nX
-void ftNs_SpecialAirHiStart_Action(
+void ftNs_SpecialAirHiStart_Enter(
     HSD_GObj* gobj) // Ness's aerial PK Thunder Start Motion State handler
 {
     Fighter* fp;
@@ -545,7 +545,7 @@ void ftNs_SpecialAirHiStart_Action(
 }
 
 /// @todo Rewrite this.
-void ftNs_SpecialHi_Action(
+void ftNs_SpecialHi_Enter(
     HSD_GObj* gobj) // Ness's grounded PK Thunder 2 Motion State handler
 {
     /// @todo Try to move these close to usage
@@ -639,7 +639,7 @@ void ftNs_SpecialHi_Action(
     }
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
     ftCommon_8007D60C(fp);
-    ftNs_SpecialAirHi_Action(gobj);
+    ftNs_SpecialAirHi_Enter(gobj);
     return;
 
 block_stuff : {
@@ -707,7 +707,7 @@ NessFloatMath_PKThunder2(HSD_GObj* gobj) // Required for 0x80118570 to match
 
 /// Ness's PK Thunder 2 Motion State handler if Ness is launching into
 /// SpecialAirHi from SpecialHiHold
-void ftNs_SpecialAirHi_Action(HSD_GObj* gobj)
+void ftNs_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     ftNessAttributes* temp_attr;
     Fighter* fighter_data3;
@@ -834,7 +834,7 @@ void ftNs_SpecialHiHold_Anim(HSD_GObj* gobj) // Ness's grounded PK Thunder
         }
     } else if (it_802AB568(fp->fv.ns.pkthunder_gobj) == gobj) {
         if (ftNs_SpecialHi_ItemPKThunder_CheckNessCollide(gobj) == true) {
-            ftNs_SpecialHi_Action(gobj);
+            ftNs_SpecialHi_Enter(gobj);
         }
     } else {
         fp->fv.ns.pkthunder_gobj = NULL;

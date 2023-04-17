@@ -11,52 +11,72 @@
 #include "ftKoopa/ftkoopa.h"
 
 MotionState ftKp_Init_MotionStateTable[] = {
-    { 295, 0x00340011, 0x12000000, ftKp_Unk3_80134F48, ftKp_Unk3_801351B0,
-      ftKp_Unk3_80135438, ftKp_Unk3_801354F8, ftCamera_UpdateCameraBox },
-    { 296, 0x003C0011, 0x12000000, ftKp_Unk3_80134F9C, ftKp_Unk3_801351B4,
-      ftKp_Unk3_80135458, ftKp_Unk3_80135564, ftCamera_UpdateCameraBox },
-    { 297, 0x00340011, 0x12000000, ftKp_Unk3_80135040, ftKp_Unk3_801352F0,
-      ftKp_Unk3_80135478, ftKp_Unk3_801355D0, ftCamera_UpdateCameraBox },
-    { 298, 0x00340411, 0x12000000, ftKp_Unk3_8013507C, ftKp_Unk3_801352F4,
-      ftKp_Unk3_80135498, ftKp_Unk3_8013563C, ftCamera_UpdateCameraBox },
-    { 299, 0x003C0411, 0x12000000, ftKp_Unk3_801350D0, ftKp_Unk3_801352F8,
-      ftKp_Unk3_801354B8, ftKp_Unk3_801356A8, ftCamera_UpdateCameraBox },
-    { 300, 0x00340411, 0x12000000, ftKp_Unk3_80135174, ftKp_Unk3_80135434,
-      ftKp_Unk3_801354D8, ftKp_Unk3_80135714, ftCamera_UpdateCameraBox },
-    { 301, 0x00340012, 0x13000000, ftKp_Init_80133654, NULL,
-      ftKp_Unk3_80134224, ftKp_Unk3_80134388, ftCamera_UpdateCameraBox },
-    { 302, 0x00340012, 0x13000000, ftKp_Init_801336CC, ftKp_Unk3_80133BF4,
-      ftKp_Unk3_80134288, ftKp_Unk3_801343D8, ftCamera_UpdateCameraBox },
-    { 303, 0x00340012, 0x13000000, ftKp_Init_801336CC, ftKp_Unk3_80133BF4,
-      ftKp_Unk3_80134288, ftKp_Unk3_801343D8, ftCamera_UpdateCameraBox },
-    { 302, 0x00340012, 0x13000000, ftKp_Unk3_801339AC, ftKp_Unk3_80133E4C,
-      ftKp_Unk3_801342C8, ftKp_Unk3_80134428, ftCamera_UpdateCameraBox },
-    { 304, 0x00340012, 0x13000000, ftKp_Unk3_801339B4, NULL,
-      ftKp_Unk3_80134308, ftKp_Unk3_80134478, ftCamera_UpdateCameraBox },
-    { 305, 0x00340012, 0x13000000, ftKp_Unk3_80133A90, NULL,
-      ftKp_Unk3_80134328, ftKp_Unk3_801344A0, ftCamera_UpdateCameraBox },
-    { 306, 0x00340412, 0x13000000, ftKp_Init_80133690, NULL,
-      ftKp_Unk3_80134244, ftKp_Unk3_801343B0, ftCamera_UpdateCameraBox },
-    { 307, 0x00340412, 0x13000000, ftKp_Unk3_8013383C, ftKp_Unk3_80133D20,
-      ftKp_Unk3_801342A8, ftKp_Unk3_80134400, ftCamera_UpdateCameraBox },
-    { 308, 0x00340412, 0x13000000, ftKp_Unk3_8013383C, ftKp_Unk3_80133D20,
-      ftKp_Unk3_801342A8, ftKp_Unk3_80134400, ftCamera_UpdateCameraBox },
-    { 307, 0x00340012, 0x13000000, ftKp_Unk3_801339B0, ftKp_Unk3_80134038,
-      ftKp_Unk3_801342E8, ftKp_Unk3_80134450, ftCamera_UpdateCameraBox },
-    { 309, 0x00340412, 0x13000000, ftKp_Unk3_80133AD4, NULL,
-      ftKp_Unk3_80134348, ftKp_Unk3_801344C8, ftCamera_UpdateCameraBox },
-    { 310, 0x00340412, 0x13000000, ftKp_Unk3_80133BB0, NULL,
-      ftKp_Unk3_80134368, ftKp_Unk3_801344F0, ftCamera_UpdateCameraBox },
-    { 311, 0x00340213, 0x14000000, ftKp_Unk3_80135C08, ftKp_Unk3_80135D78,
-      ftKp_Unk3_80135D80, ftKp_Unk3_80135E4C, ftCamera_UpdateCameraBox },
-    { 312, 0x00340613, 0x14000000, ftKp_Unk3_80135C60, ftKp_Unk3_80135D7C,
-      ftKp_Unk3_80135DE0, ftKp_Unk3_80135F6C, ftCamera_UpdateCameraBox },
-    { 313, 0x00340214, 0x15000000, ftKp_Unk3_8013474C, NULL,
-      ftKp_Unk3_801347C4, ftKp_Unk3_801348A0, ftCamera_UpdateCameraBox },
-    { 314, 0x00340614, 0x15000000, ftKp_Unk3_80134788, NULL,
-      ftKp_Unk3_80134804, ftKp_Unk3_801348C0, ftCamera_UpdateCameraBox },
-    { 315, 0x00340214, 0x15000000, ftKp_Unk3_801349C4, NULL,
-      ftKp_Unk3_80134A00, ftKp_Unk3_80134A20, ftCamera_UpdateCameraBox },
+    { 295, 0x00340011, 0x12000000, ftKp_SpecialNStart_Anim,
+      ftKp_SpecialNStart_IASA, ftKp_SpecialNStart_Phys,
+      ftKp_SpecialNStart_Coll, ftCamera_UpdateCameraBox },
+    { 296, 0x003C0011, 0x12000000, ftKp_SpecialNLoop_Anim,
+      ftKp_SpecialNLoop_IASA, ftKp_SpecialNLoop_Phys, ftKp_SpecialNLoop_Coll,
+      ftCamera_UpdateCameraBox },
+    { 297, 0x00340011, 0x12000000, ftKp_SpecialNEnd_Anim,
+      ftKp_SpecialNEnd_IASA, ftKp_SpecialNEnd_Phys, ftKp_SpecialNEnd_Coll,
+      ftCamera_UpdateCameraBox },
+    { 298, 0x00340411, 0x12000000, ftKp_SpecialAirNStart_Anim,
+      ftKp_SpecialAirNStart_IASA, ftKp_SpecialAirNStart_Phys,
+      ftKp_SpecialAirNStart_Coll, ftCamera_UpdateCameraBox },
+    { 299, 0x003C0411, 0x12000000, ftKp_SpecialAirNLoop_Anim,
+      ftKp_SpecialAirNLoop_IASA, ftKp_SpecialAirNLoop_Phys,
+      ftKp_SpecialAirNLoop_Coll, ftCamera_UpdateCameraBox },
+    { 300, 0x00340411, 0x12000000, ftKp_SpecialAirNEnd_Anim,
+      ftKp_SpecialAirNEnd_IASA, ftKp_SpecialAirNEnd_Phys,
+      ftKp_SpecialAirNEnd_Coll, ftCamera_UpdateCameraBox },
+    { 301, 0x00340012, 0x13000000, ftKp_SpecialS_Anim, NULL,
+      ftKp_SpecialS_Phys, ftKp_SpecialS_Coll, ftCamera_UpdateCameraBox },
+    { 302, 0x00340012, 0x13000000, ftKp_SpecialSCatch_Anim,
+      ftKp_SpecialSCatch_IASA, ftKp_SpecialSCatch_Phys,
+      ftKp_SpecialSCatch_Coll, ftCamera_UpdateCameraBox },
+    { 303, 0x00340012, 0x13000000, ftKp_SpecialSCatch_Anim,
+      ftKp_SpecialSCatch_IASA, ftKp_SpecialSCatch_Phys,
+      ftKp_SpecialSCatch_Coll, ftCamera_UpdateCameraBox },
+    { 302, 0x00340012, 0x13000000, ftKp_SpecialSWait_Anim,
+      ftKp_SpecialSWait_IASA, ftKp_SpecialSWait_Phys, ftKp_SpecialSWait_Coll,
+      ftCamera_UpdateCameraBox },
+    { 304, 0x00340012, 0x13000000, ftKp_SpecialSThrowF_Anim, NULL,
+      ftKp_SpecialSThrowF_Phys, ftKp_SpecialSThrowF_Coll,
+      ftCamera_UpdateCameraBox },
+    { 305, 0x00340012, 0x13000000, ftKp_SpecialSThrowB_Anim, NULL,
+      ftKp_SpecialSThrowB_Phys, ftKp_SpecialSThrowB_Coll,
+      ftCamera_UpdateCameraBox },
+    { 306, 0x00340412, 0x13000000, ftKp_SpecialAirS_Anim, NULL,
+      ftKp_SpecialAirS_Phys, ftKp_SpecialAirS_Coll, ftCamera_UpdateCameraBox },
+    { 307, 0x00340412, 0x13000000, ftKp_SpecialAirSCatch_Anim,
+      ftKp_SpecialAirSCatch_IASA, ftKp_SpecialAirSCatch_Phys,
+      ftKp_SpecialAirSCatch_Coll, ftCamera_UpdateCameraBox },
+    { 308, 0x00340412, 0x13000000, ftKp_SpecialAirSCatch_Anim,
+      ftKp_SpecialAirSCatch_IASA, ftKp_SpecialAirSCatch_Phys,
+      ftKp_SpecialAirSCatch_Coll, ftCamera_UpdateCameraBox },
+    { 307, 0x00340012, 0x13000000, ftKp_SpecialAirSWait_Anim,
+      ftKp_SpecialAirSWait_IASA, ftKp_SpecialAirSWait_Phys,
+      ftKp_SpecialAirSWait_Coll, ftCamera_UpdateCameraBox },
+    { 309, 0x00340412, 0x13000000, ftKp_SpecialAirSThrowF_Anim, NULL,
+      ftKp_SpecialAirSThrowF_Phys, ftKp_SpecialAirSThrowF_Coll,
+      ftCamera_UpdateCameraBox },
+    { 310, 0x00340412, 0x13000000, ftKp_SpecialAirSThrowB_Anim, NULL,
+      ftKp_SpecialAirSThrowB_Phys, ftKp_SpecialAirSThrowB_Coll,
+      ftCamera_UpdateCameraBox },
+    { 311, 0x00340213, 0x14000000, ftKp_SpecialHi_Anim, ftKp_SpecialHi_IASA,
+      ftKp_SpecialHi_Phys, ftKp_SpecialHi_Coll, ftCamera_UpdateCameraBox },
+    { 312, 0x00340613, 0x14000000, ftKp_SpecialAirHi_Anim,
+      ftKp_SpecialAirHi_IASA, ftKp_SpecialAirHi_Phys, ftKp_SpecialAirHi_Coll,
+      ftCamera_UpdateCameraBox },
+    { 313, 0x00340214, 0x15000000, ftKp_SpecialLwStart_Anim, NULL,
+      ftKp_SpecialLwStart_Phys, ftKp_SpecialLwStart_Coll,
+      ftCamera_UpdateCameraBox },
+    { 314, 0x00340614, 0x15000000, ftKp_SpecialAirLw_Anim, NULL,
+      ftKp_SpecialAirLw_Phys, ftKp_SpecialAirLw_Coll,
+      ftCamera_UpdateCameraBox },
+    { 315, 0x00340214, 0x15000000, ftKp_SpecialLwLanding_Anim, NULL,
+      ftKp_SpecialLwLanding_Phys, ftKp_SpecialLwLanding_Coll,
+      ftCamera_UpdateCameraBox },
 };
 
 char ftKp_Init_DatFilename[] = "PlKp.dat";
@@ -89,8 +109,8 @@ Fighter_CostumeStrings ftKp_Init_CostumeStrings[] = {
     { ftKp_Init_803CF194, ftKp_Init_803CF1A0, ftKp_Init_803CF1BC },
 };
 
-/* static */ extern const f32 lbl_804D9ADC; // = 1.0F
-/* static */ extern const f32 lbl_804D9AD8; // = 0.0F
+/* static */ extern const f32 ftKp_Init_804D9ADC; // = 1.0F
+/* static */ extern const f32 ftKp_Init_804D9AD8; // = 0.0F
 
 void ftKp_Init_OnDeath(HSD_GObj* gobj)
 {
@@ -113,14 +133,14 @@ void ftKp_Init_OnDeath(HSD_GObj* gobj)
     }
 }
 
-/* static */ void ftKp_Unk3_80134D78(HSD_GObj* gobj);
+/* static */ void ftKp_SpecialLw_80134D78(HSD_GObj* gobj);
 
 void ftKp_Init_UnkMotionStates3(HSD_GObj* gobj)
 {
-    ftKp_Unk3_80134D78(gobj);
+    ftKp_SpecialLw_80134D78(gobj);
 }
 
-void ftKp_OnLoadForGKoopa(Fighter* fp)
+void ftKp_Init_OnLoadForGKoopa(Fighter* fp)
 {
     PUSH_ATTRS(fp, ftKoopaAttributes);
 }
@@ -175,56 +195,56 @@ void ftKp_Init_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, true);
 }
 
-f32 ftKp_Init_80132DC0(HSD_GObj* gobj)
+f32 ftKp_SpecialS_80132DC0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
     return sa->x4C;
 }
 
-f32 ftKp_Init_80132DD0(HSD_GObj* gobj)
+f32 ftKp_SpecialS_80132DD0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
     return sa->x48;
 }
 
-f32 ftKp_Init_80132DE0(HSD_GObj* gobj)
+f32 ftKp_SpecialS_80132DE0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
     return sa->x44;
 }
 
-f32 ftKp_Init_80132DF0(HSD_GObj* gobj)
+f32 ftKp_SpecialS_80132DF0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
     return sa->x40;
 }
 
-f32 ftKp_Init_80132E00(HSD_GObj* gobj)
+f32 ftKp_SpecialS_80132E00(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
     return sa->x3C;
 }
 
-f32 ftKp_Init_80132E10(HSD_GObj* gobj)
+f32 ftKp_SpecialS_80132E10(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
     return sa->x34;
 }
 
-f32 ftKp_Init_80132E20(HSD_GObj* gobj)
+f32 ftKp_SpecialS_80132E20(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
     return sa->x38;
 }
 
-void ftKp_Init_80132E30(HSD_GObj* gobj)
+void ftKp_SpecialS_80132E30(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -260,7 +280,7 @@ void ftKp_Init_80132E30(HSD_GObj* gobj)
     }
 }
 
-void ftKp_SpecialS_StartMotion(HSD_GObj* gobj)
+void ftKp_SpecialS_Enter(HSD_GObj* gobj)
 {
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -271,22 +291,22 @@ void ftKp_SpecialS_StartMotion(HSD_GObj* gobj)
         fp->mv.kp.unk1.xC = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, 347, 0, 0, lbl_804D9AD8, lbl_804D9ADC,
-                              lbl_804D9AD8);
+    Fighter_ChangeMotionState(gobj, 347, 0, 0, ftKp_Init_804D9AD8,
+                              ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
 
     ftAnim_8006EBA4(gobj);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        ftCommon_8007E2D0(fp, 8, ftKp_Init_8013302C, NULL, ft_800BC7E0);
+        ftCommon_8007E2D0(fp, 8, ftKp_SpecialS_8013302C, NULL, ft_800BC7E0);
 
         fp->mv.kp.unk1.x0 = 0;
         fp->mv.kp.unk1.x8 = 0;
     }
 }
 
-void ftKp_SpecialAirS_StartMotion(HSD_GObj* gobj)
+void ftKp_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -297,15 +317,15 @@ void ftKp_SpecialAirS_StartMotion(HSD_GObj* gobj)
         fp->mv.kp.unk1.xC = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, 353, 0, 0, lbl_804D9AD8, lbl_804D9ADC,
-                              lbl_804D9AD8);
+    Fighter_ChangeMotionState(gobj, 353, 0, 0, ftKp_Init_804D9AD8,
+                              ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
 
     ftAnim_8006EBA4(gobj);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        ftCommon_8007E2D0(fp, 8, ftKp_Init_801330E4, NULL, ft_800BC8D4);
+        ftCommon_8007E2D0(fp, 8, ftKp_SpecialS_801330E4, NULL, ft_800BC8D4);
 
         fp->mv.kp.unk1.x0 = 0;
         fp->mv.kp.unk1.x8 = 0;
@@ -315,16 +335,17 @@ void ftKp_SpecialAirS_StartMotion(HSD_GObj* gobj)
 static Fighter_MotionStateChangeFlags const transition_flags0 =
     FtStateChange_SkipUpdateMatAnim;
 
-void ftKp_Init_8013302C(HSD_GObj* gobj)
+void ftKp_SpecialS_8013302C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((signed) fp->mv.kp.unk1.x4 != 0) {
         Fighter_ChangeMotionState(gobj, 349, transition_flags0, 0,
-                                  lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+                                  ftKp_Init_804D9AD8, ftKp_Init_804D9ADC,
+                                  ftKp_Init_804D9AD8);
     } else {
-        Fighter_ChangeMotionState(gobj, 348, 0, 0, lbl_804D9AD8, lbl_804D9ADC,
-                                  lbl_804D9AD8);
+        Fighter_ChangeMotionState(gobj, 348, 0, 0, ftKp_Init_804D9AD8,
+                                  ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
     }
 
     fp->x2222_flag.bits.b2 = true;
@@ -334,17 +355,18 @@ void ftKp_Init_8013302C(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
 }
 
-void ftKp_Init_801330E4(HSD_GObj* gobj)
+void ftKp_SpecialS_801330E4(HSD_GObj* gobj)
 {
     Fighter* fp;
 
     fp = gobj->user_data;
     if ((signed) fp->mv.kp.unk1.x4 != 0) {
         Fighter_ChangeMotionState(gobj, 355, transition_flags0, 0,
-                                  lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+                                  ftKp_Init_804D9AD8, ftKp_Init_804D9ADC,
+                                  ftKp_Init_804D9AD8);
     } else {
-        Fighter_ChangeMotionState(gobj, 354, 0, 0, lbl_804D9AD8, lbl_804D9ADC,
-                                  lbl_804D9AD8);
+        Fighter_ChangeMotionState(gobj, 354, 0, 0, ftKp_Init_804D9AD8,
+                                  ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
     }
 
     fp->x2222_flag.bits.b2 = true;
@@ -361,24 +383,24 @@ static Fighter_MotionStateChangeFlags const transition_flags1 =
     FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
     FtStateChange_Unk_27;
 
-void ftKp_Init_8013319C(HSD_GObj* gobj)
+void ftKp_SpecialS_8013319C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
 
     Fighter_ChangeMotionState(gobj, 353, transition_flags1, 0,
-                              fp->x894_currentAnimFrame, lbl_804D9ADC,
-                              lbl_804D9AD8);
+                              fp->x894_currentAnimFrame, ftKp_Init_804D9ADC,
+                              ftKp_Init_804D9AD8);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCommon_8007E2D0(fp, 8, ftKp_Init_801330E4, NULL, ft_800BC8D4);
+        ftCommon_8007E2D0(fp, 8, ftKp_SpecialS_801330E4, NULL, ft_800BC8D4);
         fp->mv.kp.unk1.x0 = 0;
         fp->mv.kp.unk1.x8 = 0;
     }
 }
 
-void ftKp_Init_8013322C(HSD_GObj* gobj)
+void ftKp_SpecialS_8013322C(HSD_GObj* gobj)
 {
     /// @todo @c fp0 cannot move below @c fp1, which is very strange.
     ///       Perhaps there is a temporary @c Fighter* somewhere.
@@ -388,12 +410,12 @@ void ftKp_Init_8013322C(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp1);
 
     Fighter_ChangeMotionState(gobj, 347, transition_flags1, 0,
-                              fp1->x894_currentAnimFrame, lbl_804D9ADC,
-                              lbl_804D9AD8);
+                              fp1->x894_currentAnimFrame, ftKp_Init_804D9ADC,
+                              ftKp_Init_804D9AD8);
 
     {
         fp0 = GET_FIGHTER(gobj);
-        ftCommon_8007E2D0(fp0, 8, ftKp_Init_8013302C, NULL, ft_800BC7E0);
+        ftCommon_8007E2D0(fp0, 8, ftKp_SpecialS_8013302C, NULL, ft_800BC7E0);
         fp0->mv.kp.unk1.x0 = 0;
         fp0->mv.kp.unk1.x8 = 0;
     }
@@ -402,7 +424,7 @@ void ftKp_Init_8013322C(HSD_GObj* gobj)
     fp1->x2200_ftcmd_var0 = 0;
 }
 
-void ftKp_Init_801332C4(HSD_GObj* gobj)
+void ftKp_SpecialS_801332C4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
@@ -417,21 +439,21 @@ void ftKp_Init_801332C4(HSD_GObj* gobj)
     ft_800CC730(gobj);
 }
 
-void ftKp_Init_80133324(HSD_GObj* gobj)
+void ftKp_SpecialS_80133324(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, 348, transition_flags1, 0,
-                              fp->x894_currentAnimFrame, lbl_804D9ADC,
-                              lbl_804D9AD8);
+                              fp->x894_currentAnimFrame, ftKp_Init_804D9ADC,
+                              ftKp_Init_804D9AD8);
 
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
 }
 
-void ftKp_Init_80133398(HSD_GObj* gobj)
+void ftKp_SpecialS_80133398(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
@@ -451,24 +473,24 @@ static u32 const transition_flags2 =
     FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
     FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag;
 
-void ftKp_Init_801333F8(HSD_GObj* gobj)
+void ftKp_SpecialS_801333F8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, 350, transition_flags2, 0,
-                              fp->x894_currentAnimFrame, lbl_804D9ADC,
-                              lbl_804D9AD8);
+                              fp->x894_currentAnimFrame, ftKp_Init_804D9ADC,
+                              ftKp_Init_804D9AD8);
 
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
-    ftAnim_8006F0FC(gobj, lbl_804D9AD8);
+    ftAnim_8006F0FC(gobj, ftKp_Init_804D9AD8);
     fp->mv.kp.unk1.x0 = 0;
     fp->x2200_ftcmd_var0 = 0;
 }
 
-void ftKp_Init_80133484(HSD_GObj* gobj)
+void ftKp_SpecialS_80133484(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
@@ -483,7 +505,7 @@ void ftKp_Init_80133484(HSD_GObj* gobj)
     ft_800CC730(gobj);
 }
 
-void ftKp_Init_801334E4(HSD_GObj* gobj)
+void ftKp_SpecialS_801334E4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -494,8 +516,8 @@ void ftKp_Init_801334E4(HSD_GObj* gobj)
     }
 
     Fighter_ChangeMotionState(gobj, 351, transition_flags1, 0,
-                              fp->x894_currentAnimFrame, lbl_804D9ADC,
-                              lbl_804D9AD8);
+                              fp->x894_currentAnimFrame, ftKp_Init_804D9ADC,
+                              ftKp_Init_804D9AD8);
 
     if ((s32) fp->mv.kp.unk1.xC != 0) {
         fp->facing_dir = -fp->facing_dir;
@@ -509,7 +531,7 @@ void ftKp_Init_801334E4(HSD_GObj* gobj)
     ftCommon_8007E2FC(gobj);
 }
 
-void ftKp_Init_8013359C(HSD_GObj* gobj)
+void ftKp_SpecialS_8013359C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -520,8 +542,8 @@ void ftKp_Init_8013359C(HSD_GObj* gobj)
     }
 
     Fighter_ChangeMotionState(gobj, 352, transition_flags1, 0,
-                              fp->x894_currentAnimFrame, lbl_804D9ADC,
-                              lbl_804D9AD8);
+                              fp->x894_currentAnimFrame, ftKp_Init_804D9ADC,
+                              ftKp_Init_804D9AD8);
 
     if ((signed) fp->mv.kp.unk1.xC != 0) {
         fp->facing_dir = -fp->facing_dir;
@@ -535,14 +557,14 @@ void ftKp_Init_8013359C(HSD_GObj* gobj)
     ftCommon_8007E2FC(gobj);
 }
 
-void ftKp_Init_80133654(HSD_GObj* gobj)
+void ftKp_SpecialS_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
 
-void ftKp_Init_80133690(HSD_GObj* gobj)
+void ftKp_SpecialAirS_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
@@ -552,7 +574,7 @@ void ftKp_Init_80133690(HSD_GObj* gobj)
 static Fighter_MotionStateChangeFlags const transition_flags3 =
     FtStateChange_SkipUpdateMatAnim | FtStateChange_Unk_19;
 
-void ftKp_Init_801336CC(HSD_GObj* gobj)
+void ftKp_SpecialSCatch_Anim(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
 
@@ -586,13 +608,13 @@ void ftKp_Init_801336CC(HSD_GObj* gobj)
                 fp0 = GET_FIGHTER(gobj);
 
                 if ((signed) fp0->mv.kp.unk1.x4 != false) {
-                    Fighter_ChangeMotionState(gobj, 349, transition_flags0, 0,
-                                              lbl_804D9AD8, lbl_804D9ADC,
-                                              lbl_804D9AD8);
+                    Fighter_ChangeMotionState(
+                        gobj, 349, transition_flags0, 0, ftKp_Init_804D9AD8,
+                        ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
                 } else {
-                    Fighter_ChangeMotionState(gobj, 348, FtStateChange_None, 0,
-                                              lbl_804D9AD8, lbl_804D9ADC,
-                                              lbl_804D9AD8);
+                    Fighter_ChangeMotionState(
+                        gobj, 348, FtStateChange_None, 0, ftKp_Init_804D9AD8,
+                        ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
                 }
 
                 fp0->x2222_flag.bits.b2 = true;
@@ -608,10 +630,10 @@ void ftKp_Init_801336CC(HSD_GObj* gobj)
             /// @todo Combine @c fp0 with other branch somehow
             fp0 = GET_FIGHTER(gobj);
             Fighter_ChangeMotionState(gobj, 350, transition_flags3, 0,
-                                      fp0->x894_currentAnimFrame, lbl_804D9ADC,
-                                      lbl_804D9AD8);
+                                      fp0->x894_currentAnimFrame,
+                                      ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
 
-            ftAnim_8006F0FC(gobj, lbl_804D9AD8);
+            ftAnim_8006F0FC(gobj, ftKp_Init_804D9AD8);
             fp0->mv.kp.unk1.x0 = 0;
             fp0->x2200_ftcmd_var0 = 0;
             ftCommon_8007E2F4(fp0, 511);

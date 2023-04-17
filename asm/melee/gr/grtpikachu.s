@@ -65,8 +65,8 @@ grTPikachu_80222F20:
 /* 80222F38 0021FB18  93 81 00 10 */	stw r28, 0x10(r1)
 /* 80222F3C 0021FB1C  3B 83 00 00 */	addi r28, r3, 0
 /* 80222F40 0021FB20  1C 1C 00 14 */	mulli r0, r28, 0x14
-/* 80222F44 0021FB24  3C 60 80 3F */	lis r3, lbl_803E9270@ha
-/* 80222F48 0021FB28  3B E3 92 70 */	addi r31, r3, lbl_803E9270@l
+/* 80222F44 0021FB24  3C 60 80 3F */	lis r3, grTPk_803E9270@ha
+/* 80222F48 0021FB28  3B E3 92 70 */	addi r31, r3, grTPk_803E9270@l
 /* 80222F4C 0021FB2C  38 7C 00 00 */	addi r3, r28, 0
 /* 80222F50 0021FB30  7F BF 02 14 */	add r29, r31, r0
 /* 80222F54 0021FB34  4B F9 E5 7D */	bl Ground_801C14D0
@@ -99,7 +99,7 @@ grTPikachu_80222F20:
 /* 80222FB8 0021FB98  41 82 00 2C */	beq .L_80222FE4
 /* 80222FBC 0021FB9C  38 7E 00 00 */	addi r3, r30, 0
 /* 80222FC0 0021FBA0  38 A0 00 04 */	li r5, 4
-/* 80222FC4 0021FBA4  48 16 CD 91 */	bl func_8038FD54
+/* 80222FC4 0021FBA4  48 16 CD 91 */	bl HSD_GObjProc_8038FD54
 /* 80222FC8 0021FBA8  48 00 00 1C */	b .L_80222FE4
 .L_80222FCC:
 /* 80222FCC 0021FBAC  38 DC 00 00 */	addi r6, r28, 0
@@ -236,8 +236,8 @@ grTPikachu_80223158:
 
 .section .data
     .balign 8
-.global lbl_803E9270
-lbl_803E9270:
+.global grTPk_803E9270
+grTPk_803E9270:
     .4byte grTPikachu_80223008
     .4byte grTPikachu_80223034
     .4byte grTPikachu_8022303C
@@ -258,15 +258,15 @@ lbl_803E9270:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_803E92C0
-lbl_803E92C0:
+.global grTPk_803E92C0
+grTPk_803E92C0:
     .asciz "/GrTPk.dat"
     .balign 4
-.global lbl_803E92CC
-lbl_803E92CC:
+.global grTPk_803E92CC
+grTPk_803E92CC:
     .4byte 0x00000039
-    .4byte lbl_803E9270
-    .4byte lbl_803E92C0
+    .4byte grTPk_803E9270
+    .4byte grTPk_803E92C0
     .4byte grTPikachu_80222E80
     .4byte grTPikachu_80222E7C
     .4byte grTPikachu_80222EF0

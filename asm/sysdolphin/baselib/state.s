@@ -10,8 +10,8 @@ HSD_SetupChannelMode:
 /* 803615DC 0035E1BC  BF 21 00 14 */	stmw r25, 0x14(r1)
 /* 803615E0 0035E1C0  54 7B 07 39 */	rlwinm. r27, r3, 0, 0x1c, 0x1c
 /* 803615E4 0035E1C4  3B 23 00 00 */	addi r25, r3, 0
-/* 803615E8 0035E1C8  3C 60 80 40 */	lis r3, lbl_80405A38@ha
-/* 803615EC 0035E1CC  3B E3 5A 38 */	addi r31, r3, lbl_80405A38@l
+/* 803615E8 0035E1C8  3C 60 80 40 */	lis r3, HSD_State_80405A38@ha
+/* 803615EC 0035E1CC  3B E3 5A 38 */	addi r31, r3, HSD_State_80405A38@l
 /* 803615F0 0035E1D0  41 82 00 0C */	beq .L_803615FC
 /* 803615F4 0035E1D4  38 60 00 02 */	li r3, 2
 /* 803615F8 0035E1D8  48 00 00 08 */	b .L_80361600
@@ -330,7 +330,7 @@ HSD_SetMaterialColor:
 /* 80361A38 0035E618  90 03 00 04 */	stw r0, 4(r3)
 /* 80361A3C 0035E61C  80 05 00 00 */	lwz r0, 0(r5)
 /* 80361A40 0035E620  90 03 00 08 */	stw r0, 8(r3)
-/* 80361A44 0035E624  C8 02 EA 38 */	lfd f0, lbl_804DE418@sda21(r2)
+/* 80361A44 0035E624  C8 02 EA 38 */	lfd f0, HSD_State_804DE418@sda21(r2)
 /* 80361A48 0035E628  FC 00 00 72 */	fmul f0, f0, f1
 /* 80361A4C 0035E62C  FC 00 00 1E */	fctiwz f0, f0
 /* 80361A50 0035E630  D8 01 00 18 */	stfd f0, 0x18(r1)
@@ -356,18 +356,18 @@ HSD_StateSetLineWidth:
 /* 80361A88 0035E668  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 80361A8C 0035E66C  7C 7E 1B 78 */	mr r30, r3
 /* 80361A90 0035E670  57 C0 06 3E */	clrlwi r0, r30, 0x18
-/* 80361A94 0035E674  88 6D BF 10 */	lbz r3, lbl_804D75B0@sda21(r13)
+/* 80361A94 0035E674  88 6D BF 10 */	lbz r3, HSD_State_804D75B0@sda21(r13)
 /* 80361A98 0035E678  7C 03 00 40 */	cmplw r3, r0
 /* 80361A9C 0035E67C  40 82 00 10 */	bne .L_80361AAC
-/* 80361AA0 0035E680  80 0D BF 14 */	lwz r0, lbl_804D75B4@sda21(r13)
+/* 80361AA0 0035E680  80 0D BF 14 */	lwz r0, HSD_State_804D75B4@sda21(r13)
 /* 80361AA4 0035E684  7C 00 F8 00 */	cmpw r0, r31
 /* 80361AA8 0035E688  41 82 00 18 */	beq .L_80361AC0
 .L_80361AAC:
 /* 80361AAC 0035E68C  38 7E 00 00 */	addi r3, r30, 0
 /* 80361AB0 0035E690  38 9F 00 00 */	addi r4, r31, 0
 /* 80361AB4 0035E694  4B FD B7 8D */	bl GXSetLineWidth
-/* 80361AB8 0035E698  9B CD BF 10 */	stb r30, lbl_804D75B0@sda21(r13)
-/* 80361ABC 0035E69C  93 ED BF 14 */	stw r31, lbl_804D75B4@sda21(r13)
+/* 80361AB8 0035E698  9B CD BF 10 */	stb r30, HSD_State_804D75B0@sda21(r13)
+/* 80361ABC 0035E69C  93 ED BF 14 */	stw r31, HSD_State_804D75B4@sda21(r13)
 .L_80361AC0:
 /* 80361AC0 0035E6A0  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 80361AC4 0035E6A4  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -502,18 +502,18 @@ HSD_StateSetPointSize:
 /* 80361C74 0035E854  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 80361C78 0035E858  7C 7E 1B 78 */	mr r30, r3
 /* 80361C7C 0035E85C  57 C0 06 3E */	clrlwi r0, r30, 0x18
-/* 80361C80 0035E860  88 6D BF 18 */	lbz r3, lbl_804D75B8@sda21(r13)
+/* 80361C80 0035E860  88 6D BF 18 */	lbz r3, HSD_State_804D75B8@sda21(r13)
 /* 80361C84 0035E864  7C 03 00 40 */	cmplw r3, r0
 /* 80361C88 0035E868  40 82 00 10 */	bne .L_80361C98
-/* 80361C8C 0035E86C  80 0D BF 1C */	lwz r0, lbl_804D75BC@sda21(r13)
+/* 80361C8C 0035E86C  80 0D BF 1C */	lwz r0, HSD_State_804D75BC@sda21(r13)
 /* 80361C90 0035E870  7C 00 F8 00 */	cmpw r0, r31
 /* 80361C94 0035E874  41 82 00 18 */	beq .L_80361CAC
 .L_80361C98:
 /* 80361C98 0035E878  38 7E 00 00 */	addi r3, r30, 0
 /* 80361C9C 0035E87C  38 9F 00 00 */	addi r4, r31, 0
 /* 80361CA0 0035E880  4B FD B5 F9 */	bl GXSetPointSize
-/* 80361CA4 0035E884  9B CD BF 18 */	stb r30, lbl_804D75B8@sda21(r13)
-/* 80361CA8 0035E888  93 ED BF 1C */	stw r31, lbl_804D75BC@sda21(r13)
+/* 80361CA4 0035E884  9B CD BF 18 */	stb r30, HSD_State_804D75B8@sda21(r13)
+/* 80361CA8 0035E888  93 ED BF 1C */	stw r31, HSD_State_804D75BC@sda21(r13)
 .L_80361CAC:
 /* 80361CAC 0035E88C  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 80361CB0 0035E890  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -718,8 +718,8 @@ HSD_StateSetDither:
 _HSD_StateInvalidatePrimitive:
 /* 80361F34 0035EB14  38 60 00 00 */	li r3, 0
 /* 80361F38 0035EB18  38 00 FF FF */	li r0, -1
-/* 80361F3C 0035EB1C  98 6D BF 10 */	stb r3, lbl_804D75B0@sda21(r13)
-/* 80361F40 0035EB20  98 6D BF 18 */	stb r3, lbl_804D75B8@sda21(r13)
+/* 80361F3C 0035EB1C  98 6D BF 10 */	stb r3, HSD_State_804D75B0@sda21(r13)
+/* 80361F40 0035EB20  98 6D BF 18 */	stb r3, HSD_State_804D75B8@sda21(r13)
 /* 80361F44 0035EB24  90 0D BF 20 */	stw r0, state_cull_mode@sda21(r13)
 /* 80361F48 0035EB28  4E 80 00 20 */	blr
 
@@ -792,8 +792,8 @@ HSD_StateInvalidate:
 
 .section .data
     .balign 8
-.global lbl_80405A38
-lbl_80405A38:
+.global HSD_State_80405A38
+HSD_State_80405A38:
     .4byte NULL
     .4byte 0x00000001
     .4byte 0x00000001
@@ -873,13 +873,13 @@ invalidate_funcs:
     .4byte 0x00000002
     .4byte _HSD_StateInvalidateVtxAttr
     .4byte 0x00000004
-    .4byte lbl_80362CA0
+    .4byte HSD_Tev_80362CA0
     .4byte 0x00000008
-    .4byte lbl_80362CF8
+    .4byte HSD_Tev_80362CF8
     .4byte 0x00000010
-    .4byte lbl_80362D04
+    .4byte HSD_Tev_80362D04
     .4byte 0x00000020
-    .4byte lbl_80362D24
+    .4byte HSD_Tev_80362D24
     .4byte 0x00000040
     .4byte _HSD_StateInvalidateRenderMode
     .4byte NULL
@@ -902,17 +902,17 @@ dark_matter:
 
 .section .sbss
     .balign 8
-.global lbl_804D75B0
-lbl_804D75B0:
+.global HSD_State_804D75B0
+HSD_State_804D75B0:
     .skip 0x4
-.global lbl_804D75B4
-lbl_804D75B4:
+.global HSD_State_804D75B4
+HSD_State_804D75B4:
     .skip 0x4
-.global lbl_804D75B8
-lbl_804D75B8:
+.global HSD_State_804D75B8
+HSD_State_804D75B8:
     .skip 0x4
-.global lbl_804D75BC
-lbl_804D75BC:
+.global HSD_State_804D75BC
+HSD_State_804D75BC:
     .skip 0x4
 .global state_cull_mode
 state_cull_mode:
@@ -975,7 +975,7 @@ state_dither:
 
 .section .sdata2
     .balign 8
-.global lbl_804DE418
-lbl_804DE418:
+.global HSD_State_804DE418
+HSD_State_804DE418:
     .4byte 0x406FE000
     .4byte 0x00000000

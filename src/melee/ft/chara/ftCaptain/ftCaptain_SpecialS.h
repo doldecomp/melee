@@ -18,9 +18,9 @@ void ftCa_SpecialS_RemoveGFX(HSD_GObj* gobj);
  * Captain Falcon & Ganondorf's aerial Raptor Boost/Gerudo Dragon Start Action
  * State handler.
  */
-void ftCa_SpecialS_StartMotion(HSD_GObj* gobj);
+void ftCa_SpecialS_Enter(HSD_GObj* gobj);
 
-void ftCa_SpecialAirS_StartMotion(HSD_GObj* gobj);
+void ftCa_SpecialAirS_Enter(HSD_GObj* gobj);
 
 /**
  * Captain Falcon & Ganondorf's Raptor Boost / Gerudo Dragon Detect function.
@@ -114,6 +114,6 @@ void ftCa_SpecialS_Coll(HSD_GObj* gobj);
 void ftCa_SpecialAirSStart_Coll(HSD_GObj* gobj);
 
 void ftCa_SpecialAirS_Coll(HSD_GObj* gobj);
-void ftCa_OnLoadForGanon(Fighter*);
+void ftCa_Init_OnLoadForGanon(Fighter*);
 
 #endif

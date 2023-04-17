@@ -4,13 +4,13 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-void ftMh_Unk32_80155B80(HSD_GObj*);
+void ftMh_CaptureMasterHand_80155B80(HSD_GObj*);
 
-void ftMh_Unk32_80155B70(HSD_GObj* gobj);
-void ftMh_Unk32_80155B74(HSD_GObj* gobj);
-void ftMh_Unk32_80155B78(HSD_GObj* gobj);
-void ftMh_Unk32_80155B7C(HSD_GObj* gobj);
-void ftMh_Unk32_80155B80(HSD_GObj* gobj);
-void ftMh_Unk32_80155C20(HSD_GObj* gobj);
+void ftMh_CaptureMasterHand_Anim(HSD_GObj* gobj);
+void ftMh_CaptureMasterHand_IASA(HSD_GObj* gobj);
+void ftMh_CaptureMasterHand_Phys(HSD_GObj* gobj);
+void ftMh_CaptureMasterHand_Coll(HSD_GObj* gobj);
+void ftMh_CaptureMasterHand_80155B80(HSD_GObj* gobj);
+void ftMh_CaptureDamageMasterHand_Anim(HSD_GObj* gobj);
 
 #endif

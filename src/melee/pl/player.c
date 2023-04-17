@@ -81,9 +81,9 @@ ftMapping ftMapping_list[FTKIND_MAX] = { //////ftMapping_list
 
 ////.bss
 StaticPlayer player_slots[PL_SLOT_MAX];
-HSD_ObjAllocData lbl_804587E0;
+HSD_ObjAllocData Player_804587E0;
 
-extern int lbl_804D6470;
+extern int pl_804D6470;
 
 /// @todo This can be used in more places when functions are fixed to use
 ///       correct structs.
@@ -301,7 +301,7 @@ void Player_80031D2C(enum_t id, int slot)
 
 void Player_80031DA8(s32 param_1, s32 param_2)
 {
-    ftKb_800EED50(param_1, param_2);
+    ftKb_SpecialN_800EED50(param_1, param_2);
 }
 
 void Player_80031DC8(void func_arg(s32, s32))
@@ -337,7 +337,8 @@ void Player_80031EBC(int slot)
             {
                 ft_800D4F24(player->player_entity[player->transformed[i]], 1);
             }
-            func_80390228(player->player_entity[player->transformed[i]]);
+            HSD_GObjPLink_80390228(
+                player->player_entity[player->transformed[i]]);
         }
     }
 }
@@ -2094,7 +2095,7 @@ void Player_InitAllPlayers(void)
 
 void Player_80036DA4(void)
 {
-    HSD_ObjAllocInit(&lbl_804587E0, 8, 4);
+    HSD_ObjAllocInit(&Player_804587E0, 8, 4);
     Fighter_FirstInitialize_80067A84();
 }
 
@@ -2104,7 +2105,7 @@ void Player_80036DD8(void)
 
     lbArchive_80016C64(str_PdPmdat_start_of_data, &sp8, str_plLoadCommonData,
                        0);
-    lbl_804D6470 = *sp8;
+    pl_804D6470 = *sp8;
 }
 
 void Player_80036E20(s32 arg0, s32 arg1, s32 arg2)

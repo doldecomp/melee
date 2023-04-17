@@ -139,8 +139,8 @@ ftPe_8011BB6C:
 /* 8011BC30 00118810  7C 08 03 A6 */	mtlr r0
 /* 8011BC34 00118814  4E 80 00 20 */	blr
 
-.global ftPe_8011BC38
-ftPe_8011BC38:
+.global ftPe_Float_Anim
+ftPe_Float_Anim:
 /* 8011BC38 00118818  7C 08 02 A6 */	mflr r0
 /* 8011BC3C 0011881C  90 01 00 04 */	stw r0, 4(r1)
 /* 8011BC40 00118820  94 21 FF F8 */	stwu r1, -8(r1)
@@ -165,8 +165,8 @@ ftPe_8011BC38:
 /* 8011BC84 00118864  7C 08 03 A6 */	mtlr r0
 /* 8011BC88 00118868  4E 80 00 20 */	blr
 
-.global ftPe_8011BC8C
-ftPe_8011BC8C:
+.global ftPe_Float_IASA
+ftPe_Float_IASA:
 /* 8011BC8C 0011886C  7C 08 02 A6 */	mflr r0
 /* 8011BC90 00118870  90 01 00 04 */	stw r0, 4(r1)
 /* 8011BC94 00118874  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -205,8 +205,8 @@ ftPe_8011BC8C:
 /* 8011BD10 001188F0  7C 08 03 A6 */	mtlr r0
 /* 8011BD14 001188F4  4E 80 00 20 */	blr
 
-.global ftPe_8011BD18
-ftPe_8011BD18:
+.global ftPe_Float_Phys
+ftPe_Float_Phys:
 /* 8011BD18 001188F8  7C 08 02 A6 */	mflr r0
 /* 8011BD1C 001188FC  90 01 00 04 */	stw r0, 4(r1)
 /* 8011BD20 00118900  94 21 FF F8 */	stwu r1, -8(r1)
@@ -217,8 +217,8 @@ ftPe_8011BD18:
 /* 8011BD34 00118914  7C 08 03 A6 */	mtlr r0
 /* 8011BD38 00118918  4E 80 00 20 */	blr
 
-.global ftPe_8011BD3C
-ftPe_8011BD3C:
+.global ftPe_Float_Coll
+ftPe_Float_Coll:
 /* 8011BD3C 0011891C  7C 08 02 A6 */	mflr r0
 /* 8011BD40 00118920  3C 80 80 09 */	lis r4, ft_80096CC8@ha
 /* 8011BD44 00118924  90 01 00 04 */	stw r0, 4(r1)
@@ -272,8 +272,8 @@ ftPe_8011BD6C:
 /* 8011BDE8 001189C8  7C 08 03 A6 */	mtlr r0
 /* 8011BDEC 001189CC  4E 80 00 20 */	blr
 
-.global ftPe_8011BDF0
-ftPe_8011BDF0:
+.global ftPe_FloatEnd_Anim
+ftPe_FloatEnd_Anim:
 /* 8011BDF0 001189D0  7C 08 02 A6 */	mflr r0
 /* 8011BDF4 001189D4  90 01 00 04 */	stw r0, 4(r1)
 /* 8011BDF8 001189D8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -291,12 +291,12 @@ ftPe_8011BDF0:
 /* 8011BE24 00118A04  7C 08 03 A6 */	mtlr r0
 /* 8011BE28 00118A08  4E 80 00 20 */	blr
 
-.global ftPe_8011BE2C
-ftPe_8011BE2C:
+.global ftPe_FloatEnd_IASA
+ftPe_FloatEnd_IASA:
 /* 8011BE2C 00118A0C  4E 80 00 20 */	blr
 
-.global ftPe_8011BE30
-ftPe_8011BE30:
+.global ftPe_FloatEnd_Phys
+ftPe_FloatEnd_Phys:
 /* 8011BE30 00118A10  7C 08 02 A6 */	mflr r0
 /* 8011BE34 00118A14  90 01 00 04 */	stw r0, 4(r1)
 /* 8011BE38 00118A18  94 21 FF F8 */	stwu r1, -8(r1)
@@ -306,8 +306,8 @@ ftPe_8011BE30:
 /* 8011BE48 00118A28  7C 08 03 A6 */	mtlr r0
 /* 8011BE4C 00118A2C  4E 80 00 20 */	blr
 
-.global ftPe_8011BE50
-ftPe_8011BE50:
+.global ftPe_FloatEnd_Coll
+ftPe_FloatEnd_Coll:
 /* 8011BE50 00118A30  7C 08 02 A6 */	mflr r0
 /* 8011BE54 00118A34  3C 80 80 09 */	lis r4, ft_80096CC8@ha
 /* 8011BE58 00118A38  90 01 00 04 */	stw r0, 4(r1)
@@ -397,8 +397,8 @@ ftPe_8011BF34:
 /* 8011BF80 00118B60  7C 08 03 A6 */	mtlr r0
 /* 8011BF84 00118B64  4E 80 00 20 */	blr
 
-.global ftPe_8011BF88
-ftPe_8011BF88:
+.global ftPe_FloatAttackAir_Anim
+ftPe_FloatAttackAir_Anim:
 /* 8011BF88 00118B68  7C 08 02 A6 */	mflr r0
 /* 8011BF8C 00118B6C  90 01 00 04 */	stw r0, 4(r1)
 /* 8011BF90 00118B70  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -453,8 +453,8 @@ ftPe_8011BF88:
 /* 8011C03C 00118C1C  7C 08 03 A6 */	mtlr r0
 /* 8011C040 00118C20  4E 80 00 20 */	blr
 
-.global ftPe_8011C044
-ftPe_8011C044:
+.global ftPe_FloatAttackAir_IASA
+ftPe_FloatAttackAir_IASA:
 /* 8011C044 00118C24  7C 08 02 A6 */	mflr r0
 /* 8011C048 00118C28  90 01 00 04 */	stw r0, 4(r1)
 /* 8011C04C 00118C2C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -533,8 +533,8 @@ ftPe_8011C044:
 /* 8011C158 00118D38  7C 08 03 A6 */	mtlr r0
 /* 8011C15C 00118D3C  4E 80 00 20 */	blr
 
-.global ftPe_8011C160
-ftPe_8011C160:
+.global ftPe_FloatAttackAir_Phys
+ftPe_FloatAttackAir_Phys:
 /* 8011C160 00118D40  7C 08 02 A6 */	mflr r0
 /* 8011C164 00118D44  90 01 00 04 */	stw r0, 4(r1)
 /* 8011C168 00118D48  94 21 FF F8 */	stwu r1, -8(r1)
@@ -545,15 +545,15 @@ ftPe_8011C160:
 /* 8011C17C 00118D5C  4B F6 8C 35 */	bl ft_80084DB0
 /* 8011C180 00118D60  48 00 00 08 */	b .L_8011C188
 .L_8011C184:
-/* 8011C184 00118D64  4B FF FB 95 */	bl ftPe_8011BD18
+/* 8011C184 00118D64  4B FF FB 95 */	bl ftPe_Float_Phys
 .L_8011C188:
 /* 8011C188 00118D68  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8011C18C 00118D6C  38 21 00 08 */	addi r1, r1, 8
 /* 8011C190 00118D70  7C 08 03 A6 */	mtlr r0
 /* 8011C194 00118D74  4E 80 00 20 */	blr
 
-.global ftPe_8011C198
-ftPe_8011C198:
+.global ftPe_FloatAttackAir_Coll
+ftPe_FloatAttackAir_Coll:
 /* 8011C198 00118D78  7C 08 02 A6 */	mflr r0
 /* 8011C19C 00118D7C  3C 80 80 09 */	lis r4, ft_8008D5FC@ha
 /* 8011C1A0 00118D80  90 01 00 04 */	stw r0, 4(r1)
@@ -603,8 +603,8 @@ ftPe_8011C1C0:
 /* 8011C240 00118E20  7C 08 03 A6 */	mtlr r0
 /* 8011C244 00118E24  4E 80 00 20 */	blr
 
-.global ftPe_8011C248
-ftPe_8011C248:
+.global ftPe_AttackS4_Anim
+ftPe_AttackS4_Anim:
 /* 8011C248 00118E28  7C 08 02 A6 */	mflr r0
 /* 8011C24C 00118E2C  90 01 00 04 */	stw r0, 4(r1)
 /* 8011C250 00118E30  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -622,8 +622,8 @@ ftPe_8011C248:
 /* 8011C27C 00118E5C  7C 08 03 A6 */	mtlr r0
 /* 8011C280 00118E60  4E 80 00 20 */	blr
 
-.global ftPe_8011C284
-ftPe_8011C284:
+.global ftPe_AttackS4_IASA
+ftPe_AttackS4_IASA:
 /* 8011C284 00118E64  7C 08 02 A6 */	mflr r0
 /* 8011C288 00118E68  90 01 00 04 */	stw r0, 4(r1)
 /* 8011C28C 00118E6C  94 21 FF F8 */	stwu r1, -8(r1)
@@ -631,15 +631,15 @@ ftPe_8011C284:
 /* 8011C294 00118E74  88 04 22 18 */	lbz r0, 0x2218(r4)
 /* 8011C298 00118E78  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
 /* 8011C29C 00118E7C  41 82 00 08 */	beq .L_8011C2A4
-/* 8011C2A0 00118E80  4B F6 E2 35 */	bl ft_8008A4D4
+/* 8011C2A0 00118E80  4B F6 E2 35 */	bl ftCo_Wait_IASA
 .L_8011C2A4:
 /* 8011C2A4 00118E84  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8011C2A8 00118E88  38 21 00 08 */	addi r1, r1, 8
 /* 8011C2AC 00118E8C  7C 08 03 A6 */	mtlr r0
 /* 8011C2B0 00118E90  4E 80 00 20 */	blr
 
-.global ftPe_8011C2B4
-ftPe_8011C2B4:
+.global ftPe_AttackS4_Phys
+ftPe_AttackS4_Phys:
 /* 8011C2B4 00118E94  7C 08 02 A6 */	mflr r0
 /* 8011C2B8 00118E98  90 01 00 04 */	stw r0, 4(r1)
 /* 8011C2BC 00118E9C  94 21 FF F8 */	stwu r1, -8(r1)
@@ -649,8 +649,8 @@ ftPe_8011C2B4:
 /* 8011C2CC 00118EAC  7C 08 03 A6 */	mtlr r0
 /* 8011C2D0 00118EB0  4E 80 00 20 */	blr
 
-.global ftPe_8011C2D4
-ftPe_8011C2D4:
+.global ftPe_AttackS4_Coll
+ftPe_AttackS4_Coll:
 /* 8011C2D4 00118EB4  7C 08 02 A6 */	mflr r0
 /* 8011C2D8 00118EB8  90 01 00 04 */	stw r0, 4(r1)
 /* 8011C2DC 00118EBC  94 21 FF F8 */	stwu r1, -8(r1)
@@ -684,8 +684,8 @@ ftPe_8011C2D4:
 /* 8011C344 00118F24  90 85 23 40 */	stw r4, 0x2340(r5)
 /* 8011C348 00118F28  4E 80 00 20 */	blr
 
-.global ftPe_SpecialS_StartMotion
-ftPe_SpecialS_StartMotion:
+.global ftPe_SpecialS_Enter
+ftPe_SpecialS_Enter:
 /* 8011C34C 00118F2C  7C 08 02 A6 */	mflr r0
 /* 8011C350 00118F30  38 80 01 62 */	li r4, 0x162
 /* 8011C354 00118F34  90 01 00 04 */	stw r0, 4(r1)
@@ -717,8 +717,8 @@ ftPe_SpecialS_StartMotion:
 /* 8011C3BC 00118F9C  7C 08 03 A6 */	mtlr r0
 /* 8011C3C0 00118FA0  4E 80 00 20 */	blr
 
-.global ftPe_SpecialAirS_StartMotion
-ftPe_SpecialAirS_StartMotion:
+.global ftPe_SpecialAirS_Enter
+ftPe_SpecialAirS_Enter:
 /* 8011C3C4 00118FA4  7C 08 02 A6 */	mflr r0
 /* 8011C3C8 00118FA8  38 80 01 65 */	li r4, 0x165
 /* 8011C3CC 00118FAC  90 01 00 04 */	stw r0, 4(r1)
@@ -802,8 +802,8 @@ ftPe_SpecialAirS_StartMotion:
 /* 8011C4E8 001190C8  7C 08 03 A6 */	mtlr r0
 /* 8011C4EC 001190CC  4E 80 00 20 */	blr
 
-.global ftPe_8011C4F0
-ftPe_8011C4F0:
+.global ftPe_SpecialSStart_Anim
+ftPe_SpecialSStart_Anim:
 /* 8011C4F0 001190D0  7C 08 02 A6 */	mflr r0
 /* 8011C4F4 001190D4  90 01 00 04 */	stw r0, 4(r1)
 /* 8011C4F8 001190D8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -845,8 +845,8 @@ ftPe_8011C4F0:
 /* 8011C580 00119160  7C 08 03 A6 */	mtlr r0
 /* 8011C584 00119164  4E 80 00 20 */	blr
 
-.global ftPe_8011C588
-ftPe_8011C588:
+.global ftPe_SpecialAirSStart_Anim
+ftPe_SpecialAirSStart_Anim:
 /* 8011C588 00119168  7C 08 02 A6 */	mflr r0
 /* 8011C58C 0011916C  90 01 00 04 */	stw r0, 4(r1)
 /* 8011C590 00119170  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -874,16 +874,16 @@ ftPe_8011C588:
 /* 8011C5E0 001191C0  7C 08 03 A6 */	mtlr r0
 /* 8011C5E4 001191C4  4E 80 00 20 */	blr
 
-.global ftPe_8011C5E8
-ftPe_8011C5E8:
+.global ftPe_SpecialSStart_IASA
+ftPe_SpecialSStart_IASA:
 /* 8011C5E8 001191C8  4E 80 00 20 */	blr
 
-.global ftPe_8011C5EC
-ftPe_8011C5EC:
+.global ftPe_SpecialAirSStart_IASA
+ftPe_SpecialAirSStart_IASA:
 /* 8011C5EC 001191CC  4E 80 00 20 */	blr
 
-.global ftPe_8011C5F0
-ftPe_8011C5F0:
+.global ftPe_SpecialSStart_Phys
+ftPe_SpecialSStart_Phys:
 /* 8011C5F0 001191D0  7C 08 02 A6 */	mflr r0
 /* 8011C5F4 001191D4  90 01 00 04 */	stw r0, 4(r1)
 /* 8011C5F8 001191D8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -906,8 +906,8 @@ ftPe_8011C5F0:
 /* 8011C63C 0011921C  7C 08 03 A6 */	mtlr r0
 /* 8011C640 00119220  4E 80 00 20 */	blr
 
-.global ftPe_8011C644
-ftPe_8011C644:
+.global ftPe_SpecialAirSStart_Phys
+ftPe_SpecialAirSStart_Phys:
 /* 8011C644 00119224  7C 08 02 A6 */	mflr r0
 /* 8011C648 00119228  90 01 00 04 */	stw r0, 4(r1)
 /* 8011C64C 0011922C  94 21 FF F8 */	stwu r1, -8(r1)
@@ -917,8 +917,8 @@ ftPe_8011C644:
 /* 8011C65C 0011923C  7C 08 03 A6 */	mtlr r0
 /* 8011C660 00119240  4E 80 00 20 */	blr
 
-.global ftPe_8011C664
-ftPe_8011C664:
+.global ftPe_SpecialSStart_Coll
+ftPe_SpecialSStart_Coll:
 /* 8011C664 00119244  7C 08 02 A6 */	mflr r0
 /* 8011C668 00119248  90 01 00 04 */	stw r0, 4(r1)
 /* 8011C66C 0011924C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -962,8 +962,8 @@ ftPe_8011C664:
 /* 8011C6F4 001192D4  7C 08 03 A6 */	mtlr r0
 /* 8011C6F8 001192D8  4E 80 00 20 */	blr
 
-.global ftPe_8011C6FC
-ftPe_8011C6FC:
+.global ftPe_SpecialAirSStart_Coll
+ftPe_SpecialAirSStart_Coll:
 /* 8011C6FC 001192DC  7C 08 02 A6 */	mflr r0
 /* 8011C700 001192E0  90 01 00 04 */	stw r0, 4(r1)
 /* 8011C704 001192E4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1071,8 +1071,8 @@ ftPe_8011C818:
 /* 8011C870 00119450  7C 08 03 A6 */	mtlr r0
 /* 8011C874 00119454  4E 80 00 20 */	blr
 
-.global ftPe_8011C878
-ftPe_8011C878:
+.global ftPe_SpecialAirS_Anim
+ftPe_SpecialAirS_Anim:
 /* 8011C878 00119458  7C 08 02 A6 */	mflr r0
 /* 8011C87C 0011945C  90 01 00 04 */	stw r0, 4(r1)
 /* 8011C880 00119460  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1096,12 +1096,12 @@ ftPe_8011C878:
 /* 8011C8C0 001194A0  7C 08 03 A6 */	mtlr r0
 /* 8011C8C4 001194A4  4E 80 00 20 */	blr
 
-.global ftPe_8011C8C8
-ftPe_8011C8C8:
+.global ftPe_SpecialAirS_IASA
+ftPe_SpecialAirS_IASA:
 /* 8011C8C8 001194A8  4E 80 00 20 */	blr
 
-.global ftPe_8011C8CC
-ftPe_8011C8CC:
+.global ftPe_SpecialAirS_Phys
+ftPe_SpecialAirS_Phys:
 /* 8011C8CC 001194AC  7C 08 02 A6 */	mflr r0
 /* 8011C8D0 001194B0  90 01 00 04 */	stw r0, 4(r1)
 /* 8011C8D4 001194B4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1134,8 +1134,8 @@ ftPe_8011C8CC:
 /* 8011C934 00119514  7C 08 03 A6 */	mtlr r0
 /* 8011C938 00119518  4E 80 00 20 */	blr
 
-.global ftPe_8011C93C
-ftPe_8011C93C:
+.global ftPe_SpecialAirS_Coll
+ftPe_SpecialAirS_Coll:
 /* 8011C93C 0011951C  7C 08 02 A6 */	mflr r0
 /* 8011C940 00119520  90 01 00 04 */	stw r0, 4(r1)
 /* 8011C944 00119524  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1228,8 +1228,8 @@ ftPe_8011C9E0:
 /* 8011CA7C 0011965C  7C 08 03 A6 */	mtlr r0
 /* 8011CA80 00119660  4E 80 00 20 */	blr
 
-.global ftPe_8011CA84
-ftPe_8011CA84:
+.global ftPe_SpecialSEnd_Anim
+ftPe_SpecialSEnd_Anim:
 /* 8011CA84 00119664  7C 08 02 A6 */	mflr r0
 /* 8011CA88 00119668  90 01 00 04 */	stw r0, 4(r1)
 /* 8011CA8C 0011966C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1247,8 +1247,8 @@ ftPe_8011CA84:
 /* 8011CAB8 00119698  7C 08 03 A6 */	mtlr r0
 /* 8011CABC 0011969C  4E 80 00 20 */	blr
 
-.global ftPe_8011CAC0
-ftPe_8011CAC0:
+.global ftPe_SpecialAirSEnd_Anim
+ftPe_SpecialAirSEnd_Anim:
 /* 8011CAC0 001196A0  7C 08 02 A6 */	mflr r0
 /* 8011CAC4 001196A4  90 01 00 04 */	stw r0, 4(r1)
 /* 8011CAC8 001196A8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1266,16 +1266,16 @@ ftPe_8011CAC0:
 /* 8011CAF4 001196D4  7C 08 03 A6 */	mtlr r0
 /* 8011CAF8 001196D8  4E 80 00 20 */	blr
 
-.global ftPe_8011CAFC
-ftPe_8011CAFC:
+.global ftPe_SpecialSEnd_IASA
+ftPe_SpecialSEnd_IASA:
 /* 8011CAFC 001196DC  4E 80 00 20 */	blr
 
-.global ftPe_8011CB00
-ftPe_8011CB00:
+.global ftPe_SpecialAirSEnd_IASA
+ftPe_SpecialAirSEnd_IASA:
 /* 8011CB00 001196E0  4E 80 00 20 */	blr
 
-.global ftPe_8011CB04
-ftPe_8011CB04:
+.global ftPe_SpecialSEnd_Phys
+ftPe_SpecialSEnd_Phys:
 /* 8011CB04 001196E4  7C 08 02 A6 */	mflr r0
 /* 8011CB08 001196E8  90 01 00 04 */	stw r0, 4(r1)
 /* 8011CB0C 001196EC  94 21 FF F8 */	stwu r1, -8(r1)
@@ -1285,8 +1285,8 @@ ftPe_8011CB04:
 /* 8011CB1C 001196FC  7C 08 03 A6 */	mtlr r0
 /* 8011CB20 00119700  4E 80 00 20 */	blr
 
-.global ftPe_8011CB24
-ftPe_8011CB24:
+.global ftPe_SpecialAirSEnd_Phys
+ftPe_SpecialAirSEnd_Phys:
 /* 8011CB24 00119704  7C 08 02 A6 */	mflr r0
 /* 8011CB28 00119708  90 01 00 04 */	stw r0, 4(r1)
 /* 8011CB2C 0011970C  94 21 FF F8 */	stwu r1, -8(r1)
@@ -1296,8 +1296,8 @@ ftPe_8011CB24:
 /* 8011CB3C 0011971C  7C 08 03 A6 */	mtlr r0
 /* 8011CB40 00119720  4E 80 00 20 */	blr
 
-.global ftPe_8011CB44
-ftPe_8011CB44:
+.global ftPe_SpecialSEnd_Coll
+ftPe_SpecialSEnd_Coll:
 /* 8011CB44 00119724  7C 08 02 A6 */	mflr r0
 /* 8011CB48 00119728  90 01 00 04 */	stw r0, 4(r1)
 /* 8011CB4C 0011972C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1315,8 +1315,8 @@ ftPe_8011CB44:
 /* 8011CB78 00119758  7C 08 03 A6 */	mtlr r0
 /* 8011CB7C 0011975C  4E 80 00 20 */	blr
 
-.global ftPe_8011CB80
-ftPe_8011CB80:
+.global ftPe_SpecialAirSEnd_Coll
+ftPe_SpecialAirSEnd_Coll:
 /* 8011CB80 00119760  7C 08 02 A6 */	mflr r0
 /* 8011CB84 00119764  90 01 00 04 */	stw r0, 4(r1)
 /* 8011CB88 00119768  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1719,8 +1719,8 @@ ftPe_8011CFA0:
 /* 8011D114 00119CF4  7C 08 03 A6 */	mtlr r0
 /* 8011D118 00119CF8  4E 80 00 20 */	blr
 
-.global ftPe_SpecialLw_StartMotion
-ftPe_SpecialLw_StartMotion:
+.global ftPe_SpecialLw_Enter
+ftPe_SpecialLw_Enter:
 /* 8011D11C 00119CFC  7C 08 02 A6 */	mflr r0
 /* 8011D120 00119D00  90 01 00 04 */	stw r0, 4(r1)
 /* 8011D124 00119D04  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1768,8 +1768,8 @@ ftPe_SpecialLw_StartMotion:
 /* 8011D1BC 00119D9C  7C 08 03 A6 */	mtlr r0
 /* 8011D1C0 00119DA0  4E 80 00 20 */	blr
 
-.global ftPe_SpecialAirLw_StartMotion
-ftPe_SpecialAirLw_StartMotion:
+.global ftPe_SpecialAirLw_Enter
+ftPe_SpecialAirLw_Enter:
 /* 8011D1C4 00119DA4  7C 08 02 A6 */	mflr r0
 /* 8011D1C8 00119DA8  90 01 00 04 */	stw r0, 4(r1)
 /* 8011D1CC 00119DAC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1848,8 +1848,8 @@ ftPe_SpecialAirLw_StartMotion:
 /* 8011D2E4 00119EC4  7C 08 03 A6 */	mtlr r0
 /* 8011D2E8 00119EC8  4E 80 00 20 */	blr
 
-.global ftPe_8011D2EC
-ftPe_8011D2EC:
+.global ftPe_SpecialLw_Anim
+ftPe_SpecialLw_Anim:
 /* 8011D2EC 00119ECC  7C 08 02 A6 */	mflr r0
 /* 8011D2F0 00119ED0  90 01 00 04 */	stw r0, 4(r1)
 /* 8011D2F4 00119ED4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1873,8 +1873,8 @@ ftPe_8011D2EC:
 /* 8011D338 00119F18  7C 08 03 A6 */	mtlr r0
 /* 8011D33C 00119F1C  4E 80 00 20 */	blr
 
-.global ftPe_8011D340
-ftPe_8011D340:
+.global ftPe_SpecialAirLw_Anim
+ftPe_SpecialAirLw_Anim:
 /* 8011D340 00119F20  7C 08 02 A6 */	mflr r0
 /* 8011D344 00119F24  90 01 00 04 */	stw r0, 4(r1)
 /* 8011D348 00119F28  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1898,8 +1898,8 @@ ftPe_8011D340:
 /* 8011D38C 00119F6C  7C 08 03 A6 */	mtlr r0
 /* 8011D390 00119F70  4E 80 00 20 */	blr
 
-.global ftPe_8011D394
-ftPe_8011D394:
+.global ftPe_SpecialLw_Phys
+ftPe_SpecialLw_Phys:
 /* 8011D394 00119F74  7C 08 02 A6 */	mflr r0
 /* 8011D398 00119F78  90 01 00 04 */	stw r0, 4(r1)
 /* 8011D39C 00119F7C  94 21 FF F8 */	stwu r1, -8(r1)
@@ -1909,8 +1909,8 @@ ftPe_8011D394:
 /* 8011D3AC 00119F8C  7C 08 03 A6 */	mtlr r0
 /* 8011D3B0 00119F90  4E 80 00 20 */	blr
 
-.global ftPe_8011D3B4
-ftPe_8011D3B4:
+.global ftPe_SpecialAirLw_Phys
+ftPe_SpecialAirLw_Phys:
 /* 8011D3B4 00119F94  7C 08 02 A6 */	mflr r0
 /* 8011D3B8 00119F98  90 01 00 04 */	stw r0, 4(r1)
 /* 8011D3BC 00119F9C  94 21 FF F8 */	stwu r1, -8(r1)
@@ -1920,8 +1920,8 @@ ftPe_8011D3B4:
 /* 8011D3CC 00119FAC  7C 08 03 A6 */	mtlr r0
 /* 8011D3D0 00119FB0  4E 80 00 20 */	blr
 
-.global ftPe_8011D3D4
-ftPe_8011D3D4:
+.global ftPe_SpecialLw_Coll
+ftPe_SpecialLw_Coll:
 /* 8011D3D4 00119FB4  7C 08 02 A6 */	mflr r0
 /* 8011D3D8 00119FB8  3C 80 80 12 */	lis r4, .L_8011D214@ha
 /* 8011D3DC 00119FBC  90 01 00 04 */	stw r0, 4(r1)
@@ -1933,8 +1933,8 @@ ftPe_8011D3D4:
 /* 8011D3F4 00119FD4  7C 08 03 A6 */	mtlr r0
 /* 8011D3F8 00119FD8  4E 80 00 20 */	blr
 
-.global ftPe_8011D3FC
-ftPe_8011D3FC:
+.global ftPe_SpecialAirLw_Coll
+ftPe_SpecialAirLw_Coll:
 /* 8011D3FC 00119FDC  7C 08 02 A6 */	mflr r0
 /* 8011D400 00119FE0  3C 80 80 12 */	lis r4, .L_8011D280@ha
 /* 8011D404 00119FE4  90 01 00 04 */	stw r0, 4(r1)
@@ -2165,8 +2165,8 @@ ftPe_8011D680:
 /* 8011D724 0011A304  7C 08 03 A6 */	mtlr r0
 /* 8011D728 0011A308  4E 80 00 20 */	blr
 
-.global ftPe_SpecialHi_StartMotion
-ftPe_SpecialHi_StartMotion:
+.global ftPe_SpecialHi_Enter
+ftPe_SpecialHi_Enter:
 /* 8011D72C 0011A30C  7C 08 02 A6 */	mflr r0
 /* 8011D730 0011A310  38 80 01 69 */	li r4, 0x169
 /* 8011D734 0011A314  90 01 00 04 */	stw r0, 4(r1)
@@ -2220,8 +2220,8 @@ ftPe_SpecialHi_StartMotion:
 /* 8011D7E8 0011A3C8  7C 08 03 A6 */	mtlr r0
 /* 8011D7EC 0011A3CC  4E 80 00 20 */	blr
 
-.global ftPe_SpecialAirHi_StartMotion
-ftPe_SpecialAirHi_StartMotion:
+.global ftPe_SpecialAirHi_Enter
+ftPe_SpecialAirHi_Enter:
 /* 8011D7F0 0011A3D0  7C 08 02 A6 */	mflr r0
 /* 8011D7F4 0011A3D4  38 80 01 6B */	li r4, 0x16b
 /* 8011D7F8 0011A3D8  90 01 00 04 */	stw r0, 4(r1)
@@ -2282,8 +2282,8 @@ ftPe_SpecialAirHi_StartMotion:
 /* 8011D8C8 0011A4A8  7C 08 03 A6 */	mtlr r0
 /* 8011D8CC 0011A4AC  4E 80 00 20 */	blr
 
-.global ftPe_8011D8D0
-ftPe_8011D8D0:
+.global ftPe_SpecialHiStart_Anim
+ftPe_SpecialHiStart_Anim:
 /* 8011D8D0 0011A4B0  7C 08 02 A6 */	mflr r0
 /* 8011D8D4 0011A4B4  90 01 00 04 */	stw r0, 4(r1)
 /* 8011D8D8 0011A4B8  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -2333,8 +2333,8 @@ ftPe_8011D8D0:
 /* 8011D978 0011A558  7C 08 03 A6 */	mtlr r0
 /* 8011D97C 0011A55C  4E 80 00 20 */	blr
 
-.global ftPe_8011D980
-ftPe_8011D980:
+.global ftPe_SpecialAirHiStart_Anim
+ftPe_SpecialAirHiStart_Anim:
 /* 8011D980 0011A560  7C 08 02 A6 */	mflr r0
 /* 8011D984 0011A564  90 01 00 04 */	stw r0, 4(r1)
 /* 8011D988 0011A568  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -2384,8 +2384,8 @@ ftPe_8011D980:
 /* 8011DA28 0011A608  7C 08 03 A6 */	mtlr r0
 /* 8011DA2C 0011A60C  4E 80 00 20 */	blr
 
-.global ftPe_8011DA30
-ftPe_8011DA30:
+.global ftPe_SpecialHiStart_IASA
+ftPe_SpecialHiStart_IASA:
 /* 8011DA30 0011A610  7C 08 02 A6 */	mflr r0
 /* 8011DA34 0011A614  90 01 00 04 */	stw r0, 4(r1)
 /* 8011DA38 0011A618  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2481,8 +2481,8 @@ ftPe_8011DA30:
 /* 8011DB70 0011A750  7C 08 03 A6 */	mtlr r0
 /* 8011DB74 0011A754  4E 80 00 20 */	blr
 
-.global ftPe_8011DB78
-ftPe_8011DB78:
+.global ftPe_SpecialAirHiStart_IASA
+ftPe_SpecialAirHiStart_IASA:
 /* 8011DB78 0011A758  7C 08 02 A6 */	mflr r0
 /* 8011DB7C 0011A75C  90 01 00 04 */	stw r0, 4(r1)
 /* 8011DB80 0011A760  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -2578,8 +2578,8 @@ ftPe_8011DB78:
 /* 8011DCB8 0011A898  7C 08 03 A6 */	mtlr r0
 /* 8011DCBC 0011A89C  4E 80 00 20 */	blr
 
-.global ftPe_8011DCC0
-ftPe_8011DCC0:
+.global ftPe_SpecialHiStart_Phys
+ftPe_SpecialHiStart_Phys:
 /* 8011DCC0 0011A8A0  7C 08 02 A6 */	mflr r0
 /* 8011DCC4 0011A8A4  90 01 00 04 */	stw r0, 4(r1)
 /* 8011DCC8 0011A8A8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -2597,8 +2597,8 @@ ftPe_8011DCC0:
 /* 8011DCF0 0011A8D0  7C 08 03 A6 */	mtlr r0
 /* 8011DCF4 0011A8D4  4E 80 00 20 */	blr
 
-.global ftPe_8011DCF8
-ftPe_8011DCF8:
+.global ftPe_SpecialAirHiStart_Phys
+ftPe_SpecialAirHiStart_Phys:
 /* 8011DCF8 0011A8D8  7C 08 02 A6 */	mflr r0
 /* 8011DCFC 0011A8DC  90 01 00 04 */	stw r0, 4(r1)
 /* 8011DD00 0011A8E0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2652,8 +2652,8 @@ ftPe_8011DCF8:
 /* 8011DDB4 0011A994  7C 08 03 A6 */	mtlr r0
 /* 8011DDB8 0011A998  4E 80 00 20 */	blr
 
-.global ftPe_8011DDBC
-ftPe_8011DDBC:
+.global ftPe_SpecialHiStart_Coll
+ftPe_SpecialHiStart_Coll:
 /* 8011DDBC 0011A99C  7C 08 02 A6 */	mflr r0
 /* 8011DDC0 0011A9A0  90 01 00 04 */	stw r0, 4(r1)
 /* 8011DDC4 0011A9A4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -2687,8 +2687,8 @@ ftPe_8011DDBC:
 /* 8011DE24 0011AA04  7C 08 03 A6 */	mtlr r0
 /* 8011DE28 0011AA08  4E 80 00 20 */	blr
 
-.global ftPe_8011DE2C
-ftPe_8011DE2C:
+.global ftPe_SpecialAirHiStart_Coll
+ftPe_SpecialAirHiStart_Coll:
 /* 8011DE2C 0011AA0C  7C 08 02 A6 */	mflr r0
 /* 8011DE30 0011AA10  90 01 00 04 */	stw r0, 4(r1)
 /* 8011DE34 0011AA14  94 21 FF F8 */	stwu r1, -8(r1)
@@ -2722,8 +2722,8 @@ ftPe_8011DE2C:
 /* 8011DE94 0011AA74  7C 08 03 A6 */	mtlr r0
 /* 8011DE98 0011AA78  4E 80 00 20 */	blr
 
-.global ftPe_8011DE9C
-ftPe_8011DE9C:
+.global ftPe_MS_362_Anim
+ftPe_MS_362_Anim:
 /* 8011DE9C 0011AA7C  7C 08 02 A6 */	mflr r0
 /* 8011DEA0 0011AA80  90 01 00 04 */	stw r0, 4(r1)
 /* 8011DEA4 0011AA84  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2750,8 +2750,8 @@ ftPe_8011DE9C:
 /* 8011DEF4 0011AAD4  7C 08 03 A6 */	mtlr r0
 /* 8011DEF8 0011AAD8  4E 80 00 20 */	blr
 
-.global ftPe_8011DEFC
-ftPe_8011DEFC:
+.global ftPe_MS_364_Anim
+ftPe_MS_364_Anim:
 /* 8011DEFC 0011AADC  7C 08 02 A6 */	mflr r0
 /* 8011DF00 0011AAE0  90 01 00 04 */	stw r0, 4(r1)
 /* 8011DF04 0011AAE4  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -2778,16 +2778,16 @@ ftPe_8011DEFC:
 /* 8011DF54 0011AB34  7C 08 03 A6 */	mtlr r0
 /* 8011DF58 0011AB38  4E 80 00 20 */	blr
 
-.global ftPe_8011DF5C
-ftPe_8011DF5C:
+.global ftPe_MS_362_IASA
+ftPe_MS_362_IASA:
 /* 8011DF5C 0011AB3C  4E 80 00 20 */	blr
 
-.global ftPe_8011DF60
-ftPe_8011DF60:
+.global ftPe_MS_364_IASA
+ftPe_MS_364_IASA:
 /* 8011DF60 0011AB40  4E 80 00 20 */	blr
 
-.global ftPe_8011DF64
-ftPe_8011DF64:
+.global ftPe_MS_362_Phys
+ftPe_MS_362_Phys:
 /* 8011DF64 0011AB44  7C 08 02 A6 */	mflr r0
 /* 8011DF68 0011AB48  90 01 00 04 */	stw r0, 4(r1)
 /* 8011DF6C 0011AB4C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -2818,8 +2818,8 @@ ftPe_8011DF64:
 /* 8011DFC8 0011ABA8  7C 08 03 A6 */	mtlr r0
 /* 8011DFCC 0011ABAC  4E 80 00 20 */	blr
 
-.global ftPe_8011DFD0
-ftPe_8011DFD0:
+.global ftPe_MS_364_Phys
+ftPe_MS_364_Phys:
 /* 8011DFD0 0011ABB0  7C 08 02 A6 */	mflr r0
 /* 8011DFD4 0011ABB4  90 01 00 04 */	stw r0, 4(r1)
 /* 8011DFD8 0011ABB8  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -2871,8 +2871,8 @@ ftPe_8011DFD0:
 /* 8011E08C 0011AC6C  7C 08 03 A6 */	mtlr r0
 /* 8011E090 0011AC70  4E 80 00 20 */	blr
 
-.global ftPe_8011E094
-ftPe_8011E094:
+.global ftPe_MS_362_Coll
+ftPe_MS_362_Coll:
 /* 8011E094 0011AC74  7C 08 02 A6 */	mflr r0
 /* 8011E098 0011AC78  90 01 00 04 */	stw r0, 4(r1)
 /* 8011E09C 0011AC7C  94 21 FF F8 */	stwu r1, -8(r1)
@@ -2906,8 +2906,8 @@ ftPe_8011E094:
 /* 8011E0FC 0011ACDC  7C 08 03 A6 */	mtlr r0
 /* 8011E100 0011ACE0  4E 80 00 20 */	blr
 
-.global ftPe_8011E104
-ftPe_8011E104:
+.global ftPe_MS_364_Coll
+ftPe_MS_364_Coll:
 /* 8011E104 0011ACE4  7C 08 02 A6 */	mflr r0
 /* 8011E108 0011ACE8  90 01 00 04 */	stw r0, 4(r1)
 /* 8011E10C 0011ACEC  94 21 FF F8 */	stwu r1, -8(r1)
@@ -3113,8 +3113,8 @@ ftPe_8011E3A8:
 /* 8011E3C8 0011AFA8  38 60 00 01 */	li r3, 1
 /* 8011E3CC 0011AFAC  4E 80 00 20 */	blr
 
-.global ftPe_SpecialN_StartMotion
-ftPe_SpecialN_StartMotion:
+.global ftPe_SpecialN_Enter
+ftPe_SpecialN_Enter:
 /* 8011E3D0 0011AFB0  7C 08 02 A6 */	mflr r0
 /* 8011E3D4 0011AFB4  38 80 01 6D */	li r4, 0x16d
 /* 8011E3D8 0011AFB8  90 01 00 04 */	stw r0, 4(r1)
@@ -3151,8 +3151,8 @@ ftPe_SpecialN_StartMotion:
 /* 8011E454 0011B034  7C 08 03 A6 */	mtlr r0
 /* 8011E458 0011B038  4E 80 00 20 */	blr
 
-.global ftPe_SpecialAirN_StartMotion
-ftPe_SpecialAirN_StartMotion:
+.global ftPe_SpecialAirN_Enter
+ftPe_SpecialAirN_Enter:
 /* 8011E45C 0011B03C  7C 08 02 A6 */	mflr r0
 /* 8011E460 0011B040  38 80 01 6F */	li r4, 0x16f
 /* 8011E464 0011B044  90 01 00 04 */	stw r0, 4(r1)
@@ -3193,8 +3193,8 @@ ftPe_SpecialAirN_StartMotion:
 /* 8011E4F0 0011B0D0  7C 08 03 A6 */	mtlr r0
 /* 8011E4F4 0011B0D4  4E 80 00 20 */	blr
 
-.global ftPe_8011E4F8
-ftPe_8011E4F8:
+.global ftPe_SpecialN_Anim
+ftPe_SpecialN_Anim:
 /* 8011E4F8 0011B0D8  7C 08 02 A6 */	mflr r0
 /* 8011E4FC 0011B0DC  90 01 00 04 */	stw r0, 4(r1)
 /* 8011E500 0011B0E0  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -3246,8 +3246,8 @@ ftPe_8011E4F8:
 /* 8011E5AC 0011B18C  7C 08 03 A6 */	mtlr r0
 /* 8011E5B0 0011B190  4E 80 00 20 */	blr
 
-.global ftPe_8011E5B4
-ftPe_8011E5B4:
+.global ftPe_SpecialAirN_Anim
+ftPe_SpecialAirN_Anim:
 /* 8011E5B4 0011B194  7C 08 02 A6 */	mflr r0
 /* 8011E5B8 0011B198  90 01 00 04 */	stw r0, 4(r1)
 /* 8011E5BC 0011B19C  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -3299,16 +3299,16 @@ ftPe_8011E5B4:
 /* 8011E668 0011B248  7C 08 03 A6 */	mtlr r0
 /* 8011E66C 0011B24C  4E 80 00 20 */	blr
 
-.global ftPe_8011E670
-ftPe_8011E670:
+.global ftPe_SpecialN_IASA
+ftPe_SpecialN_IASA:
 /* 8011E670 0011B250  4E 80 00 20 */	blr
 
-.global ftPe_8011E674
-ftPe_8011E674:
+.global ftPe_SpecialAirN_IASA
+ftPe_SpecialAirN_IASA:
 /* 8011E674 0011B254  4E 80 00 20 */	blr
 
-.global ftPe_8011E678
-ftPe_8011E678:
+.global ftPe_SpecialN_Phys
+ftPe_SpecialN_Phys:
 /* 8011E678 0011B258  7C 08 02 A6 */	mflr r0
 /* 8011E67C 0011B25C  90 01 00 04 */	stw r0, 4(r1)
 /* 8011E680 0011B260  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -3323,8 +3323,8 @@ ftPe_8011E678:
 /* 8011E6A4 0011B284  7C 08 03 A6 */	mtlr r0
 /* 8011E6A8 0011B288  4E 80 00 20 */	blr
 
-.global ftPe_8011E6AC
-ftPe_8011E6AC:
+.global ftPe_SpecialAirN_Phys
+ftPe_SpecialAirN_Phys:
 /* 8011E6AC 0011B28C  7C 08 02 A6 */	mflr r0
 /* 8011E6B0 0011B290  90 01 00 04 */	stw r0, 4(r1)
 /* 8011E6B4 0011B294  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -3374,8 +3374,8 @@ ftPe_8011E6AC:
 /* 8011E754 0011B334  7C 08 03 A6 */	mtlr r0
 /* 8011E758 0011B338  4E 80 00 20 */	blr
 
-.global ftPe_8011E75C
-ftPe_8011E75C:
+.global ftPe_SpecialN_Coll
+ftPe_SpecialN_Coll:
 /* 8011E75C 0011B33C  7C 08 02 A6 */	mflr r0
 /* 8011E760 0011B340  90 01 00 04 */	stw r0, 4(r1)
 /* 8011E764 0011B344  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -3393,8 +3393,8 @@ ftPe_8011E75C:
 /* 8011E790 0011B370  7C 08 03 A6 */	mtlr r0
 /* 8011E794 0011B374  4E 80 00 20 */	blr
 
-.global ftPe_8011E798
-ftPe_8011E798:
+.global ftPe_SpecialAirN_Coll
+ftPe_SpecialAirN_Coll:
 /* 8011E798 0011B378  7C 08 02 A6 */	mflr r0
 /* 8011E79C 0011B37C  90 01 00 04 */	stw r0, 4(r1)
 /* 8011E7A0 0011B380  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -3538,8 +3538,8 @@ ftPe_8011E8C0:
 /* 8011E998 0011B578  7C 08 03 A6 */	mtlr r0
 /* 8011E99C 0011B57C  4E 80 00 20 */	blr
 
-.global ftPe_8011E9A0
-ftPe_8011E9A0:
+.global ftPe_SpecialNAttack_Anim
+ftPe_SpecialNAttack_Anim:
 /* 8011E9A0 0011B580  7C 08 02 A6 */	mflr r0
 /* 8011E9A4 0011B584  90 01 00 04 */	stw r0, 4(r1)
 /* 8011E9A8 0011B588  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -3568,8 +3568,8 @@ ftPe_8011E9A0:
 /* 8011E9FC 0011B5DC  7C 08 03 A6 */	mtlr r0
 /* 8011EA00 0011B5E0  4E 80 00 20 */	blr
 
-.global ftPe_8011EA04
-ftPe_8011EA04:
+.global ftPe_SpecialAirNAttack_Anim
+ftPe_SpecialAirNAttack_Anim:
 /* 8011EA04 0011B5E4  7C 08 02 A6 */	mflr r0
 /* 8011EA08 0011B5E8  90 01 00 04 */	stw r0, 4(r1)
 /* 8011EA0C 0011B5EC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -3598,16 +3598,16 @@ ftPe_8011EA04:
 /* 8011EA60 0011B640  7C 08 03 A6 */	mtlr r0
 /* 8011EA64 0011B644  4E 80 00 20 */	blr
 
-.global ftPe_8011EA68
-ftPe_8011EA68:
+.global ftPe_SpecialNAttack_IASA
+ftPe_SpecialNAttack_IASA:
 /* 8011EA68 0011B648  4E 80 00 20 */	blr
 
-.global ftPe_8011EA6C
-ftPe_8011EA6C:
+.global ftPe_SpecialAirNAttack_IASA
+ftPe_SpecialAirNAttack_IASA:
 /* 8011EA6C 0011B64C  4E 80 00 20 */	blr
 
-.global ftPe_8011EA70
-ftPe_8011EA70:
+.global ftPe_SpecialNAttack_Phys
+ftPe_SpecialNAttack_Phys:
 /* 8011EA70 0011B650  7C 08 02 A6 */	mflr r0
 /* 8011EA74 0011B654  90 01 00 04 */	stw r0, 4(r1)
 /* 8011EA78 0011B658  94 21 FF F8 */	stwu r1, -8(r1)
@@ -3617,8 +3617,8 @@ ftPe_8011EA70:
 /* 8011EA88 0011B668  7C 08 03 A6 */	mtlr r0
 /* 8011EA8C 0011B66C  4E 80 00 20 */	blr
 
-.global ftPe_8011EA90
-ftPe_8011EA90:
+.global ftPe_SpecialAirNAttack_Phys
+ftPe_SpecialAirNAttack_Phys:
 /* 8011EA90 0011B670  7C 08 02 A6 */	mflr r0
 /* 8011EA94 0011B674  90 01 00 04 */	stw r0, 4(r1)
 /* 8011EA98 0011B678  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -3640,8 +3640,8 @@ ftPe_8011EA90:
 /* 8011EAD8 0011B6B8  7C 08 03 A6 */	mtlr r0
 /* 8011EADC 0011B6BC  4E 80 00 20 */	blr
 
-.global ftPe_8011EAE0
-ftPe_8011EAE0:
+.global ftPe_SpecialNAttack_Coll
+ftPe_SpecialNAttack_Coll:
 /* 8011EAE0 0011B6C0  7C 08 02 A6 */	mflr r0
 /* 8011EAE4 0011B6C4  90 01 00 04 */	stw r0, 4(r1)
 /* 8011EAE8 0011B6C8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -3659,8 +3659,8 @@ ftPe_8011EAE0:
 /* 8011EB14 0011B6F4  7C 08 03 A6 */	mtlr r0
 /* 8011EB18 0011B6F8  4E 80 00 20 */	blr
 
-.global ftPe_8011EB1C
-ftPe_8011EB1C:
+.global ftPe_SpecialAirNAttack_Coll
+ftPe_SpecialAirNAttack_Coll:
 /* 8011EB1C 0011B6FC  7C 08 02 A6 */	mflr r0
 /* 8011EB20 0011B700  90 01 00 04 */	stw r0, 4(r1)
 /* 8011EB24 0011B704  94 21 FF E8 */	stwu r1, -0x18(r1)

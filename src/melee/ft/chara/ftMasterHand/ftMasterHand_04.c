@@ -9,11 +9,11 @@
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 
-static void ftMh_Unk04_801511FC(HSD_GObj* gobj);
+static void ftMh_MS_343_801511FC(HSD_GObj* gobj);
 
 // 801510B0 14DC90
 // https://decomp.me/scratch/sIqel
-void ftMh_Unk04_801510B0(HSD_GObj* gobj)
+void ftMh_MS_343_801510B0(HSD_GObj* gobj)
 {
     Fighter* r31_fp;
     ftMasterHand_SpecialAttrs* r30_attributes;
@@ -25,31 +25,31 @@ void ftMh_Unk04_801510B0(HSD_GObj* gobj)
     r31_fp->cur_pos.x = r30_attributes->x30_pos2.x;
     r31_fp->cur_pos.y = r30_attributes->x30_pos2.y;
     r31_fp->cur_pos.z = 0.0f;
-    r31_fp->cb.x21BC_callback_Accessory4 = &ftMh_Unk04_801511FC;
+    r31_fp->cb.x21BC_callback_Accessory4 = &ftMh_MS_343_801511FC;
     r31_fp->mv.mh.unk4.x0 = 0;
 
-    /// @todo Probably same file if #ftMh_Unk04_801511FC is getting
+    /// @todo Probably same file if #ftMh_MS_343_801511FC is getting
     /// implicitly passed.
-    ft_800881D8(r31_fp, 0x4E201, 0x7F, 0x40 /*, ftMh_Unk04_801511FC */);
-    // ft_800881D8(r31_fp, 0x4E201, 0x7F, 0x40, ftMh_Unk04_801511FC);
+    ft_800881D8(r31_fp, 0x4E201, 0x7F, 0x40 /*, ftMh_MS_343_801511FC */);
+    // ft_800881D8(r31_fp, 0x4E201, 0x7F, 0x40, ftMh_MS_343_801511FC);
 
     ftBossLib_8015C09C(gobj, -1.0f);
 }
 
 // 80151168 14DD48
 // https://decomp.me/scratch/896fc
-void ftMh_Unk04_80151168(HSD_GObj* gobj)
+void ftMh_MS_343_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* r4_fp = GET_FIGHTER(gobj);
         r4_fp->fv.mh.x2258 = 0x155;
-        ftMh_Unk03_80151018(gobj);
+        ftMh_MS_389_80151018(gobj);
     }
 }
 
 // 801511B0 14DD90
 // https://decomp.me/scratch/lkMK2
-void ftMh_Unk04_801511B0(HSD_GObj* gobj)
+void ftMh_MS_343_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
@@ -60,20 +60,20 @@ void ftMh_Unk04_801511B0(HSD_GObj* gobj)
 
 // 801511F4 14DDD4
 // https://decomp.me/scratch/xs8Nh
-void ftMh_Unk04_801511F4(HSD_GObj* gobj)
+void ftMh_MS_343_Phys(HSD_GObj* gobj)
 {
     return;
 }
 
 // 801511F8 14DDD8
 // https://decomp.me/scratch/5Mb62
-void ftMh_Unk04_801511F8(HSD_GObj* gobj)
+void ftMh_MS_343_Coll(HSD_GObj* gobj)
 {
     return;
 }
 
 // 801511FC 14DDDC
-static void ftMh_Unk04_801511FC(HSD_GObj* gobj)
+static void ftMh_MS_343_801511FC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -103,7 +103,7 @@ static void ftMh_Unk04_801511FC(HSD_GObj* gobj)
     }
     case 1:
         if (Camera_8002F260() != 0) {
-            Camera_8002E948(&ftMh_Unk05_80151428);
+            Camera_8002E948(&ftMh_MS_343_80151428);
             Camera_8002ED9C(120.0f);
             Camera_8002F0E4(0x14);
             fp->mv.mh.unk4.x0 = 2;

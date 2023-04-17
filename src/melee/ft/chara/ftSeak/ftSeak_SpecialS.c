@@ -491,14 +491,14 @@ void ftSk_SpecialS_80110F70(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
 }
 
-void ftSk_SpecialS_StartMotion(HSD_GObj* gobj)
+void ftSk_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 349, 0, NULL, 0.0, 1, 0);
     ftAnim_8006EBA4(gobj);
     ftSk_SpecialS_80110F70(gobj);
 }
 
-void ftSk_SpecialAirS_StartMotion(HSD_GObj* gobj)
+void ftSk_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x80_self_vel.y = 0;
@@ -588,36 +588,36 @@ bool ftSk_SpecialS_CheckInitChain(HSD_GObj* gobj)
     return false;
 }
 
-void ftSk_SpecialS_Anim(HSD_GObj* gobj)
+void ftSk_SpecialSStart_Anim(HSD_GObj* gobj)
 {
     if (ftSk_SpecialS_CheckInitChain(gobj)) {
         ftSk_SpecialS_80111830(gobj);
     }
 }
 
-void ftSk_SpecialS_80111308(HSD_GObj* gobj)
+void ftSk_SpecialAirSStart_Anim(HSD_GObj* gobj)
 {
     if (ftSk_SpecialS_CheckInitChain(gobj)) {
         ftSk_SpecialS_80111988(gobj);
     }
 }
 
-void ftSk_SpecialS_80111344(HSD_GObj* gobj)
+void ftSk_SpecialSStart_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftSk_SpecialS_80111348(HSD_GObj* gobj)
+void ftSk_SpecialAirSStart_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftSk_SpecialS_8011134C(HSD_GObj* gobj)
+void ftSk_SpecialSStart_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftSk_SpecialS_8011136C(HSD_GObj* gobj)
+void ftSk_SpecialAirSStart_Phys(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -635,14 +635,14 @@ void ftSk_SpecialS_8011136C(HSD_GObj* gobj)
     ftCommon_8007CE94(fp, fighter_attr->x180_AerialFriction);
 }
 
-void ftSk_SpecialS_801113C8(HSD_GObj* gobj)
+void ftSk_SpecialSStart_Coll(HSD_GObj* gobj)
 {
     if (!ft_800827A0(gobj)) {
         ftSk_SpecialS_80111440(gobj);
     }
 }
 
-void ftSk_SpecialS_80111404(HSD_GObj* gobj)
+void ftSk_SpecialAirSStart_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
         ftSk_SpecialS_801114E4(gobj);
@@ -702,7 +702,7 @@ void ftSk_SpecialS_801114E4(HSD_GObj* gobj)
     }
 }
 
-void ftSk_SpecialS_80111588(HSD_GObj* gobj)
+void ftSk_SpecialSLoop_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -736,7 +736,7 @@ void ftSk_SpecialS_80111588(HSD_GObj* gobj)
     ftSk_SpecialS_80110610(gobj, 305, 1);
 }
 
-void ftSk_SpecialS_80111648(HSD_GObj* gobj)
+void ftSk_SpecialAirSLoop_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -769,7 +769,7 @@ void ftSk_SpecialS_80111648(HSD_GObj* gobj)
     ftSk_SpecialS_80110610(gobj, 308, 1);
 }
 
-void ftSk_SpecialS_80111708(HSD_GObj* gobj)
+void ftSk_SpecialSLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -780,7 +780,7 @@ void ftSk_SpecialS_80111708(HSD_GObj* gobj)
     ftSk_SpecialS_80110788(gobj);
 }
 
-void ftSk_SpecialS_80111740(HSD_GObj* gobj)
+void ftSk_SpecialAirSLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -791,24 +791,24 @@ void ftSk_SpecialS_80111740(HSD_GObj* gobj)
     ftSk_SpecialS_80110788(gobj);
 }
 
-void ftSk_SpecialS_80111778(HSD_GObj* gobj)
+void ftSk_SpecialSLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftSk_SpecialS_80111798(HSD_GObj* gobj)
+void ftSk_SpecialAirSLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
-void ftSk_SpecialS_801117B8(HSD_GObj* gobj)
+void ftSk_SpecialSLoop_Coll(HSD_GObj* gobj)
 {
     if (!ft_800827A0(gobj)) {
         ftSk_SpecialS_80111DF8(gobj);
     }
 }
 
-void ftSk_SpecialS_801117F4(HSD_GObj* gobj)
+void ftSk_SpecialAirSLoop_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
         ftSk_SpecialS_80111EB4(gobj);
@@ -890,7 +890,7 @@ void ftSk_SpecialS_80111988(HSD_GObj* gobj)
     }
 }
 
-void ftSk_SpecialS_80111A48(HSD_GObj* gobj)
+void ftSk_SpecialSEnd_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -932,7 +932,7 @@ void ftSk_SpecialS_80111A48(HSD_GObj* gobj)
     }
 }
 
-void ftSk_SpecialS_80111B1C(HSD_GObj* gobj)
+void ftSk_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -970,27 +970,27 @@ void ftSk_SpecialS_80111B1C(HSD_GObj* gobj)
     }
 }
 
-void ftSk_SpecialS_80111BF0(HSD_GObj* gobj)
+void ftSk_SpecialSEnd_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftSk_SpecialS_80111BF4(HSD_GObj* gobj)
+void ftSk_SpecialAirSEnd_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftSk_SpecialS_80111BF8(HSD_GObj* gobj)
+void ftSk_SpecialSEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftSk_SpecialS_80111C18(HSD_GObj* gobj)
+void ftSk_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
-void ftSk_SpecialS_80111C38(HSD_GObj* gobj)
+void ftSk_SpecialSEnd_Coll(HSD_GObj* gobj)
 {
     if (!ft_800827A0(gobj)) {
         ftSk_SpecialS_80111CB0(gobj);
@@ -998,7 +998,7 @@ void ftSk_SpecialS_80111C38(HSD_GObj* gobj)
 }
 
 // Collision_SheikChainAir
-void ftSk_SpecialS_80111C74(HSD_GObj* gobj)
+void ftSk_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
         ftSk_SpecialS_80111D54(gobj);

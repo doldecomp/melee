@@ -14,7 +14,7 @@
 #include <baselib/gobjproc.h>
 
 /// Create Oil Panic Item
-void ftGw_ItemPanicSetup(HSD_GObj* gobj)
+void ftGw_SpecialLw_ItemPanicSetup(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -33,39 +33,39 @@ void ftGw_ItemPanicSetup(HSD_GObj* gobj)
     }
 
     if (fp->fv.gw.x2268_panicGObj != NULL) {
-        fp->cb.x21E4_callback_OnDeath2 = ftGw_OnDamage;
-        fp->cb.x21DC_callback_OnTakeDamage = ftGw_OnDamage;
+        fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
+        fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = ftGw_ItemPanicEnterHitlag;
-    fp->cb.x21D8_callback_ExitHitlag = ftGw_ItemPanicExitHitlag;
+    fp->cb.x21D4_callback_EnterHitlag = ftGw_SpecialLw_ItemPanicEnterHitlag;
+    fp->cb.x21D8_callback_ExitHitlag = ftGw_SpecialLw_ItemPanicExitHitlag;
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
 /// Set Oil Panic flags + clear pointers
-void ftGw_ItemPanicSetFlag(HSD_GObj* gobj)
+void ftGw_SpecialLw_ItemPanicSetFlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftGw_ItemPanicExitHitlag(gobj);
+    ftGw_SpecialLw_ItemPanicExitHitlag(gobj);
     fp->fv.gw.x2268_panicGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
 /// Remove Oil Panic item
-void ftGw_ItemPanicRemove(HSD_GObj* gobj)
+void ftGw_SpecialLw_ItemPanicRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.gw.x2268_panicGObj != NULL) {
         it_802C7E94(fp->fv.gw.x2268_panicGObj);
-        ftGw_ItemPanicSetFlag(gobj);
+        ftGw_SpecialLw_ItemPanicSetFlag(gobj);
     }
 }
 
 /// Apply hitlag to Oil Panic item
-void ftGw_ItemPanicEnterHitlag(HSD_GObj* gobj)
+void ftGw_SpecialLw_ItemPanicEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -75,7 +75,7 @@ void ftGw_ItemPanicEnterHitlag(HSD_GObj* gobj)
 }
 
 /// Remove hitlag for Oil Panic item
-void ftGw_ItemPanicExitHitlag(HSD_GObj* gobj)
+void ftGw_SpecialLw_ItemPanicExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -85,7 +85,7 @@ void ftGw_ItemPanicExitHitlag(HSD_GObj* gobj)
 }
 
 /// Check if Mr. Game & Watch is in any of his Oil Panic Motion States
-bool ftGw_ItemCheckPanicRemove(HSD_GObj* gobj)
+bool ftGw_SpecialLw_ItemCheckPanicRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     /// @todo @c enum
@@ -142,7 +142,7 @@ inline void ftGameWatch_SpecialLw_SetVars(HSD_GObj* gobj)
 }
 
 /// Mr. Game & Watch's Oil Panic Start Motion State handler
-void ftGw_SpecialLw_StartMotion(HSD_GObj* gobj)
+void ftGw_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -159,7 +159,7 @@ void ftGw_SpecialLw_StartMotion(HSD_GObj* gobj)
     ftGameWatch_SpecialLw_SetVars(gobj);
 }
 
-void ftGw_SpecialAirLw_StartMotion(HSD_GObj* gobj)
+void ftGw_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* sa = fp->x2D4_specialAttributes;
@@ -564,7 +564,7 @@ void ftGw_SpecialAirLwCatch_AirToGround(HSD_GObj* gobj)
 }
 
 /// Check to enter grounded or aerial Oil Panic Fill
-void ftGw_AbsorbThink_DecideAction(HSD_GObj* gobj)
+void ftGw_SpecialLw_AbsorbThink_DecideAction(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -677,7 +677,7 @@ void ftGw_SpecialLwShoot_GroundToAir(HSD_GObj* gobj)
                               fp->x894_currentAnimFrame, 1, 0);
 
     ftGw_SpecialLw_UpdateBucketModel(gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftGw_ItemPanicSetup;
+    fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialLw_ItemPanicSetup;
 }
 
 /// Mr. Game & Watch's air -> ground Oil Panic Release Motion State handler
@@ -691,7 +691,7 @@ void ftGw_SpecialAirLwShoot_AirToGround(HSD_GObj* gobj)
                               NULL, fp->x894_currentAnimFrame, 1, 0);
 
     ftGw_SpecialLw_UpdateBucketModel(gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftGw_ItemPanicSetup;
+    fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialLw_ItemPanicSetup;
 }
 
 /// Enter SpecialLwShoot and calculate damage
@@ -729,7 +729,7 @@ void ftGw_SpecialLwShoot_ReleaseOil(HSD_GObj* gobj)
         }
 
         ftGw_SpecialLw_UpdateBucketModel(gobj);
-        fp->cb.x21BC_callback_Accessory4 = ftGw_ItemPanicSetup;
+        fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialLw_ItemPanicSetup;
     }
 }
 
@@ -766,6 +766,6 @@ void ftGw_SpecialAirLwShoot_ReleaseOil(HSD_GObj* gobj)
         }
 
         ftGw_SpecialLw_UpdateBucketModel(gobj);
-        fp->cb.x21BC_callback_Accessory4 = ftGw_ItemPanicSetup;
+        fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialLw_ItemPanicSetup;
     }
 }

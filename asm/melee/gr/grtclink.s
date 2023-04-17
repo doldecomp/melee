@@ -65,8 +65,8 @@ grTCaptain_8021FFE8:
 /* 80220000 0021CBE0  93 81 00 10 */	stw r28, 0x10(r1)
 /* 80220004 0021CBE4  3B 83 00 00 */	addi r28, r3, 0
 /* 80220008 0021CBE8  1C 1C 00 14 */	mulli r0, r28, 0x14
-/* 8022000C 0021CBEC  3C 60 80 3F */	lis r3, lbl_803E86D0@ha
-/* 80220010 0021CBF0  3B E3 86 D0 */	addi r31, r3, lbl_803E86D0@l
+/* 8022000C 0021CBEC  3C 60 80 3F */	lis r3, grTCl_803E86D0@ha
+/* 80220010 0021CBF0  3B E3 86 D0 */	addi r31, r3, grTCl_803E86D0@l
 /* 80220014 0021CBF4  38 7C 00 00 */	addi r3, r28, 0
 /* 80220018 0021CBF8  7F BF 02 14 */	add r29, r31, r0
 /* 8022001C 0021CBFC  4B FA 14 B5 */	bl Ground_801C14D0
@@ -99,7 +99,7 @@ grTCaptain_8021FFE8:
 /* 80220080 0021CC60  41 82 00 2C */	beq .L_802200AC
 /* 80220084 0021CC64  38 7E 00 00 */	addi r3, r30, 0
 /* 80220088 0021CC68  38 A0 00 04 */	li r5, 4
-/* 8022008C 0021CC6C  48 16 FC C9 */	bl func_8038FD54
+/* 8022008C 0021CC6C  48 16 FC C9 */	bl HSD_GObjProc_8038FD54
 /* 80220090 0021CC70  48 00 00 1C */	b .L_802200AC
 .L_80220094:
 /* 80220094 0021CC74  38 DC 00 00 */	addi r6, r28, 0
@@ -236,8 +236,8 @@ grTCaptain_80220220:
 
 .section .data
     .balign 8
-.global lbl_803E86D0
-lbl_803E86D0:
+.global grTCl_803E86D0
+grTCl_803E86D0:
     .4byte grTCaptain_802200D0
     .4byte grTCaptain_802200FC
     .4byte grTCaptain_80220104
@@ -258,15 +258,15 @@ lbl_803E86D0:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_803E8720
-lbl_803E8720:
+.global grTCl_803E8720
+grTCl_803E8720:
     .asciz "/GrTCl.dat"
     .balign 4
-.global lbl_803E872C
-lbl_803E872C:
+.global grTCl_803E872C
+grTCl_803E872C:
     .4byte 0x0000002A
-    .4byte lbl_803E86D0
-    .4byte lbl_803E8720
+    .4byte grTCl_803E86D0
+    .4byte grTCl_803E8720
     .4byte grTCaptain_8021FF48
     .4byte grTCaptain_8021FF44
     .4byte grTCaptain_8021FFB8

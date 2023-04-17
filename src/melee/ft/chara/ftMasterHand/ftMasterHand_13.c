@@ -11,14 +11,14 @@
 #include <dolphin/mtx/types.h>
 
 // 8015287C 14F45C
-void ftMh_Unk13_8015287C(HSD_GObj* gobj)
+void ftMh_MS_358_Coll(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80152880 14F460
 // https://decomp.me/scratch/is1xu
-void ftMh_Unk13_80152880(HSD_GObj* gobj)
+void ftMh_MS_358_80152880(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
@@ -36,7 +36,7 @@ void ftMh_Unk13_80152880(HSD_GObj* gobj)
 
 // 80152928 14F508
 // https://decomp.me/scratch/WyNdB
-void ftMh_Unk13_80152928(HSD_GObj* gobj)
+void ftMh_MS_359_Anim(HSD_GObj* gobj)
 {
     Fighter* temp_r31;
     Fighter* temp_r4;
@@ -59,16 +59,16 @@ void ftMh_Unk13_80152928(HSD_GObj* gobj)
 
 // 801529D0 14F5B0
 // https://decomp.me/scratch/IBucf
-void ftMh_Unk13_801529D0(HSD_GObj* arg0)
+void ftMh_MS_360_Anim(HSD_GObj* arg0)
 {
     if (!ftAnim_IsFramesRemaining(arg0)) {
-        ftMh_Unk03_80151018(arg0);
+        ftMh_MS_389_80151018(arg0);
     }
 }
 
 // 80152A0C 14F5EC
 // https://decomp.me/scratch/7UfC7
-void ftMh_Unk13_80152A0C(HSD_GObj* arg0)
+void ftMh_MS_359_IASA(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -108,7 +108,7 @@ static inline float my_lbvector_Len(Vec3* vec)
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-void ftMh_Unk13_80152A50(HSD_GObj* gobj)
+void ftMh_MS_359_Phys(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftMasterHand_SpecialAttrs* attr;

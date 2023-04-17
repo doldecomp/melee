@@ -13,22 +13,22 @@
 
 // 80154D78 151958
 // https://decomp.me/scratch/DzZiN
-void ftMh_Unk25_80154D78(HSD_GObj* gobj)
+void ftMh_MS_376_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
 
         if (fp->mv.mh.unk0.x20 == 1) {
-            ftMh_Unk23_80154A78(gobj);
+            ftMh_MS_378_80154A78(gobj);
         } else {
-            ftMh_Unk22_801546D8(gobj);
+            ftMh_MS_374_801546D8(gobj);
         }
     }
 }
 
 // 80154DD0 1519B0
 // https://decomp.me/scratch/5olg2
-void ftMh_Unk25_80154DD0(HSD_GObj* arg0)
+void ftMh_MS_376_IASA(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -38,7 +38,7 @@ void ftMh_Unk25_80154DD0(HSD_GObj* arg0)
 
 // 80154E14 1519F4
 // https://decomp.me/scratch/2yMnG
-void ftMh_Unk25_80154E14(HSD_GObj* gobj)
+void ftMh_MS_376_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
@@ -50,14 +50,14 @@ void ftMh_Unk25_80154E14(HSD_GObj* gobj)
 
 // 80154E74 151A54
 // https://decomp.me/scratch/0wwnm
-void ftMh_Unk25_80154E74(HSD_GObj* gobj)
+void ftMh_MS_376_Coll(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80154E78 151A58
 // https://decomp.me/scratch/lmtfb
-void ftMh_Unk25_80154E78(HSD_GObj* gobj)
+void ftMh_MS_376_80154E78(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -69,13 +69,14 @@ void ftMh_Unk25_80154E78(HSD_GObj* gobj)
 
 // 80154ED8 151AB8
 // https://decomp.me/scratch/6H8xW
-void ftMh_Unk25_80154ED8(HSD_GObj* gobj)
+void ftMh_MS_379_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2200_ftcmd_var0 != 0) {
         fp->x2200_ftcmd_var0 = 0;
-        ftMh_Unk34_80155D6C(fp->x1A58_interactedFighter, 0x14A);
+        ftMh_CaptureWaitMasterHand_80155D6C(fp->x1A58_interactedFighter,
+                                            0x14A);
         if (fp->x1A58_interactedFighter != 0) {
             HSD_GObj* victim = fp->x1A58_interactedFighter;
             Fighter* victim_fp = GET_FIGHTER(victim);
@@ -87,6 +88,6 @@ void ftMh_Unk25_80154ED8(HSD_GObj* gobj)
         fp->mv.mh.unk0.x20 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftMh_Unk03_80151018(gobj);
+        ftMh_MS_389_80151018(gobj);
     }
 }

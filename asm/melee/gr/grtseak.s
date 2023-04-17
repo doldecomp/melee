@@ -65,8 +65,8 @@ grTSeak_80223908:
 /* 80223920 00220500  93 81 00 10 */	stw r28, 0x10(r1)
 /* 80223924 00220504  3B 83 00 00 */	addi r28, r3, 0
 /* 80223928 00220508  1C 1C 00 14 */	mulli r0, r28, 0x14
-/* 8022392C 0022050C  3C 60 80 3F */	lis r3, lbl_803E94B8@ha
-/* 80223930 00220510  3B E3 94 B8 */	addi r31, r3, lbl_803E94B8@l
+/* 8022392C 0022050C  3C 60 80 3F */	lis r3, grTSk_803E94B8@ha
+/* 80223930 00220510  3B E3 94 B8 */	addi r31, r3, grTSk_803E94B8@l
 /* 80223934 00220514  38 7C 00 00 */	addi r3, r28, 0
 /* 80223938 00220518  7F BF 02 14 */	add r29, r31, r0
 /* 8022393C 0022051C  4B F9 DB 95 */	bl Ground_801C14D0
@@ -99,7 +99,7 @@ grTSeak_80223908:
 /* 802239A0 00220580  41 82 00 2C */	beq .L_802239CC
 /* 802239A4 00220584  38 7E 00 00 */	addi r3, r30, 0
 /* 802239A8 00220588  38 A0 00 04 */	li r5, 4
-/* 802239AC 0022058C  48 16 C3 A9 */	bl func_8038FD54
+/* 802239AC 0022058C  48 16 C3 A9 */	bl HSD_GObjProc_8038FD54
 /* 802239B0 00220590  48 00 00 1C */	b .L_802239CC
 .L_802239B4:
 /* 802239B4 00220594  38 DC 00 00 */	addi r6, r28, 0
@@ -236,8 +236,8 @@ grTSeak_80223B40:
 
 .section .data
     .balign 8
-.global lbl_803E94B8
-lbl_803E94B8:
+.global grTSk_803E94B8
+grTSk_803E94B8:
     .4byte grTSeak_802239F0
     .4byte grTSeak_80223A1C
     .4byte grTSeak_80223A24
@@ -258,15 +258,15 @@ lbl_803E94B8:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_803E9508
-lbl_803E9508:
+.global grTSk_803E9508
+grTSk_803E9508:
     .asciz "/GrTSk.dat"
     .balign 4
-.global lbl_803E9514
-lbl_803E9514:
+.global grTSk_803E9514
+grTSk_803E9514:
     .4byte 0x0000003C
-    .4byte lbl_803E94B8
-    .4byte lbl_803E9508
+    .4byte grTSk_803E94B8
+    .4byte grTSk_803E9508
     .4byte grTSeak_80223868
     .4byte grTSeak_80223864
     .4byte grTSeak_802238D8
