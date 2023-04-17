@@ -35,10 +35,6 @@ extern Fighter_DemoStrings ftCl_Init_DemoMotionFilenames;
 
 bool ftCl_Init_8014920C(HSD_GObj* gobj);
 u32 ftCl_Init_801492F4(HSD_GObj* gobj);
-void ftCl_Appeal_Anim(HSD_GObj* gobj);
-void ftCl_Appeal_Coll(HSD_GObj* gobj);
-void ftCl_Appeal_IASA(HSD_GObj* gobj);
-void ftCl_Appeal_Phys(HSD_GObj* gobj);
 void ftCl_Init_80149114(HSD_GObj* gobj);
 void ftCl_Init_8014919C(HSD_GObj* gobj);
 void ftCl_Init_80149268(HSD_GObj* gobj);

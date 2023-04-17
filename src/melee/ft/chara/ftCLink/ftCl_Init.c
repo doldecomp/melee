@@ -2,6 +2,7 @@
 
 #include "ftCl_Init.h"
 
+#include "ftCl_Appeal.h"
 #include "inlines.h"
 
 #include "ft/ft_081B.h"
@@ -13,6 +14,10 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftLink/ftLk_Init.h"
+#include "ftLink/ftLk_SpecialHi.h"
+#include "ftLink/ftLk_SpecialLw.h"
+#include "ftLink/ftLk_SpecialN.h"
+#include "ftLink/ftLk_SpecialS.h"
 #include "lb/lbmthp.h"
 
 MotionState ftCl_Init_MotionStateTable[] = {
