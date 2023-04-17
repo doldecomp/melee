@@ -6,6 +6,10 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftMario/ftMr_Init.h"
+#include "ftMario/ftMr_SpecialHi.h"
+#include "ftMario/ftMr_SpecialLw.h"
+#include "ftMario/ftMr_SpecialN.h"
+#include "ftMario/ftMr_SpecialS.h"
 #include "it/it_27CF.h"
 
 MotionState ftDr_Init_MotionStateTable[] = {
