@@ -114,6 +114,5 @@ void ftCa_SpecialS_Coll(HSD_GObj* gobj);
 void ftCa_SpecialAirSStart_Coll(HSD_GObj* gobj);
 
 void ftCa_SpecialAirS_Coll(HSD_GObj* gobj);
-void ftCa_Init_OnLoadForGanon(Fighter*);
 
 #endif

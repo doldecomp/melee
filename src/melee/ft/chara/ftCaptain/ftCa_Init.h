@@ -23,5 +23,6 @@ void ftCa_Init_OnItemInvisible(HSD_GObj* gobj);
 void ftCa_Init_OnItemPickup(HSD_GObj* gobj, bool);
 void ftCa_Init_OnItemVisible(HSD_GObj* gobj);
 void ftCa_Init_OnLoad(HSD_GObj* gobj);
+void ftCa_Init_OnLoadForGanon(Fighter*);
 
 #endif

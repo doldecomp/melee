@@ -24,6 +24,13 @@ typedef enum ftCaptain_MotionState {
     ftCa_MS_SpecialAirHi,
     ftCa_MS_SpecialHi_Catch,
     ftCa_MS_SpecialHi_Throw,
+    ftCa_MS_SpecialLw,
+    ftCa_MS_SpecialLw_GroundEnd,
+    ftCa_MS_SpecialAirLw,
+    ftCa_MS_SpecialAirLw_GroundEnd,
+    ftCa_MS_SpecialAirLw_AirEnd,
+    ftCa_MS_SpecialLw_AirEnd,
+    ftCa_MS_SpecialLw_Rebound,
 } ftCaptain_MotionState;
 
 #endif

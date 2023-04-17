@@ -16,7 +16,7 @@
 #include <trigf.h>
 
 /// Create Aesthetic Wind Effect for Warlock Punch
-void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
+static void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
 {
     s32 currentAnimFrame;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -41,7 +41,7 @@ void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
 }
 
 /// Calculate angle from control stick input - inline
-f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
+static f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
 {
     ftCaptain_DatAttrs* tempAttrs = fp->x2D4_specialAttributes;
 
