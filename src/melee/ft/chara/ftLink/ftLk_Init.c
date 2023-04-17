@@ -2,6 +2,11 @@
 
 #include "ftLk_Init.h"
 
+#include "ftLk_SpecialHi.h"
+#include "ftLk_SpecialLw.h"
+#include "ftLk_SpecialN.h"
+#include "ftLk_SpecialS.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"

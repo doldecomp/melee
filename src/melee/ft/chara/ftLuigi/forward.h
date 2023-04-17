@@ -1,7 +1,6 @@
 #ifndef MELEE_FT_CHARA_FTLUIGI_FORWARD_H
 #define MELEE_FT_CHARA_FTLUIGI_FORWARD_H
 
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
 
 typedef enum ftLuigiAction {
