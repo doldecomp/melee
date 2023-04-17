@@ -3,7 +3,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ftdata.h"
 #include "ft/ftlib.h"
-#include "ftKirby/ftkirby.h"
+#include "ftKirby/ftKb_Init.h"
 #include "gm/gm_1601.h"
 #include "if/ifstatus.h"
 #include "lb/lbarchive.h"

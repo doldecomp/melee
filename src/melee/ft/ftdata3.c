@@ -1,10 +1,10 @@
 #include <platform.h>
 
-#include "ft/chara/ftCrazyHand/ftcrazyhand.h"
-#include "ft/chara/ftKirby/ftkirby.h"
-#include "ft/chara/ftMasterHand/ftMasterHand_32.h"
-#include "ft/chara/ftMasterHand/ftMasterHand_33.h"
-#include "ft/chara/ftMasterHand/ftMasterHand_34.h"
+#include "ft/chara/ftCrazyHand/ftCh_Init.h"
+#include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftMasterHand/ftMh_CaptureMasterHand_1.h"
+#include "ft/chara/ftMasterHand/ftMh_CaptureDamageMasterHand.h"
+#include "ft/chara/ftMasterHand/ftMh_CaptureWaitMasterHand.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcliffcommon.h"

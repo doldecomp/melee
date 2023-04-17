@@ -9,7 +9,7 @@ typedef struct _ftDonkeyAttributes {
     s32 action_state;
     s32 x4_action_state;
 
-    //// used by ftdonkey_walk.c (maybe Cargo Hold) ////
+    //// used by ftDk_MS_342.c (maybe Cargo Hold) ////
     f32 x8;
     f32 xC;
     f32 x10;
