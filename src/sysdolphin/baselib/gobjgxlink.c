@@ -140,8 +140,8 @@ void HSD_GObjGXLink_80390908(HSD_GObj* gobj, u8 gx_link, u8 priority)
     gobj->gx_link = gx_link;
     gobj->render_priority = priority;
     cur = get_by_prio(gobj);
-    GObj_GXReorder(gobj,
-                   cur != NULL ? cur->prev_gx : HSD_GObj_804D7820[gobj->gx_link]);
+    GObj_GXReorder(gobj, cur != NULL ? cur->prev_gx
+                                     : HSD_GObj_804D7820[gobj->gx_link]);
 }
 
 void HSD_GObjGXLink_803909D8(HSD_GObj* gobj, HSD_GObj* other)

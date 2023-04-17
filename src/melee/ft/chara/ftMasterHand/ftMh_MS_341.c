@@ -1,11 +1,11 @@
 #include "ftMh_MS_341.h"
 
-#include "ftMh_MS_389.h"
+#include "ftMh_CaptureMasterHand_0.h"
 #include "ftMh_MS_343.h"
 #include "ftMh_MS_346.h"
 #include "ftMh_MS_348.h"
-#include "ftMh_MS_353.h"
 #include "ftMh_MS_352.h"
+#include "ftMh_MS_353.h"
 #include "ftMh_MS_355.h"
 #include "ftMh_MS_357.h"
 #include "ftMh_MS_359.h"
@@ -19,7 +19,7 @@
 #include "ftMh_MS_380.h"
 #include "ftMh_MS_382.h"
 #include "ftMh_MS_383.h"
-#include "ftMh_CaptureMasterHand_0.h"
+#include "ftMh_MS_389.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"
@@ -270,8 +270,8 @@ void ftMh_MS_341_Anim(HSD_GObj* gobj)
                     fp->ev.mh.x2254 = 0;
                     tmp = 2;
                 } else {
-                    s32 qwe4 =
-                        ftMh_Init_803D40D0.x54[fp->ev.mh.x224C * 5 + HSD_Randi(5)];
+                    s32 qwe4 = ftMh_Init_803D40D0
+                                   .x54[fp->ev.mh.x224C * 5 + HSD_Randi(5)];
                     tmp = qwe4;
                     if (qwe4 == 2) {
                         fp->ev.mh.x2254 = 0;
@@ -282,7 +282,8 @@ void ftMh_MS_341_Anim(HSD_GObj* gobj)
                 // cast required, don't know why
                 qwe = &((u8_pair*) ftMh_Init_803D40D0.x48)[tmp];
                 tmp2 = ftMh_Init_803D40D0
-                           .x0[ftMh_Init_803D40D0.x38[qwe->a + HSD_Randi(qwe->b)]];
+                           .x0[ftMh_Init_803D40D0
+                                   .x38[qwe->a + HSD_Randi(qwe->b)]];
 
                 fp->ev.mh.x224C = tmp;
                 fp->ev.mh.x2250 = tmp2;

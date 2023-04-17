@@ -1,8 +1,8 @@
 #include "ft/chara/ftDonkey/ftDk_MS_342.h"
 
-#include "ft/chara/ftDonkey/ftdonkey.h"
 #include "ft/chara/ftDonkey/ftDk_MS_341.h"
 #include "ft/chara/ftDonkey/ftDk_MS_347.h"
+#include "ft/chara/ftDonkey/ftdonkey.h"
 #include "ft/ft_0877.h"
 #include "ft/ftwalkcommon.h"
 #include "it/it_27CF.h"

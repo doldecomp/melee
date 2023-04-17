@@ -23,6 +23,6 @@ void ftSs_Init_UnkMotionStates4(HSD_GObj* gobj);
 void ftSs_Init_LoadSpecialAttrs(HSD_GObj* gobj);
 void ftSs_Init_80128770(HSD_AObj* gobj, f32 rate);
 void ftSs_Init_CreateThrowGrappleBeam(HSD_GObj* gobj, s32 action_state,
-                                    f32 anim_speed);
+                                      f32 anim_speed);
 
 #endif

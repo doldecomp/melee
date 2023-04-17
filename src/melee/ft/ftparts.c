@@ -47,7 +47,8 @@ static char ftParts_803C0A08[] = "ftparts.c";
 static char ftParts_803C0A14[] = "envelope";
 static char ftParts_803C0A20[] = "envelope->jobj";
 static char ftParts_803C0A30[] = "jp->envelopemtx";
-static char ftParts_803C0A40[] = "fighter parts model dobj num over! player %d\n";
+static char ftParts_803C0A40[] =
+    "fighter parts model dobj num over! player %d\n";
 static char ftParts_803C0A70[] = "fighter dobj num over! player %d\n";
 #endif
 

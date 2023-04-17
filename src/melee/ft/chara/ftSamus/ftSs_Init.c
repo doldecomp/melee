@@ -12,38 +12,51 @@
 #include "lb/lb_00B0.h"
 
 MotionState ftSs_Init_MotionStateTable[] = {
-    { 295, 0, 0x01000000, ftSs_SpecialLw_Anim, ftSs_SpecialLw_IASA, ftSs_SpecialLw_Phys,
-      ftSs_SpecialLw_Coll, ftCamera_UpdateCameraBox },
-    { 296, 0, 0x01000000, ftSs_SpecialAirLw_Anim, ftSs_SpecialAirLw_IASA, ftSs_SpecialAirLw_Phys,
-      ftSs_SpecialAirLw_Coll, ftCamera_UpdateCameraBox },
-    { 297, 0x00340111, 0x12000000, ftSs_SpecialNStart_Anim, ftSs_SpecialNStart_IASA,
-      ftSs_SpecialNStart_Phys, ftSs_SpecialNStart_Coll, ftCamera_UpdateCameraBox },
-    { 298, 0x00340111, 0x12000000, ftSs_SpecialNLoop_Anim, ftSs_SpecialNLoop_IASA,
-      ftSs_SpecialNLoop_Phys, ftSs_SpecialNLoop_Coll, ftCamera_UpdateCameraBox },
-    { 299, 0x00340111, 0x12000000, ftSs_SpecialNEnd_Anim, ftSs_SpecialNEnd_IASA,
-      ftSs_SpecialNEnd_Phys, ftSs_SpecialNEnd_Coll, ftCamera_UpdateCameraBox },
-    { 300, 0x00340111, 0x12000000, ftSs_SpecialNShoot_Anim, ftSs_SpecialNShoot_IASA,
-      ftSs_SpecialNShoot_Phys, ftSs_SpecialNShoot_Coll, ftCamera_UpdateCameraBox },
-    { 301, 0x00340511, 0x12000000, ftSs_SpecialAirNStart_Anim, ftSs_SpecialAirNStart_IASA,
-      ftSs_SpecialAirNStart_Phys, ftSs_SpecialAirNStart_Coll, ftCamera_UpdateCameraBox },
-    { 302, 0x00340511, 0x12000000, ftSs_SpecialAirNShoot_Anim, ftSs_SpecialAirNShoot_IASA,
-      ftSs_SpecialAirNShoot_Phys, ftSs_SpecialAirNShoot_Coll, ftCamera_UpdateCameraBox },
+    { 295, 0, 0x01000000, ftSs_SpecialLw_Anim, ftSs_SpecialLw_IASA,
+      ftSs_SpecialLw_Phys, ftSs_SpecialLw_Coll, ftCamera_UpdateCameraBox },
+    { 296, 0, 0x01000000, ftSs_SpecialAirLw_Anim, ftSs_SpecialAirLw_IASA,
+      ftSs_SpecialAirLw_Phys, ftSs_SpecialAirLw_Coll,
+      ftCamera_UpdateCameraBox },
+    { 297, 0x00340111, 0x12000000, ftSs_SpecialNStart_Anim,
+      ftSs_SpecialNStart_IASA, ftSs_SpecialNStart_Phys,
+      ftSs_SpecialNStart_Coll, ftCamera_UpdateCameraBox },
+    { 298, 0x00340111, 0x12000000, ftSs_SpecialNLoop_Anim,
+      ftSs_SpecialNLoop_IASA, ftSs_SpecialNLoop_Phys, ftSs_SpecialNLoop_Coll,
+      ftCamera_UpdateCameraBox },
+    { 299, 0x00340111, 0x12000000, ftSs_SpecialNEnd_Anim,
+      ftSs_SpecialNEnd_IASA, ftSs_SpecialNEnd_Phys, ftSs_SpecialNEnd_Coll,
+      ftCamera_UpdateCameraBox },
+    { 300, 0x00340111, 0x12000000, ftSs_SpecialNShoot_Anim,
+      ftSs_SpecialNShoot_IASA, ftSs_SpecialNShoot_Phys,
+      ftSs_SpecialNShoot_Coll, ftCamera_UpdateCameraBox },
+    { 301, 0x00340511, 0x12000000, ftSs_SpecialAirNStart_Anim,
+      ftSs_SpecialAirNStart_IASA, ftSs_SpecialAirNStart_Phys,
+      ftSs_SpecialAirNStart_Coll, ftCamera_UpdateCameraBox },
+    { 302, 0x00340511, 0x12000000, ftSs_SpecialAirNShoot_Anim,
+      ftSs_SpecialAirNShoot_IASA, ftSs_SpecialAirNShoot_Phys,
+      ftSs_SpecialAirNShoot_Coll, ftCamera_UpdateCameraBox },
     { 303, 0x00340112, 0x13000000, ftSs_SpecialS_Anim, ftSs_SpecialS_IASA,
       ftSs_SpecialS_Phys, ftSs_SpecialS_Coll, ftCamera_UpdateCameraBox },
-    { 304, 0x00340912, 0x13000000, ftSs_SpecialSSmash_Anim, ftSs_SpecialSSmash_IASA,
-      ftSs_SpecialSSmash_Phys, ftSs_SpecialSSmash_Coll, ftCamera_UpdateCameraBox },
-    { 305, 0x00340512, 0x13000000, ftSs_SpecialAirS_Anim, ftSs_SpecialAirS_IASA,
-      ftSs_SpecialAirS_Phys, ftSs_SpecialAirS_Coll, ftCamera_UpdateCameraBox },
-    { 306, 0x00340D12, 0x13000000, ftSs_SpecialAirSmash_Anim, ftSs_SpecialAirSmash_IASA,
-      ftSs_SpecialAirSmash_Phys, ftSs_SpecialAirSmash_Coll, ftCamera_UpdateCameraBox },
+    { 304, 0x00340912, 0x13000000, ftSs_SpecialSSmash_Anim,
+      ftSs_SpecialSSmash_IASA, ftSs_SpecialSSmash_Phys,
+      ftSs_SpecialSSmash_Coll, ftCamera_UpdateCameraBox },
+    { 305, 0x00340512, 0x13000000, ftSs_SpecialAirS_Anim,
+      ftSs_SpecialAirS_IASA, ftSs_SpecialAirS_Phys, ftSs_SpecialAirS_Coll,
+      ftCamera_UpdateCameraBox },
+    { 306, 0x00340D12, 0x13000000, ftSs_SpecialAirSmash_Anim,
+      ftSs_SpecialAirSmash_IASA, ftSs_SpecialAirSmash_Phys,
+      ftSs_SpecialAirSmash_Coll, ftCamera_UpdateCameraBox },
     { 307, 0x00340213, 0x14000000, ftSs_SpecialHi_Anim, ftSs_SpecialHi_IASA,
       ftSs_SpecialHi_Phys, ftSs_SpecialHi_Coll, ftCamera_UpdateCameraBox },
-    { 308, 0x00340613, 0x14000000, ftSs_SpecialAirHi_Anim, ftSs_SpecialAirHi_IASA,
-      ftSs_SpecialAirHi_Phys, ftSs_SpecialAirHi_Coll, ftCamera_UpdateCameraBox },
-    { 309, 0x00340114, 0x15000000, ftSs_SpecialLwBombEnd_Anim, ftSs_SpecialLwBombEnd_IASA,
-      ftSs_SpecialLwBombEnd_Phys, ftSs_SpecialLwBombEnd_Coll, ftCamera_UpdateCameraBox },
-    { 310, 0x00340514, 0x15000000, ftSs_SpecialAirLwBomb_Anim, ftSs_SpecialAirLwBomb_IASA,
-      ftSs_SpecialAirLwBomb_Phys, ftSs_SpecialAirLwBomb_Coll, ftCamera_UpdateCameraBox },
+    { 308, 0x00340613, 0x14000000, ftSs_SpecialAirHi_Anim,
+      ftSs_SpecialAirHi_IASA, ftSs_SpecialAirHi_Phys, ftSs_SpecialAirHi_Coll,
+      ftCamera_UpdateCameraBox },
+    { 309, 0x00340114, 0x15000000, ftSs_SpecialLwBombEnd_Anim,
+      ftSs_SpecialLwBombEnd_IASA, ftSs_SpecialLwBombEnd_Phys,
+      ftSs_SpecialLwBombEnd_Coll, ftCamera_UpdateCameraBox },
+    { 310, 0x00340514, 0x15000000, ftSs_SpecialAirLwBomb_Anim,
+      ftSs_SpecialAirLwBomb_IASA, ftSs_SpecialAirLwBomb_Phys,
+      ftSs_SpecialAirLwBomb_Coll, ftCamera_UpdateCameraBox },
     { 311, 0x00200000, 0x01000000, ftCo_Zair_Anim, ftCo_Zair_IASA,
       ftCo_Zair_Phys, ftCo_Zair_Coll, ftCamera_UpdateCameraBox },
     { 312, 0x00C00000, 0x01000000, ftCo_ZairCatch_Anim, ftCo_ZairCatch_IASA,
@@ -72,8 +85,10 @@ Fighter_DemoStrings ftSs_Init_DemoMotionFilenames = {
 };
 
 Fighter_CostumeStrings ftSs_Init_CostumeStrings[] = {
-    { ftSs_Init_803CE528, ftSs_Init_803CE534, NULL }, { ftSs_Init_803CE54C, ftSs_Init_803CE558, NULL },
-    { ftSs_Init_803CE574, ftSs_Init_803CE580, NULL }, { ftSs_Init_803CE59C, ftSs_Init_803CE5A8, NULL },
+    { ftSs_Init_803CE528, ftSs_Init_803CE534, NULL },
+    { ftSs_Init_803CE54C, ftSs_Init_803CE558, NULL },
+    { ftSs_Init_803CE574, ftSs_Init_803CE580, NULL },
+    { ftSs_Init_803CE59C, ftSs_Init_803CE5A8, NULL },
     { ftSs_Init_803CE5C4, ftSs_Init_803CE5D0, NULL },
 };
 
@@ -161,7 +176,7 @@ void ftSs_Init_80128770(HSD_AObj* gobj, f32 rate)
 }
 
 void ftSs_Init_CreateThrowGrappleBeam(HSD_GObj* gobj, s32 action_state,
-                                    f32 anim_speed)
+                                      f32 anim_speed)
 {
     Fighter* fighter_copy;
     Vec3 scale;
@@ -179,8 +194,8 @@ void ftSs_Init_CreateThrowGrappleBeam(HSD_GObj* gobj, s32 action_state,
     HSD_JObjAddAnimAll(fighter_copy->x20A0_accessory,
                        beam->x4_anim_joints[action_state - ASID_THROWF], 0, 0);
     HSD_ForeachAnim(fighter_copy->x20A0_accessory, JOBJ_TYPE,
-                    ALL_TYPE_MASK & ~TOBJ_MASK & ~MOBJ_MASK, &ftSs_Init_80128770,
-                    AOBJ_ARG_AF, anim_speed);
+                    ALL_TYPE_MASK & ~TOBJ_MASK & ~MOBJ_MASK,
+                    &ftSs_Init_80128770, AOBJ_ARG_AF, anim_speed);
     HSD_JObjReqAnimAll(fighter_copy->x20A0_accessory, 0.0f);
     HSD_JObjAnimAll(fighter_copy->x20A0_accessory);
     lb_8000C2F8(fighter_copy->x20A0_accessory,

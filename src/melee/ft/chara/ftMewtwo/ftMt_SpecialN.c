@@ -11,7 +11,7 @@
 // 0x80146CCC
 // https://decomp.me/scratch/qxdYd
 s32 ftMt_SpecialN_GetChargeLevel(HSD_GObj* gobj, s32* chargeLevel,
-                                     s32* chargeCycles)
+                                 s32* chargeCycles)
 {
     Fighter* fp;
     ftMewtwoAttributes* mewtwoAttrs;

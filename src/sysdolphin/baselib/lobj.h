@@ -150,7 +150,8 @@ void HSD_LObjSetupInit(HSD_CObj* arg0);
 void HSD_LObj_80366CA4(HSD_LObj* lobj, GXColor* color);
 void HSD_LObj_80366CB0(HSD_LObj* lobj, GXColor* color);
 void HSD_LObj_80366CBC(HSD_LObj* lobj, f32 cutoff, s32 point_func);
-void HSD_LObj_80366CD0(HSD_LObj* lobj, f32 ref_dist, f32 ref_br, s32 dist_func);
+void HSD_LObj_80366CD0(HSD_LObj* lobj, f32 ref_dist, f32 ref_br,
+                       s32 dist_func);
 void HSD_LObjSetupSpecularInit(Mtx pmtx);
 void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id);
 void setup_point_lightobj(HSD_LObj* lobj, Mtx mtx);

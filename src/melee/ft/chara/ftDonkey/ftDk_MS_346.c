@@ -1,7 +1,7 @@
 #include "ft/chara/ftDonkey/ftDk_MS_346.h"
 
-#include "ft/chara/ftDonkey/ftdonkey.h"
 #include "ft/chara/ftDonkey/ftDk_MS_341.h"
+#include "ft/chara/ftDonkey/ftdonkey.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 

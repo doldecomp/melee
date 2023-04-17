@@ -87,8 +87,8 @@ static inline void push_ecb(CollData* a, Vec3* b)
     a->x4_vec = *b;         // curr = new
 }
 
-s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk, Vec3* ECBUnk2,
-                            f32 float_unk)
+s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
+                                    Vec3* ECBUnk2, f32 float_unk)
 {
     CollData sp34;
     f32 sp1C[6]; // This is probably some kind of struct, but I don't know
@@ -718,7 +718,8 @@ void ftNs_AttackHi4_Anim(HSD_GObj* gobj)
             sp18.y += fighter_data2->cur_pos.y;
             sp18.z += fighter_data2->cur_pos.z;
             sp24 = fighter_data2->ev.ns.x2230_yoyoHitboxPos;
-            if ((ftNs_AttackHi4_YoyoCheckEnvColl(gobj, &sp18, &sp24, 0.5f) == 0) &&
+            if ((ftNs_AttackHi4_YoyoCheckEnvColl(gobj, &sp18, &sp24, 0.5f) ==
+                 0) &&
                 (sp24 = fighter_data2->ev.ns.x2230_yoyoHitboxPos, sp18 = sp24,
                  sp18.y += fighter_data2->x34_scale.y,
                  sp24.y += -1.0f * fighter_data2->x34_scale.y,
@@ -779,8 +780,7 @@ GetFighterData_x222C(HSD_GObj* gobj) // Yet another inline needed to match
 
 // 0x80115F14
 // https://decomp.me/scratch/W7Ug6
-void ftNs_AttackHi4_Coll(
-    HSD_GObj* gobj) // Ness's Up Smash Collision callback
+void ftNs_AttackHi4_Coll(HSD_GObj* gobj) // Ness's Up Smash Collision callback
 {
     Fighter* fp;
     HSD_GObj* yoyo_GObj;
@@ -1064,7 +1064,8 @@ void ftNs_AttackHi4Release_Enter(HSD_GObj* gobj)
 
     ft_80088510(fighter_data2, 0x334AA, SFX_VOLUME_MAX, SFX_PAN_MID);
 
-    ftNs_AttackHi4_YoyoApplyDamage(fighter_data2->x2114_SmashAttr.x2118_frames, gobj);
+    ftNs_AttackHi4_YoyoApplyDamage(fighter_data2->x2114_SmashAttr.x2118_frames,
+                                   gobj);
 
     fp->x2222_flag.bits.b2 = 1;
 

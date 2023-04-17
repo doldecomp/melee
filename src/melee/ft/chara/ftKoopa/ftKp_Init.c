@@ -9,52 +9,236 @@
 #include "ft/types.h"
 
 MotionState ftKp_Init_MotionStateTable[] = {
-    { 295, 0x00340011, 0x12000000, ftKp_SpecialNStart_Anim, ftKp_SpecialNStart_IASA,
-      ftKp_SpecialNStart_Phys, ftKp_SpecialNStart_Coll, ftCamera_UpdateCameraBox },
-    { 296, 0x003C0011, 0x12000000, ftKp_SpecialNLoop_Anim, ftKp_SpecialNLoop_IASA,
-      ftKp_SpecialNLoop_Phys, ftKp_SpecialNLoop_Coll, ftCamera_UpdateCameraBox },
-    { 297, 0x00340011, 0x12000000, ftKp_SpecialNEnd_Anim, ftKp_SpecialNEnd_IASA,
-      ftKp_SpecialNEnd_Phys, ftKp_SpecialNEnd_Coll, ftCamera_UpdateCameraBox },
-    { 298, 0x00340411, 0x12000000, ftKp_SpecialAirNStart_Anim, ftKp_SpecialAirNStart_IASA,
-      ftKp_SpecialAirNStart_Phys, ftKp_SpecialAirNStart_Coll, ftCamera_UpdateCameraBox },
-    { 299, 0x003C0411, 0x12000000, ftKp_SpecialAirNLoop_Anim, ftKp_SpecialAirNLoop_IASA,
-      ftKp_SpecialAirNLoop_Phys, ftKp_SpecialAirNLoop_Coll, ftCamera_UpdateCameraBox },
-    { 300, 0x00340411, 0x12000000, ftKp_SpecialAirNEnd_Anim, ftKp_SpecialAirNEnd_IASA,
-      ftKp_SpecialAirNEnd_Phys, ftKp_SpecialAirNEnd_Coll, ftCamera_UpdateCameraBox },
-    { 301, 0x00340012, 0x13000000, ftKp_SpecialS_Anim, NULL, ftKp_SpecialS_Phys,
-      ftKp_SpecialS_Coll, ftCamera_UpdateCameraBox },
-    { 302, 0x00340012, 0x13000000, ftKp_SpecialSCatch_Anim, ftKp_SpecialSCatch_IASA,
-      ftKp_SpecialSCatch_Phys, ftKp_SpecialSCatch_Coll, ftCamera_UpdateCameraBox },
-    { 303, 0x00340012, 0x13000000, ftKp_SpecialSCatch_Anim, ftKp_SpecialSCatch_IASA,
-      ftKp_SpecialSCatch_Phys, ftKp_SpecialSCatch_Coll, ftCamera_UpdateCameraBox },
-    { 302, 0x00340012, 0x13000000, ftKp_SpecialSWait_Anim, ftKp_SpecialSWait_IASA,
-      ftKp_SpecialSWait_Phys, ftKp_SpecialSWait_Coll, ftCamera_UpdateCameraBox },
-    { 304, 0x00340012, 0x13000000, ftKp_SpecialSThrowF_Anim, NULL, ftKp_SpecialSThrowF_Phys,
-      ftKp_SpecialSThrowF_Coll, ftCamera_UpdateCameraBox },
-    { 305, 0x00340012, 0x13000000, ftKp_SpecialSThrowB_Anim, NULL, ftKp_SpecialSThrowB_Phys,
-      ftKp_SpecialSThrowB_Coll, ftCamera_UpdateCameraBox },
-    { 306, 0x00340412, 0x13000000, ftKp_SpecialAirS_Anim, NULL, ftKp_SpecialAirS_Phys,
-      ftKp_SpecialAirS_Coll, ftCamera_UpdateCameraBox },
-    { 307, 0x00340412, 0x13000000, ftKp_SpecialAirSCatch_Anim, ftKp_SpecialAirSCatch_IASA,
-      ftKp_SpecialAirSCatch_Phys, ftKp_SpecialAirSCatch_Coll, ftCamera_UpdateCameraBox },
-    { 308, 0x00340412, 0x13000000, ftKp_SpecialAirSCatch_Anim, ftKp_SpecialAirSCatch_IASA,
-      ftKp_SpecialAirSCatch_Phys, ftKp_SpecialAirSCatch_Coll, ftCamera_UpdateCameraBox },
-    { 307, 0x00340012, 0x13000000, ftKp_SpecialAirSWait_Anim, ftKp_SpecialAirSWait_IASA,
-      ftKp_SpecialAirSWait_Phys, ftKp_SpecialAirSWait_Coll, ftCamera_UpdateCameraBox },
-    { 309, 0x00340412, 0x13000000, ftKp_SpecialAirSThrowF_Anim, NULL, ftKp_SpecialAirSThrowF_Phys,
-      ftKp_SpecialAirSThrowF_Coll, ftCamera_UpdateCameraBox },
-    { 310, 0x00340412, 0x13000000, ftKp_SpecialAirSThrowB_Anim, NULL, ftKp_SpecialAirSThrowB_Phys,
-      ftKp_SpecialAirSThrowB_Coll, ftCamera_UpdateCameraBox },
-    { 311, 0x00340213, 0x14000000, ftKp_SpecialHi_Anim, ftKp_SpecialHi_IASA,
-      ftKp_SpecialHi_Phys, ftKp_SpecialHi_Coll, ftCamera_UpdateCameraBox },
-    { 312, 0x00340613, 0x14000000, ftKp_SpecialAirHi_Anim, ftKp_SpecialAirHi_IASA,
-      ftKp_SpecialAirHi_Phys, ftKp_SpecialAirHi_Coll, ftCamera_UpdateCameraBox },
-    { 313, 0x00340214, 0x15000000, ftKp_SpecialLwStart_Anim, NULL, ftKp_SpecialLwStart_Phys,
-      ftKp_SpecialLwStart_Coll, ftCamera_UpdateCameraBox },
-    { 314, 0x00340614, 0x15000000, ftKp_SpecialAirLw_Anim, NULL, ftKp_SpecialAirLw_Phys,
-      ftKp_SpecialAirLw_Coll, ftCamera_UpdateCameraBox },
-    { 315, 0x00340214, 0x15000000, ftKp_SpecialLwLanding_Anim, NULL, ftKp_SpecialLwLanding_Phys,
-      ftKp_SpecialLwLanding_Coll, ftCamera_UpdateCameraBox },
+    {
+        295,
+        0x00340011,
+        0x12000000,
+        ftKp_SpecialNStart_Anim,
+        ftKp_SpecialNStart_IASA,
+        ftKp_SpecialNStart_Phys,
+        ftKp_SpecialNStart_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        296,
+        0x003C0011,
+        0x12000000,
+        ftKp_SpecialNLoop_Anim,
+        ftKp_SpecialNLoop_IASA,
+        ftKp_SpecialNLoop_Phys,
+        ftKp_SpecialNLoop_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        297,
+        0x00340011,
+        0x12000000,
+        ftKp_SpecialNEnd_Anim,
+        ftKp_SpecialNEnd_IASA,
+        ftKp_SpecialNEnd_Phys,
+        ftKp_SpecialNEnd_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        298,
+        0x00340411,
+        0x12000000,
+        ftKp_SpecialAirNStart_Anim,
+        ftKp_SpecialAirNStart_IASA,
+        ftKp_SpecialAirNStart_Phys,
+        ftKp_SpecialAirNStart_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        299,
+        0x003C0411,
+        0x12000000,
+        ftKp_SpecialAirNLoop_Anim,
+        ftKp_SpecialAirNLoop_IASA,
+        ftKp_SpecialAirNLoop_Phys,
+        ftKp_SpecialAirNLoop_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        300,
+        0x00340411,
+        0x12000000,
+        ftKp_SpecialAirNEnd_Anim,
+        ftKp_SpecialAirNEnd_IASA,
+        ftKp_SpecialAirNEnd_Phys,
+        ftKp_SpecialAirNEnd_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        301,
+        0x00340012,
+        0x13000000,
+        ftKp_SpecialS_Anim,
+        NULL,
+        ftKp_SpecialS_Phys,
+        ftKp_SpecialS_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        302,
+        0x00340012,
+        0x13000000,
+        ftKp_SpecialSCatch_Anim,
+        ftKp_SpecialSCatch_IASA,
+        ftKp_SpecialSCatch_Phys,
+        ftKp_SpecialSCatch_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        303,
+        0x00340012,
+        0x13000000,
+        ftKp_SpecialSCatch_Anim,
+        ftKp_SpecialSCatch_IASA,
+        ftKp_SpecialSCatch_Phys,
+        ftKp_SpecialSCatch_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        302,
+        0x00340012,
+        0x13000000,
+        ftKp_SpecialSWait_Anim,
+        ftKp_SpecialSWait_IASA,
+        ftKp_SpecialSWait_Phys,
+        ftKp_SpecialSWait_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        304,
+        0x00340012,
+        0x13000000,
+        ftKp_SpecialSThrowF_Anim,
+        NULL,
+        ftKp_SpecialSThrowF_Phys,
+        ftKp_SpecialSThrowF_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        305,
+        0x00340012,
+        0x13000000,
+        ftKp_SpecialSThrowB_Anim,
+        NULL,
+        ftKp_SpecialSThrowB_Phys,
+        ftKp_SpecialSThrowB_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        306,
+        0x00340412,
+        0x13000000,
+        ftKp_SpecialAirS_Anim,
+        NULL,
+        ftKp_SpecialAirS_Phys,
+        ftKp_SpecialAirS_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        307,
+        0x00340412,
+        0x13000000,
+        ftKp_SpecialAirSCatch_Anim,
+        ftKp_SpecialAirSCatch_IASA,
+        ftKp_SpecialAirSCatch_Phys,
+        ftKp_SpecialAirSCatch_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        308,
+        0x00340412,
+        0x13000000,
+        ftKp_SpecialAirSCatch_Anim,
+        ftKp_SpecialAirSCatch_IASA,
+        ftKp_SpecialAirSCatch_Phys,
+        ftKp_SpecialAirSCatch_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        307,
+        0x00340012,
+        0x13000000,
+        ftKp_SpecialAirSWait_Anim,
+        ftKp_SpecialAirSWait_IASA,
+        ftKp_SpecialAirSWait_Phys,
+        ftKp_SpecialAirSWait_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        309,
+        0x00340412,
+        0x13000000,
+        ftKp_SpecialAirSThrowF_Anim,
+        NULL,
+        ftKp_SpecialAirSThrowF_Phys,
+        ftKp_SpecialAirSThrowF_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        310,
+        0x00340412,
+        0x13000000,
+        ftKp_SpecialAirSThrowB_Anim,
+        NULL,
+        ftKp_SpecialAirSThrowB_Phys,
+        ftKp_SpecialAirSThrowB_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        311,
+        0x00340213,
+        0x14000000,
+        ftKp_SpecialHi_Anim,
+        ftKp_SpecialHi_IASA,
+        ftKp_SpecialHi_Phys,
+        ftKp_SpecialHi_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        312,
+        0x00340613,
+        0x14000000,
+        ftKp_SpecialAirHi_Anim,
+        ftKp_SpecialAirHi_IASA,
+        ftKp_SpecialAirHi_Phys,
+        ftKp_SpecialAirHi_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        313,
+        0x00340214,
+        0x15000000,
+        ftKp_SpecialLwStart_Anim,
+        NULL,
+        ftKp_SpecialLwStart_Phys,
+        ftKp_SpecialLwStart_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        314,
+        0x00340614,
+        0x15000000,
+        ftKp_SpecialAirLw_Anim,
+        NULL,
+        ftKp_SpecialAirLw_Phys,
+        ftKp_SpecialAirLw_Coll,
+        ftCamera_UpdateCameraBox,
+    },
+    {
+        315,
+        0x00340214,
+        0x15000000,
+        ftKp_SpecialLwLanding_Anim,
+        NULL,
+        ftKp_SpecialLwLanding_Phys,
+        ftKp_SpecialLwLanding_Coll,
+        ftCamera_UpdateCameraBox,
+    },
 };
 
 char ftKp_Init_DatFilename[] = "PlKp.dat";
@@ -269,8 +453,8 @@ void ftKp_SpecialS_Enter(HSD_GObj* gobj)
         fp->sv.kp.unk1.xC = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, 347, 0, 0, ftKp_Init_804D9AD8, ftKp_Init_804D9ADC,
-                              ftKp_Init_804D9AD8);
+    Fighter_ChangeMotionState(gobj, 347, 0, 0, ftKp_Init_804D9AD8,
+                              ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
 
     ftAnim_8006EBA4(gobj);
 
@@ -295,8 +479,8 @@ void ftKp_SpecialAirS_Enter(HSD_GObj* gobj)
         fp->sv.kp.unk1.xC = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, 353, 0, 0, ftKp_Init_804D9AD8, ftKp_Init_804D9ADC,
-                              ftKp_Init_804D9AD8);
+    Fighter_ChangeMotionState(gobj, 353, 0, 0, ftKp_Init_804D9AD8,
+                              ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
 
     ftAnim_8006EBA4(gobj);
 
@@ -319,10 +503,11 @@ void ftKp_SpecialS_8013302C(HSD_GObj* gobj)
 
     if ((signed) fp->sv.kp.unk1.x4 != 0) {
         Fighter_ChangeMotionState(gobj, 349, transition_flags0, 0,
-                                  ftKp_Init_804D9AD8, ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
-    } else {
-        Fighter_ChangeMotionState(gobj, 348, 0, 0, ftKp_Init_804D9AD8, ftKp_Init_804D9ADC,
+                                  ftKp_Init_804D9AD8, ftKp_Init_804D9ADC,
                                   ftKp_Init_804D9AD8);
+    } else {
+        Fighter_ChangeMotionState(gobj, 348, 0, 0, ftKp_Init_804D9AD8,
+                                  ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
     }
 
     fp->x2222_flag.bits.b2 = true;
@@ -339,10 +524,11 @@ void ftKp_SpecialS_801330E4(HSD_GObj* gobj)
     fp = gobj->user_data;
     if ((signed) fp->sv.kp.unk1.x4 != 0) {
         Fighter_ChangeMotionState(gobj, 355, transition_flags0, 0,
-                                  ftKp_Init_804D9AD8, ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
-    } else {
-        Fighter_ChangeMotionState(gobj, 354, 0, 0, ftKp_Init_804D9AD8, ftKp_Init_804D9ADC,
+                                  ftKp_Init_804D9AD8, ftKp_Init_804D9ADC,
                                   ftKp_Init_804D9AD8);
+    } else {
+        Fighter_ChangeMotionState(gobj, 354, 0, 0, ftKp_Init_804D9AD8,
+                                  ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
     }
 
     fp->x2222_flag.bits.b2 = true;
@@ -584,13 +770,13 @@ void ftKp_SpecialSCatch_Anim(HSD_GObj* gobj)
                 fp0 = GET_FIGHTER(gobj);
 
                 if ((signed) fp0->sv.kp.unk1.x4 != false) {
-                    Fighter_ChangeMotionState(gobj, 349, transition_flags0, 0,
-                                              ftKp_Init_804D9AD8, ftKp_Init_804D9ADC,
-                                              ftKp_Init_804D9AD8);
+                    Fighter_ChangeMotionState(
+                        gobj, 349, transition_flags0, 0, ftKp_Init_804D9AD8,
+                        ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
                 } else {
-                    Fighter_ChangeMotionState(gobj, 348, FtStateChange_None, 0,
-                                              ftKp_Init_804D9AD8, ftKp_Init_804D9ADC,
-                                              ftKp_Init_804D9AD8);
+                    Fighter_ChangeMotionState(
+                        gobj, 348, FtStateChange_None, 0, ftKp_Init_804D9AD8,
+                        ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
                 }
 
                 fp0->x2222_flag.bits.b2 = true;
@@ -606,8 +792,8 @@ void ftKp_SpecialSCatch_Anim(HSD_GObj* gobj)
             /// @todo Combine @c fp0 with other branch somehow
             fp0 = GET_FIGHTER(gobj);
             Fighter_ChangeMotionState(gobj, 350, transition_flags3, 0,
-                                      fp0->x894_currentAnimFrame, ftKp_Init_804D9ADC,
-                                      ftKp_Init_804D9AD8);
+                                      fp0->x894_currentAnimFrame,
+                                      ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
 
             ftAnim_8006F0FC(gobj, ftKp_Init_804D9AD8);
             fp0->sv.kp.unk1.x0 = 0;

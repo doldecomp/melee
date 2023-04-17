@@ -234,8 +234,7 @@ static inline void ftGameWatch_SpecialN_ChefLoop(HSD_GObj* gobj)
              gawAttrs->x1C_GAMEWATCH_CHEF_MAX) &&
             ((s32) fp->sv.gw.SpecialN.isChefLoopDisable == false))
         {
-            ftGw_SpecialN_Loop(gobj,
-                                      gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
+            ftGw_SpecialN_Loop(gobj, gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
         }
     }
 }
@@ -267,8 +266,8 @@ static inline void ftGameWatch_SpecialAirN_ChefLoop(HSD_GObj* gobj)
             ((f32) fp->sv.gw.SpecialN.maxSausage <
              gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
         {
-            ftGw_SpecialAirN_Loop(
-                gobj, gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
+            ftGw_SpecialAirN_Loop(gobj,
+                                  gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
         }
     }
 }
@@ -305,8 +304,7 @@ void ftGw_SpecialN_IASA(HSD_GObj* gobj)
         ((f32) fp->sv.gw.SpecialN.maxSausage <
          gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
     {
-        ftGw_SpecialN_Loop(gobj,
-                                  gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
+        ftGw_SpecialN_Loop(gobj, gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
     }
 }
 
@@ -326,8 +324,7 @@ void ftGw_SpecialAirN_IASA(HSD_GObj* gobj)
         ((f32) fp->sv.gw.SpecialN.maxSausage <
          gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
     {
-        ftGw_SpecialAirN_Loop(gobj,
-                                     gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
+        ftGw_SpecialAirN_Loop(gobj, gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
     }
 }
 

@@ -14,7 +14,7 @@
 // 0x80119E14
 // https://decomp.me/scratch/LwTKg
 void ftNs_SpecialLwStart_Enter(HSD_GObj* gobj) // Ness's grounded PSI Magnet
-                                                  // Start Motion State handler
+                                               // Start Motion State handler
 {
     ftNessAttributes* ness_attr;
     Fighter* temp_fp;
@@ -552,7 +552,7 @@ void ftNs_SpecialAirLwTurn_Anim(HSD_GObj* arg0)
 
 // 0x8011A920
 void ftNs_SpecialLwTurn_IASA(HSD_GObj* gobj) // Ness's grounded PSI Magnet
-                                               // Turnaround IASA callback - _
+                                             // Turnaround IASA callback - _
 {
     return;
 }
@@ -566,9 +566,8 @@ void ftNs_SpecialAirLwTurn_IASA(
 }
 
 // 0x8011A928
-void ftNs_SpecialLwTurn_Phys(
-    HSD_GObj* gobj) // Ness's grounded PSI Magnet Turnaround Physics
-                    // callback - _
+void ftNs_SpecialLwTurn_Phys(HSD_GObj* gobj) // Ness's grounded PSI Magnet
+                                             // Turnaround Physics callback - _
 {
     ft_80084F3C(gobj);
     ftColl_8007AF10(gobj);

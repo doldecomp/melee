@@ -236,8 +236,8 @@ void ftYs_ShieldHold_Coll(HSD_GObj* arg0)
 
 void ftYs_Shield_8012C49C(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 0x157, 0, NULL, ftYs_Init_804D9A2C, ftYs_Init_804D9A28,
-                              ftYs_Init_804D9A2C);
+    Fighter_ChangeMotionState(gobj, 0x157, 0, NULL, ftYs_Init_804D9A2C,
+                              ftYs_Init_804D9A28, ftYs_Init_804D9A2C);
 
     {
         Fighter* fp0 = GET_FIGHTER(gobj);

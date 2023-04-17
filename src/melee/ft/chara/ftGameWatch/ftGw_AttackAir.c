@@ -24,8 +24,7 @@ void ftGw_AttackAirN_ItemParachuteSetup(HSD_GObj* gobj)
             fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
             fp->cb.x21D4_callback_EnterHitlag =
                 ftGw_AttackAirN_EnterItemHitlag;
-            fp->cb.x21D8_callback_ExitHitlag =
-                ftGw_AttackAirN_ExitItemHitlag;
+            fp->cb.x21D8_callback_ExitHitlag = ftGw_AttackAirN_ExitItemHitlag;
         }
     }
     fp->cb.x21BC_callback_Accessory4 = NULL;
@@ -45,10 +44,8 @@ void ftGw_AttackAirN_ItemParachuteOnLand(HSD_GObj* gobj)
         }
         fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
-        fp->cb.x21D4_callback_EnterHitlag =
-            ftGw_AttackAirN_EnterItemHitlag;
-        fp->cb.x21D8_callback_ExitHitlag =
-            ftGw_AttackAirN_ExitItemHitlag;
+        fp->cb.x21D4_callback_EnterHitlag = ftGw_AttackAirN_EnterItemHitlag;
+        fp->cb.x21D8_callback_ExitHitlag = ftGw_AttackAirN_ExitItemHitlag;
         fp->cb.x21BC_callback_Accessory4 = NULL;
     }
 }
@@ -117,8 +114,7 @@ void ftGw_AttackAirN_ItemTurtleSetup(HSD_GObj* gobj)
             fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
             fp->cb.x21D4_callback_EnterHitlag =
                 ftGw_AttackAirN_EnterItemHitlag;
-            fp->cb.x21D8_callback_ExitHitlag =
-                ftGw_AttackAirN_ExitItemHitlag;
+            fp->cb.x21D8_callback_ExitHitlag = ftGw_AttackAirN_ExitItemHitlag;
         }
     }
     fp->cb.x21BC_callback_Accessory4 = NULL;
@@ -140,10 +136,8 @@ static void ftGw_AttackAirN_ItemTurtleOnLand(HSD_GObj* gobj)
 
         fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
-        fp->cb.x21D4_callback_EnterHitlag =
-            ftGw_AttackAirN_EnterItemHitlag;
-        fp->cb.x21D8_callback_ExitHitlag =
-            ftGw_AttackAirN_ExitItemHitlag;
+        fp->cb.x21D4_callback_EnterHitlag = ftGw_AttackAirN_EnterItemHitlag;
+        fp->cb.x21D8_callback_ExitHitlag = ftGw_AttackAirN_ExitItemHitlag;
         fp->cb.x21BC_callback_Accessory4 = NULL;
     }
 }
@@ -211,8 +205,7 @@ void ftGw_AttackAirN_ItemSparkySetup(HSD_GObj* gobj)
             fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
             fp->cb.x21D4_callback_EnterHitlag =
                 ftGw_AttackAirN_EnterItemHitlag;
-            fp->cb.x21D8_callback_ExitHitlag =
-                ftGw_AttackAirN_ExitItemHitlag;
+            fp->cb.x21D8_callback_ExitHitlag = ftGw_AttackAirN_ExitItemHitlag;
         }
     }
     fp->cb.x21BC_callback_Accessory4 = NULL;
@@ -233,10 +226,8 @@ void ftGw_AttackAirN_ItemSparkyOnLand(HSD_GObj* gobj)
 
         fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
-        fp->cb.x21D4_callback_EnterHitlag =
-            ftGw_AttackAirN_EnterItemHitlag;
-        fp->cb.x21D8_callback_ExitHitlag =
-            ftGw_AttackAirN_ExitItemHitlag;
+        fp->cb.x21D4_callback_EnterHitlag = ftGw_AttackAirN_EnterItemHitlag;
+        fp->cb.x21D8_callback_ExitHitlag = ftGw_AttackAirN_ExitItemHitlag;
         fp->cb.x21BC_callback_Accessory4 = NULL;
     }
 }
