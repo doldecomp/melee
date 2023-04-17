@@ -1,6 +1,9 @@
 #include "forward.h"
 
+#include "ftGw_SpecialHi.h"
+
 #include "ftGw_Init.h"
+#include "types.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"

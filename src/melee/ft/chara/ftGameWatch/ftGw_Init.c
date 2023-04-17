@@ -1,6 +1,17 @@
 #include "forward.h"
 
-#include "ftGameWatch/ftGw_Init.h"
+#include "ftGw_Init.h"
+
+#include "ftGw_Attack100.h"
+#include "ftGw_Attack11.h"
+#include "ftGw_AttackAir.h"
+#include "ftGw_AttackLw3.h"
+#include "ftGw_AttackS4.h"
+#include "ftGw_SpecialHi.h"
+#include "ftGw_SpecialLw.h"
+#include "ftGw_SpecialN.h"
+#include "ftGw_SpecialS.h"
+#include "types.h"
 
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
