@@ -1,9 +1,12 @@
 #include "forward.h"
 
+#include "ftGw_AttackAir.h"
+
+#include "ftGw_Init.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
-#include "ftGameWatch/ftGw_Init.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 

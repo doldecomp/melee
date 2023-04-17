@@ -1,5 +1,7 @@
 #include "forward.h"
 
+#include "ftGw_AttackS4.h"
+
 #include "ftGw_Init.h"
 
 #include "ft/ft_081B.h"
