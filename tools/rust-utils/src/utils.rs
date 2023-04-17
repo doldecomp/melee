@@ -34,6 +34,10 @@ lazy_static! {
             Glob::new(&format!("{}/obj_files.mk", *ROOT_STR))
                 .expect("Failed to parse obj_files glob.")
         )
+        .add(
+            Glob::new(&format!("{}/ldscript.lcf", *ROOT_STR))
+                .expect("Failed to parse ldscript glob.")
+        )
         .build()
         .expect("Failed to create SRC_FILES glob.");
 }

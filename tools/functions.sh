@@ -70,10 +70,6 @@ function gen_header {
     fi
 }
 
-function convert_hex {
-    perl -Mbigint -lpi -e 's{\b0x[\da-f]{1,7}U?\b}{hex($&)}gie' "$1"
-}
-
 function rename_tu {
     for ext in c s h; do
         find asm src docs -name "$1.$ext" | while read -r file; do
