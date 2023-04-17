@@ -1,5 +1,10 @@
 #include "ftLuigi/ftLg_Init.h"
 
+#include "ftLg_SpecialHi.h"
+#include "ftLg_SpecialLw.h"
+#include "ftLg_SpecialN.h"
+#include "ftLg_SpecialS.h"
+
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
