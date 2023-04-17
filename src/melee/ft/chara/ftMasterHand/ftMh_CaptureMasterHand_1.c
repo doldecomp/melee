@@ -1,7 +1,7 @@
 #include "ftMh_CaptureMasterHand_1.h"
 
-#include "ftMh_MS_372.h"
 #include "ftMh_CaptureDamageMasterHand.h"
+#include "ftMh_MS_372.h"
 
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"

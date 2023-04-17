@@ -1,7 +1,7 @@
 #include "ft/chara/ftDonkey/ftDk_MS_348.h"
 
-#include "ft/chara/ftDonkey/ftdonkey.h"
 #include "ft/chara/ftDonkey/ftDk_MS_347.h"
+#include "ft/chara/ftDonkey/ftdonkey.h"
 #include "ft/ft_0877.h"
 
 void ftDk_MS_348_IASA(HSD_GObj* gobj)

@@ -59,8 +59,7 @@ void ftNs_AttackLw4_IASA(HSD_GObj* gobj) // Ness's Down Smash IASA callback
 
 // 0x80116718
 // https://decomp.me/scratch/rrVAL
-void ftNs_AttackLw4_Phys(
-    HSD_GObj* gobj) // Ness's Down Smash Physics callback
+void ftNs_AttackLw4_Phys(HSD_GObj* gobj) // Ness's Down Smash Physics callback
 {
     ft_80084F3C(gobj);
     ftNs_AttackHi4_YoyoSetHitPos(gobj);

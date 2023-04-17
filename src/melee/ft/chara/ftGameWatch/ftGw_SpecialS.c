@@ -39,7 +39,8 @@ void ftGw_SpecialS_ItemJudgementSetup(HSD_GObj* gobj)
         }
         fp->cb.x21D4_callback_EnterHitlag =
             ftGw_SpecialS_ItemJudgementEnterHitlag;
-        fp->cb.x21D8_callback_ExitHitlag = ftGw_SpecialS_ItemJudgementExitHitlag;
+        fp->cb.x21D8_callback_ExitHitlag =
+            ftGw_SpecialS_ItemJudgementExitHitlag;
         fp->cb.x21BC_callback_Accessory4 = NULL;
     }
 }

@@ -395,7 +395,7 @@ void ftNs_SpecialAirHi_CollisionModVel(
 // 0x80118120
 // https://decomp.me/scratch/ARLRd
 void ftNs_SpecialHiStart_Enter(HSD_GObj* gobj) // Ness's grounded PK Thunder
-                                                  // Start Motion State handler
+                                               // Start Motion State handler
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
@@ -786,9 +786,8 @@ void ftNs_SpecialHiStart_Anim(HSD_GObj* gobj)
 
 // 0x801187A4
 // https://decomp.me/scratch/Xm3tt
-void ftNs_SpecialHiHold_Anim(
-    HSD_GObj* gobj) // Ness's grounded PK Thunder Control Loop
-                    // Animation callback
+void ftNs_SpecialHiHold_Anim(HSD_GObj* gobj) // Ness's grounded PK Thunder
+                                             // Control Loop Animation callback
 {
     s32 ASID;
     s32 ASID2;
@@ -1241,7 +1240,7 @@ void ftNs_SpecialHiStart_Phys(
 // 0x80118FDC
 // https://decomp.me/scratch/3o65K
 void ftNs_SpecialHiHold_Phys(HSD_GObj* gobj) // Ness's grounded PK Thunder
-                                               // Control Loop Physics callback
+                                             // Control Loop Physics callback
 {
     ft_80084F3C(gobj);
 }
@@ -1508,9 +1507,8 @@ void ftNs_SpecialHiStart_Coll(
 
 // 0x801194CC
 // https://decomp.me/scratch/oOw2I
-void ftNs_SpecialHiHold_Coll(
-    HSD_GObj* gobj) // Ness's grounded PK Thunder Control Loop
-                    // Collision callback
+void ftNs_SpecialHiHold_Coll(HSD_GObj* gobj) // Ness's grounded PK Thunder
+                                             // Control Loop Collision callback
 {
     Fighter* fp;
 
@@ -1885,7 +1883,7 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
                 return;
             }
             ftNs_SpecialAirHi_CollisionModVel(gobj,
-                                                &fighter_r31->x6F0_collData);
+                                              &fighter_r31->x6F0_collData);
             return;
         }
         if ((ecbFlag & 0xFC0) != 0) {
@@ -1928,7 +1926,7 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
                 return;
             }
             ftNs_SpecialAirHi_CollisionModVel(gobj,
-                                                &fighter_r31->x6F0_collData);
+                                              &fighter_r31->x6F0_collData);
         }
     }
 }

@@ -22,8 +22,7 @@ static inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x1A58_interactedFighter == NULL) {
-        ftCommon_8007E2D0(fp, 0x40, ftMt_SpecialS_SetFlags, NULL,
-                          ft_800BCF18);
+        ftCommon_8007E2D0(fp, 0x40, ftMt_SpecialS_SetFlags, NULL, ft_800BCF18);
     } else {
         ftCommon_8007E2F4(fp, 0x1FF);
     }
@@ -59,8 +58,7 @@ static inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x1A58_interactedFighter == NULL) {
-        ftCommon_8007E2D0(fp, 0x40, ftMt_SpecialS_SetFlags, NULL,
-                          ft_800BD000);
+        ftCommon_8007E2D0(fp, 0x40, ftMt_SpecialS_SetFlags, NULL, ft_800BD000);
     } else {
         ftCommon_8007E2F4(fp, 0x1FF);
     }
@@ -247,7 +245,7 @@ void ftMt_SpecialS_ReflectThink(HSD_GObj* gobj)
         ftColl_CreateReflectHit(
             gobj, &mewtwoAttrs->x1C_MEWTWO_CONFUSION_REFLECTION,
             ftMt_SpecialS_OnReflect); // Really? A callback that simply
-                                          // returns instead of just NULL? //
+                                      // returns instead of just NULL? //
         fp->x2218_flag.bits.b4 =
             1; // Here it is... the reason Confusion cannot change ownership.
         fp->sv.mt.SpecialS.isConfusionReflect = true;

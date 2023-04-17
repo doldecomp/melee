@@ -210,8 +210,8 @@ void ftNs_AttackHi4_YoyoCheckTimedRehit(HSD_GObj* gobj);
 
 /// Check collision of Bone (Yo-Yo attach bone)
 /// @remarks Also used by Sheik???
-s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk, Vec3* ECBUnk2,
-                            f32 float_unk);
+s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
+                                    Vec3* ECBUnk2, f32 float_unk);
 
 void ftNs_AttackHi4_YoyoSetUnkPos(HSD_GObj* gobj, Vec3* arg1);
 

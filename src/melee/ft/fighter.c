@@ -58,7 +58,8 @@ extern ft_callback
 extern ft_callback
     ftData_OnDeath[FTKIND_MAX]; // One death callback for every character.
 extern ft_callback ftData_OnAbsorb[FTKIND_MAX];
-extern ft_callback ftData_UnkMotionStates3[FTKIND_MAX]; // probably ft_OnSomething
+extern ft_callback
+    ftData_UnkMotionStates3[FTKIND_MAX]; // probably ft_OnSomething
 extern ft_callback ftData_OnUserDataRemove[FTKIND_MAX];
 
 extern fn_ptr_t ftData_Table_Unk1[FTKIND_MAX];

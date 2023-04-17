@@ -27,7 +27,8 @@
 /* 003A20CC */ extern void HSD_SObjLib_803A54EC(HSD_GObj*, s32);
 /* 003A1648 */ extern void HSD_SObjLib_803A4A68(unk_t);
 /* 003A15C0 */ extern void HSD_SObjLib_803A49E0(unk_t);
-/* 003A135C */ extern unk_t HSD_SObjLib_803A477C(s32, unk_t, s32, s32, s32, s8);
+/* 003A135C */ extern unk_t HSD_SObjLib_803A477C(s32, unk_t, s32, s32, s32,
+                                                 s8);
 /* 003A1320 */ extern void HSD_SObjLib_803A4740(unk_t);
 /* 003A1320 */ extern void HSD_SObjLib_803A4740(unk_t);
 /* 003A124C */ extern void HSD_SObjLib_803A466C(unk_t);

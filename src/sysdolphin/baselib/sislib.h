@@ -55,8 +55,8 @@ void HSD_SisLib_803A74F0(unk_t, unk_t);
 void HSD_SisLib_803A746C(unk_t, s32, f32, f32);
 s32 HSD_SisLib_803A70A0(s32, unk_t, unk_t);
 u32 lbl_803A6FEC(s32, s32, bool);
-void HSD_SisLib_803A6B98(unk_t, u32, s32, s32, s32, s32, s32, s32, f64, f64, f64,
-                   f64, f64, f64, f64, f64);
+void HSD_SisLib_803A6B98(unk_t, u32, s32, s32, s32, s32, s32, s32, f64, f64,
+                         f64, f64, f64, f64, f64, f64);
 s32 HSD_SisLib_803A67EC(unk_t, unk_t);
 s32 HSD_SisLib_803A67EC(unk_t, unk_t);
 unk_t HSD_SisLib_803A6754(void);
@@ -69,7 +69,7 @@ s32 HSD_SisLib_803A611C(s16, u32, s16, s8, s8, s8, s8, u32);
 void lbl_803A60EC(void);
 unk_t HSD_SisLib_803A5ACC(f32, f32, f32, f32, f32);
 void HSD_SisLib_803A594C(u8*);
-s32 HSD_SisLib_803A611C(s16 arg0, u32 arg1, s16 arg2, s8 arg3, s8 arg4, s8 arg5,
-                  s8 arg6, u32 arg7);
+s32 HSD_SisLib_803A611C(s16 arg0, u32 arg1, s16 arg2, s8 arg3, s8 arg4,
+                        s8 arg5, s8 arg6, u32 arg7);
 
 #endif

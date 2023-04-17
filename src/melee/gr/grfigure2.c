@@ -20,18 +20,18 @@ static StageCallbacks grEF2_803E6328[3] = {
 };
 
 StageData grEF2_803E6370 = { 0x00000045,
-                           grEF2_803E6328,
-                           "/GrEF2.dat",
-                           grFigure2_8020E274,
-                           grFigure1_8020E270,
-                           grFigure2_8020E2E4,
-                           grFigure2_8020E2E8,
-                           grFigure2_8020E30C,
-                           grFigure2_8020E4F4,
-                           grFigure2_8020E4FC,
-                           0x00000001,
-                           NULL,
-                           0UL };
+                             grEF2_803E6328,
+                             "/GrEF2.dat",
+                             grFigure2_8020E274,
+                             grFigure1_8020E270,
+                             grFigure2_8020E2E4,
+                             grFigure2_8020E2E8,
+                             grFigure2_8020E30C,
+                             grFigure2_8020E4F4,
+                             grFigure2_8020E4FC,
+                             0x00000001,
+                             NULL,
+                             0UL };
 
 void* grEF2_804D6A78;
 
