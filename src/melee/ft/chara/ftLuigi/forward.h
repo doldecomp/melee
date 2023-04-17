@@ -3,24 +3,24 @@
 
 #include "ftCommon/forward.h"
 
-typedef enum ftLuigiAction {
-    MS_LUIGI_SPECIALN = ftCo_MS_Count,
-    MS_LUIGI_SPECIALAIRN,
-    MS_LUIGI_SPECIALS_START,
-    MS_LUIGI_SPECIALS_HOLD,
-    MS_LUIGI_SPECIALS_FLY,
-    MS_LUIGI_SPECIALS_END,
-    MS_LUIGI_SPECIALS_LAUNCH,
-    MS_LUIGI_SPECIALS_MISFIRE,
-    MS_LUIGI_SPECIALAIRS_START,
-    MS_LUIGI_SPECIALAIRS_HOLD,
-    MS_LUIGI_SPECIALAIRS_FLY,
-    MS_LUIGI_SPECIALAIRS_END,
-    MS_LUIGI_SPECIALAIRS_LAUNCH,
-    MS_LUIGI_SPECIALAIRS_MISFIRE,
-    MS_LUIGI_SPECIALHI,
-    MS_LUIGI_SPECIALAIRHI,
-    MS_LUIGI_SPECIALLW,
-    MS_LUIGI_SPECIALAIRLW,
-} ftLuigiAction;
+typedef enum ftLuigi_MotionState {
+    ftLg_MS_SpecialN = ftCo_MS_Count,
+    ftLg_MS_SpecialAirN,
+    ftLg_MS_SpecialSStart,
+    ftLg_MS_SpecialSHold,
+    ftLg_MS_SpecialSFly,
+    ftLg_MS_SpecialSEnd,
+    ftLg_MS_SpecialSLaunch,
+    ftLg_MS_SpecialSMisfire,
+    ftLg_MS_SpecialAirSStart,
+    ftLg_MS_SpecialAirSHold,
+    ftLg_MS_SpecialAirSFly,
+    ftLg_MS_SpecialAirSEnd,
+    ftLg_MS_SpecialAirSLaunch,
+    ftLg_MS_SpecialAirSMisfire,
+    ftLg_MS_SpecialHi,
+    ftLg_MS_SpecialAirHi,
+    ftLg_MS_SpecialLw,
+    ftLg_MS_SpecialAirLw,
+} ftLuigi_MotionState;
 #endif

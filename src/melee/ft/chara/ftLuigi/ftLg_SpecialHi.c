@@ -20,7 +20,7 @@ void ftLg_SpecialHi_Enter(HSD_GObj* gobj)
 
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALHI, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialHi, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
 }
@@ -40,7 +40,7 @@ void ftLg_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->x2210_ThrowFlags.flags = 0;
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x *= luigiAttrs->x64_LUIGI_SUPERJUMP_VEL_X;
-    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRHI, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirHi, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
 }
