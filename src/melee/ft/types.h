@@ -9,7 +9,7 @@
 #include "ftCommon/types.h"
 #include "ftDonkey/types.h"
 #include "ftFox/types.h"
-#include "ftGameWatch/ftGameWatch_MotionVars.h"
+#include "ftGameWatch/types.h"
 #include "ftKoopa/types.h"
 #include "ftLuigi/ftLuigi_MotionVars.h"
 #include "ftMario/ftMario_MotionVars.h"
