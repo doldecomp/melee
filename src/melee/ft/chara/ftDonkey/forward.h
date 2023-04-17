@@ -1,0 +1,56 @@
+#ifndef MELEE_FT_CHARA_FTDONKEY_FORWARD_H
+#define MELEE_FT_CHARA_FTDONKEY_FORWARD_H
+
+#include <platform.h>
+#include "ftCommon/forward.h"
+
+typedef enum ftDk_MotionState {
+    ftDk_MS_Unk341 = ftCo_MS_Count,
+    ftDk_MS_Unk342,
+    ftDk_MS_Unk343,
+    ftDk_MS_Unk344,
+    ftDk_MS_Unk345,
+    ftDk_MS_Unk346,
+    ftDk_MS_Unk347,
+    ftDk_MS_Unk348,
+    ftDk_MS_Unk349,
+    ftDk_MS_Unk350,
+    ftDk_MS_CargoWait,
+    ftDk_MS_CargoWalkSlow,
+    ftDk_MS_CargoWalkMiddle,
+    ftDk_MS_CargoWalkFast,
+    ftDk_MS_CargoTurn,
+    ftDk_MS_CargoKneebend,
+    ftDk_MS_CargoFall,
+    ftDk_MS_CargoJump,
+    ftDk_MS_CargoLanding,
+    ftDk_MS_Unk360,
+    ftDk_MS_CargoThrowF,
+    ftDk_MS_CargoThrowB,
+    ftDk_MS_CargoThrowU,
+    ftDk_MS_CargoThrowD,
+    ftDk_MS_CargoAirThrowF,
+    ftDk_MS_CargoAirThrowB,
+    ftDk_MS_CargoAirThrowU,
+    ftDk_MS_CargoAirThrowD,
+    ftDk_MS_SpecialNChargeStart,
+    ftDk_MS_SpecialNChargeLoop,
+    ftDk_MS_SpecialNChargeStop,
+    ftDk_MS_SpecialNEarlyRelease,
+    ftDk_MS_SpecialNFullRelease,
+    ftDk_MS_SpecialAirNChargeStart,
+    ftDk_MS_SpecialAirNChargeLoop,
+    ftDk_MS_SpecialAirNChargeStop,
+    ftDk_MS_SpecialAirNEarlyRelease,
+    ftDk_MS_SpecialAirNFullRelease,
+    ftDk_MS_SpecialS,
+    ftDk_MS_SpecialAirS,
+    ftDk_MS_SpecialHi,
+    ftDk_MS_SpecialAirHi,
+    ftDk_MS_SpecialLwStart,
+    ftDk_MS_SpecialLwLoop,
+    ftDk_MS_SpecialLwEnd,
+    ftDk_MS_Unk386,
+} ftDk_MotionState;
+
+#endif
