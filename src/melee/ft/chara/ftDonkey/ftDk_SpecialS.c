@@ -77,21 +77,21 @@ void ftDk_SpecialS_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2200_ftcmd_var0) {
         if (!ft_800827A0(gobj)) {
-            ftDk_SpecialS_8010E464(gobj);
+            doAirTransition(gobj);
         }
     } else if (!ft_80082708(gobj)) {
-        ftDk_SpecialS_8010E464(gobj);
+        doAirTransition(gobj);
     }
 }
 
 void ftDk_SpecialAirS_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
-        ftDk_SpecialS_8010E4EC(gobj);
+        doGroundTransition(gobj);
     }
 }
 
-void ftDk_SpecialS_8010E464(HSD_GObj* gobj)
+void doAirTransition(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
@@ -103,7 +103,7 @@ void ftDk_SpecialS_8010E464(HSD_GObj* gobj)
     }
 }
 
-void ftDk_SpecialS_8010E4EC(HSD_GObj* gobj)
+void doGroundTransition(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);

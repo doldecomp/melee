@@ -39,7 +39,7 @@ void ftDk_MS_349_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->mv.dk.unk8.x4 <= 0.0f) {
-        ftDk_Init_800DF980(gobj);
+        ftDk_MS_341_800DF980(gobj);
     }
 
     fp->mv.dk.unk8.x4 -= 1.0f;

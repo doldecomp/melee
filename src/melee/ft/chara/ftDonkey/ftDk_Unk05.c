@@ -12,7 +12,7 @@ void ftDk_MS_345_Anim(HSD_GObj* gobj)
 {
     ft_800C9924(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftDk_Init_800DF980(gobj);
+        ftDk_MS_341_800DF980(gobj);
     }
 }
 

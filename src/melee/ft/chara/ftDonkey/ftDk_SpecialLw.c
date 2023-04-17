@@ -25,7 +25,7 @@ void ftDk_SpecialLwStart_Anim(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftDk_SpecialLw_8010DE88(gobj);
+        doAnim(gobj);
     }
 }
 
@@ -49,9 +49,9 @@ void ftDk_SpecialLwLoop_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->mv.dk.speciallw.x0) {
             fp->mv.dk.speciallw.x0 = 0;
-            ftDk_SpecialLw_8010DE88(gobj);
+            doAnim(gobj);
         } else {
-            ftDk_SpecialLw_8010DFF8(gobj);
+            doTransition(gobj);
         }
     }
 }
@@ -76,7 +76,7 @@ void ftDk_SpecialLwLoop_Coll(HSD_GObj* gobj)
     }
 }
 
-void ftDk_SpecialLw_8010DE54(HSD_GObj* gobj)
+void callback(HSD_GObj* gobj)
 {
     ft_80089824(gobj);
     ft_800892A0(gobj);
@@ -99,10 +99,10 @@ void ftDonkey_8010DE88_inner(HSD_GObj* gobj)
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
 }
 
-void ftDk_SpecialLw_8010DE88(HSD_GObj* gobj)
+void doAnim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21EC_callback = &ftDk_SpecialLw_8010DE54;
+    fp->cb.x21EC_callback = &callback;
     fp->x2210_ThrowFlags.flags = 0;
     Fighter_ChangeMotionState(gobj, 0x180, 0, NULL, 0.0f, 1.0f, 0.0f);
     ftDonkey_8010DE88_inner(gobj);
@@ -135,7 +135,7 @@ void ftDk_SpecialLwEnd_Coll(HSD_GObj* gobj)
     }
 }
 
-void ftDk_SpecialLw_8010DFF8(HSD_GObj* gobj)
+void doTransition(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 0x181, 0, NULL, 0.0f, 1.0f, 0.0f);
 }

@@ -21,7 +21,7 @@ void ftDk_SpecialLwLoop_Anim(HSD_GObj* gobj);
 void ftDk_SpecialLwLoop_IASA(HSD_GObj* gobj);
 void ftDk_SpecialLwLoop_Phys(HSD_GObj* gobj);
 void ftDk_SpecialLwLoop_Coll(HSD_GObj* gobj);
-void ftDk_SpecialLw_8010DE54(HSD_GObj* gobj);
+void callback(HSD_GObj* gobj);
 void ftDonkey_8010DE88_inner(HSD_GObj* gobj);
 
 #endif

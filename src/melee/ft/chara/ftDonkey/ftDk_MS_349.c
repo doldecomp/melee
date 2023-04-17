@@ -20,14 +20,14 @@ void ftDk_MS_349_Coll(HSD_GObj* gobj)
     ftDk_MS_341_Coll(gobj);
 }
 
-static bool ftDk_MS_349_800E0750(HSD_GObj* gobj);
+static bool checkSomething(HSD_GObj* gobj);
 
 void ftDk_MS_349_800E06D8(HSD_GObj* gobj)
 {
     Vec3 vec;
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ftDk_MS_349_800E0750(gobj)) {
-        ftDk_MS_349_800E07B0(gobj);
+    if (checkSomething(gobj)) {
+        doSomething(gobj);
     } else {
         vec.x = vec.y = vec.z = 0.0f;
         Item_8026ABD8(fp->x1974_heldItem, &vec, 1.0f);
@@ -35,7 +35,7 @@ void ftDk_MS_349_800E06D8(HSD_GObj* gobj)
     }
 }
 
-bool ftDk_MS_349_800E0750(HSD_GObj* gobj)
+bool checkSomething(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -50,7 +50,7 @@ bool ftDk_MS_349_800E0750(HSD_GObj* gobj)
     return false;
 }
 
-void ftDk_MS_349_800E07B0(HSD_GObj* gobj)
+void doSomething(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2CC;
@@ -65,7 +65,7 @@ void ftDk_MS_350_Anim(HSD_GObj* gobj)
         if (fp->ground_or_air == GA_Air) {
             ftDk_MS_345_800E0294(gobj);
         } else {
-            ftDk_Init_800DF980(gobj);
+            ftDk_MS_341_800DF980(gobj);
         }
     }
 }

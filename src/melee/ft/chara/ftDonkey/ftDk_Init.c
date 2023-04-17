@@ -534,7 +534,7 @@ void ftDk_Init_OnDeath(HSD_GObj* gobj)
 void ftDk_Init_8010D774(HSD_GObj* gobj)
 {
     ftDk_SpecialN_DestroyAllEffectsPlus(gobj);
-    ftDk_SpecialHi_DestroyAllEffects_SpecialHi(gobj);
+    ftDk_SpecialHi_DestroyAllEffects(gobj);
 }
 
 void ftDk_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
