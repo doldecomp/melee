@@ -119,7 +119,7 @@ HSD_GObj* ftLib_80086198(HSD_GObj* gobj)
 }
 
 // get closest opposing fp?
-HSD_GObj* ftLib_8008627C(Vec3* v, HSD_GObj* gobj)
+HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
 {
     Vec3 cur_v;
     f32 dist;
@@ -159,8 +159,8 @@ HSD_GObj* ftLib_8008627C(Vec3* v, HSD_GObj* gobj)
         }
 
         ftLib_800866DC(cur, &cur_v);
-        dx = v->x - cur_v.x;
-        dy = v->y - cur_v.y;
+        dx = pos->x - cur_v.x;
+        dy = pos->y - cur_v.y;
         dist = (dx * dx) + (dy * dy);
 
         if (dist < min_dist) {
