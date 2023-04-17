@@ -103,7 +103,7 @@ static void ftMh_MS_343_801511FC(HSD_GObj* gobj)
     }
     case 1:
         if (Camera_8002F260() != 0) {
-            Camera_8002E948(&ftMh_MS_343_80151428);
+            Camera_8002E948(ftMh_MS_343_80151428);
             Camera_8002ED9C(120.0f);
             Camera_8002F0E4(0x14);
             fp->mv.mh.unk4.x0 = 2;

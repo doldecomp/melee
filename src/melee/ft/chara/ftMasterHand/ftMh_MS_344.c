@@ -9,16 +9,16 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
 
-u32 ftMh_MS_343_80151428(Vec3* vec)
+bool ftMh_MS_343_80151428(Vec3* vec)
 {
     HSD_GObj* fetched_gobj = ftBossLib_8015C3E8(0x1B);
 
     if (fetched_gobj) {
         lb_8000B1CC(((Fighter*) fetched_gobj->user_data)->ft_bones[5].x0_jobj,
                     0, vec);
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
 // 80151484 14E064
