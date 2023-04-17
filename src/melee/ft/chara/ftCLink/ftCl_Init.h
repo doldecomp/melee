@@ -130,23 +130,4 @@ void ftCo_ZairCatch_IASA(HSD_GObj*);
 void ftCo_ZairCatch_Phys(HSD_GObj*);
 void ftCo_ZairCatch_Coll(HSD_GObj*);
 
-static inline void checkFighter2244(HSD_GObj* gobj)
-{
-    Fighter* fp;
-
-    if (gobj == NULL) {
-        return;
-    }
-
-    fp = gobj->user_data;
-    if (fp != NULL && fp->fv.cl.x2244 != 0) {
-        it_802C8C34(fp->fv.cl.x2244);
-        fp->fv.cl.x2244 = 0;
-    }
-
-    if (gobj == NULL) {
-        gobj == NULL;
-    }
-}
-
 #endif

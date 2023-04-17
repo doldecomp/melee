@@ -2,6 +2,8 @@
 
 #include "ftCl_Init.h"
 
+#include "inlines.h"
+
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
