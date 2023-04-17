@@ -9,8 +9,16 @@
 #include "lb/lb_00B0.h"
 
 MotionState ftSb_Init_MotionStateTable[] = {
-    { 295, 0, 0x01400000, ftSb_Init_8014FC20, ftSb_Init_8014FC24,
-      ftSb_Init_8014FC28, ftSb_Init_8014FC48, ftCamera_UpdateCameraBox },
+    {
+        295,
+        0,
+        0x01400000,
+        ftSb_Init_8014FC20,
+        ftSb_Init_8014FC24,
+        ftSb_Init_8014FC28,
+        ftSb_Init_8014FC48,
+        ftCamera_UpdateCameraBox,
+    },
 };
 
 char ftSb_Init_DatFilename[] = "PlSb.dat";
