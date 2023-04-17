@@ -63,7 +63,6 @@ typedef union ftFox_MotionVars {
     ftFoxSpecialHi SpecialHi;
     ftFoxSpecialLw SpecialLw;
     ftFoxAppealS AppealS;
-
 } ftFox_MotionVars;
 
 #endif
