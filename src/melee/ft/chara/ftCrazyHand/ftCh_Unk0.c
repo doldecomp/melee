@@ -1,11 +1,16 @@
 #include <platform.h>
+#include "ftMasterHand/forward.h"
 
 struct {
     enum_t asids[18];
     s8 bytes[64];
 } ftCh_Init_803D4878 = {
-    { 343, 345, 347, 349, 351, 354, 355, 357, 372, 373, 374, 359, 361, 368,
-      369, 377, 378, 379 },
+    { ftMh_MS_Unk343, ftMh_MS_Unk345, ftMh_MS_Slap_StartMotion,
+      ftMh_MS_Sweep_StartMotion, ftMh_MS_Walk_StartMotion,
+      ftMh_MS_Drill_StartMotion, ftMh_MS_Punch_StartMotion, ftMh_MS_Unk357,
+      ftMh_MS_Unk372, ftMh_MS_Unk373, ftMh_MS_Unk374, ftMh_MS_Poke_StartMotion,
+      ftMh_MS_Unk361, ftMh_MS_Unk368, ftMh_MS_Unk369, ftMh_MS_Unk377,
+      ftMh_MS_Unk378, ftMh_MS_Grab_Unk0_MotionStart },
     { 0,  1,  2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
       16, 17, 0, 0, 0, 4, 4, 4, 8, 3, 11, 2,  13, 2,  15, 3,
       1,  2,  3, 4, 5, 0, 2, 3, 4, 5, 0,  1,  3,  4,  5,  0,
