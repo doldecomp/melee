@@ -1,0 +1,132 @@
+#include "ftMh_MS_371_0.h"
+
+#include "ftMh_MS_389.h"
+
+#include "ft/fighter.h"
+#include "ft/ftbosslib.h"
+#include "ft/inlines.h"
+#include "ft/types.h"
+
+#include <dolphin/mtx/types.h>
+
+// 80153D28 150908
+void ftMh_MS_370_Coll(HSD_GObj* gobj)
+{
+    return;
+}
+
+/// @todo Figure out how to use #GET_JOBJ instead.
+static inline HSD_JObj* get_jobj(HSD_GObj* gobj)
+{
+    return gobj->hsd_obj;
+}
+
+void ftMh_MS_370_80153D2C(HSD_GObj* gobj)
+{
+    /// @todo #GET_FIGHTER and #GET_JOBJ both cause regswaps here,
+    ///       but they probably shouldn't.
+    Fighter* fp = gobj->user_data;
+    HSD_JObj* jobj = get_jobj(gobj);
+
+    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    Vec3 sp1C;
+    Vec3 scale;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
+    Fighter_ChangeMotionState(gobj, 0x173, 0, 0, 0.0f, 1.0f, 0.0f);
+    ftAnim_8006EBA4(gobj);
+    ftBossLib_8015C208(gobj, &sp1C);
+    fp->cur_pos.x = sp1C.x;
+    fp->cur_pos.y = attr->x70;
+
+    fp->x80_self_vel.z = 0.0f;
+    fp->x80_self_vel.y = 0.0f;
+    fp->x80_self_vel.x = 0.0f;
+
+    fp->mv.mh.unk0.x0 = attr->x74;
+    fp->mv.mh.unk0.x70 = attr->x7C;
+
+    HSD_JObjGetScale(jobj, &scale);
+    fp->mv.mh.unk0.x64.x = scale.x;
+    fp->mv.mh.unk0.x64.y = scale.y;
+    fp->mv.mh.unk0.x64.z = scale.z;
+
+    fp->mv.mh.unk0.x58.x = scale.x - attr->x78;
+    fp->mv.mh.unk0.x58.y = scale.y - attr->x78;
+    fp->mv.mh.unk0.x58.z = scale.z - attr->x78;
+
+    fp->mv.mh.unk0.x58.x /= attr->x7C;
+    fp->mv.mh.unk0.x58.y /= attr->x7C;
+    fp->mv.mh.unk0.x58.z /= attr->x7C;
+
+    scale.x = attr->x78;
+    scale.y = attr->x78;
+    scale.z = attr->x78;
+    HSD_JObjSetScale(jobj, &scale);
+
+    fp->x2200_ftcmd_var0 = 1;
+}
+
+// 80153F8C 150B6C
+// https://decomp.me/scratch/w6kte
+void ftMh_MS_371_Anim(HSD_GObj* gobj_arg)
+{
+    HSD_GObj* gobj = gobj_arg;
+    Fighter* fp = GET_FIGHTER(gobj);
+    Vec3 scale;
+
+    if (fp->x2200_ftcmd_var0 != 0) {
+        /// @todo #GET_JOBJ
+        HSD_JObj* jobj = get_jobj(gobj);
+        if (--fp->mv.mh.unk0.x70 < 0) {
+            fp->x2200_ftcmd_var0 = 0;
+            scale.x = fp->mv.mh.unk0.x64.x;
+            scale.y = fp->mv.mh.unk0.x64.y;
+            scale.z = fp->mv.mh.unk0.x64.z;
+        } else {
+            HSD_JObjGetScale(jobj, &scale);
+            scale.x += fp->mv.mh.unk0.x58.x;
+            scale.y += fp->mv.mh.unk0.x58.y;
+            scale.z += fp->mv.mh.unk0.x58.z;
+        }
+        HSD_JObjSetScale(jobj, &scale);
+    }
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->x80_self_vel.x = 0.0f;
+        ftMh_MS_389_80151018(gobj);
+    }
+}
+
+// 80154114 150CF4
+void ftMh_MS_371_IASA(HSD_GObj* arg0)
+{
+    Fighter* fp = arg0->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+        ftBossLib_8015BD20(arg0);
+    }
+}
+
+// 80154158 150D38
+// https://decomp.me/scratch/rgPDD
+void ftMh_MS_371_Phys(HSD_GObj* gobj)
+{
+    Fighter* r3_fp = GET_FIGHTER(gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
+    if (--r3_fp->mv.mh.unk0.x0 > 0.0f) {
+        ftMasterHand_SpecialAttrs* r4_attributes = r3_fp->ft_data->ext_attr;
+        ftBossLib_8015BF74(gobj, r4_attributes->x58);
+    } else {
+        r3_fp->x80_self_vel.x = 0.0f;
+    }
+    ftBossLib_8015C190(gobj);
+}
