@@ -1,4 +1,6 @@
-#include "ftFox/ftFx_Appeal.h"
+#include "forward.h"
+
+#include "ftFx_Appeal.h"
 
 #include "ftFx_Init.h"
 
@@ -57,12 +59,12 @@ bool ftFx_AppealS_CheckInput(HSD_GObj* gobj)
     return false;
 }
 
-f32 setFloatOrder(void)
+static f32 setFloatOrder(void)
 {
     return 0.0f;
 }
 
-f32 setFloatOrder2(void)
+static f32 setFloatOrder2(void)
 {
     return 1.0f;
 }

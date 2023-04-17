@@ -6,6 +6,10 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftMars/ftMs_Init.h"
+#include "ftMars/ftMs_SpecialHi.h"
+#include "ftMars/ftMs_SpecialLw.h"
+#include "ftMars/ftMs_SpecialN.h"
+#include "ftMars/ftMs_SpecialS.h"
 
 MotionState ftFe_Init_MotionStateTable[] = {
     {

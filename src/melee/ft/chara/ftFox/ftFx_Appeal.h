@@ -3,7 +3,4 @@
 
 #include <platform.h>
 
-f32 setFloatOrder(void);
-f32 setFloatOrder2(void);
-
 #endif
