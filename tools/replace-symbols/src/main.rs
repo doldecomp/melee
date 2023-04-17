@@ -56,13 +56,23 @@ fn main() -> Result<()> {
         let from = splits[0];
         let to = splits[1];
 
-        if replacements.contains_key(from) {
+        if from == to {
+            warn!(r#""{}" is replacing itself. Skipping."#, from);
+            return Ok(());
+        }
+
+        let replacement_exists = replacements.contains_key(from);
+        let duplicate_exists = duplicates.contains(from);
+        if replacement_exists || duplicate_exists {
             if !duplicates.contains(from) {
                 warn!(
                     r#""{}" is being replaced more than once. Skipping."#,
                     from
                 );
                 duplicates.insert(Arc::from(from));
+            }
+            if replacement_exists {
+                replacements.remove(from);
             }
             return Ok(());
         }
