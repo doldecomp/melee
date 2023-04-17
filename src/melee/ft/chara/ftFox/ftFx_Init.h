@@ -48,7 +48,6 @@ typedef enum ftFoxAction {
     MS_FOX_APPEALS_L,
     MS_FOX_APPEALS_END_R,
     MS_FOX_APPEALS_END_L,
-
 } ftFoxAction;
 
 // Flags used by Fox in Motion State Change
