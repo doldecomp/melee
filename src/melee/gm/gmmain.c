@@ -32,12 +32,12 @@
 #include <baselib/sislib.h>
 #include <baselib/video.h>
 
-extern bool lbl_804D6B20;
-extern u16 lbl_804D6B30; // debug flags
+extern bool db_804D6B20;
+extern u16 db_804D6B30; // debug flags
 
 extern GXRenderModeObj GXNtsc480IntDf;
 extern PadLibData HSD_PadLibData;
-extern char lbl_803EA6C8[]; // build timestamp string
+extern char db_803EA6C8[]; // build timestamp string
 extern s32* seed_ptr;
 
 enum {
@@ -49,15 +49,15 @@ enum {
 };
 
 static u32 arena_size;
-static bool lbl_804D6594;
+static bool gmMain_804D6594;
 
-static u8 lbl_8046B108[0xF0];
-static HSD_PadRumbleListData lbl_8046B1F8[12];
+static u8 gmMain_8046B108[0xF0];
+static HSD_PadRumbleListData gmMain_8046B1F8[12];
 
 static void gmMain_8015FD24(void)
 {
     PADSetSpec(5);
-    HSD_PadInit(5, lbl_8046B108, 12, lbl_8046B1F8);
+    HSD_PadInit(5, gmMain_8046B108, 12, gmMain_8046B1F8);
     HSD_PadLibData.clamp_stickType = 0;
     HSD_PadLibData.clamp_stickShift = 1;
     HSD_PadLibData.clamp_stickMax = 80;
@@ -75,8 +75,8 @@ static void gmMain_8015FDA0(void) {}
 static void gmMain_8015FDA4(void)
 {
     if (DVDConvertPathToEntrynum("/develop.ini") != -1) {
-        lbl_804D6B20 = true;
-        if (lbl_804D6B30 & 0x400) {
+        db_804D6B20 = true;
+        if (db_804D6B30 & 0x400) {
             int level = g_debugLevel;
             switch (level) {
             case DbLKind_NoDebugRom:
@@ -96,7 +96,7 @@ static void gmMain_8015FDA4(void)
                 break;
             }
             g_debugLevel = level;
-        } else if (lbl_804D6B30 & 0x800) {
+        } else if (db_804D6B30 & 0x800) {
             int level = g_debugLevel;
             switch (level) {
             case DbLKind_NoDebugRom:
@@ -107,7 +107,7 @@ static void gmMain_8015FDA4(void)
                 break;
             }
             g_debugLevel = level;
-            lbl_804D6B20 = false;
+            db_804D6B20 = false;
         }
     } else {
         if (g_debugLevel != DbLKind_NoDebugRom) {
@@ -177,7 +177,7 @@ int main(void)
     lbAudioAx_8002838C();
     lb_80019AAC(&gmMain_8015FD24);
     HSD_VISetUserPostRetraceCallback(&gmMain_8015FDA0);
-    HSD_VISetUserGXDrawDoneCallback(&lbl_803762C4);
+    HSD_VISetUserGXDrawDoneCallback(&HSD_Video_803762C4);
     HSD_VISetBlack(0);
     lbMemory_8001564C();
     lbHeap_80015F3C();
@@ -188,16 +188,16 @@ int main(void)
     lbSnap_8001E290();
     gmMainLib_8015FCC0();
     lbMthp_8001F87C();
-    func_803A6048(0xC000);
+    HSD_SisLib_803A6048(0xC000);
     gmMainLib_8015FBA4();
 
-    if (g_debugLevel != DbLKind_Master && lbl_804D6B30 & 0x20 &&
-        func_803931A4(-1))
+    if (g_debugLevel != DbLKind_Master && db_804D6B30 & 0x20 &&
+        hsd_803931A4(-1))
     {
-        func_80393A54(1);
-        while (!func_80393A04()) {
+        hsd_80393A54(1);
+        while (!hsd_80393A04()) {
             OSReport("please setup server for USB\n");
-            func_80392E80();
+            hsd_80392E80();
         }
     }
 
@@ -216,7 +216,7 @@ int main(void)
         OSReport("# ARAM Free Size %d MB\n",
                  (free_aram_end - free_aram_start) / (1024 * 1024));
     }
-    OSReport("# %s\n", lbl_803EA6C8);
+    OSReport("# %s\n", db_803EA6C8);
     {
         struct datetime dt;
         gm_801692E8(lbTime_8000AFBC(), &dt);
@@ -226,8 +226,8 @@ int main(void)
                  dt.second);
     }
     OSReport("#\n\n");
-    lbl_804D6594 = false;
-    if (lbl_804D6594) {
+    gmMain_804D6594 = false;
+    if (gmMain_804D6594) {
         db_80225D2C();
     } else {
         db_80225D40();

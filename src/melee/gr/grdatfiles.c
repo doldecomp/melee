@@ -16,12 +16,12 @@ typedef struct _UnkStageDatInternal {
 } UnkStageDatInternal;
 
 /// @todo Bad split?
-/* static */ extern UnkStage6B0 lbl_803E0848;
+/* static */ extern UnkStage6B0 grDatFiles_803E0848;
 
-static UnkArchiveStruct lbl_8049EE10[4];
+static UnkArchiveStruct grDatFiles_8049EE10[4];
 
 /// @todo Bad split?
-/* static */ extern UnkStageDat lbl_803E0924;
+/* static */ extern UnkStageDat grDatFiles_803E0924;
 
 void grDatFiles_801C5FC0(HSD_Archive* archive, void* data, u32 length)
 {
@@ -76,10 +76,10 @@ void grDatFiles_801C6038(void* arg0, s32 arg1, s32 arg2)
         }
         grDatFiles_801C6228(temp_r3->unk4);
     } else {
-        temp_r3->unk4 = &lbl_803E0924;
+        temp_r3->unk4 = &grDatFiles_803E0924;
         if (arg1 == 0) {
             stage_info.x6AC = NULL;
-            stage_info.x6B0 = &lbl_803E0848;
+            stage_info.x6B0 = &grDatFiles_803E0848;
             stage_info.x6A8 = NULL;
             stage_info.x6B4 = NULL;
             stage_info.x6B8 = NULL;
@@ -107,15 +107,15 @@ static void grDatFiles_801C6228(UnkStageDat* arg0)
 
 void grDatFiles_801C6288(void)
 {
-    lb_8000C160(&lbl_8049EE10, 0x30);
+    lb_8000C160(&grDatFiles_8049EE10, 0x30);
 }
 
 static UnkArchiveStruct* grDatFiles_801C62B4(void)
 {
     s32 i;
     for (i = 0; i < 4; i++) {
-        if (lbl_8049EE10[i].unk0 == NULL) {
-            return &lbl_8049EE10[i];
+        if (grDatFiles_8049EE10[i].unk0 == NULL) {
+            return &grDatFiles_8049EE10[i];
         }
     }
     HSD_ASSERT(229, 0);
@@ -128,7 +128,7 @@ static UnkArchiveStruct* grDatFiles_801C62B4(void)
 
 UnkArchiveStruct* grDatFiles_801C6324(void)
 {
-    return lbl_8049EE10;
+    return grDatFiles_8049EE10;
 }
 
 UnkArchiveStruct* grDatFiles_801C6330(s32 arg0)
@@ -136,12 +136,12 @@ UnkArchiveStruct* grDatFiles_801C6330(s32 arg0)
     if (arg0 >= 0) {
         s32 i;
         for (i = 0; i < 4; i++) {
-            if (lbl_8049EE10[i].unk0 != NULL) {
-                UnkStageDat* temp_r7 = lbl_8049EE10[i].unk4;
+            if (grDatFiles_8049EE10[i].unk0 != NULL) {
+                UnkStageDat* temp_r7 = grDatFiles_8049EE10[i].unk4;
                 if (temp_r7 != NULL && temp_r7->unkC > arg0 &&
                     temp_r7->unk8[arg0].unk0 != 0)
                 {
-                    return &lbl_8049EE10[i];
+                    return &grDatFiles_8049EE10[i];
                 }
             }
         }
@@ -166,14 +166,14 @@ UnkArchiveStruct* grDatFiles_801C6478(void* data, s32 length)
     return arc;
 }
 
-static UnkBgmStruct lbl_803E07E4 = {
+static UnkBgmStruct grDatFiles_803E07E4 = {
     0, -1, -1, 0, 0, 0, 0, 0, { 0 },
 };
 
-UnkStage6B0 lbl_803E0848 = {
+UnkStage6B0 grDatFiles_803E0848 = {
     1,  0x80, {}, 0x1E,          0,  1,  0x8000, 10, 0,     0, 1, 1, 1,  {},
     40, 10,   50, 100,           10, 10, 10,     10, false, 0, 0, 0, 30, 10,
-    0,  0,    {}, &lbl_803E07E4, 1,
+    0,  0,    {}, &grDatFiles_803E07E4, 1,
 };
 
-UnkStageDat lbl_803E0924 = { 0 };
+UnkStageDat grDatFiles_803E0924 = { 0 };

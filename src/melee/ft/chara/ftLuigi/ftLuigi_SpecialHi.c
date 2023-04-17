@@ -7,7 +7,7 @@
 // 0x80143FC8
 // https://decomp.me/scratch/MAoxx // Luigi's grounded Super Jump Punch Action
 // State handler
-void ftLuigi_SpecialHi_StartMotion(HSD_GObj* gobj)
+void ftLg_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -19,7 +19,7 @@ void ftLuigi_SpecialHi_StartMotion(HSD_GObj* gobj)
 }
 
 /// Luigi's aerial Super Jump Punch Motion State handler
-void ftLuigi_SpecialAirHi_StartMotion(HSD_GObj* gobj)
+void ftLg_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
@@ -39,7 +39,7 @@ void ftLuigi_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 }
 
 /// Luigi's grounded Super Jump Punch Animation callback
-void ftLuigi_SpecialHi_Anim(HSD_GObj* gobj)
+void ftLg_SpecialHi_Anim(HSD_GObj* gobj)
 {
     ftLuigiAttributes* luigiAttrs = GET_FIGHTER(gobj)->x2D4_specialAttributes;
 
@@ -56,7 +56,7 @@ void ftLuigi_SpecialHi_Anim(HSD_GObj* gobj)
 }
 
 /// Luigi's aerial Super Jump Punch Animation callback
-void ftLuigi_SpecialAirHi_Anim(HSD_GObj* gobj)
+void ftLg_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     ftLuigiAttributes* luigiAttrs = GET_FIGHTER(gobj)->x2D4_specialAttributes;
 
@@ -75,7 +75,7 @@ void ftLuigi_SpecialAirHi_Anim(HSD_GObj* gobj)
 // 0x80144158
 // https://decomp.me/scratch/M9q8b // Luigi's grounded Super Jump Punch IASA
 // callback
-void ftLuigi_SpecialHi_IASA(HSD_GObj* gobj)
+void ftLg_SpecialHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftLuigiAttributes* luigiAttrs;
@@ -140,7 +140,7 @@ void ftLuigi_SpecialHi_IASA(HSD_GObj* gobj)
 }
 
 /// Luigi's aerial Super Jump Punch IASA callback
-void ftLuigi_SpecialAirHi_IASA(HSD_GObj* gobj)
+void ftLg_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     f32 stick_x = fp->input.x620_lstick_x;
@@ -208,7 +208,7 @@ void ftLuigi_SpecialAirHi_IASA(HSD_GObj* gobj)
 // 0x801443E8
 // https://decomp.me/scratch/TmnDt // Luigi's grounded Super Jump Punch Physics
 // callback
-void ftLuigi_SpecialHi_Phys(HSD_GObj* gobj)
+void ftLg_SpecialHi_Phys(HSD_GObj* gobj)
 {
     if ((s32) GET_FIGHTER(gobj)->xE0_ground_or_air == GA_Air) {
         ft_80085154(gobj);
@@ -220,7 +220,7 @@ void ftLuigi_SpecialHi_Phys(HSD_GObj* gobj)
 // 0x80144420
 // https://decomp.me/scratch/vIYcm // Luigi's aerial Super Jump Punch Physics
 // callback
-void ftLuigi_SpecialAirHi_Phys(HSD_GObj* gobj)
+void ftLg_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
@@ -240,7 +240,7 @@ void ftLuigi_SpecialAirHi_Phys(HSD_GObj* gobj)
 
 // 0x801444B4
 // https://decomp.me/scratch/l7min // Luigi's Super Jump Punch Landing check
-void ftLuigi_SpecialHi_CheckLanding(HSD_GObj* gobj)
+void ftLg_SpecialHi_CheckLanding(HSD_GObj* gobj)
 {
     ft_800D5CB0(
         gobj, 0,
@@ -251,7 +251,7 @@ void ftLuigi_SpecialHi_CheckLanding(HSD_GObj* gobj)
 // 0x801444E4
 // https://decomp.me/scratch/5aRWp // Luigi's grounded Super Jump Punch
 // Collision callback
-void ftLuigi_SpecialHi_Coll(HSD_GObj* gobj)
+void ftLg_SpecialHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -261,7 +261,7 @@ void ftLuigi_SpecialHi_Coll(HSD_GObj* gobj)
             ft_80083B68(gobj);
             return;
         }
-        ft_800831CC(gobj, ft_80096CC8, ftLuigi_SpecialHi_CheckLanding);
+        ft_800831CC(gobj, ft_80096CC8, ftLg_SpecialHi_CheckLanding);
         return;
     }
     ft_80084104(gobj);
@@ -270,7 +270,7 @@ void ftLuigi_SpecialHi_Coll(HSD_GObj* gobj)
 // 0x80144554
 // https://decomp.me/scratch/h03kd // Luigi's aerial Super Jump Punch Collision
 // callback
-void ftLuigi_SpecialAirHi_Coll(HSD_GObj* gobj)
+void ftLg_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -280,7 +280,7 @@ void ftLuigi_SpecialAirHi_Coll(HSD_GObj* gobj)
             ft_80083B68(gobj);
             return;
         }
-        ft_800831CC(gobj, ft_80096CC8, ftLuigi_SpecialHi_CheckLanding);
+        ft_800831CC(gobj, ft_80096CC8, ftLg_SpecialHi_CheckLanding);
         return;
     }
     ft_80084104(gobj);

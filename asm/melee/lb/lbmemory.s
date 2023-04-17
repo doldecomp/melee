@@ -5,14 +5,14 @@
 .global lbMemory_80014E24
 lbMemory_80014E24:
 /* 80014E24 00011A04  7C 08 02 A6 */	mflr r0
-/* 80014E28 00011A08  3C A0 80 43 */	lis r5, lbl_804318B0@ha
+/* 80014E28 00011A08  3C A0 80 43 */	lis r5, lbMemory_804318B0@ha
 /* 80014E2C 00011A0C  90 01 00 04 */	stw r0, 4(r1)
 /* 80014E30 00011A10  94 21 FF D8 */	stwu r1, -0x28(r1)
 /* 80014E34 00011A14  BF 61 00 14 */	stmw r27, 0x14(r1)
-/* 80014E38 00011A18  3B E5 18 B0 */	addi r31, r5, lbl_804318B0@l
-/* 80014E3C 00011A1C  3C A0 80 3C */	lis r5, lbl_803BA2C0@ha
+/* 80014E38 00011A18  3B E5 18 B0 */	addi r31, r5, lbMemory_804318B0@l
+/* 80014E3C 00011A1C  3C A0 80 3C */	lis r5, lbMemory_803BA2C0@ha
 /* 80014E40 00011A20  3B BF 06 98 */	addi r29, r31, 0x698
-/* 80014E44 00011A24  3B C5 A2 C0 */	addi r30, r5, lbl_803BA2C0@l
+/* 80014E44 00011A24  3B C5 A2 C0 */	addi r30, r5, lbMemory_803BA2C0@l
 /* 80014E48 00011A28  3B 63 00 00 */	addi r27, r3, 0
 /* 80014E4C 00011A2C  3B 84 00 00 */	addi r28, r4, 0
 /* 80014E50 00011A30  80 1F 06 98 */	lwz r0, 0x698(r31)
@@ -66,13 +66,13 @@ lbMemory_80014EEC:
 /* 80014EF8 00011AD8  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 80014EFC 00011ADC  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 80014F00 00011AE0  7C 7E 1B 79 */	or. r30, r3, r3
-/* 80014F04 00011AE4  3C 60 80 43 */	lis r3, lbl_804318B0@ha
-/* 80014F08 00011AE8  3B E3 18 B0 */	addi r31, r3, lbl_804318B0@l
+/* 80014F04 00011AE4  3C 60 80 43 */	lis r3, lbMemory_804318B0@ha
+/* 80014F08 00011AE8  3B E3 18 B0 */	addi r31, r3, lbMemory_804318B0@l
 /* 80014F0C 00011AEC  40 82 00 18 */	bne .L_80014F24
-/* 80014F10 00011AF0  3C 60 80 3C */	lis r3, lbl_803BA2C0@ha
-/* 80014F14 00011AF4  38 63 A2 C0 */	addi r3, r3, lbl_803BA2C0@l
+/* 80014F10 00011AF0  3C 60 80 3C */	lis r3, lbMemory_803BA2C0@ha
+/* 80014F14 00011AF4  38 63 A2 C0 */	addi r3, r3, lbMemory_803BA2C0@l
 /* 80014F18 00011AF8  38 80 00 95 */	li r4, 0x95
-/* 80014F1C 00011AFC  38 AD 80 E8 */	addi r5, r13, lbl_804D3788@sda21
+/* 80014F1C 00011AFC  38 AD 80 E8 */	addi r5, r13, lbMemory_804D3788@sda21
 /* 80014F20 00011B00  48 37 33 01 */	bl __assert
 .L_80014F24:
 /* 80014F24 00011B04  80 BE 00 0C */	lwz r5, 0xc(r30)
@@ -129,14 +129,14 @@ lbMemory_80014F7C:
 .global lbMemory_80014FC8
 lbMemory_80014FC8:
 /* 80014FC8 00011BA8  7C 08 02 A6 */	mflr r0
-/* 80014FCC 00011BAC  3C A0 80 43 */	lis r5, lbl_804318B0@ha
+/* 80014FCC 00011BAC  3C A0 80 43 */	lis r5, lbMemory_804318B0@ha
 /* 80014FD0 00011BB0  90 01 00 04 */	stw r0, 4(r1)
 /* 80014FD4 00011BB4  94 21 FF C8 */	stwu r1, -0x38(r1)
 /* 80014FD8 00011BB8  BF 01 00 18 */	stmw r24, 0x18(r1)
-/* 80014FDC 00011BBC  3B A5 18 B0 */	addi r29, r5, lbl_804318B0@l
-/* 80014FE0 00011BC0  3C A0 80 3C */	lis r5, lbl_803BA2C0@ha
+/* 80014FDC 00011BBC  3B A5 18 B0 */	addi r29, r5, lbMemory_804318B0@l
+/* 80014FE0 00011BC0  3C A0 80 3C */	lis r5, lbMemory_803BA2C0@ha
 /* 80014FE4 00011BC4  3B 7D 06 2C */	addi r27, r29, 0x62c
-/* 80014FE8 00011BC8  3B 85 A2 C0 */	addi r28, r5, lbl_803BA2C0@l
+/* 80014FE8 00011BC8  3B 85 A2 C0 */	addi r28, r5, lbMemory_803BA2C0@l
 /* 80014FEC 00011BCC  3B 03 00 00 */	addi r24, r3, 0
 /* 80014FF0 00011BD0  3B C4 00 00 */	addi r30, r4, 0
 /* 80014FF4 00011BD4  3F 20 40 00 */	lis r25, 0x4000
@@ -224,8 +224,8 @@ lbMemory_800150F0:
 /* 8001510C 00011CEC  7C 00 20 40 */	cmplw r0, r4
 /* 80015110 00011CF0  40 82 00 30 */	bne .L_80015140
 /* 80015114 00011CF4  80 05 00 00 */	lwz r0, 0(r5)
-/* 80015118 00011CF8  3C 60 80 43 */	lis r3, lbl_804318B0@ha
-/* 8001511C 00011CFC  38 83 18 B0 */	addi r4, r3, lbl_804318B0@l
+/* 80015118 00011CF8  3C 60 80 43 */	lis r3, lbMemory_804318B0@ha
+/* 8001511C 00011CFC  38 83 18 B0 */	addi r4, r3, lbMemory_804318B0@l
 /* 80015120 00011D00  90 06 00 00 */	stw r0, 0(r6)
 /* 80015124 00011D04  80 04 06 2C */	lwz r0, 0x62c(r4)
 /* 80015128 00011D08  90 05 00 00 */	stw r0, 0(r5)
@@ -240,14 +240,14 @@ lbMemory_800150F0:
 .L_80015148:
 /* 80015148 00011D28  28 05 00 00 */	cmplwi r5, 0
 /* 8001514C 00011D2C  40 82 FF BC */	bne .L_80015108
-/* 80015150 00011D30  3C 60 80 3C */	lis r3, lbl_803BA344@ha
+/* 80015150 00011D30  3C 60 80 3C */	lis r3, lbMemory_803BA344@ha
 /* 80015154 00011D34  4C C6 31 82 */	crclr 6
-/* 80015158 00011D38  38 63 A3 44 */	addi r3, r3, lbl_803BA344@l
+/* 80015158 00011D38  38 63 A3 44 */	addi r3, r3, lbMemory_803BA344@l
 /* 8001515C 00011D3C  48 33 05 4D */	bl OSReport
-/* 80015160 00011D40  3C 60 80 3C */	lis r3, lbl_803BA2C0@ha
-/* 80015164 00011D44  38 63 A2 C0 */	addi r3, r3, lbl_803BA2C0@l
+/* 80015160 00011D40  3C 60 80 3C */	lis r3, lbMemory_803BA2C0@ha
+/* 80015164 00011D44  38 63 A2 C0 */	addi r3, r3, lbMemory_803BA2C0@l
 /* 80015168 00011D48  38 80 01 1B */	li r4, 0x11b
-/* 8001516C 00011D4C  38 AD 80 F0 */	addi r5, r13, lbl_804D3790@sda21
+/* 8001516C 00011D4C  38 AD 80 F0 */	addi r5, r13, lbMemory_804D3790@sda21
 /* 80015170 00011D50  48 37 30 B1 */	bl __assert
 .L_80015174:
 /* 80015174 00011D54  80 01 00 0C */	lwz r0, 0xc(r1)
@@ -256,9 +256,9 @@ lbMemory_800150F0:
 /* 80015180 00011D60  4E 80 00 20 */	blr
 .L_80015184:
 /* 80015184 00011D64  7C 08 02 A6 */	mflr r0
-/* 80015188 00011D68  3C 60 80 43 */	lis r3, lbl_804318B0@ha
+/* 80015188 00011D68  3C 60 80 43 */	lis r3, lbMemory_804318B0@ha
 /* 8001518C 00011D6C  90 01 00 04 */	stw r0, 4(r1)
-/* 80015190 00011D70  38 63 18 B0 */	addi r3, r3, lbl_804318B0@l
+/* 80015190 00011D70  38 63 18 B0 */	addi r3, r3, lbMemory_804318B0@l
 /* 80015194 00011D74  38 63 06 A0 */	addi r3, r3, 0x6a0
 /* 80015198 00011D78  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 8001519C 00011D7C  93 E1 00 14 */	stw r31, 0x14(r1)
@@ -267,10 +267,10 @@ lbMemory_800150F0:
 /* 800151A8 00011D88  80 03 00 30 */	lwz r0, 0x30(r3)
 /* 800151AC 00011D8C  28 00 00 00 */	cmplwi r0, 0
 /* 800151B0 00011D90  40 82 00 18 */	bne .L_800151C8
-/* 800151B4 00011D94  3C 60 80 3C */	lis r3, lbl_803BA2C0@ha
-/* 800151B8 00011D98  38 63 A2 C0 */	addi r3, r3, lbl_803BA2C0@l
+/* 800151B4 00011D94  3C 60 80 3C */	lis r3, lbMemory_803BA2C0@ha
+/* 800151B8 00011D98  38 63 A2 C0 */	addi r3, r3, lbMemory_803BA2C0@l
 /* 800151BC 00011D9C  38 80 01 27 */	li r4, 0x127
-/* 800151C0 00011DA0  38 AD 80 F4 */	addi r5, r13, lbl_804D3794@sda21
+/* 800151C0 00011DA0  38 AD 80 F4 */	addi r5, r13, lbMemory_804D3794@sda21
 /* 800151C4 00011DA4  48 37 30 5D */	bl __assert
 .L_800151C8:
 /* 800151C8 00011DA8  80 DF 00 34 */	lwz r6, 0x34(r31)
@@ -333,9 +333,9 @@ lbMemory_800150F0:
 .global lbMemory_8001529C
 lbMemory_8001529C:
 /* 8001529C 00011E7C  7C 08 02 A6 */	mflr r0
-/* 800152A0 00011E80  3C C0 80 43 */	lis r6, lbl_804318B0@ha
+/* 800152A0 00011E80  3C C0 80 43 */	lis r6, lbMemory_804318B0@ha
 /* 800152A4 00011E84  90 01 00 04 */	stw r0, 4(r1)
-/* 800152A8 00011E88  38 C6 18 B0 */	addi r6, r6, lbl_804318B0@l
+/* 800152A8 00011E88  38 C6 18 B0 */	addi r6, r6, lbMemory_804318B0@l
 /* 800152AC 00011E8C  38 E6 06 E4 */	addi r7, r6, 0x6e4
 /* 800152B0 00011E90  94 21 FF F8 */	stwu r1, -8(r1)
 /* 800152B4 00011E94  90 86 06 E8 */	stw r4, 0x6e8(r6)
@@ -373,15 +373,15 @@ lbMemory_8001529C:
 .global lbMemory_80015320
 lbMemory_80015320:
 /* 80015320 00011F00  7C 08 02 A6 */	mflr r0
-/* 80015324 00011F04  3C 60 80 43 */	lis r3, lbl_804318B0@ha
+/* 80015324 00011F04  3C 60 80 43 */	lis r3, lbMemory_804318B0@ha
 /* 80015328 00011F08  90 01 00 04 */	stw r0, 4(r1)
 /* 8001532C 00011F0C  2C 06 00 00 */	cmpwi r6, 0
 /* 80015330 00011F10  94 21 FF C8 */	stwu r1, -0x38(r1)
 /* 80015334 00011F14  BF 21 00 1C */	stmw r25, 0x1c(r1)
-/* 80015338 00011F18  3B C3 18 B0 */	addi r30, r3, lbl_804318B0@l
-/* 8001533C 00011F1C  3C 60 80 3C */	lis r3, lbl_803BA2C0@ha
+/* 80015338 00011F18  3B C3 18 B0 */	addi r30, r3, lbMemory_804318B0@l
+/* 8001533C 00011F1C  3C 60 80 3C */	lis r3, lbMemory_803BA2C0@ha
 /* 80015340 00011F20  3B 3E 06 E4 */	addi r25, r30, 0x6e4
-/* 80015344 00011F24  3B 63 A2 C0 */	addi r27, r3, lbl_803BA2C0@l
+/* 80015344 00011F24  3B 63 A2 C0 */	addi r27, r3, lbMemory_803BA2C0@l
 /* 80015348 00011F28  3B 84 00 00 */	addi r28, r4, 0
 /* 8001534C 00011F2C  83 BE 06 E4 */	lwz r29, 0x6e4(r30)
 /* 80015350 00011F30  41 82 00 14 */	beq .L_80015364
@@ -484,8 +484,8 @@ lbMemory_80015320:
 
 .global lbMemory_800154BC
 lbMemory_800154BC:
-/* 800154BC 0001209C  3C A0 80 43 */	lis r5, lbl_804318B0@ha
-/* 800154C0 000120A0  84 05 18 B0 */	lwzu r0, lbl_804318B0@l(r5)
+/* 800154BC 0001209C  3C A0 80 43 */	lis r5, lbMemory_804318B0@ha
+/* 800154C0 000120A0  84 05 18 B0 */	lwzu r0, lbMemory_804318B0@l(r5)
 /* 800154C4 000120A4  90 03 00 00 */	stw r0, 0(r3)
 /* 800154C8 000120A8  80 05 00 04 */	lwz r0, 0x4(r5)
 /* 800154CC 000120AC  90 04 00 00 */	stw r0, 0(r4)
@@ -494,14 +494,14 @@ lbMemory_800154BC:
 .global lbMemory_800154D4
 lbMemory_800154D4:
 /* 800154D4 000120B4  7C 08 02 A6 */	mflr r0
-/* 800154D8 000120B8  3C A0 80 43 */	lis r5, lbl_804318B0@ha
+/* 800154D8 000120B8  3C A0 80 43 */	lis r5, lbMemory_804318B0@ha
 /* 800154DC 000120BC  90 01 00 04 */	stw r0, 4(r1)
 /* 800154E0 000120C0  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 800154E4 000120C4  BF 61 00 1C */	stmw r27, 0x1c(r1)
-/* 800154E8 000120C8  3B E5 18 B0 */	addi r31, r5, lbl_804318B0@l
-/* 800154EC 000120CC  3C A0 80 3C */	lis r5, lbl_803BA2C0@ha
+/* 800154E8 000120C8  3B E5 18 B0 */	addi r31, r5, lbMemory_804318B0@l
+/* 800154EC 000120CC  3C A0 80 3C */	lis r5, lbMemory_803BA2C0@ha
 /* 800154F0 000120D0  3B BF 06 98 */	addi r29, r31, 0x698
-/* 800154F4 000120D4  3B C5 A2 C0 */	addi r30, r5, lbl_803BA2C0@l
+/* 800154F4 000120D4  3B C5 A2 C0 */	addi r30, r5, lbMemory_803BA2C0@l
 /* 800154F8 000120D8  3B 63 00 00 */	addi r27, r3, 0
 /* 800154FC 000120DC  3B 84 00 00 */	addi r28, r4, 0
 /* 80015500 000120E0  80 1F 06 98 */	lwz r0, 0x698(r31)
@@ -552,21 +552,21 @@ lbMemory_800154D4:
 .global lbMemory_800155A4
 lbMemory_800155A4:
 /* 800155A4 00012184  7C 08 02 A6 */	mflr r0
-/* 800155A8 00012188  3C 60 80 43 */	lis r3, lbl_804318B0@ha
+/* 800155A8 00012188  3C 60 80 43 */	lis r3, lbMemory_804318B0@ha
 /* 800155AC 0001218C  90 01 00 04 */	stw r0, 4(r1)
 /* 800155B0 00012190  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 800155B4 00012194  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800155B8 00012198  3B E3 18 B0 */	addi r31, r3, lbl_804318B0@l
+/* 800155B8 00012198  3B E3 18 B0 */	addi r31, r3, lbMemory_804318B0@l
 /* 800155BC 0001219C  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 800155C0 000121A0  93 A1 00 0C */	stw r29, 0xc(r1)
 /* 800155C4 000121A4  3B BF 06 9C */	addi r29, r31, 0x69c
 /* 800155C8 000121A8  83 DF 06 9C */	lwz r30, 0x69c(r31)
 /* 800155CC 000121AC  28 1E 00 00 */	cmplwi r30, 0
 /* 800155D0 000121B0  40 82 00 18 */	bne .L_800155E8
-/* 800155D4 000121B4  3C 60 80 3C */	lis r3, lbl_803BA2C0@ha
-/* 800155D8 000121B8  38 63 A2 C0 */	addi r3, r3, lbl_803BA2C0@l
+/* 800155D4 000121B4  3C 60 80 3C */	lis r3, lbMemory_803BA2C0@ha
+/* 800155D8 000121B8  38 63 A2 C0 */	addi r3, r3, lbMemory_803BA2C0@l
 /* 800155DC 000121BC  38 80 00 95 */	li r4, 0x95
-/* 800155E0 000121C0  38 AD 80 E8 */	addi r5, r13, lbl_804D3788@sda21
+/* 800155E0 000121C0  38 AD 80 E8 */	addi r5, r13, lbMemory_804D3788@sda21
 /* 800155E4 000121C4  48 37 2C 3D */	bl __assert
 .L_800155E8:
 /* 800155E8 000121C8  80 9E 00 0C */	lwz r4, 0xc(r30)
@@ -600,11 +600,11 @@ lbMemory_800155A4:
 .global lbMemory_8001564C
 lbMemory_8001564C:
 /* 8001564C 0001222C  7C 08 02 A6 */	mflr r0
-/* 80015650 00012230  3C 60 80 43 */	lis r3, lbl_804318B0@ha
+/* 80015650 00012230  3C 60 80 43 */	lis r3, lbMemory_804318B0@ha
 /* 80015654 00012234  90 01 00 04 */	stw r0, 4(r1)
 /* 80015658 00012238  94 21 FF D8 */	stwu r1, -0x28(r1)
 /* 8001565C 0001223C  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 80015660 00012240  3B E3 18 B0 */	addi r31, r3, lbl_804318B0@l
+/* 80015660 00012240  3B E3 18 B0 */	addi r31, r3, lbMemory_804318B0@l
 /* 80015664 00012244  38 60 00 20 */	li r3, 0x20
 /* 80015668 00012248  93 C1 00 20 */	stw r30, 0x20(r1)
 /* 8001566C 0001224C  93 A1 00 1C */	stw r29, 0x1c(r1)
@@ -772,15 +772,15 @@ lbMemory_8001564C:
 
 .section .bss, "wa"
     .balign 8
-.global lbl_804318B0
-lbl_804318B0:
+.global lbMemory_804318B0
+lbMemory_804318B0:
     .skip 0x6F0
 
 
 .section .data
     .balign 8
-.global lbl_803BA2C0
-lbl_803BA2C0:
+.global lbMemory_803BA2C0
+lbMemory_803BA2C0:
     .asciz "lbmemory.c"
     .balign 4
     .asciz "_p(free_heap)"
@@ -791,8 +791,8 @@ lbl_803BA2C0:
     .balign 4
     .asciz "memp_kouho"
     .balign 4
-.global lbl_803BA344
-lbl_803BA344:
+.global lbMemory_803BA344
+lbMemory_803BA344:
     .asciz "[LbMem] Error: lbMemFreeToHeap %x.\n"
     .balign 4
     .asciz "!p->size"
@@ -802,14 +802,14 @@ lbl_803BA344:
 
 .section .sdata
     .balign 8
-.global lbl_804D3788
-lbl_804D3788:
+.global lbMemory_804D3788
+lbMemory_804D3788:
     .asciz "handle"
     .balign 4
-.global lbl_804D3790
-lbl_804D3790:
+.global lbMemory_804D3790
+lbMemory_804D3790:
     .asciz "0"
     .balign 4
-.global lbl_804D3794
-lbl_804D3794:
+.global lbMemory_804D3794
+lbMemory_804D3794:
     .asciz "p->size"

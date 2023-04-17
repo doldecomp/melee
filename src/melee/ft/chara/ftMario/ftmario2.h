@@ -5,7 +5,7 @@
 
 #include "ft/types.h"
 
-extern Fighter_DemoStrings ftMario_DemoMotionFilenames;
-extern char* ftMario_DemoViMotionFilenames[];
+extern Fighter_DemoStrings ftMr_Init_DemoMotionFilenames;
+extern char* ftMr_Init_DemoViMotionFilenames[];
 
 #endif

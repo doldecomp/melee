@@ -17,7 +17,7 @@
 /// @todo Fix common data struct
 #define COMMON_DATA_F32 ((f32*) p_ftCommonData)
 
-void ftSeak_80110490(Fighter* fp)
+void ftSk_SpecialS_80110490(Fighter* fp)
 {
     f32 v2, v3, v5, v6, v8;
 
@@ -67,7 +67,7 @@ void ftSeak_80110490(Fighter* fp)
         COMMON_DATA_F32[275] * (v8 - fp->sv.sk.specials.x14);
 }
 
-void ftSeak_80110610(HSD_GObj* gobj, s32 arg1, f32 arg2)
+void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, f32 arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     UNK_T* items = fp->x10C_ftData->x48_items;
@@ -85,7 +85,7 @@ void ftSeak_80110610(HSD_GObj* gobj, s32 arg1, f32 arg2)
         item = items[5];
     }
 
-    ftSeak_80110490(fp);
+    ftSk_SpecialS_80110490(fp);
 
     {
         f32 f = 0.0556F * fp->sv.sk.specials.x18 + 4;
@@ -120,7 +120,7 @@ void ftSeak_80110610(HSD_GObj* gobj, s32 arg1, f32 arg2)
     ftAnim_8006FA58(fp, 1, item[2]);
 }
 
-void ftSeak_80110788(HSD_GObj* gobj)
+void ftSk_SpecialS_80110788(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->ev.sk.lstick_delta.x =
@@ -203,12 +203,12 @@ void ftSeak_80110788(HSD_GObj* gobj)
     }
 }
 
-void ftSeak_8011097C(HSD_GObj* gobj)
+void ftSk_SpecialS_8011097C(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftSeak_UpdateHitboxes(HSD_GObj* gobj, Vec3* new_pos, s32 hitbox_id)
+void ftSk_SpecialS_UpdateHitboxes(HSD_GObj* gobj, Vec3* new_pos, s32 hitbox_id)
 {
     if (gobj == NULL) {
         return;
@@ -238,7 +238,7 @@ void ftSeak_UpdateHitboxes(HSD_GObj* gobj, Vec3* new_pos, s32 hitbox_id)
     }
 }
 
-void ftSeak_ZeroHitboxPositions(HSD_GObj* gobj)
+void ftSk_SpecialS_ZeroHitboxPositions(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     int i;
@@ -254,7 +254,7 @@ void ftSeak_ZeroHitboxPositions(HSD_GObj* gobj)
     }
 }
 
-void ftSeak_80110AEC(HSD_GObj* gobj)
+void ftSk_SpecialS_80110AEC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     int i;
@@ -267,7 +267,7 @@ void ftSeak_80110AEC(HSD_GObj* gobj)
         Fighter* fp_2 = GET_FIGHTER(gobj);
 
         /// @todo The inlines in this file are wrong; this block should be
-        ///       #ftSeak_ZeroHitboxPositions.
+        ///       #ftSk_SpecialS_ZeroHitboxPositions.
         for (i = 0; i < 4; i++) {
             fp_2->x914[i].x58.x = 0;
             fp_2->x914[i].x58.y = 0;
@@ -291,7 +291,7 @@ inline void ftSeakSpecialS_LoopChainHitCollisions(HSD_GObj* gobj)
         lbColl_80008428(&fp->x914[i]);
     }
 
-    ftSeak_ZeroHitboxPositions(gobj);
+    ftSk_SpecialS_ZeroHitboxPositions(gobj);
 }
 
 inline void ftSeakSpecialS_LoopChainHitActivate(HSD_GObj* gobj)
@@ -303,7 +303,7 @@ inline void ftSeakSpecialS_LoopChainHitActivate(HSD_GObj* gobj)
         lbColl_80008434(&fp->x914[i]);
     }
 
-    ftSeak_ZeroHitboxPositions(gobj);
+    ftSk_SpecialS_ZeroHitboxPositions(gobj);
     fp->x2219_flag.bits.b3 = true;
 }
 
@@ -317,7 +317,7 @@ inline f32 sumOfSquares(f32 a, f32 b)
     return a + c;
 }
 
-void ftSeak_80110BCC(HSD_GObj* gobj)
+void ftSk_SpecialS_80110BCC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     HSD_GObj* item_gobj = fp->ev.sk.x2234;
@@ -380,18 +380,18 @@ void ftSeak_80110BCC(HSD_GObj* gobj)
     }
 }
 
-void ftSeak_80110E4C(HSD_GObj* gobj)
+void ftSk_SpecialS_80110E4C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftSeak_ChainSomething(gobj);
+    ftSk_SpecialS_ChainSomething(gobj);
 
     fp->ev.sk.x2234 = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
-void ftSeak_CheckAndDestroyChain(HSD_GObj* gobj)
+void ftSk_SpecialS_CheckAndDestroyChain(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -408,14 +408,14 @@ void ftSeak_CheckAndDestroyChain(HSD_GObj* gobj)
 
     fp = gobj->user_data;
 
-    ftSeak_ChainSomething(gobj);
+    ftSk_SpecialS_ChainSomething(gobj);
 
     fp->ev.sk.x2234 = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
-void ftSeak_80110EE8(HSD_GObj* gobj)
+void ftSk_SpecialS_80110EE8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -424,7 +424,7 @@ void ftSeak_80110EE8(HSD_GObj* gobj)
     }
 }
 
-void ftSeak_ChainSomething(HSD_GObj* gobj)
+void ftSk_SpecialS_ChainSomething(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -434,19 +434,19 @@ void ftSeak_ChainSomething(HSD_GObj* gobj)
     }
 }
 
-f32 ftSeak_80110F58(HSD_GObj* gobj)
+f32 ftSk_SpecialS_80110F58(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->input.x620_lstick_x;
 }
 
-f32 ftSeak_80110F64(HSD_GObj* gobj)
+f32 ftSk_SpecialS_80110F64(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->input.x624_lstick_y;
 }
 
-void ftSeak_80110F70(HSD_GObj* gobj)
+void ftSk_SpecialS_80110F70(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->x2200_ftcmd_var0 = 0;
@@ -486,27 +486,27 @@ void ftSeak_80110F70(HSD_GObj* gobj)
     }
 
     fp->x2222_flag.bits.b2 = true;
-    fp->cb.x21BC_callback_Accessory4 = &ftSeak_8011097C;
+    fp->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
 }
 
-void ftSeak_SpecialS_StartMotion(HSD_GObj* gobj)
+void ftSk_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 349, 0, NULL, 0.0, 1, 0);
     ftAnim_8006EBA4(gobj);
-    ftSeak_80110F70(gobj);
+    ftSk_SpecialS_80110F70(gobj);
 }
 
-void ftSeak_SpecialAirS_StartMotion(HSD_GObj* gobj)
+void ftSk_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x80_self_vel.y = 0;
 
     Fighter_ChangeMotionState(gobj, 352, 0, NULL, 0.0, 1, 0);
     ftAnim_8006EBA4(gobj);
-    ftSeak_80110F70(gobj);
+    ftSk_SpecialS_80110F70(gobj);
 }
 
-bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* gobj)
+bool ftSk_SpecialS_CheckInitChain(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -541,12 +541,12 @@ bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* gobj)
         fp2->x1984_heldItemSpec = fp2->ev.sk.x2234;
 
         if (fp2->ev.sk.x2234 != NULL) {
-            fp2->cb.x21E4_callback_OnDeath2 = &ftSeak_80110198;
-            fp2->cb.x21DC_callback_OnTakeDamage = &ftSeak_80110198;
+            fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
+            fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
         }
 
-        fp2->cb.x21D4_callback_EnterHitlag = &ftSeak_80110EE8;
-        fp2->cb.x21D8_callback_ExitHitlag = &ftSeak_ChainSomething;
+        fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
+        fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
         fp->sv.sk.specials.x1C = specialAttributes->x18;
 
         if (fp->ev.sk.x2234 == NULL) {
@@ -586,36 +586,36 @@ bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* gobj)
     return false;
 }
 
-void ftSeak_SpecialS_Anim(HSD_GObj* gobj)
+void ftSk_SpecialSStart_Anim(HSD_GObj* gobj)
 {
-    if (ftSeak_SpecialS_CheckInitChain(gobj)) {
-        ftSeak_80111830(gobj);
+    if (ftSk_SpecialS_CheckInitChain(gobj)) {
+        ftSk_SpecialS_80111830(gobj);
     }
 }
 
-void ftSeak_80111308(HSD_GObj* gobj)
+void ftSk_SpecialAirSStart_Anim(HSD_GObj* gobj)
 {
-    if (ftSeak_SpecialS_CheckInitChain(gobj)) {
-        ftSeak_80111988(gobj);
+    if (ftSk_SpecialS_CheckInitChain(gobj)) {
+        ftSk_SpecialS_80111988(gobj);
     }
 }
 
-void ftSeak_80111344(HSD_GObj* gobj)
+void ftSk_SpecialSStart_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftSeak_80111348(HSD_GObj* gobj)
+void ftSk_SpecialAirSStart_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftSeak_8011134C(HSD_GObj* gobj)
+void ftSk_SpecialSStart_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftSeak_8011136C(HSD_GObj* gobj)
+void ftSk_SpecialAirSStart_Phys(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -633,17 +633,17 @@ void ftSeak_8011136C(HSD_GObj* gobj)
     ftCommon_8007CE94(fp, fighter_attr->x180_AerialFriction);
 }
 
-void ftSeak_801113C8(HSD_GObj* gobj)
+void ftSk_SpecialSStart_Coll(HSD_GObj* gobj)
 {
     if (!ft_800827A0(gobj)) {
-        ftSeak_80111440(gobj);
+        ftSk_SpecialS_80111440(gobj);
     }
 }
 
-void ftSeak_80111404(HSD_GObj* gobj)
+void ftSk_SpecialAirSStart_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
-        ftSeak_801114E4(gobj);
+        ftSk_SpecialS_801114E4(gobj);
     }
 }
 
@@ -654,7 +654,7 @@ static Fighter_MotionStateChangeFlags const transition_flags =
     FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
     FtStateChange_Unk_27;
 
-void ftSeak_80111440(HSD_GObj* gobj)
+void ftSk_SpecialS_80111440(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -668,17 +668,17 @@ void ftSeak_80111440(HSD_GObj* gobj)
         Fighter* fp2 = GET_FIGHTER(gobj);
 
         if (fp2->ev.sk.x2234 != NULL) {
-            fp2->cb.x21E4_callback_OnDeath2 = &ftSeak_80110198;
-            fp2->cb.x21DC_callback_OnTakeDamage = &ftSeak_80110198;
+            fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
+            fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
         }
 
-        fp2->cb.x21BC_callback_Accessory4 = &ftSeak_8011097C;
-        fp2->cb.x21D4_callback_EnterHitlag = &ftSeak_80110EE8;
-        fp2->cb.x21D8_callback_ExitHitlag = &ftSeak_ChainSomething;
+        fp2->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
+        fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
+        fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
     }
 }
 
-void ftSeak_801114E4(HSD_GObj* gobj)
+void ftSk_SpecialS_801114E4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -690,17 +690,17 @@ void ftSeak_801114E4(HSD_GObj* gobj)
         Fighter* fp2 = GET_FIGHTER(gobj);
 
         if (fp2->ev.sk.x2234 != NULL) {
-            fp2->cb.x21E4_callback_OnDeath2 = &ftSeak_80110198;
-            fp2->cb.x21DC_callback_OnTakeDamage = &ftSeak_80110198;
+            fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
+            fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
         }
 
-        fp2->cb.x21BC_callback_Accessory4 = &ftSeak_8011097C;
-        fp2->cb.x21D4_callback_EnterHitlag = &ftSeak_80110EE8;
-        fp2->cb.x21D8_callback_ExitHitlag = &ftSeak_ChainSomething;
+        fp2->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
+        fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
+        fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
     }
 }
 
-void ftSeak_80111588(HSD_GObj* gobj)
+void ftSk_SpecialSLoop_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -710,7 +710,7 @@ void ftSeak_80111588(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
 
-    ftSeak_80110BCC(gobj);
+    ftSk_SpecialS_80110BCC(gobj);
 
     fp->sv.sk.specials.x0 += 1;
 
@@ -726,15 +726,15 @@ void ftSeak_80111588(HSD_GObj* gobj)
         }
 
         if (result) {
-            ftSeak_80111DF8(gobj);
+            ftSk_SpecialS_80111DF8(gobj);
             return;
         }
     }
 
-    ftSeak_80110610(gobj, 305, 1);
+    ftSk_SpecialS_80110610(gobj, 305, 1);
 }
 
-void ftSeak_80111648(HSD_GObj* gobj)
+void ftSk_SpecialAirSLoop_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -744,7 +744,7 @@ void ftSeak_80111648(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
 
-    ftSeak_80110BCC(gobj);
+    ftSk_SpecialS_80110BCC(gobj);
     fp->sv.sk.specials.x0 += 1;
 
     {
@@ -759,15 +759,15 @@ void ftSeak_80111648(HSD_GObj* gobj)
         }
 
         if (result) {
-            ftSeak_80111EB4(gobj);
+            ftSk_SpecialS_80111EB4(gobj);
             return;
         }
     }
 
-    ftSeak_80110610(gobj, 308, 1);
+    ftSk_SpecialS_80110610(gobj, 308, 1);
 }
 
-void ftSeak_80111708(HSD_GObj* gobj)
+void ftSk_SpecialSLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -775,10 +775,10 @@ void ftSeak_80111708(HSD_GObj* gobj)
         fp->sv.sk.specials.x4 = true;
     }
 
-    ftSeak_80110788(gobj);
+    ftSk_SpecialS_80110788(gobj);
 }
 
-void ftSeak_80111740(HSD_GObj* gobj)
+void ftSk_SpecialAirSLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -786,34 +786,34 @@ void ftSeak_80111740(HSD_GObj* gobj)
         fp->sv.sk.specials.x4 = true;
     }
 
-    ftSeak_80110788(gobj);
+    ftSk_SpecialS_80110788(gobj);
 }
 
-void ftSeak_80111778(HSD_GObj* gobj)
+void ftSk_SpecialSLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftSeak_80111798(HSD_GObj* gobj)
+void ftSk_SpecialAirSLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
-void ftSeak_801117B8(HSD_GObj* gobj)
+void ftSk_SpecialSLoop_Coll(HSD_GObj* gobj)
 {
     if (!ft_800827A0(gobj)) {
-        ftSeak_80111DF8(gobj);
+        ftSk_SpecialS_80111DF8(gobj);
     }
 }
 
-void ftSeak_801117F4(HSD_GObj* gobj)
+void ftSk_SpecialAirSLoop_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
-        ftSeak_80111EB4(gobj);
+        ftSk_SpecialS_80111EB4(gobj);
     }
 }
 
-void ftSeak_80111830(HSD_GObj* gobj)
+void ftSk_SpecialS_80111830(HSD_GObj* gobj)
 {
     /// @todo Split into two functions, one with @var fp and one with @var fp2
     Vec3 vec0;
@@ -823,22 +823,22 @@ void ftSeak_80111830(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     Fighter_ChangeMotionState(gobj, 350, 8, NULL, 0.0, 1, 0);
-    ftSeak_80110610(gobj, 305, 0);
+    ftSk_SpecialS_80110610(gobj, 305, 0);
 
     fp2 = gobj->user_data;
     fp2->sv.sk.specials.x0 = 0;
 
-    ftSeak_80110AEC(gobj);
+    ftSk_SpecialS_80110AEC(gobj);
 
     if (fp2->ev.sk.x2234 != NULL) {
-        fp2->cb.x21E4_callback_OnDeath2 = &ftSeak_80110198;
-        fp2->cb.x21DC_callback_OnTakeDamage = &ftSeak_80110198;
+        fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
+        fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
     }
 
     fp2->x2222_flag.bits.b2 = true;
-    fp2->cb.x21BC_callback_Accessory4 = &ftSeak_8011097C;
-    fp2->cb.x21D4_callback_EnterHitlag = &ftSeak_80110EE8;
-    fp2->cb.x21D8_callback_ExitHitlag = &ftSeak_ChainSomething;
+    fp2->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
+    fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
+    fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
 
     {
         f32 ecb_top;
@@ -855,39 +855,39 @@ void ftSeak_80111830(HSD_GObj* gobj)
         lb_8000B1CC(fp->x5E8_fighterBones[26].x0_jobj, NULL, &vec1);
 
         {
-            s32 flags = ftNess_YoyoCheckEnvColl(gobj, &vec0, &vec1, 0.5F);
+            s32 flags = ftNs_AttackHi4_YoyoCheckEnvColl(gobj, &vec0, &vec1, 0.5F);
 
             if (flags != 0) {
-                ftSeak_80111DF8(gobj);
+                ftSk_SpecialS_80111DF8(gobj);
             }
         }
     }
 }
 
-void ftSeak_80111988(HSD_GObj* gobj)
+void ftSk_SpecialS_80111988(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 353, 8, NULL, 0.0, 1.0, 0.0);
-    ftSeak_80110610(gobj, 308, 0.0);
+    ftSk_SpecialS_80110610(gobj, 308, 0.0);
 
     {
         Fighter* fp = gobj->user_data;
         fp->sv.sk.specials.x0 = 0;
 
-        ftSeak_80110AEC(gobj);
+        ftSk_SpecialS_80110AEC(gobj);
 
         if (fp->ev.sk.x2234 != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = &ftSeak_80110198;
-            fp->cb.x21DC_callback_OnTakeDamage = &ftSeak_80110198;
+            fp->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
+            fp->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
         }
 
         fp->x2222_flag.bits.b2 = true;
-        fp->cb.x21BC_callback_Accessory4 = &ftSeak_8011097C;
-        fp->cb.x21D4_callback_EnterHitlag = &ftSeak_80110EE8;
-        fp->cb.x21D8_callback_ExitHitlag = &ftSeak_ChainSomething;
+        fp->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
+        fp->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
+        fp->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
     }
 }
 
-void ftSeak_80111A48(HSD_GObj* gobj)
+void ftSk_SpecialSEnd_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -920,7 +920,7 @@ void ftSeak_80111A48(HSD_GObj* gobj)
             it_802BB20C(item_gobj);
         } else {
         inner_ret:
-            ftSeak_80110BCC(gobj);
+            ftSk_SpecialS_80110BCC(gobj);
         }
     }
 
@@ -929,7 +929,7 @@ void ftSeak_80111A48(HSD_GObj* gobj)
     }
 }
 
-void ftSeak_80111B1C(HSD_GObj* gobj)
+void ftSk_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -958,7 +958,7 @@ void ftSeak_80111B1C(HSD_GObj* gobj)
             it_802BB20C(item_gobj);
         } else {
         inner_ret:
-            ftSeak_80110BCC(gobj);
+            ftSk_SpecialS_80110BCC(gobj);
         }
 
         if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -967,42 +967,42 @@ void ftSeak_80111B1C(HSD_GObj* gobj)
     }
 }
 
-void ftSeak_80111BF0(HSD_GObj* gobj)
+void ftSk_SpecialSEnd_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftSeak_80111BF4(HSD_GObj* gobj)
+void ftSk_SpecialAirSEnd_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftSeak_80111BF8(HSD_GObj* gobj)
+void ftSk_SpecialSEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftSeak_80111C18(HSD_GObj* gobj)
+void ftSk_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
-void ftSeak_80111C38(HSD_GObj* gobj)
+void ftSk_SpecialSEnd_Coll(HSD_GObj* gobj)
 {
     if (!ft_800827A0(gobj)) {
-        ftSeak_80111CB0(gobj);
+        ftSk_SpecialS_80111CB0(gobj);
     }
 }
 
 // Collision_SheikChainAir
-void ftSeak_80111C74(HSD_GObj* gobj)
+void ftSk_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
-        ftSeak_80111D54(gobj);
+        ftSk_SpecialS_80111D54(gobj);
     }
 }
 
-void ftSeak_80111CB0(HSD_GObj* gobj)
+void ftSk_SpecialS_80111CB0(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -1019,18 +1019,18 @@ void ftSeak_80111CB0(HSD_GObj* gobj)
         Fighter* fp2 = gobj->user_data;
 
         if (fp2->ev.sk.x2234 != NULL) {
-            fp2->cb.x21E4_callback_OnDeath2 = &ftSeak_80110198;
-            fp2->cb.x21DC_callback_OnTakeDamage = &ftSeak_80110198;
+            fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
+            fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
         }
 
-        fp2->cb.x21BC_callback_Accessory4 = &ftSeak_8011097C;
-        fp2->cb.x21D4_callback_EnterHitlag = &ftSeak_80110EE8;
-        fp2->cb.x21D8_callback_ExitHitlag = &ftSeak_ChainSomething;
+        fp2->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
+        fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
+        fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
     }
 }
 
 // AS_SheikRetractChainGround
-void ftSeak_80111D54(HSD_GObj* gobj)
+void ftSk_SpecialS_80111D54(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
@@ -1042,17 +1042,17 @@ void ftSeak_80111D54(HSD_GObj* gobj)
         Fighter* fp2 = GET_FIGHTER(gobj);
 
         if (fp2->ev.sk.x2234 != NULL) {
-            fp2->cb.x21E4_callback_OnDeath2 = &ftSeak_80110198;
-            fp2->cb.x21DC_callback_OnTakeDamage = &ftSeak_80110198;
+            fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
+            fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
         }
 
-        fp2->cb.x21BC_callback_Accessory4 = &ftSeak_8011097C;
-        fp2->cb.x21D4_callback_EnterHitlag = &ftSeak_80110EE8;
-        fp2->cb.x21D8_callback_ExitHitlag = &ftSeak_ChainSomething;
+        fp2->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
+        fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
+        fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
     }
 }
 
-void ftSeak_80111DF8(HSD_GObj* gobj)
+void ftSk_SpecialS_80111DF8(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 351, 8, NULL, 0, 1, 0);
 
@@ -1061,22 +1061,22 @@ void ftSeak_80111DF8(HSD_GObj* gobj)
         fp->sv.sk.specials.x0 = 0;
 
         if (fp->sv.sk.specials.x1C != 0) {
-            ftSeak_80110AEC(gobj);
+            ftSk_SpecialS_80110AEC(gobj);
         }
 
         if (fp->ev.sk.x2234 != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = &ftSeak_80110198;
-            fp->cb.x21DC_callback_OnTakeDamage = &ftSeak_80110198;
+            fp->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
+            fp->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
         }
 
         fp->x2222_flag.bits.b2 = true;
-        fp->cb.x21BC_callback_Accessory4 = &ftSeak_8011097C;
-        fp->cb.x21D4_callback_EnterHitlag = &ftSeak_80110EE8;
-        fp->cb.x21D8_callback_ExitHitlag = &ftSeak_ChainSomething;
+        fp->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
+        fp->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
+        fp->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
     }
 }
 
-void ftSeak_80111EB4(HSD_GObj* gobj)
+void ftSk_SpecialS_80111EB4(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 354, 8, NULL, 0, 1, 0);
 
@@ -1085,22 +1085,22 @@ void ftSeak_80111EB4(HSD_GObj* gobj)
         fp->sv.sk.specials.x0 = 0;
 
         if (fp->sv.sk.specials.x1C != 0) {
-            ftSeak_80110AEC(gobj);
+            ftSk_SpecialS_80110AEC(gobj);
         }
 
         if (fp->ev.sk.x2234 != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = &ftSeak_80110198;
-            fp->cb.x21DC_callback_OnTakeDamage = &ftSeak_80110198;
+            fp->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
+            fp->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
         }
 
         fp->x2222_flag.bits.b2 = true;
-        fp->cb.x21BC_callback_Accessory4 = &ftSeak_8011097C;
-        fp->cb.x21D4_callback_EnterHitlag = &ftSeak_80110EE8;
-        fp->cb.x21D8_callback_ExitHitlag = &ftSeak_ChainSomething;
+        fp->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
+        fp->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
+        fp->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
     }
 }
 
-bool ftSeak_80111F70(HSD_GObj* gobj)
+bool ftSk_SpecialS_80111F70(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -1115,7 +1115,7 @@ bool ftSeak_80111F70(HSD_GObj* gobj)
     return true;
 }
 
-int ftSeak_80111FA0(HSD_GObj* gobj)
+int ftSk_SpecialS_80111FA0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 

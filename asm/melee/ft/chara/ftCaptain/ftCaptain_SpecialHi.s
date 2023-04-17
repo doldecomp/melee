@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftCaptain_800E3EAC
-ftCaptain_800E3EAC:
+.global ftCa_SpecialHi_800E3EAC
+ftCa_SpecialHi_800E3EAC:
 /* 800E3EAC 000E0A8C  7C 08 02 A6 */	mflr r0
 /* 800E3EB0 000E0A90  90 01 00 04 */	stw r0, 4(r1)
 /* 800E3EB4 000E0A94  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -33,7 +33,7 @@ ftCaptain_800E3EAC:
 /* 800E3F0C 000E0AEC  2C 00 01 65 */	cmpwi r0, 0x165
 /* 800E3F10 000E0AF0  40 82 00 20 */	bne .L_800E3F30
 # SPLIT NO LATER THAN HERE
-/* 800E3F14 000E0AF4  C0 02 98 40 */	lfs f0, lbl_804D9220/*0.0f*/@sda21(r2)
+/* 800E3F14 000E0AF4  C0 02 98 40 */	lfs f0, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
 /* 800E3F18 000E0AF8  38 7F 00 00 */	addi r3, r31, 0
 /* 800E3F1C 000E0AFC  38 80 00 0E */	li r4, 0xe
 /* 800E3F20 000E0B00  D0 01 00 1C */	stfs f0, 0x1c(r1)
@@ -43,7 +43,7 @@ ftCaptain_800E3EAC:
 .L_800E3F30:
 /* 800E3F30 000E0B10  2C 00 01 67 */	cmpwi r0, 0x167
 /* 800E3F34 000E0B14  40 82 00 24 */	bne .L_800E3F58
-/* 800E3F38 000E0B18  C0 22 98 44 */	lfs f1, lbl_804D9224/*0.01745329238474369f*/@sda21(r2)
+/* 800E3F38 000E0B18  C0 22 98 44 */	lfs f1, ftCa_SpecialHi_804D9224/*0.01745329238474369f*/@sda21(r2)
 /* 800E3F3C 000E0B1C  7F E3 FB 78 */	mr r3, r31
 /* 800E3F40 000E0B20  C0 04 00 70 */	lfs f0, 0x70(r4)
 /* 800E3F44 000E0B24  38 80 00 09 */	li r4, 9
@@ -102,8 +102,8 @@ ftCaptain_800E3EAC:
 /* 800E4000 000E0BE0  38 21 00 30 */	addi r1, r1, 0x30
 /* 800E4004 000E0BE4  7C 08 03 A6 */	mtlr r0
 /* 800E4008 000E0BE8  4E 80 00 20 */	blr
-.global ftCaptain_800E400C
-ftCaptain_800E400C:
+.global ftCa_SpecialHi_800E400C
+ftCa_SpecialHi_800E400C:
 /* 800E400C 000E0BEC  80 A3 00 2C */	lwz r5, 0x2c(r3)
 /* 800E4010 000E0BF0  80 85 02 D4 */	lwz r4, 0x2d4(r5)
 /* 800E4014 000E0BF4  A0 65 23 40 */	lhz r3, 0x2340(r5)
@@ -118,8 +118,8 @@ ftCaptain_800E400C:
 /* 800E4038 000E0C18  D0 05 23 44 */	stfs f0, 0x2344(r5)
 /* 800E403C 000E0C1C  4E 80 00 20 */	blr
 
-.global ftCaptain_SpecialLw_StartMotion
-ftCaptain_SpecialLw_StartMotion:
+.global ftCa_SpecialLw_Enter
+ftCa_SpecialLw_Enter:
 /* 800E4040 000E0C20  7C 08 02 A6 */	mflr r0
 /* 800E4044 000E0C24  38 80 01 65 */	li r4, 0x165
 /* 800E4048 000E0C28  90 01 00 04 */	stw r0, 4(r1)
@@ -136,15 +136,15 @@ ftCaptain_SpecialLw_StartMotion:
 /* 800E4074 000E0C54  90 1F 22 00 */	stw r0, 0x2200(r31)
 /* 800E4078 000E0C58  90 1F 22 10 */	stw r0, 0x2210(r31)
 /* 800E407C 000E0C5C  B0 1F 23 40 */	sth r0, 0x2340(r31)
-/* 800E4080 000E0C60  C0 42 98 48 */	lfs f2, lbl_804D9228/*1.0f*/@sda21(r2)
+/* 800E4080 000E0C60  C0 42 98 48 */	lfs f2, ftCa_SpecialHi_804D9228/*1.0f*/@sda21(r2)
 /* 800E4084 000E0C64  D0 5F 23 44 */	stfs f2, 0x2344(r31)
-/* 800E4088 000E0C68  C0 22 98 40 */	lfs f1, lbl_804D9220/*0.0f*/@sda21(r2)
+/* 800E4088 000E0C68  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
 /* 800E408C 000E0C6C  FC 60 08 90 */	fmr f3, f1
 /* 800E4090 000E0C70  4B F8 53 1D */	bl Fighter_ChangeMotionState
 /* 800E4094 000E0C74  7F C3 F3 78 */	mr r3, r30
 /* 800E4098 000E0C78  4B F8 AB 0D */	bl ftAnim_8006EBA4
-/* 800E409C 000E0C7C  3C 60 80 0E */	lis r3, ftCaptain_800E400C@ha
-/* 800E40A0 000E0C80  38 03 40 0C */	addi r0, r3, ftCaptain_800E400C@l
+/* 800E409C 000E0C7C  3C 60 80 0E */	lis r3, ftCa_SpecialHi_800E400C@ha
+/* 800E40A0 000E0C80  38 03 40 0C */	addi r0, r3, ftCa_SpecialHi_800E400C@l
 /* 800E40A4 000E0C84  3C 60 80 06 */	lis r3, efLib_PauseAll@ha
 /* 800E40A8 000E0C88  90 1F 21 C0 */	stw r0, 0x21c0(r31)
 /* 800E40AC 000E0C8C  38 03 BA 40 */	addi r0, r3, efLib_PauseAll@l
@@ -159,8 +159,8 @@ ftCaptain_SpecialLw_StartMotion:
 /* 800E40D0 000E0CB0  7C 08 03 A6 */	mtlr r0
 /* 800E40D4 000E0CB4  4E 80 00 20 */	blr
 
-.global ftCaptain_SpecialAirLw_StartMotion
-ftCaptain_SpecialAirLw_StartMotion:
+.global ftCa_SpecialAirLw_Enter
+ftCa_SpecialAirLw_Enter:
 /* 800E40D8 000E0CB8  7C 08 02 A6 */	mflr r0
 /* 800E40DC 000E0CBC  38 80 01 67 */	li r4, 0x167
 /* 800E40E0 000E0CC0  90 01 00 04 */	stw r0, 4(r1)
@@ -176,8 +176,8 @@ ftCaptain_SpecialAirLw_StartMotion:
 /* 800E4108 000E0CE8  90 1F 22 04 */	stw r0, 0x2204(r31)
 /* 800E410C 000E0CEC  90 1F 22 00 */	stw r0, 0x2200(r31)
 /* 800E4110 000E0CF0  90 1F 22 10 */	stw r0, 0x2210(r31)
-/* 800E4114 000E0CF4  C0 22 98 40 */	lfs f1, lbl_804D9220/*0.0f*/@sda21(r2)
-/* 800E4118 000E0CF8  C0 42 98 48 */	lfs f2, lbl_804D9228/*1.0f*/@sda21(r2)
+/* 800E4114 000E0CF4  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
+/* 800E4118 000E0CF8  C0 42 98 48 */	lfs f2, ftCa_SpecialHi_804D9228/*1.0f*/@sda21(r2)
 /* 800E411C 000E0CFC  FC 60 08 90 */	fmr f3, f1
 /* 800E4120 000E0D00  4B F8 52 8D */	bl Fighter_ChangeMotionState
 /* 800E4124 000E0D04  7F C3 F3 78 */	mr r3, r30
@@ -195,8 +195,8 @@ ftCaptain_SpecialAirLw_StartMotion:
 /* 800E4154 000E0D34  7C 08 03 A6 */	mtlr r0
 /* 800E4158 000E0D38  4E 80 00 20 */	blr
 
-.global ftCaptain_800E415C
-ftCaptain_800E415C:
+.global ftCa_SpecialLw_Anim
+ftCa_SpecialLw_Anim:
 /* 800E415C 000E0D3C  7C 08 02 A6 */	mflr r0
 /* 800E4160 000E0D40  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4164 000E0D44  94 21 FF B8 */	stwu r1, -0x48(r1)
@@ -220,7 +220,7 @@ ftCaptain_800E415C:
 /* 800E41AC 000E0D8C  90 1E 22 00 */	stw r0, 0x2200(r30)
 /* 800E41B0 000E0D90  90 1E 22 10 */	stw r0, 0x2210(r30)
 /* 800E41B4 000E0D94  4B F9 96 49 */	bl ftCommon_8007D7FC
-/* 800E41B8 000E0D98  C0 22 98 40 */	lfs f1, lbl_804D9220/*0.0f*/@sda21(r2)
+/* 800E41B8 000E0D98  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
 /* 800E41BC 000E0D9C  7F A3 EB 78 */	mr r3, r29
 /* 800E41C0 000E0DA0  C0 5F 00 7C */	lfs f2, 0x7c(r31)
 /* 800E41C4 000E0DA4  38 80 01 66 */	li r4, 0x166
@@ -244,9 +244,9 @@ ftCaptain_800E415C:
 /* 800E4208 000E0DE8  90 1E 22 00 */	stw r0, 0x2200(r30)
 /* 800E420C 000E0DEC  90 1E 22 10 */	stw r0, 0x2210(r30)
 /* 800E4210 000E0DF0  4B F9 93 C5 */	bl ftCommon_8007D5D4
-/* 800E4214 000E0DF4  C0 22 98 40 */	lfs f1, lbl_804D9220/*0.0f*/@sda21(r2)
+/* 800E4214 000E0DF4  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
 /* 800E4218 000E0DF8  7F A3 EB 78 */	mr r3, r29
-/* 800E421C 000E0DFC  C0 42 98 48 */	lfs f2, lbl_804D9228/*1.0f*/@sda21(r2)
+/* 800E421C 000E0DFC  C0 42 98 48 */	lfs f2, ftCa_SpecialHi_804D9228/*1.0f*/@sda21(r2)
 /* 800E4220 000E0E00  38 80 01 6A */	li r4, 0x16a
 /* 800E4224 000E0E04  FC 60 08 90 */	fmr f3, f1
 /* 800E4228 000E0E08  38 A0 00 00 */	li r5, 0
@@ -267,8 +267,8 @@ ftCaptain_800E415C:
 /* 800E4260 000E0E40  7C 08 03 A6 */	mtlr r0
 /* 800E4264 000E0E44  4E 80 00 20 */	blr
 
-.global ftCaptain_800E4268
-ftCaptain_800E4268:
+.global ftCa_SpecialLwGroundEnd_Anim
+ftCa_SpecialLwGroundEnd_Anim:
 /* 800E4268 000E0E48  7C 08 02 A6 */	mflr r0
 /* 800E426C 000E0E4C  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4270 000E0E50  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -286,8 +286,8 @@ ftCaptain_800E4268:
 /* 800E429C 000E0E7C  7C 08 03 A6 */	mtlr r0
 /* 800E42A0 000E0E80  4E 80 00 20 */	blr
 
-.global ftCaptain_800E42A4
-ftCaptain_800E42A4:
+.global ftCa_SpecialLwAirEnd_Anim
+ftCa_SpecialLwAirEnd_Anim:
 /* 800E42A4 000E0E84  7C 08 02 A6 */	mflr r0
 /* 800E42A8 000E0E88  90 01 00 04 */	stw r0, 4(r1)
 /* 800E42AC 000E0E8C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -305,8 +305,8 @@ ftCaptain_800E42A4:
 /* 800E42D8 000E0EB8  7C 08 03 A6 */	mtlr r0
 /* 800E42DC 000E0EBC  4E 80 00 20 */	blr
 
-.global ftCaptain_800E42E0
-ftCaptain_800E42E0:
+.global ftCa_SpecialAirLw_Anim
+ftCa_SpecialAirLw_Anim:
 /* 800E42E0 000E0EC0  7C 08 02 A6 */	mflr r0
 /* 800E42E4 000E0EC4  90 01 00 04 */	stw r0, 4(r1)
 /* 800E42E8 000E0EC8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -323,9 +323,9 @@ ftCaptain_800E42E0:
 /* 800E4314 000E0EF4  90 04 22 00 */	stw r0, 0x2200(r4)
 /* 800E4318 000E0EF8  90 04 22 10 */	stw r0, 0x2210(r4)
 /* 800E431C 000E0EFC  4B F9 92 B9 */	bl ftCommon_8007D5D4
-/* 800E4320 000E0F00  C0 22 98 40 */	lfs f1, lbl_804D9220/*0.0f*/@sda21(r2)
+/* 800E4320 000E0F00  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
 /* 800E4324 000E0F04  7F E3 FB 78 */	mr r3, r31
-/* 800E4328 000E0F08  C0 42 98 48 */	lfs f2, lbl_804D9228/*1.0f*/@sda21(r2)
+/* 800E4328 000E0F08  C0 42 98 48 */	lfs f2, ftCa_SpecialHi_804D9228/*1.0f*/@sda21(r2)
 /* 800E432C 000E0F0C  38 80 01 69 */	li r4, 0x169
 /* 800E4330 000E0F10  FC 60 08 90 */	fmr f3, f1
 /* 800E4334 000E0F14  38 A0 00 00 */	li r5, 0
@@ -338,8 +338,8 @@ ftCaptain_800E42E0:
 /* 800E434C 000E0F2C  7C 08 03 A6 */	mtlr r0
 /* 800E4350 000E0F30  4E 80 00 20 */	blr
 
-.global ftCaptain_800E4354
-ftCaptain_800E4354:
+.global ftCa_SpecialAirLwGroundEnd_Anim
+ftCa_SpecialAirLwGroundEnd_Anim:
 /* 800E4354 000E0F34  7C 08 02 A6 */	mflr r0
 /* 800E4358 000E0F38  90 01 00 04 */	stw r0, 4(r1)
 /* 800E435C 000E0F3C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -357,8 +357,8 @@ ftCaptain_800E4354:
 /* 800E4388 000E0F68  7C 08 03 A6 */	mtlr r0
 /* 800E438C 000E0F6C  4E 80 00 20 */	blr
 
-.global ftCaptain_800E4390
-ftCaptain_800E4390:
+.global ftCa_SpecialAirLwAirEnd_Anim
+ftCa_SpecialAirLwAirEnd_Anim:
 /* 800E4390 000E0F70  7C 08 02 A6 */	mflr r0
 /* 800E4394 000E0F74  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4398 000E0F78  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -376,8 +376,8 @@ ftCaptain_800E4390:
 /* 800E43C4 000E0FA4  7C 08 03 A6 */	mtlr r0
 /* 800E43C8 000E0FA8  4E 80 00 20 */	blr
 
-.global ftCaptain_800E43CC
-ftCaptain_800E43CC:
+.global ftCa_SpecialLwRebound_Anim
+ftCa_SpecialLwRebound_Anim:
 /* 800E43CC 000E0FAC  7C 08 02 A6 */	mflr r0
 /* 800E43D0 000E0FB0  90 01 00 04 */	stw r0, 4(r1)
 /* 800E43D4 000E0FB4  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -395,8 +395,8 @@ ftCaptain_800E43CC:
 /* 800E4400 000E0FE0  7C 08 03 A6 */	mtlr r0
 /* 800E4404 000E0FE4  4E 80 00 20 */	blr
 
-.global ftCaptain_800E4408
-ftCaptain_800E4408:
+.global ftCa_SpecialLw_Phys
+ftCa_SpecialLw_Phys:
 /* 800E4408 000E0FE8  7C 08 02 A6 */	mflr r0
 /* 800E440C 000E0FEC  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4410 000E0FF0  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -414,7 +414,7 @@ ftCaptain_800E4408:
 /* 800E4440 000E1020  4B FA 0C 49 */	bl ft_80085088
 /* 800E4444 000E1024  48 00 00 1C */	b .L_800E4460
 .L_800E4448:
-/* 800E4448 000E1028  C0 22 98 40 */	lfs f1, lbl_804D9220/*0.0f*/@sda21(r2)
+/* 800E4448 000E1028  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
 /* 800E444C 000E102C  38 7F 00 00 */	addi r3, r31, 0
 /* 800E4450 000E1030  38 80 00 00 */	li r4, 0
 /* 800E4454 000E1034  4B F9 18 61 */	bl ftParts_80075CB4
@@ -429,7 +429,7 @@ ftCaptain_800E4408:
 /* 800E4474 000E1054  C0 1F 00 84 */	lfs f0, 0x84(r31)
 /* 800E4478 000E1058  EC 00 00 72 */	fmuls f0, f0, f1
 /* 800E447C 000E105C  D0 1F 00 84 */	stfs f0, 0x84(r31)
-/* 800E4480 000E1060  4B FF FA 2D */	bl ftCaptain_800E3EAC
+/* 800E4480 000E1060  4B FF FA 2D */	bl ftCa_SpecialHi_800E3EAC
 /* 800E4484 000E1064  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 800E4488 000E1068  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 800E448C 000E106C  83 C1 00 10 */	lwz r30, 0x10(r1)
@@ -437,8 +437,8 @@ ftCaptain_800E4408:
 /* 800E4494 000E1074  7C 08 03 A6 */	mtlr r0
 /* 800E4498 000E1078  4E 80 00 20 */	blr
 
-.global ftCaptain_800E449C
-ftCaptain_800E449C:
+.global ftCa_SpecialLwGroundEnd_Phys
+ftCa_SpecialLwGroundEnd_Phys:
 /* 800E449C 000E107C  7C 08 02 A6 */	mflr r0
 /* 800E44A0 000E1080  90 01 00 04 */	stw r0, 4(r1)
 /* 800E44A4 000E1084  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -469,7 +469,7 @@ ftCaptain_800E449C:
 /* 800E4504 000E10E4  4B FA 0A 39 */	bl ft_80084F3C
 /* 800E4508 000E10E8  48 00 00 1C */	b .L_800E4524
 .L_800E450C:
-/* 800E450C 000E10EC  C0 22 98 40 */	lfs f1, lbl_804D9220/*0.0f*/@sda21(r2)
+/* 800E450C 000E10EC  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
 /* 800E4510 000E10F0  38 7F 00 00 */	addi r3, r31, 0
 /* 800E4514 000E10F4  38 80 00 00 */	li r4, 0
 /* 800E4518 000E10F8  4B F9 17 9D */	bl ftParts_80075CB4
@@ -491,8 +491,8 @@ ftCaptain_800E449C:
 /* 800E4554 000E1134  7C 08 03 A6 */	mtlr r0
 /* 800E4558 000E1138  4E 80 00 20 */	blr
 
-.global ftCaptain_800E455C
-ftCaptain_800E455C:
+.global ftCa_SpecialLwAirEnd_Phys
+ftCa_SpecialLwAirEnd_Phys:
 /* 800E455C 000E113C  7C 08 02 A6 */	mflr r0
 /* 800E4560 000E1140  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4564 000E1144  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -510,7 +510,7 @@ ftCaptain_800E455C:
 /* 800E4594 000E1174  4B FA 0A F5 */	bl ft_80085088
 /* 800E4598 000E1178  48 00 00 34 */	b .L_800E45CC
 .L_800E459C:
-/* 800E459C 000E117C  C0 22 98 40 */	lfs f1, lbl_804D9220/*0.0f*/@sda21(r2)
+/* 800E459C 000E117C  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
 /* 800E45A0 000E1180  38 7F 00 00 */	addi r3, r31, 0
 /* 800E45A4 000E1184  38 80 00 00 */	li r4, 0
 /* 800E45A8 000E1188  4B F9 17 0D */	bl ftParts_80075CB4
@@ -531,8 +531,8 @@ ftCaptain_800E455C:
 /* 800E45DC 000E11BC  7C 08 03 A6 */	mtlr r0
 /* 800E45E0 000E11C0  4E 80 00 20 */	blr
 
-.global ftCaptain_800E45E4
-ftCaptain_800E45E4:
+.global ftCa_SpecialAirLw_Phys
+ftCa_SpecialAirLw_Phys:
 /* 800E45E4 000E11C4  7C 08 02 A6 */	mflr r0
 /* 800E45E8 000E11C8  90 01 00 04 */	stw r0, 4(r1)
 /* 800E45EC 000E11CC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -540,15 +540,15 @@ ftCaptain_800E45E4:
 /* 800E45F4 000E11D4  7C 7F 1B 78 */	mr r31, r3
 /* 800E45F8 000E11D8  4B FA 0B 3D */	bl ft_80085134
 /* 800E45FC 000E11DC  7F E3 FB 78 */	mr r3, r31
-/* 800E4600 000E11E0  4B FF F8 AD */	bl ftCaptain_800E3EAC
+/* 800E4600 000E11E0  4B FF F8 AD */	bl ftCa_SpecialHi_800E3EAC
 /* 800E4604 000E11E4  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 800E4608 000E11E8  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 800E460C 000E11EC  38 21 00 18 */	addi r1, r1, 0x18
 /* 800E4610 000E11F0  7C 08 03 A6 */	mtlr r0
 /* 800E4614 000E11F4  4E 80 00 20 */	blr
 
-.global ftCaptain_800E4618
-ftCaptain_800E4618:
+.global ftCa_SpecialAirLwGroundEnd_Phys
+ftCa_SpecialAirLwGroundEnd_Phys:
 /* 800E4618 000E11F8  7C 08 02 A6 */	mflr r0
 /* 800E461C 000E11FC  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4620 000E1200  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -576,8 +576,8 @@ ftCaptain_800E4618:
 /* 800E4670 000E1250  7C 08 03 A6 */	mtlr r0
 /* 800E4674 000E1254  4E 80 00 20 */	blr
 
-.global ftCaptain_800E4678
-ftCaptain_800E4678:
+.global ftCa_SpecialAirLwAirEnd_Phys
+ftCa_SpecialAirLwAirEnd_Phys:
 /* 800E4678 000E1258  7C 08 02 A6 */	mflr r0
 /* 800E467C 000E125C  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4680 000E1260  94 21 FF F8 */	stwu r1, -8(r1)
@@ -587,8 +587,8 @@ ftCaptain_800E4678:
 /* 800E4690 000E1270  7C 08 03 A6 */	mtlr r0
 /* 800E4694 000E1274  4E 80 00 20 */	blr
 
-.global ftCaptain_800E4698
-ftCaptain_800E4698:
+.global ftCa_SpecialLwRebound_Phys
+ftCa_SpecialLwRebound_Phys:
 /* 800E4698 000E1278  7C 08 02 A6 */	mflr r0
 /* 800E469C 000E127C  90 01 00 04 */	stw r0, 4(r1)
 /* 800E46A0 000E1280  94 21 FF F8 */	stwu r1, -8(r1)
@@ -598,8 +598,8 @@ ftCaptain_800E4698:
 /* 800E46B0 000E1290  7C 08 03 A6 */	mtlr r0
 /* 800E46B4 000E1294  4E 80 00 20 */	blr
 
-.global ftCaptain_800E46B8
-ftCaptain_800E46B8:
+.global ftCa_SpecialLwColl
+ftCa_SpecialLwColl:
 /* 800E46B8 000E1298  7C 08 02 A6 */	mflr r0
 /* 800E46BC 000E129C  90 01 00 04 */	stw r0, 4(r1)
 /* 800E46C0 000E12A0  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -629,7 +629,7 @@ ftCaptain_800E46B8:
 /* 800E4718 000E12F8  80 1F 22 00 */	lwz r0, 0x2200(r31)
 /* 800E471C 000E12FC  28 00 00 00 */	cmplwi r0, 0
 /* 800E4720 000E1300  41 82 00 78 */	beq .L_800E4798
-/* 800E4724 000E1304  C0 02 98 4C */	lfs f0, lbl_804D922C/*-1.0f*/@sda21(r2)
+/* 800E4724 000E1304  C0 02 98 4C */	lfs f0, ftCa_SpecialHi_804D922C/*-1.0f*/@sda21(r2)
 /* 800E4728 000E1308  C0 3F 00 2C */	lfs f1, 0x2c(r31)
 /* 800E472C 000E130C  FC 00 08 00 */	fcmpu cr0, f0, f1
 /* 800E4730 000E1310  40 82 00 10 */	bne .L_800E4740
@@ -637,7 +637,7 @@ ftCaptain_800E46B8:
 /* 800E4738 000E1318  54 00 05 29 */	rlwinm. r0, r0, 0, 0x14, 0x14
 /* 800E473C 000E131C  40 82 00 1C */	bne .L_800E4758
 .L_800E4740:
-/* 800E4740 000E1320  C0 02 98 48 */	lfs f0, lbl_804D9228/*1.0f*/@sda21(r2)
+/* 800E4740 000E1320  C0 02 98 48 */	lfs f0, ftCa_SpecialHi_804D9228/*1.0f*/@sda21(r2)
 /* 800E4744 000E1324  FC 00 08 00 */	fcmpu cr0, f0, f1
 /* 800E4748 000E1328  40 82 00 50 */	bne .L_800E4798
 /* 800E474C 000E132C  80 1F 08 24 */	lwz r0, 0x824(r31)
@@ -652,9 +652,9 @@ ftCaptain_800E46B8:
 /* 800E476C 000E134C  90 04 22 00 */	stw r0, 0x2200(r4)
 /* 800E4770 000E1350  90 04 22 10 */	stw r0, 0x2210(r4)
 /* 800E4774 000E1354  4B F9 8E 61 */	bl ftCommon_8007D5D4
-/* 800E4778 000E1358  C0 22 98 40 */	lfs f1, lbl_804D9220/*0.0f*/@sda21(r2)
+/* 800E4778 000E1358  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
 /* 800E477C 000E135C  7F C3 F3 78 */	mr r3, r30
-/* 800E4780 000E1360  C0 42 98 48 */	lfs f2, lbl_804D9228/*1.0f*/@sda21(r2)
+/* 800E4780 000E1360  C0 42 98 48 */	lfs f2, ftCa_SpecialHi_804D9228/*1.0f*/@sda21(r2)
 /* 800E4784 000E1364  38 80 01 6B */	li r4, 0x16b
 /* 800E4788 000E1368  FC 60 08 90 */	fmr f3, f1
 /* 800E478C 000E136C  38 A0 00 00 */	li r5, 0
@@ -668,8 +668,8 @@ ftCaptain_800E46B8:
 /* 800E47A8 000E1388  7C 08 03 A6 */	mtlr r0
 /* 800E47AC 000E138C  4E 80 00 20 */	blr
 
-.global ftCaptain_800E47B0
-ftCaptain_800E47B0:
+.global ftCa_SpecialLwGroundEnd_Coll
+ftCa_SpecialLwGroundEnd_Coll:
 /* 800E47B0 000E1390  7C 08 02 A6 */	mflr r0
 /* 800E47B4 000E1394  90 01 00 04 */	stw r0, 4(r1)
 /* 800E47B8 000E1398  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -708,8 +708,8 @@ ftCaptain_800E47B0:
 /* 800E4830 000E1410  7C 08 03 A6 */	mtlr r0
 /* 800E4834 000E1414  4E 80 00 20 */	blr
 
-.global ftCaptain_800E4838
-ftCaptain_800E4838:
+.global ftCa_SpecialLwAirEnd_Coll
+ftCa_SpecialLwAirEnd_Coll:
 /* 800E4838 000E1418  7C 08 02 A6 */	mflr r0
 /* 800E483C 000E141C  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4840 000E1420  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -747,8 +747,8 @@ ftCaptain_800E4838:
 /* 800E48B4 000E1494  7C 08 03 A6 */	mtlr r0
 /* 800E48B8 000E1498  4E 80 00 20 */	blr
 
-.global ftCaptain_800E48BC
-ftCaptain_800E48BC:
+.global ftCa_SpecialAirLwColl
+ftCa_SpecialAirLwColl:
 /* 800E48BC 000E149C  7C 08 02 A6 */	mflr r0
 /* 800E48C0 000E14A0  90 01 00 04 */	stw r0, 4(r1)
 /* 800E48C4 000E14A4  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -767,7 +767,7 @@ ftCaptain_800E48BC:
 /* 800E48F8 000E14D8  90 04 22 00 */	stw r0, 0x2200(r4)
 /* 800E48FC 000E14DC  90 04 22 10 */	stw r0, 0x2210(r4)
 /* 800E4900 000E14E0  4B F9 8E FD */	bl ftCommon_8007D7FC
-/* 800E4904 000E14E4  C0 22 98 40 */	lfs f1, lbl_804D9220/*0.0f*/@sda21(r2)
+/* 800E4904 000E14E4  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
 /* 800E4908 000E14E8  7F C3 F3 78 */	mr r3, r30
 /* 800E490C 000E14EC  C0 5F 00 80 */	lfs f2, 0x80(r31)
 /* 800E4910 000E14F0  38 80 01 68 */	li r4, 0x168
@@ -783,8 +783,8 @@ ftCaptain_800E48BC:
 /* 800E4934 000E1514  7C 08 03 A6 */	mtlr r0
 /* 800E4938 000E1518  4E 80 00 20 */	blr
 
-.global ftCaptain_800E493C
-ftCaptain_800E493C:
+.global ftCa_SpecialAirLwGroundEnd_Coll
+ftCa_SpecialAirLwGroundEnd_Coll:
 /* 800E493C 000E151C  7C 08 02 A6 */	mflr r0
 /* 800E4940 000E1520  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4944 000E1524  94 21 FF F8 */	stwu r1, -8(r1)
@@ -794,8 +794,8 @@ ftCaptain_800E493C:
 /* 800E4954 000E1534  7C 08 03 A6 */	mtlr r0
 /* 800E4958 000E1538  4E 80 00 20 */	blr
 
-.global ftCaptain_800E495C
-ftCaptain_800E495C:
+.global ftCa_SpecialAirLwAirEnd_Coll
+ftCa_SpecialAirLwAirEnd_Coll:
 /* 800E495C 000E153C  7C 08 02 A6 */	mflr r0
 /* 800E4960 000E1540  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4964 000E1544  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -814,7 +814,7 @@ ftCaptain_800E495C:
 /* 800E4998 000E1578  90 04 22 00 */	stw r0, 0x2200(r4)
 /* 800E499C 000E157C  90 04 22 10 */	stw r0, 0x2210(r4)
 /* 800E49A0 000E1580  4B F9 8E 5D */	bl ftCommon_8007D7FC
-/* 800E49A4 000E1584  C0 22 98 40 */	lfs f1, lbl_804D9220/*0.0f*/@sda21(r2)
+/* 800E49A4 000E1584  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
 # SPLIT NO EARLIER THAN HERE
 /* 800E49A8 000E1588  7F C3 F3 78 */	mr r3, r30
 /* 800E49AC 000E158C  C0 5F 00 80 */	lfs f2, 0x80(r31)
@@ -833,15 +833,15 @@ ftCaptain_800E495C:
 
 .section .sdata2
     .balign 8
-.global lbl_804D9220/*0.0f*/
-lbl_804D9220/*0.0f*/:
+.global ftCa_SpecialHi_804D9220/*0.0f*/
+ftCa_SpecialHi_804D9220/*0.0f*/:
     .4byte 0x00000000
-.global lbl_804D9224/*0.01745329238474369f*/
-lbl_804D9224/*0.01745329238474369f*/:
+.global ftCa_SpecialHi_804D9224/*0.01745329238474369f*/
+ftCa_SpecialHi_804D9224/*0.01745329238474369f*/:
     .4byte 0x3C8EFA35
-.global lbl_804D9228/*1.0f*/
-lbl_804D9228/*1.0f*/:
+.global ftCa_SpecialHi_804D9228/*1.0f*/
+ftCa_SpecialHi_804D9228/*1.0f*/:
     .4byte 0x3F800000
-.global lbl_804D922C/*-1.0f*/
-lbl_804D922C/*-1.0f*/:
+.global ftCa_SpecialHi_804D922C/*-1.0f*/
+ftCa_SpecialHi_804D922C/*-1.0f*/:
     .4byte 0xBF800000

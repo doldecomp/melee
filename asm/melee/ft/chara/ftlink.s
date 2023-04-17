@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftLink_800EB3BC
-ftLink_800EB3BC:
+.global ftLk_800EB3BC
+ftLk_800EB3BC:
 /* 800EB3BC 000E7F9C  7C 08 02 A6 */	mflr r0
 /* 800EB3C0 000E7FA0  90 01 00 04 */	stw r0, 4(r1)
 /* 800EB3C4 000E7FA4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -13,8 +13,8 @@ ftLink_800EB3BC:
 /* 800EB3D4 000E7FB4  7C 00 07 75 */	extsb. r0, r0
 /* 800EB3D8 000E7FB8  40 82 00 40 */	bne .L_800EB418
 /* 800EB3DC 000E7FBC  80 DF 02 D4 */	lwz r6, 0x2d4(r31)
-/* 800EB3E0 000E7FC0  3C 80 80 0F */	lis r4, ftLink_800EB334@ha
-/* 800EB3E4 000E7FC4  38 A4 B3 34 */	addi r5, r4, ftLink_800EB334@l
+/* 800EB3E0 000E7FC0  3C 80 80 0F */	lis r4, ftLk_800EB334@ha
+/* 800EB3E4 000E7FC4  38 A4 B3 34 */	addi r5, r4, ftLk_800EB334@l
 /* 800EB3E8 000E7FC8  38 86 00 C4 */	addi r4, r6, 0xc4
 /* 800EB3EC 000E7FCC  4B F8 FD CD */	bl ftColl_8007B1B8
 /* 800EB3F0 000E7FD0  88 1F 22 1B */	lbz r0, 0x221b(r31)
@@ -34,8 +34,8 @@ ftLink_800EB3BC:
 /* 800EB424 000E8004  7C 08 03 A6 */	mtlr r0
 /* 800EB428 000E8008  4E 80 00 20 */	blr
 
-.global ftLink_800EB42C
-ftLink_800EB42C:
+.global ftLk_800EB42C
+ftLk_800EB42C:
 /* 800EB42C 000E800C  7C 08 02 A6 */	mflr r0
 /* 800EB430 000E8010  90 01 00 04 */	stw r0, 4(r1)
 /* 800EB434 000E8014  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -51,7 +51,7 @@ ftLink_800EB42C:
 /* 800EB45C 000E803C  90 1F 21 C0 */	stw r0, 0x21c0(r31)
 /* 800EB460 000E8040  38 03 B5 28 */	addi r0, r3, .L_800EB528@l
 /* 800EB464 000E8044  90 1F 21 A0 */	stw r0, 0x21a0(r31)
-/* 800EB468 000E8048  C0 02 99 08 */	lfs f0, lbl_804D92E8@sda21(r2)
+/* 800EB468 000E8048  C0 02 99 08 */	lfs f0, ftLk_Init_804D92E8@sda21(r2)
 /* 800EB46C 000E804C  D0 1F 23 40 */	stfs f0, 0x2340(r31)
 .L_800EB470:
 /* 800EB470 000E8050  80 01 00 1C */	lwz r0, 0x1c(r1)
@@ -86,8 +86,8 @@ ftLink_800EB42C:
 /* 800EB4E0 000E80C0  FC 00 F8 40 */	fcmpo cr0, f0, f31
 /* 800EB4E4 000E80C4  40 81 00 24 */	ble .L_800EB508
 /* 800EB4E8 000E80C8  FC 20 F8 90 */	fmr f1, f31
-/* 800EB4EC 000E80CC  C0 42 99 0C */	lfs f2, lbl_804D92EC@sda21(r2)
-/* 800EB4F0 000E80D0  C0 62 99 08 */	lfs f3, lbl_804D92E8@sda21(r2)
+/* 800EB4EC 000E80CC  C0 42 99 0C */	lfs f2, ftLk_Init_804D92EC@sda21(r2)
+/* 800EB4F0 000E80D0  C0 62 99 08 */	lfs f3, ftLk_Init_804D92E8@sda21(r2)
 /* 800EB4F4 000E80D4  38 7D 00 00 */	addi r3, r29, 0
 /* 800EB4F8 000E80D8  38 80 00 45 */	li r4, 0x45
 /* 800EB4FC 000E80DC  38 A0 00 00 */	li r5, 0
@@ -111,7 +111,7 @@ ftLink_800EB42C:
 /* 800EB53C 000E811C  93 A1 00 4C */	stw r29, 0x4c(r1)
 /* 800EB540 000E8120  7C 7D 1B 78 */	mr r29, r3
 /* 800EB544 000E8124  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 800EB548 000E8128  C0 22 99 08 */	lfs f1, lbl_804D92E8@sda21(r2)
+/* 800EB548 000E8128  C0 22 99 08 */	lfs f1, ftLk_Init_804D92E8@sda21(r2)
 /* 800EB54C 000E812C  C0 43 23 40 */	lfs f2, 0x2340(r3)
 /* 800EB550 000E8130  80 83 02 D4 */	lwz r4, 0x2d4(r3)
 /* 800EB554 000E8134  FC 02 08 40 */	fcmpo cr0, f2, f1
@@ -156,7 +156,7 @@ ftLink_800EB42C:
 /* 800EB5F0 000E81D0  4B F8 F5 E1 */	bl ftColl_8007ABD0
 .L_800EB5F4:
 /* 800EB5F4 000E81D4  7F A3 EB 78 */	mr r3, r29
-/* 800EB5F8 000E81D8  4B FA 1A 19 */	bl ft_8008D010
+/* 800EB5F8 000E81D8  4B FA 1A 19 */	bl ftCo_AttackAir_Anim
 /* 800EB5FC 000E81DC  80 01 00 5C */	lwz r0, 0x5c(r1)
 /* 800EB600 000E81E0  83 E1 00 54 */	lwz r31, 0x54(r1)
 /* 800EB604 000E81E4  83 C1 00 50 */	lwz r30, 0x50(r1)
@@ -165,8 +165,8 @@ ftLink_800EB42C:
 /* 800EB610 000E81F0  7C 08 03 A6 */	mtlr r0
 /* 800EB614 000E81F4  4E 80 00 20 */	blr
 
-.global ftLink_800EB618
-ftLink_800EB618:
+.global ftLk_800EB618
+ftLk_800EB618:
 /* 800EB618 000E81F8  7C 08 02 A6 */	mflr r0
 /* 800EB61C 000E81FC  38 80 00 02 */	li r4, 2
 /* 800EB620 000E8200  90 01 00 04 */	stw r0, 4(r1)
@@ -185,8 +185,8 @@ ftLink_800EB618:
 /* 800EB654 000E8234  7C 08 03 A6 */	mtlr r0
 /* 800EB658 000E8238  4E 80 00 20 */	blr
 
-.global ftLink_SpecialLw_StartMotion
-ftLink_SpecialLw_StartMotion:
+.global ftLk_SpecialLw_Enter
+ftLk_SpecialLw_Enter:
 /* 800EB65C 000E823C  7C 08 02 A6 */	mflr r0
 /* 800EB660 000E8240  38 80 00 6C */	li r4, 0x6c
 /* 800EB664 000E8244  90 01 00 04 */	stw r0, 4(r1)
@@ -195,16 +195,16 @@ ftLink_SpecialLw_StartMotion:
 /* 800EB670 000E8250  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 800EB674 000E8254  7C 7E 1B 78 */	mr r30, r3
 /* 800EB678 000E8258  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 800EB67C 000E825C  48 00 00 E1 */	bl ftLink_800EB75C
+/* 800EB67C 000E825C  48 00 00 E1 */	bl ftLk_800EB75C
 /* 800EB680 000E8260  2C 03 00 01 */	cmpwi r3, 1
 /* 800EB684 000E8264  41 82 00 40 */	beq .L_800EB6C4
 /* 800EB688 000E8268  38 00 00 00 */	li r0, 0
 /* 800EB68C 000E826C  90 1F 22 10 */	stw r0, 0x2210(r31)
 /* 800EB690 000E8270  38 7E 00 00 */	addi r3, r30, 0
 /* 800EB694 000E8274  38 80 01 66 */	li r4, 0x166
-/* 800EB698 000E8278  C0 22 99 10 */	lfs f1, lbl_804D92F0@sda21(r2)
+/* 800EB698 000E8278  C0 22 99 10 */	lfs f1, ftLk_Init_804D92F0@sda21(r2)
 /* 800EB69C 000E827C  38 A0 00 00 */	li r5, 0
-/* 800EB6A0 000E8280  C0 42 99 14 */	lfs f2, lbl_804D92F4@sda21(r2)
+/* 800EB6A0 000E8280  C0 42 99 14 */	lfs f2, ftLk_Init_804D92F4@sda21(r2)
 /* 800EB6A4 000E8284  38 C0 00 00 */	li r6, 0
 /* 800EB6A8 000E8288  FC 60 08 90 */	fmr f3, f1
 /* 800EB6AC 000E828C  4B F7 DD 01 */	bl Fighter_ChangeMotionState
@@ -221,8 +221,8 @@ ftLink_SpecialLw_StartMotion:
 /* 800EB6D4 000E82B4  7C 08 03 A6 */	mtlr r0
 /* 800EB6D8 000E82B8  4E 80 00 20 */	blr
 
-.global ftLink_SpecialAirLw_StartMotion
-ftLink_SpecialAirLw_StartMotion:
+.global ftLk_SpecialAirLw_Enter
+ftLk_SpecialAirLw_Enter:
 /* 800EB6DC 000E82BC  7C 08 02 A6 */	mflr r0
 /* 800EB6E0 000E82C0  38 80 00 70 */	li r4, 0x70
 /* 800EB6E4 000E82C4  90 01 00 04 */	stw r0, 4(r1)
@@ -231,16 +231,16 @@ ftLink_SpecialAirLw_StartMotion:
 /* 800EB6F0 000E82D0  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 800EB6F4 000E82D4  7C 7E 1B 78 */	mr r30, r3
 /* 800EB6F8 000E82D8  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 800EB6FC 000E82DC  48 00 00 61 */	bl ftLink_800EB75C
+/* 800EB6FC 000E82DC  48 00 00 61 */	bl ftLk_800EB75C
 /* 800EB700 000E82E0  2C 03 00 01 */	cmpwi r3, 1
 /* 800EB704 000E82E4  41 82 00 40 */	beq .L_800EB744
 /* 800EB708 000E82E8  38 00 00 00 */	li r0, 0
 /* 800EB70C 000E82EC  90 1F 22 10 */	stw r0, 0x2210(r31)
 /* 800EB710 000E82F0  38 7E 00 00 */	addi r3, r30, 0
 /* 800EB714 000E82F4  38 80 01 67 */	li r4, 0x167
-/* 800EB718 000E82F8  C0 22 99 10 */	lfs f1, lbl_804D92F0@sda21(r2)
+/* 800EB718 000E82F8  C0 22 99 10 */	lfs f1, ftLk_Init_804D92F0@sda21(r2)
 /* 800EB71C 000E82FC  38 A0 00 00 */	li r5, 0
-/* 800EB720 000E8300  C0 42 99 14 */	lfs f2, lbl_804D92F4@sda21(r2)
+/* 800EB720 000E8300  C0 42 99 14 */	lfs f2, ftLk_Init_804D92F4@sda21(r2)
 /* 800EB724 000E8304  38 C0 00 00 */	li r6, 0
 /* 800EB728 000E8308  FC 60 08 90 */	fmr f3, f1
 /* 800EB72C 000E830C  4B F7 DC 81 */	bl Fighter_ChangeMotionState
@@ -257,8 +257,8 @@ ftLink_SpecialAirLw_StartMotion:
 /* 800EB754 000E8334  7C 08 03 A6 */	mtlr r0
 /* 800EB758 000E8338  4E 80 00 20 */	blr
 
-.global ftLink_800EB75C
-ftLink_800EB75C:
+.global ftLk_800EB75C
+ftLk_800EB75C:
 /* 800EB75C 000E833C  7C 08 02 A6 */	mflr r0
 /* 800EB760 000E8340  90 01 00 04 */	stw r0, 4(r1)
 /* 800EB764 000E8344  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -349,8 +349,8 @@ ftLink_800EB75C:
 /* 800EB89C 000E847C  7C 08 03 A6 */	mtlr r0
 /* 800EB8A0 000E8480  4E 80 00 20 */	blr
 
-.global ftLink_800EB8A4
-ftLink_800EB8A4:
+.global ftLk_SpecialLw_Anim
+ftLk_SpecialLw_Anim:
 /* 800EB8A4 000E8484  7C 08 02 A6 */	mflr r0
 /* 800EB8A8 000E8488  90 01 00 04 */	stw r0, 4(r1)
 /* 800EB8AC 000E848C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -368,8 +368,8 @@ ftLink_800EB8A4:
 /* 800EB8D8 000E84B8  7C 08 03 A6 */	mtlr r0
 /* 800EB8DC 000E84BC  4E 80 00 20 */	blr
 
-.global ftLink_800EB8E0
-ftLink_800EB8E0:
+.global ftLk_SpecialAirLw_Anim
+ftLk_SpecialAirLw_Anim:
 /* 800EB8E0 000E84C0  7C 08 02 A6 */	mflr r0
 /* 800EB8E4 000E84C4  90 01 00 04 */	stw r0, 4(r1)
 /* 800EB8E8 000E84C8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -387,8 +387,8 @@ ftLink_800EB8E0:
 /* 800EB914 000E84F4  7C 08 03 A6 */	mtlr r0
 /* 800EB918 000E84F8  4E 80 00 20 */	blr
 
-.global ftLink_800EB91C
-ftLink_800EB91C:
+.global ftLk_SpecialLw_Phys
+ftLk_SpecialLw_Phys:
 /* 800EB91C 000E84FC  7C 08 02 A6 */	mflr r0
 /* 800EB920 000E8500  90 01 00 04 */	stw r0, 4(r1)
 /* 800EB924 000E8504  94 21 FF F8 */	stwu r1, -8(r1)
@@ -398,8 +398,8 @@ ftLink_800EB91C:
 /* 800EB934 000E8514  7C 08 03 A6 */	mtlr r0
 /* 800EB938 000E8518  4E 80 00 20 */	blr
 
-.global ftLink_800EB93C
-ftLink_800EB93C:
+.global ftLk_SpecialAirLw_Phys
+ftLk_SpecialAirLw_Phys:
 /* 800EB93C 000E851C  7C 08 02 A6 */	mflr r0
 /* 800EB940 000E8520  90 01 00 04 */	stw r0, 4(r1)
 /* 800EB944 000E8524  94 21 FF F8 */	stwu r1, -8(r1)
@@ -409,8 +409,8 @@ ftLink_800EB93C:
 /* 800EB954 000E8534  7C 08 03 A6 */	mtlr r0
 /* 800EB958 000E8538  4E 80 00 20 */	blr
 
-.global ftLink_800EB95C
-ftLink_800EB95C:
+.global ftLk_SpecialLw_Coll
+ftLk_SpecialLw_Coll:
 /* 800EB95C 000E853C  7C 08 02 A6 */	mflr r0
 /* 800EB960 000E8540  90 01 00 04 */	stw r0, 4(r1)
 /* 800EB964 000E8544  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -425,9 +425,9 @@ ftLink_800EB95C:
 /* 800EB988 000E8568  4B F9 1C 4D */	bl ftCommon_8007D5D4
 /* 800EB98C 000E856C  3C 80 0C 4C */	lis r4, 0x0C4C5080@ha
 /* 800EB990 000E8570  C0 3F 08 94 */	lfs f1, 0x894(r31)
-/* 800EB994 000E8574  C0 42 99 14 */	lfs f2, lbl_804D92F4@sda21(r2)
+/* 800EB994 000E8574  C0 42 99 14 */	lfs f2, ftLk_Init_804D92F4@sda21(r2)
 /* 800EB998 000E8578  7F C3 F3 78 */	mr r3, r30
-/* 800EB99C 000E857C  C0 62 99 10 */	lfs f3, lbl_804D92F0@sda21(r2)
+/* 800EB99C 000E857C  C0 62 99 10 */	lfs f3, ftLk_Init_804D92F0@sda21(r2)
 /* 800EB9A0 000E8580  38 A4 50 80 */	addi r5, r4, 0x0C4C5080@l
 /* 800EB9A4 000E8584  38 80 01 67 */	li r4, 0x167
 /* 800EB9A8 000E8588  38 C0 00 00 */	li r6, 0
@@ -443,8 +443,8 @@ ftLink_800EB95C:
 /* 800EB9CC 000E85AC  7C 08 03 A6 */	mtlr r0
 /* 800EB9D0 000E85B0  4E 80 00 20 */	blr
 
-.global ftLink_800EB9D4
-ftLink_800EB9D4:
+.global ftLk_SpecialAirLw_Coll
+ftLk_SpecialAirLw_Coll:
 /* 800EB9D4 000E85B4  7C 08 02 A6 */	mflr r0
 /* 800EB9D8 000E85B8  90 01 00 04 */	stw r0, 4(r1)
 /* 800EB9DC 000E85BC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -459,9 +459,9 @@ ftLink_800EB9D4:
 /* 800EBA00 000E85E0  4B F9 1D FD */	bl ftCommon_8007D7FC
 /* 800EBA04 000E85E4  3C 80 0C 4C */	lis r4, 0x0C4C5080@ha
 /* 800EBA08 000E85E8  C0 3F 08 94 */	lfs f1, 0x894(r31)
-/* 800EBA0C 000E85EC  C0 42 99 14 */	lfs f2, lbl_804D92F4@sda21(r2)
+/* 800EBA0C 000E85EC  C0 42 99 14 */	lfs f2, ftLk_Init_804D92F4@sda21(r2)
 /* 800EBA10 000E85F0  7F C3 F3 78 */	mr r3, r30
-/* 800EBA14 000E85F4  C0 62 99 10 */	lfs f3, lbl_804D92F0@sda21(r2)
+/* 800EBA14 000E85F4  C0 62 99 10 */	lfs f3, ftLk_Init_804D92F0@sda21(r2)
 /* 800EBA18 000E85F8  38 A4 50 80 */	addi r5, r4, 0x0C4C5080@l
 /* 800EBA1C 000E85FC  38 80 01 66 */	li r4, 0x166
 /* 800EBA20 000E8600  38 C0 00 00 */	li r6, 0
@@ -535,8 +535,8 @@ ftLink_800EB9D4:
 /* 800EBB14 000E86F4  7C 08 03 A6 */	mtlr r0
 /* 800EBB18 000E86F8  4E 80 00 20 */	blr
 
-.global ftLink_SpecialHi_StartMotion
-ftLink_SpecialHi_StartMotion:
+.global ftLk_SpecialHi_Enter
+ftLk_SpecialHi_Enter:
 /* 800EBB1C 000E86FC  7C 08 02 A6 */	mflr r0
 /* 800EBB20 000E8700  38 80 01 64 */	li r4, 0x164
 /* 800EBB24 000E8704  90 01 00 04 */	stw r0, 4(r1)
@@ -546,10 +546,10 @@ ftLink_SpecialHi_StartMotion:
 /* 800EBB34 000E8714  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 800EBB38 000E8718  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 800EBB3C 000E871C  7C 7E 1B 78 */	mr r30, r3
-/* 800EBB40 000E8720  C0 22 99 18 */	lfs f1, lbl_804D92F8@sda21(r2)
+/* 800EBB40 000E8720  C0 22 99 18 */	lfs f1, ftLk_Init_804D92F8@sda21(r2)
 /* 800EBB44 000E8724  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 800EBB48 000E8728  FC 60 08 90 */	fmr f3, f1
-/* 800EBB4C 000E872C  C0 42 99 1C */	lfs f2, lbl_804D92FC@sda21(r2)
+/* 800EBB4C 000E872C  C0 42 99 1C */	lfs f2, ftLk_Init_804D92FC@sda21(r2)
 /* 800EBB50 000E8730  4B F7 D8 5D */	bl Fighter_ChangeMotionState
 /* 800EBB54 000E8734  7F C3 F3 78 */	mr r3, r30
 /* 800EBB58 000E8738  4B F8 30 4D */	bl ftAnim_8006EBA4
@@ -563,8 +563,8 @@ ftLink_SpecialHi_StartMotion:
 /* 800EBB78 000E8758  7C 08 03 A6 */	mtlr r0
 /* 800EBB7C 000E875C  4E 80 00 20 */	blr
 
-.global ftLink_SpecialAirHi_StartMotion
-ftLink_SpecialAirHi_StartMotion:
+.global ftLk_SpecialAirHi_Enter
+ftLk_SpecialAirHi_Enter:
 /* 800EBB80 000E8760  7C 08 02 A6 */	mflr r0
 /* 800EBB84 000E8764  38 80 01 65 */	li r4, 0x165
 /* 800EBB88 000E8768  90 01 00 04 */	stw r0, 4(r1)
@@ -575,10 +575,10 @@ ftLink_SpecialAirHi_StartMotion:
 /* 800EBB9C 000E877C  93 C1 00 28 */	stw r30, 0x28(r1)
 /* 800EBBA0 000E8780  93 A1 00 24 */	stw r29, 0x24(r1)
 /* 800EBBA4 000E8784  7C 7D 1B 78 */	mr r29, r3
-/* 800EBBA8 000E8788  C0 22 99 18 */	lfs f1, lbl_804D92F8@sda21(r2)
+/* 800EBBA8 000E8788  C0 22 99 18 */	lfs f1, ftLk_Init_804D92F8@sda21(r2)
 /* 800EBBAC 000E878C  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 800EBBB0 000E8790  FC 60 08 90 */	fmr f3, f1
-/* 800EBBB4 000E8794  C0 42 99 1C */	lfs f2, lbl_804D92FC@sda21(r2)
+/* 800EBBB4 000E8794  C0 42 99 1C */	lfs f2, ftLk_Init_804D92FC@sda21(r2)
 /* 800EBBB8 000E8798  83 DF 02 D4 */	lwz r30, 0x2d4(r31)
 /* 800EBBBC 000E879C  4B F7 D7 F1 */	bl Fighter_ChangeMotionState
 /* 800EBBC0 000E87A0  7F A3 EB 78 */	mr r3, r29
@@ -602,8 +602,8 @@ ftLink_SpecialAirHi_StartMotion:
 /* 800EBC08 000E87E8  7C 08 03 A6 */	mtlr r0
 /* 800EBC0C 000E87EC  4E 80 00 20 */	blr
 
-.global ftLink_800EBC10
-ftLink_800EBC10:
+.global ftLk_SpecialHi_Anim
+ftLk_SpecialHi_Anim:
 /* 800EBC10 000E87F0  7C 08 02 A6 */	mflr r0
 /* 800EBC14 000E87F4  90 01 00 04 */	stw r0, 4(r1)
 /* 800EBC18 000E87F8  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -621,8 +621,8 @@ ftLink_800EBC10:
 /* 800EBC44 000E8824  7C 08 03 A6 */	mtlr r0
 /* 800EBC48 000E8828  4E 80 00 20 */	blr
 
-.global ftLink_800EBC4C
-ftLink_800EBC4C:
+.global ftLk_SpecialAirHi_Anim
+ftLk_SpecialAirHi_Anim:
 /* 800EBC4C 000E882C  7C 08 02 A6 */	mflr r0
 /* 800EBC50 000E8830  90 01 00 04 */	stw r0, 4(r1)
 /* 800EBC54 000E8834  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -649,16 +649,16 @@ ftLink_800EBC4C:
 /* 800EBCA4 000E8884  7C 08 03 A6 */	mtlr r0
 /* 800EBCA8 000E8888  4E 80 00 20 */	blr
 
-.global ftLink_800EBCAC
-ftLink_800EBCAC:
+.global ftLk_SpecialHi_IASA
+ftLk_SpecialHi_IASA:
 /* 800EBCAC 000E888C  4E 80 00 20 */	blr
 
-.global ftLink_800EBCB0
-ftLink_800EBCB0:
+.global ftLk_SpecialAirHi_IASA
+ftLk_SpecialAirHi_IASA:
 /* 800EBCB0 000E8890  4E 80 00 20 */	blr
 
-.global ftLink_800EBCB4
-ftLink_800EBCB4:
+.global ftLk_SpecialAirHi_Phys
+ftLk_SpecialAirHi_Phys:
 /* 800EBCB4 000E8894  7C 08 02 A6 */	mflr r0
 /* 800EBCB8 000E8898  90 01 00 04 */	stw r0, 4(r1)
 /* 800EBCBC 000E889C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -680,7 +680,7 @@ ftLink_800EBCB4:
 /* 800EBCFC 000E88DC  C0 7E 00 6C */	lfs f3, 0x6c(r30)
 /* 800EBD00 000E88E0  C0 1D 00 3C */	lfs f0, 0x3c(r29)
 /* 800EBD04 000E88E4  EC 42 00 72 */	fmuls f2, f2, f1
-/* 800EBD08 000E88E8  C0 22 99 18 */	lfs f1, lbl_804D92F8@sda21(r2)
+/* 800EBD08 000E88E8  C0 22 99 18 */	lfs f1, ftLk_Init_804D92F8@sda21(r2)
 /* 800EBD0C 000E88EC  EC 63 00 32 */	fmuls f3, f3, f0
 /* 800EBD10 000E88F0  4B F9 16 35 */	bl ftCommon_8007D344
 /* 800EBD14 000E88F4  80 01 00 2C */	lwz r0, 0x2c(r1)
@@ -691,8 +691,8 @@ ftLink_800EBCB4:
 /* 800EBD28 000E8908  7C 08 03 A6 */	mtlr r0
 /* 800EBD2C 000E890C  4E 80 00 20 */	blr
 
-.global ftLink_800EBD30
-ftLink_800EBD30:
+.global ftLk_SpecialHi_Phys
+ftLk_SpecialHi_Phys:
 /* 800EBD30 000E8910  7C 08 02 A6 */	mflr r0
 /* 800EBD34 000E8914  90 01 00 04 */	stw r0, 4(r1)
 /* 800EBD38 000E8918  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -717,7 +717,7 @@ ftLink_800EBD30:
 /* 800EBD84 000E8964  C0 7E 00 6C */	lfs f3, 0x6c(r30)
 /* 800EBD88 000E8968  C0 1F 00 3C */	lfs f0, 0x3c(r31)
 /* 800EBD8C 000E896C  EC 42 00 72 */	fmuls f2, f2, f1
-/* 800EBD90 000E8970  C0 22 99 18 */	lfs f1, lbl_804D92F8@sda21(r2)
+/* 800EBD90 000E8970  C0 22 99 18 */	lfs f1, ftLk_Init_804D92F8@sda21(r2)
 /* 800EBD94 000E8974  EC 63 00 32 */	fmuls f3, f3, f0
 /* 800EBD98 000E8978  4B F9 15 AD */	bl ftCommon_8007D344
 /* 800EBD9C 000E897C  48 00 00 08 */	b .L_800EBDA4
@@ -732,8 +732,8 @@ ftLink_800EBD30:
 /* 800EBDB8 000E8998  7C 08 03 A6 */	mtlr r0
 /* 800EBDBC 000E899C  4E 80 00 20 */	blr
 
-.global ftLink_800EBDC0
-ftLink_800EBDC0:
+.global ftLk_SpecialHi_Coll
+ftLk_SpecialHi_Coll:
 /* 800EBDC0 000E89A0  7C 08 02 A6 */	mflr r0
 /* 800EBDC4 000E89A4  90 01 00 04 */	stw r0, 4(r1)
 /* 800EBDC8 000E89A8  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -743,7 +743,7 @@ ftLink_800EBDC0:
 /* 800EBDD8 000E89B8  2C 03 00 00 */	cmpwi r3, 0
 /* 800EBDDC 000E89BC  40 82 00 0C */	bne .L_800EBDE8
 /* 800EBDE0 000E89C0  7F E3 FB 78 */	mr r3, r31
-/* 800EBDE4 000E89C4  48 00 00 81 */	bl ftLink_800EBE64
+/* 800EBDE4 000E89C4  48 00 00 81 */	bl ftLk_800EBE64
 .L_800EBDE8:
 /* 800EBDE8 000E89C8  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 800EBDEC 000E89CC  83 E1 00 24 */	lwz r31, 0x24(r1)
@@ -751,8 +751,8 @@ ftLink_800EBDC0:
 /* 800EBDF4 000E89D4  7C 08 03 A6 */	mtlr r0
 /* 800EBDF8 000E89D8  4E 80 00 20 */	blr
 
-.global ftLink_800EBDFC
-ftLink_800EBDFC:
+.global ftLk_SpecialAirHi_Coll
+ftLk_SpecialAirHi_Coll:
 /* 800EBDFC 000E89DC  7C 08 02 A6 */	mflr r0
 /* 800EBE00 000E89E0  38 80 00 00 */	li r4, 0
 /* 800EBE04 000E89E4  90 01 00 04 */	stw r0, 4(r1)
@@ -782,8 +782,8 @@ ftLink_800EBDFC:
 /* 800EBE5C 000E8A3C  7C 08 03 A6 */	mtlr r0
 /* 800EBE60 000E8A40  4E 80 00 20 */	blr
 
-.global ftLink_800EBE64
-ftLink_800EBE64:
+.global ftLk_800EBE64
+ftLk_800EBE64:
 /* 800EBE64 000E8A44  7C 08 02 A6 */	mflr r0
 /* 800EBE68 000E8A48  90 01 00 04 */	stw r0, 4(r1)
 /* 800EBE6C 000E8A4C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -795,9 +795,9 @@ ftLink_800EBE64:
 /* 800EBE84 000E8A64  4B F9 17 89 */	bl ftCommon_8007D60C
 /* 800EBE88 000E8A68  3C 80 0C 4C */	lis r4, 0x0C4C508A@ha
 /* 800EBE8C 000E8A6C  C0 3F 08 94 */	lfs f1, 0x894(r31)
-/* 800EBE90 000E8A70  C0 42 99 1C */	lfs f2, lbl_804D92FC@sda21(r2)
+/* 800EBE90 000E8A70  C0 42 99 1C */	lfs f2, ftLk_Init_804D92FC@sda21(r2)
 /* 800EBE94 000E8A74  7F C3 F3 78 */	mr r3, r30
-/* 800EBE98 000E8A78  C0 62 99 18 */	lfs f3, lbl_804D92F8@sda21(r2)
+/* 800EBE98 000E8A78  C0 62 99 18 */	lfs f3, ftLk_Init_804D92F8@sda21(r2)
 /* 800EBE9C 000E8A7C  38 A4 50 8A */	addi r5, r4, 0x0C4C508A@l
 /* 800EBEA0 000E8A80  38 80 01 65 */	li r4, 0x165
 /* 800EBEA4 000E8A84  38 C0 00 00 */	li r6, 0
@@ -809,8 +809,8 @@ ftLink_800EBE64:
 /* 800EBEBC 000E8A9C  7C 08 03 A6 */	mtlr r0
 /* 800EBEC0 000E8AA0  4E 80 00 20 */	blr
 
-.global ftLink_800EBEC4
-ftLink_800EBEC4:
+.global ftLk_800EBEC4
+ftLk_800EBEC4:
 /* 800EBEC4 000E8AA4  7C 08 02 A6 */	mflr r0
 /* 800EBEC8 000E8AA8  38 80 00 1F */	li r4, 0x1f
 /* 800EBECC 000E8AAC  90 01 00 04 */	stw r0, 4(r1)
@@ -822,8 +822,8 @@ ftLink_800EBEC4:
 /* 800EBEE4 000E8AC4  7C 08 03 A6 */	mtlr r0
 /* 800EBEE8 000E8AC8  4E 80 00 20 */	blr
 
-.global ftLink_800EBEEC
-ftLink_800EBEEC:
+.global ftLk_800EBEEC
+ftLk_800EBEEC:
 /* 800EBEEC 000E8ACC  80 A3 00 2C */	lwz r5, 0x2c(r3)
 /* 800EBEF0 000E8AD0  80 C5 02 D4 */	lwz r6, 0x2d4(r5)
 /* 800EBEF4 000E8AD4  80 65 00 B0 */	lwz r3, 0xb0(r5)
@@ -838,15 +838,15 @@ ftLink_800EBEEC:
 /* 800EBF18 000E8AF8  D0 04 00 04 */	stfs f0, 4(r4)
 /* 800EBF1C 000E8AFC  4E 80 00 20 */	blr
 
-.global ftLink_800EBF20
-ftLink_800EBF20:
+.global ftLk_800EBF20
+ftLk_800EBF20:
 /* 800EBF20 000E8B00  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 800EBF24 000E8B04  80 63 22 30 */	lwz r3, 0x2230(r3)
 /* 800EBF28 000E8B08  4E 80 00 20 */	blr
 .L_800EBF2C:
 /* 800EBF2C 000E8B0C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800EBF30 000E8B10  80 A3 00 2C */	lwz r5, 0x2c(r3)
-/* 800EBF34 000E8B14  C0 02 99 20 */	lfs f0, lbl_804D9300@sda21(r2)
+/* 800EBF34 000E8B14  C0 02 99 20 */	lfs f0, ftLk_Init_804D9300@sda21(r2)
 /* 800EBF38 000E8B18  C0 25 06 20 */	lfs f1, 0x620(r5)
 /* 800EBF3C 000E8B1C  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 800EBF40 000E8B20  40 80 00 08 */	bge .L_800EBF48
@@ -861,9 +861,9 @@ ftLink_800EBF20:
 /* 800EBF60 000E8B40  3C 60 43 30 */	lis r3, 0x4330
 /* 800EBF64 000E8B44  88 85 06 73 */	lbz r4, 0x673(r5)
 /* 800EBF68 000E8B48  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 800EBF6C 000E8B4C  C8 42 99 30 */	lfd f2, lbl_804D9310@sda21(r2)
+/* 800EBF6C 000E8B4C  C8 42 99 30 */	lfd f2, ftLk_Init_804D9310@sda21(r2)
 /* 800EBF70 000E8B50  90 01 00 14 */	stw r0, 0x14(r1)
-/* 800EBF74 000E8B54  C8 62 99 28 */	lfd f3, lbl_804D9308@sda21(r2)
+/* 800EBF74 000E8B54  C8 62 99 28 */	lfd f3, ftLk_Init_804D9308@sda21(r2)
 /* 800EBF78 000E8B58  90 61 00 10 */	stw r3, 0x10(r1)
 /* 800EBF7C 000E8B5C  C0 06 00 44 */	lfs f0, 0x44(r6)
 /* 800EBF80 000E8B60  90 81 00 1C */	stw r4, 0x1c(r1)
@@ -888,15 +888,15 @@ ftLink_800EBF20:
 /* 800EBFC4 000E8BA4  38 21 00 20 */	addi r1, r1, 0x20
 /* 800EBFC8 000E8BA8  4E 80 00 20 */	blr
 
-.global ftLink_800EBFCC
-ftLink_800EBFCC:
+.global ftLk_800EBFCC
+ftLk_800EBFCC:
 /* 800EBFCC 000E8BAC  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 800EBFD0 000E8BB0  88 63 22 19 */	lbz r3, 0x2219(r3)
 /* 800EBFD4 000E8BB4  54 63 F7 FE */	rlwinm r3, r3, 0x1e, 0x1f, 0x1f
 /* 800EBFD8 000E8BB8  4E 80 00 20 */	blr
 
-.global ftLink_800EBFDC
-ftLink_800EBFDC:
+.global ftLk_800EBFDC
+ftLk_800EBFDC:
 /* 800EBFDC 000E8BBC  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 800EBFE0 000E8BC0  88 03 20 71 */	lbz r0, 0x2071(r3)
 /* 800EBFE4 000E8BC4  54 00 E7 3E */	rlwinm r0, r0, 0x1c, 0x1c, 0x1f
@@ -912,8 +912,8 @@ ftLink_800EBFDC:
 /* 800EC004 000E8BE4  38 60 00 00 */	li r3, 0
 /* 800EC008 000E8BE8  4E 80 00 20 */	blr
 
-.global ftLink_800EC00C
-ftLink_800EC00C:
+.global ftLk_800EC00C
+ftLk_800EC00C:
 /* 800EC00C 000E8BEC  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 800EC010 000E8BF0  88 03 20 71 */	lbz r0, 0x2071(r3)
 /* 800EC014 000E8BF4  54 00 E7 3E */	rlwinm r0, r0, 0x1c, 0x1c, 0x1f
@@ -929,8 +929,8 @@ ftLink_800EC00C:
 /* 800EC034 000E8C14  38 60 00 00 */	li r3, 0
 /* 800EC038 000E8C18  4E 80 00 20 */	blr
 
-.global ftLink_800EC03C
-ftLink_800EC03C:
+.global ftLk_800EC03C
+ftLk_800EC03C:
 /* 800EC03C 000E8C1C  7C 08 02 A6 */	mflr r0
 /* 800EC040 000E8C20  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC044 000E8C24  38 00 00 00 */	li r0, 0
@@ -938,14 +938,14 @@ ftLink_800EC03C:
 /* 800EC04C 000E8C2C  80 83 00 2C */	lwz r4, 0x2c(r3)
 /* 800EC050 000E8C30  90 04 22 2C */	stw r0, 0x222c(r4)
 /* 800EC054 000E8C34  90 04 22 34 */	stw r0, 0x2234(r4)
-/* 800EC058 000E8C38  4B FF ED 0D */	bl ftLink_800EAD64
+/* 800EC058 000E8C38  4B FF ED 0D */	bl ftLk_800EAD64
 /* 800EC05C 000E8C3C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 800EC060 000E8C40  38 21 00 08 */	addi r1, r1, 8
 /* 800EC064 000E8C44  7C 08 03 A6 */	mtlr r0
 /* 800EC068 000E8C48  4E 80 00 20 */	blr
 
-.global ftLink_800EC06C
-ftLink_800EC06C:
+.global ftLk_800EC06C
+ftLk_800EC06C:
 /* 800EC06C 000E8C4C  7C 08 02 A6 */	mflr r0
 /* 800EC070 000E8C50  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC074 000E8C54  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -961,7 +961,7 @@ ftLink_800EC06C:
 /* 800EC09C 000E8C7C  90 1F 22 2C */	stw r0, 0x222c(r31)
 /* 800EC0A0 000E8C80  7F C3 F3 78 */	mr r3, r30
 /* 800EC0A4 000E8C84  90 1F 22 34 */	stw r0, 0x2234(r31)
-/* 800EC0A8 000E8C88  4B FF EC BD */	bl ftLink_800EAD64
+/* 800EC0A8 000E8C88  4B FF EC BD */	bl ftLk_800EAD64
 .L_800EC0AC:
 /* 800EC0AC 000E8C8C  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 800EC0B0 000E8C90  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -970,8 +970,8 @@ ftLink_800EC06C:
 /* 800EC0BC 000E8C9C  7C 08 03 A6 */	mtlr r0
 /* 800EC0C0 000E8CA0  4E 80 00 20 */	blr
 
-.global ftLink_800EC0C4
-ftLink_800EC0C4:
+.global ftLk_800EC0C4
+ftLk_800EC0C4:
 /* 800EC0C4 000E8CA4  7C 08 02 A6 */	mflr r0
 /* 800EC0C8 000E8CA8  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC0CC 000E8CAC  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -983,7 +983,7 @@ ftLink_800EC0C4:
 /* 800EC0E4 000E8CC4  93 C1 00 20 */	stw r30, 0x20(r1)
 /* 800EC0E8 000E8CC8  7C 9E 23 78 */	mr r30, r4
 /* 800EC0EC 000E8CCC  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 800EC0F0 000E8CD0  C3 E2 99 20 */	lfs f31, lbl_804D9300@sda21(r2)
+/* 800EC0F0 000E8CD0  C3 E2 99 20 */	lfs f31, ftLk_Init_804D9300@sda21(r2)
 /* 800EC0F4 000E8CD4  80 7F 02 D4 */	lwz r3, 0x2d4(r31)
 /* 800EC0F8 000E8CD8  C0 3F 06 24 */	lfs f1, 0x624(r31)
 /* 800EC0FC 000E8CDC  C0 43 00 18 */	lfs f2, 0x18(r3)
@@ -1000,7 +1000,7 @@ ftLink_800EC0C4:
 /* 800EC120 000E8D00  FC 02 00 40 */	fcmpo cr0, f2, f0
 /* 800EC124 000E8D04  40 81 00 40 */	ble .L_800EC164
 /* 800EC128 000E8D08  C0 5F 06 20 */	lfs f2, 0x620(r31)
-/* 800EC12C 000E8D0C  C0 02 99 20 */	lfs f0, lbl_804D9300@sda21(r2)
+/* 800EC12C 000E8D0C  C0 02 99 20 */	lfs f0, ftLk_Init_804D9300@sda21(r2)
 /* 800EC130 000E8D10  FC 02 00 40 */	fcmpo cr0, f2, f0
 /* 800EC134 000E8D14  40 80 00 08 */	bge .L_800EC13C
 /* 800EC138 000E8D18  FC 40 10 50 */	fneg f2, f2
@@ -1029,27 +1029,27 @@ ftLink_800EC0C4:
 /* 800EC188 000E8D68  C0 1F 00 2C */	lfs f0, 0x2c(r31)
 /* 800EC18C 000E8D6C  EC 00 00 72 */	fmuls f0, f0, f1
 /* 800EC190 000E8D70  D0 1E 00 04 */	stfs f0, 4(r30)
-/* 800EC194 000E8D74  C0 42 99 20 */	lfs f2, lbl_804D9300@sda21(r2)
+/* 800EC194 000E8D74  C0 42 99 20 */	lfs f2, ftLk_Init_804D9300@sda21(r2)
 /* 800EC198 000E8D78  D0 5E 00 08 */	stfs f2, 8(r30)
-/* 800EC19C 000E8D7C  C0 22 99 38 */	lfs f1, lbl_804D9318@sda21(r2)
+/* 800EC19C 000E8D7C  C0 22 99 38 */	lfs f1, ftLk_Init_804D9318@sda21(r2)
 /* 800EC1A0 000E8D80  C0 1F 00 2C */	lfs f0, 0x2c(r31)
 /* 800EC1A4 000E8D84  FC 01 00 00 */	fcmpu cr0, f1, f0
 /* 800EC1A8 000E8D88  40 82 00 28 */	bne .L_800EC1D0
 /* 800EC1AC 000E8D8C  FC 1F 10 40 */	fcmpo cr0, f31, f2
 /* 800EC1B0 000E8D90  40 80 00 14 */	bge .L_800EC1C4
-/* 800EC1B4 000E8D94  C8 02 99 40 */	lfd f0, lbl_804D9320@sda21(r2)
+/* 800EC1B4 000E8D94  C8 02 99 40 */	lfd f0, ftLk_Init_804D9320@sda21(r2)
 /* 800EC1B8 000E8D98  FF E0 F8 28 */	fsub f31, f0, f31
 /* 800EC1BC 000E8D9C  FF E0 F8 18 */	frsp f31, f31
 /* 800EC1C0 000E8DA0  48 00 00 10 */	b .L_800EC1D0
 .L_800EC1C4:
-/* 800EC1C4 000E8DA4  C8 02 99 48 */	lfd f0, lbl_804D9328@sda21(r2)
+/* 800EC1C4 000E8DA4  C8 02 99 48 */	lfd f0, ftLk_Init_804D9328@sda21(r2)
 /* 800EC1C8 000E8DA8  FF E0 F8 28 */	fsub f31, f0, f31
 /* 800EC1CC 000E8DAC  FF E0 F8 18 */	frsp f31, f31
 .L_800EC1D0:
-/* 800EC1D0 000E8DB0  C0 02 99 20 */	lfs f0, lbl_804D9300@sda21(r2)
+/* 800EC1D0 000E8DB0  C0 02 99 20 */	lfs f0, ftLk_Init_804D9300@sda21(r2)
 /* 800EC1D4 000E8DB4  FC 1F 00 40 */	fcmpo cr0, f31, f0
 /* 800EC1D8 000E8DB8  40 80 00 10 */	bge .L_800EC1E8
-/* 800EC1DC 000E8DBC  C8 02 99 50 */	lfd f0, lbl_804D9330@sda21(r2)
+/* 800EC1DC 000E8DBC  C8 02 99 50 */	lfd f0, ftLk_Init_804D9330@sda21(r2)
 /* 800EC1E0 000E8DC0  FF FF 00 2A */	fadd f31, f31, f0
 /* 800EC1E4 000E8DC4  FF E0 F8 18 */	frsp f31, f31
 .L_800EC1E8:
@@ -1109,12 +1109,12 @@ ftLink_800EC0C4:
 /* 800EC2B0 000E8E90  90 7F 22 34 */	stw r3, 0x2234(r31)
 /* 800EC2B4 000E8E94  41 82 00 24 */	beq .L_800EC2D8
 /* 800EC2B8 000E8E98  38 00 00 01 */	li r0, 1
-/* 800EC2BC 000E8E9C  3C 60 80 0F */	lis r3, ftLink_800EAF38@ha
+/* 800EC2BC 000E8E9C  3C 60 80 0F */	lis r3, ftLk_800EAF38@ha
 /* 800EC2C0 000E8EA0  90 1F 22 2C */	stw r0, 0x222c(r31)
-/* 800EC2C4 000E8EA4  38 03 AF 38 */	addi r0, r3, ftLink_800EAF38@l
-/* 800EC2C8 000E8EA8  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
+/* 800EC2C4 000E8EA4  38 03 AF 38 */	addi r0, r3, ftLk_800EAF38@l
+/* 800EC2C8 000E8EA8  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
 /* 800EC2CC 000E8EAC  90 1F 21 E8 */	stw r0, 0x21e8(r31)
-/* 800EC2D0 000E8EB0  38 03 AF 58 */	addi r0, r3, ftLink_800EAF58@l
+/* 800EC2D0 000E8EB0  38 03 AF 58 */	addi r0, r3, ftLk_800EAF58@l
 /* 800EC2D4 000E8EB4  90 1F 21 DC */	stw r0, 0x21dc(r31)
 .L_800EC2D8:
 /* 800EC2D8 000E8EB8  80 1F 22 00 */	lwz r0, 0x2200(r31)
@@ -1136,7 +1136,7 @@ ftLink_800EC0C4:
 .L_800EC314:
 /* 800EC314 000E8EF4  38 7D 00 00 */	addi r3, r29, 0
 /* 800EC318 000E8EF8  38 81 00 14 */	addi r4, r1, 0x14
-/* 800EC31C 000E8EFC  4B FF FD A9 */	bl ftLink_800EC0C4
+/* 800EC31C 000E8EFC  4B FF FD A9 */	bl ftLk_800EC0C4
 /* 800EC320 000E8F00  80 7F 22 34 */	lwz r3, 0x2234(r31)
 /* 800EC324 000E8F04  38 81 00 14 */	addi r4, r1, 0x14
 /* 800EC328 000E8F08  48 1B 42 0D */	bl it_802A0534
@@ -1152,8 +1152,8 @@ ftLink_800EC0C4:
 /* 800EC34C 000E8F2C  7C 08 03 A6 */	mtlr r0
 /* 800EC350 000E8F30  4E 80 00 20 */	blr
 
-.global ftLink_SpecialS_StartMotion
-ftLink_SpecialS_StartMotion:
+.global ftLk_SpecialS_Enter
+ftLk_SpecialS_Enter:
 /* 800EC354 000E8F34  7C 08 02 A6 */	mflr r0
 /* 800EC358 000E8F38  38 80 00 00 */	li r4, 0
 /* 800EC35C 000E8F3C  90 01 00 04 */	stw r0, 4(r1)
@@ -1170,9 +1170,9 @@ ftLink_SpecialS_StartMotion:
 /* 800EC388 000E8F68  80 1F 22 2C */	lwz r0, 0x222c(r31)
 /* 800EC38C 000E8F6C  2C 00 00 00 */	cmpwi r0, 0
 /* 800EC390 000E8F70  41 82 00 28 */	beq .L_800EC3B8
-/* 800EC394 000E8F74  C0 22 99 20 */	lfs f1, lbl_804D9300@sda21(r2)
+/* 800EC394 000E8F74  C0 22 99 20 */	lfs f1, ftLk_Init_804D9300@sda21(r2)
 /* 800EC398 000E8F78  7F C3 F3 78 */	mr r3, r30
-/* 800EC39C 000E8F7C  C0 42 99 58 */	lfs f2, lbl_804D9338@sda21(r2)
+/* 800EC39C 000E8F7C  C0 42 99 58 */	lfs f2, ftLk_Init_804D9338@sda21(r2)
 /* 800EC3A0 000E8F80  38 80 01 60 */	li r4, 0x160
 /* 800EC3A4 000E8F84  FC 60 08 90 */	fmr f3, f1
 /* 800EC3A8 000E8F88  38 A0 00 00 */	li r5, 0
@@ -1180,9 +1180,9 @@ ftLink_SpecialS_StartMotion:
 /* 800EC3B0 000E8F90  4B F7 CF FD */	bl Fighter_ChangeMotionState
 /* 800EC3B4 000E8F94  48 00 00 24 */	b .L_800EC3D8
 .L_800EC3B8:
-/* 800EC3B8 000E8F98  C0 22 99 20 */	lfs f1, lbl_804D9300@sda21(r2)
+/* 800EC3B8 000E8F98  C0 22 99 20 */	lfs f1, ftLk_Init_804D9300@sda21(r2)
 /* 800EC3BC 000E8F9C  7F C3 F3 78 */	mr r3, r30
-/* 800EC3C0 000E8FA0  C0 42 99 58 */	lfs f2, lbl_804D9338@sda21(r2)
+/* 800EC3C0 000E8FA0  C0 42 99 58 */	lfs f2, ftLk_Init_804D9338@sda21(r2)
 /* 800EC3C4 000E8FA4  38 80 01 5E */	li r4, 0x15e
 /* 800EC3C8 000E8FA8  FC 60 08 90 */	fmr f3, f1
 /* 800EC3CC 000E8FAC  38 A0 00 00 */	li r5, 0
@@ -1201,8 +1201,8 @@ ftLink_SpecialS_StartMotion:
 /* 800EC3FC 000E8FDC  7C 08 03 A6 */	mtlr r0
 /* 800EC400 000E8FE0  4E 80 00 20 */	blr
 
-.global ftLink_SpecialAirS_StartMotion
-ftLink_SpecialAirS_StartMotion:
+.global ftLk_SpecialAirS_Enter
+ftLk_SpecialAirS_Enter:
 /* 800EC404 000E8FE4  7C 08 02 A6 */	mflr r0
 /* 800EC408 000E8FE8  38 80 00 00 */	li r4, 0
 /* 800EC40C 000E8FEC  90 01 00 04 */	stw r0, 4(r1)
@@ -1219,9 +1219,9 @@ ftLink_SpecialAirS_StartMotion:
 /* 800EC438 000E9018  80 1F 22 2C */	lwz r0, 0x222c(r31)
 /* 800EC43C 000E901C  2C 00 00 00 */	cmpwi r0, 0
 /* 800EC440 000E9020  41 82 00 28 */	beq .L_800EC468
-/* 800EC444 000E9024  C0 22 99 20 */	lfs f1, lbl_804D9300@sda21(r2)
+/* 800EC444 000E9024  C0 22 99 20 */	lfs f1, ftLk_Init_804D9300@sda21(r2)
 /* 800EC448 000E9028  7F C3 F3 78 */	mr r3, r30
-/* 800EC44C 000E902C  C0 42 99 58 */	lfs f2, lbl_804D9338@sda21(r2)
+/* 800EC44C 000E902C  C0 42 99 58 */	lfs f2, ftLk_Init_804D9338@sda21(r2)
 /* 800EC450 000E9030  38 80 01 63 */	li r4, 0x163
 /* 800EC454 000E9034  FC 60 08 90 */	fmr f3, f1
 /* 800EC458 000E9038  38 A0 00 00 */	li r5, 0
@@ -1229,9 +1229,9 @@ ftLink_SpecialAirS_StartMotion:
 /* 800EC460 000E9040  4B F7 CF 4D */	bl Fighter_ChangeMotionState
 /* 800EC464 000E9044  48 00 00 24 */	b .L_800EC488
 .L_800EC468:
-/* 800EC468 000E9048  C0 22 99 20 */	lfs f1, lbl_804D9300@sda21(r2)
+/* 800EC468 000E9048  C0 22 99 20 */	lfs f1, ftLk_Init_804D9300@sda21(r2)
 /* 800EC46C 000E904C  7F C3 F3 78 */	mr r3, r30
-/* 800EC470 000E9050  C0 42 99 58 */	lfs f2, lbl_804D9338@sda21(r2)
+/* 800EC470 000E9050  C0 42 99 58 */	lfs f2, ftLk_Init_804D9338@sda21(r2)
 /* 800EC474 000E9054  38 80 01 61 */	li r4, 0x161
 /* 800EC478 000E9058  FC 60 08 90 */	fmr f3, f1
 /* 800EC47C 000E905C  38 A0 00 00 */	li r5, 0
@@ -1250,8 +1250,8 @@ ftLink_SpecialAirS_StartMotion:
 /* 800EC4AC 000E908C  7C 08 03 A6 */	mtlr r0
 /* 800EC4B0 000E9090  4E 80 00 20 */	blr
 
-.global ftLink_800EC4B4
-ftLink_800EC4B4:
+.global ftLk_800EC4B4
+ftLk_800EC4B4:
 /* 800EC4B4 000E9094  7C 08 02 A6 */	mflr r0
 /* 800EC4B8 000E9098  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC4BC 000E909C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1262,9 +1262,9 @@ ftLink_800EC4B4:
 /* 800EC4D0 000E90B0  80 1F 00 E0 */	lwz r0, 0xe0(r31)
 /* 800EC4D4 000E90B4  2C 00 00 01 */	cmpwi r0, 1
 /* 800EC4D8 000E90B8  40 82 00 28 */	bne .L_800EC500
-/* 800EC4DC 000E90BC  C0 22 99 20 */	lfs f1, lbl_804D9300@sda21(r2)
+/* 800EC4DC 000E90BC  C0 22 99 20 */	lfs f1, ftLk_Init_804D9300@sda21(r2)
 /* 800EC4E0 000E90C0  7F C3 F3 78 */	mr r3, r30
-/* 800EC4E4 000E90C4  C0 42 99 58 */	lfs f2, lbl_804D9338@sda21(r2)
+/* 800EC4E4 000E90C4  C0 42 99 58 */	lfs f2, ftLk_Init_804D9338@sda21(r2)
 /* 800EC4E8 000E90C8  38 80 01 62 */	li r4, 0x162
 /* 800EC4EC 000E90CC  FC 60 08 90 */	fmr f3, f1
 /* 800EC4F0 000E90D0  38 A0 00 00 */	li r5, 0
@@ -1272,17 +1272,17 @@ ftLink_800EC4B4:
 /* 800EC4F8 000E90D8  4B F7 CE B5 */	bl Fighter_ChangeMotionState
 /* 800EC4FC 000E90DC  48 00 00 24 */	b .L_800EC520
 .L_800EC500:
-/* 800EC500 000E90E0  C0 22 99 20 */	lfs f1, lbl_804D9300@sda21(r2)
+/* 800EC500 000E90E0  C0 22 99 20 */	lfs f1, ftLk_Init_804D9300@sda21(r2)
 /* 800EC504 000E90E4  7F C3 F3 78 */	mr r3, r30
-/* 800EC508 000E90E8  C0 42 99 58 */	lfs f2, lbl_804D9338@sda21(r2)
+/* 800EC508 000E90E8  C0 42 99 58 */	lfs f2, ftLk_Init_804D9338@sda21(r2)
 /* 800EC50C 000E90EC  38 80 01 5F */	li r4, 0x15f
 /* 800EC510 000E90F0  FC 60 08 90 */	fmr f3, f1
 /* 800EC514 000E90F4  38 A0 00 00 */	li r5, 0
 /* 800EC518 000E90F8  38 C0 00 00 */	li r6, 0
 /* 800EC51C 000E90FC  4B F7 CE 91 */	bl Fighter_ChangeMotionState
 .L_800EC520:
-/* 800EC520 000E9100  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
-/* 800EC524 000E9104  38 03 AF 58 */	addi r0, r3, ftLink_800EAF58@l
+/* 800EC520 000E9100  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
+/* 800EC524 000E9104  38 03 AF 58 */	addi r0, r3, ftLk_800EAF58@l
 /* 800EC528 000E9108  90 1F 21 DC */	stw r0, 0x21dc(r31)
 /* 800EC52C 000E910C  7F C3 F3 78 */	mr r3, r30
 /* 800EC530 000E9110  4B F8 26 75 */	bl ftAnim_8006EBA4
@@ -1293,8 +1293,8 @@ ftLink_800EC4B4:
 /* 800EC544 000E9124  7C 08 03 A6 */	mtlr r0
 /* 800EC548 000E9128  4E 80 00 20 */	blr
 
-.global ftLink_800EC54C
-ftLink_800EC54C:
+.global ftLk_SpecialSThrow_Anim
+ftLk_SpecialSThrow_Anim:
 /* 800EC54C 000E912C  7C 08 02 A6 */	mflr r0
 /* 800EC550 000E9130  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC554 000E9134  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1312,8 +1312,8 @@ ftLink_800EC54C:
 /* 800EC580 000E9160  7C 08 03 A6 */	mtlr r0
 /* 800EC584 000E9164  4E 80 00 20 */	blr
 
-.global ftLink_800EC588
-ftLink_800EC588:
+.global ftLk_SpecialSCatch_Anim
+ftLk_SpecialSCatch_Anim:
 /* 800EC588 000E9168  7C 08 02 A6 */	mflr r0
 /* 800EC58C 000E916C  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC590 000E9170  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1346,8 +1346,8 @@ ftLink_800EC588:
 /* 800EC5F0 000E91D0  7C 08 03 A6 */	mtlr r0
 /* 800EC5F4 000E91D4  4E 80 00 20 */	blr
 
-.global ftLink_800EC5F8
-ftLink_800EC5F8:
+.global ftLk_SpecialSThrowEmpty_Anim
+ftLk_SpecialSThrowEmpty_Anim:
 /* 800EC5F8 000E91D8  7C 08 02 A6 */	mflr r0
 /* 800EC5FC 000E91DC  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC600 000E91E0  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1365,8 +1365,8 @@ ftLink_800EC5F8:
 /* 800EC62C 000E920C  7C 08 03 A6 */	mtlr r0
 /* 800EC630 000E9210  4E 80 00 20 */	blr
 
-.global ftLink_800EC634
-ftLink_800EC634:
+.global ftLk_SpecialAirSThrow_Anim
+ftLk_SpecialAirSThrow_Anim:
 /* 800EC634 000E9214  7C 08 02 A6 */	mflr r0
 /* 800EC638 000E9218  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC63C 000E921C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1384,8 +1384,8 @@ ftLink_800EC634:
 /* 800EC668 000E9248  7C 08 03 A6 */	mtlr r0
 /* 800EC66C 000E924C  4E 80 00 20 */	blr
 
-.global ftLink_800EC670
-ftLink_800EC670:
+.global ftLk_SpecialAirSCatch_Anim
+ftLk_SpecialAirSCatch_Anim:
 /* 800EC670 000E9250  7C 08 02 A6 */	mflr r0
 /* 800EC674 000E9254  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC678 000E9258  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1418,8 +1418,8 @@ ftLink_800EC670:
 /* 800EC6D8 000E92B8  7C 08 03 A6 */	mtlr r0
 /* 800EC6DC 000E92BC  4E 80 00 20 */	blr
 
-.global ftLink_800EC6E0
-ftLink_800EC6E0:
+.global ftLk_SpecialAirSThrowEmpty_Anim
+ftLk_SpecialAirSThrowEmpty_Anim:
 /* 800EC6E0 000E92C0  7C 08 02 A6 */	mflr r0
 /* 800EC6E4 000E92C4  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC6E8 000E92C8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1437,8 +1437,8 @@ ftLink_800EC6E0:
 /* 800EC714 000E92F4  7C 08 03 A6 */	mtlr r0
 /* 800EC718 000E92F8  4E 80 00 20 */	blr
 
-.global ftLink_800EC71C
-ftLink_800EC71C:
+.global ftLk_SpecialSCatch_IASA
+ftLk_SpecialSCatch_IASA:
 /* 800EC71C 000E92FC  7C 08 02 A6 */	mflr r0
 /* 800EC720 000E9300  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC724 000E9304  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1510,8 +1510,8 @@ ftLink_800EC71C:
 /* 800EC808 000E93E8  7C 08 03 A6 */	mtlr r0
 /* 800EC80C 000E93EC  4E 80 00 20 */	blr
 
-.global ftLink_800EC810
-ftLink_800EC810:
+.global ftLk_SpecialAirSCatch_IASA
+ftLk_SpecialAirSCatch_IASA:
 /* 800EC810 000E93F0  7C 08 02 A6 */	mflr r0
 /* 800EC814 000E93F4  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC818 000E93F8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1548,8 +1548,8 @@ ftLink_800EC810:
 /* 800EC884 000E9464  7C 08 03 A6 */	mtlr r0
 /* 800EC888 000E9468  4E 80 00 20 */	blr
 
-.global ftLink_800EC88C
-ftLink_800EC88C:
+.global ftLk_SpecialSThrow_Phys
+ftLk_SpecialSThrow_Phys:
 /* 800EC88C 000E946C  7C 08 02 A6 */	mflr r0
 /* 800EC890 000E9470  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC894 000E9474  94 21 FF F8 */	stwu r1, -8(r1)
@@ -1559,8 +1559,8 @@ ftLink_800EC88C:
 /* 800EC8A4 000E9484  7C 08 03 A6 */	mtlr r0
 /* 800EC8A8 000E9488  4E 80 00 20 */	blr
 
-.global ftLink_800EC8AC
-ftLink_800EC8AC:
+.global ftLk_SpecialSCatch_Phys
+ftLk_SpecialSCatch_Phys:
 /* 800EC8AC 000E948C  7C 08 02 A6 */	mflr r0
 /* 800EC8B0 000E9490  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC8B4 000E9494  94 21 FF F8 */	stwu r1, -8(r1)
@@ -1570,8 +1570,8 @@ ftLink_800EC8AC:
 /* 800EC8C4 000E94A4  7C 08 03 A6 */	mtlr r0
 /* 800EC8C8 000E94A8  4E 80 00 20 */	blr
 
-.global ftLink_800EC8CC
-ftLink_800EC8CC:
+.global ftLk_SpecialSThrowEmpty_Phys
+ftLk_SpecialSThrowEmpty_Phys:
 /* 800EC8CC 000E94AC  7C 08 02 A6 */	mflr r0
 /* 800EC8D0 000E94B0  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC8D4 000E94B4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -1581,8 +1581,8 @@ ftLink_800EC8CC:
 /* 800EC8E4 000E94C4  7C 08 03 A6 */	mtlr r0
 /* 800EC8E8 000E94C8  4E 80 00 20 */	blr
 
-.global ftLink_800EC8EC
-ftLink_800EC8EC:
+.global ftLk_SpecialAirSThrow_Phys
+ftLk_SpecialAirSThrow_Phys:
 /* 800EC8EC 000E94CC  7C 08 02 A6 */	mflr r0
 /* 800EC8F0 000E94D0  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC8F4 000E94D4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -1592,8 +1592,8 @@ ftLink_800EC8EC:
 /* 800EC904 000E94E4  7C 08 03 A6 */	mtlr r0
 /* 800EC908 000E94E8  4E 80 00 20 */	blr
 
-.global ftLink_800EC90C
-ftLink_800EC90C:
+.global ftLk_SpecialAirSCatch_Phys
+ftLk_SpecialAirSCatch_Phys:
 /* 800EC90C 000E94EC  7C 08 02 A6 */	mflr r0
 /* 800EC910 000E94F0  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC914 000E94F4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -1603,8 +1603,8 @@ ftLink_800EC90C:
 /* 800EC924 000E9504  7C 08 03 A6 */	mtlr r0
 /* 800EC928 000E9508  4E 80 00 20 */	blr
 
-.global ftLink_800EC92C
-ftLink_800EC92C:
+.global ftLk_SpecialAirSThrowEmpty_Phys
+ftLk_SpecialAirSThrowEmpty_Phys:
 /* 800EC92C 000E950C  7C 08 02 A6 */	mflr r0
 /* 800EC930 000E9510  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC934 000E9514  94 21 FF F8 */	stwu r1, -8(r1)
@@ -1614,8 +1614,8 @@ ftLink_800EC92C:
 /* 800EC944 000E9524  7C 08 03 A6 */	mtlr r0
 /* 800EC948 000E9528  4E 80 00 20 */	blr
 
-.global ftLink_800EC94C
-ftLink_800EC94C:
+.global ftLk_SpecialSThrow_Coll
+ftLk_SpecialSThrow_Coll:
 /* 800EC94C 000E952C  7C 08 02 A6 */	mflr r0
 /* 800EC950 000E9530  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC954 000E9534  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1630,9 +1630,9 @@ ftLink_800EC94C:
 /* 800EC978 000E9558  4B F9 0C 5D */	bl ftCommon_8007D5D4
 /* 800EC97C 000E955C  3C 80 0C 4C */	lis r4, 0x0C4C5080@ha
 /* 800EC980 000E9560  C0 3F 08 94 */	lfs f1, 0x894(r31)
-/* 800EC984 000E9564  C0 42 99 58 */	lfs f2, lbl_804D9338@sda21(r2)
+/* 800EC984 000E9564  C0 42 99 58 */	lfs f2, ftLk_Init_804D9338@sda21(r2)
 /* 800EC988 000E9568  7F C3 F3 78 */	mr r3, r30
-/* 800EC98C 000E956C  C0 62 99 20 */	lfs f3, lbl_804D9300@sda21(r2)
+/* 800EC98C 000E956C  C0 62 99 20 */	lfs f3, ftLk_Init_804D9300@sda21(r2)
 /* 800EC990 000E9570  38 A4 50 80 */	addi r5, r4, 0x0C4C5080@l
 /* 800EC994 000E9574  38 80 01 61 */	li r4, 0x161
 /* 800EC998 000E9578  38 C0 00 00 */	li r6, 0
@@ -1648,8 +1648,8 @@ ftLink_800EC94C:
 /* 800EC9BC 000E959C  7C 08 03 A6 */	mtlr r0
 /* 800EC9C0 000E95A0  4E 80 00 20 */	blr
 
-.global ftLink_800EC9C4
-ftLink_800EC9C4:
+.global ftLk_SpecialSCatch_Coll
+ftLk_SpecialSCatch_Coll:
 /* 800EC9C4 000E95A4  7C 08 02 A6 */	mflr r0
 /* 800EC9C8 000E95A8  90 01 00 04 */	stw r0, 4(r1)
 /* 800EC9CC 000E95AC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1675,8 +1675,8 @@ ftLink_800EC9C4:
 /* 800ECA14 000E95F4  7C 08 03 A6 */	mtlr r0
 /* 800ECA18 000E95F8  4E 80 00 20 */	blr
 
-.global ftLink_800ECA1C
-ftLink_800ECA1C:
+.global ftLk_SpecialSThrowEmpty_Coll
+ftLk_SpecialSThrowEmpty_Coll:
 /* 800ECA1C 000E95FC  7C 08 02 A6 */	mflr r0
 /* 800ECA20 000E9600  90 01 00 04 */	stw r0, 4(r1)
 /* 800ECA24 000E9604  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1691,9 +1691,9 @@ ftLink_800ECA1C:
 /* 800ECA48 000E9628  4B F9 0B 8D */	bl ftCommon_8007D5D4
 /* 800ECA4C 000E962C  3C 80 0C 4C */	lis r4, 0x0C4C5080@ha
 /* 800ECA50 000E9630  C0 3F 08 94 */	lfs f1, 0x894(r31)
-/* 800ECA54 000E9634  C0 42 99 58 */	lfs f2, lbl_804D9338@sda21(r2)
+/* 800ECA54 000E9634  C0 42 99 58 */	lfs f2, ftLk_Init_804D9338@sda21(r2)
 /* 800ECA58 000E9638  7F C3 F3 78 */	mr r3, r30
-/* 800ECA5C 000E963C  C0 62 99 20 */	lfs f3, lbl_804D9300@sda21(r2)
+/* 800ECA5C 000E963C  C0 62 99 20 */	lfs f3, ftLk_Init_804D9300@sda21(r2)
 /* 800ECA60 000E9640  38 A4 50 80 */	addi r5, r4, 0x0C4C5080@l
 /* 800ECA64 000E9644  38 80 01 63 */	li r4, 0x163
 /* 800ECA68 000E9648  38 C0 00 00 */	li r6, 0
@@ -1706,8 +1706,8 @@ ftLink_800ECA1C:
 /* 800ECA80 000E9660  7C 08 03 A6 */	mtlr r0
 /* 800ECA84 000E9664  4E 80 00 20 */	blr
 
-.global ftLink_800ECA88
-ftLink_800ECA88:
+.global ftLk_SpecialAirSThrow_Coll
+ftLk_SpecialAirSThrow_Coll:
 /* 800ECA88 000E9668  7C 08 02 A6 */	mflr r0
 /* 800ECA8C 000E966C  90 01 00 04 */	stw r0, 4(r1)
 /* 800ECA90 000E9670  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1722,9 +1722,9 @@ ftLink_800ECA88:
 /* 800ECAB4 000E9694  4B F9 0D 49 */	bl ftCommon_8007D7FC
 /* 800ECAB8 000E9698  3C 80 0C 4C */	lis r4, 0x0C4C5080@ha
 /* 800ECABC 000E969C  C0 3F 08 94 */	lfs f1, 0x894(r31)
-/* 800ECAC0 000E96A0  C0 42 99 58 */	lfs f2, lbl_804D9338@sda21(r2)
+/* 800ECAC0 000E96A0  C0 42 99 58 */	lfs f2, ftLk_Init_804D9338@sda21(r2)
 /* 800ECAC4 000E96A4  7F C3 F3 78 */	mr r3, r30
-/* 800ECAC8 000E96A8  C0 62 99 20 */	lfs f3, lbl_804D9300@sda21(r2)
+/* 800ECAC8 000E96A8  C0 62 99 20 */	lfs f3, ftLk_Init_804D9300@sda21(r2)
 /* 800ECACC 000E96AC  38 A4 50 80 */	addi r5, r4, 0x0C4C5080@l
 /* 800ECAD0 000E96B0  38 80 01 5E */	li r4, 0x15e
 /* 800ECAD4 000E96B4  38 C0 00 00 */	li r6, 0
@@ -1740,8 +1740,8 @@ ftLink_800ECA88:
 /* 800ECAF8 000E96D8  7C 08 03 A6 */	mtlr r0
 /* 800ECAFC 000E96DC  4E 80 00 20 */	blr
 
-.global ftLink_800ECB00
-ftLink_800ECB00:
+.global ftLk_SpecialAirSCatch_Coll
+ftLk_SpecialAirSCatch_Coll:
 /* 800ECB00 000E96E0  7C 08 02 A6 */	mflr r0
 /* 800ECB04 000E96E4  90 01 00 04 */	stw r0, 4(r1)
 /* 800ECB08 000E96E8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1767,8 +1767,8 @@ ftLink_800ECB00:
 /* 800ECB50 000E9730  7C 08 03 A6 */	mtlr r0
 /* 800ECB54 000E9734  4E 80 00 20 */	blr
 
-.global ftLink_800ECB58
-ftLink_800ECB58:
+.global ftLk_SpecialAirSThrowEmpty_Coll
+ftLk_SpecialAirSThrowEmpty_Coll:
 /* 800ECB58 000E9738  7C 08 02 A6 */	mflr r0
 /* 800ECB5C 000E973C  90 01 00 04 */	stw r0, 4(r1)
 /* 800ECB60 000E9740  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1783,9 +1783,9 @@ ftLink_800ECB58:
 /* 800ECB84 000E9764  4B F9 0C 79 */	bl ftCommon_8007D7FC
 /* 800ECB88 000E9768  3C 80 0C 4C */	lis r4, 0x0C4C5080@ha
 /* 800ECB8C 000E976C  C0 3F 08 94 */	lfs f1, 0x894(r31)
-/* 800ECB90 000E9770  C0 42 99 58 */	lfs f2, lbl_804D9338@sda21(r2)
+/* 800ECB90 000E9770  C0 42 99 58 */	lfs f2, ftLk_Init_804D9338@sda21(r2)
 /* 800ECB94 000E9774  7F C3 F3 78 */	mr r3, r30
-/* 800ECB98 000E9778  C0 62 99 20 */	lfs f3, lbl_804D9300@sda21(r2)
+/* 800ECB98 000E9778  C0 62 99 20 */	lfs f3, ftLk_Init_804D9300@sda21(r2)
 /* 800ECB9C 000E977C  38 A4 50 80 */	addi r5, r4, 0x0C4C5080@l
 /* 800ECBA0 000E9780  38 80 01 60 */	li r4, 0x160
 /* 800ECBA4 000E9784  38 C0 00 00 */	li r6, 0
@@ -1798,8 +1798,8 @@ ftLink_800ECB58:
 /* 800ECBBC 000E979C  7C 08 03 A6 */	mtlr r0
 /* 800ECBC0 000E97A0  4E 80 00 20 */	blr
 
-.global ftLink_800ECBC4
-ftLink_800ECBC4:
+.global ftLk_800ECBC4
+ftLk_800ECBC4:
 /* 800ECBC4 000E97A4  28 03 00 00 */	cmplwi r3, 0
 /* 800ECBC8 000E97A8  38 80 00 06 */	li r4, 6
 /* 800ECBCC 000E97AC  41 82 00 38 */	beq .L_800ECC04
@@ -1821,8 +1821,8 @@ ftLink_800ECBC4:
 /* 800ECC04 000E97E4  7C 83 23 78 */	mr r3, r4
 /* 800ECC08 000E97E8  4E 80 00 20 */	blr
 
-.global ftLink_800ECC0C
-ftLink_800ECC0C:
+.global ftLk_800ECC0C
+ftLk_800ECC0C:
 /* 800ECC0C 000E97EC  7C 08 02 A6 */	mflr r0
 /* 800ECC10 000E97F0  28 03 00 00 */	cmplwi r3, 0
 /* 800ECC14 000E97F4  90 01 00 04 */	stw r0, 4(r1)
@@ -1842,15 +1842,15 @@ ftLink_800ECC0C:
 /* 800ECC4C 000E982C  80 04 22 40 */	lwz r0, 0x2240(r4)
 /* 800ECC50 000E9830  28 00 00 00 */	cmplwi r0, 0
 /* 800ECC54 000E9834  40 82 00 08 */	bne .L_800ECC5C
-/* 800ECC58 000E9838  4B FF E1 0D */	bl ftLink_800EAD64
+/* 800ECC58 000E9838  4B FF E1 0D */	bl ftLk_800EAD64
 .L_800ECC5C:
 /* 800ECC5C 000E983C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 800ECC60 000E9840  38 21 00 08 */	addi r1, r1, 8
 /* 800ECC64 000E9844  7C 08 03 A6 */	mtlr r0
 /* 800ECC68 000E9848  4E 80 00 20 */	blr
 
-.global ftLink_800ECC6C
-ftLink_800ECC6C:
+.global ftLk_800ECC6C
+ftLk_800ECC6C:
 /* 800ECC6C 000E984C  7C 08 02 A6 */	mflr r0
 /* 800ECC70 000E9850  28 03 00 00 */	cmplwi r3, 0
 /* 800ECC74 000E9854  90 01 00 04 */	stw r0, 4(r1)
@@ -1870,15 +1870,15 @@ ftLink_800ECC6C:
 /* 800ECCAC 000E988C  80 04 22 3C */	lwz r0, 0x223c(r4)
 /* 800ECCB0 000E9890  28 00 00 00 */	cmplwi r0, 0
 /* 800ECCB4 000E9894  40 82 00 08 */	bne .L_800ECCBC
-/* 800ECCB8 000E9898  4B FF E0 AD */	bl ftLink_800EAD64
+/* 800ECCB8 000E9898  4B FF E0 AD */	bl ftLk_800EAD64
 .L_800ECCBC:
 /* 800ECCBC 000E989C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 800ECCC0 000E98A0  38 21 00 08 */	addi r1, r1, 8
 /* 800ECCC4 000E98A4  7C 08 03 A6 */	mtlr r0
 /* 800ECCC8 000E98A8  4E 80 00 20 */	blr
 
-.global ftLink_800ECCCC
-ftLink_800ECCCC:
+.global ftLk_800ECCCC
+ftLk_800ECCCC:
 /* 800ECCCC 000E98AC  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 800ECCD0 000E98B0  80 03 00 10 */	lwz r0, 0x10(r3)
 /* 800ECCD4 000E98B4  2C 00 01 5E */	cmpwi r0, 0x15e
@@ -1896,8 +1896,8 @@ ftLink_800ECCCC:
 /* 800ECCFC 000E98DC  38 60 00 01 */	li r3, 1
 /* 800ECD00 000E98E0  4E 80 00 20 */	blr
 
-.global ftLink_800ECD04
-ftLink_800ECD04:
+.global ftLk_800ECD04
+ftLk_800ECD04:
 /* 800ECD04 000E98E4  7C 08 02 A6 */	mflr r0
 /* 800ECD08 000E98E8  90 01 00 04 */	stw r0, 4(r1)
 /* 800ECD0C 000E98EC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1912,7 +1912,7 @@ ftLink_800ECD04:
 /* 800ECD30 000E9910  38 00 00 00 */	li r0, 0
 /* 800ECD34 000E9914  90 1F 22 3C */	stw r0, 0x223c(r31)
 /* 800ECD38 000E9918  7F C3 F3 78 */	mr r3, r30
-/* 800ECD3C 000E991C  4B FF E0 29 */	bl ftLink_800EAD64
+/* 800ECD3C 000E991C  4B FF E0 29 */	bl ftLk_800EAD64
 .L_800ECD40:
 /* 800ECD40 000E9920  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 800ECD44 000E9924  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -1921,8 +1921,8 @@ ftLink_800ECD04:
 /* 800ECD50 000E9930  7C 08 03 A6 */	mtlr r0
 /* 800ECD54 000E9934  4E 80 00 20 */	blr
 
-.global ftLink_800ECD58
-ftLink_800ECD58:
+.global ftLk_800ECD58
+ftLk_800ECD58:
 /* 800ECD58 000E9938  7C 08 02 A6 */	mflr r0
 /* 800ECD5C 000E993C  90 01 00 04 */	stw r0, 4(r1)
 /* 800ECD60 000E9940  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1937,7 +1937,7 @@ ftLink_800ECD58:
 /* 800ECD84 000E9964  38 00 00 00 */	li r0, 0
 /* 800ECD88 000E9968  90 1F 22 40 */	stw r0, 0x2240(r31)
 /* 800ECD8C 000E996C  7F C3 F3 78 */	mr r3, r30
-/* 800ECD90 000E9970  4B FF DF D5 */	bl ftLink_800EAD64
+/* 800ECD90 000E9970  4B FF DF D5 */	bl ftLk_800EAD64
 .L_800ECD94:
 /* 800ECD94 000E9974  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 800ECD98 000E9978  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -1946,8 +1946,8 @@ ftLink_800ECD58:
 /* 800ECDA4 000E9984  7C 08 03 A6 */	mtlr r0
 /* 800ECDA8 000E9988  4E 80 00 20 */	blr
 
-.global ftLink_SpecialN_StartMotion
-ftLink_SpecialN_StartMotion:
+.global ftLk_SpecialN_Enter
+ftLk_SpecialN_Enter:
 /* 800ECDAC 000E998C  7C 08 02 A6 */	mflr r0
 /* 800ECDB0 000E9990  90 01 00 04 */	stw r0, 4(r1)
 /* 800ECDB4 000E9994  94 21 FF 98 */	stwu r1, -0x68(r1)
@@ -1955,7 +1955,7 @@ ftLink_SpecialN_StartMotion:
 /* 800ECDBC 000E999C  3B A0 00 00 */	li r29, 0
 /* 800ECDC0 000E99A0  7C 7F 1B 78 */	mr r31, r3
 /* 800ECDC4 000E99A4  83 63 00 2C */	lwz r27, 0x2c(r3)
-/* 800ECDC8 000E99A8  C0 02 99 60 */	lfs f0, lbl_804D9340@sda21(r2)
+/* 800ECDC8 000E99A8  C0 02 99 60 */	lfs f0, ftLk_Init_804D9340@sda21(r2)
 /* 800ECDCC 000E99AC  83 9B 02 D4 */	lwz r28, 0x2d4(r27)
 /* 800ECDD0 000E99B0  7F 63 DB 78 */	mr r3, r27
 /* 800ECDD4 000E99B4  D0 1B 23 44 */	stfs f0, 0x2344(r27)
@@ -1966,18 +1966,18 @@ ftLink_SpecialN_StartMotion:
 /* 800ECDE8 000E99C8  93 BB 22 04 */	stw r29, 0x2204(r27)
 /* 800ECDEC 000E99CC  93 BB 22 00 */	stw r29, 0x2200(r27)
 /* 800ECDF0 000E99D0  4B F9 0A 0D */	bl ftCommon_8007D7FC
-/* 800ECDF4 000E99D4  C0 22 99 60 */	lfs f1, lbl_804D9340@sda21(r2)
+/* 800ECDF4 000E99D4  C0 22 99 60 */	lfs f1, ftLk_Init_804D9340@sda21(r2)
 /* 800ECDF8 000E99D8  38 7F 00 00 */	addi r3, r31, 0
 /* 800ECDFC 000E99DC  38 80 01 58 */	li r4, 0x158
 /* 800ECE00 000E99E0  D0 3B 00 84 */	stfs f1, 0x84(r27)
 /* 800ECE04 000E99E4  FC 60 08 90 */	fmr f3, f1
 /* 800ECE08 000E99E8  38 A0 00 00 */	li r5, 0
-/* 800ECE0C 000E99EC  C0 42 99 68 */	lfs f2, lbl_804D9348@sda21(r2)
+/* 800ECE0C 000E99EC  C0 42 99 68 */	lfs f2, ftLk_Init_804D9348@sda21(r2)
 /* 800ECE10 000E99F0  38 C0 00 00 */	li r6, 0
 /* 800ECE14 000E99F4  4B F7 C5 99 */	bl Fighter_ChangeMotionState
-/* 800ECE18 000E99F8  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
+/* 800ECE18 000E99F8  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
 /* 800ECE1C 000E99FC  80 9F 00 2C */	lwz r4, 0x2c(r31)
-/* 800ECE20 000E9A00  3B C3 AF 58 */	addi r30, r3, ftLink_800EAF58@l
+/* 800ECE20 000E9A00  3B C3 AF 58 */	addi r30, r3, ftLk_800EAF58@l
 /* 800ECE24 000E9A04  93 C4 21 DC */	stw r30, 0x21dc(r4)
 /* 800ECE28 000E9A08  7F E3 FB 78 */	mr r3, r31
 /* 800ECE2C 000E9A0C  93 C4 21 E4 */	stw r30, 0x21e4(r4)
@@ -2040,7 +2040,7 @@ ftLink_SpecialN_StartMotion:
 /* 800ECF04 000E9AE4  28 00 00 00 */	cmplwi r0, 0
 /* 800ECF08 000E9AE8  40 82 00 0C */	bne .L_800ECF14
 /* 800ECF0C 000E9AEC  7F E3 FB 78 */	mr r3, r31
-/* 800ECF10 000E9AF0  4B FF DE 55 */	bl ftLink_800EAD64
+/* 800ECF10 000E9AF0  4B FF DE 55 */	bl ftLk_800EAD64
 .L_800ECF14:
 /* 800ECF14 000E9AF4  28 1F 00 00 */	cmplwi r31, 0
 /* 800ECF18 000E9AF8  41 82 00 44 */	beq .L_800ECF5C
@@ -2059,7 +2059,7 @@ ftLink_SpecialN_StartMotion:
 /* 800ECF4C 000E9B2C  28 00 00 00 */	cmplwi r0, 0
 /* 800ECF50 000E9B30  40 82 00 0C */	bne .L_800ECF5C
 /* 800ECF54 000E9B34  7F E3 FB 78 */	mr r3, r31
-/* 800ECF58 000E9B38  4B FF DE 0D */	bl ftLink_800EAD64
+/* 800ECF58 000E9B38  4B FF DE 0D */	bl ftLk_800EAD64
 .L_800ECF5C:
 /* 800ECF5C 000E9B3C  7F E3 FB 78 */	mr r3, r31
 /* 800ECF60 000E9B40  4B F9 D3 5D */	bl ft_8008A2BC
@@ -2070,8 +2070,8 @@ ftLink_SpecialN_StartMotion:
 /* 800ECF70 000E9B50  7C 08 03 A6 */	mtlr r0
 /* 800ECF74 000E9B54  4E 80 00 20 */	blr
 
-.global ftLink_SpecialAirN_StartMotion
-ftLink_SpecialAirN_StartMotion:
+.global ftLk_SpecialAirN_Enter
+ftLk_SpecialAirN_Enter:
 /* 800ECF78 000E9B58  7C 08 02 A6 */	mflr r0
 /* 800ECF7C 000E9B5C  38 80 01 5B */	li r4, 0x15b
 /* 800ECF80 000E9B60  90 01 00 04 */	stw r0, 4(r1)
@@ -2082,7 +2082,7 @@ ftLink_SpecialAirN_StartMotion:
 /* 800ECF94 000E9B74  3B 80 00 00 */	li r28, 0
 /* 800ECF98 000E9B78  7C 7E 1B 78 */	mr r30, r3
 /* 800ECF9C 000E9B7C  80 E3 00 2C */	lwz r7, 0x2c(r3)
-/* 800ECFA0 000E9B80  C0 22 99 60 */	lfs f1, lbl_804D9340@sda21(r2)
+/* 800ECFA0 000E9B80  C0 22 99 60 */	lfs f1, ftLk_Init_804D9340@sda21(r2)
 /* 800ECFA4 000E9B84  83 E7 02 D4 */	lwz r31, 0x2d4(r7)
 /* 800ECFA8 000E9B88  FC 60 08 90 */	fmr f3, f1
 /* 800ECFAC 000E9B8C  D0 27 23 44 */	stfs f1, 0x2344(r7)
@@ -2092,11 +2092,11 @@ ftLink_SpecialAirN_StartMotion:
 /* 800ECFBC 000E9B9C  93 87 22 08 */	stw r28, 0x2208(r7)
 /* 800ECFC0 000E9BA0  93 87 22 04 */	stw r28, 0x2204(r7)
 /* 800ECFC4 000E9BA4  93 87 22 00 */	stw r28, 0x2200(r7)
-/* 800ECFC8 000E9BA8  C0 42 99 68 */	lfs f2, lbl_804D9348@sda21(r2)
+/* 800ECFC8 000E9BA8  C0 42 99 68 */	lfs f2, ftLk_Init_804D9348@sda21(r2)
 /* 800ECFCC 000E9BAC  4B F7 C3 E1 */	bl Fighter_ChangeMotionState
-/* 800ECFD0 000E9BB0  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
+/* 800ECFD0 000E9BB0  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
 /* 800ECFD4 000E9BB4  80 9E 00 2C */	lwz r4, 0x2c(r30)
-/* 800ECFD8 000E9BB8  3B A3 AF 58 */	addi r29, r3, ftLink_800EAF58@l
+/* 800ECFD8 000E9BB8  3B A3 AF 58 */	addi r29, r3, ftLk_800EAF58@l
 /* 800ECFDC 000E9BBC  93 A4 21 DC */	stw r29, 0x21dc(r4)
 /* 800ECFE0 000E9BC0  7F C3 F3 78 */	mr r3, r30
 /* 800ECFE4 000E9BC4  93 A4 21 E4 */	stw r29, 0x21e4(r4)
@@ -2159,7 +2159,7 @@ ftLink_SpecialAirN_StartMotion:
 /* 800ED0BC 000E9C9C  28 00 00 00 */	cmplwi r0, 0
 /* 800ED0C0 000E9CA0  40 82 00 0C */	bne .L_800ED0CC
 /* 800ED0C4 000E9CA4  7F C3 F3 78 */	mr r3, r30
-/* 800ED0C8 000E9CA8  4B FF DC 9D */	bl ftLink_800EAD64
+/* 800ED0C8 000E9CA8  4B FF DC 9D */	bl ftLk_800EAD64
 .L_800ED0CC:
 /* 800ED0CC 000E9CAC  28 1E 00 00 */	cmplwi r30, 0
 /* 800ED0D0 000E9CB0  41 82 00 44 */	beq .L_800ED114
@@ -2178,9 +2178,9 @@ ftLink_SpecialAirN_StartMotion:
 /* 800ED104 000E9CE4  28 00 00 00 */	cmplwi r0, 0
 /* 800ED108 000E9CE8  40 82 00 0C */	bne .L_800ED114
 /* 800ED10C 000E9CEC  7F C3 F3 78 */	mr r3, r30
-/* 800ED110 000E9CF0  4B FF DC 55 */	bl ftLink_800EAD64
+/* 800ED110 000E9CF0  4B FF DC 55 */	bl ftLk_800EAD64
 .L_800ED114:
-/* 800ED114 000E9CF4  C0 02 99 60 */	lfs f0, lbl_804D9340@sda21(r2)
+/* 800ED114 000E9CF4  C0 02 99 60 */	lfs f0, ftLk_Init_804D9340@sda21(r2)
 /* 800ED118 000E9CF8  C0 5F 00 08 */	lfs f2, 8(r31)
 /* 800ED11C 000E9CFC  FC 00 10 00 */	fcmpu cr0, f0, f2
 /* 800ED120 000E9D00  40 82 00 10 */	bne .L_800ED130
@@ -2188,7 +2188,7 @@ ftLink_SpecialAirN_StartMotion:
 /* 800ED128 000E9D08  4B FD F6 09 */	bl ft_800CC730
 /* 800ED12C 000E9D0C  48 00 00 1C */	b .L_800ED148
 .L_800ED130:
-/* 800ED130 000E9D10  C0 22 99 68 */	lfs f1, lbl_804D9348@sda21(r2)
+/* 800ED130 000E9D10  C0 22 99 68 */	lfs f1, ftLk_Init_804D9348@sda21(r2)
 /* 800ED134 000E9D14  38 7E 00 00 */	addi r3, r30, 0
 /* 800ED138 000E9D18  38 80 00 01 */	li r4, 1
 /* 800ED13C 000E9D1C  38 A0 00 00 */	li r5, 0
@@ -2201,8 +2201,8 @@ ftLink_SpecialAirN_StartMotion:
 /* 800ED154 000E9D34  7C 08 03 A6 */	mtlr r0
 /* 800ED158 000E9D38  4E 80 00 20 */	blr
 
-.global ftLink_800ED15C
-ftLink_800ED15C:
+.global ftLk_SpecialNCharge_Anim
+ftLk_SpecialNCharge_Anim:
 /* 800ED15C 000E9D3C  7C 08 02 A6 */	mflr r0
 /* 800ED160 000E9D40  90 01 00 04 */	stw r0, 4(r1)
 /* 800ED164 000E9D44  94 21 FF 78 */	stwu r1, -0x88(r1)
@@ -2212,17 +2212,17 @@ ftLink_800ED15C:
 /* 800ED174 000E9D54  93 A1 00 7C */	stw r29, 0x7c(r1)
 /* 800ED178 000E9D58  93 81 00 78 */	stw r28, 0x78(r1)
 /* 800ED17C 000E9D5C  80 83 00 2C */	lwz r4, 0x2c(r3)
-/* 800ED180 000E9D60  3C 60 80 3B */	lis r3, lbl_803B7520@ha
-/* 800ED184 000E9D64  3B E3 75 20 */	addi r31, r3, lbl_803B7520@l
+/* 800ED180 000E9D60  3C 60 80 3B */	lis r3, ftLk_Init_803B7520@ha
+/* 800ED184 000E9D64  3B E3 75 20 */	addi r31, r3, ftLk_Init_803B7520@l
 /* 800ED188 000E9D68  80 04 22 08 */	lwz r0, 0x2208(r4)
 /* 800ED18C 000E9D6C  80 A4 02 D4 */	lwz r5, 0x2d4(r4)
 /* 800ED190 000E9D70  28 00 00 00 */	cmplwi r0, 0
 /* 800ED194 000E9D74  41 82 00 24 */	beq .L_800ED1B8
-/* 800ED198 000E9D78  C0 22 99 60 */	lfs f1, lbl_804D9340@sda21(r2)
+/* 800ED198 000E9D78  C0 22 99 60 */	lfs f1, ftLk_Init_804D9340@sda21(r2)
 /* 800ED19C 000E9D7C  C0 04 23 40 */	lfs f0, 0x2340(r4)
 /* 800ED1A0 000E9D80  FC 01 00 00 */	fcmpu cr0, f1, f0
 /* 800ED1A4 000E9D84  40 82 00 14 */	bne .L_800ED1B8
-/* 800ED1A8 000E9D88  C0 02 99 68 */	lfs f0, lbl_804D9348@sda21(r2)
+/* 800ED1A8 000E9D88  C0 02 99 68 */	lfs f0, ftLk_Init_804D9348@sda21(r2)
 /* 800ED1AC 000E9D8C  38 00 00 00 */	li r0, 0
 /* 800ED1B0 000E9D90  D0 04 23 40 */	stfs f0, 0x2340(r4)
 /* 800ED1B4 000E9D94  90 04 22 08 */	stw r0, 0x2208(r4)
@@ -2261,9 +2261,9 @@ ftLink_800ED15C:
 /* 800ED234 000E9E14  28 03 00 00 */	cmplwi r3, 0
 /* 800ED238 000E9E18  90 7C 22 3C */	stw r3, 0x223c(r28)
 /* 800ED23C 000E9E1C  41 82 00 1C */	beq .L_800ED258
-/* 800ED240 000E9E20  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
+/* 800ED240 000E9E20  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
 /* 800ED244 000E9E24  80 9E 00 2C */	lwz r4, 0x2c(r30)
-/* 800ED248 000E9E28  38 03 AF 58 */	addi r0, r3, ftLink_800EAF58@l
+/* 800ED248 000E9E28  38 03 AF 58 */	addi r0, r3, ftLk_800EAF58@l
 /* 800ED24C 000E9E2C  90 04 21 DC */	stw r0, 0x21dc(r4)
 /* 800ED250 000E9E30  90 04 21 E4 */	stw r0, 0x21e4(r4)
 /* 800ED254 000E9E34  48 00 00 0C */	b .L_800ED260
@@ -2325,7 +2325,7 @@ ftLink_800ED15C:
 /* 800ED328 000E9F08  C0 01 00 64 */	lfs f0, 0x64(r1)
 /* 800ED32C 000E9F0C  EC 01 00 28 */	fsubs f0, f1, f0
 /* 800ED330 000E9F10  D0 1C 23 50 */	stfs f0, 0x2350(r28)
-/* 800ED334 000E9F14  C0 02 99 60 */	lfs f0, lbl_804D9340@sda21(r2)
+/* 800ED334 000E9F14  C0 02 99 60 */	lfs f0, ftLk_Init_804D9340@sda21(r2)
 /* 800ED338 000E9F18  D0 1C 23 54 */	stfs f0, 0x2354(r28)
 /* 800ED33C 000E9F1C  C0 61 00 58 */	lfs f3, 0x58(r1)
 /* 800ED340 000E9F20  C0 21 00 4C */	lfs f1, 0x4c(r1)
@@ -2346,18 +2346,18 @@ ftLink_800ED15C:
 /* 800ED378 000E9F58  4B F8 1E C1 */	bl ftAnim_IsFramesRemaining
 /* 800ED37C 000E9F5C  2C 03 00 00 */	cmpwi r3, 0
 /* 800ED380 000E9F60  40 82 00 E0 */	bne .L_800ED460
-/* 800ED384 000E9F64  C0 22 99 60 */	lfs f1, lbl_804D9340@sda21(r2)
+/* 800ED384 000E9F64  C0 22 99 60 */	lfs f1, ftLk_Init_804D9340@sda21(r2)
 /* 800ED388 000E9F68  3C 80 00 04 */	lis r4, 0x00040010@ha
-/* 800ED38C 000E9F6C  C0 42 99 68 */	lfs f2, lbl_804D9348@sda21(r2)
+/* 800ED38C 000E9F6C  C0 42 99 68 */	lfs f2, ftLk_Init_804D9348@sda21(r2)
 /* 800ED390 000E9F70  7F C3 F3 78 */	mr r3, r30
 /* 800ED394 000E9F74  FC 60 08 90 */	fmr f3, f1
 /* 800ED398 000E9F78  38 A4 00 10 */	addi r5, r4, 0x00040010@l
 /* 800ED39C 000E9F7C  38 80 01 59 */	li r4, 0x159
 /* 800ED3A0 000E9F80  38 C0 00 00 */	li r6, 0
 /* 800ED3A4 000E9F84  4B F7 C0 09 */	bl Fighter_ChangeMotionState
-/* 800ED3A8 000E9F88  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
+/* 800ED3A8 000E9F88  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
 /* 800ED3AC 000E9F8C  80 9E 00 2C */	lwz r4, 0x2c(r30)
-/* 800ED3B0 000E9F90  38 03 AF 58 */	addi r0, r3, ftLink_800EAF58@l
+/* 800ED3B0 000E9F90  38 03 AF 58 */	addi r0, r3, ftLk_800EAF58@l
 /* 800ED3B4 000E9F94  90 04 21 DC */	stw r0, 0x21dc(r4)
 /* 800ED3B8 000E9F98  7F C3 F3 78 */	mr r3, r30
 /* 800ED3BC 000E9F9C  90 04 21 E4 */	stw r0, 0x21e4(r4)
@@ -2381,7 +2381,7 @@ ftLink_800ED15C:
 /* 800ED400 000E9FE0  28 00 00 00 */	cmplwi r0, 0
 /* 800ED404 000E9FE4  40 82 00 0C */	bne .L_800ED410
 /* 800ED408 000E9FE8  7F C3 F3 78 */	mr r3, r30
-/* 800ED40C 000E9FEC  4B FF D9 59 */	bl ftLink_800EAD64
+/* 800ED40C 000E9FEC  4B FF D9 59 */	bl ftLk_800EAD64
 .L_800ED410:
 /* 800ED410 000E9FF0  28 1E 00 00 */	cmplwi r30, 0
 /* 800ED414 000E9FF4  41 82 00 44 */	beq .L_800ED458
@@ -2400,7 +2400,7 @@ ftLink_800ED15C:
 /* 800ED448 000EA028  28 00 00 00 */	cmplwi r0, 0
 /* 800ED44C 000EA02C  40 82 00 0C */	bne .L_800ED458
 /* 800ED450 000EA030  7F C3 F3 78 */	mr r3, r30
-/* 800ED454 000EA034  4B FF D9 11 */	bl ftLink_800EAD64
+/* 800ED454 000EA034  4B FF D9 11 */	bl ftLk_800EAD64
 .L_800ED458:
 /* 800ED458 000EA038  7F C3 F3 78 */	mr r3, r30
 /* 800ED45C 000EA03C  4B F9 CE 61 */	bl ft_8008A2BC
@@ -2414,12 +2414,12 @@ ftLink_800ED15C:
 /* 800ED478 000EA058  7C 08 03 A6 */	mtlr r0
 /* 800ED47C 000EA05C  4E 80 00 20 */	blr
 
-.global ftLink_800ED480
-ftLink_800ED480:
+.global ftLk_SpecialNFullyCharged_Anim
+ftLk_SpecialNFullyCharged_Anim:
 /* 800ED480 000EA060  7C 08 02 A6 */	mflr r0
-/* 800ED484 000EA064  3C 80 80 3B */	lis r4, lbl_803B7520@ha
+/* 800ED484 000EA064  3C 80 80 3B */	lis r4, ftLk_Init_803B7520@ha
 /* 800ED488 000EA068  90 01 00 04 */	stw r0, 4(r1)
-/* 800ED48C 000EA06C  38 C4 75 20 */	addi r6, r4, lbl_803B7520@l
+/* 800ED48C 000EA06C  38 C4 75 20 */	addi r6, r4, ftLk_Init_803B7520@l
 /* 800ED490 000EA070  38 80 00 1F */	li r4, 0x1f
 /* 800ED494 000EA074  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 800ED498 000EA078  93 E1 00 3C */	stw r31, 0x3c(r1)
@@ -2472,7 +2472,7 @@ ftLink_800ED480:
 /* 800ED554 000EA134  C0 01 00 2C */	lfs f0, 0x2c(r1)
 /* 800ED558 000EA138  EC 01 00 28 */	fsubs f0, f1, f0
 /* 800ED55C 000EA13C  D0 1F 23 50 */	stfs f0, 0x2350(r31)
-/* 800ED560 000EA140  C0 02 99 60 */	lfs f0, lbl_804D9340@sda21(r2)
+/* 800ED560 000EA140  C0 02 99 60 */	lfs f0, ftLk_Init_804D9340@sda21(r2)
 /* 800ED564 000EA144  D0 1F 23 54 */	stfs f0, 0x2354(r31)
 /* 800ED568 000EA148  C0 61 00 20 */	lfs f3, 0x20(r1)
 /* 800ED56C 000EA14C  C0 21 00 14 */	lfs f1, 0x14(r1)
@@ -2495,8 +2495,8 @@ ftLink_800ED480:
 /* 800ED5AC 000EA18C  7C 08 03 A6 */	mtlr r0
 /* 800ED5B0 000EA190  4E 80 00 20 */	blr
 
-.global ftLink_800ED5B4
-ftLink_800ED5B4:
+.global ftLk_SpecialNFire_Anim
+ftLk_SpecialNFire_Anim:
 /* 800ED5B4 000EA194  7C 08 02 A6 */	mflr r0
 /* 800ED5B8 000EA198  90 01 00 04 */	stw r0, 4(r1)
 /* 800ED5BC 000EA19C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -2522,7 +2522,7 @@ ftLink_800ED5B4:
 /* 800ED60C 000EA1EC  28 00 00 00 */	cmplwi r0, 0
 /* 800ED610 000EA1F0  40 82 00 0C */	bne .L_800ED61C
 /* 800ED614 000EA1F4  7F E3 FB 78 */	mr r3, r31
-/* 800ED618 000EA1F8  4B FF D7 4D */	bl ftLink_800EAD64
+/* 800ED618 000EA1F8  4B FF D7 4D */	bl ftLk_800EAD64
 .L_800ED61C:
 /* 800ED61C 000EA1FC  80 9F 00 2C */	lwz r4, 0x2c(r31)
 /* 800ED620 000EA200  88 04 22 1E */	lbz r0, 0x221e(r4)
@@ -2598,25 +2598,25 @@ ftLink_800ED5B4:
 /* 800ED724 000EA304  7C 08 03 A6 */	mtlr r0
 /* 800ED728 000EA308  4E 80 00 20 */	blr
 
-.global ftLink_800ED72C
-ftLink_800ED72C:
+.global ftLk_SpecialAirNCharge_Anim
+ftLk_SpecialAirNCharge_Anim:
 /* 800ED72C 000EA30C  7C 08 02 A6 */	mflr r0
 /* 800ED730 000EA310  90 01 00 04 */	stw r0, 4(r1)
 /* 800ED734 000EA314  94 21 FF 70 */	stwu r1, -0x90(r1)
 /* 800ED738 000EA318  BF 61 00 7C */	stmw r27, 0x7c(r1)
 /* 800ED73C 000EA31C  7C 7D 1B 78 */	mr r29, r3
 /* 800ED740 000EA320  80 83 00 2C */	lwz r4, 0x2c(r3)
-/* 800ED744 000EA324  3C 60 80 3B */	lis r3, lbl_803B7520@ha
-/* 800ED748 000EA328  3B E3 75 20 */	addi r31, r3, lbl_803B7520@l
+/* 800ED744 000EA324  3C 60 80 3B */	lis r3, ftLk_Init_803B7520@ha
+/* 800ED748 000EA328  3B E3 75 20 */	addi r31, r3, ftLk_Init_803B7520@l
 /* 800ED74C 000EA32C  80 04 22 08 */	lwz r0, 0x2208(r4)
 /* 800ED750 000EA330  83 C4 02 D4 */	lwz r30, 0x2d4(r4)
 /* 800ED754 000EA334  28 00 00 00 */	cmplwi r0, 0
 /* 800ED758 000EA338  41 82 00 24 */	beq .L_800ED77C
-/* 800ED75C 000EA33C  C0 22 99 60 */	lfs f1, lbl_804D9340@sda21(r2)
+/* 800ED75C 000EA33C  C0 22 99 60 */	lfs f1, ftLk_Init_804D9340@sda21(r2)
 /* 800ED760 000EA340  C0 04 23 40 */	lfs f0, 0x2340(r4)
 /* 800ED764 000EA344  FC 01 00 00 */	fcmpu cr0, f1, f0
 /* 800ED768 000EA348  40 82 00 14 */	bne .L_800ED77C
-/* 800ED76C 000EA34C  C0 02 99 68 */	lfs f0, lbl_804D9348@sda21(r2)
+/* 800ED76C 000EA34C  C0 02 99 68 */	lfs f0, ftLk_Init_804D9348@sda21(r2)
 /* 800ED770 000EA350  38 00 00 00 */	li r0, 0
 /* 800ED774 000EA354  D0 04 23 40 */	stfs f0, 0x2340(r4)
 /* 800ED778 000EA358  90 04 22 08 */	stw r0, 0x2208(r4)
@@ -2652,9 +2652,9 @@ ftLink_800ED72C:
 /* 800ED7EC 000EA3CC  28 03 00 00 */	cmplwi r3, 0
 /* 800ED7F0 000EA3D0  90 7B 22 3C */	stw r3, 0x223c(r27)
 /* 800ED7F4 000EA3D4  41 82 00 1C */	beq .L_800ED810
-/* 800ED7F8 000EA3D8  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
+/* 800ED7F8 000EA3D8  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
 /* 800ED7FC 000EA3DC  80 9D 00 2C */	lwz r4, 0x2c(r29)
-/* 800ED800 000EA3E0  38 03 AF 58 */	addi r0, r3, ftLink_800EAF58@l
+/* 800ED800 000EA3E0  38 03 AF 58 */	addi r0, r3, ftLk_800EAF58@l
 /* 800ED804 000EA3E4  90 04 21 DC */	stw r0, 0x21dc(r4)
 /* 800ED808 000EA3E8  90 04 21 E4 */	stw r0, 0x21e4(r4)
 /* 800ED80C 000EA3EC  48 00 00 0C */	b .L_800ED818
@@ -2716,7 +2716,7 @@ ftLink_800ED72C:
 /* 800ED8E0 000EA4C0  C0 01 00 64 */	lfs f0, 0x64(r1)
 /* 800ED8E4 000EA4C4  EC 01 00 28 */	fsubs f0, f1, f0
 /* 800ED8E8 000EA4C8  D0 1B 23 50 */	stfs f0, 0x2350(r27)
-/* 800ED8EC 000EA4CC  C0 02 99 60 */	lfs f0, lbl_804D9340@sda21(r2)
+/* 800ED8EC 000EA4CC  C0 02 99 60 */	lfs f0, ftLk_Init_804D9340@sda21(r2)
 /* 800ED8F0 000EA4D0  D0 1B 23 54 */	stfs f0, 0x2354(r27)
 /* 800ED8F4 000EA4D4  C0 61 00 58 */	lfs f3, 0x58(r1)
 /* 800ED8F8 000EA4D8  C0 21 00 4C */	lfs f1, 0x4c(r1)
@@ -2737,18 +2737,18 @@ ftLink_800ED72C:
 /* 800ED930 000EA510  4B F8 19 09 */	bl ftAnim_IsFramesRemaining
 /* 800ED934 000EA514  2C 03 00 00 */	cmpwi r3, 0
 /* 800ED938 000EA518  40 82 01 0C */	bne .L_800EDA44
-/* 800ED93C 000EA51C  C0 22 99 60 */	lfs f1, lbl_804D9340@sda21(r2)
+/* 800ED93C 000EA51C  C0 22 99 60 */	lfs f1, ftLk_Init_804D9340@sda21(r2)
 /* 800ED940 000EA520  3C 80 00 04 */	lis r4, 0x00040010@ha
-/* 800ED944 000EA524  C0 42 99 68 */	lfs f2, lbl_804D9348@sda21(r2)
+/* 800ED944 000EA524  C0 42 99 68 */	lfs f2, ftLk_Init_804D9348@sda21(r2)
 /* 800ED948 000EA528  7F A3 EB 78 */	mr r3, r29
 /* 800ED94C 000EA52C  FC 60 08 90 */	fmr f3, f1
 /* 800ED950 000EA530  38 A4 00 10 */	addi r5, r4, 0x00040010@l
 /* 800ED954 000EA534  38 80 01 5C */	li r4, 0x15c
 /* 800ED958 000EA538  38 C0 00 00 */	li r6, 0
 /* 800ED95C 000EA53C  4B F7 BA 51 */	bl Fighter_ChangeMotionState
-/* 800ED960 000EA540  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
+/* 800ED960 000EA540  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
 /* 800ED964 000EA544  80 9D 00 2C */	lwz r4, 0x2c(r29)
-/* 800ED968 000EA548  38 03 AF 58 */	addi r0, r3, ftLink_800EAF58@l
+/* 800ED968 000EA548  38 03 AF 58 */	addi r0, r3, ftLk_800EAF58@l
 /* 800ED96C 000EA54C  90 04 21 DC */	stw r0, 0x21dc(r4)
 /* 800ED970 000EA550  7F A3 EB 78 */	mr r3, r29
 /* 800ED974 000EA554  90 04 21 E4 */	stw r0, 0x21e4(r4)
@@ -2772,7 +2772,7 @@ ftLink_800ED72C:
 /* 800ED9B8 000EA598  28 00 00 00 */	cmplwi r0, 0
 /* 800ED9BC 000EA59C  40 82 00 0C */	bne .L_800ED9C8
 /* 800ED9C0 000EA5A0  7F A3 EB 78 */	mr r3, r29
-/* 800ED9C4 000EA5A4  4B FF D3 A1 */	bl ftLink_800EAD64
+/* 800ED9C4 000EA5A4  4B FF D3 A1 */	bl ftLk_800EAD64
 .L_800ED9C8:
 /* 800ED9C8 000EA5A8  28 1D 00 00 */	cmplwi r29, 0
 /* 800ED9CC 000EA5AC  41 82 00 44 */	beq .L_800EDA10
@@ -2791,9 +2791,9 @@ ftLink_800ED72C:
 /* 800EDA00 000EA5E0  28 00 00 00 */	cmplwi r0, 0
 /* 800EDA04 000EA5E4  40 82 00 0C */	bne .L_800EDA10
 /* 800EDA08 000EA5E8  7F A3 EB 78 */	mr r3, r29
-/* 800EDA0C 000EA5EC  4B FF D3 59 */	bl ftLink_800EAD64
+/* 800EDA0C 000EA5EC  4B FF D3 59 */	bl ftLk_800EAD64
 .L_800EDA10:
-/* 800EDA10 000EA5F0  C0 02 99 60 */	lfs f0, lbl_804D9340@sda21(r2)
+/* 800EDA10 000EA5F0  C0 02 99 60 */	lfs f0, ftLk_Init_804D9340@sda21(r2)
 /* 800EDA14 000EA5F4  C0 5E 00 08 */	lfs f2, 8(r30)
 /* 800EDA18 000EA5F8  FC 00 10 00 */	fcmpu cr0, f0, f2
 /* 800EDA1C 000EA5FC  40 82 00 10 */	bne .L_800EDA2C
@@ -2801,7 +2801,7 @@ ftLink_800ED72C:
 /* 800EDA24 000EA604  4B FD ED 0D */	bl ft_800CC730
 /* 800EDA28 000EA608  48 00 00 1C */	b .L_800EDA44
 .L_800EDA2C:
-/* 800EDA2C 000EA60C  C0 22 99 68 */	lfs f1, lbl_804D9348@sda21(r2)
+/* 800EDA2C 000EA60C  C0 22 99 68 */	lfs f1, ftLk_Init_804D9348@sda21(r2)
 /* 800EDA30 000EA610  38 7D 00 00 */	addi r3, r29, 0
 /* 800EDA34 000EA614  38 80 00 01 */	li r4, 1
 /* 800EDA38 000EA618  38 A0 00 00 */	li r5, 0
@@ -2814,12 +2814,12 @@ ftLink_800ED72C:
 /* 800EDA50 000EA630  7C 08 03 A6 */	mtlr r0
 /* 800EDA54 000EA634  4E 80 00 20 */	blr
 
-.global ftLink_800EDA58
-ftLink_800EDA58:
+.global ftLk_SpecialAirNFullyCharged_Anim
+ftLk_SpecialAirNFullyCharged_Anim:
 /* 800EDA58 000EA638  7C 08 02 A6 */	mflr r0
-/* 800EDA5C 000EA63C  3C 80 80 3B */	lis r4, lbl_803B7520@ha
+/* 800EDA5C 000EA63C  3C 80 80 3B */	lis r4, ftLk_Init_803B7520@ha
 /* 800EDA60 000EA640  90 01 00 04 */	stw r0, 4(r1)
-/* 800EDA64 000EA644  38 C4 75 20 */	addi r6, r4, lbl_803B7520@l
+/* 800EDA64 000EA644  38 C4 75 20 */	addi r6, r4, ftLk_Init_803B7520@l
 /* 800EDA68 000EA648  38 80 00 1F */	li r4, 0x1f
 /* 800EDA6C 000EA64C  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 800EDA70 000EA650  93 E1 00 3C */	stw r31, 0x3c(r1)
@@ -2872,7 +2872,7 @@ ftLink_800EDA58:
 /* 800EDB2C 000EA70C  C0 01 00 2C */	lfs f0, 0x2c(r1)
 /* 800EDB30 000EA710  EC 01 00 28 */	fsubs f0, f1, f0
 /* 800EDB34 000EA714  D0 1F 23 50 */	stfs f0, 0x2350(r31)
-/* 800EDB38 000EA718  C0 02 99 60 */	lfs f0, lbl_804D9340@sda21(r2)
+/* 800EDB38 000EA718  C0 02 99 60 */	lfs f0, ftLk_Init_804D9340@sda21(r2)
 /* 800EDB3C 000EA71C  D0 1F 23 54 */	stfs f0, 0x2354(r31)
 /* 800EDB40 000EA720  C0 61 00 20 */	lfs f3, 0x20(r1)
 /* 800EDB44 000EA724  C0 21 00 14 */	lfs f1, 0x14(r1)
@@ -2895,8 +2895,8 @@ ftLink_800EDA58:
 /* 800EDB84 000EA764  7C 08 03 A6 */	mtlr r0
 /* 800EDB88 000EA768  4E 80 00 20 */	blr
 
-.global ftLink_800EDB8C
-ftLink_800EDB8C:
+.global ftLk_SpecialAirNFire_Anim
+ftLk_SpecialAirNFire_Anim:
 /* 800EDB8C 000EA76C  7C 08 02 A6 */	mflr r0
 /* 800EDB90 000EA770  90 01 00 04 */	stw r0, 4(r1)
 /* 800EDB94 000EA774  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -2925,7 +2925,7 @@ ftLink_800EDB8C:
 /* 800EDBF0 000EA7D0  28 00 00 00 */	cmplwi r0, 0
 /* 800EDBF4 000EA7D4  40 82 00 0C */	bne .L_800EDC00
 /* 800EDBF8 000EA7D8  7F E3 FB 78 */	mr r3, r31
-/* 800EDBFC 000EA7DC  4B FF D1 69 */	bl ftLink_800EAD64
+/* 800EDBFC 000EA7DC  4B FF D1 69 */	bl ftLk_800EAD64
 .L_800EDC00:
 /* 800EDC00 000EA7E0  28 1F 00 00 */	cmplwi r31, 0
 /* 800EDC04 000EA7E4  41 82 00 44 */	beq .L_800EDC48
@@ -2944,7 +2944,7 @@ ftLink_800EDB8C:
 /* 800EDC38 000EA818  28 00 00 00 */	cmplwi r0, 0
 /* 800EDC3C 000EA81C  40 82 00 0C */	bne .L_800EDC48
 /* 800EDC40 000EA820  7F E3 FB 78 */	mr r3, r31
-/* 800EDC44 000EA824  4B FF D1 21 */	bl ftLink_800EAD64
+/* 800EDC44 000EA824  4B FF D1 21 */	bl ftLk_800EAD64
 .L_800EDC48:
 /* 800EDC48 000EA828  80 9F 00 2C */	lwz r4, 0x2c(r31)
 /* 800EDC4C 000EA82C  88 04 22 1E */	lbz r0, 0x221e(r4)
@@ -2978,7 +2978,7 @@ ftLink_800EDB8C:
 /* 800EDCB8 000EA898  38 A0 00 00 */	li r5, 0
 /* 800EDCBC 000EA89C  4B F8 6E 51 */	bl ftParts_80074B0C
 .L_800EDCC0:
-/* 800EDCC0 000EA8A0  C0 02 99 60 */	lfs f0, lbl_804D9340@sda21(r2)
+/* 800EDCC0 000EA8A0  C0 02 99 60 */	lfs f0, ftLk_Init_804D9340@sda21(r2)
 /* 800EDCC4 000EA8A4  C0 5E 00 08 */	lfs f2, 8(r30)
 /* 800EDCC8 000EA8A8  FC 00 10 00 */	fcmpu cr0, f0, f2
 /* 800EDCCC 000EA8AC  40 82 00 10 */	bne .L_800EDCDC
@@ -2986,7 +2986,7 @@ ftLink_800EDB8C:
 /* 800EDCD4 000EA8B4  4B FD EA 5D */	bl ft_800CC730
 /* 800EDCD8 000EA8B8  48 00 00 98 */	b .L_800EDD70
 .L_800EDCDC:
-/* 800EDCDC 000EA8BC  C0 22 99 68 */	lfs f1, lbl_804D9348@sda21(r2)
+/* 800EDCDC 000EA8BC  C0 22 99 68 */	lfs f1, ftLk_Init_804D9348@sda21(r2)
 /* 800EDCE0 000EA8C0  38 7F 00 00 */	addi r3, r31, 0
 /* 800EDCE4 000EA8C4  38 80 00 01 */	li r4, 1
 /* 800EDCE8 000EA8C8  38 A0 00 00 */	li r5, 0
@@ -3033,21 +3033,21 @@ ftLink_800EDB8C:
 /* 800EDD80 000EA960  7C 08 03 A6 */	mtlr r0
 /* 800EDD84 000EA964  4E 80 00 20 */	blr
 
-.global ftLink_800EDD88
-ftLink_800EDD88:
+.global ftLk_SpecialNCharge_IASA
+ftLk_SpecialNCharge_IASA:
 /* 800EDD88 000EA968  7C 08 02 A6 */	mflr r0
 /* 800EDD8C 000EA96C  90 01 00 04 */	stw r0, 4(r1)
 /* 800EDD90 000EA970  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800EDD94 000EA974  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 800EDD98 000EA978  7C 7F 1B 78 */	mr r31, r3
 /* 800EDD9C 000EA97C  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 800EDDA0 000EA980  C0 22 99 60 */	lfs f1, lbl_804D9340@sda21(r2)
+/* 800EDDA0 000EA980  C0 22 99 60 */	lfs f1, ftLk_Init_804D9340@sda21(r2)
 /* 800EDDA4 000EA984  C0 03 23 40 */	lfs f0, 0x2340(r3)
 /* 800EDDA8 000EA988  80 83 02 D4 */	lwz r4, 0x2d4(r3)
 /* 800EDDAC 000EA98C  FC 01 00 00 */	fcmpu cr0, f1, f0
 /* 800EDDB0 000EA990  41 82 00 6C */	beq .L_800EDE1C
 /* 800EDDB4 000EA994  C0 23 23 44 */	lfs f1, 0x2344(r3)
-/* 800EDDB8 000EA998  C0 02 99 68 */	lfs f0, lbl_804D9348@sda21(r2)
+/* 800EDDB8 000EA998  C0 02 99 68 */	lfs f0, ftLk_Init_804D9348@sda21(r2)
 /* 800EDDBC 000EA99C  EC 01 00 2A */	fadds f0, f1, f0
 /* 800EDDC0 000EA9A0  D0 03 23 44 */	stfs f0, 0x2344(r3)
 /* 800EDDC4 000EA9A4  C0 03 23 44 */	lfs f0, 0x2344(r3)
@@ -3059,18 +3059,18 @@ ftLink_800EDD88:
 /* 800EDDD8 000EA9B8  80 03 06 5C */	lwz r0, 0x65c(r3)
 /* 800EDDDC 000EA9BC  54 00 05 AD */	rlwinm. r0, r0, 0, 0x16, 0x16
 /* 800EDDE0 000EA9C0  40 82 00 3C */	bne .L_800EDE1C
-/* 800EDDE4 000EA9C4  C0 22 99 60 */	lfs f1, lbl_804D9340@sda21(r2)
+/* 800EDDE4 000EA9C4  C0 22 99 60 */	lfs f1, ftLk_Init_804D9340@sda21(r2)
 /* 800EDDE8 000EA9C8  3C 80 00 04 */	lis r4, 0x00040010@ha
-/* 800EDDEC 000EA9CC  C0 42 99 68 */	lfs f2, lbl_804D9348@sda21(r2)
+/* 800EDDEC 000EA9CC  C0 42 99 68 */	lfs f2, ftLk_Init_804D9348@sda21(r2)
 /* 800EDDF0 000EA9D0  7F E3 FB 78 */	mr r3, r31
 /* 800EDDF4 000EA9D4  FC 60 08 90 */	fmr f3, f1
 /* 800EDDF8 000EA9D8  38 A4 00 10 */	addi r5, r4, 0x00040010@l
 /* 800EDDFC 000EA9DC  38 80 01 5A */	li r4, 0x15a
 /* 800EDE00 000EA9E0  38 C0 00 00 */	li r6, 0
 /* 800EDE04 000EA9E4  4B F7 B5 A9 */	bl Fighter_ChangeMotionState
-/* 800EDE08 000EA9E8  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
+/* 800EDE08 000EA9E8  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
 /* 800EDE0C 000EA9EC  80 9F 00 2C */	lwz r4, 0x2c(r31)
-/* 800EDE10 000EA9F0  38 03 AF 58 */	addi r0, r3, ftLink_800EAF58@l
+/* 800EDE10 000EA9F0  38 03 AF 58 */	addi r0, r3, ftLk_800EAF58@l
 /* 800EDE14 000EA9F4  90 04 21 DC */	stw r0, 0x21dc(r4)
 /* 800EDE18 000EA9F8  90 04 21 E4 */	stw r0, 0x21e4(r4)
 .L_800EDE1C:
@@ -3080,8 +3080,8 @@ ftLink_800EDD88:
 /* 800EDE28 000EAA08  7C 08 03 A6 */	mtlr r0
 /* 800EDE2C 000EAA0C  4E 80 00 20 */	blr
 
-.global ftLink_800EDE30
-ftLink_800EDE30:
+.global ftLk_SpecialNFullyCharged_IASA
+ftLk_SpecialNFullyCharged_IASA:
 /* 800EDE30 000EAA10  7C 08 02 A6 */	mflr r0
 /* 800EDE34 000EAA14  90 01 00 04 */	stw r0, 4(r1)
 /* 800EDE38 000EAA18  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -3094,18 +3094,18 @@ ftLink_800EDE30:
 /* 800EDE54 000EAA34  80 04 06 5C */	lwz r0, 0x65c(r4)
 /* 800EDE58 000EAA38  54 00 05 AD */	rlwinm. r0, r0, 0, 0x16, 0x16
 /* 800EDE5C 000EAA3C  40 82 00 3C */	bne .L_800EDE98
-/* 800EDE60 000EAA40  C0 22 99 60 */	lfs f1, lbl_804D9340@sda21(r2)
+/* 800EDE60 000EAA40  C0 22 99 60 */	lfs f1, ftLk_Init_804D9340@sda21(r2)
 /* 800EDE64 000EAA44  3C 80 00 04 */	lis r4, 0x00040010@ha
-/* 800EDE68 000EAA48  C0 42 99 68 */	lfs f2, lbl_804D9348@sda21(r2)
+/* 800EDE68 000EAA48  C0 42 99 68 */	lfs f2, ftLk_Init_804D9348@sda21(r2)
 /* 800EDE6C 000EAA4C  7F E3 FB 78 */	mr r3, r31
 /* 800EDE70 000EAA50  FC 60 08 90 */	fmr f3, f1
 /* 800EDE74 000EAA54  38 A4 00 10 */	addi r5, r4, 0x00040010@l
 /* 800EDE78 000EAA58  38 80 01 5A */	li r4, 0x15a
 /* 800EDE7C 000EAA5C  38 C0 00 00 */	li r6, 0
 /* 800EDE80 000EAA60  4B F7 B5 2D */	bl Fighter_ChangeMotionState
-/* 800EDE84 000EAA64  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
+/* 800EDE84 000EAA64  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
 /* 800EDE88 000EAA68  80 9F 00 2C */	lwz r4, 0x2c(r31)
-/* 800EDE8C 000EAA6C  38 03 AF 58 */	addi r0, r3, ftLink_800EAF58@l
+/* 800EDE8C 000EAA6C  38 03 AF 58 */	addi r0, r3, ftLk_800EAF58@l
 /* 800EDE90 000EAA70  90 04 21 DC */	stw r0, 0x21dc(r4)
 /* 800EDE94 000EAA74  90 04 21 E4 */	stw r0, 0x21e4(r4)
 .L_800EDE98:
@@ -3115,25 +3115,25 @@ ftLink_800EDE30:
 /* 800EDEA4 000EAA84  7C 08 03 A6 */	mtlr r0
 /* 800EDEA8 000EAA88  4E 80 00 20 */	blr
 
-.global ftLink_800EDEAC
-ftLink_800EDEAC:
+.global ftLk_SpecialNFire_IASA
+ftLk_SpecialNFire_IASA:
 /* 800EDEAC 000EAA8C  4E 80 00 20 */	blr
 
-.global ftLink_800EDEB0
-ftLink_800EDEB0:
+.global ftLk_SpecialAirNCharge_IASA
+ftLk_SpecialAirNCharge_IASA:
 /* 800EDEB0 000EAA90  7C 08 02 A6 */	mflr r0
 /* 800EDEB4 000EAA94  90 01 00 04 */	stw r0, 4(r1)
 /* 800EDEB8 000EAA98  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800EDEBC 000EAA9C  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 800EDEC0 000EAAA0  7C 7F 1B 78 */	mr r31, r3
 /* 800EDEC4 000EAAA4  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 800EDEC8 000EAAA8  C0 22 99 60 */	lfs f1, lbl_804D9340@sda21(r2)
+/* 800EDEC8 000EAAA8  C0 22 99 60 */	lfs f1, ftLk_Init_804D9340@sda21(r2)
 /* 800EDECC 000EAAAC  C0 03 23 40 */	lfs f0, 0x2340(r3)
 /* 800EDED0 000EAAB0  80 83 02 D4 */	lwz r4, 0x2d4(r3)
 /* 800EDED4 000EAAB4  FC 01 00 00 */	fcmpu cr0, f1, f0
 /* 800EDED8 000EAAB8  41 82 00 6C */	beq .L_800EDF44
 /* 800EDEDC 000EAABC  C0 23 23 44 */	lfs f1, 0x2344(r3)
-/* 800EDEE0 000EAAC0  C0 02 99 68 */	lfs f0, lbl_804D9348@sda21(r2)
+/* 800EDEE0 000EAAC0  C0 02 99 68 */	lfs f0, ftLk_Init_804D9348@sda21(r2)
 /* 800EDEE4 000EAAC4  EC 01 00 2A */	fadds f0, f1, f0
 /* 800EDEE8 000EAAC8  D0 03 23 44 */	stfs f0, 0x2344(r3)
 /* 800EDEEC 000EAACC  C0 03 23 44 */	lfs f0, 0x2344(r3)
@@ -3145,18 +3145,18 @@ ftLink_800EDEB0:
 /* 800EDF00 000EAAE0  80 03 06 5C */	lwz r0, 0x65c(r3)
 /* 800EDF04 000EAAE4  54 00 05 AD */	rlwinm. r0, r0, 0, 0x16, 0x16
 /* 800EDF08 000EAAE8  40 82 00 3C */	bne .L_800EDF44
-/* 800EDF0C 000EAAEC  C0 22 99 60 */	lfs f1, lbl_804D9340@sda21(r2)
+/* 800EDF0C 000EAAEC  C0 22 99 60 */	lfs f1, ftLk_Init_804D9340@sda21(r2)
 /* 800EDF10 000EAAF0  3C 80 00 04 */	lis r4, 0x00040010@ha
-/* 800EDF14 000EAAF4  C0 42 99 68 */	lfs f2, lbl_804D9348@sda21(r2)
+/* 800EDF14 000EAAF4  C0 42 99 68 */	lfs f2, ftLk_Init_804D9348@sda21(r2)
 /* 800EDF18 000EAAF8  7F E3 FB 78 */	mr r3, r31
 /* 800EDF1C 000EAAFC  FC 60 08 90 */	fmr f3, f1
 /* 800EDF20 000EAB00  38 A4 00 10 */	addi r5, r4, 0x00040010@l
 /* 800EDF24 000EAB04  38 80 01 5D */	li r4, 0x15d
 /* 800EDF28 000EAB08  38 C0 00 00 */	li r6, 0
 /* 800EDF2C 000EAB0C  4B F7 B4 81 */	bl Fighter_ChangeMotionState
-/* 800EDF30 000EAB10  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
+/* 800EDF30 000EAB10  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
 /* 800EDF34 000EAB14  80 9F 00 2C */	lwz r4, 0x2c(r31)
-/* 800EDF38 000EAB18  38 03 AF 58 */	addi r0, r3, ftLink_800EAF58@l
+/* 800EDF38 000EAB18  38 03 AF 58 */	addi r0, r3, ftLk_800EAF58@l
 /* 800EDF3C 000EAB1C  90 04 21 DC */	stw r0, 0x21dc(r4)
 /* 800EDF40 000EAB20  90 04 21 E4 */	stw r0, 0x21e4(r4)
 .L_800EDF44:
@@ -3166,8 +3166,8 @@ ftLink_800EDEB0:
 /* 800EDF50 000EAB30  7C 08 03 A6 */	mtlr r0
 /* 800EDF54 000EAB34  4E 80 00 20 */	blr
 
-.global ftLink_800EDF58
-ftLink_800EDF58:
+.global ftLk_SpecialAirNFullyCharged_IASA
+ftLk_SpecialAirNFullyCharged_IASA:
 /* 800EDF58 000EAB38  7C 08 02 A6 */	mflr r0
 /* 800EDF5C 000EAB3C  90 01 00 04 */	stw r0, 4(r1)
 /* 800EDF60 000EAB40  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -3180,18 +3180,18 @@ ftLink_800EDF58:
 /* 800EDF7C 000EAB5C  80 04 06 5C */	lwz r0, 0x65c(r4)
 /* 800EDF80 000EAB60  54 00 05 AD */	rlwinm. r0, r0, 0, 0x16, 0x16
 /* 800EDF84 000EAB64  40 82 00 3C */	bne .L_800EDFC0
-/* 800EDF88 000EAB68  C0 22 99 60 */	lfs f1, lbl_804D9340@sda21(r2)
+/* 800EDF88 000EAB68  C0 22 99 60 */	lfs f1, ftLk_Init_804D9340@sda21(r2)
 /* 800EDF8C 000EAB6C  3C 80 00 04 */	lis r4, 0x00040010@ha
-/* 800EDF90 000EAB70  C0 42 99 68 */	lfs f2, lbl_804D9348@sda21(r2)
+/* 800EDF90 000EAB70  C0 42 99 68 */	lfs f2, ftLk_Init_804D9348@sda21(r2)
 /* 800EDF94 000EAB74  7F E3 FB 78 */	mr r3, r31
 /* 800EDF98 000EAB78  FC 60 08 90 */	fmr f3, f1
 /* 800EDF9C 000EAB7C  38 A4 00 10 */	addi r5, r4, 0x00040010@l
 /* 800EDFA0 000EAB80  38 80 01 5D */	li r4, 0x15d
 /* 800EDFA4 000EAB84  38 C0 00 00 */	li r6, 0
 /* 800EDFA8 000EAB88  4B F7 B4 05 */	bl Fighter_ChangeMotionState
-/* 800EDFAC 000EAB8C  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
+/* 800EDFAC 000EAB8C  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
 /* 800EDFB0 000EAB90  80 9F 00 2C */	lwz r4, 0x2c(r31)
-/* 800EDFB4 000EAB94  38 03 AF 58 */	addi r0, r3, ftLink_800EAF58@l
+/* 800EDFB4 000EAB94  38 03 AF 58 */	addi r0, r3, ftLk_800EAF58@l
 /* 800EDFB8 000EAB98  90 04 21 DC */	stw r0, 0x21dc(r4)
 /* 800EDFBC 000EAB9C  90 04 21 E4 */	stw r0, 0x21e4(r4)
 .L_800EDFC0:
@@ -3201,12 +3201,12 @@ ftLink_800EDF58:
 /* 800EDFCC 000EABAC  7C 08 03 A6 */	mtlr r0
 /* 800EDFD0 000EABB0  4E 80 00 20 */	blr
 
-.global ftLink_800EDFD4
-ftLink_800EDFD4:
+.global ftLk_SpecialAirNFire_IASA
+ftLk_SpecialAirNFire_IASA:
 /* 800EDFD4 000EABB4  4E 80 00 20 */	blr
 
-.global ftLink_800EDFD8
-ftLink_800EDFD8:
+.global ftLk_SpecialNCharge_Phys
+ftLk_SpecialNCharge_Phys:
 /* 800EDFD8 000EABB8  7C 08 02 A6 */	mflr r0
 /* 800EDFDC 000EABBC  90 01 00 04 */	stw r0, 4(r1)
 /* 800EDFE0 000EABC0  94 21 FF F8 */	stwu r1, -8(r1)
@@ -3216,8 +3216,8 @@ ftLink_800EDFD8:
 /* 800EDFF0 000EABD0  7C 08 03 A6 */	mtlr r0
 /* 800EDFF4 000EABD4  4E 80 00 20 */	blr
 
-.global ftLink_800EDFF8
-ftLink_800EDFF8:
+.global ftLk_SpecialNFullyCharged_Phys
+ftLk_SpecialNFullyCharged_Phys:
 /* 800EDFF8 000EABD8  7C 08 02 A6 */	mflr r0
 /* 800EDFFC 000EABDC  90 01 00 04 */	stw r0, 4(r1)
 /* 800EE000 000EABE0  94 21 FF F8 */	stwu r1, -8(r1)
@@ -3227,8 +3227,8 @@ ftLink_800EDFF8:
 /* 800EE010 000EABF0  7C 08 03 A6 */	mtlr r0
 /* 800EE014 000EABF4  4E 80 00 20 */	blr
 
-.global ftLink_800EE018
-ftLink_800EE018:
+.global ftLk_SpecialNFire_Phys
+ftLk_SpecialNFire_Phys:
 /* 800EE018 000EABF8  7C 08 02 A6 */	mflr r0
 /* 800EE01C 000EABFC  90 01 00 04 */	stw r0, 4(r1)
 /* 800EE020 000EAC00  94 21 FF F8 */	stwu r1, -8(r1)
@@ -3238,8 +3238,8 @@ ftLink_800EE018:
 /* 800EE030 000EAC10  7C 08 03 A6 */	mtlr r0
 /* 800EE034 000EAC14  4E 80 00 20 */	blr
 
-.global ftLink_800EE038
-ftLink_800EE038:
+.global ftLk_SpecialAirNCharge_Phys
+ftLk_SpecialAirNCharge_Phys:
 /* 800EE038 000EAC18  7C 08 02 A6 */	mflr r0
 /* 800EE03C 000EAC1C  90 01 00 04 */	stw r0, 4(r1)
 /* 800EE040 000EAC20  94 21 FF F8 */	stwu r1, -8(r1)
@@ -3249,8 +3249,8 @@ ftLink_800EE038:
 /* 800EE050 000EAC30  7C 08 03 A6 */	mtlr r0
 /* 800EE054 000EAC34  4E 80 00 20 */	blr
 
-.global ftLink_800EE058
-ftLink_800EE058:
+.global ftLk_SpecialAirNFullyCharged_Phys
+ftLk_SpecialAirNFullyCharged_Phys:
 /* 800EE058 000EAC38  7C 08 02 A6 */	mflr r0
 /* 800EE05C 000EAC3C  90 01 00 04 */	stw r0, 4(r1)
 /* 800EE060 000EAC40  94 21 FF F8 */	stwu r1, -8(r1)
@@ -3260,8 +3260,8 @@ ftLink_800EE058:
 /* 800EE070 000EAC50  7C 08 03 A6 */	mtlr r0
 /* 800EE074 000EAC54  4E 80 00 20 */	blr
 
-.global ftLink_800EE078
-ftLink_800EE078:
+.global ftLk_SpecialAirNFire_Phys
+ftLk_SpecialAirNFire_Phys:
 /* 800EE078 000EAC58  7C 08 02 A6 */	mflr r0
 /* 800EE07C 000EAC5C  90 01 00 04 */	stw r0, 4(r1)
 /* 800EE080 000EAC60  94 21 FF F8 */	stwu r1, -8(r1)
@@ -3271,8 +3271,8 @@ ftLink_800EE078:
 /* 800EE090 000EAC70  7C 08 03 A6 */	mtlr r0
 /* 800EE094 000EAC74  4E 80 00 20 */	blr
 
-.global ftLink_800EE098
-ftLink_800EE098:
+.global ftLk_SpecialNCharge_Coll
+ftLk_SpecialNCharge_Coll:
 /* 800EE098 000EAC78  7C 08 02 A6 */	mflr r0
 /* 800EE09C 000EAC7C  90 01 00 04 */	stw r0, 4(r1)
 /* 800EE0A0 000EAC80  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -3287,16 +3287,16 @@ ftLink_800EE098:
 /* 800EE0C4 000EACA4  4B F8 F5 11 */	bl ftCommon_8007D5D4
 /* 800EE0C8 000EACA8  3C 80 0C 4C */	lis r4, 0x0C4C5090@ha
 /* 800EE0CC 000EACAC  C0 3F 08 94 */	lfs f1, 0x894(r31)
-/* 800EE0D0 000EACB0  C0 42 99 68 */	lfs f2, lbl_804D9348@sda21(r2)
+/* 800EE0D0 000EACB0  C0 42 99 68 */	lfs f2, ftLk_Init_804D9348@sda21(r2)
 /* 800EE0D4 000EACB4  7F C3 F3 78 */	mr r3, r30
-/* 800EE0D8 000EACB8  C0 62 99 60 */	lfs f3, lbl_804D9340@sda21(r2)
+/* 800EE0D8 000EACB8  C0 62 99 60 */	lfs f3, ftLk_Init_804D9340@sda21(r2)
 /* 800EE0DC 000EACBC  38 A4 50 90 */	addi r5, r4, 0x0C4C5090@l
 /* 800EE0E0 000EACC0  38 80 01 5B */	li r4, 0x15b
 /* 800EE0E4 000EACC4  38 C0 00 00 */	li r6, 0
 /* 800EE0E8 000EACC8  4B F7 B2 C5 */	bl Fighter_ChangeMotionState
-/* 800EE0EC 000EACCC  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
+/* 800EE0EC 000EACCC  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
 /* 800EE0F0 000EACD0  80 9E 00 2C */	lwz r4, 0x2c(r30)
-/* 800EE0F4 000EACD4  38 03 AF 58 */	addi r0, r3, ftLink_800EAF58@l
+/* 800EE0F4 000EACD4  38 03 AF 58 */	addi r0, r3, ftLk_800EAF58@l
 /* 800EE0F8 000EACD8  90 04 21 DC */	stw r0, 0x21dc(r4)
 /* 800EE0FC 000EACDC  7F C3 F3 78 */	mr r3, r30
 /* 800EE100 000EACE0  90 04 21 E4 */	stw r0, 0x21e4(r4)
@@ -3309,8 +3309,8 @@ ftLink_800EE098:
 /* 800EE118 000EACF8  7C 08 03 A6 */	mtlr r0
 /* 800EE11C 000EACFC  4E 80 00 20 */	blr
 
-.global ftLink_800EE120
-ftLink_800EE120:
+.global ftLk_SpecialNFullyCharged_Coll
+ftLk_SpecialNFullyCharged_Coll:
 /* 800EE120 000EAD00  7C 08 02 A6 */	mflr r0
 /* 800EE124 000EAD04  90 01 00 04 */	stw r0, 4(r1)
 /* 800EE128 000EAD08  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -3325,16 +3325,16 @@ ftLink_800EE120:
 /* 800EE14C 000EAD2C  4B F8 F4 89 */	bl ftCommon_8007D5D4
 /* 800EE150 000EAD30  3C 80 0C 4C */	lis r4, 0x0C4C5090@ha
 /* 800EE154 000EAD34  C0 3F 08 94 */	lfs f1, 0x894(r31)
-/* 800EE158 000EAD38  C0 42 99 68 */	lfs f2, lbl_804D9348@sda21(r2)
+/* 800EE158 000EAD38  C0 42 99 68 */	lfs f2, ftLk_Init_804D9348@sda21(r2)
 /* 800EE15C 000EAD3C  7F C3 F3 78 */	mr r3, r30
-/* 800EE160 000EAD40  C0 62 99 60 */	lfs f3, lbl_804D9340@sda21(r2)
+/* 800EE160 000EAD40  C0 62 99 60 */	lfs f3, ftLk_Init_804D9340@sda21(r2)
 /* 800EE164 000EAD44  38 A4 50 90 */	addi r5, r4, 0x0C4C5090@l
 /* 800EE168 000EAD48  38 80 01 5C */	li r4, 0x15c
 /* 800EE16C 000EAD4C  38 C0 00 00 */	li r6, 0
 /* 800EE170 000EAD50  4B F7 B2 3D */	bl Fighter_ChangeMotionState
-/* 800EE174 000EAD54  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
+/* 800EE174 000EAD54  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
 /* 800EE178 000EAD58  80 9E 00 2C */	lwz r4, 0x2c(r30)
-/* 800EE17C 000EAD5C  38 03 AF 58 */	addi r0, r3, ftLink_800EAF58@l
+/* 800EE17C 000EAD5C  38 03 AF 58 */	addi r0, r3, ftLk_800EAF58@l
 /* 800EE180 000EAD60  90 04 21 DC */	stw r0, 0x21dc(r4)
 /* 800EE184 000EAD64  7F C3 F3 78 */	mr r3, r30
 /* 800EE188 000EAD68  90 04 21 E4 */	stw r0, 0x21e4(r4)
@@ -3347,8 +3347,8 @@ ftLink_800EE120:
 /* 800EE1A0 000EAD80  7C 08 03 A6 */	mtlr r0
 /* 800EE1A4 000EAD84  4E 80 00 20 */	blr
 
-.global ftLink_800EE1A8
-ftLink_800EE1A8:
+.global ftLk_SpecialNFire_Coll
+ftLk_SpecialNFire_Coll:
 /* 800EE1A8 000EAD88  7C 08 02 A6 */	mflr r0
 /* 800EE1AC 000EAD8C  90 01 00 04 */	stw r0, 4(r1)
 /* 800EE1B0 000EAD90  94 21 FF A8 */	stwu r1, -0x58(r1)
@@ -3383,9 +3383,9 @@ ftLink_800EE1A8:
 /* 800EE224 000EAE04  7C 64 00 2E */	lwzx r3, r4, r0
 /* 800EE228 000EAE08  38 80 00 00 */	li r4, 0
 /* 800EE22C 000EAE0C  4B F1 CF A1 */	bl lb_8000B1CC
-/* 800EE230 000EAE10  C0 02 99 60 */	lfs f0, lbl_804D9340@sda21(r2)
+/* 800EE230 000EAE10  C0 02 99 60 */	lfs f0, ftLk_Init_804D9340@sda21(r2)
 /* 800EE234 000EAE14  38 81 00 24 */	addi r4, r1, 0x24
-/* 800EE238 000EAE18  C0 22 99 64 */	lfs f1, lbl_804D9344@sda21(r2)
+/* 800EE238 000EAE18  C0 22 99 64 */	lfs f1, ftLk_Init_804D9344@sda21(r2)
 /* 800EE23C 000EAE1C  38 A1 00 30 */	addi r5, r1, 0x30
 /* 800EE240 000EAE20  D0 01 00 38 */	stfs f0, 0x38(r1)
 /* 800EE244 000EAE24  D0 01 00 2C */	stfs f0, 0x2c(r1)
@@ -3395,7 +3395,7 @@ ftLink_800EE1A8:
 /* 800EE254 000EAE34  C0 7E 00 00 */	lfs f3, 0(r30)
 /* 800EE258 000EAE38  48 1B A2 B5 */	bl it_802A850C
 /* 800EE25C 000EAE3C  7F 63 DB 78 */	mr r3, r27
-/* 800EE260 000EAE40  4B FF E9 AD */	bl ftLink_800ECC0C
+/* 800EE260 000EAE40  4B FF E9 AD */	bl ftLk_800ECC0C
 /* 800EE264 000EAE44  93 FD 19 74 */	stw r31, 0x1974(r29)
 /* 800EE268 000EAE48  38 7B 00 00 */	addi r3, r27, 0
 /* 800EE26C 000EAE4C  38 80 00 00 */	li r4, 0
@@ -3409,16 +3409,16 @@ ftLink_800EE1A8:
 /* 800EE288 000EAE68  4B F8 F3 4D */	bl ftCommon_8007D5D4
 /* 800EE28C 000EAE6C  3C 80 0C 4C */	lis r4, 0x0C4C5090@ha
 /* 800EE290 000EAE70  C0 3C 08 94 */	lfs f1, 0x894(r28)
-/* 800EE294 000EAE74  C0 42 99 68 */	lfs f2, lbl_804D9348@sda21(r2)
+/* 800EE294 000EAE74  C0 42 99 68 */	lfs f2, ftLk_Init_804D9348@sda21(r2)
 /* 800EE298 000EAE78  7F 63 DB 78 */	mr r3, r27
-/* 800EE29C 000EAE7C  C0 62 99 60 */	lfs f3, lbl_804D9340@sda21(r2)
+/* 800EE29C 000EAE7C  C0 62 99 60 */	lfs f3, ftLk_Init_804D9340@sda21(r2)
 /* 800EE2A0 000EAE80  38 A4 50 90 */	addi r5, r4, 0x0C4C5090@l
 /* 800EE2A4 000EAE84  38 80 01 5D */	li r4, 0x15d
 /* 800EE2A8 000EAE88  38 C0 00 00 */	li r6, 0
 /* 800EE2AC 000EAE8C  4B F7 B1 01 */	bl Fighter_ChangeMotionState
-/* 800EE2B0 000EAE90  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
+/* 800EE2B0 000EAE90  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
 /* 800EE2B4 000EAE94  80 9B 00 2C */	lwz r4, 0x2c(r27)
-/* 800EE2B8 000EAE98  38 03 AF 58 */	addi r0, r3, ftLink_800EAF58@l
+/* 800EE2B8 000EAE98  38 03 AF 58 */	addi r0, r3, ftLk_800EAF58@l
 /* 800EE2BC 000EAE9C  90 04 21 DC */	stw r0, 0x21dc(r4)
 /* 800EE2C0 000EAEA0  7F 63 DB 78 */	mr r3, r27
 /* 800EE2C4 000EAEA4  90 04 21 E4 */	stw r0, 0x21e4(r4)
@@ -3430,8 +3430,8 @@ ftLink_800EE1A8:
 /* 800EE2D8 000EAEB8  7C 08 03 A6 */	mtlr r0
 /* 800EE2DC 000EAEBC  4E 80 00 20 */	blr
 
-.global ftLink_800EE2E0
-ftLink_800EE2E0:
+.global ftLk_SpecialAirNCharge_Coll
+ftLk_SpecialAirNCharge_Coll:
 /* 800EE2E0 000EAEC0  7C 08 02 A6 */	mflr r0
 /* 800EE2E4 000EAEC4  90 01 00 04 */	stw r0, 4(r1)
 /* 800EE2E8 000EAEC8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -3446,16 +3446,16 @@ ftLink_800EE2E0:
 /* 800EE30C 000EAEEC  4B F8 F4 F1 */	bl ftCommon_8007D7FC
 /* 800EE310 000EAEF0  3C 80 0C 4C */	lis r4, 0x0C4C5090@ha
 /* 800EE314 000EAEF4  C0 3F 08 94 */	lfs f1, 0x894(r31)
-/* 800EE318 000EAEF8  C0 42 99 68 */	lfs f2, lbl_804D9348@sda21(r2)
+/* 800EE318 000EAEF8  C0 42 99 68 */	lfs f2, ftLk_Init_804D9348@sda21(r2)
 /* 800EE31C 000EAEFC  7F C3 F3 78 */	mr r3, r30
-/* 800EE320 000EAF00  C0 62 99 60 */	lfs f3, lbl_804D9340@sda21(r2)
+/* 800EE320 000EAF00  C0 62 99 60 */	lfs f3, ftLk_Init_804D9340@sda21(r2)
 /* 800EE324 000EAF04  38 A4 50 90 */	addi r5, r4, 0x0C4C5090@l
 /* 800EE328 000EAF08  38 80 01 58 */	li r4, 0x158
 /* 800EE32C 000EAF0C  38 C0 00 00 */	li r6, 0
 /* 800EE330 000EAF10  4B F7 B0 7D */	bl Fighter_ChangeMotionState
-/* 800EE334 000EAF14  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
+/* 800EE334 000EAF14  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
 /* 800EE338 000EAF18  80 9E 00 2C */	lwz r4, 0x2c(r30)
-/* 800EE33C 000EAF1C  38 03 AF 58 */	addi r0, r3, ftLink_800EAF58@l
+/* 800EE33C 000EAF1C  38 03 AF 58 */	addi r0, r3, ftLk_800EAF58@l
 /* 800EE340 000EAF20  90 04 21 DC */	stw r0, 0x21dc(r4)
 /* 800EE344 000EAF24  7F C3 F3 78 */	mr r3, r30
 /* 800EE348 000EAF28  90 04 21 E4 */	stw r0, 0x21e4(r4)
@@ -3468,8 +3468,8 @@ ftLink_800EE2E0:
 /* 800EE360 000EAF40  7C 08 03 A6 */	mtlr r0
 /* 800EE364 000EAF44  4E 80 00 20 */	blr
 
-.global ftLink_800EE368
-ftLink_800EE368:
+.global ftLk_SpecialAirNFullyCharged_Coll
+ftLk_SpecialAirNFullyCharged_Coll:
 /* 800EE368 000EAF48  7C 08 02 A6 */	mflr r0
 /* 800EE36C 000EAF4C  90 01 00 04 */	stw r0, 4(r1)
 /* 800EE370 000EAF50  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -3484,16 +3484,16 @@ ftLink_800EE368:
 /* 800EE394 000EAF74  4B F8 F4 69 */	bl ftCommon_8007D7FC
 /* 800EE398 000EAF78  3C 80 0C 4C */	lis r4, 0x0C4C5090@ha
 /* 800EE39C 000EAF7C  C0 3F 08 94 */	lfs f1, 0x894(r31)
-/* 800EE3A0 000EAF80  C0 42 99 68 */	lfs f2, lbl_804D9348@sda21(r2)
+/* 800EE3A0 000EAF80  C0 42 99 68 */	lfs f2, ftLk_Init_804D9348@sda21(r2)
 /* 800EE3A4 000EAF84  7F C3 F3 78 */	mr r3, r30
-/* 800EE3A8 000EAF88  C0 62 99 60 */	lfs f3, lbl_804D9340@sda21(r2)
+/* 800EE3A8 000EAF88  C0 62 99 60 */	lfs f3, ftLk_Init_804D9340@sda21(r2)
 /* 800EE3AC 000EAF8C  38 A4 50 90 */	addi r5, r4, 0x0C4C5090@l
 /* 800EE3B0 000EAF90  38 80 01 59 */	li r4, 0x159
 /* 800EE3B4 000EAF94  38 C0 00 00 */	li r6, 0
 /* 800EE3B8 000EAF98  4B F7 AF F5 */	bl Fighter_ChangeMotionState
-/* 800EE3BC 000EAF9C  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
+/* 800EE3BC 000EAF9C  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
 /* 800EE3C0 000EAFA0  80 9E 00 2C */	lwz r4, 0x2c(r30)
-/* 800EE3C4 000EAFA4  38 03 AF 58 */	addi r0, r3, ftLink_800EAF58@l
+/* 800EE3C4 000EAFA4  38 03 AF 58 */	addi r0, r3, ftLk_800EAF58@l
 /* 800EE3C8 000EAFA8  90 04 21 DC */	stw r0, 0x21dc(r4)
 /* 800EE3CC 000EAFAC  7F C3 F3 78 */	mr r3, r30
 /* 800EE3D0 000EAFB0  90 04 21 E4 */	stw r0, 0x21e4(r4)
@@ -3506,8 +3506,8 @@ ftLink_800EE368:
 /* 800EE3E8 000EAFC8  7C 08 03 A6 */	mtlr r0
 /* 800EE3EC 000EAFCC  4E 80 00 20 */	blr
 
-.global ftLink_800EE3F0
-ftLink_800EE3F0:
+.global ftLk_SpecialAirNFire_Coll
+ftLk_SpecialAirNFire_Coll:
 /* 800EE3F0 000EAFD0  7C 08 02 A6 */	mflr r0
 /* 800EE3F4 000EAFD4  90 01 00 04 */	stw r0, 4(r1)
 /* 800EE3F8 000EAFD8  94 21 FF A8 */	stwu r1, -0x58(r1)
@@ -3542,9 +3542,9 @@ ftLink_800EE3F0:
 /* 800EE46C 000EB04C  7C 64 00 2E */	lwzx r3, r4, r0
 /* 800EE470 000EB050  38 80 00 00 */	li r4, 0
 /* 800EE474 000EB054  4B F1 CD 59 */	bl lb_8000B1CC
-/* 800EE478 000EB058  C0 02 99 60 */	lfs f0, lbl_804D9340@sda21(r2)
+/* 800EE478 000EB058  C0 02 99 60 */	lfs f0, ftLk_Init_804D9340@sda21(r2)
 /* 800EE47C 000EB05C  38 81 00 24 */	addi r4, r1, 0x24
-/* 800EE480 000EB060  C0 22 99 64 */	lfs f1, lbl_804D9344@sda21(r2)
+/* 800EE480 000EB060  C0 22 99 64 */	lfs f1, ftLk_Init_804D9344@sda21(r2)
 /* 800EE484 000EB064  38 A1 00 30 */	addi r5, r1, 0x30
 /* 800EE488 000EB068  D0 01 00 38 */	stfs f0, 0x38(r1)
 /* 800EE48C 000EB06C  D0 01 00 2C */	stfs f0, 0x2c(r1)
@@ -3554,7 +3554,7 @@ ftLink_800EE3F0:
 /* 800EE49C 000EB07C  C0 7E 00 00 */	lfs f3, 0(r30)
 /* 800EE4A0 000EB080  48 1B A0 6D */	bl it_802A850C
 /* 800EE4A4 000EB084  7F 63 DB 78 */	mr r3, r27
-/* 800EE4A8 000EB088  4B FF E7 65 */	bl ftLink_800ECC0C
+/* 800EE4A8 000EB088  4B FF E7 65 */	bl ftLk_800ECC0C
 /* 800EE4AC 000EB08C  93 FD 19 74 */	stw r31, 0x1974(r29)
 /* 800EE4B0 000EB090  38 7B 00 00 */	addi r3, r27, 0
 /* 800EE4B4 000EB094  38 80 00 00 */	li r4, 0
@@ -3568,16 +3568,16 @@ ftLink_800EE3F0:
 /* 800EE4D0 000EB0B0  4B F8 F3 2D */	bl ftCommon_8007D7FC
 /* 800EE4D4 000EB0B4  3C 80 0C 4C */	lis r4, 0x0C4C5090@ha
 /* 800EE4D8 000EB0B8  C0 3C 08 94 */	lfs f1, 0x894(r28)
-/* 800EE4DC 000EB0BC  C0 42 99 68 */	lfs f2, lbl_804D9348@sda21(r2)
+/* 800EE4DC 000EB0BC  C0 42 99 68 */	lfs f2, ftLk_Init_804D9348@sda21(r2)
 /* 800EE4E0 000EB0C0  7F 63 DB 78 */	mr r3, r27
-/* 800EE4E4 000EB0C4  C0 62 99 60 */	lfs f3, lbl_804D9340@sda21(r2)
+/* 800EE4E4 000EB0C4  C0 62 99 60 */	lfs f3, ftLk_Init_804D9340@sda21(r2)
 /* 800EE4E8 000EB0C8  38 A4 50 90 */	addi r5, r4, 0x0C4C5090@l
 /* 800EE4EC 000EB0CC  38 80 01 5A */	li r4, 0x15a
 /* 800EE4F0 000EB0D0  38 C0 00 00 */	li r6, 0
 /* 800EE4F4 000EB0D4  4B F7 AE B9 */	bl Fighter_ChangeMotionState
-/* 800EE4F8 000EB0D8  3C 60 80 0F */	lis r3, ftLink_800EAF58@ha
+/* 800EE4F8 000EB0D8  3C 60 80 0F */	lis r3, ftLk_800EAF58@ha
 /* 800EE4FC 000EB0DC  80 9B 00 2C */	lwz r4, 0x2c(r27)
-/* 800EE500 000EB0E0  38 03 AF 58 */	addi r0, r3, ftLink_800EAF58@l
+/* 800EE500 000EB0E0  38 03 AF 58 */	addi r0, r3, ftLk_800EAF58@l
 /* 800EE504 000EB0E4  90 04 21 DC */	stw r0, 0x21dc(r4)
 /* 800EE508 000EB0E8  7F 63 DB 78 */	mr r3, r27
 /* 800EE50C 000EB0EC  90 04 21 E4 */	stw r0, 0x21e4(r4)
@@ -3591,63 +3591,63 @@ ftLink_800EE3F0:
 
 .section .sdata2
     .balign 8
-.global lbl_804D92E8
-lbl_804D92E8:
+.global ftLk_Init_804D92E8
+ftLk_Init_804D92E8:
     .4byte 0x00000000
-.global lbl_804D92EC
-lbl_804D92EC:
+.global ftLk_Init_804D92EC
+ftLk_Init_804D92EC:
     .4byte 0x3F800000
-.global lbl_804D92F0
-lbl_804D92F0:
+.global ftLk_Init_804D92F0
+ftLk_Init_804D92F0:
     .4byte 0x00000000
-.global lbl_804D92F4
-lbl_804D92F4:
+.global ftLk_Init_804D92F4
+ftLk_Init_804D92F4:
     .4byte 0x3F800000
-.global lbl_804D92F8
-lbl_804D92F8:
+.global ftLk_Init_804D92F8
+ftLk_Init_804D92F8:
     .4byte 0x00000000
-.global lbl_804D92FC
-lbl_804D92FC:
+.global ftLk_Init_804D92FC
+ftLk_Init_804D92FC:
     .4byte 0x3F800000
-.global lbl_804D9300
-lbl_804D9300:
+.global ftLk_Init_804D9300
+ftLk_Init_804D9300:
     .4byte 0x00000000
     .4byte 0x00000000
-.global lbl_804D9308
-lbl_804D9308:
+.global ftLk_Init_804D9308
+ftLk_Init_804D9308:
     .4byte 0x43300000
     .4byte 0x00000000
-.global lbl_804D9310
-lbl_804D9310:
+.global ftLk_Init_804D9310
+ftLk_Init_804D9310:
     .4byte 0x43300000
     .4byte 0x80000000
-.global lbl_804D9318
-lbl_804D9318:
+.global ftLk_Init_804D9318
+ftLk_Init_804D9318:
     .4byte 0xBF800000
     .4byte 0x00000000
-.global lbl_804D9320
-lbl_804D9320:
+.global ftLk_Init_804D9320
+ftLk_Init_804D9320:
     .4byte 0xC00921FB
     .4byte 0x54442D18
-.global lbl_804D9328
-lbl_804D9328:
+.global ftLk_Init_804D9328
+ftLk_Init_804D9328:
     .4byte 0x400921FB
     .4byte 0x54442D18
-.global lbl_804D9330
-lbl_804D9330:
+.global ftLk_Init_804D9330
+ftLk_Init_804D9330:
     .4byte 0x401921FB
     .4byte 0x54442D18
-.global lbl_804D9338
-lbl_804D9338:
+.global ftLk_Init_804D9338
+ftLk_Init_804D9338:
     .4byte 0x3F800000
     .4byte 0x00000000
-.global lbl_804D9340
-lbl_804D9340:
+.global ftLk_Init_804D9340
+ftLk_Init_804D9340:
     .4byte 0x00000000
-.global lbl_804D9344
-lbl_804D9344:
+.global ftLk_Init_804D9344
+ftLk_Init_804D9344:
     .4byte 0x3DB2B8C2
-.global lbl_804D9348
-lbl_804D9348:
+.global ftLk_Init_804D9348
+ftLk_Init_804D9348:
     .4byte 0x3F800000
     .4byte 0x00000000

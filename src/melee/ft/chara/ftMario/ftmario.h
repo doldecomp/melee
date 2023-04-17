@@ -98,85 +98,85 @@ static inline ftMarioAttributes* GetMarioAttr(Fighter* fp)
     return mario_attr;
 }
 
-extern MotionState ftMario_MotionStateTable[];
-extern MotionState lbl_803C7260[];
+extern MotionState ftMr_Init_MotionStateTable[];
+extern MotionState ftMr_Init_UnkMotionStates0[];
 
 // ftmario1
-void ftMario_OnDeath(HSD_GObj*);
-void ftMario_OnLoadForDrMario(Fighter*);
-void ftMario_OnLoad(HSD_GObj*);
-void ftMario_OnTakeDamage(HSD_GObj*);
-void ftMario_OnItemPickup(HSD_GObj*, bool);
-void ftMario_OnItemInvisible(HSD_GObj*);
-void ftMario_OnItemVisible(HSD_GObj*);
-void ftMario_OnItemDrop(HSD_GObj*, bool);
-void ftMario_LoadSpecialAttrs(HSD_GObj*);
-void ftMario_OnKnockbackEnter(HSD_GObj*);
-void ftMario_OnKnockbackExit(HSD_GObj*);
-void ftMario_800E0CAC(s32, s32*, s32*);
-unk_t ftMario_GetMotionFileString(enum_t arg0);
+void ftMr_Init_OnDeath(HSD_GObj*);
+void ftMr_Init_OnLoadForDrMario(Fighter*);
+void ftMr_Init_OnLoad(HSD_GObj*);
+void ftMr_Init_OnTakeDamage(HSD_GObj*);
+void ftMr_Init_OnItemPickup(HSD_GObj*, bool);
+void ftMr_Init_OnItemInvisible(HSD_GObj*);
+void ftMr_Init_OnItemVisible(HSD_GObj*);
+void ftMr_Init_OnItemDrop(HSD_GObj*, bool);
+void ftMr_Init_LoadSpecialAttrs(HSD_GObj*);
+void ftMr_Init_OnKnockbackEnter(HSD_GObj*);
+void ftMr_Init_OnKnockbackExit(HSD_GObj*);
+void ftMr_Init_UnkDemoCallbacks0(s32, s32*, s32*);
+unk_t ftMr_Init_GetMotionFileString(enum_t arg0);
 
 // ftmario2
-int ftMario_SpecialN_VitaminRandom(HSD_GObj*);
-void ftMario_SpecialN_StartMotion(HSD_GObj*);
-void ftMario_SpecialN_Anim(HSD_GObj*);
-void ftMario_SpecialN_IASA(HSD_GObj*);
-void ftMario_SpecialN_Phys(HSD_GObj*);
-void ftMario_SpecialN_Coll(HSD_GObj*);
-void ftMario_SpecialN_ItemFireSpawn(HSD_GObj*);
-void ftMario_SpecialAirN_StartMotion(HSD_GObj*);
-void ftMario_SpecialAirN_Anim(HSD_GObj*);
-void ftMario_SpecialAirN_IASA(HSD_GObj*);
-void ftMario_SpecialAirN_Phys(HSD_GObj*);
-void ftMario_SpecialAirN_Coll(HSD_GObj*);
-void ftMario_SpecialN_GroundToAir(HSD_GObj*);
-void ftMario_SpecialAirN_AirToGround(HSD_GObj*);
+int ftMr_SpecialN_VitaminRandom(HSD_GObj*);
+void ftMr_SpecialN_Enter(HSD_GObj*);
+void ftMr_SpecialN_Anim(HSD_GObj*);
+void ftMr_SpecialN_IASA(HSD_GObj*);
+void ftMr_SpecialN_Phys(HSD_GObj*);
+void ftMr_SpecialN_Coll(HSD_GObj*);
+void ftMr_SpecialN_ItemFireSpawn(HSD_GObj*);
+void ftMr_SpecialAirN_Enter(HSD_GObj*);
+void ftMr_SpecialAirN_Anim(HSD_GObj*);
+void ftMr_SpecialAirN_IASA(HSD_GObj*);
+void ftMr_SpecialAirN_Phys(HSD_GObj*);
+void ftMr_SpecialAirN_Coll(HSD_GObj*);
+void ftMr_SpecialN_GroundToAir(HSD_GObj*);
+void ftMr_SpecialAirN_AirToGround(HSD_GObj*);
 
 // ftmario3
-void ftMario_SpecialS_CreateCape(HSD_GObj*);
-void ftMario_SpecialS_SetNULL(HSD_GObj*);
-void ftMario_SpecialS_RemoveCape(HSD_GObj*);
-void ftMario_SpecialS_EnterHitlag(HSD_GObj*);
-void ftMario_SpecialS_ExitHitlag(HSD_GObj*);
-void ftMario_SpecialS_ExitHitlag(HSD_GObj*);
-bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj*);
-void ftMario_SpecialS_StartMotion(HSD_GObj*);
-void ftMario_SpecialAirS_StartMotion(HSD_GObj*);
-void ftMario_SpecialS_Anim(HSD_GObj*);
-void ftMario_SpecialAirS_Anim(HSD_GObj*);
-void ftMario_SpecialS_IASA(HSD_GObj*);
-void ftMario_SpecialAirS_IASA(HSD_GObj*);
-void ftMario_SpecialS_Phys(HSD_GObj*);
-void ftMario_SpecialAirS_Phys(HSD_GObj*);
-void ftMario_SpecialS_Coll(HSD_GObj*);
-void ftMario_SpecialAirS_Coll(HSD_GObj*);
-void ftMario_SpecialS_GroundToAir(HSD_GObj*);
-void ftMario_SpecialAirS_AirToGround(HSD_GObj*);
+void ftMr_SpecialS_CreateCape(HSD_GObj*);
+void ftMr_SpecialS_SetNULL(HSD_GObj*);
+void ftMr_SpecialS_RemoveCape(HSD_GObj*);
+void ftMr_SpecialS_EnterHitlag(HSD_GObj*);
+void ftMr_SpecialS_ExitHitlag(HSD_GObj*);
+void ftMr_SpecialS_ExitHitlag(HSD_GObj*);
+bool ftMr_SpecialS_CheckItemCapeRemove(HSD_GObj*);
+void ftMr_SpecialS_Enter(HSD_GObj*);
+void ftMr_SpecialAirS_Enter(HSD_GObj*);
+void ftMr_SpecialS_Anim(HSD_GObj*);
+void ftMr_SpecialAirS_Anim(HSD_GObj*);
+void ftMr_SpecialS_IASA(HSD_GObj*);
+void ftMr_SpecialAirS_IASA(HSD_GObj*);
+void ftMr_SpecialS_Phys(HSD_GObj*);
+void ftMr_SpecialAirS_Phys(HSD_GObj*);
+void ftMr_SpecialS_Coll(HSD_GObj*);
+void ftMr_SpecialAirS_Coll(HSD_GObj*);
+void ftMr_SpecialS_GroundToAir(HSD_GObj*);
+void ftMr_SpecialAirS_AirToGround(HSD_GObj*);
 
 // ftmario4
-void ftMario_SpecialHi_StartMotion(HSD_GObj*);
-void ftMario_SpecialAirHi_StartMotion(HSD_GObj*);
-void ftMario_SpecialHi_Anim(HSD_GObj*);
-void ftMario_SpecialAirHi_Anim(HSD_GObj*);
-void ftMario_SpecialHi_IASA(HSD_GObj*);
-void ftMario_SpecialAirHi_IASA(HSD_GObj*);
-void ftMario_SpecialHi_Phys(HSD_GObj*);
-void ftMario_SpecialAirHi_Phys(HSD_GObj*);
-void ftMario_SpecialHi_CheckLanding(HSD_GObj*);
-void ftMario_SpecialHi_Coll(HSD_GObj*);
-void ftMario_SpecialAirHi_Coll(HSD_GObj*);
+void ftMr_SpecialHi_Enter(HSD_GObj*);
+void ftMr_SpecialAirHi_Enter(HSD_GObj*);
+void ftMr_SpecialHi_Anim(HSD_GObj*);
+void ftMr_SpecialAirHi_Anim(HSD_GObj*);
+void ftMr_SpecialHi_IASA(HSD_GObj*);
+void ftMr_SpecialAirHi_IASA(HSD_GObj*);
+void ftMr_SpecialHi_Phys(HSD_GObj*);
+void ftMr_SpecialAirHi_Phys(HSD_GObj*);
+void ftMr_SpecialHi_CheckLanding(HSD_GObj*);
+void ftMr_SpecialHi_Coll(HSD_GObj*);
+void ftMr_SpecialAirHi_Coll(HSD_GObj*);
 
 // ftmario5
-void ftMario_SpecialLw_UpdateRot(HSD_GObj*);
-void ftMario_SpecialLw_StartMotion(HSD_GObj*);
-void ftMario_SpecialAirLw_StartMotion(HSD_GObj*);
-void ftMario_SpecialLw_Anim(HSD_GObj*);
-void ftMario_SpecialAirLw_Anim(HSD_GObj*);
-void ftMario_SpecialLw_IASA(HSD_GObj*);
-void ftMario_SpecialAirLw_IASA(HSD_GObj*);
-void ftMario_SpecialLw_Phys(HSD_GObj*);
-void ftMario_SpecialAirLw_Phys(HSD_GObj*);
-void ftMario_SpecialLw_Coll(HSD_GObj*);
-void ftMario_SpecialAirLw_Coll(HSD_GObj*);
+void ftMr_SpecialLw_UpdateRot(HSD_GObj*);
+void ftMr_SpecialLw_Enter(HSD_GObj*);
+void ftMr_SpecialAirLw_Enter(HSD_GObj*);
+void ftMr_SpecialLw_Anim(HSD_GObj*);
+void ftMr_SpecialAirLw_Anim(HSD_GObj*);
+void ftMr_SpecialLw_IASA(HSD_GObj*);
+void ftMr_SpecialAirLw_IASA(HSD_GObj*);
+void ftMr_SpecialLw_Phys(HSD_GObj*);
+void ftMr_SpecialAirLw_Phys(HSD_GObj*);
+void ftMr_SpecialLw_Coll(HSD_GObj*);
+void ftMr_SpecialAirLw_Coll(HSD_GObj*);
 
 #endif

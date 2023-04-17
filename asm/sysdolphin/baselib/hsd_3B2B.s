@@ -3,8 +3,8 @@
 .section .text
 
 # https://decomp.me/scratch/SBhbM // 18500 (0%)
-.global func_803B2B20
-func_803B2B20:
+.global hsd_803B2B20
+hsd_803B2B20:
 /* 803B2B20 003AF700  7C 08 02 A6 */	mflr r0
 /* 803B2B24 003AF704  38 C0 00 45 */	li r6, 0x45
 /* 803B2B28 003AF708  90 01 00 04 */	stw r0, 4(r1)

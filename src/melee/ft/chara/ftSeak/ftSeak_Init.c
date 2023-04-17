@@ -12,92 +12,92 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
-MotionState ftSeak_MotionStateTable[] = {
-    { 295, 0x00340111, 0x12000000, ftSeak_80112248, ftSeak_801126C8,
-      ftSeak_80112878, ftSeak_80112978, ftCamera_UpdateCameraBox },
-    { 296, 0x003C0111, 0x12000000, ftSeak_801122D8, ftSeak_801126CC,
-      ftSeak_80112898, ftSeak_801129F8, ftCamera_UpdateCameraBox },
-    { 297, 0x00340111, 0x12000000, ftSeak_80112384, ftSeak_80112798,
-      ftSeak_801128B8, ftSeak_80112A78, ftCamera_UpdateCameraBox },
-    { 298, 0x00340111, 0x12000000, ftSeak_801123CC, ftSeak_8011279C,
-      ftSeak_801128D8, ftSeak_80112B00, ftCamera_UpdateCameraBox },
-    { 299, 0x00340511, 0x12000000, ftSeak_80112450, ftSeak_801127A0,
-      ftSeak_801128F8, ftSeak_80112B98, ftCamera_UpdateCameraBox },
-    { 300, 0x003C0511, 0x12000000, ftSeak_801124E0, ftSeak_801127A4,
-      ftSeak_80112918, ftSeak_80112C18, ftCamera_UpdateCameraBox },
-    { 301, 0x00340511, 0x12000000, ftSeak_8011258C, ftSeak_80112870,
-      ftSeak_80112938, ftSeak_80112C98, ftCamera_UpdateCameraBox },
-    { 302, 0x00340511, 0x12000000, ftSeak_8011260C, ftSeak_80112874,
-      ftSeak_80112958, ftSeak_80112CE4, ftCamera_UpdateCameraBox },
-    { 303, 0x00340012, 0x13000000, ftSeak_SpecialS_Anim, ftSeak_80111344,
-      ftSeak_8011134C, ftSeak_801113C8, ftCamera_UpdateCameraBox },
-    { 305, 0x003C0012, 0x13000000, ftSeak_80111588, ftSeak_80111708,
-      ftSeak_80111778, ftSeak_801117B8, ftCamera_UpdateCameraBox },
-    { 304, 0x00340012, 0x13000000, ftSeak_80111A48, ftSeak_80111BF0,
-      ftSeak_80111BF8, ftSeak_80111C38, ftCamera_UpdateCameraBox },
-    { 306, 0x00340412, 0x13000000, ftSeak_80111308, ftSeak_80111348,
-      ftSeak_8011136C, ftSeak_80111404, ftCamera_UpdateCameraBox },
-    { 308, 0x003C0412, 0x13000000, ftSeak_80111648, ftSeak_80111740,
-      ftSeak_80111798, ftSeak_801117F4, ftCamera_UpdateCameraBox },
-    { 307, 0x00340412, 0x13000000, ftSeak_80111B1C, ftSeak_80111BF4,
-      ftSeak_80111C18, ftSeak_80111C74, ftCamera_UpdateCameraBox },
-    { 309, 0x00340213, 0x14000000, ftSeak_80113194, ftSeak_8011320C,
-      ftSeak_80113214, ftSeak_80113278, ftCamera_UpdateCameraBox },
-    { 309, 0x00340213, 0x14000000, ftSeak_801133FC, ftSeak_80113474,
-      ftSeak_8011347C, ftSeak_801134A0, ftCamera_UpdateCameraBox },
-    { 310, 0x00340213, 0x14000000, ftSeak_80113C40, ftSeak_80113CDC,
-      ftSeak_80113CE4, ftSeak_80113D80, ftCamera_UpdateCameraBox },
-    { 311, 0x00340613, 0x14000000, ftSeak_801131D0, ftSeak_80113210,
-      ftSeak_80113234, ftSeak_801132B4, ftCamera_UpdateCameraBox },
-    { 311, 0x00340613, 0x14000000, ftSeak_80113438, ftSeak_80113478,
-      ftSeak_8011349C, ftSeak_80113540, ftCamera_UpdateCameraBox },
-    { 312, 0x00340613, 0x14000000, ftSeak_80113C7C, ftSeak_80113CE0,
-      ftSeak_80113D04, ftSeak_80113DBC, ftCamera_UpdateCameraBox },
-    { 313, 0x00340014, 0x15000000, ftSeak_801142E8, ftSeak_80114368,
-      ftSeak_80114370, ftSeak_801143D4, ftCamera_UpdateCameraBox },
-    { 314, 0x00340014, 0x15000000, ftSeak_80114524, ftSeak_8011459C,
-      ftSeak_801145A4, ftSeak_80114608, ftCamera_UpdateCameraBox },
-    { 315, 0x00340414, 0x15000000, ftSeak_80114328, ftSeak_8011436C,
-      ftSeak_80114390, ftSeak_80114410, ftCamera_UpdateCameraBox },
-    { 316, 0x00340414, 0x15000000, ftSeak_80114560, ftSeak_801145A0,
-      ftSeak_801145C4, ftSeak_80114644, ftCamera_UpdateCameraBox },
+MotionState ftSk_Init_MotionStateTable[] = {
+    { 295, 0x00340111, 0x12000000, ftSk_SpecialNChargeStart_Anim, ftSk_SpecialNChargeStart_IASA,
+      ftSk_SpecialNChargeStart_Phys, ftSk_SpecialNChargeStart_Coll, ftCamera_UpdateCameraBox },
+    { 296, 0x003C0111, 0x12000000, ftSk_SpecialNChargeLoop_Anim, ftSk_SpecialNChargeLoop_IASA,
+      ftSk_SpecialNChargeLoop_Phys, ftSk_SpecialNChargeLoop_Coll, ftCamera_UpdateCameraBox },
+    { 297, 0x00340111, 0x12000000, ftSk_SpecialNChargeEnd_Anim, ftSk_SpecialNChargeEnd_IASA,
+      ftSk_SpecialNChargeEnd_Phys, ftSk_SpecialNChargeEnd_Coll, ftCamera_UpdateCameraBox },
+    { 298, 0x00340111, 0x12000000, ftSk_SpecialNShoot_Anim, ftSk_SpecialNShoot_IASA,
+      ftSk_SpecialNShoot_Phys, ftSk_SpecialNShoot_Coll, ftCamera_UpdateCameraBox },
+    { 299, 0x00340511, 0x12000000, ftSk_SpecialAirNChargeStart_Anim, ftSk_SpecialAirNChargeStart_IASA,
+      ftSk_SpecialAirNChargeStart_Phys, ftSk_SpecialAirNChargeStart_Coll, ftCamera_UpdateCameraBox },
+    { 300, 0x003C0511, 0x12000000, ftSk_SpecialAirNChargeLoop_Anim, ftSk_SpecialAirNChargeLoop_IASA,
+      ftSk_SpecialAirNChargeLoop_Phys, ftSk_SpecialAirNChargeLoop_Coll, ftCamera_UpdateCameraBox },
+    { 301, 0x00340511, 0x12000000, ftSk_SpecialAirNChargeEnd_Anim, ftSk_SpecialAirNChargeEnd_IASA,
+      ftSk_SpecialAirNChargeEnd_Phys, ftSk_SpecialAirNChargeEnd_Coll, ftCamera_UpdateCameraBox },
+    { 302, 0x00340511, 0x12000000, ftSk_SpecialAirNShoot_Anim, ftSk_SpecialAirNShoot_IASA,
+      ftSk_SpecialAirNShoot_Phys, ftSk_SpecialAirNShoot_Coll, ftCamera_UpdateCameraBox },
+    { 303, 0x00340012, 0x13000000, ftSk_SpecialSStart_Anim, ftSk_SpecialSStart_IASA,
+      ftSk_SpecialSStart_Phys, ftSk_SpecialSStart_Coll, ftCamera_UpdateCameraBox },
+    { 305, 0x003C0012, 0x13000000, ftSk_SpecialSLoop_Anim, ftSk_SpecialSLoop_IASA,
+      ftSk_SpecialSLoop_Phys, ftSk_SpecialSLoop_Coll, ftCamera_UpdateCameraBox },
+    { 304, 0x00340012, 0x13000000, ftSk_SpecialSEnd_Anim, ftSk_SpecialSEnd_IASA,
+      ftSk_SpecialSEnd_Phys, ftSk_SpecialSEnd_Coll, ftCamera_UpdateCameraBox },
+    { 306, 0x00340412, 0x13000000, ftSk_SpecialAirSStart_Anim, ftSk_SpecialAirSStart_IASA,
+      ftSk_SpecialAirSStart_Phys, ftSk_SpecialAirSStart_Coll, ftCamera_UpdateCameraBox },
+    { 308, 0x003C0412, 0x13000000, ftSk_SpecialAirSLoop_Anim, ftSk_SpecialAirSLoop_IASA,
+      ftSk_SpecialAirSLoop_Phys, ftSk_SpecialAirSLoop_Coll, ftCamera_UpdateCameraBox },
+    { 307, 0x00340412, 0x13000000, ftSk_SpecialAirSEnd_Anim, ftSk_SpecialAirSEnd_IASA,
+      ftSk_SpecialAirSEnd_Phys, ftSk_SpecialAirSEnd_Coll, ftCamera_UpdateCameraBox },
+    { 309, 0x00340213, 0x14000000, ftSk_SpecialHiStart_Anim, ftSk_SpecialHiStart_IASA,
+      ftSk_SpecialHiStart_Phys, ftSk_SpecialHiStart_Coll, ftCamera_UpdateCameraBox },
+    { 309, 0x00340213, 0x14000000, ftSk_SpecialHi_Anim, ftSk_SpecialHi_IASA,
+      ftSk_SpecialHi_Phys, ftSk_SpecialHi_Coll, ftCamera_UpdateCameraBox },
+    { 310, 0x00340213, 0x14000000, ftSk_SpecialHiEnd_Anim, ftSk_SpecialHiEnd_IASA,
+      ftSk_SpecialHiEnd_Phys, ftSk_SpecialHiEnd_Coll, ftCamera_UpdateCameraBox },
+    { 311, 0x00340613, 0x14000000, ftSk_SpecialAirHiStart_Anim, ftSk_SpecialAirHiStart_IASA,
+      ftSk_SpecialAirHiStart_Phys, ftSk_SpecialAirHiStart_Coll, ftCamera_UpdateCameraBox },
+    { 311, 0x00340613, 0x14000000, ftSk_SpecialAirHi_Anim, ftSk_SpecialAirHi_IASA,
+      ftSk_SpecialAirHi_Phys, ftSk_SpecialAirHi_Coll, ftCamera_UpdateCameraBox },
+    { 312, 0x00340613, 0x14000000, ftSk_SpecialAirHiEnd_Anim, ftSk_SpecialAirHiEnd_IASA,
+      ftSk_SpecialAirHiEnd_Phys, ftSk_SpecialAirHiEnd_Coll, ftCamera_UpdateCameraBox },
+    { 313, 0x00340014, 0x15000000, ftSk_SpecialLw_Anim, ftSk_SpecialLw_IASA,
+      ftSk_SpecialLw_Phys, ftSk_SpecialLw_Coll, ftCamera_UpdateCameraBox },
+    { 314, 0x00340014, 0x15000000, ftSk_SpecialLwEnd_Anim, ftSk_SpecialLwEnd_IASA,
+      ftSk_SpecialLwEnd_Phys, ftSk_SpecialLwEnd_Coll, ftCamera_UpdateCameraBox },
+    { 315, 0x00340414, 0x15000000, ftSk_SpecialAirLw_Anim, ftSk_SpecialAirLw_IASA,
+      ftSk_SpecialAirLw_Phys, ftSk_SpecialAirLw_Coll, ftCamera_UpdateCameraBox },
+    { 316, 0x00340414, 0x15000000, ftSk_SpecialAirLwEnd_Anim, ftSk_SpecialAirLwEnd_IASA,
+      ftSk_SpecialAirLwEnd_Phys, ftSk_SpecialAirLwEnd_Coll, ftCamera_UpdateCameraBox },
 };
 
-char lbl_803CC360[] = "PlSk.dat";
-char lbl_803CC36C[] = "ftDataSeak";
-char lbl_803CC378[] = "PlSkNr.dat";
-char lbl_803CC384[] = "PlySeak5K_Share_joint";
-char lbl_803CC39C[] = "PlySeak5K_Share_matanim_joint";
-char lbl_803CC3BC[] = "PlSkRe.dat";
-char lbl_803CC3C8[] = "PlySeak5KRe_Share_joint";
-char lbl_803CC3E0[] = "PlySeak5KRe_Share_matanim_joint";
-char lbl_803CC400[] = "PlSkBu.dat";
-char lbl_803CC40C[] = "PlySeak5KBu_Share_joint";
-char lbl_803CC424[] = "PlySeak5KBu_Share_matanim_joint";
-char lbl_803CC444[] = "PlSkGr.dat";
-char lbl_803CC450[] = "PlySeak5KGr_Share_joint";
-char lbl_803CC468[] = "PlySeak5KGr_Share_matanim_joint";
-char lbl_803CC488[] = "PlSkWh.dat";
-char lbl_803CC494[] = "PlySeak5KWh_Share_joint";
-char lbl_803CC4AC[] = "PlySeak5KWh_Share_matanim_joint";
-char lbl_803CC4CC[] = "PlSkAJ.dat";
+char ftSk_Init_DatFilename[] = "PlSk.dat";
+char ftSk_Init_DataName[] = "ftDataSeak";
+char ftSk_Init_803CC378[] = "PlSkNr.dat";
+char ftSk_Init_803CC384[] = "PlySeak5K_Share_joint";
+char ftSk_Init_803CC39C[] = "PlySeak5K_Share_matanim_joint";
+char ftSk_Init_803CC3BC[] = "PlSkRe.dat";
+char ftSk_Init_803CC3C8[] = "PlySeak5KRe_Share_joint";
+char ftSk_Init_803CC3E0[] = "PlySeak5KRe_Share_matanim_joint";
+char ftSk_Init_803CC400[] = "PlSkBu.dat";
+char ftSk_Init_803CC40C[] = "PlySeak5KBu_Share_joint";
+char ftSk_Init_803CC424[] = "PlySeak5KBu_Share_matanim_joint";
+char ftSk_Init_803CC444[] = "PlSkGr.dat";
+char ftSk_Init_803CC450[] = "PlySeak5KGr_Share_joint";
+char ftSk_Init_803CC468[] = "PlySeak5KGr_Share_matanim_joint";
+char ftSk_Init_803CC488[] = "PlSkWh.dat";
+char ftSk_Init_803CC494[] = "PlySeak5KWh_Share_joint";
+char ftSk_Init_803CC4AC[] = "PlySeak5KWh_Share_matanim_joint";
+char ftSk_Init_AnimDatFilename[] = "PlSkAJ.dat";
 
-Fighter_DemoStrings lbl_803CC548 = {
+Fighter_DemoStrings ftSk_Init_DemoMotionFilenames = {
     "ftDemoResultMotionFileSeak",
     "ftDemoIntroMotionFileSeak",
     "ftDemoEndingMotionFileSeak",
     "ftDemoViWaitMotionFileSeak",
 };
 
-Fighter_CostumeStrings lbl_803CC558[] = {
-    { lbl_803CC378, lbl_803CC384, lbl_803CC39C },
-    { lbl_803CC3BC, lbl_803CC3C8, lbl_803CC3E0 },
-    { lbl_803CC400, lbl_803CC40C, lbl_803CC424 },
-    { lbl_803CC444, lbl_803CC450, lbl_803CC468 },
-    { lbl_803CC488, lbl_803CC494, lbl_803CC4AC },
+Fighter_CostumeStrings ftSk_Init_CostumeStrings[] = {
+    { ftSk_Init_803CC378, ftSk_Init_803CC384, ftSk_Init_803CC39C },
+    { ftSk_Init_803CC3BC, ftSk_Init_803CC3C8, ftSk_Init_803CC3E0 },
+    { ftSk_Init_803CC400, ftSk_Init_803CC40C, ftSk_Init_803CC424 },
+    { ftSk_Init_803CC444, ftSk_Init_803CC450, ftSk_Init_803CC468 },
+    { ftSk_Init_803CC488, ftSk_Init_803CC494, ftSk_Init_803CC4AC },
 };
 
-void ftSeak_OnDeath(HSD_GObj* gobj)
+void ftSk_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->ev.sk.x222C = 0;
@@ -107,7 +107,7 @@ void ftSeak_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 1, -1);
 }
 
-void ftSeak_OnLoad(HSD_GObj* gobj)
+void ftSk_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     void** item_list = fp->x10C_ftData->x48_items;
@@ -122,16 +122,16 @@ void ftSeak_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(item_list[3], 0x61U);
 }
 
-/* static */ void ftSeak_80111FBC(HSD_GObj* gobj);
-/* static */ void ftSeak_CheckAndDestroyChain(HSD_GObj* gobj);
+/* static */ void ftSk_SpecialN_80111FBC(HSD_GObj* gobj);
+/* static */ void ftSk_SpecialS_CheckAndDestroyChain(HSD_GObj* gobj);
 
-void ftSeak_80110198(HSD_GObj* gobj)
+void ftSk_Init_80110198(HSD_GObj* gobj)
 {
-    ftSeak_80111FBC(gobj);
-    ftSeak_CheckAndDestroyChain(gobj);
+    ftSk_SpecialN_80111FBC(gobj);
+    ftSk_SpecialS_CheckAndDestroyChain(gobj);
 }
 
-void ftSeak_801101CC(HSD_GObj* gobj)
+void ftSk_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ev.sk.x222C == 6) {
@@ -139,37 +139,37 @@ void ftSeak_801101CC(HSD_GObj* gobj)
     }
 }
 
-void ftSeak_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftSk_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
     Fighter_OnItemPickup(gobj, bool, 1, 1);
 }
 
-void ftSeak_OnItemInvisible(HSD_GObj* gobj)
+void ftSk_Init_OnItemInvisible(HSD_GObj* gobj)
 {
     Fighter_OnItemInvisible(gobj, 1);
 }
 
-void ftSeak_OnItemVisible(HSD_GObj* gobj)
+void ftSk_Init_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftSeak_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftSk_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void ftSeak_LoadSpecialAttrs(HSD_GObj* gobj)
+void ftSk_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftSeakAttributes);
 }
 
-void ftSeak_OnKnockbackEnter(HSD_GObj* gobj)
+void ftSk_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackEnter(gobj, 1);
 }
 
-void ftSeak_OnKnockbackExit(HSD_GObj* gobj)
+void ftSk_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, 1);
 }
@@ -182,7 +182,7 @@ void ftSeak_OnKnockbackExit(HSD_GObj* gobj)
 void ftSeak_8011412C(HSD_GObj* gobj) {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cb.x21BC_callback_Accessory4 = 0;
-    ftCommon_8007EFC8(gobj, &ftZelda_8013B4D8);
+    ftCommon_8007EFC8(gobj, &ftZd_SpecialLw_8013B4D8);
 }
 
 #endif

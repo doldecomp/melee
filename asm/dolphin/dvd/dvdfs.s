@@ -26,9 +26,9 @@ DVDConvertPathToEntrynum:
 /* 80337974 00334554  94 21 FF B8 */	stwu r1, -0x48(r1)
 /* 80337978 00334558  BE 81 00 18 */	stmw r20, 0x18(r1)
 /* 8033797C 0033455C  7C 77 1B 78 */	mr r23, r3
-/* 80337980 00334560  3C 60 80 40 */	lis r3, lbl_80400D80@ha
+/* 80337980 00334560  3C 60 80 40 */	lis r3, DVDFS_80400D80@ha
 /* 80337984 00334564  3B 37 00 00 */	addi r25, r23, 0
-/* 80337988 00334568  3B E3 0D 80 */	addi r31, r3, lbl_80400D80@l
+/* 80337988 00334568  3B E3 0D 80 */	addi r31, r3, DVDFS_80400D80@l
 /* 8033798C 0033456C  83 4D BB E8 */	lwz r26, currentDirectory@sda21(r13)
 .L_80337990:
 /* 80337990 00334570  88 77 00 00 */	lbz r3, 0(r23)
@@ -127,7 +127,7 @@ DVDConvertPathToEntrynum:
 /* 80337ACC 003346AC  38 BF 00 00 */	addi r5, r31, 0
 /* 80337AD0 003346B0  4C C6 31 82 */	crclr 6
 /* 80337AD4 003346B4  38 D9 00 00 */	addi r6, r25, 0
-/* 80337AD8 003346B8  38 6D A4 E8 */	addi r3, r13, lbl_804D5B88@sda21
+/* 80337AD8 003346B8  38 6D A4 E8 */	addi r3, r13, DVDFS_804D5B88@sda21
 /* 80337ADC 003346BC  38 80 01 78 */	li r4, 0x178
 /* 80337AE0 003346C0  48 00 DC 49 */	bl OSPanic
 /* 80337AE4 003346C4  48 00 00 28 */	b .L_80337B0C
@@ -315,10 +315,10 @@ DVDReadAsyncPrio:
 /* 80337D28 00334908  7C 1D 00 40 */	cmplw r29, r0
 /* 80337D2C 0033490C  41 80 00 1C */	blt .L_80337D48
 .L_80337D30:
-/* 80337D30 00334910  3C 60 80 40 */	lis r3, lbl_80400E48@ha
+/* 80337D30 00334910  3C 60 80 40 */	lis r3, DVDFS_80400E48@ha
 /* 80337D34 00334914  4C C6 31 82 */	crclr 6
-/* 80337D38 00334918  38 A3 0E 48 */	addi r5, r3, lbl_80400E48@l
-/* 80337D3C 0033491C  38 6D A4 E8 */	addi r3, r13, lbl_804D5B88@sda21
+/* 80337D38 00334918  38 A3 0E 48 */	addi r5, r3, DVDFS_80400E48@l
+/* 80337D3C 0033491C  38 6D A4 E8 */	addi r3, r13, DVDFS_804D5B88@sda21
 /* 80337D40 00334920  38 80 02 E3 */	li r4, 0x2e3
 /* 80337D44 00334924  48 00 D9 E5 */	bl OSPanic
 .L_80337D48:
@@ -329,10 +329,10 @@ DVDReadAsyncPrio:
 /* 80337D58 00334938  7C 04 00 40 */	cmplw r4, r0
 /* 80337D5C 0033493C  41 80 00 1C */	blt .L_80337D78
 .L_80337D60:
-/* 80337D60 00334940  3C 60 80 40 */	lis r3, lbl_80400E48@ha
+/* 80337D60 00334940  3C 60 80 40 */	lis r3, DVDFS_80400E48@ha
 /* 80337D64 00334944  4C C6 31 82 */	crclr 6
-/* 80337D68 00334948  38 A3 0E 48 */	addi r5, r3, lbl_80400E48@l
-/* 80337D6C 0033494C  38 6D A4 E8 */	addi r3, r13, lbl_804D5B88@sda21
+/* 80337D68 00334948  38 A3 0E 48 */	addi r5, r3, DVDFS_80400E48@l
+/* 80337D6C 0033494C  38 6D A4 E8 */	addi r3, r13, DVDFS_804D5B88@sda21
 /* 80337D70 00334950  38 80 02 E9 */	li r4, 0x2e9
 /* 80337D74 00334954  48 00 D9 B5 */	bl OSPanic
 .L_80337D78:
@@ -372,20 +372,20 @@ cbForReadAsync:
 
 .section .data
     .balign 8
-.global lbl_80400D80
-lbl_80400D80:
+.global DVDFS_80400D80
+DVDFS_80400D80:
     .asciz "DVDConvertEntrynumToPath(possibly DVDOpen or DVDChangeDir or DVDOpenDir): specified directory or file (%s) doesn't match standard 8.3 format. This is a temporary restriction and will be removed soon\n"
     .balign 4
-.global lbl_80400E48
-lbl_80400E48:
+.global DVDFS_80400E48
+DVDFS_80400E48:
     .asciz "DVDReadAsync(): specified area is out of the file  "
     .balign 4
 
 
 .section .sdata
     .balign 8
-.global lbl_804D5B88
-lbl_804D5B88:
+.global DVDFS_804D5B88
+DVDFS_804D5B88:
     .asciz "dvdfs.c"
     .balign 4
 

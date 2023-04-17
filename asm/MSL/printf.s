@@ -251,7 +251,7 @@ __FileWrite:
 .global __pformatter
 __pformatter:
 /* 80324044 00320C24  7C 08 02 A6 */	mflr r0
-/* 80324048 00320C28  3C E0 80 3C */	lis r7, lbl_803B8F30@ha
+/* 80324048 00320C28  3C E0 80 3C */	lis r7, MSL_Printf_803B8F30@ha
 /* 8032404C 00320C2C  90 01 00 04 */	stw r0, 4(r1)
 /* 80324050 00320C30  38 00 00 20 */	li r0, 0x20
 /* 80324054 00320C34  94 21 FD 98 */	stwu r1, -0x268(r1)
@@ -262,7 +262,7 @@ __pformatter:
 /* 80324068 00320C48  3B 25 00 00 */	addi r25, r5, 0
 /* 8032406C 00320C4C  3B 41 02 1C */	addi r26, r1, 0x21c
 /* 80324070 00320C50  3A E1 02 1B */	addi r23, r1, 0x21b
-/* 80324074 00320C54  3A 87 8F 30 */	addi r20, r7, lbl_803B8F30@l
+/* 80324074 00320C54  3A 87 8F 30 */	addi r20, r7, MSL_Printf_803B8F30@l
 /* 80324078 00320C58  3B 60 00 00 */	li r27, 0
 /* 8032407C 00320C5C  98 01 00 19 */	stb r0, 0x19(r1)
 /* 80324080 00320C60  48 00 05 D0 */	b .L_80324650
@@ -484,7 +484,7 @@ __pformatter:
 /* 80324374 00320F54  80 83 00 00 */	lwz r4, 0(r3)
 /* 80324378 00320F58  28 04 00 00 */	cmplwi r4, 0
 /* 8032437C 00320F5C  40 82 00 08 */	bne .L_80324384
-/* 80324380 00320F60  38 8D A4 A8 */	addi r4, r13, lbl_804D5B48@sda21
+/* 80324380 00320F60  38 8D A4 A8 */	addi r4, r13, MSL_Printf_804D5B48@sda21
 .L_80324384:
 /* 80324384 00320F64  38 61 00 1C */	addi r3, r1, 0x1c
 /* 80324388 00320F68  38 A0 02 00 */	li r5, 0x200
@@ -780,20 +780,20 @@ float2str:
 /* 80324764 00321344  B0 01 00 1E */	sth r0, 0x1e(r1)
 /* 80324768 00321348  48 00 00 6C */	b .L_803247D4
 .L_8032476C:
-/* 8032476C 0032134C  C8 02 E7 A8 */	lfd f0, lbl_804DE188@sda21(r2)
+/* 8032476C 0032134C  C8 02 E7 A8 */	lfd f0, MSL_Printf_804DE188@sda21(r2)
 /* 80324770 00321350  FC 1F 00 40 */	fcmpo cr0, f31, f0
 /* 80324774 00321354  40 80 00 20 */	bge .L_80324794
-/* 80324778 00321358  3C 60 80 3C */	lis r3, lbl_803B8F30@ha
+/* 80324778 00321358  3C 60 80 3C */	lis r3, MSL_Printf_803B8F30@ha
 /* 8032477C 0032135C  3B 9C FF FB */	addi r28, r28, -5
-/* 80324780 00321360  38 83 8F 30 */	addi r4, r3, lbl_803B8F30@l
+/* 80324780 00321360  38 83 8F 30 */	addi r4, r3, MSL_Printf_803B8F30@l
 /* 80324784 00321364  38 7C 00 00 */	addi r3, r28, 0
 /* 80324788 00321368  38 84 00 01 */	addi r4, r4, 1
 /* 8032478C 0032136C  48 00 12 C5 */	bl strcpy
 /* 80324790 00321370  48 00 00 1C */	b .L_803247AC
 .L_80324794:
-/* 80324794 00321374  3C 60 80 3C */	lis r3, lbl_803B8F30@ha
+/* 80324794 00321374  3C 60 80 3C */	lis r3, MSL_Printf_803B8F30@ha
 /* 80324798 00321378  3B 9C FF FC */	addi r28, r28, -4
-/* 8032479C 0032137C  38 83 8F 30 */	addi r4, r3, lbl_803B8F30@l
+/* 8032479C 0032137C  38 83 8F 30 */	addi r4, r3, MSL_Printf_803B8F30@l
 /* 803247A0 00321380  38 7C 00 00 */	addi r3, r28, 0
 /* 803247A4 00321384  38 84 00 06 */	addi r4, r4, 6
 /* 803247A8 00321388  48 00 12 A9 */	bl strcpy
@@ -801,9 +801,9 @@ float2str:
 /* 803247AC 0032138C  7F 83 E3 78 */	mr r3, r28
 /* 803247B0 00321390  48 00 04 D8 */	b .L_80324C88
 .L_803247B4:
-/* 803247B4 00321394  3C 60 80 3C */	lis r3, lbl_803B8F30@ha
+/* 803247B4 00321394  3C 60 80 3C */	lis r3, MSL_Printf_803B8F30@ha
 /* 803247B8 00321398  3B 9C FF FC */	addi r28, r28, -4
-/* 803247BC 0032139C  38 83 8F 30 */	addi r4, r3, lbl_803B8F30@l
+/* 803247BC 0032139C  38 83 8F 30 */	addi r4, r3, MSL_Printf_803B8F30@l
 /* 803247C0 003213A0  38 7C 00 00 */	addi r3, r28, 0
 /* 803247C4 003213A4  38 84 00 0A */	addi r4, r4, 0xa
 /* 803247C8 003213A8  48 00 12 89 */	bl strcpy
@@ -1673,8 +1673,8 @@ parse_format:
 /* 80325360 00321F40  90 1E 00 0C */	stw r0, 0xc(r30)
 /* 80325364 00321F44  48 00 04 3C */	b .L_803257A0
 .L_80325368:
-/* 80325368 00321F48  3C 80 80 40 */	lis r4, lbl_804006E0@ha
-/* 8032536C 00321F4C  38 84 06 E0 */	addi r4, r4, lbl_804006E0@l
+/* 80325368 00321F48  3C 80 80 40 */	lis r4, MSL_Printf_804006E0@ha
+/* 8032536C 00321F4C  38 84 06 E0 */	addi r4, r4, MSL_Printf_804006E0@l
 .L_80325370:
 /* 80325370 00321F50  38 03 FF E0 */	addi r0, r3, -32
 /* 80325374 00321F54  28 00 00 10 */	cmplwi r0, 0x10
@@ -1738,8 +1738,8 @@ parse_format:
 /* 80325438 00322018  7C 63 07 74 */	extsb r3, r3
 /* 8032543C 0032201C  48 00 00 40 */	b .L_8032547C
 .L_80325440:
-/* 80325440 00322020  3C 80 80 3C */	lis r4, lbl_803B8C30@ha
-/* 80325444 00322024  38 A4 8C 30 */	addi r5, r4, lbl_803B8C30@l
+/* 80325440 00322020  3C 80 80 3C */	lis r4, MSL_AnsiFp_803B8C30@ha
+/* 80325444 00322024  38 A4 8C 30 */	addi r5, r4, MSL_AnsiFp_803B8C30@l
 /* 80325448 00322028  48 00 00 20 */	b .L_80325468
 .L_8032544C:
 /* 8032544C 0032202C  80 01 00 1C */	lwz r0, 0x1c(r1)
@@ -1794,8 +1794,8 @@ parse_format:
 /* 80325500 003220E0  7C 63 07 74 */	extsb r3, r3
 /* 80325504 003220E4  48 00 00 40 */	b .L_80325544
 .L_80325508:
-/* 80325508 003220E8  3C 80 80 3C */	lis r4, lbl_803B8C30@ha
-/* 8032550C 003220EC  38 A4 8C 30 */	addi r5, r4, lbl_803B8C30@l
+/* 80325508 003220E8  3C 80 80 3C */	lis r4, MSL_AnsiFp_803B8C30@ha
+/* 8032550C 003220EC  38 A4 8C 30 */	addi r5, r4, MSL_AnsiFp_803B8C30@l
 /* 80325510 003220F0  48 00 00 20 */	b .L_80325530
 .L_80325514:
 /* 80325514 003220F4  80 01 00 20 */	lwz r0, 0x20(r1)
@@ -2001,8 +2001,8 @@ parse_format:
 
 .section .rodata
     .balign 8
-.global lbl_803B8F30
-lbl_803B8F30:
+.global MSL_Printf_803B8F30
+MSL_Printf_803B8F30:
     .4byte 0x002D496E
     .4byte 0x6600496E
     .4byte 0x66004E61
@@ -2017,14 +2017,14 @@ __files:
     .4byte 0x08800000
     .4byte NULL
     .balign 4
-.global lbl_8040043C
-lbl_8040043C:
+.global MSL_Printf_8040043C
+MSL_Printf_8040043C:
 .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte lbl_8040043C
+    .4byte MSL_Printf_8040043C
     .4byte 0x00000001
-    .4byte lbl_8040043C
+    .4byte MSL_Printf_8040043C
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -2032,31 +2032,31 @@ lbl_8040043C:
     .4byte NULL
     .4byte __read_console
     .4byte __write_console
-    .4byte func_80325F18
+    .4byte MSL_ConsoleIo_80325F18
     .4byte NULL
 
     .balign 1
-.global lbl_80400478
-lbl_80400478:
+.global MSL_Printf_80400478
+MSL_Printf_80400478:
     .4byte NULL
     .4byte 0x10800000
     .byte 0
     .byte 0
 
-.global lbl_80400482
-lbl_80400482:
+.global MSL_Printf_80400482
+MSL_Printf_80400482:
     .byte 0
     .byte 0
 
     .balign 4
-.global lbl_80400484
-lbl_80400484:
+.global MSL_Printf_80400484
+MSL_Printf_80400484:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte lbl_80400484
+    .4byte MSL_Printf_80400484
     .4byte 0x00000001
-    .4byte lbl_80400484
+    .4byte MSL_Printf_80400484
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -2065,28 +2065,28 @@ lbl_80400484:
     .4byte __read_console
 
     .balign 4
-.global lbl_804004B4
-lbl_804004B4:
+.global MSL_Printf_804004B4
+MSL_Printf_804004B4:
     .4byte __write_console
 
     .balign 4
-.global lbl_804004B8
-lbl_804004B8:
-    .4byte func_80325F18
+.global MSL_Printf_804004B8
+MSL_Printf_804004B8:
+    .4byte MSL_ConsoleIo_80325F18
     .4byte NULL
     .4byte NULL
     .4byte 0x10800000
     .4byte NULL
 
     .balign 4
-.global lbl_804004CC
-lbl_804004CC:
+.global MSL_Printf_804004CC
+MSL_Printf_804004CC:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte lbl_804004CC
+    .4byte MSL_Printf_804004CC
     .4byte 0x00000001
-    .4byte lbl_804004CC
+    .4byte MSL_Printf_804004CC
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -2094,7 +2094,7 @@ lbl_804004CC:
     .4byte NULL
     .4byte __read_console
     .4byte __write_console
-    .4byte func_80325F18
+    .4byte MSL_ConsoleIo_80325F18
     .4byte NULL
 
 .global jtbl_80400508
@@ -2221,8 +2221,8 @@ jtbl_80400610:
     .4byte .L_80325774
     .4byte .L_80325774
     .4byte .L_80325600
-.global lbl_804006E0
-lbl_804006E0:
+.global MSL_Printf_804006E0
+MSL_Printf_804006E0:
     .4byte .L_803253A8
     .4byte .L_803253E4
     .4byte .L_803253E4
@@ -2245,15 +2245,15 @@ lbl_804006E0:
 
 .section .sdata
     .balign 8
-.global lbl_804D5B48
-lbl_804D5B48:
+.global MSL_Printf_804D5B48
+MSL_Printf_804D5B48:
     .4byte 0x00000000
     .4byte 0x00000000
 
 
 .section .sdata2
     .balign 8
-.global lbl_804DE188
-lbl_804DE188:
+.global MSL_Printf_804DE188
+MSL_Printf_804DE188:
     .4byte 0x00000000
     .4byte 0x00000000

@@ -3,38 +3,38 @@
 
 #include "ft/fighter.h"
 
-void ftSamus_80129258(HSD_GObj* gobj);
+void ftSs_SpecialN_80129258(HSD_GObj* gobj);
 
-void ftSamus_SpecialN_StartMotion(HSD_GObj* gobj);
+void ftSs_SpecialN_Enter(HSD_GObj* gobj);
 void ftSamus_801293BC_inner(HSD_GObj* gobj);
-void ftSamus_SpecialAirN_StartMotion(HSD_GObj* gobj);
-void ftSamus_80129684(HSD_GObj* gobj);
-void ftSamus_80129774(HSD_GObj* gobj);
-void ftSamus_80129940(HSD_GObj* gobj);
-void ftSamus_801299D0(HSD_GObj* gobj);
-void ftSamus_80129A14(HSD_GObj* gobj);
-void ftSamus_80129A98(HSD_GObj* gobj);
-void ftSamus_80129B18(HSD_GObj* gobj);
-void ftSamus_80129B1C(HSD_GObj* gobj);
-void ftSamus_80129C78(HSD_GObj* gobj);
-void ftSamus_80129C7C(HSD_GObj* gobj);
-void ftSamus_80129C80(HSD_GObj* gobj);
-void ftSamus_80129C84(HSD_GObj* gobj);
-void ftSamus_80129C88(HSD_GObj* gobj);
-void ftSamus_80129CA8(HSD_GObj* gobj);
-void ftSamus_80129CC8(HSD_GObj* gobj);
-void ftSamus_80129CE8(HSD_GObj* gobj);
-void ftSamus_80129D08(HSD_GObj* gobj);
-void ftSamus_80129258(HSD_GObj* gobj);
-void ftSamus_80129D28(HSD_GObj* gobj);
-void ftSamus_80129D48(HSD_GObj* gobj);
-void ftSamus_80129DC8(HSD_GObj* gobj);
-void ftSamus_80129E68(HSD_GObj* gobj);
-void ftSamus_80129EE8(HSD_GObj* gobj);
-void ftSamus_80129F68(HSD_GObj* gobj);
-void ftSamus_80129FE8(HSD_GObj* gobj);
-s32 ftSamus_8012A068(HSD_GObj* gobj);
-s32 ftSamus_801292E4(HSD_GObj* gobj);
-void ftSamus_801293BC(HSD_GObj* gobj);
+void ftSs_SpecialAirN_Enter(HSD_GObj* gobj);
+void ftSs_SpecialNStart_Anim(HSD_GObj* gobj);
+void ftSs_SpecialNLoop_Anim(HSD_GObj* gobj);
+void ftSs_SpecialNEnd_Anim(HSD_GObj* gobj);
+void ftSs_SpecialNShoot_Anim(HSD_GObj* gobj);
+void ftSs_SpecialAirNStart_Anim(HSD_GObj* gobj);
+void ftSs_SpecialAirNShoot_Anim(HSD_GObj* gobj);
+void ftSs_SpecialNStart_IASA(HSD_GObj* gobj);
+void ftSs_SpecialNLoop_IASA(HSD_GObj* gobj);
+void ftSs_SpecialNEnd_IASA(HSD_GObj* gobj);
+void ftSs_SpecialNShoot_IASA(HSD_GObj* gobj);
+void ftSs_SpecialAirNStart_IASA(HSD_GObj* gobj);
+void ftSs_SpecialAirNShoot_IASA(HSD_GObj* gobj);
+void ftSs_SpecialNStart_Phys(HSD_GObj* gobj);
+void ftSs_SpecialNLoop_Phys(HSD_GObj* gobj);
+void ftSs_SpecialNEnd_Phys(HSD_GObj* gobj);
+void ftSs_SpecialNShoot_Phys(HSD_GObj* gobj);
+void ftSs_SpecialAirNStart_Phys(HSD_GObj* gobj);
+void ftSs_SpecialN_80129258(HSD_GObj* gobj);
+void ftSs_SpecialAirNShoot_Phys(HSD_GObj* gobj);
+void ftSs_SpecialNStart_Coll(HSD_GObj* gobj);
+void ftSs_SpecialNLoop_Coll(HSD_GObj* gobj);
+void ftSs_SpecialNEnd_Coll(HSD_GObj* gobj);
+void ftSs_SpecialNShoot_Coll(HSD_GObj* gobj);
+void ftSs_SpecialAirNStart_Coll(HSD_GObj* gobj);
+void ftSs_SpecialAirNShoot_Coll(HSD_GObj* gobj);
+s32 ftSs_SpecialS_8012A068(HSD_GObj* gobj);
+s32 ftSs_SpecialN_801292E4(HSD_GObj* gobj);
+void ftSs_SpecialN_801293BC(HSD_GObj* gobj);
 
 #endif

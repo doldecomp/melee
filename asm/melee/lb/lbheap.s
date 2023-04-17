@@ -5,8 +5,8 @@
 .global lbHeap_800158D0
 lbHeap_800158D0:
 /* 800158D0 000124B0  1C 03 00 1C */	mulli r0, r3, 0x1c
-/* 800158D4 000124B4  3C 60 80 43 */	lis r3, lbl_80431FA0@ha
-/* 800158D8 000124B8  38 63 1F A0 */	addi r3, r3, lbl_80431FA0@l
+/* 800158D4 000124B4  3C 60 80 43 */	lis r3, lbHeap_80431FA0@ha
+/* 800158D8 000124B8  38 63 1F A0 */	addi r3, r3, lbHeap_80431FA0@l
 /* 800158DC 000124BC  7C 63 02 14 */	add r3, r3, r0
 /* 800158E0 000124C0  90 83 00 24 */	stw r4, 0x24(r3)
 /* 800158E4 000124C4  4E 80 00 20 */	blr
@@ -14,8 +14,8 @@ lbHeap_800158D0:
 .global lbHeap_800158E8
 lbHeap_800158E8:
 /* 800158E8 000124C8  1C 03 00 1C */	mulli r0, r3, 0x1c
-/* 800158EC 000124CC  3C 60 80 43 */	lis r3, lbl_80431FA0@ha
-/* 800158F0 000124D0  38 63 1F A0 */	addi r3, r3, lbl_80431FA0@l
+/* 800158EC 000124CC  3C 60 80 43 */	lis r3, lbHeap_80431FA0@ha
+/* 800158F0 000124D0  38 63 1F A0 */	addi r3, r3, lbHeap_80431FA0@l
 /* 800158F4 000124D4  7C 63 02 14 */	add r3, r3, r0
 /* 800158F8 000124D8  80 63 00 24 */	lwz r3, 0x24(r3)
 /* 800158FC 000124DC  4E 80 00 20 */	blr
@@ -23,11 +23,11 @@ lbHeap_800158E8:
 .global lbHeap_80015900
 lbHeap_80015900:
 /* 80015900 000124E0  7C 08 02 A6 */	mflr r0
-/* 80015904 000124E4  3C 60 80 43 */	lis r3, lbl_80431FA0@ha
+/* 80015904 000124E4  3C 60 80 43 */	lis r3, lbHeap_80431FA0@ha
 /* 80015908 000124E8  90 01 00 04 */	stw r0, 4(r1)
 /* 8001590C 000124EC  94 21 FF D8 */	stwu r1, -0x28(r1)
 /* 80015910 000124F0  BF 21 00 0C */	stmw r25, 0xc(r1)
-/* 80015914 000124F4  3B E3 1F A0 */	addi r31, r3, lbl_80431FA0@l
+/* 80015914 000124F4  3B E3 1F A0 */	addi r31, r3, lbHeap_80431FA0@l
 /* 80015918 000124F8  3B DF 00 38 */	addi r30, r31, 0x38
 /* 8001591C 000124FC  3B 9E 00 00 */	addi r28, r30, 0
 /* 80015920 00012500  3B 20 00 02 */	li r25, 2
@@ -219,8 +219,8 @@ lbHeap_80015900:
 .global lbHeap_80015BB8
 lbHeap_80015BB8:
 /* 80015BB8 00012798  1C 03 00 1C */	mulli r0, r3, 0x1c
-/* 80015BBC 0001279C  3C 60 80 43 */	lis r3, lbl_80431FA0@ha
-/* 80015BC0 000127A0  38 63 1F A0 */	addi r3, r3, lbl_80431FA0@l
+/* 80015BBC 0001279C  3C 60 80 43 */	lis r3, lbHeap_80431FA0@ha
+/* 80015BC0 000127A0  38 63 1F A0 */	addi r3, r3, lbHeap_80431FA0@l
 /* 80015BC4 000127A4  7C 63 02 14 */	add r3, r3, r0
 /* 80015BC8 000127A8  80 63 00 28 */	lwz r3, 0x28(r3)
 /* 80015BCC 000127AC  4E 80 00 20 */	blr
@@ -238,8 +238,8 @@ lbHeap_80015BD0:
 /* 80015BF0 000127D0  3B 84 00 00 */	addi r28, r4, 0
 /* 80015BF4 000127D4  48 33 17 71 */	bl OSDisableInterrupts
 /* 80015BF8 000127D8  1C BD 00 1C */	mulli r5, r29, 0x1c
-/* 80015BFC 000127DC  3C 80 80 43 */	lis r4, lbl_80431FA0@ha
-/* 80015C00 000127E0  38 04 1F A0 */	addi r0, r4, lbl_80431FA0@l
+/* 80015BFC 000127DC  3C 80 80 43 */	lis r4, lbHeap_80431FA0@ha
+/* 80015C00 000127E0  38 04 1F A0 */	addi r0, r4, lbHeap_80431FA0@l
 /* 80015C04 000127E4  7C 80 2A 14 */	add r4, r0, r5
 /* 80015C08 000127E8  80 04 00 28 */	lwz r0, 0x28(r4)
 /* 80015C0C 000127EC  3B E4 00 10 */	addi r31, r4, 0x10
@@ -297,18 +297,18 @@ lbHeap_80015CA8:
 /* 80015CC4 000128A4  3B A4 00 00 */	addi r29, r4, 0
 /* 80015CC8 000128A8  48 33 16 9D */	bl OSDisableInterrupts
 /* 80015CCC 000128AC  1C BE 00 1C */	mulli r5, r30, 0x1c
-/* 80015CD0 000128B0  3C 80 80 43 */	lis r4, lbl_80431FA0@ha
-/* 80015CD4 000128B4  38 04 1F A0 */	addi r0, r4, lbl_80431FA0@l
+/* 80015CD0 000128B0  3C 80 80 43 */	lis r4, lbHeap_80431FA0@ha
+/* 80015CD4 000128B4  38 04 1F A0 */	addi r0, r4, lbHeap_80431FA0@l
 /* 80015CD8 000128B8  7C 80 2A 14 */	add r4, r0, r5
 /* 80015CDC 000128BC  80 04 00 28 */	lwz r0, 0x28(r4)
 /* 80015CE0 000128C0  3B E4 00 10 */	addi r31, r4, 0x10
 /* 80015CE4 000128C4  3B C3 00 00 */	addi r30, r3, 0
 /* 80015CE8 000128C8  2C 00 00 00 */	cmpwi r0, 0
 /* 80015CEC 000128CC  41 82 00 1C */	beq .L_80015D08
-/* 80015CF0 000128D0  3C 60 80 3C */	lis r3, lbl_803BA3D0@ha
-/* 80015CF4 000128D4  3C 80 80 3C */	lis r4, lbl_803BA3DC@ha
-/* 80015CF8 000128D8  38 A4 A3 DC */	addi r5, r4, lbl_803BA3DC@l
-/* 80015CFC 000128DC  38 63 A3 D0 */	addi r3, r3, lbl_803BA3D0@l
+/* 80015CF0 000128D0  3C 60 80 3C */	lis r3, lbHeap_803BA3D0@ha
+/* 80015CF4 000128D4  3C 80 80 3C */	lis r4, lbHeap_803BA3DC@ha
+/* 80015CF8 000128D8  38 A4 A3 DC */	addi r5, r4, lbHeap_803BA3DC@l
+/* 80015CFC 000128DC  38 63 A3 D0 */	addi r3, r3, lbHeap_803BA3D0@l
 /* 80015D00 000128E0  38 80 01 43 */	li r4, 0x143
 /* 80015D04 000128E4  48 37 25 1D */	bl __assert
 .L_80015D08:
@@ -353,8 +353,8 @@ lbHeap_80015D6C:
 /* 80015D8C 0001296C  3B A4 00 00 */	addi r29, r4, 0
 /* 80015D90 00012970  48 33 15 D5 */	bl OSDisableInterrupts
 /* 80015D94 00012974  1C BF 00 1C */	mulli r5, r31, 0x1c
-/* 80015D98 00012978  3C 80 80 43 */	lis r4, lbl_80431FA0@ha
-/* 80015D9C 0001297C  38 04 1F A0 */	addi r0, r4, lbl_80431FA0@l
+/* 80015D98 00012978  3C 80 80 43 */	lis r4, lbHeap_80431FA0@ha
+/* 80015D9C 0001297C  38 04 1F A0 */	addi r0, r4, lbHeap_80431FA0@l
 /* 80015DA0 00012980  28 1F 00 01 */	cmplwi r31, 1
 /* 80015DA4 00012984  7C 80 2A 14 */	add r4, r0, r5
 /* 80015DA8 00012988  3B E3 00 00 */	addi r31, r3, 0
@@ -383,14 +383,14 @@ lbHeap_80015D6C:
 .global lbHeap_80015DF8
 lbHeap_80015DF8:
 /* 80015DF8 000129D8  7C 08 02 A6 */	mflr r0
-/* 80015DFC 000129DC  3C 80 80 3C */	lis r4, lbl_803BA380@ha
+/* 80015DFC 000129DC  3C 80 80 3C */	lis r4, lbHeap_803BA380@ha
 /* 80015E00 000129E0  90 01 00 04 */	stw r0, 4(r1)
-/* 80015E04 000129E4  3C 60 80 43 */	lis r3, lbl_80431FA0@ha
+/* 80015E04 000129E4  3C 60 80 43 */	lis r3, lbHeap_80431FA0@ha
 /* 80015E08 000129E8  4C C6 31 82 */	crclr 6
 /* 80015E0C 000129EC  94 21 FF D8 */	stwu r1, -0x28(r1)
 /* 80015E10 000129F0  BF 21 00 0C */	stmw r25, 0xc(r1)
-/* 80015E14 000129F4  3B E4 A3 80 */	addi r31, r4, lbl_803BA380@l
-/* 80015E18 000129F8  3B C3 1F A0 */	addi r30, r3, lbl_80431FA0@l
+/* 80015E14 000129F4  3B E4 A3 80 */	addi r31, r4, lbHeap_803BA380@l
+/* 80015E18 000129F8  3B C3 1F A0 */	addi r30, r3, lbHeap_80431FA0@l
 /* 80015E1C 000129FC  38 7F 00 E0 */	addi r3, r31, 0xe0
 /* 80015E20 00012A00  48 32 F8 89 */	bl OSReport
 /* 80015E24 00012A04  3B 40 00 00 */	li r26, 0
@@ -401,7 +401,7 @@ lbHeap_80015DF8:
 .L_80015E38:
 /* 80015E38 00012A18  80 9D 00 00 */	lwz r4, 0(r29)
 /* 80015E3C 00012A1C  4C C6 31 82 */	crclr 6
-/* 80015E40 00012A20  38 6D 81 00 */	addi r3, r13, lbl_804D37A0@sda21
+/* 80015E40 00012A20  38 6D 81 00 */	addi r3, r13, lbHeap_804D37A0@sda21
 /* 80015E44 00012A24  48 32 F8 65 */	bl OSReport
 /* 80015E48 00012A28  80 1C 00 28 */	lwz r0, 0x28(r28)
 /* 80015E4C 00012A2C  3B 7C 00 10 */	addi r27, r28, 0x10
@@ -472,11 +472,11 @@ lbHeap_80015DF8:
 .global lbHeap_80015F3C
 lbHeap_80015F3C:
 /* 80015F3C 00012B1C  7C 08 02 A6 */	mflr r0
-/* 80015F40 00012B20  3C 60 80 43 */	lis r3, lbl_80431FA0@ha
+/* 80015F40 00012B20  3C 60 80 43 */	lis r3, lbHeap_80431FA0@ha
 /* 80015F44 00012B24  90 01 00 04 */	stw r0, 4(r1)
 /* 80015F48 00012B28  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80015F4C 00012B2C  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80015F50 00012B30  3B E3 1F A0 */	addi r31, r3, lbl_80431FA0@l
+/* 80015F50 00012B30  3B E3 1F A0 */	addi r31, r3, lbHeap_80431FA0@l
 /* 80015F54 00012B34  38 7F 00 00 */	addi r3, r31, 0
 /* 80015F58 00012B38  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 80015F5C 00012B3C  3B DF 00 04 */	addi r30, r31, 4
@@ -489,8 +489,8 @@ lbHeap_80015F3C:
 /* 80015F78 00012B58  4B FF F5 45 */	bl lbMemory_800154BC
 /* 80015F7C 00012B5C  38 C0 FF FF */	li r6, -1
 /* 80015F80 00012B60  90 DF 00 10 */	stw r6, 0x10(r31)
-/* 80015F84 00012B64  3C 60 80 3C */	lis r3, lbl_803BA380@ha
-/* 80015F88 00012B68  38 03 A3 80 */	addi r0, r3, lbl_803BA380@l
+/* 80015F84 00012B64  3C 60 80 3C */	lis r3, lbHeap_803BA380@ha
+/* 80015F88 00012B68  38 03 A3 80 */	addi r0, r3, lbHeap_803BA380@l
 /* 80015F8C 00012B6C  90 DF 00 14 */	stw r6, 0x14(r31)
 /* 80015F90 00012B70  38 A0 00 00 */	li r5, 0
 /* 80015F94 00012B74  38 80 00 01 */	li r4, 1
@@ -623,8 +623,8 @@ lbHeap_80015F3C:
 
 .section .data
     .balign 8
-.global lbl_803BA380
-lbl_803BA380:
+.global lbHeap_803BA380
+lbHeap_803BA380:
     .4byte 0x00000002
     .4byte 0x00000001
     .4byte 0x00000006
@@ -646,51 +646,51 @@ lbl_803BA380:
     .4byte NULL
     .4byte NULL
 
-.global lbl_803BA3D0
-lbl_803BA3D0:
+.global lbHeap_803BA3D0
+lbHeap_803BA3D0:
     .asciz "lbheap.c"
     .balign 4
 
-.global lbl_803BA3DC
-lbl_803BA3DC:
+.global lbHeap_803BA3DC
+lbHeap_803BA3DC:
     .asciz "p->status == LbHeapStatus_Create"
     .balign 4
 
-.global lbl_803BA400
-lbl_803BA400:
+.global lbHeap_803BA400
+lbHeap_803BA400:
     .asciz "     Hsd"
     .balign 4
 
-.global lbl_803BA40C
-lbl_803BA40C:
+.global lbHeap_803BA40C
+lbHeap_803BA40C:
     .asciz "    ARAM"
     .balign 4
 
-.global lbl_803BA418
-lbl_803BA418:
+.global lbHeap_803BA418
+lbHeap_803BA418:
     .asciz "     Seq"
     .balign 4
 
-.global lbl_803BA424
-lbl_803BA424:
+.global lbHeap_803BA424
+lbHeap_803BA424:
     .asciz "    Stay"
     .balign 4
 
-.global lbl_803BA430
-lbl_803BA430:
+.global lbHeap_803BA430
+lbHeap_803BA430:
     .asciz "    AllM"
     .balign 4
 
-.global lbl_803BA43C
-lbl_803BA43C:
+.global lbHeap_803BA43C
+lbHeap_803BA43C:
     .asciz "    AllA"
     .balign 4
-    .4byte lbl_803BA400
-    .4byte lbl_803BA40C
-    .4byte lbl_803BA418
-    .4byte lbl_803BA424
-    .4byte lbl_803BA430
-    .4byte lbl_803BA43C
+    .4byte lbHeap_803BA400
+    .4byte lbHeap_803BA40C
+    .4byte lbHeap_803BA418
+    .4byte lbHeap_803BA424
+    .4byte lbHeap_803BA430
+    .4byte lbHeap_803BA43C
     .asciz "[lbHeap] -- Report --\n"
     .balign 4
     .asciz " %5d KB + "
@@ -709,14 +709,14 @@ lbl_803BA43C:
 
 .section .bss
     .balign 8
-.global lbl_80431FA0
-lbl_80431FA0:
+.global lbHeap_80431FA0
+lbHeap_80431FA0:
     .skip 0xB8
 
 
 .section .sdata
     .balign 8
-.global lbl_804D37A0
-lbl_804D37A0:
+.global lbHeap_804D37A0
+lbHeap_804D37A0:
     .asciz "%s :"
     .balign 4

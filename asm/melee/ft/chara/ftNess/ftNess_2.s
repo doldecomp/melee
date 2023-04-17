@@ -1,8 +1,8 @@
 .include "macros.inc"
 
 .section .text  # 0x80005940 - 0x803B7240
-.global ftNess_AttackS4_OnReflect
-ftNess_AttackS4_OnReflect:
+.global ftNs_AttackS4_OnReflect
+ftNs_AttackS4_OnReflect:
 /* 80114BF4 001117D4  7C 08 02 A6 */	mflr r0
 /* 80114BF8 001117D8  38 80 00 E0 */	li r4, 0xe0
 /* 80114BFC 001117DC  90 01 00 04 */	stw r0, 4(r1)
@@ -16,8 +16,8 @@ ftNess_AttackS4_OnReflect:
 /* 80114C1C 001117FC  7C 08 03 A6 */	mtlr r0
 /* 80114C20 00111800  4E 80 00 20 */	blr
 
-.global ftNess_AttackS4_Action
-ftNess_AttackS4_Action:
+.global ftNs_AttackS4_Enter
+ftNs_AttackS4_Enter:
 /* 80114C24 00111804  7C 08 02 A6 */	mflr r0
 /* 80114C28 00111808  38 E0 00 00 */	li r7, 0
 /* 80114C2C 0011180C  90 01 00 04 */	stw r0, 4(r1)
@@ -49,8 +49,8 @@ ftNess_AttackS4_Action:
 /* 80114C8C 0011186C  28 03 00 00 */	cmplwi r3, 0
 /* 80114C90 00111870  90 7F 22 48 */	stw r3, 0x2248(r31)
 /* 80114C94 00111874  41 82 00 14 */	beq lbl_80114CA8
-/* 80114C98 00111878  3C 60 80 11 */	lis r3, ftNess_OnDamage@ha
-/* 80114C9C 0011187C  38 03 48 F8 */	addi r0, r3, ftNess_OnDamage@l
+/* 80114C98 00111878  3C 60 80 11 */	lis r3, ftNs_Init_OnDamage@ha
+/* 80114C9C 0011187C  38 03 48 F8 */	addi r0, r3, ftNs_Init_OnDamage@l
 /* 80114CA0 00111880  90 1F 21 E4 */	stw r0, 0x21e4(r31)
 /* 80114CA4 00111884  90 1F 21 DC */	stw r0, 0x21dc(r31)
 lbl_80114CA8:

@@ -3,10 +3,10 @@
 
 #include "ft/fighter.h"
 
-void ftMasterHand_80154C78(HSD_GObj*);
-void ftMasterHand_80154CF8(HSD_GObj*, Fighter*);
+void ftMh_MS_375_80154C78(HSD_GObj*);
+void ftMh_MS_378_80154CF8(HSD_GObj*, Fighter*);
 
-void ftMasterHand_80154CF8(HSD_GObj* gobj, Fighter* fp);
-void ftMasterHand_80154C78(HSD_GObj* arg0);
+void ftMh_MS_378_80154CF8(HSD_GObj* gobj, Fighter* fp);
+void ftMh_MS_375_80154C78(HSD_GObj* arg0);
 
 #endif

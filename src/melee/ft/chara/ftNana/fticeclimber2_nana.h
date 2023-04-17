@@ -6,16 +6,16 @@
 
 #include "ft/types.h"
 
-extern MotionState ftNana_MotionStateTable[];
-extern char lbl_803CDB78[];
-extern char lbl_803CDB84[];
-extern Fighter_CostumeStrings lbl_803CDD2C[];
-extern char lbl_803CDCA0[];
-extern Fighter_DemoStrings lbl_803CDD1C;
+extern MotionState ftNn_Init_MotionStateTable[];
+extern char ftNn_Init_DatFilename[];
+extern char ftNn_Init_DataName[];
+extern Fighter_CostumeStrings ftNn_Init_CostumeStrings[];
+extern char ftNn_Init_AnimDatFilename[];
+extern Fighter_DemoStrings ftNn_Init_DemoMotionFilenames;
 
-void ftNana_OnDeath(HSD_GObj* gobj);
-void ftNana_80122FAC(HSD_GObj* gobj);
-void ftNana_LoadSpecialAttrs(HSD_GObj* gobj);
-void ftNana_OnLoad(HSD_GObj* gobj);
+void ftNn_Init_OnDeath(HSD_GObj* gobj);
+void ftNn_Init_80122FAC(HSD_GObj* gobj);
+void ftNn_Init_LoadSpecialAttrs(HSD_GObj* gobj);
+void ftNn_Init_OnLoad(HSD_GObj* gobj);
 
 #endif

@@ -11,7 +11,7 @@
 
 extern StageInfo stage_info;
 
-static StageCallbacks lbl_803E9030[4] = {
+static StageCallbacks grTNs_803E9030[4] = {
     {
         grTNess_8022275C,
         grTNess_80222788,
@@ -33,8 +33,8 @@ static StageCallbacks lbl_803E9030[4] = {
     },
 };
 
-StageData lbl_803E908C = {
-    0x00000036,       lbl_803E9030,     "/GrTNs.dat",     grTNess_802225D4,
+StageData grTNs_803E908C = {
+    0x00000036,       grTNs_803E9030,     "/GrTNs.dat",     grTNess_802225D4,
     grTNess_802225D0, grTNess_80222644, grTNess_80222648, grTNess_8022266C,
     grTNess_802228A4, grTNess_802228AC, 0x00000001,
 };
@@ -76,7 +76,7 @@ static HSD_GObj* grTNess_80222674(int id)
 {
     HSD_GObj* gobj;
     Ground* gp;
-    StageCallbacks* cb = &lbl_803E9030[id];
+    StageCallbacks* cb = &grTNs_803E9030[id];
     gobj = Ground_801C14D0(id);
     if (gobj != NULL) {
         gp = gobj->user_data;
@@ -90,7 +90,7 @@ static HSD_GObj* grTNess_80222674(int id)
             cb->callback0(gobj);
         }
         if (cb->callback2 != 0U) {
-            func_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtness.c", 0xC3, id);

@@ -3,7 +3,7 @@
 
 #include <dolphin/mtx.h>
 
-void func_8037EE0C(Vec3*, Quaternion*);
-void func_8037EF28(Quaternion*, Quaternion*, Quaternion*, f32);
+void HSD_QuatLib_8037EE0C(Vec3*, Quaternion*);
+void HSD_QuatLib_8037EF28(Quaternion*, Quaternion*, Quaternion*, f32);
 
 #endif

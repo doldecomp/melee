@@ -3,8 +3,8 @@
 .section .data
     .balign 8
 
-.global lbl_8040FF80
-lbl_8040FF80:
+.global hsd_8040FF80
+hsd_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888410

@@ -20,13 +20,13 @@ extern StageInfo stage_info;
 struct {
     int unk0;
     int unk4;
-}* lbl_804D6ACC;
+}* grNBa_804D6ACC;
 
-static u8 lbl_804D6AC8;
+static u8 grNBa_804D6AC8;
 
 static const int BATTLE_BG_MAX = 3;
 
-static StageCallbacks lbl_803E7DA0[7] = {
+static StageCallbacks grNBa_803E7DA0[7] = {
     {
         grBattle_80219E6C,
         grBattle_8021A10C,
@@ -80,9 +80,9 @@ static StageCallbacks lbl_803E7DA0[7] = {
 
 /// @todo Not ideal @c clang-format behavior.
 /// Removing the trailing comma is arguably worse.
-StageData lbl_803E7E38 = {
+StageData grNBa_803E7E38 = {
     0x00000024,
-    lbl_803E7DA0,
+    grNBa_803E7DA0,
     "/GrNBa.dat",
     grBattle_80219CA4,
     grBattle_80219C98,
@@ -98,12 +98,12 @@ StageData lbl_803E7E38 = {
 
 static void grBattle_80219C98(int arg0)
 {
-    lbl_804D6AC8 = 1;
+    grNBa_804D6AC8 = 1;
 }
 
 static void grBattle_80219CA4(void)
 {
-    lbl_804D6ACC = Ground_801C49F8();
+    grNBa_804D6ACC = Ground_801C49F8();
     stage_info.unk8C.b4 = 1;
     stage_info.unk8C.b5 = 1;
 
@@ -119,7 +119,7 @@ static void grBattle_80219CA4(void)
     Ground_801C39C0();
     Ground_801C3BB4();
     grLib_801C9A10();
-    lbl_804D6AC8 = 0;
+    grNBa_804D6AC8 = 0;
 }
 
 static void grBattle_80219D54(void) {}
@@ -137,7 +137,7 @@ static bool grBattle_80219D7C(void)
 static HSD_GObj* grBattle_80219D84(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &lbl_803E7DA0[gobj_id];
+    StageCallbacks* callbacks = &grNBa_803E7DA0[gobj_id];
 
     gobj = Ground_801C14D0(gobj_id);
 
@@ -156,7 +156,7 @@ static HSD_GObj* grBattle_80219D84(int gobj_id)
         }
 
         if (callbacks->callback2 != NULL) {
-            func_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
         }
 
     } else {
@@ -174,7 +174,7 @@ static void grBattle_80219E6C(HSD_GObj* gobj)
 
     grAnime_801C8138(gobj, id, 0);
 
-    if (lbl_804D6AC8 == 0) {
+    if (grNBa_804D6AC8 == 0) {
         return;
     }
 
@@ -384,11 +384,11 @@ static void grBattle_8021A3BC(HSD_GObj* gobj)
 
             bg_gobj = Ground_801C2BA4(tmp);
             HSD_ASSERT(535, bg_gobj);
-            grMaterial_801C9604(bg_gobj, lbl_804D6ACC->unk4, 0);
+            grMaterial_801C9604(bg_gobj, grNBa_804D6ACC->unk4, 0);
 
             bg_gobj = grBattle_80219D84(gp->xC8);
             HSD_ASSERT(539, bg_gobj);
-            grMaterial_801C9604(bg_gobj, lbl_804D6ACC->unk0, 0);
+            grMaterial_801C9604(bg_gobj, grNBa_804D6ACC->unk0, 0);
 
             gp->xC4 = 2;
         }

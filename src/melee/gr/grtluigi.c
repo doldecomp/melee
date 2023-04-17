@@ -11,7 +11,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 
-/* static */ StageCallbacks lbl_803E8DF0[4] = {
+/* static */ StageCallbacks grTLg_803E8DF0[4] = {
     {
         grTLuigi_80221D9C,
         grTLuigi_80221DC8,
@@ -35,9 +35,9 @@
     },
 };
 
-StageData lbl_803E8E4C = {
+StageData grTLg_803E8E4C = {
     51,
-    lbl_803E8DF0,
+    grTLg_803E8DF0,
     "/GrTLg.dat",
     grTLuigi_80221C14,
     grTLuigi_80221C10,
@@ -83,7 +83,7 @@ HSD_GObj* grTLuigi_80221CB4(int arg0)
     StageCallbacks* cb;
     Ground* gp;
 
-    cb = &lbl_803E8DF0[arg0];
+    cb = &grTLg_803E8DF0[arg0];
     gobj = Ground_801C14D0(arg0);
     if (gobj != NULL) {
         gp = gobj->user_data;
@@ -97,7 +97,7 @@ HSD_GObj* grTLuigi_80221CB4(int arg0)
             cb->callback0(gobj);
         }
         if (cb->callback2 != 0U) {
-            func_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtluigi.c", 0xC3,

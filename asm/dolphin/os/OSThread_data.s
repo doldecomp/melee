@@ -2,8 +2,8 @@
 
 .section .data
     .balign 8
-.global lbl_80402420
-lbl_80402420:
+.global OSSerial_80402420
+OSSerial_80402420:
     .asciz "OSCheckActiveThreads: Failed RunQueue[prio].head != NULL && RunQueue[prio].tail != NULL in %d\n"
     .balign 4
     .asciz "OSThread.c"
@@ -57,14 +57,14 @@ lbl_80402420:
 
 .section .bss, "wa"
     .balign 8
-.global lbl_804A7FB8
-lbl_804A7FB8:
+.global OSSerial_804A7FB8
+OSSerial_804A7FB8:
     .skip 0x9E8
 
 .section .sdata
     .balign 8
-.global lbl_804D5C28
-lbl_804D5C28:
+.global OSSerial_804D5C28
+OSSerial_804D5C28:
     .4byte 0x00000000
     .4byte 0x00000000
 
@@ -73,8 +73,8 @@ lbl_804D5C28:
 .global RunQueueBits
 RunQueueBits:
     .skip 0x4
-.global lbl_804D73DC
-lbl_804D73DC:
+.global OSSerial_804D73DC
+OSSerial_804D73DC:
     .skip 0x4
 .global Reschedule
 Reschedule:

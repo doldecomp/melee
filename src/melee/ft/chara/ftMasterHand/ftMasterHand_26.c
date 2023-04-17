@@ -4,7 +4,7 @@
 #include "ft/ftbosslib.h"
 
 // 80154FAC 151B8C
-void ftMasterHand_80154FAC(HSD_GObj* arg0)
+void ftMh_MS_379_IASA(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -13,20 +13,20 @@ void ftMasterHand_80154FAC(HSD_GObj* arg0)
 }
 
 // 80154FF0 151BD0
-void ftMasterHand_80154FF0(HSD_GObj* gobj)
+void ftMh_MS_379_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
 // 80155010 151BF0
-void ftMasterHand_80155010(HSD_GObj* gobj)
+void ftMh_MS_379_Coll(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155014 151BF4
 // https://decomp.me/scratch/ZAwzc
-void ftMasterHand_80155014(HSD_GObj* gobj)
+void ftMh_MS_379_80155014(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, 0x17C, 0, 0, 0.0f, 1.0f, 0.0f);

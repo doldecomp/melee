@@ -5,7 +5,7 @@
 
 #include <baselib/gobj.h>
 
-void ftMasterHand_80155818(HSD_GObj*);
-void ftMasterHand_80155A58(HSD_GObj* gobj, HSD_GObj* gobj2);
+void ftMh_MS_386_80155818(HSD_GObj*);
+void ftMh_MS_388_80155A58(HSD_GObj* gobj, HSD_GObj* gobj2);
 
 #endif

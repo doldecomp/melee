@@ -5,24 +5,24 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 
-void ftDonkey_800E0568(HSD_GObj* gobj)
+void ftDk_MS_346_IASA(HSD_GObj* gobj)
 {
     if (!ft_80094EA4(gobj)) {
         ft_800CB59C(gobj);
     }
 }
 
-void ftDonkey_800E05A4(HSD_GObj* gobj)
+void ftDk_MS_346_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftDonkey_800E05C4(HSD_GObj* gobj)
+void ftDk_MS_346_Coll(HSD_GObj* gobj)
 {
-    ftDonkey_800DFA70(gobj);
+    ftDk_MS_341_Coll(gobj);
 }
 
-void ftDonkey_800E05E4(HSD_GObj* gobj)
+void ftDk_MS_346_800E05E4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
@@ -32,12 +32,12 @@ void ftDonkey_800E05E4(HSD_GObj* gobj)
     ftAnim_SetAnimRate(gobj, 0.0f);
 }
 
-void ftDonkey_800E0648(HSD_GObj* gobj)
+void ftDk_MS_349_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->sv.dk.unk8.x4 <= 0.0f) {
-        ftDonkey_800DF980(gobj);
+        ftDk_Init_800DF980(gobj);
     }
 
     fp->sv.dk.unk8.x4 -= 1.0f;

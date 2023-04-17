@@ -16,17 +16,17 @@
 #include <baselib/state.h>
 
 #ifdef MWERKS_GEKKO
-static char lbl_803C0EB0[] = "translate";
-static s32 lbl_804D3A88 = -128;
-static s32 lbl_804D3A8C = 0x8080FF80;
-static s32 lbl_804D3A90 = 0x80808080;
-static char lbl_804D3A94[] = "jobj.h";
-static char lbl_804D3A9C[] = "jobj";
+static char ftDrawCommon_803C0EB0[] = "translate";
+static s32 ftDrawCommon_804D3A88 = -128;
+static s32 ftDrawCommon_804D3A8C = 0x8080FF80;
+static s32 ftDrawCommon_804D3A90 = 0x80808080;
+static char ftDrawCommon_804D3A94[] = "jobj.h";
+static char ftDrawCommon_804D3A9C[] = "jobj";
 #endif
 
-extern f32 lbl_804D8368;
-extern s32 lbl_804D836C[1];
-extern s32 lbl_804D8370[2];
+extern f32 ftDrawCommon_804D8368;
+extern s32 ftDrawCommon_804D836C[1];
+extern s32 ftDrawCommon_804D8370[2];
 
 extern void ftParts_800750C8(void);
 extern void ft_8009F7F8(void);
@@ -288,9 +288,9 @@ lbl_80080848:
 /* 8008085C 0007D43C  7F 5F 02 14 */	add r26, r31, r0
 /* 80080860 0007D440  48 00 00 40 */	b lbl_800808A0
 lbl_80080864:
-/* 80080864 0007D444  80 82 89 8C */	lwz r4, lbl_804D836C(r2)
+/* 80080864 0007D444  80 82 89 8C */	lwz r4, ftDrawCommon_804D836C(r2)
 /* 80080868 0007D448  7F 87 E3 78 */	mr r7, r28
-/* 8008086C 0007D44C  80 02 89 90 */	lwz r0, lbl_804D8370(r2)
+/* 8008086C 0007D44C  80 02 89 90 */	lwz r0, ftDrawCommon_804D8370(r2)
 /* 80080870 0007D450  38 7A 02 F4 */	addi r3, r26, 0x2f4
 /* 80080874 0007D454  90 81 00 AC */	stw r4, 0xac(r1)
 /* 80080878 0007D458  38 81 00 AC */	addi r4, r1, 0xac
@@ -343,7 +343,7 @@ lbl_80080900:
 /* 80080920 0007D500  38 78 00 00 */	addi r3, r24, 0
 /* 80080924 0007D504  38 DC 00 00 */	addi r6, r28, 0
 /* 80080928 0007D508  38 9F 00 B0 */	addi r4, r31, 0xb0
-/* 8008092C 0007D50C  38 AD 83 E8 */	addi r5, r13, lbl_804D3A88
+/* 8008092C 0007D50C  38 AD 83 E8 */	addi r5, r13, ftDrawCommon_804D3A88
 /* 80080930 0007D510  4B F9 D9 C9 */	bl lbGx_8001E2F8
 /* 80080934 0007D514  2C 03 00 00 */	cmpwi r3, 0
 /* 80080938 0007D518  41 82 00 08 */	beq lbl_80080940
@@ -353,7 +353,7 @@ lbl_80080940:
 /* 80080944 0007D524  38 DC 00 00 */	addi r6, r28, 0
 /* 80080948 0007D528  38 78 00 10 */	addi r3, r24, 0x10
 /* 8008094C 0007D52C  38 9F 00 B0 */	addi r4, r31, 0xb0
-/* 80080950 0007D530  38 AD 83 F0 */	addi r5, r13, lbl_804D3A90
+/* 80080950 0007D530  38 AD 83 F0 */	addi r5, r13, ftDrawCommon_804D3A90
 /* 80080954 0007D534  4B F9 D9 A5 */	bl lbGx_8001E2F8
 /* 80080958 0007D538  2C 03 00 00 */	cmpwi r3, 0
 /* 8008095C 0007D53C  41 82 00 30 */	beq lbl_8008098C
@@ -364,7 +364,7 @@ lbl_80080968:
 /* 8008096C 0007D54C  38 DC 00 00 */	addi r6, r28, 0
 /* 80080970 0007D550  38 78 00 20 */	addi r3, r24, 0x20
 /* 80080974 0007D554  38 9F 00 B0 */	addi r4, r31, 0xb0
-/* 80080978 0007D558  38 AD 83 EC */	addi r5, r13, lbl_804D3A8C
+/* 80080978 0007D558  38 AD 83 EC */	addi r5, r13, ftDrawCommon_804D3A8C
 /* 8008097C 0007D55C  4B F9 D9 7D */	bl lbGx_8001E2F8
 /* 80080980 0007D560  2C 03 00 00 */	cmpwi r3, 0
 /* 80080984 0007D564  41 82 00 08 */	beq lbl_8008098C
@@ -474,7 +474,7 @@ lbl_80080AD0:
 /* 80080B00 0007D6E0  88 1F 22 28 */	lbz r0, 0x2228(r31)
 /* 80080B04 0007D6E4  53 A0 3E 30 */	rlwimi r0, r29, 7, 0x18, 0x18
 /* 80080B08 0007D6E8  98 1F 22 28 */	stb r0, 0x2228(r31)
-/* 80080B0C 0007D6EC  C3 E2 89 88 */	lfs f31, lbl_804D8368(r2)
+/* 80080B0C 0007D6EC  C3 E2 89 88 */	lfs f31, ftDrawCommon_804D8368(r2)
 /* 80080B10 0007D6F0  D3 E1 00 38 */	stfs f31, 0x38(r1)
 /* 80080B14 0007D6F4  D3 E1 00 34 */	stfs f31, 0x34(r1)
 /* 80080B18 0007D6F8  D3 E1 00 30 */	stfs f31, 0x30(r1)
@@ -487,7 +487,7 @@ lbl_80080AD0:
 /* 80080B34 0007D714  48 2C 16 71 */	bl PSMTXIdentity
 /* 80080B38 0007D718  C0 21 00 30 */	lfs f1, 0x30(r1)
 /* 80080B3C 0007D71C  7F A3 EB 78 */	mr r3, r29
-/* 80080B40 0007D720  C0 02 89 88 */	lfs f0, lbl_804D8368(r2)
+/* 80080B40 0007D720  C0 02 89 88 */	lfs f0, ftDrawCommon_804D8368(r2)
 /* 80080B44 0007D724  38 81 00 48 */	addi r4, r1, 0x48
 /* 80080B48 0007D728  EC 21 F8 2A */	fadds f1, f1, f31
 /* 80080B4C 0007D72C  38 A1 00 78 */	addi r5, r1, 0x78
@@ -504,15 +504,15 @@ lbl_80080B74:
 /* 80080B74 0007D754  83 DB 00 28 */	lwz r30, 0x28(r27)
 /* 80080B78 0007D758  3B 1D 00 00 */	addi r24, r29, 0
 /* 80080B7C 0007D75C  38 7C 00 00 */	addi r3, r28, 0
-/* 80080B80 0007D760  48 31 03 39 */	bl func_80390EB8
+/* 80080B80 0007D760  48 31 03 39 */	bl HSD_GObj_80390EB8
 /* 80080B84 0007D764  38 A3 00 00 */	addi r5, r3, 0
 /* 80080B88 0007D768  38 7E 00 00 */	addi r3, r30, 0
 /* 80080B8C 0007D76C  38 98 00 00 */	addi r4, r24, 0
 /* 80080B90 0007D770  38 C0 00 00 */	li r6, 0
 /* 80080B94 0007D774  48 2E FE 49 */	bl HSD_JObjDispAll
 /* 80080B98 0007D778  80 9F 00 04 */	lwz r4, 4(r31)
-/* 80080B9C 0007D77C  3C 60 80 3C */	lis r3, lbl_803C20CC@ha
-/* 80080BA0 0007D780  38 03 20 CC */	addi r0, r3, lbl_803C20CC@l
+/* 80080B9C 0007D77C  3C 60 80 3C */	lis r3, ftData_UnkMtxFunc0@ha
+/* 80080BA0 0007D780  38 03 20 CC */	addi r0, r3, ftData_UnkMtxFunc0@l
 /* 80080BA4 0007D784  54 83 10 3A */	slwi r3, r4, 2
 /* 80080BA8 0007D788  7C 60 1A 14 */	add r3, r0, r3
 /* 80080BAC 0007D78C  81 83 00 00 */	lwz r12, 0(r3)
@@ -533,7 +533,7 @@ lbl_80080BDC:
 /* 80080BE0 0007D7C0  28 00 00 00 */	cmplwi r0, 0
 /* 80080BE4 0007D7C4  41 82 00 20 */	beq lbl_80080C04
 /* 80080BE8 0007D7C8  7F 83 E3 78 */	mr r3, r28
-/* 80080BEC 0007D7CC  48 31 02 CD */	bl func_80390EB8
+/* 80080BEC 0007D7CC  48 31 02 CD */	bl HSD_GObj_80390EB8
 /* 80080BF0 0007D7D0  7C 65 1B 78 */	mr r5, r3
 /* 80080BF4 0007D7D4  80 7F 20 A0 */	lwz r3, 0x20a0(r31)
 /* 80080BF8 0007D7D8  38 80 00 00 */	li r4, 0
@@ -691,8 +691,8 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         }
         phi_r26 = fighter;
         while (phi_r25 < fighter->x3E0) {
-            spAC = 0.0f; // lbl_804D836C; //change to actual label
-            spA8 = 0.0f; // lbl_804D8370; //change to actual label
+            spAC = 0.0f; // ftDrawCommon_804D836C; //change to actual label
+            spA8 = 0.0f; // ftDrawCommon_804D8370; //change to actual label
             if (lb_800117F4(&phi_r26->x2F4, &spAC, &spA8, phi_r26->x3E0,
                             arg1) != 0)
             {
@@ -715,19 +715,19 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         temp_r24 = &fighter->x294_itPickup;
         if (fighter->xE0_ground_or_air == GA_Ground) {
             if (lbGx_8001E2F8(&temp_r24->x0_ground_light_offset,
-                              &fighter->cur_pos, &lbl_804D3A88, arg1,
+                              &fighter->cur_pos, &ftDrawCommon_804D3A88, arg1,
                               fighter->facing_dir) != 0)
             {
                 phi_r30 = 1U;
             }
             if (lbGx_8001E2F8(&temp_r24->x10_ground_heavy_offset,
-                              &fighter->cur_pos, &lbl_804D3A90, arg1,
+                              &fighter->cur_pos, &ftDrawCommon_804D3A90, arg1,
                               fighter->facing_dir) != 0)
             {
                 phi_r30 = 1U;
             }
         } else if (lbGx_8001E2F8(&temp_r24->x20_air_light_offset,
-                                 &fighter->cur_pos, &lbl_804D3A8C, arg1,
+                                 &fighter->cur_pos, &ftDrawCommon_804D3A8C, arg1,
                                  fighter->facing_dir) != 0)
         {
             phi_r30 = 1U;
@@ -794,9 +794,9 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
                 phi_r29 = sp78;
             }
             fighter0 = gobj->hsd_obj;
-            HSD_JObjDispAll(fighter0, phi_r29, func_80390EB8(arg1), 0);
-            if (lbl_803C20CC[fighter->x4_fighterKind] != NULL) {
-                lbl_803C20CC[fighter->x4_fighterKind](gobj, arg1,
+            HSD_JObjDispAll(fighter0, phi_r29, HSD_GObj_80390EB8(arg1), 0);
+            if (ftData_UnkMtxFunc0[fighter->x4_fighterKind] != NULL) {
+                ftData_UnkMtxFunc0[fighter->x4_fighterKind](gobj, arg1,
                                                       (MtxPtr) phi_r29);
             }
             ft_800C8AF0(fighter);
@@ -804,7 +804,7 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         }
         if ((u32) fighter->x20A0_accessory != 0U) {
             HSD_JObjDispAll(fighter->x20A0_accessory, NULL,
-                            func_80390EB8(arg1), 0);
+                            HSD_GObj_80390EB8(arg1), 0);
         }
         ft_800C2600(gobj, arg1);
     }
@@ -883,7 +883,7 @@ lbl_80080CCC:
 /* 80080D00 0007D8E0  88 1F 22 28 */	lbz r0, 0x2228(r31)
 /* 80080D04 0007D8E4  50 A0 3E 30 */	rlwimi r0, r5, 7, 0x18, 0x18
 /* 80080D08 0007D8E8  98 1F 22 28 */	stb r0, 0x2228(r31)
-/* 80080D0C 0007D8EC  C3 E2 89 88 */	lfs f31, lbl_804D8368(r2)
+/* 80080D0C 0007D8EC  C3 E2 89 88 */	lfs f31, ftDrawCommon_804D8368(r2)
 /* 80080D10 0007D8F0  D3 E1 00 30 */	stfs f31, 0x30(r1)
 /* 80080D14 0007D8F4  D3 E1 00 2C */	stfs f31, 0x2c(r1)
 /* 80080D18 0007D8F8  D3 E1 00 28 */	stfs f31, 0x28(r1)
@@ -896,7 +896,7 @@ lbl_80080CCC:
 /* 80080D34 0007D914  48 2C 14 71 */	bl PSMTXIdentity
 /* 80080D38 0007D918  C0 21 00 28 */	lfs f1, 0x28(r1)
 /* 80080D3C 0007D91C  7F 83 E3 78 */	mr r3, r28
-/* 80080D40 0007D920  C0 02 89 88 */	lfs f0, lbl_804D8368(r2)
+/* 80080D40 0007D920  C0 02 89 88 */	lfs f0, ftDrawCommon_804D8368(r2)
 /* 80080D44 0007D924  38 81 00 40 */	addi r4, r1, 0x40
 /* 80080D48 0007D928  EC 21 F8 2A */	fadds f1, f1, f31
 /* 80080D4C 0007D92C  38 A1 00 70 */	addi r5, r1, 0x70
@@ -912,15 +912,15 @@ lbl_80080CCC:
 lbl_80080D74:
 /* 80080D74 0007D954  83 7D 00 28 */	lwz r27, 0x28(r29)
 /* 80080D78 0007D958  7F C3 F3 78 */	mr r3, r30
-/* 80080D7C 0007D95C  48 31 01 3D */	bl func_80390EB8
+/* 80080D7C 0007D95C  48 31 01 3D */	bl HSD_GObj_80390EB8
 /* 80080D80 0007D960  38 A3 00 00 */	addi r5, r3, 0
 /* 80080D84 0007D964  38 7B 00 00 */	addi r3, r27, 0
 /* 80080D88 0007D968  38 9C 00 00 */	addi r4, r28, 0
 /* 80080D8C 0007D96C  38 C0 00 00 */	li r6, 0
 /* 80080D90 0007D970  48 2E FC 4D */	bl HSD_JObjDispAll
 /* 80080D94 0007D974  80 9F 00 04 */	lwz r4, 4(r31)
-/* 80080D98 0007D978  3C 60 80 3C */	lis r3, lbl_803C20CC@ha
-/* 80080D9C 0007D97C  38 03 20 CC */	addi r0, r3, lbl_803C20CC@l
+/* 80080D98 0007D978  3C 60 80 3C */	lis r3, ftData_UnkMtxFunc0@ha
+/* 80080D9C 0007D97C  38 03 20 CC */	addi r0, r3, ftData_UnkMtxFunc0@l
 /* 80080DA0 0007D980  54 83 10 3A */	slwi r3, r4, 2
 /* 80080DA4 0007D984  7C 60 1A 14 */	add r3, r0, r3
 /* 80080DA8 0007D988  81 83 00 00 */	lwz r12, 0(r3)
@@ -941,7 +941,7 @@ lbl_80080DD8:
 /* 80080DDC 0007D9BC  28 00 00 00 */	cmplwi r0, 0
 /* 80080DE0 0007D9C0  41 82 00 20 */	beq lbl_80080E00
 /* 80080DE4 0007D9C4  7F C3 F3 78 */	mr r3, r30
-/* 80080DE8 0007D9C8  48 31 00 D1 */	bl func_80390EB8
+/* 80080DE8 0007D9C8  48 31 00 D1 */	bl HSD_GObj_80390EB8
 /* 80080DEC 0007D9CC  7C 65 1B 78 */	mr r5, r3
 /* 80080DF0 0007D9D0  80 7F 20 A0 */	lwz r3, 0x20a0(r31)
 /* 80080DF4 0007D9D4  38 80 00 00 */	li r4, 0
@@ -1017,10 +1017,10 @@ void ftDrawCommmon_80080C28(HSD_GObj* gobj, s32 arg1)
             }
 
             temp_r27 = gobj->hsd_obj;
-            HSD_JObjDispAll(temp_r27, (MtxPtr) phi_r28, func_80390EB8(arg1),
+            HSD_JObjDispAll(temp_r27, (MtxPtr) phi_r28, HSD_GObj_80390EB8(arg1),
                             0);
-            if (lbl_803C20CC[fighter->x4_fighterKind] != NULL) {
-                lbl_803C20CC[fighter->x4_fighterKind](gobj, arg1,
+            if (ftData_UnkMtxFunc0[fighter->x4_fighterKind] != NULL) {
+                ftData_UnkMtxFunc0[fighter->x4_fighterKind](gobj, arg1,
                                                       (MtxPtr) phi_r28);
             }
             ft_800C8AF0(fighter);
@@ -1028,7 +1028,7 @@ void ftDrawCommmon_80080C28(HSD_GObj* gobj, s32 arg1)
         }
         if (fighter->x20A0_accessory != NULL) {
             HSD_JObjDispAll(fighter->x20A0_accessory, NULL,
-                            func_80390EB8(arg1), 0);
+                            HSD_GObj_80390EB8(arg1), 0);
         }
     }
 }
@@ -1083,16 +1083,16 @@ lbl_80080E6C:
 /* 80080E94 0007DA74  28 1F 00 00 */	cmplwi r31, 0
 /* 80080E98 0007DA78  3B 7B 00 B0 */	addi r27, r27, 0xb0
 /* 80080E9C 0007DA7C  40 82 00 14 */	bne lbl_80080EB0
-/* 80080EA0 0007DA80  38 6D 83 F4 */	addi r3, r13, lbl_804D3A94
+/* 80080EA0 0007DA80  38 6D 83 F4 */	addi r3, r13, ftDrawCommon_804D3A94
 /* 80080EA4 0007DA84  38 80 03 94 */	li r4, 0x394
-/* 80080EA8 0007DA88  38 AD 83 FC */	addi r5, r13, lbl_804D3A9C
+/* 80080EA8 0007DA88  38 AD 83 FC */	addi r5, r13, ftDrawCommon_804D3A9C
 /* 80080EAC 0007DA8C  48 30 73 75 */	bl __assert
 lbl_80080EB0:
 /* 80080EB0 0007DA90  28 1B 00 00 */	cmplwi r27, 0
 /* 80080EB4 0007DA94  40 82 00 18 */	bne lbl_80080ECC
-/* 80080EB8 0007DA98  3C 60 80 3C */	lis r3, lbl_803C0EB0@ha
-/* 80080EBC 0007DA9C  38 A3 0E B0 */	addi r5, r3, lbl_803C0EB0@l
-/* 80080EC0 0007DAA0  38 6D 83 F4 */	addi r3, r13, lbl_804D3A94
+/* 80080EB8 0007DA98  3C 60 80 3C */	lis r3, ftDrawCommon_803C0EB0@ha
+/* 80080EBC 0007DA9C  38 A3 0E B0 */	addi r5, r3, ftDrawCommon_803C0EB0@l
+/* 80080EC0 0007DAA0  38 6D 83 F4 */	addi r3, r13, ftDrawCommon_804D3A94
 /* 80080EC4 0007DAA4  38 80 03 95 */	li r4, 0x395
 /* 80080EC8 0007DAA8  48 30 73 59 */	bl __assert
 lbl_80080ECC:
@@ -1108,9 +1108,9 @@ lbl_80080ECC:
 /* 80080EF0 0007DAD0  28 1F 00 00 */	cmplwi r31, 0
 /* 80080EF4 0007DAD4  41 82 00 44 */	beq lbl_80080F38
 /* 80080EF8 0007DAD8  40 82 00 14 */	bne lbl_80080F0C
-/* 80080EFC 0007DADC  38 6D 83 F4 */	addi r3, r13, lbl_804D3A94
+/* 80080EFC 0007DADC  38 6D 83 F4 */	addi r3, r13, ftDrawCommon_804D3A94
 /* 80080F00 0007DAE0  38 80 02 34 */	li r4, 0x234
-/* 80080F04 0007DAE4  38 AD 83 FC */	addi r5, r13, lbl_804D3A9C
+/* 80080F04 0007DAE4  38 AD 83 FC */	addi r5, r13, ftDrawCommon_804D3A9C
 /* 80080F08 0007DAE8  48 30 73 19 */	bl __assert
 lbl_80080F0C:
 /* 80080F0C 0007DAEC  80 9F 00 14 */	lwz r4, 0x14(r31)
@@ -1167,7 +1167,7 @@ lbl_80080F38:
 /* 80080FD0 0007DBB0  50 80 26 F6 */	rlwimi r0, r4, 4, 0x1b, 0x1b
 /* 80080FD4 0007DBB4  98 1B 22 23 */	stb r0, 0x2223(r27)
 /* 80080FD8 0007DBB8  83 7C 00 28 */	lwz r27, 0x28(r28)
-/* 80080FDC 0007DBBC  48 30 FE DD */	bl func_80390EB8
+/* 80080FDC 0007DBBC  48 30 FE DD */	bl HSD_GObj_80390EB8
 /* 80080FE0 0007DBC0  3B C3 00 00 */	addi r30, r3, 0
 /* 80080FE4 0007DBC4  38 7C 00 00 */	addi r3, r28, 0
 /* 80080FE8 0007DBC8  38 81 00 54 */	addi r4, r1, 0x54
@@ -1219,7 +1219,7 @@ lbl_80081004:
 /* 8008109C 0007DC7C  50 80 26 F6 */	rlwimi r0, r4, 4, 0x1b, 0x1b
 /* 800810A0 0007DC80  98 1B 22 23 */	stb r0, 0x2223(r27)
 /* 800810A4 0007DC84  83 7C 00 28 */	lwz r27, 0x28(r28)
-/* 800810A8 0007DC88  48 30 FE 11 */	bl func_80390EB8
+/* 800810A8 0007DC88  48 30 FE 11 */	bl HSD_GObj_80390EB8
 /* 800810AC 0007DC8C  3B A3 00 00 */	addi r29, r3, 0
 /* 800810B0 0007DC90  38 7C 00 00 */	addi r3, r28, 0
 /* 800810B4 0007DC94  38 81 00 24 */	addi r4, r1, 0x24
@@ -1269,7 +1269,7 @@ void ftDrawCommmon_80080E18(HSD_GObj* arg0, long arg1)
 asm void ftDrawCommmon_80081118(void)
 { // clang-format off
     nofralloc
-/* 80081118 0007DCF8  80 8D C1 8C */	lwz r4, lbl_804D782C(r13)
+/* 80081118 0007DCF8  80 8D C1 8C */	lwz r4, HSD_GObj_804D782C(r13)
 /* 8008111C 0007DCFC  3C 60 80 08 */	lis r3, ftDrawCommmon_80080E18@ha
 /* 80081120 0007DD00  38 03 0E 18 */	addi r0, r3, ftDrawCommmon_80080E18@l
 /* 80081124 0007DD04  80 64 00 20 */	lwz r3, 0x20(r4)
@@ -1299,7 +1299,7 @@ void ftDrawCommmon_80081118(void)
 asm void ftDrawCommmon_80081140(void)
 { // clang-format off
     nofralloc
-/* 80081140 0007DD20  80 8D C1 8C */	lwz r4, lbl_804D782C(r13)
+/* 80081140 0007DD20  80 8D C1 8C */	lwz r4, HSD_GObj_804D782C(r13)
 /* 80081144 0007DD24  3C 60 80 08 */	lis r3, ftDrawCommmon_80080C28@ha
 /* 80081148 0007DD28  38 03 0C 28 */	addi r0, r3, ftDrawCommmon_80080C28@l
 /* 8008114C 0007DD2C  80 64 00 20 */	lwz r3, 0x20(r4)
@@ -1334,7 +1334,7 @@ asm void ftDrawCommmon_80081168(void)
 /* 80081170 0007DD50  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80081174 0007DD54  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 80081178 0007DD58  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 8008117C 0007DD5C  80 6D C1 8C */	lwz r3, lbl_804D782C(r13)
+/* 8008117C 0007DD5C  80 6D C1 8C */	lwz r3, HSD_GObj_804D782C(r13)
 /* 80081180 0007DD60  83 E3 00 20 */	lwz r31, 0x20(r3)
 /* 80081184 0007DD64  48 00 00 5C */	b lbl_800811E0
 lbl_80081188:
@@ -1393,7 +1393,7 @@ asm void ftDrawCommmon_80081200(void)
 /* 80081208 0007DDE8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8008120C 0007DDEC  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 80081210 0007DDF0  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 80081214 0007DDF4  80 6D C1 8C */	lwz r3, lbl_804D782C(r13)
+/* 80081214 0007DDF4  80 6D C1 8C */	lwz r3, HSD_GObj_804D782C(r13)
 /* 80081218 0007DDF8  83 E3 00 20 */	lwz r31, 0x20(r3)
 /* 8008121C 0007DDFC  48 00 00 5C */	b lbl_80081278
 lbl_80081220:

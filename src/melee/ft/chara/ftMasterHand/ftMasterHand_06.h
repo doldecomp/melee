@@ -3,22 +3,22 @@
 
 #include <baselib/forward.h>
 
-void ftMasterHand_80151918(HSD_GObj* gobj);
-void ftMasterHand_80151AC8(HSD_GObj* gobj);
-void ftMasterHand_801517B0(HSD_GObj* gobj);
-void ftMasterHand_801517F4(HSD_GObj* gobj);
-void ftMasterHand_80151824(HSD_GObj* gobj);
+void ftMh_MS_346_80151918(HSD_GObj* gobj);
+void ftMh_MS_347_80151AC8(HSD_GObj* gobj);
+void ftMh_MS_344_IASA(HSD_GObj* gobj);
+void ftMh_MS_344_Phys(HSD_GObj* gobj);
+void ftMh_MS_344_Coll(HSD_GObj* gobj);
 
 /// 6 Stage Wide Slap
-void ftMasterHand_80151828(HSD_GObj* gobj);
+void ftMh_MS_344_80151828(HSD_GObj* gobj);
 
-void ftMasterHand_80151874(HSD_GObj* arg0);
-void ftMasterHand_801518B0(HSD_GObj* gobj);
-void ftMasterHand_801518F4(HSD_GObj* gobj);
-void ftMasterHand_80151914(HSD_GObj* gobj);
-void ftMasterHand_8015198C(HSD_GObj* gobj);
-void ftMasterHand_80151A44(HSD_GObj* gobj);
-void ftMasterHand_80151A88(HSD_GObj* gobj);
-void ftMasterHand_80151AC4(HSD_GObj* gobj);
+void ftMh_MS_346_Anim(HSD_GObj* arg0);
+void ftMh_MS_346_IASA(HSD_GObj* gobj);
+void ftMh_MS_346_Phys(HSD_GObj* gobj);
+void ftMh_MS_346_Coll(HSD_GObj* gobj);
+void ftMh_MS_347_Anim(HSD_GObj* gobj);
+void ftMh_MS_347_IASA(HSD_GObj* gobj);
+void ftMh_MS_347_Phys(HSD_GObj* gobj);
+void ftMh_MS_347_Coll(HSD_GObj* gobj);
 
 #endif

@@ -9,14 +9,14 @@
 
 #ifdef MWERKS_GEKKO
 
-static Vec2 const lbl_804DE268 = { 16.0F, 0.0F };
-static f64 const lbl_804DE270 = 4503599627370496.0L;
-static f32 const lbl_804DE278 = -4.0F;
-static f32 const lbl_804DE27C = 4.0F;
-static f32 const lbl_804DE280 = 3.990000009536743F;
-static f32 const lbl_804DE284 = 32.0F;
-static f32 const lbl_804DE288 = 0.0F;
-static f32 const lbl_804DE28C = 10.0F;
+static Vec2 const GXTexture_804DE268 = { 16.0F, 0.0F };
+static f64 const GXTexture_804DE270 = 4503599627370496.0L;
+static f32 const GXTexture_804DE278 = -4.0F;
+static f32 const GXTexture_804DE27C = 4.0F;
+static f32 const GXTexture_804DE280 = 3.990000009536743F;
+static f32 const GXTexture_804DE284 = 32.0F;
+static f32 const GXTexture_804DE288 = 0.0F;
+static f32 const GXTexture_804DE28C = 10.0F;
 
 typedef struct {
     u32 x0;
@@ -32,58 +32,58 @@ static GXTexture_Unk0 GXTexImage3Ids = { 0x94959697, 0xB4B5B6B7 };
 static GXTexture_Unk0 GXTexTlutIds = { 0x98999A9B, 0xB8B9BABB };
 static GXTexture_Unk0 GX2HWFiltConv = { 0x00040105, 0x02060000 };
 
-void lbl_8033E7B4(void);
-void lbl_8033E7C0(void);
-void lbl_8033E7CC(void);
-void lbl_8033E7D8(void);
-void lbl_8033E908(void);
-void lbl_8033E914(void);
-void lbl_8033E920(void);
-void lbl_8033E92C(void);
-void lbl_8033EB58(void);
-void lbl_8033EB6C(void);
-void lbl_8033EB80(void);
-void lbl_8033EB94(void);
-void lbl_8033EBA8(void);
-void lbl_8033EBBC(void);
+void GXTexture_8033E7B4(void);
+void GXTexture_8033E7C0(void);
+void GXTexture_8033E7CC(void);
+void GXTexture_8033E7D8(void);
+void GXTexture_8033E908(void);
+void GXTexture_8033E914(void);
+void GXTexture_8033E920(void);
+void GXTexture_8033E92C(void);
+void GXTexture_8033EB58(void);
+void GXTexture_8033EB6C(void);
+void GXTexture_8033EB80(void);
+void GXTexture_8033EB94(void);
+void GXTexture_8033EBA8(void);
+void GXTexture_8033EBBC(void);
 
 static jtbl_t jtbl_804012B8 = {
-    &lbl_8033E7B4, &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7CC, &lbl_8033E7CC,
-    &lbl_8033E7CC, &lbl_8033E7CC, &lbl_8033E7D8, &lbl_8033E7B4, &lbl_8033E7C0,
-    &lbl_8033E7CC, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7B4,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7C0, &lbl_8033E7D8, &lbl_8033E7CC,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7CC, &lbl_8033E7D8, &lbl_8033E7D8,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7B4, &lbl_8033E7D8, &lbl_8033E7C0,
-    &lbl_8033E7CC, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7C0,
-    &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7CC, &lbl_8033E7CC,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7B4, &lbl_8033E7D8,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7D8,
-    &lbl_8033E7CC
+    &GXTexture_8033E7B4, &GXTexture_8033E7C0, &GXTexture_8033E7C0, &GXTexture_8033E7CC, &GXTexture_8033E7CC,
+    &GXTexture_8033E7CC, &GXTexture_8033E7CC, &GXTexture_8033E7D8, &GXTexture_8033E7B4, &GXTexture_8033E7C0,
+    &GXTexture_8033E7CC, &GXTexture_8033E7D8, &GXTexture_8033E7D8, &GXTexture_8033E7D8, &GXTexture_8033E7B4,
+    &GXTexture_8033E7D8, &GXTexture_8033E7D8, &GXTexture_8033E7C0, &GXTexture_8033E7D8, &GXTexture_8033E7CC,
+    &GXTexture_8033E7D8, &GXTexture_8033E7D8, &GXTexture_8033E7CC, &GXTexture_8033E7D8, &GXTexture_8033E7D8,
+    &GXTexture_8033E7D8, &GXTexture_8033E7D8, &GXTexture_8033E7D8, &GXTexture_8033E7D8, &GXTexture_8033E7D8,
+    &GXTexture_8033E7D8, &GXTexture_8033E7D8, &GXTexture_8033E7B4, &GXTexture_8033E7D8, &GXTexture_8033E7C0,
+    &GXTexture_8033E7CC, &GXTexture_8033E7D8, &GXTexture_8033E7D8, &GXTexture_8033E7D8, &GXTexture_8033E7C0,
+    &GXTexture_8033E7C0, &GXTexture_8033E7C0, &GXTexture_8033E7C0, &GXTexture_8033E7CC, &GXTexture_8033E7CC,
+    &GXTexture_8033E7D8, &GXTexture_8033E7D8, &GXTexture_8033E7D8, &GXTexture_8033E7B4, &GXTexture_8033E7D8,
+    &GXTexture_8033E7D8, &GXTexture_8033E7D8, &GXTexture_8033E7D8, &GXTexture_8033E7D8, &GXTexture_8033E7D8,
+    &GXTexture_8033E7D8, &GXTexture_8033E7D8, &GXTexture_8033E7C0, &GXTexture_8033E7C0, &GXTexture_8033E7D8,
+    &GXTexture_8033E7CC
 };
 
 static jtbl_t jtbl_804013AC = {
-    &lbl_8033E908, &lbl_8033E914, &lbl_8033E914, &lbl_8033E920, &lbl_8033E920,
-    &lbl_8033E920, &lbl_8033E920, &lbl_8033E92C, &lbl_8033E908, &lbl_8033E914,
-    &lbl_8033E920, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E908,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E914, &lbl_8033E92C, &lbl_8033E920,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E920, &lbl_8033E92C, &lbl_8033E92C,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E908, &lbl_8033E92C, &lbl_8033E914,
-    &lbl_8033E920, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E914,
-    &lbl_8033E914, &lbl_8033E914, &lbl_8033E914, &lbl_8033E920, &lbl_8033E920,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E908, &lbl_8033E92C,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E914, &lbl_8033E914, &lbl_8033E92C,
-    &lbl_8033E920
+    &GXTexture_8033E908, &GXTexture_8033E914, &GXTexture_8033E914, &GXTexture_8033E920, &GXTexture_8033E920,
+    &GXTexture_8033E920, &GXTexture_8033E920, &GXTexture_8033E92C, &GXTexture_8033E908, &GXTexture_8033E914,
+    &GXTexture_8033E920, &GXTexture_8033E92C, &GXTexture_8033E92C, &GXTexture_8033E92C, &GXTexture_8033E908,
+    &GXTexture_8033E92C, &GXTexture_8033E92C, &GXTexture_8033E914, &GXTexture_8033E92C, &GXTexture_8033E920,
+    &GXTexture_8033E92C, &GXTexture_8033E92C, &GXTexture_8033E920, &GXTexture_8033E92C, &GXTexture_8033E92C,
+    &GXTexture_8033E92C, &GXTexture_8033E92C, &GXTexture_8033E92C, &GXTexture_8033E92C, &GXTexture_8033E92C,
+    &GXTexture_8033E92C, &GXTexture_8033E92C, &GXTexture_8033E908, &GXTexture_8033E92C, &GXTexture_8033E914,
+    &GXTexture_8033E920, &GXTexture_8033E92C, &GXTexture_8033E92C, &GXTexture_8033E92C, &GXTexture_8033E914,
+    &GXTexture_8033E914, &GXTexture_8033E914, &GXTexture_8033E914, &GXTexture_8033E920, &GXTexture_8033E920,
+    &GXTexture_8033E92C, &GXTexture_8033E92C, &GXTexture_8033E92C, &GXTexture_8033E908, &GXTexture_8033E92C,
+    &GXTexture_8033E92C, &GXTexture_8033E92C, &GXTexture_8033E92C, &GXTexture_8033E92C, &GXTexture_8033E92C,
+    &GXTexture_8033E92C, &GXTexture_8033E92C, &GXTexture_8033E914, &GXTexture_8033E914, &GXTexture_8033E92C,
+    &GXTexture_8033E920
 };
 
-static jtbl_t jtbl_804014A0 = { &lbl_8033EB58, &lbl_8033EB6C, &lbl_8033EB6C,
-                                &lbl_8033EB80, &lbl_8033EB80, &lbl_8033EB80,
-                                &lbl_8033EB94, &lbl_8033EBBC, &lbl_8033EB58,
-                                &lbl_8033EB6C, &lbl_8033EB80, &lbl_8033EBBC,
-                                &lbl_8033EBBC, &lbl_8033EBBC, &lbl_8033EBA8,
+static jtbl_t jtbl_804014A0 = { &GXTexture_8033EB58, &GXTexture_8033EB6C, &GXTexture_8033EB6C,
+                                &GXTexture_8033EB80, &GXTexture_8033EB80, &GXTexture_8033EB80,
+                                &GXTexture_8033EB94, &GXTexture_8033EBBC, &GXTexture_8033EB58,
+                                &GXTexture_8033EB6C, &GXTexture_8033EB80, &GXTexture_8033EBBC,
+                                &GXTexture_8033EBBC, &GXTexture_8033EBBC, &GXTexture_8033EBA8,
                                 NULL };
 
 #pragma push
@@ -93,26 +93,26 @@ asm s32 GXGetTexBufferSize(u16, u16, u32, u8, u8)
 /* 8033E78C 0033B36C  94 21 FF D8 */	stwu r1, -0x28(r1)
 /* 8033E790 0033B370  28 05 00 3C */	cmplwi r5, 0x3c
 /* 8033E794 0033B374  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 8033E798 0033B378  41 81 00 40 */	bgt lbl_8033E7D8
+/* 8033E798 0033B378  41 81 00 40 */	bgt GXTexture_8033E7D8
 /* 8033E79C 0033B37C  3D 00 80 40 */	lis r8, jtbl_804012B8@ha
 /* 8033E7A0 0033B380  39 08 12 B8 */	addi r8, r8, jtbl_804012B8@l
 /* 8033E7A4 0033B384  54 A0 10 3A */	slwi r0, r5, 2
 /* 8033E7A8 0033B388  7C 08 00 2E */	lwzx r0, r8, r0
 /* 8033E7AC 0033B38C  7C 09 03 A6 */	mtctr r0
 /* 8033E7B0 0033B390  4E 80 04 20 */	bctr
-entry lbl_8033E7B4
+entry GXTexture_8033E7B4
 /* 8033E7B4 0033B394  38 00 00 03 */	li r0, 3
 /* 8033E7B8 0033B398  39 00 00 03 */	li r8, 3
 /* 8033E7BC 0033B39C  48 00 00 24 */	b lbl_8033E7E0
-entry lbl_8033E7C0
+entry GXTexture_8033E7C0
 /* 8033E7C0 0033B3A0  38 00 00 03 */	li r0, 3
 /* 8033E7C4 0033B3A4  39 00 00 02 */	li r8, 2
 /* 8033E7C8 0033B3A8  48 00 00 18 */	b lbl_8033E7E0
-entry lbl_8033E7CC
+entry GXTexture_8033E7CC
 /* 8033E7CC 0033B3AC  38 00 00 02 */	li r0, 2
 /* 8033E7D0 0033B3B0  39 00 00 02 */	li r8, 2
 /* 8033E7D4 0033B3B4  48 00 00 0C */	b lbl_8033E7E0
-entry lbl_8033E7D8
+entry GXTexture_8033E7D8
 /* 8033E7D8 0033B3B8  39 00 00 00 */	li r8, 0
 /* 8033E7DC 0033B3BC  38 00 00 00 */	li r0, 0
 lbl_8033E7E0:
@@ -205,26 +205,26 @@ asm void __GetImageTileCount(u32, s16, s16, s32*, s32*, s32*)
 { // clang-format off
     nofralloc
 /* 8033E8E8 0033B4C8  28 03 00 3C */	cmplwi r3, 0x3c
-/* 8033E8EC 0033B4CC  41 81 00 40 */	bgt lbl_8033E92C
+/* 8033E8EC 0033B4CC  41 81 00 40 */	bgt GXTexture_8033E92C
 /* 8033E8F0 0033B4D0  3D 20 80 40 */	lis r9, jtbl_804013AC@ha
 /* 8033E8F4 0033B4D4  39 29 13 AC */	addi r9, r9, jtbl_804013AC@l
 /* 8033E8F8 0033B4D8  54 60 10 3A */	slwi r0, r3, 2
 /* 8033E8FC 0033B4DC  7C 09 00 2E */	lwzx r0, r9, r0
 /* 8033E900 0033B4E0  7C 09 03 A6 */	mtctr r0
 /* 8033E904 0033B4E4  4E 80 04 20 */	bctr
-entry lbl_8033E908
+entry GXTexture_8033E908
 /* 8033E908 0033B4E8  39 60 00 03 */	li r11, 3
 /* 8033E90C 0033B4EC  39 80 00 03 */	li r12, 3
 /* 8033E910 0033B4F0  48 00 00 24 */	b lbl_8033E934
-entry lbl_8033E914
+entry GXTexture_8033E914
 /* 8033E914 0033B4F4  39 60 00 03 */	li r11, 3
 /* 8033E918 0033B4F8  39 80 00 02 */	li r12, 2
 /* 8033E91C 0033B4FC  48 00 00 18 */	b lbl_8033E934
-entry lbl_8033E920
+entry GXTexture_8033E920
 /* 8033E920 0033B500  39 60 00 02 */	li r11, 2
 /* 8033E924 0033B504  39 80 00 02 */	li r12, 2
 /* 8033E928 0033B508  48 00 00 0C */	b lbl_8033E934
-entry lbl_8033E92C
+entry GXTexture_8033E92C
 /* 8033E92C 0033B50C  39 80 00 00 */	li r12, 0
 /* 8033E930 0033B510  39 60 00 00 */	li r11, 0
 lbl_8033E934:
@@ -337,10 +337,10 @@ lbl_8033EA88:
 /* 8033EA8C 0033B66C  3C 00 43 30 */	lis r0, 0x4330
 /* 8033EA90 0033B670  80 7F 00 04 */	lwz r3, 4(r31)
 /* 8033EA94 0033B674  90 01 00 38 */	stw r0, 0x38(r1)
-/* 8033EA98 0033B678  C8 22 E8 90 */	lfd f1, lbl_804DE270(r2)
+/* 8033EA98 0033B678  C8 22 E8 90 */	lfd f1, GXTexture_804DE270(r2)
 /* 8033EA9C 0033B67C  54 63 06 1E */	rlwinm r3, r3, 0, 0x18, 0xf
 /* 8033EAA0 0033B680  C8 01 00 38 */	lfd f0, 0x38(r1)
-/* 8033EAA4 0033B684  C0 42 E8 88 */	lfs f2, lbl_804DE268(r2)
+/* 8033EAA4 0033B684  C0 42 E8 88 */	lfs f2, GXTexture_804DE268(r2)
 /* 8033EAA8 0033B688  EC 00 08 28 */	fsubs f0, f0, f1
 /* 8033EAAC 0033B68C  EC 02 00 32 */	fmuls f0, f2, f0
 /* 8033EAB0 0033B690  FC 00 00 1E */	fctiwz f0, f0
@@ -380,44 +380,44 @@ lbl_8033EAD8:
 /* 8033EB30 0033B710  54 A5 00 14 */	rlwinm r5, r5, 0, 0, 0xa
 /* 8033EB34 0033B714  7C A0 03 78 */	or r0, r5, r0
 /* 8033EB38 0033B718  90 1F 00 0C */	stw r0, 0xc(r31)
-/* 8033EB3C 0033B71C  41 81 00 80 */	bgt lbl_8033EBBC
+/* 8033EB3C 0033B71C  41 81 00 80 */	bgt GXTexture_8033EBBC
 /* 8033EB40 0033B720  3C A0 80 40 */	lis r5, jtbl_804014A0@ha
 /* 8033EB44 0033B724  38 A5 14 A0 */	addi r5, r5, jtbl_804014A0@l
 /* 8033EB48 0033B728  54 E0 10 3A */	slwi r0, r7, 2
 /* 8033EB4C 0033B72C  7C 05 00 2E */	lwzx r0, r5, r0
 /* 8033EB50 0033B730  7C 09 03 A6 */	mtctr r0
 /* 8033EB54 0033B734  4E 80 04 20 */	bctr
-entry lbl_8033EB58
+entry GXTexture_8033EB58
 /* 8033EB58 0033B738  38 00 00 01 */	li r0, 1
 /* 8033EB5C 0033B73C  98 1F 00 1E */	stb r0, 0x1e(r31)
 /* 8033EB60 0033B740  38 00 00 03 */	li r0, 3
 /* 8033EB64 0033B744  38 E0 00 03 */	li r7, 3
 /* 8033EB68 0033B748  48 00 00 64 */	b lbl_8033EBCC
-entry lbl_8033EB6C
+entry GXTexture_8033EB6C
 /* 8033EB6C 0033B74C  38 00 00 02 */	li r0, 2
 /* 8033EB70 0033B750  98 1F 00 1E */	stb r0, 0x1e(r31)
 /* 8033EB74 0033B754  38 00 00 03 */	li r0, 3
 /* 8033EB78 0033B758  38 E0 00 02 */	li r7, 2
 /* 8033EB7C 0033B75C  48 00 00 50 */	b lbl_8033EBCC
-entry lbl_8033EB80
+entry GXTexture_8033EB80
 /* 8033EB80 0033B760  38 00 00 02 */	li r0, 2
 /* 8033EB84 0033B764  98 1F 00 1E */	stb r0, 0x1e(r31)
 /* 8033EB88 0033B768  38 00 00 02 */	li r0, 2
 /* 8033EB8C 0033B76C  38 E0 00 02 */	li r7, 2
 /* 8033EB90 0033B770  48 00 00 3C */	b lbl_8033EBCC
-entry lbl_8033EB94
+entry GXTexture_8033EB94
 /* 8033EB94 0033B774  38 00 00 03 */	li r0, 3
 /* 8033EB98 0033B778  98 1F 00 1E */	stb r0, 0x1e(r31)
 /* 8033EB9C 0033B77C  38 00 00 02 */	li r0, 2
 /* 8033EBA0 0033B780  38 E0 00 02 */	li r7, 2
 /* 8033EBA4 0033B784  48 00 00 28 */	b lbl_8033EBCC
-entry lbl_8033EBA8
+entry GXTexture_8033EBA8
 /* 8033EBA8 0033B788  38 00 00 00 */	li r0, 0
 /* 8033EBAC 0033B78C  98 1F 00 1E */	stb r0, 0x1e(r31)
 /* 8033EBB0 0033B790  38 00 00 03 */	li r0, 3
 /* 8033EBB4 0033B794  38 E0 00 03 */	li r7, 3
 /* 8033EBB8 0033B798  48 00 00 14 */	b lbl_8033EBCC
-entry lbl_8033EBBC
+entry GXTexture_8033EBBC
 /* 8033EBBC 0033B79C  38 00 00 02 */	li r0, 2
 /* 8033EBC0 0033B7A0  98 1F 00 1E */	stb r0, 0x1e(r31)
 /* 8033EBC4 0033B7A4  38 00 00 02 */	li r0, 2
@@ -494,19 +494,19 @@ asm void GXInitTexObjLOD(unk_t, s32, s32, s32, s8, s32, f32, f32, f32){
     // clang-format off
     nofralloc
 /* 8033EC6C 0033B84C  94 21 FF C8 */	stwu r1, -0x38(r1)
-/* 8033EC70 0033B850  C0 02 E8 98 */	lfs f0, lbl_804DE278(r2)
+/* 8033EC70 0033B850  C0 02 E8 98 */	lfs f0, GXTexture_804DE278(r2)
 /* 8033EC74 0033B854  FC 03 00 40 */	fcmpo cr0, f3, f0
 /* 8033EC78 0033B858  40 80 00 0C */	bge lbl_8033EC84
 /* 8033EC7C 0033B85C  FC 60 00 90 */	fmr f3, f0
 /* 8033EC80 0033B860  48 00 00 18 */	b lbl_8033EC98
 lbl_8033EC84:
-/* 8033EC84 0033B864  C0 02 E8 9C */	lfs f0, lbl_804DE27C(r2)
+/* 8033EC84 0033B864  C0 02 E8 9C */	lfs f0, GXTexture_804DE27C(r2)
 /* 8033EC88 0033B868  FC 03 00 40 */	fcmpo cr0, f3, f0
 /* 8033EC8C 0033B86C  4C 41 13 82 */	cror 2, 1, 2
 /* 8033EC90 0033B870  40 82 00 08 */	bne lbl_8033EC98
-/* 8033EC94 0033B874  C0 62 E8 A0 */	lfs f3, lbl_804DE280(r2)
+/* 8033EC94 0033B874  C0 62 E8 A0 */	lfs f3, GXTexture_804DE280(r2)
 lbl_8033EC98:
-/* 8033EC98 0033B878  C0 02 E8 A4 */	lfs f0, lbl_804DE284(r2)
+/* 8033EC98 0033B878  C0 02 E8 A4 */	lfs f0, GXTexture_804DE284(r2)
 /* 8033EC9C 0033B87C  2C 05 00 01 */	cmpwi r5, 1
 /* 8033ECA0 0033B880  80 03 00 00 */	lwz r0, 0(r3)
 /* 8033ECA4 0033B884  EC 00 00 F2 */	fmuls f0, f0, f3
@@ -562,19 +562,19 @@ lbl_8033ED14:
 /* 8033ED5C 0033B93C  54 84 02 D2 */	rlwinm r4, r4, 0, 0xb, 9
 /* 8033ED60 0033B940  7C 80 03 78 */	or r0, r4, r0
 /* 8033ED64 0033B944  90 03 00 00 */	stw r0, 0(r3)
-/* 8033ED68 0033B948  C0 02 E8 A8 */	lfs f0, lbl_804DE288(r2)
+/* 8033ED68 0033B948  C0 02 E8 A8 */	lfs f0, GXTexture_804DE288(r2)
 /* 8033ED6C 0033B94C  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 8033ED70 0033B950  40 80 00 0C */	bge lbl_8033ED7C
 /* 8033ED74 0033B954  FC 20 00 90 */	fmr f1, f0
 /* 8033ED78 0033B958  48 00 00 14 */	b lbl_8033ED8C
 lbl_8033ED7C:
-/* 8033ED7C 0033B95C  C0 02 E8 AC */	lfs f0, lbl_804DE28C(r2)
+/* 8033ED7C 0033B95C  C0 02 E8 AC */	lfs f0, GXTexture_804DE28C(r2)
 /* 8033ED80 0033B960  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 8033ED84 0033B964  40 81 00 08 */	ble lbl_8033ED8C
 /* 8033ED88 0033B968  FC 20 00 90 */	fmr f1, f0
 lbl_8033ED8C:
-/* 8033ED8C 0033B96C  C0 62 E8 88 */	lfs f3, lbl_804DE268(r2)
-/* 8033ED90 0033B970  C0 02 E8 A8 */	lfs f0, lbl_804DE288(r2)
+/* 8033ED8C 0033B96C  C0 62 E8 88 */	lfs f3, GXTexture_804DE268(r2)
+/* 8033ED90 0033B970  C0 02 E8 A8 */	lfs f0, GXTexture_804DE288(r2)
 /* 8033ED94 0033B974  EC 23 00 72 */	fmuls f1, f3, f1
 /* 8033ED98 0033B978  FC 02 00 40 */	fcmpo cr0, f2, f0
 /* 8033ED9C 0033B97C  FC 20 08 1E */	fctiwz f1, f1
@@ -584,7 +584,7 @@ lbl_8033ED8C:
 /* 8033EDAC 0033B98C  FC 40 00 90 */	fmr f2, f0
 /* 8033EDB0 0033B990  48 00 00 14 */	b lbl_8033EDC4
 lbl_8033EDB4:
-/* 8033EDB4 0033B994  C0 02 E8 AC */	lfs f0, lbl_804DE28C(r2)
+/* 8033EDB4 0033B994  C0 02 E8 AC */	lfs f0, GXTexture_804DE28C(r2)
 /* 8033EDB8 0033B998  FC 02 00 40 */	fcmpo cr0, f2, f0
 /* 8033EDBC 0033B99C  40 81 00 08 */	ble lbl_8033EDC4
 /* 8033EDC0 0033B9A0  FC 40 00 90 */	fmr f2, f0
@@ -593,7 +593,7 @@ lbl_8033EDC4:
 /* 8033EDC8 0033B9A8  54 00 00 2E */	rlwinm r0, r0, 0, 0, 0x17
 /* 8033EDCC 0033B9AC  50 80 06 3E */	rlwimi r0, r4, 0, 0x18, 0x1f
 /* 8033EDD0 0033B9B0  90 03 00 04 */	stw r0, 4(r3)
-/* 8033EDD4 0033B9B4  C0 02 E8 88 */	lfs f0, lbl_804DE268(r2)
+/* 8033EDD4 0033B9B4  C0 02 E8 88 */	lfs f0, GXTexture_804DE268(r2)
 /* 8033EDD8 0033B9B8  80 03 00 04 */	lwz r0, 4(r3)
 /* 8033EDDC 0033B9BC  EC 00 00 B2 */	fmuls f0, f0, f2
 /* 8033EDE0 0033B9C0  54 04 06 1E */	rlwinm r4, r0, 0, 0x18, 0xf

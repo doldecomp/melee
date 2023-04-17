@@ -38,8 +38,8 @@ PSVECScale:
 
 .global PSVECNormalize
 PSVECNormalize:
-/* 80342DB8 0033F998  C0 02 E9 60 */	lfs f0, lbl_804DE340@sda21(r2)
-/* 80342DBC 0033F99C  C0 22 E9 64 */	lfs f1, lbl_804DE344@sda21(r2)
+/* 80342DB8 0033F998  C0 02 E9 60 */	lfs f0, MTX_Vec_804DE340@sda21(r2)
+/* 80342DBC 0033F99C  C0 22 E9 64 */	lfs f1, MTX_Vec_804DE344@sda21(r2)
 /* 80342DC0 0033F9A0  E0 43 00 00 */	psq_l f2, 0(r3), 0, qr0
 /* 80342DC4 0033F9A4  10 A2 00 B2 */	ps_mul f5, f2, f2
 /* 80342DC8 0033F9A8  E0 63 80 08 */	psq_l f3, 8(r3), 1, qr0
@@ -62,10 +62,10 @@ PSVECMag:
 /* 80342E00 0033F9E0  10 00 00 32 */	ps_mul f0, f0, f0
 /* 80342E04 0033F9E4  C0 23 00 08 */	lfs f1, 8(r3)
 /* 80342E08 0033F9E8  10 21 00 7A */	ps_madd f1, f1, f1, f0
-/* 80342E0C 0033F9EC  C0 82 E9 60 */	lfs f4, lbl_804DE340@sda21(r2)
+/* 80342E0C 0033F9EC  C0 82 E9 60 */	lfs f4, MTX_Vec_804DE340@sda21(r2)
 /* 80342E10 0033F9F0  10 21 00 14 */	ps_sum0 f1, f1, f0, f0
 /* 80342E14 0033F9F4  FC 00 08 34 */	frsqrte f0, f1
-/* 80342E18 0033F9F8  C0 62 E9 64 */	lfs f3, lbl_804DE344@sda21(r2)
+/* 80342E18 0033F9F8  C0 62 E9 64 */	lfs f3, MTX_Vec_804DE344@sda21(r2)
 /* 80342E1C 0033F9FC  EC 40 00 32 */	fmuls f2, f0, f0
 /* 80342E20 0033FA00  EC 00 01 32 */	fmuls f0, f0, f4
 /* 80342E24 0033FA04  EC 42 18 7C */	fnmsubs f2, f2, f1, f3
@@ -106,9 +106,9 @@ PSVECCrossProduct:
 
 .section .sdata2
     .balign 8
-.global lbl_804DE340
-lbl_804DE340:
+.global MTX_Vec_804DE340
+MTX_Vec_804DE340:
     .4byte 0x3F000000
-.global lbl_804DE344
-lbl_804DE344:
+.global MTX_Vec_804DE344
+MTX_Vec_804DE344:
     .4byte 0x40400000

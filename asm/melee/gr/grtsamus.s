@@ -65,8 +65,8 @@ grTSamus_80223624:
 /* 8022363C 0022021C  93 81 00 10 */	stw r28, 0x10(r1)
 /* 80223640 00220220  3B 83 00 00 */	addi r28, r3, 0
 /* 80223644 00220224  1C 1C 00 14 */	mulli r0, r28, 0x14
-/* 80223648 00220228  3C 60 80 3F */	lis r3, lbl_803E93F8@ha
-/* 8022364C 0022022C  3B E3 93 F8 */	addi r31, r3, lbl_803E93F8@l
+/* 80223648 00220228  3C 60 80 3F */	lis r3, grTSs_803E93F8@ha
+/* 8022364C 0022022C  3B E3 93 F8 */	addi r31, r3, grTSs_803E93F8@l
 /* 80223650 00220230  38 7C 00 00 */	addi r3, r28, 0
 /* 80223654 00220234  7F BF 02 14 */	add r29, r31, r0
 /* 80223658 00220238  4B F9 DE 79 */	bl Ground_801C14D0
@@ -99,7 +99,7 @@ grTSamus_80223624:
 /* 802236BC 0022029C  41 82 00 2C */	beq .L_802236E8
 /* 802236C0 002202A0  38 7E 00 00 */	addi r3, r30, 0
 /* 802236C4 002202A4  38 A0 00 04 */	li r5, 4
-/* 802236C8 002202A8  48 16 C6 8D */	bl func_8038FD54
+/* 802236C8 002202A8  48 16 C6 8D */	bl HSD_GObjProc_8038FD54
 /* 802236CC 002202AC  48 00 00 1C */	b .L_802236E8
 .L_802236D0:
 /* 802236D0 002202B0  38 DC 00 00 */	addi r6, r28, 0
@@ -236,8 +236,8 @@ grTSamus_8022385C:
 
 .section .data
     .balign 8
-.global lbl_803E93F8
-lbl_803E93F8:
+.global grTSs_803E93F8
+grTSs_803E93F8:
     .4byte grTSamus_8022370C
     .4byte grTSamus_80223738
     .4byte grTSamus_80223740
@@ -258,15 +258,15 @@ lbl_803E93F8:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_803E9448
-lbl_803E9448:
+.global grTSs_803E9448
+grTSs_803E9448:
     .asciz "/GrTSs.dat"
     .balign 4
-.global lbl_803E9454
-lbl_803E9454:
+.global grTSs_803E9454
+grTSs_803E9454:
     .4byte 0x0000003B
-    .4byte lbl_803E93F8
-    .4byte lbl_803E9448
+    .4byte grTSs_803E93F8
+    .4byte grTSs_803E9448
     .4byte grTSamus_80223584
     .4byte grTSamus_80223580
     .4byte grTSamus_802235F4

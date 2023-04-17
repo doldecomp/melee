@@ -9,7 +9,7 @@
 #include <dolphin/os/os.h>
 #include <baselib/gobjgxlink.h>
 
-static StageCallbacks lbl_803E8608[] = {
+static StageCallbacks grTCa_803E8608[] = {
     { grTCaptain_8021FDEC, grTCaptain_8021FE18, grTCaptain_8021FE20,
       grTCaptain_8021FE24, 0 },
     { grTCaptain_8021FEB8, grTCaptain_8021FF08, grTCaptain_8021FF10,
@@ -19,9 +19,9 @@ static StageCallbacks lbl_803E8608[] = {
     { NULL, NULL, NULL, NULL, 0 }
 };
 
-StageData lbl_803E8664 = {
+StageData grTCa_803E8664 = {
     41,
-    lbl_803E8608,
+    grTCa_803E8608,
     "/GrTCa.dat",
     grTCaptain_8021FC64,
     grTCaptain_8021FC60,
@@ -66,7 +66,7 @@ static HSD_GObj* grTCaptain_8021FD04(int gobj_id)
     /// @todo Can't move below @c callbacks.
     HSD_GObj* gobj;
 
-    StageCallbacks* callbacks = &lbl_803E8608[gobj_id];
+    StageCallbacks* callbacks = &grTCa_803E8608[gobj_id];
 
     gobj = Ground_801C14D0(gobj_id);
     if (gobj != NULL) {
@@ -84,7 +84,7 @@ static HSD_GObj* grTCaptain_8021FD04(int gobj_id)
         }
 
         if (callbacks->callback2 != NULL) {
-            func_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtcaptain.c", 215,

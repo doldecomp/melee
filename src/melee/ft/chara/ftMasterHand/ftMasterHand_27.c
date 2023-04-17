@@ -11,7 +11,7 @@
 
 // 80155074 151C54
 // https://decomp.me/scratch/GL82m
-void ftMasterHand_80155074(HSD_GObj* gobj)
+void ftMh_MS_380_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -22,7 +22,7 @@ void ftMasterHand_80155074(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 != 0) {
         fp->x2200_ftcmd_var0 = 0;
-        ftMasterHand_80155D6C(fp->x1A58_interactedFighter, 0x14A);
+        ftMh_CaptureWaitMasterHand_80155D6C(fp->x1A58_interactedFighter, 0x14A);
         if (fp->x1A58_interactedFighter != NULL) {
             HSD_GObj* victim = fp->x1A58_interactedFighter;
             ftCommon_8007E2F4(fp, 0);
@@ -33,12 +33,12 @@ void ftMasterHand_80155074(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftMasterHand_80151018(gobj);
+        ftMh_MS_389_80151018(gobj);
     }
 }
 
 // 8015512C 151D0C
-void ftMasterHand_8015512C(HSD_GObj* arg0)
+void ftMh_MS_380_IASA(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -47,20 +47,20 @@ void ftMasterHand_8015512C(HSD_GObj* arg0)
 }
 
 // 80155170 151D50
-void ftMasterHand_80155170(HSD_GObj* gobj)
+void ftMh_MS_380_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
 // 80155190 151D70
-void ftMasterHand_80155190(HSD_GObj* gobj)
+void ftMh_MS_380_Coll(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155194 151D74
 // https://decomp.me/scratch/3ppDy
-void ftMasterHand_80155194(HSD_GObj* gobj)
+void ftMh_MS_380_80155194(HSD_GObj* gobj)
 {
     Fighter* fp;
     HSD_GObj* gobj_2;
@@ -68,7 +68,7 @@ void ftMasterHand_80155194(HSD_GObj* gobj)
     fp = gobj->user_data;
     gobj_2 = ftBossLib_8015C3E8(0x1C);
     if (ftBossLib_8015C31C() == 0) {
-        ftCrazyHand_8015A2B0(gobj_2);
+        ftCh_Init_8015A2B0(gobj_2);
     }
     fp->x1A5C = gobj_2;
     Fighter_ChangeMotionState(gobj, 0x17E, 0, 0, 0.0f, 1.0f, 0.0f);

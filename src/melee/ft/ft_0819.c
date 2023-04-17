@@ -10,8 +10,8 @@
 
 #ifdef MWERKS_GEKKO
 
-static f32 const lbl_804D83A0 = -1.0F;
-static f32 const lbl_804D83A4 = 1.0F;
+static f32 const ft_804D83A0 = -1.0F;
+static f32 const ft_804D83A4 = 1.0F;
 
 #pragma push
 asm void ft_80081938(HSD_GObj* gobj)
@@ -136,7 +136,7 @@ asm void ft_80081A00(void)
 /* 80081A78 0007E658  C0 1F 02 8C */	lfs f0, 0x28c(r31)
 /* 80081A7C 0007E65C  EC 01 00 2A */	fadds f0, f1, f0
 /* 80081A80 0007E660  D0 1F 19 44 */	stfs f0, 0x1944(r31)
-/* 80081A84 0007E664  80 6D C1 8C */	lwz r3, lbl_804D782C(r13)
+/* 80081A84 0007E664  80 6D C1 8C */	lwz r3, HSD_GObj_804D782C(r13)
 /* 80081A88 0007E668  83 7E 00 2C */	lwz r27, 0x2c(r30)
 /* 80081A8C 0007E66C  83 83 00 24 */	lwz r28, 0x24(r3)
 /* 80081A90 0007E670  48 00 00 64 */	b lbl_80081AF4
@@ -155,10 +155,10 @@ lbl_80081A94:
 /* 80081AC0 0007E6A0  C0 1B 00 B0 */	lfs f0, 0xb0(r27)
 /* 80081AC4 0007E6A4  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 80081AC8 0007E6A8  40 81 00 0C */	ble lbl_80081AD4
-/* 80081ACC 0007E6AC  C0 02 89 C0 */	lfs f0, lbl_804D83A0(r2)
+/* 80081ACC 0007E6AC  C0 02 89 C0 */	lfs f0, ft_804D83A0(r2)
 /* 80081AD0 0007E6B0  48 00 00 08 */	b lbl_80081AD8
 lbl_80081AD4:
-/* 80081AD4 0007E6B4  C0 02 89 C4 */	lfs f0, lbl_804D83A4(r2)
+/* 80081AD4 0007E6B4  C0 02 89 C4 */	lfs f0, ft_804D83A4(r2)
 lbl_80081AD8:
 /* 80081AD8 0007E6B8  D0 1D 0C D0 */	stfs f0, 0xcd0(r29)
 /* 80081ADC 0007E6BC  38 00 00 01 */	li r0, 1

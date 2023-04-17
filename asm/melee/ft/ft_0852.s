@@ -178,8 +178,8 @@ ft_800852B0:
 
 .global ft_8008549C
 ft_8008549C:
-/* 8008549C 0008207C  3C 60 80 46 */	lis r3, lbl_8045996C@ha
-/* 800854A0 00082080  38 83 99 6C */	addi r4, r3, lbl_8045996C@l
+/* 8008549C 0008207C  3C 60 80 46 */	lis r3, ft_8045996C@ha
+/* 800854A0 00082080  38 83 99 6C */	addi r4, r3, ft_8045996C@l
 /* 800854A4 00082084  38 60 00 00 */	li r3, 0
 /* 800854A8 00082088  90 64 00 00 */	stw r3, 0(r4)
 /* 800854AC 0008208C  38 C0 00 20 */	li r6, 0x20
@@ -237,11 +237,11 @@ ft_8008549C:
 .global gFtDataList
 gFtDataList:
     .skip 0x84
-.global lbl_8045993C
-lbl_8045993C:
+.global ft_8045993C
+ft_8045993C:
     .skip 0x30
-.global lbl_8045996C
-lbl_8045996C:
+.global ft_8045996C
+ft_8045996C:
     .skip 0x84
 .L_804599F0:
     .skip 0x78
@@ -253,69 +253,69 @@ lbl_8045996C:
 CostumeListsForeachCharacter:
     .4byte .L_804599F0
     .4byte 0x05000000
-    .4byte lbl_80459B28
+    .4byte ft_80459B28
     .4byte 0x04000000
-    .4byte lbl_80459A98
+    .4byte ft_80459A98
     .4byte 0x06000000
-    .4byte lbl_80459CA0
+    .4byte ft_80459CA0
     .4byte 0x05000000
-    .4byte lbl_80459C10
+    .4byte ft_80459C10
     .4byte 0x06000000
-    .4byte lbl_8045A090
+    .4byte ft_8045A090
     .4byte 0x04000000
-    .4byte lbl_803C82EC
+    .4byte ftLk_Init_803C82EC
     .4byte 0x05000000
-    .4byte lbl_80459D18
+    .4byte ft_80459D18
     .4byte 0x05000000
-    .4byte lbl_80459D90
+    .4byte ft_80459D90
     .4byte 0x04000000
-    .4byte lbl_80459DF0
+    .4byte ft_80459DF0
     .4byte 0x05000000
-    .4byte lbl_80459E68
+    .4byte ft_80459E68
     .4byte 0x04000000
-    .4byte lbl_80459EC8
+    .4byte ft_80459EC8
     .4byte 0x04000000
-    .4byte lbl_80459F28
+    .4byte ft_80459F28
     .4byte 0x04000000
-    .4byte lbl_80459F88
+    .4byte ft_80459F88
     .4byte 0x05000000
-    .4byte lbl_8045A000
+    .4byte ft_8045A000
     .4byte 0x06000000
-    .4byte lbl_8045A1F8
+    .4byte ft_8045A1F8
     .4byte 0x05000000
-    .4byte lbl_8045A2D0
+    .4byte ft_8045A2D0
     .4byte 0x04000000
-    .4byte lbl_8045A270
+    .4byte ft_8045A270
     .4byte 0x04000000
-    .4byte lbl_8045A0F0
+    .4byte ft_8045A0F0
     .4byte 0x05000000
-    .4byte lbl_8045A168
+    .4byte ft_8045A168
     .4byte 0x05000000
-    .4byte lbl_8045A330
+    .4byte ft_8045A330
     .4byte 0x05000000
-    .4byte lbl_8045A3A8
+    .4byte ft_8045A3A8
     .4byte 0x05000000
-    .4byte lbl_8045A420
+    .4byte ft_8045A420
     .4byte 0x04000000
-    .4byte lbl_8045A480
+    .4byte ft_8045A480
     .4byte 0x04000000
-    .4byte lbl_8045A4E0
+    .4byte ft_8045A4E0
     .4byte 0x04000000
-    .4byte lbl_8045A540
+    .4byte ft_8045A540
     .4byte 0x05000000
-    .4byte lbl_8045A5B8
+    .4byte ft_8045A5B8
     .4byte 0x05000000
-    .4byte lbl_8045A690
+    .4byte ft_8045A690
     .4byte 0x01000000
-    .4byte lbl_8045A6A8
+    .4byte ft_8045A6A8
     .4byte 0x01000000
-    .4byte lbl_8045A630
+    .4byte ft_8045A630
     .4byte 0x01000000
-    .4byte lbl_8045A648
+    .4byte ft_8045A648
     .4byte 0x01000000
-    .4byte lbl_8045A660
+    .4byte ft_8045A660
     .4byte 0x01000000
-    .4byte lbl_8045A678
+    .4byte ft_8045A678
     .4byte 0x01000000
 
 

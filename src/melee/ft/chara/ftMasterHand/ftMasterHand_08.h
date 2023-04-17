@@ -3,11 +3,11 @@
 
 #include <baselib/gobj.h>
 
-void ftMasterHand_80151CA8(HSD_GObj*);
+void ftMh_MS_349_80151CA8(HSD_GObj*);
 
-void ftMasterHand_80151C04(HSD_GObj* arg0);
-void ftMasterHand_80151C40(HSD_GObj* gobj);
-void ftMasterHand_80151C84(HSD_GObj* gobj);
-void ftMasterHand_80151CA4(HSD_GObj*);
+void ftMh_MS_349_Anim(HSD_GObj* arg0);
+void ftMh_MS_349_IASA(HSD_GObj* gobj);
+void ftMh_MS_349_Phys(HSD_GObj* gobj);
+void ftMh_MS_349_Coll(HSD_GObj*);
 
 #endif

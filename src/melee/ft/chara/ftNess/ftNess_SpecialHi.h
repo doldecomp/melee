@@ -4,6 +4,6 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-void ftNess_SpecialHiTakeDamage(HSD_GObj*);
+void ftNs_SpecialHi_TakeDamage(HSD_GObj*);
 
 #endif

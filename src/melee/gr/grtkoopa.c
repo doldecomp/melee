@@ -11,7 +11,7 @@
 
 extern StageInfo stage_info;
 
-static StageCallbacks lbl_803E8C70[4] = {
+static StageCallbacks grTKp_803E8C70[4] = {
     { grTKoopa_802217D4, grTKoopa_80221800, grTKoopa_80221808,
       grTKoopa_8022180C, 0 },
     { grTKoopa_802218A0, grTKoopa_802218F0, grTKoopa_802218F8,
@@ -21,9 +21,9 @@ static StageCallbacks lbl_803E8C70[4] = {
     { NULL, NULL, NULL, NULL, 0 }
 };
 
-StageData lbl_803E8CCC = {
+StageData grTKp_803E8CCC = {
     (1 << 0) | (1 << 4) | (1 << 5),
-    lbl_803E8C70,
+    grTKp_803E8C70,
     "/GrTKp.dat",
     grTKoopa_8022164C,
     grTKoopa_80221648,
@@ -66,7 +66,7 @@ static bool grTKoopa_802216E4(void)
 static HSD_GObj* grTKoopa_802216EC(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &lbl_803E8C70[gobj_id];
+    StageCallbacks* callbacks = &grTKp_803E8C70[gobj_id];
 
     gobj = Ground_801C14D0(gobj_id);
     if (gobj != NULL) {
@@ -81,7 +81,7 @@ static HSD_GObj* grTKoopa_802216EC(int gobj_id)
             callbacks->callback0(gobj);
         }
         if (callbacks->callback2 != NULL) {
-            func_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtkoopa.c", 195,

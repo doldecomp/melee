@@ -25,38 +25,38 @@
 #include <baselib/lobj.h>
 #include <baselib/random.h>
 
-/// @todo #lbl_804D64FC..#lbl_804D6550 are initialized to 0 in
+/// @todo #Fighter_804D64FC..#Fighter_804D6550 are initialized to 0 in
 ///       #Fighter_LoadCommonData, probably all pointers
-extern void* lbl_804D64FC;
-extern void* lbl_804D6500;
-extern void* lbl_804D6504;
-extern void* lbl_804D6508;
-extern void* lbl_804D650C;
-extern void* lbl_804D6510;
-extern void* lbl_804D6514;
-extern void* lbl_804D6518;
-extern void* lbl_804D651C;
-extern void* lbl_804D6524;
-extern void* lbl_804D6528;
-extern void* lbl_804D6530;
-extern void* lbl_804D6534;
-extern void* lbl_804D6538;
-extern void* lbl_804D653C;
-extern s32** lbl_804D6540;
-extern void* lbl_804D6548;
-extern void* lbl_804D654C;
-extern void* lbl_804D6550;
+extern void* Fighter_804D64FC;
+extern void* Fighter_804D6500;
+extern void* Fighter_804D6504;
+extern void* Fighter_804D6508;
+extern void* Fighter_804D650C;
+extern void* Fighter_804D6510;
+extern void* Fighter_804D6514;
+extern void* Fighter_804D6518;
+extern void* Fighter_804D651C;
+extern void* Fighter_804D6524;
+extern void* Fighter_804D6528;
+extern void* Fighter_804D6530;
+extern void* Fighter_804D6534;
+extern void* Fighter_804D6538;
+extern void* Fighter_804D653C;
+extern s32** Fighter_804D6540;
+extern void* Fighter_804D6548;
+extern void* Fighter_804D654C;
+extern void* Fighter_804D6550;
 
-extern unk_t lbl_804D6520;
+extern unk_t Fighter_804D6520;
 extern ftCommonData* p_ftCommonData;
 extern FighterPartsTable** ftPartsTable;
 
 extern HSD_ObjAllocData fighter_alloc_data;
-extern HSD_ObjAllocData lbl_80458FFC;
+extern HSD_ObjAllocData Fighter_80458FFC;
 extern HSD_ObjAllocData fighter_bones_alloc_data;
-extern HSD_ObjAllocData lbl_80459054;
-extern HSD_ObjAllocData lbl_80459080;
-extern HSD_ObjAllocData lbl_804590AC;
+extern HSD_ObjAllocData Fighter_80459054;
+extern HSD_ObjAllocData Fighter_80459080;
+extern HSD_ObjAllocData Fighter_804590AC;
 
 // functions in fighter.c
 void Fighter_800679B0(void);

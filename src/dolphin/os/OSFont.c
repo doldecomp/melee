@@ -3,13 +3,13 @@
 
 #ifdef MWERKS_GEKKO
 
-static s16 lbl_804D5C20[] = { -1, 0, 0, 0 };
+static s16 OSFont_804D5C20[] = { -1, 0, 0, 0 };
 
 #pragma push
 asm u16 OSGetFontEncode(void)
 { // clang-format off
     nofralloc
-/* 8034730C 00343EEC  A0 6D A5 80 */	lhz r3, lbl_804D5C20(r13)
+/* 8034730C 00343EEC  A0 6D A5 80 */	lhz r3, OSFont_804D5C20(r13)
 /* 80347310 00343EF0  28 03 00 01 */	cmplwi r3, 1
 /* 80347314 00343EF4  4C 81 00 20 */	blelr
 /* 80347318 00343EF8  3C 60 80 00 */	lis r3, 0x800000CC@ha
@@ -28,13 +28,13 @@ lbl_80347330:
 lbl_80347348:
 /* 80347348 00343F28  38 00 00 00 */	li r0, 0
 lbl_8034734C:
-/* 8034734C 00343F2C  B0 0D A5 80 */	sth r0, lbl_804D5C20(r13)
+/* 8034734C 00343F2C  B0 0D A5 80 */	sth r0, OSFont_804D5C20(r13)
 /* 80347350 00343F30  48 00 00 0C */	b lbl_8034735C
 lbl_80347354:
 /* 80347354 00343F34  38 00 00 00 */	li r0, 0
-/* 80347358 00343F38  B0 0D A5 80 */	sth r0, lbl_804D5C20(r13)
+/* 80347358 00343F38  B0 0D A5 80 */	sth r0, OSFont_804D5C20(r13)
 lbl_8034735C:
-/* 8034735C 00343F3C  A0 6D A5 80 */	lhz r3, lbl_804D5C20(r13)
+/* 8034735C 00343F3C  A0 6D A5 80 */	lhz r3, OSFont_804D5C20(r13)
 /* 80347360 00343F40  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop

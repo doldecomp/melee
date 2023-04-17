@@ -16,7 +16,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-/* static */ StageCallbacks lbl_803E8A98[4] = {
+/* static */ StageCallbacks grTIc_803E8A98[4] = {
     {
         grTIceClimber_8022109C,
         grTIceClimber_802210C8,
@@ -40,9 +40,9 @@
     },
 };
 
-StageData lbl_803E8AF4 = {
+StageData grTIc_803E8AF4 = {
     47,
-    lbl_803E8A98,
+    grTIc_803E8A98,
     "/GrTIc.dat",
     grTIceClimber_80220F14,
     grTIceClimber_80220F10,
@@ -87,7 +87,7 @@ HSD_GObj* grTIceClimber_80220FB4(int id)
     /// @todo Cannot be moved below @c cb due to an inline
     HSD_GObj* gobj;
 
-    StageCallbacks* cb = &lbl_803E8A98[id];
+    StageCallbacks* cb = &grTIc_803E8A98[id];
     gobj = Ground_801C14D0(id);
 
     if (gobj != NULL) {
@@ -105,7 +105,7 @@ HSD_GObj* grTIceClimber_80220FB4(int id)
         }
 
         if (cb->callback2 != NULL) {
-            func_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grticeclimber.c", 202,
@@ -208,7 +208,7 @@ asm void grTIceClimber_80221208(void){
 #pragma pop
 #endif
 
-s16 lbl_803E8B5C[] = {
+s16 grTIc_803E8B5C[] = {
     0,  1,  2,  3,  4,  5,  6,  8,  9,  10, 11, 12, 13, 14,
     15, 16, 17, 18, 19, 20, 21, 22, 44, 45, 46, 47, 48, 49,
     50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, 0,
@@ -219,8 +219,8 @@ void grTIceClimber_80221288(HSD_GObj* ground_gobj)
     Ground* gp = GET_GROUND(ground_gobj);
     int i;
 
-    for (i = 0; lbl_803E8B5C[i] != -1; i++) {
-        enum_t result_0 = Ground_801C33C0(2, lbl_803E8B5C[i]);
+    for (i = 0; grTIc_803E8B5C[i] != -1; i++) {
+        enum_t result_0 = Ground_801C33C0(2, grTIc_803E8B5C[i]);
         if (result_0 != -1) {
             bool result_1 = grMaterial_801C8CFC(
                 0, 0, gp, Ground_801C3FA4(ground_gobj, result_0), 0,

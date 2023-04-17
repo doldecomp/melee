@@ -12,88 +12,88 @@
 #include "ftCLink/ftCLink_Init.h"
 #include "lb/lbmthp.h"
 
-MotionState ftLink_MotionStateTable[] = {
-    { 295, 0x00240009, 0x0A000000, ftLink_800CEDE0, ftLink_800CEE00,
-      ftLink_800CEE30, ftLink_800CEE50, ftCamera_UpdateCameraBox },
+MotionState ftLk_Init_MotionStateTable[] = {
+    { 295, 0x00240009, 0x0A000000, ftCo_AttackS42_Anim, ftCo_AttackS42_IASA,
+      ftCo_AttackS42_Phys, ftCo_AttackS42_Coll, ftCamera_UpdateCameraBox },
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
-    { 296, 0x00340111, 0x12000000, ftLink_800ED15C, ftLink_800EDD88,
-      ftLink_800EDFD8, ftLink_800EE098, ftCamera_UpdateCameraBox },
-    { 297, 0x003C0111, 0x12000000, ftLink_800ED480, ftLink_800EDE30,
-      ftLink_800EDFF8, ftLink_800EE120, ftCamera_UpdateCameraBox },
-    { 298, 0x00340111, 0x12000000, ftLink_800ED5B4, ftLink_800EDEAC,
-      ftLink_800EE018, ftLink_800EE1A8, ftCamera_UpdateCameraBox },
-    { 299, 0x00340511, 0x12000000, ftLink_800ED72C, ftLink_800EDEB0,
-      ftLink_800EE038, ftLink_800EE2E0, ftCamera_UpdateCameraBox },
-    { 300, 0x003C0511, 0x12000000, ftLink_800EDA58, ftLink_800EDF58,
-      ftLink_800EE058, ftLink_800EE368, ftCamera_UpdateCameraBox },
-    { 301, 0x00340511, 0x12000000, ftLink_800EDB8C, ftLink_800EDFD4,
-      ftLink_800EE078, ftLink_800EE3F0, ftCamera_UpdateCameraBox },
-    { 302, 0x00340112, 0x13000000, ftLink_800EC54C, NULL, ftLink_800EC88C,
-      ftLink_800EC94C, ftCamera_UpdateCameraBox },
-    { 303, 0x00340112, 0x13000000, ftLink_800EC588, ftLink_800EC71C,
-      ftLink_800EC8AC, ftLink_800EC9C4, ftCamera_UpdateCameraBox },
-    { 304, 0x00340112, 0x13000000, ftLink_800EC5F8, NULL, ftLink_800EC8CC,
-      ftLink_800ECA1C, ftCamera_UpdateCameraBox },
-    { 305, 0x00340512, 0x13000000, ftLink_800EC634, NULL, ftLink_800EC8EC,
-      ftLink_800ECA88, ftCamera_UpdateCameraBox },
-    { 306, 0x00340512, 0x13000000, ftLink_800EC670, ftLink_800EC810,
-      ftLink_800EC90C, ftLink_800ECB00, ftCamera_UpdateCameraBox },
-    { 307, 0x00340512, 0x13000000, ftLink_800EC6E0, NULL, ftLink_800EC92C,
-      ftLink_800ECB58, ftCamera_UpdateCameraBox },
-    { 308, 0x00340213, 0x14000000, ftLink_800EBC10, ftLink_800EBCAC,
-      ftLink_800EBD30, ftLink_800EBDC0, ftCamera_UpdateCameraBox },
-    { 309, 0x00340213, 0x14000000, ftLink_800EBC4C, ftLink_800EBCB0,
-      ftLink_800EBCB4, ftLink_800EBDFC, ftCamera_UpdateCameraBox },
-    { 310, 0x00340014, 0x15000000, ftLink_800EB8A4, NULL, ftLink_800EB91C,
-      ftLink_800EB95C, ftCamera_UpdateCameraBox },
-    { 311, 0x00340414, 0x15000000, ftLink_800EB8E0, NULL, ftLink_800EB93C,
-      ftLink_800EB9D4, ftCamera_UpdateCameraBox },
-    { 312, 0x00200000, 0x01000000, ftLink_800C3D6C, ftLink_800C4384,
-      ftLink_800C438C, ftLink_800C447C, ftCamera_UpdateCameraBox },
-    { 313, 0x00C00000, 0x01000000, ftLink_800C4380, ftLink_800C4388,
-      ftLink_800C4438, ftLink_80082B78, ftCamera_UpdateCameraBox },
+    { 296, 0x00340111, 0x12000000, ftLk_SpecialNCharge_Anim, ftLk_SpecialNCharge_IASA,
+      ftLk_SpecialNCharge_Phys, ftLk_SpecialNCharge_Coll, ftCamera_UpdateCameraBox },
+    { 297, 0x003C0111, 0x12000000, ftLk_SpecialNFullyCharged_Anim, ftLk_SpecialNFullyCharged_IASA,
+      ftLk_SpecialNFullyCharged_Phys, ftLk_SpecialNFullyCharged_Coll, ftCamera_UpdateCameraBox },
+    { 298, 0x00340111, 0x12000000, ftLk_SpecialNFire_Anim, ftLk_SpecialNFire_IASA,
+      ftLk_SpecialNFire_Phys, ftLk_SpecialNFire_Coll, ftCamera_UpdateCameraBox },
+    { 299, 0x00340511, 0x12000000, ftLk_SpecialAirNCharge_Anim, ftLk_SpecialAirNCharge_IASA,
+      ftLk_SpecialAirNCharge_Phys, ftLk_SpecialAirNCharge_Coll, ftCamera_UpdateCameraBox },
+    { 300, 0x003C0511, 0x12000000, ftLk_SpecialAirNFullyCharged_Anim, ftLk_SpecialAirNFullyCharged_IASA,
+      ftLk_SpecialAirNFullyCharged_Phys, ftLk_SpecialAirNFullyCharged_Coll, ftCamera_UpdateCameraBox },
+    { 301, 0x00340511, 0x12000000, ftLk_SpecialAirNFire_Anim, ftLk_SpecialAirNFire_IASA,
+      ftLk_SpecialAirNFire_Phys, ftLk_SpecialAirNFire_Coll, ftCamera_UpdateCameraBox },
+    { 302, 0x00340112, 0x13000000, ftLk_SpecialSThrow_Anim, NULL, ftLk_SpecialSThrow_Phys,
+      ftLk_SpecialSThrow_Coll, ftCamera_UpdateCameraBox },
+    { 303, 0x00340112, 0x13000000, ftLk_SpecialSCatch_Anim, ftLk_SpecialSCatch_IASA,
+      ftLk_SpecialSCatch_Phys, ftLk_SpecialSCatch_Coll, ftCamera_UpdateCameraBox },
+    { 304, 0x00340112, 0x13000000, ftLk_SpecialSThrowEmpty_Anim, NULL, ftLk_SpecialSThrowEmpty_Phys,
+      ftLk_SpecialSThrowEmpty_Coll, ftCamera_UpdateCameraBox },
+    { 305, 0x00340512, 0x13000000, ftLk_SpecialAirSThrow_Anim, NULL, ftLk_SpecialAirSThrow_Phys,
+      ftLk_SpecialAirSThrow_Coll, ftCamera_UpdateCameraBox },
+    { 306, 0x00340512, 0x13000000, ftLk_SpecialAirSCatch_Anim, ftLk_SpecialAirSCatch_IASA,
+      ftLk_SpecialAirSCatch_Phys, ftLk_SpecialAirSCatch_Coll, ftCamera_UpdateCameraBox },
+    { 307, 0x00340512, 0x13000000, ftLk_SpecialAirSThrowEmpty_Anim, NULL, ftLk_SpecialAirSThrowEmpty_Phys,
+      ftLk_SpecialAirSThrowEmpty_Coll, ftCamera_UpdateCameraBox },
+    { 308, 0x00340213, 0x14000000, ftLk_SpecialHi_Anim, ftLk_SpecialHi_IASA,
+      ftLk_SpecialHi_Phys, ftLk_SpecialHi_Coll, ftCamera_UpdateCameraBox },
+    { 309, 0x00340213, 0x14000000, ftLk_SpecialAirHi_Anim, ftLk_SpecialAirHi_IASA,
+      ftLk_SpecialAirHi_Phys, ftLk_SpecialAirHi_Coll, ftCamera_UpdateCameraBox },
+    { 310, 0x00340014, 0x15000000, ftLk_SpecialLw_Anim, NULL, ftLk_SpecialLw_Phys,
+      ftLk_SpecialLw_Coll, ftCamera_UpdateCameraBox },
+    { 311, 0x00340414, 0x15000000, ftLk_SpecialAirLw_Anim, NULL, ftLk_SpecialAirLw_Phys,
+      ftLk_SpecialAirLw_Coll, ftCamera_UpdateCameraBox },
+    { 312, 0x00200000, 0x01000000, ftCo_Zair_Anim, ftCo_Zair_IASA,
+      ftCo_Zair_Phys, ftCo_Zair_Coll, ftCamera_UpdateCameraBox },
+    { 313, 0x00C00000, 0x01000000, ftCo_ZairCatch_Anim, ftCo_ZairCatch_IASA,
+      ftCo_ZairCatch_Phys, ftCo_ZairCatch_Coll, ftCamera_UpdateCameraBox },
 };
 
-char lbl_803C80B8[] = "PlLk.dat";
-char lbl_803C80C4[] = "ftDataLink";
-char lbl_803C80D0[] = "PlLkNr.dat";
-char lbl_803C80DC[] = "PlyLink5K_Share_joint";
-char lbl_803C80F4[] = "PlyLink5K_Share_matanim_joint";
-char lbl_803C8114[] = "PlLkRe.dat";
-char lbl_803C8120[] = "PlyLink5KRe_Share_joint";
-char lbl_803C8138[] = "PlyLink5KRe_Share_matanim_joint";
-char lbl_803C8158[] = "PlLkBu.dat";
-char lbl_803C8164[] = "PlyLink5KBu_Share_joint";
-char lbl_803C817C[] = "PlyLink5KBu_Share_matanim_joint";
-char lbl_803C819C[] = "PlLkBk.dat";
-char lbl_803C81A8[] = "PlyLink5KBk_Share_joint";
-char lbl_803C81C0[] = "PlyLink5KBk_Share_matanim_joint";
-char lbl_803C81E0[] = "PlLkWh.dat";
-char lbl_803C81EC[] = "PlyLink5KWh_Share_joint";
-char lbl_803C8204[] = "PlyLink5KWh_Share_matanim_joint";
-char lbl_803C8224[] = "PlLkAJ.dat";
+char ftLk_Init_DatFilename[] = "PlLk.dat";
+char ftLk_Init_DataName[] = "ftDataLink";
+char ftLk_Init_803C80D0[] = "PlLkNr.dat";
+char ftLk_Init_803C80DC[] = "PlyLink5K_Share_joint";
+char ftLk_Init_803C80F4[] = "PlyLink5K_Share_matanim_joint";
+char ftLk_Init_803C8114[] = "PlLkRe.dat";
+char ftLk_Init_803C8120[] = "PlyLink5KRe_Share_joint";
+char ftLk_Init_803C8138[] = "PlyLink5KRe_Share_matanim_joint";
+char ftLk_Init_803C8158[] = "PlLkBu.dat";
+char ftLk_Init_803C8164[] = "PlyLink5KBu_Share_joint";
+char ftLk_Init_803C817C[] = "PlyLink5KBu_Share_matanim_joint";
+char ftLk_Init_803C819C[] = "PlLkBk.dat";
+char ftLk_Init_803C81A8[] = "PlyLink5KBk_Share_joint";
+char ftLk_Init_803C81C0[] = "PlyLink5KBk_Share_matanim_joint";
+char ftLk_Init_803C81E0[] = "PlLkWh.dat";
+char ftLk_Init_803C81EC[] = "PlyLink5KWh_Share_joint";
+char ftLk_Init_803C8204[] = "PlyLink5KWh_Share_matanim_joint";
+char ftLk_Init_AnimDatFilename[] = "PlLkAJ.dat";
 
-Fighter_DemoStrings lbl_803C82A0 = {
+Fighter_DemoStrings ftLk_Init_DemoMotionFilenames = {
     "ftDemoResultMotionFileLink",
     "ftDemoIntroMotionFileLink",
     "ftDemoEndingMotionFileLink",
     "ftDemoViWaitMotionFileLink",
 };
 
-Fighter_CostumeStrings lbl_803C82B0[] = {
-    { lbl_803C80D0, lbl_803C80DC, lbl_803C80F4 },
-    { lbl_803C8114, lbl_803C8120, lbl_803C8138 },
-    { lbl_803C8158, lbl_803C8164, lbl_803C817C },
-    { lbl_803C819C, lbl_803C81A8, lbl_803C81C0 },
-    { lbl_803C81E0, lbl_803C81EC, lbl_803C8204 },
+Fighter_CostumeStrings ftLk_Init_CostumeStrings[] = {
+    { ftLk_Init_803C80D0, ftLk_Init_803C80DC, ftLk_Init_803C80F4 },
+    { ftLk_Init_803C8114, ftLk_Init_803C8120, ftLk_Init_803C8138 },
+    { ftLk_Init_803C8158, ftLk_Init_803C8164, ftLk_Init_803C817C },
+    { ftLk_Init_803C819C, ftLk_Init_803C81A8, ftLk_Init_803C81C0 },
+    { ftLk_Init_803C81E0, ftLk_Init_803C81EC, ftLk_Init_803C8204 },
 };
 
-int lbl_803C82EC[31] = { 0 };
+int ftLk_Init_803C82EC[31] = { 0 };
 
-Vec3 const lbl_803B7520[3] = { 0 };
+Vec3 const ftLk_Init_803B7520[3] = { 0 };
 
-bool ftLink_800EAD64(HSD_GObj* gobj)
+bool ftLk_800EAD64(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -104,7 +104,7 @@ bool ftLink_800EAD64(HSD_GObj* gobj)
     return false;
 }
 
-void ftLink_OnDeath(HSD_GObj* gobj)
+void ftLk_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -121,12 +121,12 @@ void ftLink_OnDeath(HSD_GObj* gobj)
     fp->ev.lk.x2244 = 0;
 }
 
-void ftLink_OnLoadForCLink(Fighter* fp)
+void ftLk_Init_OnLoadForCLink(Fighter* fp)
 {
     PUSH_ATTRS(fp, ftLinkAttributes);
 }
 
-void ftLink_OnLoad(HSD_GObj* gobj)
+void ftLk_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftLinkAttributes* link_attr = fp->x10C_ftData->ext_attr;
@@ -140,59 +140,59 @@ void ftLink_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(item_list[2], link_attr->xBC);
     it_8026B3F8(item_list[3], link_attr->xC);
     it_8026B3F8(item_list[4], link_attr->x10);
-    ftParts_800753D4(fp, *lbl_804D6540[fp->x4_fighterKind], item_list[6]);
+    ftParts_800753D4(fp, *Fighter_804D6540[fp->x4_fighterKind], item_list[6]);
 }
 
-void ftLink_800EAF38(void)
+void ftLk_800EAF38(void)
 {
-    ftLink_800EC06C();
+    ftLk_800EC06C();
 }
 
-void ftLink_800EAF58(HSD_GObj* gobj)
+void ftLk_800EAF58(HSD_GObj* gobj)
 {
-    ftLink_800EC06C();
+    ftLk_800EC06C();
     ft_800D94D8(gobj);
-    ftLink_800ECD04(gobj);
-    ftLink_800ECD58(gobj);
-    ftCLink_80149268(gobj);
+    ftLk_800ECD04(gobj);
+    ftLk_800ECD58(gobj);
+    ftCl_Init_80149268(gobj);
 }
 
-void ftLink_OnItemPickupExt(HSD_GObj* gobj, int arg1)
+void ftLk_Init_OnItemPickupExt(HSD_GObj* gobj, int arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (it_8026B2B4(fp->x1974_heldItem) == 1) {
         ftParts_80074A4C(gobj, 1, 1);
     }
     ftParts_80074A4C(gobj, 2, 1);
-    ftLink_OnItemPickup(gobj, arg1);
+    ftLk_Init_OnItemPickup(gobj, arg1);
 }
 
-void ftLink_OnItemInvisible(HSD_GObj* gobj)
+void ftLk_Init_OnItemInvisible(HSD_GObj* gobj)
 {
     Fighter_OnItemInvisible(gobj, 1);
 }
 
-void ftLink_OnItemVisible(HSD_GObj* gobj)
+void ftLk_Init_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftLink_OnItemDropExt(HSD_GObj* gobj, bool arg1)
+void ftLk_Init_OnItemDropExt(HSD_GObj* gobj, bool arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (it_8026B2B4(fp->x1974_heldItem) == 1) {
         ftParts_80074A4C(gobj, 1, 0);
     }
     ftParts_80074A4C(gobj, 2, 0);
-    ftLink_OnItemDrop(gobj, arg1);
+    ftLk_Init_OnItemDrop(gobj, arg1);
 }
 
-void ftLink_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftLk_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
     Fighter_OnItemPickup(gobj, bool, 1, 1);
 }
 
-void ftLink_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftLk_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -202,7 +202,7 @@ void ftLink_OnItemDrop(HSD_GObj* gobj, bool bool1)
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void ftLink_LoadSpecialAttrs(HSD_GObj* gobj)
+void ftLk_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftLinkAttributes);
     if (fp->x34_scale.y != 1.0f) {
@@ -210,17 +210,17 @@ void ftLink_LoadSpecialAttrs(HSD_GObj* gobj)
     }
 }
 
-void ftLink_OnKnockbackEnter(HSD_GObj* gobj)
+void ftLk_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackEnter(gobj, 1);
 }
 
-void ftLink_OnKnockbackExit(HSD_GObj* gobj)
+void ftLk_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, 1);
 }
 
-void ftLink_800EB334(HSD_GObj* gobj)
+void ftLk_800EB334(HSD_GObj* gobj)
 {
     f32 new_ground_vel;
 

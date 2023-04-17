@@ -197,8 +197,8 @@
 .section .text
 
 # https://decomp.me/scratch/Cuw20 // 23200 (0%)
-.global func_80391664
-func_80391664:
+.global hsd_80391664
+hsd_80391664:
 /* 80391664 0038E244  7C 08 02 A6 */	mflr r0
 /* 80391668 0038E248  2C 03 00 30 */	cmpwi r3, 0x30
 /* 8039166C 0038E24C  90 01 00 04 */	stw r0, 4(r1)
@@ -459,8 +459,8 @@ func_80391664:
 /* 80391A00 0038E5E0  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/O3Onb // 4900 (0%)
-.global func_80391A04
-func_80391A04:
+.global hsd_80391A04
+hsd_80391A04:
 /* 80391A04 0038E5E4  7C 08 02 A6 */	mflr r0
 /* 80391A08 0038E5E8  90 01 00 04 */	stw r0, 4(r1)
 /* 80391A0C 0038E5EC  94 21 FF B8 */	stwu r1, -0x48(r1)
@@ -512,8 +512,8 @@ func_80391A04:
 /* 80391AC4 0038E6A4  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/Rq3fk // 21200 (0%)
-.global func_80391AC8
-func_80391AC8:
+.global hsd_80391AC8
+hsd_80391AC8:
 /* 80391AC8 0038E6A8  7C 08 02 A6 */	mflr r0
 /* 80391ACC 0038E6AC  90 01 00 04 */	stw r0, 4(r1)
 /* 80391AD0 0038E6B0  94 21 FF B8 */	stwu r1, -0x48(r1)
@@ -547,7 +547,7 @@ func_80391AC8:
 /* 80391B38 0038E718  90 01 00 18 */	stw r0, 0x18(r1)
 /* 80391B3C 0038E71C  88 65 00 00 */	lbz r3, 0(r5)
 /* 80391B40 0038E720  7C 63 07 74 */	extsb r3, r3
-/* 80391B44 0038E724  4B FF FB 21 */	bl func_80391664
+/* 80391B44 0038E724  4B FF FB 21 */	bl hsd_80391664
 /* 80391B48 0038E728  EF DE 08 2A */	fadds f30, f30, f1
 /* 80391B4C 0038E72C  48 00 02 84 */	b .L_80391DD0
 .L_80391B50:
@@ -777,8 +777,8 @@ func_80391AC8:
 /* 80391E14 0038E9F4  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/vcyKr // 6800 (0%)
-.global func_80391E18
-func_80391E18:
+.global hsd_80391E18
+hsd_80391E18:
 /* 80391E18 0038E9F8  7C 08 02 A6 */	mflr r0
 /* 80391E1C 0038E9FC  90 01 00 04 */	stw r0, 4(r1)
 /* 80391E20 0038EA00  94 21 FF 90 */	stwu r1, -0x70(r1)
@@ -851,8 +851,8 @@ func_80391E18:
 /* 80391F24 0038EB04  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/Jcdwp // 15500 (0%)
-.global func_80391F28
-func_80391F28:
+.global hsd_80391F28
+hsd_80391F28:
 /* 80391F28 0038EB08  7C 08 02 A6 */	mflr r0
 /* 80391F2C 0038EB0C  90 01 00 04 */	stw r0, 4(r1)
 /* 80391F30 0038EB10  94 21 FF 48 */	stwu r1, -0xb8(r1)
@@ -1015,8 +1015,8 @@ func_80391F28:
 /* 80392190 0038ED70  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/O7Lvi // 900 (0%)
-.global func_80392194
-func_80392194:
+.global hsd_80392194
+hsd_80392194:
 /* 80392194 0038ED74  54 80 07 FF */	clrlwi. r0, r4, 0x1f
 /* 80392198 0038ED78  88 87 00 00 */	lbz r4, 0(r7)
 /* 8039219C 0038ED7C  98 83 00 00 */	stb r4, 0(r3)

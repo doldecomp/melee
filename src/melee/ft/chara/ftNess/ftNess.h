@@ -162,292 +162,292 @@ typedef struct ftNessAttributes {
 
 } ftNessAttributes;
 
-extern MotionState ftNess_MotionStateTable[];
-extern char lbl_803CCAD0[];
-extern char lbl_803CCADC[];
-extern Fighter_CostumeStrings lbl_803CCC84[];
-extern char lbl_803CCBF8[];
-extern Fighter_DemoStrings lbl_803CCC74;
+extern MotionState ftNs_Init_MotionStateTable[];
+extern char ftNs_Init_DatFilename[];
+extern char ftNs_Init_DataName[];
+extern Fighter_CostumeStrings ftNs_Init_CostumeStrings[];
+extern char ftNs_Init_AnimDatFilename[];
+extern Fighter_DemoStrings ftNs_Init_DemoMotionFilenames;
 
 // Ness functions
 
-void ftNess_OnDeath(HSD_GObj* gobj);
-void ftNess_OnLoad(HSD_GObj* gobj);
-void ftNess_OnDamage(HSD_GObj* gobj);
-void ftNess_OnAbsorb(HSD_GObj* gobj);
-f32 ftNess_GetAbsorbHeal(Fighter* fp);
-void ftNess_OnItemPickup(HSD_GObj* gobj, bool catchItemFlag);
-void ftNess_OnItemInvisible(HSD_GObj* gobj);
-void ftNess_OnItemVisible(HSD_GObj* gobj);
-void ftNess_OnItemDrop(HSD_GObj* gobj, bool dropItemFlag);
-void ftNess_LoadSpecialAttrs(HSD_GObj* gobj);
+void ftNs_Init_OnDeath(HSD_GObj* gobj);
+void ftNs_Init_OnLoad(HSD_GObj* gobj);
+void ftNs_Init_OnDamage(HSD_GObj* gobj);
+void ftNs_Init_OnAbsorb(HSD_GObj* gobj);
+f32 ftNs_Init_GetAbsorbHeal(Fighter* fp);
+void ftNs_Init_OnItemPickup(HSD_GObj* gobj, bool catchItemFlag);
+void ftNs_Init_OnItemInvisible(HSD_GObj* gobj);
+void ftNs_Init_OnItemVisible(HSD_GObj* gobj);
+void ftNs_Init_OnItemDrop(HSD_GObj* gobj, bool dropItemFlag);
+void ftNs_Init_LoadSpecialAttrs(HSD_GObj* gobj);
 
 /// Change model's MatAnim frames to hurt textures
-void ftNess_OnKnockbackEnter(HSD_GObj* gobj);
+void ftNs_Init_OnKnockbackEnter(HSD_GObj* gobj);
 
 /// Change model's MatAnim frames to normal textures
-void ftNess_OnKnockbackExit(HSD_GObj* gobj);
+void ftNs_Init_OnKnockbackExit(HSD_GObj* gobj);
 
 // Forward Smash (AttackS4)
 
-void ftNess_AttackS4_OnReflect(HSD_GObj* gobj);
-bool ftNess_CheckNessBatRemove(HSD_GObj* gobj);
-void ftNess_ItemNessBatRemove(HSD_GObj* gobj);
-void ftNess_ItemNessBatSetNULL(HSD_GObj* gobj);
+void ftNs_AttackS4_OnReflect(HSD_GObj* gobj);
+bool ftNs_AttackS4_CheckNessBatRemove(HSD_GObj* gobj);
+void ftNs_AttackS4_ItemNessBatRemove(HSD_GObj* gobj);
+void ftNs_AttackS4_ItemNessBatSetNULL(HSD_GObj* gobj);
 
-void ftNess_AttackS4_Anim(HSD_GObj* gobj);
-void ftNess_AttackS4_IASA(HSD_GObj* gobj);
-void ftNess_AttackS4_Phys(HSD_GObj* gobj);
-void ftNess_AttackS4_Coll(HSD_GObj* gobj);
+void ftNs_AttackS4_Anim(HSD_GObj* gobj);
+void ftNs_AttackS4_IASA(HSD_GObj* gobj);
+void ftNs_AttackS4_Phys(HSD_GObj* gobj);
+void ftNs_AttackS4_Coll(HSD_GObj* gobj);
 
 // Yo-Yo item setup & math
 
 /// Ness Yo-Yo HitCapsule Position Update
-void ftNess_YoyoUpdateHitPos(HSD_GObj* gobj);
+void ftNs_AttackHi4_YoyoUpdateHitPos(HSD_GObj* gobj);
 
 /// Ness D-Smash HitCapsule Refresh Timer
-void ftNess_YoyoCheckTimedRehit(HSD_GObj* gobj);
+void ftNs_AttackHi4_YoyoCheckTimedRehit(HSD_GObj* gobj);
 
 /// Check collision of Bone (Yo-Yo attach bone)
 /// @remarks Also used by Sheik???
-s32 ftNess_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk, Vec3* ECBUnk2,
+s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk, Vec3* ECBUnk2,
                             f32 float_unk);
 
-void ftNess_YoyoSetUnkPos(HSD_GObj* gobj, Vec3* arg1);
+void ftNs_AttackHi4_YoyoSetUnkPos(HSD_GObj* gobj, Vec3* arg1);
 
 /// Set Yo-Yo hitbox position?
-void ftNess_YoyoSetHitPos(HSD_GObj* gobj);
+void ftNs_AttackHi4_YoyoSetHitPos(HSD_GObj* gobj);
 
-void ftNess_YoyoSetHitPosUnk(HSD_GObj* gobj, f32 arg8);
+void ftNs_AttackHi4_YoyoSetHitPosUnk(HSD_GObj* gobj, f32 arg8);
 
 /// Check if Yo-Yo is colliding with an obstacle (wall / air)
-bool ftNess_YoyoCheckNoObstruct(HSD_GObj* gobj);
+bool ftNs_AttackHi4_YoyoCheckNoObstruct(HSD_GObj* gobj);
 
 /// Set ftcmd-, fp- and stateVars
-void ftNess_YoyoSetVarAll(HSD_GObj* gobj);
+void ftNs_AttackHi4_YoyoSetVarAll(HSD_GObj* gobj);
 
 /// Applies Smash Charge attributes to Ness's Up/Down Smash
-void ftNess_YoyoApplySmash(HSD_GObj* gobj);
+void ftNs_AttackHi4_YoyoApplySmash(HSD_GObj* gobj);
 
-void ftNess_YoyoSetChargeDamage(HSD_GObj* gobj); // Used by Up Smash
+void ftNs_AttackHi4_YoyoSetChargeDamage(HSD_GObj* gobj); // Used by Up Smash
 
 /// Ness Yo-Yo Think
-bool ftNess_YoyoThink_IsRemove(HSD_GObj* gobj);
+bool ftNs_AttackHi4_YoyoThink_IsRemove(HSD_GObj* gobj);
 
 /// Calculates Yo-Yo texture rotation speed?
-void ftNess_YoyoSetUnkRate(HSD_GObj* gobj);
+void ftNs_AttackHi4_YoyoSetUnkRate(HSD_GObj* gobj);
 
 /// Creates Yo-Yo item and sets up callbacks
-void ftNess_YoyoCreateItem(HSD_GObj* gobj);
+void ftNs_AttackHi4_YoyoCreateItem(HSD_GObj* gobj);
 
 /// Something to do with Yo-Yo flags
-void ftNess_YoyoItemSetFlag(HSD_GObj* gobj);
+void ftNs_AttackHi4_YoyoItemSetFlag(HSD_GObj* gobj);
 
 /// Despawn Yo-Yo item
-void ftNess_YoyoItemDespawn(HSD_GObj* gobj);
+void ftNs_AttackHi4_YoyoItemDespawn(HSD_GObj* gobj);
 
-void ftNess_YoyoItemSetUnk(HSD_GObj* gobj);
-void ftNess_YoyoItemSetUnk2(HSD_GObj* gobj);
+void ftNs_AttackHi4_YoyoItemSetUnk(HSD_GObj* gobj);
+void ftNs_AttackHi4_YoyoItemSetUnk2(HSD_GObj* gobj);
 
 // Up Smash Motion State hook
 
 /// Ness's Up Smash Motion State handler
-void ftNess_AttackHi4_Action(HSD_GObj* gobj);
+void ftNs_AttackHi4_Enter(HSD_GObj* gobj);
 
 // Start rehit timer if target is hit
 
 /// Initiates rehit timer for Yo-Yo hitbox
-void ftNess_YoyoStartTimedRehit(HSD_GObj* gobj);
+void ftNs_AttackHi4_YoyoStartTimedRehit(HSD_GObj* gobj);
 
 // Up Smash callbacks (AttackHi4)
 
 /// Ness's Up Smash Animation Callback
-void ftNess_AttackHi4_Anim(HSD_GObj* gobj);
+void ftNs_AttackHi4_Anim(HSD_GObj* gobj);
 
-void ftNess_AttackHi4_IASA(HSD_GObj* gobj);
-void ftNess_AttackHi4_Phys(HSD_GObj* gobj);
-void ftNess_AttackHi4_Coll(HSD_GObj* gobj);
-void ftNess_AttackHi4_Charge_Anim(HSD_GObj* gobj);
-void ftNess_AttackHi4_Charge_IASA(HSD_GObj* gobj);
-void ftNess_AttackHi4_Charge_Phys(HSD_GObj* gobj);
-void ftNess_AttackHi4_Charge_Coll(HSD_GObj* gobj);
-void ftNess_AttackHi4_Charge_Action(HSD_GObj* gobj);
-void ftNess_AttackHi4_Release_Anim(HSD_GObj* gobj);
-void ftNess_AttackHi4_Release_IASA(HSD_GObj* gobj);
-void ftNess_AttackHi4_Release_Phys(HSD_GObj* gobj);
-void ftNess_AttackHi4_Release_Coll(HSD_GObj* gobj);
+void ftNs_AttackHi4_IASA(HSD_GObj* gobj);
+void ftNs_AttackHi4_Phys(HSD_GObj* gobj);
+void ftNs_AttackHi4_Coll(HSD_GObj* gobj);
+void ftNs_AttackHi4Charge_Anim(HSD_GObj* gobj);
+void ftNs_AttackHi4Charge_IASA(HSD_GObj* gobj);
+void ftNs_AttackHi4Charge_Phys(HSD_GObj* gobj);
+void ftNs_AttackHi4Charge_Coll(HSD_GObj* gobj);
+void ftNs_AttackHi4Charge_Enter(HSD_GObj* gobj);
+void ftNs_AttackHi4Release_Anim(HSD_GObj* gobj);
+void ftNs_AttackHi4Release_IASA(HSD_GObj* gobj);
+void ftNs_AttackHi4Release_Phys(HSD_GObj* gobj);
+void ftNs_AttackHi4Release_Coll(HSD_GObj* gobj);
 
 /// Ness's Up Smash Post-Charge Motion State handler
-void ftNess_AttackHi4_Release_Action(HSD_GObj* gobj);
+void ftNs_AttackHi4Release_Enter(HSD_GObj* gobj);
 
 // Down Smash callbacks (AttackLw4)
 
-void ftNess_AttackLw4_Action(HSD_GObj* gobj);
-void ftNess_AttackLw4_Anim(HSD_GObj* gobj);
-void ftNess_AttackLw4_IASA(HSD_GObj* gobj);
-void ftNess_AttackLw4_Phys(HSD_GObj* gobj);
-void ftNess_AttackLw4_Coll(HSD_GObj* gobj);
-void ftNess_AttackLw4_Charge_Anim(HSD_GObj* gobj);
-void ftNess_AttackLw4_Charge_IASA(HSD_GObj* gobj);
-void ftNess_AttackLw4_Charge_Phys(HSD_GObj* gobj);
-void ftNess_AttackLw4_Charge_Coll(HSD_GObj* gobj);
-void ftNess_AttackLw4_Charge_Action(HSD_GObj* gobj);
-void ftNess_AttackLw4_Release_Anim(HSD_GObj* gobj);
-void ftNess_AttackLw4_Release_IASA(HSD_GObj* gobj);
-void ftNess_AttackLw4_Release_Phys(HSD_GObj* gobj);
-void ftNess_AttackLw4_Release_Coll(HSD_GObj* gobj);
-void ftNess_AttackLw4_Release_Action(HSD_GObj* gobj);
+void ftNs_AttackLw4_Enter(HSD_GObj* gobj);
+void ftNs_AttackLw4_Anim(HSD_GObj* gobj);
+void ftNs_AttackLw4_IASA(HSD_GObj* gobj);
+void ftNs_AttackLw4_Phys(HSD_GObj* gobj);
+void ftNs_AttackLw4_Coll(HSD_GObj* gobj);
+void ftNs_AttackLw4Charge_Anim(HSD_GObj* gobj);
+void ftNs_AttackLw4Charge_IASA(HSD_GObj* gobj);
+void ftNs_AttackLw4Charge_Phys(HSD_GObj* gobj);
+void ftNs_AttackLw4Charge_Coll(HSD_GObj* gobj);
+void ftNs_AttackLw4Charge_Enter(HSD_GObj* gobj);
+void ftNs_AttackLw4Release_Anim(HSD_GObj* gobj);
+void ftNs_AttackLw4Release_IASA(HSD_GObj* gobj);
+void ftNs_AttackLw4Release_Phys(HSD_GObj* gobj);
+void ftNs_AttackLw4Release_Coll(HSD_GObj* gobj);
+void ftNs_AttackLw4Release_Enter(HSD_GObj* gobj);
 
 // PK Fire callbacks (SpecialS)
 
-void ftNess_ItemPKFireSpawn(HSD_GObj* gobj);
-void ftNess_SpecialS_StartMotion(HSD_GObj* gobj);
-void ftNess_SpecialAirS_Action(HSD_GObj* gobj);
-void ftNess_SpecialS_Anim(HSD_GObj* gobj);
-void ftNess_SpecialAirS_Anim(HSD_GObj* gobj);
-void ftNess_SpecialS_Phys(HSD_GObj* gobj);
-void ftNess_SpecialAirS_Phys(HSD_GObj* gobj);
-void ftNess_SpecialS_Coll(HSD_GObj* gobj);
-void ftNess_SpecialAirS_Coll(HSD_GObj* gobj);
+void ftNs_SpecialS_ItemPKFireSpawn(HSD_GObj* gobj);
+void ftNs_SpecialS_Enter(HSD_GObj* gobj);
+void ftNs_SpecialAirS_Enter(HSD_GObj* gobj);
+void ftNs_SpecialS_Anim(HSD_GObj* gobj);
+void ftNs_SpecialAirS_Anim(HSD_GObj* gobj);
+void ftNs_SpecialS_Phys(HSD_GObj* gobj);
+void ftNs_SpecialAirS_Phys(HSD_GObj* gobj);
+void ftNs_SpecialS_Coll(HSD_GObj* gobj);
+void ftNs_SpecialAirS_Coll(HSD_GObj* gobj);
 
 // PK Flash callbacks (SpecialN)
 
-bool ftNess_CheckSpecialNHold(HSD_GObj* gobj);
-void ftNess_SpecialNSetNULL(HSD_GObj* gobj);
-void ftNess_ItemPKFlushSetNULL(HSD_GObj* gobj);
-void ftNess_SpecialNStart_Action(HSD_GObj* gobj);
-void ftNess_SpecialAirNStart_Action(HSD_GObj* gobj);
-void ftNess_SpecialNStart_Anim(HSD_GObj* gobj);
-void ftNess_SpecialNHold_Anim(HSD_GObj* gobj);
-void ftNess_SpecialNEnd_Anim(HSD_GObj* gobj);
-void ftNess_SpecialAirNStart_Anim(HSD_GObj* gobj);
-void ftNess_SpecialAirNHold_Anim(HSD_GObj* gobj);
-void ftNess_SpecialAirNEnd_Anim(HSD_GObj* gobj);
-void ftNess_SpecialNStart_IASA(HSD_GObj* gobj);
-void ftNess_SpecialNHold_IASA(HSD_GObj* gobj);
-void ftNess_SpecialNEnd_IASA(HSD_GObj* gobj);
-void ftNess_SpecialAirNStart_IASA(HSD_GObj* gobj);
-void ftNess_SpecialAirNHold_IASA(HSD_GObj* gobj);
-void ftNess_SpecialAirNEnd_IASA(HSD_GObj* gobj);
-void ftNess_SpecialNStart_Phys(HSD_GObj* gobj);
-void ftNess_SpecialNHold_Phys(HSD_GObj* gobj);
-void ftNess_SpecialNEnd_Phys(HSD_GObj* gobj);
-void ftNess_SpecialAirNStart_Phys(HSD_GObj* gobj);
-void ftNess_SpecialAirNHold_Phys(HSD_GObj* gobj);
-void ftNess_SpecialAirNEnd_Phys(HSD_GObj* gobj);
-void ftNess_SpecialNStart_Coll(HSD_GObj* gobj);
-void ftNess_SpecialNHold_Coll(HSD_GObj* gobj);
-void ftNess_SpecialNEnd_Coll(HSD_GObj* gobj);
-void ftNess_SpecialAirNStart_Coll(HSD_GObj* gobj);
-void ftNess_SpecialAirNHold_Coll(HSD_GObj* gobj);
-void ftNess_SpecialAirNEnd_Coll(HSD_GObj* gobj);
+bool ftNs_SpecialN_CheckSpecialNHold(HSD_GObj* gobj);
+void ftNs_SpecialN_SetNULL(HSD_GObj* gobj);
+void ftNs_SpecialN_ItemPKFlushSetNULL(HSD_GObj* gobj);
+void ftNs_SpecialNStart_Enter(HSD_GObj* gobj);
+void ftNs_SpecialAirNStart_Enter(HSD_GObj* gobj);
+void ftNs_SpecialNStart_Anim(HSD_GObj* gobj);
+void ftNs_SpecialNHold_Anim(HSD_GObj* gobj);
+void ftNs_SpecialNEnd_Anim(HSD_GObj* gobj);
+void ftNs_SpecialAirNStart_Anim(HSD_GObj* gobj);
+void ftNs_SpecialAirNHold_Anim(HSD_GObj* gobj);
+void ftNs_SpecialAirNEnd_Anim(HSD_GObj* gobj);
+void ftNs_SpecialNStart_IASA(HSD_GObj* gobj);
+void ftNs_SpecialNHold_IASA(HSD_GObj* gobj);
+void ftNs_SpecialNEnd_IASA(HSD_GObj* gobj);
+void ftNs_SpecialAirNStart_IASA(HSD_GObj* gobj);
+void ftNs_SpecialAirNHold_IASA(HSD_GObj* gobj);
+void ftNs_SpecialAirNEnd_IASA(HSD_GObj* gobj);
+void ftNs_SpecialNStart_Phys(HSD_GObj* gobj);
+void ftNs_SpecialNHold_Phys(HSD_GObj* gobj);
+void ftNs_SpecialNEnd_Phys(HSD_GObj* gobj);
+void ftNs_SpecialAirNStart_Phys(HSD_GObj* gobj);
+void ftNs_SpecialAirNHold_Phys(HSD_GObj* gobj);
+void ftNs_SpecialAirNEnd_Phys(HSD_GObj* gobj);
+void ftNs_SpecialNStart_Coll(HSD_GObj* gobj);
+void ftNs_SpecialNHold_Coll(HSD_GObj* gobj);
+void ftNs_SpecialNEnd_Coll(HSD_GObj* gobj);
+void ftNs_SpecialAirNStart_Coll(HSD_GObj* gobj);
+void ftNs_SpecialAirNHold_Coll(HSD_GObj* gobj);
+void ftNs_SpecialAirNEnd_Coll(HSD_GObj* gobj);
 
 // PK Thunder callbacks (SpecialHi)
 
-void ftNess_SpecialHiStopGFX(HSD_GObj* gobj);
-bool ftNess_ItemPKThunder_CheckNessCollide(HSD_GObj* gobj);
-bool ftNess_CheckSpecialHiHold(HSD_GObj* gobj);
-void ftNess_ItemPKThunderRemove(HSD_GObj* gobj);
-void ftNess_SpecialHiTakeDamage(HSD_GObj* gobj);
-void ftNess_ItemPKThunderCheckOwn(HSD_GObj* gobj, HSD_GObj* gobj2);
-void ftNess_SpecialAirHi_CollisionModVel(HSD_GObj* gobj, CollData* coll_data);
-void ftNess_SpecialHi_StartMotion(HSD_GObj* gobj);
-void ftNess_SpecialAirHiStart_Action(HSD_GObj* gobj);
-void ftNess_SpecialHi_Action(HSD_GObj* gobj);
-void ftNess_SpecialAirHi_Action(HSD_GObj* gobj);
-void ftNess_SpecialHiStart_Anim(HSD_GObj* gobj);
-void ftNess_SpecialHiHold_Anim(HSD_GObj* gobj);
-void ftNess_SpecialHiEnd_Anim(HSD_GObj* gobj);
-void ftNess_SpecialHi_Anim(HSD_GObj* gobj);
-void ftNess_SpecialAirHiStart_Anim(HSD_GObj* gobj);
-void ftNess_SpecialAirHiHold_Anim(HSD_GObj* gobj);
-void ftNess_SpecialAirHiEnd_Anim(HSD_GObj* gobj);
-void ftNess_SpecialAirHi_Anim(HSD_GObj* gobj);
-void ftNess_SpecialAirHiRebound_Anim(HSD_GObj* gobj);
-void ftNess_SpecialHiStart_IASA(HSD_GObj* gobj);
-void ftNess_SpecialHiHold_IASA(HSD_GObj* gobj);
-void ftNess_SpecialHiEnd_IASA(HSD_GObj* gobj);
-void ftNess_SpecialHi_IASA(HSD_GObj* gobj);
-void ftNess_SpecialAirHiStart_IASA(HSD_GObj* gobj);
-void ftNess_SpecialAirHiHold_IASA(HSD_GObj* gobj);
-void ftNess_SpecialAirHiEnd_IASA(HSD_GObj* gobj);
-void ftNess_SpecialAirHi_IASA(HSD_GObj* gobj);
-void ftNess_SpecialAirHiRebound_IASA(HSD_GObj* gobj);
-void ftNess_SpecialHiStart_Phys(HSD_GObj* gobj);
-void ftNess_SpecialHiHold_Phys(HSD_GObj* gobj);
-void ftNess_SpecialHiEnd_Phys(HSD_GObj* gobj);
-void ftNess_SpecialHi_Phys(HSD_GObj* gobj);
-void ftNess_SpecialAirHiStart_Phys(HSD_GObj* gobj);
-void ftNess_SpecialAirHiHold_Phys(HSD_GObj* gobj);
-void ftNess_SpecialAirHiEnd_Phys(HSD_GObj* gobj);
-void ftNess_SpecialAirHi_Phys(HSD_GObj* gobj);
-void ftNess_SpecialAirHiRebound_Phys(HSD_GObj* gobj);
-void ftNess_SpecialHiStart_Coll(HSD_GObj* gobj);
-void ftNess_SpecialHiHold_Coll(HSD_GObj* gobj);
-void ftNess_SpecialHiEnd_Coll(HSD_GObj* gobj);
-void ftNess_SpecialHi_Coll(HSD_GObj* gobj);
-void ftNess_SpecialAirHiStart_Coll(HSD_GObj* gobj);
-void ftNess_SpecialAirHiHold_Coll(HSD_GObj* gobj);
-void ftNess_SpecialAirHiEnd_Coll(HSD_GObj* gobj);
-void ftNess_SpecialAirHi_Coll(HSD_GObj* gobj);
-void ftNess_SpecialAirHiRebound_Coll(HSD_GObj* gobj);
+void ftNs_SpecialHiStopGFX(HSD_GObj* gobj);
+bool ftNs_SpecialHi_ItemPKThunder_CheckNessCollide(HSD_GObj* gobj);
+bool ftNs_SpecialHi_CheckSpecialHiHold(HSD_GObj* gobj);
+void ftNs_SpecialHi_ItemPKThunderRemove(HSD_GObj* gobj);
+void ftNs_SpecialHi_TakeDamage(HSD_GObj* gobj);
+void ftNs_SpecialHi_ItemPKThunderCheckOwn(HSD_GObj* gobj, HSD_GObj* gobj2);
+void ftNs_SpecialAirHi_CollisionModVel(HSD_GObj* gobj, CollData* coll_data);
+void ftNs_SpecialHiStart_Enter(HSD_GObj* gobj);
+void ftNs_SpecialAirHiStart_Enter(HSD_GObj* gobj);
+void ftNs_SpecialHi_Enter(HSD_GObj* gobj);
+void ftNs_SpecialAirHi_Enter(HSD_GObj* gobj);
+void ftNs_SpecialHiStart_Anim(HSD_GObj* gobj);
+void ftNs_SpecialHiHold_Anim(HSD_GObj* gobj);
+void ftNs_SpecialHiEnd_Anim(HSD_GObj* gobj);
+void ftNs_SpecialHi_Anim(HSD_GObj* gobj);
+void ftNs_SpecialAirHiStart_Anim(HSD_GObj* gobj);
+void ftNs_SpecialAirHiHold_Anim(HSD_GObj* gobj);
+void ftNs_SpecialAirHiEnd_Anim(HSD_GObj* gobj);
+void ftNs_SpecialAirHi_Anim(HSD_GObj* gobj);
+void ftNs_SpecialAirHiRebound_Anim(HSD_GObj* gobj);
+void ftNs_SpecialHiStart_IASA(HSD_GObj* gobj);
+void ftNs_SpecialHiHold_IASA(HSD_GObj* gobj);
+void ftNs_SpecialHiEnd_IASA(HSD_GObj* gobj);
+void ftNs_SpecialHi_IASA(HSD_GObj* gobj);
+void ftNs_SpecialAirHiStart_IASA(HSD_GObj* gobj);
+void ftNs_SpecialAirHiHold_IASA(HSD_GObj* gobj);
+void ftNs_SpecialAirHiEnd_IASA(HSD_GObj* gobj);
+void ftNs_SpecialAirHi_IASA(HSD_GObj* gobj);
+void ftNs_SpecialAirHiRebound_IASA(HSD_GObj* gobj);
+void ftNs_SpecialHiStart_Phys(HSD_GObj* gobj);
+void ftNs_SpecialHiHold_Phys(HSD_GObj* gobj);
+void ftNs_SpecialHiEnd_Phys(HSD_GObj* gobj);
+void ftNs_SpecialHi_Phys(HSD_GObj* gobj);
+void ftNs_SpecialAirHiStart_Phys(HSD_GObj* gobj);
+void ftNs_SpecialAirHiHold_Phys(HSD_GObj* gobj);
+void ftNs_SpecialAirHiEnd_Phys(HSD_GObj* gobj);
+void ftNs_SpecialAirHi_Phys(HSD_GObj* gobj);
+void ftNs_SpecialAirHiRebound_Phys(HSD_GObj* gobj);
+void ftNs_SpecialHiStart_Coll(HSD_GObj* gobj);
+void ftNs_SpecialHiHold_Coll(HSD_GObj* gobj);
+void ftNs_SpecialHiEnd_Coll(HSD_GObj* gobj);
+void ftNs_SpecialHi_Coll(HSD_GObj* gobj);
+void ftNs_SpecialAirHiStart_Coll(HSD_GObj* gobj);
+void ftNs_SpecialAirHiHold_Coll(HSD_GObj* gobj);
+void ftNs_SpecialAirHiEnd_Coll(HSD_GObj* gobj);
+void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj);
+void ftNs_SpecialAirHiRebound_Coll(HSD_GObj* gobj);
 
 // PSI Magnet callbacks (SpecialLw)
 
-void ftNess_SpecialLwStart_Action(HSD_GObj* gobj);
-void ftNess_SpecialAirLwStart_Action(HSD_GObj* gobj);
-void ftNess_SpecialLwStart_IASA(HSD_GObj* gobj);
-void ftNess_SpecialAirLwStart_IASA(HSD_GObj* gobj);
-void ftNess_SpecialLwStart_Phys(HSD_GObj* gobj);
-void ftNess_SpecialAirLwStart_Phys(HSD_GObj* gobj);
-void ftNess_SpecialLwStart_Coll(HSD_GObj* gobj);
-void ftNess_SpecialLwStart_GroundToAir(HSD_GObj* gobj);
-void ftNess_SpecialAirLwStart_AirToGround(HSD_GObj* gobj);
-void ftNess_SpecialLwHold_Anim(HSD_GObj* gobj);
-void ftNess_SpecialAirLwHold_Anim(HSD_GObj* gobj);
-void ftNess_SpecialLwHold_IASA(HSD_GObj* gobj);
-void ftNess_SpecialAirLwHold_IASA(HSD_GObj* gobj);
-void ftNess_SpecialLwHold_Phys(HSD_GObj* gobj);
-void ftNess_SpecialAirLwHold_Phys(HSD_GObj* gobj);
-void ftNess_SpecialLwHold_Coll(HSD_GObj* gobj);
-void ftNess_SpecialAirLwHold_Coll(HSD_GObj* gobj);
-void ftNess_SpecialLwHold_GroundToAir(HSD_GObj* gobj);
-void ftNess_SpecialAirLwHold_AirToGround(HSD_GObj* gobj);
-void ftNess_SpecialLwHold_Action(HSD_GObj* gobj);
-void ftNess_SpecialAirLwHold_Action(HSD_GObj* gobj);
-void ftNess_SpecialLwTurn_Anim(HSD_GObj* gobj);
-void ftNess_SpecialAirLwTurn_Anim(HSD_GObj* gobj);
-void ftNess_SpecialLwTurn_IASA(HSD_GObj* gobj);
-void ftNess_SpecialAirLwTurn_IASA(HSD_GObj* gobj);
-void ftNess_SpecialLwTurn_Phys(HSD_GObj* gobj);
-void ftNess_SpecialAirLwTurn_Phys(HSD_GObj* gobj);
-void ftNess_SpecialLwTurn_Coll(HSD_GObj* gobj);
-void ftNess_SpecialAirLwTurn_Coll(HSD_GObj* gobj);
-void ftNess_SpecialLwTurn_GroundToAir(HSD_GObj* gobj);
-void ftNess_SpecialAirLwTurn_AirToGround(HSD_GObj* gobj);
-bool ftNess_SpecialLwHold_GroundOrAir(HSD_GObj* gobj);
-void ftNess_SpecialLwHit_Anim(HSD_GObj* gobj);
-void ftNess_SpecialAirLwHit_Anim(HSD_GObj* gobj);
-void ftNess_SpecialLwHit_IASA(HSD_GObj* gobj);
-void ftNess_SpecialAirLwHit_IASA(HSD_GObj* gobj);
-void ftNess_SpecialLwHit_Phys(HSD_GObj* gobj);
-void ftNess_SpecialAirLwHit_Phys(HSD_GObj* gobj);
-void ftNess_SpecialLwHit_Coll(HSD_GObj* gobj);
-void ftNess_SpecialAirLwHit_Coll(HSD_GObj* gobj);
-void ftNess_SpecialLwHit_GroundToAir(HSD_GObj* gobj);
-void ftNess_SpecialAirLwHit_AirToGround(HSD_GObj* gobj);
-void ftNess_AbsorbThink_DecideAction(HSD_GObj* gobj);
-void ftNess_SpecialLwEnd_Anim(HSD_GObj* gobj);
-void ftNess_SpecialAirLwEnd_Anim(HSD_GObj* gobj);
-void ftNess_SpecialLwEnd_IASA(HSD_GObj* gobj);
-void ftNess_SpecialAirLwEnd_IASA(HSD_GObj* gobj);
-void ftNess_SpecialLwEnd_Phys(HSD_GObj* gobj);
-void ftNess_SpecialAirLwEnd_Phys(HSD_GObj* gobj);
-void ftNess_SpecialLwEnd_Coll(HSD_GObj* gobj);
-void ftNess_SpecialAirLwEnd_Coll(HSD_GObj* gobj);
-void ftNess_SpecialLwEnd_GroundToAir(HSD_GObj* gobj);
-void ftNess_SpecialAirLwEnd_AirToGround(HSD_GObj* gobj);
-void ftNess_SpecialLwEnd_Action(HSD_GObj* gobj);
-void ftNess_SpecialAirLwEnd_Action(HSD_GObj* gobj);
+void ftNs_SpecialLwStart_Enter(HSD_GObj* gobj);
+void ftNs_SpecialAirLwStart_Enter(HSD_GObj* gobj);
+void ftNs_SpecialLwStart_IASA(HSD_GObj* gobj);
+void ftNs_SpecialAirLwStart_IASA(HSD_GObj* gobj);
+void ftNs_SpecialLwStart_Phys(HSD_GObj* gobj);
+void ftNs_SpecialAirLwStart_Phys(HSD_GObj* gobj);
+void ftNs_SpecialLwStart_Coll(HSD_GObj* gobj);
+void ftNs_SpecialLwStart_GroundToAir(HSD_GObj* gobj);
+void ftNs_SpecialAirLwStart_AirToGround(HSD_GObj* gobj);
+void ftNs_SpecialLwHold_Anim(HSD_GObj* gobj);
+void ftNs_SpecialAirLwHold_Anim(HSD_GObj* gobj);
+void ftNs_SpecialLwHold_IASA(HSD_GObj* gobj);
+void ftNs_SpecialAirLwHold_IASA(HSD_GObj* gobj);
+void ftNs_SpecialLwHold_Phys(HSD_GObj* gobj);
+void ftNs_SpecialAirLwHold_Phys(HSD_GObj* gobj);
+void ftNs_SpecialLwHold_Coll(HSD_GObj* gobj);
+void ftNs_SpecialAirLwHold_Coll(HSD_GObj* gobj);
+void ftNs_SpecialLwHold_GroundToAir(HSD_GObj* gobj);
+void ftNs_SpecialAirLwHold_AirToGround(HSD_GObj* gobj);
+void ftNs_SpecialLwHold_Enter(HSD_GObj* gobj);
+void ftNs_SpecialAirLwHold_Enter(HSD_GObj* gobj);
+void ftNs_SpecialLwTurn_Anim(HSD_GObj* gobj);
+void ftNs_SpecialAirLwTurn_Anim(HSD_GObj* gobj);
+void ftNs_SpecialLwTurn_IASA(HSD_GObj* gobj);
+void ftNs_SpecialAirLwTurn_IASA(HSD_GObj* gobj);
+void ftNs_SpecialLwTurn_Phys(HSD_GObj* gobj);
+void ftNs_SpecialAirLwTurn_Phys(HSD_GObj* gobj);
+void ftNs_SpecialLwTurn_Coll(HSD_GObj* gobj);
+void ftNs_SpecialAirLwTurn_Coll(HSD_GObj* gobj);
+void ftNs_SpecialLwTurn_GroundToAir(HSD_GObj* gobj);
+void ftNs_SpecialAirLwTurn_AirToGround(HSD_GObj* gobj);
+bool ftNs_SpecialLwHold_GroundOrAir(HSD_GObj* gobj);
+void ftNs_SpecialLwHit_Anim(HSD_GObj* gobj);
+void ftNs_SpecialAirLwHit_Anim(HSD_GObj* gobj);
+void ftNs_SpecialLwHit_IASA(HSD_GObj* gobj);
+void ftNs_SpecialAirLwHit_IASA(HSD_GObj* gobj);
+void ftNs_SpecialLwHit_Phys(HSD_GObj* gobj);
+void ftNs_SpecialAirLwHit_Phys(HSD_GObj* gobj);
+void ftNs_SpecialLwHit_Coll(HSD_GObj* gobj);
+void ftNs_SpecialAirLwHit_Coll(HSD_GObj* gobj);
+void ftNs_SpecialLwHit_GroundToAir(HSD_GObj* gobj);
+void ftNs_SpecialAirLwHit_AirToGround(HSD_GObj* gobj);
+void ftNs_AbsorbThink_DecideAction(HSD_GObj* gobj);
+void ftNs_SpecialLwEnd_Anim(HSD_GObj* gobj);
+void ftNs_SpecialAirLwEnd_Anim(HSD_GObj* gobj);
+void ftNs_SpecialLwEnd_IASA(HSD_GObj* gobj);
+void ftNs_SpecialAirLwEnd_IASA(HSD_GObj* gobj);
+void ftNs_SpecialLwEnd_Phys(HSD_GObj* gobj);
+void ftNs_SpecialAirLwEnd_Phys(HSD_GObj* gobj);
+void ftNs_SpecialLwEnd_Coll(HSD_GObj* gobj);
+void ftNs_SpecialAirLwEnd_Coll(HSD_GObj* gobj);
+void ftNs_SpecialLwEnd_GroundToAir(HSD_GObj* gobj);
+void ftNs_SpecialAirLwEnd_AirToGround(HSD_GObj* gobj);
+void ftNs_SpecialLwEnd_Enter(HSD_GObj* gobj);
+void ftNs_SpecialAirLwEnd_Enter(HSD_GObj* gobj);
 
 #endif

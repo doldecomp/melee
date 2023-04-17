@@ -21,7 +21,7 @@
 #include <dolphin/os/os.h>
 #include <baselib/rumble.h>
 
-const Vec3 lbl_803B74A0 = { 0 };
+const Vec3 ftCo_803B74A0 = { 0 };
 
 void ftCommon_8007C930(Fighter* fp, f32 result)
 {
@@ -217,14 +217,14 @@ f32 ftCommon_8007CD6C(f32 value, f32 decrement)
 
 // These do not match due to unpatched epilogue scheduling
 #ifdef MUST_MATCH
-char lbl_803C0D58[] = "ftcommon.c";
-char lbl_803C0D64[] = "fp->kind == Ft_Kind_Sandbag";
+char ftCo_803C0D58[] = "ftcommon.c";
+char ftCo_803C0D64[] = "fp->kind == Ft_Kind_Sandbag";
 
 // Not sure why this is needed
 // Maybe __FILE__ is allocated separate from ordinary string literals?
 #undef HSD_ASSERT
 #define HSD_ASSERT(line, cond)                                                \
-    ((cond) ? ((void) 0) : __assert(lbl_803C0D58, line, #cond))
+    ((cond) ? ((void) 0) : __assert(ftCo_803C0D58, line, #cond))
 
 asm f32 ftCommon_8007CDA4(Fighter*)
 { // clang-format off
@@ -237,10 +237,10 @@ asm f32 ftCommon_8007CDA4(Fighter*)
 /* 8007CDB8 00079998  80 03 00 04 */   lwz r0, 4(r3)
 /* 8007CDBC 0007999C  2C 00 00 20 */   cmpwi r0, 0x20
 /* 8007CDC0 000799A0  41 82 00 1C */   beq lbl_8007CDDC
-/* 8007CDC4 000799A4  3C 60 80 3C */   lis r3, lbl_803C0D58@ha
-/* 8007CDC8 000799A8  3C 80 80 3C */   lis r4, lbl_803C0D64@ha
-/* 8007CDCC 000799AC  38 A4 0D 64 */   addi r5, r4, lbl_803C0D64@l
-/* 8007CDD0 000799B0  38 63 0D 58 */   addi r3, r3, lbl_803C0D58@l
+/* 8007CDC4 000799A4  3C 60 80 3C */   lis r3, ftCo_803C0D58@ha
+/* 8007CDC8 000799A8  3C 80 80 3C */   lis r4, ftCo_803C0D64@ha
+/* 8007CDCC 000799AC  38 A4 0D 64 */   addi r5, r4, ftCo_803C0D64@l
+/* 8007CDD0 000799B0  38 63 0D 58 */   addi r3, r3, ftCo_803C0D58@l
 /* 8007CDD4 000799B4  38 80 01 2B */   li r4, 0x12b
 /* 8007CDD8 000799B8  48 30 B4 49 */   bl __assert
 lbl_8007CDDC:
@@ -264,10 +264,10 @@ asm f32 ftCommon_8007CDF8(Fighter*)
 /* 8007CE0C 000799EC  80 03 00 04 */	lwz r0, 4(r3)
 /* 8007CE10 000799F0  2C 00 00 20 */	cmpwi r0, 0x20
 /* 8007CE14 000799F4  41 82 00 1C */	beq lbl_8007CE30
-/* 8007CE18 000799F8  3C 60 80 3C */	lis r3, lbl_803C0D58@ha
-/* 8007CE1C 000799FC  3C 80 80 3C */	lis r4, lbl_803C0D64@ha
-/* 8007CE20 00079A00  38 A4 0D 64 */	addi r5, r4, lbl_803C0D64@l
-/* 8007CE24 00079A04  38 63 0D 58 */	addi r3, r3, lbl_803C0D58@l
+/* 8007CE18 000799F8  3C 60 80 3C */	lis r3, ftCo_803C0D58@ha
+/* 8007CE1C 000799FC  3C 80 80 3C */	lis r4, ftCo_803C0D64@ha
+/* 8007CE20 00079A00  38 A4 0D 64 */	addi r5, r4, ftCo_803C0D64@l
+/* 8007CE24 00079A04  38 63 0D 58 */	addi r3, r3, ftCo_803C0D58@l
 /* 8007CE28 00079A08  38 80 01 34 */	li r4, 0x134
 /* 8007CE2C 00079A0C  48 30 B3 F5 */	bl __assert
 lbl_8007CE30:
@@ -829,7 +829,7 @@ void ftCommon_8007DB58(HSD_GObj* gobj)
 extern struct {
     Vec2* x0;
     s32 x4;
-}* lbl_804D652C;
+}* Fighter_804D652C;
 
 void ftCommon_8007DBCC(Fighter* fp, bool arg1, f32 arg8)
 {
@@ -839,7 +839,7 @@ void ftCommon_8007DBCC(Fighter* fp, bool arg1, f32 arg8)
     fp->x2224_flag.bits.b6 = arg1;
     if (fp->x2224_flag.bits.b6) {
         fp->x1A52 = 0;
-        fp->x1A53 = lbl_804D652C->x4;
+        fp->x1A53 = Fighter_804D652C->x4;
     }
 }
 
@@ -920,7 +920,7 @@ void ftCommon_8007DD7C(HSD_GObj* gobj, Vec3* v)
 
     arg_ft = gobj->user_data;
     phi_r28 = false;
-    for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObj_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         temp_r31 = &arg_ft->x2C4;
         if (cur != gobj && !ftLib_80086FD4(cur, gobj)) {
             cur_ft = cur->user_data;
@@ -1193,9 +1193,9 @@ void ftCommon_8007E690(Fighter* fp, HSD_AnimJoint* arg1)
     }
 }
 
-extern void (*ft_OnItemDropExt[])(HSD_GObj*, s32);
-extern void (*ft_OnItemDrop[])(HSD_GObj*, s32); // OnItemDrop?
-extern void (*ft_OnItemPickup[])(HSD_GObj*, s32);
+extern void (*ftData_OnItemDropExt[])(HSD_GObj*, s32);
+extern void (*ftData_OnItemDrop[])(HSD_GObj*, s32); // OnItemDrop?
+extern void (*ftData_OnItemPickup[])(HSD_GObj*, s32);
 
 void ftCommon_8007E6DC(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2)
 {
@@ -1207,8 +1207,8 @@ void ftCommon_8007E6DC(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2)
     if (ft_800C5240(gobj)) {
         ft_800C5500(gobj);
     }
-    if (ft_OnItemDropExt[fp->x4_fighterKind] != NULL) {
-        ft_OnItemDropExt[fp->x4_fighterKind](gobj, arg2);
+    if (ftData_OnItemDropExt[fp->x4_fighterKind] != NULL) {
+        ftData_OnItemDropExt[fp->x4_fighterKind](gobj, arg2);
     }
     pl_8003EA08(fp->xC_playerID, fp->x221F_flag.bits.b4);
     fp->x1974_heldItem = NULL;
@@ -1217,16 +1217,16 @@ void ftCommon_8007E6DC(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2)
 void ftCommon_8007E79C(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = gobj->user_data;
-    if (ft_OnItemDrop[fp->x4_fighterKind] != NULL) {
-        ft_OnItemDrop[fp->x4_fighterKind](gobj, arg1);
+    if (ftData_OnItemDrop[fp->x4_fighterKind] != NULL) {
+        ftData_OnItemDrop[fp->x4_fighterKind](gobj, arg1);
     }
 }
 
 void ftCommon_8007E7E4(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = gobj->user_data;
-    if (ft_OnItemPickup[fp->x4_fighterKind] != NULL) {
-        ft_OnItemPickup[fp->x4_fighterKind](gobj, arg1);
+    if (ftData_OnItemPickup[fp->x4_fighterKind] != NULL) {
+        ftData_OnItemPickup[fp->x4_fighterKind](gobj, arg1);
     }
 }
 
@@ -1370,7 +1370,7 @@ void ftCommon_8007EBAC(Fighter* fp, u32 arg1, u32 arg2)
 void ftCommon_8007EC30(u32 arg0, u32 arg1)
 {
     Fighter* fp;
-    HSD_GObj* cur = lbl_804D782C->x20_fighters;
+    HSD_GObj* cur = HSD_GObj_804D782C->x20_fighters;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -1387,7 +1387,7 @@ void ftCommon_8007EC30(u32 arg0, u32 arg1)
 void ftCommon_8007ECD4(Fighter* fp, s32 arg1)
 {
     if (Player_8003544C(fp->xC_playerID, fp->x221F_flag.bits.b4)) {
-        func_80378280(fp->x618_player_id, arg1 + 2);
+        HSD_Rumble_80378280(fp->x618_player_id, arg1 + 2);
     }
 }
 
@@ -1579,10 +1579,10 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     arg1(dst_gobj);
 }
 
-extern void (*ft_OnItemInvisible[])(HSD_GObj*);
-extern void (*ft_OnItemVisible[])(HSD_GObj*);
-extern void (*ft_OnKnockbackEnter[])(HSD_GObj*);
-extern void (*ft_OnKnockbackExit[])(HSD_GObj*);
+extern void (*ftData_OnItemInvisible[])(HSD_GObj*);
+extern void (*ftData_OnItemVisible[])(HSD_GObj*);
+extern void (*ftData_OnKnockbackEnter[])(HSD_GObj*);
+extern void (*ftData_OnKnockbackExit[])(HSD_GObj*);
 
 void ftCommon_8007F578(HSD_GObj* gobj)
 {
@@ -1590,8 +1590,8 @@ void ftCommon_8007F578(HSD_GObj* gobj)
     if (fp->x1974_heldItem == NULL) {
         return;
     }
-    if (ft_OnItemInvisible[fp->x4_fighterKind] != NULL) {
-        ft_OnItemInvisible[fp->x4_fighterKind](gobj);
+    if (ftData_OnItemInvisible[fp->x4_fighterKind] != NULL) {
+        ftData_OnItemInvisible[fp->x4_fighterKind](gobj);
     }
 }
 
@@ -1609,8 +1609,8 @@ void ftCommon_8007F5CC(HSD_GObj* gobj, s32 arg1)
         if (arg1 == 0) {
             ftCommon_8007F578(gobj);
         } else if (item != NULL) {
-            if (ft_OnItemVisible[fp->x4_fighterKind] != NULL) {
-                ft_OnItemVisible[fp->x4_fighterKind](gobj);
+            if (ftData_OnItemVisible[fp->x4_fighterKind] != NULL) {
+                ftData_OnItemVisible[fp->x4_fighterKind](gobj);
             }
         }
     }
@@ -1657,16 +1657,16 @@ Mtx* ftCommon_8007F804(Fighter* fp)
 void ftCommon_8007F824(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (ft_OnKnockbackEnter[fp->x4_fighterKind] != NULL) {
-        ft_OnKnockbackEnter[fp->x4_fighterKind](gobj);
+    if (ftData_OnKnockbackEnter[fp->x4_fighterKind] != NULL) {
+        ftData_OnKnockbackEnter[fp->x4_fighterKind](gobj);
     }
 }
 
 void ftCommon_8007F86C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (ft_OnKnockbackExit[fp->x4_fighterKind] != NULL) {
-        ft_OnKnockbackExit[fp->x4_fighterKind](gobj);
+    if (ftData_OnKnockbackExit[fp->x4_fighterKind] != NULL) {
+        ftData_OnKnockbackExit[fp->x4_fighterKind](gobj);
     }
 }
 
@@ -1677,26 +1677,26 @@ void ftCommon_8007F8B4(Fighter* fp, Vec3* v)
     v->z = fp->cur_pos.z + fp->xD4_unk_vel.z;
 }
 
-extern void (*lbl_803C1C28[])(HSD_GObj*);
+extern void (*ftData_UnkMotionStates2[])(HSD_GObj*);
 
 void ftCommon_8007F8E8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x197C == NULL || fp->x1980 == NULL) {
-        if (lbl_803C1C28[fp->x4_fighterKind] != NULL) {
-            lbl_803C1C28[fp->x4_fighterKind](gobj);
+        if (ftData_UnkMotionStates2[fp->x4_fighterKind] != NULL) {
+            ftData_UnkMotionStates2[fp->x4_fighterKind](gobj);
         }
     }
 }
 
-extern void (*lbl_803C1BA4[])(HSD_GObj*);
+extern void (*ftData_UnkMotionStates1[])(HSD_GObj*);
 
 inline void _func_8007F948_inline(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x197C == NULL || fp->x1980 == NULL) {
-        if (lbl_803C1BA4[fp->x4_fighterKind] != NULL) {
-            lbl_803C1BA4[fp->x4_fighterKind](gobj);
+        if (ftData_UnkMotionStates1[fp->x4_fighterKind] != NULL) {
+            ftData_UnkMotionStates1[fp->x4_fighterKind](gobj);
         }
     }
 }
@@ -1754,7 +1754,7 @@ void ftCommon_8007FA58(HSD_GObj* gobj, HSD_GObj* arg1)
         }
     }
 
-    vec = lbl_803B74A0;
+    vec = ftCo_803B74A0;
     it_8026BD0C(arg1);
     Item_8026ABD8(arg1, &vec, 0);
     Item_8026AB54(arg1, gobj, fp->x10C_ftData->x8->unk12);
@@ -1946,7 +1946,7 @@ void ftCommon_8008021C(HSD_GObj* gobj)
         fp->dmg.x18BC += shift.y;
     }
     if (fp->x2224_flag.bits.b5) {
-        Vec2* temp_r3 = &lbl_804D652C->x0[fp->x1A52];
+        Vec2* temp_r3 = &Fighter_804D652C->x0[fp->x1A52];
         shift.x = temp_r3->x;
         shift.y = temp_r3->y;
         result = &shift;

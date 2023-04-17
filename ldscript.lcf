@@ -34,5 +34,5 @@ __ArenaHi = 0x81700000 ;
  * gets to have a crowbar in its face to stop this symbol from being stripped. Don't you
  * just love Metrowerks bugs? */
 FORCEACTIVE {
-    lbl_804C28D0
+    HSD_Debug_804C28D0
 }

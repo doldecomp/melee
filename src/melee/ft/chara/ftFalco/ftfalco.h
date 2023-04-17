@@ -5,21 +5,21 @@
 
 #include <baselib/gobj.h>
 
-extern MotionState ftFalco_MotionStateTable[];
-extern char lbl_803D1CA8[];
-extern char lbl_803D1CB4[];
-extern Fighter_CostumeStrings lbl_803D1E74[];
-extern char lbl_803D1DE8[];
-extern Fighter_DemoStrings lbl_803D1E64;
+extern MotionState ftFc_Init_MotionStateTable[];
+extern char ftFc_Init_DatFilename[];
+extern char ftFc_Init_DataName[];
+extern Fighter_CostumeStrings ftFc_Init_CostumeStrings[];
+extern char ftFc_Init_AnimDatFilename[];
+extern Fighter_DemoStrings ftFc_Init_DemoMotionFilenames;
 
-void ftFalco_OnDeath(HSD_GObj*);
-void ftFalco_OnItemPickup(HSD_GObj*, bool);
-void ftFalco_OnItemInvisible(HSD_GObj*);
-void ftFalco_OnItemVisible(HSD_GObj*);
-void ftFalco_OnItemDrop(HSD_GObj*, bool);
-void ftFalco_OnLoad(HSD_GObj*);
-void ftFalco_LoadSpecialAttrs(HSD_GObj*);
-void ftFalco_OnKnockbackEnter(HSD_GObj*);
-void ftFalco_OnKnockbackExit(HSD_GObj*);
+void ftFc_Init_OnDeath(HSD_GObj*);
+void ftFc_Init_OnItemPickup(HSD_GObj*, bool);
+void ftFc_Init_OnItemInvisible(HSD_GObj*);
+void ftFc_Init_OnItemVisible(HSD_GObj*);
+void ftFc_Init_OnItemDrop(HSD_GObj*, bool);
+void ftFc_Init_OnLoad(HSD_GObj*);
+void ftFc_Init_LoadSpecialAttrs(HSD_GObj*);
+void ftFc_Init_OnKnockbackEnter(HSD_GObj*);
+void ftFc_Init_OnKnockbackExit(HSD_GObj*);
 
 #endif

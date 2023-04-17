@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-void func_803B3344(u8 byte);
-void func_803B3398(void* src, size_t size);
+void hsd_803B3344(u8 byte);
+void hsd_803B3398(void* src, size_t size);
 
 #endif

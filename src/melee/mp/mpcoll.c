@@ -13,20 +13,20 @@
 #include <dolphin/os/os.h>
 #include <MSL/trigf.h>
 
-extern s32 lbl_804D64A0;
-extern s32 lbl_804D64A4;
-extern s32 lbl_804D64A8;
-extern u32 lbl_804D64AC;
+extern s32 mpColl_804D64A0;
+extern s32 mpColl_804D64A4;
+extern s32 mpColl_804D64A8;
+extern u32 mpColl_804D64AC;
 
 // 80041C78 https://decomp.me/scratch/V6eYQ
 void mpColl_80041C78(void)
 {
-    lbl_804D64A0 = 0;
-    lbl_804D64A4 = 0;
-    lbl_804D64A8 = 0;
+    mpColl_804D64A0 = 0;
+    mpColl_804D64A4 = 0;
+    mpColl_804D64A8 = 0;
 }
 
-char lbl_804D3948[2] = "0";
+char mpColl_804D3948[2] = "0";
 
 // 80041C8C https://decomp.me/scratch/VvSaI
 void mpColl_80041C8C(CollData* cd)
@@ -36,8 +36,8 @@ void mpColl_80041C8C(CollData* cd)
     u8 _[8];
 #endif
 
-    lbl_804D64A0 = 0;
-    lbl_804D64A4 = 0;
+    mpColl_804D64A0 = 0;
+    mpColl_804D64A4 = 0;
     if (g_debugLevel >= 3) {
         if (!(cd->x4_vec.x < 45000.0f) || !(cd->x4_vec.x > -45000.0f) ||
             !(cd->x4_vec.y < 45000.0f) || !(cd->x4_vec.y > -45000.0f))
@@ -55,7 +55,7 @@ void mpColl_80041C8C(CollData* cd)
                     OSReport("itkind=%d\n", itGetKind(cd->x0_gobj));
                 }
             }
-            __assert("mpcoll.c", 228, lbl_804D3948);
+            __assert("mpcoll.c", 228, mpColl_804D3948);
         }
     }
     cd->x28_vec = cd->x4_vec;
@@ -112,8 +112,8 @@ void mpColl_80041DD0(CollData* cd, u32 flags)
 }
 
 /// @todo float order hack
-const f32 lbl_804D7F9C = -F32_MAX;
-const f32 lbl_804D7FA0 = F32_MAX;
+const f32 mpColl_804D7F9C = -F32_MAX;
+const f32 mpColl_804D7FA0 = F32_MAX;
 
 // 80041EE4 https://decomp.me/scratch/j2TXK
 // CollDataInit
@@ -153,7 +153,7 @@ void mpColl_80041EE4(CollData* cd)
     cd->x160_rightwall.normal.x = 0.0f;
     cd->x160_rightwall.normal.y = -1.0f;
     cd->x160_rightwall.normal.z = 0.0f;
-    cd->x38 = lbl_804D64AC;
+    cd->x38 = mpColl_804D64AC;
     cd->x50 = 0.0f;
     cd->x48 = -1;
     cd->x4C = -1;
@@ -622,7 +622,7 @@ void mpColl_80042DB0(CollData* ecb, f32 time)
         fpclassify(ecb->xA4_ecbCurrCorrect.right.y) == FP_NAN)
     {
         OSReport("error\n");
-        __assert("mpcoll.c", 1193, lbl_804D3948);
+        __assert("mpcoll.c", 1193, mpColl_804D3948);
     }
 }
 
@@ -726,7 +726,7 @@ void mpColl_80043324(CollData* arg0, s32 arg1, s32 arg2)
                     OSReport("itkind=%d\n", itGetKind(arg0->x0_gobj));
                 }
             }
-            __assert("mpcoll.c", 1374, lbl_804D3948);
+            __assert("mpcoll.c", 1374, mpColl_804D3948);
         }
     }
 }
@@ -909,7 +909,7 @@ s32 mpColl_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2)
         ret = (*arg0)(arg1, arg2);
         mpLib_80058AA0();
         var_r31 += 1;
-        arg1->x38 = lbl_804D64AC;
+        arg1->x38 = mpColl_804D64AC;
     }
     return ret;
 }

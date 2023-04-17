@@ -1,66 +1,66 @@
 #include "ft/chara/ftSeak/ftSeak_SpecialN.h"
 
-f32 lbl_803CC598[] = {
+f32 ftSk_SpecialN_803CC598[] = {
     -1, -0.75, -0.5, -0.25, 0, +0.25, +0.5, +0.75, +1,
 };
 
-/* static */ void ftSeak_80112418(void);
-/* static */ void ftSeak_80112418(void);
-/* static */ void ftSeak_80112408(void);
-/* static */ void ftSeak_80112418(void);
-/* static */ void ftSeak_80112418(void);
-/* static */ void ftSeak_80112408(void);
-/* static */ void ftSeak_80112418(void);
-/* static */ void ftSeak_80112418(void);
-/* static */ void ftSeak_80112408(void);
-/* static */ void ftSeak_80112418(void);
-/* static */ void ftSeak_80112418(void);
-/* static */ void ftSeak_80112408(void);
-/* static */ void ftSeak_80112418(void);
-/* static */ void ftSeak_80112418(void);
-/* static */ void ftSeak_80112408(void);
-/* static */ void ftSeak_80112418(void);
-/* static */ void ftSeak_80112418(void);
-/* static */ void ftSeak_80112408(void);
+/* static */ void ftSk_SpecialN_80112418(void);
+/* static */ void ftSk_SpecialN_80112418(void);
+/* static */ void ftSk_SpecialN_80112408(void);
+/* static */ void ftSk_SpecialN_80112418(void);
+/* static */ void ftSk_SpecialN_80112418(void);
+/* static */ void ftSk_SpecialN_80112408(void);
+/* static */ void ftSk_SpecialN_80112418(void);
+/* static */ void ftSk_SpecialN_80112418(void);
+/* static */ void ftSk_SpecialN_80112408(void);
+/* static */ void ftSk_SpecialN_80112418(void);
+/* static */ void ftSk_SpecialN_80112418(void);
+/* static */ void ftSk_SpecialN_80112408(void);
+/* static */ void ftSk_SpecialN_80112418(void);
+/* static */ void ftSk_SpecialN_80112418(void);
+/* static */ void ftSk_SpecialN_80112408(void);
+/* static */ void ftSk_SpecialN_80112418(void);
+/* static */ void ftSk_SpecialN_80112418(void);
+/* static */ void ftSk_SpecialN_80112408(void);
 
-jtbl_t jtbl_803CC5BC = {
-    ftSeak_80112418, ftSeak_80112418, ftSeak_80112408, ftSeak_80112418,
-    ftSeak_80112418, ftSeak_80112408, ftSeak_80112418, ftSeak_80112418,
-    ftSeak_80112408, ftSeak_80112418, ftSeak_80112418, ftSeak_80112408,
-    ftSeak_80112418, ftSeak_80112418, ftSeak_80112408, ftSeak_80112418,
-    ftSeak_80112418, ftSeak_80112408,
+jtbl_t ftSk_SpecialN_803CC5BC = {
+    ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408, ftSk_SpecialN_80112418,
+    ftSk_SpecialN_80112418, ftSk_SpecialN_80112408, ftSk_SpecialN_80112418, ftSk_SpecialN_80112418,
+    ftSk_SpecialN_80112408, ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408,
+    ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408, ftSk_SpecialN_80112418,
+    ftSk_SpecialN_80112418, ftSk_SpecialN_80112408,
 };
 
-/* static */ void ftSeak_80112660(void);
-/* static */ void ftSeak_80112660(void);
-/* static */ void ftSeak_80112650(void);
-/* static */ void ftSeak_80112660(void);
-/* static */ void ftSeak_80112660(void);
-/* static */ void ftSeak_80112650(void);
-/* static */ void ftSeak_80112660(void);
-/* static */ void ftSeak_80112660(void);
-/* static */ void ftSeak_80112650(void);
-/* static */ void ftSeak_80112660(void);
-/* static */ void ftSeak_80112660(void);
-/* static */ void ftSeak_80112650(void);
-/* static */ void ftSeak_80112660(void);
-/* static */ void ftSeak_80112660(void);
-/* static */ void ftSeak_80112650(void);
-/* static */ void ftSeak_80112660(void);
-/* static */ void ftSeak_80112660(void);
-/* static */ void ftSeak_80112650(void);
+/* static */ void ftSk_SpecialN_80112660(void);
+/* static */ void ftSk_SpecialN_80112660(void);
+/* static */ void ftSk_SpecialN_80112650(void);
+/* static */ void ftSk_SpecialN_80112660(void);
+/* static */ void ftSk_SpecialN_80112660(void);
+/* static */ void ftSk_SpecialN_80112650(void);
+/* static */ void ftSk_SpecialN_80112660(void);
+/* static */ void ftSk_SpecialN_80112660(void);
+/* static */ void ftSk_SpecialN_80112650(void);
+/* static */ void ftSk_SpecialN_80112660(void);
+/* static */ void ftSk_SpecialN_80112660(void);
+/* static */ void ftSk_SpecialN_80112650(void);
+/* static */ void ftSk_SpecialN_80112660(void);
+/* static */ void ftSk_SpecialN_80112660(void);
+/* static */ void ftSk_SpecialN_80112650(void);
+/* static */ void ftSk_SpecialN_80112660(void);
+/* static */ void ftSk_SpecialN_80112660(void);
+/* static */ void ftSk_SpecialN_80112650(void);
 
-jtbl_t jtbl_803CC604 = {
-    ftSeak_80112660, ftSeak_80112660, ftSeak_80112650, ftSeak_80112660,
-    ftSeak_80112660, ftSeak_80112650, ftSeak_80112660, ftSeak_80112660,
-    ftSeak_80112650, ftSeak_80112660, ftSeak_80112660, ftSeak_80112650,
-    ftSeak_80112660, ftSeak_80112660, ftSeak_80112650, ftSeak_80112660,
-    ftSeak_80112660, ftSeak_80112650,
+jtbl_t ftSk_SpecialN_803CC604 = {
+    ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650, ftSk_SpecialN_80112660,
+    ftSk_SpecialN_80112660, ftSk_SpecialN_80112650, ftSk_SpecialN_80112660, ftSk_SpecialN_80112660,
+    ftSk_SpecialN_80112650, ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650,
+    ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650, ftSk_SpecialN_80112660,
+    ftSk_SpecialN_80112660, ftSk_SpecialN_80112650,
 };
 
-f32 const lbl_804D9650 = 0;
-f32 const lbl_804D9654 = 1;
-f32 const lbl_804D9658 = 2;
+f32 const ftSk_Init_804D9650 = 0;
+f32 const ftSk_Init_804D9654 = 1;
+f32 const ftSk_Init_804D9658 = 2;
 
 // Sheik_CheckAndDestroyNeedles
 // 80111FBC - 801120D4 (0x118 bytes)

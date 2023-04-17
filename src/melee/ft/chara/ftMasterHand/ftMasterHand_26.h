@@ -4,11 +4,11 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-void ftMasterHand_80155014(HSD_GObj*);
+void ftMh_MS_379_80155014(HSD_GObj*);
 
-void ftMasterHand_80154FF0(HSD_GObj* gobj);
-void ftMasterHand_80155010(HSD_GObj* gobj);
-void ftMasterHand_80155014(HSD_GObj* gobj);
-void ftMasterHand_80154FAC(HSD_GObj* arg0);
+void ftMh_MS_379_Phys(HSD_GObj* gobj);
+void ftMh_MS_379_Coll(HSD_GObj* gobj);
+void ftMh_MS_379_80155014(HSD_GObj* gobj);
+void ftMh_MS_379_IASA(HSD_GObj* arg0);
 
 #endif

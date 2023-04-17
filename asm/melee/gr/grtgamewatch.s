@@ -65,8 +65,8 @@ grTGameWatch_802241B4:
 /* 802241CC 00220DAC  93 81 00 10 */	stw r28, 0x10(r1)
 /* 802241D0 00220DB0  3B 83 00 00 */	addi r28, r3, 0
 /* 802241D4 00220DB4  1C 1C 00 14 */	mulli r0, r28, 0x14
-/* 802241D8 00220DB8  3C 60 80 3F */	lis r3, lbl_803E96F8@ha
-/* 802241DC 00220DBC  3B E3 96 F8 */	addi r31, r3, lbl_803E96F8@l
+/* 802241D8 00220DB8  3C 60 80 3F */	lis r3, grTGw_803E96F8@ha
+/* 802241DC 00220DBC  3B E3 96 F8 */	addi r31, r3, grTGw_803E96F8@l
 /* 802241E0 00220DC0  38 7C 00 00 */	addi r3, r28, 0
 /* 802241E4 00220DC4  7F BF 02 14 */	add r29, r31, r0
 /* 802241E8 00220DC8  4B F9 D2 E9 */	bl Ground_801C14D0
@@ -99,7 +99,7 @@ grTGameWatch_802241B4:
 /* 8022424C 00220E2C  41 82 00 2C */	beq .L_80224278
 /* 80224250 00220E30  38 7E 00 00 */	addi r3, r30, 0
 /* 80224254 00220E34  38 A0 00 04 */	li r5, 4
-/* 80224258 00220E38  48 16 BA FD */	bl func_8038FD54
+/* 80224258 00220E38  48 16 BA FD */	bl HSD_GObjProc_8038FD54
 /* 8022425C 00220E3C  48 00 00 1C */	b .L_80224278
 .L_80224260:
 /* 80224260 00220E40  38 DC 00 00 */	addi r6, r28, 0
@@ -236,8 +236,8 @@ grTGameWatch_802243EC:
 
 .section .data
     .balign 8
-.global lbl_803E96F8
-lbl_803E96F8:
+.global grTGw_803E96F8
+grTGw_803E96F8:
     .4byte grTGameWatch_8022429C
     .4byte grTGameWatch_802242C8
     .4byte grTGameWatch_802242D0
@@ -258,15 +258,15 @@ lbl_803E96F8:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_803E9748
-lbl_803E9748:
+.global grTGw_803E9748
+grTGw_803E9748:
     .asciz "/GrTGw.dat"
     .balign 4
-.global lbl_803E9754
-lbl_803E9754:
+.global grTGw_803E9754
+grTGw_803E9754:
     .4byte 0x0000003F
-    .4byte lbl_803E96F8
-    .4byte lbl_803E9748
+    .4byte grTGw_803E96F8
+    .4byte grTGw_803E9748
     .4byte grTGameWatch_80224114
     .4byte grTGameWatch_80224110
     .4byte grTGameWatch_80224184

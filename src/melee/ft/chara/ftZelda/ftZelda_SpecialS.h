@@ -4,6 +4,6 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-void ftZelda_8013BED8(HSD_GObj* gobj);
+void ftZd_SpecialSStart_Phys(HSD_GObj* gobj);
 
 #endif

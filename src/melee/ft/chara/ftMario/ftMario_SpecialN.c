@@ -22,7 +22,7 @@ int ftDrMario_SpecialN_GetRandomInt(Fighter* fp, int* arr, int outpos)
 
 // 0x800E0D1C
 // https://decomp.me/scratch/od8nq
-int ftMario_SpecialN_VitaminRandom(
+int ftMr_SpecialN_VitaminRandom(
     HSD_GObj* gobj) // Get random Megavitamin color combo for Dr. Mario //
 {
     Fighter* fp;
@@ -45,7 +45,7 @@ int ftMario_SpecialN_VitaminRandom(
     return r3;
 }
 
-void ftMario_SpecialN_StartMotion(HSD_GObj* gobj)
+void ftMr_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
@@ -53,11 +53,11 @@ void ftMario_SpecialN_StartMotion(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, AS_MARIO_SPECIALN, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialN_ItemFireSpawn;
+    fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialN_ItemFireSpawn;
 }
 
 // 0x800E0E18
-void ftMario_SpecialN_Anim(HSD_GObj* gobj)
+void ftMr_SpecialN_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -65,32 +65,32 @@ void ftMario_SpecialN_Anim(HSD_GObj* gobj)
 }
 
 // 0x800E0E54
-void ftMario_SpecialN_IASA(HSD_GObj* gobj)
+void ftMr_SpecialN_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2200_ftcmd_var0 != 0) {
-        ft_8008A4D4(gobj);
+        ftCo_Wait_IASA(gobj);
     }
 }
 
 // 0x800E0E84
-void ftMario_SpecialN_Phys(HSD_GObj* gobj)
+void ftMr_SpecialN_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
 // 0x800E0EA4
-void ftMario_SpecialN_Coll(HSD_GObj* gobj)
+void ftMr_SpecialN_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == false) {
-        ftMario_SpecialN_GroundToAir(gobj);
+        ftMr_SpecialN_GroundToAir(gobj);
     }
 }
 
 // 0x800E0EE0
 // https://decomp.me/scratch/Of8qP
-void ftMario_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
+void ftMr_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
 {
     Vec3 coords;
     Fighter* fp;
@@ -123,14 +123,14 @@ void ftMario_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
                 fp->x5E8_fighterBones[ftParts_8007500C(fp, 0x17)].x0_jobj,
                 &fp->facing_dir);
         } else {
-            rand_val_800E0D1C = ftMario_SpecialN_VitaminRandom(gobj);
+            rand_val_800E0D1C = ftMr_SpecialN_VitaminRandom(gobj);
             it_802C0510(gobj, &coords, rand_val_800E0D1C, 0x31,
                         fp->facing_dir);
         }
     }
 }
 
-void ftMario_SpecialAirN_StartMotion(HSD_GObj* gobj)
+void ftMr_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
@@ -138,11 +138,11 @@ void ftMario_SpecialAirN_StartMotion(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, AS_MARIO_SPECIALAIRN, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialN_ItemFireSpawn;
+    fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialN_ItemFireSpawn;
 }
 
 // 0x800E10B0
-void ftMario_SpecialAirN_Anim(HSD_GObj* gobj)
+void ftMr_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
@@ -150,7 +150,7 @@ void ftMario_SpecialAirN_Anim(HSD_GObj* gobj)
 }
 
 // 0x800E10EC
-void ftMario_SpecialAirN_IASA(HSD_GObj* gobj)
+void ftMr_SpecialAirN_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2200_ftcmd_var0 != 0) {
@@ -159,21 +159,21 @@ void ftMario_SpecialAirN_IASA(HSD_GObj* gobj)
 }
 
 // 0x800E111C
-void ftMario_SpecialAirN_Phys(HSD_GObj* gobj)
+void ftMr_SpecialAirN_Phys(HSD_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
 // 0x800E113C
-void ftMario_SpecialAirN_Coll(HSD_GObj* gobj)
+void ftMr_SpecialAirN_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != false) {
-        ftMario_SpecialAirN_AirToGround(gobj);
+        ftMr_SpecialAirN_AirToGround(gobj);
     }
 }
 
 // 0x800E1178
-void ftMario_SpecialN_GroundToAir(HSD_GObj* gobj)
+void ftMr_SpecialN_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
@@ -182,11 +182,11 @@ void ftMario_SpecialN_GroundToAir(HSD_GObj* gobj)
         (FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim), NULL,
         fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialN_ItemFireSpawn;
+    fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialN_ItemFireSpawn;
 }
 
 // 0x800E11E0
-void ftMario_SpecialAirN_AirToGround(HSD_GObj* gobj)
+void ftMr_SpecialAirN_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
@@ -195,5 +195,5 @@ void ftMario_SpecialAirN_AirToGround(HSD_GObj* gobj)
         (FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim), NULL,
         fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialN_ItemFireSpawn;
+    fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialN_ItemFireSpawn;
 }

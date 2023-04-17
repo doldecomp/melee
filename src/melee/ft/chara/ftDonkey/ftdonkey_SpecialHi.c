@@ -11,13 +11,13 @@
 void ftDonkey_SetCallbacks_SpecialHi(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = &ftDonkey_8010D774;
-    fp->cb.x21E4_callback_OnDeath2 = &ftDonkey_8010D774;
+    fp->cb.x21DC_callback_OnTakeDamage = &ftDk_Init_8010D774;
+    fp->cb.x21E4_callback_OnDeath2 = &ftDk_Init_8010D774;
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
 }
 
-void ftDonkey_SpecialHi_StartMotion(HSD_GObj* gobj)
+void ftDk_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
@@ -36,7 +36,7 @@ void ftDonkey_SpecialHi_StartMotion(HSD_GObj* gobj)
     efSync_Spawn(0x4CA, gobj, fp->x5E8_fighterBones[0].x0_jobj);
 }
 
-void ftDonkey_SpecialAirHi_StartMotion(HSD_GObj* gobj)
+void ftDk_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
@@ -60,14 +60,14 @@ void ftDonkey_SpecialAirHi_StartMotion(HSD_GObj* gobj)
     efSync_Spawn(0x4CA, gobj, fp->x5E8_fighterBones[0].x0_jobj);
 }
 
-void ftDonkey_8010FCD4(HSD_GObj* gobj)
+void ftDk_SpecialHi_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
 
-void ftDonkey_8010FD10(HSD_GObj* gobj)
+void ftDk_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
@@ -88,11 +88,11 @@ void ftDonkey_8010FD10(HSD_GObj* gobj)
     }
 }
 
-void ftDonkey_8010FD9C(HSD_GObj* gobj) {}
+void ftDk_SpecialHi_IASA(HSD_GObj* gobj) {}
 
-void ftDonkey_8010FDA0(HSD_GObj* gobj) {}
+void ftDk_SpecialAirHi_IASA(HSD_GObj* gobj) {}
 
-void ftDonkey_8010FDA4(HSD_GObj* gobj)
+void ftDk_SpecialHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
@@ -101,7 +101,7 @@ void ftDonkey_8010FDA4(HSD_GObj* gobj)
     ftCommon_8007CB74(gobj);
 }
 
-void ftDonkey_8010FDEC(HSD_GObj* gobj)
+void ftDk_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -123,7 +123,7 @@ void ftDonkey_8010FDEC(HSD_GObj* gobj)
                       donkey_attr->SpecialHi.x58_AERIAL_HORIZONTAL_VELOCITY);
 }
 
-void ftDonkey_8010FE60(HSD_GObj* gobj)
+void ftDk_SpecialHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
@@ -138,7 +138,7 @@ void ftDonkey_8010FE60(HSD_GObj* gobj)
     }
 }
 
-void ftDonkey_8010FF14(HSD_GObj* gobj)
+void ftDk_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
@@ -171,7 +171,7 @@ void ftDonkey_8010FF14(HSD_GObj* gobj)
     }
 }
 
-void ftDonkey_DestroyAllEffects_SpecialHi(HSD_GObj* gobj)
+void ftDk_SpecialHi_DestroyAllEffects_SpecialHi(HSD_GObj* gobj)
 {
     efLib_DestroyAll(gobj);
 }

@@ -8,27 +8,27 @@
 
 extern PadLibData HSD_PadLibData;
 
-struct Struct804C22E0 lbl_804C22E0[4];
+struct Struct804C22E0 HSD_Rumble_804C22E0[4];
 
 void HSD_PadRumbleOn(u8 a)
 {
     bool intrEnabled = OSDisableInterrupts();
-    struct Struct804C22E0* r5 = &lbl_804C22E0[a];
+    struct Struct804C22E0* r5 = &HSD_Rumble_804C22E0[a];
 
     r5->unk2 = 1;
     OSRestoreInterrupts(intrEnabled);
 }
 
-void func_803780DC(u8 a)
+void HSD_Rumble_803780DC(u8 a)
 {
     bool intrEnabled = OSDisableInterrupts();
-    struct Struct804C22E0* r5 = &lbl_804C22E0[a];
+    struct Struct804C22E0* r5 = &HSD_Rumble_804C22E0[a];
 
     r5->unk2 = 0;
     OSRestoreInterrupts(intrEnabled);
 }
 
-void func_80378128(struct Struct804C22E0* a, HSD_PadRumbleListData* b)
+void HSD_Rumble_80378128(struct Struct804C22E0* a, HSD_PadRumbleListData* b)
 {
     RumbleInfo* r6 = &HSD_PadLibData.rumble_info;
     HSD_PadRumbleListData** r5 = &a->unk8;
@@ -42,39 +42,39 @@ void func_80378128(struct Struct804C22E0* a, HSD_PadRumbleListData* b)
     r6->listdatap = b;
 }
 
-void func_80378170(u8 a)
+void HSD_Rumble_80378170(u8 a)
 {
-    struct Struct804C22E0* r28 = &lbl_804C22E0[a];
+    struct Struct804C22E0* r28 = &HSD_Rumble_804C22E0[a];
     bool r29 = OSDisableInterrupts();
     HSD_PadRumbleListData* r4 = r28->unk8;
 
     while (r4 != NULL) {
         HSD_PadRumbleListData* r30 = r4->next;
-        func_80378128(r28, r4);
+        HSD_Rumble_80378128(r28, r4);
         r4 = r30;
     }
     OSRestoreInterrupts(r29);
 }
 
-void func_80378208(void)
+void HSD_Rumble_80378208(void)
 {
     int i;
 
     for (i = 0; i < 4; i++) {
-        func_80378170(i);
+        HSD_Rumble_80378170(i);
     }
 }
 
-void func_80378280(u8 a, int b)
+void HSD_Rumble_80378280(u8 a, int b)
 {
-    struct Struct804C22E0* r31 = &lbl_804C22E0[a];
+    struct Struct804C22E0* r31 = &HSD_Rumble_804C22E0[a];
     bool r3 = OSDisableInterrupts();
     HSD_PadRumbleListData* r7 = r31->unk8;
 
     while (r7 != NULL) {
         HSD_PadRumbleListData* r6 = r7->next;
         if (r7->id == (unsigned) b) {
-            func_80378128(r31, r7);
+            HSD_Rumble_80378128(r31, r7);
         }
         r7 = r6;
     }
@@ -84,7 +84,7 @@ void func_80378280(u8 a, int b)
 void func_80378330_inline(u8 a, int b)
 {
     bool intrEnabled = OSDisableInterrupts();
-    HSD_PadRumbleListData* r4 = lbl_804C22E0[a].unk8;
+    HSD_PadRumbleListData* r4 = HSD_Rumble_804C22E0[a].unk8;
 
     while (r4 != NULL) {
         HSD_PadRumbleListData* next = r4->next;
@@ -95,7 +95,7 @@ void func_80378330_inline(u8 a, int b)
     OSRestoreInterrupts(intrEnabled);
 }
 
-void func_80378330(void)
+void HSD_Rumble_80378330(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -108,7 +108,7 @@ void func_80378330(void)
     }
 }
 
-void func_803783B0(void)
+void HSD_Rumble_803783B0(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -133,10 +133,10 @@ void func_80378430_inline(HSD_PadRumbleListData** r6,
     *r6 = r7;
 }
 
-int func_80378430(u8 a, int b, int c, int d, void* e)
+int HSD_Rumble_80378430(u8 a, int b, int c, int d, void* e)
 {
     struct RumbleInfo* r31 = &HSD_PadLibData.rumble_info;
-    struct Struct804C22E0* r30 = &lbl_804C22E0[a];
+    struct Struct804C22E0* r30 = &HSD_Rumble_804C22E0[a];
     int r29 = 0;
     bool intrEnabled = OSDisableInterrupts();
     HSD_PadRumbleListData* r7 = r31->listdatap;
@@ -161,7 +161,7 @@ int func_80378430(u8 a, int b, int c, int d, void* e)
     return r29;
 }
 
-void func_80378524(int a)
+void HSD_Rumble_80378524(int a)
 {
     bool intrEnabled = OSDisableInterrupts();
 
@@ -169,7 +169,7 @@ void func_80378524(int a)
     OSRestoreInterrupts(intrEnabled);
 }
 
-int func_80378560(HSD_PadRumbleListData* a, u8* b)
+int HSD_Rumble_80378560(HSD_PadRumbleListData* a, u8* b)
 {
     if (a->pause == 1) {
         return 0;
@@ -239,7 +239,7 @@ void HSD_PadRumbleInterpret(void)
     u8 _[8];
 #endif
     struct RumbleInfo* r31 = &HSD_PadLibData.rumble_info;
-    struct Struct804C22E0* r30 = lbl_804C22E0;
+    struct Struct804C22E0* r30 = HSD_Rumble_804C22E0;
     HSD_PadRumbleListData* r29;
     HSD_PadRumbleListData* r28;
 
@@ -252,7 +252,7 @@ void HSD_PadRumbleInterpret(void)
             while (r29 != NULL) {
                 r28 = r29->next;
 
-                if (func_80378560((void*) r29, &r30->unk1) != 0) {
+                if (HSD_Rumble_80378560((void*) r29, &r30->unk1) != 0) {
                     HSD_PadRumbleInterpret_inline(&r30->unk8, r29);
                     r30->unk4--;
                     r29->next = r31->listdatap;
@@ -278,7 +278,7 @@ void HSD_PadRumbleInterpret(void)
     }
 }
 
-struct Struct804C22E0 lbl_80406DE0 = { 0 };
+struct Struct804C22E0 HSD_Rumble_80406DE0 = { 0 };
 
 void HSD_PadRumbleInit(u16 a, void* b)
 {
@@ -295,6 +295,6 @@ void HSD_PadRumbleInit(u16 a, void* b)
         r6->listdatap[i].next = 0;
     }
     for (i = 0; i < 4; i++) {
-        lbl_804C22E0[i] = lbl_80406DE0;
+        HSD_Rumble_804C22E0[i] = HSD_Rumble_80406DE0;
     }
 }
