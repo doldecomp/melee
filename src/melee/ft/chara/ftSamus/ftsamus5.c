@@ -8,7 +8,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftparts.h"
 
-void ftSamus_SpecialHi_StartMotion(HSD_GObj* gobj)
+void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -32,7 +32,7 @@ void ftSamus_SpecialHi_StartMotion(HSD_GObj* gobj)
     fp->ev.ss.x2244 = 1;
 }
 
-void ftSamus_SpecialAirHi_StartMotion(HSD_GObj* gobj)
+void ftSs_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
@@ -61,7 +61,7 @@ void ftSamus_DestroyAllUnsetx2444(HSD_GObj* gobj)
     fp->ev.ss.x2244 = 0;
 }
 
-void ftSamus_8012A81C(HSD_GObj* gobj)
+void ftSs_SpecialHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr;
@@ -80,7 +80,7 @@ void ftSamus_8012A81C(HSD_GObj* gobj)
     }
 }
 
-void ftSamus_8012A8C4(HSD_GObj* gobj)
+void ftSs_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr;
@@ -99,7 +99,7 @@ void ftSamus_8012A8C4(HSD_GObj* gobj)
     }
 }
 
-void ftSamus_8012A96C(HSD_GObj* gobj)
+void ftSs_SpecialHi_IASA(HSD_GObj* gobj)
 {
     f32 mag;
     f32 lstick_x;
@@ -130,7 +130,7 @@ void ftSamus_8012A96C(HSD_GObj* gobj)
     }
 }
 
-void ftSamus_8012AA3C(HSD_GObj* gobj)
+void ftSs_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     f32 mag;
     f32 lstick_x;
@@ -161,7 +161,7 @@ void ftSamus_8012AA3C(HSD_GObj* gobj)
     }
 }
 
-void ftSamus_8012AB0C(HSD_GObj* gobj)
+void ftSs_SpecialHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
@@ -180,7 +180,7 @@ void ftSamus_8012AB0C(HSD_GObj* gobj)
     ft_80084F3C(gobj);
 }
 
-void ftSamus_8012ABB4(HSD_GObj* gobj)
+void ftSs_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
@@ -194,7 +194,7 @@ void ftSamus_8012ABB4(HSD_GObj* gobj)
     ftCommon_8007D344(fp, 0.0f, samus_attr->x3C, samus_attr->x40);
 }
 
-void ftSamus_8012AC00(HSD_GObj* gobj)
+void ftSs_SpecialHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
@@ -230,7 +230,7 @@ void ftSamus_8012AC00(HSD_GObj* gobj)
     }
 }
 
-void ftSamus_8012ACF8(HSD_GObj* gobj)
+void ftSs_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;

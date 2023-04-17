@@ -4,7 +4,7 @@
 
 extern const f64 lbl_804D79E0;
 
-void (*lbl_803B9840[16])(CommandInfo*) = {
+void (*lbCommand_803B9840[16])(CommandInfo*) = {
     Command_00, Command_01, Command_02, Command_03, Command_04, Command_05,
     Command_06, Command_07, Command_08, Command_09, NULL,       NULL,
     NULL,       NULL,       NULL,       NULL
@@ -92,7 +92,7 @@ void Command_09(CommandInfo* info)
 bool Command_Execute(CommandInfo* info, u32 command)
 {
     if (command < 10) {
-        lbl_803B9840[command](info);
+        lbCommand_803B9840[command](info);
         return true;
     }
     return false;

@@ -3,27 +3,27 @@
 
 #include "ft/fighter.h"
 
-void ftSamus_8012A640(HSD_GObj* gobj);
+void ftSs_SpecialS_8012A640(HSD_GObj* gobj);
 
-void ftSamus_8012A51C(HSD_GObj* gobj);
-void ftSamus_8012A558(HSD_GObj* gobj);
-void ftSamus_8012A55C(HSD_GObj* gobj);
-void ftSamus_8012A560(HSD_GObj* gobj);
-void ftSamus_8012A580(HSD_GObj* gobj);
-void ftSamus_8012A5C8(HSD_GObj* gobj);
-void ftSamus_8012A604(HSD_GObj* gobj);
-void ftSamus_8012A640(HSD_GObj* gobj);
-void ftSamus_SpecialS_StartMotion(HSD_GObj* gobj);
-void ftSamus_SpecialAirS_StartMotion(HSD_GObj* gobj);
-void ftSamus_8012A380(HSD_GObj* gobj);
-void ftSamus_8012A3BC(HSD_GObj* gobj);
-void ftSamus_8012A3F8(HSD_GObj* gobj);
-void ftSamus_8012A3FC(HSD_GObj* gobj);
-void ftSamus_8012A400(HSD_GObj* gobj);
-void ftSamus_8012A420(HSD_GObj* gobj);
+void ftSs_SpecialAirSmash_Anim(HSD_GObj* gobj);
+void ftSs_SpecialSSmash_IASA(HSD_GObj* gobj);
+void ftSs_SpecialAirSmash_IASA(HSD_GObj* gobj);
+void ftSs_SpecialSSmash_Phys(HSD_GObj* gobj);
+void ftSs_SpecialAirSmash_Phys(HSD_GObj* gobj);
+void ftSs_SpecialSSmash_Coll(HSD_GObj* gobj);
+void ftSs_SpecialAirSmash_Coll(HSD_GObj* gobj);
+void ftSs_SpecialS_8012A640(HSD_GObj* gobj);
+void ftSs_SpecialS_Enter(HSD_GObj* gobj);
+void ftSs_SpecialAirS_Enter(HSD_GObj* gobj);
+void ftSs_SpecialS_Anim(HSD_GObj* gobj);
+void ftSs_SpecialAirS_Anim(HSD_GObj* gobj);
+void ftSs_SpecialS_IASA(HSD_GObj* gobj);
+void ftSs_SpecialAirS_IASA(HSD_GObj* gobj);
+void ftSs_SpecialS_Phys(HSD_GObj* gobj);
+void ftSs_SpecialAirS_Phys(HSD_GObj* gobj);
 void ftSamus_ClearThrowFlagsUnk(HSD_GObj* gobj);
-void ftSamus_8012A468(HSD_GObj* gobj);
-void ftSamus_8012A4A4(HSD_GObj* gobj);
-void ftSamus_8012A4E0(HSD_GObj* gobj);
+void ftSs_SpecialS_Coll(HSD_GObj* gobj);
+void ftSs_SpecialAirS_Coll(HSD_GObj* gobj);
+void ftSs_SpecialSSmash_Anim(HSD_GObj* gobj);
 
 #endif

@@ -1,10 +1,10 @@
 #include "ft/chara/ftSeak/ftSeak_SpecialLw.h"
 
-f32 const lbl_804D9698 = 0.4000000059604645F;
-f32 const lbl_804D969C = 0.003000000026077032F;
-f32 const lbl_804D96A0 = 1.0471975803375244F;
-f32 const lbl_804D96A4 = 0.0F;
-f64 const lbl_804D96A8 = 0.0078125;
+f32 const ftSk_Init_804D9698 = 0.4000000059604645F;
+f32 const ftSk_Init_804D969C = 0.003000000026077032F;
+f32 const ftSk_Init_804D96A0 = 1.0471975803375244F;
+f32 const ftSk_Init_804D96A4 = 0.0F;
+f64 const ftSk_Init_804D96A8 = 0.0078125;
 
 // 80114034 - 801140B0 (0x7C bytes)
 
@@ -19,7 +19,7 @@ void ftSeak_8011412C(HSD_GObj* fighterObj)
 {
     Fighter* fighter = fighterObj->user_data;
     fighter->cb.x21BC_callback_Accessory4 = 0;
-    ftCommon_8007EFC8(fighterObj, &ftZelda_8013B4D8);
+    ftCommon_8007EFC8(fighterObj, &ftZd_SpecialLw_8013B4D8);
 }
 #endif
 

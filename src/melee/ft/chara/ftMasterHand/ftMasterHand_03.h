@@ -7,12 +7,12 @@
 #include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
-void ftMasterHand_80150C8C(HSD_GObj* gobj);
-void ftMasterHand_80150D28(HSD_GObj* gobj);
-void ftMasterHand_80150DC4(HSD_GObj* gobj, UNK_T, Vec3*);
-void ftMasterHand_80151018(HSD_GObj* gobj);
-void ftMasterHand_80150F00(HSD_GObj* gobj);
-void ftMasterHand_80150F68(HSD_GObj* gobj);
-void ftMasterHand_80150FC8(HSD_GObj* gobj);
+void ftMh_MS_389_80150C8C(HSD_GObj* gobj);
+void ftMh_MS_389_80150D28(HSD_GObj* gobj);
+void ftMh_MS_389_80150DC4(HSD_GObj* gobj, UNK_T, Vec3*);
+void ftMh_MS_389_80151018(HSD_GObj* gobj);
+void ftMh_MS_389_Anim(HSD_GObj* gobj);
+void ftMh_MS_389_Phys(HSD_GObj* gobj);
+void ftMh_MS_389_Coll(HSD_GObj* gobj);
 
 #endif

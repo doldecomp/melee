@@ -83,39 +83,39 @@ extern struct _unk_gobj_struct {
     u8 p_link;
     u8 p_prio;
     HSD_GObj* gobj;
-} lbl_804CE3E4;
+} HSD_GObj_804CE3E4;
 
 typedef struct _GObjUnkStruct GObjUnkStruct;
 typedef struct _GObjFuncs GObjFuncs;
 
-extern HSD_GObj* lbl_804D797C;
-extern HSD_GObj** lbl_804D7820;
-extern HSD_GObj** lbl_804D7824;
+extern HSD_GObj* HSD_SisLib_804D797C;
+extern HSD_GObj** HSD_GObj_804D7820;
+extern HSD_GObj** HSD_GObj_804D7824;
 extern HSD_GObjLibInitDataType HSD_GObjLibInitData;
 extern HSD_GObj** plinklow_gobjs;
-extern HSD_GObjList* lbl_804D782C;
-extern u8 lbl_804D784B[5];
+extern HSD_GObjList* HSD_GObj_804D782C;
+extern u8 HSD_GObj_804D784B[5];
 
-void func_80390C5C(HSD_GObj* gobj);
-void func_80390C84(HSD_GObj* gobj);
-void func_80390CAC(HSD_GObj* gobj);
-u32 func_80390EB8(s32 i);
-void func_803910D8(HSD_GObj*, Event);
-u8 func_803912A8(GObjUnkStruct*, GObjFuncs*);
+void HSD_GObj_80390C5C(HSD_GObj* gobj);
+void HSD_GObj_80390C84(HSD_GObj* gobj);
+void HSD_GObj_80390CAC(HSD_GObj* gobj);
+u32 HSD_GObj_80390EB8(s32 i);
+void HSD_GObj_803910D8(HSD_GObj*, Event);
+u8 HSD_GObj_803912A8(GObjUnkStruct*, GObjFuncs*);
 HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority);
-void func_80391070(HSD_GObj* gobj, s32 arg1);
-void func_80390CD4(HSD_GObj* gobj);
-void func_80390CFC(void);
+void HSD_GObj_80391070(HSD_GObj* gobj, s32 arg1);
+void HSD_GObj_80390CD4(HSD_GObj* gobj);
+void HSD_GObj_80390CFC(void);
 void render_gobj(HSD_GObj* cur, s32 i);
-void func_80390FC0(void);
-void lbl_80391044(HSD_GObj* gobj);
-void lbl_803910B4(HSD_GObj* gobj);
-void lbl_80391120(HSD_Obj* obj);
-void lbl_803911C0(HSD_Obj* obj);
-void func_80391260(struct _GObjUnkStruct* arg0);
-void func_803912E0(GObjFuncs* arg0);
-void func_80390ED0(HSD_GObj* gobj, u32 mask);
-void func_80390ED0(HSD_GObj* gobj, u32 mask);
+void HSD_GObj_80390FC0(void);
+void HSD_GObj_80391044(HSD_GObj* gobj);
+void HSD_GObj_803910B4(HSD_GObj* gobj);
+void HSD_GObj_80391120(HSD_Obj* obj);
+void HSD_GObj_803911C0(HSD_Obj* obj);
+void HSD_GObj_80391260(struct _GObjUnkStruct* arg0);
+void HSD_GObj_803912E0(GObjFuncs* arg0);
+void HSD_GObj_80390ED0(HSD_GObj* gobj, u32 mask);
+void HSD_GObj_80390ED0(HSD_GObj* gobj, u32 mask);
 
 static inline any_t HSD_GObjGetUserData(HSD_GObj* gobj)
 {

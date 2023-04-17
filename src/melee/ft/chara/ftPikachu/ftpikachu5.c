@@ -8,7 +8,7 @@
 #include "ft/ft_0877.h"
 #include "it/it_27CF.h"
 
-bool ftPikachu_CheckProperty_801275CC(HSD_GObj* gobj)
+bool ftPk_SpecialLw_CheckProperty(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -33,14 +33,14 @@ bool ftPikachu_CheckProperty_801275CC(HSD_GObj* gobj)
     }
 }
 
-void ftPikachu_80127608(HSD_GObj* gobj)
+void ftPk_SpecialLw_80127608(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Camera_80030E44(2, &fp->cur_pos);
     ftCommon_8007EBAC(fp, 0xB, 0);
 }
 
-void ftPikachu_SetState_8012764C(HSD_GObj* gobj)
+void ftPk_SpecialLw_SetState_Unk0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->sv.pk.unk4.x4 = 3;
@@ -56,7 +56,7 @@ static inline f32 nested_sum_fabs(f32 fighter_pos_y, f32 pika_attr_xBC,
     }
 }
 
-bool ftPikachu_8012765C(HSD_GObj* gobj)
+bool ftPk_SpecialLw_8012765C(HSD_GObj* gobj)
 {
     Vec3 vec;
     Fighter* fp = gobj->user_data;
@@ -88,13 +88,13 @@ bool ftPikachu_8012765C(HSD_GObj* gobj)
     return false;
 }
 
-void ftPikachu_SetState_8012779C(HSD_GObj* gobj)
+void ftPk_SpecialLw_SetState_Unk1(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->sv.pk.unk4.x4 = 0;
 }
 
-void ftPikachu_EfSpawn_801277AC(HSD_GObj* gobj)
+void ftPk_SpecialLw_SpawnEffect(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -142,7 +142,7 @@ void ftPikachu_EfSpawn_801277AC(HSD_GObj* gobj)
     }
 }
 
-void ftPikachu_SpecialLw_StartMotion(HSD_GObj* gobj)
+void ftPk_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
@@ -153,7 +153,7 @@ void ftPikachu_SpecialLw_StartMotion(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftPikachu_SpecialAirLw_StartMotion(HSD_GObj* gobj)
+void ftPk_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
@@ -164,7 +164,7 @@ void ftPikachu_SpecialAirLw_StartMotion(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftPikachu_ActionChange_8012798C(HSD_GObj* gobj)
+void ftPk_SpecialLw_ChangeMotion_Unk00(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
@@ -172,7 +172,7 @@ void ftPikachu_ActionChange_8012798C(HSD_GObj* gobj)
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
-void ftPikachu_ActionChange_801279EC(HSD_GObj* gobj)
+void ftPk_SpecialLw_ChangeMotion_Unk01(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
@@ -181,28 +181,28 @@ void ftPikachu_ActionChange_801279EC(HSD_GObj* gobj)
     ftCommon_8007D468(fp);
 }
 
-void ftPikachu_ActionChange_80127A54(HSD_GObj* gobj)
+void ftPk_SpecialLw_ChangeMotion_Unk02(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 0x168, 0xC4C588E, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
-    fp->cb.x21DC_callback_OnTakeDamage = &ftPikachu_SetState_8012779C;
-    fp->cb.x21BC_callback_Accessory4 = &ftPikachu_EfSpawn_801277AC;
+    fp->cb.x21DC_callback_OnTakeDamage = &ftPk_SpecialLw_SetState_Unk1;
+    fp->cb.x21BC_callback_Accessory4 = &ftPk_SpecialLw_SpawnEffect;
 }
 
-void ftPikachu_ActionChange_80127ACC(HSD_GObj* gobj)
+void ftPk_SpecialLw_ChangeMotion_Unk03(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 0x16C, 0xC4C588E, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
-    fp->cb.x21DC_callback_OnTakeDamage = &ftPikachu_SetState_8012779C;
-    fp->cb.x21BC_callback_Accessory4 = &ftPikachu_EfSpawn_801277AC;
+    fp->cb.x21DC_callback_OnTakeDamage = &ftPk_SpecialLw_SetState_Unk1;
+    fp->cb.x21BC_callback_Accessory4 = &ftPk_SpecialLw_SpawnEffect;
     ftCommon_8007D468(fp);
 }
 
-void ftPikachu_ActionChange_80127B4C(HSD_GObj* gobj)
+void ftPk_SpecialLw_ChangeMotion_Unk04(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
@@ -210,7 +210,7 @@ void ftPikachu_ActionChange_80127B4C(HSD_GObj* gobj)
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
-void ftPikachu_ActionChange_80127BAC(HSD_GObj* gobj)
+void ftPk_SpecialLw_ChangeMotion_Unk05(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
@@ -219,7 +219,7 @@ void ftPikachu_ActionChange_80127BAC(HSD_GObj* gobj)
     ftCommon_8007D468(fp);
 }
 
-void ftPikachu_ActionChange_80127C14(HSD_GObj* gobj)
+void ftPk_SpecialLw_ChangeMotion_Unk06(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
@@ -227,7 +227,7 @@ void ftPikachu_ActionChange_80127C14(HSD_GObj* gobj)
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
-void ftPikachu_ActionChange_80127C74(HSD_GObj* gobj)
+void ftPk_SpecialLw_ChangeMotion_Unk07(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
@@ -236,7 +236,7 @@ void ftPikachu_ActionChange_80127C74(HSD_GObj* gobj)
     ftCommon_8007D468(fp);
 }
 
-void ftPikachu_ActionChange_80127CDC(HSD_GObj* gobj)
+void ftPk_SpecialLwStart_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -250,12 +250,12 @@ void ftPikachu_ActionChange_80127CDC(HSD_GObj* gobj)
         fighter_copy = GET_FIGHTER(gobj);
         *((u32*) (&fighter_copy->x2210_ThrowFlags)) = 0;
         fighter_copy->cb.x21DC_callback_OnTakeDamage =
-            &ftPikachu_SetState_8012779C;
-        fp->cb.x21BC_callback_Accessory4 = &ftPikachu_EfSpawn_801277AC;
+            &ftPk_SpecialLw_SetState_Unk1;
+        fp->cb.x21BC_callback_Accessory4 = &ftPk_SpecialLw_SpawnEffect;
     }
 }
 
-void ftPikachu_ActionChange_80127D60(HSD_GObj* gobj)
+void ftPk_SpecialAirLwStart_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -269,12 +269,12 @@ void ftPikachu_ActionChange_80127D60(HSD_GObj* gobj)
         fighter_copy = GET_FIGHTER(gobj);
         *((u32*) (&fighter_copy->x2210_ThrowFlags)) = 0;
         fighter_copy->cb.x21DC_callback_OnTakeDamage =
-            &ftPikachu_SetState_8012779C;
-        fp->cb.x21BC_callback_Accessory4 = &ftPikachu_EfSpawn_801277AC;
+            &ftPk_SpecialLw_SetState_Unk1;
+        fp->cb.x21BC_callback_Accessory4 = &ftPk_SpecialLw_SpawnEffect;
     }
 }
 
-void ftPikachu_ActionChange_80127DE4(HSD_GObj* gobj)
+void ftPk_SpecialLw_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -287,7 +287,7 @@ void ftPikachu_ActionChange_80127DE4(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, 0x16A, 0, 0, 0.0f, 1.0f, 0.0f);
         return;
     }
-    if (ftPikachu_8012765C(gobj)) {
+    if (ftPk_SpecialLw_8012765C(gobj)) {
         Fighter* fighter_copy = GET_FIGHTER(gobj);
         Fighter_ChangeMotionState(gobj, 0x169, 0, 0, 0.0f, 1.0f, 0.0f);
         fighter_copy->x2200_ftcmd_var0 = 0;
@@ -298,7 +298,7 @@ void ftPikachu_ActionChange_80127DE4(HSD_GObj* gobj)
     }
 }
 
-void ftPikachu_ActionChange_80127EC0(HSD_GObj* gobj)
+void ftPk_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -311,7 +311,7 @@ void ftPikachu_ActionChange_80127EC0(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, 0x16E, 0, 0, 0.0f, 1.0f, 0.0f);
         return;
     }
-    if (ftPikachu_8012765C(gobj)) {
+    if (ftPk_SpecialLw_8012765C(gobj)) {
         Fighter* fighter_copy = GET_FIGHTER(gobj);
         ftPikachuAttributes* pika_attr = fighter_copy->x2D4_specialAttributes;
         Fighter_ChangeMotionState(gobj, 0x16D, 0, 0, 0.0f, 1.0f, 0.0f);
@@ -324,7 +324,7 @@ void ftPikachu_ActionChange_80127EC0(HSD_GObj* gobj)
     }
 }
 
-void ftPikachu_ActionChange_80127FB0(HSD_GObj* gobj)
+void ftPk_SpecialLwHit_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2200_ftcmd_var0) {
@@ -333,7 +333,7 @@ void ftPikachu_ActionChange_80127FB0(HSD_GObj* gobj)
     }
 }
 
-void ftPikachu_ActionChange_80128000(HSD_GObj* gobj)
+void ftPk_SpecialAirLwHit_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2200_ftcmd_var0) {
@@ -342,46 +342,46 @@ void ftPikachu_ActionChange_80128000(HSD_GObj* gobj)
     }
 }
 
-void ftPikachu_80128050(HSD_GObj* gobj)
+void ftPk_SpecialLwEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
 
-void ftPikachu_8012808C(HSD_GObj* gobj)
+void ftPk_SpecialAirLwEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
     }
 }
 
-void ftPikachu_801280C8(HSD_GObj* gobj)
+void ftPk_SpecialLwStart_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftPikachu_801280E8(HSD_GObj* gobj)
+void ftPk_SpecialAirLwStart_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
-void ftPikachu_80128108(HSD_GObj* gobj)
+void ftPk_SpecialLw_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftPikachu_80128128(HSD_GObj* gobj)
+void ftPk_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
-void ftPikachu_80128148(HSD_GObj* gobj)
+void ftPk_SpecialLwHit_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftPikachu_80128168(HSD_GObj* gobj)
+void ftPk_SpecialAirLwHit_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
@@ -391,52 +391,52 @@ void ftPikachu_80128168(HSD_GObj* gobj)
     ftCommon_8007CF58(fp);
 }
 
-void ftPikachu_801281AC(HSD_GObj* gobj)
+void ftPk_SpecialLwEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftPikachu_801281CC(HSD_GObj* gobj)
+void ftPk_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
-void ftPikachu_PrepCallActionChange_801281EC(HSD_GObj* gobj)
+void ftPk_SpecialLwStart_Coll(HSD_GObj* gobj)
 {
-    ft_8008403C(gobj, &ftPikachu_ActionChange_801279EC);
+    ft_8008403C(gobj, &ftPk_SpecialLw_ChangeMotion_Unk01);
 }
 
-void ftPikachu_PrepCallActionChange_80128214(HSD_GObj* gobj)
+void ftPk_SpecialAirLwStart_Coll(HSD_GObj* gobj)
 {
-    ft_80082C74(gobj, &ftPikachu_ActionChange_8012798C);
+    ft_80082C74(gobj, &ftPk_SpecialLw_ChangeMotion_Unk00);
 }
 
-void ftPikachu_PrepCallActionChange_8012823C(HSD_GObj* gobj)
+void ftPk_SpecialLw_Coll(HSD_GObj* gobj)
 {
-    ft_8008403C(gobj, &ftPikachu_ActionChange_80127ACC);
+    ft_8008403C(gobj, &ftPk_SpecialLw_ChangeMotion_Unk03);
 }
 
-void ftPikachu_PrepCallActionChange_80128264(HSD_GObj* gobj)
+void ftPk_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
-    ft_80082C74(gobj, &ftPikachu_ActionChange_80127A54);
+    ft_80082C74(gobj, &ftPk_SpecialLw_ChangeMotion_Unk02);
 }
 
-void ftPikachu_PrepCallActionChange_8012828C(HSD_GObj* gobj)
+void ftPk_SpecialLwHit_Coll(HSD_GObj* gobj)
 {
-    ft_8008403C(gobj, &ftPikachu_ActionChange_80127BAC);
+    ft_8008403C(gobj, &ftPk_SpecialLw_ChangeMotion_Unk05);
 }
 
-void ftPikachu_PrepCallActionChange_801282B4(HSD_GObj* gobj)
+void ftPk_SpecialAirLwHit_Coll(HSD_GObj* gobj)
 {
-    ft_80082C74(gobj, &ftPikachu_ActionChange_80127B4C);
+    ft_80082C74(gobj, &ftPk_SpecialLw_ChangeMotion_Unk04);
 }
 
-void ftPikachu_PrepCallActionChange_801282DC(HSD_GObj* gobj)
+void ftPk_SpecialLwEnd_Coll(HSD_GObj* gobj)
 {
-    ft_8008403C(gobj, &ftPikachu_ActionChange_80127C74);
+    ft_8008403C(gobj, &ftPk_SpecialLw_ChangeMotion_Unk07);
 }
 
-void ftPikachu_PrepCallActionChange_80128304(HSD_GObj* gobj)
+void ftPk_SpecialAirLwEnd_Coll(HSD_GObj* gobj)
 {
-    ft_80082C74(gobj, &ftPikachu_ActionChange_80127C14);
+    ft_80082C74(gobj, &ftPk_SpecialLw_ChangeMotion_Unk06);
 }

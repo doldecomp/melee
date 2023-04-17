@@ -2,12 +2,12 @@
 
 .section .data  # 0x803B9840 - 0x804316C0
 
-.global lbl_8040601C
-lbl_8040601C:
+.global HSD_AObj_8040601C
+HSD_AObj_8040601C:
     .asciz "unexpected argument format.\n"
     .balign 4
-.global lbl_8040603C
-lbl_8040603C:
+.global HSD_AObj_8040603C
+HSD_AObj_8040603C:
     .asciz "unexpected type of object.\n"
     .balign 4
 .global jtbl_80406058

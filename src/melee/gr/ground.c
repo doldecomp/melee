@@ -50,7 +50,7 @@
 
 StageInfo stage_info;
 
-static StageData lbl_803DFEA8 = {
+static StageData Ground_803DFEA8 = {
     0,
     NULL,
     NULL,
@@ -66,51 +66,51 @@ static StageData lbl_803DFEA8 = {
     0,
 };
 
-extern StageData lbl_803DFEA8, lbl_803E5764, lbl_803E11A4, lbl_803E4ECC,
-    lbl_803E1800, lbl_803E52E0, lbl_803E3F6C, lbl_803E5130, lbl_803E1B2C,
-    lbl_803E4D0C, lbl_803E274C, lbl_803E51CC, lbl_803E0E5C, lbl_803E76D0,
-    lbl_803E1F08, lbl_803E54CC, lbl_803E1334, lbl_803E6A3C, lbl_803E33DC,
-    lbl_803E2D20, lbl_803E2858, lbl_803E3D94, lbl_803E4800, lbl_803E4950,
-    lbl_803E4C00, lbl_803E7A00, lbl_803E6748, lbl_803E650C, lbl_803E65E8,
-    lbl_803E584C, lbl_803E5988, lbl_803E5E0C, lbl_803E617C, lbl_803E5764,
-    lbl_803E7E38, lbl_803E7F90, lbl_803E7D34, lbl_803E7B10, lbl_803E85A4,
-    lbl_803E8664, lbl_803E872C, lbl_803E87EC, lbl_803E88AC, lbl_803E8974,
-    lbl_803E8A34, lbl_803E8AF4, lbl_803E8C0C, lbl_803E8CCC, lbl_803E8D8C,
-    lbl_803E8E4C, lbl_803E8F0C, lbl_803E8FCC, lbl_803E908C, lbl_803E914C,
-    lbl_803E920C, lbl_803E92CC, lbl_803E9394, lbl_803E9454, lbl_803E9514,
-    lbl_803E95D4, lbl_803E9694, lbl_803E9754, lbl_803E981C, lbl_803E98DC,
-    lbl_803E84C4, lbl_803E821C, lbl_803E62C0, lbl_803E6370, lbl_803E6420,
-    lbl_803E5764;
+extern StageData Ground_803DFEA8, grTe_803E5764, grCs_803E11A4, grRc_803E4ECC,
+    grKg_803E1800, grGd_803E52E0, grGb_803E3F6C, grSh_803E5130, grZe_803E1B2C,
+    grKr_803E4D0C, grSt_803E274C, grYt_803E51CC, grIz_803E0E5C, grGr_803E76D0,
+    grCn_803E1F08, grVe_803E54CC, grPs_803E1334, grPu_803E6A3C, grMc_803E33DC,
+    grBb_803E2D20, grOt_803E2858, grFs_803E3D94, grIm_803E4800, grI1_803E4950,
+    grI2_803E4C00, grFz_803E7A00, grOp_803E6748, grOy_803E650C, grOk_803E65E8,
+    grNKr_803E584C, grSh_Route_803E5988, grZe_Route_803E5E0C, grBb_Route_803E617C, grTe_803E5764,
+    grNBa_803E7E38, grNLa_803E7F90, grFigureGet_803E7D34, grPushOn_803E7B10, grTMr_803E85A4,
+    grTCa_803E8664, grTCl_803E872C, grTDk_803E87EC, grTDr_803E88AC, grTFc_803E8974,
+    grTFx_803E8A34, grTIc_803E8AF4, grTKb_803E8C0C, grTKp_803E8CCC, grTLk_803E8D8C,
+    grTLg_803E8E4C, grTMs_803E8F0C, grTMt_803E8FCC, grTNs_803E908C, grTPe_803E914C,
+    grTPc_803E920C, grTPk_803E92CC, grTPr_803E9394, grTSs_803E9454, grTSk_803E9514,
+    grTYs_803E95D4, grTZd_803E9694, grTGw_803E9754, grTFe_803E981C, grTGn_803E98DC,
+    grHeal_803E84C4, grHr_803E821C, grEF1_803E62C0, grEF2_803E6370, grEF2_803E6420,
+    grTe_803E5764;
 
-static StageData* lbl_803DFEDC[] = {
-    &lbl_803DFEA8, &lbl_803E5764, &lbl_803E11A4, &lbl_803E4ECC, &lbl_803E1800,
-    &lbl_803E52E0, &lbl_803E3F6C, &lbl_803E5130, &lbl_803E1B2C, &lbl_803E4D0C,
-    &lbl_803E274C, &lbl_803E51CC, &lbl_803E0E5C, &lbl_803E76D0, &lbl_803E1F08,
-    &lbl_803E54CC, &lbl_803E1334, &lbl_803E6A3C, &lbl_803E33DC, &lbl_803E2D20,
-    &lbl_803E2858, &lbl_803E3D94, &lbl_803E4800, NULL,          &lbl_803E4950,
-    &lbl_803E4C00, NULL,          &lbl_803E7A00, &lbl_803E6748, &lbl_803E650C,
-    &lbl_803E65E8, &lbl_803E584C, &lbl_803E5988, &lbl_803E5E0C, &lbl_803E617C,
-    &lbl_803E5764, &lbl_803E7E38, &lbl_803E7F90, &lbl_803E7D34, &lbl_803E7B10,
-    &lbl_803E85A4, &lbl_803E8664, &lbl_803E872C, &lbl_803E87EC, &lbl_803E88AC,
-    &lbl_803E8974, &lbl_803E8A34, &lbl_803E8AF4, &lbl_803E8C0C, &lbl_803E8CCC,
-    &lbl_803E8D8C, &lbl_803E8E4C, &lbl_803E8F0C, &lbl_803E8FCC, &lbl_803E908C,
-    &lbl_803E914C, &lbl_803E920C, &lbl_803E92CC, &lbl_803E9394, &lbl_803E9454,
-    &lbl_803E9514, &lbl_803E95D4, &lbl_803E9694, &lbl_803E9754, &lbl_803E981C,
-    &lbl_803E98DC, &lbl_803E84C4, &lbl_803E821C, &lbl_803E62C0, &lbl_803E6370,
-    &lbl_803E6420, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764,
+static StageData* Ground_803DFEDC[] = {
+    &Ground_803DFEA8, &grTe_803E5764, &grCs_803E11A4, &grRc_803E4ECC, &grKg_803E1800,
+    &grGd_803E52E0, &grGb_803E3F6C, &grSh_803E5130, &grZe_803E1B2C, &grKr_803E4D0C,
+    &grSt_803E274C, &grYt_803E51CC, &grIz_803E0E5C, &grGr_803E76D0, &grCn_803E1F08,
+    &grVe_803E54CC, &grPs_803E1334, &grPu_803E6A3C, &grMc_803E33DC, &grBb_803E2D20,
+    &grOt_803E2858, &grFs_803E3D94, &grIm_803E4800, NULL,          &grI1_803E4950,
+    &grI2_803E4C00, NULL,          &grFz_803E7A00, &grOp_803E6748, &grOy_803E650C,
+    &grOk_803E65E8, &grNKr_803E584C, &grSh_Route_803E5988, &grZe_Route_803E5E0C, &grBb_Route_803E617C,
+    &grTe_803E5764, &grNBa_803E7E38, &grNLa_803E7F90, &grFigureGet_803E7D34, &grPushOn_803E7B10,
+    &grTMr_803E85A4, &grTCa_803E8664, &grTCl_803E872C, &grTDk_803E87EC, &grTDr_803E88AC,
+    &grTFc_803E8974, &grTFx_803E8A34, &grTIc_803E8AF4, &grTKb_803E8C0C, &grTKp_803E8CCC,
+    &grTLk_803E8D8C, &grTLg_803E8E4C, &grTMs_803E8F0C, &grTMt_803E8FCC, &grTNs_803E908C,
+    &grTPe_803E914C, &grTPc_803E920C, &grTPk_803E92CC, &grTPr_803E9394, &grTSs_803E9454,
+    &grTSk_803E9514, &grTYs_803E95D4, &grTZd_803E9694, &grTGw_803E9754, &grTFe_803E981C,
+    &grTGn_803E98DC, &grHeal_803E84C4, &grHr_803E821C, &grEF1_803E62C0, &grEF2_803E6370,
+    &grEF2_803E6420, &grTe_803E5764, &grTe_803E5764, &grTe_803E5764, &grTe_803E5764,
+    &grTe_803E5764, &grTe_803E5764, &grTe_803E5764, &grTe_803E5764, &grTe_803E5764,
+    &grTe_803E5764, &grTe_803E5764, &grTe_803E5764, &grTe_803E5764, &grTe_803E5764,
+    &grTe_803E5764, &grTe_803E5764, &grTe_803E5764, &grTe_803E5764, &grTe_803E5764,
+    &grTe_803E5764, &grTe_803E5764, &grTe_803E5764, &grTe_803E5764, &grTe_803E5764,
+    &grTe_803E5764, &grTe_803E5764, &grTe_803E5764, &grTe_803E5764, &grTe_803E5764,
+    &grTe_803E5764, &grTe_803E5764, &grTe_803E5764, &grTe_803E5764, &grTe_803E5764,
+    &grTe_803E5764, &grTe_803E5764, &grTe_803E5764, &grTe_803E5764, &grTe_803E5764,
+    &grTe_803E5764,
 };
 
 #define _BUFFER_SZ (64)
 
-static u8* lbl_804D6950;
+static u8* Ground_804D6950;
 
 static void Ground_801BFFA8(void) {}
 
@@ -209,7 +209,7 @@ static void zeroBuffer(void)
 {
     int i;
     for (i = 0; i < _BUFFER_SZ; i++) {
-        lbl_804D6950[i] = 0;
+        Ground_804D6950[i] = 0;
     }
 }
 
@@ -217,7 +217,7 @@ void Ground_801C0378(void)
 {
     ft_800C06C0();
 
-    lbl_804D6950 = HSD_MemAlloc(_BUFFER_SZ);
+    Ground_804D6950 = HSD_MemAlloc(_BUFFER_SZ);
 
     zeroBuffer();
 }
@@ -367,12 +367,12 @@ s32* Ground_801C06A4(void)
 
 void Ground_801C06B8(InternalStageId arg0)
 {
-    if (lbl_803DFEDC[arg0] == NULL) {
+    if (Ground_803DFEDC[arg0] == NULL) {
         return;
     }
 
-    if (lbl_803DFEDC[arg0]->data1 != NULL) {
-        lbDvd_800178E8(4, lbl_803DFEDC[arg0]->data1, 4, 4, 0, 1, 7, 16, 0);
+    if (Ground_803DFEDC[arg0]->data1 != NULL) {
+        lbDvd_800178E8(4, Ground_803DFEDC[arg0]->data1, 4, 4, 0, 1, 7, 16, 0);
     }
 
     switch (arg0) {
@@ -392,7 +392,7 @@ void Ground_801C0754(StructPairWithStageID* pair)
 
     Ground_801BFFB0();
     stage_info.internal_stage_id = pair->stage_id;
-    stage = lbl_803DFEDC[pair->stage_id];
+    stage = Ground_803DFEDC[pair->stage_id];
     arg3 = (pair->list_idx == 0x55) ? 0 : 1;
     grDatFiles_801C6038(stage->data1, 0, arg3);
     Ground_801C28CC(stage_info.xA0, pair->list_idx);
@@ -410,11 +410,11 @@ extern struct {
             s32 xC;
         }* xC;
     }* x1D4;
-}* lbl_804D6D38;
+}* it_804D6D38;
 
 void Ground_801C0800(StructPairWithStageID* pair)
 {
-    StageData* stage_data = lbl_803DFEDC[pair->stage_id];
+    StageData* stage_data = Ground_803DFEDC[pair->stage_id];
 
     Ground_801C38D0(stage_info.x6B0->x8, stage_info.x6B0->x14,
                     stage_info.x6B0->x1C, stage_info.x6B0->x18);
@@ -441,7 +441,7 @@ void Ground_801C0800(StructPairWithStageID* pair)
 
         if (stage_info.x6B4 != NULL) {
             for (i = 1; stage_info.x6B4[i] != 0; i++) {
-                lbl_804D6D38->x1D4->xC[i].xC = stage_info.x6B4[i];
+                it_804D6D38->x1D4->xC[i].xC = stage_info.x6B4[i];
             }
         }
     }
@@ -533,7 +533,7 @@ static bool Ground_801C0A70(Vec3* pos)
     }
 }
 
-extern u32 lbl_803B7DEC[];
+extern u32 Ground_803B7DEC[];
 
 #ifdef MWERKS_GEKKO
 
@@ -735,9 +735,9 @@ lbl_801C0EA0:
 /* 801C0ED4 001BDAB4  4B FF FB 9D */	bl Ground_801C0A70
 /* 801C0ED8 001BDAB8  2C 03 00 00 */	cmpwi r3, 0
 /* 801C0EDC 001BDABC  41 82 00 6C */	beq lbl_801C0F48
-/* 801C0EE0 001BDAC0  3C 60 80 3B */	lis r3, lbl_803B7DEC@ha
+/* 801C0EE0 001BDAC0  3C 60 80 3B */	lis r3, Ground_803B7DEC@ha
 /* 801C0EE4 001BDAC4  80 A1 00 2C */	lwz r5, 0x2c(r1)
-/* 801C0EE8 001BDAC8  39 03 7D EC */	addi r8, r3, lbl_803B7DEC@l
+/* 801C0EE8 001BDAC8  39 03 7D EC */	addi r8, r3, Ground_803B7DEC@l
 /* 801C0EEC 001BDACC  80 81 00 30 */	lwz r4, 0x30(r1)
 /* 801C0EF0 001BDAD0  80 E8 00 00 */	lwz r7, 0(r8)
 /* 801C0EF4 001BDAD4  38 61 00 0C */	addi r3, r1, 0xc
@@ -788,7 +788,7 @@ static void Ground_801C0C2C(HSD_GObj* arg0)
 
 void Ground_801C0F78(StructPairWithStageID* pair)
 {
-    lbl_803DFEDC[pair->stage_id]->callback2();
+    Ground_803DFEDC[pair->stage_id]->callback2();
 }
 
 void Ground_801C0FB8(StructPairWithStageID* pair)
@@ -800,7 +800,7 @@ void Ground_801C0FB8(StructPairWithStageID* pair)
     }* cur;
     void* next;
 
-    lbl_803DFEDC[pair->stage_id]->callback3();
+    Ground_803DFEDC[pair->stage_id]->callback3();
 
     for (cur = stage_info.x6A4; cur != NULL; cur = next) {
         next = cur->unk0;
@@ -809,12 +809,12 @@ void Ground_801C0FB8(StructPairWithStageID* pair)
     }
     stage_info.x6A4 = NULL;
 
-    func_8038FD54(GObj_Create(3, 5, 0), Ground_801C0C2C, 10);
+    HSD_GObjProc_8038FD54(GObj_Create(3, 5, 0), Ground_801C0C2C, 10);
 }
 
 void Ground_801C1074(StructPairWithStageID* pair, s32 arg1)
 {
-    lbl_803DFEDC[pair->stage_id]->callback1(arg1);
+    Ground_803DFEDC[pair->stage_id]->callback1(arg1);
 }
 
 void Ground_801C10B8(HSD_GObj* arg0, HSD_GObjEvent arg1)
@@ -902,10 +902,10 @@ HSD_JObj* Ground_801C13D0(s32 arg0, s32 depth)
     return result;
 }
 
-char lbl_804D44F8[8] = "archive";
-extern HSD_Joint lbl_803B7E0C;
-extern u8 lbl_804D784B[5];
-extern u8 lbl_804D7849;
+char Ground_804D44F8[8] = "archive";
+extern HSD_Joint Ground_803B7E0C;
+extern u8 HSD_GObj_804D784B[5];
+extern u8 HSD_GObj_804D7849;
 
 #ifdef MWERKS_GEKKO
 
@@ -914,13 +914,13 @@ asm HSD_GObj* Ground_801C14D0(int gobj_id)
 { // clang-format off
     nofralloc
 /* 801C14D0 001BE0B0  7C 08 02 A6 */	mflr r0
-/* 801C14D4 001BE0B4  3C A0 80 3E */	lis r5, lbl_803DFEA8@ha
+/* 801C14D4 001BE0B4  3C A0 80 3E */	lis r5, Ground_803DFEA8@ha
 /* 801C14D8 001BE0B8  90 01 00 04 */	stw r0, 4(r1)
 /* 801C14DC 001BE0BC  3C 80 80 4A */	lis r4, stage_info@ha
 /* 801C14E0 001BE0C0  94 21 FF 30 */	stwu r1, -0xd0(r1)
 /* 801C14E4 001BE0C4  BE E1 00 AC */	stmw r23, 0xac(r1)
 /* 801C14E8 001BE0C8  3B C3 00 00 */	addi r30, r3, 0
-/* 801C14EC 001BE0CC  3B 65 FE A8 */	addi r27, r5, lbl_803DFEA8@l
+/* 801C14EC 001BE0CC  3B 65 FE A8 */	addi r27, r5, Ground_803DFEA8@l
 /* 801C14F0 001BE0D0  3B 84 E6 C8 */	addi r28, r4, stage_info@l
 /* 801C14F4 001BE0D4  38 60 00 03 */	li r3, 3
 /* 801C14F8 001BE0D8  38 80 00 05 */	li r4, 5
@@ -950,7 +950,7 @@ lbl_801C154C:
 /* 801C1550 001BE130  38 DA 00 00 */	addi r6, r26, 0
 /* 801C1554 001BE134  40 82 00 14 */	bne lbl_801C1568
 /* 801C1558 001BE138  7F E3 FB 78 */	mr r3, r31
-/* 801C155C 001BE13C  48 1C EC CD */	bl func_80390228
+/* 801C155C 001BE13C  48 1C EC CD */	bl HSD_GObjPLink_80390228
 /* 801C1560 001BE140  38 60 00 00 */	li r3, 0
 /* 801C1564 001BE144  48 00 04 A8 */	b lbl_801C1A0C
 lbl_801C1568:
@@ -1007,7 +1007,7 @@ lbl_801C1568:
 /* 801C1630 001BE210  40 82 00 14 */	bne lbl_801C1644
 /* 801C1634 001BE214  38 7B 02 18 */	addi r3, r27, 0x218
 /* 801C1638 001BE218  38 80 05 4E */	li r4, 0x54e
-/* 801C163C 001BE21C  38 AD 8E 58 */	addi r5, r13, lbl_804D44F8
+/* 801C163C 001BE21C  38 AD 8E 58 */	addi r5, r13, Ground_804D44F8
 /* 801C1640 001BE220  48 1C 6B E1 */	bl __assert
 lbl_801C1644:
 /* 801C1644 001BE224  80 77 00 04 */	lwz r3, 4(r23)
@@ -1036,8 +1036,8 @@ lbl_801C1644:
 lbl_801C16A0:
 /* 801C16A0 001BE280  C0 02 B2 E4 */	lfs f0, 1.0f
 lbl_801C16A4:
-/* 801C16A4 001BE284  3C 60 80 3B */	lis r3, lbl_803B7E0C@ha
-/* 801C16A8 001BE288  38 A3 7E 0C */	addi r5, r3, lbl_803B7E0C@l
+/* 801C16A4 001BE284  3C 60 80 3B */	lis r3, Ground_803B7E0C@ha
+/* 801C16A8 001BE288  38 A3 7E 0C */	addi r5, r3, Ground_803B7E0C@l
 /* 801C16AC 001BE28C  80 85 00 00 */	lwz r4, 0(r5)
 /* 801C16B0 001BE290  38 61 00 58 */	addi r3, r1, 0x58
 /* 801C16B4 001BE294  80 05 00 04 */	lwz r0, 4(r5)
@@ -1091,7 +1091,7 @@ lbl_801C1760:
 /* 801C176C 001BE34C  28 18 00 00 */	cmplwi r24, 0
 /* 801C1770 001BE350  40 82 00 28 */	bne lbl_801C1798
 /* 801C1774 001BE354  7F E3 FB 78 */	mr r3, r31
-/* 801C1778 001BE358  48 1C EA B1 */	bl func_80390228
+/* 801C1778 001BE358  48 1C EA B1 */	bl HSD_GObjPLink_80390228
 /* 801C177C 001BE35C  38 7B 02 34 */	addi r3, r27, 0x234
 /* 801C1780 001BE360  4C C6 31 82 */	crclr 6
 /* 801C1784 001BE364  38 9B 02 18 */	addi r4, r27, 0x218
@@ -1128,10 +1128,10 @@ lbl_801C1798:
 /* 801C17FC 001BE3DC  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 801C1800 001BE3E0  4B E5 23 15 */	bl lb_80013B14
 /* 801C1804 001BE3E4  3B 63 00 00 */	addi r27, r3, 0
-/* 801C1808 001BE3E8  88 8D C1 AB */	lbz r4, lbl_804D784B
+/* 801C1808 001BE3E8  88 8D C1 AB */	lbz r4, HSD_GObj_804D784B
 /* 801C180C 001BE3EC  38 77 00 00 */	addi r3, r23, 0
 /* 801C1810 001BE3F0  38 BB 00 00 */	addi r5, r27, 0
-/* 801C1814 001BE3F4  48 1C F2 5D */	bl func_80390A70
+/* 801C1814 001BE3F4  48 1C F2 5D */	bl HSD_GObjObjet_80390A70
 /* 801C1818 001BE3F8  3C 60 80 1C */	lis r3, grDisplay_801C5F60@ha
 /* 801C181C 001BE3FC  38 83 5F 60 */	addi r4, r3, grDisplay_801C5F60@l
 /* 801C1820 001BE400  38 77 00 00 */	addi r3, r23, 0
@@ -1145,10 +1145,10 @@ lbl_801C1798:
 /* 801C1840 001BE420  92 FA 00 18 */	stw r23, 0x18(r26)
 /* 801C1844 001BE424  48 00 13 91 */	bl Ground_801C2BD4
 lbl_801C1848:
-/* 801C1848 001BE428  88 8D C1 A9 */	lbz r4, lbl_804D7849
+/* 801C1848 001BE428  88 8D C1 A9 */	lbz r4, HSD_GObj_804D7849
 /* 801C184C 001BE42C  38 7F 00 00 */	addi r3, r31, 0
 /* 801C1850 001BE430  38 B8 00 00 */	addi r5, r24, 0
-/* 801C1854 001BE434  48 1C F2 1D */	bl func_80390A70
+/* 801C1854 001BE434  48 1C F2 1D */	bl HSD_GObjObjet_80390A70
 /* 801C1858 001BE438  80 7D 00 04 */	lwz r3, 4(r29)
 /* 801C185C 001BE43C  80 03 00 08 */	lwz r0, 8(r3)
 /* 801C1860 001BE440  7C 60 CA 14 */	add r3, r0, r25
@@ -1186,8 +1186,8 @@ lbl_801C18B8:
 lbl_801C18CC:
 /* 801C18CC 001BE4AC  C0 02 B2 E4 */	lfs f0, 1.0f
 lbl_801C18D0:
-/* 801C18D0 001BE4B0  3C 60 80 3B */	lis r3, lbl_803B7E0C@ha
-/* 801C18D4 001BE4B4  38 A3 7E 0C */	addi r5, r3, lbl_803B7E0C@l
+/* 801C18D0 001BE4B0  3C 60 80 3B */	lis r3, Ground_803B7E0C@ha
+/* 801C18D4 001BE4B4  38 A3 7E 0C */	addi r5, r3, Ground_803B7E0C@l
 /* 801C18D8 001BE4B8  80 85 00 00 */	lwz r4, 0(r5)
 /* 801C18DC 001BE4BC  38 61 00 14 */	addi r3, r1, 0x14
 /* 801C18E0 001BE4C0  80 05 00 04 */	lwz r0, 4(r5)
@@ -1241,7 +1241,7 @@ lbl_801C198C:
 /* 801C1998 001BE578  28 17 00 00 */	cmplwi r23, 0
 /* 801C199C 001BE57C  40 82 00 28 */	bne lbl_801C19C4
 /* 801C19A0 001BE580  7F E3 FB 78 */	mr r3, r31
-/* 801C19A4 001BE584  48 1C E8 85 */	bl func_80390228
+/* 801C19A4 001BE584  48 1C E8 85 */	bl HSD_GObjPLink_80390228
 /* 801C19A8 001BE588  38 7B 02 34 */	addi r3, r27, 0x234
 /* 801C19AC 001BE58C  4C C6 31 82 */	crclr 6
 /* 801C19B0 001BE590  38 9B 02 18 */	addi r4, r27, 0x218
@@ -1250,21 +1250,21 @@ lbl_801C198C:
 /* 801C19BC 001BE59C  38 60 00 00 */	li r3, 0
 /* 801C19C0 001BE5A0  48 00 00 4C */	b lbl_801C1A0C
 lbl_801C19C4:
-/* 801C19C4 001BE5A4  88 8D C1 A9 */	lbz r4, lbl_804D7849
+/* 801C19C4 001BE5A4  88 8D C1 A9 */	lbz r4, HSD_GObj_804D7849
 /* 801C19C8 001BE5A8  38 7F 00 00 */	addi r3, r31, 0
 /* 801C19CC 001BE5AC  38 B7 00 00 */	addi r5, r23, 0
-/* 801C19D0 001BE5B0  48 1C F0 A1 */	bl func_80390A70
+/* 801C19D0 001BE5B0  48 1C F0 A1 */	bl HSD_GObjObjet_80390A70
 lbl_801C19D4:
 /* 801C19D4 001BE5B4  3C 60 80 1C */	lis r3, Ground_801C1CD0@ha
 /* 801C19D8 001BE5B8  38 83 1C D0 */	addi r4, r3, Ground_801C1CD0@l
 /* 801C19DC 001BE5BC  38 7F 00 00 */	addi r3, r31, 0
 /* 801C19E0 001BE5C0  38 A0 00 01 */	li r5, 1
-/* 801C19E4 001BE5C4  48 1C E3 71 */	bl func_8038FD54
+/* 801C19E4 001BE5C4  48 1C E3 71 */	bl HSD_GObjProc_8038FD54
 /* 801C19E8 001BE5C8  3C 60 80 1C */	lis r3, Ground_801C1D38@ha
 /* 801C19EC 001BE5CC  38 83 1D 38 */	addi r4, r3, Ground_801C1D38@l
 /* 801C19F0 001BE5D0  38 7F 00 00 */	addi r3, r31, 0
 /* 801C19F4 001BE5D4  38 A0 00 04 */	li r5, 4
-/* 801C19F8 001BE5D8  48 1C E3 5D */	bl func_8038FD54
+/* 801C19F8 001BE5D8  48 1C E3 5D */	bl HSD_GObjProc_8038FD54
 /* 801C19FC 001BE5DC  38 7F 00 00 */	addi r3, r31, 0
 /* 801C1A00 001BE5E0  38 9E 00 00 */	addi r4, r30, 0
 /* 801C1A04 001BE5E4  48 00 11 B9 */	bl Ground_801C2BBC
@@ -1321,7 +1321,7 @@ HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
     gp = temp_r3;
 
     if (gp == NULL) {
-        func_80390228(temp_r30);
+        HSD_GObjPLink_80390228(temp_r30);
         return NULL;
     }
 
@@ -1346,7 +1346,7 @@ HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
     temp_r29 = HSD_JObjLoadJoint(arg0);
     Ground_801C34AC(arg1, temp_r29, arg0);
     phi_f0 = Ground_801C0498();
-    sp18 = lbl_803B7E0C;
+    sp18 = Ground_803B7E0C;
     sp18.scale.z = phi_f0;
     sp18.scale.y = phi_f0;
     sp18.scale.x = phi_f0;
@@ -1363,18 +1363,18 @@ HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
     HSD_JObjAddNext(temp_r29, temp_r3_4);
 
     if (temp_r3_4 == NULL) {
-        func_80390228(temp_r30);
+        HSD_GObjPLink_80390228(temp_r30);
         OSReport(get_jobj, __FILE__, 0x5E8);
         return NULL;
     }
 
-    func_80390A70(temp_r30, lbl_804D7849, temp_r3_4);
-    func_8038FD54(temp_r30, Ground_801C1CD0, 1);
-    func_8038FD54(temp_r30, Ground_801C1D38, 4);
+    HSD_GObjObjet_80390A70(temp_r30, HSD_GObj_804D7849, temp_r3_4);
+    HSD_GObjProc_8038FD54(temp_r30, Ground_801C1CD0, 1);
+    HSD_GObjProc_8038FD54(temp_r30, Ground_801C1D38, 4);
     return temp_r30;
 }
 
-extern s32 lbl_804D64AC;
+extern s32 mpColl_804D64AC;
 
 static void Ground_801C1CD0(HSD_GObj* gobj)
 {
@@ -1387,7 +1387,7 @@ static void Ground_801C1CD0(HSD_GObj* gobj)
     Ground* gp = gobj->user_data;
     HSD_JObjAnimAll(jobj);
     grMaterial_801C9698(gobj);
-    lbl_804D64AC += 1;
+    mpColl_804D64AC += 1;
 
     if (gp->x8_callback != NULL) {
         gp->x8_callback(gobj);
@@ -1476,7 +1476,7 @@ void* Ground_801C1E84(void)
     return stage_info.x12C;
 }
 
-extern u8 lbl_804D7848;
+extern u8 HSD_GObj_804D7848;
 
 #ifdef MWERKS_GEKKO
 
@@ -1495,9 +1495,9 @@ static asm void Ground_801C1E94(void)
 /* 801C1EB4 001BEA94  48 00 44 71 */	bl grDatFiles_801C6324
 /* 801C1EB8 001BEA98  48 00 44 6D */	bl grDatFiles_801C6324
 /* 801C1EBC 001BEA9C  80 BF 00 88 */	lwz r5, 0x88(r31)
-/* 801C1EC0 001BEAA0  3C 80 80 3E */	lis r4, lbl_803DFEDC@ha
+/* 801C1EC0 001BEAA0  3C 80 80 3E */	lis r4, Ground_803DFEDC@ha
 /* 801C1EC4 001BEAA4  80 63 00 04 */	lwz r3, 4(r3)
-/* 801C1EC8 001BEAA8  38 04 FE DC */	addi r0, r4, lbl_803DFEDC@l
+/* 801C1EC8 001BEAA8  38 04 FE DC */	addi r0, r4, Ground_803DFEDC@l
 /* 801C1ECC 001BEAAC  54 A4 10 3A */	slwi r4, r5, 2
 /* 801C1ED0 001BEAB0  7C 80 22 14 */	add r4, r0, r4
 /* 801C1ED4 001BEAB4  83 C3 00 0C */	lwz r30, 0xc(r3)
@@ -1539,10 +1539,10 @@ lbl_801C1F34:
 /* 801C1F54 001BEB34  38 7D 00 00 */	addi r3, r29, 0
 /* 801C1F58 001BEB38  48 1B BC E1 */	bl HSD_FogLoadDesc
 /* 801C1F5C 001BEB3C  3B A3 00 00 */	addi r29, r3, 0
-/* 801C1F60 001BEB40  88 8D C1 A8 */	lbz r4, lbl_804D7848
+/* 801C1F60 001BEB40  88 8D C1 A8 */	lbz r4, HSD_GObj_804D7848
 /* 801C1F64 001BEB44  38 7E 00 00 */	addi r3, r30, 0
 /* 801C1F68 001BEB48  38 BD 00 00 */	addi r5, r29, 0
-/* 801C1F6C 001BEB4C  48 1C EB 05 */	bl func_80390A70
+/* 801C1F6C 001BEB4C  48 1C EB 05 */	bl HSD_GObjObjet_80390A70
 /* 801C1F70 001BEB50  3C 60 80 1C */	lis r3, Ground_801C1E2C@ha
 /* 801C1F74 001BEB54  38 83 1E 2C */	addi r4, r3, Ground_801C1E2C@l
 /* 801C1F78 001BEB58  38 7E 00 00 */	addi r3, r30, 0
@@ -1645,9 +1645,9 @@ static asm unk_t Ground_801C20E0(UnkArchiveStruct*, unk_t)
 /* 801C20E8 001BECC8  94 21 FF D8 */	stwu r1, -0x28(r1)
 /* 801C20EC 001BECCC  BF 41 00 10 */	stmw r26, 0x10(r1)
 /* 801C20F0 001BECD0  7C 9C 23 79 */	or. r28, r4, r4
-/* 801C20F4 001BECD4  3C 80 80 3E */	lis r4, lbl_803DFEA8@ha
+/* 801C20F4 001BECD4  3C 80 80 3E */	lis r4, Ground_803DFEA8@ha
 /* 801C20F8 001BECD8  3B 63 00 00 */	addi r27, r3, 0
-/* 801C20FC 001BECDC  3B 44 FE A8 */	addi r26, r4, lbl_803DFEA8@l
+/* 801C20FC 001BECDC  3B 44 FE A8 */	addi r26, r4, Ground_803DFEA8@l
 /* 801C2100 001BECE0  40 82 00 14 */	bne lbl_801C2114
 /* 801C2104 001BECE4  38 7A 02 18 */	addi r3, r26, 0x218
 /* 801C2108 001BECE8  38 BA 02 6C */	addi r5, r26, 0x26c
@@ -1882,7 +1882,7 @@ s32 Ground_801C247C(s32 arg0, s32 arg1)
     UnkArchiveStruct* archive = grDatFiles_801C6330(arg0);
 
     if (archive == NULL) {
-        __assert(__FILE__, 0x7E1, lbl_804D44F8);
+        __assert(__FILE__, 0x7E1, Ground_804D44F8);
     }
 
     if (archive->unk4 != NULL && arg1 < archive->unk4->unk14) {
@@ -2068,8 +2068,8 @@ static asm void Ground_801C28CC(unk_t, s32)
 /* 801C28E0 001BF4C0  BF 61 00 1C */	stmw r27, 0x1c(r1)
 /* 801C28E4 001BF4C4  3B E5 06 B0 */	addi r31, r5, 0x6b0
 /* 801C28E8 001BF4C8  80 C5 06 B0 */	lwz r6, 0x6b0(r5)
-/* 801C28EC 001BF4CC  3C A0 80 3E */	lis r5, lbl_803DFEA8@ha
-/* 801C28F0 001BF4D0  3B 85 FE A8 */	addi r28, r5, lbl_803DFEA8@l
+/* 801C28EC 001BF4CC  3C A0 80 3E */	lis r5, Ground_803DFEA8@ha
+/* 801C28F0 001BF4D0  3B 85 FE A8 */	addi r28, r5, Ground_803DFEA8@l
 /* 801C28F4 001BF4D4  83 66 00 B4 */	lwz r27, 0xb4(r6)
 /* 801C28F8 001BF4D8  80 E6 00 B0 */	lwz r7, 0xb0(r6)
 /* 801C28FC 001BF4DC  2C 1B 00 00 */	cmpwi r27, 0
@@ -2371,8 +2371,8 @@ bool Ground_801C2ED0(HSD_JObj* jobj, s32 arg1)
         }
     }
 
-    max = lbl_803DFEDC[stage_info.internal_stage_id]->x30;
-    cur = lbl_803DFEDC[stage_info.internal_stage_id]->x2C;
+    max = Ground_803DFEDC[stage_info.internal_stage_id]->x30;
+    cur = Ground_803DFEDC[stage_info.internal_stage_id]->x2C;
 
     for (i = 0; i < max; i++, cur++) {
         if (cur->y == arg1) {
@@ -2388,7 +2388,7 @@ bool Ground_801C2ED0(HSD_JObj* jobj, s32 arg1)
 }
 
 #ifdef MWERKS_GEKKO
-static s16 lbl_804D6954;
+static s16 Ground_804D6954;
 
 #pragma push
 asm void Ground_801C2FE0(HSD_GObj*)
@@ -2399,7 +2399,7 @@ asm void Ground_801C2FE0(HSD_GObj*)
 /* 801C2FE8 001BFBC8  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 801C2FEC 001BFBCC  BF 41 00 18 */	stmw r26, 0x18(r1)
 /* 801C2FF0 001BFBD0  80 83 00 2C */	lwz r4, 0x2c(r3)
-/* 801C2FF4 001BFBD4  80 6D B2 B0 */	lwz r3, lbl_804D6950
+/* 801C2FF4 001BFBD4  80 6D B2 B0 */	lwz r3, Ground_804D6950
 /* 801C2FF8 001BFBD8  80 84 00 14 */	lwz r4, 0x14(r4)
 /* 801C2FFC 001BFBDC  7C 03 20 AE */	lbzx r0, r3, r4
 /* 801C3000 001BFBE0  3B C4 00 00 */	addi r30, r4, 0
@@ -2407,13 +2407,13 @@ asm void Ground_801C2FE0(HSD_GObj*)
 /* 801C3008 001BFBE8  40 82 01 08 */	bne lbl_801C3110
 /* 801C300C 001BFBEC  3B A0 00 00 */	li r29, 0
 /* 801C3010 001BFBF0  4B E8 A1 6D */	bl mpLib_8004D17C
-/* 801C3014 001BFBF4  A8 CD B2 B4 */	lha r6, lbl_804D6954
+/* 801C3014 001BFBF4  A8 CD B2 B4 */	lha r6, Ground_804D6954
 /* 801C3018 001BFBF8  3C A0 80 4A */	lis r5, stage_info@ha
-/* 801C301C 001BFBFC  3C 80 80 3E */	lis r4, lbl_803DFEDC@ha
+/* 801C301C 001BFBFC  3C 80 80 3E */	lis r4, Ground_803DFEDC@ha
 /* 801C3020 001BFC00  38 06 00 01 */	addi r0, r6, 1
-/* 801C3024 001BFC04  B0 0D B2 B4 */	sth r0, lbl_804D6954
+/* 801C3024 001BFC04  B0 0D B2 B4 */	sth r0, Ground_804D6954
 /* 801C3028 001BFC08  38 A5 E6 C8 */	addi r5, r5, stage_info@l
-/* 801C302C 001BFC0C  38 04 FE DC */	addi r0, r4, lbl_803DFEDC@l
+/* 801C302C 001BFC0C  38 04 FE DC */	addi r0, r4, Ground_803DFEDC@l
 /* 801C3030 001BFC10  80 85 00 88 */	lwz r4, 0x88(r5)
 /* 801C3034 001BFC14  3B E3 00 00 */	addi r31, r3, 0
 /* 801C3038 001BFC18  3B 80 00 00 */	li r28, 0
@@ -2431,7 +2431,7 @@ lbl_801C3054:
 /* 801C3064 001BFC44  4B E9 2E 39 */	bl mpLib_80055E9C
 /* 801C3068 001BFC48  A8 1B 00 00 */	lha r0, 0(r27)
 /* 801C306C 001BFC4C  3B A0 00 01 */	li r29, 1
-/* 801C3070 001BFC50  A8 8D B2 B4 */	lha r4, lbl_804D6954
+/* 801C3070 001BFC50  A8 8D B2 B4 */	lha r4, Ground_804D6954
 /* 801C3074 001BFC54  1C 60 00 34 */	mulli r3, r0, 0x34
 /* 801C3078 001BFC58  38 03 00 0C */	addi r0, r3, 0xc
 /* 801C307C 001BFC5C  7C 9F 03 2E */	sthx r4, r31, r0
@@ -2455,7 +2455,7 @@ lbl_801C3088:
 /* 801C30BC 001BFC9C  48 00 00 44 */	b lbl_801C3100
 lbl_801C30C0:
 /* 801C30C0 001BFCA0  A8 7C 00 00 */	lha r3, 0(r28)
-/* 801C30C4 001BFCA4  A8 AD B2 B4 */	lha r5, lbl_804D6954
+/* 801C30C4 001BFCA4  A8 AD B2 B4 */	lha r5, Ground_804D6954
 /* 801C30C8 001BFCA8  1C 83 00 34 */	mulli r4, r3, 0x34
 /* 801C30CC 001BFCAC  38 04 00 0C */	addi r0, r4, 0xc
 /* 801C30D0 001BFCB0  7C 1F 02 AE */	lhax r0, r31, r0
@@ -2464,7 +2464,7 @@ lbl_801C30C0:
 /* 801C30DC 001BFCBC  4B E9 2D C1 */	bl mpLib_80055E9C
 /* 801C30E0 001BFCC0  A8 1C 00 00 */	lha r0, 0(r28)
 /* 801C30E4 001BFCC4  3B A0 00 01 */	li r29, 1
-/* 801C30E8 001BFCC8  A8 8D B2 B4 */	lha r4, lbl_804D6954
+/* 801C30E8 001BFCC8  A8 8D B2 B4 */	lha r4, Ground_804D6954
 /* 801C30EC 001BFCCC  1C 60 00 34 */	mulli r3, r0, 0x34
 /* 801C30F0 001BFCD0  38 03 00 0C */	addi r0, r3, 0xc
 /* 801C30F4 001BFCD4  7C 9F 03 2E */	sthx r4, r31, r0
@@ -2513,8 +2513,8 @@ bool Ground_801C3128(s32 arg0, void (*arg1)(s16))
         /// @todo @c cur cannot be swapped below @c max, hinting at a missing
         /// @c inline function.
         S16Vec3* cur;
-        int max = lbl_803DFEDC[stage_info.internal_stage_id]->x30;
-        cur = lbl_803DFEDC[stage_info.internal_stage_id]->x2C;
+        int max = Ground_803DFEDC[stage_info.internal_stage_id]->x30;
+        cur = Ground_803DFEDC[stage_info.internal_stage_id]->x2C;
 
         {
             int i;
@@ -2545,8 +2545,8 @@ bool Ground_801C3128(s32 arg0, void (*arg1)(s16))
 
 bool Ground_801C3214(int arg0)
 {
-    if (lbl_804D6950[arg0] == 1) {
-        lbl_804D6950[arg0] = 0;
+    if (Ground_804D6950[arg0] == 1) {
+        Ground_804D6950[arg0] = 0;
         return Ground_801C3128(arg0, mpLib_80057638);
     }
 
@@ -2555,8 +2555,8 @@ bool Ground_801C3214(int arg0)
 
 bool Ground_801C3260(s32 arg0)
 {
-    if (lbl_804D6950[arg0] == 0) {
-        lbl_804D6950[arg0] = 1;
+    if (Ground_804D6950[arg0] == 0) {
+        Ground_804D6950[arg0] = 1;
         return Ground_801C3128(arg0, mpLib_80057BC0);
     }
     return false;
@@ -2586,8 +2586,8 @@ s32 Ground_801C32D4(s32 arg0, s32 arg1)
 
     /// @todo Might be an @c inline starting here.
 
-    max = lbl_803DFEDC[stage_info.internal_stage_id]->x30;
-    cur = lbl_803DFEDC[stage_info.internal_stage_id]->x2C;
+    max = Ground_803DFEDC[stage_info.internal_stage_id]->x30;
+    cur = Ground_803DFEDC[stage_info.internal_stage_id]->x2C;
 
     result = -1;
 
@@ -2637,8 +2637,8 @@ s32 Ground_801C33C0(s32 arg0, s32 arg1)
 
     /// @todo Might be an @c inline starting here.
 
-    max = lbl_803DFEDC[stage_info.internal_stage_id]->x30;
-    cur = lbl_803DFEDC[stage_info.internal_stage_id]->x2C;
+    max = Ground_803DFEDC[stage_info.internal_stage_id]->x30;
+    cur = Ground_803DFEDC[stage_info.internal_stage_id]->x2C;
 
     result = -1;
 
@@ -2716,10 +2716,10 @@ static asm void Ground_801C34AC(s32, HSD_JObj*, HSD_Joint*)
 /* 801C34B4 001C0094  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 801C34B8 001C0098  BF 61 00 1C */	stmw r27, 0x1c(r1)
 /* 801C34BC 001C009C  3B C4 00 00 */	addi r30, r4, 0
-/* 801C34C0 001C00A0  3C 80 80 3E */	lis r4, lbl_803DFEA8@ha
+/* 801C34C0 001C00A0  3C 80 80 3E */	lis r4, Ground_803DFEA8@ha
 /* 801C34C4 001C00A4  3B 65 00 00 */	addi r27, r5, 0
 /* 801C34C8 001C00A8  3B FE 00 00 */	addi r31, r30, 0
-/* 801C34CC 001C00AC  3B A4 FE A8 */	addi r29, r4, lbl_803DFEA8@l
+/* 801C34CC 001C00AC  3B A4 FE A8 */	addi r29, r4, Ground_803DFEA8@l
 /* 801C34D0 001C00B0  3B 80 FF FF */	li r28, -1
 /* 801C34D4 001C00B4  48 00 2E 5D */	bl grDatFiles_801C6330
 /* 801C34D8 001C00B8  28 03 00 00 */	cmplwi r3, 0
@@ -2913,14 +2913,14 @@ asm void Ground_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk)
 { // clang-format off
     nofralloc
 /* 801C36F4 001C02D4  7C 08 02 A6 */	mflr r0
-/* 801C36F8 001C02D8  3C C0 80 3E */	lis r6, lbl_803DFEA8@ha
+/* 801C36F8 001C02D8  3C C0 80 3E */	lis r6, Ground_803DFEA8@ha
 /* 801C36FC 001C02DC  90 01 00 04 */	stw r0, 4(r1)
 /* 801C3700 001C02E0  94 21 FF C8 */	stwu r1, -0x38(r1)
 /* 801C3704 001C02E4  93 E1 00 34 */	stw r31, 0x34(r1)
 /* 801C3708 001C02E8  3B E4 00 00 */	addi r31, r4, 0
 /* 801C370C 001C02EC  93 C1 00 30 */	stw r30, 0x30(r1)
 /* 801C3710 001C02F0  93 A1 00 2C */	stw r29, 0x2c(r1)
-/* 801C3714 001C02F4  3B A6 FE A8 */	addi r29, r6, lbl_803DFEA8@l
+/* 801C3714 001C02F4  3B A6 FE A8 */	addi r29, r6, Ground_803DFEA8@l
 /* 801C3718 001C02F8  93 81 00 28 */	stw r28, 0x28(r1)
 /* 801C371C 001C02FC  3B 85 00 00 */	addi r28, r5, 0
 /* 801C3720 001C0300  48 00 2C 11 */	bl grDatFiles_801C6330
@@ -2928,7 +2928,7 @@ asm void Ground_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk)
 /* 801C3728 001C0308  40 82 00 14 */	bne lbl_801C373C
 /* 801C372C 001C030C  38 7D 02 18 */	addi r3, r29, 0x218
 /* 801C3730 001C0310  38 80 0B 78 */	li r4, 0xb78
-/* 801C3734 001C0314  38 AD 8E 58 */	addi r5, r13, lbl_804D44F8
+/* 801C3734 001C0314  38 AD 8E 58 */	addi r5, r13, Ground_804D44F8
 /* 801C3738 001C0318  48 1C 4A E9 */	bl __assert
 lbl_801C373C:
 /* 801C373C 001C031C  28 1F 00 00 */	cmplwi r31, 0
@@ -3751,11 +3751,11 @@ static void Ground_801C461C(HSD_GObj* gobj)
 
 static void Ground_801C4640(HSD_GObj* gobj)
 {
-    func_803668EC(gobj->hsd_obj);
+    HSD_LObj_803668EC(gobj->hsd_obj);
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
 }
 
-extern u8 lbl_804D784A;
+extern u8 HSD_GObj_804D784A;
 
 #ifdef MWERKS_GEKKO
 
@@ -3764,12 +3764,12 @@ static asm void Ground_801C466C(void)
 { // clang-format off
     nofralloc
 /* 801C466C 001C124C  7C 08 02 A6 */	mflr r0
-/* 801C4670 001C1250  3C 60 80 3E */	lis r3, lbl_803DFEA8@ha
+/* 801C4670 001C1250  3C 60 80 3E */	lis r3, Ground_803DFEA8@ha
 /* 801C4674 001C1254  90 01 00 04 */	stw r0, 4(r1)
 /* 801C4678 001C1258  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 801C467C 001C125C  DB E1 00 38 */	stfd f31, 0x38(r1)
 /* 801C4680 001C1260  BF 41 00 20 */	stmw r26, 0x20(r1)
-/* 801C4684 001C1264  3B E3 FE A8 */	addi r31, r3, lbl_803DFEA8@l
+/* 801C4684 001C1264  3B E3 FE A8 */	addi r31, r3, Ground_803DFEA8@l
 /* 801C4688 001C1268  48 00 1C 9D */	bl grDatFiles_801C6324
 /* 801C468C 001C126C  3C 80 80 4A */	lis r4, stage_info@ha
 /* 801C4690 001C1270  80 63 00 04 */	lwz r3, 4(r3)
@@ -3836,10 +3836,10 @@ lbl_801C4744:
 lbl_801C4768:
 /* 801C4768 001C1348  48 00 00 00 */	b lbl_801C4768
 lbl_801C476C:
-/* 801C476C 001C134C  88 8D C1 AA */	lbz r4, lbl_804D784A
+/* 801C476C 001C134C  88 8D C1 AA */	lbz r4, HSD_GObj_804D784A
 /* 801C4770 001C1350  38 7E 00 00 */	addi r3, r30, 0
 /* 801C4774 001C1354  38 BD 00 00 */	addi r5, r29, 0
-/* 801C4778 001C1358  48 1C C2 F9 */	bl func_80390A70
+/* 801C4778 001C1358  48 1C C2 F9 */	bl HSD_GObjObjet_80390A70
 /* 801C477C 001C135C  3C 60 80 1C */	lis r3, Ground_801C4640@ha
 /* 801C4780 001C1360  38 83 46 40 */	addi r4, r3, Ground_801C4640@l
 /* 801C4784 001C1364  38 7E 00 00 */	addi r3, r30, 0
@@ -3980,7 +3980,7 @@ lbl_801C4958:
 /* 801C4964 001C1544  38 83 46 1C */	addi r4, r3, Ground_801C461C@l
 /* 801C4968 001C1548  38 7E 00 00 */	addi r3, r30, 0
 /* 801C496C 001C154C  38 A0 00 00 */	li r5, 0
-/* 801C4970 001C1550  48 1C B3 E5 */	bl func_8038FD54
+/* 801C4970 001C1550  48 1C B3 E5 */	bl HSD_GObjProc_8038FD54
 /* 801C4974 001C1554  BB 41 00 20 */	lmw r26, 0x20(r1)
 /* 801C4978 001C1558  80 01 00 44 */	lwz r0, 0x44(r1)
 /* 801C497C 001C155C  CB E1 00 38 */	lfd f31, 0x38(r1)
@@ -4002,7 +4002,7 @@ static void Ground_801C466C(void)
 HSD_GObj* Ground_801C498C(void)
 {
     HSD_GObj* gobj;
-    for (gobj = lbl_804D782C->xC; gobj != NULL; gobj = gobj->next) {
+    for (gobj = HSD_GObj_804D782C->xC; gobj != NULL; gobj = gobj->next) {
         if (gobj->classifier == 13) {
             break;
         }
@@ -4010,7 +4010,7 @@ HSD_GObj* Ground_801C498C(void)
     return gobj;
 }
 
-extern unk_t lbl_803E06C8[];
+extern unk_t Ground_803E06C8[];
 
 unk_t Ground_801C49B4(void)
 {
@@ -4020,7 +4020,7 @@ unk_t Ground_801C49B4(void)
         return Ground_801C20E0(archive, stage_info.x6C4);
     }
 
-    return &lbl_803E06C8;
+    return &Ground_803E06C8;
 }
 
 void* Ground_801C49F8(void)
@@ -4075,11 +4075,11 @@ void Ground_801C4A08(HSD_GObj* gobj)
 
         if (gp->x18 != NULL) {
             removeStageGObj(gp->x18);
-            func_80390228(gp->x18);
+            HSD_GObjPLink_80390228(gp->x18);
         }
 
-        if (gobj->hsd_obj != NULL && lbl_804D6950[map_id] == 0) {
-            lbl_804D6950[map_id] = 1;
+        if (gobj->hsd_obj != NULL && Ground_804D6950[map_id] == 0) {
+            Ground_804D6950[map_id] = 1;
             Ground_801C3128(map_id, mpLib_80057BC0);
         }
 
@@ -4091,7 +4091,7 @@ void Ground_801C4A08(HSD_GObj* gobj)
         }
     }
 
-    func_80390228(gobj);
+    HSD_GObjPLink_80390228(gobj);
 }
 
 void Ground_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
@@ -4226,8 +4226,8 @@ void Ground_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
     stage_info.x16C = vec;
 }
 
-extern char lbl_804D4524[8];
-extern char lbl_804D452C[8];
+extern char Ground_804D4524[8];
+extern char Ground_804D452C[8];
 
 #ifdef MWERKS_GEKKO
 
@@ -4499,17 +4499,17 @@ lbl_801C5384:
 lbl_801C5394:
 /* 801C5394 001C1F74  28 1E 00 00 */	cmplwi r30, 0
 /* 801C5398 001C1F78  40 82 00 14 */	bne lbl_801C53AC
-/* 801C539C 001C1F7C  38 6D 8E 84 */	addi r3, r13, lbl_804D4524
+/* 801C539C 001C1F7C  38 6D 8E 84 */	addi r3, r13, Ground_804D4524
 /* 801C53A0 001C1F80  38 80 00 B4 */	li r4, 0xb4
-/* 801C53A4 001C1F84  38 AD 8E 8C */	addi r5, r13, lbl_804D452C
+/* 801C53A4 001C1F84  38 AD 8E 8C */	addi r5, r13, Ground_804D452C
 /* 801C53A8 001C1F88  48 1C 2E 79 */	bl __assert
 lbl_801C53AC:
 /* 801C53AC 001C1F8C  28 1E 00 00 */	cmplwi r30, 0
 /* 801C53B0 001C1F90  D3 FE 00 10 */	stfs f31, 0x10(r30)
 /* 801C53B4 001C1F94  40 82 00 14 */	bne lbl_801C53C8
-/* 801C53B8 001C1F98  38 6D 8E 84 */	addi r3, r13, lbl_804D4524
+/* 801C53B8 001C1F98  38 6D 8E 84 */	addi r3, r13, Ground_804D4524
 /* 801C53BC 001C1F9C  38 80 00 BF */	li r4, 0xbf
-/* 801C53C0 001C1FA0  38 AD 8E 8C */	addi r5, r13, lbl_804D452C
+/* 801C53C0 001C1FA0  38 AD 8E 8C */	addi r5, r13, Ground_804D452C
 /* 801C53C4 001C1FA4  48 1C 2E 5D */	bl __assert
 lbl_801C53C8:
 /* 801C53C8 001C1FA8  D3 DE 00 14 */	stfs f30, 0x14(r30)
@@ -4854,7 +4854,7 @@ bool Ground_801C5ABC(void)
 
 u32 Ground_801C5AD0(s32 i)
 {
-    return lbl_803DFEDC[i]->flags2;
+    return Ground_803DFEDC[i]->flags2;
 }
 
 /// @todo Move elsewhere.

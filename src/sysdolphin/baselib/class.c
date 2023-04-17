@@ -12,7 +12,7 @@ HSD_ClassInfo hsdClass = { _hsdClassInfoInit };
 
 static HSD_MemoryEntry** memory_list;
 static s32 nb_memory_list;
-static u32 lbl_804D7708;
+static u32 HSD_Class_804D7708;
 
 #ifdef MUST_MATCH
 #pragma push
@@ -282,7 +282,7 @@ void _hsdClassAmnesia(HSD_ClassInfo* info)
     if (info == &hsdClass) {
         nb_memory_list = 0;
         memory_list = NULL;
-        lbl_804D7708 = 0;
+        HSD_Class_804D7708 = 0;
     }
 }
 
@@ -468,7 +468,7 @@ void hsdForgetClassLibrary(const char* library_name)
         return;
     }
     if (strcmp(library_name, hsdClass.head.library_name) == 0) {
-        lbl_804D7708 = 0;
+        HSD_Class_804D7708 = 0;
         ForgetClassLibraryReal(&hsdClass);
     } else {
         ForgetClassLibraryChild(library_name, &hsdClass);
@@ -477,8 +477,8 @@ void hsdForgetClassLibrary(const char* library_name)
 
 HSD_ClassInfo* hsdSearchClassInfo(const char* class_name)
 {
-    if (lbl_804D7708 != 0) {
-        return HSD_HashSearch(lbl_804D7708, class_name, 0);
+    if (HSD_Class_804D7708 != 0) {
+        return HSD_HashSearch(HSD_Class_804D7708, class_name, 0);
     }
     return NULL;
 }

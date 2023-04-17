@@ -6,7 +6,7 @@
 
 #include <dolphin/mtx/types.h>
 
-extern s16 lbl_803E8B5C[];
+extern s16 grTIc_803E8B5C[];
 
 void grTIceClimber_8022109C(HSD_GObj*);
 bool grTIceClimber_802210C8(HSD_GObj*);

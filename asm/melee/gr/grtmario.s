@@ -65,8 +65,8 @@ grTMario_8021F8E4:
 /* 8021F8FC 0021C4DC  93 81 00 10 */	stw r28, 0x10(r1)
 /* 8021F900 0021C4E0  3B 83 00 00 */	addi r28, r3, 0
 /* 8021F904 0021C4E4  1C 1C 00 14 */	mulli r0, r28, 0x14
-/* 8021F908 0021C4E8  3C 60 80 3F */	lis r3, lbl_803E8548@ha
-/* 8021F90C 0021C4EC  3B E3 85 48 */	addi r31, r3, lbl_803E8548@l
+/* 8021F908 0021C4E8  3C 60 80 3F */	lis r3, grTMr_803E8548@ha
+/* 8021F90C 0021C4EC  3B E3 85 48 */	addi r31, r3, grTMr_803E8548@l
 /* 8021F910 0021C4F0  38 7C 00 00 */	addi r3, r28, 0
 /* 8021F914 0021C4F4  7F BF 02 14 */	add r29, r31, r0
 /* 8021F918 0021C4F8  4B FA 1B B9 */	bl Ground_801C14D0
@@ -99,7 +99,7 @@ grTMario_8021F8E4:
 /* 8021F97C 0021C55C  41 82 00 2C */	beq .L_8021F9A8
 /* 8021F980 0021C560  38 7E 00 00 */	addi r3, r30, 0
 /* 8021F984 0021C564  38 A0 00 04 */	li r5, 4
-/* 8021F988 0021C568  48 17 03 CD */	bl func_8038FD54
+/* 8021F988 0021C568  48 17 03 CD */	bl HSD_GObjProc_8038FD54
 /* 8021F98C 0021C56C  48 00 00 1C */	b .L_8021F9A8
 .L_8021F990:
 /* 8021F990 0021C570  38 DC 00 00 */	addi r6, r28, 0
@@ -248,7 +248,7 @@ grTMario_8021FB4C:
 /* 8021FB60 0021C740  93 E1 00 34 */	stw r31, 0x34(r1)
 /* 8021FB64 0021C744  7C 9F 23 78 */	mr r31, r4
 /* 8021FB68 0021C748  4B FA 09 31 */	bl Ground_801C0498
-/* 8021FB6C 0021C74C  C0 02 C2 D0 */	lfs f0, lbl_804DBCB0@sda21(r2)
+/* 8021FB6C 0021C74C  C0 02 C2 D0 */	lfs f0, grTMr_804DBCB0@sda21(r2)
 /* 8021FB70 0021C750  38 7F 00 00 */	addi r3, r31, 0
 /* 8021FB74 0021C754  38 81 00 20 */	addi r4, r1, 0x20
 /* 8021FB78 0021C758  EF E0 00 72 */	fmuls f31, f0, f1
@@ -264,7 +264,7 @@ grTMario_8021FB4C:
 /* 8021FBA0 0021C780  40 81 00 2C */	ble .L_8021FBCC
 /* 8021FBA4 0021C784  7F E3 FB 78 */	mr r3, r31
 /* 8021FBA8 0021C788  4B E6 6F D9 */	bl ftLib_80086B80
-/* 8021FBAC 0021C78C  C0 02 C2 D4 */	lfs f0, lbl_804DBCB4@sda21(r2)
+/* 8021FBAC 0021C78C  C0 02 C2 D4 */	lfs f0, grTMr_804DBCB4@sda21(r2)
 /* 8021FBB0 0021C790  38 61 00 20 */	addi r3, r1, 0x20
 /* 8021FBB4 0021C794  EC 21 00 24 */	fdivs f1, f1, f0
 /* 8021FBB8 0021C798  D3 E1 00 24 */	stfs f31, 0x24(r1)
@@ -322,8 +322,8 @@ grTMario_8021FC58:
 
 .section .data
     .balign 8
-.global lbl_803E8548
-lbl_803E8548:
+.global grTMr_803E8548
+grTMr_803E8548:
     .4byte grTMario_8021F9CC
     .4byte grTMario_8021F9F8
     .4byte grTMario_8021FA00
@@ -344,16 +344,16 @@ lbl_803E8548:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_803E8598
-lbl_803E8598:
+.global grTMr_803E8598
+grTMr_803E8598:
     .4byte 0x2F477254
     .4byte 0x4D722E64
     .4byte 0x61740000
-.global lbl_803E85A4
-lbl_803E85A4:
+.global grTMr_803E85A4
+grTMr_803E85A4:
     .4byte 0x00000028
-    .4byte lbl_803E8548
-    .4byte lbl_803E8598
+    .4byte grTMr_803E8548
+    .4byte grTMr_803E8598
     .4byte grTMario_8021F844
     .4byte grTMario_8021F840
     .4byte grTMario_8021F8B4
@@ -380,9 +380,9 @@ lbl_803E85A4:
 
 .section .sdata2
     .balign 8
-.global lbl_804DBCB0
-lbl_804DBCB0:
+.global grTMr_804DBCB0
+grTMr_804DBCB0:
     .4byte 0xC2F00000
-.global lbl_804DBCB4
-lbl_804DBCB4:
+.global grTMr_804DBCB4
+grTMr_804DBCB4:
     .4byte 0x41200000

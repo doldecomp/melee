@@ -21,9 +21,9 @@
 
 #define PI_MEMSP_EFB 0x08000000
 
-static void (*lbl_804D7320)(u16);
-static GXDrawDoneCallback lbl_804D7324;
-static GXBool lbl_804D7328[0x4];
+static void (*GXMisc_804D7320)(u16);
+static GXDrawDoneCallback GXMisc_804D7324;
+static GXBool GXMisc_804D7328[0x4];
 static OSThreadQueue GXDrawDoneThreadQueue;
 
 static inline void GXSetMisc_inline_1(u16 arg0)
@@ -79,7 +79,7 @@ void GXSetDrawDone(void)
     }
 
     PPCSync();
-    lbl_804D7328[0] = GX_FALSE;
+    GXMisc_804D7328[0] = GX_FALSE;
     OSRestoreInterrupts(interrupt_enabled);
 }
 
@@ -87,7 +87,7 @@ void GXWaitDrawDone(void)
 {
     u32 interrupt_enabled = OSDisableInterrupts();
 
-    while (!lbl_804D7328[0]) {
+    while (!GXMisc_804D7328[0]) {
         OSSleepThread(&GXDrawDoneThreadQueue);
     }
 
@@ -245,11 +245,11 @@ void GXPokeZMode(bool compare_enable, GXCompare func, bool update_enable)
 void GXTokenInterruptHandler(__OSInterrupt _, OSContext* current_ctx)
 {
     u16 temp_r31 = __peReg[7];
-    if (lbl_804D7320 != NULL) {
+    if (GXMisc_804D7320 != NULL) {
         OSContext temp_ctx;
         OSClearContext(&temp_ctx);
         OSSetCurrentContext(&temp_ctx);
-        lbl_804D7320(temp_r31);
+        GXMisc_804D7320(temp_r31);
         OSClearContext(&temp_ctx);
         OSSetCurrentContext(current_ctx);
     }
@@ -258,9 +258,9 @@ void GXTokenInterruptHandler(__OSInterrupt _, OSContext* current_ctx)
 
 GXDrawDoneCallback GXSetDrawDoneCallback(GXDrawDoneCallback cb)
 {
-    GXDrawDoneCallback previous = lbl_804D7324;
+    GXDrawDoneCallback previous = GXMisc_804D7324;
     bool intr = OSDisableInterrupts();
-    lbl_804D7324 = cb;
+    GXMisc_804D7324 = cb;
     OSRestoreInterrupts(intr);
     return previous;
 }
@@ -268,12 +268,12 @@ GXDrawDoneCallback GXSetDrawDoneCallback(GXDrawDoneCallback cb)
 void GXFinishInterruptHandler(__OSInterrupt _, OSContext* current_ctx)
 {
     __peReg[5] = (__peReg[5] & ~8) | 8;
-    lbl_804D7328[0] = GX_TRUE;
-    if (lbl_804D7324 != NULL) {
+    GXMisc_804D7328[0] = GX_TRUE;
+    if (GXMisc_804D7324 != NULL) {
         OSContext temp_ctx;
         OSClearContext(&temp_ctx);
         OSSetCurrentContext(&temp_ctx);
-        lbl_804D7324();
+        GXMisc_804D7324();
         OSClearContext(&temp_ctx);
         OSSetCurrentContext(current_ctx);
     }

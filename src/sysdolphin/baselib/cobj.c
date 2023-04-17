@@ -2,9 +2,9 @@
 #include <baselib/displayfunc.h>
 #include <MSL/trigf.h>
 
-extern f64 lbl_804DE468; // 0.5
-extern f32 lbl_804DE470; // 0.5f
-extern f32 lbl_804DE474; // 0.01745329252f
+extern f64 HSD_CObj_804DE468; // 0.5
+extern f32 HSD_CObj_804DE470; // 0.5f
+extern f32 HSD_CObj_804DE474; // 0.01745329252f
 
 #define DegToRad(a) ((a) *0.01745329252f)
 
@@ -46,7 +46,7 @@ lbl_80367758:
 /* 80367764 00364344  7F 83 E3 78 */	mr r3, r28
 /* 80367768 00364348  48 00 28 21 */	bl HSD_CObjGetNear
 /* 8036776C 0036434C  EC 21 F8 2A */	fadds f1, f1, f31
-/* 80367770 00364350  C8 02 EA 88 */	lfd f0, lbl_804DE468(r2)
+/* 80367770 00364350  C8 02 EA 88 */	lfd f0, HSD_CObj_804DE468(r2)
 /* 80367774 00364354  7F 83 E3 78 */	mr r3, r28
 /* 80367778 00364358  FF E0 00 72 */	fmul f31, f0, f1
 /* 8036777C 0036435C  FF E0 F8 18 */	frsp f31, f31
@@ -62,9 +62,9 @@ lbl_8036779C:
 /* 803677A0 00364380  40 80 00 7C */	bge lbl_8036781C
 /* 803677A4 00364384  48 00 00 68 */	b lbl_8036780C
 lbl_803677A8:
-/* 803677A8 00364388  C0 22 EA 94 */	lfs f1, lbl_804DE474(r2)
+/* 803677A8 00364388  C0 22 EA 94 */	lfs f1, HSD_CObj_804DE474(r2)
 /* 803677AC 0036438C  C0 1C 00 40 */	lfs f0, 0x40(r28)
-/* 803677B0 00364390  C0 42 EA 90 */	lfs f2, lbl_804DE470(r2)
+/* 803677B0 00364390  C0 42 EA 90 */	lfs f2, HSD_CObj_804DE470(r2)
 /* 803677B4 00364394  EC 01 00 32 */	fmuls f0, f1, f0
 /* 803677B8 00364398  EC 22 00 32 */	fmuls f1, f2, f0
 /* 803677BC 0036439C  4B FB EA 01 */	bl tanf

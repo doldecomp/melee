@@ -79,7 +79,7 @@ void ftCliffCommon_80081370(HSD_GObj* gobj)
     } else {
         fp->sv.co.cliff.ledge_id = fp->x6F0_collData.x40;
     }
-    ftCliffCommon_80081544(gobj);
+    ftCo_CliffCatch_Phys(gobj);
     ft_800881D8(fp, fp->x10C_ftData->x4C_collisionData->x28, 0x7F, 0x40);
     ftCommon_8007E2F4(fp, 0x1FF);
     ftCommon_8007EBAC(fp, 0xC, 0);
@@ -94,16 +94,16 @@ void ftCliffCommon_80081370(HSD_GObj* gobj)
     ft_80088148(fp, 4, 0x7F, 0x40);
 }
 
-void ftCliffCommon_80081504(HSD_GObj* gobj)
+void ftCo_CliffCatch_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8009A804(gobj);
     }
 }
 
-void ftCliffCommon_80081540(HSD_GObj* arg0) {}
+void ftCo_CliffCatch_IASA(HSD_GObj* arg0) {}
 
-void ftCliffCommon_80081544(HSD_GObj* gobj)
+void ftCo_CliffCatch_Phys(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -132,7 +132,7 @@ void ftCliffCommon_80081544(HSD_GObj* gobj)
     ft_800CC730(gobj);
 }
 
-void ftCliffCommon_800815E4(HSD_GObj* gobj)
+void ftCo_CliffCatch_Coll(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -150,7 +150,7 @@ void ftCliffCommon_800815E4(HSD_GObj* gobj)
     }
 }
 
-void ftCliffCommon_80081644(HSD_GObj* gobj)
+void ftCo_Cliff_Cam(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftCamera_UpdateCameraBox(gobj);

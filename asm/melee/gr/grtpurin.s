@@ -12,7 +12,7 @@ grTPurin_80223164:
 /* 8022316C 0021FD4C  94 21 FF F8 */	stwu r1, -8(r1)
 /* 80223170 0021FD50  4B FA 18 89 */	bl Ground_801C49F8
 /* 80223174 0021FD54  3C 80 80 4A */	lis r4, stage_info@ha
-/* 80223178 0021FD58  90 6D B4 70 */	stw r3, lbl_804D6B10@sda21(r13)
+/* 80223178 0021FD58  90 6D B4 70 */	stw r3, grTPr_804D6B10@sda21(r13)
 /* 8022317C 0021FD5C  38 64 E6 C8 */	addi r3, r4, stage_info@l
 /* 80223180 0021FD60  38 A3 00 8C */	addi r5, r3, 0x8c
 /* 80223184 0021FD64  88 03 00 8C */	lbz r0, 0x8c(r3)
@@ -67,8 +67,8 @@ grTPurin_8022320C:
 /* 80223224 0021FE04  93 81 00 10 */	stw r28, 0x10(r1)
 /* 80223228 0021FE08  3B 83 00 00 */	addi r28, r3, 0
 /* 8022322C 0021FE0C  1C 1C 00 14 */	mulli r0, r28, 0x14
-/* 80223230 0021FE10  3C 60 80 3F */	lis r3, lbl_803E9338@ha
-/* 80223234 0021FE14  3B E3 93 38 */	addi r31, r3, lbl_803E9338@l
+/* 80223230 0021FE10  3C 60 80 3F */	lis r3, grTPr_803E9338@ha
+/* 80223234 0021FE14  3B E3 93 38 */	addi r31, r3, grTPr_803E9338@l
 /* 80223238 0021FE18  38 7C 00 00 */	addi r3, r28, 0
 /* 8022323C 0021FE1C  7F BF 02 14 */	add r29, r31, r0
 /* 80223240 0021FE20  4B F9 E2 91 */	bl Ground_801C14D0
@@ -101,7 +101,7 @@ grTPurin_8022320C:
 /* 802232A4 0021FE84  41 82 00 2C */	beq .L_802232D0
 /* 802232A8 0021FE88  38 7E 00 00 */	addi r3, r30, 0
 /* 802232AC 0021FE8C  38 A0 00 04 */	li r5, 4
-/* 802232B0 0021FE90  48 16 CA A5 */	bl func_8038FD54
+/* 802232B0 0021FE90  48 16 CA A5 */	bl HSD_GObjProc_8038FD54
 /* 802232B4 0021FE94  48 00 00 1C */	b .L_802232D0
 .L_802232B8:
 /* 802232B8 0021FE98  38 DC 00 00 */	addi r6, r28, 0
@@ -172,9 +172,9 @@ grTPurin_80223380:
 .global grTPurin_80223388
 grTPurin_80223388:
 /* 80223388 0021FF68  7C 08 02 A6 */	mflr r0
-/* 8022338C 0021FF6C  3C 80 80 3C */	lis r4, lbl_803B84B8@ha
+/* 8022338C 0021FF6C  3C 80 80 3C */	lis r4, grTPr_803B84B8@ha
 /* 80223390 0021FF70  90 01 00 04 */	stw r0, 4(r1)
-/* 80223394 0021FF74  38 A4 84 B8 */	addi r5, r4, lbl_803B84B8@l
+/* 80223394 0021FF74  38 A4 84 B8 */	addi r5, r4, grTPr_803B84B8@l
 /* 80223398 0021FF78  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 8022339C 0021FF7C  DB E1 00 38 */	stfd f31, 0x38(r1)
 /* 802233A0 0021FF80  93 E1 00 34 */	stw r31, 0x34(r1)
@@ -185,7 +185,7 @@ grTPurin_80223388:
 /* 802233B4 0021FF94  7C 7C 1B 78 */	mr r28, r3
 /* 802233B8 0021FF98  80 85 00 00 */	lwz r4, 0(r5)
 /* 802233BC 0021FF9C  80 05 00 04 */	lwz r0, 4(r5)
-/* 802233C0 0021FFA0  C3 E2 C2 E8 */	lfs f31, lbl_804DBCC8@sda21(r2)
+/* 802233C0 0021FFA0  C3 E2 C2 E8 */	lfs f31, grTPr_804DBCC8@sda21(r2)
 /* 802233C4 0021FFA4  90 81 00 0C */	stw r4, 0xc(r1)
 /* 802233C8 0021FFA8  90 01 00 10 */	stw r0, 0x10(r1)
 /* 802233CC 0021FFAC  80 65 00 08 */	lwz r3, 8(r5)
@@ -296,13 +296,13 @@ grTPurin_802234F8:
 /* 80223530 00220110  4B E3 17 3D */	bl mpLib_80054C6C
 /* 80223534 00220114  2C 1F 00 00 */	cmpwi r31, 0
 /* 80223538 00220118  40 82 00 10 */	bne .L_80223548
-/* 8022353C 0022011C  80 6D B4 70 */	lwz r3, lbl_804D6B10@sda21(r13)
+/* 8022353C 0022011C  80 6D B4 70 */	lwz r3, grTPr_804D6B10@sda21(r13)
 /* 80223540 00220120  80 63 00 00 */	lwz r3, 0(r3)
 /* 80223544 00220124  48 00 00 1C */	b .L_80223560
 .L_80223548:
 /* 80223548 00220128  2C 1F 00 01 */	cmpwi r31, 1
 /* 8022354C 0022012C  40 82 00 10 */	bne .L_8022355C
-/* 80223550 00220130  80 6D B4 70 */	lwz r3, lbl_804D6B10@sda21(r13)
+/* 80223550 00220130  80 6D B4 70 */	lwz r3, grTPr_804D6B10@sda21(r13)
 /* 80223554 00220134  80 63 00 00 */	lwz r3, 0(r3)
 /* 80223558 00220138  48 00 00 08 */	b .L_80223560
 .L_8022355C:
@@ -322,8 +322,8 @@ grTPurin_80223578:
 
 .section .rodata
     .balign 8
-.global lbl_803B84B8
-lbl_803B84B8:
+.global grTPr_803B84B8
+grTPr_803B84B8:
     .4byte 0x00370039
     .4byte 0x003B003D
     .4byte 0x003F0041
@@ -332,8 +332,8 @@ lbl_803B84B8:
 
 .section .data
     .balign 8
-.global lbl_803E9338
-lbl_803E9338:
+.global grTPr_803E9338
+grTPr_803E9338:
     .4byte grTPurin_802232F4
     .4byte grTPurin_80223320
     .4byte grTPurin_80223328
@@ -354,15 +354,15 @@ lbl_803E9338:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_803E9388
-lbl_803E9388:
+.global grTPr_803E9388
+grTPr_803E9388:
     .asciz "/GrTPr.dat"
     .balign 4
-.global lbl_803E9394
-lbl_803E9394:
+.global grTPr_803E9394
+grTPr_803E9394:
     .4byte 0x0000003A
-    .4byte lbl_803E9338
-    .4byte lbl_803E9388
+    .4byte grTPr_803E9338
+    .4byte grTPr_803E9388
     .4byte grTPurin_80223164
     .4byte grTPurin_80223160
     .4byte grTPurin_802231DC
@@ -380,14 +380,14 @@ lbl_803E9394:
 
 .section .sbss
     .balign 8
-.global lbl_804D6B10
-lbl_804D6B10:
+.global grTPr_804D6B10
+grTPr_804D6B10:
     .skip 0x4
 
 
 .section .sdata2
     .balign 8
-.global lbl_804DBCC8
-lbl_804DBCC8:
+.global grTPr_804DBCC8
+grTPr_804DBCC8:
     .4byte 0x43020000
     .4byte 0x00000000

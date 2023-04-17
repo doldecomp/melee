@@ -8,7 +8,7 @@
 
 // 8015521C 151DFC
 // https://decomp.me/scratch/veN50
-void ftMasterHand_8015521C(HSD_GObj* gobj)
+void ftMh_MS_382_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -18,12 +18,12 @@ void ftMasterHand_8015521C(HSD_GObj* gobj)
         fp = gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(gobj);
         fp->x1A5C = 0;
-        ftMasterHand_80151018(gobj);
+        ftMh_MS_389_80151018(gobj);
     }
 }
 
 // 80155290 151E70
-void ftMasterHand_80155290(HSD_GObj* arg0)
+void ftMh_MS_382_IASA(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -32,20 +32,20 @@ void ftMasterHand_80155290(HSD_GObj* arg0)
 }
 
 // 801552D4 151EB4
-void ftMasterHand_801552D4(HSD_GObj* gobj)
+void ftMh_MS_382_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
 // 801552F4 151ED4
-void ftMasterHand_801552F4(HSD_GObj* gobj)
+void ftMh_MS_382_Coll(HSD_GObj* gobj)
 {
     return;
 }
 
 // 801552F8 151ED8
 // https://decomp.me/scratch/x0WJ4
-void ftMasterHand_801552F8(HSD_GObj* gobj)
+void ftMh_MS_382_801552F8(HSD_GObj* gobj)
 {
     Fighter* fp;
     HSD_GObj* gobj_2;
@@ -55,7 +55,7 @@ void ftMasterHand_801552F8(HSD_GObj* gobj)
     gobj_2 = ftBossLib_8015C3E8(0x1CU);
 
     if (ftBossLib_8015C31C() == 0) {
-        ftCrazyHand_8015A3F4(gobj_2);
+        ftCh_Init_8015A3F4(gobj_2);
     }
 
     fp->x1A5C = gobj_2;

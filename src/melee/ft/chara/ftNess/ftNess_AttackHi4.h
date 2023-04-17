@@ -5,7 +5,7 @@
 #include "ft/forward.h"
 #include <baselib/forward.h>
 
-void ftNess_YoyoItemDespawn(HSD_GObj*);
+void ftNs_AttackHi4_YoyoItemDespawn(HSD_GObj*);
 
 Fighter* GetFighterData(HSD_GObj* gobj);
 

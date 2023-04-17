@@ -65,8 +65,8 @@ grTIceClimber_80221408:
 /* 80221420 0021E000  93 81 00 10 */	stw r28, 0x10(r1)
 /* 80221424 0021E004  3B 83 00 00 */	addi r28, r3, 0
 /* 80221428 0021E008  1C 1C 00 14 */	mulli r0, r28, 0x14
-/* 8022142C 0021E00C  3C 60 80 3F */	lis r3, lbl_803E8BB0@ha
-/* 80221430 0021E010  3B E3 8B B0 */	addi r31, r3, lbl_803E8BB0@l
+/* 8022142C 0021E00C  3C 60 80 3F */	lis r3, grTKb_803E8BB0@ha
+/* 80221430 0021E010  3B E3 8B B0 */	addi r31, r3, grTKb_803E8BB0@l
 /* 80221434 0021E014  38 7C 00 00 */	addi r3, r28, 0
 /* 80221438 0021E018  7F BF 02 14 */	add r29, r31, r0
 /* 8022143C 0021E01C  4B FA 00 95 */	bl Ground_801C14D0
@@ -99,7 +99,7 @@ grTIceClimber_80221408:
 /* 802214A0 0021E080  41 82 00 2C */	beq .L_802214CC
 /* 802214A4 0021E084  38 7E 00 00 */	addi r3, r30, 0
 /* 802214A8 0021E088  38 A0 00 04 */	li r5, 4
-/* 802214AC 0021E08C  48 16 E8 A9 */	bl func_8038FD54
+/* 802214AC 0021E08C  48 16 E8 A9 */	bl HSD_GObjProc_8038FD54
 /* 802214B0 0021E090  48 00 00 1C */	b .L_802214CC
 .L_802214B4:
 /* 802214B4 0021E094  38 DC 00 00 */	addi r6, r28, 0
@@ -236,8 +236,8 @@ grTIceClimber_80221640:
 
 .section .data
     .balign 8
-.global lbl_803E8BB0
-lbl_803E8BB0:
+.global grTKb_803E8BB0
+grTKb_803E8BB0:
     .4byte grTIceClimber_802214F0
     .4byte grTIceClimber_8022151C
     .4byte grTIceClimber_80221524
@@ -258,16 +258,16 @@ lbl_803E8BB0:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_803E8C00
-lbl_803E8C00:
+.global grTKb_803E8C00
+grTKb_803E8C00:
     .4byte 0x2F477254
     .4byte 0x4B622E64
     .4byte 0x61740000
-.global lbl_803E8C0C
-lbl_803E8C0C:
+.global grTKb_803E8C0C
+grTKb_803E8C0C:
     .4byte 0x00000030
-    .4byte lbl_803E8BB0
-    .4byte lbl_803E8C00
+    .4byte grTKb_803E8BB0
+    .4byte grTKb_803E8C00
     .4byte grTIceClimber_80221368
     .4byte grTIceClimber_80221364
     .4byte grTIceClimber_802213D8

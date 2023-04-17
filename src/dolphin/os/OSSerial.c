@@ -9,11 +9,11 @@ extern struct {
     enum_t status;
     u32 xy;
     s32 _[0x20 - 0x8];
-} lbl_80402358;
+} OSSerial_80402358;
 
 bool SIBusy(void)
 {
-    if (lbl_80402358.status != -1) {
+    if (OSSerial_80402358.status != -1) {
         return true;
     }
 
@@ -29,7 +29,7 @@ bool SIIsChanBusy(enum_t status)
 {
     bool result = true;
 
-    if (Packet[status].x0 == -1 && lbl_80402358.status != status) {
+    if (Packet[status].x0 == -1 && OSSerial_80402358.status != status) {
         result = false;
     }
 
@@ -38,8 +38,8 @@ bool SIIsChanBusy(enum_t status)
 
 #ifdef MWERKS_GEKKO
 
-extern unk_t lbl_804A7EF8;
-extern unk_t lbl_804A7ED8;
+extern unk_t OSSerial_804A7EF8;
+extern unk_t OSSerial_804A7ED8;
 
 #pragma push
 static asm void CompleteTransfer(void)
@@ -57,18 +57,18 @@ static asm void CompleteTransfer(void)
 /* 8034953C 0034611C  93 81 00 10 */	stw r28, 0x10(r1)
 /* 80349540 00346120  80 03 64 34 */	lwz r0, 0x6434(r3)
 /* 80349544 00346124  83 83 64 38 */	lwz r28, 0x6438(r3)
-/* 80349548 00346128  3C 60 80 40 */	lis r3, lbl_80402358@ha
+/* 80349548 00346128  3C 60 80 40 */	lis r3, OSSerial_80402358@ha
 /* 8034954C 0034612C  64 00 80 00 */	oris r0, r0, 0x8000
 /* 80349550 00346130  54 00 00 3C */	rlwinm r0, r0, 0, 0, 0x1e
 /* 80349554 00346134  90 1E 00 34 */	stw r0, 0x34(r30)
-/* 80349558 00346138  3B E3 23 58 */	addi r31, r3, lbl_80402358@l
+/* 80349558 00346138  3B E3 23 58 */	addi r31, r3, OSSerial_80402358@l
 /* 8034955C 0034613C  80 1F 00 00 */	lwz r0, 0(r31)
 /* 80349560 00346140  2C 00 FF FF */	cmpwi r0, -1
 /* 80349564 00346144  41 82 02 74 */	beq lbl_803497D8
 /* 80349568 00346148  48 00 2E A9 */	bl __OSGetSystemTime
 /* 8034956C 0034614C  80 DF 00 00 */	lwz r6, 0(r31)
-/* 80349570 00346150  3C A0 80 4A */	lis r5, lbl_804A7EF8@ha
-/* 80349574 00346154  38 05 7E F8 */	addi r0, r5, lbl_804A7EF8@l
+/* 80349570 00346150  3C A0 80 4A */	lis r5, OSSerial_804A7EF8@ha
+/* 80349574 00346154  38 05 7E F8 */	addi r0, r5, OSSerial_804A7EF8@l
 /* 80349578 00346158  54 C5 18 38 */	slwi r5, r6, 3
 /* 8034957C 0034615C  7C A0 2A 14 */	add r5, r0, r5
 /* 80349580 00346160  90 85 00 04 */	stw r4, 4(r5)
@@ -222,8 +222,8 @@ lbl_8034979C:
 lbl_803497AC:
 /* 803497AC 0034638C  48 00 2C 65 */	bl __OSGetSystemTime
 /* 803497B0 00346390  80 DF 00 00 */	lwz r6, 0(r31)
-/* 803497B4 00346394  3C A0 80 4A */	lis r5, lbl_804A7ED8@ha
-/* 803497B8 00346398  38 05 7E D8 */	addi r0, r5, lbl_804A7ED8@l
+/* 803497B4 00346394  3C A0 80 4A */	lis r5, OSSerial_804A7ED8@ha
+/* 803497B8 00346398  38 05 7E D8 */	addi r0, r5, OSSerial_804A7ED8@l
 /* 803497BC 0034639C  54 C5 18 38 */	slwi r5, r6, 3
 /* 803497C0 003463A0  7C A0 2A 14 */	add r5, r0, r5
 /* 803497C4 003463A4  90 85 00 04 */	stw r4, 4(r5)
@@ -264,7 +264,7 @@ static void CompleteTransfer(void)
 
 #ifdef MWERKS_GEKKO
 
-extern unk_t lbl_804D73C8;
+extern unk_t OSSerial_804D73C8;
 extern unk_t VIGetCurrentLine();
 extern unk_t OSCancelAlarm();
 
@@ -276,13 +276,13 @@ asm void SIInterruptHandler(void)
 /* 80349818 003463F8  3C A0 CC 00 */	lis r5, 0xCC006434@ha
 /* 8034981C 003463FC  90 01 00 04 */	stw r0, 4(r1)
 /* 80349820 00346400  3C E0 80 4A */	lis r7, Packet@ha
-/* 80349824 00346404  3C C0 80 40 */	lis r6, lbl_80402358@ha
+/* 80349824 00346404  3C C0 80 40 */	lis r6, OSSerial_80402358@ha
 /* 80349828 00346408  94 21 FF B8 */	stwu r1, -0x48(r1)
 /* 8034982C 0034640C  BE A1 00 1C */	stmw r21, 0x1c(r1)
 /* 80349830 00346410  3B C3 00 00 */	addi r30, r3, 0
 /* 80349834 00346414  3B E4 00 00 */	addi r31, r4, 0
 /* 80349838 00346418  3B 87 7D B8 */	addi r28, r7, Packet@l
-/* 8034983C 0034641C  3B A6 23 58 */	addi r29, r6, lbl_80402358@l
+/* 8034983C 0034641C  3B A6 23 58 */	addi r29, r6, OSSerial_80402358@l
 /* 80349840 00346420  83 05 64 34 */	lwz r24, 0xCC006434@l(r5)
 /* 80349844 00346424  57 05 00 02 */	rlwinm r5, r24, 0, 0, 1
 /* 80349848 00346428  3C 05 40 00 */	addis r0, r5, 0x4000
@@ -384,7 +384,7 @@ lbl_80349988:
 /* 803499B4 00346594  39 04 A5 E8 */	addi r8, r4, GetTypeCallback@l
 /* 803499B8 00346598  54 0A E8 FE */	srwi r10, r0, 3
 /* 803499BC 0034659C  38 77 00 00 */	addi r3, r23, 0
-/* 803499C0 003465A0  38 8D BD 28 */	addi r4, r13, lbl_804D73C8
+/* 803499C0 003465A0  38 8D BD 28 */	addi r4, r13, OSSerial_804D73C8
 /* 803499C4 003465A4  38 A0 00 01 */	li r5, 1
 /* 803499C8 003465A8  38 E0 00 03 */	li r7, 3
 /* 803499CC 003465AC  39 20 00 00 */	li r9, 0
@@ -570,7 +570,7 @@ void SIEnablePollingInterrupt(void)
 
 #ifdef MWERKS_GEKKO
 
-extern unk_t lbl_804A7F58;
+extern unk_t OSSerial_804A7F58;
 
 #pragma push
 asm void SIRegisterPollingHandler(void)
@@ -583,9 +583,9 @@ asm void SIRegisterPollingHandler(void)
 /* 80349C00 003467E0  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 80349C04 003467E4  7C 7E 1B 78 */	mr r30, r3
 /* 80349C08 003467E8  4B FF D7 5D */	bl OSDisableInterrupts
-/* 80349C0C 003467EC  3C 80 80 4A */	lis r4, lbl_804A7F58@ha
+/* 80349C0C 003467EC  3C 80 80 4A */	lis r4, OSSerial_804A7F58@ha
 /* 80349C10 003467F0  38 00 00 04 */	li r0, 4
-/* 80349C14 003467F4  38 84 7F 58 */	addi r4, r4, lbl_804A7F58@l
+/* 80349C14 003467F4  38 84 7F 58 */	addi r4, r4, OSSerial_804A7F58@l
 /* 80349C18 003467F8  7C 09 03 A6 */	mtctr r0
 /* 80349C1C 003467FC  3B E3 00 00 */	addi r31, r3, 0
 /* 80349C20 00346800  38 64 00 00 */	addi r3, r4, 0
@@ -607,9 +607,9 @@ lbl_80349C54:
 /* 80349C54 00346834  80 04 00 00 */	lwz r0, 0(r4)
 /* 80349C58 00346838  28 00 00 00 */	cmplwi r0, 0
 /* 80349C5C 0034683C  40 82 00 30 */	bne lbl_80349C8C
-/* 80349C60 00346840  3C 60 80 4A */	lis r3, lbl_804A7F58@ha
+/* 80349C60 00346840  3C 60 80 4A */	lis r3, OSSerial_804A7F58@ha
 /* 80349C64 00346844  54 A4 10 3A */	slwi r4, r5, 2
-/* 80349C68 00346848  38 03 7F 58 */	addi r0, r3, lbl_804A7F58@l
+/* 80349C68 00346848  38 03 7F 58 */	addi r0, r3, OSSerial_804A7F58@l
 /* 80349C6C 0034684C  7C 60 22 14 */	add r3, r0, r4
 /* 80349C70 00346850  93 C3 00 00 */	stw r30, 0(r3)
 /* 80349C74 00346854  38 60 00 01 */	li r3, 1
@@ -657,9 +657,9 @@ asm void SIUnregisterPollingHandler(void)
 /* 80349CCC 003468AC  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 80349CD0 003468B0  7C 7E 1B 78 */	mr r30, r3
 /* 80349CD4 003468B4  4B FF D6 91 */	bl OSDisableInterrupts
-/* 80349CD8 003468B8  3C 80 80 4A */	lis r4, lbl_804A7F58@ha
+/* 80349CD8 003468B8  3C 80 80 4A */	lis r4, OSSerial_804A7F58@ha
 /* 80349CDC 003468BC  38 00 00 04 */	li r0, 4
-/* 80349CE0 003468C0  38 A4 7F 58 */	addi r5, r4, lbl_804A7F58@l
+/* 80349CE0 003468C0  38 A4 7F 58 */	addi r5, r4, OSSerial_804A7F58@l
 /* 80349CE4 003468C4  7C 09 03 A6 */	mtctr r0
 /* 80349CE8 003468C8  3B E3 00 00 */	addi r31, r3, 0
 /* 80349CEC 003468CC  38 65 00 00 */	addi r3, r5, 0
@@ -668,9 +668,9 @@ lbl_80349CF4:
 /* 80349CF4 003468D4  80 03 00 00 */	lwz r0, 0(r3)
 /* 80349CF8 003468D8  7C 00 F0 40 */	cmplw r0, r30
 /* 80349CFC 003468DC  40 82 00 84 */	bne lbl_80349D80
-/* 80349D00 003468E0  3C 60 80 4A */	lis r3, lbl_804A7F58@ha
+/* 80349D00 003468E0  3C 60 80 4A */	lis r3, OSSerial_804A7F58@ha
 /* 80349D04 003468E4  54 84 10 3A */	slwi r4, r4, 2
-/* 80349D08 003468E8  38 03 7F 58 */	addi r0, r3, lbl_804A7F58@l
+/* 80349D08 003468E8  38 03 7F 58 */	addi r0, r3, OSSerial_804A7F58@l
 /* 80349D0C 003468EC  7C 60 22 14 */	add r3, r0, r4
 /* 80349D10 003468F0  38 00 00 00 */	li r0, 0
 /* 80349D14 003468F4  90 03 00 00 */	stw r0, 0(r3)
@@ -791,7 +791,7 @@ asm void __SITransfer(void)
 { // clang-format off
     nofralloc
 /* 80349E44 00346A24  7C 08 02 A6 */	mflr r0
-/* 80349E48 00346A28  3D 20 80 40 */	lis r9, lbl_80402358@ha
+/* 80349E48 00346A28  3D 20 80 40 */	lis r9, OSSerial_80402358@ha
 /* 80349E4C 00346A2C  90 01 00 04 */	stw r0, 4(r1)
 /* 80349E50 00346A30  94 21 FF B8 */	stwu r1, -0x48(r1)
 /* 80349E54 00346A34  BF 21 00 2C */	stmw r25, 0x2c(r1)
@@ -801,7 +801,7 @@ asm void __SITransfer(void)
 /* 80349E64 00346A44  3B A6 00 00 */	addi r29, r6, 0
 /* 80349E68 00346A48  3B C7 00 00 */	addi r30, r7, 0
 /* 80349E6C 00346A4C  3B E8 00 00 */	addi r31, r8, 0
-/* 80349E70 00346A50  3B 29 23 58 */	addi r25, r9, lbl_80402358@l
+/* 80349E70 00346A50  3B 29 23 58 */	addi r25, r9, OSSerial_80402358@l
 /* 80349E74 00346A54  4B FF D4 F1 */	bl OSDisableInterrupts
 /* 80349E78 00346A58  80 19 00 00 */	lwz r0, 0(r25)
 /* 80349E7C 00346A5C  2C 00 FF FF */	cmpwi r0, -1
@@ -948,7 +948,7 @@ void __SITransfer(void)
 
 #ifdef MWERKS_GEKKO
 
-extern unk_t lbl_8040236C;
+extern unk_t OSSerial_8040236C;
 
 #pragma push
 asm void SIGetStatus(void)
@@ -968,9 +968,9 @@ asm void SIGetStatus(void)
 /* 8034A07C 00346C5C  7F FF 04 30 */	srw r31, r31, r0
 /* 8034A080 00346C60  57 E0 07 39 */	rlwinm. r0, r31, 0, 0x1c, 0x1c
 /* 8034A084 00346C64  41 82 00 28 */	beq lbl_8034A0AC
-/* 8034A088 00346C68  3C 80 80 40 */	lis r4, lbl_8040236C@ha
+/* 8034A088 00346C68  3C 80 80 40 */	lis r4, OSSerial_8040236C@ha
 /* 8034A08C 00346C6C  57 C5 10 3A */	slwi r5, r30, 2
-/* 8034A090 00346C70  38 04 23 6C */	addi r0, r4, lbl_8040236C@l
+/* 8034A090 00346C70  38 04 23 6C */	addi r0, r4, OSSerial_8040236C@l
 /* 8034A094 00346C74  7C 80 2A 14 */	add r4, r0, r5
 /* 8034A098 00346C78  80 04 00 00 */	lwz r0, 0(r4)
 /* 8034A09C 00346C7C  54 00 06 31 */	rlwinm. r0, r0, 0, 0x18, 0x18
@@ -1018,9 +1018,9 @@ s32 SISetXY(u32 arg0, u32 arg1)
     u32 temp_r4 = (arg0 << 0x10);
     temp_r4 |= (arg1 << 8);
     intr = OSDisableInterrupts();
-    lbl_80402358.xy &= 0xFC0000FF;
-    lbl_80402358.xy |= temp_r4;
-    temp_r4 = lbl_80402358.xy;
+    OSSerial_80402358.xy &= 0xFC0000FF;
+    OSSerial_80402358.xy |= temp_r4;
+    temp_r4 = OSSerial_80402358.xy;
     OSRestoreInterrupts(intr);
     return temp_r4;
 }
@@ -1037,14 +1037,14 @@ asm void SIEnablePolling(u32 chan_mask)
 /* 8034A15C 00346D3C  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8034A160 00346D40  7C 7F 1B 79 */	or. r31, r3, r3
 /* 8034A164 00346D44  40 82 00 14 */	bne lbl_8034A178
-/* 8034A168 00346D48  3C 60 80 40 */	lis r3, lbl_80402358@ha
-/* 8034A16C 00346D4C  38 63 23 58 */	addi r3, r3, lbl_80402358@l
+/* 8034A168 00346D48  3C 60 80 40 */	lis r3, OSSerial_80402358@ha
+/* 8034A16C 00346D4C  38 63 23 58 */	addi r3, r3, OSSerial_80402358@l
 /* 8034A170 00346D50  80 63 00 04 */	lwz r3, 4(r3)
 /* 8034A174 00346D54  48 00 00 64 */	b lbl_8034A1D8
 lbl_8034A178:
 /* 8034A178 00346D58  4B FF D1 ED */	bl OSDisableInterrupts
-/* 8034A17C 00346D5C  3C 80 80 40 */	lis r4, lbl_80402358@ha
-/* 8034A180 00346D60  38 84 23 58 */	addi r4, r4, lbl_80402358@l
+/* 8034A17C 00346D5C  3C 80 80 40 */	lis r4, OSSerial_80402358@ha
+/* 8034A180 00346D60  38 84 23 58 */	addi r4, r4, OSSerial_80402358@l
 /* 8034A184 00346D64  57 FF 46 3E */	srwi r31, r31, 0x18
 /* 8034A188 00346D68  80 04 00 04 */	lwz r0, 4(r4)
 /* 8034A18C 00346D6C  38 A4 00 04 */	addi r5, r4, 4
@@ -1096,14 +1096,14 @@ asm void SIDisablePolling(u32 chan_mask)
 /* 8034A1F8 00346DD8  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8034A1FC 00346DDC  7C 7F 1B 79 */	or. r31, r3, r3
 /* 8034A200 00346DE0  40 82 00 14 */	bne lbl_8034A214
-/* 8034A204 00346DE4  3C 60 80 40 */	lis r3, lbl_80402358@ha
-/* 8034A208 00346DE8  38 63 23 58 */	addi r3, r3, lbl_80402358@l
+/* 8034A204 00346DE4  3C 60 80 40 */	lis r3, OSSerial_80402358@ha
+/* 8034A208 00346DE8  38 63 23 58 */	addi r3, r3, OSSerial_80402358@l
 /* 8034A20C 00346DEC  80 63 00 04 */	lwz r3, 4(r3)
 /* 8034A210 00346DF0  48 00 00 34 */	b lbl_8034A244
 lbl_8034A214:
 /* 8034A214 00346DF4  4B FF D1 51 */	bl OSDisableInterrupts
-/* 8034A218 00346DF8  3C 80 80 40 */	lis r4, lbl_80402358@ha
-/* 8034A21C 00346DFC  38 84 23 58 */	addi r4, r4, lbl_80402358@l
+/* 8034A218 00346DF8  3C 80 80 40 */	lis r4, OSSerial_80402358@ha
+/* 8034A21C 00346DFC  38 84 23 58 */	addi r4, r4, OSSerial_80402358@l
 /* 8034A220 00346E00  80 04 00 04 */	lwz r0, 4(r4)
 /* 8034A224 00346E04  57 FF 46 36 */	rlwinm r31, r31, 8, 0x18, 0x1b
 /* 8034A228 00346E08  38 A4 00 04 */	addi r5, r4, 4
@@ -1154,9 +1154,9 @@ asm void SIGetResponseRaw(void)
 /* 8034A290 00346E70  7F BD 04 30 */	srw r29, r29, r0
 /* 8034A294 00346E74  57 A0 07 39 */	rlwinm. r0, r29, 0, 0x1c, 0x1c
 /* 8034A298 00346E78  41 82 00 28 */	beq lbl_8034A2C0
-/* 8034A29C 00346E7C  3C 80 80 40 */	lis r4, lbl_8040236C@ha
+/* 8034A29C 00346E7C  3C 80 80 40 */	lis r4, OSSerial_8040236C@ha
 /* 8034A2A0 00346E80  57 C5 10 3A */	slwi r5, r30, 2
-/* 8034A2A4 00346E84  38 04 23 6C */	addi r0, r4, lbl_8040236C@l
+/* 8034A2A4 00346E84  38 04 23 6C */	addi r0, r4, OSSerial_8040236C@l
 /* 8034A2A8 00346E88  7C 80 2A 14 */	add r4, r0, r5
 /* 8034A2AC 00346E8C  80 04 00 00 */	lwz r0, 0(r4)
 /* 8034A2B0 00346E90  54 00 06 31 */	rlwinm. r0, r0, 0, 0x18, 0x18
@@ -1359,8 +1359,8 @@ asm void SITransfer(void)
 /* 8034A4C4 003470A4  3A A3 00 00 */	addi r21, r3, 0
 /* 8034A4C8 003470A8  2C 00 FF FF */	cmpwi r0, -1
 /* 8034A4CC 003470AC  40 82 00 14 */	bne lbl_8034A4E0
-/* 8034A4D0 003470B0  3C 60 80 40 */	lis r3, lbl_80402358@ha
-/* 8034A4D4 003470B4  80 03 23 58 */	lwz r0, lbl_80402358@l(r3)
+/* 8034A4D0 003470B0  3C 60 80 40 */	lis r3, OSSerial_80402358@ha
+/* 8034A4D4 003470B4  80 03 23 58 */	lwz r0, OSSerial_80402358@l(r3)
 /* 8034A4D8 003470B8  7C 00 C0 00 */	cmpw r0, r24
 /* 8034A4DC 003470BC  40 82 00 14 */	bne lbl_8034A4F0
 lbl_8034A4E0:
@@ -1459,8 +1459,8 @@ asm void GetTypeCallback(void)
 /* 8034A5F0 003471D0  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8034A5F4 003471D4  BF 41 00 18 */	stmw r26, 0x18(r1)
 /* 8034A5F8 003471D8  3B 63 00 00 */	addi r27, r3, 0
-/* 8034A5FC 003471DC  3C 60 80 40 */	lis r3, lbl_8040236C@ha
-/* 8034A600 003471E0  38 03 23 6C */	addi r0, r3, lbl_8040236C@l
+/* 8034A5FC 003471DC  3C 60 80 40 */	lis r3, OSSerial_8040236C@ha
+/* 8034A600 003471E0  38 03 23 6C */	addi r0, r3, OSSerial_8040236C@l
 /* 8034A604 003471E4  57 7D 10 3A */	slwi r29, r27, 2
 /* 8034A608 003471E8  7F C0 EA 14 */	add r30, r0, r29
 /* 8034A60C 003471EC  3C 60 80 4A */	lis r3, Packet@ha
@@ -1646,7 +1646,7 @@ void GetTypeCallback(void)
 
 #ifdef MWERKS_GEKKO
 
-extern unk_t lbl_804D73CC;
+extern unk_t OSSerial_804D73CC;
 
 #pragma push
 asm u32 SIGetType(s32)
@@ -1658,20 +1658,20 @@ asm u32 SIGetType(s32)
 /* 8034A88C 0034746C  BF 61 00 14 */	stmw r27, 0x14(r1)
 /* 8034A890 00347470  7C 7B 1B 78 */	mr r27, r3
 /* 8034A894 00347474  4B FF CA D1 */	bl OSDisableInterrupts
-/* 8034A898 00347478  3C 80 80 40 */	lis r4, lbl_8040236C@ha
+/* 8034A898 00347478  3C 80 80 40 */	lis r4, OSSerial_8040236C@ha
 /* 8034A89C 0034747C  57 65 10 3A */	slwi r5, r27, 2
-/* 8034A8A0 00347480  38 04 23 6C */	addi r0, r4, lbl_8040236C@l
+/* 8034A8A0 00347480  38 04 23 6C */	addi r0, r4, OSSerial_8040236C@l
 /* 8034A8A4 00347484  7F C0 2A 14 */	add r30, r0, r5
 /* 8034A8A8 00347488  83 9E 00 00 */	lwz r28, 0(r30)
 /* 8034A8AC 0034748C  7C 7D 1B 78 */	mr r29, r3
 /* 8034A8B0 00347490  48 00 1B 61 */	bl __OSGetSystemTime
-/* 8034A8B4 00347494  3C A0 80 4A */	lis r5, lbl_804A7ED8@ha
+/* 8034A8B4 00347494  3C A0 80 4A */	lis r5, OSSerial_804A7ED8@ha
 /* 8034A8B8 00347498  57 66 18 38 */	slwi r6, r27, 3
-/* 8034A8BC 0034749C  38 05 7E D8 */	addi r0, r5, lbl_804A7ED8@l
+/* 8034A8BC 0034749C  38 05 7E D8 */	addi r0, r5, OSSerial_804A7ED8@l
 /* 8034A8C0 003474A0  7F E0 32 14 */	add r31, r0, r6
 /* 8034A8C4 003474A4  80 DF 00 04 */	lwz r6, 4(r31)
-/* 8034A8C8 003474A8  3C A0 80 40 */	lis r5, lbl_80402358@ha
-/* 8034A8CC 003474AC  38 A5 23 58 */	addi r5, r5, lbl_80402358@l
+/* 8034A8C8 003474A8  3C A0 80 40 */	lis r5, OSSerial_80402358@ha
+/* 8034A8CC 003474AC  38 A5 23 58 */	addi r5, r5, OSSerial_80402358@l
 /* 8034A8D0 003474B0  80 1F 00 00 */	lwz r0, 0(r31)
 /* 8034A8D4 003474B4  7C 86 20 10 */	subfc r4, r6, r4
 /* 8034A8D8 003474B8  7C 00 19 10 */	subfe r0, r0, r3
@@ -1757,7 +1757,7 @@ lbl_8034A9D0:
 /* 8034AA04 003475E4  1C 00 00 41 */	mulli r0, r0, 0x41
 /* 8034AA08 003475E8  54 0A E8 FE */	srwi r10, r0, 3
 /* 8034AA0C 003475EC  38 DE 00 00 */	addi r6, r30, 0
-/* 8034AA10 003475F0  38 8D BD 2C */	addi r4, r13, lbl_804D73CC
+/* 8034AA10 003475F0  38 8D BD 2C */	addi r4, r13, OSSerial_804D73CC
 /* 8034AA14 003475F4  38 A0 00 01 */	li r5, 1
 /* 8034AA18 003475F8  38 E0 00 03 */	li r7, 3
 /* 8034AA1C 003475FC  39 20 00 00 */	li r9, 0
@@ -1785,7 +1785,7 @@ u32 SIGetType(s32 arg0)
 
 #ifdef MWERKS_GEKKO
 
-extern unk_t lbl_804A7F18;
+extern unk_t OSSerial_804A7F18;
 
 #pragma push
 asm void SIGetTypeAsync(s32, SICallback)
@@ -1804,17 +1804,17 @@ asm void SIGetTypeAsync(s32, SICallback)
 /* 8034AA6C 0034764C  3B C3 00 00 */	addi r30, r3, 0
 /* 8034AA70 00347650  38 7C 00 00 */	addi r3, r28, 0
 /* 8034AA74 00347654  4B FF FE 0D */	bl SIGetType
-/* 8034AA78 00347658  3C 80 80 40 */	lis r4, lbl_8040236C@ha
+/* 8034AA78 00347658  3C 80 80 40 */	lis r4, OSSerial_8040236C@ha
 /* 8034AA7C 0034765C  57 85 10 3A */	slwi r5, r28, 2
-/* 8034AA80 00347660  38 04 23 6C */	addi r0, r4, lbl_8040236C@l
+/* 8034AA80 00347660  38 04 23 6C */	addi r0, r4, OSSerial_8040236C@l
 /* 8034AA84 00347664  7C 80 2A 14 */	add r4, r0, r5
 /* 8034AA88 00347668  80 04 00 00 */	lwz r0, 0(r4)
 /* 8034AA8C 0034766C  3B A3 00 00 */	addi r29, r3, 0
 /* 8034AA90 00347670  54 00 06 31 */	rlwinm. r0, r0, 0, 0x18, 0x18
 /* 8034AA94 00347674  41 82 00 AC */	beq lbl_8034AB40
-/* 8034AA98 00347678  3C 60 80 4A */	lis r3, lbl_804A7F18@ha
+/* 8034AA98 00347678  3C 60 80 4A */	lis r3, OSSerial_804A7F18@ha
 /* 8034AA9C 0034767C  57 84 20 36 */	slwi r4, r28, 4
-/* 8034AAA0 00347680  38 03 7F 18 */	addi r0, r3, lbl_804A7F18@l
+/* 8034AAA0 00347680  38 03 7F 18 */	addi r0, r3, OSSerial_804A7F18@l
 /* 8034AAA4 00347684  7C 80 22 14 */	add r4, r0, r4
 /* 8034AAA8 00347688  80 04 00 00 */	lwz r0, 0(r4)
 /* 8034AAAC 0034768C  38 A0 00 00 */	li r5, 0

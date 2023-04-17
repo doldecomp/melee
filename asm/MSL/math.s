@@ -15,10 +15,10 @@ logf:
 /* 803265C8 003231A8  2C 03 00 00 */	cmpwi r3, 0
 /* 803265CC 003231AC  41 82 01 38 */	beq .L_80326704
 .L_803265D0:
-/* 803265D0 003231B0  80 62 E7 D0 */	lwz r3, lbl_804DE1B0@sda21(r2)
+/* 803265D0 003231B0  80 62 E7 D0 */	lwz r3, MSL_Math_804DE1B0@sda21(r2)
 /* 803265D4 003231B4  80 C1 00 08 */	lwz r6, 8(r1)
 /* 803265D8 003231B8  90 61 00 10 */	stw r3, 0x10(r1)
-/* 803265DC 003231BC  80 82 E7 D4 */	lwz r4, lbl_804DE1B4@sda21(r2)
+/* 803265DC 003231BC  80 82 E7 D4 */	lwz r4, MSL_Math_804DE1B4@sda21(r2)
 /* 803265E0 003231C0  54 C0 04 3F */	clrlwi. r0, r6, 0x10
 /* 803265E4 003231C4  54 C3 4D FE */	srwi r3, r6, 0x17
 /* 803265E8 003231C8  90 81 00 14 */	stw r4, 0x14(r1)
@@ -55,11 +55,11 @@ logf:
 /* 80326660 00323240  C0 01 00 10 */	lfs f0, 0x10(r1)
 /* 80326664 00323244  90 01 00 20 */	stw r0, 0x20(r1)
 /* 80326668 00323248  38 03 8F 50 */	addi r0, r3, __ln_F@l
-/* 8032666C 0032324C  C8 82 E7 E8 */	lfd f4, lbl_804DE1C8@sda21(r2)
+/* 8032666C 0032324C  C8 82 E7 E8 */	lfd f4, MSL_Math_804DE1C8@sda21(r2)
 /* 80326670 00323250  C8 61 00 20 */	lfd f3, 0x20(r1)
 /* 80326674 00323254  7C 60 22 14 */	add r3, r0, r4
 /* 80326678 00323258  EC 46 01 B2 */	fmuls f2, f6, f6
-/* 8032667C 0032325C  C0 A2 E7 E0 */	lfs f5, lbl_804DE1C0@sda21(r2)
+/* 8032667C 0032325C  C0 A2 E7 E0 */	lfs f5, MSL_Math_804DE1C0@sda21(r2)
 /* 80326680 00323260  EC 06 00 7A */	fmadds f0, f6, f1, f0
 /* 80326684 00323264  EC 63 20 28 */	fsubs f3, f3, f4
 /* 80326688 00323268  C0 23 00 00 */	lfs f1, 0(r3)
@@ -70,11 +70,11 @@ logf:
 /* 8032669C 0032327C  48 00 00 70 */	b .L_8032670C
 .L_803266A0:
 /* 803266A0 00323280  6C E0 80 00 */	xoris r0, r7, 0x8000
-/* 803266A4 00323284  C8 22 E7 E8 */	lfd f1, lbl_804DE1C8@sda21(r2)
+/* 803266A4 00323284  C8 22 E7 E8 */	lfd f1, MSL_Math_804DE1C8@sda21(r2)
 /* 803266A8 00323288  90 01 00 24 */	stw r0, 0x24(r1)
 /* 803266AC 0032328C  3C 00 43 30 */	lis r0, 0x4330
 /* 803266B0 00323290  3C 60 80 3C */	lis r3, __ln_F@ha
-/* 803266B4 00323294  C0 42 E7 E0 */	lfs f2, lbl_804DE1C0@sda21(r2)
+/* 803266B4 00323294  C0 42 E7 E0 */	lfs f2, MSL_Math_804DE1C0@sda21(r2)
 /* 803266B8 00323298  90 01 00 20 */	stw r0, 0x20(r1)
 /* 803266BC 0032329C  55 04 10 3A */	slwi r4, r8, 2
 /* 803266C0 003232A0  C8 01 00 20 */	lfd f0, 0x20(r1)
@@ -394,11 +394,11 @@ __sincos_poly:
 
 .section .sdata2, "a"
     .balign 8
-.global lbl_804DE1B0
-lbl_804DE1B0:
+.global MSL_Math_804DE1B0
+MSL_Math_804DE1B0:
     .4byte 0xBF000030
-.global lbl_804DE1B4
-lbl_804DE1B4:
+.global MSL_Math_804DE1B4
+MSL_Math_804DE1B4:
     .4byte 0x3EAAAA36
 .global __float_nan
 __float_nan:
@@ -406,11 +406,11 @@ __float_nan:
 .global __float_huge
 __float_huge:
     .4byte 0x7F800000
-.global lbl_804DE1C0
-lbl_804DE1C0:
+.global MSL_Math_804DE1C0
+MSL_Math_804DE1C0:
     .4byte 0x3F317218
     .4byte 0x00000000
-.global lbl_804DE1C8
-lbl_804DE1C8:
+.global MSL_Math_804DE1C8
+MSL_Math_804DE1C8:
     .4byte 0x43300000
     .4byte 0x80000000

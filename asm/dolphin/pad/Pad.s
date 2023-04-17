@@ -872,7 +872,7 @@ SISetSamplingRate:
 .L_8034DE20:
 /* 8034DE20 0034AA00  38 BF 00 70 */	addi r5, r31, 0x70
 /* 8034DE24 0034AA04  4C C6 31 82 */	crclr 6
-/* 8034DE28 0034AA08  38 6D A5 B4 */	addi r3, r13, lbl_804D5C54@sda21
+/* 8034DE28 0034AA08  38 6D A5 B4 */	addi r3, r13, PAD_804D5C54@sda21
 /* 8034DE2C 0034AA0C  38 80 04 96 */	li r4, 0x496
 /* 8034DE30 0034AA10  4B FF 78 F9 */	bl OSPanic
 .L_8034DE34:
@@ -1765,8 +1765,8 @@ CmdReadOrigin:
 CmdCalibrate:
     .asciz "B"
     .balign 4
-.global lbl_804D5C54
-lbl_804D5C54:
+.global PAD_804D5C54
+PAD_804D5C54:
     .asciz "Pad.c"
     .balign 4
 

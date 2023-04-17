@@ -13,14 +13,14 @@
 #include <baselib/debug.h>
 #include <baselib/devcom.h>
 
-static char lbl_803BA508[] = __FILE__;
+static char lbFile_803BA508[] = __FILE__;
 
 static bool cancel;
 
 void lbFile_8001615C(int r3, int r4, int r5, bool cancelflag)
 {
     if (cancelflag) {
-        __assert(lbl_803BA508, 71, "!cancelflag");
+        __assert(lbFile_803BA508, 71, "!cancelflag");
     }
     cancel = true;
 }
@@ -68,7 +68,7 @@ void lbFile_800161C4(int arg0, int arg1, HSD_Archive* arg2, int arg3, int arg4,
 #define MAX_FILENAME_LENGTH 0x20
 const int FILE_EXTENSION_LENGTH = 4; // ".usd" or ".dat"
 const int MAX_BASENAME_LENGTH = MAX_FILENAME_LENGTH - FILE_EXTENSION_LENGTH;
-static char lbl_80432058[MAX_FILENAME_LENGTH];
+static char lbFile_80432058[MAX_FILENAME_LENGTH];
 
 // append file extension (if needed)
 char* lbFile_80016204(const char* basename)
@@ -80,30 +80,30 @@ char* lbFile_80016204(const char* basename)
         // no room for file extension?
         if (pos > MAX_BASENAME_LENGTH) {
             OSReport("Error : file name too long %s.", basename);
-            __assert(lbl_803BA508, 0x99, "NULL");
+            __assert(lbFile_803BA508, 0x99, "NULL");
         }
-        lbl_80432058[pos++] = cur++[0];
+        lbFile_80432058[pos++] = cur++[0];
     }
     // keep any existing file extension
     if (cur[0] != '\0' && cur[1] != '\0') {
-        strcpy(lbl_80432058, basename);
+        strcpy(lbFile_80432058, basename);
         // otherwise, append the appropriate extension for the locale
     } else if (cur[0] == '.') {
-        lbl_80432058[pos++] = '.';
+        lbFile_80432058[pos++] = '.';
         if (lbLang_IsSettingUS()) {
-            strcpy(&lbl_80432058[pos], "usd");
+            strcpy(&lbFile_80432058[pos], "usd");
         } else {
-            strcpy(&lbl_80432058[pos], "dat");
+            strcpy(&lbFile_80432058[pos], "dat");
         }
     } else {
-        lbl_80432058[pos++] = '.';
+        lbFile_80432058[pos++] = '.';
         if (lbLang_IsSavedLanguageUS()) {
-            strcpy(&lbl_80432058[pos], "usd");
+            strcpy(&lbFile_80432058[pos], "usd");
         } else {
-            strcpy(&lbl_80432058[pos], "dat");
+            strcpy(&lbFile_80432058[pos], "dat");
         }
     }
-    return lbl_80432058;
+    return lbFile_80432058;
 }
 
 size_t lbFile_8001634C(s32 fileno)
@@ -114,7 +114,7 @@ size_t lbFile_8001634C(s32 fileno)
 
     if (!DVDFastOpen(fileno, &info)) {
         OSReport("Cannot open file no=%d.", fileno);
-        __assert(lbl_803BA508, 0xD8, "0");
+        __assert(lbFile_803BA508, 0xD8, "0");
     }
 
     length = info.length;
@@ -130,7 +130,7 @@ s32 lbFile_800163D8(const char* basename)
     entry_num = DVDConvertPathToEntrynum(filename);
     if (entry_num == -1) {
         OSReport("file isn't exist %s = %d\n", filename, entry_num);
-        __assert(lbl_803BA508, 0xEE, "entry_num != -1");
+        __assert(lbFile_803BA508, 0xEE, "entry_num != -1");
     }
     return lbFile_8001634C(entry_num);
 }
@@ -158,7 +158,7 @@ void lbFile_80016580(const char* basename, HSD_Archive* arg1, s32* arg2,
 
     if (entry_num == -1) {
         OSReport("file isn't exist %s = %d\n", filename, entry_num);
-        __assert(lbl_803BA508, 0x11A, "entry_num != -1");
+        __assert(lbFile_803BA508, 0x11A, "entry_num != -1");
     }
 
     lbFile_800164A4(entry_num, arg1, arg2, 1, arg3, arg4);

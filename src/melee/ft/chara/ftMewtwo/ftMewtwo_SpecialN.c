@@ -10,7 +10,7 @@
 
 // 0x80146CCC
 // https://decomp.me/scratch/qxdYd
-s32 ftMewtwo_SpecialN_GetChargeLevel(HSD_GObj* gobj, s32* chargeLevel,
+s32 ftMt_SpecialN_GetChargeLevel(HSD_GObj* gobj, s32* chargeLevel,
                                      s32* chargeCycles)
 {
     Fighter* fp;
@@ -33,7 +33,7 @@ s32 ftMewtwo_SpecialN_GetChargeLevel(HSD_GObj* gobj, s32* chargeLevel,
 
 // 0x80146D24
 // https://decomp.me/scratch/EKheK // Check to remove Shadow Ball
-bool ftMewtwo_SpecialN_CheckShadowBallRemove(HSD_GObj* gobj)
+bool ftMt_SpecialN_CheckShadowBallRemove(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
         Fighter* fp = getFighter(gobj);
@@ -63,7 +63,7 @@ bool ftMewtwo_SpecialN_CheckShadowBallRemove(HSD_GObj* gobj)
 
 // 0x80146D74
 // https://decomp.me/scratch/s3eQH // Check to stash Shadow Ball?
-bool ftMewtwo_SpecialN_CheckShadowBallCancel(HSD_GObj* gobj)
+bool ftMt_SpecialN_CheckShadowBallCancel(HSD_GObj* gobj)
 {
     s32 ASID;
 
@@ -104,7 +104,7 @@ static inline void ftMewtwo_SpecialN_ClearGObj(HSD_GObj* gobj)
 // 0x80146DC8
 // https://decomp.me/scratch/gzSFm // Clear Shadow Ball GObj pointer and reset
 // flag
-void ftMewtwo_SpecialN_SetNULL(HSD_GObj* gobj)
+void ftMt_SpecialN_SetNULL(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
         Fighter* fp = getFighter(gobj);
@@ -141,7 +141,7 @@ static inline void ftMewtwo_SpecialN_RemoveHeldShadowBall(HSD_GObj* gobj)
 // 0x80146E30
 // https://decomp.me/scratch/kHPon
 /// Remove Shadow Ball when taking damage
-void ftMewtwo_SpecialN_OnTakeDamage(HSD_GObj* gobj)
+void ftMt_SpecialN_OnTakeDamage(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -154,7 +154,7 @@ void ftMewtwo_SpecialN_OnTakeDamage(HSD_GObj* gobj)
 }
 
 /// Remove Shadow Ball OnDeath2?
-void ftMewtwo_SpecialN_OnDeath(HSD_GObj* gobj)
+void ftMt_SpecialN_OnDeath(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -223,7 +223,7 @@ void ftMewtwo_SpecialN_SetRecoil(HSD_GObj* gobj)
 
 // 0x80146FA8
 // https://decomp.me/scratch/6f5xe // Shoot Shadow Ball
-void ftMewtwo_SpecialN_ReleaseShadowBall(HSD_GObj* gobj)
+void ftMt_SpecialN_ReleaseShadowBall(HSD_GObj* gobj)
 {
     Fighter* fp2;
     Fighter* fp;
@@ -301,7 +301,7 @@ void ftMewtwo_SpecialN_ReleaseShadowBall(HSD_GObj* gobj)
 
 // 0x801471C8
 // https://decomp.me/scratch/QGj1l // Play Shadow Ball Charge SFX
-void ftMewtwo_SpecialN_PlayChargeSFX(HSD_GObj* gobj)
+void ftMt_SpecialN_PlayChargeSFX(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftMewtwoAttributes* mewtwoAttrs = fp->x2D4_specialAttributes;
@@ -358,9 +358,9 @@ void ftMewtwo_SpecialN_PlayChargeSFX(HSD_GObj* gobj)
 inline void ftMewtwo_SpecialN_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->cb.x21E4_callback_OnDeath2 = ftMewtwo_OnDeath2;
-    fp->cb.x21DC_callback_OnTakeDamage = ftMewtwo_OnTakeDamage;
-    fp->cb.x21E8_callback_OnDeath3 = ftMewtwo_OnDeath2;
+    fp->cb.x21E4_callback_OnDeath2 = ftMt_Init_OnDeath2;
+    fp->cb.x21DC_callback_OnTakeDamage = ftMt_Init_OnTakeDamage;
+    fp->cb.x21E8_callback_OnDeath3 = ftMt_Init_OnDeath2;
 }
 
 inline void ftMewtwo_SpecialN_ChangeAction(HSD_GObj* gobj)
@@ -400,7 +400,7 @@ inline void ftMewtwo_SpecialN_ChangeAction(HSD_GObj* gobj)
 // 0x80147320
 // https://decomp.me/scratch/zcZ5Y // Mewtwo's grounded Shadow Ball Start
 // Motion State handler
-void ftMewtwo_SpecialN_StartMotion(HSD_GObj* gobj)
+void ftMt_SpecialN_Enter(HSD_GObj* gobj)
 {
     ftMewtwo_SpecialN_ChangeAction(gobj);
 }
@@ -441,7 +441,7 @@ inline void ftMewtwo_SpecialAirN_ChangeAction(HSD_GObj* gobj)
 // 0x801473F4
 // https://decomp.me/scratch/okSqF // Mewtwo's aerial Shadow Ball Start Action
 // State handler
-void ftMewtwo_SpecialAirN_StartMotion(HSD_GObj* gobj)
+void ftMt_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     ftMewtwo_SpecialAirN_ChangeAction(gobj);
 }
@@ -449,7 +449,7 @@ void ftMewtwo_SpecialAirN_StartMotion(HSD_GObj* gobj)
 // 0x801474C0
 // https://decomp.me/scratch/KY0xt // Mewtwo's grounded Shadow Ball Start
 // Animation callback
-void ftMewtwo_SpecialNStart_Anim(HSD_GObj* gobj)
+void ftMt_SpecialNStart_Anim(HSD_GObj* gobj)
 {
     Vec3 sp2C;
     Vec3 sp20;
@@ -524,7 +524,7 @@ inline void ftMewtwo_SpecialN_CreateHeldShadow(HSD_GObj* gobj, Vec3* pos1,
 // 0x8014764C
 // https://decomp.me/scratch/fZA6w // Mewtwo's grounded Shadow Ball Loop
 // Animation callback
-void ftMewtwo_SpecialNLoop_Anim(HSD_GObj* gobj)
+void ftMt_SpecialNLoop_Anim(HSD_GObj* gobj)
 {
     Vec3 sp40;
     Vec3 sp34;
@@ -541,7 +541,7 @@ void ftMewtwo_SpecialNLoop_Anim(HSD_GObj* gobj)
     if (fp->sv.mt.SpecialN.releaseLag <= 0) {
         fp->sv.mt.SpecialN.releaseLag = 0;
         ftMewtwo_SpecialN_CreateHeldShadow(gobj, &sp28, &sp1C);
-        ftMewtwo_SpecialN_PlayChargeSFX(gobj);
+        ftMt_SpecialN_PlayChargeSFX(gobj);
         if ((s32) fp->sv.mt.SpecialN.x2348 == false) {
             fp->sv.mt.SpecialN.x2344++;
             if ((s32) fp->sv.mt.SpecialN.x2344 >
@@ -572,7 +572,7 @@ void ftMewtwo_SpecialNLoop_Anim(HSD_GObj* gobj)
 
 // 0x80147850
 // https://decomp.me/scratch/Fn7lE // Set Shadow Ball vars to full charge?
-void ftMewtwo_SpecialNFull_Anim(HSD_GObj* gobj)
+void ftMt_SpecialNFull_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = fp = getFighter(gobj);
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
@@ -596,7 +596,7 @@ inline void ftMewtwo_SpecialN_RemoveShadowBall2(HSD_GObj* gobj)
 }
 
 /// Mewtwo's grounded Shadow Ball Cancel Animation callback
-void ftMewtwo_SpecialNCancel_Anim(HSD_GObj* gobj)
+void ftMt_SpecialNCancel_Anim(HSD_GObj* gobj)
 {
 #ifdef MUST_MATCH
     u8 _[24];
@@ -610,14 +610,14 @@ void ftMewtwo_SpecialNCancel_Anim(HSD_GObj* gobj)
 }
 
 /// Mewtwo's grounded Shadow Ball End Animation callback
-void ftMewtwo_SpecialNEnd_Anim(HSD_GObj* gobj)
+void ftMt_SpecialNEnd_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[24];
 #endif
 
-    ftMewtwo_SpecialN_ReleaseShadowBall(gobj);
+    ftMt_SpecialN_ReleaseShadowBall(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -627,7 +627,7 @@ void ftMewtwo_SpecialNEnd_Anim(HSD_GObj* gobj)
 // 0x80147954
 // https://decomp.me/scratch/sgOTM // Mewtwo's aerial Shadow Ball Start
 // Animation callback
-void ftMewtwo_SpecialAirNStart_Anim(HSD_GObj* gobj)
+void ftMt_SpecialAirNStart_Anim(HSD_GObj* gobj)
 {
     Vec3 sp2C;
     Vec3 sp20;
@@ -677,7 +677,7 @@ void ftMewtwo_SpecialAirNStart_Anim(HSD_GObj* gobj)
 // 0x80147AEC
 // https://decomp.me/scratch/Ngg62 // Mewtwo's aerial Shadow Ball Loop
 // Animation callback
-void ftMewtwo_SpecialAirNLoop_Anim(HSD_GObj* gobj)
+void ftMt_SpecialAirNLoop_Anim(HSD_GObj* gobj)
 {
     Vec3 sp40;
     Vec3 sp34;
@@ -694,7 +694,7 @@ void ftMewtwo_SpecialAirNLoop_Anim(HSD_GObj* gobj)
     if (fp->sv.mt.SpecialN.releaseLag <= 0) {
         fp->sv.mt.SpecialN.releaseLag = 0;
         ftMewtwo_SpecialN_CreateHeldShadow(gobj, &sp28, &sp1C);
-        ftMewtwo_SpecialN_PlayChargeSFX(gobj);
+        ftMt_SpecialN_PlayChargeSFX(gobj);
         if ((s32) fp->sv.mt.SpecialN.x2348 == false) {
             fp->sv.mt.SpecialN.x2344++;
             if ((s32) fp->sv.mt.SpecialN.x2344 >
@@ -726,7 +726,7 @@ void ftMewtwo_SpecialAirNLoop_Anim(HSD_GObj* gobj)
 
 // 0x8014CF0
 // https://decomp.me/scratch/Fn7lE // Set Shadow Ball vars to full charge?
-void ftMewtwo_SpecialAirNFull_Anim(HSD_GObj* gobj)
+void ftMt_SpecialAirNFull_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = fp = getFighter(gobj);
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
@@ -739,7 +739,7 @@ void ftMewtwo_SpecialAirNFull_Anim(HSD_GObj* gobj)
 // 0x80147D20
 // https://decomp.me/scratch/7U2EJ // Mewtwo's aerial Shadow Ball Cancel
 // Animation callback
-void ftMewtwo_SpecialAirNCancel_Anim(HSD_GObj* gobj)
+void ftMt_SpecialAirNCancel_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -754,7 +754,7 @@ void ftMewtwo_SpecialAirNCancel_Anim(HSD_GObj* gobj)
 }
 
 // Mewtwo's aerial Shadow Ball End Animation callback
-void ftMewtwo_SpecialAirNEnd_Anim(HSD_GObj* gobj)
+void ftMt_SpecialAirNEnd_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
@@ -764,7 +764,7 @@ void ftMewtwo_SpecialAirNEnd_Anim(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    ftMewtwo_SpecialN_ReleaseShadowBall(gobj);
+    ftMt_SpecialN_ReleaseShadowBall(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (0.0f == mewtwoAttrs->x14_MEWTWO_SHADOWBALL_LANDING_LAG) {
@@ -777,13 +777,13 @@ void ftMewtwo_SpecialAirNEnd_Anim(HSD_GObj* gobj)
 }
 
 // 0x80147E30 - Mewtwo's grounded Shadow Ball Start IASA callback
-void ftMewtwo_SpecialNStart_IASA(HSD_GObj* gobj)
+void ftMt_SpecialNStart_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
 /// Mewtwo's grounded Shadow Ball Loop IASA callback
-void ftMewtwo_SpecialNLoop_IASA(HSD_GObj* gobj)
+void ftMt_SpecialNLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     u32 recentInput;
@@ -823,7 +823,7 @@ void ftMewtwo_SpecialNLoop_IASA(HSD_GObj* gobj)
 // 0x8014800C
 // https://decomp.me/scratch/w0g66 // Mewtwo's grounded Shadow Ball Full Charge
 // IASA callback
-void ftMewtwo_SpecialNFull_IASA(HSD_GObj* gobj)
+void ftMt_SpecialNFull_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     u32 recentInput;
@@ -857,19 +857,19 @@ void ftMewtwo_SpecialNFull_IASA(HSD_GObj* gobj)
 }
 
 // 0x801481CC - Mewtwo's grounded Shadow Ball Cancel IASA callback
-void ftMewtwo_SpecialNCancel_IASA(HSD_GObj* gobj)
+void ftMt_SpecialNCancel_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
 // 0x801481D0 - Mewtwo's grounded Shadow Ball End IASA callback
-void ftMewtwo_SpecialNEnd_IASA(HSD_GObj* gobj)
+void ftMt_SpecialNEnd_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
 // 0x801481D4 - Mewtwo's aerial Shadow Ball Start IASA callback
-void ftMewtwo_SpecialAirNStart_IASA(HSD_GObj* gobj)
+void ftMt_SpecialAirNStart_IASA(HSD_GObj* gobj)
 {
     return;
 }
@@ -877,7 +877,7 @@ void ftMewtwo_SpecialAirNStart_IASA(HSD_GObj* gobj)
 // 0x801481D8
 // https://decomp.me/scratch/FYwNg // Mewtwo's aerial Shadow Ball Loop IASA
 // callback
-void ftMewtwo_SpecialAirNLoop_IASA(HSD_GObj* gobj)
+void ftMt_SpecialAirNLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     u32 recentInput;
@@ -911,7 +911,7 @@ void ftMewtwo_SpecialAirNLoop_IASA(HSD_GObj* gobj)
 }
 
 /// Mewtwo's aerial Shadow Ball Full Charge IASA callback
-void ftMewtwo_SpecialAirNFull_IASA(HSD_GObj* gobj)
+void ftMt_SpecialAirNFull_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     u32 recentInput;
@@ -941,73 +941,73 @@ void ftMewtwo_SpecialAirNFull_IASA(HSD_GObj* gobj)
 }
 
 // 0x801484B8 - Mewtwo's aerial Shadow Ball Cancel IASA callback
-void ftMewtwo_SpecialAirNCancel_IASA(HSD_GObj* gobj)
+void ftMt_SpecialAirNCancel_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
 // 0x801484BC - Mewtwo's aerial Shadow Ball End IASA callback
-void ftMewtwo_SpecialAirNEnd_IASA(HSD_GObj* gobj)
+void ftMt_SpecialAirNEnd_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
 // 0x801484C0 - Mewtwo's grounded Shadow Ball Start Physics callback
-void ftMewtwo_SpecialNStart_Phys(HSD_GObj* gobj)
+void ftMt_SpecialNStart_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
 // 0x801484E0 - Mewtwo's grounded Shadow Ball Loop Physics callback
-void ftMewtwo_SpecialNLoop_Phys(HSD_GObj* gobj)
+void ftMt_SpecialNLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
 // 0x80148500 - Mewtwo's grounded Shadow Ball Full Charge Physics callback
-void ftMewtwo_SpecialNFull_Phys(HSD_GObj* gobj)
+void ftMt_SpecialNFull_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
 // 0x80148520 - Mewtwo's grounded Shadow Ball Cancel Physics callback
-void ftMewtwo_SpecialNCancel_Phys(HSD_GObj* gobj)
+void ftMt_SpecialNCancel_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
 // 0x80148540 - Mewtwo's grounded Shadow Ball End Physics callback
-void ftMewtwo_SpecialNEnd_Phys(HSD_GObj* gobj)
+void ftMt_SpecialNEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
 // 0x80148560 - Mewtwo's aerial Shadow Ball Start Physics callback
-void ftMewtwo_SpecialAirNStart_Phys(HSD_GObj* gobj)
+void ftMt_SpecialAirNStart_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
 // 0x80148580 - Mewtwo's aerial Shadow Ball Loop Physics callback
-void ftMewtwo_SpecialAirNLoop_Phys(HSD_GObj* gobj)
+void ftMt_SpecialAirNLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
 // 0x801485A0 - Mewtwo's aerial Shadow Ball Full Charge Physics callback
-void ftMewtwo_SpecialAirNFull_Phys(HSD_GObj* gobj)
+void ftMt_SpecialAirNFull_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
 // 0x801485C0 - Mewtwo's aerial Shadow Ball Cancel Physics callback
-void ftMewtwo_SpecialAirNCancel_Phys(HSD_GObj* gobj)
+void ftMt_SpecialAirNCancel_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
 // 0x801485E0 - Mewtwo's aerial Shadow Ball End Physics callback
-void ftMewtwo_SpecialAirNEnd_Phys(HSD_GObj* gobj)
+void ftMt_SpecialAirNEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
@@ -1015,7 +1015,7 @@ void ftMewtwo_SpecialAirNEnd_Phys(HSD_GObj* gobj)
 // 0x80148600
 // https://decomp.me/scratch/2J4uh // Mewtwo's grounded Shadow Ball Start
 // Collision callback
-void ftMewtwo_SpecialNStart_Coll(HSD_GObj* gobj)
+void ftMt_SpecialNStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -1034,7 +1034,7 @@ void ftMewtwo_SpecialNStart_Coll(HSD_GObj* gobj)
 }
 
 // 0x8014868C - Mewtwo's grounded Shadow Ball Loop Collision callback
-void ftMewtwo_SpecialNLoop_Coll(HSD_GObj* gobj)
+void ftMt_SpecialNLoop_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -1054,7 +1054,7 @@ void ftMewtwo_SpecialNLoop_Coll(HSD_GObj* gobj)
 }
 
 /// Mewtwo's grounded Shadow Ball Full Charge Collision callback
-void ftMewtwo_SpecialNFull_Coll(HSD_GObj* gobj)
+void ftMt_SpecialNFull_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -1074,7 +1074,7 @@ void ftMewtwo_SpecialNFull_Coll(HSD_GObj* gobj)
 }
 
 /// Mewtwo's grounded Shadow Ball Cancel Collision callback
-void ftMewtwo_SpecialNCancel_Coll(HSD_GObj* gobj)
+void ftMt_SpecialNCancel_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -1093,7 +1093,7 @@ void ftMewtwo_SpecialNCancel_Coll(HSD_GObj* gobj)
 }
 
 // 0x80148830 - Mewtwo's grounded Shadow Ball Cancel Collision callback
-void ftMewtwo_SpecialNEnd_Coll(HSD_GObj* gobj)
+void ftMt_SpecialNEnd_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -1112,7 +1112,7 @@ void ftMewtwo_SpecialNEnd_Coll(HSD_GObj* gobj)
 }
 
 /// Mewtwo's aerial Shadow Ball Start Collision callback
-void ftMewtwo_SpecialAirNStart_Coll(HSD_GObj* gobj)
+void ftMt_SpecialAirNStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -1131,7 +1131,7 @@ void ftMewtwo_SpecialAirNStart_Coll(HSD_GObj* gobj)
 }
 
 /// Mewtwo's aerial Shadow Ball Loop Collision callback
-void ftMewtwo_SpecialAirNLoop_Coll(HSD_GObj* gobj)
+void ftMt_SpecialAirNLoop_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -1151,7 +1151,7 @@ void ftMewtwo_SpecialAirNLoop_Coll(HSD_GObj* gobj)
 }
 
 // Mewtwo's aerial Shadow Ball Full Charge Collision callback
-void ftMewtwo_SpecialAirNFull_Coll(HSD_GObj* gobj)
+void ftMt_SpecialAirNFull_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -1171,7 +1171,7 @@ void ftMewtwo_SpecialAirNFull_Coll(HSD_GObj* gobj)
 }
 
 /// Mewtwo's aerial Shadow Ball Cancel Collision callback
-void ftMewtwo_SpecialAirNCancel_Coll(HSD_GObj* gobj)
+void ftMt_SpecialAirNCancel_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -1190,7 +1190,7 @@ void ftMewtwo_SpecialAirNCancel_Coll(HSD_GObj* gobj)
 }
 
 /// Mewtwo's aerial Shadow Ball End Collision callback
-void ftMewtwo_SpecialAirNEnd_Coll(HSD_GObj* gobj)
+void ftMt_SpecialAirNEnd_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -1233,7 +1233,7 @@ static inline void ftMewtwo_SpecialN_LaunchShadowBall(HSD_GObj* gobj)
 }
 
 /// Create F-Throw Shadow Ball
-void ftMewtwo_SpecialN_Shoot(HSD_GObj* gobj)
+void ftMt_SpecialN_Shoot(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH

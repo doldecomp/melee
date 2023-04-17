@@ -14,117 +14,117 @@
 
 #include <baselib/gobj.h>
 
-MotionState ftPopo_MotionStateTable[] = {
-    { 295, 0x00340111, 0x12800000, ftPopo_8011F318, ftPopo_8011F390,
-      ftPopo_8011F398, ftPopo_8011F3D8, ftCamera_UpdateCameraBox },
-    { 296, 0x00340511, 0x12800000, ftPopo_8011F354, ftPopo_8011F394,
-      ftPopo_8011F3B8, ftPopo_8011F454, ftCamera_UpdateCameraBox },
-    { 297, 0x00340212, 0x13800000, ftPopo_8011FC78, ftPopo_8011FF40,
-      ftPopo_80120080, ftPopo_80120660, ftCamera_UpdateCameraBox },
-    { 298, 0x00340212, 0x13800000, ftPopo_8011FCD0, ftPopo_8011FF90,
-      ftPopo_80120230, ftPopo_80120854, ftCamera_UpdateCameraBox },
-    { 299, 0x00340612, 0x13800000, ftPopo_8011FD9C, ftPopo_8011FFE0,
-      ftPopo_801203E0, ftPopo_80120A48, ftCamera_UpdateCameraBox },
-    { 300, 0x00340612, 0x13800000, ftPopo_8011FE48, ftPopo_80120030,
-      ftPopo_80120520, ftPopo_80120C58, ftCamera_UpdateCameraBox },
-    { 301, 0x00340213, 0x14000000, ftPopo_801212C4, ftPopo_801214D4,
-      ftPopo_801215DC, ftPopo_80121740, ftCamera_UpdateCameraBox },
-    { 302, 0x00340213, 0x14000000, ftPopo_80121944, ftPopo_80121AC8,
-      ftPopo_80121AD0, ftPopo_80121C34, ftCamera_UpdateCameraBox },
-    { 303, 0x00340213, 0x14000000, ftPopo_801223B8, ftPopo_8012248C,
-      ftPopo_80122494, ftPopo_80122664, ftCamera_UpdateCameraBox },
-    { 304, 0x00340213, 0x14000000, ftPopo_80121E10, ftPopo_80121EB0,
-      ftPopo_80121EB8, ftPopo_80121F2C, ftCamera_UpdateCameraBox },
-    { 305, 0x00340213, 0x14000000, ftPopo_80122110, ftPopo_801221AC,
-      ftPopo_801221B4, ftPopo_80122228, ftCamera_UpdateCameraBox },
-    { 306, 0x00340613, 0x14000000, ftPopo_801213CC, ftPopo_80121558,
-      ftPopo_80121680, ftPopo_8012177C, ftCamera_UpdateCameraBox },
-    { 307, 0x00340613, 0x14000000, ftPopo_801219F4, ftPopo_80121ACC,
-      ftPopo_80121B74, ftPopo_80121C70, ftCamera_UpdateCameraBox },
-    { 308, 0x00340613, 0x14000000, ftPopo_80122410, ftPopo_80122490,
-      ftPopo_80122538, ftPopo_801226A0, ftCamera_UpdateCameraBox },
-    { 309, 0x00340613, 0x14000000, ftPopo_80121E4C, ftPopo_80121EB4,
-      ftPopo_80121ED8, ftPopo_80121F68, ftCamera_UpdateCameraBox },
-    { 310, 0x00340613, 0x14000000, ftPopo_8012214C, ftPopo_801221B0,
-      ftPopo_801221D4, ftPopo_80122264, ftCamera_UpdateCameraBox },
-    { 311, 0x00340014, 0x15800000, ftPopo_80122A0C, ftPopo_80122B0C,
-      ftPopo_80122B14, ftPopo_80122C18, ftCamera_UpdateCameraBox },
-    { 312, 0x00340414, 0x15800000, ftPopo_80122A8C, ftPopo_80122B10,
-      ftPopo_80122B34, ftPopo_80122D04, ftCamera_UpdateCameraBox },
-    { 313, 0x00340212, 0x13800000, ftNana_80123CA4, ftNana_80123E58,
-      ftNana_80123E60, ftNana_80123F98, ftCamera_UpdateCameraBox },
-    { 314, 0x00340612, 0x13800000, ftNana_80123D68, ftNana_80123E5C,
-      ftNana_80123EFC, ftNana_801241A0, ftCamera_UpdateCameraBox },
-    { 315, 0x00340213, 0x14000000, ftNana_80123348, ftNana_80123388,
-      ftNana_80123390, ftNana_801233F0, ftCamera_UpdateCameraBox },
-    { 316, 0x00340213, 0x14000000, ftNana_80123448, ftNana_801234E4,
-      ftNana_801234EC, ftNana_801235BC, ftCamera_UpdateCameraBox },
+MotionState ftPp_Init_MotionStateTable[] = {
+    { 295, 0x00340111, 0x12800000, ftPp_SpecialN_Anim, ftPp_SpecialN_IASA,
+      ftPp_SpecialN_Phys, ftPp_SpecialN_Coll, ftCamera_UpdateCameraBox },
+    { 296, 0x00340511, 0x12800000, ftPp_SpecialAirN_Anim, ftPp_SpecialAirN_IASA,
+      ftPp_SpecialAirN_Phys, ftPp_SpecialAirN_Coll, ftCamera_UpdateCameraBox },
+    { 297, 0x00340212, 0x13800000, ftPp_SpecialS_Anim, ftPp_SpecialS_IASA,
+      ftPp_SpecialS_Phys, ftPp_SpecialS_Coll, ftCamera_UpdateCameraBox },
+    { 298, 0x00340212, 0x13800000, ftPp_SpecialSTogether_Anim, ftPp_SpecialSTogether_IASA,
+      ftPp_SpecialSTogether_Phys, ftPp_SpecialSTogether_Coll, ftCamera_UpdateCameraBox },
+    { 299, 0x00340612, 0x13800000, ftPp_SpecialAirS_Anim, ftPp_SpecialAirS_IASA,
+      ftPp_SpecialAirS_Phys, ftPp_SpecialAirS_Coll, ftCamera_UpdateCameraBox },
+    { 300, 0x00340612, 0x13800000, ftPp_SpecialAirSTogether_Anim, ftPp_SpecialAirSTogether_IASA,
+      ftPp_SpecialAirSTogether_Phys, ftPp_SpecialAirSTogether_Coll, ftCamera_UpdateCameraBox },
+    { 301, 0x00340213, 0x14000000, ftPp_SpecialHiStart_Anim, ftPp_SpecialHiStart_IASA,
+      ftPp_SpecialHiStart_Phys, ftPp_SpecialHiStart_Coll, ftCamera_UpdateCameraBox },
+    { 302, 0x00340213, 0x14000000, ftPp_SpecialHi_Anim, ftPp_SpecialHi_IASA,
+      ftPp_SpecialHi_Phys, ftPp_SpecialHi_Coll, ftCamera_UpdateCameraBox },
+    { 303, 0x00340213, 0x14000000, ftPp_MS_349_Anim, ftPp_MS_349_IASA,
+      ftPp_MS_349_Phys, ftPp_MS_349_Coll, ftCamera_UpdateCameraBox },
+    { 304, 0x00340213, 0x14000000, ftPp_SpecialHiFail_Anim, ftPp_SpecialHiFail_IASA,
+      ftPp_SpecialHiFail_Phys, ftPp_SpecialHiFail_Coll, ftCamera_UpdateCameraBox },
+    { 305, 0x00340213, 0x14000000, ftPp_SpecialHiFailEnd_Anim, ftPp_SpecialHiFailEnd_IASA,
+      ftPp_SpecialHiFailEnd_Phys, ftPp_SpecialHiFailEnd_Coll, ftCamera_UpdateCameraBox },
+    { 306, 0x00340613, 0x14000000, ftPp_SpecialAirHiStart_Anim, ftPp_SpecialAirHiStart_IASA,
+      ftPp_SpecialAirHiStart_Phys, ftPp_SpecialAirHiStart_Coll, ftCamera_UpdateCameraBox },
+    { 307, 0x00340613, 0x14000000, ftPp_SpecialAirHi_Anim, ftPp_SpecialAirHi_IASA,
+      ftPp_SpecialAirHi_Phys, ftPp_SpecialAirHi_Coll, ftCamera_UpdateCameraBox },
+    { 308, 0x00340613, 0x14000000, ftPp_SpecialAirHiFail_Anim, ftPp_SpecialAirHiFail_IASA,
+      ftPp_SpecialAirHiFail_Phys, ftPp_SpecialAirHiFail_Coll, ftCamera_UpdateCameraBox },
+    { 309, 0x00340613, 0x14000000, ftPp_SpecialAirHiFailEnd_Anim, ftPp_SpecialAirHiFailEnd_IASA,
+      ftPp_SpecialAirHiFailEnd_Phys, ftPp_SpecialAirHiFailEnd_Coll, ftCamera_UpdateCameraBox },
+    { 310, 0x00340613, 0x14000000, ftPp_SpecialLw_Anim, ftPp_SpecialLw_IASA,
+      ftPp_SpecialLw_Phys, ftPp_SpecialLw_Coll, ftCamera_UpdateCameraBox },
+    { 311, 0x00340014, 0x15800000, ftPp_SpecialAirLw_Anim, ftPp_SpecialAirLw_IASA,
+      ftPp_SpecialAirLw_Phys, ftPp_SpecialAirLw_Coll, ftCamera_UpdateCameraBox },
+    { 312, 0x00340414, 0x15800000, ftPp_SpecialLw_80122A8C, ftPp_SpecialLw_80122B10,
+      ftPp_SpecialLw_80122B34, ftPp_SpecialLw_80122D04, ftCamera_UpdateCameraBox },
+    { 313, 0x00340212, 0x13800000, ftNn_Init_80123CA4, ftNn_Init_80123E58,
+      ftNn_Init_80123E60, ftNn_Init_80123F98, ftCamera_UpdateCameraBox },
+    { 314, 0x00340612, 0x13800000, ftNn_Init_80123D68, ftNn_Init_80123E5C,
+      ftNn_Init_80123EFC, ftNn_Init_801241A0, ftCamera_UpdateCameraBox },
+    { 315, 0x00340213, 0x14000000, ftNn_Init_80123348, ftNn_Init_80123388,
+      ftNn_Init_80123390, ftNn_Init_801233F0, ftCamera_UpdateCameraBox },
+    { 316, 0x00340213, 0x14000000, ftNn_Init_80123448, ftNn_Init_801234E4,
+      ftNn_Init_801234EC, ftNn_Init_801235BC, ftCamera_UpdateCameraBox },
     { 317, 0x00340213, 0x14000000, NULL, NULL, NULL, NULL,
       ftCamera_UpdateCameraBox },
-    { 318, 0x00340613, 0x14000000, ftNana_80123384, ftNana_8012338C,
-      ftNana_801233EC, ftNana_801233F4, ftCamera_UpdateCameraBox },
-    { 319, 0x00340613, 0x14000000, ftNana_80123484, ftNana_801234E8,
-      ftNana_8012350C, ftNana_801235F8, ftCamera_UpdateCameraBox },
+    { 318, 0x00340613, 0x14000000, ftNn_Init_80123384, ftNn_Init_8012338C,
+      ftNn_Init_801233EC, ftNn_Init_801233F4, ftCamera_UpdateCameraBox },
+    { 319, 0x00340613, 0x14000000, ftNn_Init_80123484, ftNn_Init_801234E8,
+      ftNn_Init_8012350C, ftNn_Init_801235F8, ftCamera_UpdateCameraBox },
     { 320, 0x00340613, 0x14000000, NULL, NULL, NULL, NULL,
       ftCamera_UpdateCameraBox },
 };
 
-char lbl_803CD610[] = "PlPp.dat";
-char lbl_803CD61C[] = "ftDataPopo";
-char lbl_803CD628[] = "PlPpNr.dat";
-char lbl_803CD634[] = "PlyPopo5K_Share_joint";
-char lbl_803CD64C[] = "PlyPopo5K_Share_matanim_joint";
-char lbl_803CD66C[] = "PlPpGr.dat";
-char lbl_803CD678[] = "PlyPopo5KGr_Share_joint";
-char lbl_803CD690[] = "PlyPopo5KGr_Share_matanim_joint";
-char lbl_803CD6B0[] = "PlPpOr.dat";
-char lbl_803CD6BC[] = "PlyPopo5KOr_Share_joint";
-char lbl_803CD6D4[] = "PlyPopo5KOr_Share_matanim_joint";
-char lbl_803CD6F4[] = "PlPpRe.dat";
-char lbl_803CD700[] = "PlyPopo5KRe_Share_joint";
-char lbl_803CD718[] = "PlyPopo5KRe_Share_matanim_joint";
-char lbl_803CD738[] = "PlPpAJ.dat";
+char ftPp_Init_DatFilename[] = "PlPp.dat";
+char ftPp_Init_DataName[] = "ftDataPopo";
+char ftPp_Init_803CD628[] = "PlPpNr.dat";
+char ftPp_Init_803CD634[] = "PlyPopo5K_Share_joint";
+char ftPp_Init_803CD64C[] = "PlyPopo5K_Share_matanim_joint";
+char ftPp_Init_803CD66C[] = "PlPpGr.dat";
+char ftPp_Init_803CD678[] = "PlyPopo5KGr_Share_joint";
+char ftPp_Init_803CD690[] = "PlyPopo5KGr_Share_matanim_joint";
+char ftPp_Init_803CD6B0[] = "PlPpOr.dat";
+char ftPp_Init_803CD6BC[] = "PlyPopo5KOr_Share_joint";
+char ftPp_Init_803CD6D4[] = "PlyPopo5KOr_Share_matanim_joint";
+char ftPp_Init_803CD6F4[] = "PlPpRe.dat";
+char ftPp_Init_803CD700[] = "PlyPopo5KRe_Share_joint";
+char ftPp_Init_803CD718[] = "PlyPopo5KRe_Share_matanim_joint";
+char ftPp_Init_AnimDatFilename[] = "PlPpAJ.dat";
 
-Fighter_DemoStrings lbl_803CD7B4 = {
+Fighter_DemoStrings ftPp_Init_DemoMotionFilenames = {
     "ftDemoResultMotionFilePopo",
     "ftDemoIntroMotionFilePopo",
     "ftDemoEndingMotionFilePopo",
     "ftDemoViWaitMotionFilePopo",
 };
 
-Fighter_CostumeStrings lbl_803CD7C4[] = {
-    { lbl_803CD628, lbl_803CD634, lbl_803CD64C },
-    { lbl_803CD66C, lbl_803CD678, lbl_803CD690 },
-    { lbl_803CD6B0, lbl_803CD6BC, lbl_803CD6D4 },
-    { lbl_803CD6F4, lbl_803CD700, lbl_803CD718 },
+Fighter_CostumeStrings ftPp_Init_CostumeStrings[] = {
+    { ftPp_Init_803CD628, ftPp_Init_803CD634, ftPp_Init_803CD64C },
+    { ftPp_Init_803CD66C, ftPp_Init_803CD678, ftPp_Init_803CD690 },
+    { ftPp_Init_803CD6B0, ftPp_Init_803CD6BC, ftPp_Init_803CD6D4 },
+    { ftPp_Init_803CD6F4, ftPp_Init_803CD700, ftPp_Init_803CD718 },
 };
 
-void ftPopo_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftPp_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
     Fighter_OnItemPickup(gobj, bool, 1, 1);
 }
 
-void ftPopo_OnItemInvisible(HSD_GObj* gobj)
+void ftPp_Init_OnItemInvisible(HSD_GObj* gobj)
 {
     Fighter_OnItemInvisible(gobj, 1);
 }
 
-void ftPopo_OnItemVisible(HSD_GObj* gobj)
+void ftPp_Init_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftPopo_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftPp_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void ftPopo_OnLoadForNana(Fighter* fp)
+void ftPp_Init_OnLoadForNana(Fighter* fp)
 {
     PUSH_ATTRS(fp, ftIceClimberAttributes);
 }
 
-void ftPopo_OnLoad(HSD_GObj* gobj)
+void ftPp_Init_OnLoad(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -146,7 +146,7 @@ void ftPopo_OnLoad(HSD_GObj* gobj)
     }
 }
 
-void ftPopo_OnDeath(HSD_GObj* gobj)
+void ftPp_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0U, 0);
@@ -159,30 +159,30 @@ void ftPopo_OnDeath(HSD_GObj* gobj)
     fp->ev.nn.x2250 = 0.0f;
 }
 
-void ftPopo_8011F060(HSD_GObj* gobj)
+void ftPp_Init_8011F060(HSD_GObj* gobj)
 {
-    ftPopo_8011F190(gobj);
-    ftPopo_80122898(gobj);
-    ftPopo_80121164(gobj);
-    ftPopo_8011F68C(gobj);
+    ftPp_Init_8011F190(gobj);
+    ftPp_SpecialHi_80122898(gobj);
+    ftPp_SpecialS_80121164(gobj);
+    ftPp_SpecialN_8011F68C(gobj);
 }
 
-void ftPopo_LoadSpecialAttrs(HSD_GObj* gobj)
+void ftPp_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftIceClimberAttributes);
 }
 
-void ftPopo_OnKnockbackEnter(HSD_GObj* gobj)
+void ftPp_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackEnter(gobj, true);
 }
 
-void ftPopo_OnKnockbackExit(HSD_GObj* gobj)
+void ftPp_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, true);
 }
 
-void ftPopo_8011F16C(HSD_GObj* gobj, uint i)
+void ftPp_Init_8011F16C(HSD_GObj* gobj, uint i)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
 
@@ -195,7 +195,7 @@ void ftPopo_8011F16C(HSD_GObj* gobj, uint i)
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
-void ftPopo_8011F190(HSD_GObj* gobj)
+void ftPp_Init_8011F190(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
 
@@ -204,29 +204,29 @@ void ftPopo_8011F190(HSD_GObj* gobj)
     }
 
     it_802C17DC(fp->ev.nn.x222C);
-    ftPopo_8011F16C(gobj, fp->ev.nn.x222C);
+    ftPp_Init_8011F16C(gobj, fp->ev.nn.x222C);
 }
 
-extern f32 const lbl_804D9838;
-extern f32 const lbl_804D983C;
+extern f32 const ftPp_Init_804D9838;
+extern f32 const ftPp_Init_804D983C;
 
-void ftPopo_SpecialN_StartMotion(HSD_GObj* gobj)
+void ftPp_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->ev.nn.x222C = 0;
 
-    Fighter_ChangeMotionState(gobj, 341, 0, NULL, lbl_804D9838, lbl_804D983C,
-                              lbl_804D9838);
+    Fighter_ChangeMotionState(gobj, 341, 0, NULL, ftPp_Init_804D9838, ftPp_Init_804D983C,
+                              ftPp_Init_804D9838);
 
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = &ftPopo_8011F500;
+    fp->cb.x21BC_callback_Accessory4 = &ftPp_SpecialN_8011F500;
 }
 
-extern f32 const lbl_804D9840;
+extern f32 const ftPp_Init_804D9840;
 
-void ftPopo_SpecialAirN_StartMotion(HSD_GObj* gobj)
+void ftPp_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -243,47 +243,47 @@ void ftPopo_SpecialAirN_StartMotion(HSD_GObj* gobj)
     if ((s32) fp->ev.nn.x224C == false) {
         fp->x80_self_vel.y = icattr->x4;
         fp->ev.nn.x224C = true;
-        fp->ev.nn.x2250 = lbl_804D9838;
+        fp->ev.nn.x2250 = ftPp_Init_804D9838;
     } else {
-        fp->ev.nn.x2250 = lbl_804D9840;
+        fp->ev.nn.x2250 = ftPp_Init_804D9840;
     }
 
-    Fighter_ChangeMotionState(gobj, 342, 0, NULL, lbl_804D9838, lbl_804D983C,
-                              lbl_804D9838);
+    Fighter_ChangeMotionState(gobj, 342, 0, NULL, ftPp_Init_804D9838, ftPp_Init_804D983C,
+                              ftPp_Init_804D9838);
 
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = &ftPopo_8011F500;
+    fp->cb.x21BC_callback_Accessory4 = &ftPp_SpecialN_8011F500;
 }
 
-void ftPopo_8011F318(HSD_GObj* gobj)
+void ftPp_SpecialN_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
 
-void ftPopo_8011F354(HSD_GObj* gobj)
+void ftPp_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
     }
 }
 
-void ftPopo_8011F390(HSD_GObj* arg0) {}
+void ftPp_SpecialN_IASA(HSD_GObj* arg0) {}
 
-void ftPopo_8011F394(HSD_GObj* arg0) {}
+void ftPp_SpecialAirN_IASA(HSD_GObj* arg0) {}
 
-void ftPopo_8011F398(HSD_GObj* gobj)
+void ftPp_SpecialN_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftPopo_8011F3B8(HSD_GObj* gobj)
+void ftPp_SpecialAirN_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
-void ftPopo_8011F3D8(HSD_GObj* gobj)
+void ftPp_SpecialN_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
         Fighter* fp1;
@@ -304,7 +304,7 @@ void ftPopo_8011F3D8(HSD_GObj* gobj)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPopo_8011F454(HSD_GObj*)
+asm void ftPp_SpecialAirN_Coll(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8011F454 0011C034  7C 08 02 A6 */	mflr r0
@@ -339,7 +339,7 @@ lbl_8011F4C0:
 /* 8011F4C4 0011C0A4  90 1F 22 4C */	stw r0, 0x224c(r31)
 /* 8011F4C8 0011C0A8  38 7C 00 00 */	addi r3, r28, 0
 /* 8011F4CC 0011C0AC  38 80 00 00 */	li r4, 0
-/* 8011F4D0 0011C0B0  C0 02 9E 58 */	lfs f0, lbl_804D9838
+/* 8011F4D0 0011C0B0  C0 02 9E 58 */	lfs f0, ftPp_Init_804D9838
 /* 8011F4D4 0011C0B4  D0 1F 22 50 */	stfs f0, 0x2250(r31)
 /* 8011F4D8 0011C0B8  C0 3D 00 08 */	lfs f1, 8(r29)
 /* 8011F4DC 0011C0BC  4B FB 67 D5 */	bl ft_800D5CB0
@@ -358,7 +358,7 @@ lbl_8011F4E0:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPopo_8011F500(HSD_GObj*)
+asm void ftPp_SpecialN_8011F500(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8011F500 0011C0E0  7C 08 02 A6 */	mflr r0
@@ -407,8 +407,8 @@ asm void ftPopo_8011F500(HSD_GObj*)
 /* 8011F5AC 0011C18C  80 1F 22 2C */	lwz r0, 0x222c(r31)
 /* 8011F5B0 0011C190  28 00 00 00 */	cmplwi r0, 0
 /* 8011F5B4 0011C194  41 82 00 14 */	beq lbl_8011F5C8
-/* 8011F5B8 0011C198  3C 60 80 12 */	lis r3, ftPopo_8011F060@ha
-/* 8011F5BC 0011C19C  38 03 F0 60 */	addi r0, r3, ftPopo_8011F060@l
+/* 8011F5B8 0011C198  3C 60 80 12 */	lis r3, ftPp_Init_8011F060@ha
+/* 8011F5BC 0011C19C  38 03 F0 60 */	addi r0, r3, ftPp_Init_8011F060@l
 /* 8011F5C0 0011C1A0  90 1F 21 E4 */	stw r0, 0x21e4(r31)
 /* 8011F5C4 0011C1A4  90 1F 21 DC */	stw r0, 0x21dc(r31)
 lbl_8011F5C8:
@@ -469,11 +469,11 @@ lbl_8011F670:
 #pragma pop
 #endif
 
-extern f32 const lbl_804D9848;
+extern f32 const ftPp_Init_804D9848;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPopo_8011F68C(HSD_GObj*)
+asm void ftPp_SpecialN_8011F68C(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8011F68C 0011C26C  7C 08 02 A6 */	mflr r0
@@ -484,7 +484,7 @@ asm void ftPopo_8011F68C(HSD_GObj*)
 /* 8011F6A0 0011C280  7C 7F 1B 78 */	mr r31, r3
 /* 8011F6A4 0011C284  93 C1 00 20 */	stw r30, 0x20(r1)
 /* 8011F6A8 0011C288  83 C3 00 2C */	lwz r30, 0x2c(r3)
-/* 8011F6AC 0011C28C  C0 22 9E 68 */	lfs f1, lbl_804D9848
+/* 8011F6AC 0011C28C  C0 22 9E 68 */	lfs f1, ftPp_Init_804D9848
 /* 8011F6B0 0011C290  38 7E 00 00 */	addi r3, r30, 0
 /* 8011F6B4 0011C294  4B F5 62 79 */	bl ftParts_8007592C
 /* 8011F6B8 0011C298  7F E3 FB 78 */	mr r3, r31
@@ -509,7 +509,7 @@ lbl_8011F6DC:
 #pragma pop
 #endif
 
-bool ftPopo_8011F6FC(HSD_GObj* gobj)
+bool ftPp_SpecialN_8011F6FC(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);

@@ -65,8 +65,8 @@ grTDonkey_802205B0:
 /* 802205C8 0021D1A8  93 81 00 10 */	stw r28, 0x10(r1)
 /* 802205CC 0021D1AC  3B 83 00 00 */	addi r28, r3, 0
 /* 802205D0 0021D1B0  1C 1C 00 14 */	mulli r0, r28, 0x14
-/* 802205D4 0021D1B4  3C 60 80 3F */	lis r3, lbl_803E8850@ha
-/* 802205D8 0021D1B8  3B E3 88 50 */	addi r31, r3, lbl_803E8850@l
+/* 802205D4 0021D1B4  3C 60 80 3F */	lis r3, grTDr_803E8850@ha
+/* 802205D8 0021D1B8  3B E3 88 50 */	addi r31, r3, grTDr_803E8850@l
 /* 802205DC 0021D1BC  38 7C 00 00 */	addi r3, r28, 0
 /* 802205E0 0021D1C0  7F BF 02 14 */	add r29, r31, r0
 /* 802205E4 0021D1C4  4B FA 0E ED */	bl Ground_801C14D0
@@ -99,7 +99,7 @@ grTDonkey_802205B0:
 /* 80220648 0021D228  41 82 00 2C */	beq .L_80220674
 /* 8022064C 0021D22C  38 7E 00 00 */	addi r3, r30, 0
 /* 80220650 0021D230  38 A0 00 04 */	li r5, 4
-/* 80220654 0021D234  48 16 F7 01 */	bl func_8038FD54
+/* 80220654 0021D234  48 16 F7 01 */	bl HSD_GObjProc_8038FD54
 /* 80220658 0021D238  48 00 00 1C */	b .L_80220674
 .L_8022065C:
 /* 8022065C 0021D23C  38 DC 00 00 */	addi r6, r28, 0
@@ -236,8 +236,8 @@ grTDonkey_802207E8:
 
 .section .data
     .balign 8
-.global lbl_803E8850
-lbl_803E8850:
+.global grTDr_803E8850
+grTDr_803E8850:
     .4byte grTDonkey_80220698
     .4byte grTDonkey_802206C4
     .4byte grTDonkey_802206CC
@@ -258,15 +258,15 @@ lbl_803E8850:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_803E88A0
-lbl_803E88A0:
+.global grTDr_803E88A0
+grTDr_803E88A0:
     .asciz "/GrTDr.dat"
     .balign 4
-.global lbl_803E88AC
-lbl_803E88AC:
+.global grTDr_803E88AC
+grTDr_803E88AC:
     .4byte 0x0000002C
-    .4byte lbl_803E8850
-    .4byte lbl_803E88A0
+    .4byte grTDr_803E8850
+    .4byte grTDr_803E88A0
     .4byte grTDonkey_80220510
     .4byte grTDonkey_8022050C
     .4byte grTDonkey_80220580

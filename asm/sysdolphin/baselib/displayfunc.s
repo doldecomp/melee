@@ -28,15 +28,15 @@ mkVBillBoardMtx:
 /* 803739B8 00370598  EC 41 00 72 */	fmuls f2, f1, f1
 /* 803739BC 0037059C  C0 64 00 20 */	lfs f3, 0x20(r4)
 /* 803739C0 003705A0  EC 20 00 32 */	fmuls f1, f0, f0
-/* 803739C4 003705A4  C0 02 EB 98 */	lfs f0, lbl_804DE578@sda21(r2)
+/* 803739C4 003705A4  C0 02 EB 98 */	lfs f0, HSD_DisplayFunc_804DE578@sda21(r2)
 /* 803739C8 003705A8  EC 63 00 F2 */	fmuls f3, f3, f3
 /* 803739CC 003705AC  EC 22 08 2A */	fadds f1, f2, f1
 /* 803739D0 003705B0  EF E3 08 2A */	fadds f31, f3, f1
 /* 803739D4 003705B4  FC 1F 00 40 */	fcmpo cr0, f31, f0
 /* 803739D8 003705B8  40 81 00 50 */	ble .L_80373A28
 /* 803739DC 003705BC  FC 20 F8 34 */	frsqrte f1, f31
-/* 803739E0 003705C0  C8 62 EB A0 */	lfd f3, lbl_804DE580@sda21(r2)
-/* 803739E4 003705C4  C8 42 EB A8 */	lfd f2, lbl_804DE588@sda21(r2)
+/* 803739E0 003705C0  C8 62 EB A0 */	lfd f3, HSD_DisplayFunc_804DE580@sda21(r2)
+/* 803739E4 003705C4  C8 42 EB A8 */	lfd f2, HSD_DisplayFunc_804DE588@sda21(r2)
 /* 803739E8 003705C8  FC 01 00 72 */	fmul f0, f1, f1
 /* 803739EC 003705CC  FC 23 00 72 */	fmul f1, f3, f1
 /* 803739F0 003705D0  FC 1F 10 3C */	fnmsub f0, f31, f0, f2
@@ -59,15 +59,15 @@ mkVBillBoardMtx:
 /* 80373A30 00370610  EC 41 00 72 */	fmuls f2, f1, f1
 /* 80373A34 00370614  C0 64 00 28 */	lfs f3, 0x28(r4)
 /* 80373A38 00370618  EC 20 00 32 */	fmuls f1, f0, f0
-/* 80373A3C 0037061C  C0 02 EB 98 */	lfs f0, lbl_804DE578@sda21(r2)
+/* 80373A3C 0037061C  C0 02 EB 98 */	lfs f0, HSD_DisplayFunc_804DE578@sda21(r2)
 /* 80373A40 00370620  EC 63 00 F2 */	fmuls f3, f3, f3
 /* 80373A44 00370624  EC 22 08 2A */	fadds f1, f2, f1
 /* 80373A48 00370628  EF C3 08 2A */	fadds f30, f3, f1
 /* 80373A4C 0037062C  FC 1E 00 40 */	fcmpo cr0, f30, f0
 /* 80373A50 00370630  40 81 00 50 */	ble .L_80373AA0
 /* 80373A54 00370634  FC 20 F0 34 */	frsqrte f1, f30
-/* 80373A58 00370638  C8 62 EB A0 */	lfd f3, lbl_804DE580@sda21(r2)
-/* 80373A5C 0037063C  C8 42 EB A8 */	lfd f2, lbl_804DE588@sda21(r2)
+/* 80373A58 00370638  C8 62 EB A0 */	lfd f3, HSD_DisplayFunc_804DE580@sda21(r2)
+/* 80373A5C 0037063C  C8 42 EB A8 */	lfd f2, HSD_DisplayFunc_804DE588@sda21(r2)
 /* 80373A60 00370640  FC 01 00 72 */	fmul f0, f1, f1
 /* 80373A64 00370644  FC 23 00 72 */	fmul f1, f3, f1
 /* 80373A68 00370648  FC 1E 10 3C */	fnmsub f0, f30, f0, f2
@@ -94,8 +94,8 @@ mkVBillBoardMtx:
 /* 80373AB8 00370698  4B FC F3 A1 */	bl PSVECCrossProduct
 /* 80373ABC 0037069C  48 00 00 18 */	b .L_80373AD4
 .L_80373AC0:
-/* 80373AC0 003706A0  3C 60 80 40 */	lis r3, lbl_80406AE0@ha
-/* 80373AC4 003706A4  38 83 6A E0 */	addi r4, r3, lbl_80406AE0@l
+/* 80373AC0 003706A0  3C 60 80 40 */	lis r3, HSD_DisplayFunc_80406AE0@ha
+/* 80373AC4 003706A4  38 83 6A E0 */	addi r4, r3, HSD_DisplayFunc_80406AE0@l
 /* 80373AC8 003706A8  38 61 00 30 */	addi r3, r1, 0x30
 /* 80373ACC 003706AC  38 A1 00 3C */	addi r5, r1, 0x3c
 /* 80373AD0 003706B0  4B FC F3 89 */	bl PSVECCrossProduct
@@ -175,14 +175,14 @@ mkHBillBoardMtx:
 /* 80373BE8 003707C8  EC 41 00 72 */	fmuls f2, f1, f1
 /* 80373BEC 003707CC  EC 63 00 F2 */	fmuls f3, f3, f3
 /* 80373BF0 003707D0  EC 20 00 32 */	fmuls f1, f0, f0
-/* 80373BF4 003707D4  C0 02 EB 98 */	lfs f0, lbl_804DE578@sda21(r2)
+/* 80373BF4 003707D4  C0 02 EB 98 */	lfs f0, HSD_DisplayFunc_804DE578@sda21(r2)
 /* 80373BF8 003707D8  EC 22 08 2A */	fadds f1, f2, f1
 /* 80373BFC 003707DC  EF 83 08 2A */	fadds f28, f3, f1
 /* 80373C00 003707E0  FC 1C 00 40 */	fcmpo cr0, f28, f0
 /* 80373C04 003707E4  40 81 00 50 */	ble .L_80373C54
 /* 80373C08 003707E8  FC 20 E0 34 */	frsqrte f1, f28
-/* 80373C0C 003707EC  C8 62 EB A0 */	lfd f3, lbl_804DE580@sda21(r2)
-/* 80373C10 003707F0  C8 42 EB A8 */	lfd f2, lbl_804DE588@sda21(r2)
+/* 80373C0C 003707EC  C8 62 EB A0 */	lfd f3, HSD_DisplayFunc_804DE580@sda21(r2)
+/* 80373C10 003707F0  C8 42 EB A8 */	lfd f2, HSD_DisplayFunc_804DE588@sda21(r2)
 /* 80373C14 003707F4  FC 01 00 72 */	fmul f0, f1, f1
 /* 80373C18 003707F8  FC 23 00 72 */	fmul f1, f3, f1
 /* 80373C1C 003707FC  FC 1C 10 3C */	fnmsub f0, f28, f0, f2
@@ -205,15 +205,15 @@ mkHBillBoardMtx:
 /* 80373C5C 0037083C  EC 41 00 72 */	fmuls f2, f1, f1
 /* 80373C60 00370840  C0 64 00 28 */	lfs f3, 0x28(r4)
 /* 80373C64 00370844  EC 20 00 32 */	fmuls f1, f0, f0
-/* 80373C68 00370848  C0 02 EB 98 */	lfs f0, lbl_804DE578@sda21(r2)
+/* 80373C68 00370848  C0 02 EB 98 */	lfs f0, HSD_DisplayFunc_804DE578@sda21(r2)
 /* 80373C6C 0037084C  EC 63 00 F2 */	fmuls f3, f3, f3
 /* 80373C70 00370850  EC 22 08 2A */	fadds f1, f2, f1
 /* 80373C74 00370854  EF 63 08 2A */	fadds f27, f3, f1
 /* 80373C78 00370858  FC 1B 00 40 */	fcmpo cr0, f27, f0
 /* 80373C7C 0037085C  40 81 00 50 */	ble .L_80373CCC
 /* 80373C80 00370860  FC 20 D8 34 */	frsqrte f1, f27
-/* 80373C84 00370864  C8 62 EB A0 */	lfd f3, lbl_804DE580@sda21(r2)
-/* 80373C88 00370868  C8 42 EB A8 */	lfd f2, lbl_804DE588@sda21(r2)
+/* 80373C84 00370864  C8 62 EB A0 */	lfd f3, HSD_DisplayFunc_804DE580@sda21(r2)
+/* 80373C88 00370868  C8 42 EB A8 */	lfd f2, HSD_DisplayFunc_804DE588@sda21(r2)
 /* 80373C8C 0037086C  FC 01 00 72 */	fmul f0, f1, f1
 /* 80373C90 00370870  FC 23 00 72 */	fmul f1, f3, f1
 /* 80373C94 00370874  FC 1B 10 3C */	fnmsub f0, f27, f0, f2
@@ -235,13 +235,13 @@ mkHBillBoardMtx:
 /* 80373CD0 003708B0  54 00 04 A5 */	rlwinm. r0, r0, 0, 0x12, 0x12
 /* 80373CD4 003708B4  41 82 00 A0 */	beq .L_80373D74
 /* 80373CD8 003708B8  EC 3D 07 72 */	fmuls f1, f29, f29
-/* 80373CDC 003708BC  C0 02 EB 98 */	lfs f0, lbl_804DE578@sda21(r2)
+/* 80373CDC 003708BC  C0 02 EB 98 */	lfs f0, HSD_DisplayFunc_804DE578@sda21(r2)
 /* 80373CE0 003708C0  EC 9F 0F FA */	fmadds f4, f31, f31, f1
 /* 80373CE4 003708C4  FC 04 00 40 */	fcmpo cr0, f4, f0
 /* 80373CE8 003708C8  40 81 00 50 */	ble .L_80373D38
 /* 80373CEC 003708CC  FC 20 20 34 */	frsqrte f1, f4
-/* 80373CF0 003708D0  C8 62 EB A0 */	lfd f3, lbl_804DE580@sda21(r2)
-/* 80373CF4 003708D4  C8 42 EB A8 */	lfd f2, lbl_804DE588@sda21(r2)
+/* 80373CF0 003708D0  C8 62 EB A0 */	lfd f3, HSD_DisplayFunc_804DE580@sda21(r2)
+/* 80373CF4 003708D4  C8 42 EB A8 */	lfd f2, HSD_DisplayFunc_804DE588@sda21(r2)
 /* 80373CF8 003708D8  FC 01 00 72 */	fmul f0, f1, f1
 /* 80373CFC 003708DC  FC 23 00 72 */	fmul f1, f3, f1
 /* 80373D00 003708E0  FC 04 10 3C */	fnmsub f0, f4, f0, f2
@@ -275,8 +275,8 @@ mkHBillBoardMtx:
 /* 80373D6C 0037094C  4B FC F0 ED */	bl PSVECCrossProduct
 /* 80373D70 00370950  48 00 00 18 */	b .L_80373D88
 .L_80373D74:
-/* 80373D74 00370954  3C 60 80 40 */	lis r3, lbl_80406AEC@ha
-/* 80373D78 00370958  38 83 6A EC */	addi r4, r3, lbl_80406AEC@l
+/* 80373D74 00370954  3C 60 80 40 */	lis r3, HSD_DisplayFunc_80406AEC@ha
+/* 80373D78 00370958  38 83 6A EC */	addi r4, r3, HSD_DisplayFunc_80406AEC@l
 /* 80373D7C 0037095C  38 61 00 4C */	addi r3, r1, 0x4c
 /* 80373D80 00370960  38 A1 00 34 */	addi r5, r1, 0x34
 /* 80373D84 00370964  4B FC F0 D5 */	bl PSVECCrossProduct
@@ -345,21 +345,21 @@ mkBillBoardMtx:
 /* 80373E70 00370A50  93 81 00 48 */	stw r28, 0x48(r1)
 /* 80373E74 00370A54  7C 7C 1B 78 */	mr r28, r3
 /* 80373E78 00370A58  C0 44 00 10 */	lfs f2, 0x10(r4)
-/* 80373E7C 00370A5C  3C 80 80 40 */	lis r4, lbl_80406AE0@ha
+/* 80373E7C 00370A5C  3C 80 80 40 */	lis r4, HSD_DisplayFunc_80406AE0@ha
 /* 80373E80 00370A60  C0 3D 00 00 */	lfs f1, 0(r29)
-/* 80373E84 00370A64  3B E4 6A E0 */	addi r31, r4, lbl_80406AE0@l
+/* 80373E84 00370A64  3B E4 6A E0 */	addi r31, r4, HSD_DisplayFunc_80406AE0@l
 /* 80373E88 00370A68  EC 42 00 B2 */	fmuls f2, f2, f2
 /* 80373E8C 00370A6C  EC 21 00 72 */	fmuls f1, f1, f1
 /* 80373E90 00370A70  C0 7D 00 20 */	lfs f3, 0x20(r29)
-/* 80373E94 00370A74  C0 02 EB 98 */	lfs f0, lbl_804DE578@sda21(r2)
+/* 80373E94 00370A74  C0 02 EB 98 */	lfs f0, HSD_DisplayFunc_804DE578@sda21(r2)
 /* 80373E98 00370A78  EC 63 00 F2 */	fmuls f3, f3, f3
 /* 80373E9C 00370A7C  EC 22 08 2A */	fadds f1, f2, f1
 /* 80373EA0 00370A80  EF E3 08 2A */	fadds f31, f3, f1
 /* 80373EA4 00370A84  FC 1F 00 40 */	fcmpo cr0, f31, f0
 /* 80373EA8 00370A88  40 81 00 50 */	ble .L_80373EF8
 /* 80373EAC 00370A8C  FC 20 F8 34 */	frsqrte f1, f31
-/* 80373EB0 00370A90  C8 62 EB A0 */	lfd f3, lbl_804DE580@sda21(r2)
-/* 80373EB4 00370A94  C8 42 EB A8 */	lfd f2, lbl_804DE588@sda21(r2)
+/* 80373EB0 00370A90  C8 62 EB A0 */	lfd f3, HSD_DisplayFunc_804DE580@sda21(r2)
+/* 80373EB4 00370A94  C8 42 EB A8 */	lfd f2, HSD_DisplayFunc_804DE588@sda21(r2)
 /* 80373EB8 00370A98  FC 01 00 72 */	fmul f0, f1, f1
 /* 80373EBC 00370A9C  FC 23 00 72 */	fmul f1, f3, f1
 /* 80373EC0 00370AA0  FC 1F 10 3C */	fnmsub f0, f31, f0, f2
@@ -382,15 +382,15 @@ mkBillBoardMtx:
 /* 80373F00 00370AE0  EC 41 00 72 */	fmuls f2, f1, f1
 /* 80373F04 00370AE4  C0 7D 00 28 */	lfs f3, 0x28(r29)
 /* 80373F08 00370AE8  EC 20 00 32 */	fmuls f1, f0, f0
-/* 80373F0C 00370AEC  C0 02 EB 98 */	lfs f0, lbl_804DE578@sda21(r2)
+/* 80373F0C 00370AEC  C0 02 EB 98 */	lfs f0, HSD_DisplayFunc_804DE578@sda21(r2)
 /* 80373F10 00370AF0  EC 63 00 F2 */	fmuls f3, f3, f3
 /* 80373F14 00370AF4  EC 22 08 2A */	fadds f1, f2, f1
 /* 80373F18 00370AF8  EF C3 08 2A */	fadds f30, f3, f1
 /* 80373F1C 00370AFC  FC 1E 00 40 */	fcmpo cr0, f30, f0
 /* 80373F20 00370B00  40 81 00 50 */	ble .L_80373F70
 /* 80373F24 00370B04  FC 20 F0 34 */	frsqrte f1, f30
-/* 80373F28 00370B08  C8 62 EB A0 */	lfd f3, lbl_804DE580@sda21(r2)
-/* 80373F2C 00370B0C  C8 42 EB A8 */	lfd f2, lbl_804DE588@sda21(r2)
+/* 80373F28 00370B08  C8 62 EB A0 */	lfd f3, HSD_DisplayFunc_804DE580@sda21(r2)
+/* 80373F2C 00370B0C  C8 42 EB A8 */	lfd f2, HSD_DisplayFunc_804DE588@sda21(r2)
 /* 80373F30 00370B10  FC 01 00 72 */	fmul f0, f1, f1
 /* 80373F34 00370B14  FC 23 00 72 */	fmul f1, f3, f1
 /* 80373F38 00370B18  FC 1E 10 3C */	fnmsub f0, f30, f0, f2
@@ -607,10 +607,10 @@ HSD_JObjMakePositionMtx:
 /* 80374258 00370E38  4B FC DF AD */	bl PSMTXConcat
 /* 8037425C 00370E3C  48 00 00 30 */	b .L_8037428C
 .L_80374260:
-/* 80374260 00370E40  3C 60 80 40 */	lis r3, lbl_80406B04@ha
-/* 80374264 00370E44  3C 80 80 40 */	lis r4, lbl_80406B14@ha
-/* 80374268 00370E48  38 A4 6B 14 */	addi r5, r4, lbl_80406B14@l
-/* 8037426C 00370E4C  38 63 6B 04 */	addi r3, r3, lbl_80406B04@l
+/* 80374260 00370E40  3C 60 80 40 */	lis r3, HSD_DisplayFunc_80406B04@ha
+/* 80374264 00370E44  3C 80 80 40 */	lis r4, HSD_DisplayFunc_80406B14@ha
+/* 80374268 00370E48  38 A4 6B 14 */	addi r5, r4, HSD_DisplayFunc_80406B14@l
+/* 8037426C 00370E4C  38 63 6B 04 */	addi r3, r3, HSD_DisplayFunc_80406B04@l
 /* 80374270 00370E50  38 80 01 42 */	li r4, 0x142
 /* 80374274 00370E54  48 01 40 05 */	bl HSD_Panic
 /* 80374278 00370E58  48 00 00 14 */	b .L_8037428C
@@ -648,10 +648,10 @@ _HSD_mkEnvelopeModelNodeMtx:
 /* 803742E0 00370EC0  28 1D 00 00 */	cmplwi r29, 0
 /* 803742E4 00370EC4  3B FD 00 00 */	addi r31, r29, 0
 /* 803742E8 00370EC8  40 82 00 30 */	bne .L_80374318
-/* 803742EC 00370ECC  3C 60 80 40 */	lis r3, lbl_80406B04@ha
-/* 803742F0 00370ED0  38 63 6B 04 */	addi r3, r3, lbl_80406B04@l
+/* 803742EC 00370ECC  3C 60 80 40 */	lis r3, HSD_DisplayFunc_80406B04@ha
+/* 803742F0 00370ED0  38 63 6B 04 */	addi r3, r3, HSD_DisplayFunc_80406B04@l
 /* 803742F4 00370ED4  38 80 01 56 */	li r4, 0x156
-/* 803742F8 00370ED8  38 AD A7 48 */	addi r5, r13, lbl_804D5DE8@sda21
+/* 803742F8 00370ED8  38 AD A7 48 */	addi r5, r13, HSD_DisplayFunc_804D5DE8@sda21
 /* 803742FC 00370EDC  48 01 3F 25 */	bl __assert
 /* 80374300 00370EE0  48 00 00 18 */	b .L_80374318
 .L_80374304:
@@ -668,10 +668,10 @@ _HSD_mkEnvelopeModelNodeMtx:
 .L_80374324:
 /* 80374324 00370F04  28 1F 00 00 */	cmplwi r31, 0
 /* 80374328 00370F08  40 82 00 18 */	bne .L_80374340
-/* 8037432C 00370F0C  3C 60 80 40 */	lis r3, lbl_80406B04@ha
-/* 80374330 00370F10  38 63 6B 04 */	addi r3, r3, lbl_80406B04@l
+/* 8037432C 00370F0C  3C 60 80 40 */	lis r3, HSD_DisplayFunc_80406B04@ha
+/* 80374330 00370F10  38 63 6B 04 */	addi r3, r3, HSD_DisplayFunc_80406B04@l
 /* 80374334 00370F14  38 80 01 A6 */	li r4, 0x1a6
-/* 80374338 00370F18  38 AD A7 50 */	addi r5, r13, lbl_804D5DF0@sda21
+/* 80374338 00370F18  38 AD A7 50 */	addi r5, r13, HSD_DisplayFunc_804D5DF0@sda21
 /* 8037433C 00370F1C  48 01 3E E5 */	bl __assert
 .L_80374340:
 /* 80374340 00370F20  7C 1F E8 40 */	cmplw r31, r29
@@ -784,9 +784,9 @@ HSD_JObjDispDObj:
 /* 803744B4 00371094  28 1C 00 00 */	cmplwi r28, 0
 /* 803744B8 00371098  41 82 00 44 */	beq .L_803744FC
 /* 803744BC 0037109C  40 82 00 14 */	bne .L_803744D0
-/* 803744C0 003710A0  38 6D A7 54 */	addi r3, r13, lbl_804D5DF4@sda21
+/* 803744C0 003710A0  38 6D A7 54 */	addi r3, r13, HSD_DisplayFunc_804D5DF4@sda21
 /* 803744C4 003710A4  38 80 02 34 */	li r4, 0x234
-/* 803744C8 003710A8  38 AD A7 48 */	addi r5, r13, lbl_804D5DE8@sda21
+/* 803744C8 003710A8  38 AD A7 48 */	addi r5, r13, HSD_DisplayFunc_804D5DE8@sda21
 /* 803744CC 003710AC  48 01 3D 55 */	bl __assert
 .L_803744D0:
 /* 803744D0 003710B0  80 9C 00 14 */	lwz r4, 0x14(r28)
@@ -826,7 +826,7 @@ HSD_JObjDispDObj:
 /* 8037454C 0037112C  38 C0 00 01 */	li r6, 1
 /* 80374550 00371130  4E 80 00 21 */	blrl
 .L_80374554:
-/* 80374554 00371134  80 0D BF FC */	lwz r0, lbl_804D769C@sda21(r13)
+/* 80374554 00371134  80 0D BF FC */	lwz r0, HSD_DisplayFunc_804D769C@sda21(r13)
 /* 80374558 00371138  2C 00 00 00 */	cmpwi r0, 0
 /* 8037455C 0037113C  40 82 00 60 */	bne .L_803745BC
 /* 80374560 00371140  57 E0 02 D7 */	rlwinm. r0, r31, 0, 0xb, 0xb
@@ -1023,7 +1023,7 @@ _HSD_ZListSort:
 /* 803747F8 003713D8  7C 08 02 A6 */	mflr r0
 /* 803747FC 003713DC  90 01 00 04 */	stw r0, 4(r1)
 /* 80374800 003713E0  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80374804 003713E4  80 0D C0 00 */	lwz r0, lbl_804D76A0@sda21(r13)
+/* 80374804 003713E4  80 0D C0 00 */	lwz r0, HSD_DisplayFunc_804D76A0@sda21(r13)
 /* 80374808 003713E8  2C 00 00 00 */	cmpwi r0, 0
 /* 8037480C 003713EC  41 82 00 2C */	beq .L_80374838
 /* 80374810 003713F0  80 6D C0 08 */	lwz r3, zlist_texedge_top@sda21(r13)
@@ -1220,8 +1220,8 @@ HSD_JObjSetSPtclCallback:
 
 .global HSD_SetEraseColor
 HSD_SetEraseColor:
-/* 80374A88 00371668  98 6D A7 38 */	stb r3, lbl_804D5DD8@sda21(r13)
-/* 80374A8C 0037166C  38 6D A7 38 */	addi r3, r13, lbl_804D5DD8@sda21
+/* 80374A88 00371668  98 6D A7 38 */	stb r3, HSD_DisplayFunc_804D5DD8@sda21(r13)
+/* 80374A8C 0037166C  38 6D A7 38 */	addi r3, r13, HSD_DisplayFunc_804D5DD8@sda21
 /* 80374A90 00371670  98 83 00 01 */	stb r4, 1(r3)
 /* 80374A94 00371674  98 A3 00 02 */	stb r5, 2(r3)
 /* 80374A98 00371678  98 C3 00 03 */	stb r6, 3(r3)
@@ -1256,8 +1256,8 @@ HSD_EraseRect:
 .L_80374B00:
 /* 80374B00 003716E0  2C 1F 00 00 */	cmpwi r31, 0
 /* 80374B04 003716E4  41 82 00 98 */	beq .L_80374B9C
-/* 80374B08 003716E8  3C 60 80 40 */	lis r3, lbl_80406B40@ha
-/* 80374B0C 003716EC  38 83 6B 40 */	addi r4, r3, lbl_80406B40@l
+/* 80374B08 003716E8  3C 60 80 40 */	lis r3, HSD_DisplayFunc_80406B40@ha
+/* 80374B0C 003716EC  38 83 6B 40 */	addi r4, r3, HSD_DisplayFunc_80406B40@l
 /* 80374B10 003716F0  38 61 00 3C */	addi r3, r1, 0x3c
 /* 80374B14 003716F4  38 A0 00 04 */	li r5, 4
 /* 80374B18 003716F8  38 C0 00 04 */	li r6, 4
@@ -1392,7 +1392,7 @@ HSD_EraseRect:
 /* 80374CFC 003718DC  38 60 00 0D */	li r3, 0xd
 /* 80374D00 003718E0  38 80 00 01 */	li r4, 1
 /* 80374D04 003718E4  4B FC 71 FD */	bl GXSetVtxDesc
-/* 80374D08 003718E8  80 0D A7 38 */	lwz r0, lbl_804D5DD8@sda21(r13)
+/* 80374D08 003718E8  80 0D A7 38 */	lwz r0, HSD_DisplayFunc_804D5DD8@sda21(r13)
 /* 80374D0C 003718EC  38 60 00 80 */	li r3, 0x80
 /* 80374D10 003718F0  38 80 00 00 */	li r4, 0
 /* 80374D14 003718F4  90 01 00 38 */	stw r0, 0x38(r1)
@@ -1480,33 +1480,33 @@ _HSD_DispForgetMemory:
 
 .section .data
     .balign 8
-.global lbl_80406AE0
-lbl_80406AE0:
+.global HSD_DisplayFunc_80406AE0
+HSD_DisplayFunc_80406AE0:
     .4byte NULL
     .4byte NULL
     .4byte 0x3F800000
-.global lbl_80406AEC
-lbl_80406AEC:
+.global HSD_DisplayFunc_80406AEC
+HSD_DisplayFunc_80406AEC:
     .4byte NULL
     .4byte 0x3F800000
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x3F800000
-.global lbl_80406B04
-lbl_80406B04:
+.global HSD_DisplayFunc_80406B04
+HSD_DisplayFunc_80406B04:
     .asciz "displayfunc.c"
     .balign 4
-.global lbl_80406B14
-lbl_80406B14:
+.global HSD_DisplayFunc_80406B14
+HSD_DisplayFunc_80406B14:
     .asciz "unkown type of billboard.\n"
     .balign 4
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_80406B40
-lbl_80406B40:
+.global HSD_DisplayFunc_80406B40
+HSD_DisplayFunc_80406B40:
     .4byte 0xFFFFFFFF
     .4byte 0xFFFFFFFF
     .4byte 0xFFFFFFFF
@@ -1543,8 +1543,8 @@ lbl_80406B40:
 
 .section .sdata
     .balign 8
-.global lbl_804D5DD8
-lbl_804D5DD8:
+.global HSD_DisplayFunc_804D5DD8
+HSD_DisplayFunc_804D5DD8:
     .4byte 0x00000000
 .global zlist_bottom
 zlist_bottom:
@@ -1555,16 +1555,16 @@ zlist_texedge_bottom:
 .global zlist_xlu_bottom
 zlist_xlu_bottom:
     .4byte zlist_xlu_top
-.global lbl_804D5DE8
-lbl_804D5DE8:
+.global HSD_DisplayFunc_804D5DE8
+HSD_DisplayFunc_804D5DE8:
     .asciz "jobj"
     .balign 4
-.global lbl_804D5DF0
-lbl_804D5DF0:
+.global HSD_DisplayFunc_804D5DF0
+HSD_DisplayFunc_804D5DF0:
     .asciz "x"
     .balign 4
-.global lbl_804D5DF4
-lbl_804D5DF4:
+.global HSD_DisplayFunc_804D5DF4
+HSD_DisplayFunc_804D5DF4:
     .asciz "jobj.h"
     .balign 4
 
@@ -1574,11 +1574,11 @@ lbl_804D5DF4:
 .global sptcl_callback
 sptcl_callback:
     .skip 0x4
-.global lbl_804D769C
-lbl_804D769C:
+.global HSD_DisplayFunc_804D769C
+HSD_DisplayFunc_804D769C:
     .skip 0x4
-.global lbl_804D76A0
-lbl_804D76A0:
+.global HSD_DisplayFunc_804D76A0
+HSD_DisplayFunc_804D76A0:
     .skip 0x4
 .global zlist_top
 zlist_top:
@@ -1599,15 +1599,15 @@ zlist_xlu_nb:
 
 .section .sdata2
     .balign 8
-.global lbl_804DE578
-lbl_804DE578:
+.global HSD_DisplayFunc_804DE578
+HSD_DisplayFunc_804DE578:
     .4byte 0x00000000
     .4byte 0x00000000
-.global lbl_804DE580
-lbl_804DE580:
+.global HSD_DisplayFunc_804DE580
+HSD_DisplayFunc_804DE580:
     .4byte 0x3FE00000
     .4byte 0x00000000
-.global lbl_804DE588
-lbl_804DE588:
+.global HSD_DisplayFunc_804DE588
+HSD_DisplayFunc_804DE588:
     .4byte 0x40080000
     .4byte 0x00000000

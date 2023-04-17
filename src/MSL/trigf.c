@@ -25,16 +25,16 @@ f32 sin__Ff(f32 x)
 const float tmp_float[] = { 0.25F, 0.023239374F, 0.00000017055572F,
                             1.867365e-11F };
 
-int lbl_80400770[] = { 0x7FFFFFFF };
-int lbl_80400774[] = { 0x7F800000 };
+int MSL_TrigF_80400770[] = { 0x7FFFFFFF };
+int MSL_TrigF_80400774[] = { 0x7F800000 };
 
 float __four_over_pi_m1[4] = {};
 
 const float __two_over_pi = 0.63661975F;
-const float lbl_804DE19C = 0.5F;
+const float MSL_TrigF_804DE19C = 0.5F;
 const float __SQRT_FLT_EPSILON__ = 3.4526698300e-4F;
 
-const double lbl_804DE1A8 = 4503601774854144.0L;
+const double MSL_TrigF_804DE1A8 = 4503601774854144.0L;
 
 extern const float __sincos_poly[];
 extern const float __sincos_on_quadrant[];
@@ -59,21 +59,21 @@ asm float cosf(float)
 /* 8032626C 00322E4C  54 00 00 01 */	rlwinm. r0, r0, 0, 0, 0
 /* 80326270 00322E50  EC 20 01 B2 */	fmuls f1, f0, f6
 /* 80326274 00322E54  41 82 00 1C */	beq lbl_80326290
-/* 80326278 00322E58  C0 02 E7 BC */	lfs f0, lbl_804DE19C(r2)
+/* 80326278 00322E58  C0 02 E7 BC */	lfs f0, MSL_TrigF_804DE19C(r2)
 /* 8032627C 00322E5C  EC 01 00 28 */	fsubs f0, f1, f0
 /* 80326280 00322E60  FC 00 00 1E */	fctiwz f0, f0
 /* 80326284 00322E64  D8 01 00 10 */	stfd f0, 0x10(r1)
 /* 80326288 00322E68  80 81 00 14 */	lwz r4, 0x14(r1)
 /* 8032628C 00322E6C  48 00 00 18 */	b lbl_803262A4
 lbl_80326290:
-/* 80326290 00322E70  C0 02 E7 BC */	lfs f0, lbl_804DE19C(r2)
+/* 80326290 00322E70  C0 02 E7 BC */	lfs f0, MSL_TrigF_804DE19C(r2)
 /* 80326294 00322E74  EC 00 08 2A */	fadds f0, f0, f1
 /* 80326298 00322E78  FC 00 00 1E */	fctiwz f0, f0
 /* 8032629C 00322E7C  D8 01 00 10 */	stfd f0, 0x10(r1)
 /* 803262A0 00322E80  80 81 00 14 */	lwz r4, 0x14(r1)
 lbl_803262A4:
 /* 803262A4 00322E84  54 80 08 3C */	slwi r0, r4, 1
-/* 803262A8 00322E88  C8 22 E7 C8 */	lfd f1, lbl_804DE1A8(r2)
+/* 803262A8 00322E88  C8 22 E7 C8 */	lfd f1, MSL_TrigF_804DE1A8(r2)
 /* 803262AC 00322E8C  6C 00 80 00 */	xoris r0, r0, 0x8000
 /* 803262B0 00322E90  C0 43 00 00 */	lfs f2, 0(r3)
 /* 803262B4 00322E94  90 01 00 14 */	stw r0, 0x14(r1)
@@ -239,21 +239,21 @@ asm float sinf(float)
 /* 80326400 00322FE0  54 00 00 01 */	rlwinm. r0, r0, 0, 0, 0
 /* 80326404 00322FE4  EC 20 01 B2 */	fmuls f1, f0, f6
 /* 80326408 00322FE8  41 82 00 1C */	beq lbl_80326424
-/* 8032640C 00322FEC  C0 02 E7 BC */	lfs f0, lbl_804DE19C(r2)
+/* 8032640C 00322FEC  C0 02 E7 BC */	lfs f0, MSL_TrigF_804DE19C(r2)
 /* 80326410 00322FF0  EC 01 00 28 */	fsubs f0, f1, f0
 /* 80326414 00322FF4  FC 00 00 1E */	fctiwz f0, f0
 /* 80326418 00322FF8  D8 01 00 10 */	stfd f0, 0x10(r1)
 /* 8032641C 00322FFC  80 81 00 14 */	lwz r4, 0x14(r1)
 /* 80326420 00323000  48 00 00 18 */	b lbl_80326438
 lbl_80326424:
-/* 80326424 00323004  C0 02 E7 BC */	lfs f0, lbl_804DE19C(r2)
+/* 80326424 00323004  C0 02 E7 BC */	lfs f0, MSL_TrigF_804DE19C(r2)
 /* 80326428 00323008  EC 00 08 2A */	fadds f0, f0, f1
 /* 8032642C 0032300C  FC 00 00 1E */	fctiwz f0, f0
 /* 80326430 00323010  D8 01 00 10 */	stfd f0, 0x10(r1)
 /* 80326434 00323014  80 81 00 14 */	lwz r4, 0x14(r1)
 lbl_80326438:
 /* 80326438 00323018  54 80 08 3C */	slwi r0, r4, 1
-/* 8032643C 0032301C  C8 22 E7 C8 */	lfd f1, lbl_804DE1A8(r2)
+/* 8032643C 0032301C  C8 22 E7 C8 */	lfd f1, MSL_TrigF_804DE1A8(r2)
 /* 80326440 00323020  6C 00 80 00 */	xoris r0, r0, 0x8000
 /* 80326444 00323024  C0 43 00 00 */	lfs f2, 0(r3)
 /* 80326448 00323028  90 01 00 14 */	stw r0, 0x14(r1)

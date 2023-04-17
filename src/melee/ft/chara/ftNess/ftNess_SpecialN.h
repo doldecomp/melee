@@ -4,7 +4,7 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-void ftNess_ItemPKFlushSetNULL(HSD_GObj*);
+void ftNs_SpecialN_ItemPKFlushSetNULL(HSD_GObj*);
 
 f32 return_void(void);
 f32 return_void2(void);

@@ -3,17 +3,17 @@
 #include "ft/chara/ftDonkey/ftdonkey.h"
 #include "ft/ft_0877.h"
 
-bool ftDonkey_800E0134(HSD_GObj* gobj)
+bool ftDk_MS_342_800E0134(HSD_GObj* gobj)
 {
     if (ft_800C97A8(gobj)) {
-        ftDonkey_800E017C(gobj);
+        ftDk_MS_342_800E017C(gobj);
         return true;
     }
 
     return false;
 }
 
-void ftDonkey_800E017C(HSD_GObj* gobj)
+void ftDk_MS_342_800E017C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);

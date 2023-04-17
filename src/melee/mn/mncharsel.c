@@ -8,15 +8,15 @@
 
 #include <baselib/sislib.h>
 
-extern CSSData* lbl_804D6CB0;
-extern SIS* lbl_804D1124[];
+extern CSSData* mnCharSel_804D6CB0;
+extern SIS* HSD_SisLib_804D1124[];
 
 TextKerning* mnCharSel_8025BC20(TextKerning* arg0, u32 arg1)
 {
     TextKerning* kerning;
     u32 render_zeroes;
     render_zeroes = 0;
-    kerning = lbl_804D1124[0][41].kerning;
+    kerning = HSD_SisLib_804D1124[0][41].kerning;
     if (arg1 >= 10000) {
         arg1 = 9999;
     }
@@ -50,14 +50,14 @@ void mnCharSel_8025BD30(void)
 {
     TextKerning* kerning;
 
-    kerning = lbl_804D1124[0][37].kerning;
+    kerning = HSD_SisLib_804D1124[0][37].kerning;
 
-    if (lbl_804D6CB0->match_type == 1) {
-        func_803A6530(0, 0x4A, 0x4F);
+    if (mnCharSel_804D6CB0->match_type == 1) {
+        HSD_SisLib_803A6530(0, 0x4A, 0x4F);
         return;
     }
-    if (lbl_804D6CB0->match_type == 2) {
-        func_803A6530(0, 0x4A, 0x50);
+    if (mnCharSel_804D6CB0->match_type == 2) {
+        HSD_SisLib_803A6530(0, 0x4A, 0x50);
         return;
     }
     if (lbLang_IsSavedLanguageJP() != 0) {
@@ -65,22 +65,22 @@ void mnCharSel_8025BD30(void)
             mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->stock_count);
         } else if (gmMainLib_8015CC34()->time_limit != 0) {
             mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
-            func_803A660C(0, 0x4A, 0x53);
+            HSD_SisLib_803A660C(0, 0x4A, 0x53);
         } else {
-            func_803A6530(0, 0x4A, 0x51);
+            HSD_SisLib_803A6530(0, 0x4A, 0x51);
         }
         switch (gmMainLib_8015CC34()->mode) {
         case Mode_Time:
-            func_803A660C(0, 0x4A, 0x4B);
+            HSD_SisLib_803A660C(0, 0x4A, 0x4B);
             return;
         case Mode_Stock:
-            func_803A660C(0, 0x4A, 0x4C);
+            HSD_SisLib_803A660C(0, 0x4A, 0x4C);
             return;
         case Mode_Coin:
-            func_803A660C(0, 0x4A, 0x4D);
+            HSD_SisLib_803A660C(0, 0x4A, 0x4D);
             return;
         case Mode_Bonus:
-            func_803A660C(0, 0x4A, 0x4E);
+            HSD_SisLib_803A660C(0, 0x4A, 0x4E);
             return;
         }
     } else {
@@ -88,38 +88,38 @@ void mnCharSel_8025BD30(void)
         case Mode_Time:
             if (gmMainLib_8015CC34()->time_limit != 0) {
                 mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
-                func_803A660C(0, 0x4A, 0x53);
+                HSD_SisLib_803A660C(0, 0x4A, 0x53);
             } else {
-                func_803A6530(0, 0x4A, 0x51);
+                HSD_SisLib_803A6530(0, 0x4A, 0x51);
             }
-            func_803A660C(0, 0x4A, 0x4B);
+            HSD_SisLib_803A660C(0, 0x4A, 0x4B);
             return;
         case Mode_Stock:
             mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->stock_count);
             if (gmMainLib_8015CC34()->stock_count < 2U) {
-                func_803A660C(0, 0x4A, 0x55);
+                HSD_SisLib_803A660C(0, 0x4A, 0x55);
             } else {
-                func_803A660C(0, 0x4A, 0x54);
+                HSD_SisLib_803A660C(0, 0x4A, 0x54);
             }
-            func_803A660C(0, 0x4A, 0x4C);
+            HSD_SisLib_803A660C(0, 0x4A, 0x4C);
             return;
         case Mode_Coin:
             if (gmMainLib_8015CC34()->time_limit != 0) {
                 mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
-                func_803A660C(0, 0x4A, 0x53);
+                HSD_SisLib_803A660C(0, 0x4A, 0x53);
             } else {
-                func_803A6530(0, 0x4A, 0x51);
+                HSD_SisLib_803A6530(0, 0x4A, 0x51);
             }
-            func_803A660C(0, 0x4A, 0x4D);
+            HSD_SisLib_803A660C(0, 0x4A, 0x4D);
             return;
         case Mode_Bonus:
             if (gmMainLib_8015CC34()->time_limit != 0) {
                 mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
-                func_803A660C(0, 0x4A, 0x53);
+                HSD_SisLib_803A660C(0, 0x4A, 0x53);
             } else {
-                func_803A6530(0, 0x4A, 0x51);
+                HSD_SisLib_803A6530(0, 0x4A, 0x51);
             }
-            func_803A660C(0, 0x4A, 0x4E);
+            HSD_SisLib_803A660C(0, 0x4A, 0x4E);
             return;
         }
     }

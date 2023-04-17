@@ -100,9 +100,9 @@ HSD_HashSearch:
 /* 80382B80 0037F760  3B E3 00 00 */	addi r31, r3, 0
 /* 80382B84 0037F764  7C 1F 00 40 */	cmplw r31, r0
 /* 80382B88 0037F768  41 80 00 18 */	blt .L_80382BA0
-/* 80382B8C 0037F76C  3C 60 80 40 */	lis r3, lbl_80407720@ha
-/* 80382B90 0037F770  38 A3 77 20 */	addi r5, r3, lbl_80407720@l
-/* 80382B94 0037F774  38 6D A9 20 */	addi r3, r13, lbl_804D5FC0@sda21
+/* 80382B8C 0037F76C  3C 60 80 40 */	lis r3, HSD_Hash_80407720@ha
+/* 80382B90 0037F770  38 A3 77 20 */	addi r5, r3, HSD_Hash_80407720@l
+/* 80382B94 0037F774  38 6D A9 20 */	addi r3, r13, HSD_Hash_804D5FC0@sda21
 /* 80382B98 0037F778  38 80 00 71 */	li r4, 0x71
 /* 80382B9C 0037F77C  48 00 56 85 */	bl __assert
 .L_80382BA0:
@@ -137,15 +137,15 @@ HSD_HashSearch:
 
 .section .data
     .balign 8
-.global lbl_80407720
-lbl_80407720:
+.global HSD_Hash_80407720
+HSD_Hash_80407720:
     .asciz "idx < hash->table_size"
     .balign 4
 
 
 .section .sdata
     .balign 8
-.global lbl_804D5FC0
-lbl_804D5FC0:
+.global HSD_Hash_804D5FC0
+HSD_Hash_804D5FC0:
     .asciz "hash.c"
     .balign 4

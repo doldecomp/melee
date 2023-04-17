@@ -2,15 +2,15 @@
 
 .section .data
     .balign 8
-.global lbl_80402358
-lbl_80402358:
+.global OSSerial_80402358
+OSSerial_80402358:
     .4byte 0xFFFFFFFF
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_8040236C
-lbl_8040236C:
+.global OSSerial_8040236C
+OSSerial_8040236C:
     .4byte 0x00000008
     .4byte 0x00000008
     .4byte 0x00000008
@@ -65,26 +65,26 @@ Packet:
 .global Alarm
 Alarm:
     .skip 0xA0
-.global lbl_804A7ED8
-lbl_804A7ED8:
+.global OSSerial_804A7ED8
+OSSerial_804A7ED8:
     .skip 0x20
-.global lbl_804A7EF8
-lbl_804A7EF8:
+.global OSSerial_804A7EF8
+OSSerial_804A7EF8:
     .skip 0x20
-.global lbl_804A7F18
-lbl_804A7F18:
+.global OSSerial_804A7F18
+OSSerial_804A7F18:
     .skip 0x40
-.global lbl_804A7F58
-lbl_804A7F58:
+.global OSSerial_804A7F58
+OSSerial_804A7F58:
     .skip 0x60
 
 .section .sbss
     .balign 8
-.global lbl_804D73C8
-lbl_804D73C8:
+.global OSSerial_804D73C8
+OSSerial_804D73C8:
     .skip 0x4
-.global lbl_804D73CC
-lbl_804D73CC:
+.global OSSerial_804D73CC
+OSSerial_804D73CC:
     .skip 0x4
 .global __PADFixBits
 __PADFixBits:

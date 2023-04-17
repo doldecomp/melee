@@ -1,6 +1,6 @@
 .include "macros.inc"
 
-.set fobj_c_sdata2_start, lbl_804DE4F0 - 0x20
+.set fobj_c_sdata2_start, HSD_FObj_804DE4F0 - 0x20
 .set .L_804DE4D0, fobj_c_sdata2_start
 .set .L_804DE4E0, fobj_c_sdata2_start + 0x10
 
@@ -17,8 +17,8 @@ HSD_FObjInterpretAnim:
 /* 8036B048 00367C28  DB A1 00 90 */	stfd f29, 0x90(r1)
 /* 8036B04C 00367C2C  BF 41 00 78 */	stmw r26, 0x78(r1)
 /* 8036B050 00367C30  7C 7F 1B 79 */	or. r31, r3, r3
-/* 8036B054 00367C34  3C 60 80 40 */	lis r3, lbl_80406350@ha
-/* 8036B058 00367C38  3B C3 63 50 */	addi r30, r3, lbl_80406350@l
+/* 8036B054 00367C34  3C 60 80 40 */	lis r3, HSD_FObj_80406350@ha
+/* 8036B058 00367C38  3B C3 63 50 */	addi r30, r3, HSD_FObj_80406350@l
 /* 8036B05C 00367C3C  3B 84 00 00 */	addi r28, r4, 0
 /* 8036B060 00367C40  3B 65 00 00 */	addi r27, r5, 0
 /* 8036B064 00367C44  C3 A2 EA F0 */	lfs f29, .L_804DE4D0@sda21(r2)
@@ -35,7 +35,7 @@ HSD_FObjInterpretAnim:
 /* 8036B088 00367C68  EC 00 F0 2A */	fadds f0, f0, f30
 /* 8036B08C 00367C6C  D0 1F 00 1C */	stfs f0, 0x1c(r31)
 /* 8036B090 00367C70  C0 3F 00 1C */	lfs f1, 0x1c(r31)
-/* 8036B094 00367C74  C8 02 EB 10 */	lfd f0, lbl_804DE4F0@sda21(r2)
+/* 8036B094 00367C74  C8 02 EB 10 */	lfd f0, HSD_FObj_804DE4F0@sda21(r2)
 /* 8036B098 00367C78  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 8036B09C 00367C7C  41 80 06 10 */	blt .L_8036B6AC
 /* 8036B0A0 00367C80  CB E2 EB 00 */	lfd f31, .L_804DE4E0@sda21(r2)
@@ -138,7 +138,7 @@ HSD_FObjInterpretAnim:
 /* 8036B1F4 00367DD4  2C 00 00 00 */	cmpwi r0, 0
 /* 8036B1F8 00367DD8  40 82 00 14 */	bne .L_8036B20C
 /* 8036B1FC 00367DDC  38 BE 00 18 */	addi r5, r30, 0x18
-/* 8036B200 00367DE0  38 6D A6 B8 */	addi r3, r13, lbl_804D5D58@sda21
+/* 8036B200 00367DE0  38 6D A6 B8 */	addi r3, r13, HSD_FObj_804D5D58@sda21
 /* 8036B204 00367DE4  38 80 01 7F */	li r4, 0x17f
 /* 8036B208 00367DE8  48 01 D0 19 */	bl __assert
 .L_8036B20C:
@@ -187,7 +187,7 @@ HSD_FObjInterpretAnim:
 /* 8036B298 00367E78  2C 00 00 00 */	cmpwi r0, 0
 /* 8036B29C 00367E7C  40 82 00 14 */	bne .L_8036B2B0
 /* 8036B2A0 00367E80  38 BE 00 18 */	addi r5, r30, 0x18
-/* 8036B2A4 00367E84  38 6D A6 B8 */	addi r3, r13, lbl_804D5D58@sda21
+/* 8036B2A4 00367E84  38 6D A6 B8 */	addi r3, r13, HSD_FObj_804D5D58@sda21
 /* 8036B2A8 00367E88  38 80 01 93 */	li r4, 0x193
 /* 8036B2AC 00367E8C  48 01 CF 75 */	bl __assert
 .L_8036B2B0:
@@ -236,7 +236,7 @@ HSD_FObjInterpretAnim:
 /* 8036B33C 00367F1C  2C 00 00 00 */	cmpwi r0, 0
 /* 8036B340 00367F20  40 82 00 14 */	bne .L_8036B354
 /* 8036B344 00367F24  38 BE 00 18 */	addi r5, r30, 0x18
-/* 8036B348 00367F28  38 6D A6 B8 */	addi r3, r13, lbl_804D5D58@sda21
+/* 8036B348 00367F28  38 6D A6 B8 */	addi r3, r13, HSD_FObj_804D5D58@sda21
 /* 8036B34C 00367F2C  38 80 01 A7 */	li r4, 0x1a7
 /* 8036B350 00367F30  48 01 CE D1 */	bl __assert
 .L_8036B354:
@@ -277,7 +277,7 @@ HSD_FObjInterpretAnim:
 /* 8036B3C4 00367FA4  2C 00 00 00 */	cmpwi r0, 0
 /* 8036B3C8 00367FA8  40 82 00 14 */	bne .L_8036B3DC
 /* 8036B3CC 00367FAC  38 BE 00 18 */	addi r5, r30, 0x18
-/* 8036B3D0 00367FB0  38 6D A6 B8 */	addi r3, r13, lbl_804D5D58@sda21
+/* 8036B3D0 00367FB0  38 6D A6 B8 */	addi r3, r13, HSD_FObj_804D5D58@sda21
 /* 8036B3D4 00367FB4  38 80 01 B9 */	li r4, 0x1b9
 /* 8036B3D8 00367FB8  48 01 CE 49 */	bl __assert
 .L_8036B3DC:
@@ -321,7 +321,7 @@ HSD_FObjInterpretAnim:
 /* 8036B458 00368038  2C 00 00 00 */	cmpwi r0, 0
 /* 8036B45C 0036803C  40 82 00 14 */	bne .L_8036B470
 /* 8036B460 00368040  38 BE 00 18 */	addi r5, r30, 0x18
-/* 8036B464 00368044  38 6D A6 B8 */	addi r3, r13, lbl_804D5D58@sda21
+/* 8036B464 00368044  38 6D A6 B8 */	addi r3, r13, HSD_FObj_804D5D58@sda21
 /* 8036B468 00368048  38 80 01 CC */	li r4, 0x1cc
 /* 8036B46C 0036804C  48 01 CD B5 */	bl __assert
 .L_8036B470:
@@ -352,7 +352,7 @@ HSD_FObjInterpretAnim:
 /* 8036B4C0 003680A0  2C 00 00 00 */	cmpwi r0, 0
 /* 8036B4C4 003680A4  40 82 00 14 */	bne .L_8036B4D8
 /* 8036B4C8 003680A8  38 BE 00 18 */	addi r5, r30, 0x18
-/* 8036B4CC 003680AC  38 6D A6 B8 */	addi r3, r13, lbl_804D5D58@sda21
+/* 8036B4CC 003680AC  38 6D A6 B8 */	addi r3, r13, HSD_FObj_804D5D58@sda21
 /* 8036B4D0 003680B0  38 80 01 E9 */	li r4, 0x1e9
 /* 8036B4D4 003680B4  48 01 CD 4D */	bl __assert
 .L_8036B4D8:
@@ -398,7 +398,7 @@ HSD_FObjInterpretAnim:
 /* 8036B558 00368138  28 00 00 03 */	cmplwi r0, 3
 /* 8036B55C 0036813C  41 82 00 14 */	beq .L_8036B570
 /* 8036B560 00368140  38 BE 00 00 */	addi r5, r30, 0
-/* 8036B564 00368144  38 6D A6 B8 */	addi r3, r13, lbl_804D5D58@sda21
+/* 8036B564 00368144  38 6D A6 B8 */	addi r3, r13, HSD_FObj_804D5D58@sda21
 /* 8036B568 00368148  38 80 01 6C */	li r4, 0x16c
 /* 8036B56C 0036814C  48 01 CC B5 */	bl __assert
 .L_8036B570:
@@ -615,9 +615,9 @@ HSD_FObjAlloc:
 /* 8036B860 00368440  48 00 F3 69 */	bl HSD_ObjAlloc
 /* 8036B864 00368444  7C 7F 1B 79 */	or. r31, r3, r3
 /* 8036B868 00368448  40 82 00 14 */	bne .L_8036B87C
-/* 8036B86C 0036844C  38 6D A6 B8 */	addi r3, r13, lbl_804D5D58@sda21
+/* 8036B86C 0036844C  38 6D A6 B8 */	addi r3, r13, HSD_FObj_804D5D58@sda21
 /* 8036B870 00368450  38 80 02 F3 */	li r4, 0x2f3
-/* 8036B874 00368454  38 AD A6 C0 */	addi r5, r13, lbl_804D5D60@sda21
+/* 8036B874 00368454  38 AD A6 C0 */	addi r5, r13, HSD_FObj_804D5D60@sda21
 /* 8036B878 00368458  48 01 C9 A9 */	bl __assert
 .L_8036B87C:
 /* 8036B87C 0036845C  38 7F 00 00 */	addi r3, r31, 0
@@ -648,8 +648,8 @@ HSD_FObjFree:
 
 .section .data
     .balign 8
-.global lbl_80406350
-lbl_80406350:
+.global HSD_FObj_80406350
+HSD_FObj_80406350:
     .asciz "st == FOBJ_LOAD_WAIT"
     .balign 4
     .asciz "st == FOBJ_LOAD_DATA0 || st == FOBJ_LOAD_DATA"
@@ -658,19 +658,19 @@ lbl_80406350:
 
 .section .sdata
     .balign 8
-.global lbl_804D5D58
-lbl_804D5D58:
+.global HSD_FObj_804D5D58
+HSD_FObj_804D5D58:
     .asciz "fobj.c"
     .balign 4
-.global lbl_804D5D60
-lbl_804D5D60:
+.global HSD_FObj_804D5D60
+HSD_FObj_804D5D60:
     .asciz "new"
     .balign 4
 
 
 .section .sdata2
     .balign 8
-.global lbl_804DE4F0
-lbl_804DE4F0:
+.global HSD_FObj_804DE4F0
+HSD_FObj_804DE4F0:
     .4byte 0x00000000
     .4byte 0x00000000

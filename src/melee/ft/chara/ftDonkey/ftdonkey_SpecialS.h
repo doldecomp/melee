@@ -4,15 +4,15 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-void ftDonkey_SpecialAirS_StartMotion(HSD_GObj* gobj);
-void ftDonkey_8010E2BC(HSD_GObj* gobj);
-void ftDonkey_8010E2F8(HSD_GObj* gobj);
-void ftDonkey_8010E334(HSD_GObj* gobj);
-void ftDonkey_8010E338(HSD_GObj* gobj);
-void ftDonkey_8010E33C(HSD_GObj* gobj);
-void ftDonkey_8010E35C(HSD_GObj* gobj);
-void ftDonkey_8010E3BC(HSD_GObj* gobj);
-void ftDonkey_8010E428(HSD_GObj* gobj);
-void ftDonkey_SpecialS_StartMotion(HSD_GObj* gobj);
+void ftDk_SpecialAirS_Enter(HSD_GObj* gobj);
+void ftDk_SpecialS_Anim(HSD_GObj* gobj);
+void ftDk_SpecialAirS_Anim(HSD_GObj* gobj);
+void ftDk_SpecialS_IASA(HSD_GObj* gobj);
+void ftDk_SpecialAirS_IASA(HSD_GObj* gobj);
+void ftDk_SpecialS_Phys(HSD_GObj* gobj);
+void ftDk_SpecialAirS_Phys(HSD_GObj* gobj);
+void ftDk_SpecialS_Coll(HSD_GObj* gobj);
+void ftDk_SpecialAirS_Coll(HSD_GObj* gobj);
+void ftDk_SpecialS_Enter(HSD_GObj* gobj);
 
 #endif

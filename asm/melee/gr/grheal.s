@@ -12,7 +12,7 @@ grHeal_8021EF3C:
 /* 8021EF44 0021BB24  94 21 FF F8 */	stwu r1, -8(r1)
 /* 8021EF48 0021BB28  4B FA 5A B1 */	bl Ground_801C49F8
 /* 8021EF4C 0021BB2C  3C 80 80 4A */	lis r4, stage_info@ha
-/* 8021EF50 0021BB30  90 6D B4 50 */	stw r3, lbl_804D6AF0@sda21(r13)
+/* 8021EF50 0021BB30  90 6D B4 50 */	stw r3, grHeal_804D6AF0@sda21(r13)
 /* 8021EF54 0021BB34  38 64 E6 C8 */	addi r3, r4, stage_info@l
 /* 8021EF58 0021BB38  38 A3 00 8C */	addi r5, r3, 0x8c
 /* 8021EF5C 0021BB3C  88 03 00 8C */	lbz r0, 0x8c(r3)
@@ -32,7 +32,7 @@ grHeal_8021EF3C:
 /* 8021EF94 0021BB74  4B FA 4A 2D */	bl Ground_801C39C0
 /* 8021EF98 0021BB78  4B FA 4C 1D */	bl Ground_801C3BB4
 /* 8021EF9C 0021BB7C  48 00 5B CD */	bl Stage_GetBlastZoneTopOffset
-/* 8021EFA0 0021BB80  C0 02 C2 B8 */	lfs f0, lbl_804DBC98@sda21(r2)
+/* 8021EFA0 0021BB80  C0 02 C2 B8 */	lfs f0, grHeal_804DBC98@sda21(r2)
 /* 8021EFA4 0021BB84  EC 20 00 72 */	fmuls f1, f0, f1
 /* 8021EFA8 0021BB88  4B FA 49 D9 */	bl Ground_801C3980
 /* 8021EFAC 0021BB8C  80 01 00 0C */	lwz r0, 0xc(r1)
@@ -69,8 +69,8 @@ grHeal_8021EFEC:
 /* 8021F004 0021BBE4  93 81 00 10 */	stw r28, 0x10(r1)
 /* 8021F008 0021BBE8  3B 83 00 00 */	addi r28, r3, 0
 /* 8021F00C 0021BBEC  1C 1C 00 14 */	mulli r0, r28, 0x14
-/* 8021F010 0021BBF0  3C 60 80 3F */	lis r3, lbl_803E83B8@ha
-/* 8021F014 0021BBF4  3B E3 83 B8 */	addi r31, r3, lbl_803E83B8@l
+/* 8021F010 0021BBF0  3C 60 80 3F */	lis r3, grHeal_803E83B8@ha
+/* 8021F014 0021BBF4  3B E3 83 B8 */	addi r31, r3, grHeal_803E83B8@l
 /* 8021F018 0021BBF8  7F BF 02 14 */	add r29, r31, r0
 /* 8021F01C 0021BBFC  38 7C 00 00 */	addi r3, r28, 0
 /* 8021F020 0021BC00  3B BD 00 9C */	addi r29, r29, 0x9c
@@ -104,7 +104,7 @@ grHeal_8021EFEC:
 /* 8021F088 0021BC68  41 82 00 2C */	beq .L_8021F0B4
 /* 8021F08C 0021BC6C  38 7E 00 00 */	addi r3, r30, 0
 /* 8021F090 0021BC70  38 A0 00 04 */	li r5, 4
-/* 8021F094 0021BC74  48 17 0C C1 */	bl func_8038FD54
+/* 8021F094 0021BC74  48 17 0C C1 */	bl HSD_GObjProc_8038FD54
 /* 8021F098 0021BC78  48 00 00 1C */	b .L_8021F0B4
 .L_8021F09C:
 /* 8021F09C 0021BC7C  38 DC 00 00 */	addi r6, r28, 0
@@ -136,10 +136,10 @@ grHeal_8021F0D8:
 /* 8021F0F8 0021BCD8  80 84 00 14 */	lwz r4, 0x14(r4)
 /* 8021F0FC 0021BCDC  4B FA 90 3D */	bl grAnime_801C8138
 /* 8021F100 0021BCE0  3B A0 00 00 */	li r29, 0
-/* 8021F104 0021BCE4  3C 60 80 47 */	lis r3, lbl_80473A18@ha
+/* 8021F104 0021BCE4  3C 60 80 47 */	lis r3, gm_80473A18@ha
 /* 8021F108 0021BCE8  57 A0 08 3C */	slwi r0, r29, 1
-/* 8021F10C 0021BCEC  3B CD 93 38 */	addi r30, r13, lbl_804D49D8@sda21
-/* 8021F110 0021BCF0  3B E3 3A 18 */	addi r31, r3, lbl_80473A18@l
+/* 8021F10C 0021BCEC  3B CD 93 38 */	addi r30, r13, grHeal_804D49D8@sda21
+/* 8021F110 0021BCF0  3B E3 3A 18 */	addi r31, r3, gm_80473A18@l
 /* 8021F114 0021BCF4  7F DE 02 14 */	add r30, r30, r0
 /* 8021F118 0021BCF8  48 00 00 2C */	b .L_8021F144
 .L_8021F11C:
@@ -155,7 +155,7 @@ grHeal_8021F0D8:
 /* 8021F13C 0021BD1C  3B DE 00 02 */	addi r30, r30, 2
 /* 8021F140 0021BD20  3B BD 00 01 */	addi r29, r29, 1
 .L_8021F144:
-/* 8021F144 0021BD24  80 6D B4 50 */	lwz r3, lbl_804D6AF0@sda21(r13)
+/* 8021F144 0021BD24  80 6D B4 50 */	lwz r3, grHeal_804D6AF0@sda21(r13)
 /* 8021F148 0021BD28  80 03 00 00 */	lwz r0, 0(r3)
 /* 8021F14C 0021BD2C  7C 1D 00 00 */	cmpw r29, r0
 /* 8021F150 0021BD30  41 80 FF CC */	blt .L_8021F11C
@@ -187,17 +187,17 @@ grHeal_8021F180:
 /* 8021F198 0021BD78  83 C3 00 2C */	lwz r30, 0x2c(r3)
 /* 8021F19C 0021BD7C  80 9E 00 14 */	lwz r4, 0x14(r30)
 /* 8021F1A0 0021BD80  4B FA 8F 99 */	bl grAnime_801C8138
-/* 8021F1A4 0021BD84  80 6D B4 50 */	lwz r3, lbl_804D6AF0@sda21(r13)
-/* 8021F1A8 0021BD88  3C 80 80 47 */	lis r4, lbl_80473A18@ha
-/* 8021F1AC 0021BD8C  38 84 3A 18 */	addi r4, r4, lbl_80473A18@l
+/* 8021F1A4 0021BD84  80 6D B4 50 */	lwz r3, grHeal_804D6AF0@sda21(r13)
+/* 8021F1A8 0021BD88  3C 80 80 47 */	lis r4, gm_80473A18@ha
+/* 8021F1AC 0021BD8C  38 84 3A 18 */	addi r4, r4, gm_80473A18@l
 /* 8021F1B0 0021BD90  88 84 00 94 */	lbz r4, 0x94(r4)
 /* 8021F1B4 0021BD94  80 63 00 04 */	lwz r3, 4(r3)
 /* 8021F1B8 0021BD98  7C 04 1B D6 */	divw r0, r4, r3
 /* 8021F1BC 0021BD9C  7C 00 19 D6 */	mullw r0, r0, r3
 /* 8021F1C0 0021BDA0  7C 00 20 51 */	subf. r0, r0, r4
 /* 8021F1C4 0021BDA4  40 82 00 5C */	bne .L_8021F220
-/* 8021F1C8 0021BDA8  3C 60 80 3C */	lis r3, lbl_803B84A8@ha
-/* 8021F1CC 0021BDAC  38 C3 84 A8 */	addi r6, r3, lbl_803B84A8@l
+/* 8021F1C8 0021BDA8  3C 60 80 3C */	lis r3, grHeal_803B84A8@ha
+/* 8021F1CC 0021BDAC  38 C3 84 A8 */	addi r6, r3, grHeal_803B84A8@l
 /* 8021F1D0 0021BDB0  80 A6 00 00 */	lwz r5, 0(r6)
 /* 8021F1D4 0021BDB4  38 81 00 94 */	addi r4, r1, 0x94
 /* 8021F1D8 0021BDB8  80 06 00 04 */	lwz r0, 4(r6)
@@ -219,8 +219,8 @@ grHeal_8021F180:
 /* 8021F218 0021BDF8  7F 63 DB 78 */	mr r3, r27
 /* 8021F21C 0021BDFC  48 0E 58 3D */	bl un_80304A58
 .L_8021F220:
-/* 8021F220 0021BE00  3C 60 80 47 */	lis r3, lbl_80473A18@ha
-/* 8021F224 0021BE04  38 83 3A 18 */	addi r4, r3, lbl_80473A18@l
+/* 8021F220 0021BE00  3C 60 80 47 */	lis r3, gm_80473A18@ha
+/* 8021F224 0021BE04  38 83 3A 18 */	addi r4, r3, gm_80473A18@l
 /* 8021F228 0021BE08  38 A4 00 95 */	addi r5, r4, 0x95
 /* 8021F22C 0021BE0C  88 64 00 95 */	lbz r3, 0x95(r4)
 /* 8021F230 0021BE10  3B E0 00 00 */	li r31, 0
@@ -300,9 +300,9 @@ grHeal_8021F180:
 /* 8021F340 0021BF20  7C 1A F8 00 */	cmpw r26, r31
 /* 8021F344 0021BF24  41 80 FF E0 */	blt .L_8021F324
 /* 8021F348 0021BF28  3B 40 00 00 */	li r26, 0
-/* 8021F34C 0021BF2C  3C 60 80 3F */	lis r3, lbl_803E83B8@ha
+/* 8021F34C 0021BF2C  3C 60 80 3F */	lis r3, grHeal_803E83B8@ha
 /* 8021F350 0021BF30  57 44 08 3C */	slwi r4, r26, 1
-/* 8021F354 0021BF34  38 03 83 B8 */	addi r0, r3, lbl_803E83B8@l
+/* 8021F354 0021BF34  38 03 83 B8 */	addi r0, r3, grHeal_803E83B8@l
 /* 8021F358 0021BF38  7F 60 22 14 */	add r27, r0, r4
 /* 8021F35C 0021BF3C  3B 81 00 18 */	addi r28, r1, 0x18
 .L_8021F360:
@@ -316,10 +316,10 @@ grHeal_8021F180:
 /* 8021F37C 0021BF5C  3B 9C 00 04 */	addi r28, r28, 4
 /* 8021F380 0021BF60  41 80 FF E0 */	blt .L_8021F360
 /* 8021F384 0021BF64  3B A0 00 00 */	li r29, 0
-/* 8021F388 0021BF68  3C 60 80 47 */	lis r3, lbl_80473A18@ha
+/* 8021F388 0021BF68  3C 60 80 47 */	lis r3, gm_80473A18@ha
 /* 8021F38C 0021BF6C  57 A0 10 3A */	slwi r0, r29, 2
 /* 8021F390 0021BF70  3B 81 00 18 */	addi r28, r1, 0x18
-/* 8021F394 0021BF74  3B 63 3A 18 */	addi r27, r3, lbl_80473A18@l
+/* 8021F394 0021BF74  3B 63 3A 18 */	addi r27, r3, gm_80473A18@l
 /* 8021F398 0021BF78  7F 9C 02 14 */	add r28, r28, r0
 .L_8021F39C:
 /* 8021F39C 0021BF7C  88 1B 00 76 */	lbz r0, 0x76(r27)
@@ -344,9 +344,9 @@ grHeal_8021F180:
 /* 8021F3E4 0021BFC4  90 1E 00 C4 */	stw r0, 0xc4(r30)
 /* 8021F3E8 0021BFC8  48 00 00 20 */	b .L_8021F408
 .L_8021F3EC:
-/* 8021F3EC 0021BFCC  3C 60 80 47 */	lis r3, lbl_80473A18@ha
+/* 8021F3EC 0021BFCC  3C 60 80 47 */	lis r3, gm_80473A18@ha
 /* 8021F3F0 0021BFD0  88 A5 00 00 */	lbz r5, 0(r5)
-/* 8021F3F4 0021BFD4  38 03 3A 18 */	addi r0, r3, lbl_80473A18@l
+/* 8021F3F4 0021BFD4  38 03 3A 18 */	addi r0, r3, gm_80473A18@l
 /* 8021F3F8 0021BFD8  38 81 00 90 */	addi r4, r1, 0x90
 /* 8021F3FC 0021BFDC  7C 60 FA 14 */	add r3, r0, r31
 /* 8021F400 0021BFE0  7C 84 FA 14 */	add r4, r4, r31
@@ -393,8 +393,8 @@ grHeal_8021F474:
 /* 8021F484 0021C064  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8021F488 0021C068  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 8021F48C 0021C06C  38 64 F4 24 */	addi r3, r4, .L_8021F424@l
-/* 8021F490 0021C070  C0 22 C2 BC */	lfs f1, lbl_804DBC9C@sda21(r2)
-/* 8021F494 0021C074  C0 42 C2 C0 */	lfs f2, lbl_804DBCA0@sda21(r2)
+/* 8021F490 0021C070  C0 22 C2 BC */	lfs f1, grHeal_804DBC9C@sda21(r2)
+/* 8021F494 0021C074  C0 42 C2 C0 */	lfs f2, grHeal_804DBCA0@sda21(r2)
 /* 8021F498 0021C078  4B FA 48 AD */	bl Ground_801C3D44
 /* 8021F49C 0021C07C  4B DF 21 59 */	bl lb_800115F4
 /* 8021F4A0 0021C080  38 00 00 00 */	li r0, 0
@@ -433,10 +433,10 @@ grHeal_8021F4E8:
 /* 8021F50C 0021C0EC  4B FF FA E1 */	bl grHeal_8021EFEC
 /* 8021F510 0021C0F0  7C 7F 1B 79 */	or. r31, r3, r3
 /* 8021F514 0021C0F4  40 82 00 18 */	bne .L_8021F52C
-/* 8021F518 0021C0F8  3C 60 80 3F */	lis r3, lbl_803E851C@ha
-/* 8021F51C 0021C0FC  38 63 85 1C */	addi r3, r3, lbl_803E851C@l
+/* 8021F518 0021C0F8  3C 60 80 3F */	lis r3, grHeal_803E851C@ha
+/* 8021F51C 0021C0FC  38 63 85 1C */	addi r3, r3, grHeal_803E851C@l
 /* 8021F520 0021C100  38 80 01 B8 */	li r4, 0x1b8
-/* 8021F524 0021C104  38 AD 93 40 */	addi r5, r13, lbl_804D49E0@sda21
+/* 8021F524 0021C104  38 AD 93 40 */	addi r5, r13, grHeal_804D49E0@sda21
 /* 8021F528 0021C108  48 16 8C F9 */	bl __assert
 .L_8021F52C:
 /* 8021F52C 0021C10C  38 7F 00 00 */	addi r3, r31, 0
@@ -444,10 +444,10 @@ grHeal_8021F4E8:
 /* 8021F534 0021C114  38 A0 00 00 */	li r5, 0
 /* 8021F538 0021C118  4B FA 8C 01 */	bl grAnime_801C8138
 /* 8021F53C 0021C11C  6F C0 80 00 */	xoris r0, r30, 0x8000
-/* 8021F540 0021C120  C8 22 C2 C8 */	lfd f1, lbl_804DBCA8@sda21(r2)
+/* 8021F540 0021C120  C8 22 C2 C8 */	lfd f1, grHeal_804DBCA8@sda21(r2)
 /* 8021F544 0021C124  90 01 00 1C */	stw r0, 0x1c(r1)
 /* 8021F548 0021C128  3C 00 43 30 */	lis r0, 0x4330
-/* 8021F54C 0021C12C  C0 42 C2 C4 */	lfs f2, lbl_804DBCA4@sda21(r2)
+/* 8021F54C 0021C12C  C0 42 C2 C4 */	lfs f2, grHeal_804DBCA4@sda21(r2)
 /* 8021F550 0021C130  7F E3 FB 78 */	mr r3, r31
 /* 8021F554 0021C134  90 01 00 18 */	stw r0, 0x18(r1)
 /* 8021F558 0021C138  38 80 00 00 */	li r4, 0
@@ -535,10 +535,10 @@ grHeal_8021F628:
 /* 8021F64C 0021C22C  4B FF F9 A1 */	bl grHeal_8021EFEC
 /* 8021F650 0021C230  7C 7F 1B 79 */	or. r31, r3, r3
 /* 8021F654 0021C234  40 82 00 18 */	bne .L_8021F66C
-/* 8021F658 0021C238  3C 60 80 3F */	lis r3, lbl_803E851C@ha
-/* 8021F65C 0021C23C  38 63 85 1C */	addi r3, r3, lbl_803E851C@l
+/* 8021F658 0021C238  3C 60 80 3F */	lis r3, grHeal_803E851C@ha
+/* 8021F65C 0021C23C  38 63 85 1C */	addi r3, r3, grHeal_803E851C@l
 /* 8021F660 0021C240  38 80 02 01 */	li r4, 0x201
-/* 8021F664 0021C244  38 AD 93 40 */	addi r5, r13, lbl_804D49E0@sda21
+/* 8021F664 0021C244  38 AD 93 40 */	addi r5, r13, grHeal_804D49E0@sda21
 /* 8021F668 0021C248  48 16 8B B9 */	bl __assert
 .L_8021F66C:
 /* 8021F66C 0021C24C  38 7F 00 00 */	addi r3, r31, 0
@@ -546,10 +546,10 @@ grHeal_8021F628:
 /* 8021F674 0021C254  38 A0 00 00 */	li r5, 0
 /* 8021F678 0021C258  4B FA 8A C1 */	bl grAnime_801C8138
 /* 8021F67C 0021C25C  6F A0 80 00 */	xoris r0, r29, 0x8000
-/* 8021F680 0021C260  C8 22 C2 C8 */	lfd f1, lbl_804DBCA8@sda21(r2)
+/* 8021F680 0021C260  C8 22 C2 C8 */	lfd f1, grHeal_804DBCA8@sda21(r2)
 /* 8021F684 0021C264  90 01 00 1C */	stw r0, 0x1c(r1)
 /* 8021F688 0021C268  3C 00 43 30 */	lis r0, 0x4330
-/* 8021F68C 0021C26C  C0 42 C2 C4 */	lfs f2, lbl_804DBCA4@sda21(r2)
+/* 8021F68C 0021C26C  C0 42 C2 C4 */	lfs f2, grHeal_804DBCA4@sda21(r2)
 /* 8021F690 0021C270  7F E3 FB 78 */	mr r3, r31
 /* 8021F694 0021C274  90 01 00 18 */	stw r0, 0x18(r1)
 /* 8021F698 0021C278  38 80 00 00 */	li r4, 0
@@ -595,10 +595,10 @@ grHeal_8021F708:
 .global grHeal_8021F70C
 grHeal_8021F70C:
 /* 8021F70C 0021C2EC  7C 08 02 A6 */	mflr r0
-/* 8021F710 0021C2F0  3C 80 80 3F */	lis r4, lbl_803E83B8@ha
+/* 8021F710 0021C2F0  3C 80 80 3F */	lis r4, grHeal_803E83B8@ha
 /* 8021F714 0021C2F4  90 01 00 04 */	stw r0, 4(r1)
 /* 8021F718 0021C2F8  2C 03 00 13 */	cmpwi r3, 0x13
-/* 8021F71C 0021C2FC  38 A4 83 B8 */	addi r5, r4, lbl_803E83B8@l
+/* 8021F71C 0021C2FC  38 A4 83 B8 */	addi r5, r4, grHeal_803E83B8@l
 /* 8021F720 0021C300  94 21 FF F8 */	stwu r1, -8(r1)
 /* 8021F724 0021C304  38 C0 00 00 */	li r6, 0
 /* 8021F728 0021C308  40 82 00 5C */	bne .L_8021F784
@@ -688,8 +688,8 @@ grHeal_8021F838:
 
 .section .rodata
     .balign 8
-.global lbl_803B84A8
-lbl_803B84A8:
+.global grHeal_803B84A8
+grHeal_803B84A8:
     .4byte 0x00000000
     .4byte 0x42200000
     .4byte 0x00000000
@@ -697,8 +697,8 @@ lbl_803B84A8:
 
 .section .data
     .balign 8
-.global lbl_803E83B8
-lbl_803E83B8:
+.global grHeal_803E83B8
+grHeal_803E83B8:
     .4byte 0x001D001E
     .4byte 0x001F0020
     .4byte 0x00210022
@@ -738,8 +738,8 @@ lbl_803E83B8:
     .4byte 0x00000012
     .4byte 0x00000017
     .4byte 0xFFFFFFFF
-.global lbl_803E8454
-lbl_803E8454:
+.global grHeal_803E8454
+grHeal_803E8454:
     .4byte grHeal_8021F0D8
     .4byte grHeal_8021F170
     .4byte grHeal_8021F178
@@ -765,15 +765,15 @@ lbl_803E8454:
     .4byte grHeal_8021F704
     .4byte grHeal_8021F708
     .4byte NULL
-.global lbl_803E84B8
-lbl_803E84B8:
+.global grHeal_803E84B8
+grHeal_803E84B8:
     .asciz "/GrHe.dat"
     .balign 4
-.global lbl_803E84C4
-lbl_803E84C4:
+.global grHeal_803E84C4
+grHeal_803E84C4:
     .4byte 0x00000042
-    .4byte lbl_803E8454
-    .4byte lbl_803E84B8
+    .4byte grHeal_803E8454
+    .4byte grHeal_803E84B8
     .4byte grHeal_8021EF3C
     .4byte grHeal_8021EF38
     .4byte grHeal_8021EFBC
@@ -786,8 +786,8 @@ lbl_803E84C4:
     .4byte NULL
     .asciz "%s:%d: couldn t get gobj(id=%d)\n"
     .balign 4
-.global lbl_803E851C
-lbl_803E851C:
+.global grHeal_803E851C
+grHeal_803E851C:
     .asciz "grheal.c"
     .balign 4
     .asciz "*** Not found Next Player!(%d)\n"
@@ -796,38 +796,38 @@ lbl_803E851C:
 
 .section .sdata
     .balign 8
-.global lbl_804D49D8
-lbl_804D49D8:
+.global grHeal_804D49D8
+grHeal_804D49D8:
     .4byte 0x00070008
     .4byte 0x00090000
-.global lbl_804D49E0
-lbl_804D49E0:
+.global grHeal_804D49E0
+grHeal_804D49E0:
     .asciz "gobj"
     .balign 4
 
 
 .section .sbss
     .balign 8
-.global lbl_804D6AF0
-lbl_804D6AF0:
+.global grHeal_804D6AF0
+grHeal_804D6AF0:
     .skip 0x4
 
 
 .section .sdata2
     .balign 8
-.global lbl_804DBC98
-lbl_804DBC98:
+.global grHeal_804DBC98
+grHeal_804DBC98:
     .4byte 0x40000000
-.global lbl_804DBC9C
-lbl_804DBC9C:
+.global grHeal_804DBC9C
+grHeal_804DBC9C:
     .4byte 0x41200000
-.global lbl_804DBCA0
-lbl_804DBCA0:
+.global grHeal_804DBCA0
+grHeal_804DBCA0:
     .4byte 0x41A00000
-.global lbl_804DBCA4
-lbl_804DBCA4:
+.global grHeal_804DBCA4
+grHeal_804DBCA4:
     .4byte 0x00000000
-.global lbl_804DBCA8
-lbl_804DBCA8:
+.global grHeal_804DBCA8
+grHeal_804DBCA8:
     .4byte 0x43300000
     .4byte 0x80000000

@@ -11,10 +11,10 @@
 
 extern HSD_ObjAllocData itemAllocData;
 extern HSD_ObjAllocData unkAllocData1;
-extern HSD_ObjAllocData lbl_804A0C38;
-extern HSD_ObjAllocUnk lbl_804A0C64;
-extern HSD_ObjAllocUnk2 lbl_804A0CCC;
-extern S32Vec3 lbl_804A0E24;
+extern HSD_ObjAllocData Item_804A0C38;
+extern HSD_ObjAllocUnk Item_804A0C64;
+extern HSD_ObjAllocUnk2 Item_804A0CCC;
+extern S32Vec3 Item_804A0E24;
 
 /// Checks if items are enabled
 bool Item_80266F3C(void);

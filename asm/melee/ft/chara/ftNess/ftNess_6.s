@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftNess_SpecialAirNHold_Coll
-ftNess_SpecialAirNHold_Coll:
+.global ftNs_SpecialAirNHold_Coll
+ftNs_SpecialAirNHold_Coll:
 /* 80117A98 00114678  7C 08 02 A6 */	mflr r0
 /* 80117A9C 0011467C  90 01 00 04 */	stw r0, 4(r1)
 /* 80117AA0 00114680  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -32,8 +32,8 @@ lbl_80117AEC:
 /* 80117AF8 001146D8  38 21 00 18 */	addi r1, r1, 0x18
 /* 80117AFC 001146DC  7C 08 03 A6 */	mtlr r0
 /* 80117B00 001146E0  4E 80 00 20 */	blr
-.global ftNess_SpecialAirNEnd_Coll
-ftNess_SpecialAirNEnd_Coll:
+.global ftNs_SpecialAirNEnd_Coll
+ftNs_SpecialAirNEnd_Coll:
 /* 80117B04 001146E4  7C 08 02 A6 */	mflr r0
 /* 80117B08 001146E8  90 01 00 04 */	stw r0, 4(r1)
 /* 80117B0C 001146EC  94 21 FF E8 */	stwu r1, -0x18(r1)

@@ -12,7 +12,7 @@
 
 extern StageInfo stage_info;
 
-static StageCallbacks lbl_803E8EB0[4] = {
+static StageCallbacks grTMs_803E8EB0[4] = {
     {
         grTMars_80222080,
         grTMars_802220AC,
@@ -34,8 +34,8 @@ static StageCallbacks lbl_803E8EB0[4] = {
     },
 };
 
-StageData lbl_803E8F0C = {
-    0x00000034,       lbl_803E8EB0,     "/GrTMs.dat",     grTMars_80221EF8,
+StageData grTMs_803E8F0C = {
+    0x00000034,       grTMs_803E8EB0,     "/GrTMs.dat",     grTMars_80221EF8,
     grTMars_80221EF4, grTMars_80221F68, grTMars_80221F6C, grTMars_80221F90,
     grTMars_802221C8, grTMars_802221D0, 0x00000001,
 };
@@ -76,7 +76,7 @@ static HSD_GObj* grTMars_80221F98(int id)
     Ground* gp;
     StageCallbacks* callbacks;
 
-    callbacks = &lbl_803E8EB0[id];
+    callbacks = &grTMs_803E8EB0[id];
     gobj = Ground_801C14D0(id);
 
     if (gobj != NULL) {
@@ -91,7 +91,7 @@ static HSD_GObj* grTMars_80221F98(int id)
             callbacks->callback0(gobj);
         }
         if (callbacks->callback2 != NULL) {
-            func_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtmars.c", 0xC3, id);

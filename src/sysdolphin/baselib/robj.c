@@ -3,7 +3,7 @@
 HSD_ObjAllocData robj_alloc_data;   // robj_alloc_data
 HSD_ObjAllocData rvalue_alloc_data; // rvalue_alloc_data
 
-extern const f64 lbl_804DE6A0; // 1.75
+extern const f64 HSD_RObj_804DE6A0; // 1.75
 
 void HSD_RObjInitAllocData(void)
 {
@@ -69,7 +69,7 @@ static void RObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
     }
 
     robj = (HSD_RObj*) obj;
-    if (val->fv >= lbl_804DE6A0) {
+    if (val->fv >= HSD_RObj_804DE6A0) {
         robj->flags = robj->flags | 0x80000000;
         return;
     }

@@ -12,9 +12,9 @@
 #include <dolphin/os/os.h>
 #include <baselib/gobjgxlink.h>
 
-static void* lbl_804D6A18;
+static void* grSh_804D6A18;
 
-static StageCallbacks lbl_803E50E8[3] = {
+static StageCallbacks grSh_803E50E8[3] = {
     { grShrine_80201E08, grShrine_80201E34, grShrine_80201E3C,
       grShrine_80201E40, 0 },
     { grShrine_80201E44, grShrine_80201E88, grShrine_80201E90,
@@ -23,9 +23,9 @@ static StageCallbacks lbl_803E50E8[3] = {
       grShrine_80201F40, (1 << 30) | (1 << 31) },
 };
 
-StageData lbl_803E5130 = {
+StageData grSh_803E5130 = {
     (1 << 0) | (1 << 1) | (1 << 2),
-    lbl_803E50E8,
+    grSh_803E50E8,
     "/GrSh.dat",
     grShrine_80201C64,
     grShrine_80201C60,
@@ -48,7 +48,7 @@ static void grShrine_80201C64(void)
     u8 unused0[8];
 #endif
 
-    lbl_804D6A18 = Ground_801C49F8();
+    grSh_804D6A18 = Ground_801C49F8();
     grShrine_80201D20(0);
     grShrine_80201D20(1);
     grShrine_80201D20(2);
@@ -83,7 +83,7 @@ static bool grShrine_80201D18(void)
 static HSD_GObj* grShrine_80201D20(s32 arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &lbl_803E50E8[arg0];
+    StageCallbacks* callbacks = &grSh_803E50E8[arg0];
 
     gobj = Ground_801C14D0(arg0);
 
@@ -100,7 +100,7 @@ static HSD_GObj* grShrine_80201D20(s32 arg0)
             callbacks->callback0(gobj);
         }
         if (callbacks->callback2 != NULL) {
-            func_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grshrine.c", 205, arg0);

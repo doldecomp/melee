@@ -4,19 +4,19 @@
     .balign 4
 .L_80408898:
     .4byte 0x10808000
-    .4byte func_80392194
+    .4byte hsd_80392194
     .4byte 0x46808000
-    .4byte func_80392194
+    .4byte hsd_80392194
     .4byte 0x7C808000
-    .4byte func_80392194
+    .4byte hsd_80392194
     .4byte 0xB3808000
-    .4byte func_80392194
+    .4byte hsd_80392194
 
 .section .text
 
 # https://decomp.me/scratch/OHo6e // 8100 (0%)
-.global func_803921B8
-func_803921B8:
+.global hsd_803921B8
+hsd_803921B8:
 /* 803921B8 0038ED98  7C 08 02 A6 */	mflr r0
 /* 803921BC 0038ED9C  90 01 00 04 */	stw r0, 4(r1)
 /* 803921C0 0038EDA0  94 21 FF 88 */	stwu r1, -0x78(r1)
@@ -112,8 +112,8 @@ func_803921B8:
 /* 803922F8 0038EED8  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/CSBlw // 9400 (0%)
-.global func_803922FC
-func_803922FC:
+.global hsd_803922FC
+hsd_803922FC:
 /* 803922FC 0038EEDC  7C 08 02 A6 */	mflr r0
 /* 80392300 0038EEE0  90 01 00 04 */	stw r0, 4(r1)
 /* 80392304 0038EEE4  94 21 FF 80 */	stwu r1, -0x80(r1)
@@ -223,10 +223,10 @@ func_803922FC:
 /* 80392470 0038F050  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/GVygp // 0 (100%)
-.global func_80392474
-func_80392474:
+.global hsd_80392474
+hsd_80392474:
 /* 80392474 0038F054  38 00 00 00 */	li r0, 0
-/* 80392478 0038F058  90 0D C1 B0 */	stw r0, lbl_804D7850@sda21(r13)
+/* 80392478 0038F058  90 0D C1 B0 */	stw r0, hsd_804D7850@sda21(r13)
 /* 8039247C 0038F05C  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/vqBio // 465 (88.93%)
@@ -240,7 +240,7 @@ func_80392474:
 /* 80392498 0038F078  3B C4 00 00 */	addi r30, r4, 0
 /* 8039249C 0038F07C  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 803924A0 0038F080  3B A3 00 00 */	addi r29, r3, 0
-/* 803924A4 0038F084  80 AD C1 B0 */	lwz r5, lbl_804D7850@sda21(r13)
+/* 803924A4 0038F084  80 AD C1 B0 */	lwz r5, hsd_804D7850@sda21(r13)
 /* 803924A8 0038F088  48 00 00 28 */	b .L_803924D0
 .L_803924AC:
 /* 803924AC 0038F08C  80 65 00 04 */	lwz r3, 4(r5)
@@ -267,9 +267,9 @@ func_80392474:
 /* 803924F8 0038F0D8  4B FE BF BD */	bl HSD_SListAllocAndAppend
 /* 803924FC 0038F0DC  48 00 00 10 */	b .L_8039250C
 .L_80392500:
-/* 80392500 0038F0E0  80 6D C1 B0 */	lwz r3, lbl_804D7850@sda21(r13)
+/* 80392500 0038F0E0  80 6D C1 B0 */	lwz r3, hsd_804D7850@sda21(r13)
 /* 80392504 0038F0E4  4B FE C0 35 */	bl HSD_SListAllocAndPrepend
-/* 80392508 0038F0E8  90 6D C1 B0 */	stw r3, lbl_804D7850@sda21(r13)
+/* 80392508 0038F0E8  90 6D C1 B0 */	stw r3, hsd_804D7850@sda21(r13)
 .L_8039250C:
 /* 8039250C 0038F0EC  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 80392510 0038F0F0  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -280,8 +280,8 @@ func_80392474:
 /* 80392524 0038F104  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/tB1gU // 5 (99.44%) @permuter
-.global func_80392528
-func_80392528:
+.global hsd_80392528
+hsd_80392528:
 /* 80392528 0038F108  7C 08 02 A6 */	mflr r0
 /* 8039252C 0038F10C  38 80 00 80 */	li r4, 0x80
 /* 80392530 0038F110  90 01 00 04 */	stw r0, 4(r1)

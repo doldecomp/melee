@@ -8,7 +8,7 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 
-void ftZelda_8013A830(HSD_GObj* gobj)
+void ftZd_SpecialN_8013A830(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
@@ -21,7 +21,7 @@ void ftZelda_8013A830(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = 0;
 }
 
-void ftZelda_8013A8AC(HSD_GObj* gobj)
+void ftZd_SpecialN_8013A8AC(HSD_GObj* gobj)
 {
     Fighter* fp; // r31
 
@@ -45,7 +45,7 @@ inline void startActionHelper(HSD_GObj* gobj)
     fighter2->sv.zd.unk3.x0 = attributes->x4;
 }
 
-void ftZelda_SpecialN_StartMotion(HSD_GObj* gobj)
+void ftZd_SpecialN_Enter(HSD_GObj* gobj)
 {
     f32 temp_f1;
     Fighter* fp; // r31
@@ -61,10 +61,10 @@ void ftZelda_SpecialN_StartMotion(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 0x155, 0, NULL, temp_f1, 1.0, temp_f1);
     ftAnim_8006EBA4(gobj);
     startActionHelper(gobj);
-    fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013A830;
+    fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialN_8013A830;
 }
 
-void ftZelda_SpecialAirN_StartMotion(HSD_GObj* gobj)
+void ftZd_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftZeldaAttributes* sa = fp->x2D4_specialAttributes;
@@ -81,10 +81,10 @@ void ftZelda_SpecialAirN_StartMotion(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 
     startActionHelper(gobj);
-    fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013A8AC;
+    fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialN_8013A8AC;
 }
 
-void ftZelda_8013AA38(HSD_GObj* gobj)
+void ftZd_SpecialN_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftZeldaAttributes* attributes;
@@ -99,7 +99,7 @@ void ftZelda_8013AA38(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 == 1) {
         fp->x2200_ftcmd_var0 = 2;
-        ftColl_CreateReflectHit(gobj, &attributes->x84, &ftZelda_8013ADB0);
+        ftColl_CreateReflectHit(gobj, &attributes->x84, &ftZd_SpecialN_8013ADB0);
     }
 
     if (fp->x2200_ftcmd_var0 == 0) {
@@ -113,7 +113,7 @@ void ftZelda_8013AA38(HSD_GObj* gobj)
 
 // 8013AACC - 8013AB60 (0x94 bytes)
 // https://decomp.me/scratch/ttWvN
-void ftZelda_8013AACC(HSD_GObj* gobj)
+void ftZd_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftZeldaAttributes* attributes;
@@ -128,7 +128,7 @@ void ftZelda_8013AACC(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 == 1U) {
         fp->x2200_ftcmd_var0 = 2U;
-        ftColl_CreateReflectHit(gobj, &attributes->x84, &ftZelda_8013ADB0);
+        ftColl_CreateReflectHit(gobj, &attributes->x84, &ftZd_SpecialN_8013ADB0);
     }
 
     if (fp->x2200_ftcmd_var0 == 0U) {
@@ -140,17 +140,17 @@ void ftZelda_8013AACC(HSD_GObj* gobj)
     }
 }
 
-void ftZelda_8013AB60(HSD_GObj* gobj)
+void ftZd_SpecialN_IASA(HSD_GObj* gobj)
 {
     return;
 }
-void ftZelda_8013AB64(HSD_GObj* gobj)
+void ftZd_SpecialAirN_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
 // 8013AB68 - 8013AB9C (0x34 bytes)
-void ftZelda_8013AB68(HSD_GObj* gobj)
+void ftZd_SpecialN_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
     ftColl_8007AEF8(gobj);
@@ -158,7 +158,7 @@ void ftZelda_8013AB68(HSD_GObj* gobj)
 
 // 8013AB9C - 8013AC10 (0x74 bytes)
 // https://decomp.me/scratch/juoPH
-void ftZelda_8013AB9C(HSD_GObj* gobj)
+void ftZd_SpecialAirN_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -185,23 +185,23 @@ void ftZelda_8013AB9C(HSD_GObj* gobj)
 
 // 8013AC10 - 8013AC4C (0x3C bytes)
 // https://decomp.me/scratch/CT7dz
-void ftZelda_8013AC10(HSD_GObj* gobj)
+void ftZd_SpecialN_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
-        ftZelda_8013AC88(gobj);
+        ftZd_SpecialN_8013AC88(gobj);
     }
 }
 
 // 8013AC4C - 8013AC88 (0x3C bytes)
 // https://decomp.me/scratch/CT7dz
-void ftZelda_8013AC4C(HSD_GObj* gobj)
+void ftZd_SpecialAirN_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != 0) {
-        ftZelda_8013AD1C(gobj);
+        ftZd_SpecialN_8013AD1C(gobj);
     }
 }
 
-void ftZelda_8013AC88(HSD_GObj* gobj)
+void ftZd_SpecialN_8013AC88(HSD_GObj* gobj)
 {
     ftZeldaAttributes* attributes;
     Fighter* fp;
@@ -221,12 +221,12 @@ void ftZelda_8013AC88(HSD_GObj* gobj)
     attributes = fighter2->x2D4_specialAttributes;
 
     if (fighter2->x2200_ftcmd_var0 == 2U) {
-        ftColl_CreateReflectHit(gobj, &attributes->x84, &ftZelda_8013ADB0);
+        ftColl_CreateReflectHit(gobj, &attributes->x84, &ftZd_SpecialN_8013ADB0);
     }
-    fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013A8AC;
+    fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialN_8013A8AC;
 }
 
-void ftZelda_8013AD1C(HSD_GObj* gobj)
+void ftZd_SpecialN_8013AD1C(HSD_GObj* gobj)
 {
     ftZeldaAttributes* attributes;
     Fighter* fp;
@@ -246,12 +246,12 @@ void ftZelda_8013AD1C(HSD_GObj* gobj)
     attributes = fighter2->x2D4_specialAttributes;
 
     if (fighter2->x2200_ftcmd_var0 == 2U) {
-        ftColl_CreateReflectHit(gobj, &attributes->x84, &ftZelda_8013ADB0);
+        ftColl_CreateReflectHit(gobj, &attributes->x84, &ftZd_SpecialN_8013ADB0);
     }
-    fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013A830;
+    fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialN_8013A830;
 }
 
-void ftZelda_8013ADB0(HSD_GObj* gobj)
+void ftZd_SpecialN_8013ADB0(HSD_GObj* gobj)
 {
     return;
 }

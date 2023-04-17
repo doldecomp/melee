@@ -10,7 +10,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 
-/* static */ StageCallbacks lbl_803E8918[4] = {
+/* static */ StageCallbacks grTFc_803E8918[4] = {
     {
         grTFalco_80220984,
         grTFalco_802209B0,
@@ -34,9 +34,9 @@
     },
 };
 
-StageData lbl_803E8974 = {
+StageData grTFc_803E8974 = {
     45,
-    lbl_803E8918,
+    grTFc_803E8918,
     "/GrTFc.dat",
     grTFalco_802207F4,
     grTFalco_802207F0,
@@ -55,13 +55,13 @@ typedef struct grTFalco_UnkStruct {
     s32 unk_C;
 } grTFalco_UnkStruct;
 
-grTFalco_UnkStruct* lbl_804D6AF8;
+grTFalco_UnkStruct* grTFc_804D6AF8;
 
 void grTFalco_802207F0(int arg0) {}
 
 void grTFalco_802207F4(void)
 {
-    lbl_804D6AF8 = Ground_801C49F8();
+    grTFc_804D6AF8 = Ground_801C49F8();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grTFalco_8022089C(0);
@@ -89,7 +89,7 @@ HSD_GObj* grTFalco_8022089C(int id)
 {
     HSD_GObj* gobj;
 
-    StageCallbacks* cb = &lbl_803E8918[id];
+    StageCallbacks* cb = &grTFc_803E8918[id];
     gobj = Ground_801C14D0(id);
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
@@ -106,7 +106,7 @@ HSD_GObj* grTFalco_8022089C(int id)
         }
 
         if (cb->callback2 != NULL) {
-            func_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
         }
 
     } else {
@@ -175,19 +175,19 @@ bool grTFalco_80220ACC(enum_t arg0)
             i = mpLib_80054C6C(arg0);
 
             if (i == (1 << 0)) {
-                return lbl_804D6AF8->unk_0;
+                return grTFc_804D6AF8->unk_0;
             }
 
             if (i == (1 << 1)) {
-                return lbl_804D6AF8->unk_4;
+                return grTFc_804D6AF8->unk_4;
             }
 
             if (i == (1 << 2)) {
-                return lbl_804D6AF8->unk_8;
+                return grTFc_804D6AF8->unk_8;
             }
 
             if (i == (1 << 3)) {
-                return lbl_804D6AF8->unk_C;
+                return grTFc_804D6AF8->unk_C;
             }
 
             return false;

@@ -25,8 +25,8 @@ lbArchive_80016AF0:
 /* 80016B34 00013714  3B 84 00 00 */	addi r28, r4, 0
 /* 80016B38 00013718  3B C0 00 00 */	li r30, 0
 /* 80016B3C 0001371C  90 A1 00 10 */	stw r5, 0x10(r1)
-/* 80016B40 00013720  3C A0 80 3C */	lis r5, lbl_803BA5B0@ha
-/* 80016B44 00013724  3B E5 A5 B0 */	addi r31, r5, lbl_803BA5B0@l
+/* 80016B40 00013720  3C A0 80 3C */	lis r5, lbArchive_803BA5B0@ha
+/* 80016B44 00013724  3B E5 A5 B0 */	addi r31, r5, lbArchive_803BA5B0@l
 /* 80016B48 00013728  90 C1 00 14 */	stw r6, 0x14(r1)
 /* 80016B4C 0001372C  90 E1 00 18 */	stw r7, 0x18(r1)
 /* 80016B50 00013730  91 01 00 1C */	stw r8, 0x1c(r1)
@@ -155,11 +155,11 @@ lbArchive_80016C64:
 /* 80016D14 000138F4  38 7B 00 00 */	addi r3, r27, 0
 /* 80016D18 000138F8  38 9C 00 00 */	addi r4, r28, 0
 /* 80016D1C 000138FC  4B FF FD 39 */	bl lbArchive_InitializeDAT
-/* 80016D20 00013900  3C 80 80 3C */	lis r4, lbl_803BA5B0@ha
-/* 80016D24 00013904  3C 60 80 3C */	lis r3, lbl_803BA5A4@ha
+/* 80016D20 00013900  3C 80 80 3C */	lis r4, lbArchive_803BA5B0@ha
+/* 80016D24 00013904  3C 60 80 3C */	lis r3, lbArchive_803BA5A4@ha
 /* 80016D28 00013908  3B 9D 00 00 */	addi r28, r29, 0
-/* 80016D2C 0001390C  3B C4 A5 B0 */	addi r30, r4, lbl_803BA5B0@l
-/* 80016D30 00013910  3B E3 A5 A4 */	addi r31, r3, lbl_803BA5A4@l
+/* 80016D2C 0001390C  3B C4 A5 B0 */	addi r30, r4, lbArchive_803BA5B0@l
+/* 80016D30 00013910  3B E3 A5 A4 */	addi r31, r3, lbArchive_803BA5A4@l
 /* 80016D34 00013914  48 00 00 68 */	b .L_80016D9C
 .L_80016D38:
 /* 80016D38 00013918  38 61 00 7C */	addi r3, r1, 0x7c
@@ -181,7 +181,7 @@ lbArchive_80016C64:
 /* 80016D78 00013958  48 32 E9 31 */	bl OSReport
 /* 80016D7C 0001395C  38 7F 00 00 */	addi r3, r31, 0
 /* 80016D80 00013960  38 80 00 70 */	li r4, 0x70
-/* 80016D84 00013964  38 AD 81 20 */	addi r5, r13, lbl_804D37C0@sda21
+/* 80016D84 00013964  38 AD 81 20 */	addi r5, r13, lbArchive_804D37C0@sda21
 /* 80016D88 00013968  48 37 14 99 */	bl __assert
 .L_80016D8C:
 /* 80016D8C 0001396C  38 61 00 7C */	addi r3, r1, 0x7c
@@ -248,9 +248,9 @@ lbArchive_80016DBC:
 /* 80016E6C 00013A4C  38 7B 00 00 */	addi r3, r27, 0
 /* 80016E70 00013A50  38 9C 00 00 */	addi r4, r28, 0
 /* 80016E74 00013A54  4B FF FB E1 */	bl lbArchive_InitializeDAT
-/* 80016E78 00013A58  3C 60 80 3C */	lis r3, lbl_803BA5B0@ha
+/* 80016E78 00013A58  3C 60 80 3C */	lis r3, lbArchive_803BA5B0@ha
 /* 80016E7C 00013A5C  3B 9D 00 00 */	addi r28, r29, 0
-/* 80016E80 00013A60  3B E3 A5 B0 */	addi r31, r3, lbl_803BA5B0@l
+/* 80016E80 00013A60  3B E3 A5 B0 */	addi r31, r3, lbArchive_803BA5B0@l
 /* 80016E84 00013A64  3B C0 00 00 */	li r30, 0
 /* 80016E88 00013A68  48 00 00 54 */	b .L_80016EDC
 .L_80016E8C:
@@ -293,12 +293,12 @@ lbArchive_80016EFC:
 /* 80016F08 00013AE8  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 80016F0C 00013AEC  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 80016F10 00013AF0  7C 7E 1B 79 */	or. r30, r3, r3
-/* 80016F14 00013AF4  3C 60 80 3C */	lis r3, lbl_803BA588@ha
-/* 80016F18 00013AF8  3B E3 A5 88 */	addi r31, r3, lbl_803BA588@l
+/* 80016F14 00013AF4  3C 60 80 3C */	lis r3, lbArchive_803BA588@ha
+/* 80016F18 00013AF8  3B E3 A5 88 */	addi r31, r3, lbArchive_803BA588@l
 /* 80016F1C 00013AFC  40 82 00 14 */	bne .L_80016F30
 /* 80016F20 00013B00  38 7F 00 1C */	addi r3, r31, 0x1c
 /* 80016F24 00013B04  38 80 00 FC */	li r4, 0xfc
-/* 80016F28 00013B08  38 AD 81 24 */	addi r5, r13, lbl_804D37C4@sda21
+/* 80016F28 00013B08  38 AD 81 24 */	addi r5, r13, lbArchive_804D37C4@sda21
 /* 80016F2C 00013B0C  48 37 12 F5 */	bl __assert
 .L_80016F30:
 /* 80016F30 00013B10  80 1E 00 3C */	lwz r0, 0x3c(r30)
@@ -439,11 +439,11 @@ lbArchive_80017040:
 /* 8001711C 00013CFC  3B 5C 00 00 */	addi r26, r28, 0
 /* 80017120 00013D00  3B 20 00 00 */	li r25, 0
 .L_80017124:
-/* 80017124 00013D04  3C 80 80 3C */	lis r4, lbl_803BA5B0@ha
-/* 80017128 00013D08  3C 60 80 3C */	lis r3, lbl_803BA5A4@ha
+/* 80017124 00013D04  3C 80 80 3C */	lis r4, lbArchive_803BA5B0@ha
+/* 80017128 00013D08  3C 60 80 3C */	lis r3, lbArchive_803BA5A4@ha
 /* 8001712C 00013D0C  3B 7D 00 00 */	addi r27, r29, 0
-/* 80017130 00013D10  3B A4 A5 B0 */	addi r29, r4, lbl_803BA5B0@l
-/* 80017134 00013D14  3B C3 A5 A4 */	addi r30, r3, lbl_803BA5A4@l
+/* 80017130 00013D10  3B A4 A5 B0 */	addi r29, r4, lbArchive_803BA5B0@l
+/* 80017134 00013D14  3B C3 A5 A4 */	addi r30, r3, lbArchive_803BA5A4@l
 /* 80017138 00013D18  48 00 00 68 */	b .L_800171A0
 .L_8001713C:
 /* 8001713C 00013D1C  38 61 00 80 */	addi r3, r1, 0x80
@@ -465,7 +465,7 @@ lbArchive_80017040:
 /* 8001717C 00013D5C  48 32 E5 2D */	bl OSReport
 /* 80017180 00013D60  38 7E 00 00 */	addi r3, r30, 0
 /* 80017184 00013D64  38 80 00 70 */	li r4, 0x70
-/* 80017188 00013D68  38 AD 81 20 */	addi r5, r13, lbl_804D37C0@sda21
+/* 80017188 00013D68  38 AD 81 20 */	addi r5, r13, lbArchive_804D37C0@sda21
 /* 8001718C 00013D6C  48 37 10 95 */	bl __assert
 .L_80017190:
 /* 80017190 00013D70  38 61 00 80 */	addi r3, r1, 0x80
@@ -548,9 +548,9 @@ lbArchive_800171CC:
 /* 800172A8 00013E88  3B 5C 00 00 */	addi r26, r28, 0
 /* 800172AC 00013E8C  3B 20 00 00 */	li r25, 0
 .L_800172B0:
-/* 800172B0 00013E90  3C 60 80 3C */	lis r3, lbl_803BA5B0@ha
+/* 800172B0 00013E90  3C 60 80 3C */	lis r3, lbArchive_803BA5B0@ha
 /* 800172B4 00013E94  3B 7D 00 00 */	addi r27, r29, 0
-/* 800172B8 00013E98  3B C3 A5 B0 */	addi r30, r3, lbl_803BA5B0@l
+/* 800172B8 00013E98  3B C3 A5 B0 */	addi r30, r3, lbArchive_803BA5B0@l
 /* 800172BC 00013E9C  3B A0 00 00 */	li r29, 0
 /* 800172C0 00013EA0  48 00 00 54 */	b .L_80017314
 .L_800172C4:
@@ -620,9 +620,9 @@ lbArchive_80017340:
 /* 800173A4 00013F84  80 9D 00 00 */	lwz r4, 0(r29)
 /* 800173A8 00013F88  7C 04 E0 40 */	cmplw r4, r28
 /* 800173AC 00013F8C  41 82 00 20 */	beq .L_800173CC
-/* 800173B0 00013F90  3C 60 80 3C */	lis r3, lbl_803BA5F0@ha
+/* 800173B0 00013F90  3C 60 80 3C */	lis r3, lbArchive_803BA5F0@ha
 /* 800173B4 00013F94  4C C6 31 82 */	crclr 6
-/* 800173B8 00013F98  38 63 A5 F0 */	addi r3, r3, lbl_803BA5F0@l
+/* 800173B8 00013F98  38 63 A5 F0 */	addi r3, r3, lbArchive_803BA5F0@l
 /* 800173BC 00013F9C  38 BC 00 00 */	addi r5, r28, 0
 /* 800173C0 00013FA0  48 32 E2 E9 */	bl OSReport
 /* 800173C4 00013FA4  38 60 FF FF */	li r3, -1
@@ -700,37 +700,37 @@ lbArchive_80017340:
 
 .section .data
     .balign 8
-.global lbl_803BA588
-lbl_803BA588:
+.global lbArchive_803BA588
+lbArchive_803BA588:
     .asciz "HSD_ArchiveParse error!\n"
     .balign 4
 
-.global lbl_803BA5A4
-lbl_803BA5A4:
+.global lbArchive_803BA5A4
+lbArchive_803BA5A4:
     .asciz "lbarchive.c"
     .balign 4
 
-.global lbl_803BA5B0
-lbl_803BA5B0:
+.global lbArchive_803BA5B0
+lbArchive_803BA5B0:
     .asciz "Cannot find symbol %s.\n"
     .balign 4
     .asciz "archive->flags & HSD_ARCHIVE_DONT_FREE"
     .balign 4
 
-.global lbl_803BA5F0
-lbl_803BA5F0:
+.global lbArchive_803BA5F0
+lbArchive_803BA5F0:
     .asciz "lbArchiveRelocate: byte-order mismatch! Please check data format %x %x\n"
     .balign 4
 
 
 .section .sdata
     .balign 8
-.global lbl_804D37C0
-lbl_804D37C0:
+.global lbArchive_804D37C0
+lbArchive_804D37C0:
     .asciz "0"
     .balign 4
-.global lbl_804D37C4
-lbl_804D37C4:
+.global lbArchive_804D37C4
+lbArchive_804D37C4:
     .asciz "archive"
     .balign 4
     .4byte NULL

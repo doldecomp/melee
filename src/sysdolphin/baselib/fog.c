@@ -10,7 +10,7 @@ static void FogAdjInfoInit(void);
 HSD_FogInfo hsdFog = { FogInfoInit };
 HSD_ClassInfo hsdFogAdj = { FogAdjInfoInit };
 
-const GXColor lbl_804DE6F0 = { 0 };
+const GXColor HSD_Fog_804DE6F0 = { 0 };
 
 void HSD_FogSet(HSD_Fog* fog)
 {
@@ -24,7 +24,7 @@ void HSD_FogSet(HSD_Fog* fog)
     } proj;
 
     if (fog == NULL) {
-        GXSetFog(0, lbl_804DE6F0, 0.0F, 0.0F, 0.0F, 0.0F);
+        GXSetFog(0, HSD_Fog_804DE6F0, 0.0F, 0.0F, 0.0F, 0.0F);
         return;
     }
     cobj = HSD_CObjGetCurrent();
@@ -156,7 +156,7 @@ void HSD_FogAdjInit(HSD_FogAdj* adj, HSD_FogAdjDesc* desc)
 }
 
 // HSD_FogAddAnim ?
-void func_8037DE7C(HSD_Fog* fog, HSD_AObjDesc* desc)
+void HSD_Fog_8037DE7C(HSD_Fog* fog, HSD_AObjDesc* desc)
 {
     if (fog != NULL) {
         if (fog->aobj != NULL) {

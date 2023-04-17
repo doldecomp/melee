@@ -282,13 +282,13 @@ LObjLoad:
 /* 80367290 00363E70  90 1E 00 24 */	stw r0, 0x24(r30)
 /* 80367294 00363E74  48 00 00 24 */	b .L_803672B8
 .L_80367298:
-/* 80367298 00363E78  3C 60 80 40 */	lis r3, lbl_804061D4@ha
+/* 80367298 00363E78  3C 60 80 40 */	lis r3, HSD_LObj_804061D4@ha
 /* 8036729C 00363E7C  4C C6 31 82 */	crclr 6
-/* 803672A0 00363E80  38 63 61 D4 */	addi r3, r3, lbl_804061D4@l
+/* 803672A0 00363E80  38 63 61 D4 */	addi r3, r3, HSD_LObj_804061D4@l
 /* 803672A4 00363E84  4B FD E4 05 */	bl OSReport
-/* 803672A8 00363E88  38 6D A6 78 */	addi r3, r13, lbl_804D5D18@sda21
+/* 803672A8 00363E88  38 6D A6 78 */	addi r3, r13, HSD_LObj_804D5D18@sda21
 /* 803672AC 00363E8C  38 80 06 4A */	li r4, 0x64a
-/* 803672B0 00363E90  38 AD A6 98 */	addi r5, r13, lbl_804D5D38@sda21
+/* 803672B0 00363E90  38 AD A6 98 */	addi r5, r13, HSD_LObj_804D5D38@sda21
 /* 803672B4 00363E94  48 02 0F C5 */	bl HSD_Panic
 .L_803672B8:
 /* 803672B8 00363E98  80 01 00 2C */	lwz r0, 0x2c(r1)
@@ -323,7 +323,7 @@ HSD_LObjLoadDesc:
 /* 8036731C 00363EFC  28 03 00 00 */	cmplwi r3, 0
 /* 80367320 00363F00  40 82 00 3C */	bne .L_8036735C
 .L_80367324:
-/* 80367324 00363F04  80 6D BF 98 */	lwz r3, lbl_804D7638@sda21(r13)
+/* 80367324 00363F04  80 6D BF 98 */	lwz r3, HSD_LObj_804D7638@sda21(r13)
 /* 80367328 00363F08  28 03 00 00 */	cmplwi r3, 0
 /* 8036732C 00363F0C  41 82 00 08 */	beq .L_80367334
 /* 80367330 00363F10  48 00 00 08 */	b .L_80367338
@@ -333,9 +333,9 @@ HSD_LObjLoadDesc:
 /* 80367338 00363F18  48 01 B0 0D */	bl hsdNew
 /* 8036733C 00363F1C  7C 7F 1B 79 */	or. r31, r3, r3
 /* 80367340 00363F20  40 82 00 14 */	bne .L_80367354
-/* 80367344 00363F24  38 6D A6 78 */	addi r3, r13, lbl_804D5D18@sda21
+/* 80367344 00363F24  38 6D A6 78 */	addi r3, r13, HSD_LObj_804D5D18@sda21
 /* 80367348 00363F28  38 80 05 C6 */	li r4, 0x5c6
-/* 8036734C 00363F2C  38 AD A6 94 */	addi r5, r13, lbl_804D5D34@sda21
+/* 8036734C 00363F2C  38 AD A6 94 */	addi r5, r13, HSD_LObj_804D5D34@sda21
 /* 80367350 00363F30  48 02 0E D1 */	bl __assert
 .L_80367354:
 /* 80367354 00363F34  93 FD 00 00 */	stw r31, 0(r29)
@@ -346,9 +346,9 @@ HSD_LObjLoadDesc:
 /* 80367364 00363F44  80 1D 00 00 */	lwz r0, 0(r29)
 /* 80367368 00363F48  28 00 00 00 */	cmplwi r0, 0
 /* 8036736C 00363F4C  40 82 00 14 */	bne .L_80367380
-/* 80367370 00363F50  38 6D A6 78 */	addi r3, r13, lbl_804D5D18@sda21
+/* 80367370 00363F50  38 6D A6 78 */	addi r3, r13, HSD_LObj_804D5D18@sda21
 /* 80367374 00363F54  38 80 06 6C */	li r4, 0x66c
-/* 80367378 00363F58  38 AD A6 9C */	addi r5, r13, lbl_804D5D3C@sda21
+/* 80367378 00363F58  38 AD A6 9C */	addi r5, r13, HSD_LObj_804D5D3C@sda21
 /* 8036737C 00363F5C  48 02 0E A5 */	bl __assert
 .L_80367380:
 /* 80367380 00363F60  80 7D 00 00 */	lwz r3, 0(r29)
@@ -555,11 +555,11 @@ LObjAmnesia:
 /* 80367628 00364208  7C 08 02 A6 */	mflr r0
 /* 8036762C 0036420C  90 01 00 04 */	stw r0, 4(r1)
 /* 80367630 00364210  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80367634 00364214  80 0D BF 98 */	lwz r0, lbl_804D7638@sda21(r13)
+/* 80367634 00364214  80 0D BF 98 */	lwz r0, HSD_LObj_804D7638@sda21(r13)
 /* 80367638 00364218  7C 03 00 40 */	cmplw r3, r0
 /* 8036763C 0036421C  40 82 00 0C */	bne .L_80367648
 /* 80367640 00364220  38 00 00 00 */	li r0, 0
-/* 80367644 00364224  90 0D BF 98 */	stw r0, lbl_804D7638@sda21(r13)
+/* 80367644 00364224  90 0D BF 98 */	stw r0, HSD_LObj_804D7638@sda21(r13)
 .L_80367648:
 /* 80367648 00364228  3C 80 80 40 */	lis r4, hsdLObj@ha
 /* 8036764C 0036422C  38 04 60 C0 */	addi r0, r4, hsdLObj@l
@@ -613,39 +613,39 @@ LObjInfoInit:
 
 .section .sdata
     .balign 8
-.global lbl_804D5D18
-lbl_804D5D18:
+.global HSD_LObj_804D5D18
+HSD_LObj_804D5D18:
     .asciz "lobj.c"
     .balign 4
-.global lbl_804D5D20
-lbl_804D5D20:
+.global HSD_LObj_804D5D20
+HSD_LObj_804D5D20:
     .asciz "0"
     .balign 4
-.global lbl_804D5D24
-lbl_804D5D24:
+.global HSD_LObj_804D5D24
+HSD_LObj_804D5D24:
     .asciz "lobj"
     .balign 4
-.global lbl_804D5D2C
-lbl_804D5D2C:
+.global HSD_LObj_804D5D2C
+HSD_LObj_804D5D2C:
     .asciz "lobj.h"
     .balign 4
-.global lbl_804D5D34
-lbl_804D5D34:
+.global HSD_LObj_804D5D34
+HSD_LObj_804D5D34:
     .asciz "new"
     .balign 4
-.global lbl_804D5D38
-lbl_804D5D38:
+.global HSD_LObj_804D5D38
+HSD_LObj_804D5D38:
     .4byte NULL
-.global lbl_804D5D3C
-lbl_804D5D3C:
+.global HSD_LObj_804D5D3C
+HSD_LObj_804D5D3C:
     .asciz "*p"
     .balign 4
 
 
 .section .sbss
     .balign 8
-.global lbl_804D7638
-lbl_804D7638:
+.global HSD_LObj_804D7638
+HSD_LObj_804D7638:
     .skip 0x4
 .global current_lights
 current_lights:

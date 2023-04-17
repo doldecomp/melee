@@ -7,29 +7,29 @@
 #include "ft/types.h"
 #include "lb/lb_00B0.h"
 
-MotionState ftSandbag_MotionStateTable[] = {
-    { 295, 0, 0x01400000, ftSandbag_8014FC20, ftSandbag_8014FC24,
-      ftSandbag_8014FC28, ftSandbag_8014FC48, ftCamera_UpdateCameraBox },
+MotionState ftSb_Init_MotionStateTable[] = {
+    { 295, 0, 0x01400000, ftSb_Init_8014FC20, ftSb_Init_8014FC24,
+      ftSb_Init_8014FC28, ftSb_Init_8014FC48, ftCamera_UpdateCameraBox },
 };
 
-char lbl_803D39B8[] = "PlSb.dat";
-char lbl_803D39C4[] = "ftDataSandbag";
-char lbl_803D39D4[] = "PlSbNr.dat";
-char lbl_803D39E0[] = "PlySandbag_Share_joint";
-char lbl_803D39F8[] = "PlySandbag_Share_matanim_joint";
-char lbl_803D3A18[] = "PlSbAJ.dat";
+char ftSb_Init_DatFilename[] = "PlSb.dat";
+char ftSb_Init_DataName[] = "ftDataSandbag";
+char ftSb_Init_803D39D4[] = "PlSbNr.dat";
+char ftSb_Init_803D39E0[] = "PlySandbag_Share_joint";
+char ftSb_Init_803D39F8[] = "PlySandbag_Share_matanim_joint";
+char ftSb_Init_AnimDatFilename[] = "PlSbAJ.dat";
 
-Fighter_CostumeStrings lbl_803D3A24[] = {
-    { lbl_803D39D4, lbl_803D39E0, lbl_803D39F8 },
+Fighter_CostumeStrings ftSb_Init_CostumeStrings[] = {
+    { ftSb_Init_803D39D4, ftSb_Init_803D39E0, ftSb_Init_803D39F8 },
 };
 
 typedef struct _ftSandbagAttributes {
     u32 x0_pair[2];
 } ftSandbagAttributes;
 
-void ftSandbag_OnDeath(HSD_GObj* arg0) {}
+void ftSb_Init_OnDeath(HSD_GObj* arg0) {}
 
-void ftSandbag_OnLoad(HSD_GObj* gobj)
+void ftSb_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
@@ -38,10 +38,10 @@ void ftSandbag_OnLoad(HSD_GObj* gobj)
     fp->x2228_flag.bits.b2 = 1;
     fp->x2226_flag.bits.b0 = 1;
 
-    ftSandbag_8014FA30(fp);
+    ftSb_Init_8014FA30(fp);
 }
 
-void ftSandbag_8014FA30(Fighter* fp)
+void ftSb_Init_8014FA30(Fighter* fp)
 {
     FighterBone* bones = fp->x5E8_fighterBones;
     lb_8000C1C0(bones[5].x0_jobj, bones[12].x0_jobj);
@@ -72,16 +72,16 @@ void ftSandbag_8014FA30(Fighter* fp)
     lb_8000C420(fp->x5E8_fighterBones[6].x4_jobj2, 2, -1.50098311f);
 }
 
-void ftSandbag_LoadSpecialAttrs(HSD_GObj* gobj)
+void ftSb_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftSandbagAttributes);
 }
 
-void ftSandbag_OnKnockbackEnter(HSD_GObj* arg0) {}
+void ftSb_Init_OnKnockbackEnter(HSD_GObj* arg0) {}
 
-void ftSandbag_OnKnockbackExit(HSD_GObj* arg0) {}
+void ftSb_Init_OnKnockbackExit(HSD_GObj* arg0) {}
 
-void ftSandbag_8014FBA4(HSD_GObj* gobj)
+void ftSb_Init_8014FBA4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -93,16 +93,16 @@ void ftSandbag_8014FBA4(HSD_GObj* gobj)
     ftCommon_8007EFC0(fp, p_ftCommonData->x5F0);
 }
 
-void ftSandbag_8014FC20(HSD_GObj* arg0) {}
+void ftSb_Init_8014FC20(HSD_GObj* arg0) {}
 
-void ftSandbag_8014FC24(HSD_GObj* arg0) {}
+void ftSb_Init_8014FC24(HSD_GObj* arg0) {}
 
-void ftSandbag_8014FC28(HSD_GObj* gobj)
+void ftSb_Init_8014FC28(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftSandbag_8014FC48(HSD_GObj* gobj)
+void ftSb_Init_8014FC48(HSD_GObj* gobj)
 {
     ft_80083F88(gobj);
 }

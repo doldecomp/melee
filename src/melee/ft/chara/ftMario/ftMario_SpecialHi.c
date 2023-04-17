@@ -6,7 +6,7 @@
 
 #include <baselib/random.h>
 
-void ftMario_SpecialHi_StartMotion(HSD_GObj* gobj)
+void ftMr_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -18,7 +18,7 @@ void ftMario_SpecialHi_StartMotion(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftMario_SpecialAirHi_StartMotion(HSD_GObj* gobj)
+void ftMr_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftMarioAttributes* sa;
@@ -41,7 +41,7 @@ void ftMario_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 }
 
 // 0x800E1B24
-void ftMario_SpecialHi_Anim(HSD_GObj* gobj)
+void ftMr_SpecialHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftMarioAttributes* sa;
@@ -55,14 +55,14 @@ void ftMario_SpecialHi_Anim(HSD_GObj* gobj)
 }
 
 // 0x800E1B84
-void ftMario_SpecialAirHi_Anim(HSD_GObj* gobj)
+void ftMr_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    ftMario_SpecialHi_Anim(gobj);
+    ftMr_SpecialHi_Anim(gobj);
 }
 
 #define DEGREES_TO_RADIANS (3.14159265359f / 180.0f)
@@ -124,13 +124,13 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
 }
 
 // 0x800E1BE4
-void ftMario_SpecialHi_IASA(HSD_GObj* gobj)
+void ftMr_SpecialHi_IASA(HSD_GObj* gobj)
 {
     ftMario_SpecialHi_CalcAngle(gobj);
 }
 
 // 0x800E1D2C
-void ftMario_SpecialAirHi_IASA(HSD_GObj* gobj)
+void ftMr_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -142,7 +142,7 @@ void ftMario_SpecialAirHi_IASA(HSD_GObj* gobj)
 
 // 0x800E1E74
 // https://decomp.me/scratch/8axfI
-void ftMario_SpecialHi_Phys(HSD_GObj* gobj)
+void ftMr_SpecialHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->xE0_ground_or_air == GA_Air) {
@@ -154,7 +154,7 @@ void ftMario_SpecialHi_Phys(HSD_GObj* gobj)
 
 // 0x800E1EAC
 // https://decomp.me/scratch/1jYsR
-void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)
+void ftMr_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftMarioAttributes* sa;
@@ -181,7 +181,7 @@ void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)
 
 // 0x800E1F40
 // https://decomp.me/scratch/5eIAp
-void ftMario_SpecialHi_CheckLanding(HSD_GObj* gobj)
+void ftMr_SpecialHi_CheckLanding(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftMarioAttributes* sa;
@@ -194,7 +194,7 @@ void ftMario_SpecialHi_CheckLanding(HSD_GObj* gobj)
 
 // 0x800E1F70
 // https://decomp.me/scratch/k2DCy
-void ftMario_SpecialHi_Coll(HSD_GObj* gobj)
+void ftMr_SpecialHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -203,7 +203,7 @@ void ftMario_SpecialHi_Coll(HSD_GObj* gobj)
         if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
             ft_80083B68(gobj);
         } else {
-            ft_800831CC(gobj, &ft_80096CC8, &ftMario_SpecialHi_CheckLanding);
+            ft_800831CC(gobj, &ft_80096CC8, &ftMr_SpecialHi_CheckLanding);
         }
     } else {
         ft_80084104(gobj);
@@ -211,7 +211,7 @@ void ftMario_SpecialHi_Coll(HSD_GObj* gobj)
 }
 
 // 0x800E1FE0
-void ftMario_SpecialAirHi_Coll(HSD_GObj* gobj)
+void ftMr_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
-    ftMario_SpecialHi_Coll(gobj);
+    ftMr_SpecialHi_Coll(gobj);
 }

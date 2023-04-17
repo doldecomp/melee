@@ -6,12 +6,12 @@
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
-static void ftGameWatch_ItemManholeExitHitlag(HSD_GObj*);
-static void ftGameWatch_ItemManholeEnterHitlag(HSD_GObj*);
+static void ftGw_AttackLw3_ItemManholeExitHitlag(HSD_GObj*);
+static void ftGw_AttackLw3_ItemManholeEnterHitlag(HSD_GObj*);
 
 // 0x8014AB48
 // https://decomp.me/scratch/x73Hx // Create Manhole Item
-void ftGameWatch_ItemManholeSetup(HSD_GObj* gobj)
+void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj)
 {
     Vec3 sp10;
     HSD_GObj* manholeGObj;
@@ -37,25 +37,25 @@ void ftGameWatch_ItemManholeSetup(HSD_GObj* gobj)
     }
     if (fp->ev.gw.x2250_manholeGObj2 != NULL) {
         if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
+            fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
         }
         if (fp->cb.x21DC_callback_OnTakeDamage == NULL) {
-            fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
+            fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
         }
     }
-    fp->cb.x21D4_callback_EnterHitlag = ftGameWatch_ItemManholeEnterHitlag;
-    fp->cb.x21D8_callback_ExitHitlag = ftGameWatch_ItemManholeExitHitlag;
+    fp->cb.x21D4_callback_EnterHitlag = ftGw_AttackLw3_ItemManholeEnterHitlag;
+    fp->cb.x21D8_callback_ExitHitlag = ftGw_AttackLw3_ItemManholeExitHitlag;
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
 // 0x8014AC40
 // https://decomp.me/scratch/JEvaL // Swap item GObj pointers
-void ftGameWatch_ItemManholeRemove(HSD_GObj* gobj)
+void ftGw_AttackLw3_ItemManholeRemove(HSD_GObj* gobj)
 {
     HSD_GObj* manholeGObj;
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftGameWatch_ItemManholeExitHitlag(gobj);
+    ftGw_AttackLw3_ItemManholeExitHitlag(gobj);
     fp->ev.gw.x2250_manholeGObj2 = NULL;
     manholeGObj = fp->ev.gw.x2248_manholeGObj;
     if (manholeGObj != NULL) {
@@ -69,7 +69,7 @@ void ftGameWatch_ItemManholeRemove(HSD_GObj* gobj)
 
 // 0x8014ACB0
 // https://decomp.me/scratch/09CUB // Remove Manhole on damage
-void ftGameWatch_ItemManholeOnDamage(HSD_GObj* gobj)
+void ftGw_AttackLw3_ItemManholeOnDamage(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -80,13 +80,13 @@ void ftGameWatch_ItemManholeOnDamage(HSD_GObj* gobj)
 
     if (fp->ev.gw.x2250_manholeGObj2 != NULL) {
         it_802C6718(fp->ev.gw.x2250_manholeGObj2);
-        ftGameWatch_ItemManholeRemove(gobj);
+        ftGw_AttackLw3_ItemManholeRemove(gobj);
     }
 }
 
 // 0x8014AD38
 // https://decomp.me/scratch/Kw1d3 // Apply hitlag to Manhole item
-static void ftGameWatch_ItemManholeEnterHitlag(HSD_GObj* gobj)
+static void ftGw_AttackLw3_ItemManholeEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ev.gw.x2250_manholeGObj2 != NULL) {
@@ -95,7 +95,7 @@ static void ftGameWatch_ItemManholeEnterHitlag(HSD_GObj* gobj)
 }
 
 // 0x8014AD68 - Remove hitlag from Manhole item
-static void ftGameWatch_ItemManholeExitHitlag(HSD_GObj* gobj)
+static void ftGw_AttackLw3_ItemManholeExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ev.gw.x2250_manholeGObj2 != NULL) {
@@ -106,7 +106,7 @@ static void ftGameWatch_ItemManholeExitHitlag(HSD_GObj* gobj)
 // 0x8014AD98
 // https://decomp.me/scratch/IERdX // Check if Mr. Game & Watch is performing
 // Down Tilt - remove if returns true
-bool ftGameWatch_ItemCheckManholeRemove(HSD_GObj* gobj)
+bool ftGw_AttackLw3_ItemCheckManholeRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->action_id == AS_GAMEWATCH_ATTACKLW3) {
@@ -118,7 +118,7 @@ bool ftGameWatch_ItemCheckManholeRemove(HSD_GObj* gobj)
 // 0x8014ADB8
 // https://decomp.me/scratch/rGgyM // Mr. Game & Watch's Down Tilt Motion State
 // Handler
-void ftGameWatch_AttackLw3_Action(HSD_GObj* gobj)
+void ftGw_AttackLw3_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -127,14 +127,14 @@ void ftGameWatch_AttackLw3_Action(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, AS_GAMEWATCH_ATTACKLW3, 0, NULL, 0.0f,
                                   1.0f, 0.0f);
         ftAnim_8006EBA4(gobj);
-        fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemManholeSetup;
+        fp->cb.x21BC_callback_Accessory4 = ftGw_AttackLw3_ItemManholeSetup;
     }
 }
 
 // 0x8014AE3C
 // https://decomp.me/scratch/h03Ja // Mr. Game & Watch's Down Tilt Animation
 // callback
-void ftGameWatch_AttackLw3_Anim(HSD_GObj* gobj)
+void ftGw_AttackLw3_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -149,7 +149,7 @@ void ftGameWatch_AttackLw3_Anim(HSD_GObj* gobj)
 // 0x8014AE78
 // https://decomp.me/scratch/qzCi0 // Mr. Game & Watch's Down Tilt IASA
 // callback
-void ftGameWatch_AttackLw3_IASA(HSD_GObj* gobj)
+void ftGw_AttackLw3_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2218_flag.bits.b0 == 0) {
@@ -196,7 +196,7 @@ void ftGameWatch_AttackLw3_IASA(HSD_GObj* gobj)
 // 0x8014AF6C
 // https://decomp.me/scratch/Xp4C5 // Mr. Game & Watch's Down Tilt Physics
 // callback
-void ftGameWatch_AttackLw3_Phys(HSD_GObj* gobj)
+void ftGw_AttackLw3_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
@@ -204,8 +204,8 @@ void ftGameWatch_AttackLw3_Phys(HSD_GObj* gobj)
 // 0x8014AF8C
 // https://decomp.me/scratch/0stMN // Mr. Game & Watch's Down Tilt Collision
 // callback
-void ftGameWatch_AttackLw3_Coll(HSD_GObj* gobj)
+void ftGw_AttackLw3_Coll(HSD_GObj* gobj)
 {
     ft_80084104(gobj);
-    ftGameWatch_8014A538(gobj);
+    ftGw_Init_8014A538(gobj);
 }

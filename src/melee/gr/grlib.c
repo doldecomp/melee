@@ -17,10 +17,10 @@
 #include <baselib/psappsrt.h>
 
 extern StageInfo stage_info;
-extern u8 lbl_804D7849;
-extern struct UnkGeneratorStruct* lbl_804D78FC;
+extern u8 HSD_GObj_804D7849;
+extern struct UnkGeneratorStruct* hsd_804D78FC;
 
-static Vec3 lbl_8049EF58[6];
+static Vec3 grLib_8049EF58[6];
 
 bool grLib_801C96E8(HSD_GObj* arg0)
 {
@@ -28,7 +28,7 @@ bool grLib_801C96E8(HSD_GObj* arg0)
     return gp->x10_flags.b4;
 }
 
-UnkGeneratorStruct* func_8039F05C(s8, s8, s32);
+UnkGeneratorStruct* hsd_8039F05C(s8, s8, s32);
 UnkGeneratorMember* psAddGeneratorAppSRT_begin(UnkGeneratorStruct*, s32);
 
 UnkGeneratorStruct* grLib_801C96F8(s32 arg0, s8 arg1, S32Vec3* arg2)
@@ -37,7 +37,7 @@ UnkGeneratorStruct* grLib_801C96F8(s32 arg0, s8 arg1, S32Vec3* arg2)
     UnkGeneratorMember* phi_r30;
     f32 scale;
 
-    temp_r3 = func_8039F05C(0, arg1, arg0);
+    temp_r3 = hsd_8039F05C(0, arg1, arg0);
     if (temp_r3 != NULL) {
         phi_r30 = temp_r3->x54;
         if (phi_r30 == NULL) {
@@ -46,7 +46,7 @@ UnkGeneratorStruct* grLib_801C96F8(s32 arg0, s8 arg1, S32Vec3* arg2)
             phi_r30->xA2 = 0;
         }
         if (phi_r30 == NULL) {
-            func_8039D4DC(temp_r3);
+            hsd_8039D4DC(temp_r3);
             return NULL;
         }
         phi_r30->x8 = *arg2;
@@ -63,28 +63,28 @@ UnkGeneratorStruct* grLib_801C96F8(s32 arg0, s8 arg1, S32Vec3* arg2)
 
 void grLib_801C97DC(s32 arg0, s32 arg1, HSD_JObj* arg2)
 {
-    func_8039F6CC(0, arg1, arg0, arg2);
+    hsd_8039F6CC(0, arg1, arg0, arg2);
 }
 
 void grLib_801C9808(s32 arg0, s32 arg1, HSD_JObj* arg2)
 {
-    func_8039EFAC(0, arg1, arg0, arg2);
+    hsd_8039EFAC(0, arg1, arg0, arg2);
 }
 
 void grLib_801C9834(UnkGeneratorStruct* arg0)
 {
-    func_8039D4DC(arg0);
+    hsd_8039D4DC(arg0);
 }
 
 void grLib_801C9854(s32 arg0)
 {
-    func_8039D5DC(arg0);
+    hsd_8039D5DC(arg0);
 }
 
 void grLib_801C9874(UnkGeneratorStruct* arg0)
 {
     arg0->x16_flags |= 0x80;
-    func_8039D4DC(arg0);
+    hsd_8039D4DC(arg0);
 }
 
 void grLib_801C98A0(HSD_JObj* jobj)
@@ -95,11 +95,11 @@ void grLib_801C98A0(HSD_JObj* jobj)
         return;
     }
 
-    for (cur = lbl_804D78FC; cur != NULL; cur = next) {
+    for (cur = hsd_804D78FC; cur != NULL; cur = next) {
         next = cur->next;
         if (cur->x10_jobj == jobj) {
             cur->x16_flags |= 0x80;
-            func_8039D4DC(cur);
+            hsd_8039D4DC(cur);
         }
     }
 }
@@ -129,11 +129,11 @@ void grLib_801C9908(HSD_JObj* jobj)
         return;
     }
 
-    for (cur = lbl_804D78FC; cur != NULL; cur = next) {
+    for (cur = hsd_804D78FC; cur != NULL; cur = next) {
         next = cur->next;
         if (cur->x10_jobj == jobj) {
             cur->x16_flags |= 0x80;
-            func_8039D4DC(cur);
+            hsd_8039D4DC(cur);
         }
     }
 
@@ -149,19 +149,19 @@ void grLib_801C9908(HSD_JObj* jobj)
 void grLib_801C99C0(s32 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
 {
     if (arg3 != 0) {
-        func_8039EFAC(0, arg0, arg1, arg2);
+        hsd_8039EFAC(0, arg0, arg1, arg2);
     } else {
-        func_8039F6CC(0, arg0, arg1, arg2);
+        hsd_8039F6CC(0, arg0, arg1, arg2);
     }
 }
 
 Vec3* grLib_801C9A10(void)
 {
-    Ground_801C2D24(0, &lbl_8049EF58[0]);
-    Ground_801C2D24(1, &lbl_8049EF58[1]);
-    Ground_801C2D24(2, &lbl_8049EF58[2]);
-    Ground_801C2D24(3, &lbl_8049EF58[3]);
-    return lbl_8049EF58;
+    Ground_801C2D24(0, &grLib_8049EF58[0]);
+    Ground_801C2D24(1, &grLib_8049EF58[1]);
+    Ground_801C2D24(2, &grLib_8049EF58[2]);
+    Ground_801C2D24(3, &grLib_8049EF58[3]);
+    return grLib_8049EF58;
 }
 
 void grLib_801C9A70(enum_t arg0, Vec3* v)
@@ -187,7 +187,7 @@ void grLib_801C9A70(enum_t arg0, Vec3* v)
         return;
 #endif
     }
-    *v = lbl_8049EF58[i];
+    *v = grLib_8049EF58[i];
 }
 
 void grLib_801C9B20(void* arg1, UnkAnimStruct* arg2, unk_t arg3)
@@ -224,7 +224,7 @@ static void grLib_801C9C40(HSD_GObj* gobj)
                     HSD_JObjGetTranslationY(jobj));
 
     if (aobj == NULL || aobj->flags & 0x40000000) {
-        func_80390228(gobj);
+        HSD_GObjPLink_80390228(gobj);
     }
 }
 
@@ -254,11 +254,11 @@ HSD_GObj* grLib_801C9CEC(s32 idx1)
     gobj = GObj_Create(3, 18, tmp);
     jobj = HSD_JObjLoadJoint(stage_info.x6CC->joint);
 
-    func_80390A70(gobj, lbl_804D7849, jobj);
+    HSD_GObjObjet_80390A70(gobj, HSD_GObj_804D7849, jobj);
     if (idx1 == 1) {
-        func_8038FD54(gobj, grLib_801C9BC8, 1);
+        HSD_GObjProc_8038FD54(gobj, grLib_801C9BC8, 1);
     } else {
-        func_8038FD54(gobj, grLib_801C9C40, 1);
+        HSD_GObjProc_8038FD54(gobj, grLib_801C9C40, 1);
     }
 
     HSD_JObjAddAnimAll(jobj, stage_info.x6CC->anims[idx0], NULL, NULL);
@@ -323,7 +323,7 @@ asm bool grLib_801C9EE8(void)
 /* 801C9F04 001C6AE4  93 E1 00 3C */	stw r31, 0x3c(r1)
 /* 801C9F08 001C6AE8  93 C1 00 38 */	stw r30, 0x38(r1)
 /* 801C9F0C 001C6AEC  7C 7E 1B 78 */	mr r30, r3
-/* 801C9F10 001C6AF0  80 8D C1 8C */	lwz r4, lbl_804D782C
+/* 801C9F10 001C6AF0  80 8D C1 8C */	lwz r4, HSD_GObj_804D782C
 /* 801C9F14 001C6AF4  C0 A2 B3 AC */	lfs f5, 0.5f
 /* 801C9F18 001C6AF8  80 A4 00 20 */	lwz r5, 0x20(r4)
 /* 801C9F1C 001C6AFC  C0 02 B3 A8 */	lfs f0, 0.0f

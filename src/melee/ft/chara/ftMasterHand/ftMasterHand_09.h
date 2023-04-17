@@ -3,23 +3,23 @@
 
 #include <baselib/gobj.h>
 
-void ftMasterHand_80151EB4(HSD_GObj*);
-void ftMasterHand_801520D8(HSD_GObj*);
+void ftMh_MS_350_80151EB4(HSD_GObj*);
+void ftMh_MS_351_801520D8(HSD_GObj*);
 
 /// 9 Walk
-void ftMasterHand_80151DC4(HSD_GObj* gobj);
+void ftMh_MS_353_80151DC4(HSD_GObj* gobj);
 
-void ftMasterHand_80151F00(HSD_GObj* gobj);
-void ftMasterHand_8015204C(HSD_GObj* gobj);
-void ftMasterHand_80151D20(HSD_GObj* gobj);
-void ftMasterHand_80152090(HSD_GObj* gobj);
-void ftMasterHand_801520D4(HSD_GObj* gobj);
-void ftMasterHand_80151D5C(HSD_GObj* gobj);
-void ftMasterHand_80151DA0(HSD_GObj* gobj);
-void ftMasterHand_80151DC0(HSD_GObj* gobj);
-void ftMasterHand_80151E10(HSD_GObj* gobj);
-void ftMasterHand_80151E4C(HSD_GObj* gobj);
-void ftMasterHand_80151E90(HSD_GObj* gobj);
-void ftMasterHand_80151EB0(HSD_GObj* gobj);
+void ftMh_MS_351_Anim(HSD_GObj* gobj);
+void ftMh_MS_351_IASA(HSD_GObj* gobj);
+void ftMh_MS_353_Anim(HSD_GObj* gobj);
+void ftMh_MS_351_Phys(HSD_GObj* gobj);
+void ftMh_MS_351_Coll(HSD_GObj* gobj);
+void ftMh_MS_353_IASA(HSD_GObj* gobj);
+void ftMh_MS_353_Phys(HSD_GObj* gobj);
+void ftMh_MS_353_Coll(HSD_GObj* gobj);
+void ftMh_MS_350_Anim(HSD_GObj* gobj);
+void ftMh_MS_350_IASA(HSD_GObj* gobj);
+void ftMh_MS_350_Phys(HSD_GObj* gobj);
+void ftMh_MS_350_Coll(HSD_GObj* gobj);
 
 #endif
