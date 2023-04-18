@@ -4,6 +4,7 @@
 #include "ftLg_SpecialLw.h"
 #include "ftLg_SpecialN.h"
 #include "ftLg_SpecialS.h"
+#include "types.h"
 
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"

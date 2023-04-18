@@ -23,4 +23,5 @@ typedef enum ftLuigi_MotionState {
     ftLg_MS_SpecialLw,
     ftLg_MS_SpecialAirLw,
 } ftLuigi_MotionState;
+
 #endif
