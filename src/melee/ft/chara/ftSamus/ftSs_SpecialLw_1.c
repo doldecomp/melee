@@ -59,7 +59,7 @@ void ftSs_SpecialLw_8012AF38(HSD_GObj* gobj)
     ftColl_8007B0C0(gobj, 0);
 }
 
-void ftSamus_SpecialLw_StartMotion_inner(HSD_GObj* gobj)
+static void ftSamus_SpecialLw_StartMotion_inner(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     fp->x2208_ftcmd_var2 = 0;

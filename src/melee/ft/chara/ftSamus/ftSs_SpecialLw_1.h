@@ -18,7 +18,6 @@ void ftSs_SpecialAirLwBomb_Coll(HSD_GObj* gobj);
 void ftSamus_UnkSetStateAndCb(HSD_GObj* gobj);
 void ftSs_SpecialLw_8012AEBC(HSD_GObj* gobj);
 void ftSs_SpecialLw_8012AF38(HSD_GObj* gobj);
-void ftSamus_SpecialLw_StartMotion_inner(HSD_GObj* gobj);
 void ftSs_SpecialLw_Enter(HSD_GObj* gobj);
 void ftSs_SpecialAirLw_Enter(HSD_GObj* gobj);
 
