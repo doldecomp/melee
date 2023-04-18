@@ -1,3 +1,5 @@
+#include "forward.h"
+
 #include "ftNess/ftNs_AttackS4.h"
 
 #include "ft/ft_081B.h"

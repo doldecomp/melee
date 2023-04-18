@@ -1,3 +1,5 @@
+#include "forward.h"
+
 #include "ftNess/ftNs_SpecialN.h"
 
 #include "ft/ft_081B.h"

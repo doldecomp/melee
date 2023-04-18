@@ -1,3 +1,5 @@
+#include "forward.h"
+
 #include "ftNs_AttackHi4.h"
 
 #include "ftNs_Init.h"

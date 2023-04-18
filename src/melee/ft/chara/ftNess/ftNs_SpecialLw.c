@@ -1,3 +1,5 @@
+#include "forward.h"
+
 #include "ftNs_SpecialLw.h"
 
 #include "ftNs_Init.h"
