@@ -60,7 +60,7 @@ void ftMr_SpecialS_CreateCape(HSD_GObj* gobj)
     }
 }
 
-void ftMr_SpecialS_SetNULL(HSD_GObj* gobj)
+void ftMr_SpecialS_Reset(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMr_SpecialS_ExitHitlag(gobj);
@@ -75,7 +75,7 @@ void ftMr_SpecialS_RemoveCape(HSD_GObj* gobj)
 
     if (fp->fv.mr.x223C_capeGObj != NULL) {
         it_802B2674(fp->fv.mr.x223C_capeGObj);
-        ftMr_SpecialS_SetNULL(gobj);
+        ftMr_SpecialS_Reset(gobj);
     }
 }
 
@@ -166,7 +166,7 @@ void ftMr_SpecialS_IASA(HSD_GObj* gobj) {}
 
 void ftMr_SpecialAirS_IASA(HSD_GObj* gobj) {}
 
-void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj)
+static void reflect(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
@@ -213,7 +213,7 @@ void ftMr_SpecialS_Phys(HSD_GObj* gobj)
     }
 
     ft_80084F3C(gobj);
-    ftMario_SpecialS_ReflectThink(gobj);
+    reflect(gobj);
 }
 
 void ftMr_SpecialAirS_Phys(HSD_GObj* gobj)
@@ -260,7 +260,7 @@ void ftMr_SpecialAirS_Phys(HSD_GObj* gobj)
     }
 
     ftCommon_8007CE94(fp, sa->specials.vel.x);
-    ftMario_SpecialS_ReflectThink(gobj);
+    reflect(gobj);
 }
 
 void ftMr_SpecialS_Coll(HSD_GObj* gobj)
@@ -277,7 +277,7 @@ void ftMr_SpecialAirS_Coll(HSD_GObj* gobj)
     }
 }
 
-void ftMario_SpecialS_UpdateVarsColl(HSD_GObj* gobj)
+static void collUpdateVars(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if ((s32) fp->mv.mr.SpecialS.reflecting != false) {
@@ -304,7 +304,7 @@ void ftMr_SpecialS_GroundToAir(HSD_GObj* gobj)
         fp->x2200_ftcmd_var0 = 2U;
     }
 
-    ftMario_SpecialS_UpdateVarsColl(gobj);
+    collUpdateVars(gobj);
 }
 
 void ftMr_SpecialAirS_AirToGround(HSD_GObj* gobj)
@@ -322,5 +322,5 @@ void ftMr_SpecialAirS_AirToGround(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialS, transition_flags, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
 
-    ftMario_SpecialS_UpdateVarsColl(gobj);
+    collUpdateVars(gobj);
 }
