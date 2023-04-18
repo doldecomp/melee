@@ -15,7 +15,7 @@ typedef enum ftMario_MotionState {
     ftMr_MS_SpecialAirHi,
     ftMr_MS_SpecialLw,
     ftMr_MS_SpecialAirLw,
-    ftMario_MS_Count,
+    ftMr_MS_Count,
 } ftMario_MotionState;
 
 #endif

@@ -10,7 +10,7 @@
 
 #include <stddef.h>
 
-static usize_t const states_count = ftMario_MS_Count - ftCo_MS_Count;
+static usize_t const states_count = ftMr_MS_Count - ftCo_MS_Count;
 extern MotionState ftMr_Init_MotionStateTable[states_count];
 
 static usize_t const aux_states_count = 2;
