@@ -31,7 +31,6 @@ typedef struct ftMario_DatAttrs {
 
     struct ftMario_SpecialLw_DatAttrs {
         f32 vel_y;
-
         f32 momentum_x;
         f32 air_momentum_x;
         f32 momentum_x_mul;
@@ -66,5 +65,26 @@ typedef struct ftMario_SpecialLw_ECB {
     uint x10;
     uint x14;
 } ftMario_SpecialLw_ECB;
+
+typedef struct ftMarioSpecialS {
+    /// 0x2340 - bool to check if reflect bubble should be enabled
+    bool reflecting;
+} ftMarioSpecialS;
+
+typedef struct ftMarioSpecialLw {
+    /// 0x2340 - Grounded momentum of Mario / Dr. Tornado
+    f32 groundVelX;
+    /// 0x2344 - Set but never used?
+    s32 unk;
+    /// 0x2348 - Skipped entirely
+    s32 _;
+    /// 0x234C - Checked in collision, related to some angle calculation
+    bool isUnkColl;
+} ftMarioSpecialLw;
+
+typedef union ftMario_MotionVars {
+    ftMarioSpecialS SpecialS;
+    ftMarioSpecialLw SpecialLw;
+} ftMario_MotionVars;
 
 #endif

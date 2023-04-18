@@ -12,7 +12,6 @@
 #include "ftGameWatch/types.h"
 #include "ftKoopa/types.h"
 #include "ftLuigi/types.h"
-#include "ftMario/ftMario_MotionVars.h"
 #include "ftMario/types.h"
 #include "ftMars/types.h"
 #include "ftMasterHand/types.h"
