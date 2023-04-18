@@ -1274,9 +1274,9 @@ void ftCommon_8007E83C(HSD_GObj* gobj, s32 arg1, f32 div)
     Fighter* fp = gobj->user_data;
 
 #ifdef MUST_MATCH
-#define ftCo_GetParasolStatus ftCo_GetParasolStatus
-    HSD_ASSERT(1276, ftCo_GetParasolStatus(gobj) != FtParasol_None);
-#undef ftCo_GetParasolStatus
+#define ftGetParasolStatus ftCo_GetParasolStatus
+    HSD_ASSERT(1276, ftGetParasolStatus(gobj) != FtParasol_None);
+#undef ftGetParasolStatus
 #else
     HSD_ASSERT(__LINE__, ftCo_GetParasolStatus(gobj) != FtParasol_None);
 #endif
@@ -1297,7 +1297,7 @@ void ftCommon_8007E83C(HSD_GObj* gobj, s32 arg1, f32 div)
     }
 }
 
-/// @was{ftCo_GetParasolStatus}
+/// @was{ftGetParasolStatus}
 s32 ftCo_GetParasolStatus(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
