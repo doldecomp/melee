@@ -977,8 +977,8 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
 
     if ((arg2 & FtStateChange_SkipUpdateParasol) == 0) {
         fp->x2221_flag.bits.b4 = 0;
-        if ((ftGetParasolStatus(gobj) != -1) &&
-            (ftGetParasolStatus(gobj) != 6))
+        if ((ftCo_GetParasolStatus(gobj) != -1) &&
+            (ftCo_GetParasolStatus(gobj) != 6))
         {
             ftCommon_8007E83C(gobj, 6, 0.0f);
         }
