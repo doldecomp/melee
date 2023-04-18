@@ -16,7 +16,7 @@
 #include "ftMars/types.h"
 #include "ftMasterHand/types.h"
 #include "ftMewtwo/types.h"
-#include "ftNess/ftNess_MotionVars.h"
+#include "ftNess/types.h"
 #include "ftPikachu/types.h"
 #include "ftPurin/types.h"
 #include "ftSamus/types.h"
