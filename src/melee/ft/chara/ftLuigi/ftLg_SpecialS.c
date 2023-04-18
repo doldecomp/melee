@@ -4,6 +4,7 @@
 #include "ftLg_SpecialS.h"
 
 #include "ftLg_Init.h"
+#include "types.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
