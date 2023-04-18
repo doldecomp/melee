@@ -5,7 +5,7 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftPikachu/ftpikachu.h"
+#include "ftPikachu/ftPk_Init.h"
 
 MotionState ftPc_Init_MotionStateTable[] = {
     {
