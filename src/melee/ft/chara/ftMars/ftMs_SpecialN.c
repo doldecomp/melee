@@ -1,3 +1,5 @@
+#include "ftMs_SpecialN.h"
+
 #include "ef/eflib.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"

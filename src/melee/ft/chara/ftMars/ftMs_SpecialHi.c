@@ -1,3 +1,5 @@
+#include "ftMs_SpecialHi.h"
+
 #include "ftMs_Init.h"
 
 #include "ft/ft_081B.h"
