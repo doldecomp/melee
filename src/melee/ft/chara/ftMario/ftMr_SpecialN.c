@@ -50,8 +50,7 @@ void ftMr_SpecialN_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialN, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialN, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialN_ItemFireSpawn;
 }
@@ -128,8 +127,7 @@ void ftMr_SpecialAirN_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirN, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirN, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialN_ItemFireSpawn;
 }
@@ -168,7 +166,7 @@ void ftMr_SpecialN_GroundToAir(HSD_GObj* gobj)
     Fighter_ChangeMotionState(
         gobj, ftMr_MS_SpecialAirN,
         (FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim), NULL,
-        fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        fp->x894_currentAnimFrame, 1, 0);
 
     fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialN_ItemFireSpawn;
 }
@@ -180,7 +178,7 @@ void ftMr_SpecialAirN_AirToGround(HSD_GObj* gobj)
     Fighter_ChangeMotionState(
         gobj, ftMr_MS_SpecialN,
         (FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim), NULL,
-        fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        fp->x894_currentAnimFrame, 1, 0);
 
     fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialN_ItemFireSpawn;
 }

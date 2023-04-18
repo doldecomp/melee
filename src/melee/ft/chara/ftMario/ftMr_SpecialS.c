@@ -299,7 +299,7 @@ void ftMr_SpecialS_GroundToAir(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirS, transition_flags,
-                              NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+                              NULL, fp->x894_currentAnimFrame, 1, 0);
     if ((s32) fp->x2200_ftcmd_var0 == 1U) {
         fp->x2200_ftcmd_var0 = 2U;
     }
@@ -320,7 +320,7 @@ void ftMr_SpecialAirS_AirToGround(HSD_GObj* gobj)
     fp->fv.mr.x2238_isCapeBoost = false;
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialS, transition_flags, NULL,
-                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
+                              fp->x894_currentAnimFrame, 1, 0);
 
     ftMario_SpecialS_UpdateVarsColl(gobj);
 }
