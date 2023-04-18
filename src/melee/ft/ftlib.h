@@ -9,7 +9,7 @@ s32 ftLib_800860C4(void);
 bool ftLib_800860E8(void);
 bool ftLib_80086140(void);
 HSD_GObj* ftLib_80086198(HSD_GObj*);
-HSD_GObj* ftLib_8008627C(Vec3*, HSD_GObj*);
+HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj*);
 HSD_GObj* ftLib_80086368(Vec3*, HSD_GObj*, f32);
 f32 ftLib_800864A8(Vec3*, HSD_GObj*);
 f32 ftLib_800865C0(HSD_GObj*);

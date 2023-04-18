@@ -284,7 +284,7 @@ enum_t ftBossLib_8015C44C(FighterKind kind)
     }
 }
 
-s32 ftBossLib_8015C4C4(void)
+enum_t ftBossLib_8015C4C4(void)
 {
     HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_CREZYH);
 
