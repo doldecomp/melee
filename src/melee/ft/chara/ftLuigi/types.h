@@ -53,4 +53,27 @@ typedef struct _ftLuigiAttributes {
     s32 x94_LUIGI_CYCLONE_LANDING_LAG;
 } ftLuigiAttributes;
 
+typedef struct ftLuigiSpecialS {
+    /// 0x2340 - Number of frames Green Missile has been charged
+    s32 chargeFrames;
+    /// 0x2344 - Check if Green Missile will misfire
+    bool isMisfire;
+} ftLuigiSpecialS;
+
+typedef struct ftLuigiSpecialLw {
+    /// 0x2340 - Grounded momentum of Luigi Cyclone
+    f32 groundVelX;
+    /// 0x2344 - Set but never used?
+    s32 unk;
+    /// 0x2348 - Skipped entirely
+    s32 _;
+    /// 0x234C - Checked in collision, related to some angle calculation
+    bool isUnkColl;
+} ftLuigiSpecialLw;
+
+typedef union ftLuigi_MotionVars {
+    ftLuigiSpecialS SpecialS;
+    ftLuigiSpecialLw SpecialLw;
+} ftLuigi_MotionVars;
+
 #endif
