@@ -1,6 +1,7 @@
 #include "ftPp_Init.h"
 
 #include "fticeclimber.h"
+#include "types.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

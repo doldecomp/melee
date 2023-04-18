@@ -7,6 +7,7 @@
 #include "ft/types.h"
 #include "ftPopo/fticeclimber.h"
 #include "ftPopo/ftPp_Init.h"
+#include "ftPopo/types.h"
 
 #include <dolphin/mtx/types.h>
 
