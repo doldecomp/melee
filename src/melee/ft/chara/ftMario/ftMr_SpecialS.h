@@ -7,7 +7,6 @@
 
 bool ftMr_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj);
 void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj);
-void ftMario_SpecialS_SetCall(Fighter* fp);
 void ftMario_SpecialS_UpdateVarsColl(HSD_GObj* gobj);
 void ftMr_SpecialAirS_AirToGround(HSD_GObj* gobj);
 void ftMr_SpecialAirS_Anim(HSD_GObj* gobj);

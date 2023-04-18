@@ -17,7 +17,7 @@
 #include <dolphin/mtx/types.h>
 #include <baselib/random.h>
 
-void ftMario_SpecialS_SetCall(Fighter* fp)
+static void setCallbacks(Fighter* fp)
 {
     if (fp->fv.mr.x223C_capeGObj != NULL) {
         fp->cb.x21E4_callback_OnDeath2 = ftMr_Init_OnTakeDamage;
@@ -55,7 +55,7 @@ void ftMr_SpecialS_CreateCape(HSD_GObj* gobj)
         }
 
         fp->x1984_heldItemSpec = fp->fv.mr.x223C_capeGObj;
-        ftMario_SpecialS_SetCall(fp);
+        setCallbacks(fp);
         fp->cb.x21BC_callback_Accessory4 = NULL;
     }
 }
@@ -283,7 +283,7 @@ void ftMario_SpecialS_UpdateVarsColl(HSD_GObj* gobj)
     if ((s32) fp->mv.mr.SpecialS.reflecting != false) {
         fp->x2218_flag.bits.b3 = 1;
     }
-    ftMario_SpecialS_SetCall(fp);
+    setCallbacks(fp);
     fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialS_CreateCape;
 }
 
