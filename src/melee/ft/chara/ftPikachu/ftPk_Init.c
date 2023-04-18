@@ -1,4 +1,4 @@
-#include "ftPikachu/ftPk_Init.h"
+#include "ftPk_Init.h"
 
 #include "types.h"
 
@@ -8,7 +8,6 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftPikachu/ftpikachu.h"
 
 MotionState ftPk_Init_MotionStateTable[] = {
     { 295, 0x00340111, 0x12000000, ftPk_SpecialN_Anim, ftPk_SpecialN_IASA,

@@ -1,6 +1,6 @@
 #include "ftPk_SpecialHi.h"
 
-#include "ftpikachu.h"
+#include "ftPk_Init.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"

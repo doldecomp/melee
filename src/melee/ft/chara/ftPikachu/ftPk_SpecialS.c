@@ -1,10 +1,11 @@
 #include "lb/forward.h"
 
+#include "ftPk_Init.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcoll.h"
 #include "ft/inlines.h"
-#include "ftPikachu/ftpikachu.h"
 
 void ftPk_SpecialS_Enter(HSD_GObj* gobj)
 {

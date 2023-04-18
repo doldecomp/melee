@@ -1,4 +1,4 @@
-#include "ftpikachu.h"
+#include "ftPk_Init.h"
 #include "types.h"
 
 #include "ef/eflib.h"
