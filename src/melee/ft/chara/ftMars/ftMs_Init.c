@@ -1,5 +1,10 @@
 #include "ftMs_Init.h"
 
+#include "ftMs_SpecialHi.h"
+#include "ftMs_SpecialLw.h"
+#include "ftMs_SpecialN.h"
+#include "ftMs_SpecialS.h"
+
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ft_0877.h"
