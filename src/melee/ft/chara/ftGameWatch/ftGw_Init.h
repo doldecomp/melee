@@ -1,14 +1,7 @@
-#ifndef _ftgamewatch_h_
-#define _ftgamewatch_h_
+#ifndef MELEE_FT_CHARA_FTGAMEWATCH_FTGAMEWATCH_INIT_H
+#define MELEE_FT_CHARA_FTGAMEWATCH_FTGAMEWATCH_INIT_H
 
-#include "it/forward.h"
-
-#include "ft/fighter.h"
-#include "ft/ftcommon.h"
-#include "it/item.h"
-#include "lb/lbvector.h"
-
-#include <common_structs.h>
+#include "ft/types.h"
 
 extern MotionState ftGw_Init_MotionStateTable[];
 extern char ftGw_Init_DatFilename[];
