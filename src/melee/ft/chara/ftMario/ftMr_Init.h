@@ -1,11 +1,11 @@
 #ifndef MELEE_FT_CHARA_FTMARIO_FTMARIO_INIT_H
 #define MELEE_FT_CHARA_FTMARIO_FTMARIO_INIT_H
 
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
 #include "ftMario/forward.h"
 #include <baselib/forward.h>
 
+#include "ft/fighter.h"
+#include "ft/ftcommon.h"
 #include "ft/types.h"
 
 #include <stddef.h>
