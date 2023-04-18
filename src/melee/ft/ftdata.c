@@ -55,7 +55,6 @@
 #include "ftNess/ftNs_Init.h"
 #include "ftPeach/ftPe_Init.h"
 #include "ftPichu/ftPc_Init.h"
-#include "ftPikachu/ftpikachu.h"
 #include "ftPikachu/ftPk_Init.h"
 #include "ftPopo/fticeclimber.h"
 #include "ftPopo/ftPp_Init.h"
