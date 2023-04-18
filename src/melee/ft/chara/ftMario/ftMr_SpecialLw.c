@@ -15,7 +15,7 @@
 #include <stddef.h>
 #include <baselib/random.h>
 
-void updateRot(HSD_GObj* gobj)
+static void updateRot(HSD_GObj* gobj)
 {
     Fighter* fp;
     fp = GET_FIGHTER(gobj);

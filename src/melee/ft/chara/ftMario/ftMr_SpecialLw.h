@@ -13,6 +13,5 @@ void ftMr_SpecialLw_Coll(HSD_GObj* gobj);
 void ftMr_SpecialLw_Enter(HSD_GObj* gobj);
 void ftMr_SpecialLw_IASA(HSD_GObj* gobj);
 void ftMr_SpecialLw_Phys(HSD_GObj* gobj);
-void ftMr_SpecialLw_UpdateRot(HSD_GObj* gobj);
 
 #endif
