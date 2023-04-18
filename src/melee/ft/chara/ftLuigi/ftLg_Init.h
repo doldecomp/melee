@@ -10,62 +10,6 @@
 
 #include <common_structs.h>
 
-typedef struct _ftLuigiAttributes {
-    // SIDE SPECIAL - GREEN MISSILE
-
-    f32 x0_LUIGI_GREENMISSILE_UNK1;
-    f32 x4_LUIGI_GREENMISSILE_SMASH;
-    f32 x8_LUIGI_GREENMISSILE_CHARGE_RATE;
-    f32 xC_LUIGI_GREENMISSILE_MAX_CHARGE_FRAMES;
-    f32 x10_LUIGI_GREENMISSILE_DAMAGE_TILT;
-    f32 x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE; // (base damage + charge duration)
-                                             // * this value?
-    f32 x18_LUIGI_GREENMISSILE_TRACTION;
-    f32 x1C_LUIGI_GREENMISSILE_UNK2;
-    f32 x20_LUIGI_GREENMISSILE_FALLING_SPEED;
-    f32 x24_LUIGI_GREENMISSILE_VEL_X;
-    f32 x28_LUIGI_GREENMISSILE_MUL_X;
-    f32 x2C_LUIGI_GREENMISSILE_VEL_Y;
-    f32 x30_LUIGI_GREENMISSILE_MUL_Y;
-    f32 x34_LUIGI_GREENMISSILE_GRAVITY_START;
-    f32 x38_LUIGI_GREENMISSILE_FRICTION_END;
-    f32 x3C_LUIGI_GREENMISSILE_X_DECEL;
-    f32 x40_LUIGI_GREENMISSILE_GRAVITY_MUL;
-    f32 x44_LUIGI_GREENMISSILE_MISFIRE_CHANCE; // 1.0f divided by this value
-    f32 x48_LUIGI_GREENMISSILE_MISFIRE_VEL_X;
-    f32 x4C_LUIGI_GREENMISSILE_MISFIRE_VEL_Y;
-
-    // UP SPECIAL - SUPER JUMP PUNCH
-
-    f32 x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY; // Multiplies Luigi's max
-                                               // horionztal aerial mobility
-    f32 x54_LUIGI_SUPERJUMP_LANDING_LAG;
-    f32 x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE;  // Minimum stick range
-                                                  // required for turnaround
-    f32 x5C_LUIGI_SUPERJUMP_MOMENTUM_STICK_RANGE; // Minimum stick range
-                                                  // required for horionztal
-                                                  // momentum?
-    f32 x60_LUIGI_SUPERJUMP_ANGLE_DIFF;
-    f32 x64_LUIGI_SUPERJUMP_VEL_X;
-    f32 x68_LUIGI_SUPERJUMP_GRAVITY_START;
-    f32 x6C_LUIGI_SUPERJUMP_VEL_Y;
-
-    // DOWN SPECIAL - LUIGI CYCLONE
-
-    f32 x70_LUIGI_CYCLONE_TAP_MOMENTUM; // Vertical momentum from (first?) B
-                                        // button tap
-    f32 x74_LUIGI_CYCLONE_MOMENTUM_X_GROUND;
-    f32 x78_LUIGI_CYCLONE_MOMENTUM_X_AIR;
-    f32 x7C_LUIGI_CYCLONE_MOMENTUM_X_MUL_GROUND;
-    f32 x80_LUIGI_CYCLONE_MOMENTUM_X_MUL_AIR;
-    f32 x84_LUIGI_CYCLONE_FRICTION_END;
-    s32 x88_LUIGI_CYCLONE_UNK;
-    f32 x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX;
-    f32 x90_LUIGI_CYCLONE_TAP_GRAVITY;
-    s32 x94_LUIGI_CYCLONE_LANDING_LAG;
-
-} ftLuigiAttributes;
-
 extern MotionState ftLg_Init_MotionStateTable[];
 extern MotionState ftLg_Init_UnkMotionStates0[];
 extern char ftLg_Init_DatFilename[];
