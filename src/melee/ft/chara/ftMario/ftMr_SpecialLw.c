@@ -15,7 +15,7 @@
 #include <stddef.h>
 #include <baselib/random.h>
 
-void ftMr_SpecialLw_UpdateRot(HSD_GObj* gobj)
+void updateRot(HSD_GObj* gobj)
 {
     Fighter* fp;
     fp = GET_FIGHTER(gobj);
@@ -39,8 +39,8 @@ static void setGfx(HSD_GObj* gobj)
 static void setCallbacks(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = &ftMr_SpecialLw_UpdateRot;
-    fp->cb.x21E4_callback_OnDeath2 = &ftMr_SpecialLw_UpdateRot;
+    fp->cb.x21DC_callback_OnTakeDamage = &updateRot;
+    fp->cb.x21E4_callback_OnDeath2 = &updateRot;
 }
 
 static void doStartMotion(HSD_GObj* gobj)
