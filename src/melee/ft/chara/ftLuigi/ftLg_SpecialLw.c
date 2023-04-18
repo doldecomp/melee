@@ -2,6 +2,8 @@
 
 #include "ftLg_SpecialLw.h"
 
+#include "types.h"
+
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ft_081B.h"
