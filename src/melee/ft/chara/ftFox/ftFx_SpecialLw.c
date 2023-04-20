@@ -1,5 +1,7 @@
 #include "forward.h"
 
+#include "ftFx_SpecialLw.h"
+
 #include "ftFx_Init.h"
 
 #include "ef/eflib.h"
@@ -13,6 +15,13 @@
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx/types.h>
+
+#define FTFOX_SPECIALLW_COLL_FLAG                                             \
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |             \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |           \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
+        FtStateChange_SkipUpdateModelPartVis |                                \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 void ftFx_SpecialLw_CreateLoopGFX(HSD_GObj* gobj)
 {

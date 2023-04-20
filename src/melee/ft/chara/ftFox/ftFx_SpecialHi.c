@@ -1,18 +1,27 @@
 #include "forward.h"
 
-#include "ftFx_Init.h"
+#include "ftFx_SpecialHi.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcliffcommon.h"
+#include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
+#include "lb/lbvector.h"
 
 #include <trigf.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/gobjproc.h>
+
+#define FTFOX_SPECIALHI_COLL_FLAG                                             \
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |             \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |           \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
+        FtStateChange_SkipUpdateModelPartVis |                                \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 /// @todo Move elsewhere.
 #define HALF_PI32 (1.5707963705062866f)
@@ -89,7 +98,7 @@ void ftFx_SpecialAirHiStart_Enter(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialHi_CreateChargeGFX;
 }
 
-void ftFox_SpecialHi_RotateModel(HSD_GObj* gobj)
+static void ftFox_SpecialHi_RotateModel(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_8007592C(fp, ftParts_8007500C(fp, 2),

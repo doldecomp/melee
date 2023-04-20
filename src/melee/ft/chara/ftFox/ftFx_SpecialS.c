@@ -1,5 +1,7 @@
 #include "forward.h"
 
+#include "ftFx_SpecialS.h"
+
 #include "ftFx_Init.h"
 
 #include "ef/eflib.h"
@@ -10,6 +12,13 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "it/it_27CF.h"
+
+#define FTFOX_SPECIALS_COLL_FLAG                                              \
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateRumble |        \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |           \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
+        FtStateChange_SkipUpdateModelPartVis |                                \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // 0x800E9DF8
 // https://decomp.me/scratch/5Qwzg // Create Fox Illusion / Falco Phantasm GFX

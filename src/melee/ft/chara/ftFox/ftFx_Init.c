@@ -1,6 +1,10 @@
 #include "ftFox/ftFx_Init.h"
 
+#include "ftFx_Appeal.h"
+#include "ftFx_SpecialHi.h"
+#include "ftFx_SpecialLw.h"
 #include "ftFx_SpecialN.h"
+#include "ftFx_SpecialS.h"
 
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"

@@ -2,14 +2,14 @@
 
 #include "ftFx_Appeal.h"
 
-#include "ftFx_Init.h"
-
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
 #include "gr/grcorneria.h"
 #include "it/it_26B1.h"
 #include "pl/pl_0371.h"
+
+#define FTFOX_APPEALS_ATTACKID 0x72
 
 bool ftFx_AppealS_CheckIfUsed(Fighter* fp)
 {
