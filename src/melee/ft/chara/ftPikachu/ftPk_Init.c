@@ -1,5 +1,9 @@
 #include "ftPk_Init.h"
 
+#include "ftPk_SpecialHi.h"
+#include "ftPk_SpecialLw.h"
+#include "ftPk_SpecialN.h"
+#include "ftPk_SpecialS.h"
 #include "types.h"
 
 #include "ft/fighter.h"

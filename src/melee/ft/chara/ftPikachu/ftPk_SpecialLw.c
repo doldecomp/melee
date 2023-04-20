@@ -1,3 +1,5 @@
+#include "ftPk_SpecialLw.h"
+
 #include "ftPk_Init.h"
 
 #include "cm/camera.h"
@@ -6,6 +8,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "it/it_27CF.h"
 
