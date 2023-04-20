@@ -66,7 +66,7 @@ void ftZd_SpecialHi_8013979C(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
-void ftZelda_SpecialHi_StartMotion_Helper(Fighter* fp)
+static void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -102,7 +102,7 @@ void ftZd_SpecialHi_Enter(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->mv.zd.specialhi.xC = 0;
 
-    ftZelda_SpecialHi_StartMotion_Helper(fp);
+    ftZelda_SpecialHi_StartAction_Helper(fp);
 
     fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialHi_801396AC;
 }
@@ -296,7 +296,7 @@ void ftZd_SpecialHi_Coll(HSD_GObj* gobj)
     }
 }
 
-bool ftZelda_80139D60_Helper(HSD_GObj* gobj)
+static bool ftZelda_80139D60_Helper(HSD_GObj* gobj)
 {
     bool result;
     Fighter* fighter2;
