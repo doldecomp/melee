@@ -42,7 +42,7 @@ void ftMt_SpecialLw_Enter(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->fv.mt.x222C_disableGObj = NULL;
 
-    Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALLW, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialLw, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
 
@@ -66,7 +66,7 @@ void ftMt_SpecialAirLw_Enter(HSD_GObj* gobj)
     fp->fv.mt.x222C_disableGObj = NULL;
     fp->x80_self_vel.y = 0.0f;
 
-    Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRLW, 0, NULL, 0.0f,
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirLw, 0, NULL, 0.0f,
                               1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
 
@@ -151,7 +151,7 @@ void ftMt_SpecialLw_GroundToAir(HSD_GObj* gobj)
 
     fp->x80_self_vel.y = 0.0f;
 
-    Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRLW,
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirLw,
                               FTMEWTWO_SPECIALLW_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
@@ -171,7 +171,7 @@ void ftMt_SpecialAirLw_AirToGround(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALLW,
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialLw,
                               FTMEWTWO_SPECIALLW_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 

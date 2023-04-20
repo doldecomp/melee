@@ -46,7 +46,7 @@ void ftMt_SpecialS_Enter(HSD_GObj* gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->mv.mt.SpecialS.isConfusionReflect = false;
 
-    Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALS, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialS, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
 
@@ -89,7 +89,7 @@ void ftMt_SpecialAirS_Enter(HSD_GObj* gobj)
         fp->fv.mt.x223C_isConfusionBoost = true;
     }
 
-    Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRS, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirS, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
 
@@ -186,7 +186,7 @@ void ftMt_SpecialS_GroundToAir(HSD_GObj* gobj)
 
     ftCommon_8007D5D4(fp);
 
-    Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRS,
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirS,
                               FTMEWTWO_SPECIALS_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
@@ -208,7 +208,7 @@ void ftMt_SpecialAirS_AirToGround(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALS,
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialS,
                               FTMEWTWO_SPECIALS_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
