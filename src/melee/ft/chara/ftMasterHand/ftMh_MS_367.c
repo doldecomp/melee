@@ -8,63 +8,53 @@
 
 #include <dolphin/mtx/types.h>
 
-static void doAnim(HSD_GObj*);
+static void doAnim(HSD_GObj* gobj);
 
-// 8015386C 15044C
-// https://decomp.me/scratch/dCvLa
-void ftMh_MS_367_Anim(HSD_GObj* arg0)
+void ftMh_MS_367_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(arg0)) {
-        doAnim(arg0);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        doAnim(gobj);
     }
 }
 
-// 801538A8 150488
-void ftMh_MS_367_IASA(HSD_GObj* arg0)
+void ftMh_MS_367_IASA(HSD_GObj* gobj)
 {
-    Fighter* fp = arg0->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        ftBossLib_8015BD20(arg0);
+        ftBossLib_8015BD20(gobj);
     }
 }
 
-// 801538EC 1504CC
 void ftMh_MS_367_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-// 8015390C 1504EC
-void ftMh_MS_367_Coll(HSD_GObj* gobj)
-{
-    return;
-}
+void ftMh_MS_367_Coll(HSD_GObj* gobj) {}
 
-// 80153910 1504F0
-// https://decomp.me/scratch/AYDbj
-static void doAnim(HSD_GObj* arg0)
+static void doAnim(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(arg0);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
-    Vec3 sp10;
 
-    Fighter_ChangeMotionState(arg0, 0x170, 0, 0, 0.0f, 1.0f, 0.0f);
-    ftAnim_8006EBA4(arg0);
-    ftBossLib_8015C208(arg0, &sp10);
-    fp->cur_pos.x = sp10.x;
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Unk368, 0, 0, 0, 1, 0);
+    ftAnim_8006EBA4(gobj);
+
+    {
+        Vec3 pos;
+        ftBossLib_8015C208(gobj, &pos);
+        fp->cur_pos.x = pos.x;
+    }
+
     fp->cur_pos.y = attr->x5C;
-    fp->x80_self_vel.z = 0.0f;
-    fp->x80_self_vel.y = 0.0f;
-    fp->x80_self_vel.x = 0.0f;
+    fp->x80_self_vel.x = fp->x80_self_vel.y = fp->x80_self_vel.z = 0;
 }
 
-// 801539A4 150584
-// https://decomp.me/scratch/DVyVs
-void ftMh_MS_368_Anim(HSD_GObj* arg0)
+void ftMh_MS_368_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(arg0)) {
-        Fighter* temp_r4 = GET_FIGHTER(arg0);
-        temp_r4->x80_self_vel.x = 0.0f;
-        ftMh_MS_368_80153A64(arg0);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->x80_self_vel.x = 0;
+        ftMh_MS_368_80153A64(gobj);
     }
 }

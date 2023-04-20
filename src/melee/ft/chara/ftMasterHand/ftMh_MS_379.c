@@ -12,33 +12,26 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 
-// 80154FAC 151B8C
-void ftMh_MS_379_IASA(HSD_GObj* arg0)
+void ftMh_MS_379_IASA(HSD_GObj* gobj)
 {
-    Fighter* fp = arg0->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        ftBossLib_8015BD20(arg0);
+        ftBossLib_8015BD20(gobj);
     }
 }
 
-// 80154FF0 151BD0
 void ftMh_MS_379_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-// 80155010 151BF0
-void ftMh_MS_379_Coll(HSD_GObj* gobj)
-{
-    return;
-}
+void ftMh_MS_379_Coll(HSD_GObj* gobj) {}
 
-// 80155014 151BF4
-// https://decomp.me/scratch/ZAwzc
 void ftMh_MS_379_80155014(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, 0x17C, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Grab_Unk1_MotionStart, 0, 0, 0, 1,
+                              0);
     ftAnim_8006EBA4(gobj);
     fp->x2200_ftcmd_var0 = 0;
 }

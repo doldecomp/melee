@@ -8,7 +8,6 @@
 
 #include <dolphin/mtx/types.h>
 
-// 80153AEC 1506CC
 void ftMh_MS_369_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -16,7 +15,6 @@ void ftMh_MS_369_Anim(HSD_GObj* gobj)
     }
 }
 
-// 80153B28 150708
 void ftMh_MS_369_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -25,68 +23,52 @@ void ftMh_MS_369_IASA(HSD_GObj* gobj)
     }
 }
 
-// 80153B6C 15074C
 void ftMh_MS_369_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-// 80153B8C 15076C
-void ftMh_MS_369_Coll(HSD_GObj* gobj)
+void ftMh_MS_369_Coll(HSD_GObj* gobj) {}
+
+void ftMh_MS_369_80153B90(HSD_GObj* gobj)
 {
-    return;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    Vec3 pos;
+
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Ram_StartMotion, 0, 0, 0, 1, 0);
+    ftAnim_8006EBA4(gobj);
+    fp->mv.mh.unk0.x0 = attr->x6C;
+    ftBossLib_8015C208(gobj, &pos);
+    fp->cur_pos.x = pos.x;
+    fp->cur_pos.y = attr->x68;
+    fp->x80_self_vel.x = fp->x80_self_vel.y = fp->x80_self_vel.z = 0;
 }
 
-// 80153B90 150770
-// https://decomp.me/scratch/vgHNv
-void ftMh_MS_369_80153B90(HSD_GObj* arg0)
+void ftMh_MS_370_Anim(HSD_GObj* gobj)
 {
-    Fighter* temp_r31 = GET_FIGHTER(arg0);
-    ftMasterHand_SpecialAttrs* temp_r30 = temp_r31->ft_data->ext_attr;
-    Vec3 sp10;
-
-    Fighter_ChangeMotionState(arg0, 0x172, 0, 0, 0.0f, 1.0f, 0.0f);
-    ftAnim_8006EBA4(arg0);
-    temp_r31->mv.mh.unk0.x0 = temp_r30->x6C;
-    ftBossLib_8015C208(arg0, &sp10);
-    temp_r31->cur_pos.x = sp10.x;
-    temp_r31->cur_pos.y = temp_r30->x68;
-    temp_r31->x80_self_vel.z = 0.0f;
-    temp_r31->x80_self_vel.y = 0.0f;
-    temp_r31->x80_self_vel.x = 0.0f;
-}
-
-// 80153C48 150828
-// https://decomp.me/scratch/NrDG9
-void ftMh_MS_370_Anim(HSD_GObj* arg0)
-{
-    if (!ftAnim_IsFramesRemaining(arg0)) {
-        Fighter* fp = GET_FIGHTER(arg0);
-        fp->x80_self_vel.x = 0.0f;
-        ftMh_MS_389_80151018(arg0);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->x80_self_vel.x = 0;
+        ftMh_MS_389_80151018(gobj);
     }
 }
 
-// 80153C90 150870
-// https://decomp.me/scratch/ijnCv
-void ftMh_MS_370_IASA(HSD_GObj* arg0)
+void ftMh_MS_370_IASA(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(arg0);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        ftBossLib_8015BD20(arg0);
+        ftBossLib_8015BD20(gobj);
     }
 }
 
-// 80153CD4 1508B4
-// https://decomp.me/scratch/qCZ0G
 void ftMh_MS_370_Phys(HSD_GObj* gobj)
 {
-    Fighter* r4_fp = GET_FIGHTER(gobj);
-    if (--r4_fp->mv.mh.unk0.x0 > 0.0f) {
-        ftBossLib_8015BF74(
-            gobj,
-            ((ftMasterHand_SpecialAttrs*) r4_fp->ft_data->ext_attr)->x58);
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (--fp->mv.mh.unk0.x0 > 0) {
+        ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+        ftBossLib_8015BF74(gobj, attr->x58);
     } else {
-        r4_fp->x80_self_vel.x = 0.0f;
+        fp->x80_self_vel.x = 0;
     }
 }

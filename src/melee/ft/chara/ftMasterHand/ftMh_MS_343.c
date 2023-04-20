@@ -12,165 +12,152 @@
 
 static void ftMh_MS_343_801511FC(HSD_GObj* gobj);
 
-// 801510B0 14DC90
-// https://decomp.me/scratch/sIqel
 void ftMh_MS_343_801510B0(HSD_GObj* gobj)
 {
-    Fighter* r31_fp;
-    ftMasterHand_SpecialAttrs* r30_attributes;
-
-    r31_fp = gobj->user_data;
-    r30_attributes = r31_fp->ft_data->ext_attr;
-    Fighter_ChangeMotionState(gobj, 0x157, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Unk343, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
-    r31_fp->cur_pos.x = r30_attributes->x30_pos2.x;
-    r31_fp->cur_pos.y = r30_attributes->x30_pos2.y;
-    r31_fp->cur_pos.z = 0.0f;
-    r31_fp->cb.x21BC_callback_Accessory4 = &ftMh_MS_343_801511FC;
-    r31_fp->mv.mh.unk4.x0 = 0;
+    fp->cur_pos.x = attr->x30_pos2.x;
+    fp->cur_pos.y = attr->x30_pos2.y;
+    fp->cur_pos.z = 0;
+    fp->cb.x21BC_callback_Accessory4 = ftMh_MS_343_801511FC;
+    fp->mv.mh.unk4.x0 = ftMh_UnkEnum0_Unk00;
 
     /// @todo Probably same file if #ftMh_MS_343_801511FC is getting
     /// implicitly passed.
-    ft_800881D8(r31_fp, 0x4E201, 0x7F, 0x40 /*, ftMh_MS_343_801511FC */);
-    // ft_800881D8(r31_fp, 0x4E201, 0x7F, 0x40, ftMh_MS_343_801511FC);
+    ft_800881D8(fp, 320001, 127, 64 /*, ftMh_MS_343_801511FC */);
 
-    ftBossLib_8015C09C(gobj, -1.0f);
+    ftBossLib_8015C09C(gobj, -1);
 }
 
-// 80151168 14DD48
-// https://decomp.me/scratch/896fc
 void ftMh_MS_343_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter* r4_fp = GET_FIGHTER(gobj);
-        r4_fp->fv.mh.x2258 = 0x155;
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->fv.mh.x2258 = ftMh_MS_Unk341;
         ftMh_MS_389_80151018(gobj);
     }
 }
 
-// 801511B0 14DD90
-// https://decomp.me/scratch/lkMK2
 void ftMh_MS_343_IASA(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-
+    Fighter* fp = GET_FIGHTER(gobj);
     if (!Player_GetPlayerSlotType(fp->xC_playerID)) {
         ftBossLib_8015BD20(gobj);
     }
 }
 
-// 801511F4 14DDD4
-// https://decomp.me/scratch/xs8Nh
-void ftMh_MS_343_Phys(HSD_GObj* gobj)
-{
-    return;
-}
+void ftMh_MS_343_Phys(HSD_GObj* gobj) {}
 
-// 801511F8 14DDD8
-// https://decomp.me/scratch/5Mb62
-void ftMh_MS_343_Coll(HSD_GObj* gobj)
-{
-    return;
-}
+void ftMh_MS_343_Coll(HSD_GObj* gobj) {}
 
-// 801511FC 14DDDC
 static void ftMh_MS_343_801511FC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[16];
 #endif
-
     switch (fp->mv.mh.unk4.x0) {
-    case 0: {
-        HSD_GObj* nearest_enemy = ftLib_8008627C(&fp->cur_pos, gobj);
-
-        if (nearest_enemy != NULL) {
-            Camera_8002E6FC((s32) ftLib_80086BE0(nearest_enemy));
+    case ftMh_UnkEnum0_Unk00: {
+        HSD_GObj* enemy_gobj = ftLib_8008627C(&fp->cur_pos, gobj);
+        if (enemy_gobj != NULL) {
+            Camera_8002E6FC((int) ftLib_80086BE0(enemy_gobj));
         } else {
             Camera_8002E6FC(0);
         }
-
-        Camera_8002ED9C(40.0f);
-        Camera_8002EEC8(45.0f);
+        Camera_8002ED9C(40);
+        Camera_8002EEC8(45);
         Camera_8002EC7C(-M_PI);
         Camera_8002EF14();
-        Camera_8002EC7C(0.0f);
-        Camera_8002F0E4(0x78);
-        fp->mv.mh.unk4.x0 = 1;
-        break;
+        Camera_8002EC7C(0);
+        Camera_8002F0E4(120);
+        fp->mv.mh.unk4.x0 = ftMh_UnkEnum0_Unk01;
+        return;
     }
-    case 1:
+    case ftMh_UnkEnum0_Unk01: {
         if (Camera_8002F260() != 0) {
             Camera_8002E948(ftMh_MS_343_80151428);
-            Camera_8002ED9C(120.0f);
-            Camera_8002F0E4(0x14);
-            fp->mv.mh.unk4.x0 = 2;
+            Camera_8002ED9C(120);
+            Camera_8002F0E4(20);
+            fp->mv.mh.unk4.x0 = ftMh_UnkEnum0_Unk02;
         }
-        break;
-    case 2:
+        return;
+    }
+    case ftMh_UnkEnum0_Unk02: {
         if (Camera_8002F260() != 0) {
-            Camera_8002EC7C(1.5707963705062866f);
-            Camera_8002F0E4(0x3C);
+            Camera_8002EC7C(M_PI / 2);
+            Camera_8002F0E4(60);
             fp->mv.mh.unk4.x0 = 3;
         }
-        break;
-    case 3:
+        return;
+    }
+    case ftMh_UnkEnum0_Unk03: {
         if (Camera_8002F260() != 0) {
-            Camera_8002ED9C(90.0f);
-            Camera_8002EC7C(-0.3490658402442932f);
-            Camera_8002EB5C(-0.2617993950843811f);
+            Camera_8002ED9C(90);
+            Camera_8002EC7C(-M_PI / 9);
+            Camera_8002EB5C(-M_PI / 12);
             Camera_8002EF14();
-            fp->mv.mh.unk4.x0 = 4;
+            fp->mv.mh.unk4.x0 = ftMh_UnkEnum0_Unk04;
         }
-        break;
-    case 4:
+        return;
+    }
+    case ftMh_UnkEnum0_Unk04: {
         Camera_8002F274();
-        fp->mv.mh.unk4.x8 = 0x78;
-        fp->mv.mh.unk4.x0 = 5;
-        break;
-    case 5:
+        fp->mv.mh.unk4.x8 = 120;
+        fp->mv.mh.unk4.x0 = ftMh_UnkEnum0_Unk05;
+        return;
+    }
+    case ftMh_UnkEnum0_Unk05: {
         if (--fp->mv.mh.unk4.x8 == 0) {
-            Camera_8002EC7C(-0.3490658402442932f);
+            Camera_8002EC7C(-M_PI / 9);
             Camera_8002EF14();
-            Camera_8002ED9C(120.0f);
-            fp->mv.mh.unk4.x8 = 0x1E;
-            fp->mv.mh.unk4.x0 = 6;
+            Camera_8002ED9C(120);
+            fp->mv.mh.unk4.x8 = 30;
+            fp->mv.mh.unk4.x0 = ftMh_UnkEnum0_Unk06;
         }
-        break;
-    case 6:
+        return;
+    }
+    case ftMh_UnkEnum0_Unk06: {
         if (--fp->mv.mh.unk4.x8 == 0) {
-            Camera_8002EC7C(0.3490658402442932f);
+            Camera_8002EC7C(M_PI / 9);
             Camera_8002EF14();
-            fp->mv.mh.unk4.x8 = 0x1E;
-            fp->mv.mh.unk4.x0 = 7;
+            fp->mv.mh.unk4.x8 = 30;
+            fp->mv.mh.unk4.x0 = ftMh_UnkEnum0_Unk07;
         }
-        break;
-    case 7:
+        return;
+    }
+    case ftMh_UnkEnum0_Unk07: {
         if (--fp->mv.mh.unk4.x8 == 0) {
-            Camera_8002ED9C(180.0f);
-            Camera_8002EC7C(-1.5707963705062866f);
-            Camera_8002EB5C(-0.3490658402442932f);
+            Camera_8002ED9C(180);
+            Camera_8002EC7C(-M_PI / 2);
+            Camera_8002EB5C(-M_PI / 9);
             Camera_8002EF14();
-            fp->mv.mh.unk4.x8 = 0x32;
-            fp->mv.mh.unk4.x0 = 8;
+            fp->mv.mh.unk4.x8 = 50;
+            fp->mv.mh.unk4.x0 = ftMh_UnkEnum0_Unk08;
         }
-        break;
-    case 8:
+        return;
+    }
+    case ftMh_UnkEnum0_Unk08: {
         Camera_8002F274();
-        fp->mv.mh.unk4.x0 = 9;
-        break;
-    case 9:
+        fp->mv.mh.unk4.x0 = ftMh_UnkEnum0_Unk09;
+        return;
+    }
+    case ftMh_UnkEnum0_Unk09: {
         if (--fp->mv.mh.unk4.x8 == 0) {
             Camera_8002F474();
-            fp->mv.mh.unk4.x0 = 10;
+            fp->mv.mh.unk4.x0 = ftMh_UnkEnum0_Unk10;
         }
-        break;
+        return;
+    }
 #ifndef MUST_MATCH
-    default:
+    case ftMh_UnkEnum0_Unk10: {
+        return;
+    }
+    default: {
         HSD_ASSERT(__LINE__, false);
+    }
 #endif
     }
 }
