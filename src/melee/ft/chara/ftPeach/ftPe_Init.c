@@ -1,5 +1,7 @@
 #include "ftPe_Init.h"
 
+#include "types.h"
+
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftdata.h"

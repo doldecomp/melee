@@ -1,7 +1,6 @@
 #ifndef MELEE_FT_CHARA_FTPEACH_FORWARD_H
 #define MELEE_FT_CHARA_FTPEACH_FORWARD_H
 
-#include <platform.h>
 #include "ftCommon/forward.h"
 
 typedef enum ftPeach_MotionState {
