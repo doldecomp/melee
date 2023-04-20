@@ -2,10 +2,24 @@
 #define MELEE_FT_CHARA_FTMASTERHAND_TYPES_H
 
 #include <platform.h>
-#include "forward.h"
+#include "ftMasterHand/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx/types.h>
+
+typedef enum ftMasterHand_UnkEnum0 {
+    ftMh_UnkEnum0_Unk00,
+    ftMh_UnkEnum0_Unk01,
+    ftMh_UnkEnum0_Unk02,
+    ftMh_UnkEnum0_Unk03,
+    ftMh_UnkEnum0_Unk04,
+    ftMh_UnkEnum0_Unk05,
+    ftMh_UnkEnum0_Unk06,
+    ftMh_UnkEnum0_Unk07,
+    ftMh_UnkEnum0_Unk08,
+    ftMh_UnkEnum0_Unk09,
+    ftMh_UnkEnum0_Unk10,
+} ftMasterHand_UnkEnum0;
 
 struct ftMasterHand_SpecialAttrs {
     s32 x0;
@@ -120,7 +134,7 @@ union ftMasterHand_MotionVars {
     } unk0;
 
     struct ftMasterHand_Unk4Vars {
-        int x0;
+        ftMasterHand_UnkEnum0 x0;
         int x4;
         int x8;
     } unk4;

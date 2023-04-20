@@ -1,16 +1,12 @@
-#ifndef MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_5_H
-#define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_5_H
+#ifndef GALE01_151428
+#define GALE01_151428
 
-#include <platform.h>
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
-#include <dolphin/mtx/types.h>
-
-/// Probably isCrazyHandLoaded func.
-bool ftMh_MS_343_80151428(Vec3* vec);
-
-void ftMh_MS_343_80151484(HSD_GObj* gobj);
-void ftMh_MS_344_Anim(HSD_GObj* gobj);
-void ftMh_MS_345_Anim(HSD_GObj* gobj);
+/* 151428 */ bool ftMh_MS_343_80151428(Vec3* vec);
+/* 151484 */ void ftMh_MS_343_80151484(HSD_GObj* gobj);
+/* 1515B8 */ void ftMh_MS_344_Anim(HSD_GObj* gobj);
+/* 1516B4 */ void ftMh_MS_345_Anim(HSD_GObj* gobj);
 
 #endif
