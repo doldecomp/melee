@@ -1,6 +1,8 @@
 #include "ft/forward.h"
 
-#include "ftKirby/ftKb_Init.h"
+#include "ftKb_Init.h"
+
+#include "types.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
@@ -2237,19 +2239,10 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
 };
 
 /* static */ void ftKb_Init_800EE854(void);
-/* static */ void ftKb_Init_800EE904(void);
-/* static */ void ftKb_Init_800EE904(void);
-/* static */ void ftKb_Init_800EE904(void);
+/* static */ void ftKb_Init_800EE874(void);
+/* static */ void ftKb_Init_800EE8B0(void);
 /* static */ void ftKb_Init_800EE8EC(void);
 /* static */ void ftKb_Init_800EE904(void);
-/* static */ void ftKb_Init_800EE904(void);
-/* static */ void ftKb_Init_800EE904(void);
-/* static */ void ftKb_Init_800EE904(void);
-/* static */ void ftKb_Init_800EE904(void);
-/* static */ void ftKb_Init_800EE874(void);
-/* static */ void ftKb_Init_800EE904(void);
-/* static */ void ftKb_Init_800EE904(void);
-/* static */ void ftKb_Init_800EE8B0(void);
 
 jtbl_t ftKb_Init_803CA0CC = {
     ftKb_Init_800EE854, ftKb_Init_800EE904, ftKb_Init_800EE904,
@@ -2264,37 +2257,25 @@ char ftKb_Init_assert_msg_1[] = "ftkirby.c";
 char ftKb_Init_assert_msg_2[] = "fighter dobj num over!\n";
 
 /* static */ void ftKb_SpecialN_800F1708(void);
-/* static */ void ftKb_SpecialN_800F1764(void);
-/* static */ void ftKb_SpecialN_800F18F8(void);
-/* static */ void ftKb_SpecialN_800F18F8(void);
-/* static */ void ftKb_SpecialN_800F18F8(void);
-/* static */ void ftKb_SpecialN_800F186C(void);
-/* static */ void ftKb_SpecialN_800F17A4(void);
-/* static */ void ftKb_SpecialN_800F1894(void);
-/* static */ void ftKb_SpecialN_800F17F8(void);
-/* static */ void ftKb_SpecialN_800F1744(void);
+/* static */ void ftKb_SpecialN_800F171C(void);
 /* static */ void ftKb_SpecialN_800F1730(void);
-/* static */ void ftKb_SpecialN_800F18F8(void);
+/* static */ void ftKb_SpecialN_800F1744(void);
+/* static */ void ftKb_SpecialN_800F1764(void);
+/* static */ void ftKb_SpecialN_800F1784(void);
+/* static */ void ftKb_SpecialN_800F17A4(void);
+/* static */ void ftKb_SpecialN_800F17C4(void);
+/* static */ void ftKb_SpecialN_800F17E4(void);
+/* static */ void ftKb_SpecialN_800F17F8(void);
 /* static */ void ftKb_SpecialN_800F1818(void);
+/* static */ void ftKb_SpecialN_800F1838(void);
 /* static */ void ftKb_SpecialN_800F1858(void);
+/* static */ void ftKb_SpecialN_800F186C(void);
+/* static */ void ftKb_SpecialN_800F1880(void);
+/* static */ void ftKb_SpecialN_800F1894(void);
+/* static */ void ftKb_SpecialN_800F18B4(void);
+/* static */ void ftKb_SpecialN_800F18C8(void);
 /* static */ void ftKb_SpecialN_800F18E8(void);
 /* static */ void ftKb_SpecialN_800F18F8(void);
-/* static */ void ftKb_SpecialN_800F17E4(void);
-/* static */ void ftKb_SpecialN_800F171C(void);
-/* static */ void ftKb_SpecialN_800F18F8(void);
-/* static */ void ftKb_SpecialN_800F18F8(void);
-/* static */ void ftKb_SpecialN_800F17C4(void);
-/* static */ void ftKb_SpecialN_800F18B4(void);
-/* static */ void ftKb_SpecialN_800F1784(void);
-/* static */ void ftKb_SpecialN_800F1838(void);
-/* static */ void ftKb_SpecialN_800F18C8(void);
-/* static */ void ftKb_SpecialN_800F18F8(void);
-/* static */ void ftKb_SpecialN_800F18F8(void);
-/* static */ void ftKb_SpecialN_800F18F8(void);
-/* static */ void ftKb_SpecialN_800F18F8(void);
-/* static */ void ftKb_SpecialN_800F18F8(void);
-/* static */ void ftKb_SpecialN_800F18F8(void);
-/* static */ void ftKb_SpecialN_800F1880(void);
 
 jtbl_t ftKb_Init_803CA14C = {
     ftKb_SpecialN_800F1708, ftKb_SpecialN_800F1764, ftKb_SpecialN_800F18F8,
@@ -2310,31 +2291,18 @@ jtbl_t ftKb_Init_803CA14C = {
     ftKb_SpecialN_800F18F8, ftKb_SpecialN_800F1880,
 };
 
-/* static */ void ftKb_SpecialN_800F1A78(void);
-/* static */ void ftKb_SpecialN_800F1A00(void);
-/* static */ void ftKb_SpecialN_800F1A78(void);
-/* static */ void ftKb_SpecialN_800F1A64(void);
-/* static */ void ftKb_SpecialN_800F1A78(void);
-/* static */ void ftKb_SpecialN_800F1A78(void);
-/* static */ void ftKb_SpecialN_800F1A0C(void);
-/* static */ void ftKb_SpecialN_800F1A44(void);
-/* static */ void ftKb_SpecialN_800F1A2C(void);
-/* static */ void ftKb_SpecialN_800F19F4(void);
 /* static */ void ftKb_SpecialN_800F19E8(void);
-/* static */ void ftKb_SpecialN_800F1A78(void);
-/* static */ void ftKb_SpecialN_800F1A78(void);
-/* static */ void ftKb_SpecialN_800F1A38(void);
-/* static */ void ftKb_SpecialN_800F1A50(void);
-/* static */ void ftKb_SpecialN_800F1A78(void);
-/* static */ void ftKb_SpecialN_800F1A20(void);
-/* static */ void ftKb_SpecialN_800F1A78(void);
-/* static */ void ftKb_SpecialN_800F1A78(void);
-/* static */ void ftKb_SpecialN_800F1A78(void);
-/* static */ void ftKb_SpecialN_800F1A0C(void);
-/* static */ void ftKb_SpecialN_800F1A78(void);
+/* static */ void ftKb_SpecialN_800F19F4(void);
 /* static */ void ftKb_SpecialN_800F1A00(void);
-/* static */ void ftKb_SpecialN_800F1A78(void);
+/* static */ void ftKb_SpecialN_800F1A0C(void);
+/* static */ void ftKb_SpecialN_800F1A20(void);
+/* static */ void ftKb_SpecialN_800F1A2C(void);
+/* static */ void ftKb_SpecialN_800F1A38(void);
+/* static */ void ftKb_SpecialN_800F1A44(void);
+/* static */ void ftKb_SpecialN_800F1A50(void);
+/* static */ void ftKb_SpecialN_800F1A64(void);
 /* static */ void ftKb_SpecialN_800F1A70(void);
+/* static */ void ftKb_SpecialN_800F1A78(void);
 
 jtbl_t ftKb_Init_803CA1CC = {
     ftKb_SpecialN_800F1A78, ftKb_SpecialN_800F1A00, ftKb_SpecialN_800F1A78,
@@ -2348,31 +2316,18 @@ jtbl_t ftKb_Init_803CA1CC = {
     ftKb_SpecialN_800F1A70,
 };
 
-/* static */ void ftKb_SpecialN_800F1B58(void);
-/* static */ void ftKb_SpecialN_800F1AE0(void);
-/* static */ void ftKb_SpecialN_800F1B58(void);
-/* static */ void ftKb_SpecialN_800F1B44(void);
-/* static */ void ftKb_SpecialN_800F1B58(void);
-/* static */ void ftKb_SpecialN_800F1B58(void);
-/* static */ void ftKb_SpecialN_800F1AEC(void);
-/* static */ void ftKb_SpecialN_800F1B24(void);
-/* static */ void ftKb_SpecialN_800F1B0C(void);
-/* static */ void ftKb_SpecialN_800F1AD4(void);
 /* static */ void ftKb_SpecialN_800F1AC8(void);
-/* static */ void ftKb_SpecialN_800F1B58(void);
-/* static */ void ftKb_SpecialN_800F1B58(void);
-/* static */ void ftKb_SpecialN_800F1B18(void);
-/* static */ void ftKb_SpecialN_800F1B30(void);
-/* static */ void ftKb_SpecialN_800F1B58(void);
-/* static */ void ftKb_SpecialN_800F1B00(void);
-/* static */ void ftKb_SpecialN_800F1B58(void);
-/* static */ void ftKb_SpecialN_800F1B58(void);
-/* static */ void ftKb_SpecialN_800F1B58(void);
-/* static */ void ftKb_SpecialN_800F1AEC(void);
-/* static */ void ftKb_SpecialN_800F1B58(void);
+/* static */ void ftKb_SpecialN_800F1AD4(void);
 /* static */ void ftKb_SpecialN_800F1AE0(void);
-/* static */ void ftKb_SpecialN_800F1B58(void);
+/* static */ void ftKb_SpecialN_800F1AEC(void);
+/* static */ void ftKb_SpecialN_800F1B00(void);
+/* static */ void ftKb_SpecialN_800F1B0C(void);
+/* static */ void ftKb_SpecialN_800F1B18(void);
+/* static */ void ftKb_SpecialN_800F1B24(void);
+/* static */ void ftKb_SpecialN_800F1B30(void);
+/* static */ void ftKb_SpecialN_800F1B44(void);
 /* static */ void ftKb_SpecialN_800F1B50(void);
+/* static */ void ftKb_SpecialN_800F1B58(void);
 
 jtbl_t ftKb_Init_803CA230 = {
     ftKb_SpecialN_800F1B58, ftKb_SpecialN_800F1AE0, ftKb_SpecialN_800F1B58,
@@ -2386,20 +2341,8 @@ jtbl_t ftKb_Init_803CA230 = {
     ftKb_SpecialN_800F1B50,
 };
 
-/* static */ void ftKb_SpecialN_800F1CD0(void);
-/* static */ void ftKb_SpecialN_800F1CD0(void);
 /* static */ void ftKb_SpecialN_800F1CC8(void);
 /* static */ void ftKb_SpecialN_800F1CD0(void);
-/* static */ void ftKb_SpecialN_800F1CD0(void);
-/* static */ void ftKb_SpecialN_800F1CD0(void);
-/* static */ void ftKb_SpecialN_800F1CD0(void);
-/* static */ void ftKb_SpecialN_800F1CC8(void);
-/* static */ void ftKb_SpecialN_800F1CD0(void);
-/* static */ void ftKb_SpecialN_800F1CD0(void);
-/* static */ void ftKb_SpecialN_800F1CC8(void);
-/* static */ void ftKb_SpecialN_800F1CC8(void);
-/* static */ void ftKb_SpecialN_800F1CD0(void);
-/* static */ void ftKb_SpecialN_800F1CC8(void);
 
 jtbl_t ftKb_Init_803CA294 = {
     ftKb_SpecialN_800F1CD0, ftKb_SpecialN_800F1CD0, ftKb_SpecialN_800F1CC8,
@@ -2409,20 +2352,8 @@ jtbl_t ftKb_Init_803CA294 = {
     ftKb_SpecialN_800F1CD0, ftKb_SpecialN_800F1CC8,
 };
 
-/* static */ void ftKb_SpecialN_800F1D08(void);
-/* static */ void ftKb_SpecialN_800F1D08(void);
 /* static */ void ftKb_SpecialN_800F1D00(void);
 /* static */ void ftKb_SpecialN_800F1D08(void);
-/* static */ void ftKb_SpecialN_800F1D08(void);
-/* static */ void ftKb_SpecialN_800F1D08(void);
-/* static */ void ftKb_SpecialN_800F1D08(void);
-/* static */ void ftKb_SpecialN_800F1D00(void);
-/* static */ void ftKb_SpecialN_800F1D08(void);
-/* static */ void ftKb_SpecialN_800F1D08(void);
-/* static */ void ftKb_SpecialN_800F1D00(void);
-/* static */ void ftKb_SpecialN_800F1D00(void);
-/* static */ void ftKb_SpecialN_800F1D08(void);
-/* static */ void ftKb_SpecialN_800F1D00(void);
 
 jtbl_t ftKb_Init_803CA2CC = {
     ftKb_SpecialN_800F1D08, ftKb_SpecialN_800F1D08, ftKb_SpecialN_800F1D00,
@@ -2726,24 +2657,9 @@ Vec3 ftKb_Init_803CB758[] = {
 f32 ftKb_Init_803CB770[] = {
     -1, -0.75, -0.5, -0.25, 0, +0.25, +0.5, +0.75, +1,
 };
-/* static */ void ftKb_SpecialNSk_80106474(void);
-/* static */ void ftKb_SpecialNSk_80106474(void);
+
 /* static */ void ftKb_SpecialNSk_80106464(void);
 /* static */ void ftKb_SpecialNSk_80106474(void);
-/* static */ void ftKb_SpecialNSk_80106474(void);
-/* static */ void ftKb_SpecialNSk_80106464(void);
-/* static */ void ftKb_SpecialNSk_80106474(void);
-/* static */ void ftKb_SpecialNSk_80106474(void);
-/* static */ void ftKb_SpecialNSk_80106464(void);
-/* static */ void ftKb_SpecialNSk_80106474(void);
-/* static */ void ftKb_SpecialNSk_80106474(void);
-/* static */ void ftKb_SpecialNSk_80106464(void);
-/* static */ void ftKb_SpecialNSk_80106474(void);
-/* static */ void ftKb_SpecialNSk_80106474(void);
-/* static */ void ftKb_SpecialNSk_80106464(void);
-/* static */ void ftKb_SpecialNSk_80106474(void);
-/* static */ void ftKb_SpecialNSk_80106474(void);
-/* static */ void ftKb_SpecialNSk_80106464(void);
 
 jtbl_t ftKb_Init_803CB794 = {
     ftKb_SpecialNSk_80106474, ftKb_SpecialNSk_80106474,
@@ -2756,24 +2672,9 @@ jtbl_t ftKb_Init_803CB794 = {
     ftKb_SpecialNSk_80106464, ftKb_SpecialNSk_80106474,
     ftKb_SpecialNSk_80106474, ftKb_SpecialNSk_80106464,
 };
-/* static */ void ftKb_SpecialNSk_801066C4(void);
-/* static */ void ftKb_SpecialNSk_801066C4(void);
+
 /* static */ void ftKb_SpecialNSk_801066B4(void);
 /* static */ void ftKb_SpecialNSk_801066C4(void);
-/* static */ void ftKb_SpecialNSk_801066C4(void);
-/* static */ void ftKb_SpecialNSk_801066B4(void);
-/* static */ void ftKb_SpecialNSk_801066C4(void);
-/* static */ void ftKb_SpecialNSk_801066C4(void);
-/* static */ void ftKb_SpecialNSk_801066B4(void);
-/* static */ void ftKb_SpecialNSk_801066C4(void);
-/* static */ void ftKb_SpecialNSk_801066C4(void);
-/* static */ void ftKb_SpecialNSk_801066B4(void);
-/* static */ void ftKb_SpecialNSk_801066C4(void);
-/* static */ void ftKb_SpecialNSk_801066C4(void);
-/* static */ void ftKb_SpecialNSk_801066B4(void);
-/* static */ void ftKb_SpecialNSk_801066C4(void);
-/* static */ void ftKb_SpecialNSk_801066C4(void);
-/* static */ void ftKb_SpecialNSk_801066B4(void);
 
 jtbl_t ftKb_Init_803CB7DC = {
     ftKb_SpecialNSk_801066C4,

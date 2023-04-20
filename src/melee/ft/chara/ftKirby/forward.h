@@ -1,7 +1,6 @@
 #ifndef MELEE_FT_CHARA_FTKIRBY_FORWARD_H
 #define MELEE_FT_CHARA_FTKIRBY_FORWARD_H
 
-#include <platform.h>
 #include "ftCommon/forward.h"
 
 typedef enum ftKirby_MotionState {
