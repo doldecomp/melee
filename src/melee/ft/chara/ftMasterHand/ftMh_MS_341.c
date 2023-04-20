@@ -29,7 +29,9 @@
 #include "mp/mplib.h"
 
 #include <dolphin/mtx/types.h>
+#include <baselib/controller.h>
 
+static void ifStage251(HSD_GObj* gobj);
 // 8014FDD0 0014C9B0
 // https://decomp.me/scratch/HWef2
 void ftMh_Init_LoadSpecialAttrs(HSD_GObj* gobj)
@@ -127,7 +129,7 @@ void ftMh_MS_341_8014FFDC(HSD_GObj* gobj)
     r31_fp->fv.mh.x2258 = 0x155;
 }
 
-void ifStage251(HSD_GObj* gobj)
+static void ifStage251(HSD_GObj* gobj)
 {
     ftMasterHand_SpecialAttrs* r5_attributes;
     Fighter* fp = GET_FIGHTER(gobj);
