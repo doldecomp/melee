@@ -1,3 +1,5 @@
+#include <baselib/forward.h>
+
 #include "ftMh_MS_389.h"
 
 #include "ftMh_MS_341.h"

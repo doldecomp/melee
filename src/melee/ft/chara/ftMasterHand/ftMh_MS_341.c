@@ -1,3 +1,5 @@
+#include "forward.h"
+
 #include "ftMh_MS_341.h"
 
 #include "ftMh_CaptureMasterHand_0.h"

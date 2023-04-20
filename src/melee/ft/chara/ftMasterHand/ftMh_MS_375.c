@@ -1,5 +1,9 @@
 #include "ftMh_MS_375.h"
 
+#include "ft/fighter.h"
+#include "ft/inlines.h"
+#include "ft/types.h"
+
 // 80154C78 151858
 // https://decomp.me/scratch/j7foW
 void ftMh_MS_375_80154C78(HSD_GObj* arg0)

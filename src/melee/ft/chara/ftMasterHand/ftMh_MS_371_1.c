@@ -1,3 +1,5 @@
+#include <baselib/forward.h>
+
 #include "ftMh_MS_371_1.h"
 
 #include "ft/fighter.h"

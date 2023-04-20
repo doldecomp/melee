@@ -1,7 +1,16 @@
 #include "ftMh_MS_379.h"
 
+#include "ftMh_CaptureWaitMasterHand.h"
+#include "ftMh_MS_372.h"
+#include "ftMh_MS_376.h"
+#include "ftMh_MS_378.h"
+#include "ftMh_MS_389.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
 #include "ft/ftbosslib.h"
+#include "ft/ftcommon.h"
+#include "ft/inlines.h"
 
 // 80154FAC 151B8C
 void ftMh_MS_379_IASA(HSD_GObj* arg0)

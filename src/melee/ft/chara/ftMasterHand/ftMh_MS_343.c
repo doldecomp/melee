@@ -2,6 +2,7 @@
 
 #include "ftMh_MS_344.h"
 #include "ftMh_MS_389.h"
+#include "types.h"
 
 #include "cm/camera.h"
 #include "ft/ft_0877.h"
