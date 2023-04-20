@@ -1,10 +1,13 @@
-#include "ftSamus/ftSs_SpecialLw_1.h"
+#include "ftSs_SpecialLw_1.h"
+
+#include "ftSs_Init.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcoll.h"
-#include "ftSamus/ftsamus.h"
+#include "ft/ftcommon.h"
+#include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx/types.h>
@@ -59,7 +62,7 @@ void ftSs_SpecialLw_8012AF38(HSD_GObj* gobj)
     ftColl_8007B0C0(gobj, 0);
 }
 
-static void reset(HSD_GObj* gobj)
+static void ftSamus_SpecialLw_StartAction_inner(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     fp->x2208_ftcmd_var2 = 0;
@@ -81,14 +84,14 @@ void ftSs_SpecialLw_Enter(HSD_GObj* gobj)
     fp->gr_vel *= samus_attr->x6C;
     if (fp->motion_id == 0x28) {
         Fighter_ChangeMotionState(gobj, 0x163, 0, NULL, 3.0f, 1.0f, 0.0f);
-        reset(gobj);
+        ftSamus_SpecialLw_StartAction_inner(gobj);
         fp->x2204_ftcmd_var1 = 2;
         ftSs_SpecialLw_8012B5F0(gobj);
         return;
     }
     Fighter_ChangeMotionState(gobj, 0x163, 0, NULL, 0.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
-    reset(gobj);
+    ftSamus_SpecialLw_StartAction_inner(gobj);
 }
 
 void ftSs_SpecialAirLw_Enter(HSD_GObj* gobj)
@@ -106,7 +109,7 @@ void ftSs_SpecialAirLw_Enter(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, 0x164, 0, NULL, 0.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
-    reset(gobj);
+    ftSamus_SpecialLw_StartAction_inner(gobj);
 }
 
 inline void checkStateVar1(HSD_GObj* gobj)
@@ -396,7 +399,7 @@ void ftSs_SpecialAirLwBomb_Coll(HSD_GObj* gobj)
     }
 }
 
-void ftSamus_UnkSetStateAndCb(HSD_GObj* gobj)
+static void ftSamus_UnkSetStateAndCb(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     fp->x2204_ftcmd_var1 = 2;

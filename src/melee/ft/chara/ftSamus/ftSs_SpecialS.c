@@ -1,11 +1,14 @@
 #include "ftSs_SpecialS.h"
 
-#include "ftsamus.h"
+#include "ftSs_Init.h"
+#include "ftSs_SpecialN.h"
 
+#include "ef/eflib.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ftcommon.h"
 
-void ftSamus_ClearThrowFlagsUnk(HSD_GObj* gobj)
+static void ftSamus_ClearThrowFlagsUnk(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2210_ThrowFlags.flags = 0;
@@ -163,7 +166,7 @@ void ftSs_SpecialSSmash_Coll(HSD_GObj* gobj)
     }
 }
 
-void ftSs_SpecialAirSmash_Coll(HSD_GObj* gobj)
+void ftSs_SpecialAirSSmash_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
         ft_80082B1C(gobj);

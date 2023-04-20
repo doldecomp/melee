@@ -1,11 +1,12 @@
 #include "ftSs_SpecialLw_0.h"
 
-#include "ftsamus.h"
+#include "ftSs_Init.h"
 #include "ftSs_SpecialLw_1.h"
 #include "types.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ftcommon.h"
 
 #include <trigf.h>
 

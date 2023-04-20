@@ -1,17 +1,21 @@
-#include "ftSamus/ftSs_SpecialN.h"
+#include "ftSs_SpecialN.h"
+
+#include "ftSs_Init.h"
+#include "ftSs_SpecialN.h"
+#include "inlines.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ftSamus/ftsamus.h"
+#include "ft/ftcommon.h"
+#include "ft/inlines.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
-#include "melee/ft/inlines.h"
 
 #include <dolphin/mtx/types.h>
 
-void ftSamus_801293BC_inner(HSD_GObj* gobj)
+static void ftSamus_801293BC_inner(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
@@ -55,7 +59,7 @@ void ftSs_SpecialN_80129258(HSD_GObj* gobj)
     }
 }
 
-s32 ftSs_SpecialN_801292E4(HSD_GObj* gobj)
+static s32 ftSs_SpecialN_801292E4(HSD_GObj* gobj)
 {
     Vec3 vec1;
     Vec3 vec2;
@@ -88,7 +92,7 @@ s32 ftSs_SpecialN_801292E4(HSD_GObj* gobj)
     return 0;
 }
 
-void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
+static void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
 {
     ftSamusAttributes* samus_attr;
     HSD_GObj* held_item;
@@ -442,6 +446,8 @@ s32 ftSs_SpecialS_8012A068(HSD_GObj* gobj)
     return fp->fv.ss.x2238;
 }
 
+static void ftSs_SpecialS_8012A168(HSD_GObj* gobj, Vec3* spawnlocation);
+
 void ftSs_SpecialS_8012A074(HSD_GObj* gobj)
 {
     bool bool1;
@@ -476,7 +482,7 @@ void ftSs_SpecialS_8012A074(HSD_GObj* gobj)
     }
 }
 
-void ftSs_SpecialS_8012A168(HSD_GObj* gobj, Vec3* spawnlocation)
+static void ftSs_SpecialS_8012A168(HSD_GObj* gobj, Vec3* spawnlocation)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {

@@ -1,12 +1,15 @@
-#include "ftSamus/ftSs_SpecialHi.h"
+#include "ftSs_SpecialHi.h"
+
+#include "ftSs_Init.h"
+#include "inlines.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcliffcommon.h"
+#include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ftSamus/ftsamus.h"
 
 void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
 {
@@ -54,7 +57,7 @@ void ftSs_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->fv.ss.x2244 = 1;
 }
 
-void ftSamus_DestroyAllUnsetx2444(HSD_GObj* gobj)
+static void ftSamus_DestroyAllUnsetx2444(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     efLib_DestroyAll(gobj);
