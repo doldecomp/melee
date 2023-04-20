@@ -1,45 +1,39 @@
-#ifndef MELEE_FT_CHARA_FTICECLIMBER_FTICECLIMBER1_H
-#define MELEE_FT_CHARA_FTICECLIMBER_FTICECLIMBER1_H
+#ifndef GALE01_11ED38
+#define GALE01_11ED38
 
-#include <platform.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
 
-extern MotionState ftPp_Init_MotionStateTable[];
-extern char ftPp_Init_DatFilename[];
-extern char ftPp_Init_DataName[];
-extern Fighter_CostumeStrings ftPp_Init_CostumeStrings[];
-extern char ftPp_Init_AnimDatFilename[];
-extern Fighter_DemoStrings ftPp_Init_DemoMotionFilenames;
-
-void ftPp_Init_OnItemInvisible(HSD_GObj* gobj);
-void ftPp_Init_OnItemVisible(HSD_GObj* gobj);
-void ftPp_Init_OnItemDrop(HSD_GObj* gobj, bool bool1);
-void ftPp_Init_OnLoad(HSD_GObj* gobj);
-void ftPp_Init_OnDeath(HSD_GObj* gobj);
-void ftPp_Init_8011F060(HSD_GObj* gobj);
-void ftPp_Init_LoadSpecialAttrs(HSD_GObj* gobj);
-void ftPp_Init_OnItemPickup(HSD_GObj* gobj, bool bool);
-void ftPp_Init_OnKnockbackEnter(HSD_GObj* gobj);
-void ftPp_Init_OnKnockbackExit(HSD_GObj* gobj);
-
-/* static */ void ftPp_Init_8011F190(HSD_GObj* gobj);
-/* static */ void ftPp_SpecialHi_80122898(HSD_GObj* gobj);
-/* static */ void ftPp_SpecialS_80121164(HSD_GObj* gobj);
-/* static */ void ftPp_SpecialN_8011F68C(HSD_GObj* gobj);
-void ftPp_Init_8011F16C(HSD_GObj* gobj, uint arg1);
-void ftPp_SpecialN_8011F500(HSD_GObj*);
-void ftPp_SpecialN_Enter(HSD_GObj* gobj);
-void ftPp_SpecialAirN_Enter(HSD_GObj* gobj);
-void ftPp_SpecialN_Anim(HSD_GObj* gobj);
-void ftPp_SpecialAirN_Anim(HSD_GObj* gobj);
-void ftPp_SpecialN_IASA(HSD_GObj*);
-void ftPp_SpecialAirN_IASA(HSD_GObj*);
-void ftPp_SpecialN_Phys(HSD_GObj*);
-void ftPp_SpecialAirN_Phys(HSD_GObj*);
-void ftPp_SpecialN_Coll(HSD_GObj*);
-void ftPp_SpecialAirN_Coll(HSD_GObj*);
-bool ftPp_SpecialN_8011F6FC(HSD_GObj*);
+/* 11ED38 */ void ftPp_Init_OnItemPickup(HSD_GObj* gobj, bool arg1);
+/* 11EE18 */ void ftPp_Init_OnItemInvisible(HSD_GObj* gobj);
+/* 11EE60 */ void ftPp_Init_OnItemVisible(HSD_GObj* gobj);
+/* 11EEA8 */ void ftPp_Init_OnItemDrop(HSD_GObj* gobj, bool arg1);
+/* 11EEFC */ void ftPp_Init_OnLoad(HSD_GObj* gobj);
+/* 11EF3C */ void ftPp_Init_OnLoadForNana(Fighter* fp);
+/* 11EFE8 */ void ftPp_Init_OnDeath(HSD_GObj* gobj);
+/* 11F060 */ void ftPp_Init_8011F060(HSD_GObj* gobj);
+/* 11F0A4 */ void ftPp_Init_LoadSpecialAttrs(HSD_GObj* gobj);
+/* 11F0E4 */ void ftPp_Init_OnKnockbackEnter(HSD_GObj* gobj);
+/* 11F128 */ void ftPp_Init_OnKnockbackExit(HSD_GObj* gobj);
+/* 11F16C */ void ftPp_Init_8011F16C(HSD_GObj* gobj, uint arg1);
+/* 11F1F8 */ void ftPp_SpecialN_Enter(HSD_GObj* gobj);
+/* 11F26C */ void ftPp_SpecialAirN_Enter(HSD_GObj* gobj);
+/* 11F318 */ void ftPp_SpecialN_Anim(HSD_GObj* gobj);
+/* 11F354 */ void ftPp_SpecialAirN_Anim(HSD_GObj* gobj);
+/* 11F390 */ void ftPp_SpecialN_IASA(HSD_GObj* gobj);
+/* 11F394 */ void ftPp_SpecialAirN_IASA(HSD_GObj* gobj);
+/* 11F398 */ void ftPp_SpecialN_Phys(HSD_GObj* gobj);
+/* 11F3B8 */ void ftPp_SpecialAirN_Phys(HSD_GObj* gobj);
+/* 11F3D8 */ void ftPp_SpecialN_Coll(HSD_GObj* gobj);
+/* 11F454 */ void ftPp_SpecialAirN_Coll(HSD_GObj* gobj);
+/* 11F500 */ void ftPp_SpecialN_8011F500(HSD_GObj* gobj);
+/* 11F68C */ bool ftPp_SpecialN_8011F6FC(HSD_GObj* gobj);
+/* 3CD2D0 */ extern MotionState ftPp_Init_MotionStateTable[];
+/* 3CD610 */ extern char ftPp_Init_DatFilename[];
+/* 3CD61C */ extern char ftPp_Init_DataName[];
+/* 3CD738 */ extern char ftPp_Init_AnimDatFilename[];
+/* 3CD7B4 */ extern Fighter_DemoStrings ftPp_Init_DemoMotionFilenames;
+/* 3CD7C4 */ extern Fighter_CostumeStrings ftPp_Init_CostumeStrings[];
 
 #endif

@@ -1,6 +1,7 @@
 #include "ftPp_Init.h"
 
-#include "fticeclimber.h"
+#include "ftPp_1211.h"
+#include "ftPp_SpecialS.h"
 #include "types.h"
 
 #include "ft/fighter.h"
@@ -10,6 +11,7 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftNana/ftNn_Init.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 

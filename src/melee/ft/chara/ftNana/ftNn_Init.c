@@ -1,12 +1,14 @@
+#include "ft/forward.h"
+
 #include "ftNn_Init.h"
 
 #include "ft/fighter.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftPopo/fticeclimber.h"
+#include "ftPopo/ftPp_1211.h"
 #include "ftPopo/ftPp_Init.h"
+#include "ftPopo/ftPp_SpecialS.h"
 #include "ftPopo/types.h"
 
 #include <dolphin/mtx/types.h>
