@@ -1,4 +1,5 @@
 #include "forward.h"
+#include "lb/forward.h"
 
 #include "ftNs_AttackHi4.h"
 
@@ -12,6 +13,7 @@
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
+#include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 
 #include <dolphin/mtx/types.h>

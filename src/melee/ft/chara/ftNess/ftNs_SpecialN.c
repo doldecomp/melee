@@ -6,12 +6,10 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ftNess/ftNs_Init.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
-#include <dolphin/mtx/types.h>
 
 /// Ness PK Flash Charge msid check
 bool ftNs_SpecialN_CheckSpecialNHold(HSD_GObj* gobj)

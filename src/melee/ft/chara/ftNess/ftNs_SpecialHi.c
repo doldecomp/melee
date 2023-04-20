@@ -1,5 +1,7 @@
 #include "forward.h"
 
+#include "ftNs_SpecialHi.h"
+
 #include "ftNs_Init.h"
 
 #include "ef/eflib.h"
@@ -9,12 +11,11 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbvector.h"
 
 #include <trigf.h>
-#include <dolphin/mtx/types.h>
 #include <MetroTRK/intrinsics.h>
 
 // Setup float order

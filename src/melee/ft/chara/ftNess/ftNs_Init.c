@@ -2,6 +2,13 @@
 
 #include "ftNess/ftNs_Init.h"
 
+#include "ftNs_AttackHi4.h"
+#include "ftNs_AttackLw4.h"
+#include "ftNs_AttackS4.h"
+#include "ftNs_SpecialHi.h"
+#include "ftNs_SpecialN.h"
+#include "ftNs_SpecialS.h"
+
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"

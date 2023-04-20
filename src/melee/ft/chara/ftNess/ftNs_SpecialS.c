@@ -1,13 +1,12 @@
 #include "forward.h"
 
+#include "ftNess/ftNs_SpecialS.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/inlines.h"
-#include "ftNess/ftNs_Init.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
-#include <dolphin/mtx/types.h>
 #include <MSL/trigf.h>
 
 // https://decomp.me/scratch/apf7Y

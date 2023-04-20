@@ -1,10 +1,12 @@
 #include "forward.h"
 
+#include "ftNs_AttackLw4.h"
+
+#include "ftNs_AttackHi4.h"
+
 #include "ef/efasync.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/inlines.h"
-#include "ftNess/ftNs_Init.h"
 
 // 0x8011659C
 // https://decomp.me/scratch/xVTx7
