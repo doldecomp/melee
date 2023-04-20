@@ -10,6 +10,12 @@
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
+// SpecialN/SpecialAirN (PK Flash)
+#define FTNESS_SPECIALN_COLL_FLAG                                             \
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |       \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |           \
+        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |         \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 /// Ness PK Flash Charge msid check
 bool ftNs_SpecialN_CheckSpecialNHold(HSD_GObj* gobj)
@@ -18,8 +24,8 @@ bool ftNs_SpecialN_CheckSpecialNHold(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         if (fp != NULL && fp->fv.ns.pkflash_gobj != NULL) {
             enum_t msid = fp->motion_id;
-            if (msid == MS_NESS_SPECIALN_HOLD ||
-                msid == MS_NESS_SPECIALAIRN_HOLD)
+            if (msid == ftNs_MS_SpecialNHold ||
+                msid == ftNs_MS_SpecialAirNHold)
             {
                 return true;
             }
@@ -77,19 +83,19 @@ void ftNs_SpecialN_ItemPKFlushSetNULL(HSD_GObj* gobj)
 }
 
 /// @todo Float order hack.
-f32 return_void(void)
+static f32 return_void(void)
 {
     return 0.0f;
 }
 
 /// @todo Float order hack.
-f32 return_void2(void)
+static f32 return_void2(void)
 {
     return 3.0f;
 }
 
 /// @todo Float order hack.
-f32 return_void3(void)
+static f32 return_void3(void)
 {
     return 1.0f;
 }
@@ -106,7 +112,7 @@ void ftNs_SpecialNStart_Enter(HSD_GObj* gobj)
         Fighter* fp0;
         fp0 = GET_FIGHTER(gobj);
 
-        Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALN_START, 0, NULL, 0, 1,
+        Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNStart, 0, NULL, 0, 1,
                                   0);
 
         fp0->x220C_ftcmd_var3 = 0;
@@ -142,7 +148,7 @@ void ftNs_SpecialAirNStart_Enter(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRN_START, 0, NULL, 0, 1,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNStart, 0, NULL, 0, 1,
                               0);
 
     fp->x220C_ftcmd_var3 = 0;
@@ -183,7 +189,7 @@ void ftNs_SpecialNStart_Anim(HSD_GObj* gobj)
         return;
     }
 
-    Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALN_HOLD, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNHold, 0, NULL, 0, 1, 0);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -236,15 +242,15 @@ void ftNs_SpecialNHold_Anim(HSD_GObj* gobj)
         if (fp->mv.ns.specialn.flashTimerLoop1 <= 0 &&
             fp->mv.ns.specialn.flashTimerLoop2 <= 0)
         {
-            Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALN_END, 0, NULL, 0,
-                                      1, 0);
+            Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNEnd, 0, NULL, 0, 1,
+                                      0);
 
             return;
         }
 
-        if (fp->motion_id != MS_NESS_SPECIALN_HOLD_RELEASE) {
-            Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALN_HOLD_RELEASE, 0,
-                                      NULL, fp->x894_currentAnimFrame, 1, 0);
+        if (fp->motion_id != ftNs_MS_SpecialNRelease) {
+            Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNRelease, 0, NULL,
+                                      fp->x894_currentAnimFrame, 1, 0);
         }
 
         return;
@@ -256,9 +262,9 @@ void ftNs_SpecialNHold_Anim(HSD_GObj* gobj)
     }
 
     if (it_802AA7F0(fp->fv.ns.pkflash_gobj) == true &&
-        fp->motion_id != MS_NESS_SPECIALN_HOLD_RELEASE)
+        fp->motion_id != ftNs_MS_SpecialNRelease)
     {
-        Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALN_HOLD_RELEASE, 0, NULL,
+        Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNRelease, 0, NULL,
                                   fp->x894_currentAnimFrame, 1, 0);
     }
 }
@@ -306,8 +312,8 @@ void ftNs_SpecialAirNStart_Anim(HSD_GObj* gobj)
     }
 
     {
-        Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRN_HOLD, 0, NULL, 0,
-                                  1, 0);
+        Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNHold, 0, NULL, 0, 1,
+                                  0);
         {
             Fighter* fighter_data2 = GET_FIGHTER(gobj);
 
@@ -362,15 +368,14 @@ void ftNs_SpecialAirNHold_Anim(HSD_GObj* gobj)
         if (fp->mv.ns.specialn.flashTimerLoop1 <= 0 &&
             fp->mv.ns.specialn.flashTimerLoop2 <= 0)
         {
-            Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRN_END, 0, NULL,
-                                      0, 1, 0);
+            Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNEnd, 0, NULL, 0,
+                                      1, 0);
             return;
         }
 
-        if (fp->motion_id != MS_NESS_SPECIALAIRN_HOLD_RELEASE) {
-            Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRN_HOLD_RELEASE,
-                                      0, NULL, fp->x894_currentAnimFrame, 1,
-                                      0);
+        if (fp->motion_id != ftNs_MS_SpecialAirNRelease) {
+            Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNRelease, 0,
+                                      NULL, fp->x894_currentAnimFrame, 1, 0);
         }
     } else {
         if (it_802AA7E4(fp->fv.ns.pkflash_gobj) != gobj) {
@@ -379,11 +384,10 @@ void ftNs_SpecialAirNHold_Anim(HSD_GObj* gobj)
         }
 
         if (it_802AA7F0(fp->fv.ns.pkflash_gobj) == true &&
-            fp->motion_id != MS_NESS_SPECIALAIRN_HOLD_RELEASE)
+            fp->motion_id != ftNs_MS_SpecialAirNRelease)
         {
-            Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRN_HOLD_RELEASE,
-                                      0, NULL, fp->x894_currentAnimFrame, 1,
-                                      0);
+            Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNRelease, 0,
+                                      NULL, fp->x894_currentAnimFrame, 1, 0);
         }
     }
 }
@@ -636,7 +640,7 @@ void ftNs_SpecialNStart_Coll(HSD_GObj* gobj)
 
     ftCommon_8007D5D4(fp);
 
-    Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRN_START,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNStart,
                               FTNESS_SPECIALN_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
 }
@@ -652,7 +656,7 @@ void ftNs_SpecialNHold_Coll(HSD_GObj* gobj)
 
     ftCommon_8007D5D4(fp);
 
-    Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRN_HOLD,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNHold,
                               FTNESS_SPECIALN_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
 }
@@ -668,7 +672,7 @@ void ftNs_SpecialNEnd_Coll(HSD_GObj* gobj)
 
     ftCommon_8007D5D4(fp);
 
-    Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRN_END,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNEnd,
                               FTNESS_SPECIALN_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
 }
@@ -684,7 +688,7 @@ void ftNs_SpecialAirNStart_Coll(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALN_START,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNStart,
                               FTNESS_SPECIALN_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
 }
@@ -700,7 +704,7 @@ void ftNs_SpecialAirNHold_Coll(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALN_HOLD,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNHold,
                               FTNESS_SPECIALN_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
 }
@@ -716,7 +720,7 @@ void ftNs_SpecialAirNEnd_Coll(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALN_END,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNEnd,
                               FTNESS_SPECIALN_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
 }

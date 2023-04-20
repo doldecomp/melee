@@ -7,6 +7,7 @@
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/inlines.h"
+#include "ftNess/ftNs_AttackHi4.h"
 #include "ftNess/ftNs_Init.h"
 #include "ftSeak/ftSk_Init.h"
 #include "it/it_27CF.h"

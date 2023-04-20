@@ -466,7 +466,7 @@ bool ftNs_AttackHi4_YoyoThink_IsRemove(HSD_GObj* gobj)
         fp->mv.ns.attackhi4.isPosUpdateMod = 0;
     }
     msid = fp->motion_id;
-    if ((msid >= MS_NESS_ATTACKHI4) && (msid <= MS_NESS_ATTACKHI4_RELEASE)) {
+    if ((msid >= ftNs_MS_AttackHi4) && (msid <= ftNs_MS_AttackHi4Release)) {
         yoyoSpawnFrame = 2;
         yoyoDespawnFrame = 49;
     } else {
@@ -493,7 +493,7 @@ bool ftNs_AttackHi4_YoyoThink_IsRemove(HSD_GObj* gobj)
             ft_80088510(fp, 0x334B0, SFX_VOLUME_MAX, SFX_PAN_MID);
         }
         msid = fp->motion_id;
-        if ((msid >= MS_NESS_ATTACKHI4) && (msid <= MS_NESS_ATTACKHI4_RELEASE))
+        if ((msid >= ftNs_MS_AttackHi4) && (msid <= ftNs_MS_AttackHi4Release))
         {
             yoyoRotFrame = yoyo_attr->x40_UPSMASH_YOYO_ROT_FRAME;
             yoyoNudgeFrame = yoyo_attr->x44_UPSMASH_YOYO_NUDGE_FRAME;
@@ -506,8 +506,8 @@ bool ftNs_AttackHi4_YoyoThink_IsRemove(HSD_GObj* gobj)
             sp14 = YoyoThinkPos;
             it_802C0010(yoyo_GObj, &sp14);
             msid = fp->motion_id;
-            if ((msid >= MS_NESS_ATTACKHI4) &&
-                (msid <= MS_NESS_ATTACKHI4_RELEASE))
+            if ((msid >= ftNs_MS_AttackHi4) &&
+                (msid <= ftNs_MS_AttackHi4Release))
             {
                 ft_80088510(fp, 0x334B3, SFX_VOLUME_MAX, SFX_PAN_MID);
             } else {
@@ -647,7 +647,7 @@ void ftNs_AttackHi4_Enter(HSD_GObj* gobj)
         fp->fv.ns.x223C = 0.0f;
     }
 
-    Fighter_ChangeMotionState(gobj, MS_NESS_ATTACKHI4, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackHi4, 0, NULL, 0.0f, 1.0f,
                               0.0f);
 
     ftAnim_8006EBA4(gobj);
@@ -670,7 +670,7 @@ void ftNs_AttackHi4_YoyoStartTimedRehit(HSD_GObj* gobj)
  * @todo #ftNs_AttackHi4_Anim literally won't match under any circumstances
  *       unless this inline is used to get @c Fighter*.
  */
-Fighter* GetFighterData(HSD_GObj* gobj)
+static Fighter* GetFighterData(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     return fp;
@@ -908,7 +908,7 @@ void ftNs_AttackHi4Charge_Enter(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, MS_NESS_ATTACKHI4_CHARGE,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackHi4Charge,
                               FtStateChange_SkipUpdateItemVis, NULL, 12.0f,
                               1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
@@ -1050,7 +1050,7 @@ void ftNs_AttackHi4Release_Enter(HSD_GObj* gobj)
 #endif
 
     fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, MS_NESS_ATTACKHI4_RELEASE,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackHi4Release,
                               FtStateChange_SkipUpdateItemVis, NULL, 13.0f,
                               1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);

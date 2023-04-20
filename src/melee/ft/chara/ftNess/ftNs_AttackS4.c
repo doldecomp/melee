@@ -33,7 +33,7 @@ void ftNs_AttackS4_Enter(HSD_GObj* gobj) // Ness's F-Smash Motion State handler
 
     fp->x2200_ftcmd_var0 = false;
 
-    Fighter_ChangeMotionState(gobj, MS_NESS_ATTACKS4, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackS4, 0, NULL, 0.0f, 1.0f,
                               0.0f);
 
     ftAnim_8006EBA4(gobj);
@@ -56,7 +56,7 @@ bool ftNs_AttackS4_CheckNessBatRemove(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->motion_id != MS_NESS_ATTACKS4) {
+    if (fp->motion_id != ftNs_MS_AttackS4) {
         return true;
     }
 

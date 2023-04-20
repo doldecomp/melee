@@ -77,7 +77,7 @@ void ftNs_SpecialS_Enter(
     fp = GET_FIGHTER(gobj);
     fp->x2210_ThrowFlags.flags = 0; // Set projectile summon flag to 0
     fp->x2200_ftcmd_var0 = 0;       // Set ftcmd flag0 to 0; _ in PK Fire?
-    Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALS, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialS, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 =
@@ -94,7 +94,7 @@ void ftNs_SpecialAirS_Enter(
     fp = GET_FIGHTER(gobj);
     fp->x2210_ThrowFlags.flags = 0; // Set projectile summon flag to 0
     fp->x2200_ftcmd_var0 = 0;       // Set ftcmd flag0 to 0; _ in PK Fire?
-    Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRS, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirS, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftNs_SpecialS_ItemPKFireSpawn;

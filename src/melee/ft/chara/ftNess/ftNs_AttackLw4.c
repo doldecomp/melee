@@ -18,7 +18,7 @@ void ftNs_AttackLw4_Enter(
     fp->x2218_flag.bits.b0 = 0;
     fp->mv.ns.attacklw4.isChargeDisable = false;
     ftNs_AttackHi4_YoyoSetVarAll(gobj);
-    Fighter_ChangeMotionState(gobj, MS_NESS_ATTACKLW4, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
     fp->x2222_flag.bits.b2 = 1;
@@ -145,7 +145,7 @@ void ftNs_AttackLw4Charge_Enter(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, MS_NESS_ATTACKLW4_CHARGE,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4Charge,
                               FtStateChange_SkipUpdateItemVis, NULL, 12.0f,
                               1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
@@ -235,7 +235,7 @@ void ftNs_AttackLw4Release_Enter(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, MS_NESS_ATTACKLW4_RELEASE,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4Release,
                               FtStateChange_SkipUpdateItemVis, NULL, 13.0f,
                               1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
