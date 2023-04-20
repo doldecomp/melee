@@ -6,6 +6,7 @@
 #include "ftLk_SpecialLw.h"
 #include "ftLk_SpecialN.h"
 #include "ftLk_SpecialS.h"
+#include "types.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
