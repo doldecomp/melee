@@ -10,6 +10,7 @@
 #include "ft/ftcamera.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
+#include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -596,7 +597,7 @@ extern f32 const ftPr_Init_804D9C10;
 extern f32 const ftPr_Init_804D9C14;
 extern f32 const ftPr_Init_804D9C18;
 
-inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
+static inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
