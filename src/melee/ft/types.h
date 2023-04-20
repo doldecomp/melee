@@ -10,18 +10,24 @@
 #include "ftDonkey/types.h"
 #include "ftFox/types.h"
 #include "ftGameWatch/types.h"
+#include "ftKirby/types.h"
 #include "ftKoopa/types.h"
+#include "ftLink/types.h"
 #include "ftLuigi/types.h"
 #include "ftMario/types.h"
 #include "ftMars/types.h"
 #include "ftMasterHand/types.h"
 #include "ftMewtwo/types.h"
 #include "ftNess/types.h"
+#include "ftPeach/types.h"
 #include "ftPikachu/types.h"
+#include "ftPopo/types.h"
 #include "ftPurin/types.h"
 #include "ftSamus/types.h"
+#include "ftSandbag/types.h"
 #include "ftSeak/types.h"
 #include "ftYoshi/types.h"
+#include "ftZakoBoy/types.h"
 #include "ftZelda/types.h"
 #include "gr/stage.h"
 #include "lb/lbcollision.h"
@@ -538,199 +544,6 @@ struct Fighter_DemoStrings {
     char* intro_filename;
     char* ending_filename;
     char* vi_wait_filename;
-};
-
-struct ftFox_FighterVars {
-    /* 0x222C */ HSD_GObj* x222C_blasterGObj;
-};
-
-struct ftKirby_FighterVars {
-    /* 0x222C */ s32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ UnkFlagStruct x2234;
-    /* 0x2235 */ u8 x2235[3];
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-    /* 0x224C */ u8 x224C[0x228C - 0x224C];
-    /* 0x228C */ u32 x228C;
-    /* 0x2290 */ u32 x2290;
-    /* 0x2294 */ u8 x2294[0x22C8 - 0x2294];
-    /* 0x22C8 */ s32 x22C8;
-    /* 0x22CC */ s32 x22CC;
-    /* 0x22D0 */ s32 x22D0;
-    /* 0x22D4 */ s32 x22D4;
-    /* 0x22D8 */ s32 x22D8;
-    /* 0x22DC */ s32 x22DC;
-    /* 0x22E0 */ s32 x22E0;
-    /* 0x22E4 */ s32 x22E4;
-    /* 0x22E8 */ s32 x22E8;
-};
-
-struct ftKoopa_FighterVars {
-    /* 0x222C */ f32 x222C;
-    /* 0x2230 */ f32 x2230;
-};
-
-struct ftLink_FighterVars {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-};
-
-struct ftSeak_FighterVars {
-    /* 0x222C */ int x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ HSD_GObj* x2234;
-    /* 0x2238 */ Vec3 x2238[4];
-    /* 0x2268 */ Vec3 x2268[4];
-    /* 0x2298 */ Vec3 lstick_delta;
-};
-
-struct ftNess_FighterVars {
-    /* 0x222C */ HSD_GObj* yoyo_gobj;
-    /* 0x2230 */ Vec3 yoyo_hitbox_pos;
-    /* 0x223C */ f32 x223C;
-    /* 0x2240 */ HSD_GObj* pkflash_gobj;
-    /* 0x2244 */ HSD_GObj* pkthunder_gobj;
-    /* 0x2248 */ HSD_GObj* bat_gobj;
-    /// bool for PK Thunder GFX?
-    /* 0x224C */ u32 pkthunder_gfx;
-};
-
-struct ftPeach_FighterVars {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-};
-
-struct ftPopo_FighterVars {
-    /* 0x222C */ uint x222C;
-    /* 0x2230 */ UnkFlagStruct x2230;
-    /* 0x2231 */ u8 filler_x2231[3];
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-    /* 0x224C */ u32 x224C;
-    /* 0x2250 */ f32 x2250;
-};
-
-struct ftPikachu_FighterVars {
-    u8 _[1];
-};
-
-struct ftSamus_FighterVars {
-    /* 0x222C */ HSD_GObj* x222C;
-    /* 0x2230 */ s32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-
-    /* 0x2240 */ u8 x2240;
-    /* 0x2241 */ u8 x2241;
-    /* 0x2242 */ u8 x2242;
-    /* 0x2243 */ u8 x2243;
-
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-};
-
-struct ftYoshi_FighterVars {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-};
-
-struct ftPurin_FighterVars {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ HSD_JObj* x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ void* x2244;
-    /* 0x2248 */ u32 x2248;
-};
-
-struct ftMewtwo_FighterVars {
-    /* 0x222C */ HSD_GObj* x222C_disableGObj;
-    /// GObj of Shadow Ball while in Mewtwo's hands?
-    /* 0x2230 */ HSD_GObj* x2230_shadowHeldGObj;
-    /// Number of cycles Shadow Ball has been charged
-    /* 0x2234 */ s32 x2234_shadowBallCharge;
-    /* 0x2238 */ HSD_GObj* x2238_shadowBallGObj;
-    /* 0x223C */ bool x223C_isConfusionBoost;
-};
-
-struct ftLuigi_FighterVars {
-    /* 0x222C */ bool x222C_cycloneCharge;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-};
-
-struct ftMars_FighterVars {
-    /* 0x222C */ u32 x222C;
-};
-
-struct ftZelda_FighterVars {
-    /* 0x222C */ HSD_GObj* x222C;
-};
-
-struct ftGameWatch_FighterVars {
-    /* 0x222C */ s32 x222C_judgeVar1;
-    /* 0x2230 */ s32 x2230_judgeVar2;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ s32 x2238_panicCharge;
-    /* 0x223C */ s32 x223C_panicDamage;
-    /* 0x2240 */ s32 x2240_chefVar1;
-    /* 0x2244 */ s32 x2244_chefVar2;
-    /* 0x2248 */ HSD_GObj* x2248_manholeGObj;
-    /* 0x224C */ HSD_GObj* x224C_greenhouseGObj;
-    /* 0x2250 */ HSD_GObj* x2250_manholeGObj2;
-    /* 0x2254 */ HSD_GObj* x2254_fireGObj;
-    /* 0x2258 */ HSD_GObj* x2258_parachuteGObj;
-    /* 0x225C */ HSD_GObj* x225C_turtleGObj;
-    /* 0x2260 */ HSD_GObj* x2260_sparkyGObj;
-    /* 0x2264 */ HSD_GObj* x2264_judgementGObj;
-    /* 0x2268 */ HSD_GObj* x2268_panicGObj;
-    /* 0x226C */ HSD_GObj* x226C_rescueGObj;
-};
-
-struct ftMasterHand_FighterVars {
-    /* 0x222C */ HSD_GObj* x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ f32 x2238;
-    /* 0x223C */ f32 x223C;
-    /* 0x2240 */ Vec3 x2240_pos;
-    /* 0x224C */ u32 x224C;
-    /* 0x2250 */ s32 x2250;
-    /* 0x2254 */ s32 x2254;
-    /* 0x2258 */ s32 x2258;
-};
-
-struct ftZakoBoy_FighterVars {
-    u8 _[1];
-};
-
-struct ftSandbag_FighterVars {
-    u8 _[1];
 };
 
 /// @todo Rename this and its members; investigate using it elsewhere.

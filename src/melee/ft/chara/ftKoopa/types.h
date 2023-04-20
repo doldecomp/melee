@@ -5,6 +5,11 @@
 
 #include <placeholder.h>
 
+struct ftKoopa_FighterVars {
+    /* 0x222C */ f32 x222C;
+    /* 0x2230 */ f32 x2230;
+};
+
 union ftKoopa_MotionVars {
     /// @todo Proper state name.
     struct ftKoopa_State1Vars {

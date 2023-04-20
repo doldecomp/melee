@@ -3,6 +3,12 @@
 
 #include <platform.h>
 
+struct ftLuigi_FighterVars {
+    /* 0x222C */ bool x222C_cycloneCharge;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+};
+
 typedef struct _ftLuigiAttributes {
     /// SIDE SPECIAL - GREEN MISSILE
     f32 x0_LUIGI_GREENMISSILE_UNK1;

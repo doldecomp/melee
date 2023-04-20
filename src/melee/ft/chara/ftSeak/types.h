@@ -3,6 +3,15 @@
 
 #include <platform.h>
 
+struct ftSeak_FighterVars {
+    /* 0x222C */ int x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ HSD_GObj* x2234;
+    /* 0x2238 */ Vec3 x2238[4];
+    /* 0x2268 */ Vec3 x2268[4];
+    /* 0x2298 */ Vec3 lstick_delta;
+};
+
 /// @sz{74}
 typedef struct _ftSeakAttributes {
     f32 x0;

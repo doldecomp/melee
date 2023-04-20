@@ -6,6 +6,26 @@
 
 #include <common_structs.h>
 
+struct ftGameWatch_FighterVars {
+    /* 0x222C */ s32 x222C_judgeVar1;
+    /* 0x2230 */ s32 x2230_judgeVar2;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ s32 x2238_panicCharge;
+    /* 0x223C */ s32 x223C_panicDamage;
+    /* 0x2240 */ s32 x2240_chefVar1;
+    /* 0x2244 */ s32 x2244_chefVar2;
+    /* 0x2248 */ HSD_GObj* x2248_manholeGObj;
+    /* 0x224C */ HSD_GObj* x224C_greenhouseGObj;
+    /* 0x2250 */ HSD_GObj* x2250_manholeGObj2;
+    /* 0x2254 */ HSD_GObj* x2254_fireGObj;
+    /* 0x2258 */ HSD_GObj* x2258_parachuteGObj;
+    /* 0x225C */ HSD_GObj* x225C_turtleGObj;
+    /* 0x2260 */ HSD_GObj* x2260_sparkyGObj;
+    /* 0x2264 */ HSD_GObj* x2264_judgementGObj;
+    /* 0x2268 */ HSD_GObj* x2268_panicGObj;
+    /* 0x226C */ HSD_GObj* x226C_rescueGObj;
+};
+
 typedef struct ftGameWatchChef {
     s32 sausageCount[5];
 } ftGameWatchChef;

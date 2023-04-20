@@ -6,6 +6,17 @@
 #include <common_structs.h>
 #include <dolphin/mtx/types.h>
 
+struct ftNess_FighterVars {
+    /* 0x222C */ HSD_GObj* yoyo_gobj;
+    /* 0x2230 */ Vec3 yoyo_hitbox_pos;
+    /* 0x223C */ f32 x223C;
+    /* 0x2240 */ HSD_GObj* pkflash_gobj;
+    /* 0x2244 */ HSD_GObj* pkthunder_gobj;
+    /* 0x2248 */ HSD_GObj* bat_gobj;
+    /// bool for PK Thunder GFX?
+    /* 0x224C */ u32 pkthunder_gfx;
+};
+
 union ftNess_MotionVars {
     struct ftNess_YoyoVars {
         /// 0x2340 - Current frame of Up/Down Smash animation as an integer

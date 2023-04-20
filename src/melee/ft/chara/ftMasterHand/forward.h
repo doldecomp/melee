@@ -58,4 +58,17 @@ typedef enum ftMasterhand_MotionState {
     ftMh_MS_Unk390,
 } ftMasterhand_MotionState;
 
+typedef enum ftMasterHand_UnkEnum0 {
+    ftMh_UnkEnum0_Unk00,
+    ftMh_UnkEnum0_Unk01,
+    ftMh_UnkEnum0_Unk02,
+    ftMh_UnkEnum0_Unk03,
+    ftMh_UnkEnum0_Unk04,
+    ftMh_UnkEnum0_Unk05,
+    ftMh_UnkEnum0_Unk06,
+    ftMh_UnkEnum0_Unk07,
+    ftMh_UnkEnum0_Unk08,
+    ftMh_UnkEnum0_Unk09,
+    ftMh_UnkEnum0_Unk10,
+} ftMasterHand_UnkEnum0;
 #endif

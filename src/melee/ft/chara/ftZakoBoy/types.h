@@ -3,6 +3,10 @@
 
 #include <platform.h>
 
+struct ftZakoBoy_FighterVars {
+    u8 _[1];
+};
+
 typedef struct _ftZakoboyAttributes {
     s32 x0;
 } ftZakoboyAttributes;

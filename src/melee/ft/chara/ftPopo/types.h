@@ -3,6 +3,20 @@
 
 #include <platform.h>
 
+struct ftPopo_FighterVars {
+    /* 0x222C */ uint x222C;
+    /* 0x2230 */ UnkFlagStruct x2230;
+    /* 0x2231 */ u8 filler_x2231[3];
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ u32 x223C;
+    /* 0x2240 */ u32 x2240;
+    /* 0x2244 */ u32 x2244;
+    /* 0x2248 */ u32 x2248;
+    /* 0x224C */ u32 x224C;
+    /* 0x2250 */ f32 x2250;
+};
+
 typedef struct _ftIceClimberAttributes {
     f32 x0;
     f32 x4;

@@ -5,6 +5,10 @@
 
 #include <dolphin/mtx/types.h>
 
+struct ftPikachu_FighterVars {
+    u8 _[1];
+};
+
 typedef struct _ftPikachuAttributes {
     f32 x0;
     f32 x4;

@@ -7,19 +7,18 @@
 
 #include <dolphin/mtx/types.h>
 
-typedef enum ftMasterHand_UnkEnum0 {
-    ftMh_UnkEnum0_Unk00,
-    ftMh_UnkEnum0_Unk01,
-    ftMh_UnkEnum0_Unk02,
-    ftMh_UnkEnum0_Unk03,
-    ftMh_UnkEnum0_Unk04,
-    ftMh_UnkEnum0_Unk05,
-    ftMh_UnkEnum0_Unk06,
-    ftMh_UnkEnum0_Unk07,
-    ftMh_UnkEnum0_Unk08,
-    ftMh_UnkEnum0_Unk09,
-    ftMh_UnkEnum0_Unk10,
-} ftMasterHand_UnkEnum0;
+struct ftMasterHand_FighterVars {
+    /* 0x222C */ HSD_GObj* x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ f32 x2238;
+    /* 0x223C */ f32 x223C;
+    /* 0x2240 */ Vec3 x2240_pos;
+    /* 0x224C */ u32 x224C;
+    /* 0x2250 */ s32 x2250;
+    /* 0x2254 */ s32 x2254;
+    /* 0x2258 */ s32 x2258;
+};
 
 struct ftMasterHand_SpecialAttrs {
     s32 x0;

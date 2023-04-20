@@ -7,6 +7,10 @@
 #include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
+struct ftZelda_FighterVars {
+    /* 0x222C */ HSD_GObj* x222C;
+};
+
 typedef struct ftZelda_DatAttrs {
     f32 x0;
     s32 x4; // Type confirmed

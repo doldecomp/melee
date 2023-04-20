@@ -5,6 +5,10 @@
 
 #include <placeholder.h>
 
+struct ftMars_FighterVars {
+    /* 0x222C */ u32 x222C;
+};
+
 typedef struct _MarsAttributes {
     s32 x0;
     s32 x4;

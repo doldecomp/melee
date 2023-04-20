@@ -7,6 +7,10 @@
 #include <common_structs.h>
 #include <dolphin/mtx/types.h>
 
+struct ftFox_FighterVars {
+    /* 0x222C */ HSD_GObj* x222C_blasterGObj;
+};
+
 typedef struct ftFoxSpecialN {
     /// 0x2340 - Check to allow repeated blaster shots
     bool isBlasterLoop;
