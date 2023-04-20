@@ -65,7 +65,7 @@ void ftZd_SpecialLw_8013AEAC(HSD_GObj* gobj)
 
 // Helper function for both ftZd_SpecialLw_Enter /
 // ftZd_SpecialAirLw_Enter
-void ftZelda_SpecialLw_StartMotion_Helper(HSD_GObj* gobj)
+static void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* gobj)
 {
     Vec3 sp20;
     Fighter* fp;                  // r31
@@ -85,7 +85,7 @@ void ftZelda_SpecialLw_StartMotion_Helper(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialLw_8013ADB4;
 }
 
-// Zelda_MS_355_Transform_Grounded
+// Zelda_AS_355_Transform_Grounded
 // 8013AEE0 - 8013AFA4 (0xC4 bytes)
 // https://decomp.me/scratch/jZJgg (with helper)
 // https://decomp.me/scratch/Lw6fO (single function)
@@ -95,10 +95,10 @@ void ftZd_SpecialLw_Enter(HSD_GObj* gobj)
 
     ftAnim_8006EBA4(gobj);
 
-    ftZelda_SpecialLw_StartMotion_Helper(gobj);
+    ftZelda_SpecialLw_StartAction_Helper(gobj);
 }
 
-// Zelda_MS_357_Transform_Aerial
+// Zelda_AS_357_Transform_Aerial
 // 8013AFA4 - 8013B068 (0xC4 bytes)
 // For a scratch using helper function, see the above function.
 // https://decomp.me/scratch/8W7ZF (single function)
@@ -108,7 +108,7 @@ void ftZd_SpecialAirLw_Enter(HSD_GObj* gobj)
 
     ftAnim_8006EBA4(gobj);
 
-    ftZelda_SpecialLw_StartMotion_Helper(gobj);
+    ftZelda_SpecialLw_StartAction_Helper(gobj);
 }
 
 // 8013B068 - 8013B0A8 (0x40 bytes)
@@ -306,7 +306,7 @@ void ftZd_SpecialLw_8013B46C(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialLw_8013AE30;
 }
 
-// MS_ZeldaFinishTransformation
+// AS_ZeldaFinishTransformation
 // 8013B4D8 - 8013B540 (0x68 bytes)
 // https://decomp.me/scratch/wpEbJ
 void ftZd_SpecialLw_8013B4D8(HSD_GObj* gobj)
