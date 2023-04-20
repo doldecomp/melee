@@ -1,9 +1,9 @@
-#ifndef MELEE_FT_CHARA_FTMARIO_FTMARIO_STRINGS_H
-#define MELEE_FT_CHARA_FTMARIO_FTMARIO_STRINGS_H
+#ifndef GALE01_3C59D8
+#define GALE01_3C59D8
 
 #include "ft/types.h"
 
-extern Fighter_DemoStrings ftMr_Init_DemoMotionFilenames;
-extern char* ftMr_Init_DemoViMotionFilenames[];
+/* 3C59D8 */ extern Fighter_DemoStrings ftMr_Init_DemoMotionFilenames;
+/* 3C5A20 */ extern char* ftMr_Init_DemoViMotionFilenames[];
 
 #endif
