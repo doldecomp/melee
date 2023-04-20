@@ -1,7 +1,6 @@
 #include "ftZakoGirl/ftGl_Init.h"
 
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 
 char ftGl_Init_DatFilename[] = "PlGl.dat";
 char ftGl_Init_DataName[] = "ftDataGirl";
