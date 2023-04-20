@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTPURIN_TYPES_H
 
 #include <platform.h>
+#include <baselib/forward.h>
 
 struct ftPurin_FighterVars {
     /* 0x222C */ u32 x222C;

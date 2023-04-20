@@ -3,6 +3,8 @@
 
 #include <platform.h>
 
+#include <common_structs.h>
+
 struct ftPopo_FighterVars {
     /* 0x222C */ uint x222C;
     /* 0x2230 */ UnkFlagStruct x2230;

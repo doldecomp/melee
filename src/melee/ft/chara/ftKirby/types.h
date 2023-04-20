@@ -3,6 +3,8 @@
 
 #include <platform.h>
 
+#include <common_structs.h>
+
 struct ftKirby_FighterVars {
     /* 0x222C */ s32 x222C;
     /* 0x2230 */ u32 x2230;

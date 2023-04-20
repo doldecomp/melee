@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTNESS_TYPES_H
 
 #include <platform.h>
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 #include <dolphin/mtx/types.h>
