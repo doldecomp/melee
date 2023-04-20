@@ -370,6 +370,14 @@ void ftPp_Init_OnDeath(HSD_GObj* gobj)
     fp->fv.nn.x2250 = 0.0f;
 }
 
+static void ftPp_Init_8011F190(HSD_GObj* gobj);
+
+#ifdef MWERKS_GEKKO
+static void ftPp_SpecialN_8011F68C(HSD_GObj* gobj);
+#else
+/* static */ void ftPp_SpecialN_8011F68C(HSD_GObj* gobj);
+#endif
+
 void ftPp_Init_8011F060(HSD_GObj* gobj)
 {
     ftPp_Init_8011F190(gobj);
@@ -406,7 +414,7 @@ void ftPp_Init_8011F16C(HSD_GObj* gobj, uint i)
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
-void ftPp_Init_8011F190(HSD_GObj* gobj)
+static void ftPp_Init_8011F190(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
 
@@ -684,7 +692,7 @@ extern f32 const ftPp_Init_804D9848;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPp_SpecialN_8011F68C(HSD_GObj*)
+static asm void ftPp_SpecialN_8011F68C(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8011F68C 0011C26C  7C 08 02 A6 */	mflr r0
