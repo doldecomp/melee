@@ -1,8 +1,8 @@
-#ifndef MELEE_FT_CHARA_FTDONKEY_FTDONKEY4_H
-#define MELEE_FT_CHARA_FTDONKEY_FTDONKEY4_H
+#ifndef GALE01_0E0134
+#define GALE01_0E0134
 
 #include <baselib/forward.h>
 
-bool ftDk_MS_345_800E0134(HSD_GObj* gobj);
+/* 0E0134 */ bool ftDk_MS_345_800E0134(HSD_GObj* gobj);
 
 #endif
