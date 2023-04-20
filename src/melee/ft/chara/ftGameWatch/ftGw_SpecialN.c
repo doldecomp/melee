@@ -16,17 +16,17 @@
 
 #include <dolphin/mtx/types.h>
 
-f32 ftGameWatch_SpecialN_SetFloatOrder1(void)
+static float setFloatOrder0(void)
 {
     return 2.5f;
 }
 
-f32 ftGameWatch_SpecialN_SetFloatOrder2(void)
+static float setFloatOrder1(void)
 {
     return 6.5f;
 }
 
-f32 ftGameWatch_SpecialN_SetFloatOrder3(void)
+static float setFloatOrder2(void)
 {
     return 0.0f;
 }
