@@ -1,5 +1,7 @@
 #include "ftCh_Init.h"
 
+#include "types.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
 #include "ft/ftbosslib.h"
