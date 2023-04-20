@@ -22,4 +22,5 @@ static inline void checkFighter2244(HSD_GObj* gobj)
         gobj == NULL;
     }
 }
+
 #endif

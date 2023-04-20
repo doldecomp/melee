@@ -4,6 +4,7 @@
 
 #include "ftCl_Appeal.h"
 #include "inlines.h"
+#include "types.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
