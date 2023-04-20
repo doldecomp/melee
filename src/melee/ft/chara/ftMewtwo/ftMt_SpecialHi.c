@@ -1,3 +1,5 @@
+#include "forward.h"
+
 #include "ftMewtwo/ftMt_SpecialHi.h"
 
 #include "ef/eflib.h"
@@ -74,8 +76,7 @@ void ftMt_SpecialHiStart_Enter(HSD_GObj* gobj)
         fp1->x80_self_vel.x = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHiStart, 0, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHiStart, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 
     fp0->x2200_ftcmd_var0 = 0;
@@ -97,8 +98,8 @@ void ftMt_SpecialAirHiStart_Enter(HSD_GObj* gobj)
     fp->x80_self_vel.x /= mewtwoAttrs->x40_MEWTWO_TELEPORT_VEL_DIV_X;
     fp->x80_self_vel.y /= mewtwoAttrs->x44_MEWTWO_TELEPORT_VEL_DIV_Y;
 
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirHiStart, 0, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirHiStart, 0, NULL, 0, 1,
+                              0);
     ftAnim_8006EBA4(gobj);
 
     fp->x2200_ftcmd_var0 = 0;
@@ -207,9 +208,8 @@ void ftMt_SpecialAirHiStart_AirToGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHiStart,
-                              transition_flags1, NULL,
-                              fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHiStart, transition_flags1,
+                              NULL, fp->x894_currentAnimFrame, 1, 0);
 
     fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialHi_CreateGFX;
 }
@@ -375,8 +375,8 @@ void ftMt_SpecialAirHi_AirToGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHi, transition_flags1,
-                              NULL, fp->x894_currentAnimFrame, 0, 0);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHi, transition_flags1, NULL,
+                              fp->x894_currentAnimFrame, 0, 0);
 
     fp->x221E_flag.bits.b0 = true;
 }
@@ -458,8 +458,8 @@ void ftMt_SpecialHi_Enter(HSD_GObj* gobj)
                   mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) *
                  cosf(vel));
 
-            Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHi, 0, NULL, 35,
-                                      1, 0);
+            Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHi, 0, NULL, 35, 1,
+                                      0);
 
             ftAnim_8006EBA4(gobj);
 
@@ -652,8 +652,7 @@ void ftMt_SpecialHiLost_Enter(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHiLost, 0, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHiLost, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 
     ftMewtwo_SpecialHiLost_SetVars(gobj);

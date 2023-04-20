@@ -1,3 +1,5 @@
+#include "forward.h"
+
 #include "ftMt_Init.h"
 
 #include "ft/ft_081B.h"
@@ -66,8 +68,8 @@ void ftMt_SpecialAirLw_Enter(HSD_GObj* gobj)
     fp->fv.mt.x222C_disableGObj = NULL;
     fp->x80_self_vel.y = 0.0f;
 
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirLw, 0, NULL, 0.0f,
-                              1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirLw, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     ftAnim_8006EBA4(gobj);
 
     fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
