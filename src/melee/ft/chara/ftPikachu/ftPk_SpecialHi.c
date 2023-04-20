@@ -207,7 +207,7 @@ void ftPk_SpecialHi_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialAir_Anim(HSD_GObj* gobj)
+void ftPk_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     Vec3 vec;
     Vec3 vec2;
@@ -251,7 +251,7 @@ void ftPk_SpecialAir_Anim(HSD_GObj* gobj)
 
 void ftPk_SpecialHi_IASA(HSD_GObj* arg0) {}
 
-void ftPk_SpecialAir_IASA(HSD_GObj* arg0) {}
+void ftPk_SpecialAirHi_IASA(HSD_GObj* arg0) {}
 
 void ftPk_SpecialHi_8012642C(HSD_GObj* gobj)
 {
@@ -295,7 +295,7 @@ void ftPk_SpecialHi_Phys(HSD_GObj* gobj)
 #pragma dont_inline on
 #endif
 
-void ftPk_SpecialAir_Phys(HSD_GObj* gobj)
+void ftPk_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     ftPk_SpecialHi_8012642C(gobj);
 }
@@ -359,7 +359,7 @@ void ftPk_SpecialHi_Coll(HSD_GObj* gobj)
     }
 }
 
-bool ftPikachu_GetBool(HSD_GObj* gobj)
+static bool ftPikachu_GetBool(HSD_GObj* gobj)
 {
     Fighter* fighter2 = gobj->user_data;
     ftPikachuAttributes* pika_attr2 = fighter2->x2D4_specialAttributes;
@@ -372,7 +372,7 @@ bool ftPikachu_GetBool(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialAir_Coll(HSD_GObj* gobj)
+void ftPk_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     bool bool0;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -729,7 +729,7 @@ void ftPk_SpecialHiEnd_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialAirEnd_Anim(HSD_GObj* gobj)
+void ftPk_SpecialAirHiEnd_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -754,7 +754,7 @@ void ftPk_SpecialAirEnd_Anim(HSD_GObj* gobj)
 
 void ftPk_SpecialHiEnd_IASA(HSD_GObj* arg0) {}
 
-void ftPk_SpecialAirEnd_IASA(HSD_GObj* arg0) {}
+void ftPk_SpecialAirHiEnd_IASA(HSD_GObj* arg0) {}
 
 void ftPk_SpecialHiEnd_Phys(HSD_GObj* gobj)
 {
@@ -764,7 +764,7 @@ void ftPk_SpecialHiEnd_Phys(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialAirEnd_Phys(HSD_GObj* gobj)
+void ftPk_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -797,7 +797,7 @@ void ftPk_SpecialHiEnd_Coll(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialAirEnd_Coll(HSD_GObj* gobj)
+void ftPk_SpecialAirHiEnd_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
