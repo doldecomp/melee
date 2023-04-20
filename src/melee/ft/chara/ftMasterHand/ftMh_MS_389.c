@@ -15,153 +15,132 @@
 #pragma push
 #pragma dont_inline on
 #endif
-// 80150C8C 0014D86C
-// https://decomp.me/scratch/Nhsvo
 void ftMh_MS_389_80150C8C(HSD_GObj* gobj)
 {
     /// @todo the @c #pragma above is preventing use of #GET_FIGHTER.
-    Fighter* r31_fp = gobj->user_data;
-    if ((r31_fp->fv.mh.x2258 == 0x155) || (r31_fp->fv.mh.x2258 == 0x185)) {
-        Fighter_ChangeMotionState(gobj, 0x185, 0, 0,
-                                  r31_fp->x894_currentAnimFrame, 1, 0);
+    Fighter* fp = gobj->user_data;
+    if (fp->fv.mh.x2258 == ftMh_MS_Unk341 || fp->fv.mh.x2258 == ftMh_MS_Unk389)
+    {
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Unk389, 0, 0,
+                                  fp->x894_currentAnimFrame, 1, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, 0x185, 0, 0, 0, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Unk389, 0, 0, 0, 1, 0);
         ftAnim_8006EBA4(gobj);
     }
-    r31_fp->fv.mh.x2258 = 0x185;
+    fp->fv.mh.x2258 = ftMh_MS_Unk389;
 }
 
-// 80150D28 0014D908
-// https://decomp.me/scratch/ntaE2
 void ftMh_MS_389_80150D28(HSD_GObj* gobj)
 {
-    Fighter* r31_fp = gobj->user_data;
-    if ((r31_fp->fv.mh.x2258 == 0x156) || (r31_fp->fv.mh.x2258 == 0x186)) {
-        Fighter_ChangeMotionState(gobj, 0x186, 0, 0,
-                                  r31_fp->x894_currentAnimFrame, 1, 0);
+    Fighter* fp = gobj->user_data;
+    if (fp->fv.mh.x2258 == ftMh_MS_Unk342 || fp->fv.mh.x2258 == ftMh_MS_Unk390)
+    {
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Unk390, 0, 0,
+                                  fp->x894_currentAnimFrame, 1, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, 0x186, 0, 0, 0, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Unk390, 0, 0, 0, 1, 0);
         ftAnim_8006EBA4(gobj);
     }
-    r31_fp->fv.mh.x2258 = 0x186;
+    fp->fv.mh.x2258 = ftMh_MS_Unk390;
 }
 #ifdef MUST_MATCH
 #pragma pop
 #endif
 
-// 80150DC4 0014D9A4
-// https://decomp.me/scratch/vZOBB
-void ftMh_MS_389_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos)
+void ftMh_MS_389_80150DC4(HSD_GObj* gobj, HSD_GObjEvent cb, Vec3* pos)
 {
-    Fighter* r32_fp = GET_FIGHTER(gobj);
-
-    /// @todo Unused stack.
+    Fighter* fp = GET_FIGHTER(gobj);
+/// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[16];
 #endif
-
-    if (r32_fp->fv.mh.x2258 == 0x156) {
-        if ((r32_fp->fv.mh.x2258 == 0x156) || (r32_fp->fv.mh.x2258 == 0x186)) {
-            Fighter_ChangeMotionState(gobj, 0x186, 0, 0,
-                                      r32_fp->x894_currentAnimFrame, 1, 0);
+    if (fp->fv.mh.x2258 == ftMh_MS_Unk342) {
+        if ((fp->fv.mh.x2258 == ftMh_MS_Unk342) ||
+            (fp->fv.mh.x2258 == ftMh_MS_Unk390))
+        {
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Unk390, 0, 0,
+                                      fp->x894_currentAnimFrame, 1, 0);
         } else {
-            Fighter_ChangeMotionState(gobj, 0x186, 0, 0, 0, 1, 0);
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Unk390, 0, 0, 0, 1, 0);
             ftAnim_8006EBA4(gobj);
         }
-        r32_fp->fv.mh.x2258 = 0x186;
+        fp->fv.mh.x2258 = ftMh_MS_Unk390;
     } else {
-        if ((r32_fp->fv.mh.x2258 == 0x155) || (r32_fp->fv.mh.x2258 == 0x185)) {
-            Fighter_ChangeMotionState(gobj, 0x185, 0, 0,
-                                      r32_fp->x894_currentAnimFrame, 1, 0);
+        if (fp->fv.mh.x2258 == ftMh_MS_Unk341 ||
+            fp->fv.mh.x2258 == ftMh_MS_Unk389)
+        {
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Unk389, 0, 0,
+                                      fp->x894_currentAnimFrame, 1, 0);
         } else {
-            Fighter_ChangeMotionState(gobj, 0x185, 0, 0, 0, 1, 0);
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Unk389, 0, 0, 0, 1, 0);
             ftAnim_8006EBA4(gobj);
         }
-        r32_fp->fv.mh.x2258 = 0x185;
+        fp->fv.mh.x2258 = ftMh_MS_Unk389;
     }
-    r32_fp->mv.mh.unk0.x4 = arg1_stateVar2;
-    r32_fp->mv.mh.unk0.xC = *arg2_pos;
+    fp->mv.mh.unk0.x4 = cb;
+    fp->mv.mh.unk0.xC = *pos;
 }
 
-// 80150F00 0014DAE0
-// https://decomp.me/scratch/tAkIF
 void ftMh_MS_389_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[4];
 #endif
-
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter* fp = gobj->user_data;
-        fp->fv.mh.x2258 = 0x185;
-        Fighter_ChangeMotionState(gobj, 0x185, 0, 0, 0, 1, 0);
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->fv.mh.x2258 = ftMh_MS_Unk389;
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Unk389, 0, 0, 0, 1, 0);
         ftAnim_8006EBA4(gobj);
     }
 }
 
-// 80150F68 0014DB48
-// https://decomp.me/scratch/kHlJR
 void ftMh_MS_389_Phys(HSD_GObj* gobj)
 {
-    Fighter* r31_fp;
-    ftMasterHand_SpecialAttrs* r30_ft_attributes;
-    ftData* r4_ftdata;
-
-    r31_fp = gobj->user_data;
-    r4_ftdata = r31_fp->ft_data;
-    r30_ft_attributes = r4_ftdata->ext_attr;
-
+    /// @todo #GET_FIGHTER
+    Fighter* fp = gobj->user_data;
+    ftData* data = fp->ft_data;
+    ftMasterHand_SpecialAttrs* attr = data->ext_attr;
     ft_80085134(gobj);
-    ftBossLib_8015BE40(gobj, &r31_fp->mv.mh.unk0.xC, &r31_fp->mv.mh.unk0.x18,
-                       r30_ft_attributes->x2C, r30_ft_attributes->x28);
+    ftBossLib_8015BE40(gobj, &fp->mv.mh.unk0.xC, &fp->mv.mh.unk0.x18,
+                       attr->x2C, attr->x28);
 }
 
-// 80150FC8 0014DBA8
-// https://decomp.me/scratch/8qlZ7
 void ftMh_MS_389_Coll(HSD_GObj* gobj)
 {
-    Fighter* r4_fp;
-
-    r4_fp = gobj->user_data;
-    if (0 == r4_fp->mv.mh.unk0.x18) {
-        r4_fp->x80_self_vel.z = 0;
-        r4_fp->x80_self_vel.y = 0;
-        r4_fp->x80_self_vel.x = 0;
-
-        if (r4_fp->mv.mh.unk0.x4) {
-            r4_fp->mv.mh.unk0.x4(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->mv.mh.unk0.x18 == 0) {
+        fp->x80_self_vel.x = fp->x80_self_vel.y = fp->x80_self_vel.z = 0;
+        if (fp->mv.mh.unk0.x4) {
+            fp->mv.mh.unk0.x4(gobj);
         }
     }
 }
 
-// 80151018 0014DBF8
-// https://decomp.me/scratch/rjK44
 void ftMh_MS_389_80151018(HSD_GObj* gobj)
 {
-    Vec3 sp1C_pos;
-    ftMasterHand_SpecialAttrs* r5_attributes;
-    Fighter* r6_fp;
-    Fighter* r31_fp;
-
-    /// @todo Unused stack.
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    fp->mv.mh.unk0.x20 = 0;
+    {
+        Vec3 pos;
+/// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 _[8];
+        u8 _[8];
 #endif
-
-    r6_fp = GET_FIGHTER(gobj);
-    r5_attributes = r6_fp->ft_data->ext_attr;
-    r6_fp->mv.mh.unk0.x20 = 0;
-    sp1C_pos.x = r5_attributes->x30_pos2.x;
-    sp1C_pos.y = r5_attributes->x30_pos2.y;
-    sp1C_pos.z = 0;
-    r6_fp->fv.mh.x2258 = 0x186;
-    r31_fp = GET_FIGHTER(gobj);
-    if (r31_fp->fv.mh.x2258 == 0x156) {
-        ftMh_MS_389_80150D28(gobj);
-    } else {
-        ftMh_MS_389_80150C8C(gobj);
+        pos.x = attr->x30_pos2.x;
+        pos.y = attr->x30_pos2.y;
+        pos.z = 0;
+        fp->fv.mh.x2258 = ftMh_MS_Unk390;
+        {
+            Fighter* fp = GET_FIGHTER(gobj);
+            if (fp->fv.mh.x2258 == ftMh_MS_Unk342) {
+                ftMh_MS_389_80150D28(gobj);
+            } else {
+                ftMh_MS_389_80150C8C(gobj);
+            }
+            fp->mv.mh.unk0.x4 = ftMh_MS_341_8014FFDC;
+            fp->mv.mh.unk0.xC = pos;
+        }
     }
-    r31_fp->mv.mh.unk0.x4 = ftMh_MS_341_8014FFDC;
-    r31_fp->mv.mh.unk0.xC = sp1C_pos;
 }

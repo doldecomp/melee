@@ -4,34 +4,24 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-// 80154C78 151858
-// https://decomp.me/scratch/j7foW
-void ftMh_MS_375_80154C78(HSD_GObj* arg0)
+void ftMh_MS_375_80154C78(HSD_GObj* gobj)
 {
-    Fighter* temp_r31;
-    ftMasterHand_SpecialAttrs* temp_r30;
-
-    temp_r31 = arg0->user_data;
-    temp_r30 = temp_r31->ft_data->ext_attr;
-    Fighter_ChangeMotionState(arg0, 0x178, 0, 0, 0.0f, 1.0f, 0.0f);
-    ftAnim_8006EBA4(arg0);
-    temp_r31->mv.mh.unk0.xC.x = temp_r30->x118_pos.x;
-    temp_r31->mv.mh.unk0.xC.y = temp_r30->x118_pos.y;
-    temp_r31->mv.mh.unk0.xC.z = 0.0f;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Unk376, 0, 0, 0, 1, 0);
+    ftAnim_8006EBA4(gobj);
+    fp->mv.mh.unk0.xC.x = attr->x118_pos.x;
+    fp->mv.mh.unk0.xC.y = attr->x118_pos.y;
+    fp->mv.mh.unk0.xC.z = 0;
 }
 
-// 80154CF8 1518D8
-// https://decomp.me/scratch/XwAlv
-void ftMh_MS_378_80154CF8(HSD_GObj* gobj, Fighter* fp)
+void ftMh_MS_378_80154CF8(HSD_GObj* gobj)
 {
-    Fighter* temp_r31;
-    ftMasterHand_SpecialAttrs* temp_r30;
-
-    temp_r31 = gobj->user_data;
-    temp_r30 = temp_r31->ft_data->ext_attr;
-    Fighter_ChangeMotionState(gobj, 0x179, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Unk377, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
-    temp_r31->mv.mh.unk0.xC.x = temp_r30->x30_pos2.x;
-    temp_r31->mv.mh.unk0.xC.y = temp_r30->x30_pos2.y;
-    temp_r31->mv.mh.unk0.xC.z = 0.0f;
+    fp->mv.mh.unk0.xC.x = attr->x30_pos2.x;
+    fp->mv.mh.unk0.xC.y = attr->x30_pos2.y;
+    fp->mv.mh.unk0.xC.z = 0;
 }

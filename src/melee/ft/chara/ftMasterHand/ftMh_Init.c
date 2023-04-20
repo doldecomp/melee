@@ -498,7 +498,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        341,
+        ftMh_MS_Unk341,
         0,
         0x01000000,
         ftMh_MS_387_Anim,
@@ -508,7 +508,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        342,
+        ftMh_MS_Unk342,
         0,
         0x01000000,
         ftMh_MS_388_Anim,
@@ -518,7 +518,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        343,
+        ftMh_MS_Unk343,
         0,
         0x01000000,
         ftMh_MS_389_Anim,
@@ -528,7 +528,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        344,
+        ftMh_MS_Unk344,
         0,
         0x01000000,
         ftMh_MS_389_Anim,
@@ -549,55 +549,51 @@ Fighter_CostumeStrings ftMh_Init_CostumeStrings[] = {
     { ftMh_Init_803D4090, ftMh_Init_803D409C, NULL },
 };
 
-// 8014FC68 0014C848
-void ftMh_Init_OnDeath(HSD_GObj* gobj)
-{
-    return;
-}
+void ftMh_Init_OnDeath(HSD_GObj* gobj) {}
 
-// 8014FC6C 0014C84C
-// https://decomp.me/scratch/Tbp9G
 void ftMh_Init_OnLoad(HSD_GObj* gobj)
 {
-    ftData* ftdata;
     ftMasterHand_SpecialAttrs* ftData_attr;
-    void** items;
-    Fighter* fp;
-
-    fp = gobj->user_data;
-    ftdata = fp->ft_data;
+    Fighter* fp = gobj->user_data;
+    ftData* ftdata = fp->ft_data;
     ftData_attr = ftdata->ext_attr;
-    items = ftdata->x48_items;
+    {
+        UNK_T* items = ftdata->x48_items;
+        PUSH_ATTRS(fp, ftMasterHand_SpecialAttrs);
+        ftBossLib_8015BDB4(gobj);
+        it_8026B3F8(items[0], 125);
+        it_8026B3F8(items[1], 126);
+        fp->x2229_b5_no_normal_motion = true;
+        fp->x2229_b6 = true;
+        fp->x2229_b7 = true;
+        fp->x222A_flag.bits.b0 = true;
+        fp->x222A_flag.bits.b1 = true;
+        fp->x2229_b3 = true;
+        fp->cur_pos.x = ftData_attr->x30_pos2.x;
+        fp->cur_pos.y = ftData_attr->x30_pos2.y;
+        fp->cur_pos.z = 0;
+        fp->mv.mh.unk0.x34 = 0;
+        fp->mv.mh.unk0.x38 = 0;
+        fp->mv.mh.unk0.x3C = 0;
+        fp->mv.mh.unk0.x40 = 0;
+        fp->mv.mh.unk0.x28 = -1;
+        fp->mv.mh.unk0.x2C = -1;
+        fp->mv.mh.unk0.x30 = -1;
+        fp->mv.mh.unk0.x1C = 0;
+        fp->mv.mh.unk0.x20 = 0;
+        fp->fv.mh.x222C = ftBossLib_8015C244(gobj, &fp->cur_pos);
+        fp->fv.mh.x2238 = 1;
+        fp->fv.mh.x224C = 0;
+        fp->fv.mh.x2250 = ftMh_MS_Slap_StartMotion;
+        fp->fv.mh.x2254 = 0;
+        fp->x1A98 = 1;
+        ftBossLib_8015BD24(fp->x1A98, &fp->fv.mh.x223C, fp->fv.mh.x2238,
+                           ftData_attr->x18, ftData_attr->x20,
+                           ftData_attr->x1C);
+    }
+}
 
-    PUSH_ATTRS(fp, ftMasterHand_SpecialAttrs);
-
-    ftBossLib_8015BDB4(gobj);
-    it_8026B3F8(items[0], 0x7D);
-    it_8026B3F8(items[1], 0x7E);
-    fp->x2229_b5_no_normal_motion = 1;
-    fp->x2229_b6 = 1;
-    fp->x2229_b7 = 1;
-    fp->x222A_flag.bits.b0 = 1;
-    fp->x222A_flag.bits.b1 = 1;
-    fp->x2229_b3 = 1;
-    fp->cur_pos.x = ftData_attr->x30_pos2.x;
-    fp->cur_pos.y = ftData_attr->x30_pos2.y;
-    fp->cur_pos.z = 0.0f;
-    fp->mv.mh.unk0.x34 = 0;
-    fp->mv.mh.unk0.x38 = 0;
-    fp->mv.mh.unk0.x3C = 0;
-    fp->mv.mh.unk0.x40 = 0;
-    fp->mv.mh.unk0.x28 = -1;
-    fp->mv.mh.unk0.x2C = -1;
-    fp->mv.mh.unk0.x30 = -1;
-    fp->mv.mh.unk0.x1C = 0.0f;
-    fp->mv.mh.unk0.x20 = 0;
-    fp->fv.mh.x222C = ftBossLib_8015C244(gobj, &fp->cur_pos);
-    fp->fv.mh.x2238 = 1.0f;
-    fp->fv.mh.x224C = 0;
-    fp->fv.mh.x2250 = 0x15B;
-    fp->fv.mh.x2254 = 0;
-    fp->x1A98 = 1;
-    ftBossLib_8015BD24(fp->x1A98, &fp->fv.mh.x223C, fp->fv.mh.x2238,
-                       ftData_attr->x18, ftData_attr->x20, ftData_attr->x1C);
+void ftMh_Init_LoadSpecialAttrs(HSD_GObj* gobj)
+{
+    COPY_ATTRS(gobj, ftMasterHand_SpecialAttrs);
 }
