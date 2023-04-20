@@ -1,17 +1,28 @@
 #include "forward.h"
 
-#include "ftMewtwo/ftMt_SpecialN.h"
+#include "ftMt_SpecialN.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/inlines.h"
+#include "ft/ftcommon.h"
 #include "ftMewtwo/ftMt_Init.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
-#include <dolphin/mtx/types.h>
+// SpecialN/SpecialAirN
+
+#define FTMEWTWO_SPECIALN_ACTION_FLAG                                         \
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_PreserveSfx |             \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |           \
+        FtStateChange_Unk_19
+
+#define FTMEWTWO_SPECIALN_COLL_FLAG                                           \
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |       \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |           \
+        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |         \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // 0x80146CCC
 // https://decomp.me/scratch/qxdYd
@@ -195,7 +206,7 @@ void ftMt_SpecialN_OnDeath(HSD_GObj* gobj)
     }
 }
 
-void ftMewtwo_SpecialN_GetPos(Fighter* fp, Vec3* sp38)
+static void ftMewtwo_SpecialN_GetPos(Fighter* fp, Vec3* sp38)
 {
     Vec3 sp2C;
     sp2C.z = 2.0f;
@@ -205,7 +216,7 @@ void ftMewtwo_SpecialN_GetPos(Fighter* fp, Vec3* sp38)
     sp38->z = 0.0f;
 }
 
-void ftMewtwo_SpecialN_SetRecoil(HSD_GObj* gobj)
+static void ftMewtwo_SpecialN_SetRecoil(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);

@@ -1,16 +1,36 @@
 #include "forward.h"
 
+#include "ftMt_SpecialS.h"
+
 #include "ftMt_Init.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
+
+// Flag values read during Confusion's reflect think function
+
+#define CONFUSION_REFLECT_NONE                                                \
+    0 // Effectively a "wait" state for Confusion (i.e. wait until the flag is
+      // either 1 or 2 because 0 does nothing).
+
+#define CONFUSION_REFLECT_ON 1 // Toggle reflect bubble on.
+
+#define CONFUSION_REFLECT_OFF 2 // Toggle reflect bubble off.
+
+// SpecialS/SpecialAirS
+
+#define FTMEWTWO_SPECIALS_COLL_FLAG                                           \
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |             \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |           \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
+        FtStateChange_SkipUpdateModelPartVis |                                \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // 0x8014665C
 // https://decomp.me/scratch/ktG8y // Set flags
-void ftMt_SpecialS_SetFlags(HSD_GObj* gobj)
+static void ftMt_SpecialS_SetFlags(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

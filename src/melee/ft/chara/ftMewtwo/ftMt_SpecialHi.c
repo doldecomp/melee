@@ -8,9 +8,11 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
+#include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ftMewtwo/ftMt_Init.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbvector.h"
 #include "melee/ft/types.h"
 
 #include <dolphin/mtx/types.h>
@@ -278,7 +280,7 @@ void ftMt_SpecialHi_Coll(HSD_GObj* gobj)
     }
 }
 
-bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* gobj)
+static bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMewtwoAttributes* mewtwoAttrs = fp->x2D4_specialAttributes;
@@ -293,6 +295,8 @@ bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* gobj)
 
     return true;
 }
+
+static bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* gobj);
 
 /// Mewtwo's aerial Teleport Zoom Collision callback
 void ftMt_SpecialAirHi_Coll(HSD_GObj* gobj)

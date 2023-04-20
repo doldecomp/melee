@@ -1,15 +1,23 @@
 #include "forward.h"
 
+#include "ftMt_SpecialLw.h"
+
 #include "ftMt_Init.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
-#include <dolphin/mtx/types.h>
+// SpecialLw/SpecialAirLw
+
+#define FTMEWTWO_SPECIALLW_COLL_FLAG                                          \
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |             \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |           \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
+        FtStateChange_SkipUpdateModelPartVis |                                \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // 0x80146198
 // https://decomp.me/scratch/QML6g // Reset Disable Stall flag
