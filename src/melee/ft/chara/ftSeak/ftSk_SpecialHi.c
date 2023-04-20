@@ -1,16 +1,18 @@
-#include "ftSeak/ftSk_SpecialHi.h"
+#include "ftSk_SpecialHi.h"
 
-f32 const ftSk_Init_804D9660 = 0.0F;
-f32 const ftSk_Init_804D9664 = 1.0F;
+#include <math.h>
+
+f32 const ftSk_Init_804D9660 = 0;
+f32 const ftSk_Init_804D9664 = 1;
 f64 const ftSk_Init_804D9668 = 4503601774854144.0;
-f32 const ftSk_Init_804D9670 = 0.01745329238474369F;
-f32 const ftSk_Init_804D9674 = 90.0F;
+f32 const ftSk_Init_804D9670 = DEG_TO_RAD;
+f32 const ftSk_Init_804D9674 = 90;
 f64 const ftSk_Init_804D9678 = 0.5;
-f64 const ftSk_Init_804D9680 = 3.0;
-f32 const ftSk_Init_804D9688 = 1.5707963705062866F;
-f32 const ftSk_Init_804D968C = 35.0F;
-f32 const ftSk_Init_804D9690 = 0.0010000000474974513F;
-f32 const ftSk_Init_804D9694 = 10.0F;
+f64 const ftSk_Init_804D9680 = 3;
+f32 const ftSk_Init_804D9688 = M_PI / 2;
+f32 const ftSk_Init_804D968C = 35;
+f32 const ftSk_Init_804D9690 = 0.001;
+f32 const ftSk_Init_804D9694 = 10;
 
 // 80112ED8 - 80112F48 (0x70 bytes)
 
@@ -20,10 +22,10 @@ f32 const ftSk_Init_804D9694 = 10.0F;
 
 // 80113038 - 801130D0 (0x98 bytes)
 
-// MS_SheikUpBStartGround
+// AS_SheikUpBStartGround
 // 801130D0 - 8011312C (0x5C bytes)
 
-// Sheik_MS_358_Up-B_Vanish
+// Sheik_AS_358_Up-B_Vanish
 // 8011312C - 80113194 (0x68 bytes)
 
 // 80113194 - 801131D0 (0x3C bytes)
@@ -66,16 +68,16 @@ f32 const ftSk_Init_804D9694 = 10.0F;
 
 // 80113540 - 8011374C (0x20C bytes)
 
-// MS_SheikUpBGroundtoAirFall?
+// AS_SheikUpBGroundtoAirFall?
 // 8011374C - 801137C8 (0x7C bytes)
 
-// MS_SheikUpBLand
+// AS_SheikUpBLand
 // 801137C8 - 80113838 (0x70 bytes)
 
-// MS_SheikUpBTravelGround
+// AS_SheikUpBTravelGround
 // 80113838 - 80113A30 (0x1F8 bytes)
 
-// MS_SheikUpBTravelAir
+// AS_SheikUpBTravelAir
 // 80113A30 - 80113C40 (0x210 bytes)
 
 // 80113C40 - 80113C7C (0x3C bytes)
@@ -99,5 +101,5 @@ f32 const ftSk_Init_804D9694 = 10.0F;
 
 // 80113EAC - 80113F68 (0xBC bytes)
 
-// MS_SheikUpBFall
+// AS_SheikUpBFall
 // 80113F68 - 80114034 (0xCC bytes)

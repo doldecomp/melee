@@ -10,23 +10,10 @@ f64 const ftSk_Init_804D96A8 = 0.0078125;
 
 // 801140B0 - 8011412C (0x7C bytes)
 
-/// @todo Unlinked
-#if false
-// Sheik_TransformToSubcharacter
-// 8011412C - 80114160 (0x34 bytes)
-// https://decomp.me/scratch/b1oIZ
-void ftSeak_8011412C(HSD_GObj* fighterObj)
-{
-    Fighter* fighter = fighterObj->user_data;
-    fighter->cb.x21BC_callback_Accessory4 = 0;
-    ftCommon_8007EFC8(fighterObj, &ftZd_SpecialLw_8013B4D8);
-}
-#endif
-
-// Sheik_MS_361_Transform_Grounded
+// Sheik_AS_361_Transform_Grounded
 // 80114160 - 80114224 (0xC4 bytes)
 
-// Sheik_MS_363_Transform_Aerial
+// Sheik_AS_363_Transform_Aerial
 // 80114224 - 801142E8 (0xC4 bytes)
 
 // Animation_SheikTransformStartGround
@@ -70,5 +57,5 @@ void ftSeak_8011412C(HSD_GObj* fighterObj)
 
 // 801146EC - 80114758 (0x6C bytes)
 
-// MS_SheikFinishTransformation
+// AS_SheikFinishTransformation
 // 80114758 - 801147C0 (0x68 bytes)

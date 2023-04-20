@@ -69,7 +69,7 @@ f32 const ftSk_Init_804D9658 = 2;
 
 // 801120D4 - 801120E8 (0x14 bytes)
 
-// MS_SheikChargeNeedlesStartGround
+// AS_SheikChargeNeedlesStartGround
 // 801120E8 - 80112198 (0xB0 bytes)
 
 // 80112198 - 80112248 (0xB0 bytes)

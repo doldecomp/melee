@@ -8,7 +8,6 @@
 #include "ft/ftdata.h"
 #include "ft/inlines.h"
 #include "ftNess/ftNs_AttackHi4.h"
-#include "ftNess/ftNs_Init.h"
 #include "ftSeak/ftSk_Init.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
@@ -1033,7 +1032,7 @@ void ftSk_SpecialS_80111CB0(HSD_GObj* gobj)
     }
 }
 
-// MS_SheikRetractChainGround
+// AS_SheikRetractChainGround
 void ftSk_SpecialS_80111D54(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

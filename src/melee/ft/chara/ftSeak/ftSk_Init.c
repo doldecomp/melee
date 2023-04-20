@@ -2,15 +2,17 @@
 
 #include "ftSeak/ftSk_Init.h"
 
+#include "ftSk_SpecialHi.h"
+#include "ftSk_SpecialLw.h"
+#include "ftSk_SpecialN.h"
+#include "ftSk_SpecialS.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftSeak/ftSk_SpecialLw.h"
-#include "ftSeak/ftSk_SpecialN.h"
-#include "ftSeak/ftSk_SpecialS.h"
 #include "ftSeak/types.h"
 
 MotionState ftSk_Init_MotionStateTable[] = {
@@ -366,16 +368,3 @@ void ftSk_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, 1);
 }
-
-/// @todo Moved to ftSk_SpecialN.c
-#if false
-
-// 8011412C - 80114160
-// https://decomp.me/scratch/b1oIZ
-void ftSeak_8011412C(HSD_GObj* gobj) {
-    Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21BC_callback_Accessory4 = 0;
-    ftCommon_8007EFC8(gobj, &ftZd_SpecialLw_8013B4D8);
-}
-
-#endif
