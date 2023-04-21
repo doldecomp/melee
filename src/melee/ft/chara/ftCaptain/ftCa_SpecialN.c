@@ -20,72 +20,65 @@
 /// Create Aesthetic Wind Effect for Warlock Punch
 static void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
 {
-    s32 currentAnimFrame;
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 ftKind;
+    int cur_frame = fp->x894_currentAnimFrame;
+    FighterKind kind = ftLib_800872A4(gobj);
 
-    currentAnimFrame = (s32) fp->x894_currentAnimFrame;
-
-    ftKind = ftLib_800872A4(gobj);
-    switch (ftKind) {
+    switch (kind) {
     case FTKIND_CAPTAIN:
-        break;
+        return;
     case FTKIND_GANON:
-        if (currentAnimFrame & 1) {
-            if ((currentAnimFrame >= 16) && (currentAnimFrame <= 50)) {
-                lb_800119DC(&fp->cur_pos, 2, 2.0f, 2.0f, 0.0f);
-            } else if ((currentAnimFrame >= 51) && (currentAnimFrame <= 68)) {
-                lb_800119DC(&fp->cur_pos, 2, 4.0f, 4.0f, 0.0f);
+        if (cur_frame & 1) {
+            if (cur_frame >= 16 && cur_frame <= 50) {
+                lb_800119DC(&fp->cur_pos, 2, 2, 2, 0);
+            } else if (cur_frame >= 51 && cur_frame <= 68) {
+                lb_800119DC(&fp->cur_pos, 2, 4, 4, 0);
             }
         }
-        break;
+        return;
     }
 }
 
 /// Calculate angle from control stick input - inline
 static f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
 {
-    ftCaptain_DatAttrs* tempAttrs = fp->x2D4_specialAttributes;
-
-    f32 stickRangeMinPos;
-    f32 stickRangeMinNeg;
-    f32 stick_y;
-    f32 floatVar = 0.01745329238474369f;
-
-    stick_y = stickGetDir(fp->input.x624_lstick_y, 0.0f);
-
-    stickRangeMinPos = tempAttrs->specialn_stick_range_y_pos;
-    if (stick_y > stickRangeMinPos) {
-        stick_y = stickRangeMinPos;
+    ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
+    {
+        /// @todo Join declarations and assignments somehow.
+        f32 max;
+        f32 stick_y = stickGetDir(fp->input.x624_lstick_y, 0);
+        f32 min;
+        max = da->specialn_stick_range_y_pos;
+        if (stick_y > max) {
+            stick_y = max;
+        }
+        min = da->specialn_stick_range_y_neg;
+        stick_y -= min;
+        if (stick_y < 0) {
+            stick_y = 0;
+        }
+        if (fp->input.x624_lstick_y < 0) {
+            stick_y = -stick_y;
+        }
+        {
+            /// @todo Eliminate @c f.
+            f32 f = DEG_TO_RAD;
+            return f * (stick_y * da->specialn_angle_diff / (max - min));
+        }
     }
-
-    stickRangeMinNeg = tempAttrs->specialn_stick_range_y_neg;
-    stick_y -= stickRangeMinNeg;
-
-    if (stick_y < 0.0f) {
-        stick_y = 0.0f;
-    }
-    if (fp->input.x624_lstick_y < 0.0f) {
-        stick_y = -stick_y;
-    }
-    return floatVar * ((stick_y * tempAttrs->specialn_angle_diff) /
-                       (stickRangeMinPos - stickRangeMinNeg));
 }
 
 void ftCa_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-
-    /// @todo Unused stack.
+/// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[4];
 #endif
-
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialN, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialN, 0, NULL, 0, 1, 0);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     ftAnim_8006EBA4(gobj);
@@ -94,17 +87,14 @@ void ftCa_SpecialN_Enter(HSD_GObj* gobj)
 void ftCa_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirN, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirN, 0, NULL, 0, 1, 0);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     ftAnim_8006EBA4(gobj);
@@ -113,7 +103,6 @@ void ftCa_SpecialAirN_Enter(HSD_GObj* gobj)
 void ftCa_SpecialN_Anim(HSD_GObj* gobj)
 {
     ftCaptain_SpecialN_CreateWindEffect(gobj);
-
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
@@ -122,55 +111,48 @@ void ftCa_SpecialN_Anim(HSD_GObj* gobj)
 void ftCa_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     ftCaptain_SpecialN_CreateWindEffect(gobj);
-
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
     }
 }
 
-void ftCa_SpecialN_IASA(HSD_GObj* gobj)
-{
-    return;
-}
+void ftCa_SpecialN_IASA(HSD_GObj* gobj) {}
 
 void ftCa_SpecialAirN_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptain_DatAttrs* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
-
-    f32 vel;
-
-    if ((u32) fp->x2200_ftcmd_var0 != 0U) {
-        fp->x2200_ftcmd_var0 = 0U;
-        vel = ftCaptain_SpecialN_GetAngleVel(fp);
-        fp->x80_self_vel.y = (f32) (captainAttrs->specialn_vel_x * sinf(vel));
-        fp->x80_self_vel.x = (f32) (captainAttrs->specialn_vel_x *
-                                    (fp->facing_dir * cosf(vel)));
+    /// @todo Fake double assignment.
+    ftCaptain_DatAttrs* da = da = getFtSpecialAttrs(fp);
+    if (fp->x2200_ftcmd_var0 != 0) {
+        fp->x2200_ftcmd_var0 = 0;
+        {
+            f32 vel = ftCaptain_SpecialN_GetAngleVel(fp);
+            fp->x80_self_vel.y = da->specialn_vel_x * sinf(vel);
+            fp->x80_self_vel.x =
+                da->specialn_vel_x * (fp->facing_dir * cosf(vel));
+        }
     }
 }
 
-void ftCa_SpecialN_Phys(HSD_GObj* gobj)
+static inline void doPhys(HSD_GObj* gobj)
 {
+    bool throw_b1;
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 ftKind;
-    s32 flag;
-
-    fp = GET_FIGHTER(gobj);
-    if (fp->x2210_ThrowFlags.b1 != 0) {
-        fp->x2210_ThrowFlags.b1 = 0;
-        flag = true;
+    if (fp->x2210_ThrowFlags.b1) {
+        fp->x2210_ThrowFlags.b1 = false;
+        throw_b1 = true;
     } else {
-        flag = false;
+        throw_b1 = false;
     }
-    if (flag != false) {
+    if (throw_b1) {
         if (!fp->x2219_flag.bits.b0) {
-            ftKind = ftLib_800872A4(gobj);
-            switch (ftKind) {
-            case 2:
+            FighterKind kind = ftLib_800872A4(gobj);
+            switch (kind) {
+            case FTKIND_CAPTAIN:
                 efSync_Spawn(1167, gobj, fp->parts[FtPart_TopN].x0_jobj,
                              fp->parts[57].x0_jobj);
                 break;
-            case 25:
+            case FTKIND_GANON:
                 efSync_Spawn(1291, gobj, fp->parts[FtPart_TopN].x0_jobj,
                              fp->parts[78].x0_jobj);
                 break;
@@ -180,55 +162,44 @@ void ftCa_SpecialN_Phys(HSD_GObj* gobj)
             ftCommon_8007DB24(gobj);
         }
     }
+}
+
+void ftCa_SpecialN_Phys(HSD_GObj* gobj)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+    doPhys(gobj);
     ft_80084FA8(gobj);
 }
 
 void ftCa_SpecialAirN_Phys(HSD_GObj* gobj)
 {
-    Fighter* fp = fp = GET_FIGHTER(gobj);
-    ftCaptain_DatAttrs* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
-    s32 ftKind;
-    s32 flag;
-
-    if (fp->x2210_ThrowFlags.b1 != 0) {
-        fp->x2210_ThrowFlags.b1 = 0;
-        flag = true;
-    } else {
-        flag = false;
-    }
-    if (flag != false) {
-        if (fp->x2219_flag.bits.b0 == 0) {
-            ftKind = ftLib_800872A4(gobj);
-            switch (ftKind) {
-            case 2:
-                efSync_Spawn(1167, gobj, fp->parts[FtPart_TopN].x0_jobj,
-                             fp->parts[57].x0_jobj);
-                break;
-            case 25:
-                efSync_Spawn(1291, gobj, fp->parts[FtPart_TopN].x0_jobj,
-                             fp->parts[78].x0_jobj);
-                break;
-            }
-            fp->x2219_flag.bits.b0 = 1;
-        } else {
-            ftCommon_8007DB24(gobj);
-        }
-    }
+    Fighter* fp = GET_FIGHTER(gobj);
+    /// @todo Fake double assignment.
+    ftCaptain_DatAttrs* da = da = getFtSpecialAttrs(fp);
+    doPhys(gobj);
     switch (fp->x2204_ftcmd_var1) {
-    case 0:
+    case 0: {
         ft_80084EEC(gobj);
-        break;
-
-    case 1:
-        fp->x80_self_vel.y *= captainAttrs->specialn_vel_mul;
-        fp->x80_self_vel.x *= captainAttrs->specialn_vel_mul;
-        break;
-
-    case 2:
+        return;
+    }
+    case 1: {
+        fp->x80_self_vel.y *= da->specialn_vel_mul;
+        fp->x80_self_vel.x *= da->specialn_vel_mul;
+        return;
+    }
+    case 2: {
         ft_80084DB0(gobj);
+        return;
+    }
+    default:
+        return;
     }
 }
 
+/// @todo Share with #ftCa_Init_MotionStateTable
 static Fighter_MotionStateChangeFlags const transition_flags =
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_SkipUpdateRumble | FtStateChange_UpdateCmd |
@@ -238,11 +209,11 @@ static Fighter_MotionStateChangeFlags const transition_flags =
 
 void ftCa_SpecialN_Coll(HSD_GObj* gobj)
 {
-    if (ft_800827A0(gobj) == false) {
+    if (!ft_800827A0(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirN, transition_flags,
-                                  NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+                                  NULL, fp->x894_currentAnimFrame, 1, 0);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         ftCommon_8007D468(fp);
@@ -251,11 +222,11 @@ void ftCa_SpecialN_Coll(HSD_GObj* gobj)
 
 void ftCa_SpecialAirN_Coll(HSD_GObj* gobj)
 {
-    if (ft_80081D0C(gobj) != false) {
+    if (ft_80081D0C(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialN, transition_flags,
-                                  NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+                                  NULL, fp->x894_currentAnimFrame, 1, 0);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }
