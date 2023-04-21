@@ -506,12 +506,13 @@ struct S_TEMP1 {
 struct MotionState {
     enum_t anim_id;
 
-    s32 x4_flags;
+    Fighter_MotionStateChangeFlags x4_flags;
 
     union {
-        u32 x8_flags;
+        /// @todo Try to match without this being a @c union.
+        u32 _;
         struct {
-            u8 move_id;
+            FtMoveId move_id : 8;
             UnkFlagStruct x9_flags;
             UnkFlagStruct flagsA;
             UnkFlagStruct flagsB;
