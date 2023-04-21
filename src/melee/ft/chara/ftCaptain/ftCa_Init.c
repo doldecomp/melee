@@ -12,11 +12,94 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 
+static u32 const swing_flags_x4 =
+    FtStateChange_PreserveGfx | FtStateChange_Unk_6 |
+    FtStateChange_SkipUpdateRumble | FtStateChange_SkipUpdateItemVis |
+    FtStateChange_SkipUpdateModelPartVis;
+
+static u32 const swing_flags_x8 = FtStateChange_Unk_24 | FtStateChange_Unk_30;
+
+static u32 const bat_swing_flags_x4 =
+    swing_flags_x4 | FtStateChange_PreserveColAnimHitStatus;
+
+static u32 const bat_swing_flags_x8 =
+    swing_flags_x8 | FtStateChange_SkipUpdateModelFlag;
+
+static u32 const parasol_swing_flags_x4 =
+    swing_flags_x4 | FtStateChange_SkipUpdateHit;
+
+static u32 const parasol_swing_flags_x8 =
+    swing_flags_x8 | FtStateChange_Unk_27;
+
+static u32 const harisen_swing_flags_x4 =
+    bat_swing_flags_x4 | FtStateChange_SkipUpdateHit;
+
+static u32 const harisen_swing_flags_x8 =
+    swing_flags_x8 | FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
+
+static u32 const star_rod_swing_flags_x4 =
+    swing_flags_x4 | FtStateChange_SkipUpdateModel;
+
+static u32 const star_rod_swing_flags_x8 =
+    swing_flags_x8 | FtStateChange_SkipUpdateHitStunFlag;
+
+static u32 const lipstick_swing_flags_x4 =
+    bat_swing_flags_x4 | FtStateChange_SkipUpdateModel;
+
+static u32 const lipstick_swing_flags_x8 =
+    bat_swing_flags_x8 | FtStateChange_SkipUpdateHitStunFlag;
+
+static u32 const specialn_base0_flags_x4 =
+    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateItemVis |
+    FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState;
+
+static u32 const specialn_base1_flags_x4 =
+    specialn_base0_flags_x4 | FtStateChange_PreserveSfx;
+
+static u32 const specialn_flags_x4 =
+    specialn_base1_flags_x4 | FtStateChange_PreserveFastFall;
+
+static u32 const specialn_flags_x8 =
+    FtStateChange_SkipUpdateAttackCount | FtStateChange_SkipUpdateHitStunFlag;
+
+static u32 const specialairn_flags_x4 =
+    specialn_flags_x4 | FtStateChange_SkipUpdateParasol;
+
+static u32 const specials_flags_x4 =
+    specialn_base1_flags_x4 | FtStateChange_PreserveGfx;
+
+static u32 const specials_flags_x8 = specialn_flags_x8 | FtStateChange_Unk_24;
+
+static u32 const specialairsstart_flags_x4 =
+    specials_flags_x4 | FtStateChange_SkipUpdateParasol;
+
+static u32 const specialairs_flags_x4 =
+    specials_flags_x4 | FtStateChange_SkipUpdateParasol;
+
+static u32 const specialhi_flags_x4 = specialn_base0_flags_x4 |
+                                      FtStateChange_PreserveFastFall |
+                                      FtStateChange_PreserveGfx;
+
+static u32 const specialhi_flags_x8 =
+    FtStateChange_SkipUpdateModelFlag | FtStateChange_SkipUpdateHitStunFlag;
+
+static u32 const specialairhi_flags_x4 =
+    specialhi_flags_x4 | FtStateChange_SkipUpdateParasol;
+
+static u32 const speciallw_flags_x4 =
+    specialn_base1_flags_x4 | FtStateChange_PreserveColAnimHitStatus;
+
+static u32 const speciallw_flags_x8 =
+    specialhi_flags_x8 | FtStateChange_Unk_24;
+
+static u32 const speciallwrebound_flags_x4 =
+    speciallw_flags_x4 | FtStateChange_SkipUpdateParasol;
+
 MotionState ftCa_Init_MotionStateTable[] = {
     {
         295,
-        0x00440842,
-        0x41000000,
+        swing_flags_x4,
+        swing_flags_x8,
         ftCo_SwordSwing_Anim,
         ftCo_SwordSwing_IASA,
         ftCo_SwordSwing_Phys,
@@ -25,8 +108,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         296,
-        0x00440846,
-        0x45000000,
+        bat_swing_flags_x4,
+        bat_swing_flags_x8,
         ftCo_BatSwing_Anim,
         ftCo_BatSwing_IASA,
         ftCo_BatSwing_Phys,
@@ -35,8 +118,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         297,
-        0x0044084A,
-        0x49000000,
+        parasol_swing_flags_x4,
+        parasol_swing_flags_x8,
         ftCo_ParasolSwing_Anim,
         ftCo_ParasolSwing_IASA,
         ftCo_ParasolSwing_Phys,
@@ -45,8 +128,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         298,
-        0x0044084E,
-        0x4D000000,
+        harisen_swing_flags_x4,
+        harisen_swing_flags_x8,
         ftCo_HarisenSwing_Anim,
         ftCo_HarisenSwing_IASA,
         ftCo_HarisenSwing_Phys,
@@ -55,8 +138,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         299,
-        0x00440852,
-        0x51000000,
+        star_rod_swing_flags_x4,
+        star_rod_swing_flags_x8,
         ftCo_StarRodSwing_Anim,
         ftCo_StarRodSwing_IASA,
         ftCo_StarRodSwing_Phys,
@@ -65,8 +148,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         300,
-        0x00440856,
-        0x55000000,
+        lipstick_swing_flags_x4,
+        lipstick_swing_flags_x8,
         ftCo_LipstickSwing_Anim,
         ftCo_LipstickSwing_IASA,
         ftCo_LipstickSwing_Phys,
@@ -75,8 +158,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         301,
-        0x00340211,
-        0x12000000,
+        specialn_flags_x4,
+        specialn_flags_x8,
         ftCa_SpecialN_Anim,
         ftCa_SpecialN_IASA,
         ftCa_SpecialN_Phys,
@@ -85,8 +168,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         302,
-        0x00340611,
-        0x12000000,
+        specialairn_flags_x4,
+        specialn_flags_x8,
         ftCa_SpecialAirN_Anim,
         ftCa_SpecialAirN_IASA,
         ftCa_SpecialAirN_Phys,
@@ -95,8 +178,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         303,
-        0x00340212,
-        0x13000000,
+        specials_flags_x4,
+        specials_flags_x8,
         ftCa_SpecialSStart_Anim,
         ftCa_SpecialSStart_IASA,
         ftCa_SpecialSStart_Phys,
@@ -105,8 +188,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         304,
-        0x00340212,
-        0x13000000,
+        specials_flags_x4,
+        specials_flags_x8,
         ftCa_SpecialS_Anim,
         ftCa_SpecialS_IASA,
         ftCa_SpecialS_Phys,
@@ -115,8 +198,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         305,
-        0x00340612,
-        0x13000000,
+        specialairsstart_flags_x4,
+        specials_flags_x8,
         ftCa_SpecialAirSStart_Anim,
         ftCa_SpecialAirSStart_IASA,
         ftCa_SpecialAirSStart_Phys,
@@ -125,8 +208,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         306,
-        0x00340612,
-        0x13000000,
+        specialairs_flags_x4,
+        specials_flags_x8,
         ftCa_SpecialAirS_Anim,
         ftCa_SpecialAirS_IASA,
         ftCa_SpecialAirS_Phys,
@@ -135,8 +218,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         307,
-        0x00340013,
-        0x14000000,
+        specialhi_flags_x4,
+        specialhi_flags_x8,
         ftCa_SpecialHi_Anim,
         ftCa_SpecialHi_IASA,
         ftCa_SpecialHi_Phys,
@@ -145,8 +228,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         308,
-        0x00340413,
-        0x14000000,
+        specialairhi_flags_x4,
+        specialhi_flags_x8,
         ftCa_SpecialAirHi_Anim,
         ftCa_SpecialAirHi_IASA,
         ftCa_SpecialAirHi_Phys,
@@ -155,8 +238,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         309,
-        0x00340013,
-        0x14000000,
+        specialhi_flags_x4,
+        specialhi_flags_x8,
         ftCa_SpecialHiCatch_Anim,
         ftCa_SpecialHiCatch_IASA,
         ftCa_SpecialHiCatch_Phys,
@@ -165,8 +248,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         310,
-        0x00340013,
-        0x14000000,
+        specialhi_flags_x4,
+        specialhi_flags_x8,
         ftCa_SpecialHiThrow_Anim,
         ftCa_SpecialHiThrow_IASA,
         ftCa_SpecialHiThrow_Phys,
@@ -175,8 +258,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         311,
-        0x00340214,
-        0x15000000,
+        speciallw_flags_x4,
+        speciallw_flags_x8,
         ftCa_SpecialLw_Anim,
         NULL,
         ftCa_SpecialLw_Phys,
@@ -185,8 +268,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         312,
-        0x00340214,
-        0x15000000,
+        speciallw_flags_x4,
+        speciallw_flags_x8,
         ftCa_SpecialLwGroundEnd_Anim,
         NULL,
         ftCa_SpecialLwGroundEnd_Phys,
@@ -195,8 +278,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         313,
-        0x00340614,
-        0x15000000,
+        speciallwrebound_flags_x4,
+        speciallw_flags_x8,
         ftCa_SpecialAirLw_Anim,
         NULL,
         ftCa_SpecialAirLw_Phys,
@@ -205,8 +288,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         314,
-        0x00340614,
-        0x15000000,
+        speciallwrebound_flags_x4,
+        speciallw_flags_x8,
         ftCa_SpecialAirLwGroundEnd_Anim,
         NULL,
         ftCa_SpecialAirLwGroundEnd_Phys,
@@ -215,8 +298,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         316,
-        0x00340614,
-        0x15000000,
+        speciallwrebound_flags_x4,
+        speciallw_flags_x8,
         ftCa_SpecialAirLwAirEnd_Anim,
         NULL,
         ftCa_SpecialAirLwAirEnd_Phys,
@@ -225,8 +308,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         315,
-        0x00340214,
-        0x15000000,
+        speciallw_flags_x4,
+        speciallw_flags_x8,
         ftCa_SpecialLwAirEnd_Anim,
         NULL,
         ftCa_SpecialLwAirEnd_Phys,
@@ -235,8 +318,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         317,
-        0x00340614,
-        0x15000000,
+        speciallwrebound_flags_x4,
+        speciallw_flags_x8,
         ftCa_SpecialLwRebound_Anim,
         NULL,
         ftCa_SpecialLwRebound_Phys,
@@ -247,18 +330,25 @@ MotionState ftCa_Init_MotionStateTable[] = {
 
 char ftCa_Init_DatFilename[] = "PlCa.dat";
 char ftCa_Init_DataName[] = "ftDataCaptain";
-char ftCa_Init_803C75B4[] = "PlCaNr.dat";
-char ftCa_Init_803C75C0[] = "PlyCaptain5K_Share_joint";
-char ftCa_Init_803C75DC[] = "PlCaGy.dat";
-char ftCa_Init_803C75E8[] = "PlyCaptain5KGy_Share_joint";
-char ftCa_Init_803C7604[] = "PlCaRe.";
-char ftCa_Init_803C760C[] = "PlyCaptain5KRe_Share_joint";
-char ftCa_Init_803C7628[] = "PlCaWh.dat";
-char ftCa_Init_803C7634[] = "PlyCaptain5KWh_Share_joint";
-char ftCa_Init_803C7650[] = "PlCaGr.dat";
-char ftCa_Init_803C765C[] = "PlyCaptain5KGr_Share_joint";
-char ftCa_Init_803C7678[] = "PlCaBu.dat";
-char ftCa_Init_803C7684[] = "PlyCaptain5KBu_Share_joint";
+static char nr_dat[] = "PlCaNr.dat";
+static char nr_joint[] = "PlyCaptain5K_Share_joint";
+static char gy_dat[] = "PlCaGy.dat";
+static char gy_joint[] = "PlyCaptain5KGy_Share_joint";
+
+#ifdef MUST_MATCH
+char re_dat[] = "PlCaRe.";
+#else
+/// @todo What.
+char re_dat[] = "PlCaRe.dat";
+#endif
+
+static char re_joint[] = "PlyCaptain5KRe_Share_joint";
+static char wh_dat[] = "PlCaWh.dat";
+static char wh_joint[] = "PlyCaptain5KWh_Share_joint";
+static char gr_dat[] = "PlCaGr.dat";
+static char gr_joint[] = "PlyCaptain5KGr_Share_joint";
+static char bu_dat[] = "PlCaBu.dat";
+static char bu_joint[] = "PlyCaptain5KBu_Share_joint";
 char ftCa_Init_AnimDatFilename[] = "PlCaAJ.dat";
 
 Fighter_DemoStrings ftCa_Init_DemoMotionFilenames = {
@@ -269,12 +359,9 @@ Fighter_DemoStrings ftCa_Init_DemoMotionFilenames = {
 };
 
 Fighter_CostumeStrings ftCa_Init_CostumeStrings[] = {
-    { ftCa_Init_803C75B4, ftCa_Init_803C75C0, NULL },
-    { ftCa_Init_803C75DC, ftCa_Init_803C75E8, NULL },
-    { ftCa_Init_803C7604, ftCa_Init_803C760C, NULL },
-    { ftCa_Init_803C7628, ftCa_Init_803C7634, NULL },
-    { ftCa_Init_803C7650, ftCa_Init_803C765C, NULL },
-    { ftCa_Init_803C7678, ftCa_Init_803C7684, NULL },
+    { nr_dat, nr_joint, NULL }, { gy_dat, gy_joint, NULL },
+    { re_dat, re_joint, NULL }, { wh_dat, wh_joint, NULL },
+    { gr_dat, gr_joint, NULL }, { bu_dat, bu_joint, NULL },
 };
 
 void ftCa_Init_OnDeath(HSD_GObj* gobj)
@@ -292,23 +379,23 @@ void ftCa_Init_800E28C8(HSD_GObj* gobj)
 
 void ftCa_Init_OnItemPickup(HSD_GObj* gobj, bool arg1)
 {
-    Fighter_OnItemPickup(gobj, arg1, 1, 1);
+    Fighter_OnItemPickup(gobj, arg1, true, true);
 }
 
 void ftCa_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_OnItemInvisible(gobj, true);
 }
 
 void ftCa_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_OnItemVisible(gobj, true);
 }
 
 /// @remarks Used for both OnItemRelease and OnUnknownItemRelated
 void ftCa_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, true, true);
 }
 
 void ftCa_Init_OnLoadForGanon(Fighter* fp)

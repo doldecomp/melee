@@ -99,76 +99,76 @@ typedef enum CharacterKind {
 
 typedef enum Fighter_MotionStateChangeFlags {
     FtStateChange_None,
-    FtStateChange_PreserveFastFall = (1 << 0),
-    FtStateChange_PreserveGfx = (1 << 1),
+    FtStateChange_PreserveFastFall = 1 << 0,
+    FtStateChange_PreserveGfx = 1 << 1,
 
     /// Preserve full body collision state
-    FtStateChange_PreserveColAnimHitStatus = (1 << 2),
+    FtStateChange_PreserveColAnimHitStatus = 1 << 2,
 
     /// Keep hitboxes
-    FtStateChange_SkipUpdateHit = (1 << 3),
+    FtStateChange_SkipUpdateHit = 1 << 3,
 
-    /// Ignore model state change (?)
-    FtStateChange_SkipUpdateModel = (1 << 4),
+    /// Ignore model state change ?
+    FtStateChange_SkipUpdateModel = 1 << 4,
 
-    FtStateChange_SkipUpdateAnimVel = (1 << 5),
-    FtStateChange_Unk_6 = (1 << 6),
+    FtStateChange_SkipUpdateAnimVel = 1 << 5,
+    FtStateChange_Unk_6 = 1 << 6,
 
-    /// Ignore switching to character's "hurt" textures (?)
-    FtStateChange_SkipUpdateMatAnim = (1 << 7),
+    /// Ignore switching to character's "hurt" textures ?
+    FtStateChange_SkipUpdateMatAnim = 1 << 7,
 
     /// Resets thrower GObj pointer to NULL if false?
-    FtStateChange_SkipUpdateThrowException = (1 << 8),
+    FtStateChange_SkipUpdateThrowException = 1 << 8,
 
-    FtStateChange_PreserveSfx = (1 << 9),
+    FtStateChange_PreserveSfx = 1 << 9,
 
     /// Ignore Parasol state change
-    FtStateChange_SkipUpdateParasol = (1 << 10),
+    FtStateChange_SkipUpdateParasol = 1 << 10,
 
     /// Ignore rumble update?
-    FtStateChange_SkipUpdateRumble = (1 << 11),
+    FtStateChange_SkipUpdateRumble = 1 << 11,
 
-    FtStateChange_SkipUpdateColAnim = (1 << 12),
+    FtStateChange_SkipUpdateColAnim = 1 << 12,
 
     /// Keep respawn platform?
-    FtStateChange_PreserveAccessory = (1 << 13),
+    FtStateChange_PreserveAccessory = 1 << 13,
 
     /// Run all Subaction Events up to the current animation frame
-    FtStateChange_UpdateCmd = (1 << 14),
+    FtStateChange_UpdateCmd = 1 << 14,
 
-    FtStateChange_SkipUpdateNametagVis = (1 << 15),
+    FtStateChange_SkipUpdateNametagVis = 1 << 15,
 
     /// Assume this is for individual bones?
-    FtStateChange_PreserveColaNimPartHitStatus = (1 << 16),
+    FtStateChange_PreserveColaNimPartHitStatus = 1 << 16,
 
-    FtStateChange_PreserveSwordTrail = (1 << 17),
+    FtStateChange_PreserveSwordTrail = 1 << 17,
 
     /// Used by Ness during Up/Down Smash
-    FtStateChange_SkipUpdateItemVis = (1 << 18),
+    FtStateChange_SkipUpdateItemVis = 1 << 18,
 
     /// Skips updating bit 5 of #Fighter::x2222_flag?
-    FtStateChange_Unk_19 = (1 << 19),
+    FtStateChange_Unk_19 = 1 << 19,
 
-    FtStateChange_Unk_UpdatePhys = (1 << 20),
+    FtStateChange_Unk_UpdatePhys = 1 << 20,
 
     /// Sets anim rate to 0 and some other stuff
-    FtStateChange_FreezeState = (1 << 21),
+    FtStateChange_FreezeState = 1 << 21,
 
-    FtStateChange_SkipUpdateModelPartVis = (1 << 22),
-    FtStateChange_SkipUpdateMetalB = (1 << 23),
-    FtStateChange_Unk_24 = (1 << 24),
-    FtStateChange_SkipUpdateAttackCount = (1 << 25),
-    FtStateChange_SkipUpdateModelFlag = (1 << 26),
-    FtStateChange_Unk_27 = (1 << 27),
-    FtStateChange_SkipUpdateHitStunFlag = (1 << 28),
+    FtStateChange_SkipUpdateModelPartVis = 1 << 22,
+    FtStateChange_SkipUpdateMetalB = 1 << 23,
+    FtStateChange_Unk_24 = 1 << 24,
+    FtStateChange_SkipUpdateAttackCount = 1 << 25,
+    FtStateChange_SkipUpdateModelFlag = 1 << 26,
+    FtStateChange_Unk_27 = 1 << 27,
+    FtStateChange_SkipUpdateHitStunFlag = 1 << 28,
 
     /// Keeps current fighter animation?
-    FtStateChange_SkipUpdateAnim = (1 << 29),
+    FtStateChange_SkipUpdateAnim = 1 << 29,
 
-    FtStateChange_Unk_30 = (1 << 30),
+    FtStateChange_Unk_30 = 1 << 30,
 
     /// Unused?
-    FtStateChange_Unk_31 = (1 << 31),
+    FtStateChange_Unk_31 = 1 << 31,
 } Fighter_MotionStateChangeFlags;
 
 // Ledge Grab Macros
