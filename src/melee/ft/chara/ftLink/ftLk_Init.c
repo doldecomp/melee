@@ -36,7 +36,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     {
         -1,
         0,
-        FtMoveId_Zair * (1 << 24),
+        FtMoveId_Unk01 * (1 << 24),
         NULL,
         NULL,
         NULL,
@@ -46,7 +46,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     {
         -1,
         0,
-        FtMoveId_Zair * (1 << 24),
+        FtMoveId_Unk01 * (1 << 24),
         NULL,
         NULL,
         NULL,
@@ -216,7 +216,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     {
         312,
         ftLk_MF_Zair,
-        FtMoveId_Zair * (1 << 24),
+        FtMoveId_Unk01 * (1 << 24),
         ftCo_Zair_Anim,
         ftCo_Zair_IASA,
         ftCo_Zair_Phys,
@@ -226,7 +226,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     {
         313,
         ftLk_MF_ZairCatch,
-        FtMoveId_Zair * (1 << 24),
+        FtMoveId_Unk01 * (1 << 24),
         ftCo_ZairCatch_Anim,
         ftCo_ZairCatch_IASA,
         ftCo_ZairCatch_Phys,
@@ -311,7 +311,7 @@ void ftLk_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftLinkAttributes* link_attr = fp->ft_data->ext_attr;
     void** item_list = fp->ft_data->x48_items;
-    link_attr->x54 = lbMthp_8001E8F8(ftData_80085E50(fp, 0x48U));
+    link_attr->x54 = lbMthp_8001E8F8(ftData_80085E50(fp, 72));
     PUSH_ATTRS(fp, ftLinkAttributes);
 
     link_attr = fp->x2D4_specialAttributes;
@@ -415,5 +415,5 @@ void ftLk_800EB334(HSD_GObj* gobj)
         new_ground_vel = -fp->gr_vel;
     }
     fp->gr_vel = new_ground_vel;
-    ft_80088148(fp, 0x2716AU, 0x7FU, 0x40U);
+    ft_80088148(fp, 160106, 127, 64);
 }

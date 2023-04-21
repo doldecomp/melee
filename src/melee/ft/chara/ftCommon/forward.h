@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTCOMMON_FORWARD_H
 
 typedef enum ftCommon_MotionState {
+    ftCo_MS_None = -1,
     ftCo_MS_DeadDown,
     ftCo_MS_DeadLeft,
     ftCo_MS_DeadRight,
