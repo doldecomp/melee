@@ -2,15 +2,24 @@
 
 #include "ftLk_Init.h"
 
+#include "ftLk_SpecialHi.h"
+#include "ftLk_SpecialLw.h"
+#include "ftLk_SpecialN.h"
+#include "ftLk_SpecialS.h"
+#include "types.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCLink/ftCl_Init.h"
 #include "lb/lbmthp.h"
+
+#include <dolphin/mtx/types.h>
 
 MotionState ftLk_Init_MotionStateTable[] = {
     {
@@ -267,7 +276,7 @@ bool ftLk_800EAD64(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.lk.x2234) {
+    if (fp->fv.lk.x2234) {
         return true;
     }
 
@@ -282,13 +291,13 @@ void ftLk_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 1, 0);
     ftParts_80074A4C(gobj, 2, 0);
 
-    fp->ev.lk.x222C = 0;
-    fp->ev.lk.x2234 = 0;
-    fp->ev.lk.x2238 = 0;
-    fp->ev.lk.x223C = 0;
-    fp->ev.lk.x2240 = 0;
-    fp->ev.lk.x2238 = 0;
-    fp->ev.lk.x2244 = 0;
+    fp->fv.lk.x222C = 0;
+    fp->fv.lk.x2234 = 0;
+    fp->fv.lk.x2238 = 0;
+    fp->fv.lk.x223C = 0;
+    fp->fv.lk.x2240 = 0;
+    fp->fv.lk.x2238 = 0;
+    fp->fv.lk.x2244 = 0;
 }
 
 void ftLk_Init_OnLoadForCLink(Fighter* fp)
@@ -299,8 +308,8 @@ void ftLk_Init_OnLoadForCLink(Fighter* fp)
 void ftLk_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftLinkAttributes* link_attr = fp->x10C_ftData->ext_attr;
-    void** item_list = fp->x10C_ftData->x48_items;
+    ftLinkAttributes* link_attr = fp->ft_data->ext_attr;
+    void** item_list = fp->ft_data->x48_items;
     link_attr->x54 = lbMthp_8001E8F8(ftData_80085E50(fp, 0x48U));
     PUSH_ATTRS(fp, ftLinkAttributes);
 
@@ -395,15 +404,15 @@ void ftLk_800EB334(HSD_GObj* gobj)
     f32 new_ground_vel;
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftLinkAttributes* link_attr = fp->x10C_ftData->ext_attr;
+    ftLinkAttributes* link_attr = fp->ft_data->ext_attr;
 
     f32 resultf = ft_80092ED8(fp->x19A4, link_attr, link_attr->xD8);
-    fp->xEC_ground_vel = resultf * p_ftCommonData->x294;
+    fp->gr_vel = resultf * p_ftCommonData->x294;
     if (fp->x19AC < 0.0f) {
-        new_ground_vel = fp->xEC_ground_vel;
+        new_ground_vel = fp->gr_vel;
     } else {
-        new_ground_vel = -fp->xEC_ground_vel;
+        new_ground_vel = -fp->gr_vel;
     }
-    fp->xEC_ground_vel = new_ground_vel;
+    fp->gr_vel = new_ground_vel;
     ft_80088148(fp, 0x2716AU, 0x7FU, 0x40U);
 }

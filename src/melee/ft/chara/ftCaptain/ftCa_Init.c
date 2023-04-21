@@ -9,6 +9,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 MotionState ftCa_Init_MotionStateTable[] = {
@@ -280,8 +281,8 @@ void ftCa_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
-    fp->ev.ca.during_specials = 0;
-    fp->ev.ca.during_specials_start = false;
+    fp->fv.ca.during_specials = 0;
+    fp->fv.ca.during_specials_start = false;
 }
 
 void ftCa_Init_800E28C8(HSD_GObj* gobj)
@@ -312,17 +313,17 @@ void ftCa_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 
 void ftCa_Init_OnLoadForGanon(Fighter* fp)
 {
-    PUSH_ATTRS(fp, ftCaptainAttributes);
+    PUSH_ATTRS(fp, ftCaptain_DatAttrs);
 }
 
 void ftCa_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2224_flag.bits.b7 = true;
-    PUSH_ATTRS(fp, ftCaptainAttributes);
+    PUSH_ATTRS(fp, ftCaptain_DatAttrs);
 }
 
 void ftCa_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(gobj, ftCaptainAttributes);
+    COPY_ATTRS(gobj, ftCaptain_DatAttrs);
 }

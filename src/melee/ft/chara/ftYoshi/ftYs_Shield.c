@@ -1,3 +1,5 @@
+#include "it/forward.h"
+
 #include "ftYs_Shield.h"
 
 #include "ftYs_Init.h"
@@ -7,9 +9,11 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcoll.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 #include <stddef.h>
+#include <dolphin/mtx/types.h>
 
 char ftYs_Init_DatFilename[] = "PlYs.dat";
 char ftYs_Init_DataName[] = "ftDataYoshi";
@@ -65,7 +69,7 @@ static inline void spawnEffect(HSD_GObj* gobj)
     x1CC = &fp->x110_attr.x1CC;
     bone_idx = ftParts_8007500C(fp, 4);
     fp2 = GET_FIGHTER(gobj);
-    jobj = fp->x5E8_fighterBones[bone_idx].x0_jobj;
+    jobj = fp->ft_bones[bone_idx].x0_jobj;
 
     efAsync_Spawn(gobj, &fp2->x60C, 4U, 0x4CFU, jobj, x1CC);
 }
@@ -78,7 +82,7 @@ void ftYs_MS_341_Anim(HSD_GObj* gobj)
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->sv.ys.unk2.x0 += ftYs_Init_804D9A28;
+    fp->mv.ys.unk2.x0 += ftYs_Init_804D9A28;
     ft_80092BCC(gobj);
     if (ft_800925A4(gobj)) {
         spawnEffect(gobj);
@@ -201,12 +205,12 @@ void ftYs_ShieldHold_Anim(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->sv.ys.unk2.x0 += ftYs_Init_804D9A28;
+    fp->mv.ys.unk2.x0 += ftYs_Init_804D9A28;
     ft_80092BCC(gobj);
 
     if (ft_800925A4(gobj)) {
         spawnEffect(gobj);
-    } else if (fp->sv.ys.unk2.xC != 0 ||
+    } else if (fp->mv.ys.unk2.xC != 0 ||
                (!(fp->x221B_b0 & 1) && !(fp->x2218_flag.bits.b3)))
     {
         ft_80092BE8(gobj);
@@ -256,7 +260,7 @@ void ftYs_Shield_8012C49C(HSD_GObj* gobj)
             Fighter* fp1 = GET_FIGHTER(gobj);
 
             /// @todo Why is this still using @c fp0?
-            HSD_JObj* jobj = fp0->x5E8_fighterBones[bone_idx].x0_jobj;
+            HSD_JObj* jobj = fp0->ft_bones[bone_idx].x0_jobj;
 
             efAsync_Spawn(gobj, &fp1->x60C, 4U, 0x4CF, jobj, x1CC);
         }
@@ -271,7 +275,7 @@ void ftYs_ShieldRelease_Anim(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->sv.ys.unk2.x0 = fp->sv.ys.unk2.x0 + ftYs_Init_804D9A28;
+    fp->mv.ys.unk2.x0 = fp->mv.ys.unk2.x0 + ftYs_Init_804D9A28;
 
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         ft_8008A2BC(gobj);
@@ -422,7 +426,7 @@ void ftYs_ShieldDamage_Anim(HSD_GObj* gobj)
 
     ft_80093BC0(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (fp->sv.ys.unk2.xC) {
+        if (fp->mv.ys.unk2.xC) {
             ft_80092BE8(gobj);
         } else {
             ft_800928CC(gobj);
@@ -482,9 +486,9 @@ void ftYs_Shield_8012C850(HSD_GObj* gobj)
     fp->x221C_flag.bits.b1 = true;
     fp->x221C_flag.bits.b2 = true;
 
-    fp->sv.ys.unk2.x14 = p_ftCommonData->x2A4;
+    fp->mv.ys.unk2.x14 = p_ftCommonData->x2A4;
     temp_r5 = p_ftCommonData;
-    fp->sv.ys.unk2.x18 = temp_r5->x2B4;
+    fp->mv.ys.unk2.x18 = temp_r5->x2B4;
     ft_8009370C(gobj, ftYs_Shield_8012CACC, temp_r5);
 }
 

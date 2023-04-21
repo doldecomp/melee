@@ -1,12 +1,15 @@
 #include "ft/forward.h"
 
-#include "fticeclimber2_nana.h"
+#include "ftNn_Init.h"
 
 #include "ft/fighter.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "ftPopo/fticeclimber.h"
+#include "ftPopo/ftPp_1211.h"
+#include "ftPopo/ftPp_Init.h"
+#include "ftPopo/ftPp_SpecialS.h"
+#include "ftPopo/types.h"
 
 #include <dolphin/mtx/types.h>
 
@@ -345,12 +348,12 @@ void ftNn_Init_OnDeath(HSD_GObj* gobj)
     fp->dmg.x18B0 = attr->xC8;
     ftParts_80074A4C(gobj, 0U, 0);
     ftParts_80074A4C(gobj, 1U, 0);
-    fp->ev.nn.x2234 = 0;
-    fp->ev.nn.x222C = 0;
-    fp->ev.nn.x2230.bits.b0 = 0;
-    fp->ev.nn.x2238 = 0;
-    fp->ev.nn.x224C = 0;
-    fp->ev.nn.x2250 = ftNn_Init_804D9898;
+    fp->fv.nn.x2234 = 0;
+    fp->fv.nn.x222C = 0;
+    fp->fv.nn.x2230.bits.b0 = 0;
+    fp->fv.nn.x2238 = 0;
+    fp->fv.nn.x224C = 0;
+    fp->fv.nn.x2250 = ftNn_Init_804D9898;
 }
 
 /* static */ void ftNn_Init_801238E4(HSD_GObj* gobj);

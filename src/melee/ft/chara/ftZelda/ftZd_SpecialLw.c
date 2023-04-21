@@ -2,18 +2,19 @@
 
 #include "ftZd_SpecialLw.h"
 
-#include "ftZd_Init.h"
-
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 #include "ftSeak/ftSk_SpecialLw.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+
+#include <dolphin/mtx/types.h>
 
 // 8013ADB4 - 8013AE30 (0x7C bytes)
 // https://decomp.me/scratch/LbMVE
@@ -23,7 +24,7 @@ void ftZd_SpecialLw_8013ADB4(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
-        efSync_Spawn(0x4FC, gobj, fp->x5E8_fighterBones[0x68].x0_jobj);
+        efSync_Spawn(0x4FC, gobj, fp->ft_bones[0x68].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
     }
 
@@ -40,7 +41,7 @@ void ftZd_SpecialLw_8013AE30(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
-        efSync_Spawn(0x4FD, gobj, fp->x5E8_fighterBones[4].x0_jobj);
+        efSync_Spawn(0x4FD, gobj, fp->ft_bones[4].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
     }
 
@@ -64,11 +65,11 @@ void ftZd_SpecialLw_8013AEAC(HSD_GObj* gobj)
 
 // Helper function for both ftZd_SpecialLw_Enter /
 // ftZd_SpecialAirLw_Enter
-void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* gobj)
+static void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* gobj)
 {
     Vec3 sp20;
-    Fighter* fp;                   // r31
-    ftZeldaAttributes* attributes; // r3
+    Fighter* fp;                  // r31
+    ftZelda_DatAttrs* attributes; // r3
 
     fp = getFighterPlus(gobj);
     attributes = getFtSpecialAttrs(fp);
@@ -76,9 +77,9 @@ void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->x80_self_vel.x = fp->x80_self_vel.x / attributes->x70;
     fp->x80_self_vel.y = fp->x80_self_vel.y / attributes->x74;
-    fp->xEC_ground_vel = fp->xEC_ground_vel / attributes->x70;
+    fp->gr_vel = fp->gr_vel / attributes->x70;
 
-    lb_8000B1CC(fp->x5E8_fighterBones[0].x0_jobj, NULL, &sp20);
+    lb_8000B1CC(fp->ft_bones[0].x0_jobj, NULL, &sp20);
     lb_800119DC(&sp20, 0x78, 0.4, 0.003, 60 * M_PI / 180);
 
     fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialLw_8013ADB4;
@@ -154,7 +155,7 @@ void ftZd_SpecialLw_Phys(HSD_GObj* gobj)
 void ftZd_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
     Fighter* fp;
-    ftZeldaAttributes* attributes;
+    ftZelda_DatAttrs* attributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -247,7 +248,7 @@ void ftZd_SpecialLwEnd_Phys(HSD_GObj* gobj)
 void ftZd_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
 {
     Fighter* fp;
-    ftZeldaAttributes* attributes;
+    ftZelda_DatAttrs* attributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -311,7 +312,7 @@ void ftZd_SpecialLw_8013B46C(HSD_GObj* gobj)
 void ftZd_SpecialLw_8013B4D8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftZeldaAttributes* sa = fp->x2D4_specialAttributes;
+    ftZelda_DatAttrs* sa = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -320,7 +321,7 @@ void ftZd_SpecialLw_8013B4D8(HSD_GObj* gobj)
 
     {
         enum_t msid;
-        if (fp->xE0_ground_or_air == 0) {
+        if (fp->ground_or_air == 0) {
             msid = 0x164;
         } else {
             msid = 0x166;
@@ -339,10 +340,10 @@ s32 ftZd_SpecialLw_8013B540(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    actionStateIndex = fp->action_id;
+    actionStateIndex = fp->motion_id;
 
     if (((actionStateIndex == 0x158) || (actionStateIndex == 0x15B)) &&
-        (fp->ev.zd.x222C != 0U))
+        (fp->fv.zd.x222C != 0U))
     {
         return 1;
     }
@@ -356,8 +357,8 @@ bool ftZd_SpecialLw_8013B574(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.zd.x222C != 0) {
-        switch (fp->action_id) {
+    if (fp->fv.zd.x222C != 0) {
+        switch (fp->motion_id) {
         case 0x15C:
         case 0x159:
             if (fp->x2204_ftcmd_var1 == 1) {
@@ -378,8 +379,8 @@ void ftZd_SpecialLw_8013B5C4(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    if (fp->ev.zd.x222C != 0) {
-        fp->ev.zd.x222C = 0;
+    if (fp->fv.zd.x222C != 0) {
+        fp->fv.zd.x222C = 0;
     }
 
     fp->cb.x21E4_callback_OnDeath2 = 0;
@@ -392,9 +393,9 @@ void ftZd_SpecialLw_8013B5EC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.zd.x222C != NULL) {
-        it_802C3D44(fp->ev.zd.x222C);
-        fp->ev.zd.x222C = NULL;
+    if (fp->fv.zd.x222C != NULL) {
+        it_802C3D44(fp->fv.zd.x222C);
+        fp->fv.zd.x222C = NULL;
     }
 
     fp->cb.x21E4_callback_OnDeath2 = 0;

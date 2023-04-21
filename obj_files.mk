@@ -104,8 +104,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_MS_341.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_MS_342.c.o\
     $(BUILD_DIR)/src/melee/ft/ftwalkcommon.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_MS_345.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_Unk05.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_MS_345_0.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_MS_345_1.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_MS_347.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_MS_348.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_MS_346.c.o\

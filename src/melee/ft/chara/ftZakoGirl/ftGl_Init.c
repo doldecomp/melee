@@ -1,4 +1,4 @@
-#include "ft/chara/ftZakoGirl/ftGl_Init.h"
+#include "ftZakoGirl/ftGl_Init.h"
 
 #include "ft/ftparts.h"
 

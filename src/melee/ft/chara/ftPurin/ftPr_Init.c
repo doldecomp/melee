@@ -10,7 +10,9 @@
 #include "ft/ftcamera.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
+#include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "gm/gm_1601.h"
 #include "gr/grstadium.h"
@@ -18,6 +20,7 @@
 #include "mp/mplib.h"
 
 #include <trigf.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/gobj.h>
 
 MotionState ftPr_Init_MotionStateTable[] = {
@@ -421,7 +424,7 @@ void ftPr_Init_8013C360(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (ftPr_Init_803D05B4[fp->x619_costume_id]) {
-        UNK_T* items = fp->x10C_ftData->x48_items;
+        UNK_T* items = fp->ft_data->x48_items;
         UNK_T* items_shifted = items[1];
         if (!joints[fp->x619_costume_id]) {
             UnkCostumeStruct* costume_list =
@@ -431,32 +434,32 @@ void ftPr_Init_8013C360(HSD_GObj* gobj)
                 ftPr_Init_803D05B4[fp->x619_costume_id]);
         }
 
-        fp->ev.pr.x2244 = HSD_ObjAlloc(&Fighter_80459080);
+        fp->fv.pr.x2244 = HSD_ObjAlloc(&Fighter_80459080);
         ftParts_80074148();
-        fp->ev.pr.x223C = HSD_JObjLoadJoint(joints[fp->x619_costume_id]);
+        fp->fv.pr.x223C = HSD_JObjLoadJoint(joints[fp->x619_costume_id]);
         fp->x2225_b2 = true;
         ftParts_80074170();
-        ftParts_80075650(gobj, fp->ev.pr.x223C, &fp->ev.pr.x2240);
+        ftParts_80075650(gobj, fp->fv.pr.x223C, &fp->fv.pr.x2240);
 
-        ftParts_8007487C(&items_shifted[1], &fp->ev.pr.x2248,
-                         fp->x619_costume_id, &fp->ev.pr.x2240,
-                         &fp->ev.pr.x2240);
+        ftParts_8007487C(&items_shifted[1], &fp->fv.pr.x2248,
+                         fp->x619_costume_id, &fp->fv.pr.x2240,
+                         &fp->fv.pr.x2240);
         ft_8009DC54(fp);
         return;
     }
 
-    fp->ev.pr.x223C = 0;
+    fp->fv.pr.x223C = 0;
 }
 
 void ftPr_Init_8013C494(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.pr.x223C != NULL) {
-        HSD_JObjRemoveAll(fp->ev.pr.x223C);
-        fp->ev.pr.x223C = NULL;
-        HSD_ObjFree(&Fighter_80459080, fp->ev.pr.x2244);
-        fp->ev.pr.x2244 = NULL;
+    if (fp->fv.pr.x223C != NULL) {
+        HSD_JObjRemoveAll(fp->fv.pr.x223C);
+        fp->fv.pr.x223C = NULL;
+        HSD_ObjFree(&Fighter_80459080, fp->fv.pr.x2244);
+        fp->fv.pr.x2244 = NULL;
     }
 }
 
@@ -469,28 +472,28 @@ void ftPr_Init_UnkMtxFunc0(HSD_GObj* gobj, int arg1, Mtx vmtx)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.pr.x223C && fp->x2225_b2) {
+    if (fp->fv.pr.x223C && fp->x2225_b2) {
         Mtx* mtx;
         HSD_JObj* jobj;
-        HSD_JObj* bone_jobj = fp->x5E8_fighterBones[6].x0_jobj;
-        HSD_JObjGetMtx(fp->x5E8_fighterBones[6].x0_jobj);
+        HSD_JObj* bone_jobj = fp->ft_bones[6].x0_jobj;
+        HSD_JObjGetMtx(fp->ft_bones[6].x0_jobj);
         mtx = (0, &bone_jobj->mtx);
-        jobj = fp->ev.pr.x223C;
-        HSD_JObjCopyMtx(fp->ev.pr.x223C, *mtx);
+        jobj = fp->fv.pr.x223C;
+        HSD_JObjCopyMtx(fp->fv.pr.x223C, *mtx);
         jobj->flags |= 0x03800000;
         HSD_JObjSetMtxDirty(jobj);
 
-        HSD_JObjDispAll(fp->ev.pr.x223C, vmtx, HSD_GObj_80390EB8(arg1), 0);
+        HSD_JObjDispAll(fp->fv.pr.x223C, vmtx, HSD_GObj_80390EB8(arg1), 0);
     }
 }
 
 void ftPr_Init_UnkIntBoolFunc0(Fighter* fp, int arg1, bool arg2)
 {
-    if (fp->ev.pr.x223C) {
+    if (fp->fv.pr.x223C) {
         if (arg2) {
-            ftParts_80074CA0(&fp->ev.pr.x2248, arg1, &fp->ev.pr.x2240);
+            ftParts_80074CA0(&fp->fv.pr.x2248, arg1, &fp->fv.pr.x2240);
         } else {
-            ftParts_80074D7C(&fp->ev.pr.x2248, arg1, &fp->ev.pr.x2240);
+            ftParts_80074D7C(&fp->fv.pr.x2248, arg1, &fp->fv.pr.x2240);
         }
     }
 }
@@ -499,8 +502,8 @@ void* ftPr_Init_UnkMotionStates6(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.pr.x223C) {
-        return fp->ev.pr.x223C;
+    if (fp->fv.pr.x223C) {
+        return fp->fv.pr.x223C;
     }
 
     return gobj;
@@ -581,7 +584,7 @@ void ftPr_Init_8013C94C(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
 
     if (!fp->x2219_flag.bits.b0) {
-        efSync_Spawn(1238, gobj, fp->x5E8_fighterBones[5].x0_jobj);
+        efSync_Spawn(1238, gobj, fp->ft_bones[5].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 
@@ -594,7 +597,7 @@ extern f32 const ftPr_Init_804D9C10;
 extern f32 const ftPr_Init_804D9C14;
 extern f32 const ftPr_Init_804D9C18;
 
-inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
+static inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -603,9 +606,9 @@ inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftPr_Init_8013C94C;
 
     if (gm_8016B1D8() && grStadium_801D4FF8(fp->xC_playerID)) {
-        fp->sv.pr.specialhi.x0 = true;
+        fp->mv.pr.specialhi.x0 = true;
     } else {
-        fp->sv.pr.specialhi.x0 = false;
+        fp->mv.pr.specialhi.x0 = false;
     }
 }
 

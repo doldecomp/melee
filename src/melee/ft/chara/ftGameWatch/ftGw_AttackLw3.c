@@ -1,10 +1,17 @@
+#include "forward.h"
+
+#include "ftGw_AttackLw3.h"
+
 #include "ftGw_Init.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
+
+#include <dolphin/mtx/types.h>
 
 static void ftGw_AttackLw3_ItemManholeExitHitlag(HSD_GObj*);
 static void ftGw_AttackLw3_ItemManholeEnterHitlag(HSD_GObj*);
@@ -23,19 +30,19 @@ void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj)
 
     Fighter* fp = getFighter(gobj);
 
-    if (fp->ev.gw.x2250_manholeGObj2 == NULL) {
-        lb_8000B1CC(fp->x5E8_fighterBones[0x20].x0_jobj, NULL, &sp10);
+    if (fp->fv.gw.x2250_manholeGObj2 == NULL) {
+        lb_8000B1CC(fp->ft_bones[0x20].x0_jobj, NULL, &sp10);
         manholeGObj = fp->x1974_heldItem;
         if (manholeGObj != NULL) {
-            fp->ev.gw.x2248_manholeGObj = manholeGObj;
+            fp->fv.gw.x2248_manholeGObj = manholeGObj;
             it_8026BB44(fp->x1974_heldItem);
             it_8026B724(fp->x1974_heldItem);
             ftCommon_8007E6DC(gobj, fp->x1974_heldItem, 1);
         }
-        fp->ev.gw.x2250_manholeGObj2 =
+        fp->fv.gw.x2250_manholeGObj2 =
             it_802C65E4(gobj, &sp10, 0x20, fp->facing_dir);
     }
-    if (fp->ev.gw.x2250_manholeGObj2 != NULL) {
+    if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
         if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
         }
@@ -56,11 +63,11 @@ void ftGw_AttackLw3_ItemManholeRemove(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftGw_AttackLw3_ItemManholeExitHitlag(gobj);
-    fp->ev.gw.x2250_manholeGObj2 = NULL;
-    manholeGObj = fp->ev.gw.x2248_manholeGObj;
+    fp->fv.gw.x2250_manholeGObj2 = NULL;
+    manholeGObj = fp->fv.gw.x2248_manholeGObj;
     if (manholeGObj != NULL) {
         fp->x1974_heldItem = manholeGObj;
-        fp->ev.gw.x2248_manholeGObj = NULL;
+        fp->fv.gw.x2248_manholeGObj = NULL;
         it_8026BB20(fp->x1974_heldItem);
         it_8026B73C(fp->x1974_heldItem);
         ft_80094818(gobj, 1);
@@ -78,8 +85,8 @@ void ftGw_AttackLw3_ItemManholeOnDamage(HSD_GObj* gobj)
 
     Fighter* fp = getFighter(gobj);
 
-    if (fp->ev.gw.x2250_manholeGObj2 != NULL) {
-        it_802C6718(fp->ev.gw.x2250_manholeGObj2);
+    if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
+        it_802C6718(fp->fv.gw.x2250_manholeGObj2);
         ftGw_AttackLw3_ItemManholeRemove(gobj);
     }
 }
@@ -89,8 +96,8 @@ void ftGw_AttackLw3_ItemManholeOnDamage(HSD_GObj* gobj)
 static void ftGw_AttackLw3_ItemManholeEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ev.gw.x2250_manholeGObj2 != NULL) {
-        it_802C6764(fp->ev.gw.x2250_manholeGObj2);
+    if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
+        it_802C6764(fp->fv.gw.x2250_manholeGObj2);
     }
 }
 
@@ -98,8 +105,8 @@ static void ftGw_AttackLw3_ItemManholeEnterHitlag(HSD_GObj* gobj)
 static void ftGw_AttackLw3_ItemManholeExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ev.gw.x2250_manholeGObj2 != NULL) {
-        it_802C6784(fp->ev.gw.x2250_manholeGObj2);
+    if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
+        it_802C6784(fp->fv.gw.x2250_manholeGObj2);
     }
 }
 
@@ -109,7 +116,7 @@ static void ftGw_AttackLw3_ItemManholeExitHitlag(HSD_GObj* gobj)
 bool ftGw_AttackLw3_ItemCheckManholeRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id == AS_GAMEWATCH_ATTACKLW3) {
+    if (fp->motion_id == ftGw_MS_AttackLw3) {
         return false;
     }
     return true;
@@ -124,8 +131,8 @@ void ftGw_AttackLw3_Enter(HSD_GObj* gobj)
 
     if (ft_80094790(gobj) == false) {
         fp->x2218_flag.bits.b0 = 0;
-        Fighter_ChangeMotionState(gobj, AS_GAMEWATCH_ATTACKLW3, 0, NULL, 0.0f,
-                                  1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, ftGw_MS_AttackLw3, 0, NULL, 0.0f, 1.0f,
+                                  0.0f);
         ftAnim_8006EBA4(gobj);
         fp->cb.x21BC_callback_Accessory4 = ftGw_AttackLw3_ItemManholeSetup;
     }

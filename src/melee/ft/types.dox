@@ -1,4 +1,4 @@
-/** @var Fighter::ev
+/** @var Fighter::fv
  * A different struct for each fighter to store non-transient variables.
  * @see @ref glossary_ev
  */

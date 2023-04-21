@@ -1,11 +1,15 @@
-#include "ft/chara/ftFox/ftFx_Appeal.h"
+#include "forward.h"
 
-#include "ft/chara/ftFox/ftFx_Init.h"
+#include "ftFx_Appeal.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/inlines.h"
 #include "gr/grcorneria.h"
 #include "it/it_26B1.h"
 #include "pl/pl_0371.h"
+
+#define FTFOX_APPEALS_ATTACKID 0x72
 
 bool ftFx_AppealS_CheckIfUsed(Fighter* fp)
 {
@@ -55,12 +59,12 @@ bool ftFx_AppealS_CheckInput(HSD_GObj* gobj)
     return false;
 }
 
-f32 setFloatOrder(void)
+static f32 setFloatOrder(void)
 {
     return 0.0f;
 }
 
-f32 setFloatOrder2(void)
+static f32 setFloatOrder2(void)
 {
     return 1.0f;
 }
@@ -71,8 +75,8 @@ static inline bool ftFox_AppealS_GetLR(f32 x1, f32 x2)
 }
 
 static s32 ASID_AppealS[2][3] = {
-    { AS_FOX_APPEALS_START_R, AS_FOX_APPEALS_R, AS_FOX_APPEALS_END_R },
-    { AS_FOX_APPEALS_START_L, AS_FOX_APPEALS_L, AS_FOX_APPEALS_END_L }
+    { ftFx_MS_AppealRStart, ftFx_MS_AppealR, ftFx_MS_AppealREnd },
+    { ftFx_MS_AppealLStart, ftFx_MS_AppealL, ftFx_MS_AppealLEnd }
 };
 
 void ftFx_AppealS_Enter(HSD_GObj* gobj)
@@ -82,14 +86,14 @@ void ftFx_AppealS_Enter(HSD_GObj* gobj)
     s32 animCount;
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->sv.fx.AppealS.animCount = 0;
+    fp->mv.fx.AppealS.animCount = 0;
     facingDir = ftFox_AppealS_GetLR(1.0f, fp->facing_dir);
 
-    fp->sv.fx.AppealS.facingDir = facingDir;
+    fp->mv.fx.AppealS.facingDir = facingDir;
     fp->x2210_ThrowFlags.flags = 0;
 
-    actionDir = fp->sv.fx.AppealS.facingDir;
-    animCount = fp->sv.fx.AppealS.animCount;
+    actionDir = fp->mv.fx.AppealS.facingDir;
+    animCount = fp->mv.fx.AppealS.animCount;
 
     Fighter_ChangeMotionState(gobj, ASID_AppealS[actionDir][animCount], 0,
                               NULL, 0.0f, 1.0f, 0.0f);
@@ -136,15 +140,15 @@ void ftFx_AppealS_Anim(HSD_GObj* gobj)
         }
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        fp->sv.fx.AppealS.animCount++;
-        if ((s32) fp->sv.fx.AppealS.animCount >= 3) {
+        fp->mv.fx.AppealS.animCount++;
+        if ((s32) fp->mv.fx.AppealS.animCount >= 3) {
             ft_8008A324(gobj);
             return;
         }
 
         Fighter_ChangeMotionState(gobj,
-                                  ASID_AppealS[fp->sv.fx.AppealS.facingDir]
-                                              [fp->sv.fx.AppealS.animCount],
+                                  ASID_AppealS[fp->mv.fx.AppealS.facingDir]
+                                              [fp->mv.fx.AppealS.animCount],
                                   0, NULL, 0.0f, 1.0f, 0.0f);
     }
 }

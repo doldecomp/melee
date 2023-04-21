@@ -5,6 +5,10 @@
 
 #include <dolphin/mtx/types.h>
 
+struct ftPikachu_FighterVars {
+    char filler0[0x100];
+};
+
 typedef struct _ftPikachuAttributes {
     f32 x0;
     f32 x4;
@@ -67,7 +71,7 @@ typedef struct _ftPikachuAttributes {
     f32 height_attributes[6];
 } ftPikachuAttributes;
 
-union ftPikachu_StateVars {
+union ftPikachu_MotionVars {
     /// @todo Proper state name.
     struct ftPikachu_State2Vars {
         s32 x0;

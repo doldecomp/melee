@@ -1,89 +1,30 @@
-#ifndef _ftdrmario_h_
-#define _ftdrmario_h_
+#ifndef GALE01_14949C
+#define GALE01_14949C
 
-#include <platform.h>
+#include <baselib/forward.h>
 
-#include "ft/fighter.h"
+#include "ft/types.h"
 
-#include <baselib/gobj.h>
-
-typedef struct _ftDrMarioAttributes {
-    u8 pad_x0[4];
-    u32 x4;
-    u8 pad_x8[4];
-    u32 xC;
-    u8 pad_x10[4];
-    u32 x14;
-} ftDrMarioAttributes;
-
-extern MotionState ftDr_Init_MotionStateTable[];
-extern char ftDr_Init_DatFilename[];
-extern char ftDr_Init_DataName[];
-extern Fighter_CostumeStrings ftDr_Init_CostumeStrings[];
-extern char ftDr_Init_AnimDatFilename[];
-extern Fighter_DemoStrings ftDr_Init_DemoMotionFilenames;
-
-void ftDr_Init_OnDeath(HSD_GObj*);
-void ftDr_Init_OnLoad(HSD_GObj*);
-void ftDr_Init_80149540(HSD_GObj*);
-void ftDr_Init_OnItemPickup(HSD_GObj*, bool);
-void ftDr_Init_OnItemInvisible(HSD_GObj*);
-void ftDr_Init_OnItemVisible(HSD_GObj*);
-void ftDr_Init_OnItemDrop(HSD_GObj*, bool);
-void ftDr_Init_LoadSpecialAttrs(HSD_GObj*);
-void ftDr_Init_OnKnockbackEnter(HSD_GObj*);
-void ftDr_Init_OnKnockbackExit(HSD_GObj*);
-void ftDr_Init_801497CC(HSD_GObj*);
-bool ftDr_Init_80149844(HSD_GObj*);
-void ftDr_Init_801498A0(HSD_GObj*);
-u32 ftDr_Init_801498EC(HSD_GObj*);
-void ftDr_Init_80149910(HSD_GObj*);
-
-// ftDr_Appeal.c
-void ftDr_Appeal_Anim(HSD_GObj*);
-void ftDr_Appeal_IASA(HSD_GObj*);
-void ftDr_Appeal_Phys(HSD_GObj*);
-void ftDr_Appeal_Coll(HSD_GObj*);
-
-void ftDr_Appeal_Anim(HSD_GObj*);
-void ftDr_Appeal_IASA(HSD_GObj*);
-void ftDr_Appeal_Phys(HSD_GObj*);
-void ftDr_Appeal_Coll(HSD_GObj*);
-void ftDr_Appeal_Anim(HSD_GObj*);
-void ftDr_Appeal_IASA(HSD_GObj*);
-void ftDr_Appeal_Phys(HSD_GObj*);
-void ftDr_Appeal_Coll(HSD_GObj*);
-void ftMr_SpecialN_Anim(HSD_GObj*);
-void ftMr_SpecialN_IASA(HSD_GObj*);
-void ftMr_SpecialN_Phys(HSD_GObj*);
-void ftMr_SpecialN_Coll(HSD_GObj*);
-void ftMr_SpecialAirN_Anim(HSD_GObj*);
-void ftMr_SpecialAirN_IASA(HSD_GObj*);
-void ftMr_SpecialAirN_Phys(HSD_GObj*);
-void ftMr_SpecialAirN_Coll(HSD_GObj*);
-void ftMr_SpecialS_Anim(HSD_GObj*);
-void ftMr_SpecialS_IASA(HSD_GObj*);
-void ftMr_SpecialS_Phys(HSD_GObj*);
-void ftMr_SpecialS_Coll(HSD_GObj*);
-void ftMr_SpecialAirS_Anim(HSD_GObj*);
-void ftMr_SpecialAirS_IASA(HSD_GObj*);
-void ftMr_SpecialAirS_Phys(HSD_GObj*);
-void ftMr_SpecialAirS_Coll(HSD_GObj*);
-void ftMr_SpecialHi_Anim(HSD_GObj*);
-void ftMr_SpecialHi_IASA(HSD_GObj*);
-void ftMr_SpecialHi_Phys(HSD_GObj*);
-void ftMr_SpecialHi_Coll(HSD_GObj*);
-void ftMr_SpecialAirHi_Anim(HSD_GObj*);
-void ftMr_SpecialAirHi_IASA(HSD_GObj*);
-void ftMr_SpecialAirHi_Phys(HSD_GObj*);
-void ftMr_SpecialAirHi_Coll(HSD_GObj*);
-void ftMr_SpecialLw_Anim(HSD_GObj*);
-void ftMr_SpecialLw_IASA(HSD_GObj*);
-void ftMr_SpecialLw_Phys(HSD_GObj*);
-void ftMr_SpecialLw_Coll(HSD_GObj*);
-void ftMr_SpecialAirLw_Anim(HSD_GObj*);
-void ftMr_SpecialAirLw_IASA(HSD_GObj*);
-void ftMr_SpecialAirLw_Phys(HSD_GObj*);
-void ftMr_SpecialAirLw_Coll(HSD_GObj*);
+/* 14949C */ void ftDr_Init_OnDeath(HSD_GObj* gobj);
+/* 1494E4 */ void ftDr_Init_OnLoad(HSD_GObj* gobj);
+/* 149540 */ void ftDr_Init_80149540(HSD_GObj* gobj);
+/* 149560 */ void ftDr_Init_OnItemPickup(HSD_GObj* gobj, bool);
+/* 149640 */ void ftDr_Init_OnItemInvisible(HSD_GObj* gobj);
+/* 149688 */ void ftDr_Init_OnItemVisible(HSD_GObj* gobj);
+/* 1496D0 */ void ftDr_Init_OnItemDrop(HSD_GObj* gobj, bool);
+/* 149724 */ void ftDr_Init_LoadSpecialAttrs(HSD_GObj* gobj);
+/* 149744 */ void ftDr_Init_OnKnockbackEnter(HSD_GObj* gobj);
+/* 149788 */ void ftDr_Init_OnKnockbackExit(HSD_GObj* gobj);
+/* 1497CC */ void ftDr_Init_801497CC(HSD_GObj* gobj);
+/* 149844 */ bool ftDr_Init_80149844(HSD_GObj* gobj);
+/* 1498A0 */ void ftDr_Init_801498A0(HSD_GObj* gobj);
+/* 1498EC */ u32 ftDr_Init_801498EC(HSD_GObj* gobj);
+/* 149910 */ void ftDr_Init_80149910(HSD_GObj* gobj);
+/* 3D1498 */ extern MotionState ftDr_Init_MotionStateTable[];
+/* 3D15D8 */ extern Fighter_CostumeStrings ftDr_Init_CostumeStrings[];
+/* 3D15E4 */ extern char ftDr_Init_DatFilename[];
+/* 3D1770 */ extern char ftDr_Init_AnimDatFilename[];
+/* 3D17FC */ extern Fighter_DemoStrings ftDr_Init_DemoMotionFilenames;
+/* 3D180C */ extern char ftDr_Init_DataName[];
 
 #endif

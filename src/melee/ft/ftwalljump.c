@@ -2,9 +2,11 @@
 
 #include "fighter.h"
 #include "ft_0877.h"
+#include "inlines.h"
 
 #include "mp/mplib.h"
 
+#include <dolphin/mtx/types.h>
 #include <baselib/gobj.h>
 
 static int const max_input_frames = 254;
@@ -75,7 +77,7 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                     // not sure what this computes, I guess it checks if we are
                     // close to the wall and move towards it with sufficent
                     // speed
-                    f32 x_diff = fp0->xC8_pos_delta.x - wall_pos.x;
+                    f32 x_diff = fp0->pos_delta.x - wall_pos.x;
                     x_diff = x_diff < 0 ? -x_diff : x_diff;
 
                     if (x_diff > fp0->x110_attr.x258) {
@@ -103,8 +105,8 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                 fp0->x670_timer_lstick_tilt_x < p_ftCommonData->x770)
             {
                 // do a walljump!
-                ft_800C1E64(gobj, ASID_PASSIVEWALLJUMP, p_ftCommonData->x774,
-                            fp0->x1969_walljumpUsed,
+                ft_800C1E64(gobj, ftCo_MS_PassiveWallJump,
+                            p_ftCommonData->x774, fp0->x1969_walljumpUsed,
                             fp0->x2110_walljumpWallSide);
 
                 fp0->x210C_walljumpInputTimer = max_input_frames;

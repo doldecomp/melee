@@ -3,8 +3,11 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCaptain/ftCa_Init.h"
+#include "ftCaptain/ftCa_SpecialHi.h"
+#include "ftCaptain/ftCa_SpecialLw.h"
 #include "ftCaptain/ftCa_SpecialN.h"
 #include "ftCaptain/ftCa_SpecialS.h"
 
@@ -275,8 +278,8 @@ void ftGn_Init_OnDeath(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, -1);
-    fp->ev.gn.during_specials = false;
-    fp->ev.gn.during_specials_start = false;
+    fp->fv.gn.during_specials = false;
+    fp->fv.gn.during_specials_start = false;
 }
 
 void ftGn_Init_OnItemPickup(HSD_GObj* gobj, bool bool)

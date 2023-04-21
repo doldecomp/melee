@@ -1,8 +1,9 @@
 #include "ft/ft_07C1.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_0877.h"
-#include "ft/ftcoll.h"
+#include "fighter.h"
+#include "ft_0877.h"
+#include "ftcoll.h"
+
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 

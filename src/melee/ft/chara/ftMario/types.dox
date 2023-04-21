@@ -1,0 +1,4 @@
+/** @var f32 ftMario_DatAttrs::ftMario_SpecialLw_DatAttrs::vel_y
+ * Vertical momentum from inital grounded B-tap
+ * @at{0} @sz{4}
+ */

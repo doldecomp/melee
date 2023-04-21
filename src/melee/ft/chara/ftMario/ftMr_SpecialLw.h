@@ -1,16 +1,17 @@
-#ifndef MELEE_FT_CHARA_FTMARIO_FTMARIO_SPECIALLW_H
-#define MELEE_FT_CHARA_FTMARIO_FTMARIO_SPECIALLW_H
+#ifndef GALE01_0E207C
+#define GALE01_0E207C
 
-#include <platform.h>
 #include <baselib/forward.h>
 
-void ftMario_SpecialLw_SetNULL(HSD_GObj* gobj);
-void _ftMario_800E23E4_800E25C4_helper_0(HSD_GObj* gobj);
-void ftMario_SpecialLw_SetGFX(HSD_GObj* gobj);
-void _ftMario_800E25C4_800E2778_helper(HSD_GObj* gobj);
-void _ftMario_800E2778_helper(HSD_GObj* gobj);
-void ftMario_SpecialLw_SetCall(HSD_GObj* gobj);
-void _ftMario_800E207C_800E2194_helper(HSD_GObj* gobj);
-void ftMario_SpecialLw_SetVar(HSD_GObj* gobj);
+/* 0E207C */ void ftMr_SpecialLw_Enter(HSD_GObj* gobj);
+/* 0E2194 */ void ftMr_SpecialAirLw_Enter(HSD_GObj* gobj);
+/* 0E22BC */ void ftMr_SpecialLw_Anim(HSD_GObj* gobj);
+/* 0E2308 */ void ftMr_SpecialAirLw_Anim(HSD_GObj* gobj);
+/* 0E23DC */ void ftMr_SpecialLw_IASA(HSD_GObj* gobj);
+/* 0E23E0 */ void ftMr_SpecialAirLw_IASA(HSD_GObj* gobj);
+/* 0E23E4 */ void ftMr_SpecialLw_Phys(HSD_GObj* gobj);
+/* 0E2508 */ void ftMr_SpecialAirLw_Phys(HSD_GObj* gobj);
+/* 0E25C4 */ void ftMr_SpecialLw_Coll(HSD_GObj* gobj);
+/* 0E2778 */ void ftMr_SpecialAirLw_Coll(HSD_GObj* gobj);
 
 #endif

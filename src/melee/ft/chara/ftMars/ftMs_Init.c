@@ -1,11 +1,17 @@
 #include "ftMs_Init.h"
 
+#include "ftMs_SpecialHi.h"
+#include "ftMs_SpecialLw.h"
+#include "ftMs_SpecialN.h"
+#include "ftMs_SpecialS.h"
+
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 #include <common_structs.h>
@@ -374,7 +380,7 @@ void ftMs_Init_OnDeath(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
-    fp->ev.ms.x222C = 0;
+    fp->fv.ms.x222C = 0;
 }
 
 // 801362B0 00132E90
@@ -455,10 +461,10 @@ void ftMs_SpecialN_801365A8(HSD_GObj* gobj)
         result = ftLib_800872A4(gobj);
         switch (result) {
         case 0x12:
-            efSync_Spawn(0x4F2, gobj, fp->x5E8_fighterBones->x0_jobj);
+            efSync_Spawn(0x4F2, gobj, fp->ft_bones->x0_jobj);
             break;
         case 0x1A:
-            efSync_Spawn(0x511, gobj, fp->x5E8_fighterBones->x0_jobj);
+            efSync_Spawn(0x511, gobj, fp->ft_bones->x0_jobj);
             break;
         }
         fp->x2219_flag.bits.b0 = 1;
@@ -480,10 +486,10 @@ void ftMs_SpecialN_8013666C(HSD_GObj* gobj)
         result = ftLib_800872A4(gobj);
         switch (result) {
         case 0x12:
-            efSync_Spawn(0x4F3, gobj, fp->x5E8_fighterBones->x0_jobj);
+            efSync_Spawn(0x4F3, gobj, fp->ft_bones->x0_jobj);
             break;
         case 0x1A:
-            efSync_Spawn(0x512, gobj, fp->x5E8_fighterBones->x0_jobj);
+            efSync_Spawn(0x512, gobj, fp->ft_bones->x0_jobj);
             break;
         }
         fp->x2219_flag.bits.b0 = 1;
@@ -501,5 +507,5 @@ void ftMs_SpecialN_80136730(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->x2200_ftcmd_var0 = 0;
-    fp->sv.ms.specialn.x0 = 0;
+    fp->mv.ms.specialn.x0 = 0;
 }

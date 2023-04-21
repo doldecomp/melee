@@ -1,3 +1,7 @@
+#include "forward.h"
+
+#include "ftMt_SpecialLw.h"
+
 #include "ftMt_Init.h"
 
 #include "ft/ft_081B.h"
@@ -6,20 +10,29 @@
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
+// SpecialLw/SpecialAirLw
+
+#define FTMEWTWO_SPECIALLW_COLL_FLAG                                          \
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |             \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |           \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
+        FtStateChange_SkipUpdateModelPartVis |                                \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
+
 // 0x80146198
 // https://decomp.me/scratch/QML6g // Reset Disable Stall flag
 void ftMt_SpecialLw_ClearDisableGObj(HSD_GObj* gobj)
 {
-    GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj = NULL;
+    GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj = NULL;
 }
 
 // 0x801461A8
 // https://decomp.me/scratch/d5gF6 // Remove Disable projectile
 void ftMt_SpecialLw_RemoveDisable(HSD_GObj* gobj)
 {
-    if (GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj != NULL) {
-        it_802C49E0(GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj);
-        GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj = NULL;
+    if (GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj != NULL) {
+        it_802C49E0(GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj);
+        GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj = NULL;
     }
 }
 
@@ -37,9 +50,9 @@ void ftMt_SpecialLw_Enter(HSD_GObj* gobj)
 
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->ev.mt.x222C_disableGObj = NULL;
+    fp->fv.mt.x222C_disableGObj = NULL;
 
-    Fighter_ChangeMotionState(gobj, AS_MEWTWO_SPECIALLW, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialLw, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
 
@@ -60,11 +73,11 @@ void ftMt_SpecialAirLw_Enter(HSD_GObj* gobj)
 
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->ev.mt.x222C_disableGObj = NULL;
+    fp->fv.mt.x222C_disableGObj = NULL;
     fp->x80_self_vel.y = 0.0f;
 
-    Fighter_ChangeMotionState(gobj, AS_MEWTWO_SPECIALAIRLW, 0, NULL, 0.0f,
-                              1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirLw, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     ftAnim_8006EBA4(gobj);
 
     fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
@@ -76,9 +89,9 @@ void ftMt_SpecialAirLw_Enter(HSD_GObj* gobj)
 void ftMt_SpecialLw_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj != NULL) {
-            it_802C49E0(GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj);
-            GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj = NULL;
+        if (GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj != NULL) {
+            it_802C49E0(GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj);
+            GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj = NULL;
         }
 
         ft_8008A2BC(gobj);
@@ -89,9 +102,9 @@ void ftMt_SpecialLw_Anim(HSD_GObj* gobj)
 void ftMt_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj != NULL) {
-            it_802C49E0(GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj);
-            GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj = NULL;
+        if (GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj != NULL) {
+            it_802C49E0(GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj);
+            GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj = NULL;
         }
         ft_800CC730(gobj);
     }
@@ -131,7 +144,7 @@ void ftMt_SpecialAirLw_Phys(HSD_GObj* gobj)
 inline void ftMewtwo_SpecialLw_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ev.mt.x222C_disableGObj != NULL) {
+    if (fp->fv.mt.x222C_disableGObj != NULL) {
         fp->cb.x21E4_callback_OnDeath2 = ftMt_Init_OnDeath2;
         fp->cb.x21DC_callback_OnTakeDamage = ftMt_Init_OnTakeDamage;
     }
@@ -148,7 +161,7 @@ void ftMt_SpecialLw_GroundToAir(HSD_GObj* gobj)
 
     fp->x80_self_vel.y = 0.0f;
 
-    Fighter_ChangeMotionState(gobj, AS_MEWTWO_SPECIALAIRLW,
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirLw,
                               FTMEWTWO_SPECIALLW_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
@@ -168,7 +181,7 @@ void ftMt_SpecialAirLw_AirToGround(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, AS_MEWTWO_SPECIALLW,
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialLw,
                               FTMEWTWO_SPECIALLW_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
@@ -205,12 +218,12 @@ void ftMt_SpecialLw_CreateDisable(HSD_GObj* gobj)
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
         mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-        lb_8000B1CC(fp->x5E8_fighterBones[0x1B].x0_jobj, NULL, &sp18);
+        lb_8000B1CC(fp->ft_bones[0x1B].x0_jobj, NULL, &sp18);
 
         sp18.x += (mewtwoAttrs->x80_MEWTWO_DISABLE_OFFSET_X * fp->facing_dir);
         sp18.y += mewtwoAttrs->x84_MEWTWO_DISABLE_OFFSET_Y;
 
-        fp->ev.mt.x222C_disableGObj = it_802C4A40(gobj, &sp18, fp->facing_dir);
+        fp->fv.mt.x222C_disableGObj = it_802C4A40(gobj, &sp18, fp->facing_dir);
 
         ftMewtwo_SpecialLw_SetCall(gobj);
 

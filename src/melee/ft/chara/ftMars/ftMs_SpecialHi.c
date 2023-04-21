@@ -1,9 +1,12 @@
+#include "ftMs_SpecialHi.h"
+
 #include "ftMs_Init.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 
 // 80138208 00134DE8
 // https://decomp.me/scratch/lrV6F
@@ -17,7 +20,7 @@ void ftMs_SpecialHi_Enter(HSD_GObj* gobj)
     fp->x2210_ThrowFlags.flags = 0;
     // MotionStateChange
     Fighter_ChangeMotionState(gobj, 0x16F, 0, NULL, 0.0f, 1.0f, 0.0f);
-    // AS_AnimationFrameUpdate&More
+    // MS_AnimationFrameUpdate&More
     ftAnim_8006EBA4(gobj);
 }
 
@@ -41,7 +44,7 @@ void ftMs_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->x80_self_vel.x *= attr->x3C;
     // MotionStateChange
     Fighter_ChangeMotionState(gobj, 0x170, 0, NULL, 0.0f, 1.0f, 0.0f);
-    // AS_AnimationFrameUpdate&More
+    // MS_AnimationFrameUpdate&More
     ftAnim_8006EBA4(gobj);
 }
 
@@ -54,7 +57,7 @@ void ftMs_SpecialHi_Anim(HSD_GObj* gobj)
 
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        // AS_035_FallSpecial
+        // MS_035_FallSpecial
         ft_80096900(gobj, 0, 1, 0, attr->x28, attr->x2C);
     }
 }
@@ -73,7 +76,7 @@ void ftMs_SpecialAirHi_Anim(HSD_GObj* gobj)
 
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        // AS_035_FallSpecial
+        // MS_035_FallSpecial
         ft_80096900(gobj, 0, 1, 0, attr->x28, attr->x2C);
     }
 }
@@ -173,9 +176,9 @@ void ftMs_SpecialHi_Phys(HSD_GObj* gobj)
     s32 num;
 
     // this is required, dunno why
-    fp->xE0_ground_or_air;
+    fp->ground_or_air;
 
-    if (fp->xE0_ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         if (fp->x2208_ftcmd_var2 == 0) {
             ft_80085154(gobj);
             if (fp->x80_self_vel.x < 0.0f) {
@@ -260,7 +263,7 @@ void ftMs_SpecialHi_80138884(HSD_GObj* gobj)
 void ftMs_SpecialHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->xE0_ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
             ft_80083B68(gobj);
         } else if (fp->x2204_ftcmd_var1 == 0) {
@@ -279,7 +282,7 @@ void ftMs_SpecialHi_Coll(HSD_GObj* gobj)
 void ftMs_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->xE0_ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
             ft_80083B68(gobj);
         } else if (fp->x2204_ftcmd_var1 == 0) {

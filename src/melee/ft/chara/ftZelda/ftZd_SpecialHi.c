@@ -1,7 +1,5 @@
 #include "ftZd_SpecialHi.h"
 
-#include "ftZd_Init.h"
-
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
@@ -11,6 +9,7 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -18,6 +17,7 @@
 
 #include <math.h>
 #include <trigf.h>
+#include <dolphin/mtx/types.h>
 
 void ftZd_SpecialHi_801396AC(HSD_GObj* gobj)
 {
@@ -32,12 +32,12 @@ void ftZd_SpecialHi_801396E0(HSD_GObj* gobj)
 
     if (!fp->x2219_flag.bits.b0) {
         Vec3 vec;
-        lb_8000B1CC(fp->x5E8_fighterBones[4].x0_jobj, NULL, &vec);
+        lb_8000B1CC(fp->ft_bones[4].x0_jobj, NULL, &vec);
 
-        if (fp->xE0_ground_or_air == GA_Ground) {
-            efSync_Spawn(0x4F6, gobj, fp->x5E8_fighterBones->x0_jobj);
+        if (fp->ground_or_air == GA_Ground) {
+            efSync_Spawn(0x4F6, gobj, fp->ft_bones->x0_jobj);
         } else {
-            efSync_Spawn(0x4F7, gobj, fp->x5E8_fighterBones->x0_jobj);
+            efSync_Spawn(0x4F7, gobj, fp->ft_bones->x0_jobj);
         }
 
         fp->x2219_flag.bits.b0 = true;
@@ -53,7 +53,7 @@ void ftZd_SpecialHi_8013979C(HSD_GObj* gobj)
 
     {
         Vec3 vec;
-        lb_8000B1CC(fp->x5E8_fighterBones[4].x0_jobj, NULL, &vec);
+        lb_8000B1CC(fp->ft_bones[4].x0_jobj, NULL, &vec);
 
         if (!fp->x2219_flag.bits.b0) {
             efSync_Spawn(0x505, gobj, &vec);
@@ -66,7 +66,7 @@ void ftZd_SpecialHi_8013979C(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
-void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
+static void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -76,7 +76,7 @@ void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
 
     {
         ssize_t boneIndex = ftParts_8007500C(fp, 4);
-        HSD_JObj* jObj = fp->x5E8_fighterBones[boneIndex].x0_jobj;
+        HSD_JObj* jObj = fp->ft_bones[boneIndex].x0_jobj;
 
         {
             Vec3 vec;
@@ -91,7 +91,7 @@ void ftZd_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = getFighterPlus(gobj);
 
-    fp->xEC_ground_vel = 0;
+    fp->gr_vel = 0;
     fp->x80_self_vel.y = 0;
     fp->x80_self_vel.x = 0;
 
@@ -100,7 +100,7 @@ void ftZd_SpecialHi_Enter(HSD_GObj* gobj)
 
     fp = getFighterPlus(gobj);
     fp->x2200_ftcmd_var0 = 0;
-    fp->sv.zd.specialhi.xC = 0;
+    fp->mv.zd.specialhi.xC = 0;
 
     ftZelda_SpecialHi_StartAction_Helper(fp);
 
@@ -111,7 +111,7 @@ void ftZd_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftZeldaAttributes* attributes = fp->x2D4_specialAttributes;
+        ftZelda_DatAttrs* attributes = fp->x2D4_specialAttributes;
 
         fp->x80_self_vel.x = fp->x80_self_vel.x / attributes->x38;
         fp->x80_self_vel.y = fp->x80_self_vel.y / attributes->x3C;
@@ -123,7 +123,7 @@ void ftZd_SpecialAirHi_Enter(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
         fp->x2200_ftcmd_var0 = 0;
-        fp->sv.zd.specialhi.xC = 0;
+        fp->mv.zd.specialhi.xC = 0;
 
         {
             Vec3 vec;
@@ -134,7 +134,7 @@ void ftZd_SpecialAirHi_Enter(HSD_GObj* gobj)
 #endif
 
             ssize_t boneIndex = ftParts_8007500C(fp, 4);
-            HSD_JObj* jObj = fp->x5E8_fighterBones[boneIndex].x0_jobj;
+            HSD_JObj* jObj = fp->ft_bones[boneIndex].x0_jobj;
 
             lb_8000B1CC(jObj, NULL, &vec);
             lb_800119DC(&vec, 120, 1.5, 0.02, 60 * (f32) M_PI / 180);
@@ -170,7 +170,7 @@ void ftZd_SpecialHiStart_Phys(HSD_GObj* gobj)
 void ftZd_SpecialAirHiStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftZeldaAttributes* attributes = fp->x2D4_specialAttributes;
+    ftZelda_DatAttrs* attributes = fp->x2D4_specialAttributes;
     Vec2 vec;
 
     vec.x = attributes->x40;
@@ -241,9 +241,9 @@ void ftZd_SpecialHi_80139BB0(HSD_GObj* gobj)
 void ftZd_SpecialHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->sv.zd.specialhi.x0 -= 1;
+    fp->mv.zd.specialhi.x0 -= 1;
 
-    if (fp->sv.zd.specialhi.x0 <= 0) {
+    if (fp->mv.zd.specialhi.x0 <= 0) {
         ftZd_SpecialHi_8013A6A8(gobj);
     }
 }
@@ -251,9 +251,9 @@ void ftZd_SpecialHi_Anim(HSD_GObj* gobj)
 void ftZd_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->sv.zd.specialhi.x0 -= 1;
+    fp->mv.zd.specialhi.x0 -= 1;
 
-    if (fp->sv.zd.specialhi.x0 <= 0) {
+    if (fp->mv.zd.specialhi.x0 <= 0) {
         ftZd_SpecialHi_8013A764(gobj);
     }
 }
@@ -296,16 +296,16 @@ void ftZd_SpecialHi_Coll(HSD_GObj* gobj)
     }
 }
 
-bool ftZelda_80139D60_Helper(HSD_GObj* gobj)
+static bool ftZelda_80139D60_Helper(HSD_GObj* gobj)
 {
     bool result;
     Fighter* fighter2;
-    ftZeldaAttributes* attributes2;
+    ftZelda_DatAttrs* attributes2;
 
     fighter2 = getFighter(gobj);
     attributes2 = fighter2->x2D4_specialAttributes;
 
-    if (fighter2->sv.zd.specialhi.xC >= attributes2->x4C) {
+    if (fighter2->mv.zd.specialhi.xC >= attributes2->x4C) {
         result = true;
     } else if (ft_8009A134(gobj)) {
         result = false;
@@ -327,11 +327,11 @@ void ftZd_SpecialAirHi_Coll(HSD_GObj* gobj)
 
     /// @todo @c sa can't move below @c coll_data,
     ///       which suggests a function boundary.
-    ftZeldaAttributes* sa;
+    ftZelda_DatAttrs* sa;
     CollData* coll_data = &fp->x6F0_collData;
     sa = fp->x2D4_specialAttributes;
 
-    fp->sv.zd.specialhi.xC++;
+    fp->mv.zd.specialhi.xC++;
 
     {
         int ledge_grab_dir;
@@ -411,8 +411,8 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
     volatile float y;
     f64 _three;
     f64 _half;
-    Fighter* fp;                   // r30
-    ftZeldaAttributes* attributes; // r31
+    Fighter* fp;                  // r30
+    ftZelda_DatAttrs* attributes; // r31
     f32 temp_f0;
     f32 temp_f1;
     f32 temp_f2;
@@ -471,13 +471,13 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
                 temp_f5 = atan2f(fp->input.x624_lstick_y,
                                  fp->input.x620_lstick_x * fp->facing_dir);
 
-                fp->sv.zd.specialhi.x4.x = inputVector.x;
-                fp->sv.zd.specialhi.x4.y = inputVector.y;
+                fp->mv.zd.specialhi.x4.x = inputVector.x;
+                fp->mv.zd.specialhi.x4.y = inputVector.y;
 
                 // Update ground velocity
                 temp_f6 = ((attributes->x54 * var_f31) + attributes->x58) *
                           cosf(temp_f5);
-                fp->xEC_ground_vel = fp->facing_dir * temp_f6;
+                fp->gr_vel = fp->facing_dir * temp_f6;
 
                 Fighter_ChangeMotionState(gobj, 0x15E, 0, NULL, 35.0, 1.0, 0);
                 ftAnim_8006EBA4(gobj);
@@ -485,7 +485,7 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
 
                 fp = GET_FIGHTER(gobj);
                 attributes = fp->x2D4_specialAttributes;
-                fp->sv.zd.specialhi.x0 = attributes->x48;
+                fp->mv.zd.specialhi.x0 = attributes->x48;
                 fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
                 fp->x2223_flag.bits.b4 = 1;
 
@@ -502,8 +502,8 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
 void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
 {
     volatile float y;
-    Fighter* fp;                   // r30
-    ftZeldaAttributes* attributes; // r31
+    Fighter* fp;                  // r30
+    ftZelda_DatAttrs* attributes; // r31
     f32 temp_f1;
     f32 temp_f2;
     f32 var_f4;
@@ -559,13 +559,13 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
         }
         var_f30 = atan2f(fp->input.x624_lstick_y,
                          fp->input.x620_lstick_x * fp->facing_dir);
-        fp->sv.zd.specialhi.x4.x = fp->input.x620_lstick_x;
-        fp->sv.zd.specialhi.x4.y = fp->input.x624_lstick_y;
+        fp->mv.zd.specialhi.x4.x = fp->input.x620_lstick_x;
+        fp->mv.zd.specialhi.x4.y = fp->input.x624_lstick_y;
     } else {
         ftCommon_8007DA24(fp);
         var_f30 = (f32) M_PI_2;
-        fp->sv.zd.specialhi.x4.x = 0;
-        var_f31 = fp->sv.zd.specialhi.x4.y = 1.0;
+        fp->mv.zd.specialhi.x4.x = 0;
+        var_f31 = fp->mv.zd.specialhi.x4.y = 1.0;
     }
 
     fp->x80_self_vel.x =
@@ -580,7 +580,7 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->x2D4_specialAttributes;
-    fp->sv.zd.specialhi.x0 = attributes->x48;
+    fp->mv.zd.specialhi.x0 = attributes->x48;
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
     fp->x2223_flag.bits.b4 = 1;
 
@@ -604,7 +604,7 @@ void ftZd_SpecialHiEnd_Anim(HSD_GObj* gobj)
 void ftZd_SpecialAirHiEnd_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftZeldaAttributes* attributes = fp->x2D4_specialAttributes;
+    ftZelda_DatAttrs* attributes = fp->x2D4_specialAttributes;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         f32 x, y;
@@ -631,7 +631,7 @@ void ftZd_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftZeldaAttributes* attributes = fp->x2D4_specialAttributes;
+    ftZelda_DatAttrs* attributes = fp->x2D4_specialAttributes;
 
     if (fp->x2200_ftcmd_var0 != 0) {
         ftCommon_8007D4B8(fp);
@@ -663,7 +663,7 @@ void ftZd_SpecialAirHiEnd_Coll(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftZeldaAttributes* attributes = fp->x2D4_specialAttributes;
+    ftZelda_DatAttrs* attributes = fp->x2D4_specialAttributes;
 
     {
         int ledge_grab_dir;
@@ -696,30 +696,30 @@ void ftZd_SpecialHi_8013A648(HSD_GObj* gobj)
 void ftZd_SpecialHi_8013A6A8(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
-    ftZeldaAttributes* attributes = fp0->x2D4_specialAttributes;
+    ftZelda_DatAttrs* attributes = fp0->x2D4_specialAttributes;
 
     Fighter_ChangeMotionState(gobj, 351, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 
     {
         Fighter* fp1 = GET_FIGHTER(gobj);
-        fp1->sv.zd.specialhi.x10.x = fp1->x80_self_vel.x;
-        fp1->sv.zd.specialhi.x10.y = fp1->x80_self_vel.y;
-        fp1->sv.zd.specialhi.x18 = fp1->xEC_ground_vel;
+        fp1->mv.zd.specialhi.x10.x = fp1->x80_self_vel.x;
+        fp1->mv.zd.specialhi.x10.y = fp1->x80_self_vel.y;
+        fp1->mv.zd.specialhi.x18 = fp1->gr_vel;
         fp1->x80_self_vel.y = 0;
         fp1->x80_self_vel.x = 0;
-        fp1->xEC_ground_vel = 0;
+        fp1->gr_vel = 0;
         fp1->x221E_flag.bits.b0 = false;
         fp1->cb.x21BC_callback_Accessory4 = &ftZd_SpecialHi_8013979C;
     }
 
-    fp0->xEC_ground_vel = fp0->sv.zd.specialhi.x18 * attributes->x64;
+    fp0->gr_vel = fp0->mv.zd.specialhi.x18 * attributes->x64;
 }
 
 void ftZd_SpecialHi_8013A764(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
-    ftZeldaAttributes* sa = fp0->x2D4_specialAttributes;
+    ftZelda_DatAttrs* sa = fp0->x2D4_specialAttributes;
 
     Fighter_ChangeMotionState(gobj, 354, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
@@ -727,16 +727,16 @@ void ftZd_SpecialHi_8013A764(HSD_GObj* gobj)
     {
         Fighter* fp1;
         fp1 = GET_FIGHTER(gobj);
-        fp1->sv.zd.specialhi.x10.x = fp1->x80_self_vel.x;
-        fp1->sv.zd.specialhi.x10.y = fp1->x80_self_vel.y;
-        fp1->sv.zd.specialhi.x18 = fp1->xEC_ground_vel;
+        fp1->mv.zd.specialhi.x10.x = fp1->x80_self_vel.x;
+        fp1->mv.zd.specialhi.x10.y = fp1->x80_self_vel.y;
+        fp1->mv.zd.specialhi.x18 = fp1->gr_vel;
         fp1->x80_self_vel.y = 0;
         fp1->x80_self_vel.x = 0;
-        fp1->xEC_ground_vel = 0;
+        fp1->gr_vel = 0;
         fp1->x221E_flag.bits.b0 = false;
         fp1->cb.x21BC_callback_Accessory4 = &ftZd_SpecialHi_8013979C;
     }
 
-    fp0->x80_self_vel.x = fp0->sv.zd.specialhi.x10.x * sa->x64;
-    fp0->x80_self_vel.y = fp0->sv.zd.specialhi.x10.y * sa->x64;
+    fp0->x80_self_vel.x = fp0->mv.zd.specialhi.x10.x * sa->x64;
+    fp0->x80_self_vel.y = fp0->mv.zd.specialhi.x10.y * sa->x64;
 }

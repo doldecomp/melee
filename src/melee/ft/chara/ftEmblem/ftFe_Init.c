@@ -1,10 +1,15 @@
-#include "ft/chara/ftEmblem/ftFe_Init.h"
+#include "ftEmblem/ftFe_Init.h"
 
-#include "ft/chara/ftMars/ftMs_Init.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftMars/ftMs_Init.h"
+#include "ftMars/ftMs_SpecialHi.h"
+#include "ftMars/ftMs_SpecialLw.h"
+#include "ftMars/ftMs_SpecialN.h"
+#include "ftMars/ftMs_SpecialS.h"
 
 MotionState ftFe_Init_MotionStateTable[] = {
     {
@@ -369,7 +374,7 @@ void ftFe_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
     ftParts_80074A4C(gobj, 2, -1);
-    fp->ev.ms.x222C = 0;
+    fp->fv.ms.x222C = 0;
 }
 
 void ftFe_Init_OnItemPickup(HSD_GObj* gobj, bool bool)

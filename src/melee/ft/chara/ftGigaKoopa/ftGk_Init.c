@@ -1,10 +1,13 @@
+#include "it/forward.h"
+
 #include "ftGk_Init.h"
 
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftKoopa/ftkoopa.h"
+#include "ftKoopa/ftKp_Init.h"
 
 MotionState ftGk_Init_MotionStateTable[] = {
     {
@@ -270,8 +273,8 @@ void ftGk_Init_OnDeath(HSD_GObj* gobj)
 
     ftParts_80074A4C(gobj, 0, 0);
     fp->dmg.x18B0 = koopaAttr->x0;
-    fp->ev.gk.x222C = koopaAttr->x10;
-    fp->ev.gk.x2230 = koopaAttr->x18;
+    fp->fv.gk.x222C = koopaAttr->x10;
+    fp->fv.gk.x2230 = koopaAttr->x18;
 }
 
 void ftGk_Init_UnkMotionStates3(HSD_GObj* gobj)
@@ -282,7 +285,7 @@ void ftGk_Init_UnkMotionStates3(HSD_GObj* gobj)
 void ftGk_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftData* ftdata = fp->x10C_ftData;
+    ftData* ftdata = fp->ft_data;
     void** items = ftdata->x48_items;
 
     ftKp_Init_OnLoadForGKoopa(fp);
@@ -336,7 +339,7 @@ void ftGk_Init_UnkDemoCallbacks0(s32 arg0, s32* arg1, s32* arg2)
 }
 
 /// @remarks UB warning: this function may use offset uninitialized
-unk_t ftGk_Init_GetMotionFileString(enum_t arg0)
+char* ftGk_Init_GetMotionFileString(enum_t arg0)
 {
     int offset;
 

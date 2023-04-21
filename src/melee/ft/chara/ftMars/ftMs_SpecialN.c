@@ -1,12 +1,16 @@
+#include "ftMs_SpecialN.h"
+
 #include "ef/eflib.h"
-#include "ft/chara/ftMars/ftMs_Init.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ftMars/ftMs_Init.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+
+#include <dolphin/mtx/types.h>
 
 void ftMs_SpecialN_Enter(HSD_GObj* gobj)
 {
@@ -20,7 +24,7 @@ void ftMs_SpecialN_Enter(HSD_GObj* gobj)
 
     fp->cb.x21EC_callback = &ftMs_SpecialN_80136730;
 
-    fp->xEC_ground_vel /= attrs->xC;
+    fp->gr_vel /= attrs->xC;
     Fighter_ChangeMotionState(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
 }
@@ -168,15 +172,14 @@ void ftMs_SpecialNChargeLoop_Anim(HSD_GObj* gobj)
     u8 _[28];
 #endif
 
-    if (fp->sv.ms.specialn.x0 % 30 == 0) {
-        lb_8000B1CC(fp->x5E8_fighterBones[ftParts_8007500C(fp, 4)].x0_jobj, 0,
-                    &sp28);
+    if (fp->mv.ms.specialn.x0 % 30 == 0) {
+        lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, 0, &sp28);
         lb_800119DC(&sp28, 10, 0.5f, 0.05f, 60 * M_PI / 180);
     }
 
-    fp->sv.ms.specialn.x0++;
+    fp->mv.ms.specialn.x0++;
 
-    if ((s32) fp->sv.ms.specialn.x0 > *specialAttrs * 30) {
+    if ((s32) fp->mv.ms.specialn.x0 > *specialAttrs * 30) {
         fp->x2200_ftcmd_var0 = 1;
         ftMs_SpecialN_80137354(gobj);
     }
@@ -193,13 +196,12 @@ void ftMs_SpecialAirNChargeLoop_Anim(HSD_GObj* gobj)
     u8 _[28];
 #endif
 
-    if ((s32) fp->sv.ms.specialn.x0 % 30 == 0) {
-        lb_8000B1CC(fp->x5E8_fighterBones[ftParts_8007500C(fp, 4)].x0_jobj, 0,
-                    &sp28);
+    if ((s32) fp->mv.ms.specialn.x0 % 30 == 0) {
+        lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, 0, &sp28);
         lb_800119DC(&sp28, 10, 0.5f, 0.05f, 60 * M_PI / 180);
     }
-    fp->sv.ms.specialn.x0++;
-    if ((s32) fp->sv.ms.specialn.x0 > attrs->x0 * 30) {
+    fp->mv.ms.specialn.x0++;
+    if ((s32) fp->mv.ms.specialn.x0 > attrs->x0 * 30) {
         fp->x2200_ftcmd_var0 = 1;
         ftMs_SpecialN_801373B8(gobj);
     }
@@ -315,9 +317,9 @@ void ftMs_SpecialNChargeEnd_Anim(HSD_GObj* gobj)
                     (HitCapsule*) (hb + 0x914),
 
 #if MUST_MATCH
-                    (f32) (attr->x4 + fp->sv.ms.specialn.x0 / 30 * attr->x8),
+                    (f32) (attr->x4 + fp->mv.ms.specialn.x0 / 30 * attr->x8),
 #else
-                    attr->x4 + fp->sv.ms.specialn.x0 / 30.0F * attr->x8,
+                    attr->x4 + fp->mv.ms.specialn.x0 / 30.0F * attr->x8,
 #endif
 
                     gobj);
@@ -336,14 +338,14 @@ void ftMs_SpecialNChargeEnd_Anim(HSD_GObj* gobj)
 
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
         //         Fighter_BonePersonalToCommon
-        lb_8000B1CC(fp->x5E8_fighterBones[ftParts_8007500C(fp, 4)].x0_jobj, 0,
+        lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, 0,
                     &position);
         // AestheticWindEffect(r3=sourcelocation,r4=duration,f1=radiusSize,f2=effectdegradation,f3=unk)
         lb_800119DC(&position, 120, 0.9f, 0.02f, 60 * M_PI / 180);
     }
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        // AS_014_Wait_PlayerCheck
+        // MS_014_Wait_PlayerCheck
         ft_8008A2BC(gobj);
     }
     return;
@@ -366,7 +368,7 @@ void ftMs_SpecialAirNChargeEnd_Anim(HSD_GObj* gobj)
         //     if (fp->x914[ndx].x0 == 1) {
         //         // Hitbox_ApplyDamageStalingAndMore
         //         ftColl_8007ABD0(&fp->x914[ndx], (f32) (attr->x4 +
-        //         (s32)fp->sv.ms.specialn.x0 / 30 * attr->x8), gobj);
+        //         (s32)fp->mv.ms.specialn.x0 / 30 * attr->x8), gobj);
         //     }
         // }
 
@@ -379,9 +381,9 @@ void ftMs_SpecialAirNChargeEnd_Anim(HSD_GObj* gobj)
                     (HitCapsule*) (hb + 0x914),
 
 #if MUST_MATCH
-                    (f32) (attr->x4 + fp->sv.ms.specialn.x0 / 30 * attr->x8),
+                    (f32) (attr->x4 + fp->mv.ms.specialn.x0 / 30 * attr->x8),
 #else
-                    attr->x4 + fp->sv.ms.specialn.x0 / 30.0F * attr->x8,
+                    attr->x4 + fp->mv.ms.specialn.x0 / 30.0F * attr->x8,
 #endif
 
                     gobj);
@@ -400,14 +402,14 @@ void ftMs_SpecialAirNChargeEnd_Anim(HSD_GObj* gobj)
 
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
         //         Fighter_BonePersonalToCommon
-        lb_8000B1CC(fp->x5E8_fighterBones[ftParts_8007500C(fp, 4)].x0_jobj, 0,
+        lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, 0,
                     &position);
         // AestheticWindEffect(r3=sourcelocation,r4=duration,f1=radiusSize,f2=effectdegradation,f3=unk)
         lb_800119DC(&position, 120, 0.9f, 0.02f, 60 * M_PI / 180);
     }
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        // AS_029_Fall
+        // MS_029_Fall
         ft_800CC730(gobj);
     }
     return;
@@ -478,7 +480,7 @@ void ftMs_SpecialN_801371FC(HSD_GObj* gobj)
 }
 
 // 801372A8 00133E88
-// AS_MarthNeutralBHitAir->Ground
+// MS_MarthNeutralBHitAir->Ground
 // https://decomp.me/scratch/IV8RT
 void ftMs_SpecialN_801372A8(HSD_GObj* gobj)
 {
@@ -504,7 +506,7 @@ void ftMs_SpecialN_801372A8(HSD_GObj* gobj)
 }
 
 // 80137354 00133F34
-// AS_RoyNeutralBSwing
+// MS_RoyNeutralBSwing
 // https://decomp.me/scratch/4CbiS
 void ftMs_SpecialN_80137354(HSD_GObj* gobj)
 {

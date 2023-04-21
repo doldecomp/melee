@@ -1,8 +1,16 @@
-#include "ft/chara/ftGameWatch/ftGw_Init.h"
+#include "forward.h"
+
+#include "ftGw_AttackAir.h"
+
+#include "ftGw_Init.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/inlines.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
+
+#include <dolphin/mtx/types.h>
 
 static void ftGw_AttackAirN_ExitItemHitlag(HSD_GObj*);
 
@@ -13,13 +21,13 @@ void ftGw_AttackAirN_ItemParachuteSetup(HSD_GObj* gobj)
     Vec3 sp10;
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x2258_parachuteGObj != NULL) {
+    if (fp->fv.gw.x2258_parachuteGObj != NULL) {
         ftGw_AttackAirN_ItemParachuteOnLand(gobj);
     } else {
-        lb_8000B1CC(fp->x5E8_fighterBones[1].x0_jobj, NULL, &sp10);
-        fp->ev.gw.x2258_parachuteGObj =
+        lb_8000B1CC(fp->ft_bones[1].x0_jobj, NULL, &sp10);
+        fp->fv.gw.x2258_parachuteGObj =
             it_802C6C38(gobj, &sp10, 1, fp->facing_dir);
-        if (fp->ev.gw.x2258_parachuteGObj != NULL) {
+        if (fp->fv.gw.x2258_parachuteGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
             fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
             fp->cb.x21D4_callback_EnterHitlag =
@@ -37,10 +45,10 @@ void ftGw_AttackAirN_ItemParachuteOnLand(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x2258_parachuteGObj != NULL) {
+    if (fp->fv.gw.x2258_parachuteGObj != NULL) {
         ftGw_AttackAirN_ExitItemHitlag(gobj);
-        if (fp->action_id == AS_GAMEWATCH_LANDINGAIRN) {
-            it_802C6E50(fp->ev.gw.x2258_parachuteGObj);
+        if (fp->motion_id == ftGw_MS_LandingAirN) {
+            it_802C6E50(fp->fv.gw.x2258_parachuteGObj);
         }
         fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
@@ -58,7 +66,7 @@ void ftGw_AttackAirN_ItemParachuteSetFlag(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftGw_AttackAirN_ExitItemHitlag(gobj);
-    fp->ev.gw.x2258_parachuteGObj = NULL;
+    fp->fv.gw.x2258_parachuteGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
@@ -68,8 +76,8 @@ void ftGw_AttackAirN_ItemParachuteRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x2258_parachuteGObj != NULL) {
-        it_802C6D6C(fp->ev.gw.x2258_parachuteGObj);
+    if (fp->fv.gw.x2258_parachuteGObj != NULL) {
+        it_802C6D6C(fp->fv.gw.x2258_parachuteGObj);
         ftGw_AttackAirN_ItemParachuteSetFlag(gobj);
     }
 }
@@ -80,9 +88,9 @@ void ftGw_AttackAirN_ItemParachuteRemove(HSD_GObj* gobj)
 bool ftGw_AttackAirN_ItemCheckParachuteRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 msid = fp->action_id;
+    s32 msid = fp->motion_id;
 
-    if (msid >= AS_GAMEWATCH_ATTACKAIRN && msid <= AS_GAMEWATCH_LANDINGAIRN) {
+    if (msid >= ftGw_MS_AttackAirN && msid <= ftGw_MS_LandingAirN) {
         return false;
     }
 
@@ -103,13 +111,13 @@ void ftGw_AttackAirN_ItemTurtleSetup(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (fp->ev.gw.x225C_turtleGObj != NULL) {
+    if (fp->fv.gw.x225C_turtleGObj != NULL) {
         ftGw_AttackAirN_ItemTurtleOnLand(gobj);
     } else {
-        lb_8000B1CC(fp->x5E8_fighterBones[0x11].x0_jobj, NULL, &sp10);
-        fp->ev.gw.x225C_turtleGObj =
+        lb_8000B1CC(fp->ft_bones[0x11].x0_jobj, NULL, &sp10);
+        fp->fv.gw.x225C_turtleGObj =
             it_802C6F40(gobj, &sp10, 0x11, fp->facing_dir);
-        if (fp->ev.gw.x225C_turtleGObj != NULL) {
+        if (fp->fv.gw.x225C_turtleGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
             fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
             fp->cb.x21D4_callback_EnterHitlag =
@@ -126,12 +134,12 @@ static void ftGw_AttackAirN_ItemTurtleOnLand(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x225C_turtleGObj != NULL) {
+    if (fp->fv.gw.x225C_turtleGObj != NULL) {
         ftGw_AttackAirN_ExitItemHitlag(gobj);
 
-        // Deliberate ASID mismatch to prevent item animation from freezing???
-        if (fp->action_id == AS_GAMEWATCH_LANDINGAIRN) {
-            it_802C7158(fp->ev.gw.x225C_turtleGObj);
+        // Deliberate msid mismatch to prevent item animation from freezing???
+        if (fp->motion_id == ftGw_MS_LandingAirN) {
+            it_802C7158(fp->fv.gw.x225C_turtleGObj);
         }
 
         fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
@@ -150,7 +158,7 @@ void ftGw_AttackAirN_ItemTurtleSetFlag(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftGw_AttackAirN_ExitItemHitlag(gobj);
-    fp->ev.gw.x225C_turtleGObj = NULL;
+    fp->fv.gw.x225C_turtleGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
@@ -161,8 +169,8 @@ void ftGw_AttackAirN_ItemTurtleRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x225C_turtleGObj != NULL) {
-        it_802C7074(fp->ev.gw.x225C_turtleGObj);
+    if (fp->fv.gw.x225C_turtleGObj != NULL) {
+        it_802C7074(fp->fv.gw.x225C_turtleGObj);
         ftGw_AttackAirN_ItemTurtleSetFlag(gobj);
     }
 }
@@ -173,11 +181,9 @@ void ftGw_AttackAirN_ItemTurtleRemove(HSD_GObj* gobj)
 bool ftGw_AttackAirN_ItemCheckTurtleRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 ASID = fp->action_id;
+    s32 msid = fp->motion_id;
 
-    if ((ASID >= AS_GAMEWATCH_ATTACKAIRB) &&
-        (ASID <= AS_GAMEWATCH_LANDINGAIRB))
-    {
+    if ((msid >= ftGw_MS_AttackAirB) && (msid <= ftGw_MS_LandingAirB)) {
         return false;
     }
     return true;
@@ -194,13 +200,13 @@ void ftGw_AttackAirN_ItemSparkySetup(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (fp->ev.gw.x2260_sparkyGObj != NULL) {
+    if (fp->fv.gw.x2260_sparkyGObj != NULL) {
         ftGw_AttackAirN_ItemSparkyOnLand(gobj);
     } else {
-        lb_8000B1CC(fp->x5E8_fighterBones[0x15].x0_jobj, NULL, &sp10);
-        fp->ev.gw.x2260_sparkyGObj =
+        lb_8000B1CC(fp->ft_bones[0x15].x0_jobj, NULL, &sp10);
+        fp->fv.gw.x2260_sparkyGObj =
             it_802C720C(gobj, &sp10, 0x15, fp->facing_dir);
-        if (fp->ev.gw.x2260_sparkyGObj != NULL) {
+        if (fp->fv.gw.x2260_sparkyGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
             fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
             fp->cb.x21D4_callback_EnterHitlag =
@@ -217,11 +223,11 @@ void ftGw_AttackAirN_ItemSparkyOnLand(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x2260_sparkyGObj != NULL) {
+    if (fp->fv.gw.x2260_sparkyGObj != NULL) {
         ftGw_AttackAirN_ExitItemHitlag(gobj);
 
-        if (fp->action_id == AS_GAMEWATCH_LANDINGAIRN) {
-            it_802C7424(fp->ev.gw.x2260_sparkyGObj);
+        if (fp->motion_id == ftGw_MS_LandingAirN) {
+            it_802C7424(fp->fv.gw.x2260_sparkyGObj);
         }
 
         fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
@@ -240,7 +246,7 @@ void ftGw_AttackAirN_ItemSparkySetFlag(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftGw_AttackAirN_ExitItemHitlag(gobj);
-    fp->ev.gw.x2260_sparkyGObj = NULL;
+    fp->fv.gw.x2260_sparkyGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
@@ -251,8 +257,8 @@ void ftGw_AttackAirN_ItemSparkyRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x2260_sparkyGObj != NULL) {
-        it_802C7340(fp->ev.gw.x2260_sparkyGObj);
+    if (fp->fv.gw.x2260_sparkyGObj != NULL) {
+        it_802C7340(fp->fv.gw.x2260_sparkyGObj);
         ftGw_AttackAirN_ItemSparkySetFlag(gobj);
     }
 }
@@ -264,14 +270,14 @@ void ftGw_AttackAirN_EnterItemHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x2258_parachuteGObj != NULL) {
-        it_802C6DB8(fp->ev.gw.x2258_parachuteGObj);
+    if (fp->fv.gw.x2258_parachuteGObj != NULL) {
+        it_802C6DB8(fp->fv.gw.x2258_parachuteGObj);
     }
-    if (fp->ev.gw.x225C_turtleGObj != NULL) {
-        it_802C70C0(fp->ev.gw.x225C_turtleGObj);
+    if (fp->fv.gw.x225C_turtleGObj != NULL) {
+        it_802C70C0(fp->fv.gw.x225C_turtleGObj);
     }
-    if (fp->ev.gw.x2260_sparkyGObj != NULL) {
-        it_802C738C(fp->ev.gw.x2260_sparkyGObj);
+    if (fp->fv.gw.x2260_sparkyGObj != NULL) {
+        it_802C738C(fp->fv.gw.x2260_sparkyGObj);
     }
 }
 
@@ -280,14 +286,14 @@ static void ftGw_AttackAirN_ExitItemHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x2258_parachuteGObj != NULL) {
-        it_802C6DD8(fp->ev.gw.x2258_parachuteGObj);
+    if (fp->fv.gw.x2258_parachuteGObj != NULL) {
+        it_802C6DD8(fp->fv.gw.x2258_parachuteGObj);
     }
-    if (fp->ev.gw.x225C_turtleGObj != NULL) {
-        it_802C70E0(fp->ev.gw.x225C_turtleGObj);
+    if (fp->fv.gw.x225C_turtleGObj != NULL) {
+        it_802C70E0(fp->fv.gw.x225C_turtleGObj);
     }
-    if (fp->ev.gw.x2260_sparkyGObj != NULL) {
-        it_802C73AC(fp->ev.gw.x2260_sparkyGObj);
+    if (fp->fv.gw.x2260_sparkyGObj != NULL) {
+        it_802C73AC(fp->fv.gw.x2260_sparkyGObj);
     }
 }
 
@@ -297,11 +303,9 @@ static void ftGw_AttackAirN_ExitItemHitlag(HSD_GObj* gobj)
 bool ftGw_AttackAirN_ItemCheckSparkyRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 ASID = fp->action_id;
+    s32 msid = fp->motion_id;
 
-    if ((ASID >= AS_GAMEWATCH_ATTACKAIRHI) &&
-        (ASID <= AS_GAMEWATCH_LANDINGAIRHI))
-    {
+    if ((msid >= ftGw_MS_AttackAirHi) && (msid <= ftGw_MS_LandingAirHi)) {
         return false;
     }
     return true;
@@ -315,23 +319,23 @@ static void ftGw_AttackAirHi_Enter(HSD_GObj*);
 // Motion State
 void ftGw_AttackAirN_DecideAction(HSD_GObj* gobj)
 {
-    enum_t ASID = ft_8008CE68(GET_FIGHTER(gobj));
+    enum_t msid = ft_8008CE68(GET_FIGHTER(gobj));
 
-    switch (ASID) {
-    case ASID_ATTACKAIRN:
+    switch (msid) {
+    case ftCo_MS_AttackAirN:
         ftGw_AttackAirN_Enter(gobj);
         return;
-    case ASID_ATTACKAIRF:
-        ft_8008CFAC(gobj, ASID);
+    case ftCo_MS_AttackAirF:
+        ft_8008CFAC(gobj, msid);
         return;
-    case ASID_ATTACKAIRB:
+    case ftCo_MS_AttackAirB:
         ftGw_AttackAirB_Enter(gobj);
         return;
-    case ASID_ATTACKAIRHI:
+    case ftCo_MS_AttackAirHi:
         ftGw_AttackAirHi_Enter(gobj);
         return;
-    case ASID_ATTACKAIRLW:
-        ft_8008CFAC(gobj, ASID);
+    case ftCo_MS_AttackAirLw:
+        ft_8008CFAC(gobj, msid);
         return;
     }
 }
@@ -343,7 +347,7 @@ void ftGw_AttackAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ft_8008CFAC(gobj, AS_GAMEWATCH_ATTACKAIRN);
+    ft_8008CFAC(gobj, ftGw_MS_AttackAirN);
     fp->cb.x21BC_callback_Accessory4 = ftGw_AttackAirN_ItemParachuteSetup;
 }
 
@@ -391,16 +395,16 @@ void ftGw_LandingAirN_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->ev.gw.x2258_parachuteGObj != NULL) {
-        it_802C6DD8(fp->ev.gw.x2258_parachuteGObj);
+    if (fp->fv.gw.x2258_parachuteGObj != NULL) {
+        it_802C6DD8(fp->fv.gw.x2258_parachuteGObj);
     }
 
-    if (fp->ev.gw.x225C_turtleGObj != NULL) {
-        it_802C70E0(fp->ev.gw.x225C_turtleGObj);
+    if (fp->fv.gw.x225C_turtleGObj != NULL) {
+        it_802C70E0(fp->fv.gw.x225C_turtleGObj);
     }
 
-    if (fp->ev.gw.x2260_sparkyGObj != NULL) {
-        it_802C73AC(fp->ev.gw.x2260_sparkyGObj);
+    if (fp->fv.gw.x2260_sparkyGObj != NULL) {
+        it_802C73AC(fp->fv.gw.x2260_sparkyGObj);
     }
 
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
@@ -420,7 +424,7 @@ static void ftGw_AttackAirB_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ft_8008CFAC(gobj, AS_GAMEWATCH_ATTACKAIRB);
+    ft_8008CFAC(gobj, ftGw_MS_AttackAirB);
     fp->cb.x21BC_callback_Accessory4 = ftGw_AttackAirN_ItemTurtleSetup;
 }
 
@@ -466,16 +470,16 @@ void ftGw_LandingAirB_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->ev.gw.x2258_parachuteGObj != NULL) {
-        it_802C6DD8(fp->ev.gw.x2258_parachuteGObj);
+    if (fp->fv.gw.x2258_parachuteGObj != NULL) {
+        it_802C6DD8(fp->fv.gw.x2258_parachuteGObj);
     }
 
-    if (fp->ev.gw.x225C_turtleGObj != NULL) {
-        it_802C70E0(fp->ev.gw.x225C_turtleGObj);
+    if (fp->fv.gw.x225C_turtleGObj != NULL) {
+        it_802C70E0(fp->fv.gw.x225C_turtleGObj);
     }
 
-    if (fp->ev.gw.x2260_sparkyGObj != NULL) {
-        it_802C73AC(fp->ev.gw.x2260_sparkyGObj);
+    if (fp->fv.gw.x2260_sparkyGObj != NULL) {
+        it_802C73AC(fp->fv.gw.x2260_sparkyGObj);
     }
 
     if ((u32) fp->x2200_ftcmd_var0 != 0) {
@@ -493,7 +497,7 @@ static void ftGw_AttackAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ft_8008CFAC(gobj, AS_GAMEWATCH_ATTACKAIRHI);
+    ft_8008CFAC(gobj, ftGw_MS_AttackAirHi);
     fp->cb.x21BC_callback_Accessory4 = ftGw_AttackAirN_ItemSparkySetup;
 }
 
@@ -531,16 +535,16 @@ void ftGw_LandingAirHi_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->ev.gw.x2258_parachuteGObj != NULL) {
-        it_802C6DD8(fp->ev.gw.x2258_parachuteGObj);
+    if (fp->fv.gw.x2258_parachuteGObj != NULL) {
+        it_802C6DD8(fp->fv.gw.x2258_parachuteGObj);
     }
 
-    if (fp->ev.gw.x225C_turtleGObj != NULL) {
-        it_802C70E0(fp->ev.gw.x225C_turtleGObj);
+    if (fp->fv.gw.x225C_turtleGObj != NULL) {
+        it_802C70E0(fp->fv.gw.x225C_turtleGObj);
     }
 
-    if (fp->ev.gw.x2260_sparkyGObj != NULL) {
-        it_802C73AC(fp->ev.gw.x2260_sparkyGObj);
+    if (fp->fv.gw.x2260_sparkyGObj != NULL) {
+        it_802C73AC(fp->fv.gw.x2260_sparkyGObj);
     }
 
     if (fp->x2200_ftcmd_var0 != 0) {
@@ -560,8 +564,7 @@ static void ftGw_LandingAirN_Init(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    ft_8008D708(gobj, AS_GAMEWATCH_LANDINGAIRN,
-                fp->x110_attr.x1F8_NAirLandingLag);
+    ft_8008D708(gobj, ftGw_MS_LandingAirN, fp->x110_attr.x1F8_NAirLandingLag);
 }
 
 // 0x8014BB24
@@ -572,7 +575,7 @@ void ftGw_LandingAirN_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCo_Landing_Anim(gobj);
-    if (fp->action_id != AS_GAMEWATCH_LANDINGAIRN) {
+    if (fp->motion_id != ftGw_MS_LandingAirN) {
         ftGw_Init_OnDamage(gobj);
     }
 }
@@ -599,7 +602,7 @@ void ftGw_LandingAirN_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCo_Landing_Coll(gobj);
-    if (fp->action_id != AS_GAMEWATCH_LANDINGAIRN) {
+    if (fp->motion_id != ftGw_MS_LandingAirN) {
         ftGw_Init_OnDamage(gobj);
     }
 }
@@ -611,8 +614,7 @@ void ftGw_LandingAirB_Init(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ft_8008D708(gobj, AS_GAMEWATCH_LANDINGAIRB,
-                fp->x110_attr.x200_BAirLandingLag);
+    ft_8008D708(gobj, ftGw_MS_LandingAirB, fp->x110_attr.x200_BAirLandingLag);
 }
 
 // 0x8014BC0C
@@ -623,7 +625,7 @@ void ftGw_LandingAirB_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCo_Landing_Anim(gobj);
-    if (fp->action_id != AS_GAMEWATCH_LANDINGAIRB) {
+    if (fp->motion_id != ftGw_MS_LandingAirB) {
         ftGw_Init_OnDamage(gobj);
     }
 }
@@ -650,7 +652,7 @@ void ftGw_LandingAirB_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCo_Landing_Coll(gobj);
-    if (fp->action_id != AS_GAMEWATCH_LANDINGAIRB) {
+    if (fp->motion_id != ftGw_MS_LandingAirB) {
         ftGw_Init_OnDamage(gobj);
     }
 }
@@ -662,7 +664,7 @@ void ftGw_LandingAirHi_Init(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ft_8008D708(gobj, AS_GAMEWATCH_LANDINGAIRHI,
+    ft_8008D708(gobj, ftGw_MS_LandingAirHi,
                 fp->x110_attr.x200_BAirLandingLag); // Erroneously using Back
                                                     // Aerial's landing lag
 }
@@ -675,7 +677,7 @@ void ftGw_LandingAirHi_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCo_Landing_Anim(gobj);
-    if (fp->action_id != AS_GAMEWATCH_LANDINGAIRHI) {
+    if (fp->motion_id != ftGw_MS_LandingAirHi) {
         ftGw_Init_OnDamage(gobj);
     }
 }
@@ -702,7 +704,7 @@ void ftGw_LandingAirHi_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCo_Landing_Coll(gobj);
-    if (fp->action_id != AS_GAMEWATCH_LANDINGAIRHI) {
+    if (fp->motion_id != ftGw_MS_LandingAirHi) {
         ftGw_Init_OnDamage(gobj);
     }
 }

@@ -2,14 +2,16 @@
 #define MELEE_FT_CHARA_FTCAPTAIN_TYPES_H
 
 #include <platform.h>
+#include "ft/forward.h"
 #include "ftCaptain/forward.h"
 
-struct ftCaptain_EntityVars {
-    /* 0x222C */ uint during_specials_start;
-    /* 0x2230 */ uint during_specials;
+struct ftCaptain_FighterVars {
+    /* 0x222C */ u32 during_specials_start;
+    /* 0x2230 */ u32 during_specials;
+    u8 _[FighterVars_Size - 8];
 };
 
-struct ftCaptainAttributes {
+struct ftCaptain_DatAttrs {
     f32 specialn_stick_range_y_neg;
     f32 specialn_stick_range_y_pos;
     f32 specialn_angle_diff;
@@ -47,7 +49,7 @@ struct ftCaptainAttributes {
     f32 speciallw_air_landing_traction;
 };
 
-union ftCaptain_StateVars {
+union ftCaptain_MotionVars {
     struct ftCaptainSpecialSVars {
         f32 grav;
     } specials;

@@ -1,5 +1,7 @@
 #include "ft/forward.h"
 
+#include "ftMr_Strings.h"
+
 #include "ft/types.h"
 
 char ftMr_Init_DatFilename[] = "PlMr.dat";

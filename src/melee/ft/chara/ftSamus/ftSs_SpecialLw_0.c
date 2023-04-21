@@ -1,11 +1,12 @@
 #include "ftSs_SpecialLw_0.h"
 
-#include "ftsamus.h"
+#include "ftSs_Init.h"
 #include "ftSs_SpecialLw_1.h"
 #include "types.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ftcommon.h"
 
 #include <trigf.h>
 
@@ -95,8 +96,8 @@ void ftSs_Init_80128B1C(HSD_GObj* gobj, f32 angle, f32 arg9, f32 argA)
     ftSamus_80128B1C_inner(gobj, angle);
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
-    fp->sv.ss.unk2.x0 = 0;
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    fp->mv.ss.unk2.x0 = 0;
+    if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4(fighter2);
     }
     Fighter_ChangeMotionState(gobj, 0x156, 0, 0, arg9, argA, 0.0f);
@@ -106,13 +107,13 @@ void ftSs_Init_80128B1C(HSD_GObj* gobj, f32 angle, f32 arg9, f32 argA)
 void ftSs_SpecialLw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->x2200_ftcmd_var0) && (!fp->sv.ss.unk2.x0)) {
+    if ((fp->x2200_ftcmd_var0) && (!fp->mv.ss.unk2.x0)) {
         ftSs_SpecialLw_8012AEBC(gobj);
-        fp->sv.ss.unk2.x0 = 1;
+        fp->mv.ss.unk2.x0 = 1;
     }
-    if ((!fp->x2200_ftcmd_var0) && (fp->sv.ss.unk2.x0)) {
+    if ((!fp->x2200_ftcmd_var0) && (fp->mv.ss.unk2.x0)) {
         ftSs_SpecialLw_8012AF38(gobj);
-        fp->sv.ss.unk2.x0 = 0;
+        fp->mv.ss.unk2.x0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -122,13 +123,13 @@ void ftSs_SpecialLw_Anim(HSD_GObj* gobj)
 void ftSs_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->x2200_ftcmd_var0) && (!fp->sv.ss.unk2.x0)) {
+    if ((fp->x2200_ftcmd_var0) && (!fp->mv.ss.unk2.x0)) {
         ftSs_SpecialLw_8012AEBC(gobj);
-        fp->sv.ss.unk2.x0 = 1;
+        fp->mv.ss.unk2.x0 = 1;
     }
-    if ((!fp->x2200_ftcmd_var0) && (fp->sv.ss.unk2.x0)) {
+    if ((!fp->x2200_ftcmd_var0) && (fp->mv.ss.unk2.x0)) {
         ftSs_SpecialLw_8012AF38(gobj);
-        fp->sv.ss.unk2.x0 = 0;
+        fp->mv.ss.unk2.x0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
@@ -212,9 +213,8 @@ void ftSs_SpecialLw_Phys(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0) {
         f32 samus_attr_xC = samus_attr->xC;
-        ftCommon_8007CADC(fp, 0.0f,
-                          ftAttr->x110_WalkInitialVelocity * samus_attr_xC,
-                          ftAttr->x118_WalkMaximumVelocity * samus_attr_xC);
+        ftCommon_8007CADC(fp, 0.0f, ftAttr->walk_init_vel * samus_attr_xC,
+                          ftAttr->walk_max_vel * samus_attr_xC);
         ftCommon_8007CB74(gobj);
     } else {
         ft_80084F3C(gobj);
@@ -309,11 +309,11 @@ int ftSs_SpecialLw_80129100(HSD_GObj* gobj, s32* arg1, s32* arg2)
         u8 _[4];
 #endif
 
-        if (!fp->ev.ss.x222C) {
+        if (!fp->fv.ss.x222C) {
             return -1;
         }
 
-        *arg1 = fp->ev.ss.x2230;
+        *arg1 = fp->fv.ss.x2230;
         *arg2 = samus_attr->x18;
         return 0;
     }
@@ -325,8 +325,8 @@ s32 ftSs_SpecialLw_80129158(HSD_GObj* gobj)
 {
     if (gobj) {
         Fighter* fp = GET_FIGHTER(gobj);
-        s32 action_state_index = fp->action_id;
-        switch (action_state_index) {
+        s32 motion_state_index = fp->motion_id;
+        switch (motion_state_index) {
         case 0x157:
         case 0x158:
         case 0x159:
@@ -348,9 +348,9 @@ s32 ftSs_SpecialN_801291A8(HSD_GObj* gobj)
 {
     if (gobj) {
         Fighter* fp = GET_FIGHTER(gobj);
-        s32 action_state_index = fp->action_id;
+        s32 motion_state_index = fp->motion_id;
 
-        switch (action_state_index) {
+        switch (motion_state_index) {
         case 0x157:
         case 0x158:
         case 0x15A:

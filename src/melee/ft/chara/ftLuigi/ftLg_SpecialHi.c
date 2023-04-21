@@ -1,8 +1,16 @@
+#include "forward.h"
+
+#include "ftLg_SpecialHi.h"
+
+#include "ftLg_Init.h"
+#include "types.h"
+
 #include "ef/efsync.h"
-#include "ft/chara/ftLuigi/ftLg_Init.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 
 // 0x80143FC8
 // https://decomp.me/scratch/MAoxx // Luigi's grounded Super Jump Punch Action
@@ -13,7 +21,7 @@ void ftLg_SpecialHi_Enter(HSD_GObj* gobj)
 
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ChangeMotionState(gobj, AS_LUIGI_SPECIALHI, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialHi, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
 }
@@ -33,7 +41,7 @@ void ftLg_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->x2210_ThrowFlags.flags = 0;
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x *= luigiAttrs->x64_LUIGI_SUPERJUMP_VEL_X;
-    Fighter_ChangeMotionState(gobj, AS_LUIGI_SPECIALAIRHI, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirHi, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
 }
@@ -210,7 +218,7 @@ void ftLg_SpecialAirHi_IASA(HSD_GObj* gobj)
 // callback
 void ftLg_SpecialHi_Phys(HSD_GObj* gobj)
 {
-    if ((s32) GET_FIGHTER(gobj)->xE0_ground_or_air == GA_Air) {
+    if ((s32) GET_FIGHTER(gobj)->ground_or_air == GA_Air) {
         ft_80085154(gobj);
         return;
     }
@@ -255,7 +263,7 @@ void ftLg_SpecialHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((s32) fp->xE0_ground_or_air == GA_Air) {
+    if ((s32) fp->ground_or_air == GA_Air) {
         if (((u32) fp->x2200_ftcmd_var0 == 0U) || (fp->x80_self_vel.y >= 0.0f))
         {
             ft_80083B68(gobj);
@@ -274,7 +282,7 @@ void ftLg_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((s32) fp->xE0_ground_or_air == GA_Air) {
+    if ((s32) fp->ground_or_air == GA_Air) {
         if (((u32) fp->x2200_ftcmd_var0 == 0U) || (fp->x80_self_vel.y >= 0.0f))
         {
             ft_80083B68(gobj);

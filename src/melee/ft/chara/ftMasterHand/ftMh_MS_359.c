@@ -5,57 +5,50 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftbosslib.h"
+#include "ft/inlines.h"
 #include "lb/lbvector.h"
 
-// 8015287C 14F45C
-void ftMh_MS_358_Coll(HSD_GObj* gobj)
-{
-    return;
-}
+#include <dolphin/mtx/types.h>
 
-// 80152880 14F460
-// https://decomp.me/scratch/is1xu
+void ftMh_MS_358_Coll(HSD_GObj* gobj) {}
+
 void ftMh_MS_358_80152880(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, 0x167, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Poke_StartMotion, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
-    fp->sv.mh.unk13.x0 = attr->x94 + HSD_Randi(attr->x90 - attr->x94);
-    fp->sv.mh.unk13.x4 = 0.0f;
+    fp->mv.mh.unk13.x0 = attr->x94 + HSD_Randi(attr->x90 - attr->x94);
+    fp->mv.mh.unk13.x4 = 0;
 }
 
-// 80152928 14F508
-// https://decomp.me/scratch/WyNdB
 void ftMh_MS_359_Anim(HSD_GObj* gobj)
 {
-    Fighter* temp_r31;
-    Fighter* temp_r4;
-
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        temp_r4 = GET_FIGHTER(gobj);
-        temp_r4->sv.mh.unk13.x4 = 1.0f;
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->mv.mh.unk13.x4 = 1;
 
-        if (--temp_r4->sv.mh.unk13.x0 < 0.0f) {
-            temp_r4->sv.mh.unk13.x4 = 0.0f;
-            temp_r4->x80_self_vel.x = 0.0f;
-            temp_r4->x80_self_vel.y = 0.0f;
-            temp_r31 = GET_FIGHTER(gobj);
-            Fighter_ChangeMotionState(gobj, 0x168, 0, 0, 0.0f, 1.0f, 0.0f);
-            ftAnim_8006EBA4(gobj);
-            ft_80088148(temp_r31, 0x4E207, 0x7F, 0x40);
+        if (--fp->mv.mh.unk13.x0 < 0) {
+            fp->mv.mh.unk13.x4 = 0;
+            fp->x80_self_vel.x = 0;
+            fp->x80_self_vel.y = 0;
+
+            {
+                Fighter* fp = GET_FIGHTER(gobj);
+                Fighter_ChangeMotionState(gobj, ftMh_MS_Unk360, 0, 0, 0, 1, 0);
+                ftAnim_8006EBA4(gobj);
+                ft_80088148(fp, 320007, 127, 64);
+            }
         }
     }
 }
 
-// 801529D0 14F5B0
-// https://decomp.me/scratch/IBucf
 void ftMh_MS_360_Anim(HSD_GObj* arg0)
 {
     if (!ftAnim_IsFramesRemaining(arg0)) {
@@ -63,18 +56,14 @@ void ftMh_MS_360_Anim(HSD_GObj* arg0)
     }
 }
 
-// 80152A0C 14F5EC
-// https://decomp.me/scratch/7UfC7
-void ftMh_MS_359_IASA(HSD_GObj* arg0)
+void ftMh_MS_359_IASA(HSD_GObj* gobj)
 {
-    Fighter* fp = arg0->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        ftBossLib_8015BD20(arg0);
+        ftBossLib_8015BD20(gobj);
     }
 }
 
-// 80152A50 14F630
-// https://decomp.me/scratch/YmoFC
 static inline float my_sqrtf(float x)
 {
     static const double _half = .5;
@@ -86,7 +75,7 @@ static inline float my_sqrtf(float x)
 #endif
 
     volatile float y;
-    if (x > 0.0f) {
+    if (x > 0) {
         double guess = __frsqrte((double) x); // returns an approximation to
         guess = _half * guess *
                 (_three - guess * guess * x); // now have 12 sig bits
@@ -100,43 +89,48 @@ static inline float my_sqrtf(float x)
     return x;
 }
 
-static inline float my_lbvector_Len(Vec3* vec)
+static inline float my_lbVector_Len(Vec3* vec)
 {
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
 void ftMh_MS_359_Phys(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    ftMasterHand_SpecialAttrs* attr;
-    f32 speed;
-    ftData* ftData;
-    Vec3 sp28_pos;
-    Vec3 sp1C_vel;
-    f32 len;
-
-    fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ft_80085134(gobj);
-    if (fp->sv.mh.unk13.x4) {
-        ftData = fp->x10C_ftData;
-        attr = ftData->ext_attr;
-        ftBossLib_8015C208(gobj, &sp28_pos);
-        sp28_pos.x += attr->x98;
-        sp28_pos.y += attr->x9C;
-        sp28_pos.z = 0.0f;
-        lbVector_Diff(&sp28_pos, &fp->cur_pos, &sp1C_vel);
-        len = my_lbvector_Len(&sp1C_vel);
-        if (len < attr->x2C) {
-            fp->x80_self_vel.x = sp1C_vel.x;
-            fp->x80_self_vel.y = sp1C_vel.y;
-        } else {
-            lbVector_Normalize(&sp1C_vel);
-            speed = len * attr->x28;
-            sp1C_vel.x *= speed;
-            sp1C_vel.y *= speed;
-            sp1C_vel.z *= speed;
-            fp->x80_self_vel.x = sp1C_vel.x;
-            fp->x80_self_vel.y = sp1C_vel.y;
+
+    if (fp->mv.mh.unk13.x4) {
+        ftData* ftData = fp->ft_data;
+        ftMasterHand_SpecialAttrs* attr = ftData->ext_attr;
+
+        {
+            Vec3 pos;
+            ftBossLib_8015C208(gobj, &pos);
+            pos.x += attr->x98;
+            pos.y += attr->x9C;
+            pos.z = 0;
+
+            {
+                Vec3 vel;
+                lbVector_Diff(&pos, &fp->cur_pos, &vel);
+                {
+                    float len = my_lbVector_Len(&vel);
+                    if (len < attr->x2C) {
+                        fp->x80_self_vel.x = vel.x;
+                        fp->x80_self_vel.y = vel.y;
+                    } else {
+                        lbVector_Normalize(&vel);
+                        {
+                            float speed = len * attr->x28;
+                            vel.x *= speed;
+                            vel.y *= speed;
+                            vel.z *= speed;
+                        }
+                        fp->x80_self_vel.x = vel.x;
+                        fp->x80_self_vel.y = vel.y;
+                    }
+                }
+            }
         }
     }
 }

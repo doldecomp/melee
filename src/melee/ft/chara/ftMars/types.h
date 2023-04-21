@@ -2,8 +2,14 @@
 #define MELEE_FT_CHARA_FTMARS_TYPES_H
 
 #include <platform.h>
+#include "ft/forward.h"
 
 #include <placeholder.h>
+
+struct ftMars_FighterVars {
+    /* 0x222C */ u32 x222C;
+    u8 _[FighterVars_Size - 4];
+};
 
 typedef struct _MarsAttributes {
     s32 x0;
@@ -35,8 +41,8 @@ typedef struct _MarsAttributes {
     u8 data_filler_68[0x98 - 0x68];
 } MarsAttributes;
 
-union ftMars_StateVars {
-    struct ftMars_Unk0StateVars {
+union ftMars_MotionVars {
+    struct ftMars_Unk0MotionVars {
         bool x0;
     } unk0;
 

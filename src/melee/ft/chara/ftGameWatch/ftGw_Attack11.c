@@ -1,9 +1,16 @@
+#include "forward.h"
+
+#include "ftGw_Attack11.h"
+
 #include "ftGw_Init.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/inlines.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
+
+#include <dolphin/mtx/types.h>
 
 // 0x8014BDB0
 // https://decomp.me/scratch/7BADg // Create Insecticide Spray Item
@@ -18,13 +25,13 @@ void ftGw_Attack11_ItemGreenhouseSetup(HSD_GObj* gobj)
 
     Fighter* fp = getFighter(gobj);
 
-    if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
+    if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
         ftGw_Attack11_DecideAction(gobj);
     } else {
-        lb_8000B1CC(fp->x5E8_fighterBones[0x20].x0_jobj, NULL, &sp10);
-        fp->ev.gw.x224C_greenhouseGObj =
+        lb_8000B1CC(fp->ft_bones[0x20].x0_jobj, NULL, &sp10);
+        fp->fv.gw.x224C_greenhouseGObj =
             it_802C61F4(gobj, &sp10, 0x20, fp->facing_dir);
-        if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
+        if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
             if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
                 fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
             }
@@ -45,18 +52,18 @@ void ftGw_Attack11_ItemGreenhouseSetup(HSD_GObj* gobj)
 void ftGw_Attack11_DecideAction(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 ASID;
+    s32 msid;
 
-    if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
-        ASID = fp->action_id;
-        if (ASID == AS_GAMEWATCH_ATTACK11) {
-            it_802C6430(fp->ev.gw.x224C_greenhouseGObj);
-        } else if (ASID == AS_GAMEWATCH_ATTACK100START) {
-            it_802C6458(fp->ev.gw.x224C_greenhouseGObj);
-        } else if (ASID == AS_GAMEWATCH_ATTACK100LOOP) {
-            it_802C6480(fp->ev.gw.x224C_greenhouseGObj);
-        } else if (ASID == AS_GAMEWATCH_ATTACK100END) {
-            it_802C64A8(fp->ev.gw.x224C_greenhouseGObj);
+    if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
+        msid = fp->motion_id;
+        if (msid == ftGw_MS_Attack11) {
+            it_802C6430(fp->fv.gw.x224C_greenhouseGObj);
+        } else if (msid == ftGw_MS_Attack100Start) {
+            it_802C6458(fp->fv.gw.x224C_greenhouseGObj);
+        } else if (msid == ftGw_MS_Attack100Loop) {
+            it_802C6480(fp->fv.gw.x224C_greenhouseGObj);
+        } else if (msid == ftGw_MS_Attack100End) {
+            it_802C64A8(fp->fv.gw.x224C_greenhouseGObj);
         }
 
         if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
@@ -81,7 +88,7 @@ void ftGw_Attack11_ItemGreenhouseSetFlag(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftGw_Attack11_ItemGreenhouseExitHitlag(gobj);
-    fp->ev.gw.x224C_greenhouseGObj = NULL;
+    fp->fv.gw.x224C_greenhouseGObj = NULL;
 }
 
 // 0x8014BF7C
@@ -96,8 +103,8 @@ void ftGw_Attack11_ItemGreenhouseRemove(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
-        it_802C6328(fp->ev.gw.x224C_greenhouseGObj);
+    if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
+        it_802C6328(fp->fv.gw.x224C_greenhouseGObj);
         ftGw_Attack11_ItemGreenhouseSetFlag(gobj);
     }
 }
@@ -108,8 +115,8 @@ void ftGw_Attack11_ItemGreenhouseRemove(HSD_GObj* gobj)
 void ftGw_Attack11_ItemGreenhouseEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
-        it_802C6374(fp->ev.gw.x224C_greenhouseGObj);
+    if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
+        it_802C6374(fp->fv.gw.x224C_greenhouseGObj);
     }
 }
 
@@ -117,8 +124,8 @@ void ftGw_Attack11_ItemGreenhouseEnterHitlag(HSD_GObj* gobj)
 void ftGw_Attack11_ItemGreenhouseExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
-        it_802C6394(fp->ev.gw.x224C_greenhouseGObj);
+    if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
+        it_802C6394(fp->fv.gw.x224C_greenhouseGObj);
     }
 }
 
@@ -127,9 +134,8 @@ void ftGw_Attack11_ItemGreenhouseExitHitlag(HSD_GObj* gobj)
 // his jab action states
 bool ftGw_Attack11_ItemGreenhouse_CheckAll(HSD_GObj* gobj)
 {
-    s32 ASID = GET_FIGHTER(gobj)->action_id;
-    if ((ASID >= AS_GAMEWATCH_ATTACK11) && (ASID <= AS_GAMEWATCH_ATTACK100END))
-    {
+    s32 msid = GET_FIGHTER(gobj)->motion_id;
+    if ((msid >= ftGw_MS_Attack11) && (msid <= ftGw_MS_Attack100End)) {
         return false;
     }
     return true;
@@ -138,7 +144,7 @@ bool ftGw_Attack11_ItemGreenhouse_CheckAll(HSD_GObj* gobj)
 // 0x8014C05C - Check if Mr. Game & Watch is performing Jab 1 (Attack11)
 bool ftGw_Attack11_ItemGreenhouse_CheckAttack11(HSD_GObj* gobj)
 {
-    if (GET_FIGHTER(gobj)->action_id != AS_GAMEWATCH_ATTACK11) {
+    if (GET_FIGHTER(gobj)->motion_id != ftGw_MS_Attack11) {
         return true;
     }
     return false;
@@ -159,13 +165,13 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
     if (ft_80094790(gobj) == false) {
         fp->x2218_flag.bits.b0 = 0;
         fp->x2218_flag.bits.b1 = 0;
-        Fighter_ChangeMotionState(gobj, AS_GAMEWATCH_ATTACK11, 0, NULL, 0.0f,
-                                  1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, ftGw_MS_Attack11, 0, NULL, 0.0f, 1.0f,
+                                  0.0f);
         ftAnim_8006EBA4(gobj);
         fp->x196C_hitlag_mult = (f32) fp->x110_attr.x18C_Jab_2InputWindow;
         fp->x1970 = 44;
         fp->x2218_flag.bits.b2 = 0;
-        fp->sv.gw.Attack11.unk = 0;
+        fp->mv.gw.Attack11.unk = 0;
         fp->x1A54 = 0;
         fp->cb.x21BC_callback_Accessory4 = ftGw_Attack11_ItemGreenhouseSetup;
     }

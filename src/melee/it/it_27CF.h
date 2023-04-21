@@ -40,7 +40,8 @@ void* it_802C8B28(HSD_GObj*, Vec3*, u32, f32);
 void it_802D8618(s32, Vec3*, s32, s32);
 u32 it_802F0340(HSD_GObj*, Vec3*, Vec3*, u32, u32, f32);
 void it_802F046C(s32);
-void it_802F0AE0(HSD_GObj*, Vec3*, Vec3*, s32, s32, f32, f32, f32);
+void it_802F0AE0(HSD_GObj* fighter_gobj, Vec3*, Vec3*, enum_t, bool,
+                 f32 facing_dir, f32, f32);
 
 /// @todo @c arg0 is likely a @c HSD_GObj*.
 void it_802C0DBC(u32 arg0);

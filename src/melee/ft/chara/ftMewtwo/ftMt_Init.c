@@ -1,4 +1,9 @@
-#include "ft/chara/ftMewtwo/ftMt_Init.h"
+#include "ftMt_Init.h"
+
+#include "ftMt_SpecialHi.h"
+#include "ftMt_SpecialLw.h"
+#include "ftMt_SpecialN.h"
+#include "ftMt_SpecialS.h"
 
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
@@ -242,22 +247,22 @@ void ftMt_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
     ftParts_80074A4C(gobj, 0, 0);
-    fp->ev.mt.x222C_disableGObj = NULL;
-    fp->ev.mt.x2230_shadowHeldGObj = NULL;
-    fp->ev.mt.x2234_shadowBallCharge = 0;
-    fp->ev.mt.x2238_shadowBallGObj = NULL;
-    fp->ev.mt.x223C_isConfusionBoost = false;
+    fp->fv.mt.x222C_disableGObj = NULL;
+    fp->fv.mt.x2230_shadowHeldGObj = NULL;
+    fp->fv.mt.x2234_shadowBallCharge = 0;
+    fp->fv.mt.x2238_shadowBallGObj = NULL;
+    fp->fv.mt.x223C_isConfusionBoost = false;
 }
 
 void ftMt_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    void** item_list = fp->x10C_ftData->x48_items;
+    void** item_list = fp->ft_data->x48_items;
 
     PUSH_ATTRS(fp, ftMewtwoAttributes);
 
     {
-        fp->x5E8_fighterBones[1].flags.bits.b4 = 1;
+        fp->ft_bones[1].flags.bits.b4 = 1;
         fp->x2221_flag.bits.b2 = 1;
     }
     it_8026B3F8(item_list[0], It_Kind_Mewtwo_Disable);
@@ -299,7 +304,7 @@ void ftMt_Init_UnkMotionStates4(HSD_GObj* gobj)
     ftMewtwoAttributes* attr = fp->x2D4_specialAttributes;
     f32 attr_value = attr->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
 
-    if (fp->ev.mt.x2234_shadowBallCharge == attr_value) {
+    if (fp->fv.mt.x2234_shadowBallCharge == attr_value) {
         ft_800BFFD0(fp, 0x5C, 0);
     }
 }

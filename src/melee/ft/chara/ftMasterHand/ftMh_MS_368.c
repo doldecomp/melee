@@ -1,46 +1,35 @@
 #include "ftMh_MS_368.h"
 
-#include "ft/ftbosslib.h"
+#include "types.h"
 
-// 801539EC 1505CC
-void ftMh_MS_368_IASA(HSD_GObj* arg0)
+#include "ft/fighter.h"
+#include "ft/ftbosslib.h"
+#include "ft/types.h"
+
+void ftMh_MS_368_IASA(HSD_GObj* gobj)
 {
-    Fighter* fp = arg0->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        ftBossLib_8015BD20(arg0);
+        ftBossLib_8015BD20(gobj);
     }
 }
 
-// 80153A30 150610
-// https://decomp.me/scratch/oph8G
 void ftMh_MS_368_Phys(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    ftMasterHand_SpecialAttrs* r4_attributes = fp->x10C_ftData->ext_attr;
-
-    ftBossLib_8015BF74(gobj, r4_attributes->x58);
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftBossLib_8015BF74(gobj, attr->x58);
 }
 
-// 80153A60 150640
-void ftMh_MS_368_Coll(HSD_GObj* gobj)
-{
-    return;
-}
+void ftMh_MS_368_Coll(HSD_GObj* gobj) {}
 
-// 80153A64 150644
-// https://decomp.me/scratch/K5X6I
-void ftMh_MS_368_80153A64(HSD_GObj* arg0)
+void ftMh_MS_368_80153A64(HSD_GObj* gobj)
 {
-    Fighter* temp_r31;
-    ftMasterHand_SpecialAttrs* temp_r30;
-
-    temp_r31 = arg0->user_data;
-    temp_r30 = temp_r31->x10C_ftData->ext_attr;
-    Fighter_ChangeMotionState(arg0, 0x171, 0, 0, 0.0f, 1.0f, 0.0f);
-    ftAnim_8006EBA4(arg0);
-    temp_r31->cur_pos.x = temp_r30->x60;
-    temp_r31->cur_pos.y = temp_r30->x64;
-    temp_r31->x80_self_vel.z = 0.0f;
-    temp_r31->x80_self_vel.y = 0.0f;
-    temp_r31->x80_self_vel.x = 0.0f;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Unk369, 0, 0, 0, 1, 0);
+    ftAnim_8006EBA4(gobj);
+    fp->cur_pos.x = attr->x60;
+    fp->cur_pos.y = attr->x64;
+    fp->x80_self_vel.x = fp->x80_self_vel.y = fp->x80_self_vel.z = 0;
 }

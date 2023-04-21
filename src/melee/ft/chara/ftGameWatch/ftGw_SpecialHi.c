@@ -1,12 +1,20 @@
+#include "forward.h"
+
+#include "ftGw_SpecialHi.h"
+
 #include "ftGw_Init.h"
+#include "types.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
+
+#include <dolphin/mtx/types.h>
 
 static void ftGw_SpecialHi_ItemRescueEnterHitlag(HSD_GObj* gobj);
 static void ftGw_SpecialHi_ItemRescueExitHitlag(HSD_GObj* gobj);
@@ -20,12 +28,12 @@ void ftGw_SpecialHi_ItemRescueSetup(HSD_GObj* gobj)
     HSD_GObj* rescueGObj;
 
     fp = GET_FIGHTER(gobj);
-    if (fp->ev.gw.x226C_rescueGObj == NULL) {
-        lb_8000B1CC(fp->x5E8_fighterBones[0].x0_jobj, NULL, &sp10);
+    if (fp->fv.gw.x226C_rescueGObj == NULL) {
+        lb_8000B1CC(fp->ft_bones[0].x0_jobj, NULL, &sp10);
         sp10.y = -((2.5f * ftCommon_GetModelScale(fp)) - sp10.y);
-        rescueGObj = it_802C8038(gobj, &sp10, 0, fp->action_id - 0x175,
+        rescueGObj = it_802C8038(gobj, &sp10, 0, fp->motion_id - 0x175,
                                  fp->facing_dir, 2.5f);
-        fp->ev.gw.x226C_rescueGObj = rescueGObj;
+        fp->fv.gw.x226C_rescueGObj = rescueGObj;
         if (rescueGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
             fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
@@ -42,11 +50,11 @@ void ftGw_SpecialHi_ItemRescueSetup(HSD_GObj* gobj)
 // Fire Rescue
 bool ftGw_SpecialHi_ItemCheckRescueRemove(HSD_GObj* gobj)
 {
-    enum_t ASID = GET_FIGHTER(gobj)->action_id;
+    enum_t msid = GET_FIGHTER(gobj)->motion_id;
 
-    switch (ASID) {
-    case AS_GAMEWATCH_SPECIALHI:
-    case AS_GAMEWATCH_SPECIALAIRHI:
+    switch (msid) {
+    case ftGw_MS_SpecialHi:
+    case ftGw_MS_SpecialAirHi:
         return false;
     default:
         return true;
@@ -58,7 +66,7 @@ void ftGw_SpecialHi_ItemRescueSetNULL(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->ev.gw.x226C_rescueGObj = NULL;
+    fp->fv.gw.x226C_rescueGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
@@ -68,8 +76,8 @@ void ftGw_SpecialHi_ItemRescueRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x226C_rescueGObj != NULL) {
-        it_802C8158(fp->ev.gw.x226C_rescueGObj);
+    if (fp->fv.gw.x226C_rescueGObj != NULL) {
+        it_802C8158(fp->fv.gw.x226C_rescueGObj);
         ftGw_SpecialHi_ItemRescueSetNULL(gobj);
     }
 }
@@ -79,8 +87,8 @@ static void ftGw_SpecialHi_ItemRescueEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x226C_rescueGObj != NULL) {
-        it_802C81C8(fp->ev.gw.x226C_rescueGObj);
+    if (fp->fv.gw.x226C_rescueGObj != NULL) {
+        it_802C81C8(fp->fv.gw.x226C_rescueGObj);
     }
 }
 
@@ -89,8 +97,8 @@ static void ftGw_SpecialHi_ItemRescueExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x226C_rescueGObj != NULL) {
-        it_802C81E8(fp->ev.gw.x226C_rescueGObj);
+    if (fp->fv.gw.x226C_rescueGObj != NULL) {
+        it_802C81E8(fp->fv.gw.x226C_rescueGObj);
     }
 }
 
@@ -119,8 +127,8 @@ void ftGw_SpecialHi_Enter(HSD_GObj* gobj)
     fp->x74_anim_vel.y = 0.0f;
     fp->x80_self_vel.y = 0.0f;
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, AS_GAMEWATCH_SPECIALHI, 0, NULL, 0.0f,
-                              1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialHi, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     ftGameWatch_SpecialHi_SetVars(gobj);
     ftAnim_8006EBA4(gobj);
     ft_80088510(fp, 0x46D12, 0x7F, 0x40);
@@ -137,8 +145,8 @@ void ftGw_SpecialAirHi_Enter(HSD_GObj* gobj)
 #endif
 
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, AS_GAMEWATCH_SPECIALAIRHI, 0, NULL, 0.0f,
-                              1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirHi, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     ftGameWatch_SpecialHi_SetVars(gobj);
     ftAnim_8006EBA4(gobj);
     ft_80088510(fp, 0x46D12, 0x7F, 0x40);
@@ -265,9 +273,7 @@ void ftGw_SpecialAirHi_Coll(HSD_GObj* gobj)
             }
             if (ft_CheckGroundAndLedge(gobj, ledgeGrabDir) != false) {
                 ft_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
-                return;
-            }
-            if (ftCliffCommon_80081298(gobj) != false) {
+            } else if (ftCliffCommon_80081298(gobj) != false) {
                 ftCliffCommon_80081370(gobj);
             }
         }

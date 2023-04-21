@@ -1,7 +1,9 @@
-#include "ft/chara/ftMars/ftMs_Init.h"
+#include "ftMs_SpecialS.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
+#include "ftMars/ftMs_Init.h"
 #include "melee/ft/inlines.h"
 
 void ftMs_SpecialS_Enter(HSD_GObj* gobj)
@@ -20,11 +22,11 @@ void ftMs_SpecialS_Enter(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         fp->x2204_ftcmd_var1 = 0;
         fp->x2200_ftcmd_var0 = 0;
-        fp->sv.ms.specials.x0 = 0;
+        fp->mv.ms.specials.x0 = 0;
 
         {
             enum_t msid;
-            if (fp->xE0_ground_or_air == GA_Ground) {
+            if (fp->ground_or_air == GA_Ground) {
                 msid = 349;
             } else {
                 msid = 358;
@@ -43,8 +45,8 @@ void ftMs_SpecialAirS_Enter(HSD_GObj* gobj)
     MarsAttributes* attr = getFtSpecialAttrsD(fp0);
 
     fp0->x80_self_vel.x = fp0->x80_self_vel.x / attr->x14;
-    if ((signed) fp0->ev.ms.x222C == 0) {
-        fp0->ev.ms.x222C = 1;
+    if ((signed) fp0->fv.ms.x222C == 0) {
+        fp0->fv.ms.x222C = 1;
         fp0->x80_self_vel.y = attr->x1C;
     } else {
         fp0->x80_self_vel.y = 0;
@@ -54,11 +56,11 @@ void ftMs_SpecialAirS_Enter(HSD_GObj* gobj)
         Fighter* fp1 = GET_FIGHTER(gobj);
         fp1->x2204_ftcmd_var1 = 0;
         fp1->x2200_ftcmd_var0 = 0;
-        fp1->sv.ms.specials.x0 = 0;
+        fp1->mv.ms.specials.x0 = 0;
 
         {
             enum_t msid;
-            if (fp1->xE0_ground_or_air == GA_Ground) {
+            if (fp1->ground_or_air == GA_Ground) {
                 msid = 349;
             } else {
                 msid = 358;
@@ -76,7 +78,7 @@ void ftMs_SpecialS1_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (fp->xE0_ground_or_air == GA_Ground) {
+        if (fp->ground_or_air == GA_Ground) {
             ft_8008A2BC(gobj);
         } else {
             ft_800CC730(gobj);
@@ -110,7 +112,7 @@ void ftMs_SpecialS1_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* attr = fp->x2D4_specialAttributes;
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         // Physics_Friction
         ft_80084F3C(gobj);
     } else {
@@ -124,7 +126,7 @@ void ftMs_SpecialS1_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
         if (!ft_800827A0(gobj)) {
             ftMs_SpecialS_801376E8(gobj);
@@ -160,7 +162,7 @@ void ftMs_SpecialS_801376E8(HSD_GObj* gobj)
 void ftMs_SpecialS_80137748(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->ev.ms.x222C = 0;
+    fp->fv.ms.x222C = 0;
 
     // Air_SetAsGrounded2
     ftCommon_8007D7FC(fp);
@@ -174,11 +176,11 @@ void ftMs_SpecialS2_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (fp->xE0_ground_or_air == GA_Ground) {
-            // AS_014_Wait_PlayerCheck
+        if (fp->ground_or_air == GA_Ground) {
+            // MS_014_Wait_PlayerCheck
             ft_8008A2BC(gobj);
         } else {
-            // AS_029_Fall
+            // MS_029_Fall
             ft_800CC730(gobj);
         }
     }
@@ -210,7 +212,7 @@ void ftMs_SpecialS2_Phys(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         // Physics_Friction
         ft_80084F3C(gobj);
     } else {
@@ -224,7 +226,7 @@ void ftMs_SpecialS2_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
         if (!ft_800827A0(gobj)) {
             ftMs_SpecialS_80137940(gobj);
@@ -244,7 +246,7 @@ void ftMs_SpecialS_80137940(HSD_GObj* gobj)
 
     ftCommon_8007D5D4(fp);
 
-    switch (fp->action_id) {
+    switch (fp->motion_id) {
     case 350:
         msid = 359;
         break;
@@ -266,10 +268,10 @@ void ftMs_SpecialS_801379D0(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     enum_t msid;
 
-    fp->ev.ms.x222C = 0;
+    fp->fv.ms.x222C = 0;
     ftCommon_8007D7FC(fp);
 
-    switch (fp->action_id) {
+    switch (fp->motion_id) {
     case 359:
         msid = 350;
         break;
@@ -302,13 +304,13 @@ void ftMs_SpecialS_80137A9C(HSD_GObj* gobj)
     fp->cb.x21EC_callback = &ftMs_SpecialS_80137A68;
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
-        if (fp->xE0_ground_or_air == GA_Ground) {
+        if (fp->ground_or_air == GA_Ground) {
             msid = 350;
         } else {
             msid = 359;
         }
     } else {
-        if (fp->xE0_ground_or_air == GA_Ground) {
+        if (fp->ground_or_air == GA_Ground) {
             msid = 351;
         } else {
             msid = 360;
@@ -324,11 +326,11 @@ void ftMs_SpecialS3_Anim(HSD_GObj* gobj)
 
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (fp->xE0_ground_or_air == GA_Ground) {
-            // AS_014_Wait_PlayerCheck
+        if (fp->ground_or_air == GA_Ground) {
+            // MS_014_Wait_PlayerCheck
             ft_8008A2BC(gobj);
         } else {
-            // AS_029_Fall
+            // MS_029_Fall
             ft_800CC730(gobj);
         }
     }
@@ -360,7 +362,7 @@ void ftMs_SpecialS3_Phys(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         // somethingFriction
         ft_80084FA8(gobj);
     } else {
@@ -374,7 +376,7 @@ void ftMs_SpecialS3_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
         if (!ft_800827A0(gobj)) {
             ftMs_SpecialS_80137CBC(gobj);
@@ -394,7 +396,7 @@ void ftMs_SpecialS_80137CBC(HSD_GObj* gobj)
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     ftCommon_8007D5D4(fp);
-    switch (fp->action_id) {
+    switch (fp->motion_id) {
     case 352:
         msid = 361;
         break;
@@ -418,12 +420,12 @@ void ftMs_SpecialS_80137D60(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     enum_t msid;
-    fp->ev.ms.x222C = 0;
+    fp->fv.ms.x222C = 0;
 
     // Air_SetAsGrounded2
     ftCommon_8007D7FC(fp);
 
-    switch (fp->action_id) {
+    switch (fp->motion_id) {
     case 361:
         msid = 352;
         break;
@@ -449,20 +451,20 @@ void ftMs_SpecialS_80137E0C(HSD_GObj* gobj)
     fp->cb.x21EC_callback = &ftMs_SpecialS_80137A68;
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
-        if (fp->xE0_ground_or_air == GA_Ground) {
+        if (fp->ground_or_air == GA_Ground) {
             msid = 352;
         } else {
             msid = 361;
         }
     } else {
         if (fp->input.x624_lstick_y < -p_ftCommonData->x21C) {
-            if (fp->xE0_ground_or_air == GA_Ground) {
+            if (fp->ground_or_air == GA_Ground) {
                 msid = 354;
             } else {
                 msid = 363;
             }
         } else {
-            if (fp->xE0_ground_or_air == GA_Ground) {
+            if (fp->ground_or_air == GA_Ground) {
                 msid = 353;
             } else {
                 msid = 362;
@@ -479,11 +481,11 @@ void ftMs_SpecialS4_Anim(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (fp->xE0_ground_or_air == GA_Ground) {
-            // AS_014_Wait_PlayerCheck
+        if (fp->ground_or_air == GA_Ground) {
+            // MS_014_Wait_PlayerCheck
             ft_8008A2BC(gobj);
         } else {
-            // AS_029_Fall
+            // MS_029_Fall
             ft_800CC730(gobj);
         }
     }
@@ -500,7 +502,7 @@ void ftMs_SpecialS4_Phys(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         // somethingFriction
         ft_80084FA8(gobj);
     } else {
@@ -514,7 +516,7 @@ void ftMs_SpecialS4_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
         if (ft_800827A0(gobj) == 0) {
             ftMs_SpecialS_80137FF8(gobj);
@@ -535,7 +537,7 @@ void ftMs_SpecialS_80137FF8(HSD_GObj* gobj)
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     ftCommon_8007D5D4(fp);
 
-    switch (fp->action_id) {
+    switch (fp->motion_id) {
     case 355:
         msid = 364;
         break;
@@ -560,12 +562,12 @@ void ftMs_SpecialS_8013809C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     enum_t msid;
 
-    fp->ev.ms.x222C = 0;
+    fp->fv.ms.x222C = 0;
 
     // Air_SetAsGrounded2
     ftCommon_8007D7FC(fp);
 
-    switch (fp->action_id) {
+    switch (fp->motion_id) {
     case 364:
         msid = 355;
         break;
@@ -595,20 +597,20 @@ void ftMs_SpecialS_80138148(HSD_GObj* gobj)
     fp->cb.x21EC_callback = &ftMs_SpecialS_80137A68;
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
-        if (fp->xE0_ground_or_air == GA_Ground) {
+        if (fp->ground_or_air == GA_Ground) {
             msid = 355;
         } else {
             msid = 364;
         }
     } else {
         if (fp->input.x624_lstick_y < -p_ftCommonData->x21C) {
-            if (fp->xE0_ground_or_air == GA_Ground) {
+            if (fp->ground_or_air == GA_Ground) {
                 msid = 357;
             } else {
                 msid = 366;
             }
         } else {
-            if (fp->xE0_ground_or_air == GA_Ground) {
+            if (fp->ground_or_air == GA_Ground) {
                 msid = 356;
             } else {
                 msid = 365;

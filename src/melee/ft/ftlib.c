@@ -1,3 +1,5 @@
+#include "it/forward.h"
+
 #include "ftlib.h"
 
 #include "cm/camera.h"
@@ -16,6 +18,7 @@
 #include "pl/pl_0371.h"
 #include "pl/player.h"
 
+#include <dolphin/mtx/types.h>
 #include <baselib/jobj.h>
 #include <baselib/rumble.h>
 
@@ -116,7 +119,7 @@ HSD_GObj* ftLib_80086198(HSD_GObj* gobj)
 }
 
 // get closest opposing fp?
-HSD_GObj* ftLib_8008627C(Vec3* v, HSD_GObj* gobj)
+HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
 {
     Vec3 cur_v;
     f32 dist;
@@ -156,8 +159,8 @@ HSD_GObj* ftLib_8008627C(Vec3* v, HSD_GObj* gobj)
         }
 
         ftLib_800866DC(cur, &cur_v);
-        dx = v->x - cur_v.x;
-        dy = v->y - cur_v.y;
+        dx = pos->x - cur_v.x;
+        dy = pos->y - cur_v.y;
         dist = (dx * dx) + (dy * dy);
 
         if (dist < min_dist) {
@@ -290,7 +293,7 @@ f32 ftLib_800865C0(HSD_GObj* gobj)
 s32 ftLib_800865CC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->xE0_ground_or_air;
+    return fp->ground_or_air;
 }
 
 void ftLib_800865D8(HSD_GObj* gobj, f32* x, f32* y)
@@ -303,13 +306,13 @@ void ftLib_800865D8(HSD_GObj* gobj, f32* x, f32* y)
 void* ftLib_800865F0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x5E8_fighterBones[ftParts_8007500C(fp, 4)].x0_jobj;
+    return fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj;
 }
 
 void* ftLib_80086630(HSD_GObj* gobj, s32 i)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x5E8_fighterBones[i].x0_jobj;
+    return fp->ft_bones[i].x0_jobj;
 }
 
 void ftLib_80086644(HSD_GObj* gobj, Vec3* pos)
@@ -327,7 +330,7 @@ void ftLib_80086664(HSD_GObj* gobj, Vec3* pos)
 void ftLib_80086684(HSD_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    *pos = fp->xBC_prevPos;
+    *pos = fp->prev_pos;
 }
 
 void ftLib_SetScale(HSD_GObj* gobj, f32 val)
@@ -342,7 +345,7 @@ void ftLib_800866DC(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     struct attr* r4 = &fp->x110_attr;
-    s32 i = fp->x10C_ftData->x0->x16C_idx;
+    s32 i = fp->ft_data->x0->x16C_idx;
     lb_8000B1CC(ftLib_80086630(gobj, i), &r4->x280, v);
 }
 
@@ -495,10 +498,10 @@ bool ftLib_80086A18(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     bool result = false;
 
-    switch (fp->action_id) {
-    case ASID_GUARDON:
-    case ASID_GUARD:
-    case ASID_GUARDSETOFF:
+    switch (fp->motion_id) {
+    case ftCo_MS_GuardOn:
+    case ftCo_MS_Guard:
+    case ftCo_MS_GuardSetOff:
         result = true;
     }
 
@@ -598,13 +601,13 @@ u8 ftLib_80086BE0(HSD_GObj* gobj)
 void ftLib_80086BEC(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    *v = fp->xC8_pos_delta;
+    *v = fp->pos_delta;
 }
 
 enum_t ftLib_80086C0C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->action_id;
+    return fp->motion_id;
 }
 
 inline void helper(HSD_GObj* gobj, s32 arg1, s32 arg2, s32 val)
@@ -703,7 +706,7 @@ f32 ftLib_80086F80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x221E_flag.bits.b0) {
-        return fp->x10C_ftData->x0->xFC;
+        return fp->ft_data->x0->xFC;
     }
 
     return fp->x110_attr.x20C_NametagHeight;
@@ -713,11 +716,11 @@ bool ftLib_80086FA8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    switch (fp->action_id) {
-    case ASID_SWORDSWING1:
-    case ASID_SWORDSWING3:
-    case ASID_SWORDSWING4:
-    case ASID_SWORDSWINGDASH:
+    switch (fp->motion_id) {
+    case ftCo_MS_SwordSwing1:
+    case ftCo_MS_SwordSwing3:
+    case ftCo_MS_SwordSwing4:
+    case ftCo_MS_SwordSwingDash:
         return true;
     }
 
@@ -820,7 +823,7 @@ void ftLib_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
 bool ftLib_80087284(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id >= ASID_LIGHTTHROWF4) {
+    if (fp->motion_id >= ftCo_MS_LightThrowF4) {
         return true;
     }
 
@@ -867,8 +870,8 @@ s32 ftLib_8008731C(HSD_GObj* gobj)
 bool ftLib_8008732C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id >= ASID_DEADDOWN &&
-        fp->action_id <= ASID_DEADUPFALLHITCAMERAICE)
+    if (fp->motion_id >= ftCo_MS_DeadDown &&
+        fp->motion_id <= ftCo_MS_DeadUpFallHitCameraIce)
     {
         return true;
     }
@@ -879,8 +882,8 @@ bool ftLib_8008732C(HSD_GObj* gobj)
 bool ftLib_80087354(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id >= ASID_DEADUP &&
-        fp->action_id <= ASID_DEADUPFALLHITCAMERAICE)
+    if (fp->motion_id >= ftCo_MS_DeadUp &&
+        fp->motion_id <= ftCo_MS_DeadUpFallHitCameraIce)
     {
         return true;
     }
@@ -891,8 +894,8 @@ bool ftLib_80087354(HSD_GObj* gobj)
 bool ftLib_8008737C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id >= ASID_DEADUPSTAR &&
-        fp->action_id <= ASID_DEADUPSTARICE)
+    if (fp->motion_id >= ftCo_MS_DeadUpStar &&
+        fp->motion_id <= ftCo_MS_DeadUpStarIce)
     {
         return true;
     }
@@ -903,8 +906,8 @@ bool ftLib_8008737C(HSD_GObj* gobj)
 bool ftLib_800873A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id >= ASID_DEADUPFALL &&
-        fp->action_id <= ASID_DEADUPFALLHITCAMERAICE)
+    if (fp->motion_id >= ftCo_MS_DeadUpFall &&
+        fp->motion_id <= ftCo_MS_DeadUpFallHitCameraIce)
     {
         return true;
     }
@@ -915,7 +918,9 @@ bool ftLib_800873A4(HSD_GObj* gobj)
 bool ftLib_800873CC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id >= ASID_REBIRTH && fp->action_id <= ASID_REBIRTHWAIT) {
+    if (fp->motion_id >= ftCo_MS_Rebirth &&
+        fp->motion_id <= ftCo_MS_RebirthWait)
+    {
         return true;
     }
 
@@ -925,7 +930,7 @@ bool ftLib_800873CC(HSD_GObj* gobj)
 bool ftLib_800873F4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id >= ASID_ENTRY && fp->action_id <= ASID_ENTRYEND) {
+    if (fp->motion_id >= ftCo_MS_Entry && fp->motion_id <= ftCo_MS_EntryEnd) {
         return true;
     }
 
@@ -966,7 +971,7 @@ s32 ftLib_8008746C(HSD_GObj* gobj)
         return 0x1FBD1;
     }
 
-    return fp->x10C_ftData->x4C_collisionData->x34;
+    return fp->ft_data->x4C_collisionData->x34;
 }
 
 s32 ftLib_800874BC(HSD_GObj* gobj)
@@ -1068,7 +1073,7 @@ void ftLib_8008777C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->xE0_ground_or_air != GA_Ground) {
+    if (fp->ground_or_air != GA_Ground) {
         __assert("ftlib.c", 1517, "fp->ground_or_air == GA_Ground");
     }
 

@@ -1,14 +1,14 @@
 #include <platform.h>
 
-#include "ft/chara/ftCrazyHand/ftCh_Init.h"
-#include "ft/chara/ftKirby/ftKb_Init.h"
-#include "ft/chara/ftMasterHand/ftMh_CaptureDamageMasterHand.h"
-#include "ft/chara/ftMasterHand/ftMh_CaptureMasterHand_1.h"
-#include "ft/chara/ftMasterHand/ftMh_CaptureWaitMasterHand.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/types.h"
+#include "ftCrazyHand/ftCh_Init.h"
+#include "ftKirby/ftKb_Init.h"
+#include "ftMasterHand/ftMh_CaptureDamageMasterHand.h"
+#include "ftMasterHand/ftMh_CaptureMasterHand_1.h"
+#include "ftMasterHand/ftMh_CaptureWaitMasterHand.h"
 
 MotionState ftData_MotionStateList[] = {
     {

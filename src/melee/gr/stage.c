@@ -331,7 +331,7 @@ s32 Stage_80225074(s32 arg0)
     return arg0;
 }
 
-s32 Stage_80225194(void)
+enum_t Stage_80225194(void)
 {
     return unk_struct_804D49E8.list_idx;
 }

@@ -1,14 +1,16 @@
 #include <platform.h>
 #include "lb/forward.h"
 
-#include "ft/ftcoll.h"
+#include "ftcoll.h"
+
+#include "fighter.h"
+#include "ft_081B.h"
+#include "ft_0877.h"
+#include "ftcommon.h"
+#include "ftlib.h"
+#include "inlines.h"
 
 #include "ef/efsync.h"
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ftcommon.h"
-#include "ft/ftlib.h"
 #include "gm/gm_1601.h"
 #include "gr/stage.h"
 #include "it/it_266F.h"
@@ -122,7 +124,7 @@ void ftColl_80076528(HSD_GObj* gobj)
     if (temp_r3 != 0) {
         fp->x2092 = (u16) (temp_r3 - 1);
         if ((fp->x1A58_interactedFighter == NULL) &&
-            (fp->xE0_ground_or_air == GA_Ground))
+            (fp->ground_or_air == GA_Ground))
         {
             comboCount_Push(fp);
         }
@@ -163,7 +165,7 @@ f32 ftColl_800765F0(Fighter* fp, HSD_GObj* victim, f32 arg2)
         arg2 *= p_ftCommonData->x128;
     }
 
-    if (fp->action_id == ASID_DAMAGEICE) {
+    if (fp->motion_id == ftCo_MS_DamageIce) {
         arg2 *= p_ftCommonData->x714;
     }
 
@@ -3109,7 +3111,7 @@ inline void ftGrabDist(Fighter* this_fp, Fighter* victim_fp)
     }
 
     if (grab_dist < this_fp->unk_grab_val) {
-        HSD_GObj* grabbed_fighter = victim_fp->x0_fighter;
+        HSD_GObj* grabbed_fighter = victim_fp->gobj;
         this_fp->x1A5C = grabbed_fighter;
         this_fp->x1A58_interactedFighter = grabbed_fighter;
         this_fp->x221B_b5 = true;
@@ -3155,10 +3157,9 @@ void ftColl_80078A2C(HSD_GObj* this_gobj)
                     if ((this_hit->state != HitCapsule_Disabled) &&
                         (this_hit->element == (u32) HitElement_Catch) &&
                         ((((this_hit->x40_b2) &&
-                           (victim_fp->xE0_ground_or_air == GA_Air)) ||
+                           (victim_fp->ground_or_air == GA_Air)) ||
                           ((((u8) this_hit->x40_b3) &&
-                            ((s32) victim_fp->xE0_ground_or_air ==
-                             GA_Ground))))))
+                            ((s32) victim_fp->ground_or_air == GA_Ground))))))
                     {
                         if (lbColl_8000ACFC(victim_fp, this_hit) == false) {
                             for (j = 0; j < victim_fp->x119E_hurtboxNum; j++) {

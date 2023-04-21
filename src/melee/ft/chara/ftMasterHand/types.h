@@ -7,6 +7,19 @@
 
 #include <dolphin/mtx/types.h>
 
+struct ftMasterhand_FighterVars {
+    /* 0x222C */ HSD_GObj* x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ f32 x2238;
+    /* 0x223C */ f32 x223C;
+    /* 0x2240 */ Vec3 x2240_pos;
+    /* 0x224C */ u32 x224C;
+    /* 0x2250 */ s32 x2250;
+    /* 0x2254 */ s32 x2254;
+    /* 0x2258 */ s32 x2258;
+};
+
 struct ftMasterHand_SpecialAttrs {
     s32 x0;
     s32 x4;
@@ -90,7 +103,7 @@ struct ftMasterHand_SpecialAttrs {
     f32 x178;
 };
 
-union ftMasterHand_StateVars {
+union ftMasterHand_MotionVars {
     struct ftMasterHand_Unk0Vars {
         f32 x0;
         HSD_GObjEvent x4;
@@ -120,7 +133,7 @@ union ftMasterHand_StateVars {
     } unk0;
 
     struct ftMasterHand_Unk4Vars {
-        int x0;
+        ftMasterHand_UnkEnum0 x0;
         int x4;
         int x8;
     } unk4;

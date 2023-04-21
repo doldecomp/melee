@@ -1,5 +1,3 @@
-#include <baselib/forward.h>
-
 #include "ftCa_SpecialS.h"
 
 #include "ftCa_Init.h"
@@ -11,6 +9,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 #include <dolphin/mtx/types.h>
@@ -21,8 +20,8 @@ void ftCa_SpecialS_RemoveGFX(HSD_GObj* gobj)
 
     efLib_DestroyAll(gobj);
 
-    fp->ev.ca.during_specials = false;
-    fp->ev.ca.during_specials_start = false;
+    fp->fv.ca.during_specials = false;
+    fp->fv.ca.during_specials_start = false;
 }
 
 static void setCallbacks(HSD_GObj* gobj)
@@ -46,25 +45,24 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
 
     resetCmdVarsGround(gobj);
 
-    Fighter_ChangeMotionState(gobj, ftCaptain_AS_SpecialS_Start, 0, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialS_Start, 0, NULL, 0, 1, 0);
 
     setCallbacks(gobj);
     ftAnim_8006EBA4(gobj);
 
     switch (ftLib_800872A4(gobj)) {
     case FTKIND_CAPTAIN:
-        efSync_Spawn(1169, gobj, fp->x5E8_fighterBones[HeadN].x0_jobj);
-        fp->ev.ca.during_specials_start = true;
+        efSync_Spawn(1169, gobj, fp->ft_bones[HeadN].x0_jobj);
+        fp->fv.ca.during_specials_start = true;
         break;
 
     case FTKIND_GANON:
-        efSync_Spawn(1293, gobj, fp->x5E8_fighterBones[L2ndNb].x0_jobj);
-        fp->ev.ca.during_specials_start = true;
+        efSync_Spawn(1293, gobj, fp->ft_bones[L2ndNb].x0_jobj);
+        fp->fv.ca.during_specials_start = true;
         break;
     }
 
-    fp->ev.ca.during_specials = false;
+    fp->fv.ca.during_specials = false;
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     fp->cb.x21F4_callback = ftCa_SpecialS_OnDetect;
@@ -74,7 +72,7 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
         vel->x = vel->y = vel->z = 0;
     }
 
-    fp->xEC_ground_vel = 0;
+    fp->gr_vel = 0;
 }
 
 static inline void setupAirStart(HSD_GObj* gobj)
@@ -86,24 +84,24 @@ static inline void setupAirStart(HSD_GObj* gobj)
         vars[0] = vars[1] = vars[2] = vars[3] = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, ftCaptain_AS_SpecialAirS_Start, 0, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirS_Start, 0, NULL, 0, 1,
+                              0);
 
     setCallbacks(gobj);
     ftAnim_8006EBA4(gobj);
 
     switch (ftLib_800872A4(gobj)) {
     case FTKIND_CAPTAIN:
-        efSync_Spawn(1169, gobj, fp->x5E8_fighterBones[HeadN].x0_jobj);
-        fp->ev.ca.during_specials_start = true;
+        efSync_Spawn(1169, gobj, fp->ft_bones[HeadN].x0_jobj);
+        fp->fv.ca.during_specials_start = true;
         break;
     case FTKIND_GANON:
-        efSync_Spawn(1293, gobj, fp->x5E8_fighterBones[L2ndNb].x0_jobj);
-        fp->ev.ca.during_specials_start = true;
+        efSync_Spawn(1293, gobj, fp->ft_bones[L2ndNb].x0_jobj);
+        fp->fv.ca.during_specials_start = true;
         break;
     }
 
-    fp->ev.ca.during_specials = false;
+    fp->fv.ca.during_specials = false;
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     fp->cb.x21F4_callback = ftCa_SpecialS_OnDetect;
@@ -118,7 +116,7 @@ void ftCa_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     setupAirStart(gobj);
-    fp->sv.ca.specials.grav = 0;
+    fp->mv.ca.specials.grav = 0;
     ftCommon_8007D60C(fp);
 }
 
@@ -132,11 +130,11 @@ static Fighter_MotionStateChangeFlags const transition_flags =
 static void onDetectGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* sa = getFtSpecialAttrsD(fp);
+    ftCaptain_DatAttrs* sa = getFtSpecialAttrsD(fp);
 
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftCaptain_AS_SpecialS, transition_flags,
-                              NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialS, transition_flags, NULL,
+                              0, 1, 0);
     setCallbacks(gobj);
 
     {
@@ -144,13 +142,13 @@ static void onDetectGround(HSD_GObj* gobj)
         vel->y = vel->z = 0;
     }
 
-    fp->xEC_ground_vel *= sa->specials_gr_vel_x;
+    fp->gr_vel *= sa->specials_gr_vel_x;
 }
 
 static void onDetectAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftCaptain_AS_SpecialAirS, transition_flags,
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirS, transition_flags,
                               NULL, 0, 1, 0);
     setCallbacks(gobj);
     fp->x80_self_vel.z = 0;
@@ -168,24 +166,24 @@ void ftCa_SpecialS_OnDetect(HSD_GObj* gobj)
         HSD_GObj* detected_gobj = fp->x20AC;
 
         if (fp->x20AC->classifier == HSD_GOBJ_CLASS_FIGHTER) {
-            switch (fp->action_id) {
-            case ftCaptain_AS_SpecialS_Start: {
+            switch (fp->motion_id) {
+            case ftCa_MS_SpecialS_Start: {
                 onDetectGround(gobj);
                 break;
             }
 
-            case ftCaptain_AS_SpecialAirS_Start:
+            case ftCa_MS_SpecialAirS_Start:
                 onDetectAir(gobj);
                 break;
             }
         } else if (fp->x20AC->classifier == HSD_GOBJ_CLASS_ITEM) {
             if (itGetKind(detected_gobj) < It_Kind_BombHei) {
-                switch (fp->action_id) {
-                case ftCaptain_AS_SpecialS_Start:
+                switch (fp->motion_id) {
+                case ftCa_MS_SpecialS_Start:
                     onDetectGround(gobj);
                     break;
 
-                case ftCaptain_AS_SpecialAirS_Start:
+                case ftCa_MS_SpecialAirS_Start:
                     onDetectAir(gobj);
                     break;
                 }
@@ -195,12 +193,12 @@ void ftCa_SpecialS_OnDetect(HSD_GObj* gobj)
                         itGetKind(detected_gobj) < It_Kind_Arwing_Laser) ||
                        itGetKind(detected_gobj) == Pokemon_Random)
             {
-                switch (fp->action_id) {
-                case ftCaptain_AS_SpecialS_Start:
+                switch (fp->motion_id) {
+                case ftCa_MS_SpecialS_Start:
                     onDetectGround(gobj);
                     break;
 
-                case ftCaptain_AS_SpecialAirS_Start:
+                case ftCa_MS_SpecialAirS_Start:
                     onDetectAir(gobj);
                     break;
                 }
@@ -220,18 +218,18 @@ void ftCa_SpecialS_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!fp->ev.ca.during_specials) {
+    if (!fp->fv.ca.during_specials) {
         switch (ftLib_800872A4(gobj)) {
         case FTKIND_CAPTAIN:
-            efSync_Spawn(1170, gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
+            efSync_Spawn(1170, gobj, fp->ft_bones[TransN].x0_jobj,
                          &fp->facing_dir);
-            fp->ev.ca.during_specials = true;
+            fp->fv.ca.during_specials = true;
             break;
 
         case FTKIND_GANON:
-            efSync_Spawn(1294, gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
+            efSync_Spawn(1294, gobj, fp->ft_bones[TransN].x0_jobj,
                          &fp->facing_dir);
-            fp->ev.ca.during_specials = true;
+            fp->fv.ca.during_specials = true;
             break;
         }
 
@@ -252,7 +250,7 @@ void ftCa_SpecialAirSStart_Anim(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007D60C(fp);
@@ -268,25 +266,25 @@ void ftCa_SpecialAirSStart_Anim(HSD_GObj* gobj)
 void ftCa_SpecialAirS_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    if (!fp->ev.ca.during_specials) {
+    if (!fp->fv.ca.during_specials) {
         switch (ftLib_800872A4(gobj)) {
         case FTKIND_CAPTAIN:
-            efSync_Spawn(1171, gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
+            efSync_Spawn(1171, gobj, fp->ft_bones[TransN].x0_jobj,
                          &fp->facing_dir);
-            fp->ev.ca.during_specials = true;
+            fp->fv.ca.during_specials = true;
             break;
 
         case FTKIND_GANON:
-            efSync_Spawn(1295, gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
+            efSync_Spawn(1295, gobj, fp->ft_bones[TransN].x0_jobj,
                          &fp->facing_dir);
-            fp->ev.ca.during_specials = true;
+            fp->fv.ca.during_specials = true;
             break;
         }
 
@@ -327,7 +325,7 @@ void ftCa_SpecialS_Phys(HSD_GObj* gobj)
 void ftCa_SpecialAirSStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -336,20 +334,20 @@ void ftCa_SpecialAirSStart_Phys(HSD_GObj* gobj)
 
     ft_80085134(gobj);
     if (fp->x2204_ftcmd_var1 == 1) {
-        fp->sv.ca.specials.grav -= captainAttrs->specials_grav;
+        fp->mv.ca.specials.grav -= captainAttrs->specials_grav;
 
-        if (fp->sv.ca.specials.grav < -captainAttrs->specials_terminal_vel) {
-            fp->sv.ca.specials.grav = -captainAttrs->specials_terminal_vel;
+        if (fp->mv.ca.specials.grav < -captainAttrs->specials_terminal_vel) {
+            fp->mv.ca.specials.grav = -captainAttrs->specials_terminal_vel;
         }
 
-        fp->x80_self_vel.y = fp->sv.ca.specials.grav;
+        fp->x80_self_vel.y = fp->mv.ca.specials.grav;
     }
 }
 
 void ftCa_SpecialAirS_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -357,13 +355,13 @@ void ftCa_SpecialAirS_Phys(HSD_GObj* gobj)
 #endif
 
     ft_80085134(gobj);
-    fp->sv.ca.specials.grav -= captainAttrs->specials_grav;
+    fp->mv.ca.specials.grav -= captainAttrs->specials_grav;
 
-    if (fp->sv.ca.specials.grav < -captainAttrs->specials_terminal_vel) {
-        fp->sv.ca.specials.grav = -captainAttrs->specials_terminal_vel;
+    if (fp->mv.ca.specials.grav < -captainAttrs->specials_terminal_vel) {
+        fp->mv.ca.specials.grav = -captainAttrs->specials_terminal_vel;
     }
 
-    fp->x80_self_vel.y = fp->sv.ca.specials.grav;
+    fp->x80_self_vel.y = fp->mv.ca.specials.grav;
 }
 
 // Captain Falcon & Ganondorf's grounded
@@ -376,7 +374,7 @@ void ftCa_SpecialSStart_Coll(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* sa = sa = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* sa = sa = fp->x2D4_specialAttributes;
 
     if (fp->x2208_ftcmd_var2 == 0) {
         ft_80084104(gobj);
@@ -416,7 +414,7 @@ void ftCa_SpecialS_Coll(HSD_GObj* gobj)
 {
     Fighter* temp_fp = GET_FIGHTER(gobj);
     Fighter* fp;
-    ftCaptainAttributes* captainAttrs = temp_fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* captainAttrs = temp_fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -439,7 +437,7 @@ void ftCa_SpecialS_Coll(HSD_GObj* gobj)
 void ftCa_SpecialAirSStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
 
     if (ft_80081D0C(gobj) == true) {
         efLib_DestroyAll(gobj);
@@ -452,10 +450,10 @@ void ftCa_SpecialAirSStart_Coll(HSD_GObj* gobj)
 void ftCa_SpecialAirS_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* captainAttrs = getFtSpecialAttrsD(fp);
+    ftCaptain_DatAttrs* captainAttrs = getFtSpecialAttrsD(fp);
 
     if (ft_80081D0C(gobj) == true) {
-        fp->xEC_ground_vel = fp->x80_self_vel.x;
+        fp->gr_vel = fp->x80_self_vel.x;
         efLib_DestroyAll(gobj);
         ft_800D5CB0(gobj, 0, captainAttrs->specials_hit_landing_lag);
     }

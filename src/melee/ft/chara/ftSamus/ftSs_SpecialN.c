@@ -1,15 +1,21 @@
-#include "ft/chara/ftSamus/ftSs_SpecialN.h"
+#include "ftSs_SpecialN.h"
+
+#include "ftSs_Init.h"
+#include "ftSs_SpecialN.h"
+#include "inlines.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
-#include "ft/chara/ftSamus/ftsamus.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ftcommon.h"
+#include "ft/inlines.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
-#include "melee/ft/inlines.h"
 
-void ftSamus_801293BC_inner(HSD_GObj* gobj)
+#include <dolphin/mtx/types.h>
+
+static void ftSamus_801293BC_inner(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
@@ -19,7 +25,7 @@ void ftSamus_801293BC_inner(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    s32 x2230 = fp->ev.ss.x2230;
+    s32 x2230 = fp->fv.ss.x2230;
     fp->x80_self_vel.x = (fp->facing_dir * (samus_attr->x1C * x2230));
 }
 
@@ -32,8 +38,8 @@ void ftSs_SpecialN_801291F0(HSD_GObj* gobj)
 
     if (gobj) {
         Fighter* fp = GET_FIGHTER(gobj);
-        if (fp->ev.ss.x222C) {
-            fp->ev.ss.x222C = 0;
+        if (fp->fv.ss.x222C) {
+            fp->fv.ss.x222C = 0;
         }
         ftSamus_destroyAllEF(gobj);
     }
@@ -49,11 +55,11 @@ void ftSs_SpecialN_80129258(HSD_GObj* gobj)
     if (gobj) {
         Fighter* fp = GET_FIGHTER(gobj);
         ftSamus_UnkAndDestroyAllEF(gobj);
-        fp->ev.ss.x2230 = 0;
+        fp->fv.ss.x2230 = 0;
     }
 }
 
-s32 ftSs_SpecialN_801292E4(HSD_GObj* gobj)
+static s32 ftSs_SpecialN_801292E4(HSD_GObj* gobj)
 {
     Vec3 vec1;
     Vec3 vec2;
@@ -67,26 +73,26 @@ s32 ftSs_SpecialN_801292E4(HSD_GObj* gobj)
 
     Fighter* fp = getFighter(gobj);
 
-    if ((fp->x2200_ftcmd_var0 == 1U) && (!fp->ev.ss.x222C)) {
+    if ((fp->x2200_ftcmd_var0 == 1U) && (!fp->fv.ss.x222C)) {
         fp->x2200_ftcmd_var0 = 0U;
         vec2.z = 4.0f;
         vec2.y = 0.0f;
         vec2.x = 0.0f;
-        lb_8000B1CC(fp->x5E8_fighterBones[50].x0_jobj, &vec2, &vec1);
+        lb_8000B1CC(fp->ft_bones[50].x0_jobj, &vec2, &vec1);
         vec1.z = 0.0f;
         result = it_802B55C8(gobj, &vec1, 0x32, 0x5E, fp->facing_dir);
-        fp->ev.ss.x222C = result;
+        fp->fv.ss.x222C = result;
         if (result != NULL) {
             ftSamus_updateDamageDeathCBs(gobj);
         } else {
-            fp->ev.ss.x222C = 0U;
+            fp->fv.ss.x222C = 0U;
             return 1;
         }
     }
     return 0;
 }
 
-void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
+static void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
 {
     ftSamusAttributes* samus_attr;
     HSD_GObj* held_item;
@@ -100,12 +106,12 @@ void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
     fp = getFighterPlus(gobj);
     samus_attr = fp->x2D4_specialAttributes;
 
-    if ((fp->x2204_ftcmd_var1 == 1) && (fp->ev.ss.x222C)) {
+    if ((fp->x2204_ftcmd_var1 == 1) && (fp->fv.ss.x222C)) {
         Vec3 vec1;
         u32 x2230;
 
         fp->x2204_ftcmd_var1 = 2;
-        lb_8000B1CC(fp->x5E8_fighterBones[51].x0_jobj, NULL, &vec1);
+        lb_8000B1CC(fp->ft_bones[51].x0_jobj, NULL, &vec1);
         vec1.z = 0.0f;
         held_item = fp->x1974_heldItem;
         if (1.0f == fp->facing_dir) {
@@ -113,16 +119,16 @@ void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
         } else {
             var_f0 = M_PI;
         }
-        x2230 = fp->ev.ss.x2230;
-        it_802B56E4(fp->ev.ss.x222C, &vec1, var_f0, x2230, samus_attr->x18);
-        if ((fp->action_id == 0x15C) || (fp->xE0_ground_or_air == GA_Air)) {
+        x2230 = fp->fv.ss.x2230;
+        it_802B56E4(fp->fv.ss.x222C, &vec1, var_f0, x2230, samus_attr->x18);
+        if ((fp->motion_id == 0x15C) || (fp->ground_or_air == GA_Air)) {
             /// @todo Unused stack.
 #ifdef MUST_MATCH
             u8 unused1[28];
 #endif
             ftSamus_801293BC_inner(gobj);
         }
-        fp->ev.ss.x2230 = 0U;
+        fp->fv.ss.x2230 = 0U;
 
         ftSs_SpecialN_801291F0(gobj);
         efSync_Spawn(0x486, gobj, &vec1, &fp->facing_dir);
@@ -149,9 +155,9 @@ void ftSs_SpecialN_Enter(HSD_GObj* gobj)
     self_vel = &fp->x80_self_vel;
     self_vel->y = 0.0f;
     ftSamus_updateDamageDeathCBs(gobj);
-    fp->sv.ss.unk3.x0 = 0;
-    fp->sv.ss.unk3.x4 = 0;
-    fp->sv.ss.unk3.x8 = 0.0f;
+    fp->mv.ss.unk3.x0 = 0;
+    fp->mv.ss.unk3.x4 = 0;
+    fp->mv.ss.unk3.x8 = 0.0f;
     ftAnim_8006EBA4(gobj);
 }
 
@@ -170,9 +176,9 @@ void ftSs_SpecialAirN_Enter(HSD_GObj* gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     ftSamus_updateDamageDeathCBs(gobj);
-    fp->sv.ss.unk3.x0 = 1;
-    fp->sv.ss.unk3.x4 = 0;
-    fp->sv.ss.unk3.x8 = 0.0f;
+    fp->mv.ss.unk3.x0 = 1;
+    fp->mv.ss.unk3.x4 = 0;
+    fp->mv.ss.unk3.x8 = 0.0f;
     ftAnim_8006EBA4(gobj);
 }
 
@@ -188,7 +194,7 @@ void ftSs_SpecialNStart_Anim(HSD_GObj* gobj)
 
     ftSs_SpecialN_801292E4(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if ((fp->sv.ss.unk3.x0 == 1) || (fp->ev.ss.x2230 == samus_attr->x18)) {
+        if ((fp->mv.ss.unk3.x0 == 1) || (fp->fv.ss.x2230 == samus_attr->x18)) {
             Fighter_ChangeMotionState(gobj, 0x15A, 0, NULL, 0.0f, 1.0f, 0.0f);
         } else {
             Fighter_ChangeMotionState(gobj, 0x158, 0, NULL, 0.0f, 1.0f, 0.0f);
@@ -222,8 +228,8 @@ void ftSs_SpecialNLoop_Anim(HSD_GObj* gobj)
         f32 var_f1;
         s32 index;
         fighter2->x2208_ftcmd_var2 = 0;
-        if (fighter2->ev.ss.x2230) {
-            var_f1 = fighter2->ev.ss.x2230 / samus_attr->x18;
+        if (fighter2->fv.ss.x2230) {
+            var_f1 = fighter2->fv.ss.x2230 / samus_attr->x18;
         } else {
             var_f1 = 0.f;
         }
@@ -231,13 +237,13 @@ void ftSs_SpecialNLoop_Anim(HSD_GObj* gobj)
         ft_80088510(fighter2, ftSs_Unk3_803CE6B8[index], 0x7F, 0x40);
     }
 
-    fp->sv.ss.unk3.x4 += 1;
-    if (fp->sv.ss.unk3.x4 > samus_attr->x20) {
-        fp->sv.ss.unk3.x4 = 0;
-        fp->ev.ss.x2230 += 1;
-        if (fp->ev.ss.x2230 >= samus_attr->x18) {
+    fp->mv.ss.unk3.x4 += 1;
+    if (fp->mv.ss.unk3.x4 > samus_attr->x20) {
+        fp->mv.ss.unk3.x4 = 0;
+        fp->fv.ss.x2230 += 1;
+        if (fp->fv.ss.x2230 >= samus_attr->x18) {
             ft_800BFFD0(fp, 0x35, 0);
-            fp->ev.ss.x2230 = samus_attr->x18;
+            fp->fv.ss.x2230 = samus_attr->x18;
             Fighter_ChangeMotionState(gobj, 0x159, 0, 0, 0.0f, 1.0f, 0.0f);
             ftSamus_UnkAndDestroyAllEF(gobj);
             ftSamus_updateDamageDeathCBs(gobj);
@@ -276,7 +282,7 @@ void ftSs_SpecialAirNStart_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftSs_SpecialN_801292E4(gobj);
-    fp->sv.ss.unk3.x0 = 1;
+    fp->mv.ss.unk3.x0 = 1;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ChangeMotionState(gobj, 0x15C, 0, NULL, 0.0f, 1.0f, 0.0f);
         ftSamus_updateDamageDeathCBs(gobj);
@@ -437,8 +443,10 @@ void ftSs_SpecialAirNShoot_Coll(HSD_GObj* gobj)
 s32 ftSs_SpecialS_8012A068(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->ev.ss.x2238;
+    return fp->fv.ss.x2238;
 }
+
+static void ftSs_SpecialS_8012A168(HSD_GObj* gobj, Vec3* spawnlocation);
 
 void ftSs_SpecialS_8012A074(HSD_GObj* gobj)
 {
@@ -454,11 +462,11 @@ void ftSs_SpecialS_8012A074(HSD_GObj* gobj)
     }
     if (bool1) {
         Vec3 position;
-        fp->ev.ss.x2238++;
-        lb_8000B1CC(fp->x5E8_fighterBones[56].x0_jobj, NULL, &position);
+        fp->fv.ss.x2238++;
+        lb_8000B1CC(fp->ft_bones[56].x0_jobj, NULL, &position);
         position.x += (samus_attr->x34 * fp->facing_dir);
 
-        if ((fp->action_id == 0x15D) || (fp->action_id == 0x15F)) {
+        if ((fp->motion_id == 0x15D) || (fp->motion_id == 0x15F)) {
             /// @todo Unused stack.
 #ifdef MUST_MATCH
             u8 _[8];
@@ -474,7 +482,7 @@ void ftSs_SpecialS_8012A074(HSD_GObj* gobj)
     }
 }
 
-void ftSs_SpecialS_8012A168(HSD_GObj* gobj, Vec3* spawnlocation)
+static void ftSs_SpecialS_8012A168(HSD_GObj* gobj, Vec3* spawnlocation)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
