@@ -1114,7 +1114,6 @@ struct Fighter {
         struct ftLuigi_FighterVars lg;
         struct ftMario_FighterVars mr;
         struct ftMars_FighterVars ms;
-        struct ftMasterHand_FighterVars mh, ch;
         struct ftMewtwo_FighterVars mt;
         struct ftNess_FighterVars ns;
         struct ftPeach_FighterVars pe;
@@ -1127,6 +1126,7 @@ struct Fighter {
         struct ftYoshi_FighterVars ys;
         struct ftZakoBoy_FighterVars bo, gl;
         struct ftZelda_FighterVars zd;
+        struct ftMasterhand_FighterVars mh, ch;
     } fv;
 
     /* 0x232C */ s32 x232C;
