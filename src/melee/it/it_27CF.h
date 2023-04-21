@@ -63,7 +63,7 @@ void it_802C6430(HSD_GObj*);
 void it_802C6458(HSD_GObj*);
 void it_802C6480(HSD_GObj*);
 void it_802C64A8(HSD_GObj*);
-HSD_GObj* it_802C6C38(HSD_GObj*, Vec3*, s32, f32);
+HSD_GObj* it_802C6C38(HSD_GObj*, Vec3*, enum_t part, f32);
 void it_802C7158(HSD_GObj*);
 void it_802C7074(HSD_GObj*);
 void it_802C7424(HSD_GObj*);

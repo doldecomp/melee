@@ -38,7 +38,7 @@ void ftNs_SpecialS_ItemPKFireSpawn(
     }
 
     if (FlagResult != false) {
-        lb_8000B1CC(fp->parts[42].x0_jobj, NULL, &ItemBonePos);
+        lb_8000B1CC(fp->parts[FtPart_R2ndNa].x0_jobj, NULL, &ItemBonePos);
 
         ItemBonePos.x += ness_attr->x30_PKFIRE_SPAWN_X * fp->facing_dir;
         ItemBonePos.y += ness_attr->x34_PKFIRE_SPAWN_Y;

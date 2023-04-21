@@ -1,4 +1,5 @@
 #include "forward.h"
+#include "ft/forward.h"
 
 #include "ftFx_SpecialLw.h"
 
@@ -29,7 +30,7 @@ void ftFx_SpecialLw_CreateLoopGFX(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (fp->x2219_flag.bits.b0 == false) {
-        efSync_Spawn(0x488, gobj, fp->parts[4].x0_jobj);
+        efSync_Spawn(0x488, gobj, fp->parts[FtPart_HipN].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 
@@ -44,7 +45,7 @@ void ftFx_SpecialLw_CreateStartGFX(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (fp->x2219_flag.bits.b0 == false) {
-        efSync_Spawn(0x489, gobj, fp->parts[4].x0_jobj);
+        efSync_Spawn(0x489, gobj, fp->parts[FtPart_HipN].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 
@@ -58,7 +59,7 @@ void ftFx_SpecialLw_CreateReflectGFX(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (fp->x2219_flag.bits.b0 == false) {
-        efSync_Spawn(0x48A, gobj, fp->parts[4].x0_jobj);
+        efSync_Spawn(0x48A, gobj, fp->parts[FtPart_HipN].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
         fp->x2219_flag.bits.b0 = true;
     }

@@ -262,8 +262,8 @@ void ftMt_Init_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(fp, ftMewtwoAttributes);
 
     {
-        fp->parts[1].flags.bits.b4 = 1;
-        fp->x2221_flag.bits.b2 = 1;
+        fp->parts[FtPart_TransN].flags.bits.b4 = true;
+        fp->x2221_flag.bits.b2 = true;
     }
     it_8026B3F8(item_list[0], It_Kind_Mewtwo_Disable);
     it_8026B3F8(item_list[1], It_Kind_Mewtwo_ShadowBall);

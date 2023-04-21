@@ -1,4 +1,5 @@
 #include "forward.h"
+#include "ft/forward.h"
 
 #include "ftNs_SpecialHi.h"
 
@@ -34,57 +35,57 @@
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // Setup float order
-static f32 return_float1(void) // -0x62B0
+static f32 return_float1(void) // -25264
 {
     return 5.0f;
 }
 
-static f32 return_float2(void) // -0x62AC
+static f32 return_float2(void) // -25260
 {
     return 0.0f;
 }
 
-static f32 return_float3(void) // -0x62A8
+static f32 return_float3(void) // -25256
 {
     return 8.333333015441895f;
 }
 
-static f32 return_float4(void) // -0x62A4
+static f32 return_float4(void) // -25252
 {
     return 12.333333015441895f;
 }
 
-static f32 return_float5(void) // -0x62A0
+static f32 return_float5(void) // -25248
 {
     return M_PI / 2;
 }
 
-static f64 return_float6(void) // -0x6294
+static f64 return_float6(void) // -25236
 {
     return 2 * M_PI;
 }
 
-static f64 return_float7(void) // -0x628C
+static f64 return_float7(void) // -25228
 {
     return M_PI;
 }
 
-static f64 return_float8(void) // -0x6284
+static f64 return_float8(void) // -25220
 {
     return M_PI / 2;
 }
 
-static f32 return_float9(void) // -0x6280
+static f32 return_float9(void) // -25216
 {
     return 1.0f;
 }
 
-static f64 return_float10(void) // -0x6278
+static f64 return_float10(void) // -25208
 {
     return 0.0;
 }
 
-static f32 return_float12(void) // -0x6270
+static f32 return_float12(void) // -25200
 {
     return M_PI / 180;
 }
@@ -359,7 +360,7 @@ static void ftNs_SpecialAirHi_CollisionModVel(
     while (fp->mv.ns.specialhi.aerialVel > 2 * M_PI) {
         fp->mv.ns.specialhi.aerialVel -= 2 * M_PI;
     }
-    if ((coll_data->x134_envFlags & 0x3F) != 0) {
+    if ((coll_data->x134_envFlags & 63) != 0) {
         phi_f1 = atan2f(coll_data->x160_rightwall.normal.y,
                         coll_data->x160_rightwall.normal.x);
         while (phi_f1 < 0.0f) {
@@ -384,7 +385,7 @@ static void ftNs_SpecialAirHi_CollisionModVel(
             phi_f1 -= M_PI / 2;
         }
     }
-    if ((coll_data->x134_envFlags & 0xFC0) != 0) {
+    if ((coll_data->x134_envFlags & 4032) != 0) {
         phi_f1 = atan2f(coll_data->x174_leftwall.normal.y,
                         coll_data->x174_leftwall.normal.x);
         phi_f3 = M_PI + phi_f1;
@@ -578,7 +579,7 @@ void ftNs_SpecialHi_Enter(
 
     Fighter* fp = getFighter(gobj);
     ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
-    if ((fp->x6F0_collData.x14C_ground.unk & 0x100) == 0) {
+    if ((fp->x6F0_collData.x14C_ground.unk & 256) == 0) {
         f32 temp_f3 = 5.0f;
         f32 temp_f1;
         f32 temp_f2;
@@ -772,7 +773,8 @@ void ftNs_SpecialHiStart_Anim(HSD_GObj* gobj)
             Fighter* fighter_data2 = gobj->user_data;
             HSD_GObj* pkt_ptr = fighter_data2->fv.ns.pkthunder_gobj;
             if (pkt_ptr == NULL) {
-                lb_8000B1CC(fighter_data2->parts[24].x0_jobj, NULL, &pkt_pos);
+                lb_8000B1CC(fighter_data2->parts[FtPart_L2ndNa].x0_jobj, NULL,
+                            &pkt_pos);
 
                 pkt_pos.z = 0.0f;
 
@@ -796,7 +798,7 @@ void ftNs_SpecialHiStart_Anim(HSD_GObj* gobj)
 
         ftNs_SpecialHiStopGFX(gobj);
 
-        efSync_Spawn(0x4EE, gobj, fp->parts[4].x0_jobj);
+        efSync_Spawn(1262, gobj, fp->parts[FtPart_HipN].x0_jobj);
 
         fp->fv.ns.pkthunder_gfx = true;
     }
@@ -903,7 +905,7 @@ void ftNs_SpecialHi_Anim(HSD_GObj* gobj)
         if (temp_fp->mv.ns.specialhi.jibakuGFX == 1) {
             Fighter* fp = gobj->user_data;
             ftNs_SpecialHiStopGFX(gobj);
-            efSync_Spawn(0x4EF, gobj, fp->parts[4].x0_jobj);
+            efSync_Spawn(1263, gobj, fp->parts[FtPart_HipN].x0_jobj);
             fp->fv.ns.pkthunder_gfx = true;
         }
     }
@@ -954,7 +956,7 @@ void ftNs_SpecialAirHiStart_Anim(HSD_GObj* gobj)
             pkt_ptr = fp2->fv.ns.pkthunder_gobj;
 
             if (pkt_ptr == 0) {
-                lb_8000B1CC(fp2->parts[24].x0_jobj, NULL, &pkt_pos);
+                lb_8000B1CC(fp2->parts[FtPart_L2ndNa].x0_jobj, NULL, &pkt_pos);
 
                 pkt_pos.z = 0.0f;
 
@@ -975,7 +977,7 @@ void ftNs_SpecialAirHiStart_Anim(HSD_GObj* gobj)
 
         ftNs_SpecialHiStopGFX(gobj);
 
-        efSync_Spawn(0x4EE, gobj, fp->parts[4].x0_jobj);
+        efSync_Spawn(1262, gobj, fp->parts[FtPart_HipN].x0_jobj);
 
         fp->fv.ns.pkthunder_gfx = true;
     }
@@ -1124,7 +1126,7 @@ void ftNs_SpecialAirHi_Anim(HSD_GObj* gobj)
     if (fp1->mv.ns.specialhi.jibakuGFX == 1) {
         fp0 = gobj->user_data;
         ftNs_SpecialHiStopGFX(gobj);
-        efSync_Spawn(0x4EF, gobj, fp0->parts[4].x0_jobj);
+        efSync_Spawn(1263, gobj, fp0->parts[FtPart_HipN].x0_jobj);
         fp0->fv.ns.pkthunder_gfx = true;
     }
 
@@ -1824,7 +1826,7 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
     }
 
     ecbFlag = fighter_r31->x6F0_collData.x134_envFlags;
-    if ((ecbFlag & 0x6000) != 0) {
+    if ((ecbFlag & 24576) != 0) {
         if (lbVector_Angle(&fighter_r31->x6F0_collData.x188_ceiling.normal,
                            &fighter_r31->x80_self_vel) >
             (0.01745329238474369f *
@@ -1856,11 +1858,11 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
             ftAnim_8006EBA4(gobj);
             spC4.x = atan2f(-fighter_r31->x6F0_collData.x188_ceiling.normal.x,
                             fighter_r31->x6F0_collData.x188_ceiling.normal.y);
-            efSync_Spawn(0x406, gobj, &new_var->cur_pos, &spC4);
+            efSync_Spawn(1030, gobj, &new_var->cur_pos, &spC4);
         }
 
     } else {
-        if ((ecbFlag & 0x3F) != 0) {
+        if ((ecbFlag & 63) != 0) {
             if (lbVector_Angle(
                     &fighter_r31->x6F0_collData.x160_rightwall.normal,
                     &fighter_r31->x80_self_vel) >
@@ -1896,14 +1898,14 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
                 spB8.x =
                     atan2f(-fighter_r31->x6F0_collData.x160_rightwall.normal.x,
                            fighter_r31->x6F0_collData.x160_rightwall.normal.y);
-                efSync_Spawn(0x406, gobj, &fighter_data4->cur_pos, &spB8);
+                efSync_Spawn(1030, gobj, &fighter_data4->cur_pos, &spB8);
                 return;
             }
             ftNs_SpecialAirHi_CollisionModVel(gobj,
                                               &fighter_r31->x6F0_collData);
             return;
         }
-        if ((ecbFlag & 0xFC0) != 0) {
+        if ((ecbFlag & 4032) != 0) {
             if (lbVector_Angle(
                     &fighter_r31->x6F0_collData.x174_leftwall.normal,
                     &fighter_r31->x80_self_vel) >
@@ -1939,7 +1941,7 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
                 spAC.x =
                     atan2f(-fighter_r31->x6F0_collData.x174_leftwall.normal.x,
                            fighter_r31->x6F0_collData.x174_leftwall.normal.y);
-                efSync_Spawn(0x406, gobj, &fighter_data5->cur_pos, &spAC);
+                efSync_Spawn(1030, gobj, &fighter_data5->cur_pos, &spAC);
                 return;
             }
             ftNs_SpecialAirHi_CollisionModVel(gobj,

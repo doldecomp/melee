@@ -1,3 +1,5 @@
+#include "ft/forward.h"
+
 #include "ftSs_SpecialLw_1.h"
 
 #include "ftSs_Init.h"
@@ -32,13 +34,13 @@ void ftSs_SpecialLw_8012ADF0(HSD_GObj* gobj)
     }
     if (bool1) {
         f32 vec_x;
-        lb_8000B1CC(fp->parts[0].x0_jobj, NULL, &vec);
+        lb_8000B1CC(fp->parts[FtPart_TopN].x0_jobj, NULL, &vec);
         vec_x = samus_attr->x74_vec.x;
         vec.x += (vec_x * fp->facing_dir);
         vec.y += samus_attr->x74_vec.y;
         vec.z += samus_attr->x74_vec.z;
         it_802B4AC8(gobj, &vec, fp->facing_dir, vec_x);
-        fp->cb.x21BC_callback_Accessory4 = 0;
+        fp->cb.x21BC_callback_Accessory4 = NULL;
     }
 }
 

@@ -97,9 +97,10 @@ void ftNs_SpecialLwStart_Anim(
     if (!ftAnim_IsFramesRemaining(gobj)) {
         fp = GET_FIGHTER(gobj);
 
-        if (fp->x2219_flag.bits.b0 == 0) {
-            efAsync_Spawn(gobj, &fp->x60C, 0U, 0x4F0U, fp->parts[23].x0_jobj);
-            fp->x2219_flag.bits.b0 = 1;
+        if (!fp->x2219_flag.bits.b0) {
+            efAsync_Spawn(gobj, &fp->x60C, 0U, 1264,
+                          fp->parts[FtPart_L1stNb].x0_jobj);
+            fp->x2219_flag.bits.b0 = true;
         }
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -134,9 +135,10 @@ void ftNs_SpecialAirLwStart_Anim(
     if (!ftAnim_IsFramesRemaining(gobj)) {
         fp = GET_FIGHTER(gobj);
 
-        if (fp->x2219_flag.bits.b0 == 0) {
-            efAsync_Spawn(gobj, &fp->x60C, 0U, 0x4F0U, fp->parts[23].x0_jobj);
-            fp->x2219_flag.bits.b0 = 1;
+        if (!fp->x2219_flag.bits.b0) {
+            efAsync_Spawn(gobj, &fp->x60C, 0U, 1264,
+                          fp->parts[FtPart_L1stNb].x0_jobj);
+            fp->x2219_flag.bits.b0 = true;
         }
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -273,8 +275,8 @@ void ftNs_SpecialLwHold_Anim(
     temp_r31->mv.ns.speciallw.x10--;
 
     if ((s32) temp_r31->mv.ns.speciallw.x10 <= 0) {
-        ft_80088478(temp_r31, 0x334A1, 0x7F, 0x40);
-        temp_r31->mv.ns.speciallw.x10 = 0x28;
+        ft_80088478(temp_r31, 210081, 127, 64);
+        temp_r31->mv.ns.speciallw.x10 = 40;
     }
 }
 
@@ -314,8 +316,8 @@ void ftNs_SpecialAirLwHold_Anim(
     temp_r31->mv.ns.speciallw.x10 = (s32) (temp_r31->mv.ns.speciallw.x10 - 1);
 
     if ((s32) temp_r31->mv.ns.speciallw.x10 <= 0) {
-        ft_80088478(temp_r31, 0x334A1, 0x7F, 0x40);
-        temp_r31->mv.ns.speciallw.x10 = 0x28;
+        ft_80088478(temp_r31, 210081, 127, 64);
+        temp_r31->mv.ns.speciallw.x10 = 40;
     }
 }
 
@@ -720,8 +722,8 @@ inline void MagnetStateVarCalc(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.ns.speciallw.x10 = fp->mv.ns.speciallw.x10 - 1;
     if ((s32) fp->mv.ns.speciallw.x10 <= 0) {
-        ft_80088478(fp, 0x334A1, 0x7F, 0x40);
-        fp->mv.ns.speciallw.x10 = 0x28;
+        ft_80088478(fp, 210081, 127, 64);
+        fp->mv.ns.speciallw.x10 = 40;
     }
 }
 
@@ -787,10 +789,10 @@ void ftNs_SpecialLwHit_Anim(
         if (phi_r0 != 0) {
             ftCommon_8007DB24(arg0);
             temp_r30 = arg0->user_data;
-            if (temp_r30->x2219_flag.bits.b0 == 0) {
-                efAsync_Spawn(arg0, &temp_r30->x60C, 0U, 0x4F0U,
-                              temp_r30->parts[23].x0_jobj);
-                temp_r30->x2219_flag.bits.b0 = 1;
+            if (!temp_r30->x2219_flag.bits.b0) {
+                efAsync_Spawn(arg0, &temp_r30->x60C, 0U, 1264,
+                              temp_r30->parts[FtPart_L1stNb].x0_jobj);
+                temp_r30->x2219_flag.bits.b0 = true;
             }
             temp_r30->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
             temp_r30->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -827,8 +829,8 @@ void ftNs_SpecialAirLwHit_Anim(
         {
             Fighter* fp = GET_FIGHTER(arg0);
             if (!fp->x2219_flag.bits.b0) {
-                efAsync_Spawn(arg0, &fp->x60C, 0U, 0x4F0U,
-                              fp->parts[23].x0_jobj);
+                efAsync_Spawn(arg0, &fp->x60C, 0U, 1264,
+                              fp->parts[FtPart_L1stNb].x0_jobj);
                 fp->x2219_flag.bits.b0 = true;
             }
             fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -840,8 +842,8 @@ void ftNs_SpecialAirLwHit_Anim(
         Fighter* fp = GET_FIGHTER(arg0);
         fp->mv.ns.speciallw.x10 = fp->mv.ns.speciallw.x10 - 1;
         if ((signed) fp->mv.ns.speciallw.x10 <= 0) {
-            ft_80088478(fp, 0x334A1, 0x7F, 0x40);
-            fp->mv.ns.speciallw.x10 = 0x28;
+            ft_80088478(fp, 210081, 127, 64);
+            fp->mv.ns.speciallw.x10 = 40;
         }
     }
 }

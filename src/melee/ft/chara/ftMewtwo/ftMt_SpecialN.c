@@ -1,4 +1,5 @@
 #include "forward.h"
+#include "ft/forward.h"
 
 #include "ftMt_SpecialN.h"
 
@@ -212,7 +213,7 @@ static void ftMewtwo_SpecialN_GetPos(Fighter* fp, Vec3* sp38)
     sp2C.z = 2.0f;
     sp2C.y = 0.0f;
     sp2C.x = 0.0f;
-    lb_8000B1CC(fp->parts[0x23].x0_jobj, &sp2C, sp38);
+    lb_8000B1CC(fp->parts[FtPart_RShoulderN].x0_jobj, &sp2C, sp38);
     sp38->z = 0.0f;
 }
 
@@ -307,10 +308,10 @@ void ftMt_SpecialN_ReleaseShadowBall(HSD_GObj* gobj)
         if ((f32) fp->fv.mt.x2234_shadowBallCharge ==
             mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
         {
-            ft_80088148(fp, 0x30DB6U, SFX_VOLUME_MAX, SFX_PAN_MID);
+            ft_80088148(fp, 200118, SFX_VOLUME_MAX, SFX_PAN_MID);
             return;
         }
-        ft_80088148(fp, 0x30DB3U, SFX_VOLUME_MAX, SFX_PAN_MID);
+        ft_80088148(fp, 200115, SFX_VOLUME_MAX, SFX_PAN_MID);
     }
 }
 
@@ -320,7 +321,7 @@ void ftMt_SpecialN_PlayChargeSFX(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftMewtwoAttributes* mewtwoAttrs = fp->x2D4_specialAttributes;
-    static u32 shadowBallSFX[4] = { 0x30DB9, 0x30DBC, 0x30DBF, 0x30DC2 };
+    static u32 shadowBallSFX[4] = { 200121, 200124, 200127, 200130 };
     f32 chargeLevel;
 
     /// @todo Unused stack.
@@ -483,10 +484,11 @@ void ftMt_SpecialNStart_Anim(HSD_GObj* gobj)
         sp2C.z = 2.0f;
         sp2C.y = 0.0f;
         sp2C.x = 0.0f;
-        lb_8000B1CC(fp->parts[0x23].x0_jobj, &sp2C, &sp20);
+        lb_8000B1CC(fp->parts[FtPart_RShoulderN].x0_jobj, &sp2C, &sp20);
         sp20.z = 0.0f;
-        shadowHeldGObj = it_802C5000(
-            gobj, &sp20, 0x23, It_Kind_Mewtwo_ShadowBall, fp->facing_dir);
+        shadowHeldGObj =
+            it_802C5000(gobj, &sp20, FtPart_RShoulderN,
+                        It_Kind_Mewtwo_ShadowBall, fp->facing_dir);
         fp->fv.mt.x2230_shadowHeldGObj = shadowHeldGObj;
         if (shadowHeldGObj != NULL) {
             ftMewtwo_SpecialN_SetCall(gobj);
@@ -523,10 +525,11 @@ inline void ftMewtwo_SpecialN_CreateHeldShadow(HSD_GObj* gobj, Vec3* pos1,
         pos1->z = 2.0f;
         pos1->y = 0.0f;
         pos1->x = 0.0f;
-        lb_8000B1CC(fp->parts[0x23].x0_jobj, pos1, pos2);
+        lb_8000B1CC(fp->parts[FtPart_RShoulderN].x0_jobj, pos1, pos2);
         pos2->z = 0.0f;
-        shadowHeldGObj = it_802C5000(
-            gobj, pos2, 0x23, It_Kind_Mewtwo_ShadowBall, fp->facing_dir);
+        shadowHeldGObj =
+            it_802C5000(gobj, pos2, FtPart_RShoulderN,
+                        It_Kind_Mewtwo_ShadowBall, fp->facing_dir);
         fp->fv.mt.x2230_shadowHeldGObj = shadowHeldGObj;
         if (shadowHeldGObj != NULL) {
             ftMewtwo_SpecialN_SetCall(gobj);
@@ -574,10 +577,10 @@ void ftMt_SpecialNLoop_Anim(HSD_GObj* gobj)
                     fp->fv.mt.x2234_shadowBallCharge =
                         (s32) mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
                     fp->mv.mt.SpecialN.x2348 = true;
-                    ftCommon_8007EBAC(fp, 0xCU, 0U);
-                    lb_8000B1CC(fp->parts[0].x0_jobj, &sp34, &sp40);
-                    efSync_Spawn(0x1B, gobj, &sp40);
-                    ft_800BFFD0(fp, 0x5C, 0);
+                    ftCommon_8007EBAC(fp, 12, 0U);
+                    lb_8000B1CC(fp->parts[FtPart_TopN].x0_jobj, &sp34, &sp40);
+                    efSync_Spawn(27, gobj, &sp40);
+                    ft_800BFFD0(fp, 92, 0);
                 }
             }
         }
@@ -660,10 +663,11 @@ void ftMt_SpecialAirNStart_Anim(HSD_GObj* gobj)
         sp2C.z = 2.0f;
         sp2C.y = 0.0f;
         sp2C.x = 0.0f;
-        lb_8000B1CC(fp->parts[0x23].x0_jobj, &sp2C, &sp20);
+        lb_8000B1CC(fp->parts[FtPart_RShoulderN].x0_jobj, &sp2C, &sp20);
         sp20.z = 0.0f;
-        shadowHeldGObj = it_802C5000(
-            gobj, &sp20, 0x23, It_Kind_Mewtwo_ShadowBall, fp->facing_dir);
+        shadowHeldGObj =
+            it_802C5000(gobj, &sp20, FtPart_RShoulderN,
+                        It_Kind_Mewtwo_ShadowBall, fp->facing_dir);
         fp->fv.mt.x2230_shadowHeldGObj = shadowHeldGObj;
         if (shadowHeldGObj != NULL) {
             ftMewtwo_SpecialN_SetCall(gobj);
@@ -726,18 +730,18 @@ void ftMt_SpecialAirNLoop_Anim(HSD_GObj* gobj)
                     fp->fv.mt.x2234_shadowBallCharge =
                         (s32) mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
                     fp->mv.mt.SpecialN.x2348 = 1;
-                    ftCommon_8007EBAC(fp, 0xCU, 0U);
+                    ftCommon_8007EBAC(fp, 12, 0U);
 
-                    lb_8000B1CC(fp->parts[0].x0_jobj, &sp34, &sp40);
-                    efSync_Spawn(0x1B, gobj, &sp40);
-                    ft_800BFFD0(fp, 0x5C, 0);
+                    lb_8000B1CC(fp->parts[FtPart_TopN].x0_jobj, &sp34, &sp40);
+                    efSync_Spawn(27, gobj, &sp40);
+                    ft_800BFFD0(fp, 92, 0);
                 }
             }
         }
     }
 }
 
-// 0x8014CF0
+// 134302960
 // https://decomp.me/scratch/Fn7lE // Set Shadow Ball vars to full charge?
 void ftMt_SpecialAirNFull_Anim(HSD_GObj* gobj)
 {
@@ -1232,15 +1236,15 @@ static inline void ftMewtwo_SpecialN_LaunchShadowBall(HSD_GObj* gobj)
         ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
         if ((u32) fp->x220C_ftcmd_var3 == 1U) {
             fp->x220C_ftcmd_var3 = 0;
-            lb_8000B1CC(fp->parts[0x23].x0_jobj, NULL, &sp20);
-            lb_8000B1CC(fp->parts[0x20].x0_jobj, NULL, &sp2C);
+            lb_8000B1CC(fp->parts[FtPart_RShoulderN].x0_jobj, NULL, &sp20);
+            lb_8000B1CC(fp->parts[FtPart_LHandNb].x0_jobj, NULL, &sp2C);
             sp2C.z = 0.0f;
             sp20.z = 0.0f;
             it_802C519C(gobj, &sp20, It_Kind_Mewtwo_ShadowBall,
                         mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES,
                         atan2f(sp20.y - sp2C.y, sp20.x - sp2C.x),
                         fp->facing_dir);
-            ft_80088148(fp, 0x30DB3U, SFX_VOLUME_MAX, SFX_PAN_MID);
+            ft_80088148(fp, 200115, SFX_VOLUME_MAX, SFX_PAN_MID);
         }
     }
 }

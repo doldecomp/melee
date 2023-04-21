@@ -44,41 +44,47 @@ void ftSb_Init_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftSandbagAttributes);
 
-    fp->x2228_flag.bits.b2 = 1;
-    fp->x2226_flag.bits.b0 = 1;
+    fp->x2228_flag.bits.b2 = true;
+    fp->x2226_flag.bits.b0 = true;
 
     ftSb_Init_8014FA30(fp);
 }
 
 void ftSb_Init_8014FA30(Fighter* fp)
 {
-    FighterBone* bones = fp->parts;
-    lb_8000C1C0(bones[5].x0_jobj, bones[12].x0_jobj);
-    bones = fp->parts;
-    lb_8000C1C0(bones[5].x4_jobj2, bones[12].x4_jobj2);
-    bones = fp->parts;
-    lb_8000C1C0(bones[5].x0_jobj, bones[17].x0_jobj);
-    bones = fp->parts;
-    lb_8000C1C0(bones[5].x4_jobj2, bones[17].x4_jobj2);
-    bones = fp->parts;
-    lb_8000C228(bones[7].x0_jobj, bones[37].x0_jobj);
-    bones = fp->parts;
-    lb_8000C228(bones[7].x4_jobj2, bones[37].x4_jobj2);
+    FighterBone* parts = fp->parts;
+    lb_8000C1C0(parts[FtPart_WaistN].x0_jobj, parts[FtPart_RLegJ].x0_jobj);
+    parts = fp->parts;
+    lb_8000C1C0(parts[FtPart_WaistN].x4_jobj2, parts[FtPart_RLegJ].x4_jobj2);
+    parts = fp->parts;
+    lb_8000C1C0(parts[FtPart_WaistN].x0_jobj,
+                parts[FtPart_LShoulderN].x0_jobj);
+    parts = fp->parts;
+    lb_8000C1C0(parts[FtPart_WaistN].x4_jobj2,
+                parts[FtPart_LShoulderN].x4_jobj2);
+    parts = fp->parts;
+    lb_8000C228(parts[FtPart_LLegJ].x0_jobj, parts[FtPart_RShoulderJ].x0_jobj);
+    parts = fp->parts;
+    lb_8000C228(parts[FtPart_LLegJ].x4_jobj2,
+                parts[FtPart_RShoulderJ].x4_jobj2);
 
-    lb_8000C420(fp->parts[7].x0_jobj, 1, -1.57079637f);
-    lb_8000C420(fp->parts[7].x0_jobj, 2, -1.57079637f);
-    lb_8000C420(fp->parts[7].x4_jobj2, 1, -1.57079637f);
-    lb_8000C420(fp->parts[7].x4_jobj2, 2, -1.57079637f);
+    lb_8000C420(fp->parts[FtPart_LLegJ].x0_jobj, 1, -M_PI / 2);
+    lb_8000C420(fp->parts[FtPart_LLegJ].x0_jobj, 2, -M_PI / 2);
+    lb_8000C420(fp->parts[FtPart_LLegJ].x4_jobj2, 1, -M_PI / 2);
+    lb_8000C420(fp->parts[FtPart_LLegJ].x4_jobj2, 2, -M_PI / 2);
 
-    bones = fp->parts;
-    lb_8000C228(bones[6].x0_jobj, bones[5].x0_jobj);
-    bones = fp->parts;
-    lb_8000C228(bones[6].x4_jobj2, bones[5].x4_jobj2);
+    parts = fp->parts;
+    lb_8000C228(parts[FtPart_LLegJA].x0_jobj, parts[FtPart_WaistN].x0_jobj);
+    parts = fp->parts;
+    lb_8000C228(parts[FtPart_LLegJA].x4_jobj2, parts[FtPart_WaistN].x4_jobj2);
 
-    lb_8000C420(fp->parts[6].x0_jobj, 1, -1.50098311f);
-    lb_8000C420(fp->parts[6].x0_jobj, 2, -1.50098311f);
-    lb_8000C420(fp->parts[6].x4_jobj2, 1, -1.50098311f);
-    lb_8000C420(fp->parts[6].x4_jobj2, 2, -1.50098311f);
+    {
+        float const angle = -86 * DEG_TO_RAD;
+        lb_8000C420(fp->parts[FtPart_LLegJA].x0_jobj, 1, angle);
+        lb_8000C420(fp->parts[FtPart_LLegJA].x0_jobj, 2, angle);
+        lb_8000C420(fp->parts[FtPart_LLegJA].x4_jobj2, 1, angle);
+        lb_8000C420(fp->parts[FtPart_LLegJA].x4_jobj2, 2, angle);
+    }
 }
 
 void ftSb_Init_LoadSpecialAttrs(HSD_GObj* gobj)
