@@ -3,11 +3,6 @@
 
 #include <platform.h>
 
-struct ftDK_FighterVars {
-    /* 0x222C */ s32 x222C;
-    /* 0x2230 */ s32 x2230;
-};
-
 struct ftDonkey_FighterVars {
     /* 0x222C */ s32 x222C;
     /* 0x2230 */ s32 x2230;
