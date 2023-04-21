@@ -134,7 +134,7 @@ void ftMr_SpecialAirN_AirToGround(HSD_GObj*);
 
 // ftmario3
 void ftMr_SpecialS_CreateCape(HSD_GObj*);
-void ftMr_SpecialS_SetNULL(HSD_GObj*);
+void ftMr_SpecialS_Reset(HSD_GObj*);
 void ftMr_SpecialS_RemoveCape(HSD_GObj*);
 void ftMr_SpecialS_EnterHitlag(HSD_GObj*);
 void ftMr_SpecialS_ExitHitlag(HSD_GObj*);
@@ -167,7 +167,7 @@ void ftMr_SpecialHi_Coll(HSD_GObj*);
 void ftMr_SpecialAirHi_Coll(HSD_GObj*);
 
 // ftmario5
-void ftMr_SpecialLw_UpdateRot(HSD_GObj*);
+void updateRot(HSD_GObj*);
 void ftMr_SpecialLw_Enter(HSD_GObj*);
 void ftMr_SpecialAirLw_Enter(HSD_GObj*);
 void ftMr_SpecialLw_Anim(HSD_GObj*);

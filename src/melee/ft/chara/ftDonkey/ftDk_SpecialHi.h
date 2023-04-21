@@ -3,12 +3,12 @@
 
 #include <baselib/gobj.h>
 
-void ftDk_SpecialHi_DestroyAllEffects_SpecialHi(HSD_GObj* gobj);
+void ftDk_SpecialHi_DestroyAllEffects(HSD_GObj* gobj);
 
 void ftDonkey_SetCallbacks_SpecialHi(HSD_GObj* gobj);
 void ftDk_SpecialHi_Coll(HSD_GObj* gobj);
 void ftDk_SpecialAirHi_Coll(HSD_GObj* gobj);
-void ftDk_SpecialHi_DestroyAllEffects_SpecialHi(HSD_GObj* gobj);
+void ftDk_SpecialHi_DestroyAllEffects(HSD_GObj* gobj);
 void ftDk_SpecialHi_Enter(HSD_GObj* gobj);
 void ftDk_SpecialAirHi_Enter(HSD_GObj* gobj);
 void ftDk_SpecialHi_Anim(HSD_GObj* gobj);

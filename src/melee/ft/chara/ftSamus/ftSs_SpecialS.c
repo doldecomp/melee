@@ -163,7 +163,7 @@ void ftSs_SpecialSSmash_Coll(HSD_GObj* gobj)
     }
 }
 
-void ftSs_SpecialAirSmash_Coll(HSD_GObj* gobj)
+void ftSs_SpecialAirSSmash_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
         ft_80082B1C(gobj);

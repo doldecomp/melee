@@ -45,7 +45,7 @@ MotionState ftSs_Init_MotionStateTable[] = {
       ftCamera_UpdateCameraBox },
     { 306, 0x00340D12, 0x13000000, ftSs_SpecialAirSmash_Anim,
       ftSs_SpecialAirSmash_IASA, ftSs_SpecialAirSmash_Phys,
-      ftSs_SpecialAirSmash_Coll, ftCamera_UpdateCameraBox },
+      ftSs_SpecialAirSSmash_Coll, ftCamera_UpdateCameraBox },
     { 307, 0x00340213, 0x14000000, ftSs_SpecialHi_Anim, ftSs_SpecialHi_IASA,
       ftSs_SpecialHi_Phys, ftSs_SpecialHi_Coll, ftCamera_UpdateCameraBox },
     { 308, 0x00340613, 0x14000000, ftSs_SpecialAirHi_Anim,

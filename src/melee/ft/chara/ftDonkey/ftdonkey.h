@@ -61,28 +61,28 @@ typedef struct _ftDonkeyAttributes {
 
 } ftDonkeyAttributes;
 
-void ftDk_Init_800DF980(HSD_GObj* gobj);
+void ftDk_MS_341_800DF980(HSD_GObj* gobj);
 
 bool ftDk_MS_341_800DFA98(HSD_GObj* gobj);
 
 void ftDk_MS_341_800DFAE4(HSD_GObj* gobj, f32);
 void ftDk_MS_342_IASA(HSD_GObj* gobj);
 
-void ftDk_MS_342_800E017C(HSD_GObj* gobj);
+void ifSomething(HSD_GObj* gobj);
 void ftDk_MS_345_800E0294(HSD_GObj* gobj);
 void ftDk_MS_346_800E05E4(HSD_GObj* gobj);
-void ftDk_MS_349_800E07B0(HSD_GObj* gobj);
+void doSomething(HSD_GObj* gobj);
 
 void ftDk_Init_8010D774(HSD_GObj* gobj);
 
 void ftDk_Init_8010DB3C(HSD_GObj* gobj);
-void ftDk_SpecialLw_8010DE88(HSD_GObj* gobj);
-void ftDk_SpecialLw_8010DFF8(HSD_GObj* gobj);
+void doAnim(HSD_GObj* gobj);
+void doTransition(HSD_GObj* gobj);
 
 void ftDk_SpecialLw_8010E0CC(HSD_GObj* gobj);
 void ftDk_SpecialLw_8010E148(HSD_GObj* gobj);
-void ftDk_SpecialS_8010E464(HSD_GObj* gobj);
-void ftDk_SpecialS_8010E4EC(HSD_GObj* gobj);
+void doAirTransition(HSD_GObj* gobj);
+void doGroundTransition(HSD_GObj* gobj);
 
 void ftDk_SpecialN_DestroyAllEffects(HSD_GObj* gobj);
 
