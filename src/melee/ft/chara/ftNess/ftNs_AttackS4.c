@@ -1,9 +1,11 @@
-#include "ft/chara/ftNess/ftNs_AttackS4.h"
+#include "forward.h"
 
-#include "ft/chara/ftNess/ftNs_Init.h"
+#include "ftNess/ftNs_AttackS4.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcoll.h"
+#include "ftNess/ftNs_Init.h"
 #include "it/it_27CF.h"
 
 // 0x80114BF4
@@ -31,7 +33,7 @@ void ftNs_AttackS4_Enter(HSD_GObj* gobj) // Ness's F-Smash Motion State handler
 
     fp->x2200_ftcmd_var0 = false;
 
-    Fighter_ChangeMotionState(gobj, AS_NESS_ATTACKS4, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackS4, 0, NULL, 0.0f, 1.0f,
                               0.0f);
 
     ftAnim_8006EBA4(gobj);
@@ -39,7 +41,7 @@ void ftNs_AttackS4_Enter(HSD_GObj* gobj) // Ness's F-Smash Motion State handler
     baseballBatGObj = it_802AD478(gobj, &fp->cur_pos,
                                   0x2A /* Item Hold Bone */, fp->facing_dir);
 
-    fp->ev.ns.x2248_baseballBatGObj = baseballBatGObj;
+    fp->fv.ns.bat_gobj = baseballBatGObj;
 
     if (baseballBatGObj != NULL) {
         fp->cb.x21E4_callback_OnDeath2 = ftNs_Init_OnDamage;
@@ -54,11 +56,11 @@ bool ftNs_AttackS4_CheckNessBatRemove(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->action_id != AS_NESS_ATTACKS4) {
+    if (fp->motion_id != ftNs_MS_AttackS4) {
         return true;
     }
 
-    if (fp->ev.ns.x2248_baseballBatGObj == NULL) {
+    if (fp->fv.ns.bat_gobj == NULL) {
         return true;
     }
 
@@ -71,9 +73,9 @@ void ftNs_AttackS4_ItemNessBatRemove(HSD_GObj* gobj) // Remove Baseball Bat
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.ns.x2248_baseballBatGObj != NULL) {
-        it_802AD6B8(fp->ev.ns.x2248_baseballBatGObj);
-        fp->ev.ns.x2248_baseballBatGObj = NULL;
+    if (fp->fv.ns.bat_gobj != NULL) {
+        it_802AD6B8(fp->fv.ns.bat_gobj);
+        fp->fv.ns.bat_gobj = NULL;
     }
 };
 
@@ -84,8 +86,8 @@ void ftNs_AttackS4_ItemNessBatSetNULL(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.ns.x2248_baseballBatGObj != NULL) {
-        fp->ev.ns.x2248_baseballBatGObj = NULL;
+    if (fp->fv.ns.bat_gobj != NULL) {
+        fp->fv.ns.bat_gobj = NULL;
     }
 };
 
@@ -117,12 +119,11 @@ void ftNs_AttackS4_Anim(HSD_GObj* gobj) // Ness's F-Smash Animation callback
     {
         Fighter* fighter_data2;
         fighter_data2 = GET_FIGHTER(gobj);
-        if (fighter_data2->ev.ns.x2248_baseballBatGObj != NULL) {
+        if (fighter_data2->fv.ns.bat_gobj != NULL) {
             it_802AD6B8(
-                fighter_data2->ev.ns
-                    .x2248_baseballBatGObj); // Despawn the Baseball Bat
-                                             // if animation is over
-            fighter_data2->ev.ns.x2248_baseballBatGObj = NULL;
+                fighter_data2->fv.ns.bat_gobj); // Despawn the Baseball Bat if
+                                                // animation is over
+            fighter_data2->fv.ns.bat_gobj = NULL;
         }
         ft_8008A2BC(gobj);
     }
@@ -140,9 +141,9 @@ void ftNs_AttackS4_IASA(HSD_GObj* gobj) // Ness's F-Smash IASA Callback
 #endif
 
     if (fp->x2218_flag.bits.b0 != 0) {
-        if (fp->ev.ns.x2248_baseballBatGObj != NULL) {
-            it_802AD6B8(fp->ev.ns.x2248_baseballBatGObj);
-            fp->ev.ns.x2248_baseballBatGObj = NULL;
+        if (fp->fv.ns.bat_gobj != NULL) {
+            it_802AD6B8(fp->fv.ns.bat_gobj);
+            fp->fv.ns.bat_gobj = NULL;
         }
         ftCo_Wait_IASA(gobj);
     }

@@ -1,12 +1,24 @@
-#include "ft/chara/ftCLink/ftCl_Init.h"
+#include "it/forward.h"
 
-#include "ft/chara/ftLink/ftLk_Init.h"
+#include "ftCl_Init.h"
+
+#include "ftCl_Appeal.h"
+#include "inlines.h"
+#include "types.h"
+
+#include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftLink/ftLk_Init.h"
+#include "ftLink/ftLk_SpecialHi.h"
+#include "ftLink/ftLk_SpecialLw.h"
+#include "ftLink/ftLk_SpecialN.h"
+#include "ftLink/ftLk_SpecialS.h"
 #include "lb/lbmthp.h"
 
 MotionState ftCl_Init_MotionStateTable[] = {
@@ -262,13 +274,13 @@ void ftCl_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
     ftParts_80074A4C(gobj, 2, 0);
-    fp->ev.cl.x222C = 0;
-    fp->ev.cl.x2234 = 0;
-    fp->ev.cl.x2238 = 0;
-    fp->ev.cl.x223C = 0;
-    fp->ev.cl.x2240 = 0;
-    fp->ev.cl.x2238 = 0;
-    fp->ev.cl.x2244 = 0;
+    fp->fv.cl.x222C = 0;
+    fp->fv.cl.x2234 = 0;
+    fp->fv.cl.x2238 = 0;
+    fp->fv.cl.x223C = 0;
+    fp->fv.cl.x2240 = 0;
+    fp->fv.cl.x2238 = 0;
+    fp->fv.cl.x2244 = 0;
 }
 
 void ftCl_Init_OnLoad(HSD_GObj* gobj)
@@ -279,7 +291,7 @@ void ftCl_Init_OnLoad(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = gobj->user_data;
-    ftData* ftdata = fp->x10C_ftData;
+    ftData* ftdata = fp->ft_data;
     CLinkAttributes* attrs = (void*) ftdata->ext_attr;
     void** items = ftdata->x48_items;
 
@@ -372,15 +384,15 @@ void ftCl_Init_OnKnockbackExit(HSD_GObj* gobj)
 void ftCl_Init_80149114(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    CLinkAttributes* temp_r4 = (void*) fp->x10C_ftData->ext_attr;
+    CLinkAttributes* temp_r4 = (void*) fp->ft_data->ext_attr;
     f32 ftmp = ft_80092ED8(fp->x19A4, temp_r4, temp_r4->xD8);
-    fp->xEC_ground_vel = ftmp * p_ftCommonData->x294;
+    fp->gr_vel = ftmp * p_ftCommonData->x294;
     if (fp->x19AC < 0.0f) {
-        ftmp = fp->xEC_ground_vel;
+        ftmp = fp->gr_vel;
     } else {
-        ftmp = -fp->xEC_ground_vel;
+        ftmp = -fp->gr_vel;
     }
-    fp->xEC_ground_vel = ftmp;
+    fp->gr_vel = ftmp;
     ft_80088148(fp, 0x111DA, 0x7F, 0x40);
 }
 
@@ -415,11 +427,11 @@ bool ftCl_Init_8014920C(HSD_GObj* gobj)
     if (fp == NULL) {
         return true;
     }
-    temp_r0 = fp->action_id;
+    temp_r0 = fp->motion_id;
     if (temp_r0 != 0x156 && temp_r0 != 0x157) {
         return true;
     }
-    if (fp->ev.cl.x2244 == 0) {
+    if (fp->fv.cl.x2244 == 0) {
         return true;
     }
     return false;
@@ -444,8 +456,8 @@ void ftCl_Init_801492C4(HSD_GObj* gobj)
     }
 
     fp = gobj->user_data;
-    if (fp != NULL && fp->ev.cl.x2244 != 0) {
-        fp->ev.cl.x2244 = 0;
+    if (fp != NULL && fp->fv.cl.x2244 != 0) {
+        fp->fv.cl.x2244 = 0;
     };
 
     if (gobj == NULL) {

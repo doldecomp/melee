@@ -1,5 +1,9 @@
+#include "it/forward.h"
+
 #include "ftYs_Init.h"
 
+#include "ftYs_Shield.h"
+#include "ftYs_SpecialN.h"
 #include "types.h"
 
 #include "ef/efasync.h"
@@ -8,6 +12,7 @@
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 #include <placeholder.h>
@@ -317,13 +322,13 @@ void ftYs_Init_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
     s32 i;
     f32 zero_float;
 
-    attr_r26 = fp->x10C_ftData->ext_attr;
+    attr_r26 = fp->ft_data->ext_attr;
     index = (unk_struct1 = unk_struct_arg)->unk_struct->xC_start_index;
     ptr2EndIndex = (s32*) (&unk_struct1->unk_struct->x8_end_index);
     zero_float = 0.0f;
 
     for (i = 0; i < *ptr2EndIndex; i++) {
-        HSD_DObj* dobj_r3 = fp->x5EC_dobj_list.data[index[i]];
+        HSD_DObj* dobj_r3 = fp->dobj_list.data[index[i]];
         HSD_MObj* mobj_r3;
         HSD_AObj* aobj_r24;
 
@@ -365,7 +370,7 @@ void ftYs_Init_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
         ptr2EndIndex = (s32*) &unk_struct->x8_end_index;
 
         for (i = 0; i < *ptr2EndIndex; i++) {
-            HSD_DObj* dobj_r3 = fp->x5EC_dobj_list.data[index[i]];
+            HSD_DObj* dobj_r3 = fp->dobj_list.data[index[i]];
             HSD_MObj* mobj_r3;
             HSD_MObj* mobj;
 
@@ -408,7 +413,7 @@ void ftYs_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
-    fp->ev.ys.x2238 = 0;
+    fp->fv.ys.x2238 = 0;
 }
 
 // https://decomp.me/scratch/5TPxg
@@ -424,7 +429,7 @@ void ftYs_Init_OnLoad(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     temp = temp_r27 = (struct S_UNK_YOSHI1*) fp->x5B8;
-    ft = fp->x10C_ftData;
+    ft = fp->ft_data;
     temp_r28 = (struct S_UNK_YOSHI1*) fp->x5BC;
     item_list = ft->x48_items;
     other_attr = ft->ext_attr;
@@ -563,7 +568,7 @@ void ftYs_Init_8012BE3C(HSD_GObj* gobj) {
     x1CC = &fp->x110_attr.x1CC;
     bone_idx = ftParts_8007500C(fp, 4);
     fp2 = GET_FIGHTER(gobj);
-    jobj = fp->x5E8_fighterBones[bone_idx].x0_jobj;
+    jobj = fp->ft_bones[bone_idx].x0_jobj;
     efAsync_Spawn(gobj, &fp2->x60C, 4U, 0x4CF, jobj, x1CC);
 }
 

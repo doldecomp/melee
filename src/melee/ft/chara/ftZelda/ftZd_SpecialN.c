@@ -1,4 +1,4 @@
-#include "ftZd_Init.h"
+#include "ftZd_SpecialN.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -7,12 +7,13 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 
 void ftZd_SpecialN_8013A830(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
-        efSync_Spawn(0x4F4, gobj, fp->x5E8_fighterBones[1].x0_jobj);
+        efSync_Spawn(0x4F4, gobj, fp->ft_bones[1].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 
@@ -27,7 +28,7 @@ void ftZd_SpecialN_8013A8AC(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (fp->x2219_flag.bits.b0 == 0) {
-        efSync_Spawn(0x4F5, gobj, fp->x5E8_fighterBones[1].x0_jobj);
+        efSync_Spawn(0x4F5, gobj, fp->ft_bones[1].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -37,12 +38,12 @@ void ftZd_SpecialN_8013A8AC(HSD_GObj* gobj)
 
 inline void startActionHelper(HSD_GObj* gobj)
 {
-    ftZeldaAttributes* attributes;
+    ftZelda_DatAttrs* attributes;
     Fighter* fighter2; // r5
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->x2D4_specialAttributes;
     fighter2->x2200_ftcmd_var0 = 0;
-    fighter2->sv.zd.unk3.x0 = attributes->x4;
+    fighter2->mv.zd.specialn.x0 = attributes->x4;
 }
 
 void ftZd_SpecialN_Enter(HSD_GObj* gobj)
@@ -67,7 +68,7 @@ void ftZd_SpecialN_Enter(HSD_GObj* gobj)
 void ftZd_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftZeldaAttributes* sa = fp->x2D4_specialAttributes;
+    ftZelda_DatAttrs* sa = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -87,7 +88,7 @@ void ftZd_SpecialAirN_Enter(HSD_GObj* gobj)
 void ftZd_SpecialN_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
-    ftZeldaAttributes* attributes;
+    ftZelda_DatAttrs* attributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -117,7 +118,7 @@ void ftZd_SpecialN_Anim(HSD_GObj* gobj)
 void ftZd_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
-    ftZeldaAttributes* attributes;
+    ftZelda_DatAttrs* attributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -170,12 +171,12 @@ void ftZd_SpecialAirN_Phys(HSD_GObj* gobj)
 #endif
 
     {
-        s32 var1 = fp->sv.zd.unk3.x0;
+        s32 var1 = fp->mv.zd.specialn.x0;
         attr* attr = &fp->x110_attr;
-        ftZeldaAttributes* sa = fp->x2D4_specialAttributes;
+        ftZelda_DatAttrs* sa = fp->x2D4_specialAttributes;
 
         if (var1 != 0) {
-            fp->sv.zd.unk3.x0 = var1 - 1;
+            fp->mv.zd.specialn.x0 = var1 - 1;
         } else {
             ftCommon_8007D494(fp, sa->xC, attr->x170_TerminalVelocity);
         }
@@ -205,7 +206,7 @@ void ftZd_SpecialAirN_Coll(HSD_GObj* gobj)
 
 void ftZd_SpecialN_8013AC88(HSD_GObj* gobj)
 {
-    ftZeldaAttributes* attributes;
+    ftZelda_DatAttrs* attributes;
     Fighter* fp;
     Fighter* fighter2;
 
@@ -231,7 +232,7 @@ void ftZd_SpecialN_8013AC88(HSD_GObj* gobj)
 
 void ftZd_SpecialN_8013AD1C(HSD_GObj* gobj)
 {
-    ftZeldaAttributes* attributes;
+    ftZelda_DatAttrs* attributes;
     Fighter* fp;
     Fighter* fighter2;
 

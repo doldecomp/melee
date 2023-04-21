@@ -2,34 +2,42 @@
 #define MELEE_FT_TYPES_H
 
 #include <platform.h>
-
-#include "common_structs.h"
+#include "ft/forward.h"
+#include "ftCommon/forward.h"
 
 #include "ft/ftanim.h"
 #include "ftCaptain/types.h"
 #include "ftCommon/types.h"
 #include "ftDonkey/types.h"
-#include "ftFox/ftFox_StateVars.h"
-#include "ftGameWatch/ftGameWatch_StateVars.h"
+#include "ftFox/types.h"
+#include "ftGameWatch/types.h"
+#include "ftKirby/types.h"
 #include "ftKoopa/types.h"
-#include "ftLuigi/ftLuigi_StateVars.h"
-#include "ftMario/ftMario_StateVars.h"
+#include "ftLink/types.h"
+#include "ftLuigi/types.h"
+#include "ftMario/types.h"
 #include "ftMars/types.h"
 #include "ftMasterHand/types.h"
-#include "ftMewtwo/ftMewtwo_StateVars.h"
-#include "ftNess/ftNess_StateVars.h"
+#include "ftMewtwo/types.h"
+#include "ftNess/types.h"
+#include "ftPeach/types.h"
 #include "ftPikachu/types.h"
+#include "ftPopo/types.h"
 #include "ftPurin/types.h"
 #include "ftSamus/types.h"
+#include "ftSandbag/types.h"
 #include "ftSeak/types.h"
 #include "ftYoshi/types.h"
+#include "ftZakoBoy/types.h"
 #include "ftZelda/types.h"
 #include "gr/stage.h"
 #include "lb/lbcollision.h"
 #include "lb/lbrefract.h"
 #include "pl/player.h"
 
+#include <common_structs.h>
 #include <math.h>
+#include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/archive.h>
 #include <baselib/controller.h>
@@ -40,13 +48,6 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
-
-struct RGBA {
-    u8 r;
-    u8 g;
-    u8 b;
-    u8 a;
-};
 
 // Table in PlCo.dat
 typedef struct _FighterPartsTable {
@@ -155,7 +156,7 @@ typedef struct _ftCommonData {
     /* 0x5F0 */ u32 x5F0;
     u8 filler_x5F4[0x6D8 - 0x5F4];
     /* 0x6D8 */ void* x6D8[1]; // TODO expand to actual size
-    struct RGBA x6DC_colorsByPlayer[4];
+    GXColor x6DC_colorsByPlayer[4];
     u8 filler_x6EC[0x6F4 - 0x6EC];
     /* 0x6F4 */ s32 x6F4_unkDamage;
     /* 0x6F8 */ s32 x6F8;
@@ -196,15 +197,15 @@ typedef struct _ftCommonData {
 } ftCommonData;
 
 typedef struct _FtCollisionData {
-    u8 data_filler_0[0x28];
+    u8 x0[0x28];
     u32 x28;
-    u8 data_filler_2C[0x30 - 0x2C];
+    u8 x2C[0x30 - 0x2C];
     s32 x30;
     s32 x34;
 } FtCollisionData;
 
 typedef struct _DObjList {
-    u32 count;
+    usize_t count;
     HSD_DObj** data;
 } DObjList;
 
@@ -252,13 +253,13 @@ typedef struct _ThrowFlags {
 } ThrowFlags;
 
 typedef struct attr {
-    /* 0x110 */ f32 x110_WalkInitialVelocity;
-    /* 0x114 */ f32 x114_WalkAcceleration;
-    /* 0x118 */ f32 x118_WalkMaximumVelocity;
+    /* 0x110 */ f32 walk_init_vel;
+    /* 0x114 */ f32 walk_accel;
+    /* 0x118 */ f32 walk_max_vel;
     /* 0x11C */ f32 x11C_SlowWalkMax;
     /* 0x120 */ f32 x120_MidWalkPoint;
     /* 0x124 */ f32 x124_FastWalkMin;
-    /* 0x128 */ f32 x128_GroundFriction; // used
+    /* 0x128 */ f32 gr_friction; // used
     /* 0x12C */ f32 x12C_DashInitialVelocity;
     /* 0x130 */ f32 x130_DashrunAccelerationA;
     /* 0x134 */ f32 x134_DashrunAccelerationB;
@@ -546,247 +547,6 @@ struct Fighter_DemoStrings {
     char* vi_wait_filename;
 };
 
-// --------------------------------------------------------------------------------
-// UNION DEFS FOR FIGHTER STRUCTS. TODO: Maybe move these to per-fp
-// header includes or something.
-// --------------------------------------------------------------------------------
-struct SpecialAttrs_Mario {
-    /* 0x222C */ s32 x222C_vitaminCurr; // Current Megavitamin color combo
-    /* 0x2230 */ s32 x2230_vitaminPrev; // Previous Megavitamin color combo
-    /* 0x2234 */ bool x2234_tornadoCharge;
-    /* 0x2238 */ bool x2238_isCapeBoost;
-    /* 0x223C */ HSD_GObj* x223C_capeGObj;
-    /* 0x2240 */ u32 x2240;
-};
-
-struct SpecialAttrs_Fox {
-    /* 0x222C */ HSD_GObj* x222C_blasterGObj;
-};
-
-struct SpecialAttrs_DK {
-    /* 0x222C */ s32 x222C;
-    /* 0x2230 */ s32 x2230;
-};
-
-struct SpecialAttrs_Kirby {
-    /* 0x222C */ s32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ UnkFlagStruct x2234;
-    /* 0x2235 */ u8 filler_x2235[3];
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-    /* 0x224C */ u8 filler1[0x228C - 0x224C];
-    /* 0x228C */ u32 x228C;
-    /* 0x2290 */ u32 x2290;
-    /* 0x2294 */ u8 filler2[0x22C8 - 0x2294];
-    /* 0x22C8 */ s32 x22C8;
-    /* 0x22CC */ s32 x22CC;
-    /* 0x22D0 */ s32 x22D0;
-    /* 0x22D4 */ s32 x22D4;
-    /* 0x22D8 */ s32 x22D8;
-    /* 0x22DC */ s32 x22DC;
-    /* 0x22E0 */ s32 x22E0;
-    /* 0x22E4 */ s32 x22E4;
-    /* 0x22E8 */ s32 x22E8;
-};
-
-struct SpecialAttrs_Koopa {
-    /* 0x222C */ f32 x222C;
-    /* 0x2230 */ f32 x2230;
-};
-
-struct SpecialAttrs_Link {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-};
-
-struct SpecialAttrs_Seak {
-    /* 0x222C */ int x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ HSD_GObj* x2234;
-    /* 0x2238 */ Vec3 x2238[4];
-    /* 0x2268 */ Vec3 x2268[4];
-    /* 0x2298 */ Vec3 lstick_delta;
-};
-
-struct SpecialAttrs_Ness {
-    /* 0x222C */ HSD_GObj* x222C_yoyoGObj;
-    /* 0x2230 */ Vec3 x2230_yoyoHitboxPos;
-    /* 0x223C */ f32 x223C;
-    /* 0x2240 */ HSD_GObj* x2240_flashGObj;
-    /* 0x2244 */ HSD_GObj* x2244_pkThunderGObj;
-    /* 0x2248 */ HSD_GObj* x2248_baseballBatGObj;
-    /* 0x224C */ u32 x224C_thunderGFX; // bool for PK Thunder GFX?
-};
-
-struct SpecialAttrs_Peach {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-};
-
-struct SpecialAttrs_Popo {
-    /* 0x222C */ uint x222C;
-    /* 0x2230 */ UnkFlagStruct x2230;
-    /* 0x2231 */ u8 filler_x2231[3];
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-    /* 0x224C */ u32 x224C;
-    /* 0x2250 */ f32 x2250;
-};
-
-struct SpecialAttrs_Pikachu {
-    char filler0[0x100];
-};
-
-struct SpecialAttrs_Samus {
-    /* 0x222C */ HSD_GObj* x222C;
-    /* 0x2230 */ s32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-
-    /* 0x2240 */ u8 x2240;
-    /* 0x2241 */ u8 x2241;
-    /* 0x2242 */ u8 x2242;
-    /* 0x2243 */ u8 x2243;
-
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-};
-
-struct SpecialAttrs_Yoshi {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-};
-
-struct SpecialAttrs_Purin {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ HSD_JObj* x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ void* x2244;
-    /* 0x2248 */ u32 x2248;
-};
-
-struct SpecialAttrs_Mewtwo {
-    /* 0x222C */ HSD_GObj* x222C_disableGObj;
-    /* 0x2230 */ HSD_GObj*
-        x2230_shadowHeldGObj; // GObj of Shadow Ball while in Mewtwo's hands?
-    /* 0x2234 */ s32 x2234_shadowBallCharge; // Number of cycles Shadow Ball
-                                             // has been charged
-    /* 0x2238 */ HSD_GObj* x2238_shadowBallGObj;
-    /* 0x223C */ bool x223C_isConfusionBoost;
-};
-
-struct SpecialAttrs_Luigi {
-    /* 0x222C */ bool x222C_cycloneCharge;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-};
-
-struct SpecialAttrs_Mars {
-    /* 0x222C */ u32 x222C;
-};
-
-struct SpecialAttrs_Zelda {
-    /* 0x222C */ HSD_GObj* x222C;
-};
-
-struct SpecialAttrs_CLink {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-};
-
-struct SpecialAttrs_Pichu {
-    char filler0[0x100];
-};
-
-struct SpecialAttrs_GameWatch {
-    /* 0x222C */ s32 x222C_judgeVar1;
-    /* 0x2230 */ s32 x2230_judgeVar2;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ s32 x2238_panicCharge;
-    /* 0x223C */ s32 x223C_panicDamage;
-    /* 0x2240 */ s32 x2240_chefVar1;
-    /* 0x2244 */ s32 x2244_chefVar2;
-    /* 0x2248 */ HSD_GObj* x2248_manholeGObj;
-    /* 0x224C */ HSD_GObj* x224C_greenhouseGObj;
-    /* 0x2250 */ HSD_GObj* x2250_manholeGObj2;
-    /* 0x2254 */ HSD_GObj* x2254_fireGObj;
-    /* 0x2258 */ HSD_GObj* x2258_parachuteGObj;
-    /* 0x225C */ HSD_GObj* x225C_turtleGObj;
-    /* 0x2260 */ HSD_GObj* x2260_sparkyGObj;
-    /* 0x2264 */ HSD_GObj* x2264_judgementGObj;
-    /* 0x2268 */ HSD_GObj* x2268_panicGObj;
-    /* 0x226C */ HSD_GObj* x226C_rescueGObj;
-};
-
-struct SpecialAttrs_Masterhand {
-    /* 0x222C */ HSD_GObj* x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ f32 x2238;
-    /* 0x223C */ f32 x223C;
-    /* 0x2240 */ Vec3 x2240_pos;
-    /* 0x224C */ u32 x224C;
-    /* 0x2250 */ s32 x2250;
-    /* 0x2254 */ s32 x2254;
-    /* 0x2258 */ s32 x2258;
-};
-
-struct SpecialAttrs_Crazyhand {
-    /* 0x222C */ HSD_GObj* x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ f32 x2238;
-    /* 0x223C */ f32 x223C;
-    /* 0x2240 */ Vec3 x2240_pos;
-    /* 0x224C */ u32 x224C;
-    /* 0x2250 */ s32 x2250;
-    /* 0x2254 */ s32 x2254;
-    /* 0x2258 */ s32 x2258;
-};
-
-struct SpecialAttrs_Boy {
-    char filler0[0x100];
-};
-
-struct SpecialAttrs_Girl {
-    char filler0[0x100];
-};
-
-struct SpecialAttrs_Sandbag {
-    char filler0[0x100];
-};
-
 /// @todo Rename this and its members; investigate using it elsewhere.
 union Struct2070 {
     struct {
@@ -810,11 +570,11 @@ union Struct2070 {
 };
 
 struct Fighter {
-    /* 0x0 */ HSD_GObj* x0_fighter;
+    /* 0x0 */ HSD_GObj* gobj;
     /* 0x4 */ FighterKind x4_fighterKind;
     /* 0x8 */ s32 x8_spawnNum;
     /* 0xC */ u8 xC_playerID;
-    /* 0x10 */ enum_t action_id;
+    /* 0x10 */ enum_t motion_id;
     /* 0x14 */ enum_t anim_id;
     /* 0x18 */ s32 x18;
     /* 0x1C */ MotionState* x1C_actionStateList;
@@ -826,19 +586,19 @@ struct Fighter {
     /* 0x34 */ Vec3 x34_scale;
     /* 0x40 */ f32 x40;
     /* 0x44 */ Mtx x44_mtx;
-    Vec3 x74_anim_vel;             // 0x74
-    Vec3 x80_self_vel;             // 0x80
-    Vec3 x8c_kb_vel;               // 0x8C
-    Vec3 x98_atk_shield_kb;        // 0x98
-    Vec3 xA4_unk_vel;              // 0xA4
-    Vec3 cur_pos;                  // 0xb0
-    Vec3 xBC_prevPos;              // 0xBC
-    Vec3 xC8_pos_delta;            // 0xC8
-    Vec3 xD4_unk_vel;              // 0xD4
-    GroundOrAir xE0_ground_or_air; // 0xE0
-    f32 xE4_ground_accel_1;        // 0xE4
-    f32 xE8_ground_accel_2;        // 0xE8
-    f32 xEC_ground_vel;            // 0xEC
+    Vec3 x74_anim_vel;         // 0x74
+    Vec3 x80_self_vel;         // 0x80
+    Vec3 x8c_kb_vel;           // 0x8C
+    Vec3 x98_atk_shield_kb;    // 0x98
+    Vec3 xA4_unk_vel;          // 0xA4
+    Vec3 cur_pos;              // 0xb0
+    Vec3 prev_pos;             // 0xBC
+    Vec3 pos_delta;            // 0xC8
+    Vec3 xD4_unk_vel;          // 0xD4
+    GroundOrAir ground_or_air; // 0xE0
+    f32 xE4_ground_accel_1;    // 0xE4
+    f32 xE8_ground_accel_2;    // 0xE8
+    f32 gr_vel;                // 0xEC
     f32 xF0_ground_kb_vel;
     f32 xF4_ground_attacker_shield_kb_vel;
     Vec2 xF8_playerNudgeVel;
@@ -848,10 +608,8 @@ struct Fighter {
     /* 0x106 */ s8 x106;
     /* 0x107 */ s8 x107;
     /* 0x108 */ HSD_Joint* x108_costume_joint;
-    /* 0x10C */ ftData* x10C_ftData;
-    // TODO: Ask Psi how many of those are confirmed, only a fraction of them
-    // is used right now
-    attr x110_attr;
+    /* 0x10C */ ftData* ft_data;
+    /* 0x110 */ attr x110_attr;
     /* 0x294 */ itPickup x294_itPickup;
     /* 0x2C4 */ Vec2 x2C4;
     /* 0x2CC */ void* x2CC;
@@ -894,8 +652,8 @@ struct Fighter {
     u8 filler_x598[0x5C8 - 0x5C0];
     /* 0x5A0 */ void* x5C8;
     u8 filler_x5CC[0x5E8 - 0x5CC];
-    /* 0x5E8 */ FighterBone* x5E8_fighterBones;
-    /* 0x5EC */ DObjList x5EC_dobj_list;
+    /* 0x5E8 */ FighterBone* ft_bones;
+    /* 0x5EC */ DObjList dobj_list;
     /* 0x5F4 */ s8 x5F4;
     /* 0x5F5 */ s8 x5F5;
     /* 0x5F6 */ s8 x5F6;
@@ -904,7 +662,7 @@ struct Fighter {
     u8 filler_x5FC[0x60C - 0x5F9];
     /* 0x60C */ void* x60C;
     union {
-        /* 0x610 */ struct RGBA x610_color_rgba[2];
+        /* 0x610 */ GXColor x610_color_rgba[2];
         struct {
             /* 0x610 */ s32 x610;
             /* 0x614 */ s32 x614;
@@ -1345,61 +1103,59 @@ struct Fighter {
     /* 0x222A */ UnkFlagStruct x222A_flag;
     u8 filler_x222B;
 
-    // Some of these are clones of each other (they just use another struct)
-    // and some of them dont have specials so dont exist in the union.
-    /// @todo Clean-up
-    union FighterEntityVars {
-        struct SpecialAttrs_Mario mr;
-        struct SpecialAttrs_Fox fx, fc;
-        struct ftCaptain_EntityVars ca, gn;
-        struct SpecialAttrs_DK dk;
-        struct SpecialAttrs_Kirby kb;
-        struct SpecialAttrs_Koopa kp, gk;
-        struct SpecialAttrs_Link lk, cl;
-        struct SpecialAttrs_Seak sk;
-        struct SpecialAttrs_Ness ns;
-        struct SpecialAttrs_Peach pe;
-        struct SpecialAttrs_Popo pp, nn;
-        struct SpecialAttrs_Pikachu pk, pc;
-        struct SpecialAttrs_Samus ss;
-        struct SpecialAttrs_Yoshi ys;
-        struct SpecialAttrs_Purin pr;
-        struct SpecialAttrs_Mewtwo mt;
-        struct SpecialAttrs_Luigi lg;
-        struct SpecialAttrs_Mars ms;
-        struct SpecialAttrs_Zelda zd;
-        struct SpecialAttrs_GameWatch gw;
-        struct SpecialAttrs_Masterhand mh, ch;
-        struct SpecialAttrs_Boy bo, gl;
-        struct SpecialAttrs_Sandbag sb;
-    } ev;
+    union Fighter_FighterVars {
+        u8 _[FighterVars_Size];
+        struct ftCaptain_FighterVars ca, gn;
+        struct ftDonkey_FighterVars dk;
+        struct ftFox_FighterVars fx, fc;
+        struct ftGameWatch_FighterVars gw;
+        struct ftKirby_FighterVars kb;
+        struct ftKoopa_FighterVars kp, gk;
+        struct ftLink_FighterVars lk, cl;
+        struct ftLuigi_FighterVars lg;
+        struct ftMario_FighterVars mr;
+        struct ftMars_FighterVars ms;
+        struct ftMasterhand_FighterVars mh, ch;
+        struct ftMewtwo_FighterVars mt;
+        struct ftNess_FighterVars ns;
+        struct ftPeach_FighterVars pe;
+        struct ftPikachu_FighterVars pk, pc;
+        struct ftPopo_FighterVars pp, nn;
+        struct ftPurin_FighterVars pr;
+        struct ftSamus_FighterVars ss;
+        struct ftSandbag_FighterVars sb;
+        struct ftSeak_FighterVars sk;
+        struct ftYoshi_FighterVars ys;
+        struct ftZakoBoy_FighterVars bo, gl;
+        struct ftZelda_FighterVars zd;
+    } fv;
 
     /* 0x232C */ s32 x232C;
     /* 0x2330 */ Vec2 x2330;
     /* 0x2338 */ Vec2 x2338;
 
     /// @at{2340} @sz{AC}
-    union Fighter_StateVars {
+    union Fighter_MotionVars {
         u8 _[0x23EC - 0x2340];
-        union ftCaptain_StateVars ca, gn;
-        union ftCommon_StateVars co;
-        union ftDonkey_StateVars dk;
-        union ftFox_StateVars fx, fc;
-        union ftGameWatch_StateVars gw;
-        union ftKoopa_StateVars kp;
-        union ftLuigi_StateVars lg;
-        union ftMario_StateVars mr, dr;
-        union ftMars_StateVars ms, fe;
-        union ftMasterHand_StateVars mh, ch;
-        union ftMewtwo_StateVars mt;
-        union ftNess_StateVars ns;
-        union ftPikachu_StateVars pk, pc;
-        union ftPurin_StateVars pr;
-        union ftSamus_StateVars ss;
-        union ftSeak_StateVars sk;
-        union ftYoshi_StateVars ys;
-        union ftZelda_StateVars zd;
-    } sv;
+        union ftCaptain_MotionVars ca, gn;
+        union ftCommon_MotionVars co;
+        union ftDonkey_MotionVars dk;
+        union ftFox_MotionVars fx, fc;
+        union ftGameWatch_MotionVars gw;
+        union ftKoopa_MotionVars kp;
+        union ftLuigi_MotionVars lg;
+        union ftMario_MotionVars mr, dr;
+        union ftMars_MotionVars ms, fe;
+        union ftMasterHand_MotionVars mh, ch;
+        union ftMewtwo_MotionVars mt;
+        union ftNess_MotionVars ns;
+        union ftPikachu_MotionVars pk, pc;
+        union ftPurin_MotionVars pr;
+        union ftSamus_MotionVars ss;
+        union ftSeak_MotionVars sk;
+        union ftYoshi_MotionVars ys;
+        union ftZelda_MotionVars zd;
+    } mv;
 };
 
 #endif

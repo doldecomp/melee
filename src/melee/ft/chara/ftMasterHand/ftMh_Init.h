@@ -1,17 +1,17 @@
-#ifndef MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_01_H
-#define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_01_H
+#ifndef GALE01_14FC68
+#define GALE01_14FC68
 
 #include <baselib/forward.h>
 
 #include "ft/types.h"
 
-extern MotionState ftMh_Init_MotionStateTable[];
-extern char ftMh_Init_DatFilename[];
-extern char ftMh_Init_DataName[];
-extern Fighter_CostumeStrings ftMh_Init_CostumeStrings[];
-extern char ftMh_Init_AnimDatFilename[];
-
-void ftMh_Init_OnDeath(HSD_GObj* gobj);
-void ftMh_Init_OnLoad(HSD_GObj* gobj);
+/* 14FC68 */ void ftMh_Init_OnDeath(HSD_GObj* gobj);
+/* 14FC6C */ void ftMh_Init_OnLoad(HSD_GObj* gobj);
+/* 14FDD0 */ void ftMh_Init_LoadSpecialAttrs(HSD_GObj* gobj);
+/* 3D3A30 */ extern MotionState ftMh_Init_MotionStateTable[];
+/* 3D4070 */ extern char ftMh_Init_DatFilename[];
+/* 3D407C */ extern char ftMh_Init_DataName[];
+/* 3D40B8 */ extern char ftMh_Init_AnimDatFilename[];
+/* 3D40C4 */ extern Fighter_CostumeStrings ftMh_Init_CostumeStrings[];
 
 #endif

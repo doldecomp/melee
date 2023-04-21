@@ -1,14 +1,17 @@
-#include "ft/forward.h"
+#include "ftPp_Init.h"
 
-#include "fticeclimber.h"
-#include "fticeclimber1.h"
+#include "ftPp_1211.h"
+#include "ftPp_SpecialS.h"
+#include "types.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftNana/ftNn_Init.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
@@ -340,7 +343,7 @@ void ftPp_Init_OnLoad(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    void** item_list = fp->x10C_ftData->x48_items;
+    void** item_list = fp->ft_data->x48_items;
     fp->x2222_flag.bits.b5 = 1;
 
     PUSH_ATTRS(fp, ftIceClimberAttributes);
@@ -359,13 +362,21 @@ void ftPp_Init_OnDeath(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0U, 0);
     ftParts_80074A4C(gobj, 1U, 0);
-    fp->ev.nn.x2234 = 0;
-    fp->ev.nn.x222C = 0;
-    fp->ev.nn.x2230.bits.b0 = false;
-    fp->ev.nn.x2238 = 0;
-    fp->ev.nn.x224C = 0;
-    fp->ev.nn.x2250 = 0.0f;
+    fp->fv.nn.x2234 = 0;
+    fp->fv.nn.x222C = 0;
+    fp->fv.nn.x2230.bits.b0 = false;
+    fp->fv.nn.x2238 = 0;
+    fp->fv.nn.x224C = 0;
+    fp->fv.nn.x2250 = 0.0f;
 }
+
+static void ftPp_Init_8011F190(HSD_GObj* gobj);
+
+#ifdef MWERKS_GEKKO
+static void ftPp_SpecialN_8011F68C(HSD_GObj* gobj);
+#else
+/* static */ void ftPp_SpecialN_8011F68C(HSD_GObj* gobj);
+#endif
 
 void ftPp_Init_8011F060(HSD_GObj* gobj)
 {
@@ -394,25 +405,25 @@ void ftPp_Init_8011F16C(HSD_GObj* gobj, uint i)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
 
-    if (i != fp->ev.nn.x222C) {
+    if (i != fp->fv.nn.x222C) {
         return;
     }
 
-    fp->ev.nn.x222C = 0;
+    fp->fv.nn.x222C = 0;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
-void ftPp_Init_8011F190(HSD_GObj* gobj)
+static void ftPp_Init_8011F190(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
 
-    if (fp->ev.nn.x222C == 0) {
+    if (fp->fv.nn.x222C == 0) {
         return;
     }
 
-    it_802C17DC(fp->ev.nn.x222C);
-    ftPp_Init_8011F16C(gobj, fp->ev.nn.x222C);
+    it_802C17DC(fp->fv.nn.x222C);
+    ftPp_Init_8011F16C(gobj, fp->fv.nn.x222C);
 }
 
 extern f32 const ftPp_Init_804D9838;
@@ -423,7 +434,7 @@ void ftPp_SpecialN_Enter(HSD_GObj* gobj)
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->ev.nn.x222C = 0;
+    fp->fv.nn.x222C = 0;
 
     Fighter_ChangeMotionState(gobj, 341, 0, NULL, ftPp_Init_804D9838,
                               ftPp_Init_804D983C, ftPp_Init_804D9838);
@@ -446,14 +457,14 @@ void ftPp_SpecialAirN_Enter(HSD_GObj* gobj)
 
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->ev.nn.x222C = 0;
+    fp->fv.nn.x222C = 0;
 
-    if ((s32) fp->ev.nn.x224C == false) {
+    if ((s32) fp->fv.nn.x224C == false) {
         fp->x80_self_vel.y = icattr->x4;
-        fp->ev.nn.x224C = true;
-        fp->ev.nn.x2250 = ftPp_Init_804D9838;
+        fp->fv.nn.x224C = true;
+        fp->fv.nn.x2250 = ftPp_Init_804D9838;
     } else {
-        fp->ev.nn.x2250 = ftPp_Init_804D9840;
+        fp->fv.nn.x2250 = ftPp_Init_804D9840;
     }
 
     Fighter_ChangeMotionState(gobj, 342, 0, NULL, ftPp_Init_804D9838,
@@ -496,12 +507,12 @@ void ftPp_SpecialN_Coll(HSD_GObj* gobj)
     if (!ft_80082708(gobj)) {
         Fighter* fp1;
         fp1 = GET_FIGHTER(gobj);
-        if (fp1->ev.nn.x222C != 0U) {
+        if (fp1->fv.nn.x222C != 0U) {
             Fighter* fp2;
-            it_802C17DC(fp1->ev.nn.x222C);
+            it_802C17DC(fp1->fv.nn.x222C);
             fp2 = GET_FIGHTER(gobj);
-            if ((u32) fp1->ev.nn.x222C == (u32) fp2->ev.nn.x222C) {
-                fp2->ev.nn.x222C = 0U;
+            if ((u32) fp1->fv.nn.x222C == (u32) fp2->fv.nn.x222C) {
+                fp2->fv.nn.x222C = 0U;
                 fp2->cb.x21E4_callback_OnDeath2 = 0U;
                 fp2->cb.x21DC_callback_OnTakeDamage = 0U;
             }
@@ -681,7 +692,7 @@ extern f32 const ftPp_Init_804D9848;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPp_SpecialN_8011F68C(HSD_GObj*)
+static asm void ftPp_SpecialN_8011F68C(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8011F68C 0011C26C  7C 08 02 A6 */	mflr r0

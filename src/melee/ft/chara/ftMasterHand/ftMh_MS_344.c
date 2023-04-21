@@ -4,49 +4,45 @@
 
 #include "ft/ft_0877.h"
 #include "ft/ftbosslib.h"
+#include "ft/inlines.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
 
-u32 ftMh_MS_343_80151428(Vec3* vec)
+bool ftMh_MS_343_80151428(Vec3* vec)
 {
-    HSD_GObj* fetched_gobj = ftBossLib_8015C3E8(0x1B);
-
-    if (fetched_gobj) {
-        lb_8000B1CC(
-            ((Fighter*) fetched_gobj->user_data)->x5E8_fighterBones[5].x0_jobj,
-            0, vec);
-        return 1;
+    HSD_GObj* gobj = ftBossLib_8015C3E8(27);
+    if (gobj != NULL) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        lb_8000B1CC(fp->ft_bones[WaistN].x0_jobj, 0, vec);
+        return true;
     }
-    return 0;
+    return false;
 }
 
-// 80151484 14E064
-// https://decomp.me/scratch/0vIXi
 inline void func_80151484_inline1(HSD_GObj* gobj)
 {
-    Fighter* r29_fp = gobj->user_data;
-    ftMasterHand_SpecialAttrs* temp_r30 = r29_fp->x10C_ftData->ext_attr;
-    r29_fp->x80_self_vel.z = 0.0f;
-    r29_fp->x80_self_vel.y = 0.0f;
-    r29_fp->x80_self_vel.x = 0.0f;
-    it_802F046C(r29_fp->sv.mh.unk0.x34);
-    it_802F046C(r29_fp->sv.mh.unk0.x38);
-    it_802F046C(r29_fp->sv.mh.unk0.x3C);
-    it_802F046C(r29_fp->sv.mh.unk0.x40);
-    r29_fp->sv.mh.unk0.x34 = 0;
-    r29_fp->sv.mh.unk0.x38 = 0;
-    r29_fp->sv.mh.unk0.x3C = 0;
-    r29_fp->sv.mh.unk0.x40 = 0;
-    lbAudioAx_800236B8(r29_fp->sv.mh.unk0.x28);
-    lbAudioAx_800236B8(r29_fp->sv.mh.unk0.x2C);
-    lbAudioAx_800236B8(r29_fp->sv.mh.unk0.x30);
-    if (r29_fp->sv.mh.unk0.x20) {
-        ftMh_CaptureWaitMasterHand_80155D1C(r29_fp->x1A58_interactedFighter);
+    /// @todo #GET_FIGHTER
+    Fighter* fp = gobj->user_data;
+    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    fp->x80_self_vel.x = fp->x80_self_vel.y = fp->x80_self_vel.z = 0;
+    it_802F046C(fp->mv.mh.unk0.x34);
+    it_802F046C(fp->mv.mh.unk0.x38);
+    it_802F046C(fp->mv.mh.unk0.x3C);
+    it_802F046C(fp->mv.mh.unk0.x40);
+    fp->mv.mh.unk0.x34 = 0;
+    fp->mv.mh.unk0.x38 = 0;
+    fp->mv.mh.unk0.x3C = 0;
+    fp->mv.mh.unk0.x40 = 0;
+    lbAudioAx_800236B8(fp->mv.mh.unk0.x28);
+    lbAudioAx_800236B8(fp->mv.mh.unk0.x2C);
+    lbAudioAx_800236B8(fp->mv.mh.unk0.x30);
+    if (fp->mv.mh.unk0.x20) {
+        ftMh_CaptureWaitMasterHand_80155D1C(fp->x1A58_interactedFighter);
     }
-    r29_fp->x80_self_vel.y = temp_r30->x14C;
-    r29_fp->x80_self_vel.z = temp_r30->x154;
-    r29_fp->sv.mh.unk0.x8 = temp_r30->x15C;
+    fp->x80_self_vel.y = attr->x14C;
+    fp->x80_self_vel.z = attr->x154;
+    fp->mv.mh.unk0.x8 = attr->x15C;
 }
 
 void ftMh_MS_343_80151484(HSD_GObj* gobj)
@@ -56,97 +52,57 @@ void ftMh_MS_343_80151484(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter* r3_fp = GET_FIGHTER(gobj);
-    r3_fp->x2200_ftcmd_var0 = 0;
-
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x2200_ftcmd_var0 = 0;
     func_80151484_inline1(gobj);
-
-    Fighter_ChangeMotionState(gobj, 0x158, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Unk344, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
-
-    // r3_fp now stored in r28
-    ft_800881D8(r3_fp, 0x4E217, 0x7F, 0x40);
-    ft_80088148(r3_fp, 0x4E218, 0x7F, 0x40);
-    r3_fp->sv.mh.unk0.x74 = 0;
-    r3_fp->sv.mh.unk0.x78 = 0;
+    ft_800881D8(fp, 320023, 127, 64);
+    ft_80088148(fp, 320024, 127, 64);
+    fp->mv.mh.unk0.x74 = 0;
+    fp->mv.mh.unk0.x78 = 0;
 }
 
-// 801515B8 14E198
-// https://decomp.me/scratch/I5KfO
 void ftMh_MS_344_Anim(HSD_GObj* gobj)
 {
-    s32 temp_r0;
-    s32 temp_r3;
-    s32 temp_r3_2;
-    Fighter* r31_fp;
-    ftMasterHand_SpecialAttrs* r4_attributes;
-
-    r31_fp = gobj->user_data;
-    if (r31_fp->x2200_ftcmd_var0) {
-        r4_attributes = r31_fp->x10C_ftData->ext_attr;
-        temp_r3 = r31_fp->sv.mh.unk0.x74 + 1;
-        r31_fp->sv.mh.unk0.x74 = temp_r3;
-        if (temp_r3 <= r4_attributes->x144) {
-            lbAudioAx_8002438C(0x81652);
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->x2200_ftcmd_var0) {
+        ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+        if (++fp->mv.mh.unk0.x74 <= attr->x144) {
+            lbAudioAx_8002438C(530002);
         } else {
-            temp_r3_2 = r31_fp->sv.mh.unk0.x78 + 1;
-            r31_fp->sv.mh.unk0.x78 = temp_r3_2;
-            if (temp_r3_2 <= r4_attributes->x148) {
-                lbAudioAx_8002438C(0x81653);
+            if (++fp->mv.mh.unk0.x78 <= attr->x148) {
+                lbAudioAx_8002438C(530003);
             }
         }
-        r31_fp->x2200_ftcmd_var0 = 0U;
+        fp->x2200_ftcmd_var0 = 0;
     }
-
-    // sv.mh.unk0.x8 does that make sense if its u32?
-    if (r31_fp->sv.mh.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, 0x159, 0, 0, 0.0f, 1.0f, 0.0f);
+    if (fp->mv.mh.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Unk345, 0, 0, 0, 1, 0);
         ftAnim_8006EBA4(gobj);
     }
-    temp_r0 = r31_fp->sv.mh.unk0.x8 - 1;
-
-    r31_fp->sv.mh.unk0.x8 = temp_r0;
-    if (temp_r0) {
-        return;
+    if (--fp->mv.mh.unk0.x8 == 0) {
+        ft_800D4F24(gobj, 0);
     }
-    ft_800D4F24(gobj, 0);
 }
 
-// 801516B4 14E294
-// https://decomp.me/scratch/AmIVW
 void ftMh_MS_345_Anim(HSD_GObj* gobj)
 {
-    f32 temp_f1;
-    s32 temp_r0;
-    s32 temp_r3;
-    s32 temp_r3_2;
-    ftMasterHand_SpecialAttrs* r4_attributes;
-    Fighter* r31_fp = GET_FIGHTER(gobj);
-
-    if ((u32) r31_fp->x2200_ftcmd_var0 != 0U) {
-        r4_attributes = r31_fp->x10C_ftData->ext_attr;
-        temp_r3 = r31_fp->sv.mh.unk0.x74 + 1;
-        r31_fp->sv.mh.unk0.x74 = temp_r3;
-        if (temp_r3 <= r4_attributes->x144) {
-            lbAudioAx_8002438C(0x81652);
-        } else {
-            temp_r3_2 = r31_fp->sv.mh.unk0.x78 + 1;
-            r31_fp->sv.mh.unk0.x78 = temp_r3_2;
-            if (temp_r3_2 <= r4_attributes->x148) {
-                lbAudioAx_8002438C(0x81653);
-            }
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->x2200_ftcmd_var0 != 0) {
+        ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+        if (++fp->mv.mh.unk0.x74 <= attr->x144) {
+            lbAudioAx_8002438C(530002);
+        } else if (++fp->mv.mh.unk0.x78 <= attr->x148) {
+            lbAudioAx_8002438C(530003);
         }
-        r31_fp->x2200_ftcmd_var0 = 0U;
+        fp->x2200_ftcmd_var0 = 0;
     }
-    if (r31_fp->sv.mh.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
-        temp_f1 = 0.0f;
-        Fighter_ChangeMotionState(gobj, 0x159, 0, 0, temp_f1, 1.0f, temp_f1);
+    if (fp->mv.mh.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Unk345, 0, 0, 0, 1, 0);
         ftAnim_8006EBA4(gobj);
     }
-    temp_r0 = r31_fp->sv.mh.unk0.x8 - 1;
-    // temp_cr0_eq = ;
-    r31_fp->sv.mh.unk0.x8 = temp_r0;
-    if (temp_r0 == 0) {
+    if (--fp->mv.mh.unk0.x8 == 0) {
         ft_800D4F24(gobj, 0);
     }
 }

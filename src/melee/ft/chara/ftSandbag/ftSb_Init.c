@@ -4,6 +4,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "lb/lb_00B0.h"
 
@@ -51,33 +52,33 @@ void ftSb_Init_OnLoad(HSD_GObj* gobj)
 
 void ftSb_Init_8014FA30(Fighter* fp)
 {
-    FighterBone* bones = fp->x5E8_fighterBones;
+    FighterBone* bones = fp->ft_bones;
     lb_8000C1C0(bones[5].x0_jobj, bones[12].x0_jobj);
-    bones = fp->x5E8_fighterBones;
+    bones = fp->ft_bones;
     lb_8000C1C0(bones[5].x4_jobj2, bones[12].x4_jobj2);
-    bones = fp->x5E8_fighterBones;
+    bones = fp->ft_bones;
     lb_8000C1C0(bones[5].x0_jobj, bones[17].x0_jobj);
-    bones = fp->x5E8_fighterBones;
+    bones = fp->ft_bones;
     lb_8000C1C0(bones[5].x4_jobj2, bones[17].x4_jobj2);
-    bones = fp->x5E8_fighterBones;
+    bones = fp->ft_bones;
     lb_8000C228(bones[7].x0_jobj, bones[37].x0_jobj);
-    bones = fp->x5E8_fighterBones;
+    bones = fp->ft_bones;
     lb_8000C228(bones[7].x4_jobj2, bones[37].x4_jobj2);
 
-    lb_8000C420(fp->x5E8_fighterBones[7].x0_jobj, 1, -1.57079637f);
-    lb_8000C420(fp->x5E8_fighterBones[7].x0_jobj, 2, -1.57079637f);
-    lb_8000C420(fp->x5E8_fighterBones[7].x4_jobj2, 1, -1.57079637f);
-    lb_8000C420(fp->x5E8_fighterBones[7].x4_jobj2, 2, -1.57079637f);
+    lb_8000C420(fp->ft_bones[7].x0_jobj, 1, -1.57079637f);
+    lb_8000C420(fp->ft_bones[7].x0_jobj, 2, -1.57079637f);
+    lb_8000C420(fp->ft_bones[7].x4_jobj2, 1, -1.57079637f);
+    lb_8000C420(fp->ft_bones[7].x4_jobj2, 2, -1.57079637f);
 
-    bones = fp->x5E8_fighterBones;
+    bones = fp->ft_bones;
     lb_8000C228(bones[6].x0_jobj, bones[5].x0_jobj);
-    bones = fp->x5E8_fighterBones;
+    bones = fp->ft_bones;
     lb_8000C228(bones[6].x4_jobj2, bones[5].x4_jobj2);
 
-    lb_8000C420(fp->x5E8_fighterBones[6].x0_jobj, 1, -1.50098311f);
-    lb_8000C420(fp->x5E8_fighterBones[6].x0_jobj, 2, -1.50098311f);
-    lb_8000C420(fp->x5E8_fighterBones[6].x4_jobj2, 1, -1.50098311f);
-    lb_8000C420(fp->x5E8_fighterBones[6].x4_jobj2, 2, -1.50098311f);
+    lb_8000C420(fp->ft_bones[6].x0_jobj, 1, -1.50098311f);
+    lb_8000C420(fp->ft_bones[6].x0_jobj, 2, -1.50098311f);
+    lb_8000C420(fp->ft_bones[6].x4_jobj2, 1, -1.50098311f);
+    lb_8000C420(fp->ft_bones[6].x4_jobj2, 2, -1.50098311f);
 }
 
 void ftSb_Init_LoadSpecialAttrs(HSD_GObj* gobj)
@@ -93,7 +94,7 @@ void ftSb_Init_8014FBA4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->xE0_ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         ftCommon_8007D7FC(fp);
     }
 

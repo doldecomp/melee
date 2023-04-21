@@ -1,9 +1,10 @@
-#include "ft/chara/ftDonkey/ftDk_MS_346.h"
+#include "ftDk_MS_346.h"
 
-#include "ft/chara/ftDonkey/ftDk_MS_341.h"
-#include "ft/chara/ftDonkey/ftdonkey.h"
+#include "ftDk_MS_341.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/inlines.h"
 
 void ftDk_MS_346_IASA(HSD_GObj* gobj)
 {
@@ -26,19 +27,17 @@ void ftDk_MS_346_800E05E4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
-    fp->sv.dk.unk8.x4 = donkey_attr->cargo_hold.x28_LANDING_LAG;
+    fp->mv.dk.unk8.x4 = donkey_attr->cargo_hold.x28_LANDING_LAG;
     donkey_attr = getFtSpecialAttrs2CC(fp);
-    ft_800D5AEC(gobj, donkey_attr->action_state + 8, 1, 0, fp, 0.0f, 1.0f);
-    ftAnim_SetAnimRate(gobj, 0.0f);
+    ft_800D5AEC(gobj, donkey_attr->motion_state + 8, 1, 0, fp, 0, 1);
+    ftAnim_SetAnimRate(gobj, 0);
 }
 
 void ftDk_MS_349_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-
-    if (fp->sv.dk.unk8.x4 <= 0.0f) {
+    if (fp->mv.dk.unk8.x4 <= 0) {
         ftDk_MS_341_800DF980(gobj);
     }
-
-    fp->sv.dk.unk8.x4 -= 1.0f;
+    fp->mv.dk.unk8.x4 -= 1;
 }

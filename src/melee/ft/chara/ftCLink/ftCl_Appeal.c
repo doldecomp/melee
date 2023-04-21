@@ -1,6 +1,7 @@
 #include "ftCl_Appeal.h"
 
 #include "ftCl_Init.h"
+#include "inlines.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
@@ -22,10 +23,10 @@ void ftCl_Appeal_Anim(HSD_GObj* gobj)
 
     fp = ft2 = gobj->user_data;
 
-    if (fp->x2204_ftcmd_var1 == 1 && fp->ev.cl.x2244 == 0) {
+    if (fp->x2204_ftcmd_var1 == 1 && fp->fv.cl.x2244 == 0) {
         temp_r3 = it_802C8B28(gobj, &fp->cur_pos, ftParts_8007500C(ft2, 0x1F),
                               fp->facing_dir);
-        fp->ev.cl.x2244 = (u32) temp_r3;
+        fp->fv.cl.x2244 = (u32) temp_r3;
         if (temp_r3 != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftLk_800EAF58;
             fp->cb.x21DC_callback_OnTakeDamage = ftLk_800EAF58;

@@ -1,6 +1,75 @@
 #ifndef MELEE_FT_CHARA_FTMASTERHAND_FORWARD_H
 #define MELEE_FT_CHARA_FTMASTERHAND_FORWARD_H
 
+#include "ftCommon/forward.h"
+
 typedef struct ftMasterHand_SpecialAttrs ftMasterHand_SpecialAttrs;
+
+typedef enum ftMasterHand_UnkEnum0 {
+    ftMh_UnkEnum0_Unk00,
+    ftMh_UnkEnum0_Unk01,
+    ftMh_UnkEnum0_Unk02,
+    ftMh_UnkEnum0_Unk03,
+    ftMh_UnkEnum0_Unk04,
+    ftMh_UnkEnum0_Unk05,
+    ftMh_UnkEnum0_Unk06,
+    ftMh_UnkEnum0_Unk07,
+    ftMh_UnkEnum0_Unk08,
+    ftMh_UnkEnum0_Unk09,
+    ftMh_UnkEnum0_Unk10,
+} ftMasterHand_UnkEnum0;
+
+typedef enum ftMasterhand_MotionState {
+    ftMh_MS_Unk341 = ftCo_MS_Count,
+    ftMh_MS_Unk342,
+    ftMh_MS_Unk343,
+    ftMh_MS_Unk344,
+    ftMh_MS_Unk345,
+    ftMh_MS_Unk346,
+    ftMh_MS_Slap_StartMotion,
+    ftMh_MS_Unk348,
+    ftMh_MS_Sweep_StartMotion,
+    ftMh_MS_Unk350,
+    ftMh_MS_Walk_StartMotion,
+    ftMh_MS_Unk352,
+    ftMh_MS_Unk353,
+    ftMh_MS_Drill_StartMotion,
+    ftMh_MS_Punch_StartMotion,
+    ftMh_MS_Unk356,
+    ftMh_MS_Unk357,
+    ftMh_MS_GroundSlap_StartMotion,
+    ftMh_MS_Poke_StartMotion,
+    ftMh_MS_Unk360,
+    ftMh_MS_Unk361,
+    ftMh_MS_Lasers_StartMotion,
+    ftMh_MS_Unk363,
+    ftMh_MS_Unk364,
+    ftMh_MS_Gun_StartMotion,
+    ftMh_MS_Unk366,
+    ftMh_MS_Jet_StartMotion,
+    ftMh_MS_Unk368,
+    ftMh_MS_Unk369,
+    ftMh_MS_Ram_StartMotion,
+    ftMh_MS_Crush_StartMotion,
+    ftMh_MS_Unk372,
+    ftMh_MS_Unk373,
+    ftMh_MS_Unk374,
+    ftMh_MS_Unk375,
+    ftMh_MS_Unk376,
+    ftMh_MS_Unk377,
+    ftMh_MS_Unk378,
+    ftMh_MS_Grab_Unk0_MotionStart,
+    ftMh_MS_Grab_Unk1_MotionStart,
+    ftMh_MS_Unk381,
+    ftMh_MS_Unk382,
+    ftMh_MS_Unk383,
+    ftMh_MS_Unk384,
+    ftMh_MS_Unk385,
+    ftMh_MS_Unk386,
+    ftMh_MS_Unk387,
+    ftMh_MS_Unk388,
+    ftMh_MS_Unk389,
+    ftMh_MS_Unk390,
+} ftMasterhand_MotionState;
 
 #endif

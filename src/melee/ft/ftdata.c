@@ -22,27 +22,63 @@
 #include "ftEmblem/ftFe_Init.h"
 #include "ftFalco/ftFc_Init.h"
 #include "ftFox/ftFx_Init.h"
+#include "ftFox/ftFx_SpecialHi.h"
+#include "ftFox/ftFx_SpecialLw.h"
+#include "ftFox/ftFx_SpecialN.h"
+#include "ftFox/ftFx_SpecialS.h"
 #include "ftGameWatch/ftGw_Init.h"
+#include "ftGameWatch/ftGw_SpecialHi.h"
+#include "ftGameWatch/ftGw_SpecialLw.h"
+#include "ftGameWatch/ftGw_SpecialN.h"
+#include "ftGameWatch/ftGw_SpecialS.h"
 #include "ftGanon/ftGn_Init.h"
 #include "ftGigaKoopa/ftGk_Init.h"
 #include "ftKirby/ftKb_Init.h"
-#include "ftKoopa/ftkoopa.h"
+#include "ftKoopa/ftKp_Init.h"
 #include "ftLink/ftLk_Init.h"
+#include "ftLink/ftLk_SpecialHi.h"
+#include "ftLink/ftLk_SpecialLw.h"
+#include "ftLink/ftLk_SpecialN.h"
+#include "ftLink/ftLk_SpecialS.h"
 #include "ftLuigi/ftLg_Init.h"
-#include "ftMario/ftmario.h"
-#include "ftMario/ftmario2.h"
+#include "ftLuigi/ftLg_SpecialHi.h"
+#include "ftLuigi/ftLg_SpecialLw.h"
+#include "ftLuigi/ftLg_SpecialN.h"
+#include "ftLuigi/ftLg_SpecialS.h"
+#include "ftMario/ftMr_Init.h"
+#include "ftMario/ftMr_SpecialHi.h"
+#include "ftMario/ftMr_SpecialLw.h"
+#include "ftMario/ftMr_SpecialN.h"
+#include "ftMario/ftMr_SpecialS.h"
+#include "ftMario/ftMr_Strings.h"
 #include "ftMars/ftMs_Init.h"
+#include "ftMars/ftMs_SpecialHi.h"
+#include "ftMars/ftMs_SpecialLw.h"
+#include "ftMars/ftMs_SpecialN.h"
+#include "ftMars/ftMs_SpecialS.h"
 #include "ftMasterHand/ftMh_Init.h"
 #include "ftMasterHand/ftMh_MS_341.h"
 #include "ftMewtwo/ftMt_Init.h"
-#include "ftNana/fticeclimber2_nana.h"
+#include "ftMewtwo/ftMt_SpecialHi.h"
+#include "ftMewtwo/ftMt_SpecialLw.h"
+#include "ftMewtwo/ftMt_SpecialN.h"
+#include "ftMewtwo/ftMt_SpecialS.h"
+#include "ftNana/ftNn_Init.h"
 #include "ftNess/ftNs_Init.h"
+#include "ftNess/ftNs_SpecialHi.h"
+#include "ftNess/ftNs_SpecialLw.h"
+#include "ftNess/ftNs_SpecialN.h"
+#include "ftNess/ftNs_SpecialS.h"
 #include "ftPeach/ftPe_Init.h"
 #include "ftPichu/ftPc_Init.h"
-#include "ftPikachu/ftpikachu.h"
 #include "ftPikachu/ftPk_Init.h"
-#include "ftPopo/fticeclimber.h"
-#include "ftPopo/fticeclimber1.h"
+#include "ftPikachu/ftPk_SpecialHi.h"
+#include "ftPikachu/ftPk_SpecialLw.h"
+#include "ftPikachu/ftPk_SpecialN.h"
+#include "ftPikachu/ftPk_SpecialS.h"
+#include "ftPopo/ftPp_1211.h"
+#include "ftPopo/ftPp_Init.h"
+#include "ftPopo/ftPp_SpecialS.h"
 #include "ftPurin/ftPr_Init.h"
 #include "ftSamus/ftSs_Init.h"
 #include "ftSamus/ftSs_SpecialHi.h"
@@ -61,6 +97,10 @@
 #include "ftZakoBoy/ftBo_Init.h"
 #include "ftZakoGirl/ftGl_Init.h"
 #include "ftZelda/ftZd_Init.h"
+#include "ftZelda/ftZd_SpecialHi.h"
+#include "ftZelda/ftZd_SpecialLw.h"
+#include "ftZelda/ftZd_SpecialN.h"
+#include "ftZelda/ftZd_SpecialS.h"
 
 #include <dolphin/mtx/types.h>
 
@@ -68,7 +108,7 @@ typedef struct ftData_UnkCountStruct {
     /// Always zero; could be #NULL or the high part of a 64-bit integer.
     int zero;
 
-    /// A count or ASID.
+    /// A count or msid.
     int count;
 } ftData_UnkCountStruct;
 
@@ -1271,7 +1311,7 @@ Fighter_DemoStrings* ftData_803C2468[FTKIND_MAX] = {
     NULL,
 };
 
-Fighter_DemoGetter ftData_803C24EC[FTKIND_MAX] = {
+Fighter_MotionFileStringGetter ftData_803C24EC[FTKIND_MAX] = {
     ftMr_Init_GetMotionFileString,
     NULL,
     NULL,

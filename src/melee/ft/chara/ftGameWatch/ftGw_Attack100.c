@@ -1,6 +1,13 @@
-#include "ft/chara/ftGameWatch/ftGw_Init.h"
+#include "forward.h"
+
+#include "ftGw_Attack100.h"
+
+#include "ftGw_Attack11.h"
+#include "ftGw_Init.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/inlines.h"
 
 // 0x8014C1E8
 // https://decomp.me/scratch/AyScb // Mr. Game & Watch's Rapid Jab Start Action
@@ -9,7 +16,7 @@ void ftGw_Attack100Start_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ft_800D6B00(gobj, AS_GAMEWATCH_ATTACK100START);
+    ft_800D6B00(gobj, ftGw_MS_Attack100Start);
     fp->cb.x21BC_callback_Accessory4 = ftGw_Attack11_ItemGreenhouseSetup;
 }
 
@@ -49,8 +56,8 @@ void ftGw_Attack100Loop_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, AS_GAMEWATCH_ATTACK100LOOP, 0, NULL, 0.0f,
-                              1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_Attack100Loop, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     fp->cb.x21BC_callback_Accessory4 = ftGw_Attack11_DecideAction;
 }
 
@@ -86,8 +93,8 @@ void ftGw_Attack100End_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, AS_GAMEWATCH_ATTACK100END, 0, NULL, 0.0f,
-                              1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_Attack100End, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     fp->cb.x21BC_callback_Accessory4 = ftGw_Attack11_DecideAction;
 }
 

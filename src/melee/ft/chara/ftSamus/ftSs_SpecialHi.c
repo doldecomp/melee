@@ -1,11 +1,14 @@
-#include "ft/chara/ftSamus/ftSs_SpecialHi.h"
+#include "ftSs_SpecialHi.h"
+
+#include "ftSs_Init.h"
+#include "inlines.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
-#include "ft/chara/ftSamus/ftsamus.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcliffcommon.h"
+#include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 
 void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
@@ -26,10 +29,10 @@ void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->sv.ss.unk5.x0 = 0;
+    fp->mv.ss.unk5.x0 = 0;
     ftAnim_8006EBA4(gobj);
-    efSync_Spawn(0x482, gobj, fp->x5E8_fighterBones[3].x0_jobj);
-    fp->ev.ss.x2244 = 1;
+    efSync_Spawn(0x482, gobj, fp->ft_bones[3].x0_jobj);
+    fp->fv.ss.x2244 = 1;
 }
 
 void ftSs_SpecialAirHi_Enter(HSD_GObj* gobj)
@@ -46,19 +49,19 @@ void ftSs_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->sv.ss.unk5.x0 = 0;
+    fp->mv.ss.unk5.x0 = 0;
     fp->x80_self_vel.y = samus_attr->x44;
     ftCommon_8007D440(fp, samus_attr->x40);
     ftAnim_8006EBA4(gobj);
-    efSync_Spawn(0x482, gobj, fp->x5E8_fighterBones[3].x0_jobj);
-    fp->ev.ss.x2244 = 1;
+    efSync_Spawn(0x482, gobj, fp->ft_bones[3].x0_jobj);
+    fp->fv.ss.x2244 = 1;
 }
 
-void ftSamus_DestroyAllUnsetx2444(HSD_GObj* gobj)
+static void ftSamus_DestroyAllUnsetx2444(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     efLib_DestroyAll(gobj);
-    fp->ev.ss.x2244 = 0;
+    fp->fv.ss.x2244 = 0;
 }
 
 void ftSs_SpecialHi_Anim(HSD_GObj* gobj)
@@ -111,7 +114,7 @@ void ftSs_SpecialHi_IASA(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if ((!fp->x2204_ftcmd_var1) && (!fp->sv.ss.unk5.x0)) {
+    if ((!fp->x2204_ftcmd_var1) && (!fp->mv.ss.unk5.x0)) {
         if ((lstick_x = fp->input.x620_lstick_x) < 0.0f) {
             mag = -lstick_x;
         } else {
@@ -122,7 +125,7 @@ void ftSs_SpecialHi_IASA(HSD_GObj* gobj)
                 ((fp->facing_dir == -1.0f) && (lstick_x > 0.0f)))
             {
                 fp->x2204_ftcmd_var1 = 1;
-                fp->sv.ss.unk5.x0 = 1;
+                fp->mv.ss.unk5.x0 = 1;
                 ftCommon_8007D9FC(fp);
                 ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
             }
@@ -142,7 +145,7 @@ void ftSs_SpecialAirHi_IASA(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if ((!fp->x2204_ftcmd_var1) && (!fp->sv.ss.unk5.x0)) {
+    if ((!fp->x2204_ftcmd_var1) && (!fp->mv.ss.unk5.x0)) {
         if ((lstick_x = fp->input.x620_lstick_x) < 0.0f) {
             mag = -lstick_x;
         } else {
@@ -153,7 +156,7 @@ void ftSs_SpecialAirHi_IASA(HSD_GObj* gobj)
                 ((fp->facing_dir == -1.0f) && (lstick_x > 0.0f)))
             {
                 fp->x2204_ftcmd_var1 = 1;
-                fp->sv.ss.unk5.x0 = 1;
+                fp->mv.ss.unk5.x0 = 1;
                 ftCommon_8007D9FC(fp);
                 ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
             }
@@ -171,7 +174,7 @@ void ftSs_SpecialHi_Phys(HSD_GObj* gobj)
         fp->x2200_ftcmd_var0 = 0;
         fp->x80_self_vel.x = samus_attr->x38 * fp->facing_dir;
     }
-    if (fp->xE0_ground_or_air == 1) {
+    if (fp->ground_or_air == 1) {
         ft_800851C0(gobj);
         ftCommon_8007D344(fp, 0.0f, samus_attr->x3C, samus_attr->x40);
         ftCommon_8007D268(fp);
@@ -204,7 +207,7 @@ void ftSs_SpecialHi_Coll(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->xE0_ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         int direction;
 
         if (fp->x80_self_vel.y >= 0.0f) {
@@ -240,7 +243,7 @@ void ftSs_SpecialAirHi_Coll(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (fp->xE0_ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         int direction;
 
         if (fp->x80_self_vel.y >= 0.0f) {

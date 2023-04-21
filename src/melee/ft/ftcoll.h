@@ -9,18 +9,18 @@
 #include <baselib/gobjproc.h>
 
 void ftColl_800763C0(HSD_GObj* attacker, HSD_GObj* victim,
-                     s32 attackID); // Combo Count Logic //
+                     s32 attackID); // Combo Count Logic
 void ftColl_80076444(HSD_GObj* attacker,
-                     HSD_GObj* victim); // Combo Count Logic + Get Attack ID //
+                     HSD_GObj* victim); // Combo Count Logic + Get Attack ID
 void ftColl_8007646C(HSD_GObj* attackItem,
-                     HSD_GObj* victim); // Combo Count Logic w/ Item Owner //
-void ftColl_800764DC(HSD_GObj* gobj);   // Check to end combo for victim //
-void ftColl_80076528(HSD_GObj* gobj); // Combo count something + adjust TopN //
+                     HSD_GObj* victim); // Combo Count Logic w/ Item Owner
+void ftColl_800764DC(HSD_GObj* gobj);   // Check to end combo for victim
+void ftColl_80076528(HSD_GObj* gobj);   // Combo count something + adjust TopN
 void ftColl_800765AC(HSD_GObj* victim); // Clear victim pointer from attacker
-                                        // upon freeing memory? //
-void ftColl_800765E0(void); // Reset hitbox and phantom collision count? //
+                                        // upon freeing memory?
+void ftColl_800765E0(void); // Reset hitbox and phantom collision count?
 f32 ftColl_800765F0(Fighter* fp, HSD_GObj* victim,
-                    f32 unk_floatvar); // Unk knockback related ? //
+                    f32 unk_floatvar); // Unk knockback related ?
 bool ftColl_8007B868(HSD_GObj* gobj);
 
 void ftColl_80076528(HSD_GObj*);

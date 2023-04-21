@@ -1,8 +1,14 @@
-#include "ft/chara/ftFox/ftFx_Init.h"
+#include "ftFox/ftFx_Init.h"
 
-#include "ft/chara/ftFox/ftFx_SpecialN.h"
+#include "ftFx_Appeal.h"
+#include "ftFx_SpecialHi.h"
+#include "ftFx_SpecialLw.h"
+#include "ftFx_SpecialN.h"
+#include "ftFx_SpecialS.h"
+
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 MotionState ftFx_Init_MotionStateTable[] = {
@@ -392,14 +398,14 @@ bool ftFx_Init_800E5534(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
 
-    return fp->ev.fx.x222C_blasterGObj ? true : false;
+    return fp->fv.fx.x222C_blasterGObj ? true : false;
 }
 
 void ftFx_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
 
-    fp->ev.fx.x222C_blasterGObj = 0;
+    fp->fv.fx.x222C_blasterGObj = 0;
     ftParts_80074A4C(gobj, 0, 0);
 }
 
@@ -436,7 +442,7 @@ void ftFx_Init_OnLoadForFalco(Fighter* fp)
 void ftFx_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    void** item_list = fp->x10C_ftData->x48_items;
+    void** item_list = fp->ft_data->x48_items;
 
     fp->x2224_flag.bits.b7 = 1;
 

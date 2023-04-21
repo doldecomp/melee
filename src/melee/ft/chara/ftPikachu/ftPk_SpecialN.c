@@ -1,4 +1,6 @@
-#include "ftpikachu.h"
+#include "ftPk_SpecialN.h"
+
+#include "ftPk_Init.h"
 #include "types.h"
 
 #include "ef/eflib.h"
@@ -6,9 +8,13 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "it/it_27CF.h"
+
+#include <dolphin/mtx/types.h>
 
 void ftPk_SpecialN_Enter(HSD_GObj* gobj)
 {
@@ -157,8 +163,7 @@ void ftPk_SpecialN_SpawnEffect0(HSD_GObj* gobj)
     if (!fp->x2219_flag.bits.b0) {
         s32 index = ftParts_8007500C(fp, 4);
         tempObj = gobj;
-        efSync_Spawn(0x4BE, tempObj2 = tempObj,
-                     fp->x5E8_fighterBones[index].x0_jobj);
+        efSync_Spawn(0x4BE, tempObj2 = tempObj, fp->ft_bones[index].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
     }
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
@@ -176,8 +181,7 @@ void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
     if (!fp->x2219_flag.bits.b0) {
         s32 index = ftParts_8007500C(fp, 4);
         tempObj = gobj;
-        efSync_Spawn(0x4BF, tempObj2 = tempObj,
-                     fp->x5E8_fighterBones[index].x0_jobj);
+        efSync_Spawn(0x4BF, tempObj2 = tempObj, fp->ft_bones[index].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
     }
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
@@ -197,9 +201,9 @@ void ftPk_SpecialN_80124DC8(HSD_GObj* gobj)
 
     pika_attr_1C = pika_attr->x1C;
     if (fighter_x673_byte < pika_attr_1C) {
-        fp->sv.pk.unk2.x0 = pika_attr->x20;
+        fp->mv.pk.unk2.x0 = pika_attr->x20;
         fp->x2070.x2072_b4 = 1;
     } else {
-        fp->sv.pk.unk2.x0 = 0;
+        fp->mv.pk.unk2.x0 = 0;
     }
 }

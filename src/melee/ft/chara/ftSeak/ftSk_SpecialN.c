@@ -1,4 +1,4 @@
-#include "ft/chara/ftSeak/ftSk_SpecialN.h"
+#include "ftSeak/ftSk_SpecialN.h"
 
 f32 ftSk_SpecialN_803CC598[] = {
     -1, -0.75, -0.5, -0.25, 0, +0.25, +0.5, +0.75, +1,

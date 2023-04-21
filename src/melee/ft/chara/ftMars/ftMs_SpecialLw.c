@@ -1,3 +1,5 @@
+#include "ftMs_SpecialLw.h"
+
 #include "ftMs_Init.h"
 
 #include "ef/efsync.h"
@@ -11,6 +13,8 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
+#include <dolphin/mtx/types.h>
+
 void ftMs_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
@@ -22,7 +26,7 @@ void ftMs_SpecialLw_Enter(HSD_GObj* gobj)
     {
         Fighter* fp1 = GET_FIGHTER(gobj);
         fp1->x2204_ftcmd_var1 = 0;
-        fp1->sv.ms.speciallw.x0 = 0;
+        fp1->mv.ms.speciallw.x0 = 0;
     }
 }
 
@@ -47,7 +51,7 @@ void ftMs_SpecialAirLw_Enter(HSD_GObj* gobj)
         Fighter* fp;
         fp = GET_FIGHTER(gobj);
         fp->x2204_ftcmd_var1 = 0;
-        fp->sv.ms.speciallw.x0 = 0;
+        fp->mv.ms.speciallw.x0 = 0;
     }
 }
 
@@ -204,17 +208,17 @@ void ftMs_SpecialLwHit_Anim(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 sv1 = fp->sv.ms.speciallw.x0;
+    s32 sv1 = fp->mv.ms.speciallw.x0;
 
     /// @todo required for some reason
-    fp->sv.ms.speciallw.x0;
+    fp->mv.ms.speciallw.x0;
 
     if (sv1 > 0 && ftLib_800872A4(gobj) == FTKIND_EMBLEM) {
 /// @todo register swap:
 #ifndef MUST_MATCH
         for (idx = 0; idx < 4; idx++) {
             if (fp->x914[idx].state == HitCapsule_Enabled) {
-                ftColl_8007ABD0(&fp->x914[idx], fp->sv.ms.speciallw.x0, gobj);
+                ftColl_8007ABD0(&fp->x914[idx], fp->mv.ms.speciallw.x0, gobj);
             }
         }
 
@@ -225,7 +229,7 @@ void ftMs_SpecialLwHit_Anim(HSD_GObj* gobj)
         while (idx < 4) {
             if (*(s32*) (hb + 0x914) == HitCapsule_Enabled) {
                 ftColl_8007ABD0((HitCapsule*) (hb + 0x914),
-                                fp->sv.ms.speciallw.x0, gobj);
+                                fp->mv.ms.speciallw.x0, gobj);
             }
             idx++;
             hb += 0x138;
@@ -250,17 +254,17 @@ void ftMs_SpecialAirLwHit_Anim(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 sv1 = fp->sv.ms.speciallw.x0;
+    s32 sv1 = fp->mv.ms.speciallw.x0;
 
     /// @todo required for some reason
-    fp->sv.ms.speciallw.x0;
+    fp->mv.ms.speciallw.x0;
 
     if (sv1 > 0 && ftLib_800872A4(gobj) == FTKIND_EMBLEM) {
 /// @todo register swap:
 #ifndef MUST_MATCH
         for (idx = 0; idx < 4; idx++) {
             if (fp->x914[idx].state == HitCapsule_Enabled) {
-                ftColl_8007ABD0(&fp->x914[idx], fp->sv.ms.speciallw.x0, gobj);
+                ftColl_8007ABD0(&fp->x914[idx], fp->mv.ms.speciallw.x0, gobj);
             }
         }
 
@@ -271,7 +275,7 @@ void ftMs_SpecialAirLwHit_Anim(HSD_GObj* gobj)
         while (idx < 4) {
             if (*(s32*) (hb + 0x914) == HitCapsule_Enabled) {
                 ftColl_8007ABD0((HitCapsule*) (hb + 0x914),
-                                fp->sv.ms.speciallw.x0, gobj);
+                                fp->mv.ms.speciallw.x0, gobj);
             }
             idx++;
             hb += 0x138;
@@ -365,17 +369,16 @@ void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
         temp_r0 = (s32) fp->x19A4;
 
         if (temp_r0 > 0) {
-            fp->sv.ms.speciallw.x0 = (s32) (temp_r0 * attr->x5C);
+            fp->mv.ms.speciallw.x0 = (s32) (temp_r0 * attr->x5C);
         }
 
-        lb_8000B1CC(fp->x5E8_fighterBones[ftParts_8007500C(fp, 4)].x0_jobj, 0,
-                    &sp18);
+        lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, 0, &sp18);
         lb_800119DC(&sp18, 0x78, 0.9f, 0.02f, 1.0471975803375244f);
 
         {
             enum_t msid;
 
-            if (fp->xE0_ground_or_air == GA_Ground) {
+            if (fp->ground_or_air == GA_Ground) {
                 msid = 0x172;
             } else {
                 msid = 0x174;
@@ -394,15 +397,13 @@ void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
             case 0x12:
                 efSync_Spawn(
                     0x4F1, gobj,
-                    ft_2->x5E8_fighterBones[ftParts_8007500C(ft_2, 0x23)]
-                        .x0_jobj,
+                    ft_2->ft_bones[ftParts_8007500C(ft_2, 0x23)].x0_jobj,
                     &ft_2->facing_dir);
                 break;
             case 0x1A:
                 efSync_Spawn(
                     0x510, gobj,
-                    ft_2->x5E8_fighterBones[ftParts_8007500C(ft_2, 0x23)]
-                        .x0_jobj,
+                    ft_2->ft_bones[ftParts_8007500C(ft_2, 0x23)].x0_jobj,
                     &ft_2->facing_dir);
                 break;
             }

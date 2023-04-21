@@ -1,9 +1,8 @@
 #ifndef MELEE_FT_FTBOSSLIB_H
 #define MELEE_FT_FTBOSSLIB_H
 
+#include "ft/forward.h"
 #include "ftMasterHand/forward.h"
-
-#include "ft/fighter.h"
 
 #include <baselib/gobj.h>
 
@@ -25,7 +24,7 @@ void ftBossLib_8015C208(HSD_GObj*, Vec3*);
 HSD_GObj* ftBossLib_8015C244(HSD_GObj*, Vec3*);
 bool ftBossLib_8015C31C(void);
 bool ftBossLib_8015C3A0(void);
-s32 ftBossLib_8015C4C4(void);
+enum_t ftBossLib_8015C4C4(void);
 void ftBossLib_8015C5F8(HSD_GObj*);
 
 bool ftBossLib_8015C270(void);

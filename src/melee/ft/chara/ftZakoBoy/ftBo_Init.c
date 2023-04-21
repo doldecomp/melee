@@ -1,4 +1,6 @@
-#include "ft/chara/ftZakoBoy/ftBo_Init.h"
+#include "ftBo_Init.h"
+
+#include "types.h"
 
 #include "ft/ftparts.h"
 #include "ft/types.h"

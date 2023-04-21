@@ -1,0 +1,81 @@
+/// @file
+/// @todo Fix formatting
+
+void ftNs_AttackHi4_YoyoItemDespawn(HSD_GObj*);
+// Yo-Yo item setup & math
+
+/// Ness Yo-Yo HitCapsule Position Update
+void ftNs_AttackHi4_YoyoUpdateHitPos(HSD_GObj* gobj);
+
+/// Ness D-Smash HitCapsule Refresh Timer
+void ftNs_AttackHi4_YoyoCheckTimedRehit(HSD_GObj* gobj);
+
+/// Check collision of Bone (Yo-Yo attach bone)
+/// @remarks Also used by Sheik???
+s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
+                                    Vec3* ECBUnk2, f32 float_unk);
+
+void ftNs_AttackHi4_YoyoSetUnkPos(HSD_GObj* gobj, Vec3* arg1);
+
+/// Set Yo-Yo hitbox position?
+void ftNs_AttackHi4_YoyoSetHitPos(HSD_GObj* gobj);
+
+void ftNs_AttackHi4_YoyoSetHitPosUnk(HSD_GObj* gobj, f32 arg8);
+
+/// Check if Yo-Yo is colliding with an obstacle (wall / air)
+bool ftNs_AttackHi4_YoyoCheckNoObstruct(HSD_GObj* gobj);
+
+/// Set ftcmd-, fp- and stateVars
+void ftNs_AttackHi4_YoyoSetVarAll(HSD_GObj* gobj);
+
+/// Applies Smash Charge attributes to Ness's Up/Down Smash
+void ftNs_AttackHi4_YoyoApplySmash(HSD_GObj* gobj);
+
+void ftNs_AttackHi4_YoyoSetChargeDamage(HSD_GObj* gobj); // Used by Up Smash
+
+/// Ness Yo-Yo Think
+bool ftNs_AttackHi4_YoyoThink_IsRemove(HSD_GObj* gobj);
+
+/// Calculates Yo-Yo texture rotation speed?
+void ftNs_AttackHi4_YoyoSetUnkRate(HSD_GObj* gobj);
+
+/// Creates Yo-Yo item and sets up callbacks
+void ftNs_AttackHi4_YoyoCreateItem(HSD_GObj* gobj);
+
+/// Something to do with Yo-Yo flags
+void ftNs_AttackHi4_YoyoItemSetFlag(HSD_GObj* gobj);
+
+/// Despawn Yo-Yo item
+void ftNs_AttackHi4_YoyoItemDespawn(HSD_GObj* gobj);
+
+void ftNs_AttackHi4_YoyoItemSetUnk(HSD_GObj* gobj);
+void ftNs_AttackHi4_YoyoItemSetUnk2(HSD_GObj* gobj);
+
+// Up Smash Motion State hook
+
+/// Ness's Up Smash Motion State handler
+void ftNs_AttackHi4_Enter(HSD_GObj* gobj);
+
+// Start rehit timer if target is hit
+
+/// Initiates rehit timer for Yo-Yo hitbox
+void ftNs_AttackHi4_YoyoStartTimedRehit(HSD_GObj* gobj);
+
+/// Ness's Up Smash Animation Callback
+void ftNs_AttackHi4_Anim(HSD_GObj* gobj);
+
+void ftNs_AttackHi4_IASA(HSD_GObj* gobj);
+void ftNs_AttackHi4_Phys(HSD_GObj* gobj);
+void ftNs_AttackHi4_Coll(HSD_GObj* gobj);
+void ftNs_AttackHi4Charge_Anim(HSD_GObj* gobj);
+void ftNs_AttackHi4Charge_IASA(HSD_GObj* gobj);
+void ftNs_AttackHi4Charge_Phys(HSD_GObj* gobj);
+void ftNs_AttackHi4Charge_Coll(HSD_GObj* gobj);
+void ftNs_AttackHi4Charge_Enter(HSD_GObj* gobj);
+void ftNs_AttackHi4Release_Anim(HSD_GObj* gobj);
+void ftNs_AttackHi4Release_IASA(HSD_GObj* gobj);
+void ftNs_AttackHi4Release_Phys(HSD_GObj* gobj);
+void ftNs_AttackHi4Release_Coll(HSD_GObj* gobj);
+
+/// Ness's Up Smash Post-Charge Motion State handler
+void ftNs_AttackHi4Release_Enter(HSD_GObj* gobj);

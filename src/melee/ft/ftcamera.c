@@ -1,7 +1,10 @@
-#include "ft/ftcamera.h"
+#include "ftcamera.h"
 
-#include "ft/fighter.h"
-#include "ft/ftlib.h"
+#include "fighter.h"
+#include "ftlib.h"
+#include "inlines.h"
+
+#include <dolphin/mtx/types.h>
 
 struct UnkFloat6_Camera {
     Vec3 x0;
@@ -25,7 +28,7 @@ void ftCamera_80076064(Fighter* fp)
     UnkFloat6_Camera spC;
 
     camera_box = fp->x890_cameraBox;
-    ftCamera_80076018(fp->x10C_ftData->x3C, &spC, fp->x34_scale.y);
+    ftCamera_80076018(fp->ft_data->x3C, &spC, fp->x34_scale.y);
     camera_box->x8 = 0;
     if (fp->facing_dir == 1.0f) {
         camera_box->x40.x = spC.x0.z;
@@ -61,7 +64,7 @@ void ftCamera_UpdateCameraBox(HSD_GObj* gobj)
     {
         UnkFloat6_Camera cam_floats;
 
-        ftCamera_80076018(fp->x10C_ftData->x3C, &cam_floats, fp->x34_scale.y);
+        ftCamera_80076018(fp->ft_data->x3C, &cam_floats, fp->x34_scale.y);
         if (fp->facing_dir == 1.0f) {
             camera_box->x40.x = cam_floats.x0.z;
             camera_box->x40.y = cam_floats.x0.y * Stage_GetCamFixedZoom();

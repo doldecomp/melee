@@ -1,10 +1,18 @@
+#include "it/forward.h"
+
 #include "ftFc_Init.h"
 
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftFox/ftFx_Appeal.h"
 #include "ftFox/ftFx_Init.h"
+#include "ftFox/ftFx_SpecialHi.h"
+#include "ftFox/ftFx_SpecialLw.h"
+#include "ftFox/ftFx_SpecialN.h"
+#include "ftFox/ftFx_SpecialS.h"
 
 MotionState ftFc_Init_MotionStateTable[] = {
     {
@@ -392,7 +400,7 @@ Fighter_CostumeStrings ftFc_Init_CostumeStrings[] = {
 void ftFc_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->ev.fx.x222C_blasterGObj = 0;
+    fp->fv.fx.x222C_blasterGObj = 0;
     ftParts_80074A4C(gobj, 0, 0);
 }
 
@@ -419,7 +427,7 @@ void ftFc_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 void ftFc_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftData* ftdata = fp->x10C_ftData;
+    ftData* ftdata = fp->ft_data;
     s32* sa2;
     void** items = ftdata->x48_items;
 

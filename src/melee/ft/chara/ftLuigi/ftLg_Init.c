@@ -1,8 +1,15 @@
-#include "ft/chara/ftLuigi/ftLg_Init.h"
+#include "ftLuigi/ftLg_Init.h"
+
+#include "ftLg_SpecialHi.h"
+#include "ftLg_SpecialLw.h"
+#include "ftLg_SpecialN.h"
+#include "ftLg_SpecialS.h"
+#include "types.h"
 
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 MotionState ftLg_Init_MotionStateTable[] = {
@@ -232,13 +239,13 @@ void ftLg_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, false);
-    fp->ev.lg.x2234 = 0;
+    fp->fv.lg.x2234 = 0;
 }
 
 void ftLg_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    void** item_list = fp->x10C_ftData->x48_items;
+    void** item_list = fp->ft_data->x48_items;
 
     PUSH_ATTRS(fp, ftLuigiAttributes);
 
@@ -293,7 +300,7 @@ void ftLg_Init_UnkDemoCallbacks0(s32 arg0, s32* arg1, s32* arg2)
     }
 }
 
-void* ftLg_Init_GetMotionFileString(enum_t arg0)
+char* ftLg_Init_GetMotionFileString(enum_t arg0)
 {
     int offset;
 

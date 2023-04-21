@@ -1,10 +1,17 @@
 #include "ftPc_Init.h"
 
+#include "types.h"
+
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftPikachu/ftpikachu.h"
+#include "ftPikachu/ftPk_Init.h"
+#include "ftPikachu/ftPk_SpecialHi.h"
+#include "ftPikachu/ftPk_SpecialLw.h"
+#include "ftPikachu/ftPk_SpecialN.h"
+#include "ftPikachu/ftPk_SpecialS.h"
 
 MotionState ftPc_Init_MotionStateTable[] = {
     {
@@ -302,7 +309,7 @@ Fighter_CostumeStrings ftPc_Init_CostumeStrings[] = {
 void ftPc_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftData* ftdata = fp->x10C_ftData;
+    ftData* ftdata = fp->ft_data;
     void** items = ftdata->x48_items;
     fp->x2224_flag.bits.b7 = true;
     ftPk_Init_OnLoadForPichu(fp);

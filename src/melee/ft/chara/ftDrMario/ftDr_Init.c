@@ -1,10 +1,18 @@
 #include "ftDr_Init.h"
 
+#include "ftDr_Appeal.h"
+#include "types.h"
+
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftMario/ftmario.h"
+#include "ftMario/ftMr_Init.h"
+#include "ftMario/ftMr_SpecialHi.h"
+#include "ftMario/ftMr_SpecialLw.h"
+#include "ftMario/ftMr_SpecialN.h"
+#include "ftMario/ftMr_SpecialS.h"
 #include "it/it_27CF.h"
 
 MotionState ftDr_Init_MotionStateTable[] = {
@@ -148,10 +156,10 @@ void ftDr_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
     ftParts_80074A4C(gobj, 0, 0);
-    fp->ev.mr.x2234_tornadoCharge = 0;
-    fp->ev.mr.x2238_isCapeBoost = false;
-    fp->ev.mr.x223C_capeGObj = NULL;
-    fp->ev.mr.x2240 = 0;
+    fp->fv.mr.x2234_tornadoCharge = 0;
+    fp->fv.mr.x2238_isCapeBoost = false;
+    fp->fv.mr.x223C_capeGObj = NULL;
+    fp->fv.mr.x2240 = 0;
 }
 
 void ftDr_Init_OnLoad(HSD_GObj* gobj)
@@ -166,7 +174,7 @@ void ftDr_Init_OnLoad(HSD_GObj* gobj)
 #endif
 
     fp = gobj->user_data;
-    items = fp->x10C_ftData->x48_items;
+    items = fp->ft_data->x48_items;
     ftMr_Init_OnLoadForDrMario(fp);
     sa = fp->x2D4_specialAttributes;
     it_8026B3F8(items[1], 0x31);
@@ -224,9 +232,9 @@ void ftDr_Init_801497CC(HSD_GObj* gobj)
 
     if (gobj != NULL) {
         fp = gobj->user_data;
-        if (fp != NULL && fp->ev.mr.x2240 != 0) {
-            it_802C0DBC(fp->ev.mr.x2240);
-            fp->ev.mr.x2240 = 0;
+        if (fp != NULL && fp->fv.mr.x2240 != 0) {
+            it_802C0DBC(fp->fv.mr.x2240);
+            fp->fv.mr.x2240 = 0;
         }
     }
 
@@ -251,11 +259,11 @@ bool ftDr_Init_80149844(HSD_GObj* gobj)
     if (fp == NULL) {
         return true;
     }
-    tmp = fp->action_id;
+    tmp = fp->motion_id;
     if (tmp != 0x155 && tmp != 0x156) {
         return true;
     }
-    if (fp->ev.mr.x2240 == 0) {
+    if (fp->fv.mr.x2240 == 0) {
         return true;
     }
     return false;
@@ -267,8 +275,8 @@ void ftDr_Init_801498A0(HSD_GObj* gobj)
 
     if (gobj != NULL) {
         fp = gobj->user_data;
-        if (fp != NULL && fp->ev.mr.x2240 != 0) {
-            fp->ev.mr.x2240 = 0;
+        if (fp != NULL && fp->fv.mr.x2240 != 0) {
+            fp->fv.mr.x2240 = 0;
         }
     }
     if (gobj != NULL) {

@@ -1,9 +1,15 @@
 #include "ftZd_Init.h"
 
+#include "ftZd_SpecialHi.h"
+#include "ftZd_SpecialLw.h"
+#include "ftZd_SpecialN.h"
+#include "ftZd_SpecialS.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 MotionState ftZd_Init_MotionStateTable[] = {
@@ -228,15 +234,15 @@ void ftZd_Init_OnDeath(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
-    fp->ev.zd.x222C = 0;
+    fp->fv.zd.x222C = 0;
 }
 
 void ftZd_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    void** item_list = fp->x10C_ftData->x48_items;
+    void** item_list = fp->ft_data->x48_items;
 
-    PUSH_ATTRS(fp, ftZeldaAttributes);
+    PUSH_ATTRS(fp, ftZelda_DatAttrs);
 
     it_8026B3F8(item_list[0], 0x6CU);
     it_8026B3F8(item_list[1], 0x6DU);
@@ -269,7 +275,7 @@ void ftZd_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 
 void ftZd_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(gobj, ftZeldaAttributes);
+    COPY_ATTRS(gobj, ftZelda_DatAttrs);
 }
 
 /// Zelda_RemoveDress

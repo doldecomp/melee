@@ -1,5 +1,10 @@
+#include "forward.h"
+
+#include "ftNs_AttackLw4.h"
+
+#include "ftNs_AttackHi4.h"
+
 #include "ef/efasync.h"
-#include "ft/chara/ftNess/ftNs_Init.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 
@@ -11,9 +16,9 @@ void ftNs_AttackLw4_Enter(
     Fighter* fp = GET_FIGHTER(gobj);
 
     fp->x2218_flag.bits.b0 = 0;
-    fp->sv.ns.attacklw4.isChargeDisable = false;
+    fp->mv.ns.attacklw4.isChargeDisable = false;
     ftNs_AttackHi4_YoyoSetVarAll(gobj);
-    Fighter_ChangeMotionState(gobj, AS_NESS_ATTACKLW4, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
     fp->x2222_flag.bits.b2 = 1;
@@ -28,11 +33,11 @@ void ftNs_AttackLw4_Anim(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->sv.ns.attacklw4.yoyoCurrentFrame++;
+    fp->mv.ns.attacklw4.yoyoCurrentFrame++;
     if (ftNs_AttackHi4_YoyoThink_IsRemove(gobj) == false) {
         ftNs_AttackHi4_YoyoCheckTimedRehit(gobj);
-        if (((s32) fp->sv.ns.attacklw4.yoyoCurrentFrame == 13) &&
-            ((s32) fp->sv.ns.attacklw4.isChargeDisable == false) &&
+        if (((s32) fp->mv.ns.attacklw4.yoyoCurrentFrame == 13) &&
+            ((s32) fp->mv.ns.attacklw4.isChargeDisable == false) &&
             (ftNs_AttackHi4_YoyoCheckNoObstruct(gobj) != false))
         {
             ftNs_AttackLw4Charge_Enter(gobj);
@@ -50,7 +55,7 @@ void ftNs_AttackLw4_IASA(HSD_GObj* gobj) // Ness's Down Smash IASA callback
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_A) == false) {
-        fp->sv.ns.attacklw4.isChargeDisable = true;
+        fp->mv.ns.attacklw4.isChargeDisable = true;
     }
     if (fp->x2218_flag.bits.b0 != 0) {
         ftCo_Wait_IASA(gobj);
@@ -73,7 +78,7 @@ void ftNs_AttackLw4_Coll(
     Fighter* fp = GET_FIGHTER(gobj);
 
     ft_80084104(gobj);
-    if ((s32) fp->xE0_ground_or_air == GA_Air) {
+    if ((s32) fp->ground_or_air == GA_Air) {
         ftNs_AttackHi4_YoyoItemDespawn(gobj);
     }
 }
@@ -88,12 +93,12 @@ void ftNs_AttackLw4Charge_Anim(
     ftNessAttributes* ness_attr;
 
     fp = GET_FIGHTER(gobj);
-    yoyoSmashFrameCurr = fp->sv.ns.attacklw4.yoyoCurrentFrame;
+    yoyoSmashFrameCurr = fp->mv.ns.attacklw4.yoyoCurrentFrame;
     ness_attr = fp->x2D4_specialAttributes;
-    fp->sv.ns.attacklw4.yoyoCurrentFrame = (s32) (yoyoSmashFrameCurr + 1);
+    fp->mv.ns.attacklw4.yoyoCurrentFrame = (s32) (yoyoSmashFrameCurr + 1);
     ftNs_AttackHi4_YoyoSetUnkRate(gobj);
     ftNs_AttackHi4_YoyoCheckTimedRehit(gobj);
-    if ((f32) fp->sv.ns.attacklw4.yoyoCurrentFrame >=
+    if ((f32) fp->mv.ns.attacklw4.yoyoCurrentFrame >=
         ness_attr->xAC_YOYO_CHARGE_DURATION)
     {
         ftNs_AttackLw4Release_Enter(gobj);
@@ -128,7 +133,7 @@ void ftNs_AttackLw4Charge_Coll(
     Fighter* fp = GET_FIGHTER(gobj);
 
     ft_80084104(gobj);
-    if ((s32) fp->xE0_ground_or_air == GA_Air) {
+    if ((s32) fp->ground_or_air == GA_Air) {
         ftNs_AttackHi4_YoyoItemDespawn(gobj);
     }
 }
@@ -140,7 +145,7 @@ void ftNs_AttackLw4Charge_Enter(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, AS_NESS_ATTACKLW4_CHARGE,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4Charge,
                               FtStateChange_SkipUpdateItemVis, NULL, 12.0f,
                               1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
@@ -160,8 +165,8 @@ void ftNs_AttackLw4Release_Anim(
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    yoyoSmashFrameCurr = fp->sv.ns.attacklw4.yoyoCurrentFrame;
-    fp->sv.ns.attacklw4.yoyoCurrentFrame = (s32) (yoyoSmashFrameCurr + 1);
+    yoyoSmashFrameCurr = fp->mv.ns.attacklw4.yoyoCurrentFrame;
+    fp->mv.ns.attacklw4.yoyoCurrentFrame = (s32) (yoyoSmashFrameCurr + 1);
     if (ftNs_AttackHi4_YoyoThink_IsRemove(gobj) == false) {
         ftNs_AttackHi4_YoyoCheckTimedRehit(gobj);
         if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -192,7 +197,7 @@ void ftNs_AttackLw4Release_Phys(
 
     fp = GET_FIGHTER(gobj);
     ft_80084F3C(gobj);
-    yoyoSmashFrameCurr = fp->sv.ns.attacklw4.yoyoCurrentFrame;
+    yoyoSmashFrameCurr = fp->mv.ns.attacklw4.yoyoCurrentFrame;
     if (yoyoSmashFrameCurr < 0x13) {
         yoyoSmashUnk =
             0.20000000298023224f * ((f32) yoyoSmashFrameCurr - 14.0f);
@@ -218,7 +223,7 @@ void ftNs_AttackLw4Release_Coll(
     Fighter* fp = GET_FIGHTER(gobj);
 
     ft_80084104(gobj);
-    if ((s32) fp->xE0_ground_or_air == GA_Air) {
+    if ((s32) fp->ground_or_air == GA_Air) {
         ftNs_AttackHi4_YoyoItemDespawn(gobj);
     }
 }
@@ -230,7 +235,7 @@ void ftNs_AttackLw4Release_Enter(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, AS_NESS_ATTACKLW4_RELEASE,
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4Release,
                               FtStateChange_SkipUpdateItemVis, NULL, 13.0f,
                               1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);

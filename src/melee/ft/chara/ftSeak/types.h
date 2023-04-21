@@ -2,6 +2,18 @@
 #define MELEE_FT_CHARA_FTSEAK_TYPES_H
 
 #include <platform.h>
+#include <baselib/forward.h>
+
+#include <dolphin/mtx/types.h>
+
+struct ftSeak_FighterVars {
+    /* 0x222C */ int x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ HSD_GObj* x2234;
+    /* 0x2238 */ Vec3 x2238[4];
+    /* 0x2268 */ Vec3 x2268[4];
+    /* 0x2298 */ Vec3 lstick_delta;
+};
 
 /// @sz{74}
 typedef struct _ftSeakAttributes {
@@ -52,7 +64,7 @@ typedef struct itChainSegment {
     f32 x50;
 } itChainSegment;
 
-union ftSeak_StateVars {
+union ftSeak_MotionVars {
     struct ftSeak_SpecialNVars {
         s32 x0;
         s32 x4;

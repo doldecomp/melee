@@ -1,11 +1,19 @@
 #include "ft/forward.h"
 
-#include "ft/chara/ftNess/ftNs_Init.h"
+#include "ftNess/ftNs_Init.h"
 
-#include "ft/chara/ftNess/ftNs_SpecialLw.h"
+#include "ftNs_AttackHi4.h"
+#include "ftNs_AttackLw4.h"
+#include "ftNs_AttackS4.h"
+#include "ftNs_SpecialHi.h"
+#include "ftNs_SpecialN.h"
+#include "ftNs_SpecialS.h"
+
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftNess/ftNs_SpecialLw.h"
 
 MotionState ftNs_Init_MotionStateTable[] = {
     {
@@ -404,17 +412,17 @@ void ftNs_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftParts_80074A4C(gobj, 0, 0);
-    fp->ev.ns.x2240_flashGObj = NULL;
-    fp->ev.ns.x2244_pkThunderGObj = NULL;
-    fp->ev.ns.x2248_baseballBatGObj = NULL;
-    fp->ev.ns.x222C_yoyoGObj = NULL;
-    fp->ev.ns.x224C_thunderGFX = false;
+    fp->fv.ns.pkflash_gobj = NULL;
+    fp->fv.ns.pkthunder_gobj = NULL;
+    fp->fv.ns.bat_gobj = NULL;
+    fp->fv.ns.yoyo_gobj = NULL;
+    fp->fv.ns.pkthunder_gfx = false;
 }
 
 void ftNs_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    void** item_list = fp->x10C_ftData->x48_items;
+    void** item_list = fp->ft_data->x48_items;
 
     PUSH_ATTRS(fp, ftNessAttributes);
 

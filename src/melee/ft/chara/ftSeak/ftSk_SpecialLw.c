@@ -1,4 +1,4 @@
-#include "ft/chara/ftSeak/ftSk_SpecialLw.h"
+#include "ftSeak/ftSk_SpecialLw.h"
 
 f32 const ftSk_Init_804D9698 = 0.4000000059604645F;
 f32 const ftSk_Init_804D969C = 0.003000000026077032F;
@@ -9,19 +9,6 @@ f64 const ftSk_Init_804D96A8 = 0.0078125;
 // 80114034 - 801140B0 (0x7C bytes)
 
 // 801140B0 - 8011412C (0x7C bytes)
-
-/// @todo Unlinked
-#if false
-// Sheik_TransformToSubcharacter
-// 8011412C - 80114160 (0x34 bytes)
-// https://decomp.me/scratch/b1oIZ
-void ftSeak_8011412C(HSD_GObj* fighterObj)
-{
-    Fighter* fighter = fighterObj->user_data;
-    fighter->cb.x21BC_callback_Accessory4 = 0;
-    ftCommon_8007EFC8(fighterObj, &ftZd_SpecialLw_8013B4D8);
-}
-#endif
 
 // Sheik_AS_361_Transform_Grounded
 // 80114160 - 80114224 (0xC4 bytes)

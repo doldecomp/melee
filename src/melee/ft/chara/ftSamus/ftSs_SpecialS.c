@@ -1,11 +1,14 @@
 #include "ftSs_SpecialS.h"
 
-#include "ftsamus.h"
+#include "ftSs_Init.h"
+#include "ftSs_SpecialN.h"
 
+#include "ef/eflib.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ftcommon.h"
 
-void ftSamus_ClearThrowFlagsUnk(HSD_GObj* gobj)
+static void ftSamus_ClearThrowFlagsUnk(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2210_ThrowFlags.flags = 0;
@@ -16,7 +19,7 @@ void ftSs_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
-    fp->xEC_ground_vel /= samus_attr->x2C;
+    fp->gr_vel /= samus_attr->x2C;
     fp->x80_self_vel.y = 0.0f;
     if (fp->x673 < samus_attr->x28) {
         Fighter_ChangeMotionState(gobj, 0x15E, 0, NULL, 0.0f, 1.0f, 0.0f);
@@ -180,5 +183,5 @@ void ftSs_SpecialS_8012A640(HSD_GObj* gobj)
 #endif
 
     efLib_DestroyAll(gobj);
-    fp->ev.ss.x2244 = 0;
+    fp->fv.ss.x2244 = 0;
 }

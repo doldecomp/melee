@@ -1172,13 +1172,13 @@ void ftParts_SetupParts(HSD_GObj* fighter_obj)
 
     while (jobj != NULL) {
         if (ftParts_8007506C(fighter->x4_fighterKind, part) != 0) {
-            fighter->x5E8_fighterBones[part].x0_jobj = NULL;
+            fighter->ft_bones[part].x0_jobj = NULL;
             part++;
             continue;
         }
 
-        ftParts_80074194(fighter, &fighter->x5E8_fighterBones[part], jobj,
-                         &dobj_count, tree_depth);
+        ftParts_80074194(fighter, &fighter->ft_bones[part], jobj, &dobj_count,
+                         tree_depth);
         part++;
 
         if (!(HSD_JObjGetFlags(jobj) & JOBJ_INSTANCE) &&
@@ -1219,7 +1219,7 @@ void ftParts_SetupParts(HSD_GObj* fighter_obj)
         }
     }
 
-    fighter->x5EC_dobj_list.count = dobj_count;
+    fighter->dobj_list.count = dobj_count;
 
     if (part != ftPartsTable[fighter->x4_fighterKind]->parts_num) {
         OSReport(ftParts_803C0AB8, fighter->xC_playerID);

@@ -1,3 +1,5 @@
 /** @dir
  * @defgroup ftmasterhand ftMasterHand
+ * @todo These splits work with the floats but are not what one would expect
+ *       for the text section.
  */

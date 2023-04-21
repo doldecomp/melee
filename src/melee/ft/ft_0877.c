@@ -1,7 +1,9 @@
-#include "ft/ft_0877.h"
+#include "ft_0877.h"
 
-#include "ft/fighter.h"
-#include "ft/ftcommon.h"
+#include "fighter.h"
+#include "ftcommon.h"
+#include "inlines.h"
+
 #include "lb/lbaudio_ax.h"
 
 #define TEST(expr) (expr) ? true : false
@@ -36,7 +38,7 @@ s32 ft_80087878(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->x1968_jumpsUsed <= 1) && (fp->action_id == 0) && (arg1 != 0x23) &&
+    if ((fp->x1968_jumpsUsed <= 1) && (fp->motion_id == 0) && (arg1 != 0x23) &&
         (arg1 != 0x24) && (arg1 != 0x25))
     {
         return true;
@@ -84,7 +86,9 @@ s32 ft_80087944(HSD_GObj* gobj)
 
 s32 ft_80087988(HSD_GObj* gobj)
 {
-    if ((ftGetParasolStatus(gobj) == 4) || (ftGetParasolStatus(gobj) == 5)) {
+    if ((ftCo_GetParasolStatus(gobj) == 4) ||
+        (ftCo_GetParasolStatus(gobj) == 5))
+    {
         return true;
     }
 

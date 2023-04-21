@@ -8,8 +8,11 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
+
+#include <dolphin/mtx/types.h>
 
 // 8013B638 - 8013B6D8 (0xA0 bytes)
 // https://decomp.me/scratch/QnXK1
@@ -17,7 +20,7 @@ void ftZd_SpecialS_Enter(HSD_GObj* gobj)
 {
     f32 temp_f1;
     Fighter* fp; // r31
-    ftZeldaAttributes* attributes;
+    ftZelda_DatAttrs* attributes;
     Fighter* fighter2;
 
     /// @todo Unused stack.
@@ -34,11 +37,11 @@ void ftZd_SpecialS_Enter(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->x2D4_specialAttributes;
-    fighter2->sv.zd.unk5.x0 = attributes->x10;
-    fighter2->sv.zd.unk5.x4 = attributes->x14;
-    fighter2->sv.zd.unk5.x8 = attributes->x18;
-    fighter2->ev.zd.x222C = 0;
-    fighter2->sv.zd.unk5.xC = attributes->x1C;
+    fighter2->mv.zd.specials.x0 = attributes->x10;
+    fighter2->mv.zd.specials.x4 = attributes->x14;
+    fighter2->mv.zd.specials.x8 = attributes->x18;
+    fighter2->fv.zd.x222C = 0;
+    fighter2->mv.zd.specials.xC = attributes->x1C;
     fighter2->cb.x21E4_callback_OnDeath2 = 0;
     fighter2->cb.x21DC_callback_OnTakeDamage = 0;
     ftAnim_8006EBA4(gobj);
@@ -50,7 +53,7 @@ void ftZd_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     f32 temp_f1;
     Fighter* fp;
-    ftZeldaAttributes* attributes;
+    ftZelda_DatAttrs* attributes;
     Fighter* fighter2;
 
     /// @todo Unused stack.
@@ -68,11 +71,11 @@ void ftZd_SpecialAirS_Enter(HSD_GObj* gobj)
     fp->x80_self_vel.y = 0.0F;
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->x2D4_specialAttributes;
-    fighter2->sv.zd.unk5.x0 = attributes->x10;
-    fighter2->sv.zd.unk5.x4 = attributes->x14;
-    fighter2->sv.zd.unk5.x8 = attributes->x18;
-    fighter2->ev.zd.x222C = 0;
-    fighter2->sv.zd.unk5.xC = attributes->x1C;
+    fighter2->mv.zd.specials.x0 = attributes->x10;
+    fighter2->mv.zd.specials.x4 = attributes->x14;
+    fighter2->mv.zd.specials.x8 = attributes->x18;
+    fighter2->fv.zd.x222C = 0;
+    fighter2->mv.zd.specials.xC = attributes->x1C;
     fighter2->cb.x21E4_callback_OnDeath2 = 0;
     fighter2->cb.x21DC_callback_OnTakeDamage = 0;
     ftAnim_8006EBA4(gobj);
@@ -86,8 +89,8 @@ void ftZd_SpecialSStart_Anim(HSD_GObj* gobj)
     f32 temp_f1;
     f32 temp_f2;
     HSD_GObj* temp_r3;
-    ftZeldaAttributes* attributes; // r31
-    Fighter* fp;                   // r30
+    ftZelda_DatAttrs* attributes; // r31
+    Fighter* fp;                  // r30
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -97,9 +100,9 @@ void ftZd_SpecialSStart_Anim(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     attributes = fp->x2D4_specialAttributes;
 
-    if (fp->x2200_ftcmd_var0 == 1U && fp->ev.zd.x222C == 0U) {
+    if (fp->x2200_ftcmd_var0 == 1U && fp->fv.zd.x222C == 0U) {
         fp->x2200_ftcmd_var0 = 0U;
-        lb_8000B1CC(fp->x5E8_fighterBones[0x59].x0_jobj, NULL, &sp24);
+        lb_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp24);
 
         sp24.z = 0;
         temp_f2 = attributes->x20;
@@ -107,13 +110,13 @@ void ftZd_SpecialSStart_Anim(HSD_GObj* gobj)
         sp24.y += attributes->x24;
 
         temp_r3 = it_802C3BAC(gobj, &sp24, fp->facing_dir, temp_f2);
-        fp->ev.zd.x222C = temp_r3;
+        fp->fv.zd.x222C = temp_r3;
 
         if (temp_r3 != 0) {
             fp->cb.x21E4_callback_OnDeath2 = &ftZd_Init_801393AC;
             fp->cb.x21DC_callback_OnTakeDamage = &ftZd_Init_801393AC;
         }
-        efSync_Spawn(0x4FB, gobj, fp->x5E8_fighterBones[0x4C].x0_jobj);
+        efSync_Spawn(0x4FB, gobj, fp->ft_bones[0x4C].x0_jobj);
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -128,7 +131,7 @@ void ftZd_SpecialSStart_Anim(HSD_GObj* gobj)
 void ftZd_SpecialSHold_Anim(HSD_GObj* gobj)
 {
     Vec3 sp20;
-    ftZeldaAttributes* attributes;
+    ftZelda_DatAttrs* attributes;
     Fighter* fp; // r30
     f32 temp_f1;
     f32 temp_f2;
@@ -143,9 +146,9 @@ void ftZd_SpecialSHold_Anim(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     attributes = fp->x2D4_specialAttributes;
 
-    if ((fp->x2200_ftcmd_var0 == 1U) && (fp->ev.zd.x222C == 0U)) {
+    if ((fp->x2200_ftcmd_var0 == 1U) && (fp->fv.zd.x222C == 0U)) {
         fp->x2200_ftcmd_var0 = 0U;
-        lb_8000B1CC(fp->x5E8_fighterBones[0x59].x0_jobj, NULL, &sp20);
+        lb_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp20);
 
         sp20.z = 0;
         temp_f2 = attributes->x20;
@@ -153,35 +156,35 @@ void ftZd_SpecialSHold_Anim(HSD_GObj* gobj)
         sp20.y += attributes->x24;
 
         temp_r3_u32 = it_802C3BAC(gobj, &sp20, fp->facing_dir, temp_f2);
-        fp->ev.zd.x222C = temp_r3_u32;
+        fp->fv.zd.x222C = temp_r3_u32;
 
         if (temp_r3_u32 != 0) {
             fp->cb.x21E4_callback_OnDeath2 = &ftZd_Init_801393AC;
             fp->cb.x21DC_callback_OnTakeDamage = &ftZd_Init_801393AC;
         }
-        efSync_Spawn(0x4FB, gobj, fp->x5E8_fighterBones[0x4C].x0_jobj);
+        efSync_Spawn(0x4FB, gobj, fp->ft_bones[0x4C].x0_jobj);
     }
 
-    if (fp->sv.zd.unk5.x0 != 0) {
-        fp->sv.zd.unk5.x0 -= 1;
+    if (fp->mv.zd.specials.x0 != 0) {
+        fp->mv.zd.specials.x0 -= 1;
     }
 
-    if (fp->sv.zd.unk5.x4 != 0) {
-        fp->sv.zd.unk5.x4 -= 1;
+    if (fp->mv.zd.specials.x4 != 0) {
+        fp->mv.zd.specials.x4 -= 1;
     }
 
-    temp_r3_u32 = fp->ev.zd.x222C;
+    temp_r3_u32 = fp->fv.zd.x222C;
     if (temp_r3_u32 == NULL) {
-        if (fp->sv.zd.unk5.x0 <= 0 && fp->sv.zd.unk5.x4 <= 0) {
+        if (fp->mv.zd.specials.x0 <= 0 && fp->mv.zd.specials.x4 <= 0) {
             temp_f1 = 0;
             Fighter_ChangeMotionState(gobj, 0x159, 0, NULL, temp_f1, 1.0,
                                       temp_f1);
         }
     } else {
-        temp_r3 = it_802C3AF0(fp->ev.zd.x222C);
+        temp_r3 = it_802C3AF0(fp->fv.zd.x222C);
 
         if (temp_r3 != gobj) {
-            fp->ev.zd.x222C = NULL;
+            fp->fv.zd.x222C = NULL;
         }
     }
 }
@@ -191,7 +194,7 @@ void ftZd_SpecialSHold_Anim(HSD_GObj* gobj)
 void ftZd_SpecialSEnd_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
-    ftZeldaAttributes* attributes;
+    ftZelda_DatAttrs* attributes;
 
     fp = GET_FIGHTER(gobj);
 
@@ -201,11 +204,11 @@ void ftZd_SpecialSEnd_Anim(HSD_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         attributes = getFtSpecialAttrs(fp);
 
-        fp->sv.zd.unk5.x0 = attributes->x10;
-        fp->sv.zd.unk5.x4 = attributes->x14;
-        fp->sv.zd.unk5.x8 = attributes->x18;
-        fp->ev.zd.x222C = 0;
-        fp->sv.zd.unk5.xC = attributes->x1C;
+        fp->mv.zd.specials.x0 = attributes->x10;
+        fp->mv.zd.specials.x4 = attributes->x14;
+        fp->mv.zd.specials.x8 = attributes->x18;
+        fp->fv.zd.x222C = 0;
+        fp->mv.zd.specials.xC = attributes->x1C;
         fp->cb.x21E4_callback_OnDeath2 = 0;
         fp->cb.x21DC_callback_OnTakeDamage = 0;
 
@@ -221,7 +224,7 @@ void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
     f32 temp_f1;
     f32 temp_f2;
     HSD_GObj* temp_r3;
-    ftZeldaAttributes* attributes;
+    ftZelda_DatAttrs* attributes;
     Fighter* fp;
 
     /// @todo Unused stack.
@@ -231,9 +234,9 @@ void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->x2D4_specialAttributes;
-    if (fp->x2200_ftcmd_var0 == 1U && fp->ev.zd.x222C == 0U) {
+    if (fp->x2200_ftcmd_var0 == 1U && fp->fv.zd.x222C == 0U) {
         fp->x2200_ftcmd_var0 = 0U;
-        lb_8000B1CC(fp->x5E8_fighterBones[0x59].x0_jobj, NULL, &sp24);
+        lb_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp24);
 
         sp24.z = 0;
         temp_f2 = attributes->x20;
@@ -241,13 +244,13 @@ void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
         sp24.y += attributes->x24;
 
         temp_r3 = it_802C3BAC(gobj, &sp24, fp->facing_dir, temp_f2);
-        fp->ev.zd.x222C = temp_r3;
+        fp->fv.zd.x222C = temp_r3;
 
         if (temp_r3 != 0) {
             fp->cb.x21E4_callback_OnDeath2 = &ftZd_Init_801393AC;
             fp->cb.x21DC_callback_OnTakeDamage = &ftZd_Init_801393AC;
         }
-        efSync_Spawn(0x4FB, gobj, fp->x5E8_fighterBones[0x4C].x0_jobj);
+        efSync_Spawn(0x4FB, gobj, fp->ft_bones[0x4C].x0_jobj);
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -265,8 +268,8 @@ void ftZd_SpecialAirSHold_Anim(HSD_GObj* gobj)
     f32 temp_f1;
     f32 temp_f2;
     HSD_GObj* temp_r3;
-    ftZeldaAttributes* attributes; // r31
-    Fighter* fp;                   // r30
+    ftZelda_DatAttrs* attributes; // r31
+    Fighter* fp;                  // r30
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -276,9 +279,9 @@ void ftZd_SpecialAirSHold_Anim(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     attributes = fp->x2D4_specialAttributes;
 
-    if (fp->x2200_ftcmd_var0 == 1U && fp->ev.zd.x222C == 0U) {
+    if (fp->x2200_ftcmd_var0 == 1U && fp->fv.zd.x222C == 0U) {
         fp->x2200_ftcmd_var0 = 0U;
-        lb_8000B1CC(fp->x5E8_fighterBones[0x59].x0_jobj, NULL, &sp20);
+        lb_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp20);
 
         sp20.z = 0;
         temp_f2 = attributes->x20;
@@ -286,34 +289,34 @@ void ftZd_SpecialAirSHold_Anim(HSD_GObj* gobj)
         sp20.y += attributes->x24;
 
         temp_r3 = it_802C3BAC(gobj, &sp20, fp->facing_dir, temp_f2);
-        fp->ev.zd.x222C = temp_r3;
+        fp->fv.zd.x222C = temp_r3;
 
         if (temp_r3 != 0) {
             fp->cb.x21E4_callback_OnDeath2 = &ftZd_Init_801393AC;
             fp->cb.x21DC_callback_OnTakeDamage = &ftZd_Init_801393AC;
         }
-        efSync_Spawn(0x4FB, gobj, fp->x5E8_fighterBones[0x4C].x0_jobj);
+        efSync_Spawn(0x4FB, gobj, fp->ft_bones[0x4C].x0_jobj);
     }
 
-    if (fp->sv.zd.unk5.x0 != 0) {
-        fp->sv.zd.unk5.x0 -= 1;
+    if (fp->mv.zd.specials.x0 != 0) {
+        fp->mv.zd.specials.x0 -= 1;
     }
 
-    if (fp->sv.zd.unk5.x4 != 0) {
-        fp->sv.zd.unk5.x4 -= 1;
+    if (fp->mv.zd.specials.x4 != 0) {
+        fp->mv.zd.specials.x4 -= 1;
     }
 
-    if (fp->ev.zd.x222C == 0U) {
-        if (fp->sv.zd.unk5.x0 <= 0 && fp->sv.zd.unk5.x4 <= 0) {
+    if (fp->fv.zd.x222C == 0U) {
+        if (fp->mv.zd.specials.x0 <= 0 && fp->mv.zd.specials.x4 <= 0) {
             temp_f1 = 0;
             Fighter_ChangeMotionState(gobj, 0x15C, 0, NULL, temp_f1, 1.0,
                                       temp_f1);
         }
     } else {
-        temp_r3 = it_802C3AF0(fp->ev.zd.x222C);
+        temp_r3 = it_802C3AF0(fp->fv.zd.x222C);
 
         if (temp_r3 != gobj) {
-            fp->ev.zd.x222C = NULL;
+            fp->fv.zd.x222C = NULL;
         }
     }
 }
@@ -323,7 +326,7 @@ void ftZd_SpecialAirSHold_Anim(HSD_GObj* gobj)
 void ftZd_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftZeldaAttributes* sa = fp->x2D4_specialAttributes;
+    ftZelda_DatAttrs* sa = fp->x2D4_specialAttributes;
 
     ftParts_8007592C(fp, 0, 0);
 
@@ -335,13 +338,13 @@ void ftZd_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 #endif
 
             Fighter* fp = GET_FIGHTER(gobj);
-            ftZeldaAttributes* sa = getFtSpecialAttrs(fp);
+            ftZelda_DatAttrs* sa = getFtSpecialAttrs(fp);
 
-            fp->sv.zd.unk5.x0 = sa->x10;
-            fp->sv.zd.unk5.x4 = sa->x14;
-            fp->sv.zd.unk5.x8 = sa->x18;
-            fp->ev.zd.x222C = 0;
-            fp->sv.zd.unk5.xC = sa->x1C;
+            fp->mv.zd.specials.x0 = sa->x10;
+            fp->mv.zd.specials.x4 = sa->x14;
+            fp->mv.zd.specials.x8 = sa->x18;
+            fp->fv.zd.x222C = 0;
+            fp->mv.zd.specials.xC = sa->x1C;
             fp->cb.x21E4_callback_OnDeath2 = 0;
             fp->cb.x21DC_callback_OnTakeDamage = 0;
         }
@@ -365,10 +368,10 @@ void ftZd_SpecialSHold_IASA(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    fp->sv.zd.unk5.xC -= 1;
+    fp->mv.zd.specials.xC -= 1;
 
-    if (fp->sv.zd.unk5.xC <= 0) {
-        fp->sv.zd.unk5.xC = 0;
+    if (fp->mv.zd.specials.xC <= 0) {
+        fp->mv.zd.specials.xC = 0;
         var_r0 = 1;
     } else {
         var_r0 = 0;
@@ -393,10 +396,10 @@ void ftZd_SpecialAirSHold_IASA(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    fp->sv.zd.unk5.xC -= 1;
+    fp->mv.zd.specials.xC -= 1;
 
-    if (fp->sv.zd.unk5.xC <= 0) {
-        fp->sv.zd.unk5.xC = 0;
+    if (fp->mv.zd.specials.xC <= 0) {
+        fp->mv.zd.specials.xC = 0;
         var_r0 = 1;
     } else {
         var_r0 = 0;
@@ -421,10 +424,10 @@ void ftZd_SpecialSStart_Phys(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    stateVar = fp->sv.zd.unk5.x8;
+    stateVar = fp->mv.zd.specials.x8;
 
     if (stateVar) {
-        fp->sv.zd.unk5.x8 -= 1;
+        fp->mv.zd.specials.x8 -= 1;
     }
 
     ft_80084F3C(gobj);
@@ -448,7 +451,7 @@ void ftZd_SpecialAirSStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp;
     s32 temp_r3;
-    ftZeldaAttributes* charAttr;
+    ftZelda_DatAttrs* charAttr;
     attr* fighterAttr;
     f32 aerialFriction;
 
@@ -458,11 +461,11 @@ void ftZd_SpecialAirSStart_Phys(HSD_GObj* gobj)
 #endif
 
     fp = GET_FIGHTER(gobj);
-    temp_r3 = fp->sv.zd.unk5.x8;
+    temp_r3 = fp->mv.zd.specials.x8;
     charAttr = fp->x2D4_specialAttributes;
 
     if (temp_r3 != 0) {
-        fp->sv.zd.unk5.x8 = temp_r3 - 1;
+        fp->mv.zd.specials.x8 = temp_r3 - 1;
     } else {
         fighterAttr = &fp->x110_attr;
         ftCommon_8007D494(fp, charAttr->x2C,
@@ -479,7 +482,7 @@ void ftZd_SpecialAirSHold_Phys(HSD_GObj* gobj)
 {
     Fighter* fp;
     s32 temp_r3;
-    ftZeldaAttributes* charAttr;
+    ftZelda_DatAttrs* charAttr;
     attr* fighterAttr;
     f32 aerialFriction;
 
@@ -489,11 +492,11 @@ void ftZd_SpecialAirSHold_Phys(HSD_GObj* gobj)
 #endif
 
     fp = GET_FIGHTER(gobj);
-    temp_r3 = fp->sv.zd.unk5.x8;
+    temp_r3 = fp->mv.zd.specials.x8;
     charAttr = fp->x2D4_specialAttributes;
 
     if (temp_r3 != 0) {
-        fp->sv.zd.unk5.x8 = temp_r3 - 1;
+        fp->mv.zd.specials.x8 = temp_r3 - 1;
     } else {
         fighterAttr = &fp->x110_attr;
         ftCommon_8007D494(fp, charAttr->x2C,
@@ -510,7 +513,7 @@ void ftZd_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 {
     Fighter* fp;
     s32 temp_r3;
-    ftZeldaAttributes* charAttr;
+    ftZelda_DatAttrs* charAttr;
     attr* fighterAttr;
     f32 aerialFriction;
 
@@ -520,11 +523,11 @@ void ftZd_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 #endif
 
     fp = GET_FIGHTER(gobj);
-    temp_r3 = fp->sv.zd.unk5.x8;
+    temp_r3 = fp->mv.zd.specials.x8;
     charAttr = fp->x2D4_specialAttributes;
 
     if (temp_r3 != 0) {
-        fp->sv.zd.unk5.x8 = temp_r3 - 1;
+        fp->mv.zd.specials.x8 = temp_r3 - 1;
     } else {
         fighterAttr = &fp->x110_attr;
         ftCommon_8007D494(fp, charAttr->x2C,

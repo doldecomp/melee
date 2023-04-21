@@ -5,10 +5,12 @@
 #include "ftlib.h"
 
 #include "cm/camera.h"
+#include "ft/inlines.h"
 #include "it/item.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
+#include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
 #include <baselib/gobj.h>
 
@@ -186,7 +188,7 @@ HSD_GObj* ftBossLib_8015C244(HSD_GObj* arg0, Vec3* arg1)
 
 bool ftBossLib_8015C270(void)
 {
-    /// @todo Get ASID
+    /// @todo Get msid
     if (ftBossLib_8015C44C(FTKIND_MASTERH) == 0x157) {
         return 1;
     }
@@ -196,7 +198,7 @@ bool ftBossLib_8015C270(void)
 
 bool ftBossLib_8015C2A8(void)
 {
-    /// @todo Get ASID
+    /// @todo Get msid
     if (ftBossLib_8015C44C(FTKIND_CREZYH) == 0x183) {
         return true;
     }
@@ -278,11 +280,11 @@ enum_t ftBossLib_8015C44C(FighterKind kind)
         // DataOffset_MotionStateLoad
         return ftLib_80086C0C(gobj);
     } else {
-        return ASID_DEADDOWN;
+        return ftCo_MS_DeadDown;
     }
 }
 
-s32 ftBossLib_8015C4C4(void)
+enum_t ftBossLib_8015C4C4(void)
 {
     HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_CREZYH);
 
@@ -292,7 +294,7 @@ s32 ftBossLib_8015C4C4(void)
 #endif
 
     if (gobj) {
-        return GET_FIGHTER(gobj)->ev.mh.x2250;
+        return GET_FIGHTER(gobj)->fv.mh.x2250;
     }
 
     return 0;
@@ -308,8 +310,7 @@ s32 ftBossLib_8015C530(enum_t arg0)
 #endif
 
     if (gobj != NULL) {
-        ftMasterHand_SpecialAttrs* attr =
-            GET_FIGHTER(gobj)->x10C_ftData->ext_attr;
+        ftMasterHand_SpecialAttrs* attr = GET_FIGHTER(gobj)->ft_data->ext_attr;
         switch (arg0) {
         case 0:
             return attr->x0;
@@ -370,7 +371,7 @@ ftMasterHand_SpecialAttrs* ftBossLib_8015C6BC(void)
             }
 
             {
-                ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
+                ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
                 if (attr == NULL) {
                     return NULL;
                 }

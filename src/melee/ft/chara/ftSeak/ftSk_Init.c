@@ -1,16 +1,19 @@
 #include "ft/forward.h"
 
-#include "ft/chara/ftSeak/ftSk_Init.h"
+#include "ftSeak/ftSk_Init.h"
 
-#include "ft/chara/ftSeak/ftSk_SpecialLw.h"
-#include "ft/chara/ftSeak/ftSk_SpecialN.h"
-#include "ft/chara/ftSeak/ftSk_SpecialS.h"
-#include "ft/chara/ftSeak/types.h"
+#include "ftSk_SpecialHi.h"
+#include "ftSk_SpecialLw.h"
+#include "ftSk_SpecialN.h"
+#include "ftSk_SpecialS.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftSeak/types.h"
 
 MotionState ftSk_Init_MotionStateTable[] = {
     {
@@ -292,9 +295,9 @@ Fighter_CostumeStrings ftSk_Init_CostumeStrings[] = {
 void ftSk_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->ev.sk.x222C = 0;
-    fp->ev.sk.x2230 = 0;
-    fp->ev.sk.x2234 = 0;
+    fp->fv.sk.x222C = 0;
+    fp->fv.sk.x2230 = 0;
+    fp->fv.sk.x2234 = 0;
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, -1);
 }
@@ -302,7 +305,7 @@ void ftSk_Init_OnDeath(HSD_GObj* gobj)
 void ftSk_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    void** item_list = fp->x10C_ftData->x48_items;
+    void** item_list = fp->ft_data->x48_items;
 
     fp->x2224_flag.bits.b7 = 1;
 
@@ -326,7 +329,7 @@ void ftSk_Init_80110198(HSD_GObj* gobj)
 void ftSk_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ev.sk.x222C == 6) {
+    if (fp->fv.sk.x222C == 6) {
         ft_800BFFD0(fp, 0x56, 0);
     }
 }
@@ -365,16 +368,3 @@ void ftSk_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, 1);
 }
-
-/// @todo Moved to ftSk_SpecialN.c
-#if false
-
-// 8011412C - 80114160
-// https://decomp.me/scratch/b1oIZ
-void ftSeak_8011412C(HSD_GObj* gobj) {
-    Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21BC_callback_Accessory4 = 0;
-    ftCommon_8007EFC8(gobj, &ftZd_SpecialLw_8013B4D8);
-}
-
-#endif

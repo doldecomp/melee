@@ -1,3 +1,7 @@
+#include "forward.h"
+
+#include "ftMt_SpecialS.h"
+
 #include "ftMt_Init.h"
 
 #include "ft/ft_081B.h"
@@ -5,9 +9,28 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 
+// Flag values read during Confusion's reflect think function
+
+#define CONFUSION_REFLECT_NONE                                                \
+    0 // Effectively a "wait" state for Confusion (i.e. wait until the flag is
+      // either 1 or 2 because 0 does nothing).
+
+#define CONFUSION_REFLECT_ON 1 // Toggle reflect bubble on.
+
+#define CONFUSION_REFLECT_OFF 2 // Toggle reflect bubble off.
+
+// SpecialS/SpecialAirS
+
+#define FTMEWTWO_SPECIALS_COLL_FLAG                                           \
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |             \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |           \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
+        FtStateChange_SkipUpdateModelPartVis |                                \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
+
 // 0x8014665C
 // https://decomp.me/scratch/ktG8y // Set flags
-void ftMt_SpecialS_SetFlags(HSD_GObj* gobj)
+static void ftMt_SpecialS_SetFlags(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -43,9 +66,9 @@ void ftMt_SpecialS_Enter(HSD_GObj* gobj)
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
-    fp->sv.mt.SpecialS.isConfusionReflect = false;
+    fp->mv.mt.SpecialS.isConfusionReflect = false;
 
-    Fighter_ChangeMotionState(gobj, AS_MEWTWO_SPECIALS, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialS, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
 
@@ -81,14 +104,14 @@ void ftMt_SpecialAirS_Enter(HSD_GObj* gobj)
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
-    fp->sv.mt.SpecialS.isConfusionReflect = false;
+    fp->mv.mt.SpecialS.isConfusionReflect = false;
 
-    if (fp->ev.mt.x223C_isConfusionBoost == false) {
+    if (fp->fv.mt.x223C_isConfusionBoost == false) {
         fp->x80_self_vel.y = mewtwoAttrs->x18_MEWTWO_CONFUSION_AIR_BOOST;
-        fp->ev.mt.x223C_isConfusionBoost = true;
+        fp->fv.mt.x223C_isConfusionBoost = true;
     }
 
-    Fighter_ChangeMotionState(gobj, AS_MEWTWO_SPECIALAIRS, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirS, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
 
@@ -169,7 +192,7 @@ void ftMt_SpecialAirS_Phys(HSD_GObj* gobj)
 static inline void ftMewtwo_SpecialS_SetReflect(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->sv.mt.SpecialS.isConfusionReflect != false) {
+    if (fp->mv.mt.SpecialS.isConfusionReflect != false) {
         fp->x2218_flag.bits.b3 = 1;
         fp->x2218_flag.bits.b4 = 1;
         fp->cb.x21C8_callback_OnReflectHit = ftMt_SpecialS_OnReflect;
@@ -185,7 +208,7 @@ void ftMt_SpecialS_GroundToAir(HSD_GObj* gobj)
 
     ftCommon_8007D5D4(fp);
 
-    Fighter_ChangeMotionState(gobj, AS_MEWTWO_SPECIALAIRS,
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirS,
                               FTMEWTWO_SPECIALS_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
@@ -207,14 +230,14 @@ void ftMt_SpecialAirS_AirToGround(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, AS_MEWTWO_SPECIALS,
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialS,
                               FTMEWTWO_SPECIALS_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     ftMewtwo_SpecialS_SetGrab(gobj);
 
     fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialS_ReflectThink;
-    fp->ev.mt.x223C_isConfusionBoost = false;
+    fp->fv.mt.x223C_isConfusionBoost = false;
 
     ftMewtwo_SpecialS_SetReflect(gobj);
 }
@@ -245,19 +268,19 @@ void ftMt_SpecialS_ReflectThink(HSD_GObj* gobj)
         ftColl_CreateReflectHit(
             gobj, &mewtwoAttrs->x1C_MEWTWO_CONFUSION_REFLECTION,
             ftMt_SpecialS_OnReflect); // Really? A callback that simply
-                                      // returns instead of just NULL? //
+                                      // returns instead of just NULL?
         fp->x2218_flag.bits.b4 =
             1; // Here it is... the reason Confusion cannot change ownership.
-        fp->sv.mt.SpecialS.isConfusionReflect = true;
+        fp->mv.mt.SpecialS.isConfusionReflect = true;
         fp->x2204_ftcmd_var1 = CONFUSION_REFLECT_NONE;
         return;
 
     case CONFUSION_REFLECT_OFF:
-        if (fp->sv.mt.SpecialS.isConfusionReflect != false) {
+        if (fp->mv.mt.SpecialS.isConfusionReflect != false) {
             fp->x2218_flag.bits.b3 = 0;
             fp->x2218_flag.bits.b4 = 0;
             fp->cb.x21C8_callback_OnReflectHit = NULL;
-            fp->sv.mt.SpecialS.isConfusionReflect = false;
+            fp->mv.mt.SpecialS.isConfusionReflect = false;
         }
         fp->x2204_ftcmd_var1 = CONFUSION_REFLECT_NONE;
         return;

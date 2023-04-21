@@ -4,10 +4,9 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"
+#include "ft/inlines.h"
 #include "ftCrazyHand/ftCh_Init.h"
 
-// 80155388 151F68
-// https://decomp.me/scratch/6nLDB
 void ftMh_MS_383_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -28,42 +27,29 @@ void ftMh_MS_383_Anim(HSD_GObj* gobj)
     }
 }
 
-// 8015541C 151FFC
 void ftMh_MS_383_IASA(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }
 
-// 80155460 152040
 void ftMh_MS_383_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-// 80155480 152060
-void ftMh_MS_383_Coll(HSD_GObj* gobj)
-{
-    return;
-}
+void ftMh_MS_383_Coll(HSD_GObj* gobj) {}
 
-// 80155484 152064
-// https://decomp.me/scratch/jsnxb
 void ftMh_MS_383_80155484(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    HSD_GObj* gobj_2;
-
-    fp = gobj->user_data;
-    gobj_2 = ftBossLib_8015C3E8(0x1CU);
-
+    Fighter* fp = GET_FIGHTER(gobj);
+    HSD_GObj* gobj1 = ftBossLib_8015C3E8(28);
     if (ftBossLib_8015C31C() == 0) {
-        ftCh_Init_8015A560(gobj_2);
+        ftCh_Init_8015A560(gobj1);
     }
-
-    fp->x1A5C = gobj_2;
-    Fighter_ChangeMotionState(gobj, 0x180, 0, 0, 0.0f, 1.0f, 0.0f);
+    fp->x1A5C = gobj1;
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Unk384, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 }

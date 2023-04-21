@@ -1,9 +1,12 @@
 #include "ftCh_Init.h"
 
+#include "types.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcamera.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 MotionState ftCh_Init_MotionStateTable[] = {
@@ -468,7 +471,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        341,
+        ftMh_MS_Unk341,
         0,
         0x01000000,
         ftCh_MS_387_Anim,
@@ -478,7 +481,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        342,
+        ftMh_MS_Unk342,
         0,
         0x01000000,
         ftCh_MS_388_Anim,
@@ -488,7 +491,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        343,
+        ftMh_MS_Unk343,
         0,
         0x01000000,
         ftCh_MS_388_Anim,
@@ -509,10 +512,7 @@ Fighter_CostumeStrings ftCh_Init_CostumeStrings[] = {
     { ftCh_Init_803D4834, ftCh_Init_803D4840, NULL },
 };
 
-void ftCh_Init_OnDeath(HSD_GObj* gobj)
-{
-    return;
-}
+void ftCh_Init_OnDeath(HSD_GObj* gobj) {}
 
 void ftCh_Init_OnLoad(HSD_GObj* gobj)
 {
@@ -522,16 +522,16 @@ void ftCh_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    ftdata = fp->x10C_ftData;
+    ftdata = fp->ft_data;
     ftData_attr = ftdata->ext_attr;
     items = ftdata->x48_items;
 
     PUSH_ATTRS(fp, ftCrazyHandAttributes);
 
     ftBossLib_8015BDB4(gobj);
-    it_8026B3F8(items[0], 0x7F);
-    it_8026B3F8(items[1], 0x80);
-    it_8026B3F8(items[2], 0x81);
+    it_8026B3F8(items[0], 127);
+    it_8026B3F8(items[1], 128);
+    it_8026B3F8(items[2], 129);
     fp->x2229_b5_no_normal_motion = 1;
     fp->x2229_b6 = 1;
     fp->x2229_b7 = 1;
@@ -541,22 +541,22 @@ void ftCh_Init_OnLoad(HSD_GObj* gobj)
     fp->cur_pos.x = ftData_attr->x18;
     fp->cur_pos.y = ftData_attr->x1C;
     fp->cur_pos.z = 0.0f;
-    fp->sv.mh.unk0.x28 = 0;
-    fp->sv.mh.unk0.x2C = 0;
-    fp->sv.mh.unk0.x30 = 0;
-    fp->sv.mh.unk0.x34 = 0;
-    fp->sv.mh.unk0.x38 = -1;
-    fp->sv.mh.unk0.x3C = -1;
-    fp->sv.mh.unk0.x40 = -1;
-    fp->sv.mh.unk0.x1C = 0.0f;
-    fp->sv.mh.unk0.x20 = 0;
-    fp->ev.mh.x222C = ftBossLib_8015C244(gobj, &fp->cur_pos);
-    fp->ev.mh.x2238 = 1.0f;
-    fp->ev.mh.x224C = 0;
-    fp->ev.mh.x2250 = 0x159;
-    fp->ev.mh.x2254 = 0;
+    fp->mv.mh.unk0.x28 = 0;
+    fp->mv.mh.unk0.x2C = 0;
+    fp->mv.mh.unk0.x30 = 0;
+    fp->mv.mh.unk0.x34 = 0;
+    fp->mv.mh.unk0.x38 = -1;
+    fp->mv.mh.unk0.x3C = -1;
+    fp->mv.mh.unk0.x40 = -1;
+    fp->mv.mh.unk0.x1C = 0.0f;
+    fp->mv.mh.unk0.x20 = 0;
+    fp->fv.mh.x222C = ftBossLib_8015C244(gobj, &fp->cur_pos);
+    fp->fv.mh.x2238 = 1.0f;
+    fp->fv.mh.x224C = 0;
+    fp->fv.mh.x2250 = ftMh_MS_Unk345;
+    fp->fv.mh.x2254 = 0;
     fp->x1A98 = 1;
-    ftBossLib_8015BD24(fp->x1A98, &fp->ev.mh.x223C, fp->ev.ch.x2238,
+    ftBossLib_8015BD24(fp->x1A98, &fp->fv.mh.x223C, fp->fv.ch.x2238,
                        ftData_attr->x0, ftData_attr->x8, ftData_attr->x4);
 }
 

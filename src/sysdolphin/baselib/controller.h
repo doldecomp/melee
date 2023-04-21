@@ -78,6 +78,8 @@ struct PadLibData {
     /*0x2C*/ RumbleInfo rumble_info;
 };
 
+extern HSD_PadStatus HSD_PadMasterStatus[4];
+
 u8 HSD_PadGetRawQueueCount(void);
 s32 HSD_PadGetResetSwitch(void);
 void HSD_PadInit(s32, u8*, s32, HSD_PadRumbleListData*);

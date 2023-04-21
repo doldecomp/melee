@@ -1,13 +1,12 @@
-#ifndef MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_8_H
-#define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_8_H
+#ifndef GALE01_151C04
+#define GALE01_151C04
 
-#include <baselib/gobj.h>
+#include <baselib/forward.h>
 
-void ftMh_MS_349_80151CA8(HSD_GObj*);
-
-void ftMh_MS_349_Anim(HSD_GObj* arg0);
-void ftMh_MS_349_IASA(HSD_GObj* gobj);
-void ftMh_MS_349_Phys(HSD_GObj* gobj);
-void ftMh_MS_349_Coll(HSD_GObj*);
+/* 151C04 */ void ftMh_MS_349_Anim(HSD_GObj* gobj);
+/* 151C40 */ void ftMh_MS_349_IASA(HSD_GObj* gobj);
+/* 151C84 */ void ftMh_MS_349_Phys(HSD_GObj* gobj);
+/* 151CA4 */ void ftMh_MS_349_Coll(HSD_GObj* gobj);
+/* 151CA8 */ void ftMh_MS_349_80151CA8(HSD_GObj* gobj);
 
 #endif

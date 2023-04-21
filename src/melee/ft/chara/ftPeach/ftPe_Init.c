@@ -1,11 +1,12 @@
-#include "ft/forward.h"
-
 #include "ftPe_Init.h"
+
+#include "types.h"
 
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "lb/lbmthp.h"
 
@@ -360,13 +361,13 @@ void ftPe_Init_OnDeath(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = gobj->user_data;
-    fp->ev.pe.x222C = 1;
-    fp->ev.pe.x2234 = -1;
-    fp->ev.pe.x2240 = 0;
-    fp->ev.pe.x223C = 0;
-    fp->ev.pe.x2238 = 0;
-    fp->ev.pe.x2244 = 0;
-    fp->ev.pe.x2248 = 0;
+    fp->fv.pe.x222C = 1;
+    fp->fv.pe.x2234 = -1;
+    fp->fv.pe.x2240 = 0;
+    fp->fv.pe.x223C = 0;
+    fp->fv.pe.x2238 = 0;
+    fp->fv.pe.x2244 = 0;
+    fp->fv.pe.x2248 = 0;
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 2, 0);
     ftParts_80074A4C(gobj, 3, -1);
@@ -390,8 +391,8 @@ void ftPe_Init_OnDeath(HSD_GObj* gobj)
 void ftPe_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftPeachAttributes* extAtrrs = fp->x10C_ftData->ext_attr;
-    void** items = fp->x10C_ftData->x48_items;
+    ftPeachAttributes* extAtrrs = fp->ft_data->ext_attr;
+    void** items = fp->ft_data->x48_items;
 
     extAtrrs->unk0 = lbMthp_8001E8F8(ftData_80085E50(fp, 18));
     extAtrrs->unk4 = lbMthp_8001E8F8(ftData_80085E50(fp, 19));

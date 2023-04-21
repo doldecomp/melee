@@ -1,16 +1,21 @@
-#include <platform.h>
+#include "ftMr_Init.h"
 
-#include "ft/chara/ftMario/ftmario.h"
-#include "ft/chara/ftMario/ftmario2.h"
-#include "ft/chara/ftMario/ftMr_SpecialN.h"
+#include "ftMr_SpecialHi.h"
+#include "ftMr_SpecialLw.h"
+#include "ftMr_SpecialN.h"
+#include "ftMr_SpecialS.h"
+#include "ftMr_Strings.h"
+#include "types.h"
+
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 #include <baselib/random.h>
 
-MotionState ftMr_Init_MotionStateTable[] = {
+MotionState ftMr_Init_MotionStateTable[states_count] = {
     {
         -1,
         0,
@@ -113,7 +118,7 @@ MotionState ftMr_Init_MotionStateTable[] = {
     },
 };
 
-MotionState ftMr_Init_UnkMotionStates0[] = {
+MotionState ftMr_Init_UnkMotionStates0[aux_states_count] = {
     { 14, 0, 0x01000000, NULL, NULL, ft_800C7158, NULL, NULL },
     { 15, 0, 0x01000000, NULL, NULL, ft_800C7200, NULL, NULL },
 };
@@ -122,39 +127,38 @@ void ftMr_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
-    fp->ev.mr.x222C_vitaminCurr = 9;
-    fp->ev.mr.x2230_vitaminPrev = 9;
-    fp->ev.mr.x2234_tornadoCharge = false;
-    fp->ev.mr.x2238_isCapeBoost = false;
-    fp->ev.mr.x223C_capeGObj = NULL;
-    fp->ev.mr.x2240 = 0;
+    fp->fv.mr.x222C_vitaminCurr = 9;
+    fp->fv.mr.x2230_vitaminPrev = 9;
+    fp->fv.mr.x2234_tornadoCharge = false;
+    fp->fv.mr.x2238_isCapeBoost = false;
+    fp->fv.mr.x223C_capeGObj = NULL;
+    fp->fv.mr.x2240 = 0;
 }
 
 void ftMr_Init_OnLoadForDrMario(Fighter* fp)
 {
-    PUSH_ATTRS(fp, ftMarioAttributes);
+    PUSH_ATTRS(fp, ftMario_DatAttrs);
 }
 
 void ftMr_Init_OnLoad(HSD_GObj* gobj)
 {
-    ftData* ftDataInfo;
-    void** items;
-    ftMarioAttributes* sa;
+    /// @todo #GET_FIGHTER is too much stack. Problem with #PUSH_ATTRS?
     Fighter* fp = gobj->user_data;
-    ftDataInfo = fp->x10C_ftData;
-    items = ftDataInfo->x48_items;
+    ftData* ftDataInfo = fp->ft_data;
+    void** items = ftDataInfo->x48_items;
 
-    fp->x2224_flag.bits.b7 = 1;
+    fp->x2224_flag.bits.b7 = true;
 
-    PUSH_ATTRS(fp, ftMarioAttributes);
+    PUSH_ATTRS(fp, ftMario_DatAttrs);
 
-    sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
+    {
+        ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
 
-    it_8026B3F8(items[0], It_Kind_Mario_Fire);
-    it_8026B3F8(items[2], sa->x14_MARIO_CAPE_IT_KIND);
+        it_8026B3F8(items[0], It_Kind_Mario_Fire);
+        it_8026B3F8(items[2], sa->specials.cape_kind);
+    }
 }
 
-// 0x800E0A00
 void ftMr_Init_OnTakeDamage(HSD_GObj* gobj)
 {
     ftMr_SpecialS_RemoveCape(gobj);
@@ -182,7 +186,7 @@ void ftMr_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 
 void ftMr_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(gobj, ftMarioAttributes);
+    COPY_ATTRS(gobj, ftMario_DatAttrs);
 }
 
 void ftMr_Init_OnKnockbackEnter(HSD_GObj* gobj)
@@ -204,15 +208,15 @@ void ftMr_Init_UnkDemoCallbacks0(s32 arg0, s32* arg1, s32* arg2)
         if (arg0 < 9) {
             return;
         }
-        *arg2 = 0xe;
-        *arg1 = 0xe;
+        *arg2 = 14;
+        *arg1 = 14;
     } else {
-        *arg2 = 0xf;
-        *arg1 = 0xf;
+        *arg2 = 15;
+        *arg1 = 15;
     }
 }
 
-unk_t ftMr_Init_GetMotionFileString(enum_t arg0)
+char* ftMr_Init_GetMotionFileString(enum_t arg0)
 {
     int offset;
 
@@ -224,5 +228,5 @@ unk_t ftMr_Init_GetMotionFileString(enum_t arg0)
         offset = 15;
     }
 
-    return ftMr_Init_DemoViMotionFilenames[offset - 0xe];
+    return ftMr_Init_DemoViMotionFilenames[offset - 14];
 }

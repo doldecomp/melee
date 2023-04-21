@@ -1,14 +1,14 @@
-#ifndef MELEE_FT_CHARA_FTDONKEY_FTDONKEY1_H
-#define MELEE_FT_CHARA_FTDONKEY_FTDONKEY1_H
+#ifndef GALE01_0DF938
+#define GALE01_0DF938
 
-#include <baselib/gobj.h>
+#include <baselib/forward.h>
 
-void ftDk_MS_341_Coll(HSD_GObj* gobj);
-bool ftDk_MS_341_800DF938(HSD_GObj* gobj);
-
-void ftDk_MS_341_IASA(HSD_GObj* gobj);
-void ftDk_MS_341_Phys(HSD_GObj* gobj);
-void ftDk_MS_341_Coll(HSD_GObj* gobj);
-bool ftDk_MS_341_800DF938(HSD_GObj* gobj);
+/* 0DF938 */ bool ftDk_MS_341_800DF938(HSD_GObj* gobj);
+/* 0DF980 */ void ftDk_MS_341_800DF980(HSD_GObj* gobj);
+/* 0DF9F0 */ void ftDk_MS_341_IASA(HSD_GObj* gobj);
+/* 0DFA50 */ void ftDk_MS_341_Phys(HSD_GObj* gobj);
+/* 0DFA70 */ void ftDk_MS_341_Coll(HSD_GObj* gobj);
+/* 0DFA98 */ bool ftDk_MS_341_800DFA98(HSD_GObj* gobj);
+/* 0DFAE4 */ void ftDk_MS_341_800DFAE4(HSD_GObj* gobj, float);
 
 #endif
