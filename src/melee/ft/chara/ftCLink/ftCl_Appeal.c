@@ -24,7 +24,8 @@ void ftCl_Appeal_Anim(HSD_GObj* gobj)
     fp = ft2 = gobj->user_data;
 
     if (fp->x2204_ftcmd_var1 == 1 && fp->fv.cl.x2244 == 0) {
-        temp_r3 = it_802C8B28(gobj, &fp->cur_pos, ftParts_8007500C(ft2, 0x1F),
+        temp_r3 = it_802C8B28(gobj, &fp->cur_pos,
+                              ftParts_8007500C(ft2, FtPart_LThumbNb),
                               fp->facing_dir);
         fp->fv.cl.x2244 = (u32) temp_r3;
         if (temp_r3 != NULL) {

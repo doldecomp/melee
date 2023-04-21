@@ -1,3 +1,5 @@
+#include "ft/forward.h"
+
 #include "ftPr_Init.h"
 
 #include "cm/camera.h"
@@ -475,12 +477,12 @@ void ftPr_Init_UnkMtxFunc0(HSD_GObj* gobj, int arg1, Mtx vmtx)
     if (fp->fv.pr.x223C && fp->x2225_b2) {
         Mtx* mtx;
         HSD_JObj* jobj;
-        HSD_JObj* bone_jobj = fp->ft_bones[6].x0_jobj;
-        HSD_JObjGetMtx(fp->ft_bones[6].x0_jobj);
+        HSD_JObj* bone_jobj = fp->parts[FtPart_LLegJA].x0_jobj;
+        HSD_JObjGetMtx(fp->parts[FtPart_LLegJA].x0_jobj);
         mtx = (0, &bone_jobj->mtx);
         jobj = fp->fv.pr.x223C;
         HSD_JObjCopyMtx(fp->fv.pr.x223C, *mtx);
-        jobj->flags |= 0x03800000;
+        jobj->flags |= (1 << 23) | (1 << 24) | (1 << 25);
         HSD_JObjSetMtxDirty(jobj);
 
         HSD_JObjDispAll(fp->fv.pr.x223C, vmtx, HSD_GObj_80390EB8(arg1), 0);
@@ -584,7 +586,7 @@ void ftPr_Init_8013C94C(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
 
     if (!fp->x2219_flag.bits.b0) {
-        efSync_Spawn(1238, gobj, fp->ft_bones[5].x0_jobj);
+        efSync_Spawn(1238, gobj, fp->parts[FtPart_WaistN].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 

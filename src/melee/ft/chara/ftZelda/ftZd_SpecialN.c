@@ -1,3 +1,5 @@
+#include "ft/forward.h"
+
 #include "ftZd_SpecialN.h"
 
 #include "ef/eflib.h"
@@ -13,13 +15,13 @@ void ftZd_SpecialN_8013A830(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
-        efSync_Spawn(0x4F4, gobj, fp->ft_bones[1].x0_jobj);
+        efSync_Spawn(1268, gobj, fp->parts[FtPart_TransN].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = 0;
+    fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
 void ftZd_SpecialN_8013A8AC(HSD_GObj* gobj)
@@ -27,13 +29,13 @@ void ftZd_SpecialN_8013A8AC(HSD_GObj* gobj)
     Fighter* fp; // r31
 
     fp = GET_FIGHTER(gobj);
-    if (fp->x2219_flag.bits.b0 == 0) {
-        efSync_Spawn(0x4F5, gobj, fp->ft_bones[1].x0_jobj);
-        fp->x2219_flag.bits.b0 = 1;
+    if (!fp->x2219_flag.bits.b0) {
+        efSync_Spawn(1269, gobj, fp->parts[FtPart_TransN].x0_jobj);
+        fp->x2219_flag.bits.b0 = true;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = 0;
+    fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
 inline void startActionHelper(HSD_GObj* gobj)
@@ -59,7 +61,7 @@ void ftZd_SpecialN_Enter(HSD_GObj* gobj)
     temp_f1 = 0;
     fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, 0x155, 0, NULL, temp_f1, 1.0, temp_f1);
+    Fighter_ChangeMotionState(gobj, 341, 0, NULL, temp_f1, 1.0, temp_f1);
     ftAnim_8006EBA4(gobj);
     startActionHelper(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialN_8013A830;
@@ -78,7 +80,7 @@ void ftZd_SpecialAirN_Enter(HSD_GObj* gobj)
     fp->x80_self_vel.y = 0;
     fp->x80_self_vel.x = fp->x80_self_vel.x / sa->x8;
 
-    Fighter_ChangeMotionState(gobj, 0x156, 0, NULL, 0, 1.0, 0);
+    Fighter_ChangeMotionState(gobj, 342, 0, NULL, 0, 1.0, 0);
     ftAnim_8006EBA4(gobj);
 
     startActionHelper(gobj);
@@ -113,7 +115,7 @@ void ftZd_SpecialN_Anim(HSD_GObj* gobj)
     }
 }
 
-// 8013AACC - 8013AB60 (0x94 bytes)
+// 8013AACC - 8013AB60 (148 bytes)
 // https://decomp.me/scratch/ttWvN
 void ftZd_SpecialAirN_Anim(HSD_GObj* gobj)
 {
@@ -152,14 +154,14 @@ void ftZd_SpecialAirN_IASA(HSD_GObj* gobj)
     return;
 }
 
-// 8013AB68 - 8013AB9C (0x34 bytes)
+// 8013AB68 - 8013AB9C (52 bytes)
 void ftZd_SpecialN_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
     ftColl_8007AEF8(gobj);
 }
 
-// 8013AB9C - 8013AC10 (0x74 bytes)
+// 8013AB9C - 8013AC10 (116 bytes)
 // https://decomp.me/scratch/juoPH
 void ftZd_SpecialAirN_Phys(HSD_GObj* gobj)
 {
@@ -186,7 +188,7 @@ void ftZd_SpecialAirN_Phys(HSD_GObj* gobj)
     ftColl_8007AEF8(gobj);
 }
 
-// 8013AC10 - 8013AC4C (0x3C bytes)
+// 8013AC10 - 8013AC4C (60 bytes)
 // https://decomp.me/scratch/CT7dz
 void ftZd_SpecialN_Coll(HSD_GObj* gobj)
 {
@@ -195,7 +197,7 @@ void ftZd_SpecialN_Coll(HSD_GObj* gobj)
     }
 }
 
-// 8013AC4C - 8013AC88 (0x3C bytes)
+// 8013AC4C - 8013AC88 (60 bytes)
 // https://decomp.me/scratch/CT7dz
 void ftZd_SpecialAirN_Coll(HSD_GObj* gobj)
 {
@@ -217,7 +219,7 @@ void ftZd_SpecialN_8013AC88(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 0x156, 0x0C4C508E, NULL,
+    Fighter_ChangeMotionState(gobj, 342, 0x0C4C508E, NULL,
                               fp->x894_currentAnimFrame, 1.0, 0);
 
     fighter2 = GET_FIGHTER(gobj);
@@ -243,7 +245,7 @@ void ftZd_SpecialN_8013AD1C(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x155, 0x0C4C508E, NULL,
+    Fighter_ChangeMotionState(gobj, 341, 0x0C4C508E, NULL,
                               fp->x894_currentAnimFrame, 1.0, 0);
 
     fighter2 = GET_FIGHTER(gobj);

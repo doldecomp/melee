@@ -32,7 +32,7 @@ void ftGw_SpecialLw_ItemPanicSetup(HSD_GObj* gobj)
         u8 _[16];
 #endif
 
-        lb_8000B1CC(fp->ft_bones[TopN].x0_jobj, NULL, &vec);
+        lb_8000B1CC(fp->parts[FtPart_TopN].x0_jobj, NULL, &vec);
 
         fp->fv.gw.x2268_panicGObj = it_802C7D60(gobj, &vec, 0, fp->facing_dir);
     }

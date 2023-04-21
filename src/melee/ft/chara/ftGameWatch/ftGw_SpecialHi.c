@@ -1,4 +1,5 @@
 #include "forward.h"
+#include "ft/forward.h"
 
 #include "ftGw_SpecialHi.h"
 
@@ -29,9 +30,10 @@ void ftGw_SpecialHi_ItemRescueSetup(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (fp->fv.gw.x226C_rescueGObj == NULL) {
-        lb_8000B1CC(fp->ft_bones[0].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->parts[FtPart_TopN].x0_jobj, NULL, &sp10);
         sp10.y = -((2.5f * ftCommon_GetModelScale(fp)) - sp10.y);
-        rescueGObj = it_802C8038(gobj, &sp10, 0, fp->motion_id - 0x175,
+        rescueGObj = it_802C8038(gobj, &sp10, FtPart_TopN,
+                                 fp->motion_id - ftGw_MS_SpecialHi,
                                  fp->facing_dir, 2.5f);
         fp->fv.gw.x226C_rescueGObj = rescueGObj;
         if (rescueGObj != NULL) {
@@ -131,7 +133,7 @@ void ftGw_SpecialHi_Enter(HSD_GObj* gobj)
                               0.0f);
     ftGameWatch_SpecialHi_SetVars(gobj);
     ftAnim_8006EBA4(gobj);
-    ft_80088510(fp, 0x46D12, 0x7F, 0x40);
+    ft_80088510(fp, 290066, 127, 64);
 }
 
 // 0x8014E158 - Mr. Game & Watch's aerial Fire Rescue Motion State handler
@@ -149,7 +151,7 @@ void ftGw_SpecialAirHi_Enter(HSD_GObj* gobj)
                               0.0f);
     ftGameWatch_SpecialHi_SetVars(gobj);
     ftAnim_8006EBA4(gobj);
-    ft_80088510(fp, 0x46D12, 0x7F, 0x40);
+    ft_80088510(fp, 290066, 127, 64);
 }
 
 // 0x8014E1F8 - Mr. Game & Watch's grounded Fire Rescue Animation callback

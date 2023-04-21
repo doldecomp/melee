@@ -1,3 +1,5 @@
+#include "ft/forward.h"
+
 #include "ftCa_SpecialN.h"
 
 #include "ftCa_Init.h"
@@ -161,19 +163,19 @@ void ftCa_SpecialN_Phys(HSD_GObj* gobj)
         flag = false;
     }
     if (flag != false) {
-        if (fp->x2219_flag.bits.b0 == 0) {
+        if (!fp->x2219_flag.bits.b0) {
             ftKind = ftLib_800872A4(gobj);
             switch (ftKind) {
             case 2:
-                efSync_Spawn(0x48F, gobj, fp->ft_bones[0].x0_jobj,
-                             fp->ft_bones[0x39].x0_jobj);
+                efSync_Spawn(1167, gobj, fp->parts[FtPart_TopN].x0_jobj,
+                             fp->parts[57].x0_jobj);
                 break;
             case 25:
-                efSync_Spawn(0x50B, gobj, fp->ft_bones[0].x0_jobj,
-                             fp->ft_bones[0x4E].x0_jobj);
+                efSync_Spawn(1291, gobj, fp->parts[FtPart_TopN].x0_jobj,
+                             fp->parts[78].x0_jobj);
                 break;
             }
-            fp->x2219_flag.bits.b0 = 1;
+            fp->x2219_flag.bits.b0 = true;
         } else {
             ftCommon_8007DB24(gobj);
         }
@@ -199,12 +201,12 @@ void ftCa_SpecialAirN_Phys(HSD_GObj* gobj)
             ftKind = ftLib_800872A4(gobj);
             switch (ftKind) {
             case 2:
-                efSync_Spawn(0x48F, gobj, fp->ft_bones[0].x0_jobj,
-                             fp->ft_bones[0x39].x0_jobj);
+                efSync_Spawn(1167, gobj, fp->parts[FtPart_TopN].x0_jobj,
+                             fp->parts[57].x0_jobj);
                 break;
             case 25:
-                efSync_Spawn(0x50B, gobj, fp->ft_bones[0].x0_jobj,
-                             fp->ft_bones[0x4E].x0_jobj);
+                efSync_Spawn(1291, gobj, fp->parts[FtPart_TopN].x0_jobj,
+                             fp->parts[78].x0_jobj);
                 break;
             }
             fp->x2219_flag.bits.b0 = 1;

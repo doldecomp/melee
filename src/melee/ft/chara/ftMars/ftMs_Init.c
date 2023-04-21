@@ -461,10 +461,10 @@ void ftMs_SpecialN_801365A8(HSD_GObj* gobj)
         result = ftLib_800872A4(gobj);
         switch (result) {
         case 0x12:
-            efSync_Spawn(0x4F2, gobj, fp->ft_bones->x0_jobj);
+            efSync_Spawn(0x4F2, gobj, fp->parts->x0_jobj);
             break;
         case 0x1A:
-            efSync_Spawn(0x511, gobj, fp->ft_bones->x0_jobj);
+            efSync_Spawn(0x511, gobj, fp->parts->x0_jobj);
             break;
         }
         fp->x2219_flag.bits.b0 = 1;
@@ -486,10 +486,10 @@ void ftMs_SpecialN_8013666C(HSD_GObj* gobj)
         result = ftLib_800872A4(gobj);
         switch (result) {
         case 0x12:
-            efSync_Spawn(0x4F3, gobj, fp->ft_bones->x0_jobj);
+            efSync_Spawn(0x4F3, gobj, fp->parts->x0_jobj);
             break;
         case 0x1A:
-            efSync_Spawn(0x512, gobj, fp->ft_bones->x0_jobj);
+            efSync_Spawn(0x512, gobj, fp->parts->x0_jobj);
             break;
         }
         fp->x2219_flag.bits.b0 = 1;

@@ -115,7 +115,7 @@ inline void comboCount_Push(Fighter* fp)
     fp->cur_pos.y = -((-pos->x * temp_f2) - fp->cur_pos.y);
 }
 
-/// Combo count something + adjust TopN
+/// Combo count something + adjust FtPart_TopN
 void ftColl_80076528(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

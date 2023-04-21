@@ -488,7 +488,7 @@ static inline void ftLuigi_SpecialS_Setup(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
 
     if (!fp->x2219_flag.bits.b0) {
-        efSync_Spawn(0x50A, gobj, fp->ft_bones[HipN].x0_jobj);
+        efSync_Spawn(0x50A, gobj, fp->parts[FtPart_HipN].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 

@@ -1,3 +1,5 @@
+#include "ft/forward.h"
+
 #include "ftZd_SpecialHi.h"
 
 #include "ef/eflib.h"
@@ -32,12 +34,12 @@ void ftZd_SpecialHi_801396E0(HSD_GObj* gobj)
 
     if (!fp->x2219_flag.bits.b0) {
         Vec3 vec;
-        lb_8000B1CC(fp->ft_bones[4].x0_jobj, NULL, &vec);
+        lb_8000B1CC(fp->parts[FtPart_HipN].x0_jobj, NULL, &vec);
 
         if (fp->ground_or_air == GA_Ground) {
-            efSync_Spawn(0x4F6, gobj, fp->ft_bones->x0_jobj);
+            efSync_Spawn(1270, gobj, fp->parts->x0_jobj);
         } else {
-            efSync_Spawn(0x4F7, gobj, fp->ft_bones->x0_jobj);
+            efSync_Spawn(1271, gobj, fp->parts->x0_jobj);
         }
 
         fp->x2219_flag.bits.b0 = true;
@@ -53,10 +55,10 @@ void ftZd_SpecialHi_8013979C(HSD_GObj* gobj)
 
     {
         Vec3 vec;
-        lb_8000B1CC(fp->ft_bones[4].x0_jobj, NULL, &vec);
+        lb_8000B1CC(fp->parts[FtPart_HipN].x0_jobj, NULL, &vec);
 
         if (!fp->x2219_flag.bits.b0) {
-            efSync_Spawn(0x505, gobj, &vec);
+            efSync_Spawn(1285, gobj, &vec);
             fp->x2219_flag.bits.b0 = true;
         }
     }
@@ -76,13 +78,13 @@ static void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
 
     {
         ssize_t boneIndex = ftParts_8007500C(fp, 4);
-        HSD_JObj* jObj = fp->ft_bones[boneIndex].x0_jobj;
+        HSD_JObj* jObj = fp->parts[boneIndex].x0_jobj;
 
         {
             Vec3 vec;
             lb_8000B1CC(jObj, NULL, &vec);
 
-            lb_800119DC(&vec, 0x78, 1.5f, 0.02, 60 * (f32) M_PI / 180);
+            lb_800119DC(&vec, 120, 1.5f, 0.02, 60 * (f32) M_PI / 180);
         }
     }
 }
@@ -134,7 +136,7 @@ void ftZd_SpecialAirHi_Enter(HSD_GObj* gobj)
 #endif
 
             ssize_t boneIndex = ftParts_8007500C(fp, 4);
-            HSD_JObj* jObj = fp->ft_bones[boneIndex].x0_jobj;
+            HSD_JObj* jObj = fp->parts[boneIndex].x0_jobj;
 
             lb_8000B1CC(jObj, NULL, &vec);
             lb_800119DC(&vec, 120, 1.5, 0.02, 60 * (f32) M_PI / 180);
@@ -479,7 +481,7 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
                           cosf(temp_f5);
                 fp->gr_vel = fp->facing_dir * temp_f6;
 
-                Fighter_ChangeMotionState(gobj, 0x15E, 0, NULL, 35.0, 1.0, 0);
+                Fighter_ChangeMotionState(gobj, 350, 0, NULL, 35.0, 1.0, 0);
                 ftAnim_8006EBA4(gobj);
                 ftAnim_SetAnimRate(gobj, 0);
 
@@ -574,7 +576,7 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
     fp->x80_self_vel.y =
         ((attributes->x54 * var_f31) + attributes->x58) * sinf(var_f30);
 
-    Fighter_ChangeMotionState(gobj, 0x161, 0, NULL, 35.0, 1.0, 0);
+    Fighter_ChangeMotionState(gobj, 353, 0, NULL, 35.0, 1.0, 0);
     ftAnim_8006EBA4(gobj);
     ftAnim_SetAnimRate(gobj, 0);
 

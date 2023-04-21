@@ -95,7 +95,8 @@ static void ftDonkey_8010DE88_inner(HSD_GObj* gobj)
     u8 _[8];
 #endif
     if (!fp->x2219_flag.bits.b0) {
-        efAsync_Spawn(gobj, &fp->x60C, 1, 1228, fp->ft_bones[TopN].x0_jobj);
+        efAsync_Spawn(gobj, &fp->x60C, 1, 1228,
+                      fp->parts[FtPart_TopN].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -169,7 +170,7 @@ void ftDk_SpecialLw_8010E0CC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
-        efSync_Spawn(1222, gobj, fp->ft_bones[TransN].x0_jobj);
+        efSync_Spawn(1222, gobj, fp->parts[FtPart_TransN].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -181,7 +182,7 @@ void ftDk_SpecialLw_8010E148(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
-        efSync_Spawn(1223, gobj, fp->ft_bones[TransN].x0_jobj);
+        efSync_Spawn(1223, gobj, fp->parts[FtPart_TransN].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;

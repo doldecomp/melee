@@ -1,4 +1,5 @@
 #include "forward.h"
+#include "ft/forward.h"
 
 #include "ftGw_AttackLw3.h"
 
@@ -31,7 +32,7 @@ void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
 
     if (fp->fv.gw.x2250_manholeGObj2 == NULL) {
-        lb_8000B1CC(fp->ft_bones[0x20].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->parts[FtPart_LHandNb].x0_jobj, NULL, &sp10);
         manholeGObj = fp->x1974_heldItem;
         if (manholeGObj != NULL) {
             fp->fv.gw.x2248_manholeGObj = manholeGObj;
@@ -40,7 +41,7 @@ void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj)
             ftCommon_8007E6DC(gobj, fp->x1974_heldItem, 1);
         }
         fp->fv.gw.x2250_manholeGObj2 =
-            it_802C65E4(gobj, &sp10, 0x20, fp->facing_dir);
+            it_802C65E4(gobj, &sp10, FtPart_LHandNb, fp->facing_dir);
     }
     if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
         if (fp->cb.x21E4_callback_OnDeath2 == NULL) {

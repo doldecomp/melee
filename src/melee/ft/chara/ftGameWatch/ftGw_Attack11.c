@@ -1,4 +1,5 @@
 #include "forward.h"
+#include "ft/forward.h"
 
 #include "ftGw_Attack11.h"
 
@@ -28,9 +29,9 @@ void ftGw_Attack11_ItemGreenhouseSetup(HSD_GObj* gobj)
     if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
         ftGw_Attack11_DecideAction(gobj);
     } else {
-        lb_8000B1CC(fp->ft_bones[0x20].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->parts[FtPart_LHandNb].x0_jobj, NULL, &sp10);
         fp->fv.gw.x224C_greenhouseGObj =
-            it_802C61F4(gobj, &sp10, 0x20, fp->facing_dir);
+            it_802C61F4(gobj, &sp10, FtPart_LHandNb, fp->facing_dir);
         if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
             if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
                 fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;

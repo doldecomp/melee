@@ -59,7 +59,7 @@ void ftSs_SpecialN_80129258(HSD_GObj* gobj)
     }
 }
 
-static s32 ftSs_SpecialN_801292E4(HSD_GObj* gobj)
+static bool ftSs_SpecialN_801292E4(HSD_GObj* gobj)
 {
     Vec3 vec1;
     Vec3 vec2;
@@ -75,21 +75,21 @@ static s32 ftSs_SpecialN_801292E4(HSD_GObj* gobj)
 
     if ((fp->x2200_ftcmd_var0 == 1U) && (!fp->fv.ss.x222C)) {
         fp->x2200_ftcmd_var0 = 0U;
-        vec2.z = 4.0f;
-        vec2.y = 0.0f;
-        vec2.x = 0.0f;
-        lb_8000B1CC(fp->ft_bones[50].x0_jobj, &vec2, &vec1);
-        vec1.z = 0.0f;
-        result = it_802B55C8(gobj, &vec1, 0x32, 0x5E, fp->facing_dir);
+        vec2.z = 4;
+        vec2.y = 0;
+        vec2.x = 0;
+        lb_8000B1CC(fp->parts[FtPart_RHandNb].x0_jobj, &vec2, &vec1);
+        vec1.z = 0;
+        result = it_802B55C8(gobj, &vec1, FtPart_RHandNb, 94, fp->facing_dir);
         fp->fv.ss.x222C = result;
         if (result != NULL) {
             ftSamus_updateDamageDeathCBs(gobj);
         } else {
             fp->fv.ss.x222C = 0U;
-            return 1;
+            return true;
         }
     }
-    return 0;
+    return false;
 }
 
 static void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
@@ -111,17 +111,17 @@ static void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
         u32 x2230;
 
         fp->x2204_ftcmd_var1 = 2;
-        lb_8000B1CC(fp->ft_bones[51].x0_jobj, NULL, &vec1);
-        vec1.z = 0.0f;
+        lb_8000B1CC(fp->parts[FtPart_ThrowN].x0_jobj, NULL, &vec1);
+        vec1.z = 0;
         held_item = fp->x1974_heldItem;
-        if (1.0f == fp->facing_dir) {
-            var_f0 = 0.0;
+        if (fp->facing_dir == +1) {
+            var_f0 = 0;
         } else {
             var_f0 = M_PI;
         }
         x2230 = fp->fv.ss.x2230;
         it_802B56E4(fp->fv.ss.x222C, &vec1, var_f0, x2230, samus_attr->x18);
-        if ((fp->motion_id == 0x15C) || (fp->ground_or_air == GA_Air)) {
+        if ((fp->motion_id == 348) || (fp->ground_or_air == GA_Air)) {
             /// @todo Unused stack.
 #ifdef MUST_MATCH
             u8 unused1[28];
@@ -131,7 +131,7 @@ static void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
         fp->fv.ss.x2230 = 0U;
 
         ftSs_SpecialN_801291F0(gobj);
-        efSync_Spawn(0x486, gobj, &vec1, &fp->facing_dir);
+        efSync_Spawn(1158, gobj, &vec1, &fp->facing_dir);
         fp->x1974_heldItem = held_item;
     }
 }
@@ -146,18 +146,18 @@ void ftSs_SpecialN_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, 0x157, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 343, 0, NULL, 0, 1, 0);
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     ftCommon_8007D7FC(fp);
     self_vel = &fp->x80_self_vel;
-    self_vel->y = 0.0f;
+    self_vel->y = 0;
     ftSamus_updateDamageDeathCBs(gobj);
     fp->mv.ss.unk3.x0 = 0;
     fp->mv.ss.unk3.x4 = 0;
-    fp->mv.ss.unk3.x8 = 0.0f;
+    fp->mv.ss.unk3.x8 = 0;
     ftAnim_8006EBA4(gobj);
 }
 
@@ -170,7 +170,7 @@ void ftSs_SpecialAirN_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, 0x15B, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 347, 0, NULL, 0, 1, 0);
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
@@ -178,7 +178,7 @@ void ftSs_SpecialAirN_Enter(HSD_GObj* gobj)
     ftSamus_updateDamageDeathCBs(gobj);
     fp->mv.ss.unk3.x0 = 1;
     fp->mv.ss.unk3.x4 = 0;
-    fp->mv.ss.unk3.x8 = 0.0f;
+    fp->mv.ss.unk3.x8 = 0;
     ftAnim_8006EBA4(gobj);
 }
 
@@ -195,9 +195,9 @@ void ftSs_SpecialNStart_Anim(HSD_GObj* gobj)
     ftSs_SpecialN_801292E4(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if ((fp->mv.ss.unk3.x0 == 1) || (fp->fv.ss.x2230 == samus_attr->x18)) {
-            Fighter_ChangeMotionState(gobj, 0x15A, 0, NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ChangeMotionState(gobj, 346, 0, NULL, 0, 1, 0);
         } else {
-            Fighter_ChangeMotionState(gobj, 0x158, 0, NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ChangeMotionState(gobj, 344, 0, NULL, 0, 1, 0);
             ftSamus_SetAttrx2334(gobj);
         }
         ftSamus_updateDamageDeathCBs(gobj);
@@ -233,8 +233,8 @@ void ftSs_SpecialNLoop_Anim(HSD_GObj* gobj)
         } else {
             var_f1 = 0.f;
         }
-        index = 5.0f * var_f1;
-        ft_80088510(fighter2, ftSs_Unk3_803CE6B8[index], 0x7F, 0x40);
+        index = 5 * var_f1;
+        ft_80088510(fighter2, ftSs_Unk3_803CE6B8[index], 127, 64);
     }
 
     fp->mv.ss.unk3.x4 += 1;
@@ -242,9 +242,9 @@ void ftSs_SpecialNLoop_Anim(HSD_GObj* gobj)
         fp->mv.ss.unk3.x4 = 0;
         fp->fv.ss.x2230 += 1;
         if (fp->fv.ss.x2230 >= samus_attr->x18) {
-            ft_800BFFD0(fp, 0x35, 0);
+            ft_800BFFD0(fp, 53, 0);
             fp->fv.ss.x2230 = samus_attr->x18;
-            Fighter_ChangeMotionState(gobj, 0x159, 0, 0, 0.0f, 1.0f, 0.0f);
+            Fighter_ChangeMotionState(gobj, 345, 0, 0, 0, 1, 0);
             ftSamus_UnkAndDestroyAllEF(gobj);
             ftSamus_updateDamageDeathCBs(gobj);
         }
@@ -284,7 +284,7 @@ void ftSs_SpecialAirNStart_Anim(HSD_GObj* gobj)
     ftSs_SpecialN_801292E4(gobj);
     fp->mv.ss.unk3.x0 = 1;
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, 0x15C, 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 348, 0, NULL, 0, 1, 0);
         ftSamus_updateDamageDeathCBs(gobj);
     }
 }
@@ -295,11 +295,11 @@ void ftSs_SpecialAirNShoot_Anim(HSD_GObj* gobj)
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
     ftSs_SpecialN_801293BC(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (samus_attr->x24 == 0.0f) {
+        if (samus_attr->x24 == 0) {
             ft_800CC730(gobj);
             return;
         }
-        ft_80096900(gobj, 1, 0, 1, 1.0f, samus_attr->x24);
+        ft_80096900(gobj, 1, 0, 1, 1, samus_attr->x24);
     }
 }
 
@@ -319,13 +319,13 @@ void ftSs_SpecialNLoop_IASA(HSD_GObj* gobj)
         fighterObj2 = gobj;
         ftSamus_UnkAndDestroyAllEF(fighterObj2);
     } else {
-        if ((fp->input.x668 & 0x200)) {
-            Fighter_ChangeMotionState(gobj, 0x15A, 0, NULL, 0.0f, 1.0f, 0.0f);
+        if ((fp->input.x668 & 512)) {
+            Fighter_ChangeMotionState(gobj, 346, 0, NULL, 0, 1, 0);
             ftSamus_updateDamageDeathCBs(gobj);
             return;
         }
         if ((fp->input.x668 & 0x80000000)) {
-            Fighter_ChangeMotionState(gobj, 0x159, 0, NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ChangeMotionState(gobj, 345, 0, NULL, 0, 1, 0);
             ftSamus_UnkAndDestroyAllEF(gobj);
             ftSamus_updateDamageDeathCBs(gobj);
         }
@@ -376,8 +376,8 @@ void ftSs_SpecialNStart_Coll(HSD_GObj* gobj)
 
     if (!ft_80082708(gobj)) {
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 0x15B, 0x0C4C5080, NULL,
-                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 347, 0x0C4C5080, NULL,
+                                  fp->x894_currentAnimFrame, 1, 0);
         ftSamus_updateDamageDeathCBs(gobj);
     }
 }
@@ -388,10 +388,10 @@ void ftSs_SpecialNLoop_Coll(HSD_GObj* gobj)
 
     if (!ft_80082708(gobj)) {
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 0x15C, 0x0C4C5080, NULL,
-                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 348, 0x0C4C5080, NULL,
+                                  fp->x894_currentAnimFrame, 1, 0);
         ftSamus_updateDamageDeathCBs(gobj);
-        ft_80088148(fp, 0x3F7B5U, 0x7FU, 0x40U);
+        ft_80088148(fp, 260021, 127, 64);
         fp->x2204_ftcmd_var1 = 1;
     }
 }
@@ -401,8 +401,8 @@ void ftSs_SpecialNEnd_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ft_80082708(gobj)) {
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 0x15C, 0x0C4C5080, NULL,
-                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 348, 0x0C4C5080, NULL,
+                                  fp->x894_currentAnimFrame, 1, 0);
         ftSamus_updateDamageDeathCBs(gobj);
     }
 }
@@ -412,8 +412,8 @@ void ftSs_SpecialNShoot_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ft_80082708(gobj)) {
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 0x15C, 0x0C4C5080, NULL,
-                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 348, 0x0C4C5080, NULL,
+                                  fp->x894_currentAnimFrame, 1, 0);
         ftSamus_updateDamageDeathCBs(gobj);
     }
 }
@@ -423,8 +423,8 @@ void ftSs_SpecialAirNStart_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) == 1) {
         ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, 0x157, 0x0C4C5080, NULL,
-                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 343, 0x0C4C5080, NULL,
+                                  fp->x894_currentAnimFrame, 1, 0);
         ftSamus_updateDamageDeathCBs(gobj);
     }
 }
@@ -434,8 +434,8 @@ void ftSs_SpecialAirNShoot_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) == 1) {
         ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, 0x15A, 0x0C4C5080, NULL,
-                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 346, 0x0C4C5080, NULL,
+                                  fp->x894_currentAnimFrame, 1, 0);
         ftSamus_updateDamageDeathCBs(gobj);
     }
 }
@@ -463,10 +463,10 @@ void ftSs_SpecialS_8012A074(HSD_GObj* gobj)
     if (bool1) {
         Vec3 position;
         fp->fv.ss.x2238++;
-        lb_8000B1CC(fp->ft_bones[56].x0_jobj, NULL, &position);
+        lb_8000B1CC(fp->parts[56].x0_jobj, NULL, &position);
         position.x += (samus_attr->x34 * fp->facing_dir);
 
-        if ((fp->motion_id == 0x15D) || (fp->motion_id == 0x15F)) {
+        if ((fp->motion_id == 349) || (fp->motion_id == 351)) {
             /// @todo Unused stack.
 #ifdef MUST_MATCH
             u8 _[8];
@@ -486,7 +486,7 @@ static void ftSs_SpecialS_8012A168(HSD_GObj* gobj, Vec3* spawnlocation)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
-        efSync_Spawn(0x483, gobj, spawnlocation);
+        efSync_Spawn(1155, gobj, spawnlocation);
         fp->x2219_flag.bits.b0 = 1;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;

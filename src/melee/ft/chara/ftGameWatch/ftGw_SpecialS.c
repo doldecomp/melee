@@ -29,17 +29,18 @@ void ftGw_SpecialS_ItemJudgementSetup(HSD_GObj* gobj)
 
     if (GET_FIGHTER(gobj)->x2204_ftcmd_var1 != 0U) {
         fp->x2204_ftcmd_var1 = 0;
-        lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x31)].x0_jobj, NULL,
-                    &sp20);
-        fp->fv.gw.x2264_judgementGObj =
-            it_802C7774(fp->facing_dir, gobj, &sp20,
-                        ftParts_8007500C(fp, 0x31), fp->fv.gw.x222C_judgeVar1);
+        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].x0_jobj,
+                    NULL, &sp20);
+        fp->fv.gw.x2264_judgementGObj = it_802C7774(
+            fp->facing_dir, gobj, &sp20, ftParts_8007500C(fp, FtPart_RThumbNb),
+            fp->fv.gw.x222C_judgeVar1);
         if ((s32) fp->fv.gw.x222C_judgeVar1 == 6) {
             sp14.z = 0.0f;
             sp14.x = 0.0f;
             sp14.y = 5.0f;
-            lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x1F)].x0_jobj,
-                        &sp14, &sp20);
+            lb_8000B1CC(
+                fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].x0_jobj,
+                &sp14, &sp20);
             it_8028FAF4(gobj, &sp20);
         }
         if (fp->fv.gw.x2264_judgementGObj != NULL) {

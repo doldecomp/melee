@@ -1,3 +1,5 @@
+#include "ft/forward.h"
+
 #include "ft/ftparts.h"
 
 #include "ft/fighter.h"
@@ -1172,12 +1174,12 @@ void ftParts_SetupParts(HSD_GObj* fighter_obj)
 
     while (jobj != NULL) {
         if (ftParts_8007506C(fighter->x4_fighterKind, part) != 0) {
-            fighter->ft_bones[part].x0_jobj = NULL;
+            fighter->parts[part].x0_jobj = NULL;
             part++;
             continue;
         }
 
-        ftParts_80074194(fighter, &fighter->ft_bones[part], jobj, &dobj_count,
+        ftParts_80074194(fighter, &fighter->parts[part], jobj, &dobj_count,
                          tree_depth);
         part++;
 
@@ -1866,14 +1868,6 @@ lbl_80074C8C:
 /* 80074C9C 0007187C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void ftParts_80074B6C(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -1946,14 +1940,6 @@ lbl_80074D68:
 /* 80074D78 00071958  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void ftParts_80074CA0(u32* arg0, s32 arg1, u32* arg2)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -2026,14 +2012,6 @@ lbl_80074E44:
 /* 80074E54 00071A34  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void ftParts_80074D7C(u32* arg0, s32 arg1, u32* arg2)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -2155,21 +2133,13 @@ lbl_80074EC8:
 /* 80075008 00071BE8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void ftParts_80074E58(Fighter* arg0)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
-asm s32 ftParts_8007500C(Fighter*,
-                         s32){ // clang-format off
+// clang-format off
+asm Fighter_Part ftParts_8007500C(Fighter*, Fighter_Part)
+{
     nofralloc
 /* 8007500C 00071BEC  80 03 00 04 */	lwz r0, 4(r3)
 /* 80075010 00071BF0  80 6D AE A4 */	lwz r3, ftPartsTable(r13)
@@ -2180,18 +2150,9 @@ asm s32 ftParts_8007500C(Fighter*,
 /* 80075024 00071C04  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-s32 ftParts_8007500C(Fighter* arg0, s32 arg1)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void ftParts_80075028(void)
 { // clang-format off
@@ -2216,20 +2177,12 @@ lbl_80075064:
 /* 80075068 00071C48  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void ftParts_80075028(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
-asm u32 ftParts_8007506C(s32 ftkind, u32 part){
+asm u32 ftParts_8007506C(s32 ftkind, u32 part)
+{
     // clang-format off
     nofralloc
 /* 8007506C 00071C4C  80 AD AE A0 */	lwz r5, Fighter_804D6540(r13)
@@ -2260,14 +2213,6 @@ lbl_800750C0:
 /* 800750C4 00071CA4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-u32 ftParts_8007506C(s32 ftkind, u32 part)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
