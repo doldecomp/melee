@@ -2,6 +2,7 @@
 #define MELEE_FT_TYPES_H
 
 #include <platform.h>
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
 
 #include "ft/ftanim.h"
@@ -1103,7 +1104,7 @@ struct Fighter {
     u8 filler_x222B;
 
     union Fighter_FighterVars {
-        u8 _[0x100];
+        u8 _[FighterVars_Size];
         struct ftCaptain_FighterVars ca, gn;
         struct ftDonkey_FighterVars dk;
         struct ftFox_FighterVars fx, fc;
@@ -1114,6 +1115,7 @@ struct Fighter {
         struct ftLuigi_FighterVars lg;
         struct ftMario_FighterVars mr;
         struct ftMars_FighterVars ms;
+        struct ftMasterhand_FighterVars mh, ch;
         struct ftMewtwo_FighterVars mt;
         struct ftNess_FighterVars ns;
         struct ftPeach_FighterVars pe;
@@ -1126,7 +1128,6 @@ struct Fighter {
         struct ftYoshi_FighterVars ys;
         struct ftZakoBoy_FighterVars bo, gl;
         struct ftZelda_FighterVars zd;
-        struct ftMasterhand_FighterVars mh, ch;
     } fv;
 
     /* 0x232C */ s32 x232C;
