@@ -2,11 +2,13 @@
 #define MELEE_FT_CHARA_FTCAPTAIN_TYPES_H
 
 #include <platform.h>
+#include "ft/forward.h"
 #include "ftCaptain/forward.h"
 
 struct ftCaptain_FighterVars {
-    /* 0x222C */ uint during_specials_start;
-    /* 0x2230 */ uint during_specials;
+    /* 0x222C */ u32 during_specials_start;
+    /* 0x2230 */ u32 during_specials;
+    u8 _[FighterVars_Size - 8];
 };
 
 struct ftCaptain_DatAttrs {

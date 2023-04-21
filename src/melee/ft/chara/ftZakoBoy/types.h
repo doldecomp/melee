@@ -3,8 +3,8 @@
 
 #include <platform.h>
 
-struct ftZakoBoy_FighterVars {
-    u8 _[1];
+struct ftBoy_FighterVars {
+    char filler0[0x100];
 };
 
 typedef struct _ftZakoboyAttributes {

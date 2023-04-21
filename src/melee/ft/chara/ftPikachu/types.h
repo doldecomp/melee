@@ -6,7 +6,7 @@
 #include <dolphin/mtx/types.h>
 
 struct ftPikachu_FighterVars {
-    u8 _[1];
+    char filler0[0x100];
 };
 
 typedef struct _ftPikachuAttributes {

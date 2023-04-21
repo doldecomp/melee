@@ -2,9 +2,10 @@
 #define MELEE_FT_CHARA_FTSANDBAG_TYPES_H
 
 #include <platform.h>
+#include "ft/forward.h"
 
 struct ftSandbag_FighterVars {
-    u8 _[1];
+    char filler0[FighterVars_Size];
 };
 
 #endif
