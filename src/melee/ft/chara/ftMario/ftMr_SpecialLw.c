@@ -11,7 +11,7 @@
 
 // 0x800E2050
 // https://decomp.me/scratch/8zo4V
-void ftMr_SpecialLw_UpdateRot(HSD_GObj* gobj)
+void updateRot(HSD_GObj* gobj)
 {
     Fighter* fp;
     fp = GET_FIGHTER(gobj);
@@ -35,8 +35,8 @@ void ftMario_SpecialLw_SetGFX(HSD_GObj* gobj)
 void ftMario_SpecialLw_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = &ftMr_SpecialLw_UpdateRot;
-    fp->cb.x21E4_callback_OnDeath2 = &ftMr_SpecialLw_UpdateRot;
+    fp->cb.x21DC_callback_OnTakeDamage = &updateRot;
+    fp->cb.x21E4_callback_OnDeath2 = &updateRot;
 }
 
 void _ftMario_800E207C_800E2194_helper(HSD_GObj* gobj)

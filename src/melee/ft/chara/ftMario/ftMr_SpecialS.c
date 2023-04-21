@@ -55,7 +55,7 @@ void ftMr_SpecialS_CreateCape(HSD_GObj* gobj)
     }
 }
 
-void ftMr_SpecialS_SetNULL(HSD_GObj* gobj)
+void ftMr_SpecialS_Reset(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMr_SpecialS_ExitHitlag(gobj);
@@ -70,7 +70,7 @@ void ftMr_SpecialS_RemoveCape(HSD_GObj* gobj)
 
     if (fp->ev.mr.x223C_capeGObj != NULL) {
         it_802B2674(fp->ev.mr.x223C_capeGObj);
-        ftMr_SpecialS_SetNULL(gobj);
+        ftMr_SpecialS_Reset(gobj);
     }
 }
 

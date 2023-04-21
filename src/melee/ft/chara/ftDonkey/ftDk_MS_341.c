@@ -7,17 +7,17 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 
-bool ftDk_Init_800DF938(HSD_GObj* gobj)
+bool ftDk_MS_341_800DF938(HSD_GObj* gobj)
 {
     if (ft_8008A1FC(gobj)) {
-        ftDk_Init_800DF980(gobj);
+        ftDk_MS_341_800DF980(gobj);
         return true;
     }
 
     return false;
 }
 
-void ftDk_Init_800DF980(HSD_GObj* gobj)
+void ftDk_MS_341_800DF980(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr;
@@ -38,7 +38,7 @@ void ftDk_Init_800DF980(HSD_GObj* gobj)
 void ftDk_MS_341_IASA(HSD_GObj* gobj)
 {
     if ((!ft_80094EA4(gobj)) && (!ftDk_MS_347_800E0378(gobj)) &&
-        (!ftDk_MS_342_800E0134(gobj)))
+        (!ftDk_MS_345_800E0134(gobj)))
     {
         s32 result = ftDk_MS_341_800DFA98(gobj);
 

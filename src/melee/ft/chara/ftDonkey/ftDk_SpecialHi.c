@@ -171,7 +171,7 @@ void ftDk_SpecialAirHi_Coll(HSD_GObj* gobj)
     }
 }
 
-void ftDk_SpecialHi_DestroyAllEffects_SpecialHi(HSD_GObj* gobj)
+void ftDk_SpecialHi_DestroyAllEffects(HSD_GObj* gobj)
 {
     efLib_DestroyAll(gobj);
 }

@@ -65,7 +65,7 @@ void ftSs_SpecialAirS_Coll(HSD_GObj*);
 void ftSs_SpecialAirSmash_Anim(HSD_GObj*);
 void ftSs_SpecialAirSmash_IASA(HSD_GObj*);
 void ftSs_SpecialAirSmash_Phys(HSD_GObj*);
-void ftSs_SpecialAirSmash_Coll(HSD_GObj*);
+void ftSs_SpecialAirSSmash_Coll(HSD_GObj*);
 void ftSs_SpecialHi_Anim(HSD_GObj*);
 void ftSs_SpecialHi_IASA(HSD_GObj*);
 void ftSs_SpecialHi_Phys(HSD_GObj*);
