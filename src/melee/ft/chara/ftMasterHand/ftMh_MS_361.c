@@ -95,16 +95,16 @@ void ftMh_MS_362_80152E28(HSD_GObj* gobj)
 
     {
         Vec3 vec;
-        lb_8000B1CC(fp->ft_bones[11].x0_jobj, 0, &vec);
+        lb_8000B1CC(fp->parts[11].x0_jobj, 0, &vec);
         fp->mv.mh.unk0.x34 =
             it_802F0340(gobj, &vec, &vec, 11, 125, fp->facing_dir);
-        lb_8000B1CC(fp->ft_bones[16].x0_jobj, 0, &vec);
+        lb_8000B1CC(fp->parts[16].x0_jobj, 0, &vec);
         fp->mv.mh.unk0.x38 =
             it_802F0340(gobj, &vec, &vec, 16, 125, fp->facing_dir);
-        lb_8000B1CC(fp->ft_bones[21].x0_jobj, 0, &vec);
+        lb_8000B1CC(fp->parts[21].x0_jobj, 0, &vec);
         fp->mv.mh.unk0.x3C =
             it_802F0340(gobj, &vec, &vec, 21, 125, fp->facing_dir);
-        lb_8000B1CC(fp->ft_bones[26].x0_jobj, 0, &vec);
+        lb_8000B1CC(fp->parts[26].x0_jobj, 0, &vec);
         fp->mv.mh.unk0.x40 =
             it_802F0340(gobj, &vec, &vec, 26, 125, fp->facing_dir);
         fp->mv.mh.unk0.x28 = lbAudioAx_800237A8(320004, 127, 64);

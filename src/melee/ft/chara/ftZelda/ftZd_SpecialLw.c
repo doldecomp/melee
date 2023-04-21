@@ -24,7 +24,7 @@ void ftZd_SpecialLw_8013ADB4(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
-        efSync_Spawn(0x4FC, gobj, fp->ft_bones[0x68].x0_jobj);
+        efSync_Spawn(0x4FC, gobj, fp->parts[0x68].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
     }
 
@@ -41,7 +41,7 @@ void ftZd_SpecialLw_8013AE30(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
-        efSync_Spawn(0x4FD, gobj, fp->ft_bones[4].x0_jobj);
+        efSync_Spawn(0x4FD, gobj, fp->parts[4].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
     }
 
@@ -79,7 +79,7 @@ static void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* gobj)
     fp->x80_self_vel.y = fp->x80_self_vel.y / attributes->x74;
     fp->gr_vel = fp->gr_vel / attributes->x70;
 
-    lb_8000B1CC(fp->ft_bones[0].x0_jobj, NULL, &sp20);
+    lb_8000B1CC(fp->parts[0].x0_jobj, NULL, &sp20);
     lb_800119DC(&sp20, 0x78, 0.4, 0.003, 60 * M_PI / 180);
 
     fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialLw_8013ADB4;

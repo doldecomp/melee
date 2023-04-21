@@ -29,7 +29,7 @@ void ftFx_SpecialLw_CreateLoopGFX(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (fp->x2219_flag.bits.b0 == false) {
-        efSync_Spawn(0x488, gobj, fp->ft_bones[4].x0_jobj);
+        efSync_Spawn(0x488, gobj, fp->parts[4].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 
@@ -44,7 +44,7 @@ void ftFx_SpecialLw_CreateStartGFX(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (fp->x2219_flag.bits.b0 == false) {
-        efSync_Spawn(0x489, gobj, fp->ft_bones[4].x0_jobj);
+        efSync_Spawn(0x489, gobj, fp->parts[4].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 
@@ -58,7 +58,7 @@ void ftFx_SpecialLw_CreateReflectGFX(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (fp->x2219_flag.bits.b0 == false) {
-        efSync_Spawn(0x48A, gobj, fp->ft_bones[4].x0_jobj);
+        efSync_Spawn(0x48A, gobj, fp->parts[4].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
         fp->x2219_flag.bits.b0 = true;
     }
@@ -911,7 +911,7 @@ void ftFx_SpecialLwHit_Enter(HSD_GObj* gobj)
 
     fp->facing_dir = fp->ReflectAttr.x1A2C_reflectHitDirection;
 
-    lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, NULL, &sp14);
+    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, 4)].x0_jobj, NULL, &sp14);
 
     lb_800119DC(&sp14, 0x78, 3.0f, 0.10000000149011612f, 1.0471975803375244f);
 

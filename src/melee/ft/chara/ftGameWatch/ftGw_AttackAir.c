@@ -24,7 +24,7 @@ void ftGw_AttackAirN_ItemParachuteSetup(HSD_GObj* gobj)
     if (fp->fv.gw.x2258_parachuteGObj != NULL) {
         ftGw_AttackAirN_ItemParachuteOnLand(gobj);
     } else {
-        lb_8000B1CC(fp->ft_bones[1].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->parts[1].x0_jobj, NULL, &sp10);
         fp->fv.gw.x2258_parachuteGObj =
             it_802C6C38(gobj, &sp10, 1, fp->facing_dir);
         if (fp->fv.gw.x2258_parachuteGObj != NULL) {
@@ -114,7 +114,7 @@ void ftGw_AttackAirN_ItemTurtleSetup(HSD_GObj* gobj)
     if (fp->fv.gw.x225C_turtleGObj != NULL) {
         ftGw_AttackAirN_ItemTurtleOnLand(gobj);
     } else {
-        lb_8000B1CC(fp->ft_bones[0x11].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->parts[0x11].x0_jobj, NULL, &sp10);
         fp->fv.gw.x225C_turtleGObj =
             it_802C6F40(gobj, &sp10, 0x11, fp->facing_dir);
         if (fp->fv.gw.x225C_turtleGObj != NULL) {
@@ -203,7 +203,7 @@ void ftGw_AttackAirN_ItemSparkySetup(HSD_GObj* gobj)
     if (fp->fv.gw.x2260_sparkyGObj != NULL) {
         ftGw_AttackAirN_ItemSparkyOnLand(gobj);
     } else {
-        lb_8000B1CC(fp->ft_bones[0x15].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->parts[0x15].x0_jobj, NULL, &sp10);
         fp->fv.gw.x2260_sparkyGObj =
             it_802C720C(gobj, &sp10, 0x15, fp->facing_dir);
         if (fp->fv.gw.x2260_sparkyGObj != NULL) {

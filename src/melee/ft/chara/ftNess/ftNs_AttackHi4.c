@@ -173,12 +173,12 @@ void ftNs_AttackHi4_YoyoSetUnkPos(HSD_GObj* gobj, Vec3* pos)
 #endif
 
     if (!fp->mv.ns.attackhi4.isPosUpdateMod) {
-        lb_8000B1CC(fp->ft_bones[0x3D].x0_jobj, NULL, pos);
+        lb_8000B1CC(fp->parts[0x3D].x0_jobj, NULL, pos);
         return;
     }
 
-    lb_8000B1CC(fp->ft_bones[0x3D].x0_jobj, NULL, &sp20);
-    lb_8000B1CC(fp->ft_bones[0x2].x0_jobj, NULL, &sp14);
+    lb_8000B1CC(fp->parts[0x3D].x0_jobj, NULL, &sp20);
+    lb_8000B1CC(fp->parts[0x2].x0_jobj, NULL, &sp14);
     *pos = sp20;
     lbVector_Sub(pos, &sp14);
     lbVector_Rotate(pos, 4,
@@ -208,10 +208,10 @@ void ftNs_AttackHi4_YoyoSetHitPos(HSD_GObj* gobj)
     collData = &fp->x6F0_collData;
 
     if (!fp->mv.ns.attackhi4.isPosUpdateMod) {
-        lb_8000B1CC(fp->ft_bones[0x3D].x0_jobj, NULL, &sp2C);
+        lb_8000B1CC(fp->parts[0x3D].x0_jobj, NULL, &sp2C);
     } else {
-        lb_8000B1CC(fp->ft_bones[0x3D].x0_jobj, NULL, &sp14);
-        lb_8000B1CC(fp->ft_bones[0x2].x0_jobj, NULL, &sp20);
+        lb_8000B1CC(fp->parts[0x3D].x0_jobj, NULL, &sp14);
+        lb_8000B1CC(fp->parts[0x2].x0_jobj, NULL, &sp20);
         sp2C = sp14;
         lbVector_Sub(&sp2C, &sp20);
         lbVector_Rotate(&sp2C, 4,
@@ -244,10 +244,10 @@ void ftNs_AttackHi4_YoyoSetHitPosUnk(HSD_GObj* gobj, f32 pos_unk)
     collData = &fp->x6F0_collData;
 
     if (!fp->mv.ns.attackhi4.isPosUpdateMod) {
-        lb_8000B1CC(fp->ft_bones[0x3D].x0_jobj, NULL, &sp3C);
+        lb_8000B1CC(fp->parts[0x3D].x0_jobj, NULL, &sp3C);
     } else {
-        lb_8000B1CC(fp->ft_bones[0x3D].x0_jobj, NULL, &sp18);
-        lb_8000B1CC(fp->ft_bones[0x2].x0_jobj, NULL, &sp24);
+        lb_8000B1CC(fp->parts[0x3D].x0_jobj, NULL, &sp18);
+        lb_8000B1CC(fp->parts[0x2].x0_jobj, NULL, &sp24);
         sp3C = sp18;
         lbVector_Sub(&sp3C, &sp24);
         lbVector_Rotate(&sp3C, 4,
@@ -567,7 +567,7 @@ void ftNs_AttackHi4_YoyoCreateItem(HSD_GObj* gobj)
     Vec3 sp10;
     Fighter* fp = GET_FIGHTER(gobj);
 
-    lb_8000B1CC(fp->ft_bones[0x2A].x0_jobj, NULL, &sp10);
+    lb_8000B1CC(fp->parts[0x2A].x0_jobj, NULL, &sp10);
     fp->fv.ns.yoyo_gobj =
         it_802BE9D8(fp->facing_dir, gobj, &sp10, fp->motion_id);
     fp->x1984_heldItemSpec = fp->fv.ns.yoyo_gobj;

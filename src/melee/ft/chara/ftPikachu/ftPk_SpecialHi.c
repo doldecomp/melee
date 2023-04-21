@@ -182,8 +182,7 @@ void ftPk_SpecialHi_Anim(HSD_GObj* gobj)
         ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(gobj);
         fp = GET_FIGHTER(gobj);
         if (fp->x4_fighterKind != FTKIND_PICHU) {
-            lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 2)].x0_jobj, 0,
-                        &vec);
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, 2)].x0_jobj, 0, &vec);
             efSync_Spawn(0x3F4, gobj, &vec);
             fp->x2219_flag.bits.b0 = 1;
             fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
@@ -193,8 +192,7 @@ void ftPk_SpecialHi_Anim(HSD_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         if (fp->x4_fighterKind != FTKIND_PICHU) {
             f32 tempf;
-            lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 2)].x0_jobj, 0,
-                        &vec2);
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, 2)].x0_jobj, 0, &vec2);
             tempf = HSD_Randf();
             vec2.x += (6.0f * tempf) - 3.0f;
             tempf = HSD_Randf();
@@ -224,8 +222,7 @@ void ftPk_SpecialAirHi_Anim(HSD_GObj* gobj)
         ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
         fp = GET_FIGHTER(gobj);
         if (fp->x4_fighterKind != FTKIND_PICHU) {
-            lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 2)].x0_jobj, 0,
-                        &vec);
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, 2)].x0_jobj, 0, &vec);
             efSync_Spawn(0x3F4, gobj, &vec);
             fp->x2219_flag.bits.b0 = 1;
             fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
@@ -235,8 +232,7 @@ void ftPk_SpecialAirHi_Anim(HSD_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         if (fp->x4_fighterKind != FTKIND_PICHU) {
             f32 tempf;
-            lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 2)].x0_jobj, 0,
-                        &vec2);
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, 2)].x0_jobj, 0, &vec2);
             tempf = HSD_Randf();
             vec2.x += (10.0f * tempf) - 5.0f;
             tempf = HSD_Randf();
@@ -271,7 +267,7 @@ void ftPk_SpecialHi_8012642C(HSD_GObj* gobj)
     scale.x = pika_attr->x7C_scale.x;
     scale.y = pika_attr->x7C_scale.y;
     scale.z = pika_attr->x7C_scale.z;
-    jobj = fp->ft_bones[ftParts_8007500C(fp, 2)].x0_jobj;
+    jobj = fp->parts[ftParts_8007500C(fp, 2)].x0_jobj;
     HSD_JObjSetScale(jobj, &scale);
 
     velocity_vec = fp->x80_self_vel;
@@ -349,7 +345,7 @@ void ftPk_SpecialHi_Coll(HSD_GObj* gobj)
         scale.x = pika_attr->x6C_scale.x;
         scale.y = pika_attr->x6C_scale.y;
         scale.z = pika_attr->x6C_scale.z;
-        jobj = fighter2->ft_bones[ftParts_8007500C(fighter2, 2)].x0_jobj;
+        jobj = fighter2->parts[ftParts_8007500C(fighter2, 2)].x0_jobj;
         HSD_JObjSetScale(jobj, &scale);
     }
 
@@ -488,7 +484,7 @@ void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
     scale.x = pika_attr->x6C_scale.x;
     scale.y = pika_attr->x6C_scale.y;
     scale.z = pika_attr->x6C_scale.z;
-    jobj = fp->ft_bones[ftParts_8007500C(fp, 2)].x0_jobj;
+    jobj = fp->parts[ftParts_8007500C(fp, 2)].x0_jobj;
     HSD_JObjSetScale(jobj, &scale);
 }
 

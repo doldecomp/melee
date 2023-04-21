@@ -142,11 +142,11 @@ void ftLg_SpecialN_FireSpawn(HSD_GObj* gobj)
     }
 
     if (flag != false) {
-        lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x17)].x0_jobj, NULL,
+        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, 0x17)].x0_jobj, NULL,
                     &sp10);
         it_802C01AC(gobj, &sp10, It_Kind_Luigi_Fire, fp->facing_dir);
         efSync_Spawn(0x507, gobj,
-                     fp->ft_bones[ftParts_8007500C(fp, 0x17)].x0_jobj,
+                     fp->parts[ftParts_8007500C(fp, 0x17)].x0_jobj,
                      &fp->facing_dir);
     }
 }

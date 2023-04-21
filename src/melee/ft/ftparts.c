@@ -1172,12 +1172,12 @@ void ftParts_SetupParts(HSD_GObj* fighter_obj)
 
     while (jobj != NULL) {
         if (ftParts_8007506C(fighter->x4_fighterKind, part) != 0) {
-            fighter->ft_bones[part].x0_jobj = NULL;
+            fighter->parts[part].x0_jobj = NULL;
             part++;
             continue;
         }
 
-        ftParts_80074194(fighter, &fighter->ft_bones[part], jobj, &dobj_count,
+        ftParts_80074194(fighter, &fighter->parts[part], jobj, &dobj_count,
                          tree_depth);
         part++;
 

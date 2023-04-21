@@ -229,13 +229,13 @@ void ftMh_MS_365_801535B0(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
 
     if (fp->x2200_ftcmd_var0 != 0) {
-        ftMh_MS_365_8015364C(gobj, fp->ft_bones[LKneeJ].x0_jobj, attr->xF8,
+        ftMh_MS_365_8015364C(gobj, fp->parts[FtPart_LKneeJ].x0_jobj, attr->xF8,
                              attr->xFC);
         fp->x2200_ftcmd_var0 = 0;
     }
     if (fp->x2204_ftcmd_var1 != 0) {
-        ftMh_MS_365_8015364C(gobj, fp->ft_bones[RKneeJ].x0_jobj, attr->x100,
-                             attr->x104);
+        ftMh_MS_365_8015364C(gobj, fp->parts[FtPart_RKneeJ].x0_jobj,
+                             attr->x100, attr->x104);
         fp->x2204_ftcmd_var1 = 0;
     }
 }

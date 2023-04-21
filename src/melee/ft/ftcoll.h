@@ -15,7 +15,8 @@ void ftColl_80076444(HSD_GObj* attacker,
 void ftColl_8007646C(HSD_GObj* attackItem,
                      HSD_GObj* victim); // Combo Count Logic w/ Item Owner
 void ftColl_800764DC(HSD_GObj* gobj);   // Check to end combo for victim
-void ftColl_80076528(HSD_GObj* gobj);   // Combo count something + adjust TopN
+void ftColl_80076528(
+    HSD_GObj* gobj); // Combo count something + adjust FtPart_TopN
 void ftColl_800765AC(HSD_GObj* victim); // Clear victim pointer from attacker
                                         // upon freeing memory?
 void ftColl_800765E0(void); // Reset hitbox and phantom collision count?

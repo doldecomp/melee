@@ -163,7 +163,7 @@ void ftPk_SpecialN_SpawnEffect0(HSD_GObj* gobj)
     if (!fp->x2219_flag.bits.b0) {
         s32 index = ftParts_8007500C(fp, 4);
         tempObj = gobj;
-        efSync_Spawn(0x4BE, tempObj2 = tempObj, fp->ft_bones[index].x0_jobj);
+        efSync_Spawn(0x4BE, tempObj2 = tempObj, fp->parts[index].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
     }
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
@@ -181,7 +181,7 @@ void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
     if (!fp->x2219_flag.bits.b0) {
         s32 index = ftParts_8007500C(fp, 4);
         tempObj = gobj;
-        efSync_Spawn(0x4BF, tempObj2 = tempObj, fp->ft_bones[index].x0_jobj);
+        efSync_Spawn(0x4BF, tempObj2 = tempObj, fp->parts[index].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
     }
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;

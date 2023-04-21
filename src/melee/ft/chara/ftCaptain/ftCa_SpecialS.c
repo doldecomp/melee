@@ -52,12 +52,12 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
 
     switch (ftLib_800872A4(gobj)) {
     case FTKIND_CAPTAIN:
-        efSync_Spawn(1169, gobj, fp->ft_bones[HeadN].x0_jobj);
+        efSync_Spawn(1169, gobj, fp->parts[FtPart_HeadN].x0_jobj);
         fp->fv.ca.during_specials_start = true;
         break;
 
     case FTKIND_GANON:
-        efSync_Spawn(1293, gobj, fp->ft_bones[L2ndNb].x0_jobj);
+        efSync_Spawn(1293, gobj, fp->parts[FtPart_L2ndNb].x0_jobj);
         fp->fv.ca.during_specials_start = true;
         break;
     }
@@ -92,11 +92,11 @@ static inline void setupAirStart(HSD_GObj* gobj)
 
     switch (ftLib_800872A4(gobj)) {
     case FTKIND_CAPTAIN:
-        efSync_Spawn(1169, gobj, fp->ft_bones[HeadN].x0_jobj);
+        efSync_Spawn(1169, gobj, fp->parts[FtPart_HeadN].x0_jobj);
         fp->fv.ca.during_specials_start = true;
         break;
     case FTKIND_GANON:
-        efSync_Spawn(1293, gobj, fp->ft_bones[L2ndNb].x0_jobj);
+        efSync_Spawn(1293, gobj, fp->parts[FtPart_L2ndNb].x0_jobj);
         fp->fv.ca.during_specials_start = true;
         break;
     }
@@ -221,13 +221,13 @@ void ftCa_SpecialS_Anim(HSD_GObj* gobj)
     if (!fp->fv.ca.during_specials) {
         switch (ftLib_800872A4(gobj)) {
         case FTKIND_CAPTAIN:
-            efSync_Spawn(1170, gobj, fp->ft_bones[TransN].x0_jobj,
+            efSync_Spawn(1170, gobj, fp->parts[FtPart_TransN].x0_jobj,
                          &fp->facing_dir);
             fp->fv.ca.during_specials = true;
             break;
 
         case FTKIND_GANON:
-            efSync_Spawn(1294, gobj, fp->ft_bones[TransN].x0_jobj,
+            efSync_Spawn(1294, gobj, fp->parts[FtPart_TransN].x0_jobj,
                          &fp->facing_dir);
             fp->fv.ca.during_specials = true;
             break;
@@ -276,13 +276,13 @@ void ftCa_SpecialAirS_Anim(HSD_GObj* gobj)
     if (!fp->fv.ca.during_specials) {
         switch (ftLib_800872A4(gobj)) {
         case FTKIND_CAPTAIN:
-            efSync_Spawn(1171, gobj, fp->ft_bones[TransN].x0_jobj,
+            efSync_Spawn(1171, gobj, fp->parts[FtPart_TransN].x0_jobj,
                          &fp->facing_dir);
             fp->fv.ca.during_specials = true;
             break;
 
         case FTKIND_GANON:
-            efSync_Spawn(1295, gobj, fp->ft_bones[TransN].x0_jobj,
+            efSync_Spawn(1295, gobj, fp->parts[FtPart_TransN].x0_jobj,
                          &fp->facing_dir);
             fp->fv.ca.during_specials = true;
             break;

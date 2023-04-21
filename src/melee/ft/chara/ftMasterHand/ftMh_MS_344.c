@@ -14,7 +14,7 @@ bool ftMh_MS_343_80151428(Vec3* vec)
     HSD_GObj* gobj = ftBossLib_8015C3E8(27);
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
-        lb_8000B1CC(fp->ft_bones[WaistN].x0_jobj, 0, vec);
+        lb_8000B1CC(fp->parts[FtPart_WaistN].x0_jobj, 0, vec);
         return true;
     }
     return false;

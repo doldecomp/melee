@@ -146,10 +146,10 @@ void ftDk_SpecialNEarlyRelease_Anim(HSD_GObj* gobj)
     if (fp->mv.dk.specialn.x8 == 1) {
         fp->mv.dk.specialn.x8++;
         if (fp->ground_or_air == GA_Air) {
-            efSync_Spawn(1225, gobj, fp->ft_bones[TopN].x0_jobj,
+            efSync_Spawn(1225, gobj, fp->parts[FtPart_TopN].x0_jobj,
                          &fp->facing_dir);
         } else {
-            efSync_Spawn(1224, gobj, fp->ft_bones[TopN].x0_jobj,
+            efSync_Spawn(1224, gobj, fp->parts[FtPart_TopN].x0_jobj,
                          &fp->facing_dir);
         }
     }
@@ -200,10 +200,10 @@ void ftDk_SpecialNFullRelease_Anim(HSD_GObj* gobj)
     if (fp->mv.dk.specialn.x8 == 1) {
         fp->mv.dk.specialn.x8++;
         if (fp->ground_or_air == GA_Air) {
-            efSync_Spawn(1225, gobj, fp->ft_bones[TopN].x0_jobj,
+            efSync_Spawn(1225, gobj, fp->parts[FtPart_TopN].x0_jobj,
                          &fp->facing_dir);
         } else {
-            efSync_Spawn(1224, gobj, fp->ft_bones[TopN].x0_jobj,
+            efSync_Spawn(1224, gobj, fp->parts[FtPart_TopN].x0_jobj,
                          &fp->facing_dir);
         }
     }
@@ -276,10 +276,10 @@ void ftDk_SpecialAirNEarlyRelease_Anim(HSD_GObj* gobj)
     if (fp->mv.dk.specialn.x8 == 1) {
         fp->mv.dk.specialn.x8++;
         if (fp->ground_or_air == GA_Air) {
-            efSync_Spawn(1225, gobj, fp->ft_bones[TopN].x0_jobj,
+            efSync_Spawn(1225, gobj, fp->parts[FtPart_TopN].x0_jobj,
                          &fp->facing_dir);
         } else {
-            efSync_Spawn(1224, gobj, fp->ft_bones[TopN].x0_jobj,
+            efSync_Spawn(1224, gobj, fp->parts[FtPart_TopN].x0_jobj,
                          &fp->facing_dir);
         }
     }
@@ -330,10 +330,10 @@ void ftDk_SpecialAirNFullRelease_Anim(HSD_GObj* gobj)
     if (fp->mv.dk.specialn.x8 == 1) {
         fp->mv.dk.specialn.x8++;
         if (fp->ground_or_air == GA_Air) {
-            efSync_Spawn(1225, gobj, fp->ft_bones[TopN].x0_jobj,
+            efSync_Spawn(1225, gobj, fp->parts[FtPart_TopN].x0_jobj,
                          &fp->facing_dir);
         } else {
-            efSync_Spawn(1224, gobj, fp->ft_bones[TopN].x0_jobj,
+            efSync_Spawn(1224, gobj, fp->parts[FtPart_TopN].x0_jobj,
                          &fp->facing_dir);
         }
     }

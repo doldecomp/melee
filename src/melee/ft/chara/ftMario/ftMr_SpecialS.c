@@ -43,7 +43,7 @@ void ftMr_SpecialS_CreateCape(HSD_GObj* gobj)
 #endif
 
         fp->x2208_ftcmd_var2 = true;
-        lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 49)].x0_jobj, NULL,
+        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, 49)].x0_jobj, NULL,
                     &coords);
 
         {
@@ -204,7 +204,7 @@ void ftMr_SpecialS_Phys(HSD_GObj* gobj)
 
         if (fp->x2200_ftcmd_var0 == 1U) {
             fp->x2200_ftcmd_var0 = 2U;
-            lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, NULL,
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, 4)].x0_jobj, NULL,
                         &coords);
 
             coords.x += 3 * fp->facing_dir;
@@ -249,7 +249,7 @@ void ftMr_SpecialAirS_Phys(HSD_GObj* gobj)
             } else {
                 fp->x80_self_vel.y = 0;
             }
-            lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, NULL,
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, 4)].x0_jobj, NULL,
                         &coords);
             coords.x += 3 * fp->facing_dir;
             lb_800119DC(&coords, 120, 3, 0.1, M_PI_3);

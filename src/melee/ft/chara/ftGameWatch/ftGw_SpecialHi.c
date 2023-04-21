@@ -29,7 +29,7 @@ void ftGw_SpecialHi_ItemRescueSetup(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (fp->fv.gw.x226C_rescueGObj == NULL) {
-        lb_8000B1CC(fp->ft_bones[0].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->parts[0].x0_jobj, NULL, &sp10);
         sp10.y = -((2.5f * ftCommon_GetModelScale(fp)) - sp10.y);
         rescueGObj = it_802C8038(gobj, &sp10, 0, fp->motion_id - 0x175,
                                  fp->facing_dir, 2.5f);

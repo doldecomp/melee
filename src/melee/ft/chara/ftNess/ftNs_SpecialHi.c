@@ -772,8 +772,7 @@ void ftNs_SpecialHiStart_Anim(HSD_GObj* gobj)
             Fighter* fighter_data2 = gobj->user_data;
             HSD_GObj* pkt_ptr = fighter_data2->fv.ns.pkthunder_gobj;
             if (pkt_ptr == NULL) {
-                lb_8000B1CC(fighter_data2->ft_bones[24].x0_jobj, NULL,
-                            &pkt_pos);
+                lb_8000B1CC(fighter_data2->parts[24].x0_jobj, NULL, &pkt_pos);
 
                 pkt_pos.z = 0.0f;
 
@@ -797,7 +796,7 @@ void ftNs_SpecialHiStart_Anim(HSD_GObj* gobj)
 
         ftNs_SpecialHiStopGFX(gobj);
 
-        efSync_Spawn(0x4EE, gobj, fp->ft_bones[4].x0_jobj);
+        efSync_Spawn(0x4EE, gobj, fp->parts[4].x0_jobj);
 
         fp->fv.ns.pkthunder_gfx = true;
     }
@@ -904,7 +903,7 @@ void ftNs_SpecialHi_Anim(HSD_GObj* gobj)
         if (temp_fp->mv.ns.specialhi.jibakuGFX == 1) {
             Fighter* fp = gobj->user_data;
             ftNs_SpecialHiStopGFX(gobj);
-            efSync_Spawn(0x4EF, gobj, fp->ft_bones[4].x0_jobj);
+            efSync_Spawn(0x4EF, gobj, fp->parts[4].x0_jobj);
             fp->fv.ns.pkthunder_gfx = true;
         }
     }
@@ -955,7 +954,7 @@ void ftNs_SpecialAirHiStart_Anim(HSD_GObj* gobj)
             pkt_ptr = fp2->fv.ns.pkthunder_gobj;
 
             if (pkt_ptr == 0) {
-                lb_8000B1CC(fp2->ft_bones[24].x0_jobj, NULL, &pkt_pos);
+                lb_8000B1CC(fp2->parts[24].x0_jobj, NULL, &pkt_pos);
 
                 pkt_pos.z = 0.0f;
 
@@ -976,7 +975,7 @@ void ftNs_SpecialAirHiStart_Anim(HSD_GObj* gobj)
 
         ftNs_SpecialHiStopGFX(gobj);
 
-        efSync_Spawn(0x4EE, gobj, fp->ft_bones[4].x0_jobj);
+        efSync_Spawn(0x4EE, gobj, fp->parts[4].x0_jobj);
 
         fp->fv.ns.pkthunder_gfx = true;
     }
@@ -1125,7 +1124,7 @@ void ftNs_SpecialAirHi_Anim(HSD_GObj* gobj)
     if (fp1->mv.ns.specialhi.jibakuGFX == 1) {
         fp0 = gobj->user_data;
         ftNs_SpecialHiStopGFX(gobj);
-        efSync_Spawn(0x4EF, gobj, fp0->ft_bones[4].x0_jobj);
+        efSync_Spawn(0x4EF, gobj, fp0->parts[4].x0_jobj);
         fp0->fv.ns.pkthunder_gfx = true;
     }
 

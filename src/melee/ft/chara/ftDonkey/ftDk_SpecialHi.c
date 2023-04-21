@@ -35,7 +35,7 @@ void ftDk_SpecialHi_Enter(HSD_GObj* gobj)
     fp->x80_self_vel.y = 0;
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
     ftAnim_8006EBA4(gobj);
-    efSync_Spawn(1226, gobj, fp->ft_bones[TopN].x0_jobj);
+    efSync_Spawn(1226, gobj, fp->parts[FtPart_TopN].x0_jobj);
 }
 
 void ftDk_SpecialAirHi_Enter(HSD_GObj* gobj)
@@ -55,7 +55,7 @@ void ftDk_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->x80_self_vel.y = donkey_attr->SpecialHi.x4C_AERIAL_VERTICAL_VELOCITY;
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
     ftAnim_8006EBA4(gobj);
-    efSync_Spawn(1226, gobj, fp->ft_bones[TopN].x0_jobj);
+    efSync_Spawn(1226, gobj, fp->parts[FtPart_TopN].x0_jobj);
 }
 
 void ftDk_SpecialHi_Anim(HSD_GObj* gobj)

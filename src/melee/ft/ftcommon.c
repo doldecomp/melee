@@ -1141,14 +1141,14 @@ void ftCommon_8007E358(HSD_GObj* gobj)
 {
     HSD_JObj* jobj;
     Fighter* fp = gobj->user_data;
-    jobj = fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj;
+    jobj = fp->parts[ftParts_8007500C(fp, 4)].x0_jobj;
     HSD_JObjGetTranslation(jobj, &fp->x1A7C);
 }
 
 void ftCommon_8007E3EC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    HSD_JObj* jobj = fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj;
+    HSD_JObj* jobj = fp->parts[ftParts_8007500C(fp, 4)].x0_jobj;
     Vec3 sp10;
 
     /// @todo Unused stack.

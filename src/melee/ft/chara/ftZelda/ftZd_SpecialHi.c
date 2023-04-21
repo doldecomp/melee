@@ -32,12 +32,12 @@ void ftZd_SpecialHi_801396E0(HSD_GObj* gobj)
 
     if (!fp->x2219_flag.bits.b0) {
         Vec3 vec;
-        lb_8000B1CC(fp->ft_bones[4].x0_jobj, NULL, &vec);
+        lb_8000B1CC(fp->parts[4].x0_jobj, NULL, &vec);
 
         if (fp->ground_or_air == GA_Ground) {
-            efSync_Spawn(0x4F6, gobj, fp->ft_bones->x0_jobj);
+            efSync_Spawn(0x4F6, gobj, fp->parts->x0_jobj);
         } else {
-            efSync_Spawn(0x4F7, gobj, fp->ft_bones->x0_jobj);
+            efSync_Spawn(0x4F7, gobj, fp->parts->x0_jobj);
         }
 
         fp->x2219_flag.bits.b0 = true;
@@ -53,7 +53,7 @@ void ftZd_SpecialHi_8013979C(HSD_GObj* gobj)
 
     {
         Vec3 vec;
-        lb_8000B1CC(fp->ft_bones[4].x0_jobj, NULL, &vec);
+        lb_8000B1CC(fp->parts[4].x0_jobj, NULL, &vec);
 
         if (!fp->x2219_flag.bits.b0) {
             efSync_Spawn(0x505, gobj, &vec);
@@ -76,7 +76,7 @@ static void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
 
     {
         ssize_t boneIndex = ftParts_8007500C(fp, 4);
-        HSD_JObj* jObj = fp->ft_bones[boneIndex].x0_jobj;
+        HSD_JObj* jObj = fp->parts[boneIndex].x0_jobj;
 
         {
             Vec3 vec;
@@ -134,7 +134,7 @@ void ftZd_SpecialAirHi_Enter(HSD_GObj* gobj)
 #endif
 
             ssize_t boneIndex = ftParts_8007500C(fp, 4);
-            HSD_JObj* jObj = fp->ft_bones[boneIndex].x0_jobj;
+            HSD_JObj* jObj = fp->parts[boneIndex].x0_jobj;
 
             lb_8000B1CC(jObj, NULL, &vec);
             lb_800119DC(&vec, 120, 1.5, 0.02, 60 * (f32) M_PI / 180);

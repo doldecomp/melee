@@ -34,8 +34,7 @@ void ftFx_SpecialHi_CreateLaunchGFX(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2219_flag.bits.b0 == false) {
-        efSync_Spawn(0x48C, gobj,
-                     fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj);
+        efSync_Spawn(0x48C, gobj, fp->parts[ftParts_8007500C(fp, 4)].x0_jobj);
 
         fp->x2219_flag.bits.b0 = true;
     }
@@ -50,8 +49,7 @@ void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2219_flag.bits.b0 == false) {
-        efSync_Spawn(0x48B, gobj,
-                     fp->ft_bones[ftParts_8007500C(fp, 1)].x0_jobj);
+        efSync_Spawn(0x48B, gobj, fp->parts[ftParts_8007500C(fp, 1)].x0_jobj);
 
         fp->x2219_flag.bits.b0 = true;
     }

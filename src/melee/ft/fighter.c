@@ -571,14 +571,14 @@ void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp)
 {
     Vec3 vec;
     Vec3 vec2;
-    HSD_JObj* jobj = fp->ft_bones[ftParts_8007500C(fp, 2)].x0_jobj;
+    HSD_JObj* jobj = fp->parts[ftParts_8007500C(fp, 2)].x0_jobj;
 
     HSD_JObjGetTranslation(jobj, &vec);
 
     fp->x1A6C = (vec.y / 8.55f);
 
     lb_8000B1CC(jobj, 0, &vec);
-    lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 1)].x0_jobj, 0, &vec2);
+    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, 1)].x0_jobj, 0, &vec2);
     fp->x1A70.x = vec2.x - vec.x;
     fp->x1A70.y = vec2.y - vec.y;
     fp->x1A70.z = vec2.z - vec.z;
@@ -1298,13 +1298,13 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
 
                 ftAnim_8006E9B4(gobj);
                 if ((bone_index != 0) && (*unk_byte_ptr != 0U)) {
-                    HSD_JObj* temp_joint = fp->ft_bones[bone_index].x4_jobj2;
+                    HSD_JObj* temp_joint = fp->parts[bone_index].x4_jobj2;
 
                     HSD_JObjGetTranslation(temp_joint, &translation);
-                    HSD_JObjSetTranslate(fp->ft_bones[bone_index].x0_jobj,
+                    HSD_JObjSetTranslate(fp->parts[bone_index].x0_jobj,
                                          &translation);
                     HSD_JObjGetRotation(temp_joint, &quat);
-                    ftParts_JObjSetRotation(fp->ft_bones[bone_index].x0_jobj,
+                    ftParts_JObjSetRotation(fp->parts[bone_index].x0_jobj,
                                             &quat);
                 }
 
@@ -3137,7 +3137,7 @@ void Fighter_Unload_8006DABC(void* user_data)
 
     HSD_ObjFree(&Fighter_804590AC, fp->x59C);
     HSD_ObjFree(&Fighter_804590AC, fp->x5A0);
-    HSD_ObjFree(&fighter_bones_alloc_data, fp->ft_bones);
+    HSD_ObjFree(&fighter_bones_alloc_data, fp->parts);
     HSD_ObjFree(&Fighter_80459054, fp->dobj_list.data);
     HSD_ObjFree(&Fighter_80459080, fp->x2040);
     HSD_ObjFree(&Fighter_80458FFC, fp->x2D8_specialAttributes2);

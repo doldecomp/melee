@@ -171,8 +171,8 @@ static void ftGw_SpecialN_CreateSausage(HSD_GObj* gobj)
             sp38.x = 2.5f;
             sp38.y = 6.5f;
             sp38.z = 0.0f;
-            lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x1F)].x0_jobj,
-                        &sp38, &sp44);
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, 0x1F)].x0_jobj, &sp38,
+                        &sp44);
             temp_fp = GET_FIGHTER(gobj);
             i = 5;
             for (i -= 5; i < 5; i++) {

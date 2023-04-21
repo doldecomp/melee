@@ -52,33 +52,33 @@ void ftSb_Init_OnLoad(HSD_GObj* gobj)
 
 void ftSb_Init_8014FA30(Fighter* fp)
 {
-    FighterBone* bones = fp->ft_bones;
+    FighterBone* bones = fp->parts;
     lb_8000C1C0(bones[5].x0_jobj, bones[12].x0_jobj);
-    bones = fp->ft_bones;
+    bones = fp->parts;
     lb_8000C1C0(bones[5].x4_jobj2, bones[12].x4_jobj2);
-    bones = fp->ft_bones;
+    bones = fp->parts;
     lb_8000C1C0(bones[5].x0_jobj, bones[17].x0_jobj);
-    bones = fp->ft_bones;
+    bones = fp->parts;
     lb_8000C1C0(bones[5].x4_jobj2, bones[17].x4_jobj2);
-    bones = fp->ft_bones;
+    bones = fp->parts;
     lb_8000C228(bones[7].x0_jobj, bones[37].x0_jobj);
-    bones = fp->ft_bones;
+    bones = fp->parts;
     lb_8000C228(bones[7].x4_jobj2, bones[37].x4_jobj2);
 
-    lb_8000C420(fp->ft_bones[7].x0_jobj, 1, -1.57079637f);
-    lb_8000C420(fp->ft_bones[7].x0_jobj, 2, -1.57079637f);
-    lb_8000C420(fp->ft_bones[7].x4_jobj2, 1, -1.57079637f);
-    lb_8000C420(fp->ft_bones[7].x4_jobj2, 2, -1.57079637f);
+    lb_8000C420(fp->parts[7].x0_jobj, 1, -1.57079637f);
+    lb_8000C420(fp->parts[7].x0_jobj, 2, -1.57079637f);
+    lb_8000C420(fp->parts[7].x4_jobj2, 1, -1.57079637f);
+    lb_8000C420(fp->parts[7].x4_jobj2, 2, -1.57079637f);
 
-    bones = fp->ft_bones;
+    bones = fp->parts;
     lb_8000C228(bones[6].x0_jobj, bones[5].x0_jobj);
-    bones = fp->ft_bones;
+    bones = fp->parts;
     lb_8000C228(bones[6].x4_jobj2, bones[5].x4_jobj2);
 
-    lb_8000C420(fp->ft_bones[6].x0_jobj, 1, -1.50098311f);
-    lb_8000C420(fp->ft_bones[6].x0_jobj, 2, -1.50098311f);
-    lb_8000C420(fp->ft_bones[6].x4_jobj2, 1, -1.50098311f);
-    lb_8000C420(fp->ft_bones[6].x4_jobj2, 2, -1.50098311f);
+    lb_8000C420(fp->parts[6].x0_jobj, 1, -1.50098311f);
+    lb_8000C420(fp->parts[6].x0_jobj, 2, -1.50098311f);
+    lb_8000C420(fp->parts[6].x4_jobj2, 1, -1.50098311f);
+    lb_8000C420(fp->parts[6].x4_jobj2, 2, -1.50098311f);
 }
 
 void ftSb_Init_LoadSpecialAttrs(HSD_GObj* gobj)

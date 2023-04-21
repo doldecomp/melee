@@ -107,12 +107,12 @@ void ftMr_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
     }
 
     if (flag_res != 0) {
-        lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x17)].x0_jobj, NULL,
+        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, 0x17)].x0_jobj, NULL,
                     &coords);
         if (fp->x4_fighterKind == FTKIND_MARIO) {
             it_8029B6F8(fp->facing_dir, gobj, &coords, 0x30);
             efSync_Spawn(0x47a, gobj,
-                         fp->ft_bones[ftParts_8007500C(fp, 0x17)].x0_jobj,
+                         fp->parts[ftParts_8007500C(fp, 0x17)].x0_jobj,
                          &fp->facing_dir);
         } else {
             rand_val_800E0D1C = ftMr_SpecialN_VitaminRandom(gobj);

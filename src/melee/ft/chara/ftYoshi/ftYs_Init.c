@@ -568,7 +568,7 @@ void ftYs_Init_8012BE3C(HSD_GObj* gobj) {
     x1CC = &fp->x110_attr.x1CC;
     bone_idx = ftParts_8007500C(fp, 4);
     fp2 = GET_FIGHTER(gobj);
-    jobj = fp->ft_bones[bone_idx].x0_jobj;
+    jobj = fp->parts[bone_idx].x0_jobj;
     efAsync_Spawn(gobj, &fp2->x60C, 4U, 0x4CF, jobj, x1CC);
 }
 

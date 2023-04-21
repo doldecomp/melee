@@ -102,7 +102,7 @@ void ftZd_SpecialSStart_Anim(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 == 1U && fp->fv.zd.x222C == 0U) {
         fp->x2200_ftcmd_var0 = 0U;
-        lb_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp24);
+        lb_8000B1CC(fp->parts[0x59].x0_jobj, NULL, &sp24);
 
         sp24.z = 0;
         temp_f2 = attributes->x20;
@@ -116,7 +116,7 @@ void ftZd_SpecialSStart_Anim(HSD_GObj* gobj)
             fp->cb.x21E4_callback_OnDeath2 = &ftZd_Init_801393AC;
             fp->cb.x21DC_callback_OnTakeDamage = &ftZd_Init_801393AC;
         }
-        efSync_Spawn(0x4FB, gobj, fp->ft_bones[0x4C].x0_jobj);
+        efSync_Spawn(0x4FB, gobj, fp->parts[0x4C].x0_jobj);
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -148,7 +148,7 @@ void ftZd_SpecialSHold_Anim(HSD_GObj* gobj)
 
     if ((fp->x2200_ftcmd_var0 == 1U) && (fp->fv.zd.x222C == 0U)) {
         fp->x2200_ftcmd_var0 = 0U;
-        lb_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp20);
+        lb_8000B1CC(fp->parts[0x59].x0_jobj, NULL, &sp20);
 
         sp20.z = 0;
         temp_f2 = attributes->x20;
@@ -162,7 +162,7 @@ void ftZd_SpecialSHold_Anim(HSD_GObj* gobj)
             fp->cb.x21E4_callback_OnDeath2 = &ftZd_Init_801393AC;
             fp->cb.x21DC_callback_OnTakeDamage = &ftZd_Init_801393AC;
         }
-        efSync_Spawn(0x4FB, gobj, fp->ft_bones[0x4C].x0_jobj);
+        efSync_Spawn(0x4FB, gobj, fp->parts[0x4C].x0_jobj);
     }
 
     if (fp->mv.zd.specials.x0 != 0) {
@@ -236,7 +236,7 @@ void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
     attributes = fp->x2D4_specialAttributes;
     if (fp->x2200_ftcmd_var0 == 1U && fp->fv.zd.x222C == 0U) {
         fp->x2200_ftcmd_var0 = 0U;
-        lb_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp24);
+        lb_8000B1CC(fp->parts[0x59].x0_jobj, NULL, &sp24);
 
         sp24.z = 0;
         temp_f2 = attributes->x20;
@@ -250,7 +250,7 @@ void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
             fp->cb.x21E4_callback_OnDeath2 = &ftZd_Init_801393AC;
             fp->cb.x21DC_callback_OnTakeDamage = &ftZd_Init_801393AC;
         }
-        efSync_Spawn(0x4FB, gobj, fp->ft_bones[0x4C].x0_jobj);
+        efSync_Spawn(0x4FB, gobj, fp->parts[0x4C].x0_jobj);
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -281,7 +281,7 @@ void ftZd_SpecialAirSHold_Anim(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 == 1U && fp->fv.zd.x222C == 0U) {
         fp->x2200_ftcmd_var0 = 0U;
-        lb_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp20);
+        lb_8000B1CC(fp->parts[0x59].x0_jobj, NULL, &sp20);
 
         sp20.z = 0;
         temp_f2 = attributes->x20;
@@ -295,7 +295,7 @@ void ftZd_SpecialAirSHold_Anim(HSD_GObj* gobj)
             fp->cb.x21E4_callback_OnDeath2 = &ftZd_Init_801393AC;
             fp->cb.x21DC_callback_OnTakeDamage = &ftZd_Init_801393AC;
         }
-        efSync_Spawn(0x4FB, gobj, fp->ft_bones[0x4C].x0_jobj);
+        efSync_Spawn(0x4FB, gobj, fp->parts[0x4C].x0_jobj);
     }
 
     if (fp->mv.zd.specials.x0 != 0) {

@@ -475,8 +475,8 @@ void ftPr_Init_UnkMtxFunc0(HSD_GObj* gobj, int arg1, Mtx vmtx)
     if (fp->fv.pr.x223C && fp->x2225_b2) {
         Mtx* mtx;
         HSD_JObj* jobj;
-        HSD_JObj* bone_jobj = fp->ft_bones[6].x0_jobj;
-        HSD_JObjGetMtx(fp->ft_bones[6].x0_jobj);
+        HSD_JObj* bone_jobj = fp->parts[6].x0_jobj;
+        HSD_JObjGetMtx(fp->parts[6].x0_jobj);
         mtx = (0, &bone_jobj->mtx);
         jobj = fp->fv.pr.x223C;
         HSD_JObjCopyMtx(fp->fv.pr.x223C, *mtx);
@@ -584,7 +584,7 @@ void ftPr_Init_8013C94C(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
 
     if (!fp->x2219_flag.bits.b0) {
-        efSync_Spawn(1238, gobj, fp->ft_bones[5].x0_jobj);
+        efSync_Spawn(1238, gobj, fp->parts[5].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 
