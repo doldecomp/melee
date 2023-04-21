@@ -241,7 +241,7 @@ typedef enum FtWalkType {
 
 typedef enum FtMoveId {
     FtMoveId_Unk00,
-    FtMoveId_Zair,
+    FtMoveId_Unk01,
     FtMoveId_Unk02,
     FtMoveId_Unk03,
     FtMoveId_Unk04,
