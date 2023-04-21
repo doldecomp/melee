@@ -7,7 +7,7 @@
 
 #include <dolphin/mtx/types.h>
 
-struct ftMasterHand_FighterVars {
+struct ftMasterhand_FighterVars {
     /* 0x222C */ HSD_GObj* x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;

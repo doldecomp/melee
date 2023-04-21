@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTLINK_TYPES_H
 
 #include <platform.h>
+#include "ft/forward.h"
 
 struct ftLink_FighterVars {
     /* 0x222C */ u32 x222C;
@@ -12,6 +13,7 @@ struct ftLink_FighterVars {
     /* 0x2240 */ u32 x2240;
     /* 0x2244 */ u32 x2244;
     /* 0x2248 */ u32 x2248;
+    u8 _[FighterVars_Size - 0x20];
 };
 
 typedef struct _ftLinkAttributes {

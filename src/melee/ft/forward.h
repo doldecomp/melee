@@ -4,7 +4,10 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
+#include <stddef.h>
 #include <dolphin/mtx/types.h>
+
+static usize_t const FighterVars_Size ATTRIBUTE_USED = 0x100;
 
 typedef struct MotionState MotionState;
 typedef struct Fighter Fighter;

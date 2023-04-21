@@ -3,11 +3,24 @@
 
 #include <platform.h>
 #include "forward.h"
+#include "ft/forward.h"
 #include "it/forward.h"
 #include <baselib/forward.h>
 
 #include <common_structs.h>
 #include <dolphin/mtx/types.h>
+
+struct ftMario_FighterVars {
+    /// Current Megavitamin color combo
+    /* 0x222C */ int x222C_vitaminCurr;
+    /// Previous Megavitamin color combo
+    /* 0x2230 */ int x2230_vitaminPrev;
+    /* 0x2234 */ bool x2234_tornadoCharge;
+    /* 0x2238 */ bool x2238_isCapeBoost;
+    /* 0x223C */ HSD_GObj* x223C_capeGObj;
+    /* 0x2240 */ uint x2240;
+    u8 _[FighterVars_Size - 0x18];
+};
 
 typedef struct ftMario_DatAttrs {
     struct ftMario_SpecialS_DatAttrs {
@@ -44,17 +57,6 @@ typedef struct ftMario_DatAttrs {
 
     ReflectDesc cape_reflection;
 } ftMario_DatAttrs;
-
-struct ftMario_FighterVars {
-    /// Current Megavitamin color combo
-    /* 0x222C */ int x222C_vitaminCurr;
-    /// Previous Megavitamin color combo
-    /* 0x2230 */ int x2230_vitaminPrev;
-    /* 0x2234 */ bool x2234_tornadoCharge;
-    /* 0x2238 */ bool x2238_isCapeBoost;
-    /* 0x223C */ HSD_GObj* x223C_capeGObj;
-    /* 0x2240 */ uint x2240;
-};
 
 typedef struct ftMario_SpecialLw_ECB {
     u8 x0_str_arr[3];

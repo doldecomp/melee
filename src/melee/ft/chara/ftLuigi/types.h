@@ -2,11 +2,13 @@
 #define MELEE_FT_CHARA_FTLUIGI_TYPES_H
 
 #include <platform.h>
+#include "ft/forward.h"
 
 struct ftLuigi_FighterVars {
     /* 0x222C */ bool x222C_cycloneCharge;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
+    u8 _[FighterVars_Size - 0xC];
 };
 
 typedef struct _ftLuigiAttributes {

@@ -3,6 +3,10 @@
 
 #include <platform.h>
 
+struct ftPichu_FighterVars {
+    char filler0[0x100];
+};
+
 typedef struct _ftPichuAttributes {
     /* 0x00 */ u32 x0_padding[(0x14 - 0x0) / 4];
     /* 0x14 */ u32 x14;

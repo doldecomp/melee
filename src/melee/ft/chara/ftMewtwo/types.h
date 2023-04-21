@@ -8,10 +8,10 @@
 
 struct ftMewtwo_FighterVars {
     /* 0x222C */ HSD_GObj* x222C_disableGObj;
-    /// GObj of Shadow Ball while in Mewtwo's hands?
-    /* 0x2230 */ HSD_GObj* x2230_shadowHeldGObj;
-    /// Number of cycles Shadow Ball has been charged
-    /* 0x2234 */ s32 x2234_shadowBallCharge;
+    /* 0x2230 */ HSD_GObj*
+        x2230_shadowHeldGObj; // GObj of Shadow Ball while in Mewtwo's hands?
+    /* 0x2234 */ s32 x2234_shadowBallCharge; // Number of cycles Shadow Ball
+                                             // has been charged
     /* 0x2238 */ HSD_GObj* x2238_shadowBallGObj;
     /* 0x223C */ bool x223C_isConfusionBoost;
 };
