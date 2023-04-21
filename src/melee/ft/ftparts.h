@@ -1,6 +1,8 @@
 #ifndef MELEE_FT_FTPARTS_H
 #define MELEE_FT_FTPARTS_H
 
+#include "ft/forward.h"
+
 #include "ft/fighter.h"
 
 #include <dolphin/mtx/types.h>
@@ -14,15 +16,11 @@ void ftParts_800749CC(HSD_GObj*);
 void ftParts_80074A4C(HSD_GObj*, u32, s32);
 void ftParts_80074A8C(HSD_GObj*);
 void ftParts_80074E58(Fighter*);
-
-/// @returns A bone index.
-s32 ftParts_8007500C(Fighter*, s32);
-
+Fighter_Part ftParts_8007500C(Fighter*, Fighter_Part);
 void ftParts_JObjSetRotation(HSD_JObj*, Quaternion*);
 void ftParts_8007592C(Fighter*, s32, f32);
 void ftParts_80075AF0(Fighter*, s32, f32);
 void ftParts_80075CB4(Fighter*, s32, f32);
-s32 ftParts_8007500C(Fighter*, s32);
 void ftParts_800753D4(Fighter*, s32, unk_t);
 f32 ftParts_80075F48(Fighter*, s32);
 s32 ftParts_80074A74(HSD_GObj*, s32);

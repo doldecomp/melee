@@ -1,4 +1,5 @@
 #include "forward.h"
+#include "ft/forward.h"
 
 #include "ftFx_SpecialHi.h"
 
@@ -33,8 +34,9 @@ void ftFx_SpecialHi_CreateLaunchGFX(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x2219_flag.bits.b0 == false) {
-        efSync_Spawn(0x48C, gobj, fp->parts[ftParts_8007500C(fp, 4)].x0_jobj);
+    if (!fp->x2219_flag.bits.b0) {
+        efSync_Spawn(1164, gobj,
+                     fp->parts[ftParts_8007500C(fp, FtPart_HipN)].x0_jobj);
 
         fp->x2219_flag.bits.b0 = true;
     }
@@ -48,8 +50,9 @@ void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x2219_flag.bits.b0 == false) {
-        efSync_Spawn(0x48B, gobj, fp->parts[ftParts_8007500C(fp, 1)].x0_jobj);
+    if (!fp->x2219_flag.bits.b0) {
+        efSync_Spawn(1163, gobj,
+                     fp->parts[ftParts_8007500C(fp, FtPart_TransN)].x0_jobj);
 
         fp->x2219_flag.bits.b0 = true;
     }
@@ -99,8 +102,8 @@ void ftFx_SpecialAirHiStart_Enter(HSD_GObj* gobj)
 static void ftFox_SpecialHi_RotateModel(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftParts_8007592C(fp, ftParts_8007500C(fp, 2),
-                     DOUBLE_PI32 - fp->mv.fx.SpecialHi.rotateModel);
+    ftParts_8007592C(fp, ftParts_8007500C(fp, FtPart_XRotN),
+                     2 * (f32) M_PI - fp->mv.fx.SpecialHi.rotateModel);
 }
 
 void ftFx_SpecialHiHold_Anim(HSD_GObj* gobj)
@@ -309,7 +312,7 @@ void ftFx_SpecialHi_Coll(HSD_GObj* gobj)
         return;
     }
 
-    if (collData->x134_envFlags & 0x18000) {
+    if (collData->x134_envFlags & 98304) {
         fp->mv.fx.SpecialHi.rotateModel =
             atan2f(-collData->x14C_ground.normal.x * fp->facing_dir,
                    collData->x14C_ground.normal.y);
@@ -347,7 +350,7 @@ void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
 
     if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_BOTH) != false) {
         if (ftFox_SpecialHi_IsBound(gobj) != false) {
-            if ((!(collData->x134_envFlags & 0x18000)) ||
+            if ((!(collData->x134_envFlags & 98304)) ||
                 (!(lbVector_AngleXY(&collData->x14C_ground.normal,
                                     &fp->x80_self_vel) <
                    (0.01745329238474369f *
@@ -369,13 +372,13 @@ void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
         s32 envFlags = collData->x134_envFlags;
         f32 var;
         do {
-            if (envFlags & 0x6000) {
+            if (envFlags & 24576) {
                 var = lbVector_AngleXY(&collData->x188_ceiling.normal,
                                        &fp->x80_self_vel);
-            } else if (envFlags & 0x3F) {
+            } else if (envFlags & 63) {
                 var = lbVector_AngleXY(&collData->x160_rightwall.normal,
                                        &fp->x80_self_vel);
-            } else if (envFlags & 0xFC0) {
+            } else if (envFlags & 4032) {
                 var = lbVector_AngleXY(&collData->x174_leftwall.normal,
                                        &fp->x80_self_vel);
             } else {
@@ -802,13 +805,13 @@ inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* gobj)
     Fighter* fp = fp = gobj->user_data;
     CollData* collData = collData = getFtColl(fp);
 
-    if (fp->x6F0_collData.x134_envFlags & 0x18000) {
+    if (fp->x6F0_collData.x134_envFlags & 98304) {
         f = -atan2f(collData->x14C_ground.normal.x,
                     collData->x14C_ground.normal.y);
     } else {
         f = 0.0f;
     }
-    efSync_Spawn(0x406, gobj, &fp->cur_pos, &f);
+    efSync_Spawn(1030, gobj, &fp->cur_pos, &f);
     fp->x2219_flag.bits.b0 = true;
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;

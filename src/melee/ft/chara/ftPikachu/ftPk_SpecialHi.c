@@ -53,7 +53,7 @@ void ftPk_SpecialHi_Enter(HSD_GObj* gobj)
     fp->gr_vel = 0.0f;
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x = 0.0f;
-    Fighter_ChangeMotionState(gobj, 0x161, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 353, 0, 0, 0.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -80,7 +80,7 @@ void ftPk_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->gr_vel = 0.0f;
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x = 0.0f;
-    Fighter_ChangeMotionState(gobj, 0x164, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 356, 0, 0, 0.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -153,7 +153,7 @@ void ftPk_SpecialHi_ChangeMotion_Unk00(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, 0x164, 0xC4C5084, 0,
+    Fighter_ChangeMotionState(gobj, 356, 206327940, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
@@ -161,7 +161,7 @@ void ftPk_SpecialHi_ChangeMotion_Unk01(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x161, 0xC4C5084, 0,
+    Fighter_ChangeMotionState(gobj, 353, 206327940, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
@@ -182,25 +182,27 @@ void ftPk_SpecialHi_Anim(HSD_GObj* gobj)
         ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(gobj);
         fp = GET_FIGHTER(gobj);
         if (fp->x4_fighterKind != FTKIND_PICHU) {
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, 2)].x0_jobj, 0, &vec);
-            efSync_Spawn(0x3F4, gobj, &vec);
-            fp->x2219_flag.bits.b0 = 1;
-            fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
-            fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].x0_jobj,
+                        0, &vec);
+            efSync_Spawn(1012, gobj, &vec);
+            fp->x2219_flag.bits.b0 = true;
+            fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+            fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         }
     } else {
         fp = GET_FIGHTER(gobj);
         if (fp->x4_fighterKind != FTKIND_PICHU) {
             f32 tempf;
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, 2)].x0_jobj, 0, &vec2);
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].x0_jobj,
+                        0, &vec2);
             tempf = HSD_Randf();
-            vec2.x += (6.0f * tempf) - 3.0f;
+            vec2.x += 6 * tempf - 3;
             tempf = HSD_Randf();
-            vec2.y += (6.0f * tempf) - 3.0f;
-            efSync_Spawn(0x3F4, gobj, &vec2);
-            fp->x2219_flag.bits.b0 = 1;
-            fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
-            fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+            vec2.y += 6 * tempf - 3;
+            efSync_Spawn(1012, gobj, &vec2);
+            fp->x2219_flag.bits.b0 = true;
+            fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+            fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         }
     }
 }
@@ -222,25 +224,27 @@ void ftPk_SpecialAirHi_Anim(HSD_GObj* gobj)
         ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
         fp = GET_FIGHTER(gobj);
         if (fp->x4_fighterKind != FTKIND_PICHU) {
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, 2)].x0_jobj, 0, &vec);
-            efSync_Spawn(0x3F4, gobj, &vec);
-            fp->x2219_flag.bits.b0 = 1;
-            fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
-            fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].x0_jobj,
+                        0, &vec);
+            efSync_Spawn(1012, gobj, &vec);
+            fp->x2219_flag.bits.b0 = true;
+            fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+            fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         }
     } else {
         fp = GET_FIGHTER(gobj);
         if (fp->x4_fighterKind != FTKIND_PICHU) {
             f32 tempf;
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, 2)].x0_jobj, 0, &vec2);
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].x0_jobj,
+                        0, &vec2);
             tempf = HSD_Randf();
-            vec2.x += (10.0f * tempf) - 5.0f;
+            vec2.x += (10 * tempf) - 5;
             tempf = HSD_Randf();
-            vec2.y += (10.0f * tempf) - 5.0f;
-            efSync_Spawn(0x3F4, gobj, &vec2);
-            fp->x2219_flag.bits.b0 = 1;
-            fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
-            fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+            vec2.y += (10 * tempf) - 5;
+            efSync_Spawn(1012, gobj, &vec2);
+            fp->x2219_flag.bits.b0 = true;
+            fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+            fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         }
     }
 }
@@ -251,7 +255,7 @@ void ftPk_SpecialAirHi_IASA(HSD_GObj* arg0) {}
 
 void ftPk_SpecialHi_8012642C(HSD_GObj* gobj)
 {
-    Vec3 scale;
+    Vec3 scl;
     Vec3 velocity_vec;
 
     HSD_JObj* jobj;
@@ -263,12 +267,12 @@ void ftPk_SpecialHi_8012642C(HSD_GObj* gobj)
         (fp->facing_dir * atan2f(fp->x80_self_vel.x, fp->x80_self_vel.y)) +
         (pika_attr->x78 - half_pi);
 
-    ftParts_8007592C(fp, ftParts_8007500C(fp, 2), tempf);
-    scale.x = pika_attr->x7C_scale.x;
-    scale.y = pika_attr->x7C_scale.y;
-    scale.z = pika_attr->x7C_scale.z;
-    jobj = fp->parts[ftParts_8007500C(fp, 2)].x0_jobj;
-    HSD_JObjSetScale(jobj, &scale);
+    ftParts_8007592C(fp, ftParts_8007500C(fp, FtPart_XRotN), tempf);
+    scl.x = pika_attr->x7C_scale.x;
+    scl.y = pika_attr->x7C_scale.y;
+    scl.z = pika_attr->x7C_scale.z;
+    jobj = fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].x0_jobj;
+    HSD_JObjSetScale(jobj, &scl);
 
     velocity_vec = fp->x80_self_vel;
     ftCommon_8007E2FC(gobj);
@@ -302,7 +306,7 @@ void ftPk_SpecialAirHi_Phys(HSD_GObj* gobj)
 
 void ftPk_SpecialHi_Coll(HSD_GObj* gobj)
 {
-    Vec3 scale;
+    Vec3 scl;
 
     Fighter* fighter2;
 
@@ -320,8 +324,7 @@ void ftPk_SpecialHi_Coll(HSD_GObj* gobj)
 
     /// @todo Eliminate cast (by changing type of field)
     if (!ft_80082888(gobj, (ftCollisionBox*) &pika_attr->height_attributes)) {
-        if ((collData->x134_envFlags & 0x3F) ||
-            (collData->x134_envFlags & 0xFC0))
+        if ((collData->x134_envFlags & 63) || (collData->x134_envFlags & 4032))
         {
             ftCommon_8007D60C(fp);
             ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
@@ -336,21 +339,22 @@ void ftPk_SpecialHi_Coll(HSD_GObj* gobj)
         fighter2 = GET_FIGHTER(gobj);
         collData = &fighter2->x6F0_collData;
         pika_attr = fighter2->x2D4_specialAttributes;
-        if (collData->x134_envFlags & 0x18000) {
+        if (collData->x134_envFlags & 98304) {
             f32 angle = atan2f(collData->x14C_ground.normal.x,
                                collData->x14C_ground.normal.y);
             f32 angle2 = (fighter2->facing_dir * angle) + pika_attr->x68;
-            ftParts_8007592C(fighter2, ftParts_8007500C(fighter2, 2), angle2);
+            ftParts_8007592C(fighter2,
+                             ftParts_8007500C(fighter2, FtPart_XRotN), angle2);
         }
-        scale.x = pika_attr->x6C_scale.x;
-        scale.y = pika_attr->x6C_scale.y;
-        scale.z = pika_attr->x6C_scale.z;
-        jobj = fighter2->parts[ftParts_8007500C(fighter2, 2)].x0_jobj;
-        HSD_JObjSetScale(jobj, &scale);
+        scl.x = pika_attr->x6C_scale.x;
+        scl.y = pika_attr->x6C_scale.y;
+        scl.z = pika_attr->x6C_scale.z;
+        jobj =
+            fighter2->parts[ftParts_8007500C(fighter2, FtPart_XRotN)].x0_jobj;
+        HSD_JObjSetScale(jobj, &scl);
     }
 
-    if ((collData->x134_envFlags & 0x3F) || (collData->x134_envFlags & 0xFC0))
-    {
+    if ((collData->x134_envFlags & 63) || (collData->x134_envFlags & 4032)) {
         ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(gobj);
     }
 }
@@ -398,7 +402,7 @@ void ftPk_SpecialAirHi_Coll(HSD_GObj* gobj)
     }
 
     if (!ftCliffCommon_80081298(gobj)) {
-        if (collData->x134_envFlags & 0x6000) {
+        if (collData->x134_envFlags & 24576) {
             f32 angle = lbVector_AngleXY(&collData->x188_ceiling.normal,
                                          &fp->x80_self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
@@ -406,7 +410,7 @@ void ftPk_SpecialAirHi_Coll(HSD_GObj* gobj)
             }
         }
 
-        if (collData->x134_envFlags & 0x3F) {
+        if (collData->x134_envFlags & 63) {
             f32 angle = lbVector_AngleXY(&collData->x160_rightwall.normal,
                                          &fp->x80_self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
@@ -414,7 +418,7 @@ void ftPk_SpecialAirHi_Coll(HSD_GObj* gobj)
             }
         }
 
-        if (collData->x134_envFlags & 0xFC0) {
+        if (collData->x134_envFlags & 4032) {
             f32 angle = lbVector_AngleXY(&collData->x174_leftwall.normal,
                                          &fp->x80_self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
@@ -439,7 +443,7 @@ void ftPk_SpecialHi_ChangeMotion_Unk02(HSD_GObj* gobj)
 #endif
 
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, 0x165, 0xC4C508A, 0,
+    Fighter_ChangeMotionState(gobj, 357, 206327946, 0,
                               fp->x894_currentAnimFrame, 0.0f, 0.0f);
     fp->x2223_flag.bits.b4 = true;
     ftPk_SpecialHi_8012642C(gobj);
@@ -451,7 +455,7 @@ void ftPk_SpecialHi_ChangeMotion_Unk02(HSD_GObj* gobj)
 
 void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
 {
-    Vec3 scale;
+    Vec3 scl;
 
     CollData* collData;
     ftPikachuAttributes* pika_attr;
@@ -468,24 +472,24 @@ void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
 
     fighter2 = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fighter2);
-    Fighter_ChangeMotionState(gobj, 0x162, 0xC4C508A, 0,
+    Fighter_ChangeMotionState(gobj, 354, 206327946, 0,
                               fighter2->x894_currentAnimFrame, 0.0f, 0.0f);
 
     fp = GET_FIGHTER(gobj);
     collData = &fp->x6F0_collData;
     pika_attr = fp->x2D4_specialAttributes;
-    if (fp->x6F0_collData.x134_envFlags & 0x18000) {
+    if (fp->x6F0_collData.x134_envFlags & 98304) {
         f32 angle = (fp->facing_dir * atan2f(collData->x14C_ground.normal.x,
                                              collData->x14C_ground.normal.y)) +
                     pika_attr->x68;
-        ftParts_8007592C(fp, ftParts_8007500C(fp, 2), angle);
+        ftParts_8007592C(fp, ftParts_8007500C(fp, FtPart_XRotN), angle);
     }
 
-    scale.x = pika_attr->x6C_scale.x;
-    scale.y = pika_attr->x6C_scale.y;
-    scale.z = pika_attr->x6C_scale.z;
-    jobj = fp->parts[ftParts_8007500C(fp, 2)].x0_jobj;
-    HSD_JObjSetScale(jobj, &scale);
+    scl.x = pika_attr->x6C_scale.x;
+    scl.y = pika_attr->x6C_scale.y;
+    scl.z = pika_attr->x6C_scale.z;
+    jobj = fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].x0_jobj;
+    HSD_JObjSetScale(jobj, &scl);
 }
 
 /// @todo What.
@@ -550,11 +554,10 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
                 // multiply ground velocity by second_zip_decay
                 fp->gr_vel *= pika_attr->x98;
 
-                Fighter_ChangeMotionState(gobj, 0x162, 2, 0, 12.0f, 1.0f,
-                                          0.0f);
+                Fighter_ChangeMotionState(gobj, 354, 2, 0, 12.0f, 1.0f, 0.0f);
                 ftAnim_8006EBA4(gobj);
             }
-            Fighter_ChangeMotionState(gobj, 0x162, 0xA, 0, 13.0f, 1.0f, 0.0f);
+            Fighter_ChangeMotionState(gobj, 354, 10, 0, 13.0f, 1.0f, 0.0f);
             ftAnim_8006EBA4(gobj);
             ftAnim_SetAnimRate(gobj, 0.0f);
             fp->x2223_flag.bits.b4 = 1;
@@ -639,10 +642,10 @@ void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
         fp->x80_self_vel.x *= pika_attr->x98;
         fp->x80_self_vel.y *= pika_attr->x98;
 
-        Fighter_ChangeMotionState(gobj, 0x165, 2, 0, 12.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 357, 2, 0, 12.0f, 1.0f, 0.0f);
         ftAnim_8006EBA4(gobj);
     }
-    Fighter_ChangeMotionState(gobj, 0x165, 0xA, 0, 13.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 357, 10, 0, 13.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
     ftAnim_SetAnimRate(gobj, 0.0f);
     fp->x2223_flag.bits.b4 = 1;
@@ -819,7 +822,7 @@ void ftPk_SpecialHi_ChangeMotion_Unk04(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, 0x166, 0xC4C508A, 0,
+    Fighter_ChangeMotionState(gobj, 358, 206327946, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
@@ -841,7 +844,7 @@ void ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(HSD_GObj* gobj)
     fp->x80_self_vel.x = 0.0f;
     fp->gr_vel = 0.0f;
     fp->gr_vel = fp->mv.pk.unk4.x24 * pika_attr->xA4;
-    Fighter_ChangeMotionState(gobj, 0x163, 2, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 355, 2, 0, 0.0f, 1.0f, 0.0f);
     fp->cb.x21F8_callback = &ftPk_SpecialHi_UpdateVel;
 }
 
@@ -864,6 +867,6 @@ void ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(HSD_GObj* gobj)
     fp->gr_vel = 0.0f;
     fp->x80_self_vel.x = fp->mv.pk.unk4.x1C.x * pika_attr->xA4;
     fp->x80_self_vel.y = fp->mv.pk.unk4.x1C.y * pika_attr->xA4;
-    Fighter_ChangeMotionState(gobj, 0x166, 2, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 358, 2, 0, 0.0f, 1.0f, 0.0f);
     fp->cb.x21F8_callback = &ftPk_SpecialHi_UpdateVel;
 }

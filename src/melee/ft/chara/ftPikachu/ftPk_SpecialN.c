@@ -1,3 +1,5 @@
+#include "ft/forward.h"
+
 #include "ftPk_SpecialN.h"
 
 #include "ftPk_Init.h"
@@ -19,7 +21,7 @@
 void ftPk_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 341, 0, 0, 0.0f, 1.0f, 0.0f);
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
@@ -30,7 +32,7 @@ void ftPk_SpecialN_Enter(HSD_GObj* gobj)
 void ftPk_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 0x156, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 342, 0, 0, 0.0f, 1.0f, 0.0f);
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
@@ -61,10 +63,10 @@ void ftPk_SpecialN_Anim(HSD_GObj* gobj)
             it_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
             switch (ftLib_800872A4(gobj)) {
             case 12:
-                ft_80088148(fp, 0x3a9cc, 0x7F, 0x40);
+                ft_80088148(fp, 240076, 127, 64);
                 break;
             case 23:
-                ft_80088148(fp, 0x382b3, 0x7F, 0x40);
+                ft_80088148(fp, 230067, 127, 64);
                 break;
             }
         }
@@ -98,10 +100,10 @@ void ftPk_SpecialAirN_Anim(HSD_GObj* gobj)
             it_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
             switch (ftLib_800872A4(gobj)) {
             case 12:
-                ft_80088148(fp, 0x3a9cc, 0x7F, 0x40);
+                ft_80088148(fp, 240076, 127, 64);
                 break;
             case 23:
-                ft_80088148(fp, 0x382b3, 0x7F, 0x40);
+                ft_80088148(fp, 230067, 127, 64);
                 break;
             }
         }
@@ -136,7 +138,7 @@ void ftPk_SpecialN_Coll(HSD_GObj* gobj)
     if (!ft_80082708(gobj)) {
         fp = GET_FIGHTER(gobj);
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 0x156, 0xc4c5082, 0,
+        Fighter_ChangeMotionState(gobj, 342, 206327938, 0,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
     }
 }
@@ -148,7 +150,7 @@ void ftPk_SpecialAirN_Coll(HSD_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         ftCommon_8007D7FC(fp);
         fp->x80_self_vel.y = 0.0f;
-        Fighter_ChangeMotionState(gobj, 0x155, 0xc4c5082, 0,
+        Fighter_ChangeMotionState(gobj, 341, 206327938, 0,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
     }
 }
@@ -161,14 +163,14 @@ void ftPk_SpecialN_SpawnEffect0(HSD_GObj* gobj)
     HSD_GObj* tempObj2;
 
     if (!fp->x2219_flag.bits.b0) {
-        s32 index = ftParts_8007500C(fp, 4);
+        Fighter_Part part = ftParts_8007500C(fp, FtPart_HipN);
         tempObj = gobj;
-        efSync_Spawn(0x4BE, tempObj2 = tempObj, fp->parts[index].x0_jobj);
-        fp->x2219_flag.bits.b0 = 1;
+        efSync_Spawn(1214, tempObj2 = tempObj, fp->parts[part].x0_jobj);
+        fp->x2219_flag.bits.b0 = true;
     }
-    fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = 0;
+    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
 void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
@@ -179,14 +181,14 @@ void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
     HSD_GObj* tempObj2;
 
     if (!fp->x2219_flag.bits.b0) {
-        s32 index = ftParts_8007500C(fp, 4);
+        Fighter_Part part = ftParts_8007500C(fp, FtPart_HipN);
         tempObj = gobj;
-        efSync_Spawn(0x4BF, tempObj2 = tempObj, fp->parts[index].x0_jobj);
-        fp->x2219_flag.bits.b0 = 1;
+        efSync_Spawn(1215, tempObj2 = tempObj, fp->parts[part].x0_jobj);
+        fp->x2219_flag.bits.b0 = true;
     }
-    fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = 0;
+    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
 void ftPk_SpecialN_80124DC8(HSD_GObj* gobj)

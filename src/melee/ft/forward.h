@@ -177,7 +177,7 @@ typedef enum Fighter_MotionStateChangeFlags {
 #define CLIFFCATCH_LEFT -1
 #define CLIFFCATCH_RIGHT 1
 
-typedef enum Fighter_Parts {
+typedef enum Fighter_Part {
     FtPart_TopN,
     FtPart_TransN,
     FtPart_XRotN,
@@ -231,7 +231,7 @@ typedef enum Fighter_Parts {
     FtPart_RHandNb,
     FtPart_ThrowN,
     FtPart_TransN2
-} Fighter_Parts;
+} Fighter_Part;
 
 typedef enum FtWalkType {
     FtWalkType_Slow,
