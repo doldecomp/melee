@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-struct ftBoy_FighterVars {
+struct ftZakoBoy_FighterVars {
     char filler0[0x100];
 };
 
