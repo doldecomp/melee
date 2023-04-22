@@ -21,7 +21,7 @@ MotionState ftMr_Init_MotionStateTable[states_count] = {
     {
         -1,
         FtStateChange_None,
-        FtMoveId_Unk01 * (1 << 24),
+        FtMoveId_Unk01 << 24,
         NULL,
         NULL,
         NULL,
@@ -31,7 +31,7 @@ MotionState ftMr_Init_MotionStateTable[states_count] = {
     {
         -1,
         FtStateChange_None,
-        FtMoveId_Unk01 * (1 << 24),
+        FtMoveId_Unk01 << 24,
         NULL,
         NULL,
         NULL,
@@ -124,7 +124,7 @@ MotionState ftMr_Init_UnkMotionStates0[aux_states_count] = {
     {
         14,
         FtStateChange_None,
-        FtMoveId_Unk01 * (1 << 24),
+        FtMoveId_Unk01 << 24,
         NULL,
         NULL,
         ft_800C7158,
@@ -134,7 +134,7 @@ MotionState ftMr_Init_UnkMotionStates0[aux_states_count] = {
     {
         15,
         FtStateChange_None,
-        FtMoveId_Unk01 * (1 << 24),
+        FtMoveId_Unk01 << 24,
         NULL,
         NULL,
         ft_800C7200,

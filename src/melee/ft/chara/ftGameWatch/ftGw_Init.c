@@ -1,4 +1,5 @@
 #include "forward.h"
+#include "ft/forward.h"
 
 #include "ftGw_Init.h"
 
@@ -22,8 +23,8 @@
 MotionState ftGw_Init_MotionStateTable[] = {
     {
         46,
-        0x002C0201,
-        0x02800000,
+        ftGw_MF_Attack11,
+        (FtMoveId_Attack11 << 24) | (1 << 23),
         ftGw_Attack11_Anim,
         ftGw_Attack11_IASA,
         ftGw_Attack11_Phys,
@@ -32,8 +33,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         49,
-        0x002C0204,
-        0x05800000,
+        ftGw_MF_Attack100,
+        (FtMoveId_Attack100 << 24) | (1 << 23),
         ftGw_Attack100Start_Anim,
         ftGw_Attack100Start_IASA,
         ftGw_Attack100Start_Phys,
@@ -42,8 +43,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         50,
-        0x002C0204,
-        0x05800000,
+        ftGw_MF_Attack100,
+        (FtMoveId_Attack100 << 24) | (1 << 23),
         ftGw_Attack100Loop_Anim,
         ftGw_Attack100Loop_IASA,
         ftGw_Attack100Loop_Phys,
@@ -52,8 +53,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         51,
-        0x002C0204,
-        0x05800000,
+        ftGw_MF_Attack100,
+        (FtMoveId_Attack100 << 24) | (1 << 23),
         ftGw_Attack100End_Anim,
         ftGw_Attack100End_IASA,
         ftGw_Attack100End_Phys,
@@ -62,8 +63,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         59,
-        0x00240208,
-        0x09800000,
+        ftGw_MF_AttackLw3,
+        (FtMoveId_AttackLw3 << 24) | (1 << 23),
         ftGw_AttackLw3_Anim,
         ftGw_AttackLw3_IASA,
         ftGw_AttackLw3_Phys,
@@ -72,8 +73,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         62,
-        0x00240A09,
-        0x0A800000,
+        ftGw_MF_AttackS4,
+        (FtMoveId_AttackS4 << 24) | (1 << 23),
         ftGw_AttackS4_Anim,
         ftGw_AttackS4_IASA,
         ftGw_AttackS4_Phys,
@@ -82,8 +83,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         68,
-        0x0024060C,
-        0x0D800000,
+        ftGw_MF_AttackAirN,
+        (FtMoveId_AttackAirN << 24) | (1 << 23),
         ftGw_AttackAirN_Anim,
         ftGw_AttackAirN_IASA,
         ftGw_AttackAirN_Phys,
@@ -92,8 +93,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         70,
-        0x0024060E,
-        0x0F800000,
+        ftGw_MF_AttackAirB,
+        (FtMoveId_AttackAirB << 24) | (1 << 23),
         ftGw_AttackAirB_Anim,
         ftGw_AttackAirB_IASA,
         ftGw_AttackAirB_Phys,
@@ -102,8 +103,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         71,
-        0x0024060F,
-        0x10800000,
+        ftGw_MF_AttackAirHi,
+        (FtMoveId_AttackAirHi << 24) | (1 << 23),
         ftGw_AttackAirHi_Anim,
         ftGw_AttackAirHi_IASA,
         ftGw_AttackAirHi_Phys,
@@ -112,8 +113,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         73,
-        0x0000060C,
-        0x0DC00000,
+        ftGw_MF_Landing,
+        (FtMoveId_AttackAirN << 24) | (1 << 22) | (1 << 23),
         ftGw_LandingAirN_Anim,
         ftGw_LandingAirN_IASA,
         ftGw_LandingAirN_Phys,
@@ -122,8 +123,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         75,
-        0x0000060E,
-        0x0FC00000,
+        ftGw_MF_LandingAirB,
+        (FtMoveId_AttackAirB << 24) | (1 << 22) | (1 << 23),
         ftGw_LandingAirB_Anim,
         ftGw_LandingAirB_IASA,
         ftGw_LandingAirB_Phys,
@@ -132,8 +133,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         76,
-        0x0000060F,
-        0x10C00000,
+        ftGw_MF_LandingAirHi,
+        (FtMoveId_AttackAirHi << 24) | (1 << 22) | (1 << 23),
         ftGw_LandingAirHi_Anim,
         ftGw_LandingAirHi_IASA,
         ftGw_LandingAirHi_Phys,
@@ -142,8 +143,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         295,
-        0x00340111,
-        0x12000000,
+        ftGw_MF_SpecialN,
+        FtMoveId_SpecialN << 24,
         ftGw_SpecialN_Anim,
         ftGw_SpecialN_IASA,
         ftGw_SpecialN_Phys,
@@ -152,8 +153,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         296,
-        0x00340511,
-        0x12000000,
+        ftGw_MF_SpecialAirN,
+        FtMoveId_SpecialN << 24,
         ftGw_SpecialAirN_Anim,
         ftGw_SpecialAirN_IASA,
         ftGw_SpecialAirN_Phys,
@@ -162,8 +163,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         297,
-        0x00340012,
-        0x13000000,
+        ftGw_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialS_Anim,
         ftGw_SpecialS_IASA,
         ftGw_SpecialS_Phys,
@@ -172,8 +173,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         298,
-        0x00340012,
-        0x13000000,
+        ftGw_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialS_Anim,
         ftGw_SpecialS_IASA,
         ftGw_SpecialS_Phys,
@@ -182,8 +183,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         299,
-        0x00340012,
-        0x13000000,
+        ftGw_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialS_Anim,
         ftGw_SpecialS_IASA,
         ftGw_SpecialS_Phys,
@@ -192,8 +193,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         300,
-        0x00340012,
-        0x13000000,
+        ftGw_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialS_Anim,
         ftGw_SpecialS_IASA,
         ftGw_SpecialS_Phys,
@@ -202,8 +203,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         301,
-        0x00340012,
-        0x13000000,
+        ftGw_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialS_Anim,
         ftGw_SpecialS_IASA,
         ftGw_SpecialS_Phys,
@@ -212,8 +213,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         302,
-        0x00340012,
-        0x13000000,
+        ftGw_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialS_Anim,
         ftGw_SpecialS_IASA,
         ftGw_SpecialS_Phys,
@@ -222,8 +223,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         303,
-        0x00340012,
-        0x13000000,
+        ftGw_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialS_Anim,
         ftGw_SpecialS_IASA,
         ftGw_SpecialS_Phys,
@@ -232,8 +233,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         304,
-        0x00340012,
-        0x13000000,
+        ftGw_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialS_Anim,
         ftGw_SpecialS_IASA,
         ftGw_SpecialS_Phys,
@@ -242,8 +243,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         305,
-        0x00340012,
-        0x13000000,
+        ftGw_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialS_Anim,
         ftGw_SpecialS_IASA,
         ftGw_SpecialS_Phys,
@@ -252,8 +253,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         306,
-        0x00340412,
-        0x13000000,
+        ftGw_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialAirS_Anim,
         ftGw_SpecialAirS_IASA,
         ftGw_SpecialAirS_Phys,
@@ -262,8 +263,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         307,
-        0x00340412,
-        0x13000000,
+        ftGw_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialAirS_Anim,
         ftGw_SpecialAirS_IASA,
         ftGw_SpecialAirS_Phys,
@@ -272,8 +273,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         308,
-        0x00340412,
-        0x13000000,
+        ftGw_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialAirS_Anim,
         ftGw_SpecialAirS_IASA,
         ftGw_SpecialAirS_Phys,
@@ -282,8 +283,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         309,
-        0x00340412,
-        0x13000000,
+        ftGw_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialAirS_Anim,
         ftGw_SpecialAirS_IASA,
         ftGw_SpecialAirS_Phys,
@@ -292,8 +293,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         310,
-        0x00340412,
-        0x13000000,
+        ftGw_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialAirS_Anim,
         ftGw_SpecialAirS_IASA,
         ftGw_SpecialAirS_Phys,
@@ -302,8 +303,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         311,
-        0x00340412,
-        0x13000000,
+        ftGw_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialAirS_Anim,
         ftGw_SpecialAirS_IASA,
         ftGw_SpecialAirS_Phys,
@@ -312,8 +313,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         312,
-        0x00340412,
-        0x13000000,
+        ftGw_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialAirS_Anim,
         ftGw_SpecialAirS_IASA,
         ftGw_SpecialAirS_Phys,
@@ -322,8 +323,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         313,
-        0x00340412,
-        0x13000000,
+        ftGw_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialAirS_Anim,
         ftGw_SpecialAirS_IASA,
         ftGw_SpecialAirS_Phys,
@@ -332,8 +333,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         314,
-        0x00340412,
-        0x13000000,
+        ftGw_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftGw_SpecialAirS_Anim,
         ftGw_SpecialAirS_IASA,
         ftGw_SpecialAirS_Phys,
@@ -342,8 +343,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         315,
-        0x00340013,
-        0x14000000,
+        ftGw_MF_SpecialHi,
+        FtMoveId_SpecialHi << 24,
         ftGw_SpecialHi_Anim,
         ftGw_SpecialHi_IASA,
         ftGw_SpecialHi_Phys,
@@ -352,8 +353,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         316,
-        0x00340413,
-        0x14000000,
+        ftGw_MF_SpecialAirHi,
+        FtMoveId_SpecialHi << 24,
         ftGw_SpecialAirHi_Anim,
         ftGw_SpecialAirHi_IASA,
         ftGw_SpecialAirHi_Phys,
@@ -362,8 +363,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         317,
-        0x003C0014,
-        0x15000000,
+        ftGw_MF_SpecialLw,
+        FtMoveId_SpecialLw << 24,
         ftGw_SpecialLw_Anim,
         ftGw_SpecialLw_IASA,
         ftGw_SpecialLw_Phys,
@@ -372,8 +373,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         318,
-        0x00340014,
-        0x15000000,
+        ftGw_MF_SpecialLwCatch,
+        FtMoveId_SpecialLw << 24,
         ftGw_SpecialLwCatch_Anim,
         ftGw_SpecialLwCatch_IASA,
         ftGw_SpecialLwCatch_Phys,
@@ -382,8 +383,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         319,
-        0x00340014,
-        0x15000000,
+        ftGw_MF_SpecialLwCatch,
+        FtMoveId_SpecialLw << 24,
         ftGw_SpecialLwShoot_Anim,
         ftGw_SpecialLwShoot_IASA,
         ftGw_SpecialLwShoot_Phys,
@@ -392,8 +393,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         320,
-        0x003C0414,
-        0x15000000,
+        ftGw_MF_SpecialAirLw,
+        FtMoveId_SpecialLw << 24,
         ftGw_SpecialAirLw_Anim,
         ftGw_SpecialAirLw_IASA,
         ftGw_SpecialAirLw_Phys,
@@ -402,8 +403,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         321,
-        0x00340414,
-        0x15000000,
+        ftGw_MF_SpecialAirLwCatch,
+        FtMoveId_SpecialLw << 24,
         ftGw_SpecialAirLwCatch_Anim,
         ftGw_SpecialAirLwCatch_IASA,
         ftGw_SpecialAirLwCatch_Phys,
@@ -412,8 +413,8 @@ MotionState ftGw_Init_MotionStateTable[] = {
     },
     {
         322,
-        0x00340414,
-        0x15000000,
+        ftGw_MF_SpecialAirLwCatch,
+        FtMoveId_SpecialLw << 24,
         ftGw_SpecialAirLwShoot_Anim,
         ftGw_SpecialAirLwShoot_IASA,
         ftGw_SpecialAirLwShoot_Phys,
@@ -455,7 +456,7 @@ void ftGw_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 7U, -1);
     ftParts_80074A4C(gobj, 8U, -1);
     ftParts_80074A4C(gobj, 9U, -1);
-    ftParts_80074A4C(gobj, 0xAU, -1);
+    ftParts_80074A4C(gobj, 10, -1);
     fp->fv.gw.x222C_judgeVar1 = 1;
     fp->fv.gw.x2230_judgeVar2 = 0;
     fp->fv.gw.x2234 = 0;
