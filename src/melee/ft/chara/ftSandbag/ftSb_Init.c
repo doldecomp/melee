@@ -1,3 +1,5 @@
+#include "ft/forward.h"
+
 #include "ftSb_Init.h"
 
 #include "ft/ft_081B.h"
@@ -11,12 +13,12 @@
 MotionState ftSb_Init_MotionStateTable[] = {
     {
         295,
-        0,
-        0x01400000,
-        ftSb_Init_8014FC20,
-        ftSb_Init_8014FC24,
-        ftSb_Init_8014FC28,
-        ftSb_Init_8014FC48,
+        FtStateChange_None,
+        (FtMoveId_Unk01 << 24) | (1 << 22),
+        ftSb_MS_341_Anim,
+        ftSb_MS_341_IASA,
+        ftSb_MS_341_Phys,
+        ftSb_MS_341_Coll,
         ftCamera_UpdateCameraBox,
     },
 };
@@ -108,16 +110,16 @@ void ftSb_Init_8014FBA4(HSD_GObj* gobj)
     ftCommon_8007EFC0(fp, p_ftCommonData->x5F0);
 }
 
-void ftSb_Init_8014FC20(HSD_GObj* arg0) {}
+void ftSb_MS_341_Anim(HSD_GObj* arg0) {}
 
-void ftSb_Init_8014FC24(HSD_GObj* arg0) {}
+void ftSb_MS_341_IASA(HSD_GObj* arg0) {}
 
-void ftSb_Init_8014FC28(HSD_GObj* gobj)
+void ftSb_MS_341_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftSb_Init_8014FC48(HSD_GObj* gobj)
+void ftSb_MS_341_Coll(HSD_GObj* gobj)
 {
     ft_80083F88(gobj);
 }
