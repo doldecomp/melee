@@ -1,3 +1,6 @@
+#include "forward.h"
+#include "ft/forward.h"
+
 #include "ftSs_Init.h"
 
 #include "ftSs_SpecialHi.h"
@@ -20,8 +23,8 @@
 MotionState ftSs_Init_MotionStateTable[] = {
     {
         295,
-        0,
-        0x01000000,
+        FtStateChange_None,
+        FtMoveId_Unk01 << 24,
         ftSs_SpecialLw_Anim,
         ftSs_SpecialLw_IASA,
         ftSs_SpecialLw_Phys,
@@ -30,8 +33,8 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         296,
-        0,
-        0x01000000,
+        FtStateChange_None,
+        FtMoveId_Unk01 << 24,
         ftSs_SpecialAirLw_Anim,
         ftSs_SpecialAirLw_IASA,
         ftSs_SpecialAirLw_Phys,
@@ -40,8 +43,8 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         297,
-        0x00340111,
-        0x12000000,
+        ftSs_MF_SpecialN,
+        FtMoveId_SpecialN << 24,
         ftSs_SpecialNStart_Anim,
         ftSs_SpecialNStart_IASA,
         ftSs_SpecialNStart_Phys,
@@ -50,8 +53,8 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         298,
-        0x00340111,
-        0x12000000,
+        ftSs_MF_SpecialN,
+        FtMoveId_SpecialN << 24,
         ftSs_SpecialNLoop_Anim,
         ftSs_SpecialNLoop_IASA,
         ftSs_SpecialNLoop_Phys,
@@ -60,8 +63,8 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         299,
-        0x00340111,
-        0x12000000,
+        ftSs_MF_SpecialN,
+        FtMoveId_SpecialN << 24,
         ftSs_SpecialNEnd_Anim,
         ftSs_SpecialNEnd_IASA,
         ftSs_SpecialNEnd_Phys,
@@ -70,8 +73,8 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         300,
-        0x00340111,
-        0x12000000,
+        ftSs_MF_SpecialN,
+        FtMoveId_SpecialN << 24,
         ftSs_SpecialNShoot_Anim,
         ftSs_SpecialNShoot_IASA,
         ftSs_SpecialNShoot_Phys,
@@ -80,8 +83,8 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         301,
-        0x00340511,
-        0x12000000,
+        ftSs_MF_SpecialAirN,
+        FtMoveId_SpecialN << 24,
         ftSs_SpecialAirNStart_Anim,
         ftSs_SpecialAirNStart_IASA,
         ftSs_SpecialAirNStart_Phys,
@@ -90,8 +93,8 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         302,
-        0x00340511,
-        0x12000000,
+        ftSs_MF_SpecialAirN,
+        FtMoveId_SpecialN << 24,
         ftSs_SpecialAirNShoot_Anim,
         ftSs_SpecialAirNShoot_IASA,
         ftSs_SpecialAirNShoot_Phys,
@@ -100,8 +103,8 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         303,
-        0x00340112,
-        0x13000000,
+        ftSs_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftSs_SpecialS_Anim,
         ftSs_SpecialS_IASA,
         ftSs_SpecialS_Phys,
@@ -110,8 +113,8 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         304,
-        0x00340912,
-        0x13000000,
+        ftSs_MF_SpecialSSmash,
+        FtMoveId_SpecialS << 24,
         ftSs_SpecialSSmash_Anim,
         ftSs_SpecialSSmash_IASA,
         ftSs_SpecialSSmash_Phys,
@@ -120,8 +123,8 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         305,
-        0x00340512,
-        0x13000000,
+        ftSs_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftSs_SpecialAirS_Anim,
         ftSs_SpecialAirS_IASA,
         ftSs_SpecialAirS_Phys,
@@ -130,8 +133,8 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         306,
-        0x00340D12,
-        0x13000000,
+        ftSs_MF_SpecialAirSSmash,
+        FtMoveId_SpecialS << 24,
         ftSs_SpecialAirSmash_Anim,
         ftSs_SpecialAirSmash_IASA,
         ftSs_SpecialAirSmash_Phys,
@@ -140,8 +143,8 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         307,
-        0x00340213,
-        0x14000000,
+        ftSs_MF_SpecialHi,
+        FtMoveId_SpecialHi << 24,
         ftSs_SpecialHi_Anim,
         ftSs_SpecialHi_IASA,
         ftSs_SpecialHi_Phys,
@@ -150,8 +153,8 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         308,
-        0x00340613,
-        0x14000000,
+        ftSs_MF_SpecialAirHi,
+        FtMoveId_SpecialHi << 24,
         ftSs_SpecialAirHi_Anim,
         ftSs_SpecialAirHi_IASA,
         ftSs_SpecialAirHi_Phys,
@@ -160,8 +163,8 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         309,
-        0x00340114,
-        0x15000000,
+        ftSs_MF_SpecialLw,
+        FtMoveId_SpecialLw << 24,
         ftSs_SpecialLwBombEnd_Anim,
         ftSs_SpecialLwBombEnd_IASA,
         ftSs_SpecialLwBombEnd_Phys,
@@ -170,8 +173,8 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         310,
-        0x00340514,
-        0x15000000,
+        ftSs_MF_SpecialAirLw,
+        FtMoveId_SpecialLw << 24,
         ftSs_SpecialAirLwBomb_Anim,
         ftSs_SpecialAirLwBomb_IASA,
         ftSs_SpecialAirLwBomb_Phys,
@@ -180,8 +183,8 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         311,
-        0x00200000,
-        0x01000000,
+        FtStateChange_FreezeState,
+        FtMoveId_Unk01 << 24,
         ftCo_Zair_Anim,
         ftCo_Zair_IASA,
         ftCo_Zair_Phys,
@@ -190,8 +193,8 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         312,
-        0x00C00000,
-        0x01000000,
+        ftSs_MF_ZairCatch,
+        FtMoveId_Unk01 << 24,
         ftCo_ZairCatch_Anim,
         ftCo_ZairCatch_IASA,
         ftCo_ZairCatch_Phys,
@@ -250,10 +253,10 @@ void ftSs_Init_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftSamusAttributes);
 
-    it_8026B3F8(item_list[0], 0x5DU);
-    it_8026B3F8(item_list[1], 0x5EU);
-    it_8026B3F8(item_list[2], 0x5FU);
-    it_8026B3F8(item_list[3], 0x60U);
+    it_8026B3F8(item_list[0], 93);
+    it_8026B3F8(item_list[1], 94);
+    it_8026B3F8(item_list[2], 95);
+    it_8026B3F8(item_list[3], 96);
 }
 
 void ftSs_Init_80128428(HSD_GObj* gobj)
@@ -289,7 +292,7 @@ void ftSs_Init_UnkMotionStates4(HSD_GObj* gobj)
     ftSamusAttributes* attr = fp->x2D4_specialAttributes;
     s32 samus_x2230 = fp->fv.ss.x2230;
     if (samus_x2230 == attr->x18) {
-        ft_800BFFD0(fp, 0x35, 0);
+        ft_800BFFD0(fp, 53, 0);
     }
 }
 
