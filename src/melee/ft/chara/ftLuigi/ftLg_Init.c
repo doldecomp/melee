@@ -1,3 +1,6 @@
+#include "forward.h"
+#include "ft/forward.h"
+
 #include "ftLuigi/ftLg_Init.h"
 
 #include "ftLg_SpecialHi.h"
@@ -15,8 +18,8 @@
 MotionState ftLg_Init_MotionStateTable[] = {
     {
         295,
-        0x00340111,
-        0x12000000,
+        ftLg_MF_SpecialN,
+        FtMoveId_SpecialN << 24,
         ftLg_SpecialN_Anim,
         ftLg_SpecialN_IASA,
         ftLg_SpecialN_Phys,
@@ -25,8 +28,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
     },
     {
         296,
-        0x00340511,
-        0x12000000,
+        ftLg_MF_SpecialAirN,
+        FtMoveId_SpecialN << 24,
         ftLg_SpecialAirN_Anim,
         ftLg_SpecialAirN_IASA,
         ftLg_SpecialAirN_Phys,
@@ -35,8 +38,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
     },
     {
         297,
-        0x00340212,
-        0x13000000,
+        ftLg_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftLg_SpecialSStart_Anim,
         ftLg_SpecialSStart_IASA,
         ftLg_SpecialSStart_Phys,
@@ -45,8 +48,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
     },
     {
         298,
-        0x00340212,
-        0x13000000,
+        ftLg_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftLg_SpecialSHold_Anim,
         ftLg_SpecialSHold_IASA,
         ftLg_SpecialSHold_Phys,
@@ -55,8 +58,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
     },
     {
         301,
-        0x00340212,
-        0x13000000,
+        ftLg_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftLg_SpecialSFly_Anim,
         ftLg_SpecialSFly_IASA,
         ftLg_SpecialSFly_Phys,
@@ -65,8 +68,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
     },
     {
         302,
-        0x00340212,
-        0x13000000,
+        ftLg_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftLg_SpecialSEnd_Anim,
         ftLg_SpecialSEnd_IASA,
         ftLg_SpecialSEnd_Phys,
@@ -75,8 +78,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
     },
     {
         299,
-        0x00340212,
-        0x13000000,
+        ftLg_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftLg_SpecialSLaunch_Anim,
         ftLg_SpecialSLaunch_IASA,
         ftLg_SpecialSLaunch_Phys,
@@ -85,8 +88,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
     },
     {
         300,
-        0x00340212,
-        0x13000000,
+        ftLg_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftLg_SpecialSMisfire_Anim,
         ftLg_SpecialSMisfire_IASA,
         ftLg_SpecialSMisfire_Phys,
@@ -95,8 +98,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
     },
     {
         303,
-        0x00340612,
-        0x13000000,
+        ftLg_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftLg_SpecialAirSStart_Anim,
         ftLg_SpecialAirSStart_IASA,
         ftLg_SpecialAirSStart_Phys,
@@ -105,8 +108,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
     },
     {
         304,
-        0x00340612,
-        0x13000000,
+        ftLg_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftLg_SpecialAirSHold_Anim,
         ftLg_SpecialAirSHold_IASA,
         ftLg_SpecialAirSHold_Phys,
@@ -115,8 +118,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
     },
     {
         301,
-        0x00340612,
-        0x13000000,
+        ftLg_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftLg_SpecialAirSFly_Anim,
         ftLg_SpecialAirSFly_IASA,
         ftLg_SpecialAirSFly_Phys,
@@ -125,8 +128,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
     },
     {
         307,
-        0x00340612,
-        0x13000000,
+        ftLg_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftLg_SpecialAirSEnd_Anim,
         ftLg_SpecialAirSEnd_IASA,
         ftLg_SpecialAirSEnd_Phys,
@@ -135,8 +138,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
     },
     {
         305,
-        0x00340612,
-        0x13000000,
+        ftLg_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftLg_SpecialAirSLaunch_Anim,
         ftLg_SpecialAirSLaunch_IASA,
         ftLg_SpecialAirSLaunch_Phys,
@@ -145,8 +148,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
     },
     {
         306,
-        0x00340612,
-        0x13000000,
+        ftLg_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftLg_SpecialAirSMisfire_Anim,
         ftLg_SpecialAirSMisfire_IASA,
         ftLg_SpecialAirSMisfire_Phys,
@@ -155,8 +158,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
     },
     {
         308,
-        0x00340213,
-        0x14000000,
+        ftLg_MF_SpecialHi,
+        FtMoveId_SpecialHi << 24,
         ftLg_SpecialHi_Anim,
         ftLg_SpecialHi_IASA,
         ftLg_SpecialHi_Phys,
@@ -165,8 +168,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
     },
     {
         309,
-        0x00340613,
-        0x14000000,
+        ftLg_MF_SpecialAirHi,
+        FtMoveId_SpecialHi << 24,
         ftLg_SpecialAirHi_Anim,
         ftLg_SpecialAirHi_IASA,
         ftLg_SpecialAirHi_Phys,
@@ -175,8 +178,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
     },
     {
         310,
-        0x00340214,
-        0x15000000,
+        ftLg_MF_SpecialLw,
+        FtMoveId_SpecialLw << 24,
         ftLg_SpecialLw_Anim,
         ftLg_SpecialLw_IASA,
         ftLg_SpecialLw_Phys,
@@ -185,8 +188,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
     },
     {
         311,
-        0x00340614,
-        0x15000000,
+        ftLg_MF_SpecialAirLw,
+        FtMoveId_SpecialLw << 24,
         ftLg_SpecialAirLw_Anim,
         ftLg_SpecialAirLw_IASA,
         ftLg_SpecialAirLw_Phys,
@@ -196,8 +199,26 @@ MotionState ftLg_Init_MotionStateTable[] = {
 };
 
 MotionState ftLg_Init_UnkMotionStates0[] = {
-    { 14, 0, 0x01000000, NULL, NULL, ft_800C7158, NULL, NULL },
-    { 15, 0, 0x01000000, NULL, NULL, ft_800C7200, NULL, NULL },
+    {
+        14,
+        0,
+        FtMoveId_Unk01 << 24,
+        NULL,
+        NULL,
+        ft_800C7158,
+        NULL,
+        NULL,
+    },
+    {
+        15,
+        0,
+        FtMoveId_Unk01 << 24,
+        NULL,
+        NULL,
+        ft_800C7200,
+        NULL,
+        NULL,
+    },
 };
 
 char ftLg_Init_DatFilename[] = "PlLg.dat";
@@ -289,14 +310,14 @@ void ftLg_Init_OnKnockbackExit(HSD_GObj* gobj)
 
 void ftLg_Init_UnkDemoCallbacks0(s32 arg0, s32* arg1, s32* arg2)
 {
-    if (arg0 != 0xA) {
-        if (arg0 < 0xA && arg0 >= 9) {
-            *arg2 = 0xE;
-            *arg1 = 0xE;
+    if (arg0 != 10) {
+        if (arg0 < 10 && arg0 >= 9) {
+            *arg2 = 14;
+            *arg1 = 14;
         }
     } else {
-        *arg2 = 0xF;
-        *arg1 = 0xF;
+        *arg2 = 15;
+        *arg1 = 15;
     }
 }
 

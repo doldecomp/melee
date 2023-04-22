@@ -1,3 +1,4 @@
+#include "ft/forward.h"
 #include "ftFox/forward.h"
 #include "it/forward.h"
 
@@ -359,7 +360,7 @@ MotionState ftFc_Init_MotionStateTable[] = {
     {
         326,
         ftFx_MF_Appeal,
-        1 << 24,
+        FtMoveId_Unk01 << 24,
         ftFx_AppealS_Anim,
         ftFx_AppealS_IASA,
         ftFx_AppealS_Phys,
