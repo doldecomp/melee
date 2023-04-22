@@ -1,7 +1,36 @@
 #ifndef MELEE_FT_CHARA_FTFOX_FORWARD_H
 #define MELEE_FT_CHARA_FTFOX_FORWARD_H
 
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
+
+typedef enum ftFx_MotionFlags {
+    ftFx_MF_Appeal = FtStateChange_PreserveGfx |
+                     FtStateChange_SkipUpdateModel |
+                     FtStateChange_SkipUpdateAnimVel | FtStateChange_Unk_6,
+    ftFx_MF_Special = FtStateChange_SkipUpdateModel |
+                      FtStateChange_SkipUpdateItemVis |
+                      FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState,
+    ftFx_MF_SpecialN = ftFx_MF_Special | FtStateChange_PreserveFastFall |
+                       FtStateChange_SkipUpdateThrowException,
+    ftFx_MF_SpecialS = ftFx_MF_Special | FtStateChange_PreserveGfx |
+                       FtStateChange_PreserveSfx,
+    ftFx_MF_SpecialHi = ftFx_MF_SpecialS | FtStateChange_PreserveFastFall,
+    ftFx_MF_SpecialAirN = ftFx_MF_SpecialN | FtStateChange_SkipUpdateParasol,
+    ftFx_MF_SpecialAirS = ftFx_MF_SpecialS | FtStateChange_SkipUpdateParasol,
+    ftFx_MF_SpecialAirHiHold =
+        ftFx_MF_SpecialHi | FtStateChange_SkipUpdateParasol,
+    ftFx_MF_SpecialLw = ftFx_MF_Special |
+                        FtStateChange_PreserveColAnimHitStatus |
+                        FtStateChange_SkipUpdateColAnim,
+    ftFx_MF_SpecialAirLw = ftFx_MF_SpecialLw | FtStateChange_SkipUpdateParasol,
+    ftFx_MF_SpecialNLoop = ftFx_MF_SpecialN | FtStateChange_Unk_19,
+    ftFx_MF_SpecialAirNLoop =
+        ftFx_MF_SpecialNLoop | FtStateChange_SkipUpdateParasol,
+    ftFx_MF_SpecialLwLoop = ftFx_MF_SpecialLw | FtStateChange_Unk_19,
+    ftFx_MF_SpecialAirLwLoop =
+        ftFx_MF_SpecialLwLoop | FtStateChange_SkipUpdateParasol,
+} ftFx_MotionFlags;
 
 typedef enum ftFox_MotionState {
     ftFx_MS_SpecialNStart = ftCo_MS_Count,
