@@ -26,7 +26,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     {
         295,
         ftLk_MF_AttackS42,
-        FtMoveId_Unk10 * (1 << 24),
+        FtMoveId_AttackS4 << 24,
         ftCo_AttackS42_Anim,
         ftCo_AttackS42_IASA,
         ftCo_AttackS42_Phys,
@@ -36,7 +36,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     {
         -1,
         0,
-        FtMoveId_Unk01 * (1 << 24),
+        FtMoveId_Unk01 << 24,
         NULL,
         NULL,
         NULL,
@@ -46,7 +46,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     {
         -1,
         0,
-        FtMoveId_Unk01 * (1 << 24),
+        FtMoveId_Unk01 << 24,
         NULL,
         NULL,
         NULL,
@@ -216,7 +216,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     {
         312,
         FtStateChange_FreezeState,
-        FtMoveId_Unk01 * (1 << 24),
+        FtMoveId_Unk01 << 24,
         ftCo_Zair_Anim,
         ftCo_Zair_IASA,
         ftCo_Zair_Phys,
@@ -226,7 +226,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     {
         313,
         ftLk_MF_ZairCatch,
-        FtMoveId_Unk01 * (1 << 24),
+        FtMoveId_Unk01 << 24,
         ftCo_ZairCatch_Anim,
         ftCo_ZairCatch_IASA,
         ftCo_ZairCatch_Phys,

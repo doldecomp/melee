@@ -1,7 +1,46 @@
 #ifndef MELEE_FT_CHARA_FTGAMEWATCH_FORWARD_H
 #define MELEE_FT_CHARA_FTGAMEWATCH_FORWARD_H
 
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
+
+typedef enum ftGw_MotionFlags {
+    ftGw_MF_Base = FtStateChange_SkipUpdateItemVis | FtStateChange_FreezeState,
+    ftGw_MF_Landing = FtStateChange_PreserveColAnimHitStatus |
+                      FtStateChange_SkipUpdateHit | FtStateChange_PreserveSfx |
+                      FtStateChange_SkipUpdateParasol,
+    ftGw_MF_LandingAirB = ftGw_MF_Landing | FtStateChange_PreserveGfx,
+    ftGw_MF_LandingAirHi =
+        ftGw_MF_LandingAirB | FtStateChange_PreserveFastFall,
+    ftGw_MF_Attack = ftGw_MF_Base | FtStateChange_PreserveSfx,
+    ftGw_MF_AttackLw3 = ftGw_MF_Attack | FtStateChange_SkipUpdateHit,
+    ftGw_MF_AttackAirN = ftGw_MF_Attack | ftGw_MF_Landing,
+    ftGw_MF_AttackAirB = ftGw_MF_AttackAirN | FtStateChange_PreserveGfx,
+    ftGw_MF_AttackAirHi = ftGw_MF_AttackAirB | FtStateChange_PreserveFastFall,
+    ftGw_MF_AttackS4 = ftGw_MF_AttackLw3 | FtStateChange_PreserveFastFall |
+                       FtStateChange_SkipUpdateRumble,
+    ftGw_MF_Attack11 =
+        ftGw_MF_Attack | FtStateChange_PreserveFastFall | FtStateChange_Unk_19,
+    ftGw_MF_Attack100 = ftGw_MF_Attack |
+                        FtStateChange_PreserveColAnimHitStatus |
+                        FtStateChange_Unk_19,
+    ftGw_MF_Special = ftGw_MF_Base | FtStateChange_SkipUpdateModel |
+                      FtStateChange_Unk_UpdatePhys,
+    ftGw_MF_SpecialS = ftGw_MF_Special | FtStateChange_PreserveGfx,
+    ftGw_MF_SpecialHi = ftGw_MF_Special | FtStateChange_PreserveFastFall |
+                        FtStateChange_PreserveGfx,
+    ftGw_MF_SpecialLwCatch =
+        ftGw_MF_Special | FtStateChange_PreserveColAnimHitStatus,
+    ftGw_MF_SpecialN = ftGw_MF_Special | FtStateChange_PreserveFastFall |
+                       FtStateChange_SkipUpdateThrowException,
+    ftGw_MF_SpecialAirS = ftGw_MF_SpecialS | FtStateChange_SkipUpdateParasol,
+    ftGw_MF_SpecialAirHi = ftGw_MF_SpecialHi | FtStateChange_SkipUpdateParasol,
+    ftGw_MF_SpecialAirLwCatch =
+        ftGw_MF_SpecialLwCatch | FtStateChange_SkipUpdateParasol,
+    ftGw_MF_SpecialAirN = ftGw_MF_SpecialN | FtStateChange_SkipUpdateParasol,
+    ftGw_MF_SpecialLw = ftGw_MF_SpecialLwCatch | FtStateChange_Unk_19,
+    ftGw_MF_SpecialAirLw = ftGw_MF_SpecialLw | FtStateChange_SkipUpdateParasol,
+} ftGw_MotionFlags;
 
 // Mr. Game & Watch Motion State IDs
 typedef enum ftGameWatch_MotionState {

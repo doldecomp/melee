@@ -309,7 +309,7 @@ MotionState ftFc_Init_MotionStateTable[] = {
     {
         321,
         ftFx_MF_Appeal,
-        FtMoveId_Unk01 * (1 << 24),
+        FtMoveId_Unk01 << 24,
         ftFx_AppealS_Anim,
         ftFx_AppealS_IASA,
         ftFx_AppealS_Phys,
@@ -319,7 +319,7 @@ MotionState ftFc_Init_MotionStateTable[] = {
     {
         322,
         ftFx_MF_Appeal,
-        FtMoveId_Unk01 * (1 << 24),
+        FtMoveId_Unk01 << 24,
         ftFx_AppealS_Anim,
         ftFx_AppealS_IASA,
         ftFx_AppealS_Phys,
@@ -329,7 +329,7 @@ MotionState ftFc_Init_MotionStateTable[] = {
     {
         323,
         ftFx_MF_Appeal,
-        FtMoveId_Unk01 * (1 << 24),
+        FtMoveId_Unk01 << 24,
         ftFx_AppealS_Anim,
         ftFx_AppealS_IASA,
         ftFx_AppealS_Phys,
@@ -339,7 +339,7 @@ MotionState ftFc_Init_MotionStateTable[] = {
     {
         324,
         ftFx_MF_Appeal,
-        FtMoveId_Unk01 * (1 << 24),
+        FtMoveId_Unk01 << 24,
         ftFx_AppealS_Anim,
         ftFx_AppealS_IASA,
         ftFx_AppealS_Phys,
@@ -349,7 +349,7 @@ MotionState ftFc_Init_MotionStateTable[] = {
     {
         325,
         ftFx_MF_Appeal,
-        FtMoveId_Unk01 * (1 << 24),
+        FtMoveId_Unk01 << 24,
         ftFx_AppealS_Anim,
         ftFx_AppealS_IASA,
         ftFx_AppealS_Phys,
@@ -359,7 +359,7 @@ MotionState ftFc_Init_MotionStateTable[] = {
     {
         326,
         ftFx_MF_Appeal,
-        1 * (1 << 24),
+        1 << 24,
         ftFx_AppealS_Anim,
         ftFx_AppealS_IASA,
         ftFx_AppealS_Phys,

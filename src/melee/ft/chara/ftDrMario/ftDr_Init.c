@@ -21,7 +21,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
     {
         239,
         ftDr_MF_Appeal,
-        FtMoveId_Unk01 * (1 << 24),
+        FtMoveId_Unk01 << 24,
         ftDr_Appeal_Anim,
         ftDr_Appeal_IASA,
         ftDr_Appeal_Phys,
@@ -31,7 +31,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
     {
         240,
         ftDr_MF_Appeal,
-        FtMoveId_Unk01 * (1 << 24),
+        FtMoveId_Unk01 << 24,
         ftDr_Appeal_Anim,
         ftDr_Appeal_IASA,
         ftDr_Appeal_Phys,
