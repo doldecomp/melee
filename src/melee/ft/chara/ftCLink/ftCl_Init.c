@@ -136,7 +136,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     },
     {
         304,
-        ftLk_MF_SpecialSThrowEmpty,
+        ftLk_MF_SpecialSCatch,
         FtMoveId_SpecialS * (1 << 24),
         ftLk_SpecialSThrowEmpty_Anim,
         NULL,
@@ -216,7 +216,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     },
     {
         312,
-        ftLk_MF_Zair,
+        FtStateChange_FreezeState,
         FtMoveId_Unk01 * (1 << 24),
         ftCo_Zair_Anim,
         ftCo_Zair_IASA,
