@@ -2,7 +2,32 @@
 #define MELEE_FT_CHARA_FTSAMUS_FORWARD_H
 
 #include <platform.h>
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
+
+typedef enum ftSs_MotionFlags {
+    ftSs_MF_Special = FtStateChange_SkipUpdateModel |
+                      FtStateChange_SkipUpdateItemVis |
+                      FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState,
+    ftSs_MF_SpecialN = ftSs_MF_Special | FtStateChange_PreserveFastFall |
+                       FtStateChange_SkipUpdateThrowException,
+    ftSs_MF_SpecialS = ftSs_MF_Special | FtStateChange_PreserveGfx |
+                       FtStateChange_SkipUpdateThrowException,
+    ftSs_MF_SpecialLw = ftSs_MF_Special |
+                        FtStateChange_PreserveColAnimHitStatus |
+                        FtStateChange_SkipUpdateThrowException,
+    ftSs_MF_SpecialHi = ftSs_MF_Special | FtStateChange_PreserveFastFall |
+                        FtStateChange_PreserveGfx | FtStateChange_PreserveSfx,
+    ftSs_MF_SpecialAirN = ftSs_MF_SpecialN | FtStateChange_SkipUpdateParasol,
+    ftSs_MF_SpecialAirS = ftSs_MF_SpecialS | FtStateChange_SkipUpdateParasol,
+    ftSs_MF_SpecialAirLw = ftSs_MF_SpecialLw | FtStateChange_SkipUpdateParasol,
+    ftSs_MF_SpecialAirHi = ftSs_MF_SpecialHi | FtStateChange_SkipUpdateParasol,
+    ftSs_MF_SpecialSSmash = ftSs_MF_SpecialS | FtStateChange_SkipUpdateRumble,
+    ftSs_MF_SpecialAirSSmash =
+        ftSs_MF_SpecialSSmash | FtStateChange_SkipUpdateParasol,
+    ftSs_MF_ZairCatch =
+        FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateMetalB,
+} ftSs_MotionFlags;
 
 typedef enum ftSamus_MotionState {
     ftSs_MS_SpecialLw = ftCo_MS_Count,
