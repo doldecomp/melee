@@ -2,7 +2,31 @@
 #define MELEE_FT_CHARA_FTSEAK_FORWARD_H
 
 #include <platform.h>
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
+
+typedef enum ftSk_MotionFlags {
+    ftSk_MF_Special = FtStateChange_SkipUpdateModel |
+                      FtStateChange_SkipUpdateItemVis |
+                      FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState,
+    ftSk_MF_SpecialS = ftSk_MF_Special | FtStateChange_PreserveGfx,
+    ftSk_MF_SpecialLw =
+        ftSk_MF_Special | FtStateChange_PreserveColAnimHitStatus,
+    ftSk_MF_SpecialN = ftSk_MF_Special | FtStateChange_PreserveFastFall |
+                       FtStateChange_SkipUpdateThrowException,
+    ftSk_MF_SpecialHi = ftSk_MF_SpecialS | FtStateChange_PreserveFastFall |
+                        FtStateChange_PreserveSfx,
+    ftSk_MF_SpecialAirS = ftSk_MF_SpecialS | FtStateChange_SkipUpdateParasol,
+    ftSk_MF_SpecialAirLw = ftSk_MF_SpecialLw | FtStateChange_SkipUpdateParasol,
+    ftSk_MF_SpecialAirN = ftSk_MF_SpecialN | FtStateChange_SkipUpdateParasol,
+    ftSk_MF_SpecialAirHi = ftSk_MF_SpecialHi | FtStateChange_SkipUpdateParasol,
+    ftSk_MF_SpecialSLoop = ftSk_MF_SpecialS | FtStateChange_Unk_19,
+    ftSk_MF_SpecialNLoop = ftSk_MF_SpecialN | FtStateChange_Unk_19,
+    ftSk_MF_SpecialAirSLoop =
+        ftSk_MF_SpecialSLoop | FtStateChange_SkipUpdateParasol,
+    ftSk_MF_SpecialAirNLoop =
+        ftSk_MF_SpecialNLoop | FtStateChange_SkipUpdateParasol,
+} ftSk_MotionFlags;
 
 typedef enum ftSeak_MotionState {
     ftSk_MS_SpecialN_ChargeStart = ftCo_MS_Count,
