@@ -4,67 +4,43 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
-static Fighter_MotionStateChangeFlags const ftLk_MF_Base0 =
-    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateThrowException;
-
-static Fighter_MotionStateChangeFlags const ftLk_MF_Base1 =
-    FtStateChange_SkipUpdateItemVis | FtStateChange_FreezeState;
-
-static Fighter_MotionStateChangeFlags const ftLk_MF_Base2 =
-    ftLk_MF_Base1 | FtStateChange_PreserveFastFall;
-
-static Fighter_MotionStateChangeFlags const ftLk_MF_Base3 =
-    ftLk_MF_Base0 | FtStateChange_Unk_UpdatePhys;
-
-static Fighter_MotionStateChangeFlags const ftLk_MF_AttackS42 ATTRIBUTE_USED =
-    ftLk_MF_Base2 | FtStateChange_SkipUpdateHit;
-
-static Fighter_MotionStateChangeFlags const ftLk_MF_SpecialN ATTRIBUTE_USED =
-    ftLk_MF_Base2 | ftLk_MF_Base3;
-
-static Fighter_MotionStateChangeFlags const ftLk_MF_SpecialNFullyCharged
-    ATTRIBUTE_USED = ftLk_MF_SpecialN | FtStateChange_Unk_19;
-
-static Fighter_MotionStateChangeFlags const ftLk_MF_SpecialAirNCharge
-    ATTRIBUTE_USED = ftLk_MF_SpecialN | FtStateChange_SkipUpdateParasol;
-
-static Fighter_MotionStateChangeFlags const ftLk_MF_SpecialAirNFullyCharged
-    ATTRIBUTE_USED =
-        ftLk_MF_SpecialNFullyCharged | FtStateChange_SkipUpdateParasol;
-
-static Fighter_MotionStateChangeFlags const ftLk_MF_SpecialAirNFire
-    ATTRIBUTE_USED = ftLk_MF_SpecialAirNCharge | FtStateChange_Unk_UpdatePhys;
-
-static Fighter_MotionStateChangeFlags const ftLk_MF_SpecialSThrow
-    ATTRIBUTE_USED = ftLk_MF_Base3 | ftLk_MF_Base1 | FtStateChange_PreserveGfx;
-
-static Fighter_MotionStateChangeFlags const ftLk_MF_SpecialSCatch
-    ATTRIBUTE_USED = ftLk_MF_SpecialSThrow | FtStateChange_Unk_UpdatePhys;
-
-static Fighter_MotionStateChangeFlags const ftLk_MF_SpecialAirSThrow
-    ATTRIBUTE_USED = ftLk_MF_SpecialSThrow | ftLk_MF_Base3 |
-                     FtStateChange_SkipUpdateParasol;
-
-static Fighter_MotionStateChangeFlags const ftLk_MF_SpecialAirSThrowEmpty
-    ATTRIBUTE_USED = ftLk_MF_SpecialSCatch | ftLk_MF_Base1 |
-                     FtStateChange_SkipUpdateParasol;
-
-static Fighter_MotionStateChangeFlags const ftLk_MF_SpecialHi ATTRIBUTE_USED =
-    FtStateChange_PreserveFastFall | FtStateChange_PreserveGfx |
-    FtStateChange_SkipUpdateModel | FtStateChange_PreserveSfx |
-    FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_UpdatePhys |
-    FtStateChange_FreezeState;
-
-static Fighter_MotionStateChangeFlags const ftLk_MF_SpecialLw ATTRIBUTE_USED =
-    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateModel |
-    FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_UpdatePhys |
-    FtStateChange_FreezeState;
-
-static Fighter_MotionStateChangeFlags const ftLk_MF_SpecialAirLw
-    ATTRIBUTE_USED = ftLk_MF_SpecialLw | FtStateChange_SkipUpdateParasol;
-
-static Fighter_MotionStateChangeFlags const ftLk_MF_ZairCatch ATTRIBUTE_USED =
-    FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateMetalB;
+typedef enum ftLk_MotionFlags {
+    ftLk_MF_Base0 =
+        FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateThrowException,
+    ftLk_MF_Base1 =
+        FtStateChange_SkipUpdateItemVis | FtStateChange_FreezeState,
+    ftLk_MF_Base2 = ftLk_MF_Base1 | FtStateChange_PreserveFastFall,
+    ftLk_MF_Base3 = ftLk_MF_Base0 | FtStateChange_Unk_UpdatePhys,
+    ftLk_MF_AttackS42 = ftLk_MF_Base2 | FtStateChange_SkipUpdateHit,
+    ftLk_MF_SpecialN = ftLk_MF_Base2 | ftLk_MF_Base3,
+    ftLk_MF_SpecialNFullyCharged = ftLk_MF_SpecialN | FtStateChange_Unk_19,
+    ftLk_MF_SpecialAirNCharge =
+        ftLk_MF_SpecialN | FtStateChange_SkipUpdateParasol,
+    ftLk_MF_SpecialAirNFullyCharged =
+        ftLk_MF_SpecialNFullyCharged | FtStateChange_SkipUpdateParasol,
+    ftLk_MF_SpecialAirNFire =
+        ftLk_MF_SpecialAirNCharge | FtStateChange_Unk_UpdatePhys,
+    ftLk_MF_SpecialSThrow =
+        ftLk_MF_Base3 | ftLk_MF_Base1 | FtStateChange_PreserveGfx,
+    ftLk_MF_SpecialSCatch =
+        ftLk_MF_SpecialSThrow | FtStateChange_Unk_UpdatePhys,
+    ftLk_MF_SpecialAirSThrow = ftLk_MF_SpecialSThrow | ftLk_MF_Base3 |
+                               FtStateChange_SkipUpdateParasol,
+    ftLk_MF_SpecialAirSThrowEmpty = ftLk_MF_SpecialSCatch | ftLk_MF_Base1 |
+                                    FtStateChange_SkipUpdateParasol,
+    ftLk_MF_SpecialHi =
+        FtStateChange_PreserveFastFall | FtStateChange_PreserveGfx |
+        FtStateChange_SkipUpdateModel | FtStateChange_PreserveSfx |
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_UpdatePhys |
+        FtStateChange_FreezeState,
+    ftLk_MF_SpecialLw =
+        FtStateChange_PreserveColAnimHitStatus |
+        FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateItemVis |
+        FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState,
+    ftLk_MF_SpecialAirLw = ftLk_MF_SpecialLw | FtStateChange_SkipUpdateParasol,
+    ftLk_MF_ZairCatch =
+        FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateMetalB,
+} ftLk_MotionFlags;
 
 typedef enum ftLink_MotionState {
     ftLk_MS_AttackS42 = ftCo_MS_Count,
