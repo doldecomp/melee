@@ -1,3 +1,6 @@
+#include "forward.h"
+#include "ft/forward.h"
+
 #include "ftFox/ftFx_Init.h"
 
 #include "ftFx_Appeal.h"
@@ -14,8 +17,8 @@
 MotionState ftFx_Init_MotionStateTable[] = {
     {
         295,
-        0x00340111,
-        0x12000000,
+        ftFx_MF_SpecialN,
+        FtMoveId_SpecialN * (1 << 24),
         ftFx_SpecialNStart_Anim,
         ftFx_SpecialNStart_IASA,
         ftFx_SpecialNStart_Phys,
@@ -24,8 +27,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         296,
-        0x003C0111,
-        0x12000000,
+        ftFx_MF_SpecialNLoop,
+        FtMoveId_SpecialN * (1 << 24),
         ftFx_SpecialNLoop_Anim,
         ftFx_SpecialNLoop_IASA,
         ftFx_SpecialNLoop_Phys,
@@ -34,8 +37,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         297,
-        0x00340111,
-        0x12000000,
+        ftFx_MF_SpecialN,
+        FtMoveId_SpecialN * (1 << 24),
         ftFx_SpecialNEnd_Anim,
         ftFx_SpecialNEnd_IASA,
         ftFx_SpecialNEnd_Phys,
@@ -44,8 +47,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         298,
-        0x00340511,
-        0x12000000,
+        ftFx_MF_SpecialAirN,
+        FtMoveId_SpecialN * (1 << 24),
         ftFx_SpecialAirNStart_Anim,
         ftFx_SpecialAirNStart_IASA,
         ftFx_SpecialAirNStart_Phys,
@@ -54,8 +57,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         299,
-        0x003C0511,
-        0x12000000,
+        ftFx_MF_SpecialAirNLoop,
+        FtMoveId_SpecialN * (1 << 24),
         ftFx_SpecialAirNLoop_Anim,
         ftFx_SpecialAirNLoop_IASA,
         ftFx_SpecialAirNLoop_Phys,
@@ -64,8 +67,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         300,
-        0x00340511,
-        0x12000000,
+        ftFx_MF_SpecialAirN,
+        FtMoveId_SpecialN * (1 << 24),
         ftFx_SpecialAirNEnd_Anim,
         ftFx_SpecialAirNEnd_IASA,
         ftFx_SpecialAirNEnd_Phys,
@@ -74,8 +77,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         301,
-        0x00340212,
-        0x13000000,
+        ftFx_MF_SpecialS,
+        FtMoveId_SpecialS * (1 << 24),
         ftFx_SpecialSStart_Anim,
         ftFx_SpecialSStart_IASA,
         ftFx_SpecialSStart_Phys,
@@ -84,8 +87,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         302,
-        0x00340212,
-        0x13000000,
+        ftFx_MF_SpecialS,
+        FtMoveId_SpecialS * (1 << 24),
         ftFx_SpecialS_Anim,
         ftFx_SpecialS_IASA,
         ftFx_SpecialS_Phys,
@@ -94,8 +97,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         303,
-        0x00340212,
-        0x13000000,
+        ftFx_MF_SpecialS,
+        FtMoveId_SpecialS * (1 << 24),
         ftFx_SpecialSEnd_Anim,
         ftFx_SpecialSEnd_IASA,
         ftFx_SpecialSEnd_Phys,
@@ -104,8 +107,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         304,
-        0x00340612,
-        0x13000000,
+        ftFx_MF_SpecialAirS,
+        FtMoveId_SpecialS * (1 << 24),
         ftFx_SpecialAirSStart_Anim,
         ftFx_SpecialAirSStart_IASA,
         ftFx_SpecialAirSStart_Phys,
@@ -114,8 +117,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         305,
-        0x00340612,
-        0x13000000,
+        ftFx_MF_SpecialAirS,
+        FtMoveId_SpecialS * (1 << 24),
         ftFx_SpecialAirS_Anim,
         ftFx_SpecialAirS_IASA,
         ftFx_SpecialAirS_Phys,
@@ -124,8 +127,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         306,
-        0x00340612,
-        0x13000000,
+        ftFx_MF_SpecialAirS,
+        FtMoveId_SpecialS * (1 << 24),
         ftFx_SpecialAirSEnd_Anim,
         ftFx_SpecialAirSEnd_IASA,
         ftFx_SpecialAirSEnd_Phys,
@@ -134,8 +137,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         307,
-        0x00340213,
-        0x14000000,
+        ftFx_MF_SpecialHi,
+        FtMoveId_SpecialHi * (1 << 24),
         ftFx_SpecialHiHold_Anim,
         ftFx_SpecialHiHold_IASA,
         ftFx_SpecialHiHold_Phys,
@@ -144,8 +147,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         308,
-        0x00340613,
-        0x14000000,
+        ftFx_MF_SpecialAirHiHold,
+        FtMoveId_SpecialHi * (1 << 24),
         ftFx_SpecialHiHoldAir_Anim,
         ftFx_SpecialHiHoldAir_IASA,
         ftFx_SpecialHiHoldAir_Phys,
@@ -154,8 +157,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         309,
-        0x00340213,
-        0x14000000,
+        ftFx_MF_SpecialHi,
+        FtMoveId_SpecialHi * (1 << 24),
         ftFx_SpecialHi_Anim,
         ftFx_SpecialHi_IASA,
         ftFx_SpecialHi_Phys,
@@ -164,8 +167,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         309,
-        0x00340613,
-        0x14000000,
+        ftFx_MF_SpecialAirHiHold,
+        FtMoveId_SpecialHi * (1 << 24),
         ftFx_SpecialAirHi_Anim,
         ftFx_SpecialAirHi_IASA,
         ftFx_SpecialAirHi_Phys,
@@ -174,8 +177,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         310,
-        0x00340213,
-        0x14000000,
+        ftFx_MF_SpecialHi,
+        FtMoveId_SpecialHi * (1 << 24),
         ftFx_SpecialHiLanding_Anim,
         ftFx_SpecialHiLanding_IASA,
         ftFx_SpecialHiLanding_Phys,
@@ -184,8 +187,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         311,
-        0x00340613,
-        0x14000000,
+        ftFx_MF_SpecialAirHiHold,
+        FtMoveId_SpecialHi * (1 << 24),
         ftFx_SpecialHiFall_Anim,
         ftFx_SpecialHiFall_IASA,
         ftFx_SpecialHiFall_Phys,
@@ -194,8 +197,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         312,
-        0x00340613,
-        0x14000000,
+        ftFx_MF_SpecialAirHiHold,
+        FtMoveId_SpecialHi * (1 << 24),
         ftFx_SpecialHiBound_Anim,
         ftFx_SpecialHiBound_IASA,
         ftFx_SpecialHiBound_Phys,
@@ -204,8 +207,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         313,
-        0x00341014,
-        0x15000000,
+        ftFx_MF_SpecialLw,
+        FtMoveId_SpecialLw * (1 << 24),
         ftFx_SpecialLwStart_Anim,
         ftFx_SpecialLwStart_IASA,
         ftFx_SpecialLwStart_Phys,
@@ -214,8 +217,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         314,
-        0x003C1014,
-        0x15000000,
+        ftFx_MF_SpecialLwLoop,
+        FtMoveId_SpecialLw * (1 << 24),
         ftFx_SpecialLwLoop_Anim,
         ftFx_SpecialLwLoop_IASA,
         ftFx_SpecialLwLoop_Phys,
@@ -224,8 +227,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         315,
-        0x00341014,
-        0x15000000,
+        ftFx_MF_SpecialLw,
+        FtMoveId_SpecialLw * (1 << 24),
         ftFx_SpecialLwHit_Anim,
         ftFx_SpecialLwHit_IASA,
         ftFx_SpecialLwHit_Phys,
@@ -234,8 +237,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         316,
-        0x00341014,
-        0x15000000,
+        ftFx_MF_SpecialLw,
+        FtMoveId_SpecialLw * (1 << 24),
         ftFx_SpecialLwEnd_Anim,
         ftFx_SpecialLwEnd_IASA,
         ftFx_SpecialLwEnd_Phys,
@@ -244,8 +247,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         314,
-        0x00341014,
-        0x15000000,
+        ftFx_MF_SpecialLw,
+        FtMoveId_SpecialLw * (1 << 24),
         ftFx_SpecialLwTurn_Anim,
         ftFx_SpecialLwTurn_IASA,
         ftFx_SpecialLwTurn_Phys,
@@ -254,8 +257,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         317,
-        0x00341414,
-        0x15000000,
+        ftFx_MF_SpecialAirLw,
+        FtMoveId_SpecialLw * (1 << 24),
         ftFx_SpecialAirLwStart_Anim,
         ftFx_SpecialAirLwStart_IASA,
         ftFx_SpecialAirLwStart_Phys,
@@ -264,8 +267,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         318,
-        0x003C1414,
-        0x15000000,
+        ftFx_MF_SpecialAirLwLoop,
+        FtMoveId_SpecialLw * (1 << 24),
         ftFx_SpecialAirLwLoop_Anim,
         ftFx_SpecialAirLwLoop_IASA,
         ftFx_SpecialAirLwLoop_Phys,
@@ -274,8 +277,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         319,
-        0x00341414,
-        0x15000000,
+        ftFx_MF_SpecialAirLw,
+        FtMoveId_SpecialLw * (1 << 24),
         ftFx_SpecialAirLwHit_Anim,
         ftFx_SpecialAirLwHit_IASA,
         ftFx_SpecialAirLwHit_Phys,
@@ -284,8 +287,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         320,
-        0x00341414,
-        0x15000000,
+        ftFx_MF_SpecialAirLw,
+        FtMoveId_SpecialLw * (1 << 24),
         ftFx_SpecialAirLwEnd_Anim,
         ftFx_SpecialAirLwEnd_IASA,
         ftFx_SpecialAirLwEnd_Phys,
@@ -294,8 +297,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         318,
-        0x00341414,
-        0x15000000,
+        ftFx_MF_SpecialAirLw,
+        FtMoveId_SpecialLw * (1 << 24),
         ftFx_SpecialAirLwTurn_Anim,
         ftFx_SpecialAirLwTurn_IASA,
         ftFx_SpecialAirLwTurn_Phys,
@@ -304,8 +307,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         321,
-        0x00000072,
-        0x01000000,
+        ftFx_MF_Appeal,
+        FtMoveId_Unk01 * (1 << 24),
         ftFx_AppealS_Anim,
         ftFx_AppealS_IASA,
         ftFx_AppealS_Phys,
@@ -314,8 +317,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         322,
-        0x00000072,
-        0x01000000,
+        ftFx_MF_Appeal,
+        FtMoveId_Unk01 * (1 << 24),
         ftFx_AppealS_Anim,
         ftFx_AppealS_IASA,
         ftFx_AppealS_Phys,
@@ -324,8 +327,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         323,
-        0x00000072,
-        0x01000000,
+        ftFx_MF_Appeal,
+        FtMoveId_Unk01 * (1 << 24),
         ftFx_AppealS_Anim,
         ftFx_AppealS_IASA,
         ftFx_AppealS_Phys,
@@ -334,8 +337,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         324,
-        0x00000072,
-        0x01000000,
+        ftFx_MF_Appeal,
+        FtMoveId_Unk01 * (1 << 24),
         ftFx_AppealS_Anim,
         ftFx_AppealS_IASA,
         ftFx_AppealS_Phys,
@@ -344,8 +347,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         325,
-        0x00000072,
-        0x01000000,
+        ftFx_MF_Appeal,
+        FtMoveId_Unk01 * (1 << 24),
         ftFx_AppealS_Anim,
         ftFx_AppealS_IASA,
         ftFx_AppealS_Phys,
@@ -354,8 +357,8 @@ MotionState ftFx_Init_MotionStateTable[] = {
     },
     {
         326,
-        0x00000072,
-        0x01000000,
+        ftFx_MF_Appeal,
+        1 * (1 << 24),
         ftFx_AppealS_Anim,
         ftFx_AppealS_IASA,
         ftFx_AppealS_Phys,
