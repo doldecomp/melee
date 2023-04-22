@@ -2,18 +2,24 @@
 #define MELEE_FT_CHARA_FTPOPO_FORWARD_H
 
 #include <platform.h>
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
 
 typedef enum ftPopo_MotionFlags {
-    ftPp_MF_Special = (1 << 4) | (1 << 18) | (1 << 20) | (1 << 21),
-    ftPp_MF_SpecialLw = ftPp_MF_Special | (1 << 2),
-    ftPp_MF_SpecialN = ftPp_MF_Special | (1 << 0) | (1 << 8),
-    ftPp_MF_SpecialS = ftPp_MF_Special | (1 << 1) | (1 << 9),
-    ftPp_MF_SpecialHi = ftPp_MF_SpecialS | (1 << 0),
-    ftPp_MF_MS_358 = ftPp_MF_SpecialLw | (1 << 10),
-    ftPp_MF_SpecialAirN = ftPp_MF_SpecialN | (1 << 10),
-    ftPp_MF_SpecialAirS = ftPp_MF_SpecialS | (1 << 10),
-    ftPp_MF_SpecialAirHi = ftPp_MF_SpecialHi | (1 << 10),
+    ftPp_MF_Special = FtStateChange_SkipUpdateModel |
+                      FtStateChange_SkipUpdateItemVis |
+                      FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState,
+    ftPp_MF_SpecialLw =
+        ftPp_MF_Special | FtStateChange_PreserveColAnimHitStatus,
+    ftPp_MF_SpecialN = ftPp_MF_Special | FtStateChange_PreserveFastFall |
+                       FtStateChange_SkipUpdateThrowException,
+    ftPp_MF_SpecialS = ftPp_MF_Special | FtStateChange_PreserveGfx |
+                       FtStateChange_PreserveSfx,
+    ftPp_MF_SpecialHi = ftPp_MF_SpecialS | FtStateChange_PreserveFastFall,
+    ftPp_MF_MS_358 = ftPp_MF_SpecialLw | FtStateChange_SkipUpdateParasol,
+    ftPp_MF_SpecialAirN = ftPp_MF_SpecialN | FtStateChange_SkipUpdateParasol,
+    ftPp_MF_SpecialAirS = ftPp_MF_SpecialS | FtStateChange_SkipUpdateParasol,
+    ftPp_MF_SpecialAirHi = ftPp_MF_SpecialHi | FtStateChange_SkipUpdateParasol,
 } ftPopo_MotionFlags;
 
 typedef enum ftPopo_MotionState {
