@@ -506,7 +506,7 @@ struct S_TEMP1 {
 struct MotionState {
     enum_t anim_id;
 
-    Fighter_MotionStateChangeFlags x4_flags;
+    enum_t x4_flags;
 
     union {
         /// @todo Try to match without this being a @c union.

@@ -7,60 +7,35 @@
 typedef struct ftCaptain_DatAttrs ftCaptain_DatAttrs;
 typedef union ftCaptain_MotionVars ftCaptain_MotionVars;
 
-static u32 const ftCa_MF_SwordSwing ATTRIBUTE_USED =
-    FtStateChange_PreserveGfx | FtStateChange_Unk_6 |
-    FtStateChange_SkipUpdateRumble | FtStateChange_SkipUpdateItemVis |
-    FtStateChange_SkipUpdateModelPartVis;
-
-static u32 const ftCa_MF_BatSwing ATTRIBUTE_USED =
-    ftCa_MF_SwordSwing | FtStateChange_PreserveColAnimHitStatus;
-
-static u32 const ftCa_MF_ParasolSwing ATTRIBUTE_USED =
-    ftCa_MF_SwordSwing | FtStateChange_SkipUpdateHit;
-
-static u32 const ftCa_MF_HarisenSwing ATTRIBUTE_USED =
-    ftCa_MF_BatSwing | FtStateChange_SkipUpdateHit;
-
-static u32 const ftCa_MF_StarRodSwing ATTRIBUTE_USED =
-    ftCa_MF_SwordSwing | FtStateChange_SkipUpdateModel;
-
-static u32 const ftCa_MF_LipstickSwing ATTRIBUTE_USED =
-    ftCa_MF_BatSwing | FtStateChange_SkipUpdateModel;
-
-static u32 const ftCa_MF_SpecialBase0 ATTRIBUTE_USED =
-    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateItemVis |
-    FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState;
-
-static u32 const ftCa_MF_SpecialBase1 ATTRIBUTE_USED =
-    ftCa_MF_SpecialBase0 | FtStateChange_PreserveSfx;
-
-static u32 const ftCa_MF_SpecialN ATTRIBUTE_USED =
-    ftCa_MF_SpecialBase1 | FtStateChange_PreserveFastFall;
-
-static u32 const ftCa_MF_SpecialAirN ATTRIBUTE_USED =
-    ftCa_MF_SpecialN | FtStateChange_SkipUpdateParasol;
-
-static u32 const ftCa_MF_SpecialS ATTRIBUTE_USED =
-    ftCa_MF_SpecialBase1 | FtStateChange_PreserveGfx;
-
-static u32 const ftCa_MF_SpecialAirSStart ATTRIBUTE_USED =
-    ftCa_MF_SpecialS | FtStateChange_SkipUpdateParasol;
-
-static u32 const ftCa_MF_SpecialAirS ATTRIBUTE_USED =
-    ftCa_MF_SpecialS | FtStateChange_SkipUpdateParasol;
-
-static u32 const ftCa_MF_SpecialHi ATTRIBUTE_USED =
-    ftCa_MF_SpecialBase0 | FtStateChange_PreserveFastFall |
-    FtStateChange_PreserveGfx;
-
-static u32 const ftCa_MF_SpecialAirHi ATTRIBUTE_USED =
-    ftCa_MF_SpecialHi | FtStateChange_SkipUpdateParasol;
-
-static u32 const ftCa_MF_SpecialLw ATTRIBUTE_USED =
-    ftCa_MF_SpecialBase1 | FtStateChange_PreserveColAnimHitStatus;
-
-static u32 const ftCa_MF_SpecialLwRebound ATTRIBUTE_USED =
-    ftCa_MF_SpecialLw | FtStateChange_SkipUpdateParasol;
+typedef enum ftCa_MotionFlags {
+    ftCa_MF_SwordSwing = FtStateChange_PreserveGfx | FtStateChange_Unk_6 |
+                         FtStateChange_SkipUpdateRumble |
+                         FtStateChange_SkipUpdateItemVis |
+                         FtStateChange_SkipUpdateModelPartVis,
+    ftCa_MF_BatSwing =
+        ftCa_MF_SwordSwing | FtStateChange_PreserveColAnimHitStatus,
+    ftCa_MF_ParasolSwing = ftCa_MF_SwordSwing | FtStateChange_SkipUpdateHit,
+    ftCa_MF_HarisenSwing = ftCa_MF_BatSwing | FtStateChange_SkipUpdateHit,
+    ftCa_MF_StarRodSwing = ftCa_MF_SwordSwing | FtStateChange_SkipUpdateModel,
+    ftCa_MF_LipstickSwing = ftCa_MF_BatSwing | FtStateChange_SkipUpdateModel,
+    ftCa_MF_SpecialBase0 =
+        FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateItemVis |
+        FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState,
+    ftCa_MF_SpecialBase1 = ftCa_MF_SpecialBase0 | FtStateChange_PreserveSfx,
+    ftCa_MF_SpecialN = ftCa_MF_SpecialBase1 | FtStateChange_PreserveFastFall,
+    ftCa_MF_SpecialAirN = ftCa_MF_SpecialN | FtStateChange_SkipUpdateParasol,
+    ftCa_MF_SpecialS = ftCa_MF_SpecialBase1 | FtStateChange_PreserveGfx,
+    ftCa_MF_SpecialAirSStart =
+        ftCa_MF_SpecialS | FtStateChange_SkipUpdateParasol,
+    ftCa_MF_SpecialAirS = ftCa_MF_SpecialS | FtStateChange_SkipUpdateParasol,
+    ftCa_MF_SpecialHi = ftCa_MF_SpecialBase0 | FtStateChange_PreserveFastFall |
+                        FtStateChange_PreserveGfx,
+    ftCa_MF_SpecialAirHi = ftCa_MF_SpecialHi | FtStateChange_SkipUpdateParasol,
+    ftCa_MF_SpecialLw =
+        ftCa_MF_SpecialBase1 | FtStateChange_PreserveColAnimHitStatus,
+    ftCa_MF_SpecialLwRebound =
+        ftCa_MF_SpecialLw | FtStateChange_SkipUpdateParasol,
+} ftCa_MotionFlags;
 
 typedef enum ftCaptain_MotionState {
     ftCa_MS_Swing42_Sword = ftCo_MS_Count,
