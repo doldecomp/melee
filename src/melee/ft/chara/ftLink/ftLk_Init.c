@@ -135,7 +135,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     },
     {
         304,
-        ftLk_MF_SpecialSThrowEmpty,
+        ftLk_MF_SpecialSCatch,
         FtMoveId_SpecialS * (1 << 24),
         ftLk_SpecialSThrowEmpty_Anim,
         NULL,
@@ -155,7 +155,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     },
     {
         306,
-        ftLk_MF_SpecialAirSCatch,
+        ftLk_MF_SpecialAirSThrow,
         FtMoveId_SpecialS * (1 << 24),
         ftLk_SpecialAirSCatch_Anim,
         ftLk_SpecialAirSCatch_IASA,
@@ -185,7 +185,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     },
     {
         309,
-        ftLk_MF_SpecialAirHi,
+        ftLk_MF_SpecialHi,
         FtMoveId_SpecialHi * (1 << 24),
         ftLk_SpecialAirHi_Anim,
         ftLk_SpecialAirHi_IASA,
@@ -215,7 +215,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     },
     {
         312,
-        ftLk_MF_Zair,
+        FtStateChange_FreezeState,
         FtMoveId_Unk01 * (1 << 24),
         ftCo_Zair_Anim,
         ftCo_Zair_IASA,
