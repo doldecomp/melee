@@ -1,3 +1,5 @@
+#include "forward.h"
+
 #include "ftZd_Init.h"
 
 #include "ftZd_SpecialHi.h"
@@ -15,8 +17,8 @@
 MotionState ftZd_Init_MotionStateTable[] = {
     {
         295,
-        0x00341011,
-        0x12000000,
+        ftZd_MF_SpecialN,
+        FtMoveId_SpecialN << 24,
         ftZd_SpecialN_Anim,
         ftZd_SpecialN_IASA,
         ftZd_SpecialN_Phys,
@@ -25,8 +27,8 @@ MotionState ftZd_Init_MotionStateTable[] = {
     },
     {
         296,
-        0x00341411,
-        0x12000000,
+        ftZd_MF_SpecialAirN,
+        FtMoveId_SpecialN << 24,
         ftZd_SpecialAirN_Anim,
         ftZd_SpecialAirN_IASA,
         ftZd_SpecialAirN_Phys,
@@ -35,8 +37,8 @@ MotionState ftZd_Init_MotionStateTable[] = {
     },
     {
         297,
-        0x00340112,
-        0x13000000,
+        ftZd_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftZd_SpecialSStart_Anim,
         ftZd_SpecialSStart_IASA,
         ftZd_SpecialSStart_Phys,
@@ -45,8 +47,8 @@ MotionState ftZd_Init_MotionStateTable[] = {
     },
     {
         298,
-        0x00340112,
-        0x13000000,
+        ftZd_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftZd_SpecialSHold_Anim,
         ftZd_SpecialSHold_IASA,
         ftZd_SpecialSHold_Phys,
@@ -55,8 +57,8 @@ MotionState ftZd_Init_MotionStateTable[] = {
     },
     {
         299,
-        0x00340112,
-        0x13000000,
+        ftZd_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftZd_SpecialSEnd_Anim,
         ftZd_SpecialSEnd_IASA,
         ftZd_SpecialSEnd_Phys,
@@ -65,8 +67,8 @@ MotionState ftZd_Init_MotionStateTable[] = {
     },
     {
         300,
-        0x00340512,
-        0x13000000,
+        ftZd_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftZd_SpecialAirSStart_Anim,
         ftZd_SpecialAirSStart_IASA,
         ftZd_SpecialAirSStart_Phys,
@@ -75,8 +77,8 @@ MotionState ftZd_Init_MotionStateTable[] = {
     },
     {
         301,
-        0x00340512,
-        0x13000000,
+        ftZd_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftZd_SpecialAirSHold_Anim,
         ftZd_SpecialAirSHold_IASA,
         ftZd_SpecialAirSHold_Phys,
@@ -85,8 +87,8 @@ MotionState ftZd_Init_MotionStateTable[] = {
     },
     {
         302,
-        0x00340512,
-        0x13000000,
+        ftZd_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftZd_SpecialAirSEnd_Anim,
         ftZd_SpecialAirSEnd_IASA,
         ftZd_SpecialAirSEnd_Phys,
@@ -95,8 +97,8 @@ MotionState ftZd_Init_MotionStateTable[] = {
     },
     {
         303,
-        0x00340013,
-        0x14000000,
+        ftZd_MF_SpecialHi,
+        FtMoveId_SpecialHi << 24,
         ftZd_SpecialHiStart_Anim,
         ftZd_SpecialHiStart_IASA,
         ftZd_SpecialHiStart_Phys,
@@ -105,8 +107,8 @@ MotionState ftZd_Init_MotionStateTable[] = {
     },
     {
         303,
-        0x00340013,
-        0x14000000,
+        ftZd_MF_SpecialHi,
+        FtMoveId_SpecialHi << 24,
         ftZd_SpecialHi_Anim,
         ftZd_SpecialHi_IASA,
         ftZd_SpecialHi_Phys,
@@ -115,8 +117,8 @@ MotionState ftZd_Init_MotionStateTable[] = {
     },
     {
         304,
-        0x00340013,
-        0x14000000,
+        ftZd_MF_SpecialHi,
+        FtMoveId_SpecialHi << 24,
         ftZd_SpecialHiEnd_Anim,
         ftZd_SpecialHiEnd_IASA,
         ftZd_SpecialHiEnd_Phys,
@@ -125,8 +127,8 @@ MotionState ftZd_Init_MotionStateTable[] = {
     },
     {
         305,
-        0x00340413,
-        0x14000000,
+        ftZd_MF_SpecialAirHi,
+        FtMoveId_SpecialHi << 24,
         ftZd_SpecialAirHiStart_Anim,
         ftZd_SpecialAirHiStart_IASA,
         ftZd_SpecialAirHiStart_Phys,
@@ -135,8 +137,8 @@ MotionState ftZd_Init_MotionStateTable[] = {
     },
     {
         305,
-        0x00340413,
-        0x14000000,
+        ftZd_MF_SpecialAirHi,
+        FtMoveId_SpecialHi << 24,
         ftZd_SpecialAirHi_Anim,
         ftZd_SpecialAirHi_IASA,
         ftZd_SpecialAirHi_Phys,
@@ -145,8 +147,8 @@ MotionState ftZd_Init_MotionStateTable[] = {
     },
     {
         306,
-        0x00340413,
-        0x14000000,
+        ftZd_MF_SpecialAirHi,
+        FtMoveId_SpecialHi << 24,
         ftZd_SpecialAirHiEnd_Anim,
         ftZd_SpecialAirHiEnd_IASA,
         ftZd_SpecialAirHiEnd_Phys,
@@ -155,8 +157,8 @@ MotionState ftZd_Init_MotionStateTable[] = {
     },
     {
         307,
-        0x00340014,
-        0x15000000,
+        ftZd_MF_SpecialLw,
+        FtMoveId_SpecialLw << 24,
         ftZd_SpecialLw_Anim,
         ftZd_SpecialLw_IASA,
         ftZd_SpecialLw_Phys,
@@ -165,8 +167,8 @@ MotionState ftZd_Init_MotionStateTable[] = {
     },
     {
         308,
-        0x00340014,
-        0x15000000,
+        ftZd_MF_SpecialLw,
+        FtMoveId_SpecialLw << 24,
         ftZd_SpecialLwEnd_Anim,
         ftZd_SpecialLwEnd_IASA,
         ftZd_SpecialLwEnd_Phys,
@@ -175,8 +177,8 @@ MotionState ftZd_Init_MotionStateTable[] = {
     },
     {
         309,
-        0x00340414,
-        0x15000000,
+        ftZd_MF_SpecialAirLw,
+        FtMoveId_SpecialLw << 24,
         ftZd_SpecialAirLw_Anim,
         ftZd_SpecialAirLw_IASA,
         ftZd_SpecialAirLw_Phys,
@@ -185,8 +187,8 @@ MotionState ftZd_Init_MotionStateTable[] = {
     },
     {
         310,
-        0x00340414,
-        0x15000000,
+        ftZd_MF_SpecialAirLw,
+        FtMoveId_SpecialLw << 24,
         ftZd_SpecialAirLwEnd_Anim,
         ftZd_SpecialAirLwEnd_IASA,
         ftZd_SpecialAirLwEnd_Phys,
@@ -244,8 +246,8 @@ void ftZd_Init_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftZelda_DatAttrs);
 
-    it_8026B3F8(item_list[0], 0x6CU);
-    it_8026B3F8(item_list[1], 0x6DU);
+    it_8026B3F8(item_list[0], 108);
+    it_8026B3F8(item_list[1], 109);
 }
 
 void ftZd_Init_801393AC(HSD_GObj* gobj)
