@@ -330,7 +330,7 @@ static inline void ftGameWatch_SpecialS_SetCall(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialS_ItemJudgementSetup;
 }
 
-static Fighter_MotionStateChangeFlags const transition_flags =
+static u32 const transition_flags =
     FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |
     FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |

@@ -5,28 +5,47 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
-typedef enum ftSk_MotionFlags {
-    ftSk_MF_Special = FtStateChange_SkipUpdateModel |
-                      FtStateChange_SkipUpdateItemVis |
-                      FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState,
-    ftSk_MF_SpecialS = ftSk_MF_Special | FtStateChange_PreserveGfx,
-    ftSk_MF_SpecialLw =
-        ftSk_MF_Special | FtStateChange_PreserveColAnimHitStatus,
-    ftSk_MF_SpecialN = ftSk_MF_Special | FtStateChange_PreserveFastFall |
-                       FtStateChange_SkipUpdateThrowException,
-    ftSk_MF_SpecialHi = ftSk_MF_SpecialS | FtStateChange_PreserveFastFall |
-                        FtStateChange_PreserveSfx,
-    ftSk_MF_SpecialAirS = ftSk_MF_SpecialS | FtStateChange_SkipUpdateParasol,
-    ftSk_MF_SpecialAirLw = ftSk_MF_SpecialLw | FtStateChange_SkipUpdateParasol,
-    ftSk_MF_SpecialAirN = ftSk_MF_SpecialN | FtStateChange_SkipUpdateParasol,
-    ftSk_MF_SpecialAirHi = ftSk_MF_SpecialHi | FtStateChange_SkipUpdateParasol,
-    ftSk_MF_SpecialSLoop = ftSk_MF_SpecialS | FtStateChange_Unk_19,
-    ftSk_MF_SpecialNLoop = ftSk_MF_SpecialN | FtStateChange_Unk_19,
-    ftSk_MF_SpecialAirSLoop =
-        ftSk_MF_SpecialSLoop | FtStateChange_SkipUpdateParasol,
-    ftSk_MF_SpecialAirNLoop =
-        ftSk_MF_SpecialNLoop | FtStateChange_SkipUpdateParasol,
-} ftSk_MotionFlags;
+static u32 const ftSk_MF_Special ATTRIBUTE_USED =
+    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateItemVis |
+    FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState;
+
+static u32 const ftSk_MF_SpecialS ATTRIBUTE_USED =
+    ftSk_MF_Special | FtStateChange_PreserveGfx;
+
+static u32 const ftSk_MF_SpecialLw ATTRIBUTE_USED =
+    ftSk_MF_Special | FtStateChange_PreserveColAnimHitStatus;
+
+static u32 const ftSk_MF_SpecialN ATTRIBUTE_USED =
+    ftSk_MF_Special | FtStateChange_PreserveFastFall |
+    FtStateChange_SkipUpdateThrowException;
+
+static u32 const ftSk_MF_SpecialHi ATTRIBUTE_USED =
+    ftSk_MF_SpecialS | FtStateChange_PreserveFastFall |
+    FtStateChange_PreserveSfx;
+
+static u32 const ftSk_MF_SpecialAirS ATTRIBUTE_USED =
+    ftSk_MF_SpecialS | FtStateChange_SkipUpdateParasol;
+
+static u32 const ftSk_MF_SpecialAirLw ATTRIBUTE_USED =
+    ftSk_MF_SpecialLw | FtStateChange_SkipUpdateParasol;
+
+static u32 const ftSk_MF_SpecialAirN ATTRIBUTE_USED =
+    ftSk_MF_SpecialN | FtStateChange_SkipUpdateParasol;
+
+static u32 const ftSk_MF_SpecialAirHi ATTRIBUTE_USED =
+    ftSk_MF_SpecialHi | FtStateChange_SkipUpdateParasol;
+
+static u32 const ftSk_MF_SpecialSLoop ATTRIBUTE_USED =
+    ftSk_MF_SpecialS | FtStateChange_Unk_19;
+
+static u32 const ftSk_MF_SpecialNLoop ATTRIBUTE_USED =
+    ftSk_MF_SpecialN | FtStateChange_Unk_19;
+
+static u32 const ftSk_MF_SpecialAirSLoop ATTRIBUTE_USED =
+    ftSk_MF_SpecialSLoop | FtStateChange_SkipUpdateParasol;
+
+static u32 const ftSk_MF_SpecialAirNLoop ATTRIBUTE_USED =
+    ftSk_MF_SpecialNLoop | FtStateChange_SkipUpdateParasol;
 
 typedef enum ftSeak_MotionState {
     ftSk_MS_SpecialN_ChargeStart = ftCo_MS_Count,

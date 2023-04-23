@@ -388,7 +388,7 @@ static inline void ftGameWatch_SpecialLw_UpdateVarsColl(HSD_GObj* gobj)
     }
 }
 
-static Fighter_MotionStateChangeFlags const transition_flags0 =
+static u32 const transition_flags0 =
     FtStateChange_PreserveGfx | FtStateChange_PreserveColAnimHitStatus |
     FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
@@ -446,7 +446,7 @@ static inline void ftGameWatch_SpecialLw_UpdateVarsAction(HSD_GObj* gobj)
 }
 
 /// @todo Combine common flags with #transition_flags0.
-static Fighter_MotionStateChangeFlags const transition_flags1 =
+static u32 const transition_flags1 =
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |
     FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |
     FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |

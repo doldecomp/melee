@@ -498,8 +498,7 @@ void ftKp_SpecialAirS_Enter(HSD_GObj* gobj)
     }
 }
 
-static Fighter_MotionStateChangeFlags const transition_flags0 =
-    FtStateChange_SkipUpdateMatAnim;
+static u32 const transition_flags0 = FtStateChange_SkipUpdateMatAnim;
 
 void ftKp_SpecialS_8013302C(HSD_GObj* gobj)
 {
@@ -542,7 +541,7 @@ void ftKp_SpecialS_801330E4(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
 }
 
-static Fighter_MotionStateChangeFlags const transition_flags1 =
+static u32 const transition_flags1 =
     FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
     FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
@@ -737,7 +736,7 @@ void ftKp_SpecialAirS_Anim(HSD_GObj* gobj)
     }
 }
 
-static Fighter_MotionStateChangeFlags const transition_flags3 =
+static u32 const transition_flags3 =
     FtStateChange_SkipUpdateMatAnim | FtStateChange_Unk_19;
 
 void ftKp_SpecialSCatch_Anim(HSD_GObj* gobj)

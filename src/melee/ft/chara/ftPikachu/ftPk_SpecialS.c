@@ -112,7 +112,7 @@ void ftPk_SpecialAirSStart_Coll(HSD_GObj* gobj)
     }
 }
 
-static const Fighter_MotionStateChangeFlags transition_flags0 =
+static const u32 transition_flags0 =
     FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_PreserveSfx | FtStateChange_SkipUpdateColAnim |
     FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |
@@ -219,7 +219,7 @@ void ftPk_SpecialAirSCharge_Coll(HSD_GObj* gobj)
     }
 }
 
-static Fighter_MotionStateChangeFlags const transition_flags1 =
+static u32 const transition_flags1 =
     FtStateChange_PreserveGfx | FtStateChange_PreserveColAnimHitStatus |
     FtStateChange_SkipUpdateMatAnim | FtStateChange_PreserveSfx |
     FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
@@ -343,7 +343,7 @@ void ftPk_SpecialAirSLaunch_Coll(HSD_GObj* gobj)
     }
 }
 
-static Fighter_MotionStateChangeFlags const transition_flags2 =
+static u32 const transition_flags2 =
     FtStateChange_PreserveGfx | FtStateChange_PreserveColAnimHitStatus |
     FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |
     FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |
@@ -454,7 +454,7 @@ void ftPk_SpecialAirS_Coll(HSD_GObj* gobj)
     }
 }
 
-static Fighter_MotionStateChangeFlags const transition_flags3 =
+static u32 const transition_flags3 =
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit;
 
 void ftPk_SpecialS_ChangeMotion_Unk10(HSD_GObj* gobj)
