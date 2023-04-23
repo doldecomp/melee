@@ -8,7 +8,7 @@
 struct ftCaptain_FighterVars {
     /* 0x222C */ u32 during_specials_start;
     /* 0x2230 */ u32 during_specials;
-    u8 _[FighterVars_Size - 8];
+    u8 _[FIGHTERVARS_SIZE - 8];
 };
 
 struct ftCaptain_DatAttrs {

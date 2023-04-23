@@ -1105,7 +1105,7 @@ struct Fighter {
     u8 filler_x222B;
 
     union Fighter_FighterVars {
-        u8 _[FighterVars_Size];
+        u8 _[FIGHTERVARS_SIZE];
         struct ftCaptain_FighterVars ca, gn;
         struct ftDonkey_FighterVars dk;
         struct ftFox_FighterVars fx, fc;

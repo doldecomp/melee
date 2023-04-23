@@ -19,7 +19,7 @@ struct ftMario_FighterVars {
     /* 0x2238 */ bool x2238_isCapeBoost;
     /* 0x223C */ HSD_GObj* x223C_capeGObj;
     /* 0x2240 */ uint x2240;
-    u8 _[FighterVars_Size - 0x18];
+    u8 _[FIGHTERVARS_SIZE - 0x18];
 };
 
 typedef struct ftMario_DatAttrs {

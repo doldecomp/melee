@@ -13,7 +13,7 @@ struct ftLink_FighterVars {
     /* 0x2240 */ u32 x2240;
     /* 0x2244 */ u32 x2244;
     /* 0x2248 */ u32 x2248;
-    u8 _[FighterVars_Size - 0x20];
+    u8 _[FIGHTERVARS_SIZE - 0x20];
 };
 
 typedef struct _ftLinkAttributes {
