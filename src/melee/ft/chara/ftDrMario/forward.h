@@ -3,9 +3,8 @@
 
 #include "ft/forward.h"
 
-typedef enum ftDr_MotionFlags {
-    ftDr_MF_Appeal = FtStateChange_PreserveFastFall |
-                     FtStateChange_SkipUpdateModel |
-                     FtStateChange_SkipUpdateAnimVel | FtStateChange_Unk_6,
-} ftDr_MotionFlags;
+static u32 const ftDr_MF_Appeal ATTRIBUTE_USED =
+    FtStateChange_PreserveFastFall | FtStateChange_SkipUpdateModel |
+    FtStateChange_SkipUpdateAnimVel | FtStateChange_Unk_6;
+
 #endif

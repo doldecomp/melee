@@ -649,7 +649,7 @@ void ftSk_SpecialAirSStart_Coll(HSD_GObj* gobj)
     }
 }
 
-static Fighter_MotionStateChangeFlags const transition_flags =
+static u32 const transition_flags =
     FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
     FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |

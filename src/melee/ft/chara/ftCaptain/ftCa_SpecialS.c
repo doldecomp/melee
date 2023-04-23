@@ -113,7 +113,7 @@ void ftCa_SpecialAirS_Enter(HSD_GObj* gobj)
     ftCommon_8007D60C(fp);
 }
 
-static Fighter_MotionStateChangeFlags const transition_flags =
+static u32 const transition_flags =
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |
     FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |

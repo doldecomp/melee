@@ -181,14 +181,14 @@ void ftMt_SpecialAirHiStart_Coll(HSD_GObj* gobj)
     }
 }
 
-static Fighter_MotionStateChangeFlags const transition_flags0 =
+static u32 const transition_flags0 =
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |
     FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |
     FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |
     FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
     FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
 
-static Fighter_MotionStateChangeFlags const transition_flags1 =
+static u32 const transition_flags1 =
     transition_flags0 | FtStateChange_PreserveColAnimHitStatus;
 
 /// Mewtwo's ground -> air Teleport Start Motion State handler

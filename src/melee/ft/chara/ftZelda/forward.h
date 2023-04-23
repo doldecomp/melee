@@ -4,23 +4,36 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
-typedef enum ftZd_MotionFlags {
-    ftZd_MF_Special = FtStateChange_SkipUpdateModel |
-                      FtStateChange_SkipUpdateItemVis |
-                      FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState,
-    ftZd_MF_SpecialN = ftZd_MF_Special | FtStateChange_PreserveFastFall |
-                       FtStateChange_SkipUpdateColAnim,
-    ftZd_MF_SpecialHi = ftZd_MF_Special | FtStateChange_PreserveFastFall |
-                        FtStateChange_PreserveGfx,
-    ftZd_MF_SpecialLw =
-        ftZd_MF_Special | FtStateChange_PreserveColAnimHitStatus,
-    ftZd_MF_SpecialS = ftZd_MF_Special | FtStateChange_PreserveGfx |
-                       FtStateChange_SkipUpdateThrowException,
-    ftZd_MF_SpecialAirN = ftZd_MF_SpecialN | FtStateChange_SkipUpdateParasol,
-    ftZd_MF_SpecialAirHi = ftZd_MF_SpecialHi | FtStateChange_SkipUpdateParasol,
-    ftZd_MF_SpecialAirLw = ftZd_MF_SpecialLw | FtStateChange_SkipUpdateParasol,
-    ftZd_MF_SpecialAirS = ftZd_MF_SpecialS | FtStateChange_SkipUpdateParasol,
-} ftZd_MotionFlags;
+static u32 const ftZd_MF_Special ATTRIBUTE_USED =
+    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateItemVis |
+    FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState;
+
+static u32 const ftZd_MF_SpecialN ATTRIBUTE_USED =
+    ftZd_MF_Special | FtStateChange_PreserveFastFall |
+    FtStateChange_SkipUpdateColAnim;
+
+static u32 const ftZd_MF_SpecialHi ATTRIBUTE_USED =
+    ftZd_MF_Special | FtStateChange_PreserveFastFall |
+    FtStateChange_PreserveGfx;
+
+static u32 const ftZd_MF_SpecialLw ATTRIBUTE_USED =
+    ftZd_MF_Special | FtStateChange_PreserveColAnimHitStatus;
+
+static u32 const ftZd_MF_SpecialS ATTRIBUTE_USED =
+    ftZd_MF_Special | FtStateChange_PreserveGfx |
+    FtStateChange_SkipUpdateThrowException;
+
+static u32 const ftZd_MF_SpecialAirN ATTRIBUTE_USED =
+    ftZd_MF_SpecialN | FtStateChange_SkipUpdateParasol;
+
+static u32 const ftZd_MF_SpecialAirHi ATTRIBUTE_USED =
+    ftZd_MF_SpecialHi | FtStateChange_SkipUpdateParasol;
+
+static u32 const ftZd_MF_SpecialAirLw ATTRIBUTE_USED =
+    ftZd_MF_SpecialLw | FtStateChange_SkipUpdateParasol;
+
+static u32 const ftZd_MF_SpecialAirS ATTRIBUTE_USED =
+    ftZd_MF_SpecialS | FtStateChange_SkipUpdateParasol;
 
 enum ftZelda_AS {
     ftZd_MS_SpecialN = ftCo_MS_Count,

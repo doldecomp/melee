@@ -4,10 +4,8 @@
 #include <platform.h>
 #include "ft/forward.h"
 
-typedef enum ftCl_MotionFlags {
-    ftCl_MF_Zair = FtStateChange_PreserveFastFall |
-                   FtStateChange_SkipUpdateModel |
-                   FtStateChange_SkipUpdateAnimVel | FtStateChange_Unk_6,
-} ftCl_MotionFlags;
+static u32 const ftCl_MF_Zair ATTRIBUTE_USED =
+    FtStateChange_PreserveFastFall | FtStateChange_SkipUpdateModel |
+    FtStateChange_SkipUpdateAnimVel | FtStateChange_Unk_6;
 
 #endif

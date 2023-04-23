@@ -4,28 +4,43 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
-typedef enum ftMt_MotionFlags {
-    ftMt_MF_Special = FtStateChange_SkipUpdateModel |
-                      FtStateChange_SkipUpdateItemVis |
-                      FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState,
-    ftMt_MF_SpecialHiStart = ftMt_MF_Special | FtStateChange_PreserveFastFall |
-                             FtStateChange_PreserveGfx,
-    ftMt_MF_SpecialNStart = ftMt_MF_Special | FtStateChange_PreserveFastFall |
-                            FtStateChange_SkipUpdateThrowException,
-    ftMt_MF_SpecialLw = ftMt_MF_Special |
-                        FtStateChange_PreserveColAnimHitStatus |
-                        FtStateChange_SkipUpdateThrowException,
-    ftMt_MF_SpecialAirHiStart =
-        ftMt_MF_SpecialHiStart | FtStateChange_SkipUpdateParasol,
-    ftMt_MF_SpecialAirNStart =
-        ftMt_MF_SpecialNStart | FtStateChange_SkipUpdateParasol,
-    ftMt_MF_SpecialAirLw = ftMt_MF_SpecialLw | FtStateChange_SkipUpdateParasol,
-    ftMt_MF_SpecialS = ftMt_MF_Special | FtStateChange_PreserveGfx |
-                       FtStateChange_SkipUpdateColAnim,
-    ftMt_MF_SpecialAirS = ftMt_MF_SpecialS | FtStateChange_SkipUpdateParasol,
-    ftMt_MF_SpecialN = ftMt_MF_SpecialNStart | FtStateChange_Unk_19,
-    ftMt_MF_SpecialAirN = ftMt_MF_SpecialN | FtStateChange_SkipUpdateParasol,
-} ftMt_MotionFlags;
+static u32 const ftMt_MF_Special ATTRIBUTE_USED =
+    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateItemVis |
+    FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState;
+
+static u32 const ftMt_MF_SpecialHiStart ATTRIBUTE_USED =
+    ftMt_MF_Special | FtStateChange_PreserveFastFall |
+    FtStateChange_PreserveGfx;
+
+static u32 const ftMt_MF_SpecialNStart ATTRIBUTE_USED =
+    ftMt_MF_Special | FtStateChange_PreserveFastFall |
+    FtStateChange_SkipUpdateThrowException;
+
+static u32 const ftMt_MF_SpecialLw ATTRIBUTE_USED =
+    ftMt_MF_Special | FtStateChange_PreserveColAnimHitStatus |
+    FtStateChange_SkipUpdateThrowException;
+
+static u32 const ftMt_MF_SpecialAirHiStart ATTRIBUTE_USED =
+    ftMt_MF_SpecialHiStart | FtStateChange_SkipUpdateParasol;
+
+static u32 const ftMt_MF_SpecialAirNStart ATTRIBUTE_USED =
+    ftMt_MF_SpecialNStart | FtStateChange_SkipUpdateParasol;
+
+static u32 const ftMt_MF_SpecialAirLw ATTRIBUTE_USED =
+    ftMt_MF_SpecialLw | FtStateChange_SkipUpdateParasol;
+
+static u32 const ftMt_MF_SpecialS ATTRIBUTE_USED =
+    ftMt_MF_Special | FtStateChange_PreserveGfx |
+    FtStateChange_SkipUpdateColAnim;
+
+static u32 const ftMt_MF_SpecialAirS ATTRIBUTE_USED =
+    ftMt_MF_SpecialS | FtStateChange_SkipUpdateParasol;
+
+static u32 const ftMt_MF_SpecialN ATTRIBUTE_USED =
+    ftMt_MF_SpecialNStart | FtStateChange_Unk_19;
+
+static u32 const ftMt_MF_SpecialAirN ATTRIBUTE_USED =
+    ftMt_MF_SpecialN | FtStateChange_SkipUpdateParasol;
 
 typedef enum ftMewtwo_MotionState {
     ftMt_MS_SpecialNStart = ftCo_MS_Count,

@@ -59,9 +59,9 @@ bool ftWalkCommon_800DFC70(HSD_GObj* gobj)
 }
 
 void ftWalkCommon_800DFCA4(HSD_GObj* gobj, ftCommon_MotionState msid,
-                           Fighter_MotionStateChangeFlags ms_flags, float arg8,
-                           float arg9, float argA, float argB, float argC,
-                           float argD, float argE, float argF)
+                           u32 ms_flags, float arg8, float arg9, float argA,
+                           float argB, float argC, float argD, float argE,
+                           float argF)
 {
     ftCommon_MotionState new_msid;
     FtWalkType walk_type;

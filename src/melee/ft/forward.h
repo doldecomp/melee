@@ -97,79 +97,89 @@ typedef enum CharacterKind {
     CHKIND_MAX = CHKIND_NONE
 } CharacterKind;
 
-typedef enum Fighter_MotionStateChangeFlags {
-    FtStateChange_None,
-    FtStateChange_PreserveFastFall = 1 << 0,
-    FtStateChange_PreserveGfx = 1 << 1,
+static u32 const FtStateChange_None ATTRIBUTE_USED = 0;
 
-    /// Preserve full body collision state
-    FtStateChange_PreserveColAnimHitStatus = 1 << 2,
+static u32 const FtStateChange_PreserveFastFall ATTRIBUTE_USED = 1 << 0;
 
-    /// Keep hitboxes
-    FtStateChange_SkipUpdateHit = 1 << 3,
+static u32 const FtStateChange_PreserveGfx ATTRIBUTE_USED = 1 << 1;
 
-    /// Ignore model state change ?
-    FtStateChange_SkipUpdateModel = 1 << 4,
+/// Preserve full body collision state
+static u32 const FtStateChange_PreserveColAnimHitStatus ATTRIBUTE_USED = 1
+                                                                         << 2;
 
-    FtStateChange_SkipUpdateAnimVel = 1 << 5,
-    FtStateChange_Unk_6 = 1 << 6,
+/// Keep hitboxes
+static u32 const FtStateChange_SkipUpdateHit ATTRIBUTE_USED = 1 << 3;
 
-    /// Ignore switching to character's "hurt" textures ?
-    FtStateChange_SkipUpdateMatAnim = 1 << 7,
+/// Ignore model state change ?
+static u32 const FtStateChange_SkipUpdateModel ATTRIBUTE_USED = 1 << 4;
 
-    /// Resets thrower GObj pointer to NULL if false?
-    FtStateChange_SkipUpdateThrowException = 1 << 8,
+static u32 const FtStateChange_SkipUpdateAnimVel ATTRIBUTE_USED = 1 << 5;
 
-    FtStateChange_PreserveSfx = 1 << 9,
+static u32 const FtStateChange_Unk_6 ATTRIBUTE_USED = 1 << 6;
 
-    /// Ignore Parasol state change
-    FtStateChange_SkipUpdateParasol = 1 << 10,
+/// Ignore switching to character's "hurt" textures ?
+static u32 const FtStateChange_SkipUpdateMatAnim ATTRIBUTE_USED = 1 << 7;
 
-    /// Ignore rumble update?
-    FtStateChange_SkipUpdateRumble = 1 << 11,
+/// Resets thrower GObj pointer to NULL if false?
+static u32 const FtStateChange_SkipUpdateThrowException ATTRIBUTE_USED = 1
+                                                                         << 8;
 
-    FtStateChange_SkipUpdateColAnim = 1 << 12,
+static u32 const FtStateChange_PreserveSfx ATTRIBUTE_USED = 1 << 9;
 
-    /// Keep respawn platform?
-    FtStateChange_PreserveAccessory = 1 << 13,
+/// Ignore Parasol state change
+static u32 const FtStateChange_SkipUpdateParasol ATTRIBUTE_USED = 1 << 10;
 
-    /// Run all Subaction Events up to the current animation frame
-    FtStateChange_UpdateCmd = 1 << 14,
+/// Ignore rumble update?
+static u32 const FtStateChange_SkipUpdateRumble ATTRIBUTE_USED = 1 << 11;
 
-    FtStateChange_SkipUpdateNametagVis = 1 << 15,
+static u32 const FtStateChange_SkipUpdateColAnim ATTRIBUTE_USED = 1 << 12;
 
-    /// Assume this is for individual bones?
-    FtStateChange_PreserveColaNimPartHitStatus = 1 << 16,
+/// Keep respawn platform?
+static u32 const FtStateChange_PreserveAccessory ATTRIBUTE_USED = 1 << 13;
 
-    FtStateChange_PreserveSwordTrail = 1 << 17,
+/// Run all Subaction Events up to the current animation frame
+static u32 const FtStateChange_UpdateCmd ATTRIBUTE_USED = 1 << 14;
 
-    /// Used by Ness during Up/Down Smash
-    FtStateChange_SkipUpdateItemVis = 1 << 18,
+static u32 const FtStateChange_SkipUpdateNametagVis ATTRIBUTE_USED = 1 << 15;
 
-    /// Skips updating bit 5 of #Fighter::x2222_flag?
-    FtStateChange_Unk_19 = 1 << 19,
+/// Assume this is for individual bones?
+static u32 const FtStateChange_PreserveColaNimPartHitStatus ATTRIBUTE_USED =
+    1 << 16;
 
-    FtStateChange_Unk_UpdatePhys = 1 << 20,
+static u32 const FtStateChange_PreserveSwordTrail ATTRIBUTE_USED = 1 << 17;
 
-    /// Sets anim rate to 0 and some other stuff
-    FtStateChange_FreezeState = 1 << 21,
+/// Used by Ness during Up/Down Smash
+static u32 const FtStateChange_SkipUpdateItemVis ATTRIBUTE_USED = 1 << 18;
 
-    FtStateChange_SkipUpdateModelPartVis = 1 << 22,
-    FtStateChange_SkipUpdateMetalB = 1 << 23,
-    FtStateChange_Unk_24 = 1 << 24,
-    FtStateChange_SkipUpdateAttackCount = 1 << 25,
-    FtStateChange_SkipUpdateModelFlag = 1 << 26,
-    FtStateChange_Unk_27 = 1 << 27,
-    FtStateChange_SkipUpdateHitStunFlag = 1 << 28,
+/// Skips updating bit 5 of #Fighter::x2222_flag?
+static u32 const FtStateChange_Unk_19 ATTRIBUTE_USED = 1 << 19;
 
-    /// Keeps current fighter animation?
-    FtStateChange_SkipUpdateAnim = 1 << 29,
+static u32 const FtStateChange_Unk_UpdatePhys ATTRIBUTE_USED = 1 << 20;
 
-    FtStateChange_Unk_30 = 1 << 30,
+/// Sets anim rate to 0 and some other stuff
+static u32 const FtStateChange_FreezeState ATTRIBUTE_USED = 1 << 21;
 
-    /// Unused?
-    FtStateChange_Unk_31 = 1 << 31,
-} Fighter_MotionStateChangeFlags;
+static u32 const FtStateChange_SkipUpdateModelPartVis ATTRIBUTE_USED = 1 << 22;
+
+static u32 const FtStateChange_SkipUpdateMetalB ATTRIBUTE_USED = 1 << 23;
+
+static u32 const FtStateChange_Unk_24 ATTRIBUTE_USED = 1 << 24;
+
+static u32 const FtStateChange_SkipUpdateAttackCount ATTRIBUTE_USED = 1 << 25;
+
+static u32 const FtStateChange_SkipUpdateModelFlag ATTRIBUTE_USED = 1 << 26;
+
+static u32 const FtStateChange_Unk_27 ATTRIBUTE_USED = 1 << 27;
+
+static u32 const FtStateChange_SkipUpdateHitStunFlag ATTRIBUTE_USED = 1 << 28;
+
+/// Keeps current fighter animation?
+static u32 const FtStateChange_SkipUpdateAnim ATTRIBUTE_USED = 1 << 29;
+
+static u32 const FtStateChange_Unk_30 ATTRIBUTE_USED = 1 << 30;
+
+/// Unused?
+static u32 const FtStateChange_Unk_31 ATTRIBUTE_USED = 1 << 31;
 
 // Ledge Grab Macros
 

@@ -1,7 +1,295 @@
 #ifndef MELEE_FT_CHARA_FTKIRBY_FORWARD_H
 #define MELEE_FT_CHARA_FTKIRBY_FORWARD_H
 
+#include <platform.h>
 #include "ftCommon/forward.h"
+
+/// @todo Clean up factorization
+
+static u32 const ftKb_MF_MultiJump ATTRIBUTE_USED =
+    (1 << 1) | (1 << 3) | (1 << 5) | (1 << 6);
+
+static u32 const ftKb_MF_AttackDash ATTRIBUTE_USED =
+    (1 << 0) | (1 << 2) | (1 << 18) | (1 << 21);
+
+static u32 const ftKb_MF_AttackDashAir ATTRIBUTE_USED =
+    ftKb_MF_AttackDash | (1 << 10);
+
+static u32 const ftKb_MF_18_20_21 ATTRIBUTE_USED =
+    (1 << 18) | (1 << 20) | (1 << 21);
+
+static u32 const ftKb_MF_4_18_20_21 ATTRIBUTE_USED =
+    ftKb_MF_18_20_21 | (1 << 4);
+
+static u32 const ftKb_MF_2_4_18_20_21 ATTRIBUTE_USED =
+    ftKb_MF_4_18_20_21 | (1 << 2);
+
+static u32 const ftKb_MF_5_18_20_21 ATTRIBUTE_USED =
+    ftKb_MF_18_20_21 | (1 << 5);
+
+static u32 const ftKb_MF_SpecialN ATTRIBUTE_USED =
+    ftKb_MF_4_18_20_21 | (1 << 0);
+
+static u32 const ftKb_MF_SpecialS ATTRIBUTE_USED =
+    ftKb_MF_4_18_20_21 | (1 << 1);
+
+static u32 const ftKb_MF_SpecialHi ATTRIBUTE_USED =
+    ftKb_MF_4_18_20_21 | (1 << 0) | (1 << 1);
+
+static u32 const ftKb_MF_SpecialNMr ATTRIBUTE_USED =
+    ftKb_MF_4_18_20_21 | (1 << 0) | (1 << 2);
+
+static u32 const ftKb_MF_SpecialNKp ATTRIBUTE_USED =
+    ftKb_MF_4_18_20_21 | (1 << 0) | (1 << 3);
+
+static u32 const ftKb_MF_SpecialNPe ATTRIBUTE_USED =
+    ftKb_MF_2_4_18_20_21 | (1 << 0) | (1 << 3);
+
+static u32 const ftKb_MF_SpecialNYs ATTRIBUTE_USED =
+    ftKb_MF_5_18_20_21 | (1 << 0);
+
+static u32 const ftKb_MF_SpecialNLg ATTRIBUTE_USED =
+    ftKb_MF_5_18_20_21 | (1 << 2);
+
+static u32 const ftKb_MF_SpecialNZd ATTRIBUTE_USED =
+    ftKb_MF_5_18_20_21 | (1 << 1) | (1 << 2);
+
+static u32 const ftKb_MF_SpecialNDr ATTRIBUTE_USED =
+    ftKb_MF_5_18_20_21 | (1 << 3);
+
+static u32 const ftKb_MF_SpecialNGk ATTRIBUTE_USED =
+    ftKb_MF_SpecialNZd | (1 << 3);
+
+static u32 const ftKb_MF_SpecialNFx ATTRIBUTE_USED =
+    ftKb_MF_2_4_18_20_21 | (1 << 1) | (1 << 8);
+
+static u32 const ftKb_MF_SpecialNLk ATTRIBUTE_USED =
+    ftKb_MF_4_18_20_21 | (1 << 1) | (1 << 3) | (1 << 8);
+
+static u32 const ftKb_MF_SpecialNSk ATTRIBUTE_USED =
+    ftKb_MF_SpecialNLk | (1 << 0);
+
+static u32 const ftKb_MF_SpecialNNs ATTRIBUTE_USED =
+    ftKb_MF_2_4_18_20_21 | (1 << 3) | (1 << 8);
+
+static u32 const ftKb_MF_SpecialNPp ATTRIBUTE_USED =
+    ftKb_MF_SpecialNNs | (1 << 1);
+
+static u32 const ftKb_MF_SpecialNPk ATTRIBUTE_USED =
+    ftKb_MF_SpecialNPp | (1 << 0);
+
+static u32 const ftKb_MF_SpecialNSs ATTRIBUTE_USED =
+    ftKb_MF_5_18_20_21 | (1 << 8);
+
+static u32 const ftKb_MF_SpecialNSs_1 ATTRIBUTE_USED =
+    ftKb_MF_SpecialNSs | (1 << 1);
+
+static u32 const ftKb_MF_SpecialNMt ATTRIBUTE_USED =
+    ftKb_MF_SpecialNSs_1 | (1 << 0);
+
+static u32 const ftKb_MF_SpecialNCl ATTRIBUTE_USED =
+    ftKb_MF_SpecialNMt | (1 << 2);
+
+static u32 const ftKb_MF_SpecialNFc ATTRIBUTE_USED =
+    ftKb_MF_SpecialNDr | (1 << 0) | (1 << 8);
+
+static u32 const ftKb_MF_SpecialNPc ATTRIBUTE_USED =
+    ftKb_MF_SpecialNSs_1 | (1 << 3);
+
+static u32 const ftKb_MF_SpecialNGw ATTRIBUTE_USED =
+    ftKb_MF_SpecialNPc | (1 << 0);
+
+static u32 const ftKb_MF_SpecialLw ATTRIBUTE_USED =
+    ftKb_MF_2_4_18_20_21 | (1 << 9);
+
+static u32 const ftKb_MF_SpecialNCa ATTRIBUTE_USED =
+    ftKb_MF_SpecialLw | (1 << 0) | (1 << 1);
+
+static u32 const ftKb_MF_SpecialNDk ATTRIBUTE_USED =
+    ftKb_MF_4_18_20_21 | (1 << 3) | (1 << 9);
+
+static u32 const ftKb_MF_5_9_18_20_21 ATTRIBUTE_USED =
+    ftKb_MF_5_18_20_21 | (1 << 9);
+
+static u32 const ftKb_MF_2_5_9_18_20_21 ATTRIBUTE_USED =
+    ftKb_MF_5_9_18_20_21 | (1 << 2);
+
+static u32 const ftKb_MF_SpecialNPr ATTRIBUTE_USED =
+    ftKb_MF_5_9_18_20_21 | (1 << 1);
+
+static u32 const ftKb_MF_SpecialNMs ATTRIBUTE_USED =
+    ftKb_MF_2_5_9_18_20_21 | (1 << 0);
+
+static u32 const ftKb_MF_SpecialNGn ATTRIBUTE_USED =
+    ftKb_MF_2_5_9_18_20_21 | (1 << 3);
+
+static u32 const ftKb_MF_SpecialNFeStart ATTRIBUTE_USED =
+    ftKb_MF_SpecialNMs | (1 << 3);
+
+static u32 const ftKb_MF_SpecialAirN ATTRIBUTE_USED =
+    ftKb_MF_SpecialN | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirS ATTRIBUTE_USED =
+    ftKb_MF_SpecialS | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirHi ATTRIBUTE_USED =
+    ftKb_MF_SpecialHi | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNMr ATTRIBUTE_USED =
+    ftKb_MF_SpecialNMr | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNKp ATTRIBUTE_USED =
+    ftKb_MF_SpecialNKp | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNPe ATTRIBUTE_USED =
+    ftKb_MF_SpecialNPe | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNYs ATTRIBUTE_USED =
+    ftKb_MF_SpecialNYs | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNLg ATTRIBUTE_USED =
+    ftKb_MF_SpecialNLg | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNZd ATTRIBUTE_USED =
+    ftKb_MF_SpecialNZd | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNDr ATTRIBUTE_USED =
+    ftKb_MF_SpecialNDr | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNGk ATTRIBUTE_USED =
+    ftKb_MF_SpecialNGk | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNFx ATTRIBUTE_USED =
+    ftKb_MF_SpecialNFx | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNLk ATTRIBUTE_USED =
+    ftKb_MF_SpecialNLk | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNSk ATTRIBUTE_USED =
+    ftKb_MF_SpecialNSk | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNNs ATTRIBUTE_USED =
+    ftKb_MF_SpecialNNs | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNPp ATTRIBUTE_USED =
+    ftKb_MF_SpecialNPp | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNPk ATTRIBUTE_USED =
+    ftKb_MF_SpecialNPk | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNSs ATTRIBUTE_USED =
+    ftKb_MF_SpecialNSs | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNMt ATTRIBUTE_USED =
+    ftKb_MF_SpecialNMt | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNCl ATTRIBUTE_USED =
+    ftKb_MF_SpecialNCl | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNFc ATTRIBUTE_USED =
+    ftKb_MF_SpecialNFc | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNPc ATTRIBUTE_USED =
+    ftKb_MF_SpecialNPc | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNGw ATTRIBUTE_USED =
+    ftKb_MF_SpecialNGw | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirLw ATTRIBUTE_USED =
+    ftKb_MF_SpecialLw | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNCa ATTRIBUTE_USED =
+    ftKb_MF_SpecialNCa | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNDk ATTRIBUTE_USED =
+    ftKb_MF_SpecialNDk | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNPr ATTRIBUTE_USED =
+    ftKb_MF_SpecialNPr | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNMs ATTRIBUTE_USED =
+    ftKb_MF_SpecialNMs | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNGn ATTRIBUTE_USED =
+    ftKb_MF_SpecialNGn | (1 << 10);
+
+static u32 const ftKb_MF_SpecialNFe ATTRIBUTE_USED =
+    ftKb_MF_SpecialNFeStart | (1 << 10);
+
+static u32 const ftKb_MF_0_4_18_20_21 ATTRIBUTE_USED =
+    ftKb_MF_4_18_20_21 | (1 << 0);
+
+static u32 const ftKb_MF_SpecialNCaptureTurn ATTRIBUTE_USED =
+    ftKb_MF_0_4_18_20_21 | (1 << 13);
+
+static u32 const ftKb_MF_SpecialAirNCaptureTurn ATTRIBUTE_USED =
+    ftKb_MF_SpecialNCaptureTurn | (1 << 10);
+
+static u32 const ftKb_MF_SpecialNCaptureWalk ATTRIBUTE_USED =
+    ftKb_MF_0_4_18_20_21 | (1 << 14);
+
+static u32 const ftKb_MF_SpecialNCaptureJumpSquat ATTRIBUTE_USED =
+    ftKb_MF_0_4_18_20_21 | (1 << 15);
+
+static u32 const ftKb_MF_SpecialNLoop ATTRIBUTE_USED =
+    ftKb_MF_0_4_18_20_21 | (1 << 19);
+
+static u32 const ftKb_MF_SpecialNKpLoop ATTRIBUTE_USED =
+    ftKb_MF_SpecialNKp | (1 << 19);
+
+static u32 const ftKb_MF_SpecialNGkLoop ATTRIBUTE_USED =
+    ftKb_MF_SpecialNGk | (1 << 19);
+
+static u32 const ftKb_MF_SpecialNFxLoop ATTRIBUTE_USED =
+    ftKb_MF_SpecialNFx | (1 << 19);
+
+static u32 const ftKb_MF_SpecialNLkCharged ATTRIBUTE_USED =
+    ftKb_MF_SpecialNLk | (1 << 19);
+
+static u32 const ftKb_MF_SpecialNSkLoop ATTRIBUTE_USED =
+    ftKb_MF_SpecialNSk | (1 << 19);
+
+static u32 const ftKb_MF_SpecialNMtLoop ATTRIBUTE_USED =
+    ftKb_MF_SpecialNMt | (1 << 19);
+
+static u32 const ftKb_MF_SpecialNClCharged ATTRIBUTE_USED =
+    ftKb_MF_SpecialNCl | (1 << 19);
+
+static u32 const ftKb_MF_SpecialNFcLoop ATTRIBUTE_USED =
+    ftKb_MF_SpecialNFc | (1 << 19);
+
+static u32 const ftKb_MF_SpecialNPrLoop ATTRIBUTE_USED =
+    ftKb_MF_SpecialNPr | (1 << 19);
+
+static u32 const ftKb_MF_SpecialAirNLoop ATTRIBUTE_USED =
+    ftKb_MF_SpecialNLoop | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNKpLoop ATTRIBUTE_USED =
+    ftKb_MF_SpecialNKpLoop | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNGkLoop ATTRIBUTE_USED =
+    ftKb_MF_SpecialNGkLoop | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNFxLoop ATTRIBUTE_USED =
+    ftKb_MF_SpecialNFxLoop | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNLkCharged ATTRIBUTE_USED =
+    ftKb_MF_SpecialNLkCharged | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNSkLoop ATTRIBUTE_USED =
+    ftKb_MF_SpecialNSkLoop | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNMtLoop ATTRIBUTE_USED =
+    ftKb_MF_SpecialNMtLoop | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNClCharged ATTRIBUTE_USED =
+    ftKb_MF_SpecialNClCharged | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNFcLoop ATTRIBUTE_USED =
+    ftKb_MF_SpecialNFcLoop | (1 << 10);
+
+static u32 const ftKb_MF_SpecialAirNPrLoop ATTRIBUTE_USED =
+    ftKb_MF_SpecialNPrLoop | (1 << 10);
 
 typedef enum ftKirby_MotionState {
     ftKb_MS_Jump2 = ftCo_MS_Count,

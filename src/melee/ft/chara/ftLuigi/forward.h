@@ -4,24 +4,36 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
-typedef enum ftLg_MotionFlags {
-    ftLg_MF_Special = FtStateChange_SkipUpdateModel |
-                      FtStateChange_SkipUpdateItemVis |
-                      FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState,
-    ftLg_MF_SpecialN = ftLg_MF_Special | FtStateChange_PreserveFastFall |
-                       FtStateChange_SkipUpdateThrowException,
-    ftLg_MF_SpecialS = ftLg_MF_Special | FtStateChange_PreserveGfx |
-                       FtStateChange_PreserveSfx,
-    ftLg_MF_SpecialHi = ftLg_MF_Special | FtStateChange_PreserveFastFall |
-                        FtStateChange_PreserveGfx | FtStateChange_PreserveSfx,
-    ftLg_MF_SpecialLw = ftLg_MF_Special |
-                        FtStateChange_PreserveColAnimHitStatus |
-                        FtStateChange_PreserveSfx,
-    ftLg_MF_SpecialAirN = ftLg_MF_SpecialN | FtStateChange_SkipUpdateParasol,
-    ftLg_MF_SpecialAirS = ftLg_MF_SpecialS | FtStateChange_SkipUpdateParasol,
-    ftLg_MF_SpecialAirHi = ftLg_MF_SpecialHi | FtStateChange_SkipUpdateParasol,
-    ftLg_MF_SpecialAirLw = ftLg_MF_SpecialLw | FtStateChange_SkipUpdateParasol,
-} ftLg_MotionFlags;
+static u32 const ftLg_MF_Special ATTRIBUTE_USED =
+    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateItemVis |
+    FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState;
+
+static u32 const ftLg_MF_SpecialN ATTRIBUTE_USED =
+    ftLg_MF_Special | FtStateChange_PreserveFastFall |
+    FtStateChange_SkipUpdateThrowException;
+
+static u32 const ftLg_MF_SpecialS ATTRIBUTE_USED =
+    ftLg_MF_Special | FtStateChange_PreserveGfx | FtStateChange_PreserveSfx;
+
+static u32 const ftLg_MF_SpecialHi ATTRIBUTE_USED =
+    ftLg_MF_Special | FtStateChange_PreserveFastFall |
+    FtStateChange_PreserveGfx | FtStateChange_PreserveSfx;
+
+static u32 const ftLg_MF_SpecialLw ATTRIBUTE_USED =
+    ftLg_MF_Special | FtStateChange_PreserveColAnimHitStatus |
+    FtStateChange_PreserveSfx;
+
+static u32 const ftLg_MF_SpecialAirN ATTRIBUTE_USED =
+    ftLg_MF_SpecialN | FtStateChange_SkipUpdateParasol;
+
+static u32 const ftLg_MF_SpecialAirS ATTRIBUTE_USED =
+    ftLg_MF_SpecialS | FtStateChange_SkipUpdateParasol;
+
+static u32 const ftLg_MF_SpecialAirHi ATTRIBUTE_USED =
+    ftLg_MF_SpecialHi | FtStateChange_SkipUpdateParasol;
+
+static u32 const ftLg_MF_SpecialAirLw ATTRIBUTE_USED =
+    ftLg_MF_SpecialLw | FtStateChange_SkipUpdateParasol;
 
 typedef enum ftLuigi_MotionState {
     ftLg_MS_SpecialN = ftCo_MS_Count,

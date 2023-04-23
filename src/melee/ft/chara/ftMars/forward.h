@@ -4,24 +4,37 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
-typedef enum ftMars_MotionFlags {
-    ftMs_MF_Special = FtStateChange_SkipUpdateModel |
-                      FtStateChange_PreserveSfx |
-                      FtStateChange_SkipUpdateItemVis |
-                      FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState,
-    ftMs_MF_SpecialN = ftMs_MF_Special | FtStateChange_PreserveFastFall,
-    ftMs_MF_SpecialS = ftMs_MF_Special | FtStateChange_PreserveGfx,
-    ftMs_MF_SpecialHi = ftMs_MF_Special | FtStateChange_PreserveFastFall |
-                        FtStateChange_PreserveGfx,
-    ftMs_MF_SpecialLw =
-        ftMs_MF_Special | FtStateChange_PreserveColAnimHitStatus,
-    ftMs_MF_SpecialAirN = ftMs_MF_Special | FtStateChange_PreserveFastFall |
-                          FtStateChange_SkipUpdateParasol,
-    ftMs_MF_SpecialS1 = ftMs_MF_Special | FtStateChange_PreserveGfx |
-                        FtStateChange_SkipUpdateParasol,
-    ftMs_MF_SpecialAirHi = ftMs_MF_SpecialHi | FtStateChange_SkipUpdateParasol,
-    ftMs_MF_SpecialAirLw = ftMs_MF_SpecialLw | FtStateChange_SkipUpdateParasol,
-} ftMars_MotionFlags;
+static u32 const ftMs_MF_Special ATTRIBUTE_USED =
+    FtStateChange_SkipUpdateModel | FtStateChange_PreserveSfx |
+    FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_UpdatePhys |
+    FtStateChange_FreezeState;
+
+static u32 const ftMs_MF_SpecialN ATTRIBUTE_USED =
+    ftMs_MF_Special | FtStateChange_PreserveFastFall;
+
+static u32 const ftMs_MF_SpecialS ATTRIBUTE_USED =
+    ftMs_MF_Special | FtStateChange_PreserveGfx;
+
+static u32 const ftMs_MF_SpecialHi ATTRIBUTE_USED =
+    ftMs_MF_Special | FtStateChange_PreserveFastFall |
+    FtStateChange_PreserveGfx;
+
+static u32 const ftMs_MF_SpecialLw ATTRIBUTE_USED =
+    ftMs_MF_Special | FtStateChange_PreserveColAnimHitStatus;
+
+static u32 const ftMs_MF_SpecialAirN ATTRIBUTE_USED =
+    ftMs_MF_Special | FtStateChange_PreserveFastFall |
+    FtStateChange_SkipUpdateParasol;
+
+static u32 const ftMs_MF_SpecialS1 ATTRIBUTE_USED =
+    ftMs_MF_Special | FtStateChange_PreserveGfx |
+    FtStateChange_SkipUpdateParasol;
+
+static u32 const ftMs_MF_SpecialAirHi ATTRIBUTE_USED =
+    ftMs_MF_SpecialHi | FtStateChange_SkipUpdateParasol;
+
+static u32 const ftMs_MF_SpecialAirLw ATTRIBUTE_USED =
+    ftMs_MF_SpecialLw | FtStateChange_SkipUpdateParasol;
 
 typedef enum ftMars_MotionState {
     ftMs_MS_SpecialNChargeStart = ftCo_MS_Count,

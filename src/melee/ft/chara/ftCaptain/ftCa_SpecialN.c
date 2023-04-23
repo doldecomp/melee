@@ -200,7 +200,7 @@ void ftCa_SpecialAirN_Phys(HSD_GObj* gobj)
 }
 
 /// @todo Share with #ftCa_Init_MotionStateTable
-static Fighter_MotionStateChangeFlags const transition_flags =
+static u32 const transition_flags =
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_SkipUpdateRumble | FtStateChange_UpdateCmd |
     FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |
