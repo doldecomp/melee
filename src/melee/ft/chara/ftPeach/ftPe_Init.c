@@ -1,3 +1,6 @@
+#include "forward.h"
+#include "ft/forward.h"
+
 #include "ftPe_Init.h"
 
 #include "types.h"
@@ -13,8 +16,8 @@
 MotionState ftPe_Init_MotionStateTable[] = {
     {
         295,
-        0,
-        0x01000000,
+        FtStateChange_None,
+        FtMoveId_Unk01 << 24,
         ftPe_Float_Anim,
         ftPe_Float_IASA,
         ftPe_Float_Phys,
@@ -23,8 +26,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         296,
-        0,
-        0x01000000,
+        FtStateChange_None,
+        FtMoveId_Unk01 << 24,
         ftPe_FloatEnd_Anim,
         ftPe_FloatEnd_IASA,
         ftPe_FloatEnd_Phys,
@@ -33,8 +36,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         297,
-        0,
-        0x01000000,
+        FtStateChange_None,
+        FtMoveId_Unk01 << 24,
         ftPe_FloatEnd_Anim,
         ftPe_FloatEnd_IASA,
         ftPe_FloatEnd_Phys,
@@ -43,8 +46,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         68,
-        0x0024040C,
-        0x0D000000,
+        ftPe_MF_FloatAttackAirN,
+        FtMoveId_AttackAirN << 24,
         ftPe_FloatAttackAir_Anim,
         ftPe_FloatAttackAir_IASA,
         ftPe_FloatAttackAir_Phys,
@@ -53,8 +56,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         69,
-        0x0024040D,
-        0x0E000000,
+        ftPe_MF_Move_14,
+        FtMoveId_Unk14 << 24,
         ftPe_FloatAttackAir_Anim,
         ftPe_FloatAttackAir_IASA,
         ftPe_FloatAttackAir_Phys,
@@ -63,8 +66,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         70,
-        0x0024040E,
-        0x0F000000,
+        ftPe_MF_FloatAttackAirB,
+        FtMoveId_AttackAirB << 24,
         ftPe_FloatAttackAir_Anim,
         ftPe_FloatAttackAir_IASA,
         ftPe_FloatAttackAir_Phys,
@@ -73,8 +76,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         71,
-        0x0024040F,
-        0x10000000,
+        ftPe_MF_FloatAttackAirHi,
+        FtMoveId_AttackAirHi << 24,
         ftPe_FloatAttackAir_Anim,
         ftPe_FloatAttackAir_IASA,
         ftPe_FloatAttackAir_Phys,
@@ -83,8 +86,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         72,
-        0x00240410,
-        0x11000000,
+        ftPe_MF_Move_17,
+        FtMoveId_Unk17 << 24,
         ftPe_FloatAttackAir_Anim,
         ftPe_FloatAttackAir_IASA,
         ftPe_FloatAttackAir_Phys,
@@ -93,8 +96,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         298,
-        0x00240A09,
-        0x0A000000,
+        ftPe_MF_AttackS4,
+        FtMoveId_AttackS4 << 24,
         ftPe_AttackS4_Anim,
         ftPe_AttackS4_IASA,
         ftPe_AttackS4_Phys,
@@ -103,8 +106,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         299,
-        0x00240A09,
-        0x0A000000,
+        ftPe_MF_AttackS4,
+        FtMoveId_AttackS4 << 24,
         ftPe_AttackS4_Anim,
         ftPe_AttackS4_IASA,
         ftPe_AttackS4_Phys,
@@ -113,8 +116,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         300,
-        0x00240A09,
-        0x0A000000,
+        ftPe_MF_AttackS4,
+        FtMoveId_AttackS4 << 24,
         ftPe_AttackS4_Anim,
         ftPe_AttackS4_IASA,
         ftPe_AttackS4_Phys,
@@ -123,8 +126,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         301,
-        0x00340014,
-        0x15000000,
+        ftPe_MF_SpecialLw,
+        FtMoveId_SpecialLw << 24,
         ftPe_SpecialLw_Anim,
         NULL,
         ftPe_SpecialLw_Phys,
@@ -133,8 +136,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         301,
-        0x00340014,
-        0x15000000,
+        ftPe_MF_SpecialLw,
+        FtMoveId_SpecialLw << 24,
         ftPe_SpecialAirLw_Anim,
         NULL,
         ftPe_SpecialAirLw_Phys,
@@ -143,8 +146,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         302,
-        0x00340212,
-        0x13000000,
+        ftPe_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftPe_SpecialSStart_Anim,
         ftPe_SpecialSStart_IASA,
         ftPe_SpecialSStart_Phys,
@@ -153,8 +156,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         303,
-        0x00340212,
-        0x13000000,
+        ftPe_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftPe_SpecialSEnd_Anim,
         ftPe_SpecialSEnd_IASA,
         ftPe_SpecialSEnd_Phys,
@@ -163,8 +166,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         304,
-        0x00340212,
-        0x13000000,
+        ftPe_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         NULL,
         NULL,
         NULL,
@@ -173,8 +176,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         305,
-        0x00340612,
-        0x13000000,
+        ftPe_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftPe_SpecialAirSStart_Anim,
         ftPe_SpecialAirSStart_IASA,
         ftPe_SpecialAirSStart_Phys,
@@ -183,8 +186,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         306,
-        0x00340612,
-        0x13000000,
+        ftPe_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftPe_SpecialAirSEnd_Anim,
         ftPe_SpecialAirSEnd_IASA,
         ftPe_SpecialAirSEnd_Phys,
@@ -193,8 +196,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         307,
-        0x00340612,
-        0x13000000,
+        ftPe_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftPe_SpecialAirSEnd_Anim,
         ftPe_SpecialAirSEnd_IASA,
         ftPe_SpecialAirSEnd_Phys,
@@ -203,8 +206,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         304,
-        0x00340612,
-        0x13000000,
+        ftPe_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftPe_SpecialAirS_Anim,
         ftPe_SpecialAirS_IASA,
         ftPe_SpecialAirS_Phys,
@@ -213,8 +216,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         308,
-        0x00340013,
-        0x14000000,
+        ftPe_MF_SpecialHi,
+        FtMoveId_SpecialHi << 24,
         ftPe_SpecialHiStart_Anim,
         ftPe_SpecialHiStart_IASA,
         ftPe_SpecialHiStart_Phys,
@@ -223,8 +226,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         309,
-        0x00340013,
-        0x14000000,
+        ftPe_MF_SpecialHi,
+        FtMoveId_SpecialHi << 24,
         ftPe_MS_362_Anim,
         ftPe_MS_362_IASA,
         ftPe_MS_362_Phys,
@@ -233,8 +236,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         310,
-        0x00340413,
-        0x14000000,
+        ftPe_MF_SpecialAirHi,
+        FtMoveId_SpecialHi << 24,
         ftPe_SpecialAirHiStart_Anim,
         ftPe_SpecialAirHiStart_IASA,
         ftPe_SpecialAirHiStart_Phys,
@@ -243,8 +246,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         311,
-        0x00340413,
-        0x14000000,
+        ftPe_MF_SpecialAirHi,
+        FtMoveId_SpecialHi << 24,
         ftPe_MS_364_Anim,
         ftPe_MS_364_IASA,
         ftPe_MS_364_Phys,
@@ -253,8 +256,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         312,
-        0x00340011,
-        0x12000000,
+        ftPe_MF_SpecialN,
+        FtMoveId_SpecialN << 24,
         ftPe_SpecialN_Anim,
         ftPe_SpecialN_IASA,
         ftPe_SpecialN_Phys,
@@ -263,8 +266,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         313,
-        0x00340011,
-        0x12000000,
+        ftPe_MF_SpecialN,
+        FtMoveId_SpecialN << 24,
         ftPe_SpecialNAttack_Anim,
         ftPe_SpecialNAttack_IASA,
         ftPe_SpecialNAttack_Phys,
@@ -273,8 +276,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         314,
-        0x00340411,
-        0x12000000,
+        ftPe_MF_SpecialAirN,
+        FtMoveId_SpecialN << 24,
         ftPe_SpecialAirN_Anim,
         ftPe_SpecialAirN_IASA,
         ftPe_SpecialAirN_Phys,
@@ -283,8 +286,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         315,
-        0x00340411,
-        0x12000000,
+        ftPe_MF_SpecialAirN,
+        FtMoveId_SpecialN << 24,
         ftPe_SpecialAirNAttack_Anim,
         ftPe_SpecialAirNAttack_IASA,
         ftPe_SpecialAirNAttack_Phys,
@@ -293,8 +296,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         316,
-        0x00440058,
-        0x57800000,
+        ftPe_MF_ParasolOpen,
+        (FtMoveId_Unk87 << 24) | (1 << 23),
         ftCo_ItemParasolOpen_Anim,
         ftCo_ItemParasolOpen_IASA,
         ftCo_ItemParasolOpen_Phys,
@@ -303,8 +306,8 @@ MotionState ftPe_Init_MotionStateTable[] = {
     },
     {
         317,
-        0x004C0058,
-        0x57800000,
+        ftPe_MF_ParasolFallSpecial,
+        (FtMoveId_Unk87 << 24) | (1 << 23),
         ftCo_ItemParasolFallSpecial_Anim,
         ftCo_ItemParasolFallSpecial_IASA,
         ftCo_ItemParasolFallSpecial_Phys,
@@ -473,7 +476,7 @@ s32 ftPe_8011BA20(Fighter* fp)
     s32 result = 1;
 
     if (!(fp->input.x624_lstick_y >= p_ftCommonData->x70_someLStickYMax) &&
-        !(fp->input.x65C_heldInputs & 0xC00))
+        !(fp->input.x65C_heldInputs & 3072))
     {
         result = 0;
     }
