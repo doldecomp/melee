@@ -8,7 +8,7 @@
 
 struct ftMars_FighterVars {
     /* 0x222C */ u32 x222C;
-    u8 _[FighterVars_Size - 4];
+    u8 _[FIGHTERVARS_SIZE - 4];
 };
 
 typedef struct _MarsAttributes {

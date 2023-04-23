@@ -5,7 +5,7 @@
 #include "ft/forward.h"
 
 struct ftSandbag_FighterVars {
-    char filler0[FighterVars_Size];
+    char filler0[FIGHTERVARS_SIZE];
 };
 
 #endif

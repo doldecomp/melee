@@ -8,7 +8,7 @@ struct ftLuigi_FighterVars {
     /* 0x222C */ bool x222C_cycloneCharge;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
-    u8 _[FighterVars_Size - 0xC];
+    u8 _[FIGHTERVARS_SIZE - 0xC];
 };
 
 typedef struct _ftLuigiAttributes {
