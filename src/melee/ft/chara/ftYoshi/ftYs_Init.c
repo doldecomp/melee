@@ -1,3 +1,4 @@
+#include "forward.h"
 #include "ft/forward.h"
 #include "it/forward.h"
 
@@ -22,8 +23,8 @@
 MotionState ftYs_Init_MotionStateTable[] = {
     {
         37,
-        0x00100000,
-        0x01000000,
+        ftYs_MF_MS_341,
+        FtMoveId_Unk01 << 24,
         ftYs_MS_341_Anim,
         ftYs_MS_341_IASA,
         ftYs_MS_341_Phys,
@@ -32,8 +33,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         -1,
-        0x00180000,
-        0x01000000,
+        ftYs_MF_ShieldHold,
+        FtMoveId_Unk01 << 24,
         ftYs_ShieldHold_Anim,
         ftYs_ShieldHold_IASA,
         ftYs_ShieldHold_Phys,
@@ -42,8 +43,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         39,
-        0x00100000,
-        0x01000000,
+        ftYs_MF_MS_341,
+        FtMoveId_Unk01 << 24,
         ftYs_ShieldRelease_Anim,
         ftYs_ShieldRelease_IASA,
         ftYs_ShieldRelease_Phys,
@@ -52,8 +53,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         40,
-        0x00100000,
-        0x01000000,
+        ftYs_MF_MS_341,
+        FtMoveId_Unk01 << 24,
         ftYs_ShieldDamage_Anim,
         ftYs_ShieldDamage_IASA,
         ftYs_ShieldDamage_Phys,
@@ -62,8 +63,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         37,
-        0x00101073,
-        0x01000000,
+        ftYs_MF_ShieldStart,
+        FtMoveId_Unk01 << 24,
         ftYs_ShieldStart_Anim,
         ftYs_ShieldStart_IASA,
         ftYs_ShieldStart_Phys,
@@ -72,8 +73,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         295,
-        0x00340011,
-        0x12000000,
+        ftYs_MF_SpecialN,
+        FtMoveId_SpecialN << 24,
         ftYs_SpecialN_Anim,
         NULL,
         ftYs_SpecialN_Phys,
@@ -82,8 +83,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         296,
-        0x00340011,
-        0x12000000,
+        ftYs_MF_SpecialN,
+        FtMoveId_SpecialN << 24,
         ftYs_SpecialNCatchStart_Anim,
         NULL,
         ftYs_SpecialNCatchStart_Phys,
@@ -92,8 +93,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         296,
-        0x00340011,
-        0x12000000,
+        ftYs_MF_SpecialN,
+        FtMoveId_SpecialN << 24,
         ftYs_SpecialNCatch_Anim,
         NULL,
         ftYs_SpecialNCatch_Phys,
@@ -102,8 +103,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         297,
-        0x00340011,
-        0x12000000,
+        ftYs_MF_SpecialN,
+        FtMoveId_SpecialN << 24,
         ftYs_SpecialAirN_Anim,
         NULL,
         ftYs_SpecialAirN_Phys,
@@ -112,8 +113,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         297,
-        0x00340011,
-        0x12000000,
+        ftYs_MF_SpecialN,
+        FtMoveId_SpecialN << 24,
         ftYs_SpecialAirNCatchStart_Anim,
         NULL,
         ftYs_SpecialAirNCatchStart_Phys,
@@ -122,8 +123,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         298,
-        0x00340411,
-        0x12000000,
+        ftYs_MF_SpecialS,
+        FtMoveId_SpecialN << 24,
         ftYs_SpecialAirNCatch_Anim,
         NULL,
         ftYs_SpecialAirNCatch_Phys,
@@ -131,9 +132,10 @@ MotionState ftYs_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        /// @todo Fix names, this is SpecialN
         299,
-        0x00340411,
-        0x12000000,
+        ftYs_MF_SpecialS,
+        FtMoveId_SpecialN << 24,
         ftYs_SpecialSStart_Anim,
         NULL,
         ftYs_SpecialSStart_Phys,
@@ -142,8 +144,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         299,
-        0x00340411,
-        0x12000000,
+        ftYs_MF_SpecialS,
+        FtMoveId_SpecialN << 24,
         ftYs_SpecialS_Anim,
         NULL,
         ftYs_SpecialS_Phys,
@@ -152,8 +154,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         300,
-        0x00340411,
-        0x12000000,
+        ftYs_MF_SpecialS,
+        FtMoveId_SpecialN << 24,
         ftYs_SpecialSTurn_Anim,
         NULL,
         ftYs_SpecialSTurn_Phys,
@@ -162,8 +164,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         300,
-        0x00340411,
-        0x12000000,
+        ftYs_MF_SpecialS,
+        FtMoveId_SpecialN << 24,
         ftYs_SpecialSEnd_Anim,
         NULL,
         ftYs_SpecialSEnd_Phys,
@@ -172,8 +174,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         301,
-        0x00340212,
-        0x13000000,
+        ftYs_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftYs_SpecialAirSStart_Anim,
         ftYs_SpecialAirSStart_IASA,
         ftYs_SpecialAirSStart_Phys,
@@ -182,8 +184,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         302,
-        0x00340212,
-        0x13000000,
+        ftYs_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftYs_SpecialAirS_Anim,
         ftYs_SpecialAirS_IASA,
         ftYs_SpecialAirS_Phys,
@@ -192,8 +194,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         303,
-        0x00340212,
-        0x13000000,
+        ftYs_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftYs_SpecialAirSRebound_Anim,
         ftYs_SpecialAirSRebound_IASA,
         ftYs_SpecialAirSRebound_Phys,
@@ -202,8 +204,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         304,
-        0x00340212,
-        0x13000000,
+        ftYs_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftYs_SpecialAirSEnd_Anim,
         ftYs_SpecialAirSEnd_IASA,
         ftYs_SpecialAirSEnd_Phys,
@@ -211,9 +213,10 @@ MotionState ftYs_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        /// @todo Fix names, this is SpecialS
         305,
-        0x00340612,
-        0x13000000,
+        ftYs_MF_SpecialHi,
+        FtMoveId_SpecialS << 24,
         ftYs_SpecialHi_Anim,
         ftYs_SpecialHi_IASA,
         ftYs_SpecialHi_Phys,
@@ -222,8 +225,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         306,
-        0x00340612,
-        0x13000000,
+        ftYs_MF_SpecialHi,
+        FtMoveId_SpecialS << 24,
         ftYs_SpecialAirHi_Anim,
         ftYs_SpecialAirHi_IASA,
         ftYs_SpecialAirHi_Phys,
@@ -232,8 +235,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         307,
-        0x00340612,
-        0x13000000,
+        ftYs_MF_SpecialHi,
+        FtMoveId_SpecialS << 24,
         ftYs_SpecialLw_Anim,
         ftYs_SpecialLw_IASA,
         ftYs_SpecialLw_Phys,
@@ -242,8 +245,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         308,
-        0x00340612,
-        0x13000000,
+        ftYs_MF_SpecialHi,
+        FtMoveId_SpecialS << 24,
         ftYs_SpecialLwLand_Anim,
         ftYs_SpecialLwLand_IASA,
         ftYs_SpecialLwLand_Phys,
@@ -252,8 +255,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         309,
-        0x00340113,
-        0x14000000,
+        ftYs_MF_SpecialAirHi,
+        FtMoveId_SpecialHi << 24,
         ftYs_SpecialAirLw_Anim,
         NULL,
         ftYs_SpecialAirLw_Phys,
@@ -262,8 +265,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         310,
-        0x00340513,
-        0x14000000,
+        ftYs_MF_MS_365,
+        FtMoveId_SpecialHi << 24,
         ftYs_MS_365_Anim,
         NULL,
         ftYs_MS_365_Phys,
@@ -272,8 +275,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         311,
-        0x00340214,
-        0x15000000,
+        ftYs_MF_MS_366,
+        FtMoveId_SpecialLw << 24,
         ftYs_MS_366_Anim,
         NULL,
         ftYs_MS_366_Phys,
@@ -282,8 +285,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         312,
-        0x00340214,
-        0x15000000,
+        ftYs_MF_MS_366,
+        FtMoveId_SpecialLw << 24,
         ftYs_MS_367_Anim,
         NULL,
         ftYs_MS_367_Phys,
@@ -292,8 +295,8 @@ MotionState ftYs_Init_MotionStateTable[] = {
     },
     {
         313,
-        0x00340614,
-        0x15000000,
+        ftYs_MF_MS_368,
+        FtMoveId_SpecialLw << 24,
         ftYs_MS_368_Anim,
         NULL,
         ftYs_MS_368_Phys,
