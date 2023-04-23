@@ -1,3 +1,5 @@
+#include "ftPikachu/forward.h"
+
 #include "ftPc_Init.h"
 
 #include "types.h"
@@ -16,8 +18,8 @@
 MotionState ftPc_Init_MotionStateTable[] = {
     {
         295,
-        0x00340111,
-        0x12000000,
+        ftPk_MF_SpecialN,
+        FtMoveId_SpecialN << 24,
         ftPk_SpecialN_Anim,
         ftPk_SpecialN_IASA,
         ftPk_SpecialN_Phys,
@@ -26,8 +28,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         296,
-        0x00340511,
-        0x12000000,
+        ftPk_MF_SpecialAirN,
+        FtMoveId_SpecialN << 24,
         ftPk_SpecialAirN_Anim,
         ftPk_SpecialAirN_IASA,
         ftPk_SpecialAirN_Phys,
@@ -36,8 +38,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         297,
-        0x00340212,
-        0x13000000,
+        ftPk_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftPk_SpecialSStart_Anim,
         ftPk_SpecialSStart_IASA,
         ftPk_SpecialSStart_Phys,
@@ -46,8 +48,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         298,
-        0x00340212,
-        0x13000000,
+        ftPk_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftPk_SpecialSCharge_Anim,
         ftPk_SpecialSCharge_IASA,
         ftPk_SpecialSCharge_Phys,
@@ -56,8 +58,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         300,
-        0x00340212,
-        0x13000000,
+        ftPk_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftPk_MS_345_Anim,
         ftPk_MS_345_IASA,
         ftPk_MS_345_Phys,
@@ -66,8 +68,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         301,
-        0x00340212,
-        0x13000000,
+        ftPk_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftPk_SpecialSLanding_Anim,
         ftPk_SpecialSLanding_IASA,
         ftPk_SpecialSLanding_Phys,
@@ -76,8 +78,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         299,
-        0x00340212,
-        0x13000000,
+        ftPk_MF_SpecialS,
+        FtMoveId_SpecialS << 24,
         ftPk_SpecialSLaunch_Anim,
         ftPk_SpecialSLaunch_IASA,
         ftPk_SpecialSLaunch_Phys,
@@ -86,8 +88,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         302,
-        0x00340612,
-        0x13000000,
+        ftPk_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftPk_SpecialAirSStart_Anim,
         ftPk_SpecialAirSStart_IASA,
         ftPk_SpecialAirSStart_Phys,
@@ -96,8 +98,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         303,
-        0x00340612,
-        0x13000000,
+        ftPk_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftPk_SpecialAirSCharge_Anim,
         ftPk_SpecialAirSCharge_IASA,
         ftPk_SpecialAirSCharge_Phys,
@@ -106,8 +108,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         300,
-        0x00340612,
-        0x13000000,
+        ftPk_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftPk_SpecialAirS_Anim,
         ftPk_SpecialAirS_IASA,
         ftPk_SpecialAirS_Phys,
@@ -116,8 +118,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         305,
-        0x00340612,
-        0x13000000,
+        ftPk_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftPk_SpecialAirSEnd_Anim,
         ftPk_SpecialAirSEnd_IASA,
         ftPk_SpecialAirSEnd_Phys,
@@ -126,8 +128,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         304,
-        0x00340612,
-        0x13000000,
+        ftPk_MF_SpecialAirS,
+        FtMoveId_SpecialS << 24,
         ftPk_SpecialAirSLaunch_Anim,
         ftPk_SpecialAirSLaunch_IASA,
         ftPk_SpecialAirSLaunch_Phys,
@@ -136,8 +138,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         306,
-        0x00340113,
-        0x14000000,
+        ftPk_MF_SpecialHi,
+        FtMoveId_SpecialHi << 24,
         ftPk_SpecialHiStart_Anim,
         ftPk_SpecialHiStart_IASA,
         ftPk_SpecialHiStart_Phys,
@@ -146,8 +148,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         307,
-        0x00340113,
-        0x14000000,
+        ftPk_MF_SpecialHi,
+        FtMoveId_SpecialHi << 24,
         ftPk_SpecialHi_Anim,
         ftPk_SpecialHi_IASA,
         ftPk_SpecialHi_Phys,
@@ -156,8 +158,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         308,
-        0x00340113,
-        0x14000000,
+        ftPk_MF_SpecialHi,
+        FtMoveId_SpecialHi << 24,
         ftPk_SpecialHiEnd_Anim,
         ftPk_SpecialHiEnd_IASA,
         ftPk_SpecialHiEnd_Phys,
@@ -166,8 +168,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         309,
-        0x00340513,
-        0x14000000,
+        ftPk_MF_SpecialAirHi,
+        FtMoveId_SpecialHi << 24,
         ftPk_SpecialAirHiStart_Anim,
         ftPk_SpecialAirHiStart_IASA,
         ftPk_SpecialAirHiStart_Phys,
@@ -176,8 +178,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         310,
-        0x00340513,
-        0x14000000,
+        ftPk_MF_SpecialAirHi,
+        FtMoveId_SpecialHi << 24,
         ftPk_SpecialAirHi_Anim,
         ftPk_SpecialAirHi_IASA,
         ftPk_SpecialAirHi_Phys,
@@ -186,8 +188,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         311,
-        0x00340513,
-        0x14000000,
+        ftPk_MF_SpecialAirHi,
+        FtMoveId_SpecialHi << 24,
         ftPk_SpecialAirHiEnd_Anim,
         ftPk_SpecialAirHiEnd_IASA,
         ftPk_SpecialAirHiEnd_Phys,
@@ -196,8 +198,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         312,
-        0x00340014,
-        0x15000000,
+        ftPk_MF_SpecialLw,
+        FtMoveId_SpecialLw << 24,
         ftPk_SpecialLwStart_Anim,
         NULL,
         ftPk_SpecialLwStart_Phys,
@@ -206,8 +208,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         313,
-        0x00340014,
-        0x15000000,
+        ftPk_MF_SpecialLw,
+        FtMoveId_SpecialLw << 24,
         ftPk_SpecialLw_Anim,
         NULL,
         ftPk_SpecialLw_Phys,
@@ -216,8 +218,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         314,
-        0x00340014,
-        0x15000000,
+        ftPk_MF_SpecialLw,
+        FtMoveId_SpecialLw << 24,
         ftPk_SpecialLwHit_Anim,
         NULL,
         ftPk_SpecialLwHit_Phys,
@@ -226,8 +228,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         315,
-        0x00340014,
-        0x15000000,
+        ftPk_MF_SpecialLw,
+        FtMoveId_SpecialLw << 24,
         ftPk_SpecialLwEnd_Anim,
         NULL,
         ftPk_SpecialLwEnd_Phys,
@@ -236,8 +238,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         316,
-        0x00340414,
-        0x15000000,
+        ftPk_MF_SpecialAirLw,
+        FtMoveId_SpecialLw << 24,
         ftPk_SpecialAirLwStart_Anim,
         NULL,
         ftPk_SpecialAirLwStart_Phys,
@@ -246,8 +248,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         317,
-        0x00340414,
-        0x15000000,
+        ftPk_MF_SpecialAirLw,
+        FtMoveId_SpecialLw << 24,
         ftPk_SpecialAirLw_Anim,
         NULL,
         ftPk_SpecialAirLw_Phys,
@@ -256,8 +258,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         318,
-        0x00340414,
-        0x15000000,
+        ftPk_MF_SpecialAirLw,
+        FtMoveId_SpecialLw << 24,
         ftPk_SpecialAirLwHit_Anim,
         NULL,
         ftPk_SpecialAirLwHit_Phys,
@@ -266,8 +268,8 @@ MotionState ftPc_Init_MotionStateTable[] = {
     },
     {
         319,
-        0x00340414,
-        0x15000000,
+        ftPk_MF_SpecialAirLw,
+        FtMoveId_SpecialLw << 24,
         ftPk_SpecialAirLwEnd_Anim,
         NULL,
         ftPk_SpecialAirLwEnd_Phys,

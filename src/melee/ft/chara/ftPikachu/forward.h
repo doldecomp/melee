@@ -2,7 +2,27 @@
 #define MELEE_FT_CHARA_FTPIKACHU_FORWARD_H
 
 #include <platform.h>
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
+
+typedef enum ftPk_MotionFlags {
+    ftPk_MF_Special = FtStateChange_SkipUpdateModel |
+                      FtStateChange_SkipUpdateItemVis |
+                      FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState,
+    ftPk_MF_SpecialLw =
+        ftPk_MF_Special | FtStateChange_PreserveColAnimHitStatus,
+    ftPk_MF_SpecialN = ftPk_MF_Special | FtStateChange_PreserveFastFall |
+                       FtStateChange_SkipUpdateThrowException,
+    ftPk_MF_SpecialHi = ftPk_MF_Special | FtStateChange_PreserveFastFall |
+                        FtStateChange_PreserveGfx |
+                        FtStateChange_SkipUpdateThrowException,
+    ftPk_MF_SpecialS = ftPk_MF_Special | FtStateChange_PreserveGfx |
+                       FtStateChange_PreserveSfx,
+    ftPk_MF_SpecialAirLw = ftPk_MF_SpecialLw | FtStateChange_SkipUpdateParasol,
+    ftPk_MF_SpecialAirN = ftPk_MF_SpecialN | FtStateChange_SkipUpdateParasol,
+    ftPk_MF_SpecialAirHi = ftPk_MF_SpecialHi | FtStateChange_SkipUpdateParasol,
+    ftPk_MF_SpecialAirS = ftPk_MF_SpecialS | FtStateChange_SkipUpdateParasol,
+} ftPk_MotionFlags;
 
 typedef enum ftPikachu_MotionState {
     ftPk_MS_SpecialN = ftCo_MS_Count,
