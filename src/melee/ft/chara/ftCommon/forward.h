@@ -4,314 +4,317 @@
 #include <platform.h>
 #include "ft/forward.h"
 
-static u32 const ftCo_MF_5_6 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_5_6 ATTRIBUTE_USED =
     FtStateChange_SkipUpdateAnimVel | FtStateChange_Unk_6;
-static u32 const ftCo_MF_2_5_6 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_2_5_6 ATTRIBUTE_USED =
     ftCo_MF_5_6 | FtStateChange_PreserveColAnimHitStatus;
-static u32 const ftCo_MF_Squat ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Squat ATTRIBUTE_USED =
     ftCo_MF_2_5_6 | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_Dash ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Dash ATTRIBUTE_USED =
     ftCo_MF_Squat | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_Run ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Run ATTRIBUTE_USED =
     ftCo_MF_5_6 | FtStateChange_SkipUpdateHit;
-static u32 const ftCo_MF_Appeal ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Appeal ATTRIBUTE_USED =
     ftCo_MF_5_6 | FtStateChange_PreserveFastFall |
     FtStateChange_SkipUpdateModel;
-static u32 const ftCo_MF_9_10 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_9_10 ATTRIBUTE_USED =
     FtStateChange_PreserveSfx | FtStateChange_SkipUpdateParasol;
-static u32 const ftCo_MF_LandingAirN ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_LandingAirN ATTRIBUTE_USED =
     ftCo_MF_9_10 | FtStateChange_PreserveColAnimHitStatus |
     FtStateChange_SkipUpdateHit;
-static u32 const ftCo_MF_LandingAirF ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_LandingAirF ATTRIBUTE_USED =
     ftCo_MF_LandingAirN | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_LandingAirB ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_LandingAirB ATTRIBUTE_USED =
     ftCo_MF_LandingAirN | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_LandingAirHi ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_LandingAirHi ATTRIBUTE_USED =
     ftCo_MF_LandingAirB | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_LandingAirLw ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_LandingAirLw ATTRIBUTE_USED =
     ftCo_MF_9_10 | FtStateChange_SkipUpdateModel;
-static u32 const ftCo_MF_Turn ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Turn ATTRIBUTE_USED =
     ftCo_MF_2_5_6 | FtStateChange_PreserveAccessory;
-static u32 const ftCo_MF_Walk ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Walk ATTRIBUTE_USED =
     ftCo_MF_2_5_6 | FtStateChange_PreserveGfx | FtStateChange_UpdateCmd;
-static u32 const ftCo_MF_3_5_6 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_3_5_6 ATTRIBUTE_USED =
     ftCo_MF_5_6 | FtStateChange_SkipUpdateHit;
-static u32 const ftCo_MF_Jump ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Jump ATTRIBUTE_USED =
     ftCo_MF_3_5_6 | FtStateChange_PreserveFastFall |
     FtStateChange_SkipUpdateNametagVis;
-static u32 const ftCo_MF_JumpAir ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_JumpAir ATTRIBUTE_USED =
     ftCo_MF_3_5_6 | FtStateChange_PreserveGfx |
     FtStateChange_PreserveColaNimPartHitStatus;
-static u32 const ftCo_MF_GuardReflect ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_GuardReflect ATTRIBUTE_USED =
     ftCo_MF_5_6 | FtStateChange_PreserveFastFall | FtStateChange_PreserveGfx |
     FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateColAnim |
     FtStateChange_Unk_UpdatePhys;
-static u32 const ftCo_MF_Guard ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Guard ATTRIBUTE_USED =
     FtStateChange_Unk_19 | FtStateChange_Unk_UpdatePhys;
-static u32 const ftCo_MF_AttackBase ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_AttackBase ATTRIBUTE_USED =
     FtStateChange_PreserveSfx | FtStateChange_SkipUpdateItemVis;
-static u32 const ftCo_MF_Attack ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Attack ATTRIBUTE_USED =
     ftCo_MF_AttackBase | FtStateChange_FreezeState;
-static u32 const ftCo_MF_Attack_2 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Attack_2 ATTRIBUTE_USED =
     ftCo_MF_Attack | FtStateChange_PreserveColAnimHitStatus;
-static u32 const ftCo_MF_AttackDash ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_AttackDash ATTRIBUTE_USED =
     ftCo_MF_Attack_2 | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_AttackS3 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_AttackS3 ATTRIBUTE_USED =
     ftCo_MF_Attack_2 | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_AttackHi3 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_AttackHi3 ATTRIBUTE_USED =
     ftCo_MF_AttackS3 | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_AttackLw3 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_AttackLw3 ATTRIBUTE_USED =
     ftCo_MF_Attack | FtStateChange_SkipUpdateHit;
-static u32 const ftCo_MF_CliffAttackQuick ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_CliffAttackQuick ATTRIBUTE_USED =
     ftCo_MF_AttackLw3 | FtStateChange_PreserveFastFall |
     FtStateChange_PreserveGfx | FtStateChange_PreserveColAnimHitStatus |
     FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateAnimVel;
-static u32 const ftCo_MF_AttackAir ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_AttackAir ATTRIBUTE_USED =
     ftCo_MF_Attack | FtStateChange_SkipUpdateParasol;
-static u32 const ftCo_MF_AttackAirN ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_AttackAirN ATTRIBUTE_USED =
     ftCo_MF_AttackAir | FtStateChange_PreserveColAnimHitStatus |
     FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateParasol;
-static u32 const ftCo_MF_AttackAirF ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_AttackAirF ATTRIBUTE_USED =
     ftCo_MF_AttackAirN | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_AttackAirB ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_AttackAirB ATTRIBUTE_USED =
     ftCo_MF_AttackAirN | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_AttackAirHi ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_AttackAirHi ATTRIBUTE_USED =
     ftCo_MF_AttackAirF | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_AttackAirLw ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_AttackAirLw ATTRIBUTE_USED =
     ftCo_MF_AttackAir | FtStateChange_SkipUpdateModel;
-static u32 const ftCo_MF_Attack4 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Attack4 ATTRIBUTE_USED =
     ftCo_MF_AttackLw3 | FtStateChange_SkipUpdateRumble;
-static u32 const ftCo_MF_AttackS4 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_AttackS4 ATTRIBUTE_USED =
     ftCo_MF_Attack4 | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_AttackHi4 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_AttackHi4 ATTRIBUTE_USED =
     ftCo_MF_Attack4 | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_AttackLw4 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_AttackLw4 ATTRIBUTE_USED =
     ftCo_MF_Attack4 | FtStateChange_PreserveFastFall |
     FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_Attack1 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Attack1 ATTRIBUTE_USED =
     ftCo_MF_Attack | FtStateChange_Unk_19;
-static u32 const ftCo_MF_Attack11 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Attack11 ATTRIBUTE_USED =
     ftCo_MF_Attack1 | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_Attack12 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Attack12 ATTRIBUTE_USED =
     ftCo_MF_Attack1 | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_Attack13 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Attack13 ATTRIBUTE_USED =
     ftCo_MF_Attack12 | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_Attack100 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Attack100 ATTRIBUTE_USED =
     ftCo_MF_Attack1 | FtStateChange_PreserveColAnimHitStatus;
-static u32 const ftCo_MF_ItemScope ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ItemScope ATTRIBUTE_USED =
     FtStateChange_SkipUpdateItemVis | FtStateChange_SkipUpdateModelPartVis;
-static u32 const ftCo_MF_SwordSwing1 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_SwordSwing1 ATTRIBUTE_USED =
     ftCo_MF_ItemScope | FtStateChange_Unk_6;
-static u32 const ftCo_MF_SwordSwing3 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_SwordSwing3 ATTRIBUTE_USED =
     ftCo_MF_SwordSwing1 | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_SwordSwingDash ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_SwordSwingDash ATTRIBUTE_USED =
     ftCo_MF_SwordSwing3 | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_BatSwing1 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_BatSwing1 ATTRIBUTE_USED =
     ftCo_MF_SwordSwing1 | FtStateChange_PreserveColAnimHitStatus;
-static u32 const ftCo_MF_BatSwing3 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_BatSwing3 ATTRIBUTE_USED =
     ftCo_MF_BatSwing1 | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_BatSwingDash ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_BatSwingDash ATTRIBUTE_USED =
     ftCo_MF_BatSwing3 | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_ParasolSwing1 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ParasolSwing1 ATTRIBUTE_USED =
     ftCo_MF_SwordSwing1 | FtStateChange_SkipUpdateHit;
-static u32 const ftCo_MF_ParasolSwing3 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ParasolSwing3 ATTRIBUTE_USED =
     ftCo_MF_ParasolSwing1 | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_ParasolSwingDash ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ParasolSwingDash ATTRIBUTE_USED =
     ftCo_MF_ParasolSwing3 | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_HarisenSwing1 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_HarisenSwing1 ATTRIBUTE_USED =
     ftCo_MF_BatSwing1 | FtStateChange_SkipUpdateHit;
-static u32 const ftCo_MF_HarisenSwing3 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_HarisenSwing3 ATTRIBUTE_USED =
     ftCo_MF_HarisenSwing1 | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_HarisenSwingDash ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_HarisenSwingDash ATTRIBUTE_USED =
     ftCo_MF_HarisenSwing3 | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_StarRodSwing1 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_StarRodSwing1 ATTRIBUTE_USED =
     ftCo_MF_SwordSwing1 | FtStateChange_SkipUpdateModel;
-static u32 const ftCo_MF_StarRodSwing3 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_StarRodSwing3 ATTRIBUTE_USED =
     ftCo_MF_StarRodSwing1 | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_StarRodSwingDash ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_StarRodSwingDash ATTRIBUTE_USED =
     ftCo_MF_StarRodSwing3 | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_LipstickSwing1 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_LipstickSwing1 ATTRIBUTE_USED =
     ftCo_MF_StarRodSwing1 | FtStateChange_PreserveColAnimHitStatus;
-static u32 const ftCo_MF_LipstickSwing3 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_LipstickSwing3 ATTRIBUTE_USED =
     ftCo_MF_LipstickSwing1 | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_LipstickSwingDash ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_LipstickSwingDash ATTRIBUTE_USED =
     ftCo_MF_LipstickSwing3 | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_ParasolOpen ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ParasolOpen ATTRIBUTE_USED =
     ftCo_MF_ParasolSwing1 | FtStateChange_SkipUpdateModel;
-static u32 const ftCo_MF_HammerBase ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_HammerBase ATTRIBUTE_USED =
     ftCo_MF_LipstickSwing1 | FtStateChange_SkipUpdateHit;
-static u32 const ftCo_MF_Hammer ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Hammer ATTRIBUTE_USED =
     ftCo_MF_HammerBase | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_WarpStarFall ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_WarpStarFall ATTRIBUTE_USED =
     ftCo_MF_Hammer | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_ItemScope_5_6 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ItemScope_5_6 ATTRIBUTE_USED =
     ftCo_MF_5_6 | ftCo_MF_ItemScope;
-static u32 const ftCo_MF_ItemThrow ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ItemThrow ATTRIBUTE_USED =
     ftCo_MF_ItemScope_5_6 | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_LGunShoot ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_LGunShoot ATTRIBUTE_USED =
     ftCo_MF_ItemScope | FtStateChange_PreserveFastFall |
     FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateModel |
     FtStateChange_Unk_6 | FtStateChange_SkipUpdateThrowException;
-static u32 const ftCo_MF_ItemScopeFire ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ItemScopeFire ATTRIBUTE_USED =
     ftCo_MF_LGunShoot | FtStateChange_PreserveColAnimHitStatus;
-static u32 const ftCo_MF_HammerFall ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_HammerFall ATTRIBUTE_USED =
     ftCo_MF_Hammer | FtStateChange_SkipUpdateParasol;
-static u32 const ftCo_MF_ItemThrowAir ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ItemThrowAir ATTRIBUTE_USED =
     ftCo_MF_ItemThrow | FtStateChange_SkipUpdateParasol;
-static u32 const ftCo_MF_LGunShootAir ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_LGunShootAir ATTRIBUTE_USED =
     ftCo_MF_LGunShoot | FtStateChange_SkipUpdateParasol;
-static u32 const ftCo_MF_ItemScopeAir ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ItemScopeAir ATTRIBUTE_USED =
     ftCo_MF_HammerBase | FtStateChange_PreserveFastFall |
     FtStateChange_SkipUpdateThrowException | FtStateChange_SkipUpdateParasol;
-static u32 const ftCo_MF_Swing4 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Swing4 ATTRIBUTE_USED =
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateRumble;
-static u32 const ftCo_MF_SwordSwing4 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_SwordSwing4 ATTRIBUTE_USED =
     ftCo_MF_SwordSwing1 | ftCo_MF_Swing4;
-static u32 const ftCo_MF_BatSwing4 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_BatSwing4 ATTRIBUTE_USED =
     ftCo_MF_BatSwing1 | ftCo_MF_Swing4;
-static u32 const ftCo_MF_ParasolSwing4 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ParasolSwing4 ATTRIBUTE_USED =
     ftCo_MF_ParasolSwing1 | ftCo_MF_Swing4;
-static u32 const ftCo_MF_HarisenSwing4 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_HarisenSwing4 ATTRIBUTE_USED =
     ftCo_MF_HarisenSwing1 | ftCo_MF_Swing4;
-static u32 const ftCo_MF_StarRodSwing4 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_StarRodSwing4 ATTRIBUTE_USED =
     ftCo_MF_StarRodSwing1 | ftCo_MF_Swing4;
-static u32 const ftCo_MF_LipstickSwing4 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_LipstickSwing4 ATTRIBUTE_USED =
     ftCo_MF_LipstickSwing1 | ftCo_MF_Swing4;
-static u32 const ftCo_MF_ItemThrow4 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ItemThrow4 ATTRIBUTE_USED =
     ftCo_MF_ItemScope_5_6 | ftCo_MF_Swing4;
-static u32 const ftCo_MF_ItemThrowAir4 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ItemThrowAir4 ATTRIBUTE_USED =
     ftCo_MF_ItemThrow4 | FtStateChange_SkipUpdateParasol;
-static u32 const ftCo_MF_HammerMove ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_HammerMove ATTRIBUTE_USED =
     ftCo_MF_HammerBase | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_HammerTurn ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_HammerTurn ATTRIBUTE_USED =
     ftCo_MF_HammerMove | FtStateChange_PreserveAccessory;
-static u32 const ftCo_MF_HammerWalk ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_HammerWalk ATTRIBUTE_USED =
     ftCo_MF_HammerMove | FtStateChange_UpdateCmd;
-static u32 const ftCo_MF_ItemFall ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ItemFall ATTRIBUTE_USED =
     FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateModel |
     FtStateChange_Unk_6 | FtStateChange_SkipUpdateModelPartVis;
-static u32 const ftCo_MF_ItemScrewBase ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ItemScrewBase ATTRIBUTE_USED =
     ftCo_MF_AttackBase | ftCo_MF_ItemFall | FtStateChange_PreserveFastFall |
     FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_ItemScrew ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ItemScrew ATTRIBUTE_USED =
     ftCo_MF_ItemScrewBase | FtStateChange_SkipUpdateNametagVis;
-static u32 const ftCo_MF_HammerJump ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_HammerJump ATTRIBUTE_USED =
     ftCo_MF_HammerMove | FtStateChange_SkipUpdateParasol |
     FtStateChange_SkipUpdateNametagVis;
-static u32 const ftCo_MF_ItemScrewAir ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ItemScrewAir ATTRIBUTE_USED =
     ftCo_MF_ItemScrewBase | FtStateChange_SkipUpdateParasol |
     FtStateChange_PreserveColaNimPartHitStatus;
-static u32 const ftCo_MF_LiftWait ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_LiftWait ATTRIBUTE_USED =
     FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis;
-static u32 const ftCo_MF_LiftMove ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_LiftMove ATTRIBUTE_USED =
     ftCo_MF_LiftWait | FtStateChange_PreserveColAnimHitStatus |
     FtStateChange_SkipUpdateAnimVel | FtStateChange_Unk_6;
-static u32 const ftCo_MF_LiftTurn ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_LiftTurn ATTRIBUTE_USED =
     ftCo_MF_LiftMove | FtStateChange_PreserveAccessory;
-static u32 const ftCo_MF_LiftWalk ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_LiftWalk ATTRIBUTE_USED =
     ftCo_MF_LiftMove | FtStateChange_PreserveGfx | FtStateChange_UpdateCmd;
-static u32 const ftCo_MF_ParasolFall ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ParasolFall ATTRIBUTE_USED =
     ftCo_MF_ItemFall | FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19;
-static u32 const ftCo_MF_FireFlowerShoot ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_FireFlowerShoot ATTRIBUTE_USED =
     ftCo_MF_ParasolFall | FtStateChange_PreserveGfx |
     FtStateChange_SkipUpdateThrowException;
-static u32 const ftCo_MF_ItemScopeRapid ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ItemScopeRapid ATTRIBUTE_USED =
     ftCo_MF_ParasolFall | FtStateChange_PreserveColAnimHitStatus |
     FtStateChange_SkipUpdateThrowException | FtStateChange_Unk_19;
-static u32 const ftCo_MF_FireFlowerShootAir ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_FireFlowerShootAir ATTRIBUTE_USED =
     ftCo_MF_FireFlowerShoot | FtStateChange_SkipUpdateParasol;
-static u32 const ftCo_MF_ItemScopeAirRapid ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ItemScopeAirRapid ATTRIBUTE_USED =
     ftCo_MF_ItemScopeRapid | FtStateChange_SkipUpdateParasol;
-static u32 const ftCo_MF_Dazed ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Dazed ATTRIBUTE_USED =
     FtStateChange_Unk_UpdatePhys | FtStateChange_SkipUpdateModelPartVis;
-static u32 const ftCo_MF_Damage ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Damage ATTRIBUTE_USED =
     ftCo_MF_Dazed | FtStateChange_PreserveSwordTrail;
-static u32 const ftCo_MF_DamageScrew ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_DamageScrew ATTRIBUTE_USED =
     ftCo_MF_Damage | FtStateChange_SkipUpdateNametagVis;
-static u32 const ftCo_MF_DamageScrewAir ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_DamageScrewAir ATTRIBUTE_USED =
     ftCo_MF_Damage | FtStateChange_PreserveColaNimPartHitStatus;
-static u32 const ftCo_MF_Down ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Down ATTRIBUTE_USED =
     FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateAnimVel |
     FtStateChange_Unk_6 | FtStateChange_FreezeState |
     FtStateChange_SkipUpdateModelPartVis;
-static u32 const ftCo_MF_DownU ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_DownU ATTRIBUTE_USED =
     ftCo_MF_Down | FtStateChange_PreserveColAnimHitStatus;
-static u32 const ftCo_MF_DownD ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_DownD ATTRIBUTE_USED =
     ftCo_MF_DownU | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_DownDamageU ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_DownDamageU ATTRIBUTE_USED =
     ftCo_MF_DownU | FtStateChange_PreserveSwordTrail;
-static u32 const ftCo_MF_DownDamageD ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_DownDamageD ATTRIBUTE_USED =
     ftCo_MF_DownD | FtStateChange_PreserveSwordTrail;
-static u32 const ftCo_MF_DownAttack ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_DownAttack ATTRIBUTE_USED =
     ftCo_MF_Attack | FtStateChange_SkipUpdateModel |
     FtStateChange_SkipUpdateAnimVel | FtStateChange_SkipUpdateModelPartVis;
-static u32 const ftCo_MF_DownAttackU ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_DownAttackU ATTRIBUTE_USED =
     ftCo_MF_DownAttack | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_DownAttackD ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_DownAttackD ATTRIBUTE_USED =
     ftCo_MF_DownAttack | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_PassiveWall ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_PassiveWall ATTRIBUTE_USED =
     ftCo_MF_Dazed | FtStateChange_FreezeState;
-static u32 const ftCo_MF_Passive ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Passive ATTRIBUTE_USED =
     ftCo_MF_Down | FtStateChange_PreserveGfx |
     FtStateChange_PreserveColAnimHitStatus | FtStateChange_Unk_UpdatePhys;
-static u32 const ftCo_MF_StopWall ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_StopWall ATTRIBUTE_USED =
     FtStateChange_PreserveFastFall | FtStateChange_PreserveGfx |
     FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateAnimVel |
     FtStateChange_Unk_6 | FtStateChange_SkipUpdateMetalB;
-static u32 const ftCo_MF_Pass ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Pass ATTRIBUTE_USED =
     ftCo_MF_StopWall | FtStateChange_PreserveColAnimHitStatus;
-static u32 const ftCo_MF_OttottoWait ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_OttottoWait ATTRIBUTE_USED =
     FtStateChange_Unk_19 | FtStateChange_SkipUpdateMetalB;
-static u32 const ftCo_MF_CliffAction ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_CliffAction ATTRIBUTE_USED =
     FtStateChange_Unk_UpdatePhys | FtStateChange_SkipUpdateMetalB;
-static u32 const ftCo_MF_CliffAction_4_5 ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_CliffAction_4_5 ATTRIBUTE_USED =
     ftCo_MF_CliffAction | FtStateChange_SkipUpdateModel |
     FtStateChange_SkipUpdateAnimVel;
-static u32 const ftCo_MF_CliffCatch ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_CliffCatch ATTRIBUTE_USED =
     ftCo_MF_CliffAction_4_5 | FtStateChange_Unk_6;
-static u32 const ftCo_MF_CliffAttackSlow ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_CliffAttackSlow ATTRIBUTE_USED =
     ftCo_MF_AttackBase | ftCo_MF_CliffAction_4_5 | FtStateChange_PreserveGfx |
     FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit;
-static u32 const ftCo_MF_CliffWait ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_CliffWait ATTRIBUTE_USED =
     ftCo_MF_CliffAction | FtStateChange_Unk_19;
-static u32 const ftCo_MF_CatchWait ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_CatchWait ATTRIBUTE_USED =
     FtStateChange_FreezeState | FtStateChange_SkipUpdateMetalB;
-static u32 const ftCo_MF_CatchBase ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_CatchBase ATTRIBUTE_USED =
     ftCo_MF_CatchWait | FtStateChange_SkipUpdateModel |
     FtStateChange_SkipUpdateAnimVel;
-static u32 const ftCo_MF_Catch ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Catch ATTRIBUTE_USED =
     ftCo_MF_CatchBase | FtStateChange_PreserveFastFall |
     FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_Throw ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Throw ATTRIBUTE_USED =
     ftCo_MF_CatchBase | FtStateChange_SkipUpdateItemVis;
-static u32 const ftCo_MF_CatchAttack ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_CatchAttack ATTRIBUTE_USED =
     ftCo_MF_Throw | FtStateChange_PreserveColAnimHitStatus;
-static u32 const ftCo_MF_ThrowF ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ThrowF ATTRIBUTE_USED =
     ftCo_MF_CatchAttack | FtStateChange_PreserveFastFall;
-static u32 const ftCo_MF_ThrowB ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ThrowB ATTRIBUTE_USED =
     ftCo_MF_CatchAttack | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_ThrowHi ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ThrowHi ATTRIBUTE_USED =
     ftCo_MF_ThrowF | FtStateChange_PreserveGfx;
-static u32 const ftCo_MF_ThrowLw ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ThrowLw ATTRIBUTE_USED =
     ftCo_MF_Throw | FtStateChange_SkipUpdateHit;
-static u32 const ftCo_MF_Capture ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Capture ATTRIBUTE_USED =
     ftCo_MF_CatchWait | FtStateChange_Unk_UpdatePhys;
-static u32 const ftCo_MF_CaptureAir ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_CaptureAir ATTRIBUTE_USED =
     ftCo_MF_Capture | FtStateChange_SkipUpdateParasol;
-static u32 const ftCo_MF_Thrown ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Thrown ATTRIBUTE_USED =
     ftCo_MF_Capture | FtStateChange_PreserveSwordTrail;
-static u32 const ftCo_MF_ThrownAir ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ThrownAir ATTRIBUTE_USED =
     ftCo_MF_Thrown | FtStateChange_SkipUpdateParasol;
-static u32 const ftCo_MF_Shouldered ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Shouldered ATTRIBUTE_USED =
     ftCo_MF_Capture | FtStateChange_Unk_19;
-static u32 const ftCo_MF_Rebirth ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Rebirth ATTRIBUTE_USED =
     FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateMetalB;
-static u32 const ftCo_MF_ThrownStar ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_ThrownStar ATTRIBUTE_USED =
     ftCo_MF_Rebirth | FtStateChange_PreserveSwordTrail;
-static u32 const ftCo_MF_Dead ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Dead ATTRIBUTE_USED =
     ftCo_MF_Dazed | FtStateChange_SkipUpdateMetalB;
-static u32 const ftCo_MF_Sleep ATTRIBUTE_USED =
+static MotionFlags const ftCo_MF_Sleep ATTRIBUTE_USED =
     ftCo_MF_Dead | FtStateChange_PreserveSwordTrail;
+static MotionFlags const ftCo_MF_Special ATTRIBUTE_USED =
+    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateItemVis |
+    FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState;
 
 typedef enum ftCommon_MotionState {
     ftCo_MS_None = -1,

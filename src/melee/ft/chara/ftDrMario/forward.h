@@ -3,7 +3,7 @@
 
 #include "ft/forward.h"
 
-static u32 const ftDr_MF_Appeal ATTRIBUTE_USED =
+static MotionFlags const ftDr_MF_Appeal ATTRIBUTE_USED =
     FtStateChange_PreserveFastFall | FtStateChange_SkipUpdateModel |
     FtStateChange_SkipUpdateAnimVel | FtStateChange_Unk_6;
 

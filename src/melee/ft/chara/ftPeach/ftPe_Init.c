@@ -17,7 +17,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
     {
         295,
         FtStateChange_None,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftPe_Float_Anim,
         ftPe_Float_IASA,
         ftPe_Float_Phys,
@@ -27,7 +27,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
     {
         296,
         FtStateChange_None,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftPe_FloatEnd_Anim,
         ftPe_FloatEnd_IASA,
         ftPe_FloatEnd_Phys,
@@ -37,7 +37,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
     {
         297,
         FtStateChange_None,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftPe_FloatEnd_Anim,
         ftPe_FloatEnd_IASA,
         ftPe_FloatEnd_Phys,
@@ -297,7 +297,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
     {
         316,
         ftPe_MF_ParasolOpen,
-        (FtMoveId_Unk87 << 24) | (1 << 23),
+        (FtMoveId_Parasol << 24) | (1 << 23),
         ftCo_ItemParasolOpen_Anim,
         ftCo_ItemParasolOpen_IASA,
         ftCo_ItemParasolOpen_Phys,
@@ -307,7 +307,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
     {
         317,
         ftPe_MF_ParasolFallSpecial,
-        (FtMoveId_Unk87 << 24) | (1 << 23),
+        (FtMoveId_Parasol << 24) | (1 << 23),
         ftCo_ItemParasolFallSpecial_Anim,
         ftCo_ItemParasolFallSpecial_IASA,
         ftCo_ItemParasolFallSpecial_Phys,

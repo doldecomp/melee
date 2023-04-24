@@ -24,7 +24,7 @@ MotionState ftSs_Init_MotionStateTable[] = {
     {
         295,
         FtStateChange_None,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftSs_SpecialLw_Anim,
         ftSs_SpecialLw_IASA,
         ftSs_SpecialLw_Phys,
@@ -34,7 +34,7 @@ MotionState ftSs_Init_MotionStateTable[] = {
     {
         296,
         FtStateChange_None,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftSs_SpecialAirLw_Anim,
         ftSs_SpecialAirLw_IASA,
         ftSs_SpecialAirLw_Phys,
@@ -184,7 +184,7 @@ MotionState ftSs_Init_MotionStateTable[] = {
     {
         311,
         FtStateChange_FreezeState,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftCo_Zair_Anim,
         ftCo_Zair_IASA,
         ftCo_Zair_Phys,
@@ -194,7 +194,7 @@ MotionState ftSs_Init_MotionStateTable[] = {
     {
         312,
         ftSs_MF_ZairCatch,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftCo_ZairCatch_Anim,
         ftCo_ZairCatch_IASA,
         ftCo_ZairCatch_Phys,

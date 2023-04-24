@@ -24,7 +24,7 @@ MotionState ftYs_Init_MotionStateTable[] = {
     {
         37,
         ftYs_MF_MS_341,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftYs_MS_341_Anim,
         ftYs_MS_341_IASA,
         ftYs_MS_341_Phys,
@@ -34,7 +34,7 @@ MotionState ftYs_Init_MotionStateTable[] = {
     {
         -1,
         ftYs_MF_ShieldHold,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftYs_ShieldHold_Anim,
         ftYs_ShieldHold_IASA,
         ftYs_ShieldHold_Phys,
@@ -44,7 +44,7 @@ MotionState ftYs_Init_MotionStateTable[] = {
     {
         39,
         ftYs_MF_MS_341,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftYs_ShieldRelease_Anim,
         ftYs_ShieldRelease_IASA,
         ftYs_ShieldRelease_Phys,
@@ -54,7 +54,7 @@ MotionState ftYs_Init_MotionStateTable[] = {
     {
         40,
         ftYs_MF_MS_341,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftYs_ShieldDamage_Anim,
         ftYs_ShieldDamage_IASA,
         ftYs_ShieldDamage_Phys,
@@ -64,7 +64,7 @@ MotionState ftYs_Init_MotionStateTable[] = {
     {
         37,
         ftYs_MF_ShieldStart,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftYs_ShieldStart_Anim,
         ftYs_ShieldStart_IASA,
         ftYs_ShieldStart_Phys,

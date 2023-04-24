@@ -5,61 +5,61 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
-static u32 const ftNs_MF_Attack4 ATTRIBUTE_USED =
+static MotionFlags const ftNs_MF_Attack4 ATTRIBUTE_USED =
     FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateRumble |
     FtStateChange_SkipUpdateItemVis | FtStateChange_FreezeState;
 
-static u32 const ftNs_MF_AttackHi4 ATTRIBUTE_USED =
+static MotionFlags const ftNs_MF_AttackHi4 ATTRIBUTE_USED =
     ftNs_MF_Attack4 | FtStateChange_PreserveGfx;
 
-static u32 const ftNs_MF_AttackLw4 ATTRIBUTE_USED =
+static MotionFlags const ftNs_MF_AttackLw4 ATTRIBUTE_USED =
     ftNs_MF_AttackHi4 | FtStateChange_PreserveFastFall;
 
-static u32 const ftNs_MF_AttackHi4Start ATTRIBUTE_USED =
+static MotionFlags const ftNs_MF_AttackHi4Start ATTRIBUTE_USED =
     ftNs_MF_AttackHi4 | FtStateChange_PreserveSfx;
 
-static u32 const ftNs_MF_AttackLw4Start ATTRIBUTE_USED =
+static MotionFlags const ftNs_MF_AttackLw4Start ATTRIBUTE_USED =
     ftNs_MF_AttackLw4 | FtStateChange_PreserveSfx;
 
-static u32 const ftNs_MF_AttackS4 ATTRIBUTE_USED =
+static MotionFlags const ftNs_MF_AttackS4 ATTRIBUTE_USED =
     ftNs_MF_Attack4 | FtStateChange_PreserveFastFall |
     FtStateChange_PreserveSfx | FtStateChange_SkipUpdateColAnim;
 
-static u32 const ftNs_MF_Special ATTRIBUTE_USED =
+static MotionFlags const ftNs_MF_Special ATTRIBUTE_USED =
     FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateItemVis |
     FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState;
 
-static u32 const ftNs_MF_SpecialLw ATTRIBUTE_USED =
+static MotionFlags const ftNs_MF_SpecialLw ATTRIBUTE_USED =
     ftNs_MF_Special | FtStateChange_PreserveColAnimHitStatus;
 
-static u32 const ftNs_MF_Special_SkipUpdateThrowException ATTRIBUTE_USED =
-    ftNs_MF_Special | FtStateChange_SkipUpdateThrowException;
+static MotionFlags const ftNs_MF_Special_SkipUpdateThrowException
+    ATTRIBUTE_USED = ftNs_MF_Special | FtStateChange_SkipUpdateThrowException;
 
-static u32 const ftNs_MF_SpecialN ATTRIBUTE_USED =
+static MotionFlags const ftNs_MF_SpecialN ATTRIBUTE_USED =
     ftNs_MF_Special_SkipUpdateThrowException | FtStateChange_PreserveFastFall;
 
-static u32 const ftNs_MF_SpecialS ATTRIBUTE_USED =
+static MotionFlags const ftNs_MF_SpecialS ATTRIBUTE_USED =
     ftNs_MF_Special_SkipUpdateThrowException | FtStateChange_PreserveGfx;
 
-static u32 const ftNs_MF_SpecialHi ATTRIBUTE_USED =
+static MotionFlags const ftNs_MF_SpecialHi ATTRIBUTE_USED =
     ftNs_MF_SpecialN | FtStateChange_PreserveGfx;
 
-static u32 const ftNs_MF_SpecialAirLw ATTRIBUTE_USED =
+static MotionFlags const ftNs_MF_SpecialAirLw ATTRIBUTE_USED =
     ftNs_MF_SpecialLw | FtStateChange_SkipUpdateParasol;
 
-static u32 const ftNs_MF_SpecialAirN ATTRIBUTE_USED =
+static MotionFlags const ftNs_MF_SpecialAirN ATTRIBUTE_USED =
     ftNs_MF_SpecialN | FtStateChange_SkipUpdateParasol;
 
-static u32 const ftNs_MF_SpecialAirS ATTRIBUTE_USED =
+static MotionFlags const ftNs_MF_SpecialAirS ATTRIBUTE_USED =
     ftNs_MF_SpecialS | FtStateChange_SkipUpdateParasol;
 
-static u32 const ftNs_MF_SpecialAirHi ATTRIBUTE_USED =
+static MotionFlags const ftNs_MF_SpecialAirHi ATTRIBUTE_USED =
     ftNs_MF_SpecialHi | FtStateChange_SkipUpdateParasol;
 
-static u32 const ftNs_MF_SpecialLwLoop ATTRIBUTE_USED =
+static MotionFlags const ftNs_MF_SpecialLwLoop ATTRIBUTE_USED =
     ftNs_MF_SpecialLw | FtStateChange_Unk_19;
 
-static u32 const ftNs_MF_SpecialAirLwLoop ATTRIBUTE_USED =
+static MotionFlags const ftNs_MF_SpecialAirLwLoop ATTRIBUTE_USED =
     ftNs_MF_SpecialLwLoop | FtStateChange_SkipUpdateParasol;
 
 typedef enum ftNess_MotionState {

@@ -4,7 +4,7 @@
 #include <platform.h>
 #include "ft/forward.h"
 
-static u32 const ftCl_MF_Zair ATTRIBUTE_USED =
+static MotionFlags const ftCl_MF_Zair ATTRIBUTE_USED =
     FtStateChange_PreserveFastFall | FtStateChange_SkipUpdateModel |
     FtStateChange_SkipUpdateAnimVel | FtStateChange_Unk_6;
 

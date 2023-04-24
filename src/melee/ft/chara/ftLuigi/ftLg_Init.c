@@ -201,8 +201,8 @@ MotionState ftLg_Init_MotionStateTable[] = {
 MotionState ftLg_Init_UnkMotionStates0[] = {
     {
         14,
-        0,
-        FtMoveId_Unk01 << 24,
+        FtStateChange_None,
+        FtMoveId_Default << 24,
         NULL,
         NULL,
         ft_800C7158,
@@ -211,8 +211,8 @@ MotionState ftLg_Init_UnkMotionStates0[] = {
     },
     {
         15,
-        0,
-        FtMoveId_Unk01 << 24,
+        FtStateChange_None,
+        FtMoveId_Default << 24,
         NULL,
         NULL,
         ft_800C7200,
