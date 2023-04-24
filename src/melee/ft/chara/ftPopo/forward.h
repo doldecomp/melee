@@ -6,33 +6,32 @@
 #include "ftCommon/forward.h"
 
 static MotionFlags const ftPp_MF_Special ATTRIBUTE_USED =
-    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateItemVis |
-    FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState;
+    Ft_MF_SkipModel | Ft_MF_SkipItemVis | Ft_MF_UnkUpdatePhys |
+    Ft_MF_FreezeState;
 
 static MotionFlags const ftPp_MF_SpecialLw ATTRIBUTE_USED =
-    ftPp_MF_Special | FtStateChange_PreserveColAnimHitStatus;
+    ftPp_MF_Special | Ft_MF_KeepColAnimHitStatus;
 
 static MotionFlags const ftPp_MF_SpecialN ATTRIBUTE_USED =
-    ftPp_MF_Special | FtStateChange_PreserveFastFall |
-    FtStateChange_SkipUpdateThrowException;
+    ftPp_MF_Special | Ft_MF_KeepFastFall | Ft_MF_SkipThrowException;
 
 static MotionFlags const ftPp_MF_SpecialS ATTRIBUTE_USED =
-    ftPp_MF_Special | FtStateChange_PreserveGfx | FtStateChange_PreserveSfx;
+    ftPp_MF_Special | Ft_MF_KeepGfx | Ft_MF_KeepSfx;
 
 static MotionFlags const ftPp_MF_SpecialHi ATTRIBUTE_USED =
-    ftPp_MF_SpecialS | FtStateChange_PreserveFastFall;
+    ftPp_MF_SpecialS | Ft_MF_KeepFastFall;
 
 static MotionFlags const ftPp_MF_MS_358 ATTRIBUTE_USED =
-    ftPp_MF_SpecialLw | FtStateChange_SkipUpdateParasol;
+    ftPp_MF_SpecialLw | Ft_MF_SkipParasol;
 
 static MotionFlags const ftPp_MF_SpecialAirN ATTRIBUTE_USED =
-    ftPp_MF_SpecialN | FtStateChange_SkipUpdateParasol;
+    ftPp_MF_SpecialN | Ft_MF_SkipParasol;
 
 static MotionFlags const ftPp_MF_SpecialAirS ATTRIBUTE_USED =
-    ftPp_MF_SpecialS | FtStateChange_SkipUpdateParasol;
+    ftPp_MF_SpecialS | Ft_MF_SkipParasol;
 
 static MotionFlags const ftPp_MF_SpecialAirHi ATTRIBUTE_USED =
-    ftPp_MF_SpecialHi | FtStateChange_SkipUpdateParasol;
+    ftPp_MF_SpecialHi | Ft_MF_SkipParasol;
 
 typedef enum ftPopo_MotionState {
     ftPp_MS_SpecialN = ftCo_MS_Count,

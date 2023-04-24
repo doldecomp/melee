@@ -20,7 +20,7 @@
 MotionState ftMr_Init_MotionStateTable[states_count] = {
     {
         -1,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,
@@ -30,7 +30,7 @@ MotionState ftMr_Init_MotionStateTable[states_count] = {
     },
     {
         -1,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,
@@ -123,7 +123,7 @@ MotionState ftMr_Init_MotionStateTable[states_count] = {
 MotionState ftMr_Init_UnkMotionStates0[aux_states_count] = {
     {
         14,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,
@@ -133,7 +133,7 @@ MotionState ftMr_Init_UnkMotionStates0[aux_states_count] = {
     },
     {
         15,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,

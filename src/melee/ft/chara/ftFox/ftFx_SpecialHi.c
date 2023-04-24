@@ -18,11 +18,9 @@
 #include <baselib/gobjproc.h>
 
 #define FTFOX_SPECIALHI_COLL_FLAG                                             \
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |             \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |           \
-        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
-        FtStateChange_SkipUpdateModelPartVis |                                \
-        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
+    Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_UpdateCmd | Ft_MF_SkipColAnim | \
+        Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |            \
+        Ft_MF_SkipModelFlags | Ft_MF_Unk27
 
 /// @todo Move elsewhere.
 #define HALF_PI32 (1.5707963705062866f)
@@ -428,10 +426,9 @@ void ftFx_SpecialHi_GroundToAir(HSD_GObj* gobj)
 
     ftCommon_8007D60C(fp);
 
-    Fighter_ChangeMotionState(
-        gobj, ftFx_MS_SpecialAirHi,
-        (FtStateChange_SkipUpdateHit | FTFOX_SPECIALHI_COLL_FLAG), NULL,
-        fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirHi,
+                              (Ft_MF_SkipHit | FTFOX_SPECIALHI_COLL_FLAG),
+                              NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     fp->x2223_flag.bits.b4 = true;
     fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialHi_CreateLaunchGFX;
@@ -670,10 +667,9 @@ void ftFx_SpecialHiFall_Coll(HSD_GObj* gobj)
 void ftFx_SpecialHiFall_Enter(HSD_GObj* gobj)
 {
     ftCommon_8007D7FC(GET_FIGHTER(gobj));
-    Fighter_ChangeMotionState(
-        gobj, ftFx_MS_SpecialHiEnd,
-        (FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd), NULL,
-        13.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHiEnd,
+                              (Ft_MF_SkipColAnim | Ft_MF_UpdateCmd), NULL,
+                              13.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
 }
 

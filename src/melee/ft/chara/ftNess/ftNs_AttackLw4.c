@@ -145,9 +145,8 @@ void ftNs_AttackLw4Charge_Enter(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4Charge,
-                              FtStateChange_SkipUpdateItemVis, NULL, 12.0f,
-                              1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4Charge, Ft_MF_SkipItemVis,
+                              NULL, 12.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
     ftAnim_SetAnimRate(gobj, 0.0f);
     ftNs_AttackHi4_YoyoApplySmash(gobj);
@@ -236,8 +235,7 @@ void ftNs_AttackLw4Release_Enter(
     Fighter* fp = GET_FIGHTER(gobj);
 
     Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4Release,
-                              FtStateChange_SkipUpdateItemVis, NULL, 13.0f,
-                              1.0f, 0.0f);
+                              Ft_MF_SkipItemVis, NULL, 13.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
     ftNs_AttackHi4_YoyoSetChargeDamage(gobj);
     fp->x2222_flag.bits.b2 = 1;

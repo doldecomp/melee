@@ -98,104 +98,87 @@ typedef enum CharacterKind {
     CHKIND_MAX = CHKIND_NONE
 } CharacterKind;
 
-static MotionFlags const FtStateChange_None ATTRIBUTE_USED = 0;
+static MotionFlags const Ft_MF_None ATTRIBUTE_USED = 0;
 
-static MotionFlags const FtStateChange_PreserveFastFall ATTRIBUTE_USED = 1
-                                                                         << 0;
+static MotionFlags const Ft_MF_KeepFastFall ATTRIBUTE_USED = 1 << 0;
 
-static MotionFlags const FtStateChange_PreserveGfx ATTRIBUTE_USED = 1 << 1;
+static MotionFlags const Ft_MF_KeepGfx ATTRIBUTE_USED = 1 << 1;
 
 /// Preserve full body collision state
-static MotionFlags const FtStateChange_PreserveColAnimHitStatus
-    ATTRIBUTE_USED = 1 << 2;
+static MotionFlags const Ft_MF_KeepColAnimHitStatus ATTRIBUTE_USED = 1 << 2;
 
 /// Keep hitboxes
-static MotionFlags const FtStateChange_SkipUpdateHit ATTRIBUTE_USED = 1 << 3;
+static MotionFlags const Ft_MF_SkipHit ATTRIBUTE_USED = 1 << 3;
 
 /// Ignore model state change ?
-static MotionFlags const FtStateChange_SkipUpdateModel ATTRIBUTE_USED = 1 << 4;
+static MotionFlags const Ft_MF_SkipModel ATTRIBUTE_USED = 1 << 4;
 
-static MotionFlags const FtStateChange_SkipUpdateAnimVel ATTRIBUTE_USED = 1
-                                                                          << 5;
+static MotionFlags const Ft_MF_SkipAnimVel ATTRIBUTE_USED = 1 << 5;
 
-static MotionFlags const FtStateChange_Unk_6 ATTRIBUTE_USED = 1 << 6;
+static MotionFlags const Ft_MF_Unk06 ATTRIBUTE_USED = 1 << 6;
 
 /// Ignore switching to character's "hurt" textures ?
-static MotionFlags const FtStateChange_SkipUpdateMatAnim ATTRIBUTE_USED = 1
-                                                                          << 7;
+static MotionFlags const Ft_MF_SkipMatAnim ATTRIBUTE_USED = 1 << 7;
 
 /// Resets thrower GObj pointer to NULL if false?
-static MotionFlags const FtStateChange_SkipUpdateThrowException
-    ATTRIBUTE_USED = 1 << 8;
+static MotionFlags const Ft_MF_SkipThrowException ATTRIBUTE_USED = 1 << 8;
 
-static MotionFlags const FtStateChange_PreserveSfx ATTRIBUTE_USED = 1 << 9;
+static MotionFlags const Ft_MF_KeepSfx ATTRIBUTE_USED = 1 << 9;
 
 /// Ignore Parasol state change
-static MotionFlags const FtStateChange_SkipUpdateParasol ATTRIBUTE_USED =
-    1 << 10;
+static MotionFlags const Ft_MF_SkipParasol ATTRIBUTE_USED = 1 << 10;
 
 /// Ignore rumble update?
-static MotionFlags const FtStateChange_SkipUpdateRumble ATTRIBUTE_USED = 1
-                                                                         << 11;
+static MotionFlags const Ft_MF_SkipRumble ATTRIBUTE_USED = 1 << 11;
 
-static MotionFlags const FtStateChange_SkipUpdateColAnim ATTRIBUTE_USED =
-    1 << 12;
+static MotionFlags const Ft_MF_SkipColAnim ATTRIBUTE_USED = 1 << 12;
 
 /// Keep respawn platform?
-static MotionFlags const FtStateChange_PreserveAccessory ATTRIBUTE_USED =
-    1 << 13;
+static MotionFlags const Ft_MF_KeepAccessory ATTRIBUTE_USED = 1 << 13;
 
 /// Run all Subaction Events up to the current animation frame
-static MotionFlags const FtStateChange_UpdateCmd ATTRIBUTE_USED = 1 << 14;
+static MotionFlags const Ft_MF_UpdateCmd ATTRIBUTE_USED = 1 << 14;
 
-static MotionFlags const FtStateChange_SkipUpdateNametagVis ATTRIBUTE_USED =
-    1 << 15;
+static MotionFlags const Ft_MF_SkipNametagVis ATTRIBUTE_USED = 1 << 15;
 
 /// Assume this is for individual bones?
-static MotionFlags const FtStateChange_PreserveColaNimPartHitStatus
-    ATTRIBUTE_USED = 1 << 16;
+static MotionFlags const Ft_MF_KeepColAnimPartHitStatus ATTRIBUTE_USED = 1
+                                                                         << 16;
 
-static MotionFlags const FtStateChange_PreserveSwordTrail ATTRIBUTE_USED =
-    1 << 17;
+static MotionFlags const Ft_MF_KeepSwordTrail ATTRIBUTE_USED = 1 << 17;
 
 /// Used by Ness during Up/Down Smash
-static MotionFlags const FtStateChange_SkipUpdateItemVis ATTRIBUTE_USED =
-    1 << 18;
+static MotionFlags const Ft_MF_SkipItemVis ATTRIBUTE_USED = 1 << 18;
 
 /// Skips updating bit 5 of #Fighter::x2222_flag?
-static MotionFlags const FtStateChange_Unk_19 ATTRIBUTE_USED = 1 << 19;
+static MotionFlags const Ft_MF_Unk19 ATTRIBUTE_USED = 1 << 19;
 
-static MotionFlags const FtStateChange_Unk_UpdatePhys ATTRIBUTE_USED = 1 << 20;
+static MotionFlags const Ft_MF_UnkUpdatePhys ATTRIBUTE_USED = 1 << 20;
 
 /// Sets anim rate to 0 and some other stuff
-static MotionFlags const FtStateChange_FreezeState ATTRIBUTE_USED = 1 << 21;
+static MotionFlags const Ft_MF_FreezeState ATTRIBUTE_USED = 1 << 21;
 
-static MotionFlags const FtStateChange_SkipUpdateModelPartVis ATTRIBUTE_USED =
-    1 << 22;
+static MotionFlags const Ft_MF_SkipModelPartVis ATTRIBUTE_USED = 1 << 22;
 
-static MotionFlags const FtStateChange_SkipUpdateMetalB ATTRIBUTE_USED = 1
-                                                                         << 23;
+static MotionFlags const Ft_MF_SkipMetalB ATTRIBUTE_USED = 1 << 23;
 
-static MotionFlags const FtStateChange_Unk_24 ATTRIBUTE_USED = 1 << 24;
+static MotionFlags const Ft_MF_Unk24 ATTRIBUTE_USED = 1 << 24;
 
-static MotionFlags const FtStateChange_SkipUpdateAttackCount ATTRIBUTE_USED =
-    1 << 25;
+static MotionFlags const Ft_MF_SkipAttackCount ATTRIBUTE_USED = 1 << 25;
 
-static MotionFlags const FtStateChange_SkipUpdateModelFlag ATTRIBUTE_USED =
-    1 << 26;
+static MotionFlags const Ft_MF_SkipModelFlags ATTRIBUTE_USED = 1 << 26;
 
-static MotionFlags const FtStateChange_Unk_27 ATTRIBUTE_USED = 1 << 27;
+static MotionFlags const Ft_MF_Unk27 ATTRIBUTE_USED = 1 << 27;
 
-static MotionFlags const FtStateChange_SkipUpdateHitStunFlag ATTRIBUTE_USED =
-    1 << 28;
+static MotionFlags const Ft_MF_SkipHitStun ATTRIBUTE_USED = 1 << 28;
 
 /// Keeps current fighter animation?
-static MotionFlags const FtStateChange_SkipUpdateAnim ATTRIBUTE_USED = 1 << 29;
+static MotionFlags const Ft_MF_SkipAnim ATTRIBUTE_USED = 1 << 29;
 
-static MotionFlags const FtStateChange_Unk_30 ATTRIBUTE_USED = 1 << 30;
+static MotionFlags const Ft_MF_Unk30 ATTRIBUTE_USED = 1 << 30;
 
 /// Unused?
-static MotionFlags const FtStateChange_Unk_31 ATTRIBUTE_USED = 1 << 31;
+static MotionFlags const Ft_MF_Unk31 ATTRIBUTE_USED = 1 << 31;
 
 // Ledge Grab Macros
 

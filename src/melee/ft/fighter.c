@@ -937,7 +937,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     HSD_JObjSetTranslate(jobj, &fp->cur_pos);
     efAsync_80067624(gobj, &fp->x60C);
 
-    if ((arg2 & FtStateChange_SkipUpdateHit) == 0) {
+    if ((arg2 & Ft_MF_SkipHit) == 0) {
         if (fp->x2219_flag.bits.b3 != 0) {
             ftColl_8007AFF8(gobj);
         }
@@ -946,11 +946,11 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
         }
     }
 
-    if ((arg2 & FtStateChange_SkipUpdateThrowException) == 0) {
+    if ((arg2 & Ft_MF_SkipThrowException) == 0) {
         fp->x1064_thrownHitbox.owner = NULL;
     }
 
-    if ((arg2 & FtStateChange_PreserveColAnimHitStatus) == 0) {
+    if ((arg2 & Ft_MF_KeepColAnimHitStatus) == 0) {
         if (fp->x1988 != 0) {
             ftColl_8007B62C(gobj, 0);
         }
@@ -963,19 +963,15 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
         ftColl_8007B4E0(gobj);
     }
 
-    if (((arg2 & FtStateChange_SkipUpdateModel) == 0) &&
-        (fp->x221D_flag.bits.b2 != 0U))
-    {
+    if (((arg2 & Ft_MF_SkipModel) == 0) && (fp->x221D_flag.bits.b2 != 0U)) {
         ftParts_80074A8C(gobj);
     }
 
-    if (((arg2 & FtStateChange_SkipUpdateMatAnim) == 0) &&
-        ((fp->x221E_flag.bits.b7) != 0))
-    {
+    if (((arg2 & Ft_MF_SkipMatAnim) == 0) && ((fp->x221E_flag.bits.b7) != 0)) {
         ftAnim_80070654(gobj);
     }
 
-    if ((arg2 & FtStateChange_SkipUpdateParasol) == 0) {
+    if ((arg2 & Ft_MF_SkipParasol) == 0) {
         fp->x2221_flag.bits.b4 = 0;
         if ((ftCo_GetParasolStatus(gobj) != -1) &&
             (ftCo_GetParasolStatus(gobj) != 6))
@@ -990,12 +986,12 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     ftCommon_8007ECD4(fp, 8);
     ftCommon_8007ECD4(fp, 0x24);
 
-    if ((arg2 & FtStateChange_SkipUpdateRumble) == 0) {
+    if ((arg2 & Ft_MF_SkipRumble) == 0) {
         ftCommon_8007ECD4(fp, 1);
         ftCommon_8007ECD4(fp, 0x19);
     }
 
-    if (((arg2 & FtStateChange_PreserveColaNimPartHitStatus) == 0) &&
+    if (((arg2 & Ft_MF_KeepColAnimPartHitStatus) == 0) &&
         (fp->x2221_flag.bits.b1 != 0U))
     {
         ftColl_8007B6EC(gobj);
@@ -1009,21 +1005,19 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
         fp->x2220_flag.bits.b4 = 0;
     }
 
-    if ((arg2 & FtStateChange_Unk_19) == 0) {
+    if ((arg2 & Ft_MF_Unk19) == 0) {
         fp->x2222_flag.bits.b2 = 0;
     }
 
-    if ((arg2 & FtStateChange_SkipUpdateMetalB) == 0) {
+    if ((arg2 & Ft_MF_SkipMetalB) == 0) {
         fp->x2223_flag.bits.b4 = 0;
     }
 
-    if ((arg2 & FtStateChange_Unk_27) == 0) {
+    if ((arg2 & Ft_MF_Unk27) == 0) {
         fp->x2227_flag.bits.b2 = 0;
     }
 
-    if (((arg2 & FtStateChange_SkipUpdateHitStunFlag) == 0) &&
-        (fp->x221C_flag.bits.b6 != 0U))
-    {
+    if (((arg2 & Ft_MF_SkipHitStun) == 0) && (fp->x221C_flag.bits.b6 != 0U)) {
         fp->x221C_flag.bits.b6 = 0;
         fp->x2098 = p_ftCommonData->x4CC;
     }
@@ -1077,35 +1071,33 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     fp->x2114_SmashAttr.x2138_smashSinceHitbox = -1.0f;
     fp->x2224_flag.bits.b4 = 0;
 
-    if ((arg2 & FtStateChange_SkipUpdateItemVis) == 0) {
+    if ((arg2 & Ft_MF_SkipItemVis) == 0) {
         fp->x221E_flag.bits.b3 = 1;
     } else if (fp->x221E_flag.bits.b3 == 0U) {
         ftCommon_8007F578(gobj);
     }
 
-    if ((arg2 & FtStateChange_SkipUpdateModelPartVis) == 0) {
+    if ((arg2 & Ft_MF_SkipModelPartVis) == 0) {
         fp->x221E_flag.bits.b4 = 1;
     }
 
-    if ((arg2 & FtStateChange_SkipUpdateModelFlag) == 0) {
+    if ((arg2 & Ft_MF_SkipModelFlags) == 0) {
         fp->x2225_b2 = 1;
     }
 
-    if ((arg2 & FtStateChange_PreserveFastFall) == 0) {
+    if ((arg2 & Ft_MF_KeepFastFall) == 0) {
         fp->x221A_flag.bits.b4 = 0;
     }
 
-    if ((arg2 & FtStateChange_SkipUpdateColAnim) == 0) {
+    if ((arg2 & Ft_MF_SkipColAnim) == 0) {
         ft_800C0134(fp);
     }
 
-    if (((arg2 & FtStateChange_PreserveGfx) == 0) &&
-        (fp->x2219_flag.bits.b0 != 0U))
-    {
+    if (((arg2 & Ft_MF_KeepGfx) == 0) && (fp->x2219_flag.bits.b0 != 0U)) {
         ftCommon_8007DB24(gobj);
     }
 
-    if (((arg2 & FtStateChange_PreserveAccessory) == 0) &&
+    if (((arg2 & Ft_MF_KeepAccessory) == 0) &&
         ((u32) fp->x20A0_accessory != 0U))
     {
         HSD_JObjRemoveAll(fp->x20A0_accessory);
@@ -1140,28 +1132,28 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
         fp->x196C_hitlag_mult = 0.0f;
     }
 
-    if ((arg2 & FtStateChange_PreserveSfx) == 0) {
+    if ((arg2 & Ft_MF_KeepSfx) == 0) {
         ft_80088884(fp);
         ft_800888E0(fp);
         ft_800887CC(fp);
     }
 
-    if ((arg2 & FtStateChange_PreserveSwordTrail) == 0) {
+    if ((arg2 & Ft_MF_KeepSwordTrail) == 0) {
         fp->x2100 = -1;
     }
-    if ((arg2 & FtStateChange_SkipUpdateNametagVis) == 0) {
+    if ((arg2 & Ft_MF_SkipNametagVis) == 0) {
         fp->x209A = 0;
     }
 
     fp->x2222_flag.bits.b7 = 0;
 
-    if ((arg2 & FtStateChange_Unk_UpdatePhys) != 0) {
+    if ((arg2 & Ft_MF_UnkUpdatePhys) != 0) {
         fp->x100 = 0.0f;
     } else {
         fp->x100 = -1.0f;
     }
 
-    if ((arg2 & FtStateChange_Unk_24) == 0) {
+    if ((arg2 & Ft_MF_Unk24) == 0) {
         fp->x221C_u16_y = 0;
     }
 
@@ -1212,7 +1204,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
             fp->cb.x21EC_callback = 0U;
         }
 
-        if ((arg2 & FtStateChange_SkipUpdateAttackCount) == 0) {
+        if ((arg2 & Ft_MF_SkipAttackCount) == 0) {
             pl_80037C60(gobj, x2070.x2070_int);
         }
 
@@ -1237,7 +1229,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
 
             bone_index = fp->x596_bits.x7;
 
-            if ((arg2 & FtStateChange_FreezeState) != 0) {
+            if ((arg2 & Ft_MF_FreezeState) != 0) {
                 fp->x2223_flag.bits.b0 = 1;
                 fp->x104 = 0x14;
                 fp->x89C_frameSpeedMul = 0.0f;
@@ -1255,7 +1247,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
             }
             fp->x594_s32 = unk_struct_x18->x10_animCurrFlags;
             ft_8009E7B4(fp, unk_byte_ptr);
-            if ((arg2 & FtStateChange_SkipUpdateAnim) == 0) {
+            if ((arg2 & Ft_MF_SkipAnim) == 0) {
                 if (otherObj != 0U) {
                     ftData_80085CD8(fp, GET_FIGHTER(otherObj), fp->anim_id);
                     ftColl_8007B8CC(fp, otherObj);
@@ -1315,8 +1307,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
                         fp->x6A4_transNOffset.x = fp->x6A4_transNOffset.y =
                             fp->x6A4_transNOffset.z = c;
                         fp->x698 = fp->x68C_transNPos;
-                    } else if (((arg2 & FtStateChange_SkipUpdateAnimVel) ==
-                                0) &&
+                    } else if (((arg2 & Ft_MF_SkipAnimVel) == 0) &&
                                (fp->ground_or_air == GA_Ground))
                     {
                         f32 temp_vel =
@@ -1332,8 +1323,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
                         fp->x6E4.x = fp->x6E4.y = fp->x6E4.z = c;
                         fp->x6D8.x = fp->x6D8.y = fp->x6D8.z = c;
                         fp->x6CC = fp->x6C0;
-                    } else if (((arg2 & FtStateChange_SkipUpdateAnimVel) ==
-                                0) &&
+                    } else if (((arg2 & Ft_MF_SkipAnimVel) == 0) &&
                                (fp->ground_or_air == GA_Ground))
                     {
                         f32 temp_vel = fp->x6D8.z * fp->facing_dir;
@@ -1341,7 +1331,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
                         fp->gr_vel = temp_vel;
                     }
                 }
-                if ((arg2 & FtStateChange_UpdateCmd) != 0) {
+                if ((arg2 & Ft_MF_UpdateCmd) != 0) {
                     ftAction_8007349C(gobj);
                 } else if (arg8) {
                     ftAction_80073354(gobj);

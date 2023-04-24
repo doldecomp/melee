@@ -13,11 +13,9 @@
 // SpecialLw/SpecialAirLw
 
 #define FTMEWTWO_SPECIALLW_COLL_FLAG                                          \
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |             \
-        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |           \
-        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
-        FtStateChange_SkipUpdateModelPartVis |                                \
-        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
+    Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd | \
+        Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |            \
+        Ft_MF_SkipModelFlags | Ft_MF_Unk27
 
 // 0x80146198
 // https://decomp.me/scratch/QML6g // Reset Disable Stall flag

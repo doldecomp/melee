@@ -5,35 +5,32 @@
 #include "ftCommon/forward.h"
 
 static MotionFlags const ftLg_MF_Special ATTRIBUTE_USED =
-    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateItemVis |
-    FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState;
+    Ft_MF_SkipModel | Ft_MF_SkipItemVis | Ft_MF_UnkUpdatePhys |
+    Ft_MF_FreezeState;
 
 static MotionFlags const ftLg_MF_SpecialN ATTRIBUTE_USED =
-    ftLg_MF_Special | FtStateChange_PreserveFastFall |
-    FtStateChange_SkipUpdateThrowException;
+    ftLg_MF_Special | Ft_MF_KeepFastFall | Ft_MF_SkipThrowException;
 
 static MotionFlags const ftLg_MF_SpecialS ATTRIBUTE_USED =
-    ftLg_MF_Special | FtStateChange_PreserveGfx | FtStateChange_PreserveSfx;
+    ftLg_MF_Special | Ft_MF_KeepGfx | Ft_MF_KeepSfx;
 
 static MotionFlags const ftLg_MF_SpecialHi ATTRIBUTE_USED =
-    ftLg_MF_Special | FtStateChange_PreserveFastFall |
-    FtStateChange_PreserveGfx | FtStateChange_PreserveSfx;
+    ftLg_MF_Special | Ft_MF_KeepFastFall | Ft_MF_KeepGfx | Ft_MF_KeepSfx;
 
 static MotionFlags const ftLg_MF_SpecialLw ATTRIBUTE_USED =
-    ftLg_MF_Special | FtStateChange_PreserveColAnimHitStatus |
-    FtStateChange_PreserveSfx;
+    ftLg_MF_Special | Ft_MF_KeepColAnimHitStatus | Ft_MF_KeepSfx;
 
 static MotionFlags const ftLg_MF_SpecialAirN ATTRIBUTE_USED =
-    ftLg_MF_SpecialN | FtStateChange_SkipUpdateParasol;
+    ftLg_MF_SpecialN | Ft_MF_SkipParasol;
 
 static MotionFlags const ftLg_MF_SpecialAirS ATTRIBUTE_USED =
-    ftLg_MF_SpecialS | FtStateChange_SkipUpdateParasol;
+    ftLg_MF_SpecialS | Ft_MF_SkipParasol;
 
 static MotionFlags const ftLg_MF_SpecialAirHi ATTRIBUTE_USED =
-    ftLg_MF_SpecialHi | FtStateChange_SkipUpdateParasol;
+    ftLg_MF_SpecialHi | Ft_MF_SkipParasol;
 
 static MotionFlags const ftLg_MF_SpecialAirLw ATTRIBUTE_USED =
-    ftLg_MF_SpecialLw | FtStateChange_SkipUpdateParasol;
+    ftLg_MF_SpecialLw | Ft_MF_SkipParasol;
 
 typedef enum ftLuigi_MotionState {
     ftLg_MS_SpecialN = ftCo_MS_Count,

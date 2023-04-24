@@ -12,10 +12,9 @@
 
 // SpecialN/SpecialAirN (PK Flash)
 #define FTNESS_SPECIALN_COLL_FLAG                                             \
-    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |       \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |           \
-        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |         \
-        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
+    Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |                 \
+        Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |            \
+        Ft_MF_SkipModelFlags | Ft_MF_Unk27
 
 /// Ness PK Flash Charge msid check
 bool ftNs_SpecialN_CheckSpecialNHold(HSD_GObj* gobj)

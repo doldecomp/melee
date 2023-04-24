@@ -21,18 +21,15 @@
 
 // SpecialHi/SpecialAirHi (PK Thunder)
 #define FTNESS_SPECIALHI_COLL_FLAG                                            \
-    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |       \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |           \
-        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |         \
-        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
+    Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |                 \
+        Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |            \
+        Ft_MF_SkipModelFlags | Ft_MF_Unk27
 
 // SpecialHi Jibaku (PK Thunder 2 Self-Hit)
 #define FTNESS_JIBAKU_COLL_FLAG                                               \
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |                 \
-        FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |   \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |           \
-        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |         \
-        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
+    Ft_MF_KeepGfx | Ft_MF_SkipHit | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim |   \
+        Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |                   \
+        Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27
 
 // Setup float order
 static f32 return_float1(void) // -25264
@@ -1853,8 +1850,7 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
             new_var->facing_dir = phi_f0;
             ftNs_SpecialHiStopGFX(gobj);
             Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirHiRebound,
-                                      FtStateChange_PreserveGfx, NULL, 0.0f,
-                                      1.0f, 0.0f);
+                                      Ft_MF_KeepGfx, NULL, 0.0f, 1.0f, 0.0f);
             ftAnim_8006EBA4(gobj);
             spC4.x = atan2f(-fighter_r31->x6F0_collData.x188_ceiling.normal.x,
                             fighter_r31->x6F0_collData.x188_ceiling.normal.y);
@@ -1892,8 +1888,8 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
                 fighter_data4->facing_dir = phi_f0;
                 ftNs_SpecialHiStopGFX(gobj);
                 Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirHiRebound,
-                                          FtStateChange_PreserveGfx, NULL,
-                                          0.0f, 1.0f, 0.0f);
+                                          Ft_MF_KeepGfx, NULL, 0.0f, 1.0f,
+                                          0.0f);
                 ftAnim_8006EBA4(gobj);
                 spB8.x =
                     atan2f(-fighter_r31->x6F0_collData.x160_rightwall.normal.x,
@@ -1935,8 +1931,8 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
                 fighter_data5->facing_dir = phi_f0;
                 ftNs_SpecialHiStopGFX(gobj);
                 Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirHiRebound,
-                                          FtStateChange_PreserveGfx, NULL,
-                                          0.0f, 1.0f, 0.0f);
+                                          Ft_MF_KeepGfx, NULL, 0.0f, 1.0f,
+                                          0.0f);
                 ftAnim_8006EBA4(gobj);
                 spAC.x =
                     atan2f(-fighter_r31->x6F0_collData.x174_leftwall.normal.x,

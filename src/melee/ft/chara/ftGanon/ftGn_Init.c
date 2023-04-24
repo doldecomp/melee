@@ -17,7 +17,7 @@
 MotionState ftGn_Init_MotionStateTable[] = {
     {
         ftCo_MS_None,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,
@@ -27,7 +27,7 @@ MotionState ftGn_Init_MotionStateTable[] = {
     },
     {
         ftCo_MS_None,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,
@@ -37,7 +37,7 @@ MotionState ftGn_Init_MotionStateTable[] = {
     },
     {
         ftCo_MS_None,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,
@@ -47,7 +47,7 @@ MotionState ftGn_Init_MotionStateTable[] = {
     },
     {
         ftCo_MS_None,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,
@@ -57,7 +57,7 @@ MotionState ftGn_Init_MotionStateTable[] = {
     },
     {
         ftCo_MS_None,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,
@@ -67,7 +67,7 @@ MotionState ftGn_Init_MotionStateTable[] = {
     },
     {
         ftCo_MS_None,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,

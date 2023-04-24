@@ -5,65 +5,60 @@
 #include "ftCommon/forward.h"
 
 static MotionFlags const ftPe_MF_Base ATTRIBUTE_USED =
-    FtStateChange_SkipUpdateItemVis | FtStateChange_FreezeState;
+    Ft_MF_SkipItemVis | Ft_MF_FreezeState;
 
 static MotionFlags const ftPe_MF_FloatAttack ATTRIBUTE_USED =
-    ftPe_MF_Base | FtStateChange_SkipUpdateParasol;
+    ftPe_MF_Base | Ft_MF_SkipParasol;
 
 static MotionFlags const ftPe_MF_FloatAttackAirN ATTRIBUTE_USED =
-    ftPe_MF_FloatAttack | FtStateChange_PreserveColAnimHitStatus |
-    FtStateChange_SkipUpdateHit;
+    ftPe_MF_FloatAttack | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit;
 
 static MotionFlags const ftPe_MF_Move_14 ATTRIBUTE_USED =
-    ftPe_MF_FloatAttackAirN | FtStateChange_PreserveFastFall;
+    ftPe_MF_FloatAttackAirN | Ft_MF_KeepFastFall;
 
 static MotionFlags const ftPe_MF_FloatAttackAirB ATTRIBUTE_USED =
-    ftPe_MF_FloatAttackAirN | FtStateChange_PreserveGfx;
+    ftPe_MF_FloatAttackAirN | Ft_MF_KeepGfx;
 
 static MotionFlags const ftPe_MF_FloatAttackAirHi ATTRIBUTE_USED =
-    ftPe_MF_FloatAttackAirN | FtStateChange_PreserveFastFall |
-    FtStateChange_PreserveGfx;
+    ftPe_MF_FloatAttackAirN | Ft_MF_KeepFastFall | Ft_MF_KeepGfx;
 
 static MotionFlags const ftPe_MF_Move_17 ATTRIBUTE_USED =
-    ftPe_MF_FloatAttack | FtStateChange_SkipUpdateModel;
+    ftPe_MF_FloatAttack | Ft_MF_SkipModel;
 
 static MotionFlags const ftPe_MF_AttackS4 ATTRIBUTE_USED =
-    ftPe_MF_Base | FtStateChange_PreserveFastFall |
-    FtStateChange_SkipUpdateHit | FtStateChange_PreserveSfx |
-    FtStateChange_SkipUpdateRumble;
+    ftPe_MF_Base | Ft_MF_KeepFastFall | Ft_MF_SkipHit | Ft_MF_KeepSfx |
+    Ft_MF_SkipRumble;
 
 static MotionFlags const ftPe_MF_Special ATTRIBUTE_USED =
-    ftPe_MF_Base | FtStateChange_SkipUpdateModel |
-    FtStateChange_Unk_UpdatePhys;
+    ftPe_MF_Base | Ft_MF_SkipModel | Ft_MF_UnkUpdatePhys;
 
 static MotionFlags const ftPe_MF_SpecialN ATTRIBUTE_USED =
-    ftPe_MF_Special | FtStateChange_PreserveFastFall;
+    ftPe_MF_Special | Ft_MF_KeepFastFall;
 
 static MotionFlags const ftPe_MF_SpecialHi ATTRIBUTE_USED =
-    ftPe_MF_SpecialN | FtStateChange_PreserveGfx;
+    ftPe_MF_SpecialN | Ft_MF_KeepGfx;
 
 static MotionFlags const ftPe_MF_SpecialLw ATTRIBUTE_USED =
-    ftPe_MF_Special | FtStateChange_PreserveColAnimHitStatus;
+    ftPe_MF_Special | Ft_MF_KeepColAnimHitStatus;
 
 static MotionFlags const ftPe_MF_SpecialS ATTRIBUTE_USED =
-    ftPe_MF_Special | FtStateChange_PreserveGfx | FtStateChange_PreserveSfx;
+    ftPe_MF_Special | Ft_MF_KeepGfx | Ft_MF_KeepSfx;
 
 static MotionFlags const ftPe_MF_SpecialAirN ATTRIBUTE_USED =
-    ftPe_MF_SpecialN | FtStateChange_SkipUpdateParasol;
+    ftPe_MF_SpecialN | Ft_MF_SkipParasol;
 
 static MotionFlags const ftPe_MF_SpecialAirHi ATTRIBUTE_USED =
-    ftPe_MF_SpecialHi | FtStateChange_SkipUpdateParasol;
+    ftPe_MF_SpecialHi | Ft_MF_SkipParasol;
 
 static MotionFlags const ftPe_MF_SpecialAirS ATTRIBUTE_USED =
-    ftPe_MF_SpecialS | FtStateChange_SkipUpdateParasol;
+    ftPe_MF_SpecialS | Ft_MF_SkipParasol;
 
 static MotionFlags const ftPe_MF_ParasolOpen ATTRIBUTE_USED =
-    FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateModel |
-    FtStateChange_Unk_6 | FtStateChange_SkipUpdateItemVis |
-    FtStateChange_SkipUpdateModelPartVis;
+    Ft_MF_SkipHit | Ft_MF_SkipModel | Ft_MF_Unk06 | Ft_MF_SkipItemVis |
+    Ft_MF_SkipModelPartVis;
 
 static MotionFlags const ftPe_MF_ParasolFallSpecial ATTRIBUTE_USED =
-    ftPe_MF_ParasolOpen | FtStateChange_Unk_19;
+    ftPe_MF_ParasolOpen | Ft_MF_Unk19;
 
 typedef enum ftPeach_MotionState {
     ftPe_MS_Float = ftCo_MS_Count,

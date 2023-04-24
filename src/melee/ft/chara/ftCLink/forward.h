@@ -5,7 +5,6 @@
 #include "ft/forward.h"
 
 static MotionFlags const ftCl_MF_Zair ATTRIBUTE_USED =
-    FtStateChange_PreserveFastFall | FtStateChange_SkipUpdateModel |
-    FtStateChange_SkipUpdateAnimVel | FtStateChange_Unk_6;
+    Ft_MF_KeepFastFall | Ft_MF_SkipModel | Ft_MF_SkipAnimVel | Ft_MF_Unk06;
 
 #endif

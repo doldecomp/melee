@@ -6,102 +6,91 @@
 #include "ftCommon/forward.h"
 
 static MotionFlags const ftDk_MF_Special ATTRIBUTE_USED =
-    ftCo_MF_Special | FtStateChange_SkipUpdateModel |
-    FtStateChange_PreserveSfx | FtStateChange_SkipUpdateItemVis |
-    FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState;
+    ftCo_MF_Special | Ft_MF_SkipModel | Ft_MF_KeepSfx | Ft_MF_SkipItemVis |
+    Ft_MF_UnkUpdatePhys | Ft_MF_FreezeState;
 
 static MotionFlags const ftDk_MF_SpecialN ATTRIBUTE_USED =
-    ftDk_MF_Special | FtStateChange_PreserveFastFall;
+    ftDk_MF_Special | Ft_MF_KeepFastFall;
 
 static MotionFlags const ftDk_MF_SpecialS ATTRIBUTE_USED =
-    ftDk_MF_Special | FtStateChange_PreserveGfx;
+    ftDk_MF_Special | Ft_MF_KeepGfx;
 
 static MotionFlags const ftDk_MF_SpecialHi ATTRIBUTE_USED =
-    ftDk_MF_Special | FtStateChange_PreserveFastFall |
-    FtStateChange_PreserveGfx;
+    ftDk_MF_Special | Ft_MF_KeepFastFall | Ft_MF_KeepGfx;
 
 static MotionFlags const ftDk_MF_SpecialLwStart ATTRIBUTE_USED =
-    ftDk_MF_Special | FtStateChange_PreserveColAnimHitStatus;
+    ftDk_MF_Special | Ft_MF_KeepColAnimHitStatus;
 
 static MotionFlags const ftDk_MF_SpecialAirN ATTRIBUTE_USED =
-    ftDk_MF_Special | FtStateChange_PreserveFastFall |
-    FtStateChange_SkipUpdateParasol;
+    ftDk_MF_Special | Ft_MF_KeepFastFall | Ft_MF_SkipParasol;
 
 static MotionFlags const ftDk_MF_SpecialAirS ATTRIBUTE_USED =
-    ftDk_MF_Special | FtStateChange_PreserveGfx |
-    FtStateChange_SkipUpdateParasol;
+    ftDk_MF_Special | Ft_MF_KeepGfx | Ft_MF_SkipParasol;
 
 static MotionFlags const ftDk_MF_SpecialAirHi ATTRIBUTE_USED =
-    ftDk_MF_Special | FtStateChange_PreserveFastFall |
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateParasol;
+    ftDk_MF_Special | Ft_MF_KeepFastFall | Ft_MF_KeepGfx | Ft_MF_SkipParasol;
 
 static MotionFlags const ftDk_MF_MS_386 ATTRIBUTE_USED =
-    ftDk_MF_Special | FtStateChange_PreserveColAnimHitStatus |
-    FtStateChange_SkipUpdateParasol;
+    ftDk_MF_Special | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipParasol;
 
 static MotionFlags const ftDk_MF_SpecialLw ATTRIBUTE_USED =
-    ftDk_MF_Special | FtStateChange_PreserveColAnimHitStatus |
-    FtStateChange_Unk_19;
+    ftDk_MF_Special | Ft_MF_KeepColAnimHitStatus | Ft_MF_Unk19;
 
 static MotionFlags const ftDk_MF_MS_350 ATTRIBUTE_USED =
-    FtStateChange_PreserveSwordTrail | FtStateChange_Unk_19 |
-    FtStateChange_SkipUpdateModelPartVis;
+    Ft_MF_KeepSwordTrail | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis;
 
 static MotionFlags const ftDk_MF_Cargo ATTRIBUTE_USED =
-    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateAnimVel |
-    FtStateChange_FreezeState | FtStateChange_SkipUpdateMetalB;
+    Ft_MF_SkipModel | Ft_MF_SkipAnimVel | Ft_MF_FreezeState | Ft_MF_SkipMetalB;
 
 static MotionFlags const ftDk_MF_CargoThrow ATTRIBUTE_USED =
-    ftDk_MF_Cargo | FtStateChange_SkipUpdateHit |
-    FtStateChange_SkipUpdateItemVis;
+    ftDk_MF_Cargo | Ft_MF_SkipHit | Ft_MF_SkipItemVis;
 
 static MotionFlags const ftDk_MF_CargoThrowF ATTRIBUTE_USED =
-    ftDk_MF_CargoThrow | FtStateChange_PreserveFastFall;
+    ftDk_MF_CargoThrow | Ft_MF_KeepFastFall;
 
 static MotionFlags const ftDk_MF_CargoThrowB ATTRIBUTE_USED =
-    ftDk_MF_CargoThrow | FtStateChange_PreserveGfx;
+    ftDk_MF_CargoThrow | Ft_MF_KeepGfx;
 
 static MotionFlags const ftDk_MF_CargoThrowU ATTRIBUTE_USED =
-    ftDk_MF_CargoThrow | FtStateChange_PreserveFastFall |
-    FtStateChange_PreserveGfx;
+    ftDk_MF_CargoThrow | Ft_MF_KeepFastFall | Ft_MF_KeepGfx;
 
 static MotionFlags const ftDk_MF_CargoThrowD ATTRIBUTE_USED =
-    ftDk_MF_CargoThrow | FtStateChange_PreserveColAnimHitStatus;
+    ftDk_MF_CargoThrow | Ft_MF_KeepColAnimHitStatus;
 
 static MotionFlags const ftDk_MF_CargoWait ATTRIBUTE_USED =
-    ftDk_MF_Cargo | FtStateChange_PreserveFastFall |
-    FtStateChange_PreserveColAnimHitStatus | FtStateChange_Unk_19;
+    ftDk_MF_Cargo | Ft_MF_KeepFastFall | Ft_MF_KeepColAnimHitStatus |
+    Ft_MF_Unk19;
 
 static MotionFlags const ftDk_MF_CargoTurn ATTRIBUTE_USED =
-    ftDk_MF_CargoWait | FtStateChange_PreserveAccessory;
+    ftDk_MF_CargoWait | Ft_MF_KeepAccessory;
 
 static MotionFlags const ftDk_MF_CargoWalk ATTRIBUTE_USED =
-    ftDk_MF_CargoWait | FtStateChange_UpdateCmd;
+    ftDk_MF_CargoWait | Ft_MF_UpdateCmd;
 
 static MotionFlags const ftDk_MF_CargoJump ATTRIBUTE_USED =
-    ftDk_MF_CargoWait | FtStateChange_SkipUpdateNametagVis;
+    ftDk_MF_CargoWait | Ft_MF_SkipNametagVis;
 
 static MotionFlags const ftDk_MF_MS_360 ATTRIBUTE_USED =
-    ftDk_MF_CargoWait | FtStateChange_PreserveSwordTrail;
+    ftDk_MF_CargoWait | Ft_MF_KeepSwordTrail;
 
 static MotionFlags const ftDk_MF_MS_341 ATTRIBUTE_USED =
-    FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis;
+    Ft_MF_Unk19 | Ft_MF_SkipModelPartVis;
 
 static MotionFlags const ftDk_MF_Move_53 ATTRIBUTE_USED =
-    ftDk_MF_MS_341 | FtStateChange_SkipUpdateAnimVel | FtStateChange_Unk_6;
+    ftDk_MF_MS_341 | Ft_MF_SkipAnimVel | Ft_MF_Unk06;
 
 static MotionFlags const ftDk_MF_MS_342_Base ATTRIBUTE_USED =
-    ftDk_MF_Move_53 | FtStateChange_PreserveColAnimHitStatus;
+    ftDk_MF_Move_53 | Ft_MF_KeepColAnimHitStatus;
 
 static MotionFlags const ftDk_MF_MS_342 ATTRIBUTE_USED =
-    ftDk_MF_MS_342_Base | FtStateChange_PreserveGfx | FtStateChange_UpdateCmd;
+    ftDk_MF_MS_342_Base | Ft_MF_KeepGfx | Ft_MF_UpdateCmd;
 
 static MotionFlags const ftDk_MF_MS_345 ATTRIBUTE_USED =
-    ftDk_MF_MS_342_Base | FtStateChange_PreserveAccessory;
+    ftDk_MF_MS_342_Base | Ft_MF_KeepAccessory;
 
 static MotionFlags const ftDk_MF_MS_348 ATTRIBUTE_USED =
-    ftDk_MF_Move_53 | FtStateChange_PreserveFastFall |
-    FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateNametagVis;
+    ftDk_MF_Move_53 | Ft_MF_KeepFastFall | Ft_MF_SkipHit |
+    Ft_MF_SkipNametagVis;
 
 typedef enum ftDk_MotionState {
     ftDk_MS_Unk341 = ftCo_MS_Count,

@@ -15,11 +15,9 @@
 #include "it/it_27CF.h"
 
 #define FTFOX_SPECIALS_COLL_FLAG                                              \
-    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateRumble |        \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |           \
-        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
-        FtStateChange_SkipUpdateModelPartVis |                                \
-        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
+    Ft_MF_SkipMatAnim | Ft_MF_SkipRumble | Ft_MF_UpdateCmd |                  \
+        Ft_MF_SkipColAnim | Ft_MF_SkipItemVis | Ft_MF_Unk19 |                 \
+        Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27
 
 // 0x800E9DF8
 // https://decomp.me/scratch/5Qwzg // Create Fox Illusion / Falco Phantasm GFX
@@ -423,8 +421,8 @@ void ftFx_SpecialS_GroundToAir(HSD_GObj* gobj)
     ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(
         gobj, ftFx_MS_SpecialAirS,
-        (FtStateChange_PreserveColAnimHitStatus | FTFOX_SPECIALS_COLL_FLAG),
-        NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        (Ft_MF_KeepColAnimHitStatus | FTFOX_SPECIALS_COLL_FLAG), NULL,
+        fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->x2208_ftcmd_var2 = 0;
 }
 
@@ -438,8 +436,8 @@ void ftFx_SpecialAirS_AirToGround(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(
         gobj, ftFx_MS_SpecialS,
-        (FtStateChange_PreserveColAnimHitStatus | FTFOX_SPECIALS_COLL_FLAG),
-        NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        (Ft_MF_KeepColAnimHitStatus | FTFOX_SPECIALS_COLL_FLAG), NULL,
+        fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->x2208_ftcmd_var2 = 0;
 }
 
@@ -473,9 +471,8 @@ void ftFx_SpecialS_Enter(HSD_GObj* gobj)
     u8 _[28];
 #endif
 
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialS,
-                              FtStateChange_SkipUpdateRumble, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialS, Ft_MF_SkipRumble, NULL,
+                              0.0f, 1.0f, 0.0f);
     ftFox_SpecialS_SetVars(gobj);
 }
 
@@ -489,9 +486,8 @@ void ftFx_SpecialAirS_Enter(HSD_GObj* gobj)
     u8 _[36];
 #endif
 
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirS,
-                              FtStateChange_SkipUpdateRumble, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirS, Ft_MF_SkipRumble,
+                              NULL, 0.0f, 1.0f, 0.0f);
     ftFox_SpecialS_SetVars(gobj);
 }
 
@@ -639,9 +635,8 @@ void ftFx_SpecialSEnd_Enter(HSD_GObj* gobj)
 
     fp->gr_vel = foxAttrs->x34_FOX_ILLUSION_GROUND_END_VEL_X * fp->facing_dir;
 
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialSEnd,
-                              FtStateChange_SkipUpdateRumble, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialSEnd, Ft_MF_SkipRumble,
+                              NULL, 0.0f, 1.0f, 0.0f);
     ftFox_SpecialSEnd_SetVars(gobj);
 }
 
@@ -656,8 +651,7 @@ void ftFx_SpecialAirSEnd_Enter(HSD_GObj* gobj)
         foxAttrs->x3C_FOX_ILLUSION_AIR_END_VEL_X * fp->facing_dir;
     fp->x80_self_vel.y = 0.0f;
 
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirSEnd,
-                              FtStateChange_SkipUpdateRumble, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirSEnd, Ft_MF_SkipRumble,
+                              NULL, 0.0f, 1.0f, 0.0f);
     ftFox_SpecialSEnd_SetVars(gobj);
 }

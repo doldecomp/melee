@@ -15,15 +15,13 @@
 // SpecialN/SpecialAirN
 
 #define FTMEWTWO_SPECIALN_ACTION_FLAG                                         \
-    FtStateChange_SkipUpdateMatAnim | FtStateChange_PreserveSfx |             \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |           \
-        FtStateChange_Unk_19
+    Ft_MF_SkipMatAnim | Ft_MF_KeepSfx | Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | \
+        Ft_MF_Unk19
 
 #define FTMEWTWO_SPECIALN_COLL_FLAG                                           \
-    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |       \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |           \
-        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |         \
-        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
+    Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |                 \
+        Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |            \
+        Ft_MF_SkipModelFlags | Ft_MF_Unk27
 
 // 0x80146CCC
 // https://decomp.me/scratch/qxdYd
@@ -1064,7 +1062,7 @@ void ftMt_SpecialNLoop_Coll(HSD_GObj* gobj)
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(
             gobj, ftMt_MS_SpecialAirNLoop,
-            (FtStateChange_PreserveSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
+            (Ft_MF_KeepSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
             fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftMewtwo_SpecialN_SetCall(gobj);
     }
@@ -1084,7 +1082,7 @@ void ftMt_SpecialNFull_Coll(HSD_GObj* gobj)
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(
             gobj, ftMt_MS_SpecialAirNFull,
-            (FtStateChange_PreserveSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
+            (Ft_MF_KeepSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
             fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftMewtwo_SpecialN_SetCall(gobj);
     }
@@ -1161,7 +1159,7 @@ void ftMt_SpecialAirNLoop_Coll(HSD_GObj* gobj)
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(
             gobj, ftMt_MS_SpecialNLoop,
-            (FtStateChange_PreserveSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
+            (Ft_MF_KeepSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
             fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftMewtwo_SpecialN_SetCall(gobj);
     }
@@ -1181,7 +1179,7 @@ void ftMt_SpecialAirNFull_Coll(HSD_GObj* gobj)
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(
             gobj, ftMt_MS_SpecialNFull,
-            (FtStateChange_PreserveSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
+            (Ft_MF_KeepSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
             fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftMewtwo_SpecialN_SetCall(gobj);
     }

@@ -5,35 +5,32 @@
 #include "ftCommon/forward.h"
 
 static MotionFlags const ftZd_MF_Special ATTRIBUTE_USED =
-    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateItemVis |
-    FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState;
+    Ft_MF_SkipModel | Ft_MF_SkipItemVis | Ft_MF_UnkUpdatePhys |
+    Ft_MF_FreezeState;
 
 static MotionFlags const ftZd_MF_SpecialN ATTRIBUTE_USED =
-    ftZd_MF_Special | FtStateChange_PreserveFastFall |
-    FtStateChange_SkipUpdateColAnim;
+    ftZd_MF_Special | Ft_MF_KeepFastFall | Ft_MF_SkipColAnim;
 
 static MotionFlags const ftZd_MF_SpecialHi ATTRIBUTE_USED =
-    ftZd_MF_Special | FtStateChange_PreserveFastFall |
-    FtStateChange_PreserveGfx;
+    ftZd_MF_Special | Ft_MF_KeepFastFall | Ft_MF_KeepGfx;
 
 static MotionFlags const ftZd_MF_SpecialLw ATTRIBUTE_USED =
-    ftZd_MF_Special | FtStateChange_PreserveColAnimHitStatus;
+    ftZd_MF_Special | Ft_MF_KeepColAnimHitStatus;
 
 static MotionFlags const ftZd_MF_SpecialS ATTRIBUTE_USED =
-    ftZd_MF_Special | FtStateChange_PreserveGfx |
-    FtStateChange_SkipUpdateThrowException;
+    ftZd_MF_Special | Ft_MF_KeepGfx | Ft_MF_SkipThrowException;
 
 static MotionFlags const ftZd_MF_SpecialAirN ATTRIBUTE_USED =
-    ftZd_MF_SpecialN | FtStateChange_SkipUpdateParasol;
+    ftZd_MF_SpecialN | Ft_MF_SkipParasol;
 
 static MotionFlags const ftZd_MF_SpecialAirHi ATTRIBUTE_USED =
-    ftZd_MF_SpecialHi | FtStateChange_SkipUpdateParasol;
+    ftZd_MF_SpecialHi | Ft_MF_SkipParasol;
 
 static MotionFlags const ftZd_MF_SpecialAirLw ATTRIBUTE_USED =
-    ftZd_MF_SpecialLw | FtStateChange_SkipUpdateParasol;
+    ftZd_MF_SpecialLw | Ft_MF_SkipParasol;
 
 static MotionFlags const ftZd_MF_SpecialAirS ATTRIBUTE_USED =
-    ftZd_MF_SpecialS | FtStateChange_SkipUpdateParasol;
+    ftZd_MF_SpecialS | Ft_MF_SkipParasol;
 
 enum ftZelda_AS {
     ftZd_MS_SpecialN = ftCo_MS_Count,

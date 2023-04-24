@@ -35,7 +35,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     },
     {
         -1,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,
@@ -45,7 +45,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     },
     {
         -1,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,
@@ -215,7 +215,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     },
     {
         312,
-        FtStateChange_FreezeState,
+        Ft_MF_FreezeState,
         FtMoveId_Default << 24,
         ftCo_Zair_Anim,
         ftCo_Zair_IASA,

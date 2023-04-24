@@ -331,12 +331,10 @@ static inline void ftGameWatch_SpecialS_SetCall(HSD_GObj* gobj)
 }
 
 static u32 const transition_flags =
-    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |
-    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateMatAnim |
-    FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
-    FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
-    FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
-    FtStateChange_Unk_27;
+    Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit | Ft_MF_SkipModel |
+    Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |
+    Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
+    Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
 /// Mr. Game & Watch's ground -> air Judgement Motion State handler
 static void ftGw_SpecialS_GroundToAir(HSD_GObj* gobj)

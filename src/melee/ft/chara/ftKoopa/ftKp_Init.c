@@ -498,7 +498,7 @@ void ftKp_SpecialAirS_Enter(HSD_GObj* gobj)
     }
 }
 
-static u32 const transition_flags0 = FtStateChange_SkipUpdateMatAnim;
+static u32 const transition_flags0 = Ft_MF_SkipMatAnim;
 
 void ftKp_SpecialS_8013302C(HSD_GObj* gobj)
 {
@@ -542,11 +542,9 @@ void ftKp_SpecialS_801330E4(HSD_GObj* gobj)
 }
 
 static u32 const transition_flags1 =
-    FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateMatAnim |
-    FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
-    FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
-    FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
-    FtStateChange_Unk_27;
+    Ft_MF_SkipHit | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |
+    Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
+    Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
 void ftKp_SpecialS_8013319C(HSD_GObj* gobj)
 {
@@ -634,9 +632,8 @@ void ftKp_SpecialS_80133398(HSD_GObj* gobj)
 }
 /// @todo Combine common flags with #transition_flags0.
 static u32 const transition_flags2 =
-    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |
-    FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
-    FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag;
+    Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+    Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags;
 
 void ftKp_SpecialS_801333F8(HSD_GObj* gobj)
 {
@@ -736,8 +733,7 @@ void ftKp_SpecialAirS_Anim(HSD_GObj* gobj)
     }
 }
 
-static u32 const transition_flags3 =
-    FtStateChange_SkipUpdateMatAnim | FtStateChange_Unk_19;
+static u32 const transition_flags3 = Ft_MF_SkipMatAnim | Ft_MF_Unk19;
 
 void ftKp_SpecialSCatch_Anim(HSD_GObj* gobj)
 {
@@ -778,7 +774,7 @@ void ftKp_SpecialSCatch_Anim(HSD_GObj* gobj)
                         ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
                 } else {
                     Fighter_ChangeMotionState(
-                        gobj, 348, FtStateChange_None, 0, ftKp_Init_804D9AD8,
+                        gobj, 348, Ft_MF_None, 0, ftKp_Init_804D9AD8,
                         ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
                 }
 
