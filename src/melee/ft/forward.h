@@ -264,10 +264,10 @@ typedef enum FtMoveId {
     FtMoveId_AttackHi4,
     FtMoveId_AttackLw4,
     FtMoveId_AttackAirN,
-    FtMoveId_Unk14,
+    FtMoveId_AttackAirF,
     FtMoveId_AttackAirB,
     FtMoveId_AttackAirHi,
-    FtMoveId_Unk17,
+    FtMoveId_AttackAirLw,
     FtMoveId_SpecialN,
     FtMoveId_SpecialS,
     FtMoveId_SpecialHi,
@@ -340,6 +340,10 @@ typedef enum FtMoveId {
     FtMoveId_Unk87,
     FtMoveId_Unk88,
     FtMoveId_Unk89,
+    FtMoveId_Unk90,
+    FtMoveId_Unk91,
+    FtMoveId_Unk92,
+    FtMoveId_Unk93,
 } FtMoveId;
 
 #endif
