@@ -2709,7 +2709,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_Ottotto = 245
         210,
-        (FtMoveId_Unk00 << 24) | (1 << 23),
+        FtStateChange_SkipUpdateMetalB,
         FtMoveId_Unk01 << 24,
         ftCo_Ottotto_Anim,
         ftCo_Ottotto_IASA,
@@ -2742,7 +2742,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_FlyReflectCeil = 248
         214,
-        (FtMoveId_Unk00 << 24) | (1 << 23),
+        FtStateChange_SkipUpdateMetalB,
         FtMoveId_Unk01 << 24,
         ftCo_FlyReflect_Anim,
         ftCo_FlyReflect_IASA,
@@ -2764,7 +2764,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_StopCeil = 250
         214,
-        (FtMoveId_Unk00 << 24) | (1 << 23),
+        FtStateChange_SkipUpdateMetalB,
         FtMoveId_Unk01 << 24,
         ftCo_StopCeil_Anim,
         ftCo_StopCeil_IASA,
@@ -2775,7 +2775,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_MissFoot = 251
         215,
-        (FtMoveId_Unk00 << 24) | (1 << 23),
+        FtStateChange_SkipUpdateMetalB,
         FtMoveId_Unk01 << 24,
         ftCo_MissFoot_Anim,
         ftCo_MissFoot_IASA,
@@ -3699,7 +3699,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_DownReflect = 335
         212,
-        (FtMoveId_Unk00 << 24) | (1 << 23),
+        FtStateChange_SkipUpdateMetalB,
         FtMoveId_Unk01 << 24,
         ftCo_DownReflect_Anim,
         ftCo_DownReflect_IASA,
