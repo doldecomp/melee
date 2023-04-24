@@ -6,40 +6,38 @@
 #include "ftCommon/forward.h"
 
 static MotionFlags const ftPr_MF_Special ATTRIBUTE_USED =
-    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateItemVis |
-    FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState;
+    Ft_MF_SkipModel | Ft_MF_SkipItemVis | Ft_MF_UnkUpdatePhys |
+    Ft_MF_FreezeState;
 
 static MotionFlags const ftPr_MF_SpecialHi ATTRIBUTE_USED =
-    ftPr_MF_Special | FtStateChange_PreserveFastFall |
-    FtStateChange_PreserveGfx;
+    ftPr_MF_Special | Ft_MF_KeepFastFall | Ft_MF_KeepGfx;
 
 static MotionFlags const ftPr_MF_SpecialLw ATTRIBUTE_USED =
-    ftPr_MF_Special | FtStateChange_PreserveColAnimHitStatus;
+    ftPr_MF_Special | Ft_MF_KeepColAnimHitStatus;
 
 static MotionFlags const ftPr_MF_SpecialN ATTRIBUTE_USED =
-    ftPr_MF_Special | FtStateChange_PreserveFastFall |
-    FtStateChange_PreserveSfx;
+    ftPr_MF_Special | Ft_MF_KeepFastFall | Ft_MF_KeepSfx;
 
 static MotionFlags const ftPr_MF_SpecialS ATTRIBUTE_USED =
-    ftPr_MF_Special | FtStateChange_PreserveGfx | FtStateChange_PreserveSfx;
+    ftPr_MF_Special | Ft_MF_KeepGfx | Ft_MF_KeepSfx;
 
 static MotionFlags const ftPr_MF_SpecialAirHi ATTRIBUTE_USED =
-    ftPr_MF_SpecialHi | FtStateChange_SkipUpdateParasol;
+    ftPr_MF_SpecialHi | Ft_MF_SkipParasol;
 
 static MotionFlags const ftPr_MF_SpecialAirLw ATTRIBUTE_USED =
-    ftPr_MF_SpecialLw | FtStateChange_SkipUpdateParasol;
+    ftPr_MF_SpecialLw | Ft_MF_SkipParasol;
 
 static MotionFlags const ftPr_MF_SpecialAirN ATTRIBUTE_USED =
-    ftPr_MF_SpecialN | FtStateChange_SkipUpdateParasol;
+    ftPr_MF_SpecialN | Ft_MF_SkipParasol;
 
 static MotionFlags const ftPr_MF_SpecialAirS ATTRIBUTE_USED =
-    ftPr_MF_SpecialS | FtStateChange_SkipUpdateParasol;
+    ftPr_MF_SpecialS | Ft_MF_SkipParasol;
 
 static MotionFlags const ftPr_MF_SpecialNCharged ATTRIBUTE_USED =
-    ftPr_MF_SpecialN | FtStateChange_Unk_19;
+    ftPr_MF_SpecialN | Ft_MF_Unk19;
 
 static MotionFlags const ftPr_SpecialAirNCharged ATTRIBUTE_USED =
-    ftPr_MF_SpecialNCharged | FtStateChange_SkipUpdateParasol;
+    ftPr_MF_SpecialNCharged | Ft_MF_SkipParasol;
 
 typedef enum ftPurin_MotionState {
     ftPr_MS_Jump2 = ftCo_MS_Count,

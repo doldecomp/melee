@@ -113,11 +113,9 @@ void ftPk_SpecialAirSStart_Coll(HSD_GObj* gobj)
 }
 
 static const u32 transition_flags0 =
-    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateMatAnim |
-    FtStateChange_PreserveSfx | FtStateChange_SkipUpdateColAnim |
-    FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |
-    FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
-    FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
+    Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipMatAnim | Ft_MF_KeepSfx |
+    Ft_MF_SkipColAnim | Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+    Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
 void ftPk_SpecialS_ChangeMotion_Unk00(HSD_GObj* gobj)
 {
@@ -220,12 +218,9 @@ void ftPk_SpecialAirSCharge_Coll(HSD_GObj* gobj)
 }
 
 static u32 const transition_flags1 =
-    FtStateChange_PreserveGfx | FtStateChange_PreserveColAnimHitStatus |
-    FtStateChange_SkipUpdateMatAnim | FtStateChange_PreserveSfx |
-    FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
-    FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
-    FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
-    FtStateChange_Unk_27;
+    Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipMatAnim |
+    Ft_MF_KeepSfx | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd | Ft_MF_SkipItemVis |
+    Ft_MF_Unk19 | Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
 void ftPk_SpecialS_ChangeMotion_Unk02(HSD_GObj* gobj)
 {
@@ -249,8 +244,7 @@ void ftPk_SpecialS_ChangeMotion_Unk04(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, 344, FtStateChange_PreserveSfx, 0, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, 344, Ft_MF_KeepSfx, 0, 0, 1, 0);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -265,8 +259,7 @@ void ftPk_SpecialS_ChangeMotion_Unk05(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, 349, FtStateChange_PreserveSfx, 0, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, 349, Ft_MF_KeepSfx, 0, 0, 1, 0);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -344,11 +337,9 @@ void ftPk_SpecialAirSLaunch_Coll(HSD_GObj* gobj)
 }
 
 static u32 const transition_flags2 =
-    FtStateChange_PreserveGfx | FtStateChange_PreserveColAnimHitStatus |
-    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |
-    FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |
-    FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
-    FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
+    Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipMatAnim |
+    Ft_MF_SkipColAnim | Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+    Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
 void ftPk_SpecialS_ChangeMotion_Unk06(HSD_GObj* gobj)
 {
@@ -454,8 +445,7 @@ void ftPk_SpecialAirS_Coll(HSD_GObj* gobj)
     }
 }
 
-static u32 const transition_flags3 =
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit;
+static u32 const transition_flags3 = Ft_MF_KeepGfx | Ft_MF_SkipHit;
 
 void ftPk_SpecialS_ChangeMotion_Unk10(HSD_GObj* gobj)
 {

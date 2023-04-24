@@ -23,7 +23,7 @@
 MotionState ftSs_Init_MotionStateTable[] = {
     {
         295,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftSs_SpecialLw_Anim,
         ftSs_SpecialLw_IASA,
@@ -33,7 +33,7 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         296,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftSs_SpecialAirLw_Anim,
         ftSs_SpecialAirLw_IASA,
@@ -183,7 +183,7 @@ MotionState ftSs_Init_MotionStateTable[] = {
     },
     {
         311,
-        FtStateChange_FreezeState,
+        Ft_MF_FreezeState,
         FtMoveId_Default << 24,
         ftCo_Zair_Anim,
         ftCo_Zair_IASA,

@@ -6,45 +6,41 @@
 #include "ftCommon/forward.h"
 
 static MotionFlags const ftSs_MF_Special ATTRIBUTE_USED =
-    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateItemVis |
-    FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState;
+    Ft_MF_SkipModel | Ft_MF_SkipItemVis | Ft_MF_UnkUpdatePhys |
+    Ft_MF_FreezeState;
 
 static MotionFlags const ftSs_MF_SpecialN ATTRIBUTE_USED =
-    ftSs_MF_Special | FtStateChange_PreserveFastFall |
-    FtStateChange_SkipUpdateThrowException;
+    ftSs_MF_Special | Ft_MF_KeepFastFall | Ft_MF_SkipThrowException;
 
 static MotionFlags const ftSs_MF_SpecialS ATTRIBUTE_USED =
-    ftSs_MF_Special | FtStateChange_PreserveGfx |
-    FtStateChange_SkipUpdateThrowException;
+    ftSs_MF_Special | Ft_MF_KeepGfx | Ft_MF_SkipThrowException;
 
 static MotionFlags const ftSs_MF_SpecialLw ATTRIBUTE_USED =
-    ftSs_MF_Special | FtStateChange_PreserveColAnimHitStatus |
-    FtStateChange_SkipUpdateThrowException;
+    ftSs_MF_Special | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipThrowException;
 
 static MotionFlags const ftSs_MF_SpecialHi ATTRIBUTE_USED =
-    ftSs_MF_Special | FtStateChange_PreserveFastFall |
-    FtStateChange_PreserveGfx | FtStateChange_PreserveSfx;
+    ftSs_MF_Special | Ft_MF_KeepFastFall | Ft_MF_KeepGfx | Ft_MF_KeepSfx;
 
 static MotionFlags const ftSs_MF_SpecialAirN ATTRIBUTE_USED =
-    ftSs_MF_SpecialN | FtStateChange_SkipUpdateParasol;
+    ftSs_MF_SpecialN | Ft_MF_SkipParasol;
 
 static MotionFlags const ftSs_MF_SpecialAirS ATTRIBUTE_USED =
-    ftSs_MF_SpecialS | FtStateChange_SkipUpdateParasol;
+    ftSs_MF_SpecialS | Ft_MF_SkipParasol;
 
 static MotionFlags const ftSs_MF_SpecialAirLw ATTRIBUTE_USED =
-    ftSs_MF_SpecialLw | FtStateChange_SkipUpdateParasol;
+    ftSs_MF_SpecialLw | Ft_MF_SkipParasol;
 
 static MotionFlags const ftSs_MF_SpecialAirHi ATTRIBUTE_USED =
-    ftSs_MF_SpecialHi | FtStateChange_SkipUpdateParasol;
+    ftSs_MF_SpecialHi | Ft_MF_SkipParasol;
 
 static MotionFlags const ftSs_MF_SpecialSSmash ATTRIBUTE_USED =
-    ftSs_MF_SpecialS | FtStateChange_SkipUpdateRumble;
+    ftSs_MF_SpecialS | Ft_MF_SkipRumble;
 
 static MotionFlags const ftSs_MF_SpecialAirSSmash ATTRIBUTE_USED =
-    ftSs_MF_SpecialSSmash | FtStateChange_SkipUpdateParasol;
+    ftSs_MF_SpecialSSmash | Ft_MF_SkipParasol;
 
 static MotionFlags const ftSs_MF_ZairCatch ATTRIBUTE_USED =
-    FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateMetalB;
+    Ft_MF_SkipModelPartVis | Ft_MF_SkipMetalB;
 
 typedef enum ftSamus_MotionState {
     ftSs_MS_SpecialLw = ftCo_MS_Count,

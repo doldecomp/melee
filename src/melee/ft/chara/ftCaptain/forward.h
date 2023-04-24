@@ -8,35 +8,34 @@ typedef struct ftCaptain_DatAttrs ftCaptain_DatAttrs;
 typedef union ftCaptain_MotionVars ftCaptain_MotionVars;
 
 static MotionFlags const ftCa_MF_Special ATTRIBUTE_USED =
-    ftCo_MF_Special | FtStateChange_PreserveSfx;
+    ftCo_MF_Special | Ft_MF_KeepSfx;
 
 static MotionFlags const ftCa_MF_SpecialN ATTRIBUTE_USED =
-    ftCa_MF_Special | FtStateChange_PreserveFastFall;
+    ftCa_MF_Special | Ft_MF_KeepFastFall;
 
 static MotionFlags const ftCa_MF_SpecialAirN ATTRIBUTE_USED =
-    ftCa_MF_SpecialN | FtStateChange_SkipUpdateParasol;
+    ftCa_MF_SpecialN | Ft_MF_SkipParasol;
 
 static MotionFlags const ftCa_MF_SpecialS ATTRIBUTE_USED =
-    ftCa_MF_Special | FtStateChange_PreserveGfx;
+    ftCa_MF_Special | Ft_MF_KeepGfx;
 
 static MotionFlags const ftCa_MF_SpecialAirSStart ATTRIBUTE_USED =
-    ftCa_MF_SpecialS | FtStateChange_SkipUpdateParasol;
+    ftCa_MF_SpecialS | Ft_MF_SkipParasol;
 
 static MotionFlags const ftCa_MF_SpecialAirS ATTRIBUTE_USED =
-    ftCa_MF_SpecialS | FtStateChange_SkipUpdateParasol;
+    ftCa_MF_SpecialS | Ft_MF_SkipParasol;
 
 static MotionFlags const ftCa_MF_SpecialHi ATTRIBUTE_USED =
-    ftCo_MF_Special | FtStateChange_PreserveFastFall |
-    FtStateChange_PreserveGfx;
+    ftCo_MF_Special | Ft_MF_KeepFastFall | Ft_MF_KeepGfx;
 
 static MotionFlags const ftCa_MF_SpecialAirHi ATTRIBUTE_USED =
-    ftCa_MF_SpecialHi | FtStateChange_SkipUpdateParasol;
+    ftCa_MF_SpecialHi | Ft_MF_SkipParasol;
 
 static MotionFlags const ftCa_MF_SpecialLw ATTRIBUTE_USED =
-    ftCa_MF_Special | FtStateChange_PreserveColAnimHitStatus;
+    ftCa_MF_Special | Ft_MF_KeepColAnimHitStatus;
 
 static MotionFlags const ftCa_MF_SpecialLwRebound ATTRIBUTE_USED =
-    ftCa_MF_SpecialLw | FtStateChange_SkipUpdateParasol;
+    ftCa_MF_SpecialLw | Ft_MF_SkipParasol;
 
 typedef enum ftCaptain_MotionState {
     ftCa_MS_Swing42_Sword = ftCo_MS_Count,

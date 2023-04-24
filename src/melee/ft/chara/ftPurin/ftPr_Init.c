@@ -30,7 +30,7 @@
 MotionState ftPr_Init_MotionStateTable[] = {
     {
         295,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
         ftCo_MultiJump_IASA,
@@ -40,7 +40,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
     },
     {
         296,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
         ftCo_MultiJump_IASA,
@@ -50,7 +50,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
     },
     {
         297,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
         ftCo_MultiJump_IASA,
@@ -60,7 +60,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
     },
     {
         298,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
         ftCo_MultiJump_IASA,
@@ -70,7 +70,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
     },
     {
         299,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
         ftCo_MultiJump_IASA,

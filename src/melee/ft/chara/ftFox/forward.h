@@ -5,50 +5,47 @@
 #include "ftCommon/forward.h"
 
 static MotionFlags const ftFx_MF_Appeal ATTRIBUTE_USED =
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateModel |
-    FtStateChange_SkipUpdateAnimVel | FtStateChange_Unk_6;
+    Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipAnimVel | Ft_MF_Unk06;
 
 static MotionFlags const ftFx_MF_Special ATTRIBUTE_USED =
-    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateItemVis |
-    FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState;
+    Ft_MF_SkipModel | Ft_MF_SkipItemVis | Ft_MF_UnkUpdatePhys |
+    Ft_MF_FreezeState;
 
 static MotionFlags const ftFx_MF_SpecialN ATTRIBUTE_USED =
-    ftFx_MF_Special | FtStateChange_PreserveFastFall |
-    FtStateChange_SkipUpdateThrowException;
+    ftFx_MF_Special | Ft_MF_KeepFastFall | Ft_MF_SkipThrowException;
 
 static MotionFlags const ftFx_MF_SpecialS ATTRIBUTE_USED =
-    ftFx_MF_Special | FtStateChange_PreserveGfx | FtStateChange_PreserveSfx;
+    ftFx_MF_Special | Ft_MF_KeepGfx | Ft_MF_KeepSfx;
 
 static MotionFlags const ftFx_MF_SpecialHi ATTRIBUTE_USED =
-    ftFx_MF_SpecialS | FtStateChange_PreserveFastFall;
+    ftFx_MF_SpecialS | Ft_MF_KeepFastFall;
 
 static MotionFlags const ftFx_MF_SpecialAirN ATTRIBUTE_USED =
-    ftFx_MF_SpecialN | FtStateChange_SkipUpdateParasol;
+    ftFx_MF_SpecialN | Ft_MF_SkipParasol;
 
 static MotionFlags const ftFx_MF_SpecialAirS ATTRIBUTE_USED =
-    ftFx_MF_SpecialS | FtStateChange_SkipUpdateParasol;
+    ftFx_MF_SpecialS | Ft_MF_SkipParasol;
 
 static MotionFlags const ftFx_MF_SpecialAirHiHold ATTRIBUTE_USED =
-    ftFx_MF_SpecialHi | FtStateChange_SkipUpdateParasol;
+    ftFx_MF_SpecialHi | Ft_MF_SkipParasol;
 
 static MotionFlags const ftFx_MF_SpecialLw ATTRIBUTE_USED =
-    ftFx_MF_Special | FtStateChange_PreserveColAnimHitStatus |
-    FtStateChange_SkipUpdateColAnim;
+    ftFx_MF_Special | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipColAnim;
 
 static MotionFlags const ftFx_MF_SpecialAirLw ATTRIBUTE_USED =
-    ftFx_MF_SpecialLw | FtStateChange_SkipUpdateParasol;
+    ftFx_MF_SpecialLw | Ft_MF_SkipParasol;
 
 static MotionFlags const ftFx_MF_SpecialNLoop ATTRIBUTE_USED =
-    ftFx_MF_SpecialN | FtStateChange_Unk_19;
+    ftFx_MF_SpecialN | Ft_MF_Unk19;
 
 static MotionFlags const ftFx_MF_SpecialAirNLoop ATTRIBUTE_USED =
-    ftFx_MF_SpecialNLoop | FtStateChange_SkipUpdateParasol;
+    ftFx_MF_SpecialNLoop | Ft_MF_SkipParasol;
 
 static MotionFlags const ftFx_MF_SpecialLwLoop ATTRIBUTE_USED =
-    ftFx_MF_SpecialLw | FtStateChange_Unk_19;
+    ftFx_MF_SpecialLw | Ft_MF_Unk19;
 
 static MotionFlags const ftFx_MF_SpecialAirLwLoop ATTRIBUTE_USED =
-    ftFx_MF_SpecialLwLoop | FtStateChange_SkipUpdateParasol;
+    ftFx_MF_SpecialLwLoop | Ft_MF_SkipParasol;
 
 typedef enum ftFox_MotionState {
     ftFx_MS_SpecialNStart = ftCo_MS_Count,

@@ -114,11 +114,9 @@ void ftCa_SpecialAirS_Enter(HSD_GObj* gobj)
 }
 
 static u32 const transition_flags =
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |
-    FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |
-    FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
-    FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
-    FtStateChange_Unk_27;
+    Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_UpdateCmd | Ft_MF_SkipColAnim |
+    Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
+    Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
 static void onDetectGround(HSD_GObj* gobj)
 {

@@ -161,11 +161,9 @@ void ftMr_SpecialLw_IASA(HSD_GObj* gobj) {}
 void ftMr_SpecialAirLw_IASA(HSD_GObj* gobj) {}
 
 static usize_t const transition_flags =
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |
-    FtStateChange_SkipUpdateMatAnim | FtStateChange_UpdateCmd |
-    FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |
-    FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
-    FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
+    Ft_MF_KeepGfx | Ft_MF_SkipHit | Ft_MF_SkipMatAnim | Ft_MF_UpdateCmd |
+    Ft_MF_SkipColAnim | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+    Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
 static void doPhys(HSD_GObj* gobj)
 {

@@ -908,9 +908,8 @@ void ftNs_AttackHi4Charge_Enter(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackHi4Charge,
-                              FtStateChange_SkipUpdateItemVis, NULL, 12.0f,
-                              1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackHi4Charge, Ft_MF_SkipItemVis,
+                              NULL, 12.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
     ftAnim_SetAnimRate(gobj, 0.0f);
     ftNs_AttackHi4_YoyoApplySmash(gobj);
@@ -1051,8 +1050,7 @@ void ftNs_AttackHi4Release_Enter(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftNs_MS_AttackHi4Release,
-                              FtStateChange_SkipUpdateItemVis, NULL, 13.0f,
-                              1.0f, 0.0f);
+                              Ft_MF_SkipItemVis, NULL, 13.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
 
     fighter_data2 = getFighter(gobj);

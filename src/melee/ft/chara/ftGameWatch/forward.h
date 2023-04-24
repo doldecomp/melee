@@ -5,79 +5,74 @@
 #include "ftCommon/forward.h"
 
 static MotionFlags const ftGw_MF_Base ATTRIBUTE_USED =
-    FtStateChange_SkipUpdateItemVis | FtStateChange_FreezeState;
+    Ft_MF_SkipItemVis | Ft_MF_FreezeState;
 
 static MotionFlags const ftGw_MF_Landing ATTRIBUTE_USED =
-    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |
-    FtStateChange_PreserveSfx | FtStateChange_SkipUpdateParasol;
+    Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit | Ft_MF_KeepSfx |
+    Ft_MF_SkipParasol;
 
 static MotionFlags const ftGw_MF_LandingAirB ATTRIBUTE_USED =
-    ftGw_MF_Landing | FtStateChange_PreserveGfx;
+    ftGw_MF_Landing | Ft_MF_KeepGfx;
 
 static MotionFlags const ftGw_MF_LandingAirHi ATTRIBUTE_USED =
-    ftGw_MF_LandingAirB | FtStateChange_PreserveFastFall;
+    ftGw_MF_LandingAirB | Ft_MF_KeepFastFall;
 
 static MotionFlags const ftGw_MF_Attack ATTRIBUTE_USED =
-    ftGw_MF_Base | FtStateChange_PreserveSfx;
+    ftGw_MF_Base | Ft_MF_KeepSfx;
 
 static MotionFlags const ftGw_MF_AttackLw3 ATTRIBUTE_USED =
-    ftGw_MF_Attack | FtStateChange_SkipUpdateHit;
+    ftGw_MF_Attack | Ft_MF_SkipHit;
 
 static MotionFlags const ftGw_MF_AttackAirN ATTRIBUTE_USED =
     ftGw_MF_Attack | ftGw_MF_Landing;
 
 static MotionFlags const ftGw_MF_AttackAirB ATTRIBUTE_USED =
-    ftGw_MF_AttackAirN | FtStateChange_PreserveGfx;
+    ftGw_MF_AttackAirN | Ft_MF_KeepGfx;
 
 static MotionFlags const ftGw_MF_AttackAirHi ATTRIBUTE_USED =
-    ftGw_MF_AttackAirB | FtStateChange_PreserveFastFall;
+    ftGw_MF_AttackAirB | Ft_MF_KeepFastFall;
 
 static MotionFlags const ftGw_MF_AttackS4 ATTRIBUTE_USED =
-    ftGw_MF_AttackLw3 | FtStateChange_PreserveFastFall |
-    FtStateChange_SkipUpdateRumble;
+    ftGw_MF_AttackLw3 | Ft_MF_KeepFastFall | Ft_MF_SkipRumble;
 
 static MotionFlags const ftGw_MF_Attack11 ATTRIBUTE_USED =
-    ftGw_MF_Attack | FtStateChange_PreserveFastFall | FtStateChange_Unk_19;
+    ftGw_MF_Attack | Ft_MF_KeepFastFall | Ft_MF_Unk19;
 
 static MotionFlags const ftGw_MF_Attack100 ATTRIBUTE_USED =
-    ftGw_MF_Attack | FtStateChange_PreserveColAnimHitStatus |
-    FtStateChange_Unk_19;
+    ftGw_MF_Attack | Ft_MF_KeepColAnimHitStatus | Ft_MF_Unk19;
 
 static MotionFlags const ftGw_MF_Special ATTRIBUTE_USED =
-    ftGw_MF_Base | FtStateChange_SkipUpdateModel |
-    FtStateChange_Unk_UpdatePhys;
+    ftGw_MF_Base | Ft_MF_SkipModel | Ft_MF_UnkUpdatePhys;
 
 static MotionFlags const ftGw_MF_SpecialS ATTRIBUTE_USED =
-    ftGw_MF_Special | FtStateChange_PreserveGfx;
+    ftGw_MF_Special | Ft_MF_KeepGfx;
 
 static MotionFlags const ftGw_MF_SpecialHi ATTRIBUTE_USED =
-    ftGw_MF_Special | FtStateChange_PreserveFastFall |
-    FtStateChange_PreserveGfx;
+    ftGw_MF_Special | Ft_MF_KeepFastFall | Ft_MF_KeepGfx;
 
 static MotionFlags const ftGw_MF_SpecialLwCatch ATTRIBUTE_USED =
-    ftGw_MF_Special | FtStateChange_PreserveColAnimHitStatus;
+    ftGw_MF_Special | Ft_MF_KeepColAnimHitStatus;
 
 static MotionFlags const ftGw_MF_SpecialN ATTRIBUTE_USED =
-    ftGw_MF_Special | FtStateChange_PreserveFastFall |
-    FtStateChange_SkipUpdateThrowException;
+    ftGw_MF_Special | Ft_MF_KeepFastFall | Ft_MF_SkipThrowException;
 
 static MotionFlags const ftGw_MF_SpecialAirS ATTRIBUTE_USED =
-    ftGw_MF_SpecialS | FtStateChange_SkipUpdateParasol;
+    ftGw_MF_SpecialS | Ft_MF_SkipParasol;
 
 static MotionFlags const ftGw_MF_SpecialAirHi ATTRIBUTE_USED =
-    ftGw_MF_SpecialHi | FtStateChange_SkipUpdateParasol;
+    ftGw_MF_SpecialHi | Ft_MF_SkipParasol;
 
 static MotionFlags const ftGw_MF_SpecialAirLwCatch ATTRIBUTE_USED =
-    ftGw_MF_SpecialLwCatch | FtStateChange_SkipUpdateParasol;
+    ftGw_MF_SpecialLwCatch | Ft_MF_SkipParasol;
 
 static MotionFlags const ftGw_MF_SpecialAirN ATTRIBUTE_USED =
-    ftGw_MF_SpecialN | FtStateChange_SkipUpdateParasol;
+    ftGw_MF_SpecialN | Ft_MF_SkipParasol;
 
 static MotionFlags const ftGw_MF_SpecialLw ATTRIBUTE_USED =
-    ftGw_MF_SpecialLwCatch | FtStateChange_Unk_19;
+    ftGw_MF_SpecialLwCatch | Ft_MF_Unk19;
 
 static MotionFlags const ftGw_MF_SpecialAirLw ATTRIBUTE_USED =
-    ftGw_MF_SpecialLw | FtStateChange_SkipUpdateParasol;
+    ftGw_MF_SpecialLw | Ft_MF_SkipParasol;
 
 // Mr. Game & Watch Motion State IDs
 typedef enum ftGameWatch_MotionState {

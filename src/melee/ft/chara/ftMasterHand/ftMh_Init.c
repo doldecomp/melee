@@ -39,7 +39,7 @@
 MotionState ftMh_Init_MotionStateTable[] = {
     {
         295,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_341_Anim,
         ftMh_MS_341_IASA,
@@ -49,7 +49,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         296,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_341_Anim,
         ftMh_MS_341_IASA,
@@ -59,7 +59,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         297,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_343_Anim,
         ftMh_MS_343_IASA,
@@ -69,7 +69,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         298,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_344_Anim,
         ftMh_MS_344_IASA,
@@ -79,7 +79,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         299,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_345_Anim,
         ftMh_MS_344_IASA,
@@ -89,7 +89,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         300,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_346_Anim,
         ftMh_MS_346_IASA,
@@ -99,7 +99,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         301,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_347_Anim,
         ftMh_MS_347_IASA,
@@ -109,7 +109,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         302,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_348_Anim,
         ftMh_MS_348_IASA,
@@ -119,7 +119,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         303,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_349_Anim,
         ftMh_MS_349_IASA,
@@ -129,7 +129,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         304,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_350_Anim,
         ftMh_MS_350_IASA,
@@ -139,7 +139,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         305,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_351_Anim,
         ftMh_MS_351_IASA,
@@ -149,7 +149,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         306,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_352_Anim,
         ftMh_MS_352_IASA,
@@ -159,7 +159,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         307,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_353_Anim,
         ftMh_MS_353_IASA,
@@ -169,7 +169,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         308,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_354_Anim,
         ftMh_MS_354_IASA,
@@ -179,7 +179,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         309,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_355_Anim,
         ftMh_MS_355_IASA,
@@ -189,7 +189,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         310,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_356_Anim,
         ftMh_MS_356_IASA,
@@ -199,7 +199,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         311,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_357_Anim,
         ftMh_MS_357_IASA,
@@ -209,7 +209,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         312,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_358_Anim,
         ftMh_MS_358_IASA,
@@ -219,7 +219,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         313,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_359_Anim,
         ftMh_MS_359_IASA,
@@ -229,7 +229,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         314,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_360_Anim,
         ftMh_MS_359_IASA,
@@ -239,7 +239,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         315,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_361_Anim,
         ftMh_MS_361_IASA,
@@ -249,7 +249,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         316,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_362_Anim,
         ftMh_MS_362_IASA,
@@ -259,7 +259,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         317,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_363_Anim,
         ftMh_MS_363_IASA,
@@ -269,7 +269,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         318,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_364_Anim,
         ftMh_MS_364_IASA,
@@ -279,7 +279,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         319,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_365_Anim,
         ftMh_MS_365_IASA,
@@ -289,7 +289,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         320,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_366_Anim,
         ftMh_MS_366_IASA,
@@ -299,7 +299,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         321,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_367_Anim,
         ftMh_MS_367_IASA,
@@ -309,7 +309,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         322,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_368_Anim,
         ftMh_MS_368_IASA,
@@ -319,7 +319,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         323,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_369_Anim,
         ftMh_MS_369_IASA,
@@ -329,7 +329,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         324,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_370_Anim,
         ftMh_MS_370_IASA,
@@ -339,7 +339,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         325,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_371_Anim,
         ftMh_MS_371_IASA,
@@ -349,7 +349,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         326,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_372_Anim,
         ftMh_MS_372_IASA,
@@ -359,7 +359,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         327,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_373_Anim,
         ftMh_MS_373_IASA,
@@ -369,7 +369,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         328,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_374_Anim,
         ftMh_MS_374_IASA,
@@ -379,7 +379,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         329,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_375_Anim,
         ftMh_MS_375_IASA,
@@ -389,7 +389,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         330,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_376_Anim,
         ftMh_MS_376_IASA,
@@ -399,7 +399,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         331,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_376_Anim,
         ftMh_MS_376_IASA,
@@ -409,7 +409,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         332,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_378_Anim,
         ftMh_MS_378_IASA,
@@ -419,7 +419,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         333,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_379_Anim,
         ftMh_MS_379_IASA,
@@ -429,7 +429,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         334,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_380_Anim,
         ftMh_MS_380_IASA,
@@ -439,7 +439,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         335,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_381_Anim,
         ftMh_MS_381_IASA,
@@ -449,7 +449,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         336,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_382_Anim,
         ftMh_MS_382_IASA,
@@ -459,7 +459,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         337,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_383_Anim,
         ftMh_MS_383_IASA,
@@ -469,7 +469,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         338,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_384_Anim,
         ftMh_MS_384_IASA,
@@ -479,7 +479,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         339,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_385_Anim,
         ftMh_MS_385_IASA,
@@ -489,7 +489,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         340,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_386_Anim,
         ftMh_MS_386_IASA,
@@ -499,7 +499,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         ftMh_MS_Unk341,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_387_Anim,
         ftMh_MS_387_IASA,
@@ -509,7 +509,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         ftMh_MS_Unk342,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_388_Anim,
         ftMh_MS_388_IASA,
@@ -519,7 +519,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         ftMh_MS_Unk343,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_389_Anim,
         NULL,
@@ -529,7 +529,7 @@ MotionState ftMh_Init_MotionStateTable[] = {
     },
     {
         ftMh_MS_Unk344,
-        FtStateChange_None,
+        Ft_MF_None,
         FtMoveId_Default << 24,
         ftMh_MS_389_Anim,
         NULL,

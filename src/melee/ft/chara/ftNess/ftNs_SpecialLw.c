@@ -15,17 +15,14 @@
 
 // SpecialLw (PSI Magnet)
 #define FTNESS_SPECIALLW_COLL_FLAG                                            \
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |             \
-        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |           \
-        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
-        FtStateChange_SkipUpdateModelPartVis |                                \
-        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
+    Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd | \
+        Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |            \
+        Ft_MF_SkipModelFlags | Ft_MF_Unk27
 
 #define FTNESS_SPECIALLW_END_FLAG                                             \
-    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |       \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |           \
-        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |         \
-        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
+    Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |                 \
+        Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |            \
+        Ft_MF_SkipModelFlags | Ft_MF_Unk27
 
 // 0x80119E14
 // https://decomp.me/scratch/LwTKg
@@ -453,9 +450,8 @@ void ftNs_SpecialLwHold_Enter(
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialLwHold,
-                              FtStateChange_PreserveGfx, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialLwHold, Ft_MF_KeepGfx, NULL,
+                              0.0f, 1.0f, 0.0f);
     fp = GET_FIGHTER(gobj);
     ness_attr = fp->x2D4_specialAttributes;
     ftColl_CreateAbsorbHit(gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
@@ -474,9 +470,8 @@ void ftNs_SpecialAirLwHold_Enter(
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirLwHold,
-                              FtStateChange_PreserveGfx, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirLwHold, Ft_MF_KeepGfx,
+                              NULL, 0.0f, 1.0f, 0.0f);
     fp = GET_FIGHTER(gobj);
     ness_attr = fp->x2D4_specialAttributes;
     ftColl_CreateAbsorbHit(gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
@@ -693,9 +688,8 @@ bool ftNs_SpecialLwHold_GroundOrAir(
         return false;
     }
     if ((s32) fp->ground_or_air == GA_Ground) {
-        Fighter_ChangeMotionState(arg0, ftNs_MS_SpecialLwHold,
-                                  FtStateChange_PreserveGfx, NULL, 0.0f, 1.0f,
-                                  0.0f);
+        Fighter_ChangeMotionState(arg0, ftNs_MS_SpecialLwHold, Ft_MF_KeepGfx,
+                                  NULL, 0.0f, 1.0f, 0.0f);
 
         {
             Fighter* fp = GET_FIGHTER(arg0);
@@ -704,8 +698,7 @@ bool ftNs_SpecialLwHold_GroundOrAir(
         }
     } else {
         Fighter_ChangeMotionState(arg0, ftNs_MS_SpecialAirLwHold,
-                                  FtStateChange_PreserveGfx, NULL, 0.0f, 1.0f,
-                                  0.0f);
+                                  Ft_MF_KeepGfx, NULL, 0.0f, 1.0f, 0.0f);
 
         {
             Fighter* fp = GET_FIGHTER(arg0);
@@ -770,16 +763,16 @@ void ftNs_SpecialLwHit_Anim(
         } else {
             if ((s32) temp_r3_2->ground_or_air == GA_Ground) {
                 Fighter_ChangeMotionState(arg0, ftNs_MS_SpecialLwHold,
-                                          FtStateChange_PreserveGfx, NULL,
-                                          0.0f, 1.0f, 0.0f);
+                                          Ft_MF_KeepGfx, NULL, 0.0f, 1.0f,
+                                          0.0f);
 
                 temp_e1 = arg0->user_data;
                 attr = temp_e1->x2D4_specialAttributes;
                 ftColl_CreateAbsorbHit(arg0, &attr->x98_PSI_MAGNET_ABSORPTION);
             } else {
                 Fighter_ChangeMotionState(arg0, ftNs_MS_SpecialAirLwHold,
-                                          FtStateChange_PreserveGfx, NULL,
-                                          0.0f, 1.0f, 0.0f);
+                                          Ft_MF_KeepGfx, NULL, 0.0f, 1.0f,
+                                          0.0f);
                 temp_e2 = arg0->user_data;
                 attr = temp_e2->x2D4_specialAttributes;
                 ftColl_CreateAbsorbHit(arg0, &attr->x98_PSI_MAGNET_ABSORPTION);

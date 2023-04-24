@@ -13,7 +13,7 @@
 MotionState ftSb_Init_MotionStateTable[] = {
     {
         295,
-        FtStateChange_None,
+        Ft_MF_None,
         (FtMoveId_Default << 24) | (1 << 22),
         ftSb_MS_341_Anim,
         ftSb_MS_341_IASA,
