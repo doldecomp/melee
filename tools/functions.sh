@@ -5,16 +5,11 @@ function melee_sed {
 }
 
 function replace_symbol {
-    local find=${1//\//\\\/}
-    local find=${find//[.]/\\.}
-    local replace=${2//\//\\\/}
-    echo "$find -> $replace"
-    find asm src obj_files.mk -type f -regex '.*\.\(c\|h\|s\|mk\|dox\|md\)$' \
-        -exec sed -i "s/\b$find\b/$replace/g" {} +
+    echo "$1:$2" | melee-replace-symbols -
 }
 
 function reverse_symbol {
-    replace_symbol "$2" "$1"
+    echo "$2:$1" | melee-replace-symbols -
 }
 
 function rename_module_symbols_asm {

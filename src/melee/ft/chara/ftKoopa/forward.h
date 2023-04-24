@@ -5,40 +5,40 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
-static u32 const ftKp_MF_Special ATTRIBUTE_USED =
+static MotionFlags const ftKp_MF_Special ATTRIBUTE_USED =
     FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateItemVis |
     FtStateChange_Unk_UpdatePhys | FtStateChange_FreezeState;
 
-static u32 const ftKp_MF_SpecialN ATTRIBUTE_USED =
+static MotionFlags const ftKp_MF_SpecialN ATTRIBUTE_USED =
     ftKp_MF_Special | FtStateChange_PreserveFastFall;
 
-static u32 const ftKp_MF_SpecialS ATTRIBUTE_USED =
+static MotionFlags const ftKp_MF_SpecialS ATTRIBUTE_USED =
     ftKp_MF_Special | FtStateChange_PreserveGfx;
 
-static u32 const ftKp_MF_SpecialHi ATTRIBUTE_USED =
+static MotionFlags const ftKp_MF_SpecialHi ATTRIBUTE_USED =
     ftKp_MF_Special | FtStateChange_PreserveFastFall |
     FtStateChange_PreserveGfx | FtStateChange_PreserveSfx;
 
-static u32 const ftKp_MF_SpecialLwStart ATTRIBUTE_USED =
+static MotionFlags const ftKp_MF_SpecialLwStart ATTRIBUTE_USED =
     ftKp_MF_Special | FtStateChange_PreserveColAnimHitStatus |
     FtStateChange_PreserveSfx;
 
-static u32 const ftKp_MF_SpecialNStart ATTRIBUTE_USED =
+static MotionFlags const ftKp_MF_SpecialNStart ATTRIBUTE_USED =
     ftKp_MF_SpecialN | FtStateChange_SkipUpdateParasol;
 
-static u32 const ftKp_MF_SpecialAirS ATTRIBUTE_USED =
+static MotionFlags const ftKp_MF_SpecialAirS ATTRIBUTE_USED =
     ftKp_MF_SpecialS | FtStateChange_SkipUpdateParasol;
 
-static u32 const ftKp_MF_SpecialAirHi ATTRIBUTE_USED =
+static MotionFlags const ftKp_MF_SpecialAirHi ATTRIBUTE_USED =
     ftKp_MF_SpecialHi | FtStateChange_SkipUpdateParasol;
 
-static u32 const ftKp_MF_SpecialAirLw ATTRIBUTE_USED =
+static MotionFlags const ftKp_MF_SpecialAirLw ATTRIBUTE_USED =
     ftKp_MF_SpecialLwStart | FtStateChange_SkipUpdateParasol;
 
-static u32 const ftKp_MF_SpecialNLoop ATTRIBUTE_USED =
+static MotionFlags const ftKp_MF_SpecialNLoop ATTRIBUTE_USED =
     ftKp_MF_SpecialN | FtStateChange_Unk_19;
 
-static u32 const ftKp_MF_SpecialAirNLoop ATTRIBUTE_USED =
+static MotionFlags const ftKp_MF_SpecialAirNLoop ATTRIBUTE_USED =
     ftKp_MF_SpecialNLoop | FtStateChange_SkipUpdateParasol;
 
 typedef enum ftKoopa_MotionState {

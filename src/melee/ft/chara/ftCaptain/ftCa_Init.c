@@ -17,8 +17,8 @@
 MotionState ftCa_Init_MotionStateTable[] = {
     {
         295,
-        ftCa_MF_SwordSwing,
-        FtMoveId_SwordSwing * (1 << 24),
+        ftCo_MF_SwordSwing4,
+        FtMoveId_SwordSwing4 * (1 << 24),
         ftCo_SwordSwing_Anim,
         ftCo_SwordSwing_IASA,
         ftCo_SwordSwing_Phys,
@@ -27,8 +27,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         296,
-        ftCa_MF_BatSwing,
-        FtMoveId_BatSwing * (1 << 24),
+        ftCo_MF_BatSwing4,
+        FtMoveId_BatSwing4 * (1 << 24),
         ftCo_BatSwing_Anim,
         ftCo_BatSwing_IASA,
         ftCo_BatSwing_Phys,
@@ -37,8 +37,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         297,
-        ftCa_MF_ParasolSwing,
-        FtMoveId_ParasolSwing * (1 << 24),
+        ftCo_MF_ParasolSwing4,
+        FtMoveId_ParasolSwing4 * (1 << 24),
         ftCo_ParasolSwing_Anim,
         ftCo_ParasolSwing_IASA,
         ftCo_ParasolSwing_Phys,
@@ -47,8 +47,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         298,
-        ftCa_MF_HarisenSwing,
-        FtMoveId_HarisenSwing * (1 << 24),
+        ftCo_MF_HarisenSwing4,
+        FtMoveId_HarisenSwing4 * (1 << 24),
         ftCo_HarisenSwing_Anim,
         ftCo_HarisenSwing_IASA,
         ftCo_HarisenSwing_Phys,
@@ -57,8 +57,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         299,
-        ftCa_MF_StarRodSwing,
-        FtMoveId_StarRodSwing * (1 << 24),
+        ftCo_MF_StarRodSwing4,
+        FtMoveId_StarRodSwing4 * (1 << 24),
         ftCo_StarRodSwing_Anim,
         ftCo_StarRodSwing_IASA,
         ftCo_StarRodSwing_Phys,
@@ -67,8 +67,8 @@ MotionState ftCa_Init_MotionStateTable[] = {
     },
     {
         300,
-        ftCa_MF_LipstickSwing,
-        FtMoveId_LipstickSwing * (1 << 24),
+        ftCo_MF_LipstickSwing4,
+        FtMoveId_LipstickSwing4 * (1 << 24),
         ftCo_LipstickSwing_Anim,
         ftCo_LipstickSwing_IASA,
         ftCo_LipstickSwing_Phys,
