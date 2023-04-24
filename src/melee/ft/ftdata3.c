@@ -90,7 +90,7 @@ MotionState ftData_MotionStateList[] = {
     },
     {
         // ftCo_MS_DeadUpFallHitCamera = 7
-        FtStateChange_None,
+        0,
         ftCo_MF_Dead,
         FtMoveId_Unk01 << 24,
         ftCo_DeadUpFall_Anim,
