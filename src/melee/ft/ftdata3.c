@@ -169,7 +169,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_Wait = 14
         2,
         FtStateChange_None,
-        (FtMoveId_Default << 24) | ftCo_MF_Rebirth,
+        (FtMoveId_Default << 24) | (1 << 22) | (1 << 23),
         ftCo_Wait_Anim,
         ftCo_Wait_IASA,
         ftCo_Wait_Phys,
@@ -180,7 +180,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_WalkSlow = 15
         7,
         ftCo_MF_Walk,
-        (FtMoveId_Default << 24) | ftCo_MF_Rebirth,
+        (FtMoveId_Default << 24) | (1 << 22) | (1 << 23),
         ftCo_Walk_Anim,
         ftCo_Walk_IASA,
         ftCo_Walk_Phys,
@@ -191,7 +191,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_WalkMiddle = 16
         8,
         ftCo_MF_Walk,
-        (FtMoveId_Default << 24) | ftCo_MF_Rebirth,
+        (FtMoveId_Default << 24) | (1 << 22) | (1 << 23),
         ftCo_Walk_Anim,
         ftCo_Walk_IASA,
         ftCo_Walk_Phys,
@@ -202,7 +202,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_WalkFast = 17
         9,
         ftCo_MF_Walk,
-        (FtMoveId_Default << 24) | ftCo_MF_Rebirth,
+        (FtMoveId_Default << 24) | (1 << 22) | (1 << 23),
         ftCo_Walk_Anim,
         ftCo_Walk_IASA,
         ftCo_Walk_Phys,
@@ -213,7 +213,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_Turn = 18
         10,
         ftCo_MF_Turn,
-        (FtMoveId_Default << 24) | ftCo_MF_Rebirth,
+        (FtMoveId_Default << 24) | (1 << 22) | (1 << 23),
         ftCo_Turn_Anim,
         ftCo_Turn_IASA,
         ftCo_Turn_Phys,
@@ -235,7 +235,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_Dash = 20
         12,
         ftCo_MF_Dash,
-        (FtMoveId_Default << 24) | ftCo_MF_Rebirth,
+        (FtMoveId_Default << 24) | (1 << 22) | (1 << 23),
         ftCo_Dash_Anim,
         ftCo_Dash_IASA,
         ftCo_Dash_Phys,
@@ -279,7 +279,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_KneeBend = 24
         15,
         FtStateChange_None,
-        (FtMoveId_Default << 24) | ftCo_MF_Rebirth,
+        (FtMoveId_Default << 24) | (1 << 22) | (1 << 23),
         ftCo_KneeBend_Anim,
         ftCo_KneeBend_IASA,
         ftCo_KneeBend_Phys,
@@ -1973,7 +1973,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_GuardOn = 178
         37,
         FtStateChange_Unk_UpdatePhys,
-        (FtMoveId_Default << 24) | ftCo_MF_Rebirth,
+        (FtMoveId_Default << 24) | (1 << 22) | (1 << 23),
         ftCo_GuardOn_Anim,
         ftCo_GuardOn_IASA,
         ftCo_GuardOn_Phys,
