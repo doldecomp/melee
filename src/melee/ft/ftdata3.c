@@ -146,7 +146,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_Rebirth = 12
         2,
-        (FtMoveId_Unk00 << 24) | (1 << 22) | (1 << 23),
+        ftCo_MF_Rebirth,
         FtMoveId_Unk01 << 24,
         ftCo_Rebirth_Anim,
         ftCo_Rebirth_IASA,
@@ -157,7 +157,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_RebirthWait = 13
         2,
-        (FtMoveId_Unk00 << 24) | (1 << 22) | (1 << 23),
+        ftCo_MF_Rebirth,
         FtMoveId_Unk01 << 24,
         ftCo_RebirthWait_Anim,
         ftCo_RebirthWait_IASA,
@@ -169,7 +169,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_Wait = 14
         2,
         FtStateChange_None,
-        (FtMoveId_Unk01 << 24) | (1 << 22) | (1 << 23),
+        (FtMoveId_Unk01 << 24) | ftCo_MF_Rebirth,
         ftCo_Wait_Anim,
         ftCo_Wait_IASA,
         ftCo_Wait_Phys,
@@ -180,7 +180,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_WalkSlow = 15
         7,
         ftCo_MF_Walk,
-        (FtMoveId_Unk01 << 24) | (1 << 22) | (1 << 23),
+        (FtMoveId_Unk01 << 24) | ftCo_MF_Rebirth,
         ftCo_Walk_Anim,
         ftCo_Walk_IASA,
         ftCo_Walk_Phys,
@@ -191,7 +191,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_WalkMiddle = 16
         8,
         ftCo_MF_Walk,
-        (FtMoveId_Unk01 << 24) | (1 << 22) | (1 << 23),
+        (FtMoveId_Unk01 << 24) | ftCo_MF_Rebirth,
         ftCo_Walk_Anim,
         ftCo_Walk_IASA,
         ftCo_Walk_Phys,
@@ -202,7 +202,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_WalkFast = 17
         9,
         ftCo_MF_Walk,
-        (FtMoveId_Unk01 << 24) | (1 << 22) | (1 << 23),
+        (FtMoveId_Unk01 << 24) | ftCo_MF_Rebirth,
         ftCo_Walk_Anim,
         ftCo_Walk_IASA,
         ftCo_Walk_Phys,
@@ -213,7 +213,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_Turn = 18
         10,
         ftCo_MF_Turn,
-        (FtMoveId_Unk01 << 24) | (1 << 22) | (1 << 23),
+        (FtMoveId_Unk01 << 24) | ftCo_MF_Rebirth,
         ftCo_Turn_Anim,
         ftCo_Turn_IASA,
         ftCo_Turn_Phys,
@@ -235,7 +235,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_Dash = 20
         12,
         ftCo_MF_Dash,
-        (FtMoveId_Unk01 << 24) | (1 << 22) | (1 << 23),
+        (FtMoveId_Unk01 << 24) | ftCo_MF_Rebirth,
         ftCo_Dash_Anim,
         ftCo_Dash_IASA,
         ftCo_Dash_Phys,
@@ -279,7 +279,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_KneeBend = 24
         15,
         FtStateChange_None,
-        (FtMoveId_Unk01 << 24) | (1 << 22) | (1 << 23),
+        (FtMoveId_Unk01 << 24) | ftCo_MF_Rebirth,
         ftCo_KneeBend_Anim,
         ftCo_KneeBend_IASA,
         ftCo_KneeBend_Phys,
@@ -455,7 +455,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_SquatWait = 40
         31,
         ftCo_MF_Squat,
-        0x01400000,
+        (FtMoveId_Unk01 << 24) | (1 << 22),
         ftCo_SquatWait_Anim,
         ftCo_SquatWait_IASA,
         ftCo_SquatWait_Phys,
@@ -477,7 +477,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_Landing = 42
         35,
         FtStateChange_None,
-        0x01400000,
+        (FtMoveId_Unk01 << 24) | (1 << 22),
         ftCo_Landing_Anim,
         ftCo_Landing_IASA,
         ftCo_Landing_Phys,
@@ -488,7 +488,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_LandingFallSpecial = 43
         36,
         FtStateChange_None,
-        0x01400000,
+        (FtMoveId_Unk01 << 24) | (1 << 22),
         ftCo_Landing_Anim,
         ftCo_Landing_IASA,
         ftCo_Landing_Phys,
@@ -785,7 +785,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_LandingAirN = 70
         73,
         ftCo_MF_LandingAirN,
-        (FtMoveId_AttackAirN << 24) | (1 << 22) | (1 << 23),
+        (FtMoveId_AttackAirN << 24) | ftCo_MF_Rebirth,
         ftCo_LandingAir_Anim,
         ftCo_LandingAir_IASA,
         ftCo_LandingAir_Phys,
@@ -796,7 +796,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_LandingAirF = 71
         74,
         ftCo_MF_LandingAirF,
-        (FtMoveId_AttackAirF << 24) | (1 << 22) | (1 << 23),
+        (FtMoveId_AttackAirF << 24) | ftCo_MF_Rebirth,
         ftCo_LandingAir_Anim,
         ftCo_LandingAir_IASA,
         ftCo_LandingAir_Phys,
@@ -807,7 +807,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_LandingAirB = 72
         75,
         ftCo_MF_LandingAirB,
-        (FtMoveId_AttackAirB << 24) | (1 << 22) | (1 << 23),
+        (FtMoveId_AttackAirB << 24) | ftCo_MF_Rebirth,
         ftCo_LandingAir_Anim,
         ftCo_LandingAir_IASA,
         ftCo_LandingAir_Phys,
@@ -818,7 +818,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_LandingAirHi = 73
         76,
         ftCo_MF_LandingAirHi,
-        (FtMoveId_AttackAirHi << 24) | (1 << 22) | (1 << 23),
+        (FtMoveId_AttackAirHi << 24) | ftCo_MF_Rebirth,
         ftCo_LandingAir_Anim,
         ftCo_LandingAir_IASA,
         ftCo_LandingAir_Phys,
@@ -829,7 +829,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_LandingAirLw = 74
         77,
         ftCo_MF_LandingAirLw,
-        (FtMoveId_AttackAirLw << 24) | (1 << 22) | (1 << 23),
+        (FtMoveId_AttackAirLw << 24) | ftCo_MF_Rebirth,
         ftCo_LandingAir_Anim,
         ftCo_LandingAir_IASA,
         ftCo_LandingAir_Phys,
@@ -1973,7 +1973,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_GuardOn = 178
         37,
         FtStateChange_Unk_UpdatePhys,
-        (FtMoveId_Unk01 << 24) | (1 << 22) | (1 << 23),
+        (FtMoveId_Unk01 << 24) | ftCo_MF_Rebirth,
         ftCo_GuardOn_Anim,
         ftCo_GuardOn_IASA,
         ftCo_GuardOn_Phys,
@@ -2479,7 +2479,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_CaptureWaitHi = 224
         252,
         ftCo_MF_Capture,
-        0x01400000,
+        (FtMoveId_Unk01 << 24) | (1 << 22),
         ftCo_CaptureWaitHi_Anim,
         ftCo_CaptureWaitHi_IASA,
         ftCo_CaptureWaitHi_Phys,
@@ -2512,7 +2512,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_CaptureWaitLw = 227
         255,
         ftCo_MF_Capture,
-        0x01400000,
+        (FtMoveId_Unk01 << 24) | (1 << 22),
         ftCo_CaptureWaitLw_Anim,
         ftCo_CaptureWaitLw_IASA,
         ftCo_CaptureWaitLw_Phys,
@@ -2941,7 +2941,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_ShoulderedWait = 266
         267,
         ftCo_MF_Shouldered,
-        0x01400000,
+        (FtMoveId_Unk01 << 24) | (1 << 22),
         ftCo_Shouldered_Anim,
         ftCo_Shouldered_IASA,
         ftCo_Shouldered_Phys,
@@ -3061,7 +3061,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_YoshiEgg = 277
         277,
-        (FtMoveId_Unk00 << 24) | (1 << 22) | (1 << 23),
+        ftCo_MF_Rebirth,
         FtMoveId_Unk01 << 24,
         ftCo_YoshiEgg_Anim,
         ftCo_YoshiEgg_IASA,
@@ -3095,7 +3095,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_CaptureWaitKoopa = 280
         -1,
         ftCo_MF_Capture,
-        0x01400000,
+        (FtMoveId_Unk01 << 24) | (1 << 22),
         ftCo_CaptureWaitKoopa_Anim,
         ftCo_CaptureWaitKoopa_IASA,
         ftCo_CaptureWaitKoopa_Phys,
@@ -3139,7 +3139,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_CaptureDamageKoopaAir = 284
         281,
         ftCo_MF_ThrownAir,
-        0x01400000,
+        (FtMoveId_Unk01 << 24) | (1 << 22),
         ftCo_CaptureDamageKoopaAir_Anim,
         ftCo_CaptureDamageKoopaAir_IASA,
         ftCo_CaptureDamageKoopaAir_Phys,
@@ -3194,7 +3194,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_CaptureWaitKirby = 289
         -1,
         ftCo_MF_Capture,
-        0x01400000,
+        (FtMoveId_Unk01 << 24) | (1 << 22),
         ftCo_CaptureWaitKirby_Anim,
         ftCo_CaptureWaitKirby_IASA,
         ftCo_CaptureWaitKirby_Phys,
@@ -3237,8 +3237,8 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_BarrelWait = 293
         -1,
-        (FtMoveId_Unk00 << 24) | (1 << 22) | (1 << 23),
-        0x01400000,
+        ftCo_MF_Rebirth,
+        (FtMoveId_Unk01 << 24) | (1 << 22),
         ftCo_BarrelWait_Anim,
         ftCo_BarrelWait_IASA,
         ftCo_BarrelWait_Phys,
@@ -3248,7 +3248,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_Bury = 294
         -1,
-        (FtMoveId_Unk00 << 24) | (1 << 22) | (1 << 23),
+        ftCo_MF_Rebirth,
         FtMoveId_Unk01 << 24,
         ftCo_Bury_Anim,
         ftCo_Bury_IASA,
@@ -3259,7 +3259,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_BuryWait = 295
         -1,
-        (FtMoveId_Unk00 << 24) | (1 << 22) | (1 << 23),
+        ftCo_MF_Rebirth,
         FtMoveId_Unk01 << 24,
         ftCo_BuryWait_Anim,
         ftCo_BuryWait_IASA,
@@ -3281,7 +3281,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_DamageSong = 297
         206,
-        (FtMoveId_Unk00 << 24) | (1 << 22) | (1 << 23),
+        ftCo_MF_Rebirth,
         FtMoveId_Unk01 << 24,
         ftCo_DamageSong_Anim,
         ftCo_DamageSong_IASA,
@@ -3292,7 +3292,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_DamageSongWait = 298
         207,
-        (FtMoveId_Unk00 << 24) | (1 << 22) | (1 << 23),
+        ftCo_MF_Rebirth,
         FtMoveId_Unk01 << 24,
         ftCo_DamageSongWait_Anim,
         ftCo_DamageSongWait_IASA,
@@ -3303,7 +3303,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_DamageSongRv = 299
         208,
-        (FtMoveId_Unk00 << 24) | (1 << 22) | (1 << 23),
+        ftCo_MF_Rebirth,
         FtMoveId_Unk01 << 24,
         ftCo_DamageSongRv_Anim,
         ftCo_DamageSongRv_IASA,
@@ -3369,7 +3369,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_WarpStarJump = 305
         30,
-        (FtMoveId_Unk00 << 24) | (1 << 22) | (1 << 23),
+        ftCo_MF_Rebirth,
         FtMoveId_Unk01 << 24,
         ftCo_WarpStarJump_Anim,
         ftCo_WarpStarJump_IASA,
@@ -3392,7 +3392,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_HammerWait = 307
         132,
         ftCo_MF_Hammer,
-        (FtMoveId_Unk93 << 24) | (1 << 22) | (1 << 23),
+        (FtMoveId_Unk93 << 24) | ftCo_MF_Rebirth,
         ftCo_HammerWait_Anim,
         ftCo_HammerWait_IASA,
         ftCo_HammerWait_Phys,
@@ -3458,7 +3458,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_HammerLanding = 313
         133,
         ftCo_MF_Hammer,
-        0x5D400000,
+        (93 << 24) | (1 << 22),
         ftCo_HammerLanding_Anim,
         ftCo_HammerLanding_IASA,
         ftCo_HammerLanding_Phys,
@@ -3556,7 +3556,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_Entry = 322
         -1,
-        (FtMoveId_Unk00 << 24) | (1 << 22) | (1 << 23),
+        ftCo_MF_Rebirth,
         FtMoveId_Unk01 << 24,
         ftCo_Entry_Anim,
         ftCo_Entry_IASA,
@@ -3567,7 +3567,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_EntryStart = 323
         238,
-        (FtMoveId_Unk00 << 24) | (1 << 22) | (1 << 23),
+        ftCo_MF_Rebirth,
         FtMoveId_Unk01 << 24,
         ftCo_EntryStart_Anim,
         ftCo_EntryStart_IASA,
@@ -3578,7 +3578,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_EntryEnd = 324
         -1,
-        (FtMoveId_Unk00 << 24) | (1 << 22) | (1 << 23),
+        ftCo_MF_Rebirth,
         FtMoveId_Unk01 << 24,
         ftCo_EntryEnd_Anim,
         ftCo_EntryEnd_IASA,
@@ -3634,7 +3634,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_CaptureWaitMasterHand = 329
         -1,
         ftCo_MF_Capture,
-        0x01400000,
+        (FtMoveId_Unk01 << 24) | (1 << 22),
         ftMh_CaptureWaitMasterHand_Anim,
         ftMh_CaptureWaitMasterHand_IASA,
         ftMh_CaptureWaitMasterHand_Phys,
@@ -3666,7 +3666,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_KirbyYoshiEgg = 332
         294,
-        (FtMoveId_Unk00 << 24) | (1 << 22) | (1 << 23),
+        ftCo_MF_Rebirth,
         FtMoveId_Unk01 << 24,
         ftCo_KirbyYoshiEgg_Anim,
         ftCo_KirbyYoshiEgg_IASA,
@@ -3688,7 +3688,7 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_CaptureLikelike = 334
         -1,
-        (FtMoveId_Unk00 << 24) | (1 << 22) | (1 << 23),
+        ftCo_MF_Rebirth,
         FtMoveId_Unk01 << 24,
         ftCo_CaptureLikelike_Anim,
         ftCo_CaptureLikelike_IASA,
@@ -3733,7 +3733,7 @@ MotionState ftData_MotionStateList[] = {
         // ftCo_MS_CaptureWaitCrazyHand = 338
         -1,
         ftCo_MF_Capture,
-        0x01400000,
+        (FtMoveId_Unk01 << 24) | (1 << 22),
         ftCo_CaptureWaitCrazyHand_Anim,
         ftCo_CaptureWaitCrazyHand_IASA,
         ftCo_CaptureWaitCrazyHand_Phys,
@@ -3754,8 +3754,8 @@ MotionState ftData_MotionStateList[] = {
     {
         // ftCo_MS_Barrel = 340
         -1,
-        (FtMoveId_Unk00 << 24) | (1 << 22) | (1 << 23),
-        0x01400000,
+        ftCo_MF_Rebirth,
+        (FtMoveId_Unk01 << 24) | (1 << 22),
         ftCo_Barrel_Anim,
         ftCo_Barrel_IASA,
         ftCo_Barrel_Phys,

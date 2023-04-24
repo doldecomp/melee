@@ -304,9 +304,10 @@ static u32 const ftCo_MF_ThrownAir ATTRIBUTE_USED =
     ftCo_MF_Thrown | FtStateChange_SkipUpdateParasol;
 static u32 const ftCo_MF_Shouldered ATTRIBUTE_USED =
     ftCo_MF_Capture | FtStateChange_Unk_19;
+static u32 const ftCo_MF_Rebirth ATTRIBUTE_USED =
+    FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateMetalB;
 static u32 const ftCo_MF_ThrownStar ATTRIBUTE_USED =
-    FtStateChange_PreserveSwordTrail | FtStateChange_SkipUpdateModelPartVis |
-    FtStateChange_SkipUpdateMetalB;
+    ftCo_MF_Rebirth | FtStateChange_PreserveSwordTrail;
 static u32 const ftCo_MF_Dead ATTRIBUTE_USED =
     ftCo_MF_Dazed | FtStateChange_SkipUpdateMetalB;
 static u32 const ftCo_MF_Sleep ATTRIBUTE_USED =
