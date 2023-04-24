@@ -57,7 +57,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
     {
         69,
         ftPe_MF_Move_14,
-        FtMoveId_Unk14 << 24,
+        FtMoveId_AttackAirF << 24,
         ftPe_FloatAttackAir_Anim,
         ftPe_FloatAttackAir_IASA,
         ftPe_FloatAttackAir_Phys,
@@ -87,7 +87,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
     {
         72,
         ftPe_MF_Move_17,
-        FtMoveId_Unk17 << 24,
+        FtMoveId_AttackAirLw << 24,
         ftPe_FloatAttackAir_Anim,
         ftPe_FloatAttackAir_IASA,
         ftPe_FloatAttackAir_Phys,
