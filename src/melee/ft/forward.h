@@ -344,6 +344,7 @@ typedef enum FtMoveId {
     FtMoveId_Unk91,
     FtMoveId_Unk92,
     FtMoveId_Unk93,
+    FtMoveId_Unk94,
 } FtMoveId;
 
 #endif
