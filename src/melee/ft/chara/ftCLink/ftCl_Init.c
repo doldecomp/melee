@@ -57,7 +57,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         296,
         ftLk_MF_SpecialN,
-        FtMoveId_SpecialN * (1 << 24),
+        FtMoveId_SpecialN << 24,
         ftLk_SpecialNCharge_Anim,
         ftLk_SpecialNCharge_IASA,
         ftLk_SpecialNCharge_Phys,
@@ -67,7 +67,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         297,
         ftLk_MF_SpecialNFullyCharged,
-        FtMoveId_SpecialN * (1 << 24),
+        FtMoveId_SpecialN << 24,
         ftLk_SpecialNFullyCharged_Anim,
         ftLk_SpecialNFullyCharged_IASA,
         ftLk_SpecialNFullyCharged_Phys,
@@ -77,7 +77,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         298,
         ftLk_MF_SpecialN,
-        FtMoveId_SpecialN * (1 << 24),
+        FtMoveId_SpecialN << 24,
         ftLk_SpecialNFire_Anim,
         ftLk_SpecialNFire_IASA,
         ftLk_SpecialNFire_Phys,
@@ -87,7 +87,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         299,
         ftLk_MF_SpecialAirNCharge,
-        FtMoveId_SpecialN * (1 << 24),
+        FtMoveId_SpecialN << 24,
         ftLk_SpecialAirNCharge_Anim,
         ftLk_SpecialAirNCharge_IASA,
         ftLk_SpecialAirNCharge_Phys,
@@ -97,7 +97,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         300,
         ftLk_MF_SpecialAirNFullyCharged,
-        FtMoveId_SpecialN * (1 << 24),
+        FtMoveId_SpecialN << 24,
         ftLk_SpecialAirNFullyCharged_Anim,
         ftLk_SpecialAirNFullyCharged_IASA,
         ftLk_SpecialAirNFullyCharged_Phys,
@@ -107,7 +107,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         301,
         ftLk_MF_SpecialAirNFire,
-        FtMoveId_SpecialN * (1 << 24),
+        FtMoveId_SpecialN << 24,
         ftLk_SpecialAirNFire_Anim,
         ftLk_SpecialAirNFire_IASA,
         ftLk_SpecialAirNFire_Phys,
@@ -117,7 +117,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         302,
         ftLk_MF_SpecialSThrow,
-        FtMoveId_SpecialS * (1 << 24),
+        FtMoveId_SpecialS << 24,
         ftLk_SpecialSThrow_Anim,
         NULL,
         ftLk_SpecialSThrow_Phys,
@@ -127,7 +127,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         303,
         ftLk_MF_SpecialSThrow,
-        FtMoveId_SpecialS * (1 << 24),
+        FtMoveId_SpecialS << 24,
         ftLk_SpecialSCatch_Anim,
         ftLk_SpecialSCatch_IASA,
         ftLk_SpecialSCatch_Phys,
@@ -137,7 +137,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         304,
         ftLk_MF_SpecialSCatch,
-        FtMoveId_SpecialS * (1 << 24),
+        FtMoveId_SpecialS << 24,
         ftLk_SpecialSThrowEmpty_Anim,
         NULL,
         ftLk_SpecialSThrowEmpty_Phys,
@@ -147,7 +147,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         305,
         ftLk_MF_SpecialAirSThrow,
-        FtMoveId_SpecialS * (1 << 24),
+        FtMoveId_SpecialS << 24,
         ftLk_SpecialAirSThrow_Anim,
         NULL,
         ftLk_SpecialAirSThrow_Phys,
@@ -157,7 +157,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         306,
         ftLk_MF_SpecialAirSThrow,
-        FtMoveId_SpecialS * (1 << 24),
+        FtMoveId_SpecialS << 24,
         ftLk_SpecialAirSCatch_Anim,
         ftLk_SpecialAirSCatch_IASA,
         ftLk_SpecialAirSCatch_Phys,
@@ -167,7 +167,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         307,
         ftLk_MF_SpecialAirSThrow,
-        FtMoveId_SpecialS * (1 << 24),
+        FtMoveId_SpecialS << 24,
         ftLk_SpecialAirSThrowEmpty_Anim,
         NULL,
         ftLk_SpecialAirSThrowEmpty_Phys,
@@ -177,7 +177,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         308,
         ftLk_MF_SpecialHi,
-        FtMoveId_SpecialHi * (1 << 24),
+        FtMoveId_SpecialHi << 24,
         ftLk_SpecialHi_Anim,
         ftLk_SpecialHi_IASA,
         ftLk_SpecialHi_Phys,
@@ -187,7 +187,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         309,
         ftLk_MF_SpecialHi,
-        FtMoveId_SpecialHi * (1 << 24),
+        FtMoveId_SpecialHi << 24,
         ftLk_SpecialAirHi_Anim,
         ftLk_SpecialAirHi_IASA,
         ftLk_SpecialAirHi_Phys,
@@ -197,7 +197,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         310,
         ftLk_MF_SpecialLw,
-        FtMoveId_SpecialLw * (1 << 24),
+        FtMoveId_SpecialLw << 24,
         ftLk_SpecialLw_Anim,
         NULL,
         ftLk_SpecialLw_Phys,
@@ -207,7 +207,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         311,
         ftLk_MF_SpecialAirLw,
-        FtMoveId_SpecialLw * (1 << 24),
+        FtMoveId_SpecialLw << 24,
         ftLk_SpecialAirLw_Anim,
         NULL,
         ftLk_SpecialAirLw_Phys,

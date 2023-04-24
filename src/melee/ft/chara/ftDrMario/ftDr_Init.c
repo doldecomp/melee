@@ -41,7 +41,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
     {
         295,
         ftMr_MF_SpecialN,
-        FtMoveId_SpecialN * (1 << 24),
+        FtMoveId_SpecialN << 24,
         ftMr_SpecialN_Anim,
         ftMr_SpecialN_IASA,
         ftMr_SpecialN_Phys,
@@ -51,7 +51,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
     {
         296,
         ftMr_MF_SpecialAirN,
-        FtMoveId_SpecialN * (1 << 24),
+        FtMoveId_SpecialN << 24,
         ftMr_SpecialAirN_Anim,
         ftMr_SpecialAirN_IASA,
         ftMr_SpecialAirN_Phys,
@@ -61,7 +61,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
     {
         297,
         ftMr_MF_SpecialS,
-        FtMoveId_SpecialS * (1 << 24),
+        FtMoveId_SpecialS << 24,
         ftMr_SpecialS_Anim,
         ftMr_SpecialS_IASA,
         ftMr_SpecialS_Phys,
@@ -71,7 +71,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
     {
         298,
         ftMr_MF_SpecialS,
-        FtMoveId_SpecialS * (1 << 24),
+        FtMoveId_SpecialS << 24,
         ftMr_SpecialAirS_Anim,
         ftMr_SpecialAirS_IASA,
         ftMr_SpecialAirS_Phys,
@@ -81,7 +81,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
     {
         299,
         ftMr_MF_SpecialHi,
-        FtMoveId_SpecialHi * (1 << 24),
+        FtMoveId_SpecialHi << 24,
         ftMr_SpecialHi_Anim,
         ftMr_SpecialHi_IASA,
         ftMr_SpecialHi_Phys,
@@ -91,7 +91,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
     {
         300,
         ftMr_MF_SpecialAirHi,
-        FtMoveId_SpecialHi * (1 << 24),
+        FtMoveId_SpecialHi << 24,
         ftMr_SpecialAirHi_Anim,
         ftMr_SpecialAirHi_IASA,
         ftMr_SpecialAirHi_Phys,
@@ -101,7 +101,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
     {
         301,
         ftMr_MF_SpecialLw,
-        FtMoveId_SpecialLw * (1 << 24),
+        FtMoveId_SpecialLw << 24,
         ftMr_SpecialLw_Anim,
         ftMr_SpecialLw_IASA,
         ftMr_SpecialLw_Phys,
@@ -111,7 +111,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
     {
         302,
         ftMr_MF_SpecialAirLw,
-        FtMoveId_SpecialLw * (1 << 24),
+        FtMoveId_SpecialLw << 24,
         ftMr_SpecialAirLw_Anim,
         ftMr_SpecialAirLw_IASA,
         ftMr_SpecialAirLw_Phys,
