@@ -35,7 +35,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     },
     {
         -1,
-        0,
+        FtStateChange_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,
@@ -45,7 +45,7 @@ MotionState ftLk_Init_MotionStateTable[] = {
     },
     {
         -1,
-        0,
+        FtStateChange_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,

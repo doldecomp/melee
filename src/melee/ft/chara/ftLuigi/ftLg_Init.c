@@ -201,7 +201,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
 MotionState ftLg_Init_UnkMotionStates0[] = {
     {
         14,
-        0,
+        FtStateChange_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,
@@ -211,7 +211,7 @@ MotionState ftLg_Init_UnkMotionStates0[] = {
     },
     {
         15,
-        0,
+        FtStateChange_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,

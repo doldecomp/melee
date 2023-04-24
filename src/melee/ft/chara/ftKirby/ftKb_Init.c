@@ -2236,7 +2236,7 @@ ftKirby_UnkArrayThing* ftKb_Init_803C9FC8[FTKIND_MAX] = {
 MotionState ftKb_Init_UnkMotionStates0[] = {
     {
         14,
-        0,
+        FtStateChange_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,
@@ -2246,7 +2246,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
     },
     {
         15,
-        0,
+        FtStateChange_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,
@@ -2256,7 +2256,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
     },
     {
         16,
-        0,
+        FtStateChange_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,
@@ -2266,7 +2266,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
     },
     {
         17,
-        0,
+        FtStateChange_None,
         FtMoveId_Default << 24,
         NULL,
         NULL,
