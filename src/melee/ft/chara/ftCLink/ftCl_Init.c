@@ -37,7 +37,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         239,
         ftCl_MF_Zair,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftCl_Appeal_Anim,
         ftCl_Appeal_IASA,
         ftCl_Appeal_Phys,
@@ -47,7 +47,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         240,
         ftCl_MF_Zair,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftCl_Appeal_Anim,
         ftCl_Appeal_IASA,
         ftCl_Appeal_Phys,
@@ -217,7 +217,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         312,
         FtStateChange_FreezeState,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftCo_Zair_Anim,
         ftCo_Zair_IASA,
         ftCo_Zair_Phys,
@@ -227,7 +227,7 @@ MotionState ftCl_Init_MotionStateTable[] = {
     {
         313,
         ftLk_MF_ZairCatch,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftCo_ZairCatch_Anim,
         ftCo_ZairCatch_IASA,
         ftCo_ZairCatch_Phys,

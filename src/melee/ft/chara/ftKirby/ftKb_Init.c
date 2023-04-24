@@ -19,7 +19,7 @@ MotionState ftKb_Init_MotionStateTable[] = {
     {
         295,
         ftKb_MF_MultiJump,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
         ftCo_MultiJump_IASA,
         ftCo_MultiJump_Phys,
@@ -29,7 +29,7 @@ MotionState ftKb_Init_MotionStateTable[] = {
     {
         296,
         ftKb_MF_MultiJump,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
         ftCo_MultiJump_IASA,
         ftCo_MultiJump_Phys,
@@ -39,7 +39,7 @@ MotionState ftKb_Init_MotionStateTable[] = {
     {
         297,
         ftKb_MF_MultiJump,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
         ftCo_MultiJump_IASA,
         ftCo_MultiJump_Phys,
@@ -49,7 +49,7 @@ MotionState ftKb_Init_MotionStateTable[] = {
     {
         298,
         ftKb_MF_MultiJump,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
         ftCo_MultiJump_IASA,
         ftCo_MultiJump_Phys,
@@ -59,7 +59,7 @@ MotionState ftKb_Init_MotionStateTable[] = {
     {
         299,
         ftKb_MF_MultiJump,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
         ftCo_MultiJump_IASA,
         ftCo_MultiJump_Phys,
@@ -69,7 +69,7 @@ MotionState ftKb_Init_MotionStateTable[] = {
     {
         300,
         ftKb_MF_MultiJump,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
         ftCo_MultiJump_IASA,
         ftCo_MultiJump_Phys,
@@ -79,7 +79,7 @@ MotionState ftKb_Init_MotionStateTable[] = {
     {
         301,
         ftKb_MF_MultiJump,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
         ftCo_MultiJump_IASA,
         ftCo_MultiJump_Phys,
@@ -89,7 +89,7 @@ MotionState ftKb_Init_MotionStateTable[] = {
     {
         302,
         ftKb_MF_MultiJump,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
         ftCo_MultiJump_IASA,
         ftCo_MultiJump_Phys,
@@ -99,7 +99,7 @@ MotionState ftKb_Init_MotionStateTable[] = {
     {
         303,
         ftKb_MF_MultiJump,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
         ftCo_MultiJump_IASA,
         ftCo_MultiJump_Phys,
@@ -109,7 +109,7 @@ MotionState ftKb_Init_MotionStateTable[] = {
     {
         304,
         ftKb_MF_MultiJump,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
         ftCo_MultiJump_IASA,
         ftCo_MultiJump_Phys,
@@ -2237,7 +2237,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
     {
         14,
         0,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         NULL,
         NULL,
         ft_800C737C,
@@ -2247,7 +2247,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
     {
         15,
         0,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         NULL,
         NULL,
         ft_800C737C,
@@ -2257,7 +2257,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
     {
         16,
         0,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         NULL,
         NULL,
         ft_800C737C,
@@ -2267,7 +2267,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
     {
         17,
         0,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         NULL,
         NULL,
         ft_800C7414,

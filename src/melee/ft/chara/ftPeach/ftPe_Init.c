@@ -17,7 +17,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
     {
         295,
         FtStateChange_None,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftPe_Float_Anim,
         ftPe_Float_IASA,
         ftPe_Float_Phys,
@@ -27,7 +27,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
     {
         296,
         FtStateChange_None,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftPe_FloatEnd_Anim,
         ftPe_FloatEnd_IASA,
         ftPe_FloatEnd_Phys,
@@ -37,7 +37,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
     {
         297,
         FtStateChange_None,
-        FtMoveId_Unk01 << 24,
+        FtMoveId_Default << 24,
         ftPe_FloatEnd_Anim,
         ftPe_FloatEnd_IASA,
         ftPe_FloatEnd_Phys,
