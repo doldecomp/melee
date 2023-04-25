@@ -29,7 +29,7 @@
 
 MotionState ftPr_Init_MotionStateTable[] = {
     {
-        ftCo_AnimId_MultiJump0,
+        ftPr_AnimId_MultiJump0,
         Ft_MF_None,
         FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
@@ -39,7 +39,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftCo_AnimId_MultiJump1,
+        ftPr_AnimId_MultiJump1,
         Ft_MF_None,
         FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
@@ -49,7 +49,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftCo_AnimId_MultiJump2,
+        ftPr_AnimId_MultiJump2,
         Ft_MF_None,
         FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
@@ -59,7 +59,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftCo_AnimId_MultiJump3,
+        ftPr_AnimId_MultiJump3,
         Ft_MF_None,
         FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
@@ -69,7 +69,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftCo_AnimId_MultiJump4,
+        ftPr_AnimId_MultiJump4,
         Ft_MF_None,
         FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,

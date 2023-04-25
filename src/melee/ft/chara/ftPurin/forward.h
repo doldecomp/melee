@@ -75,11 +75,11 @@ typedef enum ftPurin_MotionState {
 } ftPurin_MotionState;
 
 typedef enum ftPr_AnimId {
-    ftCo_AnimId_MultiJump0 = ftCo_AnimId_Count,
-    ftCo_AnimId_MultiJump1,
-    ftCo_AnimId_MultiJump2,
-    ftCo_AnimId_MultiJump3,
-    ftCo_AnimId_MultiJump4,
+    ftPr_AnimId_MultiJump0 = ftCo_AnimId_Count,
+    ftPr_AnimId_MultiJump1,
+    ftPr_AnimId_MultiJump2,
+    ftPr_AnimId_MultiJump3,
+    ftPr_AnimId_MultiJump4,
     ftPr_AnimId_SpecialNChargeStart0,
     ftPr_AnimId_SpecialNChargeStart1,
     ftPr_AnimId_SpecialNChargeLoop,
