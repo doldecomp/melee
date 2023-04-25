@@ -58,4 +58,23 @@ enum ftZelda_AS {
     ftZd_MS_SpecialAirLw_End,
 };
 
+typedef enum ftZd_AnimId {
+    ftZd_AnimId_SpecialN = ftCo_AnimId_Count,
+    ftZd_AnimId_SpecialAirN,
+    ftZd_AnimId_SpecialSStart,
+    ftZd_AnimId_SpecialSHold,
+    ftZd_AnimId_SpecialSEnd,
+    ftZd_AnimId_SpecialAirSStart,
+    ftZd_AnimId_SpecialAirSHold,
+    ftZd_AnimId_SpecialAirSEnd,
+    ftZd_AnimId_SpecialHi,
+    ftZd_AnimId_SpecialHiEnd,
+    ftZd_AnimId_SpecialAirHi,
+    ftZd_AnimId_SpecialAirHiEnd,
+    ftZd_AnimId_SpecialLw,
+    ftZd_AnimId_SpecialLwEnd,
+    ftZd_AnimId_SpecialAirLw,
+    ftZd_AnimId_SpecialAirLwEnd,
+} ftZd_AnimId;
+
 #endif

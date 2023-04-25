@@ -84,4 +84,26 @@ typedef enum ftLink_MotionState {
     ftLk_MS_ZairCatch,
 } ftLink_MotionState;
 
+typedef enum ftLk_AnimId {
+    ftLk_AnimId_AttackS42 = ftCo_AnimId_Count,
+    ftLk_AnimId_SpecialNCharge,
+    ftLk_AnimId_SpecialNFullyCharged,
+    ftLk_AnimId_SpecialNFire,
+    ftLk_AnimId_SpecialAirNCharge,
+    ftLk_AnimId_SpecialAirNFullyCharged,
+    ftLk_AnimId_SpecialAirNFire,
+    ftLk_AnimId_SpecialSThrow,
+    ftLk_AnimId_SpecialSCatch,
+    ftLk_AnimId_SpecialSThrowEmpty,
+    ftLk_AnimId_SpecialAirSThrow,
+    ftLk_AnimId_SpecialAirSCatch,
+    ftLk_AnimId_SpecialAirSThrowEmpty,
+    ftLk_AnimId_SpecialHi,
+    ftLk_AnimId_SpecialAirHi,
+    ftLk_AnimId_SpecialLw,
+    ftLk_AnimId_SpecialAirLw,
+    ftLk_AnimId_Zair,
+    ftLk_AnimId_ZairCatch,
+} ftLk_AnimId;
+
 #endif

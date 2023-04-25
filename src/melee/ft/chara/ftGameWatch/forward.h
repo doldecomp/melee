@@ -118,6 +118,37 @@ typedef enum ftGameWatch_MotionState {
     ftGw_MS_SpecialAirLw_Shoot,
 } ftGameWatch_MotionState;
 
+typedef enum ftGw_AnimId {
+    ftGw_AnimId_SpecialN = ftCo_AnimId_Count,
+    ftGw_AnimId_SpecialAirN,
+    ftGw_AnimId_SpecialS1,
+    ftGw_AnimId_SpecialS2,
+    ftGw_AnimId_SpecialS3,
+    ftGw_AnimId_SpecialS4,
+    ftGw_AnimId_SpecialS5,
+    ftGw_AnimId_SpecialS6,
+    ftGw_AnimId_SpecialS7,
+    ftGw_AnimId_SpecialS8,
+    ftGw_AnimId_SpecialS9,
+    ftGw_AnimId_SpecialAirS1,
+    ftGw_AnimId_SpecialAirS2,
+    ftGw_AnimId_SpecialAirS3,
+    ftGw_AnimId_SpecialAirS4,
+    ftGw_AnimId_SpecialAirS5,
+    ftGw_AnimId_SpecialAirS6,
+    ftGw_AnimId_SpecialAirS7,
+    ftGw_AnimId_SpecialAirS8,
+    ftGw_AnimId_SpecialAirS9,
+    ftGw_AnimId_SpecialHi,
+    ftGw_AnimId_SpecialAirHi,
+    ftGw_AnimId_SpecialLw,
+    ftGw_AnimId_SpecialLwCatch,
+    ftGw_AnimId_SpecialLwShoot,
+    ftGw_AnimId_SpecialAirLw,
+    ftGw_AnimId_SpecialAirLwCatch,
+    ftGw_AnimId_SpecialAirLwShoot,
+} ftGw_AnimId;
+
 typedef enum ftGameWatch_PanicLevel {
     ftGw_Panic_Empty,
     ftGw_Panic_Low,

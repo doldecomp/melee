@@ -63,4 +63,32 @@ typedef enum ftPikachu_MotionState {
     ftPk_MS_SpecialAirLw_End,
 } ftPikachu_MotionState;
 
+typedef enum ftPk_AnimId {
+    ftPk_AnimId_SpecialN = ftCo_AnimId_Count,
+    ftPk_AnimId_SpecialAirN,
+    ftPk_AnimId_SpecialSStart,
+    ftPk_AnimId_SpecialSCharge,
+    ftPk_AnimId_SpecialSLaunch,
+    ftPk_AnimId_Unk300,
+    ftPk_AnimId_SpecialSLanding,
+    ftPk_AnimId_SpecialAirSStart,
+    ftPk_AnimId_SpecialAirSCharge,
+    ftPk_AnimId_SpecialAirSLaunch,
+    ftPk_AnimId_SpecialAirSEnd,
+    ftPk_AnimId_SpecialHiStart,
+    ftPk_AnimId_SpecialHi,
+    ftPk_AnimId_SpecialHiEnd,
+    ftPk_AnimId_SpecialAirHiStart,
+    ftPk_AnimId_SpecialAirHi,
+    ftPk_AnimId_SpecialAirHiEnd,
+    ftPk_AnimId_SpecialLwStart,
+    ftPk_AnimId_SpecialLw,
+    ftPk_AnimId_SpecialLwHit,
+    ftPk_AnimId_SpecialLwEnd,
+    ftPk_AnimId_SpecialAirLwStart,
+    ftPk_AnimId_SpecialAirLw,
+    ftPk_AnimId_SpecialAirLwHit,
+    ftPk_AnimId_SpecialAirLwEnd,
+} ftPk_AnimId;
+
 #endif

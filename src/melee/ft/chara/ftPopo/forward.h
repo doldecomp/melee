@@ -53,4 +53,33 @@ typedef enum ftPopo_MotionState {
     ftPp_MS_SpecialAirLw,
 } ftPopo_MotionState;
 
+typedef enum ftPp_AnimId {
+    ftPp_AnimId_SpecialN0 = ftCo_AnimId_Count,
+    ftPp_AnimId_SpecialN1,
+    ftPp_AnimId_SpecialS0,
+    ftPp_AnimId_SpecialS1,
+    ftPp_AnimId_SpecialS2,
+    ftPp_AnimId_SpecialS3,
+    ftPp_AnimId_SpecialHi00,
+    ftPp_AnimId_SpecialHi01,
+    ftPp_AnimId_SpecialHi02,
+    ftPp_AnimId_SpecialHi03,
+    ftPp_AnimId_SpecialHi04,
+    ftPp_AnimId_SpecialHi05,
+    ftPp_AnimId_SpecialHi06,
+    ftPp_AnimId_SpecialHi07,
+    ftPp_AnimId_SpecialHi08,
+    ftPp_AnimId_SpecialHi09,
+    ftPp_AnimId_SpecialLw0,
+    ftPp_AnimId_SpecialLw1,
+    ftPp_AnimId_SpecialS4,
+    ftPp_AnimId_SpecialS5,
+    ftPp_AnimId_SpecialHi10,
+    ftPp_AnimId_SpecialHi11,
+    ftPp_AnimId_SpecialHi12,
+    ftPp_AnimId_SpecialHi13,
+    ftPp_AnimId_SpecialHi14,
+    ftPp_AnimId_SpecialHi15,
+} ftPp_AnimId;
+
 #endif

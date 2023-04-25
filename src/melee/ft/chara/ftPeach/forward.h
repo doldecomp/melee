@@ -93,4 +93,30 @@ typedef enum ftPeach_MotionState {
     ftPe_MS_ParasolOpen,
 } ftPeach_MotionState;
 
+typedef enum ftPe_AnimId {
+    ftPe_AnimId_Float = ftCo_AnimId_Count,
+    ftPe_AnimId_FloatEnd0,
+    ftPe_AnimId_FloatEnd1,
+    ftPe_AnimId_AttackS4_0,
+    ftPe_AnimId_AttackS4_1,
+    ftPe_AnimId_AttackS4_2,
+    ftPe_AnimId_Unk301,
+    ftPe_AnimId_SpecialSStart,
+    ftPe_AnimId_SpecialSEnd,
+    ftPe_AnimId_SpecialAirS,
+    ftPe_AnimId_Unk305,
+    ftPe_AnimId_SpecialAirSEnd_0,
+    ftPe_AnimId_SpecialAirSEnd_1,
+    ftPe_AnimId_SpecialHiStart,
+    ftPe_AnimId_MS_362,
+    ftPe_AnimId_SpecialAirHiStart,
+    ftPe_AnimId_MS_364,
+    ftPe_AnimId_SpecialN,
+    ftPe_AnimId_SpecialNAttack,
+    ftPe_AnimId_SpecialAirN,
+    ftPe_AnimId_SpecialAirNAttack,
+    ftPe_AnimId_ParasolOpen,
+    ftPe_AnimId_ParasolFallSpecial,
+} ftPe_AnimId;
+
 #endif

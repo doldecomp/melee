@@ -72,4 +72,29 @@ typedef enum ftSeak_MotionState {
     ftSk_MS_SpecialAirLw_End,
 } ftSeak_MotionState;
 
+typedef enum ftSk_AnimId {
+    ftSk_AnimId_SpecialNChargeStart = ftCo_AnimId_Count,
+    ftSk_AnimId_SpecialNChargeLoop,
+    ftSk_AnimId_SpecialNChargeEnd,
+    ftSk_AnimId_SpecialNShoot,
+    ftSk_AnimId_SpecialAirNChargeStart,
+    ftSk_AnimId_SpecialAirNChargeLoop,
+    ftSk_AnimId_SpecialAirNChargeEnd,
+    ftSk_AnimId_SpecialAirNShoot,
+    ftSk_AnimId_SpecialSStart,
+    ftSk_AnimId_SpecialSEnd,
+    ftSk_AnimId_SpecialSLoop,
+    ftSk_AnimId_SpecialAirSStart,
+    ftSk_AnimId_SpecialAirSEnd,
+    ftSk_AnimId_SpecialAirSLoop,
+    ftSk_AnimId_SpecialHi,
+    ftSk_AnimId_SpecialHiEnd,
+    ftSk_AnimId_SpecialAirHi,
+    ftSk_AnimId_SpecialAirHiEnd,
+    ftSk_AnimId_SpecialLw,
+    ftSk_AnimId_SpecialLwEnd,
+    ftSk_AnimId_SpecialAirLw,
+    ftSk_AnimId_SpecialAirLwEnd,
+} ftSk_AnimId;
+
 #endif

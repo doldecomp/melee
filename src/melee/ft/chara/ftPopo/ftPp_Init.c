@@ -22,7 +22,7 @@
 
 MotionState ftPp_Init_MotionStateTable[] = {
     {
-        295,
+        ftPp_AnimId_SpecialN0,
         ftPp_MF_SpecialN,
         (FtMoveId_SpecialN << 24) | (1 << 23),
         ftPp_SpecialN_Anim,
@@ -32,7 +32,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        296,
+        ftPp_AnimId_SpecialN1,
         ftPp_MF_SpecialAirN,
         (FtMoveId_SpecialN << 24) | (1 << 23),
         ftPp_SpecialAirN_Anim,
@@ -42,7 +42,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        297,
+        ftPp_AnimId_SpecialS0,
         ftPp_MF_SpecialS,
         (FtMoveId_SpecialS << 24) | (1 << 23),
         ftPp_SpecialS_Anim,
@@ -52,7 +52,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        298,
+        ftPp_AnimId_SpecialS1,
         ftPp_MF_SpecialS,
         (FtMoveId_SpecialS << 24) | (1 << 23),
         ftPp_SpecialSTogether_Anim,
@@ -62,7 +62,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        299,
+        ftPp_AnimId_SpecialS2,
         ftPp_MF_SpecialAirS,
         (FtMoveId_SpecialS << 24) | (1 << 23),
         ftPp_SpecialAirS_Anim,
@@ -72,7 +72,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        300,
+        ftPp_AnimId_SpecialS3,
         ftPp_MF_SpecialAirS,
         (FtMoveId_SpecialS << 24) | (1 << 23),
         ftPp_SpecialAirSTogether_Anim,
@@ -82,7 +82,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        301,
+        ftPp_AnimId_SpecialHi00,
         ftPp_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
         ftPp_SpecialHiStart_Anim,
@@ -92,7 +92,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        302,
+        ftPp_AnimId_SpecialHi01,
         ftPp_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
         ftPp_SpecialHi_Anim,
@@ -102,7 +102,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        303,
+        ftPp_AnimId_SpecialHi02,
         ftPp_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
         ftPp_MS_349_Anim,
@@ -112,7 +112,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        304,
+        ftPp_AnimId_SpecialHi03,
         ftPp_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
         ftPp_SpecialHiFail_Anim,
@@ -122,7 +122,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        305,
+        ftPp_AnimId_SpecialHi04,
         ftPp_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
         ftPp_SpecialHiFailEnd_Anim,
@@ -132,7 +132,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        306,
+        ftPp_AnimId_SpecialHi05,
         ftPp_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
         ftPp_SpecialAirHiStart_Anim,
@@ -142,7 +142,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        307,
+        ftPp_AnimId_SpecialHi06,
         ftPp_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
         ftPp_SpecialAirHi_Anim,
@@ -152,7 +152,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        308,
+        ftPp_AnimId_SpecialHi07,
         ftPp_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
         ftPp_SpecialAirHiFail_Anim,
@@ -162,7 +162,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        309,
+        ftPp_AnimId_SpecialHi08,
         ftPp_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
         ftPp_SpecialAirHiFailEnd_Anim,
@@ -173,7 +173,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
     },
     {
         /// @todo Fix names, this is part of SpecialHi
-        310,
+        ftPp_AnimId_SpecialHi09,
         ftPp_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
         ftPp_SpecialLw_Anim,
@@ -183,7 +183,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        311,
+        ftPp_AnimId_SpecialLw0,
         ftPp_MF_SpecialLw,
         (FtMoveId_SpecialLw << 24) | (1 << 23),
         ftPp_SpecialAirLw_Anim,
@@ -193,7 +193,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        312,
+        ftPp_AnimId_SpecialLw1,
         ftPp_MF_MS_358,
         (FtMoveId_SpecialLw << 24) | (1 << 23),
         ftPp_SpecialLw_80122A8C,
@@ -203,7 +203,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        313,
+        ftPp_AnimId_SpecialS4,
         ftPp_MF_SpecialS,
         (FtMoveId_SpecialS << 24) | (1 << 23),
         ftNn_Init_80123CA4,
@@ -213,7 +213,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        314,
+        ftPp_AnimId_SpecialS5,
         ftPp_MF_SpecialAirS,
         (FtMoveId_SpecialS << 24) | (1 << 23),
         ftNn_Init_80123D68,
@@ -223,7 +223,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        315,
+        ftPp_AnimId_SpecialHi10,
         ftPp_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
         ftNn_Init_80123348,
@@ -233,7 +233,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        316,
+        ftPp_AnimId_SpecialHi11,
         ftPp_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
         ftNn_Init_80123448,
@@ -243,7 +243,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        317,
+        ftPp_AnimId_SpecialHi12,
         ftPp_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
         NULL,
@@ -253,7 +253,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        318,
+        ftPp_AnimId_SpecialHi13,
         ftPp_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
         ftNn_Init_80123384,
@@ -263,7 +263,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        319,
+        ftPp_AnimId_SpecialHi14,
         ftPp_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
         ftNn_Init_80123484,
@@ -273,7 +273,7 @@ MotionState ftPp_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        320,
+        ftPp_AnimId_SpecialHi15,
         ftPp_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
         NULL,

@@ -53,4 +53,24 @@ typedef enum ftLuigi_MotionState {
     ftLg_MS_SpecialAirLw,
 } ftLuigi_MotionState;
 
+typedef enum ftLg_AnimId {
+    ftLg_AnimId_SpecialN = ftCo_AnimId_Count,
+    ftLg_AnimId_SpecialAirN,
+    ftLg_AnimId_SpecialSStart,
+    ftLg_AnimId_SpecialSHold,
+    ftLg_AnimId_SpecialSLaunch,
+    ftLg_AnimId_SpecialSMisfire,
+    ftLg_AnimId_Unk301,
+    ftLg_AnimId_SpecialSEnd,
+    ftLg_AnimId_SpecialAirSStart,
+    ftLg_AnimId_SpecialAirSHold,
+    ftLg_AnimId_SpecialAirSLaunch,
+    ftLg_AnimId_SpecialAirSMisfire,
+    ftLg_AnimId_SpecialAirSEnd,
+    ftLg_AnimId_SpecialHi,
+    ftLg_AnimId_SpecialAirHi,
+    ftLg_AnimId_SpecialLw,
+    ftLg_AnimId_SpecialAirLw,
+} ftLg_AnimId;
+
 #endif

@@ -70,4 +70,25 @@ typedef enum ftSamus_MotionState {
     ftSs_MS_ZairCatch,
 } ftSamus_MotionState;
 
+typedef enum ftSs_AnimId {
+    ftSs_AnimId_SpecialLw = ftCo_AnimId_Count,
+    ftSs_AnimId_SpecialAirLw,
+    ftSs_AnimId_SpecialNStart,
+    ftSs_AnimId_SpecialNLoop,
+    ftSs_AnimId_SpecialNEnd,
+    ftSs_AnimId_SpecialNShoot,
+    ftSs_AnimId_SpecialAirNStart,
+    ftSs_AnimId_SpecialAirNShoot,
+    ftSs_AnimId_SpecialS,
+    ftSs_AnimId_SpecialSSmash,
+    ftSs_AnimId_SpecialAirS,
+    ftSs_AnimId_SpecialAirSmash,
+    ftSs_AnimId_SpecialHi,
+    ftSs_AnimId_SpecialAirHi,
+    ftSs_AnimId_SpecialLwBombEnd,
+    ftSs_AnimId_SpecialAirLwBomb,
+    ftCo_AnimId_Zair,
+    ftCo_AnimId_ZairCatch,
+} ftSs_AnimId;
+
 #endif
