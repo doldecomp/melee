@@ -43,4 +43,15 @@ typedef enum ftMario_MotionState {
     ftMr_MS_Count,
 } ftMario_MotionState;
 
+typedef enum ftMr_AnimId {
+    ftMr_AnimId_SpecialN = ftCo_AnimId_Count,
+    ftMr_AnimId_SpecialAirN,
+    ftMr_AnimId_SpecialS,
+    ftMr_AnimId_SpecialAirS,
+    ftMr_AnimId_SpecialHi,
+    ftMr_AnimId_SpecialAirHi,
+    ftMr_AnimId_SpecialLw,
+    ftMr_AnimId_SpecialAirLw,
+} ftMr_AnimId;
+
 #endif

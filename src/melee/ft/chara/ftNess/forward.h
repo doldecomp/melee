@@ -99,4 +99,38 @@ typedef enum ftNess_MotionState {
     ftNs_MS_SpecialAirLwTurn,
 } ftNess_MotionState;
 
+typedef enum ftNs_AnimId {
+    ftNs_AnimId_AttackHi4Charge = ftCo_AnimId_Count,
+    ftNs_AnimId_AttackHi4Release,
+    ftNs_AnimId_AttackLw4Charge,
+    ftNs_AnimId_AttackLw4Release,
+    ftNs_AnimId_SpecialNStart,
+    ftNs_AnimId_SpecialNHold0,
+    ftNs_AnimId_SpecialNHold1,
+    ftNs_AnimId_SpecialNEnd,
+    ftNs_AnimId_SpecialAirNStart,
+    ftNs_AnimId_SpecialAirNHold0,
+    ftNs_AnimId_SpecialAirNHold1,
+    ftNs_AnimId_SpecialAirNEnd,
+    ftNs_AnimId_SpecialS,
+    ftNs_AnimId_SpecialAirS,
+    ftNs_AnimId_SpecialHiStart,
+    ftNs_AnimId_SpecialHiHold,
+    ftNs_AnimId_SpecialHiEnd,
+    ftNs_AnimId_SpecialHi,
+    ftNs_AnimId_SpecialAirHiStart,
+    ftNs_AnimId_SpecialAirHiHold,
+    ftNs_AnimId_SpecialAirHiEnd,
+    ftNs_AnimId_SpecialAirHi,
+    ftNs_AnimId_SpecialAirHiRebound,
+    ftNs_AnimId_SpecialLwStart,
+    ftNs_AnimId_SpecialLwHold,
+    ftNs_AnimId_SpecialLwHit,
+    ftNs_AnimId_SpecialLwEnd,
+    ftNs_AnimId_SpecialAirLwStart,
+    ftNs_AnimId_SpecialAirLwHold,
+    ftNs_AnimId_SpecialAirLwHit,
+    ftNs_AnimId_SpecialAirLwEnd,
+} ftNs_AnimId;
+
 #endif

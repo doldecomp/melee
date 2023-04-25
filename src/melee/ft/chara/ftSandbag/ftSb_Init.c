@@ -1,3 +1,4 @@
+#include "forward.h"
 #include "ft/forward.h"
 
 #include "ftSb_Init.h"
@@ -12,7 +13,7 @@
 
 MotionState ftSb_Init_MotionStateTable[] = {
     {
-        295,
+        ftSb_AnimId_Unk295,
         Ft_MF_None,
         (FtMoveId_Default << 24) | (1 << 22),
         ftSb_MS_341_Anim,

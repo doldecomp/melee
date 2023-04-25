@@ -63,4 +63,30 @@ typedef enum ftCaptain_MotionState {
     ftCa_MS_SpecialLw_Rebound,
 } ftCaptain_MotionState;
 
+typedef enum ftCa_AnimId {
+    ftCa_AnimId_SwordSwing4 = ftCo_AnimId_Count,
+    ftCa_AnimId_BatSwing4,
+    ftCa_AnimId_ParasolSwing4,
+    ftCa_AnimId_HarisenSwing4,
+    ftCa_AnimId_StarRodSwing4,
+    ftCa_AnimId_LipstickSwing4,
+    ftCa_AnimId_SpecialN,
+    ftCa_AnimId_SpecialAirN,
+    ftCa_AnimId_SpecialSStart,
+    ftCa_AnimId_SpecialS,
+    ftCa_AnimId_SpecialAirSStart,
+    ftCa_AnimId_SpecialAirS,
+    ftCa_AnimId_SpecialHi,
+    ftCa_AnimId_SpecialAirHi,
+    ftCa_AnimId_SpecialHiCatch,
+    ftCa_AnimId_SpecialHiThrow,
+    ftCa_AnimId_SpecialLw,
+    ftCa_AnimId_SpecialLwGroundEnd,
+    ftCa_AnimId_SpecialAirLwRebound,
+    ftCa_AnimId_SpecialAirLwGroundEnd,
+    ftCa_AnimId_SpecialAirLwEnd,
+    ftCa_AnimId_SpecialAirLwAirEnd,
+    ftCa_AnimId_SpecialLwRebound,
+} ftCa_AnimId;
+
 #endif

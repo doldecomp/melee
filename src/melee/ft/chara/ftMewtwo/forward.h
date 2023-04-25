@@ -61,4 +61,26 @@ typedef enum ftMewtwo_MotionState {
     ftMt_MS_SpecialAirLw,
 } ftMewtwo_MotionState;
 
+typedef enum ftMt_AnimId {
+    ftMt_AnimId_SpecialNStart = ftCo_AnimId_Count,
+    ftMt_AnimId_SpecialNLoop,
+    ftMt_AnimId_SpecialNFull,
+    ftMt_AnimId_SpecialNCancel,
+    ftMt_AnimId_SpecialNEnd,
+    ftMt_AnimId_SpecialAirNStart,
+    ftMt_AnimId_SpecialAirNLoop,
+    ftMt_AnimId_SpecialAirNFull,
+    ftMt_AnimId_SpecialAirNCancel,
+    ftMt_AnimId_SpecialAirNEnd,
+    ftMt_AnimId_SpecialS,
+    ftMt_AnimId_SpecialAirS,
+    ftMt_AnimId_SpecialHiStart,
+    ftMt_AnimId_SpecialHiLost,
+    ftMt_AnimId_Unk309,
+    ftMt_AnimId_SpecialAirHiStart,
+    ftMt_AnimId_SpecialAirHiLost,
+    ftMt_AnimId_SpecialLw,
+    ftMt_AnimId_SpecialAirLw,
+} ftMt_AnimId;
+
 #endif

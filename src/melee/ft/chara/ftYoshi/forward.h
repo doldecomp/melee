@@ -79,4 +79,26 @@ typedef enum ftYoshi_MotionState {
     ftYs_MS_Unk_368,
 } ftYoshi_MotionState;
 
+typedef enum ftYs_AnimId {
+    ftYs_AnimId_SpecialN = ftCo_AnimId_Count,
+    ftYs_AnimId_SpecialNCatch,
+    ftYs_AnimId_SpecialAirN,
+    ftYs_AnimId_SpecialAirNCatch,
+    ftYs_AnimId_SpecialS,
+    ftYs_AnimId_SpecialSEnd,
+    ftYs_AnimId_SpecialAirSStart,
+    ftYs_AnimId_SpecialAirS,
+    ftYs_AnimId_SpecialAirSRebound,
+    ftYs_AnimId_SpecialAirSEnd,
+    ftYs_AnimId_SpecialHi,
+    ftYs_AnimId_SpecialAirHi,
+    ftYs_AnimId_SpecialLw,
+    ftYs_AnimId_SpecialLwLand,
+    ftYs_AnimId_SpecialAirLw,
+    ftYs_AnimId_MS_365,
+    ftYs_AnimId_MS_366,
+    ftYs_AnimId_MS_367,
+    ftYs_AnimId_MS_368,
+} ftYs_AnimId;
+
 #endif

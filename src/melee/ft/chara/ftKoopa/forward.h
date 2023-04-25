@@ -65,4 +65,28 @@ typedef enum ftKoopa_MotionState {
     ftKp_MS_SpecialLwLanding,
 } ftKoopa_MotionState;
 
+typedef enum ftKp_AnimId {
+    ftKp_AnimId_SpecialNStart = ftCo_AnimId_Count,
+    ftKp_AnimId_SpecialNLoop,
+    ftKp_AnimId_SpecialNEnd,
+    ftKp_AnimId_SpecialAirNStart,
+    ftKp_AnimId_SpecialAirNLoop,
+    ftKp_AnimId_SpecialAirNEnd,
+    ftKp_AnimId_SpecialS,
+    ftKp_AnimId_Unk302,
+    ftKp_AnimId_SpecialSCatch1,
+    ftKp_AnimId_SpecialSThrowF,
+    ftKp_AnimId_SpecialSThrowB,
+    ftKp_AnimId_SpecialAirS,
+    ftKp_AnimId_Unk307,
+    ftKp_AnimId_SpecialAirSCatch1,
+    ftKp_AnimId_SpecialAirSThrowF,
+    ftKp_AnimId_SpecialAirSThrowB,
+    ftKp_AnimId_SpecialHi,
+    ftKp_AnimId_SpecialAirHi,
+    ftKp_AnimId_SpecialLwStart,
+    ftKp_AnimId_SpecialAirLw,
+    ftKp_AnimId_SpecialLwLanding,
+} ftKp_AnimId;
+
 #endif

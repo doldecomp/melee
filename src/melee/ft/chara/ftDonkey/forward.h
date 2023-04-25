@@ -51,10 +51,10 @@ static MotionFlags const ftDk_MF_CargoThrowF ATTRIBUTE_USED =
 static MotionFlags const ftDk_MF_CargoThrowB ATTRIBUTE_USED =
     ftDk_MF_CargoThrow | Ft_MF_KeepGfx;
 
-static MotionFlags const ftDk_MF_CargoThrowU ATTRIBUTE_USED =
+static MotionFlags const ftDk_MF_CargoThrowHi ATTRIBUTE_USED =
     ftDk_MF_CargoThrow | Ft_MF_KeepFastFall | Ft_MF_KeepGfx;
 
-static MotionFlags const ftDk_MF_CargoThrowD ATTRIBUTE_USED =
+static MotionFlags const ftDk_MF_CargoThrowLw ATTRIBUTE_USED =
     ftDk_MF_CargoThrow | Ft_MF_KeepColAnimHitStatus;
 
 static MotionFlags const ftDk_MF_CargoWait ATTRIBUTE_USED =
@@ -115,12 +115,12 @@ typedef enum ftDk_MotionState {
     ftDk_MS_Unk360,
     ftDk_MS_CargoThrowF,
     ftDk_MS_CargoThrowB,
-    ftDk_MS_CargoThrowU,
-    ftDk_MS_CargoThrowD,
+    ftDk_MS_CargoThrowHi,
+    ftDk_MS_CargoThrowLw,
     ftDk_MS_CargoAirThrowF,
     ftDk_MS_CargoAirThrowB,
-    ftDk_MS_CargoAirThrowU,
-    ftDk_MS_CargoAirThrowD,
+    ftDk_MS_CargoAirThrowHi,
+    ftDk_MS_CargoAirThrowLw,
     ftDk_MS_SpecialNChargeStart,
     ftDk_MS_SpecialNChargeLoop,
     ftDk_MS_SpecialNChargeStop,
@@ -140,5 +140,50 @@ typedef enum ftDk_MotionState {
     ftDk_MS_SpecialLwEnd,
     ftDk_MS_Unk386,
 } ftDk_MotionState;
+
+typedef enum ftDk_AnimId {
+    ftDk_AnimId_MS_341 = ftCo_AnimId_Count,
+    ftDk_AnimId_Unk296,
+    ftDk_AnimId_MS_342_0,
+    ftDk_AnimId_MS_342_1,
+    ftDk_AnimId_MS_345,
+    ftDk_AnimId_MS_346,
+    ftDk_AnimId_MS_347,
+    ftDk_AnimId_Unk302,
+    ftDk_AnimId_MS_349,
+    ftDk_AnimId_MS_350,
+    ftDk_AnimId_CargoWait,
+    ftDk_AnimId_CargoWalk0,
+    ftDk_AnimId_CargoWalk1,
+    ftDk_AnimId_CargoWalk2,
+    ftDk_AnimId_CargoTurn,
+    ftDk_AnimId_Unk310,
+    ftDk_AnimId_CargoFall,
+    ftDk_AnimId_CargoJump,
+    ftDk_AnimId_CargoLanding,
+    ftDk_AnimId_MS_360,
+    ftDk_AnimId_CargoThrowF,
+    ftDk_AnimId_CargoThrowB,
+    ftDk_AnimId_CargoThrowHi,
+    ftDk_AnimId_CargoThrowLw,
+    ftDk_AnimId_SpecialNChargeStart,
+    ftDk_AnimId_SpecialNChargeLoop,
+    ftDk_AnimId_SpecialNChargeStop,
+    ftDk_AnimId_SpecialNEarlyRelease,
+    ftDk_AnimId_SpecialNFullRelease,
+    ftDk_AnimId_SpecialAirNChargeStart,
+    ftDk_AnimId_SpecialAirNChargeLoop,
+    ftDk_AnimId_SpecialAirNChargeStop,
+    ftDk_AnimId_SpecialAirNEarlyRelease,
+    ftDk_AnimId_SpecialAirNFullRelease,
+    ftDk_AnimId_SpecialS,
+    ftDk_AnimId_SpecialAirS,
+    ftDk_AnimId_SpecialHi,
+    ftDk_AnimId_SpecialAirHi,
+    ftDk_AnimId_SpecialLwStart,
+    ftDk_AnimId_SpecialLwLoop,
+    ftDk_AnimId_SpecialLwEnd,
+    ftDk_AnimId_MS_386,
+} ftDk_AnimId;
 
 #endif
