@@ -19,7 +19,7 @@
 
 MotionState ftDr_Init_MotionStateTable[] = {
     {
-        ftCo_AnimId_AppealR,
+        ftCo_SM_AppealR,
         ftDr_MF_Appeal,
         FtMoveId_Default << 24,
         ftDr_Appeal_Anim,
@@ -29,7 +29,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftCo_AnimId_AppealL,
+        ftCo_SM_AppealL,
         ftDr_MF_Appeal,
         FtMoveId_Default << 24,
         ftDr_Appeal_Anim,
@@ -39,7 +39,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftMr_AnimId_SpecialN,
+        ftMr_SM_SpecialN,
         ftMr_MF_SpecialN,
         FtMoveId_SpecialN << 24,
         ftMr_SpecialN_Anim,
@@ -49,7 +49,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftMr_AnimId_SpecialAirN,
+        ftMr_SM_SpecialAirN,
         ftMr_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
         ftMr_SpecialAirN_Anim,
@@ -59,7 +59,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftMr_AnimId_SpecialS,
+        ftMr_SM_SpecialS,
         ftMr_MF_SpecialS,
         FtMoveId_SpecialS << 24,
         ftMr_SpecialS_Anim,
@@ -69,7 +69,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftMr_AnimId_SpecialAirS,
+        ftMr_SM_SpecialAirS,
         ftMr_MF_SpecialS,
         FtMoveId_SpecialS << 24,
         ftMr_SpecialAirS_Anim,
@@ -79,7 +79,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftMr_AnimId_SpecialHi,
+        ftMr_SM_SpecialHi,
         ftMr_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
         ftMr_SpecialHi_Anim,
@@ -89,7 +89,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftMr_AnimId_SpecialAirHi,
+        ftMr_SM_SpecialAirHi,
         ftMr_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
         ftMr_SpecialAirHi_Anim,
@@ -99,7 +99,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftMr_AnimId_SpecialLw,
+        ftMr_SM_SpecialLw,
         ftMr_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
         ftMr_SpecialLw_Anim,
@@ -109,7 +109,7 @@ MotionState ftDr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftMr_AnimId_SpecialAirLw,
+        ftMr_SM_SpecialAirLw,
         ftMr_MF_SpecialAirLw,
         FtMoveId_SpecialLw << 24,
         ftMr_SpecialAirLw_Anim,

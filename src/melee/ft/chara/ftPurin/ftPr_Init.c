@@ -29,7 +29,7 @@
 
 MotionState ftPr_Init_MotionStateTable[] = {
     {
-        ftPr_AnimId_MultiJump0,
+        ftPr_SM_JumpAerialF1,
         Ft_MF_None,
         FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
@@ -39,7 +39,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_MultiJump1,
+        ftPr_SM_JumpAerialF2,
         Ft_MF_None,
         FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
@@ -49,7 +49,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_MultiJump2,
+        ftPr_SM_JumpAerialF3,
         Ft_MF_None,
         FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
@@ -59,7 +59,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_MultiJump3,
+        ftPr_SM_JumpAerialF4,
         Ft_MF_None,
         FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
@@ -69,7 +69,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_MultiJump4,
+        ftPr_SM_JumpAerialF5,
         Ft_MF_None,
         FtMoveId_Default << 24,
         ftCo_MultiJump_Anim,
@@ -79,7 +79,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialNChargeStart0,
+        ftPr_SM_SpecialNStartR,
         ftPr_MF_SpecialN,
         FtMoveId_SpecialN << 24,
         ftPr_SpecialNChargeStart_Anim,
@@ -89,7 +89,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialNChargeStart1,
+        ftPr_SM_SpecialNStartL,
         ftPr_MF_SpecialN,
         FtMoveId_SpecialN << 24,
         ftPr_SpecialNChargeStart_Anim,
@@ -99,7 +99,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialNChargeLoop,
+        ftPr_SM_SpecialNChargeLoop,
         ftPr_MF_SpecialNCharged,
         FtMoveId_SpecialN << 24,
         ftPr_SpecialNChargeLoop_Anim,
@@ -109,7 +109,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialNChargeFull,
+        ftPr_SM_SpecialNChargeFull,
         ftPr_MF_SpecialNCharged,
         FtMoveId_SpecialN << 24,
         ftPr_SpecialNChargeFull_Anim,
@@ -119,7 +119,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialNChargeRelease,
+        ftPr_SM_SpecialNChargeRelease,
         ftPr_MF_SpecialN,
         FtMoveId_SpecialN << 24,
         ftPr_SpecialNChargeRelease_Anim,
@@ -129,7 +129,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialNStartTurn,
+        ftPr_SM_SpecialNStartTurn,
         ftPr_MF_SpecialN,
         FtMoveId_SpecialN << 24,
         ftPr_SpecialNStartTurn_Anim,
@@ -139,7 +139,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialNEnd0,
+        ftPr_SM_SpecialNEndR,
         ftPr_MF_SpecialN,
         FtMoveId_SpecialN << 24,
         ftPr_SpecialNEnd_Anim,
@@ -149,7 +149,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialNEnd1,
+        ftPr_SM_SpecialNEndL,
         ftPr_MF_SpecialN,
         FtMoveId_SpecialN << 24,
         ftPr_SpecialNEnd_Anim,
@@ -159,7 +159,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialAirNChargeStart0,
+        ftPr_SM_SpecialAirNStartR,
         ftPr_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
         ftPr_SpecialAirNChargeStart_Anim,
@@ -169,7 +169,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialAirNChargeStart1,
+        ftPr_SM_SpecialAirNStartL,
         ftPr_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
         ftPr_SpecialAirNChargeStart_Anim,
@@ -179,7 +179,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialAirNChargeLoop,
+        ftPr_SM_SpecialAirNChargeLoop,
         ftPr_SpecialAirNCharged,
         FtMoveId_SpecialN << 24,
         ftPr_SpecialAirNChargeLoop_Anim,
@@ -189,7 +189,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialAirNChargeFull,
+        ftPr_SM_SpecialAirNChargeFull,
         ftPr_SpecialAirNCharged,
         FtMoveId_SpecialN << 24,
         ftPr_SpecialAirNChargeFull_Anim,
@@ -199,7 +199,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialAirNChargeRelease,
+        ftPr_SM_SpecialAirNChargeRelease,
         ftPr_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
         ftPr_SpecialAirNChargeRelease_Anim,
@@ -209,7 +209,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialAirNStartTurn,
+        ftPr_SM_SpecialAirNStartTurn,
         ftPr_MF_SpecialN,
         FtMoveId_SpecialN << 24,
         ftPr_SpecialAirNStartTurn_Anim,
@@ -219,7 +219,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialAirNEnd0,
+        ftPr_SM_SpecialAirNEndR,
         ftPr_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
         ftPr_SpecialAirNEnd_Anim,
@@ -229,7 +229,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialAirNEnd1,
+        ftPr_SM_SpecialAirNEndL,
         ftPr_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
         ftPr_SpecialAirNEnd_Anim,
@@ -239,7 +239,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialNHit,
+        ftPr_SM_SpecialNHit,
         ftPr_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
         ftPr_SpecialNHit_Anim,
@@ -249,7 +249,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialS,
+        ftPr_SM_SpecialS,
         ftPr_MF_SpecialS,
         FtMoveId_SpecialS << 24,
         ftPr_SpecialS_Anim,
@@ -259,7 +259,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialAirS,
+        ftPr_SM_SpecialAirS,
         ftPr_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
         ftPr_SpecialAirS_Anim,
@@ -269,7 +269,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialHi0,
+        ftPr_SM_SpecialHiL,
         ftPr_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
         ftPr_SpecialHi_Anim,
@@ -279,7 +279,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialAirHi0,
+        ftPr_SM_SpecialAirHiL,
         ftPr_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
         ftPr_SpecialAirHi_Anim,
@@ -289,7 +289,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialHi1,
+        ftPr_SM_SpecialHiR,
         ftPr_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
         ftPr_SpecialHi_Anim,
@@ -299,7 +299,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialAirHi1,
+        ftPr_SM_SpecialAirHiR,
         ftPr_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
         ftPr_SpecialAirHi_Anim,
@@ -309,7 +309,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialLw0,
+        ftPr_SM_SpecialLwL,
         ftPr_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
         ftPr_SpecialLw_Anim,
@@ -319,7 +319,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialAirLw0,
+        ftPr_SM_SpecialAirLwL,
         ftPr_MF_SpecialAirLw,
         FtMoveId_SpecialLw << 24,
         ftPr_SpecialAirLw_Anim,
@@ -329,7 +329,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialLw1,
+        ftPr_SM_SpecialLwR,
         ftPr_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
         ftPr_SpecialLw_Anim,
@@ -339,7 +339,7 @@ MotionState ftPr_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftPr_AnimId_SpecialAirLw1,
+        ftPr_SM_SpecialAirLwR,
         ftPr_MF_SpecialAirLw,
         FtMoveId_SpecialLw << 24,
         ftPr_SpecialAirLw_Anim,

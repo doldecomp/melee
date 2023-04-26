@@ -36,7 +36,7 @@ u32 it_802B1DF8(HSD_GObj*, Vec3*, Vec3*, s32, s32, s32);
 s32 it_802B1FC8(u32);
 void it_802B1FE8(u32, Vec3*);
 void it_802B56E4(HSD_GObj*, Vec3*, f32, f32, f32);
-void* it_802C8B28(HSD_GObj*, Vec3*, u32, f32);
+HSD_GObj* it_802C8B28(HSD_GObj*, Vec3*, u32, f32);
 void it_802D8618(s32, Vec3*, s32, s32);
 u32 it_802F0340(HSD_GObj*, Vec3*, Vec3*, u32, u32, f32);
 void it_802F046C(s32);
@@ -47,7 +47,7 @@ void it_802F0AE0(HSD_GObj* fighter_gobj, Vec3*, Vec3*, enum_t, bool,
 void it_802C0DBC(u32 arg0);
 
 u32 it_802C0850(HSD_GObj*, Vec3*, u32, s32, f32 facing_direction);
-void it_802C8C34(u32);
+void it_802C8C34(HSD_GObj*);
 
 void it_8029C6A4(f32, f32, HSD_GObj*, Vec3*, s32);
 void it_802AE1D0(HSD_GObj*);

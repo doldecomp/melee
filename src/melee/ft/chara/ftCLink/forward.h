@@ -1,7 +1,6 @@
 #ifndef MELEE_FT_CHARA_FTCLINK_FORWARD_H
 #define MELEE_FT_CHARA_FTCLINK_FORWARD_H
 
-#include <platform.h>
 #include "ft/forward.h"
 
 static MotionFlags const ftCl_MF_Zair ATTRIBUTE_USED =

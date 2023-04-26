@@ -1,4 +1,3 @@
-
 set colorcolumn=80
 highlight colorcolumn ctermbg=darkgray
 

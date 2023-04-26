@@ -12,27 +12,27 @@
 
 void ftCl_Appeal_Anim(HSD_GObj* gobj)
 {
-    void* temp_r3;
-    Fighter* fp;
-    Fighter* ft2;
+    /// @todo There might be only one @c Fighter* here.
+    Fighter* fp0;
+    Fighter* fp1;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[16];
 #endif
 
-    fp = ft2 = gobj->user_data;
+    fp0 = fp1 = gobj->user_data;
 
-    if (fp->x2204_ftcmd_var1 == 1 && fp->fv.cl.x2244 == 0) {
-        temp_r3 = it_802C8B28(gobj, &fp->cur_pos,
-                              ftParts_8007500C(ft2, FtPart_LThumbNb),
-                              fp->facing_dir);
-        fp->fv.cl.x2244 = (u32) temp_r3;
-        if (temp_r3 != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = ftLk_800EAF58;
-            fp->cb.x21DC_callback_OnTakeDamage = ftLk_800EAF58;
+    if (fp0->x2204_ftcmd_var1 == 1 && fp1->fv.cl.x2244 == 0) {
+        HSD_GObj* item_gobj = it_802C8B28(
+            gobj, &fp0->cur_pos, ftParts_8007500C(fp1, FtPart_LThumbNb),
+            fp0->facing_dir);
+        fp0->fv.cl.x2244 = item_gobj;
+        if (item_gobj != NULL) {
+            fp0->cb.x21E4_callback_OnDeath2 = ftLk_800EAF58;
+            fp0->cb.x21DC_callback_OnTakeDamage = ftLk_800EAF58;
         }
-    } else if (ft2->x2204_ftcmd_var1 == 2) {
+    } else if (fp1->x2204_ftcmd_var1 == 2) {
         ftCl_Init_80149268(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {

@@ -61,26 +61,26 @@ typedef enum ftMewtwo_MotionState {
     ftMt_MS_SpecialAirLw,
 } ftMewtwo_MotionState;
 
-typedef enum ftMt_AnimId {
-    ftMt_AnimId_SpecialNStart = ftCo_AnimId_Count,
-    ftMt_AnimId_SpecialNLoop,
-    ftMt_AnimId_SpecialNFull,
-    ftMt_AnimId_SpecialNCancel,
-    ftMt_AnimId_SpecialNEnd,
-    ftMt_AnimId_SpecialAirNStart,
-    ftMt_AnimId_SpecialAirNLoop,
-    ftMt_AnimId_SpecialAirNFull,
-    ftMt_AnimId_SpecialAirNCancel,
-    ftMt_AnimId_SpecialAirNEnd,
-    ftMt_AnimId_SpecialS,
-    ftMt_AnimId_SpecialAirS,
-    ftMt_AnimId_SpecialHiStart,
-    ftMt_AnimId_SpecialHiLost,
-    ftMt_AnimId_Unk309,
-    ftMt_AnimId_SpecialAirHiStart,
-    ftMt_AnimId_SpecialAirHiLost,
-    ftMt_AnimId_SpecialLw,
-    ftMt_AnimId_SpecialAirLw,
-} ftMt_AnimId;
+typedef enum ftMt_Submotion {
+    ftMt_SM_SpecialNStart = ftCo_SM_Count,
+    ftMt_SM_SpecialNLoop,
+    ftMt_SM_SpecialNLoopFull,
+    ftMt_SM_SpecialNCancel,
+    ftMt_SM_SpecialNEnd,
+    ftMt_SM_SpecialAirNStart,
+    ftMt_SM_SpecialAirNLoop,
+    ftMt_SM_SpecialAirNLoopFull,
+    ftMt_SM_SpecialAirNCancel,
+    ftMt_SM_SpecialAirNEnd,
+    ftMt_SM_SpecialS,
+    ftMt_SM_SpecialAirS,
+    ftMt_SM_SpecialHiStart,
+    ftMt_SM_SpecialHi,
+    ftMt_SM_SpecialHiLost,
+    ftMt_SM_SpecialAirHiStart,
+    ftMt_SM_SpecialAirHi,
+    ftMt_SM_SpecialLw,
+    ftMt_SM_SpecialAirLw,
+} ftMt_Submotion;
 
 #endif

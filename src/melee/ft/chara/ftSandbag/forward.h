@@ -3,8 +3,8 @@
 
 #include "ftCommon/forward.h"
 
-typedef enum ftSb_AnimId {
-    ftSb_AnimId_Unk295 = ftCo_AnimId_Count,
-} ftSb_AnimId;
+typedef enum ftSb_Submotion {
+    ftSb_SM_WaitReverse = ftCo_SM_Count,
+} ftSb_Submotion;
 
 #endif
