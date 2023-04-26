@@ -1,3 +1,4 @@
+#include "ftCrazyHand/forward.h"
 #include "ftMasterHand/forward.h"
 
 #include "ftCh_Init.h"
@@ -11,7 +12,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-MotionState ftCh_Init_MotionStateTable[ftMh_MS_SelfCount - 1] = {
+MotionState ftCh_Init_MotionStateTable[ftCh_MS_SelfCount] = {
     {
         // ftMh_MS_Wait1_0 = 341
         ftMh_SM_Wait1_0,
