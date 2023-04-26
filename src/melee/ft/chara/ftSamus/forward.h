@@ -80,7 +80,7 @@ typedef enum ftSs_Submotion {
     ftSs_SM_SpecialAirNStart,
     ftSs_SM_SpecialAirN,
     ftSs_SM_SpecialS,
-    ftSs_SM_Special,
+    ftSs_SM_SpecialSSmash,
     ftSs_SM_SpecialAirS,
     ftSs_SM_SpecialAirSSmash,
     ftSs_SM_SpecialHi,

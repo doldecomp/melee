@@ -112,7 +112,7 @@ MotionState ftSs_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftSs_SM_Special,
+        ftSs_SM_SpecialSSmash,
         ftSs_MF_SpecialSSmash,
         FtMoveId_SpecialS << 24,
         ftSs_SpecialSSmash_Anim,
