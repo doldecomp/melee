@@ -30,8 +30,8 @@ static MotionFlags const ftMr_MF_SpecialS ATTRIBUTE_USED =
     ftMr_MF_Special | Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipColAnim;
 
 typedef enum ftMario_MotionState {
-    ftMr_MS_AppealR = ftCo_MS_Count,
-    ftMr_MS_AppealL,
+    ftMr_MS_AppealSR = ftCo_MS_Count,
+    ftMr_MS_AppealSL,
     ftMr_MS_SpecialN,
     ftMr_MS_SpecialAirN,
     ftMr_MS_SpecialS,

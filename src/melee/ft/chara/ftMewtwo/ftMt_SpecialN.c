@@ -57,12 +57,12 @@ bool ftMt_SpecialN_CheckShadowBallRemove(HSD_GObj* gobj)
         switch (msid) {
         case ftMt_MS_SpecialNStart:
         case ftMt_MS_SpecialNLoop:
-        case ftMt_MS_SpecialNFull:
+        case ftMt_MS_SpecialNLoopFull:
         case ftMt_MS_SpecialNCancel:
         case ftMt_MS_SpecialNEnd:
         case ftMt_MS_SpecialAirNStart:
         case ftMt_MS_SpecialAirNLoop:
-        case ftMt_MS_SpecialAirNFull:
+        case ftMt_MS_SpecialAirNLoopFull:
         case ftMt_MS_SpecialAirNCancel:
         case ftMt_MS_SpecialAirNEnd:
 
@@ -87,11 +87,11 @@ bool ftMt_SpecialN_CheckShadowBallCancel(HSD_GObj* gobj)
         switch (msid) {
         case ftMt_MS_SpecialNStart:
         case ftMt_MS_SpecialNLoop:
-        case ftMt_MS_SpecialNFull:
+        case ftMt_MS_SpecialNLoopFull:
         case ftMt_MS_SpecialNEnd:
         case ftMt_MS_SpecialAirNStart:
         case ftMt_MS_SpecialAirNLoop:
-        case ftMt_MS_SpecialAirNFull:
+        case ftMt_MS_SpecialAirNLoopFull:
         case ftMt_MS_SpecialAirNEnd:
             return false;
 
@@ -568,7 +568,7 @@ void ftMt_SpecialNLoop_Anim(HSD_GObj* gobj)
                 if ((f32) fp->fv.mt.x2234_shadowBallCharge >=
                     mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
                 {
-                    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialNFull,
+                    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialNLoopFull,
                                               FTMEWTWO_SPECIALN_ACTION_FLAG,
                                               NULL, fp->x894_currentAnimFrame,
                                               1.0f, 0.0f);
@@ -721,10 +721,10 @@ void ftMt_SpecialAirNLoop_Anim(HSD_GObj* gobj)
                 if ((f32) fp->fv.mt.x2234_shadowBallCharge >=
                     mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
                 {
-                    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirNFull,
-                                              FTMEWTWO_SPECIALN_ACTION_FLAG,
-                                              NULL, fp->x894_currentAnimFrame,
-                                              1.0f, 0.0f);
+                    Fighter_ChangeMotionState(
+                        gobj, ftMt_MS_SpecialAirNLoopFull,
+                        FTMEWTWO_SPECIALN_ACTION_FLAG, NULL,
+                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
                     fp->fv.mt.x2234_shadowBallCharge =
                         (s32) mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
                     fp->mv.mt.SpecialN.x2348 = 1;
@@ -1081,7 +1081,7 @@ void ftMt_SpecialNFull_Coll(HSD_GObj* gobj)
     if (ft_80082708(gobj) == false) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(
-            gobj, ftMt_MS_SpecialAirNFull,
+            gobj, ftMt_MS_SpecialAirNLoopFull,
             (Ft_MF_KeepSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
             fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftMewtwo_SpecialN_SetCall(gobj);
@@ -1178,7 +1178,7 @@ void ftMt_SpecialAirNFull_Coll(HSD_GObj* gobj)
     if (ft_80081D0C(gobj) == true) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(
-            gobj, ftMt_MS_SpecialNFull,
+            gobj, ftMt_MS_SpecialNLoopFull,
             (Ft_MF_KeepSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
             fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftMewtwo_SpecialN_SetCall(gobj);

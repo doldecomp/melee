@@ -34,6 +34,6 @@ void ftMh_MS_348_80151BB8(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Sweep_StartMotion, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Slap, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 }

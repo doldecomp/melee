@@ -96,8 +96,7 @@ bool ftGw_SpecialLw_ItemCheckPanicRemove(HSD_GObj* gobj)
     /// @todo @c enum
     enum_t msid = fp->motion_id;
 
-    if (msid >= ftGw_MS_SpecialLw_Shoot && msid <= ftGw_MS_SpecialAirLw_Shoot)
-    {
+    if (msid >= ftGw_MS_SpecialLwShoot && msid <= ftGw_MS_SpecialAirLwShoot) {
         return false;
     }
 
@@ -549,7 +548,7 @@ void ftGw_SpecialLwCatch_GroundToAir(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw_Catch,
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLwCatch,
                               transition_flags0, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
 }
@@ -560,7 +559,7 @@ void ftGw_SpecialAirLwCatch_AirToGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw_Catch, transition_flags0,
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLwCatch, transition_flags0,
                               NULL, fp->x894_currentAnimFrame, 1, 0);
 }
 
@@ -580,9 +579,9 @@ void ftGw_SpecialLw_AbsorbThink_DecideAction(HSD_GObj* gobj)
     }
 
     if (fp->ground_or_air == GA_Ground) {
-        msid = ftGw_MS_SpecialLw_Catch;
+        msid = ftGw_MS_SpecialLwCatch;
     } else {
-        msid = ftGw_MS_SpecialAirLw_Catch;
+        msid = ftGw_MS_SpecialAirLwCatch;
     }
 
     Fighter_ChangeMotionState(gobj, msid, 0, NULL, 0, 1, 0);
@@ -673,7 +672,7 @@ void ftGw_SpecialLwShoot_GroundToAir(HSD_GObj* gobj)
 
     ftCommon_8007D5D4(fp);
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw_Shoot,
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLwShoot,
                               transition_flags0, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
 
@@ -688,7 +687,7 @@ void ftGw_SpecialAirLwShoot_AirToGround(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw_Shoot, transition_flags0,
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLwShoot, transition_flags0,
                               NULL, fp->x894_currentAnimFrame, 1, 0);
 
     ftGw_SpecialLw_UpdateBucketModel(gobj);
@@ -706,7 +705,7 @@ void ftGw_SpecialLwShoot_ReleaseOil(HSD_GObj* gobj)
     /// @todo Shared @c inline with #ftGw_SpecialAirLwShoot_ReleaseOil
     /// @todo Please for the love of god stop copy-pasting code
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw_Shoot, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLwShoot, 0, NULL, 0, 1, 0);
 
     ftAnim_8006EBA4(gobj);
 
@@ -742,7 +741,7 @@ void ftGw_SpecialAirLwShoot_ReleaseOil(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw_Shoot, 0, NULL, 0, 1,
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLwShoot, 0, NULL, 0, 1,
                               0);
 
     ftAnim_8006EBA4(gobj);

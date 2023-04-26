@@ -16,7 +16,7 @@ void ftMh_MS_343_801510B0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Unk343, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Entry, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     fp->cur_pos.x = attr->x30_pos2.x;
     fp->cur_pos.y = attr->x30_pos2.y;
@@ -35,7 +35,7 @@ void ftMh_MS_343_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        fp->fv.mh.x2258 = ftMh_MS_Unk341;
+        fp->fv.mh.x2258 = ftMh_MS_Wait1_0;
         ftMh_MS_389_80151018(gobj);
     }
 }

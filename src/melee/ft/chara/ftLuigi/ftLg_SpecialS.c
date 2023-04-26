@@ -455,9 +455,8 @@ void ftLg_SpecialSLaunch_GroundToAir(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
 
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirSLaunch,
-                              transition_flags2, NULL,
-                              fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirS, transition_flags2,
+                              NULL, fp->x894_currentAnimFrame, 1, 0);
 }
 
 /// Luigi's Green Missile Launch air -> ground Motion State handler
@@ -466,8 +465,8 @@ void ftLg_SpecialAirSLaunch_AirToGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialSLaunch, transition_flags2,
-                              NULL, fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialS, transition_flags2, NULL,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 static inline void ftLuigi_SpecialS_RemoveGFX(HSD_GObj* gobj)
@@ -507,7 +506,7 @@ void ftLg_SpecialSLaunch_Enter(HSD_GObj* gobj)
         return;
     }
 
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialSLaunch, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialS, 0, NULL, 0, 1, 0);
 
     ftLuigi_SpecialS_RemoveGFX(gobj);
     ftLuigi_SpecialS_Setup(gobj);
@@ -523,8 +522,7 @@ void ftLg_SpecialAirSLaunch_Enter(HSD_GObj* gobj)
         return;
     }
 
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirSLaunch, 0, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirS, 0, NULL, 0, 1, 0);
 
     ftLuigi_SpecialS_RemoveGFX(gobj);
     ftLuigi_SpecialS_Setup(gobj);
@@ -778,7 +776,7 @@ void ftLg_SpecialSFly_Enter(HSD_GObj* gobj)
                      sa->xC_LUIGI_GREENMISSILE_MAX_CHARGE_FRAMES);
     }
 
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirSFly, transition_flags3,
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirS2, transition_flags3,
                               NULL, fp->x894_currentAnimFrame, 1, 0);
 
     fp->cb.x21F8_callback = ftCommon_8007F76C;

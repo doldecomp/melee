@@ -19,29 +19,31 @@ void ftMh_MS_389_80150C8C(HSD_GObj* gobj)
 {
     /// @todo the @c #pragma above is preventing use of #GET_FIGHTER.
     Fighter* fp = gobj->user_data;
-    if (fp->fv.mh.x2258 == ftMh_MS_Unk341 || fp->fv.mh.x2258 == ftMh_MS_Unk389)
+    if (fp->fv.mh.x2258 == ftMh_MS_Wait1_0 ||
+        fp->fv.mh.x2258 == ftMh_MS_Wait1_2)
     {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Unk389, 0, 0,
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_2, 0, 0,
                                   fp->x894_currentAnimFrame, 1, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Unk389, 0, 0, 0, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_2, 0, 0, 0, 1, 0);
         ftAnim_8006EBA4(gobj);
     }
-    fp->fv.mh.x2258 = ftMh_MS_Unk389;
+    fp->fv.mh.x2258 = ftMh_MS_Wait1_2;
 }
 
 void ftMh_MS_389_80150D28(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->fv.mh.x2258 == ftMh_MS_Unk342 || fp->fv.mh.x2258 == ftMh_MS_Unk390)
+    if (fp->fv.mh.x2258 == ftMh_MS_Wait2_0 ||
+        fp->fv.mh.x2258 == ftMh_MS_Wait2_1)
     {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Unk390, 0, 0,
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_1, 0, 0,
                                   fp->x894_currentAnimFrame, 1, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Unk390, 0, 0, 0, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_1, 0, 0, 0, 1, 0);
         ftAnim_8006EBA4(gobj);
     }
-    fp->fv.mh.x2258 = ftMh_MS_Unk390;
+    fp->fv.mh.x2258 = ftMh_MS_Wait2_1;
 }
 #ifdef MUST_MATCH
 #pragma pop
@@ -54,28 +56,28 @@ void ftMh_MS_389_80150DC4(HSD_GObj* gobj, HSD_GObjEvent cb, Vec3* pos)
 #ifdef MUST_MATCH
     u8 _[16];
 #endif
-    if (fp->fv.mh.x2258 == ftMh_MS_Unk342) {
-        if ((fp->fv.mh.x2258 == ftMh_MS_Unk342) ||
-            (fp->fv.mh.x2258 == ftMh_MS_Unk390))
+    if (fp->fv.mh.x2258 == ftMh_MS_Wait2_0) {
+        if ((fp->fv.mh.x2258 == ftMh_MS_Wait2_0) ||
+            (fp->fv.mh.x2258 == ftMh_MS_Wait2_1))
         {
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Unk390, 0, 0,
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_1, 0, 0,
                                       fp->x894_currentAnimFrame, 1, 0);
         } else {
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Unk390, 0, 0, 0, 1, 0);
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_1, 0, 0, 0, 1, 0);
             ftAnim_8006EBA4(gobj);
         }
-        fp->fv.mh.x2258 = ftMh_MS_Unk390;
+        fp->fv.mh.x2258 = ftMh_MS_Wait2_1;
     } else {
-        if (fp->fv.mh.x2258 == ftMh_MS_Unk341 ||
-            fp->fv.mh.x2258 == ftMh_MS_Unk389)
+        if (fp->fv.mh.x2258 == ftMh_MS_Wait1_0 ||
+            fp->fv.mh.x2258 == ftMh_MS_Wait1_2)
         {
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Unk389, 0, 0,
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_2, 0, 0,
                                       fp->x894_currentAnimFrame, 1, 0);
         } else {
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Unk389, 0, 0, 0, 1, 0);
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_2, 0, 0, 0, 1, 0);
             ftAnim_8006EBA4(gobj);
         }
-        fp->fv.mh.x2258 = ftMh_MS_Unk389;
+        fp->fv.mh.x2258 = ftMh_MS_Wait1_2;
     }
     fp->mv.mh.unk0.x4 = cb;
     fp->mv.mh.unk0.xC = *pos;
@@ -89,8 +91,8 @@ void ftMh_MS_389_Anim(HSD_GObj* gobj)
 #endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        fp->fv.mh.x2258 = ftMh_MS_Unk389;
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Unk389, 0, 0, 0, 1, 0);
+        fp->fv.mh.x2258 = ftMh_MS_Wait1_2;
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_2, 0, 0, 0, 1, 0);
         ftAnim_8006EBA4(gobj);
     }
 }
@@ -131,10 +133,10 @@ void ftMh_MS_389_80151018(HSD_GObj* gobj)
         pos.x = attr->x30_pos2.x;
         pos.y = attr->x30_pos2.y;
         pos.z = 0;
-        fp->fv.mh.x2258 = ftMh_MS_Unk390;
+        fp->fv.mh.x2258 = ftMh_MS_Wait2_1;
         {
             Fighter* fp = GET_FIGHTER(gobj);
-            if (fp->fv.mh.x2258 == ftMh_MS_Unk342) {
+            if (fp->fv.mh.x2258 == ftMh_MS_Wait2_0) {
                 ftMh_MS_389_80150D28(gobj);
             } else {
                 ftMh_MS_389_80150C8C(gobj);

@@ -45,29 +45,22 @@ static MotionFlags const ftSs_MF_ZairCatch ATTRIBUTE_USED =
 typedef enum ftSamus_MotionState {
     ftSs_MS_SpecialLw = ftCo_MS_Count,
     ftSs_MS_SpecialAirLw,
-    ftSs_MS_SpecialN_Start,
-    ftSs_MS_SpecialN_Loop,
-    ftSs_MS_SpecialN_End,
-    ftSs_MS_SpecialN_Shoot,
-    ftSs_MS_SpecialAirN_Start,
-    ftSs_MS_SpecialAirN_Shoot,
+    ftSs_MS_SpecialNStart,
+    ftSs_MS_SpecialNHold,
+    ftSs_MS_SpecialNCancel,
+    ftSs_MS_SpecialN,
+    ftSs_MS_SpecialAirNStart,
+    ftSs_MS_SpecialAirN,
     ftSs_MS_SpecialS,
-
-    /// @todo name
-    ftSs_MS_SpecialS_Smash,
-
+    ftSs_MS_SpecialSSmash,
     ftSs_MS_SpecialAirS,
-    ftSs_MS_SpecialAir_Smash,
+    ftSs_MS_SpecialAirSSmash,
     ftSs_MS_SpecialHi,
     ftSs_MS_SpecialAirHi,
-
-    /// @todo name
-    ftSs_MS_SpecialLw_BombEnd,
-    ftSs_MS_SpecialAirLw_Bomb,
-
-    /// @todo name
-    ftSs_MS_Zair,
-    ftSs_MS_ZairCatch,
+    ftSs_MS_SpecialLwBomb,
+    ftSs_MS_SpecialAirLwBomb,
+    ftSs_MS_AirCatch,
+    ftSs_MS_AirCatchHit,
 } ftSamus_MotionState;
 
 typedef enum ftSs_Submotion {

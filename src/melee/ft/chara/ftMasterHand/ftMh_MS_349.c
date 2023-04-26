@@ -31,7 +31,7 @@ void ftMh_MS_349_80151CA8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Unk353, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_WalkShoot, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 
     /// @todo The code matches, but is this right?

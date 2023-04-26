@@ -36,7 +36,7 @@ void ftMh_MS_369_80153B90(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
     Vec3 pos;
 
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Ram_StartMotion, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_BackPunch, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     fp->mv.mh.unk0.x0 = attr->x6C;
     ftBossLib_8015C208(gobj, &pos);
