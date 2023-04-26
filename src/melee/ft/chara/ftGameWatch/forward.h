@@ -111,11 +111,11 @@ typedef enum ftGameWatch_MotionState {
     ftGw_MS_SpecialHi,
     ftGw_MS_SpecialAirHi,
     ftGw_MS_SpecialLw,
-    ftGw_MS_SpecialLw_Catch,
-    ftGw_MS_SpecialLw_Shoot,
+    ftGw_MS_SpecialLwCatch,
+    ftGw_MS_SpecialLwShoot,
     ftGw_MS_SpecialAirLw,
-    ftGw_MS_SpecialAirLw_Catch,
-    ftGw_MS_SpecialAirLw_Shoot,
+    ftGw_MS_SpecialAirLwCatch,
+    ftGw_MS_SpecialAirLwShoot,
 } ftGameWatch_MotionState;
 
 typedef enum ftGw_Submotion {

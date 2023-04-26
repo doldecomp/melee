@@ -118,7 +118,7 @@ MotionState ftKb_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        52,
+        ftCo_SM_AttackDash,
         ftKb_MF_AttackDash,
         FtMoveId_AttackDash << 24,
         ftKb_AttackDash_Anim,
@@ -128,7 +128,7 @@ MotionState ftKb_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        52,
+        ftCo_SM_AttackDash,
         ftKb_MF_AttackDashAir,
         FtMoveId_AttackDash << 24,
         ftKb_AttackDashAir_Anim,
@@ -2236,7 +2236,7 @@ ftKirby_UnkArrayThing* ftKb_Init_803C9FC8[FTKIND_MAX] = {
 
 MotionState ftKb_Init_UnkMotionStates0[] = {
     {
-        14,
+        ftCo_SM_RunBrake,
         Ft_MF_None,
         FtMoveId_Default << 24,
         NULL,
@@ -2246,7 +2246,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
         NULL,
     },
     {
-        15,
+        ftCo_SM_Kneebend,
         Ft_MF_None,
         FtMoveId_Default << 24,
         NULL,
@@ -2256,7 +2256,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
         NULL,
     },
     {
-        16,
+        ftCo_SM_JumpF,
         Ft_MF_None,
         FtMoveId_Default << 24,
         NULL,
@@ -2266,7 +2266,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
         NULL,
     },
     {
-        17,
+        ftCo_SM_JumpB,
         Ft_MF_None,
         FtMoveId_Default << 24,
         NULL,

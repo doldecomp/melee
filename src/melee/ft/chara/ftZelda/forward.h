@@ -35,27 +35,22 @@ static MotionFlags const ftZd_MF_SpecialAirS ATTRIBUTE_USED =
 enum ftZelda_AS {
     ftZd_MS_SpecialN = ftCo_MS_Count,
     ftZd_MS_SpecialAirN,
-    ftZd_MS_SpecialS_Start,
-    ftZd_MS_SpecialS_Hold,
-    ftZd_MS_SpecialS_End,
-
-    ftZd_MS_SpecialAirS_Start,
-    ftZd_MS_SpecialAirS_Hold,
-    ftZd_MS_SpecialAirS_End,
-
-    ftZd_MS_SpecialHi_Start,
+    ftZd_MS_SpecialSStart,
+    ftZd_MS_SpecialSLoop,
+    ftZd_MS_SpecialSEnd,
+    ftZd_MS_SpecialAirSStart,
+    ftZd_MS_SpecialAirSLoop,
+    ftZd_MS_SpecialAirSEnd,
+    ftZd_MS_SpecialHiStart_0,
+    ftZd_MS_SpecialHiStart_1,
     ftZd_MS_SpecialHi,
-    ftZd_MS_SpecialHi_End,
-
-    ftZd_MS_SpecialAirHi_Start,
+    ftZd_MS_SpecialAirHiStart_0,
+    ftZd_MS_SpecialAirHiStart_1,
     ftZd_MS_SpecialAirHi,
-    ftZd_MS_SpecialAirHi_End,
-
     ftZd_MS_SpecialLw,
-    ftZd_MS_SpecialLw_End,
-
+    ftZd_MS_SpecialLw2,
     ftZd_MS_SpecialAirLw,
-    ftZd_MS_SpecialAirLw_End,
+    ftZd_MS_SpecialAirLw2,
 };
 
 typedef enum ftZd_Submotion {

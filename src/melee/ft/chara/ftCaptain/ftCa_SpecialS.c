@@ -47,7 +47,7 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     resetCmdVarsGround(gobj);
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialS_Start, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialSStart, 0, NULL, 0, 1, 0);
     setCallbacks(gobj);
     ftAnim_8006EBA4(gobj);
     switch (ftLib_800872A4(gobj)) {
@@ -78,7 +78,7 @@ static inline void setupAirStart(HSD_GObj* gobj)
         u32* vars = &fp->x2200_ftcmd_var0;
         vars[0] = vars[1] = vars[2] = vars[3] = 0;
     }
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirS_Start, 0, NULL, 0, 1,
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirSStart, 0, NULL, 0, 1,
                               0);
     setCallbacks(gobj);
     ftAnim_8006EBA4(gobj);
@@ -150,11 +150,11 @@ void ftCa_SpecialS_OnDetect(HSD_GObj* gobj)
         if (fp->x20AC->classifier == HSD_GOBJ_CLASS_FIGHTER) {
             /// @todo It might be possible to merge this with the below branch.
             switch (fp->motion_id) {
-            case ftCa_MS_SpecialS_Start: {
+            case ftCa_MS_SpecialSStart: {
                 onDetectGround(gobj);
                 break;
             }
-            case ftCa_MS_SpecialAirS_Start: {
+            case ftCa_MS_SpecialAirSStart: {
                 onDetectAir(gobj);
                 break;
             }
@@ -162,11 +162,11 @@ void ftCa_SpecialS_OnDetect(HSD_GObj* gobj)
         } else if (fp->x20AC->classifier == HSD_GOBJ_CLASS_ITEM) {
             if (itGetKind(detected_gobj) < It_Kind_BombHei) {
                 switch (fp->motion_id) {
-                case ftCa_MS_SpecialS_Start: {
+                case ftCa_MS_SpecialSStart: {
                     onDetectGround(gobj);
                     break;
                 }
-                case ftCa_MS_SpecialAirS_Start: {
+                case ftCa_MS_SpecialAirSStart: {
                     onDetectAir(gobj);
                     break;
                 }
@@ -178,11 +178,11 @@ void ftCa_SpecialS_OnDetect(HSD_GObj* gobj)
                        itGetKind(detected_gobj) == Pokemon_Random)
             {
                 switch (fp->motion_id) {
-                case ftCa_MS_SpecialS_Start: {
+                case ftCa_MS_SpecialSStart: {
                     onDetectGround(gobj);
                     break;
                 }
-                case ftCa_MS_SpecialAirS_Start: {
+                case ftCa_MS_SpecialAirSStart: {
                     onDetectAir(gobj);
                     break;
                 }

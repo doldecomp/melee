@@ -142,7 +142,7 @@ void ftDk_SpecialLwEnd_Coll(HSD_GObj* gobj)
 
 static void doTransition(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwEnd, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwEnd0, 0, NULL, 0, 1, 0);
 }
 
 void ftDk_MS_386_Anim(HSD_GObj* gobj)

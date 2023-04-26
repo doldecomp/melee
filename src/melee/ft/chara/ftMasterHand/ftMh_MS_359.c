@@ -22,7 +22,7 @@ void ftMh_MS_358_80152880(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Poke_StartMotion, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Poke1, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     fp->mv.mh.unk13.x0 = attr->x94 + HSD_Randi(attr->x90 - attr->x94);
     fp->mv.mh.unk13.x4 = 0;
@@ -41,7 +41,7 @@ void ftMh_MS_359_Anim(HSD_GObj* gobj)
 
             {
                 Fighter* fp = GET_FIGHTER(gobj);
-                Fighter_ChangeMotionState(gobj, ftMh_MS_Unk360, 0, 0, 0, 1, 0);
+                Fighter_ChangeMotionState(gobj, ftMh_MS_Poke2, 0, 0, 0, 1, 0);
                 ftAnim_8006EBA4(gobj);
                 ft_80088148(fp, 320007, 127, 64);
             }

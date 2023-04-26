@@ -38,7 +38,7 @@ void ftMh_MS_352_801521DC(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Drill_StartMotion, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Drill, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     fp->mv.mh.unk0.x0 = 107;
 }

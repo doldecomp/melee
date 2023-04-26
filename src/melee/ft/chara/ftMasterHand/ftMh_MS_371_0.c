@@ -33,7 +33,7 @@ void ftMh_MS_370_80153D2C(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Crush_StartMotion, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_BackCrush, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     ftBossLib_8015C208(gobj, &pos);
     fp->cur_pos.x = pos.x;

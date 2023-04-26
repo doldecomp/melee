@@ -36,7 +36,7 @@ void ftMh_MS_353_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_353_80151DC4(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Unk350, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Walk2, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -64,7 +64,7 @@ void ftMh_MS_350_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_350_80151EB4(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Walk_StartMotion, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_WalkLoop, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -126,8 +126,7 @@ void ftMh_MS_351_Anim(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Walk_StartMotion, 0, 0, 0, 1,
-                                  0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_WalkLoop, 0, 0, 0, 1, 0);
         ftAnim_8006EBA4(gobj);
     }
 }
@@ -155,7 +154,7 @@ void ftMh_MS_351_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_351_801520D8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Unk352, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_WalkWait, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     fp->x80_self_vel.x = 0;
 }

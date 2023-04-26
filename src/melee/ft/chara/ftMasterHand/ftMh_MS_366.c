@@ -29,6 +29,6 @@ void ftMh_MS_366_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_366_80153820(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Jet_StartMotion, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_BackAirplane1, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 }

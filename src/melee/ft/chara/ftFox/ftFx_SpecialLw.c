@@ -861,7 +861,7 @@ void ftFx_SpecialLwHit_GroundToAir(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirLwReflect,
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirLwHit,
                               FTFOX_SPECIALLW_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
     ftFx_SpecialLwHit_SetCall(gobj);
@@ -875,7 +875,7 @@ void ftFx_SpecialAirLwHit_AirToGround(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialLwReflect,
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialLwHit,
                               FTFOX_SPECIALLW_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
     ftCommon_8007D468(fp);

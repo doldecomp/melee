@@ -46,7 +46,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        68,
+        ftCo_SM_AttackAirN,
         ftPe_MF_FloatAttackAirN,
         FtMoveId_AttackAirN << 24,
         ftPe_FloatAttackAir_Anim,
@@ -56,7 +56,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        69,
+        ftCo_SM_AttackAirF,
         ftPe_MF_Move_14,
         FtMoveId_AttackAirF << 24,
         ftPe_FloatAttackAir_Anim,
@@ -66,7 +66,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        70,
+        ftCo_SM_AttackAirB,
         ftPe_MF_FloatAttackAirB,
         FtMoveId_AttackAirB << 24,
         ftPe_FloatAttackAir_Anim,
@@ -76,7 +76,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        71,
+        ftCo_SM_AttackAirHi,
         ftPe_MF_FloatAttackAirHi,
         FtMoveId_AttackAirHi << 24,
         ftPe_FloatAttackAir_Anim,
@@ -86,7 +86,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        72,
+        ftCo_SM_AttackAirLw,
         ftPe_MF_Move_17,
         FtMoveId_AttackAirLw << 24,
         ftPe_FloatAttackAir_Anim,

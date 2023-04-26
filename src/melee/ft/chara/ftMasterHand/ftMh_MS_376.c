@@ -47,8 +47,7 @@ void ftMh_MS_376_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_376_80154E78(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Grab_Unk0_MotionStart, 0, 0, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Throw, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     fp->x2200_ftcmd_var0 = 0;
 }

@@ -15,7 +15,7 @@ void ftMh_MS_378_80154A78(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
     fp->x2204_ftcmd_var1 = 0;
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Unk378, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Squeeze, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     fp->x2222_flag.bits.b2 = true;
     ftCommon_8007E2F4(fp, 511);
@@ -37,7 +37,7 @@ void ftMh_MS_378_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        if (fp->fv.mh.x2250 == ftMh_MS_Grab_Unk0_MotionStart) {
+        if (fp->fv.mh.x2250 == ftMh_MS_Throw) {
             ftMh_MS_376_80154E78(gobj);
         } else {
             ftMh_MS_379_80155014(gobj);
