@@ -14,8 +14,9 @@
 #include "ft/types.h"
 #include "lb/lbmthp.h"
 
-MotionState ftPe_Init_MotionStateTable[] = {
+MotionState ftPe_Init_MotionStateTable[ftPe_MS_SelfCount] = {
     {
+        // ftPe_MS_Float = 341
         ftPe_SM_Float,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -26,6 +27,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_FloatFallF = 342
         ftPe_SM_FloatFallF,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -36,6 +38,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_FloatFallB = 343
         ftPe_SM_FloatFallB,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -46,6 +49,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_FloatAttackAirN = 344
         ftCo_SM_AttackAirN,
         ftPe_MF_FloatAttackAirN,
         FtMoveId_AttackAirN << 24,
@@ -56,6 +60,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_FloatAttackAirF = 345
         ftCo_SM_AttackAirF,
         ftPe_MF_Move_14,
         FtMoveId_AttackAirF << 24,
@@ -66,6 +71,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_FloatAttackAirB = 346
         ftCo_SM_AttackAirB,
         ftPe_MF_FloatAttackAirB,
         FtMoveId_AttackAirB << 24,
@@ -76,6 +82,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_FloatAttackAirHi = 347
         ftCo_SM_AttackAirHi,
         ftPe_MF_FloatAttackAirHi,
         FtMoveId_AttackAirHi << 24,
@@ -86,6 +93,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_FloatAttackAirLw = 348
         ftCo_SM_AttackAirLw,
         ftPe_MF_Move_17,
         FtMoveId_AttackAirLw << 24,
@@ -96,6 +104,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_AttackS4Club = 349
         ftPe_SM_AttackS4_0,
         ftPe_MF_AttackS4,
         FtMoveId_AttackS4 << 24,
@@ -106,6 +115,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_AttackS4Pan = 350
         ftPe_SM_AttackS4_1,
         ftPe_MF_AttackS4,
         FtMoveId_AttackS4 << 24,
@@ -116,6 +126,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_AttackS4Racket = 351
         ftPe_SM_AttackS4_2,
         ftPe_MF_AttackS4,
         FtMoveId_AttackS4 << 24,
@@ -126,6 +137,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_SpecialLw = 352
         ftPe_SM_SpecialLw,
         ftPe_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
@@ -136,6 +148,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_SpecialAirLw = 353
         ftPe_SM_SpecialLw,
         ftPe_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
@@ -146,6 +159,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_SpecialSStart = 354
         ftPe_SM_SpecialSStart,
         ftPe_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -156,6 +170,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_SpecialSEnd = 355
         ftPe_SM_SpecialSEnd,
         ftPe_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -166,6 +181,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_SpecialSJump = 356
         ftPe_SM_SpecialSJump,
         ftPe_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -176,6 +192,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_SpecialAirSStart = 357
         ftPe_SM_SpecialAirSStart,
         ftPe_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
@@ -186,6 +203,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_SpecialAirSEnd_0 = 358
         ftPe_SM_SpecialAirSEnd_0,
         ftPe_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
@@ -196,6 +214,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_SpecialAirSEnd_1 = 359
         ftPe_SM_SpecialAirSEnd_1,
         ftPe_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
@@ -206,6 +225,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_SpecialAirSJump = 360
         ftPe_SM_SpecialSJump,
         ftPe_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
@@ -216,6 +236,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_SpecialHiStart = 361
         ftPe_SM_SpecialHiStart,
         ftPe_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -226,6 +247,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_SpecialHiEnd = 362
         ftPe_SM_SpecialHiEnd,
         ftPe_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -236,6 +258,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_SpecialAirHiStart = 363
         ftPe_SM_SpecialAirHiStart,
         ftPe_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
@@ -246,6 +269,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_SpecialAirHiEnd = 364
         ftPe_SM_SpecialAirHiEnd,
         ftPe_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
@@ -256,6 +280,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_SpecialN = 365
         ftPe_SM_SpecialN,
         ftPe_MF_SpecialN,
         FtMoveId_SpecialN << 24,
@@ -266,6 +291,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_SpecialNHit = 366
         ftPe_SM_SpecialNHit,
         ftPe_MF_SpecialN,
         FtMoveId_SpecialN << 24,
@@ -276,6 +302,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_SpecialAirN = 367
         ftPe_SM_SpecialAirN,
         ftPe_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
@@ -286,6 +313,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_SpecialAirNHit = 368
         ftPe_SM_SpecialAirNHit,
         ftPe_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
@@ -296,6 +324,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_ItemParasolOpen = 369
         ftPe_SM_ItemParasolOpen,
         ftPe_MF_ParasolOpen,
         (FtMoveId_Parasol << 24) | (1 << 23),
@@ -306,6 +335,7 @@ MotionState ftPe_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftPe_MS_ItemParasolFall = 370
         ftPe_SM_ItemParasolFall,
         ftPe_MF_ParasolFallSpecial,
         (FtMoveId_Parasol << 24) | (1 << 23),

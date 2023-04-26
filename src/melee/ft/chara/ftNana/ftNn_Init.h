@@ -1,6 +1,7 @@
 #ifndef GALE01_122EDC
 #define GALE01_122EDC
 
+#include "ftPopo/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -33,7 +34,7 @@
 /* 123EFC */ void ftNn_Init_80123EFC(HSD_GObj* gobj);
 /* 123F98 */ void ftNn_Init_80123F98(HSD_GObj* gobj);
 /* 1241A0 */ void ftNn_Init_801241A0(HSD_GObj* gobj);
-/* 3CD838 */ extern MotionState ftNn_Init_MotionStateTable[];
+/* 3CD838 */ extern MotionState ftNn_Init_MotionStateTable[ftPp_MS_SelfCount];
 /* 3CDB78 */ extern char ftNn_Init_DatFilename[];
 /* 3CDB84 */ extern char ftNn_Init_DataName[];
 /* 3CDCA0 */ extern char ftNn_Init_AnimDatFilename[];

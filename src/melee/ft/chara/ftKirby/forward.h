@@ -498,6 +498,8 @@ typedef enum ftKirby_MotionState {
     ftKb_MS_GkSpecialAirNStart,
     ftKb_MS_GkSpecialAirN,
     ftKb_MS_GkSpecialAirNEnd,
+    ftKb_MS_Count,
+    ftKb_MS_SelfCount = ftKb_MS_Count - ftCo_MS_Count,
 } ftKirby_MotionState;
 
 typedef enum ftKb_Submotion {
@@ -685,6 +687,8 @@ typedef enum ftKb_Submotion {
     ftKb_SM_GkSpecialAirNStart,
     ftKb_SM_GkSpecialAirN,
     ftKb_SM_GkSpecialAirNEnd,
+    ftKb_SM_Count,
+    ftKb_SM_SelfCount = ftKb_SM_Count - ftCo_SM_Count,
 } ftKb_Submotion;
 
 #endif

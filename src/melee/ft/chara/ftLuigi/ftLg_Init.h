@@ -1,6 +1,7 @@
 #ifndef GALE01_1422E8
 #define GALE01_1422E8
 
+#include "ftLuigi/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -16,7 +17,7 @@
 /* 1425C8 */ void ftLg_Init_OnKnockbackExit(HSD_GObj* gobj);
 /* 14260C */ void ftLg_Init_UnkDemoCallbacks0(s32 arg0, s32* arg1, s32* arg2);
 /* 142640 */ char* ftLg_Init_GetMotionFileString(enum_t demoMotionArg);
-/* 3D0628 */ extern MotionState ftLg_Init_MotionStateTable[];
+/* 3D0628 */ extern MotionState ftLg_Init_MotionStateTable[ftLg_MS_SelfCount];
 /* 3D0868 */ extern MotionState ftLg_Init_UnkMotionStates0[];
 /* 3D08A8 */ extern char ftLg_Init_DatFilename[];
 /* 3D08B4 */ extern char ftLg_Init_DataName[];

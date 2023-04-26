@@ -91,6 +91,8 @@ typedef enum ftPeach_MotionState {
     ftPe_MS_SpecialAirNHit,
     ftPe_MS_ItemParasolOpen,
     ftPe_MS_ItemParasolFall,
+    ftPe_MS_Count,
+    ftPe_MS_SelfCount = ftPe_MS_Count - ftCo_MS_Count,
 } ftPeach_MotionState;
 
 typedef enum ftPe_Submotion {
@@ -117,6 +119,8 @@ typedef enum ftPe_Submotion {
     ftPe_SM_SpecialAirNHit,
     ftPe_SM_ItemParasolOpen,
     ftPe_SM_ItemParasolFall,
+    ftPe_SM_Count,
+    ftPe_SM_SelfCount = ftPe_SM_Count - ftCo_SM_Count,
 } ftPe_Submotion;
 
 #endif

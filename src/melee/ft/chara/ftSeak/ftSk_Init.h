@@ -1,6 +1,7 @@
 #ifndef GALE01_110094
 #define GALE01_110094
 
+#include "ftSeak/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -16,7 +17,7 @@
 /* 1103C8 */ void ftSk_Init_LoadSpecialAttrs(HSD_GObj* gobj);
 /* 110408 */ void ftSk_Init_OnKnockbackEnter(HSD_GObj* gobj);
 /* 11044C */ void ftSk_Init_OnKnockbackExit(HSD_GObj* gobj);
-/* 3CC060 */ extern MotionState ftSk_Init_MotionStateTable[];
+/* 3CC060 */ extern MotionState ftSk_Init_MotionStateTable[ftSk_MS_SelfCount];
 /* 3CC360 */ extern char ftSk_Init_DatFilename[];
 /* 3CC36C */ extern char ftSk_Init_DataName[];
 /* 3CC4CC */ extern char ftSk_Init_AnimDatFilename[];

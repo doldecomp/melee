@@ -1,6 +1,8 @@
 #ifndef GALE01_155E18
 #define GALE01_155E18
 
+#include "ftCrazyHand/forward.h"
+
 #include "ft/types.h"
 
 /* 155E18 */ void ftCh_Init_OnDeath(HSD_GObj* gobj);
@@ -203,7 +205,7 @@
 /* 15BB70 */ void ftCh_MS_388_Anim(HSD_GObj* gobj);
 /* 15BBD8 */ void ftCh_MS_388_Phys(HSD_GObj* gobj);
 /* 15BC38 */ void ftCh_MS_388_Coll(HSD_GObj* gobj);
-/* 3D41F8 */ extern MotionState ftCh_Init_MotionStateTable[];
+/* 3D41F8 */ extern MotionState ftCh_Init_MotionStateTable[ftCh_MS_SelfCount];
 /* 3D4818 */ extern char ftCh_Init_DatFilename[];
 /* 3D4824 */ extern char ftCh_Init_DataName[];
 /* 3D485C */ extern char ftCh_Init_AnimDatFilename[];

@@ -72,11 +72,12 @@ typedef enum ftYoshi_MotionState {
     ftYs_MS_SpecialAirSLoop_3,
     ftYs_MS_SpecialAirSLanding,
     ftYs_MS_SpecialHi,
-
     ftYs_MS_SpecialAirHi,
     ftYs_MS_SpecialLw,
     ftYs_MS_SpecialLwLanding,
     ftYs_MS_SpecialAirLw,
+    ftYs_MS_Count,
+    ftYs_MS_SelfCount = ftYs_MS_Count - ftCo_MS_Count,
 } ftYoshi_MotionState;
 
 typedef enum ftYs_Submotion {
@@ -99,6 +100,8 @@ typedef enum ftYs_Submotion {
     ftYs_SM_SpecialLw,
     ftYs_SM_SpecialLwLanding,
     ftYs_SM_SpecialAirLw,
+    ftYs_SM_Count,
+    ftYs_SM_SelfCount = ftYs_SM_Count - ftCo_SM_Count,
 } ftYs_Submotion;
 
 #endif

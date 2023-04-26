@@ -1,6 +1,7 @@
 #ifndef GALE01_1243AC
 #define GALE01_1243AC
 
+#include "ftPikachu/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -17,7 +18,7 @@
 /* 124704 */ void ftPk_Init_LoadSpecialAttrs(HSD_GObj* gobj);
 /* 1247A8 */ void ftPk_Init_OnKnockbackEnter(HSD_GObj* gobj);
 /* 1247EC */ void ftPk_Init_OnKnockbackExit(HSD_GObj* gobj);
-/* 3CDD78 */ extern MotionState ftPk_Init_MotionStateTable[];
+/* 3CDD78 */ extern MotionState ftPk_Init_MotionStateTable[ftPk_MS_SelfCount];
 /* 3CE0B8 */ extern char ftPk_Init_DatFilename[];
 /* 3CE0C4 */ extern char ftPk_Init_DataName[];
 /* 3CE204 */ extern char ftPk_Init_AnimDatFilename[];

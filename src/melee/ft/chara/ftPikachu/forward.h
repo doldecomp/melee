@@ -61,6 +61,8 @@ typedef enum ftPikachu_MotionState {
     ftPk_MS_SpecialAirLwLoop0,
     ftPk_MS_SpecialAirLwLoop1,
     ftPk_MS_SpecialAirLwEnd,
+    ftPk_MS_Count,
+    ftPk_MS_SelfCount = ftPk_MS_Count - ftCo_MS_Count,
 } ftPikachu_MotionState;
 
 typedef enum ftPk_Submotion {
@@ -89,6 +91,8 @@ typedef enum ftPk_Submotion {
     ftPk_SM_SpecialAirLwLoop0,
     ftPk_SM_SpecialAirLwLoop1,
     ftPk_SM_SpecialAirLwEnd,
+    ftPk_SM_Count,
+    ftPk_SM_SelfCount = ftPk_SM_Count - ftCo_SM_Count,
 } ftPk_Submotion;
 
 #endif

@@ -1,6 +1,7 @@
 #ifndef GALE01_136258
 #define GALE01_136258
 
+#include "ftMars/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -18,7 +19,7 @@
 /* 1365A8 */ void ftMs_SpecialN_801365A8(HSD_GObj* gobj);
 /* 13666C */ void ftMs_SpecialN_8013666C(HSD_GObj* gobj);
 /* 136730 */ void ftMs_SpecialN_80136730(HSD_GObj* gobj);
-/* 3CF420 */ extern MotionState ftMs_Init_MotionStateTable[];
+/* 3CF420 */ extern MotionState ftMs_Init_MotionStateTable[ftMs_MS_SelfCount];
 /* 3CF820 */ extern char ftMs_Init_DatFilename[];
 /* 3CF82C */ extern char ftMs_Init_DataName[];
 /* 3CF98C */ extern char ftMs_Init_AnimDatFilename[];

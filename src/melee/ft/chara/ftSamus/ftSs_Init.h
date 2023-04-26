@@ -1,6 +1,7 @@
 #ifndef GALE01_12832C
 #define GALE01_12832C
 
+#include "ftSamus/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -22,7 +23,7 @@
 /* 128A1C */ bool ftSs_Init_80128A1C(HSD_GObj* gobj, unk_t arg1, f32 farg1);
 /* 128AC8 */ f32 ftSs_Init_80128AC8(HSD_GObj* gobj, f32 farg1, f32 farg2);
 /* 128B1C */ void ftSs_Init_80128B1C(HSD_GObj* gobj, f32, f32, f32);
-/* 3CE2D0 */ extern MotionState ftSs_Init_MotionStateTable[];
+/* 3CE2D0 */ extern MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount];
 /* 3CE510 */ extern char ftSs_Init_DatFilename[];
 /* 3CE51C */ extern char ftSs_Init_DataName[];
 /* 3CE5EC */ extern char ftSs_Init_AnimDatFilename[];

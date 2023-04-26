@@ -32,7 +32,7 @@ static MotionFlags const ftZd_MF_SpecialAirLw ATTRIBUTE_USED =
 static MotionFlags const ftZd_MF_SpecialAirS ATTRIBUTE_USED =
     ftZd_MF_SpecialS | Ft_MF_SkipParasol;
 
-enum ftZelda_AS {
+typedef enum ftZd_MotionState {
     ftZd_MS_SpecialN = ftCo_MS_Count,
     ftZd_MS_SpecialAirN,
     ftZd_MS_SpecialSStart,
@@ -51,7 +51,9 @@ enum ftZelda_AS {
     ftZd_MS_SpecialLw2,
     ftZd_MS_SpecialAirLw,
     ftZd_MS_SpecialAirLw2,
-};
+    ftZd_MS_Count,
+    ftZd_MS_SelfCount = ftZd_MS_Count - ftCo_MS_Count,
+} ftZd_MotionState;
 
 typedef enum ftZd_Submotion {
     ftZd_SM_SpecialN = ftCo_SM_Count,
@@ -70,6 +72,8 @@ typedef enum ftZd_Submotion {
     ftZd_SM_SpecialLw2,
     ftZd_SM_SpecialAirLw,
     ftZd_SM_SpecialAirLw2,
+    ftZd_SM_Count,
+    ftZd_SM_SelfCount = ftZd_SM_Count - ftCo_SM_Count,
 } ftZd_Submotion;
 
 #endif

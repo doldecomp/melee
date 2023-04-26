@@ -51,6 +51,8 @@ typedef enum ftLuigi_MotionState {
     ftLg_MS_SpecialAirHi,
     ftLg_MS_SpecialLw,
     ftLg_MS_SpecialAirLw,
+    ftLg_MS_Count,
+    ftLg_MS_SelfCount = ftLg_MS_Count - ftCo_MS_Count,
 } ftLuigi_MotionState;
 
 typedef enum ftLg_Submotion {
@@ -71,6 +73,8 @@ typedef enum ftLg_Submotion {
     ftLg_SM_SpecialAirHi,
     ftLg_SM_SpecialLw,
     ftLg_SM_SpecialAirLw,
+    ftLg_SM_Count,
+    ftLg_SM_SelfCount = ftLg_SM_Count - ftCo_SM_Count,
 } ftLg_Submotion;
 
 #endif

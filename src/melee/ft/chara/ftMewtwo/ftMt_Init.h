@@ -1,6 +1,7 @@
 #ifndef GALE01_144DFC
 #define GALE01_144DFC
 
+#include "ftMewtwo/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -17,7 +18,7 @@
 /* 144FB4 */ void ftMt_Init_LoadSpecialAttrs(HSD_GObj* gobj);
 /* 145018 */ void ftMt_Init_OnKnockbackEnter(HSD_GObj* gobj);
 /* 14505C */ void ftMt_Init_OnKnockbackExit(HSD_GObj* gobj);
-/* 3D0B00 */ extern MotionState ftMt_Init_MotionStateTable[];
+/* 3D0B00 */ extern MotionState ftMt_Init_MotionStateTable[ftMt_MS_SelfCount];
 /* 3D0D80 */ extern char ftMt_Init_DatFilename[];
 /* 3D0D8C */ extern char ftMt_Init_DataName[];
 /* 3D0EC4 */ extern char ftMt_Init_AnimDatFilename[];

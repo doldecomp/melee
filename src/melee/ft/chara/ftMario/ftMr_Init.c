@@ -17,8 +17,9 @@
 
 #include <baselib/random.h>
 
-MotionState ftMr_Init_MotionStateTable[states_count] = {
+MotionState ftMr_Init_MotionStateTable[ftMr_MS_SelfCount] = {
     {
+        // ftMr_MS_AppealSR = 341,
         ftCo_SM_None,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -29,6 +30,7 @@ MotionState ftMr_Init_MotionStateTable[states_count] = {
         NULL,
     },
     {
+        // ftMr_MS_AppealSL = 342,
         ftCo_SM_None,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -39,6 +41,7 @@ MotionState ftMr_Init_MotionStateTable[states_count] = {
         NULL,
     },
     {
+        // ftMr_MS_SpecialN = 343,
         ftMr_SM_SpecialN,
         ftMr_MF_SpecialN,
         FtMoveId_SpecialN << 24,
@@ -49,6 +52,7 @@ MotionState ftMr_Init_MotionStateTable[states_count] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMr_MS_SpecialAirN = 344,
         ftMr_SM_SpecialAirN,
         ftMr_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
@@ -59,6 +63,7 @@ MotionState ftMr_Init_MotionStateTable[states_count] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMr_MS_SpecialS = 345,
         ftMr_SM_SpecialS,
         ftMr_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -69,6 +74,7 @@ MotionState ftMr_Init_MotionStateTable[states_count] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMr_MS_SpecialAirS = 346,
         ftMr_SM_SpecialAirS,
         ftMr_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -79,6 +85,7 @@ MotionState ftMr_Init_MotionStateTable[states_count] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMr_MS_SpecialHi = 347,
         ftMr_SM_SpecialHi,
         ftMr_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -89,6 +96,7 @@ MotionState ftMr_Init_MotionStateTable[states_count] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMr_MS_SpecialAirHi = 348,
         ftMr_SM_SpecialAirHi,
         ftMr_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
@@ -99,6 +107,7 @@ MotionState ftMr_Init_MotionStateTable[states_count] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMr_MS_SpecialLw = 349,
         ftMr_SM_SpecialLw,
         ftMr_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
@@ -109,6 +118,7 @@ MotionState ftMr_Init_MotionStateTable[states_count] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMr_MS_SpecialAirLw = 350,
         ftMr_SM_SpecialAirLw,
         ftMr_MF_SpecialAirLw,
         FtMoveId_SpecialLw << 24,

@@ -1,6 +1,7 @@
 #ifndef GALE01_13C2F8
 #define GALE01_13C2F8
 
+#include "ftPurin/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -121,7 +122,7 @@
 /* 142070 */ void ftPr_SpecialAirNEnd_Coll(HSD_GObj* gobj);
 /* 1420D0 */ void ftPr_SpecialNHit_Coll(HSD_GObj* gobj);
 /* 14222C */ void ftPr_SpecialN_8014222C(HSD_GObj* gobj);
-/* 3CFEF0 */ extern MotionState ftPr_Init_MotionStateTable[];
+/* 3CFEF0 */ extern MotionState ftPr_Init_MotionStateTable[ftPr_MS_SelfCount];
 /* 3D02F0 */ extern char ftPr_Init_DatFilename[];
 /* 3D02FC */ extern char ftPr_Init_DataName[];
 /* 3D047C */ extern char ftPr_Init_AnimDatFilename[];

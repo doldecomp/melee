@@ -1,6 +1,7 @@
 #ifndef GALE01_14949C
 #define GALE01_14949C
 
+#include "ftMario/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -20,7 +21,7 @@
 /* 1498A0 */ void ftDr_Init_801498A0(HSD_GObj* gobj);
 /* 1498EC */ u32 ftDr_Init_801498EC(HSD_GObj* gobj);
 /* 149910 */ void ftDr_Init_80149910(HSD_GObj* gobj);
-/* 3D1498 */ extern MotionState ftDr_Init_MotionStateTable[];
+/* 3D1498 */ extern MotionState ftDr_Init_MotionStateTable[ftMr_MS_SelfCount];
 /* 3D15D8 */ extern Fighter_CostumeStrings ftDr_Init_CostumeStrings[];
 /* 3D15E4 */ extern char ftDr_Init_DatFilename[];
 /* 3D1770 */ extern char ftDr_Init_AnimDatFilename[];

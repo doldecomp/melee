@@ -2,6 +2,7 @@
 #define GALE01_0EAD64
 
 #include <platform.h>
+#include "ftLink/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -53,7 +54,7 @@
 /* 0ECCCC */ void ftLk_800ECCCC(HSD_GObj* gobj);
 /* 0ECD04 */ void ftLk_800ECD04(HSD_GObj* gobj);
 /* 0ECD58 */ void ftLk_800ECD58(HSD_GObj* gobj);
-/* 3C7E18 */ extern MotionState ftLk_Init_MotionStateTable[];
+/* 3C7E18 */ extern MotionState ftLk_Init_MotionStateTable[ftLk_MS_SelfCount];
 /* 3C80B8 */ extern char ftLk_Init_DatFilename[];
 /* 3C80C4 */ extern char ftLk_Init_DataName[];
 /* 3C8224 */ extern char ftLk_Init_AnimDatFilename[];

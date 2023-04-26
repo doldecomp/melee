@@ -1,6 +1,7 @@
 #ifndef GALE01_10D740
 #define GALE01_10D740
 
+#include "ftDonkey/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -17,7 +18,7 @@
 /* 10DAB4 */ void ftDk_Init_OnKnockbackEnter(HSD_GObj* gobj);
 /* 10DAF8 */ void ftDk_Init_OnKnockbackExit(HSD_GObj* gobj);
 /* 10DB3C */ void ftDk_Init_8010DB3C(HSD_GObj* gobj);
-/* 3CB838 */ extern MotionState ftDk_Init_MotionStateTable[];
+/* 3CB838 */ extern MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount];
 /* 3CBDF8 */ extern Fighter_CostumeStrings ftDk_Init_CostumeStrings[];
 /* 3CBE04 */ extern char ftDk_Init_DatFilename[];
 /* 3CBF88 */ extern char ftDk_Init_AnimDatFilename[];

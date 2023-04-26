@@ -83,6 +83,8 @@ typedef enum ftFox_MotionState {
     ftFx_MS_AppealSL,
     ftFx_MS_AppealSEndR,
     ftFx_MS_AppealSEndL,
+    ftFx_MS_Count,
+    ftFx_MS_SelfCount = ftFx_MS_Count - ftCo_MS_Count,
 } ftFox_MotionState;
 
 typedef enum ftFx_Submotion {
@@ -118,6 +120,8 @@ typedef enum ftFx_Submotion {
     ftFx_SM_AppealSL,
     ftFx_SM_AppealSEndR,
     ftFx_SM_AppealSEndL,
+    ftFx_SM_Count,
+    ftFx_SM_SelfCount = ftFx_SM_Count - ftCo_SM_Count,
 } ftFx_Submotion;
 
 #endif

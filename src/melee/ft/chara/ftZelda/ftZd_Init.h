@@ -1,6 +1,7 @@
 #ifndef GALE01_1393AC
 #define GALE01_1393AC
 
+#include "ftZelda/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -16,7 +17,7 @@
 /* 1395C8 */ void ftZd_Init_801395C8(HSD_GObj* gobj);
 /* 139624 */ void ftZd_Init_OnKnockbackEnter(HSD_GObj* gobj);
 /* 139668 */ void ftZd_Init_OnKnockbackExit(HSD_GObj* gobj);
-/* 3CFA58 */ extern MotionState ftZd_Init_MotionStateTable[];
+/* 3CFA58 */ extern MotionState ftZd_Init_MotionStateTable[ftZd_MS_SelfCount];
 /* 3CFC98 */ extern char ftZd_Init_DatFilename[];
 /* 3CFCA4 */ extern char ftZd_Init_DataName[];
 /* 3CFE24 */ extern char ftZd_Init_AnimDatFilename[];

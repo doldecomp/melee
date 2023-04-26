@@ -61,6 +61,8 @@ typedef enum ftSamus_MotionState {
     ftSs_MS_SpecialAirLwBomb,
     ftSs_MS_AirCatch,
     ftSs_MS_AirCatchHit,
+    ftSs_MS_Count,
+    ftSs_MS_SelfCount = ftSs_MS_Count - ftCo_MS_Count,
 } ftSamus_MotionState;
 
 typedef enum ftSs_Submotion {
@@ -82,6 +84,8 @@ typedef enum ftSs_Submotion {
     ftSs_SM_SpecialAirLwBomb,
     ftSs_SM_AirCatch,
     ftSs_SM_AirCatchHit,
+    ftSs_SM_Count,
+    ftSs_SM_SelfCount = ftSs_SM_Count - ftCo_SM_Count,
 } ftSs_Submotion;
 
 #endif

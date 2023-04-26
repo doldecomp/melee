@@ -1,6 +1,7 @@
 #ifndef GALE01_0EE528
 #define GALE01_0EE528
 
+#include "ftKirby/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -868,7 +869,7 @@
 /* 10D5F0 */ void ftKb_SpecialNGw_8010D5F0(HSD_GObj* gobj);
 /* 10D660 */ void ftKb_SpecialNGw_8010D660(HSD_GObj* gobj);
 /* 10D6D0 */ void ftKb_SpecialNGw_8010D6D0(HSD_GObj* gobj);
-/* 3C8368 */ extern MotionState ftKb_Init_MotionStateTable[];
+/* 3C8368 */ extern MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount];
 /* 3CA04C */ extern MotionState ftKb_Init_UnkMotionStates0[];
 /* 3CA308 */ extern char ftKb_Init_DatFilename[];
 /* 3CA314 */ extern char ftKb_Init_DataName[];

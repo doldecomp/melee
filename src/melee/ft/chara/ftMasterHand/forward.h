@@ -70,6 +70,8 @@ typedef enum ftMasterhand_MotionState {
     ftMh_MS_TagCancel,
     ftMh_MS_Wait1_2,
     ftMh_MS_Wait2_1,
+    ftMh_MS_Count,
+    ftMh_MS_SelfCount = ftMh_MS_Count - ftCo_MS_Count,
 } ftMasterhand_MotionState;
 
 typedef enum ftMh_Submotion {
@@ -123,6 +125,8 @@ typedef enum ftMh_Submotion {
     ftMh_SM_TagCancel,
     ftMh_SM_Wait1_2,
     ftMh_SM_Wait2_1,
+    ftMh_SM_Count,
+    ftMh_SM_SelfCount = ftMh_SM_Count - ftCo_SM_Count,
 } ftMh_Submotion;
 
 #endif
