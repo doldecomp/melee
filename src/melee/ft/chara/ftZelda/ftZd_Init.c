@@ -16,7 +16,7 @@
 
 MotionState ftZd_Init_MotionStateTable[] = {
     {
-        ftZd_AnimId_SpecialN,
+        ftZd_SM_SpecialN,
         ftZd_MF_SpecialN,
         FtMoveId_SpecialN << 24,
         ftZd_SpecialN_Anim,
@@ -26,7 +26,7 @@ MotionState ftZd_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftZd_AnimId_SpecialAirN,
+        ftZd_SM_SpecialAirN,
         ftZd_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
         ftZd_SpecialAirN_Anim,
@@ -36,7 +36,7 @@ MotionState ftZd_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftZd_AnimId_SpecialSStart,
+        ftZd_SM_SpecialSStart,
         ftZd_MF_SpecialS,
         FtMoveId_SpecialS << 24,
         ftZd_SpecialSStart_Anim,
@@ -46,7 +46,7 @@ MotionState ftZd_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftZd_AnimId_SpecialSHold,
+        ftZd_SM_SpecialSLoop,
         ftZd_MF_SpecialS,
         FtMoveId_SpecialS << 24,
         ftZd_SpecialSHold_Anim,
@@ -56,7 +56,7 @@ MotionState ftZd_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftZd_AnimId_SpecialSEnd,
+        ftZd_SM_SpecialSEnd,
         ftZd_MF_SpecialS,
         FtMoveId_SpecialS << 24,
         ftZd_SpecialSEnd_Anim,
@@ -66,7 +66,7 @@ MotionState ftZd_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftZd_AnimId_SpecialAirSStart,
+        ftZd_SM_SpecialAirSStart,
         ftZd_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
         ftZd_SpecialAirSStart_Anim,
@@ -76,7 +76,7 @@ MotionState ftZd_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftZd_AnimId_SpecialAirSHold,
+        ftZd_SM_SpecialAirSLoop,
         ftZd_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
         ftZd_SpecialAirSHold_Anim,
@@ -86,7 +86,7 @@ MotionState ftZd_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftZd_AnimId_SpecialAirSEnd,
+        ftZd_SM_SpecialAirSEnd,
         ftZd_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
         ftZd_SpecialAirSEnd_Anim,
@@ -96,7 +96,7 @@ MotionState ftZd_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftZd_AnimId_SpecialHi,
+        ftZd_SM_SpecialHiStart,
         ftZd_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
         ftZd_SpecialHiStart_Anim,
@@ -106,7 +106,7 @@ MotionState ftZd_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftZd_AnimId_SpecialHi,
+        ftZd_SM_SpecialHiStart,
         ftZd_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
         ftZd_SpecialHi_Anim,
@@ -116,7 +116,7 @@ MotionState ftZd_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftZd_AnimId_SpecialHiEnd,
+        ftZd_SM_SpecialHi,
         ftZd_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
         ftZd_SpecialHiEnd_Anim,
@@ -126,7 +126,7 @@ MotionState ftZd_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftZd_AnimId_SpecialAirHi,
+        ftZd_SM_SpecialAirHiStart,
         ftZd_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
         ftZd_SpecialAirHiStart_Anim,
@@ -136,7 +136,7 @@ MotionState ftZd_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftZd_AnimId_SpecialAirHi,
+        ftZd_SM_SpecialAirHiStart,
         ftZd_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
         ftZd_SpecialAirHi_Anim,
@@ -146,7 +146,7 @@ MotionState ftZd_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftZd_AnimId_SpecialAirHiEnd,
+        ftZd_SM_SpecialAirHi,
         ftZd_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
         ftZd_SpecialAirHiEnd_Anim,
@@ -156,7 +156,7 @@ MotionState ftZd_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftZd_AnimId_SpecialLw,
+        ftZd_SM_SpecialLw,
         ftZd_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
         ftZd_SpecialLw_Anim,
@@ -166,7 +166,7 @@ MotionState ftZd_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftZd_AnimId_SpecialLwEnd,
+        ftZd_SM_SpecialLw2,
         ftZd_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
         ftZd_SpecialLwEnd_Anim,
@@ -176,7 +176,7 @@ MotionState ftZd_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftZd_AnimId_SpecialAirLw,
+        ftZd_SM_SpecialAirLw,
         ftZd_MF_SpecialAirLw,
         FtMoveId_SpecialLw << 24,
         ftZd_SpecialAirLw_Anim,
@@ -186,7 +186,7 @@ MotionState ftZd_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        ftZd_AnimId_SpecialAirLwEnd,
+        ftZd_SM_SpecialAirLw2,
         ftZd_MF_SpecialAirLw,
         FtMoveId_SpecialLw << 24,
         ftZd_SpecialAirLwEnd_Anim,

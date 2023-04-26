@@ -84,26 +84,26 @@ typedef enum ftLink_MotionState {
     ftLk_MS_ZairCatch,
 } ftLink_MotionState;
 
-typedef enum ftLk_AnimId {
-    ftLk_AnimId_AttackS42 = ftCo_AnimId_Count,
-    ftLk_AnimId_SpecialNCharge,
-    ftLk_AnimId_SpecialNFullyCharged,
-    ftLk_AnimId_SpecialNFire,
-    ftLk_AnimId_SpecialAirNCharge,
-    ftLk_AnimId_SpecialAirNFullyCharged,
-    ftLk_AnimId_SpecialAirNFire,
-    ftLk_AnimId_SpecialSThrow,
-    ftLk_AnimId_SpecialSCatch,
-    ftLk_AnimId_SpecialSThrowEmpty,
-    ftLk_AnimId_SpecialAirSThrow,
-    ftLk_AnimId_SpecialAirSCatch,
-    ftLk_AnimId_SpecialAirSThrowEmpty,
-    ftLk_AnimId_SpecialHi,
-    ftLk_AnimId_SpecialAirHi,
-    ftLk_AnimId_SpecialLw,
-    ftLk_AnimId_SpecialAirLw,
-    ftLk_AnimId_Zair,
-    ftLk_AnimId_ZairCatch,
-} ftLk_AnimId;
+typedef enum ftLk_Submotion {
+    ftLk_SM_AttackS42 = ftCo_SM_Count,
+    ftLk_SM_SpecialNStart,
+    ftLk_SM_SpecialNLoop,
+    ftLk_SM_SpecialNEnd,
+    ftLk_SM_SpecialAirNStart,
+    ftLk_SM_SpecialAirNLoop,
+    ftLk_SM_SpecialAirNEnd,
+    ftLk_SM_SpecialS1,
+    ftLk_SM_SpecialS2,
+    ftLk_SM_SpecialS1Empty,
+    ftLk_SM_SpecialAirS1,
+    ftLk_SM_SpecialAirS2,
+    ftLk_SM_SpecialAirS1Empty,
+    ftLk_SM_SpecialHi,
+    ftLk_SM_SpecialAirHi,
+    ftLk_SM_SpecialLw,
+    ftLk_SM_SpecialAirLw,
+    ftLk_SM_AirCatch,
+    ftLk_SM_AirCatchHit,
+} ftLk_Submotion;
 
 #endif
