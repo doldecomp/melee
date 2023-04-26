@@ -41,6 +41,7 @@ typedef enum ftMario_MotionState {
     ftMr_MS_SpecialLw,
     ftMr_MS_SpecialAirLw,
     ftMr_MS_Count,
+    ftMr_MS_SelfCount = ftMr_MS_Count - ftCo_MS_Count,
 } ftMario_MotionState;
 
 typedef enum ftMr_Submotion {
@@ -52,6 +53,8 @@ typedef enum ftMr_Submotion {
     ftMr_SM_SpecialAirHi,
     ftMr_SM_SpecialLw,
     ftMr_SM_SpecialAirLw,
+    ftMr_SM_Count,
+    ftMr_SM_SelfCount = ftMr_SM_Count - ftCo_SM_Count,
 } ftMr_Submotion;
 
 #endif

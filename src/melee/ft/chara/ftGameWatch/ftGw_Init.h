@@ -1,6 +1,7 @@
 #ifndef GALE01_14A250
 #define GALE01_14A250
 
+#include "ftGameWatch/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -18,7 +19,7 @@
 /* 14A7F4 */ void ftGw_Init_8014A7F4(HSD_GObj* gobj, ItemModStruct* item_mod);
 /* 14A814 */ void ftGw_Init_8014A814(HSD_GObj* gobj, ItemModStruct* item_mod);
 /* 14A828 */ void ftGw_Init_OnAbsorb(HSD_GObj* gobj);
-/* 3D23E8 */ extern MotionState ftGw_Init_MotionStateTable[];
+/* 3D23E8 */ extern MotionState ftGw_Init_MotionStateTable[ftGw_MS_SelfCount];
 /* 3D28E8 */ extern char ftGw_Init_DatFilename[];
 /* 3D28F4 */ extern char ftGw_Init_DataName[];
 /* 3D292C */ extern char ftGw_Init_AnimDatFilename[];

@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTYOSHI_FTYOSHI1_H
 #define MELEE_FT_CHARA_FTYOSHI_FTYOSHI1_H
 
-#include "forward.h"
 #include "ft/forward.h"
+#include "ftYoshi/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -28,6 +28,6 @@
 /* 12BDA0 */ unk_t ftYs_Init_8012BDA0(void);
 /* 12BE3C */ void ftYs_Init_8012BE3C(HSD_GObj* gobj);
 /* 12BECC */ unk_t ftYs_Init_8012BECC(void);
-/* 3CE6D0 */ extern MotionState ftYs_Init_MotionStateTable[];
+/* 3CE6D0 */ extern MotionState ftYs_Init_MotionStateTable[ftYs_MS_SelfCount];
 
 #endif

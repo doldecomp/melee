@@ -72,6 +72,8 @@ typedef enum ftPurin_MotionState {
     ftPr_MS_SpecialAirLwL,
     ftPr_MS_SpecialLwR,
     ftPr_MS_SpecialAirLwR,
+    ftPr_MS_Count,
+    ftPr_MS_SelfCount = ftPr_MS_Count - ftCo_MS_Count,
 } ftPurin_MotionState;
 
 typedef enum ftPr_Submotion {
@@ -107,6 +109,8 @@ typedef enum ftPr_Submotion {
     ftPr_SM_SpecialAirLwL,
     ftPr_SM_SpecialLwR,
     ftPr_SM_SpecialAirLwR,
+    ftPr_SM_Count,
+    ftPr_SM_SelfCount = ftPr_SM_Count - ftCo_SM_Count,
 } ftPr_Submotion;
 
 #endif

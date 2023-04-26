@@ -61,6 +61,8 @@ typedef enum ftCaptain_MotionState {
     ftCa_MS_SpecialAirLwEndAir,
     ftCa_MS_SpecialLwEndAir,
     ftCa_MS_SpecialHiThrow1,
+    ftCa_MS_Count,
+    ftCa_MS_SelfCount = ftCa_MS_Count - ftCo_MS_Count,
 } ftCaptain_MotionState;
 
 typedef enum ftCa_Submotion {
@@ -87,6 +89,8 @@ typedef enum ftCa_Submotion {
     ftCa_SM_SpecialLwEndAir,
     ftCa_SM_SpecialAirLwEndAir,
     ftCa_SM_SpecialHiThrow1,
+    ftCa_SM_Count,
+    ftCa_SM_SelfCount = ftCa_SM_Count - ftCo_SM_Count,
 } ftCa_Submotion;
 
 #endif

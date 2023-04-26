@@ -139,6 +139,8 @@ typedef enum ftDk_MotionState {
     ftDk_MS_SpecialLwLoop,
     ftDk_MS_SpecialLwEnd0,
     ftDk_MS_SpecialLwEnd1,
+    ftDk_MS_Count,
+    ftDk_MS_SelfCount = ftDk_MS_Count - ftCo_MS_Count,
 } ftDk_MotionState;
 
 typedef enum ftDk_Submotion {
@@ -184,6 +186,8 @@ typedef enum ftDk_Submotion {
     ftDk_SM_SpecialLwLoop,
     ftDk_SM_SpecialLwEnd0,
     ftDk_SM_SpecialLwEnd1,
+    ftDk_SM_Count,
+    ftDk_SM_SelfCount = ftDk_SM_Count - ftCo_SM_Count,
 } ftDk_Submotion;
 
 #endif

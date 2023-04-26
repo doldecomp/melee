@@ -11,8 +11,9 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-MotionState ftCh_Init_MotionStateTable[] = {
+MotionState ftCh_Init_MotionStateTable[ftMh_MS_SelfCount - 1] = {
     {
+        // ftMh_MS_Wait1_0 = 341
         ftMh_SM_Wait1_0,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -23,6 +24,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Wait2_0 = 342
         ftMh_SM_Wait2_0,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -33,6 +35,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Entry = 343
         ftMh_SM_Entry,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -43,6 +46,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Damage = 344
         ftMh_SM_Damage,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -53,6 +57,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Damage2 = 345
         ftMh_SM_Damage2,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -63,6 +68,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_WaitSweep = 346
         ftMh_SM_WaitSweep,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -73,6 +79,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_SweepLoop = 347
         ftMh_SM_SweepLoop,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -83,6 +90,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_SweepWait = 348
         ftMh_SM_SweepWait,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -93,6 +101,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Slap = 349
         ftMh_SM_Slap,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -103,6 +112,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Walk2 = 350
         ftMh_SM_Walk2,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -113,6 +123,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_WalkLoop = 351
         ftMh_SM_WalkLoop,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -123,6 +134,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_WalkWait = 352
         ftMh_SM_WalkWait,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -133,6 +145,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_WalkShoot = 353
         ftMh_SM_WalkShoot,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -143,6 +156,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Drill = 354
         ftMh_SM_Drill,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -153,6 +167,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_RockCrushUp = 355
         ftMh_SM_RockCrushUp,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -163,6 +178,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_RockCrushWait = 356
         ftMh_SM_RockCrushWait,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -173,6 +189,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_RockCrushDown = 357
         ftMh_SM_RockCrushDown,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -183,6 +200,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_PaperCrush = 358
         ftMh_SM_PaperCrush,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -193,6 +211,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Poke1 = 359
         ftMh_SM_Poke1,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -203,6 +222,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Poke2 = 360
         ftMh_SM_Poke2,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -213,6 +233,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_FingerBeamStart = 361
         ftMh_SM_FingerBeamStart,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -223,6 +244,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_FingerBeamLoop = 362
         ftMh_SM_FingerBeamLoop,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -233,6 +255,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_FingerBeamEnd = 363
         ftMh_SM_FingerBeamEnd,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -243,6 +266,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_FingerGun1 = 364
         ftMh_SM_FingerGun1,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -253,6 +277,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_FingerGun2 = 365
         ftMh_SM_FingerGun2,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -263,6 +288,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_FingerGun3 = 366
         ftMh_SM_FingerGun3,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -273,6 +299,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_BackAirplane1 = 367
         ftMh_SM_BackAirplane1,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -283,6 +310,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_BackAirplane2 = 368
         ftMh_SM_BackAirplane2,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -293,6 +321,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_BackAirplane3 = 369
         ftMh_SM_BackAirplane3,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -303,6 +332,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_BackPunch = 370
         ftMh_SM_BackPunch,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -313,6 +343,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_BackCrush = 371
         ftMh_SM_BackCrush,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -323,6 +354,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_BackDisappear = 372
         ftMh_SM_BackDisappear,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -333,6 +365,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Wait1_1 = 373
         ftMh_SM_Wait1_1,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -343,6 +376,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Grab = 374
         ftMh_SM_Grab,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -353,6 +387,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Cancel = 375
         ftMh_SM_Cancel,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -363,6 +398,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Squeezing0 = 376
         ftMh_SM_Squeezing0,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -373,6 +409,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Squeezing1 = 377
         ftMh_SM_Squeezing1,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -383,6 +420,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Squeeze = 378
         ftMh_SM_Squeeze,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -393,6 +431,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Throw = 379
         ftMh_SM_Throw,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -403,6 +442,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Slam = 380
         ftMh_SM_Slam,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -413,6 +453,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Fail = 381
         ftMh_SM_Fail,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -423,6 +464,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_TagCrush = 382
         ftMh_SM_TagCrush,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -433,6 +475,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_TagApplaud = 383
         ftMh_SM_TagApplaud,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -443,6 +486,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_TagRockPaper = 384
         ftMh_SM_TagRockPaper,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -453,6 +497,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_TagGrab = 385
         ftMh_SM_TagGrab,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -463,6 +508,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_TagSqueeze = 386
         ftMh_SM_TagSqueeze,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -473,6 +519,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_TagFail = 387
         ftMh_SM_TagFail,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -483,6 +530,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_TagCancel = 388
         ftMh_SM_TagCancel,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -493,6 +541,7 @@ MotionState ftCh_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftMh_MS_Wait1_2 = 389
         ftMh_SM_Wait1_2,
         Ft_MF_None,
         FtMoveId_Default << 24,

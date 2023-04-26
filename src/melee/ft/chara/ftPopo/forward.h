@@ -47,17 +47,21 @@ typedef enum ftPopo_MotionState {
     ftPp_MS_SpecialHiThrow_1,
     ftPp_MS_SpecialAirHiStart_0,
     ftPp_MS_SpecialAirHiThrow_0,
+    ftPp_MS_SpecialAirHiThrow2,
     ftPp_MS_SpecialAirHiStart_1,
     ftPp_MS_SpecialAirHiThrow_1,
     ftPp_MS_SpecialLw,
     ftPp_MS_SpecialAirLw,
     ftPp_MS_SpecialS_0,
+    ftPp_MS_SpecialS_1,
     ftPp_MS_SpecialHi_0,
     ftPp_MS_SpecialHi_1,
     ftPp_MS_SpecialHi_2,
     ftPp_MS_SpecialHi_3,
     ftPp_MS_SpecialHi_4,
     ftPp_MS_SpecialHi_5,
+    ftPp_MS_Count,
+    ftPp_MS_SelfCount = ftPp_MS_Count - ftCo_MS_Count,
 } ftPopo_MotionState;
 
 typedef enum ftPp_Submotion {
@@ -87,6 +91,8 @@ typedef enum ftPp_Submotion {
     ftPp_SM_SpecialHi_3,
     ftPp_SM_SpecialHi_4,
     ftPp_SM_SpecialHi_5,
+    ftPp_SM_Count,
+    ftPp_SM_SelfCount = ftPp_SM_Count - ftCo_SM_Count,
 } ftPp_Submotion;
 
 #endif

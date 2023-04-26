@@ -16,8 +16,9 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-MotionState ftLg_Init_MotionStateTable[] = {
+MotionState ftLg_Init_MotionStateTable[ftLg_MS_SelfCount] = {
     {
+        // ftLg_MS_SpecialN = 341
         ftLg_SM_SpecialN,
         ftLg_MF_SpecialN,
         FtMoveId_SpecialN << 24,
@@ -28,6 +29,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftLg_MS_SpecialAirN = 342
         ftLg_SM_SpecialAirN,
         ftLg_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
@@ -38,6 +40,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftLg_MS_SpecialSStart = 343
         ftLg_SM_SpecialSStart,
         ftLg_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -48,6 +51,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftLg_MS_SpecialSHold = 344
         ftLg_SM_SpecialSHold,
         ftLg_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -58,6 +62,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftLg_MS_SpecialS2 = 345
         ftLg_SM_SpecialS2,
         ftLg_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -68,6 +73,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftLg_MS_SpecialSEnd = 346
         ftLg_SM_SpecialSEnd,
         ftLg_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -78,6 +84,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftLg_MS_SpecialS = 347
         ftLg_SM_SpecialS,
         ftLg_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -88,6 +95,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftLg_MS_SpecialSMisfire = 348
         ftLg_SM_SpecialSMisfire,
         ftLg_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -98,6 +106,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftLg_MS_SpecialAirSStart = 349
         ftLg_SM_SpecialAirSStart,
         ftLg_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
@@ -108,6 +117,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftLg_MS_SpecialAirSHold = 350
         ftLg_SM_SpecialAirSHold,
         ftLg_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
@@ -118,6 +128,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftLg_MS_SpecialAirS2 = 351
         ftLg_SM_SpecialS2,
         ftLg_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
@@ -128,6 +139,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftLg_MS_SpecialAirSEnd = 352
         ftLg_SM_SpecialAirSEnd,
         ftLg_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
@@ -138,6 +150,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftLg_MS_SpecialAirS = 353
         ftLg_SM_SpecialAirS,
         ftLg_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
@@ -148,6 +161,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftLg_MS_SpecialAirSMisfire = 354
         ftLg_SM_SpecialAirSMisfire,
         ftLg_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
@@ -158,6 +172,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftLg_MS_SpecialHi = 355
         ftLg_SM_SpecialHi,
         ftLg_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -168,6 +183,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftLg_MS_SpecialAirHi = 356
         ftLg_SM_SpecialAirHi,
         ftLg_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
@@ -178,6 +194,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftLg_MS_SpecialLw = 357
         ftLg_SM_SpecialLw,
         ftLg_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
@@ -188,6 +205,7 @@ MotionState ftLg_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftLg_MS_SpecialAirLw = 358
         ftLg_SM_SpecialAirLw,
         ftLg_MF_SpecialAirLw,
         FtMoveId_SpecialLw << 24,

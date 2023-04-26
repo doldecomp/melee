@@ -1,6 +1,7 @@
 #ifndef GALE01_132A0C
 #define GALE01_132A0C
 
+#include "ftKoopa/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -126,7 +127,7 @@
 /* 135DE0 */ void ftKp_SpecialAirHi_Phys(HSD_GObj* gobj);
 /* 135E4C */ void ftKp_SpecialHi_Coll(HSD_GObj* gobj);
 /* 135F6C */ void ftKp_SpecialAirHi_Coll(HSD_GObj* gobj);
-/* 3CEDC0 */ extern MotionState ftKp_Init_MotionStateTable[];
+/* 3CEDC0 */ extern MotionState ftKp_Init_MotionStateTable[ftKp_MS_SelfCount];
 /* 3CF0A0 */ extern char ftKp_Init_DatFilename[];
 /* 3CF0AC */ extern char ftKp_Init_DataName[];
 /* 3CF1E0 */ extern char ftKp_Init_AnimDatFilename[];

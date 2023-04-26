@@ -1,6 +1,7 @@
 #ifndef GALE01_14F9CC
 #define GALE01_14F9CC
 
+#include "ftSandbag/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -16,7 +17,7 @@
 /* 14FC24 */ void ftSb_MS_341_IASA(HSD_GObj* gobj);
 /* 14FC28 */ void ftSb_MS_341_Phys(HSD_GObj* gobj);
 /* 14FC48 */ void ftSb_MS_341_Coll(HSD_GObj* gobj);
-/* 3D3998 */ extern MotionState ftSb_Init_MotionStateTable[];
+/* 3D3998 */ extern MotionState ftSb_Init_MotionStateTable[ftSb_MS_SelfCount];
 /* 3D39B8 */ extern char ftSb_Init_DatFilename[];
 /* 3D39C4 */ extern char ftSb_Init_DataName[];
 /* 3D3A18 */ extern char ftSb_Init_AnimDatFilename[];

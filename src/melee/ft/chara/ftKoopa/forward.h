@@ -63,6 +63,8 @@ typedef enum ftKoopa_MotionState {
     ftKp_MS_SpecialLw,
     ftKp_MS_SpecialAirLw,
     ftKp_MS_SpecialLwLanding,
+    ftKp_MS_Count,
+    ftKp_MS_SelfCount = ftKp_MS_Count - ftCo_MS_Count,
 } ftKoopa_MotionState;
 
 typedef enum ftKp_Submotion {
@@ -87,6 +89,8 @@ typedef enum ftKp_Submotion {
     ftKp_SM_SpecialLw,
     ftKp_SM_SpecialAirLw,
     ftKp_SM_SpecialLwLanding,
+    ftKp_SM_Count,
+    ftKp_SM_SelfCount = ftKp_SM_Count - ftCo_SM_Count,
 } ftKp_Submotion;
 
 #endif

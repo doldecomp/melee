@@ -11,8 +11,9 @@
 #include "ft/types.h"
 #include "lb/lb_00B0.h"
 
-MotionState ftSb_Init_MotionStateTable[] = {
+MotionState ftSb_Init_MotionStateTable[ftSb_MS_SelfCount] = {
     {
+        // ftSb_MS_WaitReverse = 341
         ftSb_SM_WaitReverse,
         Ft_MF_None,
         (FtMoveId_Default << 24) | (1 << 22),

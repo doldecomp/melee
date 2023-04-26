@@ -6,7 +6,6 @@
 
 #include "ft/types.h"
 
-static usize_t const states_count = ftMr_MS_Count - ftCo_MS_Count;
 static usize_t const aux_states_count = 2;
 
 /* 0E08CC */ void ftMr_Init_OnDeath(HSD_GObj* gobj);
@@ -22,7 +21,7 @@ static usize_t const aux_states_count = 2;
 /* 0E0C68 */ void ftMr_Init_OnKnockbackExit(HSD_GObj* gobj);
 /* 0E0CAC */ void ftMr_Init_UnkDemoCallbacks0(s32, s32*, s32*);
 /* 0E0CE0 */ char* ftMr_Init_GetMotionFileString(enum_t);
-/* 3C7120 */ extern MotionState ftMr_Init_MotionStateTable[states_count];
+/* 3C7120 */ extern MotionState ftMr_Init_MotionStateTable[ftMr_MS_SelfCount];
 /* 3C7260 */ extern MotionState ftMr_Init_UnkMotionStates0[aux_states_count];
 
 #endif

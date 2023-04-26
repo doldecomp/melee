@@ -1,6 +1,7 @@
 #ifndef GALE01_11B51C
 #define GALE01_11B51C
 
+#include "ftPeach/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -99,7 +100,7 @@
 /* 11EA90 */ void ftPe_SpecialAirNAttack_Phys(HSD_GObj* gobj);
 /* 11EAE0 */ void ftPe_SpecialNAttack_Coll(HSD_GObj* gobj);
 /* 11EB1C */ void ftPe_SpecialAirNAttack_Coll(HSD_GObj* gobj);
-/* 3CCCB8 */ extern MotionState ftPe_Init_MotionStateTable[];
+/* 3CCCB8 */ extern MotionState ftPe_Init_MotionStateTable[ftPe_MS_SelfCount];
 /* 3CD078 */ extern char ftPe_Init_DatFilename[];
 /* 3CD084 */ extern char ftPe_Init_DataName[];
 /* 3CD204 */ extern char ftPe_Init_AnimDatFilename[];

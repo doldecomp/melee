@@ -1,6 +1,7 @@
 #ifndef GALE01_1147C0
 #define GALE01_1147C0
 
+#include "ftNess/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -17,7 +18,7 @@
 /* 114B2C */ void ftNs_Init_LoadSpecialAttrs(HSD_GObj* gobj);
 /* 114B6C */ void ftNs_Init_OnKnockbackEnter(HSD_GObj* gobj);
 /* 114BB0 */ void ftNs_Init_OnKnockbackExit(HSD_GObj* gobj);
-/* 3CC650 */ extern MotionState ftNs_Init_MotionStateTable[];
+/* 3CC650 */ extern MotionState ftNs_Init_MotionStateTable[ftNs_MS_SelfCount];
 /* 3CCAD0 */ extern char ftNs_Init_DatFilename[];
 /* 3CCADC */ extern char ftNs_Init_DataName[];
 /* 3CCBF8 */ extern char ftNs_Init_AnimDatFilename[];

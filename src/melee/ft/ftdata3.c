@@ -1,4 +1,5 @@
 #include <platform.h>
+#include "ftCommon/forward.h"
 
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
@@ -10,7 +11,7 @@
 #include "ftMasterHand/ftMh_CaptureMasterHand_1.h"
 #include "ftMasterHand/ftMh_CaptureWaitMasterHand.h"
 
-MotionState ftData_MotionStateList[] = {
+MotionState ftData_MotionStateList[ftCo_MS_Count] = {
     {
         // ftCo_MS_DeadDown = 0
         ftCo_SM_None,

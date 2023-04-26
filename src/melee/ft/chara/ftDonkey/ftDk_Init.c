@@ -29,8 +29,9 @@
 
 #include <dolphin/mtx/types.h>
 
-MotionState ftDk_Init_MotionStateTable[] = {
+MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
     {
+        // ftDk_MS_HeavyWait0 = 341
         ftDk_SM_HeavyWait0,
         ftDk_MF_MS_341,
         (FtMoveId_ThrowF << 24) | (1 << 22),
@@ -41,6 +42,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_HeavyWalkSlow = 342
         ftDk_SM_HeavyWalkSlow,
         ftDk_MF_MS_342,
         FtMoveId_ThrowF << 24,
@@ -51,6 +53,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_HeavyWalkMiddle = 343
         ftDk_SM_HeavyWalkMiddle,
         ftDk_MF_MS_342,
         FtMoveId_ThrowF << 24,
@@ -61,6 +64,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_HeavyWalkFast = 344
         ftDk_SM_HeavyWalkFast,
         ftDk_MF_MS_342,
         FtMoveId_ThrowF << 24,
@@ -71,6 +75,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_HeavyTurn = 345
         ftDk_SM_HeavyTurn,
         ftDk_MF_MS_345,
         FtMoveId_ThrowF << 24,
@@ -81,6 +86,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_HeavyWait1 = 346
         ftDk_SM_HeavyWait1,
         ftDk_MF_MS_341,
         FtMoveId_ThrowF << 24,
@@ -91,6 +97,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_HeavyFall = 347
         ftDk_SM_HeavyFall,
         ftDk_MF_MS_341,
         FtMoveId_ThrowF << 24,
@@ -101,6 +108,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_HeavyJump = 348
         ftDk_SM_HeavyJump,
         ftDk_MF_MS_348,
         FtMoveId_ThrowF << 24,
@@ -111,6 +119,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_HeavyLanding = 349
         ftDk_SM_HeavyLanding,
         ftDk_MF_MS_341,
         (FtMoveId_ThrowF << 24) | (1 << 22),
@@ -121,6 +130,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_HeavyWait2 = 350
         ftDk_SM_HeavyWait2,
         ftDk_MF_MS_350,
         FtMoveId_ThrowF << 24,
@@ -131,6 +141,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowFWait0 = 351
         ftDk_SM_ThrowFWait0,
         ftDk_MF_CargoWait,
         (FtMoveId_ThrowF << 24) | (1 << 22),
@@ -141,6 +152,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowFWalkSlow = 352
         ftDk_SM_ThrowFWalkSlow,
         ftDk_MF_CargoWalk,
         FtMoveId_ThrowF << 24,
@@ -151,6 +163,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowFWalkMiddle = 353
         ftDk_SM_ThrowFWalkMiddle,
         ftDk_MF_CargoWalk,
         FtMoveId_ThrowF << 24,
@@ -161,6 +174,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowFWalkFast = 354
         ftDk_SM_ThrowFWalkFast,
         ftDk_MF_CargoWalk,
         FtMoveId_ThrowF << 24,
@@ -171,6 +185,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowFTurn = 355
         ftDk_SM_ThrowFTurn,
         ftDk_MF_CargoTurn,
         FtMoveId_ThrowF << 24,
@@ -181,6 +196,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowFWait1 = 356
         ftDk_SM_ThrowFWait1,
         ftDk_MF_CargoWait,
         FtMoveId_ThrowF << 24,
@@ -191,6 +207,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowFFall = 357
         ftDk_SM_ThrowFFall,
         ftDk_MF_CargoWait,
         FtMoveId_ThrowF << 24,
@@ -201,6 +218,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowFJump = 358
         ftDk_SM_ThrowFJump,
         ftDk_MF_CargoJump,
         FtMoveId_ThrowF << 24,
@@ -211,6 +229,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowFLanding = 359
         ftDk_SM_ThrowFLanding,
         ftDk_MF_CargoWait,
         (FtMoveId_ThrowF << 24) | (1 << 22),
@@ -221,6 +240,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowFWait2 = 360
         ftDk_SM_ThrowFWait2,
         ftDk_MF_MS_360,
         FtMoveId_ThrowF << 24,
@@ -231,6 +251,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowFF = 361
         ftDk_SM_ThrowFF,
         ftDk_MF_CargoThrowF,
         FtMoveId_CargoThrowF << 24,
@@ -241,6 +262,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowFB = 362
         ftDk_SM_ThrowFB,
         ftDk_MF_CargoThrowB,
         FtMoveId_CargoThrowB << 24,
@@ -251,6 +273,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowFHi = 363
         ftDk_SM_ThrowFHi,
         ftDk_MF_CargoThrowHi,
         FtMoveId_CargoThrowHi << 24,
@@ -261,6 +284,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowFLw = 364
         ftDk_SM_ThrowFLw,
         ftDk_MF_CargoThrowLw,
         FtMoveId_CargoThrowLw << 24,
@@ -271,6 +295,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowAirFF = 365
         ftDk_SM_ThrowFF,
         ftDk_MF_CargoThrowF,
         FtMoveId_CargoThrowF << 24,
@@ -281,6 +306,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowAirFB = 366
         ftDk_SM_ThrowFB,
         ftDk_MF_CargoThrowB,
         FtMoveId_CargoThrowB << 24,
@@ -291,6 +317,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowAirFHi = 367
         ftDk_SM_ThrowFHi,
         ftDk_MF_CargoThrowHi,
         FtMoveId_CargoThrowHi << 24,
@@ -301,6 +328,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_ThrowAirFLw = 368
         ftDk_SM_ThrowFLw,
         ftDk_MF_CargoThrowLw,
         FtMoveId_CargoThrowLw << 24,
@@ -311,6 +339,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialNStart = 369
         ftDk_SM_SpecialNStart,
         ftDk_MF_SpecialN,
         FtMoveId_SpecialN << 24,
@@ -321,6 +350,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialNLoop = 370
         ftDk_SM_SpecialNLoop,
         ftDk_MF_SpecialN,
         FtMoveId_SpecialN << 24,
@@ -331,6 +361,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialNCancel = 371
         ftDk_SM_SpecialNCancel,
         ftDk_MF_SpecialN,
         FtMoveId_SpecialN << 24,
@@ -341,6 +372,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialN = 372
         ftDk_SM_SpecialN,
         ftDk_MF_SpecialN,
         FtMoveId_SpecialN << 24,
@@ -351,6 +383,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialNFull = 373
         ftDk_SM_SpecialNFull,
         ftDk_MF_SpecialN,
         FtMoveId_SpecialN << 24,
@@ -361,6 +394,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialAirNStart = 374
         ftDk_SM_SpecialAirNStart,
         ftDk_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
@@ -371,6 +405,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialAirNLoop = 375
         ftDk_SM_SpecialAirNLoop,
         ftDk_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
@@ -381,6 +416,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialAirNCancel = 376
         ftDk_SM_SpecialAirNCancel,
         ftDk_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
@@ -391,6 +427,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialAirN = 377
         ftDk_SM_SpecialAirN,
         ftDk_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
@@ -401,6 +438,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialAirNFull = 378
         ftDk_SM_SpecialAirNFull,
         ftDk_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
@@ -411,6 +449,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialS = 379
         ftDk_SM_SpecialS,
         ftDk_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -421,6 +460,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialAirS = 380
         ftDk_SM_SpecialAirS,
         ftDk_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
@@ -431,6 +471,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialHi = 381
         ftDk_SM_SpecialHi,
         ftDk_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -441,6 +482,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialAirHi = 382
         ftDk_SM_SpecialAirHi,
         ftDk_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
@@ -451,6 +493,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialLwStart = 383
         ftDk_SM_SpecialLwStart,
         ftDk_MF_SpecialLwStart,
         FtMoveId_SpecialLw << 24,
@@ -461,6 +504,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialLwLoop = 384
         ftDk_SM_SpecialLwLoop,
         ftDk_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
@@ -471,6 +515,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialLwEnd0 = 385
         ftDk_SM_SpecialLwEnd0,
         ftDk_MF_SpecialLwStart,
         FtMoveId_SpecialLw << 24,
@@ -481,6 +526,7 @@ MotionState ftDk_Init_MotionStateTable[] = {
         ftCamera_UpdateCameraBox,
     },
     {
+        // ftDk_MS_SpecialLwEnd1 = 386
         ftDk_SM_SpecialLwEnd1,
         ftDk_MF_MS_386,
         FtMoveId_SpecialLw << 24,

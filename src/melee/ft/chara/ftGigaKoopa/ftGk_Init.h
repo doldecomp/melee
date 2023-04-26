@@ -1,6 +1,7 @@
 #ifndef GALE01_14F640
 #define GALE01_14F640
 
+#include "ftKoopa/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -17,7 +18,7 @@
 /* 14F948 */ void ftGk_Init_OnKnockbackExit(HSD_GObj*);
 /* 14F98C */ void ftGk_Init_UnkDemoCallbacks0(s32, s32*, s32*);
 /* 14F9A4 */ char* ftGk_Init_GetMotionFileString(enum_t);
-/* 3D35E8 */ extern MotionState ftGk_Init_MotionStateTable[];
+/* 3D35E8 */ extern MotionState ftGk_Init_MotionStateTable[ftKp_MS_SelfCount];
 /* 3D38C8 */ extern MotionState ftGk_Init_UnkMotionStates0[];
 /* 3D38E8 */ extern char ftGk_Init_DatFilename[];
 /* 3D38F4 */ extern char ftGk_Init_DataName[];

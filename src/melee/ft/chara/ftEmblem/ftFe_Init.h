@@ -1,6 +1,7 @@
 #ifndef GALE01_14EEF8
 #define GALE01_14EEF8
 
+#include "ftMars/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -14,7 +15,7 @@
 /* 14F148 */ void ftFe_Init_LoadSpecialAttrs(HSD_GObj*);
 /* 14F168 */ void ftFe_Init_OnKnockbackEnter(HSD_GObj*);
 /* 14F1AC */ void ftFe_Init_OnKnockbackExit(HSD_GObj*);
-/* 3D2E80 */ extern MotionState ftFe_Init_MotionStateTable[];
+/* 3D2E80 */ extern MotionState ftFe_Init_MotionStateTable[ftMs_MS_SelfCount];
 /* 3D3280 */ extern Fighter_CostumeStrings ftFe_Init_CostumeStrings[];
 /* 3D328C */ extern char ftFe_Init_DatFilename[];
 /* 3D3410 */ extern char ftFe_Init_AnimDatFilename[];

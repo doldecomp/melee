@@ -82,6 +82,8 @@ typedef enum ftLink_MotionState {
     ftLk_MS_SpecialAirLw,
     ftLk_MS_AirCatch,
     ftLk_MS_AirCatchHit,
+    ftLk_MS_Count,
+    ftLk_MS_SelfCount = ftLk_MS_Count - ftCo_MS_Count,
 } ftLink_MotionState;
 
 typedef enum ftLk_Submotion {
@@ -104,6 +106,8 @@ typedef enum ftLk_Submotion {
     ftLk_SM_SpecialAirLw,
     ftLk_SM_AirCatch,
     ftLk_SM_AirCatchHit,
+    ftLk_SM_Count,
+    ftLk_SM_SelfCount = ftLk_SM_Count - ftCo_SM_Count,
 } ftLk_Submotion;
 
 #endif

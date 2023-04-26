@@ -116,6 +116,8 @@ typedef enum ftGameWatch_MotionState {
     ftGw_MS_SpecialAirLw,
     ftGw_MS_SpecialAirLwCatch,
     ftGw_MS_SpecialAirLwShoot,
+    ftGw_MS_Count,
+    ftGw_MS_SelfCount = ftGw_MS_Count - ftCo_MS_Count,
 } ftGameWatch_MotionState;
 
 typedef enum ftGw_Submotion {
@@ -147,6 +149,8 @@ typedef enum ftGw_Submotion {
     ftGw_SM_SpecialAirLw,
     ftGw_SM_SpecialAirLwCatch,
     ftGw_SM_SpecialAirLwShoot,
+    ftGw_SM_Count,
+    ftGw_SM_SelfCount = ftGw_SM_Count - ftCo_SM_Count,
 } ftGw_Submotion;
 
 typedef enum ftGameWatch_PanicLevel {

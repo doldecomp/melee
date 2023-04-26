@@ -97,6 +97,8 @@ typedef enum ftNess_MotionState {
     ftNs_MS_SpecialAirLwHit,
     ftNs_MS_SpecialAirLwEnd,
     ftNs_MS_SpecialAirLwTurn,
+    ftNs_MS_Count,
+    ftNs_MS_SelfCount = ftNs_MS_Count - ftCo_MS_Count,
 } ftNess_MotionState;
 
 typedef enum ftNs_Submotion {
@@ -131,6 +133,8 @@ typedef enum ftNs_Submotion {
     ftNs_SM_SpecialAirLwHold,
     ftNs_SM_SpecialAirLwHit,
     ftNs_SM_SpecialAirLwEnd,
+    ftNs_SM_Count,
+    ftNs_SM_SelfCount = ftNs_SM_Count - ftCo_SM_Count,
 } ftNs_Submotion;
 
 #endif

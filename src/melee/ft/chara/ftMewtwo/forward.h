@@ -59,6 +59,8 @@ typedef enum ftMewtwo_MotionState {
     ftMt_MS_SpecialAirHi,
     ftMt_MS_SpecialLw,
     ftMt_MS_SpecialAirLw,
+    ftMt_MS_Count,
+    ftMt_MS_SelfCount = ftMt_MS_Count - ftCo_MS_Count,
 } ftMewtwo_MotionState;
 
 typedef enum ftMt_Submotion {
@@ -81,6 +83,8 @@ typedef enum ftMt_Submotion {
     ftMt_SM_SpecialAirHi,
     ftMt_SM_SpecialLw,
     ftMt_SM_SpecialAirLw,
+    ftMt_SM_Count,
+    ftMt_SM_SelfCount = ftMt_SM_Count - ftCo_SM_Count,
 } ftMt_Submotion;
 
 #endif

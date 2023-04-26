@@ -70,6 +70,8 @@ typedef enum ftSeak_MotionState {
     ftSk_MS_SpecialLw2,
     ftSk_MS_SpecialAirLw,
     ftSk_MS_SpecialAirLw2,
+    ftSk_MS_Count,
+    ftSk_MS_SelfCount = ftSk_MS_Count - ftCo_MS_Count,
 } ftSeak_MotionState;
 
 typedef enum ftSk_Submotion {
@@ -95,6 +97,8 @@ typedef enum ftSk_Submotion {
     ftSk_SM_SpecialLw2,
     ftSk_SM_SpecialAirLw,
     ftSk_SM_SpecialAirLw2,
+    ftSk_SM_Count,
+    ftSk_SM_SelfCount = ftSk_SM_Count - ftCo_SM_Count,
 } ftSk_Submotion;
 
 #endif
