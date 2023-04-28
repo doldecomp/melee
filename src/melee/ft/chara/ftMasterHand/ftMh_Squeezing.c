@@ -1,8 +1,8 @@
 #include "ftMh_Squeezing.h"
 
-#include "ftMh_ThrownMasterHand.h"
 #include "ftMh_BackDisappear.h"
 #include "ftMh_Squeeze.h"
+#include "ftMh_ThrownMasterHand.h"
 #include "ftMh_Wait1_2.h"
 
 #include "ft/ft_081B.h"

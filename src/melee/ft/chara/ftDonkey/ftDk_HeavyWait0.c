@@ -1,8 +1,8 @@
 #include "ftDk_HeavyWait0.h"
 
-#include "ftDk_MS_345_0.h"
-#include "ftDk_HeavyTurn.h"
 #include "ftDk_HeavyFall.h"
+#include "ftDk_HeavyTurn.h"
+#include "ftDk_MS_345_0.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"

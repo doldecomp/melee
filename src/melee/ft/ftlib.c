@@ -683,7 +683,7 @@ bool ftLib_80086ED0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x221E_flag.bits.b0 || fp->x221E_flag.bits.b2 ||
-        Player_GetMoreFlagsBit4(fp->xC_playerID) || fp->x2228_flag.bits.b2 ||
+        Player_GetMoreFlagsBit4(fp->xC_playerID) || fp->x2228_flag.b2 ||
         fp->x2229_b3 || fp->x2220_flag.bits.b7)
     {
         return false;

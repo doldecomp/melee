@@ -1,7 +1,7 @@
 #include "ftMh_Drill.h"
 
-#include "ftMh_Walk.h"
 #include "ftMh_Wait1_2.h"
+#include "ftMh_Walk.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"
