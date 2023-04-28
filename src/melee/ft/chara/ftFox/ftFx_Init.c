@@ -4,7 +4,7 @@
 
 #include "ftFox/ftFx_Init.h"
 
-#include "ftFx_Appeal.h"
+#include "ftFx_AppealS.h"
 #include "ftFx_SpecialHi.h"
 #include "ftFx_SpecialLw.h"
 #include "ftFx_SpecialN.h"

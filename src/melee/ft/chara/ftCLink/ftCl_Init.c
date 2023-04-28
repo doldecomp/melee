@@ -4,7 +4,7 @@
 
 #include "ftCl_Init.h"
 
-#include "ftCl_Appeal.h"
+#include "ftCl_AppealS.h"
 #include "inlines.h"
 #include "types.h"
 
