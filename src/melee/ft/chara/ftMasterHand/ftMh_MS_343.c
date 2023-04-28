@@ -31,7 +31,7 @@ void ftMh_MS_343_801510B0(HSD_GObj* gobj)
     ftBossLib_8015C09C(gobj, -1);
 }
 
-void ftMh_MS_343_Anim(HSD_GObj* gobj)
+void ftMh_Entry_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -40,7 +40,7 @@ void ftMh_MS_343_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_343_IASA(HSD_GObj* gobj)
+void ftMh_Entry_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!Player_GetPlayerSlotType(fp->xC_playerID)) {
@@ -48,9 +48,9 @@ void ftMh_MS_343_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_343_Phys(HSD_GObj* gobj) {}
+void ftMh_Entry_Phys(HSD_GObj* gobj) {}
 
-void ftMh_MS_343_Coll(HSD_GObj* gobj) {}
+void ftMh_Entry_Coll(HSD_GObj* gobj) {}
 
 static void ftMh_MS_343_801511FC(HSD_GObj* gobj)
 {

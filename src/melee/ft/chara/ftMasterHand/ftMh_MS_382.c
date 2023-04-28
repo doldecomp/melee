@@ -6,7 +6,7 @@
 #include "ft/ftbosslib.h"
 #include "ftCrazyHand/ftCh_Init.h"
 
-void ftMh_MS_382_Anim(HSD_GObj* gobj)
+void ftMh_TagCrush_Anim(HSD_GObj* gobj)
 {
     if (ftBossLib_8015C31C() || ftBossLib_8015C3A0() ||
         !ftAnim_IsFramesRemaining(gobj))
@@ -18,7 +18,7 @@ void ftMh_MS_382_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_382_IASA(HSD_GObj* arg0)
+void ftMh_TagCrush_IASA(HSD_GObj* arg0)
 {
     Fighter* fp = GET_FIGHTER(arg0);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -26,12 +26,12 @@ void ftMh_MS_382_IASA(HSD_GObj* arg0)
     }
 }
 
-void ftMh_MS_382_Phys(HSD_GObj* gobj)
+void ftMh_TagCrush_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-void ftMh_MS_382_Coll(HSD_GObj* gobj) {}
+void ftMh_TagCrush_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_382_801552F8(HSD_GObj* gobj)
 {

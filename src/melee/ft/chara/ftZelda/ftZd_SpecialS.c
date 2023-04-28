@@ -128,7 +128,7 @@ void ftZd_SpecialSStart_Anim(HSD_GObj* gobj)
 
 // 8013B89C - 8013BA04 (360 bytes)
 // https://decomp.me/scratch/uGOsz
-void ftZd_SpecialSHold_Anim(HSD_GObj* gobj)
+void ftZd_SpecialSLoop_Anim(HSD_GObj* gobj)
 {
     Vec3 sp20;
     ftZelda_DatAttrs* attributes;
@@ -262,7 +262,7 @@ void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
 
 // 8013BBA8 - 8013BD10 (360 bytes)
 // https://decomp.me/scratch/llKUS
-void ftZd_SpecialAirSHold_Anim(HSD_GObj* gobj)
+void ftZd_SpecialAirSLoop_Anim(HSD_GObj* gobj)
 {
     Vec3 sp20;
     f32 temp_f1;
@@ -361,7 +361,7 @@ void ftZd_SpecialSStart_IASA(HSD_GObj* gobj) {}
 
 // 8013BDD4 - 8013BE50 (124 bytes)
 // https://decomp.me/scratch/MaYEA
-void ftZd_SpecialSHold_IASA(HSD_GObj* gobj)
+void ftZd_SpecialSLoop_IASA(HSD_GObj* gobj)
 {
     f32 temp_f1;
     s32 var_r0;
@@ -389,7 +389,7 @@ void ftZd_SpecialAirSStart_IASA(HSD_GObj* gobj) {}
 
 // 8013BE58 - 8013BED4 (124 bytes)
 // https://decomp.me/scratch/Zxkmg
-void ftZd_SpecialAirSHold_IASA(HSD_GObj* gobj)
+void ftZd_SpecialAirSLoop_IASA(HSD_GObj* gobj)
 {
     f32 temp_f1;
     s32 var_r0;
@@ -434,7 +434,7 @@ void ftZd_SpecialSStart_Phys(HSD_GObj* gobj)
 }
 
 // 8013BED8 - 8013BF30 (32 bytes)
-void ftZd_SpecialSHold_Phys(HSD_GObj* gobj)
+void ftZd_SpecialSLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
@@ -478,7 +478,7 @@ void ftZd_SpecialAirSStart_Phys(HSD_GObj* gobj)
 
 // 8013BFB0 - 8013C010 (96 bytes)
 // https://decomp.me/scratch/BxLXt
-void ftZd_SpecialAirSHold_Phys(HSD_GObj* gobj)
+void ftZd_SpecialAirSLoop_Phys(HSD_GObj* gobj)
 {
     Fighter* fp;
     s32 temp_r3;
@@ -554,7 +554,7 @@ void ftZd_SpecialSStart_Coll(HSD_GObj* gobj)
 
 // 8013C0DC - 8013C148 (108 bytes)
 // https://decomp.me/scratch/x1Nmd
-void ftZd_SpecialSHold_Coll(HSD_GObj* gobj)
+void ftZd_SpecialSLoop_Coll(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -593,7 +593,7 @@ void ftZd_SpecialAirSStart_Coll(HSD_GObj* gobj)
 }
 
 // 8013C220 - 8013C28C (108 bytes)
-void ftZd_SpecialAirSHold_Coll(HSD_GObj* gobj)
+void ftZd_SpecialAirSLoop_Coll(HSD_GObj* gobj)
 {
     Fighter* fp;
 

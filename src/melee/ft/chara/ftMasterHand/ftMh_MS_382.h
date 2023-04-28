@@ -5,10 +5,10 @@
 
 #include <baselib/forward.h>
 
-/* 15521C */ void ftMh_MS_382_Anim(HSD_GObj* gobj);
-/* 155290 */ void ftMh_MS_382_IASA(HSD_GObj* gobj);
-/* 1552D4 */ void ftMh_MS_382_Phys(HSD_GObj* gobj);
-/* 1552F4 */ void ftMh_MS_382_Coll(HSD_GObj* gobj);
+/* 15521C */ void ftMh_TagCrush_Anim(HSD_GObj* gobj);
+/* 155290 */ void ftMh_TagCrush_IASA(HSD_GObj* gobj);
+/* 1552D4 */ void ftMh_TagCrush_Phys(HSD_GObj* gobj);
+/* 1552F4 */ void ftMh_TagCrush_Coll(HSD_GObj* gobj);
 /* 1552F8 */ void ftMh_MS_382_801552F8(HSD_GObj* gobj);
 
 #endif

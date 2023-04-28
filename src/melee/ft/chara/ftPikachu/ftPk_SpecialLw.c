@@ -282,7 +282,7 @@ void ftPk_SpecialAirLwStart_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialLw_Anim(HSD_GObj* gobj)
+void ftPk_SpecialLwLoop0_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -306,7 +306,7 @@ void ftPk_SpecialLw_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialAirLw_Anim(HSD_GObj* gobj)
+void ftPk_SpecialAirLwLoop0_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -332,7 +332,7 @@ void ftPk_SpecialAirLw_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialLwHit_Anim(HSD_GObj* gobj)
+void ftPk_SpecialLwLoop1_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2200_ftcmd_var0) {
@@ -341,7 +341,7 @@ void ftPk_SpecialLwHit_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialAirLwHit_Anim(HSD_GObj* gobj)
+void ftPk_SpecialAirLwLoop1_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2200_ftcmd_var0) {
@@ -374,22 +374,22 @@ void ftPk_SpecialAirLwStart_Phys(HSD_GObj* gobj)
     ft_80084EEC(gobj);
 }
 
-void ftPk_SpecialLw_Phys(HSD_GObj* gobj)
+void ftPk_SpecialLwLoop0_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftPk_SpecialAirLw_Phys(HSD_GObj* gobj)
+void ftPk_SpecialAirLwLoop0_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
-void ftPk_SpecialLwHit_Phys(HSD_GObj* gobj)
+void ftPk_SpecialLwLoop1_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftPk_SpecialAirLwHit_Phys(HSD_GObj* gobj)
+void ftPk_SpecialAirLwLoop1_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
@@ -419,22 +419,22 @@ void ftPk_SpecialAirLwStart_Coll(HSD_GObj* gobj)
     ft_80082C74(gobj, &ftPk_SpecialLw_ChangeMotion_Unk00);
 }
 
-void ftPk_SpecialLw_Coll(HSD_GObj* gobj)
+void ftPk_SpecialLwLoop0_Coll(HSD_GObj* gobj)
 {
     ft_8008403C(gobj, &ftPk_SpecialLw_ChangeMotion_Unk03);
 }
 
-void ftPk_SpecialAirLw_Coll(HSD_GObj* gobj)
+void ftPk_SpecialAirLwLoop0_Coll(HSD_GObj* gobj)
 {
     ft_80082C74(gobj, &ftPk_SpecialLw_ChangeMotion_Unk02);
 }
 
-void ftPk_SpecialLwHit_Coll(HSD_GObj* gobj)
+void ftPk_SpecialLwLoop1_Coll(HSD_GObj* gobj)
 {
     ft_8008403C(gobj, &ftPk_SpecialLw_ChangeMotion_Unk05);
 }
 
-void ftPk_SpecialAirLwHit_Coll(HSD_GObj* gobj)
+void ftPk_SpecialAirLwLoop1_Coll(HSD_GObj* gobj)
 {
     ft_80082C74(gobj, &ftPk_SpecialLw_ChangeMotion_Unk04);
 }

@@ -55,7 +55,7 @@ void ftMs_SpecialAirN_Enter(HSD_GObj* gobj)
 
 // 80136844 00133424
 // https://decomp.me/scratch/Go6FC
-void ftMs_SpecialNChargeStart_Anim(HSD_GObj* gobj)
+void ftMs_SpecialNStart_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMs_SpecialN_80136E74(gobj);
@@ -70,7 +70,7 @@ void ftMs_SpecialNChargeStart_Anim(HSD_GObj* gobj)
 
 // 801368AC 0013348C
 // https://decomp.me/scratch/XBFKN
-void ftMs_SpecialAirNChargeStart_Anim(HSD_GObj* gobj)
+void ftMs_SpecialAirNStart_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMs_SpecialN_80136EAC(gobj);
@@ -84,18 +84,18 @@ void ftMs_SpecialAirNChargeStart_Anim(HSD_GObj* gobj)
 }
 
 // 80136914 001334F4
-void ftMs_SpecialNChargeStart_IASA(HSD_GObj* gobj)
+void ftMs_SpecialNStart_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80136918 001334F8
-void ftMs_SpecialAirNChargeStart_IASA(HSD_GObj* gobj)
+void ftMs_SpecialAirNStart_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftMs_SpecialNChargeStart_Phys(HSD_GObj* gobj)
+void ftMs_SpecialNStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* attr = fp->x2D4_specialAttributes;
@@ -109,7 +109,7 @@ void ftMs_SpecialNChargeStart_Phys(HSD_GObj* gobj)
     ftCommon_8007CB74(gobj);
 }
 
-void ftMs_SpecialAirNChargeStart_Phys(HSD_GObj* gobj)
+void ftMs_SpecialAirNStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* attr = fp->x2D4_specialAttributes;
@@ -125,7 +125,7 @@ void ftMs_SpecialAirNChargeStart_Phys(HSD_GObj* gobj)
 
 // 801369A4 00133584
 // https://decomp.me/scratch/bR5HF
-void ftMs_SpecialNChargeStart_Coll(HSD_GObj* gobj)
+void ftMs_SpecialNStart_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
         ftMs_SpecialN_80136A1C(gobj);
@@ -134,7 +134,7 @@ void ftMs_SpecialNChargeStart_Coll(HSD_GObj* gobj)
 
 // 801369E0 001335C0
 // https://decomp.me/scratch/cCPAH
-void ftMs_SpecialAirNChargeStart_Coll(HSD_GObj* gobj)
+void ftMs_SpecialAirNStart_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
         ftMs_SpecialN_80136A7C(gobj);
@@ -163,7 +163,7 @@ void ftMs_SpecialN_80136A7C(HSD_GObj* gobj)
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
-void ftMs_SpecialNChargeLoop_Anim(HSD_GObj* gobj)
+void ftMs_SpecialNLoop_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     s32* specialAttrs = fp->x2D4_specialAttributes;
@@ -188,7 +188,7 @@ void ftMs_SpecialNChargeLoop_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialAirNChargeLoop_Anim(HSD_GObj* gobj)
+void ftMs_SpecialAirNLoop_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* attrs = fp->x2D4_specialAttributes;
@@ -214,7 +214,7 @@ void ftMs_SpecialAirNChargeLoop_Anim(HSD_GObj* gobj)
 // 80136C8C 0013386C
 // Interrupt_MarthNeutralBCharge
 // https://decomp.me/scratch/zR8Hv
-void ftMs_SpecialNChargeLoop_IASA(HSD_GObj* gobj)
+void ftMs_SpecialNLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if ((fp->input.x65C_heldInputs & 0x200) == 0) {
@@ -225,7 +225,7 @@ void ftMs_SpecialNChargeLoop_IASA(HSD_GObj* gobj)
 
 // 80136CC4 001338A4
 // https://decomp.me/scratch/ykJFN
-void ftMs_SpecialAirNChargeLoop_IASA(HSD_GObj* gobj)
+void ftMs_SpecialAirNLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if ((fp->input.x65C_heldInputs & 0x200) == 0) {
@@ -236,21 +236,21 @@ void ftMs_SpecialAirNChargeLoop_IASA(HSD_GObj* gobj)
 
 // 80136CFC 001338DC
 // https://decomp.me/scratch/Q3NsK
-void ftMs_SpecialNChargeLoop_Phys(HSD_GObj* gobj)
+void ftMs_SpecialNLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
 // 80136D1C 001338FC
 // https://decomp.me/scratch/LVDnG
-void ftMs_SpecialAirNChargeLoop_Phys(HSD_GObj* gobj)
+void ftMs_SpecialAirNLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
 // 80136D3C 0013391C
 // https://decomp.me/scratch/XmmUv
-void ftMs_SpecialNChargeLoop_Coll(HSD_GObj* gobj)
+void ftMs_SpecialNLoop_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == 0) {
         ftMs_SpecialN_80136DB4(gobj);
@@ -259,7 +259,7 @@ void ftMs_SpecialNChargeLoop_Coll(HSD_GObj* gobj)
 
 // 80136D78 00133958
 // https://decomp.me/scratch/tjkA9
-void ftMs_SpecialAirNChargeLoop_Coll(HSD_GObj* gobj)
+void ftMs_SpecialAirNLoop_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != 0) {
         ftMs_SpecialN_80136E14(gobj);
@@ -304,7 +304,7 @@ void ftMs_SpecialN_80136EAC(HSD_GObj* gobj)
 
 // 80136EE4 00133AC4
 // https://decomp.me/scratch/e4mhD
-void ftMs_SpecialNChargeEnd_Anim(HSD_GObj* gobj)
+void ftMs_SpecialNEnd_Anim(HSD_GObj* gobj)
 {
     s32 ndx;
     MarsAttributes* attr;
@@ -357,7 +357,7 @@ void ftMs_SpecialNChargeEnd_Anim(HSD_GObj* gobj)
 
 // 80137010 00133BF0
 // https://decomp.me/scratch/pIor0
-void ftMs_SpecialAirNChargeEnd_Anim(HSD_GObj* gobj)
+void ftMs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
 {
     s32 ndx;
     MarsAttributes* attr;
@@ -420,14 +420,14 @@ void ftMs_SpecialAirNChargeEnd_Anim(HSD_GObj* gobj)
 }
 
 // 8013713C 00133D1C
-void ftMs_SpecialNChargeEnd_IASA(HSD_GObj* gobj) {}
+void ftMs_SpecialNEnd_IASA(HSD_GObj* gobj) {}
 
 // 80137140 00133D20
-void ftMs_SpecialAirNChargeEnd_IASA(HSD_GObj* gobj) {}
+void ftMs_SpecialAirNEnd_IASA(HSD_GObj* gobj) {}
 
 // 80137144 00133D24
 // https://decomp.me/scratch/ZIl0O
-void ftMs_SpecialNChargeEnd_Phys(HSD_GObj* gobj)
+void ftMs_SpecialNEnd_Phys(HSD_GObj* gobj)
 {
     // Physics_Friction
     ft_80084F3C(gobj);
@@ -435,14 +435,14 @@ void ftMs_SpecialNChargeEnd_Phys(HSD_GObj* gobj)
 
 // 80137164 00133D44
 // https://decomp.me/scratch/8OwY9
-void ftMs_SpecialAirNChargeEnd_Phys(HSD_GObj* gobj)
+void ftMs_SpecialAirNEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
 // 80137184 00133D64
 // https://decomp.me/scratch/cIi5D
-void ftMs_SpecialNChargeEnd_Coll(HSD_GObj* gobj)
+void ftMs_SpecialNEnd_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == 0) {
         ftMs_SpecialN_801371FC(gobj);
@@ -451,7 +451,7 @@ void ftMs_SpecialNChargeEnd_Coll(HSD_GObj* gobj)
 
 // 801371C0 00133DA0
 // https://decomp.me/scratch/rpVpQ
-void ftMs_SpecialAirNChargeEnd_Coll(HSD_GObj* arg0)
+void ftMs_SpecialAirNEnd_Coll(HSD_GObj* arg0)
 {
     if (ft_80081D0C(arg0) != 0) {
         ftMs_SpecialN_801372A8(arg0);

@@ -63,7 +63,7 @@ void ftMh_MS_343_80151484(HSD_GObj* gobj)
     fp->mv.mh.unk0.x78 = 0;
 }
 
-void ftMh_MS_344_Anim(HSD_GObj* gobj)
+void ftMh_Damage_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2200_ftcmd_var0) {

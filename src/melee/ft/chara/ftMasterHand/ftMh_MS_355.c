@@ -4,7 +4,7 @@
 #include "ft/ftbosslib.h"
 #include "ft/inlines.h"
 
-void ftMh_MS_354_Coll(HSD_GObj* gobj) {}
+void ftMh_Drill_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_354_80152370(HSD_GObj* gobj)
 {
@@ -12,7 +12,7 @@ void ftMh_MS_354_80152370(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftMh_MS_355_Anim(HSD_GObj* gobj)
+void ftMh_RockCrushUp_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = gobj->user_data;
@@ -22,7 +22,7 @@ void ftMh_MS_355_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_355_IASA(HSD_GObj* gobj)
+void ftMh_RockCrushUp_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -30,12 +30,12 @@ void ftMh_MS_355_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_355_Phys(HSD_GObj* gobj)
+void ftMh_RockCrushUp_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-void ftMh_MS_355_Coll(HSD_GObj* gobj) {}
+void ftMh_RockCrushUp_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_355_8015247C(HSD_GObj* gobj)
 {
@@ -43,7 +43,7 @@ void ftMh_MS_355_8015247C(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftMh_MS_356_Anim(HSD_GObj* gobj)
+void ftMh_RockCrushWait_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!--fp->mv.mh.unk0.x8) {
@@ -55,7 +55,7 @@ void ftMh_MS_356_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_356_IASA(HSD_GObj* gobj)
+void ftMh_RockCrushWait_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -63,7 +63,7 @@ void ftMh_MS_356_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_356_Phys(HSD_GObj* gobj)
+void ftMh_RockCrushWait_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftData* data = fp->ft_data;
@@ -73,7 +73,7 @@ void ftMh_MS_356_Phys(HSD_GObj* gobj)
     ftBossLib_8015C190(gobj);
 }
 
-void ftMh_MS_356_Coll(HSD_GObj* gobj) {}
+void ftMh_RockCrushWait_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_356_801525E0(HSD_GObj* gobj)
 {

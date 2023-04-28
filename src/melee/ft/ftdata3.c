@@ -2092,7 +2092,7 @@ MotionState ftData_MotionStateList[ftCo_MS_Count] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCo_MS_DownbackU = 189
+        // ftCo_MS_DownBackU = 189
         ftCo_SM_DownBackU,
         ftCo_MF_DownU,
         FtMoveId_Default << 24,
@@ -2580,10 +2580,10 @@ MotionState ftData_MotionStateList[ftCo_MS_Count] = {
         ftCo_SM_EscapeF,
         Ft_MF_UnkUpdatePhys,
         FtMoveId_Default << 24,
-        ftCo_EscapeF_Anim,
-        ftCo_EscapeF_IASA,
-        ftCo_EscapeF_Phys,
-        ftCo_EscapeF_Coll,
+        ftCo_Escape_Anim,
+        ftCo_Escape_IASA,
+        ftCo_Escape_Phys,
+        ftCo_Escape_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -2591,21 +2591,21 @@ MotionState ftData_MotionStateList[ftCo_MS_Count] = {
         ftCo_SM_EscapeB,
         Ft_MF_UnkUpdatePhys,
         FtMoveId_Default << 24,
-        ftCo_EscapeF_Anim,
-        ftCo_EscapeF_IASA,
-        ftCo_EscapeF_Phys,
-        ftCo_EscapeF_Coll,
+        ftCo_Escape_Anim,
+        ftCo_Escape_IASA,
+        ftCo_Escape_Phys,
+        ftCo_Escape_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCo_MS_Escape = 235
+        // ftCo_MS_EscapeN = 235
         ftCo_SM_EscapeN,
         Ft_MF_UnkUpdatePhys,
         FtMoveId_Default << 24,
-        ftCo_EscapeB_Anim,
-        ftCo_EscapeB_IASA,
-        ftCo_EscapeB_Phys,
-        ftCo_EscapeB_Coll,
+        ftCo_EscapeN_Anim,
+        ftCo_EscapeN_IASA,
+        ftCo_EscapeN_Phys,
+        ftCo_EscapeN_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -2917,25 +2917,25 @@ MotionState ftData_MotionStateList[ftCo_MS_Count] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCo_MS_AppealR = 264
-        ftCo_SM_AppealR,
+        // ftCo_MS_AppealSR = 264
+        ftCo_SM_AppealSR,
         ftCo_MF_Appeal,
         FtMoveId_Default << 24,
-        ftCo_Appeal_Anim,
-        ftCo_Appeal_IASA,
-        ftCo_Appeal_Phys,
-        ftCo_Appeal_Coll,
+        ftCo_AppealS_Anim,
+        ftCo_AppealS_IASA,
+        ftCo_AppealS_Phys,
+        ftCo_AppealS_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCo_MS_AppealL = 265
-        ftCo_SM_AppealL,
+        // ftCo_MS_AppealSL = 265
+        ftCo_SM_AppealSL,
         ftCo_MF_Appeal,
         FtMoveId_Default << 24,
-        ftCo_Appeal_Anim,
-        ftCo_Appeal_IASA,
-        ftCo_Appeal_Phys,
-        ftCo_Appeal_Coll,
+        ftCo_AppealS_Anim,
+        ftCo_AppealS_IASA,
+        ftCo_AppealS_Phys,
+        ftCo_AppealS_Coll,
         ftCamera_UpdateCameraBox,
     },
     {

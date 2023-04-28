@@ -28,12 +28,12 @@ void ftDk_MS_341_800DFAE4(HSD_GObj* gobj, f32 argf)
                           1);
 }
 
-void ftDk_MS_342_Anim(HSD_GObj* gobj)
+void ftDk_HeavyWalk_Anim(HSD_GObj* gobj)
 {
     ftWalkCommon_800DFDDC(gobj);
 }
 
-void ftDk_MS_342_IASA(HSD_GObj* gobj)
+void ftDk_HeavyWalk_IASA(HSD_GObj* gobj)
 {
     if (!ft_80094EA4(gobj) && !ftDk_MS_347_800E0378(gobj) &&
         !ftDk_MS_341_800DF938(gobj))
@@ -42,12 +42,12 @@ void ftDk_MS_342_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftDk_MS_342_Phys(HSD_GObj* gobj)
+void ftDk_HeavyWalk_Phys(HSD_GObj* gobj)
 {
     ftWalkCommon_800E0060(gobj);
 }
 
-void ftDk_MS_342_Coll(HSD_GObj* gobj)
+void ftDk_HeavyWalk_Coll(HSD_GObj* gobj)
 {
-    ftDk_MS_341_Coll(gobj);
+    ftDk_HeavyWait0_Coll(gobj);
 }

@@ -7,7 +7,7 @@
 #include "ft/inlines.h"
 #include "ftCrazyHand/ftCh_Init.h"
 
-void ftMh_MS_383_Anim(HSD_GObj* gobj)
+void ftMh_TagApplaud_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -16,7 +16,7 @@ void ftMh_MS_383_Anim(HSD_GObj* gobj)
         fp->x2204_ftcmd_var1 = 0;
     }
 
-    /// @todo  inlined? possibly shared with ftMh_MS_382_Anim
+    /// @todo  inlined? possibly shared with ftMh_TagCrush_Anim
     if ((ftBossLib_8015C31C() != 0) || (ftBossLib_8015C3A0() != 0) ||
         (!ftAnim_IsFramesRemaining(gobj)))
     {
@@ -27,7 +27,7 @@ void ftMh_MS_383_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_383_IASA(HSD_GObj* gobj)
+void ftMh_TagApplaud_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -35,12 +35,12 @@ void ftMh_MS_383_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_383_Phys(HSD_GObj* gobj)
+void ftMh_TagApplaud_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-void ftMh_MS_383_Coll(HSD_GObj* gobj) {}
+void ftMh_TagApplaud_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_383_80155484(HSD_GObj* gobj)
 {

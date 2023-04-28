@@ -6,7 +6,7 @@
 #include "ft/ftbosslib.h"
 #include "ft/types.h"
 
-void ftMh_MS_368_IASA(HSD_GObj* gobj)
+void ftMh_BackAirplane2_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -14,14 +14,14 @@ void ftMh_MS_368_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_368_Phys(HSD_GObj* gobj)
+void ftMh_BackAirplane2_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
     ftBossLib_8015BF74(gobj, attr->x58);
 }
 
-void ftMh_MS_368_Coll(HSD_GObj* gobj) {}
+void ftMh_BackAirplane2_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_368_80153A64(HSD_GObj* gobj)
 {

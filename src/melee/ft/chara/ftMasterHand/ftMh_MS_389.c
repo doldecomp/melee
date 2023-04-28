@@ -83,7 +83,7 @@ void ftMh_MS_389_80150DC4(HSD_GObj* gobj, HSD_GObjEvent cb, Vec3* pos)
     fp->mv.mh.unk0.xC = *pos;
 }
 
-void ftMh_MS_389_Anim(HSD_GObj* gobj)
+void ftMh_Wait1_2_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -97,7 +97,7 @@ void ftMh_MS_389_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_389_Phys(HSD_GObj* gobj)
+void ftMh_Wait1_2_Phys(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
@@ -108,7 +108,7 @@ void ftMh_MS_389_Phys(HSD_GObj* gobj)
                        attr->x2C, attr->x28);
 }
 
-void ftMh_MS_389_Coll(HSD_GObj* gobj)
+void ftMh_Wait1_2_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.mh.unk0.x18 == 0) {

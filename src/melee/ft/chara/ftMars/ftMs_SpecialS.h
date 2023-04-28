@@ -4,10 +4,10 @@
 #include <baselib/forward.h>
 
 /* 1374A0 */ void ftMs_SpecialAirS_Enter(HSD_GObj* gobj);
-/* 137558 */ void ftMs_SpecialS1_Anim(HSD_GObj* gobj);
-/* 13767C */ void ftMs_SpecialS1_Coll(HSD_GObj* gobj);
-/* 1375B8 */ void ftMs_SpecialS1_IASA(HSD_GObj* gobj);
-/* 137618 */ void ftMs_SpecialS1_Phys(HSD_GObj* gobj);
+/* 137558 */ void ftMs_SpecialAirS1_Anim(HSD_GObj* gobj);
+/* 13767C */ void ftMs_SpecialAirS1_Coll(HSD_GObj* gobj);
+/* 1375B8 */ void ftMs_SpecialAirS1_IASA(HSD_GObj* gobj);
+/* 137618 */ void ftMs_SpecialAirS1_Phys(HSD_GObj* gobj);
 /* 1377B0 */ void ftMs_SpecialS2_Anim(HSD_GObj* gobj);
 /* 1378D4 */ void ftMs_SpecialS2_Coll(HSD_GObj* gobj);
 /* 137810 */ void ftMs_SpecialS2_IASA(HSD_GObj* gobj);

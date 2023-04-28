@@ -366,8 +366,8 @@ ftSk_SpecialLw_801144B8:
 /* 8011451C 001110FC  7C 08 03 A6 */	mtlr r0
 /* 80114520 00111100  4E 80 00 20 */	blr
 
-.global ftSk_SpecialLwEnd_Anim
-ftSk_SpecialLwEnd_Anim:
+.global ftSk_SpecialLw2_Anim
+ftSk_SpecialLw2_Anim:
 /* 80114524 00111104  7C 08 02 A6 */	mflr r0
 /* 80114528 00111108  90 01 00 04 */	stw r0, 4(r1)
 /* 8011452C 0011110C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -385,8 +385,8 @@ ftSk_SpecialLwEnd_Anim:
 /* 80114558 00111138  7C 08 03 A6 */	mtlr r0
 /* 8011455C 0011113C  4E 80 00 20 */	blr
 
-.global ftSk_SpecialAirLwEnd_Anim
-ftSk_SpecialAirLwEnd_Anim:
+.global ftSk_SpecialAirLw2_Anim
+ftSk_SpecialAirLw2_Anim:
 /* 80114560 00111140  7C 08 02 A6 */	mflr r0
 /* 80114564 00111144  90 01 00 04 */	stw r0, 4(r1)
 /* 80114568 00111148  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -404,16 +404,16 @@ ftSk_SpecialAirLwEnd_Anim:
 /* 80114594 00111174  7C 08 03 A6 */	mtlr r0
 /* 80114598 00111178  4E 80 00 20 */	blr
 
-.global ftSk_SpecialLwEnd_IASA
-ftSk_SpecialLwEnd_IASA:
+.global ftSk_SpecialLw2_IASA
+ftSk_SpecialLw2_IASA:
 /* 8011459C 0011117C  4E 80 00 20 */	blr
 
-.global ftSk_SpecialAirLwEnd_IASA
-ftSk_SpecialAirLwEnd_IASA:
+.global ftSk_SpecialAirLw2_IASA
+ftSk_SpecialAirLw2_IASA:
 /* 801145A0 00111180  4E 80 00 20 */	blr
 
-.global ftSk_SpecialLwEnd_Phys
-ftSk_SpecialLwEnd_Phys:
+.global ftSk_SpecialLw2_Phys
+ftSk_SpecialLw2_Phys:
 /* 801145A4 00111184  7C 08 02 A6 */	mflr r0
 /* 801145A8 00111188  90 01 00 04 */	stw r0, 4(r1)
 /* 801145AC 0011118C  94 21 FF F8 */	stwu r1, -8(r1)
@@ -423,8 +423,8 @@ ftSk_SpecialLwEnd_Phys:
 /* 801145BC 0011119C  7C 08 03 A6 */	mtlr r0
 /* 801145C0 001111A0  4E 80 00 20 */	blr
 
-.global ftSk_SpecialAirLwEnd_Phys
-ftSk_SpecialAirLwEnd_Phys:
+.global ftSk_SpecialAirLw2_Phys
+ftSk_SpecialAirLw2_Phys:
 /* 801145C4 001111A4  7C 08 02 A6 */	mflr r0
 /* 801145C8 001111A8  90 01 00 04 */	stw r0, 4(r1)
 /* 801145CC 001111AC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -443,8 +443,8 @@ ftSk_SpecialAirLwEnd_Phys:
 /* 80114600 001111E0  7C 08 03 A6 */	mtlr r0
 /* 80114604 001111E4  4E 80 00 20 */	blr
 
-.global ftSk_SpecialLwEnd_Coll
-ftSk_SpecialLwEnd_Coll:
+.global ftSk_SpecialLw2_Coll
+ftSk_SpecialLw2_Coll:
 /* 80114608 001111E8  7C 08 02 A6 */	mflr r0
 /* 8011460C 001111EC  90 01 00 04 */	stw r0, 4(r1)
 /* 80114610 001111F0  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -462,8 +462,8 @@ ftSk_SpecialLwEnd_Coll:
 /* 8011463C 0011121C  7C 08 03 A6 */	mtlr r0
 /* 80114640 00111220  4E 80 00 20 */	blr
 
-.global ftSk_SpecialAirLwEnd_Coll
-ftSk_SpecialAirLwEnd_Coll:
+.global ftSk_SpecialAirLw2_Coll
+ftSk_SpecialAirLw2_Coll:
 /* 80114644 00111224  7C 08 02 A6 */	mflr r0
 /* 80114648 00111228  90 01 00 04 */	stw r0, 4(r1)
 /* 8011464C 0011122C  94 21 FF E8 */	stwu r1, -0x18(r1)

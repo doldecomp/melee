@@ -146,30 +146,30 @@ void ftZd_SpecialAirHi_Enter(HSD_GObj* gobj)
     }
 }
 
-void ftZd_SpecialHiStart_Anim(HSD_GObj* gobj)
+void ftZd_SpecialHiStart_0_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftZd_SpecialHi_8013A058(gobj);
     }
 }
 
-void ftZd_SpecialAirHiStart_Anim(HSD_GObj* gobj)
+void ftZd_SpecialAirHiStart_0_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftZd_SpecialHi_8013A244(gobj);
     }
 }
 
-void ftZd_SpecialHiStart_IASA(HSD_GObj* gobj) {}
+void ftZd_SpecialHiStart_0_IASA(HSD_GObj* gobj) {}
 
-void ftZd_SpecialAirHiStart_IASA(HSD_GObj* gobj) {}
+void ftZd_SpecialAirHiStart_0_IASA(HSD_GObj* gobj) {}
 
-void ftZd_SpecialHiStart_Phys(HSD_GObj* gobj)
+void ftZd_SpecialHiStart_0_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftZd_SpecialAirHiStart_Phys(HSD_GObj* gobj)
+void ftZd_SpecialAirHiStart_0_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftZelda_DatAttrs* attributes = fp->x2D4_specialAttributes;
@@ -182,14 +182,14 @@ void ftZd_SpecialAirHiStart_Phys(HSD_GObj* gobj)
     ftCommon_8007CEF4(fp);
 }
 
-void ftZd_SpecialHiStart_Coll(HSD_GObj* gobj)
+void ftZd_SpecialHiStart_0_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
         ftZd_SpecialHi_80139B44(gobj);
     }
 }
 
-void ftZd_SpecialAirHiStart_Coll(HSD_GObj* gobj)
+void ftZd_SpecialAirHiStart_0_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     f32 facing_dir = fp->facing_dir;
@@ -238,7 +238,7 @@ void ftZd_SpecialHi_80139BB0(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialHi_801396AC;
 }
 
-void ftZd_SpecialHi_Anim(HSD_GObj* gobj)
+void ftZd_SpecialHiStart_1_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.zd.specialhi.x0 -= 1;
@@ -248,7 +248,7 @@ void ftZd_SpecialHi_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftZd_SpecialAirHi_Anim(HSD_GObj* gobj)
+void ftZd_SpecialAirHiStart_1_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.zd.specialhi.x0 -= 1;
@@ -258,18 +258,18 @@ void ftZd_SpecialAirHi_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftZd_SpecialHi_IASA(HSD_GObj* gobj) {}
+void ftZd_SpecialHiStart_1_IASA(HSD_GObj* gobj) {}
 
-void ftZd_SpecialAirHi_IASA(HSD_GObj* gobj) {}
+void ftZd_SpecialAirHiStart_1_IASA(HSD_GObj* gobj) {}
 
-void ftZd_SpecialHi_Phys(HSD_GObj* gobj)
+void ftZd_SpecialHiStart_1_Phys(HSD_GObj* gobj)
 {
     ftCommon_8007CB74(gobj);
 }
 
-void ftZd_SpecialAirHi_Phys(HSD_GObj* gobj) {}
+void ftZd_SpecialAirHiStart_1_Phys(HSD_GObj* gobj) {}
 
-void ftZd_SpecialHi_Coll(HSD_GObj* gobj)
+void ftZd_SpecialHiStart_1_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     CollData* collData = &fp->x6F0_collData;
@@ -316,7 +316,7 @@ static bool ftZelda_80139D60_Helper(HSD_GObj* gobj)
     return result;
 }
 
-void ftZd_SpecialAirHi_Coll(HSD_GObj* gobj)
+void ftZd_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -589,7 +589,7 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
     fp->x221E_flag.bits.b0 = 1;
 }
 
-void ftZd_SpecialHiEnd_Anim(HSD_GObj* gobj)
+void ftZd_SpecialHi_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -601,7 +601,7 @@ void ftZd_SpecialHiEnd_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftZd_SpecialAirHiEnd_Anim(HSD_GObj* gobj)
+void ftZd_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftZelda_DatAttrs* attributes = fp->x2D4_specialAttributes;
@@ -614,16 +614,16 @@ void ftZd_SpecialAirHiEnd_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftZd_SpecialHiEnd_IASA(HSD_GObj* gobj) {}
+void ftZd_SpecialHi_IASA(HSD_GObj* gobj) {}
 
-void ftZd_SpecialAirHiEnd_IASA(HSD_GObj* gobj) {}
+void ftZd_SpecialAirHi_IASA(HSD_GObj* gobj) {}
 
-void ftZd_SpecialHiEnd_Phys(HSD_GObj* gobj)
+void ftZd_SpecialHi_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftZd_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
+void ftZd_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -648,14 +648,14 @@ void ftZd_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
     ftCommon_8007CEF4(fp);
 }
 
-void ftZd_SpecialHiEnd_Coll(HSD_GObj* gobj)
+void ftZd_SpecialHi_Coll(HSD_GObj* gobj)
 {
     if (ft_800827A0(gobj) == 0) {
         ftZd_SpecialHi_8013A648(gobj);
     }
 }
 
-void ftZd_SpecialAirHiEnd_Coll(HSD_GObj* gobj)
+void ftZd_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH

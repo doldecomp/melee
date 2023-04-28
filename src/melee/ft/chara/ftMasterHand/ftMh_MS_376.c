@@ -11,7 +11,7 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 
-void ftMh_MS_376_Anim(HSD_GObj* gobj)
+void ftMh_Squeezing_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -24,7 +24,7 @@ void ftMh_MS_376_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_376_IASA(HSD_GObj* gobj)
+void ftMh_Squeezing_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -32,7 +32,7 @@ void ftMh_MS_376_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_376_Phys(HSD_GObj* gobj)
+void ftMh_Squeezing_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
@@ -42,7 +42,7 @@ void ftMh_MS_376_Phys(HSD_GObj* gobj)
                        attr->x2C, attr->x28);
 }
 
-void ftMh_MS_376_Coll(HSD_GObj* gobj) {}
+void ftMh_Squeezing_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_376_80154E78(HSD_GObj* gobj)
 {
@@ -52,7 +52,7 @@ void ftMh_MS_376_80154E78(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
 }
 
-void ftMh_MS_379_Anim(HSD_GObj* gobj)
+void ftMh_Throw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

@@ -12,14 +12,14 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftMh_MS_353_Anim(HSD_GObj* gobj)
+void ftMh_WalkShoot_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMh_MS_389_80151018(gobj);
     }
 }
 
-void ftMh_MS_353_IASA(HSD_GObj* gobj)
+void ftMh_WalkShoot_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -27,12 +27,12 @@ void ftMh_MS_353_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_353_Phys(HSD_GObj* gobj)
+void ftMh_WalkShoot_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-void ftMh_MS_353_Coll(HSD_GObj* gobj) {}
+void ftMh_WalkShoot_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_353_80151DC4(HSD_GObj* gobj)
 {
@@ -40,14 +40,14 @@ void ftMh_MS_353_80151DC4(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftMh_MS_350_Anim(HSD_GObj* gobj)
+void ftMh_Walk2_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMh_MS_350_80151EB4(gobj);
     }
 }
 
-void ftMh_MS_350_IASA(HSD_GObj* gobj)
+void ftMh_Walk2_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -55,12 +55,12 @@ void ftMh_MS_350_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_350_Phys(HSD_GObj* gobj)
+void ftMh_Walk2_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-void ftMh_MS_350_Coll(HSD_GObj* gobj) {}
+void ftMh_Walk2_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_350_80151EB4(HSD_GObj* gobj)
 {
@@ -98,7 +98,7 @@ static inline float my_lbVector_Len(Vec3* vec)
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-void ftMh_MS_351_Anim(HSD_GObj* gobj)
+void ftMh_WalkLoop_Anim(HSD_GObj* gobj)
 {
     Vec3 pos;
     Vec3 vel;
@@ -131,7 +131,7 @@ void ftMh_MS_351_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_351_IASA(HSD_GObj* gobj)
+void ftMh_WalkLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -139,7 +139,7 @@ void ftMh_MS_351_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_351_Phys(HSD_GObj* gobj)
+void ftMh_WalkLoop_Phys(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
@@ -149,7 +149,7 @@ void ftMh_MS_351_Phys(HSD_GObj* gobj)
     fp->x80_self_vel.x = attr->x40_pos.z;
 }
 
-void ftMh_MS_351_Coll(HSD_GObj* gobj) {}
+void ftMh_WalkLoop_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_351_801520D8(HSD_GObj* gobj)
 {

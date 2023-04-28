@@ -10,7 +10,7 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftDr_Appeal_Anim(HSD_GObj* gobj)
+void ftDr_AppealS_Anim(HSD_GObj* gobj)
 {
     Vec3 sp18;
     Fighter* fp;
@@ -53,17 +53,17 @@ void ftDr_Appeal_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftDr_Appeal_IASA(HSD_GObj* gobj)
+void ftDr_AppealS_IASA(HSD_GObj* gobj)
 {
-    ftCo_Appeal_IASA(gobj);
+    ftCo_AppealS_IASA(gobj);
 }
 
-void ftDr_Appeal_Phys(HSD_GObj* gobj)
+void ftDr_AppealS_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftDr_Appeal_Coll(HSD_GObj* gobj)
+void ftDr_AppealS_Coll(HSD_GObj* gobj)
 {
     ft_80084280(gobj);
 }

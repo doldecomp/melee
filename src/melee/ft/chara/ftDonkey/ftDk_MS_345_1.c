@@ -8,7 +8,7 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 
-void ftDk_MS_345_Anim(HSD_GObj* gobj)
+void ftDk_HeavyTurn_Anim(HSD_GObj* gobj)
 {
     ft_800C9924(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -16,7 +16,7 @@ void ftDk_MS_345_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftDk_MS_345_IASA(HSD_GObj* gobj)
+void ftDk_HeavyTurn_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.dk.unk5.x0 && !ft_80094EA4(gobj)) {
@@ -26,14 +26,14 @@ void ftDk_MS_345_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftDk_MS_345_Phys(HSD_GObj* gobj)
+void ftDk_HeavyTurn_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftDk_MS_345_Coll(HSD_GObj* gobj)
+void ftDk_HeavyTurn_Coll(HSD_GObj* gobj)
 {
-    ftDk_MS_341_Coll(gobj);
+    ftDk_HeavyWait0_Coll(gobj);
 }
 
 void ftDk_MS_345_800E0294(HSD_GObj* gobj)

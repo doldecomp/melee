@@ -130,7 +130,7 @@ inline void checkStateVar1(HSD_GObj* gobj)
 
 #ifdef MUST_MATCH
 #pragma push
-asm void ftSs_SpecialLwBombEnd_Anim(HSD_GObj*)
+asm void ftSs_SpecialLwBomb_Anim(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012B150 00000000  7C 08 02 A6 */	mflr r0
@@ -211,7 +211,7 @@ lbl_8012B248:
 
 #else
 
-void ftSs_SpecialLwBombEnd_Anim(HSD_GObj* gobj)
+void ftSs_SpecialLwBomb_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
@@ -313,7 +313,7 @@ void ftSs_SpecialAirLwBomb_Anim(HSD_GObj* gobj)
 }
 #endif
 
-void ftSs_SpecialLwBombEnd_IASA(HSD_GObj* gobj)
+void ftSs_SpecialLwBomb_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
@@ -326,7 +326,7 @@ void ftSs_SpecialLwBombEnd_IASA(HSD_GObj* gobj)
 
 void ftSs_SpecialAirLwBomb_IASA(HSD_GObj* gobj) {}
 
-void ftSs_SpecialLwBombEnd_Phys(HSD_GObj* gobj)
+void ftSs_SpecialLwBomb_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
@@ -357,7 +357,7 @@ void ftSs_SpecialAirLwBomb_Phys(HSD_GObj* gobj)
                       ft_attr->x17C_AerialDriftMax * samus_attr->x60);
 }
 
-void ftSs_SpecialLwBombEnd_Coll(HSD_GObj* gobj)
+void ftSs_SpecialLwBomb_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;

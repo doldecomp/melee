@@ -21,24 +21,24 @@
 MotionState ftDr_Init_MotionStateTable[ftMr_MS_SelfCount] = {
     {
         // ftMr_MS_AppealSR = 341
-        ftCo_SM_AppealR,
+        ftCo_SM_AppealSR,
         ftDr_MF_Appeal,
         FtMoveId_Default << 24,
-        ftDr_Appeal_Anim,
-        ftDr_Appeal_IASA,
-        ftDr_Appeal_Phys,
-        ftDr_Appeal_Coll,
+        ftDr_AppealS_Anim,
+        ftDr_AppealS_IASA,
+        ftDr_AppealS_Phys,
+        ftDr_AppealS_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
         // ftMr_MS_AppealSL = 342
-        ftCo_SM_AppealL,
+        ftCo_SM_AppealSL,
         ftDr_MF_Appeal,
         FtMoveId_Default << 24,
-        ftDr_Appeal_Anim,
-        ftDr_Appeal_IASA,
-        ftDr_Appeal_Phys,
-        ftDr_Appeal_Coll,
+        ftDr_AppealS_Anim,
+        ftDr_AppealS_IASA,
+        ftDr_AppealS_Phys,
+        ftDr_AppealS_Coll,
         ftCamera_UpdateCameraBox,
     },
     {

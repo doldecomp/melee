@@ -7,7 +7,7 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftMh_MS_344_IASA(HSD_GObj* gobj)
+void ftMh_Damage_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!Player_GetPlayerSlotType(fp->xC_playerID)) {
@@ -15,7 +15,7 @@ void ftMh_MS_344_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_344_Phys(HSD_GObj* gobj)
+void ftMh_Damage_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
@@ -23,7 +23,7 @@ void ftMh_MS_344_Phys(HSD_GObj* gobj)
     fp->x80_self_vel.z += attr->x158;
 }
 
-void ftMh_MS_344_Coll(HSD_GObj* gobj) {}
+void ftMh_Damage_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_344_80151828(HSD_GObj* gobj)
 {
@@ -31,14 +31,14 @@ void ftMh_MS_344_80151828(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftMh_MS_346_Anim(HSD_GObj* gobj)
+void ftMh_WaitSweep_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMh_MS_346_80151918(gobj);
     }
 }
 
-void ftMh_MS_346_IASA(HSD_GObj* gobj)
+void ftMh_WaitSweep_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!Player_GetPlayerSlotType(fp->xC_playerID)) {
@@ -46,12 +46,12 @@ void ftMh_MS_346_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_346_Phys(HSD_GObj* gobj)
+void ftMh_WaitSweep_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-void ftMh_MS_346_Coll(HSD_GObj* gobj) {}
+void ftMh_WaitSweep_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_346_80151918(HSD_GObj* gobj)
 {
@@ -66,7 +66,7 @@ void ftMh_MS_346_80151918(HSD_GObj* gobj)
 
 static void ftMh_MS_347_80151AC8(HSD_GObj* gobj);
 
-void ftMh_MS_347_Anim(HSD_GObj* gobj)
+void ftMh_SweepLoop_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         /// @todo #GET_FIGHTER
@@ -94,7 +94,7 @@ void ftMh_MS_347_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_347_IASA(HSD_GObj* gobj)
+void ftMh_SweepLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -102,7 +102,7 @@ void ftMh_MS_347_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_347_Phys(HSD_GObj* gobj)
+void ftMh_SweepLoop_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
@@ -110,7 +110,7 @@ void ftMh_MS_347_Phys(HSD_GObj* gobj)
                        attr->x2C, attr->x28);
 }
 
-void ftMh_MS_347_Coll(HSD_GObj* gobj) {}
+void ftMh_SweepLoop_Coll(HSD_GObj* gobj) {}
 
 static void ftMh_MS_347_80151AC8(HSD_GObj* gobj)
 {

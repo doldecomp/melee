@@ -10,7 +10,7 @@
 #include "ft/inlines.h"
 #include "ftCrazyHand/ftCh_Init.h"
 
-void ftMh_MS_380_Anim(HSD_GObj* gobj)
+void ftMh_Slam_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     /// @todo Unused stack.
@@ -34,7 +34,7 @@ void ftMh_MS_380_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_380_IASA(HSD_GObj* gobj)
+void ftMh_Slam_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -42,12 +42,12 @@ void ftMh_MS_380_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_380_Phys(HSD_GObj* gobj)
+void ftMh_Slam_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-void ftMh_MS_380_Coll(HSD_GObj* gobj) {}
+void ftMh_Slam_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_380_80155194(HSD_GObj* gobj)
 {
