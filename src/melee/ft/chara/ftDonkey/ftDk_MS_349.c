@@ -11,14 +11,14 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftDk_MS_349_Phys(HSD_GObj* gobj)
+void ftDk_HeavyLanding_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftDk_MS_349_Coll(HSD_GObj* gobj)
+void ftDk_HeavyLanding_Coll(HSD_GObj* gobj)
 {
-    ftDk_MS_341_Coll(gobj);
+    ftDk_HeavyWait0_Coll(gobj);
 }
 
 static bool checkSomething(HSD_GObj* gobj);
@@ -56,7 +56,7 @@ void doSomething(HSD_GObj* gobj)
     ft_8008DCE0(gobj, donkey_attr->motion_state + 9, 0);
 }
 
-void ftDk_MS_350_Anim(HSD_GObj* gobj)
+void ftDk_HeavyWait2_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ft_8008F744(gobj);
@@ -69,12 +69,12 @@ void ftDk_MS_350_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftDk_MS_350_Phys(HSD_GObj* gobj)
+void ftDk_HeavyWait2_Phys(HSD_GObj* gobj)
 {
     ftCo_Damage_Phys(gobj);
 }
 
-void ftDk_MS_350_Coll(HSD_GObj* gobj)
+void ftDk_HeavyWait2_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Ground) {

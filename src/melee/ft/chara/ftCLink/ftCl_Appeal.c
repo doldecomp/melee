@@ -10,7 +10,7 @@
 #include "ftLink/ftLk_Init.h"
 #include "it/it_27CF.h"
 
-void ftCl_Appeal_Anim(HSD_GObj* gobj)
+void ftCl_AppealS_Anim(HSD_GObj* gobj)
 {
     /// @todo There might be only one @c Fighter* here.
     Fighter* fp0;
@@ -41,17 +41,17 @@ void ftCl_Appeal_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftCl_Appeal_IASA(HSD_GObj* gobj)
+void ftCl_AppealS_IASA(HSD_GObj* gobj)
 {
-    ftCo_Appeal_IASA(gobj);
+    ftCo_AppealS_IASA(gobj);
 }
 
-void ftCl_Appeal_Phys(HSD_GObj* gobj)
+void ftCl_AppealS_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftCl_Appeal_Coll(HSD_GObj* gobj)
+void ftCl_AppealS_Coll(HSD_GObj* gobj)
 {
     ft_80084280(gobj);
 }

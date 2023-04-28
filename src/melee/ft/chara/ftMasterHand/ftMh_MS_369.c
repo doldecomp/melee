@@ -8,14 +8,14 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftMh_MS_369_Anim(HSD_GObj* gobj)
+void ftMh_BackAirplane3_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMh_MS_389_80151018(gobj);
     }
 }
 
-void ftMh_MS_369_IASA(HSD_GObj* gobj)
+void ftMh_BackAirplane3_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -23,12 +23,12 @@ void ftMh_MS_369_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_369_Phys(HSD_GObj* gobj)
+void ftMh_BackAirplane3_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-void ftMh_MS_369_Coll(HSD_GObj* gobj) {}
+void ftMh_BackAirplane3_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_369_80153B90(HSD_GObj* gobj)
 {
@@ -45,7 +45,7 @@ void ftMh_MS_369_80153B90(HSD_GObj* gobj)
     fp->x80_self_vel.x = fp->x80_self_vel.y = fp->x80_self_vel.z = 0;
 }
 
-void ftMh_MS_370_Anim(HSD_GObj* gobj)
+void ftMh_BackPunch_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -54,7 +54,7 @@ void ftMh_MS_370_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_370_IASA(HSD_GObj* gobj)
+void ftMh_BackPunch_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -62,7 +62,7 @@ void ftMh_MS_370_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_370_Phys(HSD_GObj* gobj)
+void ftMh_BackPunch_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (--fp->mv.mh.unk0.x0 > 0) {

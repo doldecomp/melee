@@ -5,21 +5,21 @@
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
 
-void ftDk_MS_348_IASA(HSD_GObj* gobj)
+void ftDk_HeavyJump_IASA(HSD_GObj* gobj)
 {
     if (ft_80094EA4(gobj)) {
         return;
     }
 }
 
-void ftDk_MS_348_Phys(HSD_GObj* gobj)
+void ftDk_HeavyJump_Phys(HSD_GObj* gobj)
 {
     ft_800CB438(gobj);
 }
 
-void ftDk_MS_348_Coll(HSD_GObj* gobj)
+void ftDk_HeavyJump_Coll(HSD_GObj* gobj)
 {
-    ftDk_MS_347_Coll(gobj);
+    ftDk_HeavyFall_Coll(gobj);
 }
 
 void ftDk_MS_348_800E04A4(HSD_GObj* gobj, s32 arg1)
@@ -37,7 +37,7 @@ void ftDk_MS_348_800E04A4(HSD_GObj* gobj, s32 arg1)
     ftAnim_SetAnimRate(gobj, 0);
 }
 
-void ftDk_MS_346_Anim(HSD_GObj* gobj)
+void ftDk_HeavyWait1_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.dk.unk7.x8 <= 0) {

@@ -196,8 +196,8 @@ ftSk_SpecialAirHi_Enter:
 /* 8011318C 0010FD6C  7C 08 03 A6 */	mtlr r0
 /* 80113190 0010FD70  4E 80 00 20 */	blr
 
-.global ftSk_SpecialHiStart_Anim
-ftSk_SpecialHiStart_Anim:
+.global ftSk_SpecialHiStart_0_Anim
+ftSk_SpecialHiStart_0_Anim:
 /* 80113194 0010FD74  7C 08 02 A6 */	mflr r0
 /* 80113198 0010FD78  90 01 00 04 */	stw r0, 4(r1)
 /* 8011319C 0010FD7C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -215,8 +215,8 @@ ftSk_SpecialHiStart_Anim:
 /* 801131C8 0010FDA8  7C 08 03 A6 */	mtlr r0
 /* 801131CC 0010FDAC  4E 80 00 20 */	blr
 
-.global ftSk_SpecialAirHiStart_Anim
-ftSk_SpecialAirHiStart_Anim:
+.global ftSk_SpecialAirHiStart_0_Anim
+ftSk_SpecialAirHiStart_0_Anim:
 /* 801131D0 0010FDB0  7C 08 02 A6 */	mflr r0
 /* 801131D4 0010FDB4  90 01 00 04 */	stw r0, 4(r1)
 /* 801131D8 0010FDB8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -234,16 +234,16 @@ ftSk_SpecialAirHiStart_Anim:
 /* 80113204 0010FDE4  7C 08 03 A6 */	mtlr r0
 /* 80113208 0010FDE8  4E 80 00 20 */	blr
 
-.global ftSk_SpecialHiStart_IASA
-ftSk_SpecialHiStart_IASA:
+.global ftSk_SpecialHiStart_0_IASA
+ftSk_SpecialHiStart_0_IASA:
 /* 8011320C 0010FDEC  4E 80 00 20 */	blr
 
-.global ftSk_SpecialAirHiStart_IASA
-ftSk_SpecialAirHiStart_IASA:
+.global ftSk_SpecialAirHiStart_0_IASA
+ftSk_SpecialAirHiStart_0_IASA:
 /* 80113210 0010FDF0  4E 80 00 20 */	blr
 
-.global ftSk_SpecialHiStart_Phys
-ftSk_SpecialHiStart_Phys:
+.global ftSk_SpecialHiStart_0_Phys
+ftSk_SpecialHiStart_0_Phys:
 /* 80113214 0010FDF4  7C 08 02 A6 */	mflr r0
 /* 80113218 0010FDF8  90 01 00 04 */	stw r0, 4(r1)
 /* 8011321C 0010FDFC  94 21 FF F8 */	stwu r1, -8(r1)
@@ -253,8 +253,8 @@ ftSk_SpecialHiStart_Phys:
 /* 8011322C 0010FE0C  7C 08 03 A6 */	mtlr r0
 /* 80113230 0010FE10  4E 80 00 20 */	blr
 
-.global ftSk_SpecialAirHiStart_Phys
-ftSk_SpecialAirHiStart_Phys:
+.global ftSk_SpecialAirHiStart_0_Phys
+ftSk_SpecialAirHiStart_0_Phys:
 /* 80113234 0010FE14  7C 08 02 A6 */	mflr r0
 /* 80113238 0010FE18  90 01 00 04 */	stw r0, 4(r1)
 /* 8011323C 0010FE1C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -273,8 +273,8 @@ ftSk_SpecialAirHiStart_Phys:
 /* 80113270 0010FE50  7C 08 03 A6 */	mtlr r0
 /* 80113274 0010FE54  4E 80 00 20 */	blr
 
-.global ftSk_SpecialHiStart_Coll
-ftSk_SpecialHiStart_Coll:
+.global ftSk_SpecialHiStart_0_Coll
+ftSk_SpecialHiStart_0_Coll:
 /* 80113278 0010FE58  7C 08 02 A6 */	mflr r0
 /* 8011327C 0010FE5C  90 01 00 04 */	stw r0, 4(r1)
 /* 80113280 0010FE60  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -292,8 +292,8 @@ ftSk_SpecialHiStart_Coll:
 /* 801132AC 0010FE8C  7C 08 03 A6 */	mtlr r0
 /* 801132B0 0010FE90  4E 80 00 20 */	blr
 
-.global ftSk_SpecialAirHiStart_Coll
-ftSk_SpecialAirHiStart_Coll:
+.global ftSk_SpecialAirHiStart_0_Coll
+ftSk_SpecialAirHiStart_0_Coll:
 /* 801132B4 0010FE94  7C 08 02 A6 */	mflr r0
 /* 801132B8 0010FE98  90 01 00 04 */	stw r0, 4(r1)
 /* 801132BC 0010FE9C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -387,8 +387,8 @@ ftSk_SpecialHi_80113390:
 /* 801133F4 0010FFD4  7C 08 03 A6 */	mtlr r0
 /* 801133F8 0010FFD8  4E 80 00 20 */	blr
 
-.global ftSk_SpecialHi_Anim
-ftSk_SpecialHi_Anim:
+.global ftSk_SpecialHiStart_1_Anim
+ftSk_SpecialHiStart_1_Anim:
 /* 801133FC 0010FFDC  7C 08 02 A6 */	mflr r0
 /* 80113400 0010FFE0  90 01 00 04 */	stw r0, 4(r1)
 /* 80113404 0010FFE4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -406,8 +406,8 @@ ftSk_SpecialHi_Anim:
 /* 80113430 00110010  7C 08 03 A6 */	mtlr r0
 /* 80113434 00110014  4E 80 00 20 */	blr
 
-.global ftSk_SpecialAirHi_Anim
-ftSk_SpecialAirHi_Anim:
+.global ftSk_SpecialAirHiStart_1_Anim
+ftSk_SpecialAirHiStart_1_Anim:
 /* 80113438 00110018  7C 08 02 A6 */	mflr r0
 /* 8011343C 0011001C  90 01 00 04 */	stw r0, 4(r1)
 /* 80113440 00110020  94 21 FF F8 */	stwu r1, -8(r1)
@@ -425,16 +425,16 @@ ftSk_SpecialAirHi_Anim:
 /* 8011346C 0011004C  7C 08 03 A6 */	mtlr r0
 /* 80113470 00110050  4E 80 00 20 */	blr
 
-.global ftSk_SpecialHi_IASA
-ftSk_SpecialHi_IASA:
+.global ftSk_SpecialHiStart_1_IASA
+ftSk_SpecialHiStart_1_IASA:
 /* 80113474 00110054  4E 80 00 20 */	blr
 
-.global ftSk_SpecialAirHi_IASA
-ftSk_SpecialAirHi_IASA:
+.global ftSk_SpecialAirHiStart_1_IASA
+ftSk_SpecialAirHiStart_1_IASA:
 /* 80113478 00110058  4E 80 00 20 */	blr
 
-.global ftSk_SpecialHi_Phys
-ftSk_SpecialHi_Phys:
+.global ftSk_SpecialHiStart_1_Phys
+ftSk_SpecialHiStart_1_Phys:
 /* 8011347C 0011005C  7C 08 02 A6 */	mflr r0
 /* 80113480 00110060  90 01 00 04 */	stw r0, 4(r1)
 /* 80113484 00110064  94 21 FF F8 */	stwu r1, -8(r1)
@@ -444,12 +444,12 @@ ftSk_SpecialHi_Phys:
 /* 80113494 00110074  7C 08 03 A6 */	mtlr r0
 /* 80113498 00110078  4E 80 00 20 */	blr
 
-.global ftSk_SpecialAirHi_Phys
-ftSk_SpecialAirHi_Phys:
+.global ftSk_SpecialAirHiStart_1_Phys
+ftSk_SpecialAirHiStart_1_Phys:
 /* 8011349C 0011007C  4E 80 00 20 */	blr
 
-.global ftSk_SpecialHi_Coll
-ftSk_SpecialHi_Coll:
+.global ftSk_SpecialHiStart_1_Coll
+ftSk_SpecialHiStart_1_Coll:
 /* 801134A0 00110080  7C 08 02 A6 */	mflr r0
 /* 801134A4 00110084  90 01 00 04 */	stw r0, 4(r1)
 /* 801134A8 00110088  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -496,8 +496,8 @@ ftSk_SpecialHi_Coll:
 /* 80113538 00110118  7C 08 03 A6 */	mtlr r0
 /* 8011353C 0011011C  4E 80 00 20 */	blr
 
-.global ftSk_SpecialAirHi_Coll
-ftSk_SpecialAirHi_Coll:
+.global ftSk_SpecialAirHiStart_1_Coll
+ftSk_SpecialAirHiStart_1_Coll:
 /* 80113540 00110120  7C 08 02 A6 */	mflr r0
 /* 80113544 00110124  90 01 00 04 */	stw r0, 4(r1)
 /* 80113548 00110128  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -978,8 +978,8 @@ ftSk_SpecialHi_80113A30:
 /* 80113C38 00110818  7C 08 03 A6 */	mtlr r0
 /* 80113C3C 0011081C  4E 80 00 20 */	blr
 
-.global ftSk_SpecialHiEnd_Anim
-ftSk_SpecialHiEnd_Anim:
+.global ftSk_SpecialHi_Anim
+ftSk_SpecialHi_Anim:
 /* 80113C40 00110820  7C 08 02 A6 */	mflr r0
 /* 80113C44 00110824  90 01 00 04 */	stw r0, 4(r1)
 /* 80113C48 00110828  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -997,8 +997,8 @@ ftSk_SpecialHiEnd_Anim:
 /* 80113C74 00110854  7C 08 03 A6 */	mtlr r0
 /* 80113C78 00110858  4E 80 00 20 */	blr
 
-.global ftSk_SpecialAirHiEnd_Anim
-ftSk_SpecialAirHiEnd_Anim:
+.global ftSk_SpecialAirHi_Anim
+ftSk_SpecialAirHi_Anim:
 /* 80113C7C 0011085C  7C 08 02 A6 */	mflr r0
 /* 80113C80 00110860  90 01 00 04 */	stw r0, 4(r1)
 /* 80113C84 00110864  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1025,16 +1025,16 @@ ftSk_SpecialAirHiEnd_Anim:
 /* 80113CD4 001108B4  7C 08 03 A6 */	mtlr r0
 /* 80113CD8 001108B8  4E 80 00 20 */	blr
 
-.global ftSk_SpecialHiEnd_IASA
-ftSk_SpecialHiEnd_IASA:
+.global ftSk_SpecialHi_IASA
+ftSk_SpecialHi_IASA:
 /* 80113CDC 001108BC  4E 80 00 20 */	blr
 
-.global ftSk_SpecialAirHiEnd_IASA
-ftSk_SpecialAirHiEnd_IASA:
+.global ftSk_SpecialAirHi_IASA
+ftSk_SpecialAirHi_IASA:
 /* 80113CE0 001108C0  4E 80 00 20 */	blr
 
-.global ftSk_SpecialHiEnd_Phys
-ftSk_SpecialHiEnd_Phys:
+.global ftSk_SpecialHi_Phys
+ftSk_SpecialHi_Phys:
 /* 80113CE4 001108C4  7C 08 02 A6 */	mflr r0
 /* 80113CE8 001108C8  90 01 00 04 */	stw r0, 4(r1)
 /* 80113CEC 001108CC  94 21 FF F8 */	stwu r1, -8(r1)
@@ -1044,8 +1044,8 @@ ftSk_SpecialHiEnd_Phys:
 /* 80113CFC 001108DC  7C 08 03 A6 */	mtlr r0
 /* 80113D00 001108E0  4E 80 00 20 */	blr
 
-.global ftSk_SpecialAirHiEnd_Phys
-ftSk_SpecialAirHiEnd_Phys:
+.global ftSk_SpecialAirHi_Phys
+ftSk_SpecialAirHi_Phys:
 /* 80113D04 001108E4  7C 08 02 A6 */	mflr r0
 /* 80113D08 001108E8  90 01 00 04 */	stw r0, 4(r1)
 /* 80113D0C 001108EC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1080,8 +1080,8 @@ ftSk_SpecialAirHiEnd_Phys:
 /* 80113D78 00110958  7C 08 03 A6 */	mtlr r0
 /* 80113D7C 0011095C  4E 80 00 20 */	blr
 
-.global ftSk_SpecialHiEnd_Coll
-ftSk_SpecialHiEnd_Coll:
+.global ftSk_SpecialHi_Coll
+ftSk_SpecialHi_Coll:
 /* 80113D80 00110960  7C 08 02 A6 */	mflr r0
 /* 80113D84 00110964  90 01 00 04 */	stw r0, 4(r1)
 /* 80113D88 00110968  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1099,8 +1099,8 @@ ftSk_SpecialHiEnd_Coll:
 /* 80113DB4 00110994  7C 08 03 A6 */	mtlr r0
 /* 80113DB8 00110998  4E 80 00 20 */	blr
 
-.global ftSk_SpecialAirHiEnd_Coll
-ftSk_SpecialAirHiEnd_Coll:
+.global ftSk_SpecialAirHi_Coll
+ftSk_SpecialAirHi_Coll:
 /* 80113DBC 0011099C  7C 08 02 A6 */	mflr r0
 /* 80113DC0 001109A0  90 01 00 04 */	stw r0, 4(r1)
 /* 80113DC4 001109A4  94 21 FF E0 */	stwu r1, -0x20(r1)

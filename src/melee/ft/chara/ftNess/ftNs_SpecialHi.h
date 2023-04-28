@@ -13,16 +13,16 @@
 /* 116E68 */ void ftNs_SpecialAirS_Coll(HSD_GObj* gobj);
 /* 117034 */ void ftNs_SpecialAirNStart_Enter(HSD_GObj* gobj);
 /* 117378 */ void ftNs_SpecialAirNStart_Anim(HSD_GObj* gobj);
-/* 117458 */ void ftNs_SpecialAirNHold_Anim(HSD_GObj* gobj);
+/* 117458 */ void ftNs_SpecialAirNRelease_Anim(HSD_GObj* gobj);
 /* 11758C */ void ftNs_SpecialAirNEnd_Anim(HSD_GObj* gobj);
 /* 1176CC */ void ftNs_SpecialAirNStart_IASA(HSD_GObj* gobj);
-/* 1176D0 */ void ftNs_SpecialAirNHold_IASA(HSD_GObj* gobj);
+/* 1176D0 */ void ftNs_SpecialAirNRelease_IASA(HSD_GObj* gobj);
 /* 11774C */ void ftNs_SpecialAirNEnd_IASA(HSD_GObj* gobj);
 /* 1177C8 */ void ftNs_SpecialAirNStart_Phys(HSD_GObj* gobj);
-/* 117828 */ void ftNs_SpecialAirNHold_Phys(HSD_GObj* gobj);
+/* 117828 */ void ftNs_SpecialAirNRelease_Phys(HSD_GObj* gobj);
 /* 117888 */ void ftNs_SpecialAirNEnd_Phys(HSD_GObj* gobj);
 /* 117A2C */ void ftNs_SpecialAirNStart_Coll(HSD_GObj* gobj);
-/* 117A98 */ void ftNs_SpecialAirNHold_Coll(HSD_GObj* gobj);
+/* 117A98 */ void ftNs_SpecialAirNRelease_Coll(HSD_GObj* gobj);
 /* 117B04 */ void ftNs_SpecialAirNEnd_Coll(HSD_GObj* gobj);
 /* 117B70 */ void ftNs_SpecialHiStopGFX(HSD_GObj* gobj);
 /* 117BBC */ bool

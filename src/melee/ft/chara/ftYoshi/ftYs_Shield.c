@@ -75,7 +75,7 @@ static inline void spawnEffect(HSD_GObj* gobj)
     efAsync_Spawn(gobj, &fp2->x60C, FtPart_HipN, 1231, jobj, x1CC);
 }
 
-void ftYs_MS_341_Anim(HSD_GObj* gobj)
+void ftYs_GuardOn_0_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -94,7 +94,7 @@ void ftYs_MS_341_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftYs_MS_341_IASA(HSD_GObj* gobj)
+void ftYs_GuardOn_0_IASA(HSD_GObj* gobj)
 {
     if (!ft_80093694() && !ft_8009515C(gobj) && !ft_80099794(gobj) &&
         !ft_8009917C(gobj) && !ft_800D8990(gobj) && !ft_8009A080(gobj))
@@ -103,12 +103,12 @@ void ftYs_MS_341_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftYs_MS_341_Phys(HSD_GObj* arg0)
+void ftYs_GuardOn_0_Phys(HSD_GObj* arg0)
 {
     ftCo_GuardOn_Phys(arg0);
 }
 
-void ftYs_MS_341_Coll(HSD_GObj* arg0)
+void ftYs_GuardOn_0_Coll(HSD_GObj* arg0)
 {
     ftCo_GuardOn_Coll(arg0);
 }
@@ -197,7 +197,7 @@ asm void ftYs_Shield_8012C1D4(HSD_GObj*)
 #pragma pop
 #endif
 
-void ftYs_ShieldHold_Anim(HSD_GObj* gobj)
+void ftYs_GuardHold_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -220,7 +220,7 @@ void ftYs_ShieldHold_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftYs_ShieldHold_IASA(HSD_GObj* gobj)
+void ftYs_GuardHold_IASA(HSD_GObj* gobj)
 {
     if (!ft_8009515C(gobj) && !ft_80099794(gobj) && !ft_8009917C(gobj) &&
         !ft_800D8990(gobj) && !ft_8009A080(gobj))
@@ -229,12 +229,12 @@ void ftYs_ShieldHold_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftYs_ShieldHold_Phys(HSD_GObj* arg0)
+void ftYs_GuardHold_Phys(HSD_GObj* arg0)
 {
     ftCo_Guard_Phys(arg0);
 }
 
-void ftYs_ShieldHold_Coll(HSD_GObj* arg0)
+void ftYs_GuardHold_Coll(HSD_GObj* arg0)
 {
     ftCo_Guard_Coll(arg0);
 }
@@ -268,7 +268,7 @@ void ftYs_Shield_8012C49C(HSD_GObj* gobj)
     }
 }
 
-void ftYs_ShieldRelease_Anim(HSD_GObj* gobj)
+void ftYs_GuardOff_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -283,7 +283,7 @@ void ftYs_ShieldRelease_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftYs_ShieldRelease_IASA(HSD_GObj* arg0)
+void ftYs_GuardOff_IASA(HSD_GObj* arg0)
 {
     if (!ft_80099794(arg0)) {
         /// @todo Weird control flow.
@@ -291,12 +291,12 @@ void ftYs_ShieldRelease_IASA(HSD_GObj* arg0)
     }
 }
 
-void ftYs_ShieldRelease_Phys(HSD_GObj* arg0)
+void ftYs_GuardOff_Phys(HSD_GObj* arg0)
 {
     ftCo_GuardOff_Phys(arg0);
 }
 
-void ftYs_ShieldRelease_Coll(HSD_GObj* arg0)
+void ftYs_GuardOff_Coll(HSD_GObj* arg0)
 {
     ftCo_GuardOff_Coll(arg0);
 }
@@ -421,7 +421,7 @@ lbl_8012C774:
 #pragma pop
 #endif
 
-void ftYs_ShieldDamage_Anim(HSD_GObj* gobj)
+void ftYs_GuardDamage_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -435,11 +435,11 @@ void ftYs_ShieldDamage_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftYs_ShieldDamage_IASA(HSD_GObj* arg0) {}
+void ftYs_GuardDamage_IASA(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftYs_ShieldDamage_Phys(HSD_GObj*)
+asm void ftYs_GuardDamage_Phys(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012C810 001293F0  7C 08 02 A6 */	mflr r0
@@ -456,7 +456,7 @@ asm void ftYs_ShieldDamage_Phys(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftYs_ShieldDamage_Coll(HSD_GObj*)
+asm void ftYs_GuardDamage_Coll(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012C830 00129410  7C 08 02 A6 */	mflr r0
@@ -622,7 +622,7 @@ void ftYs_Shield_8012CACC(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftYs_ShieldStart_Anim(HSD_GObj*)
+asm void ftYs_GuardOn_1_Anim(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012CAD0 001296B0  7C 08 02 A6 */	mflr r0
@@ -693,7 +693,7 @@ lbl_8012CBA0:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftYs_ShieldStart_IASA(HSD_GObj*)
+asm void ftYs_GuardOn_1_IASA(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012CBBC 0012979C  7C 08 02 A6 */	mflr r0
@@ -710,7 +710,7 @@ asm void ftYs_ShieldStart_IASA(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftYs_ShieldStart_Phys(HSD_GObj*)
+asm void ftYs_GuardOn_1_Phys(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012CBDC 001297BC  7C 08 02 A6 */	mflr r0
@@ -727,7 +727,7 @@ asm void ftYs_ShieldStart_Phys(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftYs_ShieldStart_Coll(HSD_GObj*)
+asm void ftYs_GuardOn_1_Coll(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012CBFC 001297DC  7C 08 02 A6 */	mflr r0

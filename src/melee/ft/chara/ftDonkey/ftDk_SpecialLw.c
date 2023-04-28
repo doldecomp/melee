@@ -115,7 +115,7 @@ static void doAnim(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = ftDk_Init_8010DB3C;
 }
 
-void ftDk_SpecialLwEnd_Anim(HSD_GObj* gobj)
+void ftDk_SpecialLwEnd0_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -126,14 +126,14 @@ void ftDk_SpecialLwEnd_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftDk_SpecialLwEnd_IASA(HSD_GObj* gobj) {}
+void ftDk_SpecialLwEnd0_IASA(HSD_GObj* gobj) {}
 
-void ftDk_SpecialLwEnd_Phys(HSD_GObj* gobj)
+void ftDk_SpecialLwEnd0_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftDk_SpecialLwEnd_Coll(HSD_GObj* gobj)
+void ftDk_SpecialLwEnd0_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
         ft_800CC730(gobj);
@@ -145,21 +145,21 @@ static void doTransition(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwEnd0, 0, NULL, 0, 1, 0);
 }
 
-void ftDk_MS_386_Anim(HSD_GObj* gobj)
+void ftDk_SpecialLwEnd1_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
     }
 }
 
-void ftDk_MS_386_IASA(HSD_GObj* gobj) {}
+void ftDk_SpecialLwEnd1_IASA(HSD_GObj* gobj) {}
 
-void ftDk_MS_386_Phys(HSD_GObj* gobj)
+void ftDk_SpecialLwEnd1_Phys(HSD_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-void ftDk_MS_386_Coll(HSD_GObj* gobj)
+void ftDk_SpecialLwEnd1_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
         ft_8008A2BC(gobj);

@@ -73,7 +73,7 @@ void ftMs_SpecialAirS_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftMs_SpecialS1_Anim(HSD_GObj* gobj)
+void ftMs_SpecialAirS1_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -86,7 +86,7 @@ void ftMs_SpecialS1_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialS1_IASA(HSD_GObj* gobj)
+void ftMs_SpecialAirS1_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -102,7 +102,7 @@ void ftMs_SpecialS1_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialS1_Phys(HSD_GObj* gobj)
+void ftMs_SpecialAirS1_Phys(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -122,7 +122,7 @@ void ftMs_SpecialS1_Phys(HSD_GObj* gobj)
     }
 }
 
-void ftMs_SpecialS1_Coll(HSD_GObj* gobj)
+void ftMs_SpecialAirS1_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

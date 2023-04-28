@@ -12,14 +12,14 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftMh_MS_363_Anim(HSD_GObj* gobj)
+void ftMh_FingerBeamEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMh_MS_389_80151018(gobj);
     }
 }
 
-void ftMh_MS_363_IASA(HSD_GObj* gobj)
+void ftMh_FingerBeamEnd_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -27,12 +27,12 @@ void ftMh_MS_363_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_363_Phys(HSD_GObj* gobj)
+void ftMh_FingerBeamEnd_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-void ftMh_MS_363_Coll(HSD_GObj* gobj) {}
+void ftMh_FingerBeamEnd_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_363_801530A4(HSD_GObj* gobj)
 {
@@ -58,7 +58,7 @@ void ftMh_MS_363_801530A4(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
 }
 
-void ftMh_MS_364_Anim(HSD_GObj* gobj)
+void ftMh_FingerGun1_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -85,7 +85,7 @@ void ftMh_MS_364_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_364_IASA(HSD_GObj* gobj)
+void ftMh_FingerGun1_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -120,7 +120,7 @@ static inline float my_lbVector_Len(Vec3* vec)
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-void ftMh_MS_364_Phys(HSD_GObj* gobj)
+void ftMh_FingerGun1_Phys(HSD_GObj* gobj)
 {
     /// @todo Not enough stack for #GET_FIGHTER; inline issue.
     Fighter* fp = gobj->user_data;
@@ -162,7 +162,7 @@ void ftMh_MS_364_Phys(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_364_Coll(HSD_GObj* gobj) {}
+void ftMh_FingerGun1_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_364_801533CC(HSD_GObj* gobj)
 {
@@ -192,7 +192,7 @@ static inline void lbl_8015346C_inline(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = ftMh_MS_365_801535B0;
 }
 
-void ftMh_MS_365_Anim(HSD_GObj* gobj)
+void ftMh_FingerGun2_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -205,7 +205,7 @@ void ftMh_MS_365_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_365_IASA(HSD_GObj* gobj)
+void ftMh_FingerGun2_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -213,12 +213,12 @@ void ftMh_MS_365_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_365_Phys(HSD_GObj* gobj)
+void ftMh_FingerGun2_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-void ftMh_MS_365_Coll(HSD_GObj* gobj) {}
+void ftMh_FingerGun2_Coll(HSD_GObj* gobj) {}
 
 static void ftMh_MS_365_8015364C(HSD_GObj* gobj, HSD_JObj* arg1, f32 arg2,
                                  f32 arg3);

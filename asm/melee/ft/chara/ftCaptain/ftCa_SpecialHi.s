@@ -1,12 +1,12 @@
 .include "macros.inc"
 
 .section .text  # 0x80005940 - 0x803B7240
-.global ftCa_SpecialLwRebound_Coll
-ftCa_SpecialLwRebound_Coll:
+.global ftCa_SpecialHiThrow1_Coll
+ftCa_SpecialHiThrow1_Coll:
 /* 800E49DC 000E15BC  7C 08 02 A6 */	mflr r0
 /* 800E49E0 000E15C0  90 01 00 04 */	stw r0, 4(r1)
 /* 800E49E4 000E15C4  94 21 FF F8 */	stwu r1, -8(r1)
-/* 800E49E8 000E15C8  4B F9 E1 91 */	bl ftCo_ZairCatch_Coll
+/* 800E49E8 000E15C8  4B F9 E1 91 */	bl ftCo_AirCatchHit_Coll
 /* 800E49EC 000E15CC  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 800E49F0 000E15D0  38 21 00 08 */	addi r1, r1, 8
 /* 800E49F4 000E15D4  7C 08 03 A6 */	mtlr r0
@@ -667,8 +667,8 @@ ftCa_SpecialLw_800E526C:
 /* 800E5308 000E1EE8  7C 08 03 A6 */	mtlr r0
 /* 800E530C 000E1EEC  4E 80 00 20 */	blr
 
-.global ftCa_SpecialHiThrow_Anim
-ftCa_SpecialHiThrow_Anim:
+.global ftCa_SpecialHiThrow0_Anim
+ftCa_SpecialHiThrow0_Anim:
 /* 800E5310 000E1EF0  7C 08 02 A6 */	mflr r0
 /* 800E5314 000E1EF4  90 01 00 04 */	stw r0, 4(r1)
 /* 800E5318 000E1EF8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -701,12 +701,12 @@ ftCa_SpecialHiThrow_Anim:
 /* 800E537C 000E1F5C  7C 08 03 A6 */	mtlr r0
 /* 800E5380 000E1F60  4E 80 00 20 */	blr
 
-.global ftCa_SpecialHiThrow_IASA
-ftCa_SpecialHiThrow_IASA:
+.global ftCa_SpecialHiThrow0_IASA
+ftCa_SpecialHiThrow0_IASA:
 /* 800E5384 000E1F64  4E 80 00 20 */	blr
 
-.global ftCa_SpecialHiThrow_Phys
-ftCa_SpecialHiThrow_Phys:
+.global ftCa_SpecialHiThrow0_Phys
+ftCa_SpecialHiThrow0_Phys:
 /* 800E5388 000E1F68  7C 08 02 A6 */	mflr r0
 /* 800E538C 000E1F6C  90 01 00 04 */	stw r0, 4(r1)
 /* 800E5390 000E1F70  94 21 FF A8 */	stwu r1, -0x58(r1)
@@ -787,8 +787,8 @@ ftCa_SpecialHiThrow_Phys:
 /* 800E54B0 000E2090  7C 08 03 A6 */	mtlr r0
 /* 800E54B4 000E2094  4E 80 00 20 */	blr
 
-.global ftCa_SpecialHiThrow_Coll
-ftCa_SpecialHiThrow_Coll:
+.global ftCa_SpecialHiThrow0_Coll
+ftCa_SpecialHiThrow0_Coll:
 /* 800E54B8 000E2098  7C 08 02 A6 */	mflr r0
 /* 800E54BC 000E209C  90 01 00 04 */	stw r0, 4(r1)
 /* 800E54C0 000E20A0  94 21 FF E0 */	stwu r1, -0x20(r1)

@@ -223,7 +223,7 @@ void ftNs_SpecialNStart_Anim(HSD_GObj* gobj)
 }
 
 /// Ness's grounded PK Flash Charge Animation callback
-void ftNs_SpecialNHold_Anim(HSD_GObj* gobj)
+void ftNs_SpecialNRelease_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -349,7 +349,7 @@ void ftNs_SpecialAirNStart_Anim(HSD_GObj* gobj)
 }
 
 /// Ness's aerial PK Flash Charge Animation callback
-void ftNs_SpecialAirNHold_Anim(HSD_GObj* gobj)
+void ftNs_SpecialAirNRelease_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -425,7 +425,7 @@ void ftNs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
 void ftNs_SpecialNStart_IASA(HSD_GObj* gobj) {}
 
 /// Ness's grounded PK Flash Charge IASA callback
-void ftNs_SpecialNHold_IASA(HSD_GObj* gobj)
+void ftNs_SpecialNRelease_IASA(HSD_GObj* gobj)
 {
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -478,7 +478,7 @@ void ftNs_SpecialNEnd_IASA(HSD_GObj* gobj) {}
 void ftNs_SpecialAirNStart_IASA(HSD_GObj* gobj) {}
 
 /// Ness's aerial PK Flash Charge IASA callback
-void ftNs_SpecialAirNHold_IASA(HSD_GObj* gobj)
+void ftNs_SpecialAirNRelease_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -545,7 +545,7 @@ void ftNs_SpecialNStart_Phys(HSD_GObj* gobj)
 }
 
 /// Ness's grounded PK Flash Charge Physics callback
-void ftNs_SpecialNHold_Phys(HSD_GObj* gobj)
+void ftNs_SpecialNRelease_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
@@ -581,7 +581,7 @@ void ftNs_SpecialAirNStart_Phys(HSD_GObj* gobj)
 }
 
 /// Ness's aerial PK Flash Charge Physics callback
-void ftNs_SpecialAirNHold_Phys(HSD_GObj* gobj)
+void ftNs_SpecialAirNRelease_Phys(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -645,7 +645,7 @@ void ftNs_SpecialNStart_Coll(HSD_GObj* gobj)
 }
 
 /// Ness's grounded PK Flash Charge Collision callback
-void ftNs_SpecialNHold_Coll(HSD_GObj* gobj)
+void ftNs_SpecialNRelease_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -693,7 +693,7 @@ void ftNs_SpecialAirNStart_Coll(HSD_GObj* gobj)
 }
 
 /// Ness's aerial PK Flash Charge Collision callback
-void ftNs_SpecialAirNHold_Coll(HSD_GObj* gobj)
+void ftNs_SpecialAirNRelease_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

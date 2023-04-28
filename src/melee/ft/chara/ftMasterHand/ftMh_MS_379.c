@@ -12,7 +12,7 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 
-void ftMh_MS_379_IASA(HSD_GObj* gobj)
+void ftMh_Throw_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -20,12 +20,12 @@ void ftMh_MS_379_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_379_Phys(HSD_GObj* gobj)
+void ftMh_Throw_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-void ftMh_MS_379_Coll(HSD_GObj* gobj) {}
+void ftMh_Throw_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_379_80155014(HSD_GObj* gobj)
 {

@@ -33,10 +33,10 @@ MotionState ftPr_Init_MotionStateTable[ftPr_MS_SelfCount] = {
         ftPr_SM_JumpAerialF1,
         Ft_MF_None,
         FtMoveId_Default << 24,
-        ftCo_MultiJump_Anim,
-        ftCo_MultiJump_IASA,
-        ftCo_MultiJump_Phys,
-        ftCo_MultiJump_Coll,
+        ftCo_JumpAerialF1_Anim,
+        ftCo_JumpAerialF1_IASA,
+        ftCo_JumpAerialF1_Phys,
+        ftCo_JumpAerialF1_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -44,10 +44,10 @@ MotionState ftPr_Init_MotionStateTable[ftPr_MS_SelfCount] = {
         ftPr_SM_JumpAerialF2,
         Ft_MF_None,
         FtMoveId_Default << 24,
-        ftCo_MultiJump_Anim,
-        ftCo_MultiJump_IASA,
-        ftCo_MultiJump_Phys,
-        ftCo_MultiJump_Coll,
+        ftCo_JumpAerialF1_Anim,
+        ftCo_JumpAerialF1_IASA,
+        ftCo_JumpAerialF1_Phys,
+        ftCo_JumpAerialF1_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -55,10 +55,10 @@ MotionState ftPr_Init_MotionStateTable[ftPr_MS_SelfCount] = {
         ftPr_SM_JumpAerialF3,
         Ft_MF_None,
         FtMoveId_Default << 24,
-        ftCo_MultiJump_Anim,
-        ftCo_MultiJump_IASA,
-        ftCo_MultiJump_Phys,
-        ftCo_MultiJump_Coll,
+        ftCo_JumpAerialF1_Anim,
+        ftCo_JumpAerialF1_IASA,
+        ftCo_JumpAerialF1_Phys,
+        ftCo_JumpAerialF1_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -66,10 +66,10 @@ MotionState ftPr_Init_MotionStateTable[ftPr_MS_SelfCount] = {
         ftPr_SM_JumpAerialF4,
         Ft_MF_None,
         FtMoveId_Default << 24,
-        ftCo_MultiJump_Anim,
-        ftCo_MultiJump_IASA,
-        ftCo_MultiJump_Phys,
-        ftCo_MultiJump_Coll,
+        ftCo_JumpAerialF1_Anim,
+        ftCo_JumpAerialF1_IASA,
+        ftCo_JumpAerialF1_Phys,
+        ftCo_JumpAerialF1_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -77,10 +77,10 @@ MotionState ftPr_Init_MotionStateTable[ftPr_MS_SelfCount] = {
         ftPr_SM_JumpAerialF5,
         Ft_MF_None,
         FtMoveId_Default << 24,
-        ftCo_MultiJump_Anim,
-        ftCo_MultiJump_IASA,
-        ftCo_MultiJump_Phys,
-        ftCo_MultiJump_Coll,
+        ftCo_JumpAerialF1_Anim,
+        ftCo_JumpAerialF1_IASA,
+        ftCo_JumpAerialF1_Phys,
+        ftCo_JumpAerialF1_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -88,10 +88,10 @@ MotionState ftPr_Init_MotionStateTable[ftPr_MS_SelfCount] = {
         ftPr_SM_SpecialNStartR,
         ftPr_MF_SpecialN,
         FtMoveId_SpecialN << 24,
-        ftPr_SpecialNChargeStart_Anim,
-        ftPr_SpecialNChargeStart_IASA,
-        ftPr_SpecialNChargeStart_Phys,
-        ftPr_SpecialNChargeStart_Coll,
+        ftPr_SpecialNStart_Anim,
+        ftPr_SpecialNStart_IASA,
+        ftPr_SpecialNStart_Phys,
+        ftPr_SpecialNStart_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -99,10 +99,10 @@ MotionState ftPr_Init_MotionStateTable[ftPr_MS_SelfCount] = {
         ftPr_SM_SpecialNStartL,
         ftPr_MF_SpecialN,
         FtMoveId_SpecialN << 24,
-        ftPr_SpecialNChargeStart_Anim,
-        ftPr_SpecialNChargeStart_IASA,
-        ftPr_SpecialNChargeStart_Phys,
-        ftPr_SpecialNChargeStart_Coll,
+        ftPr_SpecialNStart_Anim,
+        ftPr_SpecialNStart_IASA,
+        ftPr_SpecialNStart_Phys,
+        ftPr_SpecialNStart_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -110,10 +110,10 @@ MotionState ftPr_Init_MotionStateTable[ftPr_MS_SelfCount] = {
         ftPr_SM_SpecialNChargeLoop,
         ftPr_MF_SpecialNCharged,
         FtMoveId_SpecialN << 24,
-        ftPr_SpecialNChargeLoop_Anim,
-        ftPr_SpecialNChargeLoop_IASA,
-        ftPr_SpecialNChargeLoop_Phys,
-        ftPr_SpecialNChargeLoop_Coll,
+        ftPr_SpecialNLoop_Anim,
+        ftPr_SpecialNLoop_IASA,
+        ftPr_SpecialNLoop_Phys,
+        ftPr_SpecialNLoop_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -121,10 +121,10 @@ MotionState ftPr_Init_MotionStateTable[ftPr_MS_SelfCount] = {
         ftPr_SM_SpecialNChargeFull,
         ftPr_MF_SpecialNCharged,
         FtMoveId_SpecialN << 24,
-        ftPr_SpecialNChargeFull_Anim,
-        ftPr_SpecialNChargeFull_IASA,
-        ftPr_SpecialNChargeFull_Phys,
-        ftPr_SpecialNChargeFull_Coll,
+        ftPr_SpecialNFull_Anim,
+        ftPr_SpecialNFull_IASA,
+        ftPr_SpecialNFull_Phys,
+        ftPr_SpecialNFull_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -132,10 +132,10 @@ MotionState ftPr_Init_MotionStateTable[ftPr_MS_SelfCount] = {
         ftPr_SM_SpecialNChargeRelease,
         ftPr_MF_SpecialN,
         FtMoveId_SpecialN << 24,
-        ftPr_SpecialNChargeRelease_Anim,
-        ftPr_SpecialNChargeRelease_IASA,
-        ftPr_SpecialNChargeRelease_Phys,
-        ftPr_SpecialNChargeRelease_Coll,
+        ftPr_SpecialNRelease_Anim,
+        ftPr_SpecialNRelease_IASA,
+        ftPr_SpecialNRelease_Phys,
+        ftPr_SpecialNRelease_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -143,10 +143,10 @@ MotionState ftPr_Init_MotionStateTable[ftPr_MS_SelfCount] = {
         ftPr_SM_SpecialNStartTurn,
         ftPr_MF_SpecialN,
         FtMoveId_SpecialN << 24,
-        ftPr_SpecialNStartTurn_Anim,
-        ftPr_SpecialNStartTurn_IASA,
-        ftPr_SpecialNStartTurn_Phys,
-        ftPr_SpecialNStartTurn_Coll,
+        ftPr_SpecialNTurn_Anim,
+        ftPr_SpecialNTurn_IASA,
+        ftPr_SpecialNTurn_Phys,
+        ftPr_SpecialNTurn_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -176,10 +176,10 @@ MotionState ftPr_Init_MotionStateTable[ftPr_MS_SelfCount] = {
         ftPr_SM_SpecialAirNStartR,
         ftPr_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
-        ftPr_SpecialAirNChargeStart_Anim,
-        ftPr_SpecialAirNChargeStart_IASA,
-        ftPr_SpecialAirNChargeStart_Phys,
-        ftPr_SpecialAirNChargeStart_Coll,
+        ftPr_SpecialAirNStart_Anim,
+        ftPr_SpecialAirNStart_IASA,
+        ftPr_SpecialAirNStart_Phys,
+        ftPr_SpecialAirNStart_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -187,10 +187,10 @@ MotionState ftPr_Init_MotionStateTable[ftPr_MS_SelfCount] = {
         ftPr_SM_SpecialAirNStartL,
         ftPr_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
-        ftPr_SpecialAirNChargeStart_Anim,
-        ftPr_SpecialAirNChargeStart_IASA,
-        ftPr_SpecialAirNChargeStart_Phys,
-        ftPr_SpecialAirNChargeStart_Coll,
+        ftPr_SpecialAirNStart_Anim,
+        ftPr_SpecialAirNStart_IASA,
+        ftPr_SpecialAirNStart_Phys,
+        ftPr_SpecialAirNStart_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -2459,7 +2459,7 @@ extern f32 const ftPr_Init_804D9C64;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNChargeStart_Anim(HSD_GObj*)
+asm void ftPr_SpecialNStart_Anim(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013E014 0013ABF4  7C 08 02 A6 */	mflr r0
@@ -2527,7 +2527,7 @@ extern f64 const ftPr_Init_804D9C70;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNChargeLoop_Anim(HSD_GObj*)
+asm void ftPr_SpecialNLoop_Anim(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013E0F0 0013ACD0  7C 08 02 A6 */	mflr r0
@@ -2650,7 +2650,7 @@ lbl_8013E260:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNChargeFull_Anim(HSD_GObj*)
+asm void ftPr_SpecialNFull_Anim(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013E2A0 0013AE80  7C 08 02 A6 */	mflr r0
@@ -2760,7 +2760,7 @@ extern f64 const ftPr_Init_804D9C88;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNChargeRelease_Anim(HSD_GObj*)
+asm void ftPr_SpecialNRelease_Anim(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013E410 0013AFF0  7C 08 02 A6 */	mflr r0
@@ -3034,7 +3034,7 @@ lbl_8013E7C4:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNStartTurn_Anim(HSD_GObj*)
+asm void ftPr_SpecialNTurn_Anim(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013E7E0 0013B3C0  7C 08 02 A6 */	mflr r0
@@ -3458,7 +3458,7 @@ lbl_8013ED90:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialAirNChargeStart_Anim(HSD_GObj*)
+asm void ftPr_SpecialAirNStart_Anim(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013EDB0 0013B990  7C 08 02 A6 */	mflr r0
@@ -4720,11 +4720,11 @@ lbl_8013FEC8:
 #pragma pop
 #endif
 
-void ftPr_SpecialNChargeStart_IASA(HSD_GObj* arg0) {}
+void ftPr_SpecialNStart_IASA(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNChargeLoop_IASA(HSD_GObj*)
+asm void ftPr_SpecialNLoop_IASA(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013FF04 0013CAE4  7C 08 02 A6 */	mflr r0
@@ -4826,7 +4826,7 @@ lbl_80140048:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNChargeFull_IASA(HSD_GObj*)
+asm void ftPr_SpecialNFull_IASA(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140064 0013CC44  7C 08 02 A6 */	mflr r0
@@ -4930,7 +4930,7 @@ extern f32 const ftPr_Init_804D9C90;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNChargeRelease_IASA(HSD_GObj*)
+asm void ftPr_SpecialNRelease_IASA(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 801401C4 0013CDA4  7C 08 02 A6 */	mflr r0
@@ -5042,11 +5042,11 @@ lbl_80140328:
 #pragma pop
 #endif
 
-void ftPr_SpecialNStartTurn_IASA(HSD_GObj* arg0) {}
+void ftPr_SpecialNTurn_IASA(HSD_GObj* arg0) {}
 
 void ftPr_SpecialNEnd_IASA(HSD_GObj* arg0) {}
 
-void ftPr_SpecialAirNChargeStart_IASA(HSD_GObj* arg0) {}
+void ftPr_SpecialAirNStart_IASA(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
 #pragma push
@@ -5262,7 +5262,7 @@ void ftPr_SpecialNHit_IASA(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNChargeStart_Phys(HSD_GObj*)
+asm void ftPr_SpecialNStart_Phys(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140620 0013D200  80 63 00 2C */	lwz r3, 44(r3)
@@ -5283,7 +5283,7 @@ asm void ftPr_SpecialNChargeStart_Phys(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNChargeLoop_Phys(HSD_GObj*)
+asm void ftPr_SpecialNLoop_Phys(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140650 0013D230  80 63 00 2C */	lwz r3, 44(r3)
@@ -5304,7 +5304,7 @@ asm void ftPr_SpecialNChargeLoop_Phys(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNChargeFull_Phys(HSD_GObj*)
+asm void ftPr_SpecialNFull_Phys(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140680 0013D260  80 63 00 2C */	lwz r3, 44(r3)
@@ -5325,7 +5325,7 @@ asm void ftPr_SpecialNChargeFull_Phys(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNChargeRelease_Phys(HSD_GObj*)
+asm void ftPr_SpecialNRelease_Phys(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 801406B0 0013D290  7C 08 02 A6 */	mflr r0
@@ -5480,7 +5480,7 @@ lbl_8014089C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNStartTurn_Phys(HSD_GObj*)
+asm void ftPr_SpecialNTurn_Phys(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 801408B8 0013D498  7C 08 02 A6 */	mflr r0
@@ -5720,7 +5720,7 @@ asm void ftPr_SpecialNEnd_Phys(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialAirNChargeStart_Phys(HSD_GObj*)
+asm void ftPr_SpecialAirNStart_Phys(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140BE8 0013D7C8  7C 08 02 A6 */	mflr r0
@@ -6041,7 +6041,7 @@ lbl_80140F7C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNChargeStart_Coll(HSD_GObj*)
+asm void ftPr_SpecialNStart_Coll(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140FA4 0013DB84  7C 08 02 A6 */	mflr r0
@@ -6097,7 +6097,7 @@ lbl_8014103C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNChargeLoop_Coll(HSD_GObj*)
+asm void ftPr_SpecialNLoop_Coll(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80141054 0013DC34  7C 08 02 A6 */	mflr r0
@@ -6175,7 +6175,7 @@ lbl_8014113C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNChargeFull_Coll(HSD_GObj*)
+asm void ftPr_SpecialNFull_Coll(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80141154 0013DD34  7C 08 02 A6 */	mflr r0
@@ -6255,7 +6255,7 @@ extern f32 const ftPr_Init_804D9C54;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNChargeRelease_Coll(HSD_GObj*)
+asm void ftPr_SpecialNRelease_Coll(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80141254 0013DE34  7C 08 02 A6 */	mflr r0
@@ -6511,7 +6511,7 @@ lbl_801415E0:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialNStartTurn_Coll(HSD_GObj*)
+asm void ftPr_SpecialNTurn_Coll(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 801415F4 0013E1D4  7C 08 02 A6 */	mflr r0
@@ -6613,7 +6613,7 @@ lbl_80141718:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialAirNChargeStart_Coll(HSD_GObj*)
+asm void ftPr_SpecialAirNStart_Coll(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80141730 0013E310  7C 08 02 A6 */	mflr r0

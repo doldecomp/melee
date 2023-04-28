@@ -746,19 +746,19 @@ void ftFx_SpecialNEnd_Coll(HSD_GObj* gobj)
 // 0x800E6C7C - Fox & Falco's aerial Blaster Start Collision callback
 void ftFx_SpecialAirNStart_Coll(HSD_GObj* gobj)
 {
-    ftCo_ZairCatch_Coll(gobj);
+    ftCo_AirCatchHit_Coll(gobj);
 }
 
 // 0x800E6C9C - Fox & Falco's aerial Blaster Loop Collision callback
 void ftFx_SpecialAirNLoop_Coll(HSD_GObj* gobj)
 {
-    ftCo_ZairCatch_Coll(gobj);
+    ftCo_AirCatchHit_Coll(gobj);
 }
 
 // 0x800E6CBC - Fox & Falco's aerial Blaster End Collision callback
 void ftFx_SpecialAirNEnd_Coll(HSD_GObj* gobj)
 {
-    ftCo_ZairCatch_Coll(gobj);
+    ftCo_AirCatchHit_Coll(gobj);
 }
 
 // 0x800E6CDC

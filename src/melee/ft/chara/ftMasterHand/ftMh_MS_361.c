@@ -11,7 +11,7 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftMh_MS_359_Coll(HSD_GObj* gobj) {}
+void ftMh_Poke1_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_359_80152BCC(HSD_GObj* gobj)
 {
@@ -23,14 +23,14 @@ void ftMh_MS_359_80152BCC(HSD_GObj* gobj)
     fp->mv.mh.unk0.x30 = -1;
 }
 
-void ftMh_MS_361_Anim(HSD_GObj* gobj)
+void ftMh_FingerBeamStart_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMh_MS_361_80152CD8(gobj);
     }
 }
 
-void ftMh_MS_361_IASA(HSD_GObj* gobj)
+void ftMh_FingerBeamStart_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -38,12 +38,12 @@ void ftMh_MS_361_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_361_Phys(HSD_GObj* gobj)
+void ftMh_FingerBeamStart_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-void ftMh_MS_361_Coll(HSD_GObj* gobj) {}
+void ftMh_FingerBeamStart_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_361_80152CD8(HSD_GObj* gobj)
 {
@@ -56,7 +56,7 @@ void ftMh_MS_361_80152CD8(HSD_GObj* gobj)
 
 static void ftMh_MS_362_80152F80(HSD_GObj* gobj);
 
-void ftMh_MS_362_Anim(HSD_GObj* gobj)
+void ftMh_FingerBeamLoop_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -72,7 +72,7 @@ void ftMh_MS_362_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_362_IASA(HSD_GObj* gobj)
+void ftMh_FingerBeamLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -80,12 +80,12 @@ void ftMh_MS_362_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_362_Phys(HSD_GObj* gobj)
+void ftMh_FingerBeamLoop_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-void ftMh_MS_362_Coll(HSD_GObj* gobj) {}
+void ftMh_FingerBeamLoop_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_362_80152E28(HSD_GObj* gobj)
 {

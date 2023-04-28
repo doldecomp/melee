@@ -120,7 +120,7 @@ void ftSs_SpecialSSmash_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftSs_SpecialAirSmash_Anim(HSD_GObj* gobj)
+void ftSs_SpecialAirSSmash_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -134,14 +134,14 @@ void ftSs_SpecialAirSmash_Anim(HSD_GObj* gobj)
 
 void ftSs_SpecialSSmash_IASA(HSD_GObj* gobj) {}
 
-void ftSs_SpecialAirSmash_IASA(HSD_GObj* gobj) {}
+void ftSs_SpecialAirSSmash_IASA(HSD_GObj* gobj) {}
 
 void ftSs_SpecialSSmash_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftSs_SpecialAirSmash_Phys(HSD_GObj* gobj)
+void ftSs_SpecialAirSSmash_Phys(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH

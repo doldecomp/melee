@@ -197,7 +197,7 @@ inline void doAnim1(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_341_Anim(HSD_GObj* gobj)
+void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     /// @todo Unused stack.
@@ -359,7 +359,7 @@ void ftMh_MS_341_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_341_IASA(HSD_GObj* gobj)
+void ftMh_Wait1_0_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -367,12 +367,12 @@ void ftMh_MS_341_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_341_Phys(HSD_GObj* gobj)
+void ftMh_Wait1_0_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-void ftMh_MS_341_Coll(HSD_GObj* gobj) {}
+void ftMh_Wait1_0_Coll(HSD_GObj* gobj) {}
 
 #define buttons (HSD_PadMasterStatus[2].button)
 void ftMh_MS_341_80150894(HSD_GObj* gobj)

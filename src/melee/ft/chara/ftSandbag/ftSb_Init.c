@@ -17,10 +17,10 @@ MotionState ftSb_Init_MotionStateTable[ftSb_MS_SelfCount] = {
         ftSb_SM_WaitReverse,
         Ft_MF_None,
         (FtMoveId_Default << 24) | (1 << 22),
-        ftSb_MS_341_Anim,
-        ftSb_MS_341_IASA,
-        ftSb_MS_341_Phys,
-        ftSb_MS_341_Coll,
+        ftSb_WaitReverse_Anim,
+        ftSb_WaitReverse_IASA,
+        ftSb_WaitReverse_Phys,
+        ftSb_WaitReverse_Coll,
         ftCamera_UpdateCameraBox,
     },
 };
@@ -112,16 +112,16 @@ void ftSb_Init_8014FBA4(HSD_GObj* gobj)
     ftCommon_8007EFC0(fp, p_ftCommonData->x5F0);
 }
 
-void ftSb_MS_341_Anim(HSD_GObj* arg0) {}
+void ftSb_WaitReverse_Anim(HSD_GObj* arg0) {}
 
-void ftSb_MS_341_IASA(HSD_GObj* arg0) {}
+void ftSb_WaitReverse_IASA(HSD_GObj* arg0) {}
 
-void ftSb_MS_341_Phys(HSD_GObj* gobj)
+void ftSb_WaitReverse_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftSb_MS_341_Coll(HSD_GObj* gobj)
+void ftSb_WaitReverse_Coll(HSD_GObj* gobj)
 {
     ft_80083F88(gobj);
 }

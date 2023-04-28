@@ -4428,8 +4428,8 @@ ftKb_SpecialAirHi_Enter:
 /* 800F2464 000EF044  38 21 00 20 */	addi r1, r1, 0x20
 /* 800F2468 000EF048  7C 08 03 A6 */	mtlr r0
 /* 800F246C 000EF04C  4E 80 00 20 */	blr
-.global ftKb_SpecialHiStart_Anim
-ftKb_SpecialHiStart_Anim:
+.global ftKb_SpecialHi1_Anim
+ftKb_SpecialHi1_Anim:
 /* 800F2470 000EF050  7C 08 02 A6 */	mflr r0
 /* 800F2474 000EF054  90 01 00 04 */	stw r0, 4(r1)
 /* 800F2478 000EF058  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -4465,8 +4465,8 @@ ftKb_SpecialHiStart_Anim:
 /* 800F24EC 000EF0CC  38 21 00 18 */	addi r1, r1, 0x18
 /* 800F24F0 000EF0D0  7C 08 03 A6 */	mtlr r0
 /* 800F24F4 000EF0D4  4E 80 00 20 */	blr
-.global ftKb_MS_386_Anim
-ftKb_MS_386_Anim:
+.global ftKb_SpecialHi2_Anim
+ftKb_SpecialHi2_Anim:
 /* 800F24F8 000EF0D8  7C 08 02 A6 */	mflr r0
 /* 800F24FC 000EF0DC  90 01 00 04 */	stw r0, 4(r1)
 /* 800F2500 000EF0E0  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -4500,11 +4500,11 @@ ftKb_MS_386_Anim:
 /* 800F256C 000EF14C  38 21 00 18 */	addi r1, r1, 0x18
 /* 800F2570 000EF150  7C 08 03 A6 */	mtlr r0
 /* 800F2574 000EF154  4E 80 00 20 */	blr
-.global ftKb_MS_387_Anim
-ftKb_MS_387_Anim:
+.global ftKb_SpecialHi3_Anim
+ftKb_SpecialHi3_Anim:
 /* 800F2578 000EF158  4E 80 00 20 */	blr
-.global ftKb_SpecialHiEnd_Anim
-ftKb_SpecialHiEnd_Anim:
+.global ftKb_SpecialHi4_Anim
+ftKb_SpecialHi4_Anim:
 /* 800F257C 000EF15C  7C 08 02 A6 */	mflr r0
 /* 800F2580 000EF160  90 01 00 04 */	stw r0, 4(r1)
 /* 800F2584 000EF164  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -4535,8 +4535,8 @@ ftKb_SpecialHiEnd_Anim:
 /* 800F25E0 000EF1C0  38 21 00 28 */	addi r1, r1, 0x28
 /* 800F25E4 000EF1C4  7C 08 03 A6 */	mtlr r0
 /* 800F25E8 000EF1C8  4E 80 00 20 */	blr
-.global ftKb_SpecialAirHiStart_Anim
-ftKb_SpecialAirHiStart_Anim:
+.global ftKb_SpecialAirHi1_Anim
+ftKb_SpecialAirHi1_Anim:
 /* 800F25EC 000EF1CC  7C 08 02 A6 */	mflr r0
 /* 800F25F0 000EF1D0  90 01 00 04 */	stw r0, 4(r1)
 /* 800F25F4 000EF1D4  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -4570,8 +4570,8 @@ ftKb_SpecialAirHiStart_Anim:
 /* 800F2660 000EF240  38 21 00 18 */	addi r1, r1, 0x18
 /* 800F2664 000EF244  7C 08 03 A6 */	mtlr r0
 /* 800F2668 000EF248  4E 80 00 20 */	blr
-.global ftKb_SpecialAirHiApex_Anim
-ftKb_SpecialAirHiApex_Anim:
+.global ftKb_SpecialAirHi2_Anim
+ftKb_SpecialAirHi2_Anim:
 /* 800F266C 000EF24C  7C 08 02 A6 */	mflr r0
 /* 800F2670 000EF250  90 01 00 04 */	stw r0, 4(r1)
 /* 800F2674 000EF254  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -4603,8 +4603,8 @@ ftKb_SpecialAirHiApex_Anim:
 /* 800F26D8 000EF2B8  38 21 00 18 */	addi r1, r1, 0x18
 /* 800F26DC 000EF2BC  7C 08 03 A6 */	mtlr r0
 /* 800F26E0 000EF2C0  4E 80 00 20 */	blr
-.global ftKb_SpecialHiSwordDescent_Anim
-ftKb_SpecialHiSwordDescent_Anim:
+.global ftKb_SpecialAirHi3_Anim
+ftKb_SpecialAirHi3_Anim:
 /* 800F26E4 000EF2C4  4E 80 00 20 */	blr
 .global ftKb_SpecialAirHiEnd_Anim
 ftKb_SpecialAirHiEnd_Anim:
@@ -4638,8 +4638,8 @@ ftKb_SpecialAirHiEnd_Anim:
 /* 800F274C 000EF32C  38 21 00 28 */	addi r1, r1, 0x28
 /* 800F2750 000EF330  7C 08 03 A6 */	mtlr r0
 /* 800F2754 000EF334  4E 80 00 20 */	blr
-.global ftKb_SpecialHiStart_IASA
-ftKb_SpecialHiStart_IASA:
+.global ftKb_SpecialHi1_IASA
+ftKb_SpecialHi1_IASA:
 /* 800F2758 000EF338  7C 08 02 A6 */	mflr r0
 /* 800F275C 000EF33C  90 01 00 04 */	stw r0, 4(r1)
 /* 800F2760 000EF340  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -4697,18 +4697,18 @@ ftKb_SpecialHiStart_IASA:
 /* 800F281C 000EF3FC  38 21 00 20 */	addi r1, r1, 0x20
 /* 800F2820 000EF400  7C 08 03 A6 */	mtlr r0
 /* 800F2824 000EF404  4E 80 00 20 */	blr
-.global ftKb_MS_386_IASA
-ftKb_MS_386_IASA:
+.global ftKb_SpecialHi2_IASA
+ftKb_SpecialHi2_IASA:
 /* 800F2828 000EF408  4E 80 00 20 */	blr
-.global ftKb_MS_387_IASA
-ftKb_MS_387_IASA:
+.global ftKb_SpecialHi3_IASA
+ftKb_SpecialHi3_IASA:
 /* 800F282C 000EF40C  4E 80 00 20 */	blr
 
-.global ftKb_SpecialHiEnd_IASA
-ftKb_SpecialHiEnd_IASA:
+.global ftKb_SpecialHi4_IASA
+ftKb_SpecialHi4_IASA:
 /* 800F2830 000EF410  4E 80 00 20 */	blr
-.global ftKb_SpecialAirHiStart_IASA
-ftKb_SpecialAirHiStart_IASA:
+.global ftKb_SpecialAirHi1_IASA
+ftKb_SpecialAirHi1_IASA:
 /* 800F2834 000EF414  7C 08 02 A6 */	mflr r0
 /* 800F2838 000EF418  90 01 00 04 */	stw r0, 4(r1)
 /* 800F283C 000EF41C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -4766,17 +4766,17 @@ ftKb_SpecialAirHiStart_IASA:
 /* 800F28F8 000EF4D8  38 21 00 20 */	addi r1, r1, 0x20
 /* 800F28FC 000EF4DC  7C 08 03 A6 */	mtlr r0
 /* 800F2900 000EF4E0  4E 80 00 20 */	blr
-.global ftKb_SpecialAirHiApex_IASA
-ftKb_SpecialAirHiApex_IASA:
+.global ftKb_SpecialAirHi2_IASA
+ftKb_SpecialAirHi2_IASA:
 /* 800F2904 000EF4E4  4E 80 00 20 */	blr
-.global ftKb_SpecialHiSwordDescent_IASA
-ftKb_SpecialHiSwordDescent_IASA:
+.global ftKb_SpecialAirHi3_IASA
+ftKb_SpecialAirHi3_IASA:
 /* 800F2908 000EF4E8  4E 80 00 20 */	blr
 .global ftKb_SpecialAirHiEnd_IASA
 ftKb_SpecialAirHiEnd_IASA:
 /* 800F290C 000EF4EC  4E 80 00 20 */	blr
-.global ftKb_SpecialHiStart_Phys
-ftKb_SpecialHiStart_Phys:
+.global ftKb_SpecialHi1_Phys
+ftKb_SpecialHi1_Phys:
 /* 800F2910 000EF4F0  7C 08 02 A6 */	mflr r0
 /* 800F2914 000EF4F4  90 01 00 04 */	stw r0, 4(r1)
 /* 800F2918 000EF4F8  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -4806,8 +4806,8 @@ ftKb_SpecialHiStart_Phys:
 /* 800F2978 000EF558  38 21 00 28 */	addi r1, r1, 0x28
 /* 800F297C 000EF55C  7C 08 03 A6 */	mtlr r0
 /* 800F2980 000EF560  4E 80 00 20 */	blr
-.global ftKb_MS_386_Phys
-ftKb_MS_386_Phys:
+.global ftKb_SpecialHi2_Phys
+ftKb_SpecialHi2_Phys:
 /* 800F2984 000EF564  7C 08 02 A6 */	mflr r0
 /* 800F2988 000EF568  90 01 00 04 */	stw r0, 4(r1)
 /* 800F298C 000EF56C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -4837,8 +4837,8 @@ ftKb_MS_386_Phys:
 /* 800F29EC 000EF5CC  38 21 00 28 */	addi r1, r1, 0x28
 /* 800F29F0 000EF5D0  7C 08 03 A6 */	mtlr r0
 /* 800F29F4 000EF5D4  4E 80 00 20 */	blr
-.global ftKb_MS_387_Phys
-ftKb_MS_387_Phys:
+.global ftKb_SpecialHi3_Phys
+ftKb_SpecialHi3_Phys:
 /* 800F29F8 000EF5D8  7C 08 02 A6 */	mflr r0
 /* 800F29FC 000EF5DC  90 01 00 04 */	stw r0, 4(r1)
 /* 800F2A00 000EF5E0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -4859,8 +4859,8 @@ ftKb_MS_387_Phys:
 /* 800F2A3C 000EF61C  38 21 00 20 */	addi r1, r1, 0x20
 /* 800F2A40 000EF620  7C 08 03 A6 */	mtlr r0
 /* 800F2A44 000EF624  4E 80 00 20 */	blr
-.global ftKb_SpecialHiEnd_Phys
-ftKb_SpecialHiEnd_Phys:
+.global ftKb_SpecialHi4_Phys
+ftKb_SpecialHi4_Phys:
 /* 800F2A48 000EF628  7C 08 02 A6 */	mflr r0
 /* 800F2A4C 000EF62C  90 01 00 04 */	stw r0, 4(r1)
 /* 800F2A50 000EF630  94 21 FF F8 */	stwu r1, -8(r1)
@@ -4869,8 +4869,8 @@ ftKb_SpecialHiEnd_Phys:
 /* 800F2A5C 000EF63C  38 21 00 08 */	addi r1, r1, 8
 /* 800F2A60 000EF640  7C 08 03 A6 */	mtlr r0
 /* 800F2A64 000EF644  4E 80 00 20 */	blr
-.global ftKb_SpecialAirHiStart_Phys
-ftKb_SpecialAirHiStart_Phys:
+.global ftKb_SpecialAirHi1_Phys
+ftKb_SpecialAirHi1_Phys:
 /* 800F2A68 000EF648  7C 08 02 A6 */	mflr r0
 /* 800F2A6C 000EF64C  90 01 00 04 */	stw r0, 4(r1)
 /* 800F2A70 000EF650  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -4903,8 +4903,8 @@ ftKb_SpecialAirHiStart_Phys:
 /* 800F2AD8 000EF6B8  38 21 00 28 */	addi r1, r1, 0x28
 /* 800F2ADC 000EF6BC  7C 08 03 A6 */	mtlr r0
 /* 800F2AE0 000EF6C0  4E 80 00 20 */	blr
-.global ftKb_SpecialAirHiApex_Phys
-ftKb_SpecialAirHiApex_Phys:
+.global ftKb_SpecialAirHi2_Phys
+ftKb_SpecialAirHi2_Phys:
 /* 800F2AE4 000EF6C4  7C 08 02 A6 */	mflr r0
 /* 800F2AE8 000EF6C8  90 01 00 04 */	stw r0, 4(r1)
 /* 800F2AEC 000EF6CC  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -4937,8 +4937,8 @@ ftKb_SpecialAirHiApex_Phys:
 /* 800F2B54 000EF734  38 21 00 28 */	addi r1, r1, 0x28
 /* 800F2B58 000EF738  7C 08 03 A6 */	mtlr r0
 /* 800F2B5C 000EF73C  4E 80 00 20 */	blr
-.global ftKb_SpecialHiSwordDescent_Phys
-ftKb_SpecialHiSwordDescent_Phys:
+.global ftKb_SpecialAirHi3_Phys
+ftKb_SpecialAirHi3_Phys:
 /* 800F2B60 000EF740  7C 08 02 A6 */	mflr r0
 /* 800F2B64 000EF744  90 01 00 04 */	stw r0, 4(r1)
 /* 800F2B68 000EF748  94 21 FF F8 */	stwu r1, -8(r1)
@@ -4964,8 +4964,8 @@ ftKb_SpecialAirHiEnd_Phys:
 /* 800F2BB0 000EF790  38 21 00 08 */	addi r1, r1, 8
 /* 800F2BB4 000EF794  7C 08 03 A6 */	mtlr r0
 /* 800F2BB8 000EF798  4E 80 00 20 */	blr
-.global ftKb_SpecialHiStart_Coll
-ftKb_SpecialHiStart_Coll:
+.global ftKb_SpecialHi1_Coll
+ftKb_SpecialHi1_Coll:
 /* 800F2BBC 000EF79C  7C 08 02 A6 */	mflr r0
 /* 800F2BC0 000EF7A0  90 01 00 04 */	stw r0, 4(r1)
 /* 800F2BC4 000EF7A4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -5007,8 +5007,8 @@ ftKb_SpecialHiStart_Coll:
 /* 800F2C50 000EF830  38 21 00 20 */	addi r1, r1, 0x20
 /* 800F2C54 000EF834  7C 08 03 A6 */	mtlr r0
 /* 800F2C58 000EF838  4E 80 00 20 */	blr
-.global ftKb_MS_386_Coll
-ftKb_MS_386_Coll:
+.global ftKb_SpecialHi2_Coll
+ftKb_SpecialHi2_Coll:
 /* 800F2C5C 000EF83C  7C 08 02 A6 */	mflr r0
 /* 800F2C60 000EF840  90 01 00 04 */	stw r0, 4(r1)
 /* 800F2C64 000EF844  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -5093,8 +5093,8 @@ ftKb_MS_386_Coll:
 /* 800F2D8C 000EF96C  38 21 00 28 */	addi r1, r1, 0x28
 /* 800F2D90 000EF970  7C 08 03 A6 */	mtlr r0
 /* 800F2D94 000EF974  4E 80 00 20 */	blr
-.global ftKb_MS_387_Coll
-ftKb_MS_387_Coll:
+.global ftKb_SpecialHi3_Coll
+ftKb_SpecialHi3_Coll:
 /* 800F2D98 000EF978  7C 08 02 A6 */	mflr r0
 /* 800F2D9C 000EF97C  90 01 00 04 */	stw r0, 4(r1)
 /* 800F2DA0 000EF980  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -5165,8 +5165,8 @@ ftKb_MS_387_Coll:
 /* 800F2E94 000EFA74  38 21 00 20 */	addi r1, r1, 0x20
 /* 800F2E98 000EFA78  7C 08 03 A6 */	mtlr r0
 /* 800F2E9C 000EFA7C  4E 80 00 20 */	blr
-.global ftKb_SpecialHiEnd_Coll
-ftKb_SpecialHiEnd_Coll:
+.global ftKb_SpecialHi4_Coll
+ftKb_SpecialHi4_Coll:
 /* 800F2EA0 000EFA80  7C 08 02 A6 */	mflr r0
 /* 800F2EA4 000EFA84  90 01 00 04 */	stw r0, 4(r1)
 /* 800F2EA8 000EFA88  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -5221,8 +5221,8 @@ ftKb_SpecialHiEnd_Coll:
 /* 800F2F64 000EFB44  38 21 00 20 */	addi r1, r1, 0x20
 /* 800F2F68 000EFB48  7C 08 03 A6 */	mtlr r0
 /* 800F2F6C 000EFB4C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirHiStart_Coll
-ftKb_SpecialAirHiStart_Coll:
+.global ftKb_SpecialAirHi1_Coll
+ftKb_SpecialAirHi1_Coll:
 /* 800F2F70 000EFB50  7C 08 02 A6 */	mflr r0
 /* 800F2F74 000EFB54  90 01 00 04 */	stw r0, 4(r1)
 /* 800F2F78 000EFB58  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -5261,8 +5261,8 @@ ftKb_SpecialAirHiStart_Coll:
 /* 800F2FF8 000EFBD8  38 21 00 20 */	addi r1, r1, 0x20
 /* 800F2FFC 000EFBDC  7C 08 03 A6 */	mtlr r0
 /* 800F3000 000EFBE0  4E 80 00 20 */	blr
-.global ftKb_SpecialAirHiApex_Coll
-ftKb_SpecialAirHiApex_Coll:
+.global ftKb_SpecialAirHi2_Coll
+ftKb_SpecialAirHi2_Coll:
 /* 800F3004 000EFBE4  7C 08 02 A6 */	mflr r0
 /* 800F3008 000EFBE8  90 01 00 04 */	stw r0, 4(r1)
 /* 800F300C 000EFBEC  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -5347,8 +5347,8 @@ ftKb_SpecialAirHiApex_Coll:
 /* 800F3134 000EFD14  38 21 00 28 */	addi r1, r1, 0x28
 /* 800F3138 000EFD18  7C 08 03 A6 */	mtlr r0
 /* 800F313C 000EFD1C  4E 80 00 20 */	blr
-.global ftKb_SpecialHiSwordDescent_Coll
-ftKb_SpecialHiSwordDescent_Coll:
+.global ftKb_SpecialAirHi3_Coll
+ftKb_SpecialAirHi3_Coll:
 /* 800F3140 000EFD20  7C 08 02 A6 */	mflr r0
 /* 800F3144 000EFD24  90 01 00 04 */	stw r0, 4(r1)
 /* 800F3148 000EFD28  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -6337,8 +6337,8 @@ ftKb_SpecialAirLw_Enter:
 /* 800F3F74 000F0B54  38 21 00 40 */	addi r1, r1, 0x40
 /* 800F3F78 000F0B58  7C 08 03 A6 */	mtlr r0
 /* 800F3F7C 000F0B5C  4E 80 00 20 */	blr
-.global ftKb_SpecialLwStart_Anim
-ftKb_SpecialLwStart_Anim:
+.global ftKb_SpecialLw1_Anim
+ftKb_SpecialLw1_Anim:
 /* 800F3F80 000F0B60  7C 08 02 A6 */	mflr r0
 /* 800F3F84 000F0B64  38 80 00 00 */	li r4, 0
 /* 800F3F88 000F0B68  90 01 00 04 */	stw r0, 4(r1)
@@ -6570,8 +6570,8 @@ ftKb_SpecialAirLwEnd_Anim:
 /* 800F42CC 000F0EAC  38 21 00 28 */	addi r1, r1, 0x28
 /* 800F42D0 000F0EB0  7C 08 03 A6 */	mtlr r0
 /* 800F42D4 000F0EB4  4E 80 00 20 */	blr
-.global ftKb_SpecialLwStart_IASA
-ftKb_SpecialLwStart_IASA:
+.global ftKb_SpecialLw1_IASA
+ftKb_SpecialLw1_IASA:
 /* 800F42D8 000F0EB8  4E 80 00 20 */	blr
 .global ftKb_SpecialLw_IASA
 ftKb_SpecialLw_IASA:
@@ -6738,8 +6738,8 @@ ftKb_SpecialAirLw_IASA:
 .global ftKb_SpecialAirLwEnd_IASA
 ftKb_SpecialAirLwEnd_IASA:
 /* 800F4518 000F10F8  4E 80 00 20 */	blr
-.global ftKb_SpecialLwStart_Phys
-ftKb_SpecialLwStart_Phys:
+.global ftKb_SpecialLw1_Phys
+ftKb_SpecialLw1_Phys:
 /* 800F451C 000F10FC  7C 08 02 A6 */	mflr r0
 /* 800F4520 000F1100  90 01 00 04 */	stw r0, 4(r1)
 /* 800F4524 000F1104  94 21 FF F8 */	stwu r1, -8(r1)
@@ -6818,8 +6818,8 @@ ftKb_SpecialAirLwEnd_Phys:
 /* 800F461C 000F11FC  38 21 00 08 */	addi r1, r1, 8
 /* 800F4620 000F1200  7C 08 03 A6 */	mtlr r0
 /* 800F4624 000F1204  4E 80 00 20 */	blr
-.global ftKb_SpecialLwStart_Coll
-ftKb_SpecialLwStart_Coll:
+.global ftKb_SpecialLw1_Coll
+ftKb_SpecialLw1_Coll:
 /* 800F4628 000F1208  7C 08 02 A6 */	mflr r0
 /* 800F462C 000F120C  3C 80 80 3D */	lis r4, ftKb_Init_803CB490@ha
 /* 800F4630 000F1210  90 01 00 04 */	stw r0, 4(r1)
@@ -9749,8 +9749,8 @@ ftKb_SpecialS_800F6BB0:
 /* 800F7094 000F3C74  38 21 00 18 */	addi r1, r1, 0x18
 /* 800F7098 000F3C78  7C 08 03 A6 */	mtlr r0
 /* 800F709C 000F3C7C  4E 80 00 20 */	blr
-.global ftKb_SpecialNStart_Anim
-ftKb_SpecialNStart_Anim:
+.global ftKb_SpecialN_Anim
+ftKb_SpecialN_Anim:
 /* 800F70A0 000F3C80  7C 08 02 A6 */	mflr r0
 /* 800F70A4 000F3C84  90 01 00 04 */	stw r0, 4(r1)
 /* 800F70A8 000F3C88  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -9828,8 +9828,8 @@ ftKb_SpecialNStart_Anim:
 /* 800F71C0 000F3DA0  38 21 00 38 */	addi r1, r1, 0x38
 /* 800F71C4 000F3DA4  7C 08 03 A6 */	mtlr r0
 /* 800F71C8 000F3DA8  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNStart_Anim
-ftKb_SpecialAirNStart_Anim:
+.global ftKb_SpecialAirN_Anim
+ftKb_SpecialAirN_Anim:
 /* 800F71CC 000F3DAC  7C 08 02 A6 */	mflr r0
 /* 800F71D0 000F3DB0  90 01 00 04 */	stw r0, 4(r1)
 /* 800F71D4 000F3DB4  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -9949,8 +9949,8 @@ ftKb_SpecialAirNEnd_Anim:
 /* 800F736C 000F3F4C  38 21 00 20 */	addi r1, r1, 0x20
 /* 800F7370 000F3F50  7C 08 03 A6 */	mtlr r0
 /* 800F7374 000F3F54  4E 80 00 20 */	blr
-.global ftKb_MS_357_Anim
-ftKb_MS_357_Anim:
+.global ftKb_SpecialNCapture0_Anim
+ftKb_SpecialNCapture0_Anim:
 /* 800F7378 000F3F58  7C 08 02 A6 */	mflr r0
 /* 800F737C 000F3F5C  90 01 00 04 */	stw r0, 4(r1)
 /* 800F7380 000F3F60  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -10101,8 +10101,8 @@ ftKb_SpecialNCapture_Anim:
 /* 800F75AC 000F418C  38 21 00 50 */	addi r1, r1, 0x50
 /* 800F75B0 000F4190  7C 08 03 A6 */	mtlr r0
 /* 800F75B4 000F4194  4E 80 00 20 */	blr
-.global ftKb_MS_375_Anim
-ftKb_MS_375_Anim:
+.global ftKb_SpecialNCapture1_Anim
+ftKb_SpecialNCapture1_Anim:
 /* 800F75B8 000F4198  7C 08 02 A6 */	mflr r0
 /* 800F75BC 000F419C  90 01 00 04 */	stw r0, 4(r1)
 /* 800F75C0 000F41A0  94 21 FF F8 */	stwu r1, -8(r1)
@@ -10121,8 +10121,8 @@ ftKb_SpecialAirNCapture_Anim:
 /* 800F75EC 000F41CC  38 21 00 08 */	addi r1, r1, 8
 /* 800F75F0 000F41D0  7C 08 03 A6 */	mtlr r0
 /* 800F75F4 000F41D4  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptured_Anim
-ftKb_SpecialNCaptured_Anim:
+.global ftKb_Eat_Anim
+ftKb_Eat_Anim:
 /* 800F75F8 000F41D8  7C 08 02 A6 */	mflr r0
 /* 800F75FC 000F41DC  90 01 00 04 */	stw r0, 4(r1)
 /* 800F7600 000F41E0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -10191,16 +10191,16 @@ ftKb_SpecialAirNCaptured_Anim:
 /* 800F76EC 000F42CC  38 21 00 20 */	addi r1, r1, 0x20
 /* 800F76F0 000F42D0  7C 08 03 A6 */	mtlr r0
 /* 800F76F4 000F42D4  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureWait_Anim
-ftKb_SpecialNCaptureWait_Anim:
+.global ftKb_EatWait_Anim
+ftKb_EatWait_Anim:
 /* 800F76F8 000F42D8  4E 80 00 20 */	blr
 
 .global ftKb_SpecialAirNCaptureWait_Anim
 ftKb_SpecialAirNCaptureWait_Anim:
 /* 800F76FC 000F42DC  4E 80 00 20 */	blr
 
-.global ftKb_MS_370_Anim
-ftKb_MS_370_Anim:
+.global ftKb_SpecialNSpit0_Anim
+ftKb_SpecialNSpit0_Anim:
 /* 800F7700 000F42E0  7C 08 02 A6 */	mflr r0
 /* 800F7704 000F42E4  90 01 00 04 */	stw r0, 4(r1)
 /* 800F7708 000F42E8  94 21 FF 70 */	stwu r1, -0x90(r1)
@@ -10317,8 +10317,8 @@ ftKb_SpecialNSpit_Anim:
 /* 800F78AC 000F448C  38 21 00 38 */	addi r1, r1, 0x38
 /* 800F78B0 000F4490  7C 08 03 A6 */	mtlr r0
 /* 800F78B4 000F4494  4E 80 00 20 */	blr
-.global ftKb_MS_381_Anim
-ftKb_MS_381_Anim:
+.global ftKb_SpecialNSpit1_Anim
+ftKb_SpecialNSpit1_Anim:
 /* 800F78B8 000F4498  7C 08 02 A6 */	mflr r0
 /* 800F78BC 000F449C  90 01 00 04 */	stw r0, 4(r1)
 /* 800F78C0 000F44A0  94 21 FF 70 */	stwu r1, -0x90(r1)
@@ -10435,8 +10435,8 @@ ftKb_SpecialAirNSpit_Anim:
 /* 800F7A64 000F4644  38 21 00 38 */	addi r1, r1, 0x38
 /* 800F7A68 000F4648  7C 08 03 A6 */	mtlr r0
 /* 800F7A6C 000F464C  4E 80 00 20 */	blr
-.global ftKb_MS_368_Anim
-ftKb_MS_368_Anim:
+.global ftKb_SpecialNDrink0_Anim
+ftKb_SpecialNDrink0_Anim:
 /* 800F7A70 000F4650  7C 08 02 A6 */	mflr r0
 /* 800F7A74 000F4654  90 01 00 04 */	stw r0, 4(r1)
 /* 800F7A78 000F4658  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -10483,8 +10483,8 @@ ftKb_MS_368_Anim:
 /* 800F7B14 000F46F4  38 21 00 30 */	addi r1, r1, 0x30
 /* 800F7B18 000F46F8  7C 08 03 A6 */	mtlr r0
 /* 800F7B1C 000F46FC  4E 80 00 20 */	blr
-.global ftKb_SpecialNDigest_Anim
-ftKb_SpecialNDigest_Anim:
+.global ftKb_SpecialNDrink_Anim
+ftKb_SpecialNDrink_Anim:
 /* 800F7B20 000F4700  7C 08 02 A6 */	mflr r0
 /* 800F7B24 000F4704  90 01 00 04 */	stw r0, 4(r1)
 /* 800F7B28 000F4708  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -10536,8 +10536,8 @@ ftKb_SpecialNDigest_Anim:
 /* 800F7BD8 000F47B8  38 21 00 40 */	addi r1, r1, 0x40
 /* 800F7BDC 000F47BC  7C 08 03 A6 */	mtlr r0
 /* 800F7BE0 000F47C0  4E 80 00 20 */	blr
-.global ftKb_MS_379_Anim
-ftKb_MS_379_Anim:
+.global ftKb_SpecialNDrink1_Anim
+ftKb_SpecialNDrink1_Anim:
 /* 800F7BE4 000F47C4  7C 08 02 A6 */	mflr r0
 /* 800F7BE8 000F47C8  90 01 00 04 */	stw r0, 4(r1)
 /* 800F7BEC 000F47CC  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -10584,8 +10584,8 @@ ftKb_MS_379_Anim:
 /* 800F7C88 000F4868  38 21 00 30 */	addi r1, r1, 0x30
 /* 800F7C8C 000F486C  7C 08 03 A6 */	mtlr r0
 /* 800F7C90 000F4870  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDigest_Anim
-ftKb_SpecialAirNDigest_Anim:
+.global ftKb_SpecialAirNDrink_Anim
+ftKb_SpecialAirNDrink_Anim:
 /* 800F7C94 000F4874  7C 08 02 A6 */	mflr r0
 /* 800F7C98 000F4878  90 01 00 04 */	stw r0, 4(r1)
 /* 800F7C9C 000F487C  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -10637,8 +10637,8 @@ ftKb_SpecialAirNDigest_Anim:
 /* 800F7D4C 000F492C  38 21 00 40 */	addi r1, r1, 0x40
 /* 800F7D50 000F4930  7C 08 03 A6 */	mtlr r0
 /* 800F7D54 000F4934  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureTurn_Anim
-ftKb_SpecialNCaptureTurn_Anim:
+.global ftKb_EatTurn_Anim
+ftKb_EatTurn_Anim:
 /* 800F7D58 000F4938  7C 08 02 A6 */	mflr r0
 /* 800F7D5C 000F493C  90 01 00 04 */	stw r0, 4(r1)
 /* 800F7D60 000F4940  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -10715,8 +10715,8 @@ ftKb_SpecialAirNCaptureTurn_Anim:
 /* 800F7E6C 000F4A4C  38 21 00 20 */	addi r1, r1, 0x20
 /* 800F7E70 000F4A50  7C 08 03 A6 */	mtlr r0
 /* 800F7E74 000F4A54  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureWalk_Anim
-ftKb_SpecialNCaptureWalk_Anim:
+.global ftKb_EatWalk_Anim
+ftKb_EatWalk_Anim:
 /* 800F7E78 000F4A58  7C 08 02 A6 */	mflr r0
 /* 800F7E7C 000F4A5C  90 01 00 04 */	stw r0, 4(r1)
 /* 800F7E80 000F4A60  94 21 FF F8 */	stwu r1, -8(r1)
@@ -10725,8 +10725,8 @@ ftKb_SpecialNCaptureWalk_Anim:
 /* 800F7E8C 000F4A6C  38 21 00 08 */	addi r1, r1, 8
 /* 800F7E90 000F4A70  7C 08 03 A6 */	mtlr r0
 /* 800F7E94 000F4A74  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureJumpSquat_Anim
-ftKb_SpecialNCaptureJumpSquat_Anim:
+.global ftKb_EatJump1_Anim
+ftKb_EatJump1_Anim:
 /* 800F7E98 000F4A78  7C 08 02 A6 */	mflr r0
 /* 800F7E9C 000F4A7C  90 01 00 04 */	stw r0, 4(r1)
 /* 800F7EA0 000F4A80  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -10762,11 +10762,11 @@ ftKb_SpecialNCaptureJumpSquat_Anim:
 /* 800F7F14 000F4AF4  38 21 00 30 */	addi r1, r1, 0x30
 /* 800F7F18 000F4AF8  7C 08 03 A6 */	mtlr r0
 /* 800F7F1C 000F4AFC  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureJump_Anim
-ftKb_SpecialNCaptureJump_Anim:
+.global ftKb_EatJump2_Anim
+ftKb_EatJump2_Anim:
 /* 800F7F20 000F4B00  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureLanding_Anim
-ftKb_SpecialNCaptureLanding_Anim:
+.global ftKb_EatLanding_Anim
+ftKb_EatLanding_Anim:
 /* 800F7F24 000F4B04  7C 08 02 A6 */	mflr r0
 /* 800F7F28 000F4B08  90 01 00 04 */	stw r0, 4(r1)
 /* 800F7F2C 000F4B0C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -10855,8 +10855,8 @@ ftKb_SpecialAirNLoop_IASA:
 /* 800F8054 000F4C34  38 21 00 08 */	addi r1, r1, 8
 /* 800F8058 000F4C38  7C 08 03 A6 */	mtlr r0
 /* 800F805C 000F4C3C  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureWait_IASA
-ftKb_SpecialNCaptureWait_IASA:
+.global ftKb_EatWait_IASA
+ftKb_EatWait_IASA:
 /* 800F8060 000F4C40  7C 08 02 A6 */	mflr r0
 /* 800F8064 000F4C44  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8068 000F4C48  94 21 FF 58 */	stwu r1, -0xa8(r1)
@@ -11357,8 +11357,8 @@ ftKb_SpecialAirNCaptureWait_IASA:
 /* 800F8764 000F5344  38 21 00 70 */	addi r1, r1, 0x70
 /* 800F8768 000F5348  7C 08 03 A6 */	mtlr r0
 /* 800F876C 000F534C  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureWalk_IASA
-ftKb_SpecialNCaptureWalk_IASA:
+.global ftKb_EatWalk_IASA
+ftKb_EatWalk_IASA:
 /* 800F8770 000F5350  7C 08 02 A6 */	mflr r0
 /* 800F8774 000F5354  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8778 000F5358  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -11427,8 +11427,8 @@ ftKb_SpecialNCaptureWalk_IASA:
 /* 800F8864 000F5444  38 21 00 28 */	addi r1, r1, 0x28
 /* 800F8868 000F5448  7C 08 03 A6 */	mtlr r0
 /* 800F886C 000F544C  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureJumpSquat_IASA
-ftKb_SpecialNCaptureJumpSquat_IASA:
+.global ftKb_EatJump1_IASA
+ftKb_EatJump1_IASA:
 /* 800F8870 000F5450  7C 08 02 A6 */	mflr r0
 /* 800F8874 000F5454  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8878 000F5458  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11437,8 +11437,8 @@ ftKb_SpecialNCaptureJumpSquat_IASA:
 /* 800F8884 000F5464  38 21 00 08 */	addi r1, r1, 8
 /* 800F8888 000F5468  7C 08 03 A6 */	mtlr r0
 /* 800F888C 000F546C  4E 80 00 20 */	blr
-.global ftKb_SpecialNStart_Phys
-ftKb_SpecialNStart_Phys:
+.global ftKb_SpecialN_Phys
+ftKb_SpecialN_Phys:
 /* 800F8890 000F5470  7C 08 02 A6 */	mflr r0
 /* 800F8894 000F5474  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8898 000F5478  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11447,8 +11447,8 @@ ftKb_SpecialNStart_Phys:
 /* 800F88A4 000F5484  38 21 00 08 */	addi r1, r1, 8
 /* 800F88A8 000F5488  7C 08 03 A6 */	mtlr r0
 /* 800F88AC 000F548C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNStart_Phys
-ftKb_SpecialAirNStart_Phys:
+.global ftKb_SpecialAirN_Phys
+ftKb_SpecialAirN_Phys:
 /* 800F88B0 000F5490  7C 08 02 A6 */	mflr r0
 /* 800F88B4 000F5494  90 01 00 04 */	stw r0, 4(r1)
 /* 800F88B8 000F5498  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11497,8 +11497,8 @@ ftKb_SpecialAirNEnd_Phys:
 /* 800F8944 000F5524  38 21 00 08 */	addi r1, r1, 8
 /* 800F8948 000F5528  7C 08 03 A6 */	mtlr r0
 /* 800F894C 000F552C  4E 80 00 20 */	blr
-.global ftKb_MS_357_Phys
-ftKb_MS_357_Phys:
+.global ftKb_SpecialNCapture0_Phys
+ftKb_SpecialNCapture0_Phys:
 /* 800F8950 000F5530  7C 08 02 A6 */	mflr r0
 /* 800F8954 000F5534  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8958 000F5538  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11517,8 +11517,8 @@ ftKb_SpecialNCapture_Phys:
 /* 800F8984 000F5564  38 21 00 08 */	addi r1, r1, 8
 /* 800F8988 000F5568  7C 08 03 A6 */	mtlr r0
 /* 800F898C 000F556C  4E 80 00 20 */	blr
-.global ftKb_MS_375_Phys
-ftKb_MS_375_Phys:
+.global ftKb_SpecialNCapture1_Phys
+ftKb_SpecialNCapture1_Phys:
 /* 800F8990 000F5570  7C 08 02 A6 */	mflr r0
 /* 800F8994 000F5574  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8998 000F5578  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11537,8 +11537,8 @@ ftKb_SpecialAirNCapture_Phys:
 /* 800F89C4 000F55A4  38 21 00 08 */	addi r1, r1, 8
 /* 800F89C8 000F55A8  7C 08 03 A6 */	mtlr r0
 /* 800F89CC 000F55AC  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptured_Phys
-ftKb_SpecialNCaptured_Phys:
+.global ftKb_Eat_Phys
+ftKb_Eat_Phys:
 /* 800F89D0 000F55B0  7C 08 02 A6 */	mflr r0
 /* 800F89D4 000F55B4  90 01 00 04 */	stw r0, 4(r1)
 /* 800F89D8 000F55B8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11557,8 +11557,8 @@ ftKb_SpecialAirNCaptured_Phys:
 /* 800F8A04 000F55E4  38 21 00 08 */	addi r1, r1, 8
 /* 800F8A08 000F55E8  7C 08 03 A6 */	mtlr r0
 /* 800F8A0C 000F55EC  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureWait_Phys
-ftKb_SpecialNCaptureWait_Phys:
+.global ftKb_EatWait_Phys
+ftKb_EatWait_Phys:
 /* 800F8A10 000F55F0  7C 08 02 A6 */	mflr r0
 /* 800F8A14 000F55F4  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8A18 000F55F8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11577,8 +11577,8 @@ ftKb_SpecialAirNCaptureWait_Phys:
 /* 800F8A44 000F5624  38 21 00 08 */	addi r1, r1, 8
 /* 800F8A48 000F5628  7C 08 03 A6 */	mtlr r0
 /* 800F8A4C 000F562C  4E 80 00 20 */	blr
-.global ftKb_MS_370_Phys
-ftKb_MS_370_Phys:
+.global ftKb_SpecialNSpit0_Phys
+ftKb_SpecialNSpit0_Phys:
 /* 800F8A50 000F5630  7C 08 02 A6 */	mflr r0
 /* 800F8A54 000F5634  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8A58 000F5638  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11597,8 +11597,8 @@ ftKb_SpecialNSpit_Phys:
 /* 800F8A84 000F5664  38 21 00 08 */	addi r1, r1, 8
 /* 800F8A88 000F5668  7C 08 03 A6 */	mtlr r0
 /* 800F8A8C 000F566C  4E 80 00 20 */	blr
-.global ftKb_MS_381_Phys
-ftKb_MS_381_Phys:
+.global ftKb_SpecialNSpit1_Phys
+ftKb_SpecialNSpit1_Phys:
 /* 800F8A90 000F5670  7C 08 02 A6 */	mflr r0
 /* 800F8A94 000F5674  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8A98 000F5678  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11617,8 +11617,8 @@ ftKb_SpecialAirNSpit_Phys:
 /* 800F8AC4 000F56A4  38 21 00 08 */	addi r1, r1, 8
 /* 800F8AC8 000F56A8  7C 08 03 A6 */	mtlr r0
 /* 800F8ACC 000F56AC  4E 80 00 20 */	blr
-.global ftKb_MS_368_Phys
-ftKb_MS_368_Phys:
+.global ftKb_SpecialNDrink0_Phys
+ftKb_SpecialNDrink0_Phys:
 /* 800F8AD0 000F56B0  7C 08 02 A6 */	mflr r0
 /* 800F8AD4 000F56B4  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8AD8 000F56B8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11627,8 +11627,8 @@ ftKb_MS_368_Phys:
 /* 800F8AE4 000F56C4  38 21 00 08 */	addi r1, r1, 8
 /* 800F8AE8 000F56C8  7C 08 03 A6 */	mtlr r0
 /* 800F8AEC 000F56CC  4E 80 00 20 */	blr
-.global ftKb_SpecialNDigest_Phys
-ftKb_SpecialNDigest_Phys:
+.global ftKb_SpecialNDrink_Phys
+ftKb_SpecialNDrink_Phys:
 /* 800F8AF0 000F56D0  7C 08 02 A6 */	mflr r0
 /* 800F8AF4 000F56D4  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8AF8 000F56D8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11637,8 +11637,8 @@ ftKb_SpecialNDigest_Phys:
 /* 800F8B04 000F56E4  38 21 00 08 */	addi r1, r1, 8
 /* 800F8B08 000F56E8  7C 08 03 A6 */	mtlr r0
 /* 800F8B0C 000F56EC  4E 80 00 20 */	blr
-.global ftKb_MS_379_Phys
-ftKb_MS_379_Phys:
+.global ftKb_SpecialNDrink1_Phys
+ftKb_SpecialNDrink1_Phys:
 /* 800F8B10 000F56F0  7C 08 02 A6 */	mflr r0
 /* 800F8B14 000F56F4  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8B18 000F56F8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11647,8 +11647,8 @@ ftKb_MS_379_Phys:
 /* 800F8B24 000F5704  38 21 00 08 */	addi r1, r1, 8
 /* 800F8B28 000F5708  7C 08 03 A6 */	mtlr r0
 /* 800F8B2C 000F570C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDigest_Phys
-ftKb_SpecialAirNDigest_Phys:
+.global ftKb_SpecialAirNDrink_Phys
+ftKb_SpecialAirNDrink_Phys:
 /* 800F8B30 000F5710  7C 08 02 A6 */	mflr r0
 /* 800F8B34 000F5714  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8B38 000F5718  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11658,8 +11658,8 @@ ftKb_SpecialAirNDigest_Phys:
 /* 800F8B48 000F5728  7C 08 03 A6 */	mtlr r0
 /* 800F8B4C 000F572C  4E 80 00 20 */	blr
 
-.global ftKb_SpecialNCaptureTurn_Phys
-ftKb_SpecialNCaptureTurn_Phys:
+.global ftKb_EatTurn_Phys
+ftKb_EatTurn_Phys:
 /* 800F8B50 000F5730  7C 08 02 A6 */	mflr r0
 /* 800F8B54 000F5734  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8B58 000F5738  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11678,8 +11678,8 @@ ftKb_SpecialAirNCaptureTurn_Phys:
 /* 800F8B84 000F5764  38 21 00 08 */	addi r1, r1, 8
 /* 800F8B88 000F5768  7C 08 03 A6 */	mtlr r0
 /* 800F8B8C 000F576C  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureWalk_Phys
-ftKb_SpecialNCaptureWalk_Phys:
+.global ftKb_EatWalk_Phys
+ftKb_EatWalk_Phys:
 /* 800F8B90 000F5770  7C 08 02 A6 */	mflr r0
 /* 800F8B94 000F5774  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8B98 000F5778  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11688,8 +11688,8 @@ ftKb_SpecialNCaptureWalk_Phys:
 /* 800F8BA4 000F5784  38 21 00 08 */	addi r1, r1, 8
 /* 800F8BA8 000F5788  7C 08 03 A6 */	mtlr r0
 /* 800F8BAC 000F578C  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureJumpSquat_Phys
-ftKb_SpecialNCaptureJumpSquat_Phys:
+.global ftKb_EatJump1_Phys
+ftKb_EatJump1_Phys:
 /* 800F8BB0 000F5790  7C 08 02 A6 */	mflr r0
 /* 800F8BB4 000F5794  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8BB8 000F5798  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11698,8 +11698,8 @@ ftKb_SpecialNCaptureJumpSquat_Phys:
 /* 800F8BC4 000F57A4  38 21 00 08 */	addi r1, r1, 8
 /* 800F8BC8 000F57A8  7C 08 03 A6 */	mtlr r0
 /* 800F8BCC 000F57AC  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureJump_Phys
-ftKb_SpecialNCaptureJump_Phys:
+.global ftKb_EatJump2_Phys
+ftKb_EatJump2_Phys:
 /* 800F8BD0 000F57B0  7C 08 02 A6 */	mflr r0
 /* 800F8BD4 000F57B4  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8BD8 000F57B8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11708,8 +11708,8 @@ ftKb_SpecialNCaptureJump_Phys:
 /* 800F8BE4 000F57C4  38 21 00 08 */	addi r1, r1, 8
 /* 800F8BE8 000F57C8  7C 08 03 A6 */	mtlr r0
 /* 800F8BEC 000F57CC  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureLanding_Phys
-ftKb_SpecialNCaptureLanding_Phys:
+.global ftKb_EatLanding_Phys
+ftKb_EatLanding_Phys:
 /* 800F8BF0 000F57D0  7C 08 02 A6 */	mflr r0
 /* 800F8BF4 000F57D4  90 01 00 04 */	stw r0, 4(r1)
 /* 800F8BF8 000F57D8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -11718,8 +11718,8 @@ ftKb_SpecialNCaptureLanding_Phys:
 /* 800F8C04 000F57E4  38 21 00 08 */	addi r1, r1, 8
 /* 800F8C08 000F57E8  7C 08 03 A6 */	mtlr r0
 /* 800F8C0C 000F57EC  4E 80 00 20 */	blr
-.global ftKb_SpecialNStart_Coll
-ftKb_SpecialNStart_Coll:
+.global ftKb_SpecialN_Coll
+ftKb_SpecialN_Coll:
 /* 800F8C10 000F57F0  7C 08 02 A6 */	mflr r0
 /* 800F8C14 000F57F4  3C 80 80 0F */	lis r4, .L_800F6588@ha
 /* 800F8C18 000F57F8  90 01 00 04 */	stw r0, 4(r1)
@@ -11730,8 +11730,8 @@ ftKb_SpecialNStart_Coll:
 /* 800F8C2C 000F580C  38 21 00 08 */	addi r1, r1, 8
 /* 800F8C30 000F5810  7C 08 03 A6 */	mtlr r0
 /* 800F8C34 000F5814  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNStart_Coll
-ftKb_SpecialAirNStart_Coll:
+.global ftKb_SpecialAirN_Coll
+ftKb_SpecialAirN_Coll:
 /* 800F8C38 000F5818  7C 08 02 A6 */	mflr r0
 /* 800F8C3C 000F581C  3C 80 80 0F */	lis r4, .L_800F6638@ha
 /* 800F8C40 000F5820  90 01 00 04 */	stw r0, 4(r1)
@@ -11790,8 +11790,8 @@ ftKb_SpecialAirNEnd_Coll:
 /* 800F8CF4 000F58D4  38 21 00 08 */	addi r1, r1, 8
 /* 800F8CF8 000F58D8  7C 08 03 A6 */	mtlr r0
 /* 800F8CFC 000F58DC  4E 80 00 20 */	blr
-.global ftKb_MS_357_Coll
-ftKb_MS_357_Coll:
+.global ftKb_SpecialNCapture0_Coll
+ftKb_SpecialNCapture0_Coll:
 /* 800F8D00 000F58E0  7C 08 02 A6 */	mflr r0
 /* 800F8D04 000F58E4  3C 80 80 0F */	lis r4, .L_800F6908@ha
 /* 800F8D08 000F58E8  90 01 00 04 */	stw r0, 4(r1)
@@ -11815,8 +11815,8 @@ ftKb_SpecialNCapture_Coll:
 /* 800F8D44 000F5924  38 21 00 08 */	addi r1, r1, 8
 /* 800F8D48 000F5928  7C 08 03 A6 */	mtlr r0
 /* 800F8D4C 000F592C  4E 80 00 20 */	blr
-.global ftKb_MS_375_Coll
-ftKb_MS_375_Coll:
+.global ftKb_SpecialNCapture1_Coll
+ftKb_SpecialNCapture1_Coll:
 /* 800F8D50 000F5930  7C 08 02 A6 */	mflr r0
 /* 800F8D54 000F5934  3C 80 80 0F */	lis r4, .L_800F69E8@ha
 /* 800F8D58 000F5938  90 01 00 04 */	stw r0, 4(r1)
@@ -11839,8 +11839,8 @@ ftKb_SpecialAirNCapture_Coll:
 /* 800F8D94 000F5974  38 21 00 08 */	addi r1, r1, 8
 /* 800F8D98 000F5978  7C 08 03 A6 */	mtlr r0
 /* 800F8D9C 000F597C  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptured_Coll
-ftKb_SpecialNCaptured_Coll:
+.global ftKb_Eat_Coll
+ftKb_Eat_Coll:
 /* 800F8DA0 000F5980  7C 08 02 A6 */	mflr r0
 /* 800F8DA4 000F5984  3C 80 80 0F */	lis r4, .L_800F6AC8@ha
 /* 800F8DA8 000F5988  90 01 00 04 */	stw r0, 4(r1)
@@ -11863,8 +11863,8 @@ ftKb_SpecialAirNCaptured_Coll:
 /* 800F8DE4 000F59C4  38 21 00 08 */	addi r1, r1, 8
 /* 800F8DE8 000F59C8  7C 08 03 A6 */	mtlr r0
 /* 800F8DEC 000F59CC  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureWait_Coll
-ftKb_SpecialNCaptureWait_Coll:
+.global ftKb_EatWait_Coll
+ftKb_EatWait_Coll:
 /* 800F8DF0 000F59D0  7C 08 02 A6 */	mflr r0
 /* 800F8DF4 000F59D4  3C 80 80 0F */	lis r4, ftKb_SpecialS_800F6BB0@ha
 /* 800F8DF8 000F59D8  90 01 00 04 */	stw r0, 4(r1)
@@ -11887,8 +11887,8 @@ ftKb_SpecialAirNCaptureWait_Coll:
 /* 800F8E34 000F5A14  38 21 00 08 */	addi r1, r1, 8
 /* 800F8E38 000F5A18  7C 08 03 A6 */	mtlr r0
 /* 800F8E3C 000F5A1C  4E 80 00 20 */	blr
-.global ftKb_MS_370_Coll
-ftKb_MS_370_Coll:
+.global ftKb_SpecialNSpit0_Coll
+ftKb_SpecialNSpit0_Coll:
 /* 800F8E40 000F5A20  7C 08 02 A6 */	mflr r0
 /* 800F8E44 000F5A24  3C 80 80 0F */	lis r4, .L_800F6C24@ha
 /* 800F8E48 000F5A28  90 01 00 04 */	stw r0, 4(r1)
@@ -11911,8 +11911,8 @@ ftKb_SpecialNSpit_Coll:
 /* 800F8E84 000F5A64  38 21 00 08 */	addi r1, r1, 8
 /* 800F8E88 000F5A68  7C 08 03 A6 */	mtlr r0
 /* 800F8E8C 000F5A6C  4E 80 00 20 */	blr
-.global ftKb_MS_381_Coll
-ftKb_MS_381_Coll:
+.global ftKb_SpecialNSpit1_Coll
+ftKb_SpecialNSpit1_Coll:
 /* 800F8E90 000F5A70  7C 08 02 A6 */	mflr r0
 /* 800F8E94 000F5A74  3C 80 80 0F */	lis r4, .L_800F6D0C@ha
 /* 800F8E98 000F5A78  90 01 00 04 */	stw r0, 4(r1)
@@ -11935,8 +11935,8 @@ ftKb_SpecialAirNSpit_Coll:
 /* 800F8ED4 000F5AB4  38 21 00 08 */	addi r1, r1, 8
 /* 800F8ED8 000F5AB8  7C 08 03 A6 */	mtlr r0
 /* 800F8EDC 000F5ABC  4E 80 00 20 */	blr
-.global ftKb_MS_368_Coll
-ftKb_MS_368_Coll:
+.global ftKb_SpecialNDrink0_Coll
+ftKb_SpecialNDrink0_Coll:
 /* 800F8EE0 000F5AC0  7C 08 02 A6 */	mflr r0
 /* 800F8EE4 000F5AC4  3C 80 80 0F */	lis r4, .L_800F6DF4@ha
 /* 800F8EE8 000F5AC8  90 01 00 04 */	stw r0, 4(r1)
@@ -11947,8 +11947,8 @@ ftKb_MS_368_Coll:
 /* 800F8EFC 000F5ADC  38 21 00 08 */	addi r1, r1, 8
 /* 800F8F00 000F5AE0  7C 08 03 A6 */	mtlr r0
 /* 800F8F04 000F5AE4  4E 80 00 20 */	blr
-.global ftKb_SpecialNDigest_Coll
-ftKb_SpecialNDigest_Coll:
+.global ftKb_SpecialNDrink_Coll
+ftKb_SpecialNDrink_Coll:
 /* 800F8F08 000F5AE8  7C 08 02 A6 */	mflr r0
 /* 800F8F0C 000F5AEC  3C 80 80 0F */	lis r4, .L_800F6E68@ha
 /* 800F8F10 000F5AF0  90 01 00 04 */	stw r0, 4(r1)
@@ -11959,8 +11959,8 @@ ftKb_SpecialNDigest_Coll:
 /* 800F8F24 000F5B04  38 21 00 08 */	addi r1, r1, 8
 /* 800F8F28 000F5B08  7C 08 03 A6 */	mtlr r0
 /* 800F8F2C 000F5B0C  4E 80 00 20 */	blr
-.global ftKb_MS_379_Coll
-ftKb_MS_379_Coll:
+.global ftKb_SpecialNDrink1_Coll
+ftKb_SpecialNDrink1_Coll:
 /* 800F8F30 000F5B10  7C 08 02 A6 */	mflr r0
 /* 800F8F34 000F5B14  3C 80 80 0F */	lis r4, .L_800F6EDC@ha
 /* 800F8F38 000F5B18  90 01 00 04 */	stw r0, 4(r1)
@@ -11971,8 +11971,8 @@ ftKb_MS_379_Coll:
 /* 800F8F4C 000F5B2C  38 21 00 08 */	addi r1, r1, 8
 /* 800F8F50 000F5B30  7C 08 03 A6 */	mtlr r0
 /* 800F8F54 000F5B34  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDigest_Coll
-ftKb_SpecialAirNDigest_Coll:
+.global ftKb_SpecialAirNDrink_Coll
+ftKb_SpecialAirNDrink_Coll:
 /* 800F8F58 000F5B38  7C 08 02 A6 */	mflr r0
 /* 800F8F5C 000F5B3C  3C 80 80 0F */	lis r4, .L_800F6F50@ha
 /* 800F8F60 000F5B40  90 01 00 04 */	stw r0, 4(r1)
@@ -11984,8 +11984,8 @@ ftKb_SpecialAirNDigest_Coll:
 /* 800F8F78 000F5B58  7C 08 03 A6 */	mtlr r0
 /* 800F8F7C 000F5B5C  4E 80 00 20 */	blr
 
-.global ftKb_SpecialNCaptureTurn_Coll
-ftKb_SpecialNCaptureTurn_Coll:
+.global ftKb_EatTurn_Coll
+ftKb_EatTurn_Coll:
 /* 800F8F80 000F5B60  7C 08 02 A6 */	mflr r0
 /* 800F8F84 000F5B64  3C 80 80 0F */	lis r4, .L_800F6FC4@ha
 /* 800F8F88 000F5B68  90 01 00 04 */	stw r0, 4(r1)
@@ -12008,8 +12008,8 @@ ftKb_SpecialAirNCaptureTurn_Coll:
 /* 800F8FC4 000F5BA4  38 21 00 08 */	addi r1, r1, 8
 /* 800F8FC8 000F5BA8  7C 08 03 A6 */	mtlr r0
 /* 800F8FCC 000F5BAC  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureWalk_Coll
-ftKb_SpecialNCaptureWalk_Coll:
+.global ftKb_EatWalk_Coll
+ftKb_EatWalk_Coll:
 /* 800F8FD0 000F5BB0  7C 08 02 A6 */	mflr r0
 /* 800F8FD4 000F5BB4  3C 80 80 0F */	lis r4, .L_800F6450@ha
 /* 800F8FD8 000F5BB8  90 01 00 04 */	stw r0, 4(r1)
@@ -12020,8 +12020,8 @@ ftKb_SpecialNCaptureWalk_Coll:
 /* 800F8FEC 000F5BCC  38 21 00 08 */	addi r1, r1, 8
 /* 800F8FF0 000F5BD0  7C 08 03 A6 */	mtlr r0
 /* 800F8FF4 000F5BD4  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureJumpSquat_Coll
-ftKb_SpecialNCaptureJumpSquat_Coll:
+.global ftKb_EatJump1_Coll
+ftKb_EatJump1_Coll:
 /* 800F8FF8 000F5BD8  7C 08 02 A6 */	mflr r0
 /* 800F8FFC 000F5BDC  3C 80 80 0F */	lis r4, .L_800F6450@ha
 /* 800F9000 000F5BE0  90 01 00 04 */	stw r0, 4(r1)
@@ -12032,8 +12032,8 @@ ftKb_SpecialNCaptureJumpSquat_Coll:
 /* 800F9014 000F5BF4  38 21 00 08 */	addi r1, r1, 8
 /* 800F9018 000F5BF8  7C 08 03 A6 */	mtlr r0
 /* 800F901C 000F5BFC  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureJump_Coll
-ftKb_SpecialNCaptureJump_Coll:
+.global ftKb_EatJump2_Coll
+ftKb_EatJump2_Coll:
 /* 800F9020 000F5C00  7C 08 02 A6 */	mflr r0
 /* 800F9024 000F5C04  3C 80 80 0F */	lis r4, .L_800F6528@ha
 /* 800F9028 000F5C08  90 01 00 04 */	stw r0, 4(r1)
@@ -12044,8 +12044,8 @@ ftKb_SpecialNCaptureJump_Coll:
 /* 800F903C 000F5C1C  38 21 00 08 */	addi r1, r1, 8
 /* 800F9040 000F5C20  7C 08 03 A6 */	mtlr r0
 /* 800F9044 000F5C24  4E 80 00 20 */	blr
-.global ftKb_SpecialNCaptureLanding_Coll
-ftKb_SpecialNCaptureLanding_Coll:
+.global ftKb_EatLanding_Coll
+ftKb_EatLanding_Coll:
 /* 800F9048 000F5C28  7C 08 02 A6 */	mflr r0
 /* 800F904C 000F5C2C  3C 80 80 0F */	lis r4, .L_800F6450@ha
 /* 800F9050 000F5C30  90 01 00 04 */	stw r0, 4(r1)
@@ -12142,8 +12142,8 @@ ftKb_SpecialN_800F9110:
 /* 800F918C 000F5D6C  38 21 00 20 */	addi r1, r1, 0x20
 /* 800F9190 000F5D70  7C 08 03 A6 */	mtlr r0
 /* 800F9194 000F5D74  4E 80 00 20 */	blr
-.global ftKb_SpecialNMr_Anim
-ftKb_SpecialNMr_Anim:
+.global ftKb_MrSpecialN_Anim
+ftKb_MrSpecialN_Anim:
 /* 800F9198 000F5D78  7C 08 02 A6 */	mflr r0
 /* 800F919C 000F5D7C  90 01 00 04 */	stw r0, 4(r1)
 /* 800F91A0 000F5D80  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -12160,8 +12160,8 @@ ftKb_SpecialNMr_Anim:
 /* 800F91C8 000F5DA8  38 21 00 18 */	addi r1, r1, 0x18
 /* 800F91CC 000F5DAC  7C 08 03 A6 */	mtlr r0
 /* 800F91D0 000F5DB0  4E 80 00 20 */	blr
-.global ftKb_SpecialNMr_IASA
-ftKb_SpecialNMr_IASA:
+.global ftKb_MrSpecialN_IASA
+ftKb_MrSpecialN_IASA:
 /* 800F91D4 000F5DB4  7C 08 02 A6 */	mflr r0
 /* 800F91D8 000F5DB8  90 01 00 04 */	stw r0, 4(r1)
 /* 800F91DC 000F5DBC  94 21 FF F8 */	stwu r1, -8(r1)
@@ -12175,8 +12175,8 @@ ftKb_SpecialNMr_IASA:
 /* 800F91F8 000F5DD8  38 21 00 08 */	addi r1, r1, 8
 /* 800F91FC 000F5DDC  7C 08 03 A6 */	mtlr r0
 /* 800F9200 000F5DE0  4E 80 00 20 */	blr
-.global ftKb_SpecialNMr_Phys
-ftKb_SpecialNMr_Phys:
+.global ftKb_MrSpecialN_Phys
+ftKb_MrSpecialN_Phys:
 /* 800F9204 000F5DE4  7C 08 02 A6 */	mflr r0
 /* 800F9208 000F5DE8  90 01 00 04 */	stw r0, 4(r1)
 /* 800F920C 000F5DEC  94 21 FF F8 */	stwu r1, -8(r1)
@@ -12185,8 +12185,8 @@ ftKb_SpecialNMr_Phys:
 /* 800F9218 000F5DF8  38 21 00 08 */	addi r1, r1, 8
 /* 800F921C 000F5DFC  7C 08 03 A6 */	mtlr r0
 /* 800F9220 000F5E00  4E 80 00 20 */	blr
-.global ftKb_SpecialNMr_Coll
-ftKb_SpecialNMr_Coll:
+.global ftKb_MrSpecialN_Coll
+ftKb_MrSpecialN_Coll:
 /* 800F9224 000F5E04  7C 08 02 A6 */	mflr r0
 /* 800F9228 000F5E08  90 01 00 04 */	stw r0, 4(r1)
 /* 800F922C 000F5E0C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -12339,8 +12339,8 @@ ftKb_SpecialNMr_800F93CC:
 /* 800F9448 000F6028  38 21 00 20 */	addi r1, r1, 0x20
 /* 800F944C 000F602C  7C 08 03 A6 */	mtlr r0
 /* 800F9450 000F6030  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMr_Anim
-ftKb_SpecialAirNMr_Anim:
+.global ftKb_MrSpecialAirN_Anim
+ftKb_MrSpecialAirN_Anim:
 /* 800F9454 000F6034  7C 08 02 A6 */	mflr r0
 /* 800F9458 000F6038  90 01 00 04 */	stw r0, 4(r1)
 /* 800F945C 000F603C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -12357,8 +12357,8 @@ ftKb_SpecialAirNMr_Anim:
 /* 800F9484 000F6064  38 21 00 18 */	addi r1, r1, 0x18
 /* 800F9488 000F6068  7C 08 03 A6 */	mtlr r0
 /* 800F948C 000F606C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMr_IASA
-ftKb_SpecialAirNMr_IASA:
+.global ftKb_MrSpecialAirN_IASA
+ftKb_MrSpecialAirN_IASA:
 /* 800F9490 000F6070  7C 08 02 A6 */	mflr r0
 /* 800F9494 000F6074  90 01 00 04 */	stw r0, 4(r1)
 /* 800F9498 000F6078  94 21 FF F8 */	stwu r1, -8(r1)
@@ -12372,8 +12372,8 @@ ftKb_SpecialAirNMr_IASA:
 /* 800F94B4 000F6094  38 21 00 08 */	addi r1, r1, 8
 /* 800F94B8 000F6098  7C 08 03 A6 */	mtlr r0
 /* 800F94BC 000F609C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMr_Phys
-ftKb_SpecialAirNMr_Phys:
+.global ftKb_MrSpecialAirN_Phys
+ftKb_MrSpecialAirN_Phys:
 /* 800F94C0 000F60A0  7C 08 02 A6 */	mflr r0
 /* 800F94C4 000F60A4  90 01 00 04 */	stw r0, 4(r1)
 /* 800F94C8 000F60A8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -12382,8 +12382,8 @@ ftKb_SpecialAirNMr_Phys:
 /* 800F94D4 000F60B4  38 21 00 08 */	addi r1, r1, 8
 /* 800F94D8 000F60B8  7C 08 03 A6 */	mtlr r0
 /* 800F94DC 000F60BC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMr_Coll
-ftKb_SpecialAirNMr_Coll:
+.global ftKb_MrSpecialAirN_Coll
+ftKb_MrSpecialAirN_Coll:
 /* 800F94E0 000F60C0  7C 08 02 A6 */	mflr r0
 /* 800F94E4 000F60C4  90 01 00 04 */	stw r0, 4(r1)
 /* 800F94E8 000F60C8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -12530,8 +12530,8 @@ ftKb_SpecialNLg_800F9684:
 /* 800F96E8 000F62C8  38 21 00 18 */	addi r1, r1, 0x18
 /* 800F96EC 000F62CC  7C 08 03 A6 */	mtlr r0
 /* 800F96F0 000F62D0  4E 80 00 20 */	blr
-.global ftKb_SpecialNLg_Anim
-ftKb_SpecialNLg_Anim:
+.global ftKb_LgSpecialN_Anim
+ftKb_LgSpecialN_Anim:
 /* 800F96F4 000F62D4  7C 08 02 A6 */	mflr r0
 /* 800F96F8 000F62D8  90 01 00 04 */	stw r0, 4(r1)
 /* 800F96FC 000F62DC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -12548,8 +12548,8 @@ ftKb_SpecialNLg_Anim:
 /* 800F9724 000F6304  38 21 00 18 */	addi r1, r1, 0x18
 /* 800F9728 000F6308  7C 08 03 A6 */	mtlr r0
 /* 800F972C 000F630C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNLg_Anim
-ftKb_SpecialAirNLg_Anim:
+.global ftKb_LgSpecialAirN_Anim
+ftKb_LgSpecialAirN_Anim:
 /* 800F9730 000F6310  7C 08 02 A6 */	mflr r0
 /* 800F9734 000F6314  90 01 00 04 */	stw r0, 4(r1)
 /* 800F9738 000F6318  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -12566,8 +12566,8 @@ ftKb_SpecialAirNLg_Anim:
 /* 800F9760 000F6340  38 21 00 18 */	addi r1, r1, 0x18
 /* 800F9764 000F6344  7C 08 03 A6 */	mtlr r0
 /* 800F9768 000F6348  4E 80 00 20 */	blr
-.global ftKb_SpecialNLg_IASA
-ftKb_SpecialNLg_IASA:
+.global ftKb_LgSpecialN_IASA
+ftKb_LgSpecialN_IASA:
 /* 800F976C 000F634C  7C 08 02 A6 */	mflr r0
 /* 800F9770 000F6350  90 01 00 04 */	stw r0, 4(r1)
 /* 800F9774 000F6354  94 21 FF F8 */	stwu r1, -8(r1)
@@ -12581,8 +12581,8 @@ ftKb_SpecialNLg_IASA:
 /* 800F9790 000F6370  38 21 00 08 */	addi r1, r1, 8
 /* 800F9794 000F6374  7C 08 03 A6 */	mtlr r0
 /* 800F9798 000F6378  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNLg_IASA
-ftKb_SpecialAirNLg_IASA:
+.global ftKb_LgSpecialAirN_IASA
+ftKb_LgSpecialAirN_IASA:
 /* 800F979C 000F637C  7C 08 02 A6 */	mflr r0
 /* 800F97A0 000F6380  90 01 00 04 */	stw r0, 4(r1)
 /* 800F97A4 000F6384  94 21 FF F8 */	stwu r1, -8(r1)
@@ -12596,8 +12596,8 @@ ftKb_SpecialAirNLg_IASA:
 /* 800F97C0 000F63A0  38 21 00 08 */	addi r1, r1, 8
 /* 800F97C4 000F63A4  7C 08 03 A6 */	mtlr r0
 /* 800F97C8 000F63A8  4E 80 00 20 */	blr
-.global ftKb_SpecialNLg_Phys
-ftKb_SpecialNLg_Phys:
+.global ftKb_LgSpecialN_Phys
+ftKb_LgSpecialN_Phys:
 /* 800F97CC 000F63AC  7C 08 02 A6 */	mflr r0
 /* 800F97D0 000F63B0  90 01 00 04 */	stw r0, 4(r1)
 /* 800F97D4 000F63B4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -12606,8 +12606,8 @@ ftKb_SpecialNLg_Phys:
 /* 800F97E0 000F63C0  38 21 00 08 */	addi r1, r1, 8
 /* 800F97E4 000F63C4  7C 08 03 A6 */	mtlr r0
 /* 800F97E8 000F63C8  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNLg_Phys
-ftKb_SpecialAirNLg_Phys:
+.global ftKb_LgSpecialAirN_Phys
+ftKb_LgSpecialAirN_Phys:
 /* 800F97EC 000F63CC  7C 08 02 A6 */	mflr r0
 /* 800F97F0 000F63D0  90 01 00 04 */	stw r0, 4(r1)
 /* 800F97F4 000F63D4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -12616,8 +12616,8 @@ ftKb_SpecialAirNLg_Phys:
 /* 800F9800 000F63E0  38 21 00 08 */	addi r1, r1, 8
 /* 800F9804 000F63E4  7C 08 03 A6 */	mtlr r0
 /* 800F9808 000F63E8  4E 80 00 20 */	blr
-.global ftKb_SpecialNLg_Coll
-ftKb_SpecialNLg_Coll:
+.global ftKb_LgSpecialN_Coll
+ftKb_LgSpecialN_Coll:
 /* 800F980C 000F63EC  7C 08 02 A6 */	mflr r0
 /* 800F9810 000F63F0  90 01 00 04 */	stw r0, 4(r1)
 /* 800F9814 000F63F4  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -12648,8 +12648,8 @@ ftKb_SpecialNLg_Coll:
 /* 800F9874 000F6454  38 21 00 18 */	addi r1, r1, 0x18
 /* 800F9878 000F6458  7C 08 03 A6 */	mtlr r0
 /* 800F987C 000F645C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNLg_Coll
-ftKb_SpecialAirNLg_Coll:
+.global ftKb_LgSpecialAirN_Coll
+ftKb_LgSpecialAirN_Coll:
 /* 800F9880 000F6460  7C 08 02 A6 */	mflr r0
 /* 800F9884 000F6464  90 01 00 04 */	stw r0, 4(r1)
 /* 800F9888 000F6468  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -12816,8 +12816,8 @@ ftKb_SpecialNCa_800F9A54:
 /* 800F9AE0 000F66C0  38 21 00 28 */	addi r1, r1, 0x28
 /* 800F9AE4 000F66C4  7C 08 03 A6 */	mtlr r0
 /* 800F9AE8 000F66C8  4E 80 00 20 */	blr
-.global ftKb_SpecialNCa_Anim
-ftKb_SpecialNCa_Anim:
+.global ftKb_CaSpecialN_Anim
+ftKb_CaSpecialN_Anim:
 /* 800F9AEC 000F66CC  7C 08 02 A6 */	mflr r0
 /* 800F9AF0 000F66D0  90 01 00 04 */	stw r0, 4(r1)
 /* 800F9AF4 000F66D4  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -12834,8 +12834,8 @@ ftKb_SpecialNCa_Anim:
 /* 800F9B1C 000F66FC  38 21 00 18 */	addi r1, r1, 0x18
 /* 800F9B20 000F6700  7C 08 03 A6 */	mtlr r0
 /* 800F9B24 000F6704  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNCa_Anim
-ftKb_SpecialAirNCa_Anim:
+.global ftKb_CaSpecialAirN_Anim
+ftKb_CaSpecialAirN_Anim:
 /* 800F9B28 000F6708  7C 08 02 A6 */	mflr r0
 /* 800F9B2C 000F670C  90 01 00 04 */	stw r0, 4(r1)
 /* 800F9B30 000F6710  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -12852,11 +12852,11 @@ ftKb_SpecialAirNCa_Anim:
 /* 800F9B58 000F6738  38 21 00 18 */	addi r1, r1, 0x18
 /* 800F9B5C 000F673C  7C 08 03 A6 */	mtlr r0
 /* 800F9B60 000F6740  4E 80 00 20 */	blr
-.global ftKb_SpecialNCa_IASA
-ftKb_SpecialNCa_IASA:
+.global ftKb_CaSpecialN_IASA
+ftKb_CaSpecialN_IASA:
 /* 800F9B64 000F6744  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNCa_IASA
-ftKb_SpecialAirNCa_IASA:
+.global ftKb_CaSpecialAirN_IASA
+ftKb_CaSpecialAirN_IASA:
 /* 800F9B68 000F6748  7C 08 02 A6 */	mflr r0
 /* 800F9B6C 000F674C  90 01 00 04 */	stw r0, 4(r1)
 /* 800F9B70 000F6750  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -12923,8 +12923,8 @@ ftKb_SpecialAirNCa_IASA:
 /* 800F9C4C 000F682C  38 21 00 38 */	addi r1, r1, 0x38
 /* 800F9C50 000F6830  7C 08 03 A6 */	mtlr r0
 /* 800F9C54 000F6834  4E 80 00 20 */	blr
-.global ftKb_SpecialNCa_Phys
-ftKb_SpecialNCa_Phys:
+.global ftKb_CaSpecialN_Phys
+ftKb_CaSpecialN_Phys:
 /* 800F9C58 000F6838  7C 08 02 A6 */	mflr r0
 /* 800F9C5C 000F683C  90 01 00 04 */	stw r0, 4(r1)
 /* 800F9C60 000F6840  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -12990,8 +12990,8 @@ ftKb_SpecialNCa_Phys:
 /* 800F9D34 000F6914  38 21 00 20 */	addi r1, r1, 0x20
 /* 800F9D38 000F6918  7C 08 03 A6 */	mtlr r0
 /* 800F9D3C 000F691C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNCa_Phys
-ftKb_SpecialAirNCa_Phys:
+.global ftKb_CaSpecialAirN_Phys
+ftKb_CaSpecialAirN_Phys:
 /* 800F9D40 000F6920  7C 08 02 A6 */	mflr r0
 /* 800F9D44 000F6924  90 01 00 04 */	stw r0, 4(r1)
 /* 800F9D48 000F6928  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -13087,8 +13087,8 @@ ftKb_SpecialAirNCa_Phys:
 /* 800F9E80 000F6A60  38 21 00 30 */	addi r1, r1, 0x30
 /* 800F9E84 000F6A64  7C 08 03 A6 */	mtlr r0
 /* 800F9E88 000F6A68  4E 80 00 20 */	blr
-.global ftKb_SpecialNCa_Coll
-ftKb_SpecialNCa_Coll:
+.global ftKb_CaSpecialN_Coll
+ftKb_CaSpecialN_Coll:
 /* 800F9E8C 000F6A6C  7C 08 02 A6 */	mflr r0
 /* 800F9E90 000F6A70  90 01 00 04 */	stw r0, 4(r1)
 /* 800F9E94 000F6A74  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -13133,8 +13133,8 @@ ftKb_SpecialNCa_Coll:
 /* 800F9F28 000F6B08  38 21 00 28 */	addi r1, r1, 0x28
 /* 800F9F2C 000F6B0C  7C 08 03 A6 */	mtlr r0
 /* 800F9F30 000F6B10  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNCa_Coll
-ftKb_SpecialAirNCa_Coll:
+.global ftKb_CaSpecialAirN_Coll
+ftKb_CaSpecialAirN_Coll:
 /* 800F9F34 000F6B14  7C 08 02 A6 */	mflr r0
 /* 800F9F38 000F6B18  90 01 00 04 */	stw r0, 4(r1)
 /* 800F9F3C 000F6B1C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -13257,8 +13257,8 @@ ftKb_SpecialNPk_800FA064:
 /* 800FA0E8 000F6CC8  38 21 00 20 */	addi r1, r1, 0x20
 /* 800FA0EC 000F6CCC  7C 08 03 A6 */	mtlr r0
 /* 800FA0F0 000F6CD0  4E 80 00 20 */	blr
-.global ftKb_SpecialNPk_Anim
-ftKb_SpecialNPk_Anim:
+.global ftKb_PkSpecialN_Anim
+ftKb_PkSpecialN_Anim:
 /* 800FA0F4 000F6CD4  7C 08 02 A6 */	mflr r0
 /* 800FA0F8 000F6CD8  90 01 00 04 */	stw r0, 4(r1)
 /* 800FA0FC 000F6CDC  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -13352,8 +13352,8 @@ ftKb_SpecialNPk_Anim:
 /* 800FA24C 000F6E2C  7C 08 03 A6 */	mtlr r0
 /* 800FA250 000F6E30  4E 80 00 20 */	blr
 
-.global ftKb_SpecialAirNPk_Anim
-ftKb_SpecialAirNPk_Anim:
+.global ftKb_PkSpecialAirN_Anim
+ftKb_PkSpecialAirN_Anim:
 /* 800FA254 000F6E34  7C 08 02 A6 */	mflr r0
 /* 800FA258 000F6E38  90 01 00 04 */	stw r0, 4(r1)
 /* 800FA25C 000F6E3C  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -13475,14 +13475,14 @@ ftKb_SpecialAirNPk_Anim:
 /* 800FA40C 000F6FEC  38 21 00 38 */	addi r1, r1, 0x38
 /* 800FA410 000F6FF0  7C 08 03 A6 */	mtlr r0
 /* 800FA414 000F6FF4  4E 80 00 20 */	blr
-.global ftKb_SpecialNPk_IASA
-ftKb_SpecialNPk_IASA:
+.global ftKb_PkSpecialN_IASA
+ftKb_PkSpecialN_IASA:
 /* 800FA418 000F6FF8  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPk_IASA
-ftKb_SpecialAirNPk_IASA:
+.global ftKb_PkSpecialAirN_IASA
+ftKb_PkSpecialAirN_IASA:
 /* 800FA41C 000F6FFC  4E 80 00 20 */	blr
-.global ftKb_SpecialNPk_Phys
-ftKb_SpecialNPk_Phys:
+.global ftKb_PkSpecialN_Phys
+ftKb_PkSpecialN_Phys:
 /* 800FA420 000F7000  7C 08 02 A6 */	mflr r0
 /* 800FA424 000F7004  90 01 00 04 */	stw r0, 4(r1)
 /* 800FA428 000F7008  94 21 FF F8 */	stwu r1, -8(r1)
@@ -13491,8 +13491,8 @@ ftKb_SpecialNPk_Phys:
 /* 800FA434 000F7014  38 21 00 08 */	addi r1, r1, 8
 /* 800FA438 000F7018  7C 08 03 A6 */	mtlr r0
 /* 800FA43C 000F701C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPk_Phys
-ftKb_SpecialAirNPk_Phys:
+.global ftKb_PkSpecialAirN_Phys
+ftKb_PkSpecialAirN_Phys:
 /* 800FA440 000F7020  7C 08 02 A6 */	mflr r0
 /* 800FA444 000F7024  90 01 00 04 */	stw r0, 4(r1)
 /* 800FA448 000F7028  94 21 FF F8 */	stwu r1, -8(r1)
@@ -13501,8 +13501,8 @@ ftKb_SpecialAirNPk_Phys:
 /* 800FA454 000F7034  38 21 00 08 */	addi r1, r1, 8
 /* 800FA458 000F7038  7C 08 03 A6 */	mtlr r0
 /* 800FA45C 000F703C  4E 80 00 20 */	blr
-.global ftKb_SpecialNPk_Coll
-ftKb_SpecialNPk_Coll:
+.global ftKb_PkSpecialN_Coll
+ftKb_PkSpecialN_Coll:
 /* 800FA460 000F7040  7C 08 02 A6 */	mflr r0
 /* 800FA464 000F7044  90 01 00 04 */	stw r0, 4(r1)
 /* 800FA468 000F7048  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -13542,8 +13542,8 @@ ftKb_SpecialNPk_Coll:
 /* 800FA4E4 000F70C4  38 21 00 20 */	addi r1, r1, 0x20
 /* 800FA4E8 000F70C8  7C 08 03 A6 */	mtlr r0
 /* 800FA4EC 000F70CC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPk_Coll
-ftKb_SpecialAirNPk_Coll:
+.global ftKb_PkSpecialAirN_Coll
+ftKb_PkSpecialAirN_Coll:
 /* 800FA4F0 000F70D0  7C 08 02 A6 */	mflr r0
 /* 800FA4F4 000F70D4  90 01 00 04 */	stw r0, 4(r1)
 /* 800FA4F8 000F70D8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -13904,8 +13904,8 @@ ftKb_SpecialNKp_800FA958:
 /* 800FA9F0 000F75D0  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FA9F4 000F75D4  7C 08 03 A6 */	mtlr r0
 /* 800FA9F8 000F75D8  4E 80 00 20 */	blr
-.global ftKb_SpecialNKpStart_Anim
-ftKb_SpecialNKpStart_Anim:
+.global ftKb_KpSpecialNStart_Anim
+ftKb_KpSpecialNStart_Anim:
 /* 800FA9FC 000F75DC  7C 08 02 A6 */	mflr r0
 /* 800FAA00 000F75E0  90 01 00 04 */	stw r0, 4(r1)
 /* 800FAA04 000F75E4  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -13940,8 +13940,8 @@ ftKb_SpecialNKpStart_Anim:
 /* 800FAA6C 000F764C  7C 08 03 A6 */	mtlr r0
 /* 800FAA70 000F7650  4E 80 00 20 */	blr
 
-.global ftKb_SpecialNKpLoop_Anim
-ftKb_SpecialNKpLoop_Anim:
+.global ftKb_KpSpecialN_Anim
+ftKb_KpSpecialN_Anim:
 /* 800FAA74 000F7654  7C 08 02 A6 */	mflr r0
 /* 800FAA78 000F7658  90 01 00 04 */	stw r0, 4(r1)
 /* 800FAA7C 000F765C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -13985,8 +13985,8 @@ ftKb_SpecialNKpLoop_Anim:
 /* 800FAB0C 000F76EC  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FAB10 000F76F0  7C 08 03 A6 */	mtlr r0
 /* 800FAB14 000F76F4  4E 80 00 20 */	blr
-.global ftKb_SpecialNKpEnd_Anim
-ftKb_SpecialNKpEnd_Anim:
+.global ftKb_KpSpecialNEnd_Anim
+ftKb_KpSpecialNEnd_Anim:
 /* 800FAB18 000F76F8  7C 08 02 A6 */	mflr r0
 /* 800FAB1C 000F76FC  90 01 00 04 */	stw r0, 4(r1)
 /* 800FAB20 000F7700  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -14003,8 +14003,8 @@ ftKb_SpecialNKpEnd_Anim:
 /* 800FAB48 000F7728  38 21 00 20 */	addi r1, r1, 0x20
 /* 800FAB4C 000F772C  7C 08 03 A6 */	mtlr r0
 /* 800FAB50 000F7730  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNKpStart_Anim
-ftKb_SpecialAirNKpStart_Anim:
+.global ftKb_KpSpecialAirNStart_Anim
+ftKb_KpSpecialAirNStart_Anim:
 /* 800FAB54 000F7734  7C 08 02 A6 */	mflr r0
 /* 800FAB58 000F7738  90 01 00 04 */	stw r0, 4(r1)
 /* 800FAB5C 000F773C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -14039,8 +14039,8 @@ ftKb_SpecialAirNKpStart_Anim:
 /* 800FABC4 000F77A4  7C 08 03 A6 */	mtlr r0
 /* 800FABC8 000F77A8  4E 80 00 20 */	blr
 
-.global ftKb_SpecialAirNKpLoop_Anim
-ftKb_SpecialAirNKpLoop_Anim:
+.global ftKb_KpSpecialAirN_Anim
+ftKb_KpSpecialAirN_Anim:
 /* 800FABCC 000F77AC  7C 08 02 A6 */	mflr r0
 /* 800FABD0 000F77B0  90 01 00 04 */	stw r0, 4(r1)
 /* 800FABD4 000F77B4  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -14085,8 +14085,8 @@ ftKb_SpecialAirNKpLoop_Anim:
 /* 800FAC68 000F7848  7C 08 03 A6 */	mtlr r0
 /* 800FAC6C 000F784C  4E 80 00 20 */	blr
 
-.global ftKb_SpecialAirNKpEnd_Anim
-ftKb_SpecialAirNKpEnd_Anim:
+.global ftKb_KpSpecialAirNEnd_Anim
+ftKb_KpSpecialAirNEnd_Anim:
 /* 800FAC70 000F7850  7C 08 02 A6 */	mflr r0
 /* 800FAC74 000F7854  90 01 00 04 */	stw r0, 4(r1)
 /* 800FAC78 000F7858  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -14103,11 +14103,11 @@ ftKb_SpecialAirNKpEnd_Anim:
 /* 800FACA0 000F7880  38 21 00 20 */	addi r1, r1, 0x20
 /* 800FACA4 000F7884  7C 08 03 A6 */	mtlr r0
 /* 800FACA8 000F7888  4E 80 00 20 */	blr
-.global ftKb_SpecialNKpStart_IASA
-ftKb_SpecialNKpStart_IASA:
+.global ftKb_KpSpecialNStart_IASA
+ftKb_KpSpecialNStart_IASA:
 /* 800FACAC 000F788C  4E 80 00 20 */	blr
-.global ftKb_SpecialNKpLoop_IASA
-ftKb_SpecialNKpLoop_IASA:
+.global ftKb_KpSpecialN_IASA
+ftKb_KpSpecialN_IASA:
 /* 800FACB0 000F7890  7C 08 02 A6 */	mflr r0
 /* 800FACB4 000F7894  90 01 00 04 */	stw r0, 4(r1)
 /* 800FACB8 000F7898  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -14205,15 +14205,15 @@ ftKb_SpecialNKpLoop_IASA:
 /* 800FAE00 000F79E0  38 21 00 30 */	addi r1, r1, 0x30
 /* 800FAE04 000F79E4  7C 08 03 A6 */	mtlr r0
 /* 800FAE08 000F79E8  4E 80 00 20 */	blr
-.global ftKb_SpecialNKpEnd_IASA
-ftKb_SpecialNKpEnd_IASA:
+.global ftKb_KpSpecialNEnd_IASA
+ftKb_KpSpecialNEnd_IASA:
 /* 800FAE0C 000F79EC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNKpStart_IASA
-ftKb_SpecialAirNKpStart_IASA:
+.global ftKb_KpSpecialAirNStart_IASA
+ftKb_KpSpecialAirNStart_IASA:
 /* 800FAE10 000F79F0  4E 80 00 20 */	blr
 
-.global ftKb_SpecialAirNKpLoop_IASA
-ftKb_SpecialAirNKpLoop_IASA:
+.global ftKb_KpSpecialAirN_IASA
+ftKb_KpSpecialAirN_IASA:
 /* 800FAE14 000F79F4  7C 08 02 A6 */	mflr r0
 /* 800FAE18 000F79F8  90 01 00 04 */	stw r0, 4(r1)
 /* 800FAE1C 000F79FC  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -14312,11 +14312,11 @@ ftKb_SpecialAirNKpLoop_IASA:
 /* 800FAF68 000F7B48  7C 08 03 A6 */	mtlr r0
 /* 800FAF6C 000F7B4C  4E 80 00 20 */	blr
 
-.global ftKb_SpecialAirNKpEnd_IASA
-ftKb_SpecialAirNKpEnd_IASA:
+.global ftKb_KpSpecialAirNEnd_IASA
+ftKb_KpSpecialAirNEnd_IASA:
 /* 800FAF70 000F7B50  4E 80 00 20 */	blr
-.global ftKb_SpecialNKpStart_Phys
-ftKb_SpecialNKpStart_Phys:
+.global ftKb_KpSpecialNStart_Phys
+ftKb_KpSpecialNStart_Phys:
 /* 800FAF74 000F7B54  7C 08 02 A6 */	mflr r0
 /* 800FAF78 000F7B58  90 01 00 04 */	stw r0, 4(r1)
 /* 800FAF7C 000F7B5C  94 21 FF F8 */	stwu r1, -8(r1)
@@ -14325,8 +14325,8 @@ ftKb_SpecialNKpStart_Phys:
 /* 800FAF88 000F7B68  38 21 00 08 */	addi r1, r1, 8
 /* 800FAF8C 000F7B6C  7C 08 03 A6 */	mtlr r0
 /* 800FAF90 000F7B70  4E 80 00 20 */	blr
-.global ftKb_SpecialNKpLoop_Phys
-ftKb_SpecialNKpLoop_Phys:
+.global ftKb_KpSpecialN_Phys
+ftKb_KpSpecialN_Phys:
 /* 800FAF94 000F7B74  7C 08 02 A6 */	mflr r0
 /* 800FAF98 000F7B78  90 01 00 04 */	stw r0, 4(r1)
 /* 800FAF9C 000F7B7C  94 21 FF F8 */	stwu r1, -8(r1)
@@ -14335,8 +14335,8 @@ ftKb_SpecialNKpLoop_Phys:
 /* 800FAFA8 000F7B88  38 21 00 08 */	addi r1, r1, 8
 /* 800FAFAC 000F7B8C  7C 08 03 A6 */	mtlr r0
 /* 800FAFB0 000F7B90  4E 80 00 20 */	blr
-.global ftKb_SpecialNKpEnd_Phys
-ftKb_SpecialNKpEnd_Phys:
+.global ftKb_KpSpecialNEnd_Phys
+ftKb_KpSpecialNEnd_Phys:
 /* 800FAFB4 000F7B94  7C 08 02 A6 */	mflr r0
 /* 800FAFB8 000F7B98  90 01 00 04 */	stw r0, 4(r1)
 /* 800FAFBC 000F7B9C  94 21 FF F8 */	stwu r1, -8(r1)
@@ -14345,8 +14345,8 @@ ftKb_SpecialNKpEnd_Phys:
 /* 800FAFC8 000F7BA8  38 21 00 08 */	addi r1, r1, 8
 /* 800FAFCC 000F7BAC  7C 08 03 A6 */	mtlr r0
 /* 800FAFD0 000F7BB0  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNKpStart_Phys
-ftKb_SpecialAirNKpStart_Phys:
+.global ftKb_KpSpecialAirNStart_Phys
+ftKb_KpSpecialAirNStart_Phys:
 /* 800FAFD4 000F7BB4  7C 08 02 A6 */	mflr r0
 /* 800FAFD8 000F7BB8  90 01 00 04 */	stw r0, 4(r1)
 /* 800FAFDC 000F7BBC  94 21 FF F8 */	stwu r1, -8(r1)
@@ -14356,8 +14356,8 @@ ftKb_SpecialAirNKpStart_Phys:
 /* 800FAFEC 000F7BCC  7C 08 03 A6 */	mtlr r0
 /* 800FAFF0 000F7BD0  4E 80 00 20 */	blr
 
-.global ftKb_SpecialAirNKpLoop_Phys
-ftKb_SpecialAirNKpLoop_Phys:
+.global ftKb_KpSpecialAirN_Phys
+ftKb_KpSpecialAirN_Phys:
 /* 800FAFF4 000F7BD4  7C 08 02 A6 */	mflr r0
 /* 800FAFF8 000F7BD8  90 01 00 04 */	stw r0, 4(r1)
 /* 800FAFFC 000F7BDC  94 21 FF F8 */	stwu r1, -8(r1)
@@ -14367,8 +14367,8 @@ ftKb_SpecialAirNKpLoop_Phys:
 /* 800FB00C 000F7BEC  7C 08 03 A6 */	mtlr r0
 /* 800FB010 000F7BF0  4E 80 00 20 */	blr
 
-.global ftKb_SpecialAirNKpEnd_Phys
-ftKb_SpecialAirNKpEnd_Phys:
+.global ftKb_KpSpecialAirNEnd_Phys
+ftKb_KpSpecialAirNEnd_Phys:
 /* 800FB014 000F7BF4  7C 08 02 A6 */	mflr r0
 /* 800FB018 000F7BF8  90 01 00 04 */	stw r0, 4(r1)
 /* 800FB01C 000F7BFC  94 21 FF F8 */	stwu r1, -8(r1)
@@ -14377,8 +14377,8 @@ ftKb_SpecialAirNKpEnd_Phys:
 /* 800FB028 000F7C08  38 21 00 08 */	addi r1, r1, 8
 /* 800FB02C 000F7C0C  7C 08 03 A6 */	mtlr r0
 /* 800FB030 000F7C10  4E 80 00 20 */	blr
-.global ftKb_SpecialNKpStart_Coll
-ftKb_SpecialNKpStart_Coll:
+.global ftKb_KpSpecialNStart_Coll
+ftKb_KpSpecialNStart_Coll:
 /* 800FB034 000F7C14  7C 08 02 A6 */	mflr r0
 /* 800FB038 000F7C18  90 01 00 04 */	stw r0, 4(r1)
 /* 800FB03C 000F7C1C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -14418,8 +14418,8 @@ ftKb_SpecialNKpStart_Coll:
 /* 800FB0B8 000F7C98  38 21 00 20 */	addi r1, r1, 0x20
 /* 800FB0BC 000F7C9C  7C 08 03 A6 */	mtlr r0
 /* 800FB0C0 000F7CA0  4E 80 00 20 */	blr
-.global ftKb_SpecialNKpLoop_Coll
-ftKb_SpecialNKpLoop_Coll:
+.global ftKb_KpSpecialN_Coll
+ftKb_KpSpecialN_Coll:
 /* 800FB0C4 000F7CA4  7C 08 02 A6 */	mflr r0
 /* 800FB0C8 000F7CA8  90 01 00 04 */	stw r0, 4(r1)
 /* 800FB0CC 000F7CAC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -14459,8 +14459,8 @@ ftKb_SpecialNKpLoop_Coll:
 /* 800FB148 000F7D28  38 21 00 20 */	addi r1, r1, 0x20
 /* 800FB14C 000F7D2C  7C 08 03 A6 */	mtlr r0
 /* 800FB150 000F7D30  4E 80 00 20 */	blr
-.global ftKb_SpecialNKpEnd_Coll
-ftKb_SpecialNKpEnd_Coll:
+.global ftKb_KpSpecialNEnd_Coll
+ftKb_KpSpecialNEnd_Coll:
 /* 800FB154 000F7D34  7C 08 02 A6 */	mflr r0
 /* 800FB158 000F7D38  90 01 00 04 */	stw r0, 4(r1)
 /* 800FB15C 000F7D3C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -14500,8 +14500,8 @@ ftKb_SpecialNKpEnd_Coll:
 /* 800FB1D8 000F7DB8  38 21 00 20 */	addi r1, r1, 0x20
 /* 800FB1DC 000F7DBC  7C 08 03 A6 */	mtlr r0
 /* 800FB1E0 000F7DC0  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNKpStart_Coll
-ftKb_SpecialAirNKpStart_Coll:
+.global ftKb_KpSpecialAirNStart_Coll
+ftKb_KpSpecialAirNStart_Coll:
 /* 800FB1E4 000F7DC4  7C 08 02 A6 */	mflr r0
 /* 800FB1E8 000F7DC8  90 01 00 04 */	stw r0, 4(r1)
 /* 800FB1EC 000F7DCC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -14542,8 +14542,8 @@ ftKb_SpecialAirNKpStart_Coll:
 /* 800FB26C 000F7E4C  7C 08 03 A6 */	mtlr r0
 /* 800FB270 000F7E50  4E 80 00 20 */	blr
 
-.global ftKb_SpecialAirNKpLoop_Coll
-ftKb_SpecialAirNKpLoop_Coll:
+.global ftKb_KpSpecialAirN_Coll
+ftKb_KpSpecialAirN_Coll:
 /* 800FB274 000F7E54  7C 08 02 A6 */	mflr r0
 /* 800FB278 000F7E58  90 01 00 04 */	stw r0, 4(r1)
 /* 800FB27C 000F7E5C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -14584,8 +14584,8 @@ ftKb_SpecialAirNKpLoop_Coll:
 /* 800FB2FC 000F7EDC  7C 08 03 A6 */	mtlr r0
 /* 800FB300 000F7EE0  4E 80 00 20 */	blr
 
-.global ftKb_SpecialAirNKpEnd_Coll
-ftKb_SpecialAirNKpEnd_Coll:
+.global ftKb_KpSpecialAirNEnd_Coll
+ftKb_KpSpecialAirNEnd_Coll:
 /* 800FB304 000F7EE4  7C 08 02 A6 */	mflr r0
 /* 800FB308 000F7EE8  90 01 00 04 */	stw r0, 4(r1)
 /* 800FB30C 000F7EEC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -15230,8 +15230,8 @@ ftKb_SpecialNLk800FBA00:
 /* 800FBBB8 000F8798  38 21 00 50 */	addi r1, r1, 0x50
 /* 800FBBBC 000F879C  7C 08 03 A6 */	mtlr r0
 /* 800FBBC0 000F87A0  4E 80 00 20 */	blr
-.global ftKb_SpecialNLkCharge_Anim
-ftKb_SpecialNLkCharge_Anim:
+.global ftKb_LkSpecialNStart_Anim
+ftKb_LkSpecialNStart_Anim:
 /* 800FBBC4 000F87A4  7C 08 02 A6 */	mflr r0
 /* 800FBBC8 000F87A8  90 01 00 04 */	stw r0, 4(r1)
 /* 800FBBCC 000F87AC  94 21 FF 90 */	stwu r1, -0x70(r1)
@@ -15385,8 +15385,8 @@ ftKb_SpecialNLkCharge_Anim:
 /* 800FBDF0 000F89D0  38 21 00 70 */	addi r1, r1, 0x70
 /* 800FBDF4 000F89D4  7C 08 03 A6 */	mtlr r0
 /* 800FBDF8 000F89D8  4E 80 00 20 */	blr
-.global ftKb_SpecialNLkFullyCharged_Anim
-ftKb_SpecialNLkFullyCharged_Anim:
+.global ftKb_LkSpecialNLoop_Anim
+ftKb_LkSpecialNLoop_Anim:
 /* 800FBDFC 000F89DC  7C 08 02 A6 */	mflr r0
 /* 800FBE00 000F89E0  3C 80 80 3B */	lis r4, ftKb_Init_803B7548@ha
 /* 800FBE04 000F89E4  90 01 00 04 */	stw r0, 4(r1)
@@ -15441,8 +15441,8 @@ ftKb_SpecialNLkFullyCharged_Anim:
 /* 800FBEC4 000F8AA4  38 21 00 40 */	addi r1, r1, 0x40
 /* 800FBEC8 000F8AA8  7C 08 03 A6 */	mtlr r0
 /* 800FBECC 000F8AAC  4E 80 00 20 */	blr
-.global ftKb_SpecialNLkFire_Anim
-ftKb_SpecialNLkFire_Anim:
+.global ftKb_LkSpecialNEnd_Anim
+ftKb_LkSpecialNEnd_Anim:
 /* 800FBED0 000F8AB0  7C 08 02 A6 */	mflr r0
 /* 800FBED4 000F8AB4  90 01 00 04 */	stw r0, 4(r1)
 /* 800FBED8 000F8AB8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -15470,8 +15470,8 @@ ftKb_SpecialNLkFire_Anim:
 /* 800FBF28 000F8B08  38 21 00 20 */	addi r1, r1, 0x20
 /* 800FBF2C 000F8B0C  7C 08 03 A6 */	mtlr r0
 /* 800FBF30 000F8B10  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNLkCharge_Anim
-ftKb_SpecialAirNLkCharge_Anim:
+.global ftKb_LkSpecialAirNStart_Anim
+ftKb_LkSpecialAirNStart_Anim:
 /* 800FBF34 000F8B14  7C 08 02 A6 */	mflr r0
 /* 800FBF38 000F8B18  90 01 00 04 */	stw r0, 4(r1)
 /* 800FBF3C 000F8B1C  94 21 FF 88 */	stwu r1, -0x78(r1)
@@ -15639,8 +15639,8 @@ ftKb_SpecialAirNLkCharge_Anim:
 /* 800FC194 000F8D74  38 21 00 78 */	addi r1, r1, 0x78
 /* 800FC198 000F8D78  7C 08 03 A6 */	mtlr r0
 /* 800FC19C 000F8D7C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNLkFullyCharged_Anim
-ftKb_SpecialAirNLkFullyCharged_Anim:
+.global ftKb_LkSpecialAirNLoop_Anim
+ftKb_LkSpecialAirNLoop_Anim:
 /* 800FC1A0 000F8D80  7C 08 02 A6 */	mflr r0
 /* 800FC1A4 000F8D84  3C 80 80 3B */	lis r4, ftKb_Init_803B7548@ha
 /* 800FC1A8 000F8D88  90 01 00 04 */	stw r0, 4(r1)
@@ -15695,8 +15695,8 @@ ftKb_SpecialAirNLkFullyCharged_Anim:
 /* 800FC268 000F8E48  38 21 00 40 */	addi r1, r1, 0x40
 /* 800FC26C 000F8E4C  7C 08 03 A6 */	mtlr r0
 /* 800FC270 000F8E50  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNLkFire_Anim
-ftKb_SpecialAirNLkFire_Anim:
+.global ftKb_LkSpecialAirNEnd_Anim
+ftKb_LkSpecialAirNEnd_Anim:
 /* 800FC274 000F8E54  7C 08 02 A6 */	mflr r0
 /* 800FC278 000F8E58  90 01 00 04 */	stw r0, 4(r1)
 /* 800FC27C 000F8E5C  94 21 FF B8 */	stwu r1, -0x48(r1)
@@ -15768,8 +15768,8 @@ ftKb_SpecialAirNLkFire_Anim:
 /* 800FC368 000F8F48  38 21 00 48 */	addi r1, r1, 0x48
 /* 800FC36C 000F8F4C  7C 08 03 A6 */	mtlr r0
 /* 800FC370 000F8F50  4E 80 00 20 */	blr
-.global ftKb_SpecialNLkCharge_IASA
-ftKb_SpecialNLkCharge_IASA:
+.global ftKb_LkSpecialNStart_IASA
+ftKb_LkSpecialNStart_IASA:
 /* 800FC374 000F8F54  7C 08 02 A6 */	mflr r0
 /* 800FC378 000F8F58  90 01 00 04 */	stw r0, 4(r1)
 /* 800FC37C 000F8F5C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -15839,8 +15839,8 @@ ftKb_SpecialNLkCharge_IASA:
 /* 800FC460 000F9040  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FC464 000F9044  7C 08 03 A6 */	mtlr r0
 /* 800FC468 000F9048  4E 80 00 20 */	blr
-.global ftKb_SpecialNLkFullyCharged_IASA
-ftKb_SpecialNLkFullyCharged_IASA:
+.global ftKb_LkSpecialNLoop_IASA
+ftKb_LkSpecialNLoop_IASA:
 /* 800FC46C 000F904C  7C 08 02 A6 */	mflr r0
 /* 800FC470 000F9050  90 01 00 04 */	stw r0, 4(r1)
 /* 800FC474 000F9054  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -15899,11 +15899,11 @@ ftKb_SpecialNLkFullyCharged_IASA:
 /* 800FC530 000F9110  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FC534 000F9114  7C 08 03 A6 */	mtlr r0
 /* 800FC538 000F9118  4E 80 00 20 */	blr
-.global ftKb_SpecialNLkFire_IASA
-ftKb_SpecialNLkFire_IASA:
+.global ftKb_LkSpecialNEnd_IASA
+ftKb_LkSpecialNEnd_IASA:
 /* 800FC53C 000F911C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNLkCharge_IASA
-ftKb_SpecialAirNLkCharge_IASA:
+.global ftKb_LkSpecialAirNStart_IASA
+ftKb_LkSpecialAirNStart_IASA:
 /* 800FC540 000F9120  7C 08 02 A6 */	mflr r0
 /* 800FC544 000F9124  90 01 00 04 */	stw r0, 4(r1)
 /* 800FC548 000F9128  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -15973,8 +15973,8 @@ ftKb_SpecialAirNLkCharge_IASA:
 /* 800FC62C 000F920C  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FC630 000F9210  7C 08 03 A6 */	mtlr r0
 /* 800FC634 000F9214  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNLkFullyCharged_IASA
-ftKb_SpecialAirNLkFullyCharged_IASA:
+.global ftKb_LkSpecialAirNLoop_IASA
+ftKb_LkSpecialAirNLoop_IASA:
 /* 800FC638 000F9218  7C 08 02 A6 */	mflr r0
 /* 800FC63C 000F921C  90 01 00 04 */	stw r0, 4(r1)
 /* 800FC640 000F9220  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -16033,11 +16033,11 @@ ftKb_SpecialAirNLkFullyCharged_IASA:
 /* 800FC6FC 000F92DC  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FC700 000F92E0  7C 08 03 A6 */	mtlr r0
 /* 800FC704 000F92E4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNLkFire_IASA
-ftKb_SpecialAirNLkFire_IASA:
+.global ftKb_LkSpecialAirNEnd_IASA
+ftKb_LkSpecialAirNEnd_IASA:
 /* 800FC708 000F92E8  4E 80 00 20 */	blr
-.global ftKb_SpecialNLkCharge_Phys
-ftKb_SpecialNLkCharge_Phys:
+.global ftKb_LkSpecialNStart_Phys
+ftKb_LkSpecialNStart_Phys:
 /* 800FC70C 000F92EC  7C 08 02 A6 */	mflr r0
 /* 800FC710 000F92F0  90 01 00 04 */	stw r0, 4(r1)
 /* 800FC714 000F92F4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -16046,8 +16046,8 @@ ftKb_SpecialNLkCharge_Phys:
 /* 800FC720 000F9300  38 21 00 08 */	addi r1, r1, 8
 /* 800FC724 000F9304  7C 08 03 A6 */	mtlr r0
 /* 800FC728 000F9308  4E 80 00 20 */	blr
-.global ftKb_SpecialNLkFullyCharged_Phys
-ftKb_SpecialNLkFullyCharged_Phys:
+.global ftKb_LkSpecialNLoop_Phys
+ftKb_LkSpecialNLoop_Phys:
 /* 800FC72C 000F930C  7C 08 02 A6 */	mflr r0
 /* 800FC730 000F9310  90 01 00 04 */	stw r0, 4(r1)
 /* 800FC734 000F9314  94 21 FF F8 */	stwu r1, -8(r1)
@@ -16056,8 +16056,8 @@ ftKb_SpecialNLkFullyCharged_Phys:
 /* 800FC740 000F9320  38 21 00 08 */	addi r1, r1, 8
 /* 800FC744 000F9324  7C 08 03 A6 */	mtlr r0
 /* 800FC748 000F9328  4E 80 00 20 */	blr
-.global ftKb_SpecialNLkFire_Phys
-ftKb_SpecialNLkFire_Phys:
+.global ftKb_LkSpecialNEnd_Phys
+ftKb_LkSpecialNEnd_Phys:
 /* 800FC74C 000F932C  7C 08 02 A6 */	mflr r0
 /* 800FC750 000F9330  90 01 00 04 */	stw r0, 4(r1)
 /* 800FC754 000F9334  94 21 FF F8 */	stwu r1, -8(r1)
@@ -16066,8 +16066,8 @@ ftKb_SpecialNLkFire_Phys:
 /* 800FC760 000F9340  38 21 00 08 */	addi r1, r1, 8
 /* 800FC764 000F9344  7C 08 03 A6 */	mtlr r0
 /* 800FC768 000F9348  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNLkCharge_Phys
-ftKb_SpecialAirNLkCharge_Phys:
+.global ftKb_LkSpecialAirNStart_Phys
+ftKb_LkSpecialAirNStart_Phys:
 /* 800FC76C 000F934C  7C 08 02 A6 */	mflr r0
 /* 800FC770 000F9350  90 01 00 04 */	stw r0, 4(r1)
 /* 800FC774 000F9354  94 21 FF F8 */	stwu r1, -8(r1)
@@ -16076,8 +16076,8 @@ ftKb_SpecialAirNLkCharge_Phys:
 /* 800FC780 000F9360  38 21 00 08 */	addi r1, r1, 8
 /* 800FC784 000F9364  7C 08 03 A6 */	mtlr r0
 /* 800FC788 000F9368  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNLkFullyCharged_Phys
-ftKb_SpecialAirNLkFullyCharged_Phys:
+.global ftKb_LkSpecialAirNLoop_Phys
+ftKb_LkSpecialAirNLoop_Phys:
 /* 800FC78C 000F936C  7C 08 02 A6 */	mflr r0
 /* 800FC790 000F9370  90 01 00 04 */	stw r0, 4(r1)
 /* 800FC794 000F9374  94 21 FF F8 */	stwu r1, -8(r1)
@@ -16086,8 +16086,8 @@ ftKb_SpecialAirNLkFullyCharged_Phys:
 /* 800FC7A0 000F9380  38 21 00 08 */	addi r1, r1, 8
 /* 800FC7A4 000F9384  7C 08 03 A6 */	mtlr r0
 /* 800FC7A8 000F9388  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNLkFire_Phys
-ftKb_SpecialAirNLkFire_Phys:
+.global ftKb_LkSpecialAirNEnd_Phys
+ftKb_LkSpecialAirNEnd_Phys:
 /* 800FC7AC 000F938C  7C 08 02 A6 */	mflr r0
 /* 800FC7B0 000F9390  90 01 00 04 */	stw r0, 4(r1)
 /* 800FC7B4 000F9394  94 21 FF F8 */	stwu r1, -8(r1)
@@ -16096,8 +16096,8 @@ ftKb_SpecialAirNLkFire_Phys:
 /* 800FC7C0 000F93A0  38 21 00 08 */	addi r1, r1, 8
 /* 800FC7C4 000F93A4  7C 08 03 A6 */	mtlr r0
 /* 800FC7C8 000F93A8  4E 80 00 20 */	blr
-.global ftKb_SpecialNLkCharge_Coll
-ftKb_SpecialNLkCharge_Coll:
+.global ftKb_LkSpecialNStart_Coll
+ftKb_LkSpecialNStart_Coll:
 /* 800FC7CC 000F93AC  7C 08 02 A6 */	mflr r0
 /* 800FC7D0 000F93B0  90 01 00 04 */	stw r0, 4(r1)
 /* 800FC7D4 000F93B4  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -16146,8 +16146,8 @@ ftKb_SpecialNLkCharge_Coll:
 /* 800FC874 000F9454  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FC878 000F9458  7C 08 03 A6 */	mtlr r0
 /* 800FC87C 000F945C  4E 80 00 20 */	blr
-.global ftKb_SpecialNLkFullyCharged_Coll
-ftKb_SpecialNLkFullyCharged_Coll:
+.global ftKb_LkSpecialNLoop_Coll
+ftKb_LkSpecialNLoop_Coll:
 /* 800FC880 000F9460  7C 08 02 A6 */	mflr r0
 /* 800FC884 000F9464  90 01 00 04 */	stw r0, 4(r1)
 /* 800FC888 000F9468  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -16196,8 +16196,8 @@ ftKb_SpecialNLkFullyCharged_Coll:
 /* 800FC928 000F9508  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FC92C 000F950C  7C 08 03 A6 */	mtlr r0
 /* 800FC930 000F9510  4E 80 00 20 */	blr
-.global ftKb_SpecialNLkFire_Coll
-ftKb_SpecialNLkFire_Coll:
+.global ftKb_LkSpecialNEnd_Coll
+ftKb_LkSpecialNEnd_Coll:
 /* 800FC934 000F9514  7C 08 02 A6 */	mflr r0
 /* 800FC938 000F9518  90 01 00 04 */	stw r0, 4(r1)
 /* 800FC93C 000F951C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -16248,8 +16248,8 @@ ftKb_SpecialNLkFire_Coll:
 /* 800FC9E4 000F95C4  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FC9E8 000F95C8  7C 08 03 A6 */	mtlr r0
 /* 800FC9EC 000F95CC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNLkCharge_Coll
-ftKb_SpecialAirNLkCharge_Coll:
+.global ftKb_LkSpecialAirNStart_Coll
+ftKb_LkSpecialAirNStart_Coll:
 /* 800FC9F0 000F95D0  7C 08 02 A6 */	mflr r0
 /* 800FC9F4 000F95D4  90 01 00 04 */	stw r0, 4(r1)
 /* 800FC9F8 000F95D8  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -16298,8 +16298,8 @@ ftKb_SpecialAirNLkCharge_Coll:
 /* 800FCA98 000F9678  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FCA9C 000F967C  7C 08 03 A6 */	mtlr r0
 /* 800FCAA0 000F9680  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNLkFullyCharged_Coll
-ftKb_SpecialAirNLkFullyCharged_Coll:
+.global ftKb_LkSpecialAirNLoop_Coll
+ftKb_LkSpecialAirNLoop_Coll:
 /* 800FCAA4 000F9684  7C 08 02 A6 */	mflr r0
 /* 800FCAA8 000F9688  90 01 00 04 */	stw r0, 4(r1)
 /* 800FCAAC 000F968C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -16348,8 +16348,8 @@ ftKb_SpecialAirNLkFullyCharged_Coll:
 /* 800FCB4C 000F972C  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FCB50 000F9730  7C 08 03 A6 */	mtlr r0
 /* 800FCB54 000F9734  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNLkFire_Coll
-ftKb_SpecialAirNLkFire_Coll:
+.global ftKb_LkSpecialAirNEnd_Coll
+ftKb_LkSpecialAirNEnd_Coll:
 /* 800FCB58 000F9738  7C 08 02 A6 */	mflr r0
 /* 800FCB5C 000F973C  90 01 00 04 */	stw r0, 4(r1)
 /* 800FCB60 000F9740  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -16743,8 +16743,8 @@ ftKb_SpecialNSs_800FD020:
 /* 800FD0B0 000F9C90  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FD0B4 000F9C94  7C 08 03 A6 */	mtlr r0
 /* 800FD0B8 000F9C98  4E 80 00 20 */	blr
-.global ftKb_SpecialNSsStart_Anim
-ftKb_SpecialNSsStart_Anim:
+.global ftKb_SsSpecialNStart_Anim
+ftKb_SsSpecialNStart_Anim:
 /* 800FD0BC 000F9C9C  7C 08 02 A6 */	mflr r0
 /* 800FD0C0 000F9CA0  90 01 00 04 */	stw r0, 4(r1)
 /* 800FD0C4 000F9CA4  94 21 FF A8 */	stwu r1, -0x58(r1)
@@ -16852,8 +16852,8 @@ ftKb_SpecialNSsStart_Anim:
 /* 800FD244 000F9E24  38 21 00 58 */	addi r1, r1, 0x58
 /* 800FD248 000F9E28  7C 08 03 A6 */	mtlr r0
 /* 800FD24C 000F9E2C  4E 80 00 20 */	blr
-.global ftKb_SpecialNSsLoop_Anim
-ftKb_SpecialNSsLoop_Anim:
+.global ftKb_SsSpecialNHold_Anim
+ftKb_SsSpecialNHold_Anim:
 /* 800FD250 000F9E30  7C 08 02 A6 */	mflr r0
 /* 800FD254 000F9E34  90 01 00 04 */	stw r0, 4(r1)
 /* 800FD258 000F9E38  94 21 FF A8 */	stwu r1, -0x58(r1)
@@ -16974,8 +16974,8 @@ ftKb_SpecialNSsLoop_Anim:
 /* 800FD40C 000F9FEC  38 21 00 58 */	addi r1, r1, 0x58
 /* 800FD410 000F9FF0  7C 08 03 A6 */	mtlr r0
 /* 800FD414 000F9FF4  4E 80 00 20 */	blr
-.global ftKb_SpecialNSsEnd_Anim
-ftKb_SpecialNSsEnd_Anim:
+.global ftKb_SsSpecialNCancel_Anim
+ftKb_SsSpecialNCancel_Anim:
 /* 800FD418 000F9FF8  7C 08 02 A6 */	mflr r0
 /* 800FD41C 000F9FFC  90 01 00 04 */	stw r0, 4(r1)
 /* 800FD420 000FA000  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -17012,8 +17012,8 @@ ftKb_SpecialNSsEnd_Anim:
 /* 800FD490 000FA070  38 21 00 30 */	addi r1, r1, 0x30
 /* 800FD494 000FA074  7C 08 03 A6 */	mtlr r0
 /* 800FD498 000FA078  4E 80 00 20 */	blr
-.global ftKb_SpecialNSsFire_Anim
-ftKb_SpecialNSsFire_Anim:
+.global ftKb_SsSpecialN_Anim
+ftKb_SsSpecialN_Anim:
 /* 800FD49C 000FA07C  7C 08 02 A6 */	mflr r0
 /* 800FD4A0 000FA080  90 01 00 04 */	stw r0, 4(r1)
 /* 800FD4A4 000FA084  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -17032,8 +17032,8 @@ ftKb_SpecialNSsFire_Anim:
 /* 800FD4D4 000FA0B4  38 21 00 30 */	addi r1, r1, 0x30
 /* 800FD4D8 000FA0B8  7C 08 03 A6 */	mtlr r0
 /* 800FD4DC 000FA0BC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSsStart_Anim
-ftKb_SpecialAirNSsStart_Anim:
+.global ftKb_SsSpecialAirNStart_Anim
+ftKb_SsSpecialAirNStart_Anim:
 /* 800FD4E0 000FA0C0  7C 08 02 A6 */	mflr r0
 /* 800FD4E4 000FA0C4  90 01 00 04 */	stw r0, 4(r1)
 /* 800FD4E8 000FA0C8  94 21 FF B8 */	stwu r1, -0x48(r1)
@@ -17111,8 +17111,8 @@ ftKb_SpecialAirNSsStart_Anim:
 /* 800FD5FC 000FA1DC  38 21 00 48 */	addi r1, r1, 0x48
 /* 800FD600 000FA1E0  7C 08 03 A6 */	mtlr r0
 /* 800FD604 000FA1E4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSsFire_Anim
-ftKb_SpecialAirNSsFire_Anim:
+.global ftKb_SsSpecialAirN_Anim
+ftKb_SsSpecialAirN_Anim:
 /* 800FD608 000FA1E8  7C 08 02 A6 */	mflr r0
 /* 800FD60C 000FA1EC  90 01 00 04 */	stw r0, 4(r1)
 /* 800FD610 000FA1F0  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -17147,11 +17147,11 @@ ftKb_SpecialAirNSsFire_Anim:
 /* 800FD67C 000FA25C  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FD680 000FA260  7C 08 03 A6 */	mtlr r0
 /* 800FD684 000FA264  4E 80 00 20 */	blr
-.global ftKb_SpecialNSsStart_IASA
-ftKb_SpecialNSsStart_IASA:
+.global ftKb_SsSpecialNStart_IASA
+ftKb_SsSpecialNStart_IASA:
 /* 800FD688 000FA268  4E 80 00 20 */	blr
-.global ftKb_SpecialNSsLoop_IASA
-ftKb_SpecialNSsLoop_IASA:
+.global ftKb_SsSpecialNHold_IASA
+ftKb_SsSpecialNHold_IASA:
 /* 800FD68C 000FA26C  7C 08 02 A6 */	mflr r0
 /* 800FD690 000FA270  90 01 00 04 */	stw r0, 4(r1)
 /* 800FD694 000FA274  94 21 FF B8 */	stwu r1, -0x48(r1)
@@ -17243,20 +17243,20 @@ ftKb_SpecialNSsLoop_IASA:
 /* 800FD7D4 000FA3B4  38 21 00 48 */	addi r1, r1, 0x48
 /* 800FD7D8 000FA3B8  7C 08 03 A6 */	mtlr r0
 /* 800FD7DC 000FA3BC  4E 80 00 20 */	blr
-.global ftKb_SpecialNSsEnd_IASA
-ftKb_SpecialNSsEnd_IASA:
+.global ftKb_SsSpecialNCancel_IASA
+ftKb_SsSpecialNCancel_IASA:
 /* 800FD7E0 000FA3C0  4E 80 00 20 */	blr
-.global ftKb_SpecialNSsFire_IASA
-ftKb_SpecialNSsFire_IASA:
+.global ftKb_SsSpecialN_IASA
+ftKb_SsSpecialN_IASA:
 /* 800FD7E4 000FA3C4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSsStart_IASA
-ftKb_SpecialAirNSsStart_IASA:
+.global ftKb_SsSpecialAirNStart_IASA
+ftKb_SsSpecialAirNStart_IASA:
 /* 800FD7E8 000FA3C8  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSsFire_IASA
-ftKb_SpecialAirNSsFire_IASA:
+.global ftKb_SsSpecialAirN_IASA
+ftKb_SsSpecialAirN_IASA:
 /* 800FD7EC 000FA3CC  4E 80 00 20 */	blr
-.global ftKb_SpecialNSsStart_Phys
-ftKb_SpecialNSsStart_Phys:
+.global ftKb_SsSpecialNStart_Phys
+ftKb_SsSpecialNStart_Phys:
 /* 800FD7F0 000FA3D0  7C 08 02 A6 */	mflr r0
 /* 800FD7F4 000FA3D4  90 01 00 04 */	stw r0, 4(r1)
 /* 800FD7F8 000FA3D8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -17265,8 +17265,8 @@ ftKb_SpecialNSsStart_Phys:
 /* 800FD804 000FA3E4  38 21 00 08 */	addi r1, r1, 8
 /* 800FD808 000FA3E8  7C 08 03 A6 */	mtlr r0
 /* 800FD80C 000FA3EC  4E 80 00 20 */	blr
-.global ftKb_SpecialNSsLoop_Phys
-ftKb_SpecialNSsLoop_Phys:
+.global ftKb_SsSpecialNHold_Phys
+ftKb_SsSpecialNHold_Phys:
 /* 800FD810 000FA3F0  7C 08 02 A6 */	mflr r0
 /* 800FD814 000FA3F4  90 01 00 04 */	stw r0, 4(r1)
 /* 800FD818 000FA3F8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -17275,8 +17275,8 @@ ftKb_SpecialNSsLoop_Phys:
 /* 800FD824 000FA404  38 21 00 08 */	addi r1, r1, 8
 /* 800FD828 000FA408  7C 08 03 A6 */	mtlr r0
 /* 800FD82C 000FA40C  4E 80 00 20 */	blr
-.global ftKb_SpecialNSsEnd_Phys
-ftKb_SpecialNSsEnd_Phys:
+.global ftKb_SsSpecialNCancel_Phys
+ftKb_SsSpecialNCancel_Phys:
 /* 800FD830 000FA410  7C 08 02 A6 */	mflr r0
 /* 800FD834 000FA414  90 01 00 04 */	stw r0, 4(r1)
 /* 800FD838 000FA418  94 21 FF F8 */	stwu r1, -8(r1)
@@ -17285,8 +17285,8 @@ ftKb_SpecialNSsEnd_Phys:
 /* 800FD844 000FA424  38 21 00 08 */	addi r1, r1, 8
 /* 800FD848 000FA428  7C 08 03 A6 */	mtlr r0
 /* 800FD84C 000FA42C  4E 80 00 20 */	blr
-.global ftKb_SpecialNSsFire_Phys
-ftKb_SpecialNSsFire_Phys:
+.global ftKb_SsSpecialN_Phys
+ftKb_SsSpecialN_Phys:
 /* 800FD850 000FA430  7C 08 02 A6 */	mflr r0
 /* 800FD854 000FA434  90 01 00 04 */	stw r0, 4(r1)
 /* 800FD858 000FA438  94 21 FF F8 */	stwu r1, -8(r1)
@@ -17295,8 +17295,8 @@ ftKb_SpecialNSsFire_Phys:
 /* 800FD864 000FA444  38 21 00 08 */	addi r1, r1, 8
 /* 800FD868 000FA448  7C 08 03 A6 */	mtlr r0
 /* 800FD86C 000FA44C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSsStart_Phys
-ftKb_SpecialAirNSsStart_Phys:
+.global ftKb_SsSpecialAirNStart_Phys
+ftKb_SsSpecialAirNStart_Phys:
 /* 800FD870 000FA450  7C 08 02 A6 */	mflr r0
 /* 800FD874 000FA454  90 01 00 04 */	stw r0, 4(r1)
 /* 800FD878 000FA458  94 21 FF F8 */	stwu r1, -8(r1)
@@ -17305,8 +17305,8 @@ ftKb_SpecialAirNSsStart_Phys:
 /* 800FD884 000FA464  38 21 00 08 */	addi r1, r1, 8
 /* 800FD888 000FA468  7C 08 03 A6 */	mtlr r0
 /* 800FD88C 000FA46C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSsFire_Phys
-ftKb_SpecialAirNSsFire_Phys:
+.global ftKb_SsSpecialAirN_Phys
+ftKb_SsSpecialAirN_Phys:
 /* 800FD890 000FA470  7C 08 02 A6 */	mflr r0
 /* 800FD894 000FA474  90 01 00 04 */	stw r0, 4(r1)
 /* 800FD898 000FA478  94 21 FF F8 */	stwu r1, -8(r1)
@@ -17315,8 +17315,8 @@ ftKb_SpecialAirNSsFire_Phys:
 /* 800FD8A4 000FA484  38 21 00 08 */	addi r1, r1, 8
 /* 800FD8A8 000FA488  7C 08 03 A6 */	mtlr r0
 /* 800FD8AC 000FA48C  4E 80 00 20 */	blr
-.global ftKb_SpecialNSsStart_Coll
-ftKb_SpecialNSsStart_Coll:
+.global ftKb_SsSpecialNStart_Coll
+ftKb_SsSpecialNStart_Coll:
 /* 800FD8B0 000FA490  7C 08 02 A6 */	mflr r0
 /* 800FD8B4 000FA494  90 01 00 04 */	stw r0, 4(r1)
 /* 800FD8B8 000FA498  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -17352,8 +17352,8 @@ ftKb_SpecialNSsStart_Coll:
 /* 800FD92C 000FA50C  38 21 00 20 */	addi r1, r1, 0x20
 /* 800FD930 000FA510  7C 08 03 A6 */	mtlr r0
 /* 800FD934 000FA514  4E 80 00 20 */	blr
-.global ftKb_SpecialNSsLoop_Coll
-ftKb_SpecialNSsLoop_Coll:
+.global ftKb_SsSpecialNHold_Coll
+ftKb_SsSpecialNHold_Coll:
 /* 800FD938 000FA518  7C 08 02 A6 */	mflr r0
 /* 800FD93C 000FA51C  90 01 00 04 */	stw r0, 4(r1)
 /* 800FD940 000FA520  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -17397,8 +17397,8 @@ ftKb_SpecialNSsLoop_Coll:
 /* 800FD9D4 000FA5B4  38 21 00 20 */	addi r1, r1, 0x20
 /* 800FD9D8 000FA5B8  7C 08 03 A6 */	mtlr r0
 /* 800FD9DC 000FA5BC  4E 80 00 20 */	blr
-.global ftKb_SpecialNSsEnd_Coll
-ftKb_SpecialNSsEnd_Coll:
+.global ftKb_SsSpecialNCancel_Coll
+ftKb_SsSpecialNCancel_Coll:
 /* 800FD9E0 000FA5C0  7C 08 02 A6 */	mflr r0
 /* 800FD9E4 000FA5C4  90 01 00 04 */	stw r0, 4(r1)
 /* 800FD9E8 000FA5C8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -17434,8 +17434,8 @@ ftKb_SpecialNSsEnd_Coll:
 /* 800FDA5C 000FA63C  38 21 00 20 */	addi r1, r1, 0x20
 /* 800FDA60 000FA640  7C 08 03 A6 */	mtlr r0
 /* 800FDA64 000FA644  4E 80 00 20 */	blr
-.global ftKb_SpecialNSsFire_Coll
-ftKb_SpecialNSsFire_Coll:
+.global ftKb_SsSpecialN_Coll
+ftKb_SsSpecialN_Coll:
 /* 800FDA68 000FA648  7C 08 02 A6 */	mflr r0
 /* 800FDA6C 000FA64C  90 01 00 04 */	stw r0, 4(r1)
 /* 800FDA70 000FA650  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -17471,8 +17471,8 @@ ftKb_SpecialNSsFire_Coll:
 /* 800FDAE4 000FA6C4  38 21 00 20 */	addi r1, r1, 0x20
 /* 800FDAE8 000FA6C8  7C 08 03 A6 */	mtlr r0
 /* 800FDAEC 000FA6CC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSsStart_Coll
-ftKb_SpecialAirNSsStart_Coll:
+.global ftKb_SsSpecialAirNStart_Coll
+ftKb_SsSpecialAirNStart_Coll:
 /* 800FDAF0 000FA6D0  7C 08 02 A6 */	mflr r0
 /* 800FDAF4 000FA6D4  90 01 00 04 */	stw r0, 4(r1)
 /* 800FDAF8 000FA6D8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -17508,8 +17508,8 @@ ftKb_SpecialAirNSsStart_Coll:
 /* 800FDB6C 000FA74C  38 21 00 20 */	addi r1, r1, 0x20
 /* 800FDB70 000FA750  7C 08 03 A6 */	mtlr r0
 /* 800FDB74 000FA754  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSsFire_Coll
-ftKb_SpecialAirNSsFire_Coll:
+.global ftKb_SsSpecialAirN_Coll
+ftKb_SsSpecialAirN_Coll:
 /* 800FDB78 000FA758  7C 08 02 A6 */	mflr r0
 /* 800FDB7C 000FA75C  90 01 00 04 */	stw r0, 4(r1)
 /* 800FDB80 000FA760  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -18093,8 +18093,8 @@ ftKb_SpecialNFx_800FE240:
 /* 800FE354 000FAF34  38 21 00 38 */	addi r1, r1, 0x38
 /* 800FE358 000FAF38  7C 08 03 A6 */	mtlr r0
 /* 800FE35C 000FAF3C  4E 80 00 20 */	blr
-.global ftKb_SpecialNFxStart_Anim
-ftKb_SpecialNFxStart_Anim:
+.global ftKb_FxSpecialNStart_Anim
+ftKb_FxSpecialNStart_Anim:
 /* 800FE360 000FAF40  7C 08 02 A6 */	mflr r0
 /* 800FE364 000FAF44  38 80 00 01 */	li r4, 1
 /* 800FE368 000FAF48  90 01 00 04 */	stw r0, 4(r1)
@@ -18159,8 +18159,8 @@ ftKb_SpecialNFxStart_Anim:
 /* 800FE444 000FB024  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FE448 000FB028  7C 08 03 A6 */	mtlr r0
 /* 800FE44C 000FB02C  4E 80 00 20 */	blr
-.global ftKb_SpecialNFxLoop_Anim
-ftKb_SpecialNFxLoop_Anim:
+.global ftKb_FxSpecialNLoop_Anim
+ftKb_FxSpecialNLoop_Anim:
 /* 800FE450 000FB030  7C 08 02 A6 */	mflr r0
 /* 800FE454 000FB034  38 80 00 01 */	li r4, 1
 /* 800FE458 000FB038  90 01 00 04 */	stw r0, 4(r1)
@@ -18263,8 +18263,8 @@ ftKb_SpecialNFxLoop_Anim:
 /* 800FE5BC 000FB19C  38 21 00 30 */	addi r1, r1, 0x30
 /* 800FE5C0 000FB1A0  7C 08 03 A6 */	mtlr r0
 /* 800FE5C4 000FB1A4  4E 80 00 20 */	blr
-.global ftKb_SpecialNFxEnd_Anim
-ftKb_SpecialNFxEnd_Anim:
+.global ftKb_FxSpecialNEnd_Anim
+ftKb_FxSpecialNEnd_Anim:
 /* 800FE5C8 000FB1A8  7C 08 02 A6 */	mflr r0
 /* 800FE5CC 000FB1AC  90 01 00 04 */	stw r0, 4(r1)
 /* 800FE5D0 000FB1B0  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -18317,8 +18317,8 @@ ftKb_SpecialNFxEnd_Anim:
 /* 800FE67C 000FB25C  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FE680 000FB260  7C 08 03 A6 */	mtlr r0
 /* 800FE684 000FB264  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNFxStart_Anim
-ftKb_SpecialAirNFxStart_Anim:
+.global ftKb_FxSpecialAirNStart_Anim
+ftKb_FxSpecialAirNStart_Anim:
 /* 800FE688 000FB268  7C 08 02 A6 */	mflr r0
 /* 800FE68C 000FB26C  38 80 00 01 */	li r4, 1
 /* 800FE690 000FB270  90 01 00 04 */	stw r0, 4(r1)
@@ -18383,8 +18383,8 @@ ftKb_SpecialAirNFxStart_Anim:
 /* 800FE76C 000FB34C  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FE770 000FB350  7C 08 03 A6 */	mtlr r0
 /* 800FE774 000FB354  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNFxLoop_Anim
-ftKb_SpecialAirNFxLoop_Anim:
+.global ftKb_FxSpecialAirNLoop_Anim
+ftKb_FxSpecialAirNLoop_Anim:
 /* 800FE778 000FB358  7C 08 02 A6 */	mflr r0
 /* 800FE77C 000FB35C  38 80 00 01 */	li r4, 1
 /* 800FE780 000FB360  90 01 00 04 */	stw r0, 4(r1)
@@ -18502,8 +18502,8 @@ ftKb_SpecialAirNFxLoop_Anim:
 /* 800FE920 000FB500  7C 08 03 A6 */	mtlr r0
 /* 800FE924 000FB504  4E 80 00 20 */	blr
 
-.global ftKb_SpecialAirNFxEnd_Anim
-ftKb_SpecialAirNFxEnd_Anim:
+.global ftKb_FxSpecialAirNEnd_Anim
+ftKb_FxSpecialAirNEnd_Anim:
 /* 800FE928 000FB508  7C 08 02 A6 */	mflr r0
 /* 800FE92C 000FB50C  90 01 00 04 */	stw r0, 4(r1)
 /* 800FE930 000FB510  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -18586,8 +18586,8 @@ ftKb_SpecialAirNFxEnd_Anim:
 /* 800FEA44 000FB624  38 21 00 38 */	addi r1, r1, 0x38
 /* 800FEA48 000FB628  7C 08 03 A6 */	mtlr r0
 /* 800FEA4C 000FB62C  4E 80 00 20 */	blr
-.global ftKb_SpecialNFxStart_IASA
-ftKb_SpecialNFxStart_IASA:
+.global ftKb_FxSpecialNStart_IASA
+ftKb_FxSpecialNStart_IASA:
 /* 800FEA50 000FB630  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 800FEA54 000FB634  80 03 22 00 */	lwz r0, 0x2200(r3)
 /* 800FEA58 000FB638  28 00 00 00 */	cmplwi r0, 0
@@ -18598,8 +18598,8 @@ ftKb_SpecialNFxStart_IASA:
 /* 800FEA6C 000FB64C  38 00 00 01 */	li r0, 1
 /* 800FEA70 000FB650  90 03 23 40 */	stw r0, 0x2340(r3)
 /* 800FEA74 000FB654  4E 80 00 20 */	blr
-.global ftKb_SpecialNFxLoop_IASA
-ftKb_SpecialNFxLoop_IASA:
+.global ftKb_FxSpecialNLoop_IASA
+ftKb_FxSpecialNLoop_IASA:
 /* 800FEA78 000FB658  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 800FEA7C 000FB65C  80 03 22 00 */	lwz r0, 0x2200(r3)
 /* 800FEA80 000FB660  28 00 00 00 */	cmplwi r0, 0
@@ -18610,11 +18610,11 @@ ftKb_SpecialNFxLoop_IASA:
 /* 800FEA94 000FB674  38 00 00 01 */	li r0, 1
 /* 800FEA98 000FB678  90 03 23 40 */	stw r0, 0x2340(r3)
 /* 800FEA9C 000FB67C  4E 80 00 20 */	blr
-.global ftKb_SpecialNFxEnd_IASA
-ftKb_SpecialNFxEnd_IASA:
+.global ftKb_FxSpecialNEnd_IASA
+ftKb_FxSpecialNEnd_IASA:
 /* 800FEAA0 000FB680  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNFxStart_IASA
-ftKb_SpecialAirNFxStart_IASA:
+.global ftKb_FxSpecialAirNStart_IASA
+ftKb_FxSpecialAirNStart_IASA:
 /* 800FEAA4 000FB684  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 800FEAA8 000FB688  80 03 22 00 */	lwz r0, 0x2200(r3)
 /* 800FEAAC 000FB68C  28 00 00 00 */	cmplwi r0, 0
@@ -18625,8 +18625,8 @@ ftKb_SpecialAirNFxStart_IASA:
 /* 800FEAC0 000FB6A0  38 00 00 01 */	li r0, 1
 /* 800FEAC4 000FB6A4  90 03 23 40 */	stw r0, 0x2340(r3)
 /* 800FEAC8 000FB6A8  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNFxLoop_IASA
-ftKb_SpecialAirNFxLoop_IASA:
+.global ftKb_FxSpecialAirNLoop_IASA
+ftKb_FxSpecialAirNLoop_IASA:
 /* 800FEACC 000FB6AC  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 800FEAD0 000FB6B0  80 03 22 00 */	lwz r0, 0x2200(r3)
 /* 800FEAD4 000FB6B4  28 00 00 00 */	cmplwi r0, 0
@@ -18637,11 +18637,11 @@ ftKb_SpecialAirNFxLoop_IASA:
 /* 800FEAE8 000FB6C8  38 00 00 01 */	li r0, 1
 /* 800FEAEC 000FB6CC  90 03 23 40 */	stw r0, 0x2340(r3)
 /* 800FEAF0 000FB6D0  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNFxEnd_IASA
-ftKb_SpecialAirNFxEnd_IASA:
+.global ftKb_FxSpecialAirNEnd_IASA
+ftKb_FxSpecialAirNEnd_IASA:
 /* 800FEAF4 000FB6D4  4E 80 00 20 */	blr
-.global ftKb_SpecialNFxStart_Phys
-ftKb_SpecialNFxStart_Phys:
+.global ftKb_FxSpecialNStart_Phys
+ftKb_FxSpecialNStart_Phys:
 /* 800FEAF8 000FB6D8  7C 08 02 A6 */	mflr r0
 /* 800FEAFC 000FB6DC  90 01 00 04 */	stw r0, 4(r1)
 /* 800FEB00 000FB6E0  94 21 FF F8 */	stwu r1, -8(r1)
@@ -18650,8 +18650,8 @@ ftKb_SpecialNFxStart_Phys:
 /* 800FEB0C 000FB6EC  38 21 00 08 */	addi r1, r1, 8
 /* 800FEB10 000FB6F0  7C 08 03 A6 */	mtlr r0
 /* 800FEB14 000FB6F4  4E 80 00 20 */	blr
-.global ftKb_SpecialNFxLoop_Phys
-ftKb_SpecialNFxLoop_Phys:
+.global ftKb_FxSpecialNLoop_Phys
+ftKb_FxSpecialNLoop_Phys:
 /* 800FEB18 000FB6F8  7C 08 02 A6 */	mflr r0
 /* 800FEB1C 000FB6FC  90 01 00 04 */	stw r0, 4(r1)
 /* 800FEB20 000FB700  94 21 FF F8 */	stwu r1, -8(r1)
@@ -18661,8 +18661,8 @@ ftKb_SpecialNFxLoop_Phys:
 /* 800FEB30 000FB710  7C 08 03 A6 */	mtlr r0
 /* 800FEB34 000FB714  4E 80 00 20 */	blr
 
-.global ftKb_SpecialNFxEnd_Phys
-ftKb_SpecialNFxEnd_Phys:
+.global ftKb_FxSpecialNEnd_Phys
+ftKb_FxSpecialNEnd_Phys:
 /* 800FEB38 000FB718  7C 08 02 A6 */	mflr r0
 /* 800FEB3C 000FB71C  90 01 00 04 */	stw r0, 4(r1)
 /* 800FEB40 000FB720  94 21 FF F8 */	stwu r1, -8(r1)
@@ -18671,8 +18671,8 @@ ftKb_SpecialNFxEnd_Phys:
 /* 800FEB4C 000FB72C  38 21 00 08 */	addi r1, r1, 8
 /* 800FEB50 000FB730  7C 08 03 A6 */	mtlr r0
 /* 800FEB54 000FB734  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNFxStart_Phys
-ftKb_SpecialAirNFxStart_Phys:
+.global ftKb_FxSpecialAirNStart_Phys
+ftKb_FxSpecialAirNStart_Phys:
 /* 800FEB58 000FB738  7C 08 02 A6 */	mflr r0
 /* 800FEB5C 000FB73C  90 01 00 04 */	stw r0, 4(r1)
 /* 800FEB60 000FB740  94 21 FF F8 */	stwu r1, -8(r1)
@@ -18681,8 +18681,8 @@ ftKb_SpecialAirNFxStart_Phys:
 /* 800FEB6C 000FB74C  38 21 00 08 */	addi r1, r1, 8
 /* 800FEB70 000FB750  7C 08 03 A6 */	mtlr r0
 /* 800FEB74 000FB754  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNFxLoop_Phys
-ftKb_SpecialAirNFxLoop_Phys:
+.global ftKb_FxSpecialAirNLoop_Phys
+ftKb_FxSpecialAirNLoop_Phys:
 /* 800FEB78 000FB758  7C 08 02 A6 */	mflr r0
 /* 800FEB7C 000FB75C  90 01 00 04 */	stw r0, 4(r1)
 /* 800FEB80 000FB760  94 21 FF F8 */	stwu r1, -8(r1)
@@ -18691,8 +18691,8 @@ ftKb_SpecialAirNFxLoop_Phys:
 /* 800FEB8C 000FB76C  38 21 00 08 */	addi r1, r1, 8
 /* 800FEB90 000FB770  7C 08 03 A6 */	mtlr r0
 /* 800FEB94 000FB774  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNFxEnd_Phys
-ftKb_SpecialAirNFxEnd_Phys:
+.global ftKb_FxSpecialAirNEnd_Phys
+ftKb_FxSpecialAirNEnd_Phys:
 /* 800FEB98 000FB778  7C 08 02 A6 */	mflr r0
 /* 800FEB9C 000FB77C  90 01 00 04 */	stw r0, 4(r1)
 /* 800FEBA0 000FB780  94 21 FF F8 */	stwu r1, -8(r1)
@@ -18701,8 +18701,8 @@ ftKb_SpecialAirNFxEnd_Phys:
 /* 800FEBAC 000FB78C  38 21 00 08 */	addi r1, r1, 8
 /* 800FEBB0 000FB790  7C 08 03 A6 */	mtlr r0
 /* 800FEBB4 000FB794  4E 80 00 20 */	blr
-.global ftKb_SpecialNFxStart_Coll
-ftKb_SpecialNFxStart_Coll:
+.global ftKb_FxSpecialNStart_Coll
+ftKb_FxSpecialNStart_Coll:
 /* 800FEBB8 000FB798  7C 08 02 A6 */	mflr r0
 /* 800FEBBC 000FB79C  90 01 00 04 */	stw r0, 4(r1)
 /* 800FEBC0 000FB7A0  94 21 FF F8 */	stwu r1, -8(r1)
@@ -18711,8 +18711,8 @@ ftKb_SpecialNFxStart_Coll:
 /* 800FEBCC 000FB7AC  38 21 00 08 */	addi r1, r1, 8
 /* 800FEBD0 000FB7B0  7C 08 03 A6 */	mtlr r0
 /* 800FEBD4 000FB7B4  4E 80 00 20 */	blr
-.global ftKb_SpecialNFxLoop_Coll
-ftKb_SpecialNFxLoop_Coll:
+.global ftKb_FxSpecialNLoop_Coll
+ftKb_FxSpecialNLoop_Coll:
 /* 800FEBD8 000FB7B8  7C 08 02 A6 */	mflr r0
 /* 800FEBDC 000FB7BC  90 01 00 04 */	stw r0, 4(r1)
 /* 800FEBE0 000FB7C0  94 21 FF F8 */	stwu r1, -8(r1)
@@ -18721,8 +18721,8 @@ ftKb_SpecialNFxLoop_Coll:
 /* 800FEBEC 000FB7CC  38 21 00 08 */	addi r1, r1, 8
 /* 800FEBF0 000FB7D0  7C 08 03 A6 */	mtlr r0
 /* 800FEBF4 000FB7D4  4E 80 00 20 */	blr
-.global ftKb_SpecialNFxEnd_Coll
-ftKb_SpecialNFxEnd_Coll:
+.global ftKb_FxSpecialNEnd_Coll
+ftKb_FxSpecialNEnd_Coll:
 /* 800FEBF8 000FB7D8  7C 08 02 A6 */	mflr r0
 /* 800FEBFC 000FB7DC  90 01 00 04 */	stw r0, 4(r1)
 /* 800FEC00 000FB7E0  94 21 FF F8 */	stwu r1, -8(r1)
@@ -18731,32 +18731,32 @@ ftKb_SpecialNFxEnd_Coll:
 /* 800FEC0C 000FB7EC  38 21 00 08 */	addi r1, r1, 8
 /* 800FEC10 000FB7F0  7C 08 03 A6 */	mtlr r0
 /* 800FEC14 000FB7F4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNFxStart_Coll
-ftKb_SpecialAirNFxStart_Coll:
+.global ftKb_FxSpecialAirNStart_Coll
+ftKb_FxSpecialAirNStart_Coll:
 /* 800FEC18 000FB7F8  7C 08 02 A6 */	mflr r0
 /* 800FEC1C 000FB7FC  90 01 00 04 */	stw r0, 4(r1)
 /* 800FEC20 000FB800  94 21 FF F8 */	stwu r1, -8(r1)
-/* 800FEC24 000FB804  4B F8 3F 55 */	bl ftCo_ZairCatch_Coll
+/* 800FEC24 000FB804  4B F8 3F 55 */	bl ftCo_AirCatchHit_Coll
 /* 800FEC28 000FB808  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 800FEC2C 000FB80C  38 21 00 08 */	addi r1, r1, 8
 /* 800FEC30 000FB810  7C 08 03 A6 */	mtlr r0
 /* 800FEC34 000FB814  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNFxLoop_Coll
-ftKb_SpecialAirNFxLoop_Coll:
+.global ftKb_FxSpecialAirNLoop_Coll
+ftKb_FxSpecialAirNLoop_Coll:
 /* 800FEC38 000FB818  7C 08 02 A6 */	mflr r0
 /* 800FEC3C 000FB81C  90 01 00 04 */	stw r0, 4(r1)
 /* 800FEC40 000FB820  94 21 FF F8 */	stwu r1, -8(r1)
-/* 800FEC44 000FB824  4B F8 3F 35 */	bl ftCo_ZairCatch_Coll
+/* 800FEC44 000FB824  4B F8 3F 35 */	bl ftCo_AirCatchHit_Coll
 /* 800FEC48 000FB828  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 800FEC4C 000FB82C  38 21 00 08 */	addi r1, r1, 8
 /* 800FEC50 000FB830  7C 08 03 A6 */	mtlr r0
 /* 800FEC54 000FB834  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNFxEnd_Coll
-ftKb_SpecialAirNFxEnd_Coll:
+.global ftKb_FxSpecialAirNEnd_Coll
+ftKb_FxSpecialAirNEnd_Coll:
 /* 800FEC58 000FB838  7C 08 02 A6 */	mflr r0
 /* 800FEC5C 000FB83C  90 01 00 04 */	stw r0, 4(r1)
 /* 800FEC60 000FB840  94 21 FF F8 */	stwu r1, -8(r1)
-/* 800FEC64 000FB844  4B F8 3F 15 */	bl ftCo_ZairCatch_Coll
+/* 800FEC64 000FB844  4B F8 3F 15 */	bl ftCo_AirCatchHit_Coll
 /* 800FEC68 000FB848  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 800FEC6C 000FB84C  38 21 00 08 */	addi r1, r1, 8
 /* 800FEC70 000FB850  7C 08 03 A6 */	mtlr r0
@@ -18903,8 +18903,8 @@ ftKb_SpecialNNs_800FEDD0:
 /* 800FEE64 000FBA44  38 21 00 30 */	addi r1, r1, 0x30
 /* 800FEE68 000FBA48  7C 08 03 A6 */	mtlr r0
 /* 800FEE6C 000FBA4C  4E 80 00 20 */	blr
-.global ftKb_SpecialNNsStart_Anim
-ftKb_SpecialNNsStart_Anim:
+.global ftKb_NsSpecialNStart_Anim
+ftKb_NsSpecialNStart_Anim:
 /* 800FEE70 000FBA50  7C 08 02 A6 */	mflr r0
 /* 800FEE74 000FBA54  90 01 00 04 */	stw r0, 4(r1)
 /* 800FEE78 000FBA58  94 21 FF B8 */	stwu r1, -0x48(r1)
@@ -18965,8 +18965,8 @@ ftKb_SpecialNNsStart_Anim:
 /* 800FEF4C 000FBB2C  38 21 00 48 */	addi r1, r1, 0x48
 /* 800FEF50 000FBB30  7C 08 03 A6 */	mtlr r0
 /* 800FEF54 000FBB34  4E 80 00 20 */	blr
-.global ftKb_SpecialNNsCharge_Anim
-ftKb_SpecialNNsCharge_Anim:
+.global ftKb_NsSpecialNHold_Anim
+ftKb_NsSpecialNHold_Anim:
 /* 800FEF58 000FBB38  7C 08 02 A6 */	mflr r0
 /* 800FEF5C 000FBB3C  90 01 00 04 */	stw r0, 4(r1)
 /* 800FEF60 000FBB40  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -19050,8 +19050,8 @@ ftKb_SpecialNNsCharge_Anim:
 /* 800FF080 000FBC60  38 21 00 18 */	addi r1, r1, 0x18
 /* 800FF084 000FBC64  7C 08 03 A6 */	mtlr r0
 /* 800FF088 000FBC68  4E 80 00 20 */	blr
-.global ftKb_SpecialNNsEnd_Anim
-ftKb_SpecialNNsEnd_Anim:
+.global ftKb_NsSpecialNEnd_Anim
+ftKb_NsSpecialNEnd_Anim:
 /* 800FF08C 000FBC6C  7C 08 02 A6 */	mflr r0
 /* 800FF090 000FBC70  38 80 00 00 */	li r4, 0
 /* 800FF094 000FBC74  90 01 00 04 */	stw r0, 4(r1)
@@ -19085,8 +19085,8 @@ ftKb_SpecialNNsEnd_Anim:
 /* 800FF100 000FBCE0  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FF104 000FBCE4  7C 08 03 A6 */	mtlr r0
 /* 800FF108 000FBCE8  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNNsStart_Anim
-ftKb_SpecialAirNNsStart_Anim:
+.global ftKb_NsSpecialAirNStart_Anim
+ftKb_NsSpecialAirNStart_Anim:
 /* 800FF10C 000FBCEC  7C 08 02 A6 */	mflr r0
 /* 800FF110 000FBCF0  90 01 00 04 */	stw r0, 4(r1)
 /* 800FF114 000FBCF4  94 21 FF B8 */	stwu r1, -0x48(r1)
@@ -19147,8 +19147,8 @@ ftKb_SpecialAirNNsStart_Anim:
 /* 800FF1E8 000FBDC8  38 21 00 48 */	addi r1, r1, 0x48
 /* 800FF1EC 000FBDCC  7C 08 03 A6 */	mtlr r0
 /* 800FF1F0 000FBDD0  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNNsCharge_Anim
-ftKb_SpecialAirNNsCharge_Anim:
+.global ftKb_NsSpecialAirNHold_Anim
+ftKb_NsSpecialAirNHold_Anim:
 /* 800FF1F4 000FBDD4  7C 08 02 A6 */	mflr r0
 /* 800FF1F8 000FBDD8  90 01 00 04 */	stw r0, 4(r1)
 /* 800FF1FC 000FBDDC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -19232,8 +19232,8 @@ ftKb_SpecialAirNNsCharge_Anim:
 /* 800FF31C 000FBEFC  38 21 00 18 */	addi r1, r1, 0x18
 /* 800FF320 000FBF00  7C 08 03 A6 */	mtlr r0
 /* 800FF324 000FBF04  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNNsEnd_Anim
-ftKb_SpecialAirNNsEnd_Anim:
+.global ftKb_NsSpecialAirNEnd_Anim
+ftKb_NsSpecialAirNEnd_Anim:
 /* 800FF328 000FBF08  7C 08 02 A6 */	mflr r0
 /* 800FF32C 000FBF0C  38 80 00 00 */	li r4, 0
 /* 800FF330 000FBF10  90 01 00 04 */	stw r0, 4(r1)
@@ -19281,11 +19281,11 @@ ftKb_SpecialAirNNsEnd_Anim:
 /* 800FF3D0 000FBFB0  38 21 00 30 */	addi r1, r1, 0x30
 /* 800FF3D4 000FBFB4  7C 08 03 A6 */	mtlr r0
 /* 800FF3D8 000FBFB8  4E 80 00 20 */	blr
-.global ftKb_SpecialNNsStart_IASA
-ftKb_SpecialNNsStart_IASA:
+.global ftKb_NsSpecialNStart_IASA
+ftKb_NsSpecialNStart_IASA:
 /* 800FF3DC 000FBFBC  4E 80 00 20 */	blr
-.global ftKb_SpecialNNsCharge_IASA
-ftKb_SpecialNNsCharge_IASA:
+.global ftKb_NsSpecialNHold_IASA
+ftKb_NsSpecialNHold_IASA:
 /* 800FF3E0 000FBFC0  80 A3 00 2C */	lwz r5, 0x2c(r3)
 /* 800FF3E4 000FBFC4  80 85 23 4C */	lwz r4, 0x234c(r5)
 /* 800FF3E8 000FBFC8  38 04 FF FF */	addi r0, r4, -1
@@ -19316,14 +19316,14 @@ ftKb_SpecialNNsCharge_IASA:
 /* 800FF444 000FC024  38 00 00 00 */	li r0, 0
 /* 800FF448 000FC028  90 03 22 A8 */	stw r0, 0x22a8(r3)
 /* 800FF44C 000FC02C  4E 80 00 20 */	blr
-.global ftKb_SpecialNNsEnd_IASA
-ftKb_SpecialNNsEnd_IASA:
+.global ftKb_NsSpecialNEnd_IASA
+ftKb_NsSpecialNEnd_IASA:
 /* 800FF450 000FC030  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNNsStart_IASA
-ftKb_SpecialAirNNsStart_IASA:
+.global ftKb_NsSpecialAirNStart_IASA
+ftKb_NsSpecialAirNStart_IASA:
 /* 800FF454 000FC034  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNNsCharge_IASA
-ftKb_SpecialAirNNsCharge_IASA:
+.global ftKb_NsSpecialAirNHold_IASA
+ftKb_NsSpecialAirNHold_IASA:
 /* 800FF458 000FC038  80 A3 00 2C */	lwz r5, 0x2c(r3)
 /* 800FF45C 000FC03C  80 85 23 4C */	lwz r4, 0x234c(r5)
 /* 800FF460 000FC040  38 04 FF FF */	addi r0, r4, -1
@@ -19354,11 +19354,11 @@ ftKb_SpecialAirNNsCharge_IASA:
 /* 800FF4BC 000FC09C  38 00 00 00 */	li r0, 0
 /* 800FF4C0 000FC0A0  90 03 22 A8 */	stw r0, 0x22a8(r3)
 /* 800FF4C4 000FC0A4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNNsEnd_IASA
-ftKb_SpecialAirNNsEnd_IASA:
+.global ftKb_NsSpecialAirNEnd_IASA
+ftKb_NsSpecialAirNEnd_IASA:
 /* 800FF4C8 000FC0A8  4E 80 00 20 */	blr
-.global ftKb_SpecialNNsStart_Phys
-ftKb_SpecialNNsStart_Phys:
+.global ftKb_NsSpecialNStart_Phys
+ftKb_NsSpecialNStart_Phys:
 /* 800FF4CC 000FC0AC  7C 08 02 A6 */	mflr r0
 /* 800FF4D0 000FC0B0  90 01 00 04 */	stw r0, 4(r1)
 /* 800FF4D4 000FC0B4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -19374,8 +19374,8 @@ ftKb_SpecialNNsStart_Phys:
 /* 800FF4F8 000FC0D8  38 21 00 08 */	addi r1, r1, 8
 /* 800FF4FC 000FC0DC  7C 08 03 A6 */	mtlr r0
 /* 800FF500 000FC0E0  4E 80 00 20 */	blr
-.global ftKb_SpecialNNsCharge_Phys
-ftKb_SpecialNNsCharge_Phys:
+.global ftKb_NsSpecialNHold_Phys
+ftKb_NsSpecialNHold_Phys:
 /* 800FF504 000FC0E4  7C 08 02 A6 */	mflr r0
 /* 800FF508 000FC0E8  90 01 00 04 */	stw r0, 4(r1)
 /* 800FF50C 000FC0EC  94 21 FF F8 */	stwu r1, -8(r1)
@@ -19384,8 +19384,8 @@ ftKb_SpecialNNsCharge_Phys:
 /* 800FF518 000FC0F8  38 21 00 08 */	addi r1, r1, 8
 /* 800FF51C 000FC0FC  7C 08 03 A6 */	mtlr r0
 /* 800FF520 000FC100  4E 80 00 20 */	blr
-.global ftKb_SpecialNNsEnd_Phys
-ftKb_SpecialNNsEnd_Phys:
+.global ftKb_NsSpecialNEnd_Phys
+ftKb_NsSpecialNEnd_Phys:
 /* 800FF524 000FC104  7C 08 02 A6 */	mflr r0
 /* 800FF528 000FC108  90 01 00 04 */	stw r0, 4(r1)
 /* 800FF52C 000FC10C  94 21 FF F8 */	stwu r1, -8(r1)
@@ -19394,8 +19394,8 @@ ftKb_SpecialNNsEnd_Phys:
 /* 800FF538 000FC118  38 21 00 08 */	addi r1, r1, 8
 /* 800FF53C 000FC11C  7C 08 03 A6 */	mtlr r0
 /* 800FF540 000FC120  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNNsStart_Phys
-ftKb_SpecialAirNNsStart_Phys:
+.global ftKb_NsSpecialAirNStart_Phys
+ftKb_NsSpecialAirNStart_Phys:
 /* 800FF544 000FC124  7C 08 02 A6 */	mflr r0
 /* 800FF548 000FC128  90 01 00 04 */	stw r0, 4(r1)
 /* 800FF54C 000FC12C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -19422,8 +19422,8 @@ ftKb_SpecialAirNNsStart_Phys:
 /* 800FF598 000FC178  38 21 00 20 */	addi r1, r1, 0x20
 /* 800FF59C 000FC17C  7C 08 03 A6 */	mtlr r0
 /* 800FF5A0 000FC180  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNNsCharge_Phys
-ftKb_SpecialAirNNsCharge_Phys:
+.global ftKb_NsSpecialAirNHold_Phys
+ftKb_NsSpecialAirNHold_Phys:
 /* 800FF5A4 000FC184  7C 08 02 A6 */	mflr r0
 /* 800FF5A8 000FC188  90 01 00 04 */	stw r0, 4(r1)
 /* 800FF5AC 000FC18C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -19450,8 +19450,8 @@ ftKb_SpecialAirNNsCharge_Phys:
 /* 800FF5F8 000FC1D8  38 21 00 20 */	addi r1, r1, 0x20
 /* 800FF5FC 000FC1DC  7C 08 03 A6 */	mtlr r0
 /* 800FF600 000FC1E0  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNNsEnd_Phys
-ftKb_SpecialAirNNsEnd_Phys:
+.global ftKb_NsSpecialAirNEnd_Phys
+ftKb_NsSpecialAirNEnd_Phys:
 /* 800FF604 000FC1E4  7C 08 02 A6 */	mflr r0
 /* 800FF608 000FC1E8  90 01 00 04 */	stw r0, 4(r1)
 /* 800FF60C 000FC1EC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -19478,8 +19478,8 @@ ftKb_SpecialAirNNsEnd_Phys:
 /* 800FF658 000FC238  38 21 00 20 */	addi r1, r1, 0x20
 /* 800FF65C 000FC23C  7C 08 03 A6 */	mtlr r0
 /* 800FF660 000FC240  4E 80 00 20 */	blr
-.global ftKb_SpecialNNsStart_Coll
-ftKb_SpecialNNsStart_Coll:
+.global ftKb_NsSpecialNStart_Coll
+ftKb_NsSpecialNStart_Coll:
 /* 800FF664 000FC244  7C 08 02 A6 */	mflr r0
 /* 800FF668 000FC248  90 01 00 04 */	stw r0, 4(r1)
 /* 800FF66C 000FC24C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -19508,8 +19508,8 @@ ftKb_SpecialNNsStart_Coll:
 /* 800FF6C4 000FC2A4  38 21 00 18 */	addi r1, r1, 0x18
 /* 800FF6C8 000FC2A8  7C 08 03 A6 */	mtlr r0
 /* 800FF6CC 000FC2AC  4E 80 00 20 */	blr
-.global ftKb_SpecialNNsCharge_Coll
-ftKb_SpecialNNsCharge_Coll:
+.global ftKb_NsSpecialNHold_Coll
+ftKb_NsSpecialNHold_Coll:
 /* 800FF6D0 000FC2B0  7C 08 02 A6 */	mflr r0
 /* 800FF6D4 000FC2B4  90 01 00 04 */	stw r0, 4(r1)
 /* 800FF6D8 000FC2B8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -19538,8 +19538,8 @@ ftKb_SpecialNNsCharge_Coll:
 /* 800FF730 000FC310  38 21 00 18 */	addi r1, r1, 0x18
 /* 800FF734 000FC314  7C 08 03 A6 */	mtlr r0
 /* 800FF738 000FC318  4E 80 00 20 */	blr
-.global ftKb_SpecialNNsEnd_Coll
-ftKb_SpecialNNsEnd_Coll:
+.global ftKb_NsSpecialNEnd_Coll
+ftKb_NsSpecialNEnd_Coll:
 /* 800FF73C 000FC31C  7C 08 02 A6 */	mflr r0
 /* 800FF740 000FC320  90 01 00 04 */	stw r0, 4(r1)
 /* 800FF744 000FC324  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -19568,8 +19568,8 @@ ftKb_SpecialNNsEnd_Coll:
 /* 800FF79C 000FC37C  38 21 00 18 */	addi r1, r1, 0x18
 /* 800FF7A0 000FC380  7C 08 03 A6 */	mtlr r0
 /* 800FF7A4 000FC384  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNNsStart_Coll
-ftKb_SpecialAirNNsStart_Coll:
+.global ftKb_NsSpecialAirNStart_Coll
+ftKb_NsSpecialAirNStart_Coll:
 /* 800FF7A8 000FC388  7C 08 02 A6 */	mflr r0
 /* 800FF7AC 000FC38C  90 01 00 04 */	stw r0, 4(r1)
 /* 800FF7B0 000FC390  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -19598,8 +19598,8 @@ ftKb_SpecialAirNNsStart_Coll:
 /* 800FF808 000FC3E8  38 21 00 18 */	addi r1, r1, 0x18
 /* 800FF80C 000FC3EC  7C 08 03 A6 */	mtlr r0
 /* 800FF810 000FC3F0  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNNsCharge_Coll
-ftKb_SpecialAirNNsCharge_Coll:
+.global ftKb_NsSpecialAirNHold_Coll
+ftKb_NsSpecialAirNHold_Coll:
 /* 800FF814 000FC3F4  7C 08 02 A6 */	mflr r0
 /* 800FF818 000FC3F8  90 01 00 04 */	stw r0, 4(r1)
 /* 800FF81C 000FC3FC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -19628,8 +19628,8 @@ ftKb_SpecialAirNNsCharge_Coll:
 /* 800FF874 000FC454  38 21 00 18 */	addi r1, r1, 0x18
 /* 800FF878 000FC458  7C 08 03 A6 */	mtlr r0
 /* 800FF87C 000FC45C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNNsEnd_Coll
-ftKb_SpecialAirNNsEnd_Coll:
+.global ftKb_NsSpecialAirNEnd_Coll
+ftKb_NsSpecialAirNEnd_Coll:
 /* 800FF880 000FC460  7C 08 02 A6 */	mflr r0
 /* 800FF884 000FC464  90 01 00 04 */	stw r0, 4(r1)
 /* 800FF888 000FC468  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -19808,8 +19808,8 @@ ftKb_SpecialNDk_800FFA10:
 /* 800FFB18 000FC6F8  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FFB1C 000FC6FC  7C 08 03 A6 */	mtlr r0
 /* 800FFB20 000FC700  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkChargeStart_Anim
-ftKb_SpecialNDkChargeStart_Anim:
+.global ftKb_DkSpecialNStart_Anim
+ftKb_DkSpecialNStart_Anim:
 /* 800FFB24 000FC704  7C 08 02 A6 */	mflr r0
 /* 800FFB28 000FC708  90 01 00 04 */	stw r0, 4(r1)
 /* 800FFB2C 000FC70C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -19845,8 +19845,8 @@ ftKb_SpecialNDkChargeStart_Anim:
 /* 800FFBA0 000FC780  38 21 00 18 */	addi r1, r1, 0x18
 /* 800FFBA4 000FC784  7C 08 03 A6 */	mtlr r0
 /* 800FFBA8 000FC788  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkChargeLoop_Anim
-ftKb_SpecialNDkChargeLoop_Anim:
+.global ftKb_DkSpecialNLoop_Anim
+ftKb_DkSpecialNLoop_Anim:
 /* 800FFBAC 000FC78C  7C 08 02 A6 */	mflr r0
 /* 800FFBB0 000FC790  90 01 00 04 */	stw r0, 4(r1)
 /* 800FFBB4 000FC794  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -19887,8 +19887,8 @@ ftKb_SpecialNDkChargeLoop_Anim:
 /* 800FFC3C 000FC81C  38 21 00 28 */	addi r1, r1, 0x28
 /* 800FFC40 000FC820  7C 08 03 A6 */	mtlr r0
 /* 800FFC44 000FC824  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkChargeStop_Anim
-ftKb_SpecialNDkChargeStop_Anim:
+.global ftKb_DkSpecialNCancel_Anim
+ftKb_DkSpecialNCancel_Anim:
 /* 800FFC48 000FC828  7C 08 02 A6 */	mflr r0
 /* 800FFC4C 000FC82C  90 01 00 04 */	stw r0, 4(r1)
 /* 800FFC50 000FC830  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -19909,8 +19909,8 @@ ftKb_SpecialNDkChargeStop_Anim:
 /* 800FFC88 000FC868  38 21 00 18 */	addi r1, r1, 0x18
 /* 800FFC8C 000FC86C  7C 08 03 A6 */	mtlr r0
 /* 800FFC90 000FC870  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkEarlyPunch_Anim
-ftKb_SpecialNDkEarlyPunch_Anim:
+.global ftKb_DkSpecialN_Anim
+ftKb_DkSpecialN_Anim:
 /* 800FFC94 000FC874  7C 08 02 A6 */	mflr r0
 /* 800FFC98 000FC878  90 01 00 04 */	stw r0, 4(r1)
 /* 800FFC9C 000FC87C  94 21 FF B8 */	stwu r1, -0x48(r1)
@@ -20038,8 +20038,8 @@ ftKb_SpecialNDkEarlyPunch_Anim:
 /* 800FFE60 000FCA40  38 21 00 48 */	addi r1, r1, 0x48
 /* 800FFE64 000FCA44  7C 08 03 A6 */	mtlr r0
 /* 800FFE68 000FCA48  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkFullChargePunch_Anim
-ftKb_SpecialNDkFullChargePunch_Anim:
+.global ftKb_DkSpecialNFull_Anim
+ftKb_DkSpecialNFull_Anim:
 /* 800FFE6C 000FCA4C  7C 08 02 A6 */	mflr r0
 /* 800FFE70 000FCA50  90 01 00 04 */	stw r0, 4(r1)
 /* 800FFE74 000FCA54  94 21 FF B8 */	stwu r1, -0x48(r1)
@@ -20129,8 +20129,8 @@ ftKb_SpecialNDkFullChargePunch_Anim:
 /* 800FFFAC 000FCB8C  38 21 00 48 */	addi r1, r1, 0x48
 /* 800FFFB0 000FCB90  7C 08 03 A6 */	mtlr r0
 /* 800FFFB4 000FCB94  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkChargeStart_Anim
-ftKb_SpecialAirNDkChargeStart_Anim:
+.global ftKb_DkSpecialAirNStart_Anim
+ftKb_DkSpecialAirNStart_Anim:
 /* 800FFFB8 000FCB98  7C 08 02 A6 */	mflr r0
 /* 800FFFBC 000FCB9C  90 01 00 04 */	stw r0, 4(r1)
 /* 800FFFC0 000FCBA0  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -20166,8 +20166,8 @@ ftKb_SpecialAirNDkChargeStart_Anim:
 /* 80100034 000FCC14  38 21 00 18 */	addi r1, r1, 0x18
 /* 80100038 000FCC18  7C 08 03 A6 */	mtlr r0
 /* 8010003C 000FCC1C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkChargeLoop_Anim
-ftKb_SpecialAirNDkChargeLoop_Anim:
+.global ftKb_DkSpecialAirNLoop_Anim
+ftKb_DkSpecialAirNLoop_Anim:
 /* 80100040 000FCC20  7C 08 02 A6 */	mflr r0
 /* 80100044 000FCC24  90 01 00 04 */	stw r0, 4(r1)
 /* 80100048 000FCC28  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -20208,8 +20208,8 @@ ftKb_SpecialAirNDkChargeLoop_Anim:
 /* 801000D0 000FCCB0  38 21 00 28 */	addi r1, r1, 0x28
 /* 801000D4 000FCCB4  7C 08 03 A6 */	mtlr r0
 /* 801000D8 000FCCB8  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkChargeStop_Anim
-ftKb_SpecialAirNDkChargeStop_Anim:
+.global ftKb_DkSpecialAirNCancel_Anim
+ftKb_DkSpecialAirNCancel_Anim:
 /* 801000DC 000FCCBC  7C 08 02 A6 */	mflr r0
 /* 801000E0 000FCCC0  90 01 00 04 */	stw r0, 4(r1)
 /* 801000E4 000FCCC4  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -20230,8 +20230,8 @@ ftKb_SpecialAirNDkChargeStop_Anim:
 /* 8010011C 000FCCFC  38 21 00 28 */	addi r1, r1, 0x28
 /* 80100120 000FCD00  7C 08 03 A6 */	mtlr r0
 /* 80100124 000FCD04  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkEarlyPunch_Anim
-ftKb_SpecialAirNDkEarlyPunch_Anim:
+.global ftKb_DkSpecialAirN_Anim
+ftKb_DkSpecialAirN_Anim:
 /* 80100128 000FCD08  7C 08 02 A6 */	mflr r0
 /* 8010012C 000FCD0C  90 01 00 04 */	stw r0, 4(r1)
 /* 80100130 000FCD10  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -20344,8 +20344,8 @@ ftKb_SpecialAirNDkEarlyPunch_Anim:
 /* 801002BC 000FCE9C  38 21 00 38 */	addi r1, r1, 0x38
 /* 801002C0 000FCEA0  7C 08 03 A6 */	mtlr r0
 /* 801002C4 000FCEA4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkFullChargePunch_Anim
-ftKb_SpecialAirNDkFullChargePunch_Anim:
+.global ftKb_DkSpecialAirNFull_Anim
+ftKb_DkSpecialAirNFull_Anim:
 /* 801002C8 000FCEA8  7C 08 02 A6 */	mflr r0
 /* 801002CC 000FCEAC  90 01 00 04 */	stw r0, 4(r1)
 /* 801002D0 000FCEB0  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -20420,11 +20420,11 @@ ftKb_SpecialAirNDkFullChargePunch_Anim:
 /* 801003D0 000FCFB0  38 21 00 30 */	addi r1, r1, 0x30
 /* 801003D4 000FCFB4  7C 08 03 A6 */	mtlr r0
 /* 801003D8 000FCFB8  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkChargeStart_IASA
-ftKb_SpecialNDkChargeStart_IASA:
+.global ftKb_DkSpecialNStart_IASA
+ftKb_DkSpecialNStart_IASA:
 /* 801003DC 000FCFBC  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkChargeLoop_IASA
-ftKb_SpecialNDkChargeLoop_IASA:
+.global ftKb_DkSpecialNLoop_IASA
+ftKb_DkSpecialNLoop_IASA:
 /* 801003E0 000FCFC0  7C 08 02 A6 */	mflr r0
 /* 801003E4 000FCFC4  90 01 00 04 */	stw r0, 4(r1)
 /* 801003E8 000FCFC8  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -20506,20 +20506,20 @@ ftKb_SpecialNDkChargeLoop_IASA:
 /* 8010050C 000FD0EC  38 21 00 28 */	addi r1, r1, 0x28
 /* 80100510 000FD0F0  7C 08 03 A6 */	mtlr r0
 /* 80100514 000FD0F4  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkChargeStop_IASA
-ftKb_SpecialNDkChargeStop_IASA:
+.global ftKb_DkSpecialNCancel_IASA
+ftKb_DkSpecialNCancel_IASA:
 /* 80100518 000FD0F8  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkEarlyPunch_IASA
-ftKb_SpecialNDkEarlyPunch_IASA:
+.global ftKb_DkSpecialN_IASA
+ftKb_DkSpecialN_IASA:
 /* 8010051C 000FD0FC  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkFullChargePunch_IASA
-ftKb_SpecialNDkFullChargePunch_IASA:
+.global ftKb_DkSpecialNFull_IASA
+ftKb_DkSpecialNFull_IASA:
 /* 80100520 000FD100  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkChargeStart_IASA
-ftKb_SpecialAirNDkChargeStart_IASA:
+.global ftKb_DkSpecialAirNStart_IASA
+ftKb_DkSpecialAirNStart_IASA:
 /* 80100524 000FD104  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkChargeLoop_IASA
-ftKb_SpecialAirNDkChargeLoop_IASA:
+.global ftKb_DkSpecialAirNLoop_IASA
+ftKb_DkSpecialAirNLoop_IASA:
 /* 80100528 000FD108  7C 08 02 A6 */	mflr r0
 /* 8010052C 000FD10C  90 01 00 04 */	stw r0, 4(r1)
 /* 80100530 000FD110  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -20598,17 +20598,17 @@ ftKb_SpecialAirNDkChargeLoop_IASA:
 /* 80100648 000FD228  38 21 00 28 */	addi r1, r1, 0x28
 /* 8010064C 000FD22C  7C 08 03 A6 */	mtlr r0
 /* 80100650 000FD230  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkChargeStop_IASA
-ftKb_SpecialAirNDkChargeStop_IASA:
+.global ftKb_DkSpecialAirNCancel_IASA
+ftKb_DkSpecialAirNCancel_IASA:
 /* 80100654 000FD234  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkEarlyPunch_IASA
-ftKb_SpecialAirNDkEarlyPunch_IASA:
+.global ftKb_DkSpecialAirN_IASA
+ftKb_DkSpecialAirN_IASA:
 /* 80100658 000FD238  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkFullChargePunch_IASA
-ftKb_SpecialAirNDkFullChargePunch_IASA:
+.global ftKb_DkSpecialAirNFull_IASA
+ftKb_DkSpecialAirNFull_IASA:
 /* 8010065C 000FD23C  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkChargeStart_Phys
-ftKb_SpecialNDkChargeStart_Phys:
+.global ftKb_DkSpecialNStart_Phys
+ftKb_DkSpecialNStart_Phys:
 /* 80100660 000FD240  7C 08 02 A6 */	mflr r0
 /* 80100664 000FD244  90 01 00 04 */	stw r0, 4(r1)
 /* 80100668 000FD248  94 21 FF F8 */	stwu r1, -8(r1)
@@ -20617,8 +20617,8 @@ ftKb_SpecialNDkChargeStart_Phys:
 /* 80100674 000FD254  38 21 00 08 */	addi r1, r1, 8
 /* 80100678 000FD258  7C 08 03 A6 */	mtlr r0
 /* 8010067C 000FD25C  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkChargeLoop_Phys
-ftKb_SpecialNDkChargeLoop_Phys:
+.global ftKb_DkSpecialNLoop_Phys
+ftKb_DkSpecialNLoop_Phys:
 /* 80100680 000FD260  7C 08 02 A6 */	mflr r0
 /* 80100684 000FD264  90 01 00 04 */	stw r0, 4(r1)
 /* 80100688 000FD268  94 21 FF F8 */	stwu r1, -8(r1)
@@ -20627,8 +20627,8 @@ ftKb_SpecialNDkChargeLoop_Phys:
 /* 80100694 000FD274  38 21 00 08 */	addi r1, r1, 8
 /* 80100698 000FD278  7C 08 03 A6 */	mtlr r0
 /* 8010069C 000FD27C  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkChargeStop_Phys
-ftKb_SpecialNDkChargeStop_Phys:
+.global ftKb_DkSpecialNCancel_Phys
+ftKb_DkSpecialNCancel_Phys:
 /* 801006A0 000FD280  7C 08 02 A6 */	mflr r0
 /* 801006A4 000FD284  90 01 00 04 */	stw r0, 4(r1)
 /* 801006A8 000FD288  94 21 FF F8 */	stwu r1, -8(r1)
@@ -20637,8 +20637,8 @@ ftKb_SpecialNDkChargeStop_Phys:
 /* 801006B4 000FD294  38 21 00 08 */	addi r1, r1, 8
 /* 801006B8 000FD298  7C 08 03 A6 */	mtlr r0
 /* 801006BC 000FD29C  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkEarlyPunch_Phys
-ftKb_SpecialNDkEarlyPunch_Phys:
+.global ftKb_DkSpecialN_Phys
+ftKb_DkSpecialN_Phys:
 /* 801006C0 000FD2A0  7C 08 02 A6 */	mflr r0
 /* 801006C4 000FD2A4  90 01 00 04 */	stw r0, 4(r1)
 /* 801006C8 000FD2A8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -20647,8 +20647,8 @@ ftKb_SpecialNDkEarlyPunch_Phys:
 /* 801006D4 000FD2B4  38 21 00 08 */	addi r1, r1, 8
 /* 801006D8 000FD2B8  7C 08 03 A6 */	mtlr r0
 /* 801006DC 000FD2BC  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkFullChargePunch_Phys
-ftKb_SpecialNDkFullChargePunch_Phys:
+.global ftKb_DkSpecialNFull_Phys
+ftKb_DkSpecialNFull_Phys:
 /* 801006E0 000FD2C0  7C 08 02 A6 */	mflr r0
 /* 801006E4 000FD2C4  90 01 00 04 */	stw r0, 4(r1)
 /* 801006E8 000FD2C8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -20657,8 +20657,8 @@ ftKb_SpecialNDkFullChargePunch_Phys:
 /* 801006F4 000FD2D4  38 21 00 08 */	addi r1, r1, 8
 /* 801006F8 000FD2D8  7C 08 03 A6 */	mtlr r0
 /* 801006FC 000FD2DC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkChargeStart_Phys
-ftKb_SpecialAirNDkChargeStart_Phys:
+.global ftKb_DkSpecialAirNStart_Phys
+ftKb_DkSpecialAirNStart_Phys:
 /* 80100700 000FD2E0  7C 08 02 A6 */	mflr r0
 /* 80100704 000FD2E4  90 01 00 04 */	stw r0, 4(r1)
 /* 80100708 000FD2E8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -20667,8 +20667,8 @@ ftKb_SpecialAirNDkChargeStart_Phys:
 /* 80100714 000FD2F4  38 21 00 08 */	addi r1, r1, 8
 /* 80100718 000FD2F8  7C 08 03 A6 */	mtlr r0
 /* 8010071C 000FD2FC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkChargeLoop_Phys
-ftKb_SpecialAirNDkChargeLoop_Phys:
+.global ftKb_DkSpecialAirNLoop_Phys
+ftKb_DkSpecialAirNLoop_Phys:
 /* 80100720 000FD300  7C 08 02 A6 */	mflr r0
 /* 80100724 000FD304  90 01 00 04 */	stw r0, 4(r1)
 /* 80100728 000FD308  94 21 FF F8 */	stwu r1, -8(r1)
@@ -20677,8 +20677,8 @@ ftKb_SpecialAirNDkChargeLoop_Phys:
 /* 80100734 000FD314  38 21 00 08 */	addi r1, r1, 8
 /* 80100738 000FD318  7C 08 03 A6 */	mtlr r0
 /* 8010073C 000FD31C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkChargeStop_Phys
-ftKb_SpecialAirNDkChargeStop_Phys:
+.global ftKb_DkSpecialAirNCancel_Phys
+ftKb_DkSpecialAirNCancel_Phys:
 /* 80100740 000FD320  7C 08 02 A6 */	mflr r0
 /* 80100744 000FD324  90 01 00 04 */	stw r0, 4(r1)
 /* 80100748 000FD328  94 21 FF F8 */	stwu r1, -8(r1)
@@ -20687,8 +20687,8 @@ ftKb_SpecialAirNDkChargeStop_Phys:
 /* 80100754 000FD334  38 21 00 08 */	addi r1, r1, 8
 /* 80100758 000FD338  7C 08 03 A6 */	mtlr r0
 /* 8010075C 000FD33C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkEarlyPunch_Phys
-ftKb_SpecialAirNDkEarlyPunch_Phys:
+.global ftKb_DkSpecialAirN_Phys
+ftKb_DkSpecialAirN_Phys:
 /* 80100760 000FD340  7C 08 02 A6 */	mflr r0
 /* 80100764 000FD344  90 01 00 04 */	stw r0, 4(r1)
 /* 80100768 000FD348  94 21 FF F8 */	stwu r1, -8(r1)
@@ -20697,8 +20697,8 @@ ftKb_SpecialAirNDkEarlyPunch_Phys:
 /* 80100774 000FD354  38 21 00 08 */	addi r1, r1, 8
 /* 80100778 000FD358  7C 08 03 A6 */	mtlr r0
 /* 8010077C 000FD35C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkFullChargePunch_Phys
-ftKb_SpecialAirNDkFullChargePunch_Phys:
+.global ftKb_DkSpecialAirNFull_Phys
+ftKb_DkSpecialAirNFull_Phys:
 /* 80100780 000FD360  7C 08 02 A6 */	mflr r0
 /* 80100784 000FD364  90 01 00 04 */	stw r0, 4(r1)
 /* 80100788 000FD368  94 21 FF F8 */	stwu r1, -8(r1)
@@ -20707,8 +20707,8 @@ ftKb_SpecialAirNDkFullChargePunch_Phys:
 /* 80100794 000FD374  38 21 00 08 */	addi r1, r1, 8
 /* 80100798 000FD378  7C 08 03 A6 */	mtlr r0
 /* 8010079C 000FD37C  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkChargeStart_Coll
-ftKb_SpecialNDkChargeStart_Coll:
+.global ftKb_DkSpecialNStart_Coll
+ftKb_DkSpecialNStart_Coll:
 /* 801007A0 000FD380  7C 08 02 A6 */	mflr r0
 /* 801007A4 000FD384  90 01 00 04 */	stw r0, 4(r1)
 /* 801007A8 000FD388  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -20750,8 +20750,8 @@ ftKb_SpecialNDkChargeStart_Coll:
 /* 80100834 000FD414  38 21 00 20 */	addi r1, r1, 0x20
 /* 80100838 000FD418  7C 08 03 A6 */	mtlr r0
 /* 8010083C 000FD41C  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkChargeLoop_Coll
-ftKb_SpecialNDkChargeLoop_Coll:
+.global ftKb_DkSpecialNLoop_Coll
+ftKb_DkSpecialNLoop_Coll:
 /* 80100840 000FD420  7C 08 02 A6 */	mflr r0
 /* 80100844 000FD424  90 01 00 04 */	stw r0, 4(r1)
 /* 80100848 000FD428  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -20793,8 +20793,8 @@ ftKb_SpecialNDkChargeLoop_Coll:
 /* 801008D4 000FD4B4  38 21 00 20 */	addi r1, r1, 0x20
 /* 801008D8 000FD4B8  7C 08 03 A6 */	mtlr r0
 /* 801008DC 000FD4BC  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkChargeStop_Coll
-ftKb_SpecialNDkChargeStop_Coll:
+.global ftKb_DkSpecialNCancel_Coll
+ftKb_DkSpecialNCancel_Coll:
 /* 801008E0 000FD4C0  7C 08 02 A6 */	mflr r0
 /* 801008E4 000FD4C4  90 01 00 04 */	stw r0, 4(r1)
 /* 801008E8 000FD4C8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -20836,8 +20836,8 @@ ftKb_SpecialNDkChargeStop_Coll:
 /* 80100974 000FD554  38 21 00 20 */	addi r1, r1, 0x20
 /* 80100978 000FD558  7C 08 03 A6 */	mtlr r0
 /* 8010097C 000FD55C  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkEarlyPunch_Coll
-ftKb_SpecialNDkEarlyPunch_Coll:
+.global ftKb_DkSpecialN_Coll
+ftKb_DkSpecialN_Coll:
 /* 80100980 000FD560  7C 08 02 A6 */	mflr r0
 /* 80100984 000FD564  90 01 00 04 */	stw r0, 4(r1)
 /* 80100988 000FD568  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -20879,8 +20879,8 @@ ftKb_SpecialNDkEarlyPunch_Coll:
 /* 80100A14 000FD5F4  38 21 00 20 */	addi r1, r1, 0x20
 /* 80100A18 000FD5F8  7C 08 03 A6 */	mtlr r0
 /* 80100A1C 000FD5FC  4E 80 00 20 */	blr
-.global ftKb_SpecialNDkFullChargePunch_Coll
-ftKb_SpecialNDkFullChargePunch_Coll:
+.global ftKb_DkSpecialNFull_Coll
+ftKb_DkSpecialNFull_Coll:
 /* 80100A20 000FD600  7C 08 02 A6 */	mflr r0
 /* 80100A24 000FD604  90 01 00 04 */	stw r0, 4(r1)
 /* 80100A28 000FD608  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -20922,8 +20922,8 @@ ftKb_SpecialNDkFullChargePunch_Coll:
 /* 80100AB4 000FD694  38 21 00 20 */	addi r1, r1, 0x20
 /* 80100AB8 000FD698  7C 08 03 A6 */	mtlr r0
 /* 80100ABC 000FD69C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkChargeStart_Coll
-ftKb_SpecialAirNDkChargeStart_Coll:
+.global ftKb_DkSpecialAirNStart_Coll
+ftKb_DkSpecialAirNStart_Coll:
 /* 80100AC0 000FD6A0  7C 08 02 A6 */	mflr r0
 /* 80100AC4 000FD6A4  90 01 00 04 */	stw r0, 4(r1)
 /* 80100AC8 000FD6A8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -20965,8 +20965,8 @@ ftKb_SpecialAirNDkChargeStart_Coll:
 /* 80100B54 000FD734  38 21 00 20 */	addi r1, r1, 0x20
 /* 80100B58 000FD738  7C 08 03 A6 */	mtlr r0
 /* 80100B5C 000FD73C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkChargeLoop_Coll
-ftKb_SpecialAirNDkChargeLoop_Coll:
+.global ftKb_DkSpecialAirNLoop_Coll
+ftKb_DkSpecialAirNLoop_Coll:
 /* 80100B60 000FD740  7C 08 02 A6 */	mflr r0
 /* 80100B64 000FD744  90 01 00 04 */	stw r0, 4(r1)
 /* 80100B68 000FD748  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -21008,8 +21008,8 @@ ftKb_SpecialAirNDkChargeLoop_Coll:
 /* 80100BF4 000FD7D4  38 21 00 20 */	addi r1, r1, 0x20
 /* 80100BF8 000FD7D8  7C 08 03 A6 */	mtlr r0
 /* 80100BFC 000FD7DC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkChargeStop_Coll
-ftKb_SpecialAirNDkChargeStop_Coll:
+.global ftKb_DkSpecialAirNCancel_Coll
+ftKb_DkSpecialAirNCancel_Coll:
 /* 80100C00 000FD7E0  7C 08 02 A6 */	mflr r0
 /* 80100C04 000FD7E4  90 01 00 04 */	stw r0, 4(r1)
 /* 80100C08 000FD7E8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -21051,8 +21051,8 @@ ftKb_SpecialAirNDkChargeStop_Coll:
 /* 80100C94 000FD874  38 21 00 20 */	addi r1, r1, 0x20
 /* 80100C98 000FD878  7C 08 03 A6 */	mtlr r0
 /* 80100C9C 000FD87C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkEarlyPunch_Coll
-ftKb_SpecialAirNDkEarlyPunch_Coll:
+.global ftKb_DkSpecialAirN_Coll
+ftKb_DkSpecialAirN_Coll:
 /* 80100CA0 000FD880  7C 08 02 A6 */	mflr r0
 /* 80100CA4 000FD884  90 01 00 04 */	stw r0, 4(r1)
 /* 80100CA8 000FD888  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -21094,8 +21094,8 @@ ftKb_SpecialAirNDkEarlyPunch_Coll:
 /* 80100D34 000FD914  38 21 00 20 */	addi r1, r1, 0x20
 /* 80100D38 000FD918  7C 08 03 A6 */	mtlr r0
 /* 80100D3C 000FD91C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNDkFullChargePunch_Coll
-ftKb_SpecialAirNDkFullChargePunch_Coll:
+.global ftKb_DkSpecialAirNFull_Coll
+ftKb_DkSpecialAirNFull_Coll:
 /* 80100D40 000FD920  7C 08 02 A6 */	mflr r0
 /* 80100D44 000FD924  90 01 00 04 */	stw r0, 4(r1)
 /* 80100D48 000FD928  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -21777,8 +21777,8 @@ ftKb_SpecialNPr_80101618:
 /* 801016C0 000FE2A0  38 21 00 30 */	addi r1, r1, 0x30
 /* 801016C4 000FE2A4  7C 08 03 A6 */	mtlr r0
 /* 801016C8 000FE2A8  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrChargeStart_Anim
-ftKb_SpecialNPrChargeStart_Anim:
+.global ftKb_PrSpecialNStart_Anim
+ftKb_PrSpecialNStart_Anim:
 /* 801016CC 000FE2AC  7C 08 02 A6 */	mflr r0
 /* 801016D0 000FE2B0  90 01 00 04 */	stw r0, 4(r1)
 /* 801016D4 000FE2B4  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -21837,8 +21837,8 @@ ftKb_SpecialNPrChargeStart_Anim:
 /* 801017A4 000FE384  38 21 00 28 */	addi r1, r1, 0x28
 /* 801017A8 000FE388  7C 08 03 A6 */	mtlr r0
 /* 801017AC 000FE38C  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrChargeLoop_Anim
-ftKb_SpecialNPrChargeLoop_Anim:
+.global ftKb_PrSpecialNLoop_Anim
+ftKb_PrSpecialNLoop_Anim:
 /* 801017B0 000FE390  7C 08 02 A6 */	mflr r0
 /* 801017B4 000FE394  38 80 00 00 */	li r4, 0
 /* 801017B8 000FE398  90 01 00 04 */	stw r0, 4(r1)
@@ -21953,8 +21953,8 @@ ftKb_SpecialNPrChargeLoop_Anim:
 /* 80101954 000FE534  38 21 00 40 */	addi r1, r1, 0x40
 /* 80101958 000FE538  7C 08 03 A6 */	mtlr r0
 /* 8010195C 000FE53C  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrFullyCharged_Anim
-ftKb_SpecialNPrFullyCharged_Anim:
+.global ftKb_PrSpecialNFull_Anim
+ftKb_PrSpecialNFull_Anim:
 /* 80101960 000FE540  7C 08 02 A6 */	mflr r0
 /* 80101964 000FE544  38 80 00 00 */	li r4, 0
 /* 80101968 000FE548  90 01 00 04 */	stw r0, 4(r1)
@@ -22052,8 +22052,8 @@ ftKb_SpecialNPrFullyCharged_Anim:
 /* 80101AC4 000FE6A4  38 21 00 40 */	addi r1, r1, 0x40
 /* 80101AC8 000FE6A8  7C 08 03 A6 */	mtlr r0
 /* 80101ACC 000FE6AC  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrChargeRelease_Anim
-ftKb_SpecialNPrChargeRelease_Anim:
+.global ftKb_PrSpecialN1_Anim
+ftKb_PrSpecialN1_Anim:
 /* 80101AD0 000FE6B0  7C 08 02 A6 */	mflr r0
 /* 80101AD4 000FE6B4  38 80 00 00 */	li r4, 0
 /* 80101AD8 000FE6B8  90 01 00 04 */	stw r0, 4(r1)
@@ -22319,8 +22319,8 @@ ftKb_SpecialNPrChargeRelease_Anim:
 /* 80101E94 000FEA74  38 21 00 70 */	addi r1, r1, 0x70
 /* 80101E98 000FEA78  7C 08 03 A6 */	mtlr r0
 /* 80101E9C 000FEA7C  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrTurnStart_Anim
-ftKb_SpecialNPrTurnStart_Anim:
+.global ftKb_PrSpecialNTurn_Anim
+ftKb_PrSpecialNTurn_Anim:
 /* 80101EA0 000FEA80  7C 08 02 A6 */	mflr r0
 /* 80101EA4 000FEA84  38 80 00 01 */	li r4, 1
 /* 80101EA8 000FEA88  90 01 00 04 */	stw r0, 4(r1)
@@ -22528,8 +22528,8 @@ ftKb_SpecialNPrTurnStart_Anim:
 /* 8010218C 000FED6C  38 21 00 50 */	addi r1, r1, 0x50
 /* 80102190 000FED70  7C 08 03 A6 */	mtlr r0
 /* 80102194 000FED74  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrEnd_Anim
-ftKb_SpecialNPrEnd_Anim:
+.global ftKb_PrSpecialNEnd_Anim
+ftKb_PrSpecialNEnd_Anim:
 /* 80102198 000FED78  7C 08 02 A6 */	mflr r0
 /* 8010219C 000FED7C  90 01 00 04 */	stw r0, 4(r1)
 /* 801021A0 000FED80  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -22729,8 +22729,8 @@ ftKb_SpecialNPrEnd_Anim:
 /* 80102464 000FF044  38 21 00 40 */	addi r1, r1, 0x40
 /* 80102468 000FF048  7C 08 03 A6 */	mtlr r0
 /* 8010246C 000FF04C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrChargeStart_Anim
-ftKb_SpecialAirNPrChargeStart_Anim:
+.global ftKb_PrSpecialAirNStart_Anim
+ftKb_PrSpecialAirNStart_Anim:
 /* 80102470 000FF050  7C 08 02 A6 */	mflr r0
 /* 80102474 000FF054  90 01 00 04 */	stw r0, 4(r1)
 /* 80102478 000FF058  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -22787,8 +22787,8 @@ ftKb_SpecialAirNPrChargeStart_Anim:
 /* 80102540 000FF120  38 21 00 28 */	addi r1, r1, 0x28
 /* 80102544 000FF124  7C 08 03 A6 */	mtlr r0
 /* 80102548 000FF128  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrChargeLoop_Anim
-ftKb_SpecialAirNPrChargeLoop_Anim:
+.global ftKb_PrSpecialAirNLoop_Anim
+ftKb_PrSpecialAirNLoop_Anim:
 /* 8010254C 000FF12C  7C 08 02 A6 */	mflr r0
 /* 80102550 000FF130  38 80 00 00 */	li r4, 0
 /* 80102554 000FF134  90 01 00 04 */	stw r0, 4(r1)
@@ -22903,8 +22903,8 @@ ftKb_SpecialAirNPrChargeLoop_Anim:
 /* 801026F0 000FF2D0  38 21 00 40 */	addi r1, r1, 0x40
 /* 801026F4 000FF2D4  7C 08 03 A6 */	mtlr r0
 /* 801026F8 000FF2D8  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrFullyCharged_Anim
-ftKb_SpecialAirNPrFullyCharged_Anim:
+.global ftKb_PrSpecialAirNFull_Anim
+ftKb_PrSpecialAirNFull_Anim:
 /* 801026FC 000FF2DC  7C 08 02 A6 */	mflr r0
 /* 80102700 000FF2E0  38 80 00 00 */	li r4, 0
 /* 80102704 000FF2E4  90 01 00 04 */	stw r0, 4(r1)
@@ -23002,8 +23002,8 @@ ftKb_SpecialAirNPrFullyCharged_Anim:
 /* 80102860 000FF440  38 21 00 40 */	addi r1, r1, 0x40
 /* 80102864 000FF444  7C 08 03 A6 */	mtlr r0
 /* 80102868 000FF448  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrChargeRelease_Anim
-ftKb_SpecialAirNPrChargeRelease_Anim:
+.global ftKb_PrSpecialAirN_Anim
+ftKb_PrSpecialAirN_Anim:
 /* 8010286C 000FF44C  7C 08 02 A6 */	mflr r0
 /* 80102870 000FF450  3C 80 80 3D */	lis r4, ftKb_Init_803CB710@ha
 /* 80102874 000FF454  90 01 00 04 */	stw r0, 4(r1)
@@ -23382,8 +23382,8 @@ ftKb_SpecialAirNPrChargeRelease_Anim:
 /* 80102DC4 000FF9A4  38 21 00 70 */	addi r1, r1, 0x70
 /* 80102DC8 000FF9A8  7C 08 03 A6 */	mtlr r0
 /* 80102DCC 000FF9AC  4E 80 00 20 */	blr
-.global ftKb_MS_488_Anim
-ftKb_MS_488_Anim:
+.global ftKb_PrSpecialN_Anim
+ftKb_PrSpecialN_Anim:
 /* 80102DD0 000FF9B0  7C 08 02 A6 */	mflr r0
 /* 80102DD4 000FF9B4  38 80 00 01 */	li r4, 1
 /* 80102DD8 000FF9B8  90 01 00 04 */	stw r0, 4(r1)
@@ -23574,8 +23574,8 @@ ftKb_MS_488_Anim:
 /* 8010307C 000FFC5C  38 21 00 48 */	addi r1, r1, 0x48
 /* 80103080 000FFC60  7C 08 03 A6 */	mtlr r0
 /* 80103084 000FFC64  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrEnd_Anim
-ftKb_SpecialAirNPrEnd_Anim:
+.global ftKb_PrSpecialAirNEndR_Anim
+ftKb_PrSpecialAirNEndR_Anim:
 /* 80103088 000FFC68  7C 08 02 A6 */	mflr r0
 /* 8010308C 000FFC6C  90 01 00 04 */	stw r0, 4(r1)
 /* 80103090 000FFC70  94 21 FF A8 */	stwu r1, -0x58(r1)
@@ -23781,8 +23781,8 @@ ftKb_SpecialAirNPrEnd_Anim:
 /* 80103368 000FFF48  38 21 00 58 */	addi r1, r1, 0x58
 /* 8010336C 000FFF4C  7C 08 03 A6 */	mtlr r0
 /* 80103370 000FFF50  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrHit_Anim
-ftKb_SpecialNPrHit_Anim:
+.global ftKb_PrSpecialNHit_Anim
+ftKb_PrSpecialNHit_Anim:
 /* 80103374 000FFF54  7C 08 02 A6 */	mflr r0
 /* 80103378 000FFF58  90 01 00 04 */	stw r0, 4(r1)
 /* 8010337C 000FFF5C  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -23946,11 +23946,11 @@ ftKb_SpecialNPrHit_Anim:
 /* 801035BC 0010019C  38 21 00 50 */	addi r1, r1, 0x50
 /* 801035C0 001001A0  7C 08 03 A6 */	mtlr r0
 /* 801035C4 001001A4  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrChargeStart_IASA
-ftKb_SpecialNPrChargeStart_IASA:
+.global ftKb_PrSpecialNStart_IASA
+ftKb_PrSpecialNStart_IASA:
 /* 801035C8 001001A8  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrChargeLoop_IASA
-ftKb_SpecialNPrChargeLoop_IASA:
+.global ftKb_PrSpecialNLoop_IASA
+ftKb_PrSpecialNLoop_IASA:
 /* 801035CC 001001AC  7C 08 02 A6 */	mflr r0
 /* 801035D0 001001B0  90 01 00 04 */	stw r0, 4(r1)
 /* 801035D4 001001B4  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -24046,8 +24046,8 @@ ftKb_SpecialNPrChargeLoop_IASA:
 /* 80103728 00100308  38 21 00 38 */	addi r1, r1, 0x38
 /* 8010372C 0010030C  7C 08 03 A6 */	mtlr r0
 /* 80103730 00100310  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrFullyCharged_IASA
-ftKb_SpecialNPrFullyCharged_IASA:
+.global ftKb_PrSpecialNFull_IASA
+ftKb_PrSpecialNFull_IASA:
 /* 80103734 00100314  7C 08 02 A6 */	mflr r0
 /* 80103738 00100318  90 01 00 04 */	stw r0, 4(r1)
 /* 8010373C 0010031C  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -24143,8 +24143,8 @@ ftKb_SpecialNPrFullyCharged_IASA:
 /* 80103890 00100470  38 21 00 38 */	addi r1, r1, 0x38
 /* 80103894 00100474  7C 08 03 A6 */	mtlr r0
 /* 80103898 00100478  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrChargeRelease_IASA
-ftKb_SpecialNPrChargeRelease_IASA:
+.global ftKb_PrSpecialN1_IASA
+ftKb_PrSpecialN1_IASA:
 /* 8010389C 0010047C  7C 08 02 A6 */	mflr r0
 /* 801038A0 00100480  90 01 00 04 */	stw r0, 4(r1)
 /* 801038A4 00100484  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -24252,17 +24252,17 @@ ftKb_SpecialNPrChargeRelease_IASA:
 /* 80103A18 001005F8  38 21 00 30 */	addi r1, r1, 0x30
 /* 80103A1C 001005FC  7C 08 03 A6 */	mtlr r0
 /* 80103A20 00100600  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrTurnStart_IASA
-ftKb_SpecialNPrTurnStart_IASA:
+.global ftKb_PrSpecialNTurn_IASA
+ftKb_PrSpecialNTurn_IASA:
 /* 80103A24 00100604  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrEnd_IASA
-ftKb_SpecialNPrEnd_IASA:
+.global ftKb_PrSpecialNEnd_IASA
+ftKb_PrSpecialNEnd_IASA:
 /* 80103A28 00100608  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrChargeStart_IASA
-ftKb_SpecialAirNPrChargeStart_IASA:
+.global ftKb_PrSpecialAirNStart_IASA
+ftKb_PrSpecialAirNStart_IASA:
 /* 80103A2C 0010060C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrChargeLoop_IASA
-ftKb_SpecialAirNPrChargeLoop_IASA:
+.global ftKb_PrSpecialAirNLoop_IASA
+ftKb_PrSpecialAirNLoop_IASA:
 /* 80103A30 00100610  7C 08 02 A6 */	mflr r0
 /* 80103A34 00100614  90 01 00 04 */	stw r0, 4(r1)
 /* 80103A38 00100618  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -24358,8 +24358,8 @@ ftKb_SpecialAirNPrChargeLoop_IASA:
 /* 80103B8C 0010076C  38 21 00 38 */	addi r1, r1, 0x38
 /* 80103B90 00100770  7C 08 03 A6 */	mtlr r0
 /* 80103B94 00100774  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrFullyCharged_IASA
-ftKb_SpecialAirNPrFullyCharged_IASA:
+.global ftKb_PrSpecialAirNFull_IASA
+ftKb_PrSpecialAirNFull_IASA:
 /* 80103B98 00100778  7C 08 02 A6 */	mflr r0
 /* 80103B9C 0010077C  90 01 00 04 */	stw r0, 4(r1)
 /* 80103BA0 00100780  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -24455,20 +24455,20 @@ ftKb_SpecialAirNPrFullyCharged_IASA:
 /* 80103CF4 001008D4  38 21 00 38 */	addi r1, r1, 0x38
 /* 80103CF8 001008D8  7C 08 03 A6 */	mtlr r0
 /* 80103CFC 001008DC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrChargeRelease_IASA
-ftKb_SpecialAirNPrChargeRelease_IASA:
+.global ftKb_PrSpecialAirN_IASA
+ftKb_PrSpecialAirN_IASA:
 /* 80103D00 001008E0  4E 80 00 20 */	blr
-.global ftKb_MS_488_IASA
-ftKb_MS_488_IASA:
+.global ftKb_PrSpecialN_IASA
+ftKb_PrSpecialN_IASA:
 /* 80103D04 001008E4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrEnd_IASA
-ftKb_SpecialAirNPrEnd_IASA:
+.global ftKb_PrSpecialAirNEndR_IASA
+ftKb_PrSpecialAirNEndR_IASA:
 /* 80103D08 001008E8  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrHit_IASA
-ftKb_SpecialNPrHit_IASA:
+.global ftKb_PrSpecialNHit_IASA
+ftKb_PrSpecialNHit_IASA:
 /* 80103D0C 001008EC  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrChargeStart_Phys
-ftKb_SpecialNPrChargeStart_Phys:
+.global ftKb_PrSpecialNStart_Phys
+ftKb_PrSpecialNStart_Phys:
 /* 80103D10 001008F0  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 80103D14 001008F4  C0 42 9A C0 */	lfs f2, ftKb_Init_804D94A0@sda21(r2)
 /* 80103D18 001008F8  D0 43 00 E4 */	stfs f2, 0xe4(r3)
@@ -24481,8 +24481,8 @@ ftKb_SpecialNPrChargeStart_Phys:
 /* 80103D34 00100914  D0 43 00 78 */	stfs f2, 0x78(r3)
 /* 80103D38 00100918  D0 43 00 74 */	stfs f2, 0x74(r3)
 /* 80103D3C 0010091C  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrChargeLoop_Phys
-ftKb_SpecialNPrChargeLoop_Phys:
+.global ftKb_PrSpecialNLoop_Phys
+ftKb_PrSpecialNLoop_Phys:
 /* 80103D40 00100920  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 80103D44 00100924  C0 42 9A C0 */	lfs f2, ftKb_Init_804D94A0@sda21(r2)
 /* 80103D48 00100928  D0 43 00 E4 */	stfs f2, 0xe4(r3)
@@ -24495,8 +24495,8 @@ ftKb_SpecialNPrChargeLoop_Phys:
 /* 80103D64 00100944  D0 43 00 78 */	stfs f2, 0x78(r3)
 /* 80103D68 00100948  D0 43 00 74 */	stfs f2, 0x74(r3)
 /* 80103D6C 0010094C  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrFullyCharged_Phys
-ftKb_SpecialNPrFullyCharged_Phys:
+.global ftKb_PrSpecialNFull_Phys
+ftKb_PrSpecialNFull_Phys:
 /* 80103D70 00100950  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 80103D74 00100954  C0 42 9A C0 */	lfs f2, ftKb_Init_804D94A0@sda21(r2)
 /* 80103D78 00100958  D0 43 00 E4 */	stfs f2, 0xe4(r3)
@@ -24509,8 +24509,8 @@ ftKb_SpecialNPrFullyCharged_Phys:
 /* 80103D94 00100974  D0 43 00 78 */	stfs f2, 0x78(r3)
 /* 80103D98 00100978  D0 43 00 74 */	stfs f2, 0x74(r3)
 /* 80103D9C 0010097C  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrChargeRelease_Phys
-ftKb_SpecialNPrChargeRelease_Phys:
+.global ftKb_PrSpecialN1_Phys
+ftKb_PrSpecialN1_Phys:
 /* 80103DA0 00100980  7C 08 02 A6 */	mflr r0
 /* 80103DA4 00100984  90 01 00 04 */	stw r0, 4(r1)
 /* 80103DA8 00100988  3C 00 43 30 */	lis r0, 0x4330
@@ -24657,8 +24657,8 @@ ftKb_SpecialNPrChargeRelease_Phys:
 /* 80103F9C 00100B7C  38 21 00 40 */	addi r1, r1, 0x40
 /* 80103FA0 00100B80  7C 08 03 A6 */	mtlr r0
 /* 80103FA4 00100B84  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrTurnStart_Phys
-ftKb_SpecialNPrTurnStart_Phys:
+.global ftKb_PrSpecialNTurn_Phys
+ftKb_PrSpecialNTurn_Phys:
 /* 80103FA8 00100B88  7C 08 02 A6 */	mflr r0
 /* 80103FAC 00100B8C  90 01 00 04 */	stw r0, 4(r1)
 /* 80103FB0 00100B90  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -24870,8 +24870,8 @@ ftKb_SpecialNPrTurnStart_Phys:
 /* 801042A0 00100E80  38 21 00 30 */	addi r1, r1, 0x30
 /* 801042A4 00100E84  7C 08 03 A6 */	mtlr r0
 /* 801042A8 00100E88  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrEnd_Phys
-ftKb_SpecialNPrEnd_Phys:
+.global ftKb_PrSpecialNEnd_Phys
+ftKb_PrSpecialNEnd_Phys:
 /* 801042AC 00100E8C  7C 08 02 A6 */	mflr r0
 /* 801042B0 00100E90  90 01 00 04 */	stw r0, 4(r1)
 /* 801042B4 00100E94  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -24887,8 +24887,8 @@ ftKb_SpecialNPrEnd_Phys:
 /* 801042DC 00100EBC  38 21 00 18 */	addi r1, r1, 0x18
 /* 801042E0 00100EC0  7C 08 03 A6 */	mtlr r0
 /* 801042E4 00100EC4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrChargeStart_Phys
-ftKb_SpecialAirNPrChargeStart_Phys:
+.global ftKb_PrSpecialAirNStart_Phys
+ftKb_PrSpecialAirNStart_Phys:
 /* 801042E8 00100EC8  7C 08 02 A6 */	mflr r0
 /* 801042EC 00100ECC  90 01 00 04 */	stw r0, 4(r1)
 /* 801042F0 00100ED0  94 21 FF F8 */	stwu r1, -8(r1)
@@ -24901,8 +24901,8 @@ ftKb_SpecialAirNPrChargeStart_Phys:
 /* 8010430C 00100EEC  38 21 00 08 */	addi r1, r1, 8
 /* 80104310 00100EF0  7C 08 03 A6 */	mtlr r0
 /* 80104314 00100EF4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrChargeLoop_Phys
-ftKb_SpecialAirNPrChargeLoop_Phys:
+.global ftKb_PrSpecialAirNLoop_Phys
+ftKb_PrSpecialAirNLoop_Phys:
 /* 80104318 00100EF8  7C 08 02 A6 */	mflr r0
 /* 8010431C 00100EFC  90 01 00 04 */	stw r0, 4(r1)
 /* 80104320 00100F00  94 21 FF F8 */	stwu r1, -8(r1)
@@ -24915,8 +24915,8 @@ ftKb_SpecialAirNPrChargeLoop_Phys:
 /* 8010433C 00100F1C  38 21 00 08 */	addi r1, r1, 8
 /* 80104340 00100F20  7C 08 03 A6 */	mtlr r0
 /* 80104344 00100F24  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrFullyCharged_Phys
-ftKb_SpecialAirNPrFullyCharged_Phys:
+.global ftKb_PrSpecialAirNFull_Phys
+ftKb_PrSpecialAirNFull_Phys:
 /* 80104348 00100F28  7C 08 02 A6 */	mflr r0
 /* 8010434C 00100F2C  90 01 00 04 */	stw r0, 4(r1)
 /* 80104350 00100F30  94 21 FF F8 */	stwu r1, -8(r1)
@@ -24929,8 +24929,8 @@ ftKb_SpecialAirNPrFullyCharged_Phys:
 /* 8010436C 00100F4C  38 21 00 08 */	addi r1, r1, 8
 /* 80104370 00100F50  7C 08 03 A6 */	mtlr r0
 /* 80104374 00100F54  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrChargeRelease_Phys
-ftKb_SpecialAirNPrChargeRelease_Phys:
+.global ftKb_PrSpecialAirN_Phys
+ftKb_PrSpecialAirN_Phys:
 /* 80104378 00100F58  7C 08 02 A6 */	mflr r0
 /* 8010437C 00100F5C  90 01 00 04 */	stw r0, 4(r1)
 /* 80104380 00100F60  3C 00 43 30 */	lis r0, 0x4330
@@ -25035,8 +25035,8 @@ ftKb_SpecialAirNPrChargeRelease_Phys:
 /* 801044EC 001010CC  38 21 00 48 */	addi r1, r1, 0x48
 /* 801044F0 001010D0  7C 08 03 A6 */	mtlr r0
 /* 801044F4 001010D4  4E 80 00 20 */	blr
-.global ftKb_MS_488_Phys
-ftKb_MS_488_Phys:
+.global ftKb_PrSpecialN_Phys
+ftKb_PrSpecialN_Phys:
 /* 801044F8 001010D8  7C 08 02 A6 */	mflr r0
 /* 801044FC 001010DC  90 01 00 04 */	stw r0, 4(r1)
 /* 80104500 001010E0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -25117,8 +25117,8 @@ ftKb_MS_488_Phys:
 /* 80104604 001011E4  38 21 00 20 */	addi r1, r1, 0x20
 /* 80104608 001011E8  7C 08 03 A6 */	mtlr r0
 /* 8010460C 001011EC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrEnd_Phys
-ftKb_SpecialAirNPrEnd_Phys:
+.global ftKb_PrSpecialAirNEndR_Phys
+ftKb_PrSpecialAirNEndR_Phys:
 /* 80104610 001011F0  7C 08 02 A6 */	mflr r0
 /* 80104614 001011F4  90 01 00 04 */	stw r0, 4(r1)
 /* 80104618 001011F8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -25131,8 +25131,8 @@ ftKb_SpecialAirNPrEnd_Phys:
 /* 80104634 00101214  38 21 00 08 */	addi r1, r1, 8
 /* 80104638 00101218  7C 08 03 A6 */	mtlr r0
 /* 8010463C 0010121C  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrHit_Phys
-ftKb_SpecialNPrHit_Phys:
+.global ftKb_PrSpecialNHit_Phys
+ftKb_PrSpecialNHit_Phys:
 /* 80104640 00101220  7C 08 02 A6 */	mflr r0
 /* 80104644 00101224  90 01 00 04 */	stw r0, 4(r1)
 /* 80104648 00101228  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -25159,8 +25159,8 @@ ftKb_SpecialNPrHit_Phys:
 /* 80104698 00101278  38 21 00 20 */	addi r1, r1, 0x20
 /* 8010469C 0010127C  7C 08 03 A6 */	mtlr r0
 /* 801046A0 00101280  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrChargeStart_Coll
-ftKb_SpecialNPrChargeStart_Coll:
+.global ftKb_PrSpecialNStart_Coll
+ftKb_PrSpecialNStart_Coll:
 /* 801046A4 00101284  7C 08 02 A6 */	mflr r0
 /* 801046A8 00101288  90 01 00 04 */	stw r0, 4(r1)
 /* 801046AC 0010128C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -25210,8 +25210,8 @@ ftKb_SpecialNPrChargeStart_Coll:
 /* 80104750 00101330  38 21 00 20 */	addi r1, r1, 0x20
 /* 80104754 00101334  7C 08 03 A6 */	mtlr r0
 /* 80104758 00101338  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrChargeLoop_Coll
-ftKb_SpecialNPrChargeLoop_Coll:
+.global ftKb_PrSpecialNLoop_Coll
+ftKb_PrSpecialNLoop_Coll:
 /* 8010475C 0010133C  7C 08 02 A6 */	mflr r0
 /* 80104760 00101340  90 01 00 04 */	stw r0, 4(r1)
 /* 80104764 00101344  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -25283,8 +25283,8 @@ ftKb_SpecialNPrChargeLoop_Coll:
 /* 80104858 00101438  38 21 00 20 */	addi r1, r1, 0x20
 /* 8010485C 0010143C  7C 08 03 A6 */	mtlr r0
 /* 80104860 00101440  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrFullyCharged_Coll
-ftKb_SpecialNPrFullyCharged_Coll:
+.global ftKb_PrSpecialNFull_Coll
+ftKb_PrSpecialNFull_Coll:
 /* 80104864 00101444  7C 08 02 A6 */	mflr r0
 /* 80104868 00101448  90 01 00 04 */	stw r0, 4(r1)
 /* 8010486C 0010144C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -25356,8 +25356,8 @@ ftKb_SpecialNPrFullyCharged_Coll:
 /* 80104960 00101540  38 21 00 20 */	addi r1, r1, 0x20
 /* 80104964 00101544  7C 08 03 A6 */	mtlr r0
 /* 80104968 00101548  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrChargeRelease_Coll
-ftKb_SpecialNPrChargeRelease_Coll:
+.global ftKb_PrSpecialN1_Coll
+ftKb_PrSpecialN1_Coll:
 /* 8010496C 0010154C  7C 08 02 A6 */	mflr r0
 /* 80104970 00101550  90 01 00 04 */	stw r0, 4(r1)
 /* 80104974 00101554  94 21 FF 88 */	stwu r1, -0x78(r1)
@@ -25607,8 +25607,8 @@ ftKb_SpecialNPrChargeRelease_Coll:
 /* 80104D08 001018E8  38 21 00 78 */	addi r1, r1, 0x78
 /* 80104D0C 001018EC  7C 08 03 A6 */	mtlr r0
 /* 80104D10 001018F0  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrTurnStart_Coll
-ftKb_SpecialNPrTurnStart_Coll:
+.global ftKb_PrSpecialNTurn_Coll
+ftKb_PrSpecialNTurn_Coll:
 /* 80104D14 001018F4  7C 08 02 A6 */	mflr r0
 /* 80104D18 001018F8  90 01 00 04 */	stw r0, 4(r1)
 /* 80104D1C 001018FC  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -25670,8 +25670,8 @@ ftKb_SpecialNPrTurnStart_Coll:
 /* 80104DEC 001019CC  38 21 00 28 */	addi r1, r1, 0x28
 /* 80104DF0 001019D0  7C 08 03 A6 */	mtlr r0
 /* 80104DF4 001019D4  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrEnd_Coll
-ftKb_SpecialNPrEnd_Coll:
+.global ftKb_PrSpecialNEnd_Coll
+ftKb_PrSpecialNEnd_Coll:
 /* 80104DF8 001019D8  7C 08 02 A6 */	mflr r0
 /* 80104DFC 001019DC  90 01 00 04 */	stw r0, 4(r1)
 /* 80104E00 001019E0  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -25697,8 +25697,8 @@ ftKb_SpecialNPrEnd_Coll:
 /* 80104E4C 00101A2C  38 21 00 18 */	addi r1, r1, 0x18
 /* 80104E50 00101A30  7C 08 03 A6 */	mtlr r0
 /* 80104E54 00101A34  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrChargeStartL_Coll
-ftKb_SpecialAirNPrChargeStartL_Coll:
+.global ftKb_PrSpecialAirNStart_Coll
+ftKb_PrSpecialAirNStart_Coll:
 /* 80104E58 00101A38  7C 08 02 A6 */	mflr r0
 /* 80104E5C 00101A3C  90 01 00 04 */	stw r0, 4(r1)
 /* 80104E60 00101A40  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -25748,8 +25748,8 @@ ftKb_SpecialAirNPrChargeStartL_Coll:
 /* 80104F04 00101AE4  38 21 00 20 */	addi r1, r1, 0x20
 /* 80104F08 00101AE8  7C 08 03 A6 */	mtlr r0
 /* 80104F0C 00101AEC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrChargeLoop_Coll
-ftKb_SpecialAirNPrChargeLoop_Coll:
+.global ftKb_PrSpecialAirNLoop_Coll
+ftKb_PrSpecialAirNLoop_Coll:
 /* 80104F10 00101AF0  7C 08 02 A6 */	mflr r0
 /* 80104F14 00101AF4  90 01 00 04 */	stw r0, 4(r1)
 /* 80104F18 00101AF8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -25821,8 +25821,8 @@ ftKb_SpecialAirNPrChargeLoop_Coll:
 /* 8010500C 00101BEC  38 21 00 20 */	addi r1, r1, 0x20
 /* 80105010 00101BF0  7C 08 03 A6 */	mtlr r0
 /* 80105014 00101BF4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrFullyCharged_Coll
-ftKb_SpecialAirNPrFullyCharged_Coll:
+.global ftKb_PrSpecialAirNFull_Coll
+ftKb_PrSpecialAirNFull_Coll:
 /* 80105018 00101BF8  7C 08 02 A6 */	mflr r0
 /* 8010501C 00101BFC  90 01 00 04 */	stw r0, 4(r1)
 /* 80105020 00101C00  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -25894,8 +25894,8 @@ ftKb_SpecialAirNPrFullyCharged_Coll:
 /* 80105114 00101CF4  38 21 00 20 */	addi r1, r1, 0x20
 /* 80105118 00101CF8  7C 08 03 A6 */	mtlr r0
 /* 8010511C 00101CFC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrChargeRelease_Coll
-ftKb_SpecialAirNPrChargeRelease_Coll:
+.global ftKb_PrSpecialAirN_Coll
+ftKb_PrSpecialAirN_Coll:
 /* 80105120 00101D00  7C 08 02 A6 */	mflr r0
 /* 80105124 00101D04  90 01 00 04 */	stw r0, 4(r1)
 /* 80105128 00101D08  94 21 FF 78 */	stwu r1, -0x88(r1)
@@ -26305,8 +26305,8 @@ ftKb_SpecialAirNPrChargeRelease_Coll:
 /* 801056F0 001022D0  38 21 00 88 */	addi r1, r1, 0x88
 /* 801056F4 001022D4  7C 08 03 A6 */	mtlr r0
 /* 801056F8 001022D8  4E 80 00 20 */	blr
-.global ftKb_MS_488_Coll
-ftKb_MS_488_Coll:
+.global ftKb_PrSpecialN_Coll
+ftKb_PrSpecialN_Coll:
 /* 801056FC 001022DC  7C 08 02 A6 */	mflr r0
 /* 80105700 001022E0  90 01 00 04 */	stw r0, 4(r1)
 /* 80105704 001022E4  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -26356,8 +26356,8 @@ ftKb_MS_488_Coll:
 /* 801057B0 00102390  38 21 00 28 */	addi r1, r1, 0x28
 /* 801057B4 00102394  7C 08 03 A6 */	mtlr r0
 /* 801057B8 00102398  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPrEndL_Coll
-ftKb_SpecialAirNPrEndL_Coll:
+.global ftKb_PrSpecialAirNEndR_Coll
+ftKb_PrSpecialAirNEndR_Coll:
 /* 801057BC 0010239C  7C 08 02 A6 */	mflr r0
 /* 801057C0 001023A0  90 01 00 04 */	stw r0, 4(r1)
 /* 801057C4 001023A4  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -26383,8 +26383,8 @@ ftKb_SpecialAirNPrEndL_Coll:
 /* 80105810 001023F0  38 21 00 18 */	addi r1, r1, 0x18
 /* 80105814 001023F4  7C 08 03 A6 */	mtlr r0
 /* 80105818 001023F8  4E 80 00 20 */	blr
-.global ftKb_SpecialNPrHit_Coll
-ftKb_SpecialNPrHit_Coll:
+.global ftKb_PrSpecialNHit_Coll
+ftKb_PrSpecialNHit_Coll:
 /* 8010581C 001023FC  7C 08 02 A6 */	mflr r0
 /* 80105820 00102400  90 01 00 04 */	stw r0, 4(r1)
 /* 80105824 00102404  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -26666,8 +26666,8 @@ ftKb_SpecialNZd_80105BA8:
 /* 80105C30 00102810  38 21 00 30 */	addi r1, r1, 0x30
 /* 80105C34 00102814  7C 08 03 A6 */	mtlr r0
 /* 80105C38 00102818  4E 80 00 20 */	blr
-.global ftKb_SpecialNZd_Anim
-ftKb_SpecialNZd_Anim:
+.global ftKb_ZdSpecialN_Anim
+ftKb_ZdSpecialN_Anim:
 /* 80105C3C 0010281C  7C 08 02 A6 */	mflr r0
 /* 80105C40 00102820  90 01 00 04 */	stw r0, 4(r1)
 /* 80105C44 00102824  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -26708,8 +26708,8 @@ ftKb_SpecialNZd_Anim:
 /* 80105CC4 001028A4  38 21 00 28 */	addi r1, r1, 0x28
 /* 80105CC8 001028A8  7C 08 03 A6 */	mtlr r0
 /* 80105CCC 001028AC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNZd_Anim
-ftKb_SpecialAirNZd_Anim:
+.global ftKb_ZdSpecialAirN_Anim
+ftKb_ZdSpecialAirN_Anim:
 /* 80105CD0 001028B0  7C 08 02 A6 */	mflr r0
 /* 80105CD4 001028B4  90 01 00 04 */	stw r0, 4(r1)
 /* 80105CD8 001028B8  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -26750,14 +26750,14 @@ ftKb_SpecialAirNZd_Anim:
 /* 80105D58 00102938  38 21 00 28 */	addi r1, r1, 0x28
 /* 80105D5C 0010293C  7C 08 03 A6 */	mtlr r0
 /* 80105D60 00102940  4E 80 00 20 */	blr
-.global ftKb_SpecialNZd_IASA
-ftKb_SpecialNZd_IASA:
+.global ftKb_ZdSpecialN_IASA
+ftKb_ZdSpecialN_IASA:
 /* 80105D64 00102944  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNZd_IASA
-ftKb_SpecialAirNZd_IASA:
+.global ftKb_ZdSpecialAirN_IASA
+ftKb_ZdSpecialAirN_IASA:
 /* 80105D68 00102948  4E 80 00 20 */	blr
-.global ftKb_SpecialNZd_Phys
-ftKb_SpecialNZd_Phys:
+.global ftKb_ZdSpecialN_Phys
+ftKb_ZdSpecialN_Phys:
 /* 80105D6C 0010294C  7C 08 02 A6 */	mflr r0
 /* 80105D70 00102950  90 01 00 04 */	stw r0, 4(r1)
 /* 80105D74 00102954  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -26771,8 +26771,8 @@ ftKb_SpecialNZd_Phys:
 /* 80105D94 00102974  38 21 00 18 */	addi r1, r1, 0x18
 /* 80105D98 00102978  7C 08 03 A6 */	mtlr r0
 /* 80105D9C 0010297C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNZd_Phys
-ftKb_SpecialAirNZd_Phys:
+.global ftKb_ZdSpecialAirN_Phys
+ftKb_ZdSpecialAirN_Phys:
 /* 80105DA0 00102980  7C 08 02 A6 */	mflr r0
 /* 80105DA4 00102984  90 01 00 04 */	stw r0, 4(r1)
 /* 80105DA8 00102988  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -26804,8 +26804,8 @@ ftKb_SpecialAirNZd_Phys:
 /* 80105E08 001029E8  38 21 00 20 */	addi r1, r1, 0x20
 /* 80105E0C 001029EC  7C 08 03 A6 */	mtlr r0
 /* 80105E10 001029F0  4E 80 00 20 */	blr
-.global ftKb_SpecialNZd_Coll
-ftKb_SpecialNZd_Coll:
+.global ftKb_ZdSpecialN_Coll
+ftKb_ZdSpecialN_Coll:
 /* 80105E14 001029F4  7C 08 02 A6 */	mflr r0
 /* 80105E18 001029F8  90 01 00 04 */	stw r0, 4(r1)
 /* 80105E1C 001029FC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -26822,8 +26822,8 @@ ftKb_SpecialNZd_Coll:
 /* 80105E44 00102A24  38 21 00 18 */	addi r1, r1, 0x18
 /* 80105E48 00102A28  7C 08 03 A6 */	mtlr r0
 /* 80105E4C 00102A2C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNZd_Coll
-ftKb_SpecialAirNZd_Coll:
+.global ftKb_ZdSpecialAirN_Coll
+ftKb_ZdSpecialAirN_Coll:
 /* 80105E50 00102A30  7C 08 02 A6 */	mflr r0
 /* 80105E54 00102A34  90 01 00 04 */	stw r0, 4(r1)
 /* 80105E58 00102A38  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -27135,8 +27135,8 @@ ftKb_SpecialNSk_801061E4:
 /* 80106290 00102E70  38 21 00 20 */	addi r1, r1, 0x20
 /* 80106294 00102E74  7C 08 03 A6 */	mtlr r0
 /* 80106298 00102E78  4E 80 00 20 */	blr
-.global ftKb_SpecialNSkStartCharge_Anim
-ftKb_SpecialNSkStartCharge_Anim:
+.global ftKb_SkSpecialNStart_Anim
+ftKb_SkSpecialNStart_Anim:
 /* 8010629C 00102E7C  7C 08 02 A6 */	mflr r0
 /* 801062A0 00102E80  90 01 00 04 */	stw r0, 4(r1)
 /* 801062A4 00102E84  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -27176,8 +27176,8 @@ ftKb_SpecialNSkStartCharge_Anim:
 /* 80106328 00102F08  38 21 00 20 */	addi r1, r1, 0x20
 /* 8010632C 00102F0C  7C 08 03 A6 */	mtlr r0
 /* 80106330 00102F10  4E 80 00 20 */	blr
-.global ftKb_SpecialNSkChargeLoop_Anim
-ftKb_SpecialNSkChargeLoop_Anim:
+.global ftKb_SkSpecialNLoop_Anim
+ftKb_SkSpecialNLoop_Anim:
 /* 80106334 00102F14  7C 08 02 A6 */	mflr r0
 /* 80106338 00102F18  90 01 00 04 */	stw r0, 4(r1)
 /* 8010633C 00102F1C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -27224,8 +27224,8 @@ ftKb_SpecialNSkChargeLoop_Anim:
 /* 801063D4 00102FB4  38 21 00 20 */	addi r1, r1, 0x20
 /* 801063D8 00102FB8  7C 08 03 A6 */	mtlr r0
 /* 801063DC 00102FBC  4E 80 00 20 */	blr
-.global ftKb_SpecialNSkEndCharge_Anim
-ftKb_SpecialNSkEndCharge_Anim:
+.global ftKb_SkSpecialNCancel_Anim
+ftKb_SkSpecialNCancel_Anim:
 /* 801063E0 00102FC0  7C 08 02 A6 */	mflr r0
 /* 801063E4 00102FC4  90 01 00 04 */	stw r0, 4(r1)
 /* 801063E8 00102FC8  38 00 00 00 */	li r0, 0
@@ -27245,8 +27245,8 @@ ftKb_SpecialNSkEndCharge_Anim:
 /* 8010641C 00102FFC  38 21 00 20 */	addi r1, r1, 0x20
 /* 80106420 00103000  7C 08 03 A6 */	mtlr r0
 /* 80106424 00103004  4E 80 00 20 */	blr
-.global ftKb_SpecialNSkFire_Anim
-ftKb_SpecialNSkFire_Anim:
+.global ftKb_SkSpecialNEnd_Anim
+ftKb_SkSpecialNEnd_Anim:
 /* 80106428 00103008  7C 08 02 A6 */	mflr r0
 /* 8010642C 0010300C  90 01 00 04 */	stw r0, 4(r1)
 /* 80106430 00103010  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -27287,8 +27287,8 @@ ftKb_SpecialNSk_80106474:
 /* 801064A0 00103080  38 21 00 38 */	addi r1, r1, 0x38
 /* 801064A4 00103084  7C 08 03 A6 */	mtlr r0
 /* 801064A8 00103088  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSkStartCharge_Anim
-ftKb_SpecialAirNSkStartCharge_Anim:
+.global ftKb_SkSpecialAirNStart_Anim
+ftKb_SkSpecialAirNStart_Anim:
 /* 801064AC 0010308C  7C 08 02 A6 */	mflr r0
 /* 801064B0 00103090  90 01 00 04 */	stw r0, 4(r1)
 /* 801064B4 00103094  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -27328,8 +27328,8 @@ ftKb_SpecialAirNSkStartCharge_Anim:
 /* 80106538 00103118  38 21 00 20 */	addi r1, r1, 0x20
 /* 8010653C 0010311C  7C 08 03 A6 */	mtlr r0
 /* 80106540 00103120  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSkChargeLoop_Anim
-ftKb_SpecialAirNSkChargeLoop_Anim:
+.global ftKb_SkSpecialAirNLoop_Anim
+ftKb_SkSpecialAirNLoop_Anim:
 /* 80106544 00103124  7C 08 02 A6 */	mflr r0
 /* 80106548 00103128  90 01 00 04 */	stw r0, 4(r1)
 /* 8010654C 0010312C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -27376,8 +27376,8 @@ ftKb_SpecialAirNSkChargeLoop_Anim:
 /* 801065E4 001031C4  38 21 00 20 */	addi r1, r1, 0x20
 /* 801065E8 001031C8  7C 08 03 A6 */	mtlr r0
 /* 801065EC 001031CC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSkEndCharge_Anim
-ftKb_SpecialAirNSkEndCharge_Anim:
+.global ftKb_SkSpecialAirNCancel_Anim
+ftKb_SkSpecialAirNCancel_Anim:
 /* 801065F0 001031D0  7C 08 02 A6 */	mflr r0
 /* 801065F4 001031D4  90 01 00 04 */	stw r0, 4(r1)
 /* 801065F8 001031D8  38 00 00 00 */	li r0, 0
@@ -27412,8 +27412,8 @@ ftKb_SpecialAirNSkEndCharge_Anim:
 /* 80106664 00103244  38 21 00 20 */	addi r1, r1, 0x20
 /* 80106668 00103248  7C 08 03 A6 */	mtlr r0
 /* 8010666C 0010324C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSkFire_Anim
-ftKb_SpecialAirNSkFire_Anim:
+.global ftKb_SkSpecialAirNEnd_Anim
+ftKb_SkSpecialAirNEnd_Anim:
 /* 80106670 00103250  7C 08 02 A6 */	mflr r0
 /* 80106674 00103254  90 01 00 04 */	stw r0, 4(r1)
 /* 80106678 00103258  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -27469,11 +27469,11 @@ ftKb_SpecialNSk_801066C4:
 /* 80106720 00103300  38 21 00 38 */	addi r1, r1, 0x38
 /* 80106724 00103304  7C 08 03 A6 */	mtlr r0
 /* 80106728 00103308  4E 80 00 20 */	blr
-.global ftKb_SpecialNSkStartCharge_IASA
-ftKb_SpecialNSkStartCharge_IASA:
+.global ftKb_SkSpecialNStart_IASA
+ftKb_SkSpecialNStart_IASA:
 /* 8010672C 0010330C  4E 80 00 20 */	blr
-.global ftKb_SpecialNSkChargeLoop_IASA
-ftKb_SpecialNSkChargeLoop_IASA:
+.global ftKb_SkSpecialNLoop_IASA
+ftKb_SkSpecialNLoop_IASA:
 /* 80106730 00103310  7C 08 02 A6 */	mflr r0
 /* 80106734 00103314  90 01 00 04 */	stw r0, 4(r1)
 /* 80106738 00103318  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -27531,17 +27531,17 @@ ftKb_SpecialNSkChargeLoop_IASA:
 /* 80106800 001033E0  38 21 00 20 */	addi r1, r1, 0x20
 /* 80106804 001033E4  7C 08 03 A6 */	mtlr r0
 /* 80106808 001033E8  4E 80 00 20 */	blr
-.global ftKb_SpecialNSkEndCharge_IASA
-ftKb_SpecialNSkEndCharge_IASA:
+.global ftKb_SkSpecialNCancel_IASA
+ftKb_SkSpecialNCancel_IASA:
 /* 8010680C 001033EC  4E 80 00 20 */	blr
-.global ftKb_SpecialNSkFire_IASA
-ftKb_SpecialNSkFire_IASA:
+.global ftKb_SkSpecialNEnd_IASA
+ftKb_SkSpecialNEnd_IASA:
 /* 80106810 001033F0  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSkStartCharge_IASA
-ftKb_SpecialAirNSkStartCharge_IASA:
+.global ftKb_SkSpecialAirNStart_IASA
+ftKb_SkSpecialAirNStart_IASA:
 /* 80106814 001033F4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSkChargeLoop_IASA
-ftKb_SpecialAirNSkChargeLoop_IASA:
+.global ftKb_SkSpecialAirNLoop_IASA
+ftKb_SkSpecialAirNLoop_IASA:
 /* 80106818 001033F8  7C 08 02 A6 */	mflr r0
 /* 8010681C 001033FC  90 01 00 04 */	stw r0, 4(r1)
 /* 80106820 00103400  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -27599,14 +27599,14 @@ ftKb_SpecialAirNSkChargeLoop_IASA:
 /* 801068E8 001034C8  38 21 00 20 */	addi r1, r1, 0x20
 /* 801068EC 001034CC  7C 08 03 A6 */	mtlr r0
 /* 801068F0 001034D0  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSkEndCharge_IASA
-ftKb_SpecialAirNSkEndCharge_IASA:
+.global ftKb_SkSpecialAirNCancel_IASA
+ftKb_SkSpecialAirNCancel_IASA:
 /* 801068F4 001034D4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSkFire_IASA
-ftKb_SpecialAirNSkFire_IASA:
+.global ftKb_SkSpecialAirNEnd_IASA
+ftKb_SkSpecialAirNEnd_IASA:
 /* 801068F8 001034D8  4E 80 00 20 */	blr
-.global ftKb_SpecialNSkStartCharge_Phys
-ftKb_SpecialNSkStartCharge_Phys:
+.global ftKb_SkSpecialNStart_Phys
+ftKb_SkSpecialNStart_Phys:
 /* 801068FC 001034DC  7C 08 02 A6 */	mflr r0
 /* 80106900 001034E0  90 01 00 04 */	stw r0, 4(r1)
 /* 80106904 001034E4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -27615,8 +27615,8 @@ ftKb_SpecialNSkStartCharge_Phys:
 /* 80106910 001034F0  38 21 00 08 */	addi r1, r1, 8
 /* 80106914 001034F4  7C 08 03 A6 */	mtlr r0
 /* 80106918 001034F8  4E 80 00 20 */	blr
-.global ftKb_SpecialNSkChargeLoop_Phys
-ftKb_SpecialNSkChargeLoop_Phys:
+.global ftKb_SkSpecialNLoop_Phys
+ftKb_SkSpecialNLoop_Phys:
 /* 8010691C 001034FC  7C 08 02 A6 */	mflr r0
 /* 80106920 00103500  90 01 00 04 */	stw r0, 4(r1)
 /* 80106924 00103504  94 21 FF F8 */	stwu r1, -8(r1)
@@ -27625,8 +27625,8 @@ ftKb_SpecialNSkChargeLoop_Phys:
 /* 80106930 00103510  38 21 00 08 */	addi r1, r1, 8
 /* 80106934 00103514  7C 08 03 A6 */	mtlr r0
 /* 80106938 00103518  4E 80 00 20 */	blr
-.global ftKb_SpecialNSkEndCharge_Phys
-ftKb_SpecialNSkEndCharge_Phys:
+.global ftKb_SkSpecialNCancel_Phys
+ftKb_SkSpecialNCancel_Phys:
 /* 8010693C 0010351C  7C 08 02 A6 */	mflr r0
 /* 80106940 00103520  90 01 00 04 */	stw r0, 4(r1)
 /* 80106944 00103524  94 21 FF F8 */	stwu r1, -8(r1)
@@ -27635,8 +27635,8 @@ ftKb_SpecialNSkEndCharge_Phys:
 /* 80106950 00103530  38 21 00 08 */	addi r1, r1, 8
 /* 80106954 00103534  7C 08 03 A6 */	mtlr r0
 /* 80106958 00103538  4E 80 00 20 */	blr
-.global ftKb_SpecialNSkFire_Phys
-ftKb_SpecialNSkFire_Phys:
+.global ftKb_SkSpecialNEnd_Phys
+ftKb_SkSpecialNEnd_Phys:
 /* 8010695C 0010353C  7C 08 02 A6 */	mflr r0
 /* 80106960 00103540  90 01 00 04 */	stw r0, 4(r1)
 /* 80106964 00103544  94 21 FF F8 */	stwu r1, -8(r1)
@@ -27645,8 +27645,8 @@ ftKb_SpecialNSkFire_Phys:
 /* 80106970 00103550  38 21 00 08 */	addi r1, r1, 8
 /* 80106974 00103554  7C 08 03 A6 */	mtlr r0
 /* 80106978 00103558  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSkStartCharge_Phys
-ftKb_SpecialAirNSkStartCharge_Phys:
+.global ftKb_SkSpecialAirNStart_Phys
+ftKb_SkSpecialAirNStart_Phys:
 /* 8010697C 0010355C  7C 08 02 A6 */	mflr r0
 /* 80106980 00103560  90 01 00 04 */	stw r0, 4(r1)
 /* 80106984 00103564  94 21 FF F8 */	stwu r1, -8(r1)
@@ -27655,8 +27655,8 @@ ftKb_SpecialAirNSkStartCharge_Phys:
 /* 80106990 00103570  38 21 00 08 */	addi r1, r1, 8
 /* 80106994 00103574  7C 08 03 A6 */	mtlr r0
 /* 80106998 00103578  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSkChargeLoop_Phys
-ftKb_SpecialAirNSkChargeLoop_Phys:
+.global ftKb_SkSpecialAirNLoop_Phys
+ftKb_SkSpecialAirNLoop_Phys:
 /* 8010699C 0010357C  7C 08 02 A6 */	mflr r0
 /* 801069A0 00103580  90 01 00 04 */	stw r0, 4(r1)
 /* 801069A4 00103584  94 21 FF F8 */	stwu r1, -8(r1)
@@ -27665,8 +27665,8 @@ ftKb_SpecialAirNSkChargeLoop_Phys:
 /* 801069B0 00103590  38 21 00 08 */	addi r1, r1, 8
 /* 801069B4 00103594  7C 08 03 A6 */	mtlr r0
 /* 801069B8 00103598  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSkEndCharge_Phys
-ftKb_SpecialAirNSkEndCharge_Phys:
+.global ftKb_SkSpecialAirNCancel_Phys
+ftKb_SkSpecialAirNCancel_Phys:
 /* 801069BC 0010359C  7C 08 02 A6 */	mflr r0
 /* 801069C0 001035A0  90 01 00 04 */	stw r0, 4(r1)
 /* 801069C4 001035A4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -27675,8 +27675,8 @@ ftKb_SpecialAirNSkEndCharge_Phys:
 /* 801069D0 001035B0  38 21 00 08 */	addi r1, r1, 8
 /* 801069D4 001035B4  7C 08 03 A6 */	mtlr r0
 /* 801069D8 001035B8  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSkFire_Phys
-ftKb_SpecialAirNSkFire_Phys:
+.global ftKb_SkSpecialAirNEnd_Phys
+ftKb_SkSpecialAirNEnd_Phys:
 /* 801069DC 001035BC  7C 08 02 A6 */	mflr r0
 /* 801069E0 001035C0  90 01 00 04 */	stw r0, 4(r1)
 /* 801069E4 001035C4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -27685,8 +27685,8 @@ ftKb_SpecialAirNSkFire_Phys:
 /* 801069F0 001035D0  38 21 00 08 */	addi r1, r1, 8
 /* 801069F4 001035D4  7C 08 03 A6 */	mtlr r0
 /* 801069F8 001035D8  4E 80 00 20 */	blr
-.global ftKb_SpecialNSkStartCharge_Coll
-ftKb_SpecialNSkStartCharge_Coll:
+.global ftKb_SkSpecialNStart_Coll
+ftKb_SkSpecialNStart_Coll:
 /* 801069FC 001035DC  7C 08 02 A6 */	mflr r0
 /* 80106A00 001035E0  90 01 00 04 */	stw r0, 4(r1)
 /* 80106A04 001035E4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -27722,8 +27722,8 @@ ftKb_SpecialNSkStartCharge_Coll:
 /* 80106A78 00103658  38 21 00 20 */	addi r1, r1, 0x20
 /* 80106A7C 0010365C  7C 08 03 A6 */	mtlr r0
 /* 80106A80 00103660  4E 80 00 20 */	blr
-.global ftKb_SpecialNSkChargeLoop_Coll
-ftKb_SpecialNSkChargeLoop_Coll:
+.global ftKb_SkSpecialNLoop_Coll
+ftKb_SkSpecialNLoop_Coll:
 /* 80106A84 00103664  7C 08 02 A6 */	mflr r0
 /* 80106A88 00103668  90 01 00 04 */	stw r0, 4(r1)
 /* 80106A8C 0010366C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -27759,8 +27759,8 @@ ftKb_SpecialNSkChargeLoop_Coll:
 /* 80106B00 001036E0  38 21 00 20 */	addi r1, r1, 0x20
 /* 80106B04 001036E4  7C 08 03 A6 */	mtlr r0
 /* 80106B08 001036E8  4E 80 00 20 */	blr
-.global ftKb_SpecialNSkEndCharge_Coll
-ftKb_SpecialNSkEndCharge_Coll:
+.global ftKb_SkSpecialNCancel_Coll
+ftKb_SkSpecialNCancel_Coll:
 /* 80106B0C 001036EC  7C 08 02 A6 */	mflr r0
 /* 80106B10 001036F0  90 01 00 04 */	stw r0, 4(r1)
 /* 80106B14 001036F4  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -27793,8 +27793,8 @@ ftKb_SpecialNSkEndCharge_Coll:
 /* 80106B78 00103758  38 21 00 28 */	addi r1, r1, 0x28
 /* 80106B7C 0010375C  7C 08 03 A6 */	mtlr r0
 /* 80106B80 00103760  4E 80 00 20 */	blr
-.global ftKb_SpecialNSkFire_Coll
-ftKb_SpecialNSkFire_Coll:
+.global ftKb_SkSpecialNEnd_Coll
+ftKb_SkSpecialNEnd_Coll:
 /* 80106B84 00103764  7C 08 02 A6 */	mflr r0
 /* 80106B88 00103768  90 01 00 04 */	stw r0, 4(r1)
 /* 80106B8C 0010376C  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -27832,8 +27832,8 @@ ftKb_SpecialNSkFire_Coll:
 /* 80106C04 001037E4  38 21 00 30 */	addi r1, r1, 0x30
 /* 80106C08 001037E8  7C 08 03 A6 */	mtlr r0
 /* 80106C0C 001037EC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSkStartCharge_Coll
-ftKb_SpecialAirNSkStartCharge_Coll:
+.global ftKb_SkSpecialAirNStart_Coll
+ftKb_SkSpecialAirNStart_Coll:
 /* 80106C10 001037F0  7C 08 02 A6 */	mflr r0
 /* 80106C14 001037F4  90 01 00 04 */	stw r0, 4(r1)
 /* 80106C18 001037F8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -27869,8 +27869,8 @@ ftKb_SpecialAirNSkStartCharge_Coll:
 /* 80106C8C 0010386C  38 21 00 20 */	addi r1, r1, 0x20
 /* 80106C90 00103870  7C 08 03 A6 */	mtlr r0
 /* 80106C94 00103874  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSkChargeLoop_Coll
-ftKb_SpecialAirNSkChargeLoop_Coll:
+.global ftKb_SkSpecialAirNLoop_Coll
+ftKb_SkSpecialAirNLoop_Coll:
 /* 80106C98 00103878  7C 08 02 A6 */	mflr r0
 /* 80106C9C 0010387C  90 01 00 04 */	stw r0, 4(r1)
 /* 80106CA0 00103880  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -27906,8 +27906,8 @@ ftKb_SpecialAirNSkChargeLoop_Coll:
 /* 80106D14 001038F4  38 21 00 20 */	addi r1, r1, 0x20
 /* 80106D18 001038F8  7C 08 03 A6 */	mtlr r0
 /* 80106D1C 001038FC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSkEndCharge_Coll
-ftKb_SpecialAirNSkEndCharge_Coll:
+.global ftKb_SkSpecialAirNCancel_Coll
+ftKb_SkSpecialAirNCancel_Coll:
 /* 80106D20 00103900  7C 08 02 A6 */	mflr r0
 /* 80106D24 00103904  90 01 00 04 */	stw r0, 4(r1)
 /* 80106D28 00103908  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -27924,8 +27924,8 @@ ftKb_SpecialAirNSkEndCharge_Coll:
 /* 80106D50 00103930  38 21 00 28 */	addi r1, r1, 0x28
 /* 80106D54 00103934  7C 08 03 A6 */	mtlr r0
 /* 80106D58 00103938  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNSkFire_Coll
-ftKb_SpecialAirNSkFire_Coll:
+.global ftKb_SkSpecialAirNEnd_Coll
+ftKb_SkSpecialAirNEnd_Coll:
 /* 80106D5C 0010393C  7C 08 02 A6 */	mflr r0
 /* 80106D60 00103940  90 01 00 04 */	stw r0, 4(r1)
 /* 80106D64 00103944  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -28615,8 +28615,8 @@ ftKb_SpecialNMt_80107638:
 /* 801076F4 001042D4  38 21 00 28 */	addi r1, r1, 0x28
 /* 801076F8 001042D8  7C 08 03 A6 */	mtlr r0
 /* 801076FC 001042DC  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtStartCharge_Anim
-ftKb_SpecialNMtStartCharge_Anim:
+.global ftKb_MtSpecialNStart_Anim
+ftKb_MtSpecialNStart_Anim:
 /* 80107700 001042E0  7C 08 02 A6 */	mflr r0
 /* 80107704 001042E4  90 01 00 04 */	stw r0, 4(r1)
 /* 80107708 001042E8  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -28720,8 +28720,8 @@ ftKb_SpecialNMtStartCharge_Anim:
 /* 80107878 00104458  38 21 00 50 */	addi r1, r1, 0x50
 /* 8010787C 0010445C  7C 08 03 A6 */	mtlr r0
 /* 80107880 00104460  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtChargeLoop_Anim
-ftKb_SpecialNMtChargeLoop_Anim:
+.global ftKb_MtSpecialNLoop_Anim
+ftKb_MtSpecialNLoop_Anim:
 /* 80107884 00104464  7C 08 02 A6 */	mflr r0
 /* 80107888 00104468  90 01 00 04 */	stw r0, 4(r1)
 /* 8010788C 0010446C  94 21 FF 90 */	stwu r1, -0x70(r1)
@@ -28853,8 +28853,8 @@ ftKb_SpecialNMtChargeLoop_Anim:
 /* 80107A78 00104658  38 21 00 70 */	addi r1, r1, 0x70
 /* 80107A7C 0010465C  7C 08 03 A6 */	mtlr r0
 /* 80107A80 00104660  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtFullyCharged_Anim
-ftKb_SpecialNMtFullyCharged_Anim:
+.global ftKb_MtSpecialNLoopFull_Anim
+ftKb_MtSpecialNLoopFull_Anim:
 /* 80107A84 00104664  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80107A88 00104668  38 00 00 01 */	li r0, 1
 /* 80107A8C 0010466C  80 63 00 2C */	lwz r3, 0x2c(r3)
@@ -28867,8 +28867,8 @@ ftKb_SpecialNMtFullyCharged_Anim:
 /* 80107AA8 00104688  90 03 22 C8 */	stw r0, 0x22c8(r3)
 /* 80107AAC 0010468C  38 21 00 20 */	addi r1, r1, 0x20
 /* 80107AB0 00104690  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtEndCharge_Anim
-ftKb_SpecialNMtEndCharge_Anim:
+.global ftKb_MtSpecialNCancel_Anim
+ftKb_MtSpecialNCancel_Anim:
 /* 80107AB4 00104694  7C 08 02 A6 */	mflr r0
 /* 80107AB8 00104698  90 01 00 04 */	stw r0, 4(r1)
 /* 80107ABC 0010469C  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -28905,8 +28905,8 @@ ftKb_SpecialNMtEndCharge_Anim:
 /* 80107B2C 0010470C  38 21 00 30 */	addi r1, r1, 0x30
 /* 80107B30 00104710  7C 08 03 A6 */	mtlr r0
 /* 80107B34 00104714  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtFire_Anim
-ftKb_SpecialNMtFire_Anim:
+.global ftKb_MtSpecialNEnd_Anim
+ftKb_MtSpecialNEnd_Anim:
 /* 80107B38 00104718  7C 08 02 A6 */	mflr r0
 /* 80107B3C 0010471C  90 01 00 04 */	stw r0, 4(r1)
 /* 80107B40 00104720  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -28925,8 +28925,8 @@ ftKb_SpecialNMtFire_Anim:
 /* 80107B70 00104750  38 21 00 30 */	addi r1, r1, 0x30
 /* 80107B74 00104754  7C 08 03 A6 */	mtlr r0
 /* 80107B78 00104758  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtStartCharge_Anim
-ftKb_SpecialAirNMtStartCharge_Anim:
+.global ftKb_MtSpecialAirNStart_Anim
+ftKb_MtSpecialAirNStart_Anim:
 /* 80107B7C 0010475C  7C 08 02 A6 */	mflr r0
 /* 80107B80 00104760  90 01 00 04 */	stw r0, 4(r1)
 /* 80107B84 00104764  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -29033,8 +29033,8 @@ ftKb_SpecialAirNMtStartCharge_Anim:
 /* 80107D00 001048E0  38 21 00 50 */	addi r1, r1, 0x50
 /* 80107D04 001048E4  7C 08 03 A6 */	mtlr r0
 /* 80107D08 001048E8  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtChargeLoop_Anim
-ftKb_SpecialAirNMtChargeLoop_Anim:
+.global ftKb_MtSpecialAirNLoop_Anim
+ftKb_MtSpecialAirNLoop_Anim:
 /* 80107D0C 001048EC  7C 08 02 A6 */	mflr r0
 /* 80107D10 001048F0  90 01 00 04 */	stw r0, 4(r1)
 /* 80107D14 001048F4  94 21 FF 90 */	stwu r1, -0x70(r1)
@@ -29166,8 +29166,8 @@ ftKb_SpecialAirNMtChargeLoop_Anim:
 /* 80107F00 00104AE0  38 21 00 70 */	addi r1, r1, 0x70
 /* 80107F04 00104AE4  7C 08 03 A6 */	mtlr r0
 /* 80107F08 00104AE8  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtFullyCharged_Anim
-ftKb_SpecialAirNMtFullyCharged_Anim:
+.global ftKb_MtSpecialAirNLoopFull_Anim
+ftKb_MtSpecialAirNLoopFull_Anim:
 /* 80107F0C 00104AEC  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80107F10 00104AF0  38 00 00 00 */	li r0, 0
 /* 80107F14 00104AF4  80 63 00 2C */	lwz r3, 0x2c(r3)
@@ -29180,8 +29180,8 @@ ftKb_SpecialAirNMtFullyCharged_Anim:
 /* 80107F30 00104B10  90 03 22 C8 */	stw r0, 0x22c8(r3)
 /* 80107F34 00104B14  38 21 00 20 */	addi r1, r1, 0x20
 /* 80107F38 00104B18  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtEndCharge_Anim
-ftKb_SpecialAirNMtEndCharge_Anim:
+.global ftKb_MtSpecialAirNCancel_Anim
+ftKb_MtSpecialAirNCancel_Anim:
 /* 80107F3C 00104B1C  7C 08 02 A6 */	mflr r0
 /* 80107F40 00104B20  90 01 00 04 */	stw r0, 4(r1)
 /* 80107F44 00104B24  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -29218,8 +29218,8 @@ ftKb_SpecialAirNMtEndCharge_Anim:
 /* 80107FB4 00104B94  38 21 00 30 */	addi r1, r1, 0x30
 /* 80107FB8 00104B98  7C 08 03 A6 */	mtlr r0
 /* 80107FBC 00104B9C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtFire_Anim
-ftKb_SpecialAirNMtFire_Anim:
+.global ftKb_MtSpecialAirNEnd_Anim
+ftKb_MtSpecialAirNEnd_Anim:
 /* 80107FC0 00104BA0  7C 08 02 A6 */	mflr r0
 /* 80107FC4 00104BA4  90 01 00 04 */	stw r0, 4(r1)
 /* 80107FC8 00104BA8  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -29254,11 +29254,11 @@ ftKb_SpecialAirNMtFire_Anim:
 /* 80108034 00104C14  38 21 00 28 */	addi r1, r1, 0x28
 /* 80108038 00104C18  7C 08 03 A6 */	mtlr r0
 /* 8010803C 00104C1C  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtStartCharge_IASA
-ftKb_SpecialNMtStartCharge_IASA:
+.global ftKb_MtSpecialNStart_IASA
+ftKb_MtSpecialNStart_IASA:
 /* 80108040 00104C20  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtChargeLoop_IASA
-ftKb_SpecialNMtChargeLoop_IASA:
+.global ftKb_MtSpecialNLoop_IASA
+ftKb_MtSpecialNLoop_IASA:
 /* 80108044 00104C24  7C 08 02 A6 */	mflr r0
 /* 80108048 00104C28  90 01 00 04 */	stw r0, 4(r1)
 /* 8010804C 00104C2C  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -29375,8 +29375,8 @@ ftKb_SpecialNMtChargeLoop_IASA:
 /* 801081EC 00104DCC  38 21 00 50 */	addi r1, r1, 0x50
 /* 801081F0 00104DD0  7C 08 03 A6 */	mtlr r0
 /* 801081F4 00104DD4  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtFullyCharged_IASA
-ftKb_SpecialNMtFullyCharged_IASA:
+.global ftKb_MtSpecialNLoopFull_IASA
+ftKb_MtSpecialNLoopFull_IASA:
 /* 801081F8 00104DD8  7C 08 02 A6 */	mflr r0
 /* 801081FC 00104DDC  90 01 00 04 */	stw r0, 4(r1)
 /* 80108200 00104DE0  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -29487,17 +29487,17 @@ ftKb_SpecialNMtFullyCharged_IASA:
 /* 80108388 00104F68  38 21 00 50 */	addi r1, r1, 0x50
 /* 8010838C 00104F6C  7C 08 03 A6 */	mtlr r0
 /* 80108390 00104F70  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtEndCharge_IASA
-ftKb_SpecialNMtEndCharge_IASA:
+.global ftKb_MtSpecialNCancel_IASA
+ftKb_MtSpecialNCancel_IASA:
 /* 80108394 00104F74  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtFire_IASA
-ftKb_SpecialNMtFire_IASA:
+.global ftKb_MtSpecialNEnd_IASA
+ftKb_MtSpecialNEnd_IASA:
 /* 80108398 00104F78  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtStartCharge_IASA
-ftKb_SpecialAirNMtStartCharge_IASA:
+.global ftKb_MtSpecialAirNStart_IASA
+ftKb_MtSpecialAirNStart_IASA:
 /* 8010839C 00104F7C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtChargeLoop_IASA
-ftKb_SpecialAirNMtChargeLoop_IASA:
+.global ftKb_MtSpecialAirNLoop_IASA
+ftKb_MtSpecialAirNLoop_IASA:
 /* 801083A0 00104F80  7C 08 02 A6 */	mflr r0
 /* 801083A4 00104F84  90 01 00 04 */	stw r0, 4(r1)
 /* 801083A8 00104F88  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -29592,8 +29592,8 @@ ftKb_SpecialAirNMtChargeLoop_IASA:
 /* 801084F8 001050D8  38 21 00 40 */	addi r1, r1, 0x40
 /* 801084FC 001050DC  7C 08 03 A6 */	mtlr r0
 /* 80108500 001050E0  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtFullyCharged_IASA
-ftKb_SpecialAirNMtFullyCharged_IASA:
+.global ftKb_MtSpecialAirNLoopFull_IASA
+ftKb_MtSpecialAirNLoopFull_IASA:
 /* 80108504 001050E4  7C 08 02 A6 */	mflr r0
 /* 80108508 001050E8  90 01 00 04 */	stw r0, 4(r1)
 /* 8010850C 001050EC  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -29682,14 +29682,14 @@ ftKb_SpecialAirNMtFullyCharged_IASA:
 /* 80108644 00105224  38 21 00 40 */	addi r1, r1, 0x40
 /* 80108648 00105228  7C 08 03 A6 */	mtlr r0
 /* 8010864C 0010522C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtEndCharge_IASA
-ftKb_SpecialAirNMtEndCharge_IASA:
+.global ftKb_MtSpecialAirNCancel_IASA
+ftKb_MtSpecialAirNCancel_IASA:
 /* 80108650 00105230  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtFire_IASA
-ftKb_SpecialAirNMtFire_IASA:
+.global ftKb_MtSpecialAirNEnd_IASA
+ftKb_MtSpecialAirNEnd_IASA:
 /* 80108654 00105234  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtStartCharge_Phys
-ftKb_SpecialNMtStartCharge_Phys:
+.global ftKb_MtSpecialNStart_Phys
+ftKb_MtSpecialNStart_Phys:
 /* 80108658 00105238  7C 08 02 A6 */	mflr r0
 /* 8010865C 0010523C  90 01 00 04 */	stw r0, 4(r1)
 /* 80108660 00105240  94 21 FF F8 */	stwu r1, -8(r1)
@@ -29698,8 +29698,8 @@ ftKb_SpecialNMtStartCharge_Phys:
 /* 8010866C 0010524C  38 21 00 08 */	addi r1, r1, 8
 /* 80108670 00105250  7C 08 03 A6 */	mtlr r0
 /* 80108674 00105254  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtChargeLoop_Phys
-ftKb_SpecialNMtChargeLoop_Phys:
+.global ftKb_MtSpecialNLoop_Phys
+ftKb_MtSpecialNLoop_Phys:
 /* 80108678 00105258  7C 08 02 A6 */	mflr r0
 /* 8010867C 0010525C  90 01 00 04 */	stw r0, 4(r1)
 /* 80108680 00105260  94 21 FF F8 */	stwu r1, -8(r1)
@@ -29708,8 +29708,8 @@ ftKb_SpecialNMtChargeLoop_Phys:
 /* 8010868C 0010526C  38 21 00 08 */	addi r1, r1, 8
 /* 80108690 00105270  7C 08 03 A6 */	mtlr r0
 /* 80108694 00105274  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtFullyCharged_Phys
-ftKb_SpecialNMtFullyCharged_Phys:
+.global ftKb_MtSpecialNLoopFull_Phys
+ftKb_MtSpecialNLoopFull_Phys:
 /* 80108698 00105278  7C 08 02 A6 */	mflr r0
 /* 8010869C 0010527C  90 01 00 04 */	stw r0, 4(r1)
 /* 801086A0 00105280  94 21 FF F8 */	stwu r1, -8(r1)
@@ -29718,8 +29718,8 @@ ftKb_SpecialNMtFullyCharged_Phys:
 /* 801086AC 0010528C  38 21 00 08 */	addi r1, r1, 8
 /* 801086B0 00105290  7C 08 03 A6 */	mtlr r0
 /* 801086B4 00105294  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtEndCharge_Phys
-ftKb_SpecialNMtEndCharge_Phys:
+.global ftKb_MtSpecialNCancel_Phys
+ftKb_MtSpecialNCancel_Phys:
 /* 801086B8 00105298  7C 08 02 A6 */	mflr r0
 /* 801086BC 0010529C  90 01 00 04 */	stw r0, 4(r1)
 /* 801086C0 001052A0  94 21 FF F8 */	stwu r1, -8(r1)
@@ -29728,8 +29728,8 @@ ftKb_SpecialNMtEndCharge_Phys:
 /* 801086CC 001052AC  38 21 00 08 */	addi r1, r1, 8
 /* 801086D0 001052B0  7C 08 03 A6 */	mtlr r0
 /* 801086D4 001052B4  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtFire_Phys
-ftKb_SpecialNMtFire_Phys:
+.global ftKb_MtSpecialNEnd_Phys
+ftKb_MtSpecialNEnd_Phys:
 /* 801086D8 001052B8  7C 08 02 A6 */	mflr r0
 /* 801086DC 001052BC  90 01 00 04 */	stw r0, 4(r1)
 /* 801086E0 001052C0  94 21 FF F8 */	stwu r1, -8(r1)
@@ -29738,8 +29738,8 @@ ftKb_SpecialNMtFire_Phys:
 /* 801086EC 001052CC  38 21 00 08 */	addi r1, r1, 8
 /* 801086F0 001052D0  7C 08 03 A6 */	mtlr r0
 /* 801086F4 001052D4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtStartCharge_Phys
-ftKb_SpecialAirNMtStartCharge_Phys:
+.global ftKb_MtSpecialAirNStart_Phys
+ftKb_MtSpecialAirNStart_Phys:
 /* 801086F8 001052D8  7C 08 02 A6 */	mflr r0
 /* 801086FC 001052DC  90 01 00 04 */	stw r0, 4(r1)
 /* 80108700 001052E0  94 21 FF F8 */	stwu r1, -8(r1)
@@ -29748,8 +29748,8 @@ ftKb_SpecialAirNMtStartCharge_Phys:
 /* 8010870C 001052EC  38 21 00 08 */	addi r1, r1, 8
 /* 80108710 001052F0  7C 08 03 A6 */	mtlr r0
 /* 80108714 001052F4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtChargeLoop_Phys
-ftKb_SpecialAirNMtChargeLoop_Phys:
+.global ftKb_MtSpecialAirNLoop_Phys
+ftKb_MtSpecialAirNLoop_Phys:
 /* 80108718 001052F8  7C 08 02 A6 */	mflr r0
 /* 8010871C 001052FC  90 01 00 04 */	stw r0, 4(r1)
 /* 80108720 00105300  94 21 FF F8 */	stwu r1, -8(r1)
@@ -29758,8 +29758,8 @@ ftKb_SpecialAirNMtChargeLoop_Phys:
 /* 8010872C 0010530C  38 21 00 08 */	addi r1, r1, 8
 /* 80108730 00105310  7C 08 03 A6 */	mtlr r0
 /* 80108734 00105314  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtFullyCharged_Phys
-ftKb_SpecialAirNMtFullyCharged_Phys:
+.global ftKb_MtSpecialAirNLoopFull_Phys
+ftKb_MtSpecialAirNLoopFull_Phys:
 /* 80108738 00105318  7C 08 02 A6 */	mflr r0
 /* 8010873C 0010531C  90 01 00 04 */	stw r0, 4(r1)
 /* 80108740 00105320  94 21 FF F8 */	stwu r1, -8(r1)
@@ -29768,8 +29768,8 @@ ftKb_SpecialAirNMtFullyCharged_Phys:
 /* 8010874C 0010532C  38 21 00 08 */	addi r1, r1, 8
 /* 80108750 00105330  7C 08 03 A6 */	mtlr r0
 /* 80108754 00105334  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtEndCharge_Phys
-ftKb_SpecialAirNMtEndCharge_Phys:
+.global ftKb_MtSpecialAirNCancel_Phys
+ftKb_MtSpecialAirNCancel_Phys:
 /* 80108758 00105338  7C 08 02 A6 */	mflr r0
 /* 8010875C 0010533C  90 01 00 04 */	stw r0, 4(r1)
 /* 80108760 00105340  94 21 FF F8 */	stwu r1, -8(r1)
@@ -29778,8 +29778,8 @@ ftKb_SpecialAirNMtEndCharge_Phys:
 /* 8010876C 0010534C  38 21 00 08 */	addi r1, r1, 8
 /* 80108770 00105350  7C 08 03 A6 */	mtlr r0
 /* 80108774 00105354  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtFire_Phys
-ftKb_SpecialAirNMtFire_Phys:
+.global ftKb_MtSpecialAirNEnd_Phys
+ftKb_MtSpecialAirNEnd_Phys:
 /* 80108778 00105358  7C 08 02 A6 */	mflr r0
 /* 8010877C 0010535C  90 01 00 04 */	stw r0, 4(r1)
 /* 80108780 00105360  94 21 FF F8 */	stwu r1, -8(r1)
@@ -29788,8 +29788,8 @@ ftKb_SpecialAirNMtFire_Phys:
 /* 8010878C 0010536C  38 21 00 08 */	addi r1, r1, 8
 /* 80108790 00105370  7C 08 03 A6 */	mtlr r0
 /* 80108794 00105374  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtStartCharge_Coll
-ftKb_SpecialNMtStartCharge_Coll:
+.global ftKb_MtSpecialNStart_Coll
+ftKb_MtSpecialNStart_Coll:
 /* 80108798 00105378  7C 08 02 A6 */	mflr r0
 /* 8010879C 0010537C  90 01 00 04 */	stw r0, 4(r1)
 /* 801087A0 00105380  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -29825,8 +29825,8 @@ ftKb_SpecialNMtStartCharge_Coll:
 /* 80108814 001053F4  38 21 00 20 */	addi r1, r1, 0x20
 /* 80108818 001053F8  7C 08 03 A6 */	mtlr r0
 /* 8010881C 001053FC  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtChargeLoop_Coll
-ftKb_SpecialNMtChargeLoop_Coll:
+.global ftKb_MtSpecialNLoop_Coll
+ftKb_MtSpecialNLoop_Coll:
 /* 80108820 00105400  7C 08 02 A6 */	mflr r0
 /* 80108824 00105404  90 01 00 04 */	stw r0, 4(r1)
 /* 80108828 00105408  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -29862,8 +29862,8 @@ ftKb_SpecialNMtChargeLoop_Coll:
 /* 8010889C 0010547C  38 21 00 20 */	addi r1, r1, 0x20
 /* 801088A0 00105480  7C 08 03 A6 */	mtlr r0
 /* 801088A4 00105484  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtFullyCharged_Coll
-ftKb_SpecialNMtFullyCharged_Coll:
+.global ftKb_MtSpecialNLoopFull_Coll
+ftKb_MtSpecialNLoopFull_Coll:
 /* 801088A8 00105488  7C 08 02 A6 */	mflr r0
 /* 801088AC 0010548C  90 01 00 04 */	stw r0, 4(r1)
 /* 801088B0 00105490  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -29899,8 +29899,8 @@ ftKb_SpecialNMtFullyCharged_Coll:
 /* 80108924 00105504  38 21 00 20 */	addi r1, r1, 0x20
 /* 80108928 00105508  7C 08 03 A6 */	mtlr r0
 /* 8010892C 0010550C  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtEndCharge_Coll
-ftKb_SpecialNMtEndCharge_Coll:
+.global ftKb_MtSpecialNCancel_Coll
+ftKb_MtSpecialNCancel_Coll:
 /* 80108930 00105510  7C 08 02 A6 */	mflr r0
 /* 80108934 00105514  90 01 00 04 */	stw r0, 4(r1)
 /* 80108938 00105518  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -29936,8 +29936,8 @@ ftKb_SpecialNMtEndCharge_Coll:
 /* 801089AC 0010558C  38 21 00 20 */	addi r1, r1, 0x20
 /* 801089B0 00105590  7C 08 03 A6 */	mtlr r0
 /* 801089B4 00105594  4E 80 00 20 */	blr
-.global ftKb_SpecialNMtFire_Coll
-ftKb_SpecialNMtFire_Coll:
+.global ftKb_MtSpecialNEnd_Coll
+ftKb_MtSpecialNEnd_Coll:
 /* 801089B8 00105598  7C 08 02 A6 */	mflr r0
 /* 801089BC 0010559C  90 01 00 04 */	stw r0, 4(r1)
 /* 801089C0 001055A0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -29973,8 +29973,8 @@ ftKb_SpecialNMtFire_Coll:
 /* 80108A34 00105614  38 21 00 20 */	addi r1, r1, 0x20
 /* 80108A38 00105618  7C 08 03 A6 */	mtlr r0
 /* 80108A3C 0010561C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtStartCharge_Coll
-ftKb_SpecialAirNMtStartCharge_Coll:
+.global ftKb_MtSpecialAirNStart_Coll
+ftKb_MtSpecialAirNStart_Coll:
 /* 80108A40 00105620  7C 08 02 A6 */	mflr r0
 /* 80108A44 00105624  90 01 00 04 */	stw r0, 4(r1)
 /* 80108A48 00105628  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -30010,8 +30010,8 @@ ftKb_SpecialAirNMtStartCharge_Coll:
 /* 80108ABC 0010569C  38 21 00 20 */	addi r1, r1, 0x20
 /* 80108AC0 001056A0  7C 08 03 A6 */	mtlr r0
 /* 80108AC4 001056A4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtChargeLoop_Coll
-ftKb_SpecialAirNMtChargeLoop_Coll:
+.global ftKb_MtSpecialAirNLoop_Coll
+ftKb_MtSpecialAirNLoop_Coll:
 /* 80108AC8 001056A8  7C 08 02 A6 */	mflr r0
 /* 80108ACC 001056AC  90 01 00 04 */	stw r0, 4(r1)
 /* 80108AD0 001056B0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -30047,8 +30047,8 @@ ftKb_SpecialAirNMtChargeLoop_Coll:
 /* 80108B44 00105724  38 21 00 20 */	addi r1, r1, 0x20
 /* 80108B48 00105728  7C 08 03 A6 */	mtlr r0
 /* 80108B4C 0010572C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtFullyCharged_Coll
-ftKb_SpecialAirNMtFullyCharged_Coll:
+.global ftKb_MtSpecialAirNLoopFull_Coll
+ftKb_MtSpecialAirNLoopFull_Coll:
 /* 80108B50 00105730  7C 08 02 A6 */	mflr r0
 /* 80108B54 00105734  90 01 00 04 */	stw r0, 4(r1)
 /* 80108B58 00105738  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -30084,8 +30084,8 @@ ftKb_SpecialAirNMtFullyCharged_Coll:
 /* 80108BCC 001057AC  38 21 00 20 */	addi r1, r1, 0x20
 /* 80108BD0 001057B0  7C 08 03 A6 */	mtlr r0
 /* 80108BD4 001057B4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtEndCharge_Coll
-ftKb_SpecialAirNMtEndCharge_Coll:
+.global ftKb_MtSpecialAirNCancel_Coll
+ftKb_MtSpecialAirNCancel_Coll:
 /* 80108BD8 001057B8  7C 08 02 A6 */	mflr r0
 /* 80108BDC 001057BC  90 01 00 04 */	stw r0, 4(r1)
 /* 80108BE0 001057C0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -30121,8 +30121,8 @@ ftKb_SpecialAirNMtEndCharge_Coll:
 /* 80108C54 00105834  38 21 00 20 */	addi r1, r1, 0x20
 /* 80108C58 00105838  7C 08 03 A6 */	mtlr r0
 /* 80108C5C 0010583C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMtFire_Coll
-ftKb_SpecialAirNMtFire_Coll:
+.global ftKb_MtSpecialAirNEnd_Coll
+ftKb_MtSpecialAirNEnd_Coll:
 /* 80108C60 00105840  7C 08 02 A6 */	mflr r0
 /* 80108C64 00105844  90 01 00 04 */	stw r0, 4(r1)
 /* 80108C68 00105848  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -30304,8 +30304,8 @@ ftKb_SpecialNIc_80108E14:
 /* 80108EF0 00105AD0  38 21 00 20 */	addi r1, r1, 0x20
 /* 80108EF4 00105AD4  7C 08 03 A6 */	mtlr r0
 /* 80108EF8 00105AD8  4E 80 00 20 */	blr
-.global ftKb_SpecialNIc_Anim
-ftKb_SpecialNIc_Anim:
+.global ftKb_PpSpecialN_Anim
+ftKb_PpSpecialN_Anim:
 /* 80108EFC 00105ADC  7C 08 02 A6 */	mflr r0
 /* 80108F00 00105AE0  90 01 00 04 */	stw r0, 4(r1)
 /* 80108F04 00105AE4  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -30322,8 +30322,8 @@ ftKb_SpecialNIc_Anim:
 /* 80108F2C 00105B0C  38 21 00 18 */	addi r1, r1, 0x18
 /* 80108F30 00105B10  7C 08 03 A6 */	mtlr r0
 /* 80108F34 00105B14  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNIc_Anim
-ftKb_SpecialAirNIc_Anim:
+.global ftKb_PpSpecialAirN_Anim
+ftKb_PpSpecialAirN_Anim:
 /* 80108F38 00105B18  7C 08 02 A6 */	mflr r0
 /* 80108F3C 00105B1C  90 01 00 04 */	stw r0, 4(r1)
 /* 80108F40 00105B20  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -30340,14 +30340,14 @@ ftKb_SpecialAirNIc_Anim:
 /* 80108F68 00105B48  38 21 00 18 */	addi r1, r1, 0x18
 /* 80108F6C 00105B4C  7C 08 03 A6 */	mtlr r0
 /* 80108F70 00105B50  4E 80 00 20 */	blr
-.global ftKb_SpecialNIc_IASA
-ftKb_SpecialNIc_IASA:
+.global ftKb_PpSpecialN_IASA
+ftKb_PpSpecialN_IASA:
 /* 80108F74 00105B54  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNIc_IASA
-ftKb_SpecialAirNIc_IASA:
+.global ftKb_PpSpecialAirN_IASA
+ftKb_PpSpecialAirN_IASA:
 /* 80108F78 00105B58  4E 80 00 20 */	blr
-.global ftKb_SpecialNIc_Phys
-ftKb_SpecialNIc_Phys:
+.global ftKb_PpSpecialN_Phys
+ftKb_PpSpecialN_Phys:
 /* 80108F7C 00105B5C  7C 08 02 A6 */	mflr r0
 /* 80108F80 00105B60  90 01 00 04 */	stw r0, 4(r1)
 /* 80108F84 00105B64  94 21 FF F8 */	stwu r1, -8(r1)
@@ -30356,8 +30356,8 @@ ftKb_SpecialNIc_Phys:
 /* 80108F90 00105B70  38 21 00 08 */	addi r1, r1, 8
 /* 80108F94 00105B74  7C 08 03 A6 */	mtlr r0
 /* 80108F98 00105B78  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNIc_Phys
-ftKb_SpecialAirNIc_Phys:
+.global ftKb_PpSpecialAirN_Phys
+ftKb_PpSpecialAirN_Phys:
 /* 80108F9C 00105B7C  7C 08 02 A6 */	mflr r0
 /* 80108FA0 00105B80  90 01 00 04 */	stw r0, 4(r1)
 /* 80108FA4 00105B84  94 21 FF F8 */	stwu r1, -8(r1)
@@ -30366,8 +30366,8 @@ ftKb_SpecialAirNIc_Phys:
 /* 80108FB0 00105B90  38 21 00 08 */	addi r1, r1, 8
 /* 80108FB4 00105B94  7C 08 03 A6 */	mtlr r0
 /* 80108FB8 00105B98  4E 80 00 20 */	blr
-.global ftKb_SpecialNIc_Coll
-ftKb_SpecialNIc_Coll:
+.global ftKb_PpSpecialN_Coll
+ftKb_PpSpecialN_Coll:
 /* 80108FBC 00105B9C  7C 08 02 A6 */	mflr r0
 /* 80108FC0 00105BA0  90 01 00 04 */	stw r0, 4(r1)
 /* 80108FC4 00105BA4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -30399,8 +30399,8 @@ ftKb_SpecialNIc_Coll:
 /* 80109024 00105C04  38 21 00 20 */	addi r1, r1, 0x20
 /* 80109028 00105C08  7C 08 03 A6 */	mtlr r0
 /* 8010902C 00105C0C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNIc_Coll
-ftKb_SpecialAirNIc_Coll:
+.global ftKb_PpSpecialAirN_Coll
+ftKb_PpSpecialAirN_Coll:
 /* 80109030 00105C10  7C 08 02 A6 */	mflr r0
 /* 80109034 00105C14  90 01 00 04 */	stw r0, 4(r1)
 /* 80109038 00105C18  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -31321,8 +31321,8 @@ ftKb_SpecialNYs_801094FC:
 /* 80109D64 00106944  7C 08 03 A6 */	mtlr r0
 /* 80109D68 00106948  4E 80 00 20 */	blr
 
-.global ftKb_SpecialNYs_Anim
-ftKb_SpecialNYs_Anim:
+.global ftKb_YsSpecialN1_Anim
+ftKb_YsSpecialN1_Anim:
 /* 80109D6C 0010694C  7C 08 02 A6 */	mflr r0
 /* 80109D70 00106950  90 01 00 04 */	stw r0, 4(r1)
 /* 80109D74 00106954  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -31343,8 +31343,8 @@ ftKb_SpecialNYs_Anim:
 /* 80109DAC 0010698C  38 21 00 18 */	addi r1, r1, 0x18
 /* 80109DB0 00106990  7C 08 03 A6 */	mtlr r0
 /* 80109DB4 00106994  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNYs_Anim
-ftKb_SpecialAirNYs_Anim:
+.global ftKb_YsSpecialAirNCapture2_Anim
+ftKb_YsSpecialAirNCapture2_Anim:
 /* 80109DB8 00106998  7C 08 02 A6 */	mflr r0
 /* 80109DBC 0010699C  90 01 00 04 */	stw r0, 4(r1)
 /* 80109DC0 001069A0  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -31365,8 +31365,8 @@ ftKb_SpecialAirNYs_Anim:
 /* 80109DF8 001069D8  38 21 00 18 */	addi r1, r1, 0x18
 /* 80109DFC 001069DC  7C 08 03 A6 */	mtlr r0
 /* 80109E00 001069E0  4E 80 00 20 */	blr
-.global ftKb_MS_415_Anim
-ftKb_MS_415_Anim:
+.global ftKb_YsSpecialAirNCapture1_Anim
+ftKb_YsSpecialAirNCapture1_Anim:
 /* 80109E04 001069E4  7C 08 02 A6 */	mflr r0
 /* 80109E08 001069E8  90 01 00 04 */	stw r0, 4(r1)
 /* 80109E0C 001069EC  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -31426,8 +31426,8 @@ ftKb_MS_415_Anim:
 /* 80109EE0 00106AC0  7C 08 03 A6 */	mtlr r0
 /* 80109EE4 00106AC4  4E 80 00 20 */	blr
 
-.global ftKb_SpecialNYsCaptureStart_Anim
-ftKb_SpecialNYsCaptureStart_Anim:
+.global ftKb_YsSpecialNCapture1_Anim
+ftKb_YsSpecialNCapture1_Anim:
 /* 80109EE8 00106AC8  7C 08 02 A6 */	mflr r0
 /* 80109EEC 00106ACC  90 01 00 04 */	stw r0, 4(r1)
 /* 80109EF0 00106AD0  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -31488,8 +31488,8 @@ ftKb_SpecialNYsCaptureStart_Anim:
 /* 80109FC8 00106BA8  38 21 00 30 */	addi r1, r1, 0x30
 /* 80109FCC 00106BAC  7C 08 03 A6 */	mtlr r0
 /* 80109FD0 00106BB0  4E 80 00 20 */	blr
-.global ftKb_MS_420_Anim
-ftKb_MS_420_Anim:
+.global ftKb_YsSpecialAirCapture2_Anim
+ftKb_YsSpecialAirCapture2_Anim:
 /* 80109FD4 00106BB4  7C 08 02 A6 */	mflr r0
 /* 80109FD8 00106BB8  90 01 00 04 */	stw r0, 4(r1)
 /* 80109FDC 00106BBC  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -31548,8 +31548,8 @@ ftKb_MS_420_Anim:
 /* 8010A0AC 00106C8C  38 21 00 30 */	addi r1, r1, 0x30
 /* 8010A0B0 00106C90  7C 08 03 A6 */	mtlr r0
 /* 8010A0B4 00106C94  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNYsCaptureStart_Anim
-ftKb_SpecialAirNYsCaptureStart_Anim:
+.global ftKb_YsSpecialAirCapture1_Anim
+ftKb_YsSpecialAirCapture1_Anim:
 /* 8010A0B8 00106C98  7C 08 02 A6 */	mflr r0
 /* 8010A0BC 00106C9C  90 01 00 04 */	stw r0, 4(r1)
 /* 8010A0C0 00106CA0  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -31611,8 +31611,8 @@ ftKb_SpecialAirNYsCaptureStart_Anim:
 /* 8010A19C 00106D7C  7C 08 03 A6 */	mtlr r0
 /* 8010A1A0 00106D80  4E 80 00 20 */	blr
 
-.global ftKb_MS_417_Anim
-ftKb_MS_417_Anim:
+.global ftKb_YsSpecialNCapture2_0_Anim
+ftKb_YsSpecialNCapture2_0_Anim:
 /* 8010A1A4 00106D84  7C 08 02 A6 */	mflr r0
 /* 8010A1A8 00106D88  90 01 00 04 */	stw r0, 4(r1)
 /* 8010A1AC 00106D8C  94 21 FF 38 */	stwu r1, -0xc8(r1)
@@ -31705,8 +31705,8 @@ ftKb_MS_417_Anim:
 /* 8010A2FC 00106EDC  7C 08 03 A6 */	mtlr r0
 /* 8010A300 00106EE0  4E 80 00 20 */	blr
 
-.global ftKb_SpecialNYsCapture_Anim
-ftKb_SpecialNYsCapture_Anim:
+.global ftKb_YsSpecialNCapture2_1_Anim
+ftKb_YsSpecialNCapture2_1_Anim:
 /* 8010A304 00106EE4  7C 08 02 A6 */	mflr r0
 /* 8010A308 00106EE8  90 01 00 04 */	stw r0, 4(r1)
 /* 8010A30C 00106EEC  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -31759,8 +31759,8 @@ ftKb_SpecialNYsCapture_Anim:
 /* 8010A3BC 00106F9C  38 21 00 28 */	addi r1, r1, 0x28
 /* 8010A3C0 00106FA0  7C 08 03 A6 */	mtlr r0
 /* 8010A3C4 00106FA4  4E 80 00 20 */	blr
-.global ftKb_MS_422_Anim
-ftKb_MS_422_Anim:
+.global ftKb_YsSpecialAirN2_1_Anim
+ftKb_YsSpecialAirN2_1_Anim:
 /* 8010A3C8 00106FA8  7C 08 02 A6 */	mflr r0
 /* 8010A3CC 00106FAC  90 01 00 04 */	stw r0, 4(r1)
 /* 8010A3D0 00106FB0  94 21 FF 38 */	stwu r1, -0xc8(r1)
@@ -31852,8 +31852,8 @@ ftKb_MS_422_Anim:
 /* 8010A51C 001070FC  38 21 00 C8 */	addi r1, r1, 0xc8
 /* 8010A520 00107100  7C 08 03 A6 */	mtlr r0
 /* 8010A524 00107104  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNYsCapture_Anim
-ftKb_SpecialAirNYsCapture_Anim:
+.global ftKb_YsSpecialAirN2_0_Anim
+ftKb_YsSpecialAirN2_0_Anim:
 /* 8010A528 00107108  7C 08 02 A6 */	mflr r0
 /* 8010A52C 0010710C  90 01 00 04 */	stw r0, 4(r1)
 /* 8010A530 00107110  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -31907,8 +31907,8 @@ ftKb_SpecialAirNYsCapture_Anim:
 /* 8010A5E4 001071C4  7C 08 03 A6 */	mtlr r0
 /* 8010A5E8 001071C8  4E 80 00 20 */	blr
 
-.global ftKb_SpecialNYs_Phys
-ftKb_SpecialNYs_Phys:
+.global ftKb_YsSpecialN1_Phys
+ftKb_YsSpecialN1_Phys:
 /* 8010A5EC 001071CC  7C 08 02 A6 */	mflr r0
 /* 8010A5F0 001071D0  90 01 00 04 */	stw r0, 4(r1)
 /* 8010A5F4 001071D4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -31917,8 +31917,8 @@ ftKb_SpecialNYs_Phys:
 /* 8010A600 001071E0  38 21 00 08 */	addi r1, r1, 8
 /* 8010A604 001071E4  7C 08 03 A6 */	mtlr r0
 /* 8010A608 001071E8  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNYs_Phys
-ftKb_SpecialAirNYs_Phys:
+.global ftKb_YsSpecialAirNCapture2_Phys
+ftKb_YsSpecialAirNCapture2_Phys:
 /* 8010A60C 001071EC  7C 08 02 A6 */	mflr r0
 /* 8010A610 001071F0  90 01 00 04 */	stw r0, 4(r1)
 /* 8010A614 001071F4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -31927,8 +31927,8 @@ ftKb_SpecialAirNYs_Phys:
 /* 8010A620 00107200  38 21 00 08 */	addi r1, r1, 8
 /* 8010A624 00107204  7C 08 03 A6 */	mtlr r0
 /* 8010A628 00107208  4E 80 00 20 */	blr
-.global ftKb_MS_415_Phys
-ftKb_MS_415_Phys:
+.global ftKb_YsSpecialAirNCapture1_Phys
+ftKb_YsSpecialAirNCapture1_Phys:
 /* 8010A62C 0010720C  7C 08 02 A6 */	mflr r0
 /* 8010A630 00107210  90 01 00 04 */	stw r0, 4(r1)
 /* 8010A634 00107214  94 21 FF F8 */	stwu r1, -8(r1)
@@ -31937,8 +31937,8 @@ ftKb_MS_415_Phys:
 /* 8010A640 00107220  38 21 00 08 */	addi r1, r1, 8
 /* 8010A644 00107224  7C 08 03 A6 */	mtlr r0
 /* 8010A648 00107228  4E 80 00 20 */	blr
-.global ftKb_SpecialNYsCaptureStart_Phys
-ftKb_SpecialNYsCaptureStart_Phys:
+.global ftKb_YsSpecialNCapture1_Phys
+ftKb_YsSpecialNCapture1_Phys:
 /* 8010A64C 0010722C  7C 08 02 A6 */	mflr r0
 /* 8010A650 00107230  90 01 00 04 */	stw r0, 4(r1)
 /* 8010A654 00107234  94 21 FF F8 */	stwu r1, -8(r1)
@@ -31947,8 +31947,8 @@ ftKb_SpecialNYsCaptureStart_Phys:
 /* 8010A660 00107240  38 21 00 08 */	addi r1, r1, 8
 /* 8010A664 00107244  7C 08 03 A6 */	mtlr r0
 /* 8010A668 00107248  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNYsCaptureStart_Phys
-ftKb_SpecialAirNYsCaptureStart_Phys:
+.global ftKb_YsSpecialAirCapture1_Phys
+ftKb_YsSpecialAirCapture1_Phys:
 /* 8010A66C 0010724C  7C 08 02 A6 */	mflr r0
 /* 8010A670 00107250  90 01 00 04 */	stw r0, 4(r1)
 /* 8010A674 00107254  94 21 FF F8 */	stwu r1, -8(r1)
@@ -31957,8 +31957,8 @@ ftKb_SpecialAirNYsCaptureStart_Phys:
 /* 8010A680 00107260  38 21 00 08 */	addi r1, r1, 8
 /* 8010A684 00107264  7C 08 03 A6 */	mtlr r0
 /* 8010A688 00107268  4E 80 00 20 */	blr
-.global ftKb_MS_420_Phys
-ftKb_MS_420_Phys:
+.global ftKb_YsSpecialAirCapture2_Phys
+ftKb_YsSpecialAirCapture2_Phys:
 /* 8010A68C 0010726C  7C 08 02 A6 */	mflr r0
 /* 8010A690 00107270  90 01 00 04 */	stw r0, 4(r1)
 /* 8010A694 00107274  94 21 FF F8 */	stwu r1, -8(r1)
@@ -31967,8 +31967,8 @@ ftKb_MS_420_Phys:
 /* 8010A6A0 00107280  38 21 00 08 */	addi r1, r1, 8
 /* 8010A6A4 00107284  7C 08 03 A6 */	mtlr r0
 /* 8010A6A8 00107288  4E 80 00 20 */	blr
-.global ftKb_MS_417_Phys
-ftKb_MS_417_Phys:
+.global ftKb_YsSpecialNCapture2_0_Phys
+ftKb_YsSpecialNCapture2_0_Phys:
 /* 8010A6AC 0010728C  7C 08 02 A6 */	mflr r0
 /* 8010A6B0 00107290  90 01 00 04 */	stw r0, 4(r1)
 /* 8010A6B4 00107294  94 21 FF F8 */	stwu r1, -8(r1)
@@ -31978,8 +31978,8 @@ ftKb_MS_417_Phys:
 /* 8010A6C4 001072A4  7C 08 03 A6 */	mtlr r0
 /* 8010A6C8 001072A8  4E 80 00 20 */	blr
 
-.global ftKb_SpecialNYsCapture_Phys
-ftKb_SpecialNYsCapture_Phys:
+.global ftKb_YsSpecialNCapture2_1_Phys
+ftKb_YsSpecialNCapture2_1_Phys:
 /* 8010A6CC 001072AC  7C 08 02 A6 */	mflr r0
 /* 8010A6D0 001072B0  90 01 00 04 */	stw r0, 4(r1)
 /* 8010A6D4 001072B4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -31989,8 +31989,8 @@ ftKb_SpecialNYsCapture_Phys:
 /* 8010A6E4 001072C4  7C 08 03 A6 */	mtlr r0
 /* 8010A6E8 001072C8  4E 80 00 20 */	blr
 
-.global ftKb_MS_422_Phys
-ftKb_MS_422_Phys:
+.global ftKb_YsSpecialAirN2_1_Phys
+ftKb_YsSpecialAirN2_1_Phys:
 /* 8010A6EC 001072CC  7C 08 02 A6 */	mflr r0
 /* 8010A6F0 001072D0  90 01 00 04 */	stw r0, 4(r1)
 /* 8010A6F4 001072D4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -31999,8 +31999,8 @@ ftKb_MS_422_Phys:
 /* 8010A700 001072E0  38 21 00 08 */	addi r1, r1, 8
 /* 8010A704 001072E4  7C 08 03 A6 */	mtlr r0
 /* 8010A708 001072E8  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNYsCapture_Phys
-ftKb_SpecialAirNYsCapture_Phys:
+.global ftKb_YsSpecialAirN2_0_Phys
+ftKb_YsSpecialAirN2_0_Phys:
 /* 8010A70C 001072EC  7C 08 02 A6 */	mflr r0
 /* 8010A710 001072F0  90 01 00 04 */	stw r0, 4(r1)
 /* 8010A714 001072F4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -32010,8 +32010,8 @@ ftKb_SpecialAirNYsCapture_Phys:
 /* 8010A724 00107304  7C 08 03 A6 */	mtlr r0
 /* 8010A728 00107308  4E 80 00 20 */	blr
 
-.global ftKb_SpecialNYs_Coll
-ftKb_SpecialNYs_Coll:
+.global ftKb_YsSpecialN1_Coll
+ftKb_YsSpecialN1_Coll:
 /* 8010A72C 0010730C  7C 08 02 A6 */	mflr r0
 /* 8010A730 00107310  3C 80 80 11 */	lis r4, .L_8010984C@ha
 /* 8010A734 00107314  90 01 00 04 */	stw r0, 4(r1)
@@ -32022,8 +32022,8 @@ ftKb_SpecialNYs_Coll:
 /* 8010A748 00107328  38 21 00 08 */	addi r1, r1, 8
 /* 8010A74C 0010732C  7C 08 03 A6 */	mtlr r0
 /* 8010A750 00107330  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNYs_Coll
-ftKb_SpecialAirNYs_Coll:
+.global ftKb_YsSpecialAirNCapture2_Coll
+ftKb_YsSpecialAirNCapture2_Coll:
 /* 8010A754 00107334  7C 08 02 A6 */	mflr r0
 /* 8010A758 00107338  3C 80 80 11 */	lis r4, .L_801098EC@ha
 /* 8010A75C 0010733C  90 01 00 04 */	stw r0, 4(r1)
@@ -32034,8 +32034,8 @@ ftKb_SpecialAirNYs_Coll:
 /* 8010A770 00107350  38 21 00 08 */	addi r1, r1, 8
 /* 8010A774 00107354  7C 08 03 A6 */	mtlr r0
 /* 8010A778 00107358  4E 80 00 20 */	blr
-.global ftKb_MS_415_Coll
-ftKb_MS_415_Coll:
+.global ftKb_YsSpecialAirNCapture1_Coll
+ftKb_YsSpecialAirNCapture1_Coll:
 /* 8010A77C 0010735C  7C 08 02 A6 */	mflr r0
 /* 8010A780 00107360  3C 80 80 11 */	lis r4, .L_8010998C@ha
 /* 8010A784 00107364  90 01 00 04 */	stw r0, 4(r1)
@@ -32046,8 +32046,8 @@ ftKb_MS_415_Coll:
 /* 8010A798 00107378  38 21 00 08 */	addi r1, r1, 8
 /* 8010A79C 0010737C  7C 08 03 A6 */	mtlr r0
 /* 8010A7A0 00107380  4E 80 00 20 */	blr
-.global ftKb_SpecialNYsCaptureStart_Coll
-ftKb_SpecialNYsCaptureStart_Coll:
+.global ftKb_YsSpecialNCapture1_Coll
+ftKb_YsSpecialNCapture1_Coll:
 /* 8010A7A4 00107384  7C 08 02 A6 */	mflr r0
 /* 8010A7A8 00107388  3C 80 80 11 */	lis r4, .L_80109A08@ha
 /* 8010A7AC 0010738C  90 01 00 04 */	stw r0, 4(r1)
@@ -32058,8 +32058,8 @@ ftKb_SpecialNYsCaptureStart_Coll:
 /* 8010A7C0 001073A0  38 21 00 08 */	addi r1, r1, 8
 /* 8010A7C4 001073A4  7C 08 03 A6 */	mtlr r0
 /* 8010A7C8 001073A8  4E 80 00 20 */	blr
-.global ftKb_MS_420_Coll
-ftKb_MS_420_Coll:
+.global ftKb_YsSpecialAirCapture2_Coll
+ftKb_YsSpecialAirCapture2_Coll:
 /* 8010A7CC 001073AC  7C 08 02 A6 */	mflr r0
 /* 8010A7D0 001073B0  3C 80 80 11 */	lis r4, .L_80109A84@ha
 /* 8010A7D4 001073B4  90 01 00 04 */	stw r0, 4(r1)
@@ -32070,8 +32070,8 @@ ftKb_MS_420_Coll:
 /* 8010A7E8 001073C8  38 21 00 08 */	addi r1, r1, 8
 /* 8010A7EC 001073CC  7C 08 03 A6 */	mtlr r0
 /* 8010A7F0 001073D0  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNYsCaptureStart_Coll
-ftKb_SpecialAirNYsCaptureStart_Coll:
+.global ftKb_YsSpecialAirCapture1_Coll
+ftKb_YsSpecialAirCapture1_Coll:
 /* 8010A7F4 001073D4  7C 08 02 A6 */	mflr r0
 /* 8010A7F8 001073D8  3C 80 80 11 */	lis r4, .L_80109B00@ha
 /* 8010A7FC 001073DC  90 01 00 04 */	stw r0, 4(r1)
@@ -32082,8 +32082,8 @@ ftKb_SpecialAirNYsCaptureStart_Coll:
 /* 8010A810 001073F0  38 21 00 08 */	addi r1, r1, 8
 /* 8010A814 001073F4  7C 08 03 A6 */	mtlr r0
 /* 8010A818 001073F8  4E 80 00 20 */	blr
-.global ftKb_MS_417_Coll
-ftKb_MS_417_Coll:
+.global ftKb_YsSpecialNCapture2_0_Coll
+ftKb_YsSpecialNCapture2_0_Coll:
 /* 8010A81C 001073FC  7C 08 02 A6 */	mflr r0
 /* 8010A820 00107400  3C 80 80 11 */	lis r4, .L_80109B7C@ha
 /* 8010A824 00107404  90 01 00 04 */	stw r0, 4(r1)
@@ -32095,8 +32095,8 @@ ftKb_MS_417_Coll:
 /* 8010A83C 0010741C  7C 08 03 A6 */	mtlr r0
 /* 8010A840 00107420  4E 80 00 20 */	blr
 
-.global ftKb_SpecialNYsCapture_Coll
-ftKb_SpecialNYsCapture_Coll:
+.global ftKb_YsSpecialNCapture2_1_Coll
+ftKb_YsSpecialNCapture2_1_Coll:
 /* 8010A844 00107424  7C 08 02 A6 */	mflr r0
 /* 8010A848 00107428  3C 80 80 11 */	lis r4, .L_80109BF8@ha
 /* 8010A84C 0010742C  90 01 00 04 */	stw r0, 4(r1)
@@ -32108,8 +32108,8 @@ ftKb_SpecialNYsCapture_Coll:
 /* 8010A864 00107444  7C 08 03 A6 */	mtlr r0
 /* 8010A868 00107448  4E 80 00 20 */	blr
 
-.global ftKb_MS_422_Coll
-ftKb_MS_422_Coll:
+.global ftKb_YsSpecialAirN2_1_Coll
+ftKb_YsSpecialAirN2_1_Coll:
 /* 8010A86C 0010744C  7C 08 02 A6 */	mflr r0
 /* 8010A870 00107450  3C 80 80 11 */	lis r4, .L_80109C74@ha
 /* 8010A874 00107454  90 01 00 04 */	stw r0, 4(r1)
@@ -32120,8 +32120,8 @@ ftKb_MS_422_Coll:
 /* 8010A888 00107468  38 21 00 08 */	addi r1, r1, 8
 /* 8010A88C 0010746C  7C 08 03 A6 */	mtlr r0
 /* 8010A890 00107470  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNYsCapture_Coll
-ftKb_SpecialAirNYsCapture_Coll:
+.global ftKb_YsSpecialAirN2_0_Coll
+ftKb_YsSpecialAirN2_0_Coll:
 /* 8010A894 00107474  7C 08 02 A6 */	mflr r0
 /* 8010A898 00107478  3C 80 80 11 */	lis r4, .L_80109CF0@ha
 /* 8010A89C 0010747C  90 01 00 04 */	stw r0, 4(r1)
@@ -33105,8 +33105,8 @@ ftKb_SpecialNMs_8010B4A0:
 /* 8010B654 00108234  7C 08 03 A6 */	mtlr r0
 /* 8010B658 00108238  4E 80 00 20 */	blr
 
-.global ftKb_SpecialNMsStartCharge_Anim
-ftKb_SpecialNMsStartCharge_Anim:
+.global ftKb_MsSpecialNStart_Anim
+ftKb_MsSpecialNStart_Anim:
 /* 8010B65C 0010823C  7C 08 02 A6 */	mflr r0
 /* 8010B660 00108240  90 01 00 04 */	stw r0, 4(r1)
 /* 8010B664 00108244  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -33135,8 +33135,8 @@ ftKb_SpecialNMsStartCharge_Anim:
 /* 8010B6B8 00108298  38 21 00 18 */	addi r1, r1, 0x18
 /* 8010B6BC 0010829C  7C 08 03 A6 */	mtlr r0
 /* 8010B6C0 001082A0  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMsStartCharge_Anim
-ftKb_SpecialAirNMsStartCharge_Anim:
+.global ftKb_MsSpecialAirNStart_Anim
+ftKb_MsSpecialAirNStart_Anim:
 /* 8010B6C4 001082A4  7C 08 02 A6 */	mflr r0
 /* 8010B6C8 001082A8  90 01 00 04 */	stw r0, 4(r1)
 /* 8010B6CC 001082AC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -33165,14 +33165,14 @@ ftKb_SpecialAirNMsStartCharge_Anim:
 /* 8010B720 00108300  38 21 00 18 */	addi r1, r1, 0x18
 /* 8010B724 00108304  7C 08 03 A6 */	mtlr r0
 /* 8010B728 00108308  4E 80 00 20 */	blr
-.global ftKb_SpecialNMsStartCharge_IASA
-ftKb_SpecialNMsStartCharge_IASA:
+.global ftKb_MsSpecialNStart_IASA
+ftKb_MsSpecialNStart_IASA:
 /* 8010B72C 0010830C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMsStartCharge_IASA
-ftKb_SpecialAirNMsStartCharge_IASA:
+.global ftKb_MsSpecialAirNStart_IASA
+ftKb_MsSpecialAirNStart_IASA:
 /* 8010B730 00108310  4E 80 00 20 */	blr
-.global ftKb_SpecialNMsStartCharge_Phys
-ftKb_SpecialNMsStartCharge_Phys:
+.global ftKb_MsSpecialNStart_Phys
+ftKb_MsSpecialNStart_Phys:
 /* 8010B734 00108314  7C 08 02 A6 */	mflr r0
 /* 8010B738 00108318  90 01 00 04 */	stw r0, 4(r1)
 /* 8010B73C 0010831C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -33197,8 +33197,8 @@ ftKb_SpecialNMsStartCharge_Phys:
 /* 8010B780 00108360  38 21 00 28 */	addi r1, r1, 0x28
 /* 8010B784 00108364  7C 08 03 A6 */	mtlr r0
 /* 8010B788 00108368  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMsStartCharge_Phys
-ftKb_SpecialAirNMsStartCharge_Phys:
+.global ftKb_MsSpecialAirNStart_Phys
+ftKb_MsSpecialAirNStart_Phys:
 /* 8010B78C 0010836C  7C 08 02 A6 */	mflr r0
 /* 8010B790 00108370  90 01 00 04 */	stw r0, 4(r1)
 /* 8010B794 00108374  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -33226,8 +33226,8 @@ ftKb_SpecialAirNMsStartCharge_Phys:
 /* 8010B7E4 001083C4  38 21 00 28 */	addi r1, r1, 0x28
 /* 8010B7E8 001083C8  7C 08 03 A6 */	mtlr r0
 /* 8010B7EC 001083CC  4E 80 00 20 */	blr
-.global ftKb_SpecialNMsStartCharge_Coll
-ftKb_SpecialNMsStartCharge_Coll:
+.global ftKb_MsSpecialNStart_Coll
+ftKb_MsSpecialNStart_Coll:
 /* 8010B7F0 001083D0  7C 08 02 A6 */	mflr r0
 /* 8010B7F4 001083D4  90 01 00 04 */	stw r0, 4(r1)
 /* 8010B7F8 001083D8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -33244,8 +33244,8 @@ ftKb_SpecialNMsStartCharge_Coll:
 /* 8010B820 00108400  38 21 00 18 */	addi r1, r1, 0x18
 /* 8010B824 00108404  7C 08 03 A6 */	mtlr r0
 /* 8010B828 00108408  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMsStartCharge_Coll
-ftKb_SpecialAirNMsStartCharge_Coll:
+.global ftKb_MsSpecialAirNStart_Coll
+ftKb_MsSpecialAirNStart_Coll:
 /* 8010B82C 0010840C  7C 08 02 A6 */	mflr r0
 /* 8010B830 00108410  90 01 00 04 */	stw r0, 4(r1)
 /* 8010B834 00108414  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -33332,8 +33332,8 @@ ftKb_SpecialNMs_8010B8E0:
 /* 8010B94C 0010852C  38 21 00 20 */	addi r1, r1, 0x20
 /* 8010B950 00108530  7C 08 03 A6 */	mtlr r0
 /* 8010B954 00108534  4E 80 00 20 */	blr
-.global ftKb_SpecialNMsChargeLoop_Anim
-ftKb_SpecialNMsChargeLoop_Anim:
+.global ftKb_MsSpecialNLoop_Anim
+ftKb_MsSpecialNLoop_Anim:
 /* 8010B958 00108538  7C 08 02 A6 */	mflr r0
 /* 8010B95C 0010853C  90 01 00 04 */	stw r0, 4(r1)
 /* 8010B960 00108540  94 21 FF F8 */	stwu r1, -8(r1)
@@ -33363,8 +33363,8 @@ ftKb_SpecialNMsChargeLoop_Anim:
 /* 8010B9B4 00108594  38 21 00 08 */	addi r1, r1, 8
 /* 8010B9B8 00108598  7C 08 03 A6 */	mtlr r0
 /* 8010B9BC 0010859C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMsChargeLoop_Anim
-ftKb_SpecialAirNMsChargeLoop_Anim:
+.global ftKb_MsSpecialAirNLoop_Anim
+ftKb_MsSpecialAirNLoop_Anim:
 /* 8010B9C0 001085A0  7C 08 02 A6 */	mflr r0
 /* 8010B9C4 001085A4  90 01 00 04 */	stw r0, 4(r1)
 /* 8010B9C8 001085A8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -33394,8 +33394,8 @@ ftKb_SpecialAirNMsChargeLoop_Anim:
 /* 8010BA1C 001085FC  38 21 00 08 */	addi r1, r1, 8
 /* 8010BA20 00108600  7C 08 03 A6 */	mtlr r0
 /* 8010BA24 00108604  4E 80 00 20 */	blr
-.global ftKb_SpecialNMsChargeLoop_IASA
-ftKb_SpecialNMsChargeLoop_IASA:
+.global ftKb_MsSpecialNLoop_IASA
+ftKb_MsSpecialNLoop_IASA:
 /* 8010BA28 00108608  7C 08 02 A6 */	mflr r0
 /* 8010BA2C 0010860C  90 01 00 04 */	stw r0, 4(r1)
 /* 8010BA30 00108610  94 21 FF F8 */	stwu r1, -8(r1)
@@ -33411,8 +33411,8 @@ ftKb_SpecialNMsChargeLoop_IASA:
 /* 8010BA54 00108634  38 21 00 08 */	addi r1, r1, 8
 /* 8010BA58 00108638  7C 08 03 A6 */	mtlr r0
 /* 8010BA5C 0010863C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMsChargeLoop_IASA
-ftKb_SpecialAirNMsChargeLoop_IASA:
+.global ftKb_MsSpecialAirNLoop_IASA
+ftKb_MsSpecialAirNLoop_IASA:
 /* 8010BA60 00108640  7C 08 02 A6 */	mflr r0
 /* 8010BA64 00108644  90 01 00 04 */	stw r0, 4(r1)
 /* 8010BA68 00108648  94 21 FF F8 */	stwu r1, -8(r1)
@@ -33428,8 +33428,8 @@ ftKb_SpecialAirNMsChargeLoop_IASA:
 /* 8010BA8C 0010866C  38 21 00 08 */	addi r1, r1, 8
 /* 8010BA90 00108670  7C 08 03 A6 */	mtlr r0
 /* 8010BA94 00108674  4E 80 00 20 */	blr
-.global ftKb_SpecialNMsChargeLoop_Phys
-ftKb_SpecialNMsChargeLoop_Phys:
+.global ftKb_MsSpecialNLoop_Phys
+ftKb_MsSpecialNLoop_Phys:
 /* 8010BA98 00108678  7C 08 02 A6 */	mflr r0
 /* 8010BA9C 0010867C  90 01 00 04 */	stw r0, 4(r1)
 /* 8010BAA0 00108680  94 21 FF F8 */	stwu r1, -8(r1)
@@ -33438,8 +33438,8 @@ ftKb_SpecialNMsChargeLoop_Phys:
 /* 8010BAAC 0010868C  38 21 00 08 */	addi r1, r1, 8
 /* 8010BAB0 00108690  7C 08 03 A6 */	mtlr r0
 /* 8010BAB4 00108694  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMsChargeLoop_Phys
-ftKb_SpecialAirNMsChargeLoop_Phys:
+.global ftKb_MsSpecialAirNLoop_Phys
+ftKb_MsSpecialAirNLoop_Phys:
 /* 8010BAB8 00108698  7C 08 02 A6 */	mflr r0
 /* 8010BABC 0010869C  90 01 00 04 */	stw r0, 4(r1)
 /* 8010BAC0 001086A0  94 21 FF F8 */	stwu r1, -8(r1)
@@ -33448,8 +33448,8 @@ ftKb_SpecialAirNMsChargeLoop_Phys:
 /* 8010BACC 001086AC  38 21 00 08 */	addi r1, r1, 8
 /* 8010BAD0 001086B0  7C 08 03 A6 */	mtlr r0
 /* 8010BAD4 001086B4  4E 80 00 20 */	blr
-.global ftKb_SpecialNMsChargeLoop_Coll
-ftKb_SpecialNMsChargeLoop_Coll:
+.global ftKb_MsSpecialNLoop_Coll
+ftKb_MsSpecialNLoop_Coll:
 /* 8010BAD8 001086B8  7C 08 02 A6 */	mflr r0
 /* 8010BADC 001086BC  90 01 00 04 */	stw r0, 4(r1)
 /* 8010BAE0 001086C0  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -33466,8 +33466,8 @@ ftKb_SpecialNMsChargeLoop_Coll:
 /* 8010BB08 001086E8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8010BB0C 001086EC  7C 08 03 A6 */	mtlr r0
 /* 8010BB10 001086F0  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMsChargeLoop_Coll
-ftKb_SpecialAirNMsChargeLoop_Coll:
+.global ftKb_MsSpecialAirNLoop_Coll
+ftKb_MsSpecialAirNLoop_Coll:
 /* 8010BB14 001086F4  7C 08 02 A6 */	mflr r0
 /* 8010BB18 001086F8  90 01 00 04 */	stw r0, 4(r1)
 /* 8010BB1C 001086FC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -33605,8 +33605,8 @@ ftKb_SpecialNMs_8010BC90:
 /* 8010BCD8 001088B8  7C 08 03 A6 */	mtlr r0
 /* 8010BCDC 001088BC  4E 80 00 20 */	blr
 
-.global ftKb_SpecialNMs_Anim
-ftKb_SpecialNMs_Anim:
+.global ftKb_MsSpecialNEnd_Anim
+ftKb_MsSpecialNEnd_Anim:
 /* 8010BCE0 001088C0  7C 08 02 A6 */	mflr r0
 /* 8010BCE4 001088C4  90 01 00 04 */	stw r0, 4(r1)
 /* 8010BCE8 001088C8  94 21 FF A8 */	stwu r1, -0x58(r1)
@@ -33675,8 +33675,8 @@ ftKb_SpecialNMs_Anim:
 /* 8010BDCC 001089AC  38 21 00 58 */	addi r1, r1, 0x58
 /* 8010BDD0 001089B0  7C 08 03 A6 */	mtlr r0
 /* 8010BDD4 001089B4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNFeMs_Anim
-ftKb_SpecialAirNFeMs_Anim:
+.global ftKb_MsSpecialAirNEnd_Anim
+ftKb_MsSpecialAirNEnd_Anim:
 /* 8010BDD8 001089B8  7C 08 02 A6 */	mflr r0
 /* 8010BDDC 001089BC  90 01 00 04 */	stw r0, 4(r1)
 /* 8010BDE0 001089C0  94 21 FF A8 */	stwu r1, -0x58(r1)
@@ -33745,15 +33745,15 @@ ftKb_SpecialAirNFeMs_Anim:
 /* 8010BEC4 00108AA4  38 21 00 58 */	addi r1, r1, 0x58
 /* 8010BEC8 00108AA8  7C 08 03 A6 */	mtlr r0
 /* 8010BECC 00108AAC  4E 80 00 20 */	blr
-.global ftKb_SpecialNMs_IASA
-ftKb_SpecialNMs_IASA:
+.global ftKb_MsSpecialNEnd_IASA
+ftKb_MsSpecialNEnd_IASA:
 /* 8010BED0 00108AB0  4E 80 00 20 */	blr
 
-.global ftKb_SpecialAirNMs_IASA
-ftKb_SpecialAirNMs_IASA:
+.global ftKb_MsSpecialAirNEnd_IASA
+ftKb_MsSpecialAirNEnd_IASA:
 /* 8010BED4 00108AB4  4E 80 00 20 */	blr
-.global ftKb_SpecialNMs_Phys
-ftKb_SpecialNMs_Phys:
+.global ftKb_MsSpecialNEnd_Phys
+ftKb_MsSpecialNEnd_Phys:
 /* 8010BED8 00108AB8  7C 08 02 A6 */	mflr r0
 /* 8010BEDC 00108ABC  90 01 00 04 */	stw r0, 4(r1)
 /* 8010BEE0 00108AC0  94 21 FF F8 */	stwu r1, -8(r1)
@@ -33763,8 +33763,8 @@ ftKb_SpecialNMs_Phys:
 /* 8010BEF0 00108AD0  7C 08 03 A6 */	mtlr r0
 /* 8010BEF4 00108AD4  4E 80 00 20 */	blr
 
-.global ftKb_SpecialAirNMs_Phys
-ftKb_SpecialAirNMs_Phys:
+.global ftKb_MsSpecialAirNEnd_Phys
+ftKb_MsSpecialAirNEnd_Phys:
 /* 8010BEF8 00108AD8  7C 08 02 A6 */	mflr r0
 /* 8010BEFC 00108ADC  90 01 00 04 */	stw r0, 4(r1)
 /* 8010BF00 00108AE0  94 21 FF F8 */	stwu r1, -8(r1)
@@ -33773,8 +33773,8 @@ ftKb_SpecialAirNMs_Phys:
 /* 8010BF0C 00108AEC  38 21 00 08 */	addi r1, r1, 8
 /* 8010BF10 00108AF0  7C 08 03 A6 */	mtlr r0
 /* 8010BF14 00108AF4  4E 80 00 20 */	blr
-.global ftKb_SpecialNMs_Coll
-ftKb_SpecialNMs_Coll:
+.global ftKb_MsSpecialNEnd_Coll
+ftKb_MsSpecialNEnd_Coll:
 /* 8010BF18 00108AF8  7C 08 02 A6 */	mflr r0
 /* 8010BF1C 00108AFC  90 01 00 04 */	stw r0, 4(r1)
 /* 8010BF20 00108B00  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -33791,8 +33791,8 @@ ftKb_SpecialNMs_Coll:
 /* 8010BF48 00108B28  38 21 00 18 */	addi r1, r1, 0x18
 /* 8010BF4C 00108B2C  7C 08 03 A6 */	mtlr r0
 /* 8010BF50 00108B30  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNMs_Coll
-ftKb_SpecialAirNMs_Coll:
+.global ftKb_MsSpecialAirNEnd_Coll
+ftKb_MsSpecialAirNEnd_Coll:
 /* 8010BF54 00108B34  7C 08 02 A6 */	mflr r0
 /* 8010BF58 00108B38  90 01 00 04 */	stw r0, 4(r1)
 /* 8010BF5C 00108B3C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -34283,8 +34283,8 @@ ftKb_SpecialNPe_8010C560:
 /* 8010C5F0 001091D0  38 21 00 30 */	addi r1, r1, 0x30
 /* 8010C5F4 001091D4  7C 08 03 A6 */	mtlr r0
 /* 8010C5F8 001091D8  4E 80 00 20 */	blr
-.global ftKb_SpecialNPe_Anim
-ftKb_SpecialNPe_Anim:
+.global ftKb_PeSpecialLw_Anim
+ftKb_PeSpecialLw_Anim:
 /* 8010C5FC 001091DC  7C 08 02 A6 */	mflr r0
 /* 8010C600 001091E0  90 01 00 04 */	stw r0, 4(r1)
 /* 8010C604 001091E4  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -34335,8 +34335,8 @@ ftKb_SpecialNPe_Anim:
 /* 8010C6AC 0010928C  38 21 00 30 */	addi r1, r1, 0x30
 /* 8010C6B0 00109290  7C 08 03 A6 */	mtlr r0
 /* 8010C6B4 00109294  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPe_Anim
-ftKb_SpecialAirNPe_Anim:
+.global ftKb_PeSpecialAirLw_Anim
+ftKb_PeSpecialAirLw_Anim:
 /* 8010C6B8 00109298  7C 08 02 A6 */	mflr r0
 /* 8010C6BC 0010929C  90 01 00 04 */	stw r0, 4(r1)
 /* 8010C6C0 001092A0  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -34387,14 +34387,14 @@ ftKb_SpecialAirNPe_Anim:
 /* 8010C768 00109348  38 21 00 30 */	addi r1, r1, 0x30
 /* 8010C76C 0010934C  7C 08 03 A6 */	mtlr r0
 /* 8010C770 00109350  4E 80 00 20 */	blr
-.global ftKb_SpecialNPe_IASA
-ftKb_SpecialNPe_IASA:
+.global ftKb_PeSpecialLw_IASA
+ftKb_PeSpecialLw_IASA:
 /* 8010C774 00109354  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPe_IASA
-ftKb_SpecialAirNPe_IASA:
+.global ftKb_PeSpecialAirLw_IASA
+ftKb_PeSpecialAirLw_IASA:
 /* 8010C778 00109358  4E 80 00 20 */	blr
-.global ftKb_SpecialNPe_Phys
-ftKb_SpecialNPe_Phys:
+.global ftKb_PeSpecialLw_Phys
+ftKb_PeSpecialLw_Phys:
 /* 8010C77C 0010935C  7C 08 02 A6 */	mflr r0
 /* 8010C780 00109360  90 01 00 04 */	stw r0, 4(r1)
 /* 8010C784 00109364  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -34408,8 +34408,8 @@ ftKb_SpecialNPe_Phys:
 /* 8010C7A4 00109384  38 21 00 18 */	addi r1, r1, 0x18
 /* 8010C7A8 00109388  7C 08 03 A6 */	mtlr r0
 /* 8010C7AC 0010938C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPe_Phys
-ftKb_SpecialAirNPe_Phys:
+.global ftKb_PeSpecialAirLw_Phys
+ftKb_PeSpecialAirLw_Phys:
 /* 8010C7B0 00109390  7C 08 02 A6 */	mflr r0
 /* 8010C7B4 00109394  90 01 00 04 */	stw r0, 4(r1)
 /* 8010C7B8 00109398  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -34458,8 +34458,8 @@ ftKb_SpecialAirNPe_Phys:
 /* 8010C854 00109434  38 21 00 30 */	addi r1, r1, 0x30
 /* 8010C858 00109438  7C 08 03 A6 */	mtlr r0
 /* 8010C85C 0010943C  4E 80 00 20 */	blr
-.global ftKb_SpecialNPe_Coll
-ftKb_SpecialNPe_Coll:
+.global ftKb_PeSpecialLw_Coll
+ftKb_PeSpecialLw_Coll:
 /* 8010C860 00109440  7C 08 02 A6 */	mflr r0
 /* 8010C864 00109444  90 01 00 04 */	stw r0, 4(r1)
 /* 8010C868 00109448  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -34476,8 +34476,8 @@ ftKb_SpecialNPe_Coll:
 /* 8010C890 00109470  38 21 00 18 */	addi r1, r1, 0x18
 /* 8010C894 00109474  7C 08 03 A6 */	mtlr r0
 /* 8010C898 00109478  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPe_Coll
-ftKb_SpecialAirNPe_Coll:
+.global ftKb_PeSpecialAirLw_Coll
+ftKb_PeSpecialAirLw_Coll:
 /* 8010C89C 0010947C  7C 08 02 A6 */	mflr r0
 /* 8010C8A0 00109480  90 01 00 04 */	stw r0, 4(r1)
 /* 8010C8A4 00109484  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -34624,8 +34624,8 @@ ftKb_SpecialNPe_8010C9CC:
 /* 8010CAA8 00109688  38 21 00 28 */	addi r1, r1, 0x28
 /* 8010CAAC 0010968C  7C 08 03 A6 */	mtlr r0
 /* 8010CAB0 00109690  4E 80 00 20 */	blr
-.global ftKb_SpecialNPeAttack_Anim
-ftKb_SpecialNPeAttack_Anim:
+.global ftKb_PeSpecialLwHit_Anim
+ftKb_PeSpecialLwHit_Anim:
 /* 8010CAB4 00109694  7C 08 02 A6 */	mflr r0
 /* 8010CAB8 00109698  90 01 00 04 */	stw r0, 4(r1)
 /* 8010CABC 0010969C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -34653,8 +34653,8 @@ ftKb_SpecialNPeAttack_Anim:
 /* 8010CB0C 001096EC  38 21 00 18 */	addi r1, r1, 0x18
 /* 8010CB10 001096F0  7C 08 03 A6 */	mtlr r0
 /* 8010CB14 001096F4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPeAttack_Anim
-ftKb_SpecialAirNPeAttack_Anim:
+.global ftKb_PeSpecialAirLwHit_Anim
+ftKb_PeSpecialAirLwHit_Anim:
 /* 8010CB18 001096F8  7C 08 02 A6 */	mflr r0
 /* 8010CB1C 001096FC  90 01 00 04 */	stw r0, 4(r1)
 /* 8010CB20 00109700  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -34682,14 +34682,14 @@ ftKb_SpecialAirNPeAttack_Anim:
 /* 8010CB70 00109750  38 21 00 18 */	addi r1, r1, 0x18
 /* 8010CB74 00109754  7C 08 03 A6 */	mtlr r0
 /* 8010CB78 00109758  4E 80 00 20 */	blr
-.global ftKb_SpecialNPeAttack_IASA
-ftKb_SpecialNPeAttack_IASA:
+.global ftKb_PeSpecialLwHit_IASA
+ftKb_PeSpecialLwHit_IASA:
 /* 8010CB7C 0010975C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPeAttack_IASA
-ftKb_SpecialAirNPeAttack_IASA:
+.global ftKb_PeSpecialAirLwHit_IASA
+ftKb_PeSpecialAirLwHit_IASA:
 /* 8010CB80 00109760  4E 80 00 20 */	blr
-.global ftKb_SpecialNPeAttack_Phys
-ftKb_SpecialNPeAttack_Phys:
+.global ftKb_PeSpecialLwHit_Phys
+ftKb_PeSpecialLwHit_Phys:
 /* 8010CB84 00109764  7C 08 02 A6 */	mflr r0
 /* 8010CB88 00109768  90 01 00 04 */	stw r0, 4(r1)
 /* 8010CB8C 0010976C  94 21 FF F8 */	stwu r1, -8(r1)
@@ -34698,8 +34698,8 @@ ftKb_SpecialNPeAttack_Phys:
 /* 8010CB98 00109778  38 21 00 08 */	addi r1, r1, 8
 /* 8010CB9C 0010977C  7C 08 03 A6 */	mtlr r0
 /* 8010CBA0 00109780  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPeAttack_Phys
-ftKb_SpecialAirNPeAttack_Phys:
+.global ftKb_PeSpecialAirLwHit_Phys
+ftKb_PeSpecialAirLwHit_Phys:
 /* 8010CBA4 00109784  7C 08 02 A6 */	mflr r0
 /* 8010CBA8 00109788  90 01 00 04 */	stw r0, 4(r1)
 /* 8010CBAC 0010978C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -34720,8 +34720,8 @@ ftKb_SpecialAirNPeAttack_Phys:
 /* 8010CBE8 001097C8  38 21 00 20 */	addi r1, r1, 0x20
 /* 8010CBEC 001097CC  7C 08 03 A6 */	mtlr r0
 /* 8010CBF0 001097D0  4E 80 00 20 */	blr
-.global ftKb_SpecialNPeAttack_Coll
-ftKb_SpecialNPeAttack_Coll:
+.global ftKb_PeSpecialLwHit_Coll
+ftKb_PeSpecialLwHit_Coll:
 /* 8010CBF4 001097D4  7C 08 02 A6 */	mflr r0
 /* 8010CBF8 001097D8  90 01 00 04 */	stw r0, 4(r1)
 /* 8010CBFC 001097DC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -34738,8 +34738,8 @@ ftKb_SpecialNPeAttack_Coll:
 /* 8010CC24 00109804  38 21 00 18 */	addi r1, r1, 0x18
 /* 8010CC28 00109808  7C 08 03 A6 */	mtlr r0
 /* 8010CC2C 0010980C  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNPeAttack_Coll
-ftKb_SpecialAirNPeAttack_Coll:
+.global ftKb_PeSpecialAirLwHit_Coll
+ftKb_PeSpecialAirLwHit_Coll:
 /* 8010CC30 00109810  7C 08 02 A6 */	mflr r0
 /* 8010CC34 00109814  90 01 00 04 */	stw r0, 4(r1)
 /* 8010CC38 00109818  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -35189,8 +35189,8 @@ ftKb_SpecialNGw_8010D204:
 /* 8010D274 00109E54  38 21 00 20 */	addi r1, r1, 0x20
 /* 8010D278 00109E58  7C 08 03 A6 */	mtlr r0
 /* 8010D27C 00109E5C  4E 80 00 20 */	blr
-.global ftKb_SpecialNGw_Anim
-ftKb_SpecialNGw_Anim:
+.global ftKb_GwSpecialN_Anim
+ftKb_GwSpecialN_Anim:
 /* 8010D280 00109E60  7C 08 02 A6 */	mflr r0
 /* 8010D284 00109E64  90 01 00 04 */	stw r0, 4(r1)
 /* 8010D288 00109E68  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -35233,8 +35233,8 @@ ftKb_SpecialNGw_Anim:
 /* 8010D314 00109EF4  38 21 00 40 */	addi r1, r1, 0x40
 /* 8010D318 00109EF8  7C 08 03 A6 */	mtlr r0
 /* 8010D31C 00109EFC  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNGw_Anim
-ftKb_SpecialAirNGw_Anim:
+.global ftKb_GwSpecialAirN_Anim
+ftKb_GwSpecialAirN_Anim:
 /* 8010D320 00109F00  7C 08 02 A6 */	mflr r0
 /* 8010D324 00109F04  90 01 00 04 */	stw r0, 4(r1)
 /* 8010D328 00109F08  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -35277,8 +35277,8 @@ ftKb_SpecialAirNGw_Anim:
 /* 8010D3B4 00109F94  38 21 00 40 */	addi r1, r1, 0x40
 /* 8010D3B8 00109F98  7C 08 03 A6 */	mtlr r0
 /* 8010D3BC 00109F9C  4E 80 00 20 */	blr
-.global ftKb_SpecialNGw_IASA
-ftKb_SpecialNGw_IASA:
+.global ftKb_GwSpecialN_IASA
+ftKb_GwSpecialN_IASA:
 /* 8010D3C0 00109FA0  7C 08 02 A6 */	mflr r0
 /* 8010D3C4 00109FA4  90 01 00 04 */	stw r0, 4(r1)
 /* 8010D3C8 00109FA8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -35314,8 +35314,8 @@ ftKb_SpecialNGw_IASA:
 /* 8010D438 0010A018  38 21 00 20 */	addi r1, r1, 0x20
 /* 8010D43C 0010A01C  7C 08 03 A6 */	mtlr r0
 /* 8010D440 0010A020  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNGw_IASA
-ftKb_SpecialAirNGw_IASA:
+.global ftKb_GwSpecialAirN_IASA
+ftKb_GwSpecialAirN_IASA:
 /* 8010D444 0010A024  7C 08 02 A6 */	mflr r0
 /* 8010D448 0010A028  90 01 00 04 */	stw r0, 4(r1)
 /* 8010D44C 0010A02C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -35351,8 +35351,8 @@ ftKb_SpecialAirNGw_IASA:
 /* 8010D4BC 0010A09C  38 21 00 20 */	addi r1, r1, 0x20
 /* 8010D4C0 0010A0A0  7C 08 03 A6 */	mtlr r0
 /* 8010D4C4 0010A0A4  4E 80 00 20 */	blr
-.global ftKb_SpecialNGw_Phys
-ftKb_SpecialNGw_Phys:
+.global ftKb_GwSpecialN_Phys
+ftKb_GwSpecialN_Phys:
 /* 8010D4C8 0010A0A8  7C 08 02 A6 */	mflr r0
 /* 8010D4CC 0010A0AC  90 01 00 04 */	stw r0, 4(r1)
 /* 8010D4D0 0010A0B0  94 21 FF F8 */	stwu r1, -8(r1)
@@ -35361,8 +35361,8 @@ ftKb_SpecialNGw_Phys:
 /* 8010D4DC 0010A0BC  38 21 00 08 */	addi r1, r1, 8
 /* 8010D4E0 0010A0C0  7C 08 03 A6 */	mtlr r0
 /* 8010D4E4 0010A0C4  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNGw_Phys
-ftKb_SpecialAirNGw_Phys:
+.global ftKb_GwSpecialAirN_Phys
+ftKb_GwSpecialAirN_Phys:
 /* 8010D4E8 0010A0C8  7C 08 02 A6 */	mflr r0
 /* 8010D4EC 0010A0CC  90 01 00 04 */	stw r0, 4(r1)
 /* 8010D4F0 0010A0D0  94 21 FF F8 */	stwu r1, -8(r1)
@@ -35371,8 +35371,8 @@ ftKb_SpecialAirNGw_Phys:
 /* 8010D4FC 0010A0DC  38 21 00 08 */	addi r1, r1, 8
 /* 8010D500 0010A0E0  7C 08 03 A6 */	mtlr r0
 /* 8010D504 0010A0E4  4E 80 00 20 */	blr
-.global ftKb_SpecialNGw_Coll
-ftKb_SpecialNGw_Coll:
+.global ftKb_GwSpecialN_Coll
+ftKb_GwSpecialN_Coll:
 /* 8010D508 0010A0E8  7C 08 02 A6 */	mflr r0
 /* 8010D50C 0010A0EC  90 01 00 04 */	stw r0, 4(r1)
 /* 8010D510 0010A0F0  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -35389,8 +35389,8 @@ ftKb_SpecialNGw_Coll:
 /* 8010D538 0010A118  38 21 00 18 */	addi r1, r1, 0x18
 /* 8010D53C 0010A11C  7C 08 03 A6 */	mtlr r0
 /* 8010D540 0010A120  4E 80 00 20 */	blr
-.global ftKb_SpecialAirNGw_Coll
-ftKb_SpecialAirNGw_Coll:
+.global ftKb_GwSpecialAirN_Coll
+ftKb_GwSpecialAirN_Coll:
 /* 8010D544 0010A124  7C 08 02 A6 */	mflr r0
 /* 8010D548 0010A128  90 01 00 04 */	stw r0, 4(r1)
 /* 8010D54C 0010A12C  94 21 FF E8 */	stwu r1, -0x18(r1)

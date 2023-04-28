@@ -356,9 +356,9 @@ void ftLg_SpecialAirSHold_Enter(HSD_GObj* gobj)
 }
 
 /// Luigi's grounded Green Missile Launch Animation callback
-void ftLg_SpecialSLaunch_Anim(HSD_GObj* gobj)
+void ftLg_SpecialS_Anim(HSD_GObj* gobj)
 {
-    /// @todo Shared @c inline with #ftLg_SpecialAirSLaunch_Anim.
+    /// @todo Shared @c inline with #ftLg_SpecialAirS_Anim.
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
@@ -384,7 +384,7 @@ void ftLg_SpecialSLaunch_Anim(HSD_GObj* gobj)
 }
 
 /// Luigi's aerial Green Missile Launch Animation callback
-void ftLg_SpecialAirSLaunch_Anim(HSD_GObj* gobj)
+void ftLg_SpecialAirS_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -410,25 +410,25 @@ void ftLg_SpecialAirSLaunch_Anim(HSD_GObj* gobj)
 }
 
 /// Luigi's grounded Green Missile Launch IASA callback
-void ftLg_SpecialSLaunch_IASA(HSD_GObj* gobj) {}
+void ftLg_SpecialS_IASA(HSD_GObj* gobj) {}
 
 /// Luigi's aerial Green Missile Launch IASA callback
-void ftLg_SpecialAirSLaunch_IASA(HSD_GObj* gobj) {}
+void ftLg_SpecialAirS_IASA(HSD_GObj* gobj) {}
 
 /// Luigi's grounded Green Missile Launch Physics callback
-void ftLg_SpecialSLaunch_Phys(HSD_GObj* gobj)
+void ftLg_SpecialS_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
 /// Luigi's aerial Green Missile Launch Physics callback
-void ftLg_SpecialAirSLaunch_Phys(HSD_GObj* gobj)
+void ftLg_SpecialAirS_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
 /// Luigi's grounded Green Missile Launch Collision callback
-void ftLg_SpecialSLaunch_Coll(HSD_GObj* gobj)
+void ftLg_SpecialS_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
         ftLg_SpecialSLaunch_GroundToAir(gobj);
@@ -436,7 +436,7 @@ void ftLg_SpecialSLaunch_Coll(HSD_GObj* gobj)
 }
 
 /// Luigi's aerial Green Missile Launch Collision callback
-void ftLg_SpecialAirSLaunch_Coll(HSD_GObj* gobj)
+void ftLg_SpecialAirS_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
         ftLg_SpecialAirSLaunch_AirToGround(gobj);
@@ -666,10 +666,10 @@ void ftLg_SpecialAirSMisfire_Enter(HSD_GObj* gobj)
 }
 
 /// Luigi's grounded Green Missile Fly Animation callback
-void ftLg_SpecialSFly_Anim(HSD_GObj* gobj) {}
+void ftLg_SpecialS2_Anim(HSD_GObj* gobj) {}
 
 /// Luigi's aerial Green Missile Fly Animation callback
-void ftLg_SpecialAirSFly_Anim(HSD_GObj* gobj)
+void ftLg_SpecialAirS2_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftLg_SpecialAirSEnd_Enter(gobj);
@@ -677,16 +677,16 @@ void ftLg_SpecialAirSFly_Anim(HSD_GObj* gobj)
 }
 
 /// Luigi's grounded Green Missile Fly IASA callback
-void ftLg_SpecialSFly_IASA(HSD_GObj* gobj) {}
+void ftLg_SpecialS2_IASA(HSD_GObj* gobj) {}
 
 /// Luigi's aerial Green Missile Fly IASA callback
-void ftLg_SpecialAirSFly_IASA(HSD_GObj* gobj) {}
+void ftLg_SpecialAirS2_IASA(HSD_GObj* gobj) {}
 
 /// Luigi's grounded Green Missile Fly Physics callback
-void ftLg_SpecialSFly_Phys(HSD_GObj* gobj) {}
+void ftLg_SpecialS2_Phys(HSD_GObj* gobj) {}
 
 /// Luigi's aerial Green Missile Fly Physics callback
-void ftLg_SpecialAirSFly_Phys(HSD_GObj* gobj)
+void ftLg_SpecialAirS2_Phys(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -710,10 +710,10 @@ void ftLg_SpecialAirSFly_Phys(HSD_GObj* gobj)
 }
 
 /// Luigi's grounded Green Missile Fly Collision callback
-void ftLg_SpecialSFly_Coll(HSD_GObj* gobj) {}
+void ftLg_SpecialS2_Coll(HSD_GObj* gobj) {}
 
 /// Luigi's aerial Green Missile Fly Collision callback
-void ftLg_SpecialAirSFly_Coll(HSD_GObj* gobj)
+void ftLg_SpecialAirS2_Coll(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
     CollData* coll_data = &fp0->x6F0_collData;

@@ -93,12 +93,12 @@ static MotionFlags const ftDk_MF_MS_348 ATTRIBUTE_USED =
     Ft_MF_SkipNametagVis;
 
 typedef enum ftDk_MotionState {
-    ftDk_MS_HeavyWait0 = ftCo_MS_Count,
+    ftDk_MS_HeavyWait = ftCo_MS_Count,
     ftDk_MS_HeavyWalkSlow,
     ftDk_MS_HeavyWalkMiddle,
     ftDk_MS_HeavyWalkFast,
     ftDk_MS_HeavyTurn,
-    ftDk_MS_HeavyWait1,
+    ftDk_MS_HeavyKneebend,
     ftDk_MS_HeavyFall,
     ftDk_MS_HeavyJump,
     ftDk_MS_HeavyLanding,
@@ -108,7 +108,7 @@ typedef enum ftDk_MotionState {
     ftDk_MS_ThrowFWalkMiddle,
     ftDk_MS_ThrowFWalkFast,
     ftDk_MS_ThrowFTurn,
-    ftDk_MS_ThrowFWait1,
+    ftDk_MS_ThrowFKneebend,
     ftDk_MS_ThrowFFall,
     ftDk_MS_ThrowFJump,
     ftDk_MS_ThrowFLanding,
@@ -144,12 +144,12 @@ typedef enum ftDk_MotionState {
 } ftDk_MotionState;
 
 typedef enum ftDk_Submotion {
-    ftDk_SM_HeavyWait0 = ftCo_SM_Count,
+    ftDk_SM_HeavyWait = ftCo_SM_Count,
     ftDk_SM_HeavyWalkSlow,
     ftDk_SM_HeavyWalkMiddle,
     ftDk_SM_HeavyWalkFast,
     ftDk_SM_HeavyTurn,
-    ftDk_SM_HeavyWait1,
+    ftDk_SM_HeavyKneebend,
     ftDk_SM_HeavyFall,
     ftDk_SM_HeavyJump,
     ftDk_SM_HeavyLanding,
@@ -159,7 +159,7 @@ typedef enum ftDk_Submotion {
     ftDk_SM_ThrowFWalkMiddle,
     ftDk_SM_ThrowFWalkFast,
     ftDk_SM_ThrowFTurn,
-    ftDk_SM_ThrowFWait1,
+    ftDk_SM_ThrowFKneebend,
     ftDk_SM_ThrowFFall,
     ftDk_SM_ThrowFJump,
     ftDk_SM_ThrowFLanding,

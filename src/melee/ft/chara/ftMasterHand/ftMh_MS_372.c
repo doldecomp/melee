@@ -13,7 +13,7 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftMh_MS_372_Anim(HSD_GObj* gobj)
+void ftMh_BackDisappear_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -21,7 +21,7 @@ void ftMh_MS_372_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_372_IASA(HSD_GObj* arg0)
+void ftMh_BackDisappear_IASA(HSD_GObj* arg0)
 {
     Fighter* fp = GET_FIGHTER(arg0);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -29,12 +29,12 @@ void ftMh_MS_372_IASA(HSD_GObj* arg0)
     }
 }
 
-void ftMh_MS_372_Phys(HSD_GObj* gobj)
+void ftMh_BackDisappear_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-void ftMh_MS_372_Coll(HSD_GObj* gobj) {}
+void ftMh_BackDisappear_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_372_801542E0(HSD_GObj* gobj)
 {
@@ -46,7 +46,7 @@ void ftMh_MS_372_801542E0(HSD_GObj* gobj)
     fp->mv.mh.unk0.x8 = attr->x110_pos.x;
 }
 
-void ftMh_MS_373_Anim(HSD_GObj* gobj)
+void ftMh_Wait1_1_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     int timer = fp->mv.mh.unk0.x8 - 1;
@@ -64,7 +64,7 @@ void ftMh_MS_373_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_373_IASA(HSD_GObj* gobj)
+void ftMh_Wait1_1_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -99,7 +99,7 @@ static inline float my_lbVector_Len(Vec3* vec)
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-void ftMh_MS_373_Phys(HSD_GObj* gobj)
+void ftMh_Wait1_1_Phys(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER doesn't fit the stack.
     Fighter* fp = gobj->user_data;
@@ -135,7 +135,7 @@ void ftMh_MS_373_Phys(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_373_Coll(HSD_GObj* gobj) {}
+void ftMh_Wait1_1_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_373_801545A0(HSD_GObj* gobj)
 {
@@ -146,7 +146,7 @@ void ftMh_MS_373_801545A0(HSD_GObj* gobj)
     fp->mv.mh.unk0.x20 = 0;
 }
 
-void ftMh_MS_374_Anim(HSD_GObj* gobj)
+void ftMh_Grab_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -155,7 +155,7 @@ void ftMh_MS_374_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_374_IASA(HSD_GObj* arg0)
+void ftMh_Grab_IASA(HSD_GObj* arg0)
 {
     Fighter* fp = GET_FIGHTER(arg0);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -163,12 +163,12 @@ void ftMh_MS_374_IASA(HSD_GObj* arg0)
     }
 }
 
-void ftMh_MS_374_Phys(HSD_GObj* gobj)
+void ftMh_Grab_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-void ftMh_MS_374_Coll(HSD_GObj* gobj) {}
+void ftMh_Grab_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_374_801546D8(HSD_GObj* gobj)
 {
@@ -181,14 +181,14 @@ void ftMh_MS_374_801546D8(HSD_GObj* gobj)
     fp->mv.mh.unk0.xC.z = 0;
 }
 
-void ftMh_MS_381_Anim(HSD_GObj* gobj)
+void ftMh_Fail_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMh_MS_389_80151018(gobj);
     }
 }
 
-void ftMh_MS_381_IASA(HSD_GObj* gobj)
+void ftMh_Fail_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -196,7 +196,7 @@ void ftMh_MS_381_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_381_Phys(HSD_GObj* gobj)
+void ftMh_Fail_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
@@ -205,7 +205,7 @@ void ftMh_MS_381_Phys(HSD_GObj* gobj)
                        attr->x2C, attr->x28);
 }
 
-void ftMh_MS_381_Coll(HSD_GObj* gobj) {}
+void ftMh_Fail_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_381_8015483C(HSD_GObj* gobj)
 {
@@ -223,7 +223,7 @@ void ftMh_MS_381_8015483C(HSD_GObj* gobj)
     fp->mv.mh.unk0.xC.z = 0;
 }
 
-void ftMh_MS_375_Anim(HSD_GObj* gobj)
+void ftMh_Cancel_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (--fp->mv.mh.unk0.x24 <= 0 && fp->x2200_ftcmd_var0) {
@@ -236,7 +236,7 @@ void ftMh_MS_375_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_375_IASA(HSD_GObj* gobj)
+void ftMh_Cancel_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -244,7 +244,7 @@ void ftMh_MS_375_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_375_Phys(HSD_GObj* gobj)
+void ftMh_Cancel_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
@@ -253,7 +253,7 @@ void ftMh_MS_375_Phys(HSD_GObj* gobj)
                        attr->x2C, attr->x28);
 }
 
-void ftMh_MS_375_Coll(HSD_GObj* gobj)
+void ftMh_Cancel_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.mh.unk0.x18 == 0) {

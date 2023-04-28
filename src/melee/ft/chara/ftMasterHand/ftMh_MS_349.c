@@ -5,14 +5,14 @@
 #include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"
 
-void ftMh_MS_349_Anim(HSD_GObj* gobj)
+void ftMh_Slap_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMh_MS_389_80151018(gobj);
     }
 }
 
-void ftMh_MS_349_IASA(HSD_GObj* gobj)
+void ftMh_Slap_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -20,12 +20,12 @@ void ftMh_MS_349_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_349_Phys(HSD_GObj* gobj)
+void ftMh_Slap_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
-void ftMh_MS_349_Coll(HSD_GObj* gobj) {}
+void ftMh_Slap_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_349_80151CA8(HSD_GObj* gobj)
 {

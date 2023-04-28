@@ -10,7 +10,7 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftMh_MS_358_Coll(HSD_GObj* gobj) {}
+void ftMh_PaperCrush_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_358_80152880(HSD_GObj* gobj)
 {
@@ -28,7 +28,7 @@ void ftMh_MS_358_80152880(HSD_GObj* gobj)
     fp->mv.mh.unk13.x4 = 0;
 }
 
-void ftMh_MS_359_Anim(HSD_GObj* gobj)
+void ftMh_Poke1_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -49,14 +49,14 @@ void ftMh_MS_359_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_360_Anim(HSD_GObj* arg0)
+void ftMh_Poke2_Anim(HSD_GObj* arg0)
 {
     if (!ftAnim_IsFramesRemaining(arg0)) {
         ftMh_MS_389_80151018(arg0);
     }
 }
 
-void ftMh_MS_359_IASA(HSD_GObj* gobj)
+void ftMh_Poke1_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -94,7 +94,7 @@ static inline float my_lbVector_Len(Vec3* vec)
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-void ftMh_MS_359_Phys(HSD_GObj* gobj)
+void ftMh_Poke1_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ft_80085134(gobj);

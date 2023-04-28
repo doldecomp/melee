@@ -8,19 +8,19 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 
-void ftDk_MS_347_IASA(HSD_GObj* gobj)
+void ftDk_HeavyFall_IASA(HSD_GObj* gobj)
 {
     if (ft_80094EA4(gobj)) {
         return;
     }
 }
 
-void ftDk_MS_347_Phys(HSD_GObj* gobj)
+void ftDk_HeavyFall_Phys(HSD_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-void ftDk_MS_347_Coll(HSD_GObj* gobj)
+void ftDk_HeavyFall_Coll(HSD_GObj* gobj)
 {
     ft_80082C74(gobj, ftDk_MS_346_800E05E4);
 }

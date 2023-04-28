@@ -9,7 +9,7 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftMh_MS_370_Coll(HSD_GObj* gobj) {}
+void ftMh_BackPunch_Coll(HSD_GObj* gobj) {}
 
 /// @todo Figure out how to use #GET_JOBJ instead.
 static inline HSD_JObj* get_jobj(HSD_GObj* gobj)
@@ -67,7 +67,7 @@ void ftMh_MS_370_80153D2C(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 1;
 }
 
-void ftMh_MS_371_Anim(HSD_GObj* gobj)
+void ftMh_BackCrush_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -95,7 +95,7 @@ void ftMh_MS_371_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_371_IASA(HSD_GObj* gobj)
+void ftMh_BackCrush_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -103,7 +103,7 @@ void ftMh_MS_371_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_371_Phys(HSD_GObj* gobj)
+void ftMh_BackCrush_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
