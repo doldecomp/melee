@@ -25,7 +25,7 @@ bool ftCliffCommon_80081298(HSD_GObj* gobj)
         return false;
     }
     if (((fp->x6F0_collData.x134_envFlags & 0x03000000) != 0) &&
-        (((fp->x2228_flag.bits.b2 & 1) == 0)))
+        (((fp->x2228_flag.b2 & 1) == 0)))
     {
         other_gobj = ft_80082E3C(gobj);
         if (other_gobj == NULL) {

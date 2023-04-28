@@ -1,7 +1,7 @@
 #include "ftDk_HeavyWalk.h"
 
-#include "ftDk_HeavyWait0.h"
 #include "ftDk_HeavyFall.h"
+#include "ftDk_HeavyWait0.h"
 
 #include "ft/ft_0877.h"
 #include "ft/ftwalkcommon.h"

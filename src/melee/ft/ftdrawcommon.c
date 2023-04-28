@@ -778,7 +778,7 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             fighter->x2223_flag.bits.b2 = 0;
             temp_r4 = &sp30;
             fighter->x2227_flag.bits.b7 = 1;
-            fighter->x2228_flag.bits.b0 = 0;
+            fighter->x2228_flag.b0 = 0;
             temp_f31 = temp_f0 = 0.0f;
             sp30.z = temp_f31;
             sp30.y = temp_f31;
@@ -1000,7 +1000,7 @@ void ftDrawCommmon_80080C28(HSD_GObj* gobj, s32 arg1)
             fighter->x2223_flag.bits.b2 = 0;
             fighter->x2223_flag.bits.b3 = 0;
             fighter->x2227_flag.bits.b7 = 0;
-            fighter->x2228_flag.bits.b0 = 1;
+            fighter->x2228_flag.b0 = 1;
 
             temp_f31 = temp_f0 = 0.0f;
             sp30.z = temp_f31;
