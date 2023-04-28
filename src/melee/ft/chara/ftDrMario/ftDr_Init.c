@@ -3,7 +3,7 @@
 
 #include "ftDr_Init.h"
 
-#include "ftDr_Appeal.h"
+#include "ftDr_AppealS.h"
 #include "types.h"
 
 #include "ft/ft_0877.h"

@@ -8,8 +8,8 @@
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftKirby/ftKb_Init.h"
 #include "ftMasterHand/ftMh_CaptureDamageMasterHand.h"
-#include "ftMasterHand/ftMh_CaptureMasterHand_1.h"
-#include "ftMasterHand/ftMh_CaptureWaitMasterHand.h"
+#include "ftMasterHand/ftMh_CaptureMasterHand.h"
+#include "ftMasterHand/ftMh_ThrownMasterHand.h"
 
 MotionState ftData_MotionStateList[ftCo_MS_Count] = {
     {

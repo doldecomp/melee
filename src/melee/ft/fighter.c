@@ -23,7 +23,7 @@
 #include "ef/efasync.h"
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftKirby/ftKb_Init.h"
-#include "ftMasterHand/ftMh_MS_341.h"
+#include "ftMasterHand/ftMh_Wait1_0.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_1A36.h"
 #include "if/ifmagnify.h"

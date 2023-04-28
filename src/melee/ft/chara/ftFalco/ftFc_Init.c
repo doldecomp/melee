@@ -9,7 +9,7 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftFox/ftFx_Appeal.h"
+#include "ftFox/ftFx_AppealS.h"
 #include "ftFox/ftFx_Init.h"
 #include "ftFox/ftFx_SpecialHi.h"
 #include "ftFox/ftFx_SpecialLw.h"
