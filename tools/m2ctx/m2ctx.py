@@ -50,6 +50,7 @@ MWCC_FLAGS = [
 
 PCPP_FLAGS = [
     "--passthru-defines",
+    "--passthru-comments",
     "--line-directive",
     "--compress",
     "-I",
