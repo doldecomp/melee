@@ -828,11 +828,10 @@ ftCa_SpecialLw_800E550C:
     .balign 8
 .global ftCa_SpecialLw_804D9230/*0.0f*/
 ftCa_SpecialLw_804D9230/*0.0f*/:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCa_SpecialLw_804D9234/*1.0f*/
 ftCa_SpecialLw_804D9234/*1.0f*/:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCa_SpecialLw_804D9238/*1.5707963267948966*/
 ftCa_SpecialLw_804D9238/*1.5707963267948966*/:
-    .4byte 0x3FF921FB
-    .4byte 0x54442D18
+    .double 1.5707963267948966

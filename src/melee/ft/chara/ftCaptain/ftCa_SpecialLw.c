@@ -1,125 +1,148 @@
-.include "macros.inc"
+#include <platform.h>
+#include "ft/forward.h"
+#include "ftCaptain/forward.h"
 
-.section .text  # 0x80005940 - 0x803B7240
+#include "ftCaptain/ftCa_SpecialLw.h"
 
-.global ftCa_SpecialHi_800E3EAC
-ftCa_SpecialHi_800E3EAC:
-/* 800E3EAC 000E0A8C  7C 08 02 A6 */	mflr r0
-/* 800E3EB0 000E0A90  90 01 00 04 */	stw r0, 4(r1)
-/* 800E3EB4 000E0A94  94 21 FF D0 */	stwu r1, -0x30(r1)
-/* 800E3EB8 000E0A98  93 E1 00 2C */	stw r31, 0x2c(r1)
-/* 800E3EBC 000E0A9C  93 C1 00 28 */	stw r30, 0x28(r1)
-/* 800E3EC0 000E0AA0  7C 7E 1B 78 */	mr r30, r3
-/* 800E3EC4 000E0AA4  93 A1 00 24 */	stw r29, 0x24(r1)
-/* 800E3EC8 000E0AA8  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 800E3ECC 000E0AAC  88 7F 22 10 */	lbz r3, 0x2210(r31)
-/* 800E3ED0 000E0AB0  80 9F 02 D4 */	lwz r4, 0x2d4(r31)
-/* 800E3ED4 000E0AB4  54 60 D7 FF */	rlwinm. r0, r3, 0x1a, 0x1f, 0x1f
-/* 800E3ED8 000E0AB8  41 82 00 18 */	beq .L_800E3EF0
-/* 800E3EDC 000E0ABC  38 00 00 00 */	li r0, 0
-/* 800E3EE0 000E0AC0  50 03 36 72 */	rlwimi r3, r0, 6, 0x19, 0x19
-/* 800E3EE4 000E0AC4  98 7F 22 10 */	stb r3, 0x2210(r31)
-/* 800E3EE8 000E0AC8  38 00 00 01 */	li r0, 1
-/* 800E3EEC 000E0ACC  48 00 00 08 */	b .L_800E3EF4
-.L_800E3EF0:
-/* 800E3EF0 000E0AD0  38 00 00 00 */	li r0, 0
-.L_800E3EF4:
-/* 800E3EF4 000E0AD4  2C 00 00 00 */	cmpwi r0, 0
-/* 800E3EF8 000E0AD8  41 82 00 F8 */	beq .L_800E3FF0
-/* 800E3EFC 000E0ADC  88 1F 22 19 */	lbz r0, 0x2219(r31)
-/* 800E3F00 000E0AE0  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
-/* 800E3F04 000E0AE4  40 82 00 E4 */	bne .L_800E3FE8
-/* 800E3F08 000E0AE8  80 1F 00 10 */	lwz r0, 0x10(r31)
-/* 800E3F0C 000E0AEC  2C 00 01 65 */	cmpwi r0, 0x165
-/* 800E3F10 000E0AF0  40 82 00 20 */	bne .L_800E3F30
-# SPLIT NO LATER THAN HERE
-/* 800E3F14 000E0AF4  C0 02 98 40 */	lfs f0, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
-/* 800E3F18 000E0AF8  38 7F 00 00 */	addi r3, r31, 0
-/* 800E3F1C 000E0AFC  38 80 00 0E */	li r4, 0xe
-/* 800E3F20 000E0B00  D0 01 00 1C */	stfs f0, 0x1c(r1)
-/* 800E3F24 000E0B04  4B F9 10 E9 */	bl ftParts_8007500C
-/* 800E3F28 000E0B08  7C 7D 1B 78 */	mr r29, r3
-/* 800E3F2C 000E0B0C  48 00 00 2C */	b .L_800E3F58
-.L_800E3F30:
-/* 800E3F30 000E0B10  2C 00 01 67 */	cmpwi r0, 0x167
-/* 800E3F34 000E0B14  40 82 00 24 */	bne .L_800E3F58
-/* 800E3F38 000E0B18  C0 22 98 44 */	lfs f1, ftCa_SpecialHi_804D9224/*0.01745329238474369f*/@sda21(r2)
-/* 800E3F3C 000E0B1C  7F E3 FB 78 */	mr r3, r31
-/* 800E3F40 000E0B20  C0 04 00 70 */	lfs f0, 0x70(r4)
-/* 800E3F44 000E0B24  38 80 00 09 */	li r4, 9
-/* 800E3F48 000E0B28  EC 01 00 32 */	fmuls f0, f1, f0
-/* 800E3F4C 000E0B2C  D0 01 00 1C */	stfs f0, 0x1c(r1)
-/* 800E3F50 000E0B30  4B F9 10 BD */	bl ftParts_8007500C
-/* 800E3F54 000E0B34  7C 7D 1B 78 */	mr r29, r3
-.L_800E3F58:
-/* 800E3F58 000E0B38  7F C3 F3 78 */	mr r3, r30
-/* 800E3F5C 000E0B3C  4B FA 33 49 */	bl ftLib_800872A4
-/* 800E3F60 000E0B40  2C 03 00 19 */	cmpwi r3, 0x19
-/* 800E3F64 000E0B44  41 82 00 44 */	beq .L_800E3FA8
-/* 800E3F68 000E0B48  40 80 00 6C */	bge .L_800E3FD4
-/* 800E3F6C 000E0B4C  2C 03 00 02 */	cmpwi r3, 2
-/* 800E3F70 000E0B50  41 82 00 08 */	beq .L_800E3F78
-/* 800E3F74 000E0B54  48 00 00 60 */	b .L_800E3FD4
-.L_800E3F78:
-/* 800E3F78 000E0B58  80 9F 05 E8 */	lwz r4, 0x5e8(r31)
-/* 800E3F7C 000E0B5C  57 A0 20 36 */	slwi r0, r29, 4
-/* 800E3F80 000E0B60  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 800E3F84 000E0B64  7F C3 F3 78 */	mr r3, r30
-/* 800E3F88 000E0B68  7C E4 00 2E */	lwzx r7, r4, r0
-/* 800E3F8C 000E0B6C  38 85 06 0C */	addi r4, r5, 0x60c
-/* 800E3F90 000E0B70  4C C6 31 82 */	crclr 6
-/* 800E3F94 000E0B74  39 01 00 1C */	addi r8, r1, 0x1c
-/* 800E3F98 000E0B78  38 A0 00 03 */	li r5, 3
-/* 800E3F9C 000E0B7C  38 C0 04 90 */	li r6, 0x490
-/* 800E3FA0 000E0B80  4B F8 37 51 */	bl efAsync_Spawn
-/* 800E3FA4 000E0B84  48 00 00 30 */	b .L_800E3FD4
-.L_800E3FA8:
-/* 800E3FA8 000E0B88  80 9F 05 E8 */	lwz r4, 0x5e8(r31)
-/* 800E3FAC 000E0B8C  57 A0 20 36 */	slwi r0, r29, 4
-/* 800E3FB0 000E0B90  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 800E3FB4 000E0B94  7F C3 F3 78 */	mr r3, r30
-/* 800E3FB8 000E0B98  7C E4 00 2E */	lwzx r7, r4, r0
-/* 800E3FBC 000E0B9C  38 85 06 0C */	addi r4, r5, 0x60c
-/* 800E3FC0 000E0BA0  4C C6 31 82 */	crclr 6
-/* 800E3FC4 000E0BA4  39 01 00 1C */	addi r8, r1, 0x1c
-/* 800E3FC8 000E0BA8  38 A0 00 03 */	li r5, 3
-/* 800E3FCC 000E0BAC  38 C0 05 0C */	li r6, 0x50c
-/* 800E3FD0 000E0BB0  4B F8 37 21 */	bl efAsync_Spawn
-.L_800E3FD4:
-/* 800E3FD4 000E0BB4  88 1F 22 19 */	lbz r0, 0x2219(r31)
-/* 800E3FD8 000E0BB8  38 60 00 01 */	li r3, 1
-/* 800E3FDC 000E0BBC  50 60 3E 30 */	rlwimi r0, r3, 7, 0x18, 0x18
-/* 800E3FE0 000E0BC0  98 1F 22 19 */	stb r0, 0x2219(r31)
-/* 800E3FE4 000E0BC4  48 00 00 0C */	b .L_800E3FF0
-.L_800E3FE8:
-/* 800E3FE8 000E0BC8  7F C3 F3 78 */	mr r3, r30
-/* 800E3FEC 000E0BCC  4B F9 9B 39 */	bl ftCommon_8007DB24
-.L_800E3FF0:
-/* 800E3FF0 000E0BD0  80 01 00 34 */	lwz r0, 0x34(r1)
-/* 800E3FF4 000E0BD4  83 E1 00 2C */	lwz r31, 0x2c(r1)
-/* 800E3FF8 000E0BD8  83 C1 00 28 */	lwz r30, 0x28(r1)
-/* 800E3FFC 000E0BDC  83 A1 00 24 */	lwz r29, 0x24(r1)
-/* 800E4000 000E0BE0  38 21 00 30 */	addi r1, r1, 0x30
-/* 800E4004 000E0BE4  7C 08 03 A6 */	mtlr r0
-/* 800E4008 000E0BE8  4E 80 00 20 */	blr
-.global ftCa_SpecialHi_800E400C
-ftCa_SpecialHi_800E400C:
-/* 800E400C 000E0BEC  80 A3 00 2C */	lwz r5, 0x2c(r3)
-/* 800E4010 000E0BF0  80 85 02 D4 */	lwz r4, 0x2d4(r5)
-/* 800E4014 000E0BF4  A0 65 23 40 */	lhz r3, 0x2340(r5)
-/* 800E4018 000E0BF8  80 04 00 78 */	lwz r0, 0x78(r4)
-/* 800E401C 000E0BFC  7C 03 00 00 */	cmpw r3, r0
-/* 800E4020 000E0C00  4D 81 00 20 */	bgtlr
-/* 800E4024 000E0C04  38 03 00 01 */	addi r0, r3, 1
-/* 800E4028 000E0C08  B0 05 23 40 */	sth r0, 0x2340(r5)
-/* 800E402C 000E0C0C  C0 25 23 44 */	lfs f1, 0x2344(r5)
-/* 800E4030 000E0C10  C0 04 00 74 */	lfs f0, 0x74(r4)
-/* 800E4034 000E0C14  EC 01 00 32 */	fmuls f0, f1, f0
-/* 800E4038 000E0C18  D0 05 23 44 */	stfs f0, 0x2344(r5)
-/* 800E403C 000E0C1C  4E 80 00 20 */	blr
+#include "ef/efasync.h"
+#include "ef/eflib.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
+#include "ft/ftcommon.h"
+#include "ft/ftlib.h"
+#include "ft/ftparts.h"
+#include "ft/inlines.h"
 
-.global ftCa_SpecialLw_Enter
-ftCa_SpecialLw_Enter:
+#include <common_structs.h>
+#include <baselib/gobj.h>
+
+/// @todo These are all literals.
+float const ftCa_SpecialHi_804D9220 = 0;
+float const ftCa_SpecialHi_804D9224 = 0.01745329238474369f;
+float const ftCa_SpecialHi_804D9228 = 1;
+float const ftCa_SpecialHi_804D922C = -1;
+
+#ifdef MWERKS_GEKKO
+#pragma push
+asm void ftCa_SpecialHi_800E3EAC(HSD_GObj*)
+{ // clang-format off
+    nofralloc
+/* 800E3EAC 00000000  7C 08 02 A6 */	mflr r0
+/* 800E3EB0 00000004  90 01 00 04 */	stw r0, 0x4(r1)
+/* 800E3EB4 00000008  94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 800E3EB8 0000000C  93 E1 00 2C */	stw r31, 0x2c(r1)
+/* 800E3EBC 00000010  93 C1 00 28 */	stw r30, 0x28(r1)
+/* 800E3EC0 00000014  7C 7E 1B 78 */	mr r30, r3
+/* 800E3EC4 00000018  93 A1 00 24 */	stw r29, 0x24(r1)
+/* 800E3EC8 0000001C  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 800E3ECC 00000020  88 7F 22 10 */	lbz r3, 0x2210(r31)
+/* 800E3ED0 00000024  80 9F 02 D4 */	lwz r4, 0x2d4(r31)
+/* 800E3ED4 00000028  54 60 D7 FF */	extrwi. r0, r3, 1, 25
+/* 800E3ED8 0000002C  41 82 00 18 */	beq lbl_800E3EF0
+/* 800E3EDC 00000030  38 00 00 00 */	li r0, 0x0
+/* 800E3EE0 00000034  50 03 36 72 */	rlwimi r3, r0, 6, 25, 25
+/* 800E3EE4 00000038  98 7F 22 10 */	stb r3, 0x2210(r31)
+/* 800E3EE8 0000003C  38 00 00 01 */	li r0, 0x1
+/* 800E3EEC 00000040  48 00 00 08 */	b lbl_800E3EF4
+lbl_800E3EF0:
+/* 800E3EF0 00000044  38 00 00 00 */	li r0, 0x0
+lbl_800E3EF4:
+/* 800E3EF4 00000048  2C 00 00 00 */	cmpwi r0, 0x0
+/* 800E3EF8 0000004C  41 82 00 F8 */	beq lbl_800E3FF0
+/* 800E3EFC 00000050  88 1F 22 19 */	lbz r0, 0x2219(r31)
+/* 800E3F00 00000054  54 00 CF FF */	extrwi. r0, r0, 1, 24
+/* 800E3F04 00000058  40 82 00 E4 */	bne lbl_800E3FE8
+/* 800E3F08 0000005C  80 1F 00 10 */	lwz r0, 0x10(r31)
+/* 800E3F0C 00000060  2C 00 01 65 */	cmpwi r0, 0x165
+/* 800E3F10 00000064  40 82 00 20 */	bne lbl_800E3F30
+/* 800E3F14 00000068  C0 02 98 40 */	lfs f0, ftCa_SpecialHi_804D9220
+/* 800E3F18 0000006C  38 7F 00 00 */	addi r3, r31, 0x0
+/* 800E3F1C 00000070  38 80 00 0E */	li r4, 0xe
+/* 800E3F20 00000074  D0 01 00 1C */	stfs f0, 0x1c(r1)
+/* 800E3F24 00000078  4B F9 10 E9 */	bl ftParts_8007500C
+/* 800E3F28 0000007C  7C 7D 1B 78 */	mr r29, r3
+/* 800E3F2C 00000080  48 00 00 2C */	b lbl_800E3F58
+lbl_800E3F30:
+/* 800E3F30 00000084  2C 00 01 67 */	cmpwi r0, 0x167
+/* 800E3F34 00000088  40 82 00 24 */	bne lbl_800E3F58
+/* 800E3F38 0000008C  C0 22 98 44 */	lfs f1, ftCa_SpecialHi_804D9224
+/* 800E3F3C 00000090  7F E3 FB 78 */	mr r3, r31
+/* 800E3F40 00000094  C0 04 00 70 */	lfs f0, 0x70(r4)
+/* 800E3F44 00000098  38 80 00 09 */	li r4, 0x9
+/* 800E3F48 0000009C  EC 01 00 32 */	fmuls f0, f1, f0
+/* 800E3F4C 000000A0  D0 01 00 1C */	stfs f0, 0x1c(r1)
+/* 800E3F50 000000A4  4B F9 10 BD */	bl ftParts_8007500C
+/* 800E3F54 000000A8  7C 7D 1B 78 */	mr r29, r3
+lbl_800E3F58:
+/* 800E3F58 000000AC  7F C3 F3 78 */	mr r3, r30
+/* 800E3F5C 000000B0  4B FA 33 49 */	bl ftLib_800872A4
+/* 800E3F60 000000B4  2C 03 00 19 */	cmpwi r3, 0x19
+/* 800E3F64 000000B8  41 82 00 44 */	beq lbl_800E3FA8
+/* 800E3F68 000000BC  40 80 00 6C */	bge lbl_800E3FD4
+/* 800E3F6C 000000C0  2C 03 00 02 */	cmpwi r3, 0x2
+/* 800E3F70 000000C4  41 82 00 08 */	beq lbl_800E3F78
+/* 800E3F74 000000C8  48 00 00 60 */	b lbl_800E3FD4
+lbl_800E3F78:
+/* 800E3F78 000000CC  80 9F 05 E8 */	lwz r4, 0x5e8(r31)
+/* 800E3F7C 000000D0  57 A0 20 36 */	slwi r0, r29, 4
+/* 800E3F80 000000D4  80 BE 00 2C */	lwz r5, 0x2c(r30)
+/* 800E3F84 000000D8  7F C3 F3 78 */	mr r3, r30
+/* 800E3F88 000000DC  7C E4 00 2E */	lwzx r7, r4, r0
+/* 800E3F8C 000000E0  38 85 06 0C */	addi r4, r5, 0x60c
+/* 800E3F90 000000E4  4C C6 31 82 */	crclr 4*cr1+eq
+/* 800E3F94 000000E8  39 01 00 1C */	addi r8, r1, 0x1c
+/* 800E3F98 000000EC  38 A0 00 03 */	li r5, 0x3
+/* 800E3F9C 000000F0  38 C0 04 90 */	li r6, 0x490
+/* 800E3FA0 000000F4  4B F8 37 51 */	bl efAsync_Spawn
+/* 800E3FA4 000000F8  48 00 00 30 */	b lbl_800E3FD4
+lbl_800E3FA8:
+/* 800E3FA8 000000FC  80 9F 05 E8 */	lwz r4, 0x5e8(r31)
+/* 800E3FAC 00000100  57 A0 20 36 */	slwi r0, r29, 4
+/* 800E3FB0 00000104  80 BE 00 2C */	lwz r5, 0x2c(r30)
+/* 800E3FB4 00000108  7F C3 F3 78 */	mr r3, r30
+/* 800E3FB8 0000010C  7C E4 00 2E */	lwzx r7, r4, r0
+/* 800E3FBC 00000110  38 85 06 0C */	addi r4, r5, 0x60c
+/* 800E3FC0 00000114  4C C6 31 82 */	crclr 4*cr1+eq
+/* 800E3FC4 00000118  39 01 00 1C */	addi r8, r1, 0x1c
+/* 800E3FC8 0000011C  38 A0 00 03 */	li r5, 0x3
+/* 800E3FCC 00000120  38 C0 05 0C */	li r6, 0x50c
+/* 800E3FD0 00000124  4B F8 37 21 */	bl efAsync_Spawn
+lbl_800E3FD4:
+/* 800E3FD4 00000128  88 1F 22 19 */	lbz r0, 0x2219(r31)
+/* 800E3FD8 0000012C  38 60 00 01 */	li r3, 0x1
+/* 800E3FDC 00000130  50 60 3E 30 */	rlwimi r0, r3, 7, 24, 24
+/* 800E3FE0 00000134  98 1F 22 19 */	stb r0, 0x2219(r31)
+/* 800E3FE4 00000138  48 00 00 0C */	b lbl_800E3FF0
+lbl_800E3FE8:
+/* 800E3FE8 0000013C  7F C3 F3 78 */	mr r3, r30
+/* 800E3FEC 00000140  4B F9 9B 39 */	bl ftCommon_8007DB24
+lbl_800E3FF0:
+/* 800E3FF0 00000144  80 01 00 34 */	lwz r0, 0x34(r1)
+/* 800E3FF4 00000148  83 E1 00 2C */	lwz r31, 0x2c(r1)
+/* 800E3FF8 0000014C  83 C1 00 28 */	lwz r30, 0x28(r1)
+/* 800E3FFC 00000150  83 A1 00 24 */	lwz r29, 0x24(r1)
+/* 800E4000 00000154  38 21 00 30 */	addi r1, r1, 0x30
+/* 800E4004 00000158  7C 08 03 A6 */	mtlr r0
+/* 800E4008 0000015C  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#endif
+
+void ftCa_SpecialHi_800E400C(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCaptain_DatAttrs* da = getFtSpecialAttrsD(fp);
+    if (fp->mv.ca.speciallw.x0 <= da->speciallw_unk2) {
+        ++fp->mv.ca.speciallw.x0;
+        fp->mv.ca.speciallw.friction *= da->speciallw_on_hit_spd_modifier;
+    }
+}
+
+#if defined(MUST_MATCH) && !defined(WIP)
+#pragma push
+asm void ftCa_SpecialLw_Enter(HSD_GObj*)
+{ // clang-format off
+    nofralloc
 /* 800E4040 000E0C20  7C 08 02 A6 */	mflr r0
 /* 800E4044 000E0C24  38 80 01 65 */	li r4, 0x165
 /* 800E4048 000E0C28  90 01 00 04 */	stw r0, 4(r1)
@@ -136,9 +159,9 @@ ftCa_SpecialLw_Enter:
 /* 800E4074 000E0C54  90 1F 22 00 */	stw r0, 0x2200(r31)
 /* 800E4078 000E0C58  90 1F 22 10 */	stw r0, 0x2210(r31)
 /* 800E407C 000E0C5C  B0 1F 23 40 */	sth r0, 0x2340(r31)
-/* 800E4080 000E0C60  C0 42 98 48 */	lfs f2, ftCa_SpecialHi_804D9228/*1.0f*/@sda21(r2)
+/* 800E4080 000E0C60  C0 42 98 48 */	lfs f2, ftCa_SpecialHi_804D9228/*1*/
 /* 800E4084 000E0C64  D0 5F 23 44 */	stfs f2, 0x2344(r31)
-/* 800E4088 000E0C68  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
+/* 800E4088 000E0C68  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0*/
 /* 800E408C 000E0C6C  FC 60 08 90 */	fmr f3, f1
 /* 800E4090 000E0C70  4B F8 53 1D */	bl Fighter_ChangeMotionState
 /* 800E4094 000E0C74  7F C3 F3 78 */	mr r3, r30
@@ -158,9 +181,37 @@ ftCa_SpecialLw_Enter:
 /* 800E40CC 000E0CAC  38 21 00 20 */	addi r1, r1, 0x20
 /* 800E40D0 000E0CB0  7C 08 03 A6 */	mtlr r0
 /* 800E40D4 000E0CB4  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#else
 
-.global ftCa_SpecialAirLw_Enter
-ftCa_SpecialAirLw_Enter:
+void ftCa_SpecialLw_Enter(HSD_GObj* gobj)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x2208_ftcmd_var2 = 0;
+    fp->x2204_ftcmd_var1 = 0;
+    fp->x2200_ftcmd_var0 = 0;
+    fp->x2210_ThrowFlags.flags = 0;
+    fp->mv.ca.speciallw.x0 = 0;
+    fp->mv.ca.speciallw.friction = 1;
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLw, Ft_MF_None, NULL, 0, 1,
+                              0);
+    ftAnim_8006EBA4(gobj);
+    fp->cb.x21C0_callback_OnGiveDamage = ftCa_SpecialHi_800E400C;
+    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+}
+#endif
+
+#if defined(MUST_MATCH) && !defined(WIP)
+#pragma push
+asm void ftCa_SpecialAirLw_Enter(HSD_GObj*)
+{ // clang-format off
+    nofralloc
 /* 800E40D8 000E0CB8  7C 08 02 A6 */	mflr r0
 /* 800E40DC 000E0CBC  38 80 01 67 */	li r4, 0x167
 /* 800E40E0 000E0CC0  90 01 00 04 */	stw r0, 4(r1)
@@ -176,8 +227,8 @@ ftCa_SpecialAirLw_Enter:
 /* 800E4108 000E0CE8  90 1F 22 04 */	stw r0, 0x2204(r31)
 /* 800E410C 000E0CEC  90 1F 22 00 */	stw r0, 0x2200(r31)
 /* 800E4110 000E0CF0  90 1F 22 10 */	stw r0, 0x2210(r31)
-/* 800E4114 000E0CF4  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
-/* 800E4118 000E0CF8  C0 42 98 48 */	lfs f2, ftCa_SpecialHi_804D9228/*1.0f*/@sda21(r2)
+/* 800E4114 000E0CF4  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0*/
+/* 800E4118 000E0CF8  C0 42 98 48 */	lfs f2, ftCa_SpecialHi_804D9228/*1*/
 /* 800E411C 000E0CFC  FC 60 08 90 */	fmr f3, f1
 /* 800E4120 000E0D00  4B F8 52 8D */	bl Fighter_ChangeMotionState
 /* 800E4124 000E0D04  7F C3 F3 78 */	mr r3, r30
@@ -194,9 +245,34 @@ ftCa_SpecialAirLw_Enter:
 /* 800E4150 000E0D30  38 21 00 20 */	addi r1, r1, 0x20
 /* 800E4154 000E0D34  7C 08 03 A6 */	mtlr r0
 /* 800E4158 000E0D38  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#else
 
-.global ftCa_SpecialLw_Anim
-ftCa_SpecialLw_Anim:
+void ftCa_SpecialAirLw_Enter(HSD_GObj* gobj)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x2208_ftcmd_var2 = 0;
+    fp->x2204_ftcmd_var1 = 0;
+    fp->x2200_ftcmd_var0 = 0;
+    fp->x2210_ThrowFlags.flags = 0;
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLw, Ft_MF_None, NULL, 0,
+                              1, 0);
+    ftAnim_8006EBA4(gobj);
+    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+}
+#endif
+
+#if defined(MUST_MATCH) && !defined(WIP)
+#pragma push
+asm void ftCa_SpecialLw_Anim(HSD_GObj*)
+{ // clang-format off
+    nofralloc
 /* 800E415C 000E0D3C  7C 08 02 A6 */	mflr r0
 /* 800E4160 000E0D40  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4164 000E0D44  94 21 FF B8 */	stwu r1, -0x48(r1)
@@ -207,10 +283,10 @@ ftCa_SpecialLw_Anim:
 /* 800E4178 000E0D58  83 C3 00 2C */	lwz r30, 0x2c(r3)
 /* 800E417C 000E0D5C  4B F8 B0 BD */	bl ftAnim_IsFramesRemaining
 /* 800E4180 000E0D60  2C 03 00 00 */	cmpwi r3, 0
-/* 800E4184 000E0D64  40 82 00 C8 */	bne .L_800E424C
+/* 800E4184 000E0D64  40 82 00 C8 */	bne lbl_800E424C
 /* 800E4188 000E0D68  80 1E 00 E0 */	lwz r0, 0xe0(r30)
 /* 800E418C 000E0D6C  2C 00 00 00 */	cmpwi r0, 0
-/* 800E4190 000E0D70  40 82 00 64 */	bne .L_800E41F4
+/* 800E4190 000E0D70  40 82 00 64 */	bne lbl_800E41F4
 /* 800E4194 000E0D74  83 DD 00 2C */	lwz r30, 0x2c(r29)
 /* 800E4198 000E0D78  38 00 00 00 */	li r0, 0
 /* 800E419C 000E0D7C  83 FE 02 D4 */	lwz r31, 0x2d4(r30)
@@ -220,7 +296,7 @@ ftCa_SpecialLw_Anim:
 /* 800E41AC 000E0D8C  90 1E 22 00 */	stw r0, 0x2200(r30)
 /* 800E41B0 000E0D90  90 1E 22 10 */	stw r0, 0x2210(r30)
 /* 800E41B4 000E0D94  4B F9 96 49 */	bl ftCommon_8007D7FC
-/* 800E41B8 000E0D98  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
+/* 800E41B8 000E0D98  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0*/
 /* 800E41BC 000E0D9C  7F A3 EB 78 */	mr r3, r29
 /* 800E41C0 000E0DA0  C0 5F 00 7C */	lfs f2, 0x7c(r31)
 /* 800E41C4 000E0DA4  38 80 01 66 */	li r4, 0x166
@@ -234,8 +310,8 @@ ftCa_SpecialLw_Anim:
 /* 800E41E4 000E0DC4  90 1E 21 D4 */	stw r0, 0x21d4(r30)
 /* 800E41E8 000E0DC8  38 03 BA C4 */	addi r0, r3, efLib_ResumeAll@l
 /* 800E41EC 000E0DCC  90 1E 21 D8 */	stw r0, 0x21d8(r30)
-/* 800E41F0 000E0DD0  48 00 00 5C */	b .L_800E424C
-.L_800E41F4:
+/* 800E41F0 000E0DD0  48 00 00 5C */	b lbl_800E424C
+lbl_800E41F4:
 /* 800E41F4 000E0DD4  83 DD 00 2C */	lwz r30, 0x2c(r29)
 /* 800E41F8 000E0DD8  38 00 00 00 */	li r0, 0
 /* 800E41FC 000E0DDC  90 1E 22 08 */	stw r0, 0x2208(r30)
@@ -244,9 +320,9 @@ ftCa_SpecialLw_Anim:
 /* 800E4208 000E0DE8  90 1E 22 00 */	stw r0, 0x2200(r30)
 /* 800E420C 000E0DEC  90 1E 22 10 */	stw r0, 0x2210(r30)
 /* 800E4210 000E0DF0  4B F9 93 C5 */	bl ftCommon_8007D5D4
-/* 800E4214 000E0DF4  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
+/* 800E4214 000E0DF4  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0*/
 /* 800E4218 000E0DF8  7F A3 EB 78 */	mr r3, r29
-/* 800E421C 000E0DFC  C0 42 98 48 */	lfs f2, ftCa_SpecialHi_804D9228/*1.0f*/@sda21(r2)
+/* 800E421C 000E0DFC  C0 42 98 48 */	lfs f2, ftCa_SpecialHi_804D9228/*1*/
 /* 800E4220 000E0E00  38 80 01 6A */	li r4, 0x16a
 /* 800E4224 000E0E04  FC 60 08 90 */	fmr f3, f1
 /* 800E4228 000E0E08  38 A0 00 00 */	li r5, 0
@@ -258,7 +334,7 @@ ftCa_SpecialLw_Anim:
 /* 800E4240 000E0E20  90 1E 21 D4 */	stw r0, 0x21d4(r30)
 /* 800E4244 000E0E24  38 03 BA C4 */	addi r0, r3, efLib_ResumeAll@l
 /* 800E4248 000E0E28  90 1E 21 D8 */	stw r0, 0x21d8(r30)
-.L_800E424C:
+lbl_800E424C:
 /* 800E424C 000E0E2C  80 01 00 4C */	lwz r0, 0x4c(r1)
 /* 800E4250 000E0E30  83 E1 00 44 */	lwz r31, 0x44(r1)
 /* 800E4254 000E0E34  83 C1 00 40 */	lwz r30, 0x40(r1)
@@ -266,47 +342,66 @@ ftCa_SpecialLw_Anim:
 /* 800E425C 000E0E3C  38 21 00 48 */	addi r1, r1, 0x48
 /* 800E4260 000E0E40  7C 08 03 A6 */	mtlr r0
 /* 800E4264 000E0E44  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#else
 
-.global ftCa_SpecialLwEnd_Anim
-ftCa_SpecialLwEnd_Anim:
-/* 800E4268 000E0E48  7C 08 02 A6 */	mflr r0
-/* 800E426C 000E0E4C  90 01 00 04 */	stw r0, 4(r1)
-/* 800E4270 000E0E50  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800E4274 000E0E54  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800E4278 000E0E58  7C 7F 1B 78 */	mr r31, r3
-/* 800E427C 000E0E5C  4B F8 AF BD */	bl ftAnim_IsFramesRemaining
-/* 800E4280 000E0E60  2C 03 00 00 */	cmpwi r3, 0
-/* 800E4284 000E0E64  40 82 00 0C */	bne .L_800E4290
-/* 800E4288 000E0E68  7F E3 FB 78 */	mr r3, r31
-/* 800E428C 000E0E6C  4B F9 96 A1 */	bl ftCommon_8007D92C
-.L_800E4290:
-/* 800E4290 000E0E70  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 800E4294 000E0E74  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 800E4298 000E0E78  38 21 00 18 */	addi r1, r1, 0x18
-/* 800E429C 000E0E7C  7C 08 03 A6 */	mtlr r0
-/* 800E42A0 000E0E80  4E 80 00 20 */	blr
+void ftCa_SpecialLw_Anim(HSD_GObj* gobj)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[32];
+#endif
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        if (fp->ground_or_air == GA_Ground) {
+            Fighter* fp = GET_FIGHTER(gobj);
+            ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
+            fp->x2208_ftcmd_var2 = 0;
+            fp->x2204_ftcmd_var1 = 0;
+            fp->x2200_ftcmd_var0 = 0;
+            fp->x2210_ThrowFlags.flags = 0;
+            ftCommon_8007D7FC(fp);
+            Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLwEnd, Ft_MF_None,
+                                      NULL, 0, da->speciallw_ground_lag_mul,
+                                      0);
+            fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+            fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+        } else {
+            Fighter* fp = GET_FIGHTER(gobj);
+            fp->x2208_ftcmd_var2 = 0;
+            fp->x2204_ftcmd_var1 = 0;
+            fp->x2200_ftcmd_var0 = 0;
+            fp->x2210_ThrowFlags.flags = 0;
+            ftCommon_8007D5D4(fp);
+            Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLwEndAir,
+                                      Ft_MF_None, NULL, 0, 1, 0);
+            fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+            fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+        }
+    }
+}
+#endif
 
-.global ftCa_SpecialLwEndAir_Anim
-ftCa_SpecialLwEndAir_Anim:
-/* 800E42A4 000E0E84  7C 08 02 A6 */	mflr r0
-/* 800E42A8 000E0E88  90 01 00 04 */	stw r0, 4(r1)
-/* 800E42AC 000E0E8C  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800E42B0 000E0E90  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800E42B4 000E0E94  7C 7F 1B 78 */	mr r31, r3
-/* 800E42B8 000E0E98  4B F8 AF 81 */	bl ftAnim_IsFramesRemaining
-/* 800E42BC 000E0E9C  2C 03 00 00 */	cmpwi r3, 0
-/* 800E42C0 000E0EA0  40 82 00 0C */	bne .L_800E42CC
-/* 800E42C4 000E0EA4  7F E3 FB 78 */	mr r3, r31
-/* 800E42C8 000E0EA8  4B F9 96 65 */	bl ftCommon_8007D92C
-.L_800E42CC:
-/* 800E42CC 000E0EAC  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 800E42D0 000E0EB0  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 800E42D4 000E0EB4  38 21 00 18 */	addi r1, r1, 0x18
-/* 800E42D8 000E0EB8  7C 08 03 A6 */	mtlr r0
-/* 800E42DC 000E0EBC  4E 80 00 20 */	blr
+void ftCa_SpecialLwEnd_Anim(HSD_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCommon_8007D92C(gobj);
+    }
+}
 
-.global ftCa_SpecialAirLw_Anim
-ftCa_SpecialAirLw_Anim:
+void ftCa_SpecialLwEndAir_Anim(HSD_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCommon_8007D92C(gobj);
+    }
+}
+
+#if defined(MUST_MATCH) && !defined(WIP)
+#pragma push
+asm void ftCa_SpecialAirLw_Anim(HSD_GObj*)
+{ // clang-format off
+    nofralloc
 /* 800E42E0 000E0EC0  7C 08 02 A6 */	mflr r0
 /* 800E42E4 000E0EC4  90 01 00 04 */	stw r0, 4(r1)
 /* 800E42E8 000E0EC8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -314,7 +409,7 @@ ftCa_SpecialAirLw_Anim:
 /* 800E42F0 000E0ED0  7C 7F 1B 78 */	mr r31, r3
 /* 800E42F4 000E0ED4  4B F8 AF 45 */	bl ftAnim_IsFramesRemaining
 /* 800E42F8 000E0ED8  2C 03 00 00 */	cmpwi r3, 0
-/* 800E42FC 000E0EDC  40 82 00 44 */	bne .L_800E4340
+/* 800E42FC 000E0EDC  40 82 00 44 */	bne lbl_800E4340
 /* 800E4300 000E0EE0  80 9F 00 2C */	lwz r4, 0x2c(r31)
 /* 800E4304 000E0EE4  38 00 00 00 */	li r0, 0
 /* 800E4308 000E0EE8  90 04 22 08 */	stw r0, 0x2208(r4)
@@ -323,80 +418,69 @@ ftCa_SpecialAirLw_Anim:
 /* 800E4314 000E0EF4  90 04 22 00 */	stw r0, 0x2200(r4)
 /* 800E4318 000E0EF8  90 04 22 10 */	stw r0, 0x2210(r4)
 /* 800E431C 000E0EFC  4B F9 92 B9 */	bl ftCommon_8007D5D4
-/* 800E4320 000E0F00  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
+/* 800E4320 000E0F00  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0*/
 /* 800E4324 000E0F04  7F E3 FB 78 */	mr r3, r31
-/* 800E4328 000E0F08  C0 42 98 48 */	lfs f2, ftCa_SpecialHi_804D9228/*1.0f*/@sda21(r2)
+/* 800E4328 000E0F08  C0 42 98 48 */	lfs f2, ftCa_SpecialHi_804D9228/*1*/
 /* 800E432C 000E0F0C  38 80 01 69 */	li r4, 0x169
 /* 800E4330 000E0F10  FC 60 08 90 */	fmr f3, f1
 /* 800E4334 000E0F14  38 A0 00 00 */	li r5, 0
 /* 800E4338 000E0F18  38 C0 00 00 */	li r6, 0
 /* 800E433C 000E0F1C  4B F8 50 71 */	bl Fighter_ChangeMotionState
-.L_800E4340:
+lbl_800E4340:
 /* 800E4340 000E0F20  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 800E4344 000E0F24  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 800E4348 000E0F28  38 21 00 20 */	addi r1, r1, 0x20
 /* 800E434C 000E0F2C  7C 08 03 A6 */	mtlr r0
 /* 800E4350 000E0F30  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#else
 
-.global ftCa_SpecialAirLwEnd_Anim
-ftCa_SpecialAirLwEnd_Anim:
-/* 800E4354 000E0F34  7C 08 02 A6 */	mflr r0
-/* 800E4358 000E0F38  90 01 00 04 */	stw r0, 4(r1)
-/* 800E435C 000E0F3C  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800E4360 000E0F40  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800E4364 000E0F44  7C 7F 1B 78 */	mr r31, r3
-/* 800E4368 000E0F48  4B F8 AE D1 */	bl ftAnim_IsFramesRemaining
-/* 800E436C 000E0F4C  2C 03 00 00 */	cmpwi r3, 0
-/* 800E4370 000E0F50  40 82 00 0C */	bne .L_800E437C
-/* 800E4374 000E0F54  7F E3 FB 78 */	mr r3, r31
-/* 800E4378 000E0F58  4B FA 5F 45 */	bl ft_8008A2BC
-.L_800E437C:
-/* 800E437C 000E0F5C  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 800E4380 000E0F60  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 800E4384 000E0F64  38 21 00 18 */	addi r1, r1, 0x18
-/* 800E4388 000E0F68  7C 08 03 A6 */	mtlr r0
-/* 800E438C 000E0F6C  4E 80 00 20 */	blr
+void ftCa_SpecialAirLw_Anim(HSD_GObj* gobj)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->x2208_ftcmd_var2 = 0;
+        fp->x2204_ftcmd_var1 = 0;
+        fp->x2200_ftcmd_var0 = 0;
+        fp->x2210_ThrowFlags.flags = 0;
+        ftCommon_8007D5D4(fp);
+        Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLwEndAir, Ft_MF_None,
+                                  NULL, 0, 1, 0);
+    }
+}
+#endif
 
-.global ftCa_SpecialAirLwEndAir_Anim
-ftCa_SpecialAirLwEndAir_Anim:
-/* 800E4390 000E0F70  7C 08 02 A6 */	mflr r0
-/* 800E4394 000E0F74  90 01 00 04 */	stw r0, 4(r1)
-/* 800E4398 000E0F78  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800E439C 000E0F7C  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800E43A0 000E0F80  7C 7F 1B 78 */	mr r31, r3
-/* 800E43A4 000E0F84  4B F8 AE 95 */	bl ftAnim_IsFramesRemaining
-/* 800E43A8 000E0F88  2C 03 00 00 */	cmpwi r3, 0
-/* 800E43AC 000E0F8C  40 82 00 0C */	bne .L_800E43B8
-/* 800E43B0 000E0F90  7F E3 FB 78 */	mr r3, r31
-/* 800E43B4 000E0F94  4B FE 83 7D */	bl ft_800CC730
-.L_800E43B8:
-/* 800E43B8 000E0F98  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 800E43BC 000E0F9C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 800E43C0 000E0FA0  38 21 00 18 */	addi r1, r1, 0x18
-/* 800E43C4 000E0FA4  7C 08 03 A6 */	mtlr r0
-/* 800E43C8 000E0FA8  4E 80 00 20 */	blr
+void ftCa_SpecialAirLwEnd_Anim(HSD_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_8008A2BC(gobj);
+    }
+}
 
-.global ftCa_SpecialHiThrow1_Anim
-ftCa_SpecialHiThrow1_Anim:
-/* 800E43CC 000E0FAC  7C 08 02 A6 */	mflr r0
-/* 800E43D0 000E0FB0  90 01 00 04 */	stw r0, 4(r1)
-/* 800E43D4 000E0FB4  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800E43D8 000E0FB8  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800E43DC 000E0FBC  7C 7F 1B 78 */	mr r31, r3
-/* 800E43E0 000E0FC0  4B F8 AE 59 */	bl ftAnim_IsFramesRemaining
-/* 800E43E4 000E0FC4  2C 03 00 00 */	cmpwi r3, 0
-/* 800E43E8 000E0FC8  40 82 00 0C */	bne .L_800E43F4
-/* 800E43EC 000E0FCC  7F E3 FB 78 */	mr r3, r31
-/* 800E43F0 000E0FD0  4B FE 83 41 */	bl ft_800CC730
-.L_800E43F4:
-/* 800E43F4 000E0FD4  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 800E43F8 000E0FD8  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 800E43FC 000E0FDC  38 21 00 18 */	addi r1, r1, 0x18
-/* 800E4400 000E0FE0  7C 08 03 A6 */	mtlr r0
-/* 800E4404 000E0FE4  4E 80 00 20 */	blr
+void ftCa_SpecialAirLwEndAir_Anim(HSD_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_800CC730(gobj);
+    }
+}
 
-.global ftCa_SpecialLw_Phys
-ftCa_SpecialLw_Phys:
+void ftCa_SpecialHiThrow1_Anim(HSD_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_800CC730(gobj);
+    }
+}
+
+#if defined(MUST_MATCH) && !defined(WIP)
+#pragma push
+asm void ftCa_SpecialLw_Phys(HSD_GObj*)
+{ // clang-format off
+    nofralloc
 /* 800E4408 000E0FE8  7C 08 02 A6 */	mflr r0
 /* 800E440C 000E0FEC  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4410 000E0FF0  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -407,20 +491,20 @@ ftCa_SpecialLw_Phys:
 /* 800E4424 000E1004  80 03 00 E0 */	lwz r0, 0xe0(r3)
 /* 800E4428 000E1008  3B E3 00 00 */	addi r31, r3, 0
 /* 800E442C 000E100C  2C 00 00 00 */	cmpwi r0, 0
-/* 800E4430 000E1010  40 82 00 18 */	bne .L_800E4448
+/* 800E4430 000E1010  40 82 00 18 */	bne lbl_800E4448
 /* 800E4434 000E1014  7F E3 FB 78 */	mr r3, r31
 /* 800E4438 000E1018  4B F9 A1 75 */	bl ftCommon_8007E5AC
 /* 800E443C 000E101C  7F C3 F3 78 */	mr r3, r30
 /* 800E4440 000E1020  4B FA 0C 49 */	bl ft_80085088
-/* 800E4444 000E1024  48 00 00 1C */	b .L_800E4460
-.L_800E4448:
-/* 800E4448 000E1028  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
+/* 800E4444 000E1024  48 00 00 1C */	b lbl_800E4460
+lbl_800E4448:
+/* 800E4448 000E1028  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0*/
 /* 800E444C 000E102C  38 7F 00 00 */	addi r3, r31, 0
 /* 800E4450 000E1030  38 80 00 00 */	li r4, 0
 /* 800E4454 000E1034  4B F9 18 61 */	bl ftParts_80075CB4
 /* 800E4458 000E1038  7F C3 F3 78 */	mr r3, r30
 /* 800E445C 000E103C  4B FA 0C D9 */	bl ft_80085134
-.L_800E4460:
+lbl_800E4460:
 /* 800E4460 000E1040  C0 3F 23 44 */	lfs f1, 0x2344(r31)
 /* 800E4464 000E1044  7F C3 F3 78 */	mr r3, r30
 /* 800E4468 000E1048  C0 1F 00 80 */	lfs f0, 0x80(r31)
@@ -436,9 +520,34 @@ ftCa_SpecialLw_Phys:
 /* 800E4490 000E1070  38 21 00 18 */	addi r1, r1, 0x18
 /* 800E4494 000E1074  7C 08 03 A6 */	mtlr r0
 /* 800E4498 000E1078  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#else
 
-.global ftCa_SpecialLwEnd_Phys
-ftCa_SpecialLwEnd_Phys:
+void ftCa_SpecialLw_Phys(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->ground_or_air == GA_Ground) {
+        ftCommon_8007E5AC((Fighter*) fp);
+        ft_80085088(gobj);
+    } else {
+        ftParts_80075CB4((Fighter*) fp, 0, 0);
+        ft_80085134(gobj);
+    }
+    {
+        f32 friction = fp->mv.ca.speciallw.friction;
+        fp->x80_self_vel.x *= friction;
+        fp->x80_self_vel.y *= friction;
+    }
+    ftCa_SpecialHi_800E3EAC(gobj);
+}
+#endif
+
+#if defined(MUST_MATCH) && !defined(WIP)
+#pragma push
+asm void ftCa_SpecialLwEnd_Phys(HSD_GObj*)
+{ // clang-format off
+    nofralloc
 /* 800E449C 000E107C  7C 08 02 A6 */	mflr r0
 /* 800E44A0 000E1080  90 01 00 04 */	stw r0, 4(r1)
 /* 800E44A4 000E1084  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -450,12 +559,12 @@ ftCa_SpecialLwEnd_Phys:
 /* 800E44BC 000E109C  80 1F 00 E0 */	lwz r0, 0xe0(r31)
 /* 800E44C0 000E10A0  83 DF 02 D4 */	lwz r30, 0x2d4(r31)
 /* 800E44C4 000E10A4  2C 00 00 00 */	cmpwi r0, 0
-/* 800E44C8 000E10A8  40 82 00 44 */	bne .L_800E450C
+/* 800E44C8 000E10A8  40 82 00 44 */	bne lbl_800E450C
 /* 800E44CC 000E10AC  7F E3 FB 78 */	mr r3, r31
 /* 800E44D0 000E10B0  4B F9 A0 DD */	bl ftCommon_8007E5AC
 /* 800E44D4 000E10B4  80 1F 22 08 */	lwz r0, 0x2208(r31)
 /* 800E44D8 000E10B8  28 00 00 00 */	cmplwi r0, 0
-/* 800E44DC 000E10BC  41 82 00 24 */	beq .L_800E4500
+/* 800E44DC 000E10BC  41 82 00 24 */	beq lbl_800E4500
 /* 800E44E0 000E10C0  C0 3E 00 84 */	lfs f1, 0x84(r30)
 /* 800E44E4 000E10C4  7F E3 FB 78 */	mr r3, r31
 /* 800E44E8 000E10C8  C0 1F 01 28 */	lfs f0, 0x128(r31)
@@ -463,19 +572,19 @@ ftCa_SpecialLwEnd_Phys:
 /* 800E44F0 000E10D0  4B F9 84 41 */	bl ftCommon_8007C930
 /* 800E44F4 000E10D4  7F A3 EB 78 */	mr r3, r29
 /* 800E44F8 000E10D8  4B F9 86 7D */	bl ftCommon_8007CB74
-/* 800E44FC 000E10DC  48 00 00 28 */	b .L_800E4524
-.L_800E4500:
+/* 800E44FC 000E10DC  48 00 00 28 */	b lbl_800E4524
+lbl_800E4500:
 /* 800E4500 000E10E0  7F A3 EB 78 */	mr r3, r29
 /* 800E4504 000E10E4  4B FA 0A 39 */	bl ft_80084F3C
-/* 800E4508 000E10E8  48 00 00 1C */	b .L_800E4524
-.L_800E450C:
-/* 800E450C 000E10EC  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
+/* 800E4508 000E10E8  48 00 00 1C */	b lbl_800E4524
+lbl_800E450C:
+/* 800E450C 000E10EC  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0*/
 /* 800E4510 000E10F0  38 7F 00 00 */	addi r3, r31, 0
 /* 800E4514 000E10F4  38 80 00 00 */	li r4, 0
 /* 800E4518 000E10F8  4B F9 17 9D */	bl ftParts_80075CB4
 /* 800E451C 000E10FC  7F A3 EB 78 */	mr r3, r29
 /* 800E4520 000E1100  4B FA 09 CD */	bl ft_80084EEC
-.L_800E4524:
+lbl_800E4524:
 /* 800E4524 000E1104  C0 3F 23 44 */	lfs f1, 0x2344(r31)
 /* 800E4528 000E1108  C0 1F 00 80 */	lfs f0, 0x80(r31)
 /* 800E452C 000E110C  EC 00 00 72 */	fmuls f0, f0, f1
@@ -490,9 +599,44 @@ ftCa_SpecialLwEnd_Phys:
 /* 800E4550 000E1130  38 21 00 28 */	addi r1, r1, 0x28
 /* 800E4554 000E1134  7C 08 03 A6 */	mtlr r0
 /* 800E4558 000E1138  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#else
 
-.global ftCa_SpecialLwEndAir_Phys
-ftCa_SpecialLwEndAir_Phys:
+void ftCa_SpecialLwEnd_Phys(HSD_GObj* gobj)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+    Fighter* fp = gobj->user_data;
+    ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
+    if (fp->ground_or_air == GA_Ground) {
+        ftCommon_8007E5AC(fp);
+        if (fp->x2208_ftcmd_var2 != 0) {
+            ftCommon_8007C930(fp, da->speciallw_ground_traction *
+                                      fp->x110_attr.gr_friction);
+            ftCommon_8007CB74(gobj);
+        } else {
+            ft_80084F3C(gobj);
+        }
+    } else {
+        ftParts_80075CB4(fp, 0, 0);
+        ft_80084EEC(gobj);
+    }
+    {
+        f32 friction = fp->mv.ca.speciallw.friction;
+        fp->x80_self_vel.x *= friction;
+        fp->x80_self_vel.y *= friction;
+    }
+}
+#endif
+
+#if defined(MUST_MATCH) && !defined(WIP)
+#pragma push
+asm void ftCa_SpecialLwEndAir_Phys(HSD_GObj*)
+{ // clang-format off
+    nofralloc
 /* 800E455C 000E113C  7C 08 02 A6 */	mflr r0
 /* 800E4560 000E1140  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4564 000E1144  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -503,52 +647,65 @@ ftCa_SpecialLwEndAir_Phys:
 /* 800E4578 000E1158  80 03 00 E0 */	lwz r0, 0xe0(r3)
 /* 800E457C 000E115C  3B E3 00 00 */	addi r31, r3, 0
 /* 800E4580 000E1160  2C 00 00 00 */	cmpwi r0, 0
-/* 800E4584 000E1164  40 82 00 18 */	bne .L_800E459C
+/* 800E4584 000E1164  40 82 00 18 */	bne lbl_800E459C
 /* 800E4588 000E1168  7F E3 FB 78 */	mr r3, r31
 /* 800E458C 000E116C  4B F9 A0 21 */	bl ftCommon_8007E5AC
 /* 800E4590 000E1170  7F C3 F3 78 */	mr r3, r30
 /* 800E4594 000E1174  4B FA 0A F5 */	bl ft_80085088
-/* 800E4598 000E1178  48 00 00 34 */	b .L_800E45CC
-.L_800E459C:
-/* 800E459C 000E117C  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
+/* 800E4598 000E1178  48 00 00 34 */	b lbl_800E45CC
+lbl_800E459C:
+/* 800E459C 000E117C  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0*/
 /* 800E45A0 000E1180  38 7F 00 00 */	addi r3, r31, 0
 /* 800E45A4 000E1184  38 80 00 00 */	li r4, 0
 /* 800E45A8 000E1188  4B F9 17 0D */	bl ftParts_80075CB4
 /* 800E45AC 000E118C  80 1F 22 00 */	lwz r0, 0x2200(r31)
 /* 800E45B0 000E1190  28 00 00 00 */	cmplwi r0, 0
-/* 800E45B4 000E1194  41 82 00 10 */	beq .L_800E45C4
+/* 800E45B4 000E1194  41 82 00 10 */	beq lbl_800E45C4
 /* 800E45B8 000E1198  7F C3 F3 78 */	mr r3, r30
 /* 800E45BC 000E119C  4B FA 09 31 */	bl ft_80084EEC
-/* 800E45C0 000E11A0  48 00 00 0C */	b .L_800E45CC
-.L_800E45C4:
+/* 800E45C0 000E11A0  48 00 00 0C */	b lbl_800E45CC
+lbl_800E45C4:
 /* 800E45C4 000E11A4  7F C3 F3 78 */	mr r3, r30
 /* 800E45C8 000E11A8  4B FA 0B 6D */	bl ft_80085134
-.L_800E45CC:
+lbl_800E45CC:
 /* 800E45CC 000E11AC  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 800E45D0 000E11B0  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 800E45D4 000E11B4  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 800E45D8 000E11B8  38 21 00 18 */	addi r1, r1, 0x18
 /* 800E45DC 000E11BC  7C 08 03 A6 */	mtlr r0
 /* 800E45E0 000E11C0  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#else
 
-.global ftCa_SpecialAirLw_Phys
-ftCa_SpecialAirLw_Phys:
-/* 800E45E4 000E11C4  7C 08 02 A6 */	mflr r0
-/* 800E45E8 000E11C8  90 01 00 04 */	stw r0, 4(r1)
-/* 800E45EC 000E11CC  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800E45F0 000E11D0  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800E45F4 000E11D4  7C 7F 1B 78 */	mr r31, r3
-/* 800E45F8 000E11D8  4B FA 0B 3D */	bl ft_80085134
-/* 800E45FC 000E11DC  7F E3 FB 78 */	mr r3, r31
-/* 800E4600 000E11E0  4B FF F8 AD */	bl ftCa_SpecialHi_800E3EAC
-/* 800E4604 000E11E4  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 800E4608 000E11E8  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 800E460C 000E11EC  38 21 00 18 */	addi r1, r1, 0x18
-/* 800E4610 000E11F0  7C 08 03 A6 */	mtlr r0
-/* 800E4614 000E11F4  4E 80 00 20 */	blr
+void ftCa_SpecialLwEndAir_Phys(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->ground_or_air == GA_Ground) {
+        ftCommon_8007E5AC(fp);
+        ft_80085088(gobj);
+        return;
+    }
+    ftParts_80075CB4(fp, 0, 0);
+    if (fp->x2200_ftcmd_var0 != 0) {
+        ft_80084EEC(gobj);
+    } else {
+        ft_80085134(gobj);
+    }
+}
+#endif
 
-.global ftCa_SpecialAirLwEnd_Phys
-ftCa_SpecialAirLwEnd_Phys:
+void ftCa_SpecialAirLw_Phys(HSD_GObj* gobj)
+{
+    ft_80085134(gobj);
+    ftCa_SpecialHi_800E3EAC(gobj);
+}
+
+#if defined(MUST_MATCH) && !defined(WIP)
+#pragma push
+asm void ftCa_SpecialAirLwEnd_Phys(HSD_GObj*)
+{ // clang-format off
+    nofralloc
 /* 800E4618 000E11F8  7C 08 02 A6 */	mflr r0
 /* 800E461C 000E11FC  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4620 000E1200  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -558,48 +715,61 @@ ftCa_SpecialAirLwEnd_Phys:
 /* 800E4630 000E1210  80 03 22 08 */	lwz r0, 0x2208(r3)
 /* 800E4634 000E1214  80 A3 02 D4 */	lwz r5, 0x2d4(r3)
 /* 800E4638 000E1218  28 00 00 00 */	cmplwi r0, 0
-/* 800E463C 000E121C  41 82 00 20 */	beq .L_800E465C
+/* 800E463C 000E121C  41 82 00 20 */	beq lbl_800E465C
 /* 800E4640 000E1220  C0 25 00 88 */	lfs f1, 0x88(r5)
 /* 800E4644 000E1224  C0 03 01 28 */	lfs f0, 0x128(r3)
 /* 800E4648 000E1228  EC 21 00 32 */	fmuls f1, f1, f0
 /* 800E464C 000E122C  4B F9 82 E5 */	bl ftCommon_8007C930
 /* 800E4650 000E1230  7F E3 FB 78 */	mr r3, r31
 /* 800E4654 000E1234  4B F9 85 21 */	bl ftCommon_8007CB74
-/* 800E4658 000E1238  48 00 00 0C */	b .L_800E4664
-.L_800E465C:
+/* 800E4658 000E1238  48 00 00 0C */	b lbl_800E4664
+lbl_800E465C:
 /* 800E465C 000E123C  7F E3 FB 78 */	mr r3, r31
 /* 800E4660 000E1240  4B FA 08 DD */	bl ft_80084F3C
-.L_800E4664:
+lbl_800E4664:
 /* 800E4664 000E1244  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 800E4668 000E1248  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 800E466C 000E124C  38 21 00 20 */	addi r1, r1, 0x20
 /* 800E4670 000E1250  7C 08 03 A6 */	mtlr r0
 /* 800E4674 000E1254  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#else
 
-.global ftCa_SpecialAirLwEndAir_Phys
-ftCa_SpecialAirLwEndAir_Phys:
-/* 800E4678 000E1258  7C 08 02 A6 */	mflr r0
-/* 800E467C 000E125C  90 01 00 04 */	stw r0, 4(r1)
-/* 800E4680 000E1260  94 21 FF F8 */	stwu r1, -8(r1)
-/* 800E4684 000E1264  4B FA 08 69 */	bl ft_80084EEC
-/* 800E4688 000E1268  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 800E468C 000E126C  38 21 00 08 */	addi r1, r1, 8
-/* 800E4690 000E1270  7C 08 03 A6 */	mtlr r0
-/* 800E4694 000E1274  4E 80 00 20 */	blr
+void ftCa_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
+    if (fp->x2208_ftcmd_var2 != 0) {
+        ftCommon_8007C930(fp, da->speciallw_air_landing_traction *
+                                  fp->x110_attr.gr_friction);
+        ftCommon_8007CB74(gobj);
+        return;
+    } else {
+        ft_80084F3C(gobj);
+    }
+}
+#endif
 
-.global ftCa_SpecialHiThrow1_Phys
-ftCa_SpecialHiThrow1_Phys:
-/* 800E4698 000E1278  7C 08 02 A6 */	mflr r0
-/* 800E469C 000E127C  90 01 00 04 */	stw r0, 4(r1)
-/* 800E46A0 000E1280  94 21 FF F8 */	stwu r1, -8(r1)
-/* 800E46A4 000E1284  4B FA 0A 91 */	bl ft_80085134
-/* 800E46A8 000E1288  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 800E46AC 000E128C  38 21 00 08 */	addi r1, r1, 8
-/* 800E46B0 000E1290  7C 08 03 A6 */	mtlr r0
-/* 800E46B4 000E1294  4E 80 00 20 */	blr
+void ftCa_SpecialAirLwEndAir_Phys(HSD_GObj* gobj)
+{
+    ft_80084EEC(gobj);
+}
 
-.global ftCa_SpecialLw_Coll
-ftCa_SpecialLw_Coll:
+void ftCa_SpecialHiThrow1_Phys(HSD_GObj* gobj)
+{
+    ft_80085134(gobj);
+}
+
+#if defined(MUST_MATCH) && !defined(WIP)
+#pragma push
+asm void ftCa_SpecialLw_Coll(HSD_GObj*)
+{ // clang-format off
+    nofralloc
 /* 800E46B8 000E1298  7C 08 02 A6 */	mflr r0
 /* 800E46BC 000E129C  90 01 00 04 */	stw r0, 4(r1)
 /* 800E46C0 000E12A0  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -610,40 +780,40 @@ ftCa_SpecialLw_Coll:
 /* 800E46D4 000E12B4  80 03 00 E0 */	lwz r0, 0xe0(r3)
 /* 800E46D8 000E12B8  3B E3 00 00 */	addi r31, r3, 0
 /* 800E46DC 000E12BC  2C 00 00 00 */	cmpwi r0, 0
-/* 800E46E0 000E12C0  40 82 00 20 */	bne .L_800E4700
+/* 800E46E0 000E12C0  40 82 00 20 */	bne lbl_800E4700
 /* 800E46E4 000E12C4  7F C3 F3 78 */	mr r3, r30
 /* 800E46E8 000E12C8  4B F9 E0 21 */	bl ft_80082708
 /* 800E46EC 000E12CC  2C 03 00 00 */	cmpwi r3, 0
-/* 800E46F0 000E12D0  40 82 00 28 */	bne .L_800E4718
+/* 800E46F0 000E12D0  40 82 00 28 */	bne lbl_800E4718
 /* 800E46F4 000E12D4  7F E3 FB 78 */	mr r3, r31
 /* 800E46F8 000E12D8  4B F9 8E DD */	bl ftCommon_8007D5D4
-/* 800E46FC 000E12DC  48 00 00 1C */	b .L_800E4718
-.L_800E4700:
+/* 800E46FC 000E12DC  48 00 00 1C */	b lbl_800E4718
+lbl_800E4700:
 /* 800E4700 000E12E0  7F C3 F3 78 */	mr r3, r30
 /* 800E4704 000E12E4  4B F9 D6 09 */	bl ft_80081D0C
 /* 800E4708 000E12E8  2C 03 00 00 */	cmpwi r3, 0
-/* 800E470C 000E12EC  41 82 00 0C */	beq .L_800E4718
+/* 800E470C 000E12EC  41 82 00 0C */	beq lbl_800E4718
 /* 800E4710 000E12F0  7F E3 FB 78 */	mr r3, r31
 /* 800E4714 000E12F4  4B F9 90 E9 */	bl ftCommon_8007D7FC
-.L_800E4718:
+lbl_800E4718:
 /* 800E4718 000E12F8  80 1F 22 00 */	lwz r0, 0x2200(r31)
 /* 800E471C 000E12FC  28 00 00 00 */	cmplwi r0, 0
-/* 800E4720 000E1300  41 82 00 78 */	beq .L_800E4798
-/* 800E4724 000E1304  C0 02 98 4C */	lfs f0, ftCa_SpecialHi_804D922C/*-1.0f*/@sda21(r2)
+/* 800E4720 000E1300  41 82 00 78 */	beq lbl_800E4798
+/* 800E4724 000E1304  C0 02 98 4C */	lfs f0, ftCa_SpecialHi_804D922C/*-1*/
 /* 800E4728 000E1308  C0 3F 00 2C */	lfs f1, 0x2c(r31)
 /* 800E472C 000E130C  FC 00 08 00 */	fcmpu cr0, f0, f1
-/* 800E4730 000E1310  40 82 00 10 */	bne .L_800E4740
+/* 800E4730 000E1310  40 82 00 10 */	bne lbl_800E4740
 /* 800E4734 000E1314  80 1F 08 24 */	lwz r0, 0x824(r31)
 /* 800E4738 000E1318  54 00 05 29 */	rlwinm. r0, r0, 0, 0x14, 0x14
-/* 800E473C 000E131C  40 82 00 1C */	bne .L_800E4758
-.L_800E4740:
-/* 800E4740 000E1320  C0 02 98 48 */	lfs f0, ftCa_SpecialHi_804D9228/*1.0f*/@sda21(r2)
+/* 800E473C 000E131C  40 82 00 1C */	bne lbl_800E4758
+lbl_800E4740:
+/* 800E4740 000E1320  C0 02 98 48 */	lfs f0, ftCa_SpecialHi_804D9228/*1*/
 /* 800E4744 000E1324  FC 00 08 00 */	fcmpu cr0, f0, f1
-/* 800E4748 000E1328  40 82 00 50 */	bne .L_800E4798
+/* 800E4748 000E1328  40 82 00 50 */	bne lbl_800E4798
 /* 800E474C 000E132C  80 1F 08 24 */	lwz r0, 0x824(r31)
 /* 800E4750 000E1330  54 00 06 B5 */	rlwinm. r0, r0, 0, 0x1a, 0x1a
-/* 800E4754 000E1334  41 82 00 44 */	beq .L_800E4798
-.L_800E4758:
+/* 800E4754 000E1334  41 82 00 44 */	beq lbl_800E4798
+lbl_800E4758:
 /* 800E4758 000E1338  80 9E 00 2C */	lwz r4, 0x2c(r30)
 /* 800E475C 000E133C  38 00 00 00 */	li r0, 0
 /* 800E4760 000E1340  90 04 22 08 */	stw r0, 0x2208(r4)
@@ -652,64 +822,82 @@ ftCa_SpecialLw_Coll:
 /* 800E476C 000E134C  90 04 22 00 */	stw r0, 0x2200(r4)
 /* 800E4770 000E1350  90 04 22 10 */	stw r0, 0x2210(r4)
 /* 800E4774 000E1354  4B F9 8E 61 */	bl ftCommon_8007D5D4
-/* 800E4778 000E1358  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
+/* 800E4778 000E1358  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0*/
 /* 800E477C 000E135C  7F C3 F3 78 */	mr r3, r30
-/* 800E4780 000E1360  C0 42 98 48 */	lfs f2, ftCa_SpecialHi_804D9228/*1.0f*/@sda21(r2)
+/* 800E4780 000E1360  C0 42 98 48 */	lfs f2, ftCa_SpecialHi_804D9228/*1*/
 /* 800E4784 000E1364  38 80 01 6B */	li r4, 0x16b
 /* 800E4788 000E1368  FC 60 08 90 */	fmr f3, f1
 /* 800E478C 000E136C  38 A0 00 00 */	li r5, 0
 /* 800E4790 000E1370  38 C0 00 00 */	li r6, 0
 /* 800E4794 000E1374  4B F8 4C 19 */	bl Fighter_ChangeMotionState
-.L_800E4798:
+lbl_800E4798:
 /* 800E4798 000E1378  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 800E479C 000E137C  83 E1 00 24 */	lwz r31, 0x24(r1)
 /* 800E47A0 000E1380  83 C1 00 20 */	lwz r30, 0x20(r1)
 /* 800E47A4 000E1384  38 21 00 28 */	addi r1, r1, 0x28
 /* 800E47A8 000E1388  7C 08 03 A6 */	mtlr r0
 /* 800E47AC 000E138C  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#else
 
-.global ftCa_SpecialLwEnd_Coll
-ftCa_SpecialLwEnd_Coll:
-/* 800E47B0 000E1390  7C 08 02 A6 */	mflr r0
-/* 800E47B4 000E1394  90 01 00 04 */	stw r0, 4(r1)
-/* 800E47B8 000E1398  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800E47BC 000E139C  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800E47C0 000E13A0  80 83 00 2C */	lwz r4, 0x2c(r3)
-/* 800E47C4 000E13A4  80 04 00 E0 */	lwz r0, 0xe0(r4)
-/* 800E47C8 000E13A8  3B E4 00 00 */	addi r31, r4, 0
-/* 800E47CC 000E13AC  2C 00 00 00 */	cmpwi r0, 0
-/* 800E47D0 000E13B0  40 82 00 40 */	bne .L_800E4810
-/* 800E47D4 000E13B4  80 1F 22 04 */	lwz r0, 0x2204(r31)
-/* 800E47D8 000E13B8  28 00 00 00 */	cmplwi r0, 0
-/* 800E47DC 000E13BC  41 82 00 1C */	beq .L_800E47F8
-/* 800E47E0 000E13C0  4B F9 DF C1 */	bl ft_800827A0
-/* 800E47E4 000E13C4  2C 03 00 00 */	cmpwi r3, 0
-/* 800E47E8 000E13C8  40 82 00 3C */	bne .L_800E4824
-/* 800E47EC 000E13CC  7F E3 FB 78 */	mr r3, r31
-/* 800E47F0 000E13D0  4B F9 8D E5 */	bl ftCommon_8007D5D4
-/* 800E47F4 000E13D4  48 00 00 30 */	b .L_800E4824
-.L_800E47F8:
-/* 800E47F8 000E13D8  4B F9 DF 11 */	bl ft_80082708
-/* 800E47FC 000E13DC  2C 03 00 00 */	cmpwi r3, 0
-/* 800E4800 000E13E0  40 82 00 24 */	bne .L_800E4824
-/* 800E4804 000E13E4  7F E3 FB 78 */	mr r3, r31
-/* 800E4808 000E13E8  4B F9 8D CD */	bl ftCommon_8007D5D4
-/* 800E480C 000E13EC  48 00 00 18 */	b .L_800E4824
-.L_800E4810:
-/* 800E4810 000E13F0  4B F9 D4 FD */	bl ft_80081D0C
-/* 800E4814 000E13F4  2C 03 00 00 */	cmpwi r3, 0
-/* 800E4818 000E13F8  41 82 00 0C */	beq .L_800E4824
-/* 800E481C 000E13FC  7F E3 FB 78 */	mr r3, r31
-/* 800E4820 000E1400  4B F9 8F DD */	bl ftCommon_8007D7FC
-.L_800E4824:
-/* 800E4824 000E1404  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 800E4828 000E1408  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 800E482C 000E140C  38 21 00 18 */	addi r1, r1, 0x18
-/* 800E4830 000E1410  7C 08 03 A6 */	mtlr r0
-/* 800E4834 000E1414  4E 80 00 20 */	blr
+void ftCa_SpecialLw_Coll(HSD_GObj* gobj)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+    Fighter* fp = GET_FIGHTER(gobj);
+    if ((s32) fp->ground_or_air == GA_Ground) {
+        if (ft_80082708(gobj) == 0) {
+            ftCommon_8007D5D4((Fighter*) fp);
+        }
+    } else if (ft_80081D0C(gobj) != 0) {
+        ftCommon_8007D7FC((Fighter*) fp);
+    }
+    {
+        f32 facing_dir;
+        if ((fp->x2200_ftcmd_var0 != 0) &&
+            /// @todo Pull out these check functions
+            (((facing_dir = fp->facing_dir, ((facing_dir == -1) != 0)) &&
+              (fp->x6F0_collData.x134_envFlags & MPCOLL_FLAGS_B11)) ||
+             (facing_dir == +1 &&
+              (fp->x6F0_collData.x134_envFlags & MPCOLL_FLAGS_B5))))
+        {
+            Fighter* fp = GET_FIGHTER(gobj);
+            fp->x2208_ftcmd_var2 = 0;
+            fp->x2204_ftcmd_var1 = 0;
+            fp->x2200_ftcmd_var0 = 0;
+            fp->x2210_ThrowFlags.flags = 0;
+            ftCommon_8007D5D4(fp);
+            Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialHiThrow1,
+                                      Ft_MF_None, NULL, 0, 1, 0);
+        }
+    }
+}
+#endif
 
-.global ftCa_SpecialLwEndAir_Coll
-ftCa_SpecialLwEndAir_Coll:
+void ftCa_SpecialLwEnd_Coll(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->ground_or_air == GA_Ground) {
+        if (fp->x2204_ftcmd_var1 != 0) {
+            if (!ft_800827A0(gobj)) {
+                ftCommon_8007D5D4(fp);
+            }
+        } else if (!ft_80082708(gobj)) {
+            ftCommon_8007D5D4(fp);
+        }
+    } else if (ft_80081D0C(gobj)) {
+        ftCommon_8007D7FC(fp);
+    }
+}
+
+#if defined(MUST_MATCH) && !defined(WIP)
+#pragma push
+asm void ftCa_SpecialLwEndAir_Coll(HSD_GObj*)
+{ // clang-format off
+    nofralloc
 /* 800E4838 000E1418  7C 08 02 A6 */	mflr r0
 /* 800E483C 000E141C  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4840 000E1420  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -717,38 +905,61 @@ ftCa_SpecialLwEndAir_Coll:
 /* 800E4848 000E1428  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 800E484C 000E142C  80 1F 00 E0 */	lwz r0, 0xe0(r31)
 /* 800E4850 000E1430  2C 00 00 00 */	cmpwi r0, 0
-/* 800E4854 000E1434  40 82 00 40 */	bne .L_800E4894
+/* 800E4854 000E1434  40 82 00 40 */	bne lbl_800E4894
 /* 800E4858 000E1438  80 1F 22 04 */	lwz r0, 0x2204(r31)
 /* 800E485C 000E143C  28 00 00 00 */	cmplwi r0, 0
-/* 800E4860 000E1440  41 82 00 1C */	beq .L_800E487C
+/* 800E4860 000E1440  41 82 00 1C */	beq lbl_800E487C
 /* 800E4864 000E1444  4B F9 DF 3D */	bl ft_800827A0
 /* 800E4868 000E1448  2C 03 00 00 */	cmpwi r3, 0
-/* 800E486C 000E144C  40 82 00 3C */	bne .L_800E48A8
+/* 800E486C 000E144C  40 82 00 3C */	bne lbl_800E48A8
 /* 800E4870 000E1450  7F E3 FB 78 */	mr r3, r31
 /* 800E4874 000E1454  4B F9 8D 61 */	bl ftCommon_8007D5D4
-/* 800E4878 000E1458  48 00 00 30 */	b .L_800E48A8
-.L_800E487C:
+/* 800E4878 000E1458  48 00 00 30 */	b lbl_800E48A8
+lbl_800E487C:
 /* 800E487C 000E145C  4B F9 DE 8D */	bl ft_80082708
 /* 800E4880 000E1460  2C 03 00 00 */	cmpwi r3, 0
-/* 800E4884 000E1464  40 82 00 24 */	bne .L_800E48A8
+/* 800E4884 000E1464  40 82 00 24 */	bne lbl_800E48A8
 /* 800E4888 000E1468  7F E3 FB 78 */	mr r3, r31
 /* 800E488C 000E146C  4B F9 8D 49 */	bl ftCommon_8007D5D4
-/* 800E4890 000E1470  48 00 00 18 */	b .L_800E48A8
-.L_800E4894:
+/* 800E4890 000E1470  48 00 00 18 */	b lbl_800E48A8
+lbl_800E4894:
 /* 800E4894 000E1474  4B F9 D4 79 */	bl ft_80081D0C
 /* 800E4898 000E1478  2C 03 00 00 */	cmpwi r3, 0
-/* 800E489C 000E147C  41 82 00 0C */	beq .L_800E48A8
+/* 800E489C 000E147C  41 82 00 0C */	beq lbl_800E48A8
 /* 800E48A0 000E1480  7F E3 FB 78 */	mr r3, r31
 /* 800E48A4 000E1484  4B F9 8F 59 */	bl ftCommon_8007D7FC
-.L_800E48A8:
+lbl_800E48A8:
 /* 800E48A8 000E1488  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 800E48AC 000E148C  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 800E48B0 000E1490  38 21 00 18 */	addi r1, r1, 0x18
 /* 800E48B4 000E1494  7C 08 03 A6 */	mtlr r0
 /* 800E48B8 000E1498  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#else
 
-.global ftCa_SpecialAirLw_Coll
-ftCa_SpecialAirLw_Coll:
+void ftCa_SpecialLwEndAir_Coll(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->ground_or_air == GA_Ground) {
+        if (fp->x2204_ftcmd_var1 != 0) {
+            if (!ft_800827A0(gobj)) {
+                ftCommon_8007D5D4(fp);
+            }
+        } else if (!ft_80082708(gobj)) {
+            ftCommon_8007D5D4(fp);
+        }
+    } else if (ft_80081D0C(gobj)) {
+        ftCommon_8007D7FC(fp);
+    }
+}
+#endif
+
+#if defined(MUST_MATCH) && !defined(WIP)
+#pragma push
+asm void ftCa_SpecialAirLw_Coll(HSD_GObj*)
+{ // clang-format off
+    nofralloc
 /* 800E48BC 000E149C  7C 08 02 A6 */	mflr r0
 /* 800E48C0 000E14A0  90 01 00 04 */	stw r0, 4(r1)
 /* 800E48C4 000E14A4  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -757,7 +968,7 @@ ftCa_SpecialAirLw_Coll:
 /* 800E48D0 000E14B0  7C 7E 1B 78 */	mr r30, r3
 /* 800E48D4 000E14B4  4B F9 D4 39 */	bl ft_80081D0C
 /* 800E48D8 000E14B8  2C 03 00 00 */	cmpwi r3, 0
-/* 800E48DC 000E14BC  41 82 00 48 */	beq .L_800E4924
+/* 800E48DC 000E14BC  41 82 00 48 */	beq lbl_800E4924
 /* 800E48E0 000E14C0  80 9E 00 2C */	lwz r4, 0x2c(r30)
 /* 800E48E4 000E14C4  38 00 00 00 */	li r0, 0
 /* 800E48E8 000E14C8  83 E4 02 D4 */	lwz r31, 0x2d4(r4)
@@ -767,7 +978,7 @@ ftCa_SpecialAirLw_Coll:
 /* 800E48F8 000E14D8  90 04 22 00 */	stw r0, 0x2200(r4)
 /* 800E48FC 000E14DC  90 04 22 10 */	stw r0, 0x2210(r4)
 /* 800E4900 000E14E0  4B F9 8E FD */	bl ftCommon_8007D7FC
-/* 800E4904 000E14E4  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
+/* 800E4904 000E14E4  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0*/
 /* 800E4908 000E14E8  7F C3 F3 78 */	mr r3, r30
 /* 800E490C 000E14EC  C0 5F 00 80 */	lfs f2, 0x80(r31)
 /* 800E4910 000E14F0  38 80 01 68 */	li r4, 0x168
@@ -775,27 +986,47 @@ ftCa_SpecialAirLw_Coll:
 /* 800E4918 000E14F8  38 A0 00 00 */	li r5, 0
 /* 800E491C 000E14FC  38 C0 00 00 */	li r6, 0
 /* 800E4920 000E1500  4B F8 4A 8D */	bl Fighter_ChangeMotionState
-.L_800E4924:
+lbl_800E4924:
 /* 800E4924 000E1504  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 800E4928 000E1508  83 E1 00 2C */	lwz r31, 0x2c(r1)
 /* 800E492C 000E150C  83 C1 00 28 */	lwz r30, 0x28(r1)
 /* 800E4930 000E1510  38 21 00 30 */	addi r1, r1, 0x30
 /* 800E4934 000E1514  7C 08 03 A6 */	mtlr r0
 /* 800E4938 000E1518  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#else
 
-.global ftCa_SpecialAirLwEnd_Coll
-ftCa_SpecialAirLwEnd_Coll:
-/* 800E493C 000E151C  7C 08 02 A6 */	mflr r0
-/* 800E4940 000E1520  90 01 00 04 */	stw r0, 4(r1)
-/* 800E4944 000E1524  94 21 FF F8 */	stwu r1, -8(r1)
-/* 800E4948 000E1528  4B F9 F7 BD */	bl ft_80084104
-/* 800E494C 000E152C  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 800E4950 000E1530  38 21 00 08 */	addi r1, r1, 8
-/* 800E4954 000E1534  7C 08 03 A6 */	mtlr r0
-/* 800E4958 000E1538  4E 80 00 20 */	blr
+void ftCa_SpecialAirLw_Coll(HSD_GObj* gobj)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[24];
+#endif
+    if (ft_80081D0C(gobj)) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
+        fp->x2208_ftcmd_var2 = 0;
+        fp->x2204_ftcmd_var1 = 0;
+        fp->x2200_ftcmd_var0 = 0;
+        fp->x2210_ThrowFlags.flags = 0;
+        ftCommon_8007D7FC(fp);
+        Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLwEnd, Ft_MF_None,
+                                  NULL, 0, da->speciallw_landing_lag_mul, 0);
+    }
+}
+#endif
 
-.global ftCa_SpecialAirLwEndAir_Coll
-ftCa_SpecialAirLwEndAir_Coll:
+void ftCa_SpecialAirLwEnd_Coll(HSD_GObj* gobj)
+{
+    ft_80084104(gobj);
+}
+
+#if defined(MUST_MATCH) && !defined(WIP)
+#pragma push
+asm void ftCa_SpecialAirLwEndAir_Coll(HSD_GObj*)
+{ // clang-format off
+    nofralloc
 /* 800E495C 000E153C  7C 08 02 A6 */	mflr r0
 /* 800E4960 000E1540  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4964 000E1544  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -804,7 +1035,7 @@ ftCa_SpecialAirLwEndAir_Coll:
 /* 800E4970 000E1550  7C 7E 1B 78 */	mr r30, r3
 /* 800E4974 000E1554  4B F9 D3 99 */	bl ft_80081D0C
 /* 800E4978 000E1558  2C 03 00 00 */	cmpwi r3, 0
-/* 800E497C 000E155C  41 82 00 48 */	beq .L_800E49C4
+/* 800E497C 000E155C  41 82 00 48 */	beq lbl_800E49C4
 /* 800E4980 000E1560  80 9E 00 2C */	lwz r4, 0x2c(r30)
 /* 800E4984 000E1564  38 00 00 00 */	li r0, 0
 /* 800E4988 000E1568  83 E4 02 D4 */	lwz r31, 0x2d4(r4)
@@ -814,8 +1045,7 @@ ftCa_SpecialAirLwEndAir_Coll:
 /* 800E4998 000E1578  90 04 22 00 */	stw r0, 0x2200(r4)
 /* 800E499C 000E157C  90 04 22 10 */	stw r0, 0x2210(r4)
 /* 800E49A0 000E1580  4B F9 8E 5D */	bl ftCommon_8007D7FC
-/* 800E49A4 000E1584  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0.0f*/@sda21(r2)
-# SPLIT NO EARLIER THAN HERE
+/* 800E49A4 000E1584  C0 22 98 40 */	lfs f1, ftCa_SpecialHi_804D9220/*0*/
 /* 800E49A8 000E1588  7F C3 F3 78 */	mr r3, r30
 /* 800E49AC 000E158C  C0 5F 00 80 */	lfs f2, 0x80(r31)
 /* 800E49B0 000E1590  38 80 01 68 */	li r4, 0x168
@@ -823,25 +1053,29 @@ ftCa_SpecialAirLwEndAir_Coll:
 /* 800E49B8 000E1598  38 A0 00 00 */	li r5, 0
 /* 800E49BC 000E159C  38 C0 00 00 */	li r6, 0
 /* 800E49C0 000E15A0  4B F8 49 ED */	bl Fighter_ChangeMotionState
-.L_800E49C4:
+lbl_800E49C4:
 /* 800E49C4 000E15A4  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 800E49C8 000E15A8  83 E1 00 2C */	lwz r31, 0x2c(r1)
 /* 800E49CC 000E15AC  83 C1 00 28 */	lwz r30, 0x28(r1)
 /* 800E49D0 000E15B0  38 21 00 30 */	addi r1, r1, 0x30
 /* 800E49D4 000E15B4  7C 08 03 A6 */	mtlr r0
 /* 800E49D8 000E15B8  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#else
 
-.section .sdata2
-    .balign 8
-.global ftCa_SpecialHi_804D9220/*0.0f*/
-ftCa_SpecialHi_804D9220/*0.0f*/:
-    .4byte 0x00000000
-.global ftCa_SpecialHi_804D9224/*0.01745329238474369f*/
-ftCa_SpecialHi_804D9224/*0.01745329238474369f*/:
-    .4byte 0x3C8EFA35
-.global ftCa_SpecialHi_804D9228/*1.0f*/
-ftCa_SpecialHi_804D9228/*1.0f*/:
-    .4byte 0x3F800000
-.global ftCa_SpecialHi_804D922C/*-1.0f*/
-ftCa_SpecialHi_804D922C/*-1.0f*/:
-    .4byte 0xBF800000
+void ftCa_SpecialAirLwEndAir_Coll(HSD_GObj* gobj)
+{
+    if (ft_80081D0C(gobj)) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
+        fp->x2208_ftcmd_var2 = 0;
+        fp->x2204_ftcmd_var1 = 0;
+        fp->x2200_ftcmd_var0 = 0;
+        fp->x2210_ThrowFlags.flags = 0;
+        ftCommon_8007D7FC(fp);
+        Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLwEnd, Ft_MF_None,
+                                  NULL, 0, da->speciallw_landing_lag_mul, 0);
+    }
+}
+#endif
