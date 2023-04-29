@@ -3,7 +3,7 @@
 
 #include "ftCommon/forward.h"
 
-#include "types.h"
+#include "ft/types.h"
 
 extern MotionState ftData_MotionStateList[ftCo_MS_Count];
 

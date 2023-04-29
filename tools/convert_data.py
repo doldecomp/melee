@@ -4,46 +4,46 @@ import re
 import struct
 from math import ceil
 from pathlib import Path
-from typing import TextIO, Match, Callable, Any, Tuple, Union, List
+from typing import Any, Callable, List, Match, TextIO, Tuple, Union
 
 root = Path(__file__).parent.parent
 
-options = {
-    'input_glob': r"**/ftseak3.s"
-}
+options = {"input_glob": r"**/ftCaptain/*.s"}
 
 default_options = {
-    'zero': 'float',  # How to treat zero-value dwords
+    "zero": "float",  # How to treat zero-value dwords
     # None: replace zero with 'NULL'
     # 'hex': replace zero with '0x00000000'
     # 'int': replace zero with '0'
     # 'float': replace zero with '0.0'
-
-    'find_asciz': True,  # Attempt to find zero-terminated ASCII strings
-    'find_f32': True,  # Attempt to find 4-byte floating-point values
-    'find_f64': True,  # Attempt to find 8-byte floating-point values
-    'find_s32': True,  # Attempt to find negative 4-byte values
-    'find_u32': True,  # Attempt to find positive 4-byte values
-
-    'min_asciz_len': 4,  # Minimum length for a byte array to be considered a string
-    's32_min_value': -1000,  # Lowest acceptable value for s32
-    'u32_max_value': 1000,  # Highest acceptable value for u32
-
-    'f32_max_abs_value': 1e10,  # Biggest acceptable  value for f32
-    'f32_min_abs_value': 1e-10,  # Smallest acceptable value for f32
-    'f32_max_digits': 20,  # Maximum number of digits for f32 (excludes - and .)
-
-    'f64_max_abs_value': 1e20,  # Biggest acceptable  value for f64
-    'f64_min_abs_value': 1e-20,  # Smallest acceptable value for f64
-    'f64_max_digits': 20,  # Maximum number of digits for f64 (excludes - and .)
+    "find_asciz": True,  # Attempt to find zero-terminated ASCII strings
+    "find_f32": True,  # Attempt to find 4-byte floating-point values
+    "find_f64": True,  # Attempt to find 8-byte floating-point values
+    "find_s32": True,  # Attempt to find negative 4-byte values
+    "find_u32": True,  # Attempt to find positive 4-byte values
+    "min_asciz_len": 4,  # Minimum length for a byte array to be considered a string
+    "s32_min_value": -1000,  # Lowest acceptable value for s32
+    "u32_max_value": 1000,  # Highest acceptable value for u32
+    "f32_max_abs_value": 1e10,  # Biggest acceptable  value for f32
+    "f32_min_abs_value": 1e-10,  # Smallest acceptable value for f32
+    "f32_max_digits": 20,  # Maximum number of digits for f32 (excludes - and .)
+    "f64_max_abs_value": 1e20,  # Biggest acceptable  value for f64
+    "f64_min_abs_value": 1e-20,  # Smallest acceptable value for f64
+    "f64_max_digits": 20,  # Maximum number of digits for f64 (excludes - and .)
 }
 
 options = {**options, **default_options}
 
-dword_re = re.compile(r"^(?P<indent>\s*)\.4byte (?:(?P<null>NULL)|0x(?P<hex>[\dA-F]{8}))$")
+dword_re = re.compile(
+    r"^(?P<indent>\s*)\.4byte (?:(?P<null>NULL)|0x(?P<hex>[\dA-F]{8}))$"
+)
 
 
-def take_buffer_len(buffer: bytearray, length: int, str_fn: Callable[[bytearray], Union[str, List[str], None]]):
+def take_buffer_len(
+    buffer: bytearray,
+    length: int,
+    str_fn: Callable[[bytearray], Union[str, List[str], None]],
+):
     if len(buffer) < length:
         return None, buffer
     if result := str_fn(buffer[:length]):
@@ -51,44 +51,64 @@ def take_buffer_len(buffer: bytearray, length: int, str_fn: Callable[[bytearray]
     return None, buffer
 
 
-def try_unpack_value(buffer: bytearray, size: int, unpack_format: str, result_filter: Callable[[Any], bool],
-                     instruction: str, result_format: str) -> Tuple[Union[str, List[str], None], bytearray]:
+def try_unpack_value(
+    buffer: bytearray,
+    size: int,
+    unpack_format: str,
+    result_filter: Callable[[Any], bool],
+    instruction: str,
+    result_format: str,
+) -> Tuple[Union[str, List[str], None], bytearray]:
     def get_value_str(value: bytearray) -> str:
-        result, = struct.unpack(unpack_format, value)
+        (result,) = struct.unpack(unpack_format, value)
         if not result_filter(result):
             return None
-        return f'{instruction} {result_format.format(result)}'
+        return f"{instruction} {result_format.format(result)}"
 
     return take_buffer_len(buffer, size, get_value_str)
 
 
-def try_get_dword(buffer: bytearray, unpack_format: str, result_filter: Callable[[Any], bool],
-                  instruction: str, result_format: str) -> Tuple[Union[str, List[str], None], bytearray]:
-    return try_unpack_value(buffer, 4, unpack_format, result_filter, instruction, result_format)
+def try_get_dword(
+    buffer: bytearray,
+    unpack_format: str,
+    result_filter: Callable[[Any], bool],
+    instruction: str,
+    result_format: str,
+) -> Tuple[Union[str, List[str], None], bytearray]:
+    return try_unpack_value(
+        buffer, 4, unpack_format, result_filter, instruction, result_format
+    )
 
 
-def try_get_qword(buffer: bytearray, unpack_format: str, result_filter: Callable[[Any], bool],
-                  instruction: str, result_format: str) -> Tuple[Union[str, List[str], None], bytearray]:
-    return try_unpack_value(buffer, 8, unpack_format, result_filter, instruction, result_format)
+def try_get_qword(
+    buffer: bytearray,
+    unpack_format: str,
+    result_filter: Callable[[Any], bool],
+    instruction: str,
+    result_format: str,
+) -> Tuple[Union[str, List[str], None], bytearray]:
+    return try_unpack_value(
+        buffer, 8, unpack_format, result_filter, instruction, result_format
+    )
 
 
 def try_get_zero(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
     def get_dword_str(dword: bytearray) -> str:
-        dword_int, = struct.unpack('>I', dword)
+        (dword_int,) = struct.unpack(">I", dword)
         if dword_int != 0:
             return None
 
-        zero_opt = options.get('zero')
+        zero_opt = options.get("zero")
         value: str
-        instruction: str = '4byte'
+        instruction: str = "4byte"
         if zero_opt is None:
-            value = 'NULL'
-        elif zero_opt == 'hex':
-            value = '0x00000000'
-        elif zero_opt == 'int':
-            instruction, value = 'int', '0'
-        elif zero_opt == 'float':
-            instruction, value = 'float', '0.0'
+            value = "NULL"
+        elif zero_opt == "hex":
+            value = "0x00000000"
+        elif zero_opt == "int":
+            instruction, value = "int", "0"
+        elif zero_opt == "float":
+            instruction, value = "float", "0.0"
         else:
             raise ValueError(zero_opt)
         return f"{instruction} {value}"
@@ -96,8 +116,12 @@ def try_get_zero(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytear
     return take_buffer_len(buffer, 4, get_dword_str)
 
 
-def filter_float(f: float, min_opt_name='f32_min_abs_value', max_opt_name='f32_max_abs_value',
-                 digits_opt_name='f32_max_digits') -> bool:
+def filter_float(
+    f: float,
+    min_opt_name="f32_min_abs_value",
+    max_opt_name="f32_max_abs_value",
+    digits_opt_name="f32_max_digits",
+) -> bool:
     if f == 0.0:
         return False
     if f != f:  # NaN
@@ -108,7 +132,7 @@ def filter_float(f: float, min_opt_name='f32_min_abs_value', max_opt_name='f32_m
     if (max_abs := options.get(max_opt_name)) and abs_f > max_abs:
         return False
     if max_digits := options.get(digits_opt_name):
-        s = str(abs_f).replace('.', '').strip('0')
+        s = str(abs_f).replace(".", "").strip("0")
         if len(s) > max_digits:
             return False
 
@@ -117,38 +141,42 @@ def filter_float(f: float, min_opt_name='f32_min_abs_value', max_opt_name='f32_m
 
 def try_get_f32(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
     def filter_f32(f: float) -> bool:
-        return filter_float(f, 'f32_min_abs_value', 'f32_max_abs_value', 'f32_max_digits')
+        return filter_float(
+            f, "f32_min_abs_value", "f32_max_abs_value", "f32_max_digits"
+        )
 
-    return try_get_dword(buffer, '>f', filter_f32, 'float', '{}')
+    return try_get_dword(buffer, ">f", filter_f32, "float", "{}")
 
 
 def try_get_f64(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
     def filter_f64(f: float) -> bool:
-        return filter_float(f, 'f64_min_abs_value', 'f64_max_abs_value', 'f64_max_digits')
+        return filter_float(
+            f, "f64_min_abs_value", "f64_max_abs_value", "f64_max_digits"
+        )
 
-    return try_get_qword(buffer, '>d', filter_f64, 'double', '{}')
+    return try_get_qword(buffer, ">d", filter_f64, "double", "{}")
 
 
 def try_get_u32(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
     def result_filter(i: int) -> bool:
         if i == 0:
             return False
-        if max_value := options.get('u32_max_value'):
+        if max_value := options.get("u32_max_value"):
             return i < max_value
         return True
 
-    return try_get_dword(buffer, '>I', result_filter, 'int', '{}')
+    return try_get_dword(buffer, ">I", result_filter, "int", "{}")
 
 
 def try_get_s32(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
     def result_filter(i: int) -> bool:
         if i >= 0:
             return False
-        if min_value := options.get('s32_min_value'):
+        if min_value := options.get("s32_min_value"):
             return i > min_value
         return True
 
-    return try_get_dword(buffer, '>i', result_filter, 'int', '{}')
+    return try_get_dword(buffer, ">i", result_filter, "int", "{}")
 
 
 def get_dword_hex(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
@@ -187,35 +215,37 @@ def try_get_asciz(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytea
     if display_len <= 0:
         return skip
 
-    if (min_len := options.get('min_asciz_len')) and display_len < min_len:
+    if (min_len := options.get("min_asciz_len")) and display_len < min_len:
         return skip
 
     length += 1  # zero terminator
     end = ceil(length / 4) * 4
     alignment = end - length
 
-    end_slice = buffer[length: end]
+    end_slice = buffer[length:end]
     if len(end_slice) != alignment or any(map(lambda zb: zb != 0, end_slice)):
         return skip
 
-    decode = buffer[:display_len].decode("ascii").replace('\\', '\\\\').replace('\n', '\\n')
+    decode = (
+        buffer[:display_len].decode("ascii").replace("\\", "\\\\").replace("\n", "\\n")
+    )
 
     result = [f'asciz "{decode}"']
     if alignment != 0:
-        result.append('balign 4')
+        result.append("balign 4")
 
     return result, buffer[end:]
 
 
 def take_buffer(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
     try_funcs = [
-        try_get_asciz if options.get('find_asciz') else None,
+        try_get_asciz if options.get("find_asciz") else None,
         try_get_zero,
-        try_get_f64 if options.get('find_f64') else None,
-        try_get_f32 if options.get('find_f32') else None,
-        try_get_s32 if options.get('find_s32') else None,
-        try_get_u32 if options.get('find_u32') else None,
-        get_dword_hex
+        try_get_f64 if options.get("find_f64") else None,
+        try_get_f32 if options.get("find_f32") else None,
+        try_get_s32 if options.get("find_s32") else None,
+        try_get_u32 if options.get("find_u32") else None,
+        get_dword_hex,
     ]
     active_funcs = filter(lambda fn: fn is not None, try_funcs)
     eval_funcs = map(lambda fn: fn(buffer), active_funcs)
@@ -231,18 +261,18 @@ def write_buffer(f: TextIO, buffer: bytearray, indent: str):
         if not isinstance(value, list):
             value = [value]
         for e in value:
-            f.write(f'{indent}.{e}\n')
+            f.write(f"{indent}.{e}\n")
 
 
 def read_match(match: Match[str] | None):
     if not match:
         return None
 
-    if hex_group := match['hex']:
+    if hex_group := match["hex"]:
         return hex_group
 
-    if match['null']:
-        return '0' * 8
+    if match["null"]:
+        return "0" * 8
 
     return None
 
@@ -250,7 +280,7 @@ def read_match(match: Match[str] | None):
 def process_file(path):
     with open(path, "r") as f:
         text = f.readlines()
-        text.append('')
+        text.append("")
 
     with open(path, "w") as f:
         indent: str | None = None
@@ -266,7 +296,7 @@ def process_file(path):
                     buffer = bytearray()
                     reading = True
                 if not indent:
-                    indent = match['indent']
+                    indent = match["indent"]
                 buffer += bytearray.fromhex(value)
             else:
                 if reading:
@@ -277,7 +307,7 @@ def process_file(path):
 
 
 def main():
-    for path in root.glob(options['input_glob']):
+    for path in root.glob(options["input_glob"]):
         process_file(path)
 
 
