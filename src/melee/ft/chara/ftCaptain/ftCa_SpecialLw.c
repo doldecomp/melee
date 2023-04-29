@@ -24,7 +24,7 @@ float const ftCa_SpecialHi_804D922C = -1;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftCa_SpecialHi_800E3EAC(HSD_GObj*)
+static asm void ftCa_SpecialHi_800E3EAC(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 800E3EAC 00000000  7C 08 02 A6 */	mflr r0
@@ -126,9 +126,15 @@ lbl_800E3FF0:
 /* 800E4008 0000015C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+static void ftCa_SpecialHi_800E3EAC(HSD_GObj* gobj)
+{
+    NOT_IMPLEMENTED;
+}
 #endif
 
-void ftCa_SpecialHi_800E400C(HSD_GObj* gobj)
+static void ftCa_SpecialHi_800E400C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* da = getFtSpecialAttrsD(fp);
