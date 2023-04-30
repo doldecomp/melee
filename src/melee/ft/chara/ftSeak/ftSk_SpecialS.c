@@ -487,7 +487,7 @@ void ftSk_SpecialS_80110F70(HSD_GObj* gobj)
         fp->fv.sk.lstick_delta.x = var;
     }
 
-    fp->x2222_flag.bits.b2 = true;
+    fp->x2222_b2 = true;
     fp->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
 }
 
@@ -835,7 +835,7 @@ void ftSk_SpecialS_80111830(HSD_GObj* gobj)
         fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
     }
 
-    fp2->x2222_flag.bits.b2 = true;
+    fp2->x2222_b2 = true;
     fp2->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
     fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
     fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
@@ -881,7 +881,7 @@ void ftSk_SpecialS_80111988(HSD_GObj* gobj)
             fp->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
         }
 
-        fp->x2222_flag.bits.b2 = true;
+        fp->x2222_b2 = true;
         fp->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
         fp->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
         fp->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
@@ -1070,7 +1070,7 @@ void ftSk_SpecialS_80111DF8(HSD_GObj* gobj)
             fp->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
         }
 
-        fp->x2222_flag.bits.b2 = true;
+        fp->x2222_b2 = true;
         fp->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
         fp->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
         fp->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
@@ -1094,7 +1094,7 @@ void ftSk_SpecialS_80111EB4(HSD_GObj* gobj)
             fp->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
         }
 
-        fp->x2222_flag.bits.b2 = true;
+        fp->x2222_b2 = true;
         fp->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
         fp->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
         fp->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;

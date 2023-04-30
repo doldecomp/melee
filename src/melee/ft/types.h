@@ -101,7 +101,9 @@ typedef struct _ftCommonData {
     /* +204 */ f32 x204_knockbackFrameDecay;
     /* +208 */ u8 x208[0x21C - 0x208];
     /* +21C */ f32 x21C;
-    /* +220 */ u8 x220[0x260 - 0x220];
+    /* +220 */ u8 x220[0x258 - 0x220];
+    /* +258 */ f32 x258;
+    /* +25C */ u8 x25C[0x260 - 0x25C];
     /* +260 */ f32 x260_startShieldHealth;
     /* +264 */ u8 x264[0x27C - 0x264];
     /* +27C */ f32 x27C;
@@ -1056,7 +1058,14 @@ struct Fighter {
         /* fp+2220 */ u8 flags;
     } x2220_flag;
     /* fp+2221 */ UnkFlagStruct x2221_flag;
-    /* fp+2222 */ UnkFlagStruct x2222_flag;
+    /* fp+2222:0 */ u8 x2222_b0 : 1;
+    /* fp+2222:1 */ u8 x2222_b1 : 1;
+    /* fp+2222:2 */ u8 x2222_b2 : 1;
+    /* fp+2222:3 */ u8 x2222_b3 : 1;
+    /* fp+2222:4 */ u8 x2222_b4 : 1;
+    /* fp+2222:5 */ u8 x2222_b5 : 1;
+    /* fp+2222:6 */ u8 x2222_b6 : 1;
+    /* fp+2222:7 */ u8 x2222_b7 : 1;
     /* fp+2223 */ UnkFlagStruct x2223_flag;
     /* fp+2224 */ UnkFlagStruct x2224_flag;
     /* fp+2225:0 */ u8 x2225_b0 : 1;

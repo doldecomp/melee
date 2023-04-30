@@ -521,7 +521,7 @@ void ftGw_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     void** items = fp->ft_data->x48_items;
 
-    fp->x2222_flag.bits.b6 = false;
+    fp->x2222_b6 = false;
     fp->x2223_flag.bits.b1 = true;
     fp->x2224_flag.bits.b0 = true;
 

@@ -355,7 +355,7 @@ void ftNn_Init_OnLoad(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2222_flag.bits.b4 = true;
+    fp->x2222_b4 = true;
     ftPp_Init_OnLoadForNana(fp);
 
     {

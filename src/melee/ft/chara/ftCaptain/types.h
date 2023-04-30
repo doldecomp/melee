@@ -37,7 +37,7 @@ struct ftCaptain_DatAttrs {
     /* +58 */ f32 specialhi_input_var;
     /* +5C */ f32 specialhi_unk2;
     /* +60 */ f32 specialhi_catch_grav;
-    /* +64 */ f32 specialhi_air_var;
+    /* +64 */ s32 specialhi_air_var;
     /* +68 */ f32 x68;
     /* +6C */ u32 speciallw_unk1;
     /* +70 */ f32 speciallw_flame_particle_angle;
@@ -53,6 +53,19 @@ union ftCaptain_MotionVars {
     struct ftCaptainSpecialSVars {
         /* fp+2340 */ f32 grav;
     } specials;
+    struct ftCaptainSpecialHiVars {
+        /* fp+2340 */ u16 x0;
+        /* fp+2342:0 */ u8 x2_b0 : 1;
+        /* fp+2342:1 */ u8 x2_b1 : 1;
+        /* fp+2342:2 */ u8 x2_b2 : 1;
+        /* fp+2342:3 */ u8 x2_b3 : 1;
+        /* fp+2342:4 */ u8 x2_b4 : 1;
+        /* fp+2342:5 */ u8 x2_b5 : 1;
+        /* fp+2342:6 */ u8 x2_b6 : 1;
+        /* fp+2342:7 */ u8 x2_b7 : 1;
+        /* fp+2343 */ u8 x3;
+        /* fp+2344 */ Vec2 vel;
+    } specialhi;
     struct ftCaptainSpecialLwVars {
         /* fp+2340 */ u16 x0;
         /* fp+2340 */ u16 x2;

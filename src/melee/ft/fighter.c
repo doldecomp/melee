@@ -306,7 +306,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->dmg.x18FC = 0;
     fp->dmg.x1834 = 0.0f;
 
-    fp->x2222_flag.bits.b2 = 0;
+    fp->x2222_b2 = 0;
 
     fp->dmg.x1840 = 0;
 
@@ -348,7 +348,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->xF8_playerNudgeVel.x = 0.0f;
     fp->x100 = -1.0f;
 
-    fp->x2222_flag.bits.b7 = 0;
+    fp->x2222_b7 = 0;
     fp->x2223_flag.bits.b0 = 0;
     fp->x221A_flag.bits.b4 = 0;
     fp->x2219_flag.bits.b0 = 0;
@@ -770,11 +770,11 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* gobj, struct S_TEMP1* argdata)
 
     fp->x2221_flag.bits.b3 = 0;
 
-    fp->x2222_flag.bits.b0 = 0;
-    fp->x2222_flag.bits.b1 = 0;
-    fp->x2222_flag.bits.b4 = 0;
-    fp->x2222_flag.bits.b5 = 0;
-    fp->x2222_flag.bits.b6 = 0;
+    fp->x2222_b0 = 0;
+    fp->x2222_b1 = 0;
+    fp->x2222_b4 = 0;
+    fp->x2222_b5 = 0;
+    fp->x2222_b6 = 0;
 
     fp->x2223_flag.bits.b1 = 0;
 
@@ -1006,7 +1006,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     }
 
     if ((arg2 & Ft_MF_Unk19) == 0) {
-        fp->x2222_flag.bits.b2 = 0;
+        fp->x2222_b2 = 0;
     }
 
     if ((arg2 & Ft_MF_SkipMetalB) == 0) {
@@ -1059,7 +1059,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     fp->x209C = 0;
 
     fp->x2223_flag.bits.b0 = 0;
-    fp->x2222_flag.bits.b3 = 0;
+    fp->x2222_b3 = 0;
     fp->x2224_flag.bits.b5 = 0;
     fp->x2225_b1 = 0;
     fp->x2225_b4 = 0;
@@ -1145,7 +1145,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
         fp->x209A = 0;
     }
 
-    fp->x2222_flag.bits.b7 = 0;
+    fp->x2222_b7 = 0;
 
     if ((arg2 & Ft_MF_UnkUpdatePhys) != 0) {
         fp->x100 = 0.0f;
@@ -2313,7 +2313,7 @@ void Fighter_procUpdate(HSD_GObj* gobj)
         fp->cur_pos.y += 0;
         fp->cur_pos.z += fp->xF8_playerNudgeVel.y;
 
-        if (fp->x2222_flag.bits.b6 && !fp->x2222_flag.bits.b7) {
+        if (fp->x2222_b6 && !fp->x2222_b7) {
             s32 bit;
 
             // fp->xD4_unk_vel += selfVel

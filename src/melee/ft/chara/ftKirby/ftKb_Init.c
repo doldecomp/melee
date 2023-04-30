@@ -3063,7 +3063,7 @@ void ftKb_Init_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftKirbyAttributes);
 
-    fp->x2222_flag.bits.b1 = 1;
+    fp->x2222_b1 = 1;
     fp->x2D0 = fp->x2D4_specialAttributes;
     fp->fv.kb.x2234.bits.b0 = Player_GetFlagsAEBit1(fp->xC_playerID);
     it_8026B3F8(item_list[0], 50);

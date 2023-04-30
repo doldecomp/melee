@@ -651,7 +651,7 @@ void ftNs_AttackHi4_Enter(HSD_GObj* gobj)
                               0.0f);
 
     ftAnim_8006EBA4(gobj);
-    fp->x2222_flag.bits.b2 = 1;
+    fp->x2222_b2 = 1;
     fp->cb.x21C0_callback_OnGiveDamage = ftNs_AttackHi4_YoyoStartTimedRehit;
     fp->cb.x21BC_callback_Accessory4 = ftNs_AttackHi4_YoyoUpdateHitPos;
 }
@@ -913,7 +913,7 @@ void ftNs_AttackHi4Charge_Enter(
     ftAnim_8006EBA4(gobj);
     ftAnim_SetAnimRate(gobj, 0.0f);
     ftNs_AttackHi4_YoyoApplySmash(gobj);
-    fp->x2222_flag.bits.b2 = 1;
+    fp->x2222_b2 = 1;
     fp->cb.x21C0_callback_OnGiveDamage = ftNs_AttackHi4_YoyoStartTimedRehit;
     fp->cb.x21BC_callback_Accessory4 = ftNs_AttackHi4_YoyoUpdateHitPos;
 }
@@ -1069,7 +1069,7 @@ void ftNs_AttackHi4Release_Enter(HSD_GObj* gobj)
     ftNs_AttackHi4_YoyoApplyDamage(fighter_data2->x2114_SmashAttr.x2118_frames,
                                    gobj);
 
-    fp->x2222_flag.bits.b2 = 1;
+    fp->x2222_b2 = 1;
 
     fp->cb.x21C0_callback_OnGiveDamage = ftNs_AttackHi4_YoyoStartTimedRehit;
     fp->cb.x21BC_callback_Accessory4 = ftNs_AttackHi4_YoyoUpdateHitPos;

@@ -549,7 +549,7 @@ void ftPr_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     PUSH_ATTRS(fp, ftPurinAttributes);
-    fp->x2222_flag.bits.b1 = 1;
+    fp->x2222_b1 = 1;
     fp->x2D0 = fp->x2D4_specialAttributes;
     ftPr_Init_8013C360(gobj);
 }

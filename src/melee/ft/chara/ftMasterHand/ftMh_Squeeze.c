@@ -17,7 +17,7 @@ void ftMh_MS_378_80154A78(HSD_GObj* gobj)
     fp->x2204_ftcmd_var1 = 0;
     Fighter_ChangeMotionState(gobj, ftMh_MS_Squeeze, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
-    fp->x2222_flag.bits.b2 = true;
+    fp->x2222_b2 = true;
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
     ftMh_CaptureMasterHand_80155B80(fp->x1A58_interactedFighter);

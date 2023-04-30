@@ -30,9 +30,6 @@ def main(obj_path: str) -> None:
         current_score = int(result["current_score"])
         max_score = int(result["max_score"])
 
-        if current_score == 0:
-            continue
-
         percent = 100 - round(100 * current_score / max_score, 2)
         entries.append((symbol, current_score, max_score, percent))
 
