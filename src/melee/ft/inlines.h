@@ -187,6 +187,16 @@ static inline CollData* Fighter_GetCollData(Fighter* fp)
     return &fp->x6F0_collData;
 }
 
+static inline bool ftCheckThrowB3(Fighter* fp)
+{
+    if (fp->x2210_ThrowFlags.b3) {
+        fp->x2210_ThrowFlags.b3 = false;
+        return true;
+    } else {
+        return false;
+    }
+}
+
 // Ternary macro for fcmpo-based facing direction check
 
 #define CLIFFCATCH_O(fp)                                                      \

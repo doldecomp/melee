@@ -4,7 +4,9 @@
 
 #include "ftPe_Float.h"
 
+#include "ftPe_FloatAttack.h"
 #include "ftPe_FloatFall.h"
+#include "ftPe_Init.h"
 
 #include "ef/efasync.h"
 #include "ft/fighter.h"
@@ -19,6 +21,12 @@
 
 float const ftPe_Float_804D97C0 = 0;
 float const ftPe_Float_804D97C4 = 1;
+
+/* static */ bool ftPe_Float_CheckContinueInput(Fighter* fp)
+{
+    return fp->input.x624_lstick_y >= p_ftCommonData->x70_someLStickYMax ||
+           fp->input.x65C_heldInputs & HSD_Pad_XY;
+}
 
 static bool checkStartFloatInput(HSD_GObj* gobj)
 {
@@ -88,19 +96,12 @@ lbl_8011BB5C:
 #pragma pop
 #else
 
-static bool checkContinueFloatInput(HSD_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    return fp->input.x624_lstick_y >= p_ftCommonData->x70_someLStickYMax ||
-           fp->input.x65C_heldInputs & HSD_Pad_XY;
-}
-
 bool ftPe_8011BAD8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->kind == FTKIND_PEACH) {
         if (fp->x80_self_vel.y <= 0 && fp->fv.pe.has_float) {
-            if (checkContinueFloatInput(gobj)) {
+            if (ftPe_Float_CheckContinueInput(fp)) {
                 ftPe_8011BB6C(gobj, true);
                 return true;
             }

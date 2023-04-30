@@ -9,6 +9,5 @@
 /* 11BE2C */ void ftPe_FloatFall_IASA(HSD_GObj* gobj);
 /* 11BE30 */ void ftPe_FloatFall_Phys(HSD_GObj* gobj);
 /* 11BE50 */ void ftPe_FloatFall_Coll(HSD_GObj* gobj);
-/* 11BE80 */ bool ftPe_8011BE80(HSD_GObj* gobj);
 
 #endif

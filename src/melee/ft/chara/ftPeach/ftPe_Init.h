@@ -17,7 +17,7 @@
 /* 11B93C */ void ftPe_Init_8011B93C(HSD_GObj* gobj);
 /* 11B998 */ void ftPe_Init_OnKnockbackEnter(HSD_GObj* gobj);
 /* 11B9DC */ void ftPe_Init_OnKnockbackExit(HSD_GObj* gobj);
-/* 11BA20 */ s32 ftPe_8011BA20(Fighter* fp);
+/* 11BA20 */ /* static */ bool ftPe_Float_CheckContinueInput(Fighter* fp);
 /* 11BC38 */ void ftPe_Float_Anim(HSD_GObj* gobj);
 /* 11BC8C */ void ftPe_Float_IASA(HSD_GObj* gobj);
 /* 11BD18 */ void ftPe_Float_Phys(HSD_GObj* gobj);

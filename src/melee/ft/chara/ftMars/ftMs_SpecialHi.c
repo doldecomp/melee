@@ -85,17 +85,11 @@ void ftMs_SpecialAirHi_Anim(HSD_GObj* gobj)
 #define HALF_PI 1.5707963267948966
 #define abs(x) (x < 0.0f ? -x : x)
 
-// 801383A8 00134F88
-// https://decomp.me/scratch/0VOrt
 void ftMs_SpecialHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* attr = fp->x2D4_specialAttributes;
-
     f32 abs_lstick_x = abs(fp->input.x620_lstick_x);
-
-    s32 phi_r0;
-
     if (fp->x2200_ftcmd_var0 == 0 && abs_lstick_x > attr->x34) {
         f32 temp_f1 =
             attr->x38 * ((abs_lstick_x - attr->x34) / (1.0 /*d*/ - attr->x34));
@@ -106,13 +100,7 @@ void ftMs_SpecialHi_IASA(HSD_GObj* gobj)
             fp->x6BC_inputStickangle = temp_f1;
         }
     }
-    if (fp->x2210_ThrowFlags.b3) {
-        fp->x2210_ThrowFlags.b3 = 0;
-        phi_r0 = 1;
-    } else {
-        phi_r0 = 0;
-    }
-    if (phi_r0 != 0) {
+    if (ftCheckThrowB3(fp)) {
         if (abs(fp->input.x620_lstick_x) > attr->x30) {
             ftCommon_8007D9FC(fp);
             ftParts_80075AF0(fp, 0, (f32) (HALF_PI * fp->facing_dir));
@@ -126,16 +114,11 @@ void ftMs_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* attr = fp->x2D4_specialAttributes;
-
     f32 abs_lstick_x = abs(fp->input.x620_lstick_x);
-
-    s32 phi_r0;
-
-    /// @todo Unused stack.
+/// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[16];
 #endif
-
     if (fp->x2200_ftcmd_var0 == 0 && abs_lstick_x > attr->x34) {
         f32 temp_f1 =
             attr->x38 * ((abs_lstick_x - attr->x34) / (1.0 /*d*/ - attr->x34));
@@ -146,13 +129,7 @@ void ftMs_SpecialAirHi_IASA(HSD_GObj* gobj)
             fp->x6BC_inputStickangle = temp_f1;
         }
     }
-    if (fp->x2210_ThrowFlags.b3) {
-        fp->x2210_ThrowFlags.b3 = 0;
-        phi_r0 = 1;
-    } else {
-        phi_r0 = 0;
-    }
-    if (phi_r0 != 0) {
+    if (ftCheckThrowB3(fp)) {
         if (abs(fp->input.x620_lstick_x) > attr->x30) {
             ftCommon_8007D9FC(fp);
             ftParts_80075AF0(fp, 0, (f32) (HALF_PI * fp->facing_dir));

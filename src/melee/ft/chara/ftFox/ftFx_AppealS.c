@@ -105,7 +105,6 @@ static void ftFx_AppealS_OnTakeDamage(HSD_GObj*);
 void ftFx_AppealS_Anim(HSD_GObj* gobj)
 {
     FighterKind ftKind;
-    bool flag;
     Fighter* fp = GET_FIGHTER(gobj);
 
     /// @todo Unused stack.
@@ -113,14 +112,7 @@ void ftFx_AppealS_Anim(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (fp->x2210_ThrowFlags.b3) {
-        fp->x2210_ThrowFlags.b3 = false;
-        flag = true;
-    } else {
-        flag = false;
-    }
-
-    if (flag != false) {
+    if (ftCheckThrowB3(fp)) {
         ftKind = fp->kind;
 
         switch (ftKind) {

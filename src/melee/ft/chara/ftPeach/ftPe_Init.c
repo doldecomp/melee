@@ -501,16 +501,3 @@ void ftPe_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, 1);
 }
-
-s32 ftPe_8011BA20(Fighter* fp)
-{
-    s32 result = 1;
-
-    if (!(fp->input.x624_lstick_y >= p_ftCommonData->x70_someLStickYMax) &&
-        !(fp->input.x65C_heldInputs & 3072))
-    {
-        result = 0;
-    }
-
-    return result;
-}
