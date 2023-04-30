@@ -287,7 +287,7 @@ lbl_8007CE30:
 #else
 
 // to match assert statement
-#define kind x4_fighterKind
+#define kind kind
 
 static const int Ft_Kind_Sandbag = 0x20;
 f32 ftCommon_8007CDA4(Fighter* fp)
@@ -812,7 +812,7 @@ f32 ftCommon_8007DA74(s32 arg0, u32 arg1, f32 arg8)
 void ftCommon_8007DB24(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->x2219_flag.bits.b0 = 0;
+    fp->x2219_b0 = 0;
     efLib_DestroyAll(gobj);
 }
 
@@ -1035,9 +1035,7 @@ void ftCommon_8007E0E4(HSD_GObj* gobj)
     fp = gobj->user_data;
     fp->xF8_playerNudgeVel.y = 0;
     fp->xF8_playerNudgeVel.x = 0;
-    if (!fp->x2219_flag.bits.b1 && !fp->x2219_flag.bits.b5 &&
-        fp->ground_or_air == 0)
-    {
+    if (!fp->x2219_b1 && !fp->x2219_b5 && fp->ground_or_air == 0) {
         if (!fp->x221F_flag.bits.b4) {
             phi_f30 = p_ftCommonData->x454;
             phi_f31 = p_ftCommonData->x458;
@@ -1210,8 +1208,8 @@ void ftCommon_8007E6DC(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2)
     if (ft_800C5240(gobj)) {
         ft_800C5500(gobj);
     }
-    if (ftData_OnItemDropExt[fp->x4_fighterKind] != NULL) {
-        ftData_OnItemDropExt[fp->x4_fighterKind](gobj, arg2);
+    if (ftData_OnItemDropExt[fp->kind] != NULL) {
+        ftData_OnItemDropExt[fp->kind](gobj, arg2);
     }
     pl_8003EA08(fp->xC_playerID, fp->x221F_flag.bits.b4);
     fp->x1974_heldItem = NULL;
@@ -1220,16 +1218,16 @@ void ftCommon_8007E6DC(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2)
 void ftCommon_8007E79C(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = gobj->user_data;
-    if (ftData_OnItemDrop[fp->x4_fighterKind] != NULL) {
-        ftData_OnItemDrop[fp->x4_fighterKind](gobj, arg1);
+    if (ftData_OnItemDrop[fp->kind] != NULL) {
+        ftData_OnItemDrop[fp->kind](gobj, arg1);
     }
 }
 
 void ftCommon_8007E7E4(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = gobj->user_data;
-    if (ftData_OnItemPickup[fp->x4_fighterKind] != NULL) {
-        ftData_OnItemPickup[fp->x4_fighterKind](gobj, arg1);
+    if (ftData_OnItemPickup[fp->kind] != NULL) {
+        ftData_OnItemPickup[fp->kind](gobj, arg1);
     }
 }
 
@@ -1601,8 +1599,8 @@ void ftCommon_8007F578(HSD_GObj* gobj)
     if (fp->x1974_heldItem == NULL) {
         return;
     }
-    if (ftData_OnItemInvisible[fp->x4_fighterKind] != NULL) {
-        ftData_OnItemInvisible[fp->x4_fighterKind](gobj);
+    if (ftData_OnItemInvisible[fp->kind] != NULL) {
+        ftData_OnItemInvisible[fp->kind](gobj);
     }
 }
 
@@ -1620,8 +1618,8 @@ void ftCommon_8007F5CC(HSD_GObj* gobj, s32 arg1)
         if (arg1 == 0) {
             ftCommon_8007F578(gobj);
         } else if (item != NULL) {
-            if (ftData_OnItemVisible[fp->x4_fighterKind] != NULL) {
-                ftData_OnItemVisible[fp->x4_fighterKind](gobj);
+            if (ftData_OnItemVisible[fp->kind] != NULL) {
+                ftData_OnItemVisible[fp->kind](gobj);
             }
         }
     }
@@ -1668,16 +1666,16 @@ Mtx* ftCommon_8007F804(Fighter* fp)
 void ftCommon_8007F824(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (ftData_OnKnockbackEnter[fp->x4_fighterKind] != NULL) {
-        ftData_OnKnockbackEnter[fp->x4_fighterKind](gobj);
+    if (ftData_OnKnockbackEnter[fp->kind] != NULL) {
+        ftData_OnKnockbackEnter[fp->kind](gobj);
     }
 }
 
 void ftCommon_8007F86C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (ftData_OnKnockbackExit[fp->x4_fighterKind] != NULL) {
-        ftData_OnKnockbackExit[fp->x4_fighterKind](gobj);
+    if (ftData_OnKnockbackExit[fp->kind] != NULL) {
+        ftData_OnKnockbackExit[fp->kind](gobj);
     }
 }
 
@@ -1694,8 +1692,8 @@ void ftCommon_8007F8E8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x197C == NULL || fp->x1980 == NULL) {
-        if (ftData_UnkMotionStates2[fp->x4_fighterKind] != NULL) {
-            ftData_UnkMotionStates2[fp->x4_fighterKind](gobj);
+        if (ftData_UnkMotionStates2[fp->kind] != NULL) {
+            ftData_UnkMotionStates2[fp->kind](gobj);
         }
     }
 }
@@ -1706,8 +1704,8 @@ inline void _func_8007F948_inline(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x197C == NULL || fp->x1980 == NULL) {
-        if (ftData_UnkMotionStates1[fp->x4_fighterKind] != NULL) {
-            ftData_UnkMotionStates1[fp->x4_fighterKind](gobj);
+        if (ftData_UnkMotionStates1[fp->kind] != NULL) {
+            ftData_UnkMotionStates1[fp->kind](gobj);
         }
     }
 }
@@ -1904,7 +1902,7 @@ bool ftCommon_8007FFD8(Fighter* fp, f32 arg8)
 
 bool ftCommon_80080144(Fighter* fp)
 {
-    int kind = fp->x4_fighterKind;
+    int kind = fp->kind;
     if ((kind == FTKIND_POPO || kind == FTKIND_NANA) &&
         fp->x619_costume_id >= 2)
     {

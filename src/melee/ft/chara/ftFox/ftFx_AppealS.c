@@ -42,11 +42,11 @@ static inline bool ftFox_CheckAppealSCount(void)
 bool ftFx_AppealS_CheckInput(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 ftKind = fp->x4_fighterKind;
+    s32 ftKind = fp->kind;
 
     if (((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) &&
         (grCorneria_801E2CE8() != false) &&
-        ((fp->input.x65C_heldInputs & HSD_BUTTON_DPAD_DOWN) == false) &&
+        ((fp->input.x65C_heldInputs & HSD_Pad_DpadDown) == false) &&
         ((u8) fp->x682 == true))
     {
         if (ftFox_CheckAppealSCount() == 0) {
@@ -121,7 +121,7 @@ void ftFx_AppealS_Anim(HSD_GObj* gobj)
     }
 
     if (flag != false) {
-        ftKind = fp->x4_fighterKind;
+        ftKind = fp->kind;
 
         switch (ftKind) {
         case FTKIND_FOX:

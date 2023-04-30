@@ -180,7 +180,7 @@ void ftPk_SpecialAirSHold_Anim(HSD_GObj* gobj)
 void ftPk_SpecialSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
+    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
         ftPk_SpecialS_ChangeMotion_Unk08(gobj);
     }
 }
@@ -188,7 +188,7 @@ void ftPk_SpecialSHold_IASA(HSD_GObj* gobj)
 void ftPk_SpecialAirSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
+    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
         ftPk_SpecialS_ChangeMotion_Unk09(gobj);
     }
 }

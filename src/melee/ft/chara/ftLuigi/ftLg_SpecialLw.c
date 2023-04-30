@@ -50,7 +50,7 @@ static inline void ftLuigi_SpecialLw_SetGFX(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* hsd_obj = gobj->hsd_obj;
     efSync_Spawn(0x509, gobj, hsd_obj);
-    fp->x2219_flag.bits.b0 = 1;
+    fp->x2219_b0 = 1;
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
 }
@@ -222,7 +222,7 @@ void ftLg_SpecialLw_Phys(HSD_GObj* gobj)
 
     ftCommon_8007CB74(gobj);
 
-    if (fp->x2208_ftcmd_var2 != 0 && (fp->input.x668 & HSD_BUTTON_B)) {
+    if (fp->x2208_ftcmd_var2 != 0 && (fp->input.x668 & HSD_Pad_B)) {
         fp->x80_self_vel.y += attrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX;
         ftLuigi_SpecialLw_GroundToAir(gobj);
     }
@@ -241,7 +241,7 @@ void ftLg_SpecialAirLw_Phys(HSD_GObj* gobj)
     ftLuigiAttributes* attrs0 = fp->x2D4_specialAttributes;
 
     if (!fp->fv.lg.x222C_cycloneCharge && fp->x2208_ftcmd_var2 != 0 &&
-        (fp->input.x668 & HSD_BUTTON_B))
+        (fp->input.x668 & HSD_Pad_B))
     {
         ftCommon_8007D508(fp, attrs0->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX,
                           attrs0->x90_LUIGI_CYCLONE_TAP_GRAVITY);

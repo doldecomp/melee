@@ -279,7 +279,7 @@ void ftSk_SpecialS_80110AEC(HSD_GObj* gobj)
             fp_2->x914[i].x4C.z = 0;
         }
 
-        fp->x2219_flag.bits.b3 = true;
+        fp->x2219_b3 = true;
     }
 }
 
@@ -306,7 +306,7 @@ inline void ftSeakSpecialS_LoopChainHitActivate(HSD_GObj* gobj)
     }
 
     ftSk_SpecialS_ZeroHitboxPositions(gobj);
-    fp->x2219_flag.bits.b3 = true;
+    fp->x2219_b3 = true;
 }
 
 inline f32 sumOfSquares(f32 a, f32 b)
@@ -771,7 +771,7 @@ void ftSk_SpecialS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
+    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
         fp->mv.sk.specials.x4 = true;
     }
 
@@ -782,7 +782,7 @@ void ftSk_SpecialAirS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
+    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
         fp->mv.sk.specials.x4 = true;
     }
 

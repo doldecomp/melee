@@ -73,7 +73,9 @@ typedef struct _ftCommonData {
     /* +30 */ f32 x30;
     /* +34 */ u8 x34[0x70 - 0x34];
     /* +70 */ f32 x70_someLStickYMax;
-    /* +74 */ u8 x74[0x88 - 0x74];
+    /* +74 */ u8 x74[0x78 - 0x74];
+    /* +78 */ f32 x78;
+    /* +7C */ u8 x7C[0x88 - 0x7C];
     /* +88 */ f32 x88;
     /* +8C */ s32 x8C;
     /* +90 */ u8 x90[0x98 - 0x90];
@@ -577,7 +579,7 @@ struct Fighter_DemoStrings {
 
 struct Fighter {
     /* fp+0 */ HSD_GObj* gobj;
-    /* fp+4 */ FighterKind x4_fighterKind;
+    /* fp+4 */ FighterKind kind;
     /* fp+8 */ s32 x8_spawnNum;
     /* fp+C */ u8 xC_playerID;
     /* fp+10 */ enum_t motion_id;
@@ -1018,7 +1020,19 @@ struct Fighter {
     /* fp+2210 */ ThrowFlags x2210_ThrowFlags;
     /* fp+2214 */ f32 x2214;
     /* fp+2218 */ UnkFlagStruct x2218_flag;
-    /* fp+2219 */ UnkFlagStruct x2219_flag;
+    union {
+        /* fp+2219 */ u8 x2219;
+        /* fp+2219 */ struct {
+            /* fp+2219:0 */ u8 x2219_b0 : 1;
+            /* fp+2219:1 */ u8 x2219_b1 : 1;
+            /* fp+2219:2 */ u8 x2219_b2 : 1;
+            /* fp+2219:3 */ u8 x2219_b3 : 1;
+            /* fp+2219:4 */ u8 x2219_b4 : 1;
+            /* fp+2219:5 */ u8 x2219_b5 : 1;
+            /* fp+2219:6 */ u8 x2219_b6 : 1;
+            /* fp+2219:7 */ u8 x2219_b7 : 1;
+        };
+    };
     /* fp+221A */ UnkFlagStruct x221A_flag;
     /* fp+221B */ union {
         /* fp+221B */ u8 x221B;

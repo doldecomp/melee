@@ -145,7 +145,7 @@ static inline void doPhys(HSD_GObj* gobj)
         throw_b1 = false;
     }
     if (throw_b1) {
-        if (!fp->x2219_flag.bits.b0) {
+        if (!fp->x2219_b0) {
             FighterKind kind = ftLib_800872A4(gobj);
             switch (kind) {
             case FTKIND_CAPTAIN:
@@ -157,7 +157,7 @@ static inline void doPhys(HSD_GObj* gobj)
                              fp->parts[78].x0_jobj);
                 break;
             }
-            fp->x2219_flag.bits.b0 = true;
+            fp->x2219_b0 = true;
         } else {
             ftCommon_8007DB24(gobj);
         }

@@ -60,7 +60,7 @@ void ftMs_SpecialNStart_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMs_SpecialN_80136E74(gobj);
 
-        if (((Fighter*) gobj->user_data)->x4_fighterKind == FTKIND_MARS) {
+        if (((Fighter*) gobj->user_data)->kind == FTKIND_MARS) {
             ft_800BFFD0(gobj->user_data, 0x63, 0);
         } else {
             ft_800BFFD0(gobj->user_data, 0x64, 0);
@@ -75,7 +75,7 @@ void ftMs_SpecialAirNStart_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMs_SpecialN_80136EAC(gobj);
 
-        if (((Fighter*) gobj->user_data)->x4_fighterKind == FTKIND_MARS) {
+        if (((Fighter*) gobj->user_data)->kind == FTKIND_MARS) {
             ft_800BFFD0(gobj->user_data, 0x63, 0);
         } else {
             ft_800BFFD0(gobj->user_data, 0x64, 0);
@@ -477,7 +477,7 @@ void ftMs_SpecialN_801371FC(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, thing, 0x0C4C508E, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
-    if (fp->x2219_flag.bits.b0 == 1) {
+    if (fp->x2219_b0 == 1) {
         fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
     }
@@ -503,7 +503,7 @@ void ftMs_SpecialN_801372A8(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, thing, 0x0C4C508E, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
-    if (fp->x2219_flag.bits.b0 == 1) {
+    if (fp->x2219_b0 == 1) {
         fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
     }

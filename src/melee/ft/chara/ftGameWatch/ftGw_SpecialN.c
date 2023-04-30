@@ -306,11 +306,10 @@ void ftGw_SpecialN_IASA(HSD_GObj* gobj)
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* gawAttrs = gawAttrs = getFtSpecialAttrsD(fp);
 
-    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
+    if ((fp->input.x65C_heldInputs & HSD_Pad_B) == false) {
         fp->mv.gw.SpecialN.isChefLoopDisable = true;
     }
-    if (((u32) fp->x2204_ftcmd_var1 != 0U) &&
-        (fp->input.x668 & HSD_BUTTON_B) &&
+    if (((u32) fp->x2204_ftcmd_var1 != 0U) && (fp->input.x668 & HSD_Pad_B) &&
         ((f32) fp->mv.gw.SpecialN.maxSausage <
          gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
     {
@@ -326,11 +325,10 @@ void ftGw_SpecialAirN_IASA(HSD_GObj* gobj)
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* gawAttrs = gawAttrs = getFtSpecialAttrsD(fp);
 
-    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
+    if ((fp->input.x65C_heldInputs & HSD_Pad_B) == false) {
         fp->mv.gw.SpecialN.isChefLoopDisable = true;
     }
-    if (((u32) fp->x2204_ftcmd_var1 != 0U) &&
-        (fp->input.x668 & HSD_BUTTON_B) &&
+    if (((u32) fp->x2204_ftcmd_var1 != 0U) && (fp->input.x668 & HSD_Pad_B) &&
         ((f32) fp->mv.gw.SpecialN.maxSausage <
          gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
     {

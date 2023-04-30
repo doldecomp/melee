@@ -493,7 +493,7 @@ void ftMs_SpecialN_801365A8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     s32 result;
-    if (!fp->x2219_flag.bits.b0) {
+    if (!fp->x2219_b0) {
         result = ftLib_800872A4(gobj);
         switch (result) {
         case 18:
@@ -503,7 +503,7 @@ void ftMs_SpecialN_801365A8(HSD_GObj* gobj)
             efSync_Spawn(1297, gobj, fp->parts->x0_jobj);
             break;
         }
-        fp->x2219_flag.bits.b0 = 1;
+        fp->x2219_b0 = 1;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -518,7 +518,7 @@ void ftMs_SpecialN_8013666C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     s32 result;
-    if (!fp->x2219_flag.bits.b0) {
+    if (!fp->x2219_b0) {
         result = ftLib_800872A4(gobj);
         switch (result) {
         case 18:
@@ -528,7 +528,7 @@ void ftMs_SpecialN_8013666C(HSD_GObj* gobj)
             efSync_Spawn(1298, gobj, fp->parts->x0_jobj);
             break;
         }
-        fp->x2219_flag.bits.b0 = 1;
+        fp->x2219_b0 = 1;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;

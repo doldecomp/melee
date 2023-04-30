@@ -464,7 +464,7 @@ void ftPr_Init_8013C360(HSD_GObj* gobj)
         UNK_T* items_shifted = items[1];
         if (!joints[fp->x619_costume_id]) {
             UnkCostumeStruct* costume_list =
-                CostumeListsForeachCharacter[fp->x4_fighterKind].costume_list;
+                CostumeListsForeachCharacter[fp->kind].costume_list;
             joints[fp->x619_costume_id] = HSD_ArchiveGetPublicAddress(
                 costume_list[fp->x619_costume_id].x14_archive,
                 ftPr_Init_803D05B4[fp->x619_costume_id]);
@@ -619,9 +619,9 @@ void ftPr_Init_8013C94C(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    if (!fp->x2219_flag.bits.b0) {
+    if (!fp->x2219_b0) {
         efSync_Spawn(1238, gobj, fp->parts[FtPart_WaistN].x0_jobj);
-        fp->x2219_flag.bits.b0 = true;
+        fp->x2219_b0 = true;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;

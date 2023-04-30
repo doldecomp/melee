@@ -162,11 +162,11 @@ void ftPk_SpecialN_SpawnEffect0(HSD_GObj* gobj)
     HSD_GObj* tempObj;
     HSD_GObj* tempObj2;
 
-    if (!fp->x2219_flag.bits.b0) {
+    if (!fp->x2219_b0) {
         Fighter_Part part = ftParts_8007500C(fp, FtPart_HipN);
         tempObj = gobj;
         efSync_Spawn(1214, tempObj2 = tempObj, fp->parts[part].x0_jobj);
-        fp->x2219_flag.bits.b0 = true;
+        fp->x2219_b0 = true;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -180,11 +180,11 @@ void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
     HSD_GObj* tempObj;
     HSD_GObj* tempObj2;
 
-    if (!fp->x2219_flag.bits.b0) {
+    if (!fp->x2219_b0) {
         Fighter_Part part = ftParts_8007500C(fp, FtPart_HipN);
         tempObj = gobj;
         efSync_Spawn(1215, tempObj2 = tempObj, fp->parts[part].x0_jobj);
-        fp->x2219_flag.bits.b0 = true;
+        fp->x2219_b0 = true;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;

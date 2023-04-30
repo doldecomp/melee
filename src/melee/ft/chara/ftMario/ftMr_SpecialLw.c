@@ -31,7 +31,7 @@ static void setGfx(HSD_GObj* gobj)
     hsd_obj_ptr = gobj->hsd_obj;
 
     efSync_Spawn(0x47C, gobj, hsd_obj_ptr);
-    fp->x2219_flag.bits.b0 = 1;
+    fp->x2219_b0 = 1;
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
@@ -203,7 +203,7 @@ void ftMr_SpecialLw_Phys(HSD_GObj* gobj)
         Fighter* fp1 = fp0;
         ftCommon_8007CADC(fp1, 0, sa->speciallw.momentum_x_mul, vel_y);
         ftCommon_8007CB74(gobj);
-        if (fp0->x2208_ftcmd_var2 != 0 && (fp0->input.x668 & HSD_BUTTON_B)) {
+        if (fp0->x2208_ftcmd_var2 != 0 && (fp0->input.x668 & HSD_Pad_B)) {
             vel_y = fp0->x80_self_vel.y;
             fp0->x80_self_vel.y = vel_y + sa->speciallw.tap_y_vel_max;
             doPhys(gobj);
@@ -228,7 +228,7 @@ void ftMr_SpecialAirLw_Phys(HSD_GObj* gobj)
 
     if (((s32) fp->fv.mr.x2234_tornadoCharge == false) &&
         ((u32) fp->x2208_ftcmd_var2 != 0U) &&
-        ((fp->input.x668 & HSD_BUTTON_B) != 0))
+        ((fp->input.x668 & HSD_Pad_B) != 0))
     {
         ftCommon_8007D508(fp, sa->speciallw.tap_y_vel_max,
                           sa->speciallw.tap_grav);

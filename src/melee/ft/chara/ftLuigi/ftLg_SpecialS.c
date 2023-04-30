@@ -21,8 +21,8 @@ void ftLg_SpecialS_SetGFX(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!fp->x2219_flag.bits.b0) {
-        fp->x2219_flag.bits.b0 = true;
+    if (!fp->x2219_b0) {
+        fp->x2219_b0 = true;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -256,7 +256,7 @@ void ftLg_SpecialAirSHold_Anim(HSD_GObj* gobj)
 void ftLg_SpecialSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
+    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
         ftLg_SpecialSLaunch_Enter(gobj);
     }
 }
@@ -265,7 +265,7 @@ void ftLg_SpecialSHold_IASA(HSD_GObj* gobj)
 void ftLg_SpecialAirSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
+    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
         ftLg_SpecialAirSLaunch_Enter(gobj);
     }
 }
@@ -481,9 +481,9 @@ static inline void ftLuigi_SpecialS_Setup(HSD_GObj* gobj)
     /// @todo Use #GET_FIGHTER.
     Fighter* fp = getFighter(gobj);
 
-    if (!fp->x2219_flag.bits.b0) {
+    if (!fp->x2219_b0) {
         efSync_Spawn(0x50A, gobj, fp->parts[FtPart_HipN].x0_jobj);
-        fp->x2219_flag.bits.b0 = true;
+        fp->x2219_b0 = true;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;

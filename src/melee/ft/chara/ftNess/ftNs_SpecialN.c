@@ -446,7 +446,7 @@ void ftNs_SpecialNRelease_IASA(HSD_GObj* gobj)
             }
         }
 
-        if (fp->input.x65C_heldInputs & HSD_BUTTON_B) {
+        if (fp->input.x65C_heldInputs & HSD_Pad_B) {
             return;
         }
     }
@@ -500,7 +500,7 @@ void ftNs_SpecialAirNRelease_IASA(HSD_GObj* gobj)
         }
     }
 
-    if (fp->input.x65C_heldInputs & HSD_BUTTON_B) {
+    if (fp->input.x65C_heldInputs & HSD_Pad_B) {
         return;
     }
 

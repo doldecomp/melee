@@ -32,11 +32,11 @@ void ftFx_SpecialHi_CreateLaunchGFX(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!fp->x2219_flag.bits.b0) {
+    if (!fp->x2219_b0) {
         efSync_Spawn(1164, gobj,
                      fp->parts[ftParts_8007500C(fp, FtPart_HipN)].x0_jobj);
 
-        fp->x2219_flag.bits.b0 = true;
+        fp->x2219_b0 = true;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -48,11 +48,11 @@ void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!fp->x2219_flag.bits.b0) {
+    if (!fp->x2219_b0) {
         efSync_Spawn(1163, gobj,
                      fp->parts[ftParts_8007500C(fp, FtPart_TransN)].x0_jobj);
 
-        fp->x2219_flag.bits.b0 = true;
+        fp->x2219_b0 = true;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -808,7 +808,7 @@ inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* gobj)
         f = 0.0f;
     }
     efSync_Spawn(1030, gobj, &fp->cur_pos, &f);
-    fp->x2219_flag.bits.b0 = true;
+    fp->x2219_b0 = true;
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
 }

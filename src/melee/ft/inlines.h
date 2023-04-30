@@ -76,7 +76,7 @@ static inline void* getFtSpecialAttrsD(Fighter* fp) // Direct
 
 static inline s32 ftGetKind(Fighter* fp)
 {
-    return fp->x4_fighterKind;
+    return fp->kind;
 }
 
 static inline s32 ftGetAction(Fighter* fp)

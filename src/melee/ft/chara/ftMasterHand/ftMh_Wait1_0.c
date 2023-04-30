@@ -380,56 +380,56 @@ void ftMh_MS_341_80150894(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
     Vec3 pos;
-    u32 l_pressed = buttons & HSD_BUTTON_L;
+    u32 l_pressed = buttons & HSD_Pad_L;
     // why just l_pressed and not temps for the others?
 
-    if (l_pressed && (buttons & HSD_BUTTON_DPAD_UP)) {
+    if (l_pressed && (buttons & HSD_Pad_DpadUp)) {
         // Stage-Wide Slap
         mpLib_80053FF4(0, &pos);
         pos.y = attr->x38;
         ftMh_MS_389_80150DC4(gobj, ftMh_MS_344_80151828, &pos);
-    } else if (l_pressed && (buttons & HSD_BUTTON_DPAD_RIGHT)) {
+    } else if (l_pressed && (buttons & HSD_Pad_DpadRight)) {
         // Sweep
         mpLib_80053FF4(0, &pos);
         pos.y = attr->x50.y;
         ftMh_MS_389_80150DC4(gobj, ftMh_MS_348_80151BB8, &pos);
-    } else if (l_pressed && (buttons & HSD_BUTTON_DPAD_DOWN)) {
+    } else if (l_pressed && (buttons & HSD_Pad_DpadDown)) {
         // Walk
         pos.x = attr->x40_pos.x;
         pos.y = attr->x40_pos.y;
         pos.z = 0;
         ftMh_MS_389_80150DC4(gobj, &ftMh_MS_353_80151DC4, &pos);
-    } else if ((buttons & HSD_BUTTON_R) && (buttons & HSD_BUTTON_DPAD_UP)) {
+    } else if ((buttons & HSD_Pad_R) && (buttons & HSD_Pad_DpadUp)) {
         // Drill
         pos.x = attr->x88_pos.x;
         pos.y = attr->x88_pos.y;
         pos.z = 0;
         ftMh_MS_389_80150DC4(gobj, &ftMh_MS_352_801521DC, &pos);
-    } else if ((buttons & HSD_BUTTON_R) && (buttons & HSD_BUTTON_DPAD_RIGHT)) {
+    } else if ((buttons & HSD_Pad_R) && (buttons & HSD_Pad_DpadRight)) {
         // Punch
         pos.x = attr->xA8_pos.x;
         pos.y = attr->xA8_pos.y;
         pos.z = 0;
         ftMh_MS_389_80150DC4(gobj, ftMh_MS_354_80152370, &pos);
-    } else if ((buttons & HSD_BUTTON_R) && (buttons & HSD_BUTTON_DPAD_DOWN)) {
+    } else if ((buttons & HSD_Pad_R) && (buttons & HSD_Pad_DpadDown)) {
         // Ground Slap
         pos.x = attr->xBC_pos.x;
         pos.y = attr->xBC_pos.y;
         pos.z = 0;
         ftMh_MS_389_80150DC4(gobj, &ftMh_MS_357_801526D8, &pos);
-    } else if ((buttons & HSD_BUTTON_R) && (buttons & HSD_BUTTON_DPAD_LEFT)) {
+    } else if ((buttons & HSD_Pad_R) && (buttons & HSD_Pad_DpadLeft)) {
         // Poke
         ftMh_MS_358_80152880(gobj);
-    } else if ((buttons & HSD_BUTTON_A) && (buttons & HSD_BUTTON_DPAD_UP)) {
+    } else if ((buttons & HSD_Pad_A) && (buttons & HSD_Pad_DpadUp)) {
         // Jet
         ftMh_MS_366_80153820(gobj);
-    } else if ((buttons & HSD_BUTTON_A) && (buttons & HSD_BUTTON_DPAD_RIGHT)) {
+    } else if ((buttons & HSD_Pad_A) && (buttons & HSD_Pad_DpadRight)) {
         // Ram
         ftMh_MS_371_801541C8(gobj, &ftMh_MS_369_80153B90);
-    } else if ((buttons & HSD_BUTTON_A) && (buttons & HSD_BUTTON_DPAD_DOWN)) {
+    } else if ((buttons & HSD_Pad_A) && (buttons & HSD_Pad_DpadDown)) {
         // Crush
         ftMh_MS_371_801541C8(gobj, &ftMh_MS_370_80153D2C);
-    } else if ((buttons & HSD_BUTTON_B) && (buttons & HSD_BUTTON_DPAD_UP)) {
+    } else if ((buttons & HSD_Pad_B) && (buttons & HSD_Pad_DpadUp)) {
         // Lasers
         float rand = HSD_Randf();
         pos.x = attr->xCC_pos.x * rand * 2 + attr->xC4_pos.x - attr->xCC_pos.x;
@@ -437,18 +437,18 @@ void ftMh_MS_341_80150894(HSD_GObj* gobj)
         pos.y = attr->xCC_pos.y * rand * 2 + attr->xC4_pos.y - attr->xCC_pos.y;
         pos.z = 0;
         ftMh_MS_389_80150DC4(gobj, &ftMh_MS_359_80152BCC, &pos);
-    } else if ((buttons & HSD_BUTTON_B) && (buttons & HSD_BUTTON_DPAD_RIGHT)) {
+    } else if ((buttons & HSD_Pad_B) && (buttons & HSD_Pad_DpadRight)) {
         // Gun
         ftMh_MS_363_801530A4(gobj);
-    } else if ((buttons & HSD_BUTTON_Z) && (buttons & HSD_BUTTON_DPAD_UP)) {
+    } else if ((buttons & HSD_Pad_Z) && (buttons & HSD_Pad_DpadUp)) {
         // Grab
         fp->fv.mh.x2250 = ftMh_MS_Throw;
         ftMh_MS_372_801542E0(gobj);
-    } else if ((buttons & HSD_BUTTON_Z) && (buttons & HSD_BUTTON_DPAD_RIGHT)) {
+    } else if ((buttons & HSD_Pad_Z) && (buttons & HSD_Pad_DpadRight)) {
         // Grab
         fp->fv.mh.x2250 = ftMh_MS_Slam;
         ftMh_MS_372_801542E0(gobj);
-    } else if ((buttons & HSD_BUTTON_Y) && (buttons & HSD_BUTTON_DPAD_UP)) {
+    } else if ((buttons & HSD_Pad_Y) && (buttons & HSD_Pad_DpadUp)) {
         // Crazy Hand Combo Attack
         switch (ftBossLib_8015C4C4()) {
         case ftMh_MS_Squeezing1: {

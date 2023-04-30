@@ -632,8 +632,7 @@ void ftFx_SpecialNStart_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B))
-    {
+    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_Pad_B)) {
         fp->mv.fx.SpecialN.isBlasterLoop = true;
     }
 }
@@ -645,8 +644,7 @@ void ftFx_SpecialNLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B))
-    {
+    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_Pad_B)) {
         fp->mv.fx.SpecialN.isBlasterLoop = true;
     }
 }
@@ -664,8 +662,7 @@ void ftFx_SpecialAirNStart_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B))
-    {
+    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_Pad_B)) {
         fp->mv.fx.SpecialN.isBlasterLoop = true;
     }
 }
@@ -677,8 +674,7 @@ void ftFx_SpecialAirNLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B))
-    {
+    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_Pad_B)) {
         fp->mv.fx.SpecialN.isBlasterLoop = true;
     }
 }

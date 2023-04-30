@@ -485,9 +485,9 @@ void ftSs_SpecialS_8012A074(HSD_GObj* gobj)
 static void ftSs_SpecialS_8012A168(HSD_GObj* gobj, Vec3* spawnlocation)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!fp->x2219_flag.bits.b0) {
+    if (!fp->x2219_b0) {
         efSync_Spawn(1155, gobj, spawnlocation);
-        fp->x2219_flag.bits.b0 = 1;
+        fp->x2219_b0 = 1;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;

@@ -796,9 +796,9 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             }
             fighter0 = gobj->hsd_obj;
             HSD_JObjDispAll(fighter0, phi_r29, HSD_GObj_80390EB8(arg1), 0);
-            if (ftData_UnkMtxFunc0[fighter->x4_fighterKind] != NULL) {
-                ftData_UnkMtxFunc0[fighter->x4_fighterKind](gobj, arg1,
-                                                            (MtxPtr) phi_r29);
+            if (ftData_UnkMtxFunc0[fighter->kind] != NULL) {
+                ftData_UnkMtxFunc0[fighter->kind](gobj, arg1,
+                                                  (MtxPtr) phi_r29);
             }
             ft_800C8AF0(fighter);
             ft_8009F7F8(fighter);
@@ -1020,9 +1020,9 @@ void ftDrawCommmon_80080C28(HSD_GObj* gobj, s32 arg1)
             temp_r27 = gobj->hsd_obj;
             HSD_JObjDispAll(temp_r27, (MtxPtr) phi_r28,
                             HSD_GObj_80390EB8(arg1), 0);
-            if (ftData_UnkMtxFunc0[fighter->x4_fighterKind] != NULL) {
-                ftData_UnkMtxFunc0[fighter->x4_fighterKind](gobj, arg1,
-                                                            (MtxPtr) phi_r28);
+            if (ftData_UnkMtxFunc0[fighter->kind] != NULL) {
+                ftData_UnkMtxFunc0[fighter->kind](gobj, arg1,
+                                                  (MtxPtr) phi_r28);
             }
             ft_800C8AF0(fighter);
             ft_8009F7F8(fighter);

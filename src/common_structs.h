@@ -17,29 +17,30 @@
 
 // HSD_PAD
 /// @todo @c PascalCase members
-typedef enum HSD_Buttons {
-    HSD_BUTTON_DPAD_LEFT = 1 << 0,
-    HSD_BUTTON_DPAD_RIGHT = 1 << 1,
-    HSD_BUTTON_DPAD_DOWN = 1 << 2,
-    HSD_BUTTON_DPAD_UP = 1 << 3,
-    HSD_BUTTON_Z = 1 << 4,
-    HSD_BUTTON_R = 1 << 5,
-    HSD_BUTTON_L = 1 << 6,
-    HSD_BUTTON_UNK_7 = 1 << 7,
+typedef u32 HSD_Pad;
 
-    /// @remarks Also covers Z-Button macro in-game.
-    HSD_BUTTON_A = 1 << 8,
+static HSD_Pad const HSD_Pad_DpadLeft ATTRIBUTE_USED = 1 << 0;
+static HSD_Pad const HSD_Pad_DpadRight ATTRIBUTE_USED = 1 << 1;
+static HSD_Pad const HSD_Pad_DpadDown ATTRIBUTE_USED = 1 << 2;
+static HSD_Pad const HSD_Pad_DpadUp ATTRIBUTE_USED = 1 << 3;
+static HSD_Pad const HSD_Pad_Z ATTRIBUTE_USED = 1 << 4;
+static HSD_Pad const HSD_Pad_R ATTRIBUTE_USED = 1 << 5;
+static HSD_Pad const HSD_Pad_L ATTRIBUTE_USED = 1 << 6;
+static HSD_Pad const HSD_Pad_7 ATTRIBUTE_USED = 1 << 7;
 
-    HSD_BUTTON_B = 1 << 9,
-    HSD_BUTTON_X = 1 << 10,
-    HSD_BUTTON_Y = 1 << 11,
-    HSD_BUTTON_START = 1 << 12,
+/// @remarks Also covers Z-Button macro in-game.
+static HSD_Pad const HSD_Pad_A ATTRIBUTE_USED = 1 << 8;
 
-    /// Digital input of either L or R
-    HSD_BUTTON_LR = 1 << 31,
+static HSD_Pad const HSD_Pad_B ATTRIBUTE_USED = 1 << 9;
+static HSD_Pad const HSD_Pad_X ATTRIBUTE_USED = 1 << 10;
+static HSD_Pad const HSD_Pad_Y ATTRIBUTE_USED = 1 << 11;
+static HSD_Pad const HSD_Pad_Start ATTRIBUTE_USED = 1 << 12;
 
-    HSD_BUTTON_AB = HSD_BUTTON_A | HSD_BUTTON_B,
-} HSD_Buttons;
+/// Digital input of either L or R
+static HSD_Pad const HSD_Pad_LR ATTRIBUTE_USED = 1 << 31;
+
+static HSD_Pad const HSD_Pad_AB ATTRIBUTE_USED = HSD_Pad_A | HSD_Pad_B;
+static HSD_Pad const HSD_Pad_XY ATTRIBUTE_USED = HSD_Pad_X | HSD_Pad_Y;
 
 // COLLISION FLAGS
 

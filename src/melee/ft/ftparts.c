@@ -1167,13 +1167,13 @@ void ftParts_SetupParts(HSD_GObj* fighter_obj)
     u32 tree_depth = 0;
     u32 dobj_count = 0;
 
-    if (ftPartsTable[fighter->x4_fighterKind]->parts_num > MAX_FT_PARTS) {
+    if (ftPartsTable[fighter->kind]->parts_num > MAX_FT_PARTS) {
         OSReport(ftParts_803C0A94, fighter->xC_playerID);
         __assert(ftParts_803C0A08, 503, ftParts_804D3A58);
     }
 
     while (jobj != NULL) {
-        if (ftParts_8007506C(fighter->x4_fighterKind, part) != 0) {
+        if (ftParts_8007506C(fighter->kind, part) != 0) {
             fighter->parts[part].x0_jobj = NULL;
             part++;
             continue;
@@ -1223,7 +1223,7 @@ void ftParts_SetupParts(HSD_GObj* fighter_obj)
 
     fighter->dobj_list.count = dobj_count;
 
-    if (part != ftPartsTable[fighter->x4_fighterKind]->parts_num) {
+    if (part != ftPartsTable[fighter->kind]->parts_num) {
         OSReport(ftParts_803C0AB8, fighter->xC_playerID);
         __assert(ftParts_803C0A08, 546, ftParts_804D3A58);
     }
