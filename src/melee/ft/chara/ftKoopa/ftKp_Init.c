@@ -536,7 +536,7 @@ void ftKp_SpecialS_8013302C(HSD_GObj* gobj)
                                   ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
     }
 
-    fp->x2222_flag.bits.b2 = true;
+    fp->x2222_b2 = true;
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
     fp->mv.kp.unk1.x0 = 0;
@@ -557,7 +557,7 @@ void ftKp_SpecialS_801330E4(HSD_GObj* gobj)
                                   ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
     }
 
-    fp->x2222_flag.bits.b2 = true;
+    fp->x2222_b2 = true;
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
     fp->mv.kp.unk1.x0 = 0;
@@ -801,7 +801,7 @@ void ftKp_SpecialSHit_Anim(HSD_GObj* gobj)
                         ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
                 }
 
-                fp0->x2222_flag.bits.b2 = true;
+                fp0->x2222_b2 = true;
                 ftCommon_8007E2F4(fp0, 511);
                 ftCommon_8007E2FC(gobj);
                 fp0->mv.kp.unk1.x0 = 0;

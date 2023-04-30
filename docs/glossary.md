@@ -150,6 +150,9 @@ Short for "velocity."
 @section glossary_vtx vtx
 Short for "vertex."
 
+@section glossary_vic vic
+Short for "victim."
+
 @section glossary_zako zako
 Zako (雑魚) is Japanese for "trash mob" in video games, literally "small fish."
 In Melee, this is used to refer to Fighting Wire Frames and possibly other

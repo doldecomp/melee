@@ -3,13 +3,13 @@
 
 #include <baselib/forward.h>
 
-/* 0E4040 */ void ftCa_SpecialLw_Enter(HSD_GObj* gobj);
-/* 0E40D8 */ void ftCa_SpecialAirLw_Enter(HSD_GObj* gobj);
 /* 0E4354 */ void ftCa_SpecialHi_Anim(HSD_GObj* gobj);
 /* 0E4838 */ void ftCa_SpecialLwEndAir_Coll(HSD_GObj* gobj);
 /* 0E49DC */ void ftCa_SpecialHiThrow1_Coll(HSD_GObj* gobj);
+/* 0E4A78 */ void ftCa_SpecialHi_Enter(HSD_GObj* gobj);
 /* 0E4B60 */ void ftCa_SpecialHi_IASA(HSD_GObj* gobj);
 /* 0E4BF8 */ void ftCa_SpecialHi_Phys(HSD_GObj* gobj);
+/* 0E4CF4 */ void ftCa_SpecialAirHi_Enter(HSD_GObj* gobj);
 /* 0E4E1C */ void ftCa_SpecialHi_Coll(HSD_GObj* gobj);
 /* 0E4EE8 */ void ftCa_SpecialAirHi_Anim(HSD_GObj* gobj);
 /* 0E4F48 */ void ftCa_SpecialAirHi_IASA(HSD_GObj* gobj);

@@ -917,7 +917,7 @@ void ftCo_RebirthWait_Coll(HSD_GObj*);
 void ftCo_Rebirth_Cam(HSD_GObj*);
 void ft_800D5AEC(HSD_GObj*, s32, s32, s32, Fighter*, f32, f32);
 void ft_800D5BF8(HSD_GObj*);
-void ft_800D5CB0(HSD_GObj*, s32, f32);
+void ft_800D5CB0(HSD_GObj*, s32, float landing_lag);
 void ftCo_Landing_Anim(HSD_GObj*);
 void ftCo_Landing_IASA(HSD_GObj*);
 void ftCo_Landing_Phys(HSD_GObj*);
@@ -1097,6 +1097,7 @@ void ft_800DEEB8(void);
 void ft_800DEF38(HSD_GObj*);
 void ft_800DF0D0(HSD_GObj*);
 void ft_800C555C(HSD_GObj*);
+void ft_8009CA0C(HSD_GObj*, HSD_GObj*);
 
 void ft_0877_SetFacingDirection(HSD_GObj*, f32 facing_dir);
 

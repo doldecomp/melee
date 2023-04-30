@@ -123,7 +123,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialN.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialS.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialLw.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftCa_SpecialHi.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialHi.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFx_Init.c.o\

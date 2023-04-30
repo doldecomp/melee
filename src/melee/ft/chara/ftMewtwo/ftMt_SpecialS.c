@@ -35,7 +35,7 @@ static void ftMt_SpecialS_SetFlags(HSD_GObj* gobj)
     ftCommon_8007E2F4(fp, 0x1FF);
     ftCommon_8007E2FC(gobj);
     fp->x221E_flag.bits.b6 = 0;
-    fp->x2222_flag.bits.b2 = 1;
+    fp->x2222_b2 = 1;
 }
 
 static inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* gobj)

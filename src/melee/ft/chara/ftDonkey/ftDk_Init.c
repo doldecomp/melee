@@ -624,7 +624,7 @@ void ftDk_Init_OnLoad(HSD_GObj* gobj)
     ftData_attr->xC = lbMthp_8001E8F8(ftData_80085E50(fp, 297));
     ftData_attr->x10 = lbMthp_8001E8F8(ftData_80085E50(fp, 298));
     PUSH_ATTRS(fp, ftDonkeyAttributes);
-    fp->x2222_flag.bits.b0 = true;
+    fp->x2222_b0 = true;
     fp->x2CC = fp->x2D4_specialAttributes;
 }
 

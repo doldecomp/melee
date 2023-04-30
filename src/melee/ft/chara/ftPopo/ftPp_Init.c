@@ -373,7 +373,7 @@ void ftPp_Init_OnLoad(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
     void** item_list = fp->ft_data->x48_items;
-    fp->x2222_flag.bits.b5 = 1;
+    fp->x2222_b5 = 1;
 
     PUSH_ATTRS(fp, ftIceClimberAttributes);
 

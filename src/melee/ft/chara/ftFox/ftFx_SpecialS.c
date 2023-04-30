@@ -267,7 +267,7 @@ static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* gobj)
         }
         if (ghostGObj != NULL) {
             fp->mv.fx.SpecialS.ghostGObj = ghostGObj;
-            fp->x2222_flag.bits.b2 = 1;
+            fp->x2222_b2 = 1;
         }
     }
 }
@@ -622,7 +622,7 @@ inline void ftFox_SpecialSEnd_SetVars(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
     fp->mv.fx.SpecialS.gravityDelay = foxAttrs->x44_FOX_ILLUSION_FALL_ACCEL;
-    fp->x2222_flag.bits.b2 = 1;
+    fp->x2222_b2 = 1;
 }
 
 // 0x800EAC50
