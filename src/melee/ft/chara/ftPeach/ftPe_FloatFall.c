@@ -29,9 +29,10 @@ void ftPe_FloatFall_Coll(HSD_GObj* gobj)
 
 static void ftPe_8011BF34(HSD_GObj* gobj);
 
-#if defined(MUST_MATCH) && !defined(WIP)
 /* static */ float const lbl_804D97D0 = 0;
 /* static */ float const lbl_804D97D4 = 1;
+
+#if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
 asm bool ftPe_8011BE80(HSD_GObj*)
 {
