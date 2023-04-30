@@ -645,7 +645,6 @@ void ftDk_Init_OnKnockbackExit(HSD_GObj* gobj)
 
 void ftDk_Init_8010DB3C(HSD_GObj* gobj)
 {
-    bool was_throw_b3;
     Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
     CollData* colldata = &fp->x6F0_collData;
@@ -653,13 +652,7 @@ void ftDk_Init_8010DB3C(HSD_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-    if (fp->x2210_ThrowFlags.b3) {
-        fp->x2210_ThrowFlags.b3 = false;
-        was_throw_b3 = true;
-    } else {
-        was_throw_b3 = false;
-    }
-    if (was_throw_b3 && (colldata->x134_envFlags & 98304)) {
+    if (ftCheckThrowB3(fp) && (colldata->x134_envFlags & 98304)) {
         Vec3 vec_list[4];
         int i;
         for (i = 0; i < 4; i++) {

@@ -95,7 +95,6 @@ void ftLg_SpecialHi_IASA(HSD_GObj* gobj)
     f32 stick_range;
     f32 stick_range_2;
     f32 stick_angle;
-    bool flag;
 
     fp = GET_FIGHTER(gobj);
     stick_x = fp->input.x620_lstick_x;
@@ -129,13 +128,7 @@ void ftLg_SpecialHi_IASA(HSD_GObj* gobj)
             }
         }
     }
-    if (fp->x2210_ThrowFlags.b3 != 0) {
-        fp->x2210_ThrowFlags.b3 = 0;
-        flag = true;
-    } else {
-        flag = false;
-    }
-    if (flag != false) {
+    if (ftCheckThrowB3(fp)) {
         control = fp->input.x620_lstick_x;
         if (control < 0.0f) {
             control = -control;
@@ -160,7 +153,6 @@ void ftLg_SpecialAirHi_IASA(HSD_GObj* gobj)
     f32 control_2;
     f32 stick_range_2;
     f32 stick_angle;
-    bool flag;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -195,13 +187,7 @@ void ftLg_SpecialAirHi_IASA(HSD_GObj* gobj)
             }
         }
     }
-    if (fp->x2210_ThrowFlags.b3 != 0) {
-        fp->x2210_ThrowFlags.b3 = 0;
-        flag = true;
-    } else {
-        flag = false;
-    }
-    if (flag != false) {
+    if (ftCheckThrowB3(fp)) {
         control = fp->input.x620_lstick_x;
         if (control < 0.0f) {
             control = -control;

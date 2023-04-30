@@ -67,64 +67,38 @@ void ftMr_SpecialAirHi_Anim(HSD_GObj* gobj)
 
 #define abs(x) (x < 0 ? -x : x)
 
-// https://decomp.me/scratch/9AoMu
-inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
+void ftMr_SpecialHi_IASA(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    ftMario_DatAttrs* sa;
-
-    f32 lstick_x;
-
-    bool throwflags_b3;
-    fp = GET_FIGHTER(gobj);
-
-    sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
-
-    lstick_x = abs(fp->input.x620_lstick_x);
-
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftMario_DatAttrs* sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
+    f32 lstick_x = abs(fp->input.x620_lstick_x);
     if (fp->x2200_ftcmd_var0 == 0 &&
         lstick_x > sa->specialhi.momentum_stick_range)
     {
-        f32 deg = (f64) sa->specialhi.angle_diff *
+        f32 deg = sa->specialhi.angle_diff *
                   ((lstick_x - sa->specialhi.momentum_stick_range) /
                    (1.0 - sa->specialhi.momentum_stick_range));
-
         f32 rad = fp->input.x620_lstick_x > 0 ? -(DEG_TO_RAD * deg)
                                               : +(DEG_TO_RAD * deg);
-
         if (abs(rad) > abs(fp->x6BC_inputStickangle)) {
             fp->x6BC_inputStickangle = rad;
         }
     }
-
-    if (fp->x2210_ThrowFlags.b3) {
-        fp->x2210_ThrowFlags.b3 = false;
-        throwflags_b3 = true;
-    } else {
-        throwflags_b3 = false;
-    }
-
-    if (throwflags_b3) {
+    if (ftCheckThrowB3(fp)) {
         if (abs(fp->input.x620_lstick_x) > sa->specialhi.reverse_stick_range) {
             ftCommon_8007D9FC(fp);
-            ftParts_80075AF0(fp, 0, (f32) (M_PI_2 * fp->facing_dir));
+            ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
         }
     }
-}
-
-void ftMr_SpecialHi_IASA(HSD_GObj* gobj)
-{
-    ftMario_SpecialHi_CalcAngle(gobj);
 }
 
 void ftMr_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 _[16];
+    u8 _[8];
 #endif
-
-    ftMario_SpecialHi_CalcAngle(gobj);
+    ftMr_SpecialHi_IASA(gobj);
 }
 
 void ftMr_SpecialHi_Phys(HSD_GObj* gobj)

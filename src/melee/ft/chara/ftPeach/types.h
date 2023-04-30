@@ -23,9 +23,9 @@ typedef struct ftPe_DatAttrs {
 } ftPe_DatAttrs;
 
 union ftPe_MotionVars {
-    struct ftPe_FloatFallVars {
-        /* fp+2340 */ int x0;
-    } floatfall;
+    struct ftPe_FloatAttackVars {
+        /* fp+2340 */ bool x0;
+    } floatattack;
 };
 
 #endif
