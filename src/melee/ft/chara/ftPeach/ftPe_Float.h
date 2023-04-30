@@ -8,9 +8,7 @@
 
 #include <placeholder.h>
 
-static void updateFloatDir(HSD_GObj* gobj);
-
-/* static */ void ftPe_8011BB6C(HSD_GObj* gobj, bool);
+/* static */ void ftPe_8011BB6C(HSD_GObj* gobj, bool arg1);
 /* static */ bool ftPe_8011BE80(HSD_GObj* gobj);
 
 /* 11BA54 */ bool ftPe_8011BA54(HSD_GObj* gobj);
