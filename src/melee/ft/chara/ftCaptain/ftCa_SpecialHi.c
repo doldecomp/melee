@@ -405,21 +405,6 @@ static void doAirColl(HSD_GObj* gobj)
     }
 }
 
-static void doCollAir(HSD_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
-    if (ft_CheckGroundAndLedge(gobj, 0)) {
-        if (fp->mv.ca.specialhi.x2_b1) {
-            ft_800D5CB0(gobj, 0, da->specialhi_landing_lag);
-        } else {
-            ft_80083B68(gobj);
-        }
-    } else if (fp->mv.ca.specialhi.x2_b1 && ftCliffCommon_80081298(gobj)) {
-        ftCliffCommon_80081370(gobj);
-    }
-}
-
 void ftCa_SpecialHi_Coll(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
@@ -428,7 +413,7 @@ void ftCa_SpecialHi_Coll(HSD_GObj* gobj)
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Air) {
-        doCollAir(gobj);
+        doAirColl(gobj);
     } else if (!ft_80082708(gobj)) {
         ftCommon_8007D5D4(fp);
     }
