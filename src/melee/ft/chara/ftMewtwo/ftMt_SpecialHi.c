@@ -35,10 +35,10 @@ void ftMt_SpecialHi_SetStartGFX(HSD_GObj* gobj)
         Fighter* fp1 = fp0;
         Vec3 pos;
 
-        if (!fp1->x2219_flag.bits.b0) {
+        if (!fp1->x2219_b0) {
             lb_8000B1CC(fp1->parts[FtPart_WaistN].x0_jobj, NULL, &pos);
             efSync_Spawn(0x4E8, gobj, &pos);
-            fp1->x2219_flag.bits.b0 = true;
+            fp1->x2219_b0 = true;
         }
     }
 
@@ -55,9 +55,9 @@ void ftMt_SpecialHi_SetEndGFX(HSD_GObj* gobj)
         Fighter* fp1 = fp0;
         Vec3 pos;
 
-        if (!fp1->x2219_flag.bits.b0) {
+        if (!fp1->x2219_b0) {
             lb_8000B1CC(fp1->parts[FtPart_WaistN].x0_jobj, NULL, &pos);
-            fp1->x2219_flag.bits.b0 = true;
+            fp1->x2219_b0 = true;
         }
     }
 

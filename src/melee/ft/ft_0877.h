@@ -1098,6 +1098,7 @@ void ft_800DEF38(HSD_GObj*);
 void ft_800DF0D0(HSD_GObj*);
 void ft_800C555C(HSD_GObj*);
 void ft_8009CA0C(HSD_GObj*, HSD_GObj*);
+bool ft_8009665C(void);
 
 void ft_0877_SetFacingDirection(HSD_GObj*, f32 facing_dir);
 

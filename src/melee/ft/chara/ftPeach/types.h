@@ -4,20 +4,22 @@
 #include <platform.h>
 
 struct ftPeach_FighterVars {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
+    /* fp+222C */ bool has_float;
+    /* fp+2230 */ f32 x4;
+    /* fp+2234 */ u32 x8;
+    /* fp+2238 */ u32 xC;
+    /* fp+223C */ u32 x10;
+    /* fp+2240 */ u32 x14;
+    /* fp+2244 */ u32 x18;
+    /* fp+2248 */ u32 x20;
 };
 
-typedef struct _ftPeachAttributes {
-    f32 unk0;
-    f32 unk4;
-    u8 padding[0xB8];
-} ftPeachAttributes;
+typedef struct ftPe_DatAttrs {
+    f32 floatfallf_anim_start;
+    f32 floatfallb_anim_start;
+    f32 floatfall_anim_start_offset;
+    f32 xC;
+    u8 x10[0xB0];
+} ftPe_DatAttrs;
 
 #endif

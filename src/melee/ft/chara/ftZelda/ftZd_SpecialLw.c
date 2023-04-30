@@ -24,9 +24,9 @@ void ftZd_SpecialLw_8013ADB4(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    if (!fp->x2219_flag.bits.b0) {
+    if (!fp->x2219_b0) {
         efSync_Spawn(1276, gobj, fp->parts[104].x0_jobj);
-        fp->x2219_flag.bits.b0 = true;
+        fp->x2219_b0 = true;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -41,9 +41,9 @@ void ftZd_SpecialLw_8013AE30(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    if (!fp->x2219_flag.bits.b0) {
+    if (!fp->x2219_b0) {
         efSync_Spawn(1277, gobj, fp->parts[FtPart_HipN].x0_jobj);
-        fp->x2219_flag.bits.b0 = true;
+        fp->x2219_b0 = true;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;

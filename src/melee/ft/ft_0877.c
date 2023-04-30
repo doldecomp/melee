@@ -253,7 +253,7 @@ s32 ft_80087C1C(void)
 
     for (gobj = HSD_GObj_804D782C->x20_fighters; gobj != 0; gobj = gobj->next)
     {
-        ftKind = (GET_FIGHTER(gobj))->x4_fighterKind;
+        ftKind = (GET_FIGHTER(gobj))->kind;
         if (ftKind < 27) {
             result = result | 1 << ftKind;
         }
@@ -625,7 +625,7 @@ s32 ft_80087D0C(Fighter* fighter, s32 arg1)
         }
         break;
     case 13: {
-        FighterKind ftKind = fighter->x4_fighterKind;
+        FighterKind ftKind = fighter->kind;
 
         /// @todo What a weird comparison, is it part of a macro?
         if (ftKind < FTKIND_PIKACHU && ftKind <= FTKIND_POPO) {

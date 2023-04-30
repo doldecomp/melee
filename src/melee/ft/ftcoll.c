@@ -3142,7 +3142,7 @@ void ftColl_80078A2C(HSD_GObj* this_gobj)
     while (victim_gobj != NULL) {
         if (ftLib_80086FD4(this_gobj, victim_gobj) == false) {
             victim_fp = victim_gobj->user_data;
-            if (((!(victim_fp->x2219_flag.bits.b1)) &&
+            if (((!(victim_fp->x2219_b1)) &&
                  ((!victim_fp->x222A_flag.bits.b0) &&
                   ((gm_8016B168() == false) || (gm_8016B0D4() != false) ||
                    ((u8) victim_fp->x61B_team != (u8) this_fp->x61B_team)) &&

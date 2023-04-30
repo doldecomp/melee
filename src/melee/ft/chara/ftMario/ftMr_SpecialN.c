@@ -109,7 +109,7 @@ void ftMr_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
     if (flag_res != 0) {
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_L1stNb)].x0_jobj,
                     NULL, &coords);
-        if (fp->x4_fighterKind == FTKIND_MARIO) {
+        if (fp->kind == FTKIND_MARIO) {
             it_8029B6F8(fp->facing_dir, gobj, &coords, FtPart_RThumbNa);
             efSync_Spawn(
                 1146, gobj,

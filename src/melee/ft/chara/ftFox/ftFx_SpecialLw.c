@@ -27,9 +27,9 @@ void ftFx_SpecialLw_CreateLoopGFX(HSD_GObj* gobj)
     /// @todo Shared @c inline with #ftFx_SpecialLw_CreateStartGFX.
     Fighter* fp = gobj->user_data;
 
-    if (fp->x2219_flag.bits.b0 == false) {
+    if (fp->x2219_b0 == false) {
         efSync_Spawn(1160, gobj, fp->parts[FtPart_HipN].x0_jobj);
-        fp->x2219_flag.bits.b0 = true;
+        fp->x2219_b0 = true;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -42,9 +42,9 @@ void ftFx_SpecialLw_CreateStartGFX(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    if (fp->x2219_flag.bits.b0 == false) {
+    if (fp->x2219_b0 == false) {
         efSync_Spawn(1161, gobj, fp->parts[FtPart_HipN].x0_jobj);
-        fp->x2219_flag.bits.b0 = true;
+        fp->x2219_b0 = true;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -56,10 +56,10 @@ void ftFx_SpecialLw_CreateReflectGFX(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    if (fp->x2219_flag.bits.b0 == false) {
+    if (fp->x2219_b0 == false) {
         efSync_Spawn(1162, gobj, fp->parts[FtPart_HipN].x0_jobj);
-        fp->x2219_flag.bits.b0 = true;
-        fp->x2219_flag.bits.b0 = true;
+        fp->x2219_b0 = true;
+        fp->x2219_b0 = true;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -125,7 +125,7 @@ void ftFx_SpecialLwStart_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
+    if ((fp->input.x65C_heldInputs & HSD_Pad_B) == false) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -149,7 +149,7 @@ void ftFx_SpecialAirLwStart_Anim(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
+    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -269,7 +269,7 @@ void ftFx_SpecialLwLoop_Anim(HSD_GObj* gobj)
 {
     /// @todo Shared @c inline with #ftFx_SpecialAirLwLoop_Anim.
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
+    if ((fp->input.x65C_heldInputs & HSD_Pad_B) == false) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -293,7 +293,7 @@ void ftFx_SpecialAirLwLoop_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
+    if ((fp->input.x65C_heldInputs & HSD_Pad_B) == false) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -526,7 +526,7 @@ void ftFx_SpecialLwTurn_Anim(HSD_GObj* gobj)
     u8 _[16];
 #endif
 
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
+    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -550,7 +550,7 @@ void ftFx_SpecialAirLwTurn_Anim(HSD_GObj* gobj)
     u8 _[20];
 #endif
 
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
+    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -747,7 +747,7 @@ void ftFx_SpecialLwHit_Anim(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
+    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -776,7 +776,7 @@ void ftFx_SpecialAirLwHit_Anim(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
+    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 

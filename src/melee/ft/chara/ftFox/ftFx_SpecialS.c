@@ -25,10 +25,10 @@ void ftFx_SpecialS_CreateGFX(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x2219_flag.bits.b0 == false) {
+    if (fp->x2219_b0 == false) {
         efSync_Spawn(0x48D, gobj, fp->parts[FtPart_TopN].x0_jobj,
                      &fp->facing_dir);
-        fp->x2219_flag.bits.b0 = true;
+        fp->x2219_b0 = true;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -260,7 +260,7 @@ static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* gobj)
 
     if ((u32) fp->x2208_ftcmd_var2 == 1U) {
         fp->x2208_ftcmd_var2 = 0U;
-        if ((s32) fp->x4_fighterKind == FTKIND_FOX) {
+        if ((s32) fp->kind == FTKIND_FOX) {
             ghostGObj = it_8029CEB4(gobj, &fp->cur_pos, 0x38, fp->facing_dir);
         } else {
             ghostGObj = it_8029CEB4(gobj, &fp->cur_pos, 0x39, fp->facing_dir);
@@ -311,7 +311,7 @@ void ftFx_SpecialS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.x668 & HSD_BUTTON_B) != false) {
+    if ((fp->input.x668 & HSD_Pad_B) != false) {
         if ((s32) fp->ground_or_air == GA_Air) {
             ftFx_SpecialAirSEnd_Enter(gobj);
             return;
@@ -328,7 +328,7 @@ void ftFx_SpecialAirS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.x668 & HSD_BUTTON_B) != false) {
+    if ((fp->input.x668 & HSD_Pad_B) != false) {
         if ((s32) fp->ground_or_air == GA_Air) {
             ftFx_SpecialAirSEnd_Enter(gobj);
             return;

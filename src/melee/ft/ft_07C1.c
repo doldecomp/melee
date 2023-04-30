@@ -26,7 +26,7 @@ void ft_8007C114(HSD_GObj* gobj)
             break;
         }
     }
-    fp->x2219_flag.bits.b4 = 0;
+    fp->x2219_b4 = 0;
 }
 
 #ifdef MWERKS_GEKKO

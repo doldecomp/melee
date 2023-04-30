@@ -395,13 +395,13 @@ void ftPe_Init_OnDeath(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = gobj->user_data;
-    fp->fv.pe.x222C = 1;
-    fp->fv.pe.x2234 = -1;
-    fp->fv.pe.x2240 = 0;
-    fp->fv.pe.x223C = 0;
-    fp->fv.pe.x2238 = 0;
-    fp->fv.pe.x2244 = 0;
-    fp->fv.pe.x2248 = 0;
+    fp->fv.pe.has_float = 1;
+    fp->fv.pe.x8 = -1;
+    fp->fv.pe.x14 = 0;
+    fp->fv.pe.x10 = 0;
+    fp->fv.pe.xC = 0;
+    fp->fv.pe.x18 = 0;
+    fp->fv.pe.x20 = 0;
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 2, 0);
     ftParts_80074A4C(gobj, 3, -1);
@@ -424,14 +424,14 @@ void ftPe_Init_OnDeath(HSD_GObj* gobj)
 
 void ftPe_Init_OnLoad(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    ftPeachAttributes* extAtrrs = fp->ft_data->ext_attr;
-    void** items = fp->ft_data->x48_items;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftPe_DatAttrs* extAtrrs = fp->ft_data->ext_attr;
+    UNK_T* items = fp->ft_data->x48_items;
 
-    extAtrrs->unk0 = lbMthp_8001E8F8(ftData_80085E50(fp, 18));
-    extAtrrs->unk4 = lbMthp_8001E8F8(ftData_80085E50(fp, 19));
+    extAtrrs->floatfallf_anim_start = lbMthp_8001E8F8(ftData_80085E50(fp, 18));
+    extAtrrs->floatfallb_anim_start = lbMthp_8001E8F8(ftData_80085E50(fp, 19));
 
-    PUSH_ATTRS(fp, ftPeachAttributes);
+    PUSH_ATTRS(fp, ftPe_DatAttrs);
 
     it_8026B3F8(items[0], It_Kind_Peach_Explode);
     it_8026B3F8(items[1], It_Kind_Peach_Turnip);
@@ -473,7 +473,7 @@ void ftPe_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 
 void ftPe_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(gobj, ftPeachAttributes);
+    COPY_ATTRS(gobj, ftPe_DatAttrs);
 }
 
 void ftPe_Init_8011B93C(HSD_GObj* gobj)

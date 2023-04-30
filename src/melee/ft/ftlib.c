@@ -833,7 +833,7 @@ bool ftLib_80087284(HSD_GObj* gobj)
 FighterKind ftLib_800872A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x4_fighterKind;
+    return fp->kind;
 }
 
 void* ftLib_800872B0(HSD_GObj* gobj)
@@ -1052,7 +1052,7 @@ s32 ftLib_80087700(HSD_GObj* gobj)
 void ftLib_8008770C(HSD_GObj* gobj, void* dst)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x4_fighterKind == FTKIND_GAMEWATCH) {
+    if (fp->kind == FTKIND_GAMEWATCH) {
         ftGw_Init_8014A7F4(gobj, dst);
     } else {
         ftKb_Init_800EEB00(gobj, dst);
@@ -1062,7 +1062,7 @@ void ftLib_8008770C(HSD_GObj* gobj, void* dst)
 void ftLib_80087744(HSD_GObj* gobj, void* dst)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x4_fighterKind == FTKIND_GAMEWATCH) {
+    if (fp->kind == FTKIND_GAMEWATCH) {
         ftGw_Init_8014A814(gobj, dst);
     } else {
         ftKb_Init_800EEB1C(gobj, dst);

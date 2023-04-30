@@ -181,17 +181,17 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
     if (fp->mv.pk.unk4.x4 <= 0) {
         ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(gobj);
         fp = GET_FIGHTER(gobj);
-        if (fp->x4_fighterKind != FTKIND_PICHU) {
+        if (fp->kind != FTKIND_PICHU) {
             lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].x0_jobj,
                         0, &vec);
             efSync_Spawn(1012, gobj, &vec);
-            fp->x2219_flag.bits.b0 = true;
+            fp->x2219_b0 = true;
             fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
             fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         }
     } else {
         fp = GET_FIGHTER(gobj);
-        if (fp->x4_fighterKind != FTKIND_PICHU) {
+        if (fp->kind != FTKIND_PICHU) {
             f32 tempf;
             lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].x0_jobj,
                         0, &vec2);
@@ -200,7 +200,7 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
             tempf = HSD_Randf();
             vec2.y += 6 * tempf - 3;
             efSync_Spawn(1012, gobj, &vec2);
-            fp->x2219_flag.bits.b0 = true;
+            fp->x2219_b0 = true;
             fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
             fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         }
@@ -223,17 +223,17 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
     if (fp->mv.pk.unk4.x4 <= 0) {
         ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
         fp = GET_FIGHTER(gobj);
-        if (fp->x4_fighterKind != FTKIND_PICHU) {
+        if (fp->kind != FTKIND_PICHU) {
             lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].x0_jobj,
                         0, &vec);
             efSync_Spawn(1012, gobj, &vec);
-            fp->x2219_flag.bits.b0 = true;
+            fp->x2219_b0 = true;
             fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
             fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         }
     } else {
         fp = GET_FIGHTER(gobj);
-        if (fp->x4_fighterKind != FTKIND_PICHU) {
+        if (fp->kind != FTKIND_PICHU) {
             f32 tempf;
             lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].x0_jobj,
                         0, &vec2);
@@ -242,7 +242,7 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
             tempf = HSD_Randf();
             vec2.y += (10 * tempf) - 5;
             efSync_Spawn(1012, gobj, &vec2);
-            fp->x2219_flag.bits.b0 = true;
+            fp->x2219_b0 = true;
             fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
             fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         }

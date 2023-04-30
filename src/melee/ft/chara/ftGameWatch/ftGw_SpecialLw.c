@@ -288,7 +288,7 @@ void ftGw_SpecialLw_IASA(HSD_GObj* gobj)
         }
     }
 
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
+    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
         fp->mv.gw.SpecialLw.isRelease = true;
     }
 }
@@ -324,7 +324,7 @@ void ftGw_SpecialAirLw_IASA(HSD_GObj* gobj)
         }
     }
 
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
+    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
         fp->mv.gw.SpecialLw.isRelease = true;
     }
 }

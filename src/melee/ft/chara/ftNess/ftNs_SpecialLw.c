@@ -87,17 +87,17 @@ void ftNs_SpecialLwStart_Anim(
 
     fighter_data2 = GET_FIGHTER(gobj);
 
-    if (!(fighter_data2->input.x65C_heldInputs & HSD_BUTTON_B)) {
+    if (!(fighter_data2->input.x65C_heldInputs & HSD_Pad_B)) {
         fighter_data2->mv.ns.speciallw.isRelease = 1;
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         fp = GET_FIGHTER(gobj);
 
-        if (!fp->x2219_flag.bits.b0) {
+        if (!fp->x2219_b0) {
             efAsync_Spawn(gobj, &fp->x60C, 0U, 1264,
                           fp->parts[FtPart_L1stNb].x0_jobj);
-            fp->x2219_flag.bits.b0 = true;
+            fp->x2219_b0 = true;
         }
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -125,17 +125,17 @@ void ftNs_SpecialAirLwStart_Anim(
 
     fighter_data2 = fp = GET_FIGHTER(gobj);
 
-    if ((fighter_data2->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
+    if ((fighter_data2->input.x65C_heldInputs & HSD_Pad_B) == false) {
         fighter_data2->mv.ns.speciallw.isRelease = 1;
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         fp = GET_FIGHTER(gobj);
 
-        if (!fp->x2219_flag.bits.b0) {
+        if (!fp->x2219_b0) {
             efAsync_Spawn(gobj, &fp->x60C, 0U, 1264,
                           fp->parts[FtPart_L1stNb].x0_jobj);
-            fp->x2219_flag.bits.b0 = true;
+            fp->x2219_b0 = true;
         }
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -251,7 +251,7 @@ void ftNs_SpecialLwHold_Anim(
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
+    if ((fp->input.x65C_heldInputs & HSD_Pad_B) == false) {
         fp->mv.ns.speciallw.isRelease = 1;
     }
 
@@ -291,7 +291,7 @@ void ftNs_SpecialAirLwHold_Anim(
 #endif
 
     fp = GET_FIGHTER(gobj);
-    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
+    if ((fp->input.x65C_heldInputs & HSD_Pad_B) == false) {
         fp->mv.ns.speciallw.isRelease = 1;
     }
 
@@ -514,7 +514,7 @@ void ftNs_SpecialLwTurn_Anim(HSD_GObj* arg0)
     {
         Fighter* fp1 = fp0;
 
-        if (!(fp1->input.x65C_heldInputs & HSD_BUTTON_B)) {
+        if (!(fp1->input.x65C_heldInputs & HSD_Pad_B)) {
             fp1->mv.ns.speciallw.isRelease = true;
         }
 
@@ -544,7 +544,7 @@ void ftNs_SpecialAirLwTurn_Anim(HSD_GObj* arg0)
     {
         Fighter* fp1 = fp0;
 
-        if (!(fp1->input.x65C_heldInputs & HSD_BUTTON_B)) {
+        if (!(fp1->input.x65C_heldInputs & HSD_Pad_B)) {
             fp1->mv.ns.speciallw.isRelease = true;
         }
 
@@ -741,7 +741,7 @@ void ftNs_SpecialLwHit_Anim(
     ftNessAttributes* attr;
 
     temp_r4 = arg0->user_data;
-    if (!(temp_r4->input.x65C_heldInputs & HSD_BUTTON_B)) {
+    if (!(temp_r4->input.x65C_heldInputs & HSD_Pad_B)) {
         temp_r4->mv.ns.speciallw.isRelease = 1;
     }
 
@@ -782,10 +782,10 @@ void ftNs_SpecialLwHit_Anim(
         if (phi_r0 != 0) {
             ftCommon_8007DB24(arg0);
             temp_r30 = arg0->user_data;
-            if (!temp_r30->x2219_flag.bits.b0) {
+            if (!temp_r30->x2219_b0) {
                 efAsync_Spawn(arg0, &temp_r30->x60C, 0U, 1264,
                               temp_r30->parts[FtPart_L1stNb].x0_jobj);
-                temp_r30->x2219_flag.bits.b0 = true;
+                temp_r30->x2219_b0 = true;
             }
             temp_r30->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
             temp_r30->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -807,7 +807,7 @@ void ftNs_SpecialAirLwHit_Anim(
 
     Fighter* fp = GET_FIGHTER(arg0);
 
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
+    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
         fp->mv.ns.speciallw.isRelease = true;
     }
 
@@ -821,10 +821,10 @@ void ftNs_SpecialAirLwHit_Anim(
         ftCommon_8007DB24(arg0);
         {
             Fighter* fp = GET_FIGHTER(arg0);
-            if (!fp->x2219_flag.bits.b0) {
+            if (!fp->x2219_b0) {
                 efAsync_Spawn(arg0, &fp->x60C, 0U, 1264,
                               fp->parts[FtPart_L1stNb].x0_jobj);
-                fp->x2219_flag.bits.b0 = true;
+                fp->x2219_b0 = true;
             }
             fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
             fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;

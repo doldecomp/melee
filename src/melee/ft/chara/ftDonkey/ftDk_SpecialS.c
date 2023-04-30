@@ -103,7 +103,7 @@ void doAirTransition(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirS, 0x0C4C508A, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
-    if (fp->x2219_flag.bits.b0 == true) {
+    if (fp->x2219_b0 == true) {
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }
@@ -115,7 +115,7 @@ static void doGroundTransition(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialS, 0x0C4C508A, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
-    if (fp->x2219_flag.bits.b0 == true) {
+    if (fp->x2219_b0 == true) {
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }

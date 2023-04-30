@@ -91,12 +91,11 @@ void ftMs_SpecialAirS1_IASA(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2200_ftcmd_var0 != 0) {
-        if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & HSD_BUTTON_AB) != 0)
-        {
+        if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & HSD_Pad_AB) != 0) {
             ftMs_SpecialS_80137A9C(gobj);
         }
     } else {
-        if ((fp->input.x668 & HSD_BUTTON_AB) != 0) {
+        if ((fp->input.x668 & HSD_Pad_AB) != 0) {
             fp->x2204_ftcmd_var1 = 1;
         }
     }
@@ -189,12 +188,11 @@ void ftMs_SpecialS2_IASA(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (fp->x2200_ftcmd_var0 != 0) {
-        if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & HSD_BUTTON_AB) != 0)
-        {
+        if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & HSD_Pad_AB) != 0) {
             ftMs_SpecialS_80137E0C(gobj);
         }
     } else {
-        if ((fp->input.x668 & HSD_BUTTON_AB) != 0) {
+        if ((fp->input.x668 & HSD_Pad_AB) != 0) {
             fp->x2204_ftcmd_var1 = 1;
         }
     }
@@ -338,12 +336,11 @@ void ftMs_SpecialS3_IASA(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2200_ftcmd_var0 != 0) {
-        if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & HSD_BUTTON_AB) != 0)
-        {
+        if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & HSD_Pad_AB) != 0) {
             ftMs_SpecialS_80138148(gobj);
         }
     } else {
-        if ((fp->input.x668 & HSD_BUTTON_AB) != 0) {
+        if ((fp->input.x668 & HSD_Pad_AB) != 0) {
             fp->x2204_ftcmd_var1 = 1;
         }
     }
