@@ -320,7 +320,7 @@ static void ftGw_AttackAirHi_Enter(HSD_GObj*);
 // Motion State
 void ftGw_AttackAirN_DecideAction(HSD_GObj* gobj)
 {
-    enum_t msid = ft_8008CE68(GET_FIGHTER(gobj));
+    FtMotionId msid = ft_8008CE68(GET_FIGHTER(gobj));
 
     switch (msid) {
     case ftCo_MS_AttackAirN:

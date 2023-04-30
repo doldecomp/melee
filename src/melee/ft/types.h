@@ -582,7 +582,7 @@ struct Fighter {
     /* fp+4 */ FighterKind kind;
     /* fp+8 */ s32 x8_spawnNum;
     /* fp+C */ u8 xC_playerID;
-    /* fp+10 */ enum_t motion_id;
+    /* fp+10 */ FtMotionId motion_id;
     /* fp+14 */ enum_t anim_id;
     /* fp+18 */ s32 x18;
     /* fp+1C */ MotionState* x1C_actionStateList;
@@ -699,10 +699,10 @@ struct Fighter {
         /* fp+650 */ f32 x650;
         /* fp+654 */ f32 x654;
         /* fp+658 */ f32 x658;
-        /* fp+65C */ u32 x65C_heldInputs;
+        /* fp+65C */ HSD_Pad x65C_heldInputs;
         /* fp+660 */ s32 x660;
         /* fp+664 */ s32 x664;
-        /* fp+668 */ s32 x668;
+        /* fp+668 */ HSD_Pad x668;
         /* fp+66C */ s32 x66C;
     } input;
     /* fp+670 */ u8 x670_timer_lstick_tilt_x;
@@ -1156,6 +1156,7 @@ struct Fighter {
         /* fp+2340 */ union ftMasterHand_MotionVars mh, ch;
         /* fp+2340 */ union ftMewtwo_MotionVars mt;
         /* fp+2340 */ union ftNess_MotionVars ns;
+        /* fp+2340 */ union ftPe_MotionVars pe;
         /* fp+2340 */ union ftPikachu_MotionVars pk, pc;
         /* fp+2340 */ union ftPurin_MotionVars pr;
         /* fp+2340 */ union ftSamus_MotionVars ss;

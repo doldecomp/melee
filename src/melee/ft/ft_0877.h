@@ -5,10 +5,9 @@
 #define MELEE_FT_FT_UNKNOWN_006_H
 
 #include "ft/forward.h"
+#include <baselib/forward.h>
 
 #include "ft/fighter.h"
-
-#include <baselib/gobjproc.h>
 
 /// @remarks Only used by Purin.
 extern HSD_Joint* ft_8045A1E0[6];
@@ -86,7 +85,7 @@ s32 ft_80087C1C(void);
 s32 ft_80087C58(HSD_GObj*);
 s32 ft_80087C70(Fighter*, s32);
 s32 ft_80087D0C(Fighter*, s32);
-s32 ft_8008CE68(Fighter*);
+FtMotionId ft_8008CE68(Fighter*);
 s32 ft_8008D8E8(f32);
 s32 ft_8008E984(Fighter*);
 s32 ft_80093694(void);
@@ -1099,6 +1098,11 @@ void ft_800DF0D0(HSD_GObj*);
 void ft_800C555C(HSD_GObj*);
 void ft_8009CA0C(HSD_GObj*, HSD_GObj*);
 bool ft_8009665C(void);
+void ft_800CCDA8(HSD_GObj*);
+UNK_RET ft_800CC6C8(UNK_PARAMS);
+void ft_800CDDA0(HSD_GObj*);
+UNK_RET ft_800CC6C8(UNK_PARAMS);
+bool ft_800DF478(Fighter*);
 
 void ft_0877_SetFacingDirection(HSD_GObj*, f32 facing_dir);
 
