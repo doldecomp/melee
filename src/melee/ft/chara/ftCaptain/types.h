@@ -68,7 +68,7 @@ union ftCaptain_MotionVars {
     } specialhi;
     struct ftCaptainSpecialLwVars {
         /* fp+2340 */ u16 x0;
-        /* fp+2340 */ u16 x2;
+        /* fp+2342 */ u16 x2;
         /* fp+2344 */ f32 friction;
     } speciallw;
 };

@@ -4,6 +4,8 @@
 
 #include "ftPe_Float.h"
 
+#include "ftPe_FloatFall.h"
+
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

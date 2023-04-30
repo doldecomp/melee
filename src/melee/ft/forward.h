@@ -22,6 +22,8 @@ typedef void (*Fighter_ModelEvent)(Fighter* fp, int arg1, bool arg2);
 typedef char* (*Fighter_MotionFileStringGetter)(enum_t arg0);
 typedef void (*Fighter_UnkPtrEvent)(s32 arg0, s32* arg1, s32* arg2);
 
+typedef enum_t FtMotionId;
+
 typedef enum FighterKind {
     FTKIND_MARIO,
     FTKIND_FOX,

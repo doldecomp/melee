@@ -22,4 +22,10 @@ typedef struct ftPe_DatAttrs {
     u8 x10[0xB0];
 } ftPe_DatAttrs;
 
+union ftPe_MotionVars {
+    struct ftPe_FloatFallVars {
+        /* fp+2340 */ int x0;
+    } floatfall;
+};
+
 #endif
