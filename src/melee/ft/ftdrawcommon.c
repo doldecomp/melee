@@ -656,14 +656,14 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
                 }
             }
         }
-        if ((fighter->x2218_flag.bits.b3 != 0) &&
+        if ((fighter->x2218_b3 != 0) &&
             (lbColl_8000A95C(fighter + 0x19E4, arg1,
                              ftCommon_8007F804(fighter),
                              fighter->cur_pos.z) != 0))
         {
             phi_r30 = 1U;
         }
-        if ((fighter->x2218_flag.bits.b6 != 0) &&
+        if ((fighter->x2218_b6 != 0) &&
             (lbColl_8000AB2C(fighter + 0x1A08, arg1,
                              ftCommon_8007F804(fighter),
                              fighter->cur_pos.z) != 0))

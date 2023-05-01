@@ -396,7 +396,7 @@ void ftPe_Init_OnDeath(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     fp->fv.pe.has_float = 1;
-    fp->fv.pe.x8 = -1;
+    fp->fv.pe.attacks4_motion_id = -1;
     fp->fv.pe.x14 = 0;
     fp->fv.pe.x10 = 0;
     fp->fv.pe.xC = 0;

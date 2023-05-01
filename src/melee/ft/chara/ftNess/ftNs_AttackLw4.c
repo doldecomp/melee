@@ -15,7 +15,7 @@ void ftNs_AttackLw4_Enter(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->x2218_flag.bits.b0 = 0;
+    fp->x2218_b0 = 0;
     fp->mv.ns.attacklw4.isChargeDisable = false;
     ftNs_AttackHi4_YoyoSetVarAll(gobj);
     Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4, 0, NULL, 0.0f, 1.0f,
@@ -57,7 +57,7 @@ void ftNs_AttackLw4_IASA(HSD_GObj* gobj) // Ness's Down Smash IASA callback
     if ((fp->input.x65C_heldInputs & HSD_Pad_A) == false) {
         fp->mv.ns.attacklw4.isChargeDisable = true;
     }
-    if (fp->x2218_flag.bits.b0 != 0) {
+    if (fp->x2218_b0 != 0) {
         ftCo_Wait_IASA(gobj);
     }
 }
@@ -180,7 +180,7 @@ void ftNs_AttackLw4Release_IASA(
     HSD_GObj* gobj) // Ness's Down Smash Post-Charge IASA callback
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x2218_flag.bits.b0 != 0) {
+    if (fp->x2218_b0 != 0) {
         ftCo_Wait_IASA(gobj);
     }
 }

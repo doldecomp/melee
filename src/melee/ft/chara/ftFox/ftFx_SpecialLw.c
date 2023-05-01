@@ -632,7 +632,7 @@ void ftFx_SpecialAirLwTurn_Coll(HSD_GObj* gobj)
 inline void ftFox_SpecialLw_SetReflectVars(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2218_flag.bits.b3 = 1;
+    fp->x2218_b3 = 1;
     fp->cb.x21C8_callback_OnReflectHit = ftFx_SpecialLwHit_Enter;
 }
 
@@ -669,7 +669,7 @@ inline void ftFox_SpecialLwTurn_SetVarAll(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
-    fp->x2218_flag.bits.b3 = 1;
+    fp->x2218_b3 = 1;
     fp->cb.x21C8_callback_OnReflectHit = ftFx_SpecialLwHit_Enter;
     fp->mv.fx.SpecialLw.turnFrames = foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES;
     fp->x2200_ftcmd_var0 = 0;
@@ -889,7 +889,7 @@ void ftFx_SpecialLwHit_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->x2218_flag.bits.b3 = 1;
+    fp->x2218_b3 = 1;
     fp->cb.x21C8_callback_OnReflectHit = ftFx_SpecialLwHit_Enter;
 }
 
