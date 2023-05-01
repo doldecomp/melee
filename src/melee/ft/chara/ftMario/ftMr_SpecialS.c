@@ -178,7 +178,7 @@ static void reflect(HSD_GObj* gobj)
                fp->mv.mr.SpecialS.reflecting == true)
     {
         fp->mv.mr.SpecialS.reflecting = false;
-        fp->x2218_flag.bits.b3 = false;
+        fp->x2218_b3 = false;
     }
 
     ftColl_8007AEF8(gobj);
@@ -281,7 +281,7 @@ static void collUpdateVars(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if ((s32) fp->mv.mr.SpecialS.reflecting != false) {
-        fp->x2218_flag.bits.b3 = 1;
+        fp->x2218_b3 = 1;
     }
     setCallbacks(fp);
     fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialS_CreateCape;

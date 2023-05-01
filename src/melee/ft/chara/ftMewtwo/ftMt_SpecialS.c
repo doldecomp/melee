@@ -191,8 +191,8 @@ static inline void ftMewtwo_SpecialS_SetReflect(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.mt.SpecialS.isConfusionReflect != false) {
-        fp->x2218_flag.bits.b3 = 1;
-        fp->x2218_flag.bits.b4 = 1;
+        fp->x2218_b3 = 1;
+        fp->x2218_b4 = 1;
         fp->cb.x21C8_callback_OnReflectHit = ftMt_SpecialS_OnReflect;
     }
 }
@@ -267,7 +267,7 @@ void ftMt_SpecialS_ReflectThink(HSD_GObj* gobj)
             gobj, &mewtwoAttrs->x1C_MEWTWO_CONFUSION_REFLECTION,
             ftMt_SpecialS_OnReflect); // Really? A callback that simply
                                       // returns instead of just NULL?
-        fp->x2218_flag.bits.b4 =
+        fp->x2218_b4 =
             1; // Here it is... the reason Confusion cannot change ownership.
         fp->mv.mt.SpecialS.isConfusionReflect = true;
         fp->x2204_ftcmd_var1 = CONFUSION_REFLECT_NONE;
@@ -275,8 +275,8 @@ void ftMt_SpecialS_ReflectThink(HSD_GObj* gobj)
 
     case CONFUSION_REFLECT_OFF:
         if (fp->mv.mt.SpecialS.isConfusionReflect != false) {
-            fp->x2218_flag.bits.b3 = 0;
-            fp->x2218_flag.bits.b4 = 0;
+            fp->x2218_b3 = 0;
+            fp->x2218_b4 = 0;
             fp->cb.x21C8_callback_OnReflectHit = NULL;
             fp->mv.mt.SpecialS.isConfusionReflect = false;
         }

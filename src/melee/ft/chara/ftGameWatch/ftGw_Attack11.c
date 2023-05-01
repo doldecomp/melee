@@ -164,14 +164,14 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
 #endif
 
     if (ft_80094790(gobj) == false) {
-        fp->x2218_flag.bits.b0 = 0;
-        fp->x2218_flag.bits.b1 = 0;
+        fp->x2218_b0 = 0;
+        fp->x2218_b1 = 0;
         Fighter_ChangeMotionState(gobj, ftGw_MS_Attack11, 0, NULL, 0.0f, 1.0f,
                                   0.0f);
         ftAnim_8006EBA4(gobj);
         fp->x196C_hitlag_mult = (f32) fp->x110_attr.x18C_Jab_2InputWindow;
         fp->x1970 = 44;
-        fp->x2218_flag.bits.b2 = 0;
+        fp->x2218_b2 = 0;
         fp->mv.gw.Attack11.unk = 0;
         fp->x1A54 = 0;
         fp->cb.x21BC_callback_Accessory4 = ftGw_Attack11_ItemGreenhouseSetup;

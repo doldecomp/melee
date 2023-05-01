@@ -1019,7 +1019,19 @@ struct Fighter {
     /* fp+220C */ u32 x220C_ftcmd_var3;
     /* fp+2210 */ ThrowFlags x2210_ThrowFlags;
     /* fp+2214 */ f32 x2214;
-    /* fp+2218 */ UnkFlagStruct x2218_flag;
+    union {
+        /* fp+2218 */ u8 x2218;
+        /* fp+2218 */ struct {
+            /* fp+2218:0 */ u8 x2218_b0 : 1;
+            /* fp+2218:1 */ u8 x2218_b1 : 1;
+            /* fp+2218:2 */ u8 x2218_b2 : 1;
+            /* fp+2218:3 */ u8 x2218_b3 : 1;
+            /* fp+2218:4 */ u8 x2218_b4 : 1;
+            /* fp+2218:5 */ u8 x2218_b5 : 1;
+            /* fp+2218:6 */ u8 x2218_b6 : 1;
+            /* fp+2218:7 */ u8 x2218_b7 : 1;
+        };
+    };
     union {
         /* fp+2219 */ u8 x2219;
         /* fp+2219 */ struct {

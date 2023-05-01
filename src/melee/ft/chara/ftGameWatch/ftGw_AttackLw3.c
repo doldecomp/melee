@@ -131,7 +131,7 @@ void ftGw_AttackLw3_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (ft_80094790(gobj) == false) {
-        fp->x2218_flag.bits.b0 = 0;
+        fp->x2218_b0 = 0;
         Fighter_ChangeMotionState(gobj, ftGw_MS_AttackLw3, 0, NULL, 0.0f, 1.0f,
                                   0.0f);
         ftAnim_8006EBA4(gobj);
@@ -160,7 +160,7 @@ void ftGw_AttackLw3_Anim(HSD_GObj* gobj)
 void ftGw_AttackLw3_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x2218_flag.bits.b0 == 0) {
+    if (fp->x2218_b0 == 0) {
         return;
     }
     if (ft_8008BFC4(gobj) != false) {

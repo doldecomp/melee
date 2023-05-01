@@ -29,7 +29,7 @@ void ftNs_AttackS4_Enter(HSD_GObj* gobj) // Ness's F-Smash Motion State handler
 
     fp = GET_FIGHTER(gobj);
 
-    fp->x2218_flag.bits.b0 = 0;
+    fp->x2218_b0 = 0;
 
     fp->x2200_ftcmd_var0 = false;
 
@@ -98,7 +98,7 @@ void ftNs_AttackS4_Anim(HSD_GObj* gobj) // Ness's F-Smash Animation callback
     Fighter* fighter_data1 = GET_FIGHTER(gobj);
     ftNessAttributes* ness_attr;
 
-    if (fighter_data1->x2218_flag.bits.b3 == 0) {
+    if (fighter_data1->x2218_b3 == 0) {
         if (fighter_data1->x2200_ftcmd_var0 !=
             false) // Check if reflect bubble flag is enabled in fp script
         {
@@ -111,7 +111,7 @@ void ftNs_AttackS4_Anim(HSD_GObj* gobj) // Ness's F-Smash Animation callback
 
     else if (fighter_data1->x2200_ftcmd_var0 == false)
     {
-        fighter_data1->x2218_flag.bits.b3 = 0; // Toggle reflect bubble OFF//
+        fighter_data1->x2218_b3 = 0; // Toggle reflect bubble OFF//
     }
 
     if (!ftAnim_IsFramesRemaining(
@@ -140,7 +140,7 @@ void ftNs_AttackS4_IASA(HSD_GObj* gobj) // Ness's F-Smash IASA Callback
     u8 _[8];
 #endif
 
-    if (fp->x2218_flag.bits.b0 != 0) {
+    if (fp->x2218_b0 != 0) {
         if (fp->fv.ns.bat_gobj != NULL) {
             it_802AD6B8(fp->fv.ns.bat_gobj);
             fp->fv.ns.bat_gobj = NULL;

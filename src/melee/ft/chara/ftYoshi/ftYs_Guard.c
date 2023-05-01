@@ -212,7 +212,7 @@ void ftYs_GuardHold_Anim(HSD_GObj* gobj)
     if (ft_800925A4(gobj)) {
         spawnEffect(gobj);
     } else if (fp->mv.ys.unk2.xC != 0 ||
-               (!(fp->x221B_b0 & 1) && !(fp->x2218_flag.bits.b3)))
+               (!(fp->x221B_b0 & 1) && !(fp->x2218_b3)))
     {
         ft_80092BE8(gobj);
     } else {

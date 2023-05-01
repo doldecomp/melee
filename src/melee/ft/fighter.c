@@ -422,12 +422,12 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x19BC_shieldDamageTaken3 = 6;
 
     fp->x221F_flag.bits.b6 = 0;
-    fp->x2218_flag.bits.b3 = 0;
-    fp->x2218_flag.bits.b4 = 0;
+    fp->x2218_b3 = 0;
+    fp->x2218_b4 = 0;
     fp->ReflectAttr.x1A3C_damageOver = 0;
     fp->ReflectAttr.x1A2C_reflectHitDirection = 0.0f;
-    fp->x2218_flag.bits.b6 = 0;
-    fp->x2218_flag.bits.b7 = 0;
+    fp->x2218_b6 = 0;
+    fp->x2218_b7 = 0;
 
     fp->AbsorbAttr.x1A40_absorbHitDirection = 0.0f;
 
@@ -1041,8 +1041,8 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     fp->x19B8_shieldUnk = 0.0f;
 
     fp->x221D_flag.bits.b5 = 0;
-    fp->x2218_flag.bits.b3 = 0;
-    fp->x2218_flag.bits.b6 = 0;
+    fp->x2218_b3 = 0;
+    fp->x2218_b6 = 0;
     fp->x221C_flag.bits.b4 = 0;
 
     fp->x1A6A = 0;

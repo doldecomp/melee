@@ -2,11 +2,12 @@
 #define MELEE_FT_CHARA_FTPEACH_TYPES_H
 
 #include <platform.h>
+#include "ft/forward.h"
 
 struct ftPeach_FighterVars {
     /* fp+222C */ bool has_float;
     /* fp+2230 */ f32 x4;
-    /* fp+2234 */ u32 x8;
+    /* fp+2234 */ FtMotionId attacks4_motion_id;
     /* fp+2238 */ u32 xC;
     /* fp+223C */ u32 x10;
     /* fp+2240 */ u32 x14;

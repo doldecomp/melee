@@ -192,7 +192,7 @@ static inline void ftGameWatch_SpecialLw_UpdateVars(HSD_GObj* gobj)
         fp->x2200_ftcmd_var0 = 2;
         ftColl_CreateAbsorbHit(gobj, &sa->x80_GAMEWATCH_PANIC_ABSORPTION);
     } else if (ftcmd_var == 0) {
-        fp->x2218_flag.bits.b6 = false;
+        fp->x2218_b6 = false;
     }
 
     if (fp->x2200_ftcmd_var0 != 0) {
@@ -379,7 +379,7 @@ static inline void ftGameWatch_SpecialLw_UpdateVarsColl(HSD_GObj* gobj)
     if (ftcmd_var == 2) {
         ftColl_CreateAbsorbHit(gobj, &sa->x80_GAMEWATCH_PANIC_ABSORPTION);
     } else if (ftcmd_var == 0) {
-        fp->x2218_flag.bits.b6 = false;
+        fp->x2218_b6 = false;
     }
 
     if (fp->x2200_ftcmd_var0 != 0) {
