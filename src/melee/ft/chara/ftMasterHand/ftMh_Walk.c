@@ -146,7 +146,7 @@ void ftMh_WalkLoop_Phys(HSD_GObj* gobj)
     ftData* data = fp->ft_data;
     ftMasterHand_SpecialAttrs* attr = data->ext_attr;
     ft_80085134(gobj);
-    fp->x80_self_vel.x = attr->x40_pos.z;
+    fp->self_vel.x = attr->x40_pos.z;
 }
 
 void ftMh_WalkLoop_Coll(HSD_GObj* gobj) {}
@@ -156,5 +156,5 @@ void ftMh_MS_351_801520D8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftMh_MS_WalkWait, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
-    fp->x80_self_vel.x = 0;
+    fp->self_vel.x = 0;
 }

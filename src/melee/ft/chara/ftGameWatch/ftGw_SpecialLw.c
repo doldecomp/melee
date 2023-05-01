@@ -139,8 +139,8 @@ void ftGw_SpecialLw_UpdateBucketModel(HSD_GObj* gobj)
 inline void ftGameWatch_SpecialLw_SetVars(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2204_ftcmd_var1 = 0;
-    fp->x2200_ftcmd_var0 = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
     fp->mv.gw.SpecialLw.isRelease = false;
     fp->mv.gw.SpecialLw.turnFrames = 0;
 }
@@ -155,7 +155,7 @@ void ftGw_SpecialLw_Enter(HSD_GObj* gobj)
         return;
     }
 
-    fp->x80_self_vel.y = 0;
+    fp->self_vel.y = 0;
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw, 0, NULL, 0, 1, 0);
 
@@ -166,15 +166,15 @@ void ftGw_SpecialLw_Enter(HSD_GObj* gobj)
 void ftGw_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftGameWatchAttributes* sa = fp->x2D4_specialAttributes;
+    ftGameWatchAttributes* sa = fp->dat_attrs;
 
     if (fp->fv.gw.x2238_panicCharge >= ftGw_Panic_Full) {
         ftGw_SpecialAirLwShoot_ReleaseOil(gobj);
         return;
     }
 
-    fp->x80_self_vel.x /= sa->x64_GAMEWATCH_PANIC_MOMENTUM_PRESERVE;
-    fp->x80_self_vel.y = 0;
+    fp->self_vel.x /= sa->x64_GAMEWATCH_PANIC_MOMENTUM_PRESERVE;
+    fp->self_vel.y = 0;
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw, 0, NULL, 0, 1, 0);
 
@@ -185,17 +185,17 @@ void ftGw_SpecialAirLw_Enter(HSD_GObj* gobj)
 static inline void ftGameWatch_SpecialLw_UpdateVars(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    u32 ftcmd_var = fp->x2200_ftcmd_var0;
-    ftGameWatchAttributes* sa = fp->x2D4_specialAttributes;
+    u32 ftcmd_var = fp->cmd_vars[0];
+    ftGameWatchAttributes* sa = fp->dat_attrs;
 
     if (ftcmd_var == 1) {
-        fp->x2200_ftcmd_var0 = 2;
+        fp->cmd_vars[0] = 2;
         ftColl_CreateAbsorbHit(gobj, &sa->x80_GAMEWATCH_PANIC_ABSORPTION);
     } else if (ftcmd_var == 0) {
         fp->x2218_b6 = false;
     }
 
-    if (fp->x2200_ftcmd_var0 != 0) {
+    if (fp->cmd_vars[0] != 0) {
         ftGw_SpecialLw_UpdateBucketModel(gobj);
     }
 }
@@ -214,7 +214,7 @@ void ftGw_SpecialLw_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     /// @todo Frame number constant
-    if (fp->x894_currentAnimFrame == anim_update_frame &&
+    if (fp->cur_anim_frame == anim_update_frame &&
         !fp->mv.gw.SpecialLw.isRelease)
     {
         ftGw_SpecialLw_UpdateAction(gobj, 5);
@@ -237,7 +237,7 @@ void ftGw_SpecialAirLw_Anim(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->x894_currentAnimFrame == anim_update_frame &&
+    if (fp->cur_anim_frame == anim_update_frame &&
         !fp->mv.gw.SpecialLw.isRelease)
     {
         ftGw_SpecialAirLw_UpdateAction(gobj, 5);
@@ -345,7 +345,7 @@ void ftGw_SpecialAirLw_Phys(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftGameWatchAttributes* sa = fp->x2D4_specialAttributes;
+    ftGameWatchAttributes* sa = fp->dat_attrs;
 
     ftCommon_8007D494(fp, sa->x6C_GAMEWATCH_PANIC_FALL_ACCEL,
                       sa->x70_GAMEWATCH_PANIC_VEL_Y_MAX);
@@ -373,8 +373,8 @@ void ftGw_SpecialAirLw_Coll(HSD_GObj* gobj)
 static inline void ftGameWatch_SpecialLw_UpdateVarsColl(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    u32 ftcmd_var = fp->x2200_ftcmd_var0;
-    ftGameWatchAttributes* sa = fp->x2D4_specialAttributes;
+    u32 ftcmd_var = fp->cmd_vars[0];
+    ftGameWatchAttributes* sa = fp->dat_attrs;
 
     if (ftcmd_var == 2) {
         ftColl_CreateAbsorbHit(gobj, &sa->x80_GAMEWATCH_PANIC_ABSORPTION);
@@ -382,7 +382,7 @@ static inline void ftGameWatch_SpecialLw_UpdateVarsColl(HSD_GObj* gobj)
         fp->x2218_b6 = false;
     }
 
-    if (fp->x2200_ftcmd_var0 != 0) {
+    if (fp->cmd_vars[0] != 0) {
         ftGw_SpecialLw_UpdateBucketModel(gobj);
     }
 }
@@ -404,7 +404,7 @@ void ftGw_SpecialLw_GroundToAir(HSD_GObj* gobj)
 
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw, transition_flags0,
-                              NULL, fp->x894_currentAnimFrame, 1, 0);
+                              NULL, fp->cur_anim_frame, 1, 0);
 
     ftGameWatch_SpecialLw_UpdateVarsColl(gobj);
 }
@@ -421,7 +421,7 @@ void ftGw_SpecialAirLw_AirToGround(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw, transition_flags0, NULL,
-                              fp->x894_currentAnimFrame, 1, 0);
+                              fp->cur_anim_frame, 1, 0);
 
     ftGameWatch_SpecialLw_UpdateVarsColl(gobj);
 }
@@ -431,13 +431,13 @@ static inline void ftGameWatch_SpecialLw_UpdateVarsAction(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* sa = getFtSpecialAttrs(fp);
 
-    if (fp->x2200_ftcmd_var0 >= 1) {
-        fp->x2200_ftcmd_var0 = 2;
+    if (fp->cmd_vars[0] >= 1) {
+        fp->cmd_vars[0] = 2;
 
         ftColl_CreateAbsorbHit(gobj, &sa->x80_GAMEWATCH_PANIC_ABSORPTION);
     }
 
-    if (fp->x2200_ftcmd_var0 != 0) {
+    if (fp->cmd_vars[0] != 0) {
         ftGw_SpecialLw_UpdateBucketModel(gobj);
     }
 }
@@ -549,8 +549,8 @@ void ftGw_SpecialLwCatch_GroundToAir(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLwCatch,
-                              transition_flags0, NULL,
-                              fp->x894_currentAnimFrame, 1, 0);
+                              transition_flags0, NULL, fp->cur_anim_frame, 1,
+                              0);
 }
 
 /// Mr. Game & Watch's air -> ground Oil Panic Fill Motion State handler
@@ -560,7 +560,7 @@ void ftGw_SpecialAirLwCatch_AirToGround(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLwCatch, transition_flags0,
-                              NULL, fp->x894_currentAnimFrame, 1, 0);
+                              NULL, fp->cur_anim_frame, 1, 0);
 }
 
 /// Check to enter grounded or aerial Oil Panic Fill
@@ -595,7 +595,7 @@ static inline void ftGameWatch_SpecialLwShoot_ApplyDamage(HSD_GObj* gobj)
     int i;
     for (i = 0; i < 4; i++) {
         if (fp->x914[i].state == HitCapsule_Enabled) {
-            ftColl_8007ABD0(&fp->x914[i], fp->x2204_ftcmd_var1, gobj);
+            ftColl_8007ABD0(&fp->x914[i], fp->cmd_vars[1], gobj);
         }
     }
 }
@@ -673,8 +673,8 @@ void ftGw_SpecialLwShoot_GroundToAir(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLwShoot,
-                              transition_flags0, NULL,
-                              fp->x894_currentAnimFrame, 1, 0);
+                              transition_flags0, NULL, fp->cur_anim_frame, 1,
+                              0);
 
     ftGw_SpecialLw_UpdateBucketModel(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialLw_ItemPanicSetup;
@@ -688,7 +688,7 @@ void ftGw_SpecialAirLwShoot_AirToGround(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLwShoot, transition_flags0,
-                              NULL, fp->x894_currentAnimFrame, 1, 0);
+                              NULL, fp->cur_anim_frame, 1, 0);
 
     ftGw_SpecialLw_UpdateBucketModel(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialLw_ItemPanicSetup;
@@ -715,14 +715,14 @@ void ftGw_SpecialLwShoot_ReleaseOil(HSD_GObj* gobj)
         {
             ftGameWatchAttributes* sa = getFtSpecialAttrs(fp);
 
-            fp->x2204_ftcmd_var1 = fp->fv.gw.x223C_panicDamage *
-                                   sa->x78_GAMEWATCH_PANIC_DAMAGE_MUL;
+            fp->cmd_vars[1] = fp->fv.gw.x223C_panicDamage *
+                              sa->x78_GAMEWATCH_PANIC_DAMAGE_MUL;
 
             {
                 f32 panicDamage =
-                    fp->x2204_ftcmd_var1 + sa->x74_GAMEWATCH_PANIC_DAMAGE_ADD;
+                    fp->cmd_vars[1] + sa->x74_GAMEWATCH_PANIC_DAMAGE_ADD;
 
-                fp->x2204_ftcmd_var1 = panicDamage;
+                fp->cmd_vars[1] = panicDamage;
                 fp->fv.gw.x2238_panicCharge = ftGw_Panic_Empty;
                 fp->fv.gw.x223C_panicDamage = 0;
             }
@@ -752,13 +752,13 @@ void ftGw_SpecialAirLwShoot_ReleaseOil(HSD_GObj* gobj)
         {
             ftGameWatchAttributes* sa = getFtSpecialAttrs(fp);
 
-            fp->x2204_ftcmd_var1 = fp->fv.gw.x223C_panicDamage *
-                                   sa->x78_GAMEWATCH_PANIC_DAMAGE_MUL;
+            fp->cmd_vars[1] = fp->fv.gw.x223C_panicDamage *
+                              sa->x78_GAMEWATCH_PANIC_DAMAGE_MUL;
 
             {
                 f32 panicDamage =
-                    fp->x2204_ftcmd_var1 + sa->x74_GAMEWATCH_PANIC_DAMAGE_ADD;
-                fp->x2204_ftcmd_var1 = panicDamage;
+                    fp->cmd_vars[1] + sa->x74_GAMEWATCH_PANIC_DAMAGE_ADD;
+                fp->cmd_vars[1] = panicDamage;
             }
 
             fp->fv.gw.x2238_panicCharge = 0;

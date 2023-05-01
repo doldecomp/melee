@@ -3064,7 +3064,7 @@ void ftKb_Init_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(fp, ftKirbyAttributes);
 
     fp->x2222_b1 = 1;
-    fp->x2D0 = fp->x2D4_specialAttributes;
+    fp->x2D0 = fp->dat_attrs;
     fp->fv.kb.x2234.bits.b0 = Player_GetFlagsAEBit1(fp->xC_playerID);
     it_8026B3F8(item_list[0], 50);
     it_8026B3F8(item_list[1], 51);
@@ -3104,7 +3104,7 @@ void ftKb_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     s32 _[2];
     Fighter* fp = GET_FIGHTER(gobj);
-    ftKirbyAttributes* attr = fp->x2D4_specialAttributes;
+    ftKirbyAttributes* attr = fp->dat_attrs;
     switch (fp->fv.kb.x2238) {
     case 3:
         if (fp->fv.kb.x22E8 == attr->x190) {

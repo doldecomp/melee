@@ -46,8 +46,8 @@ void ftMt_SpecialLw_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    fp->x2210_ThrowFlags.flags = 0;
-    fp->x2200_ftcmd_var0 = 0;
+    fp->throw_flags.flags = 0;
+    fp->cmd_vars[0] = 0;
     fp->fv.mt.x222C_disableGObj = NULL;
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialLw, 0, NULL, 0.0f, 1.0f,
@@ -69,10 +69,10 @@ void ftMt_SpecialAirLw_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    fp->x2210_ThrowFlags.flags = 0;
-    fp->x2200_ftcmd_var0 = 0;
+    fp->throw_flags.flags = 0;
+    fp->cmd_vars[0] = 0;
     fp->fv.mt.x222C_disableGObj = NULL;
-    fp->x80_self_vel.y = 0.0f;
+    fp->self_vel.y = 0.0f;
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirLw, 0, NULL, 0.0f, 1.0f,
                               0.0f);
@@ -157,11 +157,11 @@ void ftMt_SpecialLw_GroundToAir(HSD_GObj* gobj)
 
     ftCommon_8007D5D4(fp);
 
-    fp->x80_self_vel.y = 0.0f;
+    fp->self_vel.y = 0.0f;
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirLw,
                               FTMEWTWO_SPECIALLW_COLL_FLAG, NULL,
-                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
+                              fp->cur_anim_frame, 1.0f, 0.0f);
 
     fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
 
@@ -181,7 +181,7 @@ void ftMt_SpecialAirLw_AirToGround(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialLw,
                               FTMEWTWO_SPECIALLW_COLL_FLAG, NULL,
-                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
+                              fp->cur_anim_frame, 1.0f, 0.0f);
 
     fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
 
@@ -213,7 +213,7 @@ void ftMt_SpecialLw_CreateDisable(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if ((u32) fp->x2200_ftcmd_var0 != 0U) {
+    if ((u32) fp->cmd_vars[0] != 0U) {
         mewtwoAttrs = getFtSpecialAttrsD(fp);
 
         lb_8000B1CC(fp->parts[FtPart_L3rdNb].x0_jobj, NULL, &sp18);
@@ -225,6 +225,6 @@ void ftMt_SpecialLw_CreateDisable(HSD_GObj* gobj)
 
         ftMewtwo_SpecialLw_SetCall(gobj);
 
-        fp->x2200_ftcmd_var0 = 0;
+        fp->cmd_vars[0] = 0;
     }
 }

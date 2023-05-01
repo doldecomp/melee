@@ -46,7 +46,7 @@ static HSD_Pad const HSD_Pad_XY ATTRIBUTE_USED = HSD_Pad_X | HSD_Pad_Y;
 
 // From Ness's Yo-Yo collision check
 
-/// @todo These (and #CollData::x134_envFlags) should be a bitfield struct
+/// @todo These (and #CollData::env_flags) should be a bitfield struct
 #define MPCOLL_RIGHTWALL 0x3F ///< Bits 0-5
 #define MPCOLL_FLAGS_B5 (1 << 5)
 #define MPCOLL_LEFTWALL 0xFC0 ///< Bits 6-11

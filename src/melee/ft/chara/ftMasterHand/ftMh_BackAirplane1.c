@@ -47,14 +47,14 @@ static void doAnim(HSD_GObj* gobj)
     }
 
     fp->cur_pos.y = attr->x5C;
-    fp->x80_self_vel.x = fp->x80_self_vel.y = fp->x80_self_vel.z = 0;
+    fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
 }
 
 void ftMh_BackAirplane2_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        fp->x80_self_vel.x = 0;
+        fp->self_vel.x = 0;
         ftMh_MS_368_80153A64(gobj);
     }
 }

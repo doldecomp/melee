@@ -36,7 +36,7 @@ void ftMh_TagCrush_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_382_801552F8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->x2204_ftcmd_var1 = 0;
+    fp->cmd_vars[1] = 0;
     {
         HSD_GObj* gobj_2 = ftBossLib_8015C3E8(28);
         if (!ftBossLib_8015C31C()) {

@@ -6,7 +6,7 @@
 
 static inline ftMario_DatAttrs* GetMarioAttr(Fighter* fp)
 {
-    ftMario_DatAttrs* mario_attr = fp->x2D4_specialAttributes;
+    ftMario_DatAttrs* mario_attr = fp->dat_attrs;
     return mario_attr;
 }
 

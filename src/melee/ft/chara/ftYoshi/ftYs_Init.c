@@ -423,7 +423,7 @@ void ftYs_Init_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
 void ftYs_Init_8012B8A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftYoshiAttributes* attr = fp->x2D4_specialAttributes;
+    ftYoshiAttributes* attr = fp->dat_attrs;
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
@@ -493,7 +493,7 @@ void ftYs_Init_8012BA8C(HSD_GObj* gobj)
 
 f32 ftYs_Init_8012BAC0(Fighter* fp)
 {
-    ftYoshiAttributes* attr = fp->x2D4_specialAttributes;
+    ftYoshiAttributes* attr = fp->dat_attrs;
     return attr->x120;
 }
 

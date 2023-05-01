@@ -17,24 +17,24 @@
 #define HSD_GOBJ_CLASS_EFFECT 0x8
 
 struct HSD_GObj {
-    /* 0x00 */ u16 classifier;
-    /* 0x02 */ u8 p_link;
-    /* 0x03 */ u8 gx_link;
-    /* 0x04 */ u8 p_priority;
-    /* 0x05 */ u8 render_priority;
-    /* 0x06 */ u8 obj_kind;
-    /* 0x07 */ u8 user_data_kind;
-    /* 0x08 */ HSD_GObj* next;
-    /* 0x0C */ HSD_GObj* prev;
-    /* 0x10 */ HSD_GObj* next_gx;
-    /* 0x14 */ HSD_GObj* prev_gx;
-    /* 0x18 */ HSD_GObjProc* proc;
-    /* 0x1C */ void (*render_cb)(HSD_GObj* gobj, s32 code);
-    /* 0x20 */ u64 gxlink_prios;
-    /* 0x28 */ void* hsd_obj;
-    /* 0x2C */ void* user_data;
-    /* 0x30 */ void (*user_data_remove_func)(void* data);
-    /* 0x34 */ void* x34_unk;
+    /*  +0 */ u16 classifier;
+    /*  +2 */ u8 p_link;
+    /*  +3 */ u8 gx_link;
+    /*  +4 */ u8 p_priority;
+    /*  +5 */ u8 render_priority;
+    /*  +6 */ u8 obj_kind;
+    /*  +7 */ u8 user_data_kind;
+    /*  +8 */ HSD_GObj* next;
+    /*  +C */ HSD_GObj* prev;
+    /* +10 */ HSD_GObj* next_gx;
+    /* +14 */ HSD_GObj* prev_gx;
+    /* +18 */ HSD_GObjProc* proc;
+    /* +1C */ void (*render_cb)(HSD_GObj* gobj, s32 code);
+    /* +20 */ u64 gxlink_prios;
+    /* +28 */ void* hsd_obj;
+    /* +2C */ void* user_data;
+    /* +30 */ void (*user_data_remove_func)(void* data);
+    /* +34 */ void* x34_unk;
 };
 
 typedef struct _HSD_GObjLibInitDataType {

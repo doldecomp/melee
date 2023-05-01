@@ -18,14 +18,14 @@
 void ftMs_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
-    fp0->x80_self_vel.y = 0;
+    fp0->self_vel.y = 0;
 
     Fighter_ChangeMotionState(gobj, 369, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 
     {
         Fighter* fp1 = GET_FIGHTER(gobj);
-        fp1->x2204_ftcmd_var1 = 0;
+        fp1->cmd_vars[1] = 0;
         fp1->mv.ms.speciallw.x0 = 0;
     }
 }
@@ -39,9 +39,9 @@ void ftMs_SpecialAirLw_Enter(HSD_GObj* gobj)
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        MarsAttributes* attr = fp->x2D4_specialAttributes;
-        fp->x80_self_vel.x /= attr->x4C;
-        fp->x80_self_vel.y = 0;
+        MarsAttributes* attr = fp->dat_attrs;
+        fp->self_vel.x /= attr->x4C;
+        fp->self_vel.y = 0;
     }
 
     Fighter_ChangeMotionState(gobj, 371, 0, NULL, 0, 1, 0);
@@ -50,7 +50,7 @@ void ftMs_SpecialAirLw_Enter(HSD_GObj* gobj)
     {
         Fighter* fp;
         fp = GET_FIGHTER(gobj);
-        fp->x2204_ftcmd_var1 = 0;
+        fp->cmd_vars[1] = 0;
         fp->mv.ms.speciallw.x0 = 0;
     }
 }
@@ -65,13 +65,13 @@ void ftMs_SpecialLw_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* attr = getFtSpecialAttrsD(fp);
 
-    if (fp->x2204_ftcmd_var1 == 1) {
-        fp->x2204_ftcmd_var1 = 2;
+    if (fp->cmd_vars[1] == 1) {
+        fp->cmd_vars[1] = 2;
         ftColl_8007B1B8(gobj, &attr->x64, &ftMs_SpecialLw_80139140);
         fp->x221B_b1 = true;
         fp->x19B4_shieldUnk = attr->x60;
         fp->x19B8_shieldUnk = attr->x60;
-    } else if (fp->x2204_ftcmd_var1 == 0) {
+    } else if (fp->cmd_vars[1] == 0) {
         fp->x221B_b0 = false;
     }
 
@@ -90,13 +90,13 @@ void ftMs_SpecialAirLw_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* attr = getFtSpecialAttrsD(fp);
 
-    if (fp->x2204_ftcmd_var1 == 1) {
-        fp->x2204_ftcmd_var1 = 2;
+    if (fp->cmd_vars[1] == 1) {
+        fp->cmd_vars[1] = 2;
         ftColl_8007B1B8(gobj, &attr->x64, &ftMs_SpecialLw_80139140);
         fp->x221B_b1 = true;
         fp->x19B4_shieldUnk = attr->x60;
         fp->x19B8_shieldUnk = attr->x60;
-    } else if (fp->x2204_ftcmd_var1 == 0) {
+    } else if (fp->cmd_vars[1] == 0) {
         fp->x221B_b0 = false;
     }
 
@@ -158,14 +158,14 @@ void ftMs_SpecialLw_80138D38(HSD_GObj* gobj)
         Fighter* fp = gobj->user_data;
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 371, 0x0C4C508C, NULL,
-                                  fp->x894_currentAnimFrame, 1, 0);
+                                  fp->cur_anim_frame, 1, 0);
     }
 
     {
         Fighter* fp = gobj->user_data;
         MarsAttributes* attr = getFtSpecialAttrsD(fp);
 
-        if (fp->x2204_ftcmd_var1 == 2) {
+        if (fp->cmd_vars[1] == 2) {
             ftColl_8007B1B8(gobj, &attr->x64, &ftMs_SpecialLw_80139140);
             fp->x221B_b1 = true;
         }
@@ -183,14 +183,14 @@ void ftMs_SpecialLw_80138DD0(HSD_GObj* gobj)
         Fighter* fp0 = gobj->user_data;
         ftCommon_8007D7FC(fp0);
         Fighter_ChangeMotionState(gobj, 369, 0x0C4C508C, NULL,
-                                  fp0->x894_currentAnimFrame, 1, 0);
+                                  fp0->cur_anim_frame, 1, 0);
     }
 
     {
         Fighter* fp = gobj->user_data;
         MarsAttributes* attr = getFtSpecialAttrsD(fp);
 
-        if (fp->x2204_ftcmd_var1 == 2) {
+        if (fp->cmd_vars[1] == 2) {
             ftColl_8007B1B8(gobj, &attr->x64, &ftMs_SpecialLw_80139140);
             fp->x221B_b1 = true;
         }
@@ -332,8 +332,8 @@ void ftMs_SpecialLw_80139080(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 372, 0x0C4C508E, NULL,
-                              fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 372, 0x0C4C508E, NULL, fp->cur_anim_frame,
+                              1, 0);
 }
 
 // 801390E0 00135CC0
@@ -342,8 +342,8 @@ void ftMs_SpecialLw_801390E0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 370, 0x0C4C508E, NULL,
-                              fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 370, 0x0C4C508E, NULL, fp->cur_anim_frame,
+                              1, 0);
 }
 
 void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
@@ -363,7 +363,7 @@ void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
 
     {
         Fighter* fp = gobj->user_data;
-        MarsAttributes* attr = fp->x2D4_specialAttributes;
+        MarsAttributes* attr = fp->dat_attrs;
 
         fp->facing_dir = fp->x19AC;
         temp_r0 = (s32) fp->x19A4;

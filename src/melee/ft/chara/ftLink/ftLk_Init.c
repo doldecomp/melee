@@ -336,7 +336,7 @@ void ftLk_Init_OnLoad(HSD_GObj* gobj)
     link_attr->x54 = lbMthp_8001E8F8(ftData_80085E50(fp, 72));
     PUSH_ATTRS(fp, ftLinkAttributes);
 
-    link_attr = fp->x2D4_specialAttributes;
+    link_attr = fp->dat_attrs;
     it_8026B3F8(item_list[0], link_attr->x48);
     it_8026B3F8(item_list[1], link_attr->x2C);
     it_8026B3F8(item_list[2], link_attr->xBC);

@@ -21,7 +21,7 @@
 static void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    int cur_frame = fp->x894_currentAnimFrame;
+    int cur_frame = fp->cur_anim_frame;
     FighterKind kind = ftLib_800872A4(gobj);
 
     switch (kind) {
@@ -42,7 +42,7 @@ static void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
 /// Calculate angle from control stick input - inline
 static f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
 {
-    ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* da = fp->dat_attrs;
     {
         /// @todo Join declarations and assignments somehow.
         f32 max;
@@ -75,9 +75,9 @@ void ftCa_SpecialN_Enter(HSD_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[4];
 #endif
-    fp->x2204_ftcmd_var1 = 0;
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x2210_ThrowFlags.flags = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+    fp->throw_flags.flags = 0;
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialN, 0, NULL, 0, 1, 0);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -91,9 +91,9 @@ void ftCa_SpecialAirN_Enter(HSD_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-    fp->x2204_ftcmd_var1 = 0;
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x2210_ThrowFlags.flags = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+    fp->throw_flags.flags = 0;
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirN, 0, NULL, 0, 1, 0);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -123,13 +123,12 @@ void ftCa_SpecialAirN_IASA(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     /// @todo Fake double assignment.
     ftCaptain_DatAttrs* da = da = getFtSpecialAttrs(fp);
-    if (fp->x2200_ftcmd_var0 != 0) {
-        fp->x2200_ftcmd_var0 = 0;
+    if (fp->cmd_vars[0] != 0) {
+        fp->cmd_vars[0] = 0;
         {
             f32 vel = ftCaptain_SpecialN_GetAngleVel(fp);
-            fp->x80_self_vel.y = da->specialn_vel_x * sinf(vel);
-            fp->x80_self_vel.x =
-                da->specialn_vel_x * (fp->facing_dir * cosf(vel));
+            fp->self_vel.y = da->specialn_vel_x * sinf(vel);
+            fp->self_vel.x = da->specialn_vel_x * (fp->facing_dir * cosf(vel));
         }
     }
 }
@@ -138,8 +137,8 @@ static inline void doPhys(HSD_GObj* gobj)
 {
     bool throw_b1;
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x2210_ThrowFlags.b1) {
-        fp->x2210_ThrowFlags.b1 = false;
+    if (fp->throw_flags.b1) {
+        fp->throw_flags.b1 = false;
         throw_b1 = true;
     } else {
         throw_b1 = false;
@@ -180,14 +179,14 @@ void ftCa_SpecialAirN_Phys(HSD_GObj* gobj)
     /// @todo Fake double assignment.
     ftCaptain_DatAttrs* da = da = getFtSpecialAttrs(fp);
     doPhys(gobj);
-    switch (fp->x2204_ftcmd_var1) {
+    switch (fp->cmd_vars[1]) {
     case 0: {
         ft_80084EEC(gobj);
         return;
     }
     case 1: {
-        fp->x80_self_vel.y *= da->specialn_vel_mul;
-        fp->x80_self_vel.x *= da->specialn_vel_mul;
+        fp->self_vel.y *= da->specialn_vel_mul;
+        fp->self_vel.x *= da->specialn_vel_mul;
         return;
     }
     case 2: {
@@ -211,7 +210,7 @@ void ftCa_SpecialN_Coll(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirN, transition_flags,
-                                  NULL, fp->x894_currentAnimFrame, 1, 0);
+                                  NULL, fp->cur_anim_frame, 1, 0);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         ftCommon_8007D468(fp);
@@ -224,7 +223,7 @@ void ftCa_SpecialAirN_Coll(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialN, transition_flags,
-                                  NULL, fp->x894_currentAnimFrame, 1, 0);
+                                  NULL, fp->cur_anim_frame, 1, 0);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }

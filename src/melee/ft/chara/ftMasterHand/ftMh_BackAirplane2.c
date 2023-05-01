@@ -31,5 +31,5 @@ void ftMh_MS_368_80153A64(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
     fp->cur_pos.x = attr->x60;
     fp->cur_pos.y = attr->x64;
-    fp->x80_self_vel.x = fp->x80_self_vel.y = fp->x80_self_vel.z = 0;
+    fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
 }

@@ -49,15 +49,15 @@ void ftMh_MS_376_80154E78(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftMh_MS_Throw, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
-    fp->x2200_ftcmd_var0 = 0;
+    fp->cmd_vars[0] = 0;
 }
 
 void ftMh_Throw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x2200_ftcmd_var0 != 0) {
-        fp->x2200_ftcmd_var0 = 0;
+    if (fp->cmd_vars[0] != 0) {
+        fp->cmd_vars[0] = 0;
         ftMh_CaptureWaitMasterHand_80155D6C(fp->x1A58_interactedFighter,
                                             ftCo_MS_ThrownMasterHand);
         if (fp->x1A58_interactedFighter != 0) {

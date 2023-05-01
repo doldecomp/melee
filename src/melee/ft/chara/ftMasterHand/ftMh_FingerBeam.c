@@ -51,7 +51,7 @@ void ftMh_MS_361_80152CD8(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftMh_MS_FingerBeamLoop, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftMh_MS_362_80152E28;
-    fp->x2200_ftcmd_var0 = 1;
+    fp->cmd_vars[0] = 1;
 }
 
 static void ftMh_MS_362_80152F80(HSD_GObj* gobj);
@@ -91,7 +91,7 @@ void ftMh_MS_362_80152E28(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x2200_ftcmd_var0 == 0) {
+    if (fp->cmd_vars[0] == 0) {
         return;
     }
 
@@ -112,7 +112,7 @@ void ftMh_MS_362_80152E28(HSD_GObj* gobj)
         fp->mv.mh.unk0.x28 = lbAudioAx_800237A8(320004, 127, 64);
         fp->mv.mh.unk0.x2C = lbAudioAx_800237A8(320005, 127, 64);
         fp->mv.mh.unk0.x30 = lbAudioAx_800237A8(320006, 127, 64);
-        fp->x2200_ftcmd_var0 = 0;
+        fp->cmd_vars[0] = 0;
     }
 }
 

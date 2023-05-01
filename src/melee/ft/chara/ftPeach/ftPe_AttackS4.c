@@ -15,7 +15,7 @@ void ftPe_AttackS4_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2218_b0 = false;
-    fp->x2200_ftcmd_var0 = 0;
+    fp->cmd_vars[0] = 0;
     {
         FtMotionId msid;
         do {

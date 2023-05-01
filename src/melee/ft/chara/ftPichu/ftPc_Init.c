@@ -343,7 +343,7 @@ void ftPc_Init_OnLoad(HSD_GObj* gobj)
     ftPk_Init_OnLoadForPichu(fp);
 
     {
-        ftPichuAttributes* attrs = fp->x2D4_specialAttributes;
+        ftPichuAttributes* attrs = fp->dat_attrs;
         it_8026B3F8(items[0], attrs->xDC);
         it_8026B3F8(items[1], attrs->x14);
         it_8026B3F8(items[2], attrs->x18);

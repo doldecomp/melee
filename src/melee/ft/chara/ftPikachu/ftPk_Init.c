@@ -347,7 +347,7 @@ void ftPk_Init_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(fp, ftPikachuAttributes);
 
     {
-        ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
+        ftPikachuAttributes* pika_attr = fp->dat_attrs;
         it_8026B3F8(item_list[0], pika_attr->xDC);
         it_8026B3F8(item_list[1], pika_attr->x14);
         it_8026B3F8(item_list[2], pika_attr->x18);

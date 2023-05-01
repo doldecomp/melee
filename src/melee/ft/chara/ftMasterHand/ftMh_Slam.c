@@ -17,8 +17,8 @@ void ftMh_Slam_Anim(HSD_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-    if (fp->x2200_ftcmd_var0 != 0) {
-        fp->x2200_ftcmd_var0 = 0;
+    if (fp->cmd_vars[0] != 0) {
+        fp->cmd_vars[0] = 0;
         ftMh_CaptureWaitMasterHand_80155D6C(fp->x1A58_interactedFighter,
                                             ftCo_MS_ThrownMasterHand);
         if (fp->x1A58_interactedFighter != NULL) {

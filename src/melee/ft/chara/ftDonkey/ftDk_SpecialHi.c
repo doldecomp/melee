@@ -27,12 +27,11 @@ void ftDk_SpecialHi_Enter(HSD_GObj* gobj)
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
     Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialHi, 0, NULL, 0, 1, 0);
     setCallbacks(gobj);
-    fp->x2200_ftcmd_var0 = fp->x2204_ftcmd_var1 = fp->x2208_ftcmd_var2 =
-        fp->x220C_ftcmd_var3 = 0;
+    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
     ftCommon_8007CC78(fp,
                       donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
-    fp->x80_self_vel.x = fp->gr_vel;
-    fp->x80_self_vel.y = 0;
+    fp->self_vel.x = fp->gr_vel;
+    fp->self_vel.y = 0;
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
     ftAnim_8006EBA4(gobj);
     efSync_Spawn(1226, gobj, fp->parts[FtPart_TopN].x0_jobj);
@@ -41,18 +40,17 @@ void ftDk_SpecialHi_Enter(HSD_GObj* gobj)
 void ftDk_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
+    ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
     Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirHi, 0, NULL, 0, 1, 0);
     setCallbacks(gobj);
-    fp->x2200_ftcmd_var0 = fp->x2204_ftcmd_var1 = fp->x2208_ftcmd_var2 =
-        fp->x220C_ftcmd_var3 = 0;
+    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
     ftCommon_8007D440(fp,
                       donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
-    fp->x80_self_vel.y = donkey_attr->SpecialHi.x4C_AERIAL_VERTICAL_VELOCITY;
+    fp->self_vel.y = donkey_attr->SpecialHi.x4C_AERIAL_VERTICAL_VELOCITY;
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
     ftAnim_8006EBA4(gobj);
     efSync_Spawn(1226, gobj, fp->parts[FtPart_TopN].x0_jobj);
@@ -68,7 +66,7 @@ void ftDk_SpecialHi_Anim(HSD_GObj* gobj)
 void ftDk_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
+    ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
@@ -104,9 +102,9 @@ void ftDk_SpecialAirHi_Phys(HSD_GObj* gobj)
     u8 _[8];
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
-    ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
+    ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
     f32 grav_mul;
-    if (fp->x2200_ftcmd_var0) {
+    if (fp->cmd_vars[0]) {
         grav_mul = 1;
     } else {
         grav_mul = donkey_attr->SpecialHi.x50_AERIAL_GRAVITY;
@@ -120,12 +118,12 @@ void ftDk_SpecialAirHi_Phys(HSD_GObj* gobj)
 void ftDk_SpecialHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
+    ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
 
     if (!ft_80082708(gobj)) {
         ftCommon_8007D60C(fp);
         Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirHi, 0x0C4C5080, NULL,
-                                  fp->x894_currentAnimFrame, 1, 0);
+                                  fp->cur_anim_frame, 1, 0);
         setCallbacks(gobj);
         ftCommon_8007D440(
             fp, donkey_attr->SpecialHi.x58_AERIAL_HORIZONTAL_VELOCITY);
@@ -135,16 +133,16 @@ void ftDk_SpecialHi_Coll(HSD_GObj* gobj)
 void ftDk_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
+    ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-    if (fp->x80_self_vel.y >= 0) {
+    if (fp->self_vel.y >= 0) {
         if (ft_80081D0C(gobj)) {
             ftCommon_8007D7FC(fp);
             Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialHi, 0x0C4C5080,
-                                      NULL, fp->x894_currentAnimFrame, 1, 0);
+                                      NULL, fp->cur_anim_frame, 1, 0);
             setCallbacks(gobj);
             ftCommon_8007CC78(
                 fp, donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
@@ -153,7 +151,7 @@ void ftDk_SpecialAirHi_Coll(HSD_GObj* gobj)
         if (ft_CheckGroundAndLedge(gobj, 0)) {
             ftCommon_8007D7FC(fp);
             Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialHi, 0x0C4C5080,
-                                      NULL, fp->x894_currentAnimFrame, 1, 0);
+                                      NULL, fp->cur_anim_frame, 1, 0);
             setCallbacks(gobj);
             ftCommon_8007CC78(
                 fp, donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);

@@ -304,7 +304,7 @@ void ftGk_Init_OnDeath(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftKoopaAttributes* koopaAttr = fp->x2D4_specialAttributes;
+    ftKoopaAttributes* koopaAttr = fp->dat_attrs;
 
     ftParts_80074A4C(gobj, 0, 0);
     fp->dmg.x18B0 = koopaAttr->x0;

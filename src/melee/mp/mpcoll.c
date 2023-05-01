@@ -125,7 +125,7 @@ void mpColl_80041EE4(CollData* cd)
     cd->x34_flags.bits.b7 = 0;
     cd->x35_flags.bits.b0 = 1;
     cd->x34_flags.bits.b1234 = 0;
-    cd->x134_envFlags = 0;
+    cd->env_flags = 0;
     cd->x130_flags = 0;
     cd->x10_vec = cd->x4_vec;
     cd->x1C_vec = cd->x4_vec;
@@ -695,13 +695,13 @@ void mpColl_80043324(CollData* arg0, s32 arg1, s32 arg2)
                 (arg0->x14C_ground.unk & 0xFFFFFF00) | (temp_r3 & 0xFF);
         }
     }
-    if ((arg1 != 0) || (arg0->x134_envFlags & 0x800000) ||
-        (arg0->x134_envFlags & 0x100000) || (arg0->x134_envFlags & 0x200000))
+    if ((arg1 != 0) || (arg0->env_flags & 0x800000) ||
+        (arg0->env_flags & 0x100000) || (arg0->env_flags & 0x200000))
     {
         func_80043324_inline(arg0, arg0->x14C_ground.index, arg2,
                              arg0->x4_vec.y - arg0->x1C_vec.y);
     }
-    if (arg0->x134_envFlags & 0x6000) {
+    if (arg0->env_flags & 0x6000) {
         func_80043324_inline2(arg0, arg0->x188_ceiling.index, arg2,
                               arg0->x4_vec.y - arg0->x1C_vec.y);
     }

@@ -19,11 +19,11 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
 
     // is a walljump character? is airborne?
     if (fp0->x2224_flag.bits.b7) {
-        CollData* coll_data = &fp0->x6F0_collData;
-        if ((fp0->x6F0_collData.x134_envFlags & MPCOLL_FLAGS_B11) ||
-            (coll_data->x134_envFlags & MPCOLL_FLAGS_B5))
+        CollData* coll_data = &fp0->coll_data;
+        if ((fp0->coll_data.env_flags & MPCOLL_FLAGS_B11) ||
+            (coll_data->env_flags & MPCOLL_FLAGS_B5))
         {
-            s32 env_flags = coll_data->x134_envFlags & MPCOLL_FLAGS_B11;
+            s32 env_flags = coll_data->env_flags & MPCOLL_FLAGS_B11;
 
             // side of the collision?
             f32 wall_dir = env_flags ? -1.f : +1.f;

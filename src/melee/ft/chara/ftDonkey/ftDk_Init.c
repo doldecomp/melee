@@ -608,7 +608,7 @@ void ftDk_Init_OnItemDrop(HSD_GObj* gobj, bool arg1)
 void ftDk_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftDonkeyAttributes* attr = fp->x2D4_specialAttributes;
+    ftDonkeyAttributes* attr = fp->dat_attrs;
     if (fp->fv.dk.x222C == attr->SpecialN.x2C_MAX_ARM_SWINGS) {
         ft_800BFFD0(fp, 57, 0);
     }
@@ -625,7 +625,7 @@ void ftDk_Init_OnLoad(HSD_GObj* gobj)
     ftData_attr->x10 = lbMthp_8001E8F8(ftData_80085E50(fp, 298));
     PUSH_ATTRS(fp, ftDonkeyAttributes);
     fp->x2222_b0 = true;
-    fp->x2CC = fp->x2D4_specialAttributes;
+    fp->x2CC = fp->dat_attrs;
 }
 
 void ftDk_Init_LoadSpecialAttrs(HSD_GObj* gobj)
@@ -646,13 +646,13 @@ void ftDk_Init_OnKnockbackExit(HSD_GObj* gobj)
 void ftDk_Init_8010DB3C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
-    CollData* colldata = &fp->x6F0_collData;
+    ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
+    CollData* colldata = &fp->coll_data;
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-    if (ftCheckThrowB3(fp) && (colldata->x134_envFlags & 98304)) {
+    if (ftCheckThrowB3(fp) && (colldata->env_flags & 98304)) {
         Vec3 vec_list[4];
         int i;
         for (i = 0; i < 4; i++) {

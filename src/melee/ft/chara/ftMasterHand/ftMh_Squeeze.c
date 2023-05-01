@@ -14,7 +14,7 @@ void ftMh_MS_378_80154A78(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
-    fp->x2204_ftcmd_var1 = 0;
+    fp->cmd_vars[1] = 0;
     Fighter_ChangeMotionState(gobj, ftMh_MS_Squeeze, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     fp->x2222_b2 = true;
@@ -30,9 +30,9 @@ void ftMh_Squeeze_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x2204_ftcmd_var1 != 0) {
+    if (fp->cmd_vars[1] != 0) {
         ftBossLib_8015C5F8(gobj);
-        fp->x2204_ftcmd_var1 = 0;
+        fp->cmd_vars[1] = 0;
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -67,8 +67,8 @@ void ftMh_Squeeze_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->mv.mh.unk0.x18 == 0) {
-        fp->x80_self_vel.z = 0;
-        fp->x80_self_vel.y = 0;
-        fp->x80_self_vel.x = 0;
+        fp->self_vel.z = 0;
+        fp->self_vel.y = 0;
+        fp->self_vel.x = 0;
     }
 }

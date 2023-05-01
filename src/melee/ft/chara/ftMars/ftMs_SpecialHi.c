@@ -14,10 +14,10 @@ void ftMs_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->x2208_ftcmd_var2 = 0;
-    fp->x2204_ftcmd_var1 = 0;
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x2210_ThrowFlags.flags = 0;
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+    fp->throw_flags.flags = 0;
     // MotionStateChange
     Fighter_ChangeMotionState(gobj, 0x16F, 0, NULL, 0.0f, 1.0f, 0.0f);
     // MS_AnimationFrameUpdate&More
@@ -29,19 +29,19 @@ void ftMs_SpecialHi_Enter(HSD_GObj* gobj)
 void ftMs_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    MarsAttributes* attr = fp->x2D4_specialAttributes;
+    MarsAttributes* attr = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    fp->x2208_ftcmd_var2 = 0;
-    fp->x2204_ftcmd_var1 = 0;
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x2210_ThrowFlags.flags = 0;
-    fp->x80_self_vel.y = 0.0f;
-    fp->x80_self_vel.x *= attr->x3C;
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+    fp->throw_flags.flags = 0;
+    fp->self_vel.y = 0.0f;
+    fp->self_vel.x *= attr->x3C;
     // MotionStateChange
     Fighter_ChangeMotionState(gobj, 0x170, 0, NULL, 0.0f, 1.0f, 0.0f);
     // MS_AnimationFrameUpdate&More
@@ -53,7 +53,7 @@ void ftMs_SpecialAirHi_Enter(HSD_GObj* gobj)
 void ftMs_SpecialHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    MarsAttributes* attr = fp->x2D4_specialAttributes;
+    MarsAttributes* attr = fp->dat_attrs;
 
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -67,7 +67,7 @@ void ftMs_SpecialHi_Anim(HSD_GObj* gobj)
 void ftMs_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    MarsAttributes* attr = fp->x2D4_specialAttributes;
+    MarsAttributes* attr = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -88,9 +88,9 @@ void ftMs_SpecialAirHi_Anim(HSD_GObj* gobj)
 void ftMs_SpecialHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    MarsAttributes* attr = fp->x2D4_specialAttributes;
+    MarsAttributes* attr = fp->dat_attrs;
     f32 abs_lstick_x = abs(fp->input.x620_lstick_x);
-    if (fp->x2200_ftcmd_var0 == 0 && abs_lstick_x > attr->x34) {
+    if (fp->cmd_vars[0] == 0 && abs_lstick_x > attr->x34) {
         f32 temp_f1 =
             attr->x38 * ((abs_lstick_x - attr->x34) / (1.0 /*d*/ - attr->x34));
         temp_f1 = (fp->input.x620_lstick_x > 0.0f)
@@ -113,13 +113,13 @@ void ftMs_SpecialHi_IASA(HSD_GObj* gobj)
 void ftMs_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    MarsAttributes* attr = fp->x2D4_specialAttributes;
+    MarsAttributes* attr = fp->dat_attrs;
     f32 abs_lstick_x = abs(fp->input.x620_lstick_x);
 /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[16];
 #endif
-    if (fp->x2200_ftcmd_var0 == 0 && abs_lstick_x > attr->x34) {
+    if (fp->cmd_vars[0] == 0 && abs_lstick_x > attr->x34) {
         f32 temp_f1 =
             attr->x38 * ((abs_lstick_x - attr->x34) / (1.0 /*d*/ - attr->x34));
         temp_f1 = (fp->input.x620_lstick_x > 0.0f)
@@ -156,21 +156,21 @@ void ftMs_SpecialHi_Phys(HSD_GObj* gobj)
     fp->ground_or_air;
 
     if (fp->ground_or_air == GA_Air) {
-        if (fp->x2208_ftcmd_var2 == 0) {
+        if (fp->cmd_vars[2] == 0) {
             ft_80085154(gobj);
-            if (fp->x80_self_vel.x < 0.0f) {
+            if (fp->self_vel.x < 0.0f) {
                 num = -1;
             } else {
                 num = 1;
             }
             if (fp->facing_dir != num) {
-                fp->x80_self_vel.x *= -1.0f;
+                fp->self_vel.x *= -1.0f;
             }
             if (fp->x6A4_transNOffset.y < 0.0f) {
-                fp->x2208_ftcmd_var2 = 1;
+                fp->cmd_vars[2] = 1;
             }
         } else {
-            attr = fp->x2D4_specialAttributes;
+            attr = fp->dat_attrs;
             attr2 = &fp->x110_attr;
             ftCommon_8007D494(fp, attr->x44, attr->x48);
             ftCommon_8007D344(fp, 0.0f,
@@ -187,7 +187,7 @@ void ftMs_SpecialHi_Phys(HSD_GObj* gobj)
 void ftMs_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    MarsAttributes* attr = fp->x2D4_specialAttributes;
+    MarsAttributes* attr = fp->dat_attrs;
     struct attr* attr2 = &fp->x110_attr;
     s32 num;
 
@@ -196,22 +196,22 @@ void ftMs_SpecialAirHi_Phys(HSD_GObj* gobj)
     u8 _[40];
 #endif
 
-    if (fp->x2200_ftcmd_var0 != 0) {
-        if (fp->x2208_ftcmd_var2 == 0) {
+    if (fp->cmd_vars[0] != 0) {
+        if (fp->cmd_vars[2] == 0) {
             ft_80085154(gobj);
-            fp->x80_self_vel.x *= attr->x40;
-            fp->x80_self_vel.y *= attr->x40;
-            fp->x80_self_vel.z *= attr->x40;
-            if (fp->x80_self_vel.x < 0.0f) {
+            fp->self_vel.x *= attr->x40;
+            fp->self_vel.y *= attr->x40;
+            fp->self_vel.z *= attr->x40;
+            if (fp->self_vel.x < 0.0f) {
                 num = -1;
             } else {
                 num = 1;
             }
             if (fp->facing_dir != num) {
-                fp->x80_self_vel.x *= -1.0f;
+                fp->self_vel.x *= -1.0f;
             }
             if (fp->x6A4_transNOffset.y < 0.0f) {
-                fp->x2208_ftcmd_var2 = 1;
+                fp->cmd_vars[2] = 1;
             }
         } else {
             ftCommon_8007D494(fp, attr->x44, attr->x48);
@@ -231,7 +231,7 @@ void ftMs_SpecialAirHi_Phys(HSD_GObj* gobj)
 void ftMs_SpecialHi_80138884(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    MarsAttributes* attr = fp->x2D4_specialAttributes;
+    MarsAttributes* attr = fp->dat_attrs;
     ft_800D5CB0(gobj, 0, attr->x2C);
 }
 
@@ -241,10 +241,10 @@ void ftMs_SpecialHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Air) {
-        if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
+        if (fp->cmd_vars[0] == 0 || fp->self_vel.y >= 0.0f) {
             ft_80083B68(gobj);
-        } else if (fp->x2204_ftcmd_var1 == 0) {
-            fp->x2204_ftcmd_var1 = 1;
+        } else if (fp->cmd_vars[1] == 0) {
+            fp->cmd_vars[1] = 1;
             ft_80083B68(gobj);
         } else {
             ft_800831CC(gobj, &ft_80096CC8, &ftMs_SpecialHi_80138884);
@@ -260,10 +260,10 @@ void ftMs_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Air) {
-        if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
+        if (fp->cmd_vars[0] == 0 || fp->self_vel.y >= 0.0f) {
             ft_80083B68(gobj);
-        } else if (fp->x2204_ftcmd_var1 == 0) {
-            fp->x2204_ftcmd_var1 = 1;
+        } else if (fp->cmd_vars[1] == 0) {
+            fp->cmd_vars[1] = 1;
             ft_80083B68(gobj);
         } else {
             ft_800831CC(gobj, &ft_80096CC8, &ftMs_SpecialHi_80138884);

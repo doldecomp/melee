@@ -488,7 +488,7 @@ void ftFx_Init_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(fp, ftFoxAttributes);
 
     {
-        ftFoxAttributes* fox_attr = fp->x2D4_specialAttributes;
+        ftFoxAttributes* fox_attr = fp->dat_attrs;
         it_8026B3F8(item_list[0], fox_attr->x1C_FOX_BLASTER_SHOT_ITKIND);
         it_8026B3F8(item_list[1], fox_attr->x20_FOX_BLASTER_GUN_ITKIND);
         it_8026B3F8(item_list[2], It_Kind_Fox_Illusion);

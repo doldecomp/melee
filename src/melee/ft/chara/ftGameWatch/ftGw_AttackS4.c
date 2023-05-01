@@ -116,7 +116,7 @@ void ftGw_AttackS4_Enter(HSD_GObj* gobj)
 #endif
 
     fp->x2218_b0 = 0;
-    fp->x2200_ftcmd_var0 = 0;
+    fp->cmd_vars[0] = 0;
     Fighter_ChangeMotionState(gobj, ftGw_MS_AttackS4, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);

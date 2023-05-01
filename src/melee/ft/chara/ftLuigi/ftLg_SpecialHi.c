@@ -19,8 +19,8 @@ void ftLg_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x2210_ThrowFlags.flags = 0;
+    fp->cmd_vars[0] = 0;
+    fp->throw_flags.flags = 0;
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialHi, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
@@ -30,17 +30,17 @@ void ftLg_SpecialHi_Enter(HSD_GObj* gobj)
 void ftLg_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
+    ftLuigiAttributes* luigiAttrs = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[4];
 #endif
 
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x2210_ThrowFlags.flags = 0;
-    fp->x80_self_vel.y = 0.0f;
-    fp->x80_self_vel.x *= luigiAttrs->x64_LUIGI_SUPERJUMP_VEL_X;
+    fp->cmd_vars[0] = 0;
+    fp->throw_flags.flags = 0;
+    fp->self_vel.y = 0.0f;
+    fp->self_vel.x *= luigiAttrs->x64_LUIGI_SUPERJUMP_VEL_X;
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirHi, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
@@ -49,7 +49,7 @@ void ftLg_SpecialAirHi_Enter(HSD_GObj* gobj)
 /// Luigi's grounded Super Jump Punch Animation callback
 void ftLg_SpecialHi_Anim(HSD_GObj* gobj)
 {
-    ftLuigiAttributes* luigiAttrs = GET_FIGHTER(gobj)->x2D4_specialAttributes;
+    ftLuigiAttributes* luigiAttrs = GET_FIGHTER(gobj)->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -66,7 +66,7 @@ void ftLg_SpecialHi_Anim(HSD_GObj* gobj)
 /// Luigi's aerial Super Jump Punch Animation callback
 void ftLg_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
-    ftLuigiAttributes* luigiAttrs = GET_FIGHTER(gobj)->x2D4_specialAttributes;
+    ftLuigiAttributes* luigiAttrs = GET_FIGHTER(gobj)->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -98,9 +98,9 @@ void ftLg_SpecialHi_IASA(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     stick_x = fp->input.x620_lstick_x;
-    luigiAttrs = fp->x2D4_specialAttributes;
+    luigiAttrs = fp->dat_attrs;
     stick_range = stickGetDir(fp->input.x620_lstick_x, 0.0f);
-    if ((u32) fp->x2200_ftcmd_var0 == 0U) {
+    if ((u32) fp->cmd_vars[0] == 0U) {
         superJump_StickRange =
             luigiAttrs->x5C_LUIGI_SUPERJUMP_MOMENTUM_STICK_RANGE;
         if (stick_range > superJump_StickRange) {
@@ -145,7 +145,7 @@ void ftLg_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     f32 stick_x = fp->input.x620_lstick_x;
-    ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
+    ftLuigiAttributes* luigiAttrs = fp->dat_attrs;
     f32 stick_range = stickGetDir(fp->input.x620_lstick_x, 0.0f);
     f32 temp_range;
     f32 superJump_StickRange;
@@ -159,7 +159,7 @@ void ftLg_SpecialAirHi_IASA(HSD_GObj* gobj)
     u8 _[12];
 #endif
 
-    if (fp->x2200_ftcmd_var0 == 0) {
+    if (fp->cmd_vars[0] == 0) {
         superJump_StickRange =
             luigiAttrs->x5C_LUIGI_SUPERJUMP_MOMENTUM_STICK_RANGE;
         if (stick_range > superJump_StickRange) {
@@ -220,11 +220,11 @@ void ftLg_SpecialAirHi_Phys(HSD_GObj* gobj)
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
     attr* ftAttrs = &fp->x110_attr;
 
-    if ((u32) fp->x2200_ftcmd_var0 != 0U) {
+    if ((u32) fp->cmd_vars[0] != 0U) {
         ft_80085154(gobj);
-        fp->x80_self_vel.x *= luigiAttrs->x6C_LUIGI_SUPERJUMP_VEL_Y;
-        fp->x80_self_vel.y *= luigiAttrs->x6C_LUIGI_SUPERJUMP_VEL_Y;
-        fp->x80_self_vel.z *= luigiAttrs->x6C_LUIGI_SUPERJUMP_VEL_Y;
+        fp->self_vel.x *= luigiAttrs->x6C_LUIGI_SUPERJUMP_VEL_Y;
+        fp->self_vel.y *= luigiAttrs->x6C_LUIGI_SUPERJUMP_VEL_Y;
+        fp->self_vel.z *= luigiAttrs->x6C_LUIGI_SUPERJUMP_VEL_Y;
         return;
     }
     ftCommon_8007D494(fp, luigiAttrs->x68_LUIGI_SUPERJUMP_GRAVITY_START,
@@ -236,10 +236,9 @@ void ftLg_SpecialAirHi_Phys(HSD_GObj* gobj)
 // https://decomp.me/scratch/l7min // Luigi's Super Jump Punch Landing check
 void ftLg_SpecialHi_CheckLanding(HSD_GObj* gobj)
 {
-    ft_800D5CB0(
-        gobj, 0,
-        ((ftLuigiAttributes*) GET_FIGHTER(gobj)->x2D4_specialAttributes)
-            ->x54_LUIGI_SUPERJUMP_LANDING_LAG);
+    ft_800D5CB0(gobj, 0,
+                ((ftLuigiAttributes*) GET_FIGHTER(gobj)->dat_attrs)
+                    ->x54_LUIGI_SUPERJUMP_LANDING_LAG);
 }
 
 // 0x801444E4
@@ -250,8 +249,7 @@ void ftLg_SpecialHi_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((s32) fp->ground_or_air == GA_Air) {
-        if (((u32) fp->x2200_ftcmd_var0 == 0U) || (fp->x80_self_vel.y >= 0.0f))
-        {
+        if (((u32) fp->cmd_vars[0] == 0U) || (fp->self_vel.y >= 0.0f)) {
             ft_80083B68(gobj);
             return;
         }
@@ -269,8 +267,7 @@ void ftLg_SpecialAirHi_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((s32) fp->ground_or_air == GA_Air) {
-        if (((u32) fp->x2200_ftcmd_var0 == 0U) || (fp->x80_self_vel.y >= 0.0f))
-        {
+        if (((u32) fp->cmd_vars[0] == 0U) || (fp->self_vel.y >= 0.0f)) {
             ft_80083B68(gobj);
             return;
         }

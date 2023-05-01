@@ -32,14 +32,14 @@ static void setCallbacks(HSD_GObj* gobj)
 static void resetCmdVarsGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    u32* vars = (u32*) &fp->x2200_ftcmd_var0;
+    u32* vars = (u32*) &fp->cmd_vars[0];
     vars[0] = vars[1] = vars[2] = vars[3] = 0;
     ftCommon_8007D7FC(fp);
 }
 
 static inline void resetVel(Fighter* fp)
 {
-    Vec3* vel = &fp->x80_self_vel;
+    Vec3* vel = &fp->self_vel;
     vel->x = vel->y = vel->z = 0;
 }
 
@@ -75,7 +75,7 @@ static inline void setupAirStart(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     {
-        u32* vars = &fp->x2200_ftcmd_var0;
+        u32* vars = &fp->cmd_vars[0];
         vars[0] = vars[1] = vars[2] = vars[3] = 0;
     }
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirSStart, 0, NULL, 0, 1,
@@ -100,7 +100,7 @@ static inline void setupAirStart(HSD_GObj* gobj)
     fp->cb.x21F4_callback = ftCa_SpecialS_OnDetect;
     {
         /// @todo Too much stack for #resetVel.
-        Vec3* vel = &fp->x80_self_vel;
+        Vec3* vel = &fp->self_vel;
         vel->x = vel->y = vel->z = 0;
     }
 }
@@ -127,7 +127,7 @@ static void onDetectGround(HSD_GObj* gobj)
                               0, 1, 0);
     setCallbacks(gobj);
     {
-        Vec3* vel = &fp->x80_self_vel;
+        Vec3* vel = &fp->self_vel;
         vel->y = vel->z = 0;
     }
     fp->gr_vel *= sa->specials_gr_vel_x;
@@ -139,15 +139,15 @@ static void onDetectAir(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirS, transition_flags,
                               NULL, 0, 1, 0);
     setCallbacks(gobj);
-    fp->x80_self_vel.z = 0;
+    fp->self_vel.z = 0;
 }
 
 void ftCa_SpecialS_OnDetect(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x2200_ftcmd_var0 != 0) {
-        HSD_GObj* detected_gobj = fp->x20AC;
-        if (fp->x20AC->classifier == HSD_GOBJ_CLASS_FIGHTER) {
+    if (fp->cmd_vars[0] != 0) {
+        HSD_GObj* detected_gobj = fp->unk_gobj;
+        if (fp->unk_gobj->classifier == HSD_GOBJ_CLASS_FIGHTER) {
             /// @todo It might be possible to merge this with the below branch.
             switch (fp->motion_id) {
             case ftCa_MS_SpecialSStart: {
@@ -159,7 +159,7 @@ void ftCa_SpecialS_OnDetect(HSD_GObj* gobj)
                 break;
             }
             }
-        } else if (fp->x20AC->classifier == HSD_GOBJ_CLASS_ITEM) {
+        } else if (fp->unk_gobj->classifier == HSD_GOBJ_CLASS_ITEM) {
             if (itGetKind(detected_gobj) < It_Kind_BombHei) {
                 switch (fp->motion_id) {
                 case ftCa_MS_SpecialSStart: {
@@ -231,7 +231,7 @@ void ftCa_SpecialAirSStart_Anim(HSD_GObj* gobj)
     u8 _[8];
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* da = fp->dat_attrs;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007D60C(fp);
         if (da->specials_miss_landing_lag == 0) {
@@ -245,7 +245,7 @@ void ftCa_SpecialAirSStart_Anim(HSD_GObj* gobj)
 void ftCa_SpecialAirS_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* captainAttrs = fp->dat_attrs;
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
@@ -300,25 +300,25 @@ void ftCa_SpecialS_Phys(HSD_GObj* gobj)
 void ftCa_SpecialAirSStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* captainAttrs = fp->dat_attrs;
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
     ft_80085134(gobj);
-    if (fp->x2204_ftcmd_var1 == 1) {
+    if (fp->cmd_vars[1] == 1) {
         fp->mv.ca.specials.grav -= captainAttrs->specials_grav;
         if (fp->mv.ca.specials.grav < -captainAttrs->specials_terminal_vel) {
             fp->mv.ca.specials.grav = -captainAttrs->specials_terminal_vel;
         }
-        fp->x80_self_vel.y = fp->mv.ca.specials.grav;
+        fp->self_vel.y = fp->mv.ca.specials.grav;
     }
 }
 
 void ftCa_SpecialAirS_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* da = fp->dat_attrs;
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
@@ -328,7 +328,7 @@ void ftCa_SpecialAirS_Phys(HSD_GObj* gobj)
     if (fp->mv.ca.specials.grav < -da->specials_terminal_vel) {
         fp->mv.ca.specials.grav = -da->specials_terminal_vel;
     }
-    fp->x80_self_vel.y = fp->mv.ca.specials.grav;
+    fp->self_vel.y = fp->mv.ca.specials.grav;
 }
 
 /// Captain Falcon & Ganondorf's grounded
@@ -340,8 +340,8 @@ void ftCa_SpecialSStart_Coll(HSD_GObj* gobj)
     u8 unused[8];
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
-    if (fp->x2208_ftcmd_var2 == 0) {
+    ftCaptain_DatAttrs* da = fp->dat_attrs;
+    if (fp->cmd_vars[2] == 0) {
         ft_80084104(gobj);
         return;
     }
@@ -356,15 +356,15 @@ void ftCa_SpecialSStart_Coll(HSD_GObj* gobj)
         ft_80096900(gobj, 1, 1, 0, 1, da->specials_miss_landing_lag);
         return;
     }
-    if (fp->x2200_ftcmd_var0 == 1) {
+    if (fp->cmd_vars[0] == 1) {
         /// @todo Unused assignment.
 #ifdef MUST_MATCH
         f32 _ = fp->facing_dir;
 #endif
         if ((fp->facing_dir == +1 &&
-             (fp->x6F0_collData.x134_envFlags & MPCOLL_RIGHTWALL)) ||
+             (fp->coll_data.env_flags & MPCOLL_RIGHTWALL)) ||
             (fp->facing_dir == -1 &&
-             fp->x6F0_collData.x134_envFlags & MPCOLL_LEFTWALL))
+             fp->coll_data.env_flags & MPCOLL_LEFTWALL))
         {
             efLib_DestroyAll(gobj);
             ft_8008A2BC(gobj);
@@ -378,7 +378,7 @@ void ftCa_SpecialS_Coll(HSD_GObj* gobj)
 
     {
         Fighter* fp1;
-        ftCaptain_DatAttrs* da = fp0->x2D4_specialAttributes;
+        ftCaptain_DatAttrs* da = fp0->dat_attrs;
         /// @todo Unused stack.
 #ifdef MUST_MATCH
         u8 _[8];
@@ -401,7 +401,7 @@ void ftCa_SpecialS_Coll(HSD_GObj* gobj)
 void ftCa_SpecialAirSStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* da = fp->dat_attrs;
     if (ft_80081D0C(gobj) == true) {
         efLib_DestroyAll(gobj);
         ft_800D5CB0(gobj, 0, da->specials_miss_landing_lag);
@@ -413,13 +413,13 @@ void ftCa_SpecialAirSStart_Coll(HSD_GObj* gobj)
 void ftCa_SpecialAirS_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* da = fp->dat_attrs;
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
     if (ft_80081D0C(gobj) == true) {
-        fp->gr_vel = fp->x80_self_vel.x;
+        fp->gr_vel = fp->self_vel.x;
         efLib_DestroyAll(gobj);
         ft_800D5CB0(gobj, 0, da->specials_hit_landing_lag);
     }

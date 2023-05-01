@@ -16,8 +16,8 @@ void ftMr_SpecialHi_Enter(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x2210_ThrowFlags.flags = 0;
+    fp->cmd_vars[0] = 0;
+    fp->throw_flags.flags = 0;
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialHi, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 }
@@ -25,17 +25,17 @@ void ftMr_SpecialHi_Enter(HSD_GObj* gobj)
 void ftMr_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
+    ftMario_DatAttrs* sa = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[4];
 #endif
 
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x2210_ThrowFlags.flags = 0;
-    fp->x80_self_vel.y = 0;
-    fp->x80_self_vel.x = fp->x80_self_vel.x * sa->specialhi.vel_x;
+    fp->cmd_vars[0] = 0;
+    fp->throw_flags.flags = 0;
+    fp->self_vel.y = 0;
+    fp->self_vel.x = fp->self_vel.x * sa->specialhi.vel_x;
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirHi, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 }
@@ -47,7 +47,7 @@ void ftMr_SpecialHi_Anim(HSD_GObj* gobj)
     ftMario_DatAttrs* sa;
 
     fp = GET_FIGHTER(gobj);
-    sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
+    sa = (ftMario_DatAttrs*) fp->dat_attrs;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_80096900(gobj, 0, 1, 0, sa->specialhi.freefall_mobility,
                     sa->specialhi.landing_lag);
@@ -70,10 +70,9 @@ void ftMr_SpecialAirHi_Anim(HSD_GObj* gobj)
 void ftMr_SpecialHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMario_DatAttrs* sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
+    ftMario_DatAttrs* sa = (ftMario_DatAttrs*) fp->dat_attrs;
     f32 lstick_x = abs(fp->input.x620_lstick_x);
-    if (fp->x2200_ftcmd_var0 == 0 &&
-        lstick_x > sa->specialhi.momentum_stick_range)
+    if (fp->cmd_vars[0] == 0 && lstick_x > sa->specialhi.momentum_stick_range)
     {
         f32 deg = sa->specialhi.angle_diff *
                   ((lstick_x - sa->specialhi.momentum_stick_range) /
@@ -117,11 +116,11 @@ void ftMr_SpecialAirHi_Phys(HSD_GObj* gobj)
     ftMario_DatAttrs* sa = GetMarioAttr(fp);
     attr* attrs = &fp->x110_attr;
 
-    if (fp->x2200_ftcmd_var0 != 0) {
+    if (fp->cmd_vars[0] != 0) {
         ft_80085154(gobj);
-        fp->x80_self_vel.x *= sa->specialhi.vel_mul;
-        fp->x80_self_vel.y *= sa->specialhi.vel_mul;
-        fp->x80_self_vel.z *= sa->specialhi.vel_mul;
+        fp->self_vel.x *= sa->specialhi.vel_mul;
+        fp->self_vel.y *= sa->specialhi.vel_mul;
+        fp->self_vel.z *= sa->specialhi.vel_mul;
     } else {
         ftCommon_8007D494(fp, sa->specialhi.grav,
                           attrs->x170_TerminalVelocity);
@@ -132,7 +131,7 @@ void ftMr_SpecialAirHi_Phys(HSD_GObj* gobj)
 void ftMr_SpecialHi_CheckLanding(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
+    ftMario_DatAttrs* sa = fp->dat_attrs;
     ft_800D5CB0(gobj, 0, sa->specialhi.landing_lag);
 }
 
@@ -140,7 +139,7 @@ void ftMr_SpecialHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Air) {
-        if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0) {
+        if (fp->cmd_vars[0] == 0 || fp->self_vel.y >= 0) {
             ft_80083B68(gobj);
         } else {
             ft_800831CC(gobj, &ft_80096CC8, &ftMr_SpecialHi_CheckLanding);

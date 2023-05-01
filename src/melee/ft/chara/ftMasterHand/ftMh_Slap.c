@@ -37,5 +37,5 @@ void ftMh_MS_349_80151CA8(HSD_GObj* gobj)
     /// @todo The code matches, but is this right?
     fp->cur_pos.y = attr->x50.x;
 
-    fp->x80_self_vel.x = 0;
+    fp->self_vel.x = 0;
 }
