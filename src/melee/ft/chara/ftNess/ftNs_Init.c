@@ -491,8 +491,7 @@ void ftNs_Init_OnAbsorb(HSD_GObj* gobj)
 
 f32 ftNs_Init_GetAbsorbHeal(Fighter* fp)
 {
-    return ((ftNessAttributes*) fp->x2D4_specialAttributes)
-        ->x94_PSI_MAGNET_HEAL_MUL;
+    return ((ftNessAttributes*) fp->dat_attrs)->x94_PSI_MAGNET_HEAL_MUL;
 }
 
 void ftNs_Init_OnItemPickup(HSD_GObj* gobj, bool catchItemFlag)

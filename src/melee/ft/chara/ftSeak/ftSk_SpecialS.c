@@ -219,7 +219,7 @@ void ftSk_SpecialS_UpdateHitboxes(HSD_GObj* gobj, Vec3* new_pos, s32 hitbox_id)
     {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        if (!fp->x2200_ftcmd_var0) {
+        if (!fp->cmd_vars[0]) {
             return;
         }
 
@@ -323,7 +323,7 @@ void ftSk_SpecialS_80110BCC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     HSD_GObj* item_gobj = fp->fv.sk.x2234;
-    ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
+    ftSeakAttributes* specialAttributes = fp->dat_attrs;
 
     if (item_gobj == NULL) {
         return;
@@ -451,7 +451,7 @@ f32 ftSk_SpecialS_80110F64(HSD_GObj* gobj)
 void ftSk_SpecialS_80110F70(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->x2200_ftcmd_var0 = 0;
+    fp->cmd_vars[0] = 0;
 
     fp->mv.sk.specials.x0 = 0;
     fp->mv.sk.specials.x4 = 0;
@@ -501,7 +501,7 @@ void ftSk_SpecialS_Enter(HSD_GObj* gobj)
 void ftSk_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x80_self_vel.y = 0;
+    fp->self_vel.y = 0;
 
     Fighter_ChangeMotionState(gobj, 352, 0, NULL, 0.0, 1, 0);
     ftAnim_8006EBA4(gobj);
@@ -525,7 +525,7 @@ bool ftSk_SpecialS_CheckInitChain(HSD_GObj* gobj)
     Vec3 vec1;
 
     Fighter* fp = gobj->user_data;
-    ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
+    ftSeakAttributes* specialAttributes = fp->dat_attrs;
     fp->mv.sk.specials.x0 += 1;
 
     /// @todo Probably an inline.
@@ -627,7 +627,7 @@ void ftSk_SpecialAirSStart_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     attr* fighter_attr = &fp->x110_attr;
 
-    if (fp->x2200_ftcmd_var0 != 0) {
+    if (fp->cmd_vars[0] != 0) {
         ftCommon_8007D494(fp, fighter_attr->x16C_Gravity,
                           fighter_attr->x170_TerminalVelocity);
     }
@@ -661,7 +661,7 @@ void ftSk_SpecialS_80111440(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
     {
         Fighter_ChangeMotionState(gobj, 352, transition_flags, NULL,
-                                  fp->x894_currentAnimFrame, 1, 0);
+                                  fp->cur_anim_frame, 1, 0);
     }
 
     {
@@ -684,7 +684,7 @@ void ftSk_SpecialS_801114E4(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 349, transition_flags, NULL,
-                              fp->x894_currentAnimFrame, 1.0, 0.0);
+                              fp->cur_anim_frame, 1.0, 0.0);
 
     {
         Fighter* fp2 = GET_FIGHTER(gobj);
@@ -708,7 +708,7 @@ void ftSk_SpecialS_Anim(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
+    ftSeakAttributes* specialAttributes = fp->dat_attrs;
 
     ftSk_SpecialS_80110BCC(gobj);
 
@@ -742,7 +742,7 @@ void ftSk_SpecialAirS_Anim(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
+    ftSeakAttributes* specialAttributes = fp->dat_attrs;
 
     ftSk_SpecialS_80110BCC(gobj);
     fp->mv.sk.specials.x0 += 1;
@@ -844,8 +844,8 @@ void ftSk_SpecialS_80111830(HSD_GObj* gobj)
         f32 ecb_top;
         f32 ecb_bot;
         vec0.x = 0.0;
-        ecb_top = fp->x6F0_collData.xA4_ecbCurrCorrect.top.y;
-        ecb_bot = fp->x6F0_collData.xA4_ecbCurrCorrect.bottom.y;
+        ecb_top = fp->coll_data.xA4_ecbCurrCorrect.top.y;
+        ecb_bot = fp->coll_data.xA4_ecbCurrCorrect.bottom.y;
         vec0.y = 0.5F * (ecb_top + ecb_bot);
         vec0.z = 0.0;
         vec0.x += fp->cur_pos.x;
@@ -896,7 +896,7 @@ void ftSk_SpecialSEnd_Anim(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
+    ftSeakAttributes* specialAttributes = fp->dat_attrs;
     fp->mv.sk.specials.x0 += 1;
 
     {
@@ -938,7 +938,7 @@ void ftSk_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = gobj->user_data;
-    ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
+    ftSeakAttributes* specialAttributes = fp->dat_attrs;
     fp->mv.sk.specials.x0 += 1;
 
     {
@@ -1014,7 +1014,7 @@ void ftSk_SpecialS_80111CB0(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
 
     Fighter_ChangeMotionState(gobj, 354, transition_flags, NULL,
-                              fp->x894_currentAnimFrame, 1, 0);
+                              fp->cur_anim_frame, 1, 0);
 
     {
         Fighter* fp2 = gobj->user_data;
@@ -1037,7 +1037,7 @@ void ftSk_SpecialS_80111D54(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, 351, transition_flags, NULL,
-                              fp->x894_currentAnimFrame, 1, 0);
+                              fp->cur_anim_frame, 1, 0);
 
     {
         Fighter* fp2 = GET_FIGHTER(gobj);

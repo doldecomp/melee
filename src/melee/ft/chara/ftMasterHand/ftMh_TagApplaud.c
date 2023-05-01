@@ -11,9 +11,9 @@ void ftMh_TagApplaud_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x2204_ftcmd_var1 != 0) {
+    if (fp->cmd_vars[1] != 0) {
         ftBossLib_8015C5F8(gobj);
-        fp->x2204_ftcmd_var1 = 0;
+        fp->cmd_vars[1] = 0;
     }
 
     /// @todo  inlined? possibly shared with ftMh_TagCrush_Anim

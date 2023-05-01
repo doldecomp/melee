@@ -54,7 +54,7 @@ static void ftMh_MS_341_8014FE5C(HSD_GObj* gobj)
     }
     if (fp->fv.mh.x2258 == ftMh_MS_Wait1_2) {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0, 0,
-                                  fp->x894_currentAnimFrame, 1, 0);
+                                  fp->cur_anim_frame, 1, 0);
     } else {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0, 0, 0, 1, 0);
     }
@@ -71,7 +71,7 @@ void ftMh_MS_341_8014FF1C(HSD_GObj* gobj)
     }
     if (fp->fv.mh.x2258 == ftMh_MS_Wait2_1) {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0, 0,
-                                  fp->x894_currentAnimFrame, 1, 0);
+                                  fp->cur_anim_frame, 1, 0);
     } else {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0, 0, 0, 1, 0);
     }
@@ -95,7 +95,7 @@ void ftMh_MS_341_8014FFDC(HSD_GObj* gobj)
         }
         if (fp->fv.mh.x2258 == ftMh_MS_Wait2_1) {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0, 0,
-                                      fp->x894_currentAnimFrame, 1, 0);
+                                      fp->cur_anim_frame, 1, 0);
         } else {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0, 0, 0, 1, 0);
         }
@@ -110,7 +110,7 @@ void ftMh_MS_341_8014FFDC(HSD_GObj* gobj)
         }
         if (fp->fv.mh.x2258 == ftMh_MS_Wait1_2) {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0, 0,
-                                      fp->x894_currentAnimFrame, 1, 0);
+                                      fp->cur_anim_frame, 1, 0);
         } else {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0, 0, 0, 1, 0);
         }
@@ -137,7 +137,7 @@ static void ifStage251(HSD_GObj* gobj)
         }
         if (fp->fv.mh.x2258 == ftMh_MS_Wait1_2) {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0, 0,
-                                      fp->x894_currentAnimFrame, 1, 0);
+                                      fp->cur_anim_frame, 1, 0);
         } else {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0, 0, 0, 1, 0);
         }
@@ -179,7 +179,7 @@ inline void doAnim0(HSD_GObj* gobj)
     }
     if (fp->fv.mh.x2258 == ftMh_MS_Wait2_1) {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0, 0,
-                                  fp->x894_currentAnimFrame, 1, 0);
+                                  fp->cur_anim_frame, 1, 0);
     } else {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0, 0, 0, 1, 0);
     }

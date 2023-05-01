@@ -25,7 +25,7 @@ inline void func_80151484_inline1(HSD_GObj* gobj)
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
-    fp->x80_self_vel.x = fp->x80_self_vel.y = fp->x80_self_vel.z = 0;
+    fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
     it_802F046C(fp->mv.mh.unk0.x34);
     it_802F046C(fp->mv.mh.unk0.x38);
     it_802F046C(fp->mv.mh.unk0.x3C);
@@ -40,8 +40,8 @@ inline void func_80151484_inline1(HSD_GObj* gobj)
     if (fp->mv.mh.unk0.x20) {
         ftMh_CaptureWaitMasterHand_80155D1C(fp->x1A58_interactedFighter);
     }
-    fp->x80_self_vel.y = attr->x14C;
-    fp->x80_self_vel.z = attr->x154;
+    fp->self_vel.y = attr->x14C;
+    fp->self_vel.z = attr->x154;
     fp->mv.mh.unk0.x8 = attr->x15C;
 }
 
@@ -53,7 +53,7 @@ void ftMh_MS_343_80151484(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2200_ftcmd_var0 = 0;
+    fp->cmd_vars[0] = 0;
     func_80151484_inline1(gobj);
     Fighter_ChangeMotionState(gobj, ftMh_MS_Damage, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
@@ -66,7 +66,7 @@ void ftMh_MS_343_80151484(HSD_GObj* gobj)
 void ftMh_Damage_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x2200_ftcmd_var0) {
+    if (fp->cmd_vars[0]) {
         ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
         if (++fp->mv.mh.unk0.x74 <= attr->x144) {
             lbAudioAx_8002438C(530002);
@@ -75,7 +75,7 @@ void ftMh_Damage_Anim(HSD_GObj* gobj)
                 lbAudioAx_8002438C(530003);
             }
         }
-        fp->x2200_ftcmd_var0 = 0;
+        fp->cmd_vars[0] = 0;
     }
     if (fp->mv.mh.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Damage2, 0, 0, 0, 1, 0);
@@ -89,14 +89,14 @@ void ftMh_Damage_Anim(HSD_GObj* gobj)
 void ftMh_MS_345_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x2200_ftcmd_var0 != 0) {
+    if (fp->cmd_vars[0] != 0) {
         ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
         if (++fp->mv.mh.unk0.x74 <= attr->x144) {
             lbAudioAx_8002438C(530002);
         } else if (++fp->mv.mh.unk0.x78 <= attr->x148) {
             lbAudioAx_8002438C(530003);
         }
-        fp->x2200_ftcmd_var0 = 0;
+        fp->cmd_vars[0] = 0;
     }
     if (fp->mv.mh.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Damage2, 0, 0, 0, 1, 0);

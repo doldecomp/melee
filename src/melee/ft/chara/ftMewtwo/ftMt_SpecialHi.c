@@ -74,14 +74,14 @@ void ftMt_SpecialHiStart_Enter(HSD_GObj* gobj)
     {
         Fighter* fp1 = fp0;
         fp1->gr_vel = 0;
-        fp1->x80_self_vel.y = 0;
-        fp1->x80_self_vel.x = 0;
+        fp1->self_vel.y = 0;
+        fp1->self_vel.x = 0;
     }
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHiStart, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 
-    fp0->x2200_ftcmd_var0 = 0;
+    fp0->cmd_vars[0] = 0;
     fp0->mv.mt.SpecialHi.unk4 = 0;
     fp0->cb.x21BC_callback_Accessory4 = ftMt_SpecialHi_CreateGFX;
 }
@@ -97,14 +97,14 @@ void ftMt_SpecialAirHiStart_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-    fp->x80_self_vel.x /= mewtwoAttrs->x40_MEWTWO_TELEPORT_VEL_DIV_X;
-    fp->x80_self_vel.y /= mewtwoAttrs->x44_MEWTWO_TELEPORT_VEL_DIV_Y;
+    fp->self_vel.x /= mewtwoAttrs->x40_MEWTWO_TELEPORT_VEL_DIV_X;
+    fp->self_vel.y /= mewtwoAttrs->x44_MEWTWO_TELEPORT_VEL_DIV_Y;
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirHiStart, 0, NULL, 0, 1,
                               0);
     ftAnim_8006EBA4(gobj);
 
-    fp->x2200_ftcmd_var0 = 0;
+    fp->cmd_vars[0] = 0;
     fp->mv.mt.SpecialHi.unk4 = 0;
     fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialHi_CreateGFX;
 }
@@ -196,8 +196,8 @@ void ftMt_SpecialHiStart_GroundToAir(HSD_GObj* gobj)
     ftCommon_8007D60C(fp);
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirHiStart,
-                              transition_flags1, NULL,
-                              fp->x894_currentAnimFrame, 1, 0);
+                              transition_flags1, NULL, fp->cur_anim_frame, 1,
+                              0);
 
     fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialHi_CreateGFX;
 }
@@ -209,7 +209,7 @@ void ftMt_SpecialAirHiStart_AirToGround(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHiStart, transition_flags1,
-                              NULL, fp->x894_currentAnimFrame, 1, 0);
+                              NULL, fp->cur_anim_frame, 1, 0);
 
     fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialHi_CreateGFX;
 }
@@ -258,10 +258,10 @@ void ftMt_SpecialHiLost_Coll(HSD_GObj* gobj)
 
     {
         Fighter* fp1 = fp0;
-        CollData* collData = &fp0->x6F0_collData;
+        CollData* collData = &fp0->coll_data;
 
         if (!ft_80082708(gobj)) {
-            u32 env_flags = collData->x134_envFlags;
+            u32 env_flags = collData->env_flags;
             if (env_flags & MPCOLL_RIGHTWALL || env_flags & MPCOLL_LEFTWALL) {
                 ftCommon_8007D60C(fp1);
                 ftMt_SpecialAirHiLost_Enter(gobj);
@@ -270,7 +270,7 @@ void ftMt_SpecialHiLost_Coll(HSD_GObj* gobj)
                 ftMt_SpecialHi_GroundToAir(gobj);
             }
         } else {
-            u32 env_flags = collData->x134_envFlags;
+            u32 env_flags = collData->env_flags;
             if (env_flags & MPCOLL_RIGHTWALL || env_flags & MPCOLL_LEFTWALL) {
                 ftMt_SpecialHiLost_Enter(gobj);
             }
@@ -281,7 +281,7 @@ void ftMt_SpecialHiLost_Coll(HSD_GObj* gobj)
 static bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMewtwoAttributes* mewtwoAttrs = fp->x2D4_specialAttributes;
+    ftMewtwoAttributes* mewtwoAttrs = fp->dat_attrs;
 
     if (fp->mv.mt.SpecialHi.unk4 >= mewtwoAttrs->x54_MEWTWO_TELEPORT_UNK2) {
         return true;
@@ -324,27 +324,25 @@ void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)
             return;
         }
 
-        if ((collData->x134_envFlags & MPCOLL_CEIL) &&
-            (lbVector_AngleXY(&collData->x188_ceiling.normal,
-                              &fp1->x80_self_vel) >
+        if ((collData->env_flags & MPCOLL_CEIL) &&
+            (lbVector_AngleXY(&collData->x188_ceiling.normal, &fp1->self_vel) >
              DEG_TO_RAD *
                  (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP)))
         {
             ftMt_SpecialAirHiLost_Enter(gobj);
         }
 
-        if (collData->x134_envFlags & MPCOLL_RIGHTWALL &&
+        if (collData->env_flags & MPCOLL_RIGHTWALL &&
             (lbVector_AngleXY(&collData->x160_rightwall.normal,
-                              &fp1->x80_self_vel) >
+                              &fp1->self_vel) >
              DEG_TO_RAD *
                  (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP)))
         {
             ftMt_SpecialAirHiLost_Enter(gobj);
         }
 
-        if (collData->x134_envFlags & MPCOLL_LEFTWALL &&
-            lbVector_AngleXY(&collData->x174_leftwall.normal,
-                             &fp1->x80_self_vel) >
+        if (collData->env_flags & MPCOLL_LEFTWALL &&
+            lbVector_AngleXY(&collData->x174_leftwall.normal, &fp1->self_vel) >
                 DEG_TO_RAD *
                     (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP))
         {
@@ -365,8 +363,8 @@ void ftMt_SpecialHi_GroundToAir(HSD_GObj* gobj)
 
     ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirHiLost,
-                              transition_flags1, NULL,
-                              fp->x894_currentAnimFrame, 0, 0);
+                              transition_flags1, NULL, fp->cur_anim_frame, 0,
+                              0);
 
     fp->x2223_flag.bits.b4 = true;
     fp->x221E_flag.bits.b0 = true;
@@ -379,7 +377,7 @@ void ftMt_SpecialAirHi_AirToGround(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHiLost, transition_flags1,
-                              NULL, fp->x894_currentAnimFrame, 0, 0);
+                              NULL, fp->cur_anim_frame, 0, 0);
 
     fp->x221E_flag.bits.b0 = true;
 }
@@ -527,16 +525,14 @@ void ftMt_SpecialAirHi_Enter(HSD_GObj* gobj)
         sqrt_stick = fp->mv.mt.SpecialHi.stickY = 1;
     }
 
-    fp->x80_self_vel.x =
-        fp->facing_dir *
-        ((mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM * sqrt_stick +
-          mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) *
-         cosf(floatVar));
+    fp->self_vel.x = fp->facing_dir *
+                     ((mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM * sqrt_stick +
+                       mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) *
+                      cosf(floatVar));
 
-    fp->x80_self_vel.y =
-        (mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM * sqrt_stick +
-         mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) *
-        sinf(floatVar);
+    fp->self_vel.y = (mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM * sqrt_stick +
+                      mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) *
+                     sinf(floatVar);
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirHiLost, 0, NULL, 35, 1,
                               0);
@@ -591,13 +587,13 @@ void ftMt_SpecialAirHi_Phys(HSD_GObj* gobj)
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-    if (fp->x2200_ftcmd_var0) {
+    if (fp->cmd_vars[0]) {
         ftCommon_8007D4B8(fp);
         ftCommon_8007D440(fp, mewtwoAttrs->x64_MEWTWO_TELEPORT_DRIFT *
                                   fp->x110_attr.x17C_AerialDriftMax);
     } else {
-        f32 velY = fp->x80_self_vel.y;
-        fp->x80_self_vel.y = velY - velY / 10;
+        f32 velY = fp->self_vel.y;
+        fp->self_vel.y = velY - velY / 10;
         ftCommon_8007CEF4(fp);
     }
 }
@@ -633,17 +629,17 @@ void ftMt_SpecialHiLost_GroundToAir(HSD_GObj* gobj)
 
     ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirHi, transition_flags0,
-                              NULL, fp->x894_currentAnimFrame, 1, 0);
+                              NULL, fp->cur_anim_frame, 1, 0);
 }
 
 static inline void ftMewtwo_SpecialHiLost_SetVars(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->mv.mt.SpecialHi.velX = fp->x80_self_vel.x;
-    fp->mv.mt.SpecialHi.velY = fp->x80_self_vel.y;
+    fp->mv.mt.SpecialHi.velX = fp->self_vel.x;
+    fp->mv.mt.SpecialHi.velY = fp->self_vel.y;
     fp->mv.mt.SpecialHi.groundVelX = fp->gr_vel;
-    fp->x80_self_vel.y = 0;
-    fp->x80_self_vel.x = 0;
+    fp->self_vel.y = 0;
+    fp->self_vel.x = 0;
     fp->gr_vel = 0;
     fp->x221E_flag.bits.b0 = false;
     fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialHi_SetEndGFX;
@@ -675,8 +671,8 @@ void ftMt_SpecialAirHiLost_Enter(HSD_GObj* gobj)
 
     ftMewtwo_SpecialHiLost_SetVars(gobj);
 
-    fp->x80_self_vel.x = fp->mv.mt.SpecialHi.velX *
-                         mewtwoAttrs->x6C_MEWTWO_TELEPORT_MOMENTUM_END_MUL;
-    fp->x80_self_vel.y = fp->mv.mt.SpecialHi.velY *
-                         mewtwoAttrs->x6C_MEWTWO_TELEPORT_MOMENTUM_END_MUL;
+    fp->self_vel.x = fp->mv.mt.SpecialHi.velX *
+                     mewtwoAttrs->x6C_MEWTWO_TELEPORT_MOMENTUM_END_MUL;
+    fp->self_vel.y = fp->mv.mt.SpecialHi.velY *
+                     mewtwoAttrs->x6C_MEWTWO_TELEPORT_MOMENTUM_END_MUL;
 }

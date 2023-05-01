@@ -323,7 +323,7 @@ void ftMt_Init_OnItemVisible(HSD_GObj* gobj)
 void ftMt_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMewtwoAttributes* attr = fp->x2D4_specialAttributes;
+    ftMewtwoAttributes* attr = fp->dat_attrs;
     f32 attr_value = attr->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
 
     if (fp->fv.mt.x2234_shadowBallCharge == attr_value) {

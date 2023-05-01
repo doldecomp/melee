@@ -19,8 +19,8 @@ void ftMh_Damage_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
-    fp->x80_self_vel.y += attr->x150;
-    fp->x80_self_vel.z += attr->x158;
+    fp->self_vel.y += attr->x150;
+    fp->self_vel.z += attr->x158;
 }
 
 void ftMh_Damage_Coll(HSD_GObj* gobj) {}

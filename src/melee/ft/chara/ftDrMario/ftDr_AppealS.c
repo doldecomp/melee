@@ -22,7 +22,7 @@ void ftDr_AppealS_Anim(HSD_GObj* gobj)
 #endif
 
     fp = gobj->user_data;
-    if (fp->x2200_ftcmd_var0 == 1 && fp->fv.mr.x2240 == 0U) {
+    if (fp->cmd_vars[0] == 1 && fp->fv.mr.x2240 == 0U) {
         lb_8000B1CC(fp->parts->x0_jobj, 0, &sp18);
         tmp = ftMr_SpecialN_VitaminRandom(gobj);
         tmp = it_802C0850(gobj, &sp18, tmp, 0x31, fp->facing_dir);
@@ -31,7 +31,7 @@ void ftDr_AppealS_Anim(HSD_GObj* gobj)
             fp->cb.x21E4_callback_OnDeath2 = ftDr_Init_80149540;
             fp->cb.x21DC_callback_OnTakeDamage = ftDr_Init_80149540;
         }
-    } else if (fp->x2200_ftcmd_var0 == 2) {
+    } else if (fp->cmd_vars[0] == 2) {
         ftDr_Init_801497CC(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {

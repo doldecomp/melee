@@ -189,7 +189,7 @@ void ftDr_Init_OnLoad(HSD_GObj* gobj)
     fp = gobj->user_data;
     items = fp->ft_data->x48_items;
     ftMr_Init_OnLoadForDrMario(fp);
-    sa = fp->x2D4_specialAttributes;
+    sa = fp->dat_attrs;
     it_8026B3F8(items[1], 0x31);
     it_8026B3F8(items[3], sa->x14);
 }
@@ -308,7 +308,7 @@ u32 ftDr_Init_801498EC(HSD_GObj* gobj)
     if (gobj != NULL) {
         fp = gobj->user_data;
         if (fp != NULL) {
-            return fp->x2204_ftcmd_var1;
+            return fp->cmd_vars[1];
         }
     }
 
@@ -320,6 +320,6 @@ void ftDr_Init_80149910(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     ft_800DEAE8(gobj, 0x155, 0x156);
-    fp->x2200_ftcmd_var0 = 1;
-    fp->x2204_ftcmd_var1 = 0;
+    fp->cmd_vars[0] = 1;
+    fp->cmd_vars[1] = 0;
 }

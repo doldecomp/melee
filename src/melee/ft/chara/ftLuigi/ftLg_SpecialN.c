@@ -25,8 +25,8 @@ void ftLg_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x2210_ThrowFlags.flags = 0;
+    fp->cmd_vars[0] = 0;
+    fp->throw_flags.flags = 0;
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialN, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
@@ -38,8 +38,8 @@ void ftLg_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x2210_ThrowFlags.flags = 0;
+    fp->cmd_vars[0] = 0;
+    fp->throw_flags.flags = 0;
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirN, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
@@ -68,7 +68,7 @@ void ftLg_SpecialAirN_Anim(HSD_GObj* gobj)
 // https://decomp.me/scratch/JesBp // Luigi's grounded Fireball IASA callback
 void ftLg_SpecialN_IASA(HSD_GObj* gobj)
 {
-    if (GET_FIGHTER(gobj)->x2200_ftcmd_var0 != 0U) {
+    if (GET_FIGHTER(gobj)->cmd_vars[0] != 0U) {
         ftCo_Wait_IASA(gobj);
     }
 }
@@ -76,7 +76,7 @@ void ftLg_SpecialN_IASA(HSD_GObj* gobj)
 // 0x80142804 - Luigi's aerial Fireball IASA callback
 void ftLg_SpecialAirN_IASA(HSD_GObj* gobj)
 {
-    if (GET_FIGHTER(gobj)->x2200_ftcmd_var0 != 0U) {
+    if (GET_FIGHTER(gobj)->cmd_vars[0] != 0U) {
         ft_800CCAAC(gobj);
     }
 }
@@ -105,7 +105,7 @@ void ftLg_SpecialN_Coll(HSD_GObj* gobj)
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirN,
                                   FTLUIGI_SPECIALN_COLL_FLAG, NULL,
-                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
+                                  fp->cur_anim_frame, 1.0f, 0.0f);
         fp->cb.x21BC_callback_Accessory4 = &ftLg_SpecialN_FireSpawn;
     }
 }
@@ -120,7 +120,7 @@ void ftLg_SpecialAirN_Coll(HSD_GObj* gobj)
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialN,
                                   FTLUIGI_SPECIALN_COLL_FLAG, NULL,
-                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
+                                  fp->cur_anim_frame, 1.0f, 0.0f);
         fp->cb.x21BC_callback_Accessory4 = &ftLg_SpecialN_FireSpawn;
     }
 }
@@ -133,8 +133,8 @@ void ftLg_SpecialN_FireSpawn(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     bool flag;
 
-    if (fp->x2210_ThrowFlags.b0 != 0) {
-        fp->x2210_ThrowFlags.b0 = 0;
+    if (fp->throw_flags.b0 != 0) {
+        fp->throw_flags.b0 = 0;
         flag = true;
     } else {
         flag = false;

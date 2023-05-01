@@ -408,7 +408,7 @@ void ftGw_LandingAirN_Enter(HSD_GObj* gobj)
         it_802C73AC(fp->fv.gw.x2260_sparkyGObj);
     }
 
-    if ((u32) fp->x2200_ftcmd_var0 != 0U) {
+    if ((u32) fp->cmd_vars[0] != 0U) {
         ftGw_LandingAirN_Init(gobj);
         fp->cb.x21BC_callback_Accessory4 = ftGw_AttackAirN_ItemParachuteOnLand;
         return;
@@ -483,7 +483,7 @@ void ftGw_LandingAirB_Enter(HSD_GObj* gobj)
         it_802C73AC(fp->fv.gw.x2260_sparkyGObj);
     }
 
-    if ((u32) fp->x2200_ftcmd_var0 != 0) {
+    if ((u32) fp->cmd_vars[0] != 0) {
         ftGw_LandingAirB_Init(gobj);
         fp->cb.x21BC_callback_Accessory4 = ftGw_AttackAirN_ItemTurtleOnLand;
         return;
@@ -548,7 +548,7 @@ void ftGw_LandingAirHi_Enter(HSD_GObj* gobj)
         it_802C73AC(fp->fv.gw.x2260_sparkyGObj);
     }
 
-    if (fp->x2200_ftcmd_var0 != 0) {
+    if (fp->cmd_vars[0] != 0) {
         ftGw_LandingAirHi_Init(gobj);
         fp->cb.x21BC_callback_Accessory4 = ftGw_AttackAirN_ItemSparkyOnLand;
         return;

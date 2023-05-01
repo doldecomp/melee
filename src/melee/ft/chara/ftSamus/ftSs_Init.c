@@ -307,7 +307,7 @@ void ftSs_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 void ftSs_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSamusAttributes* attr = fp->x2D4_specialAttributes;
+    ftSamusAttributes* attr = fp->dat_attrs;
     s32 samus_x2230 = fp->fv.ss.x2230;
     if (samus_x2230 == attr->x18) {
         ft_800BFFD0(fp, 53, 0);

@@ -198,10 +198,10 @@ void ftCa_SpecialLw_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2208_ftcmd_var2 = 0;
-    fp->x2204_ftcmd_var1 = 0;
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x2210_ThrowFlags.flags = 0;
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+    fp->throw_flags.flags = 0;
     fp->mv.ca.speciallw.x0 = 0;
     fp->mv.ca.speciallw.friction = 1;
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLw, Ft_MF_None, NULL, 0, 1,
@@ -262,10 +262,10 @@ void ftCa_SpecialAirLw_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2208_ftcmd_var2 = 0;
-    fp->x2204_ftcmd_var1 = 0;
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x2210_ThrowFlags.flags = 0;
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+    fp->throw_flags.flags = 0;
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLw, Ft_MF_None, NULL, 0,
                               1, 0);
     ftAnim_8006EBA4(gobj);
@@ -362,11 +362,11 @@ void ftCa_SpecialLw_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->ground_or_air == GA_Ground) {
             Fighter* fp = GET_FIGHTER(gobj);
-            ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
-            fp->x2208_ftcmd_var2 = 0;
-            fp->x2204_ftcmd_var1 = 0;
-            fp->x2200_ftcmd_var0 = 0;
-            fp->x2210_ThrowFlags.flags = 0;
+            ftCaptain_DatAttrs* da = fp->dat_attrs;
+            fp->cmd_vars[2] = 0;
+            fp->cmd_vars[1] = 0;
+            fp->cmd_vars[0] = 0;
+            fp->throw_flags.flags = 0;
             ftCommon_8007D7FC(fp);
             Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLwEnd, Ft_MF_None,
                                       NULL, 0, da->speciallw_ground_lag_mul,
@@ -375,10 +375,10 @@ void ftCa_SpecialLw_Anim(HSD_GObj* gobj)
             fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         } else {
             Fighter* fp = GET_FIGHTER(gobj);
-            fp->x2208_ftcmd_var2 = 0;
-            fp->x2204_ftcmd_var1 = 0;
-            fp->x2200_ftcmd_var0 = 0;
-            fp->x2210_ThrowFlags.flags = 0;
+            fp->cmd_vars[2] = 0;
+            fp->cmd_vars[1] = 0;
+            fp->cmd_vars[0] = 0;
+            fp->throw_flags.flags = 0;
             ftCommon_8007D5D4(fp);
             Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLwEndAir,
                                       Ft_MF_None, NULL, 0, 1, 0);
@@ -450,10 +450,10 @@ void ftCa_SpecialAirLw_Anim(HSD_GObj* gobj)
 #endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        fp->x2208_ftcmd_var2 = 0;
-        fp->x2204_ftcmd_var1 = 0;
-        fp->x2200_ftcmd_var0 = 0;
-        fp->x2210_ThrowFlags.flags = 0;
+        fp->cmd_vars[2] = 0;
+        fp->cmd_vars[1] = 0;
+        fp->cmd_vars[0] = 0;
+        fp->throw_flags.flags = 0;
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLwEndAir, Ft_MF_None,
                                   NULL, 0, 1, 0);
@@ -542,8 +542,8 @@ void ftCa_SpecialLw_Phys(HSD_GObj* gobj)
     }
     {
         f32 friction = fp->mv.ca.speciallw.friction;
-        fp->x80_self_vel.x *= friction;
-        fp->x80_self_vel.y *= friction;
+        fp->self_vel.x *= friction;
+        fp->self_vel.y *= friction;
     }
     ftCa_SpecialHi_800E3EAC(gobj);
 }
@@ -616,10 +616,10 @@ void ftCa_SpecialLwEnd_Phys(HSD_GObj* gobj)
     u8 _[8];
 #endif
     Fighter* fp = gobj->user_data;
-    ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* da = fp->dat_attrs;
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007E5AC(fp);
-        if (fp->x2208_ftcmd_var2 != 0) {
+        if (fp->cmd_vars[2] != 0) {
             ftCommon_8007C930(fp, da->speciallw_ground_traction *
                                       fp->x110_attr.gr_friction);
             ftCommon_8007CB74(gobj);
@@ -632,8 +632,8 @@ void ftCa_SpecialLwEnd_Phys(HSD_GObj* gobj)
     }
     {
         f32 friction = fp->mv.ca.speciallw.friction;
-        fp->x80_self_vel.x *= friction;
-        fp->x80_self_vel.y *= friction;
+        fp->self_vel.x *= friction;
+        fp->self_vel.y *= friction;
     }
 }
 #endif
@@ -693,7 +693,7 @@ void ftCa_SpecialLwEndAir_Phys(HSD_GObj* gobj)
         return;
     }
     ftParts_80075CB4(fp, 0, 0);
-    if (fp->x2200_ftcmd_var0 != 0) {
+    if (fp->cmd_vars[0] != 0) {
         ft_80084EEC(gobj);
     } else {
         ft_80085134(gobj);
@@ -749,8 +749,8 @@ void ftCa_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
     u8 _[8];
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
-    if (fp->x2208_ftcmd_var2 != 0) {
+    ftCaptain_DatAttrs* da = fp->dat_attrs;
+    if (fp->cmd_vars[2] != 0) {
         ftCommon_8007C930(fp, da->speciallw_air_landing_traction *
                                   fp->x110_attr.gr_friction);
         ftCommon_8007CB74(gobj);
@@ -863,18 +863,18 @@ void ftCa_SpecialLw_Coll(HSD_GObj* gobj)
     }
     {
         f32 facing_dir;
-        if ((fp->x2200_ftcmd_var0 != 0) &&
+        if ((fp->cmd_vars[0] != 0) &&
             /// @todo Pull out these check functions
             (((facing_dir = fp->facing_dir, ((facing_dir == -1) != 0)) &&
-              (fp->x6F0_collData.x134_envFlags & MPCOLL_FLAGS_B11)) ||
+              (fp->coll_data.env_flags & MPCOLL_FLAGS_B11)) ||
              (facing_dir == +1 &&
-              (fp->x6F0_collData.x134_envFlags & MPCOLL_FLAGS_B5))))
+              (fp->coll_data.env_flags & MPCOLL_FLAGS_B5))))
         {
             Fighter* fp = GET_FIGHTER(gobj);
-            fp->x2208_ftcmd_var2 = 0;
-            fp->x2204_ftcmd_var1 = 0;
-            fp->x2200_ftcmd_var0 = 0;
-            fp->x2210_ThrowFlags.flags = 0;
+            fp->cmd_vars[2] = 0;
+            fp->cmd_vars[1] = 0;
+            fp->cmd_vars[0] = 0;
+            fp->throw_flags.flags = 0;
             ftCommon_8007D5D4(fp);
             Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialHiThrow1,
                                       Ft_MF_None, NULL, 0, 1, 0);
@@ -887,7 +887,7 @@ void ftCa_SpecialLwEnd_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Ground) {
-        if (fp->x2204_ftcmd_var1 != 0) {
+        if (fp->cmd_vars[1] != 0) {
             if (!ft_800827A0(gobj)) {
                 ftCommon_8007D5D4(fp);
             }
@@ -948,7 +948,7 @@ void ftCa_SpecialLwEndAir_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Ground) {
-        if (fp->x2204_ftcmd_var1 != 0) {
+        if (fp->cmd_vars[1] != 0) {
             if (!ft_800827A0(gobj)) {
                 ftCommon_8007D5D4(fp);
             }
@@ -1011,11 +1011,11 @@ void ftCa_SpecialAirLw_Coll(HSD_GObj* gobj)
 #endif
     if (ft_80081D0C(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
-        fp->x2208_ftcmd_var2 = 0;
-        fp->x2204_ftcmd_var1 = 0;
-        fp->x2200_ftcmd_var0 = 0;
-        fp->x2210_ThrowFlags.flags = 0;
+        ftCaptain_DatAttrs* da = fp->dat_attrs;
+        fp->cmd_vars[2] = 0;
+        fp->cmd_vars[1] = 0;
+        fp->cmd_vars[0] = 0;
+        fp->throw_flags.flags = 0;
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLwEnd, Ft_MF_None,
                                   NULL, 0, da->speciallw_landing_lag_mul, 0);
@@ -1074,11 +1074,11 @@ void ftCa_SpecialAirLwEndAir_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCaptain_DatAttrs* da = fp->x2D4_specialAttributes;
-        fp->x2208_ftcmd_var2 = 0;
-        fp->x2204_ftcmd_var1 = 0;
-        fp->x2200_ftcmd_var0 = 0;
-        fp->x2210_ThrowFlags.flags = 0;
+        ftCaptain_DatAttrs* da = fp->dat_attrs;
+        fp->cmd_vars[2] = 0;
+        fp->cmd_vars[1] = 0;
+        fp->cmd_vars[0] = 0;
+        fp->throw_flags.flags = 0;
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLwEnd, Ft_MF_None,
                                   NULL, 0, da->speciallw_landing_lag_mul, 0);

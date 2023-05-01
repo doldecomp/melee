@@ -15,7 +15,7 @@ void ftNs_SpecialS_ItemPKFireSpawn(
                     // and summoned with Subaction Event 0x60 *//
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
+    ftNessAttributes* ness_attr = fp->dat_attrs;
     bool FlagResult;
     Vec3 ItemBonePos;
     Vec3 PKFireVelStruct;
@@ -30,8 +30,8 @@ void ftNs_SpecialS_ItemPKFireSpawn(
     f32 PKFireLaunch;
     f32 PKFireVel;
 
-    if (fp->x2210_ThrowFlags.b0 != 0) {
-        fp->x2210_ThrowFlags.b0 = 0;
+    if (fp->throw_flags.b0 != 0) {
+        fp->throw_flags.b0 = 0;
         FlagResult = true;
     } else {
         FlagResult = false;
@@ -75,8 +75,8 @@ void ftNs_SpecialS_Enter(
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    fp->x2210_ThrowFlags.flags = 0; // Set projectile summon flag to 0
-    fp->x2200_ftcmd_var0 = 0;       // Set ftcmd flag0 to 0; _ in PK Fire?
+    fp->throw_flags.flags = 0; // Set projectile summon flag to 0
+    fp->cmd_vars[0] = 0;       // Set ftcmd flag0 to 0; _ in PK Fire?
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialS, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
@@ -92,8 +92,8 @@ void ftNs_SpecialAirS_Enter(
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    fp->x2210_ThrowFlags.flags = 0; // Set projectile summon flag to 0
-    fp->x2200_ftcmd_var0 = 0;       // Set ftcmd flag0 to 0; _ in PK Fire?
+    fp->throw_flags.flags = 0; // Set projectile summon flag to 0
+    fp->cmd_vars[0] = 0;       // Set ftcmd flag0 to 0; _ in PK Fire?
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirS, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
@@ -154,7 +154,7 @@ void ftNs_SpecialAirS_Coll(
     Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* ness_attr;
 
-    ness_attr = fp->x2D4_specialAttributes;
+    ness_attr = fp->dat_attrs;
     if (ft_80081D0C(gobj) != false) {
         ft_800D5CB0(gobj, 0, ness_attr->x38_PKFIRE_LANDING_LAG);
     }

@@ -60,7 +60,7 @@ void ftMh_PaperCrush_Phys(HSD_GObj* gobj)
         if (f > attr->xB0 && fp->mv.mh.unk0.x0 < attr->xB4) {
             ftBossLib_8015C010(gobj, attr->xB8);
         } else {
-            fp->x80_self_vel.x = 0;
+            fp->self_vel.x = 0;
         }
     }
     ftBossLib_8015C190(gobj);

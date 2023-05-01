@@ -27,8 +27,8 @@ void ftGw_SpecialS_ItemJudgementSetup(HSD_GObj* gobj)
     Vec3 sp14;
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (GET_FIGHTER(gobj)->x2204_ftcmd_var1 != 0U) {
-        fp->x2204_ftcmd_var1 = 0;
+    if (GET_FIGHTER(gobj)->cmd_vars[1] != 0U) {
+        fp->cmd_vars[1] = 0;
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].x0_jobj,
                     NULL, &sp20);
         fp->fv.gw.x2264_judgementGObj = it_802C7774(
@@ -169,8 +169,8 @@ int ftGw_SpecialS_GetRandomInt(HSD_GObj* gobj)
 static inline void ftGameWatch_SpecialS_SetVars(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2204_ftcmd_var1 = 0;
-    fp->x2200_ftcmd_var0 = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
     fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialS_ItemJudgementSetup;
 }
 
@@ -185,7 +185,7 @@ void ftGw_SpecialS_Enter(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    GET_FIGHTER(gobj)->x80_self_vel.y = 0.0f;
+    GET_FIGHTER(gobj)->self_vel.y = 0.0f;
 
     /// @todo Shared @c inline with #ftGw_SpecialAirS_Enter.
     ftGw_SpecialS_GetRandomInt(gobj);
@@ -201,14 +201,14 @@ void ftGw_SpecialS_Enter(HSD_GObj* gobj)
 void ftGw_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;
+    ftGameWatchAttributes* gawAttrs = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[4];
 #endif
 
-    GET_FIGHTER(gobj)->x80_self_vel.x /=
+    GET_FIGHTER(gobj)->self_vel.x /=
         gawAttrs->x20_GAMEWATCH_JUDGE_MOMENTUM_PRESERVE;
 
     ftGw_SpecialS_GetRandomInt(gobj);
@@ -256,8 +256,8 @@ void ftGw_SpecialS_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((u32) fp->x2200_ftcmd_var0 == 1U) {
-        fp->x2200_ftcmd_var0 = 2U;
+    if ((u32) fp->cmd_vars[0] == 1U) {
+        fp->cmd_vars[0] = 2U;
     }
 
     ft_80084F3C(gobj);
@@ -269,8 +269,8 @@ void ftGw_SpecialS_Phys(HSD_GObj* gobj)
 void ftGw_SpecialAirS_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    u32 ftcmd_var = fp->x2200_ftcmd_var0;
-    ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;
+    u32 ftcmd_var = fp->cmd_vars[0];
+    ftGameWatchAttributes* gawAttrs = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -279,12 +279,12 @@ void ftGw_SpecialAirS_Phys(HSD_GObj* gobj)
 
     if (ftcmd_var >= 1U) {
         if (ftcmd_var == 1) {
-            fp->x2200_ftcmd_var0 = 2;
+            fp->cmd_vars[0] = 2;
             if ((s32) fp->fv.gw.x2234 == 0) {
                 fp->fv.gw.x2234 = 1;
-                fp->x80_self_vel.y = gawAttrs->x28_GAMEWATCH_JUDGE_VEL_Y;
+                fp->self_vel.y = gawAttrs->x28_GAMEWATCH_JUDGE_VEL_Y;
             } else {
-                fp->x80_self_vel.y = 0.0f;
+                fp->self_vel.y = 0.0f;
             }
         }
         ftCommon_8007D494(fp, gawAttrs->x2C_GAMEWATCH_JUDGE_FRICTION1,
@@ -350,9 +350,9 @@ static void ftGw_SpecialS_GroundToAir(HSD_GObj* gobj)
     !gobj;
     Fighter_ChangeMotionState(
         gobj, fp->fv.gw.x222C_judgeVar1 + ftGw_MS_SpecialAirS1,
-        transition_flags, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
-    if ((u32) fp->x2200_ftcmd_var0 == 1) {
-        fp->x2200_ftcmd_var0 = 2;
+        transition_flags, NULL, fp->cur_anim_frame, 1.0f, 0.0f);
+    if ((u32) fp->cmd_vars[0] == 1) {
+        fp->cmd_vars[0] = 2;
     }
     ftGameWatch_SpecialS_SetCall(gobj);
 }
@@ -372,6 +372,6 @@ static void ftGw_SpecialAirS_AirToGround(HSD_GObj* gobj)
     !gobj;
     Fighter_ChangeMotionState(
         gobj, fp->fv.gw.x222C_judgeVar1 + ftGw_MS_SpecialS1, transition_flags,
-        NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        NULL, fp->cur_anim_frame, 1.0f, 0.0f);
     ftGameWatch_SpecialS_SetCall(gobj);
 }

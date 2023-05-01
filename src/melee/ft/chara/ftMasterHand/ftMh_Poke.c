@@ -36,8 +36,8 @@ void ftMh_Poke1_Anim(HSD_GObj* gobj)
 
         if (--fp->mv.mh.unk13.x0 < 0) {
             fp->mv.mh.unk13.x4 = 0;
-            fp->x80_self_vel.x = 0;
-            fp->x80_self_vel.y = 0;
+            fp->self_vel.x = 0;
+            fp->self_vel.y = 0;
 
             {
                 Fighter* fp = GET_FIGHTER(gobj);
@@ -116,8 +116,8 @@ void ftMh_Poke1_Phys(HSD_GObj* gobj)
                 {
                     float len = my_lbVector_Len(&vel);
                     if (len < attr->x2C) {
-                        fp->x80_self_vel.x = vel.x;
-                        fp->x80_self_vel.y = vel.y;
+                        fp->self_vel.x = vel.x;
+                        fp->self_vel.y = vel.y;
                     } else {
                         lbVector_Normalize(&vel);
                         {
@@ -126,8 +126,8 @@ void ftMh_Poke1_Phys(HSD_GObj* gobj)
                             vel.y *= speed;
                             vel.z *= speed;
                         }
-                        fp->x80_self_vel.x = vel.x;
-                        fp->x80_self_vel.y = vel.y;
+                        fp->self_vel.x = vel.x;
+                        fp->self_vel.y = vel.y;
                     }
                 }
             }

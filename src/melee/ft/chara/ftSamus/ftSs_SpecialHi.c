@@ -25,10 +25,10 @@ void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     ftCommon_8007D7FC(fp);
-    fp->x220C_ftcmd_var3 = 0;
-    fp->x2208_ftcmd_var2 = 0;
-    fp->x2204_ftcmd_var1 = 0;
-    fp->x2200_ftcmd_var0 = 0;
+    fp->cmd_vars[3] = 0;
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
     fp->mv.ss.unk5.x0 = 0;
     ftAnim_8006EBA4(gobj);
     efSync_Spawn(1154, gobj, fp->parts[FtPart_YRotN].x0_jobj);
@@ -38,19 +38,19 @@ void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
 void ftSs_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
+    ftSamusAttributes* samus_attr = fp->dat_attrs;
 
     Fighter_ChangeMotionState(gobj, 354, 0, NULL, 0.0f, 1.0f, 0.0f);
     ftSamus_updateDamageDeathCBs(gobj);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     ftCommon_8007D60C(fp);
-    fp->x220C_ftcmd_var3 = 0;
-    fp->x2208_ftcmd_var2 = 0;
-    fp->x2204_ftcmd_var1 = 0;
-    fp->x2200_ftcmd_var0 = 0;
+    fp->cmd_vars[3] = 0;
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
     fp->mv.ss.unk5.x0 = 0;
-    fp->x80_self_vel.y = samus_attr->x44;
+    fp->self_vel.y = samus_attr->x44;
     ftCommon_8007D440(fp, samus_attr->x40);
     ftAnim_8006EBA4(gobj);
     efSync_Spawn(1154, gobj, fp->parts[FtPart_YRotN].x0_jobj);
@@ -69,7 +69,7 @@ void ftSs_SpecialHi_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr;
     ftSamusAttributes* samus_attr2;
-    samus_attr = samus_attr2 = fp->x2D4_specialAttributes;
+    samus_attr = samus_attr2 = fp->dat_attrs;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fighter2 = fp;
@@ -88,7 +88,7 @@ void ftSs_SpecialAirHi_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr;
     ftSamusAttributes* samus_attr2;
-    samus_attr = samus_attr2 = fp->x2D4_specialAttributes;
+    samus_attr = samus_attr2 = fp->dat_attrs;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fighter2 = fp;
@@ -107,14 +107,14 @@ void ftSs_SpecialHi_IASA(HSD_GObj* gobj)
     f32 mag;
     f32 lstick_x;
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
+    ftSamusAttributes* samus_attr = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[4];
 #endif
 
-    if ((!fp->x2204_ftcmd_var1) && (!fp->mv.ss.unk5.x0)) {
+    if ((!fp->cmd_vars[1]) && (!fp->mv.ss.unk5.x0)) {
         if ((lstick_x = fp->input.x620_lstick_x) < 0.0f) {
             mag = -lstick_x;
         } else {
@@ -124,7 +124,7 @@ void ftSs_SpecialHi_IASA(HSD_GObj* gobj)
             if (((fp->facing_dir == 1.0f) && (lstick_x < 0.0f)) ||
                 ((fp->facing_dir == -1.0f) && (lstick_x > 0.0f)))
             {
-                fp->x2204_ftcmd_var1 = 1;
+                fp->cmd_vars[1] = 1;
                 fp->mv.ss.unk5.x0 = 1;
                 ftCommon_8007D9FC(fp);
                 ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
@@ -138,14 +138,14 @@ void ftSs_SpecialAirHi_IASA(HSD_GObj* gobj)
     f32 mag;
     f32 lstick_x;
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
+    ftSamusAttributes* samus_attr = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    if ((!fp->x2204_ftcmd_var1) && (!fp->mv.ss.unk5.x0)) {
+    if ((!fp->cmd_vars[1]) && (!fp->mv.ss.unk5.x0)) {
         if ((lstick_x = fp->input.x620_lstick_x) < 0.0f) {
             mag = -lstick_x;
         } else {
@@ -155,7 +155,7 @@ void ftSs_SpecialAirHi_IASA(HSD_GObj* gobj)
             if (((fp->facing_dir == 1.0f) && (lstick_x < 0.0f)) ||
                 ((fp->facing_dir == -1.0f) && (lstick_x > 0.0f)))
             {
-                fp->x2204_ftcmd_var1 = 1;
+                fp->cmd_vars[1] = 1;
                 fp->mv.ss.unk5.x0 = 1;
                 ftCommon_8007D9FC(fp);
                 ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
@@ -169,10 +169,10 @@ void ftSs_SpecialHi_Phys(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
 
-    if (fp->x2200_ftcmd_var0) {
+    if (fp->cmd_vars[0]) {
         ftCommon_8007D60C(fp);
-        fp->x2200_ftcmd_var0 = 0;
-        fp->x80_self_vel.x = samus_attr->x38 * fp->facing_dir;
+        fp->cmd_vars[0] = 0;
+        fp->self_vel.x = samus_attr->x38 * fp->facing_dir;
     }
     if (fp->ground_or_air == 1) {
         ft_800851C0(gobj);
@@ -186,7 +186,7 @@ void ftSs_SpecialHi_Phys(HSD_GObj* gobj)
 void ftSs_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
+    ftSamusAttributes* samus_attr = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -200,7 +200,7 @@ void ftSs_SpecialAirHi_Phys(HSD_GObj* gobj)
 void ftSs_SpecialHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
+    ftSamusAttributes* samus_attr = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -210,7 +210,7 @@ void ftSs_SpecialHi_Coll(HSD_GObj* gobj)
     if (fp->ground_or_air == GA_Air) {
         int direction;
 
-        if (fp->x80_self_vel.y >= 0.0f) {
+        if (fp->self_vel.y >= 0.0f) {
             ft_80081D0C(gobj);
             return;
         }
@@ -236,7 +236,7 @@ void ftSs_SpecialHi_Coll(HSD_GObj* gobj)
 void ftSs_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
+    ftSamusAttributes* samus_attr = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -246,7 +246,7 @@ void ftSs_SpecialAirHi_Coll(HSD_GObj* gobj)
     if (fp->ground_or_air == GA_Air) {
         int direction;
 
-        if (fp->x80_self_vel.y >= 0.0f) {
+        if (fp->self_vel.y >= 0.0f) {
             ft_80081D0C(gobj);
             return;
         }

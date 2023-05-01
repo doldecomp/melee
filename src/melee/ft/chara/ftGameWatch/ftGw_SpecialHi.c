@@ -107,10 +107,10 @@ static void ftGw_SpecialHi_ItemRescueExitHitlag(HSD_GObj* gobj)
 static inline void ftGameWatch_SpecialHi_SetVars(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x220C_ftcmd_var3 = 0;
-    fp->x2208_ftcmd_var2 = 0;
-    fp->x2204_ftcmd_var1 = 0;
-    fp->x2200_ftcmd_var0 = 0;
+    fp->cmd_vars[3] = 0;
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
     fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialHi_ItemRescueSetup;
 }
 
@@ -127,7 +127,7 @@ void ftGw_SpecialHi_Enter(HSD_GObj* gobj)
 #endif
 
     fp->x74_anim_vel.y = 0.0f;
-    fp->x80_self_vel.y = 0.0f;
+    fp->self_vel.y = 0.0f;
     ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialHi, 0, NULL, 0.0f, 1.0f,
                               0.0f);
@@ -172,7 +172,7 @@ void ftGw_SpecialAirHi_Anim(HSD_GObj* gobj)
 
     ftGameWatchAttributes* gawAttrs;
 
-    gawAttrs = (GET_FIGHTER(gobj))->x2D4_specialAttributes;
+    gawAttrs = (GET_FIGHTER(gobj))->dat_attrs;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (0.0f == gawAttrs->x60_GAMEWATCH_RESCUE_LANDING) {
             ft_800CC730(gobj);
@@ -195,14 +195,14 @@ void ftGw_SpecialHi_IASA(HSD_GObj* gobj)
 void ftGw_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;
+    ftGameWatchAttributes* gawAttrs = fp->dat_attrs;
     f32 stick_x;
     f32 temp;
     f32 angle;
     f32 facing_dir;
     f32 stick_range_threshold;
 
-    if ((u32) fp->x2200_ftcmd_var0 == 0) {
+    if ((u32) fp->cmd_vars[0] == 0) {
         stick_x = stickGetDir(fp->input.x620_lstick_x, 0.0f);
         if (stick_x > gawAttrs->x58_GAMEWATCH_RESCUE_STICK_RANGE) {
             stick_range_threshold =
@@ -218,7 +218,7 @@ void ftGw_SpecialAirHi_IASA(HSD_GObj* gobj)
             ftCommon_8007D9FC(fp);
             ftParts_80075AF0(fp, 0, (M_PI / 2) * fp->facing_dir);
             fp->x6BC_inputStickangle = -angle;
-            fp->x2200_ftcmd_var0 = 1;
+            fp->cmd_vars[0] = 1;
         }
     }
 }
@@ -256,10 +256,10 @@ void ftGw_SpecialAirHi_Coll(HSD_GObj* gobj)
 #endif
 
     fp = GET_FIGHTER(gobj);
-    gawAttrs = fp->x2D4_specialAttributes;
+    gawAttrs = fp->dat_attrs;
 
-    if (fp->x894_currentAnimFrame > 4.0f) {
-        if (fp->x80_self_vel.y >= 0.0f) {
+    if (fp->cur_anim_frame > 4.0f) {
+        if (fp->self_vel.y >= 0.0f) {
             if (ft_80081D0C(gobj) != false) {
                 ftGw_SpecialHi_ItemRescueRemove(gobj);
                 ftCommon_8007D7FC(fp);

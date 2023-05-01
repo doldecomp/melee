@@ -10,7 +10,7 @@
 
 void ftCommon_8007C930(Fighter*, f32);
 void ftCommon_8007C98C(Fighter*, f32 vel, f32, f32 gr_friction);
-void ftCommon_8007CA80(Fighter*, f32, f32);
+void ftCommon_8007CA80(Fighter* fp, float result, float, float);
 void ftCommon_8007CADC(Fighter*, f32, f32, f32);
 void ftCommon_8007CB74(HSD_GObj*);
 HSD_GObj* ftCommon_8007CC1C(HSD_GObj*);

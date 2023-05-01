@@ -182,7 +182,7 @@ void ftMr_Init_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(fp, ftMario_DatAttrs);
 
     {
-        ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
+        ftMario_DatAttrs* sa = fp->dat_attrs;
 
         it_8026B3F8(items[0], It_Kind_Mario_Fire);
         it_8026B3F8(items[2], sa->specials.cape_kind);

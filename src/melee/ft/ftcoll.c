@@ -102,7 +102,7 @@ void ftColl_800764DC(HSD_GObj* gobj)
 
 inline void comboCount_Push(Fighter* fp)
 {
-    Vec3* pos = &fp->x6F0_collData.x14C_ground.normal;
+    Vec3* pos = &fp->coll_data.x14C_ground.normal;
     f32 temp_f2;
     f32 var_f2;
     if ((s32) fp->x2090 < (s32) p_ftCommonData->x4C8) {

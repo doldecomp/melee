@@ -24,7 +24,7 @@ bool ftCliffCommon_80081298(HSD_GObj* gobj)
     if (fp->input.x624_lstick_y <= -p_ftCommonData->x480) {
         return false;
     }
-    if (((fp->x6F0_collData.x134_envFlags & 0x03000000) != 0) &&
+    if (((fp->coll_data.env_flags & 0x03000000) != 0) &&
         (((fp->x2228_flag.b2 & 1) == 0)))
     {
         other_gobj = ft_80082E3C(gobj);
@@ -57,7 +57,7 @@ void ftCliffCommon_80081370(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     UnkParameterStruct unkParam;
 
-    if ((fp->x6F0_collData.x134_envFlags & 0x01000000) != 0) {
+    if ((fp->coll_data.env_flags & 0x01000000) != 0) {
         ledgeDirection = 1.0f;
     } else {
         ledgeDirection = -1.0f;
@@ -75,9 +75,9 @@ void ftCliffCommon_80081370(HSD_GObj* gobj)
     ftCommon_8007E2FC(gobj);
     fp->x221D_flag.bits.b7 = 1;
     if (fp->facing_dir > 0.0f) {
-        fp->mv.co.cliff.ledge_id = fp->x6F0_collData.x44;
+        fp->mv.co.cliff.ledge_id = fp->coll_data.x44;
     } else {
-        fp->mv.co.cliff.ledge_id = fp->x6F0_collData.x40;
+        fp->mv.co.cliff.ledge_id = fp->coll_data.x40;
     }
     ftCo_CliffCatch_Phys(gobj);
     ft_800881D8(fp, fp->ft_data->x4C_collisionData->x28, 0x7F, 0x40);
@@ -155,7 +155,7 @@ void ftCo_Cliff_Cam(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftCamera_UpdateCameraBox(gobj);
     if ((s32) fp->ground_or_air == GA_Air) {
-        mpLib_8005811C(&fp->x6F0_collData, fp->mv.co.cliff.ledge_id);
+        mpLib_8005811C(&fp->coll_data, fp->mv.co.cliff.ledge_id);
         fp->x890_cameraBox->xC_flag.bits.b0 = 1;
     }
 }

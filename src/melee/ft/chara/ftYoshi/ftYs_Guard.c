@@ -477,7 +477,7 @@ void ftYs_Shield_8012C850(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = getFighter(gobj);
-    Fighter_ChangeMotionState(gobj, 345, 16, NULL, fp->x894_currentAnimFrame,
+    Fighter_ChangeMotionState(gobj, 345, 16, NULL, fp->cur_anim_frame,
                               ftYs_Init_804D9A28, ftYs_Init_804D9A2C);
     fp->x672_input_timer_counter = 254;
     fp->x221A_flag.bits.b7 = false;
@@ -766,7 +766,7 @@ extern f32 const ftYs_Init_804D9A38;
 void ftYs_Shield_8012CC94(HSD_GObj* gobj, Vec3* out)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftYoshiAttributes* attr = fp->x2D4_specialAttributes;
+    ftYoshiAttributes* attr = fp->dat_attrs;
     out->x = (-fp->facing_dir * attr->x10);
     out->y = attr->x14;
     out->z = ftYs_Init_804D9A38;
@@ -779,24 +779,24 @@ f32 ftYs_Shield_8012CCC4(HSD_GObj* gobj)
 
 f32 ftYs_Shield_8012CCD0(HSD_GObj* gobj)
 {
-    ftYoshiAttributes* attr = GET_FIGHTER(gobj)->x2D4_specialAttributes;
+    ftYoshiAttributes* attr = GET_FIGHTER(gobj)->dat_attrs;
     return attr->x18;
 }
 
 f32 ftYs_Shield_8012CCE0(HSD_GObj* gobj)
 {
-    ftYoshiAttributes* attr = GET_FIGHTER(gobj)->x2D4_specialAttributes;
+    ftYoshiAttributes* attr = GET_FIGHTER(gobj)->dat_attrs;
     return attr->x1C;
 }
 
 f32 ftYs_Shield_8012CCF0(HSD_GObj* gobj)
 {
-    ftYoshiAttributes* attr = GET_FIGHTER(gobj)->x2D4_specialAttributes;
+    ftYoshiAttributes* attr = GET_FIGHTER(gobj)->dat_attrs;
     return attr->x20;
 }
 
 f32 ftYs_Shield_8012CD00(HSD_GObj* gobj)
 {
-    ftYoshiAttributes* attr = GET_FIGHTER(gobj)->x2D4_specialAttributes;
+    ftYoshiAttributes* attr = GET_FIGHTER(gobj)->dat_attrs;
     return attr->x24;
 }

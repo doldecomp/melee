@@ -29,14 +29,14 @@
     do {                                                                      \
         void* backup = (fp)->x2D8_specialAttributes2;                         \
         attributeName* src = (attributeName*) (fp)->ft_data->ext_attr;        \
-        void** attr = &(fp)->x2D4_specialAttributes;                          \
+        void** attr = &(fp)->dat_attrs;                                       \
         *(attributeName*) (fp)->x2D8_specialAttributes2 = *src;               \
         *attr = backup;                                                       \
     } while (0)
 
 #define COPY_ATTRS(gobj, attributeName)                                       \
     Fighter* fp = GET_FIGHTER(gobj);                                          \
-    attributeName* sA2 = (attributeName*) fp->x2D4_specialAttributes;         \
+    attributeName* sA2 = (attributeName*) fp->dat_attrs;                      \
     attributeName* ext_attr = (attributeName*) fp->ft_data->ext_attr;         \
     *sA2 = *ext_attr;
 
@@ -65,13 +65,13 @@ static inline Fighter* getFighterPlus(HSD_GObj* gobj)
 
 static inline void* getFtSpecialAttrs(Fighter* fp)
 {
-    void* fighter_attr = fp->x2D4_specialAttributes;
+    void* fighter_attr = fp->dat_attrs;
     return fighter_attr;
 }
 
 static inline void* getFtSpecialAttrsD(Fighter* fp) // Direct
 {
-    return fp->x2D4_specialAttributes;
+    return fp->dat_attrs;
 }
 
 static inline s32 ftGetKind(Fighter* fp)
@@ -97,7 +97,7 @@ static inline attr* getFtAttrs(Fighter* fp)
 
 static inline CollData* getFtColl(Fighter* fp)
 {
-    return &fp->x6F0_collData;
+    return &fp->coll_data;
 }
 
 static inline bool ftGetGroundAir(Fighter* fp)
@@ -179,18 +179,18 @@ static inline void Fighter_OnKnockbackExit(HSD_GObj* gobj, s32 arg1)
 static inline void Fighter_UnsetCmdVar0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2200_ftcmd_var0 = 0;
+    fp->cmd_vars[0] = 0;
 }
 
 static inline CollData* Fighter_GetCollData(Fighter* fp)
 {
-    return &fp->x6F0_collData;
+    return &fp->coll_data;
 }
 
 static inline bool ftCheckThrowB3(Fighter* fp)
 {
-    if (fp->x2210_ThrowFlags.b3) {
-        fp->x2210_ThrowFlags.b3 = false;
+    if (fp->throw_flags.b3) {
+        fp->throw_flags.b3 = false;
         return true;
     } else {
         return false;

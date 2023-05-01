@@ -550,7 +550,7 @@ void ftPr_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     PUSH_ATTRS(fp, ftPurinAttributes);
     fp->x2222_b1 = 1;
-    fp->x2D0 = fp->x2D4_specialAttributes;
+    fp->x2D0 = fp->dat_attrs;
     ftPr_Init_8013C360(gobj);
 }
 
@@ -637,7 +637,7 @@ static inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    fp->x2200_ftcmd_var0 = 0;
+    fp->cmd_vars[0] = 0;
 
     fp->cb.x21BC_callback_Accessory4 = &ftPr_Init_8013C94C;
 
@@ -884,12 +884,12 @@ void ftPr_SpecialHi_8013CD34(HSD_GObj* gobj)
 
     if (ftPr_Init_804D9C10 == fp->facing_dir) {
         Fighter_ChangeMotionState(gobj, 366, 0x0C4C508A, NULL,
-                                  fp->x894_currentAnimFrame,
-                                  ftPr_Init_804D9C18, ftPr_Init_804D9C14);
+                                  fp->cur_anim_frame, ftPr_Init_804D9C18,
+                                  ftPr_Init_804D9C14);
     } else {
         Fighter_ChangeMotionState(gobj, 368, 0x0C4C508A, NULL,
-                                  fp->x894_currentAnimFrame,
-                                  ftPr_Init_804D9C18, ftPr_Init_804D9C14);
+                                  fp->cur_anim_frame, ftPr_Init_804D9C18,
+                                  ftPr_Init_804D9C14);
     }
 
     fp->cb.x21BC_callback_Accessory4 = ftPr_Init_8013C94C;

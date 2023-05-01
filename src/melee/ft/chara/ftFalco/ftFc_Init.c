@@ -476,7 +476,7 @@ void ftFc_Init_OnLoad(HSD_GObj* gobj)
     fp->x2224_flag.bits.b7 = 1;
     ftFx_Init_OnLoadForFalco(fp);
 
-    sa2 = fp->x2D4_specialAttributes;
+    sa2 = fp->dat_attrs;
     it_8026B3F8(items[0], sa2[7]);
     it_8026B3F8(items[1], sa2[8]);
     it_8026B3F8(items[3], 0x39);

@@ -78,8 +78,8 @@ void ftMh_TagSqueeze_Anim(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->x2200_ftcmd_var0 != 0) {
-        fp->x2200_ftcmd_var0 = 0;
+    if (fp->cmd_vars[0] != 0) {
+        fp->cmd_vars[0] = 0;
         ftMh_CaptureWaitMasterHand_80155D6C(fp->x1A58_interactedFighter,
                                             ftCo_MS_ThrownMasterHand);
         if (fp->x1A58_interactedFighter != 0) {
@@ -146,9 +146,9 @@ void ftMh_TagFail_Coll(HSD_GObj* gobj) {}
 void ftMh_TagCancel_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((--fp->mv.mh.unk0.x24 <= 0) && (fp->x2200_ftcmd_var0 != 0)) {
+    if ((--fp->mv.mh.unk0.x24 <= 0) && (fp->cmd_vars[0] != 0)) {
         ftMh_CaptureWaitMasterHand_80155D1C(fp->x1A58_interactedFighter);
-        fp->x2200_ftcmd_var0 = 0;
+        fp->cmd_vars[0] = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMh_MS_389_80151018(gobj);
@@ -176,7 +176,7 @@ void ftMh_TagCancel_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.mh.unk0.x18 == 0) {
-        fp->x80_self_vel.x = fp->x80_self_vel.y = fp->x80_self_vel.z = 0;
+        fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
     }
 }
 

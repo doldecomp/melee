@@ -42,14 +42,14 @@ void ftMh_MS_369_80153B90(HSD_GObj* gobj)
     ftBossLib_8015C208(gobj, &pos);
     fp->cur_pos.x = pos.x;
     fp->cur_pos.y = attr->x68;
-    fp->x80_self_vel.x = fp->x80_self_vel.y = fp->x80_self_vel.z = 0;
+    fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
 }
 
 void ftMh_BackPunch_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        fp->x80_self_vel.x = 0;
+        fp->self_vel.x = 0;
         ftMh_MS_389_80151018(gobj);
     }
 }
@@ -69,6 +69,6 @@ void ftMh_BackPunch_Phys(HSD_GObj* gobj)
         ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
         ftBossLib_8015BF74(gobj, attr->x58);
     } else {
-        fp->x80_self_vel.x = 0;
+        fp->self_vel.x = 0;
     }
 }

@@ -11,7 +11,7 @@
 static void ftSamus_ClearThrowFlagsUnk(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2210_ThrowFlags.flags = 0;
+    fp->throw_flags.flags = 0;
     fp->cb.x21BC_callback_Accessory4 = &ftSs_SpecialS_8012A074;
 }
 
@@ -20,7 +20,7 @@ void ftSs_SpecialS_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
     fp->gr_vel /= samus_attr->x2C;
-    fp->x80_self_vel.y = 0.0f;
+    fp->self_vel.y = 0.0f;
     if (fp->x673 < samus_attr->x28) {
         Fighter_ChangeMotionState(gobj, 0x15E, 0, NULL, 0.0f, 1.0f, 0.0f);
         ftAnim_8006EBA4(gobj);
@@ -35,7 +35,7 @@ void ftSs_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
-    fp->x80_self_vel.x /= samus_attr->x2C;
+    fp->self_vel.x /= samus_attr->x2C;
     if (fp->x673 < samus_attr->x28) {
         Fighter_ChangeMotionState(gobj, 0x160, 0, NULL, 0.0f, 1.0f, 0.0f);
         ftAnim_8006EBA4(gobj);

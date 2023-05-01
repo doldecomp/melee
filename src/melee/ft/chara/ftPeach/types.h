@@ -16,17 +16,37 @@ struct ftPeach_FighterVars {
 };
 
 typedef struct ftPe_DatAttrs {
-    f32 floatfallf_anim_start;
-    f32 floatfallb_anim_start;
-    f32 floatfall_anim_start_offset;
-    f32 xC;
-    u8 x10[0xB0];
+    /* +0 */ float floatfallf_anim_start;
+    /* +4 */ float floatfallb_anim_start;
+    /* +8 */ float floatfall_anim_start_offset;
+    /* +C */ float xC;
+    /* +10 */ u8 x10[0x30 - 0x10];
+    /* +30 */ int x30;
+    /* +34 */ float x34;
+    /* +38 */ f32 x38;
+    /* +3C */ f32 x3C;
+    /* +40 */ f32 x40;
+    /* +44 */ f32 specials_vel_x;
+    /* +48 */ f32 specials_smash_vel_x;
+    /* +4C */ f32 specials_vel_y;
+    /* +50 */ f32 x50;
+    /* +54 */ f32 x54;
+    /* +58 */ f32 x58;
+    /* +5C */ f32 x5C;
+    /* +60 */ f32 specials_end_vel_x;
+    /* +64 */ f32 specials_end_vel_y;
+    /* +68 */ f32 x68;
+    /* +6C */ f32 x6C;
+    /* +70 */ u8 x70[0xC0 - 0x70];
 } ftPe_DatAttrs;
 
 union ftPe_MotionVars {
     struct ftPe_FloatAttackVars {
         /* fp+2340 */ bool x0;
     } floatattack;
+    struct ftPe_SpecialSVars {
+        /* fp+2340 */ bool x0;
+    } specials;
 };
 
 #endif

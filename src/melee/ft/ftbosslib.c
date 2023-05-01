@@ -106,8 +106,8 @@ void ftBossLib_8015BE40(HSD_GObj* gobj, Vec3* arg1, f32* arg2, f32 arg3,
         }
     }
 
-    fp->x80_self_vel.x = diff.x;
-    fp->x80_self_vel.y = diff.y;
+    fp->self_vel.x = diff.x;
+    fp->self_vel.y = diff.y;
 }
 
 void ftBossLib_8015BF74(HSD_GObj* gobj, f32 x_diff_max)
@@ -121,9 +121,9 @@ void ftBossLib_8015BF74(HSD_GObj* gobj, f32 x_diff_max)
         f32 x_diff = vec.x - fp->cur_pos.x;
         f32 abs_x_diff = fabs_inline(x_diff);
         if (abs_x_diff > x_diff_max) {
-            fp->x80_self_vel.x += x_diff > 0 ? x_diff_max : -x_diff_max;
+            fp->self_vel.x += x_diff > 0 ? x_diff_max : -x_diff_max;
         } else {
-            fp->x80_self_vel.x += x_diff;
+            fp->self_vel.x += x_diff;
         }
     }
 }
@@ -138,9 +138,9 @@ void ftBossLib_8015C010(HSD_GObj* gobj, f32 x_diff_max)
         f32 x_diff = vec.x - fp->cur_pos.x;
         f32 abs_x_diff = fabs_inline(x_diff);
         if (abs_x_diff > x_diff_max) {
-            fp->x80_self_vel.x = x_diff > 0 ? x_diff_max : -x_diff_max;
+            fp->self_vel.x = x_diff > 0 ? x_diff_max : -x_diff_max;
         } else {
-            fp->x80_self_vel.x = x_diff;
+            fp->self_vel.x = x_diff;
         }
     }
 }
@@ -164,13 +164,13 @@ void ftBossLib_8015C190(HSD_GObj* arg0)
     mpLib_80053FF4(0, &vec);
     if (fp->cur_pos.x > vec.x) {
         fp->cur_pos.x = vec.x;
-        fp->x80_self_vel.x = 0;
+        fp->self_vel.x = 0;
     }
 
     mpLib_80054158(0, &vec);
     if (fp->cur_pos.x < vec.x) {
         fp->cur_pos.x = vec.x;
-        fp->x80_self_vel.x = 0;
+        fp->self_vel.x = 0;
     }
 }
 

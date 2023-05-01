@@ -109,7 +109,7 @@ static void doAnim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cb.x21EC_callback = callback;
-    fp->x2210_ThrowFlags.flags = 0;
+    fp->throw_flags.flags = 0;
     Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwLoop, 0, NULL, 0, 1, 0);
     ftDonkey_8010DE88_inner(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftDk_Init_8010DB3C;

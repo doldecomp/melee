@@ -23,7 +23,7 @@ void ftMh_MS_389_80150C8C(HSD_GObj* gobj)
         fp->fv.mh.x2258 == ftMh_MS_Wait1_2)
     {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_2, 0, 0,
-                                  fp->x894_currentAnimFrame, 1, 0);
+                                  fp->cur_anim_frame, 1, 0);
     } else {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_2, 0, 0, 0, 1, 0);
         ftAnim_8006EBA4(gobj);
@@ -38,7 +38,7 @@ void ftMh_MS_389_80150D28(HSD_GObj* gobj)
         fp->fv.mh.x2258 == ftMh_MS_Wait2_1)
     {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_1, 0, 0,
-                                  fp->x894_currentAnimFrame, 1, 0);
+                                  fp->cur_anim_frame, 1, 0);
     } else {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_1, 0, 0, 0, 1, 0);
         ftAnim_8006EBA4(gobj);
@@ -61,7 +61,7 @@ void ftMh_MS_389_80150DC4(HSD_GObj* gobj, HSD_GObjEvent cb, Vec3* pos)
             (fp->fv.mh.x2258 == ftMh_MS_Wait2_1))
         {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_1, 0, 0,
-                                      fp->x894_currentAnimFrame, 1, 0);
+                                      fp->cur_anim_frame, 1, 0);
         } else {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_1, 0, 0, 0, 1, 0);
             ftAnim_8006EBA4(gobj);
@@ -72,7 +72,7 @@ void ftMh_MS_389_80150DC4(HSD_GObj* gobj, HSD_GObjEvent cb, Vec3* pos)
             fp->fv.mh.x2258 == ftMh_MS_Wait1_2)
         {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_2, 0, 0,
-                                      fp->x894_currentAnimFrame, 1, 0);
+                                      fp->cur_anim_frame, 1, 0);
         } else {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_2, 0, 0, 0, 1, 0);
             ftAnim_8006EBA4(gobj);
@@ -112,7 +112,7 @@ void ftMh_Wait1_2_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.mh.unk0.x18 == 0) {
-        fp->x80_self_vel.x = fp->x80_self_vel.y = fp->x80_self_vel.z = 0;
+        fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
         if (fp->mv.mh.unk0.x4) {
             fp->mv.mh.unk0.x4(gobj);
         }

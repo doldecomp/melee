@@ -378,7 +378,7 @@ void ftPp_Init_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(fp, ftIceClimberAttributes);
 
     {
-        ftIceClimberAttributes* attr = fp->x2D4_specialAttributes;
+        ftIceClimberAttributes* attr = fp->dat_attrs;
         fp->x40 = attr->x0;
         it_8026B3F8(item_list[0], 106);
         it_8026B3F8(item_list[1], 107);
@@ -461,8 +461,8 @@ extern f32 const ftPp_Init_804D983C;
 void ftPp_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
-    fp->x2210_ThrowFlags.flags = 0;
-    fp->x2200_ftcmd_var0 = 0;
+    fp->throw_flags.flags = 0;
+    fp->cmd_vars[0] = 0;
     fp->fv.nn.x222C = 0;
 
     Fighter_ChangeMotionState(gobj, 341, 0, NULL, ftPp_Init_804D9838,
@@ -482,14 +482,14 @@ void ftPp_SpecialAirN_Enter(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
-    ftIceClimberAttributes* icattr = fp->x2D4_specialAttributes;
+    ftIceClimberAttributes* icattr = fp->dat_attrs;
 
-    fp->x2210_ThrowFlags.flags = 0;
-    fp->x2200_ftcmd_var0 = 0;
+    fp->throw_flags.flags = 0;
+    fp->cmd_vars[0] = 0;
     fp->fv.nn.x222C = 0;
 
     if ((s32) fp->fv.nn.x224C == false) {
-        fp->x80_self_vel.y = icattr->x4;
+        fp->self_vel.y = icattr->x4;
         fp->fv.nn.x224C = true;
         fp->fv.nn.x2250 = ftPp_Init_804D9838;
     } else {
@@ -763,7 +763,7 @@ bool ftPp_SpecialN_8011F6FC(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
 
         if (fp != NULL) {
-            return fp->x2204_ftcmd_var1;
+            return fp->cmd_vars[1];
         }
     }
 

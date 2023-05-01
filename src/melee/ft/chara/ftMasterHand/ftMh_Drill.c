@@ -66,7 +66,7 @@ void ftMh_Drill_Phys(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* attr = data->ext_attr;
     ft_80085134(gobj);
     if (--fp->mv.mh.unk0.x0 > attr->x84 || fp->mv.mh.unk0.x0 < 0) {
-        fp->x80_self_vel.x = 0;
+        fp->self_vel.x = 0;
     } else {
         ftBossLib_8015C010(gobj, attr->x80);
     }

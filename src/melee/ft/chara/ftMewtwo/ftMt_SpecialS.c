@@ -61,9 +61,9 @@ void ftMt_SpecialS_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    fp->x2210_ThrowFlags.flags = 0;
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x2204_ftcmd_var1 = 0;
+    fp->throw_flags.flags = 0;
+    fp->cmd_vars[0] = 0;
+    fp->cmd_vars[1] = 0;
     fp->mv.mt.SpecialS.isConfusionReflect = false;
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialS, 0, NULL, 0.0f, 1.0f,
@@ -99,13 +99,13 @@ void ftMt_SpecialAirS_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    fp->x2210_ThrowFlags.flags = 0;
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x2204_ftcmd_var1 = 0;
+    fp->throw_flags.flags = 0;
+    fp->cmd_vars[0] = 0;
+    fp->cmd_vars[1] = 0;
     fp->mv.mt.SpecialS.isConfusionReflect = false;
 
     if (fp->fv.mt.x223C_isConfusionBoost == false) {
-        fp->x80_self_vel.y = mewtwoAttrs->x18_MEWTWO_CONFUSION_AIR_BOOST;
+        fp->self_vel.y = mewtwoAttrs->x18_MEWTWO_CONFUSION_AIR_BOOST;
         fp->fv.mt.x223C_isConfusionBoost = true;
     }
 
@@ -122,13 +122,13 @@ static inline void ftMewtwo_SetGrabVictim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_GObj* victimGObj;
 
-    if ((u32) fp->x2200_ftcmd_var0 != 0) {
+    if ((u32) fp->cmd_vars[0] != 0) {
         victimGObj = fp->x1A58_interactedFighter;
         if (victimGObj != NULL) {
             ftCommon_8007E2F4(fp, 0);
             ft_800DE2A8(gobj, victimGObj);
             ft_80090780(victimGObj);
-            fp->x2200_ftcmd_var0 = 0;
+            fp->cmd_vars[0] = 0;
         }
     }
 }
@@ -208,7 +208,7 @@ void ftMt_SpecialS_GroundToAir(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirS,
                               FTMEWTWO_SPECIALS_COLL_FLAG, NULL,
-                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
+                              fp->cur_anim_frame, 1.0f, 0.0f);
 
     ftCommon_8007D468(fp);
 
@@ -230,7 +230,7 @@ void ftMt_SpecialAirS_AirToGround(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialS,
                               FTMEWTWO_SPECIALS_COLL_FLAG, NULL,
-                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
+                              fp->cur_anim_frame, 1.0f, 0.0f);
 
     ftMewtwo_SpecialS_SetGrab(gobj);
 
@@ -260,7 +260,7 @@ void ftMt_SpecialS_ReflectThink(HSD_GObj* gobj)
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
     s32 reflectFlag;
 
-    reflectFlag = fp->x2204_ftcmd_var1;
+    reflectFlag = fp->cmd_vars[1];
     switch (reflectFlag) {
     case CONFUSION_REFLECT_ON:
         ftColl_CreateReflectHit(
@@ -270,7 +270,7 @@ void ftMt_SpecialS_ReflectThink(HSD_GObj* gobj)
         fp->x2218_b4 =
             1; // Here it is... the reason Confusion cannot change ownership.
         fp->mv.mt.SpecialS.isConfusionReflect = true;
-        fp->x2204_ftcmd_var1 = CONFUSION_REFLECT_NONE;
+        fp->cmd_vars[1] = CONFUSION_REFLECT_NONE;
         return;
 
     case CONFUSION_REFLECT_OFF:
@@ -280,7 +280,7 @@ void ftMt_SpecialS_ReflectThink(HSD_GObj* gobj)
             fp->cb.x21C8_callback_OnReflectHit = NULL;
             fp->mv.mt.SpecialS.isConfusionReflect = false;
         }
-        fp->x2204_ftcmd_var1 = CONFUSION_REFLECT_NONE;
+        fp->cmd_vars[1] = CONFUSION_REFLECT_NONE;
         return;
     }
 }

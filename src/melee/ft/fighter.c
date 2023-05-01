@@ -265,7 +265,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->pos_delta.z = 0.0f;
     fp->pos_delta.y = 0.0f;
     fp->pos_delta.x = 0.0f;
-    fp->x894_currentAnimFrame = 0.0f;
+    fp->cur_anim_frame = 0.0f;
     fp->x898_unk = 0.0f;
 
     fp->x89C_frameSpeedMul = 1.0f;
@@ -357,7 +357,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x2219_b0 = 0;
 
     fp->x20A0_accessory = 0;
-    fp->x2210_ThrowFlags.flags = 0;
+    fp->throw_flags.flags = 0;
     fp->x2214 = 0.0f;
     fp->x1974_heldItem = 0;
     fp->x1978 = 0;
@@ -389,7 +389,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
 
     fp->x1064_thrownHitbox.owner = NULL;
     fp->x221C_u16_y = 0;
-    fp->x20AC = NULL;
+    fp->unk_gobj = NULL;
     fp->x221C_flag.bits.b5 = 0;
 
     fp->x2150 = fp->x2154 = fp->x2158 = fp->x215C = fp->x2160 = fp->x2144 =
@@ -1065,7 +1065,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     fp->x2225_b1 = 0;
     fp->x2225_b4 = 0;
 
-    mpColl_8004CBF4(&fp->x6F0_collData);
+    mpColl_8004CBF4(&fp->coll_data);
 
     ft_800DEEA8(gobj);
 
@@ -1213,7 +1213,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
         fp->x89C_frameSpeedMul = arg9;
         fp->x8A0_unk = arg9;
 
-        fp->x894_currentAnimFrame = (arg8 - fp->x89C_frameSpeedMul);
+        fp->cur_anim_frame = (arg8 - fp->x89C_frameSpeedMul);
         fp->x898_unk = 0.0f;
 
         if ((fp->x594_animCurrFlags1.bits.b0) ||
@@ -1313,7 +1313,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
                     {
                         f32 temp_vel =
                             fp->x6A4_transNOffset.z * fp->facing_dir;
-                        fp->x80_self_vel.x = temp_vel;
+                        fp->self_vel.x = temp_vel;
                         fp->gr_vel = temp_vel;
                     }
                 }
@@ -1328,7 +1328,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
                                (fp->ground_or_air == GA_Ground))
                     {
                         f32 temp_vel = fp->x6D8.z * fp->facing_dir;
-                        fp->x80_self_vel.x = temp_vel;
+                        fp->self_vel.x = temp_vel;
                         fp->gr_vel = temp_vel;
                     }
                 }
@@ -2194,7 +2194,7 @@ void Fighter_procUpdate(HSD_GObj* gobj)
 
                 fp->xF0_ground_kb_vel = 0;
             } else {
-                Vec3* pNormal = &fp->x6F0_collData.x14C_ground.normal;
+                Vec3* pNormal = &fp->coll_data.x14C_ground.normal;
                 struct attr* pAttr;
 
                 if (fp->xF0_ground_kb_vel == 0) {
@@ -2247,7 +2247,7 @@ void Fighter_procUpdate(HSD_GObj* gobj)
                 fp->xF4_ground_attacker_shield_kb_vel = 0;
             } else {
                 Vec3* pNormal =
-                    &fp->x6F0_collData.x14C_ground
+                    &fp->coll_data.x14C_ground
                          .normal; // ground_normal offset inside fp is 0x844,
                                   // surface normal points out of the surface.
                 struct attr* pAttr;
@@ -2278,11 +2278,11 @@ void Fighter_procUpdate(HSD_GObj* gobj)
         fp->xE4_ground_accel_1 = fp->xE8_ground_accel_2 = 0;
 
         // self_vel += anim_vel
-        PSVECAdd(&fp->x80_self_vel, &fp->x74_anim_vel, &fp->x80_self_vel);
+        PSVECAdd(&fp->self_vel, &fp->x74_anim_vel, &fp->self_vel);
         VEC_CLEAR(fp->x74_anim_vel);
 
         // copy selfVel into a stack storage variable
-        selfVel = fp->x80_self_vel;
+        selfVel = fp->self_vel;
 
         // TODO: these double_lower_32bit variables are probably integer
         // counters that get decremented each frame, but I was not able to
@@ -2297,10 +2297,10 @@ void Fighter_procUpdate(HSD_GObj* gobj)
             float C1 = 1.0f;
             float C2 = C1 - (float) fp->dmg.x194C / (float) fp->dmg.x1948;
 
-            selfVel.x = C2 * (fp->x80_self_vel.x - fp->xA4_unk_vel.x) +
-                        fp->xA4_unk_vel.x;
-            selfVel.y = C2 * (fp->x80_self_vel.y - fp->xA4_unk_vel.y) +
-                        fp->xA4_unk_vel.y;
+            selfVel.x =
+                C2 * (fp->self_vel.x - fp->xA4_unk_vel.x) + fp->xA4_unk_vel.x;
+            selfVel.y =
+                C2 * (fp->self_vel.y - fp->xA4_unk_vel.y) + fp->xA4_unk_vel.y;
 
             fp->dmg.x194C--;
             if (fp->dmg.x194C == 0) {
@@ -2324,8 +2324,8 @@ void Fighter_procUpdate(HSD_GObj* gobj)
             fp->xD4_unk_vel.y += p_kb_vel->y;
             fp->xD4_unk_vel.z += 0.0f;
 
-            if (fp->x2210_ThrowFlags.b2) {
-                fp->x2210_ThrowFlags.b2 = 0;
+            if (fp->throw_flags.b2) {
+                fp->throw_flags.b2 = 0;
                 bit = 1;
             } else {
                 bit = 0;
@@ -2370,7 +2370,7 @@ void Fighter_procUpdate(HSD_GObj* gobj)
         // __assert functions. But I guess these just stop or reset the game.
         // result is written to where r5 points to, which is 'difference' in
         // this case
-        if (mpLib_800567C0(fp->x6F0_collData.x14C_ground.index, &fp->cur_pos,
+        if (mpLib_800567C0(fp->coll_data.x14C_ground.index, &fp->cur_pos,
                            &difference))
         {
             // fp->position += difference
@@ -2475,9 +2475,9 @@ void Fighter_8006C27C(HSD_GObj* gobj)
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
 
     if (!fp->x221F_flag.bits.b3) {
-        if (fp->x6F0_collData.x19C) {
-            fp->x6F0_collData.x19C--;
-            if (!fp->x6F0_collData.x19C) {
+        if (fp->coll_data.x19C) {
+            fp->coll_data.x19C--;
+            if (!fp->coll_data.x19C) {
                 ftCommon_8007D5BC(fp);
             }
         }
@@ -2961,7 +2961,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
                 if (ftData_OnAbsorb[fp->kind]) {
                     ftData_OnAbsorb[fp->kind](gobj);
                 }
-            } else if (fp->x20AC) {
+            } else if (fp->unk_gobj != NULL) {
                 if (fp->cb.x21F4_callback) {
                     fp->cb.x21F4_callback(gobj);
                 }
@@ -3036,7 +3036,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
         fp->dmg.x1914 = 0;
         fp->dmg.x1918 = 0;
         fp->dmg.x191C = 0.0f;
-        fp->x20AC = NULL;
+        fp->unk_gobj = NULL;
         fp->x221C_flag.bits.b5 = 0;
 
         fp->dmg.x1924 = 0;

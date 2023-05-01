@@ -100,7 +100,7 @@ bool ftPe_8011BAD8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->kind == FTKIND_PEACH) {
-        if (fp->x80_self_vel.y <= 0 && fp->fv.pe.has_float) {
+        if (fp->self_vel.y <= 0 && fp->fv.pe.has_float) {
             if (ftPe_Float_CheckContinueInput(fp)) {
                 ftPe_8011BB6C(gobj, true);
                 return true;
@@ -179,13 +179,13 @@ void ftPe_8011BB6C(HSD_GObj* gobj, bool arg1)
     u8 _[8];
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
-    ftPe_DatAttrs* da = fp->x2D4_specialAttributes;
+    ftPe_DatAttrs* da = fp->dat_attrs;
     Fighter_ChangeMotionState(gobj, ftPe_MS_Float, 0, NULL, 0, 1, 0);
     fp->fv.pe.has_float = false;
     if (arg1) {
         fp->fv.pe.x4 = da->xC;
     }
-    fp->x80_self_vel.y = 0;
+    fp->self_vel.y = 0;
     fp->x2219_b0 = true;
     efAsync_Spawn(gobj, &fp->x60C, 0, 1236,
                   fp->parts[ftParts_8007500C(fp, FtPart_TransN)].x0_jobj);
@@ -323,7 +323,7 @@ static ftPeach_MotionState getFloatDir(HSD_GObj* gobj)
 static void updateFloatDir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftPe_DatAttrs* da = fp->x2D4_specialAttributes;
+    ftPe_DatAttrs* da = fp->dat_attrs;
     ftPeach_MotionState msid = getFloatDir(gobj);
     float anim_start = msid == ftPe_MS_FloatFallF ? da->floatfallf_anim_start
                                                   : da->floatfallb_anim_start;

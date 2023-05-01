@@ -23,7 +23,7 @@ void ftCl_AppealS_Anim(HSD_GObj* gobj)
 
     fp0 = fp1 = gobj->user_data;
 
-    if (fp0->x2204_ftcmd_var1 == 1 && fp1->fv.cl.x2244 == 0) {
+    if (fp0->cmd_vars[1] == 1 && fp1->fv.cl.x2244 == 0) {
         HSD_GObj* item_gobj = it_802C8B28(
             gobj, &fp0->cur_pos, ftParts_8007500C(fp1, FtPart_LThumbNb),
             fp0->facing_dir);
@@ -32,7 +32,7 @@ void ftCl_AppealS_Anim(HSD_GObj* gobj)
             fp0->cb.x21E4_callback_OnDeath2 = ftLk_800EAF58;
             fp0->cb.x21DC_callback_OnTakeDamage = ftLk_800EAF58;
         }
-    } else if (fp1->x2204_ftcmd_var1 == 2) {
+    } else if (fp1->cmd_vars[1] == 2) {
         ftCl_Init_80149268(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {

@@ -153,10 +153,9 @@ void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
         }
 
         float_result = ftAnim_8006F484(gobj);
-        init_animFrame = fp->x894_currentAnimFrame;
+        init_animFrame = fp->cur_anim_frame;
         quotient = init_animFrame / float_result;
-        adjusted_animFrame =
-            fp->x894_currentAnimFrame - float_result * quotient;
+        adjusted_animFrame = fp->cur_anim_frame - float_result * quotient;
         final_animFrame = frame * (adjusted_animFrame / float_result);
         arg_cb(gobj, final_animFrame);
     }

@@ -197,8 +197,8 @@ s32 ft_80087B34(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     f32 atk_shield_kb_x = fp->x98_atk_shield_kb.x;
-    f32 fVar1 = (fp->x80_self_vel.x * fp->x80_self_vel.x) +
-                (fp->x80_self_vel.y * fp->x80_self_vel.y);
+    f32 fVar1 =
+        (fp->self_vel.x * fp->self_vel.x) + (fp->self_vel.y * fp->self_vel.y);
     f32* atk_shield_kb_y = &fp->x98_atk_shield_kb.y;
     f32 fVar2 = (atk_shield_kb_x * atk_shield_kb_x) +
                 ((*atk_shield_kb_y) * (*atk_shield_kb_y));

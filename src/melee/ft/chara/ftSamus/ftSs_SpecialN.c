@@ -18,7 +18,7 @@
 static void ftSamus_801293BC_inner(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
+    ftSamusAttributes* samus_attr = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -26,7 +26,7 @@ static void ftSamus_801293BC_inner(HSD_GObj* gobj)
 #endif
 
     s32 x2230 = fp->fv.ss.x2230;
-    fp->x80_self_vel.x = (fp->facing_dir * (samus_attr->x1C * x2230));
+    fp->self_vel.x = (fp->facing_dir * (samus_attr->x1C * x2230));
 }
 
 void ftSs_SpecialN_801291F0(HSD_GObj* gobj)
@@ -73,8 +73,8 @@ static bool ftSs_SpecialN_801292E4(HSD_GObj* gobj)
 
     Fighter* fp = getFighter(gobj);
 
-    if ((fp->x2200_ftcmd_var0 == 1U) && (!fp->fv.ss.x222C)) {
-        fp->x2200_ftcmd_var0 = 0U;
+    if ((fp->cmd_vars[0] == 1U) && (!fp->fv.ss.x222C)) {
+        fp->cmd_vars[0] = 0U;
         vec2.z = 4;
         vec2.y = 0;
         vec2.x = 0;
@@ -104,13 +104,13 @@ static void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
 #endif
 
     fp = getFighterPlus(gobj);
-    samus_attr = fp->x2D4_specialAttributes;
+    samus_attr = fp->dat_attrs;
 
-    if ((fp->x2204_ftcmd_var1 == 1) && (fp->fv.ss.x222C)) {
+    if ((fp->cmd_vars[1] == 1) && (fp->fv.ss.x222C)) {
         Vec3 vec1;
         u32 x2230;
 
-        fp->x2204_ftcmd_var1 = 2;
+        fp->cmd_vars[1] = 2;
         lb_8000B1CC(fp->parts[FtPart_ThrowN].x0_jobj, NULL, &vec1);
         vec1.z = 0;
         held_item = fp->x1974_heldItem;
@@ -147,12 +147,12 @@ void ftSs_SpecialN_Enter(HSD_GObj* gobj)
 #endif
 
     Fighter_ChangeMotionState(gobj, 343, 0, NULL, 0, 1, 0);
-    fp->x220C_ftcmd_var3 = 0;
-    fp->x2208_ftcmd_var2 = 0;
-    fp->x2204_ftcmd_var1 = 0;
-    fp->x2200_ftcmd_var0 = 0;
+    fp->cmd_vars[3] = 0;
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
     ftCommon_8007D7FC(fp);
-    self_vel = &fp->x80_self_vel;
+    self_vel = &fp->self_vel;
     self_vel->y = 0;
     ftSamus_updateDamageDeathCBs(gobj);
     fp->mv.ss.unk3.x0 = 0;
@@ -171,10 +171,10 @@ void ftSs_SpecialAirN_Enter(HSD_GObj* gobj)
 #endif
 
     Fighter_ChangeMotionState(gobj, 347, 0, NULL, 0, 1, 0);
-    fp->x220C_ftcmd_var3 = 0;
-    fp->x2208_ftcmd_var2 = 0;
-    fp->x2204_ftcmd_var1 = 0;
-    fp->x2200_ftcmd_var0 = 0;
+    fp->cmd_vars[3] = 0;
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
     ftSamus_updateDamageDeathCBs(gobj);
     fp->mv.ss.unk3.x0 = 1;
     fp->mv.ss.unk3.x4 = 0;
@@ -185,7 +185,7 @@ void ftSs_SpecialAirN_Enter(HSD_GObj* gobj)
 void ftSs_SpecialNStart_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
+    ftSamusAttributes* samus_attr = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -221,13 +221,13 @@ void ftSs_SpecialNHold_Anim(HSD_GObj* gobj)
 #endif
 
     fp = fighter2 = getFighter(gobj);
-    samus_attr = samus_attr2 = fp->x2D4_specialAttributes;
-    if (fighter2->x2208_ftcmd_var2) {
+    samus_attr = samus_attr2 = fp->dat_attrs;
+    if (fighter2->cmd_vars[2]) {
         /// this block might be an inline, but couldn't get the regalloc to
         /// behave
         f32 var_f1;
         s32 index;
-        fighter2->x2208_ftcmd_var2 = 0;
+        fighter2->cmd_vars[2] = 0;
         if (fighter2->fv.ss.x2230) {
             var_f1 = fighter2->fv.ss.x2230 / samus_attr->x18;
         } else {
@@ -377,7 +377,7 @@ void ftSs_SpecialNStart_Coll(HSD_GObj* gobj)
     if (!ft_80082708(gobj)) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 347, 0x0C4C5080, NULL,
-                                  fp->x894_currentAnimFrame, 1, 0);
+                                  fp->cur_anim_frame, 1, 0);
         ftSamus_updateDamageDeathCBs(gobj);
     }
 }
@@ -389,10 +389,10 @@ void ftSs_SpecialNHold_Coll(HSD_GObj* gobj)
     if (!ft_80082708(gobj)) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 348, 0x0C4C5080, NULL,
-                                  fp->x894_currentAnimFrame, 1, 0);
+                                  fp->cur_anim_frame, 1, 0);
         ftSamus_updateDamageDeathCBs(gobj);
         ft_80088148(fp, 260021, 127, 64);
-        fp->x2204_ftcmd_var1 = 1;
+        fp->cmd_vars[1] = 1;
     }
 }
 
@@ -402,7 +402,7 @@ void ftSs_SpecialNCancel_Coll(HSD_GObj* gobj)
     if (!ft_80082708(gobj)) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 348, 0x0C4C5080, NULL,
-                                  fp->x894_currentAnimFrame, 1, 0);
+                                  fp->cur_anim_frame, 1, 0);
         ftSamus_updateDamageDeathCBs(gobj);
     }
 }
@@ -413,7 +413,7 @@ void ftSs_SpecialN_Coll(HSD_GObj* gobj)
     if (!ft_80082708(gobj)) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 348, 0x0C4C5080, NULL,
-                                  fp->x894_currentAnimFrame, 1, 0);
+                                  fp->cur_anim_frame, 1, 0);
         ftSamus_updateDamageDeathCBs(gobj);
     }
 }
@@ -424,7 +424,7 @@ void ftSs_SpecialAirNStart_Coll(HSD_GObj* gobj)
     if (ft_80081D0C(gobj) == 1) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 343, 0x0C4C5080, NULL,
-                                  fp->x894_currentAnimFrame, 1, 0);
+                                  fp->cur_anim_frame, 1, 0);
         ftSamus_updateDamageDeathCBs(gobj);
     }
 }
@@ -435,7 +435,7 @@ void ftSs_SpecialAirN_Coll(HSD_GObj* gobj)
     if (ft_80081D0C(gobj) == 1) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 346, 0x0C4C5080, NULL,
-                                  fp->x894_currentAnimFrame, 1, 0);
+                                  fp->cur_anim_frame, 1, 0);
         ftSamus_updateDamageDeathCBs(gobj);
     }
 }
@@ -452,10 +452,10 @@ void ftSs_SpecialS_8012A074(HSD_GObj* gobj)
 {
     bool bool1;
     Fighter* fp = getFighter(gobj);
-    ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
+    ftSamusAttributes* samus_attr = fp->dat_attrs;
 
-    if (fp->x2210_ThrowFlags.b0) {
-        fp->x2210_ThrowFlags.b0 = 0;
+    if (fp->throw_flags.b0) {
+        fp->throw_flags.b0 = 0;
         bool1 = 1;
     } else {
         bool1 = 0;

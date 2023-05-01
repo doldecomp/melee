@@ -94,7 +94,7 @@ void ftNs_AttackLw4Charge_Anim(
 
     fp = GET_FIGHTER(gobj);
     yoyoSmashFrameCurr = fp->mv.ns.attacklw4.yoyoCurrentFrame;
-    ness_attr = fp->x2D4_specialAttributes;
+    ness_attr = fp->dat_attrs;
     fp->mv.ns.attacklw4.yoyoCurrentFrame = (s32) (yoyoSmashFrameCurr + 1);
     ftNs_AttackHi4_YoyoSetUnkRate(gobj);
     ftNs_AttackHi4_YoyoCheckTimedRehit(gobj);

@@ -43,8 +43,8 @@ inline void startActionHelper(HSD_GObj* gobj)
     ftZelda_DatAttrs* attributes;
     Fighter* fighter2; // r5
     fighter2 = GET_FIGHTER(gobj);
-    attributes = fighter2->x2D4_specialAttributes;
-    fighter2->x2200_ftcmd_var0 = 0;
+    attributes = fighter2->dat_attrs;
+    fighter2->cmd_vars[0] = 0;
     fighter2->mv.zd.specialn.x0 = attributes->x4;
 }
 
@@ -70,15 +70,15 @@ void ftZd_SpecialN_Enter(HSD_GObj* gobj)
 void ftZd_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftZelda_DatAttrs* sa = fp->x2D4_specialAttributes;
+    ftZelda_DatAttrs* sa = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[20];
 #endif
 
-    fp->x80_self_vel.y = 0;
-    fp->x80_self_vel.x = fp->x80_self_vel.x / sa->x8;
+    fp->self_vel.y = 0;
+    fp->self_vel.x = fp->self_vel.x / sa->x8;
 
     Fighter_ChangeMotionState(gobj, 342, 0, NULL, 0, 1.0, 0);
     ftAnim_8006EBA4(gobj);
@@ -98,15 +98,15 @@ void ftZd_SpecialN_Anim(HSD_GObj* gobj)
 #endif
 
     fp = GET_FIGHTER(gobj);
-    attributes = fp->x2D4_specialAttributes;
+    attributes = fp->dat_attrs;
 
-    if (fp->x2200_ftcmd_var0 == 1) {
-        fp->x2200_ftcmd_var0 = 2;
+    if (fp->cmd_vars[0] == 1) {
+        fp->cmd_vars[0] = 2;
         ftColl_CreateReflectHit(gobj, &attributes->x84,
                                 &ftZd_SpecialN_8013ADB0);
     }
 
-    if (fp->x2200_ftcmd_var0 == 0) {
+    if (fp->cmd_vars[0] == 0) {
         fp->x2218_b3 = 0;
     }
 
@@ -128,15 +128,15 @@ void ftZd_SpecialAirN_Anim(HSD_GObj* gobj)
 #endif
 
     fp = GET_FIGHTER(gobj);
-    attributes = fp->x2D4_specialAttributes;
+    attributes = fp->dat_attrs;
 
-    if (fp->x2200_ftcmd_var0 == 1U) {
-        fp->x2200_ftcmd_var0 = 2U;
+    if (fp->cmd_vars[0] == 1U) {
+        fp->cmd_vars[0] = 2U;
         ftColl_CreateReflectHit(gobj, &attributes->x84,
                                 &ftZd_SpecialN_8013ADB0);
     }
 
-    if (fp->x2200_ftcmd_var0 == 0U) {
+    if (fp->cmd_vars[0] == 0U) {
         fp->x2218_b3 = 0;
     }
 
@@ -175,7 +175,7 @@ void ftZd_SpecialAirN_Phys(HSD_GObj* gobj)
     {
         s32 var1 = fp->mv.zd.specialn.x0;
         attr* attr = &fp->x110_attr;
-        ftZelda_DatAttrs* sa = fp->x2D4_specialAttributes;
+        ftZelda_DatAttrs* sa = fp->dat_attrs;
 
         if (var1 != 0) {
             fp->mv.zd.specialn.x0 = var1 - 1;
@@ -219,13 +219,13 @@ void ftZd_SpecialN_8013AC88(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 342, 0x0C4C508E, NULL,
-                              fp->x894_currentAnimFrame, 1.0, 0);
+    Fighter_ChangeMotionState(gobj, 342, 0x0C4C508E, NULL, fp->cur_anim_frame,
+                              1.0, 0);
 
     fighter2 = GET_FIGHTER(gobj);
-    attributes = fighter2->x2D4_specialAttributes;
+    attributes = fighter2->dat_attrs;
 
-    if (fighter2->x2200_ftcmd_var0 == 2U) {
+    if (fighter2->cmd_vars[0] == 2U) {
         ftColl_CreateReflectHit(gobj, &attributes->x84,
                                 &ftZd_SpecialN_8013ADB0);
     }
@@ -245,13 +245,13 @@ void ftZd_SpecialN_8013AD1C(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 341, 0x0C4C508E, NULL,
-                              fp->x894_currentAnimFrame, 1.0, 0);
+    Fighter_ChangeMotionState(gobj, 341, 0x0C4C508E, NULL, fp->cur_anim_frame,
+                              1.0, 0);
 
     fighter2 = GET_FIGHTER(gobj);
-    attributes = fighter2->x2D4_specialAttributes;
+    attributes = fighter2->dat_attrs;
 
-    if (fighter2->x2200_ftcmd_var0 == 2U) {
+    if (fighter2->cmd_vars[0] == 2U) {
         ftColl_CreateReflectHit(gobj, &attributes->x84,
                                 &ftZd_SpecialN_8013ADB0);
     }

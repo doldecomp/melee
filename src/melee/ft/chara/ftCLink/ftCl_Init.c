@@ -321,7 +321,7 @@ void ftCl_Init_OnLoad(HSD_GObj* gobj)
     fp->x2224_flag.bits.b7 = true;
     attrs->x54 = lbMthp_8001E8F8(ftData_80085E50(fp, 72));
     ftLk_Init_OnLoadForCLink(fp);
-    attrs = fp->x2D4_specialAttributes;
+    attrs = fp->dat_attrs;
     it_8026B3F8(items[0], attrs->x48);
     it_8026B3F8(items[1], attrs->x2C);
     it_8026B3F8(items[2], attrs->xBC);
@@ -430,7 +430,7 @@ void ftCl_Init_8014919C(HSD_GObj* gobj)
 
     Fighter* fp = gobj->user_data;
     if (fp->x5F8 == 0) {
-        attrs = (void*) fp->x2D4_specialAttributes;
+        attrs = (void*) fp->dat_attrs;
         ftColl_8007B1B8(gobj, &attrs->xC4, ftCl_Init_80149114);
         fp->x221B_b3 = true;
         fp->x221B_b4 = true;
@@ -495,7 +495,7 @@ u32 ftCl_Init_801492F4(HSD_GObj* gobj)
     if (gobj != NULL) {
         fp = gobj->user_data;
         if (fp != NULL) {
-            return fp->x2204_ftcmd_var1;
+            return fp->cmd_vars[1];
         }
     }
     return 0;
@@ -505,5 +505,5 @@ void ftCl_Init_80149318(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ft_800DEAE8(gobj, 342, 343);
-    fp->x2204_ftcmd_var1 = 0;
+    fp->cmd_vars[1] = 0;
 }

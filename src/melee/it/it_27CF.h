@@ -168,5 +168,6 @@ void it_802BCFC4(HSD_GObj* gobj, f32* arg1, itChainSegment* chainSegment,
                  Item* item_data, f32 arg4);
 HSD_GObj* it_802BB290(HSD_GObj* gobj, Vec3* arg1, f32 facing_dir);
 void it_802BCF84(HSD_GObj*);
+void it_802BD158(HSD_GObj* gobj, Vec3*, int, float);
 
 #endif
