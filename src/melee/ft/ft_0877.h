@@ -1105,7 +1105,7 @@ UNK_RET ft_800CC6C8(UNK_PARAMS);
 bool ft_800DF478(Fighter*);
 bool ft_80095328(HSD_GObj*, bool);
 void ft_8008D5FC(HSD_GObj*);
-
+void ft_800957F4(HSD_GObj* gobj, FtMotionId msid);
 void ft_0877_SetFacingDirection(HSD_GObj*, f32 facing_dir);
 
 /// Interrupt_Wait

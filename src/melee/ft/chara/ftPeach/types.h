@@ -12,7 +12,7 @@ struct ftPeach_FighterVars {
     /* fp+223C */ u32 x10;
     /* fp+2240 */ u32 x14;
     /* fp+2244 */ u32 x18;
-    /* fp+2248 */ u32 x20;
+    /* fp+2248 */ HSD_GObj* veg_gobj;
 };
 
 typedef struct ftPe_DatAttrs {
@@ -20,7 +20,10 @@ typedef struct ftPe_DatAttrs {
     /* +4 */ float floatfallb_anim_start;
     /* +8 */ float floatfall_anim_start_offset;
     /* +C */ float xC;
-    /* +10 */ u8 x10[0x30 - 0x10];
+    /* +10 */ int x10;
+    /* +14 */ int x14;
+    /* +18 */ int x18;
+    /* +1C */ u8 x1C[0x30 - 0x1C];
     /* +30 */ int x30;
     /* +34 */ float x34;
     /* +38 */ f32 x38;

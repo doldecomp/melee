@@ -362,7 +362,7 @@ void ftLk_800EAF58(HSD_GObj* gobj)
 void ftLk_Init_OnItemPickupExt(HSD_GObj* gobj, int arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (it_8026B2B4(fp->x1974_heldItem) == 1) {
+    if (it_8026B2B4(fp->item_gobj) == 1) {
         ftParts_80074A4C(gobj, 1, 1);
     }
     ftParts_80074A4C(gobj, 2, 1);
@@ -382,7 +382,7 @@ void ftLk_Init_OnItemVisible(HSD_GObj* gobj)
 void ftLk_Init_OnItemDropExt(HSD_GObj* gobj, bool arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (it_8026B2B4(fp->x1974_heldItem) == 1) {
+    if (it_8026B2B4(fp->item_gobj) == 1) {
         ftParts_80074A4C(gobj, 1, 0);
     }
     ftParts_80074A4C(gobj, 2, 0);

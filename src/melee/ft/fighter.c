@@ -359,7 +359,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x20A0_accessory = 0;
     fp->throw_flags.flags = 0;
     fp->x2214 = 0.0f;
-    fp->x1974_heldItem = 0;
+    fp->item_gobj = 0;
     fp->x1978 = 0;
 
     fp->x221E_flag.bits.b3 = 1;
@@ -1579,9 +1579,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
                 if (fp->x2104 == 0) {
                     fp->x2221_flag.bits.b4 = 0;
 
-                    if (fp->x1974_heldItem &&
-                        itGetKind(fp->x1974_heldItem) == 0x67)
-                    {
+                    if (fp->item_gobj && itGetKind(fp->item_gobj) == 0x67) {
                         fp->x2221_flag.bits.b5 = 1;
                         ft_800968C8(gobj);
                     } else {
@@ -1632,8 +1630,8 @@ void Fighter_8006A360(HSD_GObj* gobj)
             }
         }
 
-        if (fp->x1974_heldItem) {
-            if (itGetKind(fp->x1974_heldItem) != 0x1C) {
+        if (fp->item_gobj) {
+            if (itGetKind(fp->item_gobj) != 0x1C) {
                 !fp;
             } else {
                 ft_800C511C(gobj);
@@ -2678,7 +2676,7 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3)
     bool hold_item_bool = 0;
     Vec3 vec;
 
-    if (fp->x1974_heldItem && !it_8026B2B4(fp->x1974_heldItem)) {
+    if (fp->item_gobj && !it_8026B2B4(fp->item_gobj)) {
         hold_item_bool = 1;
     }
 
@@ -2692,14 +2690,14 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3)
         if ( ///// giant if condition
             hold_item_bool && temp_bool &&
             ((HSD_Randi(p_ftCommonData->x418) < arg1) ||
-             ((((it_8026B30C(fp->x1974_heldItem) == 3) &&
-                it_8026B594(fp->x1974_heldItem))) &&
+             ((((it_8026B30C(fp->item_gobj) == 3) &&
+                it_8026B594(fp->item_gobj))) &&
               !HSD_Randi(p_ftCommonData->x41C))))
         {
             if (fp->x1978) {
                 Item_8026ABD8(fp->x1978, &vec, 1.0f);
             }
-            Item_8026ABD8(fp->x1974_heldItem, &vec, 1.0f);
+            Item_8026ABD8(fp->item_gobj, &vec, 1.0f);
         }
         if (fp->x197C) {
             if (HSD_Randi(p_ftCommonData->x418) < arg1) {

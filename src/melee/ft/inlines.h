@@ -118,8 +118,8 @@ static inline void Fighter_OnItemPickup(HSD_GObj* gobj, bool catchItemFlag,
                                         bool bool2, bool bool3)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!it_8026B2B4(fp->x1974_heldItem)) {
-        switch (it_8026B320(fp->x1974_heldItem)) {
+    if (!it_8026B2B4(fp->item_gobj)) {
+        switch (it_8026B320(fp->item_gobj)) {
         case 1:
             ftAnim_80070FB4(gobj, bool2, 1);
             break;
@@ -142,7 +142,7 @@ static inline void Fighter_OnItemPickup(HSD_GObj* gobj, bool catchItemFlag,
 static inline void Fighter_OnItemInvisible(HSD_GObj* gobj, bool bool)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!it_8026B2B4(fp->x1974_heldItem)) {
+    if (!it_8026B2B4(fp->item_gobj)) {
         ftAnim_80070CC4(gobj, bool);
     }
 }
@@ -150,7 +150,7 @@ static inline void Fighter_OnItemInvisible(HSD_GObj* gobj, bool bool)
 static inline void Fighter_OnItemVisible(HSD_GObj* gobj, bool bool)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!it_8026B2B4(fp->x1974_heldItem)) {
+    if (!it_8026B2B4(fp->item_gobj)) {
         ftAnim_80070C48(gobj, bool);
     }
 }
@@ -187,6 +187,17 @@ static inline CollData* Fighter_GetCollData(Fighter* fp)
     return &fp->coll_data;
 }
 
+/// @todo This and #ftCheckThrowB3 are probably one macro or something.
+static inline bool ftCheckThrowB0(Fighter* fp)
+{
+    if (fp->throw_flags.b0) {
+        fp->throw_flags.b0 = false;
+        return true;
+    } else {
+        return false;
+    }
+}
+
 static inline bool ftCheckThrowB3(Fighter* fp)
 {
     if (fp->throw_flags.b3) {
@@ -197,13 +208,11 @@ static inline bool ftCheckThrowB3(Fighter* fp)
     }
 }
 
-// Ternary macro for fcmpo-based facing direction check
-
+/// Ternary macro for fcmpo-based facing direction check
 #define CLIFFCATCH_O(fp)                                                      \
     ((fp)->facing_dir < 0.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
 
-// Ternary macro for fcmpu-based facing direction check
-
+/// Ternary macro for fcmpu-based facing direction check
 #define CLIFFCATCH_U(fp)                                                      \
     ((fp)->facing_dir != 1.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
 

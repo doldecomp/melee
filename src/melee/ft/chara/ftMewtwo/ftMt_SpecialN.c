@@ -266,7 +266,7 @@ void ftMt_SpecialN_ReleaseShadowBall(HSD_GObj* gobj)
         Vec3 sp38;
         fp->cmd_vars[1] = 2;
         ftMewtwo_SpecialN_GetPos(fp, &sp38);
-        shadowBallGObj = fp->x1974_heldItem;
+        shadowBallGObj = fp->item_gobj;
         if (1.0f == fp->facing_dir) {
             facingDir = (f64) 0.0;
         } else {
@@ -302,7 +302,7 @@ void ftMt_SpecialN_ReleaseShadowBall(HSD_GObj* gobj)
                 }
             }
         }
-        fp->x1974_heldItem = shadowBallGObj;
+        fp->item_gobj = shadowBallGObj;
         if ((f32) fp->fv.mt.x2234_shadowBallCharge ==
             mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
         {

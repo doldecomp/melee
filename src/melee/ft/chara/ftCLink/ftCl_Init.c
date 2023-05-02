@@ -340,7 +340,7 @@ void ftCl_Init_OnItemPickupExt(HSD_GObj* gobj, bool arg1)
 
     Fighter* fp = gobj->user_data;
 
-    if (it_8026B2B4(fp->x1974_heldItem) == true) {
+    if (it_8026B2B4(fp->item_gobj) == true) {
         ftParts_80074A4C(gobj, 1, 1);
     }
 
@@ -367,7 +367,7 @@ void ftCl_Init_OnItemDropExt(HSD_GObj* gobj, bool arg1)
 
     Fighter* fp = gobj->user_data;
 
-    if (it_8026B2B4(fp->x1974_heldItem) == true) {
+    if (it_8026B2B4(fp->item_gobj) == true) {
         ftParts_80074A4C(gobj, 1, 0);
     }
 
