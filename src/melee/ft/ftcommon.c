@@ -1212,7 +1212,7 @@ void ftCommon_8007E6DC(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2)
         ftData_OnItemDropExt[fp->kind](gobj, arg2);
     }
     pl_8003EA08(fp->xC_playerID, fp->x221F_flag.bits.b4);
-    fp->x1974_heldItem = NULL;
+    fp->item_gobj = NULL;
 }
 
 void ftCommon_8007E79C(HSD_GObj* gobj, s32 arg1)
@@ -1281,17 +1281,17 @@ void ftCommon_8007E83C(HSD_GObj* gobj, s32 arg1, f32 div)
 
     if (div == 0) {
         val = fp->x89C_frameSpeedMul;
-    } else if (itGetKind(fp->x1974_heldItem) == It_Kind_Parasol) {
+    } else if (itGetKind(fp->item_gobj) == It_Kind_Parasol) {
         val = fp->x89C_frameSpeedMul *
-              (it_8028B08C(fp->x1974_heldItem, parasol_table_2[arg1]) / div);
+              (it_8028B08C(fp->item_gobj, parasol_table_2[arg1]) / div);
     } else {
         val = fp->x89C_frameSpeedMul *
-              (it_802BDA40(fp->x1974_heldItem, parasol_table_4[arg1]) / div);
+              (it_802BDA40(fp->item_gobj, parasol_table_4[arg1]) / div);
     }
-    if (itGetKind(fp->x1974_heldItem) == It_Kind_Parasol) {
-        parasol_table_1[arg1](fp->x1974_heldItem, val);
+    if (itGetKind(fp->item_gobj) == It_Kind_Parasol) {
+        parasol_table_1[arg1](fp->item_gobj, val);
     } else {
-        parasol_table_3[arg1](fp->x1974_heldItem, val);
+        parasol_table_3[arg1](fp->item_gobj, val);
     }
 }
 
@@ -1299,10 +1299,8 @@ void ftCommon_8007E83C(HSD_GObj* gobj, s32 arg1, f32 div)
 s32 ftCo_GetParasolStatus(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x1974_heldItem != NULL &&
-        itGetKind(fp->x1974_heldItem) == It_Kind_Parasol)
-    {
-        switch (it_8026B7A4(fp->x1974_heldItem)) {
+    if (fp->item_gobj != NULL && itGetKind(fp->item_gobj) == It_Kind_Parasol) {
+        switch (it_8026B7A4(fp->item_gobj)) {
         case 7:
             return 0;
         case 8:
@@ -1319,10 +1317,10 @@ s32 ftCo_GetParasolStatus(HSD_GObj* gobj)
             return 6;
         }
     }
-    if (fp->x1974_heldItem != NULL &&
-        itGetKind(fp->x1974_heldItem) == It_Kind_Peach_Parasol)
+    if (fp->item_gobj != NULL &&
+        itGetKind(fp->item_gobj) == It_Kind_Peach_Parasol)
     {
-        switch (it_8026B7A4(fp->x1974_heldItem)) {
+        switch (it_8026B7A4(fp->item_gobj)) {
         case 1:
             return 4;
         case 0:
@@ -1428,21 +1426,21 @@ void ftCommon_8007EE0C(Fighter* fp, s32 arg1)
 
 void ftCommon_8007EEC8(Fighter* fp, s32 arg1, s32 arg2)
 {
-    if (fp->x1974_heldItem != NULL && fp->x1974_heldItem->classifier == 6 &&
-        itGetKind(fp->x1974_heldItem) == It_Kind_Sword)
+    if (fp->item_gobj != NULL && fp->item_gobj->classifier == 6 &&
+        itGetKind(fp->item_gobj) == It_Kind_Sword)
     {
         f32 multiplier = 1.0 / 256;
         f32 tmp = arg2 * multiplier;
-        it_80284FC4(fp->x1974_heldItem, arg1, tmp);
+        it_80284FC4(fp->item_gobj, arg1, tmp);
     }
 }
 
 void ftCommon_8007EF5C(Fighter* fp, s32 arg1)
 {
-    if (fp->x1974_heldItem != NULL && fp->x1974_heldItem->classifier == 6 &&
-        itGetKind(fp->x1974_heldItem) == It_Kind_Sword)
+    if (fp->item_gobj != NULL && fp->item_gobj->classifier == 6 &&
+        itGetKind(fp->item_gobj) == It_Kind_Sword)
     {
-        it_80285024(fp->x1974_heldItem, arg1);
+        it_80285024(fp->item_gobj, arg1);
     }
 }
 
@@ -1577,11 +1575,11 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     ftCamera_80076064(dst);
     ft_800849EC(src, dst);
     ft_80081C88(dst_gobj, src->x34_scale.y);
-    if (src->x1974_heldItem != NULL) {
-        dst->x1974_heldItem = src->x1974_heldItem;
+    if (src->item_gobj != NULL) {
+        dst->item_gobj = src->item_gobj;
         dst->x221E_flag.bits.b3 = src->x221E_flag.bits.b3;
         ft_80094818(dst_gobj, 1);
-        it_8026B9A8(src->x1974_heldItem, dst_gobj, dst->ft_data->x8->unk10);
+        it_8026B9A8(src->item_gobj, dst_gobj, dst->ft_data->x8->unk10);
     }
     un_80322314();
     ft_800BFD04(gobj);
@@ -1596,7 +1594,7 @@ extern void (*ftData_OnKnockbackExit[])(HSD_GObj*);
 void ftCommon_8007F578(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x1974_heldItem == NULL) {
+    if (fp->item_gobj == NULL) {
         return;
     }
     if (ftData_OnItemInvisible[fp->kind] != NULL) {
@@ -1607,7 +1605,7 @@ void ftCommon_8007F578(HSD_GObj* gobj)
 void ftCommon_8007F5CC(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = gobj->user_data;
-    HSD_GObj* item = fp->x1974_heldItem;
+    HSD_GObj* item = fp->item_gobj;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH

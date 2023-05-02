@@ -51,8 +51,7 @@ s32 ft_800878BC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->x1974_heldItem != NULL) && (it_8026B2B4(fp->x1974_heldItem) == 1))
-    {
+    if ((fp->item_gobj != NULL) && (it_8026B2B4(fp->item_gobj) == 1)) {
         return true;
     }
 
@@ -63,9 +62,7 @@ s32 ft_80087900(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->x1974_heldItem != NULL) &&
-        (itGetKind(fp->x1974_heldItem) == 0x1E))
-    {
+    if ((fp->item_gobj != NULL) && (itGetKind(fp->item_gobj) == 0x1E)) {
         return true;
     }
 
@@ -76,8 +73,7 @@ s32 ft_80087944(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->x1974_heldItem != NULL) && (itGetKind(fp->x1974_heldItem) == 0x7))
-    {
+    if ((fp->item_gobj != NULL) && (itGetKind(fp->item_gobj) == 0x7)) {
         return true;
     }
 

@@ -33,12 +33,12 @@ void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj)
 
     if (fp->fv.gw.x2250_manholeGObj2 == NULL) {
         lb_8000B1CC(fp->parts[FtPart_LHandNb].x0_jobj, NULL, &sp10);
-        manholeGObj = fp->x1974_heldItem;
+        manholeGObj = fp->item_gobj;
         if (manholeGObj != NULL) {
             fp->fv.gw.x2248_manholeGObj = manholeGObj;
-            it_8026BB44(fp->x1974_heldItem);
-            it_8026B724(fp->x1974_heldItem);
-            ftCommon_8007E6DC(gobj, fp->x1974_heldItem, 1);
+            it_8026BB44(fp->item_gobj);
+            it_8026B724(fp->item_gobj);
+            ftCommon_8007E6DC(gobj, fp->item_gobj, 1);
         }
         fp->fv.gw.x2250_manholeGObj2 =
             it_802C65E4(gobj, &sp10, FtPart_LHandNb, fp->facing_dir);
@@ -67,10 +67,10 @@ void ftGw_AttackLw3_ItemManholeRemove(HSD_GObj* gobj)
     fp->fv.gw.x2250_manholeGObj2 = NULL;
     manholeGObj = fp->fv.gw.x2248_manholeGObj;
     if (manholeGObj != NULL) {
-        fp->x1974_heldItem = manholeGObj;
+        fp->item_gobj = manholeGObj;
         fp->fv.gw.x2248_manholeGObj = NULL;
-        it_8026BB20(fp->x1974_heldItem);
-        it_8026B73C(fp->x1974_heldItem);
+        it_8026BB20(fp->item_gobj);
+        it_8026B73C(fp->item_gobj);
         ft_80094818(gobj, 1);
     }
 }

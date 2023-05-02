@@ -84,7 +84,7 @@ bool ftPe_8011BE80(HSD_GObj* gobj)
     if (fp->input.x668 & HSD_Pad_A || ft_800DF478(fp)) {
         if (fp->fv.pe.x4 > 0) {
             if (ft_8008CE68(fp) - 65U <= 1) {
-                HSD_GObj* igobj = fp->x1974_heldItem;
+                HSD_GObj* igobj = fp->item_gobj;
                 if (igobj != NULL && it_8026B30C(igobj) == 3) {
                     ft_800CDDA0(gobj);
                     return true;

@@ -19,8 +19,8 @@ void ft_8007C224(HSD_GObj* gobj);
 void ft_8007C114(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x1974_heldItem != NULL) {
-        switch (itGetKind(fp->x1974_heldItem)) {
+    if (fp->item_gobj != NULL) {
+        switch (itGetKind(fp->item_gobj)) {
         case It_Kind_Hammer:
             ft_800C555C(gobj);
             break;

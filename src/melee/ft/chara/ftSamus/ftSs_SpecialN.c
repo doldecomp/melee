@@ -113,7 +113,7 @@ static void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
         fp->cmd_vars[1] = 2;
         lb_8000B1CC(fp->parts[FtPart_ThrowN].x0_jobj, NULL, &vec1);
         vec1.z = 0;
-        held_item = fp->x1974_heldItem;
+        held_item = fp->item_gobj;
         if (fp->facing_dir == +1) {
             var_f0 = 0;
         } else {
@@ -132,7 +132,7 @@ static void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
 
         ftSs_SpecialN_801291F0(gobj);
         efSync_Spawn(1158, gobj, &vec1, &fp->facing_dir);
-        fp->x1974_heldItem = held_item;
+        fp->item_gobj = held_item;
     }
 }
 

@@ -241,7 +241,8 @@ typedef enum Fighter_Part {
     FtPart_RThumbNb,
     FtPart_RHandNb,
     FtPart_ThrowN,
-    FtPart_TransN2
+    FtPart_TransN2,
+    FtPart_109 = 109,
 } Fighter_Part;
 
 typedef enum FtWalkType {

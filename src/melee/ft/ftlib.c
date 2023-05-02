@@ -352,7 +352,7 @@ void ftLib_800866DC(HSD_GObj* gobj, Vec3* v)
 void ftLib_80086724(HSD_GObj* gobj, HSD_GObj* other)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x1974_heldItem != NULL || fp->x1978 != NULL) {
+    if (fp->item_gobj != NULL || fp->x1978 != NULL) {
         ftCommon_8007E6DC(gobj, other, 1);
     }
 }
@@ -368,13 +368,13 @@ void ftLib_80086764(HSD_GObj* gobj)
 HSD_GObj* ftLib_80086794(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x1974_heldItem;
+    return fp->item_gobj;
 }
 
 bool ftLib_800867A0(HSD_GObj* gobj, HSD_GObj* arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x1974_heldItem == arg1 || fp->x1978 == arg1) {
+    if (fp->item_gobj == arg1 || fp->x1978 == arg1) {
         return true;
     } else {
         return false;
@@ -431,12 +431,12 @@ bool ftLib_800868D4(HSD_GObj* gobj, HSD_GObj* arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x1974_heldItem != arg1 && fp->x197C != arg1 && fp->x1980 != arg1) {
+    if (fp->item_gobj != arg1 && fp->x197C != arg1 && fp->x1980 != arg1) {
         return true;
     }
 
     if (fp->x221E_flag.bits.b0 || fp->x221E_flag.bits.b5 ||
-        (!fp->x221E_flag.bits.b3 && fp->x1974_heldItem == arg1) ||
+        (!fp->x221E_flag.bits.b3 && fp->item_gobj == arg1) ||
         (!fp->x221E_flag.bits.b4 && (fp->x197C == arg1 || fp->x1980 == arg1)))
     {
         return false;

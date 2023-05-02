@@ -17,7 +17,7 @@
 
 #include <baselib/gobj.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 static double const lbl_804D97F0 = -0.0078125;
 #endif
 

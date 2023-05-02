@@ -144,6 +144,9 @@ Short for "unknown."
 @section glossary_vec vec
 Short for "vector."
 
+@section glossary_veg veg
+Short for "vegetable."
+
 @section glossary_vel vel
 Short for "velocity."
 

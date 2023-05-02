@@ -32,7 +32,7 @@ void ftDk_MS_349_800E06D8(HSD_GObj* gobj)
         doSomething(gobj);
     } else {
         vec.x = vec.y = vec.z = 0;
-        Item_8026ABD8(fp->x1974_heldItem, &vec, 1);
+        Item_8026ABD8(fp->item_gobj, &vec, 1);
         ft_8008E908(gobj, 0);
     }
 }

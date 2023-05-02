@@ -170,4 +170,9 @@ HSD_GObj* it_802BB290(HSD_GObj* gobj, Vec3* arg1, f32 facing_dir);
 void it_802BCF84(HSD_GObj*);
 void it_802BD158(HSD_GObj* gobj, Vec3*, int, float);
 
+/// @returns An #Item #HSD_GObj.
+HSD_GObj* it_802BD4AC(HSD_GObj*, Vec3*, u8, s32, f32);
+
+void it_802BD45C(HSD_GObj* gobj);
+
 #endif

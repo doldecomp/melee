@@ -856,7 +856,7 @@ struct Fighter {
     /* fp+1969 */ u8 x1969_walljumpUsed;
     /* fp+196C */ f32 x196C_hitlag_mult;
     /* fp+1970 */ s32 x1970;
-    /* fp+1974 */ HSD_GObj* x1974_heldItem;
+    /* fp+1974 */ HSD_GObj* item_gobj;
     /* fp+1978 */ HSD_GObj* x1978;
     /* fp+197C */ HSD_GObj* x197C;
     /* fp+1980 */ HSD_GObj* x1980;

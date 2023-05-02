@@ -4,6 +4,14 @@
 
 #include "ftPe_Init.h"
 
+#include "ftPe_AttackS4.h"
+#include "ftPe_Float.h"
+#include "ftPe_FloatAttack.h"
+#include "ftPe_FloatFall.h"
+#include "ftPe_SpecialHi.h"
+#include "ftPe_SpecialLw.h"
+#include "ftPe_SpecialN.h"
+#include "ftPe_SpecialS.h"
 #include "types.h"
 
 #include "ft/ft_0877.h"
@@ -401,7 +409,7 @@ void ftPe_Init_OnDeath(HSD_GObj* gobj)
     fp->fv.pe.x10 = 0;
     fp->fv.pe.xC = 0;
     fp->fv.pe.x18 = 0;
-    fp->fv.pe.x20 = 0;
+    fp->fv.pe.veg_gobj = NULL;
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 2, 0);
     ftParts_80074A4C(gobj, 3, -1);
@@ -442,13 +450,12 @@ void ftPe_Init_OnLoad(HSD_GObj* gobj)
 
 /* static */ void ftPe_8011D598(HSD_GObj* gobj);
 /* static */ void ftPe_8011E2E8(HSD_GObj* gobj);
-/* static */ void ftPe_8011CFA0(HSD_GObj* gobj);
 
 void ftPe_Init_8011B704(HSD_GObj* gobj)
 {
     ftPe_8011D598(gobj);
     ftPe_8011E2E8(gobj);
-    ftPe_8011CFA0(gobj);
+    ftPe_SpecialLw_8011CFA0(gobj);
 }
 
 void ftPe_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
