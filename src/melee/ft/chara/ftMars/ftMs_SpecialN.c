@@ -98,21 +98,21 @@ void ftMs_SpecialAirNStart_IASA(HSD_GObj* gobj)
 void ftMs_SpecialNStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    MarsAttributes* attr = fp->dat_attrs;
+    MarsAttributes* da = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    ftCommon_8007C930(fp, attr->x10);
+    ftCommon_8007C930(fp, da->x10);
     ftCommon_8007CB74(gobj);
 }
 
 void ftMs_SpecialAirNStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    MarsAttributes* attr = fp->dat_attrs;
+    MarsAttributes* da = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -120,7 +120,7 @@ void ftMs_SpecialAirNStart_Phys(HSD_GObj* gobj)
 #endif
 
     ftCommon_8007D4B8(fp);
-    ftCommon_8007CE94(fp, attr->x10);
+    ftCommon_8007CE94(fp, da->x10);
 }
 
 // 801369A4 00133584
@@ -177,7 +177,7 @@ void ftMs_SpecialNLoop_Anim(HSD_GObj* gobj)
     if (fp->mv.ms.specialn.x0 % 30 == 0) {
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].x0_jobj, 0,
                     &sp28);
-        lb_800119DC(&sp28, 10, 0.5, 0.05, 60 * DEG_TO_RAD);
+        lb_800119DC(&sp28, 10, 0.5, 0.05, 60 * deg_to_rad);
     }
 
     fp->mv.ms.specialn.x0++;
@@ -202,7 +202,7 @@ void ftMs_SpecialAirNLoop_Anim(HSD_GObj* gobj)
     if ((s32) fp->mv.ms.specialn.x0 % 30 == 0) {
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].x0_jobj, 0,
                     &sp28);
-        lb_800119DC(&sp28, 10, 0.5, 0.05, 60 * DEG_TO_RAD);
+        lb_800119DC(&sp28, 10, 0.5, 0.05, 60 * deg_to_rad);
     }
     fp->mv.ms.specialn.x0++;
     if ((s32) fp->mv.ms.specialn.x0 > attrs->x0 * 30) {
@@ -217,7 +217,7 @@ void ftMs_SpecialAirNLoop_Anim(HSD_GObj* gobj)
 void ftMs_SpecialNLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if ((fp->input.x65C_heldInputs & 0x200) == 0) {
+    if ((fp->input.held_inputs & 0x200) == 0) {
         fp->cmd_vars[0] = 0;
         ftMs_SpecialN_80137354(gobj);
     }
@@ -228,7 +228,7 @@ void ftMs_SpecialNLoop_IASA(HSD_GObj* gobj)
 void ftMs_SpecialAirNLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if ((fp->input.x65C_heldInputs & 0x200) == 0) {
+    if ((fp->input.held_inputs & 0x200) == 0) {
         fp->cmd_vars[0] = 0;
         ftMs_SpecialN_801373B8(gobj);
     }
@@ -307,11 +307,11 @@ void ftMs_SpecialN_80136EAC(HSD_GObj* gobj)
 void ftMs_SpecialNEnd_Anim(HSD_GObj* gobj)
 {
     s32 ndx;
-    MarsAttributes* attr;
+    MarsAttributes* da;
     Fighter* fp;
 
     fp = gobj->user_data;
-    attr = fp->dat_attrs;
+    da = fp->dat_attrs;
     if (fp->cmd_vars[0] == 0) {
         s32 hb = (s32) fp;
         ndx = 0;
@@ -321,9 +321,9 @@ void ftMs_SpecialNEnd_Anim(HSD_GObj* gobj)
                     (HitCapsule*) (hb + 0x914),
 
 #if MUST_MATCH
-                    (f32) (attr->x4 + fp->mv.ms.specialn.x0 / 30 * attr->x8),
+                    (f32) (da->x4 + fp->mv.ms.specialn.x0 / 30 * da->x8),
 #else
-                    attr->x4 + fp->mv.ms.specialn.x0 / 30.0F * attr->x8,
+                    da->x4 + fp->mv.ms.specialn.x0 / 30.0F * da->x8,
 #endif
 
                     gobj);
@@ -345,7 +345,7 @@ void ftMs_SpecialNEnd_Anim(HSD_GObj* gobj)
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].x0_jobj, 0,
                     &position);
         // AestheticWindEffect(r3=sourcelocation,r4=duration,f1=radiusSize,f2=effectdegradation,f3=unk)
-        lb_800119DC(&position, 120, 0.9, 0.02, 60 * DEG_TO_RAD);
+        lb_800119DC(&position, 120, 0.9, 0.02, 60 * deg_to_rad);
     }
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -360,19 +360,19 @@ void ftMs_SpecialNEnd_Anim(HSD_GObj* gobj)
 void ftMs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
 {
     s32 ndx;
-    MarsAttributes* attr;
+    MarsAttributes* da;
     Fighter* fp;
 
     fp = gobj->user_data;
-    attr = fp->dat_attrs;
+    da = fp->dat_attrs;
     if (fp->cmd_vars[0] == 0) {
         // register swap:
         // s32 ndx;
         // for (ndx = 0; ndx < 4; ndx++) {
         //     if (fp->x914[ndx].x0 == 1) {
         //         // Hitbox_ApplyDamageStalingAndMore
-        //         ftColl_8007ABD0(&fp->x914[ndx], (f32) (attr->x4 +
-        //         (s32)fp->mv.ms.specialn.x0 / 30 * attr->x8), gobj);
+        //         ftColl_8007ABD0(&fp->x914[ndx], (f32) (ftCo_DatAttrs->x4 +
+        //         (s32)fp->mv.ms.specialn.x0 / 30 * ftCo_DatAttrs->x8), gobj);
         //     }
         // }
 
@@ -385,9 +385,9 @@ void ftMs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
                     (HitCapsule*) (hb + 0x914),
 
 #if MUST_MATCH
-                    (f32) (attr->x4 + fp->mv.ms.specialn.x0 / 30 * attr->x8),
+                    (f32) (da->x4 + fp->mv.ms.specialn.x0 / 30 * da->x8),
 #else
-                    attr->x4 + fp->mv.ms.specialn.x0 / 30.0F * attr->x8,
+                    da->x4 + fp->mv.ms.specialn.x0 / 30.0F * da->x8,
 #endif
 
                     gobj);
@@ -409,7 +409,7 @@ void ftMs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].x0_jobj, 0,
                     &pos);
         // AestheticWindEffect(r3=sourcelocation,r4=duration,f1=radiusSize,f2=effectdegradation,f3=unk)
-        lb_800119DC(&pos, 120, 0.9, 0.02, 60 * DEG_TO_RAD);
+        lb_800119DC(&pos, 120, 0.9, 0.02, 60 * deg_to_rad);
     }
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {

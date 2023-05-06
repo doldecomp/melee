@@ -102,10 +102,10 @@ void ftMh_Wait1_2_Phys(HSD_GObj* gobj)
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftData* data = fp->ft_data;
-    ftMasterHand_SpecialAttrs* attr = data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = data->ext_attr;
     ft_80085134(gobj);
-    ftBossLib_8015BE40(gobj, &fp->mv.mh.unk0.xC, &fp->mv.mh.unk0.x18,
-                       attr->x2C, attr->x28);
+    ftBossLib_8015BE40(gobj, &fp->mv.mh.unk0.xC, &fp->mv.mh.unk0.x18, da->x2C,
+                       da->x28);
 }
 
 void ftMh_Wait1_2_Coll(HSD_GObj* gobj)
@@ -122,7 +122,7 @@ void ftMh_Wait1_2_Coll(HSD_GObj* gobj)
 void ftMh_MS_389_80151018(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     fp->mv.mh.unk0.x20 = 0;
     {
         Vec3 pos;
@@ -130,8 +130,8 @@ void ftMh_MS_389_80151018(HSD_GObj* gobj)
 #ifdef MUST_MATCH
         u8 _[8];
 #endif
-        pos.x = attr->x30_pos2.x;
-        pos.y = attr->x30_pos2.y;
+        pos.x = da->x30_pos2.x;
+        pos.y = da->x30_pos2.y;
         pos.z = 0;
         fp->fv.mh.x2258 = ftMh_MS_Wait2_1;
         {

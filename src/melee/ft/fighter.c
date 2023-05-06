@@ -440,7 +440,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x6A4_transNOffset.z = 0.0f;
     fp->x6A4_transNOffset.y = 0.0f;
     fp->x6A4_transNOffset.x = 0.0f;
-    fp->x6BC_inputStickangle = 0.0f;
+    fp->lstick_angle = 0.0f;
 
     fp->x6C0.z = 0.0f;
     fp->x6C0.y = 0.0f;
@@ -591,13 +591,13 @@ void Fighter_ResetInputData_80068854(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->input.x620_lstick_x = fp->input.x624_lstick_y =
-        fp->input.x628_lstick_x2 = fp->input.x62C_lstick_y2 = 0.0f;
+    fp->input.lstick.x = fp->input.lstick.y = fp->input.lstick1.x =
+        fp->input.lstick1.y = 0.0f;
 
-    fp->input.x644_lsubStick_y2 = 0.0f;
-    fp->input.x640_lsubStick_x2 = 0.0f;
-    fp->input.x63C_lsubStick_y = 0.0f;
-    fp->input.x638_lsubStick_x = 0.0f;
+    fp->input.lsubstick1.y = 0.0f;
+    fp->input.lsubstick1.x = 0.0f;
+    fp->input.lsubstick.y = 0.0f;
+    fp->input.lsubstick.x = 0.0f;
 
     fp->input.x654 = 0.0f;
     fp->input.x650 = 0.0f;
@@ -605,7 +605,7 @@ void Fighter_ResetInputData_80068854(HSD_GObj* gobj)
     fp->input.x660 = 0;
     fp->input.x66C = 0;
     fp->input.x668 = 0;
-    fp->input.x65C_heldInputs = 0;
+    fp->input.held_inputs = 0;
 
     fp->x672_input_timer_counter = 0xFE;
     fp->x671_timer_lstick_tilt_y = 0xFE;
@@ -648,16 +648,15 @@ static void Fighter_UnkInitLoad_80068914_Inner1(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->input.x650 = fp->input.x654 = fp->input.x638_lsubStick_x =
-        fp->input.x63C_lsubStick_y = fp->input.x640_lsubStick_x2 =
-            fp->input.x644_lsubStick_y2 = fp->input.x620_lstick_x =
-                fp->input.x624_lstick_y = fp->input.x628_lstick_x2 =
-                    fp->input.x62C_lstick_y2 = 0.0f;
+    fp->input.x650 = fp->input.x654 = fp->input.lsubstick.x =
+        fp->input.lsubstick.y = fp->input.lsubstick1.x =
+            fp->input.lsubstick1.y = fp->input.lstick.x = fp->input.lstick.y =
+                fp->input.lstick1.x = fp->input.lstick1.y = 0.0f;
 
     fp->input.x660 = 0;
     fp->input.x66C = 0;
     fp->input.x668 = 0;
-    fp->input.x65C_heldInputs = 0;
+    fp->input.held_inputs = 0;
 
     fp->x679_x = fp->x67A_y = fp->x67B =
 
@@ -1158,7 +1157,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
         fp->x221C_u16_y = 0;
     }
 
-    fp->x6BC_inputStickangle = 0.0f;
+    fp->lstick_angle = 0.0f;
 
     ftParts_8007592C(fp, 0, 0.0f);
     ftParts_80075AF0(fp, 0, (HALF_PI * fp->facing_dir));
@@ -1360,7 +1359,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
             {
                 !fp;
                 ftCommon_8007CC78(fp,
-                                  fp->x110_attr.x138_DashrunTerminalVelocity);
+                                  fp->co_attrs.x138_DashrunTerminalVelocity);
             }
         }
 
@@ -1757,10 +1756,9 @@ static void Fighter_Spaghetti_8006AD10_Inner1(Fighter* fp)
     s32 temp0_loc_1;
     s32 temp0_loc_0;
 
-    temp0_loc_0 = (fp->input.x65C_heldInputs &
-                   (fp->input.x660 ^ fp->input.x65C_heldInputs));
-    temp0_loc_1 =
-        (fp->input.x660 & (fp->input.x660 ^ fp->input.x65C_heldInputs));
+    temp0_loc_0 =
+        (fp->input.held_inputs & (fp->input.x660 ^ fp->input.held_inputs));
+    temp0_loc_1 = (fp->input.x660 & (fp->input.x660 ^ fp->input.held_inputs));
 
     if (fp->x2219_b5) {
         fp->input.x668 |= temp0_loc_0;
@@ -1780,34 +1778,31 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
     if (!fp->x221F_flag.bits.b3) {
         if (!fp->x2224_flag.bits.b2) {
             if (!fp->x221D_flag.bits.b3) {
-                SET_STICKS(fp->input.x628_lstick_x2, fp->input.x62C_lstick_y2,
+                SET_STICKS(fp->input.lstick1.x, fp->input.lstick1.y,
                            fp->input.x630, fp->input.x634);
-                SET_STICKS(fp->input.x640_lsubStick_x2,
-                           fp->input.x644_lsubStick_y2, fp->input.x648,
-                           fp->input.x64C);
+                SET_STICKS(fp->input.lsubstick1.x, fp->input.lsubstick1.y,
+                           fp->input.x648, fp->input.x64C);
                 fp->input.x654 = fp->input.x658;
                 fp->input.x660 = fp->input.x664;
                 fp->x221D_flag.bits.b3 = 1;
             } else {
-                SET_STICKS(fp->input.x628_lstick_x2, fp->input.x62C_lstick_y2,
-                           fp->input.x620_lstick_x, fp->input.x624_lstick_y);
-                SET_STICKS(
-                    fp->input.x640_lsubStick_x2, fp->input.x644_lsubStick_y2,
-                    fp->input.x638_lsubStick_x, fp->input.x63C_lsubStick_y);
+                SET_STICKS(fp->input.lstick1.x, fp->input.lstick1.y,
+                           fp->input.lstick.x, fp->input.lstick.y);
+                SET_STICKS(fp->input.lsubstick1.x, fp->input.lsubstick1.y,
+                           fp->input.lsubstick.x, fp->input.lsubstick.y);
                 fp->input.x654 = fp->input.x650;
-                fp->input.x660 = fp->input.x65C_heldInputs;
+                fp->input.x660 = fp->input.held_inputs;
             }
 
             if (ft_800A2040(fp)) {
-                SET_STICKS(fp->input.x620_lstick_x, fp->input.x624_lstick_y,
+                SET_STICKS(fp->input.lstick.x, fp->input.lstick.y,
                            ft_800A17E4(fp), ft_800A1874(fp));
                 if (g_debugLevel < 3 && !gm_8016B41C()) {
-                    SET_STICKS(fp->input.x638_lsubStick_x,
-                               fp->input.x63C_lsubStick_y, ft_800A1994(fp),
-                               ft_800A1A24(fp));
+                    SET_STICKS(fp->input.lsubstick.x, fp->input.lsubstick.y,
+                               ft_800A1994(fp), ft_800A1A24(fp));
                 } else {
-                    fp->input.x638_lsubStick_x = 0;
-                    fp->input.x63C_lsubStick_y = 0;
+                    fp->input.lsubstick.x = 0;
+                    fp->input.lsubstick.y = 0;
                 }
 
                 tempf0 = ft_800A1904(fp);
@@ -1816,17 +1811,17 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
                 fp->input.x650 = (tempf0 > tempf1) ? tempf0 : tempf1;
 
             } else {
-                SET_STICKS(fp->input.x620_lstick_x, fp->input.x624_lstick_y,
+                SET_STICKS(fp->input.lstick.x, fp->input.lstick.y,
                            HSD_PadRumbleData[fp->x618_player_id].nml_stickX,
                            HSD_PadRumbleData[fp->x618_player_id].nml_stickY);
                 if (g_debugLevel < 3 && gm_8016B41C() == 0) {
                     SET_STICKS(
-                        fp->input.x638_lsubStick_x, fp->input.x63C_lsubStick_y,
+                        fp->input.lsubstick.x, fp->input.lsubstick.y,
                         HSD_PadRumbleData[fp->x618_player_id].nml_subStickX,
                         HSD_PadRumbleData[fp->x618_player_id].nml_subStickY);
                 } else {
-                    fp->input.x638_lsubStick_x = 0;
-                    fp->input.x63C_lsubStick_y = 0;
+                    fp->input.lsubstick.x = 0;
+                    fp->input.lsubstick.y = 0;
                 }
 
                 tempf1 = HSD_PadRumbleData[fp->x618_player_id].nml_analogR;
@@ -1835,22 +1830,20 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
                 fp->input.x650 = (tempf0 > tempf1) ? tempf0 : tempf1;
             }
 
-            if (fabs_inline(fp->input.x620_lstick_x) <= p_ftCommonData->x0) {
-                fp->input.x620_lstick_x = 0.0f;
+            if (fabs_inline(fp->input.lstick.x) <= p_ftCommonData->x0) {
+                fp->input.lstick.x = 0.0f;
             }
 
-            if (fabs_inline(fp->input.x624_lstick_y) <= p_ftCommonData->x4) {
-                fp->input.x624_lstick_y = 0.0f;
+            if (fabs_inline(fp->input.lstick.y) <= p_ftCommonData->x4) {
+                fp->input.lstick.y = 0.0f;
             }
 
-            if (fabs_inline(fp->input.x638_lsubStick_x) <= p_ftCommonData->x0)
-            {
-                fp->input.x638_lsubStick_x = 0.0f;
+            if (fabs_inline(fp->input.lsubstick.x) <= p_ftCommonData->x0) {
+                fp->input.lsubstick.x = 0.0f;
             }
 
-            if (fabs_inline(fp->input.x63C_lsubStick_y) <= p_ftCommonData->x4)
-            {
-                fp->input.x63C_lsubStick_y = 0.0f;
+            if (fabs_inline(fp->input.lsubstick.y) <= p_ftCommonData->x4) {
+                fp->input.lsubstick.y = 0.0f;
             }
 
             if (fp->input.x650 <= p_ftCommonData->x10) {
@@ -1858,34 +1851,32 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
             }
 
             if (ft_800A2040(fp)) {
-                fp->input.x65C_heldInputs = ft_800A198C(fp);
+                fp->input.held_inputs = ft_800A198C(fp);
             } else {
-                fp->input.x65C_heldInputs =
+                fp->input.held_inputs =
                     HSD_PadRumbleData[fp->x618_player_id].button;
             }
 
             if (gm_8016B0FC()) {
                 fp->input.x650 = 0.0f;
                 if (ft_800A2040(fp)) {
-                    fp->input.x65C_heldInputs =
-                        (fp->input.x65C_heldInputs & 0xD00);
+                    fp->input.held_inputs = (fp->input.held_inputs & 0xD00);
                 } else {
-                    fp->input.x65C_heldInputs =
-                        (fp->input.x65C_heldInputs & 0x100);
+                    fp->input.held_inputs = (fp->input.held_inputs & 0x100);
                 }
             } else {
-                if ((fp->input.x65C_heldInputs & 0x60)) {
-                    fp->input.x65C_heldInputs =
-                        (s32) (fp->input.x65C_heldInputs | 0x80000000);
+                if ((fp->input.held_inputs & 0x60)) {
+                    fp->input.held_inputs =
+                        (s32) (fp->input.held_inputs | 0x80000000);
                     fp->input.x650 = 1.0f;
                 } else if (fp->input.x650) {
-                    fp->input.x65C_heldInputs =
-                        (fp->input.x65C_heldInputs | 0x80000000);
+                    fp->input.held_inputs =
+                        (fp->input.held_inputs | 0x80000000);
                 }
                 if (gm_801A45E8(0) == 0) {
-                    if ((fp->input.x65C_heldInputs & 0x10)) {
-                        fp->input.x65C_heldInputs =
-                            (fp->input.x65C_heldInputs | 0x80000000 | 0x100);
+                    if ((fp->input.held_inputs & 0x10)) {
+                        fp->input.held_inputs =
+                            (fp->input.held_inputs | 0x80000000 | 0x100);
                         fp->input.x650 = p_ftCommonData->x14;
                     }
                 }
@@ -1899,10 +1890,8 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
                 fp->x676_x = 0xFE;
             }
 
-            if (fp->input.x620_lstick_x >=
-                p_ftCommonData->x8_someStickThreshold)
-            {
-                if (fp->input.x628_lstick_x2 >=
+            if (fp->input.lstick.x >= p_ftCommonData->x8_someStickThreshold) {
+                if (fp->input.lstick1.x >=
                     p_ftCommonData->x8_someStickThreshold)
                 {
                     // Fighter_ClampThreeValues
@@ -1924,10 +1913,10 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
                     fp->x670_timer_lstick_tilt_x = 0;
                     fp->x2228_flag.b7 = 1;
                 }
-            } else if (fp->input.x620_lstick_x <=
+            } else if (fp->input.lstick.x <=
                        -p_ftCommonData->x8_someStickThreshold)
             {
-                if (fp->input.x628_lstick_x2 <=
+                if (fp->input.lstick1.x <=
                     -p_ftCommonData->x8_someStickThreshold)
                 {
                     // Fighter_ClampThreeValues
@@ -1961,8 +1950,8 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
                 fp->x677_y = 0xFE;
             }
 
-            if (fp->input.x624_lstick_y >= p_ftCommonData->xC) {
-                if (fp->input.x62C_lstick_y2 >= p_ftCommonData->xC) {
+            if (fp->input.lstick.y >= p_ftCommonData->xC) {
+                if (fp->input.lstick1.y >= p_ftCommonData->xC) {
                     // Fighter_ClampThreeValues
                     fp->x671_timer_lstick_tilt_y++;
                     if (fp->x671_timer_lstick_tilt_y > 0xFE) {
@@ -1982,8 +1971,8 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
                     fp->x671_timer_lstick_tilt_y = 0;
                     fp->x2229_b0 = 0;
                 }
-            } else if (fp->input.x624_lstick_y <= -p_ftCommonData->xC) {
-                if (fp->input.x62C_lstick_y2 <= -p_ftCommonData->xC) {
+            } else if (fp->input.lstick.y <= -p_ftCommonData->xC) {
+                if (fp->input.lstick1.y <= -p_ftCommonData->xC) {
                     // Fighter_ClampThreeValues
                     fp->x671_timer_lstick_tilt_y++;
                     if (fp->x671_timer_lstick_tilt_y > 0xFE) {
@@ -2009,9 +1998,9 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
                 fp->x671_timer_lstick_tilt_y = 0xFE;
             }
 
-            if (lb_8000D148(fp->input.x628_lstick_x2, fp->input.x62C_lstick_y2,
-                            fp->input.x620_lstick_x, fp->input.x624_lstick_y,
-                            0.0f, 0.0f, p_ftCommonData->x8_someStickThreshold))
+            if (lb_8000D148(fp->input.lstick1.x, fp->input.lstick1.y,
+                            fp->input.lstick.x, fp->input.lstick.y, 0.0f, 0.0f,
+                            p_ftCommonData->x8_someStickThreshold))
             {
                 fp->x67A_y = 0;
                 fp->x679_x = 0;
@@ -2097,12 +2086,12 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
 
         if (fp->x221D_flag.bits.b4 || fp->x2224_flag.bits.b2 || gm_801A45E8(2))
         {
-            fp->input.x630 = fp->input.x620_lstick_x;
-            fp->input.x634 = fp->input.x624_lstick_y;
-            fp->input.x648 = fp->input.x638_lsubStick_x;
-            fp->input.x64C = fp->input.x63C_lsubStick_y;
+            fp->input.x630 = fp->input.lstick.x;
+            fp->input.x634 = fp->input.lstick.y;
+            fp->input.x648 = fp->input.lsubstick.x;
+            fp->input.x64C = fp->input.lsubstick.y;
             fp->input.x658 = fp->input.x650;
-            fp->input.x664 = fp->input.x65C_heldInputs;
+            fp->input.x664 = fp->input.held_inputs;
             fp->x221D_flag.bits.b3 = 0;
 
             Fighter_UnkInitLoad_80068914_Inner1(gobj);
@@ -2193,13 +2182,13 @@ void Fighter_procUpdate(HSD_GObj* gobj)
                 fp->xF0_ground_kb_vel = 0;
             } else {
                 Vec3* pNormal = &fp->coll_data.x14C_ground.normal;
-                struct attr* pAttr;
+                struct ftCo_DatAttrs* pAttr;
 
                 if (fp->xF0_ground_kb_vel == 0) {
                     fp->xF0_ground_kb_vel = kb_vel_x;
                 }
 
-                pAttr = &fp->x110_attr;
+                pAttr = &fp->co_attrs;
                 ftCommon_8007CCA0(
                     fp,
                     /*effective friction - ground multiplier is
@@ -2248,13 +2237,13 @@ void Fighter_procUpdate(HSD_GObj* gobj)
                     &fp->coll_data.x14C_ground
                          .normal; // ground_normal offset inside fp is 0x844,
                                   // surface normal points out of the surface.
-                struct attr* pAttr;
+                struct ftCo_DatAttrs* pAttr;
 
                 if (fp->xF4_ground_attacker_shield_kb_vel == 0) {
                     fp->xF4_ground_attacker_shield_kb_vel = atkShieldKB_X;
                 }
 
-                pAttr = &fp->x110_attr;
+                pAttr = &fp->co_attrs;
 
                 ftCommon_8007CE4C(
                     fp,

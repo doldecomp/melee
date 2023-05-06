@@ -42,12 +42,12 @@ void ftMs_SpecialS_Enter(HSD_GObj* gobj)
 void ftMs_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
-    MarsAttributes* attr = getFtSpecialAttrsD(fp0);
+    MarsAttributes* da = getFtSpecialAttrsD(fp0);
 
-    fp0->self_vel.x = fp0->self_vel.x / attr->x14;
+    fp0->self_vel.x = fp0->self_vel.x / da->x14;
     if ((signed) fp0->fv.ms.x222C == 0) {
         fp0->fv.ms.x222C = 1;
-        fp0->self_vel.y = attr->x1C;
+        fp0->self_vel.y = da->x1C;
     } else {
         fp0->self_vel.y = 0;
     }
@@ -109,15 +109,15 @@ void ftMs_SpecialAirS1_Phys(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    MarsAttributes* attr = fp->dat_attrs;
+    MarsAttributes* da = fp->dat_attrs;
 
     if (fp->ground_or_air == GA_Ground) {
         // Physics_Friction
         ft_80084F3C(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        ftCommon_8007D494(fp, attr->x20, attr->x24);
-        ftCommon_8007CE94(fp, attr->x18);
+        ftCommon_8007D494(fp, da->x20, da->x24);
+        ftCommon_8007CE94(fp, da->x18);
     }
 }
 
@@ -201,7 +201,7 @@ void ftMs_SpecialS2_IASA(HSD_GObj* gobj)
 void ftMs_SpecialS2_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    MarsAttributes* attr = getFtSpecialAttrsD(fp);
+    MarsAttributes* da = getFtSpecialAttrsD(fp);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -213,8 +213,8 @@ void ftMs_SpecialS2_Phys(HSD_GObj* gobj)
         ft_80084F3C(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        ftCommon_8007D494(fp, attr->x20, attr->x24);
-        ftCommon_8007CE94(fp, attr->x18);
+        ftCommon_8007D494(fp, da->x20, da->x24);
+        ftCommon_8007CE94(fp, da->x18);
     }
 }
 
@@ -299,7 +299,7 @@ void ftMs_SpecialS_80137A9C(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->cb.x21EC_callback = &ftMs_SpecialS_80137A68;
 
-    if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
+    if (fp->input.lstick.y > p_ftCommonData->x21C) {
         if (fp->ground_or_air == GA_Ground) {
             msid = 350;
         } else {
@@ -444,14 +444,14 @@ void ftMs_SpecialS_80137E0C(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->cb.x21EC_callback = &ftMs_SpecialS_80137A68;
 
-    if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
+    if (fp->input.lstick.y > p_ftCommonData->x21C) {
         if (fp->ground_or_air == GA_Ground) {
             msid = 352;
         } else {
             msid = 361;
         }
     } else {
-        if (fp->input.x624_lstick_y < -p_ftCommonData->x21C) {
+        if (fp->input.lstick.y < -p_ftCommonData->x21C) {
             if (fp->ground_or_air == GA_Ground) {
                 msid = 354;
             } else {
@@ -589,14 +589,14 @@ void ftMs_SpecialS_80138148(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->cb.x21EC_callback = &ftMs_SpecialS_80137A68;
 
-    if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
+    if (fp->input.lstick.y > p_ftCommonData->x21C) {
         if (fp->ground_or_air == GA_Ground) {
             msid = 355;
         } else {
             msid = 364;
         }
     } else {
-        if (fp->input.x624_lstick_y < -p_ftCommonData->x21C) {
+        if (fp->input.lstick.y < -p_ftCommonData->x21C) {
             if (fp->ground_or_air == GA_Ground) {
                 msid = 357;
             } else {

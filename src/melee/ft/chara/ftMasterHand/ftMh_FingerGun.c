@@ -37,7 +37,7 @@ void ftMh_FingerBeamEnd_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_363_801530A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -49,8 +49,8 @@ void ftMh_MS_363_801530A4(HSD_GObj* gobj)
 
     {
         int rand;
-        rand = HSD_Randi(attr->xE8 - attr->xE4);
-        fp->mv.mh.unk0.x50 = attr->xE4 + rand;
+        rand = HSD_Randi(da->xE8 - da->xE4);
+        fp->mv.mh.unk0.x50 = da->xE4 + rand;
     }
 
     fp->cmd_vars[0] = 0;
@@ -70,11 +70,11 @@ void ftMh_FingerGun1_Anim(HSD_GObj* gobj)
             fp->mv.mh.unk0.x50 = f;
             if (f < 0) {
                 ftData* data = fp->ft_data;
-                ftMasterHand_SpecialAttrs* attr = data->ext_attr;
+                ftMasterHand_SpecialAttrs* da = data->ext_attr;
                 ftMh_MS_364_801533CC(gobj);
 
-                if (ftLib_80087120(gobj) > attr->xEC) {
-                    fp->mv.mh.unk0.x54 = attr->xF0;
+                if (ftLib_80087120(gobj) > da->xEC) {
+                    fp->mv.mh.unk0.x54 = da->xF0;
                 } else {
                     fp->mv.mh.unk0.x54 = 1;
                 }
@@ -125,7 +125,7 @@ void ftMh_FingerGun1_Phys(HSD_GObj* gobj)
     /// @todo Not enough stack for #GET_FIGHTER; inline issue.
     Fighter* fp = gobj->user_data;
 
-    ftMasterHand_SpecialAttrs* attr;
+    ftMasterHand_SpecialAttrs* da;
     float len;
     float speed;
     Vec3 pos;
@@ -138,20 +138,20 @@ void ftMh_FingerGun1_Phys(HSD_GObj* gobj)
 
     ft_80085134(gobj);
     if (fp->cmd_vars[2] != 0) {
-        attr = fp->ft_data->ext_attr;
+        da = fp->ft_data->ext_attr;
         ftBossLib_8015C208(gobj, &pos);
-        pos.x += attr->xDC;
-        pos.y += attr->xE0;
+        pos.x += da->xDC;
+        pos.y += da->xE0;
         pos.z = 0;
         lbVector_Diff(&pos, &fp->cur_pos, &vel);
         {
             len = my_lbVector_Len(&vel);
-            if (len < attr->x2C) {
+            if (len < da->x2C) {
                 fp->self_vel.x = vel.x;
                 fp->self_vel.y = vel.y;
             } else {
                 lbVector_Normalize(&vel);
-                speed = len * attr->x28;
+                speed = len * da->x28;
                 vel.x *= speed;
                 vel.y *= speed;
                 vel.z *= speed;
@@ -167,11 +167,11 @@ void ftMh_FingerGun1_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_364_801533CC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, ftMh_MS_FingerGun2, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
-    if (ftLib_80087120(gobj) > attr->xEC) {
-        ftAnim_SetAnimRate(gobj, attr->xF4);
+    if (ftLib_80087120(gobj) > da->xEC) {
+        ftAnim_SetAnimRate(gobj, da->xF4);
     }
     fp->self_vel.x = 0;
     fp->self_vel.y = 0;
@@ -181,11 +181,11 @@ void ftMh_MS_364_801533CC(HSD_GObj* gobj)
 static inline void lbl_8015346C_inline(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, ftMh_MS_FingerGun2, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
-    if (ftLib_80087120(gobj) > attr->xEC) {
-        ftAnim_SetAnimRate(gobj, attr->xF4);
+    if (ftLib_80087120(gobj) > da->xEC) {
+        ftAnim_SetAnimRate(gobj, da->xF4);
     }
     fp->self_vel.x = 0;
     fp->self_vel.y = 0;
@@ -226,16 +226,16 @@ static void ftMh_MS_365_8015364C(HSD_GObj* gobj, HSD_JObj* arg1, f32 arg2,
 void ftMh_MS_365_801535B0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
 
     if (fp->cmd_vars[0] != 0) {
-        ftMh_MS_365_8015364C(gobj, fp->parts[FtPart_LKneeJ].x0_jobj, attr->xF8,
-                             attr->xFC);
+        ftMh_MS_365_8015364C(gobj, fp->parts[FtPart_LKneeJ].x0_jobj, da->xF8,
+                             da->xFC);
         fp->cmd_vars[0] = 0;
     }
     if (fp->cmd_vars[1] != 0) {
-        ftMh_MS_365_8015364C(gobj, fp->parts[FtPart_RKneeJ].x0_jobj,
-                             attr->x100, attr->x104);
+        ftMh_MS_365_8015364C(gobj, fp->parts[FtPart_RKneeJ].x0_jobj, da->x100,
+                             da->x104);
         fp->cmd_vars[1] = 0;
     }
 }
@@ -243,7 +243,7 @@ void ftMh_MS_365_801535B0(HSD_GObj* gobj)
 void ftMh_MS_365_8015364C(HSD_GObj* gobj, HSD_JObj* arg1, f32 arg2, f32 arg3)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     bool b = false;
 
     {
@@ -255,12 +255,12 @@ void ftMh_MS_365_8015364C(HSD_GObj* gobj, HSD_JObj* arg1, f32 arg2, f32 arg3)
             vec0.x += arg2;
             vec0.y += arg3;
 
-            if (ftLib_80087120(gobj) > attr->xEC) {
+            if (ftLib_80087120(gobj) > da->xEC) {
                 b = true;
             }
 
-            it_802F0AE0(gobj, &vec0, &vec1, 126, b, fp->facing_dir, attr->xD4,
-                        attr->xD8);
+            it_802F0AE0(gobj, &vec0, &vec1, 126, b, fp->facing_dir, da->xD4,
+                        da->xD8);
         }
     }
 }

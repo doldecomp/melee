@@ -423,13 +423,13 @@ void ftYs_Init_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
 void ftYs_Init_8012B8A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftYoshiAttributes* attr = fp->dat_attrs;
+    ftYoshiAttributes* da = fp->dat_attrs;
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-    f32 tempf = attr->xC * (1.0f - (fp->x1998_shieldHealth /
-                                    p_ftCommonData->x260_startShieldHealth));
+    f32 tempf = da->xC * (1.0f - (fp->x1998_shieldHealth /
+                                  p_ftCommonData->x260_startShieldHealth));
     ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5B8, tempf);
     ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5BC, tempf);
 }
@@ -493,8 +493,8 @@ void ftYs_Init_8012BA8C(HSD_GObj* gobj)
 
 f32 ftYs_Init_8012BAC0(Fighter* fp)
 {
-    ftYoshiAttributes* attr = fp->dat_attrs;
-    return attr->x120;
+    ftYoshiAttributes* da = fp->dat_attrs;
+    return da->x120;
 }
 
 void ftYs_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
@@ -598,7 +598,7 @@ void ftYs_Init_8012BE3C(HSD_GObj* gobj) {
     ftParts_80074B0C(gobj, 0, 0);
     ftColl_8007B0C0(gobj, 0);
 
-    x1CC = &fp->x110_attr.x1CC;
+    x1CC = &fp->co_attrs.x1CC;
     part = ftParts_8007500C(fp, FtPart_HipN);
     fp2 = GET_FIGHTER(gobj);
     jobj = fp->parts[part].x0_jobj;

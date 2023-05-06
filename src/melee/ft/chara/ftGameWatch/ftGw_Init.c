@@ -529,10 +529,10 @@ void ftGw_Init_OnLoad(HSD_GObj* gobj)
     fp->fv.gw.x2238_panicCharge = ftGw_Panic_Empty;
 
     {
-        ftGameWatchAttributes* attr = fp->dat_attrs;
-        fp->x34_scale.z = attr->x0_GAMEWATCH_WIDTH;
-        fp->x614 = attr->x14_GAMEWATCH_OUTLINE;
-        ft_800BFB4C(gobj, &attr->x4_GAMEWATCH_COLOR[fp->x619_costume_id]);
+        ftGameWatchAttributes* da = fp->dat_attrs;
+        fp->x34_scale.z = da->x0_GAMEWATCH_WIDTH;
+        fp->x614 = da->x14_GAMEWATCH_OUTLINE;
+        ft_800BFB4C(gobj, &da->x4_GAMEWATCH_COLOR[fp->x619_costume_id]);
         fp->x5C8 = items[10];
 
         it_8026B3F8(items[0], It_Kind_GameWatch_Greenhouse);

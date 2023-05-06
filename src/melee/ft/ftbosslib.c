@@ -310,21 +310,22 @@ s32 ftBossLib_8015C530(enum_t arg0)
 #endif
 
     if (gobj != NULL) {
-        ftMasterHand_SpecialAttrs* attr = GET_FIGHTER(gobj)->ft_data->ext_attr;
+        ftMasterHand_SpecialAttrs* ftCo_DatAttrs =
+            GET_FIGHTER(gobj)->ft_data->ext_attr;
         switch (arg0) {
         case 0:
-            return attr->x0;
+            return ftCo_DatAttrs->x0;
         case 1:
-            return attr->x4;
+            return ftCo_DatAttrs->x4;
         case 2:
-            return attr->x8;
+            return ftCo_DatAttrs->x8;
         case 3:
-            return attr->xC;
+            return ftCo_DatAttrs->xC;
         case 4:
-            return attr->x10;
+            return ftCo_DatAttrs->x10;
         case 6:
         default:
-            return attr->x14;
+            return ftCo_DatAttrs->x14;
         }
     } else {
         return 0;
@@ -371,12 +372,13 @@ ftMasterHand_SpecialAttrs* ftBossLib_8015C6BC(void)
             }
 
             {
-                ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
-                if (attr == NULL) {
+                ftMasterHand_SpecialAttrs* ftCo_DatAttrs =
+                    fp->ft_data->ext_attr;
+                if (ftCo_DatAttrs == NULL) {
                     return NULL;
                 }
 
-                return attr;
+                return ftCo_DatAttrs;
             }
         }
     }
@@ -389,12 +391,12 @@ s32 ftBossLib_8015C74C(void)
     u8 _[24];
 #endif
 
-    ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
-    if (attr == NULL) {
+    ftMasterHand_SpecialAttrs* da = ftBossLib_8015C6BC();
+    if (da == NULL) {
         return -1;
     }
 
-    return attr->x164;
+    return da->x164;
 }
 
 s32 ftBossLib_8015C7EC(void)
@@ -404,12 +406,12 @@ s32 ftBossLib_8015C7EC(void)
     u8 _[24];
 #endif
 
-    ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
-    if (attr == NULL) {
+    ftMasterHand_SpecialAttrs* da = ftBossLib_8015C6BC();
+    if (da == NULL) {
         return -1;
     }
 
-    return attr->x168;
+    return da->x168;
 }
 
 s32 ftBossLib_8015C88C(void)
@@ -419,12 +421,12 @@ s32 ftBossLib_8015C88C(void)
     u8 _[24];
 #endif
 
-    ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
-    if (attr == NULL) {
+    ftMasterHand_SpecialAttrs* da = ftBossLib_8015C6BC();
+    if (da == NULL) {
         return -1;
     }
 
-    return attr->x16C;
+    return da->x16C;
 }
 
 s32 ftBossLib_8015C92C(void)
@@ -434,12 +436,12 @@ s32 ftBossLib_8015C92C(void)
     u8 _[24];
 #endif
 
-    ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
-    if (attr == NULL) {
+    ftMasterHand_SpecialAttrs* da = ftBossLib_8015C6BC();
+    if (da == NULL) {
         return -1;
     }
 
-    return attr->x170;
+    return da->x170;
 }
 
 s32 ftBossLib_8015C9CC(void)
@@ -449,12 +451,12 @@ s32 ftBossLib_8015C9CC(void)
     u8 _[24];
 #endif
 
-    ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
-    if (attr == NULL) {
+    ftMasterHand_SpecialAttrs* da = ftBossLib_8015C6BC();
+    if (da == NULL) {
         return -1;
     }
 
-    return attr->x174;
+    return da->x174;
 }
 
 void func_8015CA6C_inline(s32 arg0)
@@ -492,8 +494,8 @@ void ftBossLib_8015CB7C(void)
 
 void func_8015CB9C_inline(Vec3 spC)
 {
-    ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
-    spC.z += attr == NULL ? -1 : attr->x178;
+    ftMasterHand_SpecialAttrs* da = ftBossLib_8015C6BC();
+    spC.z += da == NULL ? -1 : da->x178;
     Camera_8002EA64(&spC);
     Camera_8002F0E4(0xA);
 }

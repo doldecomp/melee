@@ -83,7 +83,7 @@ void ftSb_Init_8014FA30(Fighter* fp)
     lb_8000C228(parts[FtPart_LLegJA].x4_jobj2, parts[FtPart_WaistN].x4_jobj2);
 
     {
-        float const angle = -86 * DEG_TO_RAD;
+        float const angle = -86 * deg_to_rad;
         lb_8000C420(fp->parts[FtPart_LLegJA].x0_jobj, 1, angle);
         lb_8000C420(fp->parts[FtPart_LLegJA].x0_jobj, 2, angle);
         lb_8000C420(fp->parts[FtPart_LLegJA].x4_jobj2, 1, angle);

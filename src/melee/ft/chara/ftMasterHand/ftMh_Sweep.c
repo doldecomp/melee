@@ -18,9 +18,9 @@ void ftMh_Damage_IASA(HSD_GObj* gobj)
 void ftMh_Damage_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
-    fp->self_vel.y += attr->x150;
-    fp->self_vel.z += attr->x158;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    fp->self_vel.y += da->x150;
+    fp->self_vel.z += da->x158;
 }
 
 void ftMh_Damage_Coll(HSD_GObj* gobj) {}
@@ -56,9 +56,9 @@ void ftMh_WaitSweep_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_346_80151918(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
-    fp->mv.mh.unk0.xC.x = fp->cur_pos.x - attr->x3C;
-    fp->mv.mh.unk0.xC.y = attr->x38;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    fp->mv.mh.unk0.xC.x = fp->cur_pos.x - da->x3C;
+    fp->mv.mh.unk0.xC.y = da->x38;
     fp->mv.mh.unk0.xC.z = 0;
     Fighter_ChangeMotionState(gobj, ftMh_MS_SweepLoop, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
@@ -84,9 +84,9 @@ void ftMh_SweepLoop_Anim(HSD_GObj* gobj)
         }
         {
             Fighter* fp = gobj->user_data;
-            ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
-            fp->mv.mh.unk0.xC.x = fp->cur_pos.x - attr->x3C;
-            fp->mv.mh.unk0.xC.y = attr->x38;
+            ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+            fp->mv.mh.unk0.xC.x = fp->cur_pos.x - da->x3C;
+            fp->mv.mh.unk0.xC.y = da->x38;
             fp->mv.mh.unk0.xC.z = 0;
         }
         Fighter_ChangeMotionState(gobj, ftMh_MS_SweepLoop, 0, 0, 0, 1, 0);
@@ -105,9 +105,9 @@ void ftMh_SweepLoop_IASA(HSD_GObj* gobj)
 void ftMh_SweepLoop_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
-    ftBossLib_8015BE40(gobj, &fp->mv.mh.unk0.xC, &fp->mv.mh.unk0.x18,
-                       attr->x2C, attr->x28);
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    ftBossLib_8015BE40(gobj, &fp->mv.mh.unk0.xC, &fp->mv.mh.unk0.x18, da->x2C,
+                       da->x28);
 }
 
 void ftMh_SweepLoop_Coll(HSD_GObj* gobj) {}

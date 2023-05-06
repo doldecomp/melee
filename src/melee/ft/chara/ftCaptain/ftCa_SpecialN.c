@@ -46,7 +46,7 @@ static f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
     {
         /// @todo Join declarations and assignments somehow.
         f32 max;
-        f32 stick_y = stickGetDir(fp->input.x624_lstick_y, 0);
+        f32 stick_y = stickGetDir(fp->input.lstick.y, 0);
         f32 min;
         max = da->specialn_stick_range_y_pos;
         if (stick_y > max) {
@@ -57,12 +57,12 @@ static f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
         if (stick_y < 0) {
             stick_y = 0;
         }
-        if (fp->input.x624_lstick_y < 0) {
+        if (fp->input.lstick.y < 0) {
             stick_y = -stick_y;
         }
         {
             /// @todo Eliminate @c f.
-            f32 f = DEG_TO_RAD;
+            f32 f = deg_to_rad;
             return f * (stick_y * da->specialn_angle_diff / (max - min));
         }
     }

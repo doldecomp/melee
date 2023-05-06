@@ -148,15 +148,15 @@ void ftLg_SpecialAirSStart_Phys(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftLuigiAttributes* sa = fp->dat_attrs;
-    attr* attr = &fp->x110_attr;
+    ftLuigiAttributes* da = fp->dat_attrs;
+    ftCo_DatAttrs* ca = &fp->co_attrs;
 
     if (fp->cmd_vars[0] != 0) {
-        ftCommon_8007D494(fp, sa->x20_LUIGI_GREENMISSILE_FALLING_SPEED,
-                          attr->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, da->x20_LUIGI_GREENMISSILE_FALLING_SPEED,
+                          ca->terminal_vel);
     }
 
-    ftCommon_8007CE94(fp, sa->x1C_LUIGI_GREENMISSILE_UNK2);
+    ftCommon_8007CE94(fp, da->x1C_LUIGI_GREENMISSILE_UNK2);
 }
 
 /// Luigi's grounded Green Missile Start Collision callback
@@ -256,7 +256,7 @@ void ftLg_SpecialAirSHold_Anim(HSD_GObj* gobj)
 void ftLg_SpecialSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_Pad_B)) {
         ftLg_SpecialSLaunch_Enter(gobj);
     }
 }
@@ -265,7 +265,7 @@ void ftLg_SpecialSHold_IASA(HSD_GObj* gobj)
 void ftLg_SpecialAirSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_Pad_B)) {
         ftLg_SpecialAirSLaunch_Enter(gobj);
     }
 }
@@ -821,7 +821,7 @@ void ftLg_SpecialAirSEnd_Phys(HSD_GObj* gobj)
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
 
     ftCommon_8007D494(fp, sa->x40_LUIGI_GREENMISSILE_GRAVITY_MUL,
-                      fp->x110_attr.x170_TerminalVelocity);
+                      fp->co_attrs.terminal_vel);
     ftCommon_8007CE94(fp, sa->x3C_LUIGI_GREENMISSILE_X_DECEL);
 }
 

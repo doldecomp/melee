@@ -621,7 +621,7 @@ void ftCa_SpecialLwEnd_Phys(HSD_GObj* gobj)
         ftCommon_8007E5AC(fp);
         if (fp->cmd_vars[2] != 0) {
             ftCommon_8007C930(fp, da->speciallw_ground_traction *
-                                      fp->x110_attr.gr_friction);
+                                      fp->co_attrs.gr_friction);
             ftCommon_8007CB74(gobj);
         } else {
             ft_80084F3C(gobj);
@@ -752,7 +752,7 @@ void ftCa_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
     ftCaptain_DatAttrs* da = fp->dat_attrs;
     if (fp->cmd_vars[2] != 0) {
         ftCommon_8007C930(fp, da->speciallw_air_landing_traction *
-                                  fp->x110_attr.gr_friction);
+                                  fp->co_attrs.gr_friction);
         ftCommon_8007CB74(gobj);
         return;
     } else {

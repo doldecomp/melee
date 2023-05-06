@@ -105,7 +105,7 @@ void ftMh_WalkLoop_Anim(HSD_GObj* gobj)
 
     /// @todo #GET_FIGHTER uses slightly too much stack; inline issue.
     Fighter* fp = gobj->user_data;
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -115,7 +115,7 @@ void ftMh_WalkLoop_Anim(HSD_GObj* gobj)
     ftLib_800866DC(ftBossLib_8015C244(gobj, &fp->cur_pos), &pos);
     lbVector_Diff(&pos, &fp->cur_pos, &vel);
 
-    if (my_lbVector_Len(&vel) < attr->x4C) {
+    if (my_lbVector_Len(&vel) < da->x4C) {
         ftMh_MS_349_80151CA8(gobj);
     }
 
@@ -144,9 +144,9 @@ void ftMh_WalkLoop_Phys(HSD_GObj* gobj)
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftData* data = fp->ft_data;
-    ftMasterHand_SpecialAttrs* attr = data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = data->ext_attr;
     ft_80085134(gobj);
-    fp->self_vel.x = attr->x40_pos.z;
+    fp->self_vel.x = da->x40_pos.z;
 }
 
 void ftMh_WalkLoop_Coll(HSD_GObj* gobj) {}

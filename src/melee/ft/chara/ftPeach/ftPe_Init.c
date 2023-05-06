@@ -400,14 +400,12 @@ Fighter_CostumeStrings ftPe_Init_CostumeStrings[] = {
 
 void ftPe_Init_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* fp;
-
-    fp = gobj->user_data;
-    fp->fv.pe.has_float = 1;
-    fp->fv.pe.attacks4_motion_id = -1;
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->fv.pe.has_float = true;
+    fp->fv.pe.attacks4_motion_id = ftCo_MS_None;
     fp->fv.pe.x14 = 0;
-    fp->fv.pe.x10 = 0;
-    fp->fv.pe.xC = 0;
+    fp->fv.pe.parasol_gobj = NULL;
+    fp->fv.pe.unk_item_gobj = NULL;
     fp->fv.pe.x18 = 0;
     fp->fv.pe.veg_gobj = NULL;
     ftParts_80074A4C(gobj, 0, 0);
@@ -416,17 +414,18 @@ void ftPe_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 4, 0);
 
     switch (fp->x619_costume_id) {
-    case 1:
+    case 1: {
         ftParts_80074A4C(gobj, 1, -1);
         ftParts_80074A4C(gobj, 5, 0);
         ftParts_80074A4C(gobj, 6, -1);
         break;
-
-    default:
+    }
+    default: {
         ftParts_80074A4C(gobj, 1, 0);
         ftParts_80074A4C(gobj, 5, -1);
         ftParts_80074A4C(gobj, 6, 0);
         break;
+    }
     }
 }
 
@@ -435,12 +434,9 @@ void ftPe_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* extAtrrs = fp->ft_data->ext_attr;
     UNK_T* items = fp->ft_data->x48_items;
-
     extAtrrs->floatfallf_anim_start = lbMthp_8001E8F8(ftData_80085E50(fp, 18));
     extAtrrs->floatfallb_anim_start = lbMthp_8001E8F8(ftData_80085E50(fp, 19));
-
     PUSH_ATTRS(fp, ftPe_DatAttrs);
-
     it_8026B3F8(items[0], It_Kind_Peach_Explode);
     it_8026B3F8(items[1], It_Kind_Peach_Turnip);
     it_8026B3F8(items[2], It_Kind_Peach_Parasol);
@@ -448,7 +444,6 @@ void ftPe_Init_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(items[4], It_Kind_Peach_ToadSpore);
 }
 
-/* static */ void ftPe_8011D598(HSD_GObj* gobj);
 /* static */ void ftPe_8011E2E8(HSD_GObj* gobj);
 
 void ftPe_Init_8011B704(HSD_GObj* gobj)

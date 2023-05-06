@@ -174,5 +174,11 @@ void it_802BD158(HSD_GObj* gobj, Vec3*, int, float);
 HSD_GObj* it_802BD4AC(HSD_GObj*, Vec3*, u8, s32, f32);
 
 void it_802BD45C(HSD_GObj* gobj);
+HSD_GObj* it_802BDA64(HSD_GObj*, Vec3*, int, f32);
+void it_802BDB94(HSD_GObj* gobj);
+void it_802BDBF8(HSD_GObj* gobj);
+void it_802BDC18(HSD_GObj* gobj);
+bool it_802BDC38(HSD_GObj* gobj);
+UNK_RET it_802BDE18(UNK_PARAMS);
 
 #endif

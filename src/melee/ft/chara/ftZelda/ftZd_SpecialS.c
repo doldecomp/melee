@@ -122,7 +122,7 @@ void ftZd_SpecialSStart_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_f1 = 0;
         Fighter_ChangeMotionState(gobj, 344, 0, NULL, temp_f1, 1.0, temp_f1);
-        fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
+        fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
     }
 }
 
@@ -256,7 +256,7 @@ void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_f1 = 0;
         Fighter_ChangeMotionState(gobj, 347, 0, NULL, temp_f1, 1.0, temp_f1);
-        fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
+        fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
     }
 }
 
@@ -377,7 +377,7 @@ void ftZd_SpecialSLoop_IASA(HSD_GObj* gobj)
         var_r0 = 0;
     }
 
-    if ((var_r0 == 1) && !(fp->input.x65C_heldInputs & 512)) {
+    if ((var_r0 == 1) && !(fp->input.held_inputs & 512)) {
         temp_f1 = 0;
         Fighter_ChangeMotionState(gobj, 345, 0, NULL, temp_f1, 1.0, temp_f1);
     }
@@ -405,7 +405,7 @@ void ftZd_SpecialAirSLoop_IASA(HSD_GObj* gobj)
         var_r0 = 0;
     }
 
-    if (var_r0 == 1 && !(fp->input.x65C_heldInputs & 512)) {
+    if (var_r0 == 1 && !(fp->input.held_inputs & 512)) {
         temp_f1 = 0;
         Fighter_ChangeMotionState(gobj, 348, 0, NULL, temp_f1, 1.0, temp_f1);
     }
@@ -452,7 +452,7 @@ void ftZd_SpecialAirSStart_Phys(HSD_GObj* gobj)
     Fighter* fp;
     s32 temp_r3;
     ftZelda_DatAttrs* charAttr;
-    attr* fighterAttr;
+    ftCo_DatAttrs* fighterAttr;
     f32 aerialFriction;
 
     /// @todo Unused stack.
@@ -467,12 +467,11 @@ void ftZd_SpecialAirSStart_Phys(HSD_GObj* gobj)
     if (temp_r3 != 0) {
         fp->mv.zd.specials.x8 = temp_r3 - 1;
     } else {
-        fighterAttr = &fp->x110_attr;
-        ftCommon_8007D494(fp, charAttr->x2C,
-                          fighterAttr->x170_TerminalVelocity);
+        fighterAttr = &fp->co_attrs;
+        ftCommon_8007D494(fp, charAttr->x2C, fighterAttr->terminal_vel);
     }
 
-    aerialFriction = fp->x110_attr.x180_AerialFriction;
+    aerialFriction = fp->co_attrs.x180_AerialFriction;
     ftCommon_8007CE94(fp, aerialFriction);
 }
 
@@ -483,7 +482,7 @@ void ftZd_SpecialAirSLoop_Phys(HSD_GObj* gobj)
     Fighter* fp;
     s32 temp_r3;
     ftZelda_DatAttrs* charAttr;
-    attr* fighterAttr;
+    ftCo_DatAttrs* fighterAttr;
     f32 aerialFriction;
 
     /// @todo Unused stack.
@@ -498,12 +497,11 @@ void ftZd_SpecialAirSLoop_Phys(HSD_GObj* gobj)
     if (temp_r3 != 0) {
         fp->mv.zd.specials.x8 = temp_r3 - 1;
     } else {
-        fighterAttr = &fp->x110_attr;
-        ftCommon_8007D494(fp, charAttr->x2C,
-                          fighterAttr->x170_TerminalVelocity);
+        fighterAttr = &fp->co_attrs;
+        ftCommon_8007D494(fp, charAttr->x2C, fighterAttr->terminal_vel);
     }
 
-    aerialFriction = fp->x110_attr.x180_AerialFriction;
+    aerialFriction = fp->co_attrs.x180_AerialFriction;
     ftCommon_8007CE94(fp, aerialFriction);
 }
 
@@ -514,7 +512,7 @@ void ftZd_SpecialAirSEnd_Phys(HSD_GObj* gobj)
     Fighter* fp;
     s32 temp_r3;
     ftZelda_DatAttrs* charAttr;
-    attr* fighterAttr;
+    ftCo_DatAttrs* fighterAttr;
     f32 aerialFriction;
 
     /// @todo Unused stack.
@@ -529,12 +527,11 @@ void ftZd_SpecialAirSEnd_Phys(HSD_GObj* gobj)
     if (temp_r3 != 0) {
         fp->mv.zd.specials.x8 = temp_r3 - 1;
     } else {
-        fighterAttr = &fp->x110_attr;
-        ftCommon_8007D494(fp, charAttr->x2C,
-                          fighterAttr->x170_TerminalVelocity);
+        fighterAttr = &fp->co_attrs;
+        ftCommon_8007D494(fp, charAttr->x2C, fighterAttr->terminal_vel);
     }
 
-    aerialFriction = fp->x110_attr.x180_AerialFriction;
+    aerialFriction = fp->co_attrs.x180_AerialFriction;
     ftCommon_8007CE94(fp, aerialFriction);
 }
 

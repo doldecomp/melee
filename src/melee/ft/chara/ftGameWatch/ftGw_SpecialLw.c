@@ -269,7 +269,7 @@ void ftGw_SpecialLw_IASA(HSD_GObj* gobj)
         if (turn_frames > 0) {
             fp->mv.gw.SpecialLw.turnFrames = turn_frames - 1;
         } else {
-            f32 stick_range = fp->input.x620_lstick_x;
+            f32 stick_range = fp->input.lstick.x;
 
             if (stick_range < 0) {
                 stick_range = -stick_range;
@@ -288,7 +288,7 @@ void ftGw_SpecialLw_IASA(HSD_GObj* gobj)
         }
     }
 
-    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_Pad_B)) {
         fp->mv.gw.SpecialLw.isRelease = true;
     }
 }
@@ -306,7 +306,7 @@ void ftGw_SpecialAirLw_IASA(HSD_GObj* gobj)
         if (turnFrames > 0) {
             fp->mv.gw.SpecialLw.turnFrames = turnFrames - 1;
         } else {
-            f32 stick_range = fp->input.x620_lstick_x;
+            f32 stick_range = fp->input.lstick.x;
 
             if (stick_range < 0) {
                 stick_range = -stick_range;
@@ -324,7 +324,7 @@ void ftGw_SpecialAirLw_IASA(HSD_GObj* gobj)
         }
     }
 
-    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_Pad_B)) {
         fp->mv.gw.SpecialLw.isRelease = true;
     }
 }

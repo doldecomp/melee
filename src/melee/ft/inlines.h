@@ -29,9 +29,9 @@
     do {                                                                      \
         void* backup = (fp)->x2D8_specialAttributes2;                         \
         attributeName* src = (attributeName*) (fp)->ft_data->ext_attr;        \
-        void** attr = &(fp)->dat_attrs;                                       \
+        void** da = &(fp)->dat_attrs;                                         \
         *(attributeName*) (fp)->x2D8_specialAttributes2 = *src;               \
-        *attr = backup;                                                       \
+        *da = backup;                                                         \
     } while (0)
 
 #define COPY_ATTRS(gobj, attributeName)                                       \
@@ -90,9 +90,9 @@ static inline void* getFtSpecialAttrs2CC(Fighter* fp)
     return fighter_attr;
 }
 
-static inline attr* getFtAttrs(Fighter* fp)
+static inline ftCo_DatAttrs* getFtAttrs(Fighter* fp)
 {
-    return &fp->x110_attr;
+    return &fp->co_attrs;
 }
 
 static inline CollData* getFtColl(Fighter* fp)

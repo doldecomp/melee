@@ -24,7 +24,7 @@ void ftMh_MS_370_80153D2C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     HSD_JObj* jobj = get_jobj(gobj);
 
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     Vec3 pos;
     Vec3 scl;
 
@@ -37,31 +37,31 @@ void ftMh_MS_370_80153D2C(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
     ftBossLib_8015C208(gobj, &pos);
     fp->cur_pos.x = pos.x;
-    fp->cur_pos.y = attr->x70;
+    fp->cur_pos.y = da->x70;
 
     fp->self_vel.z = 0;
     fp->self_vel.y = 0;
     fp->self_vel.x = 0;
 
-    fp->mv.mh.unk0.x0 = attr->x74;
-    fp->mv.mh.unk0.x70 = attr->x7C;
+    fp->mv.mh.unk0.x0 = da->x74;
+    fp->mv.mh.unk0.x70 = da->x7C;
 
     HSD_JObjGetScale(jobj, &scl);
     fp->mv.mh.unk0.x64.x = scl.x;
     fp->mv.mh.unk0.x64.y = scl.y;
     fp->mv.mh.unk0.x64.z = scl.z;
 
-    fp->mv.mh.unk0.x58.x = scl.x - attr->x78;
-    fp->mv.mh.unk0.x58.y = scl.y - attr->x78;
-    fp->mv.mh.unk0.x58.z = scl.z - attr->x78;
+    fp->mv.mh.unk0.x58.x = scl.x - da->x78;
+    fp->mv.mh.unk0.x58.y = scl.y - da->x78;
+    fp->mv.mh.unk0.x58.z = scl.z - da->x78;
 
-    fp->mv.mh.unk0.x58.x /= attr->x7C;
-    fp->mv.mh.unk0.x58.y /= attr->x7C;
-    fp->mv.mh.unk0.x58.z /= attr->x7C;
+    fp->mv.mh.unk0.x58.x /= da->x7C;
+    fp->mv.mh.unk0.x58.y /= da->x7C;
+    fp->mv.mh.unk0.x58.z /= da->x7C;
 
-    scl.x = attr->x78;
-    scl.y = attr->x78;
-    scl.z = attr->x78;
+    scl.x = da->x78;
+    scl.y = da->x78;
+    scl.z = da->x78;
     HSD_JObjSetScale(jobj, &scl);
 
     fp->cmd_vars[0] = 1;
@@ -113,8 +113,8 @@ void ftMh_BackCrush_Phys(HSD_GObj* gobj)
 #endif
 
     if (--fp->mv.mh.unk0.x0 > 0) {
-        ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
-        ftBossLib_8015BF74(gobj, attr->x58);
+        ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+        ftBossLib_8015BF74(gobj, da->x58);
     } else {
         fp->self_vel.x = 0;
     }

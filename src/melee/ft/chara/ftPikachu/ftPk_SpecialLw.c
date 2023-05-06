@@ -394,7 +394,7 @@ void ftPk_SpecialAirLwLoop1_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
     f32 pika_B8 = pika_attr->xB8;
-    f32 terminal_velocity = fp->x110_attr.x170_TerminalVelocity;
+    f32 terminal_velocity = fp->co_attrs.terminal_vel;
     ftCommon_8007D494(fp, pika_B8, terminal_velocity);
     ftCommon_8007CF58(fp);
 }

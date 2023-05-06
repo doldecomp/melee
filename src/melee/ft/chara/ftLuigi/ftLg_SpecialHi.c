@@ -97,9 +97,9 @@ void ftLg_SpecialHi_IASA(HSD_GObj* gobj)
     f32 stick_angle;
 
     fp = GET_FIGHTER(gobj);
-    stick_x = fp->input.x620_lstick_x;
+    stick_x = fp->input.lstick.x;
     luigiAttrs = fp->dat_attrs;
-    stick_range = stickGetDir(fp->input.x620_lstick_x, 0.0f);
+    stick_range = stickGetDir(fp->input.lstick.x, 0.0f);
     if ((u32) fp->cmd_vars[0] == 0U) {
         superJump_StickRange =
             luigiAttrs->x5C_LUIGI_SUPERJUMP_MOMENTUM_STICK_RANGE;
@@ -113,7 +113,7 @@ void ftLg_SpecialHi_IASA(HSD_GObj* gobj)
             } else {
                 control = 0.01745329238474369f * temp_range;
             }
-            control_2 = fp->x6BC_inputStickangle;
+            control_2 = fp->lstick_angle;
             stick_angle = control_2;
             if (stick_angle < 0.0f) {
                 stick_angle = -stick_angle;
@@ -124,12 +124,12 @@ void ftLg_SpecialHi_IASA(HSD_GObj* gobj)
                 stick_range_2 = control;
             }
             if (stick_range_2 > stick_angle) {
-                fp->x6BC_inputStickangle = control;
+                fp->lstick_angle = control;
             }
         }
     }
     if (ftCheckThrowB3(fp)) {
-        control = fp->input.x620_lstick_x;
+        control = fp->input.lstick.x;
         if (control < 0.0f) {
             control = -control;
         }
@@ -144,9 +144,9 @@ void ftLg_SpecialHi_IASA(HSD_GObj* gobj)
 void ftLg_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    f32 stick_x = fp->input.x620_lstick_x;
+    f32 stick_x = fp->input.lstick.x;
     ftLuigiAttributes* luigiAttrs = fp->dat_attrs;
-    f32 stick_range = stickGetDir(fp->input.x620_lstick_x, 0.0f);
+    f32 stick_range = stickGetDir(fp->input.lstick.x, 0.0f);
     f32 temp_range;
     f32 superJump_StickRange;
     f32 control;
@@ -172,7 +172,7 @@ void ftLg_SpecialAirHi_IASA(HSD_GObj* gobj)
             } else {
                 control = 0.01745329238474369f * temp_range;
             }
-            control_2 = fp->x6BC_inputStickangle;
+            control_2 = fp->lstick_angle;
             stick_angle = control_2;
             if (stick_angle < 0.0f) {
                 stick_angle = -stick_angle;
@@ -183,12 +183,12 @@ void ftLg_SpecialAirHi_IASA(HSD_GObj* gobj)
                 stick_range_2 = control;
             }
             if (stick_range_2 > stick_angle) {
-                fp->x6BC_inputStickangle = control;
+                fp->lstick_angle = control;
             }
         }
     }
     if (ftCheckThrowB3(fp)) {
-        control = fp->input.x620_lstick_x;
+        control = fp->input.lstick.x;
         if (control < 0.0f) {
             control = -control;
         }
@@ -218,7 +218,7 @@ void ftLg_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
-    attr* ftAttrs = &fp->x110_attr;
+    ftCo_DatAttrs* ca = &fp->co_attrs;
 
     if ((u32) fp->cmd_vars[0] != 0U) {
         ft_80085154(gobj);
@@ -228,7 +228,7 @@ void ftLg_SpecialAirHi_Phys(HSD_GObj* gobj)
         return;
     }
     ftCommon_8007D494(fp, luigiAttrs->x68_LUIGI_SUPERJUMP_GRAVITY_START,
-                      ftAttrs->x170_TerminalVelocity);
+                      ca->terminal_vel);
     ftCommon_8007CF58(fp);
 }
 

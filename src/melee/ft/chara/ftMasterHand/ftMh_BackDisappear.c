@@ -39,11 +39,11 @@ void ftMh_BackDisappear_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_372_801542E0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_1, 0, 0, fp->cur_anim_frame,
                               1, 0);
-    ftAnim_SetAnimRate(gobj, attr->x110_pos.y);
-    fp->mv.mh.unk0.x8 = attr->x110_pos.x;
+    ftAnim_SetAnimRate(gobj, da->x110_pos.y);
+    fp->mv.mh.unk0.x8 = da->x110_pos.x;
 }
 
 void ftMh_Wait1_1_Anim(HSD_GObj* gobj)
@@ -103,7 +103,7 @@ void ftMh_Wait1_1_Phys(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER doesn't fit the stack.
     Fighter* fp = gobj->user_data;
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     f32 len;
     f32 speed;
     Vec3 sp28_pos;
@@ -116,17 +116,17 @@ void ftMh_Wait1_1_Phys(HSD_GObj* gobj)
 
     ft_80085134(gobj);
     ftBossLib_8015C208(gobj, &sp28_pos);
-    sp28_pos.x += attr->x108;
-    sp28_pos.y += attr->x10C;
+    sp28_pos.x += da->x108;
+    sp28_pos.y += da->x10C;
     sp28_pos.z = 0;
     lbVector_Diff(&sp28_pos, &fp->cur_pos, &vel);
     len = my_lbVector_Len(&vel);
-    if (len < attr->x2C) {
+    if (len < da->x2C) {
         fp->self_vel.x = vel.x;
         fp->self_vel.y = vel.y;
     } else {
         lbVector_Normalize(&vel);
-        speed = len * attr->x28;
+        speed = len * da->x28;
         vel.x *= speed;
         vel.y *= speed;
         vel.z *= speed;
@@ -173,11 +173,11 @@ void ftMh_Grab_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_374_801546D8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, ftMh_MS_Fail, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
-    fp->mv.mh.unk0.xC.x = attr->x30_pos2.x;
-    fp->mv.mh.unk0.xC.y = attr->x30_pos2.y;
+    fp->mv.mh.unk0.xC.x = da->x30_pos2.x;
+    fp->mv.mh.unk0.xC.y = da->x30_pos2.y;
     fp->mv.mh.unk0.xC.z = 0;
 }
 
@@ -199,10 +199,10 @@ void ftMh_Fail_IASA(HSD_GObj* gobj)
 void ftMh_Fail_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     ft_80085134(gobj);
-    ftBossLib_8015BE40(gobj, &fp->mv.mh.unk0.xC, &fp->mv.mh.unk0.x18,
-                       attr->x2C, attr->x28);
+    ftBossLib_8015BE40(gobj, &fp->mv.mh.unk0.xC, &fp->mv.mh.unk0.x18, da->x2C,
+                       da->x28);
 }
 
 void ftMh_Fail_Coll(HSD_GObj* gobj) {}
@@ -210,16 +210,16 @@ void ftMh_Fail_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_381_8015483C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, ftMh_MS_Cancel, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
-    fp->mv.mh.unk0.x24 = attr->x120;
+    fp->mv.mh.unk0.x24 = da->x120;
     fp->cmd_vars[0] = 1;
     fp->self_vel.x = 0;
     fp->self_vel.y = 0;
     fp->self_vel.z = 0;
-    fp->mv.mh.unk0.xC.x = attr->x30_pos2.x;
-    fp->mv.mh.unk0.xC.y = attr->x30_pos2.y;
+    fp->mv.mh.unk0.xC.x = da->x30_pos2.x;
+    fp->mv.mh.unk0.xC.y = da->x30_pos2.y;
     fp->mv.mh.unk0.xC.z = 0;
 }
 
@@ -247,10 +247,10 @@ void ftMh_Cancel_IASA(HSD_GObj* gobj)
 void ftMh_Cancel_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     ft_80085134(gobj);
-    ftBossLib_8015BE40(gobj, &fp->mv.mh.unk0.xC, &fp->mv.mh.unk0.x18,
-                       attr->x2C, attr->x28);
+    ftBossLib_8015BE40(gobj, &fp->mv.mh.unk0.xC, &fp->mv.mh.unk0.x18, da->x2C,
+                       da->x28);
 }
 
 void ftMh_Cancel_Coll(HSD_GObj* gobj)

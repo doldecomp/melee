@@ -565,7 +565,7 @@ static void ftGw_LandingAirN_Init(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    ft_8008D708(gobj, ftGw_MS_LandingAirN, fp->x110_attr.x1F8_NAirLandingLag);
+    ft_8008D708(gobj, ftGw_MS_LandingAirN, fp->co_attrs.x1F8_NAirLandingLag);
 }
 
 // 0x8014BB24
@@ -615,7 +615,7 @@ void ftGw_LandingAirB_Init(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ft_8008D708(gobj, ftGw_MS_LandingAirB, fp->x110_attr.x200_BAirLandingLag);
+    ft_8008D708(gobj, ftGw_MS_LandingAirB, fp->co_attrs.x200_BAirLandingLag);
 }
 
 // 0x8014BC0C
@@ -666,8 +666,8 @@ void ftGw_LandingAirHi_Init(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ft_8008D708(gobj, ftGw_MS_LandingAirHi,
-                fp->x110_attr.x200_BAirLandingLag); // Erroneously using Back
-                                                    // Aerial's landing lag
+                fp->co_attrs.x200_BAirLandingLag); // Erroneously using Back
+                                                   // Aerial's landing lag
 }
 
 // 0x8014BCF4

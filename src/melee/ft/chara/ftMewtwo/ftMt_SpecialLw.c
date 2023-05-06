@@ -132,11 +132,11 @@ void ftMt_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
-    attr* ftAttrs = getFtAttrs(fp);
+    ftCo_DatAttrs* ca = getFtAttrs(fp);
 
     ftCommon_8007D494(fp, mewtwoAttrs->x78_MEWTWO_DISABLE_GRAVITY,
                       mewtwoAttrs->x7C_MEWTWO_DISABLE_TERMINAL_VELOCITY);
-    ftCommon_8007CE94(fp, ftAttrs->x180_AerialFriction);
+    ftCommon_8007CE94(fp, ca->x180_AerialFriction);
 }
 
 inline void ftMewtwo_SpecialLw_SetCall(HSD_GObj* gobj)

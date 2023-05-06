@@ -30,12 +30,12 @@ void ftMh_Slap_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_349_80151CA8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, ftMh_MS_WalkShoot, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 
     /// @todo The code matches, but is this right?
-    fp->cur_pos.y = attr->x50.x;
+    fp->cur_pos.y = da->x50.x;
 
     fp->self_vel.x = 0;
 }

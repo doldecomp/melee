@@ -80,7 +80,7 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                     f32 x_diff = fp0->pos_delta.x - wall_pos.x;
                     x_diff = x_diff < 0 ? -x_diff : x_diff;
 
-                    if (x_diff > fp0->x110_attr.x258) {
+                    if (x_diff > fp0->co_attrs.x258) {
                         // walljump input phase one completed, now start the
                         // walljump input timer and check for the control stick
                         // movement away from the wall in the next phase
@@ -96,11 +96,11 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                 ((
                      // left wall & control stick right?
                      fp0->x2110_walljumpWallSide == -1 &&
-                     fp0->input.x620_lstick_x >= p_ftCommonData->x76C) ||
+                     fp0->input.lstick.x >= p_ftCommonData->x76C) ||
                  (
                      // right wall & control stick left?
                      fp0->x2110_walljumpWallSide == +1 &&
-                     fp0->input.x620_lstick_x <= -p_ftCommonData->x76C)) &&
+                     fp0->input.lstick.x <= -p_ftCommonData->x76C)) &&
                 // control stick didn't stay too long in the tilt area?
                 fp0->x670_timer_lstick_tilt_x < p_ftCommonData->x770)
             {

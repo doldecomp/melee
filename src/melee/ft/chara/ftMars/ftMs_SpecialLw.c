@@ -39,8 +39,8 @@ void ftMs_SpecialAirLw_Enter(HSD_GObj* gobj)
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        MarsAttributes* attr = fp->dat_attrs;
-        fp->self_vel.x /= attr->x4C;
+        MarsAttributes* da = fp->dat_attrs;
+        fp->self_vel.x /= da->x4C;
         fp->self_vel.y = 0;
     }
 
@@ -63,14 +63,14 @@ void ftMs_SpecialLw_Anim(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    MarsAttributes* attr = getFtSpecialAttrsD(fp);
+    MarsAttributes* da = getFtSpecialAttrsD(fp);
 
     if (fp->cmd_vars[1] == 1) {
         fp->cmd_vars[1] = 2;
-        ftColl_8007B1B8(gobj, &attr->x64, &ftMs_SpecialLw_80139140);
+        ftColl_8007B1B8(gobj, &da->x64, &ftMs_SpecialLw_80139140);
         fp->x221B_b1 = true;
-        fp->x19B4_shieldUnk = attr->x60;
-        fp->x19B8_shieldUnk = attr->x60;
+        fp->x19B4_shieldUnk = da->x60;
+        fp->x19B8_shieldUnk = da->x60;
     } else if (fp->cmd_vars[1] == 0) {
         fp->x221B_b0 = false;
     }
@@ -88,14 +88,14 @@ void ftMs_SpecialAirLw_Anim(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    MarsAttributes* attr = getFtSpecialAttrsD(fp);
+    MarsAttributes* da = getFtSpecialAttrsD(fp);
 
     if (fp->cmd_vars[1] == 1) {
         fp->cmd_vars[1] = 2;
-        ftColl_8007B1B8(gobj, &attr->x64, &ftMs_SpecialLw_80139140);
+        ftColl_8007B1B8(gobj, &da->x64, &ftMs_SpecialLw_80139140);
         fp->x221B_b1 = true;
-        fp->x19B4_shieldUnk = attr->x60;
-        fp->x19B8_shieldUnk = attr->x60;
+        fp->x19B4_shieldUnk = da->x60;
+        fp->x19B8_shieldUnk = da->x60;
     } else if (fp->cmd_vars[1] == 0) {
         fp->x221B_b0 = false;
     }
@@ -123,9 +123,9 @@ void ftMs_SpecialAirLw_Phys(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = gobj->user_data;
-    MarsAttributes* attr = getFtSpecialAttrsD(fp);
-    ftCommon_8007D494(fp, attr->x54, attr->x58);
-    ftCommon_8007CE94(fp, attr->x50);
+    MarsAttributes* da = getFtSpecialAttrsD(fp);
+    ftCommon_8007D494(fp, da->x54, da->x58);
+    ftCommon_8007CE94(fp, da->x50);
     ftColl_8007AEE0(gobj);
 }
 
@@ -163,10 +163,10 @@ void ftMs_SpecialLw_80138D38(HSD_GObj* gobj)
 
     {
         Fighter* fp = gobj->user_data;
-        MarsAttributes* attr = getFtSpecialAttrsD(fp);
+        MarsAttributes* da = getFtSpecialAttrsD(fp);
 
         if (fp->cmd_vars[1] == 2) {
-            ftColl_8007B1B8(gobj, &attr->x64, &ftMs_SpecialLw_80139140);
+            ftColl_8007B1B8(gobj, &da->x64, &ftMs_SpecialLw_80139140);
             fp->x221B_b1 = true;
         }
     }
@@ -188,10 +188,10 @@ void ftMs_SpecialLw_80138DD0(HSD_GObj* gobj)
 
     {
         Fighter* fp = gobj->user_data;
-        MarsAttributes* attr = getFtSpecialAttrsD(fp);
+        MarsAttributes* da = getFtSpecialAttrsD(fp);
 
         if (fp->cmd_vars[1] == 2) {
-            ftColl_8007B1B8(gobj, &attr->x64, &ftMs_SpecialLw_80139140);
+            ftColl_8007B1B8(gobj, &da->x64, &ftMs_SpecialLw_80139140);
             fp->x221B_b1 = true;
         }
     }
@@ -363,13 +363,13 @@ void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
 
     {
         Fighter* fp = gobj->user_data;
-        MarsAttributes* attr = fp->dat_attrs;
+        MarsAttributes* da = fp->dat_attrs;
 
         fp->facing_dir = fp->x19AC;
         temp_r0 = (s32) fp->x19A4;
 
         if (temp_r0 > 0) {
-            fp->mv.ms.speciallw.x0 = (s32) (temp_r0 * attr->x5C);
+            fp->mv.ms.speciallw.x0 = (s32) (temp_r0 * da->x5C);
         }
 
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].x0_jobj, 0,

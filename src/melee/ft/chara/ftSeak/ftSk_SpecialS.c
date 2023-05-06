@@ -23,14 +23,13 @@ void ftSk_SpecialS_80110490(Fighter* fp)
 {
     f32 v2, v3, v5, v6, v8;
 
-    v2 = atan2f(fp->input.x624_lstick_y,
-                (fp->input.x620_lstick_x * fp->facing_dir));
+    v2 = atan2f(fp->input.lstick.y, (fp->input.lstick.x * fp->facing_dir));
 
     if (v2 < 0) {
         v2 += (f32) M_PI * 2;
     }
 
-    v3 = v2 * RAD_TO_DEG;
+    v3 = v2 * rad_to_deg;
 
     if (v3 < 0) {
         v3 = 0;
@@ -58,8 +57,8 @@ void ftSk_SpecialS_80110490(Fighter* fp)
 
     fp->mv.sk.specials.x18 = v6;
 
-    v8 = sqrtf(fp->input.x620_lstick_x * fp->input.x620_lstick_x +
-               fp->input.x624_lstick_y * fp->input.x624_lstick_y);
+    v8 = sqrtf(fp->input.lstick.x * fp->input.lstick.x +
+               fp->input.lstick.y * fp->input.lstick.y);
 
     if (v8 > 1) {
         v8 = 1;
@@ -125,10 +124,8 @@ void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, f32 arg2)
 void ftSk_SpecialS_80110788(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->fv.sk.lstick_delta.x =
-        fp->input.x620_lstick_x - fp->input.x628_lstick_x2;
-    fp->fv.sk.lstick_delta.y =
-        fp->input.x624_lstick_y - fp->input.x62C_lstick_y2;
+    fp->fv.sk.lstick_delta.x = fp->input.lstick.x - fp->input.lstick1.x;
+    fp->fv.sk.lstick_delta.y = fp->input.lstick.y - fp->input.lstick1.y;
 
     {
         s32 stateVar3 = fp->mv.sk.specials.x8;
@@ -161,9 +158,9 @@ void ftSk_SpecialS_80110788(HSD_GObj* gobj)
                                  (1 << 12) | (1 << 18);
 
             if ((fp->facing_dir == +1 && fp->fv.sk.lstick_delta.x < -0.3F &&
-                 fp->input.x620_lstick_x < 0) ||
+                 fp->input.lstick.x < 0) ||
                 (fp->facing_dir == -1 && fp->fv.sk.lstick_delta.x > +0.3F &&
-                 fp->input.x620_lstick_x > 0))
+                 fp->input.lstick.x > 0))
             {
                 ft_80088148(fp, flags, 127, 64);
                 fp->mv.sk.specials.xC = 6;
@@ -179,7 +176,7 @@ void ftSk_SpecialS_80110788(HSD_GObj* gobj)
         }
 
         {
-            f32 left_stick_x = fp->input.x620_lstick_x;
+            f32 left_stick_x = fp->input.lstick.x;
             Item* item_data = item_gobj->user_data;
             Article* article = item_data->xC4_article_data;
             itChainSegment* chainSegment = article->x4_specialAttributes;
@@ -189,9 +186,9 @@ void ftSk_SpecialS_80110788(HSD_GObj* gobj)
             }
 
             if (left_stick_x < chainSegment->x48) {
-                f32 left_stick_y = fp->input.x624_lstick_y;
+                f32 left_stick_y = fp->input.lstick.y;
 
-                if (fp->input.x624_lstick_y < 0) {
+                if (fp->input.lstick.y < 0) {
                     left_stick_y = -left_stick_y;
                 }
 
@@ -439,13 +436,13 @@ void ftSk_SpecialS_ChainSomething(HSD_GObj* gobj)
 f32 ftSk_SpecialS_80110F58(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->input.x620_lstick_x;
+    return fp->input.lstick.x;
 }
 
 f32 ftSk_SpecialS_80110F64(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->input.x624_lstick_y;
+    return fp->input.lstick.y;
 }
 
 void ftSk_SpecialS_80110F70(HSD_GObj* gobj)
@@ -625,11 +622,10 @@ void ftSk_SpecialAirSStart_Phys(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    attr* fighter_attr = &fp->x110_attr;
+    ftCo_DatAttrs* fighter_attr = &fp->co_attrs;
 
     if (fp->cmd_vars[0] != 0) {
-        ftCommon_8007D494(fp, fighter_attr->x16C_Gravity,
-                          fighter_attr->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, fighter_attr->grav, fighter_attr->terminal_vel);
     }
 
     ftCommon_8007CE94(fp, fighter_attr->x180_AerialFriction);
@@ -771,7 +767,7 @@ void ftSk_SpecialS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_Pad_B)) {
         fp->mv.sk.specials.x4 = true;
     }
 
@@ -782,7 +778,7 @@ void ftSk_SpecialAirS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_Pad_B)) {
         fp->mv.sk.specials.x4 = true;
     }
 

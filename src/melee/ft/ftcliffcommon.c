@@ -21,7 +21,7 @@ bool ftCliffCommon_80081298(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = gobj->user_data;
-    if (fp->input.x624_lstick_y <= -p_ftCommonData->x480) {
+    if (fp->input.lstick.y <= -p_ftCommonData->x480) {
         return false;
     }
     if (((fp->coll_data.env_flags & 0x03000000) != 0) &&

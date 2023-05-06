@@ -46,7 +46,7 @@ bool ftFx_AppealS_CheckInput(HSD_GObj* gobj)
 
     if (((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) &&
         (grCorneria_801E2CE8() != false) &&
-        ((fp->input.x65C_heldInputs & HSD_Pad_DpadDown) == false) &&
+        ((fp->input.held_inputs & HSD_Pad_DpadDown) == false) &&
         ((u8) fp->x682 == true))
     {
         if (ftFox_CheckAppealSCount() == 0) {
