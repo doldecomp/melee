@@ -317,7 +317,7 @@ void ftSs_SpecialLwBomb_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->dat_attrs;
-    if ((fp->cmd_vars[2]) && (fp->input.x624_lstick_y < samus_attr->x80)) {
+    if ((fp->cmd_vars[2]) && (fp->input.lstick.y < samus_attr->x80)) {
         fp->cmd_vars[2] = 0;
         ft_800D638C(gobj);
     }
@@ -329,7 +329,7 @@ void ftSs_SpecialLwBomb_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
-    attr* ft_attr = &fp->x110_attr;
+    ftCo_DatAttrs* ft_attr = &fp->co_attrs;
 
     if (fp->cmd_vars[0]) {
         ftCommon_8007CADC(fp, 0.0f, ft_attr->walk_init_vel * samus_attr->x64,
@@ -344,7 +344,7 @@ void ftSs_SpecialAirLwBomb_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->dat_attrs;
-    attr* ft_attr = &fp->x110_attr;
+    ftCo_DatAttrs* ft_attr = &fp->co_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH

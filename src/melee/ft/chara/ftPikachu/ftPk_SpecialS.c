@@ -89,10 +89,10 @@ void ftPk_SpecialAirSStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = getFtSpecialAttrsD(fp);
-    struct attr* attr = &fp->x110_attr;
+    struct ftCo_DatAttrs* da = &fp->co_attrs;
 
     if (fp->cmd_vars[0]) {
-        ftCommon_8007D494(fp, pika_attr->x38, attr->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, pika_attr->x38, da->terminal_vel);
     }
 
     ftCommon_8007CE94(fp, pika_attr->x34);
@@ -180,7 +180,7 @@ void ftPk_SpecialAirSHold_Anim(HSD_GObj* gobj)
 void ftPk_SpecialSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_Pad_B)) {
         ftPk_SpecialS_ChangeMotion_Unk08(gobj);
     }
 }
@@ -188,7 +188,7 @@ void ftPk_SpecialSHold_IASA(HSD_GObj* gobj)
 void ftPk_SpecialAirSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_Pad_B)) {
         ftPk_SpecialS_ChangeMotion_Unk09(gobj);
     }
 }
@@ -509,7 +509,7 @@ void ftPk_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
-    ftCommon_8007D494(fp, sa->x58, fp->x110_attr.x170_TerminalVelocity);
+    ftCommon_8007D494(fp, sa->x58, fp->co_attrs.terminal_vel);
     ftCommon_8007CE94(fp, sa->x54);
 }
 

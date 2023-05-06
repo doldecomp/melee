@@ -70,16 +70,15 @@ void ftFx_SpecialLw_CreateReflectGFX(HSD_GObj* gobj)
 static inline void ftFox_SpecialLw_SetVars(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* foxAttrs = foxAttrs = getFtSpecialAttrs(fp);
+    ftFoxAttributes* da = da = getFtSpecialAttrs(fp);
 
-    fp->mv.fx.SpecialLw.releaseLag =
-        (s32) foxAttrs->x98_FOX_REFLECTOR_RELEASE_LAG;
+    fp->mv.fx.SpecialLw.releaseLag = (s32) da->x98_FOX_REFLECTOR_RELEASE_LAG;
 
     fp->mv.fx.SpecialLw.isRelease = 0;
     fp->cmd_vars[1] = 4;
 
     fp->mv.fx.SpecialLw.gravityDelay =
-        (s32) foxAttrs->xA4_FOX_REFLECTOR_GRAVITY_DELAY;
+        (s32) da->xA4_FOX_REFLECTOR_GRAVITY_DELAY;
 
     fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialLw_CreateStartGFX;
 }
@@ -100,10 +99,10 @@ void ftFx_SpecialLw_Enter(HSD_GObj* gobj)
 void ftFx_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* foxAttrs = fp->dat_attrs;
+    ftFoxAttributes* da = fp->dat_attrs;
 
     fp->self_vel.y = 0;
-    fp->self_vel.x /= foxAttrs->xA8_FOX_REFLECTOR_MOMENTUM_PRESERVE_X;
+    fp->self_vel.x /= da->xA8_FOX_REFLECTOR_MOMENTUM_PRESERVE_X;
 
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirLwStart, 0, NULL, 0, 1,
                               0);
@@ -125,7 +124,7 @@ void ftFx_SpecialLwStart_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.x65C_heldInputs & HSD_Pad_B) == false) {
+    if ((fp->input.held_inputs & HSD_Pad_B) == false) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -149,7 +148,7 @@ void ftFx_SpecialAirLwStart_Anim(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_Pad_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -214,14 +213,14 @@ void ftFx_SpecialAirLwStart_Phys(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = gobj->user_data;
-    attr* ftAttrs = &fp->x110_attr;
-    ftFoxAttributes* foxAttrs = fp->dat_attrs;
+    ftCo_DatAttrs* ca = &fp->co_attrs;
+    ftFoxAttributes* da = fp->dat_attrs;
 
     if (fp->mv.fx.SpecialLw.gravityDelay != 0) {
         fp->mv.fx.SpecialLw.gravityDelay--;
     } else {
-        ftCommon_8007D494(fp, foxAttrs->xAC_FOX_REFLECTOR_FALL_ACCEL,
-                          ftAttrs->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, da->xAC_FOX_REFLECTOR_FALL_ACCEL,
+                          ca->terminal_vel);
     }
 
     ftCommon_8007CF58(fp);
@@ -269,7 +268,7 @@ void ftFx_SpecialLwLoop_Anim(HSD_GObj* gobj)
 {
     /// @todo Shared @c inline with #ftFx_SpecialAirLwLoop_Anim.
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->input.x65C_heldInputs & HSD_Pad_B) == false) {
+    if ((fp->input.held_inputs & HSD_Pad_B) == false) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -293,7 +292,7 @@ void ftFx_SpecialAirLwLoop_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.x65C_heldInputs & HSD_Pad_B) == false) {
+    if ((fp->input.held_inputs & HSD_Pad_B) == false) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -364,19 +363,19 @@ void ftFx_SpecialLwLoop_Phys(HSD_GObj* gobj)
 
 static inline void ftFox_SpecialLw_InlinePhys(HSD_GObj* gobj)
 {
-    attr* ftAttrs;
-    ftFoxAttributes* foxAttrs;
+    ftCo_DatAttrs* ca;
+    ftFoxAttributes* da;
     Fighter* fp = getFighter(gobj);
 
-    ftAttrs = getFtAttrs(fp);
-    foxAttrs = getFtSpecialAttrs(fp);
+    ca = getFtAttrs(fp);
+    da = getFtSpecialAttrs(fp);
 
     /// @todo Shared @c inline with other functions in this file.
     if (fp->mv.fx.SpecialLw.gravityDelay != 0) {
         fp->mv.fx.SpecialLw.gravityDelay--;
     } else {
-        ftCommon_8007D494(fp, foxAttrs->xAC_FOX_REFLECTOR_FALL_ACCEL,
-                          ftAttrs->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, da->xAC_FOX_REFLECTOR_FALL_ACCEL,
+                          ca->terminal_vel);
     }
 
     ftCommon_8007CF58(fp);
@@ -438,9 +437,9 @@ static void ftFx_SpecialAirLwLoop_AirToGround(HSD_GObj* gobj)
 static void ftFx_SpecialLw_CreateReflectHit(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
+    ftFoxAttributes* da = getFtSpecialAttrs(fp);
 
-    ftColl_CreateReflectHit(gobj, &foxAttrs->xB0_FOX_REFLECTOR_REFLECTION,
+    ftColl_CreateReflectHit(gobj, &da->xB0_FOX_REFLECTOR_REFLECTION,
                             ftFx_SpecialLwHit_Enter);
 }
 
@@ -470,7 +469,7 @@ static void ftFx_SpecialAirLwLoop_Enter(HSD_GObj* gobj)
 static void ftFx_SpecialLw_Turn(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftFoxAttributes* foxAttrs = fp->dat_attrs;
+    ftFoxAttributes* da = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -478,16 +477,15 @@ static void ftFx_SpecialLw_Turn(HSD_GObj* gobj)
 #endif
 
     fp->mv.fx.SpecialLw.turnFrames--;
-    if (fp->cmd_vars[0] == 0 && fp->mv.fx.SpecialLw.turnFrames <=
-                                    foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES)
+    if (fp->cmd_vars[0] == 0 &&
+        fp->mv.fx.SpecialLw.turnFrames <= da->x9C_FOX_REFLECTOR_TURN_FRAMES)
     {
         fp->cmd_vars[0] = 1;
         fp->facing_dir = -fp->facing_dir;
     }
-    ftParts_80075AF0(
-        fp, 0,
-        -(180 / foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES * DEG_TO_RAD -
-          ftParts_80075F48(fp, 0)));
+    ftParts_80075AF0(fp, 0,
+                     -(180 / da->x9C_FOX_REFLECTOR_TURN_FRAMES * deg_to_rad -
+                       ftParts_80075F48(fp, 0)));
 }
 #ifdef MUST_MATCH
 #pragma pop
@@ -497,22 +495,21 @@ static void ftFx_SpecialLw_Turn(HSD_GObj* gobj)
 static inline void ftFox_SpecialLw_Turn_Inline(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftFoxAttributes* foxAttrs = fp->dat_attrs;
+    ftFoxAttributes* da = fp->dat_attrs;
 
     fp->mv.fx.SpecialLw.turnFrames--;
     if (fp->cmd_vars[0] == false &&
-        fp->mv.fx.SpecialLw.turnFrames <=
-            foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES)
+        fp->mv.fx.SpecialLw.turnFrames <= da->x9C_FOX_REFLECTOR_TURN_FRAMES)
     {
         fp->cmd_vars[0] = true;
         fp->facing_dir = -fp->facing_dir;
     }
 
     /// @todo Degrees-to-radians constant.
-    ftParts_80075AF0(fp, 0,
-                     -((0.01745329238474369f *
-                        (180 / foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES)) -
-                       ftParts_80075F48(fp, 0)));
+    ftParts_80075AF0(
+        fp, 0,
+        -((0.01745329238474369f * (180 / da->x9C_FOX_REFLECTOR_TURN_FRAMES)) -
+          ftParts_80075F48(fp, 0)));
 }
 
 void ftFx_SpecialLwTurn_Anim(HSD_GObj* gobj)
@@ -525,7 +522,7 @@ void ftFx_SpecialLwTurn_Anim(HSD_GObj* gobj)
     u8 _[16];
 #endif
 
-    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_Pad_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -549,7 +546,7 @@ void ftFx_SpecialAirLwTurn_Anim(HSD_GObj* gobj)
     u8 _[20];
 #endif
 
-    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_Pad_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -589,8 +586,8 @@ void ftFx_SpecialLwTurn_Phys(HSD_GObj* gobj)
 void ftFx_SpecialAirLwTurn_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
-    attr* ftAttrs = getFtAttrs(fp);
+    ftFoxAttributes* da = getFtSpecialAttrs(fp);
+    ftCo_DatAttrs* ca = getFtAttrs(fp);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -600,8 +597,8 @@ void ftFx_SpecialAirLwTurn_Phys(HSD_GObj* gobj)
     if (fp->mv.fx.SpecialLw.gravityDelay != 0) {
         fp->mv.fx.SpecialLw.gravityDelay--;
     } else {
-        ftCommon_8007D494(fp, foxAttrs->xAC_FOX_REFLECTOR_FALL_ACCEL,
-                          ftAttrs->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, da->xAC_FOX_REFLECTOR_FALL_ACCEL,
+                          ca->terminal_vel);
     }
 
     ftCommon_8007CF58(fp);
@@ -667,10 +664,10 @@ void ftFx_SpecialAirLwTurn_GroundToAir(HSD_GObj* gobj)
 inline void ftFox_SpecialLwTurn_SetVarAll(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
+    ftFoxAttributes* da = getFtSpecialAttrs(fp);
     fp->x2218_b3 = 1;
     fp->cb.x21C8_callback_OnReflectHit = ftFx_SpecialLwHit_Enter;
-    fp->mv.fx.SpecialLw.turnFrames = foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES;
+    fp->mv.fx.SpecialLw.turnFrames = da->x9C_FOX_REFLECTOR_TURN_FRAMES;
     fp->cmd_vars[0] = 0;
     ftFx_SpecialLw_Turn(gobj);
 }
@@ -702,8 +699,8 @@ bool ftFx_SpecialLwTurn_Check(HSD_GObj* gobj)
 inline void ftFox_SpecialLwHit_CreateReflectInline(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
-    ftColl_CreateReflectHit(gobj, &foxAttrs->xB0_FOX_REFLECTOR_REFLECTION,
+    ftFoxAttributes* da = getFtSpecialAttrs(fp);
+    ftColl_CreateReflectHit(gobj, &da->xB0_FOX_REFLECTOR_REFLECTION,
                             ftFx_SpecialLwHit_Enter);
 }
 
@@ -746,7 +743,7 @@ void ftFx_SpecialLwHit_Anim(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_Pad_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -775,7 +772,7 @@ void ftFx_SpecialAirLwHit_Anim(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (!(fp->input.x65C_heldInputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_Pad_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -817,8 +814,8 @@ void ftFx_SpecialLwHit_Phys(HSD_GObj* gobj)
 void ftFx_SpecialAirLwHit_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
-    attr* ftAttrs = getFtAttrs(fp);
+    ftFoxAttributes* da = getFtSpecialAttrs(fp);
+    ftCo_DatAttrs* ca = getFtAttrs(fp);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -828,8 +825,8 @@ void ftFx_SpecialAirLwHit_Phys(HSD_GObj* gobj)
     if (fp->mv.fx.SpecialLw.gravityDelay != 0) {
         fp->mv.fx.SpecialLw.gravityDelay--;
     } else {
-        ftCommon_8007D494(fp, foxAttrs->xAC_FOX_REFLECTOR_FALL_ACCEL,
-                          ftAttrs->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, da->xAC_FOX_REFLECTOR_FALL_ACCEL,
+                          ca->terminal_vel);
     }
 
     ftCommon_8007CF58(fp);
@@ -970,8 +967,8 @@ void ftFx_SpecialLwEnd_Phys(HSD_GObj* gobj)
 void ftFx_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
-    attr* ftAttrs = getFtAttrs(fp);
+    ftFoxAttributes* da = getFtSpecialAttrs(fp);
+    ftCo_DatAttrs* ca = getFtAttrs(fp);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -981,8 +978,8 @@ void ftFx_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
     if (fp->mv.fx.SpecialLw.gravityDelay != 0) {
         fp->mv.fx.SpecialLw.gravityDelay--;
     } else {
-        ftCommon_8007D494(fp, foxAttrs->xAC_FOX_REFLECTOR_FALL_ACCEL,
-                          ftAttrs->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, da->xAC_FOX_REFLECTOR_FALL_ACCEL,
+                          ca->terminal_vel);
     }
     ftCommon_8007CF58(fp);
 }

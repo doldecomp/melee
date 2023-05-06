@@ -13,7 +13,7 @@
 void ftSs_Init_80128944(HSD_GObj* gobj, f32 farg1, f32 farg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSamusAttributes* attr = fp->dat_attrs;
+    ftSamusAttributes* da = fp->dat_attrs;
     f32 float_result = ftSs_Init_80128AC8(gobj, farg1, farg2);
 
     /// @todo Unused stack.
@@ -29,7 +29,7 @@ void ftSs_Init_80128944(HSD_GObj* gobj, f32 farg1, f32 farg2)
         case 4:
             if ((fp->x2070.x2073 == 0x14) || ((fp->x2070.x2071_b5) == 0)) {
                 if (fp->x5F5 == 2) {
-                    ftSs_Init_80128B1C(gobj, float_result, attr->x0, 1.0f);
+                    ftSs_Init_80128B1C(gobj, float_result, da->x0, 1.0f);
                 } else {
                     ftSs_Init_80128B1C(gobj, float_result, 0.0f, 1.0f);
                 }
@@ -58,7 +58,7 @@ bool ftSs_Init_80128A1C(HSD_GObj* gobj, unk_t arg1, f32 farg1)
 f32 ftSs_Init_80128AC8(HSD_GObj* gobj, f32 farg1, f32 farg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSamusAttributes* attr = getFtSpecialAttrs(fp);
+    ftSamusAttributes* da = getFtSpecialAttrs(fp);
     f32 value = (fp->cur_pos.x - farg1) / farg2;
     if (value >= 1.0f) {
         value = 1.0f;
@@ -66,13 +66,13 @@ f32 ftSs_Init_80128AC8(HSD_GObj* gobj, f32 farg1, f32 farg2)
     if (value <= -1.0f) {
         value = -1.0f;
     }
-    return (-attr->x4 * value) + 1.5707963705062866f;
+    return (-da->x4 * value) + 1.5707963705062866f;
 }
 
 inline void ftSamus_80128B1C_inner(HSD_GObj* gobj, f32 angle)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    struct attr* ftAttr = &fp->x110_attr;
+    struct ftCo_DatAttrs* ftAttr = &fp->co_attrs;
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
 
     fp = GET_FIGHTER(gobj);
@@ -146,7 +146,7 @@ void ftSs_SpecialLw_IASA(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if ((fp->cmd_vars[1]) && (fp->input.x624_lstick_y < samus_attr->x14)) {
+    if ((fp->cmd_vars[1]) && (fp->input.lstick.y < samus_attr->x14)) {
         fp->cmd_vars[1] = 0;
         ft_800D638C(gobj);
         return;
@@ -208,7 +208,7 @@ void ftSs_SpecialLw_Phys(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    struct attr* ftAttr = &fp->x110_attr;
+    struct ftCo_DatAttrs* ftAttr = &fp->co_attrs;
 
     if (fp->cmd_vars[0]) {
         f32 samus_attr_xC = samus_attr->xC;
@@ -224,7 +224,7 @@ void ftSs_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->dat_attrs;
-    struct attr* ftAttr = &fp->x110_attr;
+    struct ftCo_DatAttrs* ftAttr = &fp->co_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH

@@ -5,7 +5,7 @@
 f32 const ftSk_Init_804D9660 = 0;
 f32 const ftSk_Init_804D9664 = 1;
 f64 const ftSk_Init_804D9668 = 4503601774854144.0;
-f32 const ftSk_Init_804D9670 = DEG_TO_RAD;
+f32 const ftSk_Init_804D9670 = deg_to_rad;
 f32 const ftSk_Init_804D9674 = 90;
 f64 const ftSk_Init_804D9678 = 0.5;
 f64 const ftSk_Init_804D9680 = 3;

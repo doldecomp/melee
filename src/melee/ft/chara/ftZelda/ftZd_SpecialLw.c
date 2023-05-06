@@ -81,7 +81,7 @@ static void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* gobj)
     fp->gr_vel = fp->gr_vel / attributes->x70;
 
     lb_8000B1CC(fp->parts[FtPart_TopN].x0_jobj, NULL, &sp20);
-    lb_800119DC(&sp20, 120, 0.4, 0.003, 60 * DEG_TO_RAD);
+    lb_800119DC(&sp20, 120, 0.4, 0.003, 60 * deg_to_rad);
 
     fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialLw_8013ADB4;
 }

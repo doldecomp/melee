@@ -71,20 +71,20 @@ void ftMr_SpecialHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = (ftMario_DatAttrs*) fp->dat_attrs;
-    f32 lstick_x = abs(fp->input.x620_lstick_x);
+    f32 lstick_x = abs(fp->input.lstick.x);
     if (fp->cmd_vars[0] == 0 && lstick_x > sa->specialhi.momentum_stick_range)
     {
         f32 deg = sa->specialhi.angle_diff *
                   ((lstick_x - sa->specialhi.momentum_stick_range) /
                    (1.0 - sa->specialhi.momentum_stick_range));
-        f32 rad = fp->input.x620_lstick_x > 0 ? -(DEG_TO_RAD * deg)
-                                              : +(DEG_TO_RAD * deg);
-        if (abs(rad) > abs(fp->x6BC_inputStickangle)) {
-            fp->x6BC_inputStickangle = rad;
+        f32 rad =
+            fp->input.lstick.x > 0 ? -(deg_to_rad * deg) : +(deg_to_rad * deg);
+        if (abs(rad) > abs(fp->lstick_angle)) {
+            fp->lstick_angle = rad;
         }
     }
     if (ftCheckThrowB3(fp)) {
-        if (abs(fp->input.x620_lstick_x) > sa->specialhi.reverse_stick_range) {
+        if (abs(fp->input.lstick.x) > sa->specialhi.reverse_stick_range) {
             ftCommon_8007D9FC(fp);
             ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
         }
@@ -114,7 +114,7 @@ void ftMr_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     ftMario_DatAttrs* sa = GetMarioAttr(fp);
-    attr* attrs = &fp->x110_attr;
+    ftCo_DatAttrs* attrs = &fp->co_attrs;
 
     if (fp->cmd_vars[0] != 0) {
         ft_80085154(gobj);
@@ -122,8 +122,7 @@ void ftMr_SpecialAirHi_Phys(HSD_GObj* gobj)
         fp->self_vel.y *= sa->specialhi.vel_mul;
         fp->self_vel.z *= sa->specialhi.vel_mul;
     } else {
-        ftCommon_8007D494(fp, sa->specialhi.grav,
-                          attrs->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, sa->specialhi.grav, attrs->terminal_vel);
         ftCommon_8007CF58(fp);
     }
 }

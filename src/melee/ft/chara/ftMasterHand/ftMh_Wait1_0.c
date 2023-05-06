@@ -121,11 +121,11 @@ void ftMh_MS_341_8014FFDC(HSD_GObj* gobj)
 static void ifStage251(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     fp->fv.mh.x2258 = ftMh_MS_Wait1_0;
     fp->motion_id = ftMh_MS_Entry;
-    fp->cur_pos.x = attr->x30_pos2.x;
-    fp->cur_pos.y = attr->x30_pos2.y;
+    fp->cur_pos.x = da->x30_pos2.x;
+    fp->cur_pos.y = da->x30_pos2.y;
     {
         Fighter* fp = GET_FIGHTER(gobj);
         if (fp->motion_id == ftMh_MS_Wait1_0 ||
@@ -215,7 +215,7 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
         }
     } else {
         if (--fp->fv.mh.x223C < 0) {
-            ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+            ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
             Vec3 vec;
 
             /// @todo Unused stack.
@@ -224,31 +224,31 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
 #endif
 
             ftBossLib_8015BD24(fp->x1A98, &fp->fv.mh.x223C, fp->fv.mh.x2238,
-                               attr->x18, attr->x20, attr->x1C);
+                               da->x18, da->x20, da->x1C);
             if (ftBossLib_8015C44C(28) == ftMh_MS_TagRockPaper) {
                 // Crazy Hand Combo Attack
                 switch (ftBossLib_8015C4C4()) {
                 case ftMh_MS_Squeezing1:
-                    vec.x = attr->x124_pos.x;
-                    vec.y = attr->x124_pos.y;
+                    vec.x = da->x124_pos.x;
+                    vec.y = da->x124_pos.y;
                     vec.z = 0;
                     ftMh_MS_389_80150DC4(gobj, ftMh_MS_380_80155194, &vec);
                     break;
                 case ftMh_MS_Squeeze:
-                    vec.x = attr->x12C_pos.x;
-                    vec.y = attr->x12C_pos.y;
+                    vec.x = da->x12C_pos.x;
+                    vec.y = da->x12C_pos.y;
                     vec.z = 0;
                     ftMh_MS_389_80150DC4(gobj, ftMh_MS_382_801552F8, &vec);
                     break;
                 case ftMh_MS_Throw:
-                    vec.x = attr->x134_pos.x;
-                    vec.y = attr->x134_pos.y;
+                    vec.x = da->x134_pos.x;
+                    vec.y = da->x134_pos.y;
                     vec.z = 0;
                     ftMh_MS_389_80150DC4(gobj, ftMh_MS_383_80155484, &vec);
                     break;
                 case ftMh_MS_Slam:
-                    vec.x = attr->x13C_pos.x;
-                    vec.y = attr->x13C_pos.y;
+                    vec.x = da->x13C_pos.x;
+                    vec.y = da->x13C_pos.y;
                     vec.z = 0;
                     break;
                 }
@@ -257,7 +257,7 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
                 s32 tmp2;
                 u8_pair* qwe;
                 f32 rand;
-                if (fp->fv.mh.x2254 == attr->x24) {
+                if (fp->fv.mh.x2254 == da->x24) {
                     fp->fv.mh.x2254 = 0;
                     tmp = 2;
                 } else {
@@ -284,35 +284,35 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
                 switch (tmp2) {
                 case ftMh_MS_SweepLoop: // Stage-Wide Slap
                     mpLib_80053FF4(0, &vec);
-                    vec.y = attr->x38;
+                    vec.y = da->x38;
                     ftMh_MS_389_80150DC4(gobj, &ftMh_MS_344_80151828, &vec);
                     break;
                 case ftMh_MS_Slap: // Sweep
                     mpLib_80053FF4(0, &vec);
-                    vec.y = attr->x50.y;
+                    vec.y = da->x50.y;
                     ftMh_MS_389_80150DC4(gobj, &ftMh_MS_348_80151BB8, &vec);
                     break;
                 case ftMh_MS_WalkLoop: // Walk
-                    vec.x = attr->x40_pos.x;
-                    vec.y = attr->x40_pos.y;
+                    vec.x = da->x40_pos.x;
+                    vec.y = da->x40_pos.y;
                     vec.z = 0;
                     ftMh_MS_389_80150DC4(gobj, &ftMh_MS_353_80151DC4, &vec);
                     break;
                 case ftMh_MS_Drill: // Drill
-                    vec.x = attr->x88_pos.x;
-                    vec.y = attr->x88_pos.y;
+                    vec.x = da->x88_pos.x;
+                    vec.y = da->x88_pos.y;
                     vec.z = 0;
                     ftMh_MS_389_80150DC4(gobj, &ftMh_MS_352_801521DC, &vec);
                     break;
                 case ftMh_MS_RockCrushUp: // Punch
-                    vec.x = attr->xA8_pos.x;
-                    vec.y = attr->xA8_pos.y;
+                    vec.x = da->xA8_pos.x;
+                    vec.y = da->xA8_pos.y;
                     vec.z = 0;
                     ftMh_MS_389_80150DC4(gobj, &ftMh_MS_354_80152370, &vec);
                     break;
                 case ftMh_MS_PaperCrush: // Ground Slap
-                    vec.x = attr->xBC_pos.x;
-                    vec.y = attr->xBC_pos.y;
+                    vec.x = da->xBC_pos.x;
+                    vec.y = da->xBC_pos.y;
                     vec.z = 0;
                     ftMh_MS_389_80150DC4(gobj, &ftMh_MS_357_801526D8, &vec);
                     break;
@@ -330,11 +330,11 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
                     break;
                 case ftMh_MS_FingerBeamLoop: // Lasers
                     rand = HSD_Randf();
-                    vec.x = attr->xCC_pos.x * rand * 2 + attr->xC4_pos.x -
-                            attr->xCC_pos.x;
+                    vec.x = da->xCC_pos.x * rand * 2 + da->xC4_pos.x -
+                            da->xCC_pos.x;
                     rand = HSD_Randf();
-                    vec.y = attr->xCC_pos.y * rand * 2 + attr->xC4_pos.y -
-                            attr->xCC_pos.y;
+                    vec.y = da->xCC_pos.y * rand * 2 + da->xC4_pos.y -
+                            da->xCC_pos.y;
                     vec.z = 0;
                     ftMh_MS_389_80150DC4(gobj, &ftMh_MS_359_80152BCC, &vec);
                     break;
@@ -378,7 +378,7 @@ void ftMh_Wait1_0_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_341_80150894(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     Vec3 pos;
     u32 l_pressed = buttons & HSD_Pad_L;
     // why just l_pressed and not temps for the others?
@@ -386,35 +386,35 @@ void ftMh_MS_341_80150894(HSD_GObj* gobj)
     if (l_pressed && (buttons & HSD_Pad_DpadUp)) {
         // Stage-Wide Slap
         mpLib_80053FF4(0, &pos);
-        pos.y = attr->x38;
+        pos.y = da->x38;
         ftMh_MS_389_80150DC4(gobj, ftMh_MS_344_80151828, &pos);
     } else if (l_pressed && (buttons & HSD_Pad_DpadRight)) {
         // Sweep
         mpLib_80053FF4(0, &pos);
-        pos.y = attr->x50.y;
+        pos.y = da->x50.y;
         ftMh_MS_389_80150DC4(gobj, ftMh_MS_348_80151BB8, &pos);
     } else if (l_pressed && (buttons & HSD_Pad_DpadDown)) {
         // Walk
-        pos.x = attr->x40_pos.x;
-        pos.y = attr->x40_pos.y;
+        pos.x = da->x40_pos.x;
+        pos.y = da->x40_pos.y;
         pos.z = 0;
         ftMh_MS_389_80150DC4(gobj, &ftMh_MS_353_80151DC4, &pos);
     } else if ((buttons & HSD_Pad_R) && (buttons & HSD_Pad_DpadUp)) {
         // Drill
-        pos.x = attr->x88_pos.x;
-        pos.y = attr->x88_pos.y;
+        pos.x = da->x88_pos.x;
+        pos.y = da->x88_pos.y;
         pos.z = 0;
         ftMh_MS_389_80150DC4(gobj, &ftMh_MS_352_801521DC, &pos);
     } else if ((buttons & HSD_Pad_R) && (buttons & HSD_Pad_DpadRight)) {
         // Punch
-        pos.x = attr->xA8_pos.x;
-        pos.y = attr->xA8_pos.y;
+        pos.x = da->xA8_pos.x;
+        pos.y = da->xA8_pos.y;
         pos.z = 0;
         ftMh_MS_389_80150DC4(gobj, ftMh_MS_354_80152370, &pos);
     } else if ((buttons & HSD_Pad_R) && (buttons & HSD_Pad_DpadDown)) {
         // Ground Slap
-        pos.x = attr->xBC_pos.x;
-        pos.y = attr->xBC_pos.y;
+        pos.x = da->xBC_pos.x;
+        pos.y = da->xBC_pos.y;
         pos.z = 0;
         ftMh_MS_389_80150DC4(gobj, &ftMh_MS_357_801526D8, &pos);
     } else if ((buttons & HSD_Pad_R) && (buttons & HSD_Pad_DpadLeft)) {
@@ -432,9 +432,9 @@ void ftMh_MS_341_80150894(HSD_GObj* gobj)
     } else if ((buttons & HSD_Pad_B) && (buttons & HSD_Pad_DpadUp)) {
         // Lasers
         float rand = HSD_Randf();
-        pos.x = attr->xCC_pos.x * rand * 2 + attr->xC4_pos.x - attr->xCC_pos.x;
+        pos.x = da->xCC_pos.x * rand * 2 + da->xC4_pos.x - da->xCC_pos.x;
         rand = HSD_Randf();
-        pos.y = attr->xCC_pos.y * rand * 2 + attr->xC4_pos.y - attr->xCC_pos.y;
+        pos.y = da->xCC_pos.y * rand * 2 + da->xC4_pos.y - da->xCC_pos.y;
         pos.z = 0;
         ftMh_MS_389_80150DC4(gobj, &ftMh_MS_359_80152BCC, &pos);
     } else if ((buttons & HSD_Pad_B) && (buttons & HSD_Pad_DpadRight)) {
@@ -452,29 +452,29 @@ void ftMh_MS_341_80150894(HSD_GObj* gobj)
         // Crazy Hand Combo Attack
         switch (ftBossLib_8015C4C4()) {
         case ftMh_MS_Squeezing1: {
-            pos.x = attr->x124_pos.x;
-            pos.y = attr->x124_pos.y;
+            pos.x = da->x124_pos.x;
+            pos.y = da->x124_pos.y;
             pos.z = 0;
             ftMh_MS_389_80150DC4(gobj, ftMh_MS_380_80155194, &pos);
             break;
         }
         case ftMh_MS_Squeeze: {
-            pos.x = attr->x12C_pos.x;
-            pos.y = attr->x12C_pos.y;
+            pos.x = da->x12C_pos.x;
+            pos.y = da->x12C_pos.y;
             pos.z = 0;
             ftMh_MS_389_80150DC4(gobj, ftMh_MS_382_801552F8, &pos);
             break;
         }
         case ftMh_MS_Throw: {
-            pos.x = attr->x134_pos.x;
-            pos.y = attr->x134_pos.y;
+            pos.x = da->x134_pos.x;
+            pos.y = da->x134_pos.y;
             pos.z = 0;
             ftMh_MS_389_80150DC4(gobj, ftMh_MS_383_80155484, &pos);
             break;
         }
         case ftMh_MS_Slam: {
-            pos.x = attr->x13C_pos.x;
-            pos.y = attr->x13C_pos.y;
+            pos.x = da->x13C_pos.x;
+            pos.y = da->x13C_pos.y;
             pos.z = 0;
             break;
         }

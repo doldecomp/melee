@@ -3,6 +3,11 @@
 
 #include <baselib/forward.h>
 
+#include <placeholder.h>
+
+/* 11D518 */ bool ftPe_8011D518(HSD_GObj* gobj);
+/* 11D598 */ void ftPe_8011D598(HSD_GObj* gobj);
+/* 11D680 */ bool ftPe_SpecialHi_NotActive(HSD_GObj* gobj);
 /* 11D72C */ void ftPe_SpecialHi_Enter(HSD_GObj* gobj);
 /* 11D7F0 */ void ftPe_SpecialAirHi_Enter(HSD_GObj* gobj);
 /* 11D8D0 */ void ftPe_SpecialHiStart_Anim(HSD_GObj* gobj);

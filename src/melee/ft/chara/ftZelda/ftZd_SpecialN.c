@@ -174,13 +174,13 @@ void ftZd_SpecialAirN_Phys(HSD_GObj* gobj)
 
     {
         s32 var1 = fp->mv.zd.specialn.x0;
-        attr* attr = &fp->x110_attr;
+        ftCo_DatAttrs* da = &fp->co_attrs;
         ftZelda_DatAttrs* sa = fp->dat_attrs;
 
         if (var1 != 0) {
             fp->mv.zd.specialn.x0 = var1 - 1;
         } else {
-            ftCommon_8007D494(fp, sa->xC, attr->x170_TerminalVelocity);
+            ftCommon_8007D494(fp, sa->xC, da->terminal_vel);
         }
     }
 

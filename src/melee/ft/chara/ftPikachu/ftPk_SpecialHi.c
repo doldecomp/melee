@@ -118,12 +118,12 @@ void ftPk_SpecialAirHiStart0_Phys(HSD_GObj* gobj)
 
     {
         ftPikachuAttributes* sa = fp->dat_attrs;
-        attr* attr = &fp->x110_attr;
+        ftCo_DatAttrs* da = &fp->co_attrs;
 
         if ((signed) fp->mv.pk.unk4.x0 != 0) {
             fp->mv.pk.unk4.x0--;
         } else {
-            ftCommon_8007D494(fp, sa->x64, attr->x170_TerminalVelocity);
+            ftCommon_8007D494(fp, sa->x64, da->terminal_vel);
         }
     }
 
@@ -278,7 +278,7 @@ void ftPk_SpecialHi_8012642C(HSD_GObj* gobj)
     fp->self_vel = velocity_vec;
 
     fp->x6D8.x = fp->x6D8.y = fp->x6D8.z = fp->x6C0.x = fp->x6C0.y =
-        fp->x6C0.z = fp->x6BC_inputStickangle = fp->x6A4_transNOffset.x =
+        fp->x6C0.z = fp->lstick_angle = fp->x6A4_transNOffset.x =
             fp->x6A4_transNOffset.y = fp->x6A4_transNOffset.z =
                 fp->x68C_transNPos.x = fp->x68C_transNPos.y =
                     fp->x68C_transNPos.z = 0.0f;
@@ -507,8 +507,8 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
     // distance formula
-    f32 stick_mag = sqrtf(fp->input.x620_lstick_x * fp->input.x620_lstick_x +
-                          fp->input.x624_lstick_y * fp->input.x624_lstick_y);
+    f32 stick_mag = sqrtf(fp->input.lstick.x * fp->input.lstick.x +
+                          fp->input.lstick.y * fp->input.lstick.y);
 
     // cap stick magnitude to MAX_STICK_MAG
     if (stick_mag > MAX_STICK_MAG) {
@@ -518,8 +518,8 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
     if (!(stick_mag < pika_attr->x8C)) {
         Vec3 lstick_direction;
 
-        lstick_direction.x = fp->input.x620_lstick_x;
-        lstick_direction.y = fp->input.x624_lstick_y;
+        lstick_direction.x = fp->input.lstick.x;
+        lstick_direction.y = fp->input.lstick.y;
         lstick_direction.z = 0.0f;
 
         if (!(lbVector_AngleXY(&collData->x14C_ground.normal,
@@ -540,7 +540,7 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
                 ((ftPikachuAttributes*) fighter2->dat_attrs)->x60;
 
             // lose double jump(s)
-            fighter2->x1968_jumpsUsed = fighter2->x110_attr.x168_MaxJumps;
+            fighter2->x1968_jumpsUsed = fighter2->co_attrs.x168_MaxJumps;
 
             // set ground velocity to (zip_slope * stick_mag) + zip_intercept
             // and then flip based on facing direction
@@ -580,9 +580,8 @@ void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
     // distance formula
-    f32 temp_stick_mag =
-        sqrtf((fp->input.x620_lstick_x * fp->input.x620_lstick_x) +
-              (fp->input.x624_lstick_y * fp->input.x624_lstick_y));
+    f32 temp_stick_mag = sqrtf((fp->input.lstick.x * fp->input.lstick.x) +
+                               (fp->input.lstick.y * fp->input.lstick.y));
 
     final_stick_mag = temp_stick_mag;
 
@@ -592,17 +591,17 @@ void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
     }
 
     if ((final_stick_mag > pika_attr->x8C)) {
-        if (fabs_inline(fp->input.x620_lstick_x) > 0.001f) {
+        if (fabs_inline(fp->input.lstick.x) > 0.001f) {
             ftCommon_8007D9FC(fp);
         }
 
         // zip angle = atan2(stick_y, stick_x * facing_direction)
-        some_angle = atan2f(fp->input.x624_lstick_y,
-                            fp->input.x620_lstick_x * fp->facing_dir);
+        some_angle =
+            atan2f(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
 
         // store stick angle to compare during zip2 check
-        fp->mv.pk.unk4.x10.x = fp->input.x620_lstick_x;
-        fp->mv.pk.unk4.x10.y = fp->input.x624_lstick_y;
+        fp->mv.pk.unk4.x10.x = fp->input.lstick.x;
+        fp->mv.pk.unk4.x10.y = fp->input.lstick.y;
     } else {
         // set facing direction if stick x meets a threshold
         ftCommon_8007DA24(fp);
@@ -623,7 +622,7 @@ void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
         ((ftPikachuAttributes*) fighter2->dat_attrs)->x60;
 
     // lose double jump(s)
-    fighter2->x1968_jumpsUsed = fighter2->x110_attr.x168_MaxJumps;
+    fighter2->x1968_jumpsUsed = fighter2->co_attrs.x168_MaxJumps;
 
     // compute velocity as (zip slope * stick_mag) + zip intercept
     // x velocity is the same but flips based on facing direction
@@ -665,8 +664,8 @@ bool ftPk_SpecialHi_80127064(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
     // distance formula
-    f32 stick_mag = sqrtf((fp->input.x620_lstick_x * fp->input.x620_lstick_x) +
-                          (fp->input.x624_lstick_y * fp->input.x624_lstick_y));
+    f32 stick_mag = sqrtf((fp->input.lstick.x * fp->input.lstick.x) +
+                          (fp->input.lstick.y * fp->input.lstick.y));
 
     // if stick_mag is less than the threshold, push the max stick magnitude
     // onto the stack and return 0
@@ -684,8 +683,8 @@ bool ftPk_SpecialHi_80127064(HSD_GObj* gobj)
 #endif
 
         // push current stick to temporary vector
-        vec1.x = fp->input.x620_lstick_x;
-        vec1.y = fp->input.x624_lstick_y;
+        vec1.x = fp->input.lstick.x;
+        vec1.y = fp->input.lstick.y;
         vec1.z = 0.0f;
 
         // push stick from zip1 to temporary vector
@@ -697,7 +696,7 @@ bool ftPk_SpecialHi_80127064(HSD_GObj* gobj)
         tempf = lbVector_AngleXY(&vec2, &vec1);
 
         // if the angular difference > the minimum difference, return 1
-        if (tempf > (DEG_TO_RAD * (pika_attr->xA8))) {
+        if (tempf > (deg_to_rad * (pika_attr->xA8))) {
             return true;
         }
 
@@ -772,7 +771,7 @@ void ftPk_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
 
     if (fp->cmd_vars[0]) {
         ftCommon_8007D4B8(fp);
-        ftCommon_8007D440(fp, sa->x9C * fp->x110_attr.x17C_AerialDriftMax);
+        ftCommon_8007D440(fp, sa->x9C * fp->co_attrs.x17C_AerialDriftMax);
     } else {
         fp->self_vel.y -= (fp->self_vel.y / 9.0f);
         ftCommon_8007CEF4(fp);

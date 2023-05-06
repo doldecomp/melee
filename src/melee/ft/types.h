@@ -154,7 +154,9 @@ typedef struct _ftCommonData {
     /* +4D0 */ f32 x4D0;
     /* +4D4 */ f32 x4D4;
     /* +4D8 */ u32 x4D8;
-    /* +4DC */ u8 x4DC[0x5C0 - 0x4DC];
+    /* +4DC */ u8 x4DC[0x59C - 0x4DC];
+    /* +59C */ f32 x59C;
+    /* +5A0 */ u8 x5A0[0x5C0 - 0x5A0];
     /* +5F0 */ f32 x5C0;
     /* +5C4 */ u8 x5C4[0x5F0 - 0x5C4];
     /* +5F0 */ u32 x5F0;
@@ -257,7 +259,7 @@ typedef struct _ThrowFlags {
     };
 } ThrowFlags;
 
-typedef struct attr {
+typedef struct ftCo_DatAttrs {
     /* fp+110 */ f32 walk_init_vel;
     /* fp+114 */ f32 walk_accel;
     /* fp+118 */ f32 walk_max_vel;
@@ -281,8 +283,8 @@ typedef struct attr {
     /* fp+160 */ f32 x160_AirJumpVMultiplier;
     /* fp+164 */ f32 x164_AirJumpHMultiplier;
     /* fp+168 */ s32 x168_MaxJumps;
-    /* fp+16C */ f32 x16C_Gravity;
-    /* fp+170 */ f32 x170_TerminalVelocity;
+    /* fp+16C */ f32 grav;
+    /* fp+170 */ f32 terminal_vel;
     /* fp+174 */ f32 x174_AerialDriftStickMult;
     /* fp+178 */ f32 x178_AerialDriftBase;
     /* fp+17C */ f32 x17C_AerialDriftMax;
@@ -347,7 +349,7 @@ typedef struct attr {
     /* fp+280 */ Vec3 x280;
     /* fp+28C */ s32 x28C;
     /* fp+290 */ s32 x290_WeightDependentThrowSpeedFlags;
-} attr;
+} ftCo_DatAttrs;
 
 typedef struct _FighterBone {
     /* +0 */ HSD_JObj* x0_jobj;
@@ -617,7 +619,7 @@ struct Fighter {
     /*  fp+107 */ s8 x107;
     /*  fp+108 */ HSD_Joint* x108_costume_joint;
     /*  fp+10C */ ftData* ft_data;
-    /*  fp+110 */ attr x110_attr;
+    /*  fp+110 */ ftCo_DatAttrs co_attrs;
     /*  fp+294 */ itPickup x294_itPickup;
     /*  fp+2C4 */ Vec2 x2C4;
     /*  fp+2CC */ void* x2CC;
@@ -684,22 +686,18 @@ struct Fighter {
     /*  fp+61D */ u8 x61D;
     /*  fp+61E */ u8 filler_x61E[0x620 - 0x61E];
     /*  fp+620 */ struct {
-        /*  fp+620 */ f32 x620_lstick_x;
-        /*  fp+624 */ f32 x624_lstick_y;
-        /*  fp+628 */ f32 x628_lstick_x2;
-        /*  fp+62C */ f32 x62C_lstick_y2;
+        /*  fp+620 */ Vec2 lstick;
+        /*  fp+628 */ Vec2 lstick1;
         /*  fp+630 */ f32 x630;
         /*  fp+634 */ f32 x634;
-        /*  fp+638 */ f32 x638_lsubStick_x;
-        /*  fp+63C */ f32 x63C_lsubStick_y;
-        /*  fp+640 */ f32 x640_lsubStick_x2;
-        /*  fp+644 */ f32 x644_lsubStick_y2;
+        /*  fp+638 */ Vec2 lsubstick;
+        /*  fp+640 */ Vec2 lsubstick1;
         /*  fp+648 */ f32 x648;
         /*  fp+64C */ f32 x64C;
         /*  fp+650 */ f32 x650;
         /*  fp+654 */ f32 x654;
         /*  fp+658 */ f32 x658;
-        /*  fp+65C */ HSD_Pad x65C_heldInputs;
+        /*  fp+65C */ HSD_Pad held_inputs;
         /*  fp+660 */ s32 x660;
         /*  fp+664 */ s32 x664;
         /*  fp+668 */ HSD_Pad x668;
@@ -737,7 +735,7 @@ struct Fighter {
     /*  fp+698 */ Vec3 x698;
     /*  fp+6A4 */ Vec3 x6A4_transNOffset;
     /*  fp+6B0 */ Vec3 x6B0;
-    /*  fp+6BC */ f32 x6BC_inputStickangle;
+    /*  fp+6BC */ f32 lstick_angle;
     /*  fp+6C0 */ Vec3 x6C0;
     /*  fp+6CC */ Vec3 x6CC;
     /*  fp+6D8 */ Vec3 x6D8;

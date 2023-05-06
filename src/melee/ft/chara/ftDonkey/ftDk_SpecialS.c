@@ -61,11 +61,11 @@ void ftDk_SpecialS_Phys(HSD_GObj* gobj)
 void ftDk_SpecialAirS_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    attr* ft_attr = &fp->x110_attr;
+    ftCo_DatAttrs* ca = &fp->co_attrs;
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
     if (fp->cmd_vars[0]) {
         ftCommon_8007D494(fp, donkey_attr->SpecialS.x44_AERIAL_GRAVITY,
-                          ft_attr->x170_TerminalVelocity);
+                          ca->terminal_vel);
     }
     ftCommon_8007CE94(fp,
                       donkey_attr->SpecialS.x40_MOMENTUM_TRANSITION_MODIFIER);

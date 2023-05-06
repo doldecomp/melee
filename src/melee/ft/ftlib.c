@@ -299,8 +299,8 @@ s32 ftLib_800865CC(HSD_GObj* gobj)
 void ftLib_800865D8(HSD_GObj* gobj, f32* x, f32* y)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    *x = fp->input.x620_lstick_x;
-    *y = fp->input.x624_lstick_y;
+    *x = fp->input.lstick.x;
+    *y = fp->input.lstick.y;
 }
 
 void* ftLib_800865F0(HSD_GObj* gobj)
@@ -344,7 +344,7 @@ void ftLib_SetScale(HSD_GObj* gobj, f32 val)
 void ftLib_800866DC(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    struct attr* r4 = &fp->x110_attr;
+    struct ftCo_DatAttrs* r4 = &fp->co_attrs;
     s32 i = fp->ft_data->x0->x16C_idx;
     lb_8000B1CC(ftLib_80086630(gobj, i), &r4->x280, v);
 }
@@ -484,7 +484,7 @@ f32 ftLib_800869D4(HSD_GObj* gobj)
 f32 ftLib_800869F8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x34_scale.x * fp->x110_attr.x19C_ModelScaling;
+    return fp->x34_scale.x * fp->co_attrs.x19C_ModelScaling;
 }
 
 f32 ftLib_80086A0C(HSD_GObj* gobj)
@@ -709,7 +709,7 @@ f32 ftLib_80086F80(HSD_GObj* gobj)
         return fp->ft_data->x0->xFC;
     }
 
-    return fp->x110_attr.x20C_NametagHeight;
+    return fp->co_attrs.x20C_NametagHeight;
 }
 
 bool ftLib_80086FA8(HSD_GObj* gobj)

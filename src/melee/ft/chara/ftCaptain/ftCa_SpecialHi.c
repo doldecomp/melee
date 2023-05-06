@@ -74,7 +74,7 @@ static void ftCa_SpecialLw_800E49FC(HSD_GObj* gobj)
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* da = fp->dat_attrs;
-    fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
+    fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
     fp->mv.ca.specialhi.x0 = da->specialhi_air_var;
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = da->specialhi_unk2;
@@ -217,7 +217,7 @@ void ftCa_SpecialHi_IASA(HSD_GObj* gobj)
         fp->cmd_vars[0] = 0;
         fp->mv.ca.specialhi.x2_b1 = true;
         {
-            f32 lstick_x = fp->input.x620_lstick_x;
+            f32 lstick_x = fp->input.lstick.x;
             if (lstick_x < 0) {
                 lstick_x = -lstick_x;
             }
@@ -311,17 +311,17 @@ void ftCa_SpecialHi_Phys(HSD_GObj* gobj)
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* da = fp->dat_attrs;
-    attr* attr = &fp->x110_attr;
+    ftCo_DatAttrs* ca = &fp->co_attrs;
     fp->self_vel.x = fp->mv.ca.specialhi.vel.x;
     fp->self_vel.y = fp->mv.ca.specialhi.vel.y;
     fp->self_vel.z = 0;
     if (!ftCommon_8007D050(fp, da->specialhi_horz_vel *
-                                   fp->x110_attr.x17C_AerialDriftMax))
+                                   fp->co_attrs.x17C_AerialDriftMax))
     {
         ftCommon_8007D3A8(fp, p_ftCommonData->x258,
-                          attr->x174_AerialDriftStickMult *
+                          ca->x174_AerialDriftStickMult *
                               da->specialhi_air_friction_mul,
-                          attr->x17C_AerialDriftMax * da->specialhi_horz_vel);
+                          ca->x17C_AerialDriftMax * da->specialhi_horz_vel);
     }
     fp->mv.ca.specialhi.vel.x = fp->x74_anim_vel.x + fp->self_vel.x;
     fp->mv.ca.specialhi.vel.y = fp->x74_anim_vel.y + fp->self_vel.y;
@@ -487,7 +487,7 @@ static void doAirIASA(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->mv.ca.specialhi.x2_b1 = true;
     {
-        float lstick_x = fp->input.x620_lstick_x;
+        float lstick_x = fp->input.lstick.x;
         if (lstick_x < 0) {
             lstick_x = -lstick_x;
         }
@@ -591,17 +591,17 @@ void ftCa_SpecialAirHi_Phys(HSD_GObj* gobj)
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* da = fp->dat_attrs;
-    attr* attr = &fp->x110_attr;
+    ftCo_DatAttrs* ca = &fp->co_attrs;
     fp->self_vel.x = fp->mv.ca.specialhi.vel.x;
     fp->self_vel.y = fp->mv.ca.specialhi.vel.y;
     fp->self_vel.z = 0;
     if (!ftCommon_8007D050(fp,
-                           da->specialhi_horz_vel * attr->x17C_AerialDriftMax))
+                           da->specialhi_horz_vel * ca->x17C_AerialDriftMax))
     {
         ftCommon_8007D3A8(fp, p_ftCommonData->x258,
-                          attr->x174_AerialDriftStickMult *
+                          ca->x174_AerialDriftStickMult *
                               da->specialhi_air_friction_mul,
-                          attr->x17C_AerialDriftMax * da->specialhi_horz_vel);
+                          ca->x17C_AerialDriftMax * da->specialhi_horz_vel);
     }
     fp->mv.ca.specialhi.vel.x = fp->x74_anim_vel.x + fp->self_vel.x;
     fp->mv.ca.specialhi.vel.y = fp->x74_anim_vel.y + fp->self_vel.y;
@@ -936,18 +936,17 @@ void ftCa_SpecialHiThrow0_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* da = fp->dat_attrs;
     if (fp->mv.ca.specialhi.x2_b2) {
-        attr* attr = &fp->x110_attr;
+        ftCo_DatAttrs* ca = &fp->co_attrs;
         fp->self_vel.x = fp->mv.ca.specialhi.vel.x;
         fp->self_vel.y = fp->mv.ca.specialhi.vel.y;
         fp->self_vel.z = 0;
         if (!ftCommon_8007D050(fp, da->specialhi_horz_vel *
-                                       attr->x17C_AerialDriftMax))
+                                       ca->x17C_AerialDriftMax))
         {
-            ftCommon_8007D3A8(fp, p_ftCommonData->x258,
-                              attr->x174_AerialDriftStickMult *
-                                  da->specialhi_air_friction_mul,
-                              attr->x17C_AerialDriftMax *
-                                  da->specialhi_horz_vel);
+            ftCommon_8007D3A8(
+                fp, p_ftCommonData->x258,
+                ca->x174_AerialDriftStickMult * da->specialhi_air_friction_mul,
+                ca->x17C_AerialDriftMax * da->specialhi_horz_vel);
         }
         fp->mv.ca.specialhi.vel.x = fp->x74_anim_vel.x + fp->self_vel.x;
         fp->mv.ca.specialhi.vel.y = fp->x74_anim_vel.y + fp->self_vel.y;
@@ -957,8 +956,7 @@ void ftCa_SpecialHiThrow0_Phys(HSD_GObj* gobj)
         fp->self_vel.y = fp->self_vel.y + fp->mv.ca.specialhi.vel.y;
         {
             float vel_y = fp->self_vel.y - fp->mv.ca.specialhi.vel.y;
-            ftCommon_8007D494(fp, da->specialhi_catch_grav,
-                              attr->x170_TerminalVelocity);
+            ftCommon_8007D494(fp, da->specialhi_catch_grav, ca->terminal_vel);
             fp->mv.ca.specialhi.vel.y = fp->self_vel.y - vel_y;
         }
     } else {

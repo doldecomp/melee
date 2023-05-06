@@ -16,12 +16,11 @@ FtWalkType ftWalkCommon_GetWalkType(HSD_GObj* gobj)
     float gr_vel = fp->gr_vel;
     float walk_vel = fabs_inline(gr_vel);
     if (walk_vel >= (fp->mv.co.walk.accel_mul *
-                     (p_ftCommonData->x2C * fp->x110_attr.walk_max_vel)))
+                     (p_ftCommonData->x2C * fp->co_attrs.walk_max_vel)))
     {
         return FtWalkType_Fast;
-    } else if (walk_vel >=
-               (fp->mv.co.walk.accel_mul *
-                (p_ftCommonData->x28 * fp->x110_attr.walk_max_vel)))
+    } else if (walk_vel >= (fp->mv.co.walk.accel_mul *
+                            (p_ftCommonData->x28 * fp->co_attrs.walk_max_vel)))
     {
         return FtWalkType_Middle;
     } else {
@@ -35,11 +34,11 @@ static inline FtWalkType ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* gobj)
     f32 walking_velocity = fabs_inline(fp->gr_vel);
     f32 tempf = fp->mv.co.walk.accel_mul;
     if (walking_velocity >=
-        (tempf * (p_ftCommonData->x2C * fp->x110_attr.walk_max_vel)))
+        (tempf * (p_ftCommonData->x2C * fp->co_attrs.walk_max_vel)))
     {
         return FtWalkType_Fast;
     } else if (walking_velocity >=
-               (tempf * (p_ftCommonData->x28 * fp->x110_attr.walk_max_vel)))
+               (tempf * (p_ftCommonData->x28 * fp->co_attrs.walk_max_vel)))
     {
         return FtWalkType_Middle;
     } else {
@@ -51,7 +50,7 @@ bool ftWalkCommon_800DFC70(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->input.x620_lstick_x * fp->facing_dir >= p_ftCommonData->x24) {
+    if (fp->input.lstick.x * fp->facing_dir >= p_ftCommonData->x24) {
         return true;
     }
 
@@ -163,8 +162,8 @@ void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
 
 static float getWalkAccel(Fighter* fp, float mul)
 {
-    return fp->input.x620_lstick_x > 0 ? mul * +fp->x110_attr.walk_accel
-                                       : mul * -fp->x110_attr.walk_accel;
+    return fp->input.lstick.x > 0 ? mul * +fp->co_attrs.walk_accel
+                                  : mul * -fp->co_attrs.walk_accel;
 }
 
 void ftWalkCommon_800E0060(HSD_GObj* gobj)
@@ -186,12 +185,12 @@ void ftWalkCommon_800E0060(HSD_GObj* gobj)
 
     {
         float walk_vel =
-            fp->input.x620_lstick_x * fp->x110_attr.walk_init_vel * accel_mul;
+            fp->input.lstick.x * fp->co_attrs.walk_init_vel * accel_mul;
         walk_vel += getWalkAccel(fp, accel_mul);
 
         {
-            float stick_mul = fp->input.x620_lstick_x *
-                              fp->x110_attr.walk_max_vel * accel_mul;
+            float stick_mul =
+                fp->input.lstick.x * fp->co_attrs.walk_max_vel * accel_mul;
 
             if (stick_mul) {
                 float gr_vel = fp->gr_vel / stick_mul;
@@ -203,7 +202,7 @@ void ftWalkCommon_800E0060(HSD_GObj* gobj)
 
             fp->mv.co.walk.x0 = stick_mul * p_ftCommonData->x440;
             ftCommon_8007C98C(fp, walk_vel, stick_mul,
-                              fp->x110_attr.gr_friction);
+                              fp->co_attrs.gr_friction);
         }
 
         ftCommon_8007CB74(gobj);

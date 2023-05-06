@@ -608,8 +608,8 @@ void ftDk_Init_OnItemDrop(HSD_GObj* gobj, bool arg1)
 void ftDk_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftDonkeyAttributes* attr = fp->dat_attrs;
-    if (fp->fv.dk.x222C == attr->SpecialN.x2C_MAX_ARM_SWINGS) {
+    ftDonkeyAttributes* da = fp->dat_attrs;
+    if (fp->fv.dk.x222C == da->SpecialN.x2C_MAX_ARM_SWINGS) {
         ft_800BFFD0(fp, 57, 0);
     }
 }

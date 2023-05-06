@@ -67,7 +67,7 @@ static inline void spawnEffect(HSD_GObj* gobj)
     ftParts_80074B0C(gobj, 0, 0);
     ftColl_8007B0C0(gobj, 0);
 
-    x1CC = &fp->x110_attr.x1CC;
+    x1CC = &fp->co_attrs.x1CC;
     part = ftParts_8007500C(fp, FtPart_HipN);
     fp2 = GET_FIGHTER(gobj);
     jobj = fp->parts[part].x0_jobj;
@@ -255,7 +255,7 @@ void ftYs_Shield_8012C49C(HSD_GObj* gobj)
             u8 _[8];
 #endif
 
-            s32* x1CC = &fp0->x110_attr.x1CC;
+            s32* x1CC = &fp0->co_attrs.x1CC;
 
             ssize_t bone_idx = ftParts_8007500C(fp0, 4);
             Fighter* fp1 = GET_FIGHTER(gobj);
@@ -746,7 +746,7 @@ bool ftYs_Shield_8012CC1C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.x65C_heldInputs & 0x80000000) &&
+    if ((fp->input.held_inputs & 0x80000000) &&
         (fp->x1998_shieldHealth >= ftYs_Init_804D9A2C))
     {
         ft_800928CC(gobj);
@@ -766,9 +766,9 @@ extern f32 const ftYs_Init_804D9A38;
 void ftYs_Shield_8012CC94(HSD_GObj* gobj, Vec3* out)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftYoshiAttributes* attr = fp->dat_attrs;
-    out->x = (-fp->facing_dir * attr->x10);
-    out->y = attr->x14;
+    ftYoshiAttributes* da = fp->dat_attrs;
+    out->x = (-fp->facing_dir * da->x10);
+    out->y = da->x14;
     out->z = ftYs_Init_804D9A38;
 }
 
@@ -779,24 +779,24 @@ f32 ftYs_Shield_8012CCC4(HSD_GObj* gobj)
 
 f32 ftYs_Shield_8012CCD0(HSD_GObj* gobj)
 {
-    ftYoshiAttributes* attr = GET_FIGHTER(gobj)->dat_attrs;
-    return attr->x18;
+    ftYoshiAttributes* da = GET_FIGHTER(gobj)->dat_attrs;
+    return da->x18;
 }
 
 f32 ftYs_Shield_8012CCE0(HSD_GObj* gobj)
 {
-    ftYoshiAttributes* attr = GET_FIGHTER(gobj)->dat_attrs;
-    return attr->x1C;
+    ftYoshiAttributes* da = GET_FIGHTER(gobj)->dat_attrs;
+    return da->x1C;
 }
 
 f32 ftYs_Shield_8012CCF0(HSD_GObj* gobj)
 {
-    ftYoshiAttributes* attr = GET_FIGHTER(gobj)->dat_attrs;
-    return attr->x20;
+    ftYoshiAttributes* da = GET_FIGHTER(gobj)->dat_attrs;
+    return da->x20;
 }
 
 f32 ftYs_Shield_8012CD00(HSD_GObj* gobj)
 {
-    ftYoshiAttributes* attr = GET_FIGHTER(gobj)->dat_attrs;
-    return attr->x24;
+    ftYoshiAttributes* da = GET_FIGHTER(gobj)->dat_attrs;
+    return da->x24;
 }

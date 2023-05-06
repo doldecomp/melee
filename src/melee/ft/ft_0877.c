@@ -13,7 +13,7 @@
 s32 ft_800877F8(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return TEST(fp->input.x65C_heldInputs & arg1);
+    return TEST(fp->input.held_inputs & arg1);
 }
 
 s32 ft_80087818(HSD_GObj* gobj, s32 arg1)

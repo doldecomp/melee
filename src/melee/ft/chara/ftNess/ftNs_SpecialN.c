@@ -219,7 +219,7 @@ void ftNs_SpecialNStart_Anim(HSD_GObj* gobj)
         }
     }
 
-    fp->x1968_jumpsUsed = (u8) fp->x110_attr.x168_MaxJumps;
+    fp->x1968_jumpsUsed = (u8) fp->co_attrs.x168_MaxJumps;
 }
 
 /// Ness's grounded PK Flash Charge Animation callback
@@ -344,7 +344,7 @@ void ftNs_SpecialAirNStart_Anim(HSD_GObj* gobj)
             }
         }
 
-        fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
+        fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
     }
 }
 
@@ -446,7 +446,7 @@ void ftNs_SpecialNRelease_IASA(HSD_GObj* gobj)
             }
         }
 
-        if (fp->input.x65C_heldInputs & HSD_Pad_B) {
+        if (fp->input.held_inputs & HSD_Pad_B) {
             return;
         }
     }
@@ -500,7 +500,7 @@ void ftNs_SpecialAirNRelease_IASA(HSD_GObj* gobj)
         }
     }
 
-    if (fp->input.x65C_heldInputs & HSD_Pad_B) {
+    if (fp->input.held_inputs & HSD_Pad_B) {
         return;
     }
 
@@ -571,11 +571,11 @@ void ftNs_SpecialAirNStart_Phys(HSD_GObj* gobj)
         fp->mv.ns.specialn.gravityDelay--;
     } else {
         ftCommon_8007D494(fp, sa->x14_PKFLASH_FALL_ACCEL,
-                          fp->x110_attr.x170_TerminalVelocity);
+                          fp->co_attrs.terminal_vel);
     }
 
     {
-        f32 airFriction = fp->x110_attr.x180_AerialFriction;
+        f32 airFriction = fp->co_attrs.x180_AerialFriction;
         ftCommon_8007CE94(fp, airFriction);
     }
 }
@@ -595,11 +595,11 @@ void ftNs_SpecialAirNRelease_Phys(HSD_GObj* gobj)
         fp->mv.ns.specialn.gravityDelay--;
     } else {
         ftCommon_8007D494(fp, sa->x14_PKFLASH_FALL_ACCEL,
-                          fp->x110_attr.x170_TerminalVelocity);
+                          fp->co_attrs.terminal_vel);
     }
 
     {
-        f32 airFriction = fp->x110_attr.x180_AerialFriction;
+        f32 airFriction = fp->co_attrs.x180_AerialFriction;
         ftCommon_8007CE94(fp, airFriction);
     }
 }
@@ -619,11 +619,11 @@ void ftNs_SpecialAirNEnd_Phys(HSD_GObj* gobj)
         fp->mv.ns.specialn.gravityDelay--;
     } else {
         ftCommon_8007D494(fp, sa->x14_PKFLASH_FALL_ACCEL,
-                          fp->x110_attr.x170_TerminalVelocity);
+                          fp->co_attrs.terminal_vel);
     }
 
     {
-        f32 airFriction = fp->x110_attr.x180_AerialFriction;
+        f32 airFriction = fp->co_attrs.x180_AerialFriction;
         ftCommon_8007CE94(fp, airFriction);
     }
 }

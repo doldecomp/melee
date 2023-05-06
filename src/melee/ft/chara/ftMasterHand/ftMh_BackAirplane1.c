@@ -35,7 +35,7 @@ void ftMh_BackAirplane1_Coll(HSD_GObj* gobj) {}
 static void doAnim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
 
     Fighter_ChangeMotionState(gobj, ftMh_MS_BackAirplane2, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
@@ -46,7 +46,7 @@ static void doAnim(HSD_GObj* gobj)
         fp->cur_pos.x = pos.x;
     }
 
-    fp->cur_pos.y = attr->x5C;
+    fp->cur_pos.y = da->x5C;
     fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
 }
 

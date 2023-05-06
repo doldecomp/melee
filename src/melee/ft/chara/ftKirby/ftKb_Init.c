@@ -3104,20 +3104,20 @@ void ftKb_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     s32 _[2];
     Fighter* fp = GET_FIGHTER(gobj);
-    ftKirbyAttributes* attr = fp->dat_attrs;
+    ftKirbyAttributes* da = fp->dat_attrs;
     switch (fp->fv.kb.x2238) {
     case 3:
-        if (fp->fv.kb.x22E8 == attr->x190) {
+        if (fp->fv.kb.x22E8 == da->x190) {
             ft_800BFFD0(fp, 58, 0);
         }
         break;
     case 13:
-        if (fp->fv.kb.x22D4 == attr->x168) {
+        if (fp->fv.kb.x22D4 == da->x168) {
             ft_800BFFD0(fp, 54, 0);
         }
         break;
     case 16:
-        if (fp->fv.kb.x22C8 == attr->x384) {
+        if (fp->fv.kb.x22C8 == da->x384) {
             ft_800BFFD0(fp, 93, 0);
             return;
         }

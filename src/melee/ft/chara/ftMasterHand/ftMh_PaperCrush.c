@@ -53,12 +53,12 @@ void ftMh_PaperCrush_IASA(HSD_GObj* gobj)
 void ftMh_PaperCrush_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     ft_80085134(gobj);
     {
         float f = ++fp->mv.mh.unk0.x0;
-        if (f > attr->xB0 && fp->mv.mh.unk0.x0 < attr->xB4) {
-            ftBossLib_8015C010(gobj, attr->xB8);
+        if (f > da->xB0 && fp->mv.mh.unk0.x0 < da->xB4) {
+            ftBossLib_8015C010(gobj, da->xB8);
         } else {
             fp->self_vel.x = 0;
         }

@@ -45,7 +45,7 @@ struct HSD_PObjDesc {
 };
 
 struct HSD_VtxDescList {
-    u32 attr;
+    u32 ftCo_DatAttrs;
     u32 attr_type;
     u32 comp_cnt;
     u32 comp_type;

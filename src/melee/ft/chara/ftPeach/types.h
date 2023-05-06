@@ -11,8 +11,8 @@ struct ftPeach_FighterVars {
     /* fp+222C */ bool has_float;
     /* fp+2230 */ f32 x4;
     /* fp+2234 */ FtMotionId attacks4_motion_id;
-    /* fp+2238 */ u32 xC;
-    /* fp+223C */ u32 x10;
+    /* fp+2238 */ HSD_GObj* unk_item_gobj;
+    /* fp+223C */ HSD_GObj* parasol_gobj;
     /* fp+2240 */ u32 x14;
     /* fp+2244 */ u32 x18;
     /* fp+2248 */ HSD_GObj* veg_gobj;
@@ -31,21 +31,30 @@ typedef struct ftPe_DatAttrs {
     } speciallw_item_table[3];
     /* +30 */ int x30;
     /* +34 */ float x34;
-    /* +38 */ f32 x38;
-    /* +3C */ f32 x3C;
-    /* +40 */ f32 x40;
-    /* +44 */ f32 specials_vel_x;
-    /* +48 */ f32 specials_smash_vel_x;
-    /* +4C */ f32 specials_vel_y;
-    /* +50 */ f32 x50;
-    /* +54 */ f32 x54;
-    /* +58 */ f32 x58;
-    /* +5C */ f32 x5C;
-    /* +60 */ f32 specials_end_vel_x;
-    /* +64 */ f32 specials_end_vel_y;
-    /* +68 */ f32 x68;
-    /* +6C */ f32 x6C;
-    /* +70 */ u8 x70[0xC0 - 0x70];
+    /* +38 */ float x38;
+    /* +3C */ float x3C;
+    /* +40 */ float x40;
+    /* +44 */ float specials_vel_x;
+    /* +48 */ float specials_smash_vel_x;
+    /* +4C */ float specials_vel_y;
+    /* +50 */ float x50;
+    /* +54 */ float x54;
+    /* +58 */ float x58;
+    /* +5C */ float x5C;
+    /* +60 */ float specials_end_vel_x;
+    /* +64 */ float specials_end_vel_y;
+    /* +68 */ float x68;
+    /* +6C */ float x6C;
+    /* +70 */ float x70;
+    /* +74 */ float x74;
+    /* +78 */ float x78;
+    /* +7C */ float x7C;
+    /* +80 */ float x80;
+    /* +84 */ float x84;
+    /* +88 */ float x88;
+    /* +8C */ float x8C;
+    /* +90 */ int x90;
+    /* +94 */ u8 x94[0xC0 - 0x94];
 } ftPe_DatAttrs;
 
 union ftPe_MotionVars {
@@ -55,6 +64,9 @@ union ftPe_MotionVars {
     struct ftPe_SpecialSVars {
         /* fp+2340 */ bool x0;
     } specials;
+    struct ftPe_SpecialHiVars {
+        /* fp+2340 */ ItemKind kind;
+    } specialhi;
 };
 
 #endif

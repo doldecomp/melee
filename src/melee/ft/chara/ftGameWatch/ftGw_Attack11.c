@@ -169,7 +169,7 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftGw_MS_Attack11, 0, NULL, 0.0f, 1.0f,
                                   0.0f);
         ftAnim_8006EBA4(gobj);
-        fp->x196C_hitlag_mult = (f32) fp->x110_attr.x18C_Jab_2InputWindow;
+        fp->x196C_hitlag_mult = (f32) fp->co_attrs.x18C_Jab_2InputWindow;
         fp->x1970 = 44;
         fp->x2218_b2 = 0;
         fp->mv.gw.Attack11.unk = 0;

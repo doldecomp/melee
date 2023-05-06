@@ -32,7 +32,7 @@ void ftDk_SpecialHi_Enter(HSD_GObj* gobj)
                       donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
     fp->self_vel.x = fp->gr_vel;
     fp->self_vel.y = 0;
-    fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
+    fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
     ftAnim_8006EBA4(gobj);
     efSync_Spawn(1226, gobj, fp->parts[FtPart_TopN].x0_jobj);
 }
@@ -51,7 +51,7 @@ void ftDk_SpecialAirHi_Enter(HSD_GObj* gobj)
     ftCommon_8007D440(fp,
                       donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
     fp->self_vel.y = donkey_attr->SpecialHi.x4C_AERIAL_VERTICAL_VELOCITY;
-    fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
+    fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
     ftAnim_8006EBA4(gobj);
     efSync_Spawn(1226, gobj, fp->parts[FtPart_TopN].x0_jobj);
 }
@@ -109,8 +109,8 @@ void ftDk_SpecialAirHi_Phys(HSD_GObj* gobj)
     } else {
         grav_mul = donkey_attr->SpecialHi.x50_AERIAL_GRAVITY;
     }
-    ftCommon_8007D494(fp, grav_mul * fp->x110_attr.x16C_Gravity,
-                      fp->x110_attr.x170_TerminalVelocity);
+    ftCommon_8007D494(fp, grav_mul * fp->co_attrs.grav,
+                      fp->co_attrs.terminal_vel);
     ftCommon_8007D344(fp, 0, donkey_attr->SpecialHi.x60_AERIAL_MOBILITY,
                       donkey_attr->SpecialHi.x58_AERIAL_HORIZONTAL_VELOCITY);
 }

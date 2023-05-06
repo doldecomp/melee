@@ -306,7 +306,7 @@ void ftGw_SpecialN_IASA(HSD_GObj* gobj)
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* gawAttrs = gawAttrs = getFtSpecialAttrsD(fp);
 
-    if ((fp->input.x65C_heldInputs & HSD_Pad_B) == false) {
+    if ((fp->input.held_inputs & HSD_Pad_B) == false) {
         fp->mv.gw.SpecialN.isChefLoopDisable = true;
     }
     if (((u32) fp->cmd_vars[1] != 0U) && (fp->input.x668 & HSD_Pad_B) &&
@@ -325,7 +325,7 @@ void ftGw_SpecialAirN_IASA(HSD_GObj* gobj)
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* gawAttrs = gawAttrs = getFtSpecialAttrsD(fp);
 
-    if ((fp->input.x65C_heldInputs & HSD_Pad_B) == false) {
+    if ((fp->input.held_inputs & HSD_Pad_B) == false) {
         fp->mv.gw.SpecialN.isChefLoopDisable = true;
     }
     if (((u32) fp->cmd_vars[1] != 0U) && (fp->input.x668 & HSD_Pad_B) &&

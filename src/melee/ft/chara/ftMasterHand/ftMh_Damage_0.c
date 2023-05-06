@@ -24,7 +24,7 @@ inline void func_80151484_inline1(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
     it_802F046C(fp->mv.mh.unk0.x34);
     it_802F046C(fp->mv.mh.unk0.x38);
@@ -40,9 +40,9 @@ inline void func_80151484_inline1(HSD_GObj* gobj)
     if (fp->mv.mh.unk0.x20) {
         ftMh_CaptureWaitMasterHand_80155D1C(fp->x1A58_interactedFighter);
     }
-    fp->self_vel.y = attr->x14C;
-    fp->self_vel.z = attr->x154;
-    fp->mv.mh.unk0.x8 = attr->x15C;
+    fp->self_vel.y = da->x14C;
+    fp->self_vel.z = da->x154;
+    fp->mv.mh.unk0.x8 = da->x15C;
 }
 
 void ftMh_MS_343_80151484(HSD_GObj* gobj)
@@ -67,11 +67,11 @@ void ftMh_Damage_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[0]) {
-        ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
-        if (++fp->mv.mh.unk0.x74 <= attr->x144) {
+        ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+        if (++fp->mv.mh.unk0.x74 <= da->x144) {
             lbAudioAx_8002438C(530002);
         } else {
-            if (++fp->mv.mh.unk0.x78 <= attr->x148) {
+            if (++fp->mv.mh.unk0.x78 <= da->x148) {
                 lbAudioAx_8002438C(530003);
             }
         }
@@ -90,10 +90,10 @@ void ftMh_MS_345_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[0] != 0) {
-        ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
-        if (++fp->mv.mh.unk0.x74 <= attr->x144) {
+        ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+        if (++fp->mv.mh.unk0.x74 <= da->x144) {
             lbAudioAx_8002438C(530002);
-        } else if (++fp->mv.mh.unk0.x78 <= attr->x148) {
+        } else if (++fp->mv.mh.unk0.x78 <= da->x148) {
             lbAudioAx_8002438C(530003);
         }
         fp->cmd_vars[0] = 0;

@@ -326,7 +326,7 @@ void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)
 
         if ((collData->env_flags & MPCOLL_CEIL) &&
             (lbVector_AngleXY(&collData->x188_ceiling.normal, &fp1->self_vel) >
-             DEG_TO_RAD *
+             deg_to_rad *
                  (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP)))
         {
             ftMt_SpecialAirHiLost_Enter(gobj);
@@ -335,7 +335,7 @@ void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)
         if (collData->env_flags & MPCOLL_RIGHTWALL &&
             (lbVector_AngleXY(&collData->x160_rightwall.normal,
                               &fp1->self_vel) >
-             DEG_TO_RAD *
+             deg_to_rad *
                  (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP)))
         {
             ftMt_SpecialAirHiLost_Enter(gobj);
@@ -343,7 +343,7 @@ void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)
 
         if (collData->env_flags & MPCOLL_LEFTWALL &&
             lbVector_AngleXY(&collData->x174_leftwall.normal, &fp1->self_vel) >
-                DEG_TO_RAD *
+                deg_to_rad *
                     (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP))
         {
             ftMt_SpecialAirHiLost_Enter(gobj);
@@ -394,7 +394,7 @@ static inline void ftMewtwo_SpecialHi_SetVars(HSD_GObj* gobj)
     fp->mv.mt.SpecialHi.travelFrames =
         mewtwoAttrs->x50_MEWTWO_TELEPORT_DURATION;
 
-    fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
+    fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
     fp->x2223_flag.bits.b4 = true;
 
     ftColl_8007B62C(gobj, 2);
@@ -416,8 +416,8 @@ void ftMt_SpecialHi_Enter(HSD_GObj* gobj)
     f32 stick_x;
     f32 sqrt_stick;
 
-    stick_x = fp->input.x620_lstick_x;
-    stick_y = fp->input.x624_lstick_y;
+    stick_x = fp->input.lstick.x;
+    stick_y = fp->input.lstick.y;
 
     stick_x *= stick_x;
     stick_y *= stick_y;
@@ -438,8 +438,8 @@ void ftMt_SpecialHi_Enter(HSD_GObj* gobj)
     if (!(sqrt_stick < mewtwoAttrs->x58_MEWTWO_TELEPORT_STICK_RANGE_MIN)) {
         Vec3 stickVec;
 
-        stickVec.x = fp->input.x620_lstick_x;
-        stickVec.y = fp->input.x624_lstick_y;
+        stickVec.x = fp->input.lstick.x;
+        stickVec.y = fp->input.lstick.y;
         stickVec.z = 0.0f;
 
         if (!(lbVector_AngleXY(&collData->x14C_ground.normal, &stickVec) <
@@ -448,8 +448,8 @@ void ftMt_SpecialHi_Enter(HSD_GObj* gobj)
         {
             ftCommon_8007D9FC(fp);
 
-            vel = atan2f(fp->input.x624_lstick_y,
-                         fp->input.x620_lstick_x * fp->facing_dir);
+            vel = atan2f(fp->input.lstick.y,
+                         fp->input.lstick.x * fp->facing_dir);
 
             fp->mv.mt.SpecialHi.stickX = stickVec.x;
             fp->mv.mt.SpecialHi.stickY = stickVec.y;
@@ -488,8 +488,8 @@ void ftMt_SpecialAirHi_Enter(HSD_GObj* gobj)
     f32 sqrt_stick;
     f32 floatVar;
 
-    stick_x = fp->input.x620_lstick_x;
-    stick_y = fp->input.x624_lstick_y;
+    stick_x = fp->input.lstick.x;
+    stick_y = fp->input.lstick.y;
 
     stick_x *= stick_x;
     stick_y *= stick_y;
@@ -507,17 +507,17 @@ void ftMt_SpecialAirHi_Enter(HSD_GObj* gobj)
     }
 
     if (sqrt_stick > mewtwoAttrs->x58_MEWTWO_TELEPORT_STICK_RANGE_MIN) {
-        stick_x = stickGetDir(fp->input.x620_lstick_x, 0);
+        stick_x = stickGetDir(fp->input.lstick.x, 0);
 
         /// @todo Express as a fraction or something.
         if (stick_x > stick_epsilon) {
             ftCommon_8007D9FC(fp);
         }
 
-        floatVar = atan2f(fp->input.x624_lstick_y,
-                          fp->input.x620_lstick_x * fp->facing_dir);
-        fp->mv.mt.SpecialHi.stickX = fp->input.x620_lstick_x;
-        fp->mv.mt.SpecialHi.stickY = fp->input.x624_lstick_y;
+        floatVar =
+            atan2f(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
+        fp->mv.mt.SpecialHi.stickX = fp->input.lstick.x;
+        fp->mv.mt.SpecialHi.stickY = fp->input.lstick.y;
     } else {
         ftCommon_8007DA24(fp);
         floatVar = M_PI_2;
@@ -590,7 +590,7 @@ void ftMt_SpecialAirHi_Phys(HSD_GObj* gobj)
     if (fp->cmd_vars[0]) {
         ftCommon_8007D4B8(fp);
         ftCommon_8007D440(fp, mewtwoAttrs->x64_MEWTWO_TELEPORT_DRIFT *
-                                  fp->x110_attr.x17C_AerialDriftMax);
+                                  fp->co_attrs.x17C_AerialDriftMax);
     } else {
         f32 velY = fp->self_vel.y;
         fp->self_vel.y = velY - velY / 10;

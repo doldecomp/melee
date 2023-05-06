@@ -354,7 +354,7 @@ void ftZd_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
         if ((coll_data->env_flags & MPCOLL_CEIL) != 0) {
             f32 angle = lbVector_AngleXY(&coll_data->x188_ceiling.normal,
                                          &fp->self_vel);
-            if (angle > DEG_TO_RAD * (90.0F + sa->x60)) {
+            if (angle > deg_to_rad * (90.0F + sa->x60)) {
                 ftZd_SpecialHi_8013A764(gobj);
             }
         }
@@ -362,14 +362,14 @@ void ftZd_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
         if ((coll_data->env_flags & MPCOLL_RIGHTWALL) != 0) {
             f32 angle = lbVector_AngleXY(&coll_data->x160_rightwall.normal,
                                          &fp->self_vel);
-            if (angle > (DEG_TO_RAD * (90.0F + sa->x60))) {
+            if (angle > (deg_to_rad * (90.0F + sa->x60))) {
                 ftZd_SpecialHi_8013A764(gobj);
             }
         }
         if ((coll_data->env_flags & MPCOLL_LEFTWALL) != 0) {
             f32 angle = lbVector_AngleXY(&coll_data->x174_leftwall.normal,
                                          &fp->self_vel);
-            if (angle > (DEG_TO_RAD * (90.0F + sa->x60))) {
+            if (angle > (deg_to_rad * (90.0F + sa->x60))) {
                 ftZd_SpecialHi_8013A764(gobj);
             }
         }
@@ -430,8 +430,8 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
     collData = &fp->coll_data;
-    temp_f2 = fp->input.x620_lstick_x;
-    temp_f1 = fp->input.x624_lstick_y;
+    temp_f2 = fp->input.lstick.x;
+    temp_f1 = fp->input.lstick.y;
     temp_f2 = temp_f2 * temp_f2;
     temp_f1 = temp_f1 * temp_f1;
     temp_f5 = temp_f2 + temp_f1;
@@ -458,8 +458,8 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
 
     if (!(var_f31 < attributes->x50)) {
         groundVector = &collData->x14C_ground.normal;
-        inputVector.x = fp->input.x620_lstick_x;
-        inputVector.y = fp->input.x624_lstick_y;
+        inputVector.x = fp->input.lstick.x;
+        inputVector.y = fp->input.lstick.y;
         inputVector.z = 0;
 
         if (!(lbVector_AngleXY(groundVector, (Vec3*) &inputVector.x) <
@@ -468,8 +468,8 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
             if (ft_8009A134(gobj) == 0) {
                 ftCommon_8007D9FC(fp);
 
-                temp_f5 = atan2f(fp->input.x624_lstick_y,
-                                 fp->input.x620_lstick_x * fp->facing_dir);
+                temp_f5 = atan2f(fp->input.lstick.y,
+                                 fp->input.lstick.x * fp->facing_dir);
 
                 fp->mv.zd.specialhi.x4.x = inputVector.x;
                 fp->mv.zd.specialhi.x4.y = inputVector.y;
@@ -486,7 +486,7 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
                 fp = GET_FIGHTER(gobj);
                 attributes = fp->dat_attrs;
                 fp->mv.zd.specialhi.x0 = attributes->x48;
-                fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
+                fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
                 fp->x2223_flag.bits.b4 = 1;
 
                 ftColl_8007B62C(gobj, 2);
@@ -522,8 +522,8 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
     f64 guess;
 
     fp = GET_FIGHTER(gobj);
-    temp_f2 = fp->input.x620_lstick_x;
-    temp_f1 = fp->input.x624_lstick_y;
+    temp_f2 = fp->input.lstick.x;
+    temp_f1 = fp->input.lstick.y;
     attributes = fp->dat_attrs;
     temp_f1 = temp_f1 * temp_f1;
     temp_f2 = temp_f2 * temp_f2;
@@ -550,17 +550,17 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
     }
 
     if (var_f31 > attributes->x50) {
-        temp_f1 = fp->input.x620_lstick_x;
+        temp_f1 = fp->input.lstick.x;
         if (temp_f1 < 0) {
             temp_f1 = -temp_f1;
         }
         if (temp_f1 > 0.001f) {
             ftCommon_8007D9FC(fp);
         }
-        var_f30 = atan2f(fp->input.x624_lstick_y,
-                         fp->input.x620_lstick_x * fp->facing_dir);
-        fp->mv.zd.specialhi.x4.x = fp->input.x620_lstick_x;
-        fp->mv.zd.specialhi.x4.y = fp->input.x624_lstick_y;
+        var_f30 =
+            atan2f(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
+        fp->mv.zd.specialhi.x4.x = fp->input.lstick.x;
+        fp->mv.zd.specialhi.x4.y = fp->input.lstick.y;
     } else {
         ftCommon_8007DA24(fp);
         var_f30 = (f32) M_PI_2;
@@ -581,7 +581,7 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
     fp->mv.zd.specialhi.x0 = attributes->x48;
-    fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
+    fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
     fp->x2223_flag.bits.b4 = 1;
 
     ftColl_8007B62C(gobj, 2);
@@ -636,7 +636,7 @@ void ftZd_SpecialAirHi_Phys(HSD_GObj* gobj)
     if (fp->cmd_vars[0] != 0) {
         ftCommon_8007D4B8(fp);
         ftCommon_8007D440(fp,
-                          attributes->x5C * fp->x110_attr.x17C_AerialDriftMax);
+                          attributes->x5C * fp->co_attrs.x17C_AerialDriftMax);
         return;
     }
 

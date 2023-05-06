@@ -115,7 +115,7 @@ void ftSs_SpecialHi_IASA(HSD_GObj* gobj)
 #endif
 
     if ((!fp->cmd_vars[1]) && (!fp->mv.ss.unk5.x0)) {
-        if ((lstick_x = fp->input.x620_lstick_x) < 0.0f) {
+        if ((lstick_x = fp->input.lstick.x) < 0.0f) {
             mag = -lstick_x;
         } else {
             mag = lstick_x;
@@ -146,7 +146,7 @@ void ftSs_SpecialAirHi_IASA(HSD_GObj* gobj)
 #endif
 
     if ((!fp->cmd_vars[1]) && (!fp->mv.ss.unk5.x0)) {
-        if ((lstick_x = fp->input.x620_lstick_x) < 0.0f) {
+        if ((lstick_x = fp->input.lstick.x) < 0.0f) {
             mag = -lstick_x;
         } else {
             mag = lstick_x;

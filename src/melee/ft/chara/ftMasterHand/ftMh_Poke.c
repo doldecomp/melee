@@ -15,7 +15,7 @@ void ftMh_PaperCrush_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_358_80152880(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -24,7 +24,7 @@ void ftMh_MS_358_80152880(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, ftMh_MS_Poke1, 0, 0, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
-    fp->mv.mh.unk13.x0 = attr->x94 + HSD_Randi(attr->x90 - attr->x94);
+    fp->mv.mh.unk13.x0 = da->x94 + HSD_Randi(da->x90 - da->x94);
     fp->mv.mh.unk13.x4 = 0;
 }
 
@@ -101,13 +101,13 @@ void ftMh_Poke1_Phys(HSD_GObj* gobj)
 
     if (fp->mv.mh.unk13.x4) {
         ftData* ftData = fp->ft_data;
-        ftMasterHand_SpecialAttrs* attr = ftData->ext_attr;
+        ftMasterHand_SpecialAttrs* da = ftData->ext_attr;
 
         {
             Vec3 pos;
             ftBossLib_8015C208(gobj, &pos);
-            pos.x += attr->x98;
-            pos.y += attr->x9C;
+            pos.x += da->x98;
+            pos.y += da->x9C;
             pos.z = 0;
 
             {
@@ -115,13 +115,13 @@ void ftMh_Poke1_Phys(HSD_GObj* gobj)
                 lbVector_Diff(&pos, &fp->cur_pos, &vel);
                 {
                     float len = my_lbVector_Len(&vel);
-                    if (len < attr->x2C) {
+                    if (len < da->x2C) {
                         fp->self_vel.x = vel.x;
                         fp->self_vel.y = vel.y;
                     } else {
                         lbVector_Normalize(&vel);
                         {
-                            float speed = len * attr->x28;
+                            float speed = len * da->x28;
                             vel.x *= speed;
                             vel.y *= speed;
                             vel.z *= speed;

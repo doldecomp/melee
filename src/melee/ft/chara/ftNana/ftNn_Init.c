@@ -359,8 +359,8 @@ void ftNn_Init_OnLoad(HSD_GObj* gobj)
     ftPp_Init_OnLoadForNana(fp);
 
     {
-        ftIceClimberAttributes* attr = fp->dat_attrs;
-        fp->x40 = attr->xC4;
+        ftIceClimberAttributes* da = fp->dat_attrs;
+        fp->x40 = da->xC4;
     }
 }
 
@@ -372,8 +372,8 @@ void ftNn_Init_OnDeath(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftIceClimberAttributes* attr = fp->dat_attrs;
-    fp->dmg.x18B0 = attr->xC8;
+    ftIceClimberAttributes* da = fp->dat_attrs;
+    fp->dmg.x18B0 = da->xC8;
     ftParts_80074A4C(gobj, 0U, 0);
     ftParts_80074A4C(gobj, 1U, 0);
     fp->fv.nn.x2234 = 0;

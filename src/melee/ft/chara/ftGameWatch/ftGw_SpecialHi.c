@@ -203,11 +203,11 @@ void ftGw_SpecialAirHi_IASA(HSD_GObj* gobj)
     f32 stick_range_threshold;
 
     if ((u32) fp->cmd_vars[0] == 0) {
-        stick_x = stickGetDir(fp->input.x620_lstick_x, 0.0f);
+        stick_x = stickGetDir(fp->input.lstick.x, 0.0f);
         if (stick_x > gawAttrs->x58_GAMEWATCH_RESCUE_STICK_RANGE) {
             stick_range_threshold =
                 stick_x - gawAttrs->x58_GAMEWATCH_RESCUE_STICK_RANGE;
-            if (fp->input.x620_lstick_x > 0.0f) {
+            if (fp->input.lstick.x > 0.0f) {
                 facing_dir = 1.0f;
             } else {
                 facing_dir = -1.0f;
@@ -217,7 +217,7 @@ void ftGw_SpecialAirHi_IASA(HSD_GObj* gobj)
             angle = temp * gawAttrs->x5C_GAMEWATCH_RESCUE_ANGLE_UNK;
             ftCommon_8007D9FC(fp);
             ftParts_80075AF0(fp, 0, (M_PI / 2) * fp->facing_dir);
-            fp->x6BC_inputStickangle = -angle;
+            fp->lstick_angle = -angle;
             fp->cmd_vars[0] = 1;
         }
     }
