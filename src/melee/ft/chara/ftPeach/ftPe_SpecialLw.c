@@ -19,192 +19,40 @@
 #include <placeholder.h>
 #include <baselib/random.h>
 
-/* 11CE48 */ static bool pickVeg(HSD_GObj* gobj);
+/* 11CE48 */ static ItemKind pickVeg(HSD_GObj* gobj);
 /* 11D018 */ static void spawnVeg(HSD_GObj* gobj);
 /* 11D214 */ static void handleAirColl(HSD_GObj* gobj);
 /* 11D280 */ static void handleColl(HSD_GObj* gobj);
 
-#if defined(MUST_MATCH) && !defined(WIP)
-#pragma push
-static asm bool pickVeg(HSD_GObj* gobj)
+ItemKind pickVeg(HSD_GObj* gobj)
 {
-    // clang-format off
-    nofralloc
-/* 8011CE48 00119A28  7C 08 02 A6 */	mflr r0
-/* 8011CE4C 00119A2C  38 E0 00 00 */	li r7, 0
-/* 8011CE50 00119A30  90 01 00 04 */	stw r0, 4(r1)
-/* 8011CE54 00119A34  94 21 FF D8 */	stwu r1, -0x28(r1)
-/* 8011CE58 00119A38  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 8011CE5C 00119A3C  80 83 00 2C */	lwz r4, 0x2c(r3)
-/* 8011CE60 00119A40  38 60 00 00 */	li r3, 0
-/* 8011CE64 00119A44  80 84 02 D4 */	lwz r4, 0x2d4(r4)
-/* 8011CE68 00119A48  80 C4 00 10 */	lwz r6, 0x10(r4)
-/* 8011CE6C 00119A4C  3B E4 00 00 */	addi r31, r4, 0
-/* 8011CE70 00119A50  2C 06 00 00 */	cmpwi r6, 0
-/* 8011CE74 00119A54  40 81 00 98 */	ble lbl_8011CF0C
-/* 8011CE78 00119A58  2C 06 00 08 */	cmpwi r6, 8
-/* 8011CE7C 00119A5C  38 86 FF F8 */	addi r4, r6, -8
-/* 8011CE80 00119A60  40 81 00 E4 */	ble lbl_8011CF64
-/* 8011CE84 00119A64  38 04 00 07 */	addi r0, r4, 7
-/* 8011CE88 00119A68  54 00 E8 FE */	srwi r0, r0, 3
-/* 8011CE8C 00119A6C  2C 04 00 00 */	cmpwi r4, 0
-/* 8011CE90 00119A70  7C 09 03 A6 */	mtctr r0
-/* 8011CE94 00119A74  38 BF 00 00 */	addi r5, r31, 0
-/* 8011CE98 00119A78  40 81 00 CC */	ble lbl_8011CF64
-lbl_8011CE9C:
-/* 8011CE9C 00119A7C  80 85 00 18 */	lwz r4, 0x18(r5)
-/* 8011CEA0 00119A80  38 E7 00 08 */	addi r7, r7, 8
-/* 8011CEA4 00119A84  80 05 00 20 */	lwz r0, 0x20(r5)
-/* 8011CEA8 00119A88  7C 63 22 14 */	add r3, r3, r4
-/* 8011CEAC 00119A8C  80 85 00 28 */	lwz r4, 0x28(r5)
-/* 8011CEB0 00119A90  7C 63 02 14 */	add r3, r3, r0
-/* 8011CEB4 00119A94  80 05 00 30 */	lwz r0, 0x30(r5)
-/* 8011CEB8 00119A98  7C 63 22 14 */	add r3, r3, r4
-/* 8011CEBC 00119A9C  80 85 00 38 */	lwz r4, 0x38(r5)
-/* 8011CEC0 00119AA0  7C 63 02 14 */	add r3, r3, r0
-/* 8011CEC4 00119AA4  80 05 00 40 */	lwz r0, 0x40(r5)
-/* 8011CEC8 00119AA8  7C 63 22 14 */	add r3, r3, r4
-/* 8011CECC 00119AAC  80 85 00 48 */	lwz r4, 0x48(r5)
-/* 8011CED0 00119AB0  7C 63 02 14 */	add r3, r3, r0
-/* 8011CED4 00119AB4  80 05 00 50 */	lwz r0, 0x50(r5)
-/* 8011CED8 00119AB8  7C 63 22 14 */	add r3, r3, r4
-/* 8011CEDC 00119ABC  7C 63 02 14 */	add r3, r3, r0
-/* 8011CEE0 00119AC0  38 A5 00 40 */	addi r5, r5, 0x40
-/* 8011CEE4 00119AC4  42 00 FF B8 */	bdnz lbl_8011CE9C
-/* 8011CEE8 00119AC8  48 00 00 7C */	b lbl_8011CF64
-lbl_8011CEEC:
-/* 8011CEEC 00119ACC  7C 07 30 50 */	subf r0, r7, r6
-/* 8011CEF0 00119AD0  7C 07 30 00 */	cmpw r7, r6
-/* 8011CEF4 00119AD4  7C 09 03 A6 */	mtctr r0
-/* 8011CEF8 00119AD8  40 80 00 14 */	bge lbl_8011CF0C
-lbl_8011CEFC:
-/* 8011CEFC 00119ADC  80 04 00 18 */	lwz r0, 0x18(r4)
-/* 8011CF00 00119AE0  38 84 00 08 */	addi r4, r4, 8
-/* 8011CF04 00119AE4  7C 63 02 14 */	add r3, r3, r0
-/* 8011CF08 00119AE8  42 00 FF F4 */	bdnz lbl_8011CEFC
-lbl_8011CF0C:
-/* 8011CF0C 00119AEC  48 26 36 75 */	bl HSD_Randi
-/* 8011CF10 00119AF0  80 FF 00 18 */	lwz r7, 0x18(r31)
-/* 8011CF14 00119AF4  7F E4 FB 78 */	mr r4, r31
-/* 8011CF18 00119AF8  80 BF 00 10 */	lwz r5, 0x10(r31)
-/* 8011CF1C 00119AFC  39 00 FF FF */	li r8, -1
-/* 8011CF20 00119B00  38 C0 00 00 */	li r6, 0
-/* 8011CF24 00119B04  48 00 00 20 */	b lbl_8011CF44
-lbl_8011CF28:
-/* 8011CF28 00119B08  7C 03 38 00 */	cmpw r3, r7
-/* 8011CF2C 00119B0C  40 80 00 08 */	bge lbl_8011CF34
-/* 8011CF30 00119B10  7C C8 33 78 */	mr r8, r6
-lbl_8011CF34:
-/* 8011CF34 00119B14  80 04 00 20 */	lwz r0, 0x20(r4)
-/* 8011CF38 00119B18  38 84 00 08 */	addi r4, r4, 8
-/* 8011CF3C 00119B1C  38 C6 00 01 */	addi r6, r6, 1
-/* 8011CF40 00119B20  7C E7 02 14 */	add r7, r7, r0
-lbl_8011CF44:
-/* 8011CF44 00119B24  7C 06 28 00 */	cmpw r6, r5
-/* 8011CF48 00119B28  40 80 00 0C */	bge lbl_8011CF54
-/* 8011CF4C 00119B2C  2C 08 FF FF */	cmpwi r8, -1
-/* 8011CF50 00119B30  41 82 FF D8 */	beq lbl_8011CF28
-lbl_8011CF54:
-/* 8011CF54 00119B34  55 00 18 38 */	slwi r0, r8, 3
-/* 8011CF58 00119B38  7C 7F 02 14 */	add r3, r31, r0
-/* 8011CF5C 00119B3C  80 63 00 1C */	lwz r3, 0x1c(r3)
-/* 8011CF60 00119B40  48 00 00 10 */	b lbl_8011CF70
-lbl_8011CF64:
-/* 8011CF64 00119B44  54 E0 18 38 */	slwi r0, r7, 3
-/* 8011CF68 00119B48  7C 9F 02 14 */	add r4, r31, r0
-/* 8011CF6C 00119B4C  4B FF FF 80 */	b lbl_8011CEEC
-lbl_8011CF70:
-/* 8011CF70 00119B50  80 01 00 2C */	lwz r0, 0x2c(r1)
-/* 8011CF74 00119B54  83 E1 00 24 */	lwz r31, 0x24(r1)
-/* 8011CF78 00119B58  38 21 00 28 */	addi r1, r1, 0x28
-/* 8011CF7C 00119B5C  7C 08 03 A6 */	mtlr r0
-/* 8011CF80 00119B60  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#else
-
-bool pickVeg(HSD_GObj* gobj)
-{
-    int ret0;
-    int var_r3 = 0;
-    ftPe_DatAttrs* da0 = GET_FIGHTER(gobj)->dat_attrs;
+    ftPe_DatAttrs* a = GET_FIGHTER(gobj)->dat_attrs;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+    ssize_t randi, idx;
     {
-        {
-            int da_x10 = da0->x10;
-            if (da_x10 > 0) {
-                int temp_r4_2 = da_x10 - 8;
-                int var_r7 = 0;
-                if (da_x10 > 8) {
-                    {
-                        u32 i = (u32) (temp_r4_2 + 7) >> 3U;
-                        {
-                            // ftPe_DatAttrs* da1 = da0;
-                            if (temp_r4_2 > 0) {
-                                do {
-                                    var_r7 += 8;
-                                    // var_r3 = var_r3 + da1->x18 +
-                                    // da1->x20 +
-                                    //          da1->x28 + da1->x30 +
-                                    //          da1->x38 + da1->x40 +
-                                    //          da1->x28 + da1->x50;
-                                    // da1 += 0x40;
-                                    i -= 1;
-                                } while (i != 0);
-                            }
-                        }
-                    }
-                }
-                {
-                    M2C_UNK var_r4 = (M2C_UNK) (da0 + (var_r7 * 8));
-                    {
-                        int i = da_x10 - var_r7;
-                        if (var_r7 < da_x10) {
-                            do {
-                                s32 temp_r0 = M2C_FIELD(var_r4, s32*, 0x18);
-                                var_r4 += 8;
-                                var_r3 += temp_r0;
-                                i -= 1;
-                            } while (i != 0);
-                        }
-                    }
-                }
-            }
+        int odds;
+        for (idx = 0, odds = 0; idx < a->speciallw_item_table_count; idx++) {
+            odds += a->speciallw_item_table[idx].randi_max;
         }
+        randi = HSD_Randi(odds);
     }
-    ret0 = HSD_Randi(var_r3);
     {
-        s32 da_x18;
-        da_x18 = da0->x18;
+        ssize_t randi_max, result;
+        for (result = -1, idx = 0,
+            randi_max = a->speciallw_item_table[0].randi_max;
+             idx < a->speciallw_item_table_count && result == -1; idx++)
         {
-            ftPe_DatAttrs* da2 = da0;
-            {
-                s32 var_r8;
-                var_r8 = -1;
-                {
-                    int var_r6 = 0;
-                    {
-                    loop_11:
-                        if ((var_r6 < da0->x10) && (var_r8 == -1)) {
-                            if (ret0 < da_x18) {
-                                var_r8 = var_r6;
-                            }
-                            {
-                                s32 da_x20;
-                                da_x20 = M2C_FIELD(da2, s32*, 0x20);
-                                da2 += 8;
-                                var_r6 += 1;
-                                da_x18 += da_x20;
-                            }
-                            goto loop_11;
-                        }
-                    }
-                }
-                return M2C_FIELD((da0 + (var_r8 * 8)), s32*, 0x1C);
+            if (randi < randi_max) {
+                result = idx;
             }
+            randi_max += a->speciallw_item_table[idx + 1].randi_max;
         }
+        return a->speciallw_item_table[result].kind;
     }
 }
-#endif
 
 void ftPe_SpecialLw_UnsetVeg(HSD_GObj* gobj)
 {
@@ -307,18 +155,34 @@ lbl_8011D100:
 #pragma pop
 #else
 
-static HSD_GObj* getVeg(HSD_GObj* gobj, Vec3* pos)
+static inline ItemKind getKind(HSD_GObj* gobj)
 {
-    {
-        ItemKind kind = It_Kind_Peach_Turnip;
-        Fighter* fp = GET_FIGHTER(gobj);
-        ftPe_DatAttrs* da = fp->dat_attrs;
-        int da_x14 = da->x14;
-        if (HSD_Randi(da_x14) == 0) {
-            kind = pickVeg(gobj);
-        }
-        return it_802BD4AC(gobj, pos, fp->ft_data->x8->unk10, kind,
-                           fp->facing_dir);
+    ftPe_DatAttrs* da = GET_FIGHTER(gobj)->dat_attrs;
+    int da_x14 = da->x14;
+
+    ItemKind kind = It_Kind_Peach_Turnip;
+    if (HSD_Randi(da_x14) == 0) {
+        kind = pickVeg(gobj);
+    }
+
+    return kind;
+}
+
+static inline void createVeg(HSD_GObj* gobj, Vec3* pos, Fighter* fp)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[12] = { 0 };
+#endif
+    HSD_GObj* veg_gobj = it_802BD4AC(gobj, pos, fp->ft_data->x8->unk10,
+                                     getKind(gobj), fp->facing_dir);
+    fp->item_gobj = veg_gobj;
+    fp->fv.pe.veg_gobj = veg_gobj;
+    if (veg_gobj != NULL) {
+        ft_80094818(gobj, false);
+        efSync_Spawn(1234, gobj, &fp->cur_pos);
+        fp->cb.x21E4_callback_OnDeath2 = ftPe_Init_8011B704;
+        fp->cb.x21DC_callback_OnTakeDamage = ftPe_Init_8011B704;
     }
 }
 
@@ -327,18 +191,12 @@ static void spawnVeg(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (ftCheckThrowB0(fp)) {
         Vec3 pos;
+        /// @todo Unused stack.
+#ifdef MUST_MATCH
+        u8 _[16];
+#endif
         lb_8000B1CC(fp->parts[FtPart_109].x0_jobj, NULL, &pos);
-        {
-            HSD_GObj* veg_gobj = getVeg(gobj, &pos);
-            fp->item_gobj = veg_gobj;
-            fp->fv.pe.veg_gobj = veg_gobj;
-            if (veg_gobj != NULL) {
-                ft_80094818(gobj, false);
-                efSync_Spawn(1234, gobj, &fp->cur_pos);
-                fp->cb.x21E4_callback_OnDeath2 = ftPe_Init_8011B704;
-                fp->cb.x21DC_callback_OnTakeDamage = ftPe_Init_8011B704;
-            }
-        }
+        createVeg(gobj, &pos, fp);
     }
 }
 #endif

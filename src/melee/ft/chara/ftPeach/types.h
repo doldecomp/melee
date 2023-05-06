@@ -3,6 +3,9 @@
 
 #include <platform.h>
 #include "ft/forward.h"
+#include "it/forward.h"
+
+#include <placeholder.h>
 
 struct ftPeach_FighterVars {
     /* fp+222C */ bool has_float;
@@ -20,10 +23,12 @@ typedef struct ftPe_DatAttrs {
     /* +4 */ float floatfallb_anim_start;
     /* +8 */ float floatfall_anim_start_offset;
     /* +C */ float xC;
-    /* +10 */ int x10;
+    /* +10 */ int speciallw_item_table_count;
     /* +14 */ int x14;
-    /* +18 */ int x18;
-    /* +1C */ u8 x1C[0x30 - 0x1C];
+    /* +1C */ struct ftPe_ItemChance {
+        /* +0 */ int randi_max;
+        /* +4 */ ItemKind kind;
+    } speciallw_item_table[3];
     /* +30 */ int x30;
     /* +34 */ float x34;
     /* +38 */ f32 x38;
