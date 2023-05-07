@@ -3,6 +3,11 @@
 
 #include <baselib/forward.h>
 
+#include <placeholder.h>
+
+/* 11E2AC */ void ftPe_SpecialN_DoDeath2(HSD_GObj* gobj);
+/* 11E2E8 */ void ftPe_SpecialN_OnDeath2(HSD_GObj* gobj);
+/* 11E3A8 */ bool ftPe_SpecialN_IsActive(HSD_GObj* gobj);
 /* 11E3D0 */ void ftPe_SpecialN_Enter(HSD_GObj* gobj);
 /* 11E45C */ void ftPe_SpecialAirN_Enter(HSD_GObj* gobj);
 /* 11E4F8 */ void ftPe_SpecialN_Anim(HSD_GObj* gobj);

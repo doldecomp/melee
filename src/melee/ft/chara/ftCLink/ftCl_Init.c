@@ -410,7 +410,7 @@ void ftCl_Init_80149114(HSD_GObj* gobj)
     CLinkAttributes* temp_r4 = (void*) fp->ft_data->ext_attr;
     f32 ftmp = ft_80092ED8(fp->x19A4, temp_r4, temp_r4->xD8);
     fp->gr_vel = ftmp * p_ftCommonData->x294;
-    if (fp->x19AC < 0.0f) {
+    if (fp->specialn_facing_dir < 0.0f) {
         ftmp = fp->gr_vel;
     } else {
         ftmp = -fp->gr_vel;

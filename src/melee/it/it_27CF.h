@@ -1,6 +1,8 @@
 #ifndef MELEE_IT_CODE_8027CF30_H
 #define MELEE_IT_CODE_8027CF30_H
 
+#include "ft/forward.h"
+
 #include "ftSeak/types.h"
 #include "it/types.h"
 
@@ -179,6 +181,11 @@ void it_802BDB94(HSD_GObj* gobj);
 void it_802BDBF8(HSD_GObj* gobj);
 void it_802BDC18(HSD_GObj* gobj);
 bool it_802BDC38(HSD_GObj* gobj);
-UNK_RET it_802BDE18(UNK_PARAMS);
+HSD_GObj* it_802BDE18(HSD_GObj*, Vec3*, Fighter_Part, enum_t, float);
+void it_802BE214(HSD_GObj* gobj, Vec3* pos, enum_t, float facing_dir);
+void it_802BDF40(HSD_GObj* gobj);
+void it_802BDFA0(HSD_GObj* gobj);
+void it_802BDFC0(HSD_GObj* gobj);
+void it_802BE100(HSD_GObj* gobj);
 
 #endif

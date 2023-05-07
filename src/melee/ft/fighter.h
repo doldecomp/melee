@@ -2,6 +2,7 @@
 #define _fighter_h_
 
 #include <platform.h>
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
 
 #include "ft/ftanim.h"
@@ -73,9 +74,10 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* gobj, struct S_TEMP1* argdata);
 u32 Fighter_NewSpawn_80068E40(void);
 void Fighter_80068E64(HSD_GObj* gobj);
 HSD_GObj* Fighter_Create(struct S_TEMP1* input);
-void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
-                               s32 flags, HSD_GObj* otherObj, f32 animStart,
-                               f32 animSpeed, f32 animBlend);
+void Fighter_ChangeMotionState(HSD_GObj* gobj, FtMotionId msid,
+                               MotionFlags flags, HSD_GObj* arg3,
+                               float anim_start, float anim_speed,
+                               float anim_blend);
 void Fighter_8006A1BC(HSD_GObj* gobj);
 void Fighter_8006A360(HSD_GObj* gobj);
 void Fighter_8006ABA0(HSD_GObj* gobj);
@@ -105,9 +107,5 @@ void Fighter_Unload_8006DABC(void* user_data);
 
 void Fighter_UnkProcessDeath_80068354(HSD_GObj*);
 u32 Fighter_NewSpawn_80068E40(void);
-
-void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 newAction, s32 flags,
-                               HSD_GObj* otherObj, f32 animStart,
-                               f32 animSpeed, f32 animBlend);
 
 #endif

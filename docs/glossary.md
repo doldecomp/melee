@@ -37,6 +37,9 @@ Short for "degrees."
 @section glossary_dir dir
 Short for "direction."
 
+@section glossary_div div
+Short for "divisor" or "divide."
+
 @section glossary_dmg dmg
 Short for "damage."
 
