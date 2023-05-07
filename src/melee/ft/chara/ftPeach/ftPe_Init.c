@@ -406,7 +406,7 @@ void ftPe_Init_OnDeath(HSD_GObj* gobj)
     fp->fv.pe.specialairn_used = false;
     fp->fv.pe.parasol_gobj = NULL;
     fp->fv.pe.unk_item_gobj = NULL;
-    fp->fv.pe.toad_gobj = 0;
+    fp->fv.pe.toad_gobj = NULL;
     fp->fv.pe.veg_gobj = NULL;
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 2, 0);
