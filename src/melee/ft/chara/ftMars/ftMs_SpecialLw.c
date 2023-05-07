@@ -69,8 +69,8 @@ void ftMs_SpecialLw_Anim(HSD_GObj* gobj)
         fp->cmd_vars[1] = 2;
         ftColl_8007B1B8(gobj, &da->x64, &ftMs_SpecialLw_80139140);
         fp->x221B_b1 = true;
-        fp->x19B4_shieldUnk = da->x60;
-        fp->x19B8_shieldUnk = da->x60;
+        fp->shield_unk0 = da->x60;
+        fp->shield_unk1 = da->x60;
     } else if (fp->cmd_vars[1] == 0) {
         fp->x221B_b0 = false;
     }
@@ -94,8 +94,8 @@ void ftMs_SpecialAirLw_Anim(HSD_GObj* gobj)
         fp->cmd_vars[1] = 2;
         ftColl_8007B1B8(gobj, &da->x64, &ftMs_SpecialLw_80139140);
         fp->x221B_b1 = true;
-        fp->x19B4_shieldUnk = da->x60;
-        fp->x19B8_shieldUnk = da->x60;
+        fp->shield_unk0 = da->x60;
+        fp->shield_unk1 = da->x60;
     } else if (fp->cmd_vars[1] == 0) {
         fp->x221B_b0 = false;
     }
@@ -365,7 +365,7 @@ void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
         Fighter* fp = gobj->user_data;
         MarsAttributes* da = fp->dat_attrs;
 
-        fp->facing_dir = fp->x19AC;
+        fp->facing_dir = fp->specialn_facing_dir;
         temp_r0 = (s32) fp->x19A4;
 
         if (temp_r0 > 0) {

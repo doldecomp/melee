@@ -431,7 +431,7 @@ void ftLk_800EB334(HSD_GObj* gobj)
 
     f32 resultf = ft_80092ED8(fp->x19A4, link_attr, link_attr->xD8);
     fp->gr_vel = resultf * p_ftCommonData->x294;
-    if (fp->x19AC < 0.0f) {
+    if (fp->specialn_facing_dir < 0) {
         new_ground_vel = fp->gr_vel;
     } else {
         new_ground_vel = -fp->gr_vel;

@@ -139,8 +139,8 @@ lbl_8011D0A0:
 /* 8011D0E4 00119CC4  38 BE 00 B0 */	addi r5, r30, 0xb0
 /* 8011D0E8 00119CC8  38 60 04 D2 */	li r3, 0x4d2
 /* 8011D0EC 00119CCC  4B F4 2C F1 */	bl efSync_Spawn
-/* 8011D0F0 00119CD0  3C 60 80 12 */	lis r3, ftPe_Init_8011B704@ha
-/* 8011D0F4 00119CD4  38 03 B7 04 */	addi r0, r3, ftPe_Init_8011B704@l
+/* 8011D0F0 00119CD0  3C 60 80 12 */	lis r3, ftPe_Init_OnDeath2@ha
+/* 8011D0F4 00119CD4  38 03 B7 04 */	addi r0, r3, ftPe_Init_OnDeath2@l
 /* 8011D0F8 00119CD8  90 1E 21 E4 */	stw r0, 0x21e4(r30)
 /* 8011D0FC 00119CDC  90 1E 21 DC */	stw r0, 0x21dc(r30)
 lbl_8011D100:
@@ -181,8 +181,8 @@ static inline void createVeg(HSD_GObj* gobj, Vec3* pos, Fighter* fp)
     if (veg_gobj != NULL) {
         ft_80094818(gobj, false);
         efSync_Spawn(1234, gobj, &fp->cur_pos);
-        fp->cb.x21E4_callback_OnDeath2 = ftPe_Init_8011B704;
-        fp->cb.x21DC_callback_OnTakeDamage = ftPe_Init_8011B704;
+        fp->cb.x21E4_callback_OnDeath2 = ftPe_Init_OnDeath2;
+        fp->cb.x21DC_callback_OnTakeDamage = ftPe_Init_OnDeath2;
     }
 }
 

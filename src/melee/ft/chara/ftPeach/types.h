@@ -13,8 +13,8 @@ struct ftPeach_FighterVars {
     /* fp+2234 */ FtMotionId attacks4_motion_id;
     /* fp+2238 */ HSD_GObj* unk_item_gobj;
     /* fp+223C */ HSD_GObj* parasol_gobj;
-    /* fp+2240 */ u32 x14;
-    /* fp+2244 */ u32 x18;
+    /* fp+2240 */ bool specialairn_used;
+    /* fp+2244 */ HSD_GObj* toad_gobj;
     /* fp+2248 */ HSD_GObj* veg_gobj;
 };
 
@@ -54,7 +54,14 @@ typedef struct ftPe_DatAttrs {
     /* +88 */ float x88;
     /* +8C */ float x8C;
     /* +90 */ int x90;
-    /* +94 */ u8 x94[0xC0 - 0x94];
+    /* +94 */ float specialairn_vel_x_div;
+    /* +98 */ float x98;
+    /* +9C */ float specialairn_vel_y;
+    /* +A0 */ float xA0;
+    /* +A4 */ float xA4;
+    /* +A8 */ float xA8;
+    /* +AC */ float xAC;
+    /* +B0 */ u8 xB0[0xC0 - 0xB0];
 } ftPe_DatAttrs;
 
 union ftPe_MotionVars {
@@ -67,6 +74,9 @@ union ftPe_MotionVars {
     struct ftPe_SpecialHiVars {
         /* fp+2340 */ ItemKind kind;
     } specialhi;
+    struct ftPe_SpecialNVars {
+        /* fp+2340 */ int facing_dir;
+    } specialn;
 };
 
 #endif

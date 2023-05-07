@@ -403,10 +403,10 @@ void ftPe_Init_OnDeath(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->fv.pe.has_float = true;
     fp->fv.pe.attacks4_motion_id = ftCo_MS_None;
-    fp->fv.pe.x14 = 0;
+    fp->fv.pe.specialairn_used = false;
     fp->fv.pe.parasol_gobj = NULL;
     fp->fv.pe.unk_item_gobj = NULL;
-    fp->fv.pe.x18 = 0;
+    fp->fv.pe.toad_gobj = NULL;
     fp->fv.pe.veg_gobj = NULL;
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 2, 0);
@@ -444,12 +444,10 @@ void ftPe_Init_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(items[4], It_Kind_Peach_ToadSpore);
 }
 
-/* static */ void ftPe_8011E2E8(HSD_GObj* gobj);
-
-void ftPe_Init_8011B704(HSD_GObj* gobj)
+void ftPe_Init_OnDeath2(HSD_GObj* gobj)
 {
     ftPe_8011D598(gobj);
-    ftPe_8011E2E8(gobj);
+    ftPe_SpecialN_OnDeath2(gobj);
     ftPe_SpecialLw_8011CFA0(gobj);
 }
 

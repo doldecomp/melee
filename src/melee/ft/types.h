@@ -868,10 +868,10 @@ struct Fighter {
     /* fp+19A0 */ s32 x19A0_shieldDamageTaken;
     /* fp+19A4 */ s32 x19A4;
     /* fp+19A8 */ void* x19A8;
-    /* fp+19AC */ f32 x19AC;
+    /* fp+19AC */ float specialn_facing_dir;
     /* fp+19B0 */ s32 filler_x19B0;
-    /* fp+19B4 */ f32 x19B4_shieldUnk;
-    /* fp+19B8 */ f32 x19B8_shieldUnk;
+    /* fp+19B4 */ f32 shield_unk0;
+    /* fp+19B8 */ f32 shield_unk1;
     /* fp+19BC */ s32 x19BC_shieldDamageTaken3;
     /* fp+19C0 */ HitResult shield_hit;
     /* fp+19E4 */ HitResult reflect_hit;

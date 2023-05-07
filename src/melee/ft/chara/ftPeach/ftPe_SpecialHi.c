@@ -50,8 +50,8 @@ void ftPe_SpecialHi_8011D424(HSD_GObj* gobj)
                 it_802BDA64(gobj, &pos, FtPart_109, fp->facing_dir);
             fp->item_gobj = fp->fv.pe.unk_item_gobj;
             if (fp->fv.pe.unk_item_gobj != NULL) {
-                fp->cb.x21E8_callback_OnDeath3 = ftPe_Init_8011B704;
-                fp->cb.x21DC_callback_OnTakeDamage = ftPe_Init_8011B704;
+                fp->cb.x21E8_callback_OnDeath3 = ftPe_Init_OnDeath2;
+                fp->cb.x21DC_callback_OnTakeDamage = ftPe_Init_OnDeath2;
             }
         }
     }

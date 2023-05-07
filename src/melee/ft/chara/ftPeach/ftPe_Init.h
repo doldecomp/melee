@@ -8,7 +8,7 @@
 
 /* 11B51C */ void ftPe_Init_OnDeath(HSD_GObj* gobj);
 /* 11B628 */ void ftPe_Init_OnLoad(HSD_GObj* gobj);
-/* 11B704 */ void ftPe_Init_8011B704(HSD_GObj* gobj);
+/* 11B704 */ void ftPe_Init_OnDeath2(HSD_GObj* gobj);
 /* 11B740 */ void ftPe_Init_OnItemPickup(HSD_GObj* gobj, bool bool);
 /* 11B820 */ void ftPe_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 11B868 */ void ftPe_Init_OnItemVisible(HSD_GObj* gobj);
