@@ -187,6 +187,9 @@ void it_802BDF40(HSD_GObj* gobj);
 void it_802BDFA0(HSD_GObj* gobj);
 void it_802BDFC0(HSD_GObj* gobj);
 void it_802BE100(HSD_GObj* gobj);
-/* 29DD58 */ UNK_RET it_8029DD58(UNK_PARAMS);
+
+/// @returns An #Item #HSD_GObj.
+/* 29DD58 */ HSD_GObj* it_8029DD58(HSD_GObj* fighter_gobj, Vec3*, u8, int,
+                                   float);
 
 #endif
