@@ -35554,7 +35554,7 @@ ftKb_Init_804D3DAC:
 ftKb_Init_804D3DB0:
     .asciz "0"
     .balign 4
-    .4byte NULL
+    .float 0.0
 .global ftKb_Init_804D3DB8
 ftKb_Init_804D3DB8:
     .4byte 0x0001AE17
@@ -35567,7 +35567,7 @@ ftKb_Init_804D3DC0:
 ftKb_Init_804D3DC8:
     .asciz "0"
     .balign 4
-    .4byte NULL
+    .float 0.0
 .global ftKb_Init_804D3DD0
 ftKb_Init_804D3DD0:
     .asciz "jobj.h"
@@ -35606,379 +35606,345 @@ ftKb_Init_804D3E08:
     .balign 8
 .global ftKb_Init_804D9350
 ftKb_Init_804D9350:
-    .4byte 0x43300000
-    .4byte 0x80000000
+    .double 4503601774854144.0
 .global ftKb_Init_804D9358
 ftKb_Init_804D9358:
-    .4byte 0x40400000
+    .float 3.0
 .global ftKb_Init_804D935C
 ftKb_Init_804D935C:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D9360
 ftKb_Init_804D9360:
-    .4byte 0x3F800000
-    .4byte 0x00000000
+    .double 0.0078125
 .global ftKb_Init_804D9368
 ftKb_Init_804D9368:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D936C
 ftKb_Init_804D936C:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D9370
 ftKb_Init_804D9370:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D9374
 ftKb_Init_804D9374:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D9378
 ftKb_Init_804D9378:
-    .4byte 0xBF800000
-    .4byte 0x00000000
+    .double -0.0078125
 .global ftKb_Init_804D9380
 ftKb_Init_804D9380:
-    .4byte 0x3FF921FB
-    .4byte 0x54442D18
+    .double 1.5707963267948966
 .global ftKb_Init_804D9388
 ftKb_Init_804D9388:
-    .4byte 0x43300000
-    .4byte 0x80000000
+    .double 4503601774854144.0
 .global ftKb_Init_804D9390
 ftKb_Init_804D9390:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D9394
 ftKb_Init_804D9394:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D9398
 ftKb_Init_804D9398:
-    .4byte 0xBF800000
+    .float -1.0
 .global ftKb_Init_804D939C
 ftKb_Init_804D939C:
-    .4byte 0x3E800000
+    .float 0.25
 .global ftKb_Init_804D93A0
 ftKb_Init_804D93A0:
-    .4byte 0x3F666666
+    .float 0.8999999761581421
 .global ftKb_Init_804D93A4
 ftKb_Init_804D93A4:
-    .4byte 0x3C8EFA35
+    .float 0.01745329238474369
 .global ftKb_Init_804D93A8
 ftKb_Init_804D93A8:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D93AC
 ftKb_Init_804D93AC:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D93B0
 ftKb_Init_804D93B0:
-    .4byte 0x00000000
-    .4byte 0x00000000
+    .float 0.0
+    .float 0.0
 .global ftKb_Init_804D93B8
 ftKb_Init_804D93B8:
-    .4byte 0x43300000
-    .4byte 0x80000000
+    .double 4503601774854144.0
 .global ftKb_Init_804D93C0
 ftKb_Init_804D93C0:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D93C4
 ftKb_Init_804D93C4:
-    .4byte 0xBF800000
+    .float -1.0
 .global ftKb_Init_804D93C8
 ftKb_Init_804D93C8:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D93CC
 ftKb_Init_804D93CC:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D93D0
 ftKb_Init_804D93D0:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D93D4
 ftKb_Init_804D93D4:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D93D8
 ftKb_Init_804D93D8:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D93DC
 ftKb_Init_804D93DC:
-    .4byte 0x3C8EFA35
+    .float 0.01745329238474369
 .global ftKb_Init_804D93E0
 ftKb_Init_804D93E0:
-    .4byte 0x3F800000
-    .4byte 0x00000000
+    .double 0.0078125
 .global ftKb_Init_804D93E8
 ftKb_Init_804D93E8:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D93EC
 ftKb_Init_804D93EC:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D93F0
 ftKb_Init_804D93F0:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D93F4
 ftKb_Init_804D93F4:
-    .4byte 0x3F000000
+    .float 0.5
 .global ftKb_Init_804D93F8
 ftKb_Init_804D93F8:
-    .4byte 0x40400000
+    .float 3.0
 .global ftKb_Init_804D93FC
 ftKb_Init_804D93FC:
-    .4byte 0x3EAAA64C
+    .float 0.33329999446868896
 .global ftKb_Init_804D9400
 ftKb_Init_804D9400:
-    .4byte 0x3F2AA64C
+    .float 0.6665999889373779
 .global ftKb_Init_804D9404
 ftKb_Init_804D9404:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D9408
 ftKb_Init_804D9408:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D940C
 ftKb_Init_804D940C:
-    .4byte 0x3DB2B8C2
+    .float 0.0872664600610733
 .global ftKb_Init_804D9410
 ftKb_Init_804D9410:
-    .4byte 0x3F800000
-    .4byte 0x00000000
+    .double 0.0078125
 .global ftKb_Init_804D9418
 ftKb_Init_804D9418:
-    .4byte 0x43300000
-    .4byte 0x80000000
+    .double 4503601774854144.0
 .global ftKb_Init_804D9420
 ftKb_Init_804D9420:
-    .4byte 0x40800000
+    .float 4.0
 .global ftKb_Init_804D9424
 ftKb_Init_804D9424:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D9428
 ftKb_Init_804D9428:
-    .4byte 0x3F800000
-    .4byte 0x00000000
+    .double 0.0078125
 .global ftKb_Init_804D9430
 ftKb_Init_804D9430:
-    .4byte 0x00000000
-    .4byte 0x00000000
+    .float 0.0
+    .float 0.0
 .global ftKb_Init_804D9438
 ftKb_Init_804D9438:
-    .4byte 0x400921FB
-    .4byte 0x54442D18
+    .double 3.141592653589793
 .global ftKb_Init_804D9440
 ftKb_Init_804D9440:
-    .4byte 0x43300000
-    .4byte 0x00000000
+    .double 4503599627370496.0
 .global ftKb_Init_804D9448
 ftKb_Init_804D9448:
-    .4byte 0x40A00000
-    .4byte 0x00000000
+    .double 2048.0
 .global ftKb_Init_804D9450
 ftKb_Init_804D9450:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D9454
 ftKb_Init_804D9454:
-    .4byte 0x3FB9999A
+    .float 1.4500000476837158
 .global ftKb_Init_804D9458
 ftKb_Init_804D9458:
-    .4byte 0x40A08312
+    .float 5.015999794006348
 .global ftKb_Init_804D945C
 ftKb_Init_804D945C:
-    .4byte 0x3C83126F
+    .float 0.01600000075995922
 .global ftKb_Init_804D9460
 ftKb_Init_804D9460:
-    .4byte 0x3F800000
-    .4byte 0x00000000
+    .double 0.0078125
 .global ftKb_Init_804D9468
 ftKb_Init_804D9468:
-    .4byte 0x400921FB
-    .4byte 0x54442D18
+    .double 3.141592653589793
 .global ftKb_Init_804D9470
 ftKb_Init_804D9470:
-    .4byte 0xBF800000
-    .4byte 0x00000000
+    .double -0.0078125
 .global ftKb_Init_804D9478
 ftKb_Init_804D9478:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D947C
 ftKb_Init_804D947C:
-    .4byte 0x40400000
+    .float 3.0
 .global ftKb_Init_804D9480
 ftKb_Init_804D9480:
-    .4byte 0x3F800000
-    .4byte 0x00000000
+    .double 0.0078125
 .global ftKb_Init_804D9488
 ftKb_Init_804D9488:
-    .4byte 0x43300000
-    .4byte 0x80000000
+    .double 4503601774854144.0
 .global ftKb_Init_804D9490
 ftKb_Init_804D9490:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D9494
 ftKb_Init_804D9494:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D9498
 ftKb_Init_804D9498:
-    .4byte 0x3FF921FB
-    .4byte 0x54442D18
+    .double 1.5707963267948966
 .global ftKb_Init_804D94A0
 ftKb_Init_804D94A0:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D94A4
 ftKb_Init_804D94A4:
-    .4byte 0x3FC90FDB
+    .float 1.5707963705062866
 .global ftKb_Init_804D94A8
 ftKb_Init_804D94A8:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D94AC
 ftKb_Init_804D94AC:
-    .4byte 0x3F000000
+    .float 0.5
 .global ftKb_Init_804D94B0
 ftKb_Init_804D94B0:
-    .4byte 0x401921FB
-    .4byte 0x54442D18
+    .double 6.283185307179586
 .global ftKb_Init_804D94B8
 ftKb_Init_804D94B8:
-    .4byte 0xBF800000
+    .float -1.0
 .global ftKb_Init_804D94BC
 ftKb_Init_804D94BC:
-    .4byte 0x38D1B717
+    .float 9.999999747378752e-05
 .global ftKb_Init_804D94C0
 ftKb_Init_804D94C0:
-    .4byte 0x3C8EFA35
-    .4byte 0x00000000
+    .float 0.01745329238474369
+    .float 0.0
 .global ftKb_Init_804D94C8
 ftKb_Init_804D94C8:
-    .4byte 0x43300000
-    .4byte 0x80000000
+    .double 4503601774854144.0
 .global ftKb_Init_804D94D0
 ftKb_Init_804D94D0:
-    .4byte 0x3FC99999
-    .4byte 0x9999999A
+    .double 0.2
 .global ftKb_Init_804D94D8
 ftKb_Init_804D94D8:
-    .4byte 0x4012D97C
-    .4byte 0x7F3321D2
+    .double 4.71238898038469
 .global ftKb_Init_804D94E0
 ftKb_Init_804D94E0:
-    .4byte 0x400921FB
-    .4byte 0x54442D18
+    .double 3.141592653589793
 .global ftKb_Init_804D94E8
 ftKb_Init_804D94E8:
-    .4byte 0xBD4CCCCD
-    .4byte 0x00000000
+    .double -2.046363295829523e-13
 .global ftKb_Init_804D94F0
 ftKb_Init_804D94F0:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D94F4
 ftKb_Init_804D94F4:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D94F8
 ftKb_Init_804D94F8:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D94FC
 ftKb_Init_804D94FC:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D9500
 ftKb_Init_804D9500:
-    .4byte 0x40000000
-    .4byte 0x00000000
+    .double 2.0
 .global ftKb_Init_804D9508
 ftKb_Init_804D9508:
-    .4byte 0x43300000
-    .4byte 0x80000000
+    .double 4503601774854144.0
 .global ftKb_Init_804D9510
 ftKb_Init_804D9510:
-    .4byte 0x40000000
+    .float 2.0
 .global ftKb_Init_804D9514
 ftKb_Init_804D9514:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D9518
 ftKb_Init_804D9518:
-    .4byte 0x3F800000
-    .4byte 0x00000000
+    .double 0.0078125
 .global ftKb_Init_804D9520
 ftKb_Init_804D9520:
-    .4byte 0x00000000
-    .4byte 0x00000000
+    .float 0.0
+    .float 0.0
 .global ftKb_Init_804D9528
 ftKb_Init_804D9528:
-    .4byte 0x400921FB
-    .4byte 0x54442D18
+    .double 3.141592653589793
 .global ftKb_Init_804D9530
 ftKb_Init_804D9530:
-    .4byte 0x43300000
-    .4byte 0x00000000
+    .double 4503599627370496.0
 .global ftKb_Init_804D9538
 ftKb_Init_804D9538:
-    .4byte 0x3F400000
+    .float 0.75
 .global ftKb_Init_804D953C
 ftKb_Init_804D953C:
-    .4byte 0x3F000000
+    .float 0.5
 .global ftKb_Init_804D9540
 ftKb_Init_804D9540:
-    .4byte 0x3E800000
+    .float 0.25
 .global ftKb_Init_804D9544
 ftKb_Init_804D9544:
-    .4byte 0x38D1B717
+    .float 9.999999747378752e-05
 .global ftKb_Init_804D9548
 ftKb_Init_804D9548:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D954C
 ftKb_Init_804D954C:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D9550
 ftKb_Init_804D9550:
-    .4byte 0xC1200000
-    .4byte 0x00000000
+    .double -524288.0
 .global ftKb_Init_804D9558
 ftKb_Init_804D9558:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D955C
 ftKb_Init_804D955C:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D9560
 ftKb_Init_804D9560:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D9564
 ftKb_Init_804D9564:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D9568
 ftKb_Init_804D9568:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D956C
 ftKb_Init_804D956C:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D9570
 ftKb_Init_804D9570:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D9574
 ftKb_Init_804D9574:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D9578
 ftKb_Init_804D9578:
-    .4byte 0x43300000
-    .4byte 0x80000000
+    .double 4503601774854144.0
 .global ftKb_Init_804D9580
 ftKb_Init_804D9580:
-    .4byte 0x40200000
+    .float 2.5
 .global ftKb_Init_804D9584
 ftKb_Init_804D9584:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKb_Init_804D9588
 ftKb_Init_804D9588:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKb_Init_804D958C
 ftKb_Init_804D958C:
-    .4byte 0x41100000
+    .float 9.0
 .global ftKb_Init_804D9590
 ftKb_Init_804D9590:
-    .4byte 0x40200000
+    .float 2.5
 .global ftKb_Init_804D9594
 ftKb_Init_804D9594:
-    .4byte 0x40D00000
+    .float 6.5
 .global ftKb_Init_804D9598
 ftKb_Init_804D9598:
-    .4byte 0x00000000
-    .4byte 0x00000000
+    .float 0.0
+    .float 0.0
 .global ftKb_Init_804D95A0
 ftKb_Init_804D95A0:
-    .4byte 0x43300000
-    .4byte 0x80000000
+    .double 4503601774854144.0
 .global ftKb_Init_804D95A8
 ftKb_Init_804D95A8:
-    .4byte 0x3F800000
-    .4byte 0x00000000
+    .double 0.0078125

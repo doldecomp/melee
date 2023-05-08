@@ -1158,6 +1158,7 @@ struct Fighter {
         /* fp+2340 */ union ftGameWatch_MotionVars gw;
         /* fp+2340 */ union ftKoopa_MotionVars kp;
         /* fp+2340 */ union ftLuigi_MotionVars lg;
+        /* fp+2340 */ union ftLk_MotionVars lk;
         /* fp+2340 */ union ftMario_MotionVars mr, dr;
         /* fp+2340 */ union ftMars_MotionVars ms, fe;
         /* fp+2340 */ union ftMasterHand_MotionVars mh, ch;

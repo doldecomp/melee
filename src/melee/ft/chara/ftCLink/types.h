@@ -15,7 +15,7 @@ struct ftCLink_FighterVars {
     u8 _[FIGHTERVARS_SIZE - 0x1C];
 };
 
-/// @todo this is #ftLinkAttributes.
+/// @todo this is #ftLk_DatAttrs.
 typedef struct _CLinkAttributes {
     s32 x0_pad[(0xC - 0x0) / 4];
     s32 xC;

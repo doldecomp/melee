@@ -1407,51 +1407,46 @@ ftPp_SpecialS_1_Coll:
     .balign 8
 .global ftNn_Init_804D9898
 ftNn_Init_804D9898:
-    .4byte 0x00000000
-    .4byte 0x00000000
+    .float 0.0
+    .float 0.0
 .global ftNn_Init_804D98A0
 ftNn_Init_804D98A0:
-    .4byte 0x3FF921FB
-    .4byte 0x54442D18
+    .double 1.5707963267948966
 .global ftNn_Init_804D98A8
 ftNn_Init_804D98A8:
-    .4byte 0x00000000
+    .float 0.0
 .global ftNn_Init_804D98AC
 ftNn_Init_804D98AC:
-    .4byte 0x41000000
+    .float 8.0
 .global ftNn_Init_804D98B0
 ftNn_Init_804D98B0:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftNn_Init_804D98B4
 ftNn_Init_804D98B4:
-    .4byte 0xBF800000
+    .float -1.0
 .global ftNn_Init_804D98B8
 ftNn_Init_804D98B8:
-    .4byte 0x40800000
+    .float 4.0
 .global ftNn_Init_804D98BC
 ftNn_Init_804D98BC:
-    .4byte 0x40E00000
+    .float 7.0
 .global ftNn_Init_804D98C0
 ftNn_Init_804D98C0:
-    .4byte 0x00000000
-    .4byte 0x00000000
+    .float 0.0
+    .float 0.0
 .global ftNn_Init_804D98C8
 ftNn_Init_804D98C8:
-    .4byte 0x3FF921FB
-    .4byte 0x54442D18
+    .double 1.5707963267948966
 .global ftNn_Init_804D98D0
 ftNn_Init_804D98D0:
-    .4byte 0x43300000
-    .4byte 0x80000000
+    .double 4503601774854144.0
 .global ftNn_Init_804D98D8
 ftNn_Init_804D98D8:
-    .4byte 0x3F800000
-    .4byte 0x00000000
+    .double 0.0078125
 .global ftNn_Init_804D98E0
 ftNn_Init_804D98E0:
-    .4byte 0x00000000
-    .4byte 0x00000000
+    .float 0.0
+    .float 0.0
 .global ftNn_Init_804D98E8
 ftNn_Init_804D98E8:
-    .4byte 0x3FC00000
-    .4byte 0x00000000
+    .double 0.125

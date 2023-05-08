@@ -187,5 +187,6 @@ void it_802BDF40(HSD_GObj* gobj);
 void it_802BDFA0(HSD_GObj* gobj);
 void it_802BDFC0(HSD_GObj* gobj);
 void it_802BE100(HSD_GObj* gobj);
+/* 29DD58 */ UNK_RET it_8029DD58(UNK_PARAMS);
 
 #endif

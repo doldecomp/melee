@@ -3023,39 +3023,37 @@ ftKp_SpecialAirHi_Coll:
 .section .sdata2
 .global ftKp_Init_804D9AD0
 ftKp_Init_804D9AD0:
-    .4byte 0x43300000
-    .4byte 0x80000000
+    .double 4503601774854144.0
 .global ftKp_Init_804D9AD8
 ftKp_Init_804D9AD8:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKp_Init_804D9ADC
 ftKp_Init_804D9ADC:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKp_Init_804D9AE0
 ftKp_Init_804D9AE0:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKp_Init_804D9AE4
 ftKp_Init_804D9AE4:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKp_Init_804D9AE8
 ftKp_Init_804D9AE8:
-    .4byte 0x41F00000
-    .4byte 0x00000000
+    .double 4294967296.0
 .global ftKp_Init_804D9AF0
 ftKp_Init_804D9AF0:
-    .4byte 0x3EAAA64C
+    .float 0.33329999446868896
 .global ftKp_Init_804D9AF4
 ftKp_Init_804D9AF4:
-    .4byte 0x3F2AA64C
+    .float 0.6665999889373779
 .global ftKp_Init_804D9AF8
 ftKp_Init_804D9AF8:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKp_Init_804D9AFC
 ftKp_Init_804D9AFC:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftKp_Init_804D9B00
 ftKp_Init_804D9B00:
-    .4byte 0x00000000
+    .float 0.0
 .global ftKp_Init_804D9B04
 ftKp_Init_804D9B04:
-    .4byte 0x3F800000
+    .float 1.0

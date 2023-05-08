@@ -4098,75 +4098,70 @@ ftPp_Unk0_804D3E18:
 
 .global ftPp_Init_804D9838
 ftPp_Init_804D9838:
-    .4byte 0x00000000
+    .float 0.0
 
 .global ftPp_Init_804D983C
 ftPp_Init_804D983C:
-    .4byte 0x3F800000
+    .float 1.0
 
 .global ftPp_Init_804D9840
 ftPp_Init_804D9840:
-    .4byte 0xC1200000
-    .4byte 0x00000000
+    .double -524288.0
 
 .global ftPp_Init_804D9848
 ftPp_Init_804D9848:
-    .4byte 0x00000000
+    .float 0.0
 
 .global ftPp_Init_804D984C
 ftPp_Init_804D984C:
-    .4byte 0x3F800000
+    .float 1.0
 
 .global ftPp_Init_804D9850
 ftPp_Init_804D9850:
-    .4byte 0x00000000
-    .4byte 0x00000000
+    .float 0.0
+    .float 0.0
 
 .global ftPp_Init_804D9858
 ftPp_Init_804D9858:
-    .4byte 0x43300000
-    .4byte 0x80000000
+    .double 4503601774854144.0
 
 .global ftPp_Init_804D9860
 ftPp_Init_804D9860:
-    .4byte 0x00000000
-    .4byte 0x00000000
+    .float 0.0
+    .float 0.0
 
 .global ftPp_Init_804D9868
 ftPp_Init_804D9868:
-    .4byte 0x3FE00000
-    .4byte 0x00000000
+    .double 0.5
 
 .global ftPp_Init_804D9870
 ftPp_Init_804D9870:
-    .4byte 0x40080000
-    .4byte 0x00000000
+    .double 3.0
 
 .global ftPp_Init_804D9878
 ftPp_Init_804D9878:
-    .4byte 0x40400000
+    .float 3.0
 
 .global ftPp_Init_804D987C
 ftPp_Init_804D987C:
-    .4byte 0x40A00000
+    .float 5.0
 
 .global ftPp_Init_804D9880
 ftPp_Init_804D9880:
-    .4byte 0x3F800000
+    .float 1.0
 
 .global ftPp_Init_804D9884
 ftPp_Init_804D9884:
-    .4byte 0xBF800000
+    .float -1.0
 
 .global ftPp_Init_804D9888
 ftPp_Init_804D9888:
-    .4byte 0x3FF921FB
-    .4byte 0x54442D18
+    .double 1.5707963267948966
 
 .global ftPp_Init_804D9890
 ftPp_Init_804D9890:
-    .4byte 0x00000000
+    .float 0.0
 
 .global ftPp_Init_804D9894
 ftPp_Init_804D9894:
-    .4byte 0x3F800000
+    .float 1.0

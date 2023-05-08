@@ -13,7 +13,7 @@ void ftParts_80074148(void);
 void ftParts_80074170(void);
 void func_800743E0(void);
 void ftParts_800749CC(HSD_GObj*);
-void ftParts_80074A4C(HSD_GObj*, u32, s32);
+void ftParts_80074A4C(HSD_GObj*, enum_t, enum_t);
 void ftParts_80074A8C(HSD_GObj*);
 void ftParts_80074E58(Fighter*);
 Fighter_Part ftParts_8007500C(Fighter*, Fighter_Part);
