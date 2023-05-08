@@ -136,6 +136,8 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftLk_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftLk_AttackAir.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftLk_SpecialLw.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftLk_Init.s.o\
 
 TEXT_O_FILES +=\

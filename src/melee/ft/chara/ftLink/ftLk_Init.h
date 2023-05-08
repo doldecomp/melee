@@ -23,18 +23,7 @@
 /* 0EB2AC */ void ftLk_Init_OnKnockbackEnter(HSD_GObj* gobj);
 /* 0EB2F0 */ void ftLk_Init_OnKnockbackExit(HSD_GObj* gobj);
 /* 0EB334 */ void ftLk_800EB334(HSD_GObj* gobj);
-/* 0EB3BC */ void ftLk_800EB3BC(HSD_GObj* gobj);
-/* 0EB42C */ void ftLk_800EB42C(HSD_GObj* gobj);
-/* 0EB618 */ void ftLk_800EB618(HSD_GObj* gobj);
-/* 0EB65C */ void ftLk_SpecialLw_Enter(HSD_GObj* gobj);
-/* 0EB6DC */ void ftLk_SpecialAirLw_Enter(HSD_GObj* gobj);
-/* 0EB75C */ void ftLk_800EB75C(HSD_GObj* gobj);
-/* 0EB8A4 */ void ftLk_SpecialLw_Anim(HSD_GObj* gobj);
-/* 0EB8E0 */ void ftLk_SpecialAirLw_Anim(HSD_GObj* gobj);
-/* 0EB91C */ void ftLk_SpecialLw_Phys(HSD_GObj* gobj);
-/* 0EB93C */ void ftLk_SpecialAirLw_Phys(HSD_GObj* gobj);
-/* 0EB95C */ void ftLk_SpecialLw_Coll(HSD_GObj* gobj);
-/* 0EB9D4 */ void ftLk_SpecialAirLw_Coll(HSD_GObj* gobj);
+
 /* 0EBE64 */ void ftLk_800EBE64(HSD_GObj* gobj);
 /* 0EBEC4 */ void ftLk_800EBEC4(HSD_GObj* gobj);
 /* 0EBEEC */ void ftLk_800EBEEC(HSD_GObj* gobj);

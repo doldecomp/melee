@@ -325,23 +325,23 @@ void ftLk_Init_OnDeath(HSD_GObj* gobj)
 
 void ftLk_Init_OnLoadForCLink(Fighter* fp)
 {
-    PUSH_ATTRS(fp, ftLinkAttributes);
+    PUSH_ATTRS(fp, ftLk_DatAttrs);
 }
 
 void ftLk_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftLinkAttributes* link_attr = fp->ft_data->ext_attr;
+    ftLk_DatAttrs* da = fp->ft_data->ext_attr;
     void** item_list = fp->ft_data->x48_items;
-    link_attr->x54 = lbMthp_8001E8F8(ftData_80085E50(fp, 72));
-    PUSH_ATTRS(fp, ftLinkAttributes);
-
-    link_attr = fp->dat_attrs;
-    it_8026B3F8(item_list[0], link_attr->x48);
-    it_8026B3F8(item_list[1], link_attr->x2C);
-    it_8026B3F8(item_list[2], link_attr->xBC);
-    it_8026B3F8(item_list[3], link_attr->xC);
-    it_8026B3F8(item_list[4], link_attr->x10);
+    da->attackairlw_hit_anim_frame_end =
+        lbMthp_8001E8F8(ftData_80085E50(fp, 72));
+    PUSH_ATTRS(fp, ftLk_DatAttrs);
+    da = fp->dat_attrs;
+    it_8026B3F8(item_list[0], da->x48);
+    it_8026B3F8(item_list[1], da->x2C);
+    it_8026B3F8(item_list[2], da->xBC);
+    it_8026B3F8(item_list[3], da->xC);
+    it_8026B3F8(item_list[4], da->x10);
     ftParts_800753D4(fp, *Fighter_804D6540[fp->kind], item_list[6]);
 }
 
@@ -406,7 +406,7 @@ void ftLk_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 
 void ftLk_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(gobj, ftLinkAttributes);
+    COPY_ATTRS(gobj, ftLk_DatAttrs);
     if (fp->x34_scale.y != 1.0f) {
         sA2->x28 *= fp->x34_scale.y;
     }
@@ -427,7 +427,7 @@ void ftLk_800EB334(HSD_GObj* gobj)
     f32 new_ground_vel;
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftLinkAttributes* link_attr = fp->ft_data->ext_attr;
+    ftLk_DatAttrs* link_attr = fp->ft_data->ext_attr;
 
     f32 resultf = ft_80092ED8(fp->x19A4, link_attr, link_attr->xD8);
     fp->gr_vel = resultf * p_ftCommonData->x294;

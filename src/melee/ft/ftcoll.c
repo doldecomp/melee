@@ -5882,7 +5882,7 @@ lbl_8007B020:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftColl_8007B064(void)
+asm void ftColl_8007B064(HSD_GObj*, enum_t)
 { // clang-format off
     nofralloc
 /* 8007B064 00077C44  7C 08 02 A6 */	mflr r0

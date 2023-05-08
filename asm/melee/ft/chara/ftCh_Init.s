@@ -6843,287 +6843,274 @@ ftCh_Init_804D3EC8:
     .balign 8
 .global ftCh_Init_804DA058
 ftCh_Init_804DA058:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA05C
 ftCh_Init_804DA05C:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA060
 ftCh_Init_804DA060:
-    .4byte 0x40000000
-    .4byte 0x00000000
+    .double 2.0
 .global ftCh_Init_804DA068
 ftCh_Init_804DA068:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA06C
 ftCh_Init_804DA06C:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA070
 ftCh_Init_804DA070:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA074
 ftCh_Init_804DA074:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA078
 ftCh_Init_804DA078:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA07C
 ftCh_Init_804DA07C:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA080
 ftCh_Init_804DA080:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA084
 ftCh_Init_804DA084:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA088
 ftCh_Init_804DA088:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA08C
 ftCh_Init_804DA08C:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA090
 ftCh_Init_804DA090:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA094
 ftCh_Init_804DA094:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA098
 ftCh_Init_804DA098:
-    .4byte 0x43300000
-    .4byte 0x80000000
+    .double 4503601774854144.0
 .global ftCh_Init_804DA0A0
 ftCh_Init_804DA0A0:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA0A4
 ftCh_Init_804DA0A4:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA0A8
 ftCh_Init_804DA0A8:
-    .4byte 0x43300000
-    .4byte 0x80000000
+    .double 4503601774854144.0
 .global ftCh_Init_804DA0B0
 ftCh_Init_804DA0B0:
-    .4byte 0x3FE00000
-    .4byte 0x00000000
+    .double 0.5
 .global ftCh_Init_804DA0B8
 ftCh_Init_804DA0B8:
-    .4byte 0x40080000
-    .4byte 0x00000000
+    .double 3.0
 .global ftCh_Init_804DA0C0
 ftCh_Init_804DA0C0:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA0C4
 ftCh_Init_804DA0C4:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA0C8
 ftCh_Init_804DA0C8:
-    .4byte 0x42D60000
-    .4byte 0x00000000
+    .double 96757023244288.0
 .global ftCh_Init_804DA0D0
 ftCh_Init_804DA0D0:
-    .4byte 0x43300000
-    .4byte 0x80000000
+    .double 4503601774854144.0
 .global ftCh_Init_804DA0D8
 ftCh_Init_804DA0D8:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA0DC
 ftCh_Init_804DA0DC:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA0E0
 ftCh_Init_804DA0E0:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA0E4
 ftCh_Init_804DA0E4:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA0E8
 ftCh_Init_804DA0E8:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA0EC
 ftCh_Init_804DA0EC:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA0F0
 ftCh_Init_804DA0F0:
-    .4byte 0x3FE00000
-    .4byte 0x00000000
+    .double 0.5
 .global ftCh_Init_804DA0F8
 ftCh_Init_804DA0F8:
-    .4byte 0x40080000
-    .4byte 0x00000000
+    .double 3.0
 .global ftCh_Init_804DA100
 ftCh_Init_804DA100:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA104
 ftCh_Init_804DA104:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA108
 ftCh_Init_804DA108:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA10C
 ftCh_Init_804DA10C:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA110
 ftCh_Init_804DA110:
-    .4byte 0xBF800000
-    .4byte 0x00000000
+    .double -0.0078125
 .global ftCh_Init_804DA118
 ftCh_Init_804DA118:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA11C
 ftCh_Init_804DA11C:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA120
 ftCh_Init_804DA120:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA124
 ftCh_Init_804DA124:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA128
 ftCh_Init_804DA128:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA12C
 ftCh_Init_804DA12C:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA130
 ftCh_Init_804DA130:
-    .4byte 0x43300000
-    .4byte 0x80000000
+    .double 4503601774854144.0
 .global ftCh_Init_804DA138
 ftCh_Init_804DA138:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA13C
 ftCh_Init_804DA13C:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA140
 ftCh_Init_804DA140:
-    .4byte 0x43300000
-    .4byte 0x80000000
+    .double 4503601774854144.0
 .global ftCh_Init_804DA148
 ftCh_Init_804DA148:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA14C
 ftCh_Init_804DA14C:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA150
 ftCh_Init_804DA150:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA154
 ftCh_Init_804DA154:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA158
 ftCh_Init_804DA158:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA15C
 ftCh_Init_804DA15C:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA160
 ftCh_Init_804DA160:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA164
 ftCh_Init_804DA164:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA168
 ftCh_Init_804DA168:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA16C
 ftCh_Init_804DA16C:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA170
 ftCh_Init_804DA170:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA174
 ftCh_Init_804DA174:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA178
 ftCh_Init_804DA178:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA17C
 ftCh_Init_804DA17C:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA180
 ftCh_Init_804DA180:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA184
 ftCh_Init_804DA184:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA188
 ftCh_Init_804DA188:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA18C
 ftCh_Init_804DA18C:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA190
 ftCh_Init_804DA190:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA194
 ftCh_Init_804DA194:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA198
 ftCh_Init_804DA198:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA19C
 ftCh_Init_804DA19C:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA1A0
 ftCh_Init_804DA1A0:
-    .4byte 0x42200000
+    .float 40.0
 .global ftCh_Init_804DA1A4
 ftCh_Init_804DA1A4:
-    .4byte 0x42340000
+    .float 45.0
 .global ftCh_Init_804DA1A8
 ftCh_Init_804DA1A8:
-    .4byte 0xC0490FDB
+    .float -3.1415927410125732
 .global ftCh_Init_804DA1AC
 ftCh_Init_804DA1AC:
-    .4byte 0x42F00000
+    .float 120.0
 .global ftCh_Init_804DA1B0
 ftCh_Init_804DA1B0:
-    .4byte 0x3FC90FDB
+    .float 1.5707963705062866
 .global ftCh_Init_804DA1B4
 ftCh_Init_804DA1B4:
-    .4byte 0x42B40000
+    .float 90.0
 .global ftCh_Init_804DA1B8
 ftCh_Init_804DA1B8:
-    .4byte 0xBEB2B8C2
+    .float -0.3490658402442932
 .global ftCh_Init_804DA1BC
 ftCh_Init_804DA1BC:
-    .4byte 0xBE860A92
+    .float -0.2617993950843811
 .global ftCh_Init_804DA1C0
 ftCh_Init_804DA1C0:
-    .4byte 0x3EB2B8C2
+    .float 0.3490658402442932
 .global ftCh_Init_804DA1C4
 ftCh_Init_804DA1C4:
-    .4byte 0x43340000
+    .float 180.0
 .global ftCh_Init_804DA1C8
 ftCh_Init_804DA1C8:
-    .4byte 0xBFC90FDB
-    .4byte 0x00000000
+    .double -0.19579637050628662
 .global ftCh_Init_804DA1D0
 ftCh_Init_804DA1D0:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA1D4
 ftCh_Init_804DA1D4:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA1D8
 ftCh_Init_804DA1D8:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA1DC
 ftCh_Init_804DA1DC:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA1E0
 ftCh_Init_804DA1E0:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA1E4
 ftCh_Init_804DA1E4:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA1E8
 ftCh_Init_804DA1E8:
-    .4byte 0x00000000
+    .float 0.0
 .global ftCh_Init_804DA1EC
 ftCh_Init_804DA1EC:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA1F0
 ftCh_Init_804DA1F0:
-    .4byte 0x3F800000
+    .float 1.0
 .global ftCh_Init_804DA1F4
 ftCh_Init_804DA1F4:
-    .4byte 0x00000000
+    .float 0.0

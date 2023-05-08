@@ -1608,7 +1608,7 @@ void ftParts_800749CC(HSD_GObj* arg0)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ftParts_80074A4C(HSD_GObj*, u32, s32)
+asm void ftParts_80074A4C(HSD_GObj*, enum_t, enum_t)
 { // clang-format off
     nofralloc
 /* 80074A4C 0007162C  80 C3 00 2C */	lwz r6, 0x2c(r3)
@@ -1626,7 +1626,7 @@ asm void ftParts_80074A4C(HSD_GObj*, u32, s32)
 
 #else
 
-void ftParts_80074A4C(HSD_GObj* arg0, u32 arg1, s32 arg2)
+void ftParts_80074A4C(HSD_GObj* arg0, enum_t arg1, enum_t arg2)
 {
     NOT_IMPLEMENTED;
 }

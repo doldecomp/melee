@@ -4,6 +4,29 @@
 #include <platform.h>
 #include "ft/forward.h"
 
+typedef struct ftLk_DatAttrs {
+    /* +0 */ s32 x0;
+    /* +4 */ s32 x4;
+    /* +8 */ s32 x8;
+    /* +C */ s32 xC;
+    /* +10 */ s32 x10;
+    /* +14 */ u8 x14_filler[0x2C - 0x18];
+    /* +28 */ f32 x28;
+    /* +2C */ s32 x2C;
+    /* +30 */ u8 x30_filler[0x48 - 0x30];
+    /* +48 */ s32 x48;
+    /* +4C */ float attackairlw_hit_vel_y;
+    /* +50 */ float attackairlw_hit_anim_frame_start;
+    /* +54 */ float attackairlw_hit_anim_frame_end;
+    /* +58 */ u32 attackairlw_anim_flags[3];
+    /* +64 */ u8 x64[0xBC - 0x64];
+    /* +BC */ s32 xBC;
+    /* +C0 */ u8 xC0_filler[0xC4 - 0xC0];
+    /* +C4 */ float xC4;
+    /* +C8 */ u8 xC8_filler[0xD8 - 0xC8];
+    /* +D8 */ f32 xD8;
+} ftLk_DatAttrs;
+
 struct ftLink_FighterVars {
     /* 0x222C */ u32 x222C;
     /* 0x2230 */ u32 x2230;
@@ -16,24 +39,9 @@ struct ftLink_FighterVars {
     u8 _[FIGHTERVARS_SIZE - 0x20];
 };
 
-typedef struct _ftLinkAttributes {
-    s32 x0;
-    s32 x4;
-    s32 x8;
-    s32 xC;
-    s32 x10;
-    u8 x14_filler[0x2C - 0x18];
-    f32 x28;
-    s32 x2C;
-    u8 x30_filler[0x48 - 0x30];
-    s32 x48;
-    s32 x4C;
-    s32 x50;
-    f32 x54;
-    u8 x58_filler[0xBC - 0x58];
-    s32 xBC;
-    u8 xC0_filler[0xD8 - 0xC0];
-    f32 xD8;
-} ftLinkAttributes;
-
+union ftLk_MotionVars {
+    struct ftLk_AttackAirVars {
+        /* fp+2340 */ float lw_frame_start;
+    } attackair;
+};
 #endif

@@ -1118,4 +1118,6 @@ void ft_800C1E64(HSD_GObj* pPlayerEntityStruct, s32, s32, u8, f32);
 /// @todo enum params
 void ft_800DEAE8(HSD_GObj* gobj, enum_t asid0, enum_t asid1);
 
+/* 08CF70 */ void ft_8008CF70(void);
+
 #endif
