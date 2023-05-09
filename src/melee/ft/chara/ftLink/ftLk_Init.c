@@ -295,15 +295,14 @@ int ftLk_Init_803C82EC[31] = { 0 };
 
 Vec3 const ftLk_Init_803B7520[3] = { 0 };
 
-bool ftLk_800EAD64(HSD_GObj* gobj)
+bool ftLk_Init_BoomerangExists(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-
-    if (fp->fv.lk.x8) {
+    if (fp->fv.lk.boomerang_gobj != NULL) {
         return true;
+    } else {
+        return false;
     }
-
-    return false;
 }
 
 void ftLk_Init_OnDeath(HSD_GObj* gobj)
@@ -314,8 +313,8 @@ void ftLk_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 1, 0);
     ftParts_80074A4C(gobj, 2, 0);
 
-    fp->fv.lk.x0 = 0;
-    fp->fv.lk.x8 = 0;
+    fp->fv.lk.used_boomerang = 0;
+    fp->fv.lk.boomerang_gobj = 0;
     fp->fv.lk.xC = 0;
     fp->fv.lk.x10 = 0;
     fp->fv.lk.x14 = 0;
@@ -345,17 +344,17 @@ void ftLk_Init_OnLoad(HSD_GObj* gobj)
     ftParts_800753D4(fp, *Fighter_804D6540[fp->kind], item_list[6]);
 }
 
-void ftLk_800EAF38(void)
+void ftLk_800EAF38(HSD_GObj* gobj)
 {
-    ftLk_800EC06C();
+    ftLk_SpecialS_RemoveBoomerang1(gobj);
 }
 
 void ftLk_800EAF58(HSD_GObj* gobj)
 {
-    ftLk_800EC06C();
+    ftLk_SpecialS_RemoveBoomerang1(gobj);
     ft_800D94D8(gobj);
-    ftLk_800ECD04(gobj);
-    ftLk_800ECD58(gobj);
+    ftLk_SpecialN_ProcessFv10(gobj);
+    ftLk_SpecialN_ProcessFv14(gobj);
     ftCl_Init_80149268(gobj);
 }
 

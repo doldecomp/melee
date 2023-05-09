@@ -187,6 +187,16 @@ void it_802BDF40(HSD_GObj* gobj);
 void it_802BDFA0(HSD_GObj* gobj);
 void it_802BDFC0(HSD_GObj* gobj);
 void it_802BE100(HSD_GObj* gobj);
+/* 2A07B4 */ void it_802A07B4(HSD_GObj* gobj);
+/* 2A0534 */ void it_802A0534(HSD_GObj* gobj, Vec3*);
+/* 29FDBC */ bool it_8029FDBC(HSD_GObj* gobj);
+
+/// @returns An #Item #HSD_GObj.
+/* 2A013C */ HSD_GObj* it_802A013C(float facing_dir, HSD_GObj* owner_gobj,
+                                   Vec3* pos, Fighter_Part, int);
+
+/* 2A8A7C */ void it_802A8A7C(HSD_GObj* gobj);
+/* 2AF304 */ void it_802AF304(HSD_GObj* gobj);
 
 /// @returns An #Item #HSD_GObj.
 /* 29DD58 */ HSD_GObj* it_8029DD58(HSD_GObj* fighter_gobj, Vec3*, u8, int,

@@ -90,6 +90,16 @@ typedef enum ftLink_MotionState {
     ftLk_MS_SelfCount = ftLk_MS_Count - ftCo_MS_Count,
 } ftLink_MotionState;
 
+typedef enum ftLk_SpecialNIndex {
+    ftLk_SpecialNIndex_Start,
+    ftLk_SpecialNIndex_Loop,
+    ftLk_SpecialNIndex_End,
+    ftLk_SpecialNIndex_AirStart,
+    ftLk_SpecialNIndex_AirLoop,
+    ftLk_SpecialNIndex_AirEnd,
+    ftLk_SpecialNIndex_None,
+} ftLk_SpecialNIndex;
+
 typedef enum ftLk_Submotion {
     ftLk_SM_AttackS42 = ftCo_SM_Count,
     ftLk_SM_SpecialNStart,
