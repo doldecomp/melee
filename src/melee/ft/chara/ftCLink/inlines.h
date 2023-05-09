@@ -13,9 +13,9 @@ static inline void checkFighter2244(HSD_GObj* gobj)
     }
 
     fp = gobj->user_data;
-    if (fp != NULL && fp->fv.cl.x2244 != 0) {
-        it_802C8C34(fp->fv.cl.x2244);
-        fp->fv.cl.x2244 = 0;
+    if (fp != NULL && fp->fv.cl.x18 != NULL) {
+        it_802C8C34(fp->fv.cl.x18);
+        fp->fv.cl.x18 = NULL;
     }
 
     if (gobj == NULL) {

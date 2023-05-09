@@ -361,7 +361,7 @@ bool ftCommon_8007CF58(Fighter* fp)
 
     temp_f3 = fp->self_vel.x;
     phi_f1 = fabs_inline(temp_f3);
-    if (fabs_inline(temp_f3) > ca->x17C_AerialDriftMax) {
+    if (fabs_inline(temp_f3) > ca->air_drift_max) {
         phi_f2 = p_ftCommonData->x1FC;
         phi_f1 = fabs_inline(temp_f3);
         phi_f0 = fabs_inline(p_ftCommonData->x1FC);
@@ -500,15 +500,14 @@ void ftCommon_8007D28C(Fighter* fp, f32 arg8)
 
     f5 = fp->input.lstick.x;
     temp_r4 = &fp->co_attrs;
-    tmp = f5 * fp->co_attrs.x174_AerialDriftStickMult;
+    tmp = f5 * fp->co_attrs.air_drift_stick_mul;
 
     if (f5 > 0) {
         phi_f3 = +temp_r4->x178_AerialDriftBase;
     } else {
         phi_f3 = -temp_r4->x178_AerialDriftBase;
     }
-    ftCommon_8007D174(fp, arg8, tmp + phi_f3,
-                      f5 * temp_r4->x17C_AerialDriftMax,
+    ftCommon_8007D174(fp, arg8, tmp + phi_f3, f5 * temp_r4->air_drift_max,
                       temp_r4->x180_AerialFriction);
 }
 
@@ -575,10 +574,10 @@ void ftCommon_8007D440(Fighter* fp, f32 val)
 
 void ftCommon_8007D468(Fighter* fp)
 {
-    if (fp->self_vel.x < -fp->co_attrs.x17C_AerialDriftMax) {
-        fp->self_vel.x = -fp->co_attrs.x17C_AerialDriftMax;
-    } else if (fp->self_vel.x > fp->co_attrs.x17C_AerialDriftMax) {
-        fp->self_vel.x = fp->co_attrs.x17C_AerialDriftMax;
+    if (fp->self_vel.x < -fp->co_attrs.air_drift_max) {
+        fp->self_vel.x = -fp->co_attrs.air_drift_max;
+    } else if (fp->self_vel.x > fp->co_attrs.air_drift_max) {
+        fp->self_vel.x = fp->co_attrs.air_drift_max;
     }
 }
 

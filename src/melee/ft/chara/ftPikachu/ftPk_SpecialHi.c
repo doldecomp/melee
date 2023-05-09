@@ -771,7 +771,7 @@ void ftPk_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
 
     if (fp->cmd_vars[0]) {
         ftCommon_8007D4B8(fp);
-        ftCommon_8007D440(fp, sa->x9C * fp->co_attrs.x17C_AerialDriftMax);
+        ftCommon_8007D440(fp, sa->x9C * fp->co_attrs.air_drift_max);
     } else {
         fp->self_vel.y -= (fp->self_vel.y / 9.0f);
         ftCommon_8007CEF4(fp);

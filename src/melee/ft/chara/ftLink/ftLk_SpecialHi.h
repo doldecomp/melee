@@ -1,6 +1,7 @@
 #ifndef GALE01_0EBB1C
 #define GALE01_0EBB1C
 
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 /* 0EBB1C */ void ftLk_SpecialHi_Enter(HSD_GObj* gobj);
@@ -13,5 +14,15 @@
 /* 0EBD30 */ void ftLk_SpecialHi_Phys(HSD_GObj* gobj);
 /* 0EBDC0 */ void ftLk_SpecialHi_Coll(HSD_GObj* gobj);
 /* 0EBDFC */ void ftLk_SpecialAirHi_Coll(HSD_GObj* gobj);
+/* 0EBEC4 */ void ftLk_SpecialHi_ProcessPartLThumbNb(HSD_GObj* gobj);
+
+/**
+ * @param[out] pos #Fighter::cur_pos with its #Vec3::y component adjusted by
+ *                 #ftLk_DatAttrs::specialhi_pos_y_offset.
+ */
+/* 0EBEEC */ void ftLk_SpecialHi_GetPosWithAdjustedY(HSD_GObj* gobj,
+                                                     Vec3* pos);
+
+/* 0EBF20 */ int ftLk_SpecialHi_GetFv4(HSD_GObj* gobj);
 
 #endif

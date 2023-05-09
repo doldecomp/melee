@@ -351,9 +351,8 @@ void ftSs_SpecialAirLwBomb_Phys(HSD_GObj* gobj)
     u8 _[8];
 #endif
     ftCommon_8007D4B8(fp);
-    ftCommon_8007D3A8(fp, 0.0f,
-                      ft_attr->x174_AerialDriftStickMult * samus_attr->x68,
-                      ft_attr->x17C_AerialDriftMax * samus_attr->x60);
+    ftCommon_8007D3A8(fp, 0.0f, ft_attr->air_drift_stick_mul * samus_attr->x68,
+                      ft_attr->air_drift_max * samus_attr->x60);
 }
 
 void ftSs_SpecialLwBomb_Coll(HSD_GObj* gobj)

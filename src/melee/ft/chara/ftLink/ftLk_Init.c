@@ -299,7 +299,7 @@ bool ftLk_800EAD64(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.lk.x2234) {
+    if (fp->fv.lk.x8) {
         return true;
     }
 
@@ -314,13 +314,13 @@ void ftLk_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 1, 0);
     ftParts_80074A4C(gobj, 2, 0);
 
-    fp->fv.lk.x222C = 0;
-    fp->fv.lk.x2234 = 0;
-    fp->fv.lk.x2238 = 0;
-    fp->fv.lk.x223C = 0;
-    fp->fv.lk.x2240 = 0;
-    fp->fv.lk.x2238 = 0;
-    fp->fv.lk.x2244 = 0;
+    fp->fv.lk.x0 = 0;
+    fp->fv.lk.x8 = 0;
+    fp->fv.lk.xC = 0;
+    fp->fv.lk.x10 = 0;
+    fp->fv.lk.x14 = 0;
+    fp->fv.lk.xC = 0;
+    fp->fv.lk.x18 = 0;
 }
 
 void ftLk_Init_OnLoadForCLink(Fighter* fp)
@@ -408,7 +408,7 @@ void ftLk_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftLk_DatAttrs);
     if (fp->x34_scale.y != 1.0f) {
-        sA2->x28 *= fp->x34_scale.y;
+        sA2->specialhi_pos_y_offset *= fp->x34_scale.y;
     }
 }
 

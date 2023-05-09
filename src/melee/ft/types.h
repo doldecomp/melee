@@ -285,9 +285,9 @@ typedef struct ftCo_DatAttrs {
     /* fp+168 */ s32 x168_MaxJumps;
     /* fp+16C */ f32 grav;
     /* fp+170 */ f32 terminal_vel;
-    /* fp+174 */ f32 x174_AerialDriftStickMult;
+    /* fp+174 */ f32 air_drift_stick_mul;
     /* fp+178 */ f32 x178_AerialDriftBase;
-    /* fp+17C */ f32 x17C_AerialDriftMax;
+    /* fp+17C */ f32 air_drift_max;
     /* fp+180 */ f32 x180_AerialFriction;
     /* fp+184 */ f32 x184_FastfallVelocity;
     /* fp+188 */ f32 x188_HorizontalAirMobilityConstant;
