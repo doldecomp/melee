@@ -1,8 +1,15 @@
-#ifndef GALE01_0ECDAC
-#define GALE01_0ECDAC
+#ifndef GALE01_0ECBC4
+#define GALE01_0ECBC4
 
+#include "ftLink/forward.h"
 #include <baselib/forward.h>
 
+/* 0ECBC4 */ ftLk_SpecialNIndex ftLk_SpecialN_GetIndex(HSD_GObj* gobj);
+/* 0ECC0C */ void ftLk_SpecialN_UnsetFv10(HSD_GObj* gobj);
+/* 0ECC6C */ void ftLk_SpecialN_UnsetFv14(HSD_GObj* gobj);
+/* 0ECCCC */ bool ftLk_SpecialN_IsActiveAnd2071b6(HSD_GObj* gobj);
+/* 0ECD04 */ void ftLk_SpecialN_ProcessFv10(HSD_GObj* gobj);
+/* 0ECD58 */ void ftLk_SpecialN_ProcessFv14(HSD_GObj* gobj);
 /* 0ECDAC */ void ftLk_SpecialN_Enter(HSD_GObj* gobj);
 /* 0ECF78 */ void ftLk_SpecialAirN_Enter(HSD_GObj* gobj);
 /* 0ED15C */ void ftLk_SpecialNStart_Anim(HSD_GObj* gobj);

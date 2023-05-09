@@ -297,8 +297,8 @@ void ftCl_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
     ftParts_80074A4C(gobj, 2, 0);
-    fp->fv.cl.x0 = 0;
-    fp->fv.cl.x8 = 0;
+    fp->fv.cl.used_boomerang = 0;
+    fp->fv.cl.boomerang_gobj = 0;
     fp->fv.cl.xC = 0;
     fp->fv.cl.x10 = 0;
     fp->fv.cl.x14 = 0;
