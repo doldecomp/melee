@@ -316,12 +316,12 @@ void ftCa_SpecialHi_Phys(HSD_GObj* gobj)
     fp->self_vel.y = fp->mv.ca.specialhi.vel.y;
     fp->self_vel.z = 0;
     if (!ftCommon_8007D050(fp, da->specialhi_horz_vel *
-                                   fp->co_attrs.x17C_AerialDriftMax))
+                                   fp->co_attrs.air_drift_max))
     {
         ftCommon_8007D3A8(fp, p_ftCommonData->x258,
-                          ca->x174_AerialDriftStickMult *
+                          ca->air_drift_stick_mul *
                               da->specialhi_air_friction_mul,
-                          ca->x17C_AerialDriftMax * da->specialhi_horz_vel);
+                          ca->air_drift_max * da->specialhi_horz_vel);
     }
     fp->mv.ca.specialhi.vel.x = fp->x74_anim_vel.x + fp->self_vel.x;
     fp->mv.ca.specialhi.vel.y = fp->x74_anim_vel.y + fp->self_vel.y;
@@ -595,13 +595,11 @@ void ftCa_SpecialAirHi_Phys(HSD_GObj* gobj)
     fp->self_vel.x = fp->mv.ca.specialhi.vel.x;
     fp->self_vel.y = fp->mv.ca.specialhi.vel.y;
     fp->self_vel.z = 0;
-    if (!ftCommon_8007D050(fp,
-                           da->specialhi_horz_vel * ca->x17C_AerialDriftMax))
-    {
+    if (!ftCommon_8007D050(fp, da->specialhi_horz_vel * ca->air_drift_max)) {
         ftCommon_8007D3A8(fp, p_ftCommonData->x258,
-                          ca->x174_AerialDriftStickMult *
+                          ca->air_drift_stick_mul *
                               da->specialhi_air_friction_mul,
-                          ca->x17C_AerialDriftMax * da->specialhi_horz_vel);
+                          ca->air_drift_max * da->specialhi_horz_vel);
     }
     fp->mv.ca.specialhi.vel.x = fp->x74_anim_vel.x + fp->self_vel.x;
     fp->mv.ca.specialhi.vel.y = fp->x74_anim_vel.y + fp->self_vel.y;
@@ -940,13 +938,12 @@ void ftCa_SpecialHiThrow0_Phys(HSD_GObj* gobj)
         fp->self_vel.x = fp->mv.ca.specialhi.vel.x;
         fp->self_vel.y = fp->mv.ca.specialhi.vel.y;
         fp->self_vel.z = 0;
-        if (!ftCommon_8007D050(fp, da->specialhi_horz_vel *
-                                       ca->x17C_AerialDriftMax))
+        if (!ftCommon_8007D050(fp, da->specialhi_horz_vel * ca->air_drift_max))
         {
-            ftCommon_8007D3A8(
-                fp, p_ftCommonData->x258,
-                ca->x174_AerialDriftStickMult * da->specialhi_air_friction_mul,
-                ca->x17C_AerialDriftMax * da->specialhi_horz_vel);
+            ftCommon_8007D3A8(fp, p_ftCommonData->x258,
+                              ca->air_drift_stick_mul *
+                                  da->specialhi_air_friction_mul,
+                              ca->air_drift_max * da->specialhi_horz_vel);
         }
         fp->mv.ca.specialhi.vel.x = fp->x74_anim_vel.x + fp->self_vel.x;
         fp->mv.ca.specialhi.vel.y = fp->x74_anim_vel.y + fp->self_vel.y;

@@ -297,13 +297,13 @@ void ftCl_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
     ftParts_80074A4C(gobj, 2, 0);
-    fp->fv.cl.x222C = 0;
-    fp->fv.cl.x2234 = 0;
-    fp->fv.cl.x2238 = 0;
-    fp->fv.cl.x223C = 0;
-    fp->fv.cl.x2240 = 0;
-    fp->fv.cl.x2238 = 0;
-    fp->fv.cl.x2244 = 0;
+    fp->fv.cl.x0 = 0;
+    fp->fv.cl.x8 = 0;
+    fp->fv.cl.xC = 0;
+    fp->fv.cl.x10 = 0;
+    fp->fv.cl.x14 = 0;
+    fp->fv.cl.xC = 0;
+    fp->fv.cl.x18 = 0;
 }
 
 void ftCl_Init_OnLoad(HSD_GObj* gobj)
@@ -454,7 +454,7 @@ bool ftCl_Init_8014920C(HSD_GObj* gobj)
     if (temp_r0 != 342 && temp_r0 != 343) {
         return true;
     }
-    if (fp->fv.cl.x2244 == 0) {
+    if (fp->fv.cl.x18 == 0) {
         return true;
     }
     return false;
@@ -479,8 +479,8 @@ void ftCl_Init_801492C4(HSD_GObj* gobj)
     }
 
     fp = gobj->user_data;
-    if (fp != NULL && fp->fv.cl.x2244 != 0) {
-        fp->fv.cl.x2244 = 0;
+    if (fp != NULL && fp->fv.cl.x18 != 0) {
+        fp->fv.cl.x18 = 0;
     };
 
     if (gobj == NULL) {

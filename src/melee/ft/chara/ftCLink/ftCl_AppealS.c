@@ -23,11 +23,11 @@ void ftCl_AppealS_Anim(HSD_GObj* gobj)
 
     fp0 = fp1 = gobj->user_data;
 
-    if (fp0->cmd_vars[1] == 1 && fp1->fv.cl.x2244 == 0) {
+    if (fp0->cmd_vars[1] == 1 && fp1->fv.cl.x18 == NULL) {
         HSD_GObj* item_gobj = it_802C8B28(
             gobj, &fp0->cur_pos, ftParts_8007500C(fp1, FtPart_LThumbNb),
             fp0->facing_dir);
-        fp0->fv.cl.x2244 = item_gobj;
+        fp0->fv.cl.x18 = item_gobj;
         if (item_gobj != NULL) {
             fp0->cb.x21E4_callback_OnDeath2 = ftLk_800EAF58;
             fp0->cb.x21DC_callback_OnTakeDamage = ftLk_800EAF58;

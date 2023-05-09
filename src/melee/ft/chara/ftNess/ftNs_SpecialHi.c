@@ -1836,9 +1836,9 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
             fmuls1 = temp_f1_2 * temp_f1_2;
             fmuls2 = temp_f0_2 * temp_f0_2;
             lbVector_sqrtf_accurate(fmuls1 + fmuls2);
-            DriftMax = new_var->co_attrs.x17C_AerialDriftMax;
+            DriftMax = new_var->co_attrs.air_drift_max;
             DriftMax == 0.0f;
-            ftCommon_8007D440(new_var, new_var->co_attrs.x17C_AerialDriftMax);
+            ftCommon_8007D440(new_var, new_var->co_attrs.air_drift_max);
             if (new_var->self_vel.x >= 0.0f) {
                 phi_f0 = 1.0f;
             } else {
@@ -1871,10 +1871,9 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
                 fmuls3 = temp_f1_5 * temp_f1_5;
                 fmuls4 = temp_f0_3 * temp_f0_3;
                 lbVector_sqrtf_accurate(fmuls3 + fmuls4);
-                DriftMax = new_var->co_attrs.x17C_AerialDriftMax;
+                DriftMax = new_var->co_attrs.air_drift_max;
                 DriftMax == 0.0f;
-                ftCommon_8007D440(new_var,
-                                  new_var->co_attrs.x17C_AerialDriftMax);
+                ftCommon_8007D440(new_var, new_var->co_attrs.air_drift_max);
                 if (fighter_data4->self_vel.x >= 0.0f) {
                     phi_f0 = 1.0f;
                 } else {
@@ -1911,10 +1910,9 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
                 fmuls5 = temp_f1_8 * temp_f1_8;
                 fmuls6 = temp_f0_4 * temp_f0_4;
                 lbVector_sqrtf_accurate(fmuls5 + fmuls6);
-                DriftMax = new_var->co_attrs.x17C_AerialDriftMax;
+                DriftMax = new_var->co_attrs.air_drift_max;
                 DriftMax == 0.0f;
-                ftCommon_8007D440(new_var,
-                                  new_var->co_attrs.x17C_AerialDriftMax);
+                ftCommon_8007D440(new_var, new_var->co_attrs.air_drift_max);
                 if (fighter_data5->self_vel.x >= 0.0f) {
                     phi_f0 = 1.0f;
                 } else {

@@ -24,10 +24,7 @@
 /* 0EB2F0 */ void ftLk_Init_OnKnockbackExit(HSD_GObj* gobj);
 /* 0EB334 */ void ftLk_800EB334(HSD_GObj* gobj);
 
-/* 0EBE64 */ void ftLk_800EBE64(HSD_GObj* gobj);
-/* 0EBEC4 */ void ftLk_800EBEC4(HSD_GObj* gobj);
-/* 0EBEEC */ void ftLk_800EBEEC(HSD_GObj* gobj);
-/* 0EBF20 */ void ftLk_800EBF20(HSD_GObj* gobj);
+/* 0EBF2C */ static UNK_RET lbl_800EBF2C(UNK_PARAMS);
 /* 0EBFCC */ void ftLk_800EBFCC(HSD_GObj* gobj);
 /* 0EBFDC */ void ftLk_800EBFDC(HSD_GObj* gobj);
 /* 0EC00C */ void ftLk_800EC00C(HSD_GObj* gobj);

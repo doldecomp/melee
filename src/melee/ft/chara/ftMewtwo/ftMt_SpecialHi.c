@@ -590,7 +590,7 @@ void ftMt_SpecialAirHi_Phys(HSD_GObj* gobj)
     if (fp->cmd_vars[0]) {
         ftCommon_8007D4B8(fp);
         ftCommon_8007D440(fp, mewtwoAttrs->x64_MEWTWO_TELEPORT_DRIFT *
-                                  fp->co_attrs.x17C_AerialDriftMax);
+                                  fp->co_attrs.air_drift_max);
     } else {
         f32 velY = fp->self_vel.y;
         fp->self_vel.y = velY - velY / 10;

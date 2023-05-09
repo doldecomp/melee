@@ -78,7 +78,7 @@ inline void ftSamus_80128B1C_inner(HSD_GObj* gobj, f32 angle)
     fp = GET_FIGHTER(gobj);
     fp->self_vel.x = samus_attr->x8 * cosf(angle);
     fp->self_vel.y = samus_attr->x8 * sinf(angle);
-    ftCommon_8007D440(fp, ftAttr->x17C_AerialDriftMax * samus_attr->x10);
+    ftCommon_8007D440(fp, ftAttr->air_drift_max * samus_attr->x10);
 }
 
 void ftSs_Init_80128B1C(HSD_GObj* gobj, f32 angle, f32 arg9, f32 argA)

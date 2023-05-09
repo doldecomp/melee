@@ -171,9 +171,8 @@ void ftMs_SpecialHi_Phys(HSD_GObj* gobj)
             da = fp->dat_attrs;
             attr2 = &fp->co_attrs;
             ftCommon_8007D494(fp, da->x44, da->x48);
-            ftCommon_8007D344(fp, 0.0f,
-                              attr2->x174_AerialDriftStickMult * da->x28,
-                              attr2->x17C_AerialDriftMax * da->x28);
+            ftCommon_8007D344(fp, 0.0f, attr2->air_drift_stick_mul * da->x28,
+                              attr2->air_drift_max * da->x28);
         }
     } else {
         ft_80084FA8(gobj);
@@ -213,9 +212,8 @@ void ftMs_SpecialAirHi_Phys(HSD_GObj* gobj)
             }
         } else {
             ftCommon_8007D494(fp, da->x44, da->x48);
-            ftCommon_8007D344(fp, 0.0f,
-                              attr2->x174_AerialDriftStickMult * da->x28,
-                              attr2->x17C_AerialDriftMax * da->x28);
+            ftCommon_8007D344(fp, 0.0f, attr2->air_drift_stick_mul * da->x28,
+                              attr2->air_drift_max * da->x28);
         }
     } else {
         ftCommon_8007D494(fp, attr2->grav, attr2->terminal_vel);

@@ -4,6 +4,10 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
+typedef struct ftLink_FighterVars ftLink_FighterVars;
+typedef struct ftLk_DatAttrs ftLk_DatAttrs;
+typedef union ftLk_MotionVars ftLk_MotionVars;
+
 static MotionFlags const ftLk_MF_Base0 ATTRIBUTE_USED =
     Ft_MF_SkipModel | Ft_MF_SkipThrowException;
 
