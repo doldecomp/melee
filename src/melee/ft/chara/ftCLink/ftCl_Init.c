@@ -6,7 +6,6 @@
 
 #include "ftCl_AppealS.h"
 #include "inlines.h"
-#include "types.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
@@ -21,6 +20,7 @@
 #include "ftLink/ftLk_SpecialLw.h"
 #include "ftLink/ftLk_SpecialN.h"
 #include "ftLink/ftLk_SpecialS.h"
+#include "ftLink/types.h"
 #include "lb/lbmthp.h"
 
 MotionState ftCl_Init_MotionStateTable[ftLk_MS_SelfCount] = {
@@ -293,7 +293,7 @@ Fighter_CostumeStrings ftCl_Init_CostumeStrings[] = {
 
 void ftCl_Init_OnDeath(ftLk_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
     ftParts_80074A4C(gobj, 2, 0);
@@ -313,20 +313,21 @@ void ftCl_Init_OnLoad(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter* fp = gobj->user_data;
+    ftLk_Fighter* fp = gobj->user_data;
     ftData* ftdata = fp->ft_data;
-    CLinkAttributes* attrs = (void*) ftdata->ext_attr;
+    ftLk_DatAttrs* ea = ftdata->ext_attr;
     void** items = ftdata->x48_items;
 
     fp->x2224_flag.bits.b7 = true;
-    attrs->x54 = lbMthp_8001E8F8(ftData_80085E50(fp, 72));
+    ea->attackairlw_hit_anim_frame_end =
+        lbMthp_8001E8F8(ftData_80085E50(fp, 72));
     ftLk_Init_OnLoadForCLink(fp);
-    attrs = fp->dat_attrs;
-    it_8026B3F8(items[0], attrs->x48);
-    it_8026B3F8(items[1], attrs->x2C);
-    it_8026B3F8(items[2], attrs->xBC);
-    it_8026B3F8(items[3], attrs->xC);
-    it_8026B3F8(items[4], attrs->x10);
+    ea = fp->dat_attrs;
+    it_8026B3F8(items[0], ea->x48);
+    it_8026B3F8(items[1], ea->x2C);
+    it_8026B3F8(items[2], ea->xBC);
+    it_8026B3F8(items[3], ea->xC);
+    it_8026B3F8(items[4], ea->x10);
     it_8026B3F8(items[5], It_Kind_CLink_Milk);
     ftParts_800753D4(fp, *Fighter_804D6540[fp->kind], items[6]);
 }
@@ -338,7 +339,7 @@ void ftCl_Init_OnItemPickupExt(HSD_GObj* gobj, bool arg1)
     u8 _[4];
 #endif
 
-    Fighter* fp = gobj->user_data;
+    ftLk_Fighter* fp = gobj->user_data;
 
     if (it_8026B2B4(fp->item_gobj) == true) {
         ftParts_80074A4C(gobj, 1, 1);
@@ -365,7 +366,7 @@ void ftCl_Init_OnItemDropExt(HSD_GObj* gobj, bool arg1)
     u8 _[4];
 #endif
 
-    Fighter* fp = gobj->user_data;
+    ftLk_Fighter* fp = gobj->user_data;
 
     if (it_8026B2B4(fp->item_gobj) == true) {
         ftParts_80074A4C(gobj, 1, 0);
@@ -406,9 +407,9 @@ void ftCl_Init_OnKnockbackExit(HSD_GObj* gobj)
 
 void ftCl_Init_80149114(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    CLinkAttributes* temp_r4 = (void*) fp->ft_data->ext_attr;
-    f32 ftmp = ft_80092ED8(fp->x19A4, temp_r4, temp_r4->xD8);
+    ftLk_Fighter* fp = gobj->user_data;
+    ftLk_DatAttrs* ea = fp->ft_data->ext_attr;
+    f32 ftmp = ft_80092ED8(fp->x19A4, ea, ea->xD8);
     fp->gr_vel = ftmp * p_ftCommonData->x294;
     if (fp->specialn_facing_dir < 0.0f) {
         ftmp = fp->gr_vel;
@@ -421,17 +422,15 @@ void ftCl_Init_80149114(HSD_GObj* gobj)
 
 void ftCl_Init_8014919C(HSD_GObj* gobj)
 {
-    CLinkAttributes* attrs;
-
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    Fighter* fp = gobj->user_data;
+    ftLk_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x5F8 == 0) {
-        attrs = (void*) fp->dat_attrs;
-        ftColl_8007B1B8(gobj, &attrs->xC4, ftCl_Init_80149114);
+        ftLk_DatAttrs* da = fp->dat_attrs;
+        ftColl_8007B1B8(gobj, &da->xC4, ftCl_Init_80149114);
         fp->x221B_b3 = true;
         fp->x221B_b4 = true;
         fp->x221B_b2 = true;
@@ -441,7 +440,7 @@ void ftCl_Init_8014919C(HSD_GObj* gobj)
 bool ftCl_Init_8014920C(HSD_GObj* gobj)
 {
     s32 temp_r0;
-    Fighter* fp;
+    ftLk_Fighter* fp;
 
     if (gobj == NULL) {
         return true;
@@ -472,38 +471,32 @@ void ftCl_Init_80149268(HSD_GObj* gobj)
 
 void ftCl_Init_801492C4(HSD_GObj* gobj)
 {
-    Fighter* fp;
+    if (gobj != NULL) {
+        ftLk_Fighter* fp = GET_FIGHTER(gobj);
+        if (fp != NULL && fp->fv.lk.x18 != 0) {
+            fp->fv.lk.x18 = 0;
+        };
 
-    if (gobj == NULL) {
-        return;
-    }
-
-    fp = gobj->user_data;
-    if (fp != NULL && fp->fv.lk.x18 != 0) {
-        fp->fv.lk.x18 = 0;
-    };
-
-    if (gobj == NULL) {
-        return;
+        if (gobj == NULL) {
+            return;
+        }
     }
 }
 
-u32 ftCl_Init_801492F4(HSD_GObj* gobj)
+bool ftCl_Init_801492F4(HSD_GObj* gobj)
 {
-    Fighter* fp;
-
     if (gobj != NULL) {
-        fp = gobj->user_data;
+        ftLk_Fighter* fp = GET_FIGHTER(gobj);
         if (fp != NULL) {
             return fp->cmd_vars[1];
         }
     }
-    return 0;
+    return false;
 }
 
 void ftCl_Init_80149318(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ft_800DEAE8(gobj, 342, 343);
-    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[1] = false;
 }
