@@ -1,5 +1,4 @@
 import abc
-import copy
 from collections import defaultdict
 from dataclasses import dataclass, field, replace
 from typing import (
@@ -17,15 +16,13 @@ from typing import (
     Union,
 )
 
-from .error import DecompFailure, static_assert_unreachable
+from .error import DecompFailure
 from .options import Formatter, Options, Target
 from .asm_file import AsmData, Function, Label
 from .asm_instruction import (
     AsmAddressMode,
     AsmGlobalSymbol,
     AsmInstruction,
-    AsmLiteral,
-    BinOp,
     JumpTarget,
     Macro,
     Register,
@@ -33,7 +30,6 @@ from .asm_instruction import (
 from .instruction import (
     ArchAsm,
     Instruction,
-    InstructionMeta,
     Location,
 )
 from .asm_pattern import simplify_patterns, AsmPattern
@@ -543,7 +539,7 @@ def build_blocks(
 
         if item.is_conditional and item.is_return:
             if cond_return_target is None:
-                cond_return_target = JumpTarget(f"_m2c_conditionalreturn_")
+                cond_return_target = JumpTarget("_m2c_conditionalreturn_")
             # Strip the "lr" off of the instruction
             assert item.mnemonic[-2:] == "lr"
             branch_instr = arch.parse(
@@ -1529,7 +1525,7 @@ def nodes_to_flowgraph(
         print(f"Warning: in {function.name}, regs were read before being written to:")
         for reg, ref in missing_regs:
             print(f"   {reg} at {ref}: {ref.instruction}")
-        print(f"*/")
+        print("*/")
 
     return flow_graph
 

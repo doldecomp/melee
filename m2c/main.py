@@ -1,12 +1,11 @@
 import argparse
 import gc
-import re
 import sys
 import traceback
 from pathlib import Path
 from typing import Dict, List, Optional, Union
 
-from .c_types import TypeMap, build_typemap, dump_typemap
+from .c_types import build_typemap, dump_typemap
 from .error import DecompFailure
 from .flow_graph import FlowGraph, build_flowgraph, visualize_flowgraph
 from .if_statements import get_function_text
@@ -441,6 +440,12 @@ def parse_flags(flags: List[str]) -> Options:
         help="Pad hex constants with 0's to fill their type's width.",
     )
     group.add_argument(
+        "--force-decimal",
+        dest="force_decimal",
+        action="store_true",
+        help="Force decimal values",
+    )
+    group.add_argument(
         "--deterministic-vars",
         dest="deterministic_vars",
         action="store_true",
@@ -594,6 +599,7 @@ def parse_flags(flags: List[str]) -> Options:
         andor_detection=args.andor_detection,
         skip_casts=args.skip_casts,
         zfill_constants=args.zfill_constants,
+        force_decimal=args.force_decimal,
         heuristic_strings=args.heuristic_strings,
         reg_vars=reg_vars,
         goto_patterns=args.goto_patterns,

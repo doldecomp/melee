@@ -1,5 +1,4 @@
 from dataclasses import replace
-import typing
 from typing import (
     Callable,
     Dict,
@@ -16,7 +15,6 @@ from .asm_file import Label
 from .asm_instruction import (
     Argument,
     AsmAddressMode,
-    AsmGlobalSymbol,
     AsmInstruction,
     AsmLiteral,
     JumpTarget,
@@ -47,7 +45,6 @@ from .translate import (
     CmpInstrMap,
     CommentStmt,
     ErrorExpr,
-    ExprCondition,
     ExprStmt,
     Expression,
     InstrArgs,
@@ -60,13 +57,9 @@ from .translate import (
     UnaryOp,
     as_f32,
     as_f64,
-    as_int64,
     as_intish,
-    as_intptr,
-    as_ptr,
     as_s64,
     as_sintish,
-    as_type,
     as_u32,
     as_u64,
     as_uintish,

@@ -1,5 +1,4 @@
 from dataclasses import replace
-import typing
 from typing import (
     Callable,
     ClassVar,
@@ -7,12 +6,10 @@ from typing import (
     List,
     Optional,
     Set,
-    Tuple,
     Union,
 )
 
 from .error import DecompFailure
-from .flow_graph import FlowGraph
 from .ir_pattern import IrMatch, IrPattern
 from .options import Target
 from .asm_instruction import (
@@ -48,8 +45,6 @@ from .translate import (
     Arch,
     BinaryOp,
     Cast,
-    CmpInstrMap,
-    CommentStmt,
     ErrorExpr,
     ExprStmt,
     Expression,
@@ -57,19 +52,12 @@ from .translate import (
     InstrMap,
     Literal,
     NodeState,
-    SecondF64Half,
     StmtInstrMap,
     StoreInstrMap,
     TernaryOp,
     UnaryOp,
-    as_f32,
-    as_f64,
-    as_int64,
     as_intish,
-    as_intptr,
-    as_ptr,
     as_sintish,
-    as_type,
     as_u32,
     as_uintish,
 )
