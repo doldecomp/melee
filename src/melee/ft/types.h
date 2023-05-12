@@ -224,7 +224,7 @@ typedef struct _DObjList {
 struct UnkFloat6_Camera;
 
 typedef struct _ftData {
-    struct {
+    /*  +0 */ struct {
         u8 x0_fill[0x8C];
         f32 x8C;
         u8 x90_fill[0xFC - 0x90];
@@ -232,14 +232,16 @@ typedef struct _ftData {
         u8 x100_fill[0x16C - 0x100];
         s32 x16C_idx;
     }* x0;
-    /* 0x04 */ void* ext_attr;
-    struct {
+    /*  +4 */ void* ext_attr;
+    /*  +8 */ struct {
         u8 x0_fill[0x10];
         u8 unk10, unk11, unk12;
     }* x8;
-    struct S_TEMP4* xC;
-    u8* x10;
-    s32 filler_x14[10];
+    /*  +C */ struct S_TEMP4* xC;
+    /* +10 */ u8* x10;
+    /* +14 */ u8 x14[0x24 - 0x14];
+    /* +24 */ int x24;
+    /* +28 */ u8 x28[0x3C - 0x28];
     struct UnkFloat6_Camera* x3C;
     s32 filler_x40[2];
     /* 0x48 */ UNK_T* x48_items;

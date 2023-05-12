@@ -1,6 +1,8 @@
 #include <platform.h>
 #include "ftCommon/forward.h"
 
+#include "ftCo_Wait.h"
+
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcliffcommon.h"
