@@ -22,7 +22,7 @@
 /* 14920C */ bool ftCl_Init_8014920C(ftLk_GObj* gobj);
 /* 149268 */ void ftCl_Init_80149268(ftLk_GObj* gobj);
 /* 1492C4 */ void ftCl_Init_801492C4(ftLk_GObj* gobj);
-/* 1492F4 */ u32 ftCl_Init_801492F4(ftLk_GObj* gobj);
+/* 1492F4 */ bool ftCl_Init_801492F4(ftLk_GObj* gobj);
 /* 149318 */ void ftCl_Init_80149318(ftLk_GObj* gobj);
 /* 3D0FA0 */ extern MotionState ftCl_Init_MotionStateTable[ftLk_MS_SelfCount];
 /* 3D1240 */ extern char ftCl_Init_DatFilename[];
