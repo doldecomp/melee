@@ -1952,15 +1952,16 @@ lbl_800EE2CC:
 
 static inline void doEndColl(ftLk_GObj* gobj)
 {
+/// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[12] = { 0 };
+#endif
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
-    if (fp->cmd_vars[cmd_unk1_bool] == 1 && fp->fv.lk.arrow_gobj != NULL) {
-        fp->cmd_vars[cmd_unk1_bool] = 0;
+    Item_GObj* item_gobj;
+    if (fp->cmd_vars[cmd_unk1_bool] == true && fp->fv.lk.arrow_gobj != NULL) {
+        fp->cmd_vars[cmd_unk1_bool] = false;
         {
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
-            u8 _[4] = { 0 };
-#endif
             Vec3 rpos, lpos;
             lb_8000B1CC(
                 fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].x0_jobj, NULL,
@@ -1968,18 +1969,12 @@ static inline void doEndColl(ftLk_GObj* gobj)
             lb_8000B1CC(
                 fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].x0_jobj, NULL,
                 &lpos);
-            lpos.z = rpos.z = 0;
-            {
-                /// @todo Unused stack.
-#ifdef MUST_MATCH
-                u8 _[4] = { 0 };
-#endif
-                Item_GObj* item_gobj = fp->item_gobj;
-                it_802A850C(fp->fv.lk.arrow_gobj, &rpos, &lpos, 5 * deg_to_rad,
-                            fp->mv.lk.specialn.x0.y, da->x0);
-                ftLk_SpecialN_UnsetArrow(gobj);
-                fp->item_gobj = item_gobj;
-            }
+            rpos.z = lpos.z = 0;
+            item_gobj = fp->item_gobj;
+            it_802A850C(fp->fv.lk.arrow_gobj, &rpos, &lpos, 5 * deg_to_rad,
+                        fp->mv.lk.specialn.x0.y, da->x0);
+            ftLk_SpecialN_UnsetArrow(gobj);
+            fp->item_gobj = item_gobj;
         }
         ft_80094818(gobj, false);
     }
@@ -1987,14 +1982,9 @@ static inline void doEndColl(ftLk_GObj* gobj)
 
 void ftLk_SpecialNEnd_Coll(ftLk_GObj* gobj)
 {
-    // ftLk_MS_SpecialAirNEnd
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u8 _[8] = { 0 };
-#endif
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     doEndColl(gobj);
-    if (ft_80082708(gobj) == GA_Ground) {
+    if (!ft_80082708(gobj)) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirNEnd, coll_mf, NULL,
                                   fp->cur_anim_frame, 1, 0);
