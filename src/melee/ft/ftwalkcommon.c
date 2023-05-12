@@ -57,61 +57,62 @@ bool ftWalkCommon_800DFC70(HSD_GObj* gobj)
     return false;
 }
 
-void ftWalkCommon_800DFCA4(HSD_GObj* gobj, ftCommon_MotionState msid,
-                           u32 ms_flags, float arg8, float arg9, float argA,
-                           float argB, float argC, float argD, float argE,
-                           float argF)
+void ftWalkCommon_800DFCA4(Fighter_GObj* gobj, FtMotionId msid,
+                           MotionFlags ms_flags, float anim_start,
+                           float slow_anim_frame, float middle_anim_frame,
+                           float fast_anim_frame, float slow_anim_rate,
+                           float middle_anim_rate, float fast_anim_rate,
+                           float accel_mul)
 {
-    ftCommon_MotionState new_msid;
-    FtWalkType walk_type;
-    Fighter* fp;
-
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[20];
 #endif
 
-    fp = GET_FIGHTER(gobj);
-    fp->mv.co.walk.accel_mul = argF;
-    walk_type = ftWalkCommon_GetWalkType_800DFBF8_fake(gobj);
-    new_msid = msid + walk_type;
-    Fighter_ChangeMotionState(gobj, new_msid, ms_flags, 0, arg8, 1, 0);
-    ftAnim_8006EBA4(gobj);
-    fp->mv.co.walk.x0 = fp->gr_vel;
-    fp->mv.co.walk.x4 = msid;
-    fp->mv.co.walk.x8 = arg9;
-    fp->mv.co.walk.xC = argA;
-    fp->mv.co.walk.x10 = argB;
-    fp->mv.co.walk.x14 = argC;
-    fp->mv.co.walk.x18 = argD;
-    fp->mv.co.walk.x1C = argE;
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->mv.co.walk.accel_mul = accel_mul;
+    {
+        FtWalkType walk_type = ftWalkCommon_GetWalkType_800DFBF8_fake(gobj);
+        ftCommon_MotionState new_msid = msid + walk_type;
+        Fighter_ChangeMotionState(gobj, new_msid, ms_flags, 0, anim_start, 1,
+                                  0);
+        ftAnim_8006EBA4(gobj);
+        fp->mv.co.walk.x0 = fp->gr_vel;
+        fp->mv.co.walk.msid = msid;
+        fp->mv.co.walk.slow_anim_frame = slow_anim_frame;
+        fp->mv.co.walk.middle_anim_frame = middle_anim_frame;
+        fp->mv.co.walk.fast_anim_frame = fast_anim_frame;
+        fp->mv.co.walk.slow_anim_rate = slow_anim_rate;
+        fp->mv.co.walk.middle_anim_rate = middle_anim_rate;
+        fp->mv.co.walk.fast_anim_rate = fast_anim_rate;
+    }
 }
 
 void ftWalkCommon_800DFDDC(HSD_GObj* gobj)
 {
-    f32 velocity_f2;
-    f32 anim_rate;
+    float mv_x0;
+    float anim_rate;
 
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (ft_GetGroundFrictionMultiplier(fp) < 1) {
-        velocity_f2 = fp->mv.co.walk.x0;
+        mv_x0 = fp->mv.co.walk.x0;
     } else {
-        velocity_f2 = fp->gr_vel;
+        mv_x0 = fp->gr_vel;
     }
-    if ((velocity_f2 * fp->facing_dir) <= 0) {
+    if (mv_x0 * fp->facing_dir <= 0) {
         anim_rate = 0;
     } else {
-        velocity_f2 = fabs_inline(velocity_f2);
-        switch (fp->motion_id - fp->mv.co.walk.x4) {
-        case 0:
-            anim_rate = velocity_f2 / fp->mv.co.walk.x14;
+        mv_x0 = fabs_inline(mv_x0);
+        switch (fp->motion_id - fp->mv.co.walk.msid) {
+        case FtWalkType_Slow:
+            anim_rate = mv_x0 / fp->mv.co.walk.slow_anim_rate;
             break;
-        case 1:
-            anim_rate = velocity_f2 / fp->mv.co.walk.x18;
+        case FtWalkType_Middle:
+            anim_rate = mv_x0 / fp->mv.co.walk.middle_anim_rate;
             break;
-        case 2:
-            anim_rate = velocity_f2 / fp->mv.co.walk.x1C;
+        case FtWalkType_Fast:
+            anim_rate = mv_x0 / fp->mv.co.walk.fast_anim_rate;
             break;
         }
     }
@@ -125,7 +126,7 @@ void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
     Fighter* fp = GET_FIGHTER(gobj);
     s32 walk_action_type = ftWalkCommon_GetWalkType_800DFBF8_fake(gobj);
 
-    motion_state_base = fp->mv.co.walk.x4;
+    motion_state_base = fp->mv.co.walk.msid;
     motion_state_sum = motion_state_base + walk_action_type;
 
     if (motion_state_sum != (int) fp->motion_id) {
@@ -137,14 +138,14 @@ void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
         s32 quotient;
 
         switch (motion_state_sum - motion_state_base) {
-        case 0:
-            frame = fp->mv.co.walk.x8;
+        case FtWalkType_Slow:
+            frame = fp->mv.co.walk.slow_anim_frame;
             break;
-        case 1:
-            frame = fp->mv.co.walk.xC;
+        case FtWalkType_Middle:
+            frame = fp->mv.co.walk.middle_anim_frame;
             break;
-        case 2:
-            frame = fp->mv.co.walk.x10;
+        case FtWalkType_Fast:
+            frame = fp->mv.co.walk.fast_anim_frame;
             break;
         default:
             OSReport("couldn't get walk frame\n");

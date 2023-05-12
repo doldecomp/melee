@@ -268,6 +268,6 @@ void ftMh_MS_375_80154A2C(HSD_GObj* gobj)
     fp->self_vel.y = 0;
     fp->self_vel.x = 0;
     fp->mv.mh.unk0.x20 = true;
-    fp->x221E_flag.bits.b6 = false;
+    fp->x221E_b6 = false;
     ftMh_MS_375_80154C78(gobj);
 }

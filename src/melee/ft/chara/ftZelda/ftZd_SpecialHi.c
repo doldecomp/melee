@@ -390,7 +390,7 @@ void ftZd_SpecialHi_80139F6C(HSD_GObj* gobj)
                               fp->cur_anim_frame, 0, 0);
 
     fp->x2223_flag.bits.b4 = true;
-    fp->x221E_flag.bits.b0 = true;
+    fp->x221E_b0 = true;
 }
 
 void ftZd_SpecialHi_80139FE8(HSD_GObj* gobj)
@@ -401,7 +401,7 @@ void ftZd_SpecialHi_80139FE8(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 350, transition_flags1, NULL,
                               fp->cur_anim_frame, 0, 0);
 
-    fp->x221E_flag.bits.b0 = true;
+    fp->x221E_b0 = true;
 }
 
 void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
@@ -490,7 +490,7 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
                 fp->x2223_flag.bits.b4 = 1;
 
                 ftColl_8007B62C(gobj, 2);
-                fp->x221E_flag.bits.b0 = 1;
+                fp->x221E_b0 = 1;
                 return;
             }
         }
@@ -586,7 +586,7 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
 
     ftColl_8007B62C(gobj, 2);
 
-    fp->x221E_flag.bits.b0 = 1;
+    fp->x221E_b0 = 1;
 }
 
 void ftZd_SpecialHi_Anim(HSD_GObj* gobj)
@@ -708,7 +708,7 @@ void ftZd_SpecialHi_8013A6A8(HSD_GObj* gobj)
         fp1->self_vel.y = 0;
         fp1->self_vel.x = 0;
         fp1->gr_vel = 0;
-        fp1->x221E_flag.bits.b0 = false;
+        fp1->x221E_b0 = false;
         fp1->cb.x21BC_callback_Accessory4 = &ftZd_SpecialHi_8013979C;
     }
 
@@ -732,7 +732,7 @@ void ftZd_SpecialHi_8013A764(HSD_GObj* gobj)
         fp1->self_vel.y = 0;
         fp1->self_vel.x = 0;
         fp1->gr_vel = 0;
-        fp1->x221E_flag.bits.b0 = false;
+        fp1->x221E_b0 = false;
         fp1->cb.x21BC_callback_Accessory4 = &ftZd_SpecialHi_8013979C;
     }
 

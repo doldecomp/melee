@@ -9,11 +9,13 @@
 
 #define FIGHTERVARS_SIZE 0x100
 
-typedef struct MotionState MotionState;
+typedef HSD_GObj Fighter_GObj;
 typedef struct Fighter Fighter;
 typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;
 typedef struct Fighter_DemoStrings Fighter_DemoStrings;
+typedef struct MotionState MotionState;
 typedef struct UnkFloat6_Camera UnkFloat6_Camera;
+typedef struct ftLk_SpecialN_Vec3Group ftLk_SpecialN_Vec3Group;
 typedef u32 MotionFlags;
 
 typedef void (*Fighter_ItemEvent)(HSD_GObj* this, bool arg1);

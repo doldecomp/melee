@@ -1,6 +1,9 @@
 #ifndef PLACEHOLDER_H
 #define PLACEHOLDER_H
 
+#include "ft/forward.h"
+#include <baselib/forward.h>
+
 #include <m2c_macros.h>
 #include <dolphin/os/os.h>
 

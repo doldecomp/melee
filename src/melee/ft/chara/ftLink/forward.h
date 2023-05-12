@@ -4,8 +4,10 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
-typedef struct ftLink_FighterVars ftLink_FighterVars;
+typedef Fighter ftLk_Fighter;
+typedef HSD_GObj ftLk_GObj;
 typedef struct ftLk_DatAttrs ftLk_DatAttrs;
+typedef struct ftLk_FighterVars ftLk_FighterVars;
 typedef union ftLk_MotionVars ftLk_MotionVars;
 
 static MotionFlags const ftLk_MF_Base0 ATTRIBUTE_USED =

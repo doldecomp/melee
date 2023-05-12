@@ -2,19 +2,16 @@
 #define GALE01_0EC354
 
 #include "ftLink/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
-#include <placeholder.h>
-
 /* 0EBFCC */ bool ftLk_SepcialS_Get2219b5(HSD_GObj* gobj);
-/* 0EBFDC */ bool ftLk_Is2071b0_5to13(HSD_GObj* gobj);
-/* 0EC00C */ bool ftLk_Is2071b0_1to13(HSD_GObj* gobj);
+/* 0EBFDC */ bool ftLk_SpecialS_Is2071b0_5to13(HSD_GObj* gobj);
+/* 0EC00C */ bool ftLk_SpecialS_Is2071b0_1to13(HSD_GObj* gobj);
 /* 0EC03C */ void ftLk_SpecialS_RemoveBoomerang0(HSD_GObj* gobj);
 /* 0EC06C */ void ftLk_SpecialS_RemoveBoomerang1(HSD_GObj* gobj);
 /* 0EC354 */ void ftLk_SpecialS_Enter(HSD_GObj* gobj);
 /* 0EC404 */ void ftLk_SpecialAirS_Enter(HSD_GObj* gobj);
-/* 0EC4B4 */ void ftLk_800EC4B4(HSD_GObj* gobj);
+/* 0EC4B4 */ void ftLk_SpecialS2_Enter(HSD_GObj* gobj);
 /* 0EC54C */ void ftLk_SpecialS1_Anim(HSD_GObj* gobj);
 /* 0EC588 */ void ftLk_SpecialS2_Anim(HSD_GObj* gobj);
 /* 0EC5F8 */ void ftLk_SpecialS1Empty_Anim(HSD_GObj* gobj);

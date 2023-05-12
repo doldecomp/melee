@@ -253,7 +253,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x221A_flag.bits.b5 = 0;
     fp->x221A_flag.bits.b6 = 0;
     fp->x221D_flag.bits.b2 = 0;
-    fp->x221E_flag.bits.b7 = 0;
+    fp->x221E_b7 = 0;
     fp->x2220_flag.bits.b7 = 0;
     fp->x2221_flag.bits.b4 = 0;
     fp->x2221_flag.bits.b5 = 0;
@@ -362,7 +362,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->item_gobj = 0;
     fp->x1978 = 0;
 
-    fp->x221E_flag.bits.b3 = 1;
+    fp->x221E_b3 = 1;
 
     fp->x1984_heldItemSpec = 0;
     fp->x1988 = 0;
@@ -459,7 +459,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->cb.x21B8_callback_Accessory3 = 0;
     fp->cb.x21E0_callback_OnDeath = 0;
     fp->cb.x21E8_callback_OnDeath3 = 0;
-    fp->x221E_flag.bits.b4 = 1;
+    fp->x221E_b4 = 1;
     fp->x197C = 0;
     fp->x2223_flag.bits.b7 = 0;
     fp->x2028 = 0;
@@ -738,14 +738,14 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* gobj, struct S_TEMP1* argdata)
     fp->x594_s32 = 0;
     fp->x21FC_flag.u8 = 1;
 
-    fp->x221E_flag.bits.b0 = 0;
-    fp->x221E_flag.bits.b1 = 0;
-    fp->x221E_flag.bits.b2 = 0;
+    fp->x221E_b0 = 0;
+    fp->x221E_b1 = 0;
+    fp->x221E_b2 = 0;
     fp->x221F_flag.bits.b1 = 0;
     fp->x221F_flag.bits.b2 = 0;
 
     fp->x209A = 0;
-    fp->x221E_flag.bits.b5 = 0;
+    fp->x221E_b5 = 0;
     fp->x221F_flag.bits.b0 = 0;
     fp->cb.x21EC_callback = 0;
 
@@ -968,8 +968,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, FtMotionId msid,
         ftParts_80074A8C(gobj);
     }
 
-    if (((flags & Ft_MF_SkipMatAnim) == 0) && ((fp->x221E_flag.bits.b7) != 0))
-    {
+    if (((flags & Ft_MF_SkipMatAnim) == 0) && ((fp->x221E_b7) != 0)) {
         ftAnim_80070654(gobj);
     }
 
@@ -1049,12 +1048,12 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, FtMotionId msid,
     fp->x1A6A = 0;
 
     fp->x221D_flag.bits.b7 = 0;
-    fp->x221E_flag.bits.b0 = 0;
-    fp->x221E_flag.bits.b1 = 0;
-    fp->x221E_flag.bits.b2 = 0;
+    fp->x221E_b0 = 0;
+    fp->x221E_b1 = 0;
+    fp->x221E_b2 = 0;
     fp->x221F_flag.bits.b1 = 0;
-    fp->x221E_flag.bits.b5 = 0;
-    fp->x221E_flag.bits.b6 = 0;
+    fp->x221E_b5 = 0;
+    fp->x221E_b6 = 0;
     fp->x2220_flag.bits.b3 = 0;
     fp->x2220_flag.bits.b7 = 0;
 
@@ -1074,13 +1073,13 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, FtMotionId msid,
     fp->x2224_flag.bits.b4 = 0;
 
     if ((flags & Ft_MF_SkipItemVis) == 0) {
-        fp->x221E_flag.bits.b3 = 1;
-    } else if (fp->x221E_flag.bits.b3 == 0U) {
+        fp->x221E_b3 = 1;
+    } else if (fp->x221E_b3 == 0U) {
         ftCommon_8007F578(gobj);
     }
 
     if ((flags & Ft_MF_SkipModelPartVis) == 0) {
-        fp->x221E_flag.bits.b4 = 1;
+        fp->x221E_b4 = 1;
     }
 
     if ((flags & Ft_MF_SkipModelFlags) == 0) {
@@ -2579,7 +2578,7 @@ void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* gobj)
 
     if (!fp->x221F_flag.bits.b3 && !gm_8016B1C4()) {
         ftColl_8007BA0C(gobj);
-        if (fp->x221E_flag.bits.b6) {
+        if (fp->x221E_b6) {
             ftColl_80078A2C(gobj);
             if (fp->x1A58_interactedFighter) {
                 if (!fp->x2225_b1) {

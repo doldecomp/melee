@@ -4,13 +4,14 @@
 #include <platform.h>
 #include "ft/forward.h"
 #include "ftLink/forward.h"
+#include "it/forward.h"
 
 #include <placeholder.h>
 
 struct ftLk_DatAttrs {
-    /* +0 */ int x0;
-    /* +4 */ int x4;
-    /* +8 */ int x8;
+    /* +0 */ float x0;
+    /* +4 */ float specialn_anim_rate;
+    /* +8 */ float x8;
     /* +C */ int xC;
     /* +10 */ int x10;
     /* +14 */ float x14;
@@ -39,14 +40,14 @@ struct ftLk_DatAttrs {
     /* +D8 */ float xD8;
 };
 
-struct ftLink_FighterVars {
+struct ftLk_FighterVars {
     /* fp+222C */ bool used_boomerang;
     /* fp+2230 */ bool x4;
-    /* fp+2234 */ HSD_GObj* boomerang_gobj;
+    /* fp+2234 */ Item_GObj* boomerang_gobj;
     /* fp+2238 */ u32 xC;
-    /* fp+223C */ HSD_GObj* x10;
-    /* fp+2240 */ HSD_GObj* x14;
-    /* fp+2244 */ HSD_GObj* x18;
+    /* fp+223C */ Item_GObj* arrow_gobj;
+    /* fp+2240 */ Item_GObj* x14;
+    /* fp+2244 */ Item_GObj* x18;
     /* fp+2248 */ u32 x1C;
     u8 _[FIGHTERVARS_SIZE - 0x20];
 };
@@ -55,6 +56,18 @@ union ftLk_MotionVars {
     struct ftLk_AttackAirVars {
         /* fp+2340 */ float lw_frame_start;
     } attackair;
+    struct ftLk_SpecialNVars {
+        /* fp+2340 */ Vec2 x0;
+        /* fp+2348 */ Vec3 x8;
+        /* fp+2354 */ float x14;
+        /* fp+2358 */ int unk_timer;
+    } specialn;
+};
+
+struct ftLk_SpecialN_Vec3Group {
+    /*  +0 */ Vec3 a;
+    /*  +C */ Vec3 b;
+    /* +18 */ Vec3 c;
 };
 
 #endif

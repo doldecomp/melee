@@ -2,7 +2,10 @@
 #define MELEE_FT_CHARA_FTCOMMON_TYPES_H
 
 #include <platform.h>
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
+
+#include <placeholder.h>
 
 union ftCommon_MotionVars {
     struct ftCommon_CliffVars {
@@ -12,15 +15,15 @@ union ftCommon_MotionVars {
     } cliff;
 
     struct ftCommon_WalkVars {
-        f32 x0;
-        ftCommon_MotionState x4;
-        f32 x8;
-        f32 xC;
-        f32 x10;
-        f32 x14;
-        f32 x18;
-        f32 x1C;
-        float accel_mul;
+        /* fp+2340 */ float x0;
+        /* fp+2344 */ FtMotionId msid;
+        /* fp+2348 */ float slow_anim_frame;
+        /* fp+234C */ float middle_anim_frame;
+        /* fp+2350 */ float fast_anim_frame;
+        /* fp+2354 */ float slow_anim_rate;
+        /* fp+2358 */ float middle_anim_rate;
+        /* fp+235C */ float fast_anim_rate;
+        /* fp+2360 */ float accel_mul;
     } walk;
 };
 
