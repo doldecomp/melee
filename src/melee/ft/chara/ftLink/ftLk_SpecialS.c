@@ -49,7 +49,7 @@ bool ftLk_SepcialS_Get2219b5(HSD_GObj* gobj)
     return GET_FIGHTER(gobj)->x2219_b5;
 }
 
-bool ftLk_Is2071b0_5to13(HSD_GObj* gobj)
+bool ftLk_SpecialS_Is2071b0_5to13(HSD_GObj* gobj)
 {
     switch (GET_FIGHTER(gobj)->x2070.x2071_b0_3) {
     case 5:
@@ -67,7 +67,7 @@ bool ftLk_Is2071b0_5to13(HSD_GObj* gobj)
     }
 }
 
-bool ftLk_Is2071b0_1to13(HSD_GObj* gobj)
+bool ftLk_SpecialS_Is2071b0_1to13(HSD_GObj* gobj)
 {
     switch (GET_FIGHTER(gobj)->x2070.x2071_b0_3) {
     case 1:
@@ -247,7 +247,7 @@ void ftLk_SpecialAirS_Enter(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = onAccessory4;
 }
 
-void ftLk_800EC4B4(HSD_GObj* gobj)
+void ftLk_SpecialS2_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Air) {

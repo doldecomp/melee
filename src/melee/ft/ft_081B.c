@@ -163,7 +163,7 @@ lbl_80081CE0:
 extern void ft_80081A00(void);
 
 #pragma push
-asm bool ft_80081D0C(HSD_GObj* gobj)
+asm GroundOrAir ft_80081D0C(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80081D0C 0007E8EC  7C 08 02 A6 */	mflr r0
@@ -965,7 +965,7 @@ lbl_800826EC:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm bool ft_80082708(HSD_GObj* gobj)
+asm GroundOrAir ft_80082708(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80082708 0007F2E8  7C 08 02 A6 */	mflr r0

@@ -435,9 +435,9 @@ bool ftLib_800868D4(HSD_GObj* gobj, HSD_GObj* arg1)
         return true;
     }
 
-    if (fp->x221E_flag.bits.b0 || fp->x221E_flag.bits.b5 ||
-        (!fp->x221E_flag.bits.b3 && fp->item_gobj == arg1) ||
-        (!fp->x221E_flag.bits.b4 && (fp->x197C == arg1 || fp->x1980 == arg1)))
+    if (fp->x221E_b0 || fp->x221E_b5 ||
+        (!fp->x221E_b3 && fp->item_gobj == arg1) ||
+        (!fp->x221E_b4 && (fp->x197C == arg1 || fp->x1980 == arg1)))
     {
         return false;
     } else {
@@ -682,7 +682,7 @@ bool ftLib_80086EC0(HSD_GObj* gobj)
 bool ftLib_80086ED0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x221E_flag.bits.b0 || fp->x221E_flag.bits.b2 ||
+    if (fp->x221E_b0 || fp->x221E_b2 ||
         Player_GetMoreFlagsBit4(fp->xC_playerID) || fp->x2228_flag.b2 ||
         fp->x2229_b3 || fp->x2220_flag.bits.b7)
     {
@@ -705,7 +705,7 @@ bool ftLib_80086F4C(HSD_GObj* gobj)
 f32 ftLib_80086F80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x221E_flag.bits.b0) {
+    if (fp->x221E_b0) {
         return fp->ft_data->x0->xFC;
     }
 
@@ -845,8 +845,7 @@ void* ftLib_800872B0(HSD_GObj* gobj)
 bool ftLib_800872BC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return !fp->x221E_flag.bits.b1 && !fp->x2226_flag.bits.b4 &&
-           !fp->x221F_flag.bits.b4;
+    return !fp->x221E_b1 && !fp->x2226_flag.bits.b4 && !fp->x221F_flag.bits.b4;
 }
 
 s32 ftLib_80087300(HSD_GObj* gobj)

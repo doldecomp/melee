@@ -6,6 +6,7 @@
 
 #include "ft/fighter.h"
 
+#include <common_structs.h>
 #include <placeholder.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>
@@ -16,13 +17,13 @@ bool ft_8008239C(HSD_GObj* gobj, s32 facing_direction, f32* height_attributes);
 void ft_80084FA8(HSD_GObj* gobj);
 void ft_80084EEC(HSD_GObj* gobj);
 bool ft_800827A0(HSD_GObj* gobj);
-bool ft_80081D0C(HSD_GObj* gobj);
+GroundOrAir ft_80081D0C(HSD_GObj* gobj);
 void ft_80085134(HSD_GObj* gobj);
 
 /// CollisionCheck_StopLedge
 void ft_80084104(HSD_GObj* gobj);
 
-bool ft_80082708(HSD_GObj* gobj);
+GroundOrAir ft_80082708(HSD_GObj* gobj);
 void ft_80084F3C(HSD_GObj* gobj);
 void ft_80084280(HSD_GObj*);
 void ft_8008403C(HSD_GObj*, HSD_GObjEvent);

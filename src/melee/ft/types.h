@@ -1070,7 +1070,14 @@ struct Fighter {
             /* fp+221D:2 */ u16 x221C_u16_z : 6;
         };
     };
-    /* fp+221E */ UnkFlagStruct x221E_flag;
+    /* fp+221E:0 */ u8 x221E_b0 : 1;
+    /* fp+221E:1 */ u8 x221E_b1 : 1;
+    /* fp+221E:2 */ u8 x221E_b2 : 1;
+    /* fp+221E:3 */ u8 x221E_b3 : 1;
+    /* fp+221E:4 */ u8 x221E_b4 : 1;
+    /* fp+221E:5 */ u8 x221E_b5 : 1;
+    /* fp+221E:6 */ u8 x221E_b6 : 1;
+    /* fp+221E:7 */ u8 x221E_b7 : 1;
     /* fp+221F */ UnkFlagStruct x221F_flag;
     /* fp+2220 */ union {
         /* fp+2220 */ struct {
@@ -1132,7 +1139,7 @@ struct Fighter {
         /* fp+222C */ struct ftGameWatch_FighterVars gw;
         /* fp+222C */ struct ftKirby_FighterVars kb;
         /* fp+222C */ struct ftKoopa_FighterVars kp, gk;
-        /* fp+222C */ struct ftLink_FighterVars lk, cl;
+        /* fp+222C */ struct ftLk_FighterVars lk;
         /* fp+222C */ struct ftLuigi_FighterVars lg;
         /* fp+222C */ struct ftMario_FighterVars mr;
         /* fp+222C */ struct ftMars_FighterVars ms;

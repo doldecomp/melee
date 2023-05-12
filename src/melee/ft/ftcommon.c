@@ -1090,7 +1090,7 @@ void ftCommon_8007E2D0(Fighter* fp, s16 arg1, void (*cb0)(HSD_GObj*),
                        void (*cb1)(HSD_GObj*),
                        void (*cb2)(HSD_GObj*, HSD_GObj*))
 {
-    fp->x221E_flag.bits.b6 = 1;
+    fp->x221E_b6 = 1;
     fp->x1A68 = arg1;
     fp->cb.x2190_callback_OnGrabFighter_Self = cb0;
     fp->cb.x2198_callback_OnGrabFighter_Victim = cb2;
@@ -1552,7 +1552,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
         }
         ft_800C8A64(gobj);
     }
-    dst->x221E_flag.bits.b4 = src->x221E_flag.bits.b4;
+    dst->x221E_b4 = src->x221E_b4;
     if (src->x197C != NULL) {
         it_8026B9A8(src->x197C, dst_gobj, dst->ft_data->x8->unk12);
         it_802950D4(src->x197C, 0);
@@ -1574,7 +1574,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     ft_80081C88(dst_gobj, src->x34_scale.y);
     if (src->item_gobj != NULL) {
         dst->item_gobj = src->item_gobj;
-        dst->x221E_flag.bits.b3 = src->x221E_flag.bits.b3;
+        dst->x221E_b3 = src->x221E_b3;
         ft_80094818(dst_gobj, 1);
         it_8026B9A8(src->item_gobj, dst_gobj, dst->ft_data->x8->unk10);
     }
@@ -1609,7 +1609,7 @@ void ftCommon_8007F5CC(HSD_GObj* gobj, s32 arg1)
     u8 _[8];
 #endif
 
-    if (item != NULL && fp->x221E_flag.bits.b3 != arg1) {
+    if (item != NULL && fp->x221E_b3 != arg1) {
         if (arg1 == 0) {
             ftCommon_8007F578(gobj);
         } else if (item != NULL) {
@@ -1618,7 +1618,7 @@ void ftCommon_8007F5CC(HSD_GObj* gobj, s32 arg1)
             }
         }
     }
-    fp->x221E_flag.bits.b3 = arg1;
+    fp->x221E_b3 = arg1;
 }
 
 f32 ftCommon_GetModelScale(Fighter* fp)

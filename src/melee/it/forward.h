@@ -1,6 +1,7 @@
 #ifndef MELEE_IT_FORWARD_H
 #define MELEE_IT_FORWARD_H
 
+typedef struct HSD_GObj Item_GObj;
 typedef struct Article Article;
 typedef struct BobOmbRain BobOmbRain;
 typedef struct CameraBoxFlags CameraBoxFlags;

@@ -141,7 +141,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftLk_SpecialHi.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftLk_SpecialS.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftLk_SpecialN.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftLk_Init.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftKirby/ftKb_Init.c.o\

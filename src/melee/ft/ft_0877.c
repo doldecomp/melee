@@ -170,9 +170,9 @@ void ft_80087AC0(HSD_GObj* gobj, s32 arg1)
         var1 = true;
     }
     var0 = var1;
-    var2 = fp->x221E_flag.bits.b7;
+    var2 = fp->x221E_b7;
     var2 = var0;
-    fp->x221E_flag.bits.b0 = var2;
+    fp->x221E_b0 = var2;
 }
 
 s32 ft_80087AEC(HSD_GObj* gobj)

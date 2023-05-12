@@ -293,7 +293,7 @@ Fighter_CostumeStrings ftLk_Init_CostumeStrings[] = {
 
 int ftLk_Init_803C82EC[31] = { 0 };
 
-Vec3 const ftLk_Init_803B7520[3] = { 0 };
+ftLk_SpecialN_Vec3Group const ftLk_Init_Vec3Group = { 0 };
 
 bool ftLk_Init_BoomerangExists(HSD_GObj* gobj)
 {
@@ -313,10 +313,10 @@ void ftLk_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 1, 0);
     ftParts_80074A4C(gobj, 2, 0);
 
-    fp->fv.lk.used_boomerang = 0;
-    fp->fv.lk.boomerang_gobj = 0;
+    fp->fv.lk.used_boomerang = false;
+    fp->fv.lk.boomerang_gobj = NULL;
     fp->fv.lk.xC = 0;
-    fp->fv.lk.x10 = 0;
+    fp->fv.lk.arrow_gobj = NULL;
     fp->fv.lk.x14 = 0;
     fp->fv.lk.xC = 0;
     fp->fv.lk.x18 = 0;
