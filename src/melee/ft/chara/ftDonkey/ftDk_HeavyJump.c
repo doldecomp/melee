@@ -4,6 +4,7 @@
 
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_Wait.h"
 
 void ftDk_HeavyJump_IASA(HSD_GObj* gobj)
 {

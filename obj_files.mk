@@ -99,6 +99,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMr_Strings.c.o\
     $(BUILD_DIR)/src/melee/ft/ft_0877.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0877.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Wait.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_08A4.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyWait0.c.o\
