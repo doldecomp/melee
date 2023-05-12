@@ -117,6 +117,7 @@ class Options:
     andor_detection: bool
     skip_casts: bool
     zfill_constants: bool
+    force_decimal: bool
     heuristic_strings: bool
     reg_vars: List[str]
     goto_patterns: List[str]
@@ -145,6 +146,7 @@ class Options:
             self.coding_style,
             skip_casts=self.skip_casts,
             zfill_constants=self.zfill_constants,
+            force_decimal=self.force_decimal,
             valid_syntax=self.valid_syntax,
         )
 
@@ -172,6 +174,7 @@ class Formatter:
     valid_syntax: bool = False
     line_length: int = 80
     zfill_constants: bool = False
+    force_decimal: bool = False
 
     def indent(self, line: str, indent: int = 0) -> str:
         return self.indent_step * max(indent + self.extra_indent, 0) + line
@@ -227,7 +230,7 @@ class Formatter:
         return format(val, "x").upper()
 
     def format_int(self, val: int, size_bits: Optional[int] = None) -> str:
-        if abs(val) < 10:
+        if abs(val) < 10 or self.force_decimal:
             return str(val)
 
         if self.zfill_constants and size_bits is not None:
