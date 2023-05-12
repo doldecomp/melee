@@ -1075,7 +1075,7 @@ def build_switch_statement(
         else:
             remaining_labels.append((index, case_label))
     if len(remaining_labels) != len(context.case_nodes[end]):
-        switch_body.add_statement(SimpleStatement(f"break;", is_jump=True))
+        switch_body.add_statement(SimpleStatement("break;", is_jump=True))
         context.case_nodes[end] = remaining_labels
 
     # Order case blocks by their position in the asm, not by their order in the jump table
@@ -1097,7 +1097,7 @@ def build_switch_statement(
         ):
             switch_body.extend(build_flowgraph_between(context, case, next_case))
             if not switch_body.ends_in_jump():
-                switch_body.add_comment(f"fallthrough")
+                switch_body.add_comment("fallthrough")
         else:
             switch_body.extend(build_flowgraph_between(context, case, end))
             if not switch_body.ends_in_jump():
@@ -1191,7 +1191,7 @@ def build_flowgraph_between(
         if (
             not skip_loop_detection
             and curr_start.loop
-            and not curr_start in context.emitted_nodes
+            and curr_start not in context.emitted_nodes
         ):
             # Find the immediate postdominator to the whole loop,
             # i.e. the first node outside the loop body

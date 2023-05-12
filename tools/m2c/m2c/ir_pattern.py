@@ -3,13 +3,12 @@ from collections import defaultdict
 from dataclasses import dataclass, field, replace
 from typing import ClassVar, Dict, List, Optional, TypeVar
 
-from .error import DecompFailure, static_assert_unreachable
+from .error import static_assert_unreachable
 from .flow_graph import (
     ArchFlowGraph,
     BaseNode,
     FlowGraph,
     InstrRef,
-    Instruction,
     LocationRefSetDict,
     RefSet,
     Reference,

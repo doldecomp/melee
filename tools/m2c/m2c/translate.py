@@ -10,7 +10,6 @@ import typing
 from typing import (
     AbstractSet,
     Callable,
-    Collection,
     DefaultDict,
     Dict,
     Iterator,
@@ -2928,7 +2927,6 @@ def reg_sources(node: Node, reg: Register) -> Tuple[List[Reference], bool]:
         if n in seen:
             continue
         seen.add(n)
-        clobbered: Optional[bool] = None
         for instr_ref in reversed(list(n.block.instruction_refs)):
             instr = instr_ref.instruction
             if reg in instr.outputs:
@@ -4102,8 +4100,8 @@ class GlobalInfo:
 
                 sort_order = (
                     not sym.type.is_function(),
-                    is_global,
                     is_in_file,
+                    is_global if not is_in_file else False,
                     is_const,
                     data_entry.sort_order if data_entry is not None else ("", 0),
                     name,
