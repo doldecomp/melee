@@ -8,6 +8,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
 #include "ftCommon/ftCo_Attack1.h"
+#include "ftCommon/ftCo_AttackS3.h"
 
 #include <trigf.h>
 
@@ -177,7 +178,7 @@ void ftSs_SpecialLw_IASA(HSD_GObj* gobj)
     if (ft_8008CB44(gobj)) {
         return;
     }
-    if (ft_8008B658(gobj)) {
+    if (ftCo_AttackS3_8008B658(gobj)) {
         return;
     }
     if (ft_8008B980(gobj)) {

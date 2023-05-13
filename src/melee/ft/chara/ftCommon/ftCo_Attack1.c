@@ -6,6 +6,7 @@
 #include "ftCo_Attack1.h"
 
 #include "ftCo_08A6.h"
+#include "ftCo_AttackS3.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
@@ -132,7 +133,8 @@ void ftCo_Attack11_IASA(ftCo_GObj* gobj)
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if ((!fp->x2218_b0 ||
          (!ft_8008BFC4(gobj) && !ft_8008C830(gobj) && !ft_8008CB44(gobj) &&
-          !ft_8008B658(gobj) && !ft_8008B980(gobj) && !ft_8008BB44(gobj))) &&
+          !ftCo_AttackS3_8008B658(gobj) && !ft_8008B980(gobj) &&
+          !ft_8008BB44(gobj))) &&
         !ftCo_Attack_800D6A50(gobj) && !checkAttack12(gobj) && fp->x2218_b0 &&
         !ft_800CAED0(gobj) && !ft_800CA094(gobj) && !ft_800D5FB0(gobj) &&
         !ft_800C97DC(gobj) && !ft_800C9468(gobj))
@@ -227,7 +229,8 @@ void ftCo_Attack12_IASA(ftCo_GObj* gobj)
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if ((!fp->x2218_b0 ||
          (!ft_8008BFC4(gobj) && !ft_8008C830(gobj) && !ft_8008CB44(gobj) &&
-          !ft_8008B658(gobj) && !ft_8008B980(gobj) && !ft_8008BB44(gobj))) &&
+          !ftCo_AttackS3_8008B658(gobj) && !ft_8008B980(gobj) &&
+          !ft_8008BB44(gobj))) &&
         !ftCo_Attack_800D6A50(gobj) && !checkAttack13(gobj) && fp->x2218_b0 &&
         !ft_800CAED0(gobj) && !ft_800CA094(gobj) && !ft_800D5FB0(gobj) &&
         !ft_800C97DC(gobj) && !ft_800C9468(gobj))
