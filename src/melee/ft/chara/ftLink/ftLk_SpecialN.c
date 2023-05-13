@@ -1984,7 +1984,7 @@ void ftLk_SpecialNEnd_Coll(ftLk_GObj* gobj)
 {
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     doEndColl(gobj);
-    if (!ft_80082708(gobj)) {
+    if (ft_80082708(gobj) == GA_Ground) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirNEnd, coll_mf, NULL,
                                   fp->cur_anim_frame, 1, 0);

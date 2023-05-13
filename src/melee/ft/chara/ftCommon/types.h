@@ -25,6 +25,9 @@ union ftCommon_MotionVars {
         /* fp+235C */ float fast_anim_rate;
         /* fp+2360 */ float accel_mul;
     } walk;
+    struct ftCo_Attack1Vars {
+        /* fp+2340 */ bool x0;
+    } attack1;
 };
 
 #endif

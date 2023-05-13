@@ -283,7 +283,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->dmg.x18a0 = 0.0f;
     fp->x1968_jumpsUsed = 0;
     fp->x1969_walljumpUsed = 0;
-    fp->x196C_hitlag_mult = 0.0f;
+    fp->hitlag_mul = 0.0f;
     fp->x2064_ledgeCooldown = 0;
 
     fp->dmg.x1830_percent = Player_GetDamage(fp->xC_playerID);
@@ -1128,7 +1128,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, FtMotionId msid,
     }
 
     if ((msid != 0xE) && (msid != 0xF) && (msid != 0x10) && (msid != 0x11)) {
-        fp->x196C_hitlag_mult = 0.0f;
+        fp->hitlag_mul = 0.0f;
     }
 
     if ((flags & Ft_MF_KeepSfx) == 0) {
