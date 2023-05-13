@@ -323,9 +323,9 @@ static inline bool checkBoomerangSomething(HSD_GObj* gobj)
         return true;
     } else if (ft_80091A4C(gobj)) {
         return true;
-    } else if (ft_800CAED0(gobj)) {
+    } else if (ftCo_Jump_CheckInput(gobj)) {
         return true;
-    } else if (ft_800CA094(gobj)) {
+    } else if (ftCo_Dash_CheckInput(gobj)) {
         return true;
     } else {
         return false;

@@ -18,7 +18,7 @@ static void ftSamus_ClearThrowFlagsUnk(HSD_GObj* gobj)
 void ftSs_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
+    ftSs_DatAttrs* samus_attr = getFtSpecialAttrs(fp);
     fp->gr_vel /= samus_attr->x2C;
     fp->self_vel.y = 0.0f;
     if (fp->x673 < samus_attr->x28) {
@@ -34,7 +34,7 @@ void ftSs_SpecialS_Enter(HSD_GObj* gobj)
 void ftSs_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
+    ftSs_DatAttrs* samus_attr = getFtSpecialAttrs(fp);
     fp->self_vel.x /= samus_attr->x2C;
     if (fp->x673 < samus_attr->x28) {
         Fighter_ChangeMotionState(gobj, 0x160, 0, NULL, 0.0f, 1.0f, 0.0f);
@@ -87,7 +87,7 @@ void ftSs_SpecialAirS_Phys(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
+    ftSs_DatAttrs* samus_attr = getFtSpecialAttrs(fp);
     Fighter* fighter2;
     ftCommon_8007D4B8(fp);
     fighter2 = fp;
@@ -150,8 +150,8 @@ void ftSs_SpecialAirSSmash_Phys(HSD_GObj* gobj)
 
     Fighter* fighter2;
     Fighter* fp;
-    ftSamusAttributes* samus_attr;
-    ftSamusAttributes* samus_attr2;
+    ftSs_DatAttrs* samus_attr;
+    ftSs_DatAttrs* samus_attr2;
     fp = fighter2 = GET_FIGHTER(gobj);
     samus_attr = getFtSpecialAttrs(fp);
     ftCommon_8007D4B8(fp);

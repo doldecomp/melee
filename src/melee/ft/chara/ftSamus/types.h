@@ -56,7 +56,7 @@ typedef struct _ftSamusAttributes {
     f32 x80;
     f32 height_attributes[6];
     u8 data_filler_4[0xD4 - 0x9C];
-} ftSamusAttributes;
+} ftSs_DatAttrs;
 
 /// maybe Samus grapple?
 struct UNK_SAMUS_S1 {

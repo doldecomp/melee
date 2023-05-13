@@ -11,6 +11,7 @@
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_Attack1.h"
 #include "ftCommon/ftCo_AttackHi3.h"
+#include "ftCommon/ftCo_AttackLw3.h"
 #include "ftCommon/ftCo_AttackS3.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
@@ -157,50 +158,23 @@ void ftGw_AttackLw3_Anim(HSD_GObj* gobj)
     }
 }
 
-// 0x8014AE78
-// https://decomp.me/scratch/qzCi0 // Mr. Game & Watch's Down Tilt IASA
-// callback
+/// Mr. Game & Watch's Down Tilt IASA callback
 void ftGw_AttackLw3_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->allow_interrupt == 0) {
-        return;
-    }
-    if (ft_8008BFC4(gobj) != false) {
-        return;
-    }
-    if (ft_8008C830(gobj) != false) {
-        return;
-    }
-    if (ft_8008CB44(gobj) != false) {
-        return;
-    }
-    if (ftCo_AttackS3_CheckInput(gobj) != false) {
-        return;
-    }
-    if (ftCo_AttackHi3_CheckInput(gobj) != false) {
-        return;
-    }
-    if (ft_8008BB44(gobj) != false) {
-        return;
-    }
-    if (ftCo_Attack1_CheckInput(gobj) != false) {
-        return;
-    }
-    if (ft_800CAED0(gobj) != false) {
-        return;
-    }
-    if (ft_800CA094(gobj) != false) {
-        return;
-    }
-    if (ft_800D5F58(gobj) != false) {
-        return;
-    }
-    if (ft_800C97DC(gobj) != false) {
-        return;
-    }
-    if (ft_800C9468(gobj) != false) {
-        return;
+    if (fp->allow_interrupt) {
+        GUARD(ftCo_AttackS4_CheckInput(gobj))
+        GUARD(ftCo_AttackHi4_CheckInput(gobj))
+        GUARD(ftCo_AttackLw4_CheckInput(gobj))
+        GUARD(ftCo_AttackS3_CheckInput(gobj))
+        GUARD(ftCo_AttackHi3_CheckInput(gobj))
+        GUARD(ftCo_AttackLw3_CheckInput(gobj))
+        GUARD(ftCo_Attack1_CheckInput(gobj))
+        GUARD(ftCo_Jump_CheckInput(gobj))
+        GUARD(ftCo_Dash_CheckInput(gobj))
+        GUARD(ftCo_Squat_CheckInput(gobj))
+        GUARD(ftCo_Turn_CheckInput(gobj))
+        GUARD(ftCo_Walk_CheckInput(gobj))
     }
 }
 

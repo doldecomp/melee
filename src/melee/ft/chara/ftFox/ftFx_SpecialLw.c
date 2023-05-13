@@ -318,7 +318,7 @@ static bool ftFx_SpecialLwLoop_CheckPass(HSD_GObj* gobj);
 void ftFx_SpecialLwLoop_IASA(HSD_GObj* gobj)
 {
     if ((ftFx_SpecialLwTurn_Check(gobj) == false) &&
-        (ft_800CAED0(gobj) == false))
+        (ftCo_Jump_CheckInput(gobj) == false))
     {
         if (ftFx_SpecialLwLoop_CheckPass(gobj)) {
             return;
