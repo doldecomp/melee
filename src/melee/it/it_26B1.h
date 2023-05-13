@@ -8,7 +8,8 @@
 /// Transfer item on character swap - used for Zelda <-> Sheik
 void it_8026B9A8(HSD_GObj* gobj, HSD_GObj* arg1, u8 arg2);
 
-s32 it_8026B30C(HSD_GObj*);
+/// Return flag from Item Attributes
+enum_t it_8026B30C(Item_GObj* gobj);
 
 /// Return item hold kind
 s32 it_8026B320(HSD_GObj*);
@@ -29,9 +30,6 @@ bool it_8026B2D8(HSD_GObj* gobj);
 
 /// Get Item ID
 s32 itGetKind(HSD_GObj* gobj);
-
-/// Return flag from Item Attributes
-s32 it_8026B30C(HSD_GObj* gobj);
 
 /// Return item damage multiplier
 f32 it_8026B334(HSD_GObj* gobj);

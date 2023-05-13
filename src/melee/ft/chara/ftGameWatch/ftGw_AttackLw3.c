@@ -9,6 +9,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_Attack1.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
@@ -181,7 +182,7 @@ void ftGw_AttackLw3_IASA(HSD_GObj* gobj)
     if (ft_8008BB44(gobj) != false) {
         return;
     }
-    if (ft_8008A9F8(gobj) != false) {
+    if (ftCo_Attack1_DecideMotion(gobj) != false) {
         return;
     }
     if (ft_800CAED0(gobj) != false) {

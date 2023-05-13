@@ -92,10 +92,11 @@ s32 itGetKind(HSD_GObj* gobj) // Get Item ID
     return temp_item->kind;
 }
 
-s32 it_8026B30C(HSD_GObj* gobj) // Return flag from Item Attributes
+/// Return flag from Item Attributes
+enum_t it_8026B30C(Item_GObj* gobj)
 {
-    Item* temp_item = gobj->user_data;
-    return temp_item->xCC_item_attr->x0_78;
+    Item* ip = GET_ITEM(gobj);
+    return ip->xCC_item_attr->x0_78;
 }
 
 s32 it_8026B320(HSD_GObj* gobj) // Return item hold kind

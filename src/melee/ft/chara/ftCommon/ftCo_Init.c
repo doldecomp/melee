@@ -1,6 +1,7 @@
 #include <platform.h>
 #include "ftCommon/forward.h"
 
+#include "ftCo_Attack1.h"
 #include "ftCo_Wait.h"
 
 #include "ft/ft_0877.h"
@@ -505,8 +506,8 @@ MotionState ftData_MotionStateList[ftCo_MS_Count] = {
         (FtMoveId_Attack11 << 24) | (1 << 23),
         ftCo_Attack11_Anim,
         ftCo_Attack11_IASA,
-        ftCo_Attack1_Phys,
-        ftCo_Attack1_Coll,
+        ftCo_Attack11_Phys,
+        ftCo_Attack11_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -516,8 +517,8 @@ MotionState ftData_MotionStateList[ftCo_MS_Count] = {
         (FtMoveId_Attack12 << 24) | (1 << 23),
         ftCo_Attack12_Anim,
         ftCo_Attack12_IASA,
-        ftCo_Attack1_Phys,
-        ftCo_Attack1_Coll,
+        ftCo_Attack11_Phys,
+        ftCo_Attack11_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -527,8 +528,8 @@ MotionState ftData_MotionStateList[ftCo_MS_Count] = {
         (FtMoveId_Attack13 << 24) | (1 << 23),
         ftCo_Attack13_Anim,
         ftCo_Attack13_IASA,
-        ftCo_Attack1_Phys,
-        ftCo_Attack1_Coll,
+        ftCo_Attack11_Phys,
+        ftCo_Attack11_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
