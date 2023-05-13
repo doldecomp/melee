@@ -94,7 +94,11 @@ typedef struct _ftCommonData {
     /* +8C */ int x8C;
     /* +90 */ u8 x90[0x98 - 0x90];
     /* +98 */ float x98_shieldHealthInit;
-    /* +9C */ u8 x9C[0xEC - 0x9C];
+    /* +9C */ float x9C;
+    /* +A0 */ float xA0;
+    /* +A4 */ float xA4;
+    /* +A8 */ float xA8;
+    /* +A8 */ u8 xE0[0xEC - 0xAC];
     /* +EC */ float xEC;
     /* +F0 */ float xF0;
     /* +F4 */ u8 xF4[0x128 - 0xF4];

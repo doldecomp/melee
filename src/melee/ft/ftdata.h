@@ -1,6 +1,8 @@
 #ifndef MELEE_FT_FTDATA_H
 #define MELEE_FT_FTDATA_H
 
+#include "ft/forward.h"
+
 #include "ft/fighter.h"
 
 #include <baselib/gobj.h>
@@ -24,5 +26,11 @@ void ftData_80085B10(Fighter*);
 void ftData_80085CD8(Fighter*, Fighter*, s32 msid);
 u32 ftData_80085E50(Fighter*, u32);
 void ftData_80085560(s32, bool);
+
+/* 085FD4 */ struct {
+    /* +0 */ UNK_T x0;
+    /* +4 */ UNK_T x4;
+    /* +8 */ UNK_T x8;
+}* ftData_80085FD4(Fighter* fp, FtMotionId msid);
 
 #endif

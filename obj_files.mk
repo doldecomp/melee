@@ -103,6 +103,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_08A6.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Attack1.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackDash.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackS3.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_08A4.s.o\
 
 TEXT_O_FILES +=\
