@@ -18,7 +18,7 @@
 static void ftSamus_801293BC_inner(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSamusAttributes* samus_attr = fp->dat_attrs;
+    ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -94,7 +94,7 @@ static bool ftSs_SpecialN_801292E4(HSD_GObj* gobj)
 
 static void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
 {
-    ftSamusAttributes* samus_attr;
+    ftSs_DatAttrs* samus_attr;
     HSD_GObj* held_item;
     Fighter* fp;
     f64 var_f0;
@@ -185,7 +185,7 @@ void ftSs_SpecialAirN_Enter(HSD_GObj* gobj)
 void ftSs_SpecialNStart_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSamusAttributes* samus_attr = fp->dat_attrs;
+    ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -212,8 +212,8 @@ void ftSs_SpecialNHold_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
     Fighter* fighter2;
-    ftSamusAttributes* samus_attr;
-    ftSamusAttributes* samus_attr2;
+    ftSs_DatAttrs* samus_attr;
+    ftSs_DatAttrs* samus_attr2;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -292,7 +292,7 @@ void ftSs_SpecialAirNStart_Anim(HSD_GObj* gobj)
 void ftSs_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
+    ftSs_DatAttrs* samus_attr = getFtSpecialAttrs(fp);
     ftSs_SpecialN_801293BC(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (samus_attr->x24 == 0) {
@@ -452,7 +452,7 @@ void ftSs_SpecialS_8012A074(HSD_GObj* gobj)
 {
     bool bool1;
     Fighter* fp = getFighter(gobj);
-    ftSamusAttributes* samus_attr = fp->dat_attrs;
+    ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
     if (fp->throw_flags.b0) {
         fp->throw_flags.b0 = 0;

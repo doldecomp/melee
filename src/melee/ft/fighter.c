@@ -103,28 +103,28 @@ u32 Fighter_804D64F8 = 0;
 #define g_spawnNumCounter Fighter_804D64F8
 
 // the following seems to be an array, initialized in reverse in
-unk_t Fighter_804D64FC = NULL;
-unk_t Fighter_804D6500 = NULL;
-unk_t Fighter_804D6504 = NULL;
-unk_t Fighter_804D6508 = NULL;
-unk_t Fighter_804D650C = NULL;
-unk_t Fighter_804D6510 = NULL;
-unk_t Fighter_804D6514 = NULL;
-unk_t Fighter_804D6518 = NULL;
-unk_t Fighter_804D651C = NULL;
-unk_t Fighter_804D6520 = NULL;
-unk_t Fighter_804D6524 = NULL;
-unk_t Fighter_804D6528 = NULL;
-unk_t Fighter_804D652C = NULL;
-unk_t Fighter_804D6530 = NULL;
-unk_t Fighter_804D6534 = NULL;
-unk_t Fighter_804D6538 = NULL;
-unk_t Fighter_804D653C = NULL;
-s32** Fighter_804D6540 = NULL;
+UNK_T Fighter_804D64FC = NULL;
+UNK_T Fighter_804D6500 = NULL;
+UNK_T Fighter_804D6504 = NULL;
+UNK_T Fighter_804D6508 = NULL;
+UNK_T Fighter_804D650C = NULL;
+UNK_T Fighter_804D6510 = NULL;
+UNK_T Fighter_804D6514 = NULL;
+UNK_T Fighter_804D6518 = NULL;
+UNK_T Fighter_804D651C = NULL;
+UNK_T Fighter_804D6520 = NULL;
+UNK_T Fighter_804D6524 = NULL;
+UNK_T Fighter_804D6528 = NULL;
+UNK_T Fighter_804D652C = NULL;
+UNK_T Fighter_804D6530 = NULL;
+UNK_T Fighter_804D6534 = NULL;
+UNK_T Fighter_804D6538 = NULL;
+UNK_T Fighter_804D653C = NULL;
+int** Fighter_804D6540 = NULL;
 FighterPartsTable** ftPartsTable = NULL;
-unk_t Fighter_804D6548 = NULL;
-unk_t Fighter_804D654C = NULL;
-unk_t Fighter_804D6550 = NULL;
+UNK_T Fighter_804D6548 = NULL;
+UNK_T Fighter_804D654C = NULL;
+UNK_T Fighter_804D6550 = NULL;
 ftCommonData* p_ftCommonData;
 
 void Fighter_800679B0(void)

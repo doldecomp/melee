@@ -6,6 +6,7 @@
 #include "ftCo_08A6.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackHi3.h"
+#include "ftCo_AttackLw3.h"
 #include "ftCo_AttackS3.h"
 
 #include "ft/ft_081B.h"
@@ -29,18 +30,27 @@ void ftCo_Wait_Anim(HSD_GObj* gobj)
 
 void ftCo_Wait_IASA(ftCo_GObj* gobj)
 {
-    if (!ft_80096540(gobj) && !ft_800D695C(gobj) && !ft_800D6824(gobj) &&
-        !ft_800D68C0(gobj) && !ft_800D8990(gobj) && !ft_8008BFC4(gobj) &&
-        !ft_8008C830(gobj) && !ft_8008CB44(gobj) &&
-        !ftCo_AttackS3_CheckInput(gobj) && !ftCo_AttackHi3_CheckInput(gobj) &&
-        !ft_8008BB44(gobj) && !ftCo_Attack1_CheckInput(gobj) &&
-        !ft_80099794(gobj) && !ft_80091A4C(gobj) &&
-        !ftFx_AppealS_CheckInput(gobj) && !ft_800DE9D8(gobj) &&
-        !ft_800CAED0(gobj) && !ft_800CA094(gobj) && !ft_800D5FB0(gobj) &&
-        !ft_800C97DC(gobj) && !ft_800C9468(gobj))
-    {
-        return;
-    }
+    GUARD(ft_80096540(gobj))
+    GUARD(ft_800D695C(gobj))
+    GUARD(ft_800D6824(gobj))
+    GUARD(ft_800D68C0(gobj))
+    GUARD(ft_800D8990(gobj))
+    GUARD(ftCo_AttackS4_CheckInput(gobj))
+    GUARD(ftCo_AttackHi4_CheckInput(gobj))
+    GUARD(ftCo_AttackLw4_CheckInput(gobj))
+    GUARD(ftCo_AttackS3_CheckInput(gobj))
+    GUARD(ftCo_AttackHi3_CheckInput(gobj))
+    GUARD(ftCo_AttackLw3_CheckInput(gobj))
+    GUARD(ftCo_Attack1_CheckInput(gobj))
+    GUARD(ft_80099794(gobj))
+    GUARD(ft_80091A4C(gobj))
+    GUARD(ftFx_AppealS_CheckInput(gobj))
+    GUARD(ft_800DE9D8(gobj))
+    GUARD(ftCo_Jump_CheckInput(gobj))
+    GUARD(ftCo_Dash_CheckInput(gobj))
+    GUARD(ft_800D5FB0(gobj))
+    GUARD(ftCo_Turn_CheckInput(gobj))
+    GUARD(ftCo_Walk_CheckInput(gobj))
 }
 
 void ftCo_Wait_Phys(HSD_GObj* gobj)

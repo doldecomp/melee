@@ -164,4 +164,9 @@ typedef void (*Event)(void);
 
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 
+#define GUARD(cond)                                                           \
+    if ((cond)) {                                                             \
+        return;                                                               \
+    }
+
 #endif

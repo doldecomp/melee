@@ -7,6 +7,7 @@
 
 #include "ftCo_08A6.h"
 #include "ftCo_AttackHi3.h"
+#include "ftCo_AttackLw3.h"
 #include "ftCo_AttackS3.h"
 
 #include "ft/ft_081B.h"
@@ -132,15 +133,22 @@ void ftCo_Attack11_Anim(ftCo_GObj* arg0)
 void ftCo_Attack11_IASA(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if ((!fp->allow_interrupt ||
-         (!ft_8008BFC4(gobj) && !ft_8008C830(gobj) && !ft_8008CB44(gobj) &&
-          !ftCo_AttackS3_CheckInput(gobj) &&
-          !ftCo_AttackHi3_CheckInput(gobj) && !ft_8008BB44(gobj))) &&
-        !ftCo_Attack_800D6A50(gobj) && !checkAttack12(gobj) &&
-        fp->allow_interrupt && !ft_800CAED0(gobj) && !ft_800CA094(gobj) &&
-        !ft_800D5FB0(gobj) && !ft_800C97DC(gobj) && !ft_800C9468(gobj))
-    {
-        return;
+    if (fp->allow_interrupt) {
+        GUARD(ftCo_AttackS4_CheckInput(gobj))
+        GUARD(ftCo_AttackHi4_CheckInput(gobj))
+        GUARD(ftCo_AttackLw4_CheckInput(gobj))
+        GUARD(ftCo_AttackS3_CheckInput(gobj))
+        GUARD(ftCo_AttackHi3_CheckInput(gobj))
+        GUARD(ftCo_AttackLw3_CheckInput(gobj))
+    }
+    GUARD(ftCo_Attack_800D6A50(gobj))
+    GUARD(checkAttack12(gobj))
+    if (fp->allow_interrupt) {
+        GUARD(ftCo_Jump_CheckInput(gobj))
+        GUARD(ftCo_Dash_CheckInput(gobj))
+        GUARD(ft_800D5FB0(gobj))
+        GUARD(ftCo_Turn_CheckInput(gobj))
+        GUARD(ftCo_Walk_CheckInput(gobj))
     }
 }
 
@@ -196,7 +204,7 @@ static void doAttack12(ftCo_GObj* gobj)
 
 bool checkAttack12(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
+/// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[16] = { 0 };
 #endif
@@ -216,7 +224,7 @@ bool checkAttack12(ftCo_GObj* gobj)
 
 void ftCo_Attack12_Anim(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
+/// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8] = { 0 };
 #endif
@@ -228,15 +236,22 @@ void ftCo_Attack12_Anim(ftCo_GObj* gobj)
 void ftCo_Attack12_IASA(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if ((!fp->allow_interrupt ||
-         (!ft_8008BFC4(gobj) && !ft_8008C830(gobj) && !ft_8008CB44(gobj) &&
-          !ftCo_AttackS3_CheckInput(gobj) &&
-          !ftCo_AttackHi3_CheckInput(gobj) && !ft_8008BB44(gobj))) &&
-        !ftCo_Attack_800D6A50(gobj) && !checkAttack13(gobj) &&
-        fp->allow_interrupt && !ft_800CAED0(gobj) && !ft_800CA094(gobj) &&
-        !ft_800D5FB0(gobj) && !ft_800C97DC(gobj) && !ft_800C9468(gobj))
-    {
-        return;
+    if (fp->allow_interrupt) {
+        GUARD(ftCo_AttackS4_CheckInput(gobj))
+        GUARD(ftCo_AttackHi4_CheckInput(gobj))
+        GUARD(ftCo_AttackLw4_CheckInput(gobj))
+        GUARD(ftCo_AttackS3_CheckInput(gobj))
+        GUARD(ftCo_AttackHi3_CheckInput(gobj))
+        GUARD(ftCo_AttackLw3_CheckInput(gobj))
+    }
+    GUARD(ftCo_Attack_800D6A50(gobj))
+    GUARD(checkAttack13(gobj))
+    if (fp->allow_interrupt) {
+        GUARD(ftCo_Jump_CheckInput(gobj))
+        GUARD(ftCo_Dash_CheckInput(gobj))
+        GUARD(ft_800D5FB0(gobj))
+        GUARD(ftCo_Turn_CheckInput(gobj))
+        GUARD(ftCo_Walk_CheckInput(gobj))
     }
 }
 

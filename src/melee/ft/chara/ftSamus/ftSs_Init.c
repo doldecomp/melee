@@ -269,7 +269,7 @@ void ftSs_Init_OnLoad(HSD_GObj* gobj)
 
     fp->x2224_flag.bits.b7 = 1;
 
-    PUSH_ATTRS(fp, ftSamusAttributes);
+    PUSH_ATTRS(fp, ftSs_DatAttrs);
 
     it_8026B3F8(item_list[0], 93);
     it_8026B3F8(item_list[1], 94);
@@ -307,7 +307,7 @@ void ftSs_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 void ftSs_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftSamusAttributes* da = fp->dat_attrs;
+    ftSs_DatAttrs* da = fp->dat_attrs;
     s32 samus_x2230 = fp->fv.ss.x2230;
     if (samus_x2230 == da->x18) {
         ft_800BFFD0(fp, 53, 0);
@@ -316,7 +316,7 @@ void ftSs_Init_UnkMotionStates4(HSD_GObj* gobj)
 
 void ftSs_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(gobj, ftSamusAttributes);
+    COPY_ATTRS(gobj, ftSs_DatAttrs);
     if (fp->x34_scale.y != 1.0f) {
         sA2->x8 *= fp->x34_scale.y;
         sA2->x74_vec.y *= fp->x34_scale.y;

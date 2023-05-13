@@ -44,7 +44,7 @@ extern void* Fighter_804D6530;
 extern void* Fighter_804D6534;
 extern void* Fighter_804D6538;
 extern void* Fighter_804D653C;
-extern s32** Fighter_804D6540;
+extern int** Fighter_804D6540;
 extern void* Fighter_804D6548;
 extern void* Fighter_804D654C;
 extern void* Fighter_804D6550;
