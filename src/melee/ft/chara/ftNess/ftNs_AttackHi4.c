@@ -630,7 +630,7 @@ void ftNs_AttackHi4_Enter(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    fp->x2218_b0 = 0;
+    fp->allow_interrupt = 0;
     fp->mv.ns.attackhi4.isChargeDisable = false;
 
     {
@@ -755,7 +755,7 @@ void ftNs_AttackHi4_IASA(HSD_GObj* gobj) // Ness's Up Smash IASA callback
                   // instance
     }
 
-    if (fp->x2218_b0 != 0) {
+    if (fp->allow_interrupt != 0) {
         ftCo_Wait_IASA(gobj);
     }
 }
@@ -954,7 +954,7 @@ void ftNs_AttackHi4Release_IASA(
     HSD_GObj* gobj) // Ness's Up Smash Post-Charge IASA
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x2218_b0 != 0) {
+    if (fp->allow_interrupt != 0) {
         ftCo_Wait_IASA(gobj);
     }
 }

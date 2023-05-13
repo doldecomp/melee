@@ -165,7 +165,7 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
 #endif
 
     if (ft_80094790(gobj) == false) {
-        fp->x2218_b0 = 0;
+        fp->allow_interrupt = 0;
         fp->x2218_b1 = 0;
         Fighter_ChangeMotionState(gobj, ftGw_MS_Attack11, 0, NULL, 0.0f, 1.0f,
                                   0.0f);

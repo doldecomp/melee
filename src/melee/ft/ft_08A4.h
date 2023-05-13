@@ -6,6 +6,7 @@
 
 #include <placeholder.h>
 
+/* 094E54 */ bool ft_80094E54(ftCo_Fighter* fp);
 /* 0C8B74 */ void ft_800C8B74(void);
 /* 0D5FB0 */ bool ft_800D5FB0(ftCo_GObj* gobj);
 /* 0D8A38 */ UNK_RET lbl_800D8A38(UNK_PARAMS);

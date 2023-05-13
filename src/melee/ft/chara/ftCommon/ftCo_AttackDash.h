@@ -4,7 +4,7 @@
 #include <platform.h>
 #include "ftCommon/forward.h"
 
-/* 08B3E4 */ bool ftCo_AttackDash_DecideMotion(ftCo_GObj* gobj);
+/* 08B3E4 */ bool ftCo_AttackDash_CheckInput(ftCo_GObj* gobj);
 /* 08B548 */ void ftCo_AttackDash_Anim(ftCo_GObj* gobj);
 /* 08B584 */ void ftCo_AttackDash_SetMv0(ftCo_GObj* gobj);
 /* 08B5AC */ void ftCo_AttackDash_IASA(ftCo_GObj* gobj);

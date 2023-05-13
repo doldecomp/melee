@@ -29,7 +29,7 @@ void ftNs_AttackS4_Enter(HSD_GObj* gobj) // Ness's F-Smash Motion State handler
 
     fp = GET_FIGHTER(gobj);
 
-    fp->x2218_b0 = 0;
+    fp->allow_interrupt = 0;
 
     fp->cmd_vars[0] = false;
 
@@ -140,7 +140,7 @@ void ftNs_AttackS4_IASA(HSD_GObj* gobj) // Ness's F-Smash IASA Callback
     u8 _[8];
 #endif
 
-    if (fp->x2218_b0 != 0) {
+    if (fp->allow_interrupt != 0) {
         if (fp->fv.ns.bat_gobj != NULL) {
             it_802AD6B8(fp->fv.ns.bat_gobj);
             fp->fv.ns.bat_gobj = NULL;

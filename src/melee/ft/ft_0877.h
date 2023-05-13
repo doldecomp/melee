@@ -21,7 +21,6 @@ extern char ftMr_Init_AnimDatFilename[];
 
 bool ftColl_8007B868(HSD_GObj*);
 bool ft_8008A1FC(HSD_GObj*);
-bool ft_8008B980(HSD_GObj*);
 bool ft_8008BB44(HSD_GObj*);
 bool ft_8008BFC4(HSD_GObj*);
 bool ft_8008C830(HSD_GObj*);
