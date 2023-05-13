@@ -28,6 +28,9 @@ union ftCommon_MotionVars {
     struct ftCo_Attack1Vars {
         /* fp+2340 */ bool x0;
     } attack1;
+    struct ftCo_AttackDashVars {
+        /* fp+2340 */ int x0;
+    } attackdash;
 };
 
 #endif

@@ -4306,8 +4306,6 @@ lbl_80084F88:
 #pragma pop
 #endif
 
-void ft_80085030(void);
-
 #ifdef MWERKS_GEKKO
 
 #pragma push
@@ -4367,7 +4365,7 @@ asm void ft_80085004(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_80085030(void)
+asm void ft_80085030(ftCo_GObj*, ftCommonData*, float, float)
 {
     // clang-format off
     nofralloc
@@ -4399,7 +4397,6 @@ lbl_8008506C:
 #pragma pop
 #endif
 
-void ft_80085030(void);
 void ft_800850E0(void);
 
 #ifdef MWERKS_GEKKO

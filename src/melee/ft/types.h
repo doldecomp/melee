@@ -76,7 +76,16 @@ typedef struct _ftCommonData {
     /* +3C */ float x3C;
     /* +40 */ int x40;
     /* +44 */ float x44;
-    /* +48 */ u8 x48[0x70 - 0x48];
+    /* +48 */ UNK_T x48;
+    /* +4C */ UNK_T x4C;
+    /* +50 */ float x50;
+    /* +54 */ UNK_T x54;
+    /* +58 */ UNK_T x58;
+    /* +5C */ UNK_T x5C;
+    /* +60 */ UNK_T x60;
+    /* +64 */ UNK_T x64;
+    /* +68 */ float x68;
+    /* +6C */ UNK_T x6C;
     /* +70 */ float x70_someLStickYMax;
     /* +74 */ u8 x74[0x78 - 0x74];
     /* +78 */ float x78;
