@@ -98,7 +98,8 @@ typedef struct _ftCommonData {
     /* +A0 */ float xA0;
     /* +A4 */ float xA4;
     /* +A8 */ float xA8;
-    /* +A8 */ u8 xE0[0xEC - 0xAC];
+    /* +AC */ float attackhi3_stick_threshold_y;
+    /* +A8 */ u8 xE0[0xEC - 0xB0];
     /* +EC */ float xEC;
     /* +F0 */ float xF0;
     /* +F4 */ u8 xF4[0x128 - 0xF4];
@@ -1034,7 +1035,7 @@ struct Fighter {
     /* fp+2200 */ u32 cmd_vars[4];
     /* fp+2210 */ ThrowFlags throw_flags;
     /* fp+2214 */ f32 x2214;
-    /* fp+2218:0 */ u8 x2218_b0 : 1;
+    /* fp+2218:0 */ u8 allow_interrupt : 1;
     /* fp+2218:1 */ u8 x2218_b1 : 1;
     /* fp+2218:2 */ u8 x2218_b2 : 1;
     /* fp+2218:3 */ u8 x2218_b3 : 1;

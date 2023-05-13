@@ -10,6 +10,7 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_Attack1.h"
+#include "ftCommon/ftCo_AttackHi3.h"
 #include "ftCommon/ftCo_AttackS3.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
@@ -133,7 +134,7 @@ void ftGw_AttackLw3_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (ft_80094790(gobj) == false) {
-        fp->x2218_b0 = 0;
+        fp->allow_interrupt = 0;
         Fighter_ChangeMotionState(gobj, ftGw_MS_AttackLw3, 0, NULL, 0.0f, 1.0f,
                                   0.0f);
         ftAnim_8006EBA4(gobj);
@@ -162,7 +163,7 @@ void ftGw_AttackLw3_Anim(HSD_GObj* gobj)
 void ftGw_AttackLw3_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x2218_b0 == 0) {
+    if (fp->allow_interrupt == 0) {
         return;
     }
     if (ft_8008BFC4(gobj) != false) {
@@ -174,16 +175,16 @@ void ftGw_AttackLw3_IASA(HSD_GObj* gobj)
     if (ft_8008CB44(gobj) != false) {
         return;
     }
-    if (ftCo_AttackS3_8008B658(gobj) != false) {
+    if (ftCo_AttackS3_CheckInput(gobj) != false) {
         return;
     }
-    if (ft_8008B980(gobj) != false) {
+    if (ftCo_AttackHi3_CheckInput(gobj) != false) {
         return;
     }
     if (ft_8008BB44(gobj) != false) {
         return;
     }
-    if (ftCo_Attack1_DecideMotion(gobj) != false) {
+    if (ftCo_Attack1_CheckInput(gobj) != false) {
         return;
     }
     if (ft_800CAED0(gobj) != false) {

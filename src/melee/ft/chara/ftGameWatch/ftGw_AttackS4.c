@@ -115,7 +115,7 @@ void ftGw_AttackS4_Enter(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    fp->x2218_b0 = 0;
+    fp->allow_interrupt = 0;
     fp->cmd_vars[0] = 0;
     Fighter_ChangeMotionState(gobj, ftGw_MS_AttackS4, 0, NULL, 0.0f, 1.0f,
                               0.0f);
@@ -140,7 +140,7 @@ void ftGw_AttackS4_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x2218_b0 != false) {
+    if (fp->allow_interrupt != false) {
         ftCo_Wait_IASA(gobj);
     }
 }

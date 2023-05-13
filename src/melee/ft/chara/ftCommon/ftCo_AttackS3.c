@@ -19,7 +19,7 @@
 /// @todo Is #fabs_inline fake?
 #define ABS(x) ((x) < 0 ? -(x) : (x))
 
-bool ftCo_AttackS3_8008B658(ftCo_GObj* gobj)
+bool ftCo_AttackS3_CheckInput(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_Pad_A && fp->input.lstick.x * fp->facing_dir >=
@@ -75,7 +75,7 @@ static void decideAngle(ftCo_GObj* gobj)
         } else {
             msid = ftCo_MS_AttackS3S;
         }
-        fp->x2218_b0 = false;
+        fp->allow_interrupt = false;
         Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0, 1, 0);
         ftAnim_8006EBA4(gobj);
     }
@@ -90,7 +90,7 @@ void ftCo_AttackS3_Anim(ftCo_GObj* gobj)
 
 void ftCo_AttackS3_IASA(ftCo_GObj* gobj)
 {
-    if (GET_FIGHTER(gobj)->x2218_b0) {
+    if (GET_FIGHTER(gobj)->allow_interrupt) {
         ftCo_Wait_IASA(gobj);
     }
 }

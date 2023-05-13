@@ -6,7 +6,7 @@
 
 #include <placeholder.h>
 
-/* 08A9F8 */ bool ftCo_Attack1_DecideMotion(ftCo_GObj* gobj);
+/* 08A9F8 */ bool ftCo_Attack1_CheckInput(ftCo_GObj* gobj);
 /* 08AC9C */ void ftCo_Attack11_Anim(ftCo_GObj* gobj);
 /* 08ACD8 */ void ftCo_Attack11_IASA(ftCo_GObj* gobj);
 /* 08ADF0 */ void ftCo_Attack11_Phys(ftCo_GObj* gobj);

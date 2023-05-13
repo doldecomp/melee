@@ -17,7 +17,7 @@
 /* 08B498 */ static void decideFighter(ftCo_GObj* gobj);
 /* 08B4D4 */ static void doEnter(ftCo_GObj* gobj);
 
-bool ftCo_AttackDash_DecideMotion(HSD_GObj* gobj)
+bool ftCo_AttackDash_CheckInput(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_Pad_A) {
@@ -55,7 +55,7 @@ static void decideFighter(ftCo_GObj* gobj)
 static void doEnter(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2218_b0 = false;
+    fp->allow_interrupt = false;
     Fighter_ChangeMotionState(gobj, ftCo_MS_AttackDash, Ft_MF_None, NULL, 0, 1,
                               0);
     ftAnim_8006EBA4(gobj);
@@ -81,7 +81,7 @@ void ftCo_AttackDash_SetMv0(HSD_GObj* gobj)
 void ftCo_AttackDash_IASA(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (!lbl_800D8AE0() && fp->x2218_b0) {
+    if (!lbl_800D8AE0() && fp->allow_interrupt) {
         ftCo_Wait_IASA(gobj);
     }
 }

@@ -14,7 +14,7 @@
 void ftPe_AttackS4_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2218_b0 = false;
+    fp->allow_interrupt = false;
     fp->cmd_vars[0] = 0;
     {
         FtMotionId msid;
@@ -38,7 +38,7 @@ void ftPe_AttackS4_Anim(HSD_GObj* gobj)
 
 void ftPe_AttackS4_IASA(HSD_GObj* gobj)
 {
-    if (GET_FIGHTER(gobj)->x2218_b0) {
+    if (GET_FIGHTER(gobj)->allow_interrupt) {
         ftCo_Wait_IASA(gobj);
     }
 }
