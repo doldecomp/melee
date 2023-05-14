@@ -30,7 +30,7 @@ typedef s64 M2C_UNK64;
 #define M2C_UNALIGNED32(expr) (expr)
 
 /* Unhandled instructions */
-#define M2C_ERROR(desc) (0)
+#define M2C_ERROR(...) (0)
 #define M2C_TRAP_IF(cond) (0)
 #define M2C_BREAK() (0)
 #define M2C_SYNC() (0)

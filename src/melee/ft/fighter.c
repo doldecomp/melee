@@ -594,10 +594,10 @@ void Fighter_ResetInputData_80068854(HSD_GObj* gobj)
     fp->input.lstick.x = fp->input.lstick.y = fp->input.lstick1.x =
         fp->input.lstick1.y = 0.0f;
 
-    fp->input.lsubstick1.y = 0.0f;
-    fp->input.lsubstick1.x = 0.0f;
-    fp->input.lsubstick.y = 0.0f;
-    fp->input.lsubstick.x = 0.0f;
+    fp->input.cstick1.y = 0.0f;
+    fp->input.cstick1.x = 0.0f;
+    fp->input.cstick.y = 0.0f;
+    fp->input.cstick.x = 0.0f;
 
     fp->input.x654 = 0.0f;
     fp->input.x650 = 0.0f;
@@ -648,10 +648,10 @@ static void Fighter_UnkInitLoad_80068914_Inner1(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->input.x650 = fp->input.x654 = fp->input.lsubstick.x =
-        fp->input.lsubstick.y = fp->input.lsubstick1.x =
-            fp->input.lsubstick1.y = fp->input.lstick.x = fp->input.lstick.y =
-                fp->input.lstick1.x = fp->input.lstick1.y = 0.0f;
+    fp->input.x650 = fp->input.x654 = fp->input.cstick.x = fp->input.cstick.y =
+        fp->input.cstick1.x = fp->input.cstick1.y = fp->input.lstick.x =
+            fp->input.lstick.y = fp->input.lstick1.x = fp->input.lstick1.y =
+                0.0f;
 
     fp->input.x660 = 0;
     fp->input.x66C = 0;
@@ -1779,7 +1779,7 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
             if (!fp->x221D_flag.bits.b3) {
                 SET_STICKS(fp->input.lstick1.x, fp->input.lstick1.y,
                            fp->input.x630, fp->input.x634);
-                SET_STICKS(fp->input.lsubstick1.x, fp->input.lsubstick1.y,
+                SET_STICKS(fp->input.cstick1.x, fp->input.cstick1.y,
                            fp->input.x648, fp->input.x64C);
                 fp->input.x654 = fp->input.x658;
                 fp->input.x660 = fp->input.x664;
@@ -1787,8 +1787,8 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
             } else {
                 SET_STICKS(fp->input.lstick1.x, fp->input.lstick1.y,
                            fp->input.lstick.x, fp->input.lstick.y);
-                SET_STICKS(fp->input.lsubstick1.x, fp->input.lsubstick1.y,
-                           fp->input.lsubstick.x, fp->input.lsubstick.y);
+                SET_STICKS(fp->input.cstick1.x, fp->input.cstick1.y,
+                           fp->input.cstick.x, fp->input.cstick.y);
                 fp->input.x654 = fp->input.x650;
                 fp->input.x660 = fp->input.held_inputs;
             }
@@ -1797,11 +1797,11 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
                 SET_STICKS(fp->input.lstick.x, fp->input.lstick.y,
                            ft_800A17E4(fp), ft_800A1874(fp));
                 if (g_debugLevel < 3 && !gm_8016B41C()) {
-                    SET_STICKS(fp->input.lsubstick.x, fp->input.lsubstick.y,
+                    SET_STICKS(fp->input.cstick.x, fp->input.cstick.y,
                                ft_800A1994(fp), ft_800A1A24(fp));
                 } else {
-                    fp->input.lsubstick.x = 0;
-                    fp->input.lsubstick.y = 0;
+                    fp->input.cstick.x = 0;
+                    fp->input.cstick.y = 0;
                 }
 
                 tempf0 = ft_800A1904(fp);
@@ -1815,12 +1815,12 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
                            HSD_PadRumbleData[fp->x618_player_id].nml_stickY);
                 if (g_debugLevel < 3 && gm_8016B41C() == 0) {
                     SET_STICKS(
-                        fp->input.lsubstick.x, fp->input.lsubstick.y,
+                        fp->input.cstick.x, fp->input.cstick.y,
                         HSD_PadRumbleData[fp->x618_player_id].nml_subStickX,
                         HSD_PadRumbleData[fp->x618_player_id].nml_subStickY);
                 } else {
-                    fp->input.lsubstick.x = 0;
-                    fp->input.lsubstick.y = 0;
+                    fp->input.cstick.x = 0;
+                    fp->input.cstick.y = 0;
                 }
 
                 tempf1 = HSD_PadRumbleData[fp->x618_player_id].nml_analogR;
@@ -1837,12 +1837,12 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
                 fp->input.lstick.y = 0.0f;
             }
 
-            if (fabs_inline(fp->input.lsubstick.x) <= p_ftCommonData->x0) {
-                fp->input.lsubstick.x = 0.0f;
+            if (fabs_inline(fp->input.cstick.x) <= p_ftCommonData->x0) {
+                fp->input.cstick.x = 0.0f;
             }
 
-            if (fabs_inline(fp->input.lsubstick.y) <= p_ftCommonData->x4) {
-                fp->input.lsubstick.y = 0.0f;
+            if (fabs_inline(fp->input.cstick.y) <= p_ftCommonData->x4) {
+                fp->input.cstick.y = 0.0f;
             }
 
             if (fp->input.x650 <= p_ftCommonData->x10) {
@@ -2087,8 +2087,8 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
         {
             fp->input.x630 = fp->input.lstick.x;
             fp->input.x634 = fp->input.lstick.y;
-            fp->input.x648 = fp->input.lsubstick.x;
-            fp->input.x64C = fp->input.lsubstick.y;
+            fp->input.x648 = fp->input.cstick.x;
+            fp->input.x64C = fp->input.cstick.y;
             fp->input.x658 = fp->input.x650;
             fp->input.x664 = fp->input.held_inputs;
             fp->x221D_flag.bits.b3 = 0;

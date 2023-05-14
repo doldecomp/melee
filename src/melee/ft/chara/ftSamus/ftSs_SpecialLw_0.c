@@ -154,10 +154,10 @@ void ftSs_SpecialLw_IASA(HSD_GObj* gobj)
         return;
     }
     GUARD(ft_80096540(gobj))
-    GUARD(ft_800D695C(gobj))
+    GUARD(ftCo_Attack100_CheckInput(gobj))
     GUARD(ft_800D6824(gobj))
     GUARD(ft_800D68C0(gobj))
-    GUARD(ft_800D8990(gobj))
+    GUARD(ftCo_Catch_CheckInput(gobj))
     GUARD(ftCo_AttackS4_CheckInput(gobj))
     GUARD(ftCo_AttackHi4_CheckInput(gobj))
     GUARD(ftCo_AttackLw4_CheckInput(gobj))

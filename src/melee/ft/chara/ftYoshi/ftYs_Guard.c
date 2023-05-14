@@ -97,7 +97,8 @@ void ftYs_GuardOn_0_Anim(HSD_GObj* gobj)
 void ftYs_GuardOn_0_IASA(HSD_GObj* gobj)
 {
     if (!ft_80093694() && !ft_8009515C(gobj) && !ft_80099794(gobj) &&
-        !ft_8009917C(gobj) && !ft_800D8990(gobj) && !ft_8009A080(gobj))
+        !ft_8009917C(gobj) && !ftCo_Catch_CheckInput(gobj) &&
+        !ft_8009A080(gobj))
     {
         return;
     }
@@ -223,7 +224,7 @@ void ftYs_GuardHold_Anim(HSD_GObj* gobj)
 void ftYs_GuardHold_IASA(HSD_GObj* gobj)
 {
     if (!ft_8009515C(gobj) && !ft_80099794(gobj) && !ft_8009917C(gobj) &&
-        !ft_800D8990(gobj) && !ft_8009A080(gobj))
+        !ftCo_Catch_CheckInput(gobj) && !ft_8009A080(gobj))
     {
         return;
     }

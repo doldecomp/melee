@@ -16,16 +16,13 @@
 
 /* 08B788 */ static void decideAngle(ftCo_GObj* gobj);
 
-/// @todo Is #fabs_inline fake?
-#define ABS(x) ((x) < 0 ? -(x) : (x))
-
 bool ftCo_AttackS3_CheckInput(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_Pad_A && fp->input.lstick.x * fp->facing_dir >=
-                                          p_ftCommonData->x98_shieldHealthInit)
+    if (fp->input.x668 & HSD_Pad_A &&
+        fp->input.lstick.x * fp->facing_dir >= p_ftCommonData->x98)
     {
-        if (ABS(ftCommon_8007D964(fp)) < p_ftCommonData->x20) {
+        if (ABS(ftCo_GetLStickAngle(fp)) < p_ftCommonData->x20) {
             if (fp->item_gobj) {
                 if (fp->input.held_inputs & HSD_Pad_LR ||
                     it_8026B30C(fp->item_gobj) == 0)
@@ -55,20 +52,20 @@ static void decideAngle(ftCo_GObj* gobj)
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (!ft_80094790(gobj)) {
         FtMotionId msid;
-        float f = ftCommon_8007D964(fp);
-        if (f > p_ftCommonData->x9C &&
+        float stick_angle = ftCo_GetLStickAngle(fp);
+        if (stick_angle > p_ftCommonData->x9C &&
             ftData_80085FD4(fp, ftCo_MS_AttackS3S)->x8 != NULL)
         {
             msid = ftCo_MS_AttackS3Hi;
-        } else if (f > p_ftCommonData->xA0 &&
+        } else if (stick_angle > p_ftCommonData->xA0 &&
                    ftData_80085FD4(fp, ftCo_MS_AttackS3LwS)->x8 != NULL)
         {
             msid = ftCo_MS_AttackS3HiS;
-        } else if (f < p_ftCommonData->xA8 &&
+        } else if (stick_angle < p_ftCommonData->xA8 &&
                    ftData_80085FD4(fp, ftCo_MS_AttackLw3)->x8 != NULL)
         {
             msid = ftCo_MS_AttackS3Lw;
-        } else if (f < p_ftCommonData->xA4 &&
+        } else if (stick_angle < p_ftCommonData->xA4 &&
                    ftData_80085FD4(fp, ftCo_MS_AttackHi3)->x8 != NULL)
         {
             msid = ftCo_MS_AttackS3LwS;

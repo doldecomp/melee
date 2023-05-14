@@ -31,7 +31,7 @@ bool ftCo_AttackLw3_CheckInput(ftCo_GObj* gobj)
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_Pad_A) {
         if (fp->input.lstick.y <= p_ftCommonData->xB0 &&
-            ftCommon_8007D964(fp) < -p_ftCommonData->x20)
+            ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20)
         {
             if (fp->item_gobj != NULL && ft_80094E54(fp)) {
                 ft_800957F4(gobj, ftCo_MS_LightThrowLw);
@@ -116,7 +116,7 @@ static bool checkItemThrowInput(ftCo_GObj* gobj)
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_Pad_A &&
         fp->input.lstick.y <= p_ftCommonData->xB0 &&
-        ftCommon_8007D964(fp) < -p_ftCommonData->x20)
+        ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20)
     {
         if (fp->item_gobj != NULL && ft_80094E54(fp)) {
             ft_800957F4(gobj, ftCo_MS_LightThrowLw);

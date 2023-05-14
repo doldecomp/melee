@@ -14,5 +14,8 @@
 /* 0D8B9C */ UNK_RET lbl_800D8B9C(UNK_PARAMS);
 /* 0D8C54 */ UNK_RET lbl_800D8C54(UNK_PARAMS);
 /* 0DE9D8 */ bool ft_800DE9D8(ftCo_GObj* gobj);
+/* 0DF1C8 */ bool ft_800DF1C8(ftCo_Fighter* fp);
+/* 0CED30 */ UNK_RET ftCo_800CED30(UNK_PARAMS);
+/* 0CECE8 */ bool ftCo_800CECE8(ftCo_GObj* gobj);
 
 #endif
