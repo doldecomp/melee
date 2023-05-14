@@ -6,8 +6,6 @@
 
 #include <placeholder.h>
 
-/* 08BA38 */ static void doEnter(ftCo_GObj* gobj);
-
 /* 08B980 */ bool ftCo_AttackHi3_CheckInput(ftCo_GObj* gobj);
 /* 08BA98 */ void ftCo_AttackHi3_Anim(ftCo_GObj* gobj);
 /* 08BAD4 */ void ftCo_AttackHi3_IASA(ftCo_GObj* gobj);

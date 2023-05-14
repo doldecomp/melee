@@ -757,14 +757,14 @@ void ftCommon_8007D92C(HSD_GObj* gobj)
     }
 }
 
-f32 ftCommon_8007D964(Fighter* fp)
+float ftCo_GetLStickAngle(Fighter* fp)
 {
     return atan2f(fp->input.lstick.y, fabs_inline(fp->input.lstick.x));
 }
 
-f32 ftCommon_8007D99C(Fighter* fp)
+float ftCo_GetCStickAngle(Fighter* fp)
 {
-    return atan2f(fp->input.lsubstick.y, fabs_inline(fp->input.lsubstick.x));
+    return atan2f(fp->input.cstick.y, fabs_inline(fp->input.cstick.x));
 }
 
 f32 ftCommon_8007D9D4(Fighter* fp)

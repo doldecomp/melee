@@ -93,10 +93,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/ftdata.s.o\
     $(BUILD_DIR)/src/melee/ft/ftlib.c.o\
     $(BUILD_DIR)/src/melee/ft/ftwaitanim.c.o\
-    $(BUILD_DIR)/src/melee/ft/ft_3C54.c.o\
-    $(BUILD_DIR)/src/melee/ft/ftitempickup.c.o\
-    $(BUILD_DIR)/src/melee/ft/ftdynamics.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMr_Strings.c.o\
     $(BUILD_DIR)/src/melee/ft/ft_0877.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0877.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Wait.c.o\
@@ -106,6 +102,10 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackS3.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackHi3.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackLw3.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackS4.c.o\
+    $(BUILD_DIR)/src/melee/ft/ftitempickup.c.o\
+    $(BUILD_DIR)/src/melee/ft/ftdynamics.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMr_Strings.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_08A4.s.o\
 
 TEXT_O_FILES +=\

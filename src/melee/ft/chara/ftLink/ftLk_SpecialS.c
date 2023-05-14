@@ -315,7 +315,7 @@ static inline bool checkBoomerangSomething(HSD_GObj* gobj)
 {
     if (ft_80096540(gobj)) {
         return true;
-    } else if (ft_800D695C(gobj)) {
+    } else if (ftCo_Attack100_CheckInput(gobj)) {
         return true;
     } else if (ft_800D6824(gobj)) {
         return true;

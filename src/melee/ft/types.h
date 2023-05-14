@@ -93,7 +93,7 @@ typedef struct _ftCommonData {
     /* +88 */ float x88;
     /* +8C */ int x8C;
     /* +90 */ u8 x90[0x98 - 0x90];
-    /* +98 */ float x98_shieldHealthInit;
+    /* +98 */ float x98;
     /* +9C */ float x9C;
     /* +A0 */ float xA0;
     /* +A4 */ float xA4;
@@ -725,8 +725,8 @@ struct Fighter {
         /*  fp+628 */ Vec2 lstick1;
         /*  fp+630 */ f32 x630;
         /*  fp+634 */ f32 x634;
-        /*  fp+638 */ Vec2 lsubstick;
-        /*  fp+640 */ Vec2 lsubstick1;
+        /*  fp+638 */ Vec2 cstick;
+        /*  fp+640 */ Vec2 cstick1;
         /*  fp+648 */ f32 x648;
         /*  fp+64C */ f32 x64C;
         /*  fp+650 */ f32 x650;
