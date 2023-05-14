@@ -105,6 +105,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackS4.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackHi4.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackLw4.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackAir.c.o\
     $(BUILD_DIR)/src/melee/ft/ftitempickup.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdynamics.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMr_Strings.c.o\
