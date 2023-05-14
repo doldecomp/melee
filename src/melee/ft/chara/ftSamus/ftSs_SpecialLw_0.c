@@ -9,8 +9,10 @@
 #include "ft/ftcommon.h"
 #include "ftCommon/ftCo_Attack1.h"
 #include "ftCommon/ftCo_AttackHi3.h"
+#include "ftCommon/ftCo_AttackHi4.h"
 #include "ftCommon/ftCo_AttackLw3.h"
 #include "ftCommon/ftCo_AttackS3.h"
+#include "ftCommon/ftCo_AttackS4.h"
 
 #include <trigf.h>
 

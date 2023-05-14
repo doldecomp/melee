@@ -7,7 +7,9 @@
 
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackHi3.h"
+#include "ftCo_AttackHi4.h"
 #include "ftCo_AttackS3.h"
+#include "ftCo_AttackS4.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
