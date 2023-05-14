@@ -4,6 +4,8 @@
 
 #include "ftCo_AttackAir.h"
 
+#include "ftCo_LandingAir.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_08A4.h"
@@ -183,5 +185,5 @@ void ftCo_AttackAir_Phys(ftCo_GObj* gobj)
 
 void ftCo_AttackAir_Coll(ftCo_GObj* gobj)
 {
-    ft_80082C74(gobj, ft_8008D5FC);
+    ft_80082C74(gobj, ftCo_LandingAir_EnterWithLag);
 }

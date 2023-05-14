@@ -29,7 +29,7 @@ void ft_80084F3C(HSD_GObj* gobj);
 void ft_80084280(HSD_GObj*);
 void ft_8008403C(HSD_GObj*, HSD_GObjEvent);
 void ft_80084DB0(HSD_GObj*);
-void ft_80082C74(HSD_GObj*, HSD_GObjEvent);
+void ft_80082C74(HSD_GObj*, void (*)(ftCo_GObj*, float lag));
 
 /// @todo Name does not follow our conventions.
 bool ft_CheckGroundAndLedge(HSD_GObj* gobj, s32 direction);

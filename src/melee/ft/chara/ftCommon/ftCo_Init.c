@@ -2,6 +2,15 @@
 #include "ftCommon/forward.h"
 
 #include "ftCo_Attack1.h"
+#include "ftCo_AttackAir.h"
+#include "ftCo_AttackDash.h"
+#include "ftCo_AttackHi3.h"
+#include "ftCo_AttackHi4.h"
+#include "ftCo_AttackLw3.h"
+#include "ftCo_AttackLw4.h"
+#include "ftCo_AttackS3.h"
+#include "ftCo_AttackS4.h"
+#include "ftCo_LandingAir.h"
 #include "ftCo_Wait.h"
 
 #include "ft/ft_0877.h"
