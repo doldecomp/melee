@@ -7,6 +7,7 @@
 #include "ftCo_08A6.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackHi3.h"
+#include "ftCo_AttackHi4.h"
 #include "ftCo_AttackLw3.h"
 #include "ftCo_AttackS3.h"
 

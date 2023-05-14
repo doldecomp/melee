@@ -21,8 +21,6 @@ extern char ftMr_Init_AnimDatFilename[];
 
 bool ftColl_8007B868(HSD_GObj*);
 bool ft_8008A1FC(HSD_GObj*);
-bool ftCo_AttackS4_CheckInput(HSD_GObj*);
-bool ftCo_AttackHi4_CheckInput(HSD_GObj*);
 bool ftCo_AttackLw4_CheckInput(HSD_GObj*);
 bool ft_800925A4(HSD_GObj* gobj);
 bool ft_800925A4(HSD_GObj*);

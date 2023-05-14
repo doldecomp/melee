@@ -11,8 +11,10 @@
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_Attack1.h"
 #include "ftCommon/ftCo_AttackHi3.h"
+#include "ftCommon/ftCo_AttackHi4.h"
 #include "ftCommon/ftCo_AttackLw3.h"
 #include "ftCommon/ftCo_AttackS3.h"
+#include "ftCommon/ftCo_AttackS4.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
