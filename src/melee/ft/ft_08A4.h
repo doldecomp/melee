@@ -19,5 +19,7 @@
 /* 0CECE8 */ bool ftCo_800CECE8(ftCo_GObj* gobj);
 /* 0DF30C */ bool ft_800DF30C(ftCo_Fighter* fp);
 /* 0DF2D8 */ bool ft_800DF2D8(ftCo_Fighter* fp);
+/* 0DF3DC */ bool ft_800DF3DC(ftCo_Fighter* fp);
+/* 0DF3A8 */ bool ft_800DF3A8(ftCo_Fighter* fp);
 
 #endif
