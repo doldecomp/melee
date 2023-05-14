@@ -8,6 +8,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_AttackAir.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
@@ -320,14 +321,14 @@ static void ftGw_AttackAirHi_Enter(HSD_GObj*);
 // Motion State
 void ftGw_AttackAirN_DecideAction(HSD_GObj* gobj)
 {
-    FtMotionId msid = ft_8008CE68(GET_FIGHTER(gobj));
+    FtMotionId msid = ftCo_AttackAir_GetMsidFromCStick(GET_FIGHTER(gobj));
 
     switch (msid) {
     case ftCo_MS_AttackAirN:
         ftGw_AttackAirN_Enter(gobj);
         return;
     case ftCo_MS_AttackAirF:
-        ft_8008CFAC(gobj, msid);
+        ftCo_AttackAir_EnterFromMsid(gobj, msid);
         return;
     case ftCo_MS_AttackAirB:
         ftGw_AttackAirB_Enter(gobj);
@@ -336,7 +337,7 @@ void ftGw_AttackAirN_DecideAction(HSD_GObj* gobj)
         ftGw_AttackAirHi_Enter(gobj);
         return;
     case ftCo_MS_AttackAirLw:
-        ft_8008CFAC(gobj, msid);
+        ftCo_AttackAir_EnterFromMsid(gobj, msid);
         return;
     }
 }
@@ -348,7 +349,7 @@ void ftGw_AttackAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ft_8008CFAC(gobj, ftGw_MS_AttackAirN);
+    ftCo_AttackAir_EnterFromMsid(gobj, ftGw_MS_AttackAirN);
     fp->cb.x21BC_callback_Accessory4 = ftGw_AttackAirN_ItemParachuteSetup;
 }
 
@@ -425,7 +426,7 @@ static void ftGw_AttackAirB_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ft_8008CFAC(gobj, ftGw_MS_AttackAirB);
+    ftCo_AttackAir_EnterFromMsid(gobj, ftGw_MS_AttackAirB);
     fp->cb.x21BC_callback_Accessory4 = ftGw_AttackAirN_ItemTurtleSetup;
 }
 
@@ -498,7 +499,7 @@ static void ftGw_AttackAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ft_8008CFAC(gobj, ftGw_MS_AttackAirHi);
+    ftCo_AttackAir_EnterFromMsid(gobj, ftGw_MS_AttackAirHi);
     fp->cb.x21BC_callback_Accessory4 = ftGw_AttackAirN_ItemSparkySetup;
 }
 

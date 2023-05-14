@@ -79,7 +79,6 @@ s32 ft_80087C1C(void);
 s32 ft_80087C58(HSD_GObj*);
 s32 ft_80087C70(Fighter*, s32);
 s32 ft_80087D0C(Fighter*, s32);
-FtMotionId ft_8008CE68(Fighter*);
 s32 ft_8008D8E8(f32);
 s32 ft_8008E984(Fighter*);
 s32 ft_80093694(void);
@@ -171,7 +170,6 @@ void ftCo_AttackLw4_Anim(HSD_GObj*);
 void ftCo_AttackLw4_IASA(HSD_GObj*);
 void ftCo_AttackLw4_Phys(HSD_GObj*);
 void ftCo_AttackLw4_Coll(HSD_GObj*);
-void ft_8008CFAC(HSD_GObj*, s32);
 void ftCo_AttackAir_Anim(HSD_GObj*);
 void ftCo_AttackAirN_IASA(HSD_GObj*);
 void ftCo_AttackAirF_IASA(HSD_GObj*);
@@ -1100,7 +1098,6 @@ void ft_800C1E64(HSD_GObj* pPlayerEntityStruct, s32, s32, u8, f32);
 /// @todo enum params
 void ft_800DEAE8(HSD_GObj* gobj, enum_t asid0, enum_t asid1);
 
-/* 08CF70 */ void ft_8008CF70(void);
 /* 091A4C */ bool ft_80091A4C(HSD_GObj* gobj);
 
 #endif

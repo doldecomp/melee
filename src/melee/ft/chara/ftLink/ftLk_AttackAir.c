@@ -1,6 +1,5 @@
 #include <platform.h>
 #include "ft/forward.h"
-#include "ftCommon/forward.h"
 #include <baselib/forward.h>
 
 #include "ftLk_AttackAir.h"
@@ -12,6 +11,7 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ftCommon/ftCo_AttackAir.h"
 #include "ftLink/types.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
@@ -38,7 +38,7 @@ void ftLk_AttackAir_800EB3BC(HSD_GObj* gobj)
 void ftLk_AttackAir_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ft_8008CF70();
+    ftCo_AttackAir_EnterFromCStick(gobj);
     if (fp->motion_id == ftCo_MS_AttackAirLw) {
         fp->cb.x21C0_callback_OnGiveDamage = lwOnHit;
         fp->cb.x21A0_callback_Anim = lwOnAnim;

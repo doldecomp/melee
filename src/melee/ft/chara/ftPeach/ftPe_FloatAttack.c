@@ -10,6 +10,7 @@
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_AttackAir.h"
 
 #include <baselib/gobj.h>
 
@@ -42,7 +43,7 @@ lbl_8011BEBC:
 /* 8011BEC4 00118AA4  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 8011BEC8 00118AA8  40 81 00 50 */	ble lbl_8011BF18
 /* 8011BECC 00118AAC  7F E3 FB 78 */	mr r3, r31
-/* 8011BED0 00118AB0  4B F7 0F 99 */	bl ft_8008CE68
+/* 8011BED0 00118AB0  4B F7 0F 99 */	bl ftCo_AttackAir_GetMsidFromCStick
 /* 8011BED4 00118AB4  38 03 FF BF */	addi r0, r3, -65
 /* 8011BED8 00118AB8  28 00 00 01 */	cmplwi r0, 1
 /* 8011BEDC 00118ABC  41 81 00 2C */	bgt lbl_8011BF08
@@ -83,7 +84,7 @@ bool ftPe_8011BE80(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_Pad_A || ft_800DF478(fp)) {
         if (fp->fv.pe.x4 > 0) {
-            if (ft_8008CE68(fp) - 65U <= 1) {
+            if (ftCo_AttackAir_GetMsidFromCStick(fp) - 65U <= 1) {
                 HSD_GObj* igobj = fp->item_gobj;
                 if (igobj != NULL && it_8026B30C(igobj) == 3) {
                     ft_800CDDA0(gobj);
@@ -101,9 +102,9 @@ bool ftPe_8011BE80(HSD_GObj* gobj)
 static void ftPe_8011BF34(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    FtMotionId msid = ft_8008CE68(fp);
+    FtMotionId msid = ftCo_AttackAir_GetMsidFromCStick(fp);
     fp->mv.pe.floatattack.x0 = 0;
-    ft_8008CFAC(gobj, msid + ftCo_MS_CaptureDamageKoopa);
+    ftCo_AttackAir_EnterFromMsid(gobj, msid + ftCo_MS_CaptureDamageKoopa);
 }
 
 void ftPe_FloatAttackAir_Anim(HSD_GObj* gobj)
@@ -165,7 +166,7 @@ lbl_8011C0B8:
 /* 8011C0C0 00118CA0  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 8011C0C4 00118CA4  40 81 00 6C */	ble lbl_8011C130
 /* 8011C0C8 00118CA8  7F E3 FB 78 */	mr r3, r31
-/* 8011C0CC 00118CAC  4B F7 0D 9D */	bl ft_8008CE68
+/* 8011C0CC 00118CAC  4B F7 0D 9D */	bl ftCo_AttackAir_GetMsidFromCStick
 /* 8011C0D0 00118CB0  38 03 FF BF */	addi r0, r3, -65
 /* 8011C0D4 00118CB4  28 00 00 01 */	cmplwi r0, 1
 /* 8011C0D8 00118CB8  41 81 00 2C */	bgt lbl_8011C104
@@ -182,13 +183,13 @@ lbl_8011C0B8:
 lbl_8011C104:
 /* 8011C104 00118CE4  83 FE 00 2C */	lwz r31, 0x2c(r30)
 /* 8011C108 00118CE8  7F E3 FB 78 */	mr r3, r31
-/* 8011C10C 00118CEC  4B F7 0D 5D */	bl ft_8008CE68
+/* 8011C10C 00118CEC  4B F7 0D 5D */	bl ftCo_AttackAir_GetMsidFromCStick
 /* 8011C110 00118CF0  38 00 00 00 */	li r0, 0
 /* 8011C114 00118CF4  38 83 00 00 */	addi r4, r3, 0
 /* 8011C118 00118CF8  90 1F 23 40 */	stw r0, 0x2340(r31)
 /* 8011C11C 00118CFC  38 7E 00 00 */	addi r3, r30, 0
 /* 8011C120 00118D00  38 84 01 17 */	addi r4, r4, 0x117
-/* 8011C124 00118D04  4B F7 0E 89 */	bl ft_8008CFAC
+/* 8011C124 00118D04  4B F7 0E 89 */	bl ftCo_AttackAir_EnterFromMsid
 /* 8011C128 00118D08  38 00 00 01 */	li r0, 1
 /* 8011C12C 00118D0C  48 00 00 08 */	b lbl_8011C134
 lbl_8011C130:
