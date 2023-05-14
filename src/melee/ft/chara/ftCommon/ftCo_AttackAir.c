@@ -66,7 +66,7 @@ bool ftCo_AttackAir_CheckItemThrowInput(ftCo_GObj* gobj)
     }
 }
 
-void decideFighter(ftCo_GObj* gobj)
+static void decideFighter(ftCo_GObj* gobj)
 {
     switch (GET_FIGHTER(gobj)->kind) {
     case FTKIND_LINK:
