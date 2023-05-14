@@ -173,7 +173,7 @@ void ftMt_SpecialLw_GroundToAir(HSD_GObj* gobj)
 // 0x801464B0
 // https://decomp.me/scratch/xNFhq // Mewtwo's air -> ground Disable Action
 // State handler
-void ftMt_SpecialAirLw_AirToGround(HSD_GObj* gobj)
+void ftMt_SpecialAirLw_AirToGround(HSD_GObj* gobj, float lag)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

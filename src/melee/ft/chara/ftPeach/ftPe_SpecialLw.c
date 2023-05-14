@@ -22,7 +22,7 @@
 /* 11CE48 */ static ItemKind pickVeg(HSD_GObj* gobj);
 /* 11D018 */ static void spawnVeg(HSD_GObj* gobj);
 /* 11D214 */ static void handleAirColl(HSD_GObj* gobj);
-/* 11D280 */ static void handleColl(HSD_GObj* gobj);
+/* 11D280 */ static void handleColl(HSD_GObj* gobj, float lag);
 
 ItemKind pickVeg(HSD_GObj* gobj)
 {
@@ -155,48 +155,36 @@ lbl_8011D100:
 #pragma pop
 #else
 
-static inline ItemKind getKind(HSD_GObj* gobj)
-{
-    ftPe_DatAttrs* da = GET_FIGHTER(gobj)->dat_attrs;
-    int da_x14 = da->x14;
-
-    ItemKind kind = It_Kind_Peach_Turnip;
-    if (HSD_Randi(da_x14) == 0) {
-        kind = pickVeg(gobj);
-    }
-
-    return kind;
-}
-
-static inline void createVeg(HSD_GObj* gobj, Vec3* pos, Fighter* fp)
-{
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u8 _[12] = { 0 };
-#endif
-    HSD_GObj* veg_gobj = it_802BD4AC(gobj, pos, fp->ft_data->x8->unk10,
-                                     getKind(gobj), fp->facing_dir);
-    fp->item_gobj = veg_gobj;
-    fp->fv.pe.veg_gobj = veg_gobj;
-    if (veg_gobj != NULL) {
-        ft_80094818(gobj, false);
-        efSync_Spawn(1234, gobj, &fp->cur_pos);
-        fp->cb.x21E4_callback_OnDeath2 = ftPe_Init_OnDeath2;
-        fp->cb.x21DC_callback_OnTakeDamage = ftPe_Init_OnDeath2;
-    }
-}
-
 static void spawnVeg(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ftCheckThrowB0(fp)) {
         Vec3 pos;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
-        u8 _[16];
-#endif
         lb_8000B1CC(fp->parts[FtPart_109].x0_jobj, NULL, &pos);
-        createVeg(gobj, &pos, fp);
+        {
+            Fighter* fp = GET_FIGHTER(gobj);
+
+            ftPe_DatAttrs* da = GET_FIGHTER(gobj)->dat_attrs;
+            int da_x14 = da->x14;
+
+            ItemKind kind = It_Kind_Peach_Turnip;
+            if (HSD_Randi(da_x14) == 0) {
+                kind = pickVeg(gobj);
+            }
+
+            {
+                HSD_GObj* veg_gobj = it_802BD4AC(
+                    gobj, &pos, fp->ft_data->x8->unk10, kind, fp->facing_dir);
+                fp->item_gobj = veg_gobj;
+                fp->fv.pe.veg_gobj = veg_gobj;
+                if (veg_gobj != NULL) {
+                    ft_80094818(gobj, false);
+                    efSync_Spawn(1234, gobj, &fp->cur_pos);
+                    fp->cb.x21E4_callback_OnDeath2 = ftPe_Init_OnDeath2;
+                    fp->cb.x21DC_callback_OnTakeDamage = ftPe_Init_OnDeath2;
+                }
+            }
+        }
     }
 }
 #endif
@@ -245,9 +233,10 @@ static void handleAirColl(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = spawnVeg;
 }
 
-static void handleColl(HSD_GObj* gobj)
+static void handleColl(HSD_GObj* gobj, float lag)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    /// @todo #GET_FIGHTER
+    Fighter* fp = gobj->user_data;
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialLw, coll_mf, NULL,
                               fp->cur_anim_frame, 1, 0);

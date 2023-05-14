@@ -11,6 +11,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_AttackAir.h"
+#include "ftCommon/ftCo_LandingAir.h"
 
 #include <baselib/gobj.h>
 
@@ -85,8 +86,7 @@ bool ftPe_8011BE80(HSD_GObj* gobj)
     if (fp->input.x668 & HSD_Pad_A || ft_800DF478(fp)) {
         if (fp->fv.pe.x4 > 0) {
             if (ftCo_AttackAir_GetMsidFromCStick(fp) - 65U <= 1) {
-                HSD_GObj* igobj = fp->item_gobj;
-                if (igobj != NULL && it_8026B30C(igobj) == 3) {
+                if (fp->item_gobj != NULL && it_8026B30C(fp->item_gobj) == 3) {
                     ft_800CDDA0(gobj);
                     return true;
                 }
@@ -238,5 +238,5 @@ void ftPe_FloatAttackAir_Phys(HSD_GObj* gobj)
 
 void ftPe_FloatAttackAir_Coll(HSD_GObj* gobj)
 {
-    ft_80082C74(gobj, ft_8008D5FC);
+    ft_80082C74(gobj, ftCo_LandingAir_EnterWithLag);
 }

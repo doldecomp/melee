@@ -112,7 +112,7 @@ typedef struct _ftCommonData {
     /* +D8 */ float xD8;
     /* +DC */ float xDC;
     /* +E0 */ float xE0;
-    /* +E4 */ float xE4;
+    /* +E4 */ int xE4;
     /* +E8 */ float xE8;
     /* +EC */ float xEC;
     /* +F0 */ float xF0;
@@ -353,11 +353,11 @@ typedef struct ftCo_DatAttrs {
     /* fp+1EC */ s32 x1EC;
     /* fp+1F0 */ float x1F0_KirbyBStarDamage;
     /* fp+1F4 */ float x1F4_NormalLandingLag;
-    /* fp+1F8 */ float x1F8_NAirLandingLag;
-    /* fp+1FC */ float x1FC_FAirLandingLag;
-    /* fp+200 */ float x200_BAirLandingLag;
-    /* fp+204 */ float x204_UAirLandingLag;
-    /* fp+208 */ float x208_DAirLandingLag;
+    /* fp+1F8 */ float landingairn_lag;
+    /* fp+1FC */ float landingairf_lag;
+    /* fp+200 */ float landingairb_lag;
+    /* fp+204 */ float landingairhi_lag;
+    /* fp+208 */ float landingairlw_lag;
     /* fp+20C */ float x20C_NametagHeight;
     /* fp+210 */ s32 x210;
     /* fp+214 */ float x214_WallJumpHorizontalVelocity;

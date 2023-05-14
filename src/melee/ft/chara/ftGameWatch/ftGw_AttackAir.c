@@ -9,6 +9,7 @@
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_AttackAir.h"
+#include "ftCommon/ftCo_LandingAir.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
@@ -388,7 +389,7 @@ void ftGw_AttackAirN_Coll(HSD_GObj* gobj)
 static void ftGw_LandingAirN_Init(HSD_GObj*);
 
 /// Mr. Game & Watch - LandingAirN Think
-void ftGw_LandingAirN_Enter(HSD_GObj* gobj)
+void ftGw_LandingAirN_Enter(HSD_GObj* gobj, float lag)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -463,7 +464,7 @@ void ftGw_AttackAirB_Coll(HSD_GObj* gobj)
 }
 
 /// Mr. Game & Watch - LandingAirB Think
-void ftGw_LandingAirB_Enter(HSD_GObj* gobj)
+void ftGw_LandingAirB_Enter(HSD_GObj* gobj, float lag)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -528,7 +529,7 @@ void ftGw_AttackAirHi_Coll(HSD_GObj* gobj)
 }
 
 /// Mr. Game & Watch - LandingAirHi Think
-void ftGw_LandingAirHi_Enter(HSD_GObj* gobj)
+void ftGw_LandingAirHi_Enter(HSD_GObj* gobj, float lag)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -566,7 +567,8 @@ static void ftGw_LandingAirN_Init(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    ft_8008D708(gobj, ftGw_MS_LandingAirN, fp->co_attrs.x1F8_NAirLandingLag);
+    ftCo_LandingAir_EnterWithMsidLag(gobj, ftGw_MS_LandingAirN,
+                                     fp->co_attrs.landingairn_lag);
 }
 
 // 0x8014BB24
@@ -616,7 +618,8 @@ void ftGw_LandingAirB_Init(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ft_8008D708(gobj, ftGw_MS_LandingAirB, fp->co_attrs.x200_BAirLandingLag);
+    ftCo_LandingAir_EnterWithMsidLag(gobj, ftGw_MS_LandingAirB,
+                                     fp->co_attrs.landingairb_lag);
 }
 
 // 0x8014BC0C
@@ -659,16 +662,13 @@ void ftGw_LandingAirB_Coll(HSD_GObj* gobj)
     }
 }
 
-// 0x8014BCC8
-// https://decomp.me/scratch/8ClCw // Mr. Game & Watch's Up Aerial Landing
-// prefunction
+/// Mr. Game & Watch's Up Aerial Landing prefunction
 void ftGw_LandingAirHi_Init(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-
-    ft_8008D708(gobj, ftGw_MS_LandingAirHi,
-                fp->co_attrs.x200_BAirLandingLag); // Erroneously using Back
-                                                   // Aerial's landing lag
+    // Erroneously using Back Aerial's landing lag
+    ftCo_LandingAir_EnterWithMsidLag(gobj, ftGw_MS_LandingAirHi,
+                                     fp->co_attrs.landingairb_lag);
 }
 
 // 0x8014BCF4

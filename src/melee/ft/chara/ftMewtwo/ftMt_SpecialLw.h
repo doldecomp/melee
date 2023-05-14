@@ -16,7 +16,7 @@
 /* 14639C */ void ftMt_SpecialLw_Phys(HSD_GObj* gobj);
 /* 1463BC */ void ftMt_SpecialAirLw_Phys(HSD_GObj* gobj);
 /* 146410 */ void ftMt_SpecialLw_GroundToAir(HSD_GObj* gobj);
-/* 1464B0 */ void ftMt_SpecialAirLw_AirToGround(HSD_GObj* gobj);
+/* 1464B0 */ void ftMt_SpecialAirLw_AirToGround(HSD_GObj* gobj, float lag);
 /* 146544 */ void ftMt_SpecialLw_Coll(HSD_GObj* gobj);
 /* 14656C */ void ftMt_SpecialAirLw_Coll(HSD_GObj* gobj);
 /* 146594 */ void ftMt_SpecialLw_CreateDisable(HSD_GObj* gobj);

@@ -11,13 +11,13 @@
 /* 1277AC */ void ftPk_SpecialLw_SpawnEffect(HSD_GObj* gobj);
 /* 1278BC */ void ftPk_SpecialLw_Enter(HSD_GObj* gobj);
 /* 127924 */ void ftPk_SpecialAirLw_Enter(HSD_GObj* gobj);
-/* 12798C */ void ftPk_SpecialLw_ChangeMotion_Unk00(HSD_GObj* gobj);
+/* 12798C */ void ftPk_SpecialLw_ChangeMotion_Unk00(HSD_GObj* gobj, float lag);
 /* 1279EC */ void ftPk_SpecialLw_ChangeMotion_Unk01(HSD_GObj* gobj);
-/* 127A54 */ void ftPk_SpecialLw_ChangeMotion_Unk02(HSD_GObj* gobj);
+/* 127A54 */ void ftPk_SpecialLw_ChangeMotion_Unk02(HSD_GObj* gobj, float lag);
 /* 127ACC */ void ftPk_SpecialLw_ChangeMotion_Unk03(HSD_GObj* gobj);
-/* 127B4C */ void ftPk_SpecialLw_ChangeMotion_Unk04(HSD_GObj* gobj);
+/* 127B4C */ void ftPk_SpecialLw_ChangeMotion_Unk04(HSD_GObj* gobj, float lag);
 /* 127BAC */ void ftPk_SpecialLw_ChangeMotion_Unk05(HSD_GObj* gobj);
-/* 127C14 */ void ftPk_SpecialLw_ChangeMotion_Unk06(HSD_GObj* gobj);
+/* 127C14 */ void ftPk_SpecialLw_ChangeMotion_Unk06(HSD_GObj* gobj, float lag);
 /* 127C74 */ void ftPk_SpecialLw_ChangeMotion_Unk07(HSD_GObj* gobj);
 /* 127CDC */ void ftPk_SpecialLwStart_Anim(HSD_GObj* gobj);
 /* 127D60 */ void ftPk_SpecialAirLwStart_Anim(HSD_GObj* gobj);
