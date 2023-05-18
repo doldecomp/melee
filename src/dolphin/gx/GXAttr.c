@@ -158,8 +158,6 @@ lbl_8033BEC4:
 #endif
 
 /**
- *      GXSetVtxDesc
- *
  * This function sets the type of a single attribute (attr) in the current
  * vertex descriptor. The current vertex descriptor defines which attributes
  * are present in a vertex and how each attribute is referenced. The current
@@ -167,8 +165,12 @@ lbl_8033BEC4:
  * graphics command stream produced by the GX API. In particular, the current
  * vertex descriptor is used to parse the vertex data that is present in the
  * command stream.
+ *
+ * @param attr Specifies the name of the attribute. One of GXAttr.
+ *             Enabled attribute data must be sent in ascending order.
+ * @param type Specifies the reference type of the attribute. One of
+ * GXAttrType. Accepted values are GX_NONE, GX_DIRECT, GX_INDEX8, GX_INDEX16.
  */
-
 void GXSetVtxDesc(s32 attr, s32 type)
 {
     switch (attr) {
@@ -383,8 +385,6 @@ void GXClearVtxDesc(void)
 }
 
 /**
- *      GXSetVtxAttrFmt
- *
  * This function sets the attribute format (attr) for a single attribute
  * in the Vertex Attribute Format Table (VAT). Each attribute format
  * describes the data type, number of elements (count), and fixed point format
@@ -409,8 +409,22 @@ void GXClearVtxDesc(void)
  *
  * Note also that a HW1 bug means that for a component type of U8 or S8 the
  * fixed-point fraction is ignored and assumed to be zero.
+ *
+ * @param vtxfmt Specifies the vertex format number.
+ * @param attr   Specifies the attribute name. One of GXAttr.
+ * @param count  May be one of several different enumerations, depending
+ *               on the attribute name; one of GXCompCnt, GXPosCompCnt,
+ *               GXNrmCompCnt, GXClrCompCnt, or GXTexCompCnt. Ultimately
+ *               aids in determining the number of dimensions for this
+ *               attribute. For example, 4 for an RGBA color, or 3 for
+ *               vertex position data.
+ * @param type   May be one of several different enumerations, depending
+ *               on the attribute name. Specifies the data format for
+ *               a single value in a dimension, such as u8, s16, or f32.
+ * @param frac   Specifies the number of fractional bits in a fixed point
+ *               number, where 0 <= frac <= 31.  frac is ignored for
+ *               floating point types and color types.
  */
-
 void GXSetVtxAttrFmt(u32 vtxfmt, u32 attr, s32 count, u32 type, u8 frac)
 {
     s32* temp_r4 = &__GXContexts.main->x1C_data[vtxfmt];
@@ -523,8 +537,6 @@ void __GXSetVAT(void)
 }
 
 /**
- *      GXSetArray
- *
  * This function sets the array base pointer and stride for a single
  * attribute. The array base and stride are used to compute the address
  * of indexed attribute data using the equation:
@@ -560,13 +572,11 @@ void __GXSetVAT(void)
  *          // initialize data
  *      };
  *
- *  Arguments:
- *      attr        Specifies the attribute array name. Accepted
+ * @param attr      Specifies the attribute array name. Accepted
  *                  values are members of the GXAttr enumeration.
- *      base_ptr    Pointer to first element in attribute data array.
- *      stride      Stride in bytes (B) between attribute data elements.
+ * @param base_ptr  Pointer to first element in attribute data array.
+ * @param stride    Stride in bytes (B) between attribute data elements.
  */
-
 void GXSetArray(s32 attr, s32 base_ptr, u8 stride)
 {
     s32 idx;
@@ -596,8 +606,6 @@ void GXSetArray(s32 attr, s32 base_ptr, u8 stride)
 }
 
 /**
- *      GXInvalidateVtxCache
- *
  * This function is called by GXInit and invalidates the vertex cache tags.
  * This function should be used whenever you relocate or modify data that
  * is read by, or may be cached by, the vertex cache. The invalidate is
@@ -609,7 +617,6 @@ void GXSetArray(s32 attr, s32 base_ptr, u8 stride)
  * Direct data is any attribute that is set to GX_DIRECT in the current
  * vertex descriptor.
  */
-
 void GXInvalidateVtxCache(void)
 {
     WGPIPE.u8 = GX_CMD_INVL_VC;
@@ -840,8 +847,6 @@ lbl_8033CB60:
 #endif
 
 /**
- *      GXSetNumTexGens
- *
  * This function sets the number of texture coordinates that are generated
  * and available for use in the Texture Environment (TEV) stages. Texture
  * coordinates are generated from input data as described by GXSetTexCoordGen.
@@ -853,11 +858,9 @@ lbl_8033CB60:
  * If nTexGens is set to 0, no texture coordinates will be generated. In
  * this case, at least one color channel must be output, see GXSetNumChans.
  *
- * Arguments:
- *      nTexGens    Number of texture coordinates to generate.
+ * @param nTexGens  Number of texture coordinates to generate.
  *                  Minimum value is 0, maximum value is 8.
  */
-
 void GXSetNumTexGens(u8 nTexGens)
 {
     INSERT_FIELD(__GXContexts.main->x204, nTexGens, 4, 0);
