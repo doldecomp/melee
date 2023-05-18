@@ -1,8 +1,8 @@
 #ifndef MELEE_GR_GRIZUMI_H
 #define MELEE_GR_GRIZUMI_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
-void func_801CD2D4(void);
+void grIzumi_801CD2D4(void);
 
 #endif

@@ -3,8 +3,9 @@
 #ifndef _OSTHREAD_H_
 #define _OSTHREAD_H_
 
+#include <platform.h>
+
 #include <dolphin/os/OSContext.h>
-#include <Runtime/platform.h>
 
 #define OS_PRIORITY_MIN 0
 #define OS_PRIORITY_MAX 31

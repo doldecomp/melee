@@ -1,4 +1,4 @@
-#include <sysdolphin/baselib/object.h>
+#include <baselib/object.h>
 
 HSD_ClassInfo hsdObj = { ObjInfoInit };
 extern HSD_ClassInfo hsdClass;

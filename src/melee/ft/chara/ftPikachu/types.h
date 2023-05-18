@@ -1,8 +1,13 @@
 #ifndef MELEE_FT_CHARA_FTPIKACHU_TYPES_H
 #define MELEE_FT_CHARA_FTPIKACHU_TYPES_H
 
-#include <dolphin/mtx/types.h>
 #include <platform.h>
+
+#include <dolphin/mtx/types.h>
+
+struct ftPikachu_FighterVars {
+    char filler0[0x100];
+};
 
 typedef struct _ftPikachuAttributes {
     f32 x0;
@@ -66,7 +71,7 @@ typedef struct _ftPikachuAttributes {
     f32 height_attributes[6];
 } ftPikachuAttributes;
 
-union ftPikachu_StateVars {
+union ftPikachu_MotionVars {
     /// @todo Proper state name.
     struct ftPikachu_State2Vars {
         s32 x0;

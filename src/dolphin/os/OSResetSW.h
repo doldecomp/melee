@@ -1,9 +1,10 @@
 #ifndef DOLPHIN_OS_OSRESETSW_H
 #define DOLPHIN_OS_OSRESETSW_H
 
-#include <dolphin/gx/types.h>
+#include <platform.h>
 #include <dolphin/os/forward.h>
-#include <Runtime/platform.h>
+
+#include <dolphin/gx/types.h>
 
 struct _OSResetSW_Unk1;
 typedef bool (*OSResetSW_Predicate)(struct _OSResetSW_Unk1*);

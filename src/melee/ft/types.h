@@ -1,31 +1,44 @@
 #ifndef MELEE_FT_TYPES_H
 #define MELEE_FT_TYPES_H
 
-#include "common_structs.h"
+#include <platform.h>
+#include "ft/forward.h"
+#include "ftCommon/forward.h"
+
 #include "ft/ftanim.h"
 #include "ftCaptain/types.h"
 #include "ftCommon/types.h"
 #include "ftDonkey/types.h"
-#include "ftFox/ftFox_StateVars.h"
-#include "ftGameWatch/ftGameWatch_StateVars.h"
+#include "ftFox/types.h"
+#include "ftGameWatch/types.h"
+#include "ftKirby/types.h"
 #include "ftKoopa/types.h"
-#include "ftLuigi/ftLuigi_StateVars.h"
-#include "ftMario/ftMario_StateVars.h"
+#include "ftLink/types.h"
+#include "ftLuigi/types.h"
+#include "ftMario/types.h"
 #include "ftMars/types.h"
 #include "ftMasterHand/types.h"
-#include "ftMewtwo/ftMewtwo_StateVars.h"
-#include "ftNess/ftNess_StateVars.h"
+#include "ftMewtwo/types.h"
+#include "ftNess/types.h"
+#include "ftPeach/types.h"
 #include "ftPikachu/types.h"
+#include "ftPopo/types.h"
 #include "ftPurin/types.h"
 #include "ftSamus/types.h"
+#include "ftSandbag/types.h"
 #include "ftSeak/types.h"
 #include "ftYoshi/types.h"
+#include "ftZakoBoy/types.h"
 #include "ftZelda/types.h"
 #include "gr/stage.h"
 #include "lb/lbcollision.h"
 #include "lb/lbrefract.h"
 #include "pl/player.h"
 
+#include <common_structs.h>
+#include <math.h>
+#include <dolphin/gx/types.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/archive.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
@@ -35,16 +48,6 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
-#include <dolphin/mtx/types.h>
-#include <math.h>
-#include <platform.h>
-
-struct RGBA {
-    u8 r;
-    u8 g;
-    u8 b;
-    u8 a;
-};
 
 // Table in PlCo.dat
 typedef struct _FighterPartsTable {
@@ -55,161 +58,201 @@ typedef struct _FighterPartsTable {
 
 // Points to data in PlCo.dat
 typedef struct _ftCommonData {
-    /* 0x0 */ f32 x0;
-    /* 0x4 */ f32 x4;
-    /* 0x8 */ f32 x8_someStickThreshold;
-    /* 0xC */ f32 xC;
-    /* 0x10 */ f32 x10;
-    /* 0x14 */ f32 x14;
-    /* 0x18 */ f32 x18;
-    /* 0x1C */ f32 x1C;
-    /* 0x20 */ f32 x20;
-    /* 0x24 */ f32 x24;
-    /* 0x28 */ f32 x28;
-    /* 0x2C */ f32 x2C;
-    /* 0x30 */ f32 x30;
-    u8 filler_x34[0x70 - 0x34];
-    /* 0x70 */ f32 x70_someLStickYMax;
-    u8 filler_x74[0x88 - 0x74];
-    /* 0x88 */ f32 x88;
-    /* 0x8C */ s32 x8C;
-    u8 filler_x90[0x98 - 0x90];
-    /* 0x98 */ f32 x98_shieldHealthInit;
-    u8 filler_x9C[0xEC - 0x9C];
-    /* 0xEC */ f32 xEC;
-    /* 0xF0 */ f32 xF0;
-    u8 filler_xF4[0x128 - 0xF4];
-    /* 0x128 */ f32 x128;
-    /* 0x12C */ f32 x12C;
-    /* 0x130 */ f32 x130;
-    /* 0x134 */ s32 x134;
-    /* 0x138 */ f32 x138;
-    /* 0x13C */ f32 x13C;
-    u8 filler_x140[0x164 - 0x140];
-    /* 0x164 */ f32 x164;
-    u8 filler_x168[0x194 - 0x168];
-    /* 0x194 */ f32 x194_unkHitLagFrames;
-    /* 0x198 */ f32 x198;
-    /* 0x19C */ f32 x19C;
-    /* 0x1A0 */ f32 x1A0;
-    u8 filler_x1A4[0x1FC - 0x1A4];
-    /* 0x1FC */ f32 x1FC;
-    /* 0x200 */ f32 x200;
-    /* 0x204 */ f32 x204_knockbackFrameDecay;
-    u8 filler_x208[0x21C - 0x208];
-    /* 0x21C */ f32 x21C;
-    u8 filler_x220[0x260 - 0x220];
-    /* 0x260 */ f32 x260_startShieldHealth;
-    u8 filler_x264[0x27C - 0x264];
-    /* 0x27C */ f32 x27C;
-    /* 0x280 */ f32 x280_unkShieldHealth;
-    /* 0x284 */ f32 x284;
-    /* 0x288 */ f32 x288;
-    u8 filler_x28C[0x294 - 0x28C];
-    /* 0x294 */ f32 x294;
-    u8 filler_x298[0x2A4 - 0x298];
-    /* 0x2A4 */ f32 x2A4;
-    u8 filler_x2A8[0x2B4 - 0x2A8];
-    /* 0x2B4 */ f32 x2B4;
-    u8 filler_x2B8[0x2DC - 0x2B8];
-    /* 0x2DC */ f32 x2DC;
-    /* 0x2E0 */ f32 x2E0;
-    u8 filler_x2E4[0x308 - 0x2E4];
-    /* 0x308 */ f32 x308;
-    u8 filler_x30C[0x3A8 - 0x30C];
-    /* 0x3A8 */ f32 x3A8;
-    u8 filler_x3AC[0x3E0 - 0x3AC];
-    /* 0x3E0 */ f32 x3E0;
-    /* 0x3E4 */ f32 x3E4;
-    /* 0x3E8 */ f32 x3E8_shieldKnockbackFrameDecay;
-    /* 0x3EC */ f32 x3EC_shieldGroundFrictionMultiplier;
-    u8 filler_x3F0[0x418 - 0x3F0];
-    /* 0x418 */ s32 x418;
-    /* 0x41C */ s32 x41C;
-    u8 filler_x420[0x440 - 0x420];
-    /* 0x440 */ f32 x440;
-    /* 0x444 */ f32 x444;
-    /* 0x448 */ f32 x448;
-    /* 0x44C */ f32 x44C;
-    /* 0x450 */ f32 x450;
-    /* 0x454 */ f32 x454;
-    /* 0x458 */ f32 x458;
-    /* 0x45C */ f32 x45C;
-    /* 0x460 */ f32 x460;
-    u8 filler_x464[0x480 - 0x464];
-    /* 0x480 */ f32 x480;
-    u8 filler_x484[0x498 - 0x484];
-    /* 0x498 */ u32 x498_ledgeCooldownTime;
-    u8 filler_x49C[0x4C4 - 0x49C];
-    s32 x4C4;
-    s32 x4C8;
-    s32 x4CC;
-    f32 x4D0;
-    f32 x4D4;
-    u32 x4D8;
-    u8 filler_x4D0[0x5C0 - 0x4DC];
-    /* 0x5F0 */ f32 x5C0;
-    u8 filler_x5C4[0x5F0 - 0x5C4];
-    /* 0x5F0 */ u32 x5F0;
-    u8 filler_x5F4[0x6D8 - 0x5F4];
-    /* 0x6D8 */ void* x6D8[1]; // TODO expand to actual size
-    struct RGBA x6DC_colorsByPlayer[4];
-    u8 filler_x6EC[0x6F4 - 0x6EC];
-    /* 0x6F4 */ s32 x6F4_unkDamage;
-    /* 0x6F8 */ s32 x6F8;
-    /* 0x6FC */ s32 x6FC;
-    /* 0x700 */ s32 x700;
-    /* 0x704 */ f32 x704;
-    /* 0x708 */ f32 x708;
-    /* 0x70C */ f32 x70C;
-    /* 0x710 */ f32 x710;
-    /* 0x714 */ f32 x714;
-    u8 filler_x718[0x768 - 0x718];
-    /* 0x768 */ f32 x768;
-    /* 0x76C */ f32 x76C;
-    /* 0x770 */ f32 x770;
-    /* 0x774 */ s32 x774;
-    u8 x7A0_filler[0x7A0 - 0x778];
-    /* 0x7A0 */ s32 x7A0;
-    /* 0x7A4 */ s32 x7A4;
-    /* 0x7A8 */ s32 x7A8;
-    /* 0x7AC */ s32 x7AC;
-    /* 0x7B0 */ s32 x7B0;
-    /* 0x7B4 */ s32 x7B4_unkDamage;
-    /* 0x7B8 */ f32 x7B8;
-    /* 0x7BC */ f32 x7BC;
-    /* 0x7C0 */ f32 x7C0;
-    /* 0x7C4 */ s32 x7C4;
-    /* 0x7C8 */ s32 x7C8;
-    /* 0x7CC */ s32 x7CC;
-    /* 0x7D0 */ s32 x7D0;
-    /* 0x7D4 */ s32 x7D4;
-    /* 0x7D8 */ s32 x7D8;
-    /* 0x7DC */ s32 x7DC;
-    /* 0x7E0 */ s32 x7E0;
-    /* 0x7E4 */ f32 x7E4_scaleZ;
-    u8 x7E8_filler[0x814 - 0x7E8];
-    /* 0x814 */ s32 x814;
+    /* +0 */ float x0;
+    /* +4 */ float x4;
+    /* +8 */ float x8_someStickThreshold;
+    /* +C */ float xC;
+    /* +10 */ float x10;
+    /* +14 */ float x14;
+    /* +18 */ float x18;
+    /* +1C */ float x1C;
+    /* +20 */ float x20;
+    /* +24 */ float x24;
+    /* +28 */ float x28;
+    /* +2C */ float x2C;
+    /* +30 */ float x30;
+    /* +34 */ UNK_T x34;
+    /* +38 */ UNK_T x38;
+    /* +3C */ float x3C;
+    /* +40 */ int x40;
+    /* +44 */ float x44;
+    /* +48 */ UNK_T x48;
+    /* +4C */ UNK_T x4C;
+    /* +50 */ float x50;
+    /* +54 */ UNK_T x54;
+    /* +58 */ UNK_T x58;
+    /* +5C */ UNK_T x5C;
+    /* +60 */ UNK_T x60;
+    /* +64 */ UNK_T x64;
+    /* +68 */ float x68;
+    /* +6C */ UNK_T x6C;
+    /* +70 */ float x70_someLStickYMax;
+    /* +74 */ u8 x74[0x78 - 0x74];
+    /* +78 */ float x78;
+    /* +7C */ u8 x7C[0x88 - 0x7C];
+    /* +88 */ float x88;
+    /* +8C */ int x8C;
+    /* +90 */ u8 x90[0x98 - 0x90];
+    /* +98 */ float x98;
+    /* +9C */ float x9C;
+    /* +A0 */ float xA0;
+    /* +A4 */ float xA4;
+    /* +A8 */ float xA8;
+    /* +AC */ float attackhi3_stick_threshold_y;
+    /* +B0 */ float xB0;
+    /* +B4 */ float xB4;
+    /* +B8 */ float xB8;
+    /* +BC */ float xBC;
+    /* +C0 */ float xC0;
+    /* +C4 */ float xC4;
+    /* +C8 */ float xC8;
+    /* +CC */ float xCC;
+    /* +D0 */ float xD0;
+    /* +D4 */ float xD4;
+    /* +D8 */ float xD8;
+    /* +DC */ float xDC;
+    /* +E0 */ float xE0;
+    /* +E4 */ int xE4;
+    /* +E8 */ float xE8;
+    /* +EC */ float xEC;
+    /* +F0 */ float xF0;
+    /* +F4 */ u8 xF4[0x128 - 0xF4];
+    /* +128 */ float x128;
+    /* +12C */ float x12C;
+    /* +130 */ float x130;
+    /* +134 */ int x134;
+    /* +138 */ float x138;
+    /* +13C */ float x13C;
+    /* +140 */ u8 x140[0x164 - 0x140];
+    /* +164 */ float x164;
+    /* +168 */ u8 x168[0x194 - 0x168];
+    /* +194 */ float x194_unkHitLagFrames;
+    /* +198 */ float x198;
+    /* +19C */ float x19C;
+    /* +1A0 */ float x1A0;
+    /* +1A4 */ u8 x1A4[0x1FC - 0x1A4];
+    /* +1FC */ float x1FC;
+    /* +200 */ float x200;
+    /* +204 */ float x204_knockbackFrameDecay;
+    /* +208 */ u8 x208[0x21C - 0x208];
+    /* +21C */ float x21C;
+    /* +220 */ u8 x220[0x258 - 0x220];
+    /* +258 */ float x258;
+    /* +25C */ u8 x25C[0x260 - 0x25C];
+    /* +260 */ float x260_startShieldHealth;
+    /* +264 */ u8 x264[0x27C - 0x264];
+    /* +27C */ float x27C;
+    /* +280 */ float x280_unkShieldHealth;
+    /* +284 */ float x284;
+    /* +288 */ float x288;
+    /* +28C */ u8 x28C[0x294 - 0x28C];
+    /* +294 */ float x294;
+    /* +298 */ u8 x298[0x2A4 - 0x298];
+    /* +2A4 */ float x2A4;
+    /* +2A8 */ u8 x2A8[0x2B4 - 0x2A8];
+    /* +2B4 */ float x2B4;
+    /* +2B8 */ u8 x2B8[0x2DC - 0x2B8];
+    /* +2DC */ float x2DC;
+    /* +2E0 */ float x2E0;
+    /* +2E4 */ u8 x2E4[0x308 - 0x2E4];
+    /* +308 */ float x308;
+    /* +30C */ u8 x30C[0x3A8 - 0x30C];
+    /* +3A8 */ float x3A8;
+    /* +3AC */ u8 x3AC[0x3E0 - 0x3AC];
+    /* +3E0 */ float x3E0;
+    /* +3E4 */ float x3E4;
+    /* +3E8 */ float x3E8_shieldKnockbackFrameDecay;
+    /* +3EC */ float x3EC_shieldGroundFrictionMultiplier;
+    /* +3F0 */ u8 x3F0[0x418 - 0x3F0];
+    /* +418 */ int x418;
+    /* +41C */ int x41C;
+    /* +420 */ u8 x420[0x440 - 0x420];
+    /* +440 */ float x440;
+    /* +444 */ float x444;
+    /* +448 */ float x448;
+    /* +44C */ float x44C;
+    /* +450 */ float x450;
+    /* +454 */ float x454;
+    /* +458 */ float x458;
+    /* +45C */ float x45C;
+    /* +460 */ float x460;
+    /* +464 */ u8 x464[0x480 - 0x464];
+    /* +480 */ float x480;
+    /* +484 */ u8 x484[0x498 - 0x484];
+    /* +498 */ u32 x498_ledgeCooldownTime;
+    /* +49C */ u8 x49C[0x4C4 - 0x49C];
+    /* +4C4 */ int x4C4;
+    /* +4C8 */ int x4C8;
+    /* +4CC */ int x4CC;
+    /* +4D0 */ float x4D0;
+    /* +4D4 */ float x4D4;
+    /* +4D8 */ u32 x4D8;
+    /* +4DC */ u8 x4DC[0x59C - 0x4DC];
+    /* +59C */ float x59C;
+    /* +5A0 */ u8 x5A0[0x5C0 - 0x5A0];
+    /* +5F0 */ float x5C0;
+    /* +5C4 */ u8 x5C4[0x5F0 - 0x5C4];
+    /* +5F0 */ u32 x5F0;
+    /* +5F4 */ u8 x5F4[0x6D8 - 0x5F4];
+    /// @todo expand to actual size
+    /* +6D8 */ void* x6D8[1];
+    /* +6DC */ GXColor x6DC_colorsByPlayer[4];
+    /* +6EC */ u8 x6EC[0x6F4 - 0x6EC];
+    /* +6F4 */ int x6F4_unkDamage;
+    /* +6F8 */ int x6F8;
+    /* +6FC */ int x6FC;
+    /* +700 */ int x700;
+    /* +704 */ float x704;
+    /* +708 */ float x708;
+    /* +70C */ float x70C;
+    /* +710 */ float x710;
+    /* +714 */ float x714;
+    /* +718 */ u8 x718[0x768 - 0x718];
+    /* +768 */ float x768;
+    /* +76C */ float x76C;
+    /* +770 */ float x770;
+    /* +774 */ int x774;
+    /* +7A0 */ u8 x7A0_filler[0x7A0 - 0x778];
+    /* +7A0 */ int x7A0;
+    /* +7A4 */ int x7A4;
+    /* +7A8 */ int x7A8;
+    /* +7AC */ int x7AC;
+    /* +7B0 */ int x7B0;
+    /* +7B4 */ int x7B4_unkDamage;
+    /* +7B8 */ float x7B8;
+    /* +7BC */ float x7BC;
+    /* +7C0 */ float x7C0;
+    /* +7C4 */ int x7C4;
+    /* +7C8 */ int x7C8;
+    /* +7CC */ int x7CC;
+    /* +7D0 */ int x7D0;
+    /* +7D4 */ int x7D4;
+    /* +7D8 */ int x7D8;
+    /* +7DC */ int x7DC;
+    /* +7E0 */ int x7E0;
+    /* +7E4 */ float x7E4_scaleZ;
+    /* +7E8 */ u8 x7E8_filler[0x814 - 0x7E8];
+    /* +814 */ int x814;
     // lots of more data following, exact size to be determined
 } ftCommonData;
 
 typedef struct _FtCollisionData {
-    u8 data_filler_0[0x28];
+    u8 x0[0x28];
     u32 x28;
-    u8 data_filler_2C[0x30 - 0x2C];
+    u8 x2C[0x30 - 0x2C];
     s32 x30;
     s32 x34;
 } FtCollisionData;
 
 typedef struct _DObjList {
-    u32 count;
+    usize_t count;
     HSD_DObj** data;
 } DObjList;
 
 struct UnkFloat6_Camera;
 
 typedef struct _ftData {
-    struct {
+    /*  +0 */ struct {
         u8 x0_fill[0x8C];
         f32 x8C;
         u8 x90_fill[0xFC - 0x90];
@@ -217,14 +260,16 @@ typedef struct _ftData {
         u8 x100_fill[0x16C - 0x100];
         s32 x16C_idx;
     }* x0;
-    /* 0x04 */ void* ext_attr;
-    struct {
+    /*  +4 */ void* ext_attr;
+    /*  +8 */ struct {
         u8 x0_fill[0x10];
         u8 unk10, unk11, unk12;
     }* x8;
-    struct S_TEMP4* xC;
-    u8* x10;
-    s32 filler_x14[10];
+    /*  +C */ struct S_TEMP4* xC;
+    /* +10 */ u8* x10;
+    /* +14 */ u8 x14[0x24 - 0x14];
+    /* +24 */ int x24;
+    /* +28 */ u8 x28[0x3C - 0x28];
     struct UnkFloat6_Camera* x3C;
     s32 filler_x40[2];
     /* 0x48 */ UNK_T* x48_items;
@@ -249,103 +294,103 @@ typedef struct _ThrowFlags {
     };
 } ThrowFlags;
 
-typedef struct attr {
-    /* 0x110 */ f32 x110_WalkInitialVelocity;
-    /* 0x114 */ f32 x114_WalkAcceleration;
-    /* 0x118 */ f32 x118_WalkMaximumVelocity;
-    /* 0x11C */ f32 x11C_SlowWalkMax;
-    /* 0x120 */ f32 x120_MidWalkPoint;
-    /* 0x124 */ f32 x124_FastWalkMin;
-    /* 0x128 */ f32 x128_GroundFriction; // used
-    /* 0x12C */ f32 x12C_DashInitialVelocity;
-    /* 0x130 */ f32 x130_DashrunAccelerationA;
-    /* 0x134 */ f32 x134_DashrunAccelerationB;
-    /* 0x138 */ f32 x138_DashrunTerminalVelocity;
-    /* 0x13C */ f32 x13C_RunAnimationScaling;
-    /* 0x140 */ f32 x140_MaxRunbrakeFrames;
-    /* 0x144 */ f32 x144_GroundedMaxHorizontalVelocity;
-    /* 0x148 */ f32 x148_JumpStartupTime;
-    /* 0x14C */ f32 x14C_JumpHInitialVelocity;
-    /* 0x150 */ f32 x150_JumpVInitialVelocity;
-    /* 0x154 */ f32 x154_GroundToAirJumpMomentumMultiplier;
-    /* 0x158 */ f32 x158_JumpHMaxVelocity;
-    /* 0x15C */ f32 x15C_HopVInitialVelocity;
-    /* 0x160 */ f32 x160_AirJumpVMultiplier;
-    /* 0x164 */ f32 x164_AirJumpHMultiplier;
-    /* 0x168 */ s32 x168_MaxJumps;
-    /* 0x16C */ f32 x16C_Gravity;
-    /* 0x170 */ f32 x170_TerminalVelocity;
-    /* 0x174 */ f32 x174_AerialDriftStickMult;
-    /* 0x178 */ f32 x178_AerialDriftBase;
-    /* 0x17C */ f32 x17C_AerialDriftMax;
-    /* 0x180 */ f32 x180_AerialFriction;
-    /* 0x184 */ f32 x184_FastfallVelocity;
-    /* 0x188 */ f32 x188_HorizontalAirMobilityConstant;
-    /* 0x18C */ f32 x18C_Jab_2InputWindow;
-    /* 0x190 */ s32 x190_Jab_3InputWindow;
-    /* 0x194 */ s32 x194_FramesToChangeDirectionOnStandingTurn;
-    /* 0x198 */ f32 x198_Weight;
-    /* 0x19C */ f32 x19C_ModelScaling;
-    /* 0x1A0 */ f32 x1A0_InitialShieldSize;
-    /* 0x1A4 */ f32 x1A4_ShieldBreakInitialVelocity;
-    /* 0x1A8 */ s32 x1A8_RapidJabWindow;
-    /* 0x1AC */ s32 x1AC;
-    /* 0x1B0 */ s32 x1B0;
-    /* 0x1B4 */ s32 x1B4;
-    /* 0x1B8 */ f32 x1B8_LedgeJumpHorizontalVelocity;
-    /* 0x1BC */ f32 x1BC_LedgeJumpVerticalVelocity;
-    /* 0x1C0 */ f32 x1C0_ItemThrowVelocityMultiplier;
-    /* 0x1C4 */ s32 x1C4;
-    /* 0x1C8 */ s32 x1C8;
-    /* 0x1CC */ s32 x1CC;
-    /* 0x1D0 */ s32 x1D0;
-    /* 0x1D4 */ s32 x1D4;
-    /* 0x1D8 */ s32 x1D8;
-    /* 0x1DC */ s32 x1DC;
-    /* 0x1E0 */ s32 x1E0;
-    /* 0x1E4 */ s32 x1E4;
-    /* 0x1E8 */ s32 x1E8;
-    /* 0x1EC */ s32 x1EC;
-    /* 0x1F0 */ f32 x1F0_KirbyBStarDamage;
-    /* 0x1F4 */ f32 x1F4_NormalLandingLag;
-    /* 0x1F8 */ f32 x1F8_NAirLandingLag;
-    /* 0x1FC */ f32 x1FC_FAirLandingLag;
-    /* 0x200 */ f32 x200_BAirLandingLag;
-    /* 0x204 */ f32 x204_UAirLandingLag;
-    /* 0x208 */ f32 x208_DAirLandingLag;
-    /* 0x20C */ f32 x20C_NametagHeight;
-    /* 0x210 */ s32 x210;
-    /* 0x214 */ f32 x214_WallJumpHorizontalVelocity;
-    /* 0x218 */ f32 x218_WallJumpVerticalVelocity;
-    /* 0x21C */ s32 x21C;
-    /* 0x220 */ f32 x220_TrophyScale;
-    /* 0x224 */ Vec3 x224;
-    /* 0x230 */ Vec3 x230;
-    /* 0x23C */ f32 x23C;
-    /* 0x240 */ Vec3 x240;
-    /* 0x24C */ f32 x24C;
-    /* 0x250 */ s32 x250;
-    /* 0x254 */ s32 x254;
-    /* 0x258 */ f32 x258; // used
-    /* 0x25C */ f32 x25C_BubbleRatio;
-    /* 0x260 */ s32 x260;
-    /* 0x264 */ s32 x264;
-    /* 0x268 */ s32 x268;
-    /* 0x26C */ s32 x26C;
-    /* 0x270 */ f32 x270_RespawnPlatformScale;
-    /* 0x274 */ s32 x274;
-    /* 0x278 */ s32 x278;
-    /* 0x27C */ s32 x27C_CameraZoomTargetBone;
-    /* 0x280 */ Vec3 x280;
-    /* 0x28C */ s32 x28C;
-    /* 0x290 */ s32 x290_WeightDependentThrowSpeedFlags;
-} attr;
+typedef struct ftCo_DatAttrs {
+    /* fp+110 */ float walk_init_vel;
+    /* fp+114 */ float walk_accel;
+    /* fp+118 */ float walk_max_vel;
+    /* fp+11C */ float x11C_SlowWalkMax;
+    /* fp+120 */ float x120_MidWalkPoint;
+    /* fp+124 */ float x124_FastWalkMin;
+    /* fp+128 */ float gr_friction; // used
+    /* fp+12C */ float x12C_DashInitialVelocity;
+    /* fp+130 */ float x130_DashrunAccelerationA;
+    /* fp+134 */ float x134_DashrunAccelerationB;
+    /* fp+138 */ float x138_DashrunTerminalVelocity;
+    /* fp+13C */ float x13C_RunAnimationScaling;
+    /* fp+140 */ float x140_MaxRunbrakeFrames;
+    /* fp+144 */ float x144_GroundedMaxHorizontalVelocity;
+    /* fp+148 */ float x148_JumpStartupTime;
+    /* fp+14C */ float x14C_JumpHInitialVelocity;
+    /* fp+150 */ float x150_JumpVInitialVelocity;
+    /* fp+154 */ float x154_GroundToAirJumpMomentumMultiplier;
+    /* fp+158 */ float x158_JumpHMaxVelocity;
+    /* fp+15C */ float x15C_HopVInitialVelocity;
+    /* fp+160 */ float x160_AirJumpVMultiplier;
+    /* fp+164 */ float x164_AirJumpHMultiplier;
+    /* fp+168 */ s32 x168_MaxJumps;
+    /* fp+16C */ float grav;
+    /* fp+170 */ float terminal_vel;
+    /* fp+174 */ float air_drift_stick_mul;
+    /* fp+178 */ float x178_AerialDriftBase;
+    /* fp+17C */ float air_drift_max;
+    /* fp+180 */ float x180_AerialFriction;
+    /* fp+184 */ float x184_FastfallVelocity;
+    /* fp+188 */ float x188_HorizontalAirMobilityConstant;
+    /* fp+18C */ float x18C_Jab_2InputWindow;
+    /* fp+190 */ float x190_Jab_3InputWindow;
+    /* fp+194 */ s32 x194_FramesToChangeDirectionOnStandingTurn;
+    /* fp+198 */ float x198_Weight;
+    /* fp+19C */ float x19C_ModelScaling;
+    /* fp+1A0 */ float x1A0_InitialShieldSize;
+    /* fp+1A4 */ float x1A4_ShieldBreakInitialVelocity;
+    /* fp+1A8 */ s32 x1A8_RapidJabWindow;
+    /* fp+1AC */ s32 x1AC;
+    /* fp+1B0 */ s32 x1B0;
+    /* fp+1B4 */ s32 x1B4;
+    /* fp+1B8 */ float x1B8_LedgeJumpHorizontalVelocity;
+    /* fp+1BC */ float x1BC_LedgeJumpVerticalVelocity;
+    /* fp+1C0 */ float x1C0_ItemThrowVelocityMultiplier;
+    /* fp+1C4 */ s32 x1C4;
+    /* fp+1C8 */ s32 x1C8;
+    /* fp+1CC */ s32 x1CC;
+    /* fp+1D0 */ s32 x1D0;
+    /* fp+1D4 */ s32 x1D4;
+    /* fp+1D8 */ s32 x1D8;
+    /* fp+1DC */ s32 x1DC;
+    /* fp+1E0 */ s32 x1E0;
+    /* fp+1E4 */ s32 x1E4;
+    /* fp+1E8 */ s32 x1E8;
+    /* fp+1EC */ s32 x1EC;
+    /* fp+1F0 */ float x1F0_KirbyBStarDamage;
+    /* fp+1F4 */ float x1F4_NormalLandingLag;
+    /* fp+1F8 */ float landingairn_lag;
+    /* fp+1FC */ float landingairf_lag;
+    /* fp+200 */ float landingairb_lag;
+    /* fp+204 */ float landingairhi_lag;
+    /* fp+208 */ float landingairlw_lag;
+    /* fp+20C */ float x20C_NametagHeight;
+    /* fp+210 */ s32 x210;
+    /* fp+214 */ float x214_WallJumpHorizontalVelocity;
+    /* fp+218 */ float x218_WallJumpVerticalVelocity;
+    /* fp+21C */ s32 x21C;
+    /* fp+220 */ float x220_TrophyScale;
+    /* fp+224 */ Vec3 x224;
+    /* fp+230 */ Vec3 x230;
+    /* fp+23C */ float x23C;
+    /* fp+240 */ Vec3 x240;
+    /* fp+24C */ float x24C;
+    /* fp+250 */ s32 x250;
+    /* fp+254 */ s32 x254;
+    /* fp+258 */ float x258; // used
+    /* fp+25C */ float x25C_BubbleRatio;
+    /* fp+260 */ s32 x260;
+    /* fp+264 */ s32 x264;
+    /* fp+268 */ s32 x268;
+    /* fp+26C */ s32 x26C;
+    /* fp+270 */ float x270_RespawnPlatformScale;
+    /* fp+274 */ s32 x274;
+    /* fp+278 */ s32 x278;
+    /* fp+27C */ s32 x27C_CameraZoomTargetBone;
+    /* fp+280 */ Vec3 x280;
+    /* fp+28C */ s32 x28C;
+    /* fp+290 */ s32 x290_WeightDependentThrowSpeedFlags;
+} ftCo_DatAttrs;
 
 typedef struct _FighterBone {
-    /* 0x0 */ HSD_JObj* x0_jobj;
-    /* 0x4 */ HSD_JObj* x4_jobj2; // used for interpolation
-    /* 0x5 */ UnkFlagStruct flags;
-    /* 0x6 */ u8 filler_x6[7];
+    /* +0 */ HSD_JObj* x0_jobj;
+    /* +4 */ HSD_JObj* x4_jobj2; // used for interpolation
+    /* +5 */ UnkFlagStruct flags;
+    /* +6 */ u8 filler_x6[7];
 } FighterBone;
 
 typedef struct _CameraBox {
@@ -374,7 +419,6 @@ typedef struct _ftCollisionBox {
     f32 bottom;
     Vec2 left;
     Vec2 right;
-
 } ftCollisionBox;
 
 typedef struct _ECBFlagStruct {
@@ -397,89 +441,94 @@ typedef struct SurfaceData {
 } SurfaceData;
 
 typedef struct _CollData {
-    HSD_GObj* x0_gobj;
-    Vec3 x4_vec;
-    Vec3 x10_vec;
-    Vec3 x1C_vec;
-    Vec3 x28_vec;
-    ECBFlagStruct x34_flags;
-    ECBFlagStruct x35_flags;
-    s16 x36;
-    s32 x38;
-    s32 x3C;
-    s32 x40;
-    u32 x44;
-    u32 x48;
-    u32 x4C;
-    f32 x50;
-    f32 x54;
-    f32 x58;
-    f32 x5C;
-    s32 x60;
-    ftECB x64_ecb;
-    ftECB x84_ecb;
-    ftECB xA4_ecbCurrCorrect;
-    ftECB xC4_ecb;
-    ftECB xE4_ecb;
-    s32 x104; // TODO: this is the start of a substruct with size 0x2C
-    union {
-        struct {
-            HSD_JObj* x108_joint;
-            HSD_JObj* x10C_joint[6];
+    /* fp+6F0 */ HSD_GObj* x0_gobj;
+    /* fp+6F4 */ Vec3 x4_vec;
+    /* fp+700 */ Vec3 x10_vec;
+    /* fp+70C */ Vec3 x1C_vec;
+    /* fp+718 */ Vec3 x28_vec;
+    /* fp+724 */ ECBFlagStruct x34_flags;
+    /* fp+725 */ ECBFlagStruct x35_flags;
+    /* fp+726 */ s16 x36;
+    /* fp+728 */ s32 x38;
+    /* fp+72C */ s32 x3C;
+    /* fp+730 */ s32 x40;
+    /* fp+734 */ u32 x44;
+    /* fp+738 */ u32 x48;
+    /* fp+73C */ u32 x4C;
+    /* fp+740 */ f32 x50;
+    /* fp+744 */ f32 x54;
+    /* fp+748 */ f32 x58;
+    /* fp+74C */ f32 x5C;
+    /* fp+750 */ s32 x60;
+    /* fp+754 */ ftECB x64_ecb;
+    /* fp+774 */ ftECB x84_ecb;
+    /* fp+794 */ ftECB xA4_ecbCurrCorrect;
+    /* fp+7B4 */ ftECB xC4_ecb;
+    /* fp+7D4 */ ftECB xE4_ecb;
+    /// @todo this is the start of a substruct with size 0x2C
+    /* fp+7F4 */ s32 x104;
+    /* fp+7F8 */ union {
+        /* fp+7F8 */ struct {
+            /* fp+7F8 */ HSD_JObj* x108_joint;
+            /* fp+7FC */ HSD_JObj* x10C_joint[6];
         };
-        struct {
-            f32 x108_f32;
-            f32 x10C_f32;
-            f32 x110_f32;
-            f32 x114_f32;
-            f32 x118_f32;
-            f32 x11C_f32;
-            f32 x120_f32;
+        /* fp+7F8 */ struct {
+            /* fp+7F8 */ f32 x108_f32;
+            /* fp+7FC */ f32 x10C_f32;
+            /* fp+800 */ f32 x110_f32;
+            /* fp+804 */ f32 x114_f32;
+            /* fp+808 */ f32 x118_f32;
+            /* fp+80C */ f32 x11C_f32;
+            /* fp+810 */ f32 x120_f32;
         };
     };
-    f32 x124;
-    f32 x128;
-    f32 x12C;
-    u32 x130_flags;
-    s32 x134_envFlags;
-    s32 filler138;
-    s32 filler13C;
-    Vec3 x140;
-    SurfaceData x14C_ground;
-    SurfaceData x160_rightwall;
-    SurfaceData x174_leftwall;
-    SurfaceData x188_ceiling;
-    /* 0x19C */ s32 x19C;
+    /* fp+814 */ f32 x124;
+    /* fp+818 */ f32 x128;
+    /* fp+81C */ f32 x12C;
+    /* fp+820 */ u32 x130_flags;
+    /* fp+824 */ s32 env_flags;
+    /* fp+828 */ s32 x138;
+    /* fp+82C */ s32 x13C;
+    /* fp+830 */ Vec3 x140;
+    /* fp+83C */ SurfaceData x14C_ground;
+    /* fp+850 */ SurfaceData x160_rightwall;
+    /* fp+864 */ SurfaceData x174_leftwall;
+    /* fp+878 */ SurfaceData x188_ceiling;
+    /* fp+88C */ s32 x19C;
 } CollData;
 
-typedef struct _SmashAttr {
-    s32 x2114_state;     // 0x2114 0 = none, 1 = pre-charge, 2 = charging, 3 =
-                         // release
-    f32 x2118_frames;    // 0x2118 number of frames fp has charged for
-    f32 x211C_holdFrame; // 0x211c frame that charge begins/ends
-    f32 x2120_damageMul; // 0x2120 damage multiplier
-    f32 x2124_frameSpeedMul;    // 0x2124 speed multiplier?
-    s32 x2128;                  // 0x2128
-    s8 x212C;                   // 0x212C
-    s8 x212D;                   // 0x212D
-    s8 x212E;                   // 0x212E
-    s8 x212F;                   // 0x212F
-    s32 x2130_sfxBool;          // 0x2130 bool for smash sfx?
-    s8 x2134_vibrateFrame;      // 0x2134
-    s8 x2135;                   // 0x2135
-    s8 x2136;                   // 0x2136
-    s8 x2137;                   // 0x2137
-    f32 x2138_smashSinceHitbox; // 0x2138
+/* fp+2114 */ typedef struct _SmashAttr {
+    /// 0 = none, 1 = pre-charge, 2 = charging, 3 = release
+    /* fp+2114 */ enum_t x2114_state;
+    /// number of frames fp has charged for
+    /* fp+2118 */ f32 x2118_frames;
+    /// frame that charge begins/ends
+    /* fp+211C */ f32 x211C_holdFrame;
+    /// damage multiplier
+    /* fp+2120 */ f32 x2120_damageMul;
+    /// speed multiplier?
+    /* fp+2124 */ f32 x2124_frameSpeedMul;
+    /* fp+2128 */ s32 x2128;
+    /* fp+212C */ s8 x212C;
+    /* fp+212D */ s8 x212D;
+    /* fp+212E */ s8 x212E;
+    /* fp+212F */ s8 x212F;
+    /// bool for smash sfx?
+    /* fp+2130 */ s32 x2130_sfxBool;
+    /* fp+2134 */ s8 x2134_vibrateFrame;
+    /* fp+2135 */ s8 x2135;
+    /* fp+2136 */ s8 x2136;
+    /* fp+2137 */ s8 x2137;
+    /* fp+2138 */ f32 x2138_smashSinceHitbox;
 } SmashAttr;
 
-typedef struct _itPickup // 0x294
-{
-    Vec2 x0_ground_light_offset;  // 0x294
-    Vec2 x8;                      // 0x29C
-    Vec2 x10_ground_heavy_offset; // 0x2A4
-    Vec2 x18;                     // 0x2AC
-    Vec2 x20_air_light_offset;    // 0x2B4
-    Vec2 x28;                     // 0x2BC
+/* fp+294 */ typedef struct _itPickup {
+    /* fp+294 */ Vec2 x0_ground_light_offset;
+    /* fp+29C */ Vec2 x8;
+    /* fp+2A4 */ Vec2 x10_ground_heavy_offset;
+    /* fp+2AC */ Vec2 x18;
+    /* fp+2B4 */ Vec2 x20_air_light_offset;
+    /* fp+2BC */ Vec2 x28;
 } itPickup;
 
 typedef struct {
@@ -500,15 +549,16 @@ struct S_TEMP1 {
     UnkFlagStruct flags;
 };
 
-struct ActionState {
+struct MotionState {
     enum_t anim_id;
 
-    s32 x4_flags;
+    enum_t x4_flags;
 
     union {
-        u32 x8_flags;
+        /// @todo Try to match without this being a @c union.
+        u32 _;
         struct {
-            u8 move_id;
+            FtMoveId move_id : 8;
             UnkFlagStruct x9_flags;
             UnkFlagStruct flagsA;
             UnkFlagStruct flagsB;
@@ -544,860 +594,621 @@ struct Fighter_DemoStrings {
     char* vi_wait_filename;
 };
 
-// --------------------------------------------------------------------------------
-// UNION DEFS FOR FIGHTER STRUCTS. TODO: Maybe move these to per-fp
-// header includes or something.
-// --------------------------------------------------------------------------------
-struct SpecialAttrs_Mario {
-    /* 0x222C */ s32 x222C_vitaminCurr; // Current Megavitamin color combo
-    /* 0x2230 */ s32 x2230_vitaminPrev; // Previous Megavitamin color combo
-    /* 0x2234 */ bool x2234_tornadoCharge;
-    /* 0x2238 */ bool x2238_isCapeBoost;
-    /* 0x223C */ HSD_GObj* x223C_capeGObj;
-    /* 0x2240 */ u32 x2240;
-};
-
-struct SpecialAttrs_Fox {
-    /* 0x222C */ HSD_GObj* x222C_blasterGObj;
-};
-
-struct SpecialAttrs_DK {
-    /* 0x222C */ s32 x222C;
-    /* 0x2230 */ s32 x2230;
-};
-
-struct SpecialAttrs_Kirby {
-    /* 0x222C */ s32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ UnkFlagStruct x2234;
-    /* 0x2235 */ u8 filler_x2235[3];
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-    /* 0x224C */ u8 filler1[0x228C - 0x224C];
-    /* 0x228C */ u32 x228C;
-    /* 0x2290 */ u32 x2290;
-    /* 0x2294 */ u8 filler2[0x22C8 - 0x2294];
-    /* 0x22C8 */ s32 x22C8;
-    /* 0x22CC */ s32 x22CC;
-    /* 0x22D0 */ s32 x22D0;
-    /* 0x22D4 */ s32 x22D4;
-    /* 0x22D8 */ s32 x22D8;
-    /* 0x22DC */ s32 x22DC;
-    /* 0x22E0 */ s32 x22E0;
-    /* 0x22E4 */ s32 x22E4;
-    /* 0x22E8 */ s32 x22E8;
-};
-
-struct SpecialAttrs_Koopa {
-    /* 0x222C */ f32 x222C;
-    /* 0x2230 */ f32 x2230;
-};
-
-struct SpecialAttrs_Link {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-};
-
-struct SpecialAttrs_Seak {
-    /* 0x222C */ int x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ HSD_GObj* x2234;
-    /* 0x2238 */ Vec3 x2238[4];
-    /* 0x2268 */ Vec3 x2268[4];
-    /* 0x2298 */ Vec3 lstick_delta;
-};
-
-struct SpecialAttrs_Ness {
-    /* 0x222C */ HSD_GObj* x222C_yoyoGObj;
-    /* 0x2230 */ Vec3 x2230_yoyoHitboxPos;
-    /* 0x223C */ f32 x223C;
-    /* 0x2240 */ HSD_GObj* x2240_flashGObj;
-    /* 0x2244 */ HSD_GObj* x2244_pkThunderGObj;
-    /* 0x2248 */ HSD_GObj* x2248_baseballBatGObj;
-    /* 0x224C */ u32 x224C_thunderGFX; // bool for PK Thunder GFX?
-};
-
-struct SpecialAttrs_Peach {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-};
-
-struct SpecialAttrs_Popo {
-    /* 0x222C */ uint x222C;
-    /* 0x2230 */ UnkFlagStruct x2230;
-    /* 0x2231 */ u8 filler_x2231[3];
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-    /* 0x224C */ u32 x224C;
-    /* 0x2250 */ f32 x2250;
-};
-
-struct SpecialAttrs_Pikachu {
-    char filler0[0x100];
-};
-
-struct SpecialAttrs_Samus {
-    /* 0x222C */ HSD_GObj* x222C;
-    /* 0x2230 */ s32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-
-    /* 0x2240 */ u8 x2240;
-    /* 0x2241 */ u8 x2241;
-    /* 0x2242 */ u8 x2242;
-    /* 0x2243 */ u8 x2243;
-
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-};
-
-struct SpecialAttrs_Yoshi {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-};
-
-struct SpecialAttrs_Purin {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ HSD_JObj* x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ void* x2244;
-    /* 0x2248 */ u32 x2248;
-};
-
-struct SpecialAttrs_Mewtwo {
-    /* 0x222C */ HSD_GObj* x222C_disableGObj;
-    /* 0x2230 */ HSD_GObj*
-        x2230_shadowHeldGObj; // GObj of Shadow Ball while in Mewtwo's hands?
-    /* 0x2234 */ s32
-        x2234_shadowBallCharge; // Number of cycles Shadow Ball has been charged
-    /* 0x2238 */ HSD_GObj* x2238_shadowBallGObj;
-    /* 0x223C */ bool x223C_isConfusionBoost;
-};
-
-struct SpecialAttrs_Luigi {
-    /* 0x222C */ bool x222C_cycloneCharge;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-};
-
-struct SpecialAttrs_Mars {
-    /* 0x222C */ u32 x222C;
-};
-
-struct SpecialAttrs_Zelda {
-    /* 0x222C */ HSD_GObj* x222C;
-};
-
-struct SpecialAttrs_CLink {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-};
-
-struct SpecialAttrs_Pichu {
-    char filler0[0x100];
-};
-
-struct SpecialAttrs_GameWatch {
-    /* 0x222C */ s32 x222C_judgeVar1;
-    /* 0x2230 */ s32 x2230_judgeVar2;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ s32 x2238_panicCharge;
-    /* 0x223C */ s32 x223C_panicDamage;
-    /* 0x2240 */ s32 x2240_chefVar1;
-    /* 0x2244 */ s32 x2244_chefVar2;
-    /* 0x2248 */ HSD_GObj* x2248_manholeGObj;
-    /* 0x224C */ HSD_GObj* x224C_greenhouseGObj;
-    /* 0x2250 */ HSD_GObj* x2250_manholeGObj2;
-    /* 0x2254 */ HSD_GObj* x2254_fireGObj;
-    /* 0x2258 */ HSD_GObj* x2258_parachuteGObj;
-    /* 0x225C */ HSD_GObj* x225C_turtleGObj;
-    /* 0x2260 */ HSD_GObj* x2260_sparkyGObj;
-    /* 0x2264 */ HSD_GObj* x2264_judgementGObj;
-    /* 0x2268 */ HSD_GObj* x2268_panicGObj;
-    /* 0x226C */ HSD_GObj* x226C_rescueGObj;
-};
-
-struct SpecialAttrs_Masterhand {
-    /* 0x222C */ HSD_GObj* x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ f32 x2238;
-    /* 0x223C */ f32 x223C;
-    /* 0x2240 */ Vec3 x2240_pos;
-    /* 0x224C */ u32 x224C;
-    /* 0x2250 */ s32 x2250;
-    /* 0x2254 */ s32 x2254;
-    /* 0x2258 */ s32 x2258;
-};
-
-struct SpecialAttrs_Crazyhand {
-    /* 0x222C */ HSD_GObj* x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ f32 x2238;
-    /* 0x223C */ f32 x223C;
-    /* 0x2240 */ Vec3 x2240_pos;
-    /* 0x224C */ u32 x224C;
-    /* 0x2250 */ s32 x2250;
-    /* 0x2254 */ s32 x2254;
-    /* 0x2258 */ s32 x2258;
-};
-
-struct SpecialAttrs_Boy {
-    char filler0[0x100];
-};
-
-struct SpecialAttrs_Girl {
-    char filler0[0x100];
-};
-
-struct SpecialAttrs_Sandbag {
-    char filler0[0x100];
-};
-
 /// @todo Rename this and its members; investigate using it elsewhere.
-union Struct2070 {
-    struct {
-        s8 x2070;
+/* fp+2070 */ union Struct2070 {
+    /* fp+2070 */ struct {
+        /* fp+2070 */ s8 x2070;
+        /* fp+2070:0 */ u8 x2071_b0_3 : 4;
+        /* fp+2070:4 */ u8 x2071_b4 : 1;
+        /* fp+2070:5 */ u8 x2071_b5 : 1;
+        /* fp+2070:6 */ u8 x2071_b6 : 1;
+        /* fp+2070:7 */ u8 x2071_b7 : 1;
 
-        u8 x2071_b0_3 : 4;
-        u8 x2071_b4 : 1;
-        u8 x2071_b5 : 1;
-        u8 x2071_b6 : 1;
-        u8 x2071_b7 : 1;
-
-        u8 x2072_b0_3 : 4;
-        u8 x2072_b4 : 1;
-        u8 x2072_b5 : 1;
-        u8 x2072_b6 : 1;
-        u8 x2072_b7 : 1;
-
-        u8 x2073;
+        /* fp+2070:0 */ u8 x2072_b0_3 : 4;
+        /* fp+2070:4 */ u8 x2072_b4 : 1;
+        /* fp+2070:5 */ u8 x2072_b5 : 1;
+        /* fp+2070:6 */ u8 x2072_b6 : 1;
+        /* fp+2070:7 */ u8 x2072_b7 : 1;
+        /* fp+2073 */ u8 x2073;
     };
-    s32 x2070_int;
+    /* fp+2070 */ s32 x2070_int;
 };
 
 struct Fighter {
-    /* 0x0 */ HSD_GObj* x0_fighter;
-    /* 0x4 */ FighterKind x4_fighterKind;
-    /* 0x8 */ s32 x8_spawnNum;
-    /* 0xC */ u8 xC_playerID;
-    /* 0x10 */ enum_t action_id;
-    /* 0x14 */ enum_t anim_id;
-    /* 0x18 */ s32 x18;
-    /* 0x1C */ ActionState* x1C_actionStateList;
-    /* 0x20 */ ActionState* x20_actionStateList;
-    /* 0x24 */ struct S_TEMP4* x24;
-    /* 0x28 */ u8* x28;
-    /* 0x2C */ f32 facing_dir;
-    /* 0x30 */ f32 x30_facingDirectionRepeated;
-    /* 0x34 */ Vec3 x34_scale;
-    /* 0x40 */ f32 x40;
-    /* 0x44 */ Mtx x44_mtx;
-    Vec3 x74_anim_vel;             // 0x74
-    Vec3 x80_self_vel;             // 0x80
-    Vec3 x8c_kb_vel;               // 0x8C
-    Vec3 x98_atk_shield_kb;        // 0x98
-    Vec3 xA4_unk_vel;              // 0xA4
-    Vec3 xB0_pos;                  // 0xb0
-    Vec3 xBC_prevPos;              // 0xBC
-    Vec3 xC8_pos_delta;            // 0xC8
-    Vec3 xD4_unk_vel;              // 0xD4
-    GroundOrAir xE0_ground_or_air; // 0xE0
-    f32 xE4_ground_accel_1;        // 0xE4
-    f32 xE8_ground_accel_2;        // 0xE8
-    f32 xEC_ground_vel;            // 0xEC
-    f32 xF0_ground_kb_vel;
-    f32 xF4_ground_attacker_shield_kb_vel;
-    Vec2 xF8_playerNudgeVel;
-    /* 0x100 */ f32 x100;
-    /* 0x104 */ u8 x104;
-    /* 0x105 */ s8 x105;
-    /* 0x106 */ s8 x106;
-    /* 0x107 */ s8 x107;
-    /* 0x108 */ HSD_Joint* x108_costume_joint;
-    /* 0x10C */ ftData* x10C_ftData;
-    // TODO: Ask Psi how many of those are confirmed, only a fraction of them is
-    // used right now
-    attr x110_attr;
-    /* 0x294 */ itPickup x294_itPickup;
-    /* 0x2C4 */ Vec2 x2C4;
-    /* 0x2CC */ void* x2CC;
-    /* 0x2D0 */ void* x2D0;
-    /* 0x2D4 */ void* x2D4_specialAttributes;
-    /* 0x2D8 */ void* x2D8_specialAttributes2;
-    /* 0x2DC */ f32 x2DC;
-    /* 0x2E0 */ f32 x2E0;
-    /* 0x2E4 */ f32 x2E4;
-    /* 0x2E8 */ f32 x2E8;
-    /* 0x2EC */ f32 x2EC;
-    /* 0x2F0 */ u32 x2F0;
-    /* 0x2F4 */ unk_t x2F4;
-    u8 filler_x2F0[0x3E0 - 0x2F8];
-    /* 0x3E0 */ u32 x3E0;
-    /* 0x3E4 */ f32 x3E4;
-    /* 0x3E8 */ f32 x3E8;
-    /* 0x3EC */ s32 x3EC;
-    /* 0x3F0 */ s32 x3F0;
-    u8 filler_x3F4[0x588 - 0x3F4];
-    /* 0x588 */ HSD_LObj* x588;
-    /* 0x58C */ s32 x58C;
-    /* 0x590 */ s32 x590;
-    /* 0x594 */ union {
+    /*    fp+0 */ HSD_GObj* gobj;
+    /*    fp+4 */ FighterKind kind;
+    /*    fp+8 */ s32 x8_spawnNum;
+    /*    fp+C */ u8 xC_playerID;
+    /*   fp+10 */ FtMotionId motion_id;
+    /*   fp+14 */ enum_t anim_id;
+    /*   fp+18 */ s32 x18;
+    /*   fp+1C */ MotionState* x1C_actionStateList;
+    /*   fp+20 */ MotionState* x20_actionStateList;
+    /*   fp+24 */ struct S_TEMP4* x24;
+    /*   fp+28 */ u8* x28;
+    /*   fp+2C */ f32 facing_dir;
+    /*   fp+30 */ f32 x30_facingDirectionRepeated;
+    /*   fp+34 */ Vec3 x34_scale;
+    /*   fp+40 */ f32 x40;
+    /*   fp+44 */ Mtx x44_mtx;
+    /*   fp+74 */ Vec3 x74_anim_vel;
+    /*   fp+80 */ Vec3 self_vel;
+    /*   fp+8C */ Vec3 x8c_kb_vel;
+    /*   fp+98 */ Vec3 x98_atk_shield_kb;
+    /*   fp+A4 */ Vec3 xA4_unk_vel;
+    /*   fp+B0 */ Vec3 cur_pos;
+    /*   fp+BC */ Vec3 prev_pos;
+    /*   fp+C8 */ Vec3 pos_delta;
+    /*   fp+D4 */ Vec3 xD4_unk_vel;
+    /*   fp+E0 */ GroundOrAir ground_or_air;
+    /*   fp+E4 */ f32 xE4_ground_accel_1;
+    /*   fp+E8 */ f32 xE8_ground_accel_2;
+    /*   fp+EC */ f32 gr_vel;
+    /*   fp+F0 */ f32 xF0_ground_kb_vel;
+    /*   fp+F4 */ f32 xF4_ground_attacker_shield_kb_vel;
+    /*   fp+F8 */ Vec2 xF8_playerNudgeVel;
+    /*  fp+100 */ f32 x100;
+    /*  fp+104 */ u8 x104;
+    /*  fp+105 */ s8 x105;
+    /*  fp+106 */ s8 x106;
+    /*  fp+107 */ s8 x107;
+    /*  fp+108 */ HSD_Joint* x108_costume_joint;
+    /*  fp+10C */ ftData* ft_data;
+    /*  fp+110 */ ftCo_DatAttrs co_attrs;
+    /*  fp+294 */ itPickup x294_itPickup;
+    /*  fp+2C4 */ Vec2 x2C4;
+    /*  fp+2CC */ void* x2CC;
+    /*  fp+2D0 */ void* x2D0;
+    /*  fp+2D4 */ void* dat_attrs;
+    /*  fp+2D8 */ void* x2D8_specialAttributes2;
+    /*  fp+2DC */ f32 x2DC;
+    /*  fp+2E0 */ f32 x2E0;
+    /*  fp+2E4 */ f32 x2E4;
+    /*  fp+2E8 */ f32 x2E8;
+    /*  fp+2EC */ f32 x2EC;
+    /*  fp+2F0 */ u32 x2F0;
+    /*  fp+2F4 */ unk_t x2F4;
+    /*  fp+2F8 */ u8 filler_x2F0[0x3E0 - 0x2F8];
+    /*  fp+3E0 */ u32 x3E0;
+    /*  fp+3E4 */ f32 x3E4;
+    /*  fp+3E8 */ f32 x3E8;
+    /*  fp+3EC */ s32 x3EC;
+    /*  fp+3F0 */ s32 x3F0;
+    /*  fp+3F4 */ u8 filler_x3F4[0x588 - 0x3F4];
+    /*  fp+588 */ HSD_LObj* x588;
+    /*  fp+58C */ s32 x58C;
+    /*  fp+590 */ s32 x590;
+    /*  fp+594 */ union {
         struct {
-            UnkFlagStruct x594_animCurrFlags1;
-            struct {
-                u8 x0 : 7;
-                u16 x7 : 3;
+            /* fp+594 */ UnkFlagStruct x594_animCurrFlags1;
+            /* fp+596 */ struct {
+                /* fp+596:0 */ u8 x0 : 7;
+                /* fp+596:7 */ u16 x7 : 3;
             } x596_bits;
         };
-        s32 x594_s32;
+        /* fp+594 */ s32 x594_s32;
     };
-    /* 0x598 */ s32 x598;
-    /* 0x59C */ void* x59C;
-    /* 0x5A0 */ void* x5A0;
-    u8 filler_x5A4[0x5B8 - 0x5A4];
-    /* 0x5B8 */ s32 x5B8;
-    /* 0x5BC */ s32 x5BC;
-    u8 filler_x598[0x5C8 - 0x5C0];
-    /* 0x5A0 */ void* x5C8;
-    u8 filler_x5CC[0x5E8 - 0x5CC];
-    /* 0x5E8 */ FighterBone* x5E8_fighterBones;
-    /* 0x5EC */ DObjList x5EC_dobj_list;
-    /* 0x5F4 */ s8 x5F4;
-    /* 0x5F5 */ s8 x5F5;
-    /* 0x5F6 */ s8 x5F6;
-    /* 0x5F7 */ s8 x5F7;
-    /* 0x5F8 */ s8 x5F8;
-    u8 filler_x5FC[0x60C - 0x5F9];
-    /* 0x60C */ void* x60C;
-    union {
-        /* 0x610 */ struct RGBA x610_color_rgba[2];
-        struct {
-            /* 0x610 */ s32 x610;
-            /* 0x614 */ s32 x614;
+    /*  fp+598 */ s32 x598;
+    /*  fp+59C */ UNK_T x59C;
+    /*  fp+5A0 */ UNK_T x5A0;
+    /*  fp+5A4 */ u8 filler_x5A4[0x5B8 - 0x5A4];
+    /*  fp+5B8 */ s32 x5B8;
+    /*  fp+5BC */ s32 x5BC;
+    /*  fp+598 */ u8 filler_x598[0x5C8 - 0x5C0];
+    /*  fp+5A0 */ void* x5C8;
+    /*  fp+5CC */ u8 filler_x5CC[0x5E8 - 0x5CC];
+    /*  fp+5E8 */ FighterBone* parts;
+    /*  fp+5EC */ DObjList dobj_list;
+    /*  fp+5F4 */ s8 x5F4;
+    /*  fp+5F5 */ s8 x5F5;
+    /*  fp+5F6 */ s8 x5F6;
+    /*  fp+5F7 */ s8 x5F7;
+    /*  fp+5F8 */ s8 x5F8;
+    /*  fp+5FC */ u8 filler_x5FC[0x60C - 0x5F9];
+    /*  fp+60C */ void* x60C;
+    /*  fp+610 */ union {
+        /* fp+610 */ GXColor x610_color_rgba[2];
+        /* fp+610 */ struct {
+            /* fp+610 */ s32 x610;
+            /* fp+614 */ s32 x614;
         };
     };
-    /* 0x618 */ u8 x618_player_id;
-    /* 0x619 */ u8 x619_costume_id;
-    /* 0x61A */ u8 x61A_controller_index;
-    /* 0x61B */ u8 x61B_team;
-    /* 0x61C */ u8 x61C;
-    /* 0x61D */ u8 x61D;
-    u8 filler_x61E[0x620 - 0x61E];
-
-    struct {
-        /* 0x620 */ f32 x620_lstick_x;
-        /* 0x624 */ f32 x624_lstick_y;
-        /* 0x628 */ f32 x628_lstick_x2;
-        /* 0x62C */ f32 x62C_lstick_y2;
-
-        /* 0x630 */ f32 x630;
-        /* 0x634 */ f32 x634;
-
-        /* 0x638 */ f32 x638_lsubStick_x;
-        /* 0x63C */ f32 x63C_lsubStick_y;
-        /* 0x640 */ f32 x640_lsubStick_x2;
-        /* 0x644 */ f32 x644_lsubStick_y2;
-
-        /* 0x648 */ f32 x648;
-        /* 0x64C */ f32 x64C;
-
-        /* 0x650 */ f32 x650;
-        /* 0x654 */ f32 x654;
-
-        /* 0x658 */ f32 x658;
-
-        /* 0x65C */ u32 x65C_heldInputs;
-        /* 0x660 */ s32 x660;
-        /* 0x664 */ s32 x664;
-        /* 0x668 */ s32 x668;
-        /* 0x66C */ s32 x66C;
-    } input; // 0x620 to 0x670
-
-    /* 0x670 */ u8 x670_timer_lstick_tilt_x;
-    /* 0x671 */ u8 x671_timer_lstick_tilt_y;
-    /* 0x672 */ u8 x672_input_timer_counter;
-
-    /* 0x673 */ u8 x673;
-    /* 0x674 */ u8 x674;
-    /* 0x674 */ u8 x675;
-
-    /* 0x676 */ u8 x676_x;
-    /* 0x677 */ u8 x677_y;
-    /* 0x678 */ u8 x678;
-
-    /* 0x679 */ u8 x679_x;
-    /* 0x67A */ u8 x67A_y;
-    /* 0x67B */ u8 x67B;
-
-    /* 0x67C */ u8 x67C;
-    /* 0x67D */ u8 x67D;
-    /* 0x67E */ u8 x67E;
-    /* 0x67F */ u8 x67F;
-    /* 0x680 */ u8 x680;
-    /* 0x681 */ u8 x681;
-    /* 0x682 */ u8 x682;
-    /* 0x683 */ u8 x683;
-    /* 0x684 */ u8 x684;
-    /* 0x685 */ u8 x685;
-    /* 0x686 */ u8 x686;
-    /* 0x687 */ u8 x687;
-    /* 0x688 */ u8 x688;
-    /* 0x689 */ u8 x689;
-    /* 0x68A */ u8 x68A;
-    /* 0x68B */ u8 x68B;
-
-    /* 0x68C */ Vec3 x68C_transNPos;
-    /* 0x698 */ Vec3 x698;
-    /* 0x6A4 */ Vec3 x6A4_transNOffset;
-    /* 0x6B0 */ Vec3 x6B0;
-    /* 0x6BC */ f32 x6BC_inputStickangle;
-    /* 0x6C0 */ Vec3 x6C0;
-    /* 0x6CC */ Vec3 x6CC;
-    /* 0x6D8 */ Vec3 x6D8;
-    /* 0x6E4 */ Vec3 x6E4;
-    /* 0x6F0 */ CollData x6F0_collData;
-    /* 0x890 */ CameraBox* x890_cameraBox;
-    /* 0x894 */ f32 x894_currentAnimFrame;
-    /* 0x898 */ f32 x898_unk;
-    /* 0x89C */ f32 x89C_frameSpeedMul;
-    /* 0x8A0 */ f32 x8A0_unk;
-    /* 0x8A4 */ f32 x8A4_animBlendFrames;
-    /* 0x8A8 */ f32 x8A8_unk;
-    /* 0x8AC */ HSD_JObj* x8AC_animSkeleton;
-    u8 filler_x8AC[0x914 - 0x8B0];
-    /* 0x914 */ HitCapsule x914[4];
-    u8 filler_xDF4[0x1064 - 0xDF4];
-    /* 0x1064 */ HitCapsule x1064_thrownHitbox;
-    /* 0x119C */ u8 x119C_teamUnk;
-    /* 0x119D */ u8 grabber_unk1;
-    /* 0x119E */ u8 x119E_hurtboxNum;
-    /* 0x119F */ u8 x119F;
-    /* 0x11A0 */ HurtCapsule x11A0_fighterHurtbox[15];
-    /* 0x1614 */ unk_t x1614;
-    /* 0x1618 */ u8 filler_x1618[0x166C - 0x1618];
-    /* 0x166C */ u32 x166C;
-    /* 0x1670 */ unk_t x1670;
-    /* 0x1674 */ u8 filler_x1674[0x1828 - 0x1674];
-    /* 0x1828 */ s32 x1828;
-    struct dmg // 0x182c
-    {
-        f32 x182c_behavior;           // 0x182c
-        f32 x1830_percent;            // 0x1830
-        f32 x1834;                    // 0x1834
-        f32 x1838_percentTemp;        // 0x1838
-        s32 x183C_applied;            // 0x183c
-        s32 x1840;                    // 0x1840
-        f32 x1844_direction;          // 0x1844
-        s32 x1848_kb_angle;           // 0x1848
-        s32 x184c_damaged_hurtbox;    // 0x184c
-        f32 x1850_forceApplied;       // 0x1850
-        Vec3 x1854_collpos;           // 0x1854
-        s32 x1860_dealt;              // 0x1860
-        s32 x1864;                    // 0x1864
-        HSD_GObj* x1868_source;       // 0x1868
-        s32 x186c;                    // 0x186c
-        s32 x1870;                    // 0x1870
-        s32 x1874;                    // 0x1874
-        s32 x1878;                    // 0x1878
-        s32 x187c;                    // 0x187c
-        s32 x1880;                    // 0x1880
-        s32 x1884;                    // 0x1884
-        s32 x1888;                    // 0x1888
-        s32 x188c;                    // 0x188c
-        s32 x1890;                    // 0x1890
-        s32 x1894;                    // 0x1894
-        s32 x1898;                    // 0x1898
-        f32 x189C_unk_num_frames;     // 0x189c
-        f32 x18a0;                    // 0x18a0
-        f32 x18A4_knockbackMagnitude; // 0x18a4  kb magnitude
-        f32 x18A8;                    // 0x18a8
-        s32 x18ac_time_since_hit;     // 0x18ac   in frames
-        f32 x18B0;                    // 0x18b0
-        f32 x18B4_armor;              // 0x18b4
-        f32 x18B8;                    // 0x18b8
-        f32 x18BC;                    // 0x18bc
-        s32 x18C0;                    // 0x18c0
-        s32 x18c4_source_ply;         // 0x18c4   damage source ply number
-        s32 x18C8;                    // 0x18c8
-        s32 x18CC;                    // 0x18cc
-        s32 x18D0;                    // 0x18d0
-        s32 x18d4;                    // 0x18d4
-        s32 x18d8;                    // 0x18d8
-        s32 x18dc;                    // 0x18dc
-        s32 x18e0;                    // 0x18e0
-        s32 x18e4;                    // 0x18e4
-        s32 x18e8;                    // 0x18e8
-        u16 x18ec_instancehitby; // 0x18ec. Last Move Instance This Player Was
-                                 // Hit by
-        s32 x18F0;               // 0x18f0
-        s32 x18F4;               // 0x18f4
-        u8 x18F8;                // 0x18f8
-        u8 x18f9;                // 0x18f9
-        u16 x18fa_model_shift_frames; // 0x18fa
-        u8 x18FC;                     // 0x18fc
-        u8 x18FD;                     // 0x18fd
-        s32 x1900;                    // 0x1900
-        s32 x1904;                    // 0x1904
-        s32 x1908;                    // 0x1908
-        s32 x190C;                    // 0x190c
-        s32 x1910;                    // 0x1910
-        s32 x1914;                    // 0x1914
-        s32 x1918;                    // 0x1918
-        f32 x191C;                    // 0x191c
-        s32 x1920;                    // 0x1920
-        s32 x1924;                    // 0x1924
-        f32 x1928;                    // 0x1928
-        f32 x192c;                    // 0x192c
-        s32 x1930;                    // 0x1930
-        s32 x1934;                    // 0x1934
-        s32 x1938;                    // 0x1938
-        s32 x193c;                    // 0x193c
-        s32 x1940;                    // 0x1940
-        s32 x1944;                    // 0x1944
-        s32 x1948;                    // 0x1948
-        s32 x194C;                    // 0x194c
-        s32 x1950;                    // 0x1950
-        f32 x1954;                    // 0x1954
-        f32 x1958;                    // 0x1958
-        f32 x195c_hitlag_frames;      // 0x195c
+    /*  fp+618 */ u8 x618_player_id;
+    /*  fp+619 */ u8 x619_costume_id;
+    /*  fp+61A */ u8 x61A_controller_index;
+    /*  fp+61B */ u8 x61B_team;
+    /*  fp+61C */ u8 x61C;
+    /*  fp+61D */ u8 x61D;
+    /*  fp+61E */ u8 filler_x61E[0x620 - 0x61E];
+    /*  fp+620 */ struct {
+        /*  fp+620 */ Vec2 lstick;
+        /*  fp+628 */ Vec2 lstick1;
+        /*  fp+630 */ f32 x630;
+        /*  fp+634 */ f32 x634;
+        /*  fp+638 */ Vec2 cstick;
+        /*  fp+640 */ Vec2 cstick1;
+        /*  fp+648 */ f32 x648;
+        /*  fp+64C */ f32 x64C;
+        /*  fp+650 */ f32 x650;
+        /*  fp+654 */ f32 x654;
+        /*  fp+658 */ f32 x658;
+        /*  fp+65C */ HSD_Pad held_inputs;
+        /*  fp+660 */ s32 x660;
+        /*  fp+664 */ s32 x664;
+        /*  fp+668 */ HSD_Pad x668;
+        /*  fp+66C */ s32 x66C;
+    } input;
+    /*  fp+670 */ u8 x670_timer_lstick_tilt_x;
+    /*  fp+671 */ u8 x671_timer_lstick_tilt_y;
+    /*  fp+672 */ u8 x672_input_timer_counter;
+    /*  fp+673 */ u8 x673;
+    /*  fp+674 */ u8 x674;
+    /*  fp+674 */ u8 x675;
+    /*  fp+676 */ u8 x676_x;
+    /*  fp+677 */ u8 x677_y;
+    /*  fp+678 */ u8 x678;
+    /*  fp+679 */ u8 x679_x;
+    /*  fp+67A */ u8 x67A_y;
+    /*  fp+67B */ u8 x67B;
+    /*  fp+67C */ u8 x67C;
+    /*  fp+67D */ u8 x67D;
+    /*  fp+67E */ u8 x67E;
+    /*  fp+67F */ u8 x67F;
+    /*  fp+680 */ u8 x680;
+    /*  fp+681 */ u8 x681;
+    /*  fp+682 */ u8 x682;
+    /*  fp+683 */ u8 x683;
+    /*  fp+684 */ u8 x684;
+    /*  fp+685 */ u8 x685;
+    /*  fp+686 */ u8 x686;
+    /*  fp+687 */ u8 x687;
+    /*  fp+688 */ u8 x688;
+    /*  fp+689 */ u8 x689;
+    /*  fp+68A */ u8 x68A;
+    /*  fp+68B */ u8 x68B;
+    /*  fp+68C */ Vec3 x68C_transNPos;
+    /*  fp+698 */ Vec3 x698;
+    /*  fp+6A4 */ Vec3 x6A4_transNOffset;
+    /*  fp+6B0 */ Vec3 x6B0;
+    /*  fp+6BC */ f32 lstick_angle;
+    /*  fp+6C0 */ Vec3 x6C0;
+    /*  fp+6CC */ Vec3 x6CC;
+    /*  fp+6D8 */ Vec3 x6D8;
+    /*  fp+6E4 */ Vec3 x6E4;
+    /*  fp+6F0 */ CollData coll_data;
+    /*  fp+890 */ CameraBox* x890_cameraBox;
+    /*  fp+894 */ f32 cur_anim_frame;
+    /*  fp+898 */ f32 x898_unk;
+    /*  fp+89C */ f32 x89C_frameSpeedMul;
+    /*  fp+8A0 */ f32 x8A0_unk;
+    /*  fp+8A4 */ f32 x8A4_animBlendFrames;
+    /*  fp+8A8 */ f32 x8A8_unk;
+    /*  fp+8AC */ HSD_JObj* x8AC_animSkeleton;
+    /*  fp+8AC */ u8 filler_x8AC[0x914 - 0x8B0];
+    /*  fp+914 */ HitCapsule x914[4];
+    /*  fp+DF4 */ u8 filler_xDF4[0x1064 - 0xDF4];
+    /* fp+1064 */ HitCapsule x1064_thrownHitbox;
+    /* fp+119C */ u8 x119C_teamUnk;
+    /* fp+119D */ u8 grabber_unk1;
+    /* fp+119E */ u8 x119E_hurtboxNum;
+    /* fp+119F */ u8 x119F;
+    /* fp+11A0 */ HurtCapsule x11A0_fighterHurtbox[15];
+    /* fp+1614 */ unk_t x1614;
+    /* fp+1618 */ u8 filler_x1618[0x166C - 0x1618];
+    /* fp+166C */ u32 x166C;
+    /* fp+1670 */ unk_t x1670;
+    /* fp+1674 */ u8 filler_x1674[0x1828 - 0x1674];
+    /* fp+1828 */ s32 x1828;
+    /* fp+182C */ struct dmg {
+        /* fp+182C */ f32 x182c_behavior;
+        /* fp+1830 */ f32 x1830_percent;
+        /* fp+1834 */ f32 x1834;
+        /* fp+1838 */ f32 x1838_percentTemp;
+        /* fp+183C */ s32 x183C_applied;
+        /* fp+1840 */ s32 x1840;
+        /* fp+1844 */ f32 x1844_direction;
+        /* fp+1848 */ s32 x1848_kb_angle;
+        /* fp+184C */ s32 x184c_damaged_hurtbox;
+        /* fp+1850 */ f32 x1850_forceApplied;
+        /* fp+1854 */ Vec3 x1854_collpos;
+        /* fp+1860 */ s32 x1860_dealt;
+        /* fp+1864 */ s32 x1864;
+        /* fp+1868 */ HSD_GObj* x1868_source;
+        /* fp+186C */ s32 x186c;
+        /* fp+1870 */ s32 x1870;
+        /* fp+1874 */ s32 x1874;
+        /* fp+1878 */ s32 x1878;
+        /* fp+187C */ s32 x187c;
+        /* fp+1880 */ s32 x1880;
+        /* fp+1884 */ s32 x1884;
+        /* fp+1888 */ s32 x1888;
+        /* fp+188C */ s32 x188c;
+        /* fp+1890 */ s32 x1890;
+        /* fp+1894 */ s32 x1894;
+        /* fp+1898 */ s32 x1898;
+        /* fp+189C */ f32 x189C_unk_num_frames;
+        /* fp+18A0 */ f32 x18a0;
+        /// kb magnitude
+        /* fp+18A4 */ f32 x18A4_knockbackMagnitude;
+        /* fp+18A8 */ f32 x18A8;
+        /// in frames
+        /* fp+18AC */ s32 x18ac_time_since_hit;
+        /* fp+18B0 */ f32 x18B0;
+        /* fp+18B4 */ f32 x18B4_armor;
+        /* fp+18B8 */ f32 x18B8;
+        /* fp+18BC */ f32 x18BC;
+        /* fp+18C0 */ s32 x18C0;
+        /// damage source ply number
+        /* fp+18C4 */ s32 x18c4_source_ply;
+        /* fp+18C8 */ s32 x18C8;
+        /* fp+18CC */ s32 x18CC;
+        /* fp+18D0 */ s32 x18D0;
+        /* fp+18D4 */ s32 x18d4;
+        /* fp+18D8 */ s32 x18d8;
+        /* fp+18DC */ s32 x18dc;
+        /* fp+18E0 */ s32 x18e0;
+        /* fp+18E4 */ s32 x18e4;
+        /* fp+18E8 */ s32 x18e8;
+        /// Last Move Instance This Player Was Hit by
+        /* fp+18EC */ u16 x18ec_instancehitby;
+        /* fp+18F0 */ s32 x18F0;
+        /* fp+18F4 */ s32 x18F4;
+        /* fp+18F8 */ u8 x18F8;
+        /* fp+18F9 */ u8 x18f9;
+        /* fp+18FA */ u16 x18fa_model_shift_frames;
+        /* fp+18FC */ u8 x18FC;
+        /* fp+18FD */ u8 x18FD;
+        /* fp+1900 */ s32 x1900;
+        /* fp+1904 */ s32 x1904;
+        /* fp+1908 */ s32 x1908;
+        /* fp+190C */ s32 x190C;
+        /* fp+1910 */ s32 x1910;
+        /* fp+1914 */ s32 x1914;
+        /* fp+1918 */ s32 x1918;
+        /* fp+191C */ f32 x191C;
+        /* fp+1920 */ s32 x1920;
+        /* fp+1924 */ s32 x1924;
+        /* fp+1928 */ f32 x1928;
+        /* fp+192C */ f32 x192c;
+        /* fp+1930 */ s32 x1930;
+        /* fp+1934 */ s32 x1934;
+        /* fp+1938 */ s32 x1938;
+        /* fp+193C */ s32 x193c;
+        /* fp+1940 */ s32 x1940;
+        /* fp+1944 */ s32 x1944;
+        /* fp+1948 */ s32 x1948;
+        /* fp+194C */ s32 x194C;
+        /* fp+1950 */ s32 x1950;
+        /* fp+1954 */ f32 x1954;
+        /* fp+1958 */ f32 x1958;
+        /* fp+195C */ f32 x195c_hitlag_frames;
     } dmg;
-    /* 0x1960 */ f32 x1960_vibrateMult;
-    /* 0x1964 */ f32 x1964;
-    /* 0x1968 */ u8 x1968_jumpsUsed;
-    /* 0x1969 */ u8 x1969_walljumpUsed;
-    /* 0x196C */ f32 x196C_hitlag_mult;
-    /* 0x1970 */ s32 x1970;
-    /* 0x1974 */ HSD_GObj* x1974_heldItem;
-    /* 0x1978 */ HSD_GObj* x1978;
-    /* 0x197C */ HSD_GObj* x197C;
-    /* 0x1980 */ HSD_GObj* x1980;
-    /* 0x1984 */ HSD_GObj* x1984_heldItemSpec;
-    /* 0x1988 */ s32 x1988;
-    /* 0x198C */ s32 x198C;
-    /* 0x1990 */ s32 x1990;
-    /* 0x1994 */ s32 x1994;
-    /* 0x1998 */ f32 x1998_shieldHealth;
-    /* 0x199C */ f32 x199C_shieldLightshieldAmt;
-    /* 0x19A0 */ s32 x19A0_shieldDamageTaken;
-    /* 0x19A4 */ s32 x19A4;
-    /* 0x19A8 */ void* x19A8;
-    /* 0x19AC */ f32 x19AC;
-    s32 filler_x19B0;
-    /* 0x19B4 */ f32 x19B4_shieldUnk;
-    /* 0x19B8 */ f32 x19B8_shieldUnk;
-    /* 0x19BC */ s32 x19BC_shieldDamageTaken3;
-    /* 0x19C0 */ HitResult shield_hit;
-    /* 0x19E4 */ HitResult reflect_hit;
-    /* 0x1A08 */ HitResult absorb_hit;
-    struct {
-        f32 x1A2C_reflectHitDirection;
-        s32 x1A30_maxDamage;
-        f32 x1A34_damageMul;
-        f32 x1A38_speedMul;
-        s32 x1A3C_damageOver; // % damage over the maximum reflectable damage
-                              // threshold
+    /* fp+1960 */ f32 x1960_vibrateMult;
+    /* fp+1964 */ f32 x1964;
+    /* fp+1968 */ u8 x1968_jumpsUsed;
+    /* fp+1969 */ u8 x1969_walljumpUsed;
+    /* fp+196C */ float hitlag_mul;
+    /* fp+1970 */ enum_t unk_msid;
+    /* fp+1974 */ Item_GObj* item_gobj;
+    /* fp+1978 */ HSD_GObj* x1978;
+    /* fp+197C */ HSD_GObj* x197C;
+    /* fp+1980 */ HSD_GObj* x1980;
+    /* fp+1984 */ Item_GObj* x1984_heldItemSpec;
+    /* fp+1988 */ s32 x1988;
+    /* fp+198C */ s32 x198C;
+    /* fp+1990 */ s32 x1990;
+    /* fp+1994 */ s32 x1994;
+    /* fp+1998 */ f32 x1998_shieldHealth;
+    /* fp+199C */ f32 x199C_shieldLightshieldAmt;
+    /* fp+19A0 */ s32 x19A0_shieldDamageTaken;
+    /* fp+19A4 */ s32 x19A4;
+    /* fp+19A8 */ void* x19A8;
+    /* fp+19AC */ float specialn_facing_dir;
+    /* fp+19B0 */ s32 filler_x19B0;
+    /* fp+19B4 */ f32 shield_unk0;
+    /* fp+19B8 */ f32 shield_unk1;
+    /* fp+19BC */ s32 x19BC_shieldDamageTaken3;
+    /* fp+19C0 */ HitResult shield_hit;
+    /* fp+19E4 */ HitResult reflect_hit;
+    /* fp+1A08 */ HitResult absorb_hit;
+    /* fp+1A2C */ struct {
+        /* fp+1A2C */ f32 x1A2C_reflectHitDirection;
+        /* fp+1A30 */ s32 x1A30_maxDamage;
+        /* fp+1A34 */ f32 x1A34_damageMul;
+        /* fp+1A38 */ f32 x1A38_speedMul;
+        /// % damage over the maximum reflectable damage threshold
+        /* fp+1A3C */ s32 x1A3C_damageOver;
     } ReflectAttr;
-    struct {
-        f32 x1A40_absorbHitDirection;
-        s32 x1A44_damageTaken; // unconfirmred?
-        s32 x1A48_hitsTaken;   // unconfirmed?
+    /* fp+1A40 */ struct {
+        /* fp+1A40 */ f32 x1A40_absorbHitDirection;
+        /// unconfirmed?
+        /* fp+1A44 */ s32 x1A44_damageTaken;
+        /// unconfirmed?
+        /* fp+1A48 */ s32 x1A48_hitsTaken;
     } AbsorbAttr;
-    /* 0x1A4C */ f32 x1A4C;
-    /* 0x1A50 */ s8 x1A50;
-    /* 0x1A51 */ s8 x1A51;
-    /* 0x1A52 */ u8 x1A52;
-    /* 0x1A53 */ u8 x1A53;
-    /* 0x1A54 */ s32 x1A54;
-    /* 0x1A58 */ HSD_GObj* x1A58_interactedFighter;
-    /* 0x1A5C */ HSD_GObj* x1A5C;
-    /* 0x1A60 */ u32 x1A60;
-    /* 0x1A64 */ s32 x1A64;
-    /* 0x1A68 */ u16 x1A68;
-    /* 0x1A6A */ u16 x1A6A;
-    /* 0x1A6C */ f32 x1A6C;
-    /* 0x1A70 */ Vec3 x1A70;
-    /* 0x1A7C */ Vec3 x1A7C;
-    u8 filler_x1A7C[0x1A94 - 0x1A88];
-    /* 0x1A94 */ u32 x1A94;
-    /* 0x1A98 */ u32 x1A98;
-    /* 0x1A9C */ s32 x1A9C;
-    u8 filler_x1A9C[0x2004 - 0x1AA0];
-    /* 0x2008 */ s32 x2004;
-    /* 0x2008 */ s32 x2008;
-    /* 0x200C */ s32 x200C;
-    /* 0x2010 */ s32 x2010;
-    /* 0x2014 */ s32 x2014;
-    /* 0x2018 */ s32 x2018;
-    /* 0x201C */ s32 x201C;
-    /* 0x2020 */ s8 x2020;
-    /* 0x2021 */ s8 x2021;
-    /* 0x2022 */ s8 x2022;
-    /* 0x2024 */ s32 x2024;
-    /* 0x2028 */ s32 x2028;
-    /* 0x202C */ s32 x202C;
-    /* 0x2030 */ s32 x2030;
-    /* 0x2034 */ s32 x2034;
-    /* 0x2038 */ s32 x2038;
-    /* 0x203C */ s32 x203C;
-    /* 0x2040 */ void* x2040;
-    u8 filler_x203C[0x2064 - 0x2044];
-    /* 0x2064 */ s32 x2064_ledgeCooldown;
-    /* 0x2068 */ s32 x2068_attackID;
-    u8 filler_x206C[0x2070 - 0x206C];
-    /* 0x2070 */ union Struct2070 x2070;
-    u8 filler_x2074[0x208C - 0x2074];
-    /* 0x208C */ s32 x208C;
-    /* 0x2090 */ u16 x2090;
-    /* 0x2092 */ u16 x2092;
-    /* 0x2094 */ HSD_GObj* x2094; // GObj pointer of combo victim?
-    /* 0x2098 */ u16 x2098;
-    /* 0x209A */ u16 x209A;
-    /* 0x209C */ s16 x209C;
-    /* 0x20A0 */ HSD_JObj* x20A0_accessory;
-    /* 0x20A4 */ s32 x20A4;
-    /* 0x20A8 */ s32 x20A8;
-    /* 0x20AC */ HSD_GObj* x20AC;
-    u8 filler_x20B0[0x2100 - 0x20B0];
-    /* 0x2100 */ s8 x2100;
-    /* 0x2101 */ u8 x2101_bits_0to6 : 7;
-    /* 0x2101 */ u8 x2101_bits_8 : 1;
-    /* 0x2102 */ s8 x2102;
-    /* 0x2103 */ s8 x2103;
-    /* 0x2104 */ s32 x2104;
-    /* 0x2108 */ s32 x2108;
-    /* 0x210C */ u8 x210C_walljumpInputTimer;
-    u8 filler_x210C[3];
-    /* 0x2110 */ f32 x2110_walljumpWallSide;
-    /* 0x2114 */ SmashAttr x2114_SmashAttr;
-    /* 0x213C */ s32 x213C;
-    /* 0x2140 */ f32 x2140;
-    /* 0x2144 */ s32 x2144;
-    /* 0x2148 */ s32 x2148;
-    /* 0x214C */ s32 x214C;
-    /* 0x2150 */ s32 x2150;
-    /* 0x2154 */ s32 x2154;
-    /* 0x2158 */ s32 x2158;
-    /* 0x215C */ s32 x215C;
-    /* 0x2160 */ s32 x2160;
-    /* 0x2164 */ s32 x2164;
-    /* 0x2168 */ s32 x2168;
-    /* 0x216C */ f32 unk_grab_val;
-    /* 0x2170 */ f32 x2170;
-    u8 filler_x2174[0x2180 - 0x2174];
-    /* 0x2180 */ s32 x2180;
-    /* 0x2184 */ HSD_JObj* x2184;
-    /* 0x2188 */ S32Vec2 x2188;
-    // callback struct. Not all of them used by fighter.c, but I'm leaving them
-    // in for now.
+    /* fp+1A4C */ f32 x1A4C;
+    /* fp+1A50 */ s8 x1A50;
+    /* fp+1A51 */ s8 x1A51;
+    /* fp+1A52 */ u8 x1A52;
+    /* fp+1A53 */ u8 x1A53;
+    /* fp+1A54 */ s32 x1A54;
+    /* fp+1A58 */ HSD_GObj* x1A58_interactedFighter;
+    /* fp+1A5C */ HSD_GObj* x1A5C;
+    /* fp+1A60 */ u32 x1A60;
+    /* fp+1A64 */ s32 x1A64;
+    /* fp+1A68 */ u16 x1A68;
+    /* fp+1A6A */ u16 x1A6A;
+    /* fp+1A6C */ f32 x1A6C;
+    /* fp+1A70 */ Vec3 x1A70;
+    /* fp+1A7C */ Vec3 x1A7C;
+    /* fp+1A7C */ u8 filler_x1A7C[0x1A94 - 0x1A88];
+    /* fp+1A94 */ u32 x1A94;
+    /* fp+1A98 */ u32 x1A98;
+    /* fp+1A9C */ s32 x1A9C;
+    /* fp+1A9C */ u8 filler_x1A9C[0x2004 - 0x1AA0];
+    /* fp+2008 */ s32 x2004;
+    /* fp+2008 */ s32 x2008;
+    /* fp+200C */ s32 x200C;
+    /* fp+2010 */ s32 x2010;
+    /* fp+2014 */ s32 x2014;
+    /* fp+2018 */ s32 x2018;
+    /* fp+201C */ s32 x201C;
+    /* fp+2020 */ s8 x2020;
+    /* fp+2021 */ s8 x2021;
+    /* fp+2022 */ s8 x2022;
+    /* fp+2024 */ s32 x2024;
+    /* fp+2028 */ s32 x2028;
+    /* fp+202C */ s32 x202C;
+    /* fp+2030 */ s32 x2030;
+    /* fp+2034 */ s32 x2034;
+    /* fp+2038 */ s32 x2038;
+    /* fp+203C */ s32 x203C;
+    /* fp+2040 */ void* x2040;
+    /* fp+203C */ u8 filler_x203C[0x2064 - 0x2044];
+    /* fp+2064 */ s32 x2064_ledgeCooldown;
+    /* fp+2068 */ s32 x2068_attackID;
+    /* fp+206C */ u8 filler_x206C[0x2070 - 0x206C];
+    /* fp+2070 */ union Struct2070 x2070;
+    /* fp+2074 */ u8 filler_x2074[0x208C - 0x2074];
+    /* fp+208C */ s32 x208C;
+    /* fp+2090 */ u16 x2090;
+    /* fp+2092 */ u16 x2092;
+    /// GObj pointer of combo victim?
+    /* fp+2094 */ HSD_GObj* x2094;
+    /* fp+2098 */ u16 x2098;
+    /* fp+209A */ u16 x209A;
+    /* fp+209C */ s16 x209C;
+    /* fp+20A0 */ HSD_JObj* x20A0_accessory;
+    /* fp+20A4 */ s32 x20A4;
+    /* fp+20A8 */ s32 x20A8;
+    /* fp+20AC */ HSD_GObj* unk_gobj;
+    /* fp+20B0 */ u8 filler_x20B0[0x2100 - 0x20B0];
+    /* fp+2100 */ s8 x2100;
+    /* fp+2101 */ u8 x2101_bits_0to6 : 7;
+    /* fp+2101 */ u8 x2101_bits_8 : 1;
+    /* fp+2102 */ s8 x2102;
+    /* fp+2103 */ s8 x2103;
+    /* fp+2104 */ s32 x2104;
+    /* fp+2108 */ s32 x2108;
+    /* fp+210C */ u8 x210C_walljumpInputTimer;
+    /* fp+210C */ u8 filler_x210C[3];
+    /* fp+2110 */ f32 x2110_walljumpWallSide;
+    /* fp+2114 */ SmashAttr x2114_SmashAttr;
+    /* fp+213C */ s32 x213C;
+    /* fp+2140 */ f32 x2140;
+    /* fp+2144 */ s32 x2144;
+    /* fp+2148 */ s32 x2148;
+    /* fp+214C */ s32 x214C;
+    /* fp+2150 */ s32 x2150;
+    /* fp+2154 */ s32 x2154;
+    /* fp+2158 */ s32 x2158;
+    /* fp+215C */ s32 x215C;
+    /* fp+2160 */ s32 x2160;
+    /* fp+2164 */ s32 x2164;
+    /* fp+2168 */ s32 x2168;
+    /* fp+216C */ f32 unk_grab_val;
+    /* fp+2170 */ f32 x2170;
+    /* fp+2174 */ u8 filler_x2174[0x2180 - 0x2174];
+    /* fp+2180 */ s32 x2180;
+    /* fp+2184 */ HSD_JObj* x2184;
+    /* fp+2188 */ S32Vec2 x2188;
+    /// callback struct. Not all of them used by fighter.c.
     struct cb {
-        void (*x2190_callback_OnGrabFighter_Self)(HSD_GObj* fp); // used
-        void (*x2194_callback)(HSD_GObj* fp);                    // used
-        void (*x2198_callback_OnGrabFighter_Victim)(HSD_GObj*,
-                                                    HSD_GObj*); // used
-        void (*x219C_callback_IASA)(HSD_GObj* fp);              // used
-        void (*x21A0_callback_Anim)(HSD_GObj* fp);
-        void (*x21A4_callback_Phys)(HSD_GObj* fp); // xused
-        void (*x21A8_callback_Coll)(HSD_GObj* fp);
-        void (*x21AC_callback_Cam)(HSD_GObj* fp);
-        void (*x21B0_callback_Accessory1)(HSD_GObj* fp);
-        void (*x21B4_callback_Accessory2)(HSD_GObj* fp); // used
-        void (*x21B8_callback_Accessory3)(HSD_GObj* fp); // used
-        void (*x21BC_callback_Accessory4)(HSD_GObj* fp);
-        void (*x21C0_callback_OnGiveDamage)(HSD_GObj* fp);
-        void (*x21C4_callback_OnShieldHit)(HSD_GObj* fp);
-        void (*x21C8_callback_OnReflectHit)(HSD_GObj* fp);
-        void (*x21CC_callback)(HSD_GObj* fp);
-        void (*x21D0_callback_EveryHitlag)(HSD_GObj* fp); // xused
-        void (*x21D4_callback_EnterHitlag)(HSD_GObj* fp);
-        void (*x21D8_callback_ExitHitlag)(HSD_GObj* fp);
-        void (*x21DC_callback_OnTakeDamage)(HSD_GObj* fp);
-        void (*x21E0_callback_OnDeath)(HSD_GObj* fp); // used
-        void (*x21E4_callback_OnDeath2)(
-            HSD_GObj*
-                fp); // used. internally Dead_Proc as evidenced by 800f5430
-        void (*x21E8_callback_OnDeath3)(HSD_GObj* fp); // used
-        void (*x21EC_callback)(HSD_GObj* fp);
-        void (*x21F0_callback)(HSD_GObj* fp);
-        void (*x21F4_callback)(HSD_GObj* fp);
-        void (*x21F8_callback)(HSD_GObj* fp);
+        /* fp+2190 */ void (*x2190_callback_OnGrabFighter_Self)(HSD_GObj* fp);
+        /* fp+2194 */ void (*x2194_callback)(HSD_GObj* fp);
+        /* fp+2198 */ void (*x2198_callback_OnGrabFighter_Victim)(HSD_GObj*,
+                                                                  HSD_GObj*);
+        /* fp+219C */ void (*x219C_callback_IASA)(HSD_GObj* fp);
+        /* fp+21A0 */ void (*x21A0_callback_Anim)(HSD_GObj* fp);
+        /* fp+21A4 */ void (*x21A4_callback_Phys)(HSD_GObj* fp);
+        /* fp+21A8 */ void (*x21A8_callback_Coll)(HSD_GObj* fp);
+        /* fp+21AC */ void (*x21AC_callback_Cam)(HSD_GObj* fp);
+        /* fp+21B0 */ void (*x21B0_callback_Accessory1)(HSD_GObj* fp);
+        /* fp+21B4 */ void (*x21B4_callback_Accessory2)(HSD_GObj* fp);
+        /* fp+21B8 */ void (*x21B8_callback_Accessory3)(HSD_GObj* fp);
+        /* fp+21BC */ void (*x21BC_callback_Accessory4)(HSD_GObj* fp);
+        /* fp+21C0 */ void (*x21C0_callback_OnGiveDamage)(HSD_GObj* fp);
+        /* fp+21C4 */ void (*x21C4_callback_OnShieldHit)(HSD_GObj* fp);
+        /* fp+21C8 */ void (*x21C8_callback_OnReflectHit)(HSD_GObj* fp);
+        /* fp+21CC */ void (*x21CC_callback)(HSD_GObj* fp);
+        /* fp+21D0 */ void (*x21D0_callback_EveryHitlag)(HSD_GObj* fp);
+        /* fp+21D4 */ void (*x21D4_callback_EnterHitlag)(HSD_GObj* fp);
+        /* fp+21D8 */ void (*x21D8_callback_ExitHitlag)(HSD_GObj* fp);
+        /* fp+21DC */ void (*x21DC_callback_OnTakeDamage)(HSD_GObj* fp);
+        /* fp+21E0 */ void (*x21E0_callback_OnDeath)(HSD_GObj* fp);
+        /// @remarks Used. Internally Dead_Proc as evidenced by 800F5430.
+        /* fp+21E4 */ void (*x21E4_callback_OnDeath2)(HSD_GObj* fp);
+        /* fp+21E8 */ void (*x21E8_callback_OnDeath3)(HSD_GObj* fp);
+        /* fp+21EC */ void (*x21EC_callback)(HSD_GObj* fp);
+        /* fp+21F0 */ void (*x21F0_callback)(HSD_GObj* fp);
+        /* fp+21F4 */ void (*x21F4_callback)(HSD_GObj* fp);
+        /* fp+21F8 */ void (*x21F8_callback)(HSD_GObj* fp);
     } cb;
-    /* 0x21FC */ UnkFlagStruct x21FC_flag;
-    u8 filler_x21FC[0x2200 - 0x21FD];
-    /* 0x2200 */ u32 x2200_ftcmd_var0;
-    /* 0x2204 */ u32 x2204_ftcmd_var1;
-    /* 0x2208 */ u32 x2208_ftcmd_var2;
-    /* 0x220C */ u32 x220C_ftcmd_var3;
-    /* 0x2210 */ ThrowFlags x2210_ThrowFlags;
-    /* 0x2214 */ f32 x2214;
-    /* 0x2218 */ UnkFlagStruct x2218_flag;
-    /* 0x2219 */ UnkFlagStruct x2219_flag;
-    /* 0x221A */ UnkFlagStruct x221A_flag;
-    /* 0x221B */
+    /* fp+21FC */ UnkFlagStruct x21FC_flag;
+    /* fp+21FC */ u8 filler_x21FC[0x2200 - 0x21FD];
+    /* fp+2200 */ u32 cmd_vars[4];
+    /* fp+2210 */ ThrowFlags throw_flags;
+    /* fp+2214 */ f32 x2214;
+    /* fp+2218:0 */ u8 allow_interrupt : 1;
+    /* fp+2218:1 */ u8 x2218_b1 : 1;
+    /* fp+2218:2 */ u8 x2218_b2 : 1;
+    /* fp+2218:3 */ u8 x2218_b3 : 1;
+    /* fp+2218:4 */ u8 x2218_b4 : 1;
+    /* fp+2218:5 */ u8 x2218_b5 : 1;
+    /* fp+2218:6 */ u8 x2218_b6 : 1;
+    /* fp+2218:7 */ u8 x2218_b7 : 1;
     union {
-        u8 x221B;
-        struct {
-            u8 x221B_b0 : 1;
-            u8 x221B_b1 : 1;
-            u8 x221B_b2 : 1;
-            u8 x221B_b3 : 1;
-            u8 x221B_b4 : 1;
-            u8 x221B_b5 : 1;
-            u8 x221B_b6 : 1;
-            u8 x221B_b7 : 1;
+        /* fp+2219 */ u8 x2219;
+        /* fp+2219 */ struct {
+            /* fp+2219:0 */ u8 x2219_b0 : 1;
+            /* fp+2219:1 */ u8 x2219_b1 : 1;
+            /* fp+2219:2 */ u8 x2219_b2 : 1;
+            /* fp+2219:3 */ u8 x2219_b3 : 1;
+            /* fp+2219:4 */ u8 x2219_b4 : 1;
+            /* fp+2219:5 */ u8 x2219_b5 : 1;
+            /* fp+2219:6 */ u8 x2219_b6 : 1;
+            /* fp+2219:7 */ u8 x2219_b7 : 1;
         };
     };
-    /* 0x221C */
-    union {
-        struct {
-            UnkFlagStruct x221C_flag;
-            UnkFlagStruct x221D_flag;
-        };
-        struct {
-            u16 x221C_u16_x : 7;
-            u16 x221C_u16_y : 3;
-            u16 x221C_u16_z : 6;
+    /* fp+221A */ UnkFlagStruct x221A_flag;
+    /* fp+221B */ union {
+        /* fp+221B */ u8 x221B;
+        /* fp+221B */ struct {
+            /* fp+221B:0 */ u8 x221B_b0 : 1;
+            /* fp+221B:1 */ u8 x221B_b1 : 1;
+            /* fp+221B:2 */ u8 x221B_b2 : 1;
+            /* fp+221B:3 */ u8 x221B_b3 : 1;
+            /* fp+221B:4 */ u8 x221B_b4 : 1;
+            /* fp+221B:5 */ u8 x221B_b5 : 1;
+            /* fp+221B:6 */ u8 x221B_b6 : 1;
+            /* fp+221B:7 */ u8 x221B_b7 : 1;
         };
     };
-    /* 0x221E */ UnkFlagStruct x221E_flag;
-    /* 0x221F */ UnkFlagStruct x221F_flag;
-    struct {
-        union {
-            struct {
-                u8 b0 : 3;
-                u8 b3 : 1;
-                u8 b4 : 1;
-                u8 b5 : 1;
-                u8 b6 : 1;
-                u8 b7 : 1;
-            } bits;
-            u8 flags;
+    /* fp+221C */ union {
+        /* fp+221C */ struct {
+            /* fp+221C */ UnkFlagStruct x221C_flag;
+            /* fp+221D */ UnkFlagStruct x221D_flag;
         };
-    } x2220_flag;
-    /* 0x2221 */ UnkFlagStruct x2221_flag;
-    /* 0x2222 */ UnkFlagStruct x2222_flag;
-    /* 0x2223 */ UnkFlagStruct x2223_flag;
-    /* 0x2224 */ UnkFlagStruct x2224_flag;
-    /* 0x2225 b0 */ u8 x2225_b0 : 1;
-    /* 0x2225 b1 */ u8 x2225_b1 : 1;
-    /* 0x2225 b2 */ u8 x2225_b2 : 1;
-    /* 0x2225 b3 */ u8 x2225_b3 : 1;
-    /* 0x2225 b4 */ u8 x2225_b4 : 1;
-    /* 0x2225 b5 */ u8 x2225_b5 : 1;
-    /* 0x2225 b6 */ u8 x2225_b6 : 1;
-    /* 0x2225 b7 */ u8 x2225_b7 : 1;
-    /* 0x2226 */ UnkFlagStruct x2226_flag;
-    /* 0x2227 */ UnkFlagStruct x2227_flag;
-    /* 0x2228 */ struct { /// UnkFlagStruct does not quite work
-        struct {
-            u8 b0 : 1;
-            u8 b1 : 1;
-            u8 b2 : 1;
-            u8 b3 : 2;
-            u8 b5 : 1;
-            u8 b6 : 1;
-            u8 b7 : 1;
+        /* fp+221C */ struct {
+            /* fp+221C:0 */ u16 x221C_u16_x : 7;
+            /* fp+221C:7 */ u16 x221C_u16_y : 3;
+            /* fp+221D:2 */ u16 x221C_u16_z : 6;
+        };
+    };
+    /* fp+221E:0 */ u8 x221E_b0 : 1;
+    /* fp+221E:1 */ u8 x221E_b1 : 1;
+    /* fp+221E:2 */ u8 x221E_b2 : 1;
+    /* fp+221E:3 */ u8 x221E_b3 : 1;
+    /* fp+221E:4 */ u8 x221E_b4 : 1;
+    /* fp+221E:5 */ u8 x221E_b5 : 1;
+    /* fp+221E:6 */ u8 x221E_b6 : 1;
+    /* fp+221E:7 */ u8 x221E_b7 : 1;
+    /* fp+221F */ UnkFlagStruct x221F_flag;
+    /* fp+2220 */ union {
+        /* fp+2220 */ struct {
+            /* fp+2220:0 */ u8 b0 : 3;
+            /* fp+2220:3 */ u8 b3 : 1;
+            /* fp+2220:4 */ u8 b4 : 1;
+            /* fp+2220:5 */ u8 b5 : 1;
+            /* fp+2220:6 */ u8 b6 : 1;
+            /* fp+2220:7 */ u8 b7 : 1;
         } bits;
+        /* fp+2220 */ u8 flags;
+    } x2220_flag;
+    /* fp+2221 */ UnkFlagStruct x2221_flag;
+    /* fp+2222:0 */ u8 x2222_b0 : 1;
+    /* fp+2222:1 */ u8 x2222_b1 : 1;
+    /* fp+2222:2 */ u8 x2222_b2 : 1;
+    /* fp+2222:3 */ u8 x2222_b3 : 1;
+    /* fp+2222:4 */ u8 x2222_b4 : 1;
+    /* fp+2222:5 */ u8 x2222_b5 : 1;
+    /* fp+2222:6 */ u8 x2222_b6 : 1;
+    /* fp+2222:7 */ u8 x2222_b7 : 1;
+    /* fp+2223 */ UnkFlagStruct x2223_flag;
+    /* fp+2224 */ UnkFlagStruct x2224_flag;
+    /* fp+2225:0 */ u8 x2225_b0 : 1;
+    /* fp+2225:1 */ u8 x2225_b1 : 1;
+    /* fp+2225:2 */ u8 x2225_b2 : 1;
+    /* fp+2225:3 */ u8 x2225_b3 : 1;
+    /* fp+2225:4 */ u8 x2225_b4 : 1;
+    /* fp+2225:5 */ u8 x2225_b5 : 1;
+    /* fp+2225:6 */ u8 x2225_b6 : 1;
+    /* fp+2225:7 */ u8 x2225_b7 : 1;
+    /* fp+2226 */ UnkFlagStruct x2226_flag;
+    /* fp+2227 */ UnkFlagStruct x2227_flag;
+    /// UnkFlagStruct does not quite work
+    /* fp+2228 */ struct {
+        /* fp+2228:0 */ u8 b0 : 1;
+        /* fp+2228:1 */ u8 b1 : 1;
+        /* fp+2228:2 */ u8 b2 : 1;
+        /* fp+2228:3 */ u8 b3 : 2;
+        /* fp+2228:5 */ u8 b5 : 1;
+        /* fp+2228:6 */ u8 b6 : 1;
+        /* fp+2228:7 */ u8 b7 : 1;
     } x2228_flag;
-
-    /* 0x2229 */ u8 x2229_b0 : 1;
-    u8 x2229_b1 : 1;
-    u8 x2229_b2 : 1;
-    u8 x2229_b3 : 1;
-    u8 x2229_b4 : 1;
-    u8 x2229_b5_no_normal_motion : 1;
-    u8 x2229_b6 : 1;
-    u8 x2229_b7 : 1;
-
-    /* 0x222A */ UnkFlagStruct x222A_flag;
-    u8 filler_x222B;
-
-    // Some of these are clones of each other (they just use another struct)
-    // and some of them dont have specials so dont exist in the union.
-    /// @todo Clean-up
-    union FighterEntityVars {
-        struct SpecialAttrs_Mario mr;
-        struct SpecialAttrs_Fox fx, fc;
-        struct ftCaptain_EntityVars ca, gn;
-        struct SpecialAttrs_DK dk;
-        struct SpecialAttrs_Kirby kb;
-        struct SpecialAttrs_Koopa kp, gk;
-        struct SpecialAttrs_Link lk, cl;
-        struct SpecialAttrs_Seak sk;
-        struct SpecialAttrs_Ness ns;
-        struct SpecialAttrs_Peach pe;
-        struct SpecialAttrs_Popo pp, nn;
-        struct SpecialAttrs_Pikachu pk, pc;
-        struct SpecialAttrs_Samus ss;
-        struct SpecialAttrs_Yoshi ys;
-        struct SpecialAttrs_Purin pr;
-        struct SpecialAttrs_Mewtwo mt;
-        struct SpecialAttrs_Luigi lg;
-        struct SpecialAttrs_Mars ms;
-        struct SpecialAttrs_Zelda zd;
-        struct SpecialAttrs_GameWatch gw;
-        struct SpecialAttrs_Masterhand mh, ch;
-        struct SpecialAttrs_Boy bo, gl;
-        struct SpecialAttrs_Sandbag sb;
-    } ev;
-
-    /* 0x232C */ s32 x232C;
-    /* 0x2330 */ Vec2 x2330;
-    /* 0x2338 */ Vec2 x2338;
-
+    /* fp+2229:0 */ u8 x2229_b0 : 1;
+    /* fp+2229:1 */ u8 x2229_b1 : 1;
+    /* fp+2229:2 */ u8 x2229_b2 : 1;
+    /* fp+2229:3 */ u8 x2229_b3 : 1;
+    /* fp+2229:4 */ u8 x2229_b4 : 1;
+    /* fp+2229:5 */ u8 x2229_b5_no_normal_motion : 1;
+    /* fp+2229:6 */ u8 x2229_b6 : 1;
+    /* fp+2229:7 */ u8 x2229_b7 : 1;
+    /* fp+222A */ UnkFlagStruct x222A_flag;
+    /* fp+222B */ u8 filler_x222B;
+    /* fp+222C */ union Fighter_FighterVars {
+        /* fp+222C */ u8 _[FIGHTERVARS_SIZE];
+        /* fp+222C */ struct ftCaptain_FighterVars ca, gn;
+        /* fp+222C */ struct ftDonkey_FighterVars dk;
+        /* fp+222C */ struct ftFox_FighterVars fx, fc;
+        /* fp+222C */ struct ftGameWatch_FighterVars gw;
+        /* fp+222C */ struct ftKirby_FighterVars kb;
+        /* fp+222C */ struct ftKoopa_FighterVars kp, gk;
+        /* fp+222C */ struct ftLk_FighterVars lk;
+        /* fp+222C */ struct ftLuigi_FighterVars lg;
+        /* fp+222C */ struct ftMario_FighterVars mr;
+        /* fp+222C */ struct ftMars_FighterVars ms;
+        /* fp+222C */ struct ftMasterhand_FighterVars mh, ch;
+        /* fp+222C */ struct ftMewtwo_FighterVars mt;
+        /* fp+222C */ struct ftNess_FighterVars ns;
+        /* fp+222C */ struct ftPeach_FighterVars pe;
+        /* fp+222C */ struct ftPikachu_FighterVars pk, pc;
+        /* fp+222C */ struct ftPopo_FighterVars pp, nn;
+        /* fp+222C */ struct ftPurin_FighterVars pr;
+        /* fp+222C */ struct ftSamus_FighterVars ss;
+        /* fp+222C */ struct ftSandbag_FighterVars sb;
+        /* fp+222C */ struct ftSeak_FighterVars sk;
+        /* fp+222C */ struct ftYoshi_FighterVars ys;
+        /* fp+222C */ struct ftZakoBoy_FighterVars bo, gl;
+        /* fp+222C */ struct ftZelda_FighterVars zd;
+    } fv;
+    /* fp+232C */ s32 x232C;
+    /* fp+2330 */ Vec2 x2330;
+    /* fp+2338 */ Vec2 x2338;
     /// @at{2340} @sz{AC}
-    union Fighter_StateVars {
-        u8 _[0x23EC - 0x2340];
-        union ftCaptain_StateVars ca, gn;
-        union ftCommon_StateVars co;
-        union ftDonkey_StateVars dk;
-        union ftFox_StateVars fx, fc;
-        union ftGameWatch_StateVars gw;
-        union ftKoopa_StateVars kp;
-        union ftLuigi_StateVars lg;
-        union ftMario_StateVars mr, dr;
-        union ftMars_StateVars ms, fe;
-        union ftMasterHand_StateVars mh, ch;
-        union ftMewtwo_StateVars mt;
-        union ftNess_StateVars ns;
-        union ftPikachu_StateVars pk, pc;
-        union ftPurin_StateVars pr;
-        union ftSamus_StateVars ss;
-        union ftSeak_StateVars sk;
-        union ftYoshi_StateVars ys;
-        union ftZelda_StateVars zd;
-    } sv;
+    /* fp+2340 */ union Fighter_MotionVars {
+        /* fp+2340 */ u8 _[0x23EC - 0x2340];
+        /* fp+2340 */ union ftCaptain_MotionVars ca, gn;
+        /* fp+2340 */ union ftCommon_MotionVars co;
+        /* fp+2340 */ union ftDonkey_MotionVars dk;
+        /* fp+2340 */ union ftFox_MotionVars fx, fc;
+        /* fp+2340 */ union ftGameWatch_MotionVars gw;
+        /* fp+2340 */ union ftKoopa_MotionVars kp;
+        /* fp+2340 */ union ftLuigi_MotionVars lg;
+        /* fp+2340 */ union ftLk_MotionVars lk;
+        /* fp+2340 */ union ftMario_MotionVars mr, dr;
+        /* fp+2340 */ union ftMars_MotionVars ms, fe;
+        /* fp+2340 */ union ftMasterHand_MotionVars mh, ch;
+        /* fp+2340 */ union ftMewtwo_MotionVars mt;
+        /* fp+2340 */ union ftNess_MotionVars ns;
+        /* fp+2340 */ union ftPe_MotionVars pe;
+        /* fp+2340 */ union ftPikachu_MotionVars pk, pc;
+        /* fp+2340 */ union ftPurin_MotionVars pr;
+        /* fp+2340 */ union ftSamus_MotionVars ss;
+        /* fp+2340 */ union ftSeak_MotionVars sk;
+        /* fp+2340 */ union ftYoshi_MotionVars ys;
+        /* fp+2340 */ union ftZelda_MotionVars zd;
+    } mv;
 };
 
 #endif

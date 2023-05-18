@@ -1,0 +1,18 @@
+[package]
+name = "melee-replace-module"
+version = "0.1.0"
+edition = "2021"
+authors = ["Robin Avery <robin@ribbanya.dev>"]
+license = "AGPL-3.0-or-later"
+
+[dependencies]
+anyhow = "1.0.70"
+clap = { version = "4.1.11", features = ["derive"] }
+env_logger = "0.10.0"
+globset = "0.4.10"
+itertools = "0.10.5"
+lazy_static = "1.4.0"
+log = "0.4.17"
+melee-utils = { version = "0.1.0", path = "../rust-utils" }
+regex = "1.7.2"
+walkdir = "2.3.3"

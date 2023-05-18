@@ -1,10 +1,11 @@
 #ifndef _controller_h_
 #define _controller_h_
 
+#include <platform.h>
+#include <baselib/forward.h>
+
 #include <dolphin/pad/Pad.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/forward.h>
-#include <sysdolphin/baselib/rumble.h>
+#include <baselib/rumble.h>
 
 typedef enum _HSD_FlushType {
     HSD_PAD_FLUSH_QUEUE_MERGE,
@@ -76,6 +77,8 @@ struct PadLibData {
     /*0x2B*/ u8 reset_switch;
     /*0x2C*/ RumbleInfo rumble_info;
 };
+
+extern HSD_PadStatus HSD_PadMasterStatus[4];
 
 u8 HSD_PadGetRawQueueCount(void);
 s32 HSD_PadGetResetSwitch(void);

@@ -1,10 +1,11 @@
 #ifndef _initialize_h_
 #define _initialize_h_
 
+#include <platform.h>
+
 #include <dolphin/gx/types.h>
 #include <dolphin/os/OSAlloc.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/video.h>
+#include <baselib/video.h>
 
 #define HSD_DEFAULT_FIFO_SIZE (256 * 1024)
 #define HSD_DEFAULT_XFB_MAX_NUM 2
@@ -40,7 +41,7 @@ void HSD_GetNextArena(void** lo, void** hi);
 OSHeapHandle HSD_CreateMainHeap(void* lo, void* hi);
 HSD_RenderPass HSD_GetCurrentRenderPass(void);
 void HSD_StartRender(HSD_RenderPass pass);
-void func_803755A8(void);
+void HSD_Init_803755A8(void);
 static void HSD_ObjInit(void);
 void HSD_ObjDumpStat(void);
 bool HSD_SetInitParameter(HSD_InitParam param, ...);

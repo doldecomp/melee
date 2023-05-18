@@ -1,9 +1,10 @@
 #ifndef _mncharsel_h_
 #define _mncharsel_h_
 
+#include <platform.h>
+#include <baselib/forward.h>
+
 #include <common_structs.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/forward.h>
 
 typedef enum _Mode {
     Mode_Time,
@@ -151,7 +152,7 @@ typedef struct _CSSData {
     VsModeData data;
 } CSSData;
 
-TextKerning* func_8025BC20(TextKerning* arg0, u32 arg1);
-void func_8025BD30(void);
+TextKerning* mnCharSel_8025BC20(TextKerning* arg0, u32 arg1);
+void mnCharSel_8025BD30(void);
 
 #endif

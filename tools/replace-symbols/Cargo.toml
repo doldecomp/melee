@@ -1,0 +1,16 @@
+[package]
+name = "melee-replace-symbols"
+version = "0.2.0"
+edition = "2021"
+authors = ["Robin Avery <robin@ribbanya.dev>"]
+license = "AGPL-3.0-or-later"
+
+[dependencies]
+ahash = "0.8.3"
+anyhow = "1.0.70"
+clap = { version = "4.2.1", features = ["derive"] }
+env_logger = "0.10.0"
+log = "0.4.17"
+melee-utils = { version = "0.1.0", path = "../rust-utils" }
+memmap2 = "0.5.10"
+rayon = "1.7.0"

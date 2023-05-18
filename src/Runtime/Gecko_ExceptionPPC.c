@@ -1,4 +1,4 @@
-#include <Runtime/Gecko_ExceptionPPC.h>
+#include <Gecko_ExceptionPPC.h>
 
 typedef struct ProcessInfo {
     __eti_init_info* exception_info;

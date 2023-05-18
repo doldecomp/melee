@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/os/os.h>
@@ -6,7 +7,6 @@
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
 #include <dolphin/os/OSTime.h>
-#include <stdio.h>
 
 void OSReport(char* msg, ...)
 {
@@ -63,8 +63,9 @@ void __OSUnhandledException(u8 error, OSContext* context, u32 dsisr, u32 dar)
             __OSReschedule();
             OSLoadContext(context);
         }
-        if (error == OS_ERROR_DECREMENTER)
+        if (error == OS_ERROR_DECREMENTER) {
             OSLoadContext(context);
+        }
         OSReport("Unhandled Exception %d", error);
     }
 
@@ -89,9 +90,10 @@ void __OSUnhandledException(u8 error, OSContext* context, u32 dsisr, u32 dar)
                  context->srr0, dar);
         break;
     case OS_ERROR_PROGRAM:
-        OSReport("\nProgram exception : Possible illegal instruction/operation "
-                 "at or around 0x%x (read from SRR0)\n",
-                 context->srr0, dar);
+        OSReport(
+            "\nProgram exception : Possible illegal instruction/operation "
+            "at or around 0x%x (read from SRR0)\n",
+            context->srr0, dar);
         break;
     case 15:
         OSReport("\n");

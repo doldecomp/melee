@@ -1,5 +1,6 @@
 -xc
 --target=ppc32-none-eabi
+-fno-short-enums
 -std=c99
 -nostdinc
 -Isrc/melee

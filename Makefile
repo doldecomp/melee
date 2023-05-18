@@ -6,6 +6,12 @@ SKIP_CHECK ?= 0
 REQUIRE_PROTOS ?= 1
 MSG_STYLE ?= gcc
 WARN_ERROR ?= 1
+WIP ?= 0
+
+ifeq ($(WIP),1)
+	SKIP_CHECK := 1
+	REQUIRE_PROTOS := 0
+endif
 
 VERBOSE ?= 0
 MAX_ERRORS ?= 0     # 0 = no maximum
@@ -20,7 +26,12 @@ endif
 
 TARGET := ssbm.us.1.2
 
-BUILD_DIR := build/$(TARGET)
+ifeq ($(WIP),1)
+	BUILD_DIR := build/wip/$(TARGET)
+else
+	BUILD_DIR := build/$(TARGET)
+endif
+
 VANILLA_DIR := $(BUILD_DIR)/vanilla
 PROFILE_DIR := $(BUILD_DIR)/profile
 
@@ -133,6 +144,10 @@ ifeq ($(VERBOSE),1)
 	CFLAGS += -verbose
 endif
 
+ifeq ($(WIP),1)
+	CFLAGS += -DWIP
+endif
+
 $(BUILD_DIR)/src/melee/pl/player.c.o: CC_EPI := $(CC)
 $(BUILD_DIR)/src/melee/lb/lbtime.c.o: CC_EPI := $(CC)
 
@@ -164,7 +179,7 @@ format:
 	$(QUIET) tools/newlines.sh
 
 clean:
-	rm -f -d -r build $(ELF2DOL)
+	rm -f -d -r $(BUILD_DIR) build/o_files $(ELF2DOL)
 
 ALL_DIRS := $(sort $(dir $(O_FILES)))
 ALL_DIRS += $(patsubst $(BUILD_DIR)/%,$(VANILLA_DIR)/%,$(ALL_DIRS)) \

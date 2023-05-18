@@ -50,10 +50,10 @@
 #   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from contextlib import contextmanager
-from dataclasses import dataclass, field, replace
+from dataclasses import dataclass, field
 from enum import Enum
 from io import StringIO, TextIOBase
-from typing import Any, ClassVar, Iterator, List, Optional, Set, Tuple
+from typing import ClassVar, Iterator, List, Optional, Set
 
 __all__ = [
     "CxxName",

@@ -1,10 +1,10 @@
-#include <dolphin/gx/GXMisc.h>
+#include <dolphin/gx/forward.h>
 
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/gx/__GXFifo.h>
 #include <dolphin/gx/__GXInit.h>
-#include <dolphin/gx/forward.h>
 #include <dolphin/gx/GXGeometry.h>
+#include <dolphin/gx/GXMisc.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
@@ -21,9 +21,9 @@
 
 #define PI_MEMSP_EFB 0x08000000
 
-static void (*lbl_804D7320)(u16);
-static GXDrawDoneCallback lbl_804D7324;
-static GXBool lbl_804D7328[0x4];
+static void (*GXMisc_804D7320)(u16);
+static GXDrawDoneCallback GXMisc_804D7324;
+static GXBool GXMisc_804D7328[0x4];
 static OSThreadQueue GXDrawDoneThreadQueue;
 
 static inline void GXSetMisc_inline_1(u16 arg0)
@@ -42,8 +42,9 @@ static inline void GXSetMisc_inline_3(void)
 {
     GXContext* gx = __GXContexts.main;
 
-    if (gx->x4)
+    if (gx->x4) {
         gx->x4F0_flags |= 8;
+    }
 }
 
 void GXSetMisc(s32 arg0, u32 arg1)
@@ -69,14 +70,16 @@ void GXSetDrawDone(void)
     WGPIPE.u8 = GX_LOAD_BP_REG;
     WGPIPE.u32 = 0x45000002;
 
-    if (__GXContexts.main->x4F0_flags != 0)
+    if (__GXContexts.main->x4F0_flags != 0) {
         __GXSetDirtyState();
+    }
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < 8; i++) {
         WGPIPE.u32 = 0;
+    }
 
     PPCSync();
-    lbl_804D7328[0] = GX_FALSE;
+    GXMisc_804D7328[0] = GX_FALSE;
     OSRestoreInterrupts(interrupt_enabled);
 }
 
@@ -84,8 +87,9 @@ void GXWaitDrawDone(void)
 {
     u32 interrupt_enabled = OSDisableInterrupts();
 
-    while (!lbl_804D7328[0])
+    while (!GXMisc_804D7328[0]) {
         OSSleepThread(&GXDrawDoneThreadQueue);
+    }
 
     OSRestoreInterrupts(interrupt_enabled);
 }
@@ -106,8 +110,8 @@ void GXPixModeSync(void)
  * EFB using the source alpha channel as a template. If the compare function is
  * true, the source color will be written to the EFB based on the result of the
  * Z compare (see GXPokeZMode). If the alpha compare function is false, the
- * source color is not written to the EFB. The alpha compare test happens before
- * the Z compare and before blending (see GXPokeBlendMode).
+ * source color is not written to the EFB. The alpha compare test happens
+ * before the Z compare and before blending (see GXPokeBlendMode).
  */
 void GXPokeAlphaMode(GXCompare func, u8 threshold)
 {
@@ -118,8 +122,8 @@ void GXPokeAlphaMode(GXCompare func, u8 threshold)
  * This function determines what value of alpha will be read from the Embedded
  * Frame Buffer (EFB).The mode only applies to GXPeek* functions.  The GXPeek*
  * functions allow the CPU to directly read the EFB. Note that this feature
- * works no matter what pixel type (see GXSetPixelFmt) you are using. If you are
- * using the EFB with alpha plane, it is recommended that you should use
+ * works no matter what pixel type (see GXSetPixelFmt) you are using. If you
+ * are using the EFB with alpha plane, it is recommended that you should use
  * GX_READ_NONE so that you can read correct alpha value from the EFB. If you
  * are using the EFB with no alpha, you should set either of GX_READ_00 or
  * GX_READ_FF in order to get certain value.
@@ -130,27 +134,29 @@ void GXPokeAlphaRead(s32 mode)
 }
 
 /*
- * This function enables or disables alpha-buffer updates for GXPoke* functions.
- * The normal rendering state (GXSetAlphaUpdate) is not effected.
+ * This function enables or disables alpha-buffer updates for GXPoke*
+ * functions. The normal rendering state (GXSetAlphaUpdate) is not effected.
  */
 void GXPokeAlphaUpdate(bool update_enable)
 {
     u16 old = __peReg[PE_POKE_CMODE0_ID];
 
     // PEReg[2].bit11 = update_enable (PowerPC bit-ordering)
-    __peReg[PE_POKE_CMODE0_ID] = (old & ~0x10) | ((update_enable << 4) & 0xFF0);
+    __peReg[PE_POKE_CMODE0_ID] =
+        (old & ~0x10) | ((update_enable << 4) & 0xFF0);
 }
 
 /*
  * This function determines how the source image, written using the GXPoke*
- * functions, is blended with the current Embedded Frame Buffer (EFB). When type
- * is set to GX_CM_NONE, no color data is written to the EFB.  When type is set
- * to GX_CM_BLEND, the source and EFB pixels are blended using the following
- * equation: dst_pix_clr = src_pix_clr * src_factor + dst_pix_clr * dst_factor
- * The dst_factor can be used only when the frame buffer has GX_PF_RGBA6_Z24 as
- * the pixel format (see GXSetPixelFmt). When type is set to GX_CM_LOGIC, the
- * source and EFB pixels are blended using logical bitwise operations. This
- * function does not effect the normal rendering state, GXSetBlendMode.
+ * functions, is blended with the current Embedded Frame Buffer (EFB). When
+ * type is set to GX_CM_NONE, no color data is written to the EFB.  When type
+ * is set to GX_CM_BLEND, the source and EFB pixels are blended using the
+ * following equation: dst_pix_clr = src_pix_clr * src_factor + dst_pix_clr *
+ * dst_factor The dst_factor can be used only when the frame buffer has
+ * GX_PF_RGBA6_Z24 as the pixel format (see GXSetPixelFmt). When type is set to
+ * GX_CM_LOGIC, the source and EFB pixels are blended using logical bitwise
+ * operations. This function does not effect the normal rendering state,
+ * GXSetBlendMode.
  *
  * HW2 adds a new type: GX_BM_SUBTRACT.    When this type is used, the
  * destination pixel is computed as follows: dst_pix_clr = dst_pix_clr -
@@ -188,11 +194,11 @@ void GXPokeColorUpdate(bool update_enable)
 
 /*
  * This function sets a constant alpha value for writing to the Embedded Frame
- * Buffer (EFB) using the GXPoke* functions. The GXPoke* functions allow the CPU
- * direct access to the EFB. The EFB pixel type must have an alpha channel for
- * this function to be effective, see GXSetPixelFmt. The blending operations
- * (see GXPokeBlendMode) still use source alpha but when writing the pixel
- * color, the constant alpha will replace the pixel alpha in the EFB.
+ * Buffer (EFB) using the GXPoke* functions. The GXPoke* functions allow the
+ * CPU direct access to the EFB. The EFB pixel type must have an alpha channel
+ * for this function to be effective, see GXSetPixelFmt. The blending
+ * operations (see GXPokeBlendMode) still use source alpha but when writing the
+ * pixel color, the constant alpha will replace the pixel alpha in the EFB.
  */
 void GXPokeDstAlpha(bool enable, u8 alpha)
 {
@@ -239,11 +245,11 @@ void GXPokeZMode(bool compare_enable, GXCompare func, bool update_enable)
 void GXTokenInterruptHandler(__OSInterrupt _, OSContext* current_ctx)
 {
     u16 temp_r31 = __peReg[7];
-    if (lbl_804D7320 != NULL) {
+    if (GXMisc_804D7320 != NULL) {
         OSContext temp_ctx;
         OSClearContext(&temp_ctx);
         OSSetCurrentContext(&temp_ctx);
-        lbl_804D7320(temp_r31);
+        GXMisc_804D7320(temp_r31);
         OSClearContext(&temp_ctx);
         OSSetCurrentContext(current_ctx);
     }
@@ -252,9 +258,9 @@ void GXTokenInterruptHandler(__OSInterrupt _, OSContext* current_ctx)
 
 GXDrawDoneCallback GXSetDrawDoneCallback(GXDrawDoneCallback cb)
 {
-    GXDrawDoneCallback previous = lbl_804D7324;
+    GXDrawDoneCallback previous = GXMisc_804D7324;
     bool intr = OSDisableInterrupts();
-    lbl_804D7324 = cb;
+    GXMisc_804D7324 = cb;
     OSRestoreInterrupts(intr);
     return previous;
 }
@@ -262,12 +268,12 @@ GXDrawDoneCallback GXSetDrawDoneCallback(GXDrawDoneCallback cb)
 void GXFinishInterruptHandler(__OSInterrupt _, OSContext* current_ctx)
 {
     __peReg[5] = (__peReg[5] & ~8) | 8;
-    lbl_804D7328[0] = GX_TRUE;
-    if (lbl_804D7324 != NULL) {
+    GXMisc_804D7328[0] = GX_TRUE;
+    if (GXMisc_804D7324 != NULL) {
         OSContext temp_ctx;
         OSClearContext(&temp_ctx);
         OSSetCurrentContext(&temp_ctx);
-        lbl_804D7324();
+        GXMisc_804D7324();
         OSClearContext(&temp_ctx);
         OSSetCurrentContext(current_ctx);
     }
@@ -281,5 +287,6 @@ void __GXPEInit(void)
     OSInitThreadQueue(&GXDrawDoneThreadQueue);
     __OSUnmaskInterrupts(0x2000);
     __OSUnmaskInterrupts(0x1000);
-    __peReg[5] = ((((((((__peReg[5] & ~4) | 4) & ~8) | 8) & ~1) | 1) & ~2) | 2);
+    __peReg[5] =
+        ((((((((__peReg[5] & ~4) | 4) & ~8) | 8) & ~1) | 1) & ~2) | 2);
 }

@@ -1,12 +1,11 @@
-#include <dolphin/card/CARDDir.h>
-
+#include <__mem.h>
+#include <stddef.h>
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDCheck.h>
+#include <dolphin/card/CARDDir.h>
 #include <dolphin/card/CARDRdwr.h>
 #include <dolphin/os/OSCache.h>
-#include <Runtime/__mem.h>
-#include <stddef.h>
 
 CARDDir* __CARDGetDirBlock(CARDControl* card)
 {
@@ -23,7 +22,8 @@ static void WriteCallback(s32 chan, s32 result)
     card = &__CARDBlock[chan];
     if (0 <= result) {
         CARDDir* dir0 = (CARDDir*) ((uintptr_t) card->workArea + card_size);
-        CARDDir* dir1 = (CARDDir*) ((uintptr_t) card->workArea + card_size * 2);
+        CARDDir* dir1 =
+            (CARDDir*) ((uintptr_t) card->workArea + card_size * 2);
 
         if (card->currentDir == dir0) {
             card->currentDir = dir1;
@@ -57,8 +57,9 @@ static void EraseCallback(s32 chan, s32 result)
     uintptr_t addr;
 
     card = &__CARDBlock[chan];
-    if (result < 0)
+    if (result < 0) {
         goto error;
+    }
 
     dir = __CARDGetDirBlock(card);
     addr = ((uintptr_t) dir - (uintptr_t) card->workArea) / card_size *
@@ -68,8 +69,9 @@ static void EraseCallback(s32 chan, s32 result)
     result =
         __CARDWrite(chan, addr, card_size, dir, (CARDCallback) WriteCallback);
 
-    if (result < 0)
+    if (result < 0) {
         goto error;
+    }
 
     return;
 
@@ -97,8 +99,9 @@ s32 __CARDUpdateDir(s32 chan, CARDCallback callback)
     CARDDir* dir;
 
     card = &__CARDBlock[chan];
-    if (!card->attached)
+    if (!card->attached) {
         return CARD_RESULT_NOCARD;
+    }
 
     dir = __CARDGetDirBlock(card);
     check = __CARDGetDirCheck(dir);

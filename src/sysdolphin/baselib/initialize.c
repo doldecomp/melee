@@ -1,28 +1,27 @@
-#include <sysdolphin/baselib/initialize.h>
-
+#include <stdarg.h>
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/vi/vi.h>
-#include <stdarg.h>
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/displayfunc.h>
-#include <sysdolphin/baselib/id.h>
-#include <sysdolphin/baselib/leak.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/objalloc.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/robj.h>
-#include <sysdolphin/baselib/shadow.h>
-#include <sysdolphin/baselib/state.h>
-#include <sysdolphin/baselib/tev.h>
+#include <baselib/aobj.h>
+#include <baselib/class.h>
+#include <baselib/debug.h>
+#include <baselib/displayfunc.h>
+#include <baselib/id.h>
+#include <baselib/initialize.h>
+#include <baselib/leak.h>
+#include <baselib/lobj.h>
+#include <baselib/mtx.h>
+#include <baselib/objalloc.h>
+#include <baselib/random.h>
+#include <baselib/robj.h>
+#include <baselib/shadow.h>
+#include <baselib/state.h>
+#include <baselib/tev.h>
 
-extern OSHeapHandle lbl_804D6018;
+extern OSHeapHandle HSD_Synth_804D6018;
 extern GXRenderModeObj GXNtsc480IntDf;
 extern GXRenderModeObj HSD_VIData;
 
@@ -43,7 +42,7 @@ static u32 iparam_fifo_size = HSD_DEFAULT_FIFO_SIZE;
 static int iparam_xfb_max_num = HSD_DEFAULT_XFB_MAX_NUM;
 static int iparam_heap_max_num = 4;
 static u32 iparam_audio_heap_size = HSD_DEFAULT_AUDIO_SIZE;
-static GXColor lbl_804D5E1C = { 0 };
+static GXColor HSD_Init_804D5E1C = { 0 };
 
 void HSD_InitComponent(void)
 {
@@ -70,7 +69,7 @@ void HSD_InitComponent(void)
     HSD_IDSetup();
     VIWaitForRetrace();
     HSD_ObjInit();
-    func_803881E4();
+    HSD_Debug_803881E4();
     init_done = true;
 }
 
@@ -148,7 +147,7 @@ static void HSD_GXInit(void)
     GXInitLightPos(&lightobj, 1, 0, 0);
     GXInitLightDir(&lightobj, 1, 0, 0);
     GXInitLightAttn(&lightobj, 1, 0, 0, 1, 0, 0);
-    GXInitLightColor(&lightobj, lbl_804D5E1C);
+    GXInitLightColor(&lightobj, HSD_Init_804D5E1C);
 
     for (i = 0; i < 8; i++) {
         GXLoadLightObjImm(&lightobj, HSD_Index2LightID(i));
@@ -165,13 +164,13 @@ static void HSD_OSInit(void)
     memReport.total = OSGetPhysicalMemSize();
     memReport.system = memReport.total - (u32) OSGetArenaHi() +
                        (u32) OSGetArenaLo() - memReport.xfb - memReport.gxfifo;
-    old_arena_lo = (u32) OSInitAlloc((void*) old_arena_lo, (void*) old_arena_hi,
-                                     iparam_heap_max_num);
+    old_arena_lo = (u32) OSInitAlloc(
+        (void*) old_arena_lo, (void*) old_arena_hi, iparam_heap_max_num);
     OSSetArenaLo((void*) old_arena_lo);
 
     new_arena_lo = OSRoundUp32B(old_arena_lo);
     new_arena_hi = OSRoundDown32B(old_arena_hi);
-    lbl_804D6018 = OSCreateHeap(
+    HSD_Synth_804D6018 = OSCreateHeap(
         (void*) new_arena_lo, (void*) (new_arena_lo + iparam_audio_heap_size));
     new_arena_lo += iparam_audio_heap_size;
     hsd_heap_next_arena_lo = (void*) new_arena_lo;
@@ -223,7 +222,8 @@ OSHeapHandle HSD_CreateMainHeap(void* lo, void* hi)
         hsd_heap_next_arena_hi = hi;
     }
     OSDestroyHeap(current_heap);
-    current_heap = OSCreateHeap(hsd_heap_next_arena_lo, hsd_heap_next_arena_hi);
+    current_heap =
+        OSCreateHeap(hsd_heap_next_arena_lo, hsd_heap_next_arena_hi);
     OSSetCurrentHeap(current_heap);
     HSD_ObjSetHeap((u32) hsd_heap_next_arena_hi - (u32) hsd_heap_next_arena_lo,
                    NULL);
@@ -247,11 +247,12 @@ void HSD_StartRender(HSD_RenderPass pass)
     GXSetFieldMode(rmode->field_rendering, rmode->xfbHeight < rmode->viHeight);
 }
 
-void func_803755A8(void)
+void HSD_Init_803755A8(void)
 {
     // Does nothing, but need to force a comparison to make this match
-    if (current_render_pass == HSD_RP_OFFSCREEN)
+    if (current_render_pass == HSD_RP_OFFSCREEN) {
         current_render_pass == 0;
+    }
 }
 
 static void HSD_ObjInit(void)
@@ -332,7 +333,8 @@ void HSD_ObjDumpStat(void)
     HSD_ObjAllocInfo* i;
     for (i = objs; i->name != NULL; i++) {
         OSReport("objalloc: %s\tusing %d\tfreed %d\tpeak %d\n", i->name,
-                 HSD_ObjAllocUsed(i), HSD_ObjAllocFree(i), HSD_ObjAllocPeak(i));
+                 HSD_ObjAllocUsed(i), HSD_ObjAllocFree(i),
+                 HSD_ObjAllocPeak(i));
     }
 }
 

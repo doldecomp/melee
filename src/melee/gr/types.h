@@ -1,11 +1,14 @@
 #ifndef MELEE_GR_TYPES_H
 #define MELEE_GR_TYPES_H
 
-#include <melee/it/forward.h>
-#include <melee/sc/scene.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
+#include "it/forward.h"
+
+#include "sc/scene.h"
+
+#include <dolphin/mtx/types.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 
 /// @todo Finish values, use @c PascalCase
 typedef enum InternalStageId {

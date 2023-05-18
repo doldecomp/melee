@@ -1,12 +1,12 @@
 #ifndef _robj_h_
 #define _robj_h_
 
-#include "sysdolphin/baselib/forward.h"
-#include <sysdolphin/baselib/objalloc.h>
+#include <baselib/forward.h>
 
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/fobj.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/aobj.h>
+#include <baselib/fobj.h>
+#include <baselib/jobj.h>
+#include <baselib/objalloc.h>
 
 #define TYPE_MASK 0x70000000
 #define REFTYPE_JOBJ 0x10000000

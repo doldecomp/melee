@@ -50,6 +50,7 @@ MWCC_FLAGS = [
 
 PCPP_FLAGS = [
     "--passthru-defines",
+    "--passthru-comments",
     "--line-directive",
     "--compress",
     "-I",
@@ -68,6 +69,10 @@ PCPP_FLAGS = [
     "__MWERKS__",
     "-D",
     "M2CTX",
+    "-D",
+    "MUST_MATCH",
+    "-U",
+    "FIGHTERVARS_SIZE",
 ]
 
 

@@ -1,9 +1,10 @@
 #ifndef MELEE_GR_GRBIGBLUE_H
 #define MELEE_GR_GRBIGBLUE_H
 
-#include <dolphin/mtx/types.h>
-#include <Runtime/platform.h>
+#include <platform.h>
 
-void func_801EF7D8(Vec3*);
+#include <dolphin/mtx/types.h>
+
+void grBigBlue_801EF7D8(Vec3*);
 
 #endif

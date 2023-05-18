@@ -1,9 +1,10 @@
 #ifndef _class_h_
 #define _class_h_
 
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/forward.h>
+#include <platform.h>
+#include <baselib/forward.h>
+
+#include <baselib/debug.h>
 
 #define HSD_CLASS_INFO(o) ((HSD_ClassInfo*) o)
 #define HSD_CLASS_METHOD(o) (((HSD_Class*) o)->class_info)

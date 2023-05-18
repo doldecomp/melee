@@ -1,22 +1,22 @@
 #ifndef _lbrefract_h_
 #define _lbrefract_h_
 
+#include <string.h>
 #include <dolphin/gx/GXMisc.h>
 #include <dolphin/os/OSCache.h>
-#include <string.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/pobj.h>
-#include <sysdolphin/baselib/tobj.h>
+#include <baselib/cobj.h>
+#include <baselib/memory.h>
+#include <baselib/pobj.h>
+#include <baselib/tobj.h>
 
-void func_800222A4(void);
-void func_8002247C(HSD_CObj*);
-void func_80022560(void);
-void func_800225D4(void);
+void lbRefract_800222A4(void);
+void lbRefract_8002247C(HSD_CObj*);
+void lbRefract_80022560(void);
+void lbRefract_800225D4(void);
 s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc);
-void func_80022998(s32, s32);
-void func_80022BB8(void);
-void func_80022BD0(void);
+void lbRefract_80022998(s32, s32);
+void lbRefract_80022BB8(void);
+void lbRefract_80022BD0(void);
 
 #pragma region lbrefract_003
 
@@ -31,10 +31,10 @@ f32 atanf(f32);
 
 struct _RefractCallbackData;
 
-typedef void (*RefractCallbackTypeA)(struct _RefractCallbackData*, s32, u32, s8,
-                                     s8);
-typedef void (*RefractCallbackTypeB)(struct _RefractCallbackData*, s32, u32, s8,
-                                     s8, s8, s8);
+typedef void (*RefractCallbackTypeA)(struct _RefractCallbackData*, s32, u32,
+                                     s8, s8);
+typedef void (*RefractCallbackTypeB)(struct _RefractCallbackData*, s32, u32,
+                                     s8, s8, s8, s8);
 typedef void (*RefractCallbackTypeC)(struct _RefractCallbackData*, s32, u32,
                                      s32*, s32*, s32*, s32*);
 typedef struct _RefractCallbackData {
@@ -49,18 +49,18 @@ typedef struct _RefractCallbackData {
 
 } RefractCallbackData;
 
-void local_80021CE8(void*, s32);
+void lbRefract_80021CE8(void*, s32);
 
-extern RefractCallbackTypeA callback_80021F34;
-extern RefractCallbackTypeA callback_80021F70;
+extern RefractCallbackTypeA lbRefract_80021F34;
+extern RefractCallbackTypeA lbRefract_80021F70;
 
-extern RefractCallbackTypeB callback_80021FB4;
-extern RefractCallbackTypeB callback_80021FB4;
+extern RefractCallbackTypeB lbRefract_80021FB4;
+extern RefractCallbackTypeB lbRefract_80021FB4;
 
-extern RefractCallbackTypeC callback_80021FF8;
-extern RefractCallbackTypeC callback_8002206C;
-extern RefractCallbackTypeC callback_80022120;
+extern RefractCallbackTypeC lbRefract_80021FF8;
+extern RefractCallbackTypeC lbRefract_8002206C;
+extern RefractCallbackTypeC lbRefract_80022120;
 
-s32 local_8002219C(RefractCallbackData*, s32, u32, u16, u16);
+s32 lbRefract_8002219C(RefractCallbackData*, s32, u32, u16, u16);
 
 #endif

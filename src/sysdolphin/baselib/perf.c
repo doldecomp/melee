@@ -1,8 +1,7 @@
-#include <sysdolphin/baselib/perf.h>
-
-#include <dolphin/os/OSTime.h>
 #include <string.h>
-#include <sysdolphin/baselib/debug.h>
+#include <dolphin/os/OSTime.h>
+#include <baselib/debug.h>
+#include <baselib/perf.h>
 
 s64 start_time;
 

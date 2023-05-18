@@ -1,10 +1,10 @@
-#include <melee/lb/lbcommand.h>
+#include "lb/lbcommand.h"
 
-#include <melee/lb/lbbgflash.h>
+#include "lb/lbbgflash.h"
 
 extern const f64 lbl_804D79E0;
 
-void (*lbl_803B9840[16])(CommandInfo*) = {
+void (*lbCommand_803B9840[16])(CommandInfo*) = {
     Command_00, Command_01, Command_02, Command_03, Command_04, Command_05,
     Command_06, Command_07, Command_08, Command_09, NULL,       NULL,
     NULL,       NULL,       NULL,       NULL
@@ -85,14 +85,14 @@ void Command_08(CommandInfo* info)
 void Command_09(CommandInfo* info)
 {
     Command_09_Struct* cmd = info->u.Command_09;
-    func_80021C48(cmd->param_1, cmd->param_2);
+    lbBgFlash_80021C48(cmd->param_1, cmd->param_2);
     info->u.data_position += 1;
 }
 
 bool Command_Execute(CommandInfo* info, u32 command)
 {
     if (command < 10) {
-        lbl_803B9840[command](info);
+        lbCommand_803B9840[command](info);
         return true;
     }
     return false;

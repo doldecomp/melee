@@ -1,7 +1,6 @@
-#include <dolphin/card/CARDRdwr.h>
-
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
+#include <dolphin/card/CARDRdwr.h>
 
 static void BlockReadCallback(s32 chan, s32 result)
 {
@@ -40,7 +39,8 @@ error:
     }
 }
 
-s32 __CARDRead(s32 chan, u32 addr, u32 length, void* dst, CARDCallback callback)
+s32 __CARDRead(s32 chan, u32 addr, u32 length, void* dst,
+               CARDCallback callback)
 {
     CARDControl* card = &__CARDBlock[chan];
     if (!card->attached) {
@@ -77,8 +77,9 @@ static void BlockWriteCallback(s32 chan, s32 result)
     /// @todo Eliminate cast to #CARDCallback.
     result = __CARDWritePage(chan, (CARDCallback) BlockWriteCallback);
 
-    if (result < 0)
+    if (result < 0) {
         goto error;
+    }
 
     return;
 

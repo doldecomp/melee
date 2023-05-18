@@ -1,12 +1,18 @@
 #ifndef MELEE_FT_CHARA_FTZELDA_TYPES_H
 #define MELEE_FT_CHARA_FTZELDA_TYPES_H
 
-#include <placeholder.h>
 #include <platform.h>
+#include <baselib/forward.h>
 
 #include <common_structs.h>
+#include <placeholder.h>
+#include <dolphin/mtx/types.h>
 
-typedef struct _ftZeldaAttributes {
+struct ftZelda_FighterVars {
+    /* 0x222C */ HSD_GObj* x222C;
+};
+
+typedef struct ftZelda_DatAttrs {
     f32 x0;
     s32 x4; // Type confirmed
     f32 x8;
@@ -41,27 +47,27 @@ typedef struct _ftZeldaAttributes {
     f32 x7C; // Type confirmed
     f32 x80; // Type confirmed
     ReflectDesc x84;
-} ftZeldaAttributes;
+} ftZelda_DatAttrs;
 
-union ftZelda_StateVars {
+union ftZelda_MotionVars {
     struct ftZelda_SpecialHiVars {
         int x0;
         Vec2 x4;
         int xC;
         Vec2 x10;
-        f32 x18;
+        float x18;
     } specialhi;
 
-    struct ftZelda_Unk3StateVars {
+    struct ftZelda_SpecialNVars {
         int x0;
-    } unk3;
+    } specialn;
 
-    struct ftZelda_Unk5StateVars {
+    struct ftZelda_SpecialSVars {
         int x0;
         int x4;
         int x8;
         int xC;
-    } unk5;
+    } specials;
 };
 
 #endif

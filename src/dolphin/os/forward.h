@@ -1,7 +1,7 @@
 #ifndef DOLPHIN_OS_FORWARD_H
 #define DOLPHIN_OS_FORWARD_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 typedef u16 OSError;
 typedef s16 __OSInterrupt;
@@ -95,7 +95,8 @@ typedef enum {
     OS_THREAD_DETACHED = (1 << 0)
 } OSThreadFlag;
 
-typedef void (*__OSExceptionHandler)(OSException exception, OSContext* context);
+typedef void (*__OSExceptionHandler)(OSException exception,
+                                     OSContext* context);
 typedef void (*OSErrorHandler)(OSError error, OSContext* context, ...);
 typedef void (*EXICallback)(EXIChannel, OSContext*);
 typedef void (*OSSwitchThreadCallback)(OSThread*, OSThread*);

@@ -18,11 +18,11 @@ TEXT_O_FILES :=\
     $(BUILD_DIR)/asm/melee/lb/lbcollision.s.o\
     $(BUILD_DIR)/src/melee/lb/lblanguage.c.o\
     $(BUILD_DIR)/src/melee/lb/lbtime.c.o\
-    $(BUILD_DIR)/src/melee/lb/lbunknown_001.c.o\
-    $(BUILD_DIR)/asm/melee/lb/lbunknown_002.s.o\
+    $(BUILD_DIR)/src/melee/lb/lb_00B0.c.o\
+    $(BUILD_DIR)/asm/melee/lb/lb_00CE.s.o\
     $(BUILD_DIR)/src/melee/lb/lbvector.c.o\
     $(BUILD_DIR)/asm/melee/lb/lbshadow.s.o\
-    $(BUILD_DIR)/asm/melee/lb/lbunknown_003.s.o\
+    $(BUILD_DIR)/asm/melee/lb/lb_00F9.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbarq.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbmemory.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbheap.s.o\
@@ -30,8 +30,8 @@ TEXT_O_FILES :=\
     $(BUILD_DIR)/src/melee/lb/lbarchive.c.o\
     $(BUILD_DIR)/asm/melee/lb/lbarchive.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbdvd.s.o\
-    $(BUILD_DIR)/asm/melee/lb/lbunknown_004.s.o\
-    $(BUILD_DIR)/asm/melee/lb/lbunknown_005.s.o\
+    $(BUILD_DIR)/asm/melee/lb/lb_0192.s.o\
+    $(BUILD_DIR)/asm/melee/lb/lb_0198.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbsnap.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbgx.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbanim.s.o\
@@ -40,11 +40,11 @@ TEXT_O_FILES :=\
     $(BUILD_DIR)/asm/melee/lb/lbbgflash.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/lb/lbrefract_shared_data.s.o\
-    $(BUILD_DIR)/asm/melee/lb/lbrefract_001.s.o\
-    $(BUILD_DIR)/asm/melee/lb/lbrefract_002.s.o\
-    $(BUILD_DIR)/asm/melee/lb/lbrefract_003_data.s.o\
-    $(BUILD_DIR)/src/melee/lb/lbrefract_003.c.o\
+    $(BUILD_DIR)/asm/melee/lb/lbrefract_data.s.o\
+    $(BUILD_DIR)/asm/melee/lb/lbrefract1.s.o\
+    $(BUILD_DIR)/asm/melee/lb/lbrefract2.s.o\
+    $(BUILD_DIR)/asm/melee/lb/lbrefract3.s.o\
+    $(BUILD_DIR)/src/melee/lb/lbrefract3.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/lb/lbaudio_ax.s.o\
@@ -55,7 +55,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/pl/player.c.o\
-    $(BUILD_DIR)/asm/melee/pl/pl_unknown_001.s.o\
+    $(BUILD_DIR)/asm/melee/pl/pl_0371.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/mp/mpcoll.c.o\
@@ -66,7 +66,7 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ef/eflib.s.o\
     $(BUILD_DIR)/asm/melee/ef/efsync.s.o\
-    $(BUILD_DIR)/asm/melee/ef/code_80061D70.s.o\
+    $(BUILD_DIR)/asm/melee/ef/ef_061D.s.o\
     $(BUILD_DIR)/asm/melee/ef/efasync.s.o\
 
 TEXT_O_FILES +=\
@@ -77,252 +77,277 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/ftcamera.c.o\
     $(BUILD_DIR)/src/melee/ft/ftcoll.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftcoll.s.o\
-    $(BUILD_DIR)/src/melee/ft/code_8007C114.c.o\
-    $(BUILD_DIR)/src/melee/ft/code_8007C630.c.o\
+    $(BUILD_DIR)/src/melee/ft/ft_07C1.c.o\
+    $(BUILD_DIR)/src/melee/ft/ft_07C6.c.o\
     $(BUILD_DIR)/src/melee/ft/ftcommon.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdrawcommon.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftdrawcommon_data.s.o\
     $(BUILD_DIR)/src/melee/ft/ftcliffcommon.c.o\
     $(BUILD_DIR)/src/melee/ft/ftwalljump.c.o\
-    $(BUILD_DIR)/src/melee/ft/code_80081938.c.o\
-    $(BUILD_DIR)/src/melee/ft/code_80081B38.c.o\
-    $(BUILD_DIR)/asm/melee/ft/ft_unknown_005.s.o\
-    $(BUILD_DIR)/src/melee/ft/ftdata1.c.o\
+    $(BUILD_DIR)/src/melee/ft/ft_0819.c.o\
+    $(BUILD_DIR)/src/melee/ft/ft_081B.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0852.s.o\
+    $(BUILD_DIR)/src/melee/ft/ftdata.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdata2.c.o\
-    $(BUILD_DIR)/src/melee/ft/ftdata3.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Init.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftdata.s.o\
     $(BUILD_DIR)/src/melee/ft/ftlib.c.o\
     $(BUILD_DIR)/src/melee/ft/ftwaitanim.c.o\
-    $(BUILD_DIR)/src/melee/ft/ftunk07.c.o\
+    $(BUILD_DIR)/src/melee/ft/ft_0877.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0877.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Wait.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_08A6.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Attack1.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackDash.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackS3.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackHi3.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackLw3.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackS4.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackHi4.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackLw4.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackAir.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_LandingAir.c.o\
     $(BUILD_DIR)/src/melee/ft/ftitempickup.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdynamics.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftmario2.c.o\
-    $(BUILD_DIR)/src/melee/ft/ft_unknown_006.c.o\
-    $(BUILD_DIR)/asm/melee/ft/ft_unknown_006.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMr_Strings.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_08A4.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey1.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey_walk.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyWait0.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyWalk.c.o\
     $(BUILD_DIR)/src/melee/ft/ftwalkcommon.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey4.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey5.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey6.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey7.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey8.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey9.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_MS_345_0.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyTurn.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyFall.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyJump.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyWait1.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyLanding.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftmario.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_SpecialN.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_SpecialS.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_SpecialHi.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_SpecialLw.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMr_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMr_SpecialN.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMr_SpecialS.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMr_SpecialHi.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMr_SpecialLw.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain_SpecialN.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain_SpecialS.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftCaptain_SpecialHi.s.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftCaptain_SpecialLw.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialN.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialS.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialLw.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialHi.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftFox/ftfox.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_AppealS.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_SpecialN.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_SpecialHi.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_SpecialLw.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_SpecialS.c.o\
-
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftlink.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftlink.s.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftKirby/ftkirby.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftkirby.s.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey_callbacks.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey_SpecialLw.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey_SpecialS.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey_SpecialN.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey_SpecialHi.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSeak_Init.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSeak_SpecialS.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftSeak/ftSeak_SpecialN.s.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSeak_SpecialN.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftSeak/ftSeak_SpecialHi.s.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSeak_SpecialHi.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftSeak/ftSeak_SpecialLw.s.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSeak_SpecialLw.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_AttackS4.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_AttackHi4.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_AttackLw4.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_SpecialS.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_SpecialN.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_SpecialHi.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_SpecialLw.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftpeach.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftpeach.s.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/fticeclimber1.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/fticeclimber.s.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/fticeclimber2_nana.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/fticeclimber2_nana.s.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/fticeclimber3.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu1.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu2.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu3.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu4.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu5.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus1.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus2.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus3.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus4.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus5.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus6.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftyoshi1.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftyoshi2.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftyoshi3.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftyoshi4.s.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftKoopa/ftkoopa1.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftKoopa/ftkoopa2.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftkoopa3.s.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMars.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialN.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialS.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialHi.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialLw.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda1.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda2.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda3.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda4.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda5.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftpurin.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftpurin.s.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftluigi.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_SpecialN.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_SpecialS.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_SpecialHi.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_SpecialLw.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFx_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFx_AppealS.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFx_SpecialN.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFx_SpecialHi.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFx_SpecialLw.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFx_SpecialS.c.o\
 
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftmewtwo.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialHi.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialLw.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialS.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialN.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftLk_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftLk_AttackAir.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftLk_SpecialLw.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftLk_SpecialHi.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftLk_SpecialS.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftLk_SpecialN.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCLink/ftclink.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCLink/ftclink_2.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftKirby/ftKb_Init.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftKb_Init.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDrMario/ftdrmario.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDrMario/ftdrmario_2.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_SpecialLw.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_SpecialS.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_SpecialN.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_SpecialHi.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftFalco/ftfalco.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSk_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSk_SpecialS.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftSeak/ftSk_SpecialN.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSk_SpecialN.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftSeak/ftSk_SpecialHi.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSk_SpecialHi.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftSeak/ftSk_SpecialLw.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSk_SpecialLw.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftPichu/ftpichu.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNs_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNs_AttackS4.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNs_AttackHi4.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNs_AttackLw4.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNs_SpecialS.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNs_SpecialN.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNs_SpecialHi.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNs_SpecialLw.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftgamewatch.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_AttackS4.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_AttackLw3.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_AttackAir.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_Attack11.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_Attack100.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_SpecialS.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_SpecialLw.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_SpecialHi.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_SpecialN.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_Float.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_FloatFall.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_FloatAttack.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_AttackS4.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_SpecialS.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_SpecialLw.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_SpecialHi.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_SpecialN.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftGanon/ftganon.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPopo/ftPp_Init.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftPp_SpecialS.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftEmblem/ftemblem.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftNana/ftNn_Init.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftNn_Init.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftNana/ftNn_Unk0.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftZakoBoy/ftzakoboy.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftPk_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftPk_SpecialN.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftPk_SpecialS.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftPk_SpecialHi.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftPk_SpecialLw.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftZakoGirl/ftzakogirl.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_SpecialLw_0.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_SpecialN.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_SpecialS.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_SpecialHi.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_SpecialLw_1.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftGigaKoopa/ftgigakoopa.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYs_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYs_Guard.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYs_SpecialN.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftYs_SpecialN.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSandbag/ftsandbag.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftKoopa/ftKp_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftKoopa/ftKp_Unk1.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftKp_SpecialS.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_01.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_02.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_03.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_04.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_05.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_06.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_07.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_08.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_09.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_10.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_11.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_12.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_13.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_14.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_15.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_16.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_17.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_18.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_19.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_20.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_21.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_22.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_23.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_24.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_25.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_26.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_27.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_28.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_29.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_30.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_31.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_32.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_33.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_34.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMs_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMs_SpecialN.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMs_SpecialS.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMs_SpecialHi.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMs_SpecialLw.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCrazyHand/ftcrazyhand.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCrazyHand/ftcrazyhand_2.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftcrazyhand.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftZd_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftZd_SpecialHi.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftZd_SpecialN.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftZd_SpecialLw.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftZd_SpecialS.c.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftPr_Init.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftPr_Init.s.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLg_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLg_SpecialN.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLg_SpecialS.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLg_SpecialHi.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLg_SpecialLw.c.o\
+
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMt_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMt_SpecialHi.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMt_SpecialLw.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMt_SpecialS.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMt_SpecialN.c.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCLink/ftCl_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCLink/ftCl_AppealS.c.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDrMario/ftDr_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDrMario/ftDr_AppealS.c.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftFalco/ftFc_Init.c.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPichu/ftPc_Init.c.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGw_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGw_AttackS4.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGw_AttackLw3.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGw_AttackAir.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGw_Attack11.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGw_Attack100.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGw_SpecialS.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGw_SpecialLw.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGw_SpecialHi.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGw_SpecialN.c.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftGanon/ftGn_Init.c.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftEmblem/ftFe_Init.c.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftZakoBoy/ftBo_Init.c.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftZakoGirl/ftGl_Init.c.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftGigaKoopa/ftGk_Init.c.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSandbag/ftSb_Init.c.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_Wait1_0.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_Wait1_2.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_Entry.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_Damage_0.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_Sweep.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_SweepWait.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_Slap.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_Walk.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_Drill.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_RockCrush.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_PaperCrush.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_Poke.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_FingerBeam.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_FingerGun.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_FingerGun3.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_BackAirplane1.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_BackAirplane2.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_BackAirplane3.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_BackCrush_0.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_BackCrush_1.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_BackDisappear.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_Squeeze.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_Wait1_1.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_Squeezing.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_Throw.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_Slam.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_TagCrush.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_TagApplaud.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_TagRockPaper.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_TagCancel.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_CaptureMasterHand.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_CaptureDamageMasterHand.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_ThrownMasterHand.c.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCrazyHand/ftCh_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCrazyHand/ftCh_Unk0.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCh_Init.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/ftbosslib.c.o\
@@ -331,16 +356,10 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gm/gmmain_lib.c.o\
     $(BUILD_DIR)/asm/melee/gm/gmmain_lib.s.o\
     $(BUILD_DIR)/src/melee/gm/gmmain.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/gm/code_801601C4.s.o\
-
-TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/melee/gm/gm_1601.s.o\
     $(BUILD_DIR)/asm/melee/gm/gmtitle.s.o\
     $(BUILD_DIR)/asm/melee/gm/gmcamera.s.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/text_2.s.o\
+    $(BUILD_DIR)/asm/melee/gm_1A36.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gr/ground.c.o\
@@ -424,10 +443,10 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/gr/stage.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/db/db_unknown_001.s.o\
+    $(BUILD_DIR)/asm/melee/db/db_2253.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/text_3.s.o\
+    $(BUILD_DIR)/asm/melee/mn_2295.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/mn/mnitemsw.s.o\
@@ -454,21 +473,21 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/mn/mncharsel.c.o\
     $(BUILD_DIR)/asm/melee/mn/mncharsel.s.o\
     $(BUILD_DIR)/src/melee/it/item.c.o\
-    $(BUILD_DIR)/src/melee/it/item2.c.o\
-    $(BUILD_DIR)/asm/melee/it/code_80266F3C.s.o\
-    $(BUILD_DIR)/asm/melee/it/code_8027CF30.s.o\
+    $(BUILD_DIR)/src/melee/it/it_26B1.c.o\
+    $(BUILD_DIR)/asm/melee/it/it_266F.s.o\
+    $(BUILD_DIR)/asm/melee/it/it_27CF.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/if/ifall.s.o\
     $(BUILD_DIR)/asm/melee/if/iftime.s.o\
     $(BUILD_DIR)/asm/melee/if/ifstatus_data.s.o\
     $(BUILD_DIR)/src/melee/if/ifstatus.c.o\
-    $(BUILD_DIR)/asm/melee/if/if_unknown_001.s.o\
+    $(BUILD_DIR)/asm/melee/if/if_2F72.s.o\
     $(BUILD_DIR)/asm/melee/if/ifstock.s.o\
     $(BUILD_DIR)/asm/melee/if/ifmagnify.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/text_4.s.o\
+    $(BUILD_DIR)/asm/melee/un_2FC9.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/Runtime/__va_arg.c.o\
@@ -841,13 +860,13 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_shared_data_002.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/db/db_data.s.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_003.s.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_004.s.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_005.s.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_006.s.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_007.s.o\
-    $(BUILD_DIR)/src/sysdolphin/baselib/baselib_unknown_008.c.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_40FF.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_001.s.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3A94.s.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3AA7.s.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3B27.s.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3B2B.s.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3B2E.s.o\
+    $(BUILD_DIR)/src/sysdolphin/baselib/hsd_3B33.c.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3B34.s.o\

@@ -8,7 +8,7 @@
 #ifndef M2C_MACROS_H
 #define M2C_MACROS_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 /* Unknown types */
 typedef s32 M2C_UNK;
@@ -18,7 +18,7 @@ typedef s32 M2C_UNK32;
 typedef s64 M2C_UNK64;
 
 /* Unknown field access, like `*(type_ptr) &expr->unk_offset` */
-#define M2C_FIELD(expr, type_ptr, offset)                                      \
+#define M2C_FIELD(expr, type_ptr, offset)                                     \
     (*(type_ptr) ((s8*) (expr) + (offset)))
 
 /* Bitwise (reinterpret) cast */
@@ -30,7 +30,7 @@ typedef s64 M2C_UNK64;
 #define M2C_UNALIGNED32(expr) (expr)
 
 /* Unhandled instructions */
-#define M2C_ERROR(desc) (0)
+#define M2C_ERROR(...) (0)
 #define M2C_TRAP_IF(cond) (0)
 #define M2C_BREAK() (0)
 #define M2C_SYNC() (0)

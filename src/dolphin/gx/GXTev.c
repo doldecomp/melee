@@ -1,8 +1,7 @@
-#include <dolphin/gx/GXTev.h>
-
+#include <placeholder.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__types.h>
-#include <placeholder.h>
+#include <dolphin/gx/GXTev.h>
 
 void GXSetTevOp(GXTevStageID id, GXTevMode mode)
 {
@@ -435,7 +434,7 @@ lbl_803405B4:
 #endif
 
 #ifdef MWERKS_GEKKO
-static u32 lbl_804014E0[] = { 0, 1, 0, 1, 0, 1, 7, 5, 6, 0 };
+static u32 GXTev_804014E0[] = { 0, 1, 0, 1, 0, 1, 7, 5, 6, 0 };
 #pragma push
 asm void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map,
                        GXChannelID color)
@@ -480,9 +479,9 @@ lbl_8034063C:
 /* 80340674 0033D254  38 00 00 07 */	li r0, 7
 /* 80340678 0033D258  48 00 00 18 */	b lbl_80340690
 lbl_8034067C:
-/* 8034067C 0033D25C  3C 60 80 40 */	lis r3, lbl_804014E0@ha
+/* 8034067C 0033D25C  3C 60 80 40 */	lis r3, GXTev_804014E0@ha
 /* 80340680 0033D260  54 C4 10 3A */	slwi r4, r6, 2
-/* 80340684 0033D264  38 03 14 E0 */	addi r0, r3, lbl_804014E0@l
+/* 80340684 0033D264  38 03 14 E0 */	addi r0, r3, GXTev_804014E0@l
 /* 80340688 0033D268  7C 60 22 14 */	add r3, r0, r4
 /* 8034068C 0033D26C  80 03 00 00 */	lwz r0, 0(r3)
 lbl_80340690:
@@ -519,9 +518,9 @@ lbl_803406D4:
 /* 80340700 0033D2E0  38 00 00 07 */	li r0, 7
 /* 80340704 0033D2E4  48 00 00 18 */	b lbl_8034071C
 lbl_80340708:
-/* 80340708 0033D2E8  3C 60 80 40 */	lis r3, lbl_804014E0@ha
+/* 80340708 0033D2E8  3C 60 80 40 */	lis r3, GXTev_804014E0@ha
 /* 8034070C 0033D2EC  54 C4 10 3A */	slwi r4, r6, 2
-/* 80340710 0033D2F0  38 03 14 E0 */	addi r0, r3, lbl_804014E0@l
+/* 80340710 0033D2F0  38 03 14 E0 */	addi r0, r3, GXTev_804014E0@l
 /* 80340714 0033D2F4  7C 60 22 14 */	add r3, r0, r4
 /* 80340718 0033D2F8  80 03 00 00 */	lwz r0, 0(r3)
 lbl_8034071C:

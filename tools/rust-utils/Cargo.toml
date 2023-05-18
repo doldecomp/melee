@@ -1,0 +1,19 @@
+[package]
+name = "melee-utils"
+version = "0.1.1"
+edition = "2021"
+authors = ["Robin Avery <robin@ribbanya.dev>"]
+license = "LGPL-3.0-or-later"
+
+[dependencies]
+anyhow = "1.0.70"
+globset = "0.4.10"
+lazy_static = "1.4.0"
+log = "0.4.17"
+memmap2 = "0.5.10"
+rayon = "1.7.0"
+regex = "1.7.2"
+walkdir = "2.3.3"
+
+[dev-dependencies]
+env_logger = "0.10.0"

@@ -1,8 +1,16 @@
 #ifndef MELEE_FT_CHARA_FTYOSHI_TYPES_H
 #define MELEE_FT_CHARA_FTYOSHI_TYPES_H
 
-#include <placeholder.h>
 #include <platform.h>
+
+#include <placeholder.h>
+
+struct ftYoshi_FighterVars {
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
+};
 
 typedef struct _ftYoshiAttributes {
     f32 x0;
@@ -34,7 +42,7 @@ struct S_UNK_YOSHI1 {
     struct S_UNK_YOSHI2* unk_struct;
 };
 
-union ftYoshi_StateVars {
+union ftYoshi_MotionVars {
     /// @todo Proper state name.
     struct ftYoshi_State2Vars {
         f32 x0;

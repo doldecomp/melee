@@ -1,6 +1,6 @@
-#include <dolphin/os/OSLink.h>
+#include <platform.h>
 
-#include <Runtime/platform.h>
+#include <dolphin/os/OSLink.h>
 
 #define OS_MODULE_LIST_ADDR 0x800030C8
 #define OS_STRING_TABLE_ADDR 0x800030D0

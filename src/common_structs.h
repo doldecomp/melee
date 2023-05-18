@@ -3,9 +3,10 @@
 #ifndef _common_structs_h_
 #define _common_structs_h_
 
+#include <platform.h>
+
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
-#include <Runtime/platform.h>
 
 // Most of these should be moved to independent headers once they are created
 
@@ -16,35 +17,36 @@
 
 // HSD_PAD
 /// @todo @c PascalCase members
-typedef enum HSD_Buttons {
-    HSD_BUTTON_DPAD_LEFT = 1 << 0,
-    HSD_BUTTON_DPAD_RIGHT = 1 << 1,
-    HSD_BUTTON_DPAD_DOWN = 1 << 2,
-    HSD_BUTTON_DPAD_UP = 1 << 3,
-    HSD_BUTTON_Z = 1 << 4,
-    HSD_BUTTON_R = 1 << 5,
-    HSD_BUTTON_L = 1 << 6,
-    HSD_BUTTON_UNK_7 = 1 << 7,
+typedef u32 HSD_Pad;
 
-    /// @remarks Also covers Z-Button macro in-game.
-    HSD_BUTTON_A = 1 << 8,
+static HSD_Pad const HSD_Pad_DpadLeft ATTRIBUTE_USED = 1 << 0;
+static HSD_Pad const HSD_Pad_DpadRight ATTRIBUTE_USED = 1 << 1;
+static HSD_Pad const HSD_Pad_DpadDown ATTRIBUTE_USED = 1 << 2;
+static HSD_Pad const HSD_Pad_DpadUp ATTRIBUTE_USED = 1 << 3;
+static HSD_Pad const HSD_Pad_Z ATTRIBUTE_USED = 1 << 4;
+static HSD_Pad const HSD_Pad_R ATTRIBUTE_USED = 1 << 5;
+static HSD_Pad const HSD_Pad_L ATTRIBUTE_USED = 1 << 6;
+static HSD_Pad const HSD_Pad_7 ATTRIBUTE_USED = 1 << 7;
 
-    HSD_BUTTON_B = 1 << 9,
-    HSD_BUTTON_X = 1 << 10,
-    HSD_BUTTON_Y = 1 << 11,
-    HSD_BUTTON_START = 1 << 12,
+/// @remarks Also covers Z-Button macro in-game.
+static HSD_Pad const HSD_Pad_A ATTRIBUTE_USED = 1 << 8;
 
-    /// Digital input of either L or R
-    HSD_BUTTON_LR = 1 << 31,
+static HSD_Pad const HSD_Pad_B ATTRIBUTE_USED = 1 << 9;
+static HSD_Pad const HSD_Pad_X ATTRIBUTE_USED = 1 << 10;
+static HSD_Pad const HSD_Pad_Y ATTRIBUTE_USED = 1 << 11;
+static HSD_Pad const HSD_Pad_Start ATTRIBUTE_USED = 1 << 12;
 
-    HSD_BUTTON_AB = HSD_BUTTON_A | HSD_BUTTON_B,
-} HSD_Buttons;
+/// Digital input of either L or R
+static HSD_Pad const HSD_Pad_LR ATTRIBUTE_USED = 1 << 31;
+
+static HSD_Pad const HSD_Pad_AB ATTRIBUTE_USED = HSD_Pad_A | HSD_Pad_B;
+static HSD_Pad const HSD_Pad_XY ATTRIBUTE_USED = HSD_Pad_X | HSD_Pad_Y;
 
 // COLLISION FLAGS
 
 // From Ness's Yo-Yo collision check
 
-/// @todo These (and #CollData::x134_envFlags) should be a bitfield struct
+/// @todo These (and #CollData::env_flags) should be a bitfield struct
 #define MPCOLL_RIGHTWALL 0x3F ///< Bits 0-5
 #define MPCOLL_FLAGS_B5 (1 << 5)
 #define MPCOLL_LEFTWALL 0xFC0 ///< Bits 6-11
@@ -74,7 +76,8 @@ typedef struct _ReflectDesc {
     f32 x18_damage_mul;
     f32 x1C_speed_mul;
 
-    /// @remarks Setting this to 1 causes the reflector to skip ownership change
+    /// @remarks Setting this to 1 causes the reflector to skip ownership
+    /// change
     u8 x20_behavior : 8;
 
 } ReflectDesc;
@@ -87,23 +90,23 @@ typedef struct _AbsorbDesc {
 } AbsorbDesc;
 
 typedef struct ColorOverlay {
-    s32 x0_timer;           // 0x0
-    s32 x4_pri;             // 0x4  this colanims priority, lower = will persist
-    s32* x8_ptr1;           // 0x8
-    s32 xC_loop;            // 0xc
-    s32* x10_ptr2;          // 0x10
-    s32 x14;                // 0x14
-    s32* x18_alloc;         // 0x18
-    s32 x1c;                // 0x1c
-    s32 x20;                // 0x20
-    s32 x24;                // 0x24
-    s32 x28_colanim;        // 0x28, id for the color animation in effect
-    GXColor x2C_hex;        // 0x2C
-    f32 x30_color_red;      // 0x30
-    f32 x34_color_green;    // 0x34
-    f32 x38_color_blue;     // 0x38
-    f32 x3C_color_alpha;    // 0x3C
-    f32 x40_colorblend_red; // 0x40
+    s32 x0_timer;        // 0x0
+    s32 x4_pri;          // 0x4  this colanims priority, lower = will persist
+    s32* x8_ptr1;        // 0x8
+    s32 xC_loop;         // 0xc
+    s32* x10_ptr2;       // 0x10
+    s32 x14;             // 0x14
+    s32* x18_alloc;      // 0x18
+    s32 x1c;             // 0x1c
+    s32 x20;             // 0x20
+    s32 x24;             // 0x24
+    s32 x28_colanim;     // 0x28, id for the color animation in effect
+    GXColor x2C_hex;     // 0x2C
+    f32 x30_color_red;   // 0x30
+    f32 x34_color_green; // 0x34
+    f32 x38_color_blue;  // 0x38
+    f32 x3C_color_alpha; // 0x3C
+    f32 x40_colorblend_red;   // 0x40
     f32 x44_colorblend_green; // 0x44
     f32 x48_colorblend_blue;  // 0x48
     f32 x4C_colorblend_alpha; // 0x4C

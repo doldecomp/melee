@@ -1,9 +1,10 @@
 #ifndef MELEE_GR_GRRCRUISE_H
 #define MELEE_GR_GRRCRUISE_H
 
-#include <dolphin/mtx/types.h>
-#include <Runtime/platform.h>
+#include <platform.h>
 
-void func_80201918(Vec3*);
+#include <dolphin/mtx/types.h>
+
+void grRCruise_80201918(Vec3*);
 
 #endif

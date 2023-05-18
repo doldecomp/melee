@@ -1,209 +1,211 @@
+#include "ft/forward.h"
+#include "ftCommon/forward.h"
+
 #include "ftwalkcommon.h"
 
-#include "code_80081B38.h"
 #include "fighter.h"
+#include "ft_081B.h"
 #include "ftcommon.h"
+#include "inlines.h"
 
 #include <dolphin/os/os.h>
 
-s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighter_gobj)
+FtWalkType ftWalkCommon_GetWalkType(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    f32 ground_vel = fp->xEC_ground_vel;
-    f32 walking_velocity = fabs_inline(ground_vel);
+    Fighter* fp = GET_FIGHTER(gobj);
+    float gr_vel = fp->gr_vel;
+    float walk_vel = fabs_inline(gr_vel);
+    if (walk_vel >= (fp->mv.co.walk.accel_mul *
+                     (p_ftCommonData->x2C * fp->co_attrs.walk_max_vel)))
+    {
+        return FtWalkType_Fast;
+    } else if (walk_vel >= (fp->mv.co.walk.accel_mul *
+                            (p_ftCommonData->x28 * fp->co_attrs.walk_max_vel)))
+    {
+        return FtWalkType_Middle;
+    } else {
+        return FtWalkType_Slow;
+    }
+}
+
+static inline FtWalkType ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    f32 walking_velocity = fabs_inline(fp->gr_vel);
+    f32 tempf = fp->mv.co.walk.accel_mul;
     if (walking_velocity >=
-        (fp->sv.co.walk.x20 *
-         (p_ftCommonData->x2C * fp->x110_attr.x118_WalkMaximumVelocity)))
+        (tempf * (p_ftCommonData->x2C * fp->co_attrs.walk_max_vel)))
     {
-        return 2;
+        return FtWalkType_Fast;
     } else if (walking_velocity >=
-               (fp->sv.co.walk.x20 *
-                (p_ftCommonData->x28 * fp->x110_attr.x118_WalkMaximumVelocity)))
+               (tempf * (p_ftCommonData->x28 * fp->co_attrs.walk_max_vel)))
     {
-        return 1;
+        return FtWalkType_Middle;
     } else {
-        return 0;
+        return FtWalkType_Slow;
     }
 }
 
-static inline s32 ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* fighter_gobj)
+bool ftWalkCommon_800DFC70(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    f32 walking_velocity = fabs_inline(fp->xEC_ground_vel);
-    f32 tempf = fp->sv.co.walk.x20;
-    if (walking_velocity >= (tempf * (p_ftCommonData->x2C *
-                                      fp->x110_attr.x118_WalkMaximumVelocity)))
-    {
-        return 2;
-    } else if (walking_velocity >=
-               (tempf *
-                (p_ftCommonData->x28 * fp->x110_attr.x118_WalkMaximumVelocity)))
-    {
-        return 1;
-    } else {
-        return 0;
-    }
-}
+    Fighter* fp = GET_FIGHTER(gobj);
 
-bool ftWalkCommon_800DFC70(HSD_GObj* fighter_gobj)
-{
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-
-    if ((fp->input.x620_lstick_x * fp->facing_dir) >= p_ftCommonData->x24) {
+    if (fp->input.lstick.x * fp->facing_dir >= p_ftCommonData->x24) {
         return true;
     }
 
     return false;
 }
 
-void ftWalkCommon_800DFCA4(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2, f32 arg8,
-                           f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD,
-                           f32 argE, f32 argF)
+void ftWalkCommon_800DFCA4(Fighter_GObj* gobj, FtMotionId msid,
+                           MotionFlags ms_flags, float anim_start,
+                           float slow_anim_frame, float middle_anim_frame,
+                           float fast_anim_frame, float slow_anim_rate,
+                           float middle_anim_rate, float fast_anim_rate,
+                           float accel_mul)
 {
-    s32 new_action_state;
-    s32 walking_state;
-    Fighter* fp;
-
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[20];
 #endif
 
-    fp = GET_FIGHTER(fighter_gobj);
-    fp->sv.co.walk.x20 = argF;
-    walking_state = ftWalkCommon_GetWalkType_800DFBF8_fake(fighter_gobj);
-    new_action_state = arg1 + walking_state;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, new_action_state, arg2, 0,
-                                       arg8, 1.0f, 0.0f);
-    func_8006EBA4(fighter_gobj);
-    fp->sv.co.walk.x0 = fp->xEC_ground_vel;
-    fp->sv.co.walk.x4 = arg1;
-    fp->sv.co.walk.x8 = arg9;
-    fp->sv.co.walk.xC = argA;
-    fp->sv.co.walk.x10 = argB;
-    fp->sv.co.walk.x14 = argC;
-    fp->sv.co.walk.x18 = argD;
-    fp->sv.co.walk.x1C = argE;
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->mv.co.walk.accel_mul = accel_mul;
+    {
+        FtWalkType walk_type = ftWalkCommon_GetWalkType_800DFBF8_fake(gobj);
+        ftCommon_MotionState new_msid = msid + walk_type;
+        Fighter_ChangeMotionState(gobj, new_msid, ms_flags, 0, anim_start, 1,
+                                  0);
+        ftAnim_8006EBA4(gobj);
+        fp->mv.co.walk.x0 = fp->gr_vel;
+        fp->mv.co.walk.msid = msid;
+        fp->mv.co.walk.slow_anim_frame = slow_anim_frame;
+        fp->mv.co.walk.middle_anim_frame = middle_anim_frame;
+        fp->mv.co.walk.fast_anim_frame = fast_anim_frame;
+        fp->mv.co.walk.slow_anim_rate = slow_anim_rate;
+        fp->mv.co.walk.middle_anim_rate = middle_anim_rate;
+        fp->mv.co.walk.fast_anim_rate = fast_anim_rate;
+    }
 }
 
-void ftWalkCommon_800DFDDC(HSD_GObj* fighter_gobj)
+void ftWalkCommon_800DFDDC(HSD_GObj* gobj)
 {
-    f32 velocity_f2;
-    f32 anim_rate;
+    float mv_x0;
+    float anim_rate;
 
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    if (Stage_GetGroundFrictionMultiplier(fp) < 1.0f) {
-        velocity_f2 = fp->sv.co.walk.x0;
+    if (ft_GetGroundFrictionMultiplier(fp) < 1) {
+        mv_x0 = fp->mv.co.walk.x0;
     } else {
-        velocity_f2 = fp->xEC_ground_vel;
+        mv_x0 = fp->gr_vel;
     }
-    if ((velocity_f2 * fp->facing_dir) <= 0.0f) {
-        anim_rate = 0.0f;
+    if (mv_x0 * fp->facing_dir <= 0) {
+        anim_rate = 0;
     } else {
-        velocity_f2 = fabs_inline(velocity_f2);
-        switch (fp->action_id - fp->sv.co.walk.x4) {
-        case 0:
-            anim_rate = velocity_f2 / fp->sv.co.walk.x14;
+        mv_x0 = fabs_inline(mv_x0);
+        switch (fp->motion_id - fp->mv.co.walk.msid) {
+        case FtWalkType_Slow:
+            anim_rate = mv_x0 / fp->mv.co.walk.slow_anim_rate;
             break;
-        case 1:
-            anim_rate = velocity_f2 / fp->sv.co.walk.x18;
+        case FtWalkType_Middle:
+            anim_rate = mv_x0 / fp->mv.co.walk.middle_anim_rate;
             break;
-        case 2:
-            anim_rate = velocity_f2 / fp->sv.co.walk.x1C;
+        case FtWalkType_Fast:
+            anim_rate = mv_x0 / fp->mv.co.walk.fast_anim_rate;
             break;
         }
     }
-    ftAnim_SetAnimRate(fighter_gobj, anim_rate);
+    ftAnim_SetAnimRate(gobj, anim_rate);
 }
 
-void ftWalkCommon_800DFEC8(HSD_GObj* fighter_gobj,
-                           void (*arg_cb)(HSD_GObj*, f32))
+void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
 {
-    s32 action_state_sum;
-    s32 action_state_base;
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 walk_action_type = ftWalkCommon_GetWalkType_800DFBF8_fake(fighter_gobj);
+    int motion_state_sum;
+    int motion_state_base;
+    Fighter* fp = GET_FIGHTER(gobj);
+    s32 walk_action_type = ftWalkCommon_GetWalkType_800DFBF8_fake(gobj);
 
-    action_state_base = fp->sv.co.walk.x4;
-    action_state_sum = action_state_base + walk_action_type;
-    if (action_state_sum != fp->action_id) {
+    motion_state_base = fp->mv.co.walk.msid;
+    motion_state_sum = motion_state_base + walk_action_type;
+
+    if (motion_state_sum != (int) fp->motion_id) {
         f32 float_result;
-        f32 var_f31;
+        f32 frame;
         f32 init_animFrame;
         f32 adjusted_animFrame;
         s32 final_animFrame;
         s32 quotient;
 
-        switch (action_state_sum - action_state_base) {
-        case 0:
-            var_f31 = fp->sv.co.walk.x8;
+        switch (motion_state_sum - motion_state_base) {
+        case FtWalkType_Slow:
+            frame = fp->mv.co.walk.slow_anim_frame;
             break;
-        case 1:
-            var_f31 = fp->sv.co.walk.xC;
+        case FtWalkType_Middle:
+            frame = fp->mv.co.walk.middle_anim_frame;
             break;
-        case 2:
-            var_f31 = fp->sv.co.walk.x10;
+        case FtWalkType_Fast:
+            frame = fp->mv.co.walk.fast_anim_frame;
             break;
         default:
             OSReport("couldn't get walk frame\n");
             HSD_ASSERT(71, 0);
         }
-        float_result = func_8006F484(fighter_gobj);
-        init_animFrame = fp->x894_currentAnimFrame;
+
+        float_result = ftAnim_8006F484(gobj);
+        init_animFrame = fp->cur_anim_frame;
         quotient = init_animFrame / float_result;
-        adjusted_animFrame =
-            fp->x894_currentAnimFrame - float_result * quotient;
-        final_animFrame = var_f31 * (adjusted_animFrame / float_result);
-        arg_cb(fighter_gobj, final_animFrame);
+        adjusted_animFrame = fp->cur_anim_frame - float_result * quotient;
+        final_animFrame = frame * (adjusted_animFrame / float_result);
+        arg_cb(gobj, final_animFrame);
     }
 }
 
-inline f32 getFtWalkAcceleration(Fighter* fp, f32 multiplier)
+static float getWalkAccel(Fighter* fp, float mul)
 {
-    if (fp->input.x620_lstick_x > 0.0f) {
-        return multiplier * fp->x110_attr.x114_WalkAcceleration;
-    } else {
-        return multiplier * -fp->x110_attr.x114_WalkAcceleration;
-    }
+    return fp->input.lstick.x > 0 ? mul * +fp->co_attrs.walk_accel
+                                  : mul * -fp->co_attrs.walk_accel;
 }
 
-void ftWalkCommon_800E0060(HSD_GObj* fighter_gobj)
+void ftWalkCommon_800E0060(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 _[20];
+    u8 _[12];
 #endif
 
-    Fighter* fp;
-    f32 temp_f0;
-    f32 temp_f4;
-    f32 ftx2360_f5;
-    f32 velocity_f1;
-
-    fp = GET_FIGHTER(fighter_gobj);
-    ftx2360_f5 = fp->sv.co.walk.x20;
+    Fighter* fp = GET_FIGHTER(gobj);
+    float accel_mul = fp->mv.co.walk.accel_mul;
 
 /// @todo Unused assignment.
 #ifdef MUST_MATCH
     {
-        f32 _ = ftx2360_f5;
+        float _ = accel_mul;
     }
 #endif
 
-    velocity_f1 = fp->input.x620_lstick_x *
-                  fp->x110_attr.x110_WalkInitialVelocity * ftx2360_f5;
-    velocity_f1 += getFtWalkAcceleration(fp, ftx2360_f5);
-    temp_f0 =
-        (fp->input.x620_lstick_x * fp->x110_attr.x118_WalkMaximumVelocity) *
-        ftx2360_f5;
-    if (temp_f0) {
-        temp_f4 = fp->xEC_ground_vel / temp_f0;
-        if (temp_f4 > 0.0f && temp_f4 < 1.0f) {
-            velocity_f1 *= (1.0f - temp_f4) * p_ftCommonData->x30;
+    {
+        float walk_vel =
+            fp->input.lstick.x * fp->co_attrs.walk_init_vel * accel_mul;
+        walk_vel += getWalkAccel(fp, accel_mul);
+
+        {
+            float stick_mul =
+                fp->input.lstick.x * fp->co_attrs.walk_max_vel * accel_mul;
+
+            if (stick_mul) {
+                float gr_vel = fp->gr_vel / stick_mul;
+
+                if (gr_vel > 0 && gr_vel < 1) {
+                    walk_vel *= (1 - gr_vel) * p_ftCommonData->x30;
+                }
+            }
+
+            fp->mv.co.walk.x0 = stick_mul * p_ftCommonData->x440;
+            ftCommon_8007C98C(fp, walk_vel, stick_mul,
+                              fp->co_attrs.gr_friction);
         }
+
+        ftCommon_8007CB74(gobj);
     }
-    fp->sv.co.walk.x0 = temp_f0 * p_ftCommonData->x440;
-    func_8007C98C(fp, velocity_f1, temp_f0, fp->x110_attr.x128_GroundFriction);
-    func_8007CB74(fighter_gobj);
 }

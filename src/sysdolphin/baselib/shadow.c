@@ -4,15 +4,15 @@
 #include "mobj.h"
 #include "shadow.h"
 
-#include <dolphin/gx/GXFrameBuf.h>
 #include <string.h>
+#include <dolphin/gx/GXFrameBuf.h>
 
 extern HSD_ObjAllocData shadow_alloc_data;
 
 extern const f32 lbl_804DE768;
 extern const f32 lbl_804DE76C;
-extern const f32 lbl_804DE770;
-extern const f32 lbl_804DE774;
+extern const f32 HSD_Shadow_804DE770;
+extern const f32 HSD_Shadow_804DE774;
 
 HSD_ObjAllocData* HSD_ShadowGetAllocData(void)
 {
@@ -57,9 +57,9 @@ HSD_Shadow* HSD_ShadowAlloc(void)
     shadow->texture->imagedesc->width = 256;
     shadow->texture->imagedesc->height = 256;
 
-    hack = lbl_804DE770;
-    HSD_CObjSetViewportfx4(shadow->camera, hack, lbl_804DE774, hack,
-                           lbl_804DE774); // 0f, 256f, 0f, 256f
+    hack = HSD_Shadow_804DE770;
+    HSD_CObjSetViewportfx4(shadow->camera, hack, HSD_Shadow_804DE774, hack,
+                           HSD_Shadow_804DE774); // 0f, 256f, 0f, 256f
     HSD_CObjSetScissorx4(shadow->camera, 0, 256, 0, 256);
 
     return shadow;
@@ -104,15 +104,15 @@ void HSD_ShadowRemove(HSD_Shadow* shadow)
     HSD_ObjFree(&shadow_alloc_data, shadow);
 }
 
-extern char lbl_80407310[9];
-extern char lbl_804D5F78[7];
+extern char HSD_Shadow_80407310[9];
+extern char HSD_Shadow_804D5F78[7];
 
 void HSD_ShadowInit(HSD_Shadow* shadow)
 {
     HSD_ImageDesc* imagedesc;
 
     if (shadow == NULL) {
-        __assert(lbl_80407310, 0xF5, lbl_804D5F78);
+        __assert(HSD_Shadow_80407310, 0xF5, HSD_Shadow_804D5F78);
     }
     imagedesc = shadow->texture->imagedesc;
     GXSetTexCopySrc(0, 0, imagedesc->width, imagedesc->height);

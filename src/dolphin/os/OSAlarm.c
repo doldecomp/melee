@@ -1,13 +1,12 @@
-#include <dolphin/os/OSAlarm.h>
-
+#include <placeholder.h>
 #include <dolphin/base/PPCArch.h>
+#include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
 #include <dolphin/os/OSTime.h>
-#include <placeholder.h>
 
 static struct OSAlarmQueue {
     OSAlarm* head;
@@ -52,7 +51,8 @@ static void InsertAlarm(OSAlarm* alarm, OSTime fire, OSAlarmHandler handler)
 
         fire = alarm->start;
         if (alarm->start < time) {
-            fire += alarm->period * ((time - alarm->start) / alarm->period + 1);
+            fire +=
+                alarm->period * ((time - alarm->start) / alarm->period + 1);
         }
     }
 

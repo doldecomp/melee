@@ -1,13 +1,12 @@
-#include <dolphin/card/CARDFormat.h>
-
+#include <__mem.h>
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDCheck.h>
+#include <dolphin/card/CARDFormat.h>
 #include <dolphin/card/CARDRdwr.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSFont.h>
 #include <dolphin/os/OSRtc.h>
-#include <Runtime/__mem.h>
 
 extern vu16 __VIRegs[59] AT_ADDRESS(0xCC002000);
 
@@ -28,8 +27,9 @@ void FormatCallback(s32 chan, s32 result)
             __CARDEraseSector(chan, (u32) card->sectorSize * card->formatStep,
                               (CARDCallback) FormatCallback);
 
-        if (0 <= result)
+        if (0 <= result) {
             return;
+        }
     } else if (card->formatStep < 2 * CARD_NUM_SYSTEM_BLOCK) {
         int step = card->formatStep - CARD_NUM_SYSTEM_BLOCK;
 
@@ -39,8 +39,9 @@ void FormatCallback(s32 chan, s32 result)
             (u8*) card->workArea + (CARD_SYSTEM_BLOCK_SIZE * step),
             (CARDCallback) FormatCallback);
 
-        if (result >= 0)
+        if (result >= 0) {
             return;
+        }
     } else {
         card->currentDir = (CARDDir*) ((u8*) card->workArea +
                                        (1 + 0) * CARD_SYSTEM_BLOCK_SIZE);
@@ -124,7 +125,8 @@ s32 __CARDFormatRegionAsync(s32 chan, u16 encode, CARDCallback callback)
         fat = (u16*) ((u8*) card->workArea + (3 + i) * CARD_SYSTEM_BLOCK_SIZE);
         memset(fat, 0x00, CARD_SYSTEM_BLOCK_SIZE);
         fat[CARD_FAT_CHECKCODE] = (u16) i;
-        fat[CARD_FAT_FREEBLOCKS] = (u16) (card->cBlock - CARD_NUM_SYSTEM_BLOCK);
+        fat[CARD_FAT_FREEBLOCKS] =
+            (u16) (card->cBlock - CARD_NUM_SYSTEM_BLOCK);
         fat[CARD_FAT_LASTSLOT] = CARD_NUM_SYSTEM_BLOCK - 1;
         __CARDCheckSum(&fat[CARD_FAT_CHECKCODE],
                        CARD_SYSTEM_BLOCK_SIZE - sizeof(u32),
@@ -143,8 +145,9 @@ s32 __CARDFormatRegionAsync(s32 chan, u16 encode, CARDCallback callback)
     result = __CARDEraseSector(chan, (u32) card->sectorSize * card->formatStep,
                                (CARDCallback) FormatCallback);
 
-    if (result < 0)
+    if (result < 0) {
         __CARDPutControlBlock(card, result);
+    }
 
     return result;
 }

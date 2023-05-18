@@ -1,6 +1,6 @@
-#include <MSL/ctype.h>
+#include <platform.h>
 
-#include <Runtime/platform.h>
+#include <MSL/ctype.h>
 
 static const u8 LowercaseTable[] = {
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B,
@@ -54,14 +54,16 @@ static const u8 UppercaseTable[] = {
 
 int toupper(int c)
 {
-    if (c == -1)
+    if (c == -1) {
         return -1;
+    }
     return UppercaseTable[c & 0xFF];
 }
 
 int tolower(int c)
 {
-    if (c == -1)
+    if (c == -1) {
         return -1;
+    }
     return LowercaseTable[c & 0xFF];
 }

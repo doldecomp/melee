@@ -1,8 +1,9 @@
 #ifndef _video_h_
 #define _video_h_
 
+#include <platform.h>
+
 #include <dolphin/gx/types.h>
-#include <Runtime/platform.h>
 
 #define HSD_VI_XFB_MAX 3
 
@@ -31,7 +32,7 @@ typedef struct _HSD_VIStatus {
 void HSD_VIInit(struct _HSD_VIStatus* vi_status, void* xfb0, void* xfb1,
                 void* xfb2);
 
-void lbl_803762C4(void);
+void HSD_Video_803762C4(void);
 void HSD_VISetUserPostRetraceCallback(Event);
 void HSD_VISetUserGXDrawDoneCallback(Event);
 void HSD_VISetBlack(s32);

@@ -1,15 +1,17 @@
 #ifndef _jobj_h_
 #define _jobj_h_
 
+#include <platform.h>
+#include <baselib/forward.h>
+
 #include <dolphin/mtx.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/forward.h>
-#include <sysdolphin/baselib/list.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/object.h>
-#include <sysdolphin/baselib/pobj.h>
+#include <dolphin/mtx/types.h>
+#include <baselib/aobj.h>
+#include <baselib/class.h>
+#include <baselib/list.h>
+#include <baselib/mobj.h>
+#include <baselib/object.h>
+#include <baselib/pobj.h>
 
 #define HSD_A_J_ROTX 1
 #define HSD_A_J_ROTY 2
@@ -76,7 +78,7 @@
 
 #define union_type_ptcl(o) ((o)->flags & JOBJ_PTCL ? true : false)
 #define union_type_spline(o) ((o)->flags & JOBJ_SPLINE ? true : false)
-#define union_type_dobj(o)                                                     \
+#define union_type_dobj(o)                                                    \
     ((o)->flags & (JOBJ_PTCL | JOBJ_SPLINE) ? false : true)
 
 #define HSD_JOBJ_INFO(i) ((HSD_JObjInfo*) (i))
@@ -85,25 +87,25 @@
 typedef u32 HSD_TrspMask;
 
 struct HSD_JObj {
-    /* 0x00 - 0x04 */ HSD_Obj object;
-    /* 0x08 */ HSD_JObj* next;
-    /* 0x0C */ HSD_JObj* parent;
-    /* 0x10 */ HSD_JObj* child;
-    /* 0x14 */ u32 flags;
-    /* 0x18 */ union {
+    /* +0 */ HSD_Obj object;
+    /* +8 */ HSD_JObj* next;
+    /* +C */ HSD_JObj* parent;
+    /* +10 */ HSD_JObj* child;
+    /* +14 */ u32 flags;
+    /* +18 */ union {
         HSD_SList* ptcl;
         struct HSD_DObj* dobj;
         HSD_Spline* spline;
     } u;
-    /* 0x1C */ Quaternion rotate;
-    /* 0x2C */ Vec3 scale;
-    /* 0x38 */ Vec3 translate;
-    /* 0x44 */ Mtx mtx;
-    /* 0x74 */ Vec3* scl;
-    /* 0x78 */ MtxPtr envelopemtx;
-    /* 0x7C */ HSD_AObj* aobj;
-    /* 0x80 */ HSD_RObj* robj;
-    /* 0x84 */ u32 id;
+    /* +1C */ Quaternion rotate;
+    /* +2C */ Vec3 scale;
+    /* +38 */ Vec3 translate;
+    /* +44 */ Mtx mtx;
+    /* +74 */ Vec3* scl;
+    /* +78 */ MtxPtr envelopemtx;
+    /* +7C */ HSD_AObj* aobj;
+    /* +80 */ HSD_RObj* robj;
+    /* +84 */ u32 id;
 };
 
 struct HSD_Joint {
@@ -196,11 +198,11 @@ static inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
 }
 
 // Why does this seem to be a define while the others are inline functions?
-#define HSD_JObjSetMtxDirty(jobj)                                              \
-    {                                                                          \
-        if (jobj != NULL && !HSD_JObjMtxIsDirty(jobj)) {                       \
-            HSD_JObjSetMtxDirtySub(jobj);                                      \
-        }                                                                      \
+#define HSD_JObjSetMtxDirty(jobj)                                             \
+    {                                                                         \
+        if (jobj != NULL && !HSD_JObjMtxIsDirty(jobj)) {                      \
+            HSD_JObjSetMtxDirtySub(jobj);                                     \
+        }                                                                     \
     }
 
 static inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
@@ -410,7 +412,8 @@ void JObjAnimAll(HSD_JObj* jobj);
 s32 JObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent);
 
 void HSD_JObjAddAnim(HSD_JObj*, HSD_AnimJoint* an_joint,
-                     HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint);
+                     HSD_MatAnimJoint* mat_joint,
+                     HSD_ShapeAnimJoint* sh_joint);
 void HSD_JObjWalkTree0(HSD_JObj* jobj, HSD_JObjWalkTreeCallback cb,
                        f32** cb_args);
 

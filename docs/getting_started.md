@@ -9,14 +9,14 @@ The goal of this repo is to **write C code that, after being compiled, matches t
 
 ![](compilation_diagram.png)
 
-The details for what produces these different artifacts is out-of-scope. Here’s what some Melee C code looks like ([link](https://github.com/doldecomp/melee/blob/0b3f4aeebc17d8e9c3d8ea792d8d8e412c2ad436/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialHi.c#L15-L21)):
+The details for what produces these different artifacts is out-of-scope. Here’s what some Melee C code looks like ([link](https://github.com/doldecomp/melee/blob/0b3f4aeebc17d8e9c3d8ea792d8d8e412c2ad436/src/melee/ft/chara/ftMewtwo/ftMt_SpecialHi.c#L15-L21)):
 
 ```c
-void ftMewtwo_SpecialHi_CreateGFX(HSD_GObj* fighter_gobj)
+void ftMt_SpecialHi_CreateGFX(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    ftMewtwo_SpecialHi_SetStartGFX(fighter_gobj);
+    ftMt_SpecialHi_SetStartGFX(gobj);
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 ```
@@ -24,14 +24,14 @@ void ftMewtwo_SpecialHi_CreateGFX(HSD_GObj* fighter_gobj)
 and its corresponding PowerPC assembly:
 
 ```asm
-.global ftMewtwo_SpecialHi_CreateGFX
-ftMewtwo_SpecialHi_CreateGFX:
+.global ftMt_SpecialHi_CreateGFX
+ftMt_SpecialHi_CreateGFX:
 /* 801450A0 00000000  7C 08 02 A6 */	mflr r0
 /* 801450A4 00000004  90 01 00 04 */	stw r0, 0x4(r1)
 /* 801450A8 00000008  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 801450AC 0000000C  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 801450B0 00000010  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 801450B4 00000014  48 00 00 21 */	bl ftMewtwo_SpecialHi_SetStartGFX
+/* 801450B4 00000014  48 00 00 21 */	bl ftMt_SpecialHi_SetStartGFX
 /* 801450B8 00000018  38 00 00 00 */	li r0, 0x0
 /* 801450BC 0000001C  90 1F 21 BC */	stw r0, 0x21bc(r31)
 /* 801450C0 00000020  80 01 00 1C */	lwz r0, 0x1c(r1)
@@ -73,7 +73,7 @@ temp_r31 = *((s32 *) ((u8 *) arg0 + 0x2c))
 …while this accomplishes the goal of getting a 100% match (you could pretty much do every memory access and set like this), we actually can guess what `arg0` is in this case because of the file it’s in. You can do some digging yourself, but that line ends up translating to something like:
 
 ```c
-Fighter* fp = GET_FIGHTER(fighter_gobj);
+Fighter* fp = GET_FIGHTER(gobj);
 ```
 
 ## What was going on with the Context?
@@ -90,9 +90,9 @@ So you want to find some assembly that:
 
 In [this public Trello board](https://trello.com/b/pz2ACtnS/melee-decompilation), you can see which assembly files have been claimed or unclaimed. So don’t pick a function in a `.s` file that’s claimed. Note that this is a read-only link. If you want write access, join the [Discord](https://discord.gg/hKx3FJJgrV)!
 
-To make sure it’s not already decompiled, take the label (e.g. `func_8007B8CC`) and search the repo for instances of it. If you don’t see any C code definitions with implementations, then it at least hasn’t been committed to the repo. You can also use `grep`:
+To make sure it’s not already decompiled, take the label (e.g. `ftColl_8007B8CC`) and search the repo for instances of it. If you don’t see any C code definitions with implementations, then it at least hasn’t been committed to the repo. You can also use `grep`:
 ```sh
-grep -rn 'func_8007B8CC' src
+grep -rn 'ftColl_8007B8CC' src
 ```
 
 You then want to make sure no one is working on it. So search [decomp.me](http://decomp.me) for that label, and it’ll flag if anyone has tried decompiling it. If it’s clearly abandoned, it’s probably okay to fork it and try it out.

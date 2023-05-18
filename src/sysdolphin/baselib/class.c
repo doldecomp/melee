@@ -1,18 +1,18 @@
 #include "class.h"
 
+#include <stddef.h>
+#include <string.h>
+#include <dolphin/os/os.h>
 #include <baselib/hash.h>
 #include <baselib/memory.h>
 #include <baselib/object.h>
-#include <dolphin/os/os.h>
-#include <stddef.h>
-#include <string.h>
 
 void _hsdClassInfoInit(void);
 HSD_ClassInfo hsdClass = { _hsdClassInfoInit };
 
 static HSD_MemoryEntry** memory_list;
 static s32 nb_memory_list;
-static u32 lbl_804D7708;
+static u32 HSD_Class_804D7708;
 
 #ifdef MUST_MATCH
 #pragma push
@@ -112,8 +112,8 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
             memcpy(new_list, memory_list, 4 * nb_memory_list);
             memset(&new_list[nb_memory_list], 0,
                    4 * (new_nb -
-                        nb_memory_list)); // You start *after* existing ptrs and
-                                          // make sure memory is zero'd
+                        nb_memory_list)); // You start *after* existing ptrs
+                                          // and make sure memory is zero'd
 
             old_list = memory_list;
             old_nb = OSRoundDown32B(nb_memory_list * 4);
@@ -282,7 +282,7 @@ void _hsdClassAmnesia(HSD_ClassInfo* info)
     if (info == &hsdClass) {
         nb_memory_list = 0;
         memory_list = NULL;
-        lbl_804D7708 = 0;
+        HSD_Class_804D7708 = 0;
     }
 }
 
@@ -343,8 +343,9 @@ inline bool hsdChangeClass_inline(HSD_Obj* object, HSD_ClassInfo* class_info)
     if (!(var_r28->head.flags & 1)) {
         var_r28->head.info_init();
     }
-    if (var_r29->head.obj_size != var_r28->head.obj_size)
+    if (var_r29->head.obj_size != var_r28->head.obj_size) {
         return false;
+    }
     while (var_r29->head.parent != NULL &&
            var_r29->head.parent->head.obj_size == var_r29->head.obj_size)
     {
@@ -467,7 +468,7 @@ void hsdForgetClassLibrary(const char* library_name)
         return;
     }
     if (strcmp(library_name, hsdClass.head.library_name) == 0) {
-        lbl_804D7708 = 0;
+        HSD_Class_804D7708 = 0;
         ForgetClassLibraryReal(&hsdClass);
     } else {
         ForgetClassLibraryChild(library_name, &hsdClass);
@@ -476,8 +477,8 @@ void hsdForgetClassLibrary(const char* library_name)
 
 HSD_ClassInfo* hsdSearchClassInfo(const char* class_name)
 {
-    if (lbl_804D7708 != 0) {
-        return HSD_HashSearch(lbl_804D7708, class_name, 0);
+    if (HSD_Class_804D7708 != 0) {
+        return HSD_HashSearch(HSD_Class_804D7708, class_name, 0);
     }
     return NULL;
 }

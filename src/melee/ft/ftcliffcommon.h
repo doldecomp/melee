@@ -1,17 +1,19 @@
 #ifndef _ftcliffcommon_h_
 #define _ftcliffcommon_h_
 
-#include <melee/ft/fighter.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <platform.h>
 
-bool func_80081298(HSD_GObj* gobj);
-void func_80081370(HSD_GObj* gobj);
-void func_80081504(HSD_GObj* gobj);
-void func_80081540(HSD_GObj*);
-void func_80081544(HSD_GObj* gobj);
-void func_80081644(HSD_GObj* gobj);
+#include "ft/fighter.h"
 
-void func_800815E4(HSD_GObj* gobj);
+#include <baselib/gobj.h>
+
+bool ftCliffCommon_80081298(HSD_GObj* gobj);
+void ftCliffCommon_80081370(HSD_GObj* gobj);
+void ftCo_CliffCatch_Anim(HSD_GObj* gobj);
+void ftCo_CliffCatch_IASA(HSD_GObj*);
+void ftCo_CliffCatch_Phys(HSD_GObj* gobj);
+void ftCo_Cliff_Cam(HSD_GObj* gobj);
+
+void ftCo_CliffCatch_Coll(HSD_GObj* gobj);
 
 #endif

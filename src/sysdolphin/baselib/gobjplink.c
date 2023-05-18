@@ -1,10 +1,9 @@
-#include <sysdolphin/baselib/gobjplink.h>
-
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjplink.h>
+#include <baselib/gobjproc.h>
+#include <baselib/gobjuserdata.h>
 
 void GObj_PReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
 {
@@ -14,8 +13,8 @@ void GObj_PReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
         gobj->next = hiprio_gobj->next;
         hiprio_gobj->next = gobj;
     } else {
-        gobj->next = ((HSD_GObj**) lbl_804D782C)[link];
-        ((HSD_GObj**) lbl_804D782C)[link] = gobj;
+        gobj->next = ((HSD_GObj**) HSD_GObj_804D782C)[link];
+        ((HSD_GObj**) HSD_GObj_804D782C)[link] = gobj;
     }
     if (gobj->next != NULL) {
         gobj->next->prev = gobj;
@@ -42,12 +41,12 @@ inline void gobj_first_lower_prio(HSD_GObj* gobj)
 
 inline void gobj_first_higher_prio(HSD_GObj* gobj)
 {
-    HSD_GObj* var_r4 = ((HSD_GObj**) lbl_804D782C)[gobj->p_link];
+    HSD_GObj* var_r4 = ((HSD_GObj**) HSD_GObj_804D782C)[gobj->p_link];
     while (var_r4 != NULL && var_r4->p_priority < gobj->p_priority) {
         var_r4 = var_r4->next;
     }
-    GObj_PReorder(gobj,
-                  var_r4 != NULL ? var_r4->prev : plinklow_gobjs[gobj->p_link]);
+    GObj_PReorder(gobj, var_r4 != NULL ? var_r4->prev
+                                       : plinklow_gobjs[gobj->p_link]);
 }
 
 extern char lbl_804084B8[];
@@ -98,25 +97,25 @@ HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority)
     return CreateGObj(0, classifier, p_link, priority, NULL);
 }
 
-extern HSD_GObj* lbl_804D781C;
+extern HSD_GObj* HSD_GObj_804D781C;
 
-void func_80390228(HSD_GObj* gobj)
+void HSD_GObjPLink_80390228(HSD_GObj* gobj)
 {
     HSD_ASSERT(0x171, gobj);
-    if (!lbl_804CE3E4.b0 && gobj == lbl_804D781C) {
-        lbl_804CE3E4.b1 = 1;
+    if (!HSD_GObj_804CE3E4.b0 && gobj == HSD_GObj_804D781C) {
+        HSD_GObj_804CE3E4.b1 = 1;
         return;
     }
     GObj_RemoveUserData(gobj);
-    func_80390B0C(gobj);
-    func_8038FED4(gobj);
+    HSD_GObjObjet_80390B0C(gobj);
+    HSD_GObjProc_8038FED4(gobj);
     if (gobj->gx_link != HSD_GOBJ_GXLINK_NONE) {
-        func_8039084C(gobj);
+        HSD_GObjGXLink_8039084C(gobj);
     }
     if (gobj->prev != NULL) {
         gobj->prev->next = gobj->next;
     } else {
-        ((HSD_GObj**) lbl_804D782C)[gobj->p_link] = gobj->next;
+        ((HSD_GObj**) HSD_GObj_804D782C)[gobj->p_link] = gobj->next;
     }
     if (gobj->next != NULL) {
         gobj->next->prev = gobj->prev;
@@ -126,10 +125,10 @@ void func_80390228(HSD_GObj* gobj)
     HSD_ObjFree(&gobj_alloc_data, gobj);
 }
 
-extern s32 lbl_804D783C;
+extern s32 HSD_GObj_804D783C;
 
-void func_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,
-                   HSD_GObj* position)
+void HSD_GObjPLink_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,
+                            HSD_GObj* position)
 {
     HSD_GObjProc* proc_cur;
     HSD_GObjProc* child;
@@ -143,18 +142,18 @@ void func_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,
 #endif
 
     HSD_ASSERT(0x1A3, p_link <= HSD_GObjLibInitData.p_link_max);
-    if (!lbl_804CE3E4.b0 && gobj == lbl_804D781C) {
-        lbl_804CE3E4.b3 = 1;
-        lbl_804CE3E4.type = arg0;
-        lbl_804CE3E4.p_link = p_link;
-        lbl_804CE3E4.p_prio = priority;
-        lbl_804CE3E4.gobj = position;
+    if (!HSD_GObj_804CE3E4.b0 && gobj == HSD_GObj_804D781C) {
+        HSD_GObj_804CE3E4.b3 = 1;
+        HSD_GObj_804CE3E4.type = arg0;
+        HSD_GObj_804CE3E4.p_link = p_link;
+        HSD_GObj_804CE3E4.p_prio = priority;
+        HSD_GObj_804CE3E4.gobj = position;
         return;
     }
     cur = gobj->proc;
     proc_cur = NULL;
     while (cur != NULL) {
-        func_8038FC18(cur);
+        HSD_GObjProc_8038FC18(cur);
         child = cur->child;
         cur->child = proc_cur;
         proc_cur = cur;
@@ -164,7 +163,7 @@ void func_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,
     if (gobj->prev != NULL) {
         gobj->prev->next = gobj->next;
     } else {
-        ((HSD_GObj**) lbl_804D782C)[gobj->p_link] = gobj->next;
+        ((HSD_GObj**) HSD_GObj_804D782C)[gobj->p_link] = gobj->next;
     }
     if (gobj->next != NULL) {
         gobj->next->prev = gobj->prev;
@@ -187,12 +186,12 @@ void func_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,
         GObj_PReorder(gobj, position->prev);
         break;
     }
-    flags_new = lbl_804D783C == 0 ? 2 : lbl_804D783C - 1;
+    flags_new = HSD_GObj_804D783C == 0 ? 2 : HSD_GObj_804D783C - 1;
     flags_cur = flags_new == 0 ? 2 : flags_new - 1;
     cur = proc_cur;
     while (cur != NULL) {
         child = cur->child;
-        func_8038FAA8(cur);
+        HSD_GObjProc_8038FAA8(cur);
         if (cur->flags_3 == flags_cur) {
             cur->flags_3 = flags_new;
         }

@@ -1,13 +1,13 @@
 #ifndef _mobj_h_
 #define _mobj_h_
 
-#include <Runtime/platform.h>
+#include <platform.h>
+#include <baselib/forward.h>
 
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/forward.h>
-#include <sysdolphin/baselib/texp.h>
-#include <sysdolphin/baselib/tobj.h>
+#include <baselib/aobj.h>
+#include <baselib/class.h>
+#include <baselib/texp.h>
+#include <baselib/tobj.h>
 
 #define MOBJ_ANIM 0x4
 #define TOBJ_ANIM 0x10
@@ -38,7 +38,7 @@
 #define RENDER_VERTEX (1 << 1)
 #define RENDER_DIFFUSE (1 << 2)
 #define RENDER_SPECULAR (1 << 3)
-#define CHANNEL_FIELD                                                          \
+#define CHANNEL_FIELD                                                         \
     (RENDER_CONSTANT | RENDER_VERTEX | RENDER_DIFFUSE | RENDER_SPECULAR)
 #define RENDER_TEX0 (1 << 4)
 #define RENDER_TEX1 (1 << 5)
@@ -48,8 +48,8 @@
 #define RENDER_TEX5 (1 << 9)
 #define RENDER_TEX6 (1 << 10)
 #define RENDER_TEX7 (1 << 11)
-#define RENDER_TEXTURES                                                        \
-    (RENDER_TEX0 | RENDER_TEX1 | RENDER_TEX2 | RENDER_TEX3 | RENDER_TEX4 |     \
+#define RENDER_TEXTURES                                                       \
+    (RENDER_TEX0 | RENDER_TEX1 | RENDER_TEX2 | RENDER_TEX3 | RENDER_TEX4 |    \
      RENDER_TEX5 | RENDER_TEX6 | RENDER_TEX7)
 #define RENDER_TOON (1 << 12)
 
@@ -140,7 +140,8 @@ typedef struct _HSD_MObjInfo {
     HSD_ClassInfo parent;
     void (*setup)(HSD_MObj* mobj, u32 rendermode);
     int (*load)(HSD_MObj* mobj, HSD_MObjDesc* desc);
-    HSD_TExp* (*make_texp)(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list);
+    HSD_TExp* (*make_texp)(HSD_MObj* mobj, HSD_TObj* tobj_top,
+                           HSD_TExp** list);
     void (*setup_tev)(HSD_MObj* mobj, HSD_TObj* tobj, u32 rendermode);
     void (*unset)(HSD_MObj* mobj, u32 rendermode);
 } HSD_MObjInfo;

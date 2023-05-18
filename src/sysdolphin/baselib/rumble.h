@@ -1,9 +1,10 @@
 #ifndef SYSDOLPHIN_BASELIB_RUMBLE_H
 #define SYSDOLPHIN_BASELIB_RUMBLE_H
 
+#include <platform.h>
+#include <baselib/forward.h>
+
 #include <dolphin/pad/Pad.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/forward.h>
 
 struct HSD_RumbleData {
     u8 last_status;
@@ -51,23 +52,23 @@ struct Struct804C22E0 {
     HSD_PadRumbleListData* unk8;
 };
 
-void func_80378280(u8, int);
+void HSD_Rumble_80378280(u8, int);
 
-void func_80378128(struct Struct804C22E0* a, HSD_PadRumbleListData* b);
-void func_80378170(u8 a);
-void func_80378208(void);
+void HSD_Rumble_80378128(struct Struct804C22E0* a, HSD_PadRumbleListData* b);
+void HSD_Rumble_80378170(u8 a);
+void HSD_Rumble_80378208(void);
 void func_80378330_inline(u8 a, int b);
-void func_80378330(void);
-void func_803783B0(void);
+void HSD_Rumble_80378330(void);
+void HSD_Rumble_803783B0(void);
 void func_80378430_inline(HSD_PadRumbleListData** r6,
                           HSD_PadRumbleListData* r7);
-int func_80378430(u8 a, int b, int c, int d, void* e);
-void func_80378524(int a);
-int func_80378560(HSD_PadRumbleListData* a, u8* b);
+int HSD_Rumble_80378430(u8 a, int b, int c, int d, void* e);
+void HSD_Rumble_80378524(int a);
+int HSD_Rumble_80378560(HSD_PadRumbleListData* a, u8* b);
 void HSD_PadRumbleInterpret(void);
 void HSD_PadRumbleInit(u16 a, void* b);
 void HSD_PadRumbleOn(u8 a);
-void func_803780DC(u8 a);
+void HSD_Rumble_803780DC(u8 a);
 void HSD_PadRumbleInterpret_inline(HSD_PadRumbleListData** r6,
                                    HSD_PadRumbleListData* r29);
 

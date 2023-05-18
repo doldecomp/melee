@@ -2,8 +2,12 @@
 #define MELEE_FT_CHARA_FTCOMMON_TYPES_H
 
 #include <platform.h>
+#include "ft/forward.h"
+#include "ftCommon/forward.h"
 
-union ftCommon_StateVars {
+#include <placeholder.h>
+
+union ftCommon_MotionVars {
     struct ftCommon_CliffVars {
         /// 0x2340 - Used to check against opponent's variable @ 0x213C while
         /// they're occupying a ledge within grab range
@@ -11,16 +15,25 @@ union ftCommon_StateVars {
     } cliff;
 
     struct ftCommon_WalkVars {
-        f32 x0;
-        s32 x4;
-        f32 x8;
-        f32 xC;
-        f32 x10;
-        f32 x14;
-        f32 x18;
-        f32 x1C;
-        f32 x20;
+        /* fp+2340 */ float x0;
+        /* fp+2344 */ FtMotionId msid;
+        /* fp+2348 */ float slow_anim_frame;
+        /* fp+234C */ float middle_anim_frame;
+        /* fp+2350 */ float fast_anim_frame;
+        /* fp+2354 */ float slow_anim_rate;
+        /* fp+2358 */ float middle_anim_rate;
+        /* fp+235C */ float fast_anim_rate;
+        /* fp+2360 */ float accel_mul;
     } walk;
+    struct ftCo_Attack1Vars {
+        /* fp+2340 */ bool x0;
+    } attack1;
+    struct ftCo_AttackDashVars {
+        /* fp+2340 */ int x0;
+    } attackdash;
+    struct ftCo_AttackLw3Vars {
+        /* fp+2340 */ bool x0;
+    } attacklw3;
 };
 
 #endif

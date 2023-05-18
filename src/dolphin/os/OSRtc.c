@@ -1,10 +1,9 @@
-#include <dolphin/os/OSRtc.h>
-
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSRtc.h>
 
 #define RTC_CMD_READ 0x20000000
 #define RTC_CMD_WRITE 0xA0000000
@@ -69,8 +68,9 @@ bool WriteSram(void* buffer, u32 offset, u32 size)
     bool err;
     u32 cmd;
 
-    if (!EXILock(RTC_CHAN, RTC_DEV, WriteSramCallback))
+    if (!EXILock(RTC_CHAN, RTC_DEV, WriteSramCallback)) {
         return false;
+    }
 
     if (!EXISelect(RTC_CHAN, RTC_DEV, RTC_FREQ)) {
         EXIUnlock(RTC_CHAN);

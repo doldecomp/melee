@@ -3,8 +3,10 @@
 #include "aobj.h"
 #include "memory.h"
 #include "mtx.h"
-#include <dolphin/mtx.h>
+
 #include <math.h>
+#include <dolphin/mtx.h>
+#include <dolphin/mtx/types.h>
 #include <MetroTRK/intrinsics.h>
 
 extern void TObjInfoInit(void);
@@ -15,8 +17,8 @@ extern HSD_TObj* tobj_head;
 
 extern char lbl_804055B8[];
 
-char lbl_804D5C90[7] = "tobj.c\0";
-char lbl_804D5C98[5] = "tobj\0";
+char HSD_TObj_804D5C90[7] = "tobj.c\0";
+char HSD_TObj_804D5C98[5] = "tobj\0";
 
 void HSD_TObjRemoveAnim(HSD_TObj* tobj)
 {
@@ -43,8 +45,9 @@ static HSD_TexAnim* lookupTextureAnim(s32 id, HSD_TexAnim* texanim)
 {
     HSD_TexAnim* ta;
     for (ta = texanim; ta; ta = ta->next) {
-        if (ta->id == id)
+        if (ta->id == id) {
             return ta;
+        }
     }
     return NULL;
 }
@@ -129,14 +132,15 @@ static void TObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
 {
     HSD_TObj* tobj = obj;
 
-    if (tobj == NULL)
+    if (tobj == NULL) {
         return;
+    }
 
     switch (type) {
     case HSD_A_T_TIMG: {
         int n;
         if (tobj->imagetbl == NULL) {
-            __assert(lbl_804D5C90, 276, "tobj->imagetbl");
+            __assert(HSD_TObj_804D5C90, 276, "tobj->imagetbl");
         }
         n = (int) val->fv;
         if (tobj->imagetbl[n]) {
@@ -282,7 +286,7 @@ HSD_TObj* HSD_TObjLoadDesc(HSD_TObjDesc* td)
         } else {
             tobj = hsdNew(info);
             if (tobj == NULL) {
-                __assert(lbl_804D5C90, 468, lbl_804D5C98);
+                __assert(HSD_TObj_804D5C90, 468, HSD_TObj_804D5C98);
             }
         }
         HSD_TOBJ_METHOD(tobj)->load(tobj, td);
@@ -323,8 +327,9 @@ HSD_TObj* _HSD_TObjGetCurrentByType(HSD_TObj* from, u32 mapping)
     }
 
     for (; tp != NULL; tp = tp->next) {
-        if (tobj_coord(tp) == mapping)
+        if (tobj_coord(tp) == mapping) {
             goto END;
+        }
     }
 
     tp = NULL;
@@ -332,7 +337,7 @@ END:
     return tp;
 }
 
-char lbl_8040562C[23] = "unexpected texmap id.\n\0";
+char HSD_TObj_8040562C[23] = "unexpected texmap id.\n\0";
 
 #ifdef MUST_MATCH
 #pragma push
@@ -359,7 +364,7 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
     case GX_TEXMAP7:
         return GX_PTTEXMTX7;
     default:
-        HSD_Panic(lbl_804D5C90, 574, lbl_8040562C);
+        HSD_Panic(HSD_TObj_804D5C90, 574, HSD_TObj_8040562C);
     }
     return 0;
 }
@@ -382,11 +387,13 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
 
     bool no_assert = false;
 
-    if (tobj->repeat_s && tobj->repeat_t)
+    if (tobj->repeat_s && tobj->repeat_t) {
         no_assert = true;
+    }
 
-    if (!no_assert)
-        __assert(lbl_804D5C90, 589, "tobj->repeat_s && tobj->repeat_t");
+    if (!no_assert) {
+        __assert(HSD_TObj_804D5C90, 589, "tobj->repeat_s && tobj->repeat_t");
+    }
 
     scale.x = __fabsf(tobj->scale.x) < FLT_EPSILON
                   ? 0.0F

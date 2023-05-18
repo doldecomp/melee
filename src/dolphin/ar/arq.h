@@ -1,7 +1,7 @@
 #ifndef DOLPHIN_AR_ARQ_H
 #define DOLPHIN_AR_ARQ_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 #define ARQ_CHUNK_SIZE_DEFAULT 4096
 
@@ -32,8 +32,9 @@ struct ARQRequest {
 
 void ARQInit(void);
 void ARQReset(void);
-void ARQPostRequest(ARQRequest* task, u32 owner, ARQType type, ARQPrio priority,
-                    u32 source, u32 dest, size_t length, ARQCallback callback);
+void ARQPostRequest(ARQRequest* task, u32 owner, ARQType type,
+                    ARQPrio priority, u32 source, u32 dest, size_t length,
+                    ARQCallback callback);
 size_t ARQGetChunkSize(void);
 
 void __ARQPopTaskQueueHi(void);

@@ -1,11 +1,11 @@
-#include <Runtime/platform.h>
+#include <platform.h>
 
-int lbl_803C5520[] = {
+int ftItemPickup_803C5520[] = {
     81, 78, 75, 82, 79, 76, 83, 80, 77, 89, 88, 87,
     84, 84, 84, 85, 85, 85, 86, 86, 86, 89, 88, 87,
 };
 
-char lbl_803C5580[] = "ftGetImmItem item_gobj is NULL!!\n";
+char ftItemPickup_803C5580[] = "ftGetImmItem item_gobj is NULL!!\n";
 
 #ifdef MUST_MATCH
 #pragma push
@@ -17,35 +17,35 @@ char ftItemPickup_assert_msg_2[] = "item_gobj";
 #pragma pop
 #endif
 
-/* static */ void lbl_80095728(void);
-/* static */ void lbl_80095738(void);
+/* static */ void ft_80095728(void);
+/* static */ void ft_80095738(void);
 
 jtbl_t jtbl_803C55C0 = {
-    lbl_80095728, lbl_80095738, lbl_80095738, lbl_80095738, lbl_80095738,
-    lbl_80095738, lbl_80095728, lbl_80095738, lbl_80095738, lbl_80095738,
-    lbl_80095728, lbl_80095738, lbl_80095738, lbl_80095738, lbl_80095728,
-    lbl_80095738, lbl_80095738, lbl_80095738, lbl_80095728, lbl_80095738,
-    lbl_80095738, lbl_80095738, lbl_80095728,
+    ft_80095728, ft_80095738, ft_80095738, ft_80095738, ft_80095738,
+    ft_80095738, ft_80095728, ft_80095738, ft_80095738, ft_80095738,
+    ft_80095728, ft_80095738, ft_80095738, ft_80095738, ft_80095728,
+    ft_80095738, ft_80095738, ft_80095738, ft_80095728, ft_80095738,
+    ft_80095738, ft_80095738, ft_80095728,
 };
 
-/* static */ void lbl_8009588C(void);
-/* static */ void lbl_8009589C(void);
+/* static */ void ft_8009588C(void);
+/* static */ void ft_8009589C(void);
 
 jtbl_t jtbl_803C561C = {
-    lbl_8009588C, lbl_8009589C, lbl_8009589C, lbl_8009589C, lbl_8009589C,
-    lbl_8009589C, lbl_8009588C, lbl_8009589C, lbl_8009589C, lbl_8009589C,
-    lbl_8009588C, lbl_8009589C, lbl_8009589C, lbl_8009589C, lbl_8009588C,
-    lbl_8009589C, lbl_8009589C, lbl_8009589C, lbl_8009588C, lbl_8009589C,
-    lbl_8009589C, lbl_8009589C, lbl_8009588C,
+    ft_8009588C, ft_8009589C, ft_8009589C, ft_8009589C, ft_8009589C,
+    ft_8009589C, ft_8009588C, ft_8009589C, ft_8009589C, ft_8009589C,
+    ft_8009588C, ft_8009589C, ft_8009589C, ft_8009589C, ft_8009588C,
+    ft_8009589C, ft_8009589C, ft_8009589C, ft_8009588C, ft_8009589C,
+    ft_8009589C, ft_8009589C, ft_8009588C,
 };
 
-/* static */ void lbl_80095990(void);
-/* static */ void lbl_800959A0(void);
+/* static */ void ft_80095990(void);
+/* static */ void ft_800959A0(void);
 
 jtbl_t jtbl_803C5678 = {
-    lbl_80095990, lbl_800959A0, lbl_800959A0, lbl_800959A0, lbl_800959A0,
-    lbl_800959A0, lbl_80095990, lbl_800959A0, lbl_800959A0, lbl_800959A0,
-    lbl_80095990, lbl_800959A0, lbl_800959A0, lbl_800959A0, lbl_80095990,
-    lbl_800959A0, lbl_800959A0, lbl_800959A0, lbl_80095990, lbl_800959A0,
-    lbl_800959A0, lbl_800959A0, lbl_80095990,
+    ft_80095990, ft_800959A0, ft_800959A0, ft_800959A0, ft_800959A0,
+    ft_800959A0, ft_80095990, ft_800959A0, ft_800959A0, ft_800959A0,
+    ft_80095990, ft_800959A0, ft_800959A0, ft_800959A0, ft_80095990,
+    ft_800959A0, ft_800959A0, ft_800959A0, ft_80095990, ft_800959A0,
+    ft_800959A0, ft_800959A0, ft_80095990,
 };

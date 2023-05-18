@@ -1,13 +1,14 @@
 #ifndef _CMSNAP_H_
 #define _CMSNAP_H_
 
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <platform.h>
 
-void func_800315C8(void);
-void func_800316B4(void);
+#include <baselib/gobj.h>
 
-s32 func_80031618(void);
-void func_80031640(HSD_GObj* arg0, s32 arg1);
+void cmSnap_800315C8(void);
+void cmSnap_800316B4(void);
+
+s32 cmSnap_80031618(void);
+void cmSnap_80031640(HSD_GObj* arg0, s32 arg1);
 
 #endif

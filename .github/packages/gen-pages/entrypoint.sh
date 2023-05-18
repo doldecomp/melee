@@ -8,7 +8,6 @@ cd /tmp/input
 pip install --no-cache-dir -r requirements.txt
 
 mkdir -p build/doxygen
-ln -s /opt/doxygen-awesome-css tools/
 doxygen Doxyfile
 touch build/doxygen/html/.nojekyll
 python tools/m2ctx/m2ctx.py -pqr

@@ -3,8 +3,8 @@
 .section .text
 
 # https://decomp.me/scratch/mtpS3 // 5700 (0%)
-.global func_80391580
-func_80391580:
+.global hsd_80391580
+hsd_80391580:
 /* 80391580 0038E160  7C 08 02 A6 */	mflr r0
 /* 80391584 0038E164  38 80 00 00 */	li r4, 0
 /* 80391588 0038E168  90 01 00 04 */	stw r0, 4(r1)

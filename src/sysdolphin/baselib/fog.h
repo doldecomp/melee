@@ -1,8 +1,9 @@
 #ifndef SYSDOLPHIN_BASELIB_FOG_H
 #define SYSDOLPHIN_BASELIB_FOG_H
 
-#include "baselib/fobj.h"
 #include "baselib/forward.h"
+
+#include "baselib/fobj.h"
 #include "baselib/object.h"
 
 #include <dolphin/gx/types.h>
@@ -58,12 +59,12 @@ HSD_Fog* HSD_FogLoadDesc(HSD_FogDesc* desc);
 
 HSD_Fog* HSD_FogAlloc(void);
 HSD_FogAdj* HSD_FogAdjAlloc(void);
-void func_8037DE7C(HSD_Fog* fog, HSD_AObjDesc* desc);
+void HSD_Fog_8037DE7C(HSD_Fog* fog, HSD_AObjDesc* desc);
 void HSD_FogReqAnim(HSD_Fog* fog, f32 frame);
 void HSD_FogInterpretAnim(HSD_Fog* fog);
 HSD_Fog* HSD_FogAlloc(void);
 HSD_FogAdj* HSD_FogAdjAlloc(void);
-void func_8037DE7C(HSD_Fog* fog, HSD_AObjDesc* desc);
+void HSD_Fog_8037DE7C(HSD_Fog* fog, HSD_AObjDesc* desc);
 void HSD_FogReqAnim(HSD_Fog* fog, f32 frame);
 void HSD_FogInterpretAnim(HSD_Fog* fog);
 

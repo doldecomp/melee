@@ -1,9 +1,8 @@
-#include <sysdolphin/baselib/fog.h>
-
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
-#include <sysdolphin/baselib/cobj.h>
+#include <baselib/cobj.h>
+#include <baselib/fog.h>
 
 static void FogInfoInit(void);
 static void FogAdjInfoInit(void);
@@ -11,7 +10,7 @@ static void FogAdjInfoInit(void);
 HSD_FogInfo hsdFog = { FogInfoInit };
 HSD_ClassInfo hsdFogAdj = { FogAdjInfoInit };
 
-const GXColor lbl_804DE6F0 = { 0 };
+const GXColor HSD_Fog_804DE6F0 = { 0 };
 
 void HSD_FogSet(HSD_Fog* fog)
 {
@@ -25,15 +24,15 @@ void HSD_FogSet(HSD_Fog* fog)
     } proj;
 
     if (fog == NULL) {
-        GXSetFog(0, lbl_804DE6F0, 0.0F, 0.0F, 0.0F, 0.0F);
+        GXSetFog(0, HSD_Fog_804DE6F0, 0.0F, 0.0F, 0.0F, 0.0F);
         return;
     }
     cobj = HSD_CObjGetCurrent();
     if (cobj == NULL) {
         HSD_Panic(__FILE__, 0x4D, "You must specify CObj first.\n");
     }
-    GXSetFog(fog->type, fog->color, fog->start, fog->end, HSD_CObjGetNear(cobj),
-             HSD_CObjGetFar(cobj));
+    GXSetFog(fog->type, fog->color, fog->start, fog->end,
+             HSD_CObjGetNear(cobj), HSD_CObjGetFar(cobj));
 
     if (fog->fog_adj != NULL) {
         GXGetViewportv(v);
@@ -157,7 +156,7 @@ void HSD_FogAdjInit(HSD_FogAdj* adj, HSD_FogAdjDesc* desc)
 }
 
 // HSD_FogAddAnim ?
-void func_8037DE7C(HSD_Fog* fog, HSD_AObjDesc* desc)
+void HSD_Fog_8037DE7C(HSD_Fog* fog, HSD_AObjDesc* desc)
 {
     if (fog != NULL) {
         if (fog->aobj != NULL) {
@@ -182,8 +181,9 @@ void HSD_FogReqAnimByFlags(HSD_Fog* fog, u32 flags, f32 frame)
 
 void HSD_FogInterpretAnim(HSD_Fog* fog)
 {
-    if (fog != NULL)
+    if (fog != NULL) {
         HSD_AObjInterpretAnim(fog->aobj, fog, FogUpdateFunc);
+    }
 }
 
 void FogUpdateFunc(any_t obj, enum_t type, HSD_ObjData* val)

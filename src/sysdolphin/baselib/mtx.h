@@ -1,10 +1,10 @@
 #ifndef _mtx_h_
 #define _mtx_h_
 
-#include <math.h>
-#include <sysdolphin/baselib/objalloc.h>
+#include "lb/lbrefract.h"
 
-#include <melee/lb/lbrefract.h>
+#include <math.h>
+#include <baselib/objalloc.h>
 
 void HSD_MtxInverse(Mtx src, Mtx dest);
 void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest);
@@ -13,7 +13,7 @@ void HSD_MtxGetRotation(Mtx m, Vec3* vec);
 void HSD_MtxGetTranslate(Mtx mat, Vec3* vec);
 void HSD_MtxGetScale(Mtx arg0, Vec3* arg1);
 void HSD_MkRotationMtx(Mtx arg0, Vec3* arg1);
-void func_8037A230(Mtx arg0, Quaternion* arg1);
+void HSD_Mtx_8037A230(Mtx arg0, Quaternion* arg1);
 void HSD_MtxSRT(Mtx m, Vec3* vec1, Vec3* vec2, Vec3* vec3, Vec3* vec4);
 void HSD_MtxSRTQuat(Mtx arg0, Vec3* arg1, Quaternion* arg2, Vec3* arg3,
                     Vec3* arg4);

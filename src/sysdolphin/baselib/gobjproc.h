@@ -1,8 +1,8 @@
 #ifndef SYSDOLPHIN_BASELIB_GOBJPROC_H
 #define SYSDOLPHIN_BASELIB_GOBJPROC_H
 
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/forward.h>
+#include <platform.h>
+#include <baselib/forward.h>
 
 struct HSD_GObjProc {
     /* 0x00 */ HSD_GObjProc* child;
@@ -16,15 +16,15 @@ struct HSD_GObjProc {
     /* 0x14 */ HSD_GObjEvent on_invoke;
 };
 
-HSD_GObjProc* func_8038FD54(HSD_GObj*, HSD_GObjEvent, u8);
+HSD_GObjProc* HSD_GObjProc_8038FD54(HSD_GObj*, HSD_GObjEvent, u8);
 
-void func_8038FED4(HSD_GObj* gobj);
-void func_8038FAA8(HSD_GObjProc*);
-void func_8038FC18(HSD_GObjProc* gproc);
+void HSD_GObjProc_8038FED4(HSD_GObj* gobj);
+void HSD_GObjProc_8038FAA8(HSD_GObjProc*);
+void HSD_GObjProc_8038FC18(HSD_GObjProc* gproc);
 
-void func_8038FCE4(HSD_GObjProc* gproc);
-void func_8038FE24(HSD_GObjProc* gproc);
-void func_8038FCE4(HSD_GObjProc* gproc);
-void func_8038FE24(HSD_GObjProc* gproc);
+void HSD_GObjProc_8038FCE4(HSD_GObjProc* gproc);
+void HSD_GObjProc_8038FE24(HSD_GObjProc* gproc);
+void HSD_GObjProc_8038FCE4(HSD_GObjProc* gproc);
+void HSD_GObjProc_8038FE24(HSD_GObjProc* gproc);
 
 #endif

@@ -1,8 +1,8 @@
-#include <Runtime/__init_cpp_exceptions.h>
+#include <platform.h>
 
+#include <__init_cpp_exceptions.h>
+#include <Gecko_ExceptionPPC.h>
 #include <placeholder.h>
-#include <Runtime/Gecko_ExceptionPPC.h>
-#include <Runtime/platform.h>
 
 static int fragmentID = -2;
 
@@ -33,8 +33,9 @@ void __fini_cpp_exceptions(void)
 
 void __init_cpp_exceptions(void)
 {
-    if (fragmentID == -2)
+    if (fragmentID == -2) {
         fragmentID = __register_fragment(_eti_init_info_, GetR2());
+    }
 }
 
 #else

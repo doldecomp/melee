@@ -1,7 +1,7 @@
 #ifndef DOLPHIN_GX_GXATTR_H
 #define DOLPHIN_GX_GXATTR_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 void GXSetNumTexGens(u8 arg0);
 void GXSetTexCoordGen2(u32, s32, u32, s32, s32, s32);

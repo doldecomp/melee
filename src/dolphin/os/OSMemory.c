@@ -1,9 +1,8 @@
-#include <dolphin/os/OSMemory.h>
-
+#include <placeholder.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSMemory.h>
 #include <dolphin/os/OSReset.h>
-#include <placeholder.h>
 
 extern volatile u32 Mem_Size AT_ADDRESS(0x80000028);
 extern volatile u32 Simulated_Mem AT_ADDRESS(0x800000F0);
@@ -11,7 +10,7 @@ extern OSErrorHandler __OSErrorTable[];
 
 static bool OnReset(bool);
 
-static OSResetFunctionInfo lbl_80402348 = { OnReset, 127, NULL, NULL };
+static OSResetFunctionInfo OSMemory_80402348 = { OnReset, 127, NULL, NULL };
 
 u32 OSGetPhysicalMemSize(void)
 {
@@ -39,8 +38,8 @@ static void MEMIntrruptHandler(__OSInterrupt interrupt, OSContext* context)
     __MEMRegs[0x10] = 0;
 
     if (__OSErrorTable[OS_ERROR_PROTECTION]) {
-        __OSErrorTable[OS_ERROR_PROTECTION](OS_ERROR_PROTECTION, context, cause,
-                                            addr);
+        __OSErrorTable[OS_ERROR_PROTECTION](OS_ERROR_PROTECTION, context,
+                                            cause, addr);
         return;
     }
 
@@ -178,7 +177,7 @@ void __OSInitMemoryProtection(void)
     __OSSetInterruptHandler(2, MEMIntrruptHandler);
     __OSSetInterruptHandler(3, MEMIntrruptHandler);
     __OSSetInterruptHandler(4, MEMIntrruptHandler);
-    OSRegisterResetFunction(&lbl_80402348);
+    OSRegisterResetFunction(&OSMemory_80402348);
     simulated_mem = OSGetConsoleSimulatedMemSize();
     if (simulated_mem < Mem_Size && simulated_mem == 24 * 1024 * 1024) {
         __MEMRegs[20] = 2;

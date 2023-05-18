@@ -1,6 +1,5 @@
-#include <dolphin/ar/arq.h>
-
 #include <dolphin/ar/ar.h>
+#include <dolphin/ar/arq.h>
 #include <dolphin/os/OSInterrupt.h>
 
 static ARQRequest* __ARQRequestQueueHi;
@@ -43,9 +42,10 @@ void __ARQServiceQueueLo(void)
     if (__ARQRequestPendingLo) {
         if (__ARQRequestPendingLo->length <= __ARQChunkSize) {
             if (__ARQRequestPendingLo->type == ARQ_TYPE_MRAM_TO_ARAM) {
-                ARStartDMA(
-                    __ARQRequestPendingLo->type, __ARQRequestPendingLo->source,
-                    __ARQRequestPendingLo->dest, __ARQRequestPendingLo->length);
+                ARStartDMA(__ARQRequestPendingLo->type,
+                           __ARQRequestPendingLo->source,
+                           __ARQRequestPendingLo->dest,
+                           __ARQRequestPendingLo->length);
             } else {
                 ARStartDMA(__ARQRequestPendingLo->type,
                            __ARQRequestPendingLo->dest,

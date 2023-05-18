@@ -12,7 +12,6 @@ from pathlib import Path
 from typing import (
     ClassVar,
     Dict,
-    Iterator,
     List,
     Match,
     Optional,
@@ -446,7 +445,6 @@ def parse_struct(struct: Union[ca.Struct, ca.Union], typemap: TypeMap) -> Struct
 def parse_struct_member(
     type: CType, field_name: str, typemap: TypeMap, *, allow_unsized: bool
 ) -> Tuple[int, int, DetailedStructMember]:
-    old_type = type
     type = resolve_typedefs(type, typemap)
     if isinstance(type, PtrDecl):
         return 4, 4, None
@@ -750,8 +748,6 @@ def _build_typemap(source_paths: Tuple[Path, ...], use_cache: bool) -> TypeMap:
                 fn = parse_function(item.type)
                 assert fn is not None
                 typemap.functions[item.name] = fn
-
-        defined_function_decls: Set[ca.Decl] = set()
 
         class Visitor(ca.NodeVisitor):
             def visit_Struct(self, struct: ca.Struct) -> None:

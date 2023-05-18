@@ -1,12 +1,12 @@
-#include <melee/lb/lbarchive.h>
+#include "lb/lbarchive.h"
 
 #include <dolphin/os/os.h>
-#include <sysdolphin/baselib/debug.h>
+#include <baselib/debug.h>
 
-extern char lbl_803BA588[]; //"HSD_ArchiveParse error!\n"
-extern char lbl_803BA5A4[]; //"lbarchive.c"
+extern char lbArchive_803BA588[]; //"HSD_ArchiveParse error!\n"
+extern char lbArchive_803BA5A4[]; //"lbarchive.c"
 
-extern char lbl_804D37C0[2]; //"0"
+extern char lbArchive_804D37C0[2]; //"0"
 
 void lbArchive_InitializeDAT(HSD_Archive* archive, u8* data, u32 length)
 {
@@ -14,15 +14,17 @@ void lbArchive_InitializeDAT(HSD_Archive* archive, u8* data, u32 length)
     int i = 0;
 
     if (HSD_ArchiveParse(archive, data, length) == -1) {
-        OSReport(lbl_803BA588);
-        __assert(lbl_803BA5A4, 73, lbl_804D37C0);
+        OSReport(lbArchive_803BA588);
+        __assert(lbArchive_803BA5A4, 73, lbArchive_804D37C0);
     }
 
     while (true) {
         symbol = HSD_ArchiveGetExtern(archive, i++);
-        if (symbol != NULL)
+        if (symbol != NULL) {
             HSD_ArchiveLocateExtern(archive, symbol, NULL);
-        if (symbol == NULL)
+        }
+        if (symbol == NULL) {
             return;
+        }
     }
 }

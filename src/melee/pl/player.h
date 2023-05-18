@@ -1,10 +1,13 @@
 #ifndef _player_h_
 #define _player_h_
 
-#include <melee/pl/types.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <platform.h>
+
+#include "pl/types.h"
+
+#include <dolphin/mtx/types.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 typedef struct _StaticPlayer {
     /// @at{0} @sz{4}
@@ -90,8 +93,8 @@ typedef struct _StaticPlayer {
 
     /*0xA0-A4*/ s32
         joystick_direction_input_count[2]; // Incremented every time you move
-                                           // the joystick a different direction
-                                           // from neutral.
+                                           // the joystick a different
+                                           // direction from neutral.
 
     /*0xA8*/ int nametag_slot_id;
 
@@ -130,7 +133,8 @@ typedef struct _StaticPlayer {
     /*0xAF*/ s8 unkAF;
 
     /*0xB0*/ HSD_GObj* player_entity[2];
-    /*0xB4*/ /*void* sub_character_entity;*/ // Used for followers, such as Nana
+    /*0xB4*/ /*void* sub_character_entity;*/ // Used for followers, such as
+                                             // Nana
 
     /*0xB8*/ void (*struct_func)(s32 slot);
 
@@ -179,9 +183,9 @@ bool Player_8003221C(int slot);
 s32 Player_GetPlayerState(s32 slot);
 enum_t Player_GetPlayerCharacter(int slot);
 void Player_SetPlayerCharacter(s32 slot, s32 value);
-s32 Player_GetPlayerSlotType(s32 slot);
+enum_t Player_GetPlayerSlotType(s32 slot);
 s32 Player_8003248C(s32 slot, bool arg1);
-void Player_SetSlottype(s32 slot, s32 value);
+void Player_SetSlottype(s32 slot, enum_t value);
 s8 Player_800325C8(s32 slot, bool b);
 s8 Player_80032610(s32 slot, bool arg1);
 void Player_LoadPlayerCoords(s32 slot, Vec3* out_vec);
@@ -323,8 +327,6 @@ void Player_80036E20(s32 arg0, s32 arg1, s32 arg2);
 s32 Player_80036EA0(s32 slot);
 void Player_80036F34(s32 slot, s32 arg1);
 void Player_80037054(s32 slot, s32 arg1);
-s32 Player_GetPlayerSlotType(s32);
-
 void Player_SetOtherStamina(s32 slot, s32 stamina);
 void Player_SetFlagsAEBit0(s32 slot, u8 bit0);
 s32 Player_80033BB8(int slot);

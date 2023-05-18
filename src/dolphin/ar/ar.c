@@ -1,8 +1,8 @@
-#include <dolphin/ar/ar.h>
+#include <platform.h>
 
+#include <dolphin/ar/ar.h>
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/os/os.h>
-#include <Runtime/platform.h>
 
 extern Event __AR_Callback;
 extern u32 __AR_Size;
@@ -34,7 +34,8 @@ void ARStartDMA(u32 type, u32 mainmem_addr, u32 aram_addr, u32 length)
 {
     bool enabled = OSDisableInterrupts();
 
-    __DSPRegs[16] = (u16) (__DSPRegs[16] & ~0x3ff) | (u16) (mainmem_addr >> 16);
+    __DSPRegs[16] =
+        (u16) (__DSPRegs[16] & ~0x3ff) | (u16) (mainmem_addr >> 16);
     __DSPRegs[17] =
         (u16) (__DSPRegs[17] & ~0xffe0) | (u16) (mainmem_addr & 0xffff);
     __DSPRegs[18] = (u16) (__DSPRegs[18] & ~0x3ff) | (u16) (aram_addr >> 16);
@@ -65,8 +66,9 @@ u32 ARFree(u32* length)
 
     __AR_BlockLength--;
 
-    if (length != NULL)
+    if (length != NULL) {
         *length = *__AR_BlockLength;
+    }
 
     __AR_StackPointer -= *__AR_BlockLength;
 
@@ -138,8 +140,9 @@ void __ARHandler(__OSInterrupt interrupt, OSContext* context)
     OSClearContext(&exceptionContext);
     OSSetCurrentContext(&exceptionContext);
 
-    if (__AR_Callback != NULL)
+    if (__AR_Callback != NULL) {
         __AR_Callback();
+    }
 
     OSClearContext(&exceptionContext);
     OSSetCurrentContext(context);

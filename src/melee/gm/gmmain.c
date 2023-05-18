@@ -1,3 +1,20 @@
+#include "gm_1A36.h"
+
+#include "db/db_2253.h"
+#include "gm/gm_1601.h"
+#include "gm/gmmain_lib.h"
+#include "lb/lb_0198.h"
+#include "lb/lbarq.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbdvd.h"
+#include "lb/lbheap.h"
+#include "lb/lblanguage.h"
+#include "lb/lbmemory.h"
+#include "lb/lbmthp.h"
+#include "lb/lbsnap.h"
+#include "lb/lbtime.h"
+
+#include <placeholder.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/gx/GXInit.h>
@@ -7,35 +24,20 @@
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/pad/Pad.h>
 #include <dolphin/vi/vi.h>
-#include <melee/db/db_unknown_001.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/lb/lbarq.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbdvd.h>
-#include <melee/lb/lbheap.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbmemory.h>
-#include <melee/lb/lbmthp.h>
-#include <melee/lb/lbsnap.h>
-#include <melee/lb/lbtime.h>
-#include <melee/lb/lbunknown_005.h>
-#include <melee/text_2.h>
-#include <placeholder.h>
-#include <sysdolphin/baselib/baselib_unknown_002.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/initialize.h>
-#include <sysdolphin/baselib/rumble.h>
-#include <sysdolphin/baselib/sislib.h>
-#include <sysdolphin/baselib/video.h>
+#include <baselib/baselib_unknown_002.h>
+#include <baselib/controller.h>
+#include <baselib/debug.h>
+#include <baselib/initialize.h>
+#include <baselib/rumble.h>
+#include <baselib/sislib.h>
+#include <baselib/video.h>
 
-extern bool lbl_804D6B20;
-extern u16 lbl_804D6B30; // debug flags
+extern bool db_804D6B20;
+extern u16 db_804D6B30; // debug flags
 
 extern GXRenderModeObj GXNtsc480IntDf;
 extern PadLibData HSD_PadLibData;
-extern char lbl_803EA6C8[]; // build timestamp string
+extern char db_803EA6C8[]; // build timestamp string
 extern s32* seed_ptr;
 
 enum {
@@ -47,15 +49,15 @@ enum {
 };
 
 static u32 arena_size;
-static bool lbl_804D6594;
+static bool gmMain_804D6594;
 
-static u8 lbl_8046B108[0xF0];
-static HSD_PadRumbleListData lbl_8046B1F8[12];
+static u8 gmMain_8046B108[0xF0];
+static HSD_PadRumbleListData gmMain_8046B1F8[12];
 
-static void lbl_8015FD24(void)
+static void gmMain_8015FD24(void)
 {
     PADSetSpec(5);
-    HSD_PadInit(5, lbl_8046B108, 12, lbl_8046B1F8);
+    HSD_PadInit(5, gmMain_8046B108, 12, gmMain_8046B1F8);
     HSD_PadLibData.clamp_stickType = 0;
     HSD_PadLibData.clamp_stickShift = 1;
     HSD_PadLibData.clamp_stickMax = 80;
@@ -67,14 +69,14 @@ static void lbl_8015FD24(void)
     HSD_PadLibData.scale_analogLR = 140;
 }
 
-static void lbl_8015FDA0(void) {}
+static void gmMain_8015FDA0(void) {}
 
 // set debug level
-static void func_8015FDA4(void)
+static void gmMain_8015FDA4(void)
 {
     if (DVDConvertPathToEntrynum("/develop.ini") != -1) {
-        lbl_804D6B20 = true;
-        if (lbl_804D6B30 & 0x400) {
+        db_804D6B20 = true;
+        if (db_804D6B30 & 0x400) {
             int level = g_debugLevel;
             switch (level) {
             case DbLKind_NoDebugRom:
@@ -94,7 +96,7 @@ static void func_8015FDA4(void)
                 break;
             }
             g_debugLevel = level;
-        } else if (lbl_804D6B30 & 0x800) {
+        } else if (db_804D6B30 & 0x800) {
             int level = g_debugLevel;
             switch (level) {
             case DbLKind_NoDebugRom:
@@ -105,7 +107,7 @@ static void func_8015FDA4(void)
                 break;
             }
             g_debugLevel = level;
-            lbl_804D6B20 = false;
+            db_804D6B20 = false;
         }
     } else {
         if (g_debugLevel != DbLKind_NoDebugRom) {
@@ -119,12 +121,12 @@ static void func_8015FDA4(void)
 
 static inline void init_spr_unk(void)
 {
-#define MTSPR(spr, val)                                                        \
-    asm { li r3, val }                                                         \
-    asm                                                                        \
-    {                                                                          \
-        oris r3, r3, val                                                       \
-    }                                                                          \
+#define MTSPR(spr, val)                                                       \
+    asm { li r3, val }                                                        \
+    asm                                                                       \
+    {                                                                         \
+        oris r3, r3, val                                                      \
+    }                                                                         \
     asm { mtspr spr, r3 }
 
     MTSPR(0x392, 4);
@@ -156,8 +158,8 @@ int main(void)
     PADInit();
     CARDInit();
     OSInitAlarm();
-    func_80225374();
-    func_8015FDA4();
+    db_80225374();
+    gmMain_8015FDA4();
     if (OSGetConsoleSimulatedMemSize() / (1024 * 1024) == 48) {
         OSAllocFromArenaHi(0x01800000, 4);
     }
@@ -166,40 +168,40 @@ int main(void)
     HSD_SetInitParameter(HSD_INIT_RENDER_MODE_OBJ, &GXNtsc480IntDf);
     HSD_SetInitParameter(HSD_INIT_FIFO_SIZE, 0x40000);
     HSD_SetInitParameter(HSD_INIT_HEAP_MAX_NUM, 4);
-    func_80228C4C();
+    db_80228C4C();
     HSD_AllocateXFB(2, &GXNtsc480IntDf);
     HSD_GXSetFifoObj(GXInit(HSD_AllocateFifo(0x40000), 0x40000));
     HSD_InitComponent();
     GXSetMisc(1, 8);
     *seed_ptr = OSGetTick();
-    func_8002838C();
-    func_80019AAC(&lbl_8015FD24);
-    HSD_VISetUserPostRetraceCallback(&lbl_8015FDA0);
-    HSD_VISetUserGXDrawDoneCallback(&lbl_803762C4);
+    lbAudioAx_8002838C();
+    lb_80019AAC(&gmMain_8015FD24);
+    HSD_VISetUserPostRetraceCallback(&gmMain_8015FDA0);
+    HSD_VISetUserGXDrawDoneCallback(&HSD_Video_803762C4);
     HSD_VISetBlack(0);
-    func_8001564C();
-    func_80015F3C();
-    func_80018F68();
-    func_80014D2C();
-    func_8001C5BC();
-    func_8001D21C();
-    func_8001E290();
-    func_8015FCC0();
-    func_8001F87C();
-    func_803A6048(0xC000);
-    func_8015FBA4();
+    lbMemory_8001564C();
+    lbHeap_80015F3C();
+    lbDvd_80018F68();
+    lbArq_80014D2C();
+    lb_8001C5BC();
+    lb_8001D21C();
+    lbSnap_8001E290();
+    gmMainLib_8015FCC0();
+    lbMthp_8001F87C();
+    HSD_SisLib_803A6048(0xC000);
+    gmMainLib_8015FBA4();
 
-    if (g_debugLevel != DbLKind_Master && lbl_804D6B30 & 0x20 &&
-        func_803931A4(-1))
+    if (g_debugLevel != DbLKind_Master && db_804D6B30 & 0x20 &&
+        hsd_803931A4(-1))
     {
-        func_80393A54(1);
-        while (!func_80393A04()) {
+        hsd_80393A54(1);
+        while (!hsd_80393A04()) {
             OSReport("please setup server for USB\n");
-            func_80392E80();
+            hsd_80392E80();
         }
     }
 
-    func_8022886C();
+    db_8022886C();
     OSReport("# ---------------------------------------------\n");
     OSReport("#    Super Smash Bros. Melee\n");
     OSReport("#\n");
@@ -210,29 +212,29 @@ int main(void)
     {
         u32 free_aram_start;
         u32 free_aram_end;
-        func_800154BC(&free_aram_start, &free_aram_end);
+        lbMemory_800154BC(&free_aram_start, &free_aram_end);
         OSReport("# ARAM Free Size %d MB\n",
                  (free_aram_end - free_aram_start) / (1024 * 1024));
     }
-    OSReport("# %s\n", lbl_803EA6C8);
+    OSReport("# %s\n", db_803EA6C8);
     {
         struct datetime dt;
-        func_801692E8(func_8000AFBC(), &dt);
+        gm_801692E8(lbTime_8000AFBC(), &dt);
         OSReport("# GC Calendar Year %d Month %d Day %d\n", dt.year, dt.month,
                  dt.day);
         OSReport("#             Hour %d Min %d Sec %d \n", dt.hour, dt.minute,
                  dt.second);
     }
     OSReport("#\n\n");
-    lbl_804D6594 = false;
-    if (lbl_804D6594) {
-        func_80225D2C();
+    gmMain_804D6594 = false;
+    if (gmMain_804D6594) {
+        db_80225D2C();
     } else {
-        func_80225D40();
+        db_80225D40();
     }
 
     init_spr_unk();
 
-    func_80228A64();
-    func_801A4510();
+    db_80228A64();
+    gm_801A4510();
 }

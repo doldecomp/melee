@@ -1,40 +1,40 @@
-#include <dolphin/gx/GXAttr.h>
+#include <platform.h>
 
+#include <placeholder.h>
 #include <dolphin/gx/__GX_unknown_001.h>
 #include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXTransform.h>
-#include <placeholder.h>
-#include <Runtime/platform.h>
 
 #ifdef MWERKS_GEKKO
-static u32 lbl_804D5BB0 = 0x00040102;
-static u32 lbl_804D5BB4 = 0x00080102;
-static u64 lbl_804D5BB8 = 0x000C010200000000;
+static u32 GXAttr_804D5BB0 = 0x00040102;
+static u32 GXAttr_804D5BB4 = 0x00080102;
+static u64 GXAttr_804D5BB8 = 0x000C010200000000;
 #endif
 
-void lbl_8033CA6C(void);
-void lbl_8033CA8C(void);
-void lbl_8033CAAC(void);
-void lbl_8033CACC(void);
-void lbl_8033CAEC(void);
-void lbl_8033CB04(void);
-void lbl_8033CB24(void);
+void GXAttr_8033CA6C(void);
+void GXAttr_8033CA8C(void);
+void GXAttr_8033CAAC(void);
+void GXAttr_8033CACC(void);
+void GXAttr_8033CAEC(void);
+void GXAttr_8033CB04(void);
+void GXAttr_8033CB24(void);
 
-void lbl_8033C8E0(void);
-void lbl_8033C8EC(void);
-void lbl_8033C8F8(void);
-void lbl_8033C904(void);
-void lbl_8033C920(void);
-void lbl_8033C928(void);
-void lbl_8033C930(void);
-void lbl_8033C938(void);
-void lbl_8033C940(void);
-void lbl_8033C948(void);
-void lbl_8033C950(void);
-void lbl_8033C958(void);
-void lbl_8033C95C(void);
-void lbl_8033C910(void);
-void lbl_8033C918(void);
+void GXAttr_8033C8E0(void);
+void GXAttr_8033C8EC(void);
+void GXAttr_8033C8F8(void);
+void GXAttr_8033C904(void);
+void GXAttr_8033C920(void);
+void GXAttr_8033C928(void);
+void GXAttr_8033C930(void);
+void GXAttr_8033C938(void);
+void GXAttr_8033C940(void);
+void GXAttr_8033C948(void);
+void GXAttr_8033C950(void);
+void GXAttr_8033C958(void);
+void GXAttr_8033C95C(void);
+void GXAttr_8033C910(void);
+void GXAttr_8033C918(void);
 
 #ifdef MWERKS_GEKKO
 
@@ -276,9 +276,9 @@ asm void __GXSetVCD(void)
 /* 8033C2B0 00338E90  28 00 00 00 */	cmplwi r0, 0
 /* 8033C2B4 00338E94  41 82 01 00 */	beq lbl_8033C3B4
 /* 8033C2B8 00338E98  88 A3 04 1D */	lbz r5, 0x41d(r3)
-/* 8033C2BC 00338E9C  39 2D A5 18 */	addi r9, r13, lbl_804D5BB8
+/* 8033C2BC 00338E9C  39 2D A5 18 */	addi r9, r13, GXAttr_804D5BB8
 /* 8033C2C0 00338EA0  83 E3 00 14 */	lwz r31, 0x14(r3)
-/* 8033C2C4 00338EA4  38 ED A5 10 */	addi r7, r13, lbl_804D5BB0
+/* 8033C2C4 00338EA4  38 ED A5 10 */	addi r7, r13, GXAttr_804D5BB0
 /* 8033C2C8 00338EA8  54 A5 08 3C */	slwi r5, r5, 1
 /* 8033C2CC 00338EAC  39 05 00 01 */	addi r8, r5, 1
 /* 8033C2D0 00338EB0  80 83 00 18 */	lwz r4, 0x18(r3)
@@ -312,7 +312,7 @@ asm void __GXSetVCD(void)
 /* 8033C340 00338F20  7C 00 2A 14 */	add r0, r0, r5
 /* 8033C344 00338F24  7C 00 32 14 */	add r0, r0, r6
 /* 8033C348 00338F28  54 86 07 BE */	clrlwi r6, r4, 0x1e
-/* 8033C34C 00338F2C  39 0D A5 14 */	addi r8, r13, lbl_804D5BB4
+/* 8033C34C 00338F2C  39 0D A5 14 */	addi r8, r13, GXAttr_804D5BB4
 /* 8033C350 00338F30  54 85 F7 BE */	rlwinm r5, r4, 0x1e, 0x1e, 0x1f
 /* 8033C354 00338F34  7C E8 30 AE */	lbzx r7, r8, r6
 /* 8033C358 00338F38  7C 00 4A 14 */	add r0, r0, r9
@@ -446,17 +446,19 @@ void GXSetVtxAttrFmt(u32 arg0, u32 arg1, s32 arg2, u32 arg3, u8 arg4)
 }
 
 #ifdef MWERKS_GEKKO
-static jtbl_t jtbl_804010F4 = { &lbl_8033CA6C, &lbl_8033CA8C, &lbl_8033CAAC,
-                                &lbl_8033CACC, &lbl_8033CAEC, &lbl_8033CB04,
-                                &lbl_8033CB24 };
+static jtbl_t jtbl_804010F4 = { &GXAttr_8033CA6C, &GXAttr_8033CA8C,
+                                &GXAttr_8033CAAC, &GXAttr_8033CACC,
+                                &GXAttr_8033CAEC, &GXAttr_8033CB04,
+                                &GXAttr_8033CB24 };
 
-static jtbl_t jtbl_80401110 = { &lbl_8033C8E0, &lbl_8033C8EC, &lbl_8033C8F8,
-                                &lbl_8033C904, &lbl_8033C920, &lbl_8033C928,
-                                &lbl_8033C930, &lbl_8033C938, &lbl_8033C940,
-                                &lbl_8033C948, &lbl_8033C950, &lbl_8033C958,
-                                &lbl_8033C95C, &lbl_8033C95C, &lbl_8033C95C,
-                                &lbl_8033C95C, &lbl_8033C95C, &lbl_8033C95C,
-                                &lbl_8033C95C, &lbl_8033C910, &lbl_8033C918 };
+static jtbl_t jtbl_80401110 = {
+    &GXAttr_8033C8E0, &GXAttr_8033C8EC, &GXAttr_8033C8F8, &GXAttr_8033C904,
+    &GXAttr_8033C920, &GXAttr_8033C928, &GXAttr_8033C930, &GXAttr_8033C938,
+    &GXAttr_8033C940, &GXAttr_8033C948, &GXAttr_8033C950, &GXAttr_8033C958,
+    &GXAttr_8033C95C, &GXAttr_8033C95C, &GXAttr_8033C95C, &GXAttr_8033C95C,
+    &GXAttr_8033C95C, &GXAttr_8033C95C, &GXAttr_8033C95C, &GXAttr_8033C910,
+    &GXAttr_8033C918
+};
 #endif
 
 void __GXSetVAT(void)
@@ -524,59 +526,59 @@ asm void GXSetTexCoordGen2(u32, s32, u32, s32, s32, s32)
 /* 8033C8B8 00339498  39 80 00 00 */	li r12, 0
 /* 8033C8BC 0033949C  94 21 FF F8 */	stwu r1, -8(r1)
 /* 8033C8C0 003394A0  39 40 00 05 */	li r10, 5
-/* 8033C8C4 003394A4  41 81 00 98 */	bgt lbl_8033C95C
+/* 8033C8C4 003394A4  41 81 00 98 */	bgt GXAttr_8033C95C
 /* 8033C8C8 003394A8  3D 20 80 40 */	lis r9, jtbl_80401110@ha
 /* 8033C8CC 003394AC  39 29 11 10 */	addi r9, r9, jtbl_80401110@l
 /* 8033C8D0 003394B0  54 A0 10 3A */	slwi r0, r5, 2
 /* 8033C8D4 003394B4  7C 09 00 2E */	lwzx r0, r9, r0
 /* 8033C8D8 003394B8  7C 09 03 A6 */	mtctr r0
 /* 8033C8DC 003394BC  4E 80 04 20 */	bctr
-entry lbl_8033C8E0
+entry GXAttr_8033C8E0
 /* 8033C8E0 003394C0  39 40 00 00 */	li r10, 0
 /* 8033C8E4 003394C4  39 80 00 01 */	li r12, 1
-/* 8033C8E8 003394C8  48 00 00 74 */	b lbl_8033C95C
-entry lbl_8033C8EC
+/* 8033C8E8 003394C8  48 00 00 74 */	b GXAttr_8033C95C
+entry GXAttr_8033C8EC
 /* 8033C8EC 003394CC  39 40 00 01 */	li r10, 1
 /* 8033C8F0 003394D0  39 80 00 01 */	li r12, 1
-/* 8033C8F4 003394D4  48 00 00 68 */	b lbl_8033C95C
-entry lbl_8033C8F8
+/* 8033C8F4 003394D4  48 00 00 68 */	b GXAttr_8033C95C
+entry GXAttr_8033C8F8
 /* 8033C8F8 003394D8  39 40 00 03 */	li r10, 3
 /* 8033C8FC 003394DC  39 80 00 01 */	li r12, 1
-/* 8033C900 003394E0  48 00 00 5C */	b lbl_8033C95C
-entry lbl_8033C904
+/* 8033C900 003394E0  48 00 00 5C */	b GXAttr_8033C95C
+entry GXAttr_8033C904
 /* 8033C904 003394E4  39 40 00 04 */	li r10, 4
 /* 8033C908 003394E8  39 80 00 01 */	li r12, 1
-/* 8033C90C 003394EC  48 00 00 50 */	b lbl_8033C95C
-entry lbl_8033C910
+/* 8033C90C 003394EC  48 00 00 50 */	b GXAttr_8033C95C
+entry GXAttr_8033C910
 /* 8033C910 003394F0  39 40 00 02 */	li r10, 2
-/* 8033C914 003394F4  48 00 00 48 */	b lbl_8033C95C
-entry lbl_8033C918
+/* 8033C914 003394F4  48 00 00 48 */	b GXAttr_8033C95C
+entry GXAttr_8033C918
 /* 8033C918 003394F8  39 40 00 02 */	li r10, 2
-/* 8033C91C 003394FC  48 00 00 40 */	b lbl_8033C95C
-entry lbl_8033C920
+/* 8033C91C 003394FC  48 00 00 40 */	b GXAttr_8033C95C
+entry GXAttr_8033C920
 /* 8033C920 00339500  39 40 00 05 */	li r10, 5
-/* 8033C924 00339504  48 00 00 38 */	b lbl_8033C95C
-entry lbl_8033C928
+/* 8033C924 00339504  48 00 00 38 */	b GXAttr_8033C95C
+entry GXAttr_8033C928
 /* 8033C928 00339508  39 40 00 06 */	li r10, 6
-/* 8033C92C 0033950C  48 00 00 30 */	b lbl_8033C95C
-entry lbl_8033C930
+/* 8033C92C 0033950C  48 00 00 30 */	b GXAttr_8033C95C
+entry GXAttr_8033C930
 /* 8033C930 00339510  39 40 00 07 */	li r10, 7
-/* 8033C934 00339514  48 00 00 28 */	b lbl_8033C95C
-entry lbl_8033C938
+/* 8033C934 00339514  48 00 00 28 */	b GXAttr_8033C95C
+entry GXAttr_8033C938
 /* 8033C938 00339518  39 40 00 08 */	li r10, 8
-/* 8033C93C 0033951C  48 00 00 20 */	b lbl_8033C95C
-entry lbl_8033C940
+/* 8033C93C 0033951C  48 00 00 20 */	b GXAttr_8033C95C
+entry GXAttr_8033C940
 /* 8033C940 00339520  39 40 00 09 */	li r10, 9
-/* 8033C944 00339524  48 00 00 18 */	b lbl_8033C95C
-entry lbl_8033C948
+/* 8033C944 00339524  48 00 00 18 */	b GXAttr_8033C95C
+entry GXAttr_8033C948
 /* 8033C948 00339528  39 40 00 0A */	li r10, 0xa
-/* 8033C94C 0033952C  48 00 00 10 */	b lbl_8033C95C
-entry lbl_8033C950
+/* 8033C94C 0033952C  48 00 00 10 */	b GXAttr_8033C95C
+entry GXAttr_8033C950
 /* 8033C950 00339530  39 40 00 0B */	li r10, 0xb
-/* 8033C954 00339534  48 00 00 08 */	b lbl_8033C95C
-entry lbl_8033C958
+/* 8033C954 00339534  48 00 00 08 */	b GXAttr_8033C95C
+entry GXAttr_8033C958
 /* 8033C958 00339538  39 40 00 0C */	li r10, 0xc
-entry lbl_8033C95C
+entry GXAttr_8033C95C
 /* 8033C95C 0033953C  2C 04 00 01 */	cmpwi r4, 1
 /* 8033C960 00339540  41 82 00 24 */	beq lbl_8033C984
 /* 8033C964 00339544  40 80 00 10 */	bge lbl_8033C974
@@ -653,7 +655,7 @@ lbl_8033CA14:
 /* 8033CA60 00339640  7C 04 00 2E */	lwzx r0, r4, r0
 /* 8033CA64 00339644  7C 09 03 A6 */	mtctr r0
 /* 8033CA68 00339648  4E 80 04 20 */	bctr
-entry lbl_8033CA6C
+entry GXAttr_8033CA6C
 /* 8033CA6C 0033964C  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 8033CA70 00339650  54 C0 30 32 */	slwi r0, r6, 6
 /* 8033CA74 00339654  38 A4 00 80 */	addi r5, r4, 0x80
@@ -662,7 +664,7 @@ entry lbl_8033CA6C
 /* 8033CA80 00339660  7C 80 03 78 */	or r0, r4, r0
 /* 8033CA84 00339664  90 05 00 00 */	stw r0, 0(r5)
 /* 8033CA88 00339668  48 00 00 D8 */	b lbl_8033CB60
-entry lbl_8033CA8C
+entry GXAttr_8033CA8C
 /* 8033CA8C 0033966C  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 8033CA90 00339670  54 C0 60 26 */	slwi r0, r6, 0xc
 /* 8033CA94 00339674  38 A4 00 80 */	addi r5, r4, 0x80
@@ -671,7 +673,7 @@ entry lbl_8033CA8C
 /* 8033CAA0 00339680  7C 80 03 78 */	or r0, r4, r0
 /* 8033CAA4 00339684  90 05 00 00 */	stw r0, 0(r5)
 /* 8033CAA8 00339688  48 00 00 B8 */	b lbl_8033CB60
-entry lbl_8033CAAC
+entry GXAttr_8033CAAC
 /* 8033CAAC 0033968C  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 8033CAB0 00339690  54 C0 90 1A */	slwi r0, r6, 0x12
 /* 8033CAB4 00339694  38 A4 00 80 */	addi r5, r4, 0x80
@@ -680,7 +682,7 @@ entry lbl_8033CAAC
 /* 8033CAC0 003396A0  7C 80 03 78 */	or r0, r4, r0
 /* 8033CAC4 003396A4  90 05 00 00 */	stw r0, 0(r5)
 /* 8033CAC8 003396A8  48 00 00 98 */	b lbl_8033CB60
-entry lbl_8033CACC
+entry GXAttr_8033CACC
 /* 8033CACC 003396AC  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 8033CAD0 003396B0  54 C0 C0 0E */	slwi r0, r6, 0x18
 /* 8033CAD4 003396B4  38 A4 00 80 */	addi r5, r4, 0x80
@@ -689,14 +691,14 @@ entry lbl_8033CACC
 /* 8033CAE0 003396C0  7C 80 03 78 */	or r0, r4, r0
 /* 8033CAE4 003396C4  90 05 00 00 */	stw r0, 0(r5)
 /* 8033CAE8 003396C8  48 00 00 78 */	b lbl_8033CB60
-entry lbl_8033CAEC
+entry GXAttr_8033CAEC
 /* 8033CAEC 003396CC  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 8033CAF0 003396D0  84 04 00 84 */	lwzu r0, 0x84(r4)
 /* 8033CAF4 003396D4  54 00 00 32 */	rlwinm r0, r0, 0, 0, 0x19
 /* 8033CAF8 003396D8  7C 00 33 78 */	or r0, r0, r6
 /* 8033CAFC 003396DC  90 04 00 00 */	stw r0, 0(r4)
 /* 8033CB00 003396E0  48 00 00 60 */	b lbl_8033CB60
-entry lbl_8033CB04
+entry GXAttr_8033CB04
 /* 8033CB04 003396E4  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 8033CB08 003396E8  54 C0 30 32 */	slwi r0, r6, 6
 /* 8033CB0C 003396EC  38 A4 00 84 */	addi r5, r4, 0x84
@@ -705,7 +707,7 @@ entry lbl_8033CB04
 /* 8033CB18 003396F8  7C 80 03 78 */	or r0, r4, r0
 /* 8033CB1C 003396FC  90 05 00 00 */	stw r0, 0(r5)
 /* 8033CB20 00339700  48 00 00 40 */	b lbl_8033CB60
-entry lbl_8033CB24
+entry GXAttr_8033CB24
 /* 8033CB24 00339704  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 8033CB28 00339708  54 C0 60 26 */	slwi r0, r6, 0xc
 /* 8033CB2C 0033970C  38 A4 00 84 */	addi r5, r4, 0x84

@@ -1,7 +1,7 @@
 #ifndef _grdatfiles_h_
 #define _grdatfiles_h_
 
-#include <melee/gr/stage.h>
+#include "gr/stage.h"
 
 // Appears to be related to stage audio
 typedef struct _UnkBgmStruct {
@@ -82,13 +82,13 @@ typedef struct _UnkArchiveStruct {
     s32 unk8;
 } UnkArchiveStruct;
 
-void func_801C5FC0(struct _HSD_Archive*, void* data, u32 length);
-void func_801C6038(void*, s32, s32);
-static void func_801C6228(struct _UnkStageDat*);
-void func_801C6288(void);
-static struct _UnkArchiveStruct* func_801C62B4(void);
-struct _UnkArchiveStruct* func_801C6324(void);
-struct _UnkArchiveStruct* func_801C6330(s32);
-struct _UnkArchiveStruct* func_801C6478(void* data, s32 length);
+void grDatFiles_801C5FC0(struct _HSD_Archive*, void* data, u32 length);
+void grDatFiles_801C6038(void*, s32, s32);
+static void grDatFiles_801C6228(struct _UnkStageDat*);
+void grDatFiles_801C6288(void);
+static struct _UnkArchiveStruct* grDatFiles_801C62B4(void);
+struct _UnkArchiveStruct* grDatFiles_801C6324(void);
+struct _UnkArchiveStruct* grDatFiles_801C6330(s32);
+struct _UnkArchiveStruct* grDatFiles_801C6478(void* data, s32 length);
 
 #endif

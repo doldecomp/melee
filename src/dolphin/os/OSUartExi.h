@@ -1,7 +1,7 @@
 #ifndef DOLPHIN_OS_OSUARTEXI_H
 #define DOLPHIN_OS_OSUARTEXI_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 s32 ReadUARTN(void);
 void WriteUARTN(void);

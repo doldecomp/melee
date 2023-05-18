@@ -357,7 +357,7 @@ def parse_file(f: typing.TextIO, arch: ArchAsm, options: Options) -> AsmFile:
         line = re.sub(re_whitespace_or_string, re_comment_replacer, line)
         line = line.strip()
 
-        def process_label(label: str, *, glabel: bool) -> None:
+        def process_label(label: str, *, glabel: Optional[bool]) -> None:
             if curr_section == ".rodata":
                 asm_file.new_data_label(label, is_readonly=True, is_bss=False)
             elif curr_section == ".data":
@@ -365,7 +365,7 @@ def parse_file(f: typing.TextIO, arch: ArchAsm, options: Options) -> AsmFile:
             elif curr_section == ".bss":
                 asm_file.new_data_label(label, is_readonly=False, is_bss=True)
             elif curr_section == ".text":
-                if label.startswith("."):
+                if label.startswith(".") or glabel is False:
                     if asm_file.current_function is None:
                         raise DecompFailure(f"Label {label} is not within a function!")
                     asm_file.new_label(label.lstrip("."))
@@ -392,7 +392,7 @@ def parse_file(f: typing.TextIO, arch: ArchAsm, options: Options) -> AsmFile:
 
             label = g.group(1) or g.group(2)
             if ifdef_level == 0:
-                process_label(label, glabel=False)
+                process_label(label, glabel=None)
 
             line = line[len(g.group(0)) :].strip()
 
@@ -531,7 +531,7 @@ def parse_file(f: typing.TextIO, arch: ArchAsm, options: Options) -> AsmFile:
             if directive in ("glabel", "dlabel", "jlabel"):
                 parts = line.split()
                 if len(parts) >= 2:
-                    process_label(parts[1], glabel=True)
+                    process_label(parts[1], glabel=(directive != "jlabel"))
 
             elif curr_section == ".text":
                 meta = InstructionMeta(

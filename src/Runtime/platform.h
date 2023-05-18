@@ -1,5 +1,5 @@
-#ifndef INCLUDE_RUNTIME_PLATFORM_H
-#define INCLUDE_RUNTIME_PLATFORM_H
+#ifndef RUNTIME_PLATFORM_H
+#define RUNTIME_PLATFORM_H
 
 #if defined(__MWERKS__) || defined(__GNUC__)
 #define MWERKS_GNUC
@@ -127,20 +127,20 @@ typedef void (*Event)(void);
 #endif
 #endif
 
+#ifndef ATTRIBUTE_USED
+#if defined(__clang__)
+#define ATTRIBUTE_USED __attribute__((used))
+#else
+#define ATTRIBUTE_USED
+#endif
+#endif
+
 #ifdef PERMUTER
 #define AT_ADDRESS(x) = FIXEDADDR(x)
 #elif defined(__MWERKS__) && !defined(M2CTX)
 #define AT_ADDRESS(x) : (x)
 #else
 #define AT_ADDRESS(x)
-#endif
-
-#ifndef UNK_SIZE_ARRAY
-#if defined(__MWERKS__) && !defined(M2CTX)
-#define UNK_SIZE_ARRAY []
-#else
-#define UNK_SIZE_ARRAY [0]
-#endif
 #endif
 
 #ifdef __PPCGEKKO__
@@ -163,5 +163,10 @@ typedef void (*Event)(void);
 #define F32_MAX 3.4028235E38
 
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
+
+#define RETURN_IF(cond)                                                       \
+    if ((cond)) {                                                             \
+        return;                                                               \
+    }
 
 #endif

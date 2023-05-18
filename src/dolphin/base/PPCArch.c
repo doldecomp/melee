@@ -1,6 +1,5 @@
-#include <dolphin/base/PPCArch.h>
-
 #include <placeholder.h>
+#include <dolphin/base/PPCArch.h>
 
 #ifdef MWERKS_GEKKO
 asm u32 PPCMfmsr(void){ // clang-format off

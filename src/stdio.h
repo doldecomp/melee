@@ -1,7 +1,8 @@
 #ifndef _STDIO_H_
 #define _STDIO_H_
 
-#include <Runtime/platform.h>
+#include <platform.h>
+
 #include <stdarg.h>
 
 typedef struct {

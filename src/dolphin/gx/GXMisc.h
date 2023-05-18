@@ -2,6 +2,7 @@
 #define DOLPHIN_GX_GXMISC_H
 
 #include <dolphin/gx/forward.h>
+
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/os/OSThread.h>
 

@@ -1,14 +1,13 @@
-#include <dolphin/os/OSExi.h>
-
 #include <cstring.h>
+#include <placeholder.h>
+#include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSTime.h>
-#include <placeholder.h>
 
 #define EXI_FREQ_1M 0
 #define REG(chan, idx) (__EXIRegs[(chan)][(idx)])
-#define EXI_0CR(tstart, dma, rw, tlen)                                         \
-    ((((u32) (tstart)) << 0) | (((u32) (dma)) << 1) | (((u32) (rw)) << 2) |    \
+#define EXI_0CR(tstart, dma, rw, tlen)                                        \
+    ((((u32) (tstart)) << 0) | (((u32) (dma)) << 1) | (((u32) (rw)) << 2) |   \
      (((u32) (tlen)) << 4))
 #define CPR_CLK(x) ((x) << 4)
 #define CPR_CS(x) ((1u << (x)) << 7)
@@ -28,7 +27,8 @@ void SetExiInterruptMask(EXIChannel chan, volatile EXIControl* exi)
         {
             __OSMaskInterrupts(OS_INTRMASK_EXI_0_EXI | OS_INTRMASK_EXI_2_EXI);
         } else {
-            __OSUnmaskInterrupts(OS_INTRMASK_EXI_0_EXI | OS_INTRMASK_EXI_2_EXI);
+            __OSUnmaskInterrupts(OS_INTRMASK_EXI_0_EXI |
+                                 OS_INTRMASK_EXI_2_EXI);
         }
         break;
     case EXI_CHAN_1:
@@ -69,7 +69,8 @@ static void CompleteTransfer(EXIChannel chan)
     }
 }
 
-bool EXIImm(EXIChannel chan, void* buf, s32 len, u32 type, EXICallback callback)
+bool EXIImm(EXIChannel chan, void* buf, s32 len, u32 type,
+            EXICallback callback)
 {
     EXIControl* exi = &Ecb[chan];
     bool enabled = OSDisableInterrupts();
@@ -113,11 +114,13 @@ bool EXIImmEx(EXIChannel chan, void* buf, s32 len, u32 mode)
     while (len) {
         s32 xLen = (len < 4) ? len : 4;
 
-        if (!EXIImm(chan, buf, xLen, mode, NULL))
+        if (!EXIImm(chan, buf, xLen, mode, NULL)) {
             return false;
+        }
 
-        if (!EXISync(chan))
+        if (!EXISync(chan)) {
             return false;
+        }
 
         buf = (u8*) buf + xLen;
 
@@ -127,7 +130,8 @@ bool EXIImmEx(EXIChannel chan, void* buf, s32 len, u32 mode)
     return true;
 }
 
-bool EXIDma(EXIChannel chan, void* buf, s32 len, u32 type, EXICallback callback)
+bool EXIDma(EXIChannel chan, void* buf, s32 len, u32 type,
+            EXICallback callback)
 {
     EXIControl* exi = &Ecb[chan];
     bool enabled = OSDisableInterrupts();

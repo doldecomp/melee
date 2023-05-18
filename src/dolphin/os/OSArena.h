@@ -1,7 +1,7 @@
 #ifndef __DOLPHIN_OSARENA_H_
 #define __DOLPHIN_OSARENA_H_
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 void* OSGetArenaHi(void);
 void* OSGetArenaLo(void);

@@ -1,7 +1,7 @@
 #ifndef __DOLPHIN_OSTIME_H_
 #define __DOLPHIN_OSTIME_H_
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 typedef s64 OSTime;
 typedef u32 OSTick;
@@ -35,6 +35,7 @@ extern u32 __OSBusClock AT_ADDRESS(0x800000F8);
 #define OSSecondsToTicks(sec) ((sec) * (OS_TIMER_CLOCK))
 #define OSMillisecondsToTicks(msec) ((msec) * (OS_TIMER_CLOCK / 1000))
 #define OSMicrosecondsToTicks(usec) (((usec) * (OS_TIMER_CLOCK / 125000)) / 8)
-#define OSNanosecondsToTicks(nsec) (((nsec) * (OS_TIMER_CLOCK / 125000)) / 8000)
+#define OSNanosecondsToTicks(nsec)                                            \
+    (((nsec) * (OS_TIMER_CLOCK / 125000)) / 8000)
 
 #endif

@@ -1,36 +1,36 @@
-#include <sysdolphin/baselib/aobj.h>
+#include <baselib/forward.h>
 
-#include <MetroTRK/intrinsics.h>
 #include <placeholder.h>
 #include <stdarg.h>
 #include <string.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/forward.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/robj.h>
-#include <sysdolphin/baselib/tobj.h>
+#include <baselib/aobj.h>
+#include <baselib/debug.h>
+#include <baselib/dobj.h>
+#include <baselib/jobj.h>
+#include <baselib/robj.h>
+#include <baselib/tobj.h>
+#include <MetroTRK/intrinsics.h>
 
 HSD_ObjAllocData aobj_alloc_data;
 
-static char lbl_804D5D08[7] = "aobj.c\0";
-static char lbl_804D5D10[4] = "new\0";
+static char HSD_AObj_804D5D08[7] = "aobj.c\0";
+static char HSD_AObj_804D5D10[4] = "new\0";
 
 #ifdef MWERKS_GEKKO
-static char lbl_804D5D14[4] = "obj\0";
+static char HSD_AObj_804D5D14[4] = "obj\0";
 #endif
 
 char lbl_80405FB8[9] = "object.h\0";
 char lbl_80405FC4[39] = "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF\0";
-extern s32 lbl_8040601C;
-extern s32 lbl_8040603C;
+extern s32 HSD_AObj_8040601C;
+extern s32 HSD_AObj_8040603C;
 extern jtbl_t jtbl_80406058;
 extern jtbl_t jtbl_8040608C;
 
 static HSD_SList* endcallback_list;
 
-static s32 lbl_804D762C;
-static s32 lbl_804D7630;
+static s32 HSD_AObj_804D762C;
+static s32 HSD_AObj_804D7630;
 
 void HSD_AObjInitAllocData(void)
 {
@@ -65,25 +65,27 @@ void HSD_AObjClearFlags(HSD_AObj* aobj, u32 flags)
 
 void HSD_AObjSetFObj(HSD_AObj* aobj, HSD_FObj* fobj)
 {
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
 
-    if (aobj->fobj)
+    if (aobj->fobj) {
         HSD_FObjRemoveAll(aobj->fobj);
+    }
     aobj->fobj = fobj;
 }
 
 void HSD_AObjInitEndCallBack(void)
 {
-    lbl_804D762C = 0;
-    lbl_804D7630 = 0;
+    HSD_AObj_804D762C = 0;
+    HSD_AObj_804D7630 = 0;
 }
 
 void HSD_AObjInvokeCallBacks(void)
 {
     HSD_SList* list;
 
-    if (lbl_804D762C != 0 && lbl_804D7630 == 0) {
+    if (HSD_AObj_804D762C != 0 && HSD_AObj_804D7630 == 0) {
         list = endcallback_list;
         while (list) {
             void (*func)(void) = list->data;
@@ -97,8 +99,9 @@ void HSD_AObjReqAnim(HSD_AObj* aobj, f32 frame)
 {
     u32 flags;
 
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
 
     aobj->curr_frame = frame;
 
@@ -110,8 +113,9 @@ void HSD_AObjReqAnim(HSD_AObj* aobj, f32 frame)
 
 void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, HSD_ObjUpdateFunc func)
 {
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
 
     HSD_FObjStopAnimAll(aobj->fobj, obj, func, aobj->framerate);
     aobj->flags |= AOBJ_NO_ANIM;
@@ -122,8 +126,9 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
 {
     f32 rate = 0;
 
-    if (!aobj || aobj->flags & AOBJ_NO_ANIM)
+    if (!aobj || aobj->flags & AOBJ_NO_ANIM) {
         return;
+    }
 
     if (aobj->flags & AOBJ_FIRST_PLAY) {
         aobj->flags &= 0xF7FFFFFF;
@@ -165,17 +170,18 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
     }
 
     if (aobj->flags & AOBJ_NO_ANIM) {
-        lbl_804D762C += 1;
+        HSD_AObj_804D762C += 1;
     } else {
-        lbl_804D7630 += 1;
+        HSD_AObj_804D7630 += 1;
     }
 }
 
 float fmod(float a, float b)
 {
     long long quotient;
-    if (__fabs(b) > __fabs(a))
+    if (__fabs(b) > __fabs(a)) {
         return a;
+    }
     quotient = a / b;
     return a - b * quotient;
 }
@@ -233,18 +239,21 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
 
 void HSD_AObjRemove(HSD_AObj* aobj)
 {
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
 
     if (aobj) {
-        if (aobj->fobj)
+        if (aobj->fobj) {
             HSD_FObjRemoveAll(aobj->fobj);
+        }
         aobj->fobj = NULL;
     }
 
     if (aobj) {
-        if (aobj->hsd_obj != NULL)
+        if (aobj->hsd_obj != NULL) {
             HSD_JObjUnref((HSD_JObj*) aobj->hsd_obj);
+        }
         aobj->hsd_obj = NULL;
     }
     HSD_AObjFree(aobj);
@@ -254,7 +263,7 @@ HSD_AObj* HSD_AObjAlloc(void)
 {
     HSD_AObj* aobj = (HSD_AObj*) HSD_ObjAlloc(&aobj_alloc_data);
     if (aobj == NULL) {
-        __assert(lbl_804D5D08, 489, lbl_804D5D10);
+        __assert(HSD_AObj_804D5D08, 489, HSD_AObj_804D5D10);
     }
     memset(aobj, 0, sizeof(HSD_AObj));
     aobj->flags = AOBJ_NO_ANIM;
@@ -264,8 +273,9 @@ HSD_AObj* HSD_AObjAlloc(void)
 
 void HSD_AObjFree(HSD_AObj* aobj)
 {
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
 
     HSD_ObjFree(&aobj_alloc_data, (HSD_ObjAllocLink*) aobj);
 }
@@ -343,8 +353,9 @@ void RObjForeachAnim(HSD_RObj* robj, HSD_TypeMask mask, Event func,
 void PObjForeachAnim(HSD_PObj* pobj, HSD_TypeMask mask, Event func,
                      AObj_Arg_Type arg_type, callbackArg* arg)
 {
-    if (pobj == NULL)
+    if (pobj == NULL) {
         return;
+    }
 
     if ((pobj->flags & 0x3000) == 0x1000 && pobj->u.x14_unk != NULL &&
         pobj->u.x14_unk->aobj != NULL)
@@ -357,8 +368,9 @@ void PObjForeachAnim(HSD_PObj* pobj, HSD_TypeMask mask, Event func,
 void MObjForeachAnim(HSD_MObj* mobj, HSD_TypeMask mask, Event func,
                      AObj_Arg_Type arg_type, callbackArg* arg)
 {
-    if (mobj == NULL)
+    if (mobj == NULL) {
         return;
+    }
 
     if (mask & MOBJ_MASK && mobj->aobj != NULL) {
         callbackForeachFunc(mobj->aobj, mobj, MOBJ_TYPE, func, arg_type, arg);
@@ -402,9 +414,9 @@ asm void JObjForeachAnim(HSD_JObj* jobj, HSD_TypeMask mask, void (*func)(),
 /* 80364940 00361520  3B 86 00 00 */	addi r28, r6, 0
 /* 80364944 00361524  3B A7 00 00 */	addi r29, r7, 0
 /* 80364948 00361528  40 82 00 14 */	bne lbl_8036495C
-/* 8036494C 0036152C  38 6D A6 68 */	addi r3, r13, lbl_804D5D08
+/* 8036494C 0036152C  38 6D A6 68 */	addi r3, r13, HSD_AObj_804D5D08
 /* 80364950 00361530  38 80 02 CB */	li r4, 0x2cb
-/* 80364954 00361534  38 AD A6 74 */	addi r5, r13, lbl_804D5D14
+/* 80364954 00361534  38 AD A6 74 */	addi r5, r13, HSD_AObj_804D5D14
 /* 80364958 00361538  48 02 38 C9 */	bl __assert
 lbl_8036495C:
 /* 8036495C 0036153C  57 5F 06 B5 */	rlwinm. r31, r26, 0, 0x1a, 0x1a
@@ -524,9 +536,9 @@ lbl_80364AEC:
 /* 80364AEC 003616CC  28 19 00 00 */	cmplwi r25, 0
 /* 80364AF0 003616D0  3B 19 00 00 */	addi r24, r25, 0
 /* 80364AF4 003616D4  40 82 00 14 */	bne lbl_80364B08
-/* 80364AF8 003616D8  38 6D A6 68 */	addi r3, r13, lbl_804D5D08
+/* 80364AF8 003616D8  38 6D A6 68 */	addi r3, r13, HSD_AObj_804D5D08
 /* 80364AFC 003616DC  38 80 02 CB */	li r4, 0x2cb
-/* 80364B00 003616E0  38 AD A6 74 */	addi r5, r13, lbl_804D5D14
+/* 80364B00 003616E0  38 AD A6 74 */	addi r5, r13, HSD_AObj_804D5D14
 /* 80364B04 003616E4  48 02 37 1D */	bl __assert
 lbl_80364B08:
 /* 80364B08 003616E8  2C 1F 00 00 */	cmpwi r31, 0
@@ -706,9 +718,9 @@ lbl_80364C3C:
 /* 80364CF0 003618D0  90 01 00 7C */	stw r0, 0x7c(r1)
 /* 80364CF4 003618D4  48 00 00 18 */	b lbl_80364D0C
 lbl_80364CF8:
-/* 80364CF8 003618D8  3C 60 80 40 */	lis r3, lbl_8040601C@ha
-/* 80364CFC 003618DC  38 A3 60 1C */	addi r5, r3, lbl_8040601C@l
-/* 80364D00 003618E0  38 6D A6 68 */	addi r3, r13, lbl_804D5D08
+/* 80364CF8 003618D8  3C 60 80 40 */	lis r3, HSD_AObj_8040601C@ha
+/* 80364CFC 003618DC  38 A3 60 1C */	addi r5, r3, HSD_AObj_8040601C@l
+/* 80364D00 003618E0  38 6D A6 68 */	addi r3, r13, HSD_AObj_804D5D08
 /* 80364D04 003618E4  38 80 03 3A */	li r4, 0x33a
 /* 80364D08 003618E8  48 02 35 71 */	bl HSD_Panic
 lbl_80364D0C:
@@ -722,9 +734,9 @@ lbl_80364D0C:
 /* 80364D28 00361908  4E 80 04 20 */	bctr
 /* 80364D2C 0036190C  28 1B 00 00 */	cmplwi r27, 0
 /* 80364D30 00361910  40 82 00 14 */	bne lbl_80364D44
-/* 80364D34 00361914  38 6D A6 68 */	addi r3, r13, lbl_804D5D08
+/* 80364D34 00361914  38 6D A6 68 */	addi r3, r13, HSD_AObj_804D5D08
 /* 80364D38 00361918  38 80 02 CB */	li r4, 0x2cb
-/* 80364D3C 0036191C  38 AD A6 74 */	addi r5, r13, lbl_804D5D14
+/* 80364D3C 0036191C  38 AD A6 74 */	addi r5, r13, HSD_AObj_804D5D14
 /* 80364D40 00361920  48 02 34 E1 */	bl __assert
 lbl_80364D44:
 /* 80364D44 00361924  57 A0 06 B5 */	rlwinm. r0, r29, 0, 0x1a, 0x1a
@@ -1128,9 +1140,9 @@ lbl_803652A0:
 /* 803652DC 00361EBC  4B FF F2 FD */	bl callbackForeachFunc
 /* 803652E0 00361EC0  48 00 00 18 */	b lbl_803652F8
 lbl_803652E4:
-/* 803652E4 00361EC4  3C 60 80 40 */	lis r3, lbl_8040603C@ha
-/* 803652E8 00361EC8  38 A3 60 3C */	addi r5, r3, lbl_8040603C@l
-/* 803652EC 00361ECC  38 6D A6 68 */	addi r3, r13, lbl_804D5D08
+/* 803652E4 00361EC4  3C 60 80 40 */	lis r3, HSD_AObj_8040603C@ha
+/* 803652E8 00361EC8  38 A3 60 3C */	addi r5, r3, HSD_AObj_8040603C@l
+/* 803652EC 00361ECC  38 6D A6 68 */	addi r3, r13, HSD_AObj_804D5D08
 /* 803652F0 00361ED0  38 80 03 5E */	li r4, 0x35e
 /* 803652F4 00361ED4  48 02 2F 85 */	bl HSD_Panic
 lbl_803652F8:
@@ -1154,29 +1166,33 @@ void HSD_ForeachAnim(void* obj, HSD_Type type, HSD_TypeMask mask, void* func,
 
 void HSD_AObjSetRate(HSD_AObj* aobj, f32 rate)
 {
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
     aobj->framerate = rate;
 }
 
 void HSD_AObjSetRewindFrame(HSD_AObj* aobj, f32 frame)
 {
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
     aobj->rewind_frame = frame;
 }
 
 void HSD_AObjSetEndFrame(HSD_AObj* aobj, f32 frame)
 {
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
     aobj->end_frame = frame;
 }
 
 void HSD_AObjSetCurrentFrame(HSD_AObj* aobj, f32 frame)
 {
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
 
     if (!(aobj->flags & AOBJ_NO_ANIM) && aobj) {
         aobj->curr_frame = frame;

@@ -1,15 +1,16 @@
 #ifndef __MATH_H__
 #define __MATH_H__
 
+#include <platform.h>
+
 #include <MetroTRK/intrinsics.h>
-#include <Runtime/platform.h>
 
 #define M_PI 3.14159265358979323846
 #define M_PI_2 (M_PI / 2)
 #define M_PI_3 (M_PI / 3)
 
-#define DEG_TO_RAD ((float) (M_PI / 180))
-#define RAD_TO_DEG ((float) (180 / M_PI))
+static float const deg_to_rad ATTRIBUTE_USED = M_PI / 180;
+static float const rad_to_deg ATTRIBUTE_USED = 180 / M_PI;
 
 #ifdef __MWERKS__
 #pragma push
@@ -71,19 +72,24 @@ static inline s32 __fpclassifyd(double x)
 {
     switch (__HI(x) & 0x7ff00000) {
     case 0x7ff00000:
-        return ((__HI(x) & 0x000fffff) || (__LO(x) & 0xffffffff)) ? FP_NAN
-                                                                  : FP_INFINITE;
+        return ((__HI(x) & 0x000fffff) || (__LO(x) & 0xffffffff))
+                   ? FP_NAN
+                   : FP_INFINITE;
     case 0:
-        return ((__HI(x) & 0x000fffff) || (__LO(x) & 0xffffffff)) ? FP_SUBNORMAL
-                                                                  : FP_ZERO;
+        return ((__HI(x) & 0x000fffff) || (__LO(x) & 0xffffffff))
+                   ? FP_SUBNORMAL
+                   : FP_ZERO;
     default:
         return FP_NORMAL;
     }
 }
 
-#define fpclassify(x)                                                          \
-    ((sizeof(x) == sizeof(float)) ? __fpclassifyf((float) (x))                 \
+#define fpclassify(x)                                                         \
+    ((sizeof(x) == sizeof(float)) ? __fpclassifyf((float) (x))                \
                                   : __fpclassifyd((double) (x)))
+
+/// @todo Is #fabs_inline fake? See #ftCo_AttackS3_CheckInput.
+#define ABS(x) ((x) < 0 ? -(x) : (x))
 
 static inline f32 fabs_inline(f32 x)
 {

@@ -1,14 +1,14 @@
-#include <sysdolphin/baselib/jobj.h>
-
 #include <dolphin/mtx/mtxvec.h>
+#include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/displayfunc.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/robj.h>
-#include <sysdolphin/baselib/spline.h>
+#include <baselib/class.h>
+#include <baselib/displayfunc.h>
+#include <baselib/dobj.h>
+#include <baselib/jobj.h>
+#include <baselib/mtx.h>
+#include <baselib/robj.h>
+#include <baselib/spline.h>
 
 void JObjInfoInit(void);
 HSD_JObjInfo hsdJObj = { JObjInfoInit };
@@ -122,8 +122,9 @@ void HSD_JObjWalkTree(HSD_JObj* jobj, HSD_JObjWalkTreeCallback cb,
 inline bool has_scl(HSD_JObj* jobj)
 {
     bool result = false;
-    if (jobj != NULL && jobj->scl != NULL)
+    if (jobj != NULL && jobj->scl != NULL) {
         result = true;
+    }
     return result;
 }
 
@@ -162,8 +163,8 @@ void HSD_JObjMakeMatrix(HSD_JObj* jobj)
         } else {
             scl = NULL;
         }
-        HSD_MtxSRTQuat(jobj->mtx, &jobj->scale, &jobj->rotate, &jobj->translate,
-                       scl);
+        HSD_MtxSRTQuat(jobj->mtx, &jobj->scale, &jobj->rotate,
+                       &jobj->translate, scl);
     } else {
         if (has_scl(jobj->parent)) {
             scl = jobj->parent->scl;
@@ -1013,7 +1014,7 @@ static char unused2[] = "jobj_root == NULL";
 static char jobj_child[] = "jobj->child";
 
 /// @todo Remove once no more inline asm needs this "object.h" literal
-char lbl_804068E4[] = "object.h";
+char HSD_JObj_804068E4[] = "object.h";
 
 #ifdef MUST_MATCH
 
@@ -1024,7 +1025,7 @@ static inline void ref_INC_alt(void* o)
     if (o != NULL) {
         HSD_OBJ(o)->ref_count++;
         if (!(HSD_OBJ(o)->ref_count != (u16) -1)) {
-            __assert(lbl_804068E4, 0x5D,
+            __assert(HSD_JObj_804068E4, 0x5D,
                      "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF");
         }
     }
@@ -1039,8 +1040,9 @@ void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
     u8 _[4];
 #endif
 
-    if (jobj == NULL || joint == NULL)
+    if (jobj == NULL || joint == NULL) {
         return;
+    }
 
     HSD_RObjResolveRefsAll(jobj->robj, joint->robjdesc);
     if (!!(jobj->flags & JOBJ_INSTANCE)) {
@@ -1073,14 +1075,14 @@ void HSD_JObjResolveRefsAll(HSD_JObj* jobj, HSD_Joint* joint)
     }
 }
 
-char lbl_80406918[] = "HSD_OBJ(o)->ref_count_individual != 0";
+char HSD_JObj_80406918[] = "HSD_OBJ(o)->ref_count_individual != 0";
 
 static inline void iref_INC(void* o)
 {
     HSD_OBJ(o)->ref_count_individual += 1;
     HSD_OBJ(o)->ref_count_individual != 0
         ? (void) 0
-        : __assert(lbl_804068E4, 0x9E, lbl_80406918);
+        : __assert(HSD_JObj_804068E4, 0x9E, HSD_JObj_80406918);
 }
 
 static inline bool iref_none(void* o)
@@ -1094,8 +1096,9 @@ static inline bool iref_none(void* o)
 static inline bool iref_DEC_alt(void* o)
 {
     bool ret = iref_none(o);
-    if (ret)
+    if (ret) {
         return ret;
+    }
     HSD_OBJ(o)->ref_count_individual -= 1;
     return HSD_OBJ(o)->ref_count_individual == 0;
 }
@@ -1195,10 +1198,10 @@ lbl_803715D0:
 lbl_803715DC:
 /* 803715DC 0036E1BC  3C 60 00 01 */	lis r3, 0x0000FFFF@ha
 /* 803715E0 0036E1C0  38 03 FF FF */	addi r0, r3, 0x0000FFFF@l
-/* 803715E4 0036E1C4  3C 80 80 40 */	lis r4, lbl_804068E4@ha
-/* 803715E8 0036E1C8  3C 60 80 40 */	lis r3, lbl_80406918@ha
-/* 803715EC 0036E1CC  3B 64 68 E4 */	addi r27, r4, lbl_804068E4@l
-/* 803715F0 0036E1D0  3B 83 69 18 */	addi r28, r3, lbl_80406918@l
+/* 803715E4 0036E1C4  3C 80 80 40 */	lis r4, HSD_JObj_804068E4@ha
+/* 803715E8 0036E1C8  3C 60 80 40 */	lis r3, HSD_JObj_80406918@ha
+/* 803715EC 0036E1CC  3B 64 68 E4 */	addi r27, r4, HSD_JObj_804068E4@l
+/* 803715F0 0036E1D0  3B 83 69 18 */	addi r28, r3, HSD_JObj_80406918@l
 /* 803715F4 0036E1D4  54 1F 04 3E */	clrlwi r31, r0, 0x10
 /* 803715F8 0036E1D8  48 00 01 3C */	b lbl_80371734
 lbl_803715FC:
@@ -1348,8 +1351,9 @@ static void UpdateParentTrspBits(HSD_JObj* jobj, HSD_JObj* child)
 {
     u32 flags = (child->flags | (child->flags << 10)) & JOBJ_ROOT_MASK;
     while (jobj != NULL) {
-        if (!(flags & ~jobj->flags))
+        if (!(flags & ~jobj->flags)) {
             break;
+        }
         jobj->flags |= flags;
         jobj = jobj->parent;
     }
@@ -1631,7 +1635,7 @@ HSD_JObj* jobj_get_effector_checked(HSD_JObj* eff)
     }
 }
 
-extern const Vec3 lbl_803B94C4;
+extern const Vec3 HSD_JObj_803B94C4;
 
 void resolveIKJoint1(HSD_JObj* jobj)
 {
@@ -1679,7 +1683,7 @@ void resolveIKJoint1(HSD_JObj* jobj)
     var_r30 = 0;
     var_f29 = 0.0F;
     var_r31 = jobj_get_joint2(jobj->child);
-    spB0 = lbl_803B94C4;
+    spB0 = HSD_JObj_803B94C4;
     temp_r4 = jobj->scl;
     var_f5 = 1e-8F;
     if (temp_r4 != NULL) {
@@ -1795,8 +1799,8 @@ void resolveIKJoint1(HSD_JObj* jobj)
     }
 }
 
-const Vec3 lbl_803B94C4 = { 0.0F, 0.0F, 0.0F };
-const Vec3 lbl_803B94D0 = { 1.0F, 1.0F, 1.0F };
+const Vec3 HSD_JObj_803B94C4 = { 0.0F, 0.0F, 0.0F };
+const Vec3 HSD_JObj_803B94D0 = { 1.0F, 1.0F, 1.0F };
 
 void resolveIKJoint2(HSD_JObj* jobj)
 {
@@ -1828,7 +1832,7 @@ void resolveIKJoint2(HSD_JObj* jobj)
     HSD_RObj* robj;
 
     var_f31 = 1.0F;
-    spA0 = lbl_803B94D0;
+    spA0 = HSD_JObj_803B94D0;
     var_r29 = jobj_get_effector_checked(jobj->child);
     if (var_r29 == NULL || jobj->parent == NULL) {
         return;
@@ -1960,9 +1964,9 @@ void HSD_JObjSetupMatrixSub(HSD_JObj* jobj)
                     sp10.x = parent->mtx[0][0];
                     sp10.y = parent->mtx[1][0];
                     sp10.z = parent->mtx[2][0];
-                    PSVECScale(
-                        &sp10, &sp10,
-                        sqrtf(1.0F / (1e-10F + PSVECDotProduct(&sp10, &sp10))));
+                    PSVECScale(&sp10, &sp10,
+                               sqrtf(1.0F / (1e-10F +
+                                             PSVECDotProduct(&sp10, &sp10))));
                     if (parent->scl != NULL) {
                         x_scale = parent->scl->x;
                     }

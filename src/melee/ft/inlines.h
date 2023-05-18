@@ -1,14 +1,20 @@
 #ifndef MELEE_FT_INLINES_H
 #define MELEE_FT_INLINES_H
 
+#include <platform.h>
+#include "ftCommon/forward.h"
+
 #include "ft/ftanim.h"
 #include "ft/types.h"
 #include "gr/stage.h"
-#include "it/item2.h"
+#include "it/it_26B1.h"
 #include "lb/lbcollision.h"
 #include "lb/lbrefract.h"
 #include "pl/player.h"
 
+#include <common_structs.h>
+#include <math.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/archive.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
@@ -18,68 +24,64 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
-#include <common_structs.h>
-#include <dolphin/mtx/types.h>
-#include <math.h>
-#include <platform.h>
 
-#define PUSH_ATTRS(fp, attributeName)                                          \
-    do {                                                                       \
-        void* backup = (fp)->x2D8_specialAttributes2;                          \
-        attributeName* src = (attributeName*) (fp)->x10C_ftData->ext_attr;     \
-        void** attr = &(fp)->x2D4_specialAttributes;                           \
-        *(attributeName*) (fp)->x2D8_specialAttributes2 = *src;                \
-        *attr = backup;                                                        \
+#define PUSH_ATTRS(fp, attributeName)                                         \
+    do {                                                                      \
+        void* backup = (fp)->x2D8_specialAttributes2;                         \
+        attributeName* src = (attributeName*) (fp)->ft_data->ext_attr;        \
+        void** da = &(fp)->dat_attrs;                                         \
+        *(attributeName*) (fp)->x2D8_specialAttributes2 = *src;               \
+        *da = backup;                                                         \
     } while (0)
 
-#define COPY_ATTRS(gobj, attributeName)                                        \
-    Fighter* fp = GET_FIGHTER(gobj);                                           \
-    attributeName* sA2 = (attributeName*) fp->x2D4_specialAttributes;          \
-    attributeName* ext_attr = (attributeName*) fp->x10C_ftData->ext_attr;      \
+#define COPY_ATTRS(gobj, attributeName)                                       \
+    Fighter* fp = GET_FIGHTER(gobj);                                          \
+    attributeName* sA2 = (attributeName*) fp->dat_attrs;                      \
+    attributeName* ext_attr = (attributeName*) fp->ft_data->ext_attr;         \
     *sA2 = *ext_attr;
 
-#define SCALE_HEIGHT_ATTRS(num_attrs)                                          \
-    {                                                                          \
-        int i;                                                                 \
-        for (i = 0; i < num_attrs; i++) {                                      \
-            sA2->height_attributes[i] *= fp->x34_scale.y;                      \
-        }                                                                      \
+#define SCALE_HEIGHT_ATTRS(num_attrs)                                         \
+    {                                                                         \
+        int i;                                                                \
+        for (i = 0; i < num_attrs; i++) {                                     \
+            sA2->height_attributes[i] *= fp->x34_scale.y;                     \
+        }                                                                     \
     }
 
 #define GET_FIGHTER(gobj) ((Fighter*) HSD_GObjGetUserData(gobj))
 
 /// @deprecated Use #GET_FIGHTER instead.
-static inline Fighter* getFighter(HSD_GObj* fighter_gobj)
+static inline Fighter* getFighter(HSD_GObj* gobj)
 {
-    return fighter_gobj->user_data;
+    return gobj->user_data;
 }
 
 /// @deprecated use #GET_FIGHTER instead.
-static inline Fighter* getFighterPlus(HSD_GObj* fighter_gobj)
+static inline Fighter* getFighterPlus(HSD_GObj* gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
     return fp;
 }
 
 static inline void* getFtSpecialAttrs(Fighter* fp)
 {
-    void* fighter_attr = fp->x2D4_specialAttributes;
+    void* fighter_attr = fp->dat_attrs;
     return fighter_attr;
 }
 
 static inline void* getFtSpecialAttrsD(Fighter* fp) // Direct
 {
-    return fp->x2D4_specialAttributes;
+    return fp->dat_attrs;
 }
 
 static inline s32 ftGetKind(Fighter* fp)
 {
-    return fp->x4_fighterKind;
+    return fp->kind;
 }
 
 static inline s32 ftGetAction(Fighter* fp)
 {
-    return fp->action_id;
+    return fp->motion_id;
 }
 
 static inline void* getFtSpecialAttrs2CC(Fighter* fp)
@@ -88,51 +90,51 @@ static inline void* getFtSpecialAttrs2CC(Fighter* fp)
     return fighter_attr;
 }
 
-static inline attr* getFtAttrs(Fighter* fp)
+static inline ftCo_DatAttrs* getFtAttrs(Fighter* fp)
 {
-    return &fp->x110_attr;
+    return &fp->co_attrs;
 }
 
 static inline CollData* getFtColl(Fighter* fp)
 {
-    return &fp->x6F0_collData;
+    return &fp->coll_data;
 }
 
 static inline bool ftGetGroundAir(Fighter* fp)
 {
-    return fp->xE0_ground_or_air;
+    return fp->ground_or_air;
 }
 
 static inline f32 stickGetDir(f32 x1, f32 x2)
 {
     if (x1 < x2) {
         return -x1;
-    } else
+    } else {
         return x1;
+    }
 }
 /// used for all fighters except Kirby and Purin
-static inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj,
-                                        bool catchItemFlag, bool bool2,
-                                        bool bool3)
+static inline void Fighter_OnItemPickup(HSD_GObj* gobj, bool catchItemFlag,
+                                        bool bool2, bool bool3)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    if (!func_8026B2B4(fp->x1974_heldItem)) {
-        switch (func_8026B320(fp->x1974_heldItem)) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (!it_8026B2B4(fp->item_gobj)) {
+        switch (it_8026B320(fp->item_gobj)) {
         case 1:
-            func_80070FB4(fighter_gobj, bool2, 1);
+            ftAnim_80070FB4(gobj, bool2, 1);
             break;
         case 2:
-            func_80070FB4(fighter_gobj, bool2, 0);
+            ftAnim_80070FB4(gobj, bool2, 0);
             break;
         case 3:
-            func_80070FB4(fighter_gobj, bool2, 2);
+            ftAnim_80070FB4(gobj, bool2, 2);
             break;
         case 4:
-            func_80070FB4(fighter_gobj, bool2, 3);
+            ftAnim_80070FB4(gobj, bool2, 3);
             break;
         }
         if (catchItemFlag) {
-            func_80070C48(fighter_gobj, bool3);
+            ftAnim_80070C48(gobj, bool3);
         }
     }
 }
@@ -140,59 +142,78 @@ static inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj,
 static inline void Fighter_OnItemInvisible(HSD_GObj* gobj, bool bool)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!func_8026B2B4(fp->x1974_heldItem)) {
-        func_80070CC4(gobj, bool);
+    if (!it_8026B2B4(fp->item_gobj)) {
+        ftAnim_80070CC4(gobj, bool);
     }
 }
 
 static inline void Fighter_OnItemVisible(HSD_GObj* gobj, bool bool)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!func_8026B2B4(fp->x1974_heldItem)) {
-        func_80070C48(gobj, bool);
+    if (!it_8026B2B4(fp->item_gobj)) {
+        ftAnim_80070C48(gobj, bool);
     }
 }
 
 static inline void Fighter_OnItemDrop(HSD_GObj* gobj, bool dropItemFlag,
                                       bool bool2, bool bool3)
 {
-    func_80070FB4(gobj, bool2, -1);
+    ftAnim_80070FB4(gobj, bool2, -1);
     if (dropItemFlag) {
-        func_80070CC4(gobj, bool3);
+        ftAnim_80070CC4(gobj, bool3);
     }
 }
 
 static inline void Fighter_OnKnockbackEnter(HSD_GObj* gobj, s32 arg1)
 {
-    func_800704F0(gobj, arg1, 3.0f);
-    func_800704F0(gobj, 0, 3.0f);
+    ftAnim_800704F0(gobj, arg1, 3.0f);
+    ftAnim_800704F0(gobj, 0, 3.0f);
 }
 
 static inline void Fighter_OnKnockbackExit(HSD_GObj* gobj, s32 arg1)
 {
-    func_800704F0(gobj, arg1, 0.0f);
-    func_800704F0(gobj, 0, 0.0f);
+    ftAnim_800704F0(gobj, arg1, 0.0f);
+    ftAnim_800704F0(gobj, 0, 0.0f);
 }
 
-static inline void Fighter_UnsetCmdVar0(HSD_GObj* fighter_gobj)
+static inline void Fighter_UnsetCmdVar0(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    fp->x2200_ftcmd_var0 = 0;
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[0] = 0;
 }
 
 static inline CollData* Fighter_GetCollData(Fighter* fp)
 {
-    return &fp->x6F0_collData;
+    return &fp->coll_data;
 }
 
-// Ternary macro for fcmpo-based facing direction check
+/// @todo This and #ftCheckThrowB3 are probably one macro or something.
+static inline bool ftCheckThrowB0(Fighter* fp)
+{
+    if (fp->throw_flags.b0) {
+        fp->throw_flags.b0 = false;
+        return true;
+    } else {
+        return false;
+    }
+}
 
-#define CLIFFCATCH_O(fp)                                                       \
+static inline bool ftCheckThrowB3(Fighter* fp)
+{
+    if (fp->throw_flags.b3) {
+        fp->throw_flags.b3 = false;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/// Ternary macro for fcmpo-based facing direction check
+#define CLIFFCATCH_O(fp)                                                      \
     ((fp)->facing_dir < 0.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
 
-// Ternary macro for fcmpu-based facing direction check
-
-#define CLIFFCATCH_U(fp)                                                       \
+/// Ternary macro for fcmpu-based facing direction check
+#define CLIFFCATCH_U(fp)                                                      \
     ((fp)->facing_dir != 1.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
 
 #endif

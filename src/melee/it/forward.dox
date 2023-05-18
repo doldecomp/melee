@@ -29,7 +29,7 @@
 
 /** @enum Item_UnkKinds
  * @todo Doxygen can't seem to find enums by name...
- * These are used in #func_8026C258 to determine whether Samus' Homing Missile
+ * These are used in #it_8026C258 to determine whether Samus' Homing Missile
  * should lock on its target.
  */
 

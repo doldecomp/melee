@@ -6,8 +6,8 @@
 #pragma ANSI_strict off
 #endif
 
-static unsigned int lbl_804D5B58 = 0x80808080L; // = K1
-static unsigned int lbl_804D5B5C = 0xfefefeffL; // = K2
+static unsigned int MSL_String_804D5B58 = 0x80808080L; // = K1
+static unsigned int MSL_String_804D5B5C = 0xfefefeffL; // = K2
 
 typedef struct {
     const char* NextChar;
@@ -136,8 +136,8 @@ int strcmp(const char* str1, const char* str2)
 
     /*	Strings are word aligned */
 
-    k1 = lbl_804D5B58;
-    k2 = lbl_804D5B5C;
+    k1 = MSL_String_804D5B58;
+    k2 = MSL_String_804D5B5C;
 
     /*	Load a word from each string. */
     l1 = *(unsigned int*) left;
@@ -208,7 +208,8 @@ char* strncpy(char* ATTRIBUTE_RESTRICT dst, const char* ATTRIBUTE_RESTRICT src,
     return (dst);
 }
 
-char*(strcpy) (char* ATTRIBUTE_RESTRICT dst, const char* ATTRIBUTE_RESTRICT src)
+char*(strcpy) (char* ATTRIBUTE_RESTRICT dst,
+               const char* ATTRIBUTE_RESTRICT src)
 {
     /*
      *	strcpy routine designed to minimized the number of
@@ -247,8 +248,8 @@ char*(strcpy) (char* ATTRIBUTE_RESTRICT dst, const char* ATTRIBUTE_RESTRICT src)
     }
     /*	Source and destination are word aligned */
 
-    k1 = lbl_804D5B58;
-    k2 = lbl_804D5B5C;
+    k1 = MSL_String_804D5B58;
+    k2 = MSL_String_804D5B5C;
 
     /*	Load a word and test for a null byte. */
     w = *((unsigned int*) (fromb));

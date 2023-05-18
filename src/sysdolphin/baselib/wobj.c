@@ -1,10 +1,10 @@
-#include <sysdolphin/baselib/wobj.h>
-
 #include <dolphin/mtx/mtxvec.h>
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/robj.h>
-#include <sysdolphin/baselib/spline.h>
+#include <dolphin/mtx/types.h>
+#include <baselib/class.h>
+#include <baselib/jobj.h>
+#include <baselib/robj.h>
+#include <baselib/spline.h>
+#include <baselib/wobj.h>
 
 static void WObjInfoInit(void);
 
@@ -229,8 +229,8 @@ void HSD_WObjGetPosition(HSD_WObj* wobj, Vec3* vec)
 
 HSD_WObj* HSD_WObjAlloc(void)
 {
-    HSD_WObj* wobj = (HSD_WObj*) hsdNew(default_class ? default_class
-                                                      : &hsdWObj.parent.parent);
+    HSD_WObj* wobj = (HSD_WObj*) hsdNew(
+        default_class ? default_class : &hsdWObj.parent.parent);
     HSD_ASSERT(591, wobj);
     return wobj;
 }

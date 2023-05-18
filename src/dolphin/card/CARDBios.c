@@ -1,6 +1,5 @@
-#include <dolphin/card/CARDBios.h>
-
 #include <dolphin/card.h>
+#include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDMount.h>
 #include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSExi.h>

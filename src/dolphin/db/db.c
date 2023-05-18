@@ -1,7 +1,7 @@
+#include <placeholder.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/db/db.h>
 #include <dolphin/os/os.h>
-#include <placeholder.h>
 
 static DBInterface* __DBInterface;
 static int DBVerbose;
