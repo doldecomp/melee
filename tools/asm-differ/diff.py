@@ -3,21 +3,8 @@
 import argparse
 import enum
 import sys
-from typing import (
-    Any,
-    Callable,
-    Dict,
-    Iterator,
-    List,
-    Match,
-    NoReturn,
-    Optional,
-    Pattern,
-    Set,
-    Tuple,
-    Type,
-    Union,
-)
+from typing import (Any, Callable, Dict, Iterator, List, Match, NoReturn,
+                    Optional, Pattern, Set, Tuple, Type, Union)
 
 
 def fail(msg: str) -> NoReturn:
@@ -369,8 +356,6 @@ if __name__ == "__main__":
 
 import abc
 import ast
-from collections import Counter, defaultdict
-from dataclasses import asdict, dataclass, field, replace
 import difflib
 import html
 import itertools
@@ -384,7 +369,8 @@ import subprocess
 import threading
 import time
 import traceback
-
+from collections import Counter, defaultdict
+from dataclasses import asdict, dataclass, field, replace
 
 MISSING_PREREQUISITES = (
     "Missing prerequisite python module {}. "
@@ -392,8 +378,8 @@ MISSING_PREREQUISITES = (
 )
 
 try:
-    from colorama import Back, Fore, Style
     import watchdog
+    from colorama import Back, Fore, Style
 except ModuleNotFoundError as e:
     fail(MISSING_PREREQUISITES.format(e.name))
 

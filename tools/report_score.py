@@ -1,28 +1,50 @@
 #!/usr/bin/env python3
 import json
-import os
 import subprocess
+from pathlib import Path
 from typing import List, Tuple
+
+from elftools.elf.elffile import ELFFile
+from elftools.elf.sections import SymbolTableSection
+
+
+def get_functions_info(file_path):
+    with open(file_path, "rb") as f:
+        elf_file = ELFFile(f)
+        symbol_table = elf_file.get_section_by_name(".symtab")
+
+        functions = []
+        if isinstance(symbol_table, SymbolTableSection):
+            for symbol in symbol_table.iter_symbols():
+                if symbol["st_info"]["type"] == "STT_FUNC":
+                    functions.append(
+                        {
+                            "name": symbol.name,
+                        }
+                    )
+
+    return functions
 
 
 def main(obj_path: str) -> None:
-    build_path = "./build/ssbm.us.1.2/"
-    obj_name = os.path.relpath(obj_path, start=build_path).replace(".o", "")
+    expected_root = Path("./expected/build/ssbm.us.1.2/")
+    expected_path = expected_root / obj_path
+    obj_name = str(expected_path.relative_to(expected_root)).replace(".o", "")
 
     entries: List[Tuple[str, int, int, float]] = []
 
-    for symbol in (
-        subprocess.run(
-            ["nm", obj_path], stdout=subprocess.PIPE, universal_newlines=True
-        )
-        .stdout.strip()
-        .split("\n")
-    ):
-        if symbol.split()[1] != "T":
-            continue
-        symbol = symbol.split()[2]
+    functions_info = get_functions_info(expected_path)
+    for function in functions_info:
+        cmd = [
+            "python3",
+            "./tools/asm-differ/diff.py",
+            "-os",
+            "--format",
+            "json",
+            f"{function['name']}",
+        ]
         result = subprocess.run(
-            ["python3", "./tools/asm-differ/diff.py", "-o", symbol, "--format", "json"],
+            cmd,
             stdout=subprocess.PIPE,
             universal_newlines=True,
         ).stdout.strip()
@@ -31,9 +53,9 @@ def main(obj_path: str) -> None:
         max_score = int(result["max_score"])
 
         percent = 100 - round(100 * current_score / max_score, 2)
-        entries.append((symbol, current_score, max_score, percent))
+        entries.append((function["name"], current_score, max_score, percent))
 
-    entries.sort(key=lambda x: x[3], reverse=True)
+    entries.sort(key=lambda x: x[3], reverse=False)
 
     print(f"## Report of `{obj_name}`")
     print("Function|Score|Max|%")

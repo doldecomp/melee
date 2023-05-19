@@ -1,8 +1,10 @@
 #include <platform.h>
+#include "forward.h"
 #include "ft/forward.h"
-#include "ftCommon/forward.h"
 
 #include "ftCo_Damage.h"
+
+#include "ftCo_DamageFall.h"
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
@@ -27,7 +29,7 @@
 #include <MetroTRK/intrinsics.h>
 #include <MSL/trigf.h>
 
-static int ftItemPickup_803C5520[2][12] = {
+int ftCo_803C5520[2][12] = {
     { 81, 78, 75, 82, 79, 76, 83, 80, 77, 89, 88, 87 },
     { 84, 84, 84, 85, 85, 85, 86, 86, 86, 89, 88, 87 },
 };
@@ -46,12 +48,7 @@ double const lbl_804D8508 = 3;
 #endif
 
 /* 08DA4C */ static bool ftCo_8008DA4C(ftCo_GObj* gobj, enum_t, enum_t);
-/* 08DB10 */ static void ftCo_8008DB10(ftCo_GObj* gobj, enum_t, float);
-/* 08E498 */ static bool checkAirMotion(ftCo_Fighter* fp);
-/* 08E4F0 */ static void onEveryHitlag(ftCo_GObj* gobj);
-/* 08E714 */ static void onExitHitlag(ftCo_GObj* gobj);
 /* 08F938 */ static bool doIasa(ftCo_GObj* gobj);
-/* 08FCB8 */ static void setMv8FromKbThreshold(ftCo_Fighter* fp);
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
@@ -602,7 +599,7 @@ asm /* 08DCE0 */ void ft_8008DCE0(ftCo_GObj* gobj, int, float)
 { // clang-format off
     nofralloc
 /* 8008DCE0 0008A8C0  7C 08 02 A6 */	mflr r0
-/* 8008DCE4 0008A8C4  3C A0 80 3C */	lis r5, ftItemPickup_803C5520@ha
+/* 8008DCE4 0008A8C4  3C A0 80 3C */	lis r5, ftCo_803C5520@ha
 /* 8008DCE8 0008A8C8  90 01 00 04 */	stw r0, 4(r1)
 /* 8008DCEC 0008A8CC  94 21 FF 38 */	stwu r1, -0xc8(r1)
 /* 8008DCF0 0008A8D0  DB E1 00 C0 */	stfd f31, 0xc0(r1)
@@ -616,7 +613,7 @@ asm /* 08DCE0 */ void ft_8008DCE0(ftCo_GObj* gobj, int, float)
 /* 8008DD10 0008A8F0  BF 01 00 70 */	stmw r24, 0x70(r1)
 /* 8008DD14 0008A8F4  3B 24 00 00 */	addi r25, r4, 0
 /* 8008DD18 0008A8F8  7C 78 1B 78 */	mr r24, r3
-/* 8008DD1C 0008A8FC  3B E5 55 20 */	addi r31, r5, ftItemPickup_803C5520@l
+/* 8008DD1C 0008A8FC  3B E5 55 20 */	addi r31, r5, ftCo_803C5520@l
 /* 8008DD20 0008A900  3B 60 00 01 */	li r27, 1
 /* 8008DD24 0008A904  83 A3 00 2C */	lwz r29, 0x2c(r3)
 /* 8008DD28 0008A908  C0 1D 18 38 */	lfs f0, 0x1838(r29)
@@ -739,7 +736,7 @@ lbl_8008DE9C:
 /* 8008DED8 0008AAB8  7C 63 02 14 */	add r3, r3, r0
 /* 8008DEDC 0008AABC  83 E3 00 30 */	lwz r31, 0x30(r3)
 /* 8008DEE0 0008AAC0  7F A3 EB 78 */	mr r3, r29
-/* 8008DEE4 0008AAC4  48 00 05 B5 */	bl checkAirMotion
+/* 8008DEE4 0008AAC4  48 00 05 B5 */	bl ftCo_Damage_CheckAirMotion
 /* 8008DEE8 0008AAC8  2C 03 00 00 */	cmpwi r3, 0
 /* 8008DEEC 0008AACC  41 82 00 28 */	beq lbl_8008DF14
 /* 8008DEF0 0008AAD0  80 6D AE B4 */	lwz r3, p_ftCommonData
@@ -1001,13 +998,13 @@ lbl_8008E29C:
 lbl_8008E2A0:
 /* 8008E2A0 0008AE80  90 1D 23 44 */	stw r0, 0x2344(r29)
 /* 8008E2A4 0008AE84  38 A0 00 00 */	li r5, 0
-/* 8008E2A8 0008AE88  3C 60 80 09 */	lis r3, onEveryHitlag@ha
+/* 8008E2A8 0008AE88  3C 60 80 09 */	lis r3, ftCo_Damage_OnEveryHitlag@ha
 /* 8008E2AC 0008AE8C  98 BD 23 59 */	stb r5, 0x2359(r29)
-/* 8008E2B0 0008AE90  38 03 E4 F0 */	addi r0, r3, onEveryHitlag@l
-/* 8008E2B4 0008AE94  3C 60 80 09 */	lis r3, onExitHitlag@ha
+/* 8008E2B0 0008AE90  38 03 E4 F0 */	addi r0, r3, ftCo_Damage_OnEveryHitlag@l
+/* 8008E2B4 0008AE94  3C 60 80 09 */	lis r3, ftCo_Damage_OnExitHitlag@ha
 /* 8008E2B8 0008AE98  90 1D 21 D0 */	stw r0, 0x21d0(r29)
 /* 8008E2BC 0008AE9C  38 80 00 FE */	li r4, 0xfe
-/* 8008E2C0 0008AEA0  38 03 E7 14 */	addi r0, r3, onExitHitlag@l
+/* 8008E2C0 0008AEA0  38 03 E7 14 */	addi r0, r3, ftCo_Damage_OnExitHitlag@l
 /* 8008E2C4 0008AEA4  98 9D 06 70 */	stb r4, 0x670(r29)
 /* 8008E2C8 0008AEA8  38 60 00 01 */	li r3, 1
 /* 8008E2CC 0008AEAC  2C 1F 00 5B */	cmpwi r31, 0x5b
@@ -1041,7 +1038,7 @@ lbl_8008E338:
 /* 8008E338 0008AF18  38 00 00 FF */	li r0, 0xff
 /* 8008E33C 0008AF1C  98 1D 06 7F */	stb r0, 0x67f(r29)
 /* 8008E340 0008AF20  7F A3 EB 78 */	mr r3, r29
-/* 8008E344 0008AF24  48 00 19 75 */	bl setMv8FromKbThreshold
+/* 8008E344 0008AF24  48 00 19 75 */	bl ftCo_Damage_SetMv8FromKbThreshold
 /* 8008E348 0008AF28  80 1D 23 48 */	lwz r0, 0x2348(r29)
 /* 8008E34C 0008AF2C  2C 00 00 00 */	cmpwi r0, 0
 /* 8008E350 0008AF30  41 82 00 0C */	beq lbl_8008E35C
@@ -1191,8 +1188,7 @@ void ft_8008DCE0(ftCo_GObj* gobj, int arg1, float facing_dir)
     float y;
     int var_r27 = 1;
     float kb_applied = fp->dmg.kb_applied;
-    Fighter_8006CDA4(fp, fp->dmg.x1838_percentTemp,
-                     ftItemPickup_803C5520[0][0]);
+    Fighter_8006CDA4(fp, fp->dmg.x1838_percentTemp, ftCo_803C5520[0][0]);
     fp->dmg.kb_applied1 = kb_applied;
     pl_80040270(fp->xC_playerID, fp->x221F_flag.bits.b4, kb_applied);
     temp_f30 = kb_applied * p_ftCommonData->x154;
@@ -1244,9 +1240,8 @@ void ft_8008DCE0(ftCo_GObj* gobj, int arg1, float facing_dir)
         if (fp->ground_or_air != GA_Air) {
             goto block_21;
         }
-        msid = ftItemPickup_803C5520[var_r28 * 12]
-                                    [fp->dmg.x184c_damaged_hurtbox + 12];
-        if (!checkAirMotion(fp)) {
+        msid = ftCo_803C5520[var_r28 * 12][fp->dmg.x184c_damaged_hurtbox + 12];
+        if (!ftCo_Damage_CheckAirMotion(fp)) {
             goto block_20;
         }
         var_f31 *= p_ftCommonData->x190;
@@ -1265,7 +1260,7 @@ void ft_8008DCE0(ftCo_GObj* gobj, int arg1, float facing_dir)
         if (!(temp_f1_2 < M_PI_2)) {
             goto block_23;
         }
-        msid = (int) *(ftItemPickup_803C5520 +
+        msid = (int) *(ftCo_803C5520 +
                        ((var_r28 * 0xC) + (M2C_FIELD(fp, s32*, 0x184C) * 4)));
         ftCommon_8007D5D4(fp);
         ftCo_Damage_CalcVel(fp, pos.x, pos.y);
@@ -1276,9 +1271,8 @@ void ft_8008DCE0(ftCo_GObj* gobj, int arg1, float facing_dir)
             goto block_27;
         }
         ftCommon_8007D5D4(fp);
-        msid =
-            (int) *(ftItemPickup_803C5520 +
-                    ((var_r28 * 0xC) + (fp->dmg.x184c_damaged_hurtbox * 4)));
+        msid = (int) *(ftCo_803C5520 + ((var_r28 * 0xC) +
+                                        (fp->dmg.x184c_damaged_hurtbox * 4)));
         if (!(temp_f1_2 >
               (float) (M_PI_2 +
                        (double) M2C_FIELD(p_ftCommonData, float*, 0x1E8))))
@@ -1297,7 +1291,7 @@ void ft_8008DCE0(ftCo_GObj* gobj, int arg1, float facing_dir)
         fp->xF0_ground_kb_vel = 0;
         goto block_28;
     block_27:
-        msid = (int) *(ftItemPickup_803C5520 +
+        msid = (int) *(ftCo_803C5520 +
                        ((var_r28 * 0xC) + (M2C_FIELD(fp, s32*, 0x184C) * 4)));
         fp->xF0_ground_kb_vel = pos.x;
         temp_f2 = fp->xF0_ground_kb_vel;
@@ -1375,10 +1369,10 @@ block_62:
 block_63:
     M2C_FIELD(fp, s32*, 0x2344) = var_r0;
     M2C_FIELD(fp, s8*, 0x2359) = 0;
-    M2C_FIELD(fp, void (**)(ftCo_GObj*), 0x21D0) = onEveryHitlag;
+    M2C_FIELD(fp, void (**)(ftCo_GObj*), 0x21D0) = ftCo_Damage_OnEveryHitlag;
     fp->x670_timer_lstick_tilt_x = 0xFE;
     fp->x671_timer_lstick_tilt_y = 0xFE;
-    M2C_FIELD(fp, void (**)(ftCo_GObj*), 0x21D8) = onExitHitlag;
+    M2C_FIELD(fp, void (**)(ftCo_GObj*), 0x21D8) = ftCo_Damage_OnExitHitlag;
     M2C_FIELD(fp, float*, 0x18A8) = (float) M2C_FIELD(fp, float*, 0x1850);
     fp->x221C_b6 = true;
     M2C_FIELD(fp, s32*, 0x18AC) = (s32) 0;
@@ -1386,7 +1380,7 @@ block_63:
         inlineA1(gobj);
     }
     fp->x67F = 0xFF;
-    setMv8FromKbThreshold(fp);
+    ftCo_Damage_SetMv8FromKbThreshold(fp);
     if (M2C_FIELD(fp, s32*, 0x2348) == 0) {
         goto block_67;
     }
@@ -1455,7 +1449,7 @@ block_83:
 }
 #endif
 
-bool checkAirMotion(ftCo_Fighter* fp)
+bool ftCo_Damage_CheckAirMotion(ftCo_Fighter* fp)
 {
     switch (fp->motion_id) {
     case ftCo_MS_JumpF:
@@ -1485,7 +1479,7 @@ bool checkAirMotion(ftCo_Fighter* fp)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm /* 08E4F0 */ /* static */ void onEveryHitlag(ftCo_GObj* gobj)
+asm /* 08E4F0 */ /* static */ void ftCo_Damage_OnEveryHitlag(ftCo_GObj* gobj)
 {
     // clang-format off
     nofralloc
@@ -1541,7 +1535,7 @@ lbl_8008E594:
 #else
 
 #define SOLUTION 1
-void onEveryHitlag(ftCo_GObj* gobj)
+void ftCo_Damage_OnEveryHitlag(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->x221A_flag.bits.b2) {
@@ -1733,7 +1727,7 @@ void ftCo_8008E5A4(Fighter* fp)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm /* 08E714 */ /* static */ void onExitHitlag(ftCo_GObj* gobj)
+asm /* 08E714 */ /* static */ void ftCo_Damage_OnExitHitlag(ftCo_GObj* gobj)
 {
     // clang-format off
     nofralloc
@@ -1885,7 +1879,7 @@ static bool isPointInCircle(float x, float y, float radius)
     }
 }
 
-void onExitHitlag(ftCo_GObj* gobj)
+void ftCo_Damage_OnExitHitlag(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (isPointInCircle(SQ(fp->input.lstick.x), SQ(fp->input.lstick.y),
@@ -3804,7 +3798,8 @@ void ftCo_8008FC94(ftCo_GObj* gobj)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm /* 08FCB8 */ static void setMv8FromKbThreshold(ftCo_Fighter* fp)
+asm /* 08FCB8 */ static void
+ftCo_Damage_SetMv8FromKbThreshold(ftCo_Fighter* fp)
 { // clang-format off
     nofralloc
 /* 8008FCB8 0008C898  7C 08 02 A6 */	mflr r0
@@ -3875,7 +3870,7 @@ lbl_8008FD80:
 #pragma pop
 #else
 
-void setMv8FromKbThreshold(Fighter* fp)
+void ftCo_Damage_SetMv8FromKbThreshold(Fighter* fp)
 {
     float kb_vel = fp->ground_or_air == GA_Air
                        ? sqrtf__Ff(VEC3_SQ_MAG(fp->x8c_kb_vel))
@@ -3939,7 +3934,7 @@ lbl_8008FE08:
 /* 8008FE34 0008CA14  38 89 06 0C */	addi r4, r9, 0x60c
 /* 8008FE38 0008CA18  4B FD 78 B9 */	bl efAsync_Spawn
 /* 8008FE3C 0008CA1C  7F C3 F3 78 */	mr r3, r30
-/* 8008FE40 0008CA20  4B FF FE 79 */	bl setMv8FromKbThreshold
+/* 8008FE40 0008CA20  4B FF FE 79 */	bl ftCo_Damage_SetMv8FromKbThreshold
 lbl_8008FE44:
 /* 8008FE44 0008CA24  83 BF 00 2C */	lwz r29, 0x2c(r31)
 /* 8008FE48 0008CA28  C0 02 8A F4 */	lfs f0, lbl_804D84D4
@@ -4036,7 +4031,7 @@ static inline void inlineD0(ftCo_GObj* gobj)
             efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 4, 1032,
                           fp->parts[FtPart_TopN].joint, &param);
         }
-        setMv8FromKbThreshold(fp);
+        ftCo_Damage_SetMv8FromKbThreshold(fp);
     }
 }
 
@@ -4282,7 +4277,7 @@ lbl_80090240:
 /* 8009026C 0008CE4C  38 89 06 0C */	addi r4, r9, 0x60c
 /* 80090270 0008CE50  4B FD 74 81 */	bl efAsync_Spawn
 /* 80090274 0008CE54  7F C3 F3 78 */	mr r3, r30
-/* 80090278 0008CE58  4B FF FA 41 */	bl setMv8FromKbThreshold
+/* 80090278 0008CE58  4B FF FA 41 */	bl ftCo_Damage_SetMv8FromKbThreshold
 lbl_8009027C:
 /* 8009027C 0008CE5C  83 BF 00 2C */	lwz r29, 0x2c(r31)
 /* 80090280 0008CE60  C0 02 8A F4 */	lfs f0, lbl_804D84D4

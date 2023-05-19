@@ -40,7 +40,7 @@ extern UNK_T Fighter_804D6518;
 extern UNK_T Fighter_804D651C;
 extern float* Fighter_804D6524;
 extern UNK_T Fighter_804D6528;
-extern UNK_T Fighter_804D6530;
+extern Vec2** Fighter_804D6530;
 extern UNK_T Fighter_804D6534;
 extern UNK_T Fighter_804D6538;
 extern UNK_T Fighter_804D653C;
