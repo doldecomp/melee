@@ -107,14 +107,13 @@ void ftMr_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
     }
 
     if (flag_res != 0) {
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_L1stNb)].x0_jobj,
-                    NULL, &coords);
+        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_L1stNb)].joint, NULL,
+                    &coords);
         if (fp->kind == FTKIND_MARIO) {
             it_8029B6F8(fp->facing_dir, gobj, &coords, FtPart_RThumbNa);
-            efSync_Spawn(
-                1146, gobj,
-                fp->parts[ftParts_8007500C(fp, FtPart_L1stNb)].x0_jobj,
-                &fp->facing_dir);
+            efSync_Spawn(1146, gobj,
+                         fp->parts[ftParts_8007500C(fp, FtPart_L1stNb)].joint,
+                         &fp->facing_dir);
         } else {
             rand_val_800E0D1C = ftMr_SpecialN_VitaminRandom(gobj);
             it_802C0510(gobj, &coords, rand_val_800E0D1C, FtPart_RThumbNb,

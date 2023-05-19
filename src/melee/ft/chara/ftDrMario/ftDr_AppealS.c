@@ -23,7 +23,7 @@ void ftDr_AppealS_Anim(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     if (fp->cmd_vars[0] == 1 && fp->fv.mr.x2240 == 0U) {
-        lb_8000B1CC(fp->parts->x0_jobj, 0, &sp18);
+        lb_8000B1CC(fp->parts->joint, 0, &sp18);
         tmp = ftMr_SpecialN_VitaminRandom(gobj);
         tmp = it_802C0850(gobj, &sp18, tmp, 0x31, fp->facing_dir);
         fp->fv.mr.x2240 = tmp;

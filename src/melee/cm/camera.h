@@ -20,7 +20,7 @@ void Camera_8002F474(void);
 void* Camera_80030A50(void);
 bool Camera_80030CFC(struct _CameraBox*, f32);
 f32 Camera_80031144(void);
-void Camera_80030E44(s32, Vec3*);
+void Camera_80030E44(enum_t, Vec3*);
 void Camera_8002EA64(Vec3*);
 void Camera_8002E818(Vec3*);
 bool Camera_80030CD8(struct _CameraBox*, S32Vec2*);

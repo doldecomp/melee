@@ -351,4 +351,11 @@ typedef enum FtMoveId {
     FtMoveId_WarpStarFall,
 } FtMoveId;
 
+typedef enum SmashState {
+    SmashState_None,
+    SmashState_PreCharge,
+    SmashState_Charging,
+    SmashState_Release,
+} SmashState;
+
 #endif

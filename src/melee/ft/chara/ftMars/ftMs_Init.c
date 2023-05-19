@@ -497,10 +497,10 @@ void ftMs_SpecialN_801365A8(HSD_GObj* gobj)
         result = ftLib_800872A4(gobj);
         switch (result) {
         case 18:
-            efSync_Spawn(1266, gobj, fp->parts->x0_jobj);
+            efSync_Spawn(1266, gobj, fp->parts->joint);
             break;
         case 26:
-            efSync_Spawn(1297, gobj, fp->parts->x0_jobj);
+            efSync_Spawn(1297, gobj, fp->parts->joint);
             break;
         }
         fp->x2219_b0 = 1;
@@ -522,10 +522,10 @@ void ftMs_SpecialN_8013666C(HSD_GObj* gobj)
         result = ftLib_800872A4(gobj);
         switch (result) {
         case 18:
-            efSync_Spawn(1267, gobj, fp->parts->x0_jobj);
+            efSync_Spawn(1267, gobj, fp->parts->joint);
             break;
         case 26:
-            efSync_Spawn(1298, gobj, fp->parts->x0_jobj);
+            efSync_Spawn(1298, gobj, fp->parts->joint);
             break;
         }
         fp->x2219_b0 = 1;

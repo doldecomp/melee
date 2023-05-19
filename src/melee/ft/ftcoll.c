@@ -94,7 +94,7 @@ void ftColl_800764DC(HSD_GObj* gobj)
     if (fp1->x2094 != NULL) {
         Fighter* fp2 = fp1->x2094->user_data;
 
-        if (!fp2->x221C_flag.bits.b6 && fp2->x2098 == 0) {
+        if (!fp2->x221C_b6 && fp2->x2098 == 0) {
             fp1->x2094 = NULL;
         }
     }
@@ -102,7 +102,7 @@ void ftColl_800764DC(HSD_GObj* gobj)
 
 inline void comboCount_Push(Fighter* fp)
 {
-    Vec3* pos = &fp->coll_data.x14C_ground.normal;
+    Vec3* pos = &fp->coll_data.floor.normal;
     f32 temp_f2;
     f32 var_f2;
     if ((s32) fp->x2090 < (s32) p_ftCommonData->x4C8) {
@@ -3148,7 +3148,7 @@ void ftColl_80078A2C(HSD_GObj* this_gobj)
                    ((u8) victim_fp->x61B_team != (u8) this_fp->x61B_team)) &&
                   ((s32) victim_fp->x1988 == 0) &&
                   ((s32) victim_fp->x198C == 0) &&
-                  (!(victim_fp->x221D_flag.bits.b6) &&
+                  (!(victim_fp->x221D_b6) &&
                    !(victim_fp->x1A6A & this_fp->x1A68) &&
                    !((victim_fp->x2224_flag.bits.b2))))))
             {
@@ -5484,7 +5484,7 @@ asm void ftColl_8007ABD0(HitCapsule*, u32, HSD_GObj*)
 /* 8007AC14 000777F4  41 82 00 10 */	beq lbl_8007AC24
 /* 8007AC18 000777F8  80 6D AE 84 */	lwz r3, Fighter_804D6524
 /* 8007AC1C 000777FC  C0 63 00 04 */	lfs f3, 4(r3)
-/* 8007AC20 00077800  48 05 49 75 */	bl ft_800CF594
+/* 8007AC20 00077800  48 05 49 75 */	bl ft_CalcYScaledKnockback
 lbl_8007AC24:
 /* 8007AC24 00077804  7F E3 FB 78 */	mr r3, r31
 /* 8007AC28 00077808  48 06 42 91 */	bl ft_800DEEB8
@@ -5509,7 +5509,7 @@ lbl_8007AC24:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftColl_8007AC68(void)
+asm bool ftColl_8007AC68(int)
 { // clang-format off
     nofralloc
 /* 8007AC68 00077848  28 03 01 69 */	cmplwi r3, 0x169

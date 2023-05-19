@@ -70,7 +70,7 @@ static inline void spawnEffect(HSD_GObj* gobj)
     x1CC = &fp->co_attrs.x1CC;
     part = ftParts_8007500C(fp, FtPart_HipN);
     fp2 = GET_FIGHTER(gobj);
-    jobj = fp->parts[part].x0_jobj;
+    jobj = fp->parts[part].joint;
 
     efAsync_Spawn(gobj, &fp2->x60C, FtPart_HipN, 1231, jobj, x1CC);
 }
@@ -262,7 +262,7 @@ void ftYs_Shield_8012C49C(HSD_GObj* gobj)
             Fighter* fp1 = GET_FIGHTER(gobj);
 
             /// @todo Why is this still using @c fp0?
-            HSD_JObj* jobj = fp0->parts[bone_idx].x0_jobj;
+            HSD_JObj* jobj = fp0->parts[bone_idx].joint;
 
             efAsync_Spawn(gobj, &fp1->x60C, 4U, 1231, jobj, x1CC);
         }
@@ -483,9 +483,9 @@ void ftYs_Shield_8012C850(HSD_GObj* gobj)
     fp->x672_input_timer_counter = 254;
     fp->x221A_flag.bits.b7 = false;
     fp->x221B_b0 = false;
-    fp->x221C_flag.bits.b3 = true;
-    fp->x221C_flag.bits.b1 = true;
-    fp->x221C_flag.bits.b2 = true;
+    fp->x221C_b3 = true;
+    fp->x221C_b1 = true;
+    fp->x221C_b2 = true;
 
     fp->mv.ys.unk2.x14 = p_ftCommonData->x2A4;
     temp_r5 = p_ftCommonData;

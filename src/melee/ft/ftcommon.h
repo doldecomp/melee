@@ -52,7 +52,7 @@ float ftCo_GetCStickAngle(Fighter* fp);
 float ftCommon_8007D9D4(Fighter*);
 void ftCommon_8007D9FC(Fighter*);
 void ftCommon_8007DA24(Fighter*);
-float ftCommon_8007DA74(s32, u32, float);
+float ftCommon_CalcHitlag(int dmg, FtMotionId msid, float mul);
 void ftCommon_8007DB24(HSD_GObj*);
 void ftCommon_8007DB58(HSD_GObj*);
 void ftCommon_8007DBCC(Fighter*, bool, float);
@@ -133,7 +133,6 @@ void ftCommon_8007D780(Fighter*);
 void ftCommon_8007D7FC(Fighter*);
 void ftCommon_8007D92C(HSD_GObj*);
 void ftCommon_8007D9FC(Fighter*);
-float ftCommon_8007DA74(s32, u32, float);
 
 void ftCommon_8007E2D0(Fighter*, s16, HSD_GObjEvent, HSD_GObjEvent,
                        void (*)(HSD_GObj*, HSD_GObj*));

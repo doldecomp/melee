@@ -306,13 +306,13 @@ void ftLib_800865D8(HSD_GObj* gobj, f32* x, f32* y)
 void* ftLib_800865F0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->parts[ftParts_8007500C(fp, 4)].x0_jobj;
+    return fp->parts[ftParts_8007500C(fp, 4)].joint;
 }
 
 void* ftLib_80086630(HSD_GObj* gobj, s32 i)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->parts[i].x0_jobj;
+    return fp->parts[i].joint;
 }
 
 void ftLib_80086644(HSD_GObj* gobj, Vec3* pos)
@@ -390,14 +390,14 @@ HSD_GObj* ftLib_800867CC(HSD_GObj* gobj)
 bool ftLib_800867D8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x221D_flag.bits.b4;
+    return fp->x221D_b4;
 }
 
 void ftLib_800867E8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     Fighter_ResetInputData_80068854(gobj);
-    fp->x221D_flag.bits.b4 = true;
+    fp->x221D_b4 = true;
 }
 
 void ftLib_80086824(void)
@@ -416,7 +416,7 @@ void ftLib_80086824(void)
 void ftLib_8008688C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x221D_flag.bits.b4 = false;
+    fp->x221D_b4 = false;
 }
 
 void ftLib_800868A4(void)
@@ -676,7 +676,7 @@ s32 ftLib_80086EB4(HSD_GObj* gobj)
 bool ftLib_80086EC0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x221C_flag.bits.b6;
+    return fp->x221C_b6;
 }
 
 bool ftLib_80086ED0(HSD_GObj* gobj)
@@ -1029,7 +1029,7 @@ void ftLib_800876B4(HSD_GObj* gobj)
 bool ftLib_800876D4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x2114_SmashAttr.x2114_state == 2) {
+    if (fp->smash_attrs.state == 2) {
         return true;
     } else {
         return false;
@@ -1078,7 +1078,7 @@ void ftLib_8008777C(HSD_GObj* gobj)
 
     {
         CollData* cd = Fighter_GetCollData(fp);
-        atan2f(-cd->x14C_ground.normal.x, cd->x14C_ground.normal.y);
+        atan2f(-cd->floor.normal.x, cd->floor.normal.y);
     }
 }
 

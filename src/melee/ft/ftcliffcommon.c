@@ -73,7 +73,7 @@ void ftCliffCommon_80081370(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
     ftCommon_8007EFC0(fp, p_ftCommonData->x5F0);
     ftCommon_8007E2FC(gobj);
-    fp->x221D_flag.bits.b7 = 1;
+    fp->x221D_b7 = 1;
     if (fp->facing_dir > 0.0f) {
         fp->mv.co.cliff.ledge_id = fp->coll_data.x44;
     } else {
@@ -146,7 +146,7 @@ void ftCo_CliffCatch_Coll(HSD_GObj* gobj)
 
     if (ft_8009EF68(gobj)) {
         Fighter* fp = gobj->user_data;
-        fp->x2064_ledgeCooldown = p_ftCommonData->x498_ledgeCooldownTime;
+        fp->x2064_ledgeCooldown = p_ftCommonData->ledge_cooldown;
     }
 }
 

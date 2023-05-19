@@ -144,10 +144,10 @@ void ftDk_SpecialN_Anim(HSD_GObj* gobj)
     if (fp->mv.dk.specialn.x8 == 1) {
         fp->mv.dk.specialn.x8++;
         if (fp->ground_or_air == GA_Air) {
-            efSync_Spawn(1225, gobj, fp->parts[FtPart_TopN].x0_jobj,
+            efSync_Spawn(1225, gobj, fp->parts[FtPart_TopN].joint,
                          &fp->facing_dir);
         } else {
-            efSync_Spawn(1224, gobj, fp->parts[FtPart_TopN].x0_jobj,
+            efSync_Spawn(1224, gobj, fp->parts[FtPart_TopN].joint,
                          &fp->facing_dir);
         }
     }
@@ -198,10 +198,10 @@ void ftDk_SpecialNFull_Anim(HSD_GObj* gobj)
     if (fp->mv.dk.specialn.x8 == 1) {
         fp->mv.dk.specialn.x8++;
         if (fp->ground_or_air == GA_Air) {
-            efSync_Spawn(1225, gobj, fp->parts[FtPart_TopN].x0_jobj,
+            efSync_Spawn(1225, gobj, fp->parts[FtPart_TopN].joint,
                          &fp->facing_dir);
         } else {
-            efSync_Spawn(1224, gobj, fp->parts[FtPart_TopN].x0_jobj,
+            efSync_Spawn(1224, gobj, fp->parts[FtPart_TopN].joint,
                          &fp->facing_dir);
         }
     }
@@ -274,10 +274,10 @@ void ftDk_SpecialAirN_Anim(HSD_GObj* gobj)
     if (fp->mv.dk.specialn.x8 == 1) {
         fp->mv.dk.specialn.x8++;
         if (fp->ground_or_air == GA_Air) {
-            efSync_Spawn(1225, gobj, fp->parts[FtPart_TopN].x0_jobj,
+            efSync_Spawn(1225, gobj, fp->parts[FtPart_TopN].joint,
                          &fp->facing_dir);
         } else {
-            efSync_Spawn(1224, gobj, fp->parts[FtPart_TopN].x0_jobj,
+            efSync_Spawn(1224, gobj, fp->parts[FtPart_TopN].joint,
                          &fp->facing_dir);
         }
     }
@@ -328,10 +328,10 @@ void ftDk_SpecialAirNFull_Anim(HSD_GObj* gobj)
     if (fp->mv.dk.specialn.x8 == 1) {
         fp->mv.dk.specialn.x8++;
         if (fp->ground_or_air == GA_Air) {
-            efSync_Spawn(1225, gobj, fp->parts[FtPart_TopN].x0_jobj,
+            efSync_Spawn(1225, gobj, fp->parts[FtPart_TopN].joint,
                          &fp->facing_dir);
         } else {
-            efSync_Spawn(1224, gobj, fp->parts[FtPart_TopN].x0_jobj,
+            efSync_Spawn(1224, gobj, fp->parts[FtPart_TopN].joint,
                          &fp->facing_dir);
         }
     }

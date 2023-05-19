@@ -38,7 +38,7 @@ void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
 
     if (fp->fv.gw.x2250_manholeGObj2 == NULL) {
-        lb_8000B1CC(fp->parts[FtPart_LHandNb].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->parts[FtPart_LHandNb].joint, NULL, &sp10);
         manholeGObj = fp->item_gobj;
         if (manholeGObj != NULL) {
             fp->fv.gw.x2248_manholeGObj = manholeGObj;

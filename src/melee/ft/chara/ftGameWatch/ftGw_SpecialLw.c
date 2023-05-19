@@ -32,7 +32,7 @@ void ftGw_SpecialLw_ItemPanicSetup(HSD_GObj* gobj)
         u8 _[16];
 #endif
 
-        lb_8000B1CC(fp->parts[FtPart_TopN].x0_jobj, NULL, &vec);
+        lb_8000B1CC(fp->parts[FtPart_TopN].joint, NULL, &vec);
 
         fp->fv.gw.x2268_panicGObj = it_802C7D60(gobj, &vec, 0, fp->facing_dir);
     }
@@ -288,7 +288,7 @@ void ftGw_SpecialLw_IASA(HSD_GObj* gobj)
         }
     }
 
-    if (!(fp->input.held_inputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
         fp->mv.gw.SpecialLw.isRelease = true;
     }
 }
@@ -324,7 +324,7 @@ void ftGw_SpecialAirLw_IASA(HSD_GObj* gobj)
         }
     }
 
-    if (!(fp->input.held_inputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
         fp->mv.gw.SpecialLw.isRelease = true;
     }
 }

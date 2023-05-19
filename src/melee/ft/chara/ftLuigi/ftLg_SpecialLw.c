@@ -222,7 +222,7 @@ void ftLg_SpecialLw_Phys(HSD_GObj* gobj)
 
     ftCommon_8007CB74(gobj);
 
-    if (fp->cmd_vars[2] != 0 && (fp->input.x668 & HSD_Pad_B)) {
+    if (fp->cmd_vars[2] != 0 && (fp->input.x668 & HSD_PAD_B)) {
         fp->self_vel.y += attrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX;
         ftLuigi_SpecialLw_GroundToAir(gobj);
     }
@@ -241,7 +241,7 @@ void ftLg_SpecialAirLw_Phys(HSD_GObj* gobj)
     ftLuigiAttributes* attrs0 = fp->dat_attrs;
 
     if (!fp->fv.lg.x222C_cycloneCharge && fp->cmd_vars[2] != 0 &&
-        (fp->input.x668 & HSD_Pad_B))
+        (fp->input.x668 & HSD_PAD_B))
     {
         ftCommon_8007D508(fp, attrs0->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX,
                           attrs0->x90_LUIGI_CYCLONE_TAP_GRAVITY);
@@ -283,8 +283,8 @@ static inline void ftLuigi_SpecialLw_UnkAngle(HSD_GObj* gobj)
     {
         ftParts_8007592C(fp, 0,
                          fp->facing_dir *
-                             atan2f(fp->coll_data.x14C_ground.normal.x,
-                                    fp->coll_data.x14C_ground.normal.y));
+                             atan2f(fp->coll_data.floor.normal.x,
+                                    fp->coll_data.floor.normal.y));
         return;
     }
     ftParts_8007592C(fp, 0, 0.0f);

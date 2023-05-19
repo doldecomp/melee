@@ -372,7 +372,7 @@ void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
             fp->mv.ms.speciallw.x0 = (s32) (temp_r0 * da->x5C);
         }
 
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].x0_jobj, 0,
+        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint, 0,
                     &sp18);
         lb_800119DC(&sp18, 120, 0.9, 0.02, M_PI / 3);
 
@@ -399,14 +399,14 @@ void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
                 efSync_Spawn(
                     1265, gobj,
                     ft_2->parts[ftParts_8007500C(ft_2, FtPart_RShoulderN)]
-                        .x0_jobj,
+                        .joint,
                     &ft_2->facing_dir);
                 break;
             case 26:
                 efSync_Spawn(
                     1296, gobj,
                     ft_2->parts[ftParts_8007500C(ft_2, FtPart_RShoulderN)]
-                        .x0_jobj,
+                        .joint,
                     &ft_2->facing_dir);
                 break;
             }

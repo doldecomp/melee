@@ -1445,7 +1445,8 @@ def dump_objfile(
     if not os.path.isfile(objfile):
         fail(f"Not able to find .o file for function: {objfile} is not a file.")
 
-    refobjfile = os.path.join(project.expected_dir, objfile)
+    refobjfile = os.path.relpath(objfile, project.build_dir)
+    refobjfile = os.path.join(project.expected_dir, refobjfile)
     if config.diff_mode != DiffMode.SINGLE and not os.path.isfile(refobjfile):
         refobjfile = refobjfile.replace("/src/", "/asm/").replace(".c.o", ".s.o")
         if not os.path.isfile(refobjfile):

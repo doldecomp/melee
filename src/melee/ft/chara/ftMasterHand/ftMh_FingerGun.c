@@ -229,12 +229,12 @@ void ftMh_MS_365_801535B0(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
 
     if (fp->cmd_vars[0] != 0) {
-        ftMh_MS_365_8015364C(gobj, fp->parts[FtPart_LKneeJ].x0_jobj, da->xF8,
+        ftMh_MS_365_8015364C(gobj, fp->parts[FtPart_LKneeJ].joint, da->xF8,
                              da->xFC);
         fp->cmd_vars[0] = 0;
     }
     if (fp->cmd_vars[1] != 0) {
-        ftMh_MS_365_8015364C(gobj, fp->parts[FtPart_RKneeJ].x0_jobj, da->x100,
+        ftMh_MS_365_8015364C(gobj, fp->parts[FtPart_RKneeJ].joint, da->x100,
                              da->x104);
         fp->cmd_vars[1] = 0;
     }

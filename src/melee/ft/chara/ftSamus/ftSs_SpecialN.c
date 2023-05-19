@@ -78,7 +78,7 @@ static bool ftSs_SpecialN_801292E4(HSD_GObj* gobj)
         vec2.z = 4;
         vec2.y = 0;
         vec2.x = 0;
-        lb_8000B1CC(fp->parts[FtPart_RHandNb].x0_jobj, &vec2, &vec1);
+        lb_8000B1CC(fp->parts[FtPart_RHandNb].joint, &vec2, &vec1);
         vec1.z = 0;
         result = it_802B55C8(gobj, &vec1, FtPart_RHandNb, 94, fp->facing_dir);
         fp->fv.ss.x222C = result;
@@ -111,7 +111,7 @@ static void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
         u32 x2230;
 
         fp->cmd_vars[1] = 2;
-        lb_8000B1CC(fp->parts[FtPart_ThrowN].x0_jobj, NULL, &vec1);
+        lb_8000B1CC(fp->parts[FtPart_ThrowN].joint, NULL, &vec1);
         vec1.z = 0;
         held_item = fp->item_gobj;
         if (fp->facing_dir == +1) {
@@ -463,7 +463,7 @@ void ftSs_SpecialS_8012A074(HSD_GObj* gobj)
     if (bool1) {
         Vec3 position;
         fp->fv.ss.x2238++;
-        lb_8000B1CC(fp->parts[56].x0_jobj, NULL, &position);
+        lb_8000B1CC(fp->parts[56].joint, NULL, &position);
         position.x += (samus_attr->x34 * fp->facing_dir);
 
         if ((fp->motion_id == 349) || (fp->motion_id == 351)) {

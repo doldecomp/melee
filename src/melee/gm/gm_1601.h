@@ -3,6 +3,8 @@
 
 #include <platform.h>
 
+#include <placeholder.h>
+
 struct datetime {
     u16 year;
     u8 month, day, hour, minute, second;
@@ -33,5 +35,6 @@ void gm_80168B34(void);
 void gm_801692E8(int, struct datetime* datetime);
 void gm_8016B248(void);
 void gm_8016B498(void);
+/* 16B014 */ bool gm_8016B014(void);
 
 #endif

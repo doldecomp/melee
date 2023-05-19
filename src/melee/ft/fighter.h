@@ -29,25 +29,25 @@
 
 /// @todo #Fighter_804D64FC..#Fighter_804D6550 are initialized to 0 in
 ///       #Fighter_LoadCommonData, probably all pointers
-extern void* Fighter_804D64FC;
-extern void* Fighter_804D6500;
-extern void* Fighter_804D6504;
-extern void* Fighter_804D6508;
-extern void* Fighter_804D650C;
-extern void* Fighter_804D6510;
-extern void* Fighter_804D6514;
-extern void* Fighter_804D6518;
-extern void* Fighter_804D651C;
-extern void* Fighter_804D6524;
-extern void* Fighter_804D6528;
-extern void* Fighter_804D6530;
-extern void* Fighter_804D6534;
-extern void* Fighter_804D6538;
-extern void* Fighter_804D653C;
+extern UNK_T Fighter_804D64FC;
+extern UNK_T Fighter_804D6500;
+extern UNK_T Fighter_804D6504;
+extern UNK_T Fighter_804D6508;
+extern UNK_T Fighter_804D650C;
+extern UNK_T Fighter_804D6510;
+extern UNK_T Fighter_804D6514;
+extern UNK_T Fighter_804D6518;
+extern UNK_T Fighter_804D651C;
+extern float* Fighter_804D6524;
+extern UNK_T Fighter_804D6528;
+extern UNK_T Fighter_804D6530;
+extern UNK_T Fighter_804D6534;
+extern UNK_T Fighter_804D6538;
+extern UNK_T Fighter_804D653C;
 extern int** Fighter_804D6540;
-extern void* Fighter_804D6548;
-extern void* Fighter_804D654C;
-extern void* Fighter_804D6550;
+extern UNK_T Fighter_804D6548;
+extern UNK_T Fighter_804D654C;
+extern UNK_T Fighter_804D6550;
 
 extern unk_t Fighter_804D6520;
 extern ftCommonData* p_ftCommonData;
@@ -93,7 +93,7 @@ void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* gobj);
 void Fighter_8006CB94(HSD_GObj* gobj);
 void Fighter_UnkTakeDamage_8006CC30(Fighter* fp, f32 damage_amount);
 void Fighter_TakeDamage_8006CC7C(Fighter*, f32);
-void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3);
+void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2);
 void Fighter_8006CF5C(Fighter* fp, s32 arg1);
 void Fighter_UnkSetFlag_8006CFBC(HSD_GObj* gobj);
 void Fighter_8006CFE0(HSD_GObj* gobj);

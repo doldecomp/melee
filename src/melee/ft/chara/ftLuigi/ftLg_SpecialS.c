@@ -256,7 +256,7 @@ void ftLg_SpecialAirSHold_Anim(HSD_GObj* gobj)
 void ftLg_SpecialSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.held_inputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
         ftLg_SpecialSLaunch_Enter(gobj);
     }
 }
@@ -265,7 +265,7 @@ void ftLg_SpecialSHold_IASA(HSD_GObj* gobj)
 void ftLg_SpecialAirSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.held_inputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
         ftLg_SpecialAirSLaunch_Enter(gobj);
     }
 }
@@ -482,7 +482,7 @@ static inline void ftLuigi_SpecialS_Setup(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
 
     if (!fp->x2219_b0) {
-        efSync_Spawn(0x50A, gobj, fp->parts[FtPart_HipN].x0_jobj);
+        efSync_Spawn(0x50A, gobj, fp->parts[FtPart_HipN].joint);
         fp->x2219_b0 = true;
     }
 

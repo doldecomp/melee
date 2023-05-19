@@ -57,35 +57,34 @@ void ftSb_Init_OnLoad(HSD_GObj* gobj)
 void ftSb_Init_8014FA30(Fighter* fp)
 {
     FighterBone* parts = fp->parts;
-    lb_8000C1C0(parts[FtPart_WaistN].x0_jobj, parts[FtPart_RLegJ].x0_jobj);
+    lb_8000C1C0(parts[FtPart_WaistN].joint, parts[FtPart_RLegJ].joint);
     parts = fp->parts;
     lb_8000C1C0(parts[FtPart_WaistN].x4_jobj2, parts[FtPart_RLegJ].x4_jobj2);
     parts = fp->parts;
-    lb_8000C1C0(parts[FtPart_WaistN].x0_jobj,
-                parts[FtPart_LShoulderN].x0_jobj);
+    lb_8000C1C0(parts[FtPart_WaistN].joint, parts[FtPart_LShoulderN].joint);
     parts = fp->parts;
     lb_8000C1C0(parts[FtPart_WaistN].x4_jobj2,
                 parts[FtPart_LShoulderN].x4_jobj2);
     parts = fp->parts;
-    lb_8000C228(parts[FtPart_LLegJ].x0_jobj, parts[FtPart_RShoulderJ].x0_jobj);
+    lb_8000C228(parts[FtPart_LLegJ].joint, parts[FtPart_RShoulderJ].joint);
     parts = fp->parts;
     lb_8000C228(parts[FtPart_LLegJ].x4_jobj2,
                 parts[FtPart_RShoulderJ].x4_jobj2);
 
-    lb_8000C420(fp->parts[FtPart_LLegJ].x0_jobj, 1, -M_PI / 2);
-    lb_8000C420(fp->parts[FtPart_LLegJ].x0_jobj, 2, -M_PI / 2);
+    lb_8000C420(fp->parts[FtPart_LLegJ].joint, 1, -M_PI / 2);
+    lb_8000C420(fp->parts[FtPart_LLegJ].joint, 2, -M_PI / 2);
     lb_8000C420(fp->parts[FtPart_LLegJ].x4_jobj2, 1, -M_PI / 2);
     lb_8000C420(fp->parts[FtPart_LLegJ].x4_jobj2, 2, -M_PI / 2);
 
     parts = fp->parts;
-    lb_8000C228(parts[FtPart_LLegJA].x0_jobj, parts[FtPart_WaistN].x0_jobj);
+    lb_8000C228(parts[FtPart_LLegJA].joint, parts[FtPart_WaistN].joint);
     parts = fp->parts;
     lb_8000C228(parts[FtPart_LLegJA].x4_jobj2, parts[FtPart_WaistN].x4_jobj2);
 
     {
         float const angle = -86 * deg_to_rad;
-        lb_8000C420(fp->parts[FtPart_LLegJA].x0_jobj, 1, angle);
-        lb_8000C420(fp->parts[FtPart_LLegJA].x0_jobj, 2, angle);
+        lb_8000C420(fp->parts[FtPart_LLegJA].joint, 1, angle);
+        lb_8000C420(fp->parts[FtPart_LLegJA].joint, 2, angle);
         lb_8000C420(fp->parts[FtPart_LLegJA].x4_jobj2, 1, angle);
         lb_8000C420(fp->parts[FtPart_LLegJA].x4_jobj2, 2, angle);
     }

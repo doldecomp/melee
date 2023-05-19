@@ -31,7 +31,7 @@ void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->mv.ss.unk5.x0 = 0;
     ftAnim_8006EBA4(gobj);
-    efSync_Spawn(1154, gobj, fp->parts[FtPart_YRotN].x0_jobj);
+    efSync_Spawn(1154, gobj, fp->parts[FtPart_YRotN].joint);
     fp->fv.ss.x2244 = 1;
 }
 
@@ -53,7 +53,7 @@ void ftSs_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->self_vel.y = samus_attr->x44;
     ftCommon_8007D440(fp, samus_attr->x40);
     ftAnim_8006EBA4(gobj);
-    efSync_Spawn(1154, gobj, fp->parts[FtPart_YRotN].x0_jobj);
+    efSync_Spawn(1154, gobj, fp->parts[FtPart_YRotN].joint);
     fp->fv.ss.x2244 = 1;
 }
 

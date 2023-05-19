@@ -19,12 +19,12 @@
 bool ftCo_AttackS3_CheckInput(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_Pad_A &&
+    if (fp->input.x668 & HSD_PAD_A &&
         fp->input.lstick.x * fp->facing_dir >= p_ftCommonData->x98)
     {
         if (ABS(ftCo_GetLStickAngle(fp)) < p_ftCommonData->x20) {
             if (fp->item_gobj) {
-                if (fp->input.held_inputs & HSD_Pad_LR ||
+                if (fp->input.held_inputs & HSD_PAD_LR ||
                     it_8026B30C(fp->item_gobj) == 0)
                 {
                     ft_800957F4(gobj, ftCo_MS_LightThrowF);

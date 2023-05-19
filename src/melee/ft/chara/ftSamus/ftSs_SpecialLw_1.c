@@ -34,7 +34,7 @@ void ftSs_SpecialLw_8012ADF0(HSD_GObj* gobj)
     }
     if (bool1) {
         f32 vec_x;
-        lb_8000B1CC(fp->parts[FtPart_TopN].x0_jobj, NULL, &vec);
+        lb_8000B1CC(fp->parts[FtPart_TopN].joint, NULL, &vec);
         vec_x = samus_attr->x74_vec.x;
         vec.x += (vec_x * fp->facing_dir);
         vec.y += samus_attr->x74_vec.y;

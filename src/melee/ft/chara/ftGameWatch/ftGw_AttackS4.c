@@ -27,7 +27,7 @@ void ftGw_ItemTorchSetup(HSD_GObj* gobj)
 #endif
 
     fp = getFighter(gobj);
-    lb_8000B1CC(fp->parts[FtPart_LHandNb].x0_jobj, NULL, &sp10);
+    lb_8000B1CC(fp->parts[FtPart_LHandNb].joint, NULL, &sp10);
     fp->fv.gw.x2254_fireGObj =
         it_802C68F8(gobj, &sp10, FtPart_LHandNb, fp->facing_dir);
     if (fp->fv.gw.x2254_fireGObj != NULL) {

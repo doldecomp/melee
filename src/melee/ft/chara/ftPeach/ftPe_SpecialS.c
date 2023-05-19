@@ -97,7 +97,7 @@ void ftPe_SpecialAirS_Enter(HSD_GObj* gobj)
 static void doAirEnd0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x221C_flag.bits.b5) {
+    if (fp->x221C_b5) {
         Fighter* other_fp = GET_FIGHTER(fp->unk_gobj);
         if (other_fp != NULL) {
             switch (other_fp->kind) {
@@ -667,7 +667,7 @@ static void doPostEnd(HSD_GObj* gobj)
     ftPe_DatAttrs* da = fp->dat_attrs;
     if (fp->cmd_vars[2]) {
         Vec3 vec;
-        lb_8000B1CC(fp->parts[FtPart_HipN].x0_jobj, NULL, &vec);
+        lb_8000B1CC(fp->parts[FtPart_HipN].joint, NULL, &vec);
         vec.z = 0;
         {
             float facing_dir = fp->facing_dir;

@@ -160,7 +160,7 @@ static void spawnVeg(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (ftCheckThrowB0(fp)) {
         Vec3 pos;
-        lb_8000B1CC(fp->parts[FtPart_109].x0_jobj, NULL, &pos);
+        lb_8000B1CC(fp->parts[FtPart_109].joint, NULL, &pos);
         {
             Fighter* fp = GET_FIGHTER(gobj);
 

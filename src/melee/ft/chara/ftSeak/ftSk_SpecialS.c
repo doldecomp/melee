@@ -533,7 +533,7 @@ bool ftSk_SpecialS_CheckInitChain(HSD_GObj* gobj)
 #endif
         Fighter* fp2 = gobj->user_data;
 
-        lb_8000B1CC(fp2->parts[FtPart_L3rdNa].x0_jobj, NULL, &vec1);
+        lb_8000B1CC(fp2->parts[FtPart_L3rdNa].joint, NULL, &vec1);
 
         fp2->fv.sk.x2234 = it_802BB290(gobj, &vec1, fp2->facing_dir);
 
@@ -767,7 +767,7 @@ void ftSk_SpecialS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!(fp->input.held_inputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
         fp->mv.sk.specials.x4 = true;
     }
 
@@ -778,7 +778,7 @@ void ftSk_SpecialAirS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!(fp->input.held_inputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
         fp->mv.sk.specials.x4 = true;
     }
 
@@ -848,7 +848,7 @@ void ftSk_SpecialS_80111830(HSD_GObj* gobj)
         vec0.y += fp->cur_pos.y;
         vec0.z += fp->cur_pos.z;
 
-        lb_8000B1CC(fp->parts[FtPart_L3rdNa].x0_jobj, NULL, &vec1);
+        lb_8000B1CC(fp->parts[FtPart_L3rdNa].joint, NULL, &vec1);
 
         {
             s32 flags =
