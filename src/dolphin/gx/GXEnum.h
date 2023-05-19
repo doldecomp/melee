@@ -81,7 +81,7 @@ typedef enum {
     GX_MAX_VTXFMT,
 } GXVtxFmt;
 
-typedef enum {
+typedef enum GXAttr {
     GX_VA_PNMTXIDX,
     GX_VA_TEX0MTXIDX,
     GX_VA_TEX1MTXIDX,
@@ -112,7 +112,7 @@ typedef enum {
     GX_VA_NULL = 0xFF,
 } GXAttr;
 
-typedef enum {
+typedef enum GXAttrType {
     GX_NONE,
     GX_DIRECT,
     GX_INDEX8,
