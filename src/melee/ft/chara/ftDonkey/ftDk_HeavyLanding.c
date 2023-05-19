@@ -7,6 +7,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_Damage.h"
 #include "it/item.h"
 
 #include <dolphin/mtx/types.h>
@@ -43,7 +44,7 @@ bool checkSomething(HSD_GObj* gobj)
     if (ft_8008E984(fp)) {
         return true;
     }
-    if (ft_8008D8E8(ft_0877_ScaleBy154(fp->dmg.x1850_forceApplied)) < 3) {
+    if (ft_8008D8E8(ft_0877_ScaleBy154(fp->dmg.kb_applied)) < 3) {
         return true;
     }
     return false;
@@ -60,7 +61,7 @@ void ftDk_HeavyWait2_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ft_8008F744(gobj);
-    if (!fp->x221C_flag.bits.b6) {
+    if (!fp->x221C_b6) {
         if (fp->ground_or_air == GA_Air) {
             ftDk_MS_345_800E0294(gobj);
         } else {

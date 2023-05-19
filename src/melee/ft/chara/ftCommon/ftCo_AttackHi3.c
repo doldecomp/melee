@@ -17,7 +17,7 @@
 bool ftCo_AttackHi3_CheckInput(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_Pad_A) {
+    if (fp->input.x668 & HSD_PAD_A) {
         if (fp->input.lstick.y >=
                 p_ftCommonData->attackhi3_stick_threshold_y &&
             ftCo_GetLStickAngle(fp) > p_ftCommonData->x20)

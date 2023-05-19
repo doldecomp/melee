@@ -25,7 +25,7 @@ void ftZd_SpecialLw_8013ADB4(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (!fp->x2219_b0) {
-        efSync_Spawn(1276, gobj, fp->parts[104].x0_jobj);
+        efSync_Spawn(1276, gobj, fp->parts[104].joint);
         fp->x2219_b0 = true;
     }
 
@@ -42,7 +42,7 @@ void ftZd_SpecialLw_8013AE30(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (!fp->x2219_b0) {
-        efSync_Spawn(1277, gobj, fp->parts[FtPart_HipN].x0_jobj);
+        efSync_Spawn(1277, gobj, fp->parts[FtPart_HipN].joint);
         fp->x2219_b0 = true;
     }
 
@@ -80,7 +80,7 @@ static void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* gobj)
     fp->self_vel.y = fp->self_vel.y / attributes->x74;
     fp->gr_vel = fp->gr_vel / attributes->x70;
 
-    lb_8000B1CC(fp->parts[FtPart_TopN].x0_jobj, NULL, &sp20);
+    lb_8000B1CC(fp->parts[FtPart_TopN].joint, NULL, &sp20);
     lb_800119DC(&sp20, 120, 0.4, 0.003, 60 * deg_to_rad);
 
     fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialLw_8013ADB4;

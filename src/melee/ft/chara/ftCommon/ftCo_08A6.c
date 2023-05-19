@@ -10,7 +10,7 @@
 
 #include <placeholder.h>
 
-#if defined(MWERKS_GEKKO) && !defined(WIP)
+#if defined(MWERKS_GEKKO)
 /* static */ float const lbl_804D8448 = 0;
 /* static */ float const lbl_804D844C = 1;
 /* static */ double const ftCo_804D8450 = 4503599627370496;

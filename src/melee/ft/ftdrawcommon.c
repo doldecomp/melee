@@ -608,7 +608,7 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             phi_r25 = temp_r25;
             phi_r30 = phi_r30;
         } while (temp_r25 < 4U);
-        if (fighter->x221D_flag.bits.b6 != 0) {
+        if (fighter->x221D_b6 != 0) {
             phi_r26 = fighter + (0U * 0x4C);
             phi_r30 = phi_r30;
             while (phi_r25 < fighter->x119E_hurtboxNum) {

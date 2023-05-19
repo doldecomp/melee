@@ -148,12 +148,12 @@ static inline void doPhys(HSD_GObj* gobj)
             FighterKind kind = ftLib_800872A4(gobj);
             switch (kind) {
             case FTKIND_CAPTAIN:
-                efSync_Spawn(1167, gobj, fp->parts[FtPart_TopN].x0_jobj,
-                             fp->parts[57].x0_jobj);
+                efSync_Spawn(1167, gobj, fp->parts[FtPart_TopN].joint,
+                             fp->parts[57].joint);
                 break;
             case FTKIND_GANON:
-                efSync_Spawn(1291, gobj, fp->parts[FtPart_TopN].x0_jobj,
-                             fp->parts[78].x0_jobj);
+                efSync_Spawn(1291, gobj, fp->parts[FtPart_TopN].joint,
+                             fp->parts[78].joint);
                 break;
             }
             fp->x2219_b0 = true;

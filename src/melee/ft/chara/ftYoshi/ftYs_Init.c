@@ -601,7 +601,7 @@ void ftYs_Init_8012BE3C(HSD_GObj* gobj) {
     x1CC = &fp->co_attrs.x1CC;
     part = ftParts_8007500C(fp, FtPart_HipN);
     fp2 = GET_FIGHTER(gobj);
-    jobj = fp->parts[part].x0_jobj;
+    jobj = fp->parts[part].joint;
     efAsync_Spawn(gobj, &fp2->x60C, FtPart_HipN, 1231, jobj, x1CC);
 }
 

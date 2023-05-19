@@ -1436,7 +1436,7 @@ void Item_802697D4(HSD_GObj* gobj)
             mpLib_800567C0(item_data->xC30, &item_data->pos,
                            &item_data->x64_vec_unk2);
         } else {
-            mpLib_800567C0(item_data->x378_itemColl.x14C_ground.index,
+            mpLib_800567C0(item_data->x378_itemColl.floor.index,
                            &item_data->pos, &item_data->x64_vec_unk2);
         }
     }

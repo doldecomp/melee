@@ -182,8 +182,8 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
         ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(gobj);
         fp = GET_FIGHTER(gobj);
         if (fp->kind != FTKIND_PICHU) {
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].x0_jobj,
-                        0, &vec);
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint, 0,
+                        &vec);
             efSync_Spawn(1012, gobj, &vec);
             fp->x2219_b0 = true;
             fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -193,8 +193,8 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         if (fp->kind != FTKIND_PICHU) {
             f32 tempf;
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].x0_jobj,
-                        0, &vec2);
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint, 0,
+                        &vec2);
             tempf = HSD_Randf();
             vec2.x += 6 * tempf - 3;
             tempf = HSD_Randf();
@@ -224,8 +224,8 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
         ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
         fp = GET_FIGHTER(gobj);
         if (fp->kind != FTKIND_PICHU) {
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].x0_jobj,
-                        0, &vec);
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint, 0,
+                        &vec);
             efSync_Spawn(1012, gobj, &vec);
             fp->x2219_b0 = true;
             fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -235,8 +235,8 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         if (fp->kind != FTKIND_PICHU) {
             f32 tempf;
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].x0_jobj,
-                        0, &vec2);
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint, 0,
+                        &vec2);
             tempf = HSD_Randf();
             vec2.x += (10 * tempf) - 5;
             tempf = HSD_Randf();
@@ -270,7 +270,7 @@ void ftPk_SpecialHi_8012642C(HSD_GObj* gobj)
     scl.x = pika_attr->x7C_scale.x;
     scl.y = pika_attr->x7C_scale.y;
     scl.z = pika_attr->x7C_scale.z;
-    jobj = fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].x0_jobj;
+    jobj = fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint;
     HSD_JObjSetScale(jobj, &scl);
 
     velocity_vec = fp->self_vel;
@@ -338,8 +338,8 @@ void ftPk_SpecialHiStart1_Coll(HSD_GObj* gobj)
         collData = &fighter2->coll_data;
         pika_attr = fighter2->dat_attrs;
         if (collData->env_flags & 98304) {
-            f32 angle = atan2f(collData->x14C_ground.normal.x,
-                               collData->x14C_ground.normal.y);
+            f32 angle =
+                atan2f(collData->floor.normal.x, collData->floor.normal.y);
             f32 angle2 = (fighter2->facing_dir * angle) + pika_attr->x68;
             ftParts_8007592C(fighter2,
                              ftParts_8007500C(fighter2, FtPart_XRotN), angle2);
@@ -347,8 +347,7 @@ void ftPk_SpecialHiStart1_Coll(HSD_GObj* gobj)
         scl.x = pika_attr->x6C_scale.x;
         scl.y = pika_attr->x6C_scale.y;
         scl.z = pika_attr->x6C_scale.z;
-        jobj =
-            fighter2->parts[ftParts_8007500C(fighter2, FtPart_XRotN)].x0_jobj;
+        jobj = fighter2->parts[ftParts_8007500C(fighter2, FtPart_XRotN)].joint;
         HSD_JObjSetScale(jobj, &scl);
     }
 
@@ -388,7 +387,7 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
 
         if (bool0) {
             f32 tempf =
-                lbVector_AngleXY(&collData->x14C_ground.normal, &fp->self_vel);
+                lbVector_AngleXY(&collData->floor.normal, &fp->self_vel);
             if (tempf > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftCommon_8007D7FC(fp);
                 ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(gobj);
@@ -401,24 +400,24 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
 
     if (!ftCliffCommon_80081298(gobj)) {
         if (collData->env_flags & 24576) {
-            f32 angle = lbVector_AngleXY(&collData->x188_ceiling.normal,
-                                         &fp->self_vel);
+            f32 angle =
+                lbVector_AngleXY(&collData->ceiling.normal, &fp->self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
             }
         }
 
         if (collData->env_flags & 63) {
-            f32 angle = lbVector_AngleXY(&collData->x160_rightwall.normal,
-                                         &fp->self_vel);
+            f32 angle =
+                lbVector_AngleXY(&collData->right_wall.normal, &fp->self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
             }
         }
 
         if (collData->env_flags & 4032) {
-            f32 angle = lbVector_AngleXY(&collData->x174_leftwall.normal,
-                                         &fp->self_vel);
+            f32 angle =
+                lbVector_AngleXY(&collData->left_wall.normal, &fp->self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
             }
@@ -477,8 +476,8 @@ void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
     collData = &fp->coll_data;
     pika_attr = fp->dat_attrs;
     if (fp->coll_data.env_flags & 98304) {
-        f32 angle = (fp->facing_dir * atan2f(collData->x14C_ground.normal.x,
-                                             collData->x14C_ground.normal.y)) +
+        f32 angle = (fp->facing_dir * atan2f(collData->floor.normal.x,
+                                             collData->floor.normal.y)) +
                     pika_attr->x68;
         ftParts_8007592C(fp, ftParts_8007500C(fp, FtPart_XRotN), angle);
     }
@@ -486,7 +485,7 @@ void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
     scl.x = pika_attr->x6C_scale.x;
     scl.y = pika_attr->x6C_scale.y;
     scl.z = pika_attr->x6C_scale.z;
-    jobj = fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].x0_jobj;
+    jobj = fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint;
     HSD_JObjSetScale(jobj, &scl);
 }
 
@@ -522,8 +521,8 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
         lstick_direction.y = fp->input.lstick.y;
         lstick_direction.z = 0.0f;
 
-        if (!(lbVector_AngleXY(&collData->x14C_ground.normal,
-                               &lstick_direction) < (f32) M_PI_2) &&
+        if (!(lbVector_AngleXY(&collData->floor.normal, &lstick_direction) <
+              (f32) M_PI_2) &&
             (!ft_8009A134(gobj)))
         {
             Fighter* fighter2;

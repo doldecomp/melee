@@ -306,7 +306,7 @@ void ftPk_SpecialLwLoop0_Anim(HSD_GObj* gobj)
         fighter_copy->cb.x21DC_callback_OnTakeDamage = 0;
         fp = GET_FIGHTER(gobj);
         efAsync_Spawn(gobj, &fp->x60C, 0, 1216,
-                      fighter_copy->parts[FtPart_TopN].x0_jobj);
+                      fighter_copy->parts[FtPart_TopN].joint);
     }
 }
 
@@ -332,7 +332,7 @@ void ftPk_SpecialAirLwLoop0_Anim(HSD_GObj* gobj)
         fighter_copy->self_vel.y = (f32) pika_attr->xB4;
         fp = GET_FIGHTER(gobj);
         efAsync_Spawn(gobj, &fp->x60C, 0, 1216,
-                      fighter_copy->parts[FtPart_TopN].x0_jobj);
+                      fighter_copy->parts[FtPart_TopN].joint);
     }
 }
 

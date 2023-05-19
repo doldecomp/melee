@@ -316,7 +316,7 @@ void ftKp_Init_OnDeath(HSD_GObj* gobj)
     {
         ftKoopaVars* vars = (ftKoopaVars*) &fp->fv.kp.x222C;
 
-        fp->dmg.x18B0 = koopaAttr->x0;
+        fp->dmg.armor0 = koopaAttr->x0;
         vars->x0 = koopaAttr->x10;
         vars->x4 = koopaAttr->x18;
     }

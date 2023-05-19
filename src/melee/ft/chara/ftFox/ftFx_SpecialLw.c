@@ -28,7 +28,7 @@ void ftFx_SpecialLw_CreateLoopGFX(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (fp->x2219_b0 == false) {
-        efSync_Spawn(1160, gobj, fp->parts[FtPart_HipN].x0_jobj);
+        efSync_Spawn(1160, gobj, fp->parts[FtPart_HipN].joint);
         fp->x2219_b0 = true;
     }
 
@@ -43,7 +43,7 @@ void ftFx_SpecialLw_CreateStartGFX(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (fp->x2219_b0 == false) {
-        efSync_Spawn(1161, gobj, fp->parts[FtPart_HipN].x0_jobj);
+        efSync_Spawn(1161, gobj, fp->parts[FtPart_HipN].joint);
         fp->x2219_b0 = true;
     }
 
@@ -57,7 +57,7 @@ void ftFx_SpecialLw_CreateReflectGFX(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (fp->x2219_b0 == false) {
-        efSync_Spawn(1162, gobj, fp->parts[FtPart_HipN].x0_jobj);
+        efSync_Spawn(1162, gobj, fp->parts[FtPart_HipN].joint);
         fp->x2219_b0 = true;
         fp->x2219_b0 = true;
     }
@@ -124,7 +124,7 @@ void ftFx_SpecialLwStart_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.held_inputs & HSD_Pad_B) == false) {
+    if ((fp->input.held_inputs & HSD_PAD_B) == false) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -148,7 +148,7 @@ void ftFx_SpecialAirLwStart_Anim(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (!(fp->input.held_inputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -268,7 +268,7 @@ void ftFx_SpecialLwLoop_Anim(HSD_GObj* gobj)
 {
     /// @todo Shared @c inline with #ftFx_SpecialAirLwLoop_Anim.
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->input.held_inputs & HSD_Pad_B) == false) {
+    if ((fp->input.held_inputs & HSD_PAD_B) == false) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -292,7 +292,7 @@ void ftFx_SpecialAirLwLoop_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.held_inputs & HSD_Pad_B) == false) {
+    if ((fp->input.held_inputs & HSD_PAD_B) == false) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -522,7 +522,7 @@ void ftFx_SpecialLwTurn_Anim(HSD_GObj* gobj)
     u8 _[16];
 #endif
 
-    if (!(fp->input.held_inputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -546,7 +546,7 @@ void ftFx_SpecialAirLwTurn_Anim(HSD_GObj* gobj)
     u8 _[20];
 #endif
 
-    if (!(fp->input.held_inputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -743,7 +743,7 @@ void ftFx_SpecialLwHit_Anim(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (!(fp->input.held_inputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -772,7 +772,7 @@ void ftFx_SpecialAirLwHit_Anim(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (!(fp->input.held_inputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -900,7 +900,7 @@ void ftFx_SpecialLwHit_Enter(HSD_GObj* gobj)
 
     fp->facing_dir = fp->ReflectAttr.x1A2C_reflectHitDirection;
 
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].x0_jobj, NULL,
+    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint, NULL,
                 &sp14);
 
     lb_800119DC(&sp14, 120, 3, 0.1, M_PI / 3);

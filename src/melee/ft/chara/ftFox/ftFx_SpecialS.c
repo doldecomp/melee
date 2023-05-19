@@ -26,7 +26,7 @@ void ftFx_SpecialS_CreateGFX(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2219_b0 == false) {
-        efSync_Spawn(0x48D, gobj, fp->parts[FtPart_TopN].x0_jobj,
+        efSync_Spawn(0x48D, gobj, fp->parts[FtPart_TopN].joint,
                      &fp->facing_dir);
         fp->x2219_b0 = true;
     }
@@ -308,7 +308,7 @@ void ftFx_SpecialS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.x668 & HSD_Pad_B) != false) {
+    if ((fp->input.x668 & HSD_PAD_B) != false) {
         if ((s32) fp->ground_or_air == GA_Air) {
             ftFx_SpecialAirSEnd_Enter(gobj);
             return;
@@ -325,7 +325,7 @@ void ftFx_SpecialAirS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.x668 & HSD_Pad_B) != false) {
+    if ((fp->input.x668 & HSD_PAD_B) != false) {
         if ((s32) fp->ground_or_air == GA_Air) {
             ftFx_SpecialAirSEnd_Enter(gobj);
             return;

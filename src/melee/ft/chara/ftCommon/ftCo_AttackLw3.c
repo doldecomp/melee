@@ -31,7 +31,7 @@ typedef enum cmd_var_idx {
 bool ftCo_AttackLw3_CheckInput(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_Pad_A) {
+    if (fp->input.x668 & HSD_PAD_A) {
         if (fp->input.lstick.y <= p_ftCommonData->xB0 &&
             ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20)
         {
@@ -103,7 +103,7 @@ void ftCo_AttackLw3_Anim(HSD_GObj* gobj)
 static bool checkPadA(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_Pad_A) {
+    if (fp->input.x668 & HSD_PAD_A) {
         if (fp->cmd_vars[cmd_unk0_bool]) {
             decideFighter(gobj);
             return true;
@@ -116,7 +116,7 @@ static bool checkPadA(ftCo_GObj* gobj)
 static bool checkItemThrowInput(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_Pad_A &&
+    if (fp->input.x668 & HSD_PAD_A &&
         fp->input.lstick.y <= p_ftCommonData->xB0 &&
         ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20)
     {

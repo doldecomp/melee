@@ -175,7 +175,7 @@ void ftMs_SpecialNLoop_Anim(HSD_GObj* gobj)
 #endif
 
     if (fp->mv.ms.specialn.x0 % 30 == 0) {
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].x0_jobj, 0,
+        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint, 0,
                     &sp28);
         lb_800119DC(&sp28, 10, 0.5, 0.05, 60 * deg_to_rad);
     }
@@ -200,7 +200,7 @@ void ftMs_SpecialAirNLoop_Anim(HSD_GObj* gobj)
 #endif
 
     if ((s32) fp->mv.ms.specialn.x0 % 30 == 0) {
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].x0_jobj, 0,
+        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint, 0,
                     &sp28);
         lb_800119DC(&sp28, 10, 0.5, 0.05, 60 * deg_to_rad);
     }
@@ -342,7 +342,7 @@ void ftMs_SpecialNEnd_Anim(HSD_GObj* gobj)
 
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
         //         Fighter_BonePersonalToCommon
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].x0_jobj, 0,
+        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint, 0,
                     &position);
         // AestheticWindEffect(r3=sourcelocation,r4=duration,f1=radiusSize,f2=effectdegradation,f3=unk)
         lb_800119DC(&position, 120, 0.9, 0.02, 60 * deg_to_rad);
@@ -406,7 +406,7 @@ void ftMs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
 
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
         //         Fighter_BonePersonalToCommon
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].x0_jobj, 0,
+        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint, 0,
                     &pos);
         // AestheticWindEffect(r3=sourcelocation,r4=duration,f1=radiusSize,f2=effectdegradation,f3=unk)
         lb_800119DC(&pos, 120, 0.9, 0.02, 60 * deg_to_rad);

@@ -34,12 +34,12 @@ void ftZd_SpecialHi_801396E0(HSD_GObj* gobj)
 
     if (!fp->x2219_b0) {
         Vec3 vec;
-        lb_8000B1CC(fp->parts[FtPart_HipN].x0_jobj, NULL, &vec);
+        lb_8000B1CC(fp->parts[FtPart_HipN].joint, NULL, &vec);
 
         if (fp->ground_or_air == GA_Ground) {
-            efSync_Spawn(1270, gobj, fp->parts->x0_jobj);
+            efSync_Spawn(1270, gobj, fp->parts->joint);
         } else {
-            efSync_Spawn(1271, gobj, fp->parts->x0_jobj);
+            efSync_Spawn(1271, gobj, fp->parts->joint);
         }
 
         fp->x2219_b0 = true;
@@ -55,7 +55,7 @@ void ftZd_SpecialHi_8013979C(HSD_GObj* gobj)
 
     {
         Vec3 vec;
-        lb_8000B1CC(fp->parts[FtPart_HipN].x0_jobj, NULL, &vec);
+        lb_8000B1CC(fp->parts[FtPart_HipN].joint, NULL, &vec);
 
         if (!fp->x2219_b0) {
             efSync_Spawn(1285, gobj, &vec);
@@ -78,7 +78,7 @@ static void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
 
     {
         ssize_t boneIndex = ftParts_8007500C(fp, 4);
-        HSD_JObj* jObj = fp->parts[boneIndex].x0_jobj;
+        HSD_JObj* jObj = fp->parts[boneIndex].joint;
 
         {
             Vec3 vec;
@@ -136,7 +136,7 @@ void ftZd_SpecialAirHi_Enter(HSD_GObj* gobj)
 #endif
 
             ssize_t boneIndex = ftParts_8007500C(fp, 4);
-            HSD_JObj* jObj = fp->parts[boneIndex].x0_jobj;
+            HSD_JObj* jObj = fp->parts[boneIndex].joint;
 
             lb_8000B1CC(jObj, NULL, &vec);
             lb_800119DC(&vec, 120, 1.5, 0.02, 60 * (f32) M_PI / 180);
@@ -352,23 +352,23 @@ void ftZd_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
 
     if (!ftCliffCommon_80081298(gobj)) {
         if ((coll_data->env_flags & MPCOLL_CEIL) != 0) {
-            f32 angle = lbVector_AngleXY(&coll_data->x188_ceiling.normal,
-                                         &fp->self_vel);
+            f32 angle =
+                lbVector_AngleXY(&coll_data->ceiling.normal, &fp->self_vel);
             if (angle > deg_to_rad * (90.0F + sa->x60)) {
                 ftZd_SpecialHi_8013A764(gobj);
             }
         }
 
         if ((coll_data->env_flags & MPCOLL_RIGHTWALL) != 0) {
-            f32 angle = lbVector_AngleXY(&coll_data->x160_rightwall.normal,
-                                         &fp->self_vel);
+            f32 angle =
+                lbVector_AngleXY(&coll_data->right_wall.normal, &fp->self_vel);
             if (angle > (deg_to_rad * (90.0F + sa->x60))) {
                 ftZd_SpecialHi_8013A764(gobj);
             }
         }
         if ((coll_data->env_flags & MPCOLL_LEFTWALL) != 0) {
-            f32 angle = lbVector_AngleXY(&coll_data->x174_leftwall.normal,
-                                         &fp->self_vel);
+            f32 angle =
+                lbVector_AngleXY(&coll_data->left_wall.normal, &fp->self_vel);
             if (angle > (deg_to_rad * (90.0F + sa->x60))) {
                 ftZd_SpecialHi_8013A764(gobj);
             }
@@ -457,7 +457,7 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
     }
 
     if (!(var_f31 < attributes->x50)) {
-        groundVector = &collData->x14C_ground.normal;
+        groundVector = &collData->floor.normal;
         inputVector.x = fp->input.lstick.x;
         inputVector.y = fp->input.lstick.y;
         inputVector.z = 0;

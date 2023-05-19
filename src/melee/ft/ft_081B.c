@@ -226,7 +226,7 @@ lbl_80081DB4:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_80081DD4(void)
+asm bool ft_80081DD4(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80081DD4 0007E9B4  7C 08 02 A6 */	mflr r0
@@ -3699,7 +3699,7 @@ lbl_800848C0:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_800848DC(void)
+asm void ft_800848DC(ftCo_GObj* goibj, HSD_GObjEvent cb)
 {
     // clang-format off
     nofralloc

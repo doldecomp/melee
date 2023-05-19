@@ -20,10 +20,10 @@ void lbRefract_80022BD0(void);
 
 #pragma region lbrefract_003
 
-f32 atan2f(f32 y, f32 x);
-f32 acosf(f32);
-f32 asinf(f32);
-f32 atanf(f32);
+float atan2f(float y, float x);
+float acosf(float);
+float asinf(float);
+float atanf(float);
 
 #pragma endregion
 

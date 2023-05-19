@@ -170,9 +170,8 @@ static void ftGw_SpecialN_CreateSausage(HSD_GObj* gobj)
             sp38.x = 2.5f;
             sp38.y = 6.5f;
             sp38.z = 0.0f;
-            lb_8000B1CC(
-                fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].x0_jobj,
-                &sp38, &sp44);
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint,
+                        &sp38, &sp44);
             temp_fp = GET_FIGHTER(gobj);
             {
                 int const len = (signed) ARRAY_SIZE(sausageCount);
@@ -306,10 +305,10 @@ void ftGw_SpecialN_IASA(HSD_GObj* gobj)
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* gawAttrs = gawAttrs = getFtSpecialAttrsD(fp);
 
-    if ((fp->input.held_inputs & HSD_Pad_B) == false) {
+    if ((fp->input.held_inputs & HSD_PAD_B) == false) {
         fp->mv.gw.SpecialN.isChefLoopDisable = true;
     }
-    if (((u32) fp->cmd_vars[1] != 0U) && (fp->input.x668 & HSD_Pad_B) &&
+    if (((u32) fp->cmd_vars[1] != 0U) && (fp->input.x668 & HSD_PAD_B) &&
         ((f32) fp->mv.gw.SpecialN.maxSausage <
          gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
     {
@@ -325,10 +324,10 @@ void ftGw_SpecialAirN_IASA(HSD_GObj* gobj)
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* gawAttrs = gawAttrs = getFtSpecialAttrsD(fp);
 
-    if ((fp->input.held_inputs & HSD_Pad_B) == false) {
+    if ((fp->input.held_inputs & HSD_PAD_B) == false) {
         fp->mv.gw.SpecialN.isChefLoopDisable = true;
     }
-    if (((u32) fp->cmd_vars[1] != 0U) && (fp->input.x668 & HSD_Pad_B) &&
+    if (((u32) fp->cmd_vars[1] != 0U) && (fp->input.x668 & HSD_PAD_B) &&
         ((f32) fp->mv.gw.SpecialN.maxSausage <
          gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
     {

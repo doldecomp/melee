@@ -25,14 +25,14 @@ float const ftPe_Float_804D97C4 = 1;
 /* static */ bool ftPe_Float_CheckContinueInput(Fighter* fp)
 {
     return fp->input.lstick.y >= p_ftCommonData->x70_someLStickYMax ||
-           fp->input.held_inputs & HSD_Pad_XY;
+           fp->input.held_inputs & HSD_PAD_XY;
 }
 
 static bool checkStartFloatInput(HSD_GObj* gobj)
 {
     Fighter* temp_r6 = GET_FIGHTER(gobj);
     return temp_r6->input.lstick.y <= -p_ftCommonData->x88 &&
-           temp_r6->input.held_inputs & HSD_Pad_XY;
+           temp_r6->input.held_inputs & HSD_PAD_XY;
 }
 
 bool ftPe_8011BA54(HSD_GObj* gobj)
@@ -188,7 +188,7 @@ void ftPe_8011BB6C(HSD_GObj* gobj, bool arg1)
     fp->self_vel.y = 0;
     fp->x2219_b0 = true;
     efAsync_Spawn(gobj, &fp->x60C, 0, 1236,
-                  fp->parts[ftParts_8007500C(fp, FtPart_TransN)].x0_jobj);
+                  fp->parts[ftParts_8007500C(fp, FtPart_TransN)].joint);
 }
 #endif
 
@@ -245,7 +245,7 @@ void ftPe_Float_IASA(HSD_GObj* gobj)
         /// @todo Call #checkContinueFloatInput
         bool float_input =
             fp->input.lstick.y >= p_ftCommonData->x70_someLStickYMax ||
-            fp->input.held_inputs & HSD_Pad_XY;
+            fp->input.held_inputs & HSD_PAD_XY;
         if (!float_input) {
             updateFloatDir(gobj);
         }

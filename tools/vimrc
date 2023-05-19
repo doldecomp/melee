@@ -7,7 +7,8 @@ augroup project
   autocmd BufRead,BufNewFile .clang-format set filetype=yaml | set syntax=yaml
 augroup END
 
-command! -nargs=1 FpGrep vimgrep /\<fp+<args>\>/ src/melee/ft/**/*.[ch]
+command! -nargs=1 FpGrep vimgrep /\<fp+<args>\>/ src/melee/ft/**/*.h
+command! -nargs=1 LblGrep vimgrep /^<args>:$/ expected/dump/**/*.s
 
 let &path.="src,src/melee,src/melee/ft/chara,src/MSL,src/sysdolphin,src/dolphin,"
 

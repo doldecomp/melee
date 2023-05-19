@@ -36,7 +36,7 @@ void ftMt_SpecialHi_SetStartGFX(HSD_GObj* gobj)
         Vec3 pos;
 
         if (!fp1->x2219_b0) {
-            lb_8000B1CC(fp1->parts[FtPart_WaistN].x0_jobj, NULL, &pos);
+            lb_8000B1CC(fp1->parts[FtPart_WaistN].joint, NULL, &pos);
             efSync_Spawn(0x4E8, gobj, &pos);
             fp1->x2219_b0 = true;
         }
@@ -56,7 +56,7 @@ void ftMt_SpecialHi_SetEndGFX(HSD_GObj* gobj)
         Vec3 pos;
 
         if (!fp1->x2219_b0) {
-            lb_8000B1CC(fp1->parts[FtPart_WaistN].x0_jobj, NULL, &pos);
+            lb_8000B1CC(fp1->parts[FtPart_WaistN].joint, NULL, &pos);
             fp1->x2219_b0 = true;
         }
     }
@@ -325,7 +325,7 @@ void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)
         }
 
         if ((collData->env_flags & MPCOLL_CEIL) &&
-            (lbVector_AngleXY(&collData->x188_ceiling.normal, &fp1->self_vel) >
+            (lbVector_AngleXY(&collData->ceiling.normal, &fp1->self_vel) >
              deg_to_rad *
                  (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP)))
         {
@@ -333,8 +333,7 @@ void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)
         }
 
         if (collData->env_flags & MPCOLL_RIGHTWALL &&
-            (lbVector_AngleXY(&collData->x160_rightwall.normal,
-                              &fp1->self_vel) >
+            (lbVector_AngleXY(&collData->right_wall.normal, &fp1->self_vel) >
              deg_to_rad *
                  (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP)))
         {
@@ -342,7 +341,7 @@ void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)
         }
 
         if (collData->env_flags & MPCOLL_LEFTWALL &&
-            lbVector_AngleXY(&collData->x174_leftwall.normal, &fp1->self_vel) >
+            lbVector_AngleXY(&collData->left_wall.normal, &fp1->self_vel) >
                 deg_to_rad *
                     (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP))
         {
@@ -442,7 +441,7 @@ void ftMt_SpecialHi_Enter(HSD_GObj* gobj)
         stickVec.y = fp->input.lstick.y;
         stickVec.z = 0.0f;
 
-        if (!(lbVector_AngleXY(&collData->x14C_ground.normal, &stickVec) <
+        if (!(lbVector_AngleXY(&collData->floor.normal, &stickVec) <
               (f32) M_PI_2) &&
             (ft_8009A134(gobj) == false))
         {

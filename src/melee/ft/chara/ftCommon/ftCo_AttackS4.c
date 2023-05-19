@@ -36,7 +36,7 @@ typedef enum cmd_var_idx {
 
 static bool checkLStick(Fighter* fp)
 {
-    if (fp->input.x668 & HSD_Pad_A &&
+    if (fp->input.x668 & HSD_PAD_A &&
         ABS(fp->input.lstick.x) >= p_ftCommonData->x3C &&
         fp->x670_timer_lstick_tilt_x < p_ftCommonData->x40)
     {
@@ -67,7 +67,7 @@ bool ftCo_AttackS4_CheckInput(ftCo_GObj* gobj)
 
 static bool checkFacingDir(Fighter* fp)
 {
-    if (fp->input.x668 & HSD_Pad_A &&
+    if (fp->input.x668 & HSD_PAD_A &&
         fp->input.lstick.x * fp->facing_dir >= p_ftCommonData->x3C)
     {
         return true;
@@ -101,7 +101,7 @@ static bool checkItemThrow(ftCo_GObj* gobj, float stick_x_sign)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->item_gobj != NULL) {
-        if (fp->input.held_inputs & HSD_Pad_LR ||
+        if (fp->input.held_inputs & HSD_PAD_LR ||
             it_8026B30C(fp->item_gobj) == 0 ||
             (it_8026B30C(fp->item_gobj) == 3 && it_8026B594(fp->item_gobj)) ||
             ft_800DF21C(fp))

@@ -25,7 +25,7 @@ s32 ft_80087818(HSD_GObj* gobj, s32 arg1)
 s32 ft_80087838(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return TEST(fp->x221D_flag.bits.b7 & 1);
+    return TEST(fp->x221D_b7 & 1);
 }
 
 s32 ft_80087858(HSD_GObj* gobj)
@@ -106,7 +106,7 @@ s32 ft_800879F8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x221D_flag.bits.b6 & 1) {
+    if (fp->x221D_b6 & 1) {
         return true;
     }
 
@@ -131,13 +131,13 @@ s32 ft_80087A18(HSD_GObj* gobj)
 u8 ft_80087A80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x2114_SmashAttr.x2134_vibrateFrame;
+    return fp->smash_attrs.x2134_vibrateFrame;
 }
 
 f32 ft_80087A8C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x2114_SmashAttr.x2138_smashSinceHitbox;
+    return fp->smash_attrs.x2138_smashSinceHitbox;
 }
 
 s32 ft_80087A98(HSD_GObj* gobj)

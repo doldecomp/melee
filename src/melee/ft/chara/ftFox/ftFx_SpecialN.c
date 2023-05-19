@@ -28,8 +28,8 @@ void ftFx_SpecialN_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
     sp14.y = 1.2325000762939453f;
     sp14.z = 4.263599872589111f;
 
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].x0_jobj,
-                &sp14, pos);
+    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint, &sp14,
+                pos);
 }
 
 void ftFx_SpecialN_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
@@ -41,8 +41,8 @@ void ftFx_SpecialN_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
     sp14.y = 1.2325000762939453f;
     sp14.z = 0.013600001111626625f;
 
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].x0_jobj,
-                &sp14, pos);
+    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint, &sp14,
+                pos);
 }
 
 // 0x800E5D90
@@ -627,7 +627,7 @@ void ftFx_SpecialNStart_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (((u32) fp->cmd_vars[0] != 0U) && (fp->input.x668 & HSD_Pad_B)) {
+    if (((u32) fp->cmd_vars[0] != 0U) && (fp->input.x668 & HSD_PAD_B)) {
         fp->mv.fx.SpecialN.isBlasterLoop = true;
     }
 }
@@ -639,7 +639,7 @@ void ftFx_SpecialNLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (((u32) fp->cmd_vars[0] != 0U) && (fp->input.x668 & HSD_Pad_B)) {
+    if (((u32) fp->cmd_vars[0] != 0U) && (fp->input.x668 & HSD_PAD_B)) {
         fp->mv.fx.SpecialN.isBlasterLoop = true;
     }
 }
@@ -657,7 +657,7 @@ void ftFx_SpecialAirNStart_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (((u32) fp->cmd_vars[0] != 0U) && (fp->input.x668 & HSD_Pad_B)) {
+    if (((u32) fp->cmd_vars[0] != 0U) && (fp->input.x668 & HSD_PAD_B)) {
         fp->mv.fx.SpecialN.isBlasterLoop = true;
     }
 }
@@ -669,7 +669,7 @@ void ftFx_SpecialAirNLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (((u32) fp->cmd_vars[0] != 0U) && (fp->input.x668 & HSD_Pad_B)) {
+    if (((u32) fp->cmd_vars[0] != 0U) && (fp->input.x668 & HSD_PAD_B)) {
         fp->mv.fx.SpecialN.isBlasterLoop = true;
     }
 }

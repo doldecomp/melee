@@ -23,7 +23,7 @@
 static bool checkItemThrowInput(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_Pad_A || ft_800DF478(fp)) {
+    if (fp->input.x668 & HSD_PAD_A || ft_800DF478(fp)) {
         if ((unsigned) ftCo_AttackAir_GetMsidFromCStick(fp) -
                     ftCo_MS_AttackAirN <=
                 1 &&
@@ -51,7 +51,7 @@ bool ftCo_AttackAir_CheckItemThrowInput(ftCo_GObj* gobj)
     u8 _[8] = { 0 };
 #endif
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_Pad_A || ft_800DF478(fp)) {
+    if (fp->input.x668 & HSD_PAD_A || ft_800DF478(fp)) {
         if ((unsigned) ftCo_AttackAir_GetMsidFromCStick(fp) -
                     ftCo_MS_AttackAirN <=
                 1 &&

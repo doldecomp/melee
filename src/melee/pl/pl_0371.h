@@ -4,6 +4,7 @@
 #ifndef MELEE_PL_PL_UNKNOWN_001_H
 #define MELEE_PL_PL_UNKNOWN_001_H
 
+#include <placeholder.h>
 #include <baselib/gobj.h>
 
 void pl_80037C60(HSD_GObj*, s32);
@@ -38,5 +39,7 @@ void pl_8003EB30(void);
 void pl_8003722C(void);
 void pl_800373CC(void);
 void pl_80037ECC(void);
+/* 040270 */ void pl_80040270(u8, u8, float);
+void pl_800401F0(u8, int, float, float);
 
 #endif

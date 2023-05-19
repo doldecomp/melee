@@ -203,7 +203,7 @@ void ftMr_SpecialLw_Phys(HSD_GObj* gobj)
         Fighter* fp1 = fp0;
         ftCommon_8007CADC(fp1, 0, sa->speciallw.momentum_x_mul, vel_y);
         ftCommon_8007CB74(gobj);
-        if (fp0->cmd_vars[2] != 0 && (fp0->input.x668 & HSD_Pad_B)) {
+        if (fp0->cmd_vars[2] != 0 && (fp0->input.x668 & HSD_PAD_B)) {
             vel_y = fp0->self_vel.y;
             fp0->self_vel.y = vel_y + sa->speciallw.tap_y_vel_max;
             doPhys(gobj);
@@ -227,7 +227,7 @@ void ftMr_SpecialAirLw_Phys(HSD_GObj* gobj)
     sa = fp->dat_attrs;
 
     if (((s32) fp->fv.mr.x2234_tornadoCharge == false) &&
-        ((u32) fp->cmd_vars[2] != 0U) && ((fp->input.x668 & HSD_Pad_B) != 0))
+        ((u32) fp->cmd_vars[2] != 0U) && ((fp->input.x668 & HSD_PAD_B) != 0))
     {
         ftCommon_8007D508(fp, sa->speciallw.tap_y_vel_max,
                           sa->speciallw.tap_grav);
@@ -256,8 +256,8 @@ static void doColl(HSD_GObj* gobj)
     {
         ftParts_8007592C(fp, 0,
                          fp->facing_dir *
-                             atan2f(fp->coll_data.x14C_ground.normal.x,
-                                    fp->coll_data.x14C_ground.normal.y));
+                             atan2f(fp->coll_data.floor.normal.x,
+                                    fp->coll_data.floor.normal.y));
     } else {
         ftParts_8007592C(fp, 0, 0);
     }

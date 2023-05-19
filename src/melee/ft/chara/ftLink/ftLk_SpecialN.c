@@ -277,7 +277,7 @@ static inline bool unkCondition(ftLk_GObj* gobj)
         u8 _[36] = { 0 };
 #endif
         Vec3 pos;
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].x0_jobj,
+        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
                     NULL, &pos);
         {
             Item_GObj* fv_x14 =
@@ -709,9 +709,8 @@ static inline bool foo(ftLk_GObj* gobj)
         fp->cmd_vars[cmd_unk0_bool] = 0;
         {
             Vec3 vec3;
-            lb_8000B1CC(
-                fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].x0_jobj, NULL,
-                &vec3);
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint,
+                        NULL, &vec3);
             {
                 Item_GObj* arrow_gobj =
                     it_802A83E0(fp->facing_dir, gobj, &vec3,
@@ -738,11 +737,11 @@ static inline void bar(ftLk_GObj* gobj)
 #endif
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ftLk_SpecialN_Vec3Group vecs = ftLk_Init_Vec3Group;
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].x0_jobj, NULL,
+    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint, NULL,
                 &vecs.a);
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].x0_jobj, NULL,
+    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint, NULL,
                 &vecs.b);
-    lb_8000B1CC(fp->parts->x0_jobj, NULL, &vecs.c);
+    lb_8000B1CC(fp->parts->joint, NULL, &vecs.c);
     fp->mv.lk.specialn.x8.x = vecs.b.x - vecs.c.x;
     fp->mv.lk.specialn.x8.y = vecs.b.y - vecs.c.y;
     fp->mv.lk.specialn.x8.z = 0;
@@ -873,11 +872,11 @@ void ftLk_SpecialNLoop_Anim(ftLk_GObj* gobj)
 {
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ftLk_SpecialN_Vec3Group vecs = ftLk_Init_Vec3Group;
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].x0_jobj, NULL,
+    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint, NULL,
                 &vecs.a);
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].x0_jobj, NULL,
+    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint, NULL,
                 &vecs.b);
-    lb_8000B1CC(fp->parts->x0_jobj, NULL, &vecs.c);
+    lb_8000B1CC(fp->parts->joint, NULL, &vecs.c);
     fp->mv.lk.specialn.x8.x = vecs.b.x - vecs.c.x;
     fp->mv.lk.specialn.x8.y = vecs.b.y - vecs.c.y;
     fp->mv.lk.specialn.x8.z = 0;
@@ -1155,11 +1154,11 @@ void ftLk_SpecialAirNStart_Anim(ftLk_GObj* gobj)
     if (!unkCondition(gobj)) {
         ftLk_Fighter* fp = GET_FIGHTER(gobj);
         ftLk_SpecialN_Vec3Group vecs = ftLk_Init_Vec3Group;
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].x0_jobj,
+        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint,
                     NULL, &vecs.a);
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].x0_jobj,
+        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
                     NULL, &vecs.b);
-        lb_8000B1CC(fp->parts->x0_jobj, NULL, &vecs.c);
+        lb_8000B1CC(fp->parts->joint, NULL, &vecs.c);
         fp->mv.lk.specialn.x8.x = vecs.b.x - vecs.c.x;
         fp->mv.lk.specialn.x8.y = vecs.b.y - vecs.c.y;
         fp->mv.lk.specialn.x8.x =
@@ -1276,11 +1275,11 @@ void ftLk_SpecialAirNLoop_Anim(ftLk_GObj* gobj)
 {
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ftLk_SpecialN_Vec3Group vecs = ftLk_Init_Vec3Group;
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].x0_jobj, NULL,
+    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint, NULL,
                 &vecs.a);
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].x0_jobj, NULL,
+    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint, NULL,
                 &vecs.b);
-    lb_8000B1CC(fp->parts->x0_jobj, NULL, &vecs.c);
+    lb_8000B1CC(fp->parts->joint, NULL, &vecs.c);
     fp->mv.lk.specialn.x8.x = vecs.b.x - vecs.c.x;
     fp->mv.lk.specialn.x8.y = vecs.b.y - vecs.c.y;
     fp->mv.lk.specialn.x8.x = atan2f(vecs.b.y - vecs.a.y, vecs.b.x - vecs.a.x);
@@ -1520,7 +1519,7 @@ void ftLk_SpecialNStart_IASA(ftLk_GObj* gobj)
             fp->mv.lk.specialn.x0.y = da->x0;
         }
         /// @todo Shared with #ftLk_SpecialNLoop_IASA
-        if (!(fp->input.held_inputs & HSD_Pad_B)) {
+        if (!(fp->input.held_inputs & HSD_PAD_B)) {
             Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialNEnd, mf, NULL, 0,
                                       1, 0);
             setCallbacks(gobj);
@@ -1575,7 +1574,7 @@ static void doLoopIASA(ftLk_GObj* gobj, FtMotionId msid)
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
     fp->mv.lk.specialn.x0.y = da->x0;
-    if (!(fp->input.held_inputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
         Fighter_ChangeMotionState(gobj, msid, mf, NULL, 0, 1, 0);
         setCallbacks(gobj);
     }
@@ -1656,7 +1655,7 @@ void ftLk_SpecialAirNStart_IASA(ftLk_GObj* gobj)
         if (fp->mv.lk.specialn.x0.y > da->x0) {
             fp->mv.lk.specialn.x0.y = da->x0;
         }
-        if (!(fp->input.held_inputs & HSD_Pad_B)) {
+        if (!(fp->input.held_inputs & HSD_PAD_B)) {
             Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirNEnd, mf, NULL,
                                       0, 1, 0);
             setCallbacks(gobj);
@@ -1963,12 +1962,10 @@ static inline void doEndColl(ftLk_GObj* gobj)
         fp->cmd_vars[cmd_unk1_bool] = false;
         {
             Vec3 rpos, lpos;
-            lb_8000B1CC(
-                fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].x0_jobj, NULL,
-                &rpos);
-            lb_8000B1CC(
-                fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].x0_jobj, NULL,
-                &lpos);
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
+                        NULL, &rpos);
+            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint,
+                        NULL, &lpos);
             rpos.z = lpos.z = 0;
             item_gobj = fp->item_gobj;
             it_802A850C(fp->fv.lk.arrow_gobj, &rpos, &lpos, 5 * deg_to_rad,

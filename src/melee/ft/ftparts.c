@@ -1174,7 +1174,7 @@ void ftParts_SetupParts(HSD_GObj* fighter_obj)
 
     while (jobj != NULL) {
         if (ftParts_8007506C(fighter->kind, part) != 0) {
-            fighter->parts[part].x0_jobj = NULL;
+            fighter->parts[part].joint = NULL;
             part++;
             continue;
         }

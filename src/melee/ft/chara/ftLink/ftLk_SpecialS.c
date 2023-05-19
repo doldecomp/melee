@@ -165,7 +165,7 @@ void onAccessory4(HSD_GObj* gobj)
 #ifdef MUST_MATCH
         u8 _[4];
 #endif
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].x0_jobj,
+        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint,
                     NULL, &pos);
         {
             HSD_GObj* boomerang_gobj =

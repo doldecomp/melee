@@ -201,7 +201,7 @@ void ftNs_SpecialNStart_Anim(HSD_GObj* gobj)
             u8 _[20];
 #endif
 
-            lb_8000B1CC(fp->parts[FtPart_L2ndNa].x0_jobj, NULL, &vec);
+            lb_8000B1CC(fp->parts[FtPart_L2ndNa].joint, NULL, &vec);
             vec.z = 0;
             vec.y += 3 * fp->x34_scale.y;
 
@@ -324,7 +324,7 @@ void ftNs_SpecialAirNStart_Anim(HSD_GObj* gobj)
                 u8 _[20];
 #endif
 
-                lb_8000B1CC(fighter_data2->parts[FtPart_L2ndNa].x0_jobj, NULL,
+                lb_8000B1CC(fighter_data2->parts[FtPart_L2ndNa].joint, NULL,
                             &vec);
                 vec.z = 0;
                 vec.y += 3 * fighter_data2->x34_scale.y;
@@ -446,7 +446,7 @@ void ftNs_SpecialNRelease_IASA(HSD_GObj* gobj)
             }
         }
 
-        if (fp->input.held_inputs & HSD_Pad_B) {
+        if (fp->input.held_inputs & HSD_PAD_B) {
             return;
         }
     }
@@ -500,7 +500,7 @@ void ftNs_SpecialAirNRelease_IASA(HSD_GObj* gobj)
         }
     }
 
-    if (fp->input.held_inputs & HSD_Pad_B) {
+    if (fp->input.held_inputs & HSD_PAD_B) {
         return;
     }
 

@@ -34,7 +34,7 @@ void ftFx_SpecialHi_CreateLaunchGFX(HSD_GObj* gobj)
 
     if (!fp->x2219_b0) {
         efSync_Spawn(1164, gobj,
-                     fp->parts[ftParts_8007500C(fp, FtPart_HipN)].x0_jobj);
+                     fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint);
 
         fp->x2219_b0 = true;
     }
@@ -50,7 +50,7 @@ void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
 
     if (!fp->x2219_b0) {
         efSync_Spawn(1163, gobj,
-                     fp->parts[ftParts_8007500C(fp, FtPart_TransN)].x0_jobj);
+                     fp->parts[ftParts_8007500C(fp, FtPart_TransN)].joint);
 
         fp->x2219_b0 = true;
     }
@@ -310,8 +310,8 @@ void ftFx_SpecialHi_Coll(HSD_GObj* gobj)
 
     if (collData->env_flags & 98304) {
         fp->mv.fx.SpecialHi.rotateModel =
-            atan2f(-collData->x14C_ground.normal.x * fp->facing_dir,
-                   collData->x14C_ground.normal.y);
+            atan2f(-collData->floor.normal.x * fp->facing_dir,
+                   collData->floor.normal.y);
         ftFox_SpecialHi_RotateModel(gobj);
     }
 }
@@ -347,8 +347,7 @@ void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
     if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_BOTH) != false) {
         if (ftFox_SpecialHi_IsBound(gobj) != false) {
             if ((!(collData->env_flags & 98304)) ||
-                (!(lbVector_AngleXY(&collData->x14C_ground.normal,
-                                    &fp->self_vel) <
+                (!(lbVector_AngleXY(&collData->floor.normal, &fp->self_vel) <
                    (0.01745329238474369f *
                     (90.0f + da->x94_FOX_FIREFOX_BOUND_ANGLE)))))
             {
@@ -369,13 +368,13 @@ void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
         f32 var;
         do {
             if (envFlags & 24576) {
-                var = lbVector_AngleXY(&collData->x188_ceiling.normal,
-                                       &fp->self_vel);
+                var =
+                    lbVector_AngleXY(&collData->ceiling.normal, &fp->self_vel);
             } else if (envFlags & 63) {
-                var = lbVector_AngleXY(&collData->x160_rightwall.normal,
+                var = lbVector_AngleXY(&collData->right_wall.normal,
                                        &fp->self_vel);
             } else if (envFlags & 4032) {
-                var = lbVector_AngleXY(&collData->x174_leftwall.normal,
+                var = lbVector_AngleXY(&collData->left_wall.normal,
                                        &fp->self_vel);
             } else {
                 if (((!fp->self_vel.x) && (!fp->self_vel.x)) &&
@@ -466,8 +465,7 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
         sp20.y = fp->input.lstick.y;
         sp20.z = 0.0f;
 
-        if (!(lbVector_AngleXY(&collData->x14C_ground.normal, &sp20) <
-              HALF_PI32) &&
+        if (!(lbVector_AngleXY(&collData->floor.normal, &sp20) < HALF_PI32) &&
             (ft_8009A134(gobj) == false))
         {
             ftCommon_8007D9FC(fp);
@@ -487,8 +485,8 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
             fp->gr_vel = da->x74_FOX_FIREFOX_SPEED * fp->facing_dir;
 
             fp->mv.fx.SpecialHi.rotateModel =
-                atan2f(-collData->x14C_ground.normal.x * fp->facing_dir,
-                       collData->x14C_ground.normal.y);
+                atan2f(-collData->floor.normal.x * fp->facing_dir,
+                       collData->floor.normal.y);
 
             ftFox_SpecialHi_RotateModel(gobj);
             fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialHi_CreateLaunchGFX;
@@ -791,8 +789,7 @@ inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* gobj)
     CollData* collData = collData = getFtColl(fp);
 
     if (fp->coll_data.env_flags & 98304) {
-        f = -atan2f(collData->x14C_ground.normal.x,
-                    collData->x14C_ground.normal.y);
+        f = -atan2f(collData->floor.normal.x, collData->floor.normal.y);
     } else {
         f = 0.0f;
     }

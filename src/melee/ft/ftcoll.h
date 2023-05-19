@@ -2,6 +2,7 @@
 #define _ftcoll_h_
 
 #include <platform.h>
+#include "ftCommon/forward.h"
 
 #include "ft/fighter.h"
 
@@ -89,13 +90,15 @@ UNK_RET ftColl_80079AB0(UNK_PARAMS);
 UNK_RET ftColl_80079C70(UNK_PARAMS);
 UNK_RET ftColl_80079EA8(UNK_PARAMS);
 UNK_RET ftColl_8007A06C(UNK_PARAMS);
-UNK_RET ftColl_8007AC68(UNK_PARAMS);
+bool ftColl_8007AC68(int kb_angle);
 UNK_RET ftColl_8007AC9C(UNK_PARAMS);
 UNK_RET ftColl_8007AD18(UNK_PARAMS);
 UNK_RET ftColl_8007AF60(UNK_PARAMS);
 UNK_RET ftColl_8007AFC8(UNK_PARAMS);
-void ftColl_8007B064(HSD_GObj* gobj, enum_t arg1);
+void ftColl_8007B064(ftCo_GObj* gobj, enum_t arg1);
 UNK_RET ftColl_8007B128(UNK_PARAMS);
 UNK_RET ftColl_80077464(UNK_PARAMS);
+/* 07B6A0 */ void ftColl_8007B6A0(ftCo_GObj* gobj);
+/* 07B7A4 */ void ftColl_8007B7A4(ftCo_GObj* gobj, int);
 
 #endif

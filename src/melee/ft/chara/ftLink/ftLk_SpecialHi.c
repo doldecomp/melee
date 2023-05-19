@@ -24,12 +24,12 @@
 static void onAccessory4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    HSD_JObj* jobj0 = fp->parts[ftParts_8007500C(fp, FtPart_TransN)].x0_jobj;
+    HSD_JObj* jobj0 = fp->parts[ftParts_8007500C(fp, FtPart_TransN)].joint;
     HSD_JObj* jobj1;
     if (fp->kind == FTKIND_LINK) {
-        jobj1 = fp->parts[FtPart_L2ndNa].x0_jobj;
+        jobj1 = fp->parts[FtPart_L2ndNa].joint;
     } else {
-        jobj1 = fp->parts[FtPart_L3rdNa].x0_jobj;
+        jobj1 = fp->parts[FtPart_L3rdNa].joint;
     }
     if (!fp->x2219_b0) {
         if (fp->ground_or_air == GA_Ground) {
