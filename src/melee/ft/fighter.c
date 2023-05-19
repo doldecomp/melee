@@ -26,6 +26,7 @@
 #include "ef/efasync.h"
 #include "ft/ftdata.h"
 #include "ftCommon/ftCo_Damage.h"
+#include "ftCommon/ftCo_DamageFall.h"
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftKirby/ftKb_Init.h"
 #include "ftMasterHand/ftMh_Wait1_0.h"
@@ -102,7 +103,7 @@ UNK_T Fighter_804D6520 = NULL;
 float* Fighter_804D6524 = NULL;
 UNK_T Fighter_804D6528 = NULL;
 UNK_T Fighter_804D652C = NULL;
-UNK_T Fighter_804D6530 = NULL;
+Vec2** Fighter_804D6530 = NULL;
 UNK_T Fighter_804D6534 = NULL;
 UNK_T Fighter_804D6538 = NULL;
 UNK_T Fighter_804D653C = NULL;

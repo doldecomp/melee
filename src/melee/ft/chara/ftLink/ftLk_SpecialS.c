@@ -342,7 +342,7 @@ void ftLk_SpecialS2_IASA(HSD_GObj* gobj)
 
 static bool checkAirBoomerangSomething(HSD_GObj* gobj)
 {
-    if (ft_8009665C()) {
+    if (ft_8009665C(gobj)) {
         return true;
     } else if (ft_800CB870(gobj)) {
         return true;

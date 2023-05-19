@@ -241,7 +241,7 @@ void ftPe_Float_Anim(HSD_GObj* gobj)
 void ftPe_Float_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (!ft_8009665C() && !ftPe_8011BE80(gobj)) {
+    if (!ft_8009665C(gobj) && !ftPe_8011BE80(gobj)) {
         /// @todo Call #checkContinueFloatInput
         bool float_input =
             fp->input.lstick.y >= p_ftCommonData->x70_someLStickYMax ||

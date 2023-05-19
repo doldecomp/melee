@@ -13,6 +13,7 @@
 
 #include "ef/eflib.h"
 #include "ftCommon/ftCo_Damage.h"
+#include "ftCommon/ftCo_DamageFall.h"
 #include "gm/gm_1601.h"
 #include "it/it_26B1.h"
 #include "it/it_27CF.h"
@@ -1947,7 +1948,7 @@ void ftCommon_8008021C(HSD_GObj* gobj)
 
     fp->dmg.x18BC = 0;
     fp->dmg.x18B8 = 0;
-    if (ft_80090690(fp, &shift)) {
+    if (ft_80090690(fp, &shift) != NULL) {
         fp->dmg.x18B8 += shift.x;
         fp->dmg.x18BC += shift.y;
     }

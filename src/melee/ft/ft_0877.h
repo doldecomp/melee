@@ -69,10 +69,6 @@ void ft_80089B08(HSD_GObj*);
 bool ft_8008A1FC(HSD_GObj*);
 void ft_8008A2BC(HSD_GObj*);
 void ft_8008A324(HSD_GObj*);
-void ft_80090594(Fighter*, s32, bool, s32, s32, float);
-u32 ft_80090690(Fighter*, Vec2*);
-void ft_80090718(Fighter*);
-void ft_80090780(HSD_GObj*);
 bool ft_80091A4C(HSD_GObj* gobj);
 unk_t ft_80091D58(void);
 unk_t ft_80092450(void);
@@ -100,7 +96,7 @@ void ft_80095744(HSD_GObj*, bool);
 void ft_800957F4(HSD_GObj* gobj, FtMotionId msid);
 s32 ft_800964FC(Fighter*);
 bool ft_80096540(HSD_GObj*);
-bool ft_8009665C(void);
+bool ft_8009665C(ftCo_GObj* gobj);
 void ft_800968C8(HSD_GObj*);
 void ft_80096900(HSD_GObj*, s32, s32, bool is_interruptable, f32, f32);
 void ft_800969D8(HSD_GObj*, s32, s32, s32, f32, f32, f32);
@@ -1030,5 +1026,6 @@ void ftDk_ThrowFWalk_Coll(HSD_GObj*);
 void ftDk_ThrowFWalk_IASA(HSD_GObj*);
 void ftDk_ThrowFWalk_Phys(HSD_GObj*);
 unk_t mpColl_8004B4B0(void);
+/* 0889F4 */ void ft_800889F4(ftCo_Fighter* fp, UNK_T);
 
 #endif

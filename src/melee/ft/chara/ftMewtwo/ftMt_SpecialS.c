@@ -8,6 +8,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ftCommon/ftCo_DamageFall.h"
 
 // Flag values read during Confusion's reflect think function
 

@@ -145,8 +145,8 @@ typedef struct _ftCommonData {
     /* +15C */ float x15C;
     /* +160 */ float x160;
     /* +164 */ float x164;
-    /* +168 */ UNK_T x168;
-    /* +16C */ UNK_T x16C;
+    /* +168 */ float x168;
+    /* +16C */ float x16C;
     /* +170 */ float x170;
     /* +174 */ float x174;
     /* +178 */ float x178;
@@ -185,7 +185,10 @@ typedef struct _ftCommonData {
     /* +1FC */ float x1FC;
     /* +200 */ float x200;
     /* +204 */ float x204_knockbackFrameDecay;
-    /* +208 */ u8 x208[0x21C - 0x208];
+    /* +208 */ u8 x208[0x210 - 0x208];
+    /* +210 */ float x210;
+    /* +214 */ int x214;
+    /* +218 */ UNK_T x218;
     /* +21C */ float x21C;
     /* +220 */ u8 x220[0x258 - 0x220];
     /* +258 */ float x258;
@@ -977,10 +980,10 @@ struct Fighter {
         /* fp+18FA */ u16 x18fa_model_shift_frames;
         /* fp+18FC */ u8 x18FC;
         /* fp+18FD */ u8 x18FD;
-        /* fp+1900 */ s32 x1900;
-        /* fp+1904 */ s32 x1904;
-        /* fp+1908 */ s32 x1908;
-        /* fp+190C */ s32 x190C;
+        /* fp+1900 */ float x1900;
+        /* fp+1904 */ float x1904;
+        /* fp+1908 */ enum_t x1908;
+        /* fp+190C */ UNK_T x190C;
         /* fp+1910 */ s32 x1910;
         /* fp+1914 */ s32 x1914;
         /* fp+1918 */ s32 x1918;
