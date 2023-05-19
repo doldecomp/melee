@@ -159,7 +159,7 @@ lbl_8033BEC4:
 #endif
 
 /**
- * Sets the type of a single attribute (@attr) in the current vertex
+ * Sets the type of a single attribute (@p attr) in the current vertex
  * descriptor.
  *
  * The current vertex descriptor defines which attributes are present in a
