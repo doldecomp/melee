@@ -26,6 +26,10 @@ def get_functions_info(file_path):
     return functions
 
 
+def calc_percent(current_score, max_score):
+    return 100 - round(100 * current_score / max_score, 2)
+
+
 def main(obj_path: str) -> None:
     expected_root = Path("./expected/build/ssbm.us.1.2/")
     expected_path = expected_root / obj_path
@@ -34,6 +38,8 @@ def main(obj_path: str) -> None:
     entries: List[Tuple[str, int, int, float]] = []
 
     functions_info = get_functions_info(expected_path)
+    file_current_score = 0
+    file_max_score = 0
     for function in functions_info:
         cmd = [
             "python3",
@@ -52,8 +58,10 @@ def main(obj_path: str) -> None:
         current_score = int(result["current_score"])
         max_score = int(result["max_score"])
 
-        percent = 100 - round(100 * current_score / max_score, 2)
+        percent = calc_percent(current_score, max_score)
         entries.append((function["name"], current_score, max_score, percent))
+        file_current_score += current_score
+        file_max_score += max_score
 
     # sort by percentage (ascending)
     # then by max score (descending)
@@ -61,8 +69,9 @@ def main(obj_path: str) -> None:
     entries.sort(key=lambda x: (x[3], -x[2], x[0]))
 
     print(f"## Report of `{obj_name}`")
-    print("Function|Score|Max|%")
-    print("-|-|-|-")
+    print("Function|Score|Max|%\n-|-|-|-")
+    file_percent = calc_percent(file_current_score, file_max_score)
+    print(f"**File**|`{file_current_score}`|`{file_max_score}`|`{file_percent:.2f}%`")
     for entry in entries:
         print(f"`{entry[0]}`|`{entry[1]}`|`{entry[2]}`|`{entry[3]:.2f}%`")
 

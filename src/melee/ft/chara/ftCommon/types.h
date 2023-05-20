@@ -54,6 +54,9 @@ union ftCommon_MotionVars {
         /* fp+2344 */ float x4;
         /* fp+2348 */ ftCollisionBox x8;
     } damageice;
+    struct ftCo_DamageIceJumpVars {
+        /* fp+2340 */ float x0;
+    } damageicejump;
 };
 
 #endif
