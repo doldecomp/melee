@@ -393,7 +393,7 @@ static inline void ftMewtwo_SpecialHi_SetVars(HSD_GObj* gobj)
     fp->mv.mt.SpecialHi.travelFrames =
         mewtwoAttrs->x50_MEWTWO_TELEPORT_DURATION;
 
-    fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
+    fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
     fp->x2223_flag.bits.b4 = true;
 
     ftColl_8007B62C(gobj, 2);

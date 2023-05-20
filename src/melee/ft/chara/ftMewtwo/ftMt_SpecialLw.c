@@ -136,7 +136,7 @@ void ftMt_SpecialAirLw_Phys(HSD_GObj* gobj)
 
     ftCommon_8007D494(fp, mewtwoAttrs->x78_MEWTWO_DISABLE_GRAVITY,
                       mewtwoAttrs->x7C_MEWTWO_DISABLE_TERMINAL_VELOCITY);
-    ftCommon_8007CE94(fp, ca->x180_AerialFriction);
+    ftCommon_8007CE94(fp, ca->aerial_friction);
 }
 
 inline void ftMewtwo_SpecialLw_SetCall(HSD_GObj* gobj)

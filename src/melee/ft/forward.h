@@ -15,6 +15,7 @@ typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;
 typedef struct Fighter_DemoStrings Fighter_DemoStrings;
 typedef struct MotionState MotionState;
 typedef struct UnkFloat6_Camera UnkFloat6_Camera;
+typedef struct ftCollisionBox ftCollisionBox;
 typedef struct ftLk_SpecialN_Vec3Group ftLk_SpecialN_Vec3Group;
 typedef u32 MotionFlags;
 

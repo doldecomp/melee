@@ -1027,5 +1027,6 @@ void ftDk_ThrowFWalk_IASA(HSD_GObj*);
 void ftDk_ThrowFWalk_Phys(HSD_GObj*);
 unk_t mpColl_8004B4B0(void);
 /* 0889F4 */ void ft_800889F4(ftCo_Fighter* fp, UNK_T);
+/* 0886D8 */ void ftCo_800886D8(ftCo_Fighter* fp, UNK_T, UNK_T, UNK_T);
 
 #endif

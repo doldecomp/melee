@@ -539,7 +539,7 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
                 ((ftPikachuAttributes*) fighter2->dat_attrs)->x60;
 
             // lose double jump(s)
-            fighter2->x1968_jumpsUsed = fighter2->co_attrs.x168_MaxJumps;
+            fighter2->x1968_jumpsUsed = fighter2->co_attrs.max_jumps;
 
             // set ground velocity to (zip_slope * stick_mag) + zip_intercept
             // and then flip based on facing direction
@@ -621,7 +621,7 @@ void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
         ((ftPikachuAttributes*) fighter2->dat_attrs)->x60;
 
     // lose double jump(s)
-    fighter2->x1968_jumpsUsed = fighter2->co_attrs.x168_MaxJumps;
+    fighter2->x1968_jumpsUsed = fighter2->co_attrs.max_jumps;
 
     // compute velocity as (zip slope * stick_mag) + zip intercept
     // x velocity is the same but flips based on facing direction

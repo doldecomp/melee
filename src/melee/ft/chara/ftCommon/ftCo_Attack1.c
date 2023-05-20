@@ -113,7 +113,7 @@ static void checkAttack11(ftCo_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftCo_MS_Attack11, getMotionFlags(fp),
                                   NULL, 0, 1, 0);
         ftAnim_8006EBA4(gobj);
-        fp->hitlag_mul = fp->co_attrs.x18C_Jab_2InputWindow;
+        fp->hitlag_mul = fp->co_attrs.jab_2_input_window;
         fp->unk_msid = ftCo_MS_Attack11;
         fp->x2218_b2 = false;
         fp->mv.co.attack1.x0 = 0;
@@ -185,7 +185,7 @@ static void doAttack12Normal(ftCo_GObj* gobj)
         fp->x2218_b1 = false;
         Fighter_ChangeMotionState(gobj, ftCo_MS_Attack12, Ft_MF_None, NULL, 0,
                                   1, 0);
-        fp->hitlag_mul = fp->co_attrs.x190_Jab_3InputWindow;
+        fp->hitlag_mul = fp->co_attrs.jab_3_input_window;
         fp->unk_msid = ftCo_MS_Attack12;
         fp->mv.co.attack1.x0 = 0;
     }

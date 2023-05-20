@@ -210,9 +210,9 @@ void ftSs_SpecialAirLw_Phys(HSD_GObj* gobj)
 
     ftCommon_8007D4B8(fp);
     ftCommon_8007D344(fp, 0.0f,
-                      ftAttr->x154_GroundToAirJumpMomentumMultiplier *
+                      ftAttr->ground_to_air_jump_momentum_multiplier *
                           samus_attr->x10,
-                      ftAttr->x158_JumpHMaxVelocity * samus_attr->x10);
+                      ftAttr->jump_h_max_velocity * samus_attr->x10);
 }
 
 void ftSs_SpecialLw_Coll(HSD_GObj* gobj)

@@ -55,7 +55,10 @@ def main(obj_path: str) -> None:
         percent = 100 - round(100 * current_score / max_score, 2)
         entries.append((function["name"], current_score, max_score, percent))
 
-    entries.sort(key=lambda x: x[3], reverse=False)
+    # sort by percentage (ascending)
+    # then by max score (descending)
+    # then by name (ascending)
+    entries.sort(key=lambda x: (x[3], -x[2], x[0]))
 
     print(f"## Report of `{obj_name}`")
     print("Function|Score|Max|%")

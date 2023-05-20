@@ -5,6 +5,7 @@
 #include "ftCo_Damage.h"
 
 #include "ftCo_DamageFall.h"
+#include "ftCo_DamageIce.h"
 
 #include "cm/camera.h"
 #include "ef/efasync.h"

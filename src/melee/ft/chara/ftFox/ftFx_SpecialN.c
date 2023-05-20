@@ -779,7 +779,7 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                 if (blasterGObj != NULL) {
                     it_8026BAE8(fp->fv.fx.x222C_blasterGObj,
                                 (0.85f * (fp->x34_scale.y *
-                                          fp->co_attrs.x19C_ModelScaling)));
+                                          fp->co_attrs.model_scaling)));
                     ftFox_SpecialN_SetCall(gobj);
                 }
                 return;

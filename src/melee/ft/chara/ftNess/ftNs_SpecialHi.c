@@ -641,7 +641,7 @@ void ftNs_SpecialHi_Enter(
                         fighter_data2->cb.x21E4_callback_OnDeath2 = NULL;
                         fighter_data2->cb.x21DC_callback_OnTakeDamage = NULL;
                         fighter_data2->x1968_jumpsUsed =
-                            fighter_data2->co_attrs.x168_MaxJumps;
+                            fighter_data2->co_attrs.max_jumps;
                         return;
                     }
                 }
@@ -649,7 +649,7 @@ void ftNs_SpecialHi_Enter(
             }
         }
     }
-    fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
+    fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
     ftCommon_8007D60C(fp);
     ftNs_SpecialAirHi_Enter(gobj);
     return;
@@ -744,7 +744,7 @@ void ftNs_SpecialAirHi_Enter(HSD_GObj* gobj)
             (f32) M_PI_2);
     fighter_data2->cb.x21E4_callback_OnDeath2 = NULL;
     fighter_data2->cb.x21DC_callback_OnTakeDamage = NULL;
-    fighter_data2->x1968_jumpsUsed = fighter_data2->co_attrs.x168_MaxJumps;
+    fighter_data2->x1968_jumpsUsed = fighter_data2->co_attrs.max_jumps;
 }
 
 /// PK Thunder Grounded Startup Animation
@@ -786,7 +786,7 @@ void ftNs_SpecialHiStart_Anim(HSD_GObj* gobj)
             }
         }
 
-        fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
+        fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
 
         fp = gobj->user_data;
 
@@ -965,7 +965,7 @@ void ftNs_SpecialAirHiStart_Anim(HSD_GObj* gobj)
             }
         }
 
-        fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
+        fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
 
         fp = gobj->user_data;
 
@@ -1052,7 +1052,7 @@ void ftNs_SpecialAirHiHold_Anim(HSD_GObj* gobj)
 
                 fp1->cb.x21E4_callback_OnDeath2 = NULL;
                 fp1->cb.x21DC_callback_OnTakeDamage = NULL;
-                fp1->x1968_jumpsUsed = fp1->co_attrs.x168_MaxJumps;
+                fp1->x1968_jumpsUsed = fp1->co_attrs.max_jumps;
             }
         }
     } else {
@@ -1091,7 +1091,7 @@ void ftNs_SpecialAirHiEnd_Anim(HSD_GObj* gobj)
     ftNessAttributes* ness_attr = fp->dat_attrs;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
+        fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
         ftCommon_8007D60C(fp);
 
         if (ness_attr->x70_PK_THUNDER_2_LANDING_LAG == 0) {
@@ -1332,7 +1332,7 @@ void ftNs_SpecialAirHiStart_Phys(HSD_GObj* gobj)
     }
 
     {
-        f32 friction = fp->co_attrs.x180_AerialFriction;
+        f32 friction = fp->co_attrs.aerial_friction;
         ftCommon_8007CE94(fp, friction);
     }
 }
@@ -1360,7 +1360,7 @@ void ftNs_SpecialAirHiHold_Phys(
     }
 
     {
-        f32 friction = fp->co_attrs.x180_AerialFriction;
+        f32 friction = fp->co_attrs.aerial_friction;
         ftCommon_8007CE94(fp, friction);
     }
 }
@@ -1385,7 +1385,7 @@ void ftNs_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
     }
 
     {
-        f32 friction = fp->co_attrs.x180_AerialFriction;
+        f32 friction = fp->co_attrs.aerial_friction;
         ftCommon_8007CE94(fp, friction);
     }
 }
@@ -1498,7 +1498,7 @@ void ftNs_SpecialAirHiRebound_Phys(
     fighter_attr = &fp->co_attrs;
     fighter_attr == NULL;
     ftCommon_8007D494(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
-    ftCommon_8007CE94(fp, fighter_attr->x180_AerialFriction);
+    ftCommon_8007CE94(fp, fighter_attr->aerial_friction);
 }
 
 // 0x80119460

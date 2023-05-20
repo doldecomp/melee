@@ -628,7 +628,7 @@ void ftSk_SpecialAirSStart_Phys(HSD_GObj* gobj)
         ftCommon_8007D494(fp, fighter_attr->grav, fighter_attr->terminal_vel);
     }
 
-    ftCommon_8007CE94(fp, fighter_attr->x180_AerialFriction);
+    ftCommon_8007CE94(fp, fighter_attr->aerial_friction);
 }
 
 void ftSk_SpecialSStart_Coll(HSD_GObj* gobj)

@@ -4,6 +4,7 @@
 #ifndef MELEE_FT_CODE_80081B38_H
 #define MELEE_FT_CODE_80081B38_H
 
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include <baselib/forward.h>
 
@@ -40,8 +41,8 @@ bool ft_CheckGroundAndLedge(HSD_GObj* gobj, s32 direction);
 void ft_80083F88(HSD_GObj* gobj);
 void ft_80085154(HSD_GObj* gobj);
 void ft_80083B68(HSD_GObj* gobj);
-bool ft_800824A0(HSD_GObj*, struct _ftCollisionBox*);
-bool ft_80082888(HSD_GObj*, struct _ftCollisionBox*);
+bool ft_800824A0(HSD_GObj*, ftCollisionBox*);
+bool ft_80082888(HSD_GObj*, ftCollisionBox*);
 void ft_80085204(HSD_GObj* gobj);
 void ft_80082B1C(HSD_GObj* gobj);
 void ft_80081B38(HSD_GObj* gobj);
@@ -92,7 +93,7 @@ UNK_RET ft_80085004(UNK_PARAMS);
 UNK_RET ft_800850B4(UNK_PARAMS);
 UNK_RET ft_800851D0(UNK_PARAMS);
 UNK_RET ft_80082578(UNK_PARAMS);
-UNK_RET ft_80082638(UNK_PARAMS);
+void ft_80082638(ftCo_GObj* gobj, ftCollisionBox*);
 void ft_80085030(ftCo_GObj*, ftCommonData*, float gr_friction,
                  float facing_dir);
 

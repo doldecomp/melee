@@ -590,7 +590,7 @@ asm unk_t ftYs_Init_8012BDA0(void)
 #endif
 
 void ftYs_Init_8012BE3C(HSD_GObj* gobj) {
-    s32* x1CC;
+    int* co_xBC;
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_Part part;
     Fighter* fp2;
@@ -598,11 +598,11 @@ void ftYs_Init_8012BE3C(HSD_GObj* gobj) {
     ftParts_80074B0C(gobj, 0, 0);
     ftColl_8007B0C0(gobj, 0);
 
-    x1CC = &fp->co_attrs.x1CC;
+    co_xBC = &fp->co_attrs.xBC;
     part = ftParts_8007500C(fp, FtPart_HipN);
     fp2 = GET_FIGHTER(gobj);
     jobj = fp->parts[part].joint;
-    efAsync_Spawn(gobj, &fp2->x60C, FtPart_HipN, 1231, jobj, x1CC);
+    efAsync_Spawn(gobj, &fp2->x60C, FtPart_HipN, 1231, jobj, co_xBC);
 }
 
 #ifdef MWERKS_GEKKO

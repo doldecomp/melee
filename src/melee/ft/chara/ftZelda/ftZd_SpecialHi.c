@@ -486,7 +486,7 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
                 fp = GET_FIGHTER(gobj);
                 attributes = fp->dat_attrs;
                 fp->mv.zd.specialhi.x0 = attributes->x48;
-                fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
+                fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
                 fp->x2223_flag.bits.b4 = 1;
 
                 ftColl_8007B62C(gobj, 2);
@@ -581,7 +581,7 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
     fp->mv.zd.specialhi.x0 = attributes->x48;
-    fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
+    fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
     fp->x2223_flag.bits.b4 = 1;
 
     ftColl_8007B62C(gobj, 2);
