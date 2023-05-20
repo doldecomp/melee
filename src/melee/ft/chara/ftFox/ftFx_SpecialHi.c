@@ -556,7 +556,7 @@ void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
     ftFox_SpecialHi_RotateModel(gobj);
     fp->cb.x21F8_callback = ftCommon_8007F76C;
     fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialHi_CreateLaunchGFX;
-    fp->x1968_jumpsUsed = ca->x168_MaxJumps;
+    fp->x1968_jumpsUsed = ca->max_jumps;
 }
 
 // 0x800E7E3C
@@ -714,7 +714,7 @@ void ftFx_SpecialHiBound_Anim(HSD_GObj* gobj)
     if (((u32) fp->cmd_vars[0] != 0U) && ((s32) fp->ground_or_air == GA_Air)) {
         ft_80096900(gobj, 1, 0, true, da->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
                     da->x90_FOX_FIREFOX_LANDING_LAG);
-        fp->x1968_jumpsUsed = (u8) ca->x168_MaxJumps;
+        fp->x1968_jumpsUsed = (u8) ca->max_jumps;
         return;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -722,7 +722,7 @@ void ftFx_SpecialHiBound_Anim(HSD_GObj* gobj)
             ft_80096900(gobj, 1, 0, true,
                         da->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
                         da->x90_FOX_FIREFOX_LANDING_LAG);
-            fp->x1968_jumpsUsed = (u8) ca->x168_MaxJumps;
+            fp->x1968_jumpsUsed = (u8) ca->max_jumps;
             return;
         }
         ft_8008A2BC(gobj);

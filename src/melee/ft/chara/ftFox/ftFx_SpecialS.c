@@ -120,7 +120,7 @@ void ftFx_SpecialAirSStart_Enter(HSD_GObj* gobj)
                               1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
 
-    fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
+    fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
 }
 
 // 0x800EA004

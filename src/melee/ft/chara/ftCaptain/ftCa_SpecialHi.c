@@ -74,7 +74,7 @@ static void ftCa_SpecialLw_800E49FC(HSD_GObj* gobj)
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* da = fp->dat_attrs;
-    fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
+    fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
     fp->mv.ca.specialhi.x0 = da->specialhi_air_var;
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = da->specialhi_unk2;

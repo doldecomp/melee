@@ -219,7 +219,7 @@ void ftNs_SpecialNStart_Anim(HSD_GObj* gobj)
         }
     }
 
-    fp->x1968_jumpsUsed = (u8) fp->co_attrs.x168_MaxJumps;
+    fp->x1968_jumpsUsed = (u8) fp->co_attrs.max_jumps;
 }
 
 /// Ness's grounded PK Flash Charge Animation callback
@@ -344,7 +344,7 @@ void ftNs_SpecialAirNStart_Anim(HSD_GObj* gobj)
             }
         }
 
-        fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
+        fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
     }
 }
 
@@ -575,7 +575,7 @@ void ftNs_SpecialAirNStart_Phys(HSD_GObj* gobj)
     }
 
     {
-        f32 airFriction = fp->co_attrs.x180_AerialFriction;
+        f32 airFriction = fp->co_attrs.aerial_friction;
         ftCommon_8007CE94(fp, airFriction);
     }
 }
@@ -599,7 +599,7 @@ void ftNs_SpecialAirNRelease_Phys(HSD_GObj* gobj)
     }
 
     {
-        f32 airFriction = fp->co_attrs.x180_AerialFriction;
+        f32 airFriction = fp->co_attrs.aerial_friction;
         ftCommon_8007CE94(fp, airFriction);
     }
 }
@@ -623,7 +623,7 @@ void ftNs_SpecialAirNEnd_Phys(HSD_GObj* gobj)
     }
 
     {
-        f32 airFriction = fp->co_attrs.x180_AerialFriction;
+        f32 airFriction = fp->co_attrs.aerial_friction;
         ftCommon_8007CE94(fp, airFriction);
     }
 }

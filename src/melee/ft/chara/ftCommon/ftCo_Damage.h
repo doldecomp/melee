@@ -53,6 +53,7 @@ struct _m2c_stack_ftCo_8008E5A4 {
 /* 08FF48 */ void ftCo_DamageFly_IASA(ftCo_GObj* gobj);
 /* 08FF84 */ void ftCo_DamageFly_Phys(ftCo_GObj* gobj);
 /* 0900EC */ void ftCo_DamageFly_Coll(ftCo_GObj* gobj);
+/* 090184 */ void ftCo_80090184(ftCo_GObj* gobj);
 /* 0901D0 */ void ftCo_DamageFlyRoll_Anim(ftCo_GObj* gobj);
 /* 090324 */ void ftCo_DamageFlyRoll_IASA(ftCo_GObj* gobj);
 /* 09035C */ void ftCo_DamageFlyRoll_Phys(ftCo_GObj* gobj);

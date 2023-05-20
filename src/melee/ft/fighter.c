@@ -1344,8 +1344,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, FtMotionId msid,
                 !fp->x594_animCurrFlags1.bits.b0)
             {
                 !fp;
-                ftCommon_8007CC78(fp,
-                                  fp->co_attrs.x138_DashrunTerminalVelocity);
+                ftCommon_8007CC78(fp, fp->co_attrs.dash_run_terminal_velocity);
             }
         }
 

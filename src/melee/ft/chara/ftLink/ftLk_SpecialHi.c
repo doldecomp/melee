@@ -66,7 +66,7 @@ void ftLk_SpecialAirHi_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
     fp->self_vel.x *= da->x34;
     fp->self_vel.y = da->x40;
-    fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
+    fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
     fp->cb.x21BC_callback_Accessory4 = onAccessory4;
 }
 

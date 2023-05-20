@@ -122,7 +122,7 @@ void ftZd_SpecialSStart_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_f1 = 0;
         Fighter_ChangeMotionState(gobj, 344, 0, NULL, temp_f1, 1.0, temp_f1);
-        fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
+        fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
     }
 }
 
@@ -256,7 +256,7 @@ void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_f1 = 0;
         Fighter_ChangeMotionState(gobj, 347, 0, NULL, temp_f1, 1.0, temp_f1);
-        fp->x1968_jumpsUsed = fp->co_attrs.x168_MaxJumps;
+        fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
     }
 }
 
@@ -471,7 +471,7 @@ void ftZd_SpecialAirSStart_Phys(HSD_GObj* gobj)
         ftCommon_8007D494(fp, charAttr->x2C, fighterAttr->terminal_vel);
     }
 
-    aerialFriction = fp->co_attrs.x180_AerialFriction;
+    aerialFriction = fp->co_attrs.aerial_friction;
     ftCommon_8007CE94(fp, aerialFriction);
 }
 
@@ -501,7 +501,7 @@ void ftZd_SpecialAirSLoop_Phys(HSD_GObj* gobj)
         ftCommon_8007D494(fp, charAttr->x2C, fighterAttr->terminal_vel);
     }
 
-    aerialFriction = fp->co_attrs.x180_AerialFriction;
+    aerialFriction = fp->co_attrs.aerial_friction;
     ftCommon_8007CE94(fp, aerialFriction);
 }
 
@@ -531,7 +531,7 @@ void ftZd_SpecialAirSEnd_Phys(HSD_GObj* gobj)
         ftCommon_8007D494(fp, charAttr->x2C, fighterAttr->terminal_vel);
     }
 
-    aerialFriction = fp->co_attrs.x180_AerialFriction;
+    aerialFriction = fp->co_attrs.aerial_friction;
     ftCommon_8007CE94(fp, aerialFriction);
 }
 

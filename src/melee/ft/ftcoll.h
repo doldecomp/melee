@@ -3,6 +3,7 @@
 
 #include <platform.h>
 #include "ftCommon/forward.h"
+#include "lb/forward.h"
 
 #include "ft/fighter.h"
 
@@ -64,7 +65,7 @@ void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*,
                              HSD_GObjEvent on_reflect);
 void ftColl_CreateAbsorbHit(HSD_GObj*, AbsorbDesc*);
 void ftColl_8007AF10(HSD_GObj*);
-void ftColl_8007B5AC(void* arg0, void* arg1, void* arg2);
+void ftColl_8007B5AC(void* arg0, HurtCapsule* arg1, void* arg2);
 void ftColl_8007B7FC(Fighter*, s32);
 void ftColl_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID);
 void ftColl_80076640(void);

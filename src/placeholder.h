@@ -7,8 +7,13 @@
 #include <m2c_macros.h>
 #include <dolphin/os/os.h>
 
+#if defined(__clang__) || defined(__GNUC__)
 #define NOT_IMPLEMENTED                                                       \
     OSPanic(__FILE__, __LINE__, "%s is not implemented!", __func__)
+#else
+#define NOT_IMPLEMENTED                                                       \
+    OSPanic(__FILE__, __LINE__, "Function is not implemented!")
+#endif
 
 #ifndef UNK_T
 #ifdef M2CTX

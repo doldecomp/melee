@@ -6,16 +6,8 @@
 
 #include <placeholder.h>
 
-/* 08FC94 */ void ftCo_8008FC94(ftCo_GObj* gobj);
-/* 090184 */ void ftCo_80090184(ftCo_GObj* gobj);
-/* 090984 */ void ftCo_80090984(ftCo_GObj* gobj);
-/* 0909D0 */ UNK_RET ftCo_800909D0(UNK_PARAMS);
-/* 090AC0 */ UNK_RET ftCo_80090AC0(UNK_PARAMS);
-/* 090B60 */ void ftCo_80090B60(ftCo_GObj* gobj);
-/* 091030 */ void ftCo_80091030(ftCo_GObj* gobj);
-/* 0914A4 */ UNK_RET ftCo_800914A4(UNK_PARAMS);
+/* 0914A4 */ void ftCo_800914A4(ftCo_GObj* gobj);
 /* 091620 */ UNK_RET ftCo_80091620(UNK_PARAMS);
-/* 091854 */ UNK_RET ftCo_80091854(UNK_PARAMS);
 /* 091A2C */ UNK_RET ftCo_80091A2C(UNK_PARAMS);
 /* 091AD8 */ UNK_RET ftCo_80091AD8(UNK_PARAMS);
 /* 091B90 */ UNK_RET ftCo_80091B90(UNK_PARAMS);
@@ -72,6 +64,7 @@
 /* 098928 */ bool ftCo_80098928(ftCo_GObj* gobj);
 /* 0989D4 */ UNK_RET ftCo_800989D4(UNK_PARAMS);
 /* 098D90 */ UNK_RET ftCo_80098D90(UNK_PARAMS);
+/* 09E140 */ void ftCo_8009E140(ftCo_Fighter* fp, bool);
 /* 09F0F0 */ bool ftCo_8009F0F0(ftCo_GObj* gobj);
 /* 09F184 */ UNK_RET ftCo_8009F184(UNK_PARAMS);
 /* 09F75C */ UNK_RET ftCo_8009F75C(UNK_PARAMS);
