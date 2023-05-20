@@ -42,6 +42,13 @@ struct _m2c_stack_ftCo_80090B60 {
     /* 0x1AC */ Vec3 trans;
     /* 0x1B8 */ char pad_1B8[0x18];
 }; /* size = 0x1D0 */
+
+struct _m2c_stack_ftCo_80091854 {
+    /* 0x00 */ char pad_0[0x24];
+    /* 0x24 */ f32 sp24; /* inferred */
+    /* 0x28 */ Vec3 vec;
+    /* 0x34 */ char pad_34[0xC];
+}; /* size = 0x40 */
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -50,6 +57,7 @@ struct _m2c_stack_ftCo_80090B60 {
 #endif
 
 /* static */ extern Vec3 const ftCo_803B74B0; // = { 0 }
+/* static */ extern Vec3 const ftCo_803B74BC; // = { 0 }
 
 /* 090984 */ void ftCo_80090984(ftCo_GObj* gobj);
 /* 0909D0 */ /* static */ void ftCo_800909D0(ftCo_Fighter* fp);
