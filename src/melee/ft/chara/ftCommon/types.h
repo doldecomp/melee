@@ -57,6 +57,20 @@ union ftCommon_MotionVars {
     struct ftCo_DamageIceJumpVars {
         /* fp+2340 */ float x0;
     } damageicejump;
+    struct ftCo_GuardOnVars {
+        /* fp+2340 */ float x0;
+        /* fp+2344 */ float x4;
+        /* fp+2348 */ float x8;
+        /* fp+234C */ bool xC;
+        /* fp+2350 */ float x10;
+        /* fp+2354 */ float x14;
+        /* fp+2358 */ float x18;
+        /* fp+235C */ int x1C;
+        /* fp+2360 */ int x20;
+        /* fp+2364 */ int x24;
+        /* fp+2368 */ UNK_T x28;
+        /* fp+236C */ float x2C;
+    } guardon;
 };
 
 #endif

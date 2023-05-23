@@ -7,6 +7,7 @@
 
 #include "ft/fighter.h"
 
+#include <common_structs.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/gobjproc.h>
 
@@ -40,7 +41,7 @@ void ftColl_8007AEE0(HSD_GObj*);
 void ftColl_8007AF28(HSD_GObj* gobj);
 void ftColl_8007AFF8(HSD_GObj*);
 void ftColl_8007B0C0(HSD_GObj*, int);
-void ftColl_8007B1B8(HSD_GObj*, f32*, HSD_GObjEvent);
+void ftColl_8007B1B8(HSD_GObj*, AbsorbDesc*, HSD_GObjEvent);
 void ftColl_8007B320(HSD_GObj*);
 void ftColl_8007B4E0(HSD_GObj*);
 void ftColl_8007B62C(HSD_GObj*, bool);
@@ -69,7 +70,8 @@ void ftColl_8007B5AC(void* arg0, HurtCapsule* arg1, void* arg2);
 void ftColl_8007B7FC(Fighter*, s32);
 void ftColl_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID);
 void ftColl_80076640(void);
-void ftColl_80076764(void);
+void ftColl_80076764(int arg0, int arg1, int arg2, UNK_T arg3,
+                     ftCo_Fighter* arg4, int arg5);
 void ftColl_80076808(Fighter* attacker, HitCapsule*, int, Fighter* victim,
                      int);
 void ftColl_800768A0(void);

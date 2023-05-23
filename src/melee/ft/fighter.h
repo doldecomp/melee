@@ -33,7 +33,7 @@ extern UNK_T Fighter_804D64FC;
 extern UNK_T Fighter_804D6500;
 extern UNK_T Fighter_804D6504;
 extern UNK_T Fighter_804D6508;
-extern UNK_T Fighter_804D650C;
+extern int* Fighter_804D650C;
 extern UNK_T Fighter_804D6510;
 extern UNK_T Fighter_804D6514;
 extern UNK_T Fighter_804D6518;

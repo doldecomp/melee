@@ -3049,10 +3049,10 @@ void ftKb_Init_OnDeath(HSD_GObj* gobj)
     fp->fv.kb.x2244 = 0;
     fp->fv.kb.x228C = 0;
     fp->fv.kb.x2290 = 0;
-    if (Player_GetFlagsBit1(fp->xC_playerID) &&
-        Player_GetUnk4D(fp->xC_playerID) != 4)
+    if (Player_GetFlagsBit1(fp->player_id) &&
+        Player_GetUnk4D(fp->player_id) != 4)
     {
-        ftKb_SpecialN_800F1BAC(gobj, Player_GetUnk4D(fp->xC_playerID), 0);
+        ftKb_SpecialN_800F1BAC(gobj, Player_GetUnk4D(fp->player_id), 0);
     }
 }
 
@@ -3065,7 +3065,7 @@ void ftKb_Init_OnLoad(HSD_GObj* gobj)
 
     fp->x2222_b1 = 1;
     fp->x2D0 = fp->dat_attrs;
-    fp->fv.kb.x2234.bits.b0 = Player_GetFlagsAEBit1(fp->xC_playerID);
+    fp->fv.kb.x2234.bits.b0 = Player_GetFlagsAEBit1(fp->player_id);
     it_8026B3F8(item_list[0], 50);
     it_8026B3F8(item_list[1], 51);
     it_8026B3F8(item_list[2], 52);

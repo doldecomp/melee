@@ -16,6 +16,7 @@
 #include "ft/ft_08A4.h"
 #include "ft/ftcoll.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Guard.h"
 #include "ftFox/ftFx_AppealS.h"
 
 #include <placeholder.h>

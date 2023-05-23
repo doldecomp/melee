@@ -7,7 +7,7 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftParts_80074B0C(HSD_GObj*, s32, s32);
+void ftParts_80074B0C(HSD_GObj*, int, int);
 void ftParts_80073758(HSD_JObj*);
 void ftParts_80074148(void);
 void ftParts_80074170(void);

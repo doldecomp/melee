@@ -216,8 +216,8 @@ static inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
 
 static inline void HSD_JObjSetRotationX(HSD_JObj* jobj, f32 x)
 {
-    HSD_ASSERT(0x27F, jobj);
-    HSD_ASSERT(0x280, !(jobj->flags & JOBJ_USE_QUATERNION));
+    HSD_ASSERT(639, jobj);
+    HSD_ASSERT(640, !(jobj->flags & JOBJ_USE_QUATERNION));
     jobj->rotate.x = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -226,8 +226,8 @@ static inline void HSD_JObjSetRotationX(HSD_JObj* jobj, f32 x)
 
 static inline void HSD_JObjSetRotationY(HSD_JObj* jobj, f32 y)
 {
-    HSD_ASSERT(0x294, jobj);
-    HSD_ASSERT(0x295, !(jobj->flags & JOBJ_USE_QUATERNION));
+    HSD_ASSERT(660, jobj);
+    HSD_ASSERT(661, !(jobj->flags & JOBJ_USE_QUATERNION));
     jobj->rotate.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -236,8 +236,8 @@ static inline void HSD_JObjSetRotationY(HSD_JObj* jobj, f32 y)
 
 static inline void HSD_JObjSetRotationZ(HSD_JObj* jobj, f32 z)
 {
-    HSD_ASSERT(0x2A9, jobj);
-    HSD_ASSERT(0x2AA, !(jobj->flags & JOBJ_USE_QUATERNION));
+    HSD_ASSERT(681, jobj);
+    HSD_ASSERT(682, !(jobj->flags & JOBJ_USE_QUATERNION));
     jobj->rotate.z = z;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);

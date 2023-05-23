@@ -94,7 +94,7 @@ UNK_T Fighter_804D64FC = NULL;
 UNK_T Fighter_804D6500 = NULL;
 UNK_T Fighter_804D6504 = NULL;
 UNK_T Fighter_804D6508 = NULL;
-UNK_T Fighter_804D650C = NULL;
+int* Fighter_804D650C = NULL;
 UNK_T Fighter_804D6510 = NULL;
 UNK_T Fighter_804D6514 = NULL;
 UNK_T Fighter_804D6518 = NULL;
@@ -207,8 +207,8 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     f32 x, y, z;
 
     fp->x8_spawnNum = Fighter_NewSpawn_80068E40();
-    Player_LoadPlayerCoords(fp->xC_playerID, &player_coords);
-    fp->facing_dir = Player_GetFacingDirection(fp->xC_playerID);
+    Player_LoadPlayerCoords(fp->player_id, &player_coords);
+    fp->facing_dir = Player_GetFacingDirection(fp->player_id);
 
     player_coords.x = fp->facing_dir * ftCommon_800804EC(fp) + player_coords.x;
     x = player_coords.x;
@@ -273,7 +273,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->hitlag_mul = 0.0f;
     fp->x2064_ledgeCooldown = 0;
 
-    fp->dmg.x1830_percent = Player_GetDamage(fp->xC_playerID);
+    fp->dmg.x1830_percent = Player_GetDamage(fp->player_id);
 
     fp->dmg.x1838_percentTemp = 0.0f;
 
@@ -389,7 +389,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x2098 = 0;
     fp->x2092 = 0;
     fp->x2094 = 0;
-    fp->x1998_shieldHealth = p_ftCommonData->x260_startShieldHealth;
+    fp->shield_health = p_ftCommonData->x260_startShieldHealth;
 
     fp->x221A_flag.bits.b7 = 0;
     fp->x221B_b0 = 0;
@@ -402,7 +402,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
 
     fp->x19A0_shieldDamageTaken = 0;
     fp->x19A4 = 0;
-    fp->x199C_shieldLightshieldAmt = 0.0f;
+    fp->lightshield_amount = 0.0f;
     fp->x19A8 = 0;
     fp->shield_unk0 = 0.0f;
     fp->shield_unk1 = 0.0f;
@@ -533,8 +533,8 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj)
         ftData_OnDeath[fp->kind](gobj);
     }
 
-    ft_800A101C(fp, Player_GetCpuType(fp->xC_playerID),
-                Player_GetCpuLevel(fp->xC_playerID), 0);
+    ft_800A101C(fp, Player_GetCpuType(fp->player_id),
+                Player_GetCpuLevel(fp->player_id), 0);
 
     efAsync_80067688(&fp->x60C);
     ft_8007C17C(gobj);
@@ -664,21 +664,21 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* gobj, struct S_TEMP1* argdata)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 costume_id;
     fp->kind = argdata->fighterKind;
-    fp->xC_playerID = argdata->playerID;
+    fp->player_id = argdata->playerID;
 
     fp->x221F_flag.bits.b4 = argdata->flags.bits.b0;
 
-    fp->x34_scale.x = Player_GetModelScale(fp->xC_playerID);
+    fp->x34_scale.x = Player_GetModelScale(fp->player_id);
     fp->x61C = argdata->unk5;
-    fp->x618_player_id = Player_GetPlayerId(fp->xC_playerID);
-    fp->x61A_controller_index = Player_GetControllerIndex(fp->xC_playerID);
-    fp->x2223_flag.bits.b6 = Player_GetFlagsBit5(fp->xC_playerID);
-    fp->x2226_flag.bits.b3 = Player_GetFlagsBit6(fp->xC_playerID);
-    fp->x2226_flag.bits.b6 = Player_GetFlagsBit7(fp->xC_playerID);
-    fp->x2225_b5 = Player_GetMoreFlagsBit1(fp->xC_playerID);
-    fp->x2225_b7 = Player_GetMoreFlagsBit2(fp->xC_playerID);
-    fp->x2228_flag.b3 = Player_GetMoreFlagsBit6(fp->xC_playerID);
-    fp->x2229_b1 = Player_GetFlagsAEBit0(fp->xC_playerID);
+    fp->x618_player_id = Player_GetPlayerId(fp->player_id);
+    fp->x61A_controller_index = Player_GetControllerIndex(fp->player_id);
+    fp->x2223_flag.bits.b6 = Player_GetFlagsBit5(fp->player_id);
+    fp->x2226_flag.bits.b3 = Player_GetFlagsBit6(fp->player_id);
+    fp->x2226_flag.bits.b6 = Player_GetFlagsBit7(fp->player_id);
+    fp->x2225_b5 = Player_GetMoreFlagsBit1(fp->player_id);
+    fp->x2225_b7 = Player_GetMoreFlagsBit2(fp->player_id);
+    fp->x2228_flag.b3 = Player_GetMoreFlagsBit6(fp->player_id);
+    fp->x2229_b1 = Player_GetFlagsAEBit0(fp->player_id);
 
     if (fp->x61A_controller_index > 4) {
         OSReport("fighter sub color num over!\n");
@@ -695,13 +695,13 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* gobj, struct S_TEMP1* argdata)
         fp->x610_color_rgba[0].a = color->a;
     }
 
-    costume_id = Player_GetCostumeId(fp->xC_playerID);
+    costume_id = Player_GetCostumeId(fp->player_id);
     if (costume_id >= CostumeListsForeachCharacter[fp->kind].numCostumes) {
         costume_id = 0;
     }
 
     fp->x619_costume_id = costume_id;
-    fp->x61B_team = Player_GetTeam(fp->xC_playerID);
+    fp->x61B_team = Player_GetTeam(fp->player_id);
     fp->gobj = gobj;
     fp->ft_data = gFtDataList[fp->kind];
     ft_800D0FA0(gobj);
@@ -891,7 +891,7 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
         ftCh_Init_80155FCC(gobj);
     } else if (input->flags.bits.b1 != 0) {
         ft_800BFD04(gobj);
-    } else if (Player_GetFlagsBit3(fp->xC_playerID) != 0) {
+    } else if (Player_GetFlagsBit3(fp->player_id) != 0) {
         ft_800C61B0(gobj);
     } else {
         if (!fp->x2229_b5_no_normal_motion) {
@@ -1104,11 +1104,11 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, FtMotionId msid,
         fp->x213C = -1;
 
         if (fp->x2227_flag.bits.b4 != 0U) {
-            pl_8003FE1C(fp->xC_playerID, fp->x221F_flag.bits.b4);
+            pl_8003FE1C(fp->player_id, fp->x221F_flag.bits.b4);
             fp->x2227_flag.bits.b4 = false;
         }
         fp->x2227_flag.bits.b5 = false;
-        pl_80040330(fp->xC_playerID, fp->x221F_flag.bits.b4, fp->x2140);
+        pl_80040330(fp->player_id, fp->x221F_flag.bits.b4, fp->x2140);
         fp->x2140 = 0;
         fp->x2228_flag.b6 = false;
         fp->x2180 = 6;
@@ -1575,8 +1575,8 @@ void Fighter_8006A360(HSD_GObj* gobj)
 
         if (!fp->x221F_flag.bits.b4 && Camera_80031144() == 1.0f) {
             if (fp->dmg.x1830_percent < p_ftCommonData->x7B0) {
-                if (ifMagnify_802FC998(fp->xC_playerID) &&
-                    (Player_GetMoreFlagsBit3(fp->xC_playerID) != 0))
+                if (ifMagnify_802FC998(fp->player_id) &&
+                    (Player_GetMoreFlagsBit3(fp->player_id) != 0))
                 {
                     fp->dmg.x1910++;
                 } else {
@@ -1596,9 +1596,9 @@ void Fighter_8006A360(HSD_GObj* gobj)
             if (fp->dmg.x1830_percent > 0.0f) {
                 fp->dmg.x1830_percent--;
                 ft_80088640(fp, 0x7D, 0x7F, 0x40);
-                Player_SetHPByIndex(fp->xC_playerID, fp->x221F_flag.bits.b4,
+                Player_SetHPByIndex(fp->player_id, fp->x221F_flag.bits.b4,
                                     fp->dmg.x1830_percent);
-                pl_80040B8C(fp->xC_playerID, fp->x221F_flag.bits.b4, 1);
+                pl_80040B8C(fp->player_id, fp->x221F_flag.bits.b4, 1);
             }
 
             if (fp->dmg.x1830_percent <= 0.0f) {
@@ -1667,7 +1667,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
             ftColl_800764DC(gobj);
 
             if (!fp->x221C_b6) {
-                pl_800411C4(fp->xC_playerID, fp->x221F_flag.bits.b4);
+                pl_800411C4(fp->player_id, fp->x221F_flag.bits.b4);
             }
             ft_800DEF38(gobj);
 
@@ -2463,7 +2463,7 @@ void Fighter_8006C27C(HSD_GObj* gobj)
         }
 
         if (fp->ground_or_air == GA_Ground) {
-            pl_80041280(fp->xC_playerID, fp->x221F_flag.bits.b4);
+            pl_80041280(fp->player_id, fp->x221F_flag.bits.b4);
         }
 
         if (g_debugLevel >= 3) {
@@ -2545,7 +2545,7 @@ void Fighter_8006C80C(HSD_GObj* gobj)
         if (fp->ground_or_air == GA_Air &&
             fp->cur_pos.y < Stage_GetCamBoundsBottomOffset())
         {
-            if (ifMagnify_802FB6E8(fp->xC_playerID) == 3) {
+            if (ifMagnify_802FB6E8(fp->player_id) == 3) {
                 Vec3 cam_offset;
                 Stage_UnkSetVec3TCam_Offset(&cam_offset);
 
@@ -2634,9 +2634,9 @@ void Fighter_TakeDamage_8006CC7C(Fighter* fp, f32 damage_amount)
         if (fp->dmg.x1830_percent > 999.0f) {
             fp->dmg.x1830_percent = 999.0f;
         }
-        Player_SetHPByIndex(fp->xC_playerID, fp->x221F_flag.bits.b4,
+        Player_SetHPByIndex(fp->player_id, fp->x221F_flag.bits.b4,
                             fp->dmg.x1830_percent);
-        pl_8003EC9C(fp->xC_playerID, fp->x221F_flag.bits.b4,
+        pl_8003EC9C(fp->player_id, fp->x221F_flag.bits.b4,
                     fp->dmg.x1830_percent, damage_amount);
         ft_800C8C84(fp->gobj);
     }
@@ -2800,33 +2800,29 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
 
     if (!fp->x221F_flag.bits.b3) {
         if (!fp->x221A_flag.bits.b7) {
-            if (fp->x1998_shieldHealth <
-                p_ftCommonData->x260_startShieldHealth)
-            {
-                fp->x1998_shieldHealth += p_ftCommonData->x27C;
-                if (fp->x1998_shieldHealth >
-                    p_ftCommonData->x260_startShieldHealth)
+            if (fp->shield_health < p_ftCommonData->x260_startShieldHealth) {
+                fp->shield_health += p_ftCommonData->x27C;
+                if (fp->shield_health > p_ftCommonData->x260_startShieldHealth)
                 {
-                    fp->x1998_shieldHealth =
-                        p_ftCommonData->x260_startShieldHealth;
+                    fp->shield_health = p_ftCommonData->x260_startShieldHealth;
                 }
             }
         }
 
         if (fp->x221A_flag.bits.b7) {
-            fp->x1998_shieldHealth -=
+            fp->shield_health -=
                 (p_ftCommonData->x284 *
                  ((fp->x19A0_shieldDamageTaken) *
-                  (1.0f - ((fp->x199C_shieldLightshieldAmt *
+                  (1.0f - ((fp->lightshield_amount *
                             (p_ftCommonData->x2E0 - p_ftCommonData->x2DC)) +
                            p_ftCommonData->x2DC)))) +
                 p_ftCommonData->x288;
-            if (fp->x1998_shieldHealth < 0.0f) {
+            if (fp->shield_health < 0.0f) {
                 bool3 = 1;
-                fp->x1998_shieldHealth = p_ftCommonData->x280_unkShieldHealth;
+                fp->shield_health = p_ftCommonData->x280_unkShieldHealth;
                 /// this function is called when shield is broken
                 pl_8003E058(fp->x19BC_shieldDamageTaken3,
-                            fp->x221F_flag.bits.b6, fp->xC_playerID,
+                            fp->x221F_flag.bits.b6, fp->player_id,
                             fp->x221F_flag.bits.b4);
             }
         }
@@ -3064,10 +3060,10 @@ void Fighter_8006DA4C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!fp->x221F_flag.bits.b3) {
-        Player_80032828(fp->xC_playerID, fp->x221F_flag.bits.b4, &fp->cur_pos);
+        Player_80032828(fp->player_id, fp->x221F_flag.bits.b4, &fp->cur_pos);
         Player_SetFacingDirectionConditional(
-            fp->xC_playerID, fp->x221F_flag.bits.b4, fp->facing_dir);
-        pl_8003FAA8(fp->xC_playerID, fp->x221F_flag.bits.b4, &fp->cur_pos,
+            fp->player_id, fp->x221F_flag.bits.b4, fp->facing_dir);
+        pl_8003FAA8(fp->player_id, fp->x221F_flag.bits.b4, &fp->cur_pos,
                     &fp->prev_pos);
     }
 }
@@ -3100,7 +3096,7 @@ void Fighter_Unload_8006DABC(void* user_data)
     HSD_JObjUnref(fp->x2184);
     ftData_800859A8(fp);
     HSD_LObjRemoveAll(fp->x588);
-    Player_80031FB0(fp->xC_playerID, fp->x221F_flag.bits.b4);
+    Player_80031FB0(fp->player_id, fp->x221F_flag.bits.b4);
 
     HSD_ObjFree(&Fighter_804590AC, fp->x59C);
     HSD_ObjFree(&Fighter_804590AC, fp->x5A0);

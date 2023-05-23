@@ -79,15 +79,14 @@ typedef struct _ReflectDesc {
 
     /// @remarks Setting this to 1 causes the reflector to skip ownership
     /// change
-    u8 x20_behavior : 8;
+    u8 x20_behavior;
 
 } ReflectDesc;
 
 typedef struct _AbsorbDesc {
-    u32 x0_bone_id;
-    Vec3 x4_offset;
-    f32 x10_size;
-
+    /*  +0 */ int x0_bone_id;
+    /*  +4 */ Vec3 x4_offset;
+    /* +10 */ float x10_size;
 } AbsorbDesc;
 
 typedef struct ColorOverlay {

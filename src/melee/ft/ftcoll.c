@@ -273,7 +273,8 @@ extern char* const ftColl_803C0C80;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftColl_80076764(void)
+asm void ftColl_80076764(int arg0, int arg1, int arg2, UNK_T arg3,
+                         ftCo_Fighter* arg4, int arg5)
 { // clang-format off
     nofralloc
 /* 80076764 00073344  7C 08 02 A6 */	mflr r0
@@ -6003,7 +6004,7 @@ lbl_8007B1A8:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftColl_8007B1B8(HSD_GObj*, f32*, HSD_GObjEvent)
+asm void ftColl_8007B1B8(HSD_GObj*, AbsorbDesc*, HSD_GObjEvent)
 { // clang-format off
     nofralloc
 /* 8007B1B8 00077D98  80 E3 00 2C */	lwz r7, 0x2c(r3)

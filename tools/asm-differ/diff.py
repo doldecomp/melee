@@ -1000,7 +1000,7 @@ def eval_line_num(expr: str) -> Optional[int]:
 
 
 def run_make(target: str, project: ProjectSettings) -> None:
-    subprocess.check_call(project.build_command + [target])
+    subprocess.check_call(project.build_command + [target], stdout=sys.stderr, stderr=sys.stderr)
 
 
 def run_make_capture_output(
@@ -1062,7 +1062,7 @@ def run_objdump(cmd: ObjdumpCommand, config: Config, project: ProjectSettings) -
         ).stdout
     except subprocess.CalledProcessError as e:
         print(e.stdout)
-        print(e.stderr)
+        print(e.stderr, file=sys.stderr)
         if "unrecognized option '--source-comment" in e.stderr:
             fail("** Try using --source-old-binutils instead of --source **")
         raise e

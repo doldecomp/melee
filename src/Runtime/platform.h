@@ -162,6 +162,10 @@ typedef void (*Event)(void);
 #define S32_MAX 0x7FFFFFFF
 #define F32_MAX 3.4028235E38
 
+#define SQ(x) ((x) * (x))
+#define MIN(a, b) (((a) > (b)) ? (b) : (a))
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
+
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 
 #define RETURN_IF(cond)                                                       \

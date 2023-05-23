@@ -44,7 +44,7 @@ def main(obj_path: str) -> None:
         cmd = [
             "python3",
             "./tools/asm-differ/diff.py",
-            "-os",
+            "-mos",
             "--format",
             "json",
             f"{function['name']}",
@@ -52,16 +52,22 @@ def main(obj_path: str) -> None:
         result = subprocess.run(
             cmd,
             stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             universal_newlines=True,
         ).stdout.strip()
-        result = json.loads(result)
-        current_score = int(result["current_score"])
-        max_score = int(result["max_score"])
+        try:
+            result = json.loads(result)
+            current_score = int(result["current_score"])
+            max_score = int(result["max_score"])
 
-        percent = calc_percent(current_score, max_score)
-        entries.append((function["name"], current_score, max_score, percent))
-        file_current_score += current_score
-        file_max_score += max_score
+            percent = calc_percent(current_score, max_score)
+            entries.append((function["name"], current_score, max_score, percent))
+            file_current_score += current_score
+            file_max_score += max_score
+        except Exception as e:
+            json.dump(function, sys.stderr)
+            print(f"\n{repr(result)}", file=sys.stderr)
+            print(e, file=sys.stderr)
 
     # sort by percentage (ascending)
     # then by max score (descending)

@@ -129,7 +129,6 @@ lbl_8014E624:
 /* 8014E640 0014B220  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
 #else
 
 /**

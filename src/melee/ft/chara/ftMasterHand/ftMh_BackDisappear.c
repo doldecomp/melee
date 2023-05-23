@@ -24,7 +24,7 @@ void ftMh_BackDisappear_Anim(HSD_GObj* gobj)
 void ftMh_BackDisappear_IASA(HSD_GObj* arg0)
 {
     Fighter* fp = GET_FIGHTER(arg0);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftBossLib_8015BD20(arg0);
     }
 }
@@ -67,7 +67,7 @@ void ftMh_Wait1_1_Anim(HSD_GObj* gobj)
 void ftMh_Wait1_1_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }
@@ -158,7 +158,7 @@ void ftMh_Grab_Anim(HSD_GObj* gobj)
 void ftMh_Grab_IASA(HSD_GObj* arg0)
 {
     Fighter* fp = GET_FIGHTER(arg0);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftBossLib_8015BD20(arg0);
     }
 }
@@ -191,7 +191,7 @@ void ftMh_Fail_Anim(HSD_GObj* gobj)
 void ftMh_Fail_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }
@@ -239,7 +239,7 @@ void ftMh_Cancel_Anim(HSD_GObj* gobj)
 void ftMh_Cancel_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }

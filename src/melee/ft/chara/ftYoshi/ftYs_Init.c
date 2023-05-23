@@ -17,6 +17,7 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Guard.h"
 
 #include <placeholder.h>
 #include <dolphin/os/os.h>
@@ -428,8 +429,9 @@ void ftYs_Init_8012B8A4(HSD_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-    f32 tempf = da->xC * (1.0f - (fp->x1998_shieldHealth /
-                                  p_ftCommonData->x260_startShieldHealth));
+    f32 tempf =
+        da->xC *
+        (1.0f - (fp->shield_health / p_ftCommonData->x260_startShieldHealth));
     ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5B8, tempf);
     ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5BC, tempf);
 }
@@ -611,7 +613,7 @@ void ftYs_Init_8012BE3C(HSD_GObj* gobj) {
 /* static */ extern f32 const ftYs_Init_804D9A28;
 
 #pragma push
-asm unk_t ftYs_Init_8012BECC(void)
+asm void ftYs_Init_8012BECC(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 ftYs_Init_8012BECC:

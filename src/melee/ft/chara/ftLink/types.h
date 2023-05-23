@@ -6,6 +6,7 @@
 #include "ftLink/forward.h"
 #include "it/forward.h"
 
+#include <common_structs.h>
 #include <placeholder.h>
 
 struct ftLk_DatAttrs {
@@ -35,8 +36,7 @@ struct ftLk_DatAttrs {
     /* +64 */ u8 x64[0xBC - 0x64];
     /* +BC */ int xBC;
     /* +C0 */ u8 xC0_filler[0xC4 - 0xC0];
-    /* +C4 */ float xC4;
-    /* +C8 */ u8 xC8_filler[0xD8 - 0xC8];
+    /* +C4 */ AbsorbDesc xC4;
     /* +D8 */ float xD8;
 };
 

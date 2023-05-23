@@ -27,6 +27,7 @@
 #include <common_structs.h>
 #include <math.h>
 #include <placeholder.h>
+#include <dolphin/mtx/vec.h>
 #include <MetroTRK/intrinsics.h>
 #include <MSL/trigf.h>
 
@@ -1191,7 +1192,7 @@ void ft_8008DCE0(ftCo_GObj* gobj, int arg1, float facing_dir)
     float kb_applied = fp->dmg.kb_applied;
     Fighter_8006CDA4(fp, fp->dmg.x1838_percentTemp, ftCo_803C5520[0][0]);
     fp->dmg.kb_applied1 = kb_applied;
-    pl_80040270(fp->xC_playerID, fp->x221F_flag.bits.b4, kb_applied);
+    pl_80040270(fp->player_id, fp->x221F_flag.bits.b4, kb_applied);
     temp_f30 = kb_applied * p_ftCommonData->x154;
     fp->mv.co.damage.x0 = (int) temp_f30;
     if (!fp->mv.co.damage.x0) {
@@ -1566,11 +1567,11 @@ void ftCo_Damage_OnEveryHitlag(ftCo_GObj* gobj)
                 fp->x671_timer_lstick_tilt_y = 0xFE;
 #endif
 #if SOLUTION == 0
-                pl_800401F0(fp->xC_playerID,
+                pl_800401F0(fp->player_id,
                             (M2C_FIELD(fp, u8*, 0x221F) >> 3) & 1,
                             scaled_lstick_x, scaled_lstick_y);
 #else
-                pl_800401F0(fp->xC_playerID, fp->x221F_flag.bits.b4,
+                pl_800401F0(fp->player_id, fp->x221F_flag.bits.b4,
                             scaled_lstick_x, scaled_lstick_y);
 #endif
             }
@@ -1721,10 +1722,6 @@ void ftCo_8008E5A4(Fighter* fp)
     }
 }
 #endif
-
-#define SQ(x) ((x) * (x))
-#define VEC2_SQ_MAG(v) ((SQ((v).x) + SQ((v).y)))
-#define VEC3_SQ_MAG(v) ((SQ((v).x) + SQ((v).y) + SQ((v).z)))
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
@@ -1899,7 +1896,7 @@ void ftCo_Damage_OnExitHitlag(ftCo_GObj* gobj)
         }
         fp->cur_pos.x += x;
         fp->cur_pos.y += y;
-        pl_800401F0(fp->xC_playerID, fp->x221F_flag.bits.b4, x, y);
+        pl_800401F0(fp->player_id, fp->x221F_flag.bits.b4, x, y);
     }
     if (fp->mv.co.damage.x4) {
         fp->mv.co.damage.x4 = false;
