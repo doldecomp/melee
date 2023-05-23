@@ -238,7 +238,7 @@ bool ftCo_80091AD8(ftCo_GObj* gobj, int mv_x20)
         }
     }
     if (ret0 != false) {
-        fp->mv.co.guardon.x20 = mv_x20;
+        fp->mv.co.guard.x20 = mv_x20;
         return true;
     }
     return false;
@@ -248,7 +248,7 @@ bool ftCo_80091AD8(ftCo_GObj* gobj, int mv_x20)
 void ftCo_80091B90(ftCo_GObj* gobj, int mv_x20)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    fp->mv.co.guardon.x20 = mv_x20;
+    fp->mv.co.guard.x20 = mv_x20;
 }
 
 void ftCo_80091B9C(ftCo_GObj* gobj)
@@ -258,7 +258,7 @@ void ftCo_80091B9C(ftCo_GObj* gobj)
     u8 _[8] = { 0 };
 #endif
     ftCo_Fighter* fp = gobj->user_data;
-    fp->mv.co.guardon.x24 = p_ftCommonData->x68;
+    fp->mv.co.guard.x24 = p_ftCommonData->x68;
 }
 
 #if defined(MUST_MATCH) && !defined(WIP)
@@ -417,10 +417,10 @@ void ftCo_80091BC4(Fighter* fp)
         }
         {
             Fighter* fp0;
-            float offset = (fp0 = fp)->mv.co.guardon.x8 - 10;
+            float offset = (fp0 = fp)->mv.co.guard.x8 - 10;
             float deg = lstick_deg - offset;
             lstick_x = normalizeAngle180(deg);
-            fp->mv.co.guardon.x8 =
+            fp->mv.co.guard.x8 =
                 10 + normalizeAngle0(lstick_x * p_ftCommonData->x44C + offset);
             {
                 float lstick_mag =
@@ -428,10 +428,10 @@ void ftCo_80091BC4(Fighter* fp)
                 if (lstick_mag > 1) {
                     lstick_mag = 1;
                 }
-                fp->mv.co.guardon.x4 =
+                fp->mv.co.guard.x4 =
                     (lstick_rad = p_ftCommonData->x44C) *
-                        (lstick_mag - fp->mv.co.guardon.x4) +
-                    fp->mv.co.guardon.x4;
+                        (lstick_mag - fp->mv.co.guard.x4) +
+                    fp->mv.co.guard.x4;
             }
         }
     }
@@ -774,16 +774,16 @@ void ftCo_80091E78(HSD_GObj* gobj, float arg1)
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->x2218_b3 || fp->x221B_b0) {
         ftCo_80091BC4(fp);
-        if (fp->mv.co.guardon.x4) {
+        if (fp->mv.co.guard.x4) {
             HSD_JObj* jobj = fp->x8AC_animSkeleton;
             ftAnim_8006F4C8(fp, 1, ftData_80085E50(fp, 38));
-            ftAnim_80070710(jobj, fp->mv.co.guardon.x8);
+            ftAnim_80070710(jobj, fp->mv.co.guard.x8);
             ftAnim_8006FB88(fp, 1, fp->x108_costume_joint->child);
             HSD_JObjAnimAll(jobj);
-            if (fp->mv.co.guardon.x4 < 1) {
+            if (fp->mv.co.guard.x4 < 1) {
                 ftAnim_80070108(fp, 1, fp->ft_data->x20->x8,
-                                1 - fp->mv.co.guardon.x4,
-                                fp->mv.co.guardon.x4);
+                                1 - fp->mv.co.guard.x4,
+                                fp->mv.co.guard.x4);
             }
             if (arg1 < 1) {
                 ftAnim_8006FE9C(fp, 1, arg1, 1 - arg1);
@@ -1000,20 +1000,20 @@ void ftCo_800921DC(HSD_GObj* gobj)
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_80092158(gobj, 1047, fp->parts[fp->ft_data->x8->unk11].joint);
     fp->x2219_b0 = true;
-    fp->mv.co.guardon.xC = false;
-    fp->mv.co.guardon.x0 = 0;
-    fp->mv.co.guardon.x10 = p_ftCommonData->x268;
-    fp->mv.co.guardon.x8 = 10;
-    fp->mv.co.guardon.x4 = 0;
-    fp->mv.co.guardon.x2C = 0;
+    fp->mv.co.guard.xC = false;
+    fp->mv.co.guard.x0 = 0;
+    fp->mv.co.guard.x10 = p_ftCommonData->x268;
+    fp->mv.co.guard.x8 = 10;
+    fp->mv.co.guard.x4 = 0;
+    fp->mv.co.guard.x2C = 0;
     {
         float lightshield_amount = fp->input.x650 / (1 - p_ftCommonData->x10);
         if (lightshield_amount < 0) {
-            lightshield_amount = fp->mv.co.guardon.x2C;
+            lightshield_amount = fp->mv.co.guard.x2C;
         }
         fp->lightshield_amount = lightshield_amount;
     }
-    fp->mv.co.guardon.x20 = fp->mv.co.guardon.x24 = 0;
+    fp->mv.co.guard.x20 = fp->mv.co.guard.x24 = 0;
     {
         Vec3 trans;
         trans.x = trans.y = trans.z = 0;
@@ -1306,13 +1306,13 @@ bool ft_800925A4(HSD_GObj* gobj)
 #endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->x221B_b0) {
-        fp->mv.co.guardon.x2C = fp->lightshield_amount;
+        fp->mv.co.guard.x2C = fp->lightshield_amount;
         {
             fp->lightshield_amount =
                 (fp->input.x650 - p_ftCommonData->x10) /
                             (1 - p_ftCommonData->x10) <
                         0
-                    ? fp->mv.co.guardon.x2C
+                    ? fp->mv.co.guard.x2C
                     : (fp->input.x650 - p_ftCommonData->x10) /
                           (1 - p_ftCommonData->x10);
         }
@@ -1329,10 +1329,10 @@ bool ft_800925A4(HSD_GObj* gobj)
             ft_80088148(fp, 129, 127, 64);
             return true;
         }
-        if (fp->mv.co.guardon.x10 > 0) {
-            fp->mv.co.guardon.x10 -= 1;
-            if (fp->mv.co.guardon.x10 < 0) {
-                fp->mv.co.guardon.x10 = 0;
+        if (fp->mv.co.guard.x10 > 0) {
+            fp->mv.co.guard.x10 -= 1;
+            if (fp->mv.co.guard.x10 < 0) {
+                fp->mv.co.guard.x10 = 0;
             }
         }
     }
@@ -1385,12 +1385,12 @@ lbl_80092740:
 void ftCo_GuardOn_Anim(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    fp->mv.co.guardon.x0 += 1;
+    fp->mv.co.guard.x0 += 1;
     if (ft_800925A4(gobj) == 0) {
-        if (fp->mv.co.guardon.x0 >= fp->x2E8) {
+        if (fp->mv.co.guard.x0 >= fp->x2E8) {
             ft_800928CC(gobj);
         } else {
-            ftCo_80091E78(gobj, fp->mv.co.guardon.x0 / fp->x2E8);
+            ftCo_80091E78(gobj, fp->mv.co.guard.x0 / fp->x2E8);
         }
     }
 }
@@ -1484,14 +1484,14 @@ lbl_80092858:
 static inline bool inlineC0(ftCo_GObj* gobj, HSD_GObjEvent cb)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if ((fp->mv.co.guardon.xC && !fp->mv.co.guardon.x10) ||
+    if ((fp->mv.co.guard.xC && !fp->mv.co.guard.x10) ||
         (!fp->x221B_b0 && !fp->x2218_b3))
     {
         cb(gobj);
         return true;
     }
-    if (fp->mv.co.guardon.x1C != 0) {
-        --fp->mv.co.guardon.x1C;
+    if (fp->mv.co.guard.x1C != 0) {
+        --fp->mv.co.guard.x1C;
     }
     return false;
 }
@@ -1664,7 +1664,7 @@ lbl_80092A64:
 void ftCo_Guard_Anim(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    fp->mv.co.guardon.x0 += 1;
+    fp->mv.co.guard.x0 += 1;
     if (!ft_800925A4(gobj)) {
         ftCo_80091E78(gobj, 1);
     }
@@ -1776,7 +1776,7 @@ void ft_80092BCC(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (!(fp->input.held_inputs & HSD_PAD_LR)) {
-        fp->mv.co.guardon.xC = true;
+        fp->mv.co.guard.xC = true;
     }
 }
 
@@ -1867,7 +1867,7 @@ lbl_80092CE8:
 void ftCo_GuardOff_Anim(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    fp->mv.co.guardon.x0 += 1;
+    fp->mv.co.guard.x0 += 1;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
@@ -1882,7 +1882,7 @@ void ftCo_GuardOff_IASA(ftCo_GObj* gobj)
 #endif
     ftCo_Fighter* fp = gobj->user_data;
     /// @todo #RETURN_IF chain
-    if (!fp->mv.co.guardon.x1C ||
+    if (!fp->mv.co.guard.x1C ||
         (!ft_80096540(gobj) && !ftCo_Attack100_CheckInput(gobj) &&
          !ft_800D6824(gobj) && !ft_800D68C0(gobj) &&
          !ftCo_Catch_CheckInput(gobj) && !ftCo_AttackS4_CheckInput(gobj) &&
@@ -2562,7 +2562,7 @@ void ftCo_GuardSetOff_Anim(HSD_GObj* gobj)
     ftCo_Fighter* fp = gobj->user_data;
     ft_80093BC0(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (fp->mv.co.guardon.xC) {
+        if (fp->mv.co.guard.xC) {
             ft_80092BE8(gobj);
         } else {
             ft_800928CC(gobj);
@@ -2636,7 +2636,7 @@ lbl_800936FC:
 bool ft_80093694(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (fp->mv.co.guardon.x0 < p_ftCommonData->x2A0 &&
+    if (fp->mv.co.guard.x0 < p_ftCommonData->x2A0 &&
         fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
         fp->x672_input_timer_counter < p_ftCommonData->x2A0)
     {
@@ -2886,9 +2886,9 @@ void ftCo_8009388C(HSD_GObj* gobj)
     fp->x221C_b3 = true;
     fp->x221C_b1 = true;
     fp->x221C_b2 = true;
-    fp->mv.co.guardon.x1C = 0;
-    fp->mv.co.guardon.x14 = p_ftCommonData->x2A4;
-    fp->mv.co.guardon.x18 = p_ftCommonData->x2B4;
+    fp->mv.co.guard.x1C = 0;
+    fp->mv.co.guard.x14 = p_ftCommonData->x2A4;
+    fp->mv.co.guard.x18 = p_ftCommonData->x2B4;
     ft_8009370C(gobj, ftCo_80093790);
 }
 #endif
@@ -3024,9 +3024,9 @@ void ftCo_80093A50(ftCo_GObj* gobj)
     fp->x221C_b3 = true;
     fp->x221C_b1 = true;
     fp->x221C_b2 = true;
-    fp->mv.co.guardon.x1C = 0;
-    fp->mv.co.guardon.x14 = p_ftCommonData->x2A4;
-    fp->mv.co.guardon.x18 = p_ftCommonData->x2B4;
+    fp->mv.co.guard.x1C = 0;
+    fp->mv.co.guard.x14 = p_ftCommonData->x2A4;
+    fp->mv.co.guard.x18 = p_ftCommonData->x2B4;
     ft_80092450(gobj);
     ft_8009370C(gobj, ftCo_80093790);
     ftCo_800921DC(gobj);
@@ -3120,16 +3120,16 @@ void ft_80093BC0(ftCo_GObj* gobj)
         fp->x221C_b3 = false;
     }
     if (fp->x221C_b1) {
-        fp->mv.co.guardon.x14 -= 1;
-        if (fp->mv.co.guardon.x14 < 0) {
+        fp->mv.co.guard.x14 -= 1;
+        if (fp->mv.co.guard.x14 < 0) {
             fp->x221C_b1 = false;
             fp->x2218_b3 = false;
             ft_80092450(gobj);
         }
     }
     if (fp->x221C_b2) {
-        fp->mv.co.guardon.x18 -= 1;
-        if (fp->mv.co.guardon.x18 < 0) {
+        fp->mv.co.guard.x18 -= 1;
+        if (fp->mv.co.guard.x18 < 0) {
             fp->x221C_b2 = false;
         }
     }
