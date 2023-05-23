@@ -27,7 +27,7 @@
 /* 12BD34 */ void ftYs_Init_OnKnockbackExit(HSD_GObj* gobj);
 /* 12BDA0 */ unk_t ftYs_Init_8012BDA0(void);
 /* 12BE3C */ void ftYs_Init_8012BE3C(HSD_GObj* gobj);
-/* 12BECC */ unk_t ftYs_Init_8012BECC(void);
+/* 12BECC */ void ftYs_Init_8012BECC(ftCo_GObj* gobj);
 /* 3CE6D0 */ extern MotionState ftYs_Init_MotionStateTable[ftYs_MS_SelfCount];
 
 #endif

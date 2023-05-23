@@ -655,7 +655,7 @@ void ftCommon_8007D60C(Fighter* fp)
 {
     struct ftCo_DatAttrs* ca = &fp->co_attrs;
     if (fp->x2227_flag.bits.b0 && fp->x1968_jumpsUsed <= 1) {
-        pl_8003FC44(fp->xC_playerID, fp->x221F_flag.bits.b4);
+        pl_8003FC44(fp->player_id, fp->x221F_flag.bits.b4);
     }
     fp->ground_or_air = GA_Air;
     fp->gr_vel = 0;
@@ -690,7 +690,7 @@ void ftCommon_8007D6A4(Fighter* fp)
     fp->coll_data.x19C = 0;
     fp->coll_data.x130_flags &= 0xFFFFFFEF;
     if (!ft_80084A18(fp->gobj)) {
-        OSReport("fighter ground no under Id! %d %d\n", fp->xC_playerID,
+        OSReport("fighter ground no under Id! %d %d\n", fp->player_id,
                  fp->motion_id);
         HSD_ASSERT(686, 0);
     }
@@ -708,7 +708,7 @@ void ftCommon_8007D780(Fighter* fp)
         fp->dmg.x18A4_knockbackMagnitude = 0;
     }
     if (fp->x2227_flag.bits.b0 && fp->x1968_jumpsUsed <= 1) {
-        pl_8003FC44(fp->xC_playerID, fp->x221F_flag.bits.b4);
+        pl_8003FC44(fp->player_id, fp->x221F_flag.bits.b4);
     }
 }
 
@@ -722,7 +722,7 @@ void ftCommon_8007D7FC(Fighter* fp)
             fp->dmg.x18A4_knockbackMagnitude = 0;
         }
         if (fp->x2227_flag.bits.b0 && fp->x1968_jumpsUsed <= 1) {
-            pl_8003FC44(fp->xC_playerID, fp->x221F_flag.bits.b4);
+            pl_8003FC44(fp->player_id, fp->x221F_flag.bits.b4);
         }
     }
     if (fp->x594_animCurrFlags1.bits.b0) {
@@ -742,7 +742,7 @@ void ftCommon_8007D7FC(Fighter* fp)
     fp->coll_data.x19C = 0;
     fp->coll_data.x130_flags &= 0xFFFFFFEF;
     if (!ft_80084A18(fp->gobj)) {
-        OSReport("fighter ground no under Id! %d %d\n", fp->xC_playerID,
+        OSReport("fighter ground no under Id! %d %d\n", fp->player_id,
                  fp->motion_id);
         HSD_ASSERT(0x2AE, 0);
     }
@@ -883,7 +883,7 @@ s32 ftCommon_8007DC08(Fighter* fp, f32 arg8)
     } else {
         fp->x2224_flag.bits.b5 = 0;
     }
-    pl_800402D0(fp->xC_playerID, fp->x221F_flag.bits.b4, phi_r31);
+    pl_800402D0(fp->player_id, fp->x221F_flag.bits.b4, phi_r31);
     return phi_r31;
 }
 
@@ -996,7 +996,7 @@ void ftCommon_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
 
     fp = gobj->user_data;
     temp_r31 = &fp->x2C4;
-    new_var = Player_GetEntity(fp->xC_playerID);
+    new_var = Player_GetEntity(fp->player_id);
     temp_r3 = new_var->user_data;
     if (!temp_r3->x221F_flag.bits.b3 && temp_r3->ground_or_air == 0) {
         temp_r0 = fp->coll_data.floor.index;
@@ -1209,7 +1209,7 @@ void ftCommon_8007E6DC(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2)
     if (ftData_OnItemDropExt[fp->kind] != NULL) {
         ftData_OnItemDropExt[fp->kind](gobj, arg2);
     }
-    pl_8003EA08(fp->xC_playerID, fp->x221F_flag.bits.b4);
+    pl_8003EA08(fp->player_id, fp->x221F_flag.bits.b4);
     fp->item_gobj = NULL;
 }
 
@@ -1366,7 +1366,7 @@ void ftCommon_8007EA90(Fighter* fp, s32 arg1)
 
 void ftCommon_8007EBAC(Fighter* fp, u32 arg1, u32 arg2)
 {
-    if (Player_8003544C(fp->xC_playerID, fp->x221F_flag.bits.b4) &&
+    if (Player_8003544C(fp->player_id, fp->x221F_flag.bits.b4) &&
         !fp->x221F_flag.bits.b3 && !fp->x2224_flag.bits.b2)
     {
         lb_80014574(fp->x618_player_id, arg1 + 2, arg1, arg2);
@@ -1392,7 +1392,7 @@ void ftCommon_8007EC30(u32 arg0, u32 arg1)
 
 void ftCommon_8007ECD4(Fighter* fp, s32 arg1)
 {
-    if (Player_8003544C(fp->xC_playerID, fp->x221F_flag.bits.b4)) {
+    if (Player_8003544C(fp->player_id, fp->x221F_flag.bits.b4)) {
         HSD_Rumble_80378280(fp->x618_player_id, arg1 + 2);
     }
 }
@@ -1450,7 +1450,7 @@ void ftCommon_8007EFC0(Fighter* fp, u32 val)
 void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
 {
     Fighter* src = gobj->user_data;
-    HSD_GObj* dst_gobj = Player_GetEntityAtIndex(src->xC_playerID, 1);
+    HSD_GObj* dst_gobj = Player_GetEntityAtIndex(src->player_id, 1);
     Fighter* dst = dst_gobj->user_data;
     s32 tmp_bit;
 
@@ -1459,7 +1459,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     u8 _[16];
 #endif
 
-    Player_SwapTransformedStates(src->xC_playerID, src->x221F_flag.bits.b4,
+    Player_SwapTransformedStates(src->player_id, src->x221F_flag.bits.b4,
                                  dst->x221F_flag.bits.b4);
     tmp_bit = src->x221F_flag.bits.b4;
     src->x221F_flag.bits.b4 = dst->x221F_flag.bits.b4;
@@ -1471,7 +1471,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->pos_delta = src->pos_delta;
     dst->facing_dir = src->facing_dir;
     dst->dmg.x1830_percent = src->dmg.x1830_percent;
-    Player_SetHPByIndex(dst->xC_playerID, dst->x221F_flag.bits.b4,
+    Player_SetHPByIndex(dst->player_id, dst->x221F_flag.bits.b4,
                         dst->dmg.x1830_percent);
     dst->dmg.x18F0 = src->dmg.x18F0;
     dst->self_vel = src->self_vel;
@@ -1524,7 +1524,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->dmg.x1910 = src->dmg.x1910;
     dst->x1968_jumpsUsed = src->x1968_jumpsUsed;
     dst->x1969_walljumpUsed = src->x1969_walljumpUsed;
-    dst->x1998_shieldHealth = src->x1998_shieldHealth;
+    dst->shield_health = src->shield_health;
     dst->x232C = src->x232C;
     dst->x2330 = src->x2330;
     dst->x2338 = src->x2338;
@@ -1862,7 +1862,7 @@ void ftCommon_8007FF74(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     fp->x1980 = NULL;
     ftCommon_8007ECD4(fp, 2);
-    pl_80040460(fp->xC_playerID, fp->x221F_flag.bits.b4);
+    pl_80040460(fp->player_id, fp->x221F_flag.bits.b4);
 }
 
 bool ftCommon_8007FFD8(Fighter* fp, f32 arg8)
@@ -1892,7 +1892,7 @@ bool ftCommon_8007FFD8(Fighter* fp, f32 arg8)
         fp->x2018 = fp->x2018 - arg8;
         phi_r31 = true;
     }
-    pl_800402D0(fp->xC_playerID, fp->x221F_flag.bits.b4, phi_r31);
+    pl_800402D0(fp->player_id, fp->x221F_flag.bits.b4, phi_r31);
     return phi_r31;
 }
 
@@ -1976,14 +1976,14 @@ void ftCommon_8008031C(HSD_GObj* gobj)
         (fabs_inline(fp->input.lstick.y) >= p_ftCommonData->x7B8 &&
          fp->x67A_y < p_ftCommonData->x7C0))
     {
-        Player_UpdateJoystickCountByIndex((s32) fp->xC_playerID,
+        Player_UpdateJoystickCountByIndex((s32) fp->player_id,
                                           fp->x221F_flag.bits.b4);
         fp->x67A_y = 0xFE;
         fp->x679_x = 0xFE;
     }
     if (fabs_inline(fp->input.x650) >= p_ftCommonData->x7BC) {
         if (fp->x67B < p_ftCommonData->x7C0) {
-            Player_UpdateJoystickCountByIndex((s32) fp->xC_playerID,
+            Player_UpdateJoystickCountByIndex((s32) fp->player_id,
                                               fp->x221F_flag.bits.b4);
             fp->x67B = 0xFE;
         }

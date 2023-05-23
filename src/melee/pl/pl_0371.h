@@ -41,5 +41,7 @@ void pl_800373CC(void);
 void pl_80037ECC(void);
 /* 040270 */ void pl_80040270(u8, u8, float);
 void pl_800401F0(u8, int, float, float);
+/* 03E0E8 */ void pl_8003E0E8(u8, int);
+/* 03E114 */ void pl_8003E114(u8, int, float);
 
 #endif

@@ -42,7 +42,7 @@ void ftBossLib_8015BD24(s32 arg0, f32* arg1, f32 arg2, s32 arg3, s32 arg4,
 void ftBossLib_8015BDB4(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
-    Gm_PKind kind = Player_GetPlayerSlotType(fp->xC_playerID);
+    Gm_PKind kind = Player_GetPlayerSlotType(fp->player_id);
     { // TODO: assert macro
         bool bad = (kind == Gm_PKind_Human || kind == Gm_PKind_Boss ||
                     kind == Gm_PKind_Cpu);

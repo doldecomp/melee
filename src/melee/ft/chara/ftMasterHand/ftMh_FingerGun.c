@@ -22,7 +22,7 @@ void ftMh_FingerBeamEnd_Anim(HSD_GObj* gobj)
 void ftMh_FingerBeamEnd_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }
@@ -88,7 +88,7 @@ void ftMh_FingerGun1_Anim(HSD_GObj* gobj)
 void ftMh_FingerGun1_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }
@@ -208,7 +208,7 @@ void ftMh_FingerGun2_Anim(HSD_GObj* gobj)
 void ftMh_FingerGun2_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }

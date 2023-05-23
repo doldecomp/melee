@@ -57,7 +57,7 @@ typedef struct _FighterPartsTable {
 } FighterPartsTable;
 
 // Points to data in PlCo.dat
-typedef struct _ftCommonData {
+struct ftCommonData {
     /* +0 */ float x0;
     /* +4 */ float x4;
     /* +8 */ float x8_someStickThreshold;
@@ -194,21 +194,43 @@ typedef struct _ftCommonData {
     /* +258 */ float x258;
     /* +25C */ u8 x25C[0x260 - 0x25C];
     /* +260 */ float x260_startShieldHealth;
-    /* +264 */ u8 x264[0x27C - 0x264];
+    /* +264 */ float x264;
+    /* +268 */ float x268;
+    /* +26C */ UNK_T x26C;
+    /* +270 */ UNK_T x270;
+    /* +274 */ UNK_T x274;
+    /* +278 */ float x278;
     /* +27C */ float x27C;
     /* +280 */ float x280_unkShieldHealth;
     /* +284 */ float x284;
     /* +288 */ float x288;
-    /* +28C */ u8 x28C[0x294 - 0x28C];
+    /* +28C */ float x28C;
+    /* +290 */ float x290;
     /* +294 */ float x294;
-    /* +298 */ u8 x298[0x2A4 - 0x298];
+    /* +298 */ float x298;
+    /* +29C */ UNK_T x29C;
+    /* +2A0 */ int x2A0;
     /* +2A4 */ float x2A4;
-    /* +2A8 */ u8 x2A8[0x2B4 - 0x2A8];
+    /* +2A8 */ float x2A8;
+    /* +2AC */ float x2AC;
+    /* +2B0 */ float x2B0;
     /* +2B4 */ float x2B4;
-    /* +2B8 */ u8 x2B8[0x2DC - 0x2B8];
+    /* +2B8 */ UNK_T x2B8;
+    /* +2BC */ float x2BC;
+    /* +2C0 */ UNK_T x2C0;
+    /* +2C4 */ UNK_T x2C4;
+    /* +2C8 */ UNK_T x2C8;
+    /* +2CC */ UNK_T x2CC;
+    /* +2D0 */ UNK_T x2D0;
+    /* +2D4 */ float x2D4;
+    /* +2D8 */ float x2D8;
     /* +2DC */ float x2DC;
     /* +2E0 */ float x2E0;
-    /* +2E4 */ u8 x2E4[0x308 - 0x2E4];
+    /* +2E4 */ float x2E4;
+    /* +2E8 */ float x2E8;
+    /* +2EC */ float x2EC;
+    /* +2F0 */ float x2F0;
+    /* +2F4 */ u8 x2F4[0x308 - 0x2F4];
     /* +308 */ float x308;
     /* +30C */ u8 x30C[0x3A8 - 0x30C];
     /* +3A8 */ float x3A8;
@@ -251,7 +273,7 @@ typedef struct _ftCommonData {
     /* +4B4 */ int x4B4;
     /* +4B8 */ float x4B8;
     /* +4BC */ float x4BC;
-    /* +4C0 */ UNK_T x4C0;
+    /* +4C0 */ float x4C0;
     /* +4C4 */ int x4C4;
     /* +4C8 */ int x4C8;
     /* +4CC */ int x4CC;
@@ -366,7 +388,7 @@ typedef struct _ftCommonData {
     /* +7F4 */ u8 x7F4[0x814 - 0x7F4];
     /* +814 */ int x814;
     // lots of more data following, exact size to be determined
-} ftCommonData;
+};
 
 typedef struct _FtCollisionData {
     u8 x0[0x28];
@@ -399,7 +421,11 @@ typedef struct _ftData {
     }* x8;
     /*  +C */ struct S_TEMP4* xC;
     /* +10 */ u8* x10;
-    /* +14 */ u8 x14[0x24 - 0x14];
+    /* +14 */ u8 x14[0x20 - 0x14];
+    /* +20 */ struct {
+        UNK_T x0;
+        int x8;
+    }* x20;
     /* +24 */ int x24;
     /* +28 */ u8 x28[0x3C - 0x28];
     struct UnkFloat6_Camera* x3C;
@@ -742,7 +768,7 @@ struct Fighter {
     /*    fp+0 */ HSD_GObj* gobj;
     /*    fp+4 */ FighterKind kind;
     /*    fp+8 */ s32 x8_spawnNum;
-    /*    fp+C */ u8 xC_playerID;
+    /*    fp+C */ u8 player_id;
     /*   fp+10 */ FtMotionId motion_id;
     /*   fp+14 */ enum_t anim_id;
     /*   fp+18 */ s32 x18;
@@ -790,8 +816,8 @@ struct Fighter {
     /*  fp+2E4 */ float x2E4;
     /*  fp+2E8 */ float x2E8;
     /*  fp+2EC */ float x2EC;
-    /*  fp+2F0 */ u32 x2F0;
-    /*  fp+2F4 */ unk_t x2F4;
+    /*  fp+2F0 */ float x2F0;
+    /*  fp+2F4 */ UNK_T x2F4;
     /*  fp+2F8 */ u8 filler_x2F0[0x3E0 - 0x2F8];
     /*  fp+3E0 */ u32 x3E0;
     /*  fp+3E4 */ float x3E4;
@@ -917,10 +943,10 @@ struct Fighter {
     /* fp+119E */ u8 x119E_hurtboxNum;
     /* fp+119F */ u8 x119F;
     /* fp+11A0 */ HurtCapsule x11A0_fighterHurtbox[15];
-    /* fp+1614 */ unk_t x1614;
+    /* fp+1614 */ UNK_T x1614;
     /* fp+1618 */ u8 filler_x1618[0x166C - 0x1618];
     /* fp+166C */ u32 x166C;
-    /* fp+1670 */ unk_t x1670;
+    /* fp+1670 */ UNK_T x1670;
     /* fp+1674 */ u8 filler_x1674[0x1828 - 0x1674];
     /* fp+1828 */ enum_t x1828;
     /* fp+182C */ struct dmg {
@@ -1022,13 +1048,13 @@ struct Fighter {
     /* fp+198C */ s32 x198C;
     /* fp+1990 */ s32 x1990;
     /* fp+1994 */ s32 x1994;
-    /* fp+1998 */ float x1998_shieldHealth;
-    /* fp+199C */ float x199C_shieldLightshieldAmt;
+    /* fp+1998 */ float shield_health;
+    /* fp+199C */ float lightshield_amount;
     /* fp+19A0 */ s32 x19A0_shieldDamageTaken;
-    /* fp+19A4 */ s32 x19A4;
+    /* fp+19A4 */ int x19A4;
     /* fp+19A8 */ void* x19A8;
     /* fp+19AC */ float specialn_facing_dir;
-    /* fp+19B0 */ s32 filler_x19B0;
+    /* fp+19B0 */ enum_t x19B0;
     /* fp+19B4 */ float shield_unk0;
     /* fp+19B8 */ float shield_unk1;
     /* fp+19BC */ s32 x19BC_shieldDamageTaken3;

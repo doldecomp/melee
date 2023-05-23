@@ -10,7 +10,7 @@
 void ftMh_Damage_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!Player_GetPlayerSlotType(fp->xC_playerID)) {
+    if (!Player_GetPlayerSlotType(fp->player_id)) {
         ftBossLib_8015BD20(gobj);
     }
 }
@@ -41,7 +41,7 @@ void ftMh_WaitSweep_Anim(HSD_GObj* gobj)
 void ftMh_WaitSweep_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!Player_GetPlayerSlotType(fp->xC_playerID)) {
+    if (!Player_GetPlayerSlotType(fp->player_id)) {
         ftBossLib_8015BD20(gobj);
     }
 }
@@ -97,7 +97,7 @@ void ftMh_SweepLoop_Anim(HSD_GObj* gobj)
 void ftMh_SweepLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }

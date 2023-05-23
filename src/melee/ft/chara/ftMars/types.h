@@ -4,6 +4,7 @@
 #include <platform.h>
 #include "ft/forward.h"
 
+#include <common_structs.h>
 #include <placeholder.h>
 
 struct ftMars_FighterVars {
@@ -12,33 +13,33 @@ struct ftMars_FighterVars {
 };
 
 typedef struct _MarsAttributes {
-    s32 x0;
-    s32 x4;
-    s32 x8;
-    f32 xC;
-    f32 x10;
-    f32 x14;
-    f32 x18;
-    f32 x1C;
-    f32 x20;
-    f32 x24;
-    f32 x28;
-    f32 x2C;
-    f32 x30;
-    f32 x34;
-    f32 x38;
-    f32 x3C;
-    f32 x40;
-    f32 x44;
-    f32 x48;
-    f32 x4C;
-    f32 x50;
-    f32 x54;
-    f32 x58;
-    f32 x5C;
-    f32 x60;
-    f32 x64;
-    u8 data_filler_68[0x98 - 0x68];
+    int x0;
+    int x4;
+    int x8;
+    float xC;
+    float x10;
+    float x14;
+    float x18;
+    float x1C;
+    float x20;
+    float x24;
+    float x28;
+    float x2C;
+    float x30;
+    float x34;
+    float x38;
+    float x3C;
+    float x40;
+    float x44;
+    float x48;
+    float x4C;
+    float x50;
+    float x54;
+    float x58;
+    float x5C;
+    float x60;
+    AbsorbDesc x64;
+    u8 x78[0x98 - 0x78];
 } MarsAttributes;
 
 union ftMars_MotionVars {

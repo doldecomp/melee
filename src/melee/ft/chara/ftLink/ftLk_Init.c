@@ -19,6 +19,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCLink/ftCl_Init.h"
+#include "ftCommon/ftCo_Guard.h"
 #include "lb/lbmthp.h"
 
 #include <dolphin/mtx/types.h>
@@ -428,7 +429,7 @@ void ftLk_800EB334(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* link_attr = fp->ft_data->ext_attr;
 
-    f32 resultf = ft_80092ED8(fp->x19A4, link_attr, link_attr->xD8);
+    f32 resultf = ft_80092ED8(fp->x19A4, link_attr->xD8);
     fp->gr_vel = resultf * p_ftCommonData->x294;
     if (fp->specialn_facing_dir < 0) {
         new_ground_vel = fp->gr_vel;

@@ -12,6 +12,7 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Guard.h"
 
 #include <stddef.h>
 #include <dolphin/mtx/types.h>
@@ -96,12 +97,12 @@ void ftYs_GuardOn_0_Anim(HSD_GObj* gobj)
 
 void ftYs_GuardOn_0_IASA(HSD_GObj* gobj)
 {
-    if (!ft_80093694() && !ft_8009515C(gobj) && !ft_80099794(gobj) &&
-        !ft_8009917C(gobj) && !ftCo_Catch_CheckInput(gobj) &&
-        !ft_8009A080(gobj))
-    {
-        return;
-    }
+    RETURN_IF(ft_80093694(gobj))
+    RETURN_IF(ft_8009515C(gobj))
+    RETURN_IF(ft_80099794(gobj))
+    RETURN_IF(ft_8009917C(gobj))
+    RETURN_IF(ftCo_Catch_CheckInput(gobj))
+    RETURN_IF(ft_8009A080(gobj))
 }
 
 void ftYs_GuardOn_0_Phys(HSD_GObj* arg0)
@@ -306,7 +307,7 @@ extern f64 const ftYs_Init_804D9A30;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftYs_Shield_8012C600(HSD_GObj*)
+asm void ftYs_Shield_8012C600(HSD_GObj*, bool)
 { // clang-format off
     nofralloc
 /* 8012C600 001291E0  7C 08 02 A6 */	mflr r0
@@ -490,7 +491,7 @@ void ftYs_Shield_8012C850(HSD_GObj* gobj)
     fp->mv.ys.unk2.x14 = p_ftCommonData->x2A4;
     temp_r5 = p_ftCommonData;
     fp->mv.ys.unk2.x18 = temp_r5->x2B4;
-    ft_8009370C(gobj, ftYs_Shield_8012CACC, temp_r5);
+    ft_8009370C(gobj, ftYs_Shield_8012CACC);
 }
 
 extern char* const ftYs_Unk2_804D3E58;
@@ -748,7 +749,7 @@ bool ftYs_Shield_8012CC1C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((fp->input.held_inputs & 0x80000000) &&
-        (fp->x1998_shieldHealth >= ftYs_Init_804D9A2C))
+        (fp->shield_health >= ftYs_Init_804D9A2C))
     {
         ft_800928CC(gobj);
         return true;

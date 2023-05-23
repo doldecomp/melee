@@ -3448,7 +3448,7 @@ lbl_80084598:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_800845B4(void)
+asm void ft_800845B4(ftCo_GObj* gobj)
 {
     // clang-format off
     nofralloc

@@ -10,6 +10,7 @@
 #include "ftCo_AttackHi4.h"
 #include "ftCo_AttackLw3.h"
 #include "ftCo_AttackS3.h"
+#include "ftCo_Guard.h"
 
 #include "ef/eflib.h"
 #include "ft/fighter.h"

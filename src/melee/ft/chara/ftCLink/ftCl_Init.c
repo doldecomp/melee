@@ -15,6 +15,7 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Guard.h"
 #include "ftLink/ftLk_Init.h"
 #include "ftLink/ftLk_SpecialHi.h"
 #include "ftLink/ftLk_SpecialLw.h"
@@ -409,7 +410,7 @@ void ftCl_Init_80149114(HSD_GObj* gobj)
 {
     ftLk_Fighter* fp = gobj->user_data;
     ftLk_DatAttrs* ea = fp->ft_data->ext_attr;
-    f32 ftmp = ft_80092ED8(fp->x19A4, ea, ea->xD8);
+    f32 ftmp = ft_80092ED8(fp->x19A4, ea->xD8);
     fp->gr_vel = ftmp * p_ftCommonData->x294;
     if (fp->specialn_facing_dir < 0.0f) {
         ftmp = fp->gr_vel;
