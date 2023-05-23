@@ -173,4 +173,9 @@ typedef void (*Event)(void);
         return;                                                               \
     }
 
+#define INVOKE(cb, ...)                                                       \
+    if ((cb) != NULL) {                                                       \
+        (cb)(__VA_ARGS__);                                                    \
+    }
+
 #endif

@@ -24,6 +24,7 @@
 #include "cm/camera.h"
 #include "db/db_2253.h"
 #include "ef/efasync.h"
+#include "ft/ft_08A4.h"
 #include "ft/ftdata.h"
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"

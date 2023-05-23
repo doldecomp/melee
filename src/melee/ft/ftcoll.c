@@ -11,6 +11,8 @@
 #include "inlines.h"
 
 #include "ef/efsync.h"
+#include "ft/ft_08A4.h"
+#include "ftCommon/ftCo_Guard.h"
 #include "gm/gm_1601.h"
 #include "gr/stage.h"
 #include "it/it_266F.h"

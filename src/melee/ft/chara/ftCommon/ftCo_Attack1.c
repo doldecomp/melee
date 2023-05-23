@@ -11,6 +11,7 @@
 #include "ftCo_AttackLw3.h"
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
+#include "ftCo_ItemGet.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"

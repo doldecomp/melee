@@ -10,9 +10,11 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_08A4.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ftCommon/ftCo_ItemGet.h"
 #include "ftLink/types.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"

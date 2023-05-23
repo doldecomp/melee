@@ -100,5 +100,7 @@ static char* ftCo_804D3B00 = "jobj";
 /* 0932DC */ void ft_800932DC(ftCo_GObj* gobj);
 /* 093694 */ bool ft_80093694(ftCo_GObj* gobj);
 /* 09370C */ void ft_8009370C(HSD_GObj*, HSD_GObjEvent);
+/* 093C3C */ /* static */ UNK_RET ft_80094098(UNK_PARAMS);
+/* 093CDC */ /* static */ UNK_RET ft_80094138(UNK_PARAMS);
 
 #endif

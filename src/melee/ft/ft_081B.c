@@ -3131,7 +3131,7 @@ lbl_8008419C:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_800841B8(void)
+asm void ft_800841B8(ftCo_GObj* gobj, HSD_GObjEvent cb)
 {
     // clang-format off
     nofralloc

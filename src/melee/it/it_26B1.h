@@ -23,7 +23,7 @@ f32 it_8026B1D4(HSD_GObj* gobj, itHit* itemHitboxUnk);
 void it_8026B294(HSD_GObj* gobj, Vec3* pos);
 
 /// Check if item is heavy
-bool it_8026B2B4(HSD_GObj* gobj);
+enum_t it_8026B2B4(HSD_GObj* gobj);
 
 /// Check if item is heavy again?
 bool it_8026B2D8(HSD_GObj* gobj);

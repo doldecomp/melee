@@ -77,7 +77,7 @@ void Item_8026A848(HSD_GObj* gobj, HSD_GObj* fgobj);
 void Item_8026A8EC(HSD_GObj* gobj);
 
 /// Make Item Held
-void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* pickupGFX, u8 pickupSFX);
+void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* owner_gobj, u8 part);
 
 /// Drop Item
 void Item_8026ABD8(HSD_GObj* gobj, Vec3* pos, f32 arg2);

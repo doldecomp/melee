@@ -3776,7 +3776,7 @@ void ftCo_Damage_Coll(ftCo_GObj* gobj)
         if (fp->x2224_flag.bits.b2) {
             ft_80097D40(gobj);
         } else {
-            float mag = sqrtf(VEC2_SQ_MAG(fp->x8c_kb_vel));
+            float mag = sqrtf(VEC2_DOT(fp->x8c_kb_vel));
             if (mag >= p_ftCommonData->x1E0) {
                 ft_80097D40(gobj);
             } else if (mag >= p_ftCommonData->x1E4) {
@@ -3871,7 +3871,7 @@ lbl_8008FD80:
 void ftCo_Damage_SetMv8FromKbThreshold(Fighter* fp)
 {
     float kb_vel = fp->ground_or_air == GA_Air
-                       ? sqrtf__Ff(VEC3_SQ_MAG(fp->x8c_kb_vel))
+                       ? sqrtf__Ff(VEC3_DOT(fp->x8c_kb_vel))
                        : ABS(fp->xF0_ground_kb_vel);
     fp->mv.co.damage.x8 =
         kb_vel < p_ftCommonData->x568   ? 0
@@ -4189,7 +4189,7 @@ void ftCo_DamageFly_Phys(ftCo_GObj* gobj)
         doFlyRoll(gobj);
     }
     if (fp->x1064_thrownHitbox.owner != NULL &&
-        sqrtf(VEC3_SQ_MAG(fp->x8c_kb_vel)) < p_ftCommonData->x1C8)
+        sqrtf(VEC3_DOT(fp->x8c_kb_vel)) < p_ftCommonData->x1C8)
     {
         ftColl_8007AFF8(gobj);
     }
@@ -4376,7 +4376,7 @@ void ftCo_DamageFlyRoll_Phys(ftCo_GObj* gobj)
         doFlyRoll(gobj);
     }
     if (fp->x1064_thrownHitbox.owner != NULL) {
-        if (sqrtf__Ff(VEC3_SQ_MAG(fp->x8c_kb_vel)) < p_ftCommonData->x1C8) {
+        if (sqrtf__Ff(VEC3_DOT(fp->x8c_kb_vel)) < p_ftCommonData->x1C8) {
             ftColl_8007AFF8(gobj);
         }
     }

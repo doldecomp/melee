@@ -71,6 +71,9 @@ union ftCommon_MotionVars {
         /* fp+2368 */ UNK_T x28;
         /* fp+236C */ float x2C;
     } guard;
+    struct ftCo_ItemGetVars {
+        /* fp+2340 */ bool x0;
+    } itemget;
 };
 
 #endif

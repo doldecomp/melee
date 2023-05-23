@@ -12,8 +12,10 @@
 #include "ftparts.h"
 
 #include "ef/eflib.h"
+#include "ft/ft_08A4.h"
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"
+#include "ftCommon/ftCo_ItemGet.h"
 #include "gm/gm_1601.h"
 #include "it/it_26B1.h"
 #include "it/it_27CF.h"
