@@ -6,9 +6,11 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_08A4.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_ItemGet.h"
 
 bool ftDk_MS_341_800DF938(HSD_GObj* gobj)
 {

@@ -18,7 +18,6 @@ bool ftCo_AttackLw4_CheckInput(HSD_GObj*);
 bool ft_800925A4(HSD_GObj* gobj);
 bool ft_800925A4(HSD_GObj*);
 bool ft_80094790(HSD_GObj*);
-bool ft_80094EA4(HSD_GObj*);
 bool ft_80096540(HSD_GObj*);
 bool ft_80096CC8(HSD_GObj*);
 bool ft_8009917C(HSD_GObj*);

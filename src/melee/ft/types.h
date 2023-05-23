@@ -393,7 +393,7 @@ struct ftCommonData {
 typedef struct _FtCollisionData {
     u8 x0[0x28];
     u32 x28;
-    u8 x2C[0x30 - 0x2C];
+    u32 x2C;
     s32 x30;
     s32 x34;
 } FtCollisionData;
@@ -672,13 +672,10 @@ typedef struct _CollData {
     /* fp+2138 */ f32 x2138_smashSinceHitbox;
 } SmashAttr;
 
-/* fp+294 */ typedef struct _itPickup {
-    /* fp+294 */ Vec2 x0_ground_light_offset;
-    /* fp+29C */ Vec2 x8;
-    /* fp+2A4 */ Vec2 x10_ground_heavy_offset;
-    /* fp+2AC */ Vec2 x18;
-    /* fp+2B4 */ Vec2 x20_air_light_offset;
-    /* fp+2BC */ Vec2 x28;
+typedef struct itPickup {
+    /*  +0 */ Vec2 gr_light_offset[2];
+    /* +10 */ Vec2 gr_heavy_offset[2];
+    /* +20 */ Vec2 air_light_offset[2];
 } itPickup;
 
 typedef struct {
@@ -1040,7 +1037,7 @@ struct Fighter {
     /* fp+196C */ float hitlag_mul;
     /* fp+1970 */ enum_t unk_msid;
     /* fp+1974 */ Item_GObj* item_gobj;
-    /* fp+1978 */ HSD_GObj* x1978;
+    /* fp+1978 */ Item_GObj* x1978;
     /* fp+197C */ HSD_GObj* x197C;
     /* fp+1980 */ HSD_GObj* x1980;
     /* fp+1984 */ Item_GObj* x1984_heldItemSpec;

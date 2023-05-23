@@ -715,19 +715,19 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
     if (fighter->x21FC_flag.bits.b3 != 0) {
         temp_r24 = &fighter->x294_itPickup;
         if (fighter->ground_or_air == GA_Ground) {
-            if (lbGx_8001E2F8(&temp_r24->x0_ground_light_offset,
-                              &fighter->cur_pos, &ftDrawCommon_804D3A88, arg1,
+            if (lbGx_8001E2F8(&temp_r24->gr_light_offset, &fighter->cur_pos,
+                              &ftDrawCommon_804D3A88, arg1,
                               fighter->facing_dir) != 0)
             {
                 phi_r30 = 1U;
             }
-            if (lbGx_8001E2F8(&temp_r24->x10_ground_heavy_offset,
-                              &fighter->cur_pos, &ftDrawCommon_804D3A90, arg1,
+            if (lbGx_8001E2F8(&temp_r24->gr_heavy_offset, &fighter->cur_pos,
+                              &ftDrawCommon_804D3A90, arg1,
                               fighter->facing_dir) != 0)
             {
                 phi_r30 = 1U;
             }
-        } else if (lbGx_8001E2F8(&temp_r24->x20_air_light_offset,
+        } else if (lbGx_8001E2F8(&temp_r24->air_light_offset,
                                  &fighter->cur_pos, &ftDrawCommon_804D3A8C,
                                  arg1, fighter->facing_dir) != 0)
         {

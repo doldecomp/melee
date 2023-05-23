@@ -42,5 +42,6 @@ extern HSD_GObjEvent
     ftData_UnkMotionStates3[FTKIND_MAX]; // probably ft_OnSomething
 extern HSD_GObjEvent ftData_OnUserDataRemove[FTKIND_MAX];
 extern Event ftData_Table_Unk1[FTKIND_MAX];
+extern Fighter_ItemEvent ftData_OnItemPickupExt[FTKIND_MAX];
 
 #endif

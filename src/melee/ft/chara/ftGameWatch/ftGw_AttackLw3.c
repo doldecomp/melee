@@ -15,6 +15,7 @@
 #include "ftCommon/ftCo_AttackLw3.h"
 #include "ftCommon/ftCo_AttackS3.h"
 #include "ftCommon/ftCo_AttackS4.h"
+#include "ftCommon/ftCo_ItemGet.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 

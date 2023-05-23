@@ -14,6 +14,7 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_ItemGet.h"
 #include "ftPeach/types.h"
 #include "it/it_26B1.h"
 #include "it/it_27CF.h"
