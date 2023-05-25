@@ -33,15 +33,22 @@ void ftData_80085560(s32, bool);
     /* +8 */ UNK_T x8;
 }* ftData_80085FD4(Fighter* fp, FtMotionId msid);
 
-extern HSD_GObjEvent
-    ftData_OnLoad[FTKIND_MAX]; // One load  callback for every character.
-extern HSD_GObjEvent
-    ftData_OnDeath[FTKIND_MAX]; // One death callback for every character.
+/// One load  callback for every character.
+extern HSD_GObjEvent ftData_OnLoad[FTKIND_MAX];
+
+/// One death callback for every character.-
+extern HSD_GObjEvent ftData_OnDeath[FTKIND_MAX];
+
 extern HSD_GObjEvent ftData_OnAbsorb[FTKIND_MAX];
-extern HSD_GObjEvent
-    ftData_UnkMotionStates3[FTKIND_MAX]; // probably ft_OnSomething
+
+/// probably ft_OnSomething
+extern HSD_GObjEvent ftData_UnkMotionStates3[FTKIND_MAX];
+
 extern HSD_GObjEvent ftData_OnUserDataRemove[FTKIND_MAX];
 extern Event ftData_Table_Unk1[FTKIND_MAX];
 extern Fighter_ItemEvent ftData_OnItemPickupExt[FTKIND_MAX];
+extern HSD_GObjEvent ftData_SpecialS[FTKIND_MAX];
+extern HSD_GObjEvent ftData_SpecialAirHi[FTKIND_MAX];
+extern HSD_GObjEvent ftData_SpecialAirLw[FTKIND_MAX];
 
 #endif

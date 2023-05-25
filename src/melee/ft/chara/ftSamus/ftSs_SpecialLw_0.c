@@ -7,12 +7,14 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
+#include "ftCommon/ftCo_0961.h"
 #include "ftCommon/ftCo_Attack1.h"
 #include "ftCommon/ftCo_AttackHi3.h"
 #include "ftCommon/ftCo_AttackHi4.h"
 #include "ftCommon/ftCo_AttackLw3.h"
 #include "ftCommon/ftCo_AttackS3.h"
 #include "ftCommon/ftCo_AttackS4.h"
+#include "ftCommon/ftCo_SpecialS.h"
 
 #include <trigf.h>
 
@@ -155,7 +157,7 @@ void ftSs_SpecialLw_IASA(HSD_GObj* gobj)
         ft_800D638C(gobj);
         return;
     }
-    RETURN_IF(ft_80096540(gobj))
+    RETURN_IF(ftCo_SpecialS_CheckInput(gobj))
     RETURN_IF(ftCo_Attack100_CheckInput(gobj))
     RETURN_IF(ft_800D6824(gobj))
     RETURN_IF(ft_800D68C0(gobj))

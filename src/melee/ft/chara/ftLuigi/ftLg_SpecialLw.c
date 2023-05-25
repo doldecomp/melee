@@ -10,6 +10,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ftCommon/ftCo_0961.h"
 #include "ftLuigi/ftLg_Init.h"
 #include "melee/ft/inlines.h"
 

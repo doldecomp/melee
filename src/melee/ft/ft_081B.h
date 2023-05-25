@@ -17,8 +17,9 @@
 #include <baselib/gobjproc.h>
 
 HSD_GObj* ft_80082E3C(HSD_GObj* gobj);
-f32 ft_GetGroundFrictionMultiplier(Fighter* fp);
-bool ft_8008239C(HSD_GObj* gobj, s32 facing_direction, f32* height_attributes);
+float ft_GetGroundFrictionMultiplier(Fighter* fp);
+bool ft_8008239C(HSD_GObj* gobj, s32 facing_direction,
+                 float* height_attributes);
 void ft_80084FA8(HSD_GObj* gobj);
 void ft_80084EEC(HSD_GObj* gobj);
 bool ft_800827A0(HSD_GObj* gobj);
@@ -53,7 +54,7 @@ void ft_80085088(HSD_GObj*);
 bool ft_800821DC(void);
 bool ft_80084A18(HSD_GObj*);
 void ft_800849EC(Fighter*, Fighter*);
-void ft_80081C88(HSD_GObj* dst_gobj, f32 scl_y);
+void ft_80081C88(HSD_GObj* dst_gobj, float scl_y);
 void ft_80082838(void);
 void ft_800831CC(HSD_GObj*, HSD_GObjPredicate, HSD_GObjEvent);
 

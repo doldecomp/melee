@@ -5,6 +5,7 @@
 #include "ftCo_AttackS4.h"
 
 #include "ftCo_08A6.h"
+#include "ftCo_0961.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackHi3.h"
 #include "ftCo_AttackHi4.h"
@@ -12,6 +13,7 @@
 #include "ftCo_AttackS3.h"
 #include "ftCo_Guard.h"
 #include "ftCo_ItemThrow.h"
+#include "ftCo_SpecialS.h"
 
 #include "ef/eflib.h"
 #include "ft/fighter.h"
@@ -194,7 +196,7 @@ void ftCo_AttackS4_IASA(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->allow_interrupt) {
-        RETURN_IF(ft_80096540(gobj))
+        RETURN_IF(ftCo_SpecialS_CheckInput(gobj))
         RETURN_IF(ftCo_Attack100_CheckInput(gobj))
         RETURN_IF(ft_800D6824(gobj))
         RETURN_IF(ft_800D68C0(gobj))

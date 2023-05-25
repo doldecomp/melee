@@ -10,6 +10,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_0961.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 

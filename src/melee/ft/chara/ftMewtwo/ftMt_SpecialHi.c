@@ -10,6 +10,7 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_0961.h"
 #include "ftMewtwo/ftMt_Init.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"

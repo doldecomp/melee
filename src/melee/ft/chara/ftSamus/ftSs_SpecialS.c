@@ -7,6 +7,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
+#include "ftCommon/ftCo_SpecialS.h"
 
 static void ftSamus_ClearThrowFlagsUnk(HSD_GObj* gobj)
 {

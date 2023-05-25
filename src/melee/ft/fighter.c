@@ -26,9 +26,11 @@
 #include "ef/efasync.h"
 #include "ft/ft_08A4.h"
 #include "ft/ftdata.h"
+#include "ftCommon/ftCo_0961.h"
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_ItemThrow.h"
+#include "ftCommon/ftCo_SpecialS.h"
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftKirby/ftKb_Init.h"
 #include "ftMasterHand/ftMh_Wait1_0.h"
@@ -1715,7 +1717,7 @@ void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* gobj)
     } else if (fp->x687 < 0xFF) {
         fp->x687++;
     }
-    if (ft_800964FC(fp)) {
+    if (ftCo_SpecialS_HasInput(fp)) {
         fp->x688 = 0;
     } else if (fp->x688 < 0xFF) {
         fp->x688++;
