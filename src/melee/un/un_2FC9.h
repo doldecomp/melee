@@ -19,5 +19,6 @@ void un_80304A58(s32);
 bool un_803048C0(s32);
 /* 32233C */ void un_8032233C(int, int);
 /* 3222EC */ float un_803222EC(float mag, float angle);
+/* 322598 */ void un_80322598(int, float);
 
 #endif

@@ -12,7 +12,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
-#include "ftCommon/ftCo_0961.h"
+#include "ftCommon/ftCo_FallSpecial.h"
 #include "it/it_27CF.h"
 
 #define FTFOX_SPECIALS_COLL_FLAG                                              \

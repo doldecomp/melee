@@ -90,6 +90,15 @@ union ftCommon_MotionVars {
         /* fp+2344 */ float anim_spd;
         /* fp+2348 */ Vec3 x8;
     } itemthrow4;
+    struct ftCo_FallSpecialVars {
+        /* fp+2340 */ int x0;
+        /* fp+2344 */ float x4;
+        /* fp+2348 */ float x8;
+        /* fp+234C */ int xC;
+        /* fp+2350 */ int x10;
+        /* fp+2354 */ float x14;
+        /* fp+2358 */ bool allow_interrupt;
+    } fallspecial;
 };
 
 #endif

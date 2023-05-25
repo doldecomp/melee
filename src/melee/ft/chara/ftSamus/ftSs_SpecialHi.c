@@ -10,7 +10,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ftCommon/ftCo_0961.h"
+#include "ftCommon/ftCo_FallSpecial.h"
 
 void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
 {

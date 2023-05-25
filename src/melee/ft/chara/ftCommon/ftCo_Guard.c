@@ -4,13 +4,13 @@
 
 #include "ftCo_Guard.h"
 
-#include "ftCo_0961.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackHi3.h"
 #include "ftCo_AttackHi4.h"
 #include "ftCo_AttackLw3.h"
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
+#include "ftCo_FallSpecial.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_SpecialS.h"
 

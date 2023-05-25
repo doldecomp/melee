@@ -7,7 +7,7 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
-#include "ftCommon/ftCo_0961.h"
+#include "ftCommon/ftCo_FallSpecial.h"
 
 // 80138208 00134DE8
 // https://decomp.me/scratch/lrV6F

@@ -2,6 +2,7 @@
 #define MELEE_FT_FT_08A4_H
 
 #include <platform.h>
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
 
 #include <placeholder.h>
@@ -132,8 +133,9 @@
 /* 0CC0E8 */ UNK_RET ftCo_800CC0E8(UNK_PARAMS);
 /* 0CC238 */ UNK_RET ftCo_800CC238(UNK_PARAMS);
 /* 0CC830 */ UNK_RET ftCo_800CC830(UNK_PARAMS);
-/* 0CC988 */ UNK_RET ftCo_800CC988(UNK_PARAMS);
-/* 0CCBE0 */ UNK_RET ftCo_800CCBE0(UNK_PARAMS);
+/* 0CC988 */ void ftCo_800CC988(ftCo_GObj* gobj, float);
+/* 0CCBE0 */ void ftCo_800CCBE0(ftCo_GObj* gobj, float*, FtMotionId,
+                                FtMotionId, FtMotionId);
 /* 0CD140 */ UNK_RET ftCo_800CD140(UNK_PARAMS);
 /* 0CD1BC */ UNK_RET ftCo_800CD1BC(UNK_PARAMS);
 /* 0CD204 */ UNK_RET ftCo_800CD204(UNK_PARAMS);
@@ -155,7 +157,7 @@
 /* 0CE480 */ UNK_RET ftCo_800CE480(UNK_PARAMS);
 /* 0CECE8 */ bool ftCo_800CECE8(ftCo_GObj* gobj);
 /* 0CED30 */ UNK_RET ftCo_800CED30(UNK_PARAMS);
-/* 0CEE70 */ UNK_RET ftCo_800CEE70(UNK_PARAMS);
+/* 0CEE70 */ bool ftCo_800CEE70(ftCo_GObj* gobj);
 /* 0CF138 */ float ft_CalcYScaledKnockback(float*, float, float, float);
 /* 0CF3C8 */ UNK_RET ftCo_800CF3C8(UNK_PARAMS);
 /* 0CF4DC */ void ftCo_800CF4DC(ftCo_GObj* gobj);
@@ -243,5 +245,6 @@
 /* 0DF910 */ UNK_RET ftCo_800DF910(UNK_PARAMS);
 /* 096498 */ void ftCo_80096498(ftCo_GObj* gobj);
 /* 096250 */ void ftCo_80096250(ftCo_GObj* gobj);
+/* 096D28 */ void ftCo_80096D28(ftCo_GObj* gobj);
 
 #endif
