@@ -5,6 +5,7 @@
 #include "ftCo_DamageIce.h"
 
 #include "ftCo_DamageFall.h"
+#include "ftCo_FallSpecial.h"
 
 #include "baselib/mtx.h"
 #include "cm/camera.h"
@@ -31,6 +32,8 @@ float const ftCo_804D851C = 1;
 float const ftCo_804D8520 = 3;
 double const ftCo_804D8528 = 0.5;
 double const ftCo_804D8530 = 3;
+/* static */ extern char* ftCo_804D3AE8; // = "jobj.h";
+/* static */ extern char* ftCo_804D3AF0; // = "jobj";
 #endif
 
 void ftCo_80090984(ftCo_GObj* gobj)

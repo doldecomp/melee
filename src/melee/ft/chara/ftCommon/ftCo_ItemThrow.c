@@ -5,6 +5,7 @@
 #include "ftCo_ItemThrow.h"
 
 #include "ftCo_FallSpecial.h"
+#include "ftCo_Lift.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -2009,16 +2010,16 @@ lbl_80096330:
 #pragma pop
 #else
 
-static inline void inlineB0(ftCo_GObj* gobj, FtMotionId msid, int offset)
+static inline void inlineA0(ftCo_GObj* gobj, FtMotionId msid, int offset)
 {
+    int msid_offset = msid + offset;
     ftCo_Fighter* fp = gobj->user_data;
     float facing_dir = fp->facing_dir;
-    float facing_dir1 = fp->facing_dir1;
-    if (facing_dir != facing_dir1) {
-        fp->facing_dir = facing_dir1;
+    if (facing_dir != fp->facing_dir1) {
+        fp->facing_dir = fp->facing_dir1;
     }
     Fighter_ChangeMotionState(
-        gobj, msid + offset,
+        gobj, msid_offset,
         Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |
             Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
             Ft_MF_SkipModelFlags | Ft_MF_Unk27,
@@ -2030,19 +2031,13 @@ static inline void inlineB0(ftCo_GObj* gobj, FtMotionId msid, int offset)
 
 void ftCo_80096250(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
-    {
-        FtMotionId msid = fp->motion_id;
-        if (msid >= ftCo_MS_LightThrowF4) {
-            inlineB0(gobj, msid, 4);
-        } else {
-            inlineB0(gobj, msid, 6);
-        }
+
+    if (fp->motion_id >= ftCo_MS_LightThrowF4) {
+        inlineA0(gobj, fp->motion_id, 4);
+    } else {
+        inlineA0(gobj, fp->motion_id, 6);
     }
 }
 #endif
@@ -2139,9 +2134,9 @@ void ftCo_80096374(ftCo_GObj* gobj, float lag)
     {
         int msid = fp->motion_id;
         if (msid >= ftCo_MS_LightThrowF4) {
-            inlineB0(gobj, msid, -4);
+            inlineA0(gobj, msid, -4);
         } else {
-            inlineB0(gobj, msid, -6);
+            inlineA0(gobj, msid, -6);
         }
     }
 }

@@ -51,11 +51,6 @@ struct _m2c_stack_ftCo_80091854 {
 }; /* size = 0x40 */
 #endif
 
-#ifdef MWERKS_GEKKO
-/* static */ extern char* ftCo_804D3AE8; // = "jobj.h"
-/* static */ extern char* ftCo_804D3AF0; // = "jobj"
-#endif
-
 /* static */ extern Vec3 const ftCo_803B74B0; // = { 0 }
 /* static */ extern Vec3 const ftCo_803B74BC; // = { 0 }
 

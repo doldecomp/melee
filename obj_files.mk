@@ -110,12 +110,16 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Damage.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DamageFall.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DamageIce.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ftCo_DamageIce.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Guard.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ftCo_Guard.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ItemGet.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ItemThrow.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_SpecialS.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_SpecialAir.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_FallSpecial.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Lift.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_4D3A.s.o\
     $(BUILD_DIR)/src/melee/ft/ftdynamics.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMr_Strings.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_08A4.s.o\

@@ -56,12 +56,12 @@ bool ft_80084A18(HSD_GObj*);
 void ft_800849EC(Fighter*, Fighter*);
 void ft_80081C88(HSD_GObj* dst_gobj, float scl_y);
 void ft_80082838(void);
-void ft_800831CC(HSD_GObj*, HSD_GObjPredicate, HSD_GObjEvent);
+void ft_800831CC(HSD_GObj*, bool (*)(HSD_GObj*, enum_t), HSD_GObjEvent);
 
 UNK_RET ft_80082978(UNK_PARAMS);
 UNK_RET ft_80082D40(UNK_PARAMS);
 UNK_RET ft_80082F28(UNK_PARAMS);
-void ft_80083090(ftCo_GObj* gobj, HSD_GObjPredicate, HSD_GObjEvent);
+void ft_80083090(ftCo_GObj* gobj, bool (*)(HSD_GObj*, enum_t), HSD_GObjEvent);
 UNK_RET ft_80083318(UNK_PARAMS);
 UNK_RET ft_80083464(UNK_PARAMS);
 UNK_RET ft_800835B0(UNK_PARAMS);
