@@ -28,6 +28,7 @@
 #include "ft/ftdata.h"
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftKirby/ftKb_Init.h"
 #include "ftMasterHand/ftMh_Wait1_0.h"
@@ -112,7 +113,7 @@ int** Fighter_804D6540 = NULL;
 FighterPartsTable** ftPartsTable = NULL;
 UNK_T Fighter_804D6548 = NULL;
 UNK_T Fighter_804D654C = NULL;
-UNK_T Fighter_804D6550 = NULL;
+int** Fighter_804D6550 = NULL;
 ftCommonData* p_ftCommonData;
 
 void Fighter_800679B0(void)
@@ -224,7 +225,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->cur_pos.z = z;
     fp->prev_pos.z = z;
 
-    fp->x30_facingDirectionRepeated = fp->facing_dir;
+    fp->facing_dir1 = fp->facing_dir;
     fp->x34_scale.y = fp->x34_scale.x;
 
     fp->x2220_flag.bits.b5 = 0;
@@ -256,7 +257,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->cur_anim_frame = 0.0f;
     fp->x898_unk = 0.0f;
 
-    fp->x89C_frameSpeedMul = 1.0f;
+    fp->frame_spd_mul = 1.0f;
     fp->x8A0_unk = 1.0f;
     fp->dmg.kb_applied = 0.0f;
     fp->dmg.x18A4_knockbackMagnitude = 0.0f;
@@ -921,7 +922,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, FtMotionId msid,
     union Struct2070 x2070;
 
     fp->motion_id = msid;
-    fp->x30_facingDirectionRepeated = fp->facing_dir;
+    fp->facing_dir1 = fp->facing_dir;
 
     HSD_JObjSetTranslate(jobj, &fp->cur_pos);
     efAsync_80067624(gobj, &fp->x60C);
@@ -1195,10 +1196,10 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, FtMotionId msid,
         }
 
         fp->anim_id = new_motion_state->anim_id;
-        fp->x89C_frameSpeedMul = anim_speed;
+        fp->frame_spd_mul = anim_speed;
         fp->x8A0_unk = anim_speed;
 
-        fp->cur_anim_frame = (anim_start - fp->x89C_frameSpeedMul);
+        fp->cur_anim_frame = (anim_start - fp->frame_spd_mul);
         fp->x898_unk = 0.0f;
 
         if ((fp->x594_animCurrFlags1.bits.b0) ||
@@ -1218,7 +1219,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, FtMotionId msid,
             if ((flags & Ft_MF_FreezeState) != 0) {
                 fp->x2223_flag.bits.b0 = 1;
                 fp->x104 = 0x14;
-                fp->x89C_frameSpeedMul = 0.0f;
+                fp->frame_spd_mul = 0.0f;
                 anim_speed = 0.0f;
             }
 
@@ -1647,11 +1648,11 @@ void Fighter_8006A360(HSD_GObj* gobj)
                 if (fp->x104 == 0x14U) {
                     ftAnim_8006F0FC(gobj, 0.0f);
                 } else {
-                    fp->x89C_frameSpeedMul += fp->x8A0_unk;
+                    fp->frame_spd_mul += fp->x8A0_unk;
                 }
                 fp->x104--;
                 if (fp->x104 == 0) {
-                    ftAnim_8006F0FC(gobj, fp->x89C_frameSpeedMul);
+                    ftAnim_8006F0FC(gobj, fp->frame_spd_mul);
                     fp->x104 = 0x14U;
                 }
             }

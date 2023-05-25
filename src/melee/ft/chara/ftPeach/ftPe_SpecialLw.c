@@ -13,6 +13,7 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_ItemGet.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 #include "ftPeach/types.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"

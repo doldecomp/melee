@@ -362,7 +362,7 @@ void ftNs_AttackHi4_YoyoApplySmash(HSD_GObj* gobj)
 
     colAnimID = 119;
     fp->smash_attrs.state = 4;
-    fp->smash_attrs.x2124_frameSpeedMul = fp->x89C_frameSpeedMul;
+    fp->smash_attrs.x2124_frameSpeedMul = fp->frame_spd_mul;
     smash_attr = &fp->smash_attrs;
     fp->smash_attrs.x2118_frames = 0.0f;
     fp->smash_attrs.x211C_holdFrame = 60.0f;

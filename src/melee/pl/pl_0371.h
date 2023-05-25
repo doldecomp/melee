@@ -1,11 +1,10 @@
-/** @file
- * @todo Rename to @c plUnk1.
- */
-#ifndef MELEE_PL_PL_UNKNOWN_001_H
-#define MELEE_PL_PL_UNKNOWN_001_H
+#ifndef GALE01_03715C
+#define GALE01_03715C
+
+#include "it/forward.h"
+#include <baselib/forward.h>
 
 #include <placeholder.h>
-#include <baselib/gobj.h>
 
 void pl_80037C60(HSD_GObj*, s32);
 void pl_8003E058(s32, s32, s32, s32);
@@ -44,5 +43,8 @@ void pl_80037ECC(void);
 void pl_800401F0(u8, int, float, float);
 /* 03E0E8 */ void pl_8003E0E8(u8, int);
 /* 03E114 */ void pl_8003E114(u8, int, float);
+/* 03E978 */ void pl_8003E978(u8 slot, bool fp_x221F_b4, Item_GObj* item_gobj,
+                              float y0, float, float, float, float x1,
+                              float y1, float frame_spd_mul);
 
 #endif

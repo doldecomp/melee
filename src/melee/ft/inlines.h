@@ -187,7 +187,7 @@ static inline CollData* Fighter_GetCollData(Fighter* fp)
     return &fp->coll_data;
 }
 
-/// @todo This and #ftCheckThrowB3 are probably one macro or something.
+/// @todo This and #ftCheckThrowB3, etc. are probably one macro or something.
 static inline bool ftCheckThrowB0(Fighter* fp)
 {
     if (fp->throw_flags.b0) {
@@ -202,6 +202,16 @@ static inline bool ftCheckThrowB3(Fighter* fp)
 {
     if (fp->throw_flags.b3) {
         fp->throw_flags.b3 = false;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+static inline bool ftCheckThrowB4(Fighter* fp)
+{
+    if (fp->throw_flags.b4) {
+        fp->throw_flags.b4 = false;
         return true;
     } else {
         return false;

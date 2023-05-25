@@ -5,13 +5,12 @@
 #include "ft/ft_0877.h"
 #include "ft/ft_08A4.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_Wait.h"
 
 void ftDk_HeavyJump_IASA(HSD_GObj* gobj)
 {
-    if (ft_80094EA4(gobj)) {
-        return;
-    }
+    RETURN_IF(ft_80094EA4(gobj))
 }
 
 void ftDk_HeavyJump_Phys(HSD_GObj* gobj)

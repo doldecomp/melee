@@ -11,6 +11,7 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_ItemGet.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 
 bool ftDk_MS_341_800DF938(HSD_GObj* gobj)
 {

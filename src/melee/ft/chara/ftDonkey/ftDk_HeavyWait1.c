@@ -7,6 +7,7 @@
 #include "ft/ft_08A4.h"
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_ItemGet.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 
 void ftDk_HeavyWait1_IASA(HSD_GObj* gobj)
 {

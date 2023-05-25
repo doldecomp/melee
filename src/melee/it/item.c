@@ -2089,12 +2089,12 @@ void Item_8026ABD8(HSD_GObj* gobj, Vec3* pos, f32 arg2)
     }
 }
 
-void Item_8026AC74(HSD_GObj* gobj, enum_t drop_gfx, enum_t drop_sfx, f32 arg3)
+void Item_8026AC74(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3)
 {
     Item* item_data = GetItemData(gobj);
     item_data->xC44 = arg3;
     it_802731A4(gobj);
-    it_80273748(gobj, drop_gfx, drop_sfx);
+    it_80273748(gobj, arg1, arg2);
     RunCallback(gobj, item_data->xB8_itemLogicTable->dropped);
     it_802741F4(gobj, 1);
     it_802754D4(gobj);
@@ -2104,12 +2104,12 @@ void Item_8026AC74(HSD_GObj* gobj, enum_t drop_gfx, enum_t drop_sfx, f32 arg3)
     }
 }
 
-void Item_8026AD20(HSD_GObj* gobj, s32 drop_gfx, s32 drop_sfx, f32 arg8)
+void Item_8026AD20(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3)
 {
     Item* item_data = GetItemData(gobj);
     it_802731E0(gobj);
-    item_data->xC44 = arg8;
-    it_80273748(gobj, drop_gfx, drop_sfx);
+    item_data->xC44 = arg3;
+    it_80273748(gobj, arg1, arg2);
     RunCallback(gobj, item_data->xB8_itemLogicTable->thrown);
     it_802741F4(gobj, 1);
     it_802754D4(gobj);

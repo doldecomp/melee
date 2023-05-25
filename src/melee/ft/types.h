@@ -251,7 +251,13 @@ struct ftCommonData {
     /* +3E4 */ float x3E4;
     /* +3E8 */ float x3E8_shieldKnockbackFrameDecay;
     /* +3EC */ float x3EC_shieldGroundFrictionMultiplier;
-    /* +3F0 */ u8 x3F0[0x418 - 0x3F0];
+    /* +3F0 */ u8 x3F0[0x400 - 0x3F0];
+    /* +410 */ float x400;
+    /* +410 */ float x404;
+    /* +410 */ float x408;
+    /* +40C */ float x40C;
+    /* +410 */ UNK_T x410;
+    /* +414 */ UNK_T x414;
     /* +418 */ int x418;
     /* +41C */ int x41C;
     /* +420 */ u8 x420[0x440 - 0x420];
@@ -280,7 +286,7 @@ struct ftCommonData {
     /* +4D0 */ float x4D0;
     /* +4D4 */ float x4D4;
     /* +4D8 */ u32 x4D8;
-    /* +4DC */ UNK_T x4DC;
+    /* +4DC */ float x4DC;
     /* +4E0 */ UNK_T x4E0;
     /* +4E4 */ UNK_T x4E4;
     /* +4E8 */ UNK_T x4E8;
@@ -774,7 +780,7 @@ struct Fighter {
     /*   fp+24 */ struct S_TEMP4* x24;
     /*   fp+28 */ u8* x28;
     /*   fp+2C */ float facing_dir;
-    /*   fp+30 */ float x30_facingDirectionRepeated;
+    /*   fp+30 */ float facing_dir1;
     /*   fp+34 */ Vec3 x34_scale;
     /*   fp+40 */ float x40;
     /*   fp+44 */ Mtx x44_mtx;
@@ -926,7 +932,7 @@ struct Fighter {
     /*  fp+890 */ CameraBox* x890_cameraBox;
     /*  fp+894 */ float cur_anim_frame;
     /*  fp+898 */ float x898_unk;
-    /*  fp+89C */ float x89C_frameSpeedMul;
+    /*  fp+89C */ float frame_spd_mul;
     /*  fp+8A0 */ float x8A0_unk;
     /*  fp+8A4 */ float x8A4_animBlendFrames;
     /*  fp+8A8 */ float x8A8_unk;

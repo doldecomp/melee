@@ -13,6 +13,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Guard.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 
 #include <stddef.h>
 #include <dolphin/mtx/types.h>

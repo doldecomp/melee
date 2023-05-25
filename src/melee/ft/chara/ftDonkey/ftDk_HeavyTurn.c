@@ -9,6 +9,7 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_ItemGet.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 
 void ftDk_HeavyTurn_Anim(HSD_GObj* gobj)
 {

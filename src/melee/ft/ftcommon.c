@@ -1280,12 +1280,12 @@ void ftCommon_8007E83C(HSD_GObj* gobj, s32 arg1, f32 div)
 #endif
 
     if (div == 0) {
-        val = fp->x89C_frameSpeedMul;
+        val = fp->frame_spd_mul;
     } else if (itGetKind(fp->item_gobj) == It_Kind_Parasol) {
-        val = fp->x89C_frameSpeedMul *
+        val = fp->frame_spd_mul *
               (it_8028B08C(fp->item_gobj, parasol_table_2[arg1]) / div);
     } else {
-        val = fp->x89C_frameSpeedMul *
+        val = fp->frame_spd_mul *
               (it_802BDA40(fp->item_gobj, parasol_table_4[arg1]) / div);
     }
     if (itGetKind(fp->item_gobj) == It_Kind_Parasol) {

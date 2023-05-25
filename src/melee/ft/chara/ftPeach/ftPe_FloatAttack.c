@@ -11,6 +11,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_AttackAir.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_LandingAir.h"
 
 #include <baselib/gobj.h>

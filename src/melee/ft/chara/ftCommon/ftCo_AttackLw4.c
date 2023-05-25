@@ -4,10 +4,13 @@
 
 #include "ftCo_AttackLw4.h"
 
+#include "ftCo_ItemGet.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_08A4.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 #include "ftNess/ftNs_AttackLw4.h"
 
 #include <placeholder.h>
