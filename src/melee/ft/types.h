@@ -188,9 +188,10 @@ struct ftCommonData {
     /* +208 */ u8 x208[0x210 - 0x208];
     /* +210 */ float x210;
     /* +214 */ int x214;
-    /* +218 */ UNK_T x218;
+    /* +218 */ float x218;
     /* +21C */ float x21C;
-    /* +220 */ u8 x220[0x258 - 0x220];
+    /* +220 */ float x220;
+    /* +224 */ u8 x224[0x258 - 0x224];
     /* +258 */ float x258;
     /* +25C */ u8 x25C[0x260 - 0x25C];
     /* +260 */ float x260_startShieldHealth;
@@ -505,7 +506,7 @@ typedef struct ftCo_DatAttrs {
     /* +0AC fp+1BC */ float ledge_jump_vertical_velocity;
     /* +0B0 fp+1C0 */ float item_throw_velocity_multiplier;
     /* +0B4 fp+1C4 */ int xB4;
-    /* +0B8 fp+1C8 */ int xB8;
+    /* +0B8 fp+1C8 */ float xB8;
     /* +0BC fp+1CC */ int xBC;
     /* +0C0 fp+1D0 */ int xC0;
     /* +0C4 fp+1D4 */ int xC4;

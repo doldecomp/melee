@@ -11,6 +11,7 @@
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_0961.h"
 
 #include <dolphin/mtx/types.h>
 

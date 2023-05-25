@@ -45,6 +45,8 @@ def main(obj_path: str) -> None:
             "python3",
             "./tools/asm-differ/diff.py",
             "-mos",
+            "-f",
+            str(expected_path),
             "--format",
             "json",
             f"{function['name']}",

@@ -11,6 +11,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_0961.h"
 
 static void setCallbacks(HSD_GObj* gobj)
 {

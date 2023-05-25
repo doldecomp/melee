@@ -6,7 +6,6 @@
 
 #include <placeholder.h>
 
-/* 0965DC */ UNK_RET ftCo_800965DC(UNK_PARAMS);
 /* 096D9C */ void ftCo_80096D9C(ftCo_GObj* gobj);
 /* 096EF8 */ UNK_RET ftCo_80096EF8(UNK_PARAMS);
 /* 096F48 */ UNK_RET ftCo_80096F48(UNK_PARAMS);

@@ -4,12 +4,14 @@
 #include "ftCo_Wait.h"
 
 #include "ftCo_08A6.h"
+#include "ftCo_0961.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackHi3.h"
 #include "ftCo_AttackHi4.h"
 #include "ftCo_AttackLw3.h"
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
+#include "ftCo_SpecialS.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
@@ -33,7 +35,7 @@ void ftCo_Wait_Anim(HSD_GObj* gobj)
 
 void ftCo_Wait_IASA(ftCo_GObj* gobj)
 {
-    RETURN_IF(ft_80096540(gobj))
+    RETURN_IF(ftCo_SpecialS_CheckInput(gobj))
     RETURN_IF(ftCo_Attack100_CheckInput(gobj))
     RETURN_IF(ft_800D6824(gobj))
     RETURN_IF(ft_800D68C0(gobj))

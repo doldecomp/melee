@@ -18,6 +18,7 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_0961.h"
 #include "gm/gm_1601.h"
 #include "gr/grstadium.h"
 #include "it/it_26B1.h"

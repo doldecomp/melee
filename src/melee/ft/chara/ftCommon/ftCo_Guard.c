@@ -4,6 +4,7 @@
 
 #include "ftCo_Guard.h"
 
+#include "ftCo_0961.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackHi3.h"
 #include "ftCo_AttackHi4.h"
@@ -11,6 +12,7 @@
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
 #include "ftCo_ItemThrow.h"
+#include "ftCo_SpecialS.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -1882,7 +1884,7 @@ void ftCo_GuardOff_IASA(ftCo_GObj* gobj)
     ftCo_Fighter* fp = gobj->user_data;
     /// @todo #RETURN_IF chain
     if (!fp->mv.co.guard.x1C ||
-        (!ft_80096540(gobj) && !ftCo_Attack100_CheckInput(gobj) &&
+        (!ftCo_SpecialS_CheckInput(gobj) && !ftCo_Attack100_CheckInput(gobj) &&
          !ft_800D6824(gobj) && !ft_800D68C0(gobj) &&
          !ftCo_Catch_CheckInput(gobj) && !ftCo_AttackS4_CheckInput(gobj) &&
          !ftCo_AttackHi4_CheckInput(gobj) &&

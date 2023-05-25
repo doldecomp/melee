@@ -5,8 +5,8 @@
 
 #include <dolphin/mtx/types.h>
 
-#define VEC2_DOT(v) ((SQ((v).x) + SQ((v).y)))
-#define VEC3_DOT(v) ((SQ((v).x) + SQ((v).y) + SQ((v).z)))
+#define VEC2_SQ_LEN(v) ((SQ((v).x) + SQ((v).y)))
+#define VEC3_SQ_LEN(v) ((SQ((v).x) + SQ((v).y) + SQ((v).z)))
 
 void PSVECAdd(Vec3* a, Vec3* b, Vec3* result);
 void PSVECScale(Vec3* src, Vec3* dst, float scale);
