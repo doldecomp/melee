@@ -13,7 +13,7 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_0961.h"
+#include "ftCommon/ftCo_FallSpecial.h"
 
 #include <common_structs.h>
 #include <baselib/gobj.h>

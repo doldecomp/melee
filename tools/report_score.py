@@ -32,7 +32,9 @@ def calc_percent(current_score, max_score):
 
 def main(obj_path: str) -> None:
     expected_root = Path("./expected/build/ssbm.us.1.2/")
+    wip_root = Path("./build/wip/ssbm.us.1.2/")
     expected_path = expected_root / obj_path
+    wip_path = wip_root / obj_path
     obj_name = str(expected_path.relative_to(expected_root)).replace(".o", "")
 
     entries: List[Tuple[str, int, int, float]] = []
@@ -46,7 +48,7 @@ def main(obj_path: str) -> None:
             "./tools/asm-differ/diff.py",
             "-mos",
             "-f",
-            str(expected_path),
+            str(wip_path),
             "--format",
             "json",
             f"{function['name']}",

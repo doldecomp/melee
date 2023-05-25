@@ -9,7 +9,7 @@
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
-#include "ftCommon/ftCo_0961.h"
+#include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_ItemGet.h"
 #include "it/it_27CF.h"
 #include "it/item.h"

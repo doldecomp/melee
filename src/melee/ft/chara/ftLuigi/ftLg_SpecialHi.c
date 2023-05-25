@@ -11,7 +11,7 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
-#include "ftCommon/ftCo_0961.h"
+#include "ftCommon/ftCo_FallSpecial.h"
 
 // 0x80143FC8
 // https://decomp.me/scratch/MAoxx // Luigi's grounded Super Jump Punch Action

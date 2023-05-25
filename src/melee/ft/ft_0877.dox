@@ -215,7 +215,7 @@ void ftCo_LightThrow_Coll(HSD_GObj*);
 void ftCo_LightThrowAir_Coll(HSD_GObj*);
 void ftCo_HeavyThrow_Coll(HSD_GObj*);
 void ft_800968C8(HSD_GObj*);
-void ft_80096900(HSD_GObj*, s32, s32, bool is_interruptable, f32, f32);
+void ft_80096900(HSD_GObj*, s32, s32, bool allow_interrupt, f32, f32);
 void ft_800969D8(HSD_GObj*, s32, s32, s32, f32, f32, f32);
 void ftCo_FallSpecial_Anim(HSD_GObj*);
 void ftCo_FallSpecial_IASA(HSD_GObj*);
