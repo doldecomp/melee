@@ -14,6 +14,7 @@
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_0961.h"
 #include "ftCommon/ftCo_Guard.h"
+#include "ftCommon/ftCo_SpecialAir.h"
 #include "ftCommon/ftCo_SpecialS.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
@@ -345,7 +346,7 @@ void ftLk_SpecialS2_IASA(HSD_GObj* gobj)
 
 static bool checkAirBoomerangSomething(HSD_GObj* gobj)
 {
-    if (ft_8009665C(gobj)) {
+    if (ftCo_SpecialAir_CheckInput(gobj)) {
         return true;
     } else if (ft_800CB870(gobj)) {
         return true;

@@ -1028,7 +1028,7 @@ void ft_800DEF38(HSD_GObj*);
 void ft_800DF0D0(HSD_GObj*);
 void ft_800C555C(HSD_GObj*);
 void ft_8009CA0C(HSD_GObj*, HSD_GObj*);
-bool ft_8009665C(void);
+bool ftCo_SpecialAir_CheckInput(void);
 void ft_800CCDA8(HSD_GObj*);
 UNK_RET ft_800CC6C8(UNK_PARAMS);
 void ft_800CDDA0(HSD_GObj*);

@@ -15,6 +15,7 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ftCommon/ftCo_0961.h"
+#include "ftCommon/ftCo_SpecialAir.h"
 #include "ftPeach/types.h"
 
 #include <common_structs.h>
@@ -242,7 +243,7 @@ void ftPe_Float_Anim(HSD_GObj* gobj)
 void ftPe_Float_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (!ft_8009665C(gobj) && !ftPe_8011BE80(gobj)) {
+    if (!ftCo_SpecialAir_CheckInput(gobj) && !ftPe_8011BE80(gobj)) {
         /// @todo Call #checkContinueFloatInput
         bool float_input =
             fp->input.lstick.y >= p_ftCommonData->x70_someLStickYMax ||
