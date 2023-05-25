@@ -2,10 +2,9 @@
 #define MELEE_FT_FTDATA_H
 
 #include "ft/forward.h"
+#include <baselib/forward.h>
 
 #include "ft/fighter.h"
-
-#include <baselib/gobj.h>
 
 typedef struct ftData_UnkModelStruct {
     Fighter_ModelEvent model_events[FTKIND_MAX];
@@ -50,5 +49,7 @@ extern Fighter_ItemEvent ftData_OnItemPickupExt[FTKIND_MAX];
 extern HSD_GObjEvent ftData_SpecialS[FTKIND_MAX];
 extern HSD_GObjEvent ftData_SpecialAirHi[FTKIND_MAX];
 extern HSD_GObjEvent ftData_SpecialAirLw[FTKIND_MAX];
+extern HSD_GObjEvent ftData_SpecialAirS[FTKIND_MAX];
+extern HSD_GObjEvent ftData_SpecialAirN[FTKIND_MAX];
 
 #endif

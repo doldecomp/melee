@@ -191,7 +191,8 @@ struct ftCommonData {
     /* +218 */ float x218;
     /* +21C */ float x21C;
     /* +220 */ float x220;
-    /* +224 */ u8 x224[0x258 - 0x224];
+    /* +224 */ int x224;
+    /* +228 */ u8 x228[0x258 - 0x228];
     /* +258 */ float x258;
     /* +25C */ u8 x25C[0x260 - 0x25C];
     /* +260 */ float x260_startShieldHealth;

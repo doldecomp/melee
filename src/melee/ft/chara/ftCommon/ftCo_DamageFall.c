@@ -7,6 +7,7 @@
 #include "ftCo_AttackAir.h"
 #include "ftCo_DamageIce.h"
 #include "ftCo_ItemThrow.h"
+#include "ftCo_SpecialAir.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -175,7 +176,7 @@ void ftCo_DamageFall_IASA(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (!ft_800C5240(gobj)) {
-        RETURN_IF(ft_8009665C(gobj))
+        RETURN_IF(ftCo_SpecialAir_CheckInput(gobj))
         RETURN_IF(ft_80095328(gobj, 0))
         RETURN_IF(ftCo_800D7100(gobj))
         RETURN_IF(ftCo_800C3B10(gobj))

@@ -1,10 +1,9 @@
-#ifndef GALE01_09614C
-#define GALE01_09614C
+#ifndef GALE01_0963B8
+#define GALE01_0963B8
 
 #include <platform.h>
 #include "ftCommon/forward.h"
 
-/* 09614C */ bool ft_8009665C(ftCo_GObj* gobj);
 /* 0963B8 */ void ft_800968C8(ftCo_GObj* gobj);
 /* 0963F0 */ void ft_80096900(ftCo_GObj* gobj, int, int, bool is_interruptable,
                               float, float);
