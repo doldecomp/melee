@@ -47,7 +47,7 @@ extern UNK_T Fighter_804D653C;
 extern int** Fighter_804D6540;
 extern UNK_T Fighter_804D6548;
 extern UNK_T Fighter_804D654C;
-extern UNK_T Fighter_804D6550;
+extern int** Fighter_804D6550;
 
 extern unk_t Fighter_804D6520;
 extern ftCommonData* p_ftCommonData;

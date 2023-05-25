@@ -6,6 +6,8 @@
 #include "it/forward.h"
 #include <baselib/forward.h>
 
+/* 094DF8 */ void ftCo_80094DF8(ftCo_GObj* gobj);
+/* 094D90 */ void ftCo_80094D90(ftCo_GObj* gobj);
 /* 093CF4 */ /* static */ bool ftCo_80094150(HSD_GObj* arg0, HSD_GObj* arg1);
 /* 094020 */ /* static */ bool ftCo_8009447C(ftCo_GObj* gobj,
                                              HSD_GObj* item_gobj);

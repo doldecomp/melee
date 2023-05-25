@@ -84,7 +84,7 @@ void it_8027327C(HSD_GObj* gobj, s32 ID1, s32 ID2);
 void it_8027346C(HSD_GObj* gobj);
 void it_80273484(HSD_GObj* gobj);
 void it_80273500(HSD_GObj*, Vec3*);
-void it_80273748(HSD_GObj*, s32, s32);
+void it_80273748(HSD_GObj*, Vec3*, Vec3*);
 
 void it_80273B50(HSD_GObj*, Vec3*);
 void it_80274198(HSD_GObj*, s32);
@@ -141,5 +141,6 @@ UNK_RET it_8026FAC4(UNK_PARAMS);
 UNK_RET ftColl_80077688(UNK_PARAMS);
 UNK_RET it_8026FC00(UNK_PARAMS);
 UNK_RET it_80272818(UNK_PARAMS);
+HSD_JObj* it_80272C90(Item_GObj* gobj);
 
 #endif

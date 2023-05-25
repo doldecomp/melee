@@ -9,6 +9,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_08A4.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 #include "ftNess/ftNs_AttackHi4.h"
 
 /* 08CA38 */ void doEnter(ftCo_GObj* gobj);

@@ -146,7 +146,7 @@ void ftLk_SpecialAirHi_Coll(HSD_GObj* gobj)
 #endif
     Fighter* fp = GET_FIGHTER(gobj)->dat_attrs;
     if (ft_CheckGroundAndLedge(gobj, 0)) {
-        ft_800D5CB0(gobj, 0, fp->x30_facingDirectionRepeated);
+        ft_800D5CB0(gobj, 0, fp->facing_dir1);
     } else if (ftCliffCommon_80081298(gobj)) {
         return;
     }

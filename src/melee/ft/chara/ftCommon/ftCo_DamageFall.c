@@ -5,6 +5,7 @@
 
 #include "ftCo_AttackAir.h"
 #include "ftCo_DamageIce.h"
+#include "ftCo_ItemThrow.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

@@ -4,6 +4,8 @@
 
 #include "ftCo_AttackHi3.h"
 
+#include "ftCo_ItemThrow.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"

@@ -74,6 +74,22 @@ union ftCommon_MotionVars {
     struct ftCo_ItemGetVars {
         /* fp+2340 */ bool x0;
     } itemget;
+    struct ftCo_ItemThrowVars {
+        /* fp+2340 */ float facing_dir;
+        /* fp+2344 */ UNK_T x4;
+        /* fp+2348 */ UNK_T x8;
+        /* fp+234C */ UNK_T xC;
+        /* fp+2350 */ UNK_T x10;
+        /* fp+2354 */ UNK_T x14;
+        /* fp+2358 */ UNK_T x18;
+        /* fp+235C */ UNK_T x1C;
+        /* fp+2360 */ int x20;
+    } itemthrow;
+    struct ftCo_ItemThrow4Vars {
+        /* fp+2340 */ int unk_timer;
+        /* fp+2344 */ float anim_spd;
+        /* fp+2348 */ Vec3 x8;
+    } itemthrow4;
 };
 
 #endif

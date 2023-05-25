@@ -94,7 +94,6 @@ UNK_RET ft_800850B4(UNK_PARAMS);
 UNK_RET ft_800851D0(UNK_PARAMS);
 UNK_RET ft_80082578(UNK_PARAMS);
 void ft_80082638(ftCo_GObj* gobj, ftCollisionBox*);
-void ft_80085030(ftCo_GObj*, ftCommonData*, float gr_friction,
-                 float facing_dir);
+void ft_80085030(ftCo_GObj*, float gr_friction, float facing_dir);
 
 #endif

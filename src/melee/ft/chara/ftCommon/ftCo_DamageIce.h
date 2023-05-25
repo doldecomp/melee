@@ -70,6 +70,7 @@ struct _m2c_stack_ftCo_80091854 {
 /* 0913DC */ void ftCo_DamageIce_IASA(ftCo_GObj* gobj);
 /* 0913E0 */ void ftCo_DamageIce_Phys(ftCo_GObj* gobj);
 /* 09144C */ void ftCo_DamageIce_Coll(ftCo_GObj* gobj);
+/* 0914A4 */ void ftCo_800914A4(ftCo_GObj* gobj);
 /* 091620 */ /* static */ UNK_RET ftCo_80091620(UNK_PARAMS);
 /* 091854 */ void ftCo_80091854(ftCo_GObj* gobj);
 /* 091988 */ void ftCo_DamageIceJump_Anim(ftCo_GObj* gobj);

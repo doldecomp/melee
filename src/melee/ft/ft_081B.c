@@ -4362,40 +4362,17 @@ asm void ft_80085004(void)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
-
-#pragma push
-asm void ft_80085030(ftCo_GObj*, ftCommonData*, float, float)
+void ft_80085030(HSD_GObj* gobj, float gr_friction, float facing_dir)
 {
-    // clang-format off
-    nofralloc
-/* 80085030 00081C10  7C 08 02 A6 */	mflr r0
-/* 80085034 00081C14  90 01 00 04 */	stw r0, 4(r1)
-/* 80085038 00081C18  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 8008503C 00081C1C  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 80085040 00081C20  7C 7F 1B 78 */	mr r31, r3
-/* 80085044 00081C24  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 80085048 00081C28  88 03 05 94 */	lbz r0, 0x594(r3)
-/* 8008504C 00081C2C  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
-/* 80085050 00081C30  41 82 00 18 */	beq lbl_80085068
-/* 80085054 00081C34  C0 23 06 AC */	lfs f1, 0x6ac(r3)
-/* 80085058 00081C38  C0 03 00 EC */	lfs f0, 0xec(r3)
-/* 8008505C 00081C3C  EC 01 00 B8 */	fmsubs f0, f1, f2, f0
-/* 80085060 00081C40  D0 03 00 E4 */	stfs f0, 0xe4(r3)
-/* 80085064 00081C44  48 00 00 08 */	b lbl_8008506C
-lbl_80085068:
-/* 80085068 00081C48  4B FF 78 C9 */	bl ftCommon_8007C930
-lbl_8008506C:
-/* 8008506C 00081C4C  7F E3 FB 78 */	mr r3, r31
-/* 80085070 00081C50  4B FF 7B 05 */	bl ftCommon_8007CB74
-/* 80085074 00081C54  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 80085078 00081C58  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 8008507C 00081C5C  38 21 00 20 */	addi r1, r1, 0x20
-/* 80085080 00081C60  7C 08 03 A6 */	mtlr r0
-/* 80085084 00081C64  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+    ftCo_Fighter* fp = gobj->user_data;
+    if (fp->x594_animCurrFlags1.bits.b0) {
+        fp->xE4_ground_accel_1 =
+            fp->x6A4_transNOffset.z * facing_dir - fp->gr_vel;
+    } else {
+        ftCommon_8007C930(fp, gr_friction);
+    }
+    ftCommon_8007CB74(gobj);
+}
 
 void ft_800850E0(void);
 
