@@ -124,7 +124,7 @@ void ft_800BFFAC(Fighter*);
 bool ft_800BFFD0(Fighter*, int, int);
 void ft_800C0074(Fighter*);
 void ft_800C0134(Fighter*);
-void ft_800C0200(Fighter*, s32);
+void ft_800C0200(Fighter*, int);
 void ft_800C0358(Fighter*, Fighter*, s32);
 void ft_800C0408(HSD_GObj*);
 bool ft_800C0694(Fighter*);
@@ -995,7 +995,12 @@ void ftDk_ThrowFWalk_Coll(HSD_GObj*);
 void ftDk_ThrowFWalk_IASA(HSD_GObj*);
 void ftDk_ThrowFWalk_Phys(HSD_GObj*);
 unk_t mpColl_8004B4B0(void);
-/* 0889F4 */ void ft_800889F4(ftCo_Fighter* fp, UNK_T);
+/* 0889F4 */ void ft_800889F4(ftCo_Fighter* fp, FtCollisionData*);
 /* 0886D8 */ void ftCo_800886D8(ftCo_Fighter* fp, UNK_T, UNK_T, UNK_T);
+/* 08893C */ void ft_8008893C(ftCo_Fighter* fp);
+/* 088828 */ void ft_80088828(ftCo_Fighter* fp);
+/* 088328 */ void ft_80088328(ftCo_Fighter* fp);
+/* 0885A8 */ void ft_800885A8(ftCo_Fighter* fp);
+/* 08A1B8 */ void ft_8008A1B8(ftCo_GObj* gobj, int);
 
 #endif

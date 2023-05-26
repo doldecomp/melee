@@ -25,17 +25,6 @@
 #define JOBJ_PARENT(jobj) ((jobj) == NULL ? NULL : (jobj)->parent)
 #define JOBJ_CHILD(jobj) ((jobj) == NULL ? NULL : (jobj)->child)
 
-extern HSD_GObj* HSD_GObj_804D7814;
-extern HSD_PerfStat HSD_PerfCurrentStat;
-extern HSD_MObjInfo ftMObj;
-
-void ftParts_80074ACC(void);
-u32 ftParts_8007506C(s32 ftkind, u32 part);
-
-void ftParts_JObjInfoInit(void);
-void ftParts_IntpJObjInfoInit(void);
-void ftParts_PObjInfoInit(void);
-
 HSD_JObjInfo ftJObj = { ftParts_JObjInfoInit };
 HSD_JObjInfo ftIntpJObj = { ftParts_IntpJObjInfoInit };
 HSD_PObjInfo ftPObj = { ftParts_PObjInfoInit };
@@ -1670,7 +1659,7 @@ void ftParts_80074A8C(HSD_GObj* arg0)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ftParts_80074ACC(void)
+asm void ftParts_80074ACC(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80074ACC 000716AC  80 A3 00 2C */	lwz r5, 0x2c(r3)
@@ -1694,7 +1683,7 @@ lbl_80074AEC:
 } // clang-format on
 #pragma pop
 #else
-void ftParts_80074ACC(void)
+void ftParts_80074ACC(ftCo_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }

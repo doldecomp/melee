@@ -5535,7 +5535,7 @@ lbl_8007AC94:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftColl_8007AC9C(void)
+asm void ftColl_8007AC9C(HitCapsule*, int, HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8007AC9C 0007787C  7C 08 02 A6 */	mflr r0
@@ -5578,7 +5578,7 @@ lbl_8007AD08:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftColl_8007AD18(void)
+asm void ftColl_8007AD18(ftCo_Fighter* fp, HitCapsule*)
 { // clang-format off
     nofralloc
 /* 8007AD18 000778F8  7C 08 02 A6 */	mflr r0
@@ -5827,7 +5827,7 @@ lbl_8007AFA0:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftColl_8007AFC8(void)
+asm void ftColl_8007AFC8(ftCo_GObj* gobj, int)
 { // clang-format off
     nofralloc
 /* 8007AFC8 00077BA8  7C 08 02 A6 */	mflr r0
@@ -5957,7 +5957,7 @@ extern char* const ftColl_803C0CF0;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftColl_8007B128(void)
+asm void ftColl_8007B128(s8, int)
 { // clang-format off
     nofralloc
 /* 8007B128 00077D08  7C 08 02 A6 */	mflr r0

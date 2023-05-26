@@ -44,7 +44,9 @@ struct HitCapsule {
 
     HSD_JObj* bone;
 
-    u8 x24[0x30 - 0x24];
+    int x24;
+    int x28;
+    int x2C;
 
     /// @at{30} @sz{4}
     HitElement element;

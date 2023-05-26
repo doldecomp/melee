@@ -160,7 +160,7 @@ typedef void (*Event)(void);
 #define S8_MAX 0x7F
 #define S16_MAX 0x7FFF
 #define S32_MAX 0x7FFFFFFF
-#define F32_MAX 3.4028235E38
+#define F32_MAX 3.4028235E38f
 
 #define SQ(x) ((x) * (x))
 #define MIN(a, b) (((a) > (b)) ? (b) : (a))
