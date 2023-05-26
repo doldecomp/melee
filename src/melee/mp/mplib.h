@@ -3,6 +3,7 @@
 
 #include "ft/fighter.h"
 
+#include <common_structs.h>
 #include <dolphin/mtx/types.h>
 
 typedef void (*mpLib_Callback)(s32, s32, CollData*, s32, s32, f32);
@@ -23,7 +24,7 @@ unk_t mpLib_80056A1C(void);
 bool mpLib_800509B8(f32 surface_normal_y, f32 surface_normal_x, f32 left_x,
                     f32 left_y, Vec3* coll_vec, unk_t, unk_t, unk_t, u32, u32);
 
-unk_t mpLib_80054CEC(void);
+u32 mpLib_80054CEC(enum_t);
 
 s32 mpLib_80051EC8(Vec3*, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32);
 void mpLib_80053DA4(u32, f32*);

@@ -1746,7 +1746,8 @@ lbl_80083070:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_80083090(ftCo_GObj* gobj, HSD_GObjPredicate, HSD_GObjEvent)
+asm void ft_80083090(ftCo_GObj* gobj, bool (*)(HSD_GObj*, enum_t),
+                     HSD_GObjEvent)
 {
     // clang-format off
     nofralloc
@@ -1846,8 +1847,7 @@ lbl_800831B8:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_800831CC(HSD_GObj* arg0, HSD_GObjPredicate arg1,
-                     HSD_GObjEvent arg2)
+asm void ft_800831CC(HSD_GObj*, bool (*)(HSD_GObj*, enum_t), HSD_GObjEvent)
 { // clang-format off
     nofralloc
 /* 800831CC 0007FDAC  7C 08 02 A6 */	mflr r0

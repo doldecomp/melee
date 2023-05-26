@@ -47,7 +47,6 @@ struct _m2c_stack_ftCo_80095EFC {
 /* 095EEC */ void ftCo_LightThrowAir_Coll(ftCo_GObj* gobj);
 /* 096010 */ void ftCo_HeavyThrow_Coll(ftCo_GObj* gobj);
 /* 096374 */ void ftCo_80096374(ftCo_GObj* gobj, float lag);
-/* 096E68 */ void ftCo_80096E68(ftCo_GObj* gobj);
 /* 0961D0 */ void ftCo_800961D0(ftCo_GObj* gobj);
 
 #endif

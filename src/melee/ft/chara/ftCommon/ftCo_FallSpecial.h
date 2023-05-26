@@ -13,5 +13,7 @@
 /* 096AF4 */ void ftCo_FallSpecial_IASA(ftCo_GObj* gobj);
 /* 096B44 */ void ftCo_FallSpecial_Phys(ftCo_GObj* gobj);
 /* 096C98 */ void ftCo_FallSpecial_Coll(ftCo_GObj* gobj);
+/* 096CC8 */ bool ft_80096CC8(ftCo_GObj* gobj, enum_t);
+/* 096D28 */ void ftCo_80096D28(ftCo_GObj* gobj);
 
 #endif

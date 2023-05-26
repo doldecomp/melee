@@ -7,11 +7,8 @@
 
 #include <placeholder.h>
 
-/* 096D9C */ void ftCo_80096D9C(ftCo_GObj* gobj);
-/* 096EF8 */ UNK_RET ftCo_80096EF8(UNK_PARAMS);
-/* 096F48 */ UNK_RET ftCo_80096F48(UNK_PARAMS);
-/* 0970E0 */ UNK_RET ftCo_800970E0(UNK_PARAMS);
-/* 097130 */ UNK_RET ftCo_80097130(UNK_PARAMS);
+/* 0970E0 */ bool ftCo_800970E0(ftCo_GObj* gobj);
+/* 097130 */ void ftCo_80097130(ftCo_GObj* gobj);
 /* 0974C4 */ void ftCo_800974C4(ftCo_GObj* gobj);
 /* 097570 */ UNK_RET ftCo_80097570(UNK_PARAMS);
 /* 097630 */ UNK_RET ftCo_80097630(UNK_PARAMS);
@@ -185,7 +182,6 @@
 /* 0D3680 */ UNK_RET ftCo_800D3680(UNK_PARAMS);
 /* 0D38B8 */ UNK_RET ftCo_800D38B8(UNK_PARAMS);
 /* 0D3950 */ UNK_RET ftCo_800D3950(UNK_PARAMS);
-/* 0D3BC8 */ UNK_RET ftCo_800D3BC8(UNK_PARAMS);
 /* 0D3E40 */ UNK_RET ftCo_800D3E40(UNK_PARAMS);
 /* 0D40B8 */ UNK_RET ftCo_800D40B8(UNK_PARAMS);
 /* 0D41C4 */ UNK_RET ftCo_800D41C4(UNK_PARAMS);
@@ -245,6 +241,5 @@
 /* 0DF910 */ UNK_RET ftCo_800DF910(UNK_PARAMS);
 /* 096498 */ void ftCo_80096498(ftCo_GObj* gobj);
 /* 096250 */ void ftCo_80096250(ftCo_GObj* gobj);
-/* 096D28 */ void ftCo_80096D28(ftCo_GObj* gobj);
 
 #endif

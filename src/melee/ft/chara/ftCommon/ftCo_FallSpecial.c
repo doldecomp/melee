@@ -11,6 +11,7 @@
 #include "ft/ft_08A4.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "mp/mplib.h"
 #include "un/un_2FC9.h"
 
 #include <common_structs.h>
@@ -192,7 +193,7 @@ lbl_80096A84:
 #pragma pop
 #else
 
-void ft_800969D8(HSD_GObj* gobj, int arg1, int arg2, int allow_interrupt,
+void ft_800969D8(ftCo_GObj* gobj, int arg1, int arg2, int allow_interrupt,
                  float arg4, float arg5, float arg6)
 {
     /// @todo Unused stack.
@@ -394,4 +395,30 @@ void ftCo_FallSpecial_Phys(ftCo_GObj* gobj)
 void ftCo_FallSpecial_Coll(ftCo_GObj* gobj)
 {
     ft_80083090(gobj, ft_80096CC8, ftCo_80096D28);
+}
+
+bool ft_80096CC8(ftCo_GObj* gobj, enum_t arg1)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8] = { 0 };
+#endif
+    ftCo_Fighter* fp = gobj->user_data;
+    if (arg1 != -1 && (!(mpLib_80054CEC(arg1) & (1 << 8)) ||
+                       fp->input.lstick.y > p_ftCommonData->x25C))
+    {
+        return true;
+    }
+    return false;
+}
+
+void ftCo_80096D28(ftCo_GObj* gobj)
+{
+    ftCo_Fighter* fp = gobj->user_data;
+    if (fp->mv.co.fallspecial.x10 || fp->self_vel.y < ft_800D0EC8(fp)) {
+        ft_800D5CB0(gobj, fp->mv.co.fallspecial.allow_interrupt,
+                    fp->mv.co.fallspecial.x14);
+    } else {
+        ft_8008A2BC(gobj);
+    }
 }
