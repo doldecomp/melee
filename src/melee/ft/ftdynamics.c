@@ -1,6 +1,5 @@
 #include <dolphin/mtx/types.h>
 
-int ftDynamics_803C5700[] = { 9, 10, 11, 12 };
 Vec4 ftDynamics_803C5710 = { 14, 0, -3, 3 };
 char ftDynamics_803C5720[] = "translate";
 char ftDynamics_803C572C[] = "fighter dynamics num over!\n";

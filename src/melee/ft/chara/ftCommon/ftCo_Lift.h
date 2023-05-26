@@ -19,11 +19,6 @@ struct _m2c_stack_ft_8009750C {
 }; /* size = 0x28 */
 #endif
 
-extern char* ftCo_804D3B08; // = "jobj.h"
-extern char* ftCo_804D3B10; // = "jobj"
-extern char* ftCo_804D3B18; // = "jobj.h"
-extern char* ftCo_804D3B20; // = "jobj"
-
 /* 0968E0 */ void ftCo_LiftWait_Anim(ftCo_GObj* gobj);
 /* 0968E4 */ void ftCo_LiftWait_IASA(ftCo_GObj* gobj);
 /* 096934 */ void ftCo_LiftWait_Phys(ftCo_GObj* gobj);

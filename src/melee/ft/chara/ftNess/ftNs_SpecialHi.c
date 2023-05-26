@@ -12,6 +12,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ftCommon/ftCo_DownBound.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"

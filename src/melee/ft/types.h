@@ -180,8 +180,8 @@ struct ftCommonData {
     /* +1E4 */ float x1E4;
     /* +1E8 */ UNK_T x1E8;
     /* +1EC */ float x1EC;
-    /* +1F0 */ UNK_T x1F0;
-    /* +1F4 */ UNK_T x1F4;
+    /* +1F0 */ float x1F0;
+    /* +1F4 */ float x1F4;
     /* +1F8 */ UNK_T x1F8;
     /* +1FC */ float x1FC;
     /* +200 */ float x200;
