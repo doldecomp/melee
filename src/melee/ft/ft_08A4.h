@@ -241,5 +241,11 @@
 /* 0DF910 */ UNK_RET ftCo_800DF910(UNK_PARAMS);
 /* 096498 */ void ftCo_80096498(ftCo_GObj* gobj);
 /* 096250 */ void ftCo_80096250(ftCo_GObj* gobj);
-
+/* 09F834 */ void ft_8009F834(HSD_GObj*, int, int, int, int, Vec3*, Vec3*,
+                              float);
+/* 09E318 */ void ft_8009E318(int, void*, float);
+/* 0DEE84 */ void ft_800DEE84(int, u8, char*, u32, float, float);
+/* 0C8B60 */ void ft_800C8B60(ftCo_Fighter* fp, int, s8);
+/* 09E714 */ void ft_8009E714(u8, s16, char*, u8, float, float, float, float,
+                              float, float);
 #endif

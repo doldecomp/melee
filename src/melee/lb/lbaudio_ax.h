@@ -32,5 +32,7 @@ void lbAudioAx_80026510(HSD_GObj*);
 enum_t lbAudioAx_800265C4(HSD_GObj*, enum_t sfx);
 int lbAudioAx_80024184(int, int, int, int);
 void lbAudioAx_80024B94(int, int);
+/* 0264E4 */ bool lbAudioAx_800264E4(void);
+/* 0263E8 */ void lbAudioAx_800263E8(HSD_GObj*, int, int, int, float);
 
 #endif

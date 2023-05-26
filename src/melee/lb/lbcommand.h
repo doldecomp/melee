@@ -13,6 +13,7 @@ typedef struct _Command_09_Struct {
     u32 param_2 : 18;
 } Command_09_Struct;
 
+/// @todo Unify with #ftCmdScript
 typedef struct _CommandInfo {
     f32 timer;       // 0x00
     f32 frame_count; // 0x04

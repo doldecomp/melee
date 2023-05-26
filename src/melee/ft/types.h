@@ -4,6 +4,7 @@
 #include <platform.h>
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include "lb/forward.h"
 
 #include "ft/ftanim.h"
 #include "ftCaptain/types.h"
@@ -436,7 +437,7 @@ typedef struct _ftData {
     /*  +4 */ void* ext_attr;
     /*  +8 */ struct {
         u8 x0_fill[0x10];
-        u8 unk10, unk11, unk12;
+        u8 unk10, unk11, unk12, unk13, unk14;
     }* x8;
     /*  +C */ struct S_TEMP4* xC;
     /* +10 */ u8* x10;
@@ -742,7 +743,7 @@ struct S_TEMP4 {
     s32 x0;
     s32 x4;
     s32 x8;
-    s32 xC;
+    ftSubactionList* xC;
     s32 x10_animCurrFlags;
     s32 x14;
 };
@@ -778,6 +779,18 @@ struct Fighter_DemoStrings {
         /* fp+2073 */ u8 x2073;
     };
     /* fp+2070 */ s32 x2070_int;
+};
+
+struct ftSubactionList {
+    u8 x0_opcode;
+};
+
+struct ftCmdScript {
+    f32 x3E4_scriptEventTimer;           // 0x3E4
+    f32 x3E8_scriptFrameTimer;           // 0x3E8
+    ftSubactionList* x3EC_scriptCurrent; // 0x3EC
+    s32 x3F0_scriptLoopNum;              // 0x3F0
+    void* x3F4_scriptReturn;             // 0x3F4
 };
 
 struct Fighter {
@@ -836,11 +849,8 @@ struct Fighter {
     /*  fp+2F4 */ UNK_T x2F4;
     /*  fp+2F8 */ u8 filler_x2F0[0x3E0 - 0x2F8];
     /*  fp+3E0 */ u32 x3E0;
-    /*  fp+3E4 */ float x3E4;
-    /*  fp+3E8 */ float x3E8;
-    /*  fp+3EC */ s32 x3EC;
-    /*  fp+3F0 */ s32 x3F0;
-    /*  fp+3F4 */ u8 filler_x3F4[0x588 - 0x3F4];
+    /*  fp+3E4 */ ftCmdScript x3E4_fighterCmdScript;
+    /*  fp+3F8 */ u8 x3F8[0x588 - 0x3F8];
     /*  fp+588 */ HSD_LObj* x588;
     /*  fp+58C */ s32 x58C;
     /*  fp+590 */ s32 x590;
@@ -952,7 +962,7 @@ struct Fighter {
     /*  fp+8AC */ HSD_JObj* x8AC_animSkeleton;
     /*  fp+8AC */ u8 filler_x8AC[0x914 - 0x8B0];
     /*  fp+914 */ HitCapsule x914[4];
-    /*  fp+DF4 */ u8 filler_xDF4[0x1064 - 0xDF4];
+    /*  fp+DF4 */ HitCapsule xDF4[2];
     /* fp+1064 */ HitCapsule x1064_thrownHitbox;
     /* fp+119C */ u8 x119C_teamUnk;
     /* fp+119D */ u8 grabber_unk1;
@@ -1150,8 +1160,13 @@ struct Fighter {
     /* fp+20AC */ HSD_GObj* unk_gobj;
     /* fp+20B0 */ u8 filler_x20B0[0x2100 - 0x20B0];
     /* fp+2100 */ s8 x2100;
-    /* fp+2101 */ u8 x2101_bits_0to6 : 7;
-    /* fp+2101 */ u8 x2101_bits_8 : 1;
+    /* fp+2101 */ union {
+        /* fp+2101 */ u8 x2101;
+        /* fp+2101 */ struct {
+            /* fp+2101:0 */ u8 x2101_bits_0to6 : 7;
+            /* fp+2101:7 */ u8 x2101_bits_8 : 1;
+        };
+    };
     /* fp+2102 */ s8 x2102;
     /* fp+2103 */ s8 x2103;
     /* fp+2104 */ s32 x2104;
@@ -1215,14 +1230,19 @@ struct Fighter {
     /* fp+2200 */ u32 cmd_vars[4];
     /* fp+2210 */ ThrowFlags throw_flags;
     /* fp+2214 */ float x2214;
-    /* fp+2218:0 */ u8 allow_interrupt : 1;
-    /* fp+2218:1 */ u8 x2218_b1 : 1;
-    /* fp+2218:2 */ u8 x2218_b2 : 1;
-    /* fp+2218:3 */ u8 x2218_b3 : 1;
-    /* fp+2218:4 */ u8 x2218_b4 : 1;
-    /* fp+2218:5 */ u8 x2218_b5 : 1;
-    /* fp+2218:6 */ u8 x2218_b6 : 1;
-    /* fp+2218:7 */ u8 x2218_b7 : 1;
+    union {
+        /* fp+2218 */ u8 x2218;
+        /* fp+2218 */ struct {
+            /* fp+2218:0 */ u8 allow_interrupt : 1;
+            /* fp+2218:1 */ u8 x2218_b1 : 1;
+            /* fp+2218:2 */ u8 x2218_b2 : 1;
+            /* fp+2218:3 */ u8 x2218_b3 : 1;
+            /* fp+2218:4 */ u8 x2218_b4 : 1;
+            /* fp+2218:5 */ u8 x2218_b5 : 1;
+            /* fp+2218:6 */ u8 x2218_b6 : 1;
+            /* fp+2218:7 */ u8 x2218_b7 : 1;
+        };
+    };
     union {
         /* fp+2219 */ u8 x2219;
         /* fp+2219 */ struct {
@@ -1393,6 +1413,11 @@ struct Fighter {
         /* fp+2340 */ union ftYoshi_MotionVars ys;
         /* fp+2340 */ union ftZelda_MotionVars zd;
     } mv;
+};
+
+struct gmScriptEventDefault {
+    u32 opcode : 6;
+    u32 value1 : 26;
 };
 
 #endif

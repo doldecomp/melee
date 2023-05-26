@@ -1,9 +1,10 @@
-#ifndef _gobj_h_
-#define _gobj_h_
+#ifndef GALE01_390730
+#define GALE01_390730
 
 #include <platform.h>
 #include <baselib/forward.h>
 
+#include <placeholder.h>
 #include <baselib/objalloc.h>
 
 #define HSD_GOBJ_GXLINK_NONE ((u8) 0xFF)
@@ -88,6 +89,13 @@ extern struct _unk_gobj_struct {
 typedef struct _GObjUnkStruct GObjUnkStruct;
 typedef struct _GObjFuncs GObjFuncs;
 
+extern HSD_GObj* HSD_GObj_804D7818;
+extern HSD_GObj* HSD_GObj_804D781C;
+extern HSD_GObjProc* HSD_GObj_804D7830;
+extern HSD_GObjProc* HSD_GObj_804D7838;
+extern HSD_GObjProc** HSD_GObj_804D7840;
+extern s32 HSD_GObj_804D7834;
+extern s32 HSD_GObj_804D783C;
 extern HSD_GObj* HSD_SisLib_804D797C;
 extern HSD_GObj** HSD_GObj_804D7820;
 extern HSD_GObj** HSD_GObj_804D7824;

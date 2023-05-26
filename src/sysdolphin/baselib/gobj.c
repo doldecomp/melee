@@ -5,14 +5,6 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 
-extern HSD_GObj* HSD_GObj_804D7818;
-extern HSD_GObj* HSD_GObj_804D781C;
-extern HSD_GObjProc* HSD_GObj_804D7830;
-extern HSD_GObjProc* HSD_GObj_804D7838;
-extern HSD_GObjProc** HSD_GObj_804D7840;
-extern s32 HSD_GObj_804D7834;
-extern s32 HSD_GObj_804D783C;
-
 inline void GObj_SetFlag1_inline(HSD_GObjProc* proc, u8 value)
 {
     while (proc != NULL) {

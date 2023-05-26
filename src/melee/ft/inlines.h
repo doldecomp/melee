@@ -2,6 +2,7 @@
 #define MELEE_FT_INLINES_H
 
 #include <platform.h>
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
 
 #include "ft/ftanim.h"
@@ -225,5 +226,15 @@ static inline bool ftCheckThrowB4(Fighter* fp)
 /// Ternary macro for fcmpu-based facing direction check
 #define CLIFFCATCH_U(fp)                                                      \
     ((fp)->facing_dir != 1.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
+
+/// @todo Fix naming.
+#define gmScriptEventCast(p_event, type) ((type*) p_event)
+#define gmScriptEventUpdatePtr(event, type)                                   \
+    (event = (void*) ((uintptr_t) event + (sizeof(type))))
+
+inline ftCmdScript* getCmdScript(Fighter* fp)
+{
+    return &fp->x3E4_fighterCmdScript;
+}
 
 #endif

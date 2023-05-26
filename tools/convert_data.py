@@ -7,8 +7,7 @@ from pathlib import Path
 from typing import Any, Callable, List, Match, TextIO, Tuple, Union
 
 root = Path(__file__).parent.parent
-
-options = {"input_glob": r"**/ft/chara/*.s"}
+options = {"input_glob": r"**/ft/ftaction.s"}
 
 default_options = {
     "zero": "float",  # How to treat zero-value dwords
