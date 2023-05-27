@@ -3,6 +3,8 @@
 
 #include "ftCo_ShieldBreakStand.h"
 
+#include "ftCo_Furafura.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_08A4.h"
