@@ -4021,7 +4021,7 @@ asm bool ft_80084C38(HSD_GObj*, int*, int*, int*, char*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ft_80084C74(void)
+asm bool ft_80084C74(Fighter_GObj*, int*, int*, int*)
 { // clang-format off
     nofralloc
 /* 80084C74 00081854  7C 08 02 A6 */	mflr r0

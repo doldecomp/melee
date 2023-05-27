@@ -74,7 +74,6 @@ void ft_80092BCC(HSD_GObj* gobj);
 void ft_80092BE8(HSD_GObj*);
 void ft_80093BC0(HSD_GObj*);
 void ft_8009750C(HSD_GObj*);
-void ft_80097D40(HSD_GObj*);
 void ft_80098B20(HSD_GObj*);
 void ft_80098C9C(HSD_GObj*);
 bool ft_8009917C(HSD_GObj*);

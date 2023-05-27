@@ -27,7 +27,7 @@ def get_functions_info(file_path):
 
 
 def calc_percent(current_score, max_score):
-    return 100 - round(100 * current_score / max_score, 2)
+    return max(0, 100 - round(100 * current_score / max_score, 2))
 
 
 def main(obj_path: str) -> None:
