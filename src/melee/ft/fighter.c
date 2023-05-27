@@ -30,6 +30,7 @@
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_ItemThrow.h"
+#include "ftCommon/ftCo_ShieldBreakFly.h"
 #include "ftCommon/ftCo_SpecialS.h"
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftKirby/ftKb_Init.h"
