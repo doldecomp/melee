@@ -21,7 +21,7 @@ HSD_GObj_80391304:
 /* 8039133C 0038DF1C  38 03 00 01 */	addi r0, r3, 1
 /* 80391340 0038DF20  54 03 10 3A */	slwi r3, r0, 2
 /* 80391344 0038DF24  4B FE DE A1 */	bl HSD_MemAlloc
-/* 80391348 0038DF28  90 6D C1 8C */	stw r3, HSD_GObj_804D782C@sda21(r13)
+/* 80391348 0038DF28  90 6D C1 8C */	stw r3, HSD_GObj_Entities@sda21(r13)
 /* 8039134C 0038DF2C  88 7F 00 00 */	lbz r3, 0(r31)
 /* 80391350 0038DF30  38 03 00 01 */	addi r0, r3, 1
 /* 80391354 0038DF34  54 03 10 3A */	slwi r3, r0, 2
@@ -35,7 +35,7 @@ HSD_GObj_80391304:
 /* 80391370 0038DF50  80 6D C1 88 */	lwz r3, plinklow_gobjs@sda21(r13)
 /* 80391374 0038DF54  38 C6 00 01 */	addi r6, r6, 1
 /* 80391378 0038DF58  7C 83 29 2E */	stwx r4, r3, r5
-/* 8039137C 0038DF5C  80 6D C1 8C */	lwz r3, HSD_GObj_804D782C@sda21(r13)
+/* 8039137C 0038DF5C  80 6D C1 8C */	lwz r3, HSD_GObj_Entities@sda21(r13)
 /* 80391380 0038DF60  7C 83 29 2E */	stwx r4, r3, r5
 /* 80391384 0038DF64  38 A5 00 04 */	addi r5, r5, 4
 .L_80391388:
@@ -248,8 +248,8 @@ HSD_GObj_804D7824:
 .global plinklow_gobjs
 plinklow_gobjs:
     .skip 0x4
-.global HSD_GObj_804D782C
-HSD_GObj_804D782C:
+.global HSD_GObj_Entities
+HSD_GObj_Entities:
     .skip 0x4
 .global HSD_GObj_804D7830
 HSD_GObj_804D7830:

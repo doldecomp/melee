@@ -47,4 +47,7 @@
 #endif
 #endif
 
+#define CONV_LO 4503599627370496.0
+#define CONV_HI 4503601774854144.0
+
 #endif

@@ -123,6 +123,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/ftCo_DownBound.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DownStand.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Down.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DownAttack.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdynamics.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMr_Strings.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_08A4.s.o\
