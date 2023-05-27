@@ -9,9 +9,35 @@
 
 #define FIGHTERVARS_SIZE 0x100
 
-typedef struct ftSubactionList ftSubactionList;
-typedef HSD_GObj Fighter_GObj;
 typedef struct Fighter Fighter;
+
+#ifdef M2CTX
+typedef struct Fighter_GObj Fighter_GObj;
+struct Fighter_GObj {
+    /*  +0 */ u16 classifier;
+    /*  +2 */ u8 p_link;
+    /*  +3 */ u8 gx_link;
+    /*  +4 */ u8 p_priority;
+    /*  +5 */ u8 render_priority;
+    /*  +6 */ u8 obj_kind;
+    /*  +7 */ u8 user_data_kind;
+    /*  +8 */ Fighter_GObj* next;
+    /*  +C */ Fighter_GObj* prev;
+    /* +10 */ Fighter_GObj* next_gx;
+    /* +14 */ Fighter_GObj* prev_gx;
+    /* +18 */ HSD_GObjProc* proc;
+    /* +1C */ void (*render_cb)(Fighter_GObj* gobj, s32 code);
+    /* +20 */ u64 gxlink_prios;
+    /* +28 */ HSD_JObj* hsd_obj;
+    /* +2C */ Fighter* user_data;
+    /* +30 */ void (*user_data_remove_func)(Fighter* data);
+    /* +34 */ void* x34_unk;
+};
+#else
+typedef struct HSD_GObj Fighter_GObj;
+#endif
+
+typedef struct ftSubactionList ftSubactionList;
 typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;
 typedef struct Fighter_DemoStrings Fighter_DemoStrings;
 typedef struct FtCmdState FtCmdState;

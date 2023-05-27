@@ -7,25 +7,25 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-void ftAnim_8006E9B4(HSD_GObj*);
-void ftAnim_8006EBA4(HSD_GObj*);
-void ftAnim_8006EBE8(HSD_GObj* gobj, f32, f32, f32);
-void ftAnim_8006F0FC(HSD_GObj* gobj, f32);
-void ftAnim_SetAnimRate(HSD_GObj*, f32);
-bool ftAnim_IsFramesRemaining(HSD_GObj*);
+void ftAnim_8006E9B4(Fighter_GObj*);
+void ftAnim_8006EBA4(Fighter_GObj*);
+void ftAnim_8006EBE8(Fighter_GObj* gobj, f32, f32, f32);
+void ftAnim_8006F0FC(Fighter_GObj* gobj, f32);
+void ftAnim_SetAnimRate(Fighter_GObj*, f32);
+bool ftAnim_IsFramesRemaining(Fighter_GObj*);
 f32 ftAnim_8006F484(void*);
-void ftAnim_8006FE48(HSD_GObj*);
-void ftAnim_80070308(HSD_GObj*);
-void ftAnim_800704F0(HSD_GObj*, s32, f32);
-void ftAnim_80070654(HSD_GObj*);
+void ftAnim_8006FE48(Fighter_GObj*);
+void ftAnim_80070308(Fighter_GObj*);
+void ftAnim_800704F0(Fighter_GObj*, s32, f32);
+void ftAnim_80070654(Fighter_GObj*);
 void ftAnim_80070758(HSD_JObj*);
-void ftAnim_8007077C(HSD_GObj*);
-void ftAnim_ApplyPartAnim(HSD_GObj*, s32, s32, f32);
-void ftAnim_80070C48(HSD_GObj*, s32);
-void ftAnim_80070CC4(HSD_GObj*, s32);
-void ftAnim_80070E74(HSD_GObj*);
-void ftAnim_80070F28(HSD_GObj*);
-void ftAnim_80070FB4(HSD_GObj*, s32, s32);
+void ftAnim_8007077C(Fighter_GObj*);
+void ftAnim_ApplyPartAnim(Fighter_GObj*, s32, s32, f32);
+void ftAnim_80070C48(Fighter_GObj*, s32);
+void ftAnim_80070CC4(Fighter_GObj*, s32);
+void ftAnim_80070E74(Fighter_GObj*);
+void ftAnim_80070F28(Fighter_GObj*);
+void ftAnim_80070FB4(Fighter_GObj*, s32, s32);
 bool ftAnim_80070FD0(Fighter*);
 void ftAnim_GetNextJointInTree(HSD_Joint** pjoint, s32* pdepth);
 void ftAnim_8006FA58(Fighter* fp, int, int item);

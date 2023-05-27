@@ -34,9 +34,9 @@ static inline void ftSamus_destroyAllEF(HSD_GObj* gobj)
 
 static inline void ftSamus_UnkAndDestroyAllEF(HSD_GObj* gobj)
 {
-    if (gobj) {
+    if (gobj != NULL) {
         Fighter* fp = gobj->user_data;
-        HSD_GObj* x222C = fp->fv.ss.x222C;
+        Item_GObj* x222C = fp->fv.ss.x222C;
         if (x222C != NULL) {
             it_802B5974(x222C);
             fp->fv.ss.x222C = NULL;

@@ -5,7 +5,7 @@
 #include "ft/forward.h"
 
 typedef Fighter ftCo_Fighter;
-typedef HSD_GObj ftCo_GObj;
+typedef Fighter_GObj ftCo_GObj;
 
 static MotionFlags const ftCo_MF_5_6 ATTRIBUTE_USED =
     Ft_MF_SkipAnimVel | Ft_MF_Unk06;

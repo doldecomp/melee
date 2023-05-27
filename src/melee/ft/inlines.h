@@ -49,16 +49,20 @@
         }                                                                     \
     }
 
+#ifdef M2CTX
+#define GET_FIGHTER(gobj) ((Fighter*) HSD_GObjGetUserData((HSD_GObj*) gobj))
+#else
 #define GET_FIGHTER(gobj) ((Fighter*) HSD_GObjGetUserData(gobj))
+#endif
 
 /// @deprecated Use #GET_FIGHTER instead.
-static inline Fighter* getFighter(HSD_GObj* gobj)
+static inline Fighter* getFighter(Fighter_GObj* gobj)
 {
     return gobj->user_data;
 }
 
 /// @deprecated use #GET_FIGHTER instead.
-static inline Fighter* getFighterPlus(HSD_GObj* gobj)
+static inline Fighter* getFighterPlus(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     return fp;
@@ -115,7 +119,7 @@ static inline f32 stickGetDir(f32 x1, f32 x2)
     }
 }
 /// used for all fighters except Kirby and Purin
-static inline void Fighter_OnItemPickup(HSD_GObj* gobj, bool catchItemFlag,
+static inline void Fighter_OnItemPickup(Fighter_GObj* gobj, bool catchItemFlag,
                                         bool bool2, bool bool3)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -140,7 +144,7 @@ static inline void Fighter_OnItemPickup(HSD_GObj* gobj, bool catchItemFlag,
     }
 }
 
-static inline void Fighter_OnItemInvisible(HSD_GObj* gobj, bool bool)
+static inline void Fighter_OnItemInvisible(Fighter_GObj* gobj, bool bool)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!it_8026B2B4(fp->item_gobj)) {
@@ -148,7 +152,7 @@ static inline void Fighter_OnItemInvisible(HSD_GObj* gobj, bool bool)
     }
 }
 
-static inline void Fighter_OnItemVisible(HSD_GObj* gobj, bool bool)
+static inline void Fighter_OnItemVisible(Fighter_GObj* gobj, bool bool)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!it_8026B2B4(fp->item_gobj)) {
@@ -156,7 +160,7 @@ static inline void Fighter_OnItemVisible(HSD_GObj* gobj, bool bool)
     }
 }
 
-static inline void Fighter_OnItemDrop(HSD_GObj* gobj, bool dropItemFlag,
+static inline void Fighter_OnItemDrop(Fighter_GObj* gobj, bool dropItemFlag,
                                       bool bool2, bool bool3)
 {
     ftAnim_80070FB4(gobj, bool2, -1);
@@ -165,19 +169,19 @@ static inline void Fighter_OnItemDrop(HSD_GObj* gobj, bool dropItemFlag,
     }
 }
 
-static inline void Fighter_OnKnockbackEnter(HSD_GObj* gobj, s32 arg1)
+static inline void Fighter_OnKnockbackEnter(Fighter_GObj* gobj, s32 arg1)
 {
     ftAnim_800704F0(gobj, arg1, 3.0f);
     ftAnim_800704F0(gobj, 0, 3.0f);
 }
 
-static inline void Fighter_OnKnockbackExit(HSD_GObj* gobj, s32 arg1)
+static inline void Fighter_OnKnockbackExit(Fighter_GObj* gobj, s32 arg1)
 {
     ftAnim_800704F0(gobj, arg1, 0.0f);
     ftAnim_800704F0(gobj, 0, 0.0f);
 }
 
-static inline void Fighter_UnsetCmdVar0(HSD_GObj* gobj)
+static inline void Fighter_UnsetCmdVar0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = 0;

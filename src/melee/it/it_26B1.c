@@ -99,7 +99,8 @@ enum_t it_8026B30C(Item_GObj* gobj)
     return ip->xCC_item_attr->x0_78;
 }
 
-s32 it_8026B320(HSD_GObj* gobj) // Return item hold kind
+/// Return item hold kind
+enum_t it_8026B320(HSD_GObj* gobj)
 {
     Item* temp_item = gobj->user_data;
     return temp_item->xCC_item_attr->x0_hold_kind;
