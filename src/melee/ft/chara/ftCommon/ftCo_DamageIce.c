@@ -8,6 +8,7 @@
 #include "ftCo_DownAttack.h"
 #include "ftCo_DownBound.h"
 #include "ftCo_FallSpecial.h"
+#include "ftCo_PassiveStand.h"
 
 #include "baselib/mtx.h"
 #include "cm/camera.h"
