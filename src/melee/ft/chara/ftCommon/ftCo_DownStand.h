@@ -2,6 +2,7 @@
 #define GALE01_0980BC
 
 #include <platform.h>
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
 
 /* static */ bool ftCo_800980BC(ftCo_GObj* gobj);

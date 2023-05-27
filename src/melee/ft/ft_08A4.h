@@ -12,11 +12,8 @@
 /* 0974C4 */ void ftCo_800974C4(ftCo_GObj* gobj);
 /* 09794C */ void ftCo_8009794C(ftCo_GObj* gobj);
 /* 097AF4 */ void ftCo_80097AF4(ftCo_GObj* gobj);
-/* 098214 */ bool ftCo_80098214(ftCo_GObj* gobj);
-/* 098324 */ UNK_RET ftCo_80098324(UNK_PARAMS);
 /* 098400 */ bool ftCo_80098400(ftCo_GObj* gobj);
 /* 0984D4 */ bool ftCo_800984D4(ftCo_GObj* gobj);
-/* 09856C */ UNK_RET ftCo_8009856C(UNK_PARAMS);
 /* 0986B0 */ UNK_RET ftCo_800986B0(UNK_PARAMS);
 /* 09872C */ bool ftCo_8009872C(ftCo_GObj* gobj);
 /* 0987D0 */ UNK_RET ftCo_800987D0(UNK_PARAMS);
@@ -219,8 +216,9 @@
 /* 0DF3DC */ bool ft_800DF3DC(ftCo_Fighter* fp);
 /* 0DF50C */ bool ftCo_800DF50C(ftCo_Fighter* fp);
 /* 0DF608 */ bool ftCo_800DF608(ftCo_Fighter* fp);
-/* 0DF644 */ UNK_RET ftCo_800DF644(UNK_PARAMS);
-/* 0DF678 */ UNK_RET ftCo_800DF678(UNK_PARAMS);
+/* 0DF678 */ bool ftCo_800DF678(Fighter* fp);
+/* 0DF644 */ bool ftCo_800DF644(ftCo_Fighter* fp);
+/* 09856C */ /* static */ void ftCo_8009856C(ftCo_GObj*, FtMotionId msid);
 /* 0DF6F8 */ UNK_RET ftCo_800DF6F8(UNK_PARAMS);
 /* 0DF72C */ UNK_RET ftCo_800DF72C(UNK_PARAMS);
 /* 0DF79C */ UNK_RET ftCo_800DF79C(UNK_PARAMS);
