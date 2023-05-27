@@ -230,5 +230,6 @@
 /* 0C8B60 */ void ft_800C8B60(ftCo_Fighter* fp, int, s8);
 /* 09E714 */ void ft_8009E714(u8, s16, char*, u8, float, float, float, float,
                               float, float);
+/* 099010 */ /* static */ UNK_RET ftCo_80099010(UNK_PARAMS);
 
 #endif
