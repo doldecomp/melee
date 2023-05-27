@@ -74,8 +74,6 @@ void ft_80092BCC(Fighter_GObj* gobj);
 void ft_80092BE8(Fighter_GObj* gobj);
 void ft_80093BC0(Fighter_GObj* gobj);
 void ft_8009750C(Fighter_GObj* gobj);
-bool ft_8009917C(Fighter_GObj* gobj);
-bool ft_80099794(Fighter_GObj* gobj);
 void ft_80099D9C(Fighter_GObj* gobj);
 bool ft_80099F1C(Fighter_GObj* gobj);
 bool ft_8009A080(Fighter_GObj* gobj);

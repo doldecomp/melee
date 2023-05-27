@@ -411,7 +411,13 @@ void ftPk_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftPikachuAttributes);
     if (fp->x34_scale.y != 1.0f) {
-        SCALE_HEIGHT_ATTRS(6);
+        int i;
+        for (i = 0;
+             i < (signed) (sizeof(sA2->height_attributes) / sizeof(float));
+             i++)
+        {
+            *(float*) &sA2->height_attributes[i] *= fp->x34_scale.y;
+        }
     }
 }
 

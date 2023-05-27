@@ -3616,7 +3616,7 @@ lbl_800847B0:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_800847D0(void)
+asm void ft_800847D0(ftCo_GObj* gobj, ftCollisionBox*)
 {
     // clang-format off
     nofralloc
@@ -4344,7 +4344,7 @@ lbl_80084FEC:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_80085004(void)
+asm void ft_80085004(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80085004 00081BE4  7C 08 02 A6 */	mflr r0

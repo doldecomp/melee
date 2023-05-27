@@ -544,7 +544,7 @@ void ftYs_Init_OnKnockbackExit(HSD_GObj* gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t ftYs_Init_8012BDA0(void)
+asm /* 12BDA0 */ void ftYs_Init_8012BDA0(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8012BDA0 00128980  7C 08 02 A6 */	mflr r0
