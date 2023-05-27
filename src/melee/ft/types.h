@@ -204,7 +204,7 @@ struct ftCommonData {
     /* +248 */ float x248;
     /* +24C */ float x24C;
     /* +250 */ float x250;
-    /* +254 */ UNK_T x254;
+    /* +254 */ float x254;
     /* +258 */ float x258;
     /* +25C */ float x25C;
     /* +260 */ float x260_startShieldHealth;

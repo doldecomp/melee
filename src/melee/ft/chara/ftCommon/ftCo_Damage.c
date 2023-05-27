@@ -8,6 +8,7 @@
 #include "ftCo_DamageIce.h"
 #include "ftCo_DownAttack.h"
 #include "ftCo_DownBound.h"
+#include "ftCo_PassiveStand.h"
 
 #include "cm/camera.h"
 #include "ef/efasync.h"

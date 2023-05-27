@@ -13,8 +13,6 @@
 /* 09794C */ void ftCo_8009794C(ftCo_GObj* gobj);
 /* 097AF4 */ void ftCo_80097AF4(ftCo_GObj* gobj);
 /* 098400 */ bool ftCo_80098400(ftCo_GObj* gobj);
-/* 098928 */ bool ftCo_80098928(ftCo_GObj* gobj);
-/* 0989D4 */ UNK_RET ftCo_800989D4(UNK_PARAMS);
 /* 098D90 */ UNK_RET ftCo_80098D90(UNK_PARAMS);
 /* 09980C */ bool ftCo_8009980C(ftCo_GObj* gobj);
 /* 09E140 */ void ftCo_8009E140(ftCo_Fighter* fp, bool);
