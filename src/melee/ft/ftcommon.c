@@ -923,7 +923,7 @@ void ftCommon_8007DD7C(HSD_GObj* gobj, Vec3* v)
 
     arg_ft = gobj->user_data;
     phi_r28 = false;
-    for (cur = HSD_GObj_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
         temp_r31 = &arg_ft->x2C4;
         if (cur != gobj && !ftLib_80086FD4(cur, gobj)) {
             cur_ft = cur->user_data;
@@ -1378,7 +1378,7 @@ void ftCommon_8007EBAC(Fighter* fp, u32 arg1, u32 arg2)
 void ftCommon_8007EC30(u32 arg0, u32 arg1)
 {
     Fighter* fp;
-    HSD_GObj* cur = HSD_GObj_804D782C->x20_fighters;
+    HSD_GObj* cur = HSD_GObj_Entities->fighters;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH

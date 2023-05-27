@@ -136,7 +136,7 @@ void ftColl_80076528(HSD_GObj* gobj)
 /// Clear victim pointer from attacker upon freeing memory?
 void ftColl_800765AC(HSD_GObj* victim)
 {
-    HSD_GObj* cur = HSD_GObj_804D782C->x20_fighters;
+    HSD_GObj* cur = HSD_GObj_Entities->fighters;
 
     while (cur != NULL) {
         Fighter* fp = GET_FIGHTER(cur);
@@ -2954,7 +2954,7 @@ asm void ftColl_80078A2C(HSD_GObj*)
 /* 80078A4C 0007562C  90 1E 1A 58 */	stw r0, 0x1a58(r30)
 /* 80078A50 00075630  C0 02 89 30 */	lfs f0, ftColl_804D8310
 /* 80078A54 00075634  D0 1E 21 6C */	stfs f0, 0x216c(r30)
-/* 80078A58 00075638  80 6D C1 8C */	lwz r3, HSD_GObj_804D782C
+/* 80078A58 00075638  80 6D C1 8C */	lwz r3, HSD_GObj_Entities
 /* 80078A5C 0007563C  C3 E2 89 00 */	lfs f31, ftColl_804D82E0
 /* 80078A60 00075640  83 A3 00 20 */	lwz r29, 0x20(r3)
 /* 80078A64 00075644  48 00 01 EC */	b lbl_80078C50
@@ -3140,7 +3140,7 @@ void ftColl_80078A2C(HSD_GObj* this_gobj)
     this_fp = this_gobj->user_data;
     this_fp->x1A58_interactedFighter = NULL;
     this_fp->unk_grab_val = F32_MAX;
-    victim_gobj = HSD_GObj_804D782C->x20_fighters;
+    victim_gobj = HSD_GObj_Entities->fighters;
 
     while (victim_gobj != NULL) {
         if (ftLib_80086FD4(this_gobj, victim_gobj) == false) {
@@ -3217,7 +3217,7 @@ asm void ftColl_80078C70(HSD_GObj*)
 /* 80078C8C 0007586C  48 0F 25 39 */	bl gm_8016B1C4
 /* 80078C90 00075870  2C 03 00 00 */	cmpwi r3, 0
 /* 80078C94 00075874  40 82 05 B0 */	bne lbl_80079244
-/* 80078C98 00075878  80 8D C1 8C */	lwz r4, HSD_GObj_804D782C
+/* 80078C98 00075878  80 8D C1 8C */	lwz r4, HSD_GObj_Entities
 /* 80078C9C 0007587C  3C 60 80 3C */	lis r3, ftColl_803C0C40@ha
 /* 80078CA0 00075880  C3 E2 89 10 */	lfs f31, ftColl_804D82F0
 /* 80078CA4 00075884  3B E3 0C 40 */	addi r31, r3, ftColl_803C0C40@l
@@ -3644,7 +3644,7 @@ asm void ftColl_8007925C(HSD_GObj*)
 /* 80079274 00075E54  3B E3 00 00 */	addi r31, r3, 0
 /* 80079278 00075E58  3C 60 80 3C */	lis r3, ftColl_803C0C40@ha
 /* 8007927C 00075E5C  3B C3 0C 40 */	addi r30, r3, ftColl_803C0C40@l
-/* 80079280 00075E60  80 8D C1 8C */	lwz r4, HSD_GObj_804D782C
+/* 80079280 00075E60  80 8D C1 8C */	lwz r4, HSD_GObj_Entities
 /* 80079284 00075E64  83 7F 00 2C */	lwz r27, 0x2c(r31)
 /* 80079288 00075E68  83 44 00 24 */	lwz r26, 0x24(r4)
 /* 8007928C 00075E6C  C3 E2 89 10 */	lfs f31, ftColl_804D82F0

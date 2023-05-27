@@ -119,7 +119,7 @@ lbl_800942DC:
 /* 800942F8 00090ED8  38 60 00 00 */	li r3, 0
 /* 800942FC 00090EDC  48 00 01 64 */	b lbl_80094460
 lbl_80094300:
-/* 80094300 00090EE0  80 6D C1 8C */	lwz r3, HSD_GObj_804D782C
+/* 80094300 00090EE0  80 6D C1 8C */	lwz r3, HSD_GObj_Entities
 /* 80094304 00090EE4  57 1C 07 FE */	clrlwi r28, r24, 0x1f
 /* 80094308 00090EE8  C3 E2 8B A0 */	lfs f31, ftCo_804D8580
 /* 8009430C 00090EEC  57 1B 07 BC */	rlwinm r27, r24, 0, 0x1e, 0x1e
@@ -247,7 +247,7 @@ HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
     }
     {
         float min_dist_sq = 30000;
-        HSD_GObj* cur = HSD_GObj_804D782C->x24_items;
+        HSD_GObj* cur = HSD_GObj_Entities->items;
         HSD_GObj* result = NULL;
         while (cur != NULL) {
             if (Item_IsGrabbable(cur)) {

@@ -4018,7 +4018,7 @@ static void Ground_801C466C(void)
 HSD_GObj* Ground_801C498C(void)
 {
     HSD_GObj* gobj;
-    for (gobj = HSD_GObj_804D782C->xC; gobj != NULL; gobj = gobj->next) {
+    for (gobj = HSD_GObj_Entities->xC; gobj != NULL; gobj = gobj->next) {
         if (gobj->classifier == 13) {
             break;
         }

@@ -837,7 +837,17 @@ struct Item_r13_Data {
 };
 
 struct HSD_ObjAllocUnk2 {
-    u8 x0_filler[0x148];
+    float x0;
+    float x4;
+    float x8;
+    float xC;
+    u8 pad_10[0xB0 - 0x10];
+    int xB0;
+    int xB4;
+    int xB8;
+    UNK_T xBC;
+    Vec3 xC0;
+    u8 pad_CC[0x148 - 0xCC];
     u32 x148;
     u32 x14C;
     u32 x150;

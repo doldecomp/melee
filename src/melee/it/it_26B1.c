@@ -157,7 +157,7 @@ int it_8026B3C0(ItemKind kind) // Count identical item GObj entities?
     HSD_GObj* unkItemGObj;
 
     int i = 0;
-    unkItemGObj = HSD_GObj_804D782C->x24_items;
+    unkItemGObj = HSD_GObj_Entities->items;
 
     while (unkItemGObj != NULL) {
         temp_item = unkItemGObj->user_data;
@@ -495,7 +495,7 @@ void it_8026B7F8(HSD_GObj* fighter_gobj)
 #endif
 
     HSD_GObj *cur, *owner;
-    for (cur = HSD_GObj_804D782C->x24_items; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
         Item* ip = GET_ITEM(cur);
         owner = ip->owner;
         RunCallbackUnk(ip->xB8_itemLogicTable->evt_unk, cur, fighter_gobj);
@@ -1213,7 +1213,7 @@ HSD_GObj* it_8026C258(Vec3* pos, f32 facing_dir)
 {
     f32 min_sq_dist = F32_MAX;
     HSD_GObj *cur, *result = NULL;
-    for (cur = HSD_GObj_804D782C->x24_items; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
         Item* ip = GET_ITEM(cur);
 
         // Might not actually be (exclusively) hold kind in the end???
@@ -1291,7 +1291,7 @@ void it_8026C368(HSD_GObj* gobj)
 void it_8026C3FC(void)
 {
     HSD_GObj* cur;
-    for (cur = HSD_GObj_804D782C->x24_items; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
         it_8026B724(cur);
     }
 }
@@ -1300,7 +1300,7 @@ void it_8026C3FC(void)
 void it_8026C42C(void)
 {
     HSD_GObj* cur;
-    for (cur = HSD_GObj_804D782C->x24_items; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
         Item* ip = GET_ITEM(cur);
 
         if (ip->xDC8_word.flags.x7) {

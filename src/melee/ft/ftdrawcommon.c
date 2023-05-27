@@ -1269,7 +1269,7 @@ void ftDrawCommmon_80080E18(HSD_GObj* arg0, long arg1)
 asm void ftDrawCommmon_80081118(void)
 { // clang-format off
     nofralloc
-/* 80081118 0007DCF8  80 8D C1 8C */	lwz r4, HSD_GObj_804D782C(r13)
+/* 80081118 0007DCF8  80 8D C1 8C */	lwz r4, HSD_GObj_Entities(r13)
 /* 8008111C 0007DCFC  3C 60 80 08 */	lis r3, ftDrawCommmon_80080E18@ha
 /* 80081120 0007DD00  38 03 0E 18 */	addi r0, r3, ftDrawCommmon_80080E18@l
 /* 80081124 0007DD04  80 64 00 20 */	lwz r3, 0x20(r4)
@@ -1299,7 +1299,7 @@ void ftDrawCommmon_80081118(void)
 asm void ftDrawCommmon_80081140(void)
 { // clang-format off
     nofralloc
-/* 80081140 0007DD20  80 8D C1 8C */	lwz r4, HSD_GObj_804D782C(r13)
+/* 80081140 0007DD20  80 8D C1 8C */	lwz r4, HSD_GObj_Entities(r13)
 /* 80081144 0007DD24  3C 60 80 08 */	lis r3, ftDrawCommmon_80080C28@ha
 /* 80081148 0007DD28  38 03 0C 28 */	addi r0, r3, ftDrawCommmon_80080C28@l
 /* 8008114C 0007DD2C  80 64 00 20 */	lwz r3, 0x20(r4)
@@ -1334,7 +1334,7 @@ asm void ftDrawCommmon_80081168(void)
 /* 80081170 0007DD50  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80081174 0007DD54  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 80081178 0007DD58  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 8008117C 0007DD5C  80 6D C1 8C */	lwz r3, HSD_GObj_804D782C(r13)
+/* 8008117C 0007DD5C  80 6D C1 8C */	lwz r3, HSD_GObj_Entities(r13)
 /* 80081180 0007DD60  83 E3 00 20 */	lwz r31, 0x20(r3)
 /* 80081184 0007DD64  48 00 00 5C */	b lbl_800811E0
 lbl_80081188:
@@ -1393,7 +1393,7 @@ asm void ftDrawCommmon_80081200(void)
 /* 80081208 0007DDE8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8008120C 0007DDEC  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 80081210 0007DDF0  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 80081214 0007DDF4  80 6D C1 8C */	lwz r3, HSD_GObj_804D782C(r13)
+/* 80081214 0007DDF4  80 6D C1 8C */	lwz r3, HSD_GObj_Entities(r13)
 /* 80081218 0007DDF8  83 E3 00 20 */	lwz r31, 0x20(r3)
 /* 8008121C 0007DDFC  48 00 00 5C */	b lbl_80081278
 lbl_80081220:
