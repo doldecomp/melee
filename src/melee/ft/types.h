@@ -244,7 +244,11 @@ struct ftCommonData {
     /* +2E8 */ float x2E8;
     /* +2EC */ float x2EC;
     /* +2F0 */ float x2F0;
-    /* +2F4 */ u8 x2F4[0x308 - 0x2F4];
+    /* +2F4 */ UNK_T x2F4;
+    /* +2F8 */ float x2F8;
+    /* +2FC */ float x2FC;
+    /* +300 */ float x300;
+    /* +304 */ float x304;
     /* +308 */ float x308;
     /* +30C */ u8 x30C[0x3A8 - 0x30C];
     /* +3A8 */ float x3A8;

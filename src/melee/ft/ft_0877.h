@@ -977,7 +977,7 @@ unk_t mpColl_8004B4B0(void);
 /* 08893C */ void ft_8008893C(Fighter* fp);
 /* 088828 */ void ft_80088828(Fighter* fp);
 /* 088328 */ void ft_80088328(Fighter* fp);
-/* 0885A8 */ void ft_800885A8(Fighter* fp);
+/* 0885A8 */ void ft_800885A8(Fighter* fp, int, int, int);
 /* 08A1B8 */ void ft_8008A1B8(Fighter_GObj* gobj, int);
 
 #endif
