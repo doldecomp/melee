@@ -8,8 +8,6 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
 
-#include <placeholder.h>
-
 static inline void inlineA0(ftCo_GObj* gobj, HSD_JObj* joint)
 {
     /// @todo Unused stack.
