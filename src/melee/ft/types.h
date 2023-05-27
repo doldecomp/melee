@@ -418,7 +418,8 @@ struct ftCommonData {
 };
 
 typedef struct _FtCollisionData {
-    u8 x0[0x28];
+    u8 x0[0x24];
+    u32 x24;
     u32 x28;
     u32 x2C;
     s32 x30;
