@@ -2,51 +2,7 @@
 
 .section .text
 
-.global ftCo_EscapeN_Anim
-ftCo_EscapeN_Anim:
-/* 800999D8 000965B8  7C 08 02 A6 */	mflr r0
-/* 800999DC 000965BC  90 01 00 04 */	stw r0, 4(r1)
-/* 800999E0 000965C0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800999E4 000965C4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800999E8 000965C8  7C 7F 1B 78 */	mr r31, r3
-/* 800999EC 000965CC  4B FD 58 4D */	bl ftAnim_IsFramesRemaining
-/* 800999F0 000965D0  2C 03 00 00 */	cmpwi r3, 0
-/* 800999F4 000965D4  40 82 00 0C */	bne .L_80099A00
-/* 800999F8 000965D8  7F E3 FB 78 */	mr r3, r31
-/* 800999FC 000965DC  4B FF 08 C1 */	bl ft_8008A2BC
-.L_80099A00:
-/* 80099A00 000965E0  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80099A04 000965E4  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80099A08 000965E8  38 21 00 18 */	addi r1, r1, 0x18
-/* 80099A0C 000965EC  7C 08 03 A6 */	mtlr r0
-/* 80099A10 000965F0  4E 80 00 20 */	blr
-
-.global ftCo_EscapeN_IASA
-ftCo_EscapeN_IASA:
-/* 80099A14 000965F4  4E 80 00 20 */	blr
-
-.global ftCo_EscapeN_Phys
-ftCo_EscapeN_Phys:
-/* 80099A18 000965F8  7C 08 02 A6 */	mflr r0
-/* 80099A1C 000965FC  90 01 00 04 */	stw r0, 4(r1)
-/* 80099A20 00096600  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80099A24 00096604  4B FE B5 19 */	bl ft_80084F3C
-/* 80099A28 00096608  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 80099A2C 0009660C  38 21 00 08 */	addi r1, r1, 8
-/* 80099A30 00096610  7C 08 03 A6 */	mtlr r0
-/* 80099A34 00096614  4E 80 00 20 */	blr
-
-.global ftCo_EscapeN_Coll
-ftCo_EscapeN_Coll:
-/* 80099A38 00096618  7C 08 02 A6 */	mflr r0
-/* 80099A3C 0009661C  90 01 00 04 */	stw r0, 4(r1)
-/* 80099A40 00096620  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80099A44 00096624  4B FE A6 C1 */	bl ft_80084104
-/* 80099A48 00096628  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 80099A4C 0009662C  38 21 00 08 */	addi r1, r1, 8
-/* 80099A50 00096630  7C 08 03 A6 */	mtlr r0
-/* 80099A54 00096634  4E 80 00 20 */	blr
-
+.global .L_80099A58
 .L_80099A58:
 /* 80099A58 00096638  7C 08 02 A6 */	mflr r0
 /* 80099A5C 0009663C  90 01 00 04 */	stw r0, 4(r1)
