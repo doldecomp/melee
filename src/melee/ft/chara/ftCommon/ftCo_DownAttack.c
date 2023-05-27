@@ -3,6 +3,8 @@
 
 #include "ftCo_DownAttack.h"
 
+#include "ftCo_Passive.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"

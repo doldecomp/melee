@@ -13,6 +13,7 @@
 #include "ftCo_DownBound.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_LandingAir.h"
+#include "ftCo_Passive.h"
 #include "ftCo_Wait.h"
 
 #include "ft/ft_0877.h"
