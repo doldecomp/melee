@@ -4,6 +4,7 @@
 
 #include "ftCo_DownBound.h"
 
+#include "ftCo_Down.h"
 #include "ftCo_DownStand.h"
 
 #include "cm/camera.h"
@@ -779,7 +780,7 @@ void ftCo_DownBound_Anim(ftCo_GObj* gobj)
 {
     RETURN_IF(ftAnim_IsFramesRemaining(gobj))
     RETURN_IF(ftCo_80098400(gobj))
-    RETURN_IF(ftCo_80098214(gobj))
+    RETURN_IF(ftCo_Down_CheckInput(gobj))
     ftCo_80097E8C(gobj);
 }
 
@@ -1004,7 +1005,7 @@ void ftCo_DownWait_Anim(ftCo_GObj* gobj)
 void ftCo_DownWait_IASA(ftCo_GObj* gobj)
 {
     RETURN_IF(ftCo_800984D4(gobj))
-    RETURN_IF(ftCo_80098214(gobj))
+    RETURN_IF(ftCo_Down_CheckInput(gobj))
     RETURN_IF(ftCo_800980BC(gobj))
 }
 
