@@ -50,4 +50,10 @@
 #define CONV_LO 4503599627370496.0
 #define CONV_HI 4503601774854144.0
 
+#if defined(MUST_MATCH) && !defined(WIP)
+#define ASM asm
+#else
+#define ASM
+#endif
+
 #endif

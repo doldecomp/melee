@@ -10,6 +10,7 @@
 #include "ftCo_AttackLw3.h"
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
+#include "ftCo_Escape.h"
 #include "ftCo_FallSpecial.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_ShieldBreakFly.h"

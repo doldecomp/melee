@@ -107,6 +107,10 @@ union ftCommon_MotionVars {
     struct ftCo_DownVars {
         /* fp+2340 */ float x0;
     } downwait;
+    struct ftCo_EscapeVars {
+        /* fp+2340 */ bool x0;
+        /* fp+2344 */ bool x4;
+    } escape;
 };
 
 #endif

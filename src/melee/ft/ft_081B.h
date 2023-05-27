@@ -9,6 +9,7 @@
 #include <baselib/forward.h>
 
 #include "ft/fighter.h"
+#include "ft/ftcolltypes.h"
 #include "ft/types.h"
 
 #include <common_structs.h>
@@ -82,7 +83,7 @@ UNK_RET ft_80081F2C(UNK_PARAMS);
 UNK_RET ft_800844EC(UNK_PARAMS);
 void ft_800845B4(Fighter_GObj* gobj);
 UNK_RET ft_800846B0(UNK_PARAMS);
-UNK_RET ft_800847D0(UNK_PARAMS);
+void ft_800847D0(ftCo_GObj* gobj, ftCollisionBox*);
 void ft_800848DC(Fighter_GObj* gobj, HSD_GObjEvent cb);
 UNK_RET ft_80084A80(UNK_PARAMS);
 bool ft_80084BFC(Fighter_GObj* gobj, int*, int*);
@@ -92,7 +93,7 @@ UNK_RET ft_80084CB0(UNK_PARAMS);
 bool ft_80084CE4(Fighter* attacker, Fighter* victim);
 UNK_RET ft_80084E1C(UNK_PARAMS);
 UNK_RET ft_80082084(UNK_PARAMS);
-UNK_RET ft_80085004(UNK_PARAMS);
+void ft_80085004(ftCo_GObj* gobj);
 UNK_RET ft_800850B4(UNK_PARAMS);
 UNK_RET ft_800851D0(UNK_PARAMS);
 UNK_RET ft_80082578(UNK_PARAMS);

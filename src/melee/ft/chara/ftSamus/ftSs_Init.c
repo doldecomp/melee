@@ -322,7 +322,16 @@ void ftSs_Init_LoadSpecialAttrs(HSD_GObj* gobj)
         sA2->x74_vec.y *= fp->x34_scale.y;
         sA2->x54 *= fp->x34_scale.y;
         sA2->x58 *= fp->x34_scale.y;
-        SCALE_HEIGHT_ATTRS(6);
+        {
+            /// @todo Shared code wit #ftPk_Init_LoadSpecialAttrs
+            int i;
+            for (i = 0;
+                 i < (signed) (sizeof(sA2->height_attributes) / sizeof(float));
+                 i++)
+            {
+                ((float*) &sA2->height_attributes)[i] *= fp->x34_scale.y;
+            }
+        }
     }
 }
 

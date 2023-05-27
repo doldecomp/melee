@@ -2,8 +2,11 @@
 #define MELEE_FT_CHARA_FTSAMUS_TYPES_H
 
 #include <platform.h>
+#include "ft/forward.h"
 #include "it/forward.h"
 #include <baselib/forward.h>
+
+#include "ftCommon/types.h"
 
 #include <dolphin/mtx/types.h>
 
@@ -55,7 +58,7 @@ typedef struct _ftSamusAttributes {
     f32 x70;
     Vec3 x74_vec;
     f32 x80;
-    f32 height_attributes[6];
+    ftCollisionBox height_attributes;
     u8 data_filler_4[0xD4 - 0x9C];
 } ftSs_DatAttrs;
 

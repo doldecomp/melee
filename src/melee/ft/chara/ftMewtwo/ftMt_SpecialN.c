@@ -8,6 +8,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
+#include "ftCommon/ftCo_Escape.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftMewtwo/ftMt_Init.h"
 #include "it/it_27CF.h"

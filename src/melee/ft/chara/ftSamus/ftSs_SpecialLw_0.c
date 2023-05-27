@@ -14,6 +14,7 @@
 #include "ftCommon/ftCo_AttackLw3.h"
 #include "ftCommon/ftCo_AttackS3.h"
 #include "ftCommon/ftCo_AttackS4.h"
+#include "ftCommon/ftCo_Escape.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_SpecialS.h"
 

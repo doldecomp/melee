@@ -35,19 +35,12 @@
         *da = backup;                                                         \
     } while (0)
 
+/// @todo Remove declarations. Doesn't really need to be a macro.
 #define COPY_ATTRS(gobj, attributeName)                                       \
     Fighter* fp = GET_FIGHTER(gobj);                                          \
     attributeName* sA2 = (attributeName*) fp->dat_attrs;                      \
     attributeName* ext_attr = (attributeName*) fp->ft_data->ext_attr;         \
     *sA2 = *ext_attr;
-
-#define SCALE_HEIGHT_ATTRS(num_attrs)                                         \
-    {                                                                         \
-        int i;                                                                \
-        for (i = 0; i < num_attrs; i++) {                                     \
-            sA2->height_attributes[i] *= fp->x34_scale.y;                     \
-        }                                                                     \
-    }
 
 #ifdef M2CTX
 #define GET_FIGHTER(gobj) ((Fighter*) HSD_GObjGetUserData((HSD_GObj*) gobj))
