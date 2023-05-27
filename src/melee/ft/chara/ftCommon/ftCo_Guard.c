@@ -12,6 +12,7 @@
 #include "ftCo_AttackS4.h"
 #include "ftCo_FallSpecial.h"
 #include "ftCo_ItemThrow.h"
+#include "ftCo_ShieldBreakFly.h"
 #include "ftCo_SpecialS.h"
 
 #include "ef/eflib.h"

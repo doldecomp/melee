@@ -13,7 +13,7 @@
 /* 09794C */ void ftCo_8009794C(ftCo_GObj* gobj);
 /* 097AF4 */ void ftCo_80097AF4(ftCo_GObj* gobj);
 /* 098400 */ bool ftCo_80098400(ftCo_GObj* gobj);
-/* 098D90 */ UNK_RET ftCo_80098D90(UNK_PARAMS);
+/* 098D90 */ void ftCo_80098D90(ftCo_GObj* gobj);
 /* 09980C */ bool ftCo_8009980C(ftCo_GObj* gobj);
 /* 09E140 */ void ftCo_8009E140(ftCo_Fighter* fp, bool);
 /* 09F0F0 */ bool ftCo_8009F0F0(ftCo_GObj* gobj);
@@ -100,7 +100,7 @@
 /* 0C7590 */ UNK_RET ftCo_800C7590(UNK_PARAMS);
 /* 0C7A30 */ UNK_RET ftCo_800C7A30(UNK_PARAMS);
 /* 0C7CA0 */ bool ftCo_800C7CA0(ftCo_GObj* gobj);
-/* 0C88D4 */ void ft_800C88D4(HSD_GObj* gobj, int, bool);
+/* 0C88D4 */ void ft_800C88D4(ftCo_GObj* gobj, int, bool);
 /* 0C8B74 */ void ft_800C8B74(void);
 /* 0CB024 */ bool ftCo_800CB024(ftCo_GObj* gobj);
 /* 0CB8E0 */ bool ftCo_800CB8E0(ftCo_GObj* gobj);
@@ -223,11 +223,13 @@
 /* 0DF910 */ UNK_RET ftCo_800DF910(UNK_PARAMS);
 /* 096498 */ void ftCo_80096498(ftCo_GObj* gobj);
 /* 096250 */ void ftCo_80096250(ftCo_GObj* gobj);
-/* 09F834 */ void ft_8009F834(HSD_GObj*, int, int, int, int, Vec3*, Vec3*,
+/* 09F834 */ void ft_8009F834(ftCo_GObj*, int, int, int, int, Vec3*, Vec3*,
                               float);
 /* 09E318 */ void ft_8009E318(int, void*, float);
 /* 0DEE84 */ void ft_800DEE84(int, u8, char*, u32, float, float);
 /* 0C8B60 */ void ft_800C8B60(ftCo_Fighter* fp, int, s8);
 /* 09E714 */ void ft_8009E714(u8, s16, char*, u8, float, float, float, float,
                               float, float);
+/* 098E3C */ void ftCo_80098E3C(ftCo_GObj*, float lag);
+
 #endif
