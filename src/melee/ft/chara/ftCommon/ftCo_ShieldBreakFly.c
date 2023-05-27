@@ -2,6 +2,9 @@
 
 #include "ftCo_ShieldBreakFly.h"
 
+#include "ftCo_ShieldBreakDown.h"
+#include "ftCo_ShieldBreakFall.h"
+
 #include "ef/efasync.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
