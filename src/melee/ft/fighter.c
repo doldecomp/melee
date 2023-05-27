@@ -186,7 +186,7 @@ void Fighter_LoadCommonData(void)
     Fighter_804D64FC = pData[22];
 }
 
-void Fighter_UpdateModelScale(HSD_GObj* gobj)
+void Fighter_UpdateModelScale(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -494,7 +494,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x2229_b4 = 1;
 }
 
-void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj)
+void Fighter_UnkProcessDeath_80068354(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -545,7 +545,7 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj)
     ft_8007C630(gobj);
 }
 
-void Fighter_UnkUpdateCostumeJoint_800686E4(HSD_GObj* gobj)
+void Fighter_UnkUpdateCostumeJoint_800686E4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj;
@@ -578,7 +578,7 @@ void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp)
     fp->x1A70.z = vec2.z - vec.z;
 }
 
-void Fighter_ResetInputData_80068854(HSD_GObj* gobj)
+void Fighter_ResetInputData_80068854(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -635,7 +635,7 @@ void Fighter_ResetInputData_80068854(HSD_GObj* gobj)
     fp->x67C = 0xFF;
 }
 
-static void Fighter_UnkInitLoad_80068914_Inner1(HSD_GObj* gobj)
+static void Fighter_UnkInitLoad_80068914_Inner1(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -663,7 +663,7 @@ static void Fighter_UnkInitLoad_80068914_Inner1(HSD_GObj* gobj)
             fp->x688 = fp->x689 = fp->x68A = fp->x68B = 0xFF;
 }
 
-void Fighter_UnkInitLoad_80068914(HSD_GObj* gobj, struct S_TEMP1* argdata)
+void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct S_TEMP1* argdata)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     s32 costume_id;
@@ -801,7 +801,7 @@ u32 Fighter_NewSpawn_80068E40(void)
     return spawnNum;
 }
 
-void Fighter_80068E64(HSD_GObj* gobj)
+void Fighter_80068E64(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -812,7 +812,7 @@ void Fighter_80068E64(HSD_GObj* gobj)
     }
 }
 
-static void Fighter_Create_Inline2(HSD_GObj* gobj)
+static void Fighter_Create_Inline2(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2229_b5_no_normal_motion) {
@@ -826,9 +826,9 @@ static void Fighter_Create_Inline2(HSD_GObj* gobj)
     }
 }
 
-HSD_GObj* Fighter_Create(struct S_TEMP1* input)
+Fighter_GObj* Fighter_Create(struct S_TEMP1* input)
 {
-    HSD_GObj* gobj;
+    Fighter_GObj* gobj;
     Fighter* fp;
     HSD_JObj* jobj;
 
@@ -909,8 +909,8 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
     return gobj;
 }
 
-void Fighter_ChangeMotionState(HSD_GObj* gobj, FtMotionId msid,
-                               MotionFlags flags, HSD_GObj* arg3,
+void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
+                               MotionFlags flags, Fighter_GObj* arg3,
                                float anim_start, float anim_speed,
                                float anim_blend)
 {
@@ -1377,7 +1377,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, FtMotionId msid,
     }
 }
 
-void Fighter_8006A1BC(HSD_GObj* gobj)
+void Fighter_8006A1BC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -1428,7 +1428,7 @@ void Fighter_8006A1BC(HSD_GObj* gobj)
     }
 }
 
-void Fighter_8006A360(HSD_GObj* gobj)
+void Fighter_8006A360(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -1687,7 +1687,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
     }
 }
 
-void Fighter_8006ABA0(HSD_GObj* gobj)
+void Fighter_8006ABA0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x221F_flag.bits.b3 && ft_800A2040(fp)) {
@@ -1696,7 +1696,7 @@ void Fighter_8006ABA0(HSD_GObj* gobj)
 }
 
 // https://decomp.me/scratch/A7CgG
-void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* gobj)
+void Fighter_UnkIncrementCounters_8006ABEC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -1760,7 +1760,7 @@ static void Fighter_Spaghetti_8006AD10_Inner1(Fighter* fp)
     }
 }
 
-void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
+void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     f32 tempf1;
@@ -2110,7 +2110,7 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
         vecLocal->x = vecLocal->y = vecLocal->z = c;                          \
     } while (0)
 
-void Fighter_procUpdate(HSD_GObj* gobj)
+void Fighter_procUpdate(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Vec3 windOffset;
@@ -2404,7 +2404,7 @@ void Fighter_procUpdate(HSD_GObj* gobj)
     }
 }
 
-void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* gobj)
+void Fighter_UnkApplyTransformation_8006C0F0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -2447,7 +2447,7 @@ static inline float Fighter_GetPosY(Fighter* fp)
     return fp->cur_pos.y;
 }
 
-void Fighter_8006C27C(HSD_GObj* gobj)
+void Fighter_8006C27C(Fighter_GObj* gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
 
@@ -2489,7 +2489,7 @@ void Fighter_8006C27C(HSD_GObj* gobj)
     }
 }
 
-void Fighter_8006C5F4(HSD_GObj* gobj)
+void Fighter_8006C5F4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x221F_flag.bits.b3) {
@@ -2497,7 +2497,7 @@ void Fighter_8006C5F4(HSD_GObj* gobj)
     }
 }
 
-void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* gobj)
+void Fighter_CallAcessoryCallbacks_8006C624(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -2526,7 +2526,7 @@ void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* gobj)
     }
 }
 
-void Fighter_8006C80C(HSD_GObj* gobj)
+void Fighter_8006C80C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -2563,7 +2563,7 @@ void Fighter_8006C80C(HSD_GObj* gobj)
     }
 }
 
-void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* gobj)
+void Fighter_UnkProcessGrab_8006CA5C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -2598,7 +2598,7 @@ void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* gobj)
     }
 }
 
-void Fighter_8006CB94(HSD_GObj* gobj)
+void Fighter_8006CB94(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     f32 func_8007BBCC_float_output;
@@ -2705,7 +2705,7 @@ void Fighter_8006CF5C(Fighter* fp, s32 arg1)
     }
 }
 
-void Fighter_UnkSetFlag_8006CFBC(HSD_GObj* gobj)
+void Fighter_UnkSetFlag_8006CFBC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -2714,7 +2714,7 @@ void Fighter_UnkSetFlag_8006CFBC(HSD_GObj* gobj)
     }
 }
 
-void Fighter_8006CFE0(HSD_GObj* gobj)
+void Fighter_8006CFE0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -2728,13 +2728,13 @@ void Fighter_8006CFE0(HSD_GObj* gobj)
     }
 }
 
-inline void setBit(HSD_GObj* gobj)
+inline void setBit(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2219_b7 = 1;
 }
 
-void Fighter_UnkRecursiveFunc_8006D044(HSD_GObj* gobj)
+void Fighter_UnkRecursiveFunc_8006D044(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -2745,7 +2745,7 @@ void Fighter_UnkRecursiveFunc_8006D044(HSD_GObj* gobj)
     fp->x2219_b5 = 1;
 
     if (fp->x1A5C && !fp->x2219_b7) {
-        HSD_GObj* new_gobj = gobj;
+        Fighter_GObj* new_gobj = gobj;
 
         // @todo What is going on here?
         setBit(new_gobj = fp->x1A5C);
@@ -2756,14 +2756,14 @@ void Fighter_UnkRecursiveFunc_8006D044(HSD_GObj* gobj)
 
 static void Fighter_8006D10C_Inline2(Fighter* fp)
 {
-    HSD_GObj* gobj = fp->x1A5C;
+    Fighter_GObj* gobj = fp->x1A5C;
 
     if (fp->x1A5C != NULL && !fp->x2219_b7) {
         Fighter_8006CFE0(gobj);
     }
 }
 
-static void Fighter_8006D10C_Inline1(HSD_GObj* gobj)
+static void Fighter_8006D10C_Inline1(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -2779,7 +2779,7 @@ static void Fighter_8006D10C_Inline1(HSD_GObj* gobj)
     }
 }
 
-void Fighter_8006D10C(HSD_GObj* gobj)
+void Fighter_8006D10C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -2794,7 +2794,7 @@ void Fighter_8006D10C(HSD_GObj* gobj)
     }
 }
 
-void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
+void Fighter_UnkProcessShieldHit_8006D1EC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     bool bool1 = 0;
@@ -3038,7 +3038,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
     }
 }
 
-void Fighter_8006D9AC(HSD_GObj* gobj)
+void Fighter_8006D9AC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -3049,7 +3049,7 @@ void Fighter_8006D9AC(HSD_GObj* gobj)
     ft_8009E0A8(gobj);
 }
 
-void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* gobj)
+void Fighter_UnkCallCameraCallback_8006D9EC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -3061,7 +3061,7 @@ void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* gobj)
     }
 }
 
-void Fighter_8006DA4C(HSD_GObj* gobj)
+void Fighter_8006DA4C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

@@ -1,7 +1,36 @@
 #ifndef MELEE_IT_FORWARD_H
 #define MELEE_IT_FORWARD_H
 
-typedef struct HSD_GObj Item_GObj;
+#include <baselib/forward.h>
+
+typedef struct Item Item;
+
+#ifdef M2CTX
+typedef struct Item_GObj Item_GObj;
+struct Item_GObj {
+    /*  +0 */ u16 classifier;
+    /*  +2 */ u8 p_link;
+    /*  +3 */ u8 gx_link;
+    /*  +4 */ u8 p_priority;
+    /*  +5 */ u8 render_priority;
+    /*  +6 */ u8 obj_kind;
+    /*  +7 */ u8 user_data_kind;
+    /*  +8 */ Item_GObj* next;
+    /*  +C */ Item_GObj* prev;
+    /* +10 */ Item_GObj* next_gx;
+    /* +14 */ Item_GObj* prev_gx;
+    /* +18 */ HSD_GObjProc* proc;
+    /* +1C */ void (*render_cb)(Item_GObj* gobj, s32 code);
+    /* +20 */ u64 gxlink_prios;
+    /* +28 */ HSD_JObj* hsd_obj;
+    /* +2C */ Item* user_data;
+    /* +30 */ void (*user_data_remove_func)(Item* data);
+    /* +34 */ void* x34_unk;
+};
+#else
+typedef HSD_GObj Item_GObj;
+#endif
+
 typedef struct Article Article;
 typedef struct BobOmbRain BobOmbRain;
 typedef struct CameraBoxFlags CameraBoxFlags;
@@ -13,7 +42,6 @@ typedef struct HSD_ObjAllocUnk2 HSD_ObjAllocUnk2;
 typedef struct HSD_ObjAllocUnk4 HSD_ObjAllocUnk4;
 typedef struct HSD_ObjAllocUnk5 HSD_ObjAllocUnk5;
 typedef struct HSD_ObjAllocUnk6 HSD_ObjAllocUnk6;
-typedef struct Item Item;
 typedef struct Item_DynamicBones Item_DynamicBones;
 typedef struct ItemAttr ItemAttr;
 typedef struct ItemCommonData ItemCommonData;

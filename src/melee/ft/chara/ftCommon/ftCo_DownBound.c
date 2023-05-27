@@ -4,6 +4,8 @@
 
 #include "ftCo_DownBound.h"
 
+#include "ftCo_DownStand.h"
+
 #include "cm/camera.h"
 #include "ef/efasync.h"
 #include "ft/ft_081B.h"

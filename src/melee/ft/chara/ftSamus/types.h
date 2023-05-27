@@ -2,12 +2,13 @@
 #define MELEE_FT_CHARA_FTSAMUS_TYPES_H
 
 #include <platform.h>
+#include "it/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx/types.h>
 
 struct ftSamus_FighterVars {
-    /* 0x222C */ HSD_GObj* x222C;
+    /* 0x222C */ Item_GObj* x222C;
     /* 0x2230 */ s32 x2230;
     /* 0x2234 */ u32 x2234;
     /* 0x2238 */ u32 x2238;

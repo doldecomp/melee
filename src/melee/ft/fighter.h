@@ -64,48 +64,48 @@ extern HSD_ObjAllocData Fighter_804590AC;
 void Fighter_800679B0(void);
 void Fighter_FirstInitialize_80067A84(void);
 void Fighter_LoadCommonData(void);
-void Fighter_UpdateModelScale(HSD_GObj* gobj);
+void Fighter_UpdateModelScale(Fighter_GObj* gobj);
 void Fighter_UnkInitReset_80067C98(Fighter*);
-void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj);
-void Fighter_UnkUpdateCostumeJoint_800686E4(HSD_GObj* gobj);
+void Fighter_UnkProcessDeath_80068354(Fighter_GObj* gobj);
+void Fighter_UnkUpdateCostumeJoint_800686E4(Fighter_GObj* gobj);
 void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp);
-void Fighter_ResetInputData_80068854(HSD_GObj* gobj);
-void Fighter_UnkInitLoad_80068914(HSD_GObj* gobj, struct S_TEMP1* argdata);
+void Fighter_ResetInputData_80068854(Fighter_GObj* gobj);
+void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct S_TEMP1* argdata);
 u32 Fighter_NewSpawn_80068E40(void);
-void Fighter_80068E64(HSD_GObj* gobj);
-HSD_GObj* Fighter_Create(struct S_TEMP1* input);
-void Fighter_ChangeMotionState(HSD_GObj* gobj, FtMotionId msid,
-                               MotionFlags flags, HSD_GObj* arg3,
+void Fighter_80068E64(Fighter_GObj* gobj);
+Fighter_GObj* Fighter_Create(struct S_TEMP1* input);
+void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
+                               MotionFlags flags, Fighter_GObj* arg3,
                                float anim_start, float anim_speed,
                                float anim_blend);
-void Fighter_8006A1BC(HSD_GObj* gobj);
-void Fighter_8006A360(HSD_GObj* gobj);
-void Fighter_8006ABA0(HSD_GObj* gobj);
-void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* gobj);
-void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj);
-void Fighter_procUpdate(HSD_GObj* gobj);
-void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* gobj);
-void Fighter_8006C27C(HSD_GObj* gobj);
-void Fighter_8006C5F4(HSD_GObj* gobj);
-void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* gobj);
-void Fighter_8006C80C(HSD_GObj* gobj);
-void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* gobj);
-void Fighter_8006CB94(HSD_GObj* gobj);
+void Fighter_8006A1BC(Fighter_GObj* gobj);
+void Fighter_8006A360(Fighter_GObj* gobj);
+void Fighter_8006ABA0(Fighter_GObj* gobj);
+void Fighter_UnkIncrementCounters_8006ABEC(Fighter_GObj* gobj);
+void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj);
+void Fighter_procUpdate(Fighter_GObj* gobj);
+void Fighter_UnkApplyTransformation_8006C0F0(Fighter_GObj* gobj);
+void Fighter_8006C27C(Fighter_GObj* gobj);
+void Fighter_8006C5F4(Fighter_GObj* gobj);
+void Fighter_CallAcessoryCallbacks_8006C624(Fighter_GObj* gobj);
+void Fighter_8006C80C(Fighter_GObj* gobj);
+void Fighter_UnkProcessGrab_8006CA5C(Fighter_GObj* gobj);
+void Fighter_8006CB94(Fighter_GObj* gobj);
 void Fighter_UnkTakeDamage_8006CC30(Fighter* fp, f32 damage_amount);
 void Fighter_TakeDamage_8006CC7C(Fighter*, f32);
 void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2);
 void Fighter_8006CF5C(Fighter* fp, s32 arg1);
-void Fighter_UnkSetFlag_8006CFBC(HSD_GObj* gobj);
-void Fighter_8006CFE0(HSD_GObj* gobj);
-void Fighter_UnkRecursiveFunc_8006D044(HSD_GObj* gobj);
-void Fighter_8006D10C(HSD_GObj* gobj);
-void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj);
-void Fighter_8006D9AC(HSD_GObj* gobj);
-void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* gobj);
-void Fighter_8006DA4C(HSD_GObj* gobj);
+void Fighter_UnkSetFlag_8006CFBC(Fighter_GObj* gobj);
+void Fighter_8006CFE0(Fighter_GObj* gobj);
+void Fighter_UnkRecursiveFunc_8006D044(Fighter_GObj* gobj);
+void Fighter_8006D10C(Fighter_GObj* gobj);
+void Fighter_UnkProcessShieldHit_8006D1EC(Fighter_GObj* gobj);
+void Fighter_8006D9AC(Fighter_GObj* gobj);
+void Fighter_UnkCallCameraCallback_8006D9EC(Fighter_GObj* gobj);
+void Fighter_8006DA4C(Fighter_GObj* gobj);
 void Fighter_Unload_8006DABC(void* user_data);
 
-void Fighter_UnkProcessDeath_80068354(HSD_GObj*);
+void Fighter_UnkProcessDeath_80068354(Fighter_GObj*);
 u32 Fighter_NewSpawn_80068E40(void);
 
 #endif

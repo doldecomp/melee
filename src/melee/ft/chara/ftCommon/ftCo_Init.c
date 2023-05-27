@@ -10,6 +10,8 @@
 #include "ftCo_AttackLw4.h"
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
+#include "ftCo_DownBound.h"
+#include "ftCo_ItemThrow.h"
 #include "ftCo_LandingAir.h"
 #include "ftCo_Wait.h"
 

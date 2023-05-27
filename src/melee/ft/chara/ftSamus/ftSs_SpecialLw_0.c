@@ -6,6 +6,7 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ftCommon/ftCo_Attack1.h"
 #include "ftCommon/ftCo_AttackHi3.h"
