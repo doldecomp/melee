@@ -12,14 +12,12 @@
 /* 0974C4 */ void ftCo_800974C4(ftCo_GObj* gobj);
 /* 09794C */ void ftCo_8009794C(ftCo_GObj* gobj);
 /* 097AF4 */ void ftCo_80097AF4(ftCo_GObj* gobj);
-/* 097E8C */ bool ftCo_80097E8C(ftCo_GObj* gobj);
-/* 097F38 */ UNK_RET ftCo_80097F38(UNK_PARAMS);
-/* 0980BC */ UNK_RET ftCo_800980BC(UNK_PARAMS);
-/* 098160 */ UNK_RET ftCo_80098160(UNK_PARAMS);
+/* 0980BC */ bool ftCo_800980BC(ftCo_GObj* gobj);
+/* 098160 */ void ftCo_80098160(ftCo_GObj* gobj, FtMotionId msid);
 /* 098214 */ bool ftCo_80098214(ftCo_GObj* gobj);
 /* 098324 */ UNK_RET ftCo_80098324(UNK_PARAMS);
 /* 098400 */ bool ftCo_80098400(ftCo_GObj* gobj);
-/* 0984D4 */ UNK_RET ftCo_800984D4(UNK_PARAMS);
+/* 0984D4 */ bool ftCo_800984D4(ftCo_GObj* gobj);
 /* 09856C */ UNK_RET ftCo_8009856C(UNK_PARAMS);
 /* 0986B0 */ UNK_RET ftCo_800986B0(UNK_PARAMS);
 /* 09872C */ bool ftCo_8009872C(ftCo_GObj* gobj);
