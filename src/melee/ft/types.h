@@ -300,8 +300,8 @@ struct ftCommonData {
     /* +3CC */ UNK_T x3CC;
     /* +3D0 */ UNK_T x3D0;
     /* +3D4 */ UNK_T x3D4;
-    /* +3D8 */ UNK_T x3D8;
-    /* +3DC */ UNK_T x3DC;
+    /* +3D8 */ float x3D8;
+    /* +3DC */ float x3DC;
     /* +3E0 */ float x3E0;
     /* +3E4 */ float x3E4;
     /* +3E8 */ float x3E8_shieldKnockbackFrameDecay;
@@ -561,7 +561,7 @@ typedef struct ftCo_DatAttrs {
     /* +090 fp+1A0 */ float initial_shield_size;
     /* +094 fp+1A4 */ float shield_break_initial_velocity;
     /* +098 fp+1A8 */ int rapid_jab_window;
-    /* +09C fp+1AC */ int x9C;
+    /* +09C fp+1AC */ float x9C;
     /* +0A0 fp+1B0 */ int xA0;
     /* +0A4 fp+1B4 */ int xA4;
     /* +0A8 fp+1B8 */ float ledge_jump_horizontal_velocity;
@@ -1091,7 +1091,7 @@ struct Fighter {
         /* fp+1914 */ s32 x1914;
         /* fp+1918 */ s32 x1918;
         /* fp+191C */ float x191C;
-        /* fp+1920 */ s32 x1920;
+        /* fp+1920 */ float x1920;
         /* fp+1924 */ s32 x1924;
         /* fp+1928 */ float x1928;
         /* fp+192C */ float x192c;
