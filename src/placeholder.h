@@ -10,6 +10,8 @@
 #if defined(__clang__) || defined(__GNUC__)
 #define NOT_IMPLEMENTED                                                       \
     OSPanic(__FILE__, __LINE__, "%s is not implemented!", __func__)
+#elif MUST_MATCH
+#define NOT_IMPLEMENTED asm { nop }
 #else
 #define NOT_IMPLEMENTED                                                       \
     OSPanic(__FILE__, __LINE__, "Function is not implemented!")

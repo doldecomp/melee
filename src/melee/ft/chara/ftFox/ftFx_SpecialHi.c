@@ -12,6 +12,7 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/ftCo_Pass.h"
 #include "lb/lbvector.h"
 
 #include <trigf.h>

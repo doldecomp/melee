@@ -332,7 +332,13 @@ struct ftCommonData {
     /* +458 */ float x458;
     /* +45C */ float x45C;
     /* +460 */ float x460;
-    /* +464 */ u8 x464[0x480 - 0x464];
+    /* +464 */ float x464;
+    /* +468 */ float x468;
+    /* +46C */ float x46C;
+    /* +470 */ float x470;
+    /* +474 */ UNK_T x474;
+    /* +478 */ UNK_T x478;
+    /* +47C */ UNK_T x47C;
     /* +480 */ float x480;
     /* +484 */ u8 x484[0x498 - 0x484];
     /* +498 */ u32 ledge_cooldown;
