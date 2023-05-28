@@ -55,6 +55,7 @@ typedef u32 HSD_Pad;
 #define MPCOLL_FLAGS_B14 (1 << 14)
 #define MPCOLL_GRPUSH (1 << 15)
 #define MPCOLL_FLAGS_B23 (1 << 23)
+#define MPCOLL_FLAGS_B24 (1 << 24)
 
 typedef union _UnkFlagStruct {
     u8 u8;

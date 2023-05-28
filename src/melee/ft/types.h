@@ -344,7 +344,7 @@ struct ftCommonData {
     /* +488 */ int x488;
     /* +48C */ float x48C;
     /* +490 */ float x490;
-    /* +494 */ UNK_T x494;
+    /* +494 */ float x494;
     /* +498 */ u32 ledge_cooldown;
     /* +49C */ int x49C;
     /* +4A0 */ UNK_T x4A0;
@@ -693,8 +693,8 @@ typedef struct _CollData {
     /* fp+726 */ s16 x36;
     /* fp+728 */ s32 x38;
     /* fp+72C */ s32 x3C;
-    /* fp+730 */ s32 x40;
-    /* fp+734 */ u32 x44;
+    /* fp+730 */ int ledge_id_unk0;
+    /* fp+734 */ int ledge_id_unk1;
     /* fp+738 */ u32 x48;
     /* fp+73C */ u32 x4C;
     /* fp+740 */ f32 x50;

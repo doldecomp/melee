@@ -213,7 +213,7 @@
 /* 0DF644 */ bool ftCo_800DF644(ftCo_Fighter* fp);
 /* 0DF6F8 */ UNK_RET ftCo_800DF6F8(UNK_PARAMS);
 /* 0DF72C */ UNK_RET ftCo_800DF72C(UNK_PARAMS);
-/* 0DF79C */ UNK_RET ftCo_800DF79C(UNK_PARAMS);
+/* 0DF79C */ bool ftCo_800DF79C(ftCo_Fighter* fp);
 /* 0DF7F4 */ UNK_RET ftCo_800DF7F4(UNK_PARAMS);
 /* 0DF844 */ UNK_RET ftCo_800DF844(UNK_PARAMS);
 /* 0DF878 */ UNK_RET ftCo_800DF878(UNK_PARAMS);
@@ -244,7 +244,7 @@
 /* 09B518 */ /* static */ UNK_RET ftCo_8009B518(UNK_PARAMS);
 /* 09B56C */ /* static */ UNK_RET ftCo_8009B56C(UNK_PARAMS);
 /* 09B56C */ /* static */ UNK_RET ftCo_8009B56C(UNK_PARAMS);
-/* 09AE14 */ /* static */ UNK_RET ftCo_8009AE14(UNK_PARAMS);
+/* 09AE14 */ /* static */ bool ftCo_8009AE14(ftCo_GObj* gobj);
 /* 09AE38 */ /* static */ bool ftCo_8009AE38(ftCo_GObj* gobj);
 /* 09AEA4 */ /* static */ UNK_RET ftCo_8009AEA4(UNK_PARAMS);
 /* 09AEA4 */ /* static */ UNK_RET ftCo_8009AEA4(UNK_PARAMS);
@@ -253,7 +253,5 @@ void ftCo_CliffCatch_IASA(ftCo_GObj*);
 void ftCo_CliffCatch_Phys(ftCo_GObj* gobj);
 void ftCo_Cliff_Cam(ftCo_GObj* gobj);
 void ftCo_CliffCatch_Coll(ftCo_GObj* gobj);
-/* 09AAFC */ /* static */ UNK_RET ftCo_8009AAFC(UNK_PARAMS);
-/* 09AB9C */ /* static */ UNK_RET ftCo_8009AB9C(UNK_PARAMS);
 
 #endif

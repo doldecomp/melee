@@ -2,6 +2,7 @@
 
 #include "ftCo_CliffWait.h"
 
+#include "ftCo_CliffClimb.h"
 #include "ftCo_DamageFall.h"
 
 #include "ft/fighter.h"
@@ -18,10 +19,10 @@ void ft_8009A804(ftCo_GObj* gobj)
                               NULL, 0, 1, 0);
     ftCommon_8007E2F4(fp, 511);
     fp->x221D_b7 = true;
-    fp->mv.co.cliffwait.x8 = 0;
-    fp->mv.co.cliffwait.x4 = fp->dmg.x1830_percent < p_ftCommonData->x488
-                                 ? p_ftCommonData->x48C
-                                 : p_ftCommonData->x490;
+    fp->mv.co.cliff.x8 = 0;
+    fp->mv.co.cliff.x4 = fp->dmg.x1830_percent < p_ftCommonData->x488
+                             ? p_ftCommonData->x48C
+                             : p_ftCommonData->x490;
     ftColl_8007B760(gobj, p_ftCommonData->x49C);
     ftCommon_8007E2F4(fp, 511);
 }
@@ -29,8 +30,8 @@ void ft_8009A804(ftCo_GObj* gobj)
 void ftCo_CliffWait_Anim(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (fp->mv.co.cliffwait.x4 > 0) {
-        fp->mv.co.cliffwait.x4 -= 1;
+    if (fp->mv.co.cliff.x4 > 0) {
+        fp->mv.co.cliff.x4 -= 1;
     }
 }
 
@@ -56,7 +57,7 @@ void ftCo_CliffWait_Coll(Fighter_GObj* gobj)
 bool ftCo_8009A9AC(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (fp->mv.co.cliffwait.x4 <= 0) {
+    if (fp->mv.co.cliff.x4 <= 0) {
         fp->x2064_ledgeCooldown = p_ftCommonData->ledge_cooldown;
         fp->x2227_flag.bits.b1 = true;
         ft_80090780(gobj);

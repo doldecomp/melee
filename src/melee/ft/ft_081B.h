@@ -52,7 +52,7 @@ bool ft_80082A68(Fighter_GObj* gobj);
 void ft_800851C0(Fighter_GObj*);
 void ftCo_AirCatchHit_Coll(Fighter_GObj*);
 void ft_80085088(Fighter_GObj*);
-bool ft_800821DC(void);
+bool ft_800821DC(ftCo_GObj* gobj);
 bool ft_80084A18(Fighter_GObj*);
 void ft_800849EC(Fighter*, Fighter*);
 void ft_80081C88(Fighter_GObj* dst_gobj, float scl_y);

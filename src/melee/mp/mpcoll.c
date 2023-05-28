@@ -131,8 +131,8 @@ void mpColl_80041EE4(CollData* cd)
     cd->x1C_vec = cd->x4_vec;
     cd->x28_vec = cd->x4_vec;
     cd->x3C = -1;
-    cd->x40 = -1;
-    cd->x44 = -1;
+    cd->ledge_id_unk0 = -1;
+    cd->ledge_id_unk1 = -1;
     cd->floor.index = -1;
     cd->floor.unk = 0;
     cd->floor.normal.x = 0.0f;

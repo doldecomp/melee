@@ -539,7 +539,7 @@ lbl_800821BC:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm bool ft_800821DC(void)
+asm bool ft_800821DC(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 800821DC 0007EDBC  7C 08 02 A6 */	mflr r0

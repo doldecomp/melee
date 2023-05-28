@@ -27,8 +27,8 @@ bool mpLib_800509B8(f32 surface_normal_y, f32 surface_normal_x, f32 left_x,
 u32 mpLib_80054CEC(enum_t);
 
 s32 mpLib_80051EC8(Vec3*, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32);
-void mpLib_80053DA4(u32, f32*);
-void mpLib_80053ECC(u32, f32*);
+void mpLib_80053DA4(int ledge_id, Vec3*);
+void mpLib_80053ECC(int ledge_id, Vec3*);
 void mpLib_80053FF4(s32, Vec3*);
 void mpLib_80054158(s32, Vec3*);
 

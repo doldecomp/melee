@@ -9,6 +9,5 @@
 /* 09A8FC */ void ftCo_CliffWait_IASA(ftCo_GObj* gobj);
 /* 09A96C */ void ftCo_CliffWait_Phys(ftCo_GObj* gobj);
 /* 09A98C */ void ftCo_CliffWait_Coll(ftCo_GObj* gobj);
-/* 09AA0C */ bool ftCo_8009AA0C(ftCo_GObj* gobj);
 
 #endif
