@@ -123,6 +123,11 @@ union ftCommon_MotionVars {
         /* fp+2340 */ bool x0;
         /* fp+2344 */ float x4;
     } pass;
+    struct {
+        /* fp+2340 */ UNK_T x0;
+        /* fp+2344 */ float x4;
+        /* fp+2348 */ int x8;
+    } cliffwait;
 };
 
 #endif
