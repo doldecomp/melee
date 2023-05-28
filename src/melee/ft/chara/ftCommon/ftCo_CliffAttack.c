@@ -11,7 +11,7 @@
 
 /* 09AEA4 */ static void ftCo_8009AEA4(ftCo_GObj* gobj);
 
-void ftCo_8009AE14(Fighter_GObj* gobj)
+void ftCo_8009AE14(ftCo_GObj* gobj)
 {
     ftCommon_8007D7FC(gobj->user_data);
 }
@@ -48,19 +48,19 @@ void ftCo_8009AEA4(ftCo_GObj* gobj)
     ftCo_CliffCatch_Phys(gobj);
 }
 
-void ftCo_CliffAttack_Anim(Fighter_GObj* gobj)
+void ftCo_CliffAttack_Anim(ftCo_GObj* gobj)
 {
     ftCo_CliffClimb_Anim(gobj);
 }
 
-void ftCo_CliffAttack_IASA(HSD_GObj* gobj) {}
+void ftCo_CliffAttack_IASA(ftCo_GObj* gobj) {}
 
-void ftCo_CliffAttack_Phys(Fighter_GObj* gobj)
+void ftCo_CliffAttack_Phys(ftCo_GObj* gobj)
 {
     ftCo_CliffClimb_Phys(gobj);
 }
 
-void ftCo_CliffAttack_Coll(Fighter_GObj* gobj)
+void ftCo_CliffAttack_Coll(ftCo_GObj* gobj)
 {
     ftCo_CliffClimb_Coll(gobj);
 }
