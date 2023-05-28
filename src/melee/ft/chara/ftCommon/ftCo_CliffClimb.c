@@ -36,7 +36,7 @@ bool ftCo_8009AA0C(ftCo_GObj* gobj)
                              ftCo_GetCStickAngle(fp));
     }
     fp->mv.co.cliff.x8 = true;
-    return 0;
+    return false;
 }
 
 bool ftCo_8009AAFC(ftCo_GObj* gobj, int arg1, float stick_x, float angle)
