@@ -26,9 +26,9 @@ struct _m2c_stack_ftCo_80095EFC {
 /* 0952A0 */ /* static */ void ftCo_80095700(ftCo_GObj* gobj, enum_t arg1);
 /* 0952C8 */ /* static */ UNK_RET lbl_80095728(UNK_PARAMS);
 /* 0952D8 */ /* static */ UNK_RET lbl_80095738(UNK_PARAMS);
-/* 0952E4 */ void ft_80095744(HSD_GObj* gobj, int*);
-/* 095328 */ bool ft_80095328(HSD_GObj*, bool*);
-/* 095394 */ void ft_800957F4(HSD_GObj* gobj, FtMotionId msid);
+/* 0952E4 */ void ft_80095744(ftCo_GObj* gobj, int*);
+/* 095328 */ bool ft_80095328(ftCo_GObj*, bool*);
+/* 095394 */ void ft_800957F4(ftCo_GObj* gobj, FtMotionId msid);
 /* 09542C */ /* static */ UNK_RET lbl_8009588C(UNK_PARAMS);
 /* 09543C */ /* static */ UNK_RET lbl_8009589C(UNK_PARAMS);
 /* 09549C */ /* static */ void ftCo_800958FC(ftCo_GObj* gobj, int);

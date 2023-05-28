@@ -10,12 +10,12 @@
 #include <placeholder.h>
 
 union ftCommon_MotionVars {
-    struct ftCommon_CliffVars {
+    struct {
         /// 0x2340 - Used to check against opponent's variable @ 0x213C while
         /// they're occupying a ledge within grab range
         s32 ledge_id;
     } cliff;
-    struct ftCommon_WalkVars {
+    struct {
         /* fp+2340 */ float x0;
         /* fp+2344 */ FtMotionId msid;
         /* fp+2348 */ float slow_anim_frame;
@@ -26,16 +26,16 @@ union ftCommon_MotionVars {
         /* fp+235C */ float fast_anim_rate;
         /* fp+2360 */ float accel_mul;
     } walk;
-    struct ftCo_Attack1Vars {
+    struct {
         /* fp+2340 */ bool x0;
     } attack1;
-    struct ftCo_AttackDashVars {
+    struct {
         /* fp+2340 */ int x0;
     } attackdash;
-    struct ftCo_AttackLw3Vars {
+    struct {
         /* fp+2340 */ bool x0;
     } attacklw3;
-    struct ftCo_DamageVars {
+    struct {
         /* fp+2340 */ float x0;
         /* fp+2344 */ int x4;
         /* fp+2348 */ int x8;
@@ -46,7 +46,7 @@ union ftCommon_MotionVars {
         /* fp+235A */ u8 x1A;
         /* fp+235B */ u8 x1B;
     } damage;
-    struct ftCo_DamageIceVars {
+    struct {
         /* fp+2340 */ s8 x0;
         /* fp+2341 */ s8 x1;
         /* fp+2342 */ s8 x2;
@@ -54,10 +54,10 @@ union ftCommon_MotionVars {
         /* fp+2344 */ float x4;
         /* fp+2348 */ ftCollisionBox x8;
     } damageice;
-    struct ftCo_DamageIceJumpVars {
+    struct {
         /* fp+2340 */ float x0;
     } damageicejump;
-    struct ftCo_GuardVars {
+    struct {
         /* fp+2340 */ float x0;
         /* fp+2344 */ float x4;
         /* fp+2348 */ float x8;
@@ -71,10 +71,10 @@ union ftCommon_MotionVars {
         /* fp+2368 */ UNK_T x28;
         /* fp+236C */ float x2C;
     } guard;
-    struct ftCo_ItemGetVars {
+    struct {
         /* fp+2340 */ bool x0;
     } itemget;
-    struct ftCo_ItemThrowVars {
+    struct {
         /* fp+2340 */ float facing_dir;
         /* fp+2344 */ UNK_T x4;
         /* fp+2348 */ UNK_T x8;
@@ -85,12 +85,12 @@ union ftCommon_MotionVars {
         /* fp+235C */ UNK_T x1C;
         /* fp+2360 */ int x20;
     } itemthrow;
-    struct ftCo_ItemThrow4Vars {
+    struct {
         /* fp+2340 */ int unk_timer;
         /* fp+2344 */ float anim_spd;
         /* fp+2348 */ Vec3 x8;
     } itemthrow4;
-    struct ftCo_FallSpecialVars {
+    struct {
         /* fp+2340 */ int x0;
         /* fp+2344 */ float x4;
         /* fp+2348 */ float x8;
@@ -99,18 +99,22 @@ union ftCommon_MotionVars {
         /* fp+2354 */ float x14;
         /* fp+2358 */ bool allow_interrupt;
     } fallspecial;
-    struct ftCo_LiftVars {
+    struct {
         /* fp+2340 */ bool x0;
         /* fp+2344 */ float x4;
         /* fp+2348 */ bool x8;
     } lift;
-    struct ftCo_DownVars {
+    struct {
         /* fp+2340 */ float x0;
     } downwait;
-    struct ftCo_EscapeVars {
+    struct {
         /* fp+2340 */ bool x0;
         /* fp+2344 */ bool x4;
     } escape;
+    struct {
+        /* fp+2340 */ int timer;
+        /* fp+2344 */ Vec3 self_vel;
+    } escapeair;
 };
 
 #endif
