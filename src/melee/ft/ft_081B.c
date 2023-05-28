@@ -6,6 +6,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftwalljump.h"
+#include "ftCommon/ftCo_Ottotto.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 

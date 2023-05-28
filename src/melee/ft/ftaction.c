@@ -1431,7 +1431,8 @@ void ftAction_80071B50(Fighter_GObj* gobj, FtCmdState* cmd)
                                 (int) temp_r6_2);
                     break;
                 case 6:
-                    ft_80088328(fp);
+                    ft_80088328(fp, temp_r4_2, (int) temp_r5_2,
+                                (int) temp_r6_2);
                     break;
                 }
             }
@@ -2102,7 +2103,7 @@ void ftAction_80071FC8(Fighter_GObj* gobj, FtCmdState* cmd)
             ft_80088640(fp, var_r27, (int) temp_r30, (int) temp_r29);
             return;
         case 6:
-            ft_80088328(fp);
+            ft_80088328(fp, var_r27, (int) temp_r30, (int) temp_r29);
         /* fallthrough */
         default:
             return;

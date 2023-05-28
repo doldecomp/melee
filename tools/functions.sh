@@ -55,6 +55,9 @@ function gen_header {
     local text="$guard
 
 #include <platform.h>
+#include \"ftCommon/forward.h\"
+
+#include <placeholder.h>
 
 #endif"
 
