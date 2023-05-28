@@ -239,7 +239,7 @@ void ftCo_80099894(ftCo_GObj* gobj)
     ftCommon_8007EBAC(fp, 23, 0);
 }
 
-void ftCo_800998EC(Fighter_GObj* gobj)
+void ftCo_800998EC(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_EscapeN, Ft_MF_None, NULL, 0, 1,
@@ -248,7 +248,7 @@ void ftCo_800998EC(Fighter_GObj* gobj)
     fp->x221D_b5 = true;
 }
 
-void ftCo_80099954(Fighter_GObj* gobj)
+void ftCo_80099954(ftCo_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -259,4 +259,23 @@ void ftCo_80099954(Fighter_GObj* gobj)
         ftYs_Init_8012BE3C(gobj);
     }
     ftCo_800998EC(gobj);
+}
+
+void ftCo_EscapeN_Anim(ftCo_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_8008A2BC(gobj);
+    }
+}
+
+void ftCo_EscapeN_IASA(ftCo_GObj* gobj) {}
+
+void ftCo_EscapeN_Phys(ftCo_GObj* gobj)
+{
+    ft_80084F3C(gobj);
+}
+
+void ftCo_EscapeN_Coll(ftCo_GObj* gobj)
+{
+    ft_80084104(gobj);
 }
