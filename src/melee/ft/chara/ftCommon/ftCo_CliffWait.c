@@ -2,6 +2,7 @@
 
 #include "ftCo_CliffWait.h"
 
+#include "ftCo_CliffAttack.h"
 #include "ftCo_CliffClimb.h"
 #include "ftCo_DamageFall.h"
 
