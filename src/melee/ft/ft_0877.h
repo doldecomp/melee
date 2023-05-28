@@ -74,7 +74,6 @@ void ft_80092BCC(Fighter_GObj* gobj);
 void ft_80092BE8(Fighter_GObj* gobj);
 void ft_80093BC0(Fighter_GObj* gobj);
 void ft_8009750C(Fighter_GObj* gobj);
-unk_t ft_8009A3C8(void);
 void ft_8009A804(Fighter_GObj* gobj);
 void ft_8009CA0C(Fighter_GObj*, Fighter_GObj* gobj);
 void ft_8009CF84(Fighter*);
@@ -969,7 +968,7 @@ unk_t mpColl_8004B4B0(void);
 /* 0886D8 */ void ftCo_800886D8(Fighter* fp, UNK_T, UNK_T, UNK_T);
 /* 08893C */ void ft_8008893C(Fighter* fp);
 /* 088828 */ void ft_80088828(Fighter* fp);
-/* 088328 */ void ft_80088328(Fighter* fp);
+/* 088328 */ void ft_80088328(Fighter* fp, int, int, int);
 /* 0885A8 */ void ft_800885A8(Fighter* fp, int, int, int);
 /* 08A1B8 */ void ft_8008A1B8(Fighter_GObj* gobj, int);
 

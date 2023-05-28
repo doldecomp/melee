@@ -337,8 +337,8 @@ struct ftCommonData {
     /* +46C */ float x46C;
     /* +470 */ float x470;
     /* +474 */ UNK_T x474;
-    /* +478 */ UNK_T x478;
-    /* +47C */ UNK_T x47C;
+    /* +478 */ float x478;
+    /* +47C */ float x47C;
     /* +480 */ float x480;
     /* +484 */ u8 x484[0x498 - 0x484];
     /* +498 */ u32 ledge_cooldown;
@@ -465,7 +465,15 @@ struct ftCommonData {
 };
 
 typedef struct _FtCollisionData {
-    u8 x0[0x24];
+    UNK_T x0;
+    UNK_T x4;
+    UNK_T x8;
+    UNK_T xC;
+    UNK_T x10;
+    UNK_T x14;
+    int x18;
+    UNK_T x1C;
+    UNK_T x20;
     u32 x24;
     u32 x28;
     u32 x2C;
