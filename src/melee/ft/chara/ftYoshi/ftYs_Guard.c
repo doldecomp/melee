@@ -15,6 +15,7 @@
 #include "ftCommon/ftCo_Escape.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "ftCommon/ftCo_ItemThrow.h"
+#include "ftCommon/ftCo_Pass.h"
 
 #include <stddef.h>
 #include <dolphin/mtx/types.h>

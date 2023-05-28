@@ -13,6 +13,7 @@
 #include "ftCo_Escape.h"
 #include "ftCo_FallSpecial.h"
 #include "ftCo_ItemThrow.h"
+#include "ftCo_Pass.h"
 #include "ftCo_ShieldBreakFly.h"
 #include "ftCo_SpecialS.h"
 

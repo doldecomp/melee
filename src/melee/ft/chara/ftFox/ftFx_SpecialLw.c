@@ -12,6 +12,7 @@
 #include "ft/ftcoll.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_Pass.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 

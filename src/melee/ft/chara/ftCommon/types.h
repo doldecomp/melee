@@ -119,6 +119,10 @@ union ftCommon_MotionVars {
         /* fp+2340 */ float x0;
         /* fp+2344 */ float anim_start;
     } rebound;
+    struct {
+        /* fp+2340 */ bool x0;
+        /* fp+2344 */ float x4;
+    } pass;
 };
 
 #endif
