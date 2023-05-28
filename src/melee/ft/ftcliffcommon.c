@@ -5,15 +5,17 @@
 #include "ef/efasync.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_08A4.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcommon.h"
+#include "ftCommon/ftCo_CliffWait.h"
 #include "mp/mplib.h"
 #include "pl/pl_0371.h"
 
-bool ftCliffCommon_80081298(HSD_GObj* gobj)
+bool ftCliffCommon_80081298(ftCo_GObj* gobj)
 {
     Fighter* other_fp;
-    HSD_GObj* other_gobj;
+    ftCo_GObj* other_gobj;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -49,7 +51,7 @@ typedef struct _UnkParameterStruct {
     u8 data_filler_1[0x1];
 } UnkParameterStruct;
 
-void ftCliffCommon_80081370(HSD_GObj* gobj)
+void ftCliffCommon_80081370(ftCo_GObj* gobj)
 {
     f32 facingDirection;
     f32 ledgeDirection;
@@ -94,16 +96,16 @@ void ftCliffCommon_80081370(HSD_GObj* gobj)
     ft_80088148(fp, 4, 0x7F, 0x40);
 }
 
-void ftCo_CliffCatch_Anim(HSD_GObj* gobj)
+void ftCo_CliffCatch_Anim(ftCo_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8009A804(gobj);
     }
 }
 
-void ftCo_CliffCatch_IASA(HSD_GObj* arg0) {}
+void ftCo_CliffCatch_IASA(ftCo_GObj* arg0) {}
 
-void ftCo_CliffCatch_Phys(HSD_GObj* gobj)
+void ftCo_CliffCatch_Phys(ftCo_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -132,7 +134,7 @@ void ftCo_CliffCatch_Phys(HSD_GObj* gobj)
     ft_800CC730(gobj);
 }
 
-void ftCo_CliffCatch_Coll(HSD_GObj* gobj)
+void ftCo_CliffCatch_Coll(ftCo_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -150,7 +152,7 @@ void ftCo_CliffCatch_Coll(HSD_GObj* gobj)
     }
 }
 
-void ftCo_Cliff_Cam(HSD_GObj* gobj)
+void ftCo_Cliff_Cam(ftCo_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftCamera_UpdateCameraBox(gobj);
