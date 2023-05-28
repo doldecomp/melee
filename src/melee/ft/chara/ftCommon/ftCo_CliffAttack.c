@@ -69,9 +69,8 @@ static inline bool inlineB0(ftCo_Fighter* fp)
 {
     if (fp->input.x668 & HSD_PAD_LR) {
         return true;
-    } else {
-        return false;
     }
+    return false;
 }
 
 bool ftCo_8009AFD4(ftCo_GObj* gobj)
