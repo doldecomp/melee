@@ -11,11 +11,6 @@
 
 union ftCommon_MotionVars {
     struct {
-        /// 0x2340 - Used to check against opponent's variable @ 0x213C while
-        /// they're occupying a ledge within grab range
-        s32 ledge_id;
-    } cliff;
-    struct {
         /* fp+2340 */ float x0;
         /* fp+2344 */ FtMotionId msid;
         /* fp+2348 */ float slow_anim_frame;
@@ -124,10 +119,14 @@ union ftCommon_MotionVars {
         /* fp+2344 */ float x4;
     } pass;
     struct {
-        /* fp+2340 */ UNK_T x0;
+        /**
+         * Used to check against opponent's #Fighter::213C while they're
+         * occupying a ledge within grab range
+         */
+        /* fp+2340 */ int ledge_id;
         /* fp+2344 */ float x4;
-        /* fp+2348 */ int x8;
-    } cliffwait;
+        /* fp+2348 */ bool x8;
+    } cliff;
 };
 
 #endif
