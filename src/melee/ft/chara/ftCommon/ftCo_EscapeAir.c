@@ -77,9 +77,9 @@ void ftCo_EscapeAir_Anim(Fighter_GObj* gobj)
 
 void ftCo_EscapeAir_IASA(ftCo_GObj* gobj)
 {
-    bool b;
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->mv.co.escapeair.timer != 0) {
+        bool b;
         Vec3 self_vel = fp->mv.co.escapeair.self_vel;
         /// @todo Unused stack.
 #ifdef MUST_MATCH
