@@ -115,6 +115,10 @@ union ftCommon_MotionVars {
         /* fp+2340 */ int timer;
         /* fp+2344 */ Vec3 self_vel;
     } escapeair;
+    struct {
+        /* fp+2340 */ float x0;
+        /* fp+2344 */ float anim_start;
+    } rebound;
 };
 
 #endif
