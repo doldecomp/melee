@@ -801,7 +801,7 @@ void ftLib_80087140(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x221F_flag.bits.b3) {
-        ft_800D4F24(gobj, 1);
+        ftCo_800D4F24(gobj, 1);
         ftCommon_8007ED2C(fp);
         Fighter_UnkProcessDeath_80068354(gobj);
         ftCommon_8007D92C(gobj);
@@ -812,8 +812,8 @@ void ftLib_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_ASSERT(1117, itGetKind(item_gobj) == It_Kind_MetalB);
-    ft_800C8348(gobj, it_8026B560(item_gobj), it_8026B574(item_gobj));
-    ft_800D105C(gobj);
+    ftCo_800C8348(gobj, it_8026B560(item_gobj), it_8026B574(item_gobj));
+    ftCo_800D105C(gobj);
     ft_80081C88(gobj, fp->x34_scale.y);
     ftCommon_8007EBAC(fp, 0xC, 0);
     Camera_80030E44(2, &fp->cur_pos);

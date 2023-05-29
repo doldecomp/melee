@@ -7,7 +7,7 @@
 
 #include <placeholder.h>
 
-/* 09917C */ bool ft_8009917C(ftCo_GObj* gobj);
+/* 09917C */ bool ftCo_8009917C(ftCo_GObj* gobj);
 /* 099264 */ /* static */ bool ftCo_80099264(ftCo_GObj* gobj);
 /* 0992A8 */ /* static */ void ftCo_800992A8(ftCo_GObj* gobj, FtMotionId msid,
                                              bool);
@@ -24,7 +24,7 @@
 /* 099564 */ /* static */ void ftCo_80099564(ftCo_GObj* gobj);
 /* 099754 */ /* static */ void ftCo_80099754(ftCo_GObj* gobj);
 /* 099644 */ /* static */ void ftCo_80099644(ftCo_GObj* gobj);
-/* 099794 */ /* static */ bool ft_80099794(ftCo_GObj* gobj);
+/* 099794 */ /* static */ bool ftCo_80099794(ftCo_GObj* gobj);
 /* 099894 */ /* static */ void ftCo_80099894(ftCo_GObj* gobj);
 /* 09980C */ bool ftCo_8009980C(ftCo_GObj* gobj);
 /* 0998EC */ /* static */ void ftCo_800998EC(ftCo_GObj* gobj);

@@ -155,12 +155,12 @@ float ftCo_Damage_CalcAngle(Fighter* fp, float f)
 }
 #endif
 
-float ft_0877_ScaleBy154(float mul)
+float ftCo_ScaleBy154(float mul)
 {
     return mul * p_ftCommonData->x154;
 }
 
-bool ft_8008D8E8(float f)
+bool ftCo_8008D8E8(float f)
 {
     return f < p_ftCommonData->x158   ? 0
            : f < p_ftCommonData->x15C ? 1
@@ -219,7 +219,7 @@ lbl_8008D9BC:
 /* 8008D9CC 0008A5AC  80 6D AE 84 */	lwz r3, Fighter_804D6524
 /* 8008D9D0 0008A5B0  C0 3F 18 50 */	lfs f1, 0x1850(r31)
 /* 8008D9D4 0008A5B4  C0 63 00 00 */	lfs f3, 0(r3)
-/* 8008D9D8 0008A5B8  48 04 1B BD */	bl ft_CalcYScaledKnockback
+/* 8008D9D8 0008A5B8  48 04 1B BD */	bl ftCo_CalcYScaledKnockback
 /* 8008D9DC 0008A5BC  D0 3F 18 50 */	stfs f1, 0x1850(r31)
 lbl_8008D9E0:
 /* 8008D9E0 0008A5C0  C0 1F 18 B0 */	lfs f0, 0x18b0(r31)
@@ -280,8 +280,8 @@ not_squatwait:
     }
     if (fp->x34_scale.y != 1) {
         fp->dmg.kb_applied =
-            ft_CalcYScaledKnockback(Fighter_804D6524, fp->dmg.kb_applied,
-                                    fp->x34_scale.y, *Fighter_804D6524);
+            ftCo_CalcYScaledKnockback(Fighter_804D6524, fp->dmg.kb_applied,
+                                      fp->x34_scale.y, *Fighter_804D6524);
     }
     {
         float armor =
@@ -328,31 +328,31 @@ lbl_8008DA90:
 lbl_8008DA9C:
 /* 8008DA9C 0008A67C  38 85 00 0B */	addi r4, r5, 0xb
 /* 8008DAA0 0008A680  38 A0 00 00 */	li r5, 0
-/* 8008DAA4 0008A684  48 03 25 2D */	bl ft_800BFFD0
+/* 8008DAA4 0008A684  48 03 25 2D */	bl ftCo_800BFFD0
 /* 8008DAA8 0008A688  7C 60 1B 78 */	mr r0, r3
 /* 8008DAAC 0008A68C  48 00 00 50 */	b lbl_8008DAFC
 lbl_8008DAB0:
 /* 8008DAB0 0008A690  38 85 00 0F */	addi r4, r5, 0xf
 /* 8008DAB4 0008A694  38 A0 00 00 */	li r5, 0
-/* 8008DAB8 0008A698  48 03 25 19 */	bl ft_800BFFD0
+/* 8008DAB8 0008A698  48 03 25 19 */	bl ftCo_800BFFD0
 /* 8008DABC 0008A69C  7C 60 1B 78 */	mr r0, r3
 /* 8008DAC0 0008A6A0  48 00 00 3C */	b lbl_8008DAFC
 lbl_8008DAC4:
 /* 8008DAC4 0008A6A4  38 85 00 1F */	addi r4, r5, 0x1f
 /* 8008DAC8 0008A6A8  38 A0 00 00 */	li r5, 0
-/* 8008DACC 0008A6AC  48 03 25 05 */	bl ft_800BFFD0
+/* 8008DACC 0008A6AC  48 03 25 05 */	bl ftCo_800BFFD0
 /* 8008DAD0 0008A6B0  7C 60 1B 78 */	mr r0, r3
 /* 8008DAD4 0008A6B4  48 00 00 28 */	b lbl_8008DAFC
 lbl_8008DAD8:
 /* 8008DAD8 0008A6B8  38 85 00 23 */	addi r4, r5, 0x23
 /* 8008DADC 0008A6BC  38 A0 00 00 */	li r5, 0
-/* 8008DAE0 0008A6C0  48 03 24 F1 */	bl ft_800BFFD0
+/* 8008DAE0 0008A6C0  48 03 24 F1 */	bl ftCo_800BFFD0
 /* 8008DAE4 0008A6C4  7C 60 1B 78 */	mr r0, r3
 /* 8008DAE8 0008A6C8  48 00 00 14 */	b lbl_8008DAFC
 lbl_8008DAEC:
 /* 8008DAEC 0008A6CC  38 80 00 04 */	li r4, 4
 /* 8008DAF0 0008A6D0  38 A0 00 00 */	li r5, 0
-/* 8008DAF4 0008A6D4  48 03 24 DD */	bl ft_800BFFD0
+/* 8008DAF4 0008A6D4  48 03 24 DD */	bl ftCo_800BFFD0
 /* 8008DAF8 0008A6D8  7C 60 1B 78 */	mr r0, r3
 lbl_8008DAFC:
 /* 8008DAFC 0008A6DC  7C 03 03 78 */	mr r3, r0
@@ -370,20 +370,20 @@ bool ftCo_8008DA4C(ftCo_GObj* gobj, enum_t arg1, enum_t arg2)
     if (fp->dmg.x1838_percentTemp) {
         switch (arg1) {
         case 1:
-            return ft_800BFFD0(fp, arg2 + 11, 0);
+            return ftCo_800BFFD0(fp, arg2 + 11, 0);
             break;
         case 2:
-            return ft_800BFFD0(fp, arg2 + 15, 0);
+            return ftCo_800BFFD0(fp, arg2 + 15, 0);
             break;
         case 5:
-            return ft_800BFFD0(fp, arg2 + 31, 0);
+            return ftCo_800BFFD0(fp, arg2 + 31, 0);
             break;
         case 13:
-            return ft_800BFFD0(fp, arg2 + 35, 0);
+            return ftCo_800BFFD0(fp, arg2 + 35, 0);
             break;
         }
     }
-    return ft_800BFFD0(fp, 4, 0);
+    return ftCo_800BFFD0(fp, 4, 0);
 }
 #endif
 
@@ -600,7 +600,7 @@ void ftCo_Damage_CalcVel(Fighter* fp, float x, float y)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm /* 08DCE0 */ void ft_8008DCE0(ftCo_GObj* gobj, int, float)
+asm /* 08DCE0 */ void ftCo_8008DCE0(ftCo_GObj* gobj, int, float)
 { // clang-format off
     nofralloc
 /* 8008DCE0 0008A8C0  7C 08 02 A6 */	mflr r0
@@ -946,27 +946,27 @@ lbl_8008E1D0:
 lbl_8008E1DC:
 /* 8008E1DC 0008ADBC  38 9C 00 0B */	addi r4, r28, 0xb
 /* 8008E1E0 0008ADC0  38 A0 00 00 */	li r5, 0
-/* 8008E1E4 0008ADC4  48 03 1D ED */	bl ft_800BFFD0
+/* 8008E1E4 0008ADC4  48 03 1D ED */	bl ftCo_800BFFD0
 /* 8008E1E8 0008ADC8  48 00 00 40 */	b lbl_8008E228
 lbl_8008E1EC:
 /* 8008E1EC 0008ADCC  38 9C 00 0F */	addi r4, r28, 0xf
 /* 8008E1F0 0008ADD0  38 A0 00 00 */	li r5, 0
-/* 8008E1F4 0008ADD4  48 03 1D DD */	bl ft_800BFFD0
+/* 8008E1F4 0008ADD4  48 03 1D DD */	bl ftCo_800BFFD0
 /* 8008E1F8 0008ADD8  48 00 00 30 */	b lbl_8008E228
 lbl_8008E1FC:
 /* 8008E1FC 0008ADDC  38 9C 00 1F */	addi r4, r28, 0x1f
 /* 8008E200 0008ADE0  38 A0 00 00 */	li r5, 0
-/* 8008E204 0008ADE4  48 03 1D CD */	bl ft_800BFFD0
+/* 8008E204 0008ADE4  48 03 1D CD */	bl ftCo_800BFFD0
 /* 8008E208 0008ADE8  48 00 00 20 */	b lbl_8008E228
 lbl_8008E20C:
 /* 8008E20C 0008ADEC  38 9C 00 23 */	addi r4, r28, 0x23
 /* 8008E210 0008ADF0  38 A0 00 00 */	li r5, 0
-/* 8008E214 0008ADF4  48 03 1D BD */	bl ft_800BFFD0
+/* 8008E214 0008ADF4  48 03 1D BD */	bl ftCo_800BFFD0
 /* 8008E218 0008ADF8  48 00 00 10 */	b lbl_8008E228
 lbl_8008E21C:
 /* 8008E21C 0008ADFC  38 80 00 04 */	li r4, 4
 /* 8008E220 0008AE00  38 A0 00 00 */	li r5, 0
-/* 8008E224 0008AE04  48 03 1D AD */	bl ft_800BFFD0
+/* 8008E224 0008AE04  48 03 1D AD */	bl ftCo_800BFFD0
 lbl_8008E228:
 /* 8008E228 0008AE08  FC 20 E0 90 */	fmr f1, f28
 /* 8008E22C 0008AE0C  80 9D 18 60 */	lwz r4, 0x1860(r29)
@@ -1169,7 +1169,7 @@ static void inlineA1(ftCo_GObj* gobj)
                                 fp->self_vel.y + fp->x8c_kb_vel.y));
 }
 
-void ft_8008DCE0(ftCo_GObj* gobj, int arg1, float facing_dir)
+void ftCo_8008DCE0(ftCo_GObj* gobj, int arg1, float facing_dir)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -1920,7 +1920,7 @@ void ftCo_Damage_OnExitHitlag(ftCo_GObj* gobj)
 }
 #endif
 
-void ft_8008E908(ftCo_GObj* gobj, float facing_dir)
+void ftCo_8008E908(ftCo_GObj* gobj, float facing_dir)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->x221D_b7) {
@@ -1931,14 +1931,14 @@ void ft_8008E908(ftCo_GObj* gobj, float facing_dir)
         if ((fp_x1860 == 6 || fp_x1860 == 7) && !fp->x2228_flag.b2) {
             ftCo_800C318C(gobj, fp_x1860 == 6 ? 0 : 1);
         } else {
-            ft_8008DCE0(gobj, -1, facing_dir);
+            ftCo_8008DCE0(gobj, -1, facing_dir);
         }
     }
 }
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm /* 08E984 */ bool ft_8008E984(ftCo_Fighter* fp)
+asm /* 08E984 */ bool ftCo_8008E984(ftCo_Fighter* fp)
 { // clang-format off
     nofralloc
 /* 8008E984 0008B564  C0 02 8A F4 */	lfs f0, lbl_804D84D4
@@ -1966,7 +1966,7 @@ lbl_8008E9C8:
 #pragma pop
 #else
 
-bool ft_8008E984(Fighter* fp)
+bool ftCo_8008E984(Fighter* fp)
 {
     if (fp->dmg.kb_applied == 0 ||
         (fp->x221A_flag.bits.b2 && fp->x221A_flag.bits.b3 &&
@@ -1990,7 +1990,7 @@ bool ft_8008E984(Fighter* fp)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm /* 08E9D0 */ void ft_8008E9D0(ftCo_GObj* gobj)
+asm /* 08E9D0 */ void ftCo_8008E9D0(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8008E9D0 0008B5B0  7C 08 02 A6 */	mflr r0
@@ -2001,7 +2001,7 @@ asm /* 08E9D0 */ void ft_8008E9D0(ftCo_GObj* gobj)
 /* 8008E9E4 0008B5C4  93 A1 00 24 */	stw r29, 0x24(r1)
 /* 8008E9E8 0008B5C8  7C 7D 1B 78 */	mr r29, r3
 /* 8008E9EC 0008B5CC  83 C3 00 2C */	lwz r30, 0x2c(r3)
-/* 8008E9F0 0008B5D0  48 03 A3 11 */	bl ft_800C8D00
+/* 8008E9F0 0008B5D0  48 03 A3 11 */	bl ftCo_800C8D00
 /* 8008E9F4 0008B5D4  80 1E 00 10 */	lwz r0, 0x10(r30)
 /* 8008E9F8 0008B5D8  2C 00 00 E0 */	cmpwi r0, 0xe0
 /* 8008E9FC 0008B5DC  41 82 00 0C */	beq lbl_8008EA08
@@ -2066,37 +2066,37 @@ lbl_8008EAB8:
 lbl_8008EAC4:
 /* 8008EAC4 0008B6A4  38 84 00 0B */	addi r4, r4, 0xb
 /* 8008EAC8 0008B6A8  38 A0 00 00 */	li r5, 0
-/* 8008EACC 0008B6AC  48 03 15 05 */	bl ft_800BFFD0
+/* 8008EACC 0008B6AC  48 03 15 05 */	bl ftCo_800BFFD0
 /* 8008EAD0 0008B6B0  7C 7F 1B 78 */	mr r31, r3
 /* 8008EAD4 0008B6B4  48 00 00 50 */	b lbl_8008EB24
 lbl_8008EAD8:
 /* 8008EAD8 0008B6B8  38 84 00 0F */	addi r4, r4, 0xf
 /* 8008EADC 0008B6BC  38 A0 00 00 */	li r5, 0
-/* 8008EAE0 0008B6C0  48 03 14 F1 */	bl ft_800BFFD0
+/* 8008EAE0 0008B6C0  48 03 14 F1 */	bl ftCo_800BFFD0
 /* 8008EAE4 0008B6C4  7C 7F 1B 78 */	mr r31, r3
 /* 8008EAE8 0008B6C8  48 00 00 3C */	b lbl_8008EB24
 lbl_8008EAEC:
 /* 8008EAEC 0008B6CC  38 84 00 1F */	addi r4, r4, 0x1f
 /* 8008EAF0 0008B6D0  38 A0 00 00 */	li r5, 0
-/* 8008EAF4 0008B6D4  48 03 14 DD */	bl ft_800BFFD0
+/* 8008EAF4 0008B6D4  48 03 14 DD */	bl ftCo_800BFFD0
 /* 8008EAF8 0008B6D8  7C 7F 1B 78 */	mr r31, r3
 /* 8008EAFC 0008B6DC  48 00 00 28 */	b lbl_8008EB24
 lbl_8008EB00:
 /* 8008EB00 0008B6E0  38 84 00 23 */	addi r4, r4, 0x23
 /* 8008EB04 0008B6E4  38 A0 00 00 */	li r5, 0
-/* 8008EB08 0008B6E8  48 03 14 C9 */	bl ft_800BFFD0
+/* 8008EB08 0008B6E8  48 03 14 C9 */	bl ftCo_800BFFD0
 /* 8008EB0C 0008B6EC  7C 7F 1B 78 */	mr r31, r3
 /* 8008EB10 0008B6F0  48 00 00 14 */	b lbl_8008EB24
 lbl_8008EB14:
 /* 8008EB14 0008B6F4  38 80 00 04 */	li r4, 4
 /* 8008EB18 0008B6F8  38 A0 00 00 */	li r5, 0
-/* 8008EB1C 0008B6FC  48 03 14 B5 */	bl ft_800BFFD0
+/* 8008EB1C 0008B6FC  48 03 14 B5 */	bl ftCo_800BFFD0
 /* 8008EB20 0008B700  7C 7F 1B 78 */	mr r31, r3
 lbl_8008EB24:
 /* 8008EB24 0008B704  2C 1F 00 00 */	cmpwi r31, 0
 /* 8008EB28 0008B708  41 82 00 0C */	beq lbl_8008EB34
 /* 8008EB2C 0008B70C  7F A3 EB 78 */	mr r3, r29
-/* 8008EB30 0008B710  48 03 18 D9 */	bl ft_800C0408
+/* 8008EB30 0008B710  48 03 18 D9 */	bl ftCo_800C0408
 lbl_8008EB34:
 /* 8008EB34 0008B714  7F C3 F3 78 */	mr r3, r30
 /* 8008EB38 0008B718  4B FF 19 C5 */	bl ftCommon_800804FC
@@ -2113,7 +2113,7 @@ lbl_8008EB34:
 
 static inline void inlineF0(ftCo_GObj* gobj)
 {
-    ft_800C8D00(gobj);
+    ftCo_800C8D00(gobj);
     {
         ftCo_Fighter* fp = gobj->user_data;
         if (fp->motion_id == 0xe0 || fp->motion_id == 0xe1) {
@@ -2125,7 +2125,7 @@ static inline void inlineF0(ftCo_GObj* gobj)
     }
 }
 
-void ft_8008E9D0(ftCo_GObj* gobj)
+void ftCo_8008E9D0(ftCo_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -2134,8 +2134,8 @@ void ft_8008E9D0(ftCo_GObj* gobj)
 
     ftCo_Fighter* fp = gobj->user_data;
     inlineF0(gobj);
-    if (ftCo_8008DA4C(gobj, ft_8008D8E8(fp->dmg.kb_applied), 0)) {
-        ft_800C0408(gobj);
+    if (ftCo_8008DA4C(gobj, ftCo_8008D8E8(fp->dmg.kb_applied), 0)) {
+        ftCo_800C0408(gobj);
     }
     ftCommon_800804FC(fp);
 }
@@ -2143,7 +2143,7 @@ void ft_8008E9D0(ftCo_GObj* gobj)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm /* 08EB58 */ void ft_8008EB58(ftCo_GObj* gobj)
+asm /* 08EB58 */ void ftCo_8008EB58(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8008EB58 0008B738  7C 08 02 A6 */	mflr r0
@@ -2177,7 +2177,7 @@ lbl_8008EBBC:
 /* 8008EBBC 0008B79C  2C 00 00 00 */	cmpwi r0, 0
 /* 8008EBC0 0008B7A0  41 82 00 B8 */	beq lbl_8008EC78
 /* 8008EBC4 0008B7A4  7F C3 F3 78 */	mr r3, r30
-/* 8008EBC8 0008B7A8  48 03 A1 39 */	bl ft_800C8D00
+/* 8008EBC8 0008B7A8  48 03 A1 39 */	bl ftCo_800C8D00
 /* 8008EBCC 0008B7AC  80 1F 00 10 */	lwz r0, 0x10(r31)
 /* 8008EBD0 0008B7B0  2C 00 00 E0 */	cmpwi r0, 0xe0
 /* 8008EBD4 0008B7B4  41 82 00 0C */	beq lbl_8008EBE0
@@ -2226,7 +2226,7 @@ lbl_8008EC54:
 /* 8008EC60 0008B840  2C 03 00 00 */	cmpwi r3, 0
 /* 8008EC64 0008B844  41 82 00 0C */	beq lbl_8008EC70
 /* 8008EC68 0008B848  7F C3 F3 78 */	mr r3, r30
-/* 8008EC6C 0008B84C  48 03 17 9D */	bl ft_800C0408
+/* 8008EC6C 0008B84C  48 03 17 9D */	bl ftCo_800C0408
 lbl_8008EC70:
 /* 8008EC70 0008B850  7F E3 FB 78 */	mr r3, r31
 /* 8008EC74 0008B854  4B FF 18 89 */	bl ftCommon_800804FC
@@ -2262,17 +2262,17 @@ static bool inlineB0(ftCo_GObj* gobj)
 #pragma push
 #pragma inline_depth(1)
 #endif
-void ft_8008EB58(ftCo_GObj* gobj)
+void ftCo_8008EB58(ftCo_GObj* gobj)
 {
     if (inlineB0(gobj)) {
-        ft_800C8D00(gobj);
+        ftCo_800C8D00(gobj);
         inlineF0(gobj);
         {
             ftCo_Fighter* fp = gobj->user_data;
             if (ftCo_8008DA4C(gobj, fp->dmg.x1860,
-                              ft_8008D8E8(fp->dmg.kb_applied)))
+                              ftCo_8008D8E8(fp->dmg.kb_applied)))
             {
-                ft_800C0408(gobj);
+                ftCo_800C0408(gobj);
             }
             ftCommon_800804FC(fp);
         }
@@ -2285,7 +2285,7 @@ void ft_8008EB58(ftCo_GObj* gobj)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm /* 08EC90 */ void ft_8008EC90(ftCo_GObj* gobj)
+asm /* 08EC90 */ void ftCo_8008EC90(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8008EC90 0008B870  7C 08 02 A6 */	mflr r0
@@ -2307,7 +2307,7 @@ asm /* 08EC90 */ void ft_8008EC90(ftCo_GObj* gobj)
 /* 8008ECD0 0008B8B0  40 82 00 BC */	bne lbl_8008ED8C
 lbl_8008ECD4:
 /* 8008ECD4 0008B8B4  7F E3 FB 78 */	mr r3, r31
-/* 8008ECD8 0008B8B8  48 03 A0 29 */	bl ft_800C8D00
+/* 8008ECD8 0008B8B8  48 03 A0 29 */	bl ftCo_800C8D00
 /* 8008ECDC 0008B8BC  80 1D 00 10 */	lwz r0, 0x10(r29)
 /* 8008ECE0 0008B8C0  2C 00 00 E0 */	cmpwi r0, 0xe0
 /* 8008ECE4 0008B8C4  41 82 00 0C */	beq lbl_8008ECF0
@@ -2356,7 +2356,7 @@ lbl_8008ED64:
 /* 8008ED70 0008B950  2C 03 00 00 */	cmpwi r3, 0
 /* 8008ED74 0008B954  41 82 00 0C */	beq lbl_8008ED80
 /* 8008ED78 0008B958  7F E3 FB 78 */	mr r3, r31
-/* 8008ED7C 0008B95C  48 03 16 8D */	bl ft_800C0408
+/* 8008ED7C 0008B95C  48 03 16 8D */	bl ftCo_800C0408
 lbl_8008ED80:
 /* 8008ED80 0008B960  7F A3 EB 78 */	mr r3, r29
 /* 8008ED84 0008B964  4B FF 17 79 */	bl ftCommon_800804FC
@@ -2444,7 +2444,7 @@ lbl_8008EEA8:
 /* 8008EEAC 0008BA8C  41 82 00 D8 */	beq lbl_8008EF84
 /* 8008EEB0 0008BA90  83 9F 00 2C */	lwz r28, 0x2c(r31)
 /* 8008EEB4 0008BA94  7F E3 FB 78 */	mr r3, r31
-/* 8008EEB8 0008BA98  48 03 9E 49 */	bl ft_800C8D00
+/* 8008EEB8 0008BA98  48 03 9E 49 */	bl ftCo_800C8D00
 /* 8008EEBC 0008BA9C  80 1C 00 10 */	lwz r0, 0x10(r28)
 /* 8008EEC0 0008BAA0  2C 00 00 E0 */	cmpwi r0, 0xe0
 /* 8008EEC4 0008BAA4  41 82 00 0C */	beq lbl_8008EED0
@@ -2493,7 +2493,7 @@ lbl_8008EF44:
 /* 8008EF50 0008BB30  2C 03 00 00 */	cmpwi r3, 0
 /* 8008EF54 0008BB34  41 82 00 0C */	beq lbl_8008EF60
 /* 8008EF58 0008BB38  7F E3 FB 78 */	mr r3, r31
-/* 8008EF5C 0008BB3C  48 03 14 AD */	bl ft_800C0408
+/* 8008EF5C 0008BB3C  48 03 14 AD */	bl ftCo_800C0408
 lbl_8008EF60:
 /* 8008EF60 0008BB40  7F 83 E3 78 */	mr r3, r28
 /* 8008EF64 0008BB44  4B FF 15 99 */	bl ftCommon_800804FC
@@ -2543,7 +2543,7 @@ lbl_8008EFFC:
 /* 8008EFFC 0008BBDC  FC 20 F8 90 */	fmr f1, f31
 /* 8008F000 0008BBE0  38 7F 00 00 */	addi r3, r31, 0
 /* 8008F004 0008BBE4  38 80 FF FF */	li r4, -1
-/* 8008F008 0008BBE8  4B FF EC D9 */	bl ft_8008DCE0
+/* 8008F008 0008BBE8  4B FF EC D9 */	bl ftCo_8008DCE0
 lbl_8008F00C:
 /* 8008F00C 0008BBEC  38 00 00 01 */	li r0, 1
 /* 8008F010 0008BBF0  90 1B 18 28 */	stw r0, 0x1828(r27)
@@ -2580,7 +2580,7 @@ lbl_8008F078:
 /* 8008F080 0008BC60  7F E3 FB 78 */	mr r3, r31
 /* 8008F084 0008BC64  90 1D 06 68 */	stw r0, 0x668(r29)
 /* 8008F088 0008BC68  83 7F 00 2C */	lwz r27, 0x2c(r31)
-/* 8008F08C 0008BC6C  48 03 9C 75 */	bl ft_800C8D00
+/* 8008F08C 0008BC6C  48 03 9C 75 */	bl ftCo_800C8D00
 /* 8008F090 0008BC70  80 1B 00 10 */	lwz r0, 0x10(r27)
 /* 8008F094 0008BC74  2C 00 00 E0 */	cmpwi r0, 0xe0
 /* 8008F098 0008BC78  41 82 00 0C */	beq lbl_8008F0A4
@@ -2629,7 +2629,7 @@ lbl_8008F118:
 /* 8008F124 0008BD04  2C 03 00 00 */	cmpwi r3, 0
 /* 8008F128 0008BD08  41 82 00 0C */	beq lbl_8008F134
 /* 8008F12C 0008BD0C  7F E3 FB 78 */	mr r3, r31
-/* 8008F130 0008BD10  48 03 12 D9 */	bl ft_800C0408
+/* 8008F130 0008BD10  48 03 12 D9 */	bl ftCo_800C0408
 lbl_8008F134:
 /* 8008F134 0008BD14  7F 63 DB 78 */	mr r3, r27
 /* 8008F138 0008BD18  4B FF 13 C5 */	bl ftCommon_800804FC
@@ -2675,7 +2675,7 @@ lbl_8008F1C0:
 /* 8008F1C0 0008BDA0  FC 20 F8 90 */	fmr f1, f31
 /* 8008F1C4 0008BDA4  38 7F 00 00 */	addi r3, r31, 0
 /* 8008F1C8 0008BDA8  38 80 FF FF */	li r4, -1
-/* 8008F1CC 0008BDAC  4B FF EB 15 */	bl ft_8008DCE0
+/* 8008F1CC 0008BDAC  4B FF EB 15 */	bl ftCo_8008DCE0
 lbl_8008F1D0:
 /* 8008F1D0 0008BDB0  38 00 00 01 */	li r0, 1
 /* 8008F1D4 0008BDB4  90 1B 18 28 */	stw r0, 0x1828(r27)
@@ -2717,7 +2717,7 @@ lbl_8008F24C:
 /* 8008F24C 0008BE2C  FC 20 F8 90 */	fmr f1, f31
 /* 8008F250 0008BE30  38 7F 00 00 */	addi r3, r31, 0
 /* 8008F254 0008BE34  38 80 FF FF */	li r4, -1
-/* 8008F258 0008BE38  4B FF EA 89 */	bl ft_8008DCE0
+/* 8008F258 0008BE38  4B FF EA 89 */	bl ftCo_8008DCE0
 lbl_8008F25C:
 /* 8008F25C 0008BE3C  7F 83 E3 78 */	mr r3, r28
 /* 8008F260 0008BE40  4B FE E8 F9 */	bl ftCommon_8007DB58
@@ -2809,7 +2809,7 @@ lbl_8008F390:
 /* 8008F390 0008BF70  2C 00 00 00 */	cmpwi r0, 0
 /* 8008F394 0008BF74  41 82 00 0C */	beq lbl_8008F3A0
 /* 8008F398 0008BF78  7F E3 FB 78 */	mr r3, r31
-/* 8008F39C 0008BF7C  4B FF F6 35 */	bl ft_8008E9D0
+/* 8008F39C 0008BF7C  4B FF F6 35 */	bl ftCo_8008E9D0
 lbl_8008F3A0:
 /* 8008F3A0 0008BF80  38 00 00 02 */	li r0, 2
 /* 8008F3A4 0008BF84  90 1B 18 28 */	stw r0, 0x1828(r27)
@@ -2850,7 +2850,7 @@ lbl_8008F418:
 /* 8008F418 0008BFF8  FC 20 F8 90 */	fmr f1, f31
 /* 8008F41C 0008BFFC  38 7F 00 00 */	addi r3, r31, 0
 /* 8008F420 0008C000  38 80 FF FF */	li r4, -1
-/* 8008F424 0008C004  4B FF E8 BD */	bl ft_8008DCE0
+/* 8008F424 0008C004  4B FF E8 BD */	bl ftCo_8008DCE0
 lbl_8008F428:
 /* 8008F428 0008C008  38 00 00 01 */	li r0, 1
 /* 8008F42C 0008C00C  90 1B 18 28 */	stw r0, 0x1828(r27)
@@ -2880,7 +2880,7 @@ lbl_8008F47C:
 /* 8008F47C 0008C05C  2C 00 00 00 */	cmpwi r0, 0
 /* 8008F480 0008C060  41 82 02 9C */	beq lbl_8008F71C
 /* 8008F484 0008C064  7F E3 FB 78 */	mr r3, r31
-/* 8008F488 0008C068  4B FF F5 49 */	bl ft_8008E9D0
+/* 8008F488 0008C068  4B FF F5 49 */	bl ftCo_8008E9D0
 /* 8008F48C 0008C06C  48 00 02 90 */	b lbl_8008F71C
 lbl_8008F490:
 /* 8008F490 0008C070  C0 3B 18 50 */	lfs f1, 0x1850(r27)
@@ -2951,7 +2951,7 @@ lbl_8008F570:
 /* 8008F570 0008C150  FC 20 F8 90 */	fmr f1, f31
 /* 8008F574 0008C154  38 7F 00 00 */	addi r3, r31, 0
 /* 8008F578 0008C158  38 80 FF FF */	li r4, -1
-/* 8008F57C 0008C15C  4B FF E7 65 */	bl ft_8008DCE0
+/* 8008F57C 0008C15C  4B FF E7 65 */	bl ftCo_8008DCE0
 lbl_8008F580:
 /* 8008F580 0008C160  38 00 00 01 */	li r0, 1
 /* 8008F584 0008C164  90 1B 18 28 */	stw r0, 0x1828(r27)
@@ -2997,7 +2997,7 @@ lbl_8008F60C:
 /* 8008F60C 0008C1EC  FC 20 F8 90 */	fmr f1, f31
 /* 8008F610 0008C1F0  38 7F 00 00 */	addi r3, r31, 0
 /* 8008F614 0008C1F4  38 80 FF FF */	li r4, -1
-/* 8008F618 0008C1F8  4B FF E6 C9 */	bl ft_8008DCE0
+/* 8008F618 0008C1F8  4B FF E6 C9 */	bl ftCo_8008DCE0
 /* 8008F61C 0008C1FC  48 00 01 00 */	b lbl_8008F71C
 lbl_8008F620:
 /* 8008F620 0008C200  80 7D 19 74 */	lwz r3, 0x1974(r29)
@@ -3027,7 +3027,7 @@ lbl_8008F650:
 /* 8008F67C 0008C25C  C0 3D 00 2C */	lfs f1, 0x2c(r29)
 /* 8008F680 0008C260  38 7F 00 00 */	addi r3, r31, 0
 /* 8008F684 0008C264  38 80 01 45 */	li r4, 0x145
-/* 8008F688 0008C268  4B FF E6 59 */	bl ft_8008DCE0
+/* 8008F688 0008C268  4B FF E6 59 */	bl ftCo_8008DCE0
 /* 8008F68C 0008C26C  7F E3 FB 78 */	mr r3, r31
 /* 8008F690 0008C270  48 00 19 A1 */	bl ftCo_80091030
 /* 8008F694 0008C274  48 00 00 88 */	b lbl_8008F71C
@@ -3069,7 +3069,7 @@ lbl_8008F70C:
 /* 8008F70C 0008C2EC  FC 20 F8 90 */	fmr f1, f31
 /* 8008F710 0008C2F0  38 7F 00 00 */	addi r3, r31, 0
 /* 8008F714 0008C2F4  38 80 FF FF */	li r4, -1
-/* 8008F718 0008C2F8  4B FF E5 C9 */	bl ft_8008DCE0
+/* 8008F718 0008C2F8  4B FF E5 C9 */	bl ftCo_8008DCE0
 lbl_8008F71C:
 /* 8008F71C 0008C2FC  2C 1E 00 00 */	cmpwi r30, 0
 /* 8008F720 0008C300  41 82 00 0C */	beq lbl_8008F72C
@@ -3107,15 +3107,16 @@ static inline void inlineB2(ftCo_GObj* gobj)
 #ifdef MUST_MATCH
 #pragma always_inline restore
 #endif
-    if (ftCo_8008DA4C(gobj, fp->dmg.x1860,
-                      ft_8008D8E8(fp->dmg.kb_applied * p_ftCommonData->x154)))
+    if (ftCo_8008DA4C(
+            gobj, fp->dmg.x1860,
+            ftCo_8008D8E8(fp->dmg.kb_applied * p_ftCommonData->x154)))
     {
-        ft_800C0408(gobj);
+        ftCo_800C0408(gobj);
     }
     ftCommon_800804FC(fp);
 }
 
-void ft_8008EC90(ftCo_GObj* gobj)
+void ftCo_8008EC90(ftCo_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -3144,7 +3145,7 @@ void ft_8008EC90(ftCo_GObj* gobj)
         if (!fp->x221B_b5) {
             if (!ret0 && inlineB1(fp)) {
                 if (other_fp->dmg.kb_applied) {
-                    if (ft_8008E984(other_fp)) {
+                    if (ftCo_8008E984(other_fp)) {
                         inlineB2(gobj);
                         fp->dmg.x183C_applied = other_fp->dmg.x183C_applied;
                         fp->x1960_vibrateMult = other_fp->x1960_vibrateMult;
@@ -3154,7 +3155,7 @@ void ft_8008EC90(ftCo_GObj* gobj)
                     ftCo_800DE854(gobj);
                     ftCo_800DCE34(other_gobj, gobj);
                     ftCommon_8007DB58(gobj);
-                    ft_8008E908(gobj, facing_dir);
+                    ftCo_8008E908(gobj, facing_dir);
                     other_fp->x1828 = 1;
                     goto ret_A8C;
                 }
@@ -3178,13 +3179,13 @@ void ft_8008EC90(ftCo_GObj* gobj)
                 if (other_fp->dmg.kb_applied) {
                     ftCo_800DCE34(other_gobj, gobj);
                     ftCommon_8007DB58(gobj);
-                    ft_8008E908(gobj, facing_dir);
+                    ftCo_8008E908(gobj, facing_dir);
                     other_fp->x1828 = 1;
                     goto ret_A8C;
                 }
                 ftCo_800DCE34(other_gobj, gobj);
                 ftCommon_8007DB58(gobj);
-                ft_8008E908(gobj, facing_dir);
+                ftCo_8008E908(gobj, facing_dir);
                 ftCommon_8007DB58(other_gobj);
                 ftCo_800DE2F0(other_gobj);
                 goto ret_A8C;
@@ -3196,19 +3197,19 @@ void ft_8008EC90(ftCo_GObj* gobj)
                     other_fp->dmg.x183C_applied = fp->dmg.x183C_applied;
                     other_fp->x1960_vibrateMult = fp->x1960_vibrateMult;
                     if (inlineB0(gobj)) {
-                        ft_8008E9D0(gobj);
+                        ftCo_8008E9D0(gobj);
                     }
                     fp->x1828 = 2;
                     goto ret_A8C;
                 }
                 ftCo_800DCE34(gobj, other_gobj);
                 ftCommon_8007DB58(gobj);
-                ft_8008E908(gobj, facing_dir);
+                ftCo_8008E908(gobj, facing_dir);
                 fp->x1828 = 1;
                 goto ret_A8C;
             }
             if (inlineB0(gobj)) {
-                ft_8008E9D0(gobj);
+                ftCo_8008E9D0(gobj);
             }
             goto ret_A8C;
         }
@@ -3218,7 +3219,7 @@ void ft_8008EC90(ftCo_GObj* gobj)
             }
             ftCo_800DCE34(gobj, fp->x1A58_interactedFighter);
             ftCommon_8007DB58(gobj);
-            ft_8008E908(gobj, facing_dir);
+            ftCo_8008E908(gobj, facing_dir);
             other_fp->x1828 = 1;
             goto ret_A8C;
         }
@@ -3226,7 +3227,7 @@ void ft_8008EC90(ftCo_GObj* gobj)
         ftCo_800DCFD4(fp->x1A58_interactedFighter);
         ftCo_800DCE34(gobj, fp->x1A58_interactedFighter);
         ftCommon_8007DB58(gobj);
-        ft_8008E908(gobj, facing_dir);
+        ftCo_8008E908(gobj, facing_dir);
     } else if (fp->item_gobj != NULL && it_8026B2D8(fp->item_gobj) &&
                fp->x2222_b0)
     {
@@ -3234,11 +3235,11 @@ void ft_8008EC90(ftCo_GObj* gobj)
     } else if (!ftCo_8009F0F0(gobj) && !ftCo_800C0CB8(gobj) &&
                fp->motion_id == ftCo_MS_DamageIce)
     {
-        ft_8008DCE0(gobj, ftCo_MS_DamageIce, fp->facing_dir);
+        ftCo_8008DCE0(gobj, ftCo_MS_DamageIce, fp->facing_dir);
         ftCo_80091030(gobj);
     } else if (!ftCo_800C74F4(gobj)) {
         ftCommon_8007DB58(gobj);
-        ft_8008E908(gobj, facing_dir);
+        ftCo_8008E908(gobj, facing_dir);
     }
 ret_A8C:
     if (ret0) {
@@ -3249,7 +3250,7 @@ ret_A8C:
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm /* 08F744 */ void ft_8008F744(ftCo_GObj* gobj)
+asm /* 08F744 */ void ftCo_8008F744(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8008F744 0008C324  7C 08 02 A6 */	mflr r0
@@ -3285,7 +3286,7 @@ lbl_8008F780:
 /* 8008F7B8 0008C398  B0 1F 20 98 */	sth r0, 0x2098(r31)
 /* 8008F7BC 0008C39C  4B FF 00 B1 */	bl ftCommon_8007F86C
 /* 8008F7C0 0008C3A0  7F C3 F3 78 */	mr r3, r30
-/* 8008F7C4 0008C3A4  48 03 5A 7D */	bl ft_800C5240
+/* 8008F7C4 0008C3A4  48 03 5A 7D */	bl ftCo_800C5240
 /* 8008F7C8 0008C3A8  2C 03 00 00 */	cmpwi r3, 0
 /* 8008F7CC 0008C3AC  41 82 00 0C */	beq lbl_8008F7D8
 /* 8008F7D0 0008C3B0  7F E3 FB 78 */	mr r3, r31
@@ -3301,7 +3302,7 @@ lbl_8008F7D8:
 #pragma pop
 #else
 
-void ft_8008F744(ftCo_GObj* gobj)
+void ftCo_8008F744(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->mv.co.damage.x0 > 0) {
@@ -3312,7 +3313,7 @@ void ft_8008F744(ftCo_GObj* gobj)
             fp->x221C_b6 = false;
             fp->x2098 = p_ftCommonData->x4CC;
             ftCommon_8007F86C(gobj);
-            if (ft_800C5240(gobj)) {
+            if (ftCo_800C5240(gobj)) {
                 ftCo_800C554C((Fighter*) fp);
             }
         }
@@ -3357,7 +3358,7 @@ lbl_8008F828:
 /* 8008F860 0008C440  B0 1E 20 98 */	sth r0, 0x2098(r30)
 /* 8008F864 0008C444  4B FF 00 09 */	bl ftCommon_8007F86C
 /* 8008F868 0008C448  7F E3 FB 78 */	mr r3, r31
-/* 8008F86C 0008C44C  48 03 59 D5 */	bl ft_800C5240
+/* 8008F86C 0008C44C  48 03 59 D5 */	bl ftCo_800C5240
 /* 8008F870 0008C450  2C 03 00 00 */	cmpwi r3, 0
 /* 8008F874 0008C454  41 82 00 0C */	beq lbl_8008F880
 /* 8008F878 0008C458  7F C3 F3 78 */	mr r3, r30
@@ -3377,7 +3378,7 @@ lbl_8008F880:
 /* 8008F8AC 0008C48C  54 00 DF FF */	rlwinm. r0, r0, 0x1b, 0x1f, 0x1f
 /* 8008F8B0 0008C490  41 82 00 10 */	beq lbl_8008F8C0
 /* 8008F8B4 0008C494  7F E3 FB 78 */	mr r3, r31
-/* 8008F8B8 0008C498  48 00 0E C9 */	bl ft_80090780
+/* 8008F8B8 0008C498  48 00 0E C9 */	bl ftCo_80090780
 /* 8008F8BC 0008C49C  48 00 00 64 */	b lbl_8008F920
 lbl_8008F8C0:
 /* 8008F8C0 0008C4A0  80 9F 00 2C */	lwz r4, 0x2c(r31)
@@ -3394,7 +3395,7 @@ lbl_8008F8C0:
 /* 8008F8EC 0008C4CC  38 7F 00 00 */	addi r3, r31, 0
 /* 8008F8F0 0008C4D0  60 00 0C 00 */	ori r0, r0, 0xc00
 /* 8008F8F4 0008C4D4  90 04 06 68 */	stw r0, 0x668(r4)
-/* 8008F8F8 0008C4D8  48 03 BF 79 */	bl ft_800CB870
+/* 8008F8F8 0008C4D8  48 03 BF 79 */	bl ftCo_800CB870
 /* 8008F8FC 0008C4DC  48 00 00 08 */	b lbl_8008F904
 lbl_8008F900:
 /* 8008F900 0008C4E0  38 60 00 00 */	li r3, 0
@@ -3402,7 +3403,7 @@ lbl_8008F904:
 /* 8008F904 0008C4E4  2C 03 00 00 */	cmpwi r3, 0
 /* 8008F908 0008C4E8  40 82 00 18 */	bne lbl_8008F920
 /* 8008F90C 0008C4EC  7F E3 FB 78 */	mr r3, r31
-/* 8008F910 0008C4F0  48 03 CE 21 */	bl ft_800CC730
+/* 8008F910 0008C4F0  48 03 CE 21 */	bl ftCo_800CC730
 /* 8008F914 0008C4F4  48 00 00 0C */	b lbl_8008F920
 lbl_8008F918:
 /* 8008F918 0008C4F8  7F E3 FB 78 */	mr r3, r31
@@ -3423,7 +3424,7 @@ static bool inlineC0(ftCo_GObj* gobj)
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->mv.co.damage.x14 && fp->mv.co.damage.x14 <= p_ftCommonData->x1D0) {
         fp->input.x668 |= HSD_PAD_XY;
-        return ft_800CB870(gobj);
+        return ftCo_800CB870(gobj);
     } else {
         return false;
     }
@@ -3436,13 +3437,13 @@ void ftCo_Damage_Anim(ftCo_GObj* gobj)
     u8 _[8] = { 0 };
 #endif
     ftCo_Fighter* fp = gobj->user_data;
-    ft_8008F744(gobj);
+    ftCo_8008F744(gobj);
     if (!ftAnim_IsFramesRemaining(gobj) && !fp->x221C_b6) {
         if (fp->ground_or_air == GA_Air) {
             if (fp->x2224_flag.bits.b2) {
-                ft_80090780(gobj);
+                ftCo_80090780(gobj);
             } else if (!inlineC0(gobj)) {
-                ft_800CC730(gobj);
+                ftCo_800CC730(gobj);
             }
         } else {
             ft_8008A2BC(gobj);
@@ -3504,7 +3505,7 @@ lbl_8008F9C0:
 /* 8008F9E0 0008C5C0  38 7F 00 00 */	addi r3, r31, 0
 /* 8008F9E4 0008C5C4  38 80 00 79 */	li r4, 0x79
 /* 8008F9E8 0008C5C8  38 A0 00 00 */	li r5, 0
-/* 8008F9EC 0008C5CC  48 03 05 E5 */	bl ft_800BFFD0
+/* 8008F9EC 0008C5CC  48 03 05 E5 */	bl ftCo_800BFFD0
 /* 8008F9F0 0008C5D0  88 1F 22 27 */	lbz r0, 0x2227(r31)
 /* 8008F9F4 0008C5D4  38 60 00 01 */	li r3, 1
 /* 8008F9F8 0008C5D8  50 60 1F 38 */	rlwimi r0, r3, 3, 0x1c, 0x1c
@@ -3513,7 +3514,7 @@ lbl_8008F9C0:
 /* 8008FA04 0008C5E4  48 00 00 28 */	b lbl_8008FA2C
 lbl_8008FA08:
 /* 8008FA08 0008C5E8  7F C3 F3 78 */	mr r3, r30
-/* 8008FA0C 0008C5EC  48 03 B4 75 */	bl ft_800CAE80
+/* 8008FA0C 0008C5EC  48 03 B4 75 */	bl ftCo_800CAE80
 /* 8008FA10 0008C5F0  2C 03 00 00 */	cmpwi r3, 0
 /* 8008FA14 0008C5F4  41 82 00 14 */	beq lbl_8008FA28
 /* 8008FA18 0008C5F8  C0 1F 23 40 */	lfs f0, 0x2340(r31)
@@ -3557,11 +3558,11 @@ bool doIasa(ftCo_GObj* gobj)
     }
     fp->x8c_kb_vel.x = fp->x8c_kb_vel.y = fp->x8c_kb_vel.z = 0;
     ftCommon_8007EBAC(fp, 12, 0);
-    ft_800BFFD0(fp, 121, 0);
+    ftCo_800BFFD0(fp, 121, 0);
     fp->x2227_flag.bits.b4 = true;
     return true;
 ret_inline:
-    if (ft_800CAE80(gobj)) {
+    if (ftCo_800CAE80(gobj)) {
         fp->mv.co.damage.x14 = fp->mv.co.damage.x0;
         return true;
     }
@@ -3585,7 +3586,7 @@ asm void ftCo_Damage_IASA(ftCo_GObj*)
 /* 8008FA64 0008C644  54 00 FF FF */	rlwinm. r0, r0, 0x1f, 0x1f, 0x1f
 /* 8008FA68 0008C648  40 82 00 8C */	bne lbl_8008FAF4
 /* 8008FA6C 0008C64C  7F C3 F3 78 */	mr r3, r30
-/* 8008FA70 0008C650  48 03 57 D1 */	bl ft_800C5240
+/* 8008FA70 0008C650  48 03 57 D1 */	bl ftCo_800C5240
 /* 8008FA74 0008C654  2C 03 00 00 */	cmpwi r3, 0
 /* 8008FA78 0008C658  41 82 00 28 */	beq lbl_8008FAA0
 /* 8008FA7C 0008C65C  80 1F 00 E0 */	lwz r0, 0xe0(r31)
@@ -3616,7 +3617,7 @@ lbl_8008FAD0:
 /* 8008FAD4 0008C6B4  2C 00 00 01 */	cmpwi r0, 1
 /* 8008FAD8 0008C6B8  40 82 00 10 */	bne lbl_8008FAE8
 /* 8008FADC 0008C6BC  7F C3 F3 78 */	mr r3, r30
-/* 8008FAE0 0008C6C0  48 03 CF CD */	bl ft_800CCAAC
+/* 8008FAE0 0008C6C0  48 03 CF CD */	bl ftCo_800CCAAC
 /* 8008FAE4 0008C6C4  48 00 00 1C */	b lbl_8008FB00
 lbl_8008FAE8:
 /* 8008FAE8 0008C6C8  7F C3 F3 78 */	mr r3, r30
@@ -3641,7 +3642,7 @@ void ftCo_Damage_IASA(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (!fp->x221C_b6) {
-        if (ft_800C5240(gobj)) {
+        if (ftCo_800C5240(gobj)) {
             if (fp->ground_or_air == GA_Air) {
                 ftCo_HammerFall_IASA(gobj);
             } else {
@@ -3654,7 +3655,7 @@ void ftCo_Damage_IASA(ftCo_GObj* gobj)
                 fp->input.x668 |= HSD_PAD_XY;
             }
             if (fp->ground_or_air == GA_Air) {
-                ft_800CCAAC(gobj);
+                ftCo_800CCAAC(gobj);
             } else {
                 ftCo_Wait_IASA(gobj);
             }
@@ -3709,7 +3710,7 @@ lbl_8008FBA4:
 /* 8008FBB8 0008C798  54 00 DF FF */	rlwinm. r0, r0, 0x1b, 0x1f, 0x1f
 /* 8008FBBC 0008C79C  41 82 00 10 */	beq lbl_8008FBCC
 /* 8008FBC0 0008C7A0  7F C3 F3 78 */	mr r3, r30
-/* 8008FBC4 0008C7A4  48 00 81 7D */	bl ft_80097D40
+/* 8008FBC4 0008C7A4  48 00 81 7D */	bl ftCo_80097D40
 /* 8008FBC8 0008C7A8  48 00 00 B4 */	b lbl_8008FC7C
 lbl_8008FBCC:
 /* 8008FBCC 0008C7AC  C0 1F 00 8C */	lfs f0, 0x8c(r31)
@@ -3746,7 +3747,7 @@ lbl_8008FC38:
 /* 8008FC44 0008C824  4C 41 13 82 */	cror 2, 1, 2
 /* 8008FC48 0008C828  40 82 00 10 */	bne lbl_8008FC58
 /* 8008FC4C 0008C82C  7F C3 F3 78 */	mr r3, r30
-/* 8008FC50 0008C830  48 00 80 F1 */	bl ft_80097D40
+/* 8008FC50 0008C830  48 00 80 F1 */	bl ftCo_80097D40
 /* 8008FC54 0008C834  48 00 00 28 */	b lbl_8008FC7C
 lbl_8008FC58:
 /* 8008FC58 0008C838  C0 03 01 E4 */	lfs f0, 0x1e4(r3)
@@ -3754,7 +3755,7 @@ lbl_8008FC58:
 /* 8008FC60 0008C840  4C 41 13 82 */	cror 2, 1, 2
 /* 8008FC64 0008C844  40 82 00 10 */	bne lbl_8008FC74
 /* 8008FC68 0008C848  7F C3 F3 78 */	mr r3, r30
-/* 8008FC6C 0008C84C  48 04 5F 8D */	bl ft_800D5BF8
+/* 8008FC6C 0008C84C  48 04 5F 8D */	bl ftCo_800D5BF8
 /* 8008FC70 0008C850  48 00 00 0C */	b lbl_8008FC7C
 lbl_8008FC74:
 /* 8008FC74 0008C854  7F E3 FB 78 */	mr r3, r31
@@ -3777,13 +3778,13 @@ void ftCo_Damage_Coll(ftCo_GObj* gobj)
         ft_800848DC(gobj, ftCo_8008FC94);
     } else if (ft_80081DD4(gobj)) {
         if (fp->x2224_flag.bits.b2) {
-            ft_80097D40(gobj);
+            ftCo_80097D40(gobj);
         } else {
             float mag = sqrtf(VEC2_SQ_LEN(fp->x8c_kb_vel));
             if (mag >= p_ftCommonData->x1E0) {
-                ft_80097D40(gobj);
+                ftCo_80097D40(gobj);
             } else if (mag >= p_ftCommonData->x1E4) {
-                ft_800D5BF8(gobj);
+                ftCo_800D5BF8(gobj);
             } else {
                 ftCommon_8007D7FC(fp);
             }
@@ -3963,7 +3964,7 @@ lbl_8008FE64:
 /* 8008FE9C 0008CA7C  B0 1D 20 98 */	sth r0, 0x2098(r29)
 /* 8008FEA0 0008CA80  4B FE F9 CD */	bl ftCommon_8007F86C
 /* 8008FEA4 0008CA84  7F E3 FB 78 */	mr r3, r31
-/* 8008FEA8 0008CA88  48 03 53 99 */	bl ft_800C5240
+/* 8008FEA8 0008CA88  48 03 53 99 */	bl ftCo_800C5240
 /* 8008FEAC 0008CA8C  2C 03 00 00 */	cmpwi r3, 0
 /* 8008FEB0 0008CA90  41 82 00 0C */	beq lbl_8008FEBC
 /* 8008FEB4 0008CA94  7F A3 EB 78 */	mr r3, r29
@@ -3990,7 +3991,7 @@ lbl_8008FEBC:
 /* 8008FF04 0008CAE4  38 7F 00 00 */	addi r3, r31, 0
 /* 8008FF08 0008CAE8  60 00 0C 00 */	ori r0, r0, 0xc00
 /* 8008FF0C 0008CAEC  90 04 06 68 */	stw r0, 0x668(r4)
-/* 8008FF10 0008CAF0  48 03 B9 61 */	bl ft_800CB870
+/* 8008FF10 0008CAF0  48 03 B9 61 */	bl ftCo_800CB870
 /* 8008FF14 0008CAF4  48 00 00 08 */	b lbl_8008FF1C
 lbl_8008FF18:
 /* 8008FF18 0008CAF8  38 60 00 00 */	li r3, 0
@@ -3998,7 +3999,7 @@ lbl_8008FF1C:
 /* 8008FF1C 0008CAFC  2C 03 00 00 */	cmpwi r3, 0
 /* 8008FF20 0008CB00  40 82 00 0C */	bne lbl_8008FF2C
 /* 8008FF24 0008CB04  7F E3 FB 78 */	mr r3, r31
-/* 8008FF28 0008CB08  48 00 08 59 */	bl ft_80090780
+/* 8008FF28 0008CB08  48 00 08 59 */	bl ftCo_80090780
 lbl_8008FF2C:
 /* 8008FF2C 0008CB0C  80 01 00 44 */	lwz r0, 0x44(r1)
 /* 8008FF30 0008CB10  83 E1 00 3C */	lwz r31, 0x3c(r1)
@@ -4040,10 +4041,10 @@ void ftCo_DamageFly_Anim(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     inlineD0(gobj);
-    ft_8008F744(gobj);
+    ftCo_8008F744(gobj);
     if (!ftAnim_IsFramesRemaining(gobj) && !fp->x221C_b6) {
         if (!inlineC0(gobj)) {
-            ft_80090780(gobj);
+            ftCo_80090780(gobj);
         }
     }
 }
@@ -4225,7 +4226,7 @@ void ftCo_80090184(ftCo_GObj* gobj)
 {
     RETURN_IF(ftCo_80098928(gobj))
     RETURN_IF(ftCo_8009872C(gobj))
-    ft_80097D40(gobj);
+    ftCo_80097D40(gobj);
 }
 
 #if defined(MUST_MATCH) && !defined(WIP)
@@ -4306,7 +4307,7 @@ lbl_8009029C:
 /* 800902D4 0008CEB4  B0 1D 20 98 */	sth r0, 0x2098(r29)
 /* 800902D8 0008CEB8  4B FE F5 95 */	bl ftCommon_8007F86C
 /* 800902DC 0008CEBC  7F E3 FB 78 */	mr r3, r31
-/* 800902E0 0008CEC0  48 03 4F 61 */	bl ft_800C5240
+/* 800902E0 0008CEC0  48 03 4F 61 */	bl ftCo_800C5240
 /* 800902E4 0008CEC4  2C 03 00 00 */	cmpwi r3, 0
 /* 800902E8 0008CEC8  41 82 00 0C */	beq lbl_800902F4
 /* 800902EC 0008CECC  7F A3 EB 78 */	mr r3, r29
@@ -4316,7 +4317,7 @@ lbl_800902F4:
 /* 800902F8 0008CED8  54 00 FF FF */	rlwinm. r0, r0, 0x1f, 0x1f, 0x1f
 /* 800902FC 0008CEDC  40 82 00 0C */	bne lbl_80090308
 /* 80090300 0008CEE0  7F E3 FB 78 */	mr r3, r31
-/* 80090304 0008CEE4  48 00 04 7D */	bl ft_80090780
+/* 80090304 0008CEE4  48 00 04 7D */	bl ftCo_80090780
 lbl_80090308:
 /* 80090308 0008CEE8  80 01 00 44 */	lwz r0, 0x44(r1)
 /* 8009030C 0008CEEC  83 E1 00 3C */	lwz r31, 0x3c(r1)
@@ -4343,9 +4344,9 @@ void ftCo_DamageFlyRoll_Anim(ftCo_GObj* gobj)
     if (fp->mv.co.damage.x8 != 0) {
         inlineD0(gobj);
     }
-    ft_8008F744(gobj);
+    ftCo_8008F744(gobj);
     if (!fp->x221C_b6) {
-        ft_80090780(gobj);
+        ftCo_80090780(gobj);
     }
 }
 #endif
@@ -4398,7 +4399,7 @@ void ftCo_DamageFlyRoll_Coll(ftCo_GObj* gobj)
     if (ft_80081DD4(gobj)) {
         RETURN_IF(ftCo_80098928(gobj))
         RETURN_IF(ftCo_8009872C(gobj))
-        ft_80097D40(gobj);
+        ftCo_80097D40(gobj);
     } else {
         u32 env_flags = coll->env_flags;
         if (env_flags & MPCOLL_FLAGS_B11 || env_flags & MPCOLL_FLAGS_B5 ||

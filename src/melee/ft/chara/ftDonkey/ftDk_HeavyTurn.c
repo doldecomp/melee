@@ -13,7 +13,7 @@
 
 void ftDk_HeavyTurn_Anim(HSD_GObj* gobj)
 {
-    ft_800C9924(gobj);
+    ftCo_800C9924(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftDk_MS_341_800DF980(gobj);
     }
@@ -22,7 +22,7 @@ void ftDk_HeavyTurn_Anim(HSD_GObj* gobj)
 void ftDk_HeavyTurn_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->mv.dk.unk5.x0 && !ft_80094EA4(gobj)) {
+    if (fp->mv.dk.unk5.x0 && !ftCo_80094EA4(gobj)) {
         if (ftDk_MS_347_800E0378(gobj)) {
             return;
         }

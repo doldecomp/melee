@@ -364,7 +364,7 @@ static bool ftPikachu_GetBool(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr2 = fighter2->dat_attrs;
     if (fighter2->mv.pk.unk4.x18 >= pika_attr2->x88) {
         return 1;
-    } else if (ft_8009A134(gobj)) {
+    } else if (ftCo_8009A134(gobj)) {
         return 0;
     } else {
         return 1;
@@ -525,7 +525,7 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
 
         if (!(lbVector_AngleXY(&collData->floor.normal, &lstick_direction) <
               (f32) M_PI_2) &&
-            (!ft_8009A134(gobj)))
+            (!ftCo_8009A134(gobj)))
         {
             Fighter* fighter2;
             ftCommon_8007D9FC(fp);
@@ -744,7 +744,7 @@ void ftPk_SpecialAirHiEnd_Anim(HSD_GObj* gobj)
             fp->cmd_vars[0] = 2;
         }
     } else if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_80096900(gobj, 1, 0, 1, sa->xAC, sa->xB0);
+        ftCo_80096900(gobj, 1, 0, 1, sa->xAC, sa->xB0);
     }
 }
 
@@ -808,7 +808,7 @@ void ftPk_SpecialAirHiEnd_Coll(HSD_GObj* gobj)
 #endif
 
     if (ft_8008239C(gobj, fp->facing_dir, (f32*) box)) {
-        ft_800D5CB0(gobj, 0, pika_attr->xB0);
+        ftCo_800D5CB0(gobj, 0, pika_attr->xB0);
     } else if (!ftCliffCommon_80081298(gobj)) {
         /// @todo Fix weird control flow.
         return;

@@ -173,7 +173,7 @@ lbl_80071070:
 /* 800711B0 0006DD90  81 6A 00 08 */	lwz r11, 8(r10)
 /* 800711B4 0006DD94  38 0B 00 04 */	addi r0, r11, 4
 /* 800711B8 0006DD98  90 0A 00 08 */	stw r0, 8(r10)
-/* 800711BC 0006DD9C  48 02 E6 79 */	bl ft_8009F834
+/* 800711BC 0006DD9C  48 02 E6 79 */	bl ftCo_8009F834
 /* 800711C0 0006DDA0  48 00 00 0C */	b lbl_800711CC
 lbl_800711C4:
 /* 800711C4 0006DDA4  7D 44 53 78 */	mr r4, r10
@@ -207,7 +207,7 @@ Range X
 
 
 
-ft_8009F834 args:
+ftCo_8009F834 args:
 
 gobj
 gfx_id
@@ -293,8 +293,8 @@ void ftAction_80071028(Fighter_GObj* gobj, FtCmdState* cmd)
         range.x = (1 / 256.0f) *
                   gmScriptEventCast(new_var->x8, struct test5)->rangeX;
         gmScriptEventUpdatePtr(new_var->x8, struct test5);
-        ft_8009F834(gobj, gfx_id, bone, use_common_bone_id,
-                    destroy_on_state_change, &offset, &range, unk);
+        ftCo_8009F834(gobj, gfx_id, bone, use_common_bone_id,
+                      destroy_on_state_change, &offset, &range, unk);
     } else {
         // skip the gfxspawn event
         ftAction_800711DC(gobj, cmd);
@@ -2946,7 +2946,7 @@ asm void ftAction_80072A5C(Fighter_GObj* gobj, FtCmdState* cmd)
 /* 80072A7C 0006F65C  80 A5 00 00 */	lwz r5, 0(r5)
 /* 80072A80 0006F660  54 84 F6 3E */	rlwinm r4, r4, 0x1e, 0x18, 0x1f
 /* 80072A84 0006F664  54 A5 03 BE */	clrlwi r5, r5, 0xe
-/* 80072A88 0006F668  48 04 D5 49 */	bl ft_800BFFD0
+/* 80072A88 0006F668  48 04 D5 49 */	bl ftCo_800BFFD0
 /* 80072A8C 0006F66C  80 7F 00 08 */	lwz r3, 8(r31)
 /* 80072A90 0006F670  38 03 00 04 */	addi r0, r3, 4
 /* 80072A94 0006F674  90 1F 00 08 */	stw r0, 8(r31)
@@ -2966,8 +2966,8 @@ void ftAction_80072A5C(Fighter_GObj* gobj, FtCmdState* cmd)
     u8 _[8] = { 0 };
 #endif
     char* cmd_x8 = cmd->x8;
-    ft_800BFFD0(gobj->user_data, (int) (s8) ((u16) *cmd_x8 >> 2U),
-                (int) *cmd_x8 & 0x3FFFF);
+    ftCo_800BFFD0(gobj->user_data, (int) (s8) ((u16) *cmd_x8 >> 2U),
+                  (int) *cmd_x8 & 0x3FFFF);
     cmd->x8 += 4;
 }
 #endif
@@ -2991,7 +2991,7 @@ asm void ftAction_80072ABC(Fighter_GObj* gobj, FtCmdState* cmd)
 /* 80072AD4 0006F6B4  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 80072AD8 0006F6B8  A0 84 00 00 */	lhz r4, 0(r4)
 /* 80072ADC 0006F6BC  54 84 F6 3E */	rlwinm r4, r4, 0x1e, 0x18, 0x1f
-/* 80072AE0 0006F6C0  48 04 D7 21 */	bl ft_800C0200
+/* 80072AE0 0006F6C0  48 04 D7 21 */	bl ftCo_800C0200
 /* 80072AE4 0006F6C4  80 7F 00 08 */	lwz r3, 8(r31)
 /* 80072AE8 0006F6C8  38 03 00 04 */	addi r0, r3, 4
 /* 80072AEC 0006F6CC  90 1F 00 08 */	stw r0, 8(r31)
@@ -3006,7 +3006,7 @@ asm void ftAction_80072ABC(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80072ABC(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ft_800C0200(gobj->user_data, (s8) ((u16) *cmd->x8 >> 2U));
+    ftCo_800C0200(gobj->user_data, (s8) ((u16) *cmd->x8 >> 2U));
     cmd->x8 += 4;
 }
 #endif
@@ -3107,7 +3107,7 @@ asm void ftAction_80072B94(Fighter_GObj* gobj, FtCmdState* cmd)
 /* 80072BB4 0006F794  C0 25 08 94 */	lfs f1, 0x894(r5)
 /* 80072BB8 0006F798  54 84 30 34 */	rlwinm r4, r4, 6, 0, 0x1a
 /* 80072BBC 0006F79C  7C 84 36 70 */	srawi r4, r4, 6
-/* 80072BC0 0006F7A0  48 02 B7 59 */	bl ft_8009E318
+/* 80072BC0 0006F7A0  48 02 B7 59 */	bl ftCo_8009E318
 /* 80072BC4 0006F7A4  80 7F 00 08 */	lwz r3, 8(r31)
 /* 80072BC8 0006F7A8  38 03 00 04 */	addi r0, r3, 4
 /* 80072BCC 0006F7AC  90 1F 00 08 */	stw r0, 8(r31)
@@ -3128,8 +3128,8 @@ void ftAction_80072B94(Fighter_GObj* gobj, FtCmdState* cmd)
 #endif
     ftCo_Fighter* fp = gobj->user_data;
     u32 cmd_x8 = *cmd->x8;
-    ft_8009E318((int) ((cmd_x8 << 6) | ((cmd_x8 >> 0x1AU) & 0x20)) >> 6, fp,
-                fp->cur_anim_frame);
+    ftCo_8009E318((int) ((cmd_x8 << 6) | ((cmd_x8 >> 0x1AU) & 0x20)) >> 6, fp,
+                  fp->cur_anim_frame);
     cmd->x8 += 4;
 }
 #endif
@@ -3319,7 +3319,7 @@ lbl_80072DAC:
 /* 80072DB8 0006F998  39 21 00 14 */	addi r9, r1, 0x14
 /* 80072DBC 0006F99C  38 C0 00 00 */	li r6, 0
 /* 80072DC0 0006F9A0  38 E0 00 00 */	li r7, 0
-/* 80072DC4 0006F9A4  48 02 CA 71 */	bl ft_8009F834
+/* 80072DC4 0006F9A4  48 02 CA 71 */	bl ftCo_8009F834
 lbl_80072DC8:
 /* 80072DC8 0006F9A8  80 01 00 60 */	lwz r0, 0x60(r1)
 /* 80072DCC 0006F9AC  2C 00 00 00 */	cmpwi r0, 0
@@ -3385,7 +3385,8 @@ void ftAction_80072CD8(Fighter_GObj* gobj, FtCmdState* cmd)
             } else {
                 var_r5 = fp->ft_data->x8->unk14;
             }
-            ft_8009F834(gobj, (int) ivec1.x, var_r5, 0, 0, &vec1, &vec0, 0.0f);
+            ftCo_8009F834(gobj, (int) ivec1.x, var_r5, 0, 0, &vec1, &vec0,
+                          0.0f);
         }
     }
     if (ivec1.y != 0) {
@@ -3476,7 +3477,7 @@ lbl_80072F08:
 /* 80072F34 0006FB14  D0 21 00 18 */	stfs f1, 0x18(r1)
 /* 80072F38 0006FB18  D0 21 00 20 */	stfs f1, 0x20(r1)
 /* 80072F3C 0006FB1C  D0 21 00 14 */	stfs f1, 0x14(r1)
-/* 80072F40 0006FB20  48 02 C8 F5 */	bl ft_8009F834
+/* 80072F40 0006FB20  48 02 C8 F5 */	bl ftCo_8009F834
 /* 80072F44 0006FB24  80 01 00 60 */	lwz r0, 0x60(r1)
 /* 80072F48 0006FB28  2C 00 00 00 */	cmpwi r0, 0
 /* 80072F4C 0006FB2C  41 82 00 2C */	beq lbl_80072F78
@@ -3563,7 +3564,7 @@ void ftAction_80072E4C(Fighter_GObj* gobj, FtCmdState* cmd)
         vec0.y = 0.0f;
         vec1.x = 0.0f;
         vec0.x = 0.0f;
-        ft_8009F834(gobj, ivec1.x, 0, 0, 0, &vec1, &vec0, 0.0f);
+        ftCo_8009F834(gobj, ivec1.x, 0, 0, 0, &vec1, &vec0, 0.0f);
         if (ivec1.y != 0) {
             ft_80088148(fp, 0x46, 0x7F, 0x40);
             if (temp_r29 == 0) {
@@ -3628,7 +3629,7 @@ asm void ftAction_80073008(Fighter_GObj* gobj, FtCmdState* cmd)
 /* 8007307C 0006FC5C  EC 21 18 28 */	fsubs f1, f1, f3
 /* 80073080 0006FC60  D8 01 00 18 */	stfd f0, 0x18(r1)
 /* 80073084 0006FC64  80 81 00 1C */	lwz r4, 0x1c(r1)
-/* 80073088 0006FC68  48 06 BD FD */	bl ft_800DEE84
+/* 80073088 0006FC68  48 06 BD FD */	bl ftCo_800DEE84
 /* 8007308C 0006FC6C  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 80073090 0006FC70  38 21 00 38 */	addi r1, r1, 0x38
 /* 80073094 0006FC74  7C 08 03 A6 */	mtlr r0
@@ -3646,9 +3647,9 @@ void ftAction_80073008(Fighter_GObj* gobj, FtCmdState* cmd)
         char* temp_r6 = cmd->x8;
         u8 temp_r5 = (u8) M2C_FIELD(temp_r6, s8*, 0);
         cmd->x8 = temp_r6 + 4;
-        ft_800DEE84((int) (float) temp_r5, temp_r5, temp_r6, temp_r8_2,
-                    (float) temp_r8_2,
-                    0.003906f * (float) M2C_FIELD(temp_r8, u16*, 2));
+        ftCo_800DEE84((int) (float) temp_r5, temp_r5, temp_r6, temp_r8_2,
+                      (float) temp_r8_2,
+                      0.003906f * (float) M2C_FIELD(temp_r8, u16*, 2));
     }
 }
 #endif
@@ -3675,7 +3676,7 @@ asm void ftAction_800730B8(Fighter_GObj* gobj, FtCmdState* cmd)
 /* 800730D8 0006FCB8  88 84 00 00 */	lbz r4, 0(r4)
 /* 800730DC 0006FCBC  54 05 FE 3E */	rlwinm r5, r0, 0x1f, 0x18, 0x1f
 /* 800730E0 0006FCC0  54 84 FF FE */	rlwinm r4, r4, 0x1f, 0x1f, 0x1f
-/* 800730E4 0006FCC4  48 05 5A 7D */	bl ft_800C8B60
+/* 800730E4 0006FCC4  48 05 5A 7D */	bl ftCo_800C8B60
 /* 800730E8 0006FCC8  80 7F 00 08 */	lwz r3, 8(r31)
 /* 800730EC 0006FCCC  38 03 00 04 */	addi r0, r3, 4
 /* 800730F0 0006FCD0  90 1F 00 08 */	stw r0, 8(r31)
@@ -3695,8 +3696,8 @@ void ftAction_800730B8(Fighter_GObj* gobj, FtCmdState* cmd)
     u8 _[8] = { 0 };
 #endif
     char* cmd_x8 = cmd->x8;
-    ft_800C8B60(gobj->user_data, ((u8) *cmd_x8 >> 1U) & 1,
-                (s8) ((u16) *cmd_x8 >> 1U));
+    ftCo_800C8B60(gobj->user_data, ((u8) *cmd_x8 >> 1U) & 1,
+                  (s8) ((u16) *cmd_x8 >> 1U));
     cmd->x8 += 4;
 }
 #endif
@@ -3768,7 +3769,7 @@ asm void ftAction_80073118(Fighter_GObj* gobj, FtCmdState* cmd)
 /* 800731EC 0006FDCC  EC 47 01 72 */	fmuls f2, f7, f5
 /* 800731F0 0006FDD0  EC 87 01 32 */	fmuls f4, f7, f4
 /* 800731F4 0006FDD4  EC A7 00 32 */	fmuls f5, f7, f0
-/* 800731F8 0006FDD8  48 02 B5 1D */	bl ft_8009E714
+/* 800731F8 0006FDD8  48 02 B5 1D */	bl ftCo_8009E714
 /* 800731FC 0006FDDC  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 80073200 0006FDE0  38 21 00 38 */	addi r1, r1, 0x38
 /* 80073204 0006FDE4  7C 08 03 A6 */	mtlr r0
@@ -3791,12 +3792,13 @@ void ftAction_80073118(Fighter_GObj* gobj, FtCmdState* cmd)
             {
                 char* cmd_x8 = cmd->x8;
                 cmd->x8 = cmd_x8 + 4;
-                ft_8009E714(temp_r10, M2C_FIELD(cmd_x8, s16*, 0), cmd_x8,
-                            temp_r10, 0.003906f * M2C_FIELD(cmd_x8, s16*, 0),
-                            0.003906f * M2C_FIELD(cmd_x8, s16*, 2),
-                            0.003906f * M2C_FIELD(cmd_x8, s16*, 0),
-                            0.003906f * M2C_FIELD(cmd_x8, s16*, 2),
-                            0.003906f * M2C_FIELD(cmd_x8, s16*, 2), 0.003906f);
+                ftCo_8009E714(temp_r10, M2C_FIELD(cmd_x8, s16*, 0), cmd_x8,
+                              temp_r10, 0.003906f * M2C_FIELD(cmd_x8, s16*, 0),
+                              0.003906f * M2C_FIELD(cmd_x8, s16*, 2),
+                              0.003906f * M2C_FIELD(cmd_x8, s16*, 0),
+                              0.003906f * M2C_FIELD(cmd_x8, s16*, 2),
+                              0.003906f * M2C_FIELD(cmd_x8, s16*, 2),
+                              0.003906f);
             }
         }
     }

@@ -22,7 +22,7 @@ void ft_8007C114(HSD_GObj* gobj)
     if (fp->item_gobj != NULL) {
         switch (itGetKind(fp->item_gobj)) {
         case It_Kind_Hammer:
-            ft_800C555C(gobj);
+            ftCo_800C555C(gobj);
             break;
         }
     }

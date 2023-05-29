@@ -225,7 +225,7 @@ void ftZd_SpecialLw2_Anim(HSD_GObj* gobj)
 void ftZd_SpecialAirLw2_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 

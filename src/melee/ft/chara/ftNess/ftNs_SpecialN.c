@@ -414,11 +414,11 @@ void ftNs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
         f32 landing_lag = sa->x1C_PKFLASH_LANDING_LAG;
 
         if (landing_lag == 0) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
             return;
         }
 
-        ft_80096900(gobj, 1, 0, true, 1, sa->x1C_PKFLASH_LANDING_LAG);
+        ftCo_80096900(gobj, 1, 0, true, 1, sa->x1C_PKFLASH_LANDING_LAG);
     }
 }
 

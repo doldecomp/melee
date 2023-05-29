@@ -34,7 +34,7 @@
 /* static */ float const ftCo_804D85B0 = deg_to_rad;
 #endif
 
-bool ft_80094E54(Fighter* fp)
+bool ftCo_80094E54(Fighter* fp)
 {
     if (fp->input.x668 & HSD_PAD_A &&
         (fp->input.held_inputs & HSD_PAD_LR || !it_8026B30C(fp->item_gobj)))
@@ -46,7 +46,7 @@ bool ft_80094E54(Fighter* fp)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm bool ft_80094EA4(ftCo_GObj* gobj)
+asm bool ftCo_80094EA4(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80094EA4 00091A84  7C 08 02 A6 */	mflr r0
@@ -258,7 +258,7 @@ static FtMotionId getHeavyThrowMsid(ftCo_Fighter* fp, float arg1)
     }
 }
 
-int ft_80094EA4(HSD_GObj* gobj)
+int ftCo_80094EA4(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -344,12 +344,12 @@ int ft_80094EA4(HSD_GObj* gobj)
 }
 #endif
 
-int ft_8009515C(ftCo_GObj* gobj)
+int ftCo_8009515C(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->item_gobj != NULL && fp->input.x668 & HSD_PAD_A) {
         if (fp->mv.co.itemthrow.x20 != 0) {
-            ft_800957F4(gobj, ftCo_MS_LightThrowDash);
+            ftCo_800957F4(gobj, ftCo_MS_LightThrowDash);
         } else {
             ftCo_80095A30(gobj);
         }
@@ -364,7 +364,7 @@ int ft_8009515C(ftCo_GObj* gobj)
 bool ftCo_800951D0(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (fp->item_gobj != NULL && ft_80094E54(fp)) {
+    if (fp->item_gobj != NULL && ftCo_80094E54(fp)) {
         ftCo_80095A30(gobj);
         return true;
     }
@@ -374,8 +374,8 @@ bool ftCo_800951D0(ftCo_GObj* gobj)
 bool ftCo_80095254(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (fp->item_gobj != NULL && ft_80094E54(fp)) {
-        ft_800957F4(gobj, ftCo_MS_LightThrowDash);
+    if (fp->item_gobj != NULL && ftCo_80094E54(fp)) {
+        ftCo_800957F4(gobj, ftCo_MS_LightThrowDash);
         return true;
     }
     return false;
@@ -385,7 +385,7 @@ bool ftCo_800952DC(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->item_gobj != NULL && fp->input.held_inputs & HSD_PAD_LR) {
-        ft_800957F4(gobj, ftCo_MS_LightThrowDash);
+        ftCo_800957F4(gobj, ftCo_MS_LightThrowDash);
         return true;
     }
     return false;
@@ -393,7 +393,7 @@ bool ftCo_800952DC(ftCo_GObj* gobj)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm bool ft_80095328(HSD_GObj*, bool*)
+asm bool ftCo_80095328(HSD_GObj*, bool*)
 { // clang-format off
     nofralloc
 /* 80095328 00091F08  7C 08 02 A6 */	mflr r0
@@ -498,7 +498,7 @@ lbl_80095468:
 /* 8009548C 0009206C  40 82 00 28 */	bne lbl_800954B4
 /* 80095490 00092070  38 7D 00 00 */	addi r3, r29, 0
 /* 80095494 00092074  38 80 00 64 */	li r4, 0x64
-/* 80095498 00092078  48 00 03 5D */	bl ft_800957F4
+/* 80095498 00092078  48 00 03 5D */	bl ftCo_800957F4
 /* 8009549C 0009207C  28 1E 00 00 */	cmplwi r30, 0
 /* 800954A0 00092080  41 82 00 0C */	beq lbl_800954AC
 /* 800954A4 00092084  38 00 00 01 */	li r0, 1
@@ -509,7 +509,7 @@ lbl_800954AC:
 lbl_800954B4:
 /* 800954B4 00092094  38 7D 00 00 */	addi r3, r29, 0
 /* 800954B8 00092098  38 9E 00 00 */	addi r4, r30, 0
-/* 800954BC 0009209C  48 00 02 89 */	bl ft_80095744
+/* 800954BC 0009209C  48 00 02 89 */	bl ftCo_80095744
 /* 800954C0 000920A0  88 1F 22 24 */	lbz r0, 0x2224(r31)
 /* 800954C4 000920A4  38 60 00 01 */	li r3, 1
 /* 800954C8 000920A8  50 60 36 72 */	rlwimi r0, r3, 6, 0x19, 0x19
@@ -601,7 +601,7 @@ lbl_800955F0:
 /* 800955F0 000921D0  7C 04 03 78 */	mr r4, r0
 lbl_800955F4:
 /* 800955F4 000921D4  7F A3 EB 78 */	mr r3, r29
-/* 800955F8 000921D8  48 00 01 FD */	bl ft_800957F4
+/* 800955F8 000921D8  48 00 01 FD */	bl ftCo_800957F4
 /* 800955FC 000921DC  28 1E 00 00 */	cmplwi r30, 0
 /* 80095600 000921E0  41 82 00 0C */	beq lbl_8009560C
 /* 80095604 000921E4  38 00 00 01 */	li r0, 1
@@ -624,8 +624,8 @@ lbl_80095610:
 #pragma pop
 #else
 
-/// @todo A lot of shared code with #ft_80094EA4.
-bool ft_80095328(HSD_GObj* arg0, bool* arg1)
+/// @todo A lot of shared code with #ftCo_80094EA4.
+bool ftCo_80095328(HSD_GObj* arg0, bool* arg1)
 {
     HSD_GObj* temp_r3_2;
     float temp_f0;
@@ -690,13 +690,13 @@ bool ft_80095328(HSD_GObj* arg0, bool* arg1)
                          0) &&
                         !(M2C_FIELD(temp_r3, int*, 0x65C) & 0x80000000))
                     {
-                        ft_800957F4(arg0, 0x64);
+                        ftCo_800957F4(arg0, 0x64);
                         if ((u32) arg1 != 0U) {
                             *arg1 = 1;
                         }
                         return 1;
                     }
-                    ft_80095744(arg0, (int*) arg1);
+                    ftCo_80095744(arg0, (int*) arg1);
                     M2C_FIELD(temp_r3, u8*, 0x2224) =
                         (u8) (M2C_FIELD(temp_r3, u8*, 0x2224) | 0x40);
                     return 1;
@@ -741,7 +741,7 @@ bool ft_80095328(HSD_GObj* arg0, bool* arg1)
                     var_r4 = var_r0_5;
                 }
             }
-            ft_800957F4(arg0, var_r4);
+            ftCo_800957F4(arg0, var_r4);
             if ((u32) arg1 != 0U) {
                 *arg1 = 1;
             }
@@ -757,12 +757,12 @@ block_11:
 bool ftCo_8009563C(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (fp->item_gobj != NULL && ft_80094E54(fp) &&
+    if (fp->item_gobj != NULL && ftCo_80094E54(fp) &&
         fp->mv.co.itemthrow4.unk_timer != 0)
     {
-        ft_800957F4(gobj, fp->motion_id == ftCo_MS_EscapeF
-                              ? ftCo_MS_LightThrowF4
-                              : ftCo_MS_LightThrowB4);
+        ftCo_800957F4(gobj, fp->motion_id == ftCo_MS_EscapeF
+                                ? ftCo_MS_LightThrowF4
+                                : ftCo_MS_LightThrowB4);
         return true;
     }
     if (fp->mv.co.itemthrow4.unk_timer != 0) {
@@ -798,7 +798,7 @@ void ftCo_80095700(ftCo_GObj* gobj, enum_t arg1)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm void ft_80095744(ftCo_GObj* gobj, int*)
+asm void ftCo_80095744(ftCo_GObj* gobj, int*)
 { // clang-format off
     nofralloc
 /* 80095744 00092324  7C 08 02 A6 */	mflr r0
@@ -821,11 +821,11 @@ asm void ft_80095744(ftCo_GObj* gobj, int*)
 /* 80095788 00092368  2C 00 00 92 */	cmpwi r0, 0x92
 /* 8009578C 0009236C  40 82 00 10 */	bne lbl_8009579C
 /* 80095790 00092370  7F A3 EB 78 */	mr r3, r29
-/* 80095794 00092374  48 00 11 35 */	bl ft_800968C8
+/* 80095794 00092374  48 00 11 35 */	bl ftCo_800968C8
 /* 80095798 00092378  48 00 00 0C */	b lbl_800957A4
 lbl_8009579C:
 /* 8009579C 0009237C  7F A3 EB 78 */	mr r3, r29
-/* 800957A0 00092380  48 03 6F 91 */	bl ft_800CC730
+/* 800957A0 00092380  48 03 6F 91 */	bl ftCo_800CC730
 lbl_800957A4:
 /* 800957A4 00092384  28 1E 00 00 */	cmplwi r30, 0
 /* 800957A8 00092388  41 82 00 20 */	beq lbl_800957C8
@@ -853,7 +853,7 @@ lbl_800957C8:
 #pragma pop
 #else
 
-void ft_80095744(ftCo_GObj* gobj, int* arg1)
+void ftCo_80095744(ftCo_GObj* gobj, int* arg1)
 {
     Vec3 vec;
     /// @todo Unused stack.
@@ -864,9 +864,9 @@ void ft_80095744(ftCo_GObj* gobj, int* arg1)
     vec.x = vec.y = vec.z = 0;
     if (ftCo_GetParasolStatus(gobj) != -1) {
         if (fp->motion_id == ftCo_MS_ItemParasolFallSpecial) {
-            ft_800968C8(gobj);
+            ftCo_800968C8(gobj);
         } else {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         }
         if (arg1 != NULL) {
             *arg1 = 1;
@@ -879,17 +879,17 @@ void ft_80095744(ftCo_GObj* gobj, int* arg1)
 #endif
 
 #if defined(MUST_MATCH) && !defined(WIP)
-/* static */ void lbl_8009588C(void);
-/* static */ void lbl_8009589C(void);
+/* static */ void ftCo_8009588C(void);
+/* static */ void ftCo_8009589C(void);
 jtbl_t jtbl_803C561C = {
-    lbl_8009588C, lbl_8009589C, lbl_8009589C, lbl_8009589C, lbl_8009589C,
-    lbl_8009589C, lbl_8009588C, lbl_8009589C, lbl_8009589C, lbl_8009589C,
-    lbl_8009588C, lbl_8009589C, lbl_8009589C, lbl_8009589C, lbl_8009588C,
-    lbl_8009589C, lbl_8009589C, lbl_8009589C, lbl_8009588C, lbl_8009589C,
-    lbl_8009589C, lbl_8009589C, lbl_8009588C,
+    ftCo_8009588C, ftCo_8009589C, ftCo_8009589C, ftCo_8009589C, ftCo_8009589C,
+    ftCo_8009589C, ftCo_8009588C, ftCo_8009589C, ftCo_8009589C, ftCo_8009589C,
+    ftCo_8009588C, ftCo_8009589C, ftCo_8009589C, ftCo_8009589C, ftCo_8009588C,
+    ftCo_8009589C, ftCo_8009589C, ftCo_8009589C, ftCo_8009588C, ftCo_8009589C,
+    ftCo_8009589C, ftCo_8009589C, ftCo_8009588C,
 };
 #pragma push
-asm void ft_800957F4(ftCo_GObj* gobj, FtMotionId msid)
+asm void ftCo_800957F4(ftCo_GObj* gobj, FtMotionId msid)
 { // clang-format off
     nofralloc
 /* 800957F4 000923D4  7C 08 02 A6 */	mflr r0
@@ -924,19 +924,19 @@ lbl_80095848:
 /* 80095864 00092444  FC 40 F8 90 */	fmr f2, f31
 /* 80095868 00092448  D0 5F 23 44 */	stfs f2, 0x2344(r31)
 /* 8009586C 0009244C  80 9D 00 2C */	lwz r4, 0x2c(r29)
-/* 80095870 00092450  41 81 00 2C */	bgt lbl_8009589C
+/* 80095870 00092450  41 81 00 2C */	bgt ftCo_8009589C
 /* 80095874 00092454  3C 60 80 3C */	lis r3, jtbl_803C561C@ha
 /* 80095878 00092458  38 63 56 1C */	addi r3, r3, jtbl_803C561C@l
 /* 8009587C 0009245C  54 00 10 3A */	slwi r0, r0, 2
 /* 80095880 00092460  7C 03 00 2E */	lwzx r0, r3, r0
 /* 80095884 00092464  7C 09 03 A6 */	mtctr r0
 /* 80095888 00092468  4E 80 04 20 */	bctr
-entry lbl_8009588C
+entry ftCo_8009588C
 /* 8009588C 0009246C  C0 04 00 2C */	lfs f0, 0x2c(r4)
 /* 80095890 00092470  FC 00 00 50 */	fneg f0, f0
 /* 80095894 00092474  D0 04 23 40 */	stfs f0, 0x2340(r4)
 /* 80095898 00092478  48 00 00 0C */	b lbl_800958A4
-entry lbl_8009589C
+entry ftCo_8009589C
 /* 8009589C 0009247C  C0 04 00 2C */	lfs f0, 0x2c(r4)
 /* 800958A0 00092480  D0 04 23 40 */	stfs f0, 0x2340(r4)
 lbl_800958A4:
@@ -966,7 +966,7 @@ lbl_800958A4:
 #pragma pop
 #else
 
-void ft_800957F4(ftCo_GObj* gobj, int msid)
+void ftCo_800957F4(ftCo_GObj* gobj, int msid)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -997,14 +997,14 @@ void ft_800957F4(ftCo_GObj* gobj, int msid)
 #endif
 
 #if defined(MUST_MATCH) && !defined(WIP)
-void lbl_80095990(void);
-void lbl_800959A0(void);
+void ftCo_80095990(void);
+void ftCo_800959A0(void);
 jtbl_t jtbl_803C5678 = {
-    lbl_80095990, lbl_800959A0, lbl_800959A0, lbl_800959A0, lbl_800959A0,
-    lbl_800959A0, lbl_80095990, lbl_800959A0, lbl_800959A0, lbl_800959A0,
-    lbl_80095990, lbl_800959A0, lbl_800959A0, lbl_800959A0, lbl_80095990,
-    lbl_800959A0, lbl_800959A0, lbl_800959A0, lbl_80095990, lbl_800959A0,
-    lbl_800959A0, lbl_800959A0, lbl_80095990,
+    ftCo_80095990, ftCo_800959A0, ftCo_800959A0, ftCo_800959A0, ftCo_800959A0,
+    ftCo_800959A0, ftCo_80095990, ftCo_800959A0, ftCo_800959A0, ftCo_800959A0,
+    ftCo_80095990, ftCo_800959A0, ftCo_800959A0, ftCo_800959A0, ftCo_80095990,
+    ftCo_800959A0, ftCo_800959A0, ftCo_800959A0, ftCo_80095990, ftCo_800959A0,
+    ftCo_800959A0, ftCo_800959A0, ftCo_80095990,
 };
 #pragma push
 asm void ftCo_800958FC(ftCo_GObj* gobj, int)
@@ -1041,19 +1041,19 @@ lbl_80095950:
 /* 80095968 00092548  EC 00 08 24 */	fdivs f0, f0, f1
 /* 8009596C 0009254C  EF FF 00 32 */	fmuls f31, f31, f0
 /* 80095970 00092550  FC 40 F8 90 */	fmr f2, f31
-/* 80095974 00092554  41 81 00 2C */	bgt lbl_800959A0
+/* 80095974 00092554  41 81 00 2C */	bgt ftCo_800959A0
 /* 80095978 00092558  3C 60 80 3C */	lis r3, jtbl_803C5678@ha
 /* 8009597C 0009255C  38 63 56 78 */	addi r3, r3, jtbl_803C5678@l
 /* 80095980 00092560  54 00 10 3A */	slwi r0, r0, 2
 /* 80095984 00092564  7C 03 00 2E */	lwzx r0, r3, r0
 /* 80095988 00092568  7C 09 03 A6 */	mtctr r0
 /* 8009598C 0009256C  4E 80 04 20 */	bctr
-entry lbl_80095990
+entry ftCo_80095990
 /* 80095990 00092570  C0 04 00 2C */	lfs f0, 0x2c(r4)
 /* 80095994 00092574  FC 00 00 50 */	fneg f0, f0
 /* 80095998 00092578  D0 04 23 40 */	stfs f0, 0x2340(r4)
 /* 8009599C 0009257C  48 00 00 0C */	b lbl_800959A8
-entry lbl_800959A0
+entry ftCo_800959A0
 /* 800959A0 00092580  C0 04 00 2C */	lfs f0, 0x2c(r4)
 /* 800959A4 00092584  D0 04 23 40 */	stfs f0, 0x2340(r4)
 lbl_800959A8:
@@ -1096,7 +1096,7 @@ lbl_80095A08:
 #pragma pop
 #else
 
-/// @todo Mostly just an inline of #ft_800957F4.
+/// @todo Mostly just an inline of #ftCo_800957F4.
 void ftCo_800958FC(HSD_GObj* gobj, FtMotionId msid)
 {
     /// @todo Unused stack.
@@ -1483,7 +1483,7 @@ void ftCo_80095A30(HSD_GObj* gobj)
             }
         }
     }
-    ft_800957F4(gobj, var_r29);
+    ftCo_800957F4(gobj, var_r29);
 }
 #endif
 

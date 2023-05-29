@@ -29,7 +29,7 @@ struct _m2c_stack_ftCo_800976A4 {
 /* 0972E8 */ /* static */ void ftCo_8009794C(ftCo_GObj* gobj);
 /* 097490 */ /* static */ void ftCo_80097AF4(ftCo_GObj* gobj);
 /* 097570 */ bool ftCo_80097570(ftCo_GObj* gobj);
-/* 0976DC */ /* static */ void ft_80097D40(ftCo_GObj* gobj);
+/* 0976DC */ /* static */ void ftCo_80097D40(ftCo_GObj* gobj);
 /* 097724 */ /* static */ void ftCo_80097D88(ftCo_GObj* gobj);
 /* 09775C */ void ftCo_DownBound_Anim(ftCo_GObj* gobj);
 /* 0977B8 */ void ftCo_DownBound_IASA(ftCo_GObj* gobj);

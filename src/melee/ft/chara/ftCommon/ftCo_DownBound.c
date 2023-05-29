@@ -231,7 +231,7 @@ lbl_800977F0:
 /* 8009781C 000943FC  D0 21 00 1C */	stfs f1, 0x1c(r1)
 /* 80097820 00094400  D0 21 00 24 */	stfs f1, 0x24(r1)
 /* 80097824 00094404  D0 21 00 18 */	stfs f1, 0x18(r1)
-/* 80097828 00094408  48 00 80 0D */	bl ft_8009F834
+/* 80097828 00094408  48 00 80 0D */	bl ftCo_8009F834
 /* 8009782C 0009440C  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 80097830 00094410  2C 00 00 00 */	cmpwi r0, 0
 /* 80097834 00094414  41 82 00 60 */	beq lbl_80097894
@@ -309,7 +309,7 @@ void ftCo_800976A4(ftCo_GObj* gobj)
     vec0.x = vec1.x = 0;
     vec0.y = vec1.y = 0;
     vec0.z = vec1.z = 0;
-    ft_8009F834(gobj, ef_id, 0, 0, 0, &vec1, &vec0, 0);
+    ftCo_8009F834(gobj, ef_id, 0, 0, 0, &vec1, &vec0, 0);
     if (ivec.y != 0) {
         ftCo_80097630(fp, ftCo_DownBound_SfxIds, dist);
     }
@@ -747,7 +747,7 @@ void ftCo_80097AF4(ftCo_GObj* gobj)
 #endif
 
 #define SOLUTION 1
-void ft_80097D40(ftCo_GObj* gobj)
+void ftCo_80097D40(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
 #if SOLUTION == 0
@@ -799,7 +799,7 @@ void ftCo_DownBound_Coll(ftCo_GObj* gobj)
     u8 _[8] = { 0 };
 #endif
     if (ft_80082708(gobj) == GA_Ground) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     } else {
         RETURN_IF(ftCo_800C7CA0(gobj))
     }

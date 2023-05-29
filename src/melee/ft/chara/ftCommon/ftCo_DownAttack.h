@@ -11,7 +11,7 @@
 /* 098178 */ void ftCo_DownAttack_IASA(ftCo_GObj* gobj);
 /* 09817C */ void ftCo_DownAttack_Phys(ftCo_GObj* gobj);
 /* 09819C */ void ftCo_DownAttack_Coll(ftCo_GObj* gobj);
-/* 0981BC */ void ft_80098634(HSD_ObjAllocUnk2*);
+/* 0981BC */ void ftCo_80098634(HSD_ObjAllocUnk2*);
 /* 098238 */ /* static */ bool ftCo_800986B0(Fighter_GObj* arg0);
 /* 0984D4 */ bool ftCo_800984D4(ftCo_GObj* gobj);
 /* 09856C */ void ftCo_8009856C(ftCo_GObj*, FtMotionId msid);

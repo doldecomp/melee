@@ -24,7 +24,7 @@ void ftCo_80090574(ftCo_GObj* gobj)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm void ft_80090594(ftCo_Fighter*, enum_t, int, FtMotionId, enum_t, float)
+asm void ftCo_80090594(ftCo_Fighter*, enum_t, int, FtMotionId, enum_t, float)
 { // clang-format off
     nofralloc
 /* 80090594 0008D174  7C 08 02 A6 */	mflr r0
@@ -99,8 +99,8 @@ lbl_80090670:
 #pragma pop
 #else
 
-void ft_80090594(ftCo_Fighter* fp, enum_t arg1, int dmg, FtMotionId msid,
-                 enum_t arg4, float hitlag_mul)
+void ftCo_80090594(ftCo_Fighter* fp, enum_t arg1, int dmg, FtMotionId msid,
+                   enum_t arg4, float hitlag_mul)
 {
     if (arg1 != ftCo_MS_DeadUpFallHitCameraIce && arg1 != ftCo_MS_Rebirth &&
         !((unsigned) (arg1 - 6) > 1) && fp->motion_id != ftCo_MS_DamageIce)
@@ -124,7 +124,7 @@ void ft_80090594(ftCo_Fighter* fp, enum_t arg1, int dmg, FtMotionId msid,
 }
 #endif
 
-Vec2* ft_80090690(Fighter* fp, Vec2* shift)
+Vec2* ftCo_80090690(Fighter* fp, Vec2* shift)
 {
     if (fp->dmg.x18fa_model_shift_frames != 0) {
         u8 fp_x18F8 = fp->dmg.x18F8;
@@ -142,7 +142,7 @@ Vec2* ft_80090690(Fighter* fp, Vec2* shift)
     return NULL;
 }
 
-void ft_80090718(Fighter* fp)
+void ftCo_80090718(Fighter* fp)
 {
     if (fp->dmg.x1908 != -1) {
         ft_80088148(fp, fp->dmg.x1908, 127, 64);
@@ -154,7 +154,7 @@ void ft_80090718(Fighter* fp)
     }
 }
 
-void ft_80090780(HSD_GObj* gobj)
+void ftCo_80090780(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if ((s32) M2C_FIELD(fp, s32*, 0xE0) == 0) {
@@ -175,18 +175,18 @@ void ftCo_DamageFall_Anim(ftCo_GObj* gobj) {}
 void ftCo_DamageFall_IASA(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (!ft_800C5240(gobj)) {
+    if (!ftCo_800C5240(gobj)) {
         RETURN_IF(ftCo_SpecialAir_CheckInput(gobj))
-        RETURN_IF(ft_80095328(gobj, 0))
+        RETURN_IF(ftCo_80095328(gobj, 0))
         RETURN_IF(ftCo_800D7100(gobj))
         RETURN_IF(ftCo_800C3B10(gobj))
         RETURN_IF(ftCo_AttackAir_CheckItemThrowInput(gobj))
         RETURN_IF(ftCo_800D705C(gobj))
-        RETURN_IF(ft_800CB870(gobj))
+        RETURN_IF(ftCo_800CB870(gobj))
         if (ABS(fp->input.lstick.x) >= p_ftCommonData->x210 &&
             fp->x670_timer_lstick_tilt_x < p_ftCommonData->x214)
         {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
             return;
         }
     }

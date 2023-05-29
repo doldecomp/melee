@@ -2444,7 +2444,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
         FtMoveId_Default << 24,
         NULL,
         NULL,
-        ft_800C737C,
+        ftCo_800C737C,
         NULL,
         NULL,
     },
@@ -2454,7 +2454,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
         FtMoveId_Default << 24,
         NULL,
         NULL,
-        ft_800C737C,
+        ftCo_800C737C,
         NULL,
         NULL,
     },
@@ -2464,7 +2464,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
         FtMoveId_Default << 24,
         NULL,
         NULL,
-        ft_800C737C,
+        ftCo_800C737C,
         NULL,
         NULL,
     },
@@ -2474,7 +2474,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
         FtMoveId_Default << 24,
         NULL,
         NULL,
-        ft_800C7414,
+        ftCo_800C7414,
         NULL,
         NULL,
     },
@@ -3108,23 +3108,23 @@ void ftKb_Init_UnkMotionStates4(HSD_GObj* gobj)
     switch (fp->fv.kb.x2238) {
     case 3:
         if (fp->fv.kb.x22E8 == da->x190) {
-            ft_800BFFD0(fp, 58, 0);
+            ftCo_800BFFD0(fp, 58, 0);
         }
         break;
     case 13:
         if (fp->fv.kb.x22D4 == da->x168) {
-            ft_800BFFD0(fp, 54, 0);
+            ftCo_800BFFD0(fp, 54, 0);
         }
         break;
     case 16:
         if (fp->fv.kb.x22C8 == da->x384) {
-            ft_800BFFD0(fp, 93, 0);
+            ftCo_800BFFD0(fp, 93, 0);
             return;
         }
         break;
     case 7:
         if (fp->fv.kb.x22E0 == 6) {
-            ft_800BFFD0(fp, 87, 0);
+            ftCo_800BFFD0(fp, 87, 0);
         }
         break;
     }

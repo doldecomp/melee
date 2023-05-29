@@ -471,14 +471,14 @@ void ftCa_SpecialAirLwEnd_Anim(HSD_GObj* gobj)
 void ftCa_SpecialAirLwEndAir_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
 void ftCa_SpecialHiThrow1_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 

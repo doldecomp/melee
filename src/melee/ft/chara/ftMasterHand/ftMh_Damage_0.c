@@ -82,7 +82,7 @@ void ftMh_Damage_Anim(HSD_GObj* gobj)
         ftAnim_8006EBA4(gobj);
     }
     if (--fp->mv.mh.unk0.x8 == 0) {
-        ft_800D4F24(gobj, 0);
+        ftCo_800D4F24(gobj, 0);
     }
 }
 
@@ -103,6 +103,6 @@ void ftMh_MS_345_Anim(HSD_GObj* gobj)
         ftAnim_8006EBA4(gobj);
     }
     if (--fp->mv.mh.unk0.x8 == 0) {
-        ft_800D4F24(gobj, 0);
+        ftCo_800D4F24(gobj, 0);
     }
 }

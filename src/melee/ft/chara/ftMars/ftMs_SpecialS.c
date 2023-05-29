@@ -81,7 +81,7 @@ void ftMs_SpecialAirS1_Anim(HSD_GObj* gobj)
         if (fp->ground_or_air == GA_Ground) {
             ft_8008A2BC(gobj);
         } else {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         }
     }
 }
@@ -178,7 +178,7 @@ void ftMs_SpecialS2_Anim(HSD_GObj* gobj)
             ft_8008A2BC(gobj);
         } else {
             // MS_029_Fall
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         }
     }
 }
@@ -326,7 +326,7 @@ void ftMs_SpecialS3_Anim(HSD_GObj* gobj)
             ft_8008A2BC(gobj);
         } else {
             // MS_029_Fall
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         }
     }
 }
@@ -479,7 +479,7 @@ void ftMs_SpecialS4_Anim(HSD_GObj* gobj)
             ft_8008A2BC(gobj);
         } else {
             // MS_029_Fall
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         }
     }
 }

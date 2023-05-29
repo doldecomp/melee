@@ -42,7 +42,7 @@ void ftDk_MS_341_800DF980(HSD_GObj* gobj)
 
 void ftDk_HeavyWait0_IASA(HSD_GObj* gobj)
 {
-    if (!ft_80094EA4(gobj) && !ftDk_MS_347_800E0378(gobj) &&
+    if (!ftCo_80094EA4(gobj) && !ftDk_MS_347_800E0378(gobj) &&
         !ftDk_MS_345_800E0134(gobj))
     {
         if (ftDk_MS_341_800DFA98(gobj)) {

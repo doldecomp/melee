@@ -16,7 +16,7 @@ void ftGw_Attack100Start_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ft_800D6B00(gobj, ftGw_MS_Attack100Start);
+    ftCo_800D6B00(gobj, ftGw_MS_Attack100Start);
     fp->cb.x21BC_callback_Accessory4 = ftGw_Attack11_ItemGreenhouseSetup;
 }
 
@@ -66,7 +66,7 @@ void ftGw_Attack100Loop_Enter(HSD_GObj* gobj)
 // Animation callback
 void ftGw_Attack100Loop_Anim(HSD_GObj* gobj)
 {
-    ft_800D6C60(gobj, ftGw_Attack100End_Enter);
+    ftCo_800D6C60(gobj, ftGw_Attack100End_Enter);
 }
 
 // 0x8014C330 - Mr. Game & Watch's Rapid Jab Loop IASA callback

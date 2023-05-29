@@ -75,10 +75,10 @@ void ftDk_SpecialAirHi_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007D60C(fp);
         if (donkey_attr->SpecialHi.x64_LANDING_LAG == 0) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         } else {
-            ft_80096900(gobj, 1, 0, 1, 1,
-                        donkey_attr->SpecialHi.x64_LANDING_LAG);
+            ftCo_80096900(gobj, 1, 0, 1, 1,
+                          donkey_attr->SpecialHi.x64_LANDING_LAG);
         }
     }
 }

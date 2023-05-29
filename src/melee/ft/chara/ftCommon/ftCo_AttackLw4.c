@@ -31,9 +31,10 @@ static bool checkLStick(ftCo_Fighter* fp)
 bool ftCo_AttackLw4_CheckInput(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (checkLStick(fp) || ft_800DF3A8(fp)) {
-        if (fp->item_gobj != NULL && (ft_80094E54(fp) || ft_800DF3DC(fp))) {
-            ft_800957F4(gobj, ftCo_MS_LightThrowLw4);
+    if (checkLStick(fp) || ftCo_800DF3A8(fp)) {
+        if (fp->item_gobj != NULL && (ftCo_80094E54(fp) || ftCo_800DF3DC(fp)))
+        {
+            ftCo_800957F4(gobj, ftCo_MS_LightThrowLw4);
             return true;
         }
         switch (fp->kind) {

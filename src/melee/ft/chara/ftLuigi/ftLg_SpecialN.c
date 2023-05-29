@@ -60,7 +60,7 @@ void ftLg_SpecialN_Anim(HSD_GObj* gobj)
 void ftLg_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -77,7 +77,7 @@ void ftLg_SpecialN_IASA(HSD_GObj* gobj)
 void ftLg_SpecialAirN_IASA(HSD_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->cmd_vars[0] != 0U) {
-        ft_800CCAAC(gobj);
+        ftCo_800CCAAC(gobj);
     }
 }
 

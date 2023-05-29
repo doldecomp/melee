@@ -10,12 +10,12 @@
 
 void ftDk_HeavyJump_IASA(HSD_GObj* gobj)
 {
-    RETURN_IF(ft_80094EA4(gobj))
+    RETURN_IF(ftCo_80094EA4(gobj))
 }
 
 void ftDk_HeavyJump_Phys(HSD_GObj* gobj)
 {
-    ft_800CB438(gobj);
+    ftCo_800CB438(gobj);
 }
 
 void ftDk_HeavyJump_Coll(HSD_GObj* gobj)

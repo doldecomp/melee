@@ -290,7 +290,7 @@ lbl_8012B324:
 /* 8012B32C 000000C8  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8012B330 000000CC  40 82 00 0C */	bne lbl_8012B33C
 /* 8012B334 000000D0  7F A3 EB 78 */	mr r3, r29
-/* 8012B338 000000D4  4B FA 13 F9 */	bl ft_800CC730
+/* 8012B338 000000D4  4B FA 13 F9 */	bl ftCo_800CC730
 lbl_8012B33C:
 /* 8012B33C 000000D8  80 01 00 64 */	lwz r0, 0x64(r1)
 /* 8012B340 000000DC  83 E1 00 5C */	lwz r31, 0x5c(r1)
@@ -308,7 +308,7 @@ void ftSs_SpecialAirLwBomb_Anim(HSD_GObj* gobj)
 {
     checkStateVar1(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 #endif
@@ -319,7 +319,7 @@ void ftSs_SpecialLwBomb_IASA(HSD_GObj* gobj)
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
     if ((fp->cmd_vars[2]) && (fp->input.lstick.y < samus_attr->x80)) {
         fp->cmd_vars[2] = 0;
-        ft_800D638C(gobj);
+        ftCo_800D638C(gobj);
     }
 }
 

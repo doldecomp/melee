@@ -261,7 +261,7 @@ void ftPe_Float_Phys(HSD_GObj* gobj)
 
 void ftPe_Float_Coll(HSD_GObj* gobj)
 {
-    ft_800831CC(gobj, ft_80096CC8, ft_80082B1C);
+    ft_800831CC(gobj, ftCo_80096CC8, ft_80082B1C);
 }
 
 static float const lbl_804D97C8 = 1;

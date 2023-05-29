@@ -679,7 +679,7 @@ block_stuff : {
             fighter_data3->fv.ns.pkthunder_gfx = false;
         default:
             ftParts_8007592C(fp, 0, 0.0f);
-            ft_80097D40(gobj);
+            ftCo_80097D40(gobj);
             return;
         }
     }
@@ -1097,12 +1097,13 @@ void ftNs_SpecialAirHiEnd_Anim(HSD_GObj* gobj)
         ftCommon_8007D60C(fp);
 
         if (ness_attr->x70_PK_THUNDER_2_LANDING_LAG == 0) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
             return;
         }
 
-        ft_800969D8(gobj, 1, 0, 1, 1, ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
-                    ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
+        ftCo_800969D8(gobj, 1, 0, 1, 1,
+                      ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
+                      ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
     }
 }
 
@@ -1138,12 +1139,13 @@ void ftNs_SpecialAirHi_Anim(HSD_GObj* gobj)
         ftCommon_8007D60C(fp1);
 
         if (ness_attr->x70_PK_THUNDER_2_LANDING_LAG == 0) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
             return;
         }
 
-        ft_800969D8(gobj, 1, 0, 1, 1, ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
-                    ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
+        ftCo_800969D8(gobj, 1, 0, 1, 1,
+                      ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
+                      ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
     }
 }
 
@@ -1165,13 +1167,13 @@ void ftNs_SpecialAirHiRebound_Anim(HSD_GObj* gobj)
             ftCommon_8007D60C(fp1);
 
             if (ness_attr->x70_PK_THUNDER_2_LANDING_LAG == 0) {
-                ft_800CC730(gobj);
+                ftCo_800CC730(gobj);
                 return;
             }
 
-            ft_800969D8(gobj, 1, 0, 1, 1.0f,
-                        ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
-                        ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
+            ftCo_800969D8(gobj, 1, 0, 1, 1.0f,
+                          ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
+                          ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
         }
     }
 }
@@ -1626,7 +1628,7 @@ void ftNs_SpecialHi_Coll(HSD_GObj* gobj)
                     fighter_data2->fv.ns.pkthunder_gfx = false;
                 }
                 ftParts_8007592C(fp0, 0, 0);
-                ft_80097D40(gobj);
+                ftCo_80097D40(gobj);
                 return;
             }
         }
@@ -1804,7 +1806,7 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
             }
 
             ftParts_8007592C(fighter_r31, 0, 0);
-            ft_80097D40(gobj);
+            ftCo_80097D40(gobj);
             return;
         }
 
@@ -1967,7 +1969,7 @@ void ftNs_SpecialAirHiRebound_Coll(HSD_GObj* gobj)
             fighter_data2->fv.ns.pkthunder_gfx = false;
         }
         ftParts_8007592C(fp, 0, 0.0f);
-        ft_80097D40(gobj);
+        ftCo_80097D40(gobj);
         return;
     }
     if (ftCliffCommon_80081298(gobj) != false) {

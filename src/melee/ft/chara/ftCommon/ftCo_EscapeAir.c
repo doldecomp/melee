@@ -70,8 +70,8 @@ void ftCo_EscapeAir_Anim(Fighter_GObj* gobj)
     u8 _[8] = { 0 };
 #endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_80096900(gobj, 1, 1, false, p_ftCommonData->x340,
-                    p_ftCommonData->x344);
+        ftCo_80096900(gobj, 1, 1, false, p_ftCommonData->x340,
+                      p_ftCommonData->x344);
     }
 }
 
@@ -85,7 +85,7 @@ void ftCo_EscapeAir_IASA(ftCo_GObj* gobj)
 #ifdef MUST_MATCH
         u8 _[4] = { 0 };
 #endif
-        if (ft_80095328(gobj, &b)) {
+        if (ftCo_80095328(gobj, &b)) {
             if (b) {
                 fp->self_vel = self_vel;
             }
@@ -117,5 +117,5 @@ void ftCo_EscapeAir_Coll(Fighter_GObj* gobj)
 
 void ftCo_80099D70(ftCo_GObj* gobj, float lag)
 {
-    ft_800D5CB0(gobj, 0, p_ftCommonData->x344);
+    ftCo_800D5CB0(gobj, 0, p_ftCommonData->x344);
 }

@@ -75,7 +75,7 @@ bool ftPe_8011D518(HSD_GObj* gobj)
             fp->fv.pe.parasol_gobj = NULL;
             it_8026BB20(fp->item_gobj);
             it_8026B73C(fp->item_gobj);
-            ft_80094818(gobj, true);
+            ftCo_80094818(gobj, true);
             return true;
         }
     }
@@ -217,10 +217,10 @@ void ftPe_SpecialHiStart_Anim(HSD_GObj* gobj)
         ftPe_DatAttrs* da = fp->dat_attrs;
         if (fp->mv.pe.specialhi.kind == It_Kind_Parasol) {
             fp->motion_id = ftCo_MS_FallSpecial;
-            ft_800CEFE0(gobj, p_ftCommonData->x59C);
+            ftCo_800CEFE0(gobj, p_ftCommonData->x59C);
         } else {
             fp->motion_id = ftCo_MS_FallSpecial;
-            ft_800CEFE0(gobj, da->x90);
+            ftCo_800CEFE0(gobj, da->x90);
         }
     }
 }
@@ -296,7 +296,7 @@ void ftPe_SpecialAirHiStart_Phys(HSD_GObj* gobj)
 static void ftPe_SpecialHi_8011DD8C(HSD_GObj* gobj)
 {
     ftPe_DatAttrs* da = GET_FIGHTER(gobj)->dat_attrs;
-    ft_800D5CB0(gobj, 0, da->x74);
+    ftCo_800D5CB0(gobj, 0, da->x74);
 }
 
 static void doColl(HSD_GObj* gobj, HSD_GObjEvent cb)
@@ -307,7 +307,7 @@ static void doColl(HSD_GObj* gobj, HSD_GObjEvent cb)
             ft_80083B68(gobj);
             return;
         }
-        ft_800831CC(gobj, ft_80096CC8, cb);
+        ft_800831CC(gobj, ftCo_80096CC8, cb);
         return;
     }
     ft_80084104(gobj);
@@ -328,7 +328,7 @@ void ftPe_SpecialHiEnd_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_80096900(gobj, 0, 1, 0, da->x70, da->x74);
+        ftCo_80096900(gobj, 0, 1, 0, da->x70, da->x74);
     }
 }
 

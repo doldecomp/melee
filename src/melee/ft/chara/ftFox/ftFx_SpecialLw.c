@@ -182,7 +182,7 @@ void ftFx_SpecialAirLwStart_IASA(HSD_GObj* gobj)
 
 bool ftFx_SpecialLwStart_CheckPass(HSD_GObj* gobj)
 {
-    if (ft_80099F1C(gobj) != false) {
+    if (ftCo_80099F1C(gobj) != false) {
         ftFx_SpecialLwStart_Pass(gobj);
         return true;
     }
@@ -195,8 +195,8 @@ static void ftFx_SpecialLw_CreateReflectHit(HSD_GObj* gobj);
 
 void ftFx_SpecialLwStart_Pass(HSD_GObj* gobj)
 {
-    ft_8009A184(gobj, ftFx_MS_SpecialAirLwStart, FTFOX_SPECIALLW_COLL_FLAG,
-                GET_FIGHTER(gobj)->cur_anim_frame);
+    ftCo_8009A184(gobj, ftFx_MS_SpecialAirLwStart, FTFOX_SPECIALLW_COLL_FLAG,
+                  GET_FIGHTER(gobj)->cur_anim_frame);
 
     ftFx_SpecialLw_CreateReflectHit(gobj);
 }
@@ -329,7 +329,7 @@ void ftFx_SpecialLwLoop_IASA(HSD_GObj* gobj)
 
 void ftFx_SpecialAirLwLoop_IASA(HSD_GObj* gobj)
 {
-    if (ftFx_SpecialLwTurn_Check(gobj) == false && ft_800CB870(gobj)) {
+    if (ftFx_SpecialLwTurn_Check(gobj) == false && ftCo_800CB870(gobj)) {
         /// @remarks Kinda weird, was this stripped or are there side effects?
         return;
     }
@@ -340,7 +340,7 @@ static void ftFx_SpecialLwLoop_Pass(HSD_GObj* gobj);
 
 static bool ftFx_SpecialLwLoop_CheckPass(HSD_GObj* gobj)
 {
-    if (ft_80099F1C(gobj) != false) {
+    if (ftCo_80099F1C(gobj) != false) {
         ftFx_SpecialLwLoop_Pass(gobj);
         return true;
     }
@@ -350,8 +350,8 @@ static bool ftFx_SpecialLwLoop_CheckPass(HSD_GObj* gobj)
 
 static void ftFx_SpecialLwLoop_Pass(HSD_GObj* gobj)
 {
-    ft_8009A184(gobj, ftFx_MS_SpecialAirLwLoop, FTFOX_SPECIALLW_COLL_FLAG,
-                GET_FIGHTER(gobj)->cur_anim_frame);
+    ftCo_8009A184(gobj, ftFx_MS_SpecialAirLwLoop, FTFOX_SPECIALLW_COLL_FLAG,
+                  GET_FIGHTER(gobj)->cur_anim_frame);
 
     ftFx_SpecialLw_CreateReflectHit(gobj);
 }
@@ -680,7 +680,7 @@ bool ftFx_SpecialLwTurn_Check(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    if (ft_800C97A8(gobj) != false) {
+    if (ftCo_800C97A8(gobj) != false) {
         if ((s32) fp->ground_or_air == GA_Ground) {
             Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialLwTurn,
                                       Ft_MF_KeepGfx, NULL, 0, 1, 0);

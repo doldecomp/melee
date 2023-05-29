@@ -84,7 +84,7 @@ bool ftCo_80091A2C(ftCo_GObj* gobj)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm bool ft_80091A4C(ftCo_GObj* gobj)
+asm bool ftCo_80091A4C(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80091A4C 0008E62C  7C 08 02 A6 */	mflr r0
@@ -136,7 +136,7 @@ static inline bool inlineA0(ftCo_Fighter* fp)
     return fp->input.held_inputs & HSD_PAD_LR ? true : false;
 }
 
-int ft_80091A4C(ftCo_GObj* gobj)
+int ftCo_80091A4C(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
@@ -215,7 +215,7 @@ lbl_80091B78:
 #pragma pop
 #else
 
-/// @todo @c inline of #ft_80091A4C and something else.
+/// @todo @c inline of #ftCo_80091A4C and something else.
 bool ftCo_80091AD8(ftCo_GObj* gobj, int mv_x20)
 {
     /// @todo Unused stack.
@@ -445,7 +445,7 @@ void ftCo_80091BC4(Fighter* fp)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm void ft_80091D58(ftCo_Fighter* fp)
+asm void ftCo_80091D58(ftCo_Fighter* fp)
 { // clang-format off
     nofralloc
 /* 80091D58 0008E938  7C 08 02 A6 */	mflr r0
@@ -546,7 +546,7 @@ static inline float inlineB0(ftCo_Fighter* fp)
     }
 }
 
-void ft_80091D58(Fighter* fp)
+void ftCo_80091D58(Fighter* fp)
 {
     Vec3 scl;
     scl.x = scl.y = scl.z = inlineB0(fp);
@@ -799,7 +799,7 @@ void ftCo_80091E78(HSD_GObj* gobj, float arg1)
         } else {
             ftAnim_8006FA58(fp, 1, fp->ft_data->x20->x8);
         }
-        ft_80091D58(fp);
+        ftCo_80091D58(fp);
         inlineD0(gobj);
     }
 }
@@ -1048,7 +1048,7 @@ void ftCo_800923B4(ftCo_GObj* gobj)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm void ft_80092450(ftCo_GObj* gobj)
+asm void ftCo_80092450(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80092450 0008F030  7C 08 02 A6 */	mflr r0
@@ -1083,7 +1083,7 @@ asm void ft_80092450(ftCo_GObj* gobj)
 #pragma pop
 #else
 
-void ft_80092450(ftCo_GObj* gobj)
+void ftCo_80092450(ftCo_GObj* gobj)
 {
     AbsorbDesc absorb;
     /// @todo Unused stack.
@@ -1213,7 +1213,7 @@ void ftCo_800924C0(ftCo_GObj* gobj)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm bool ft_800925A4(ftCo_GObj*)
+asm bool ftCo_800925A4(ftCo_GObj*)
 { // clang-format off
     nofralloc
 /* 800925A4 0008F184  7C 08 02 A6 */	mflr r0
@@ -1270,7 +1270,7 @@ lbl_80092604:
 /* 8009266C 0008F24C  54 84 EF FE */	rlwinm r4, r4, 0x1d, 0x1f, 0x1f
 /* 80092670 0008F250  4B FA BA 79 */	bl pl_8003E0E8
 /* 80092674 0008F254  7F C3 F3 78 */	mr r3, r30
-/* 80092678 0008F258  48 00 64 A9 */	bl ft_80098B20
+/* 80092678 0008F258  48 00 64 A9 */	bl ftCo_80098B20
 /* 8009267C 0008F25C  38 7F 00 00 */	addi r3, r31, 0
 /* 80092680 0008F260  38 80 00 81 */	li r4, 0x81
 /* 80092684 0008F264  38 A0 00 7F */	li r5, 0x7f
@@ -1302,7 +1302,7 @@ lbl_800926C4:
 #pragma pop
 #else
 
-bool ft_800925A4(HSD_GObj* gobj)
+bool ftCo_800925A4(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -1329,7 +1329,7 @@ bool ft_800925A4(HSD_GObj* gobj)
             fp->x221A_flag.bits.b7 = false;
             fp->x221B_b0 = false;
             pl_8003E0E8(fp->player_id, fp->x221F_flag.bits.b4);
-            ft_80098B20(gobj);
+            ftCo_80098B20(gobj);
             ft_80088148(fp, 129, 127, 64);
             return true;
         }
@@ -1360,7 +1360,7 @@ asm void ftCo_GuardOn_Anim(ftCo_GObj*)
 /* 800926FC 0008F2DC  C0 3F 23 40 */	lfs f1, 0x2340(r31)
 /* 80092700 0008F2E0  EC 01 00 2A */	fadds f0, f1, f0
 /* 80092704 0008F2E4  D0 1F 23 40 */	stfs f0, 0x2340(r31)
-/* 80092708 0008F2E8  4B FF FE 9D */	bl ft_800925A4
+/* 80092708 0008F2E8  4B FF FE 9D */	bl ftCo_800925A4
 /* 8009270C 0008F2EC  2C 03 00 00 */	cmpwi r3, 0
 /* 80092710 0008F2F0  40 82 00 30 */	bne lbl_80092740
 /* 80092714 0008F2F4  C0 3F 23 40 */	lfs f1, 0x2340(r31)
@@ -1369,7 +1369,7 @@ asm void ftCo_GuardOn_Anim(ftCo_GObj*)
 /* 80092720 0008F300  4C 41 13 82 */	cror 2, 1, 2
 /* 80092724 0008F304  40 82 00 10 */	bne lbl_80092734
 /* 80092728 0008F308  7F C3 F3 78 */	mr r3, r30
-/* 8009272C 0008F30C  48 00 01 A1 */	bl ft_800928CC
+/* 8009272C 0008F30C  48 00 01 A1 */	bl ftCo_800928CC
 /* 80092730 0008F310  48 00 00 10 */	b lbl_80092740
 lbl_80092734:
 /* 80092734 0008F314  7F C3 F3 78 */	mr r3, r30
@@ -1390,9 +1390,9 @@ void ftCo_GuardOn_Anim(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     fp->mv.co.guard.x0 += 1;
-    if (ft_800925A4(gobj) == 0) {
+    if (ftCo_800925A4(gobj) == 0) {
         if (fp->mv.co.guard.x0 >= fp->x2E8) {
-            ft_800928CC(gobj);
+            ftCo_800928CC(gobj);
         } else {
             ftCo_80091E78(gobj, fp->mv.co.guard.x0 / fp->x2E8);
         }
@@ -1412,7 +1412,7 @@ asm void ftCo_GuardOn_IASA(ftCo_GObj*)
 /* 80092768 0008F348  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 8009276C 0008F34C  7C 7E 1B 78 */	mr r30, r3
 /* 80092770 0008F350  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 80092774 0008F354  48 00 04 59 */	bl ft_80092BCC
+/* 80092774 0008F354  48 00 04 59 */	bl ftCo_80092BCC
 /* 80092778 0008F358  80 1F 23 4C */	lwz r0, 0x234c(r31)
 /* 8009277C 0008F35C  2C 00 00 00 */	cmpwi r0, 0
 /* 80092780 0008F360  41 82 00 14 */	beq lbl_80092794
@@ -1429,7 +1429,7 @@ lbl_80092794:
 /* 800927A8 0008F388  40 82 00 14 */	bne lbl_800927BC
 lbl_800927AC:
 /* 800927AC 0008F38C  7F C3 F3 78 */	mr r3, r30
-/* 800927B0 0008F390  48 00 04 39 */	bl ft_80092BE8
+/* 800927B0 0008F390  48 00 04 39 */	bl ftCo_80092BE8
 /* 800927B4 0008F394  38 00 00 01 */	li r0, 1
 /* 800927B8 0008F398  48 00 00 1C */	b lbl_800927D4
 lbl_800927BC:
@@ -1444,11 +1444,11 @@ lbl_800927D4:
 /* 800927D4 0008F3B4  2C 00 00 00 */	cmpwi r0, 0
 /* 800927D8 0008F3B8  40 82 00 80 */	bne lbl_80092858
 /* 800927DC 0008F3BC  7F C3 F3 78 */	mr r3, r30
-/* 800927E0 0008F3C0  48 00 0E B5 */	bl ft_80093694
+/* 800927E0 0008F3C0  48 00 0E B5 */	bl ftCo_80093694
 /* 800927E4 0008F3C4  2C 03 00 00 */	cmpwi r3, 0
 /* 800927E8 0008F3C8  40 82 00 70 */	bne lbl_80092858
 /* 800927EC 0008F3CC  7F C3 F3 78 */	mr r3, r30
-/* 800927F0 0008F3D0  48 00 29 6D */	bl ft_8009515C
+/* 800927F0 0008F3D0  48 00 29 6D */	bl ftCo_8009515C
 /* 800927F4 0008F3D4  2C 03 00 00 */	cmpwi r3, 0
 /* 800927F8 0008F3D8  40 82 00 60 */	bne lbl_80092858
 /* 800927FC 0008F3DC  7F C3 F3 78 */	mr r3, r30
@@ -1456,11 +1456,11 @@ lbl_800927D4:
 /* 80092804 0008F3E4  2C 03 00 00 */	cmpwi r3, 0
 /* 80092808 0008F3E8  40 82 00 50 */	bne lbl_80092858
 /* 8009280C 0008F3EC  7F C3 F3 78 */	mr r3, r30
-/* 80092810 0008F3F0  48 00 69 6D */	bl ft_8009917C
+/* 80092810 0008F3F0  48 00 69 6D */	bl ftCo_8009917C
 /* 80092814 0008F3F4  2C 03 00 00 */	cmpwi r3, 0
 /* 80092818 0008F3F8  40 82 00 40 */	bne lbl_80092858
 /* 8009281C 0008F3FC  7F C3 F3 78 */	mr r3, r30
-/* 80092820 0008F400  48 04 63 7D */	bl lbl_800D8B9C
+/* 80092820 0008F400  48 04 63 7D */	bl ftCo_800D8B9C
 /* 80092824 0008F404  2C 03 00 00 */	cmpwi r3, 0
 /* 80092828 0008F408  40 82 00 30 */	bne lbl_80092858
 /* 8009282C 0008F40C  7F C3 F3 78 */	mr r3, r30
@@ -1472,7 +1472,7 @@ lbl_800927D4:
 /* 80092844 0008F424  2C 03 00 00 */	cmpwi r3, 0
 /* 80092848 0008F428  40 82 00 10 */	bne lbl_80092858
 /* 8009284C 0008F42C  7F C3 F3 78 */	mr r3, r30
-/* 80092850 0008F430  48 00 78 31 */	bl ft_8009A080
+/* 80092850 0008F430  48 00 78 31 */	bl ftCo_8009A080
 /* 80092854 0008F434  2C 03 00 00 */	cmpwi r3, 0
 lbl_80092858:
 /* 80092858 0008F438  80 01 00 1C */	lwz r0, 0x1c(r1)
@@ -1502,15 +1502,15 @@ static inline bool inlineC0(ftCo_GObj* gobj, HSD_GObjEvent cb)
 
 void ftCo_GuardOn_IASA(ftCo_GObj* gobj)
 {
-    RETURN_IF(inlineC0(gobj, ft_80092BE8))
-    RETURN_IF(ft_80093694(gobj))
-    RETURN_IF(ft_8009515C(gobj))
+    RETURN_IF(inlineC0(gobj, ftCo_80092BE8))
+    RETURN_IF(ftCo_80093694(gobj))
+    RETURN_IF(ftCo_8009515C(gobj))
     RETURN_IF(ftCo_8009980C(gobj))
-    RETURN_IF(ft_8009917C(gobj))
-    RETURN_IF(lbl_800D8B9C(gobj))
+    RETURN_IF(ftCo_8009917C(gobj))
+    RETURN_IF(ftCo_800D8B9C(gobj))
     RETURN_IF(ftCo_Catch_CheckInput(gobj))
     RETURN_IF(ftCo_800CB024(gobj))
-    RETURN_IF(ft_8009A080(gobj))
+    RETURN_IF(ftCo_8009A080(gobj))
 }
 #endif
 
@@ -1526,7 +1526,7 @@ void ftCo_GuardOn_Coll(ftCo_GObj* gobj)
     ft_800845B4(gobj);
 }
 
-void ft_800928CC(ftCo_GObj* gobj)
+void ftCo_800928CC(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     switch (fp->kind) {
@@ -1628,7 +1628,7 @@ void ftCo_80092908(ftCo_GObj* gobj)
         HSD_JObj* jobj = fp->parts[fp->ft_data->x8->unk11].joint;
         ftCo_80092158(gobj, 1048, jobj);
         fp->x2219_b0 = true;
-        ft_80092450(gobj);
+        ftCo_80092450(gobj);
         ftCo_80091E78(gobj, 1);
     }
 }
@@ -1649,7 +1649,7 @@ asm void ftCo_Guard_Anim(ftCo_GObj*)
 /* 80092A40 0008F620  C0 24 23 40 */	lfs f1, 0x2340(r4)
 /* 80092A44 0008F624  EC 01 00 2A */	fadds f0, f1, f0
 /* 80092A48 0008F628  D0 04 23 40 */	stfs f0, 0x2340(r4)
-/* 80092A4C 0008F62C  4B FF FB 59 */	bl ft_800925A4
+/* 80092A4C 0008F62C  4B FF FB 59 */	bl ftCo_800925A4
 /* 80092A50 0008F630  2C 03 00 00 */	cmpwi r3, 0
 /* 80092A54 0008F634  40 82 00 10 */	bne lbl_80092A64
 /* 80092A58 0008F638  7F E3 FB 78 */	mr r3, r31
@@ -1669,7 +1669,7 @@ void ftCo_Guard_Anim(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     fp->mv.co.guard.x0 += 1;
-    if (!ft_800925A4(gobj)) {
+    if (!ftCo_800925A4(gobj)) {
         ftCo_80091E78(gobj, 1);
     }
 }
@@ -1687,7 +1687,7 @@ asm void ftCo_Guard_IASA(ftCo_GObj*)
 /* 80092A88 0008F668  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 80092A8C 0008F66C  7C 7E 1B 78 */	mr r30, r3
 /* 80092A90 0008F670  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 80092A94 0008F674  48 00 01 39 */	bl ft_80092BCC
+/* 80092A94 0008F674  48 00 01 39 */	bl ftCo_80092BCC
 /* 80092A98 0008F678  80 1F 23 4C */	lwz r0, 0x234c(r31)
 /* 80092A9C 0008F67C  2C 00 00 00 */	cmpwi r0, 0
 /* 80092AA0 0008F680  41 82 00 14 */	beq lbl_80092AB4
@@ -1704,7 +1704,7 @@ lbl_80092AB4:
 /* 80092AC8 0008F6A8  40 82 00 14 */	bne lbl_80092ADC
 lbl_80092ACC:
 /* 80092ACC 0008F6AC  7F C3 F3 78 */	mr r3, r30
-/* 80092AD0 0008F6B0  48 00 01 19 */	bl ft_80092BE8
+/* 80092AD0 0008F6B0  48 00 01 19 */	bl ftCo_80092BE8
 /* 80092AD4 0008F6B4  38 00 00 01 */	li r0, 1
 /* 80092AD8 0008F6B8  48 00 00 1C */	b lbl_80092AF4
 lbl_80092ADC:
@@ -1719,7 +1719,7 @@ lbl_80092AF4:
 /* 80092AF4 0008F6D4  2C 00 00 00 */	cmpwi r0, 0
 /* 80092AF8 0008F6D8  40 82 00 60 */	bne lbl_80092B58
 /* 80092AFC 0008F6DC  7F C3 F3 78 */	mr r3, r30
-/* 80092B00 0008F6E0  48 00 26 5D */	bl ft_8009515C
+/* 80092B00 0008F6E0  48 00 26 5D */	bl ftCo_8009515C
 /* 80092B04 0008F6E4  2C 03 00 00 */	cmpwi r3, 0
 /* 80092B08 0008F6E8  40 82 00 50 */	bne lbl_80092B58
 /* 80092B0C 0008F6EC  7F C3 F3 78 */	mr r3, r30
@@ -1727,7 +1727,7 @@ lbl_80092AF4:
 /* 80092B14 0008F6F4  2C 03 00 00 */	cmpwi r3, 0
 /* 80092B18 0008F6F8  40 82 00 40 */	bne lbl_80092B58
 /* 80092B1C 0008F6FC  7F C3 F3 78 */	mr r3, r30
-/* 80092B20 0008F700  48 00 66 5D */	bl ft_8009917C
+/* 80092B20 0008F700  48 00 66 5D */	bl ftCo_8009917C
 /* 80092B24 0008F704  2C 03 00 00 */	cmpwi r3, 0
 /* 80092B28 0008F708  40 82 00 30 */	bne lbl_80092B58
 /* 80092B2C 0008F70C  7F C3 F3 78 */	mr r3, r30
@@ -1739,7 +1739,7 @@ lbl_80092AF4:
 /* 80092B44 0008F724  2C 03 00 00 */	cmpwi r3, 0
 /* 80092B48 0008F728  40 82 00 10 */	bne lbl_80092B58
 /* 80092B4C 0008F72C  7F C3 F3 78 */	mr r3, r30
-/* 80092B50 0008F730  48 00 75 31 */	bl ft_8009A080
+/* 80092B50 0008F730  48 00 75 31 */	bl ftCo_8009A080
 /* 80092B54 0008F734  2C 03 00 00 */	cmpwi r3, 0
 lbl_80092B58:
 /* 80092B58 0008F738  80 01 00 1C */	lwz r0, 0x1c(r1)
@@ -1754,13 +1754,13 @@ lbl_80092B58:
 
 void ftCo_Guard_IASA(ftCo_GObj* gobj)
 {
-    RETURN_IF(inlineC0(gobj, ft_80092BE8))
-    RETURN_IF(ft_8009515C(gobj))
+    RETURN_IF(inlineC0(gobj, ftCo_80092BE8))
+    RETURN_IF(ftCo_8009515C(gobj))
     RETURN_IF(ftCo_8009980C(gobj))
-    RETURN_IF(ft_8009917C(gobj))
+    RETURN_IF(ftCo_8009917C(gobj))
     RETURN_IF(ftCo_Catch_CheckInput(gobj))
     RETURN_IF(ftCo_800CB024(gobj))
-    RETURN_IF(ft_8009A080(gobj))
+    RETURN_IF(ftCo_8009A080(gobj))
 }
 #endif
 
@@ -1776,7 +1776,7 @@ void ftCo_Guard_Coll(ftCo_GObj* gobj)
     ft_800845B4(gobj);
 }
 
-void ft_80092BCC(ftCo_GObj* gobj)
+void ftCo_80092BCC(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (!(fp->input.held_inputs & HSD_PAD_LR)) {
@@ -1784,7 +1784,7 @@ void ft_80092BCC(ftCo_GObj* gobj)
     }
 }
 
-void ft_80092BE8(ftCo_GObj* gobj)
+void ftCo_80092BE8(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     pl_8003E114(fp->player_id, fp->x221F_flag.bits.b4, fp->shield_health);
@@ -1888,7 +1888,7 @@ void ftCo_GuardOff_IASA(ftCo_GObj* gobj)
     /// @todo #RETURN_IF chain
     if (!fp->mv.co.guard.x1C ||
         (!ftCo_SpecialS_CheckInput(gobj) && !ftCo_Attack100_CheckInput(gobj) &&
-         !ft_800D6824(gobj) && !ft_800D68C0(gobj) &&
+         !ftCo_800D6824(gobj) && !ftCo_800D68C0(gobj) &&
          !ftCo_Catch_CheckInput(gobj) && !ftCo_AttackS4_CheckInput(gobj) &&
          !ftCo_AttackHi4_CheckInput(gobj) &&
          !ftCo_AttackLw4_CheckInput(gobj) && !ftCo_AttackS3_CheckInput(gobj) &&
@@ -1934,7 +1934,7 @@ void ftCo_80092E50(ftCo_GObj* gobj)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm float ft_80092ED8(int arg0, float arg2)
+asm float ftCo_80092ED8(int arg0, float arg2)
 { // clang-format off
     nofralloc
 /* 80092ED8 0008FAB8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1962,7 +1962,7 @@ asm float ft_80092ED8(int arg0, float arg2)
 #pragma pop
 #else
 
-float ft_80092ED8(int arg0, float arg1)
+float ftCo_80092ED8(int arg0, float arg1)
 {
     return p_ftCommonData->x28C *
                (arg0 *
@@ -1995,13 +1995,13 @@ asm void ftCo_80092F2C(ftCo_GObj* gobj, bool)
 /* 80092F68 0008FB48  FC 60 08 90 */	fmr f3, f1
 /* 80092F6C 0008FB4C  C0 42 8B 88 */	lfs f2, ftCo_804D8568
 /* 80092F70 0008FB50  4B FD 64 3D */	bl Fighter_ChangeMotionState
-/* 80092F74 0008FB54  3C 60 80 09 */	lis r3, ft_80093240@ha
-/* 80092F78 0008FB58  38 03 32 40 */	addi r0, r3, ft_80093240@l
+/* 80092F74 0008FB54  3C 60 80 09 */	lis r3, ftCo_80093240@ha
+/* 80092F78 0008FB58  38 03 32 40 */	addi r0, r3, ftCo_80093240@l
 /* 80092F7C 0008FB5C  90 1F 21 D0 */	stw r0, 0x21d0(r31)
 /* 80092F80 0008FB60  38 00 00 FE */	li r0, 0xfe
-/* 80092F84 0008FB64  3C 60 80 09 */	lis r3, ft_800932DC@ha
+/* 80092F84 0008FB64  3C 60 80 09 */	lis r3, ftCo_800932DC@ha
 /* 80092F88 0008FB68  98 1F 06 70 */	stb r0, 0x670(r31)
-/* 80092F8C 0008FB6C  38 03 32 DC */	addi r0, r3, ft_800932DC@l
+/* 80092F8C 0008FB6C  38 03 32 DC */	addi r0, r3, ftCo_800932DC@l
 /* 80092F90 0008FB70  90 1F 21 D8 */	stw r0, 0x21d8(r31)
 /* 80092F94 0008FB74  88 1F 22 1C */	lbz r0, 0x221c(r31)
 /* 80092F98 0008FB78  54 00 DF FF */	rlwinm. r0, r0, 0x1b, 0x1f, 0x1f
@@ -2195,9 +2195,9 @@ void ftCo_80092F2C(HSD_GObj* gobj, bool arg1)
     ftCo_Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_GuardSetOff, Ft_MF_None, NULL, 0,
                               1, 0);
-    fp->cb.x21D0_callback_EveryHitlag = ft_80093240;
+    fp->cb.x21D0_callback_EveryHitlag = ftCo_80093240;
     fp->x670_timer_lstick_tilt_x = -2;
-    fp->cb.x21D8_callback_ExitHitlag = ft_800932DC;
+    fp->cb.x21D8_callback_ExitHitlag = ftCo_800932DC;
     if (!fp->x221C_b2) {
         ftCo_80092158(gobj, 1049, fp->parts[fp->ft_data->x8->unk11].joint);
         fp->x2219_b0 = true;
@@ -2225,14 +2225,14 @@ void ftCo_80092F2C(HSD_GObj* gobj, bool arg1)
             fp->gr_vel = ABS(fp->specialn_facing_dir);
         }
     }
-    ft_80092450(gobj);
-    ft_80091D58(fp);
+    ftCo_80092450(gobj);
+    ftCo_80091D58(fp);
 }
 #endif
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm void ft_80093240(ftCo_GObj*)
+asm void ftCo_80093240(ftCo_GObj*)
 { // clang-format off
     nofralloc
 /* 80093240 0008FE20  80 83 00 2C */	lwz r4, 0x2c(r3)
@@ -2280,7 +2280,7 @@ lbl_80093278:
 #pragma pop
 #else
 
-void ft_80093240(ftCo_GObj* gobj)
+void ftCo_80093240(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->x221A_flag.bits.b2 && fp->ground_or_air == GA_Ground) {
@@ -2301,7 +2301,7 @@ void ft_80093240(ftCo_GObj* gobj)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm void ft_800932DC(ftCo_GObj*)
+asm void ftCo_800932DC(ftCo_GObj*)
 { // clang-format off
     nofralloc
 /* 800932DC 0008FEBC  80 83 00 2C */	lwz r4, 0x2c(r3)
@@ -2340,7 +2340,7 @@ lbl_80093308:
 #pragma pop
 #else
 
-void ft_800932DC(ftCo_GObj* gobj)
+void ftCo_800932DC(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Ground) {
@@ -2373,7 +2373,7 @@ asm void ftCo_GuardSetOff_Anim(ftCo_GObj*)
 /* 80093368 0008FF48  7C 7E 1B 78 */	mr r30, r3
 /* 8009336C 0008FF4C  93 A1 00 5C */	stw r29, 0x5c(r1)
 /* 80093370 0008FF50  83 A3 00 2C */	lwz r29, 0x2c(r3)
-/* 80093374 0008FF54  48 00 08 4D */	bl ft_80093BC0
+/* 80093374 0008FF54  48 00 08 4D */	bl ftCo_80093BC0
 /* 80093378 0008FF58  7F C3 F3 78 */	mr r3, r30
 /* 8009337C 0008FF5C  4B FD BE BD */	bl ftAnim_IsFramesRemaining
 /* 80093380 0008FF60  2C 03 00 00 */	cmpwi r3, 0
@@ -2564,15 +2564,15 @@ lbl_80093608:
 void ftCo_GuardSetOff_Anim(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    ft_80093BC0(gobj);
+    ftCo_80093BC0(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->mv.co.guard.xC) {
-            ft_80092BE8(gobj);
+            ftCo_80092BE8(gobj);
         } else {
-            ft_800928CC(gobj);
+            ftCo_800928CC(gobj);
         }
     } else {
-        ft_80091D58(fp);
+        ftCo_80091D58(fp);
     }
 }
 #endif
@@ -2597,7 +2597,7 @@ void ftCo_GuardSetOff_Coll(ftCo_GObj* gobj)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm bool ft_80093694(ftCo_GObj* gobj)
+asm bool ftCo_80093694(ftCo_GObj* gobj)
 {
     // clang-format off
     nofralloc
@@ -2637,7 +2637,7 @@ lbl_800936FC:
 #pragma pop
 #else
 
-bool ft_80093694(ftCo_GObj* gobj)
+bool ftCo_80093694(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->mv.co.guard.x0 < p_ftCommonData->x2A0 &&
@@ -2653,7 +2653,7 @@ bool ft_80093694(ftCo_GObj* gobj)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm void ft_8009370C(ftCo_GObj*, HSD_GObjEvent)
+asm void ftCo_8009370C(ftCo_GObj*, HSD_GObjEvent)
 { // clang-format off
     nofralloc
 /* 8009370C 000902EC  7C 08 02 A6 */	mflr r0
@@ -2693,7 +2693,7 @@ asm void ft_8009370C(ftCo_GObj*, HSD_GObjEvent)
 #pragma pop
 #else
 
-void ft_8009370C(ftCo_GObj* gobj, HSD_GObjEvent on_reflect)
+void ftCo_8009370C(ftCo_GObj* gobj, HSD_GObjEvent on_reflect)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -2893,7 +2893,7 @@ void ftCo_8009388C(HSD_GObj* gobj)
     fp->mv.co.guard.x1C = 0;
     fp->mv.co.guard.x14 = p_ftCommonData->x2A4;
     fp->mv.co.guard.x18 = p_ftCommonData->x2B4;
-    ft_8009370C(gobj, ftCo_80093790);
+    ftCo_8009370C(gobj, ftCo_80093790);
 }
 #endif
 
@@ -3031,15 +3031,15 @@ void ftCo_80093A50(ftCo_GObj* gobj)
     fp->mv.co.guard.x1C = 0;
     fp->mv.co.guard.x14 = p_ftCommonData->x2A4;
     fp->mv.co.guard.x18 = p_ftCommonData->x2B4;
-    ft_80092450(gobj);
-    ft_8009370C(gobj, ftCo_80093790);
+    ftCo_80092450(gobj);
+    ftCo_8009370C(gobj, ftCo_80093790);
     ftCo_800921DC(gobj);
 }
 #endif
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm void ft_80093BC0(ftCo_GObj*)
+asm void ftCo_80093BC0(ftCo_GObj*)
 { // clang-format off
     nofralloc
 /* 80093BC0 000907A0  7C 08 02 A6 */	mflr r0
@@ -3117,7 +3117,7 @@ lbl_80093CB8:
 #pragma pop
 #else
 
-void ft_80093BC0(ftCo_GObj* gobj)
+void ftCo_80093BC0(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->x221C_b3) {
@@ -3128,7 +3128,7 @@ void ft_80093BC0(ftCo_GObj* gobj)
         if (fp->mv.co.guard.x14 < 0) {
             fp->x221C_b1 = false;
             fp->x2218_b3 = false;
-            ft_80092450(gobj);
+            ftCo_80092450(gobj);
         }
     }
     if (fp->x221C_b2) {
@@ -3219,7 +3219,7 @@ lbl_80093DD4:
 /* 80093DE0 000909C0  C0 3D 23 40 */	lfs f1, 0x2340(r29)
 /* 80093DE4 000909C4  EC 01 00 2A */	fadds f0, f1, f0
 /* 80093DE8 000909C8  D0 1D 23 40 */	stfs f0, 0x2340(r29)
-/* 80093DEC 000909CC  4B FF E7 B9 */	bl ft_800925A4
+/* 80093DEC 000909CC  4B FF E7 B9 */	bl ftCo_800925A4
 /* 80093DF0 000909D0  2C 03 00 00 */	cmpwi r3, 0
 /* 80093DF4 000909D4  40 82 00 B0 */	bne lbl_80093EA4
 /* 80093DF8 000909D8  C0 3D 23 40 */	lfs f1, 0x2340(r29)
@@ -3259,7 +3259,7 @@ lbl_80093E2C:
 /* 80093E78 00090A58  50 60 3E 30 */	rlwimi r0, r3, 7, 0x18, 0x18
 /* 80093E7C 00090A5C  98 1D 22 19 */	stb r0, 0x2219(r29)
 /* 80093E80 00090A60  7F C3 F3 78 */	mr r3, r30
-/* 80093E84 00090A64  4B FF E5 CD */	bl ft_80092450
+/* 80093E84 00090A64  4B FF E5 CD */	bl ftCo_80092450
 /* 80093E88 00090A68  7F C3 F3 78 */	mr r3, r30
 /* 80093E8C 00090A6C  C0 22 8B 88 */	lfs f1, ftCo_804D8568
 /* 80093E90 00090A70  4B FF DF E9 */	bl ftCo_80091E78
@@ -3282,7 +3282,7 @@ lbl_80093EA4:
 
 void ftCo_GuardReflect_Anim(HSD_GObj* gobj)
 {
-    ft_80093BC0(gobj);
+    ftCo_80093BC0(gobj);
     ftCo_GuardOn_Anim(gobj);
 }
 #endif
@@ -3364,7 +3364,7 @@ lbl_80093FB0:
 /* 80093FB0 00090B90  2C 00 00 00 */	cmpwi r0, 0
 /* 80093FB4 00090B94  40 82 00 70 */	bne lbl_80094024
 /* 80093FB8 00090B98  7F C3 F3 78 */	mr r3, r30
-/* 80093FBC 00090B9C  48 00 11 A1 */	bl ft_8009515C
+/* 80093FBC 00090B9C  48 00 11 A1 */	bl ftCo_8009515C
 /* 80093FC0 00090BA0  2C 03 00 00 */	cmpwi r3, 0
 /* 80093FC4 00090BA4  40 82 00 60 */	bne lbl_80094024
 /* 80093FC8 00090BA8  7F C3 F3 78 */	mr r3, r30
@@ -3372,11 +3372,11 @@ lbl_80093FB0:
 /* 80093FD0 00090BB0  2C 03 00 00 */	cmpwi r3, 0
 /* 80093FD4 00090BB4  40 82 00 50 */	bne lbl_80094024
 /* 80093FD8 00090BB8  7F C3 F3 78 */	mr r3, r30
-/* 80093FDC 00090BBC  48 00 51 A1 */	bl ft_8009917C
+/* 80093FDC 00090BBC  48 00 51 A1 */	bl ftCo_8009917C
 /* 80093FE0 00090BC0  2C 03 00 00 */	cmpwi r3, 0
 /* 80093FE4 00090BC4  40 82 00 40 */	bne lbl_80094024
 /* 80093FE8 00090BC8  7F C3 F3 78 */	mr r3, r30
-/* 80093FEC 00090BCC  48 04 4B B1 */	bl lbl_800D8B9C
+/* 80093FEC 00090BCC  48 04 4B B1 */	bl ftCo_800D8B9C
 /* 80093FF0 00090BD0  2C 03 00 00 */	cmpwi r3, 0
 /* 80093FF4 00090BD4  40 82 00 30 */	bne lbl_80094024
 /* 80093FF8 00090BD8  7F C3 F3 78 */	mr r3, r30
@@ -3388,7 +3388,7 @@ lbl_80093FB0:
 /* 80094010 00090BF0  2C 03 00 00 */	cmpwi r3, 0
 /* 80094014 00090BF4  40 82 00 10 */	bne lbl_80094024
 /* 80094018 00090BF8  7F C3 F3 78 */	mr r3, r30
-/* 8009401C 00090BFC  48 00 60 65 */	bl ft_8009A080
+/* 8009401C 00090BFC  48 00 60 65 */	bl ftCo_8009A080
 /* 80094020 00090C00  2C 03 00 00 */	cmpwi r3, 0
 lbl_80094024:
 /* 80094024 00090C04  80 01 00 2C */	lwz r0, 0x2c(r1)
@@ -3408,14 +3408,14 @@ void ftCo_GuardReflect_IASA(HSD_GObj* gobj)
     u8 _[16] = { 0 };
 #endif
     /// @todo Inline depth.
-    RETURN_IF(inlineC0(gobj, ft_80092BE8))
-    RETURN_IF(ft_8009515C(gobj))
+    RETURN_IF(inlineC0(gobj, ftCo_80092BE8))
+    RETURN_IF(ftCo_8009515C(gobj))
     RETURN_IF(ftCo_8009980C(gobj))
-    RETURN_IF(ft_8009917C(gobj))
-    RETURN_IF(lbl_800D8B9C(gobj))
+    RETURN_IF(ftCo_8009917C(gobj))
+    RETURN_IF(ftCo_800D8B9C(gobj))
     RETURN_IF(ftCo_Catch_CheckInput(gobj))
     RETURN_IF(ftCo_800CB024(gobj))
-    RETURN_IF(ft_8009A080(gobj))
+    RETURN_IF(ftCo_8009A080(gobj))
 }
 #endif
 
@@ -3433,7 +3433,7 @@ void ftCo_GuardReflect_Coll(ftCo_GObj* gobj)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm UNK_RET ft_80094098(UNK_PARAMS)
+asm UNK_RET ftCo_80094098(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 80094098 00090C78  7C 08 02 A6 */	mflr r0
@@ -3484,7 +3484,7 @@ lbl_80094124:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm UNK_RET ft_80094138(UNK_PARAMS)
+asm UNK_RET ftCo_80094138(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 80094138 00090D18  80 8D AE B4 */	lwz r4, p_ftCommonData

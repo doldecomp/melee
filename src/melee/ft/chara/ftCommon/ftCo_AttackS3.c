@@ -29,7 +29,7 @@ bool ftCo_AttackS3_CheckInput(ftCo_GObj* gobj)
                 if (fp->input.held_inputs & HSD_PAD_LR ||
                     it_8026B30C(fp->item_gobj) == 0)
                 {
-                    ft_800957F4(gobj, ftCo_MS_LightThrowF);
+                    ftCo_800957F4(gobj, ftCo_MS_LightThrowF);
                     return true;
                 } else {
                     switch (it_8026B30C(fp->item_gobj)) {
@@ -52,7 +52,7 @@ bool ftCo_AttackS3_CheckInput(ftCo_GObj* gobj)
 static void decideAngle(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (!ft_80094790(gobj)) {
+    if (!ftCo_80094790(gobj)) {
         FtMotionId msid;
         float stick_angle = ftCo_GetLStickAngle(fp);
         if (stick_angle > p_ftCommonData->x9C &&

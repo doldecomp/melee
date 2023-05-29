@@ -24,8 +24,8 @@ bool ftCo_AttackHi3_CheckInput(ftCo_GObj* gobj)
                 p_ftCommonData->attackhi3_stick_threshold_y &&
             ftCo_GetLStickAngle(fp) > p_ftCommonData->x20)
         {
-            if (fp->item_gobj != NULL && ft_80094E54(fp)) {
-                ft_800957F4(gobj, ftCo_MS_LightThrowHi);
+            if (fp->item_gobj != NULL && ftCo_80094E54(fp)) {
+                ftCo_800957F4(gobj, ftCo_MS_LightThrowHi);
                 return true;
             }
             doEnter(gobj);

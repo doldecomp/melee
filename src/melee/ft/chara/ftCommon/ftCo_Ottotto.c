@@ -23,7 +23,7 @@
 /* 09A410 */ static void ftCo_8009A410(ftCo_GObj* gobj);
 /* 09A6B8 */ static void ftCo_8009A6B8(ftCo_GObj* gobj);
 
-bool ft_8009A3C8(ftCo_GObj* gobj)
+bool ftCo_8009A3C8(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->coll_data.env_flags & MPCOLL_FLAGS_B23 && !fp->x2228_flag.b2) {
@@ -57,8 +57,8 @@ void ftCo_Ottotto_IASA(ftCo_GObj* gobj)
 #endif
     RETURN_IF(ftCo_SpecialS_CheckInput(gobj))
     RETURN_IF(ftCo_Attack100_CheckInput(gobj))
-    RETURN_IF(ft_800D6824(gobj))
-    RETURN_IF(ft_800D68C0(gobj))
+    RETURN_IF(ftCo_800D6824(gobj))
+    RETURN_IF(ftCo_800D68C0(gobj))
     RETURN_IF(ftCo_Catch_CheckInput(gobj))
     RETURN_IF(ftCo_AttackS4_CheckInput(gobj))
     RETURN_IF(ftCo_AttackHi4_CheckInput(gobj))
@@ -67,11 +67,11 @@ void ftCo_Ottotto_IASA(ftCo_GObj* gobj)
     RETURN_IF(ftCo_AttackHi3_CheckInput(gobj))
     RETURN_IF(ftCo_AttackLw3_CheckInput(gobj))
     RETURN_IF(ftCo_Attack1_CheckInput(gobj))
-    RETURN_IF(ft_80091A4C(gobj))
-    RETURN_IF(ft_800DE9D8(gobj))
+    RETURN_IF(ftCo_80091A4C(gobj))
+    RETURN_IF(ftCo_800DE9D8(gobj))
     RETURN_IF(ftCo_Jump_CheckInput(gobj))
     RETURN_IF(ftCo_Dash_CheckInput(gobj))
-    RETURN_IF(ft_800D5FB0(gobj))
+    RETURN_IF(ftCo_800D5FB0(gobj))
     RETURN_IF(ftCo_Turn_CheckInput(gobj))
     RETURN_IF(ftCo_800C94B4(gobj))
 }
@@ -83,7 +83,7 @@ void ftCo_Ottotto_Coll(ftCo_GObj* gobj)
     ftCo_Fighter* fp = gobj->user_data;
     {
         if (!ft_800827A0(gobj)) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         } else {
             /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -137,7 +137,7 @@ void ftCo_OttottoWait_Coll(ftCo_GObj* gobj)
     ftCo_Fighter* fp = gobj->user_data;
     {
         if (!ft_800827A0(gobj)) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         } else {
             /// @todo Unused stack.
 #ifdef MUST_MATCH

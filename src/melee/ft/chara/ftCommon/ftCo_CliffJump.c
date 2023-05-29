@@ -19,7 +19,7 @@ bool ftCo_8009B170(ftCo_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[8] = { 0 };
 #endif
-    if (ft_800CAE80(gobj)) {
+    if (ftCo_800CAE80(gobj)) {
         ftCo_8009B1B8(gobj);
         return true;
     }
@@ -76,7 +76,7 @@ void ftCo_8009B2F8(ftCo_GObj* gobj)
     fp->self_vel.y = fp->co_attrs.ledge_jump_vertical_velocity;
 }
 
-void ft_8009B390(ftCo_GObj* gobj, float force_mul)
+void ftCo_8009B390(ftCo_GObj* gobj, float force_mul)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -95,7 +95,7 @@ void ft_8009B390(ftCo_GObj* gobj, float force_mul)
 void ftCo_CliffJump2_Anim(ftCo_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -113,5 +113,5 @@ void ftCo_CliffJump2_Phys(ftCo_GObj* gobj)
 
 void ftCo_CliffJump2_Coll(ftCo_GObj* gobj)
 {
-    ft_800835B0(gobj, ft_80096CC8, ft_80082B1C);
+    ft_800835B0(gobj, ftCo_80096CC8, ft_80082B1C);
 }

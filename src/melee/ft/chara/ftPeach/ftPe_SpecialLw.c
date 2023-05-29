@@ -135,7 +135,7 @@ lbl_8011D0A0:
 /* 8011D0CC 00119CAC  41 82 00 34 */	beq lbl_8011D100
 /* 8011D0D0 00119CB0  38 7D 00 00 */	addi r3, r29, 0
 /* 8011D0D4 00119CB4  38 80 00 00 */	li r4, 0
-/* 8011D0D8 00119CB8  4B F7 77 41 */	bl ft_80094818
+/* 8011D0D8 00119CB8  4B F7 77 41 */	bl ftCo_80094818
 /* 8011D0DC 00119CBC  38 9D 00 00 */	addi r4, r29, 0
 /* 8011D0E0 00119CC0  4C C6 31 82 */	crclr 6
 /* 8011D0E4 00119CC4  38 BE 00 B0 */	addi r5, r30, 0xb0
@@ -180,7 +180,7 @@ static void spawnVeg(HSD_GObj* gobj)
                 fp->item_gobj = veg_gobj;
                 fp->fv.pe.veg_gobj = veg_gobj;
                 if (veg_gobj != NULL) {
-                    ft_80094818(gobj, false);
+                    ftCo_80094818(gobj, false);
                     efSync_Spawn(1234, gobj, &fp->cur_pos);
                     fp->cb.x21E4_callback_OnDeath2 = ftPe_Init_OnDeath2;
                     fp->cb.x21DC_callback_OnTakeDamage = ftPe_Init_OnDeath2;
@@ -196,7 +196,7 @@ static bool throwVegIfHeld(HSD_GObj* gobj, FtMotionId msid)
     HSD_GObj* igobj = GET_FIGHTER(gobj)->item_gobj;
     if (igobj != NULL) {
         if (itGetKind(igobj) == It_Kind_Peach_Turnip) {
-            ft_800957F4(gobj, msid);
+            ftCo_800957F4(gobj, msid);
         }
         return true;
     } else {
@@ -264,7 +264,7 @@ void ftPe_SpecialLw_Anim(HSD_GObj* gobj)
 
 void ftPe_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
-    doAnim(gobj, ft_800CC730);
+    doAnim(gobj, ftCo_800CC730);
 }
 
 void ftPe_SpecialLw_Phys(HSD_GObj* gobj)

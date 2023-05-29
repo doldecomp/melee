@@ -15,7 +15,7 @@
 #include "ft/ftcommon.h"
 #include "mp/mpcoll.h"
 
-bool ft_80099F1C(ftCo_GObj* gobj)
+bool ftCo_80099F1C(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->input.lstick.y <= -p_ftCommonData->x464 &&
@@ -34,10 +34,10 @@ bool ftCo_80099F9C(ftCo_GObj* gobj)
     u8 _[8] = { 0 };
 #endif
     ftCo_Fighter* fp = gobj->user_data;
-    if (ft_800C5240(gobj)) {
+    if (ftCo_800C5240(gobj)) {
         return ftCo_800C60C8(gobj);
     }
-    if (!fp->mv.co.pass.x0 && ft_80099F1C(gobj)) {
+    if (!fp->mv.co.pass.x0 && ftCo_80099F1C(gobj)) {
         fp->mv.co.pass.x0 = true;
         fp->mv.co.pass.x4 = p_ftCommonData->x470;
         return true;
@@ -45,21 +45,21 @@ bool ftCo_80099F9C(ftCo_GObj* gobj)
     return false;
 }
 
-bool ft_8009A080(ftCo_GObj* gobj)
+bool ftCo_8009A080(ftCo_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8] = { 0 };
 #endif
     ftCo_Fighter* fp = gobj->user_data;
-    if (fp->input.held_inputs & HSD_PAD_LR && ft_80099F1C(gobj)) {
+    if (fp->input.held_inputs & HSD_PAD_LR && ftCo_80099F1C(gobj)) {
         ftCo_8009A228(gobj);
         return true;
     }
     return false;
 }
 
-bool ft_8009A134(ftCo_GObj* gobj)
+bool ftCo_8009A134(ftCo_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -74,8 +74,8 @@ bool ft_8009A134(ftCo_GObj* gobj)
     return false;
 }
 
-void ft_8009A184(ftCo_GObj* gobj, FtMotionId msid, MotionFlags mf,
-                 float anim_start)
+void ftCo_8009A184(ftCo_GObj* gobj, FtMotionId msid, MotionFlags mf,
+                   float anim_start)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -108,20 +108,20 @@ void ftCo_8009A228(ftCo_GObj* gobj)
 void ftCo_Pass_Anim(ftCo_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
 void ftCo_Pass_IASA(ftCo_GObj* gobj)
 {
     RETURN_IF(ftCo_SpecialAir_CheckInput(gobj))
-    RETURN_IF(ft_80095328(gobj, NULL))
+    RETURN_IF(ftCo_80095328(gobj, NULL))
     RETURN_IF(ftCo_800D7100(gobj))
     RETURN_IF(ftCo_800C3B10(gobj))
     RETURN_IF(ftCo_80099A58(gobj))
     RETURN_IF(ftCo_AttackAir_CheckItemThrowInput(gobj))
     RETURN_IF(ftCo_800D705C(gobj))
-    RETURN_IF(ft_800CB870(gobj))
+    RETURN_IF(ftCo_800CB870(gobj))
 }
 
 void ftCo_Pass_Phys(ftCo_GObj* gobj)

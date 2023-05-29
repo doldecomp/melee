@@ -58,9 +58,9 @@ void ftLg_SpecialHi_Anim(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_80096900(gobj, 0, 1, 0,
-                    luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY,
-                    luigiAttrs->x54_LUIGI_SUPERJUMP_LANDING_LAG);
+        ftCo_80096900(gobj, 0, 1, 0,
+                      luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY,
+                      luigiAttrs->x54_LUIGI_SUPERJUMP_LANDING_LAG);
     }
 }
 
@@ -75,9 +75,9 @@ void ftLg_SpecialAirHi_Anim(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_80096900(gobj, 0, 1, 0,
-                    luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY,
-                    luigiAttrs->x54_LUIGI_SUPERJUMP_LANDING_LAG);
+        ftCo_80096900(gobj, 0, 1, 0,
+                      luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY,
+                      luigiAttrs->x54_LUIGI_SUPERJUMP_LANDING_LAG);
     }
 }
 
@@ -237,9 +237,9 @@ void ftLg_SpecialAirHi_Phys(HSD_GObj* gobj)
 // https://decomp.me/scratch/l7min // Luigi's Super Jump Punch Landing check
 void ftLg_SpecialHi_CheckLanding(HSD_GObj* gobj)
 {
-    ft_800D5CB0(gobj, 0,
-                ((ftLuigiAttributes*) GET_FIGHTER(gobj)->dat_attrs)
-                    ->x54_LUIGI_SUPERJUMP_LANDING_LAG);
+    ftCo_800D5CB0(gobj, 0,
+                  ((ftLuigiAttributes*) GET_FIGHTER(gobj)->dat_attrs)
+                      ->x54_LUIGI_SUPERJUMP_LANDING_LAG);
 }
 
 // 0x801444E4
@@ -254,7 +254,7 @@ void ftLg_SpecialHi_Coll(HSD_GObj* gobj)
             ft_80083B68(gobj);
             return;
         }
-        ft_800831CC(gobj, ft_80096CC8, ftLg_SpecialHi_CheckLanding);
+        ft_800831CC(gobj, ftCo_80096CC8, ftLg_SpecialHi_CheckLanding);
         return;
     }
     ft_80084104(gobj);
@@ -272,7 +272,7 @@ void ftLg_SpecialAirHi_Coll(HSD_GObj* gobj)
             ft_80083B68(gobj);
             return;
         }
-        ft_800831CC(gobj, ft_80096CC8, ftLg_SpecialHi_CheckLanding);
+        ft_800831CC(gobj, ftCo_80096CC8, ftLg_SpecialHi_CheckLanding);
         return;
     }
     ft_80084104(gobj);

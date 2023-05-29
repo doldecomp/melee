@@ -24,13 +24,13 @@
 static bool checkItemThrowInput(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_PAD_A || ft_800DF478(fp)) {
+    if (fp->input.x668 & HSD_PAD_A || ftCo_800DF478(fp)) {
         if ((unsigned) ftCo_AttackAir_GetMsidFromCStick(fp) -
                     ftCo_MS_AttackAirN <=
                 1 &&
             fp->item_gobj != NULL && it_8026B30C(fp->item_gobj) == 3)
         {
-            ft_800CDDA0(gobj);
+            ftCo_800CDDA0(gobj);
             return true;
         } else {
             decideFighter(gobj);
@@ -52,13 +52,13 @@ bool ftCo_AttackAir_CheckItemThrowInput(ftCo_GObj* gobj)
     u8 _[8] = { 0 };
 #endif
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_PAD_A || ft_800DF478(fp)) {
+    if (fp->input.x668 & HSD_PAD_A || ftCo_800DF478(fp)) {
         if ((unsigned) ftCo_AttackAir_GetMsidFromCStick(fp) -
                     ftCo_MS_AttackAirN <=
                 1 &&
             fp->item_gobj != NULL && it_8026B30C(fp->item_gobj) == 3)
         {
-            ft_800CDDA0(gobj);
+            ftCo_800CDDA0(gobj);
             return true;
         } else {
             decideFighter(gobj);
@@ -88,7 +88,7 @@ static void decideFighter(ftCo_GObj* gobj)
 FtMotionId ftCo_AttackAir_GetMsidFromCStick(Fighter* fp)
 {
     float stick_angle, stick_x, stick_y;
-    if (ft_800DF478(fp)) {
+    if (ftCo_800DF478(fp)) {
         stick_x = fp->input.cstick.x;
         stick_y = fp->input.cstick.y;
         stick_angle = ftCo_GetCStickAngle(fp);
@@ -137,19 +137,19 @@ void ftCo_AttackAir_Anim(ftCo_GObj* gobj)
         fp->facing_dir = -fp->facing_dir;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
 /// @remarks Trying to use an @c inline function breaks inlining.
 #define DO_IASA(gobj)                                                         \
     if (GET_FIGHTER(gobj)->allow_interrupt) {                                 \
-        RETURN_IF(ft_80095328(gobj, false))                                   \
+        RETURN_IF(ftCo_80095328(gobj, false))                                 \
         RETURN_IF(ftCo_800D7100(gobj))                                        \
         RETURN_IF(ftCo_800C3B10(gobj))                                        \
         RETURN_IF(checkItemThrowInput(gobj))                                  \
         RETURN_IF(ftCo_800D705C(gobj))                                        \
-        RETURN_IF(ft_800CB870(gobj))                                          \
+        RETURN_IF(ftCo_800CB870(gobj))                                        \
     }
 
 void ftCo_AttackAirN_IASA(ftCo_GObj* gobj)

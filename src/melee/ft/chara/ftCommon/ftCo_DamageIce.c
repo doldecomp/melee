@@ -43,7 +43,7 @@ void ftCo_80090984(ftCo_GObj* gobj)
 {
     RETURN_IF(ftCo_80098928(gobj))
     RETURN_IF(ftCo_8009872C(gobj))
-    ft_80097D40(gobj);
+    ftCo_80097D40(gobj);
 }
 
 #if defined(MUST_MATCH) && !defined(WIP)
@@ -193,9 +193,9 @@ asm void ftCo_80090B60(ftCo_GObj*)
 /* 80090B7C 0008D75C  93 81 01 B8 */	stw r28, 0x1b8(r1)
 /* 80090B80 0008D760  7C 7C 1B 78 */	mr r28, r3
 /* 80090B84 0008D764  83 A3 00 2C */	lwz r29, 0x2c(r3)
-/* 80090B88 0008D768  48 00 69 85 */	bl ft_8009750C
+/* 80090B88 0008D768  48 00 69 85 */	bl ftCo_8009750C
 /* 80090B8C 0008D76C  7F 83 E3 78 */	mr r3, r28
-/* 80090B90 0008D770  48 04 C5 D9 */	bl ft_800DD168
+/* 80090B90 0008D770  48 04 C5 D9 */	bl ftCo_800DD168
 /* 80090B94 0008D774  88 1D 22 27 */	lbz r0, 0x2227(r29)
 /* 80090B98 0008D778  38 60 00 01 */	li r3, 1
 /* 80090B9C 0008D77C  50 60 0F BC */	rlwimi r0, r3, 1, 0x1e, 0x1e
@@ -532,9 +532,9 @@ asm void ftCo_80091030(ftCo_GObj*)
 /* 80091050 0008DC30  83 A3 00 2C */	lwz r29, 0x2c(r3)
 /* 80091054 0008DC34  4B FE CB 05 */	bl ftCommon_8007DB58
 /* 80091058 0008DC38  7F C3 F3 78 */	mr r3, r30
-/* 8009105C 0008DC3C  48 00 64 B1 */	bl ft_8009750C
+/* 8009105C 0008DC3C  48 00 64 B1 */	bl ftCo_8009750C
 /* 80091060 0008DC40  7F C3 F3 78 */	mr r3, r30
-/* 80091064 0008DC44  48 04 C1 05 */	bl ft_800DD168
+/* 80091064 0008DC44  48 04 C1 05 */	bl ftCo_800DD168
 /* 80091068 0008DC48  88 1D 22 27 */	lbz r0, 0x2227(r29)
 /* 8009106C 0008DC4C  3B 80 00 01 */	li r28, 1
 /* 80091070 0008DC50  53 80 0F BC */	rlwimi r0, r28, 1, 0x1e, 0x1e
@@ -694,8 +694,8 @@ void ftCo_80091030(ftCo_GObj* gobj)
     int temp_r0;
     ftCo_Fighter* fp = gobj->user_data;
     ftCommon_8007DB58(gobj);
-    ft_8009750C(gobj);
-    ft_800DD168(gobj);
+    ftCo_8009750C(gobj);
+    ftCo_800DD168(gobj);
     fp->x2227_flag.bits.b6 = true;
     Fighter_ChangeMotionState(gobj, ftCo_MS_DamageIce, (1 << 1) | (1 << 6),
                               NULL, 0, 1, 0);
@@ -1140,7 +1140,7 @@ lbl_80091758:
 /* 8009179C 0008E37C  88 1F 22 27 */	lbz r0, 0x2227(r31)
 /* 800917A0 0008E380  50 80 0F BC */	rlwimi r0, r4, 1, 0x1e, 0x1e
 /* 800917A4 0008E384  98 1F 22 27 */	stb r0, 0x2227(r31)
-/* 800917A8 0008E388  4B FF EF D9 */	bl ft_80090780
+/* 800917A8 0008E388  4B FF EF D9 */	bl ftCo_80090780
 /* 800917AC 0008E38C  48 00 00 94 */	b lbl_80091840
 lbl_800917B0:
 /* 800917B0 0008E390  38 7F 00 80 */	addi r3, r31, 0x80
@@ -1209,7 +1209,7 @@ asm void ftCo_80091854(ftCo_GObj*)
 /* 80091864 0008E444  93 C1 00 38 */	stw r30, 0x38(r1)
 /* 80091868 0008E448  7C 7E 1B 78 */	mr r30, r3
 /* 8009186C 0008E44C  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 80091870 0008E450  48 03 39 D1 */	bl ft_800C5240
+/* 80091870 0008E450  48 03 39 D1 */	bl ftCo_800C5240
 /* 80091874 0008E454  2C 03 00 00 */	cmpwi r3, 0
 /* 80091878 0008E458  41 82 00 10 */	beq lbl_80091888
 /* 8009187C 0008E45C  7F C3 F3 78 */	mr r3, r30
@@ -1294,7 +1294,7 @@ void ftCo_80091854(HSD_GObj* gobj)
     Vec3 vec;
     f32 sp24;
     ftCo_Fighter* fp = gobj->user_data;
-    if (ft_800C5240(gobj)) {
+    if (ftCo_800C5240(gobj)) {
         ftCo_800C5A98(gobj);
     } else {
         ftCommon_8007D5D4(fp);
@@ -1344,7 +1344,7 @@ asm void ftCo_DamageIceJump_Anim(ftCo_GObj*)
 /* 800919B8 0008E598  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 800919BC 0008E59C  4C 40 13 82 */	cror 2, 0, 2
 /* 800919C0 0008E5A0  40 82 00 08 */	bne lbl_800919C8
-/* 800919C4 0008E5A4  48 03 AD 6D */	bl ft_800CC730
+/* 800919C4 0008E5A4  48 03 AD 6D */	bl ftCo_800CC730
 lbl_800919C8:
 /* 800919C8 0008E5A8  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 800919CC 0008E5AC  38 21 00 08 */	addi r1, r1, 8
@@ -1360,7 +1360,7 @@ void ftCo_DamageIceJump_Anim(HSD_GObj* gobj)
     if (fp->mv.co.damageicejump.x0 > 0) {
         fp->mv.co.damageicejump.x0 -= 1;
         if (fp->mv.co.damageicejump.x0 <= 0) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         }
     }
 }
@@ -1375,5 +1375,5 @@ void ftCo_DamageIceJump_Phys(ftCo_GObj* gobj)
 
 void ftCo_DamageIceJump_Coll(ftCo_GObj* gobj)
 {
-    ft_800831CC(gobj, ft_80096CC8, ft_80082B1C);
+    ft_800831CC(gobj, ftCo_80096CC8, ft_80082B1C);
 }

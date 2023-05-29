@@ -513,7 +513,7 @@ void ftPp_SpecialN_Anim(HSD_GObj* gobj)
 void ftPp_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -546,7 +546,7 @@ void ftPp_SpecialN_Coll(HSD_GObj* gobj)
                 fp2->cb.x21DC_callback_OnTakeDamage = 0U;
             }
         }
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -590,7 +590,7 @@ lbl_8011F4C0:
 /* 8011F4D0 0011C0B0  C0 02 9E 58 */	lfs f0, ftPp_Init_804D9838
 /* 8011F4D4 0011C0B4  D0 1F 22 50 */	stfs f0, 8784(r31)
 /* 8011F4D8 0011C0B8  C0 3D 00 08 */	lfs f1, 8(r29)
-/* 8011F4DC 0011C0BC  4B FB 67 D5 */	bl ft_800D5CB0
+/* 8011F4DC 0011C0BC  4B FB 67 D5 */	bl ftCo_800D5CB0
 lbl_8011F4E0:
 /* 8011F4E0 0011C0C0  80 01 00 34 */	lwz r0, 52(r1)
 /* 8011F4E4 0011C0C4  83 E1 00 2C */	lwz r31, 44(r1)

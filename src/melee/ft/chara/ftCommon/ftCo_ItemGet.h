@@ -14,8 +14,8 @@
 /* 094238 */ /* static */ void ftCo_80094694(HSD_GObj* gobj, FtMotionId msid,
                                              bool loop);
 /* 0942A0 */ /* static */ ftCo_GObj* ftCo_800942A0(ftCo_GObj* gobj, u32 flags);
-/* 094334 */ bool ft_80094790(HSD_GObj* gobj);
-/* 0943BC */ void ft_80094818(HSD_GObj* gobj, bool);
+/* 094334 */ bool ftCo_80094790(HSD_GObj* gobj);
+/* 0943BC */ void ftCo_80094818(HSD_GObj* gobj, bool);
 /* 09444C */ /* static */ void ftCo_800948A8(ftCo_GObj* gobj,
                                              Item_GObj* item_gobj);
 /* 0945B8 */ void ftCo_ItemGet_Anim(ftCo_GObj* gobj);

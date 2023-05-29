@@ -61,9 +61,9 @@ void ftMs_SpecialNStart_Anim(HSD_GObj* gobj)
         ftMs_SpecialN_80136E74(gobj);
 
         if (((Fighter*) gobj->user_data)->kind == FTKIND_MARS) {
-            ft_800BFFD0(gobj->user_data, 0x63, 0);
+            ftCo_800BFFD0(gobj->user_data, 0x63, 0);
         } else {
-            ft_800BFFD0(gobj->user_data, 0x64, 0);
+            ftCo_800BFFD0(gobj->user_data, 0x64, 0);
         }
     }
 }
@@ -76,9 +76,9 @@ void ftMs_SpecialAirNStart_Anim(HSD_GObj* gobj)
         ftMs_SpecialN_80136EAC(gobj);
 
         if (((Fighter*) gobj->user_data)->kind == FTKIND_MARS) {
-            ft_800BFFD0(gobj->user_data, 0x63, 0);
+            ftCo_800BFFD0(gobj->user_data, 0x63, 0);
         } else {
-            ft_800BFFD0(gobj->user_data, 0x64, 0);
+            ftCo_800BFFD0(gobj->user_data, 0x64, 0);
         }
     }
 }
@@ -414,7 +414,7 @@ void ftMs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
         // MS_029_Fall
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
     return;
 }

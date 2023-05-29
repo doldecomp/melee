@@ -104,7 +104,7 @@ void ftMt_SpecialAirLw_Anim(HSD_GObj* gobj)
             it_802C49E0(GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj);
             GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj = NULL;
         }
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 

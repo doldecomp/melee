@@ -231,7 +231,7 @@ static void zeroBuffer(void)
 
 void Ground_801C0378(void)
 {
-    ft_800C06C0();
+    ftCo_800C06C0();
 
     Ground_804D6950 = HSD_MemAlloc(_BUFFER_SZ);
 

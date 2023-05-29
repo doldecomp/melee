@@ -158,7 +158,7 @@ void ftMr_SpecialS_Anim(HSD_GObj* gobj)
 void ftMr_SpecialAirS_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 

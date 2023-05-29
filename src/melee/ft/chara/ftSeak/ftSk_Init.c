@@ -355,7 +355,7 @@ void ftSk_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.sk.x222C == 6) {
-        ft_800BFFD0(fp, 86, 0);
+        ftCo_800BFFD0(fp, 86, 0);
     }
 }
 

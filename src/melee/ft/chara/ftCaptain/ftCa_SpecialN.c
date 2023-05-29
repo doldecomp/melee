@@ -112,7 +112,7 @@ void ftCa_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     ftCaptain_SpecialN_CreateWindEffect(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 

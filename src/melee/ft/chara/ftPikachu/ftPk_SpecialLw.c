@@ -364,7 +364,7 @@ void ftPk_SpecialLwEnd_Anim(HSD_GObj* gobj)
 void ftPk_SpecialAirLwEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 

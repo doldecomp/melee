@@ -151,7 +151,7 @@ static inline void ftMewtwo_SpecialN_RemoveHeldShadowBall(HSD_GObj* gobj)
         }
     }
     fp2->fv.mt.x2234_shadowBallCharge = 0;
-    ft_800BFFAC(fp2);
+    ftCo_800BFFAC(fp2);
     efLib_DestroyAll(gobj);
 }
 
@@ -201,7 +201,7 @@ void ftMt_SpecialN_OnDeath(HSD_GObj* gobj)
             mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
         {
             fp2->fv.mt.x2234_shadowBallCharge = 0;
-            ft_800BFFAC(fp2);
+            ftCo_800BFFAC(fp2);
             efLib_DestroyAll(gobj);
         }
     }
@@ -580,7 +580,7 @@ void ftMt_SpecialNLoop_Anim(HSD_GObj* gobj)
                     ftCommon_8007EBAC(fp, 12, 0U);
                     lb_8000B1CC(fp->parts[FtPart_TopN].joint, &sp34, &sp40);
                     efSync_Spawn(27, gobj, &sp40);
-                    ft_800BFFD0(fp, 92, 0);
+                    ftCo_800BFFD0(fp, 92, 0);
                 }
             }
         }
@@ -734,7 +734,7 @@ void ftMt_SpecialAirNLoop_Anim(HSD_GObj* gobj)
 
                     lb_8000B1CC(fp->parts[FtPart_TopN].joint, &sp34, &sp40);
                     efSync_Spawn(27, gobj, &sp40);
-                    ft_800BFFD0(fp, 92, 0);
+                    ftCo_800BFFD0(fp, 92, 0);
                 }
             }
         }
@@ -766,7 +766,7 @@ void ftMt_SpecialAirNCancel_Anim(HSD_GObj* gobj)
     ftMewtwo_SpecialN_RemoveShadowBall2(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -785,11 +785,11 @@ void ftMt_SpecialAirNEnd_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (0.0f == mewtwoAttrs->x14_MEWTWO_SHADOWBALL_LANDING_LAG) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
             return;
         }
-        ft_80096900(gobj, 1, 0, true, 1.0f,
-                    mewtwoAttrs->x14_MEWTWO_SHADOWBALL_LANDING_LAG);
+        ftCo_80096900(gobj, 1, 0, true, 1.0f,
+                      mewtwoAttrs->x14_MEWTWO_SHADOWBALL_LANDING_LAG);
     }
 }
 
@@ -810,7 +810,7 @@ void ftMt_SpecialNLoop_IASA(HSD_GObj* gobj)
     u8 _[48];
 #endif
 
-    if (ft_8009917C(gobj) != false) {
+    if (ftCo_8009917C(gobj) != false) {
         ftMewtwo_SpecialN_RemoveShadowBall2(gobj);
     } else {
         recentInput = fp->input.x668;
@@ -849,7 +849,7 @@ void ftMt_SpecialNLoopFull_IASA(HSD_GObj* gobj)
     u8 _[48];
 #endif
 
-    if (ft_8009917C(gobj) != false) {
+    if (ftCo_8009917C(gobj) != false) {
         ftMewtwo_SpecialN_RemoveShadowBall2(gobj);
     } else {
         recentInput = fp->input.x668;
