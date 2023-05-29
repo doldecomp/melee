@@ -139,6 +139,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CliffWait.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CliffClimb.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CliffAttack.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CliffEscape.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdynamics.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMr_Strings.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_08A4.s.o\

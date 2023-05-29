@@ -231,7 +231,6 @@
                               float, float);
 /* 0C94B4 */ bool ftCo_800C94B4(ftCo_GObj* gobj);
 /* 09B170 */ bool ftCo_8009B170(ftCo_GObj* gobj);
-/* 09B040 */ /* static */ bool ftCo_8009B040(ftCo_GObj* gobj);
 /* 09B1B8 */ /* static */ UNK_RET ftCo_8009B1B8(UNK_PARAMS);
 /* 09B1B8 */ /* static */ UNK_RET ftCo_8009B1B8(UNK_PARAMS);
 /* 09B2F8 */ /* static */ UNK_RET ftCo_8009B2F8(UNK_PARAMS);

@@ -366,7 +366,6 @@ void ftCo_CliffAttack_Anim(Fighter_GObj* gobj);
 void ftCo_CliffAttack_Coll(Fighter_GObj* gobj);
 void ftCo_CliffAttack_IASA(Fighter_GObj* gobj);
 void ftCo_CliffAttack_Phys(Fighter_GObj* gobj);
-void ftCo_CliffClimb_Anim(Fighter_GObj* gobj);
 void ftCo_CliffClimb_Coll(Fighter_GObj* gobj);
 void ftCo_CliffClimb_IASA(Fighter_GObj* gobj);
 void ftCo_CliffClimb_Phys(Fighter_GObj* gobj);

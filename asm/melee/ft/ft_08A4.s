@@ -2,99 +2,6 @@
 
 .section .text
 
-.global ftCo_8009B040
-ftCo_8009B040:
-/* 8009B040 00097C20  7C 08 02 A6 */	mflr r0
-/* 8009B044 00097C24  90 01 00 04 */	stw r0, 4(r1)
-/* 8009B048 00097C28  3C 00 43 30 */	lis r0, 0x4330
-/* 8009B04C 00097C2C  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 8009B050 00097C30  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8009B054 00097C34  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 8009B058 00097C38  7C 7E 1B 78 */	mr r30, r3
-/* 8009B05C 00097C3C  80 8D AE B4 */	lwz r4, p_ftCommonData@sda21(r13)
-/* 8009B060 00097C40  80 A3 00 2C */	lwz r5, 0x2c(r3)
-/* 8009B064 00097C44  80 64 04 88 */	lwz r3, 0x488(r4)
-/* 8009B068 00097C48  C8 22 8D 10 */	lfd f1, .L_804D86F0@sda21(r2)
-/* 8009B06C 00097C4C  3B E5 00 00 */	addi r31, r5, 0
-/* 8009B070 00097C50  6C 63 80 00 */	xoris r3, r3, 0x8000
-/* 8009B074 00097C54  C0 45 18 30 */	lfs f2, 0x1830(r5)
-/* 8009B078 00097C58  90 61 00 14 */	stw r3, 0x14(r1)
-/* 8009B07C 00097C5C  90 01 00 10 */	stw r0, 0x10(r1)
-/* 8009B080 00097C60  C8 01 00 10 */	lfd f0, 0x10(r1)
-/* 8009B084 00097C64  EC 00 08 28 */	fsubs f0, f0, f1
-/* 8009B088 00097C68  FC 02 00 40 */	fcmpo cr0, f2, f0
-/* 8009B08C 00097C6C  40 80 00 0C */	bge .L_8009B098
-/* 8009B090 00097C70  38 00 01 03 */	li r0, 0x103
-/* 8009B094 00097C74  48 00 00 08 */	b .L_8009B09C
-.L_8009B098:
-/* 8009B098 00097C78  38 00 01 02 */	li r0, 0x102
-.L_8009B09C:
-/* 8009B09C 00097C7C  C0 22 8D 08 */	lfs f1, .L_804D86E8@sda21(r2)
-/* 8009B0A0 00097C80  7C 04 03 78 */	mr r4, r0
-/* 8009B0A4 00097C84  C0 42 8D 0C */	lfs f2, .L_804D86EC@sda21(r2)
-/* 8009B0A8 00097C88  7F C3 F3 78 */	mr r3, r30
-/* 8009B0AC 00097C8C  FC 60 08 90 */	fmr f3, f1
-/* 8009B0B0 00097C90  38 A0 00 00 */	li r5, 0
-/* 8009B0B4 00097C94  38 C0 00 00 */	li r6, 0
-/* 8009B0B8 00097C98  4B FC E2 F5 */	bl Fighter_ChangeMotionState
-/* 8009B0BC 00097C9C  7F C3 F3 78 */	mr r3, r30
-/* 8009B0C0 00097CA0  4B FD 3A E5 */	bl ftAnim_8006EBA4
-/* 8009B0C4 00097CA4  38 7F 00 00 */	addi r3, r31, 0
-/* 8009B0C8 00097CA8  38 80 00 20 */	li r4, 0x20
-/* 8009B0CC 00097CAC  4B FE 32 29 */	bl ftCommon_8007E2F4
-/* 8009B0D0 00097CB0  88 1F 22 1D */	lbz r0, 0x221d(r31)
-/* 8009B0D4 00097CB4  38 80 00 01 */	li r4, 1
-/* 8009B0D8 00097CB8  50 80 07 FE */	rlwimi r0, r4, 0, 0x1f, 0x1f
-/* 8009B0DC 00097CBC  98 1F 22 1D */	stb r0, 0x221d(r31)
-/* 8009B0E0 00097CC0  7F C3 F3 78 */	mr r3, r30
-/* 8009B0E4 00097CC4  88 1F 22 1D */	lbz r0, 0x221d(r31)
-/* 8009B0E8 00097CC8  50 80 17 7A */	rlwimi r0, r4, 2, 0x1d, 0x1d
-/* 8009B0EC 00097CCC  98 1F 22 1D */	stb r0, 0x221d(r31)
-/* 8009B0F0 00097CD0  4B FE 64 55 */	bl ftCo_CliffCatch_Phys
-/* 8009B0F4 00097CD4  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 8009B0F8 00097CD8  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 8009B0FC 00097CDC  83 C1 00 18 */	lwz r30, 0x18(r1)
-/* 8009B100 00097CE0  38 21 00 20 */	addi r1, r1, 0x20
-/* 8009B104 00097CE4  7C 08 03 A6 */	mtlr r0
-/* 8009B108 00097CE8  4E 80 00 20 */	blr
-
-.global ftCo_CliffEscape_Anim
-ftCo_CliffEscape_Anim:
-/* 8009B10C 00097CEC  7C 08 02 A6 */	mflr r0
-/* 8009B110 00097CF0  90 01 00 04 */	stw r0, 4(r1)
-/* 8009B114 00097CF4  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8009B118 00097CF8  4B FF FB 51 */	bl ftCo_CliffClimb_Anim
-/* 8009B11C 00097CFC  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8009B120 00097D00  38 21 00 08 */	addi r1, r1, 8
-/* 8009B124 00097D04  7C 08 03 A6 */	mtlr r0
-/* 8009B128 00097D08  4E 80 00 20 */	blr
-
-.global ftCo_CliffEscape_IASA
-ftCo_CliffEscape_IASA:
-/* 8009B12C 00097D0C  4E 80 00 20 */	blr
-
-.global ftCo_CliffEscape_Phys
-ftCo_CliffEscape_Phys:
-/* 8009B130 00097D10  7C 08 02 A6 */	mflr r0
-/* 8009B134 00097D14  90 01 00 04 */	stw r0, 4(r1)
-/* 8009B138 00097D18  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8009B13C 00097D1C  4B FF FB 6D */	bl ftCo_CliffClimb_Phys
-/* 8009B140 00097D20  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8009B144 00097D24  38 21 00 08 */	addi r1, r1, 8
-/* 8009B148 00097D28  7C 08 03 A6 */	mtlr r0
-/* 8009B14C 00097D2C  4E 80 00 20 */	blr
-
-.global ftCo_CliffEscape_Coll
-ftCo_CliffEscape_Coll:
-/* 8009B150 00097D30  7C 08 02 A6 */	mflr r0
-/* 8009B154 00097D34  90 01 00 04 */	stw r0, 4(r1)
-/* 8009B158 00097D38  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8009B15C 00097D3C  4B FF FC 49 */	bl ftCo_CliffClimb_Coll
-/* 8009B160 00097D40  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8009B164 00097D44  38 21 00 08 */	addi r1, r1, 8
-/* 8009B168 00097D48  7C 08 03 A6 */	mtlr r0
-/* 8009B16C 00097D4C  4E 80 00 20 */	blr
-
 .global ftCo_8009B170
 ftCo_8009B170:
 /* 8009B170 00097D50  7C 08 02 A6 */	mflr r0
@@ -81250,13 +81157,6 @@ ft_804D6578:
 
 .section .sdata2
     .balign 8
-.L_804D86E8:
-    .4byte NULL
-.L_804D86EC:
-    .float 1.0
-.L_804D86F0:
-    .float 176.0
-    .4byte 0x80000000
 .L_804D86F8:
     .4byte NULL
 .L_804D86FC:
