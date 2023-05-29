@@ -36,11 +36,11 @@ bool ftCo_Attack1_CheckInput(ftCo_GObj* gobj)
     if (fp->input.x668 & HSD_PAD_A) {
         if (fp->item_gobj != NULL) {
             if (it_8026B30C(fp->item_gobj) == 0) {
-                ft_800957F4(gobj, ftCo_MS_LightThrowF);
+                ftCo_800957F4(gobj, ftCo_MS_LightThrowF);
                 return true;
             }
             if (fp->input.held_inputs & HSD_PAD_LR) {
-                ft_800957F4(gobj, ftCo_MS_LightThrowDrop);
+                ftCo_800957F4(gobj, ftCo_MS_LightThrowDrop);
                 return true;
             }
             switch (it_8026B30C(fp->item_gobj)) {
@@ -109,7 +109,7 @@ static void checkAttack11(ftCo_GObj* gobj)
     u8 _[8] = { 0 };
 #endif
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (!ft_80094790(gobj)) {
+    if (!ftCo_80094790(gobj)) {
         fp->allow_interrupt = false;
         fp->x2218_b1 = false;
         Fighter_ChangeMotionState(gobj, ftCo_MS_Attack11, getMotionFlags(fp),
@@ -150,7 +150,7 @@ void ftCo_Attack11_IASA(ftCo_GObj* gobj)
     if (fp->allow_interrupt) {
         RETURN_IF(ftCo_Jump_CheckInput(gobj))
         RETURN_IF(ftCo_Dash_CheckInput(gobj))
-        RETURN_IF(ft_800D5FB0(gobj))
+        RETURN_IF(ftCo_800D5FB0(gobj))
         RETURN_IF(ftCo_Turn_CheckInput(gobj))
         RETURN_IF(ftCo_Walk_CheckInput(gobj))
     }
@@ -182,7 +182,7 @@ static void doAttack12Rapid(ftCo_GObj* gobj)
 static void doAttack12Normal(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (!ft_80094790(gobj)) {
+    if (!ftCo_80094790(gobj)) {
         fp->allow_interrupt = false;
         fp->x2218_b1 = false;
         Fighter_ChangeMotionState(gobj, ftCo_MS_Attack12, Ft_MF_None, NULL, 0,
@@ -253,7 +253,7 @@ void ftCo_Attack12_IASA(ftCo_GObj* gobj)
     if (fp->allow_interrupt) {
         RETURN_IF(ftCo_Jump_CheckInput(gobj))
         RETURN_IF(ftCo_Dash_CheckInput(gobj))
-        RETURN_IF(ft_800D5FB0(gobj))
+        RETURN_IF(ftCo_800D5FB0(gobj))
         RETURN_IF(ftCo_Turn_CheckInput(gobj))
         RETURN_IF(ftCo_Walk_CheckInput(gobj))
     }
@@ -267,7 +267,7 @@ static void doAttack13(ftCo_GObj* gobj)
         doAttack12Rapid(gobj);
         return;
     default:
-        if (!ft_80094790(gobj)) {
+        if (!ftCo_80094790(gobj)) {
             fp->allow_interrupt = false;
             fp->x2218_b1 = false;
             Fighter_ChangeMotionState(gobj, ftCo_MS_Attack13, Ft_MF_None, NULL,

@@ -309,7 +309,7 @@ static bool ftZelda_80139D60_Helper(HSD_GObj* gobj)
 
     if (fighter2->mv.zd.specialhi.xC >= attributes2->x4C) {
         result = true;
-    } else if (ft_8009A134(gobj)) {
+    } else if (ftCo_8009A134(gobj)) {
         result = false;
     } else {
         result = true;
@@ -467,7 +467,7 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
         if (!(lbVector_AngleXY(groundVector, (Vec3*) &inputVector.x) <
               (f32) M_PI_2))
         {
-            if (ft_8009A134(gobj) == 0) {
+            if (ftCo_8009A134(gobj) == 0) {
                 ftCommon_8007D9FC(fp);
 
                 temp_f5 = atan2f(fp->input.lstick.y,
@@ -612,7 +612,7 @@ void ftZd_SpecialAirHi_Anim(HSD_GObj* gobj)
         f32 x, y;
         x = attributes->x68;
         y = attributes->x6C;
-        ft_80096900(gobj, 1, 0, 1, x, y);
+        ftCo_80096900(gobj, 1, 0, 1, x, y);
     }
 }
 
@@ -676,7 +676,7 @@ void ftZd_SpecialAirHi_Coll(HSD_GObj* gobj)
         }
 
         if (ft_CheckGroundAndLedge(gobj, ledge_grab_dir) != 0) {
-            ft_800D5CB0(gobj, 0, attributes->x6C);
+            ftCo_800D5CB0(gobj, 0, attributes->x6C);
             return;
         }
     }

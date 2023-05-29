@@ -372,7 +372,7 @@ void ftNs_AttackHi4_YoyoApplySmash(HSD_GObj* gobj)
     smashColAnimID = smash_attr->x2128;
 
     if (smash_attr->x2128 != 123) {
-        ft_800BFFD0(fp, smashColAnimID, 0);
+        ftCo_800BFFD0(fp, smashColAnimID, 0);
     }
 
     ftCommon_8007EBAC(fp, 36, 0U);

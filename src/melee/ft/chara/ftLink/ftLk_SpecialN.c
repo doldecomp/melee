@@ -439,7 +439,7 @@ lbl_800ED114:
 /* 800ED11C 000E9CFC  FC 00 10 00 */	fcmpu cr0, f0, f2
 /* 800ED120 000E9D00  40 82 00 10 */	bne lbl_800ED130
 /* 800ED124 000E9D04  7F C3 F3 78 */	mr r3, r30
-/* 800ED128 000E9D08  4B FD F6 09 */	bl ft_800CC730
+/* 800ED128 000E9D08  4B FD F6 09 */	bl ftCo_800CC730
 /* 800ED12C 000E9D0C  48 00 00 1C */	b lbl_800ED148
 lbl_800ED130:
 /* 800ED130 000E9D10  C0 22 99 68 */	lfs f1, ftLk_Init_804D9348
@@ -447,7 +447,7 @@ lbl_800ED130:
 /* 800ED138 000E9D18  38 80 00 01 */	li r4, 1
 /* 800ED13C 000E9D1C  38 A0 00 00 */	li r5, 0
 /* 800ED140 000E9D20  38 C0 00 01 */	li r6, 1
-/* 800ED144 000E9D24  4B FA 97 BD */	bl ft_80096900
+/* 800ED144 000E9D24  4B FA 97 BD */	bl ftCo_80096900
 lbl_800ED148:
 /* 800ED148 000E9D28  BB 41 00 50 */	lmw r26, 0x50(r1)
 /* 800ED14C 000E9D2C  80 01 00 6C */	lwz r0, 0x6c(r1)
@@ -476,9 +476,9 @@ void ftLk_SpecialAirN_Enter(ftLk_GObj* gobj)
         ftLk_SpecialN_UnsetArrow(gobj);
         ftLk_SpecialN_UnsetFv14(gobj);
         if (da->x8 == 0) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         } else {
-            ft_80096900(gobj, 1, 0, 1, 1, da->x8);
+            ftCo_80096900(gobj, 1, 0, 1, 1, da->x8);
         }
     }
 }
@@ -1126,7 +1126,7 @@ lbl_800EDA10:
 /* 800EDA18 000EA5F8  FC 00 10 00 */	fcmpu cr0, f0, f2
 /* 800EDA1C 000EA5FC  40 82 00 10 */	bne lbl_800EDA2C
 /* 800EDA20 000EA600  7F A3 EB 78 */	mr r3, r29
-/* 800EDA24 000EA604  4B FD ED 0D */	bl ft_800CC730
+/* 800EDA24 000EA604  4B FD ED 0D */	bl ftCo_800CC730
 /* 800EDA28 000EA608  48 00 00 1C */	b lbl_800EDA44
 lbl_800EDA2C:
 /* 800EDA2C 000EA60C  C0 22 99 68 */	lfs f1, ftLk_Init_804D9348
@@ -1134,7 +1134,7 @@ lbl_800EDA2C:
 /* 800EDA34 000EA614  38 80 00 01 */	li r4, 1
 /* 800EDA38 000EA618  38 A0 00 00 */	li r5, 0
 /* 800EDA3C 000EA61C  38 C0 00 01 */	li r6, 1
-/* 800EDA40 000EA620  4B FA 8E C1 */	bl ft_80096900
+/* 800EDA40 000EA620  4B FA 8E C1 */	bl ftCo_80096900
 lbl_800EDA44:
 /* 800EDA44 000EA624  BB 61 00 7C */	lmw r27, 0x7c(r1)
 /* 800EDA48 000EA628  80 01 00 94 */	lwz r0, 0x94(r1)
@@ -1178,9 +1178,9 @@ void ftLk_SpecialAirNStart_Anim(ftLk_GObj* gobj)
         ftLk_SpecialN_UnsetArrow(gobj);
         ftLk_SpecialN_UnsetFv14(gobj);
         if (da->x8 == 0) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         } else {
-            ft_80096900(gobj, 1, 0, 1, 1, da->x8);
+            ftCo_80096900(gobj, 1, 0, 1, 1, da->x8);
         }
     }
 }
@@ -1382,7 +1382,7 @@ lbl_800EDCC0:
 /* 800EDCC8 000EA8A8  FC 00 10 00 */	fcmpu cr0, f0, f2
 /* 800EDCCC 000EA8AC  40 82 00 10 */	bne lbl_800EDCDC
 /* 800EDCD0 000EA8B0  7F E3 FB 78 */	mr r3, r31
-/* 800EDCD4 000EA8B4  4B FD EA 5D */	bl ft_800CC730
+/* 800EDCD4 000EA8B4  4B FD EA 5D */	bl ftCo_800CC730
 /* 800EDCD8 000EA8B8  48 00 00 98 */	b lbl_800EDD70
 lbl_800EDCDC:
 /* 800EDCDC 000EA8BC  C0 22 99 68 */	lfs f1, ftLk_Init_804D9348
@@ -1390,7 +1390,7 @@ lbl_800EDCDC:
 /* 800EDCE4 000EA8C4  38 80 00 01 */	li r4, 1
 /* 800EDCE8 000EA8C8  38 A0 00 00 */	li r5, 0
 /* 800EDCEC 000EA8CC  38 C0 00 01 */	li r6, 1
-/* 800EDCF0 000EA8D0  4B FA 8C 11 */	bl ft_80096900
+/* 800EDCF0 000EA8D0  4B FA 8C 11 */	bl ftCo_80096900
 /* 800EDCF4 000EA8D4  48 00 00 7C */	b lbl_800EDD70
 lbl_800EDCF8:
 /* 800EDCF8 000EA8D8  80 9F 00 2C */	lwz r4, 0x2c(r31)
@@ -1448,9 +1448,9 @@ void ftLk_SpecialAirNEnd_Anim(ftLk_GObj* gobj)
         ftLk_SpecialN_UnsetFv14(gobj);
         updateParts(gobj);
         if (da->x8 == 0) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         } else {
-            ft_80096900(gobj, 1, 0, 1, 1, da->x8);
+            ftCo_80096900(gobj, 1, 0, 1, 1, da->x8);
         }
     } else {
         updateParts(gobj);
@@ -1917,7 +1917,7 @@ asm void ftLk_SpecialNEnd_Coll(ftLk_GObj*)
 /* 800EE264 000EAE44  93 FD 19 74 */	stw r31, 0x1974(r29)
 /* 800EE268 000EAE48  38 7B 00 00 */	addi r3, r27, 0
 /* 800EE26C 000EAE4C  38 80 00 00 */	li r4, 0
-/* 800EE270 000EAE50  4B FA 65 A9 */	bl ft_80094818
+/* 800EE270 000EAE50  4B FA 65 A9 */	bl ftCo_80094818
 lbl_800EE274:
 /* 800EE274 000EAE54  7F 63 DB 78 */	mr r3, r27
 /* 800EE278 000EAE58  4B F9 44 91 */	bl ft_80082708
@@ -1975,7 +1975,7 @@ static inline void doEndColl(ftLk_GObj* gobj)
             ftLk_SpecialN_UnsetArrow(gobj);
             fp->item_gobj = item_gobj;
         }
-        ft_80094818(gobj, false);
+        ftCo_80094818(gobj, false);
     }
 }
 
@@ -2160,7 +2160,7 @@ asm void ftLk_SpecialAirNEnd_Coll(ftLk_GObj*)
 /* 800EE4AC 000EB08C  93 FD 19 74 */	stw r31, 0x1974(r29)
 /* 800EE4B0 000EB090  38 7B 00 00 */	addi r3, r27, 0
 /* 800EE4B4 000EB094  38 80 00 00 */	li r4, 0
-/* 800EE4B8 000EB098  4B FA 63 61 */	bl ft_80094818
+/* 800EE4B8 000EB098  4B FA 63 61 */	bl ftCo_80094818
 lbl_800EE4BC:
 /* 800EE4BC 000EB09C  7F 63 DB 78 */	mr r3, r27
 /* 800EE4C0 000EB0A0  4B F9 38 4D */	bl ft_80081D0C

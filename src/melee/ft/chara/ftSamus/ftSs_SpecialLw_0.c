@@ -142,7 +142,7 @@ void ftSs_SpecialAirLw_Anim(HSD_GObj* gobj)
         fp->mv.ss.unk2.x0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -156,13 +156,13 @@ void ftSs_SpecialLw_IASA(HSD_GObj* gobj)
     ftSs_DatAttrs* da = fp->dat_attrs;
     if (fp->cmd_vars[1] && fp->input.lstick.y < da->x14) {
         fp->cmd_vars[1] = 0;
-        ft_800D638C(gobj);
+        ftCo_800D638C(gobj);
         return;
     }
     RETURN_IF(ftCo_SpecialS_CheckInput(gobj))
     RETURN_IF(ftCo_Attack100_CheckInput(gobj))
-    RETURN_IF(ft_800D6824(gobj))
-    RETURN_IF(ft_800D68C0(gobj))
+    RETURN_IF(ftCo_800D6824(gobj))
+    RETURN_IF(ftCo_800D68C0(gobj))
     RETURN_IF(ftCo_Catch_CheckInput(gobj))
     RETURN_IF(ftCo_AttackS4_CheckInput(gobj))
     RETURN_IF(ftCo_AttackHi4_CheckInput(gobj))
@@ -171,12 +171,12 @@ void ftSs_SpecialLw_IASA(HSD_GObj* gobj)
     RETURN_IF(ftCo_AttackHi3_CheckInput(gobj))
     RETURN_IF(ftCo_AttackLw3_CheckInput(gobj))
     RETURN_IF(ftCo_Attack1_CheckInput(gobj))
-    RETURN_IF(ft_80099794(gobj))
+    RETURN_IF(ftCo_80099794(gobj))
 }
 
 void ftSs_SpecialAirLw_IASA(HSD_GObj* gobj)
 {
-    ft_800CCAAC(gobj);
+    ftCo_800CCAAC(gobj);
 }
 
 void ftSs_SpecialLw_Phys(HSD_GObj* gobj)

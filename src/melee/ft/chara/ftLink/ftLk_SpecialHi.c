@@ -90,8 +90,8 @@ void ftLk_SpecialAirHi_Anim(HSD_GObj* gobj)
 #endif
     ftLk_DatAttrs* da = GET_FIGHTER(gobj)->dat_attrs;
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_80096900(gobj, 1, 1, false, da->specialairhi_drift_stick_mul,
-                    da->x30);
+        ftCo_80096900(gobj, 1, 1, false, da->specialairhi_drift_stick_mul,
+                      da->x30);
     }
 }
 
@@ -147,7 +147,7 @@ void ftLk_SpecialAirHi_Coll(HSD_GObj* gobj)
 #endif
     Fighter* fp = GET_FIGHTER(gobj)->dat_attrs;
     if (ft_CheckGroundAndLedge(gobj, 0)) {
-        ft_800D5CB0(gobj, 0, fp->facing_dir1);
+        ftCo_800D5CB0(gobj, 0, fp->facing_dir1);
     } else if (ftCliffCommon_80081298(gobj)) {
         return;
     }

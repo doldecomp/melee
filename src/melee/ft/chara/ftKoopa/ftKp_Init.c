@@ -463,8 +463,8 @@ void ftKp_SpecialS_80132E30(HSD_GObj* gobj)
     {
         HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
         ftCommon_8007E2F4(fp, 0);
-        ft_800DE2A8(gobj, victim_gobj);
-        ft_800DE7C0(victim_gobj, 0, 0);
+        ftCo_800DE2A8(gobj, victim_gobj);
+        ftCo_800DE7C0(victim_gobj, 0, 0);
         fp->cmd_vars[0] = 0;
     }
 }
@@ -488,7 +488,7 @@ void ftKp_SpecialS_Enter(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        ftCommon_8007E2D0(fp, 8, ftKp_SpecialS_8013302C, NULL, ft_800BC7E0);
+        ftCommon_8007E2D0(fp, 8, ftKp_SpecialS_8013302C, NULL, ftCo_800BC7E0);
 
         fp->mv.kp.unk1.x0 = 0;
         fp->mv.kp.unk1.x8 = 0;
@@ -514,7 +514,7 @@ void ftKp_SpecialAirS_Enter(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        ftCommon_8007E2D0(fp, 8, ftKp_SpecialS_801330E4, NULL, ft_800BC8D4);
+        ftCommon_8007E2D0(fp, 8, ftKp_SpecialS_801330E4, NULL, ftCo_800BC8D4);
 
         fp->mv.kp.unk1.x0 = 0;
         fp->mv.kp.unk1.x8 = 0;
@@ -580,7 +580,7 @@ void ftKp_SpecialS_8013319C(HSD_GObj* gobj)
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCommon_8007E2D0(fp, 8, ftKp_SpecialS_801330E4, NULL, ft_800BC8D4);
+        ftCommon_8007E2D0(fp, 8, ftKp_SpecialS_801330E4, NULL, ftCo_800BC8D4);
         fp->mv.kp.unk1.x0 = 0;
         fp->mv.kp.unk1.x8 = 0;
     }
@@ -601,7 +601,7 @@ void ftKp_SpecialS_8013322C(HSD_GObj* gobj)
 
     {
         fp0 = GET_FIGHTER(gobj);
-        ftCommon_8007E2D0(fp0, 8, ftKp_SpecialS_8013302C, NULL, ft_800BC7E0);
+        ftCommon_8007E2D0(fp0, 8, ftKp_SpecialS_8013302C, NULL, ftCo_800BC7E0);
         fp0->mv.kp.unk1.x0 = 0;
         fp0->mv.kp.unk1.x8 = 0;
     }
@@ -618,11 +618,11 @@ void ftKp_SpecialS_801332C4(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
 
     if (victim_gobj != NULL) {
-        ft_800DC920(gobj, victim_gobj);
-        ft_800CC730(victim_gobj);
+        ftCo_800DC920(gobj, victim_gobj);
+        ftCo_800CC730(victim_gobj);
     }
 
-    ft_800CC730(gobj);
+    ftCo_800CC730(gobj);
 }
 
 void ftKp_SpecialS_80133324(HSD_GObj* gobj)
@@ -647,11 +647,11 @@ void ftKp_SpecialS_80133398(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
 
     if (victim_gobj != NULL) {
-        ft_800DC920(gobj, victim_gobj);
-        ft_800CC730(victim_gobj);
+        ftCo_800DC920(gobj, victim_gobj);
+        ftCo_800CC730(victim_gobj);
     }
 
-    ft_800CC730(gobj);
+    ftCo_800CC730(gobj);
 }
 /// @todo Combine common flags with #transition_flags0.
 static u32 const transition_flags2 =
@@ -683,11 +683,11 @@ void ftKp_SpecialS_80133484(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
 
     if (victim_gobj != NULL) {
-        ft_800DC920(gobj, victim_gobj);
-        ft_800CC730(victim_gobj);
+        ftCo_800DC920(gobj, victim_gobj);
+        ftCo_800CC730(victim_gobj);
     }
 
-    ft_800CC730(gobj);
+    ftCo_800CC730(gobj);
 }
 
 void ftKp_SpecialS_801334E4(HSD_GObj* gobj)
@@ -709,7 +709,7 @@ void ftKp_SpecialS_801334E4(HSD_GObj* gobj)
     }
 
     if (fp->x1A58_interactedFighter != NULL) {
-        ft_800BCE64(fp->x1A58_interactedFighter, ftCo_MS_ThrownKoopaF);
+        ftCo_800BCE64(fp->x1A58_interactedFighter, ftCo_MS_ThrownKoopaF);
     }
 
     ftCommon_8007E2F4(fp, 511);
@@ -735,7 +735,7 @@ void ftKp_SpecialS_8013359C(HSD_GObj* gobj)
     }
 
     if (fp->x1A58_interactedFighter != NULL) {
-        ft_800BCE64(fp->x1A58_interactedFighter, ftCo_MS_ThrownKoopaB);
+        ftCo_800BCE64(fp->x1A58_interactedFighter, ftCo_MS_ThrownKoopaB);
     }
 
     ftCommon_8007E2F4(fp, 511);
@@ -752,7 +752,7 @@ void ftKp_SpecialSStart_Anim(HSD_GObj* gobj)
 void ftKp_SpecialAirSStart_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -807,7 +807,7 @@ void ftKp_SpecialSHit_Anim(HSD_GObj* gobj)
                 fp0->cmd_vars[0] = 0;
             }
 
-            ft_800BC9C8(fp1->x1A58_interactedFighter);
+            ftCo_800BC9C8(fp1->x1A58_interactedFighter);
 
         } else {
             /// @todo Combine @c fp0 with other branch somehow

@@ -14,7 +14,7 @@
 
 /* 09A9AC */ static bool ftCo_8009A9AC(ftCo_GObj* gobj);
 
-void ft_8009A804(ftCo_GObj* gobj)
+void ftCo_8009A804(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_CliffWait, Ft_MF_SkipNametagVis,
@@ -62,7 +62,7 @@ bool ftCo_8009A9AC(ftCo_GObj* gobj)
     if (fp->mv.co.cliff.x4 <= 0) {
         fp->x2064_ledgeCooldown = p_ftCommonData->ledge_cooldown;
         fp->x2227_flag.bits.b1 = true;
-        ft_80090780(gobj);
+        ftCo_80090780(gobj);
         return true;
     }
     return false;

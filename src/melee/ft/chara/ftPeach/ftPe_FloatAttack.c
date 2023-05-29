@@ -36,7 +36,7 @@ asm bool ftPe_8011BE80(HSD_GObj*)
 /* 8011BEA4 00118A84  54 00 05 EF */	rlwinm. r0, r0, 0, 0x17, 0x17
 /* 8011BEA8 00118A88  40 82 00 14 */	bne lbl_8011BEBC
 /* 8011BEAC 00118A8C  7F E3 FB 78 */	mr r3, r31
-/* 8011BEB0 00118A90  4B FC 35 C9 */	bl ft_800DF478
+/* 8011BEB0 00118A90  4B FC 35 C9 */	bl ftCo_800DF478
 /* 8011BEB4 00118A94  2C 03 00 00 */	cmpwi r3, 0
 /* 8011BEB8 00118A98  41 82 00 60 */	beq lbl_8011BF18
 lbl_8011BEBC:
@@ -56,7 +56,7 @@ lbl_8011BEBC:
 /* 8011BEF0 00118AD0  2C 03 00 03 */	cmpwi r3, 3
 /* 8011BEF4 00118AD4  40 82 00 14 */	bne lbl_8011BF08
 /* 8011BEF8 00118AD8  7F C3 F3 78 */	mr r3, r30
-/* 8011BEFC 00118ADC  4B FB 1E A5 */	bl ft_800CDDA0
+/* 8011BEFC 00118ADC  4B FB 1E A5 */	bl ftCo_800CDDA0
 /* 8011BF00 00118AE0  38 60 00 01 */	li r3, 1
 /* 8011BF04 00118AE4  48 00 00 18 */	b lbl_8011BF1C
 lbl_8011BF08:
@@ -84,11 +84,11 @@ bool ftPe_8011BE80(HSD_GObj* gobj)
     u8 _[8];
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_PAD_A || ft_800DF478(fp)) {
+    if (fp->input.x668 & HSD_PAD_A || ftCo_800DF478(fp)) {
         if (fp->fv.pe.x4 > 0) {
             if (ftCo_AttackAir_GetMsidFromCStick(fp) - 65U <= 1) {
                 if (fp->item_gobj != NULL && it_8026B30C(fp->item_gobj) == 3) {
-                    ft_800CDDA0(gobj);
+                    ftCo_800CDDA0(gobj);
                     return true;
                 }
             }
@@ -119,7 +119,7 @@ void ftPe_FloatAttackAir_Anim(HSD_GObj* gobj)
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->mv.pe.floatattack.x0) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         } else {
             ftPe_8011BB6C(gobj, false);
         }
@@ -150,7 +150,7 @@ lbl_8011C078:
 /* 8011C080 00118C60  41 82 00 C8 */	beq lbl_8011C148
 /* 8011C084 00118C64  38 7E 00 00 */	addi r3, r30, 0
 /* 8011C088 00118C68  38 80 00 00 */	li r4, 0
-/* 8011C08C 00118C6C  4B F7 92 9D */	bl ft_80095328
+/* 8011C08C 00118C6C  4B F7 92 9D */	bl ftCo_80095328
 /* 8011C090 00118C70  2C 03 00 00 */	cmpwi r3, 0
 /* 8011C094 00118C74  40 82 00 B4 */	bne lbl_8011C148
 /* 8011C098 00118C78  83 FE 00 2C */	lwz r31, 0x2c(r30)
@@ -158,7 +158,7 @@ lbl_8011C078:
 /* 8011C0A0 00118C80  54 00 05 EF */	rlwinm. r0, r0, 0, 0x17, 0x17
 /* 8011C0A4 00118C84  40 82 00 14 */	bne lbl_8011C0B8
 /* 8011C0A8 00118C88  7F E3 FB 78 */	mr r3, r31
-/* 8011C0AC 00118C8C  4B FC 33 CD */	bl ft_800DF478
+/* 8011C0AC 00118C8C  4B FC 33 CD */	bl ftCo_800DF478
 /* 8011C0B0 00118C90  2C 03 00 00 */	cmpwi r3, 0
 /* 8011C0B4 00118C94  41 82 00 7C */	beq lbl_8011C130
 lbl_8011C0B8:
@@ -178,7 +178,7 @@ lbl_8011C0B8:
 /* 8011C0EC 00118CCC  2C 03 00 03 */	cmpwi r3, 3
 /* 8011C0F0 00118CD0  40 82 00 14 */	bne lbl_8011C104
 /* 8011C0F4 00118CD4  7F C3 F3 78 */	mr r3, r30
-/* 8011C0F8 00118CD8  4B FB 1C A9 */	bl ft_800CDDA0
+/* 8011C0F8 00118CD8  4B FB 1C A9 */	bl ftCo_800CDDA0
 /* 8011C0FC 00118CDC  38 00 00 01 */	li r0, 1
 /* 8011C100 00118CE0  48 00 00 34 */	b lbl_8011C134
 lbl_8011C104:
@@ -199,7 +199,7 @@ lbl_8011C134:
 /* 8011C134 00118D14  2C 00 00 00 */	cmpwi r0, 0
 /* 8011C138 00118D18  40 82 00 10 */	bne lbl_8011C148
 /* 8011C13C 00118D1C  7F C3 F3 78 */	mr r3, r30
-/* 8011C140 00118D20  4B FA F7 31 */	bl ft_800CB870
+/* 8011C140 00118D20  4B FA F7 31 */	bl ftCo_800CB870
 /* 8011C144 00118D24  2C 03 00 00 */	cmpwi r3, 0
 lbl_8011C148:
 /* 8011C148 00118D28  80 01 00 24 */	lwz r0, 0x24(r1)
@@ -218,9 +218,9 @@ void ftPe_FloatAttackAir_IASA(HSD_GObj* gobj)
     if (!ftPe_Float_CheckContinueInput(fp)) {
         fp->mv.pe.floatattack.x0 = true;
     }
-    if (fp->allow_interrupt && !ft_80095328(gobj, false)) {
+    if (fp->allow_interrupt && !ftCo_80095328(gobj, false)) {
         if (!ftPe_8011BE80(gobj)) {
-            if (ft_800CB870(gobj)) {
+            if (ftCo_800CB870(gobj)) {
                 return;
             }
         }

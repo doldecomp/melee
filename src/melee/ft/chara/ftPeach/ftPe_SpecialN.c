@@ -211,7 +211,7 @@ void ftPe_SpecialAirN_Anim(HSD_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[16];
 #endif
-    doAnim(gobj, ft_800CC730);
+    doAnim(gobj, ftCo_800CC730);
 }
 
 void ftPe_SpecialN_IASA(HSD_GObj* gobj) {}
@@ -335,7 +335,7 @@ void ftPe_SpecialNHit_Anim(HSD_GObj* gobj)
 
 void ftPe_SpecialAirNHit_Anim(HSD_GObj* gobj)
 {
-    doHitAnim(gobj, ft_800CC730);
+    doHitAnim(gobj, ftCo_800CC730);
 }
 
 void ftPe_SpecialNHit_IASA(HSD_GObj* gobj) {}

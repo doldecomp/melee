@@ -319,7 +319,7 @@ void ftDr_Init_80149910(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    ft_800DEAE8(gobj, 0x155, 0x156);
+    ftCo_800DEAE8(gobj, 0x155, 0x156);
     fp->cmd_vars[0] = 1;
     fp->cmd_vars[1] = 0;
 }

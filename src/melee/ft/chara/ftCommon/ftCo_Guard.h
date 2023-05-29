@@ -84,23 +84,23 @@ static char* ftCo_804D3B00 = "jobj";
 #endif
 
 /* 091A2C */ bool ftCo_80091A2C(ftCo_GObj* gobj);
-/* 091A4C */ bool ft_80091A4C(ftCo_GObj* gobj);
+/* 091A4C */ bool ftCo_80091A4C(ftCo_GObj* gobj);
 /* 091AD8 */ bool ftCo_80091AD8(ftCo_GObj* gobj, int mv_x20);
 /* 091B90 */ void ftCo_80091B90(ftCo_GObj* gobj, int);
 /* 091B9C */ void ftCo_80091B9C(ftCo_GObj* gobj);
-/* 091D58 */ void ft_80091D58(ftCo_Fighter* fp);
-/* 092450 */ void ft_80092450(ftCo_GObj* gobj);
-/* 0925A4 */ bool ft_800925A4(ftCo_GObj* gobj);
+/* 091D58 */ void ftCo_80091D58(ftCo_Fighter* fp);
+/* 092450 */ void ftCo_80092450(ftCo_GObj* gobj);
+/* 0925A4 */ bool ftCo_800925A4(ftCo_GObj* gobj);
 /* 0926DC */ void ftCo_GuardOn_Anim(ftCo_GObj* gobj);
 /* 092758 */ void ftCo_GuardOn_IASA(ftCo_GObj* gobj);
 /* 092870 */ void ftCo_GuardOn_Phys(ftCo_GObj* gobj);
 /* 0928AC */ void ftCo_GuardOn_Coll(ftCo_GObj* gobj);
-/* 092ED8 */ float ft_80092ED8(int, float);
-/* 093240 */ void ft_80093240(ftCo_GObj* gobj);
-/* 0932DC */ void ft_800932DC(ftCo_GObj* gobj);
-/* 093694 */ bool ft_80093694(ftCo_GObj* gobj);
-/* 09370C */ void ft_8009370C(HSD_GObj*, HSD_GObjEvent);
-/* 093C3C */ /* static */ UNK_RET ft_80094098(UNK_PARAMS);
-/* 093CDC */ /* static */ UNK_RET ft_80094138(UNK_PARAMS);
+/* 092ED8 */ float ftCo_80092ED8(int, float);
+/* 093240 */ void ftCo_80093240(ftCo_GObj* gobj);
+/* 0932DC */ void ftCo_800932DC(ftCo_GObj* gobj);
+/* 093694 */ bool ftCo_80093694(ftCo_GObj* gobj);
+/* 09370C */ void ftCo_8009370C(HSD_GObj*, HSD_GObjEvent);
+/* 093C3C */ /* static */ UNK_RET ftCo_80094098(UNK_PARAMS);
+/* 093CDC */ /* static */ UNK_RET ftCo_80094138(UNK_PARAMS);
 
 #endif

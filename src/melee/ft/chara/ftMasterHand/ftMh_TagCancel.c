@@ -16,16 +16,16 @@ void ftMh_MS_388_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
     ft_1 = gobj_1->user_data;
     ft_2 = gobj_2->user_data;
     ftCommon_8007DB58(gobj_1);
-    ft_8009750C(gobj_1);
-    ft_800DD168(gobj_1);
+    ftCo_8009750C(gobj_1);
+    ftCo_800DD168(gobj_1);
     ft_1->x1A5C = gobj_2;
     ft_1->x1A58_interactedFighter = gobj_2;
     ft_1->x221B_b5 = false;
     ft_1->x221B_b7 = false;
     ft_1->facing_dir = ft_2->facing_dir;
-    ftCommon_8007DBCC(ft_1, 0, ft_800DA824(ft_2));
-    ft_800DB368(ft_2, ft_1);
-    ft_1->cb.x21B0_callback_Accessory1 = ft_800DB464;
+    ftCommon_8007DBCC(ft_1, 0, ftCo_800DA824(ft_2));
+    ftCo_800DB368(ft_2, ft_1);
+    ft_1->cb.x21B0_callback_Accessory1 = ftCo_800DB464;
     ftCommon_8007D5D4(ft_1);
     Fighter_ChangeMotionState(gobj_1, ftCo_MS_CaptureMasterHand, 0, 0, 0, 1,
                               0);

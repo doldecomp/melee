@@ -176,11 +176,11 @@ void ftGw_SpecialAirHi_Anim(HSD_GObj* gobj)
     gawAttrs = (GET_FIGHTER(gobj))->dat_attrs;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (0.0f == gawAttrs->x60_GAMEWATCH_RESCUE_LANDING) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
             return;
         }
-        ft_80096900(gobj, 1, 0, 1, 1.0f,
-                    gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
+        ftCo_80096900(gobj, 1, 0, 1, 1.0f,
+                      gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
     }
 }
 
@@ -264,7 +264,7 @@ void ftGw_SpecialAirHi_Coll(HSD_GObj* gobj)
             if (ft_80081D0C(gobj) != false) {
                 ftGw_SpecialHi_ItemRescueRemove(gobj);
                 ftCommon_8007D7FC(fp);
-                ft_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
+                ftCo_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
                 fp->cb.x21E4_callback_OnDeath2 = NULL;
                 fp->cb.x21DC_callback_OnTakeDamage = NULL;
             }
@@ -275,7 +275,7 @@ void ftGw_SpecialAirHi_Coll(HSD_GObj* gobj)
                 ledgeGrabDir = -1;
             }
             if (ft_CheckGroundAndLedge(gobj, ledgeGrabDir) != false) {
-                ft_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
+                ftCo_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
             } else if (ftCliffCommon_80081298(gobj) != false) {
                 ftCliffCommon_80081370(gobj);
             }

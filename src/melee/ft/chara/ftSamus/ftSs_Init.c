@@ -281,7 +281,7 @@ void ftSs_Init_80128428(HSD_GObj* gobj)
 {
     ftSs_SpecialN_80129258(gobj);
     ftSs_SpecialS_8012A640(gobj);
-    ft_800D9C98(gobj);
+    ftCo_800D9C98(gobj);
 }
 
 void ftSs_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
@@ -310,7 +310,7 @@ void ftSs_Init_UnkMotionStates4(HSD_GObj* gobj)
     ftSs_DatAttrs* da = fp->dat_attrs;
     s32 samus_x2230 = fp->fv.ss.x2230;
     if (samus_x2230 == da->x18) {
-        ft_800BFFD0(fp, 53, 0);
+        ftCo_800BFFD0(fp, 53, 0);
     }
 }
 

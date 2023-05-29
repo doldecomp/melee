@@ -51,7 +51,7 @@ void ftCo_LandingAir_EnterWithLag(ftCo_GObj* gobj, float lag)
     if (msid != ftCo_MS_None) {
         ftCo_LandingAir_EnterWithMsidLag(gobj, msid, lag);
     } else {
-        ft_800D5BF8(gobj);
+        ftCo_800D5BF8(gobj);
     }
 }
 

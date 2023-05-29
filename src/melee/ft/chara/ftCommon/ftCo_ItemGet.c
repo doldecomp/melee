@@ -110,7 +110,7 @@ lbl_800942D8:
 /* 800942D8 00090EB8  3B BE 00 20 */	addi r29, r30, 0x20
 lbl_800942DC:
 /* 800942DC 00090EBC  7F 43 D3 78 */	mr r3, r26
-/* 800942E0 00090EC0  48 00 DD 61 */	bl ft_800A2040
+/* 800942E0 00090EC0  48 00 DD 61 */	bl ftCo_800A2040
 /* 800942E4 00090EC4  2C 03 00 00 */	cmpwi r3, 0
 /* 800942E8 00090EC8  41 82 00 18 */	beq lbl_80094300
 /* 800942EC 00090ECC  80 1A 1A 94 */	lwz r0, 0x1a94(r26)
@@ -242,7 +242,7 @@ HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
     } else {
         offset0 = &pickup->air_light_offset[0];
     }
-    if (ft_800A2040(fp) && (signed) fp->x1A94 == 28) {
+    if (ftCo_800A2040(fp) && (signed) fp->x1A94 == 28) {
         return NULL;
     }
     {
@@ -438,7 +438,7 @@ lbl_80094648:
 /* 8009464C 0009122C  38 7C 00 00 */	addi r3, r28, 0
 /* 80094650 00091230  38 A0 00 01 */	li r5, 1
 /* 80094654 00091234  80 84 07 CC */	lwz r4, 0x7cc(r4)
-/* 80094658 00091238  48 03 42 7D */	bl ft_800C88D4
+/* 80094658 00091238  48 03 42 7D */	bl ftCo_800C88D4
 /* 8009465C 0009123C  7F A3 EB 78 */	mr r3, r29
 /* 80094660 00091240  48 1D 62 8D */	bl Item_8026A8EC
 /* 80094664 00091244  48 00 00 0C */	b lbl_80094670
@@ -503,7 +503,7 @@ bool ftCo_8009447C(HSD_GObj* gobj, HSD_GObj* item_gobj)
             Item_8026A8EC(item_gobj);
             goto block_35;
         case It_Kind_Spycloak:
-            ft_800C88D4(gobj, p_ftCommonData->x7CC, 1);
+            ftCo_800C88D4(gobj, p_ftCommonData->x7CC, 1);
             Item_8026A8EC(item_gobj);
             goto block_35;
         case It_Kind_Coin:
@@ -535,7 +535,7 @@ asm void ftCo_80094694(ftCo_GObj* gobj, enum_t, bool)
 /* 800946C0 000912A0  C0 22 8B A4 */	lfs f1, ftCo_804D8584
 /* 800946C4 000912A4  C0 5E 00 38 */	lfs f2, 0x38(r30)
 /* 800946C8 000912A8  C0 63 00 08 */	lfs f3, 8(r3)
-/* 800946CC 000912AC  48 03 AE C9 */	bl ft_CalcYScaledKnockback
+/* 800946CC 000912AC  48 03 AE C9 */	bl ftCo_CalcYScaledKnockback
 /* 800946D0 000912B0  48 00 00 08 */	b lbl_800946D8
 lbl_800946D4:
 /* 800946D4 000912B4  C0 22 8B A4 */	lfs f1, ftCo_804D8584
@@ -604,7 +604,7 @@ void ftCo_80094694(HSD_GObj* gobj, FtMotionId msid, bool loop)
     {
         float anim_spd;
         if (msid == ftCo_MS_HeavyGet) {
-            anim_spd = ft_CalcYScaledKnockback(
+            anim_spd = ftCo_CalcYScaledKnockback(
                 Fighter_804D6524, 1, fp->x34_scale.y,
                 M2C_FIELD(Fighter_804D6524, float*, 8));
         } else {
@@ -631,7 +631,7 @@ void ftCo_80094694(HSD_GObj* gobj, FtMotionId msid, bool loop)
 }
 #endif
 
-bool ft_80094790(HSD_GObj* gobj)
+bool ftCo_80094790(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -651,7 +651,7 @@ bool ft_80094790(HSD_GObj* gobj)
     return false;
 }
 
-void ft_80094818(HSD_GObj* gobj, int arg1)
+void ftCo_80094818(HSD_GObj* gobj, int arg1)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -1106,7 +1106,7 @@ lbl_80094D48:
 /* 80094D4C 0009192C  38 7C 00 00 */	addi r3, r28, 0
 /* 80094D50 00091930  38 A0 00 01 */	li r5, 1
 /* 80094D54 00091934  80 84 07 CC */	lwz r4, 0x7cc(r4)
-/* 80094D58 00091938  48 03 3B 7D */	bl ft_800C88D4
+/* 80094D58 00091938  48 03 3B 7D */	bl ftCo_800C88D4
 /* 80094D5C 0009193C  7F A3 EB 78 */	mr r3, r29
 /* 80094D60 00091940  48 1D 5B 8D */	bl Item_8026A8EC
 /* 80094D64 00091944  48 00 00 0C */	b lbl_80094D70
@@ -1175,7 +1175,7 @@ void ftCo_80094B6C(HSD_GObj* gobj, HSD_GObj* item_gobj)
             Item_8026A8EC(item_gobj);
             return;
         case It_Kind_Spycloak:
-            ft_800C88D4(gobj, p_ftCommonData->x7CC, 1);
+            ftCo_800C88D4(gobj, p_ftCommonData->x7CC, 1);
             Item_8026A8EC(item_gobj);
             return;
         case It_Kind_Coin:
@@ -1189,7 +1189,7 @@ void ftCo_80094B6C(HSD_GObj* gobj, HSD_GObj* item_gobj)
 void ftCo_80094D90(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    ft_8009750C(gobj);
+    ftCo_8009750C(gobj);
     /// @todo #ftCo_80094DF8
     if (fp->item_gobj != NULL) {
         ftCo_80094B6C(gobj, fp->item_gobj);
@@ -1197,7 +1197,7 @@ void ftCo_80094D90(HSD_GObj* gobj)
     if (fp->x1978 != NULL) {
         ftCo_80094B6C(gobj, fp->x1978);
     }
-    ft_800CC730(gobj);
+    ftCo_800CC730(gobj);
 }
 
 #if defined(MUST_MATCH) && !defined(WIP)

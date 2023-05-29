@@ -24,8 +24,8 @@ void ftMh_Slam_Anim(HSD_GObj* gobj)
         if (fp->x1A58_interactedFighter != NULL) {
             HSD_GObj* victim = fp->x1A58_interactedFighter;
             ftCommon_8007E2F4(fp, 0);
-            ft_800DE2A8(gobj, victim);
-            ft_800DE7C0(victim, 0, 0);
+            ftCo_800DE2A8(gobj, victim);
+            ftCo_800DE7C0(victim, 0, 0);
         }
         fp->mv.mh.unk0.x20 = 0;
     }

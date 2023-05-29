@@ -327,7 +327,7 @@ void ftMt_Init_UnkMotionStates4(HSD_GObj* gobj)
     f32 attr_value = da->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
 
     if (fp->fv.mt.x2234_shadowBallCharge == attr_value) {
-        ft_800BFFD0(fp, 92, 0);
+        ftCo_800BFFD0(fp, 92, 0);
     }
 }
 

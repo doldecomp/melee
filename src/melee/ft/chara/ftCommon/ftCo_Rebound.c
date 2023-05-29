@@ -10,7 +10,7 @@
 
 /* 099E44 */ static void ftCo_80099E44(ftCo_GObj* gobj);
 
-void ft_80099D9C(ftCo_GObj* gobj)
+void ftCo_80099D9C(ftCo_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH

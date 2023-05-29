@@ -21,7 +21,7 @@ void ftCo_800987D0(Fighter_GObj* gobj)
     ft_80088148(fp, 3, 127, 64);
     ftCommon_8007CCE8(fp);
     ftCo_SpawnEf(gobj, fp->parts[FtPart_TopN].joint, 1, 1053);
-    ft_800BFFD0(fp, 120, 0);
+    ftCo_800BFFD0(fp, 120, 0);
 }
 
 void ftCo_Passive_Anim(Fighter_GObj* gobj)

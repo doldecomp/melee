@@ -508,8 +508,8 @@ void ftFx_SpecialAirSEnd_Anim(HSD_GObj* gobj)
     ftFoxAttributes* da = fp->dat_attrs;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_80096900(gobj, 1, 0, true, da->x4C_FOX_ILLUSION_FREEFALL_MOBILITY,
-                    da->x50_FOX_ILLUSION_LANDING_LAG);
+        ftCo_80096900(gobj, 1, 0, true, da->x4C_FOX_ILLUSION_FREEFALL_MOBILITY,
+                      da->x50_FOX_ILLUSION_LANDING_LAG);
     }
 }
 
@@ -581,7 +581,7 @@ void ftFx_SpecialSEnd_Coll(HSD_GObj* gobj)
 #endif
 
     if (ft_800827A0(gobj) == false) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -606,7 +606,7 @@ void ftFx_SpecialAirSEnd_Coll(HSD_GObj* gobj)
         cliffCatchDir = 1;
     }
     if (ft_CheckGroundAndLedge(gobj, cliffCatchDir) != false) {
-        ft_800D5CB0(gobj, 0, da->x50_FOX_ILLUSION_LANDING_LAG);
+        ftCo_800D5CB0(gobj, 0, da->x50_FOX_ILLUSION_LANDING_LAG);
         return;
     }
     if (ftCliffCommon_80081298(gobj)) {

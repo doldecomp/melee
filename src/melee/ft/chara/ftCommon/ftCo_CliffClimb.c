@@ -55,7 +55,7 @@ bool ftCo_8009AAFC(ftCo_GObj* gobj, int arg1, float stick_x, float angle)
     }
     if (fp->mv.co.cliff.x8) {
         fp->x2064_ledgeCooldown = p_ftCommonData->ledge_cooldown;
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
         return true;
     }
     return false;
@@ -109,7 +109,7 @@ void ftCo_CliffClimb_Phys(ftCo_GObj* gobj)
                 ftCommon_8007D7FC(fp);
             }
         } else {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         }
     } else {
         ft_80084FA8(gobj);
@@ -126,7 +126,7 @@ void ftCo_CliffClimb_Coll(ftCo_GObj* gobj)
     if (fp->ground_or_air == GA_Air) {
         if (ft_800821DC(gobj)) {
             ftCo_8009AE14(gobj);
-        } else if (ft_8009EF68(gobj)) {
+        } else if (ftCo_8009EF68(gobj)) {
             return;
         }
     } else {

@@ -244,7 +244,7 @@ void ftSs_SpecialNHold_Anim(HSD_GObj* gobj)
         fp->mv.ss.unk3.x4 = 0;
         fp->fv.ss.x2230 += 1;
         if (fp->fv.ss.x2230 >= samus_attr->x18) {
-            ft_800BFFD0(fp, 53, 0);
+            ftCo_800BFFD0(fp, 53, 0);
             fp->fv.ss.x2230 = samus_attr->x18;
             Fighter_ChangeMotionState(gobj, 345, 0, 0, 0, 1, 0);
             ftSamus_UnkAndDestroyAllEF(gobj);
@@ -298,10 +298,10 @@ void ftSs_SpecialAirN_Anim(HSD_GObj* gobj)
     ftSs_SpecialN_801293BC(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (samus_attr->x24 == 0) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
             return;
         }
-        ft_80096900(gobj, 1, 0, 1, 1, samus_attr->x24);
+        ftCo_80096900(gobj, 1, 0, 1, 1, samus_attr->x24);
     }
 }
 
@@ -317,7 +317,7 @@ void ftSs_SpecialNHold_IASA(HSD_GObj* gobj)
     u8 _[32];
 #endif
 
-    if (ft_8009917C(gobj)) {
+    if (ftCo_8009917C(gobj)) {
         fighterObj2 = gobj;
         ftSamus_UnkAndDestroyAllEF(fighterObj2);
     } else {

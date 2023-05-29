@@ -17,16 +17,16 @@
 #include <common_structs.h>
 #include <placeholder.h>
 
-void ft_800968C8(ftCo_GObj* gobj)
+void ftCo_800968C8(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    ft_80096900(gobj, 1, 0, true, 1, fp->x2EC);
+    ftCo_80096900(gobj, 1, 0, true, 1, fp->x2EC);
 }
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm void ft_80096900(ftCo_GObj* gobj, int, int, bool allow_interrupt, float,
-                     float)
+asm void ftCo_80096900(ftCo_GObj* gobj, int, int, bool allow_interrupt, float,
+                       float)
 {
     // clang-format off
     nofralloc
@@ -46,7 +46,7 @@ asm void ft_80096900(ftCo_GObj* gobj, int, int, bool allow_interrupt, float,
 /* 80096934 00093514  3B FE 01 10 */	addi r31, r30, 0x110
 /* 80096938 00093518  54 00 DF FF */	rlwinm. r0, r0, 0x1b, 0x1f, 0x1f
 /* 8009693C 0009351C  41 82 00 0C */	beq lbl_80096948
-/* 80096940 00093520  4B FF 9E 41 */	bl ft_80090780
+/* 80096940 00093520  4B FF 9E 41 */	bl ftCo_80090780
 /* 80096944 00093524  48 00 00 78 */	b lbl_800969BC
 lbl_80096948:
 /* 80096948 00093528  C0 22 8B F4 */	lfs f1, 0.0f
@@ -94,11 +94,11 @@ lbl_800969BC:
 
 /// @todo Real solution is @c 0. Inline needs to be fixed.
 #define SOLUTION 1
-void ft_80096900(ftCo_GObj* gobj, int arg1, int arg2, bool allow_interrupt,
-                 float arg4, float arg5)
+void ftCo_80096900(ftCo_GObj* gobj, int arg1, int arg2, bool allow_interrupt,
+                   float arg4, float arg5)
 {
 #if SOLUTION == 0
-    ft_800969D8(gobj, arg1, arg2, allow_interrupt, arg4, arg5, 0);
+    ftCo_800969D8(gobj, arg1, arg2, allow_interrupt, arg4, arg5, 0);
 #elif SOLUTION == 1
 
     /// @todo Unused stack.
@@ -108,7 +108,7 @@ void ft_80096900(ftCo_GObj* gobj, int arg1, int arg2, bool allow_interrupt,
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_DatAttrs* ca = &fp->co_attrs;
     if (fp->x2224_flag.bits.b2) {
-        ft_80090780(gobj);
+        ftCo_80090780(gobj);
         return;
     }
     Fighter_ChangeMotionState(gobj, ftCo_MS_FallSpecial, Ft_MF_KeepFastFall,
@@ -133,7 +133,7 @@ void ft_80096900(ftCo_GObj* gobj, int arg1, int arg2, bool allow_interrupt,
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm void ft_800969D8(ftCo_GObj* gobj, int, int, int, float, float, float)
+asm void ftCo_800969D8(ftCo_GObj* gobj, int, int, int, float, float, float)
 { // clang-format off
     nofralloc
 /* 800969D8 000935B8  7C 08 02 A6 */	mflr r0
@@ -152,7 +152,7 @@ asm void ft_800969D8(ftCo_GObj* gobj, int, int, int, float, float, float)
 /* 80096A0C 000935EC  3B FE 01 10 */	addi r31, r30, 0x110
 /* 80096A10 000935F0  54 00 DF FF */	rlwinm. r0, r0, 0x1b, 0x1f, 0x1f
 /* 80096A14 000935F4  41 82 00 0C */	beq lbl_80096A20
-/* 80096A18 000935F8  4B FF 9D 69 */	bl ft_80090780
+/* 80096A18 000935F8  4B FF 9D 69 */	bl ftCo_80090780
 /* 80096A1C 000935FC  48 00 00 68 */	b lbl_80096A84
 lbl_80096A20:
 /* 80096A20 00093600  C0 22 8B F4 */	lfs f1, 0.0f
@@ -193,8 +193,8 @@ lbl_80096A84:
 #pragma pop
 #else
 
-void ft_800969D8(ftCo_GObj* gobj, int arg1, int arg2, int allow_interrupt,
-                 float arg4, float arg5, float arg6)
+void ftCo_800969D8(ftCo_GObj* gobj, int arg1, int arg2, int allow_interrupt,
+                   float arg4, float arg5, float arg6)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -203,7 +203,7 @@ void ft_800969D8(ftCo_GObj* gobj, int arg1, int arg2, int allow_interrupt,
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_DatAttrs* ca = &fp->co_attrs;
     if (fp->x2224_flag.bits.b2) {
-        ft_80090780(gobj);
+        ftCo_80090780(gobj);
         return;
     }
     Fighter_ChangeMotionState(gobj, ftCo_MS_FallSpecial, Ft_MF_KeepFastFall,
@@ -234,7 +234,7 @@ void ftCo_FallSpecial_IASA(ftCo_GObj* gobj)
 {
     RETURN_IF(ftCo_800CEE70(gobj))
     RETURN_IF(ftCo_800D705C(gobj))
-    RETURN_IF(ft_800CB870(gobj));
+    RETURN_IF(ftCo_800CB870(gobj));
 }
 
 #if defined(MUST_MATCH) && !defined(WIP)
@@ -394,10 +394,10 @@ void ftCo_FallSpecial_Phys(ftCo_GObj* gobj)
 
 void ftCo_FallSpecial_Coll(ftCo_GObj* gobj)
 {
-    ft_80083090(gobj, ft_80096CC8, ftCo_80096D28);
+    ft_80083090(gobj, ftCo_80096CC8, ftCo_80096D28);
 }
 
-bool ft_80096CC8(ftCo_GObj* gobj, enum_t arg1)
+bool ftCo_80096CC8(ftCo_GObj* gobj, enum_t arg1)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -415,9 +415,9 @@ bool ft_80096CC8(ftCo_GObj* gobj, enum_t arg1)
 void ftCo_80096D28(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (fp->mv.co.fallspecial.x10 || fp->self_vel.y < ft_800D0EC8(fp)) {
-        ft_800D5CB0(gobj, fp->mv.co.fallspecial.allow_interrupt,
-                    fp->mv.co.fallspecial.x14);
+    if (fp->mv.co.fallspecial.x10 || fp->self_vel.y < ftCo_800D0EC8(fp)) {
+        ftCo_800D5CB0(gobj, fp->mv.co.fallspecial.allow_interrupt,
+                      fp->mv.co.fallspecial.x14);
     } else {
         ft_8008A2BC(gobj);
     }

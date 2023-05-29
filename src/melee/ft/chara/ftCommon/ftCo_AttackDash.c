@@ -26,7 +26,7 @@ bool ftCo_AttackDash_CheckInput(HSD_GObj* gobj)
             if (fp->input.held_inputs & HSD_PAD_LR ||
                 it_8026B30C(fp->item_gobj) == 0)
             {
-                ft_800957F4(gobj, ftCo_MS_LightThrowDash);
+                ftCo_800957F4(gobj, ftCo_MS_LightThrowDash);
                 return true;
             }
             switch (it_8026B30C(fp->item_gobj)) {
@@ -82,7 +82,7 @@ void ftCo_AttackDash_SetMv0(HSD_GObj* gobj)
 void ftCo_AttackDash_IASA(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (!lbl_800D8AE0() && fp->allow_interrupt) {
+    if (!ftCo_800D8AE0() && fp->allow_interrupt) {
         ftCo_Wait_IASA(gobj);
     }
 }

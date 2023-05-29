@@ -246,7 +246,7 @@ void ftGw_SpecialAirLw_Anim(HSD_GObj* gobj)
     ftGameWatch_SpecialLw_UpdateVars(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -497,7 +497,7 @@ void ftGw_SpecialAirLwCatch_Anim(HSD_GObj* gobj)
     }
 
     if (fp->fv.gw.x2238_panicCharge >= ftGw_Panic_Full) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
         return;
     }
 
@@ -575,7 +575,7 @@ void ftGw_SpecialLw_AbsorbThink_DecideAction(HSD_GObj* gobj)
     fp->fv.gw.x223C_panicDamage += fp->AbsorbAttr.x1A44_damageTaken;
 
     if (fp->fv.gw.x2238_panicCharge >= ftGw_Panic_Full) {
-        ft_800BFFD0(fp, 5, 0);
+        ftCo_800BFFD0(fp, 5, 0);
     }
 
     if (fp->ground_or_air == GA_Ground) {
@@ -627,7 +627,7 @@ void ftGw_SpecialAirLwShoot_Anim(HSD_GObj* gobj)
     ftGameWatch_SpecialLwShoot_ApplyDamage(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 

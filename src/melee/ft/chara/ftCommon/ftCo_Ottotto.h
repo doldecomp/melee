@@ -4,7 +4,7 @@
 #include <platform.h>
 #include "ftCommon/forward.h"
 
-/* 09A3C8 */ bool ft_8009A3C8(ftCo_GObj* gobj);
+/* 09A3C8 */ bool ftCo_8009A3C8(ftCo_GObj* gobj);
 /* 09A468 */ void ftCo_Ottotto_Anim(ftCo_GObj* gobj);
 /* 09A4A4 */ void ftCo_Ottotto_IASA(ftCo_GObj* gobj);
 /* 09A5F4 */ void ftCo_Ottotto_Phys(ftCo_GObj* gobj);

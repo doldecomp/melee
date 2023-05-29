@@ -50,7 +50,7 @@ static bool updateBomb(HSD_GObj* gobj, FtMotionId msid)
     if (fp->item_gobj != NULL) {
         uint bomb_kind = itGetKind(fp->item_gobj) - It_Kind_Link_Bomb;
         if (bomb_kind <= 1) {
-            ft_800957F4(gobj, msid);
+            ftCo_800957F4(gobj, msid);
         }
         return true;
     }
@@ -77,7 +77,7 @@ static void spawnBomb(HSD_GObj* gobj)
             fp->item_gobj = igobj;
             ftParts_80074A4C(gobj, 2, 1);
             if (igobj != NULL) {
-                ft_80094818(gobj, 1);
+                ftCo_80094818(gobj, 1);
             }
         }
     }
@@ -101,7 +101,7 @@ void ftLk_SpecialLw_Anim(HSD_GObj* gobj)
 
 void ftLk_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
-    doAnim(gobj, ft_800CC730);
+    doAnim(gobj, ftCo_800CC730);
 }
 
 void ftLk_SpecialLw_Phys(HSD_GObj* gobj)

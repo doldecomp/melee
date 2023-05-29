@@ -64,9 +64,9 @@ void ftMh_Throw_Anim(HSD_GObj* gobj)
             HSD_GObj* victim = fp->x1A58_interactedFighter;
             Fighter* victim_fp = GET_FIGHTER(victim);
             ftCommon_8007E2F4(fp, 0);
-            ft_800DE2A8(gobj, victim);
+            ftCo_800DE2A8(gobj, victim);
             victim_fp->dmg.x1844_direction *= -1;
-            ft_800DE7C0(victim, 0, 0);
+            ftCo_800DE7C0(victim, 0, 0);
         }
         fp->mv.mh.unk0.x20 = 0;
     }

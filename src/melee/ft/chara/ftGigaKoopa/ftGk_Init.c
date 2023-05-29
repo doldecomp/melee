@@ -275,7 +275,7 @@ MotionState ftGk_Init_UnkMotionStates0[] = {
         FtMoveId_Default << 24,
         NULL,
         NULL,
-        ft_800C74AC,
+        ftCo_800C74AC,
         NULL,
         NULL,
     },

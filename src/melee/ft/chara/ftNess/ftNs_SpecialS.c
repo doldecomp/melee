@@ -116,7 +116,7 @@ void ftNs_SpecialAirS_Anim(
     HSD_GObj* gobj) // Ness's aerial PK Fire Animation callback
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -142,7 +142,7 @@ void ftNs_SpecialS_Coll(
     HSD_GObj* gobj) // Ness's grounded PK Fire Collision callback
 {
     if (ft_800827A0(gobj) == false) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -156,6 +156,6 @@ void ftNs_SpecialAirS_Coll(
 
     ness_attr = fp->dat_attrs;
     if (ft_80081D0C(gobj) != false) {
-        ft_800D5CB0(gobj, 0, ness_attr->x38_PKFIRE_LANDING_LAG);
+        ftCo_800D5CB0(gobj, 0, ness_attr->x38_PKFIRE_LANDING_LAG);
     }
 }

@@ -292,7 +292,7 @@ void ftGw_SpecialAirN_Anim(HSD_GObj* gobj)
 
     ftGameWatch_SpecialAirN_ChefLoop(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 

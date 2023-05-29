@@ -44,7 +44,8 @@ static inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x1A58_interactedFighter == NULL) {
-        ftCommon_8007E2D0(fp, 0x40, ftMt_SpecialS_SetFlags, NULL, ft_800BCF18);
+        ftCommon_8007E2D0(fp, 0x40, ftMt_SpecialS_SetFlags, NULL,
+                          ftCo_800BCF18);
     } else {
         ftCommon_8007E2F4(fp, 0x1FF);
     }
@@ -80,7 +81,8 @@ static inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x1A58_interactedFighter == NULL) {
-        ftCommon_8007E2D0(fp, 0x40, ftMt_SpecialS_SetFlags, NULL, ft_800BD000);
+        ftCommon_8007E2D0(fp, 0x40, ftMt_SpecialS_SetFlags, NULL,
+                          ftCo_800BD000);
     } else {
         ftCommon_8007E2F4(fp, 0x1FF);
     }
@@ -127,8 +129,8 @@ static inline void ftMewtwo_SetGrabVictim(HSD_GObj* gobj)
         victimGObj = fp->x1A58_interactedFighter;
         if (victimGObj != NULL) {
             ftCommon_8007E2F4(fp, 0);
-            ft_800DE2A8(gobj, victimGObj);
-            ft_80090780(victimGObj);
+            ftCo_800DE2A8(gobj, victimGObj);
+            ftCo_80090780(victimGObj);
             fp->cmd_vars[0] = 0;
         }
     }
@@ -154,7 +156,7 @@ void ftMt_SpecialAirS_Anim(HSD_GObj* gobj)
     ftMewtwo_SetGrabVictim(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 

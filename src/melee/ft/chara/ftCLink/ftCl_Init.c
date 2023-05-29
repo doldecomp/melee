@@ -410,7 +410,7 @@ void ftCl_Init_80149114(HSD_GObj* gobj)
 {
     ftLk_Fighter* fp = gobj->user_data;
     ftLk_DatAttrs* ea = fp->ft_data->ext_attr;
-    f32 ftmp = ft_80092ED8(fp->x19A4, ea->xD8);
+    f32 ftmp = ftCo_80092ED8(fp->x19A4, ea->xD8);
     fp->gr_vel = ftmp * p_ftCommonData->x294;
     if (fp->specialn_facing_dir < 0.0f) {
         ftmp = fp->gr_vel;
@@ -498,6 +498,6 @@ bool ftCl_Init_801492F4(HSD_GObj* gobj)
 void ftCl_Init_80149318(HSD_GObj* gobj)
 {
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
-    ft_800DEAE8(gobj, 342, 343);
+    ftCo_800DEAE8(gobj, 342, 343);
     fp->cmd_vars[1] = false;
 }

@@ -56,7 +56,7 @@ bool ftCo_AttackS4_CheckInput(ftCo_GObj* gobj)
     if (checkLStick(fp)) {
         stick_x_sign = fp->input.lstick.x >= 0 ? (float) +1 : -1;
         stick_angle = ftCo_GetLStickAngle(fp);
-    } else if (ft_800DF1C8(fp)) {
+    } else if (ftCo_800DF1C8(fp)) {
         stick_x_sign = fp->input.cstick.x >= 0 ? (float) +1 : -1;
         stick_angle = ftCo_GetCStickAngle(fp);
     } else {
@@ -88,7 +88,7 @@ bool ftCo_AttackS4_8008C114(ftCo_GObj* gobj)
     if (checkFacingDir(fp)) {
         stick_x_sign = fp->facing_dir;
         stick_angle = ftCo_GetLStickAngle(fp);
-    } else if (ft_800DF1C8(fp)) {
+    } else if (ftCo_800DF1C8(fp)) {
         stick_x_sign = fp->input.cstick.x >= 0 ? (float) +1 : -1;
         stick_angle = ftCo_GetCStickAngle(fp);
     } else {
@@ -108,11 +108,11 @@ static bool checkItemThrow(ftCo_GObj* gobj, float stick_x_sign)
         if (fp->input.held_inputs & HSD_PAD_LR ||
             it_8026B30C(fp->item_gobj) == 0 ||
             (it_8026B30C(fp->item_gobj) == 3 && it_8026B594(fp->item_gobj)) ||
-            ft_800DF21C(fp))
+            ftCo_800DF21C(fp))
         {
-            ft_800957F4(gobj, stick_x_sign * fp->facing_dir >= 0
-                                  ? ftCo_MS_LightThrowF4
-                                  : ftCo_MS_LightThrowB4);
+            ftCo_800957F4(gobj, stick_x_sign * fp->facing_dir >= 0
+                                    ? ftCo_MS_LightThrowF4
+                                    : ftCo_MS_LightThrowB4);
             return true;
         }
         switch (it_8026B30C(fp->item_gobj)) {
@@ -198,8 +198,8 @@ void ftCo_AttackS4_IASA(HSD_GObj* gobj)
     if (fp->allow_interrupt) {
         RETURN_IF(ftCo_SpecialS_CheckInput(gobj))
         RETURN_IF(ftCo_Attack100_CheckInput(gobj))
-        RETURN_IF(ft_800D6824(gobj))
-        RETURN_IF(ft_800D68C0(gobj))
+        RETURN_IF(ftCo_800D6824(gobj))
+        RETURN_IF(ftCo_800D68C0(gobj))
         RETURN_IF(ftCo_Catch_CheckInput(gobj))
     }
     RETURN_IF(ftCo_800CECE8(gobj))
@@ -211,11 +211,11 @@ void ftCo_AttackS4_IASA(HSD_GObj* gobj)
         RETURN_IF(ftCo_AttackHi3_CheckInput(gobj))
         RETURN_IF(ftCo_AttackLw3_CheckInput(gobj))
         RETURN_IF(ftCo_Attack1_CheckInput(gobj))
-        RETURN_IF(ft_80091A4C(gobj))
-        RETURN_IF(ft_800DE9D8(gobj))
+        RETURN_IF(ftCo_80091A4C(gobj))
+        RETURN_IF(ftCo_800DE9D8(gobj))
         RETURN_IF(ftCo_Jump_CheckInput(gobj))
         RETURN_IF(ftCo_Dash_CheckInput(gobj))
-        RETURN_IF(ft_800D5FB0(gobj))
+        RETURN_IF(ftCo_800D5FB0(gobj))
         RETURN_IF(ftCo_Turn_CheckInput(gobj))
         RETURN_IF(ftCo_Walk_CheckInput(gobj))
     }

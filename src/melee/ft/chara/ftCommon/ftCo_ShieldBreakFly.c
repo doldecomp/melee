@@ -15,7 +15,7 @@
 
 #include <placeholder.h>
 
-void ft_80098B20(Fighter_GObj* gobj)
+void ftCo_80098B20(Fighter_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
@@ -51,11 +51,11 @@ void ftCo_ShieldBreakFly_Coll(Fighter_GObj* gobj)
     ft_80082C74(gobj, ftCo_80098E3C);
 }
 
-void ft_80098C9C(Fighter_GObj* gobj)
+void ftCo_80098C9C(Fighter_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8] = { 0 };
 #endif
-    ft_80098B20(gobj);
+    ftCo_80098B20(gobj);
 }

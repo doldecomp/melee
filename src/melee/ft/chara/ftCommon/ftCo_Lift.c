@@ -32,7 +32,7 @@ void ftCo_LiftWait_Anim(ftCo_GObj* gobj) {}
 
 void ftCo_LiftWait_IASA(ftCo_GObj* arg0)
 {
-    RETURN_IF(ft_80094EA4(arg0))
+    RETURN_IF(ftCo_80094EA4(arg0))
     RETURN_IF(ftCo_800970E0(arg0))
     RETURN_IF(ftCo_80096EF8(arg0));
 }
@@ -57,9 +57,9 @@ void ftCo_80096E68(ftCo_GObj* gobj)
 #endif
         vec.x = vec.y = vec.z = 0.0f;
         Item_8026ABD8(fp->item_gobj, &vec, 0.0f);
-        ft_80090780(gobj);
+        ftCo_80090780(gobj);
     } else {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -109,7 +109,7 @@ void ftCo_LiftWalk_Anim(HSD_GObj* gobj)
 
 void ftCo_LiftWalk_IASA(ftCo_GObj* gobj)
 {
-    RETURN_IF(ft_80094EA4(gobj))
+    RETURN_IF(ftCo_80094EA4(gobj))
 }
 
 void ftCo_LiftWalk_Phys(ftCo_GObj* gobj)
@@ -182,7 +182,7 @@ void ftCo_LiftTurn_Anim(HSD_GObj* gobj)
 
 void ftCo_LiftTurn_IASA(HSD_GObj* arg0)
 {
-    RETURN_IF(ft_80094EA4(arg0))
+    RETURN_IF(ftCo_80094EA4(arg0))
 }
 
 void ftCo_LiftTurn_Phys(HSD_GObj* arg0)
@@ -213,7 +213,7 @@ void ftCo_800974C4(HSD_GObj* gobj)
     }
 }
 
-void ft_8009750C(HSD_GObj* gobj)
+void ftCo_8009750C(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     Item_GObj* item_gobj = fp->item_gobj;

@@ -78,7 +78,7 @@ void ftGw_AttackLw3_ItemManholeRemove(HSD_GObj* gobj)
         fp->fv.gw.x2248_manholeGObj = NULL;
         it_8026BB20(fp->item_gobj);
         it_8026B73C(fp->item_gobj);
-        ft_80094818(gobj, 1);
+        ftCo_80094818(gobj, 1);
     }
 }
 
@@ -137,7 +137,7 @@ void ftGw_AttackLw3_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (ft_80094790(gobj) == false) {
+    if (ftCo_80094790(gobj) == false) {
         fp->allow_interrupt = 0;
         Fighter_ChangeMotionState(gobj, ftGw_MS_AttackLw3, 0, NULL, 0.0f, 1.0f,
                                   0.0f);
@@ -157,7 +157,7 @@ void ftGw_AttackLw3_Anim(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800D638C(gobj);
+        ftCo_800D638C(gobj);
     }
 }
 

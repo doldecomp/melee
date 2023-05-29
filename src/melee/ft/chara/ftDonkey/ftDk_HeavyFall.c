@@ -13,7 +13,7 @@
 
 void ftDk_HeavyFall_IASA(HSD_GObj* gobj)
 {
-    if (ft_80094EA4(gobj)) {
+    if (ftCo_80094EA4(gobj)) {
         return;
     }
 }
@@ -30,7 +30,7 @@ void ftDk_HeavyFall_Coll(HSD_GObj* gobj)
 
 bool ftDk_MS_347_800E0378(HSD_GObj* gobj)
 {
-    bool result = ft_800CAE80(gobj);
+    bool result = ftCo_800CAE80(gobj);
     if (result) {
         ftDk_MS_348_800E04A4(gobj, result);
         return true;
@@ -48,5 +48,5 @@ void ftDk_MS_347_800E03C0(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, donkey_attr->motion_state + 7, 0, NULL, 0,
                               1, 0);
     ftAnim_SetAnimRate(gobj, 0);
-    ft_800CB110(gobj, 1, 1);
+    ftCo_800CB110(gobj, 1, 1);
 }

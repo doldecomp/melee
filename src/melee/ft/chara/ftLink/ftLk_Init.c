@@ -353,7 +353,7 @@ void ftLk_800EAF38(HSD_GObj* gobj)
 void ftLk_800EAF58(HSD_GObj* gobj)
 {
     ftLk_SpecialS_RemoveBoomerang1(gobj);
-    ft_800D94D8(gobj);
+    ftCo_800D94D8(gobj);
     ftLk_SpecialN_ProcessFv10(gobj);
     ftLk_SpecialN_ProcessFv14(gobj);
     ftCl_Init_80149268(gobj);
@@ -429,7 +429,7 @@ void ftLk_800EB334(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* link_attr = fp->ft_data->ext_attr;
 
-    f32 resultf = ft_80092ED8(fp->x19A4, link_attr->xD8);
+    f32 resultf = ftCo_80092ED8(fp->x19A4, link_attr->xD8);
     fp->gr_vel = resultf * p_ftCommonData->x294;
     if (fp->specialn_facing_dir < 0) {
         new_ground_vel = fp->gr_vel;

@@ -38,7 +38,7 @@ static inline bool inlineA1(ftCo_Fighter* fp)
     return false;
 }
 
-bool ft_8009917C(ftCo_GObj* gobj)
+bool ftCo_8009917C(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     float stick_x;
@@ -205,7 +205,7 @@ static inline bool inlineB0(ftCo_Fighter* fp)
     return false;
 }
 
-bool ft_80099794(ftCo_GObj* gobj)
+bool ftCo_80099794(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->input.held_inputs & HSD_PAD_LR && inlineB0(fp)) {

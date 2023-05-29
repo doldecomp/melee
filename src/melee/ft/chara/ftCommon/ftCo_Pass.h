@@ -4,12 +4,12 @@
 #include <platform.h>
 #include "ftCommon/forward.h"
 
-/* 099F1C */ bool ft_80099F1C(ftCo_GObj* gobj);
+/* 099F1C */ bool ftCo_80099F1C(ftCo_GObj* gobj);
 /* 099F9C */ bool ftCo_80099F9C(ftCo_GObj* gobj);
-/* 09A080 */ bool ft_8009A080(ftCo_GObj* gobj);
-/* 09A134 */ bool ft_8009A134(ftCo_GObj* gobj);
-/* 09A184 */ void ft_8009A184(ftCo_GObj* gobj, FtMotionId msid, MotionFlags mf,
-                              float anim_start);
+/* 09A080 */ bool ftCo_8009A080(ftCo_GObj* gobj);
+/* 09A134 */ bool ftCo_8009A134(ftCo_GObj* gobj);
+/* 09A184 */ void ftCo_8009A184(ftCo_GObj* gobj, FtMotionId msid,
+                                MotionFlags mf, float anim_start);
 /* 09A228 */ void ftCo_8009A228(ftCo_GObj* gobj);
 /* 09A2A8 */ void ftCo_Pass_Anim(ftCo_GObj* gobj);
 /* 09A2E4 */ void ftCo_Pass_IASA(ftCo_GObj* gobj);

@@ -351,9 +351,9 @@ void ftZd_SpecialAirSEnd_Anim(HSD_GObj* gobj)
         }
 
         if (sa->x34 == 0) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         } else {
-            ft_80096900(gobj, 1, 0, 1, 1, sa->x34);
+            ftCo_80096900(gobj, 1, 0, 1, 1, sa->x34);
         }
     }
 }

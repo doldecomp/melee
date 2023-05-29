@@ -42,7 +42,7 @@ void ftDk_SpecialLwStart_Phys(HSD_GObj* gobj)
 void ftDk_SpecialLwStart_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -77,7 +77,7 @@ void ftDk_SpecialLwLoop_Phys(HSD_GObj* gobj)
 void ftDk_SpecialLwLoop_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -135,7 +135,7 @@ void ftDk_SpecialLwEnd0_Phys(HSD_GObj* gobj)
 void ftDk_SpecialLwEnd0_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -147,7 +147,7 @@ static void doTransition(HSD_GObj* gobj)
 void ftDk_SpecialLwEnd1_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 

@@ -101,7 +101,7 @@ void ftCliffCommon_80081370(ftCo_GObj* gobj)
 void ftCo_CliffCatch_Anim(ftCo_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_8009A804(gobj);
+        ftCo_8009A804(gobj);
     }
 }
 
@@ -124,7 +124,7 @@ void ftCo_CliffCatch_Phys(ftCo_GObj* gobj)
         fp->cur_pos.x = fp->x68C_transNPos.z * fp->facing_dir + vec.x;
         fp->cur_pos.y = vec.y + fp->x68C_transNPos.y;
     } else {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -140,7 +140,7 @@ void ftCo_CliffCatch_Coll(ftCo_GObj* gobj)
         return;
     }
 
-    if (ft_8009EF68(gobj)) {
+    if (ftCo_8009EF68(gobj)) {
         Fighter* fp = gobj->user_data;
         fp->x2064_ledgeCooldown = p_ftCommonData->ledge_cooldown;
     }

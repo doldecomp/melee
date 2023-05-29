@@ -8,7 +8,7 @@
 
 #define TEST(expr) (expr) ? true : false
 
-/* static */ s32 ft_800C06B4(Fighter*);
+/* static */ s32 ftCo_800C06B4(Fighter*);
 
 s32 ft_800877F8(HSD_GObj* gobj, s32 arg1)
 {
@@ -119,7 +119,8 @@ s32 ft_80087A18(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((fp->x2226_flag.bits.b4) &&
-        ((var1 = ft_800C06B4(fp), ((var1 == 0x7B) != 0)) || (var1 == 0x80)) &&
+        ((var1 = ftCo_800C06B4(fp), ((var1 == 0x7B) != 0)) ||
+         (var1 == 0x80)) &&
         ((fp->x2226_flag.bits.b5)))
     {
         return true;
@@ -231,14 +232,14 @@ void ft_80087BC0(HSD_GObj* gobj, s8 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     u64 var0 = fp->x1A98;
-    ft_800A101C(fp, arg1, var0, fp->x1A9C);
+    ftCo_800A101C(fp, arg1, var0, fp->x1A9C);
 }
 
 void ft_80087BEC(HSD_GObj* gobj, u8 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     u64 var0 = fp->x1A94;
-    ft_800A101C(fp, var0, arg1, fp->x1A9C);
+    ftCo_800A101C(fp, var0, arg1, fp->x1A9C);
 }
 
 s32 ft_80087C1C(void)

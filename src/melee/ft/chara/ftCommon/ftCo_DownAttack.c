@@ -58,7 +58,7 @@ void ftCo_DownAttack_Coll(ftCo_GObj* gobj)
     ft_80084104(gobj);
 }
 
-void ft_80098634(HSD_ObjAllocUnk2* gobj)
+void ftCo_80098634(HSD_ObjAllocUnk2* gobj)
 {
     Vec4* cur_vec4 = (Vec4*) gobj;
     Vec3* cur_pos = (Vec3*) gobj;
@@ -83,7 +83,7 @@ void ft_80098634(HSD_ObjAllocUnk2* gobj)
 bool ftCo_800986B0(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (!ft_800C5240(gobj) && fp->x680 < p_ftCommonData->x250 &&
+    if (!ftCo_800C5240(gobj) && fp->x680 < p_ftCommonData->x250 &&
         fp->x684 >= p_ftCommonData->x1C)
     {
         return true;

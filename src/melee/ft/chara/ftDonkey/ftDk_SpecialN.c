@@ -118,7 +118,7 @@ void ftDk_SpecialNLoop_Anim(HSD_GObj* gobj)
         fp->fv.dk.x222C += 1;
         if (fp->fv.dk.x222C >= donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
             Fighter* fighter2 = fp;
-            ft_800BFFD0(fighter2, 57, 0);
+            ftCo_800BFFD0(fighter2, 57, 0);
             fighter2->fv.dk.x222C = donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS;
             clearCallbacks(gobj);
             ft_8008A2BC(gobj);
@@ -240,10 +240,10 @@ void ftDk_SpecialAirNLoop_Anim(HSD_GObj* gobj)
         fp->fv.dk.x222C += 1;
         if (fp->fv.dk.x222C >= donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
             Fighter* fighter2 = fp;
-            ft_800BFFD0(fighter2, 57, 0);
+            ftCo_800BFFD0(fighter2, 57, 0);
             fp->fv.dk.x222C = donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS;
             clearCallbacks(gobj);
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         }
     }
 }
@@ -256,7 +256,7 @@ void ftDk_SpecialAirNCancel_Anim(HSD_GObj* gobj)
 #endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         clearCallbacks(gobj);
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -306,10 +306,10 @@ void ftDk_SpecialAirN_Anim(HSD_GObj* gobj)
         fp->fv.dk.x222C = 0;
         clearCallbacks(gobj);
         if (donkey_attr->SpecialN.x38_LANDING_LAG == 0) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         } else {
-            ft_80096900(gobj, 1, 0, 1, 1,
-                        donkey_attr->SpecialN.x38_LANDING_LAG);
+            ftCo_80096900(gobj, 1, 0, 1, 1,
+                          donkey_attr->SpecialN.x38_LANDING_LAG);
         }
     }
 }
@@ -341,10 +341,10 @@ void ftDk_SpecialAirNFull_Anim(HSD_GObj* gobj)
         fp->fv.dk.x222C = 0;
         clearCallbacks(gobj);
         if (donkey_attr->SpecialN.x38_LANDING_LAG == 0) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         } else {
-            ft_80096900(gobj, 1, 0, 1, 1,
-                        donkey_attr->SpecialN.x38_LANDING_LAG);
+            ftCo_80096900(gobj, 1, 0, 1, 1,
+                          donkey_attr->SpecialN.x38_LANDING_LAG);
         }
     }
 }
@@ -358,7 +358,7 @@ void ftDk_SpecialNLoop_IASA(HSD_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-    if (!ft_8009917C(gobj)) {
+    if (!ftCo_8009917C(gobj)) {
         if ((fp->input.x668 & 512)) {
             Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialN, 0, NULL, 0, 1,
                                       0);

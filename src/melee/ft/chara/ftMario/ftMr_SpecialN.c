@@ -135,7 +135,7 @@ void ftMr_SpecialAirN_Enter(HSD_GObj* gobj)
 void ftMr_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -143,7 +143,7 @@ void ftMr_SpecialAirN_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[0] != 0) {
-        ft_800CCAAC(gobj);
+        ftCo_800CCAAC(gobj);
     }
 }
 

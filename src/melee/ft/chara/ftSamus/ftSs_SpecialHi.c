@@ -77,10 +77,10 @@ void ftSs_SpecialHi_Anim(HSD_GObj* gobj)
         ftSamus_DestroyAllUnsetx2444(gobj);
         ftCommon_8007D60C(fighter2);
         if (samus_attr->x50 == 0.0f) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
             return;
         }
-        ft_80096900(gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
+        ftCo_80096900(gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
     }
 }
 
@@ -96,10 +96,10 @@ void ftSs_SpecialAirHi_Anim(HSD_GObj* gobj)
         ftSamus_DestroyAllUnsetx2444(gobj);
         ftCommon_8007D60C(fighter2);
         if (samus_attr->x50 == 0.0f) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
             return;
         }
-        ft_80096900(gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
+        ftCo_80096900(gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
     }
 }
 
@@ -222,7 +222,7 @@ void ftSs_SpecialHi_Coll(HSD_GObj* gobj)
         }
         if (ft_CheckGroundAndLedge(gobj, direction)) {
             ftSamus_DestroyAllUnsetx2444(gobj);
-            ft_800D5CB0(gobj, 0, samus_attr->x50);
+            ftCo_800D5CB0(gobj, 0, samus_attr->x50);
             return;
         }
         if (ftCliffCommon_80081298(gobj)) {
@@ -258,7 +258,7 @@ void ftSs_SpecialAirHi_Coll(HSD_GObj* gobj)
         }
         if (ft_CheckGroundAndLedge(gobj, direction)) {
             ftSamus_DestroyAllUnsetx2444(gobj);
-            ft_800D5CB0(gobj, 0, samus_attr->x50);
+            ftCo_800D5CB0(gobj, 0, samus_attr->x50);
             return;
         }
         if (ftCliffCommon_80081298(gobj)) {

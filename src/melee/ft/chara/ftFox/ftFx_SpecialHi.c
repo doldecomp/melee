@@ -325,7 +325,7 @@ static inline bool ftFox_SpecialHi_IsBound(HSD_GObj* gobj)
 
     if (fp->mv.fx.SpecialHi.unk2 >= da->x6C_FOX_FIREFOX_BOUNCE_VAR) {
         return true;
-    } else if (ft_8009A134(gobj) != false) {
+    } else if (ftCo_8009A134(gobj) != false) {
         return false;
     } else {
         return true;
@@ -468,7 +468,7 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
         sp20.z = 0.0f;
 
         if (!(lbVector_AngleXY(&collData->floor.normal, &sp20) < HALF_PI32) &&
-            (ft_8009A134(gobj) == false))
+            (ftCo_8009A134(gobj) == false))
         {
             ftCommon_8007D9FC(fp);
 
@@ -585,8 +585,8 @@ void ftFx_SpecialHiFall_Anim(HSD_GObj* gobj)
     ftFoxAttributes* da = fp->dat_attrs;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_80096900(gobj, 1, 0, true, da->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
-                    da->x90_FOX_FIREFOX_LANDING_LAG);
+        ftCo_80096900(gobj, 1, 0, true, da->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
+                      da->x90_FOX_FIREFOX_LANDING_LAG);
     }
 }
 
@@ -629,8 +629,8 @@ void ftFx_SpecialHiLanding_Coll(HSD_GObj* gobj)
     ftFoxAttributes* da = fp->dat_attrs;
 
     if (ft_80082708(gobj) == false) {
-        ft_80096900(gobj, 1, 0, true, da->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
-                    da->x90_FOX_FIREFOX_LANDING_LAG);
+        ftCo_80096900(gobj, 1, 0, true, da->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
+                      da->x90_FOX_FIREFOX_LANDING_LAG);
     }
 }
 
@@ -714,16 +714,16 @@ void ftFx_SpecialHiBound_Anim(HSD_GObj* gobj)
     da = fp->dat_attrs;
 
     if (((u32) fp->cmd_vars[0] != 0U) && ((s32) fp->ground_or_air == GA_Air)) {
-        ft_80096900(gobj, 1, 0, true, da->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
-                    da->x90_FOX_FIREFOX_LANDING_LAG);
+        ftCo_80096900(gobj, 1, 0, true, da->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
+                      da->x90_FOX_FIREFOX_LANDING_LAG);
         fp->x1968_jumpsUsed = (u8) ca->max_jumps;
         return;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if ((s32) fp->ground_or_air == GA_Air) {
-            ft_80096900(gobj, 1, 0, true,
-                        da->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
-                        da->x90_FOX_FIREFOX_LANDING_LAG);
+            ftCo_80096900(gobj, 1, 0, true,
+                          da->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
+                          da->x90_FOX_FIREFOX_LANDING_LAG);
             fp->x1968_jumpsUsed = (u8) ca->max_jumps;
             return;
         }

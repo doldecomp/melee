@@ -163,11 +163,11 @@ void ftLg_SpecialAirLw_Anim(HSD_GObj* gobj)
             int landing_lag = attrs->x94_LUIGI_CYCLONE_LANDING_LAG;
 
             if (landing_lag == 0.0) {
-                ft_800CC730(gobj);
+                ftCo_800CC730(gobj);
                 return;
             }
 
-            ft_80096900(gobj, 1, 0, 1, 1, (f32) landing_lag);
+            ftCo_80096900(gobj, 1, 0, 1, 1, (f32) landing_lag);
         }
     }
 }

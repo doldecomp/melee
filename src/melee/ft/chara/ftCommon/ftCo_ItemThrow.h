@@ -16,24 +16,24 @@ struct _m2c_stack_ftCo_80095EFC {
 }; /* size = 0x58 */
 #endif
 
-/* 0949F4 */ bool ft_80094E54(ftCo_Fighter* fp);
-/* 094CFC */ /* static */ bool ft_8009515C(ftCo_GObj* gobj);
+/* 0949F4 */ bool ftCo_80094E54(ftCo_Fighter* fp);
+/* 094CFC */ /* static */ bool ftCo_8009515C(ftCo_GObj* gobj);
 /* 094D70 */ /* static */ bool ftCo_800951D0(ftCo_GObj* gobj);
 /* 094DF4 */ /* static */ bool ftCo_80095254(ftCo_GObj* gobj);
 /* 094E7C */ /* static */ bool ftCo_800952DC(ftCo_GObj* gobj);
-/* 094EA4 */ bool ft_80094EA4(ftCo_GObj* gobj);
+/* 094EA4 */ bool ftCo_80094EA4(ftCo_GObj* gobj);
 /* 0951DC */ /* static */ bool ftCo_8009563C(ftCo_GObj* gobj);
 /* 0952A0 */ /* static */ void ftCo_80095700(ftCo_GObj* gobj, enum_t arg1);
 /* 0952C8 */ /* static */ UNK_RET lbl_80095728(UNK_PARAMS);
 /* 0952D8 */ /* static */ UNK_RET lbl_80095738(UNK_PARAMS);
-/* 0952E4 */ void ft_80095744(ftCo_GObj* gobj, int*);
-/* 095328 */ bool ft_80095328(ftCo_GObj*, bool*);
-/* 095394 */ void ft_800957F4(ftCo_GObj* gobj, FtMotionId msid);
-/* 09542C */ /* static */ UNK_RET lbl_8009588C(UNK_PARAMS);
-/* 09543C */ /* static */ UNK_RET lbl_8009589C(UNK_PARAMS);
+/* 0952E4 */ void ftCo_80095744(ftCo_GObj* gobj, int*);
+/* 095328 */ bool ftCo_80095328(ftCo_GObj*, bool*);
+/* 095394 */ void ftCo_800957F4(ftCo_GObj* gobj, FtMotionId msid);
+/* 09542C */ /* static */ UNK_RET ftCo_8009588C(UNK_PARAMS);
+/* 09543C */ /* static */ UNK_RET ftCo_8009589C(UNK_PARAMS);
 /* 09549C */ /* static */ void ftCo_800958FC(ftCo_GObj* gobj, int);
-/* 095530 */ /* static */ UNK_RET lbl_80095990(UNK_PARAMS);
-/* 095540 */ /* static */ UNK_RET lbl_800959A0(UNK_PARAMS);
+/* 095530 */ /* static */ UNK_RET ftCo_80095990(UNK_PARAMS);
+/* 095540 */ /* static */ UNK_RET ftCo_800959A0(UNK_PARAMS);
 /* 0955D0 */ /* static */ void ftCo_80095A30(ftCo_GObj* gobj);
 /* 0958FC */ /* static */ void ftCo_80095D5C(ftCo_Fighter* fp, Vec3* arg1);
 /* 095A20 */ void ftCo_ItemThrow_Anim(ftCo_GObj* gobj);

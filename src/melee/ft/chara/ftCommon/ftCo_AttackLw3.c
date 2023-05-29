@@ -37,8 +37,8 @@ bool ftCo_AttackLw3_CheckInput(ftCo_GObj* gobj)
         if (fp->input.lstick.y <= p_ftCommonData->xB0 &&
             ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20)
         {
-            if (fp->item_gobj != NULL && ft_80094E54(fp)) {
-                ft_800957F4(gobj, ftCo_MS_LightThrowLw);
+            if (fp->item_gobj != NULL && ftCo_80094E54(fp)) {
+                ftCo_800957F4(gobj, ftCo_MS_LightThrowLw);
                 return true;
             }
             decideFighter(gobj);
@@ -73,7 +73,7 @@ void decideFighter(HSD_GObj* gobj)
 static void doEnter(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (!ft_80094790(gobj)) {
+    if (!ftCo_80094790(gobj)) {
         fp->cmd_vars[cmd_unk0_bool] = false;
         fp->allow_interrupt = false;
         fp->mv.co.attacklw3.x0 = 0;
@@ -98,7 +98,7 @@ void ftCo_AttackLw3_Anim(HSD_GObj* gobj)
         return;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800D638C(gobj);
+        ftCo_800D638C(gobj);
     }
 }
 
@@ -122,8 +122,8 @@ static bool checkItemThrowInput(ftCo_GObj* gobj)
         fp->input.lstick.y <= p_ftCommonData->xB0 &&
         ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20)
     {
-        if (fp->item_gobj != NULL && ft_80094E54(fp)) {
-            ft_800957F4(gobj, ftCo_MS_LightThrowLw);
+        if (fp->item_gobj != NULL && ftCo_80094E54(fp)) {
+            ftCo_800957F4(gobj, ftCo_MS_LightThrowLw);
             return true;
         }
         decideFighter(gobj);

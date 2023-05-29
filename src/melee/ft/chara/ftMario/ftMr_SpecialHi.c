@@ -50,8 +50,8 @@ void ftMr_SpecialHi_Anim(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     sa = (ftMario_DatAttrs*) fp->dat_attrs;
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_80096900(gobj, 0, 1, 0, sa->specialhi.freefall_mobility,
-                    sa->specialhi.landing_lag);
+        ftCo_80096900(gobj, 0, 1, 0, sa->specialhi.freefall_mobility,
+                      sa->specialhi.landing_lag);
     }
 }
 
@@ -132,7 +132,7 @@ void ftMr_SpecialHi_CheckLanding(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = fp->dat_attrs;
-    ft_800D5CB0(gobj, 0, sa->specialhi.landing_lag);
+    ftCo_800D5CB0(gobj, 0, sa->specialhi.landing_lag);
 }
 
 void ftMr_SpecialHi_Coll(HSD_GObj* gobj)
@@ -142,7 +142,7 @@ void ftMr_SpecialHi_Coll(HSD_GObj* gobj)
         if (fp->cmd_vars[0] == 0 || fp->self_vel.y >= 0) {
             ft_80083B68(gobj);
         } else {
-            ft_800831CC(gobj, &ft_80096CC8, &ftMr_SpecialHi_CheckLanding);
+            ft_800831CC(gobj, &ftCo_80096CC8, &ftMr_SpecialHi_CheckLanding);
         }
     } else {
         ft_80084104(gobj);
