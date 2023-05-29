@@ -24,6 +24,7 @@
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_CargoWalk.h"
 #include "lb/lbmthp.h"
 #include "mp/mplib.h"
 
