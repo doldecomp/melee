@@ -230,12 +230,6 @@
 /* 09E714 */ void ft_8009E714(u8, s16, char*, u8, float, float, float, float,
                               float, float);
 /* 0C94B4 */ bool ftCo_800C94B4(ftCo_GObj* gobj);
-/* 09B170 */ bool ftCo_8009B170(ftCo_GObj* gobj);
-/* 09B1B8 */ /* static */ UNK_RET ftCo_8009B1B8(UNK_PARAMS);
-/* 09B1B8 */ /* static */ UNK_RET ftCo_8009B1B8(UNK_PARAMS);
-/* 09B2F8 */ /* static */ UNK_RET ftCo_8009B2F8(UNK_PARAMS);
-/* 09B2F8 */ /* static */ UNK_RET ftCo_8009B2F8(UNK_PARAMS);
-/* 09B4D0 */ /* static */ UNK_RET ftCo_8009B4D0(UNK_PARAMS);
 /* 09B4D0 */ /* static */ UNK_RET ftCo_8009B4D0(UNK_PARAMS);
 /* 09B518 */ /* static */ UNK_RET ftCo_8009B518(UNK_PARAMS);
 /* 09B518 */ /* static */ UNK_RET ftCo_8009B518(UNK_PARAMS);

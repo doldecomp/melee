@@ -150,7 +150,7 @@ void ft_800C9034(Fighter_GObj* gobj);
 bool ft_800C97A8(Fighter_GObj* gobj);
 void ft_800C9840(Fighter_GObj*, s32, s32, f32, f32, f32);
 void ft_800C9924(Fighter_GObj* gobj);
-s32 ft_800CAE80(Fighter_GObj* gobj);
+bool ft_800CAE80(Fighter_GObj* gobj);
 void ft_800CB110(Fighter_GObj*, s32, f32);
 void ft_800CB438(Fighter_GObj* gobj);
 void ft_800CB59C(Fighter_GObj* gobj);

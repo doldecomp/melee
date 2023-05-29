@@ -2159,7 +2159,8 @@ lbl_8008359C:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_800835B0(void)
+asm void ft_800835B0(Fighter_GObj* gobj, bool (*)(Fighter_GObj*, enum_t),
+                     HSD_GObjEvent)
 {
     // clang-format off
     nofralloc
