@@ -5,6 +5,7 @@
 
 #include "ftCo_CargoFall.h"
 #include "ftCo_CargoJump.h"
+#include "ftCo_CargoThrow.h"
 #include "ftCo_CargoTurn.h"
 #include "ftCo_CargoWalk.h"
 
