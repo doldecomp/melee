@@ -4,6 +4,7 @@
 #include "ftCo_CliffAttack.h"
 
 #include "ftCo_CliffClimb.h"
+#include "ftCo_CliffEscape.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_08A4.h"
