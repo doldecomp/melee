@@ -146,6 +146,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CargoTurn.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CargoKneebend.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CargoJump.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CargoFall.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CargoLanding.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdynamics.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMr_Strings.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_08A4.s.o\
