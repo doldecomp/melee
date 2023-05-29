@@ -130,6 +130,9 @@ union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ bool x0;
     } cliffjump;
+    struct {
+        /* fp+2340 */ bool x0;
+    } cargoturn;
 };
 
 #endif
