@@ -4,6 +4,7 @@
 #include "ft_0877.h"
 #include "inlines.h"
 
+#include "ft/ft_08A4.h"
 #include "mp/mplib.h"
 
 #include <dolphin/mtx/types.h>
