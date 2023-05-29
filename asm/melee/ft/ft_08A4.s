@@ -2,52 +2,6 @@
 
 .section .text
 
-.global ftCo_CargoLanding_Anim
-ftCo_CargoLanding_Anim:
-/* 8009BDC4 000989A4  7C 08 02 A6 */	mflr r0
-/* 8009BDC8 000989A8  90 01 00 04 */	stw r0, 4(r1)
-/* 8009BDCC 000989AC  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8009BDD0 000989B0  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8009BDD4 000989B4  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 8009BDD8 000989B8  C0 02 8D 58 */	lfs f0, ftCo_804D8738@sda21(r2)
-/* 8009BDDC 000989BC  C0 3F 23 44 */	lfs f1, 0x2344(r31)
-/* 8009BDE0 000989C0  FC 01 00 40 */	fcmpo cr0, f1, f0
-/* 8009BDE4 000989C4  4C 40 13 82 */	cror 2, 0, 2
-/* 8009BDE8 000989C8  40 82 00 08 */	bne .L_8009BDF0
-/* 8009BDEC 000989CC  4B FF F7 2D */	bl ftCo_8009B518
-.L_8009BDF0:
-/* 8009BDF0 000989D0  C0 3F 23 44 */	lfs f1, 0x2344(r31)
-/* 8009BDF4 000989D4  C0 02 8D 5C */	lfs f0, ftCo_804D873C@sda21(r2)
-/* 8009BDF8 000989D8  EC 01 00 28 */	fsubs f0, f1, f0
-/* 8009BDFC 000989DC  D0 1F 23 44 */	stfs f0, 0x2344(r31)
-/* 8009BE00 000989E0  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8009BE04 000989E4  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8009BE08 000989E8  38 21 00 18 */	addi r1, r1, 0x18
-/* 8009BE0C 000989EC  7C 08 03 A6 */	mtlr r0
-/* 8009BE10 000989F0  4E 80 00 20 */	blr
-
-.global ftCo_CargoLanding_Phys
-ftCo_CargoLanding_Phys:
-/* 8009BE14 000989F4  7C 08 02 A6 */	mflr r0
-/* 8009BE18 000989F8  90 01 00 04 */	stw r0, 4(r1)
-/* 8009BE1C 000989FC  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8009BE20 00098A00  4B FE 91 1D */	bl ft_80084F3C
-/* 8009BE24 00098A04  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8009BE28 00098A08  38 21 00 08 */	addi r1, r1, 8
-/* 8009BE2C 00098A0C  7C 08 03 A6 */	mtlr r0
-/* 8009BE30 00098A10  4E 80 00 20 */	blr
-
-.global ftCo_CargoLanding_Coll
-ftCo_CargoLanding_Coll:
-/* 8009BE34 00098A14  7C 08 02 A6 */	mflr r0
-/* 8009BE38 00098A18  90 01 00 04 */	stw r0, 4(r1)
-/* 8009BE3C 00098A1C  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8009BE40 00098A20  4B FF F8 15 */	bl ftCo_CargoWait_Coll
-/* 8009BE44 00098A24  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8009BE48 00098A28  38 21 00 08 */	addi r1, r1, 8
-/* 8009BE4C 00098A2C  7C 08 03 A6 */	mtlr r0
-/* 8009BE50 00098A30  4E 80 00 20 */	blr
-
 .global ftCo_CargoWait2_Anim
 ftCo_CargoWait2_Anim:
 /* 8009BE54 00098A34  7C 08 02 A6 */	mflr r0
