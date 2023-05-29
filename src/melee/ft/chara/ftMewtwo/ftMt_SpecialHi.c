@@ -1,21 +1,22 @@
 #include "forward.h"
 
-#include "ftMewtwo/ftMt_SpecialHi.h"
+#include "ftMt_SpecialHi.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_08A4.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Pass.h"
 #include "ftMewtwo/ftMt_Init.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
-#include "melee/ft/types.h"
 
 #include <dolphin/mtx/types.h>
 #include <MSL/trigf.h>

@@ -1,6 +1,7 @@
 #include "player.h"
 
 #include "ft/ft_0877.h"
+#include "ft/ft_08A4.h"
 #include "ft/ftdata.h"
 #include "ft/ftlib.h"
 #include "ftKirby/ftKb_Init.h"

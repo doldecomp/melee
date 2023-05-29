@@ -4,6 +4,7 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_08A4.h"
 #include "ft/ftcoll.h"
 #include "ftNess/ftNs_Init.h"
 #include "it/it_27CF.h"

@@ -1,6 +1,7 @@
 #include "ftMh_TagCancel.h"
 
 #include "ft/ft_0877.h"
+#include "ft/ft_08A4.h"
 #include "ft/ftcommon.h"
 
 void ftMh_MS_388_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
