@@ -3,6 +3,7 @@
 #include "ftCo_CargoTurn.h"
 
 #include "ftCo_CargoJump.h"
+#include "ftCo_CargoThrow.h"
 #include "ftCo_CargoWait.h"
 
 #include "ft/ft_081B.h"

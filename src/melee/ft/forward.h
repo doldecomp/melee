@@ -50,6 +50,7 @@ typedef struct ftLk_SpecialN_Vec3Group ftLk_SpecialN_Vec3Group;
 typedef struct gmScriptEventDefault gmScriptEventDefault;
 typedef u32 MotionFlags;
 
+typedef void (*FighterEvent)(Fighter* fp);
 typedef char* (*Fighter_MotionFileStringGetter)(enum_t arg0);
 typedef void (*Fighter_ItemEvent)(HSD_GObj* this, bool arg1);
 typedef void (*Fighter_ModelEvent)(Fighter* fp, int arg1, bool arg2);

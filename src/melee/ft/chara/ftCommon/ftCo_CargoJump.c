@@ -4,6 +4,7 @@
 #include "ftCo_CargoJump.h"
 
 #include "ftCo_CargoKneebend.h"
+#include "ftCo_CargoThrow.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_08A4.h"
