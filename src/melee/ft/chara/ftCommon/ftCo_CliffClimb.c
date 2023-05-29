@@ -3,6 +3,8 @@
 
 #include "ftCo_CliffClimb.h"
 
+#include "ftCo_CliffAttack.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
