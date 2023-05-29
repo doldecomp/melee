@@ -907,7 +907,7 @@ struct Fighter {
     /*  fp+110 */ ftCo_DatAttrs co_attrs;
     /*  fp+294 */ itPickup x294_itPickup;
     /*  fp+2C4 */ Vec2 x2C4;
-    /*  fp+2CC */ void* x2CC;
+    /*  fp+2CC */ ftDonkeyAttributes* x2CC;
     /*  fp+2D0 */ void* x2D0;
     /*  fp+2D4 */ void* dat_attrs;
     /*  fp+2D8 */ void* x2D8_specialAttributes2;
