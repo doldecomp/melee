@@ -365,7 +365,7 @@ void ftCo_800D237C(Fighter_GObj* gobj);
 void ftCo_800D3158(Fighter_GObj* gobj);
 void ftCo_800D4F24(Fighter_GObj*, s32);
 void ftCo_800D4FF4(Fighter_GObj* gobj);
-void ftCo_800D5AEC(Fighter_GObj*, s32, s32, s32, Fighter*, f32, f32);
+void ftCo_800D5AEC(Fighter_GObj*, s32, s32, s32, f32, f32);
 void ftCo_800D5BF8(Fighter_GObj* gobj);
 void ftCo_800D5CB0(Fighter_GObj*, bool, float landing_lag);
 void ftCo_800D638C(Fighter_GObj* gobj);
