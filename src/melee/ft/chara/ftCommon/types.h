@@ -133,6 +133,11 @@ union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ bool x0;
     } cargoturn;
+    struct {
+        /* fp+2340 */ int x0;
+        /* fp+2344 */ int x4;
+        /* fp+2348 */ float x8;
+    } cargokneebend;
 };
 
 #endif
