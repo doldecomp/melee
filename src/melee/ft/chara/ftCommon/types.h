@@ -127,6 +127,9 @@ union ftCommon_MotionVars {
         /* fp+2344 */ float x4;
         /* fp+2348 */ bool x8;
     } cliff;
+    struct {
+        /* fp+2340 */ bool x0;
+    } cliffjump;
 };
 
 #endif
