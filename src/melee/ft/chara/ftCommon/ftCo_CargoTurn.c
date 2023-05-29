@@ -23,7 +23,7 @@ void ftCo_8009B860(ftCo_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[16] = { 0 };
 #endif
-    Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* fp_x2CC = fp->x2CC;
     ftCo_800C9840(gobj, fp_x2CC->x4_motion_state + 4, 0, 0,
                   fp_x2CC->cargo_hold.x20_TURN_SPEED, 0);
@@ -36,7 +36,7 @@ void ftCo_CargoTurn_Anim(ftCo_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[16] = { 0 };
 #endif
-    Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = gobj->user_data;
     if (fp->mv.co.walk.fast_anim_frame > 0) {
         fp->mv.co.walk.fast_anim_frame -= 1;
     } else if (!fp->mv.co.cargoturn.x0) {
@@ -51,18 +51,18 @@ void ftCo_CargoTurn_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_CargoTurn_IASA(Fighter_GObj* gobj)
+void ftCo_CargoTurn_IASA(ftCo_GObj* gobj)
 {
     RETURN_IF(ftCo_8009BF3C(gobj))
     RETURN_IF(ftCo_8009BB1C(gobj))
 }
 
-void ftCo_CargoTurn_Phys(Fighter_GObj* gobj)
+void ftCo_CargoTurn_Phys(ftCo_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftCo_CargoTurn_Coll(Fighter_GObj* gobj)
+void ftCo_CargoTurn_Coll(ftCo_GObj* gobj)
 {
     ftCo_CargoWait_Coll(gobj);
 }
