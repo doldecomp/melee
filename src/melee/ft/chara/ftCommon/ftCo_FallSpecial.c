@@ -107,7 +107,7 @@ void ftCo_80096900(ftCo_GObj* gobj, int arg1, int arg2, bool allow_interrupt,
 #endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_DatAttrs* ca = &fp->co_attrs;
-    if (fp->x2224_flag.bits.b2) {
+    if (fp->x2224_b2) {
         ftCo_80090780(gobj);
         return;
     }
@@ -202,7 +202,7 @@ void ftCo_800969D8(ftCo_GObj* gobj, int arg1, int arg2, int allow_interrupt,
 #endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_DatAttrs* ca = &fp->co_attrs;
-    if (fp->x2224_flag.bits.b2) {
+    if (fp->x2224_b2) {
         ftCo_80090780(gobj);
         return;
     }
@@ -351,7 +351,7 @@ void ftCo_FallSpecial_Phys(ftCo_GObj* gobj)
     ftCo_DatAttrs* ca = &fp->co_attrs;
     ftCommon_8007D528(fp);
     if (fp->mv.co.fallspecial.xC != 0) {
-        if (fp->x221A_flag.bits.b4) {
+        if (fp->x221A_b4) {
             ftCommon_8007D4E4(fp);
         } else {
             ftCommon_8007D494(fp, ca->grav, ca->terminal_vel);
@@ -365,7 +365,7 @@ void ftCo_FallSpecial_Phys(ftCo_GObj* gobj)
                               ca->aerial_friction);
         }
     } else {
-        if (fp->x221A_flag.bits.b4) {
+        if (fp->x221A_b4) {
             ftCommon_8007D4E4(fp);
         } else {
             ftCommon_8007D494(fp, ca->grav, ca->fast_fall_velocity);

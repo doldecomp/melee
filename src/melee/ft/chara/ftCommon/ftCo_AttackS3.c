@@ -7,6 +7,7 @@
 #include "ftCo_08A6.h"
 #include "ftCo_ItemGet.h"
 #include "ftCo_ItemThrow.h"
+#include "ftCo_Shouldered.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

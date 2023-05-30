@@ -723,7 +723,7 @@ lbl_800E51D8:
 void ftCa_SpecialLw_800E5128(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter* vic_fp = GET_FIGHTER(fp->x1A58_interactedFighter);
+    Fighter* vic_fp = GET_FIGHTER(fp->victim_gobj);
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialHiCatch, 2, NULL, 0, 1, 0);
     fp->x2222_b2 = true;
     ftCommon_8007E2F4(fp, 511);
@@ -811,7 +811,7 @@ static asm void doCatchAnim(HSD_GObj*)
 static void doCatchAnim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    HSD_GObj* vic_gobj = fp->x1A58_interactedFighter;
+    HSD_GObj* vic_gobj = fp->victim_gobj;
     fp->cmd_vars[0] = 0;
     fp->mv.ca.specialhi.x2_b0 = false;
     fp->mv.ca.specialhi.vel.x = 0;
@@ -976,6 +976,6 @@ void ftCa_SpecialHiThrow0_Coll(HSD_GObj* gobj)
 static void ftCa_SpecialLw_800E550C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter* vic_fp = GET_FIGHTER(fp->x1A58_interactedFighter);
+    Fighter* vic_fp = GET_FIGHTER(fp->victim_gobj);
     fp->cur_pos = vic_fp->cur_pos;
 }

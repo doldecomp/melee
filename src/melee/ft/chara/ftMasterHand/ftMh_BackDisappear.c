@@ -227,7 +227,7 @@ void ftMh_Cancel_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (--fp->mv.mh.unk0.x24 <= 0 && fp->cmd_vars[0]) {
-        ftMh_CaptureWaitMasterHand_80155D1C(fp->x1A58_interactedFighter);
+        ftMh_CaptureWaitMasterHand_80155D1C(fp->victim_gobj);
         fp->mv.mh.unk0.x20 = 0;
         fp->cmd_vars[0] = 0;
     }

@@ -31,8 +31,8 @@ void ftNs_SpecialS_ItemPKFireSpawn(
     f32 PKFireLaunch;
     f32 PKFireVel;
 
-    if (fp->throw_flags.b0 != 0) {
-        fp->throw_flags.b0 = 0;
+    if (fp->throw_flags_b0 != 0) {
+        fp->throw_flags_b0 = 0;
         FlagResult = true;
     } else {
         FlagResult = false;
@@ -76,8 +76,8 @@ void ftNs_SpecialS_Enter(
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    fp->throw_flags.flags = 0; // Set projectile summon flag to 0
-    fp->cmd_vars[0] = 0;       // Set ftcmd flag0 to 0; _ in PK Fire?
+    fp->throw_flags = 0; // Set projectile summon flag to 0
+    fp->cmd_vars[0] = 0; // Set ftcmd flag0 to 0; _ in PK Fire?
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialS, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
@@ -93,8 +93,8 @@ void ftNs_SpecialAirS_Enter(
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    fp->throw_flags.flags = 0; // Set projectile summon flag to 0
-    fp->cmd_vars[0] = 0;       // Set ftcmd flag0 to 0; _ in PK Fire?
+    fp->throw_flags = 0; // Set projectile summon flag to 0
+    fp->cmd_vars[0] = 0; // Set ftcmd flag0 to 0; _ in PK Fire?
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirS, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);

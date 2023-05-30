@@ -209,7 +209,7 @@ void ftPe_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (throwVegIfHeld(gobj, ftCo_MS_LightThrowF4) != true) {
-        fp->throw_flags.flags = 0;
+        fp->throw_flags = 0;
         Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialLw, Ft_MF_None, NULL, 0,
                                   1, 0);
         ftAnim_8006EBA4(gobj);

@@ -13,6 +13,7 @@
 #include "ftCo_FallSpecial.h"
 #include "ftCo_Guard.h"
 #include "ftCo_ItemThrow.h"
+#include "ftCo_Shouldered.h"
 #include "ftCo_SpecialS.h"
 
 #include "ef/eflib.h"
@@ -180,7 +181,7 @@ static void doEnter(ftCo_GObj* gobj, float stick_angle)
     }
     fp->allow_interrupt = false;
     fp->cmd_vars[cmd_unk0_bool] = false;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 }

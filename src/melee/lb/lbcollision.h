@@ -30,9 +30,9 @@ struct HitCapsule {
     /// @at{0} @sz{4}
     HitCapsuleState state;
 
-    /// @at{4} @sz{C}
-    /// The offset of point @e a of the capsule.
-    Vec3 a_offset;
+    int x4;
+    int x8;
+    float damage;
 
     /// @at{10} @sz{C}
     /// The offset of point @e b of the capsule.
@@ -42,7 +42,7 @@ struct HitCapsule {
     /// The scale of the capsule.
     f32 scl;
 
-    HSD_JObj* bone;
+    int kb_angle;
 
     int x24;
     int x28;

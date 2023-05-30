@@ -27,7 +27,7 @@ static void doEnter(HSD_GObj* gobj, FtMotionId msid0, FtMotionId msid1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (updateBomb(gobj, msid0) != true) {
-        fp->throw_flags.flags = 0;
+        fp->throw_flags = 0;
         Fighter_ChangeMotionState(gobj, msid1, Ft_MF_None, NULL, 0, 1, 0);
         ftAnim_8006EBA4(gobj);
         fp->cb.x21BC_callback_Accessory4 = spawnBomb;

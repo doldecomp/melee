@@ -394,7 +394,7 @@ void ftPp_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 1U, 0);
     fp->fv.nn.x2234 = 0;
     fp->fv.nn.x222C = 0;
-    fp->fv.nn.x2230.bits.b0 = false;
+    fp->fv.nn.x2230_b0 = false;
     fp->fv.nn.x2238 = 0;
     fp->fv.nn.x224C = 0;
     fp->fv.nn.x2250 = 0.0f;
@@ -462,7 +462,7 @@ extern f32 const ftPp_Init_804D983C;
 void ftPp_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;
     fp->fv.nn.x222C = 0;
 
@@ -485,7 +485,7 @@ void ftPp_SpecialAirN_Enter(HSD_GObj* gobj)
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
     ftIceClimberAttributes* icattr = fp->dat_attrs;
 
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;
     fp->fv.nn.x222C = 0;
 

@@ -56,7 +56,7 @@ float ftCommon_CalcHitlag(int dmg, FtMotionId msid, float mul);
 void ftCommon_8007DB24(HSD_GObj*);
 void ftCommon_8007DB58(HSD_GObj*);
 void ftCommon_8007DBCC(Fighter*, bool, float);
-s32 ftCommon_8007DC08(Fighter*, float);
+bool ftCommon_8007DC08(Fighter*, float);
 void ftCommon_8007DD7C(HSD_GObj*, Vec3*);
 void ftCommon_8007DFD0(HSD_GObj* gobj, Vec3* arg1);
 void ftCommon_8007E0E4(HSD_GObj*);

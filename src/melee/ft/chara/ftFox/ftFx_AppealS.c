@@ -51,7 +51,7 @@ bool ftFx_AppealS_CheckInput(HSD_GObj* gobj)
     {
         if (ftFox_CheckAppealSCount() == 0) {
             ftFx_AppealS_Enter(gobj);
-            pl_80040120(fp->player_id, fp->x221F_flag.bits.b4);
+            pl_80040120(fp->player_id, fp->x221F_b4);
             return true;
         }
     }
@@ -90,7 +90,7 @@ void ftFx_AppealS_Enter(HSD_GObj* gobj)
     facingDir = ftFox_AppealS_GetLR(1.0f, fp->facing_dir);
 
     fp->mv.fx.AppealS.facingDir = facingDir;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
 
     actionDir = fp->mv.fx.AppealS.facingDir;
     animCount = fp->mv.fx.AppealS.animCount;

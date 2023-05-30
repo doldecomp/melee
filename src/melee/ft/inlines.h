@@ -188,8 +188,8 @@ static inline CollData* Fighter_GetCollData(Fighter* fp)
 /// @todo This and #ftCheckThrowB3, etc. are probably one macro or something.
 static inline bool ftCheckThrowB0(Fighter* fp)
 {
-    if (fp->throw_flags.b0) {
-        fp->throw_flags.b0 = false;
+    if (fp->throw_flags_b0) {
+        fp->throw_flags_b0 = false;
         return true;
     } else {
         return false;
@@ -198,8 +198,8 @@ static inline bool ftCheckThrowB0(Fighter* fp)
 
 static inline bool ftCheckThrowB3(Fighter* fp)
 {
-    if (fp->throw_flags.b3) {
-        fp->throw_flags.b3 = false;
+    if (fp->throw_flags_b3) {
+        fp->throw_flags_b3 = false;
         return true;
     } else {
         return false;
@@ -208,8 +208,8 @@ static inline bool ftCheckThrowB3(Fighter* fp)
 
 static inline bool ftCheckThrowB4(Fighter* fp)
 {
-    if (fp->throw_flags.b4) {
-        fp->throw_flags.b4 = false;
+    if (fp->throw_flags_b4) {
+        fp->throw_flags_b4 = false;
         return true;
     } else {
         return false;

@@ -27,8 +27,8 @@ void ftSs_SpecialLw_8012ADF0(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->throw_flags.b0) {
-        fp->throw_flags.b0 = 0;
+    if (fp->throw_flags_b0) {
+        fp->throw_flags_b0 = 0;
         bool1 = 1;
     } else {
         bool1 = 0;
@@ -71,7 +71,7 @@ static void ftSamus_SpecialLw_StartAction_inner(HSD_GObj* gobj)
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.b0 = 0;
+    fp->throw_flags_b0 = 0;
     fp->mv.ss.unk6.x0 = 0;
     if (fp->cur_anim_frame == 3.0f) {
         fp->cmd_vars[1] = 1;

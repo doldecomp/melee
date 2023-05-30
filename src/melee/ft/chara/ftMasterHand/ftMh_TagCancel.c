@@ -20,7 +20,7 @@ void ftMh_MS_388_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
     ftCo_8009750C(gobj_1);
     ftCo_800DD168(gobj_1);
     ft_1->x1A5C = gobj_2;
-    ft_1->x1A58_interactedFighter = gobj_2;
+    ft_1->victim_gobj = gobj_2;
     ft_1->x221B_b5 = false;
     ft_1->x221B_b7 = false;
     ft_1->facing_dir = ft_2->facing_dir;

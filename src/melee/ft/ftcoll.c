@@ -125,9 +125,7 @@ void ftColl_80076528(HSD_GObj* gobj)
 
     if (temp_r3 != 0) {
         fp->x2092 = (u16) (temp_r3 - 1);
-        if ((fp->x1A58_interactedFighter == NULL) &&
-            (fp->ground_or_air == GA_Ground))
-        {
+        if ((fp->victim_gobj == NULL) && (fp->ground_or_air == GA_Ground)) {
             comboCount_Push(fp);
         }
     }
@@ -161,7 +159,7 @@ void ftColl_800765E0(void)
 
 f32 ftColl_800765F0(Fighter* fp, HSD_GObj* victim, f32 arg2)
 {
-    HSD_GObj* cur = fp->x1A58_interactedFighter;
+    HSD_GObj* cur = fp->victim_gobj;
 
     if (cur != NULL && !fp->x221B_b5 && cur != victim) {
         arg2 *= p_ftCommonData->x128;
@@ -2673,7 +2671,7 @@ lbl_800786DC:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftColl_80078710(void)
+asm void ftColl_80078710(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80078710 000752F0  7C 08 02 A6 */	mflr r0
@@ -3116,7 +3114,7 @@ inline void ftGrabDist(Fighter* this_fp, Fighter* victim_fp)
     if (grab_dist < this_fp->unk_grab_val) {
         HSD_GObj* grabbed_fighter = victim_fp->gobj;
         this_fp->x1A5C = grabbed_fighter;
-        this_fp->x1A58_interactedFighter = grabbed_fighter;
+        this_fp->victim_gobj = grabbed_fighter;
         this_fp->x221B_b5 = true;
         this_fp->unk_grab_val = grab_dist;
     }
@@ -3138,7 +3136,7 @@ void ftColl_80078A2C(HSD_GObj* this_gobj)
     u32 j;
 
     this_fp = this_gobj->user_data;
-    this_fp->x1A58_interactedFighter = NULL;
+    this_fp->victim_gobj = NULL;
     this_fp->unk_grab_val = F32_MAX;
     victim_gobj = HSD_GObj_Entities->fighters;
 
@@ -3153,7 +3151,7 @@ void ftColl_80078A2C(HSD_GObj* this_gobj)
                   ((s32) victim_fp->x198C == 0) &&
                   (!(victim_fp->x221D_b6) &&
                    !(victim_fp->x1A6A & this_fp->x1A68) &&
-                   !((victim_fp->x2224_flag.bits.b2))))))
+                   !((victim_fp->x2224_b2))))))
             {
                 for (i = 0; i < 4; i++) {
                     this_hit = ftHitGetPtr(this_fp, i);
@@ -4357,7 +4355,7 @@ lbl_80079C68:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftColl_80079C70(void)
+asm float ftColl_80079C70(Fighter*, Fighter*, void*, int)
 { // clang-format off
     nofralloc
 /* 80079C70 00076850  7C 08 02 A6 */	mflr r0

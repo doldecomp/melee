@@ -486,7 +486,7 @@ void ftYs_Shield_8012C850(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 345, 16, NULL, fp->cur_anim_frame,
                               ftYs_Init_804D9A28, ftYs_Init_804D9A2C);
     fp->x672_input_timer_counter = 254;
-    fp->x221A_flag.bits.b7 = false;
+    fp->x221A_b7 = false;
     fp->x221B_b0 = false;
     fp->x221C_b3 = true;
     fp->x221C_b1 = true;

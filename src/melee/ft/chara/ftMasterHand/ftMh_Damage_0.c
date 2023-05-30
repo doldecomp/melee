@@ -39,7 +39,7 @@ inline void func_80151484_inline1(HSD_GObj* gobj)
     lbAudioAx_800236B8(fp->mv.mh.unk0.x2C);
     lbAudioAx_800236B8(fp->mv.mh.unk0.x30);
     if (fp->mv.mh.unk0.x20) {
-        ftMh_CaptureWaitMasterHand_80155D1C(fp->x1A58_interactedFighter);
+        ftMh_CaptureWaitMasterHand_80155D1C(fp->victim_gobj);
     }
     fp->self_vel.y = da->x14C;
     fp->self_vel.z = da->x154;

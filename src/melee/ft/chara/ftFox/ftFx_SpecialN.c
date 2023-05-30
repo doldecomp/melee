@@ -800,8 +800,8 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                     it_802AE608(fp->fv.fx.x222C_blasterGObj);
                     break;
                 }
-                if (fp->throw_flags.b0 != 0) {
-                    fp->throw_flags.b0 = 0;
+                if (fp->throw_flags_b0 != 0) {
+                    fp->throw_flags_b0 = 0;
                     flag = true;
                 } else {
                     flag = false;

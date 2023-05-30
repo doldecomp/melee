@@ -290,8 +290,8 @@ struct ftCommonData {
     /* +3A4 */ UNK_T x3A4;
     /* +3A8 */ float x3A8;
     /* +3AC */ UNK_T x3AC;
-    /* +3B0 */ UNK_T x3B0;
-    /* +3B4 */ UNK_T x3B4;
+    /* +3B0 */ float x3B0;
+    /* +3B4 */ float shouldered_anim_rate;
     /* +3B8 */ UNK_T x3B8;
     /* +3BC */ UNK_T x3BC;
     /* +3C0 */ int x3C0;
@@ -345,12 +345,12 @@ struct ftCommonData {
     /* +48C */ float x48C;
     /* +490 */ float x490;
     /* +494 */ float x494;
-    /* +498 */ u32 ledge_cooldown;
+    /* +498 */ int ledge_cooldown;
     /* +49C */ int x49C;
-    /* +4A0 */ UNK_T x4A0;
-    /* +4A4 */ UNK_T x4A4;
-    /* +4A8 */ UNK_T x4A8;
-    /* +4AC */ UNK_T x4AC;
+    /* +4A0 */ float x4A0;
+    /* +4A4 */ float x4A4;
+    /* +4A8 */ float x4A8;
+    /* +4AC */ float x4AC;
     /* +4B0 */ float x4B0;
     /* +4B4 */ int x4B4;
     /* +4B8 */ float x4B8;
@@ -638,14 +638,21 @@ typedef struct ftCo_DatAttrs {
 typedef struct _FighterBone {
     /* +0 */ HSD_JObj* joint;
     /* +4 */ HSD_JObj* x4_jobj2; // used for interpolation
-    /* +5 */ UnkFlagStruct flags;
+    /* +5:0 */ u8 flags_b0 : 1;
+    /* +5:1 */ u8 flags_b1 : 1;
+    /* +5:2 */ u8 flags_b2 : 1;
+    /* +5:3 */ u8 flags_b3 : 1;
+    /* +5:4 */ u8 flags_b4 : 1;
+    /* +5:5 */ u8 flags_b5 : 1;
+    /* +5:6 */ u8 flags_b6 : 1;
+    /* +5:7 */ u8 flags_b7 : 1;
     /* +6 */ u8 filler_x6[7];
 } FighterBone;
 
 typedef struct _CameraBox {
     u32 data_filler[2];
     s32 x8;
-    UnkFlagStruct xC_flag;
+    /* +C:0 */ u8 xC_b0 : 1;
     u8 xD_fill[0x10 - 0xD];
     Vec3 x10; // might be Vec2?
     Vec3 x1C;
@@ -784,7 +791,8 @@ struct S_TEMP1 {
     FighterKind fighterKind;
     u8 playerID;
     u8 unk5;
-    UnkFlagStruct flags;
+    /* +6:0 */ u8 flags_b0 : 1;
+    /* +6:1 */ u8 flags_b1 : 1;
 };
 
 struct MotionState {
@@ -797,9 +805,18 @@ struct MotionState {
         u32 _;
         struct {
             FtMoveId move_id : 8;
-            UnkFlagStruct x9_flags;
-            UnkFlagStruct flagsA;
-            UnkFlagStruct flagsB;
+            struct {
+                u8 x9_b0 : 1;
+                u8 x9_b1 : 1;
+                u8 x9_b2 : 1;
+                u8 x9_b3 : 1;
+                u8 x9_b4 : 1;
+                u8 x9_b5 : 1;
+                u8 x9_b6 : 1;
+                u8 x9_b7 : 1;
+            };
+            u8 xA;
+            u8 xB;
         };
     };
 
@@ -927,7 +944,14 @@ struct Fighter {
     /*  fp+590 */ s32 x590;
     /*  fp+594 */ union {
         struct {
-            /* fp+594 */ UnkFlagStruct x594_animCurrFlags1;
+            /* fp+594:0 */ u8 x594_b0 : 1;
+            /* fp+594:1 */ u8 x594_b1 : 1;
+            /* fp+594:2 */ u8 x594_b2 : 1;
+            /* fp+594:3 */ u8 x594_b3 : 1;
+            /* fp+594:4 */ u8 x594_b4 : 1;
+            /* fp+594:5 */ u8 x594_b5 : 1;
+            /* fp+594:6 */ u8 x594_b6 : 1;
+            /* fp+594:7 */ u8 x594_b7 : 1;
             /* fp+596 */ struct {
                 /* fp+596:0 */ u8 x0 : 7;
                 /* fp+596:7 */ u16 x7 : 3;
@@ -1051,55 +1075,55 @@ struct Fighter {
         /* fp+1830 */ float x1830_percent;
         /* fp+1834 */ float x1834;
         /* fp+1838 */ float x1838_percentTemp;
-        /* fp+183C */ s32 x183C_applied;
-        /* fp+1840 */ s32 x1840;
+        /* fp+183C */ int x183C_applied;
+        /* fp+1840 */ int x1840;
         /* fp+1844 */ float x1844_direction;
         /* fp+1848 */ int x1848_kb_angle;
-        /* fp+184C */ s32 x184c_damaged_hurtbox;
+        /* fp+184C */ int x184c_damaged_hurtbox;
         /* fp+1850 */ float kb_applied;
         /* fp+1854 */ Vec3 x1854_collpos;
         /* fp+1860 */ uint x1860;
-        /* fp+1864 */ s32 x1864;
+        /* fp+1864 */ int x1864;
         /* fp+1868 */ HSD_GObj* x1868_source;
-        /* fp+186C */ s32 x186c;
-        /* fp+1870 */ s32 x1870;
-        /* fp+1874 */ s32 x1874;
-        /* fp+1878 */ s32 x1878;
-        /* fp+187C */ s32 x187c;
-        /* fp+1880 */ s32 x1880;
-        /* fp+1884 */ s32 x1884;
-        /* fp+1888 */ s32 x1888;
-        /* fp+188C */ s32 x188c;
-        /* fp+1890 */ s32 x1890;
-        /* fp+1894 */ s32 x1894;
-        /* fp+1898 */ s32 x1898;
+        /* fp+186C */ int x186c;
+        /* fp+1870 */ int x1870;
+        /* fp+1874 */ int x1874;
+        /* fp+1878 */ int x1878;
+        /* fp+187C */ int x187c;
+        /* fp+1880 */ int x1880;
+        /* fp+1884 */ int x1884;
+        /* fp+1888 */ int x1888;
+        /* fp+188C */ int x188c;
+        /* fp+1890 */ int x1890;
+        /* fp+1894 */ int x1894;
+        /* fp+1898 */ int x1898;
         /* fp+189C */ float x189C_unk_num_frames;
         /* fp+18A0 */ float x18a0;
         /// kb magnitude
         /* fp+18A4 */ float x18A4_knockbackMagnitude;
         /* fp+18A8 */ float x18A8;
         /// in frames
-        /* fp+18AC */ s32 x18ac_time_since_hit;
+        /* fp+18AC */ int x18ac_time_since_hit;
         /* fp+18B0 */ float armor0;
         /* fp+18B4 */ float armor1;
         /* fp+18B8 */ float x18B8;
         /* fp+18BC */ float x18BC;
-        /* fp+18C0 */ s32 x18C0;
+        /* fp+18C0 */ int x18C0;
         /// damage source ply number
-        /* fp+18C4 */ s32 x18c4_source_ply;
-        /* fp+18C8 */ s32 x18C8;
-        /* fp+18CC */ s32 x18CC;
-        /* fp+18D0 */ s32 x18D0;
-        /* fp+18D4 */ s32 x18d4;
-        /* fp+18D8 */ s32 x18d8;
-        /* fp+18DC */ s32 x18dc;
+        /* fp+18C4 */ int x18c4_source_ply;
+        /* fp+18C8 */ int x18C8;
+        /* fp+18CC */ int x18CC;
+        /* fp+18D0 */ int x18D0;
+        /* fp+18D4 */ int x18d4;
+        /* fp+18D8 */ int x18d8;
+        /* fp+18DC */ int x18dc;
         /* fp+18E0 */ float kb_applied1;
-        /* fp+18E4 */ s32 x18e4;
-        /* fp+18E8 */ s32 x18e8;
+        /* fp+18E4 */ int x18e4;
+        /* fp+18E8 */ int x18e8;
         /// Last Move Instance This Player Was Hit by
         /* fp+18EC */ u16 x18ec_instancehitby;
-        /* fp+18F0 */ s32 x18F0;
-        /* fp+18F4 */ s32 x18F4;
+        /* fp+18F0 */ int x18F0;
+        /* fp+18F4 */ int x18F4;
         /* fp+18F8 */ u8 x18F8;
         /* fp+18F9 */ u8 x18f9;
         /* fp+18FA */ u16 x18fa_model_shift_frames;
@@ -1109,23 +1133,23 @@ struct Fighter {
         /* fp+1904 */ float x1904;
         /* fp+1908 */ enum_t x1908;
         /* fp+190C */ UNK_T x190C;
-        /* fp+1910 */ s32 x1910;
-        /* fp+1914 */ s32 x1914;
-        /* fp+1918 */ s32 x1918;
+        /* fp+1910 */ int x1910;
+        /* fp+1914 */ int x1914;
+        /* fp+1918 */ int x1918;
         /* fp+191C */ float x191C;
         /* fp+1920 */ float x1920;
-        /* fp+1924 */ s32 x1924;
+        /* fp+1924 */ int x1924;
         /* fp+1928 */ float x1928;
         /* fp+192C */ float x192c;
-        /* fp+1930 */ s32 x1930;
-        /* fp+1934 */ s32 x1934;
-        /* fp+1938 */ s32 x1938;
-        /* fp+193C */ s32 x193c;
-        /* fp+1940 */ s32 x1940;
-        /* fp+1944 */ s32 x1944;
-        /* fp+1948 */ s32 x1948;
-        /* fp+194C */ s32 x194C;
-        /* fp+1950 */ s32 x1950;
+        /* fp+1930 */ int x1930;
+        /* fp+1934 */ int x1934;
+        /* fp+1938 */ int x1938;
+        /* fp+193C */ int x193c;
+        /* fp+1940 */ int x1940;
+        /* fp+1944 */ int x1944;
+        /* fp+1948 */ int x1948;
+        /* fp+194C */ int x194C;
+        /* fp+1950 */ int x1950;
         /* fp+1954 */ float x1954;
         /* fp+1958 */ float x1958;
         /* fp+195C */ float x195c_hitlag_frames;
@@ -1179,7 +1203,7 @@ struct Fighter {
     /* fp+1A52 */ u8 x1A52;
     /* fp+1A53 */ u8 x1A53;
     /* fp+1A54 */ s32 x1A54;
-    /* fp+1A58 */ HSD_GObj* x1A58_interactedFighter;
+    /* fp+1A58 */ HSD_GObj* victim_gobj;
     /* fp+1A5C */ HSD_GObj* x1A5C;
     /* fp+1A60 */ u32 x1A60;
     /* fp+1A64 */ s32 x1A64;
@@ -1299,7 +1323,19 @@ struct Fighter {
     /* fp+21FC */ UnkFlagStruct x21FC_flag;
     /* fp+21FC */ u8 filler_x21FC[0x2200 - 0x21FD];
     /* fp+2200 */ u32 cmd_vars[4];
-    /* fp+2210 */ ThrowFlags throw_flags;
+    /* fp+2210 */ union {
+        u32 throw_flags;
+        struct {
+            u8 throw_flags_b0 : 1;
+            u8 throw_flags_b1 : 1;
+            u8 throw_flags_b2 : 1;
+            u8 throw_flags_b3 : 1;
+            u8 throw_flags_b4 : 1;
+            u8 throw_flags_b5 : 1;
+            u8 throw_flags_b6 : 1;
+            u8 throw_flags_b7 : 1;
+        };
+    };
     /* fp+2214 */ float x2214;
     union {
         /* fp+2218 */ u8 x2218;
@@ -1327,7 +1363,14 @@ struct Fighter {
             /* fp+2219:7 */ u8 x2219_b7 : 1;
         };
     };
-    /* fp+221A */ UnkFlagStruct x221A_flag;
+    /* fp+221A:0 */ u8 x221A_b0 : 1;
+    /* fp+221A:1 */ u8 x221A_b1 : 1;
+    /* fp+221A:2 */ u8 x221A_b2 : 1;
+    /* fp+221A:3 */ u8 x221A_b3 : 1;
+    /* fp+221A:4 */ u8 x221A_b4 : 1;
+    /* fp+221A:5 */ u8 x221A_b5 : 1;
+    /* fp+221A:6 */ u8 x221A_b6 : 1;
+    /* fp+221A:7 */ u8 x221A_b7 : 1;
     /* fp+221B */ union {
         /* fp+221B */ u8 x221B;
         /* fp+221B */ struct {
@@ -1378,7 +1421,14 @@ struct Fighter {
     /* fp+221E:5 */ u8 x221E_b5 : 1;
     /* fp+221E:6 */ u8 x221E_b6 : 1;
     /* fp+221E:7 */ u8 x221E_b7 : 1;
-    /* fp+221F */ UnkFlagStruct x221F_flag;
+    /* fp+221F:0 */ u8 x221F_b0 : 1;
+    /* fp+221F:1 */ u8 x221F_b1 : 1;
+    /* fp+221F:2 */ u8 x221F_b2 : 1;
+    /* fp+221F:3 */ u8 x221F_b3 : 1;
+    /* fp+221F:4 */ u8 x221F_b4 : 1;
+    /* fp+221F:5 */ u8 x221F_b5 : 1;
+    /* fp+221F:6 */ u8 x221F_b6 : 1;
+    /* fp+221F:7 */ u8 x221F_b7 : 1;
     /* fp+2220 */ union {
         /* fp+2220 */ struct {
             /* fp+2220:0 */ u8 b0 : 3;
@@ -1390,7 +1440,19 @@ struct Fighter {
         } bits;
         /* fp+2220 */ u8 flags;
     } x2220_flag;
-    /* fp+2221 */ UnkFlagStruct x2221_flag;
+    /* fp+2221 */ union {
+        /* fp+2221 */ u8 x2221;
+        /* fp+2221 */ struct {
+            /* fp+2221:0 */ u8 x2221_b0 : 1;
+            /* fp+2221:1 */ u8 x2221_b1 : 1;
+            /* fp+2221:2 */ u8 x2221_b2 : 1;
+            /* fp+2221:3 */ u8 x2221_b3 : 1;
+            /* fp+2221:4 */ u8 x2221_b4 : 1;
+            /* fp+2221:5 */ u8 x2221_b5 : 1;
+            /* fp+2221:6 */ u8 x2221_b6 : 1;
+            /* fp+2221:7 */ u8 x2221_b7 : 1;
+        };
+    };
     /* fp+2222:0 */ u8 x2222_b0 : 1;
     /* fp+2222:1 */ u8 x2222_b1 : 1;
     /* fp+2222:2 */ u8 x2222_b2 : 1;
@@ -1400,7 +1462,14 @@ struct Fighter {
     /* fp+2222:6 */ u8 x2222_b6 : 1;
     /* fp+2222:7 */ u8 x2222_b7 : 1;
     /* fp+2223 */ UnkFlagStruct x2223_flag;
-    /* fp+2224 */ UnkFlagStruct x2224_flag;
+    /* fp+2224:0 */ u8 x2224_b0 : 1;
+    /* fp+2224:1 */ u8 x2224_b1 : 1;
+    /* fp+2224:2 */ u8 x2224_b2 : 1;
+    /* fp+2224:3 */ u8 x2224_b3 : 1;
+    /* fp+2224:4 */ u8 x2224_b4 : 1;
+    /* fp+2224:5 */ u8 x2224_b5 : 1;
+    /* fp+2224:6 */ u8 x2224_b6 : 1;
+    /* fp+2224:7 */ u8 x2224_b7 : 1;
     /* fp+2225:0 */ u8 x2225_b0 : 1;
     /* fp+2225:1 */ u8 x2225_b1 : 1;
     /* fp+2225:2 */ u8 x2225_b2 : 1;

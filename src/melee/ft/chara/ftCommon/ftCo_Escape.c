@@ -87,7 +87,7 @@ void ftCo_800992A8(ftCo_GObj* gobj, FtMotionId msid, bool arg2)
 void ftCo_80099314(ftCo_GObj* gobj, FtMotionId msid, bool arg2)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     fp->x221D_b5 = true;

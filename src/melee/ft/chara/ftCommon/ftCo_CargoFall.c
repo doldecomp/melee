@@ -2,8 +2,10 @@
 
 #include "ftCo_CargoFall.h"
 
+#include "ftCo_09C4.h"
 #include "ftCo_CargoLanding.h"
 #include "ftCo_CargoThrow.h"
+#include "ftCo_Shouldered.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -24,7 +26,7 @@ void ftCo_8009BC58(ftCo_GObj* gobj)
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4(fp);
     }
-    ftCo_8009C5A4(fp->x1A58_interactedFighter, ftCo_MS_ShoulderedWait);
+    ftCo_8009C5A4(fp->victim_gobj, ftCo_MS_ShoulderedWait);
 }
 
 void ftCo_CargoFall_Anim(ftCo_GObj* gobj) {}

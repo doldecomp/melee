@@ -595,9 +595,9 @@ void ftAction_8007121C(Fighter_GObj* gobj, FtCmdState* cmd)
         hit = &fp->x914[(((u16) M2C_FIELD(cmd_x8, u16*, 0) >> 7U) & 7)];
         temp_r4_2 = ((u8) M2C_FIELD(cmd_x8, u8*, 1) >> 4U) & 7;
         if (((int) hit->state == HitCapsule_Disabled) ||
-            ((u32) hit->a_offset.x != temp_r4_2))
+            ((u32) hit->x4 != temp_r4_2))
         {
-            hit->a_offset.x = temp_r4_2;
+            hit->x4 = temp_r4_2;
             hit->state = HitCapsule_Enabled;
             M2C_FIELD(fp, u8*, 0x2219) =
                 (u8) (M2C_FIELD(fp, u8*, 0x2219) | 0x10);
@@ -991,11 +991,11 @@ void ftAction_800718A4(Fighter_GObj* gobj, FtCmdState* cmd)
     int cmd_x8 = *cmd->x8 & 0x03FFFFFF;
     switch (cmd_x8) {
     case 0:
-        fp->throw_flags.b3 = true;
+        fp->throw_flags_b3 = true;
         fp->x2214 = cmd->x0;
         break;
     case 1:
-        fp->throw_flags.b4 = true;
+        fp->throw_flags_b4 = true;
         break;
     }
     cmd->x8 += 4;
@@ -1005,14 +1005,14 @@ void ftAction_800718A4(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80071908(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    fp->throw_flags.b1 = true;
+    fp->throw_flags_b1 = true;
     cmd->x8 += 4;
 }
 
 void ftAction_8007192C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    fp->throw_flags.b2 = true;
+    fp->throw_flags_b2 = true;
     cmd->x8 += 4;
 }
 
@@ -1026,7 +1026,7 @@ void ftAction_80071950(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80071974(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    fp->throw_flags.b0 = true;
+    fp->throw_flags_b0 = true;
     cmd->x8 += 4;
 }
 
@@ -4039,7 +4039,7 @@ void ftAction_80073354(Fighter_GObj* gobj)
     CommandInfo* cmd = (CommandInfo*) &fp->x3E4_fighterCmdScript;
     fp->x3E4_fighterCmdScript.x3E8_scriptFrameTimer =
         fp->cur_anim_frame + fp->x898_unk;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     if (fp->x3E4_fighterCmdScript.x3EC_scriptCurrent != NULL) {
         float timer = cmd->timer;
         if (timer != F32_MAX) {
@@ -4065,7 +4065,7 @@ void ftAction_80073354(Fighter_GObj* gobj)
                     float timer1 = cmd->timer;
                     if (timer1 != timer) {
                         if (timer1 <= 0.0f) {
-                            fp->throw_flags.flags = 0;
+                            fp->throw_flags = 0;
                         }
                     }
                 }

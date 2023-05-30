@@ -19,7 +19,7 @@ void ftMr_SpecialHi_Enter(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialHi, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 }
@@ -35,7 +35,7 @@ void ftMr_SpecialAirHi_Enter(HSD_GObj* gobj)
 #endif
 
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->self_vel.y = 0;
     fp->self_vel.x = fp->self_vel.x * sa->specialhi.vel_x;
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirHi, 0, NULL, 0, 1, 0);

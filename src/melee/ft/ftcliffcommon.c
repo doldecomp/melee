@@ -31,14 +31,13 @@ bool ftCliffCommon_80081298(ftCo_GObj* gobj)
     {
         other_gobj = ft_80082E3C(gobj);
         if (other_gobj == NULL) {
-            pl_80040048(fp->player_id, fp->x221F_flag.bits.b4);
+            pl_80040048(fp->player_id, fp->x221F_b4);
             ftCliffCommon_80081370(gobj);
             return true;
         }
         other_fp = other_gobj->user_data;
-        pl_8003FFDC(other_fp->player_id, other_fp->x221F_flag.bits.b4,
-                    fp->player_id, fp->x221F_flag.bits.b4,
-                    other_fp->mv.co.cliff.ledge_id);
+        pl_8003FFDC(other_fp->player_id, other_fp->x221F_b4, fp->player_id,
+                    fp->x221F_b4, other_fp->mv.co.cliff.ledge_id);
         fp->x213C = other_fp->mv.co.cliff.ledge_id;
         return false;
     }
@@ -152,6 +151,6 @@ void ftCo_Cliff_Cam(ftCo_GObj* gobj)
     ftCamera_UpdateCameraBox(gobj);
     if ((s32) fp->ground_or_air == GA_Air) {
         mpLib_8005811C(&fp->coll_data, fp->mv.co.cliff.ledge_id);
-        fp->x890_cameraBox->xC_flag.bits.b0 = 1;
+        fp->x890_cameraBox->xC_b0 = true;
     }
 }

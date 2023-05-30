@@ -159,7 +159,7 @@ void ftDk_SpecialN_Anim(HSD_GObj* gobj)
             fp->mv.dk.specialn.x4 = 1;
         }
         if (fp->mv.dk.specialn.x10 == -1) {
-            fp->mv.dk.specialn.x10 = fp->x914[0].a_offset.z;
+            fp->mv.dk.specialn.x10 = fp->x914[0].damage;
         }
         ftColl_8007ABD0(&fp->x914[0],
                         fp->mv.dk.specialn.x10 +
@@ -167,7 +167,7 @@ void ftDk_SpecialN_Anim(HSD_GObj* gobj)
                              donkey_attr->SpecialN.x30_DAMAGE_PER_SWING),
                         gobj);
         if (fp->mv.dk.specialn.x14 == -1) {
-            fp->mv.dk.specialn.x14 = fp->x914[1].a_offset.z;
+            fp->mv.dk.specialn.x14 = fp->x914[1].damage;
         }
         ftColl_8007ABD0(&fp->x914[1],
                         fp->mv.dk.specialn.x14 +
@@ -286,7 +286,7 @@ void ftDk_SpecialAirN_Anim(HSD_GObj* gobj)
     }
     if (fp->x914[0].state != HitCapsule_Disabled) {
         if (fp->mv.dk.specialn.x10 == -1) {
-            fp->mv.dk.specialn.x10 = fp->x914[0].a_offset.z;
+            fp->mv.dk.specialn.x10 = fp->x914[0].damage;
         }
         ftColl_8007ABD0(&fp->x914[0],
                         fp->mv.dk.specialn.x10 +
@@ -294,7 +294,7 @@ void ftDk_SpecialAirN_Anim(HSD_GObj* gobj)
                              donkey_attr->SpecialN.x30_DAMAGE_PER_SWING),
                         gobj);
         if (fp->mv.dk.specialn.x14 == -1) {
-            fp->mv.dk.specialn.x14 = fp->x914[1].a_offset.z;
+            fp->mv.dk.specialn.x14 = fp->x914[1].damage;
         }
         ftColl_8007ABD0(&fp->x914[1],
                         fp->mv.dk.specialn.x14 +

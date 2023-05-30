@@ -992,7 +992,7 @@ lbl_8009801C:
 void ftCo_DownWait_Anim(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (!fp->x2224_flag.bits.b2) {
+    if (!fp->x2224_b2) {
         fp->mv.co.downwait.x0 -= 1;
     }
     if (fp->mv.co.downwait.x0 <= 0) {

@@ -1095,7 +1095,7 @@ void ftCo_80092450(ftCo_GObj* gobj)
     absorb.x10_size = 1;
     absorb.x4_offset.x = absorb.x4_offset.y = absorb.x4_offset.z = 0.0f;
     ftColl_8007B1B8(gobj, &absorb, ftCo_80092E50);
-    fp->x221A_flag.bits.b7 = true;
+    fp->x221A_b7 = true;
 }
 #endif
 
@@ -1201,7 +1201,7 @@ void ftCo_800924C0(ftCo_GObj* gobj)
         sp14.y = 0.0f;
         sp14.z = 0.0f;
         // ftColl_8007B1B8(gobj, &sp14, ftCo_80092E50);
-        fp->x221A_flag.bits.b0 = true;
+        fp->x221A_b0 = true;
     }
     ftCo_800921DC(gobj);
 }
@@ -1326,9 +1326,9 @@ bool ftCo_800925A4(HSD_GObj* gobj)
                               p_ftCommonData->x2EC);
         if (fp->shield_health < 0) {
             fp->shield_health = 0;
-            fp->x221A_flag.bits.b7 = false;
+            fp->x221A_b7 = false;
             fp->x221B_b0 = false;
-            pl_8003E0E8(fp->player_id, fp->x221F_flag.bits.b4);
+            pl_8003E0E8(fp->player_id, fp->x221F_b4);
             ftCo_80098B20(gobj);
             ft_80088148(fp, 129, 127, 64);
             return true;
@@ -1787,7 +1787,7 @@ void ftCo_80092BCC(ftCo_GObj* gobj)
 void ftCo_80092BE8(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    pl_8003E114(fp->player_id, fp->x221F_flag.bits.b4, fp->shield_health);
+    pl_8003E114(fp->player_id, fp->x221F_b4, fp->shield_health);
     switch (fp->kind) {
     case FTKIND_YOSHI:
         ftYs_Shield_8012C49C(gobj);
@@ -2283,7 +2283,7 @@ lbl_80093278:
 void ftCo_80093240(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (fp->x221A_flag.bits.b2 && fp->ground_or_air == GA_Ground) {
+    if (fp->x221A_b2 && fp->ground_or_air == GA_Ground) {
         if ((fp->input.lstick.x < 0
                  ? -fp->input.lstick.x
                  : fp->input.lstick.x) >= p_ftCommonData->x4B0 &&
@@ -2588,7 +2588,7 @@ void ftCo_GuardSetOff_Phys(ftCo_GObj* gobj)
 void ftCo_GuardSetOff_Coll(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (!(fp->x221A_flag.bits.b2)) {
+    if (!(fp->x221A_b2)) {
         ft_800845B4(gobj);
     } else {
         ft_80084104(gobj);
@@ -2885,7 +2885,7 @@ void ftCo_8009388C(HSD_GObj* gobj)
                               Ft_MF_SkipAnim | Ft_MF_KeepGfx, NULL,
                               fp->cur_anim_frame, 1, 0);
     fp->x672_input_timer_counter = 0xFE;
-    fp->x221A_flag.bits.b7 = false;
+    fp->x221A_b7 = false;
     fp->x221B_b0 = false;
     fp->x221C_b3 = true;
     fp->x221C_b1 = true;

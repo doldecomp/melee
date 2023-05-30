@@ -231,7 +231,7 @@ bool ftBossLib_8015C31C(void)
 bool ftBossLib_8015C358(void)
 {
     HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_MASTERH);
-    if (gobj && GET_FIGHTER(gobj)->x221F_flag.bits.b3) {
+    if (gobj && GET_FIGHTER(gobj)->x221F_b3) {
         return true;
     }
 
@@ -241,7 +241,7 @@ bool ftBossLib_8015C358(void)
 bool ftBossLib_8015C3A0(void)
 {
     HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_CREZYH);
-    if (gobj && GET_FIGHTER(gobj)->x221F_flag.bits.b3) {
+    if (gobj && GET_FIGHTER(gobj)->x221F_b3) {
         return true;
     }
 

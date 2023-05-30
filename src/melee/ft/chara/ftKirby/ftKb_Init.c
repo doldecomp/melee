@@ -3066,7 +3066,7 @@ void ftKb_Init_OnLoad(HSD_GObj* gobj)
 
     fp->x2222_b1 = 1;
     fp->x2D0 = fp->dat_attrs;
-    fp->fv.kb.x2234.bits.b0 = Player_GetFlagsAEBit1(fp->player_id);
+    fp->fv.kb.x2234_b0 = Player_GetFlagsAEBit1(fp->player_id);
     it_8026B3F8(item_list[0], 50);
     it_8026B3F8(item_list[1], 51);
     it_8026B3F8(item_list[2], 52);

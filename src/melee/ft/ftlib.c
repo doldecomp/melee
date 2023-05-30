@@ -98,7 +98,7 @@ HSD_GObj* ftLib_80086198(HSD_GObj* gobj)
         if (!ftLib_80086FD4(gobj, cur)) {
             // If not same player
             Fighter* cur_fp = GET_FIGHTER(cur);
-            if (cur_fp->x221F_flag.bits.b3) {
+            if (cur_fp->x221F_b3) {
                 continue;
             }
 
@@ -153,8 +153,8 @@ HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
 
         cur_fp = cur->user_data;
         // skip if same team
-        if (cur_fp->x221F_flag.bits.b3 || (gm_8016B168() && fp != NULL &&
-                                           cur_fp->x61B_team == fp->x61B_team))
+        if (cur_fp->x221F_b3 || (gm_8016B168() && fp != NULL &&
+                                 cur_fp->x61B_team == fp->x61B_team))
         {
             continue;
         }
@@ -202,8 +202,8 @@ HSD_GObj* ftLib_80086368(Vec3* v, HSD_GObj* gobj, f32 facing_dir)
         }
 
         cur_fp = cur->user_data;
-        if (cur_fp->x221F_flag.bits.b3 || (gm_8016B168() && fp != NULL &&
-                                           cur_fp->x61B_team == fp->x61B_team))
+        if (cur_fp->x221F_b3 || (gm_8016B168() && fp != NULL &&
+                                 cur_fp->x61B_team == fp->x61B_team))
         {
             continue;
         }
@@ -262,9 +262,8 @@ f32 ftLib_800864A8(Vec3* v, HSD_GObj* gobj)
 
         {
             Fighter* cur_fp = cur->user_data;
-            if (cur_fp->x221F_flag.bits.b3 ||
-                (gm_8016B168() && fp != NULL &&
-                 cur_fp->x61B_team == fp->x61B_team))
+            if (cur_fp->x221F_b3 || (gm_8016B168() && fp != NULL &&
+                                     cur_fp->x61B_team == fp->x61B_team))
             {
                 continue;
             }
@@ -545,10 +544,10 @@ bool ftLib_80086A8C(HSD_GObj* gobj)
             void* temp_r30 = temp_r3->unk28;
             if (temp_r30 == HSD_CObjGetCurrent()) {
                 if (Camera_80030CD8(fp->x890_cameraBox, &fp->x2188)) {
-                    fp->x221F_flag.bits.b0 = false;
+                    fp->x221F_b0 = false;
                     return true;
                 }
-                fp->x221F_flag.bits.b0 = true;
+                fp->x221F_b0 = true;
                 if (Camera_80030CFC(fp->x890_cameraBox, 15)) {
                     return true;
                 }
@@ -557,14 +556,14 @@ bool ftLib_80086A8C(HSD_GObj* gobj)
         }
     }
 
-    fp->x221F_flag.bits.b0 = false;
+    fp->x221F_b0 = false;
     return true;
 }
 
 bool ftLib_80086B64(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x221F_flag.bits.b0;
+    return fp->x221F_b0;
 }
 
 CameraBox* ftLib_80086B74(HSD_GObj* gobj)
@@ -615,11 +614,11 @@ inline void helper(HSD_GObj* gobj, s32 arg1, s32 arg2, s32 val)
 {
     Fighter* fp = gobj->user_data;
 
-    if (!Player_8003544C(fp->player_id, fp->x221F_flag.bits.b4)) {
+    if (!Player_8003544C(fp->player_id, fp->x221F_b4)) {
         return;
     }
 
-    if (!fp->x221F_flag.bits.b3 && !fp->x2224_flag.bits.b2) {
+    if (!fp->x221F_b3 && !fp->x2224_b2) {
         lb_80014574(fp->x618_player_id, val, arg1, arg2);
     }
 }
@@ -663,7 +662,7 @@ void ftLib_80086DC4(s32 arg0, s32 arg1)
 void ftLib_80086E68(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_8003544C(fp->player_id, fp->x221F_flag.bits.b4)) {
+    if (Player_8003544C(fp->player_id, fp->x221F_b4)) {
         HSD_Rumble_80378280(fp->x618_player_id, 1);
     }
 }
@@ -696,7 +695,7 @@ bool ftLib_80086ED0(HSD_GObj* gobj)
 bool ftLib_80086F4C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!fp->x221F_flag.bits.b2 && !fp->x221F_flag.bits.b1 && fp->x209A == 1) {
+    if (!fp->x221F_b2 && !fp->x221F_b1 && fp->x209A == 1) {
         return true;
     }
 
@@ -750,7 +749,7 @@ bool ftLib_80086FD4(HSD_GObj* gobj0, HSD_GObj* gobj1)
 bool ftLib_8008701C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x221F_flag.bits.b3;
+    return fp->x221F_b3;
 }
 
 void ftLib_8008702C(s32 arg0)
@@ -801,7 +800,7 @@ s32 ftLib_80087120(HSD_GObj* gobj)
 void ftLib_80087140(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!fp->x221F_flag.bits.b3) {
+    if (!fp->x221F_b3) {
         ftCo_800D4F24(gobj, 1);
         ftCommon_8007ED2C(fp);
         Fighter_UnkProcessDeath_80068354(gobj);
@@ -846,7 +845,7 @@ void* ftLib_800872B0(HSD_GObj* gobj)
 bool ftLib_800872BC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return !fp->x221E_b1 && !fp->x2226_flag.bits.b4 && !fp->x221F_flag.bits.b4;
+    return !fp->x221E_b1 && !fp->x2226_flag.bits.b4 && !fp->x221F_b4;
 }
 
 s32 ftLib_80087300(HSD_GObj* gobj)
@@ -858,13 +857,13 @@ s32 ftLib_80087300(HSD_GObj* gobj)
 s32 ftLib_8008730C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x221F_flag.bits.b5;
+    return fp->x221F_b5;
 }
 
 s32 ftLib_8008731C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x221F_flag.bits.b3;
+    return fp->x221F_b3;
 }
 
 bool ftLib_8008732C(HSD_GObj* gobj)
@@ -977,13 +976,13 @@ s32 ftLib_8008746C(HSD_GObj* gobj)
 s32 ftLib_800874BC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x221F_flag.bits.b4;
+    return fp->x221F_b4;
 }
 
 void ftLib_800874CC(HSD_GObj* gobj, s32 arg1, s32 arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    pl_8003E4A4(fp->player_id, fp->x221F_flag.bits.b4, arg1, arg2);
+    pl_8003E4A4(fp->player_id, fp->x221F_b4, arg1, arg2);
 }
 
 void ftLib_80087508(s8 arg0, u8 arg1)

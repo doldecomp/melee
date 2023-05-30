@@ -440,8 +440,8 @@ void ftKp_SpecialS_80132E30(HSD_GObj* gobj)
 
     {
         bool throw_flag;
-        if (fp->throw_flags.b4) {
-            fp->throw_flags.b4 = false;
+        if (fp->throw_flags_b4) {
+            fp->throw_flags_b4 = false;
             throw_flag = true;
         } else {
             throw_flag = false;
@@ -457,12 +457,12 @@ void ftKp_SpecialS_80132E30(HSD_GObj* gobj)
         return;
     }
 
-    if (fp->x1A58_interactedFighter == NULL) {
+    if (fp->victim_gobj == NULL) {
         return;
     }
 
     {
-        HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
+        HSD_GObj* victim_gobj = fp->victim_gobj;
         ftCommon_8007E2F4(fp, 0);
         ftCo_800DE2A8(gobj, victim_gobj);
         ftCo_800DE7C0(victim_gobj, 0, 0);
@@ -475,7 +475,7 @@ void ftKp_SpecialS_Enter(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        fp->throw_flags.flags = 0;
+        fp->throw_flags = 0;
         fp->cmd_vars[0] = 0;
         fp->mv.kp.unk1.x4 = 0;
         fp->mv.kp.unk1.xC = 0;
@@ -501,7 +501,7 @@ void ftKp_SpecialAirS_Enter(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        fp->throw_flags.flags = 0;
+        fp->throw_flags = 0;
         fp->cmd_vars[0] = 0;
         fp->mv.kp.unk1.x4 = 0;
         fp->mv.kp.unk1.xC = 0;
@@ -614,7 +614,7 @@ void ftKp_SpecialS_8013322C(HSD_GObj* gobj)
 void ftKp_SpecialS_801332C4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
+    HSD_GObj* victim_gobj = fp->victim_gobj;
 
     ftCommon_8007D5D4(fp);
 
@@ -643,7 +643,7 @@ void ftKp_SpecialS_80133324(HSD_GObj* gobj)
 void ftKp_SpecialS_80133398(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
+    HSD_GObj* victim_gobj = fp->victim_gobj;
 
     ftCommon_8007D5D4(fp);
 
@@ -679,7 +679,7 @@ void ftKp_SpecialS_801333F8(HSD_GObj* gobj)
 void ftKp_SpecialS_80133484(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
+    HSD_GObj* victim_gobj = fp->victim_gobj;
 
     ftCommon_8007D5D4(fp);
 
@@ -709,8 +709,8 @@ void ftKp_SpecialS_801334E4(HSD_GObj* gobj)
         fp->facing_dir = -fp->facing_dir;
     }
 
-    if (fp->x1A58_interactedFighter != NULL) {
-        ftCo_800BCE64(fp->x1A58_interactedFighter, ftCo_MS_ThrownKoopaF);
+    if (fp->victim_gobj != NULL) {
+        ftCo_800BCE64(fp->victim_gobj, ftCo_MS_ThrownKoopaF);
     }
 
     ftCommon_8007E2F4(fp, 511);
@@ -735,8 +735,8 @@ void ftKp_SpecialS_8013359C(HSD_GObj* gobj)
         fp->facing_dir = -fp->facing_dir;
     }
 
-    if (fp->x1A58_interactedFighter != NULL) {
-        ftCo_800BCE64(fp->x1A58_interactedFighter, ftCo_MS_ThrownKoopaB);
+    if (fp->victim_gobj != NULL) {
+        ftCo_800BCE64(fp->victim_gobj, ftCo_MS_ThrownKoopaB);
     }
 
     ftCommon_8007E2F4(fp, 511);
@@ -808,7 +808,7 @@ void ftKp_SpecialSHit_Anim(HSD_GObj* gobj)
                 fp0->cmd_vars[0] = 0;
             }
 
-            ftCo_800BC9C8(fp1->x1A58_interactedFighter);
+            ftCo_800BC9C8(fp1->victim_gobj);
 
         } else {
             /// @todo Combine @c fp0 with other branch somehow

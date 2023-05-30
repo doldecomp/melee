@@ -138,6 +138,10 @@ union ftCommon_MotionVars {
         /* fp+2344 */ int x4;
         /* fp+2348 */ float x8;
     } cargokneebend;
+    struct {
+        /* fp+2340 */ float x0;
+        /* fp+2344 */ int x4;
+    } shouldered;
 };
 
 #endif

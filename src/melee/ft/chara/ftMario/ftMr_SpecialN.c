@@ -50,7 +50,7 @@ void ftMr_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialN, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialN_ItemFireSpawn;
@@ -100,8 +100,8 @@ void ftMr_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
 
     fp = gobj->user_data;
 
-    if (fp->throw_flags.b0) {
-        fp->throw_flags.b0 = false;
+    if (fp->throw_flags_b0) {
+        fp->throw_flags_b0 = false;
         flag_res = true;
     } else {
         flag_res = false;
@@ -127,7 +127,7 @@ void ftMr_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirN, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialN_ItemFireSpawn;

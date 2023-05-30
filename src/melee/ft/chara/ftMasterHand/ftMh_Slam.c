@@ -20,10 +20,10 @@ void ftMh_Slam_Anim(HSD_GObj* gobj)
 #endif
     if (fp->cmd_vars[0] != 0) {
         fp->cmd_vars[0] = 0;
-        ftMh_CaptureWaitMasterHand_80155D6C(fp->x1A58_interactedFighter,
+        ftMh_CaptureWaitMasterHand_80155D6C(fp->victim_gobj,
                                             ftCo_MS_ThrownMasterHand);
-        if (fp->x1A58_interactedFighter != NULL) {
-            HSD_GObj* victim = fp->x1A58_interactedFighter;
+        if (fp->victim_gobj != NULL) {
+            HSD_GObj* victim = fp->victim_gobj;
             ftCommon_8007E2F4(fp, 0);
             ftCo_800DE2A8(gobj, victim);
             ftCo_800DE7C0(victim, 0, 0);
