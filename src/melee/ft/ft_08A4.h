@@ -21,7 +21,6 @@
 /* 09E1D4 */ /* static */ UNK_RET ftCo_8009E1D4(UNK_PARAMS);
 /* 09E4A8 */ /* static */ UNK_RET ftCo_8009E4A8(UNK_PARAMS);
 /* 09E614 */ /* static */ UNK_RET ftCo_8009E614(UNK_PARAMS);
-/* 09EFA4 */ /* static */ UNK_RET ftCo_8009EFA4(UNK_PARAMS);
 /* 09F0F0 */ bool ftCo_8009F0F0(ftCo_GObj* gobj);
 /* 09F184 */ UNK_RET ftCo_8009F184(UNK_PARAMS);
 /* 09F75C */ UNK_RET ftCo_8009F75C(UNK_PARAMS);
@@ -232,7 +231,6 @@
 /* 0DF8B0 */ bool ftCo_800DF8B0(ftCo_Fighter* fp);
 /* 0DF8E8 */ bool ftCo_800DF8E8(ftCo_Fighter* fp);
 /* 0DF910 */ UNK_RET ftCo_800DF910(UNK_PARAMS);
-bool ftCo_8009EF68(Fighter_GObj* gobj);
 bool ftCo_800BFFD0(Fighter*, int, int);
 bool ftCo_800C0694(Fighter*);
 bool ftCo_800C5240(Fighter_GObj* gobj);
