@@ -1,9 +1,11 @@
-#ifndef MELEE_LB_LBUNKNOWN_003_H
-#define MELEE_LB_LBUNKNOWN_003_H
+#ifndef GALE01_00F9F8
+#define GALE01_00F9F8
+
+#include <baselib/forward.h>
 
 #include "lb/types.h"
 
-#include <baselib/jobj.h>
+#include <placeholder.h>
 
 unk_t lb_80014638(void);
 void lb_8001044C(void*, void*, s32, f32, s32, s32, s32, s32);
@@ -21,5 +23,6 @@ void lb_80011710(unk_t, unk_t);
 void lb_8000FD18(unk_t);
 void lb_800115F4(void);
 void lb_800121FC(int*, int, int, int, int);
+/* 011ABC */ /* static */ UNK_RET lb_80011ABC(UNK_PARAMS);
 
 #endif

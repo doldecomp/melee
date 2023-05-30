@@ -4,6 +4,7 @@
 
 #include "ftCo_DamageIce.h"
 
+#include "ftCo_09CB.h"
 #include "ftCo_DamageFall.h"
 #include "ftCo_DownAttack.h"
 #include "ftCo_DownBound.h"
