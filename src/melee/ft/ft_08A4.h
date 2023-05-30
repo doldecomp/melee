@@ -282,7 +282,6 @@ void ftCo_80092BCC(Fighter_GObj* gobj);
 void ftCo_80092BE8(Fighter_GObj* gobj);
 void ftCo_80093BC0(Fighter_GObj* gobj);
 void ftCo_8009750C(Fighter_GObj* gobj);
-void ftCo_8009CA0C(Fighter_GObj*, Fighter_GObj* gobj);
 void ftCo_8009CF84(Fighter*);
 void ftCo_8009DC54(Fighter*);
 void ftCo_8009E0A8(Fighter_GObj* gobj);

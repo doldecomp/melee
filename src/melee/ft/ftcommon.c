@@ -1532,8 +1532,8 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
         ftCo_800C8348(dst_gobj, src->x2028, src->x202C);
         ftCo_800C8540(gobj);
     }
-    if (src->x2226_flag.bits.b4) {
-        if (!src->x2226_flag.bits.b7) {
+    if (src->x2226_b4) {
+        if (!src->x2226_b7) {
             ftCo_800C88D4(dst_gobj, src->x2030, 0);
         }
         ftCo_800C8A64(gobj);

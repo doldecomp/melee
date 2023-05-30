@@ -327,7 +327,7 @@ void ftGk_Init_OnLoad(HSD_GObj* gobj)
     ftKp_Init_OnLoadForGKoopa(fp);
     it_8026B3F8(items[0], It_Kind_Koopa_Flame);
 
-    fp->x2226_flag.bits.b1 = true;
+    fp->x2226_b1 = true;
     fp->x222A_flag.bits.b0 = true;
 }
 

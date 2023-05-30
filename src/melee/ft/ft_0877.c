@@ -119,10 +119,10 @@ s32 ft_80087A18(HSD_GObj* gobj)
     s32 var1;
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->x2226_flag.bits.b4) &&
+    if ((fp->x2226_b4) &&
         ((var1 = ftCo_800C06B4(fp), ((var1 == 0x7B) != 0)) ||
          (var1 == 0x80)) &&
-        ((fp->x2226_flag.bits.b5)))
+        ((fp->x2226_b5)))
     {
         return true;
     }
@@ -182,8 +182,7 @@ s32 ft_80087AEC(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((fp->x34_scale.y != fp->x34_scale.x) ||
-        ((fp->x2226_flag.bits.b4) || (fp->x2223_flag.bits.b7) ||
-         (fp->x197C != 0)))
+        ((fp->x2226_b4) || (fp->x2223_flag.bits.b7) || (fp->x197C != 0)))
     {
         return true;
     }

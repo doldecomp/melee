@@ -345,7 +345,7 @@ void ftKp_Init_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftKoopaAttributes);
     it_8026B3F8(items[0], It_Kind_Koopa_Flame);
-    fp->x2226_flag.bits.b1 = true;
+    fp->x2226_b1 = true;
 }
 
 void ftKp_Init_80132B38(void) {}
