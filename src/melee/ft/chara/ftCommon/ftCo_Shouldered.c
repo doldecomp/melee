@@ -22,7 +22,7 @@
 #endif
 float const ftCo_804D8750 = 0;
 float const ftCo_804D8754 = 1;
-double const ftCo_804D8758 = CONV_HI;
+double const ftCo_804D8758 = S32_TO_F32;
 #endif
 
 /* 09C744 */ static void ftCo_8009C744(ftCo_GObj* gobj);
