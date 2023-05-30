@@ -8,6 +8,7 @@
 #include "ft/ftcommon.h"
 #include "ft/ftwalljump.h"
 #include "ftCommon/ftCo_Ottotto.h"
+#include "ftCommon/ftCo_StopCeil.h"
 #include "ftCommon/ftCo_StopWall.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
@@ -1483,7 +1484,7 @@ lbl_80082D2C:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_80082D40(void)
+asm void ft_80082D40(Fighter_GObj* gobj, float, float)
 {
     // clang-format off
     nofralloc
@@ -2057,7 +2058,8 @@ lbl_80083450:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_80083464(void)
+asm void ft_80083464(Fighter_GObj* gobj, bool (*)(Fighter_GObj* gobj, enum_t),
+                     HSD_GObjEvent)
 {
     // clang-format off
     nofralloc

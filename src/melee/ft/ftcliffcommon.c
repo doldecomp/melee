@@ -9,6 +9,7 @@
 #include "ft/ftcamera.h"
 #include "ft/ftcommon.h"
 #include "ftCommon/ftCo_CliffWait.h"
+#include "ftCommon/ftCo_StopCeil.h"
 #include "mp/mplib.h"
 #include "pl/pl_0371.h"
 
