@@ -99,7 +99,7 @@
 /* 0F1CD8 */ void ftKb_SpecialN_800F1CD8(HSD_GObj* gobj);
 /* 0F1D24 */ void ftKb_SpecialN_800F1D24(HSD_GObj* gobj);
 /* 0F1DAC */ void ftKb_SpecialN_800F1DAC(HSD_GObj* gobj);
-/* 0F1F1C */ void ftKb_SpecialN_800F1F1C(HSD_GObj* gobj);
+/* 0F1F1C */ void ftKb_SpecialN_800F1F1C(HSD_GObj* gobj, Vec3*);
 /* 0F1F68 */ void ftKb_SpecialN_800F1F68(HSD_GObj* gobj);
 /* 0F203C */ void ftKb_AttackDash_Anim(HSD_GObj* gobj);
 /* 0F205C */ void ftKb_AttackDash_IASA(HSD_GObj* gobj);

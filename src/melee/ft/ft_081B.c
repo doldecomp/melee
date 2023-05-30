@@ -8,6 +8,7 @@
 #include "ft/ftcommon.h"
 #include "ft/ftwalljump.h"
 #include "ftCommon/ftCo_Ottotto.h"
+#include "ftCommon/ftCo_StopWall.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
@@ -3310,7 +3311,7 @@ lbl_800843E0:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_800843FC(void)
+asm void ft_800843FC(ftCo_GObj* gobj)
 {
     // clang-format off
     nofralloc

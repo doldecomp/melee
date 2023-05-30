@@ -22,7 +22,7 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
     if (fp0->x2224_b7) {
         CollData* coll_data = &fp0->coll_data;
         if ((fp0->coll_data.env_flags & MPCOLL_FLAGS_B11) ||
-            (coll_data->env_flags & MPCOLL_FLAGS_B5))
+            (coll_data->env_flags & MPCOLL_FLAGS_B05))
         {
             s32 env_flags = coll_data->env_flags & MPCOLL_FLAGS_B11;
 

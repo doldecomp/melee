@@ -869,7 +869,7 @@ void ftCa_SpecialLw_Coll(HSD_GObj* gobj)
             (((facing_dir = fp->facing_dir, ((facing_dir == -1) != 0)) &&
               (fp->coll_data.env_flags & MPCOLL_FLAGS_B11)) ||
              (facing_dir == +1 &&
-              (fp->coll_data.env_flags & MPCOLL_FLAGS_B5))))
+              (fp->coll_data.env_flags & MPCOLL_FLAGS_B05))))
         {
             Fighter* fp = GET_FIGHTER(gobj);
             fp->cmd_vars[2] = 0;
