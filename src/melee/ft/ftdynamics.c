@@ -1,9 +1,5 @@
 #include <dolphin/mtx/types.h>
 
-char ftDynamics_803C5720[] = "translate";
-char ftDynamics_803C572C[] = "fighter dynamics num over!\n";
-char ftDynamics_803C5748[] = "ftdynamics.c";
-
 #ifdef MUST_MATCH
 #pragma push
 #pragma force_active on

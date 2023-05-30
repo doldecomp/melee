@@ -26,7 +26,6 @@ void ftCamera_80076064(Fighter* fp)
 {
     CameraBox* camera_box;
     UnkFloat6_Camera spC;
-
     camera_box = fp->x890_cameraBox;
     ftCamera_80076018(fp->ft_data->x3C, &spC, fp->x34_scale.y);
     camera_box->x8 = 0;

@@ -26,6 +26,7 @@
 #include "ef/efasync.h"
 #include "ft/ft_08A4.h"
 #include "ft/ftdata.h"
+#include "ftCommon/ftCo_09CB.h"
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_FallSpecial.h"

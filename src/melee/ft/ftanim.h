@@ -36,5 +36,6 @@ void ftAnim_80070108(Fighter* fp, int, int item, f32, f32);
 void ftAnim_8006FB88(Fighter* fp, int, HSD_Joint* joint);
 void ftAnim_80070710(HSD_JObj* joint, f32);
 void ftAnim_8006F4C8(Fighter* fp, int, u32);
+/* 06EED4 */ /* static */ UNK_RET ftAnim_8006EED4(UNK_PARAMS);
 
 #endif

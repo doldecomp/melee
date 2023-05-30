@@ -9,6 +9,7 @@
 #include "ft/ft_08A4.h"
 #include "ft/ftdata.h"
 #include "ft/ftwaitanim.h"
+#include "ftCommon/ftCo_09CB.h"
 #include "it/it_26B1.h"
 
 #include <placeholder.h>

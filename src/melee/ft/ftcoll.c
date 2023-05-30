@@ -2815,7 +2815,7 @@ lbl_800788B4:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftColl_800788D4(void)
+asm void ftColl_800788D4(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 800788D4 000754B4  7C 08 02 A6 */	mflr r0
@@ -4512,7 +4512,7 @@ lbl_80079E7C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftColl_80079EA8(void)
+asm float ftColl_80079EA8(Fighter*, HitCapsule*, int)
 { // clang-format off
     nofralloc
 /* 80079EA8 00076A88  94 21 FF B8 */	stwu r1, -0x48(r1)

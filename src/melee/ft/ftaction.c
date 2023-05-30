@@ -10,6 +10,7 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_09CB.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcommand.h"
 
