@@ -191,7 +191,7 @@ void ftGw_SpecialS_Enter(HSD_GObj* gobj)
     ftGw_SpecialS_GetRandomInt(gobj);
     Fighter_ChangeMotionState(gobj,
                               fp->fv.gw.x222C_judgeVar1 + ftGw_MS_SpecialS1, 0,
-                              NULL, 0.0f, 1.0f, 0.0f);
+                              0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialS_SetVars(gobj);
 }
@@ -214,7 +214,7 @@ void ftGw_SpecialAirS_Enter(HSD_GObj* gobj)
     ftGw_SpecialS_GetRandomInt(gobj);
     Fighter_ChangeMotionState(gobj,
                               fp->fv.gw.x222C_judgeVar1 + ftGw_MS_SpecialAirS1,
-                              0, NULL, 0.0f, 1.0f, 0.0f);
+                              0, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialS_SetVars(gobj);
 }
@@ -350,7 +350,7 @@ static void ftGw_SpecialS_GroundToAir(HSD_GObj* gobj)
     !gobj;
     Fighter_ChangeMotionState(
         gobj, fp->fv.gw.x222C_judgeVar1 + ftGw_MS_SpecialAirS1,
-        transition_flags, NULL, fp->cur_anim_frame, 1.0f, 0.0f);
+        transition_flags, fp->cur_anim_frame, 1.0f, 0.0f, NULL);
     if ((u32) fp->cmd_vars[0] == 1) {
         fp->cmd_vars[0] = 2;
     }
@@ -372,6 +372,6 @@ static void ftGw_SpecialAirS_AirToGround(HSD_GObj* gobj)
     !gobj;
     Fighter_ChangeMotionState(
         gobj, fp->fv.gw.x222C_judgeVar1 + ftGw_MS_SpecialS1, transition_flags,
-        NULL, fp->cur_anim_frame, 1.0f, 0.0f);
+        fp->cur_anim_frame, 1.0f, 0.0f, NULL);
     ftGameWatch_SpecialS_SetCall(gobj);
 }

@@ -175,8 +175,8 @@ void ftPe_SpecialHi_Enter(HSD_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[16];
 #endif
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialHiStart, FtMoveId_None,
-                              NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialHiStart, FtMoveId_None, 0,
+                              1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     doEnter(gobj);
 }
@@ -192,7 +192,7 @@ void ftPe_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->self_vel.y = 0;
     fp->self_vel.x *= da->x84;
     Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirHiStart, FtMoveId_None,
-                              NULL, 0, 1, 0);
+                              0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     doEnter(gobj);
 }

@@ -118,8 +118,8 @@ void ftGw_AttackS4_Enter(HSD_GObj* gobj)
 
     fp->allow_interrupt = 0;
     fp->cmd_vars[0] = 0;
-    Fighter_ChangeMotionState(gobj, ftGw_MS_AttackS4, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_AttackS4, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftGw_ItemTorchSetup;
 }

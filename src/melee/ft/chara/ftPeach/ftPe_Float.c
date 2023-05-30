@@ -182,7 +182,7 @@ void ftPe_8011BB6C(HSD_GObj* gobj, bool arg1)
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
-    Fighter_ChangeMotionState(gobj, ftPe_MS_Float, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_Float, 0, 0, 1, 0, NULL);
     fp->fv.pe.has_float = false;
     if (arg1) {
         fp->fv.pe.x4 = da->xC;
@@ -329,8 +329,8 @@ static void updateFloatDir(HSD_GObj* gobj)
     ftPeach_MotionState msid = getFloatDir(gobj);
     float anim_start = msid == ftPe_MS_FloatFallF ? da->floatfallf_anim_start
                                                   : da->floatfallb_anim_start;
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_KeepGfx, NULL,
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_KeepGfx,
                               anim_start - da->floatfall_anim_start_offset,
-                              lbl_804D97C8, lbl_804D97CC);
+                              lbl_804D97C8, lbl_804D97CC, NULL);
 }
 #endif

@@ -525,8 +525,8 @@ void ftCo_8009794C(ftCo_GObj* gobj)
         }
         Fighter_ChangeMotionState(
             gobj, b ? ftCo_MS_DownBoundU : ftCo_MS_DownBoundD,
-            Ft_MF_SkipNametagVis | Ft_MF_KeepColAnimPartHitStatus, NULL, 0, 1,
-            0);
+            Ft_MF_SkipNametagVis | Ft_MF_KeepColAnimPartHitStatus, 0, 1, 0,
+            NULL);
         ftCo_800978D4(gobj);
         ftCo_800976A4(gobj);
         fp->x67C = 255;
@@ -881,7 +881,7 @@ void ftCo_80097E8C(ftCo_GObj* gobj)
                                   Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
                                       Ft_MF_SkipNametagVis |
                                       Ft_MF_KeepColAnimPartHitStatus,
-                                  NULL, 0, 1, 0);
+                                  0, 1, 0, NULL);
     }
     ftAnim_8006EBA4(gobj);
     ftCommon_8007E2F4(fp, true);
@@ -942,7 +942,7 @@ void ftCo_80097F38(ftCo_GObj* gobj)
                                              : ftCo_MS_DownWaitD,
         Ft_MF_SkipModel | Ft_MF_SkipMatAnim | Ft_MF_SkipNametagVis |
             Ft_MF_KeepColAnimPartHitStatus,
-        NULL, 0, 1, 0);
+        0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     ftCommon_8007E2F4(fp, 1);
 }

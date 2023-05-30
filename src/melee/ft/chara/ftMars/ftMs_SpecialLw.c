@@ -21,7 +21,7 @@ void ftMs_SpecialLw_Enter(HSD_GObj* gobj)
     Fighter* fp0 = GET_FIGHTER(gobj);
     fp0->self_vel.y = 0;
 
-    Fighter_ChangeMotionState(gobj, 369, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 369, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
 
     {
@@ -45,7 +45,7 @@ void ftMs_SpecialAirLw_Enter(HSD_GObj* gobj)
         fp->self_vel.y = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, 371, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 371, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
 
     {
@@ -158,8 +158,8 @@ void ftMs_SpecialLw_80138D38(HSD_GObj* gobj)
     {
         Fighter* fp = gobj->user_data;
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 371, 0x0C4C508C, NULL,
-                                  fp->cur_anim_frame, 1, 0);
+        Fighter_ChangeMotionState(gobj, 371, 0x0C4C508C, fp->cur_anim_frame, 1,
+                                  0, NULL);
     }
 
     {
@@ -183,8 +183,8 @@ void ftMs_SpecialLw_80138DD0(HSD_GObj* gobj)
     {
         Fighter* fp0 = gobj->user_data;
         ftCommon_8007D7FC(fp0);
-        Fighter_ChangeMotionState(gobj, 369, 0x0C4C508C, NULL,
-                                  fp0->cur_anim_frame, 1, 0);
+        Fighter_ChangeMotionState(gobj, 369, 0x0C4C508C, fp0->cur_anim_frame,
+                                  1, 0, NULL);
     }
 
     {
@@ -333,8 +333,8 @@ void ftMs_SpecialLw_80139080(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 372, 0x0C4C508E, NULL, fp->cur_anim_frame,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, 372, 0x0C4C508E, fp->cur_anim_frame, 1, 0,
+                              NULL);
 }
 
 // 801390E0 00135CC0
@@ -343,8 +343,8 @@ void ftMs_SpecialLw_801390E0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 370, 0x0C4C508E, NULL, fp->cur_anim_frame,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, 370, 0x0C4C508E, fp->cur_anim_frame, 1, 0,
+                              NULL);
 }
 
 void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
@@ -386,7 +386,7 @@ void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
                 msid = 372;
             }
 
-            Fighter_ChangeMotionState(gobj, msid, 0, NULL, 0, 1, 0);
+            Fighter_ChangeMotionState(gobj, msid, 0, 0, 1, 0, NULL);
         }
     }
 

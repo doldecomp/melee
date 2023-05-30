@@ -33,7 +33,7 @@ void ftCo_8009B1B8(ftCo_GObj* gobj)
     FtMotionId msid = (float) fp->dmg.x1830_percent < p_ftCommonData->x488
                           ? ftCo_MS_CliffJumpQuick1
                           : ftCo_MS_CliffJumpSlow1;
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     ftCommon_8007E2F4(fp, 32);
     fp->x221D_b7 = true;
@@ -69,7 +69,7 @@ void ftCo_8009B2F8(ftCo_GObj* gobj)
     FtMotionId msid = fp->motion_id == ftCo_MS_CliffJumpQuick1
                           ? ftCo_MS_CliffJumpQuick2
                           : ftCo_MS_CliffJumpSlow2;
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     fp->mv.co.cliffjump.x0 = false;
     fp->self_vel.x +=
@@ -87,7 +87,7 @@ void ftCo_8009B390(ftCo_GObj* gobj, float force_mul)
     FtMotionId msid = fp->motion_id == ftCo_MS_CliffJumpQuick1
                           ? ftCo_MS_CliffJumpQuick2
                           : ftCo_MS_CliffJumpSlow2;
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     fp->mv.co.cliffjump.x0 = false;
     fp->self_vel.y = fp->co_attrs.ledge_jump_vertical_velocity * force_mul;

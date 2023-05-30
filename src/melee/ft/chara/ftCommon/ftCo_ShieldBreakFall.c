@@ -17,7 +17,7 @@ void ftCo_80098D90(ftCo_GObj* gobj)
                               Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipModel |
                                   Ft_MF_Unk06 | Ft_MF_SkipMatAnim |
                                   Ft_MF_SkipColAnim,
-                              NULL, 0, 1, 0);
+                              0, 1, 0, NULL);
     ftCommon_8007D468(fp);
     ftCommon_8007EBAC(fp, 8, 0);
 }

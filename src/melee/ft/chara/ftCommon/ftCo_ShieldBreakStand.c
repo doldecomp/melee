@@ -20,7 +20,7 @@ void ftCo_80098F3C(ftCo_GObj* gobj)
     Fighter_ChangeMotionState(gobj, msid,
                               Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipModel |
                                   Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim,
-                              NULL, 0, 1, 0);
+                              0, 1, 0, NULL);
 }
 
 void ftCo_ShieldBreakStand_Anim(ftCo_GObj* gobj)

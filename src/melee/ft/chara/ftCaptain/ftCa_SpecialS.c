@@ -49,7 +49,7 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     resetCmdVarsGround(gobj);
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialSStart, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialSStart, 0, 0, 1, 0, NULL);
     setCallbacks(gobj);
     ftAnim_8006EBA4(gobj);
     switch (ftLib_800872A4(gobj)) {
@@ -80,8 +80,8 @@ static inline void setupAirStart(HSD_GObj* gobj)
         u32* vars = &fp->cmd_vars[0];
         vars[0] = vars[1] = vars[2] = vars[3] = 0;
     }
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirSStart, 0, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirSStart, 0, 0, 1, 0,
+                              NULL);
     setCallbacks(gobj);
     ftAnim_8006EBA4(gobj);
     switch (ftLib_800872A4(gobj)) {
@@ -125,8 +125,8 @@ static void onDetectGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* sa = getFtSpecialAttrsD(fp);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialS, transition_flags, NULL,
-                              0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialS, transition_flags, 0, 1,
+                              0, NULL);
     setCallbacks(gobj);
     {
         Vec3* vel = &fp->self_vel;
@@ -138,8 +138,8 @@ static void onDetectGround(HSD_GObj* gobj)
 static void onDetectAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirS, transition_flags,
-                              NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirS, transition_flags, 0,
+                              1, 0, NULL);
     setCallbacks(gobj);
     fp->self_vel.z = 0;
 }

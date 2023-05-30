@@ -43,8 +43,8 @@ void ftDk_MS_345_800E0294(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
-    Fighter_ChangeMotionState(gobj, donkey_attr->motion_state + 6, 1, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, donkey_attr->motion_state + 6, 1, 0, 1, 0,
+                              NULL);
     ftAnim_SetAnimRate(gobj, 0);
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4(fp);

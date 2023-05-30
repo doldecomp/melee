@@ -17,8 +17,8 @@ void ftCo_80099D9C(ftCo_GObj* gobj)
     u8 _[8] = { 0 };
 #endif
     ftCo_Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_ReboundStop, Ft_MF_None, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_ReboundStop, Ft_MF_None, 0, 1, 0,
+                              NULL);
     {
         float fp_x191C = fp->dmg.x191C;
         fp->mv.co.rebound.anim_start = (fp->co_attrs.x9C + 0.1f) / fp_x191C;
@@ -37,8 +37,8 @@ void ftCo_ReboundStop_Anim(ftCo_GObj* gobj)
 void ftCo_80099E44(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_Rebound, Ft_MF_None, NULL, 0,
-                              fp->mv.co.rebound.anim_start, 0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_Rebound, Ft_MF_None, 0,
+                              fp->mv.co.rebound.anim_start, 0, NULL);
 }
 
 void ftCo_Rebound_Anim(ftCo_GObj* gobj)

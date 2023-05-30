@@ -79,7 +79,7 @@ static void doEnter(ftCo_GObj* gobj)
         fp->mv.co.attacklw3.x0 = 0;
         fp->cb.x21EC_callback = callUnk;
         Fighter_ChangeMotionState(gobj, ftCo_MS_AttackLw3,
-                                  Ft_MF_SkipAttackCount, NULL, 0, 1, 0);
+                                  Ft_MF_SkipAttackCount, 0, 1, 0, NULL);
         ftAnim_8006EBA4(gobj);
     }
 }

@@ -118,7 +118,7 @@ void ftMh_TagSqueeze_Coll(HSD_GObj* gobj) {}
 
 static void ftMh_MS_386_80155818(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftMh_MS_TagFail, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_TagFail, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
 }
 

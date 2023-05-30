@@ -466,8 +466,8 @@ void ftPp_SpecialN_Enter(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->fv.nn.x222C = 0;
 
-    Fighter_ChangeMotionState(gobj, 341, 0, NULL, ftPp_Init_804D9838,
-                              ftPp_Init_804D983C, ftPp_Init_804D9838);
+    Fighter_ChangeMotionState(gobj, 341, 0, ftPp_Init_804D9838,
+                              ftPp_Init_804D983C, ftPp_Init_804D9838, NULL);
 
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftPp_SpecialN_8011F500;
@@ -497,8 +497,8 @@ void ftPp_SpecialAirN_Enter(HSD_GObj* gobj)
         fp->fv.nn.x2250 = ftPp_Init_804D9840;
     }
 
-    Fighter_ChangeMotionState(gobj, 342, 0, NULL, ftPp_Init_804D9838,
-                              ftPp_Init_804D983C, ftPp_Init_804D9838);
+    Fighter_ChangeMotionState(gobj, 342, 0, ftPp_Init_804D9838,
+                              ftPp_Init_804D983C, ftPp_Init_804D9838, NULL);
 
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftPp_SpecialN_8011F500;

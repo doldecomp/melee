@@ -114,7 +114,7 @@ static void checkAttack11(ftCo_GObj* gobj)
         fp->allow_interrupt = false;
         fp->x2218_b1 = false;
         Fighter_ChangeMotionState(gobj, ftCo_MS_Attack11, getMotionFlags(fp),
-                                  NULL, 0, 1, 0);
+                                  0, 1, 0, NULL);
         ftAnim_8006EBA4(gobj);
         fp->hitlag_mul = fp->co_attrs.jab_2_input_window;
         fp->unk_msid = ftCo_MS_Attack11;
@@ -186,8 +186,8 @@ static void doAttack12Normal(ftCo_GObj* gobj)
     if (!ftCo_80094790(gobj)) {
         fp->allow_interrupt = false;
         fp->x2218_b1 = false;
-        Fighter_ChangeMotionState(gobj, ftCo_MS_Attack12, Ft_MF_None, NULL, 0,
-                                  1, 0);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_Attack12, Ft_MF_None, 0, 1, 0,
+                                  NULL);
         fp->hitlag_mul = fp->co_attrs.jab_3_input_window;
         fp->unk_msid = ftCo_MS_Attack12;
         fp->mv.co.attack1.x0 = 0;
@@ -271,8 +271,8 @@ static void doAttack13(ftCo_GObj* gobj)
         if (!ftCo_80094790(gobj)) {
             fp->allow_interrupt = false;
             fp->x2218_b1 = false;
-            Fighter_ChangeMotionState(gobj, ftCo_MS_Attack13, Ft_MF_None, NULL,
-                                      0, 1, 0);
+            Fighter_ChangeMotionState(gobj, ftCo_MS_Attack13, Ft_MF_None, 0, 1,
+                                      0, NULL);
         }
         return;
     }

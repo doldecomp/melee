@@ -36,18 +36,9 @@ ASM void ftCo_8009C5A4(ftCo_GObj* gobj, FtMotionId msid)
 #endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->motion_id != msid || msid != ftCo_MS_ShoulderedWait) {
-#define SOLUTION 1
-#if SOLUTION == 0
-        ftCo_GObj* temp = fp->victim_gobj;
         Fighter_ChangeMotionState(
-            gobj, msid, fp->x2222_b6 ? Ft_MF_FreezeState : Ft_MF_None, temp, 0,
-            1, 0);
-#elif SOLUTION == 1
-        Fighter_ChangeMotionState(
-            gobj, msid, fp->x2222_b6 ? Ft_MF_FreezeState : Ft_MF_None,
-            fp->victim_gobj, 0, 1, 0);
-#endif
-#undef SOLUTION
+            gobj, msid, fp->x2222_b6 ? Ft_MF_FreezeState : Ft_MF_None, 0, 1, 0,
+            fp->victim_gobj);
         ftCommon_8007E2FC(gobj);
         ftCommon_8007E2F4(fp, 0x1FF);
         fp->cb.x21B0_callback_Accessory1 = ftCo_800DB464;

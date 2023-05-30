@@ -21,7 +21,7 @@ void ftMs_SpecialHi_Enter(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
     // MotionStateChange
-    Fighter_ChangeMotionState(gobj, 0x16F, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x16F, 0, 0.0f, 1.0f, 0.0f, NULL);
     // MS_AnimationFrameUpdate&More
     ftAnim_8006EBA4(gobj);
 }
@@ -45,7 +45,7 @@ void ftMs_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->self_vel.y = 0.0f;
     fp->self_vel.x *= da->x3C;
     // MotionStateChange
-    Fighter_ChangeMotionState(gobj, 0x170, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x170, 0, 0.0f, 1.0f, 0.0f, NULL);
     // MS_AnimationFrameUpdate&More
     ftAnim_8006EBA4(gobj);
 }

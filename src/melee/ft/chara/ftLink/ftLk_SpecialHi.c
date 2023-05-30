@@ -49,8 +49,8 @@ static void onAccessory4(HSD_GObj* gobj)
 void ftLk_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialHi, Ft_MF_None, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialHi, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = onAccessory4;
 }
@@ -63,8 +63,8 @@ void ftLk_SpecialAirHi_Enter(HSD_GObj* gobj)
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
-    Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirHi, Ft_MF_None, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirHi, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     fp->self_vel.x *= da->x34;
     fp->self_vel.y = da->x40;
@@ -166,8 +166,8 @@ static void doColl(HSD_GObj* gobj)
         Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirHi, coll_mf, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirHi, coll_mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
 }
 
 void ftLk_SpecialHi_ProcessPartLThumbNb(HSD_GObj* gobj)

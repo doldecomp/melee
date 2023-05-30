@@ -113,8 +113,8 @@ void ftNs_SpecialNStart_Enter(HSD_GObj* gobj)
         Fighter* fp0;
         fp0 = GET_FIGHTER(gobj);
 
-        Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNStart, 0, NULL, 0, 1,
-                                  0);
+        Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNStart, 0, 0, 1, 0,
+                                  NULL);
 
         fp0->cmd_vars[3] = 0;
         fp0->cmd_vars[2] = 0;
@@ -149,8 +149,8 @@ void ftNs_SpecialAirNStart_Enter(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNStart, 0, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNStart, 0, 0, 1, 0,
+                              NULL);
 
     fp->cmd_vars[3] = 0;
     fp->cmd_vars[2] = 0;
@@ -190,7 +190,7 @@ void ftNs_SpecialNStart_Anim(HSD_GObj* gobj)
         return;
     }
 
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNHold, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNHold, 0, 0, 1, 0, NULL);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -243,15 +243,15 @@ void ftNs_SpecialNRelease_Anim(HSD_GObj* gobj)
         if (fp->mv.ns.specialn.flashTimerLoop1 <= 0 &&
             fp->mv.ns.specialn.flashTimerLoop2 <= 0)
         {
-            Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNEnd, 0, NULL, 0, 1,
-                                      0);
+            Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNEnd, 0, 0, 1, 0,
+                                      NULL);
 
             return;
         }
 
         if (fp->motion_id != ftNs_MS_SpecialNRelease) {
-            Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNRelease, 0, NULL,
-                                      fp->cur_anim_frame, 1, 0);
+            Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNRelease, 0,
+                                      fp->cur_anim_frame, 1, 0, NULL);
         }
 
         return;
@@ -265,8 +265,8 @@ void ftNs_SpecialNRelease_Anim(HSD_GObj* gobj)
     if (it_802AA7F0(fp->fv.ns.pkflash_gobj) == true &&
         fp->motion_id != ftNs_MS_SpecialNRelease)
     {
-        Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNRelease, 0, NULL,
-                                  fp->cur_anim_frame, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNRelease, 0,
+                                  fp->cur_anim_frame, 1, 0, NULL);
     }
 }
 
@@ -313,8 +313,8 @@ void ftNs_SpecialAirNStart_Anim(HSD_GObj* gobj)
     }
 
     {
-        Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNHold, 0, NULL, 0, 1,
-                                  0);
+        Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNHold, 0, 0, 1, 0,
+                                  NULL);
         {
             Fighter* fighter_data2 = GET_FIGHTER(gobj);
 
@@ -369,14 +369,14 @@ void ftNs_SpecialAirNRelease_Anim(HSD_GObj* gobj)
         if (fp->mv.ns.specialn.flashTimerLoop1 <= 0 &&
             fp->mv.ns.specialn.flashTimerLoop2 <= 0)
         {
-            Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNEnd, 0, NULL, 0,
-                                      1, 0);
+            Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNEnd, 0, 0, 1, 0,
+                                      NULL);
             return;
         }
 
         if (fp->motion_id != ftNs_MS_SpecialAirNRelease) {
             Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNRelease, 0,
-                                      NULL, fp->cur_anim_frame, 1, 0);
+                                      fp->cur_anim_frame, 1, 0, NULL);
         }
     } else {
         if (it_802AA7E4(fp->fv.ns.pkflash_gobj) != gobj) {
@@ -388,7 +388,7 @@ void ftNs_SpecialAirNRelease_Anim(HSD_GObj* gobj)
             fp->motion_id != ftNs_MS_SpecialAirNRelease)
         {
             Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNRelease, 0,
-                                      NULL, fp->cur_anim_frame, 1, 0);
+                                      fp->cur_anim_frame, 1, 0, NULL);
         }
     }
 }
@@ -642,8 +642,8 @@ void ftNs_SpecialNStart_Coll(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
 
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNStart,
-                              FTNESS_SPECIALN_COLL_FLAG, NULL,
-                              fp->cur_anim_frame, 1, 0);
+                              FTNESS_SPECIALN_COLL_FLAG, fp->cur_anim_frame, 1,
+                              0, NULL);
 }
 
 /// Ness's grounded PK Flash Charge Collision callback
@@ -658,8 +658,8 @@ void ftNs_SpecialNRelease_Coll(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
 
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNHold,
-                              FTNESS_SPECIALN_COLL_FLAG, NULL,
-                              fp->cur_anim_frame, 1, 0);
+                              FTNESS_SPECIALN_COLL_FLAG, fp->cur_anim_frame, 1,
+                              0, NULL);
 }
 
 /// Ness's grounded PK Flash Release Collision callback
@@ -674,8 +674,8 @@ void ftNs_SpecialNEnd_Coll(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
 
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNEnd,
-                              FTNESS_SPECIALN_COLL_FLAG, NULL,
-                              fp->cur_anim_frame, 1, 0);
+                              FTNESS_SPECIALN_COLL_FLAG, fp->cur_anim_frame, 1,
+                              0, NULL);
 }
 
 /// Ness's aerial PK Flash Start Collision callback
@@ -690,8 +690,8 @@ void ftNs_SpecialAirNStart_Coll(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNStart,
-                              FTNESS_SPECIALN_COLL_FLAG, NULL,
-                              fp->cur_anim_frame, 1, 0);
+                              FTNESS_SPECIALN_COLL_FLAG, fp->cur_anim_frame, 1,
+                              0, NULL);
 }
 
 /// Ness's aerial PK Flash Charge Collision callback
@@ -706,8 +706,8 @@ void ftNs_SpecialAirNRelease_Coll(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNHold,
-                              FTNESS_SPECIALN_COLL_FLAG, NULL,
-                              fp->cur_anim_frame, 1, 0);
+                              FTNESS_SPECIALN_COLL_FLAG, fp->cur_anim_frame, 1,
+                              0, NULL);
 }
 
 /// Ness's aerial PK Flash Release Collision callback
@@ -722,6 +722,6 @@ void ftNs_SpecialAirNEnd_Coll(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNEnd,
-                              FTNESS_SPECIALN_COLL_FLAG, NULL,
-                              fp->cur_anim_frame, 1, 0);
+                              FTNESS_SPECIALN_COLL_FLAG, fp->cur_anim_frame, 1,
+                              0, NULL);
 }

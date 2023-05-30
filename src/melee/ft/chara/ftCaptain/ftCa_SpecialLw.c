@@ -205,8 +205,8 @@ void ftCa_SpecialLw_Enter(HSD_GObj* gobj)
     fp->throw_flags = 0;
     fp->mv.ca.speciallw.x0 = 0;
     fp->mv.ca.speciallw.friction = 1;
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLw, Ft_MF_None, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLw, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     fp->cb.x21C0_callback_OnGiveDamage = ftCa_SpecialHi_800E400C;
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -267,8 +267,8 @@ void ftCa_SpecialAirLw_Enter(HSD_GObj* gobj)
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLw, Ft_MF_None, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLw, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -370,8 +370,8 @@ void ftCa_SpecialLw_Anim(HSD_GObj* gobj)
             fp->throw_flags = 0;
             ftCommon_8007D7FC(fp);
             Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLwEnd, Ft_MF_None,
-                                      NULL, 0, da->speciallw_ground_lag_mul,
-                                      0);
+                                      0, da->speciallw_ground_lag_mul, 0,
+                                      NULL);
             fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
             fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         } else {
@@ -382,7 +382,7 @@ void ftCa_SpecialLw_Anim(HSD_GObj* gobj)
             fp->throw_flags = 0;
             ftCommon_8007D5D4(fp);
             Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLwEndAir,
-                                      Ft_MF_None, NULL, 0, 1, 0);
+                                      Ft_MF_None, 0, 1, 0, NULL);
             fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
             fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         }
@@ -457,7 +457,7 @@ void ftCa_SpecialAirLw_Anim(HSD_GObj* gobj)
         fp->throw_flags = 0;
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLwEndAir, Ft_MF_None,
-                                  NULL, 0, 1, 0);
+                                  0, 1, 0, NULL);
     }
 }
 #endif
@@ -878,7 +878,7 @@ void ftCa_SpecialLw_Coll(HSD_GObj* gobj)
             fp->throw_flags = 0;
             ftCommon_8007D5D4(fp);
             Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialHiThrow1,
-                                      Ft_MF_None, NULL, 0, 1, 0);
+                                      Ft_MF_None, 0, 1, 0, NULL);
         }
     }
 }
@@ -1018,8 +1018,8 @@ void ftCa_SpecialAirLw_Coll(HSD_GObj* gobj)
         fp->cmd_vars[0] = 0;
         fp->throw_flags = 0;
         ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLwEnd, Ft_MF_None,
-                                  NULL, 0, da->speciallw_landing_lag_mul, 0);
+        Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLwEnd, Ft_MF_None, 0,
+                                  da->speciallw_landing_lag_mul, 0, NULL);
     }
 }
 #endif
@@ -1081,8 +1081,8 @@ void ftCa_SpecialAirLwEndAir_Coll(HSD_GObj* gobj)
         fp->cmd_vars[0] = 0;
         fp->throw_flags = 0;
         ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLwEnd, Ft_MF_None,
-                                  NULL, 0, da->speciallw_landing_lag_mul, 0);
+        Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLwEnd, Ft_MF_None, 0,
+                                  da->speciallw_landing_lag_mul, 0, NULL);
     }
 }
 #endif

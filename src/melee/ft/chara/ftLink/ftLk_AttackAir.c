@@ -61,8 +61,8 @@ static void lwOnHit(HSD_GObj* gobj)
     fp->x221A_b4 = false;
     fp->mv.lk.attackair.lw_frame_start = da->attackairlw_hit_anim_frame_start;
     if (fp->cur_anim_frame > frame_len) {
-        Fighter_ChangeMotionState(gobj, ftCo_MS_AttackAirLw, Ft_MF_None, NULL,
-                                  frame_len, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_AttackAirLw, Ft_MF_None,
+                                  frame_len, 1, 0, NULL);
     }
 }
 

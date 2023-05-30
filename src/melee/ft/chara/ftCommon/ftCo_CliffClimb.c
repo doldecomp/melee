@@ -68,7 +68,7 @@ void ftCo_8009AB9C(ftCo_GObj* gobj)
     FtMotionId msid = (float) fp->dmg.x1830_percent < p_ftCommonData->x488
                           ? ftCo_MS_CliffClimbQuick
                           : ftCo_MS_CliffClimbSlow;
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     ftCommon_8007E2F4(fp, 32);
     fp->x221D_b7 = true;

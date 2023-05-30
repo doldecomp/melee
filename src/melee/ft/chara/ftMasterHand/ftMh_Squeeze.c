@@ -15,7 +15,7 @@ void ftMh_MS_378_80154A78(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     fp->cmd_vars[1] = 0;
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Squeeze, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Squeeze, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
     fp->x2222_b2 = true;
     ftCommon_8007E2F4(fp, 511);

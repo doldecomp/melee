@@ -75,9 +75,9 @@ u32 Fighter_NewSpawn_80068E40(void);
 void Fighter_80068E64(Fighter_GObj* gobj);
 Fighter_GObj* Fighter_Create(struct S_TEMP1* input);
 void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
-                               MotionFlags flags, Fighter_GObj* arg3,
-                               float anim_start, float anim_speed,
-                               float anim_blend);
+                               MotionFlags flags, float anim_start,
+                               float anim_speed, float anim_blend,
+                               Fighter_GObj* arg3);
 void Fighter_8006A1BC(Fighter_GObj* gobj);
 void Fighter_8006A360(Fighter_GObj* gobj);
 void Fighter_8006ABA0(Fighter_GObj* gobj);

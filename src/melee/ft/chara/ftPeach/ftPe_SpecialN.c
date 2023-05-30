@@ -158,8 +158,8 @@ void ftPe_SpecialN_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
     GET_FIGHTER(gobj)->self_vel.y = 0;
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialN, Ft_MF_None, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialN, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     reset(gobj);
 }
@@ -173,8 +173,8 @@ void ftPe_SpecialAirN_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     fp->self_vel.x /= da->specialairn_vel_x_div;
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirN, Ft_MF_None, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirN, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     reset(gobj);
 }
@@ -295,8 +295,8 @@ static void doColl(HSD_GObj* gobj)
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirN, coll_mf, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirN, coll_mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
     if (fp->cmd_vars[cmd_phys_state] == phys_state_1) {
         fp->cmd_vars[cmd_phys_state] = phys_state_2;
     }
@@ -312,8 +312,8 @@ static void doAirColl(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->fv.pe.specialairn_used = false;
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialN, coll_mf, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialN, coll_mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
     setupColl(gobj);
 }
 
@@ -378,8 +378,8 @@ static void doHitColl(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirNHit, coll_mf, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirNHit, coll_mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
     setupHitColl(gobj);
 }
 
@@ -389,8 +389,8 @@ void doAirHitColl(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->fv.pe.specialairn_used = false;
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialNHit, coll_mf, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialNHit, coll_mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
     setupHitColl(gobj);
 }
 
@@ -416,7 +416,7 @@ static void onUnkHit(HSD_GObj* gobj)
     } else {
         msid = ftPe_MS_SpecialAirNHit;
     }
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 9, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 9, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     if (fp->fv.pe.toad_gobj != NULL) {
         it_802BE100(fp->fv.pe.toad_gobj);

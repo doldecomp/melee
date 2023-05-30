@@ -481,8 +481,8 @@ void ftKp_SpecialS_Enter(HSD_GObj* gobj)
         fp->mv.kp.unk1.xC = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, 347, 0, 0, ftKp_Init_804D9AD8,
-                              ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
+    Fighter_ChangeMotionState(gobj, 347, 0, ftKp_Init_804D9AD8,
+                              ftKp_Init_804D9ADC, ftKp_Init_804D9AD8, 0);
 
     ftAnim_8006EBA4(gobj);
 
@@ -507,8 +507,8 @@ void ftKp_SpecialAirS_Enter(HSD_GObj* gobj)
         fp->mv.kp.unk1.xC = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, 353, 0, 0, ftKp_Init_804D9AD8,
-                              ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
+    Fighter_ChangeMotionState(gobj, 353, 0, ftKp_Init_804D9AD8,
+                              ftKp_Init_804D9ADC, ftKp_Init_804D9AD8, 0);
 
     ftAnim_8006EBA4(gobj);
 
@@ -529,12 +529,12 @@ void ftKp_SpecialS_8013302C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((signed) fp->mv.kp.unk1.x4 != 0) {
-        Fighter_ChangeMotionState(gobj, 349, transition_flags0, 0,
+        Fighter_ChangeMotionState(gobj, 349, transition_flags0,
                                   ftKp_Init_804D9AD8, ftKp_Init_804D9ADC,
-                                  ftKp_Init_804D9AD8);
+                                  ftKp_Init_804D9AD8, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, 348, 0, 0, ftKp_Init_804D9AD8,
-                                  ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
+        Fighter_ChangeMotionState(gobj, 348, 0, ftKp_Init_804D9AD8,
+                                  ftKp_Init_804D9ADC, ftKp_Init_804D9AD8, 0);
     }
 
     fp->x2222_b2 = true;
@@ -550,12 +550,12 @@ void ftKp_SpecialS_801330E4(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     if ((signed) fp->mv.kp.unk1.x4 != 0) {
-        Fighter_ChangeMotionState(gobj, 355, transition_flags0, 0,
+        Fighter_ChangeMotionState(gobj, 355, transition_flags0,
                                   ftKp_Init_804D9AD8, ftKp_Init_804D9ADC,
-                                  ftKp_Init_804D9AD8);
+                                  ftKp_Init_804D9AD8, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, 354, 0, 0, ftKp_Init_804D9AD8,
-                                  ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
+        Fighter_ChangeMotionState(gobj, 354, 0, ftKp_Init_804D9AD8,
+                                  ftKp_Init_804D9ADC, ftKp_Init_804D9AD8, 0);
     }
 
     fp->x2222_b2 = true;
@@ -575,9 +575,8 @@ void ftKp_SpecialS_8013319C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
 
-    Fighter_ChangeMotionState(gobj, 353, transition_flags1, 0,
-                              fp->cur_anim_frame, ftKp_Init_804D9ADC,
-                              ftKp_Init_804D9AD8);
+    Fighter_ChangeMotionState(gobj, 353, transition_flags1, fp->cur_anim_frame,
+                              ftKp_Init_804D9ADC, ftKp_Init_804D9AD8, 0);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -596,9 +595,9 @@ void ftKp_SpecialS_8013322C(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp1);
 
-    Fighter_ChangeMotionState(gobj, 347, transition_flags1, 0,
+    Fighter_ChangeMotionState(gobj, 347, transition_flags1,
                               fp1->cur_anim_frame, ftKp_Init_804D9ADC,
-                              ftKp_Init_804D9AD8);
+                              ftKp_Init_804D9AD8, 0);
 
     {
         fp0 = GET_FIGHTER(gobj);
@@ -632,9 +631,8 @@ void ftKp_SpecialS_80133324(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, 348, transition_flags1, 0,
-                              fp->cur_anim_frame, ftKp_Init_804D9ADC,
-                              ftKp_Init_804D9AD8);
+    Fighter_ChangeMotionState(gobj, 348, transition_flags1, fp->cur_anim_frame,
+                              ftKp_Init_804D9ADC, ftKp_Init_804D9AD8, 0);
 
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
@@ -665,9 +663,8 @@ void ftKp_SpecialS_801333F8(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, 350, transition_flags2, 0,
-                              fp->cur_anim_frame, ftKp_Init_804D9ADC,
-                              ftKp_Init_804D9AD8);
+    Fighter_ChangeMotionState(gobj, 350, transition_flags2, fp->cur_anim_frame,
+                              ftKp_Init_804D9ADC, ftKp_Init_804D9AD8, 0);
 
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
@@ -701,9 +698,8 @@ void ftKp_SpecialS_801334E4(HSD_GObj* gobj)
         fp->facing_dir = -fp->facing_dir;
     }
 
-    Fighter_ChangeMotionState(gobj, 351, transition_flags1, 0,
-                              fp->cur_anim_frame, ftKp_Init_804D9ADC,
-                              ftKp_Init_804D9AD8);
+    Fighter_ChangeMotionState(gobj, 351, transition_flags1, fp->cur_anim_frame,
+                              ftKp_Init_804D9ADC, ftKp_Init_804D9AD8, 0);
 
     if ((s32) fp->mv.kp.unk1.xC != 0) {
         fp->facing_dir = -fp->facing_dir;
@@ -727,9 +723,8 @@ void ftKp_SpecialS_8013359C(HSD_GObj* gobj)
         fp->facing_dir = -fp->facing_dir;
     }
 
-    Fighter_ChangeMotionState(gobj, 352, transition_flags1, 0,
-                              fp->cur_anim_frame, ftKp_Init_804D9ADC,
-                              ftKp_Init_804D9AD8);
+    Fighter_ChangeMotionState(gobj, 352, transition_flags1, fp->cur_anim_frame,
+                              ftKp_Init_804D9ADC, ftKp_Init_804D9AD8, 0);
 
     if ((signed) fp->mv.kp.unk1.xC != 0) {
         fp->facing_dir = -fp->facing_dir;
@@ -793,12 +788,12 @@ void ftKp_SpecialSHit_Anim(HSD_GObj* gobj)
 
                 if ((signed) fp0->mv.kp.unk1.x4 != false) {
                     Fighter_ChangeMotionState(
-                        gobj, 349, transition_flags0, 0, ftKp_Init_804D9AD8,
-                        ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
+                        gobj, 349, transition_flags0, ftKp_Init_804D9AD8,
+                        ftKp_Init_804D9ADC, ftKp_Init_804D9AD8, 0);
                 } else {
                     Fighter_ChangeMotionState(
-                        gobj, 348, Ft_MF_None, 0, ftKp_Init_804D9AD8,
-                        ftKp_Init_804D9ADC, ftKp_Init_804D9AD8);
+                        gobj, 348, Ft_MF_None, ftKp_Init_804D9AD8,
+                        ftKp_Init_804D9ADC, ftKp_Init_804D9AD8, 0);
                 }
 
                 fp0->x2222_b2 = true;
@@ -813,9 +808,9 @@ void ftKp_SpecialSHit_Anim(HSD_GObj* gobj)
         } else {
             /// @todo Combine @c fp0 with other branch somehow
             fp0 = GET_FIGHTER(gobj);
-            Fighter_ChangeMotionState(gobj, 350, transition_flags3, 0,
+            Fighter_ChangeMotionState(gobj, 350, transition_flags3,
                                       fp0->cur_anim_frame, ftKp_Init_804D9ADC,
-                                      ftKp_Init_804D9AD8);
+                                      ftKp_Init_804D9AD8, 0);
 
             ftAnim_8006F0FC(gobj, ftKp_Init_804D9AD8);
             fp0->mv.kp.unk1.x0 = 0;

@@ -697,8 +697,8 @@ void ftCo_80091030(ftCo_GObj* gobj)
     ftCo_8009750C(gobj);
     ftCo_800DD168(gobj);
     fp->x2227_flag.bits.b6 = true;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_DamageIce, (1 << 1) | (1 << 6),
-                              NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_DamageIce, (1 << 1) | (1 << 6), 0,
+                              1, 0, NULL);
     ftCo_8009E140(fp, 0);
     ftCommon_8007F824(fp->gobj);
     fp->x2222_b3 = true;
@@ -1299,7 +1299,7 @@ void ftCo_80091854(HSD_GObj* gobj)
     } else {
         ftCommon_8007D5D4(fp);
         fp->x2227_flag.bits.b5 = false;
-        Fighter_ChangeMotionState(gobj, 0x146, 0x40U, NULL, 0, 0, 0);
+        Fighter_ChangeMotionState(gobj, 0x146, 0x40U, 0, 0, 0, NULL);
         ft_80088148(fp, 0x123, 0x7F, 0x40);
         {
             HSD_JObj* jobj =

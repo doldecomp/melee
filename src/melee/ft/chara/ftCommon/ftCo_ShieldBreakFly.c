@@ -19,7 +19,7 @@ void ftCo_80098B20(Fighter_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 205, 64, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 205, 64, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     fp->self_vel.x = 0;
     fp->self_vel.y = fp->co_attrs.shield_break_initial_velocity;

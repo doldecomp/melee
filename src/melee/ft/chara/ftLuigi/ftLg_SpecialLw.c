@@ -75,8 +75,8 @@ void ftLg_SpecialLw_Enter(HSD_GObj* gobj)
     luigiAttrs = temp_fp->dat_attrs;
     fp2 = temp_fp;
     GET_FIGHTER(gobj)->cmd_vars[2] = 0;
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirLw, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirLw, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     fp2->self_vel.y = (f32) (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM -
                              luigiAttrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX);
@@ -108,8 +108,8 @@ void ftLg_SpecialAirLw_Enter(HSD_GObj* gobj)
     luigiAttrs = temp_fp->dat_attrs;
     fp2 = temp_fp;
     GET_FIGHTER(gobj)->cmd_vars[2] = 0;
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirLw, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirLw, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     if (fp2->fv.lg.x222C_cycloneCharge != 0) {
         cycloneVar = 0.0f;
@@ -185,8 +185,8 @@ static inline void ftLuigi_SpecialLw_GroundToAir(HSD_GObj* gobj)
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
     fp->cmd_vars[2] = 0;
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 0x166, 0x0C4C508A, NULL,
-                              fp->cur_anim_frame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x166, 0x0C4C508A, fp->cur_anim_frame,
+                              1.0f, 0.0f, NULL);
     ftCommon_ClampFallSpeed(fp, luigiAttrs->x90_LUIGI_CYCLONE_TAP_GRAVITY);
     ftCommon_8007D440(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -328,7 +328,7 @@ static inline void ftLuigi_SpecialAirLw_AirToGround(HSD_GObj* gobj)
     fp->self_vel.y = 0.0f;
     fp->fv.lg.x222C_cycloneCharge = false;
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialLw, FTLUIGI_SPECIALLW_FLAG,
-                              NULL, fp->cur_anim_frame, 1.0f, 0.0f);
+                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
     ftCommon_8007CC78(fp, luigiAttrs->x74_LUIGI_CYCLONE_MOMENTUM_X_GROUND);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;

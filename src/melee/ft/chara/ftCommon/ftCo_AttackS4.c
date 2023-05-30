@@ -182,7 +182,7 @@ static void doEnter(ftCo_GObj* gobj, float stick_angle)
     fp->allow_interrupt = false;
     fp->cmd_vars[cmd_unk0_bool] = false;
     fp->throw_flags = 0;
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
 }
 

@@ -85,7 +85,7 @@ void ftCo_8009A184(ftCo_GObj* gobj, FtMotionId msid, MotionFlags mf,
     ftCommon_8007D5D4(fp);
     ftCommon_8007D468(fp);
     fp->self_vel.y = p_ftCommonData->x46C;
-    Fighter_ChangeMotionState(gobj, msid, mf, NULL, anim_start, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, mf, anim_start, 1, 0, NULL);
     mpColl_8004CBE8(&fp->coll_data);
     fp->x671_timer_lstick_tilt_y = 0xFE;
 }
@@ -100,7 +100,7 @@ void ftCo_8009A228(ftCo_GObj* gobj)
     ftCommon_8007D5D4(fp);
     ftCommon_8007D468(fp);
     fp->self_vel.y = p_ftCommonData->x46C;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_Pass, Ft_MF_None, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_Pass, Ft_MF_None, 0, 1, 0, NULL);
     mpColl_8004CBE8(&fp->coll_data);
     fp->x671_timer_lstick_tilt_y = 0xFE;
 }

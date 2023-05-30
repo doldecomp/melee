@@ -35,8 +35,8 @@ void ftDk_MS_341_800DF980(HSD_GObj* gobj)
     }
     {
         ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
-        Fighter_ChangeMotionState(gobj, donkey_attr->motion_state, 0, NULL, 0,
-                                  1, 0);
+        Fighter_ChangeMotionState(gobj, donkey_attr->motion_state, 0, 0, 1, 0,
+                                  NULL);
     }
 }
 

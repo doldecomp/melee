@@ -36,8 +36,8 @@ bool ftCo_8009A3C8(ftCo_GObj* gobj)
 void ftCo_8009A410(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_Ottotto, Ft_MF_None, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_Ottotto, Ft_MF_None, 0, 1, 0,
+                              NULL);
     fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
     fp->gr_vel = 0;
 }
@@ -115,8 +115,8 @@ void ftCo_Ottotto_Coll(ftCo_GObj* gobj)
 void ftCo_8009A6B8(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_OttottoWait, Ft_MF_None, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_OttottoWait, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ft_80088770(fp);
     ft_800887CC(fp);
     ft_80088328(fp, fp->ft_data->x4C_collisionData->x18, 127, 64);

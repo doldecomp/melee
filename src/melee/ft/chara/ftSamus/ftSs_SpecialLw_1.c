@@ -86,13 +86,13 @@ void ftSs_SpecialLw_Enter(HSD_GObj* gobj)
 
     fp->gr_vel *= samus_attr->x6C;
     if (fp->motion_id == 0x28) {
-        Fighter_ChangeMotionState(gobj, 0x163, 0, NULL, 3.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 0x163, 0, 3.0f, 1.0f, 0.0f, NULL);
         ftSamus_SpecialLw_StartAction_inner(gobj);
         fp->cmd_vars[1] = 2;
         ftSs_SpecialLw_8012B5F0(gobj);
         return;
     }
-    Fighter_ChangeMotionState(gobj, 0x163, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x163, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftSamus_SpecialLw_StartAction_inner(gobj);
 }
@@ -110,7 +110,7 @@ void ftSs_SpecialAirLw_Enter(HSD_GObj* gobj)
     fp->self_vel.x *= samus_attr->x70;
     fp->self_vel.y = samus_attr->x58;
 
-    Fighter_ChangeMotionState(gobj, 0x164, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x164, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftSamus_SpecialLw_StartAction_inner(gobj);
 }
@@ -412,8 +412,8 @@ void ftSs_SpecialLw_8012B570(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 0x164, 0x0C4C509C, NULL,
-                              fp->cur_anim_frame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x164, 0x0C4C509C, fp->cur_anim_frame,
+                              1.0f, 0.0f, NULL);
     ftSamus_UnkSetStateAndCb(gobj);
 }
 
@@ -423,8 +423,8 @@ void ftSs_SpecialLw_8012B5F0(HSD_GObj* gobj)
     ftSs_DatAttrs* samus_attr = getFtSpecialAttrs(fp);
     fp->self_vel.y = samus_attr->x54;
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 0x164, 0x0C4C509C, NULL,
-                              fp->cur_anim_frame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x164, 0x0C4C509C, fp->cur_anim_frame,
+                              1.0f, 0.0f, NULL);
     fp->cb.x21BC_callback_Accessory4 = ftSs_SpecialLw_8012ADF0;
 }
 
@@ -432,7 +432,7 @@ void ftSs_SpecialLw_8012B668(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x163, 0x0C4C509C, NULL,
-                              fp->cur_anim_frame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x163, 0x0C4C509C, fp->cur_anim_frame,
+                              1.0f, 0.0f, NULL);
     ftSamus_UnkSetStateAndCb(gobj);
 }

@@ -1177,8 +1177,8 @@ void ftCo_800924C0(ftCo_GObj* gobj)
     void* fp;
 
     fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_GuardOn, Ft_MF_SkipAnim, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_GuardOn, Ft_MF_SkipAnim, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     M2C_FIELD(fp, u8*, 0x221C) = (u8) (M2C_FIELD(fp, u8*, 0x221C) & ~0x10);
     M2C_FIELD(fp, u8*, 0x221C) = (u8) (M2C_FIELD(fp, u8*, 0x221C) & ~0x40);
@@ -1622,8 +1622,8 @@ asm void ftCo_80092908(ftCo_GObj* gobj)
 void ftCo_80092908(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_Guard, Ft_MF_SkipAnim, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_Guard, Ft_MF_SkipAnim, 0, 1, 0,
+                              NULL);
     {
         HSD_JObj* jobj = fp->parts[fp->ft_data->x8->unk11].joint;
         ftCo_80092158(gobj, 1048, jobj);
@@ -1832,8 +1832,8 @@ asm void ftCo_80092C54(ftCo_GObj* gobj)
 void ftCo_80092C54(ftCo_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_GuardOff, Ft_MF_None, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_GuardOff, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ft_80088148(fp, 127, 127, 64);
 }
 #endif
@@ -2193,8 +2193,8 @@ lbl_8009321C:
 void ftCo_80092F2C(HSD_GObj* gobj, bool arg1)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_GuardSetOff, Ft_MF_None, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_GuardSetOff, Ft_MF_None, 0, 1, 0,
+                              NULL);
     fp->cb.x21D0_callback_EveryHitlag = ftCo_80093240;
     fp->x670_timer_lstick_tilt_x = -2;
     fp->cb.x21D8_callback_ExitHitlag = ftCo_800932DC;
@@ -2882,8 +2882,8 @@ void ftCo_8009388C(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_GuardReflect,
-                              Ft_MF_SkipAnim | Ft_MF_KeepGfx, NULL,
-                              fp->cur_anim_frame, 1, 0);
+                              Ft_MF_SkipAnim | Ft_MF_KeepGfx,
+                              fp->cur_anim_frame, 1, 0, NULL);
     fp->x672_input_timer_counter = 0xFE;
     fp->x221A_b7 = false;
     fp->x221B_b0 = false;
@@ -3022,7 +3022,7 @@ asm void ftCo_80093A50(ftCo_GObj*)
 void ftCo_80093A50(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, 182, Ft_MF_SkipAnim, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 182, Ft_MF_SkipAnim, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     fp->x672_input_timer_counter = 0xFE;
     fp->x221C_b3 = true;
