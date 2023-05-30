@@ -1,4 +1,5 @@
 #include <platform.h>
+#include "ft/forward.h"
 
 #include "ftCo_CaptureCaptain.h"
 
@@ -28,8 +29,8 @@ void ftCo_8009CA0C(ftCo_GObj* gobj, ftCo_GObj* vic_gobj)
     } else {
         fp->x221B_b7 = true;
     }
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureCaptain, 0U, 0, 1, 0,
-                              fp->victim_gobj);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureCaptain, Ft_MF_None, 0, 1,
+                              0, fp->victim_gobj);
     if (!fp->x221B_b7) {
         fp->cb.x21B0_callback_Accessory1 = ftCo_800DB464;
     }
