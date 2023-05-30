@@ -142,6 +142,9 @@ union ftCommon_MotionVars {
         /* fp+2340 */ float x0;
         /* fp+2344 */ int x4;
     } shouldered;
+    struct {
+        /* fp+2340 */ float x0;
+    } downdamage;
 };
 
 #endif

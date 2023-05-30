@@ -21,9 +21,6 @@
 /* 09E1D4 */ /* static */ UNK_RET ftCo_8009E1D4(UNK_PARAMS);
 /* 09E4A8 */ /* static */ UNK_RET ftCo_8009E4A8(UNK_PARAMS);
 /* 09E614 */ /* static */ UNK_RET ftCo_8009E614(UNK_PARAMS);
-/* 09F0F0 */ bool ftCo_8009F0F0(ftCo_GObj* gobj);
-/* 09F184 */ UNK_RET ftCo_8009F184(UNK_PARAMS);
-/* 09F75C */ UNK_RET ftCo_8009F75C(UNK_PARAMS);
 /* 09F834 */ void ftCo_8009F834(ftCo_GObj*, int, int, int, int, Vec3*, Vec3*,
                                 float);
 /* 0A0098 */ UNK_RET ftCo_800A0098(UNK_PARAMS);
@@ -48,6 +45,7 @@
 /* 0C17CC */ bool ftCo_800C17CC(ftCo_GObj* gobj);
 /* 0C18A8 */ UNK_RET ftCo_800C18A8(UNK_PARAMS);
 /* 0C1D38 */ bool ftCo_800C1D38(ftCo_GObj* gobj);
+/* 09F75C */ UNK_RET ftCo_8009F75C(UNK_PARAMS);
 /* 0C1E0C */ UNK_RET ftCo_800C1E0C(UNK_PARAMS);
 /* 0C23A0 */ bool ftCo_800C23A0(ftCo_GObj* gobj);
 /* 0C23FC */ UNK_RET ftCo_800C23FC(UNK_PARAMS);
