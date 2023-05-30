@@ -480,7 +480,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     ftCo_800DEEA8(fp->gobj);
     fp->dmg.x18BC = 0.0f;
     fp->dmg.x18B8 = 0.0f;
-    fp->x2226_flag.bits.b2 = 0;
+    fp->x2226_b2 = 0;
     fp->x2170 = 0.0f;
     fp->x2225_b6 = fp->x2225_b5;
     fp->dmg.x1908 = -1;
@@ -679,8 +679,8 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct S_TEMP1* argdata)
     fp->x618_player_id = Player_GetPlayerId(fp->player_id);
     fp->x61A_controller_index = Player_GetControllerIndex(fp->player_id);
     fp->x2223_flag.bits.b6 = Player_GetFlagsBit5(fp->player_id);
-    fp->x2226_flag.bits.b3 = Player_GetFlagsBit6(fp->player_id);
-    fp->x2226_flag.bits.b6 = Player_GetFlagsBit7(fp->player_id);
+    fp->x2226_b3 = Player_GetFlagsBit6(fp->player_id);
+    fp->x2226_b6 = Player_GetFlagsBit7(fp->player_id);
     fp->x2225_b5 = Player_GetMoreFlagsBit1(fp->player_id);
     fp->x2225_b7 = Player_GetMoreFlagsBit2(fp->player_id);
     fp->x2228_flag.b3 = Player_GetMoreFlagsBit6(fp->player_id);
@@ -780,8 +780,8 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct S_TEMP1* argdata)
     fp->x2225_b3 = 0;
     fp->x2228_flag.b2 = 0;
 
-    fp->x2226_flag.bits.b0 = 0;
-    fp->x2226_flag.bits.b1 = 0;
+    fp->x2226_b0 = 0;
+    fp->x2226_b1 = 0;
 
     fp->x2227_flag.bits.b0 = 0;
     fp->x2224_b0 = 0;
@@ -1180,7 +1180,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
         ft_800895E0(fp, new_motion_state->x4_flags);
         fp->x2225_b3 = new_motion_state->x9_b0;
 
-        if (fp->x2226_flag.bits.b4 != 0U) {
+        if (fp->x2226_b4 != 0U) {
             if (fp->x2070.x2071_b5 != 0U) {
                 ftCo_800C8B2C(fp, 0x7E, 0);
             }
@@ -1544,18 +1544,17 @@ void Fighter_8006A360(Fighter_GObj* gobj)
             }
         }
 
-        if (fp->x2226_flag.bits.b4) {
+        if (fp->x2226_b4) {
             if (fp->x2030) {
                 fp->x2030--;
                 if (fp->x2030 == 0) {
                     ftCo_800C8A64(gobj);
                     return;
                 }
-                if (!fp->x2226_flag.bits.b3 &&
-                    fp->x2030 == p_ftCommonData->x7D0 &&
+                if (!fp->x2226_b3 && fp->x2030 == p_ftCommonData->x7D0 &&
                     ftCo_800C8B2C(fp, 0x7D, 0))
                 {
-                    fp->x2226_flag.bits.b7 = 1;
+                    fp->x2226_b7 = 1;
                 }
             }
         }
@@ -2623,7 +2622,7 @@ void Fighter_UnkTakeDamage_8006CC30(Fighter* fp, f32 arg0)
 
 void Fighter_TakeDamage_8006CC7C(Fighter* fp, f32 damage_amount)
 {
-    if (!fp->x2226_flag.bits.b4 || fp->x2226_flag.bits.b3) {
+    if (!fp->x2226_b4 || fp->x2226_b3) {
         fp->dmg.x1830_percent += damage_amount;
         if (fp->x2028) {
             fp->x202C -= damage_amount;
@@ -2664,7 +2663,7 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2)
     vec = vec3_803B7494;
 
     if (fp->motion_id != 0x145 && (unsigned) fp->motion_id - 0x122 > 1 &&
-        fp->dmg.x1860 != 0xAU && !fp->x2226_flag.bits.b2)
+        fp->dmg.x1860 != 0xAU && !fp->x2226_b2)
     {
         /// @todo Unused stack.
 #ifdef MUST_MATCH

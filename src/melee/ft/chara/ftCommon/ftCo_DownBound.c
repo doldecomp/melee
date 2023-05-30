@@ -103,7 +103,7 @@ bool ftCo_80097570(ftCo_GObj* gobj)
     HSD_JObj* jobj = fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint;
     HSD_JObjSetupMatrix(jobj);
     {
-        float f = fp->x2226_flag.bits.b0 ? jobj->mtx[1][2] : jobj->mtx[1][1];
+        float f = fp->x2226_b0 ? jobj->mtx[1][2] : jobj->mtx[1][1];
         if (f > 0) {
             return true;
         }
@@ -520,7 +520,7 @@ void ftCo_8009794C(ftCo_GObj* gobj)
     }
     {
         bool b = ftCo_80097570(gobj);
-        if (fp->x2226_flag.bits.b1) {
+        if (fp->x2226_b1) {
             b = !b;
         }
         Fighter_ChangeMotionState(
@@ -716,7 +716,7 @@ void ftCo_80097AF4(ftCo_GObj* gobj)
     HSD_JObj* jobj = fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint;
     float rot0, rot1;
     HSD_JObjSetupMatrix(jobj);
-    if (fp->x2226_flag.bits.b0) {
+    if (fp->x2226_b0) {
         rot0 = jobj->mtx[0][2];
         rot1 = jobj->mtx[1][2];
     } else {

@@ -766,8 +766,7 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             ftParts_800750C8(fighter, 1, 0);
             ftParts_800750C8(fighter, 4, 0);
             if ((fighter->x2223_flag.bits.b7 != 0) ||
-                (fighter->x2226_flag.bits.b5 != 0) ||
-                (fighter->x2227_flag.bits.b3 != 0))
+                (fighter->x2226_b5 != 0) || (fighter->x2227_flag.bits.b3 != 0))
             {
                 ftParts_800750C8(fighter, 0, 0);
                 ftParts_800750C8(fighter, 2, 1);
@@ -985,7 +984,7 @@ void ftDrawCommmon_80080C28(HSD_GObj* gobj, s32 arg1)
     fighter = gobj->user_data;
     if (fighter->x21FC_flag.bits.b7 != 0) {
         if ((fighter->x221E_b0 == 0) && (fighter->x221E_b5 == 0) &&
-            (fighter->x2226_flag.bits.b5 == 0))
+            (fighter->x2226_b5 == 0))
         {
             ftCo_8009F5AC(fighter);
             if (fighter->x5BC != 0U) {

@@ -1203,8 +1203,8 @@ struct Fighter {
     /* fp+1A52 */ u8 x1A52;
     /* fp+1A53 */ u8 x1A53;
     /* fp+1A54 */ s32 x1A54;
-    /* fp+1A58 */ HSD_GObj* victim_gobj;
-    /* fp+1A5C */ HSD_GObj* x1A5C;
+    /* fp+1A58 */ Fighter_GObj* victim_gobj;
+    /* fp+1A5C */ Fighter_GObj* x1A5C;
     /* fp+1A60 */ u32 x1A60;
     /* fp+1A64 */ s32 x1A64;
     /* fp+1A68 */ u16 x1A68;
@@ -1478,7 +1478,14 @@ struct Fighter {
     /* fp+2225:5 */ u8 x2225_b5 : 1;
     /* fp+2225:6 */ u8 x2225_b6 : 1;
     /* fp+2225:7 */ u8 x2225_b7 : 1;
-    /* fp+2226 */ UnkFlagStruct x2226_flag;
+    /* fp+2226:0 */ u8 x2226_b0 : 1;
+    /* fp+2226:1 */ u8 x2226_b1 : 1;
+    /* fp+2226:2 */ u8 x2226_b2 : 1;
+    /* fp+2226:3 */ u8 x2226_b3 : 1;
+    /* fp+2226:4 */ u8 x2226_b4 : 1;
+    /* fp+2226:5 */ u8 x2226_b5 : 1;
+    /* fp+2226:6 */ u8 x2226_b6 : 1;
+    /* fp+2226:7 */ u8 x2226_b7 : 1;
     /* fp+2227 */ UnkFlagStruct x2227_flag;
     /// UnkFlagStruct does not quite work
     /* fp+2228 */ struct {

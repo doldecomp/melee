@@ -481,7 +481,7 @@ void ftYs_Init_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(item_list[0], It_Kind_Yoshi_EggThrow);
     it_8026B3F8(item_list[1], It_Kind_Yoshi_Star);
     it_8026B3F8(item_list[2], It_Kind_Yoshi_EggLay);
-    fp->x2226_flag.bits.b1 = 1;
+    fp->x2226_b1 = 1;
 }
 
 /* static */ void ftYs_SpecialS_8012E270(HSD_GObj* gobj);

@@ -845,7 +845,7 @@ void* ftLib_800872B0(HSD_GObj* gobj)
 bool ftLib_800872BC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return !fp->x221E_b1 && !fp->x2226_flag.bits.b4 && !fp->x221F_b4;
+    return !fp->x221E_b1 && !fp->x2226_b4 && !fp->x221F_b4;
 }
 
 s32 ftLib_80087300(HSD_GObj* gobj)
