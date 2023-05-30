@@ -457,8 +457,8 @@ void ftSs_SpecialS_8012A074(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    if (fp->throw_flags.b0) {
-        fp->throw_flags.b0 = 0;
+    if (fp->throw_flags_b0) {
+        fp->throw_flags_b0 = 0;
         bool1 = 1;
     } else {
         bool1 = 0;

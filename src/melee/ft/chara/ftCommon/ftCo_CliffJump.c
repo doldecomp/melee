@@ -3,6 +3,7 @@
 
 #include "ftCo_CliffJump.h"
 
+#include "ftCo_09C4.h"
 #include "ftCo_FallSpecial.h"
 
 #include "ft/ft_081B.h"

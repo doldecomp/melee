@@ -47,7 +47,7 @@ void ftMt_SpecialLw_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;
     fp->fv.mt.x222C_disableGObj = NULL;
 
@@ -70,7 +70,7 @@ void ftMt_SpecialAirLw_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;
     fp->fv.mt.x222C_disableGObj = NULL;
     fp->self_vel.y = 0.0f;

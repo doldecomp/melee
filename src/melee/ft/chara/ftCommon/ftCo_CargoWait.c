@@ -3,11 +3,13 @@
 
 #include "ftCo_CargoWait.h"
 
+#include "ftCo_09C4.h"
 #include "ftCo_CargoFall.h"
 #include "ftCo_CargoJump.h"
 #include "ftCo_CargoThrow.h"
 #include "ftCo_CargoTurn.h"
 #include "ftCo_CargoWalk.h"
+#include "ftCo_Shouldered.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
@@ -27,7 +29,7 @@ static inline void inlineA0(ftCo_GObj* gobj, void (*cb)(ftCo_GObj* gobj, int))
     ftCo_Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, fp->x2CC->x4_motion_state, Ft_MF_None,
                               NULL, 0, 1, 0);
-    cb(fp->x1A58_interactedFighter, 266);
+    cb(fp->victim_gobj, 266);
 }
 
 void ftCo_8009B518(ftCo_GObj* gobj)

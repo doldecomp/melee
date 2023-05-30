@@ -203,7 +203,7 @@ void onAccessory4(HSD_GObj* gobj)
 static void doEnter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->cmd_vars[cmd_unk0_bool] = false;
     fp->cb.x21EC_callback = on21EC;
     if (fp->fv.lk.used_boomerang) {
@@ -220,7 +220,7 @@ static void doEnter(HSD_GObj* gobj)
 void ftLk_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->cmd_vars[cmd_unk0_bool] = false;
     fp->cb.x21EC_callback = on21EC;
     if (fp->fv.lk.used_boomerang) {
@@ -238,7 +238,7 @@ void ftLk_SpecialS_Enter(HSD_GObj* gobj)
 void ftLk_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->cmd_vars[cmd_unk0_bool] = 0;
     fp->cb.x21EC_callback = on21EC;
     if (fp->fv.lk.used_boomerang) {

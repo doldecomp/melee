@@ -78,7 +78,7 @@ void ftCa_SpecialN_Enter(HSD_GObj* gobj)
 #endif
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialN, 0, NULL, 0, 1, 0);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -94,7 +94,7 @@ void ftCa_SpecialAirN_Enter(HSD_GObj* gobj)
 #endif
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirN, 0, NULL, 0, 1, 0);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -138,8 +138,8 @@ static inline void doPhys(HSD_GObj* gobj)
 {
     bool throw_b1;
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->throw_flags.b1) {
-        fp->throw_flags.b1 = false;
+    if (fp->throw_flags_b1) {
+        fp->throw_flags_b1 = false;
         throw_b1 = true;
     } else {
         throw_b1 = false;

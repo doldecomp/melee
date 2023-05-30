@@ -988,9 +988,9 @@ void ftNs_AbsorbThink_DecideAction(
             }
         }
 
-        Player_SetHPByIndex(fp->player_id, fp->x221F_flag.bits.b4,
+        Player_SetHPByIndex(fp->player_id, fp->x221F_b4,
                             fp->dmg.x1830_percent);
-        pl_80040B8C(fp->player_id, fp->x221F_flag.bits.b4, heal_amount);
+        pl_80040B8C(fp->player_id, fp->x221F_b4, heal_amount);
     }
 
     fp->facing_dir = (f32) fp->AbsorbAttr.x1A40_absorbHitDirection;

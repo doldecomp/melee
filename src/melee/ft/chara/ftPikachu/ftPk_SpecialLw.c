@@ -125,8 +125,8 @@ void ftPk_SpecialLw_SpawnEffect(HSD_GObj* gobj)
 
         /// @todo Result of an inner function.
         bool result;
-        if (fp->throw_flags.b0) {
-            fp->throw_flags.b0 = false;
+        if (fp->throw_flags_b0) {
+            fp->throw_flags_b0 = false;
             result = true;
         } else {
             result = false;
@@ -155,7 +155,7 @@ void ftPk_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = 0;
-    *((u32*) (&fp->throw_flags)) = 0;
+    fp->throw_flags = 0;
     fp->mv.pk.unk4.x4 = 1;
     fp->mv.pk.unk4.x0 = 0;
     Fighter_ChangeMotionState(gobj, 359, 0, 0, 0.0f, 1.0f, 0.0f);
@@ -166,7 +166,7 @@ void ftPk_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = 0;
-    *((u32*) (&fp->throw_flags)) = 0;
+    fp->throw_flags = 0;
     fp->mv.pk.unk4.x4 = 1;
     fp->mv.pk.unk4.x0 = 0;
     Fighter_ChangeMotionState(gobj, 363, 0, 0, 0.0f, 1.0f, 0.0f);
@@ -261,7 +261,7 @@ void ftPk_SpecialLwStart_Anim(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         Fighter_ChangeMotionState(gobj, 360, 2048, 0, 0.0f, 1.0f, 0.0f);
         fighter_copy = GET_FIGHTER(gobj);
-        *((u32*) (&fighter_copy->throw_flags)) = 0;
+        fighter_copy->throw_flags = 0;
         fighter_copy->cb.x21DC_callback_OnTakeDamage =
             &ftPk_SpecialLw_SetState_Unk1;
         fp->cb.x21BC_callback_Accessory4 = &ftPk_SpecialLw_SpawnEffect;
@@ -280,7 +280,7 @@ void ftPk_SpecialAirLwStart_Anim(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         Fighter_ChangeMotionState(gobj, 364, 2048, 0, 0.0f, 1.0f, 0.0f);
         fighter_copy = GET_FIGHTER(gobj);
-        *((u32*) (&fighter_copy->throw_flags)) = 0;
+        fighter_copy->throw_flags = 0;
         fighter_copy->cb.x21DC_callback_OnTakeDamage =
             &ftPk_SpecialLw_SetState_Unk1;
         fp->cb.x21BC_callback_Accessory4 = &ftPk_SpecialLw_SpawnEffect;

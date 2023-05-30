@@ -32,7 +32,6 @@ void pl_8003E150(void);
 /* 03E17C */ void pl_8003E17C(u8, int, HSD_GObj*);
 /* 03E854 */ void pl_8003E854(u8, int, HSD_GObj*);
 void pl_80038144(void);
-void ftColl_80078710(void);
 void pl_8003D60C(void);
 void pl_80041B08(void);
 void pl_8003EB30(void);

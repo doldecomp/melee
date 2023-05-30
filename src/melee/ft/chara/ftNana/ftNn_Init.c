@@ -378,7 +378,7 @@ void ftNn_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 1U, 0);
     fp->fv.nn.x2234 = 0;
     fp->fv.nn.x222C = 0;
-    fp->fv.nn.x2230.bits.b0 = 0;
+    fp->fv.nn.x2230_b0 = 0;
     fp->fv.nn.x2238 = 0;
     fp->fv.nn.x224C = 0;
     fp->fv.nn.x2250 = ftNn_Init_804D9898;

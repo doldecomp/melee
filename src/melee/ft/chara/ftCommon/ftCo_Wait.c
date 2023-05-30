@@ -12,6 +12,7 @@
 #include "ftCo_AttackS4.h"
 #include "ftCo_Escape.h"
 #include "ftCo_FallSpecial.h"
+#include "ftCo_Shouldered.h"
 #include "ftCo_SpecialS.h"
 
 #include "ft/ft_081B.h"
@@ -27,7 +28,7 @@
 void ftCo_Wait_Anim(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x2224_flag.bits.b2) {
+    if (fp->x2224_b2) {
         ftCo_800C8B74();
     } else {
         ftCo_8008A7A8(gobj, fp->ft_data->x24);

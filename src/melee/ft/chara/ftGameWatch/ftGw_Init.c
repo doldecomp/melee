@@ -524,7 +524,7 @@ void ftGw_Init_OnLoad(HSD_GObj* gobj)
 
     fp->x2222_b6 = false;
     fp->x2223_flag.bits.b1 = true;
-    fp->x2224_flag.bits.b0 = true;
+    fp->x2224_b0 = true;
 
     PUSH_ATTRS(fp, ftGameWatchAttributes);
     fp->fv.gw.x2238_panicCharge = ftGw_Panic_Empty;

@@ -22,7 +22,7 @@ void ftLg_SpecialHi_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialHi, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
@@ -40,7 +40,7 @@ void ftLg_SpecialAirHi_Enter(HSD_GObj* gobj)
 #endif
 
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->self_vel.y = 0.0f;
     fp->self_vel.x *= luigiAttrs->x64_LUIGI_SUPERJUMP_VEL_X;
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirHi, 0, NULL, 0.0f, 1.0f,

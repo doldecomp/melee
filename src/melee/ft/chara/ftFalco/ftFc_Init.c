@@ -473,7 +473,7 @@ void ftFc_Init_OnLoad(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    fp->x2224_flag.bits.b7 = 1;
+    fp->x2224_b7 = 1;
     ftFx_Init_OnLoadForFalco(fp);
 
     sa2 = fp->dat_attrs;

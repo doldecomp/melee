@@ -182,7 +182,7 @@ bool ftCo_8009C02C(ftCo_GObj* gobj, FtMotionId msid)
         FtMotionId msid1 = msid;
         msid1 -= fp->x2CC->x4_motion_state + 10;
         msid1 += ftCo_MS_ThrownFF;
-        return ftCo_800DE3FC(fp->x1A58_interactedFighter, msid1, 1);
+        return ftCo_800DE3FC(fp->victim_gobj, msid1, 1);
     }
 }
 

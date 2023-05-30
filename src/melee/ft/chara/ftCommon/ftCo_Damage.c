@@ -1195,7 +1195,7 @@ void ftCo_8008DCE0(ftCo_GObj* gobj, int arg1, float facing_dir)
     float kb_applied = fp->dmg.kb_applied;
     Fighter_8006CDA4(fp, fp->dmg.x1838_percentTemp, ftCo_803C5520[0][0]);
     fp->dmg.kb_applied1 = kb_applied;
-    pl_80040270(fp->player_id, fp->x221F_flag.bits.b4, kb_applied);
+    pl_80040270(fp->player_id, fp->x221F_b4, kb_applied);
     temp_f30 = kb_applied * p_ftCommonData->x154;
     fp->mv.co.damage.x0 = (int) temp_f30;
     if (!fp->mv.co.damage.x0) {
@@ -1362,7 +1362,7 @@ block_44:
         goto block_60;
     }
     ftColl_8007B6A0(gobj);
-    fp->x2221_flag.bits.b1 = true;
+    fp->x2221_b1 = true;
 block_60:
     if (!(kb_applied > p_ftCommonData->x12C)) {
         goto block_62;
@@ -1543,7 +1543,7 @@ lbl_8008E594:
 void ftCo_Damage_OnEveryHitlag(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (fp->x221A_flag.bits.b2) {
+    if (fp->x221A_b2) {
         float lstick_x = fp->input.lstick.x;
         float lstick_y = fp->input.lstick.y;
         float cd_x4B0 = p_ftCommonData->x4B0;
@@ -1574,8 +1574,8 @@ void ftCo_Damage_OnEveryHitlag(ftCo_GObj* gobj)
                             (M2C_FIELD(fp, u8*, 0x221F) >> 3) & 1,
                             scaled_lstick_x, scaled_lstick_y);
 #else
-                pl_800401F0(fp->player_id, fp->x221F_flag.bits.b4,
-                            scaled_lstick_x, scaled_lstick_y);
+                pl_800401F0(fp->player_id, fp->x221F_b4, scaled_lstick_x,
+                            scaled_lstick_y);
 #endif
             }
         }
@@ -1899,7 +1899,7 @@ void ftCo_Damage_OnExitHitlag(ftCo_GObj* gobj)
         }
         fp->cur_pos.x += x;
         fp->cur_pos.y += y;
-        pl_800401F0(fp->player_id, fp->x221F_flag.bits.b4, x, y);
+        pl_800401F0(fp->player_id, fp->x221F_b4, x, y);
     }
     if (fp->mv.co.damage.x4) {
         fp->mv.co.damage.x4 = false;
@@ -1969,7 +1969,7 @@ lbl_8008E9C8:
 bool ftCo_8008E984(Fighter* fp)
 {
     if (fp->dmg.kb_applied == 0 ||
-        (fp->x221A_flag.bits.b2 && fp->x221A_flag.bits.b3 &&
+        (fp->x221A_b2 && fp->x221A_b3 &&
          fp->dmg.kb_applied < fp->dmg.x18A8 + p_ftCommonData->x140))
     {
         return true;
@@ -2249,7 +2249,7 @@ static bool inlineB0(ftCo_GObj* gobj)
     if (kb_applied != 0) {
         return true;
     }
-    if (fp->x221A_flag.bits.b2 && fp->x221A_flag.bits.b3 &&
+    if (fp->x221A_b2 && fp->x221A_b3 &&
         fp->dmg.kb_applied < fp->dmg.x18A8 + p_ftCommonData->x140)
     {
         return true;
@@ -3138,9 +3138,9 @@ void ftCo_8008EC90(ftCo_GObj* gobj)
         ret0 = true;
     }
     if (!ftCo_800C44CC(gobj) && !ftCo_800D2FA4(gobj) &&
-        fp->x1A58_interactedFighter != NULL)
+        fp->victim_gobj != NULL)
     {
-        ftCo_GObj* other_gobj = fp->x1A58_interactedFighter;
+        ftCo_GObj* other_gobj = fp->victim_gobj;
         ftCo_Fighter* other_fp = other_gobj->user_data;
         if (!fp->x221B_b5) {
             if (!ret0 && inlineB1(fp)) {
@@ -3163,7 +3163,7 @@ void ftCo_8008EC90(ftCo_GObj* gobj)
                     other_fp->dmg.x195c_hitlag_frames = ftCommon_CalcHitlag(
                         fp->dmg.x183C_applied, other_fp->motion_id,
                         other_fp->x1960_vibrateMult);
-                    other_fp->x221A_flag.bits.b2 = true;
+                    other_fp->x221A_b2 = true;
                     if (!other_fp->x2219_b5) {
                         if (other_fp->cb.x21D4_callback_EnterHitlag != NULL) {
                             other_fp->cb.x21D4_callback_EnterHitlag(gobj);
@@ -3217,15 +3217,15 @@ void ftCo_8008EC90(ftCo_GObj* gobj)
             if (inlineB1(other_fp)) {
                 ftCo_800DE854(other_gobj);
             }
-            ftCo_800DCE34(gobj, fp->x1A58_interactedFighter);
+            ftCo_800DCE34(gobj, fp->victim_gobj);
             ftCommon_8007DB58(gobj);
             ftCo_8008E908(gobj, facing_dir);
             other_fp->x1828 = 1;
             goto ret_A8C;
         }
         ftCommon_8007DB58(other_gobj);
-        ftCo_800DCFD4(fp->x1A58_interactedFighter);
-        ftCo_800DCE34(gobj, fp->x1A58_interactedFighter);
+        ftCo_800DCFD4(fp->victim_gobj);
+        ftCo_800DCE34(gobj, fp->victim_gobj);
         ftCommon_8007DB58(gobj);
         ftCo_8008E908(gobj, facing_dir);
     } else if (fp->item_gobj != NULL && it_8026B2D8(fp->item_gobj) &&
@@ -3440,7 +3440,7 @@ void ftCo_Damage_Anim(ftCo_GObj* gobj)
     ftCo_8008F744(gobj);
     if (!ftAnim_IsFramesRemaining(gobj) && !fp->x221C_b6) {
         if (fp->ground_or_air == GA_Air) {
-            if (fp->x2224_flag.bits.b2) {
+            if (fp->x2224_b2) {
                 ftCo_80090780(gobj);
             } else if (!inlineC0(gobj)) {
                 ftCo_800CC730(gobj);
@@ -3777,7 +3777,7 @@ void ftCo_Damage_Coll(ftCo_GObj* gobj)
     if (fp->ground_or_air == GA_Ground) {
         ft_800848DC(gobj, ftCo_8008FC94);
     } else if (ft_80081DD4(gobj)) {
-        if (fp->x2224_flag.bits.b2) {
+        if (fp->x2224_b2) {
             ftCo_80097D40(gobj);
         } else {
             float mag = sqrtf(VEC2_SQ_LEN(fp->x8c_kb_vel));

@@ -3,7 +3,9 @@
 
 #include "ftCo_CargoKneebend.h"
 
+#include "ftCo_09C4.h"
 #include "ftCo_CargoThrow.h"
+#include "ftCo_Shouldered.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -26,7 +28,7 @@ void ftCo_8009B9C8(ftCo_GObj* gobj, int arg1)
     Fighter_ChangeMotionState(gobj, fp->x2CC->x4_motion_state + 5, Ft_MF_None,
                               NULL, 0, 1, 0);
     ftAnim_SetAnimRate(gobj, 0);
-    ftCo_8009C5A4(fp->x1A58_interactedFighter, ftCo_MS_ShoulderedWait);
+    ftCo_8009C5A4(fp->victim_gobj, ftCo_MS_ShoulderedWait);
 }
 
 void ftCo_CargoKneebend_Anim(ftCo_GObj* gobj)

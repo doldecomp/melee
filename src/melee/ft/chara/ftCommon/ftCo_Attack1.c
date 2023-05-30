@@ -13,6 +13,7 @@
 #include "ftCo_AttackS4.h"
 #include "ftCo_ItemGet.h"
 #include "ftCo_ItemThrow.h"
+#include "ftCo_Shouldered.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"

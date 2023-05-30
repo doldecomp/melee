@@ -90,7 +90,7 @@ UNK_RET ftColl_8007861C(UNK_PARAMS);
 UNK_RET ftColl_800787B4(UNK_PARAMS);
 UNK_RET ftColl_800788D4(UNK_PARAMS);
 UNK_RET ftColl_80079AB0(UNK_PARAMS);
-UNK_RET ftColl_80079C70(UNK_PARAMS);
+float ftColl_80079C70(Fighter*, Fighter*, void*, int);
 UNK_RET ftColl_80079EA8(UNK_PARAMS);
 UNK_RET ftColl_8007A06C(UNK_PARAMS);
 bool ftColl_8007AC68(int kb_angle);
@@ -103,5 +103,6 @@ void ftColl_8007B128(s8, int);
 UNK_RET ftColl_80077464(UNK_PARAMS);
 /* 07B6A0 */ void ftColl_8007B6A0(ftCo_GObj* gobj);
 /* 07B7A4 */ void ftColl_8007B7A4(ftCo_GObj* gobj, int);
+void ftColl_80078710(ftCo_GObj* gobj);
 
 #endif

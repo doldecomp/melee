@@ -20,7 +20,7 @@ void ftMh_MS_378_80154A78(HSD_GObj* gobj)
     fp->x2222_b2 = true;
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
-    ftMh_CaptureMasterHand_80155B80(fp->x1A58_interactedFighter);
+    ftMh_CaptureMasterHand_80155B80(fp->victim_gobj);
     fp->mv.mh.unk0.xC.x = da->x118_pos.x;
     fp->mv.mh.unk0.xC.y = da->x118_pos.y;
     fp->mv.mh.unk0.xC.z = 0;

@@ -3,8 +3,10 @@
 
 #include "ftCo_CargoJump.h"
 
+#include "ftCo_09C4.h"
 #include "ftCo_CargoKneebend.h"
 #include "ftCo_CargoThrow.h"
+#include "ftCo_Shouldered.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_08A4.h"
@@ -33,7 +35,7 @@ void ftCo_8009BB64(ftCo_GObj* gobj)
                               NULL, 0, 1, 0);
     ftAnim_SetAnimRate(gobj, 0);
     ftCo_800CB110(gobj, 1, 1);
-    ftCo_8009C5A4(fp->x1A58_interactedFighter, ftCo_MS_ShoulderedWait);
+    ftCo_8009C5A4(fp->victim_gobj, ftCo_MS_ShoulderedWait);
 }
 
 void ftCo_CargoJump_Anim(HSD_GObj* gobj) {}

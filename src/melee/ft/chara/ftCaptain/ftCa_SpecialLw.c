@@ -202,7 +202,7 @@ void ftCa_SpecialLw_Enter(HSD_GObj* gobj)
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->mv.ca.speciallw.x0 = 0;
     fp->mv.ca.speciallw.friction = 1;
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLw, Ft_MF_None, NULL, 0, 1,
@@ -266,7 +266,7 @@ void ftCa_SpecialAirLw_Enter(HSD_GObj* gobj)
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLw, Ft_MF_None, NULL, 0,
                               1, 0);
     ftAnim_8006EBA4(gobj);
@@ -367,7 +367,7 @@ void ftCa_SpecialLw_Anim(HSD_GObj* gobj)
             fp->cmd_vars[2] = 0;
             fp->cmd_vars[1] = 0;
             fp->cmd_vars[0] = 0;
-            fp->throw_flags.flags = 0;
+            fp->throw_flags = 0;
             ftCommon_8007D7FC(fp);
             Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLwEnd, Ft_MF_None,
                                       NULL, 0, da->speciallw_ground_lag_mul,
@@ -379,7 +379,7 @@ void ftCa_SpecialLw_Anim(HSD_GObj* gobj)
             fp->cmd_vars[2] = 0;
             fp->cmd_vars[1] = 0;
             fp->cmd_vars[0] = 0;
-            fp->throw_flags.flags = 0;
+            fp->throw_flags = 0;
             ftCommon_8007D5D4(fp);
             Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLwEndAir,
                                       Ft_MF_None, NULL, 0, 1, 0);
@@ -454,7 +454,7 @@ void ftCa_SpecialAirLw_Anim(HSD_GObj* gobj)
         fp->cmd_vars[2] = 0;
         fp->cmd_vars[1] = 0;
         fp->cmd_vars[0] = 0;
-        fp->throw_flags.flags = 0;
+        fp->throw_flags = 0;
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLwEndAir, Ft_MF_None,
                                   NULL, 0, 1, 0);
@@ -875,7 +875,7 @@ void ftCa_SpecialLw_Coll(HSD_GObj* gobj)
             fp->cmd_vars[2] = 0;
             fp->cmd_vars[1] = 0;
             fp->cmd_vars[0] = 0;
-            fp->throw_flags.flags = 0;
+            fp->throw_flags = 0;
             ftCommon_8007D5D4(fp);
             Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialHiThrow1,
                                       Ft_MF_None, NULL, 0, 1, 0);
@@ -1016,7 +1016,7 @@ void ftCa_SpecialAirLw_Coll(HSD_GObj* gobj)
         fp->cmd_vars[2] = 0;
         fp->cmd_vars[1] = 0;
         fp->cmd_vars[0] = 0;
-        fp->throw_flags.flags = 0;
+        fp->throw_flags = 0;
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLwEnd, Ft_MF_None,
                                   NULL, 0, da->speciallw_landing_lag_mul, 0);
@@ -1079,7 +1079,7 @@ void ftCa_SpecialAirLwEndAir_Coll(HSD_GObj* gobj)
         fp->cmd_vars[2] = 0;
         fp->cmd_vars[1] = 0;
         fp->cmd_vars[0] = 0;
-        fp->throw_flags.flags = 0;
+        fp->throw_flags = 0;
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLwEnd, Ft_MF_None,
                                   NULL, 0, da->speciallw_landing_lag_mul, 0);

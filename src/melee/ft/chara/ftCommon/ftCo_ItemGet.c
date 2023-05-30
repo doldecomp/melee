@@ -610,7 +610,7 @@ void ftCo_80094694(HSD_GObj* gobj, FtMotionId msid, bool loop)
         } else {
             anim_spd = 1;
         }
-        fp->throw_flags.flags = 0;
+        fp->throw_flags = 0;
         Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0, anim_spd,
                                   0);
     }
@@ -659,12 +659,12 @@ void ftCo_80094818(HSD_GObj* gobj, int arg1)
 #endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->x1978 != NULL) {
-        pl_8003E17C(fp->player_id, fp->x221F_flag.bits.b4, fp->x1978);
+        pl_8003E17C(fp->player_id, fp->x221F_b4, fp->x1978);
     } else if (fp->item_gobj != NULL) {
         if (ftData_OnItemPickupExt[fp->kind] != NULL) {
             ftData_OnItemPickupExt[fp->kind](gobj, arg1);
         }
-        pl_8003E17C(fp->player_id, fp->x221F_flag.bits.b4, fp->item_gobj);
+        pl_8003E17C(fp->player_id, fp->x221F_b4, fp->item_gobj);
     }
 }
 
@@ -785,10 +785,10 @@ static inline void inlineB0(ftCo_GObj* gobj)
 #endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->x1978 != NULL) {
-        pl_8003E17C(fp->player_id, fp->x221F_flag.bits.b4, fp->x1978);
+        pl_8003E17C(fp->player_id, fp->x221F_b4, fp->x1978);
     } else if (fp->item_gobj != NULL) {
         INVOKE(ftData_OnItemPickupExt[fp->kind], gobj, true);
-        pl_8003E17C(fp->player_id, fp->x221F_flag.bits.b4, fp->item_gobj);
+        pl_8003E17C(fp->player_id, fp->x221F_b4, fp->item_gobj);
     }
 }
 
@@ -812,7 +812,7 @@ void ftCo_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj)
         } else {
             ret_part = fp->ft_data->x8->unk11;
         }
-        pl_8003E854(fp->player_id, fp->x221F_flag.bits.b4, item_gobj);
+        pl_8003E854(fp->player_id, fp->x221F_b4, item_gobj);
         Item_8026AB54(item_gobj, gobj, ret_part);
         if (it_8026B2B4(item_gobj) == 1) {
             ft_800881D8(fp, fp->ft_data->x4C_collisionData->x2C, 127, 64);

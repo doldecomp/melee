@@ -4368,7 +4368,7 @@ asm void ft_80085004(ftCo_GObj* gobj)
 void ft_80085030(HSD_GObj* gobj, float gr_friction, float facing_dir)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (fp->x594_animCurrFlags1.bits.b0) {
+    if (fp->x594_b0) {
         fp->xE4_ground_accel_1 =
             fp->x6A4_transNOffset.z * facing_dir - fp->gr_vel;
     } else {

@@ -44,7 +44,7 @@ static inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x1A58_interactedFighter == NULL) {
+    if (fp->victim_gobj == NULL) {
         ftCommon_8007E2D0(fp, 0x40, ftMt_SpecialS_SetFlags, NULL,
                           ftCo_800BCF18);
     } else {
@@ -64,7 +64,7 @@ void ftMt_SpecialS_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
     fp->mv.mt.SpecialS.isConfusionReflect = false;
@@ -81,7 +81,7 @@ static inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x1A58_interactedFighter == NULL) {
+    if (fp->victim_gobj == NULL) {
         ftCommon_8007E2D0(fp, 0x40, ftMt_SpecialS_SetFlags, NULL,
                           ftCo_800BD000);
     } else {
@@ -103,7 +103,7 @@ void ftMt_SpecialAirS_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
     fp->mv.mt.SpecialS.isConfusionReflect = false;
@@ -127,7 +127,7 @@ static inline void ftMewtwo_SetGrabVictim(HSD_GObj* gobj)
     HSD_GObj* victimGObj;
 
     if ((u32) fp->cmd_vars[0] != 0) {
-        victimGObj = fp->x1A58_interactedFighter;
+        victimGObj = fp->victim_gobj;
         if (victimGObj != NULL) {
             ftCommon_8007E2F4(fp, 0);
             ftCo_800DE2A8(gobj, victimGObj);

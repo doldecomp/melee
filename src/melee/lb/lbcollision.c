@@ -5079,7 +5079,7 @@ loop_1:
         var_r8 = 0;
     loop_13:
         if ((Fighter*) var_r6_2->victims_1[0].victim != NULL) {
-            temp_r6 = &var_r6_2->a_offset.y;
+            temp_r6 = (f32*) &var_r6_2->x8;
             var_r8 += 1;
             if ((Fighter*) var_r6_2->victims_1[1].victim != NULL) {
                 temp_r6_2 = temp_r6 + 8;

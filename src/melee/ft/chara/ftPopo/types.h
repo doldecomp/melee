@@ -7,7 +7,7 @@
 
 struct ftPopo_FighterVars {
     /* 0x222C */ uint x222C;
-    /* 0x2230 */ UnkFlagStruct x2230;
+    /* 0x2230:0 */ u8 x2230_b0 : 1;
     /* 0x2231 */ u8 filler_x2231[3];
     /* 0x2234 */ u32 x2234;
     /* 0x2238 */ u32 x2238;

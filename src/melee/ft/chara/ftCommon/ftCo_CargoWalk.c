@@ -3,9 +3,11 @@
 
 #include "ftCo_CargoWalk.h"
 
+#include "ftCo_09C4.h"
 #include "ftCo_CargoJump.h"
 #include "ftCo_CargoThrow.h"
 #include "ftCo_CargoWait.h"
+#include "ftCo_Shouldered.h"
 
 #include "ft/ft_08A4.h"
 #include "ft/ftwalkcommon.h"
@@ -32,7 +34,7 @@ void ftCo_8009B6C8(ftCo_GObj* gobj, float anim_start)
     ftWalkCommon_800DFCA4(gobj, fp_x2CC->x4_motion_state + 1, Ft_MF_None,
                           anim_start, fp_x2CC->x8, fp_x2CC->xC, fp_x2CC->x10,
                           fp_x2CC->x14, fp_x2CC->x18, fp_x2CC->x1C, 1);
-    ftCo_8009C5A4(fp->x1A58_interactedFighter,
+    ftCo_8009C5A4(fp->victim_gobj,
                   ftWalkCommon_GetWalkType(gobj) + ftCo_MS_ShoulderedWait);
 }
 

@@ -8,7 +8,7 @@
 struct ftKirby_FighterVars {
     /* 0x222C */ s32 x222C;
     /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ UnkFlagStruct x2234;
+    /* 0x2234:0 */ u8 x2234_b0 : 1;
     /* 0x2235 */ u8 x2235[3];
     /* 0x2238 */ u32 x2238;
     /* 0x223C */ u32 x223C;

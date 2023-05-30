@@ -975,7 +975,7 @@ void ftCo_800957F4(ftCo_GObj* gobj, int msid)
     ftCo_Fighter* fp = gobj->user_data;
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     {
         float numerator = 1;
         if (msid >= ftCo_MS_LightThrowF4) {
@@ -1811,7 +1811,7 @@ void ftCo_80095EFC(ftCo_GObj* gobj)
                                 vec0.y;
                             vec2.y = vec1_y;
                             vec2.z = 0;
-                            pl_8003E978(fp->player_id, fp->x221F_flag.bits.b4,
+                            pl_8003E978(fp->player_id, fp->x221F_b4,
                                         fp->item_gobj, vec1_y, temp_f2, cd_xB4,
                                         temp_f4, vec0_x, vec0.y, fsm);
                         }

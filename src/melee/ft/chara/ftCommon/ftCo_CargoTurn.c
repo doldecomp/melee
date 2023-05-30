@@ -2,9 +2,11 @@
 
 #include "ftCo_CargoTurn.h"
 
+#include "ftCo_09C4.h"
 #include "ftCo_CargoJump.h"
 #include "ftCo_CargoThrow.h"
 #include "ftCo_CargoWait.h"
+#include "ftCo_Shouldered.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
@@ -29,7 +31,7 @@ void ftCo_8009B860(ftCo_GObj* gobj)
     ftDonkeyAttributes* fp_x2CC = fp->x2CC;
     ftCo_800C9840(gobj, fp_x2CC->x4_motion_state + 4, 0, 0,
                   fp_x2CC->cargo_hold.x20_TURN_SPEED, 0);
-    ftCo_8009C5A4(fp->x1A58_interactedFighter, ftCo_MS_ShoulderedTurn);
+    ftCo_8009C5A4(fp->victim_gobj, ftCo_MS_ShoulderedTurn);
 }
 
 void ftCo_CargoTurn_Anim(ftCo_GObj* gobj)
@@ -42,7 +44,7 @@ void ftCo_CargoTurn_Anim(ftCo_GObj* gobj)
     if (fp->mv.co.walk.fast_anim_frame > 0) {
         fp->mv.co.walk.fast_anim_frame -= 1;
     } else if (!fp->mv.co.cargoturn.x0) {
-        ftCo_GObj* other_gobj = fp->x1A58_interactedFighter;
+        ftCo_GObj* other_gobj = fp->victim_gobj;
         ftCo_Fighter* other_fp = other_gobj->user_data;
         fp->mv.co.cargoturn.x0 = true;
         fp->facing_dir = -fp->facing_dir;

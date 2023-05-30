@@ -882,7 +882,7 @@ void ftCo_DamageIce_Anim(ftCo_GObj* gobj)
             HSD_JObjSetMtxDirty(jobj);
         }
     }
-    if (!fp->x2224_flag.bits.b2) {
+    if (!fp->x2224_b2) {
         fp->x1A4C -= p_ftCommonData->x794;
     }
     ftCommon_8007DC08(fp, p_ftCommonData->x798);

@@ -125,7 +125,7 @@ void ftCo_AttackAir_EnterFromMsid(ftCo_GObj* gobj, FtMotionId msid)
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     fp->allow_interrupt = false;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_KeepFastFall, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 }

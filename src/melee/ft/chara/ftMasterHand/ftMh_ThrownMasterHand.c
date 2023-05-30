@@ -24,7 +24,7 @@ void ftMh_CaptureWaitMasterHand_Coll(HSD_GObj* gobj) {}
 void ftMh_CaptureWaitMasterHand_80155D6C(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter* victim_fp = GET_FIGHTER(fp->x1A58_interactedFighter);
+    Fighter* victim_fp = GET_FIGHTER(fp->victim_gobj);
 
     fp->facing_dir = victim_fp->facing_dir;
     fp->mv.mh.unk4.x0 = 0;
