@@ -23,7 +23,7 @@
 void ftPk_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 341, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 341, 0, 0.0f, 1.0f, 0.0f, 0);
     fp->cmd_vars[3] = 0;
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
@@ -34,7 +34,7 @@ void ftPk_SpecialN_Enter(HSD_GObj* gobj)
 void ftPk_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 342, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 342, 0, 0.0f, 1.0f, 0.0f, 0);
     fp->cmd_vars[3] = 0;
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
@@ -140,8 +140,8 @@ void ftPk_SpecialN_Coll(HSD_GObj* gobj)
     if (!ft_80082708(gobj)) {
         fp = GET_FIGHTER(gobj);
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 342, 206327938, 0, fp->cur_anim_frame,
-                                  1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 342, 206327938, fp->cur_anim_frame,
+                                  1.0f, 0.0f, 0);
     }
 }
 
@@ -152,8 +152,8 @@ void ftPk_SpecialAirN_Coll(HSD_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         ftCommon_8007D7FC(fp);
         fp->self_vel.y = 0.0f;
-        Fighter_ChangeMotionState(gobj, 341, 206327938, 0, fp->cur_anim_frame,
-                                  1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 341, 206327938, fp->cur_anim_frame,
+                                  1.0f, 0.0f, 0);
     }
 }
 

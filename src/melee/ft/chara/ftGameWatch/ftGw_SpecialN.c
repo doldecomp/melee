@@ -214,8 +214,8 @@ static inline void ftGameWatch_SpecialN_SetVars(HSD_GObj* gobj)
 void ftGw_SpecialN_Enter(HSD_GObj* gobj)
 {
     GET_FIGHTER(gobj)->self_vel.y = 0.0f;
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialN, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialN, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialN_SetVars(gobj);
 }
@@ -226,8 +226,8 @@ void ftGw_SpecialN_Enter(HSD_GObj* gobj)
 void ftGw_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     GET_FIGHTER(gobj)->self_vel.y = 0.0f;
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirN, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirN, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialN_SetVars(gobj);
 }
@@ -382,7 +382,7 @@ void ftGw_SpecialN_GroundToAir(HSD_GObj* gobj)
 
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirN, transition_flags,
-                              NULL, fp->cur_anim_frame, 1.0f, 0.0f);
+                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
     GET_FIGHTER(gobj)->cb.x21BC_callback_Accessory4 =
         &ftGw_SpecialN_CreateSausage;
 }
@@ -395,8 +395,8 @@ void ftGw_SpecialAirN_AirToGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialN, transition_flags, NULL,
-                              fp->cur_anim_frame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialN, transition_flags,
+                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
     GET_FIGHTER(gobj)->cb.x21BC_callback_Accessory4 =
         &ftGw_SpecialN_CreateSausage;
 }
@@ -414,8 +414,8 @@ void ftGw_SpecialN_Loop(HSD_GObj* gobj, f32 anim_frame)
     u8 _[4];
 #endif
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialN, transition_flags, NULL,
-                              anim_frame - 1.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialN, transition_flags,
+                              anim_frame - 1.0f, 1.0f, 0.0f, NULL);
 
     ftAnim_8006EBA4(gobj);
 
@@ -445,7 +445,7 @@ void ftGw_SpecialAirN_Loop(HSD_GObj* gobj, f32 anim_frame)
 #endif
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirN, transition_flags,
-                              NULL, anim_frame - 1.0f, 1.0f, 0.0f);
+                              anim_frame - 1.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 
 #ifdef MUST_MATCH

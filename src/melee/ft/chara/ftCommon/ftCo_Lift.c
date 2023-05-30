@@ -23,8 +23,8 @@ void ftCo_80096D9C(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     fp->mv.co.lift.x0 = false;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_LiftWait, Ft_MF_None, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_LiftWait, Ft_MF_None, 0, 1, 0,
+                              NULL);
     fp->cb.x21DC_callback_OnTakeDamage = ftCo_800974C4;
 }
 
@@ -88,7 +88,7 @@ void ftCo_80096F48(HSD_GObj* gobj)
         msid = ftCo_MS_LiftWalk2;
     }
     fp->mv.co.lift.x0 ^= true;
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     fp->cb.x21DC_callback_OnTakeDamage = ftCo_800974C4;
 }
@@ -101,8 +101,8 @@ void ftCo_LiftWalk_Anim(HSD_GObj* gobj)
 #endif
     if (!ftAnim_IsFramesRemaining(gobj) && !ftCo_80096EF8(gobj)) {
         ftCo_Fighter* fp = gobj->user_data;
-        Fighter_ChangeMotionState(gobj, ftCo_MS_LiftWait, Ft_MF_Unk24, NULL, 0,
-                                  1, 0);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_LiftWait, Ft_MF_Unk24, 0, 1, 0,
+                                  NULL);
         fp->cb.x21DC_callback_OnTakeDamage = ftCo_800974C4;
     }
 }
@@ -137,8 +137,8 @@ void ftCo_80097130(HSD_GObj* gobj)
     ftCo_Fighter* fp = gobj->user_data;
     fp->mv.co.lift.x4 = p_ftCommonData->x230;
     fp->mv.co.lift.x8 = false;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_LiftTurn, Ft_MF_Unk24, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_LiftTurn, Ft_MF_Unk24, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     fp->cb.x21DC_callback_OnTakeDamage = ftCo_800974C4;
     ftCo_LiftTurn_Anim(gobj);
@@ -175,7 +175,7 @@ void ftCo_LiftTurn_Anim(HSD_GObj* gobj)
     }
     if (fp->mv.co.lift.x4 <= 0) {
         ftCo_Fighter* fp = gobj->user_data;
-        Fighter_ChangeMotionState(gobj, 174, Ft_MF_Unk24, NULL, 0, 1, 0);
+        Fighter_ChangeMotionState(gobj, 174, Ft_MF_Unk24, 0, 1, 0, NULL);
         fp->cb.x21DC_callback_OnTakeDamage = ftCo_800974C4;
     }
 }

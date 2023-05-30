@@ -74,7 +74,7 @@ void ftWalkCommon_800DFCA4(Fighter_GObj* gobj, FtMotionId msid,
     {
         FtWalkType walk_type = ftWalkCommon_GetWalkType_800DFBF8_fake(gobj);
         ftCommon_MotionState new_msid = msid + walk_type;
-        Fighter_ChangeMotionState(gobj, new_msid, ms_flags, 0, anim_start, 1,
+        Fighter_ChangeMotionState(gobj, new_msid, ms_flags, anim_start, 1, 0,
                                   0);
         ftAnim_8006EBA4(gobj);
         fp->mv.co.walk.x0 = fp->gr_vel;

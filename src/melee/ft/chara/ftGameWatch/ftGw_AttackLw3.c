@@ -140,8 +140,8 @@ void ftGw_AttackLw3_Enter(HSD_GObj* gobj)
 
     if (ftCo_80094790(gobj) == false) {
         fp->allow_interrupt = 0;
-        Fighter_ChangeMotionState(gobj, ftGw_MS_AttackLw3, 0, NULL, 0.0f, 1.0f,
-                                  0.0f);
+        Fighter_ChangeMotionState(gobj, ftGw_MS_AttackLw3, 0, 0.0f, 1.0f, 0.0f,
+                                  NULL);
         ftAnim_8006EBA4(gobj);
         fp->cb.x21BC_callback_Accessory4 = ftGw_AttackLw3_ItemManholeSetup;
     }

@@ -21,7 +21,7 @@ void ftCo_8009BC58(ftCo_GObj* gobj)
 #endif
     ftCo_Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, fp->x2CC->x4_motion_state + 6,
-                              Ft_MF_KeepFastFall, NULL, 0, 1, 0);
+                              Ft_MF_KeepFastFall, 0, 1, 0, NULL);
     ftAnim_SetAnimRate(gobj, 0);
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4(fp);

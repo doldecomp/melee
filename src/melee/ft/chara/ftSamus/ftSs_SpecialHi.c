@@ -22,7 +22,7 @@ void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, 353, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 353, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftSamus_updateDamageDeathCBs(gobj);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -42,7 +42,7 @@ void ftSs_SpecialAirHi_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    Fighter_ChangeMotionState(gobj, 354, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 354, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftSamus_updateDamageDeathCBs(gobj);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;

@@ -611,8 +611,8 @@ void ftCo_80094694(HSD_GObj* gobj, FtMotionId msid, bool loop)
             anim_spd = 1;
         }
         fp->throw_flags = 0;
-        Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0, anim_spd,
-                                  0);
+        Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, anim_spd, 0,
+                                  NULL);
     }
     if (loop) {
         while (!ftCheckThrowB3(fp)) {

@@ -1356,7 +1356,7 @@ block_44:
 
     ftCo_8008DA4C(gobj, var_r28, 0);
     ftCo_8008DB10(gobj, (s32) M2C_FIELD(fp, u32*, 0x1860), kb_applied);
-    Fighter_ChangeMotionState(gobj, msid, 0x40U, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, 0x40U, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     if (!gm_8016B014()) {
         goto block_60;

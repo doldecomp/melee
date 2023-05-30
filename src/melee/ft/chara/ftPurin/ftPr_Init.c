@@ -657,11 +657,13 @@ inline void ftPurin_SpecialHi_SetActionFromFacingDirection(HSD_GObj* gobj,
     Fighter* fighter = getFighter(gobj);
 
     if (ftPr_Init_804D9C10 == fighter->facing_dir) {
-        Fighter_ChangeMotionState(gobj, left_id, 0, NULL, ftPr_Init_804D9C14,
-                                  ftPr_Init_804D9C18, ftPr_Init_804D9C14);
+        Fighter_ChangeMotionState(gobj, left_id, 0, ftPr_Init_804D9C14,
+                                  ftPr_Init_804D9C18, ftPr_Init_804D9C14,
+                                  NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, right_id, 0, NULL, ftPr_Init_804D9C14,
-                                  ftPr_Init_804D9C18, ftPr_Init_804D9C14);
+        Fighter_ChangeMotionState(gobj, right_id, 0, ftPr_Init_804D9C14,
+                                  ftPr_Init_804D9C18, ftPr_Init_804D9C14,
+                                  NULL);
     }
 }
 
@@ -676,11 +678,13 @@ inline void startHi(HSD_GObj* gobj, int left_id, int right_id)
     fighter = (Fighter*) HSD_GObjGetUserData(gobj);
 
     if (ftPr_Init_804D9C10 == fighter->facing_dir) {
-        Fighter_ChangeMotionState(gobj, left_id, 0, NULL, ftPr_Init_804D9C14,
-                                  ftPr_Init_804D9C18, ftPr_Init_804D9C14);
+        Fighter_ChangeMotionState(gobj, left_id, 0, ftPr_Init_804D9C14,
+                                  ftPr_Init_804D9C18, ftPr_Init_804D9C14,
+                                  NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, right_id, 0, NULL, ftPr_Init_804D9C14,
-                                  ftPr_Init_804D9C18, ftPr_Init_804D9C14);
+        Fighter_ChangeMotionState(gobj, right_id, 0, ftPr_Init_804D9C14,
+                                  ftPr_Init_804D9C18, ftPr_Init_804D9C14,
+                                  NULL);
     }
 }
 
@@ -885,13 +889,13 @@ void ftPr_SpecialHi_8013CD34(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
 
     if (ftPr_Init_804D9C10 == fp->facing_dir) {
-        Fighter_ChangeMotionState(gobj, 366, 0x0C4C508A, NULL,
-                                  fp->cur_anim_frame, ftPr_Init_804D9C18,
-                                  ftPr_Init_804D9C14);
+        Fighter_ChangeMotionState(gobj, 366, 0x0C4C508A, fp->cur_anim_frame,
+                                  ftPr_Init_804D9C18, ftPr_Init_804D9C14,
+                                  NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, 368, 0x0C4C508A, NULL,
-                                  fp->cur_anim_frame, ftPr_Init_804D9C18,
-                                  ftPr_Init_804D9C14);
+        Fighter_ChangeMotionState(gobj, 368, 0x0C4C508A, fp->cur_anim_frame,
+                                  ftPr_Init_804D9C18, ftPr_Init_804D9C14,
+                                  NULL);
     }
 
     fp->cb.x21BC_callback_Accessory4 = ftPr_Init_8013C94C;

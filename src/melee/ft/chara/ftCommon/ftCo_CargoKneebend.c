@@ -26,7 +26,7 @@ void ftCo_8009B9C8(ftCo_GObj* gobj, int arg1)
     fp->mv.co.cargokneebend.x0 = 0;
     fp->mv.co.cargokneebend.x8 = fp_x2CC->cargo_hold.x24_JUMP_STARTUP_LAG;
     Fighter_ChangeMotionState(gobj, fp->x2CC->x4_motion_state + 5, Ft_MF_None,
-                              NULL, 0, 1, 0);
+                              0, 1, 0, NULL);
     ftAnim_SetAnimRate(gobj, 0);
     ftCo_8009C5A4(fp->victim_gobj, ftCo_MS_ShoulderedWait);
 }

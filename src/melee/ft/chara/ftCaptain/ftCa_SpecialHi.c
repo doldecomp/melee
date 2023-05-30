@@ -136,8 +136,8 @@ void ftCa_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cb.x21EC_callback = ftCa_SpecialLw_800E49FC;
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialHi, Ft_MF_None, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialHi, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftCommon_8007E2D0(fp, 2, ftCa_SpecialLw_800E5128, NULL, ftCo_8009CA0C);
     ftAnim_8006EBA4(gobj);
 }
@@ -381,8 +381,8 @@ void ftCa_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cb.x21EC_callback = ftCa_SpecialLw_800E49FC;
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirHi, Ft_MF_None, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirHi, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftCommon_8007E2D0(fp, 2, ftCa_SpecialLw_800E5128, NULL, ftCo_8009CA0C);
     ftAnim_8006EBA4(gobj);
 }
@@ -724,7 +724,7 @@ void ftCa_SpecialLw_800E5128(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter* vic_fp = GET_FIGHTER(fp->victim_gobj);
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialHiCatch, 2, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialHiCatch, 2, 0, 1, 0, NULL);
     fp->x2222_b2 = true;
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
@@ -817,7 +817,7 @@ static void doCatchAnim(HSD_GObj* gobj)
     fp->mv.ca.specialhi.vel.x = 0;
     fp->mv.ca.specialhi.vel.y = 0;
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialHiThrow,
-                              Ft_MF_Unk19 | Ft_MF_KeepGfx, NULL, 0, 1, 0);
+                              Ft_MF_Unk19 | Ft_MF_KeepGfx, 0, 1, 0, NULL);
     ftCommon_8007E2F4(fp, 0);
     ftCo_800DE2A8(gobj, vic_gobj);
     ftCo_800DE7C0(vic_gobj, 0, 0);

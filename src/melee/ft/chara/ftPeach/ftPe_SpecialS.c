@@ -60,7 +60,7 @@ static inline void enter(HSD_GObj* gobj, FtMotionId msid)
     fp->cb.x21EC_callback = reset;
     fp->self_vel.y = 0;
     fp->gr_vel = da->x34 * fp->facing_dir;
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -75,8 +75,8 @@ void ftPe_SpecialS_Enter(HSD_GObj* gobj)
     fp->cb.x21EC_callback = reset;
     fp->self_vel.y = 0;
     fp->gr_vel = da->x34 * fp->facing_dir;
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialSStart, Ft_MF_None, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialSStart, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -90,8 +90,8 @@ void ftPe_SpecialAirS_Enter(HSD_GObj* gobj)
     ftPe_DatAttrs* da = fp->dat_attrs;
     fp->cb.x21EC_callback = reset;
     fp->self_vel.y = da->x40;
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSStart, Ft_MF_None, NULL,
-                              0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSStart, Ft_MF_None, 0, 1,
+                              0, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -377,8 +377,8 @@ static void enterAirStart(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->self_vel.x = 0;
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSStart, start_mf, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSStart, start_mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
 }
 #endif
 
@@ -419,8 +419,8 @@ static void enterStart(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialSStart, start_mf, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialSStart, start_mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
 }
 #endif
 
@@ -594,8 +594,8 @@ static void enterAirJump(HSD_GObj* gobj)
         fp->self_vel.x = da->specials_vel_x * fp->facing_dir;
     }
     fp->self_vel.y = da->specials_vel_y;
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSJump, Ft_MF_None, NULL,
-                              0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSJump, Ft_MF_None, 0, 1,
+                              0, NULL);
     setCallbacks(gobj);
 }
 #endif
@@ -646,16 +646,16 @@ void enterAirEnd(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_0, end_mf, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_0, end_mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
 }
 
 void enterEnd(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialSEnd, end_mf, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialSEnd, end_mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
 }
 
 static void doPostEnd(HSD_GObj* gobj)
@@ -686,8 +686,8 @@ static void enterEndSmash(HSD_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialSEnd, Ft_MF_None, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialSEnd, Ft_MF_None, 0, 1, 0,
+                              NULL);
     doPostEnd(gobj);
 }
 
@@ -780,11 +780,11 @@ void enterAirEndSmash(HSD_GObj* gobj)
     fp->self_vel.x /= da->x68;
     fp->self_vel.y /= da->x6C;
     if (fp->cmd_vars[2] != 0U) {
-        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_1, 0, NULL,
-                                  0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_1, 0, 0.0f,
+                                  1.0f, 0.0f, NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_0, 0, NULL,
-                                  0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_0, 0, 0.0f,
+                                  1.0f, 0.0f, NULL);
     }
     doPostEnd(gobj);
 }

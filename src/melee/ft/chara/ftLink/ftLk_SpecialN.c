@@ -309,8 +309,8 @@ void ftLk_SpecialN_Enter(ftLk_GObj* gobj)
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
     ftCommon_8007D7FC(fp);
     fp->self_vel.y = 0;
-    Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialNStart, Ft_MF_None, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialNStart, Ft_MF_None, 0, 1, 0,
+                              NULL);
     setCallbacks(gobj);
     ftAnim_SetAnimRate(gobj, da->specialn_anim_rate);
     ftAnim_8006EBA4(gobj);
@@ -468,8 +468,8 @@ void ftLk_SpecialAirN_Enter(ftLk_GObj* gobj)
     fp->mv.lk.specialn.x0.x = fp->mv.lk.specialn.x0.y = 0;
     fp->mv.lk.specialn.unk_timer = 0;
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
-    Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirNStart, Ft_MF_None, NULL,
-                              0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirNStart, Ft_MF_None, 0, 1,
+                              0, NULL);
     setCallbacks(gobj);
     ftAnim_SetAnimRate(gobj, da->specialn_anim_rate);
     ftAnim_8006EBA4(gobj);
@@ -753,8 +753,8 @@ static inline void bar(ftLk_GObj* gobj)
         it_802A8398(fp->fv.lk.arrow_gobj, &vecs.b);
     }
     if (ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialNLoop, mf, NULL, 0, 1,
-                                  0);
+        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialNLoop, mf, 0, 1, 0,
+                                  NULL);
         setCallbacks(gobj);
         ftAnim_8006EBA4(gobj);
     }
@@ -1170,8 +1170,8 @@ void ftLk_SpecialAirNStart_Anim(ftLk_GObj* gobj)
             it_802A8398(fp->fv.lk.arrow_gobj, &vecs.b);
         }
         if (!ftAnim_IsFramesRemaining(gobj)) {
-            Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirNLoop, mf, NULL,
-                                      0, 1, 0);
+            Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirNLoop, mf, 0, 1,
+                                      0, NULL);
             setCallbacks(gobj);
             ftAnim_8006EBA4(gobj);
         }
@@ -1523,8 +1523,8 @@ void ftLk_SpecialNStart_IASA(ftLk_GObj* gobj)
         }
         /// @todo Shared with #ftLk_SpecialNLoop_IASA
         if (!(fp->input.held_inputs & HSD_PAD_B)) {
-            Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialNEnd, mf, NULL, 0,
-                                      1, 0);
+            Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialNEnd, mf, 0, 1, 0,
+                                      NULL);
             setCallbacks(gobj);
         }
     }
@@ -1578,7 +1578,7 @@ static void doLoopIASA(ftLk_GObj* gobj, FtMotionId msid)
     ftLk_DatAttrs* da = fp->dat_attrs;
     fp->mv.lk.specialn.x0.y = da->x0;
     if (!(fp->input.held_inputs & HSD_PAD_B)) {
-        Fighter_ChangeMotionState(gobj, msid, mf, NULL, 0, 1, 0);
+        Fighter_ChangeMotionState(gobj, msid, mf, 0, 1, 0, NULL);
         setCallbacks(gobj);
     }
 }
@@ -1659,8 +1659,8 @@ void ftLk_SpecialAirNStart_IASA(ftLk_GObj* gobj)
             fp->mv.lk.specialn.x0.y = da->x0;
         }
         if (!(fp->input.held_inputs & HSD_PAD_B)) {
-            Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirNEnd, mf, NULL,
-                                      0, 1, 0);
+            Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirNEnd, mf, 0, 1,
+                                      0, NULL);
             setCallbacks(gobj);
         }
     }
@@ -1800,8 +1800,8 @@ static void doColl(ftLk_GObj* gobj, FtMotionId msid)
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     if (!ft_80082708(gobj)) {
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, msid, coll_mf, NULL,
-                                  fp->cur_anim_frame, 1, 0);
+        Fighter_ChangeMotionState(gobj, msid, coll_mf, fp->cur_anim_frame, 1,
+                                  0, NULL);
         setCallbacks(gobj);
         ftAnim_8006EBA4(gobj);
     }
@@ -1986,8 +1986,8 @@ void ftLk_SpecialNEnd_Coll(ftLk_GObj* gobj)
     doEndColl(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirNEnd, coll_mf, NULL,
-                                  fp->cur_anim_frame, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirNEnd, coll_mf,
+                                  fp->cur_anim_frame, 1, 0, NULL);
         setCallbacks(gobj);
         ftAnim_8006EBA4(gobj);
     }
@@ -2043,8 +2043,8 @@ static void doAirColl(ftLk_GObj* gobj, FtMotionId msid)
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) == GA_Air) {
         ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, msid, coll_mf, NULL,
-                                  fp->cur_anim_frame, 1, 0);
+        Fighter_ChangeMotionState(gobj, msid, coll_mf, fp->cur_anim_frame, 1,
+                                  0, NULL);
         setCallbacks(gobj);
         ftAnim_8006EBA4(gobj);
     }
@@ -2206,8 +2206,8 @@ void ftLk_SpecialAirNEnd_Coll(ftLk_GObj* gobj)
     doEndColl(gobj);
     if (ft_80081D0C(gobj) == GA_Air) {
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialNEnd, coll_mf, NULL,
-                                  fp->cur_anim_frame, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialNEnd, coll_mf,
+                                  fp->cur_anim_frame, 1, 0, NULL);
         setCallbacks(gobj);
         ftAnim_8006EBA4(gobj);
     }

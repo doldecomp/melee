@@ -175,7 +175,7 @@ asm void ftCo_80098324(ftCo_GObj* gobj, FtMotionId msid)
 void ftCo_80098324(ftCo_GObj* gobj, FtMotionId msid)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     ftCommon_8007CCE8(fp);
 }

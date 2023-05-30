@@ -16,7 +16,7 @@ void ftMh_MS_343_801510B0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Entry, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Entry, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
     fp->cur_pos.x = da->x30_pos2.x;
     fp->cur_pos.y = da->x30_pos2.y;

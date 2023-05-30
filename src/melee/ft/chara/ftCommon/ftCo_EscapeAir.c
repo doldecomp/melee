@@ -57,8 +57,8 @@ void ftCo_80099A9C(Fighter_GObj* gobj, int timer)
     inlineA0(fp);
     fp->cmd_vars[cmd_skip_decay] = false;
     fp->mv.co.escapeair.timer = timer;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_EscapeAir, Ft_MF_None, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_EscapeAir, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     ftCommon_8007EBAC(fp, 23, 0);
 }

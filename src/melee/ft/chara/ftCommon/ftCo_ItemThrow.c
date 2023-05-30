@@ -986,8 +986,8 @@ void ftCo_800957F4(ftCo_GObj* gobj, int msid)
                 numerator * (1 / it_8026B334(GET_FIGHTER(gobj)->item_gobj));
             fp->mv.co.itemthrow4.anim_spd = anim_spd;
             ftCo_80095700(gobj, msid);
-            Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0,
-                                      anim_spd, 0);
+            Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, anim_spd, 0,
+                                      NULL);
         }
     }
     ftAnim_8006EBA4(gobj);
@@ -1134,7 +1134,7 @@ void ftCo_800958FC(HSD_GObj* gobj, FtMotionId msid)
             (float) M2C_FIELD(temp_r4, float*, 0x2C);
         break;
     }
-    Fighter_ChangeMotionState(gobj, msid, 0U, NULL, 0.0f, temp_f2, 0.0f);
+    Fighter_ChangeMotionState(gobj, msid, 0U, 0.0f, temp_f2, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     M2C_FIELD(temp_r31, void (**)(HSD_GObj*), 0x21BC) = ftCo_80095EFC;
     M2C_FIELD(temp_r31, void (**)(HSD_GObj*), 0x21DC) = ftCo_800974C4;
@@ -2022,7 +2022,7 @@ static inline void inlineA1(ftCo_GObj* gobj, FtMotionId msid)
         Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |
             Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
             Ft_MF_SkipModelFlags | Ft_MF_Unk27,
-        NULL, fp->cur_anim_frame, fp->mv.co.itemthrow4.anim_spd, 0);
+        fp->cur_anim_frame, fp->mv.co.itemthrow4.anim_spd, 0, NULL);
     fp->facing_dir = facing_dir;
 }
 

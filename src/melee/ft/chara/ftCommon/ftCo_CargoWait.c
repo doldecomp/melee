@@ -27,8 +27,8 @@ bool ftCo_8009B4D0(ftCo_GObj* gobj)
 static inline void inlineA0(ftCo_GObj* gobj, void (*cb)(ftCo_GObj* gobj, int))
 {
     ftCo_Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, fp->x2CC->x4_motion_state, Ft_MF_None,
-                              NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, fp->x2CC->x4_motion_state, Ft_MF_None, 0,
+                              1, 0, NULL);
     cb(fp->victim_gobj, 266);
 }
 

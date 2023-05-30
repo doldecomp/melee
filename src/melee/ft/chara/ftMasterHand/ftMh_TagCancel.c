@@ -28,7 +28,7 @@ void ftMh_MS_388_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
     ftCo_800DB368(ft_2, ft_1);
     ft_1->cb.x21B0_callback_Accessory1 = ftCo_800DB464;
     ftCommon_8007D5D4(ft_1);
-    Fighter_ChangeMotionState(gobj_1, ftCo_MS_CaptureMasterHand, 0, 0, 0, 1,
+    Fighter_ChangeMotionState(gobj_1, ftCo_MS_CaptureMasterHand, 0, 0, 1, 0,
                               0);
     ft_1->x221E_b0 = true;
     ft_1->x2220_flag.bits.b3 = true;

@@ -51,8 +51,8 @@ void ftMt_SpecialLw_Enter(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->fv.mt.x222C_disableGObj = NULL;
 
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialLw, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialLw, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 
     fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
@@ -75,8 +75,8 @@ void ftMt_SpecialAirLw_Enter(HSD_GObj* gobj)
     fp->fv.mt.x222C_disableGObj = NULL;
     fp->self_vel.y = 0.0f;
 
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirLw, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirLw, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 
     fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
@@ -161,8 +161,8 @@ void ftMt_SpecialLw_GroundToAir(HSD_GObj* gobj)
     fp->self_vel.y = 0.0f;
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirLw,
-                              FTMEWTWO_SPECIALLW_COLL_FLAG, NULL,
-                              fp->cur_anim_frame, 1.0f, 0.0f);
+                              FTMEWTWO_SPECIALLW_COLL_FLAG, fp->cur_anim_frame,
+                              1.0f, 0.0f, NULL);
 
     fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
 
@@ -181,8 +181,8 @@ void ftMt_SpecialAirLw_AirToGround(HSD_GObj* gobj, float lag)
     ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialLw,
-                              FTMEWTWO_SPECIALLW_COLL_FLAG, NULL,
-                              fp->cur_anim_frame, 1.0f, 0.0f);
+                              FTMEWTWO_SPECIALLW_COLL_FLAG, fp->cur_anim_frame,
+                              1.0f, 0.0f, NULL);
 
     fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
 

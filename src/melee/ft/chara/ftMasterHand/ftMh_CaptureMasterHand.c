@@ -18,8 +18,8 @@ void ftMh_CaptureMasterHand_Coll(HSD_GObj* gobj) {}
 void ftMh_CaptureMasterHand_80155B80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageMasterHand, 0, 0, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageMasterHand, 0, 0, 1,
+                              0, 0);
     fp->x221E_b0 = true;
     fp->x2220_flag.bits.b3 = true;
     fp->cb.x21B0_callback_Accessory1 = ftCo_800DB464;

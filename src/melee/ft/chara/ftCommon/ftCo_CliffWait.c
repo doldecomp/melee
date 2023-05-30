@@ -17,8 +17,8 @@
 void ftCo_8009A804(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CliffWait, Ft_MF_SkipNametagVis,
-                              NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CliffWait, Ft_MF_SkipNametagVis, 0,
+                              1, 0, NULL);
     ftCommon_8007E2F4(fp, 511);
     fp->x221D_b7 = true;
     fp->mv.co.cliff.x8 = 0;

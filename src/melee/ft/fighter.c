@@ -912,9 +912,9 @@ Fighter_GObj* Fighter_Create(struct S_TEMP1* input)
 }
 
 void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
-                               MotionFlags flags, Fighter_GObj* arg3,
-                               float anim_start, float anim_speed,
-                               float anim_blend)
+                               MotionFlags flags, float anim_start,
+                               float anim_speed, float anim_blend,
+                               Fighter_GObj* arg3)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Fighter* fp = GET_FIGHTER(gobj);

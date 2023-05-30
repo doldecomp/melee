@@ -33,7 +33,7 @@ void ftMs_SpecialS_Enter(HSD_GObj* gobj)
                 msid = 358;
             }
 
-            Fighter_ChangeMotionState(gobj, msid, 0, 0, 0, 1, 0);
+            Fighter_ChangeMotionState(gobj, msid, 0, 0, 1, 0, 0);
         }
     }
 
@@ -67,7 +67,7 @@ void ftMs_SpecialAirS_Enter(HSD_GObj* gobj)
                 msid = 358;
             }
 
-            Fighter_ChangeMotionState(gobj, msid, 0, 0, 0, 1, 0);
+            Fighter_ChangeMotionState(gobj, msid, 0, 0, 1, 0, 0);
         }
     }
 
@@ -153,8 +153,8 @@ void ftMs_SpecialS_801376E8(HSD_GObj* gobj)
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     ftCommon_8007D5D4(fp);
 
-    Fighter_ChangeMotionState(gobj, 358, transition_flags, 0,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 358, transition_flags, fp->cur_anim_frame,
+                              1, 0, 0);
 }
 
 void ftMs_SpecialS_80137748(HSD_GObj* gobj)
@@ -165,8 +165,8 @@ void ftMs_SpecialS_80137748(HSD_GObj* gobj)
     // Air_SetAsGrounded2
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, 349, transition_flags, 0,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 349, transition_flags, fp->cur_anim_frame,
+                              1, 0, 0);
 }
 
 void ftMs_SpecialS2_Anim(HSD_GObj* gobj)
@@ -256,8 +256,8 @@ void ftMs_SpecialS_80137940(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ChangeMotionState(gobj, msid, transition_flags, 0,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, transition_flags, fp->cur_anim_frame,
+                              1, 0, 0);
 }
 
 void ftMs_SpecialS_801379D0(HSD_GObj* gobj)
@@ -281,8 +281,8 @@ void ftMs_SpecialS_801379D0(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ChangeMotionState(gobj, msid, transition_flags, 0,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, transition_flags, fp->cur_anim_frame,
+                              1, 0, 0);
 }
 
 void ftMs_SpecialS_80137A68(HSD_GObj* gobj)
@@ -313,7 +313,7 @@ void ftMs_SpecialS_80137A9C(HSD_GObj* gobj)
             msid = 360;
         }
     }
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_SkipAttackCount, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_SkipAttackCount, 0, 1, 0, 0);
 }
 
 void ftMs_SpecialS3_Anim(HSD_GObj* gobj)
@@ -407,8 +407,8 @@ void ftMs_SpecialS_80137CBC(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ChangeMotionState(gobj, msid, transition_flags, 0,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, transition_flags, fp->cur_anim_frame,
+                              1, 0, 0);
 }
 
 void ftMs_SpecialS_80137D60(HSD_GObj* gobj)
@@ -432,8 +432,8 @@ void ftMs_SpecialS_80137D60(HSD_GObj* gobj)
         break;
     }
 
-    Fighter_ChangeMotionState(gobj, msid, transition_flags, 0,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, transition_flags, fp->cur_anim_frame,
+                              1, 0, 0);
 }
 
 void ftMs_SpecialS_80137E0C(HSD_GObj* gobj)
@@ -467,7 +467,7 @@ void ftMs_SpecialS_80137E0C(HSD_GObj* gobj)
         }
     }
 
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_SkipAttackCount, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_SkipAttackCount, 0, 1, 0, 0);
 }
 
 void ftMs_SpecialS4_Anim(HSD_GObj* gobj)
@@ -547,8 +547,8 @@ void ftMs_SpecialS_80137FF8(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ChangeMotionState(gobj, msid, transition_flags, 0,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, transition_flags, fp->cur_anim_frame,
+                              1, 0, 0);
 }
 
 void ftMs_SpecialS_8013809C(HSD_GObj* gobj)
@@ -577,8 +577,8 @@ void ftMs_SpecialS_8013809C(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ChangeMotionState(gobj, msid, transition_flags, 0,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, transition_flags, fp->cur_anim_frame,
+                              1, 0, 0);
 }
 
 void ftMs_SpecialS_80138148(HSD_GObj* gobj)
@@ -611,5 +611,5 @@ void ftMs_SpecialS_80138148(HSD_GObj* gobj)
             }
         }
     }
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_SkipAttackCount, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_SkipAttackCount, 0, 1, 0, 0);
 }

@@ -96,7 +96,7 @@ void ftFx_AppealS_Enter(HSD_GObj* gobj)
     animCount = fp->mv.fx.AppealS.animCount;
 
     Fighter_ChangeMotionState(gobj, ASID_AppealS[actionDir][animCount], 0,
-                              NULL, 0.0f, 1.0f, 0.0f);
+                              0.0f, 1.0f, 0.0f, NULL);
 }
 
 /// Fox & Falco's Special Taunt OnTakeDamage/OnDeath callback
@@ -141,7 +141,7 @@ void ftFx_AppealS_Anim(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj,
                                   ASID_AppealS[fp->mv.fx.AppealS.facingDir]
                                               [fp->mv.fx.AppealS.animCount],
-                                  0, NULL, 0.0f, 1.0f, 0.0f);
+                                  0, 0.0f, 1.0f, 0.0f, NULL);
     }
 }
 

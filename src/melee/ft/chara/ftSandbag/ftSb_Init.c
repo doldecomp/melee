@@ -107,7 +107,7 @@ void ftSb_Init_8014FBA4(HSD_GObj* gobj)
         ftCommon_8007D7FC(fp);
     }
 
-    Fighter_ChangeMotionState(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x155, 0, 0.0f, 1.0f, 0.0f, 0);
     ftCommon_8007EFC0(fp, p_ftCommonData->x5F0);
 }
 

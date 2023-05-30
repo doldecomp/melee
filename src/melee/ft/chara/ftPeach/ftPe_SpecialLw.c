@@ -210,8 +210,8 @@ void ftPe_SpecialLw_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (throwVegIfHeld(gobj, ftCo_MS_LightThrowF4) != true) {
         fp->throw_flags = 0;
-        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialLw, Ft_MF_None, NULL, 0,
-                                  1, 0);
+        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialLw, Ft_MF_None, 0, 1, 0,
+                                  NULL);
         ftAnim_8006EBA4(gobj);
         fp->cb.x21BC_callback_Accessory4 = spawnVeg;
     }
@@ -231,8 +231,8 @@ static void handleAirColl(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirLw, coll_mf, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirLw, coll_mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
     fp->cb.x21BC_callback_Accessory4 = spawnVeg;
 }
 
@@ -241,8 +241,8 @@ static void handleColl(HSD_GObj* gobj, float lag)
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialLw, coll_mf, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialLw, coll_mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
     fp->cb.x21BC_callback_Accessory4 = spawnVeg;
 }
 

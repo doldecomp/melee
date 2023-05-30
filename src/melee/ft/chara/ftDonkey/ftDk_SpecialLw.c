@@ -16,7 +16,7 @@ void ftDk_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.dk.speciallw.x0 = 0;
-    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwStart, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwStart, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -110,7 +110,7 @@ static void doAnim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cb.x21EC_callback = callback;
     fp->throw_flags = 0;
-    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwLoop, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwLoop, 0, 0, 1, 0, NULL);
     ftDonkey_8010DE88_inner(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftDk_Init_8010DB3C;
 }
@@ -142,7 +142,7 @@ void ftDk_SpecialLwEnd0_Coll(HSD_GObj* gobj)
 
 static void doTransition(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwEnd0, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwEnd0, 0, 0, 1, 0, NULL);
 }
 
 void ftDk_SpecialLwEnd1_Anim(HSD_GObj* gobj)

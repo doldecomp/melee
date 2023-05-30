@@ -35,7 +35,7 @@ int ftCo_800984D4(ftCo_GObj* gobj)
 
 void ftCo_8009856C(ftCo_GObj* gobj, FtMotionId msid)
 {
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
 }
 

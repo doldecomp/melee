@@ -111,8 +111,8 @@ void ftCo_80096900(ftCo_GObj* gobj, int arg1, int arg2, bool allow_interrupt,
         ftCo_80090780(gobj);
         return;
     }
-    Fighter_ChangeMotionState(gobj, ftCo_MS_FallSpecial, Ft_MF_KeepFastFall,
-                              NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_FallSpecial, Ft_MF_KeepFastFall, 0,
+                              1, 0, NULL);
     fp->mv.co.fallspecial.x8 = ca->air_drift_max * arg4;
     fp->mv.co.fallspecial.xC = arg1;
     fp->mv.co.fallspecial.x10 = arg2;
@@ -206,8 +206,8 @@ void ftCo_800969D8(ftCo_GObj* gobj, int arg1, int arg2, int allow_interrupt,
         ftCo_80090780(gobj);
         return;
     }
-    Fighter_ChangeMotionState(gobj, ftCo_MS_FallSpecial, Ft_MF_KeepFastFall,
-                              NULL, 0, 1, arg6);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_FallSpecial, Ft_MF_KeepFastFall, 0,
+                              1, arg6, NULL);
     fp->mv.co.fallspecial.x8 = ca->air_drift_max * arg4;
     fp->mv.co.fallspecial.xC = arg1;
     fp->mv.co.fallspecial.x10 = arg2;

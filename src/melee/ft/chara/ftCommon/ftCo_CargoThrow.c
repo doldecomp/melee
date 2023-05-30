@@ -174,7 +174,7 @@ bool ftCo_8009C02C(ftCo_GObj* gobj, FtMotionId msid)
         } else {
             msid1 = msid;
         }
-        Fighter_ChangeMotionState(gobj, msid1, mf, NULL, 0, 1, 0);
+        Fighter_ChangeMotionState(gobj, msid1, mf, 0, 1, 0, NULL);
     }
     ftAnim_8006EBA4(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
@@ -216,7 +216,7 @@ static inline void inlineB0(ftCo_GObj* gobj, FtMotionId msid)
                                   Ft_MF_UpdateCmd | Ft_MF_SkipItemVis |
                                   Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
                                   Ft_MF_SkipModelFlags | Ft_MF_Unk27,
-                              NULL, fp->cur_anim_frame, 1, 0);
+                              fp->cur_anim_frame, 1, 0, NULL);
     fp->facing_dir = facing_dir;
     ftCommon_8007E2F4(fp, 0x1FF);
 }

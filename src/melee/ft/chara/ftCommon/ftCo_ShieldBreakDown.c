@@ -23,7 +23,7 @@ void ftCo_80098E3C(Fighter_GObj* gobj, float lag)
                                   Ft_MF_KeepColAnimHitStatus |
                                       Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
                                       Ft_MF_SkipColAnim,
-                                  NULL, 0, 1, 0);
+                                  0, 1, 0, NULL);
     }
     ftCo_800978D4(gobj);
 }

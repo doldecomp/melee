@@ -13,8 +13,8 @@ void ftCo_80099010(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_Furafura,
-                              Ft_MF_SkipModel | Ft_MF_SkipMatAnim, NULL, 0, 1,
-                              0);
+                              Ft_MF_SkipModel | Ft_MF_SkipMatAnim, 0, 1, 0,
+                              NULL);
     fp->shield_health = p_ftCommonData->x280_unkShieldHealth;
     {
         float percent = p_ftCommonData->x2F8 - fp->dmg.x1830_percent;

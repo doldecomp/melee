@@ -251,7 +251,7 @@ void ftFx_SpecialN_Enter(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialNStart, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialNStart, 0, 0, 1, 0, NULL);
 
     fp->cmd_vars[3] = 0;
     fp->cmd_vars[2] = 0;
@@ -291,8 +291,8 @@ void ftFx_SpecialAirN_Enter(
     ftFoxAttributes* da = fp->dat_attrs;
     HSD_GObj* blasterGObj;
 
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirNStart, 0, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirNStart, 0, 0, 1, 0,
+                              NULL);
 
     fp->cmd_vars[3] = 0;
     fp->cmd_vars[2] = 0;
@@ -336,8 +336,8 @@ void ftFx_SpecialNStart_Anim(HSD_GObj* gobj)
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialNLoop,
-                                  (Ft_MF_SkipModel | Ft_MF_KeepGfx), NULL, 0,
-                                  1, 0);
+                                  (Ft_MF_SkipModel | Ft_MF_KeepGfx), 0, 1, 0,
+                                  NULL);
         ftFox_SpecialN_SetCall(gobj);
         fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialN_CreateBlasterShot;
         it_802ADDD0(fp->fv.fx.x222C_blasterGObj, 1);
@@ -363,8 +363,8 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
             temp_r28->cb.x21EC_callback = ftFx_SpecialN_OnChangeAction;
             Fighter_ChangeMotionState(
                 gobj, ftFx_MS_SpecialNLoop,
-                (Ft_MF_SkipAttackCount | Ft_MF_SkipModel | Ft_MF_KeepGfx),
-                NULL, 0, 1, 0);
+                (Ft_MF_SkipAttackCount | Ft_MF_SkipModel | Ft_MF_KeepGfx), 0,
+                1, 0, NULL);
             temp_r28->cb.x21BC_callback_Accessory4 =
                 ftFx_SpecialN_CreateBlasterShot;
             temp_r28->mv.fx.SpecialN.isBlasterLoop = false;
@@ -372,8 +372,8 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
         } else {
             HSD_GObj* temp;
             Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialNEnd,
-                                      (Ft_MF_SkipModel | Ft_MF_KeepGfx), NULL,
-                                      0, 1, 0);
+                                      (Ft_MF_SkipModel | Ft_MF_KeepGfx), 0, 1,
+                                      0, NULL);
             temp = temp_r28->fv.fx.x222C_blasterGObj;
             temp_r28->cmd_vars[1] = 1;
             it_802ADDD0(temp, 1);
@@ -491,8 +491,8 @@ void ftFx_SpecialAirNStart_Anim(HSD_GObj* gobj)
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirNLoop,
-                                  (Ft_MF_SkipModel | Ft_MF_KeepGfx), NULL, 0,
-                                  1, 0);
+                                  (Ft_MF_SkipModel | Ft_MF_KeepGfx), 0, 1, 0,
+                                  NULL);
         ftFox_SpecialN_SetCall(gobj);
         fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialN_CreateBlasterShot;
         it_802ADDD0(fp->fv.fx.x222C_blasterGObj, 1);
@@ -517,8 +517,8 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
             fp->cb.x21EC_callback = ftFx_SpecialN_OnChangeAction;
             Fighter_ChangeMotionState(
                 gobj, ftFx_MS_SpecialAirNLoop,
-                (Ft_MF_SkipAttackCount | Ft_MF_SkipModel | Ft_MF_KeepGfx),
-                NULL, 0, 1, 0);
+                (Ft_MF_SkipAttackCount | Ft_MF_SkipModel | Ft_MF_KeepGfx), 0,
+                1, 0, NULL);
             ftFox_SpecialN_SetCall(gobj);
             fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialN_CreateBlasterShot;
             fp->mv.fx.SpecialN.isBlasterLoop = false;
@@ -527,8 +527,8 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
             HSD_GObj* temp;
 
             Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirNEnd,
-                                      (Ft_MF_SkipModel | Ft_MF_KeepGfx), NULL,
-                                      0, 1, 0);
+                                      (Ft_MF_SkipModel | Ft_MF_KeepGfx), 0, 1,
+                                      0, NULL);
             ftFox_SpecialN_SetCall(gobj);
 
             temp = fp->fv.fx.x222C_blasterGObj;

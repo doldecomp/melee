@@ -207,11 +207,11 @@ static void doEnter(HSD_GObj* gobj)
     fp->cmd_vars[cmd_unk0_bool] = false;
     fp->cb.x21EC_callback = on21EC;
     if (fp->fv.lk.used_boomerang) {
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1Empty, Ft_MF_None,
-                                  NULL, 0, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1Empty, Ft_MF_None, 0,
+                                  1, 0, NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1, Ft_MF_None, NULL, 0,
-                                  1, 0);
+        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1, Ft_MF_None, 0, 1, 0,
+                                  NULL);
     }
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = onAccessory4;
@@ -224,11 +224,11 @@ void ftLk_SpecialS_Enter(HSD_GObj* gobj)
     fp->cmd_vars[cmd_unk0_bool] = false;
     fp->cb.x21EC_callback = on21EC;
     if (fp->fv.lk.used_boomerang) {
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1Empty, Ft_MF_None,
-                                  NULL, 0, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1Empty, Ft_MF_None, 0,
+                                  1, 0, NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1, Ft_MF_None, NULL, 0,
-                                  1, 0);
+        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1, Ft_MF_None, 0, 1, 0,
+                                  NULL);
     }
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = onAccessory4;
@@ -243,10 +243,10 @@ void ftLk_SpecialAirS_Enter(HSD_GObj* gobj)
     fp->cb.x21EC_callback = on21EC;
     if (fp->fv.lk.used_boomerang) {
         Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirS1Empty, Ft_MF_None,
-                                  NULL, 0, 1, 0);
+                                  0, 1, 0, NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirS1, Ft_MF_None, NULL,
-                                  0, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirS1, Ft_MF_None, 0, 1,
+                                  0, NULL);
     }
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = onAccessory4;
@@ -256,11 +256,11 @@ void ftLk_SpecialS2_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Air) {
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirS2, Ft_MF_None, NULL,
-                                  0, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirS2, Ft_MF_None, 0, 1,
+                                  0, NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS2, Ft_MF_None, NULL, 0,
-                                  1, 0);
+        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS2, Ft_MF_None, 0, 1, 0,
+                                  NULL);
     }
     fp->cb.x21DC_callback_OnTakeDamage = ftLk_800EAF58;
     ftAnim_8006EBA4(gobj);
@@ -404,8 +404,8 @@ void ftLk_SpecialS1_Coll(HSD_GObj* gobj)
     if (!ft_80082708(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirS1, coll_mf, NULL,
-                                  fp->cur_anim_frame, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirS1, coll_mf,
+                                  fp->cur_anim_frame, 1, 0, NULL);
         fp->cb.x21BC_callback_Accessory4 = onAccessory4;
     }
 }
@@ -428,7 +428,7 @@ void ftLk_SpecialS1Empty_Coll(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirS1Empty, coll_mf,
-                                  NULL, fp->cur_anim_frame, 1, 0);
+                                  fp->cur_anim_frame, 1, 0, NULL);
     }
 }
 
@@ -437,8 +437,8 @@ void ftLk_SpecialAirS1_Coll(HSD_GObj* gobj)
     if (ft_80081D0C(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1, coll_mf, NULL,
-                                  fp->cur_anim_frame, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1, coll_mf,
+                                  fp->cur_anim_frame, 1, 0, NULL);
         fp->cb.x21BC_callback_Accessory4 = onAccessory4;
     }
 }
@@ -459,7 +459,7 @@ void ftLk_SpecialAirS1Empty_Coll(HSD_GObj* gobj)
     if (ft_80081D0C(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1Empty, coll_mf, NULL,
-                                  fp->cur_anim_frame, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1Empty, coll_mf,
+                                  fp->cur_anim_frame, 1, 0, NULL);
     }
 }

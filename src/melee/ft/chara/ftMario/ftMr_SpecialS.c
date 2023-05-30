@@ -110,7 +110,7 @@ bool ftMr_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
 
 static void changeAction(HSD_GObj* gobj, ftMario_MotionState msid)
 {
-    Fighter_ChangeMotionState(gobj, msid, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
 
     {
@@ -296,7 +296,7 @@ void ftMr_SpecialS_GroundToAir(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirS, transition_flags,
-                              NULL, fp->cur_anim_frame, 1, 0);
+                              fp->cur_anim_frame, 1, 0, NULL);
     if ((s32) fp->cmd_vars[0] == 1U) {
         fp->cmd_vars[0] = 2U;
     }
@@ -316,8 +316,8 @@ void ftMr_SpecialAirS_AirToGround(HSD_GObj* gobj)
     fp = gobj->user_data;
     fp->fv.mr.x2238_isCapeBoost = false;
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialS, transition_flags, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialS, transition_flags,
+                              fp->cur_anim_frame, 1, 0, NULL);
 
     collUpdateVars(gobj);
 }

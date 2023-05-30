@@ -17,7 +17,7 @@ void ftCo_800987D0(Fighter_GObj* gobj)
     if (fp->ground_or_air == GA_Air) {
         ftCommon_8007D7FC(fp);
     }
-    Fighter_ChangeMotionState(gobj, 199, Ft_MF_None, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 199, Ft_MF_None, 0, 1, 0, NULL);
     ft_800881D8(fp, fp->ft_data->x4C_collisionData->x24, 127, 64);
     ft_80088148(fp, 3, 127, 64);
     ftCommon_8007CCE8(fp);
