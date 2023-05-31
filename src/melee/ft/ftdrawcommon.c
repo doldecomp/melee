@@ -6,6 +6,7 @@
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/ftlib.h"
+#include "ftCommon/ftCo_09F4.h"
 
 #include <placeholder.h>
 #include <dolphin/mtx.h>
@@ -30,7 +31,6 @@ extern s32 ftDrawCommon_804D836C[1];
 extern s32 ftDrawCommon_804D8370[2];
 
 extern void ftParts_800750C8(void);
-extern void ftCo_8009F7F8(void);
 extern void ftCo_800C8AF0(void);
 extern void ftCo_8009F5AC(void);
 extern void HSD_CObjGetInvViewingMtxPtr(void);

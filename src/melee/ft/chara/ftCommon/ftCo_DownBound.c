@@ -4,6 +4,7 @@
 
 #include "ftCo_DownBound.h"
 
+#include "ftCo_09F7.h"
 #include "ftCo_Down.h"
 #include "ftCo_DownAttack.h"
 #include "ftCo_DownStand.h"

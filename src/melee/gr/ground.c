@@ -922,7 +922,6 @@ HSD_JObj* Ground_801C13D0(s32 arg0, s32 depth)
 char Ground_804D44F8[8] = "archive";
 extern HSD_Joint Ground_803B7E0C;
 extern u8 HSD_GObj_804D784B[5];
-extern u8 HSD_GObj_804D7849;
 
 #ifdef MWERKS_GEKKO
 
@@ -1492,8 +1491,6 @@ void* Ground_801C1E84(void)
 {
     return stage_info.x12C;
 }
-
-extern u8 HSD_GObj_804D7848;
 
 #ifdef MWERKS_GEKKO
 
@@ -3771,8 +3768,6 @@ static void Ground_801C4640(HSD_GObj* gobj)
     HSD_LObj_803668EC(gobj->hsd_obj);
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
 }
-
-extern u8 HSD_GObj_804D784A;
 
 #ifdef MWERKS_GEKKO
 

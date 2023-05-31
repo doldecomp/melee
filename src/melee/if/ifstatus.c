@@ -1360,7 +1360,6 @@ void ifStatus_802F4EDC(void)
 
 #endif
 
-extern u8 HSD_GObj_804D7849;
 extern char* ifStatus_803F95C0;
 
 #ifdef MWERKS_GEKKO

@@ -223,12 +223,6 @@ struct _GObjFuncs {
     void (**funcs)(void);
 };
 
-extern GObjFuncs HSD_GObj_80408610;
-extern s8 HSD_GObj_804D7848;
-extern s8 HSD_GObj_804D7849;
-extern s8 HSD_GObj_804D784A;
-extern GObjFuncs HSD_GObj_80408620;
-
 void HSD_GObj_80391260(struct _GObjUnkStruct* arg0)
 {
     u8 count = HSD_GObj_803912A8(arg0, &HSD_GObj_80408610);

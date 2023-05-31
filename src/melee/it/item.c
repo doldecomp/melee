@@ -704,7 +704,6 @@ void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
 }
 
 extern void PSMTXIdentity(Mtx); /* extern */
-extern u8 HSD_GObj_804D7849;
 
 /// Setup Item JObj
 void Item_802680CC(HSD_GObj* gobj)

@@ -27,6 +27,7 @@
 #include "ft/ft_08A4.h"
 #include "ft/ftdata.h"
 #include "ftCommon/ftCo_09CB.h"
+#include "ftCommon/ftCo_09F4.h"
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
@@ -75,8 +76,6 @@ extern s8 ftData_UnkBytePerCharacter[FTKIND_MAX];
 extern HSD_PadStatus HSD_PadRumbleData[4];
 
 extern StageInfo stage_info; // from asm/melee/gm_1A36.s
-
-extern u8 HSD_GObj_804D7849; // asm/sysdolphin/baselib/gobj.s
 
 // ==== fighter.c variables ====
 // =============================

@@ -105,6 +105,12 @@ extern HSD_GObj** plinklow_gobjs;
 extern HSD_GObjList* HSD_GObj_Entities;
 extern u8 HSD_GObj_804D784B[5];
 
+extern GObjFuncs HSD_GObj_80408610;
+extern s8 HSD_GObj_804D7848;
+extern s8 HSD_GObj_804D7849;
+extern s8 HSD_GObj_804D784A;
+extern GObjFuncs HSD_GObj_80408620;
+
 void HSD_GObj_80390C5C(HSD_GObj* gobj);
 void HSD_GObj_80390C84(HSD_GObj* gobj);
 void HSD_GObj_80390CAC(HSD_GObj* gobj);
