@@ -263,7 +263,6 @@ s32 ftCo_800D6928(Fighter*);
 u32 ftCo_800DEEE8(Fighter*, Vec2*);
 UNK_RET ftCo_800C8D00(Fighter_GObj* gobj);
 UNK_RET ftCo_800CC6C8(UNK_PARAMS);
-unk_t ftCo_8009F39C(void);
 unk_t ftCo_800C703C(void);
 void ftCo_800928CC(Fighter_GObj* gobj);
 void ftCo_80092BCC(Fighter_GObj* gobj);
