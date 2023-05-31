@@ -163,6 +163,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/ftCo_09F4.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_09F7.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMr_Strings.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_0A01.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_08A4.s.o\
 
 TEXT_O_FILES +=\

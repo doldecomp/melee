@@ -80,12 +80,6 @@ typedef void* unk_t;
 /// A pointer to an unspecified type, used for polymorphic data
 typedef void* any_t;
 
-/// A label in a jump table
-typedef void (*jmp_t)(void);
-
-/// A jump table
-typedef jmp_t jtbl_t[];
-
 /// A @c void callback with no arguments.
 typedef void (*Event)(void);
 

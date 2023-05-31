@@ -1,5 +1,5 @@
-#ifndef MELEE_GM_CODE_801601C4_H
-#define MELEE_GM_CODE_801601C4_H
+#ifndef GALE01_1601C4
+#define GALE01_1601C4
 
 #include <platform.h>
 
@@ -36,5 +36,8 @@ void gm_801692E8(int, struct datetime* datetime);
 void gm_8016B248(void);
 void gm_8016B498(void);
 /* 16B014 */ bool gm_8016B014(void);
+/* 16B14C */ /* static */ UNK_RET gm_8016B14C(UNK_PARAMS);
+/* 16C6C0 */ /* static */ UNK_RET gm_8016C6C0(UNK_PARAMS);
+/* 16C75C */ /* static */ UNK_RET gm_8016C75C(UNK_PARAMS);
 
 #endif
