@@ -457,10 +457,9 @@ enum_t Player_GetPlayerSlotType(s32 slot)
     return slot_type;
 }
 
-s32 Player_8003248C(s32 slot, bool arg1)
-{ /// decomp.me/scratch/3yC1W
-
-    s32 slot_type;
+enum_t Player_8003248C(s32 slot, bool arg1)
+{
+    enum_t slot_type;
     struct Unk_Struct_w_Array* unk_struct =
         (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
     StaticPlayer* player;

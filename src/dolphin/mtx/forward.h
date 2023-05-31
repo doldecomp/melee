@@ -11,6 +11,7 @@ typedef f32 (*Mtx44Ptr)[4];
 
 typedef struct IntVec3 IntVec3;
 typedef struct S16Vec3 S16Vec3;
+typedef struct IntVec2 IntVec2;
 typedef struct S32Vec2 S32Vec2;
 typedef struct S32Vec3 S32Vec3;
 typedef struct S8Vec3 S8Vec3;

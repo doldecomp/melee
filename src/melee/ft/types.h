@@ -1222,11 +1222,35 @@ struct Fighter {
     /* fp+1A6C */ float x1A6C;
     /* fp+1A70 */ Vec3 x1A70;
     /* fp+1A7C */ Vec3 x1A7C;
-    /* fp+1A7C */ u8 filler_x1A7C[0x1A94 - 0x1A88];
+    /* fp+1A88 */ HSD_Pad x1A88;
+    /* fp+1A8C */ u8 x1A8C;
+    /* fp+1A8D */ u8 x1A8D;
+    /* fp+1A8E */ u8 x1A8E;
+    /* fp+1A8F */ u8 x1A8F;
+    /* fp+1A90 */ u8 x1A90;
+    /* fp+1A91 */ u8 x1A91;
+    /* fp+1A92 */ u8 x1A92;
+    /* fp+1A93 */ u8 x1A93;
     /* fp+1A94 */ u32 x1A94;
     /* fp+1A98 */ u32 x1A98;
     /* fp+1A9C */ s32 x1A9C;
-    /* fp+1A9C */ u8 filler_x1A9C[0x2004 - 0x1AA0];
+    /* fp+1AA0 */ UNK_T x1AA0;
+    /* fp+1AA4 */ UNK_T x1AA4;
+    /* fp+1AA8 */ UNK_T x1AA8;
+    /* fp+1AAC */ UNK_T x1AAC;
+    /* fp+1AB0 */ UNK_T x1AB0;
+    /* fp+1AB4 */ UNK_T x1AB4;
+    /* fp+1AB8 */ UNK_T x1AB8;
+    /* fp+1ABC */ UNK_T x1ABC;
+    /* fp+1AC0 */ UNK_T x1AC0;
+    /* fp+1AC4 */ UNK_T x1AC4;
+    /* fp+1AC8 */ UNK_T x1AC8;
+    /* fp+1ACC */ UNK_T x1ACC;
+    /* fp+1AD0 */ UNK_T x1AD0;
+    /* fp+1AD4 */ UNK_T x1AD4;
+    /* fp+1AD8 */ UNK_T x1AD8;
+    /* fp+1ADC */ float x1ADC;
+    /* fp+1A9C */ u8 x1AE0[0x2004 - 0x1AE0];
     /* fp+2008 */ s32 x2004;
     /* fp+2008 */ s32 x2008;
     /* fp+200C */ s32 x200C;
@@ -1290,8 +1314,8 @@ struct Fighter {
     /* fp+2158 */ s32 x2158;
     /* fp+215C */ s32 x215C;
     /* fp+2160 */ s32 x2160;
-    /* fp+2164 */ s32 x2164;
-    /* fp+2168 */ s32 x2168;
+    /* fp+2164 */ int x2164;
+    /* fp+2168 */ int x2168;
     /* fp+216C */ float unk_grab_val;
     /* fp+2170 */ float x2170;
     /* fp+2174 */ u8 filler_x2174[0x2180 - 0x2174];
@@ -1545,7 +1569,7 @@ struct Fighter {
     } fv;
     /* fp+232C */ s32 x232C;
     /* fp+2330 */ Vec2 x2330;
-    /* fp+2338 */ Vec2 x2338;
+    /* fp+2338 */ IntVec2 x2338;
     /// @at{2340} @sz{AC}
     /* fp+2340 */ union Fighter_MotionVars {
         /* fp+2340 */ u8 _[0x23EC - 0x2340];
