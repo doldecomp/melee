@@ -33,9 +33,6 @@
 #include <MSL/trigf.h>
 
 #ifdef MWERKS_GEKKO
-#ifdef WIP
-#pragma always_active on
-#endif
 float const ftCo_804D87D8 = 0;
 double const ftCo_804D87E0 = 30;
 float const ftCo_804D87E8 = 0.6;
@@ -126,6 +123,10 @@ int ftCo_803C5A68[] = {
 };
 
 extern UNK_T ftCo_803C6594;
+
+#endif
+
+#ifdef MUST_MATCH
 
 void lbl_800A10A8(void);
 void lbl_800A10C0(void);
@@ -284,7 +285,12 @@ jtbl_t ftCo_803C5D60 = {
     lbl_800B3A3C, lbl_800B3AC8, lbl_800B3AC8, lbl_800B3AC8, lbl_800B3AC8,
     lbl_800B3AC8, lbl_800B3AC8, lbl_800B3AC8, lbl_800B3A9C,
 };
+#endif
 
+/* 0A18B0 */ static void ftCo_800A49B4(ftCo_Fighter* fp);
+
+#ifdef WIP
+#pragma force_active on
 #endif
 
 ASM UNK_RET ftCo_800A0148(UNK_PARAMS)
@@ -1114,25 +1120,10 @@ lbl_800A0C78:
 #pragma peephole on
 #endif /* clang-format on */
 
-ASM UNK_RET ftCo_800A0C8C(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+void ftCo_800A0C8C(UNK_T arg0)
 {
-    NOT_IMPLEMENTED;
+    ftCo_800B463C(arg0, 127);
 }
-#else /* clang-format off */
-{ nofralloc
-/* 800A0C8C 0009D86C  7C 08 02 A6 */	mflr r0
-/* 800A0C90 0009D870  38 80 00 7F */	li r4, 0x7f
-/* 800A0C94 0009D874  90 01 00 04 */	stw r0, 4(r1)
-/* 800A0C98 0009D878  94 21 FF F8 */	stwu r1, -8(r1)
-/* 800A0C9C 0009D87C  48 01 39 A1 */	bl ftCo_800B463C
-/* 800A0CA0 0009D880  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 800A0CA4 0009D884  38 21 00 08 */	addi r1, r1, 8
-/* 800A0CA8 0009D888  7C 08 03 A6 */	mtlr r0
-/* 800A0CAC 0009D88C  4E 80 00 20 */	blr
-}
-#pragma peephole on
-#endif /* clang-format on */
 
 ASM UNK_RET ftCo_800A0CB0(UNK_PARAMS)
 #if !defined(MUST_MATCH) || defined(WIP)
@@ -1216,8 +1207,79 @@ lbl_800A0D8C:
 ASM void ftCo_800A0DA4(Fighter* fp)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
-    NOT_IMPLEMENTED;
+    Fighter* var_r31;
+    HurtCapsule* hurt;
+    float temp_f0;
+    float temp_f0_2;
+    float temp_f0_3;
+    float temp_f0_4;
+    float temp_f0_5;
+    float temp_f0_6;
+    float temp_f1;
+    float temp_f3;
+    float temp_f4;
+    float temp_f5;
+    float temp_f6;
+    float var_f29;
+    float var_f30;
+    float var_f31;
+    int var_r30;
+    u32* temp_r28;
+
+    var_r31 = fp;
+    temp_r28 = &fp->x1A88;
+    var_r30 = 0;
+    var_f29 = 0.0f;
+    var_f31 = 0.0f;
+    var_f30 = 0.0f;
+    while (var_r30 < (int) fp->x119E_hurtboxNum) {
+        hurt = var_r31->x11A0_fighterHurtbox;
+        lbColl_800083C4(hurt);
+        temp_f5 = fp->cur_pos.x;
+        temp_f4 = hurt->a_pos.x - temp_f5;
+        temp_f3 = hurt->scl * fp->x34_scale.y;
+        temp_f6 = fp->cur_pos.y;
+        temp_f0 = temp_f4 - temp_f3;
+        if (var_f31 > temp_f0) {
+            var_f31 = temp_f0;
+        }
+        temp_f0_2 = temp_f4 + temp_f3;
+        if (var_f30 < temp_f0_2) {
+            var_f30 = temp_f0_2;
+        }
+        temp_f0_3 = (hurt->a_pos.y - temp_f6) + temp_f3;
+        if (var_f29 < temp_f0_3) {
+            var_f29 = temp_f0_3;
+        }
+        temp_f1 = hurt->b_pos.x - temp_f5;
+        temp_f0_4 = temp_f1 - temp_f3;
+        if (var_f31 > temp_f0_4) {
+            var_f31 = temp_f0_4;
+        }
+        temp_f0_5 = temp_f1 + temp_f3;
+        if (var_f30 < temp_f0_5) {
+            var_f30 = temp_f0_5;
+        }
+        temp_f0_6 = (hurt->b_pos.y - temp_f6) + temp_f3;
+        if (var_f29 < temp_f0_6) {
+            var_f29 = temp_f0_6;
+        }
+        var_r31 += 0x4C;
+        var_r30 += 1;
+    }
+    if (fp->facing_dir > (float) 0.0) {
+        M2C_FIELD(temp_r28, float*, 0x55C) = var_f30;
+        M2C_FIELD(temp_r28, float*, 0x560) = (float) -var_f31;
+    } else {
+        M2C_FIELD(temp_r28, float*, 0x55C) = (float) -var_f31;
+        M2C_FIELD(temp_r28, float*, 0x560) = var_f30;
+    }
+    M2C_FIELD(temp_r28, float*, 0x564) =
+        (float) (0.5 * (f64) (M2C_FIELD(temp_r28, float*, 0x55C) +
+                              M2C_FIELD(temp_r28, float*, 0x560)));
+    M2C_FIELD(temp_r28, float*, 0x568) = var_f29;
 }
+
 #else /* clang-format off */
 { nofralloc
 /* 800A0DA4 0009D984  7C 08 02 A6 */	mflr r0
@@ -1962,7 +2024,19 @@ lbl_800A17C4:
 ASM float ftCo_800A17E4(ftCo_Fighter* fp)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
-    NOT_IMPLEMENTED;
+    float result;
+    if ((s8) fp->x1A8C > 0) {
+        result = (s8) fp->x1A8C / 127.0f;
+    } else {
+        result = (s8) fp->x1A8C * 0.0078125f;
+    }
+    if (result > 1.0) {
+        return 1.0;
+    }
+    if (result < -1.0) {
+        result = -1.0;
+    }
+    return result;
 }
 #else /* clang-format off */
 { nofralloc
@@ -2093,7 +2167,11 @@ lbl_800A1940:
 ASM float ftCo_800A1948(ftCo_Fighter* fp)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
-    NOT_IMPLEMENTED;
+    float result = fp->x1A91 / 255.0;
+    if (result > 1.0) {
+        result = 1.0;
+    }
+    return result;
 }
 #else /* clang-format off */
 { nofralloc
@@ -2119,18 +2197,10 @@ lbl_800A1984:
 #pragma peephole on
 #endif /* clang-format on */
 
-ASM s32 ftCo_800A198C(ftCo_Fighter* fp)
-#if !defined(MUST_MATCH) || defined(WIP)
+HSD_Pad ftCo_800A198C(ftCo_Fighter* fp)
 {
-    NOT_IMPLEMENTED;
+    return fp->x1A88;
 }
-#else /* clang-format off */
-{ nofralloc
-/* 800A198C 0009E56C  80 63 1A 88 */	lwz r3, 0x1a88(r3)
-/* 800A1990 0009E570  4E 80 00 20 */	blr
-}
-#pragma peephole on
-#endif /* clang-format on */
 
 ASM float ftCo_800A1994(ftCo_Fighter* fp)
 #if !defined(MUST_MATCH) || defined(WIP)
@@ -2374,64 +2444,27 @@ lbl_800A1C34:
 #pragma peephole on
 #endif /* clang-format on */
 
-ASM UNK_RET ftCo_800A1C44(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+bool ftCo_800A1C44(ftCo_Fighter* fp)
 {
-    NOT_IMPLEMENTED;
+    if (fp->x2219_b1) {
+        return true;
+    }
+    if (fp->x2164 != 0) {
+        return true;
+    }
+    if (fp->x2168 != 0 && fp->x2338.x == 0) {
+        return true;
+    }
+    if (fp->x221F_b3) {
+        return true;
+    }
+    return false;
 }
-#else /* clang-format off */
-{ nofralloc
-/* 800A1C44 0009E824  88 03 22 19 */	lbz r0, 0x2219(r3)
-/* 800A1C48 0009E828  54 00 D7 FF */	rlwinm. r0, r0, 0x1a, 0x1f, 0x1f
-/* 800A1C4C 0009E82C  41 82 00 0C */	beq lbl_800A1C58
-/* 800A1C50 0009E830  38 60 00 01 */	li r3, 1
-/* 800A1C54 0009E834  4E 80 00 20 */	blr
-lbl_800A1C58:
-/* 800A1C58 0009E838  80 03 21 64 */	lwz r0, 0x2164(r3)
-/* 800A1C5C 0009E83C  2C 00 00 00 */	cmpwi r0, 0
-/* 800A1C60 0009E840  41 82 00 0C */	beq lbl_800A1C6C
-/* 800A1C64 0009E844  38 60 00 01 */	li r3, 1
-/* 800A1C68 0009E848  4E 80 00 20 */	blr
-lbl_800A1C6C:
-/* 800A1C6C 0009E84C  80 03 21 68 */	lwz r0, 0x2168(r3)
-/* 800A1C70 0009E850  2C 00 00 00 */	cmpwi r0, 0
-/* 800A1C74 0009E854  41 82 00 18 */	beq lbl_800A1C8C
-/* 800A1C78 0009E858  80 03 23 38 */	lwz r0, 0x2338(r3)
-/* 800A1C7C 0009E85C  2C 00 00 00 */	cmpwi r0, 0
-/* 800A1C80 0009E860  40 82 00 0C */	bne lbl_800A1C8C
-/* 800A1C84 0009E864  38 60 00 01 */	li r3, 1
-/* 800A1C88 0009E868  4E 80 00 20 */	blr
-lbl_800A1C8C:
-/* 800A1C8C 0009E86C  88 03 22 1F */	lbz r0, 0x221f(r3)
-/* 800A1C90 0009E870  54 00 E7 FF */	rlwinm. r0, r0, 0x1c, 0x1f, 0x1f
-/* 800A1C94 0009E874  41 82 00 0C */	beq lbl_800A1CA0
-/* 800A1C98 0009E878  38 60 00 01 */	li r3, 1
-/* 800A1C9C 0009E87C  4E 80 00 20 */	blr
-lbl_800A1CA0:
-/* 800A1CA0 0009E880  38 60 00 00 */	li r3, 0
-/* 800A1CA4 0009E884  4E 80 00 20 */	blr
-}
-#pragma peephole on
-#endif /* clang-format on */
 
-ASM UNK_RET ftCo_800A1CA8(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+bool ftCo_800A1CA8(ftCo_Fighter* fp)
 {
-    NOT_IMPLEMENTED;
+    return fp->x2168 ? true : false;
 }
-#else /* clang-format off */
-{ nofralloc
-/* 800A1CA8 0009E888  80 03 21 68 */	lwz r0, 0x2168(r3)
-/* 800A1CAC 0009E88C  2C 00 00 00 */	cmpwi r0, 0
-/* 800A1CB0 0009E890  41 82 00 0C */	beq lbl_800A1CBC
-/* 800A1CB4 0009E894  38 60 00 01 */	li r3, 1
-/* 800A1CB8 0009E898  4E 80 00 20 */	blr
-lbl_800A1CBC:
-/* 800A1CBC 0009E89C  38 60 00 00 */	li r3, 0
-/* 800A1CC0 0009E8A0  4E 80 00 20 */	blr
-}
-#pragma peephole on
-#endif /* clang-format on */
 
 ASM UNK_RET ftCo_800A1CC4(UNK_PARAMS)
 #if !defined(MUST_MATCH) || defined(WIP)
@@ -2706,43 +2739,16 @@ lbl_800A2028:
 #pragma peephole on
 #endif /* clang-format on */
 
-ASM bool ftCo_800A2040(ftCo_Fighter* fp)
-#if !defined(MUST_MATCH) || defined(WIP)
+bool ftCo_800A2040(ftCo_Fighter* fp)
 {
-    NOT_IMPLEMENTED;
+    if (Player_8003248C(fp->player_id, fp->x221F_b4) != 1) {
+        return false;
+    }
+    if ((signed) fp->x1A94 == 5) {
+        return false;
+    }
+    return true;
 }
-#else /* clang-format off */
-{ nofralloc
-/* 800A2040 0009EC20  7C 08 02 A6 */	mflr r0
-/* 800A2044 0009EC24  90 01 00 04 */	stw r0, 4(r1)
-/* 800A2048 0009EC28  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800A204C 0009EC2C  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800A2050 0009EC30  7C 7F 1B 78 */	mr r31, r3
-/* 800A2054 0009EC34  88 83 22 1F */	lbz r4, 0x221f(r3)
-/* 800A2058 0009EC38  88 63 00 0C */	lbz r3, 0xc(r3)
-/* 800A205C 0009EC3C  54 84 EF FE */	rlwinm r4, r4, 0x1d, 0x1f, 0x1f
-/* 800A2060 0009EC40  4B F9 04 2D */	bl Player_8003248C
-/* 800A2064 0009EC44  2C 03 00 01 */	cmpwi r3, 1
-/* 800A2068 0009EC48  41 82 00 0C */	beq lbl_800A2074
-/* 800A206C 0009EC4C  38 60 00 00 */	li r3, 0
-/* 800A2070 0009EC50  48 00 00 1C */	b lbl_800A208C
-lbl_800A2074:
-/* 800A2074 0009EC54  80 1F 1A 94 */	lwz r0, 0x1a94(r31)
-/* 800A2078 0009EC58  2C 00 00 05 */	cmpwi r0, 5
-/* 800A207C 0009EC5C  40 82 00 0C */	bne lbl_800A2088
-/* 800A2080 0009EC60  38 60 00 00 */	li r3, 0
-/* 800A2084 0009EC64  48 00 00 08 */	b lbl_800A208C
-lbl_800A2088:
-/* 800A2088 0009EC68  38 60 00 01 */	li r3, 1
-lbl_800A208C:
-/* 800A208C 0009EC6C  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 800A2090 0009EC70  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 800A2094 0009EC74  38 21 00 18 */	addi r1, r1, 0x18
-/* 800A2098 0009EC78  7C 08 03 A6 */	mtlr r0
-/* 800A209C 0009EC7C  4E 80 00 20 */	blr
-}
-#pragma peephole on
-#endif /* clang-format on */
 
 ASM UNK_RET ftCo_800A20A0(UNK_PARAMS)
 #if !defined(MUST_MATCH) || defined(WIP)
@@ -3621,10 +3627,10 @@ lbl_800A2BBC:
 #pragma peephole on
 #endif /* clang-format on */
 
-ASM UNK_RET ftCo_800A2BD4(UNK_PARAMS)
+ASM bool ftCo_800A2BD4(ftCo_Fighter* fp)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
-    NOT_IMPLEMENTED;
+    return fp->facing_dir * (fp->x1ADC - fp->cur_pos.x) >= 0.0 ? true : false;
 }
 #else /* clang-format off */
 { nofralloc
@@ -4116,32 +4122,17 @@ lbl_800A31F8:
 #pragma peephole on
 #endif /* clang-format on */
 
-ASM UNK_RET ftCo_800A3200(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+bool ftCo_800A3200(ftCo_Fighter* fp)
 {
-    NOT_IMPLEMENTED;
+    switch (fp->motion_id) {
+    case ftCo_MS_CliffCatch:
+        return 1;
+    case ftCo_MS_CliffWait:
+        return 2;
+    default:
+        return 0;
+    }
 }
-#else /* clang-format off */
-{ nofralloc
-/* 800A3200 0009FDE0  80 03 00 10 */	lwz r0, 0x10(r3)
-/* 800A3204 0009FDE4  2C 00 00 FD */	cmpwi r0, 0xfd
-/* 800A3208 0009FDE8  41 82 00 1C */	beq lbl_800A3224
-/* 800A320C 0009FDEC  40 80 00 20 */	bge lbl_800A322C
-/* 800A3210 0009FDF0  2C 00 00 FC */	cmpwi r0, 0xfc
-/* 800A3214 0009FDF4  40 80 00 08 */	bge lbl_800A321C
-/* 800A3218 0009FDF8  48 00 00 14 */	b lbl_800A322C
-lbl_800A321C:
-/* 800A321C 0009FDFC  38 60 00 01 */	li r3, 1
-/* 800A3220 0009FE00  4E 80 00 20 */	blr
-lbl_800A3224:
-/* 800A3224 0009FE04  38 60 00 02 */	li r3, 2
-/* 800A3228 0009FE08  4E 80 00 20 */	blr
-lbl_800A322C:
-/* 800A322C 0009FE0C  38 60 00 00 */	li r3, 0
-/* 800A3230 0009FE10  4E 80 00 20 */	blr
-}
-#pragma peephole on
-#endif /* clang-format on */
 
 ASM UNK_RET ftCo_800A3234(UNK_PARAMS)
 #if !defined(MUST_MATCH) || defined(WIP)
@@ -5877,11 +5868,34 @@ lbl_800A4974:
 #pragma peephole on
 #endif /* clang-format on */
 
-ASM UNK_RET ftCo_800A49B4(UNK_PARAMS)
+ASM void ftCo_800A49B4(ftCo_Fighter* fp)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
-    NOT_IMPLEMENTED;
+    float spC;
+    float temp_f2;
+    float temp_f3;
+    float var_f4;
+    f64 temp_f1;
+    f64 temp_f1_2;
+    f64 temp_f1_3;
+
+    temp_f3 = M2C_FIELD(fp, float*, 0xB4) - M2C_FIELD(fp, float*, 0x1AE0);
+    temp_f2 = M2C_FIELD(fp, float*, 0xB0) - M2C_FIELD(fp, float*, 0x1ADC);
+    var_f4 = (temp_f2 * temp_f2) + (temp_f3 * temp_f3);
+    if (var_f4 > 0.0f) {
+        temp_f1 = __frsqrte(var_f4);
+        temp_f1_2 =
+            0.5 * temp_f1 * -(((f64) var_f4 * (temp_f1 * temp_f1)) - 3.0);
+        temp_f1_3 = 0.5 * temp_f1_2 *
+                    -(((f64) var_f4 * (temp_f1_2 * temp_f1_2)) - 3.0);
+        spC = (float) ((f64) var_f4 *
+                       (0.5 * temp_f1_3 *
+                        -(((f64) var_f4 * (temp_f1_3 * temp_f1_3)) - 3.0)));
+        var_f4 = spC;
+    }
+    M2C_FIELD((fp + 0x1A88), float*, 0x5C) = var_f4;
 }
+
 #else /* clang-format off */
 { nofralloc
 /* 800A49B4 000A1594  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -7150,28 +7164,15 @@ lbl_800A59B8:
 #pragma peephole on
 #endif /* clang-format on */
 
-ASM UNK_RET ftCo_800A59C0(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+bool ftCo_800A59C0(UNK_T arg0)
 {
-    NOT_IMPLEMENTED;
+    if ((u32) (((u8) *M2C_FIELD(arg0, u8**, 0xCC) >> 3U) & 0xF) == 3) {
+        return true;
+    }
+    return false;
 }
-#else /* clang-format off */
-{ nofralloc
-/* 800A59C0 000A25A0  80 63 00 CC */	lwz r3, 0xcc(r3)
-/* 800A59C4 000A25A4  88 03 00 00 */	lbz r0, 0(r3)
-/* 800A59C8 000A25A8  54 00 EF 3E */	rlwinm r0, r0, 0x1d, 0x1c, 0x1f
-/* 800A59CC 000A25AC  28 00 00 03 */	cmplwi r0, 3
-/* 800A59D0 000A25B0  40 82 00 0C */	bne lbl_800A59DC
-/* 800A59D4 000A25B4  38 60 00 01 */	li r3, 1
-/* 800A59D8 000A25B8  4E 80 00 20 */	blr
-lbl_800A59DC:
-/* 800A59DC 000A25BC  38 60 00 00 */	li r3, 0
-/* 800A59E0 000A25C0  4E 80 00 20 */	blr
-}
-#pragma peephole on
-#endif /* clang-format on */
 
-ASM UNK_RET ftCo_800A59E4(UNK_PARAMS)
+ASM bool ftCo_800A59E4(ftCo_Fighter* fp)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
     NOT_IMPLEMENTED;
@@ -20187,7 +20188,7 @@ lbl_800B0A80:
 #pragma peephole on
 #endif /* clang-format on */
 
-ASM UNK_RET ftCo_800B0AF4(UNK_PARAMS)
+static ASM void ftCo_800B0AF4(ftCo_Fighter* fp)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
     NOT_IMPLEMENTED;
@@ -22351,7 +22352,7 @@ lbl_800B2770:
 #pragma peephole on
 #endif /* clang-format on */
 
-ASM UNK_RET ftCo_800B2790(UNK_PARAMS)
+ASM void ftCo_800B2790(ftCo_Fighter* fp)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
     NOT_IMPLEMENTED;
@@ -22614,7 +22615,7 @@ lbl_800B2ADC:
 #pragma peephole on
 #endif /* clang-format on */
 
-ASM UNK_RET ftCo_800B2AFC(UNK_PARAMS)
+ASM void ftCo_800B2AFC(ftCo_Fighter* fp)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
     NOT_IMPLEMENTED;
@@ -23245,7 +23246,7 @@ lbl_800B3394:
 #pragma peephole on
 #endif /* clang-format on */
 
-ASM UNK_RET ftCo_800B33B0(UNK_PARAMS)
+static ASM void ftCo_800B33B0(ftCo_Fighter* fp)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
     NOT_IMPLEMENTED;
@@ -23628,7 +23629,15 @@ lbl_800B38E4:
 ASM void ftCo_800B3900(Fighter_GObj* gobj)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
-    NOT_IMPLEMENTED;
+    Fighter* fp;
+
+    fp = gobj->user_data;
+    ftCo_800B33B0(fp);
+    ftCo_800B2AFC(fp);
+    ftCo_800B2790(fp);
+    ftCo_800B3E04(fp);
+    ftCo_800B0AF4(fp);
+    M2C_FIELD(fp, int*, 0x1B04) = (int) (M2C_FIELD(fp, int*, 0x1B04) + 1);
 }
 #else /* clang-format off */
 { nofralloc

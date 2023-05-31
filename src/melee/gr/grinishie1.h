@@ -6,6 +6,6 @@
 
 #include <placeholder.h>
 
-/* 1FCAAC */ /* static */ UNK_RET grInishie1_801FCAAC(UNK_PARAMS);
+/* 1FCAAC */ bool grInishie1_801FCAAC(enum_t);
 
 #endif

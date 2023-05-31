@@ -11,7 +11,7 @@ s32 grCorneria_801E2B80(void);
 bool grCorneria_801E2C34(void);
 void grCorneria_801E2AF4(void);
 void grCorneria_801E2A6C(void);
-/* 1E2D90 */ /* static */ UNK_RET grCorneria_801E2D90(UNK_PARAMS);
+/* 1E2D90 */ bool grCorneria_801E2D90(enum_t);
 /* 1E2E50 */ /* static */ UNK_RET grCorneria_801E2E50(UNK_PARAMS);
 
 #endif

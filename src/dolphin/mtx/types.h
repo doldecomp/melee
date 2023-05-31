@@ -32,6 +32,10 @@ struct S32Vec3 {
     s32 x, y, z;
 };
 
+struct IntVec2 {
+    int x, y;
+};
+
 struct IntVec3 {
     int x, y, z;
 };
