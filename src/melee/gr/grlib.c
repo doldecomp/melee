@@ -17,7 +17,6 @@
 #include <baselib/psappsrt.h>
 
 extern StageInfo stage_info;
-extern u8 HSD_GObj_804D7849;
 extern struct UnkGeneratorStruct* hsd_804D78FC;
 
 static Vec3 grLib_8049EF58[6];

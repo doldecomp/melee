@@ -11,6 +11,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_09CB.h"
+#include "ftCommon/ftCo_09F7.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcommand.h"
 

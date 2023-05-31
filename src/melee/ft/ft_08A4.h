@@ -21,9 +21,6 @@
 /* 09E1D4 */ /* static */ UNK_RET ftCo_8009E1D4(UNK_PARAMS);
 /* 09E4A8 */ /* static */ UNK_RET ftCo_8009E4A8(UNK_PARAMS);
 /* 09E614 */ /* static */ UNK_RET ftCo_8009E614(UNK_PARAMS);
-/* 09F834 */ void ftCo_8009F834(ftCo_GObj*, int, int, int, int, Vec3*, Vec3*,
-                                float);
-/* 0A0098 */ UNK_RET ftCo_800A0098(UNK_PARAMS);
 /* 0A0148 */ UNK_RET ftCo_800A0148(UNK_PARAMS);
 /* 0A0384 */ UNK_RET ftCo_800A0384(UNK_PARAMS);
 /* 0A0508 */ UNK_RET ftCo_800A0508(UNK_PARAMS);
@@ -269,8 +266,6 @@ void ftCo_80092BCC(Fighter_GObj* gobj);
 void ftCo_80092BE8(Fighter_GObj* gobj);
 void ftCo_80093BC0(Fighter_GObj* gobj);
 void ftCo_8009750C(Fighter_GObj* gobj);
-void ftCo_8009F4A4(void);
-void ftCo_8009F578(Fighter*);
 void ftCo_800A0DA4(Fighter*);
 void ftCo_800A101C(Fighter*, s8, s8, s32);
 void ftCo_800B3900(Fighter_GObj* gobj);
@@ -1106,5 +1101,8 @@ void ftCo_YoshiEgg_Anim(Fighter_GObj* gobj);
 void ftCo_YoshiEgg_Coll(Fighter_GObj* gobj);
 void ftCo_YoshiEgg_IASA(Fighter_GObj* gobj);
 void ftCo_YoshiEgg_Phys(Fighter_GObj* gobj);
+/* 0C0658 */ /* static */ UNK_RET ftCo_800C0658(UNK_PARAMS);
+/* 0B463C */ /* static */ UNK_RET ftCo_800B463C(UNK_PARAMS);
+/* 0B46B8 */ /* static */ UNK_RET ftCo_800B46B8(UNK_PARAMS);
 
 #endif
