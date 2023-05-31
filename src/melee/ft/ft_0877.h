@@ -5,6 +5,7 @@
 #include <baselib/forward.h>
 
 #include "ft/fighter.h"
+#include "ftCommon/ftCo_0A01.h"
 
 extern HSD_Joint* ft_8045A1E0[6];
 extern s32 ft_80459B88[FTKIND_MAX];

@@ -7,6 +7,12 @@
 #include <m2c_macros.h>
 #include <dolphin/os/os.h>
 
+/// A label in a jump table
+typedef void (*jmp_t)(void);
+
+/// A jump table
+typedef jmp_t jtbl_t[];
+
 #if defined(__clang__) || defined(__GNUC__)
 #define NOT_IMPLEMENTED                                                       \
     OSPanic(__FILE__, __LINE__, "%s is not implemented!", __func__)

@@ -1,7 +1,9 @@
-#ifndef MELEE_CM_CAMERA_H
-#define MELEE_CM_CAMERA_H
+#ifndef GALE01_028B9C
+#define GALE01_028B9C
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx/forward.h>
+
+#include <placeholder.h>
 
 struct _CameraBox* Camera_80029020(void);
 void Camera_800290D4(struct _CameraBox*);
@@ -33,5 +35,6 @@ bool Camera_80030A78(void);
 void Camera_80030740(u8 r, u8 g, u8 b);
 
 void Camera_8002F8F4(void);
+/* 03118C */ /* static */ UNK_RET Camera_8003118C(UNK_PARAMS);
 
 #endif

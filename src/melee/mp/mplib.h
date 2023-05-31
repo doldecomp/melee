@@ -1,10 +1,11 @@
-#ifndef MELEE_MP_MPLIB_H
-#define MELEE_MP_MPLIB_H
+#ifndef GALE01_04D164
+#define GALE01_04D164
+
+#include <dolphin/mtx/forward.h>
 
 #include "ft/fighter.h"
 
 #include <common_structs.h>
-#include <dolphin/mtx/types.h>
 
 typedef void (*mpLib_Callback)(s32, s32, CollData*, s32, s32, f32);
 
@@ -68,5 +69,6 @@ enum_t mpLib_80054C6C(int);
 void mpLib_80058AA0(void);
 enum_t mpLib_8004E090(int idx, Vec3*, f32*, u32*, Vec3* normal);
 void mpLib_800569EC(void);
+/* 04F8A4 */ /* static */ UNK_RET mpLib_8004F8A4(UNK_PARAMS);
 
 #endif

@@ -1,6 +1,8 @@
 #include <platform.h>
 #include "ftMasterHand/forward.h"
 
+#include <placeholder.h>
+
 struct {
     enum_t asids[18];
     s8 bytes[64];
