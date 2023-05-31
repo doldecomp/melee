@@ -157,6 +157,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_StopWall.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_StopCeil.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DownDamage.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_MissFoot.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_09F4.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdynamics.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMr_Strings.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_08A4.s.o\

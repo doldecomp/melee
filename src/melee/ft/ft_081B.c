@@ -7,6 +7,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftwalljump.h"
+#include "ftCommon/ftCo_MissFoot.h"
 #include "ftCommon/ftCo_Ottotto.h"
 #include "ftCommon/ftCo_StopCeil.h"
 #include "ftCommon/ftCo_StopWall.h"
