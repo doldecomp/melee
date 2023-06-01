@@ -145,7 +145,6 @@
 /* 0AC5A0 */ static UNK_RET ftCo_800AC5A0(UNK_PARAMS);
 /* 0B07FC */ void ftCo_800B3900(Fighter_GObj* gobj);
 /* 0B0858 */ UNK_RET ftCo_800B3958(UNK_PARAMS);
-/* 0B3E04 */ void ftCo_800B3E04(ftCo_Fighter* fp);
 /* 0B2AFC */ static void ftCo_800B2AFC(ftCo_Fighter* fp);
 
 #endif

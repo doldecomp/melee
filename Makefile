@@ -104,9 +104,6 @@ INCLUDES = $(addprefix -i ,$(INCLUDE_DIRS)) -I- $(addprefix -i ,$(SYSTEM_INCLUDE
 
 
 ASFLAGS := -mgekko -I src
-ifneq ($(NON_MATCHING),1)
-	ASFLAGS += --defsym MUST_MATCH=1
-endif
 LDFLAGS := -fp hard -nodefaults
 ifeq ($(GENERATE_MAP),1)
 	LDFLAGS += -map $(MAP)
@@ -125,6 +122,7 @@ CFLAGS = -msgstyle $(MSG_STYLE) \
 		-maxerrors $(MAX_ERRORS)
 
 ifneq ($(NON_MATCHING),1)
+	ASFLAGS += --defsym MUST_MATCH=1
 	CFLAGS += -DMUST_MATCH
 endif
 
@@ -145,6 +143,7 @@ ifeq ($(VERBOSE),1)
 endif
 
 ifeq ($(WIP),1)
+	ASFLAGS += --defsym WIP=1
 	CFLAGS += -DWIP
 endif
 

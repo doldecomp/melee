@@ -2,6 +2,7 @@
 
 #include "ftCo_0A01.h"
 
+#include "ftCo_0B3E.h"
 #include "ftCo_ItemGet.h"
 
 #include "cm/camera.h"

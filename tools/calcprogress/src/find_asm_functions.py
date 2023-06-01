@@ -9,7 +9,7 @@ _valid_suffixes = {".c", ".h"}
 
 _asm_func_re = re.compile(
     r"^[\s\w\*]*?\b(?:asm|ASM)\b[\s\w\*]*?"
-    r"(?P<type>[\s\w\*]+)\b(?P<name>\w+)\s*\(.*?\)\s*\{.*?}",
+    r"(?P<type>[\s\w\*]+)\b(?P<name>\w+)\s*\(.*?\).*?\{.*?}",
     flags=re.MULTILINE | re.DOTALL,
 )
 
