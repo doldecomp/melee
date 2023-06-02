@@ -185,7 +185,7 @@ static void doAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
     ftPe_DatAttrs* da = fp->dat_attrs;
     if (fp->cmd_vars[cmd_anim_state] == anim_state_1) {
         fp->cmd_vars[cmd_anim_state] = anim_state_2;
-        ftColl_8007B1B8(gobj, &da->xAC, onUnkHit);
+        ftColl_8007B1B8(gobj, (ShieldDesc*) &da->xAC, onUnkHit);
         fp->x221B_b3 = true;
         fp->shield_unk0 = da->xA8;
         fp->shield_unk1 = da->xA8;
@@ -277,7 +277,7 @@ static void setupColl(HSD_GObj* gobj)
     fp->cb.x21D4_callback_EnterHitlag = onEnterHitlag;
     fp->cb.x21D8_callback_ExitHitlag = onExitHitlag;
     if (fp->cmd_vars[cmd_anim_state] == anim_state_2) {
-        ftColl_8007B1B8(gobj, &da->xAC, onUnkHit);
+        ftColl_8007B1B8(gobj, (ShieldDesc*) &da->xAC, onUnkHit);
         fp->x221B_b3 = true;
     }
 }

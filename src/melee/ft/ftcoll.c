@@ -6057,127 +6057,45 @@ lbl_8007B1A8:
 }
 #endif /* clang-format on */
 
-ASM void ftColl_8007B1B8(Fighter_GObj* gobj, AbsorbDesc* absorb,
-                         HSD_GObjEvent cb)
-#if !defined(MUST_MATCH) || defined(WIP)
+void ftColl_8007B1B8(Fighter_GObj* gobj, ShieldDesc* shield, HSD_GObjEvent cb)
 {
-    NOT_IMPLEMENTED;
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x221B_b0 = true;
+    fp->x221B_b1 = false;
+    fp->x221B_b2 = false;
+    fp->x221B_b3 = false;
+    fp->x221B_b4 = false;
+    fp->cb.x21C4_callback_OnShieldHit = cb;
+    fp->shield_hit.bone = fp->parts[shield->bone].joint;
+    fp->shield_hit.size = shield->radius;
+    fp->shield_hit.offset = shield->pos;
 }
-#else /* clang-format off */
-{ nofralloc
-/* 8007B1B8 00077D98  80 E3 00 2C */	lwz r7, 0x2c(r3)
-/* 8007B1BC 00077D9C  38 C0 00 01 */	li r6, 1
-/* 8007B1C0 00077DA0  38 60 00 00 */	li r3, 0
-/* 8007B1C4 00077DA4  88 07 22 1B */	lbz r0, 0x221b(r7)
-/* 8007B1C8 00077DA8  50 C0 3E 30 */	rlwimi r0, r6, 7, 0x18, 0x18
-/* 8007B1CC 00077DAC  98 07 22 1B */	stb r0, 0x221b(r7)
-/* 8007B1D0 00077DB0  88 07 22 1B */	lbz r0, 0x221b(r7)
-/* 8007B1D4 00077DB4  50 60 36 72 */	rlwimi r0, r3, 6, 0x19, 0x19
-/* 8007B1D8 00077DB8  98 07 22 1B */	stb r0, 0x221b(r7)
-/* 8007B1DC 00077DBC  88 07 22 1B */	lbz r0, 0x221b(r7)
-/* 8007B1E0 00077DC0  50 60 2E B4 */	rlwimi r0, r3, 5, 0x1a, 0x1a
-/* 8007B1E4 00077DC4  98 07 22 1B */	stb r0, 0x221b(r7)
-/* 8007B1E8 00077DC8  88 07 22 1B */	lbz r0, 0x221b(r7)
-/* 8007B1EC 00077DCC  50 60 26 F6 */	rlwimi r0, r3, 4, 0x1b, 0x1b
-/* 8007B1F0 00077DD0  98 07 22 1B */	stb r0, 0x221b(r7)
-/* 8007B1F4 00077DD4  88 07 22 1B */	lbz r0, 0x221b(r7)
-/* 8007B1F8 00077DD8  50 60 1F 38 */	rlwimi r0, r3, 3, 0x1c, 0x1c
-/* 8007B1FC 00077DDC  98 07 22 1B */	stb r0, 0x221b(r7)
-/* 8007B200 00077DE0  90 A7 21 C4 */	stw r5, 0x21c4(r7)
-/* 8007B204 00077DE4  80 04 00 00 */	lwz r0, 0(r4)
-/* 8007B208 00077DE8  80 67 05 E8 */	lwz r3, 0x5e8(r7)
-/* 8007B20C 00077DEC  54 00 20 36 */	slwi r0, r0, 4
-/* 8007B210 00077DF0  7C 03 00 2E */	lwzx r0, r3, r0
-/* 8007B214 00077DF4  90 07 19 C0 */	stw r0, 0x19c0(r7)
-/* 8007B218 00077DF8  C0 04 00 10 */	lfs f0, 0x10(r4)
-/* 8007B21C 00077DFC  D0 07 19 E0 */	stfs f0, 0x19e0(r7)
-/* 8007B220 00077E00  80 64 00 04 */	lwz r3, 4(r4)
-/* 8007B224 00077E04  80 04 00 08 */	lwz r0, 8(r4)
-/* 8007B228 00077E08  90 67 19 D4 */	stw r3, 0x19d4(r7)
-/* 8007B22C 00077E0C  90 07 19 D8 */	stw r0, 0x19d8(r7)
-/* 8007B230 00077E10  80 04 00 0C */	lwz r0, 0xc(r4)
-/* 8007B234 00077E14  90 07 19 DC */	stw r0, 0x19dc(r7)
-/* 8007B238 00077E18  4E 80 00 20 */	blr
-}
-#endif /* clang-format on */
 
-ASM void ftColl_CreateReflectHit(Fighter_GObj* gobj, ReflectDesc* reflect,
-                                 HSD_GObjEvent cb)
-#if !defined(MUST_MATCH) || defined(WIP)
+void ftColl_CreateReflectHit(Fighter_GObj* gobj, ReflectDesc* reflect,
+                             HSD_GObjEvent cb)
 {
-    NOT_IMPLEMENTED;
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x2218_b3 = true;
+    fp->x2218_b4 = false;
+    fp->cb.x21C8_callback_OnReflectHit = cb;
+    fp->ReflectAttr.x1A30_maxDamage = reflect->x4_max_damage;
+    fp->ReflectAttr.x1A34_damageMul = reflect->x18_damage_mul;
+    fp->ReflectAttr.x1A38_speedMul = reflect->x1C_speed_mul;
+    fp->x2218_b5 = reflect->x20_behavior;
+    fp->reflect_hit.bone = fp->parts[reflect->x0_bone_id].joint;
+    fp->reflect_hit.size = reflect->x14_size;
+    fp->reflect_hit.offset = reflect->x8_offset;
 }
-#else /* clang-format off */
-{ nofralloc
-/* 8007B23C 00077E1C  80 E3 00 2C */	lwz r7, 0x2c(r3)
-/* 8007B240 00077E20  38 C0 00 01 */	li r6, 1
-/* 8007B244 00077E24  38 60 00 00 */	li r3, 0
-/* 8007B248 00077E28  88 07 22 18 */	lbz r0, 0x2218(r7)
-/* 8007B24C 00077E2C  50 C0 26 F6 */	rlwimi r0, r6, 4, 0x1b, 0x1b
-/* 8007B250 00077E30  98 07 22 18 */	stb r0, 0x2218(r7)
-/* 8007B254 00077E34  88 07 22 18 */	lbz r0, 0x2218(r7)
-/* 8007B258 00077E38  50 60 1F 38 */	rlwimi r0, r3, 3, 0x1c, 0x1c
-/* 8007B25C 00077E3C  98 07 22 18 */	stb r0, 0x2218(r7)
-/* 8007B260 00077E40  90 A7 21 C8 */	stw r5, 0x21c8(r7)
-/* 8007B264 00077E44  80 04 00 04 */	lwz r0, 4(r4)
-/* 8007B268 00077E48  90 07 1A 30 */	stw r0, 0x1a30(r7)
-/* 8007B26C 00077E4C  C0 04 00 18 */	lfs f0, 0x18(r4)
-/* 8007B270 00077E50  D0 07 1A 34 */	stfs f0, 0x1a34(r7)
-/* 8007B274 00077E54  C0 04 00 1C */	lfs f0, 0x1c(r4)
-/* 8007B278 00077E58  D0 07 1A 38 */	stfs f0, 0x1a38(r7)
-/* 8007B27C 00077E5C  88 64 00 20 */	lbz r3, 0x20(r4)
-/* 8007B280 00077E60  88 07 22 18 */	lbz r0, 0x2218(r7)
-/* 8007B284 00077E64  50 60 17 7A */	rlwimi r0, r3, 2, 0x1d, 0x1d
-/* 8007B288 00077E68  98 07 22 18 */	stb r0, 0x2218(r7)
-/* 8007B28C 00077E6C  80 04 00 00 */	lwz r0, 0(r4)
-/* 8007B290 00077E70  80 67 05 E8 */	lwz r3, 0x5e8(r7)
-/* 8007B294 00077E74  54 00 20 36 */	slwi r0, r0, 4
-/* 8007B298 00077E78  7C 03 00 2E */	lwzx r0, r3, r0
-/* 8007B29C 00077E7C  90 07 19 E4 */	stw r0, 0x19e4(r7)
-/* 8007B2A0 00077E80  C0 04 00 14 */	lfs f0, 0x14(r4)
-/* 8007B2A4 00077E84  D0 07 1A 04 */	stfs f0, 0x1a04(r7)
-/* 8007B2A8 00077E88  80 64 00 08 */	lwz r3, 8(r4)
-/* 8007B2AC 00077E8C  80 04 00 0C */	lwz r0, 0xc(r4)
-/* 8007B2B0 00077E90  90 67 19 F8 */	stw r3, 0x19f8(r7)
-/* 8007B2B4 00077E94  90 07 19 FC */	stw r0, 0x19fc(r7)
-/* 8007B2B8 00077E98  80 04 00 10 */	lwz r0, 0x10(r4)
-/* 8007B2BC 00077E9C  90 07 1A 00 */	stw r0, 0x1a00(r7)
-/* 8007B2C0 00077EA0  4E 80 00 20 */	blr
-}
-#endif /* clang-format on */
 
-ASM void ftColl_CreateAbsorbHit(Fighter_GObj* gobj, AbsorbDesc* absorb)
-#if !defined(MUST_MATCH) || defined(WIP)
+void ftColl_CreateAbsorbHit(Fighter_GObj* gobj, AbsorbDesc* absorb)
 {
-    NOT_IMPLEMENTED;
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x2218_b6 = true;
+    fp->x2218_b7 = false;
+    fp->absorb_hit.bone = fp->parts[absorb->x0_bone_id].joint;
+    fp->absorb_hit.size = absorb->x10_size;
+    fp->absorb_hit.offset = absorb->x4_offset;
 }
-#else /* clang-format off */
-{ nofralloc
-/* 8007B2C4 00077EA4  80 C3 00 2C */	lwz r6, 0x2c(r3)
-/* 8007B2C8 00077EA8  38 A0 00 01 */	li r5, 1
-/* 8007B2CC 00077EAC  38 60 00 00 */	li r3, 0
-/* 8007B2D0 00077EB0  88 06 22 18 */	lbz r0, 0x2218(r6)
-/* 8007B2D4 00077EB4  50 A0 0F BC */	rlwimi r0, r5, 1, 0x1e, 0x1e
-/* 8007B2D8 00077EB8  98 06 22 18 */	stb r0, 0x2218(r6)
-/* 8007B2DC 00077EBC  88 06 22 18 */	lbz r0, 0x2218(r6)
-/* 8007B2E0 00077EC0  50 60 07 FE */	rlwimi r0, r3, 0, 0x1f, 0x1f
-/* 8007B2E4 00077EC4  98 06 22 18 */	stb r0, 0x2218(r6)
-/* 8007B2E8 00077EC8  80 04 00 00 */	lwz r0, 0(r4)
-/* 8007B2EC 00077ECC  80 66 05 E8 */	lwz r3, 0x5e8(r6)
-/* 8007B2F0 00077ED0  54 00 20 36 */	slwi r0, r0, 4
-/* 8007B2F4 00077ED4  7C 03 00 2E */	lwzx r0, r3, r0
-/* 8007B2F8 00077ED8  90 06 1A 08 */	stw r0, 0x1a08(r6)
-/* 8007B2FC 00077EDC  C0 04 00 10 */	lfs f0, 0x10(r4)
-/* 8007B300 00077EE0  D0 06 1A 28 */	stfs f0, 0x1a28(r6)
-/* 8007B304 00077EE4  80 64 00 04 */	lwz r3, 4(r4)
-/* 8007B308 00077EE8  80 04 00 08 */	lwz r0, 8(r4)
-/* 8007B30C 00077EEC  90 66 1A 1C */	stw r3, 0x1a1c(r6)
-/* 8007B310 00077EF0  90 06 1A 20 */	stw r0, 0x1a20(r6)
-/* 8007B314 00077EF4  80 04 00 0C */	lwz r0, 0xc(r4)
-/* 8007B318 00077EF8  90 06 1A 24 */	stw r0, 0x1a24(r6)
-/* 8007B31C 00077EFC  4E 80 00 20 */	blr
-}
-#endif /* clang-format on */
 
 ASM void ftColl_8007B320(Fighter_GObj* gobj)
 #if !defined(MUST_MATCH) || defined(WIP)
