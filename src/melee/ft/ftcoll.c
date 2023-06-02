@@ -2964,7 +2964,7 @@ lbl_80078A10:
 
 extern float const ftColl_804D8310;
 
-inline HitCapsule* ftHitGetPtr(Fighter* fp, u32 i)
+inline HitCapsule* HitCapsuleGetPtr(Fighter* fp, u32 i)
 {
     return &fp->x914[i];
 }
@@ -3016,7 +3016,7 @@ ASM void ftColl_80078A2C(Fighter_GObj* this_gobj)
                    !((victim_fp->x2224_b2))))))
             {
                 for (i = 0; i < 4; i++) {
-                    this_hit = ftHitGetPtr(this_fp, i);
+                    this_hit = HitCapsuleGetPtr(this_fp, i);
                     if ((this_hit->state != HitCapsule_Disabled) &&
                         (this_hit->element == (u32) HitElement_Catch) &&
                         ((((this_hit->x40_b2) &&
@@ -3221,11 +3221,166 @@ lbl_80078C50:
 }
 #endif /* clang-format on */
 
-ASM void ftColl_80078C70(Fighter_GObj* gobj)
+ASM void ftColl_80078C70(Fighter_GObj* this_gobj)
 #if !defined(MUST_MATCH) || defined(WIP)
-{
-    NOT_IMPLEMENTED;
-}
+{ // clang-format off
+    const static u32 hit_sfx[20];
+    Fighter* this_fp;
+    HSD_GObj* victim_gobj;
+    bool is_same_gobj;
+    s32 var_unk;
+    Fighter* victim_fp;
+    u32 i;
+    HitCapsule* temp_r23;
+    u32 n;
+    u32 m;
+    u32 j;
+    s32 var_r0_2;
+    s32 var_r22;
+    s32 var_r17;
+    HitCapsule* temp_r16;
+    HitCapsule* this_hit;
+    s32 var_r4;
+    s32 var_r3;
+    u8 var_r0;
+
+    this_fp = this_gobj->user_data;
+
+    if (gm_8016B1C4() == 0) {
+        victim_gobj = HSD_GObj_Entities->fighters;
+        is_same_gobj = false;
+        while (victim_gobj != NULL) {
+            if (this_gobj == victim_gobj) {
+                is_same_gobj = true;
+            } else {
+                victim_fp = victim_gobj->user_data;
+                var_r4 = false;
+                if ((victim_fp->x1064_thrownHitbox.owner != NULL)) {
+                    if ((u8) this_fp->player_id != (u8) victim_fp->grabber_unk1) {
+                        var_r4 = true;
+                    } else {
+                        goto next_gobj;
+                    }
+                }
+            if ((var_r4 != 0) || ((u8) this_fp->player_id != (u8) victim_fp->player_id)) {
+                if ((gm_8016B168() != false) && (gm_8016B0D4() == false) && !(((u8) victim_fp->x2225_b4))) {
+                    var_r0 = (victim_fp->x1064_thrownHitbox.owner != NULL) ? victim_fp->x119C_teamUnk : victim_fp->x61B_team;
+                    if ((u8) this_fp->x61B_team != var_r0) {
+                        goto block_16;
+                    }
+                } else {
+                block_16:
+                    if (victim_fp->x1064_thrownHitbox.owner != this_gobj) {
+                        if ((is_same_gobj != false) && !(((u8) this_fp->x221B >> 2U) & 1)) {
+                            for (var_unk = 0, i = 0; i < (sizeof(this_fp->x914) / sizeof(HitCapsule)); i++) {
+                                this_hit = (HitCapsule*) HitCapsuleGetPtr( this_fp, i);
+                                if ((this_hit->state != HitCapsule_Disabled) && (!((u8) this_hit->x43_b2) && ((((u32) this_hit->element == (u8) HitElement_Catch) == 0)) && ((u32) this_hit->element != (u8) HitElement_Inert) && ((((this_hit->x40_b0) == 1) != 0)) && ((u32) (((u8) this_hit->x42_b5) == 1) && (((this_hit->x40_b2) && (victim_fp->ground_or_air == GA_Air)) || (((u8) this_hit->x40_b3) && (victim_fp->ground_or_air == GA_Ground))) && (lbColl_8000ACFC(victim_fp, this_hit) == 0)))) { ftColl_804D6560[i] = 1; var_unk++;
+                                } else {
+                                    ftColl_804D6560[i] = 0;
+                                }
+                            }
+                        }
+                        for (j = 0; j < (sizeof(victim_fp->x914) / sizeof(HitCapsule)); j++) {
+                            temp_r23 = (HitCapsule*) HitCapsuleGetPtr( victim_fp, j);
+                            if ((temp_r23->state != HitCapsule_Disabled) && ((u32) temp_r23->element != (u32) HitElement_Catch) && ((u32) (((u8) temp_r23->x42_b5)) == true) && (((((u8) temp_r23->x40_b2)) && (this_fp->ground_or_air == GA_Air)) || ((((u8) temp_r23->x40_b3)) && ((s32) this_fp->ground_or_air == 0))) && (!(((u8) (temp_r23 ->hit_grabbed_victim_only))) || (((victim_fp->victim_gobj == NULL) != 0)) || !(((u8) victim_fp->x221B_b5)) || (victim_fp->victim_gobj == this_gobj)) && (lbColl_8000ACFC(this_fp, temp_r23) == false)) {
+                                var_r22 = var_r0_2 = ((u8) temp_r23->x43_b2 != false) ? true : false;
+                                if ((is_same_gobj != false) && (var_r0_2 == false) && (this_gobj != victim_fp->victim_gobj) && ((s32) this_fp->ground_or_air == GA_Ground) && ((s32) victim_fp->ground_or_air == GA_Ground) && !((u8) this_fp->x221B_b5) && ((u32) temp_r23->element != (u32) HitElement_Inert) && ((u32) (((u8) temp_r23->x40_b0)) == true) && (var_unk != 0)) {
+                                    var_r17 = 0;
+                                    for (m = 0; m < (sizeof(this_fp->x914) / sizeof(HitCapsule)); m++) {
+                                        if ((u8) ftColl_804D6560[m] != 0) {
+                                            temp_r16 = (HitCapsule*) HitCapsuleGetPtr( this_fp, m);
+                                            if (((lbColl_80007AFC( temp_r23, temp_r16, victim_fp ->x34_scale .y, this_fp ->x34_scale .y) != false) && (ftColl_8007699C( victim_fp, temp_r23, this_fp, temp_r16) != false))) {
+                                                var_r17 = true;
+                                                break;
+                                            } else {
+                                                continue;
+                                            }
+                                        }
+                                    }
+                                    if (var_r17 == false) {
+                                        goto block_66;
+                                    }
+                                } else {
+                                block_66:
+                                    if (this_fp->x221B_b0) {
+                                        var_r3 = true;
+                                        if (this_fp->x221B_b3) {
+                                            if (1.0F == this_fp->facing_dir) {
+                                                if (this_fp->cur_pos .x < victim_fp->cur_pos .x) {
+                                                    var_r3 = false;
+                                                }
+                                            } else if (this_fp->cur_pos .x > victim_fp ->cur_pos.x) {
+                                                var_r3 = false;
+                                            }
+                                        }
+                                        if ((((u8) this_fp ->x221B_b4)) && !(((u8) temp_r23->x42_b4))) {
+                                            var_r3 = false;
+                                        }
+                                        if ((var_r3 != false) && (lbColl_80007BCC( temp_r23, &this_fp->shield_hit, ftCommon_8007F804( this_fp), var_r22, victim_fp->x34_scale .y, this_fp->x34_scale.y, this_fp->cur_pos.z) != false)) {
+                                            if ((u32) temp_r23 ->element != (u32) HitElement_Inert) {
+                                                ftColl_80076CBC( (Fighter*) victim_fp, temp_r23, this_fp);
+                                            } else {
+                                                victim_fp->x221C_b5 = true;
+                                                victim_fp->unk_gobj = this_gobj;
+                                                goto block_81;
+                                            }
+                                        } else {
+                                            goto block_81;
+                                        }
+                                    } else {
+                                    block_81:
+                                        if (((s32) this_fp->x1988 != 2) && ((s32) this_fp->x198C != 2)) {
+                                            for ( n = 0; n < this_fp ->x119E_hurtboxNum; n++) {
+                                                if (lbColl_8000805C( temp_r23, &this_fp ->x11A0_fighterHurtbox [n], ftCommon_8007F804( this_fp), var_r22, victim_fp ->x34_scale .y, this_fp ->x34_scale .y, this_fp ->cur_pos .z) != false) {
+                                                    if ((u32) temp_r23->element != (u32) HitElement_Inert) {
+                                                        if (ftColl_80076ED8((Fighter*) victim_fp, temp_r23, this_fp, &this_fp ->x11A0_fighterHurtbox [n]) != false) {
+                                                            if (((s32) this_fp ->x1988 != 0) || ((s32) this_fp ->x198C != 0) || (((u8) this_fp ->x221D >> 1U) & 1) || ((&this_fp->x11A0_fighterHurtbox[n])->tangibility != 0)) {
+                                                                ft_80088148(this_fp, hit_sfx [temp_r23 ->sfx_severity], 0x7FU, 0x40U);
+                                                                var_r0_2 = true;
+                                                            } else {
+                                                                var_r0_2 = false;
+                                                            }
+                                                            if (var_r0_2 == 0) {
+                                                                if (((u32) temp_r23 ->sfx_kind == 0xDU) && ((u32) temp_r23 ->sfx_severity == 2)) {
+                                                                    this_fp->x215C = lbColl_80005BB0(temp_r23, (0x72 + (this_fp->player_id * 2) + (u8) this_fp->x221F_b4));
+                                                                } else {
+                                                                    this_fp->x2160 = lbColl_80005BB0(temp_r23, (0x7E + (this_fp ->player_id * 2) + (u8) this_fp ->x221F_b4));
+                                                                }
+                                                            }
+                                                        }
+                                                    } else {
+                                                        victim_fp ->unk_gobj = this_gobj;
+                                                    }
+
+                                                    /* if(temp_r23->x70_coll_distance
+                                                         * >=
+                                                         * p_ftCommonData->x7A8)
+                                                         */
+                                                    break;
+
+                                                    // else continue;
+
+                                                    // This fix continues to advance the loop if a phantom hit
+                                                    // occurs. Done to prevent astronomical edge case where the game exits
+                                                    // the code due to hurtbox priority even if the hitbox is making contact with
+                                                    // subsequent, lower priority hurtboxes.
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        next_gobj:
+            victim_gobj = victim_gobj->next;
+        }
+    }
+} // clang-format on
+
 #else /* clang-format off */
 { nofralloc
 /* 80078C70 00075850  7C 08 02 A6 */	mflr r0
