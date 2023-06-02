@@ -44,7 +44,7 @@ void ftColl_8007AEE0(Fighter_GObj*);
 void ftColl_8007AF28(Fighter_GObj* gobj);
 void ftColl_8007AFF8(Fighter_GObj*);
 void ftColl_8007B0C0(Fighter_GObj*, Tangibility);
-void ftColl_8007B1B8(Fighter_GObj*, AbsorbDesc*, HSD_GObjEvent);
+void ftColl_8007B1B8(Fighter_GObj* gobj, ShieldDesc* shield, HSD_GObjEvent cb);
 void ftColl_8007B320(Fighter_GObj*);
 void ftColl_8007B4E0(Fighter_GObj*);
 void ftColl_8007B62C(Fighter_GObj*, bool);

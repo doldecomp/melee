@@ -9,15 +9,15 @@
 
 #include <placeholder.h>
 
+#ifdef M2CTX
+#include <dolphin/mtx/types.h>
+
 struct _m2c_stack_ftCo_80091030 {
     /* 0x00 */ char pad_0[0x20];
     /* 0x20 */ Vec3 sp20;
     /* 0x2C */ struct UNK_SAMUS_S2 sp2C;
     /* 0x58 */ char pad_54[0x1C];
 }; /* size = 0x70 */
-
-#ifdef M2CTX
-#include <dolphin/mtx/types.h>
 
 struct _m2c_stack_ftCo_80090B60 {
     /* 0x000 */ char pad_0[0x28];

@@ -28,7 +28,7 @@ void ftLk_AttackAir_800EB3BC(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x5F8 == 0) {
         ftLk_DatAttrs* da = fp->dat_attrs;
-        ftColl_8007B1B8(gobj, &da->xC4, ftLk_800EB334);
+        ftColl_8007B1B8(gobj, (ShieldDesc*) &da->xC4, ftLk_800EB334);
         fp->x221B_b3 = true;
         fp->x221B_b4 = true;
         fp->x221B_b2 = true;

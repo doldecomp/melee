@@ -68,7 +68,8 @@ void ftMs_SpecialLw_Anim(HSD_GObj* gobj)
 
     if (fp->cmd_vars[1] == 1) {
         fp->cmd_vars[1] = 2;
-        ftColl_8007B1B8(gobj, &da->x64, &ftMs_SpecialLw_80139140);
+        ftColl_8007B1B8(gobj, (ShieldDesc*) &da->x64,
+                        &ftMs_SpecialLw_80139140);
         fp->x221B_b1 = true;
         fp->shield_unk0 = da->x60;
         fp->shield_unk1 = da->x60;
@@ -93,7 +94,8 @@ void ftMs_SpecialAirLw_Anim(HSD_GObj* gobj)
 
     if (fp->cmd_vars[1] == 1) {
         fp->cmd_vars[1] = 2;
-        ftColl_8007B1B8(gobj, &da->x64, &ftMs_SpecialLw_80139140);
+        ftColl_8007B1B8(gobj, (ShieldDesc*) &da->x64,
+                        &ftMs_SpecialLw_80139140);
         fp->x221B_b1 = true;
         fp->shield_unk0 = da->x60;
         fp->shield_unk1 = da->x60;
@@ -167,7 +169,8 @@ void ftMs_SpecialLw_80138D38(HSD_GObj* gobj)
         MarsAttributes* da = getFtSpecialAttrsD(fp);
 
         if (fp->cmd_vars[1] == 2) {
-            ftColl_8007B1B8(gobj, &da->x64, &ftMs_SpecialLw_80139140);
+            ftColl_8007B1B8(gobj, (ShieldDesc*) &da->x64,
+                            &ftMs_SpecialLw_80139140);
             fp->x221B_b1 = true;
         }
     }
@@ -192,7 +195,8 @@ void ftMs_SpecialLw_80138DD0(HSD_GObj* gobj)
         MarsAttributes* da = getFtSpecialAttrsD(fp);
 
         if (fp->cmd_vars[1] == 2) {
-            ftColl_8007B1B8(gobj, &da->x64, &ftMs_SpecialLw_80139140);
+            ftColl_8007B1B8(gobj, (ShieldDesc*) &da->x64,
+                            &ftMs_SpecialLw_80139140);
             fp->x221B_b1 = true;
         }
     }

@@ -1094,7 +1094,7 @@ void ftCo_80092450(ftCo_GObj* gobj)
     absorb.x0_bone_id = fp->ft_data->x8->unk11;
     absorb.x10_size = 1;
     absorb.x4_offset.x = absorb.x4_offset.y = absorb.x4_offset.z = 0.0f;
-    ftColl_8007B1B8(gobj, &absorb, ftCo_80092E50);
+    ftColl_8007B1B8(gobj, (ShieldDesc*) &absorb, ftCo_80092E50);
     fp->x221A_b7 = true;
 }
 #endif

@@ -91,6 +91,15 @@ typedef struct _AbsorbDesc {
     /* +10 */ float x10_size;
 } AbsorbDesc;
 
+typedef struct _ShieldDesc {
+    int bone;
+    Vec3 pos;
+    f32 radius;
+    f32 dmg_mul;
+    f32 vel_mul;
+    u8 flags : 8;
+} ShieldDesc;
+
 typedef struct ColorOverlay {
     s32 x0_timer;        // 0x0
     s32 x4_pri;          // 0x4  this colanims priority, lower = will persist
