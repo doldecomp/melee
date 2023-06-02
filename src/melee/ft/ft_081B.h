@@ -35,7 +35,7 @@ void ft_80084F3C(Fighter_GObj* gobj);
 void ft_80084280(Fighter_GObj*);
 void ft_8008403C(Fighter_GObj*, HSD_GObjEvent);
 void ft_80084DB0(Fighter_GObj*);
-void ft_80082C74(Fighter_GObj*, void (*)(Fighter_GObj*, float lag));
+void ft_80082C74(Fighter_GObj*, HSD_GObjEvent);
 
 /// @todo Name does not follow our conventions.
 bool ft_CheckGroundAndLedge(Fighter_GObj* gobj, s32 direction);

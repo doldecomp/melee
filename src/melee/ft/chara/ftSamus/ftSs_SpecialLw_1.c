@@ -51,12 +51,12 @@ void ftSs_SpecialLw_8012AEBC(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftColl_8007B0C0(gobj, 2);
 
-    unk_struct.intvec.x = 2;
-    unk_struct.intvec.y = 1;
-    unk_struct.intvec.z = 0;
-    unk_struct.vec1.x = unk_struct.vec1.y = unk_struct.vec1.z = 0.0f;
-    unk_struct.vec2.x = unk_struct.vec2.y = unk_struct.vec2.z = 0.0f;
-    unk_struct.single_float = 3.0f;
+    unk_struct.parts[0] = 2;
+    unk_struct.parts[1] = 1;
+    unk_struct.parts[2] = 0;
+    unk_struct.vec1.x = unk_struct.vec1.y = unk_struct.vec1.z = 0;
+    unk_struct.vec2.x = unk_struct.vec2.y = unk_struct.vec2.z = 0;
+    unk_struct.single_float = 3;
     ftColl_8007B5AC(fp, &fp->x11A0_fighterHurtbox[0], &unk_struct);
 }
 

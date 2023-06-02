@@ -26,7 +26,7 @@ void ftDk_HeavyWait1_Coll(HSD_GObj* gobj)
     ftDk_HeavyWait0_Coll(gobj);
 }
 
-void ftDk_MS_346_800E05E4(HSD_GObj* gobj, float lag)
+void ftDk_MS_346_800E05E4(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;

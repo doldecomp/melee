@@ -173,7 +173,7 @@ void ftPk_SpecialAirLw_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftPk_SpecialLw_ChangeMotion_Unk00(HSD_GObj* gobj, float lag)
+void ftPk_SpecialLw_ChangeMotion_Unk00(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
@@ -191,7 +191,7 @@ void ftPk_SpecialLw_ChangeMotion_Unk01(HSD_GObj* gobj)
     ftCommon_8007D468(fp);
 }
 
-void ftPk_SpecialLw_ChangeMotion_Unk02(HSD_GObj* gobj, float lag)
+void ftPk_SpecialLw_ChangeMotion_Unk02(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
@@ -213,7 +213,7 @@ void ftPk_SpecialLw_ChangeMotion_Unk03(HSD_GObj* gobj)
     ftCommon_8007D468(fp);
 }
 
-void ftPk_SpecialLw_ChangeMotion_Unk04(HSD_GObj* gobj, float lag)
+void ftPk_SpecialLw_ChangeMotion_Unk04(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
@@ -231,7 +231,7 @@ void ftPk_SpecialLw_ChangeMotion_Unk05(HSD_GObj* gobj)
     ftCommon_8007D468(fp);
 }
 
-void ftPk_SpecialLw_ChangeMotion_Unk06(HSD_GObj* gobj, float lag)
+void ftPk_SpecialLw_ChangeMotion_Unk06(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;

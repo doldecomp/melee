@@ -592,7 +592,7 @@ asm /* 12BDA0 */ void ftYs_Init_8012BDA0(ftCo_GObj* gobj)
 #endif
 
 void ftYs_Init_8012BE3C(HSD_GObj* gobj) {
-    int* co_xBC;
+    ftCo_DatAttrs_xBC_t* co_xBC;
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_Part part;
     Fighter* fp2;

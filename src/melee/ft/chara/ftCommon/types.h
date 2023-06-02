@@ -145,6 +145,16 @@ union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ float x0;
     } downdamage;
+    struct {
+        /* fp+2340 */ ftCo_GObj* x0;
+        /* fp+2344 */ bool x4;
+        /* fp+2348 */ float x8;
+        /* fp+234C */ float xC;
+        /* fp+2350 */ float x10;
+        /* fp+2354 */ float x14;
+        /* fp+2358 */ Vec3 x18;
+        /* fp+2364 */ Vec3 scale;
+    } yoshiegg;
 };
 
 #endif

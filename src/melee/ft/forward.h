@@ -37,16 +37,17 @@ struct Fighter_GObj {
 typedef struct HSD_GObj Fighter_GObj;
 #endif
 
-typedef struct ftSubactionList ftSubactionList;
 typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;
 typedef struct Fighter_DemoStrings Fighter_DemoStrings;
 typedef struct FtCmdState FtCmdState;
 typedef struct MotionState MotionState;
 typedef struct UnkFloat6_Camera UnkFloat6_Camera;
 typedef struct ftCmdScript ftCmdScript;
+typedef struct ftCo_DatAttrs_xBC_t ftCo_DatAttrs_xBC_t;
 typedef struct ftCollisionBox ftCollisionBox;
 typedef struct ftCommonData ftCommonData;
 typedef struct ftLk_SpecialN_Vec3Group ftLk_SpecialN_Vec3Group;
+typedef struct ftSubactionList ftSubactionList;
 typedef struct gmScriptEventDefault gmScriptEventDefault;
 typedef u32 MotionFlags;
 

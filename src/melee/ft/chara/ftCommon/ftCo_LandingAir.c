@@ -9,12 +9,13 @@
 #include "ft/ft_08A4.h"
 #include "ft/ftcommon.h"
 
-void ftCo_LandingAir_EnterWithLag(ftCo_GObj* gobj, float lag)
+void ftCo_LandingAir_EnterWithLag(ftCo_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[20] = { 0 };
 #endif
+    float lag;
     FtMotionId msid = ftCo_MS_None;
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[0]) {

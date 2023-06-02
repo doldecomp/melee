@@ -746,7 +746,7 @@ void ftCommon_8007D7FC(Fighter* fp)
     if (!ft_80084A18(fp->gobj)) {
         OSReport("fighter ground no under Id! %d %d\n", fp->player_id,
                  fp->motion_id);
-        HSD_ASSERT(0x2AE, 0);
+        HSD_ASSERT(686, 0);
     }
 }
 

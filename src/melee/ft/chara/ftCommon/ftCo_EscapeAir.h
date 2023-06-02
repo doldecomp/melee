@@ -10,6 +10,5 @@
 /* 099C24 */ void ftCo_EscapeAir_IASA(ftCo_GObj* gobj);
 /* 099CEC */ void ftCo_EscapeAir_Phys(ftCo_GObj* gobj);
 /* 099D48 */ void ftCo_EscapeAir_Coll(ftCo_GObj* gobj);
-/* 099D70 */ /* static */ void ftCo_80099D70(ftCo_GObj* gobj, float lag);
 
 #endif

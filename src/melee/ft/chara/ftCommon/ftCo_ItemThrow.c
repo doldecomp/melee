@@ -2057,7 +2057,7 @@ void ftCo_LightThrowAir_Coll(ftCo_GObj* gobj)
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push
-asm void ftCo_80096374(ftCo_GObj* gobj, float lag)
+asm void ftCo_80096374(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80096374 00092F54  7C 08 02 A6 */	mflr r0
@@ -2131,7 +2131,7 @@ lbl_80096454:
 #pragma pop
 #else
 
-void ftCo_80096374(ftCo_GObj* gobj, float lag)
+void ftCo_80096374(ftCo_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH

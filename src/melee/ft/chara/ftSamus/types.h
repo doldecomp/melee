@@ -70,13 +70,6 @@ struct UNK_SAMUS_S1 {
     HSD_MatAnimJoint* xC_matanim_joint;
 };
 
-struct UNK_SAMUS_S2 {
-    S32Vec3 intvec;
-    Vec3 vec1;
-    Vec3 vec2;
-    f32 single_float;
-};
-
 union ftSamus_MotionVars {
     /// @todo Proper state name.
     struct ftSamus_State2Vars {

@@ -4,6 +4,6 @@
 #include <platform.h>
 #include "ftCommon/forward.h"
 
-/* 09BD4C */ void ftCo_8009BD4C(ftCo_GObj* gobj, float lag);
+/* 09BD4C */ void ftCo_8009BD4C(ftCo_GObj* gobj);
 
 #endif
