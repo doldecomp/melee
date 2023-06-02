@@ -15,7 +15,7 @@
 
 /* 09C02C */ static bool ftCo_8009C02C(ftCo_GObj* gobj, FtMotionId msid);
 /* 09C170 */ static void ftCo_8009C170(ftCo_GObj* gobj);
-/* 09C45C */ static void ftCo_8009C45C(ftCo_GObj* gobj, float lag);
+/* 09C45C */ static void ftCo_8009C45C(ftCo_GObj* gobj);
 
 void ftCo_CargoWait2_Anim(ftCo_GObj* gobj)
 {
@@ -252,7 +252,11 @@ void ftCo_CargoThrowAir_Coll(ftCo_GObj* gobj)
     ft_80082C74(gobj, ftCo_8009C45C);
 }
 
-void ftCo_8009C45C(ftCo_GObj* gobj, float lag)
+void ftCo_8009C45C(ftCo_GObj* gobj)
 {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8] = { 0 };
+#endif
     inlineB1(gobj, ftCommon_8007D7FC, -4);
 }

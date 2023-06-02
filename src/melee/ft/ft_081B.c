@@ -1420,7 +1420,7 @@ lbl_80082C54:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_80082C74(HSD_GObj*, void (*)(ftCo_GObj*, float lag))
+asm void ft_80082C74(HSD_GObj*, HSD_GObjEvent)
 { // clang-format off
     nofralloc
 /* 80082C74 0007F854  7C 08 02 A6 */	mflr r0

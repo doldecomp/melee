@@ -390,7 +390,7 @@ void ftGw_AttackAirN_Coll(HSD_GObj* gobj)
 static void ftGw_LandingAirN_Init(HSD_GObj*);
 
 /// Mr. Game & Watch - LandingAirN Think
-void ftGw_LandingAirN_Enter(HSD_GObj* gobj, float lag)
+void ftGw_LandingAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -465,7 +465,7 @@ void ftGw_AttackAirB_Coll(HSD_GObj* gobj)
 }
 
 /// Mr. Game & Watch - LandingAirB Think
-void ftGw_LandingAirB_Enter(HSD_GObj* gobj, float lag)
+void ftGw_LandingAirB_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -530,7 +530,7 @@ void ftGw_AttackAirHi_Coll(HSD_GObj* gobj)
 }
 
 /// Mr. Game & Watch - LandingAirHi Think
-void ftGw_LandingAirHi_Enter(HSD_GObj* gobj, float lag)
+void ftGw_LandingAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 

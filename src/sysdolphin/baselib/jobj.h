@@ -262,7 +262,7 @@ static inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec3* scale)
 
 static inline void HSD_JObjSetScaleX(HSD_JObj* jobj, f32 x)
 {
-    HSD_ASSERT(0x308, jobj);
+    HSD_ASSERT(776, jobj);
     jobj->scale.x = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -271,7 +271,7 @@ static inline void HSD_JObjSetScaleX(HSD_JObj* jobj, f32 x)
 
 static inline void HSD_JObjSetScaleY(HSD_JObj* jobj, f32 y)
 {
-    HSD_ASSERT(0x317, jobj);
+    HSD_ASSERT(791, jobj);
     jobj->scale.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -280,7 +280,7 @@ static inline void HSD_JObjSetScaleY(HSD_JObj* jobj, f32 y)
 
 static inline void HSD_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
 {
-    HSD_ASSERT(0x326, jobj);
+    HSD_ASSERT(806, jobj);
     jobj->scale.z = z;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -323,7 +323,7 @@ static inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
 
 static inline void HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
 {
-    HSD_ASSERT(0x3A4, jobj);
+    HSD_ASSERT(932, jobj);
     jobj->translate.x = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -332,7 +332,7 @@ static inline void HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
 
 static inline void HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
 {
-    HSD_ASSERT(0x3B3, jobj);
+    HSD_ASSERT(947, jobj);
     jobj->translate.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -341,7 +341,7 @@ static inline void HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
 
 static inline void HSD_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
 {
-    HSD_ASSERT(0x3C2, jobj);
+    HSD_ASSERT(962, jobj);
     jobj->translate.z = z;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);

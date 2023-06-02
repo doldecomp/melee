@@ -10,13 +10,13 @@
 #include "ft/ft_08A4.h"
 #include "ft/ftanim.h"
 
-void ftCo_8009BD4C(ftCo_GObj* gobj, float lag)
+void ftCo_8009BD4C(ftCo_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[20] = { 0 };
 #endif
-    ftCo_Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.ca.specialhi.vel.x = fp->x2CC->cargo_hold.x28_LANDING_LAG;
     ftCo_800D5AEC(gobj, fp->x2CC->x4_motion_state + 8, 1, 0, 0, 1);
     ftAnim_SetAnimRate(gobj, 0);

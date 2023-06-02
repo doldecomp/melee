@@ -553,6 +553,13 @@ typedef struct _ThrowFlags {
     };
 } ThrowFlags;
 
+struct ftCo_DatAttrs_xBC_t {
+    float size;
+    Vec3 x4;
+    Vec3 x10;
+    float x1C;
+};
+
 typedef struct ftCo_DatAttrs {
     /* +000 fp+110 */ float walk_init_vel;
     /* +004 fp+114 */ float walk_accel;
@@ -601,14 +608,7 @@ typedef struct ftCo_DatAttrs {
     /* +0B0 fp+1C0 */ float item_throw_velocity_multiplier;
     /* +0B4 fp+1C4 */ int xB4;
     /* +0B8 fp+1C8 */ float xB8;
-    /* +0BC fp+1CC */ int xBC;
-    /* +0C0 fp+1D0 */ int xC0;
-    /* +0C4 fp+1D4 */ int xC4;
-    /* +0C8 fp+1D8 */ int xC8;
-    /* +0CC fp+1DC */ int xCC;
-    /* +0D0 fp+1E0 */ float xD0;
-    /* +0D4 fp+1E4 */ float xD4;
-    /* +0D8 fp+1E8 */ int xD8;
+    /* +0BC fp+1CC */ ftCo_DatAttrs_xBC_t xBC;
     /* +0DC fp+1EC */ int xDC;
     /* +0E0 fp+1F0 */ float kirby_b_star_damage;
     /* +0E4 fp+1F4 */ float normal_landing_lag;
@@ -1279,7 +1279,7 @@ struct Fighter {
     /* fp+2090 */ u16 x2090;
     /* fp+2092 */ u16 x2092;
     /// GObj pointer of combo victim?
-    /* fp+2094 */ HSD_GObj* x2094;
+    /* fp+2094 */ Fighter_GObj* x2094;
     /* fp+2098 */ u16 x2098;
     /* fp+209A */ u16 x209A;
     /* fp+209C */ s16 x209C;

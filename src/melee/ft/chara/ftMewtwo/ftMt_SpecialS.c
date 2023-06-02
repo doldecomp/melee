@@ -226,7 +226,7 @@ void ftMt_SpecialS_GroundToAir(HSD_GObj* gobj)
 // 0x80146AD4
 // https://decomp.me/scratch/gv2WK // Mewtwo's air -> ground Confusion Action
 // State handler
-void ftMt_SpecialAirS_AirToGround(HSD_GObj* gobj, float lag)
+void ftMt_SpecialAirS_AirToGround(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;

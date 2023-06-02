@@ -36,8 +36,13 @@
 /* 12CC1C */ bool ftYs_Shield_8012CC1C(ftYs_GObj* gobj);
 /* 12CC6C */ void ftYs_Shield_8012CC6C(ftYs_GObj* gobj);
 /* 12CC94 */ void ftYs_Shield_8012CC94(ftYs_GObj* gobj, Vec3* out);
-/* 12CCC4 */ f32 ftYs_Shield_8012CCC4(ftYs_GObj* gobj);
+
+/// @returns #Fighter::facing_dir
+/* 12CCC4 */ float ftYs_Shield_8012CCC4(ftYs_GObj* gobj);
+
+/// @returns #Fighter::dmg.x182c_behavior
 /* 12CCD0 */ f32 ftYs_Shield_8012CCD0(ftYs_GObj* gobj);
+
 /* 12CCE0 */ f32 ftYs_Shield_8012CCE0(ftYs_GObj* gobj);
 /* 12CCF0 */ f32 ftYs_Shield_8012CCF0(ftYs_GObj* gobj);
 /* 12CD00 */ f32 ftYs_Shield_8012CD00(ftYs_GObj* gobj);

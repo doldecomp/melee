@@ -15,6 +15,8 @@
 #include <placeholder.h>
 #include <MSL/trigf.h>
 
+/* 099D70 */ static void ftCo_80099D70(ftCo_GObj* gobj);
+
 typedef enum cmd_var_idx {
     cmd_skip_decay,
 } cmd_var_idx;
@@ -115,7 +117,7 @@ void ftCo_EscapeAir_Coll(Fighter_GObj* gobj)
     ft_80082C74(gobj, ftCo_80099D70);
 }
 
-void ftCo_80099D70(ftCo_GObj* gobj, float lag)
+void ftCo_80099D70(ftCo_GObj* gobj)
 {
     ftCo_800D5CB0(gobj, 0, p_ftCommonData->x344);
 }

@@ -10,7 +10,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ftcommon.h"
 
-void ftCo_80098E3C(Fighter_GObj* gobj, float lag)
+void ftCo_80098E3C(Fighter_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Air) {

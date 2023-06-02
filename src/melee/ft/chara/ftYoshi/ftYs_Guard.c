@@ -66,7 +66,7 @@ static inline void spawnEffect(HSD_GObj* gobj)
     HSD_JObj* jobj;
     Fighter_Part part;
     Fighter* fp2;
-    int* co_xBC;
+    ftCo_DatAttrs_xBC_t* co_xBC;
     Fighter* fp;
     fp = GET_FIGHTER(gobj);
     ftParts_80074B0C(gobj, 0, 0);
@@ -261,7 +261,7 @@ void ftYs_Shield_8012C49C(HSD_GObj* gobj)
             u8 _[8];
 #endif
 
-            int* co_xBC = &fp0->co_attrs.xBC;
+            ftCo_DatAttrs_xBC_t* co_xBC = &fp0->co_attrs.xBC;
 
             ssize_t bone_idx = ftParts_8007500C(fp0, 4);
             Fighter* fp1 = GET_FIGHTER(gobj);

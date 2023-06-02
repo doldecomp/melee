@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any, Callable, List, Match, TextIO, Tuple, Union
 
 root = Path(__file__).parent.parent
-options = {"input_glob": r"**/ft/ftaction.s"}
+options = {"input_glob": r"**/ft/ftcoll.s"}
 
 default_options = {
     "zero": "float",  # How to treat zero-value dwords
@@ -21,8 +21,8 @@ default_options = {
     "find_s32": True,  # Attempt to find negative 4-byte values
     "find_u32": True,  # Attempt to find positive 4-byte values
     "min_asciz_len": 4,  # Minimum length for a byte array to be considered a string
-    "s32_min_value": -1000,  # Lowest acceptable value for s32
-    "u32_max_value": 1000,  # Highest acceptable value for u32
+    "s32_min_value": -5000,  # Lowest acceptable value for s32
+    "u32_max_value": 5000,  # Highest acceptable value for u32
     "f32_max_abs_value": 1e10,  # Biggest acceptable  value for f32
     "f32_min_abs_value": 1e-10,  # Smallest acceptable value for f32
     "f32_max_digits": 20,  # Maximum number of digits for f32 (excludes - and .)

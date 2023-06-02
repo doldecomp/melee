@@ -25,7 +25,7 @@
 /* 11CE48 */ static ItemKind pickVeg(HSD_GObj* gobj);
 /* 11D018 */ static void spawnVeg(HSD_GObj* gobj);
 /* 11D214 */ static void handleAirColl(HSD_GObj* gobj);
-/* 11D280 */ static void handleColl(HSD_GObj* gobj, float lag);
+/* 11D280 */ static void handleColl(HSD_GObj* gobj);
 
 ItemKind pickVeg(HSD_GObj* gobj)
 {
@@ -236,7 +236,7 @@ static void handleAirColl(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = spawnVeg;
 }
 
-static void handleColl(HSD_GObj* gobj, float lag)
+static void handleColl(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
