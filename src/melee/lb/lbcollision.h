@@ -100,8 +100,10 @@ struct HitCapsule {
     HitVictim victims_1[12];
     /// @at{D4} @sz{60}
     HitVictim victims_2[12];
-
-    HSD_GObj* owner;
+    union {
+        HSD_GObj* owner;
+        u8 hit_grabbed_victim_only : 1;
+    };
 };
 
 struct HurtCapsule {
