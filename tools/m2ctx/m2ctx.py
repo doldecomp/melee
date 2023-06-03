@@ -73,6 +73,7 @@ PCPP_FLAGS = [
     "MUST_MATCH",
     "-U",
     "FIGHTERVARS_SIZE",
+    "--passthru-magic-macros"
 ]
 
 
