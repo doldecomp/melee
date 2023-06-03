@@ -367,6 +367,12 @@ static inline f32 HSD_JObjGetTranslationY(HSD_JObj* jobj)
     return jobj->translate.y;
 }
 
+static inline float HSD_JObjGetTranslationZ(HSD_JObj* jobj)
+{
+    HSD_ASSERT(1019, jobj);
+    return jobj->translate.z;
+}
+
 static inline void HSD_JObjAddTranslationY(HSD_JObj* jobj, float y)
 {
     HSD_ASSERT(1114, jobj);
@@ -374,12 +380,6 @@ static inline void HSD_JObjAddTranslationY(HSD_JObj* jobj, float y)
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
-}
-
-static inline float HSD_JObjGetTranslationZ(HSD_JObj* jobj)
-{
-    HSD_ASSERT(1019, jobj);
-    return jobj->translate.z;
 }
 
 static inline void HSD_JObjAddTranslationZ(HSD_JObj* jobj, float z)
