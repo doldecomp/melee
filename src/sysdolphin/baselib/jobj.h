@@ -367,6 +367,30 @@ static inline f32 HSD_JObjGetTranslationY(HSD_JObj* jobj)
     return jobj->translate.y;
 }
 
+static inline float HSD_JObjGetTranslationZ(HSD_JObj* jobj)
+{
+    HSD_ASSERT(1019, jobj);
+    return jobj->translate.z;
+}
+
+static inline void HSD_JObjAddTranslationY(HSD_JObj* jobj, float y)
+{
+    HSD_ASSERT(1114, jobj);
+    jobj->translate.y += y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void HSD_JObjAddTranslationZ(HSD_JObj* jobj, float z)
+{
+    HSD_ASSERT(1126, jobj);
+    jobj->translate.z += z;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
 /// @todo This is misplaced or something; @c jobj.h must not include @c
 ///       lbcollision.
 void lbColl_JObjSetupMatrix(HSD_JObj*);

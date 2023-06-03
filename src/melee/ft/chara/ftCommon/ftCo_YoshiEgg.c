@@ -3,6 +3,9 @@
 
 #include "ftCo_YoshiEgg.h"
 
+#include "ftCo_CaptureCaptain.h"
+#include "ftCo_CaptureKoopa.h"
+
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
