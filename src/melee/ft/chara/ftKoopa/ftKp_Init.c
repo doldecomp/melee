@@ -14,6 +14,7 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_CaptureDamageKoopa.h"
 #include "ftCommon/ftCo_CaptureKoopa.h"
+#include "ftCommon/ftCo_ThrownKoopa.h"
 
 MotionState ftKp_Init_MotionStateTable[ftKp_MS_SelfCount] = {
     {
