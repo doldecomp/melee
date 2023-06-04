@@ -2,6 +2,8 @@
 
 #include "ftCo_CaptureKoopa.h"
 
+#include "ftCo_CaptureDamageKoopa.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_08A4.h"
 #include "ft/ftcommon.h"
