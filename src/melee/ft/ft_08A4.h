@@ -300,7 +300,6 @@ void ftCo_80092BCC(ftCo_GObj* gobj);
 void ftCo_80092BE8(ftCo_GObj* gobj);
 void ftCo_80093BC0(ftCo_GObj* gobj);
 void ftCo_8009750C(ftCo_GObj* gobj);
-void ftCo_800BCE64(ftCo_GObj*, enum_t msid);
 void ftCo_800BCF18(ftCo_GObj*, ftCo_GObj* gobj);
 void ftCo_800BD000(ftCo_GObj*, ftCo_GObj* gobj);
 void ftCo_800BEB60(int, int, int);
