@@ -29,11 +29,12 @@ static inline void inlineA0(ftCo_GObj* gobj, HSD_GObjEvent cb)
 #ifdef MUST_MATCH
     u8 _[8] = { 0 };
 #endif
-    ftCo_Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         cb(gobj);
         return;
     }
+    /// @todo #ftCo_CaptureWaitKoopa_Anim
     ftCo_800BC458(gobj);
     if (fp->x1A4C <= 0) {
         ftCo_800DA698(fp->victim_gobj, false);
@@ -49,16 +50,16 @@ void ftCo_CaptureDamageKoopa_Anim(ftCo_GObj* gobj)
     inlineA0(gobj, ftCo_800BCC20);
 }
 
-void ftCo_CaptureDamageKoopa_IASA(HSD_GObj* gobj) {}
+void ftCo_CaptureDamageKoopa_IASA(ftCo_GObj* gobj) {}
 
-void ftCo_CaptureDamageKoopa_Phys(HSD_GObj* gobj) {}
+void ftCo_CaptureDamageKoopa_Phys(ftCo_GObj* gobj) {}
 
-void ftCo_CaptureDamageKoopa_Coll(HSD_GObj* gobj) {}
+void ftCo_CaptureDamageKoopa_Coll(ftCo_GObj* gobj) {}
 
 /// @todo Shared code with #ftCo_800BC9C8. Simple @c inline doesn't work.
 void ftCo_800BCAF4(ftCo_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageKoopaAir,
                               fp->x2222_b6 ? Ft_MF_FreezeState : Ft_MF_None, 0,
                               1, 0, fp->victim_gobj);
@@ -72,8 +73,8 @@ void ftCo_CaptureDamageKoopaAir_Anim(ftCo_GObj* gobj)
     inlineA0(gobj, ftCo_800BCD00);
 }
 
-void ftCo_CaptureDamageKoopaAir_IASA(HSD_GObj* gobj) {}
+void ftCo_CaptureDamageKoopaAir_IASA(ftCo_GObj* gobj) {}
 
-void ftCo_CaptureDamageKoopaAir_Phys(HSD_GObj* gobj) {}
+void ftCo_CaptureDamageKoopaAir_Phys(ftCo_GObj* gobj) {}
 
-void ftCo_CaptureDamageKoopaAir_Coll(HSD_GObj* gobj) {}
+void ftCo_CaptureDamageKoopaAir_Coll(ftCo_GObj* gobj) {}
