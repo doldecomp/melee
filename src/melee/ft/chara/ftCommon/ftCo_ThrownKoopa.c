@@ -4,23 +4,13 @@
 
 #include "ftCo_ThrownKoopa.h"
 
+#include "inlines.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_08A4.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
-
-static inline void inlineA0(ftCo_GObj* gobj, FtMotionId msid, MotionFlags mf,
-                            float anim_start)
-{
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    fp->facing_dir = GET_FIGHTER(fp->victim_gobj)->facing_dir;
-    fp->mv.co.capturekoopa.x0 = false;
-    Fighter_ChangeMotionState(gobj, msid, mf, anim_start, 1, 0,
-                              fp->victim_gobj);
-    fp->cb.x21B0_callback_Accessory1 = ftCo_800DE508;
-    ftCommon_8007E2F4(fp, 0x1FF);
-}
 
 void ftCo_800BCDE0(ftCo_GObj* gobj, FtMotionId msid)
 {
@@ -28,7 +18,7 @@ void ftCo_800BCDE0(ftCo_GObj* gobj, FtMotionId msid)
 #ifdef MUST_MATCH
     u8 _[8] = { 0 };
 #endif
-    inlineA0(gobj, msid, Ft_MF_None, 0);
+    ftCo_Thrown_Enter(gobj, msid, Ft_MF_None, 0);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -39,10 +29,10 @@ void ftCo_800BCE64(ftCo_GObj* gobj, FtMotionId msid)
                            Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
                            Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags |
                            Ft_MF_Unk27;
-/// @todo Use #inlineA0.
+/// @todo Use #ftCo_Thrown_Enter.
 #define SOLUTION 1
 #if SOLUTION == 0
-    inlineA0(gobj, msid, mf, fp->cur_anim_frame);
+    ftCo_Thrown_Enter(gobj, msid, mf, fp->cur_anim_frame);
 #elif SOLUTION == 1
     /// @todo Unused stack.
 #ifdef MUST_MATCH
