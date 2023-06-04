@@ -170,6 +170,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_YoshiEgg.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftCo_YoshiEgg.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureKoopa.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureDamageKoopa.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureWaitKoopa.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_08A4.s.o\
 
 TEXT_O_FILES +=\

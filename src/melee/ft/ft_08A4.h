@@ -300,7 +300,6 @@ void ftCo_80092BCC(ftCo_GObj* gobj);
 void ftCo_80092BE8(ftCo_GObj* gobj);
 void ftCo_80093BC0(ftCo_GObj* gobj);
 void ftCo_8009750C(ftCo_GObj* gobj);
-void ftCo_800BC9C8(ftCo_GObj* gobj);
 void ftCo_800BCE64(ftCo_GObj*, enum_t msid);
 void ftCo_800BCF18(ftCo_GObj*, ftCo_GObj* gobj);
 void ftCo_800BD000(ftCo_GObj*, ftCo_GObj* gobj);
@@ -1132,6 +1131,7 @@ void ftCo_YoshiEgg_IASA(ftCo_GObj* gobj);
 void ftCo_YoshiEgg_Phys(ftCo_GObj* gobj);
 /* 0C0B20 */ UNK_RET ftCo_800C0B20(UNK_PARAMS);
 /* 0C08A0 */ UNK_RET ftCo_800C08A0(UNK_PARAMS);
-/* 0BCAF4 */ void ftCo_800BCAF4(ftCo_GObj* gobj);
+/* 0DA698 */ void ftCo_800DA698(ftCo_GObj* gobj, bool);
+/* 0BCD00 */ void ftCo_800BCD00(ftCo_GObj* gobj);
 
 #endif
