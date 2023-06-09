@@ -705,183 +705,68 @@ void ftPr_SpecialAirHi_Enter(HSD_GObj* gobj)
     ftPurin_SpecialHi_SetVars(gobj);
 }
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialHi_Anim(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013CB68 00139748  7C 08 02 A6 */	mflr r0
-/* 8013CB6C 0013974C  90 01 00 04 */	stw r0, 4(r1)
-/* 8013CB70 00139750  94 21 FF E8 */	stwu r1, -24(r1)
-/* 8013CB74 00139754  93 E1 00 14 */	stw r31, 20(r1)
-/* 8013CB78 00139758  7C 7F 1B 78 */	mr r31, r3
-/* 8013CB7C 0013975C  80 83 00 2C */	lwz r4, 44(r3)
-/* 8013CB80 00139760  80 04 23 40 */	lwz r0, 9024(r4)
-/* 8013CB84 00139764  2C 00 00 00 */	cmpwi r0, 0
-/* 8013CB88 00139768  41 82 00 30 */	beq lbl_8013CBB8
-/* 8013CB8C 0013976C  88 64 09 57 */	lbz r3, 2391(r4)
-/* 8013CB90 00139770  54 60 DF FF */	rlwinm. r0, r3, 27, 31, 31
-/* 8013CB94 00139774  40 82 00 24 */	bne lbl_8013CBB8
-/* 8013CB98 00139778  80 04 09 14 */	lwz r0, 2324(r4)
-/* 8013CB9C 0013977C  2C 00 00 00 */	cmpwi r0, 0
-/* 8013CBA0 00139780  41 82 00 18 */	beq lbl_8013CBB8
-/* 8013CBA4 00139784  38 00 00 01 */	li r0, 1
-/* 8013CBA8 00139788  50 03 2E B4 */	rlwimi r3, r0, 5, 26, 26
-/* 8013CBAC 0013978C  98 64 09 57 */	stb r3, 2391(r4)
-/* 8013CBB0 00139790  38 00 00 07 */	li r0, 7
-/* 8013CBB4 00139794  90 04 09 44 */	stw r0, 2372(r4)
-lbl_8013CBB8:
-/* 8013CBB8 00139798  7F E3 FB 78 */	mr r3, r31
-/* 8013CBBC 0013979C  4B F3 26 7D */	bl ftAnim_IsFramesRemaining
-/* 8013CBC0 001397A0  2C 03 00 00 */	cmpwi r3, 0
-/* 8013CBC4 001397A4  40 82 00 0C */	bne lbl_8013CBD0
-/* 8013CBC8 001397A8  7F E3 FB 78 */	mr r3, r31
-/* 8013CBCC 001397AC  4B F4 D6 F1 */	bl ft_8008A2BC
-lbl_8013CBD0:
-/* 8013CBD0 001397B0  80 01 00 1C */	lwz r0, 28(r1)
-/* 8013CBD4 001397B4  83 E1 00 14 */	lwz r31, 20(r1)
-/* 8013CBD8 001397B8  38 21 00 18 */	addi r1, r1, 24
-/* 8013CBDC 001397BC  7C 08 03 A6 */	mtlr r0
-/* 8013CBE0 001397C0  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialHi_Anim(Fighter_GObj* fighter_gobj)
+{
+    Fighter* fighter = getFighter(fighter_gobj);
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialAirHi_Anim(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013CBE4 001397C4  7C 08 02 A6 */	mflr r0
-/* 8013CBE8 001397C8  90 01 00 04 */	stw r0, 4(r1)
-/* 8013CBEC 001397CC  94 21 FF E8 */	stwu r1, -24(r1)
-/* 8013CBF0 001397D0  93 E1 00 14 */	stw r31, 20(r1)
-/* 8013CBF4 001397D4  7C 7F 1B 78 */	mr r31, r3
-/* 8013CBF8 001397D8  80 83 00 2C */	lwz r4, 44(r3)
-/* 8013CBFC 001397DC  80 04 23 40 */	lwz r0, 9024(r4)
-/* 8013CC00 001397E0  2C 00 00 00 */	cmpwi r0, 0
-/* 8013CC04 001397E4  41 82 00 30 */	beq lbl_8013CC34
-/* 8013CC08 001397E8  88 64 09 57 */	lbz r3, 2391(r4)
-/* 8013CC0C 001397EC  54 60 DF FF */	rlwinm. r0, r3, 27, 31, 31
-/* 8013CC10 001397F0  40 82 00 24 */	bne lbl_8013CC34
-/* 8013CC14 001397F4  80 04 09 14 */	lwz r0, 2324(r4)
-/* 8013CC18 001397F8  2C 00 00 00 */	cmpwi r0, 0
-/* 8013CC1C 001397FC  41 82 00 18 */	beq lbl_8013CC34
-/* 8013CC20 00139800  38 00 00 01 */	li r0, 1
-/* 8013CC24 00139804  50 03 2E B4 */	rlwimi r3, r0, 5, 26, 26
-/* 8013CC28 00139808  98 64 09 57 */	stb r3, 2391(r4)
-/* 8013CC2C 0013980C  38 00 00 07 */	li r0, 7
-/* 8013CC30 00139810  90 04 09 44 */	stw r0, 2372(r4)
-lbl_8013CC34:
-/* 8013CC34 00139814  7F E3 FB 78 */	mr r3, r31
-/* 8013CC38 00139818  4B F3 26 01 */	bl ftAnim_IsFramesRemaining
-/* 8013CC3C 0013981C  2C 03 00 00 */	cmpwi r3, 0
-/* 8013CC40 00139820  40 82 00 0C */	bne lbl_8013CC4C
-/* 8013CC44 00139824  7F E3 FB 78 */	mr r3, r31
-/* 8013CC48 00139828  4B F8 FA E9 */	bl ftCo_800CC730
-lbl_8013CC4C:
-/* 8013CC4C 0013982C  80 01 00 1C */	lwz r0, 28(r1)
-/* 8013CC50 00139830  83 E1 00 14 */	lwz r31, 20(r1)
-/* 8013CC54 00139834  38 21 00 18 */	addi r1, r1, 24
-/* 8013CC58 00139838  7C 08 03 A6 */	mtlr r0
-/* 8013CC5C 0013983C  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+    if (fighter->mv.pr.specialhi.x0 != 0 && !fighter->x914[0].x43_b2 &&
+        fighter->x914[0].state != HitCapsule_Disabled)
+    {
+        fighter->x914[0].x43_b2 = 1;
+        fighter->x914[0].element = HitElement_Sleep;
+    }
+
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+        ft_8008A2BC(fighter_gobj);
+    }
+}
+
+void ftPr_SpecialAirHi_Anim(Fighter_GObj* fighter_gobj)
+{
+    Fighter* fighter = fighter_gobj->user_data;
+    if (fighter->mv.pr.specialhi.x0 != 0 && !fighter->x914[0].x43_b2 &&
+        fighter->x914[0].state != HitCapsule_Disabled)
+    {
+        fighter->x914[0].x43_b2 = 1;
+        fighter->x914[0].element = HitElement_Sleep;
+    }
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+        ftCo_800CC730(fighter_gobj);
+    }
+}
 
 void ftPr_SpecialHi_IASA(HSD_GObj* arg0) {}
 
 void ftPr_SpecialAirHi_IASA(HSD_GObj* arg0) {}
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialHi_Phys(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013CC68 00139848  7C 08 02 A6 */	mflr r0
-/* 8013CC6C 0013984C  90 01 00 04 */	stw r0, 4(r1)
-/* 8013CC70 00139850  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8013CC74 00139854  4B F4 82 C9 */	bl ft_80084F3C
-/* 8013CC78 00139858  80 01 00 0C */	lwz r0, 12(r1)
-/* 8013CC7C 0013985C  38 21 00 08 */	addi r1, r1, 8
-/* 8013CC80 00139860  7C 08 03 A6 */	mtlr r0
-/* 8013CC84 00139864  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialHi_Phys(HSD_GObj* gobj)
+{
+    ft_80084F3C(gobj);
+}
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialAirHi_Phys(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013CC88 00139868  7C 08 02 A6 */	mflr r0
-/* 8013CC8C 0013986C  90 01 00 04 */	stw r0, 4(r1)
-/* 8013CC90 00139870  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8013CC94 00139874  4B F4 82 59 */	bl ft_80084EEC
-/* 8013CC98 00139878  80 01 00 0C */	lwz r0, 12(r1)
-/* 8013CC9C 0013987C  38 21 00 08 */	addi r1, r1, 8
-/* 8013CCA0 00139880  7C 08 03 A6 */	mtlr r0
-/* 8013CCA4 00139884  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialAirHi_Phys(HSD_GObj* gobj)
+{
+    ft_80084EEC(gobj);
+}
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialHi_Coll(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013CCA8 00139888  7C 08 02 A6 */	mflr r0
-/* 8013CCAC 0013988C  90 01 00 04 */	stw r0, 4(r1)
-/* 8013CCB0 00139890  94 21 FF E8 */	stwu r1, -24(r1)
-/* 8013CCB4 00139894  93 E1 00 14 */	stw r31, 20(r1)
-/* 8013CCB8 00139898  7C 7F 1B 78 */	mr r31, r3
-/* 8013CCBC 0013989C  4B F4 5A E5 */	bl ft_800827A0
-/* 8013CCC0 001398A0  2C 03 00 00 */	cmpwi r3, 0
-/* 8013CCC4 001398A4  40 82 00 0C */	bne lbl_8013CCD0
-/* 8013CCC8 001398A8  7F E3 FB 78 */	mr r3, r31
-/* 8013CCCC 001398AC  48 00 00 69 */	bl ftPr_SpecialHi_8013CD34
-lbl_8013CCD0:
-/* 8013CCD0 001398B0  80 01 00 1C */	lwz r0, 28(r1)
-/* 8013CCD4 001398B4  83 E1 00 14 */	lwz r31, 20(r1)
-/* 8013CCD8 001398B8  38 21 00 18 */	addi r1, r1, 24
-/* 8013CCDC 001398BC  7C 08 03 A6 */	mtlr r0
-/* 8013CCE0 001398C0  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialHi_Coll(HSD_GObj* gobj)
+{
+    if (!ft_800827A0(gobj)) {
+        ftPr_SpecialHi_8013CD34(gobj);
+    }
+}
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialAirHi_Coll(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013CCE4 001398C4  7C 08 02 A6 */	mflr r0
-/* 8013CCE8 001398C8  38 80 00 00 */	li r4, 0
-/* 8013CCEC 001398CC  90 01 00 04 */	stw r0, 4(r1)
-/* 8013CCF0 001398D0  94 21 FF E8 */	stwu r1, -24(r1)
-/* 8013CCF4 001398D4  93 E1 00 14 */	stw r31, 20(r1)
-/* 8013CCF8 001398D8  3B E3 00 00 */	addi r31, r3, 0
-/* 8013CCFC 001398DC  4B F4 55 A9 */	bl ft_CheckGroundAndLedge
-/* 8013CD00 001398E0  2C 03 00 00 */	cmpwi r3, 0
-/* 8013CD04 001398E4  41 82 00 10 */	beq lbl_8013CD14
-/* 8013CD08 001398E8  7F E3 FB 78 */	mr r3, r31
-/* 8013CD0C 001398EC  48 00 00 CD */	bl ftPr_SpecialHi_8013CDD8
-/* 8013CD10 001398F0  48 00 00 10 */	b lbl_8013CD20
-lbl_8013CD14:
-/* 8013CD14 001398F4  7F E3 FB 78 */	mr r3, r31
-/* 8013CD18 001398F8  4B F4 45 81 */	bl ftCliffCommon_80081298
-/* 8013CD1C 001398FC  2C 03 00 00 */	cmpwi r3, 0
-lbl_8013CD20:
-/* 8013CD20 00139900  80 01 00 1C */	lwz r0, 28(r1)
-/* 8013CD24 00139904  83 E1 00 14 */	lwz r31, 20(r1)
-/* 8013CD28 00139908  38 21 00 18 */	addi r1, r1, 24
-/* 8013CD2C 0013990C  7C 08 03 A6 */	mtlr r0
-/* 8013CD30 00139910  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialAirHi_Coll(HSD_GObj* gobj)
+{
+    if (ft_CheckGroundAndLedge(gobj, 0)) {
+        ftPr_SpecialHi_8013CDD8(gobj);
+        return;
+    }
+
+    if (ftCliffCommon_80081298(gobj)) {
+        return;
+    }
+}
 
 void ftPr_SpecialHi_8013CD34(HSD_GObj* gobj)
 {
@@ -902,70 +787,27 @@ void ftPr_SpecialHi_8013CD34(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = ftPr_Init_8013C94C;
 }
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialHi_8013CDD8(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013CDD8 001399B8  7C 08 02 A6 */	mflr r0
-/* 8013CDDC 001399BC  90 01 00 04 */	stw r0, 4(r1)
-/* 8013CDE0 001399C0  94 21 FF E8 */	stwu r1, -24(r1)
-/* 8013CDE4 001399C4  93 E1 00 14 */	stw r31, 20(r1)
-/* 8013CDE8 001399C8  93 C1 00 10 */	stw r30, 16(r1)
-/* 8013CDEC 001399CC  7C 7E 1B 78 */	mr r30, r3
-/* 8013CDF0 001399D0  83 E3 00 2C */	lwz r31, 44(r3)
-/* 8013CDF4 001399D4  7F E3 FB 78 */	mr r3, r31
-/* 8013CDF8 001399D8  4B F4 0A 05 */	bl ftCommon_8007D7FC
-/* 8013CDFC 001399DC  C0 22 A2 30 */	lfs f1, ftPr_Init_804D9C10(r2)
-/* 8013CE00 001399E0  C0 1F 00 2C */	lfs f0, 44(r31)
-/* 8013CE04 001399E4  FC 01 00 00 */	fcmpu cr0, f1, f0
-/* 8013CE08 001399E8  40 82 00 2C */	bne lbl_8013CE34
-/* 8013CE0C 001399EC  3C 80 0C 4C */	lis r4, 0x0C4C508A@ha
-/* 8013CE10 001399F0  C0 3F 08 94 */	lfs f1, 2196(r31)
-/* 8013CE14 001399F4  C0 42 A2 38 */	lfs f2, ftPr_Init_804D9C18(r2)
-/* 8013CE18 001399F8  7F C3 F3 78 */	mr r3, r30
-/* 8013CE1C 001399FC  C0 62 A2 34 */	lfs f3, ftPr_Init_804D9C14(r2)
-/* 8013CE20 00139A00  38 A4 50 8A */	addi r5, r4, 0x0C4C508A@l
-/* 8013CE24 00139A04  38 80 01 6D */	li r4, 365
-/* 8013CE28 00139A08  38 C0 00 00 */	li r6, 0
-/* 8013CE2C 00139A0C  4B F2 C5 81 */	bl Fighter_ChangeMotionState
-/* 8013CE30 00139A10  48 00 00 28 */	b lbl_8013CE58
-lbl_8013CE34:
-/* 8013CE34 00139A14  3C 80 0C 4C */	lis r4, 0x0C4C508A@ha
-/* 8013CE38 00139A18  C0 3F 08 94 */	lfs f1, 2196(r31)
-/* 8013CE3C 00139A1C  C0 42 A2 38 */	lfs f2, ftPr_Init_804D9C18(r2)
-/* 8013CE40 00139A20  7F C3 F3 78 */	mr r3, r30
-/* 8013CE44 00139A24  C0 62 A2 34 */	lfs f3, ftPr_Init_804D9C14(r2)
-/* 8013CE48 00139A28  38 A4 50 8A */	addi r5, r4, 0x0C4C508A@l
-/* 8013CE4C 00139A2C  38 80 01 6F */	li r4, 367
-/* 8013CE50 00139A30  38 C0 00 00 */	li r6, 0
-/* 8013CE54 00139A34  4B F2 C5 59 */	bl Fighter_ChangeMotionState
-lbl_8013CE58:
-/* 8013CE58 00139A38  3C 60 80 14 */	lis r3, ftPr_Init_8013C94C@ha
-/* 8013CE5C 00139A3C  38 03 C9 4C */	addi r0, r3, ftPr_Init_8013C94C@l
-/* 8013CE60 00139A40  90 1F 21 BC */	stw r0, 8636(r31)
-/* 8013CE64 00139A44  80 01 00 1C */	lwz r0, 28(r1)
-/* 8013CE68 00139A48  83 E1 00 14 */	lwz r31, 20(r1)
-/* 8013CE6C 00139A4C  83 C1 00 10 */	lwz r30, 16(r1)
-/* 8013CE70 00139A50  38 21 00 18 */	addi r1, r1, 24
-/* 8013CE74 00139A54  7C 08 03 A6 */	mtlr r0
-/* 8013CE78 00139A58  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialHi_8013CDD8(Fighter_GObj* fighter_gobj)
+{
+    Fighter* fighter = fighter_gobj->user_data;
+    ftCommon_8007D7FC(fighter);
+    if (ftPr_Init_804D9C10 == fighter->facing_dir) {
+        Fighter_ChangeMotionState(fighter_gobj, 0x16D, 0x0C4C508AU,
+                                  fighter->cur_anim_frame, ftPr_Init_804D9C18,
+                                  ftPr_Init_804D9C14, NULL);
+    } else {
+        Fighter_ChangeMotionState(fighter_gobj, 0x16F, 0x0C4C508AU,
+                                  fighter->cur_anim_frame, ftPr_Init_804D9C18,
+                                  ftPr_Init_804D9C14, NULL);
+    }
+    fighter->cb.x21BC_callback_Accessory4 = ftPr_Init_8013C94C;
+}
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialHi_8013CE7C(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013CE7C 00139A5C  80 63 00 2C */	lwz r3, 44(r3)
-/* 8013CE80 00139A60  38 00 00 00 */	li r0, 0
-/* 8013CE84 00139A64  90 03 21 BC */	stw r0, 8636(r3)
-/* 8013CE88 00139A68  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialHi_8013CE7C(Fighter_GObj* fighter_gobj)
+{
+    Fighter* fighter = getFighter(fighter_gobj);
+    fighter->cb.x21BC_callback_Accessory4 = NULL;
+}
 
 extern f32 const ftPr_Init_804D9C20;
 extern f32 const ftPr_Init_804D9C24;
@@ -1073,145 +915,47 @@ lbl_8013CF98:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialLw_Anim(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013CFCC 00139BAC  7C 08 02 A6 */	mflr r0
-/* 8013CFD0 00139BB0  90 01 00 04 */	stw r0, 4(r1)
-/* 8013CFD4 00139BB4  94 21 FF E8 */	stwu r1, -24(r1)
-/* 8013CFD8 00139BB8  93 E1 00 14 */	stw r31, 20(r1)
-/* 8013CFDC 00139BBC  7C 7F 1B 78 */	mr r31, r3
-/* 8013CFE0 00139BC0  4B F3 22 59 */	bl ftAnim_IsFramesRemaining
-/* 8013CFE4 00139BC4  2C 03 00 00 */	cmpwi r3, 0
-/* 8013CFE8 00139BC8  40 82 00 0C */	bne lbl_8013CFF4
-/* 8013CFEC 00139BCC  7F E3 FB 78 */	mr r3, r31
-/* 8013CFF0 00139BD0  4B F4 D2 CD */	bl ft_8008A2BC
-lbl_8013CFF4:
-/* 8013CFF4 00139BD4  80 01 00 1C */	lwz r0, 28(r1)
-/* 8013CFF8 00139BD8  83 E1 00 14 */	lwz r31, 20(r1)
-/* 8013CFFC 00139BDC  38 21 00 18 */	addi r1, r1, 24
-/* 8013D000 00139BE0  7C 08 03 A6 */	mtlr r0
-/* 8013D004 00139BE4  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialLw_Anim(Fighter_GObj* fighter_gobj)
+{
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+        ft_8008A2BC(fighter_gobj);
+    }
+}
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialAirLw_Anim(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013D008 00139BE8  7C 08 02 A6 */	mflr r0
-/* 8013D00C 00139BEC  90 01 00 04 */	stw r0, 4(r1)
-/* 8013D010 00139BF0  94 21 FF E8 */	stwu r1, -24(r1)
-/* 8013D014 00139BF4  93 E1 00 14 */	stw r31, 20(r1)
-/* 8013D018 00139BF8  7C 7F 1B 78 */	mr r31, r3
-/* 8013D01C 00139BFC  4B F3 22 1D */	bl ftAnim_IsFramesRemaining
-/* 8013D020 00139C00  2C 03 00 00 */	cmpwi r3, 0
-/* 8013D024 00139C04  40 82 00 0C */	bne lbl_8013D030
-/* 8013D028 00139C08  7F E3 FB 78 */	mr r3, r31
-/* 8013D02C 00139C0C  4B F8 F7 05 */	bl ftCo_800CC730
-lbl_8013D030:
-/* 8013D030 00139C10  80 01 00 1C */	lwz r0, 28(r1)
-/* 8013D034 00139C14  83 E1 00 14 */	lwz r31, 20(r1)
-/* 8013D038 00139C18  38 21 00 18 */	addi r1, r1, 24
-/* 8013D03C 00139C1C  7C 08 03 A6 */	mtlr r0
-/* 8013D040 00139C20  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialAirLw_Anim(Fighter_GObj* fighter_gobj)
+{
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+        ftCo_800CC730(fighter_gobj);
+    }
+}
 
 void ftPr_SpecialLw_IASA(HSD_GObj* arg0) {}
 
 void ftPr_SpecialAirLw_IASA(HSD_GObj* arg0) {}
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialLw_Phys(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013D04C 00139C2C  7C 08 02 A6 */	mflr r0
-/* 8013D050 00139C30  90 01 00 04 */	stw r0, 4(r1)
-/* 8013D054 00139C34  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8013D058 00139C38  4B F4 7E E5 */	bl ft_80084F3C
-/* 8013D05C 00139C3C  80 01 00 0C */	lwz r0, 12(r1)
-/* 8013D060 00139C40  38 21 00 08 */	addi r1, r1, 8
-/* 8013D064 00139C44  7C 08 03 A6 */	mtlr r0
-/* 8013D068 00139C48  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
-
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialAirLw_Phys(HSD_GObj*)
+void ftPr_SpecialLw_Phys(HSD_GObj* gobj)
 {
-    // clang-format off
-    nofralloc
-/* 8013D06C 00139C4C  7C 08 02 A6 */	mflr r0
-/* 8013D070 00139C50  90 01 00 04 */	stw r0, 4(r1)
-/* 8013D074 00139C54  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8013D078 00139C58  4B F4 7E 75 */	bl ft_80084EEC
-/* 8013D07C 00139C5C  80 01 00 0C */	lwz r0, 12(r1)
-/* 8013D080 00139C60  38 21 00 08 */	addi r1, r1, 8
-/* 8013D084 00139C64  7C 08 03 A6 */	mtlr r0
-/* 8013D088 00139C68  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+    ft_80084F3C(gobj);
+}
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialLw_Coll(HSD_GObj*)
+void ftPr_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
-    // clang-format off
-    nofralloc
-/* 8013D08C 00139C6C  7C 08 02 A6 */	mflr r0
-/* 8013D090 00139C70  90 01 00 04 */	stw r0, 4(r1)
-/* 8013D094 00139C74  94 21 FF E8 */	stwu r1, -24(r1)
-/* 8013D098 00139C78  93 E1 00 14 */	stw r31, 20(r1)
-/* 8013D09C 00139C7C  7C 7F 1B 78 */	mr r31, r3
-/* 8013D0A0 00139C80  4B F4 57 01 */	bl ft_800827A0
-/* 8013D0A4 00139C84  2C 03 00 00 */	cmpwi r3, 0
-/* 8013D0A8 00139C88  40 82 00 0C */	bne lbl_8013D0B4
-/* 8013D0AC 00139C8C  7F E3 FB 78 */	mr r3, r31
-/* 8013D0B0 00139C90  48 00 00 55 */	bl ftPr_SpecialLw_8013D104
-lbl_8013D0B4:
-/* 8013D0B4 00139C94  80 01 00 1C */	lwz r0, 28(r1)
-/* 8013D0B8 00139C98  83 E1 00 14 */	lwz r31, 20(r1)
-/* 8013D0BC 00139C9C  38 21 00 18 */	addi r1, r1, 24
-/* 8013D0C0 00139CA0  7C 08 03 A6 */	mtlr r0
-/* 8013D0C4 00139CA4  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+    ft_80084EEC(gobj);
+}
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialAirLw_Coll(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013D0C8 00139CA8  7C 08 02 A6 */	mflr r0
-/* 8013D0CC 00139CAC  90 01 00 04 */	stw r0, 4(r1)
-/* 8013D0D0 00139CB0  94 21 FF E8 */	stwu r1, -24(r1)
-/* 8013D0D4 00139CB4  93 E1 00 14 */	stw r31, 20(r1)
-/* 8013D0D8 00139CB8  7C 7F 1B 78 */	mr r31, r3
-/* 8013D0DC 00139CBC  4B F4 4C 31 */	bl ft_80081D0C
-/* 8013D0E0 00139CC0  2C 03 00 00 */	cmpwi r3, 0
-/* 8013D0E4 00139CC4  41 82 00 0C */	beq lbl_8013D0F0
-/* 8013D0E8 00139CC8  7F E3 FB 78 */	mr r3, r31
-/* 8013D0EC 00139CCC  48 00 00 B1 */	bl ftPr_SpecialLw_8013D19C
-lbl_8013D0F0:
-/* 8013D0F0 00139CD0  80 01 00 1C */	lwz r0, 28(r1)
-/* 8013D0F4 00139CD4  83 E1 00 14 */	lwz r31, 20(r1)
-/* 8013D0F8 00139CD8  38 21 00 18 */	addi r1, r1, 24
-/* 8013D0FC 00139CDC  7C 08 03 A6 */	mtlr r0
-/* 8013D100 00139CE0  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialLw_Coll(HSD_GObj* gobj)
+{
+    if (!ft_800827A0(gobj)) {
+        ftPr_SpecialLw_8013D104(gobj);
+    }
+}
+
+void ftPr_SpecialAirLw_Coll(HSD_GObj* gobj)
+{
+    if (ft_80081D0C(gobj) != GA_Ground) {
+        ftPr_SpecialLw_8013D19C(gobj);
+    }
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push
@@ -1314,77 +1058,30 @@ lbl_8013D21C:
 extern f32 const ftPr_Init_804D9C30;
 extern f32 const ftPr_Init_804D9C38;
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialS_Enter(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013D234 00139E14  7C 08 02 A6 */	mflr r0
-/* 8013D238 00139E18  38 80 01 6B */	li r4, 363
-/* 8013D23C 00139E1C  90 01 00 04 */	stw r0, 4(r1)
-/* 8013D240 00139E20  38 A0 00 00 */	li r5, 0
-/* 8013D244 00139E24  38 C0 00 00 */	li r6, 0
-/* 8013D248 00139E28  94 21 FF E8 */	stwu r1, -24(r1)
-/* 8013D24C 00139E2C  93 E1 00 14 */	stw r31, 20(r1)
-/* 8013D250 00139E30  93 C1 00 10 */	stw r30, 16(r1)
-/* 8013D254 00139E34  7C 7E 1B 78 */	mr r30, r3
-/* 8013D258 00139E38  C0 22 A2 50 */	lfs f1, ftPr_Init_804D9C30(r2)
-/* 8013D25C 00139E3C  83 E3 00 2C */	lwz r31, 44(r3)
-/* 8013D260 00139E40  FC 60 08 90 */	fmr f3, f1
-/* 8013D264 00139E44  C0 42 A2 58 */	lfs f2, ftPr_Init_804D9C38(r2)
-/* 8013D268 00139E48  4B F2 C1 45 */	bl Fighter_ChangeMotionState
-/* 8013D26C 00139E4C  7F C3 F3 78 */	mr r3, r30
-/* 8013D270 00139E50  4B F3 19 35 */	bl ftAnim_8006EBA4
-/* 8013D274 00139E54  38 00 00 00 */	li r0, 0
-/* 8013D278 00139E58  90 1F 22 0C */	stw r0, 8716(r31)
-/* 8013D27C 00139E5C  90 1F 22 08 */	stw r0, 8712(r31)
-/* 8013D280 00139E60  90 1F 22 04 */	stw r0, 8708(r31)
-/* 8013D284 00139E64  90 1F 22 00 */	stw r0, 8704(r31)
-/* 8013D288 00139E68  80 01 00 1C */	lwz r0, 28(r1)
-/* 8013D28C 00139E6C  83 E1 00 14 */	lwz r31, 20(r1)
-/* 8013D290 00139E70  83 C1 00 10 */	lwz r30, 16(r1)
-/* 8013D294 00139E74  38 21 00 18 */	addi r1, r1, 24
-/* 8013D298 00139E78  7C 08 03 A6 */	mtlr r0
-/* 8013D29C 00139E7C  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialS_Enter(Fighter_GObj* fighter_gobj)
+{
+    Fighter* fighter = getFighter(fighter_gobj);
+    Fighter_ChangeMotionState(fighter_gobj, 0x16B, 0, ftPr_Init_804D9C30,
+                              ftPr_Init_804D9C38, ftPr_Init_804D9C30, NULL);
+    ftAnim_8006EBA4(fighter_gobj);
+    fighter->cmd_vars[3] = 0;
+    fighter->cmd_vars[2] = 0;
+    fighter->cmd_vars[1] = 0;
+    fighter->cmd_vars[0] = 0;
+}
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialAirS_Enter(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013D2A0 00139E80  7C 08 02 A6 */	mflr r0
-/* 8013D2A4 00139E84  38 80 01 6C */	li r4, 364
-/* 8013D2A8 00139E88  90 01 00 04 */	stw r0, 4(r1)
-/* 8013D2AC 00139E8C  38 A0 00 00 */	li r5, 0
-/* 8013D2B0 00139E90  38 C0 00 00 */	li r6, 0
-/* 8013D2B4 00139E94  94 21 FF E8 */	stwu r1, -24(r1)
-/* 8013D2B8 00139E98  93 E1 00 14 */	stw r31, 20(r1)
-/* 8013D2BC 00139E9C  93 C1 00 10 */	stw r30, 16(r1)
-/* 8013D2C0 00139EA0  7C 7E 1B 78 */	mr r30, r3
-/* 8013D2C4 00139EA4  C0 22 A2 50 */	lfs f1, ftPr_Init_804D9C30(r2)
-/* 8013D2C8 00139EA8  83 E3 00 2C */	lwz r31, 44(r3)
-/* 8013D2CC 00139EAC  FC 60 08 90 */	fmr f3, f1
-/* 8013D2D0 00139EB0  C0 42 A2 58 */	lfs f2, ftPr_Init_804D9C38(r2)
-/* 8013D2D4 00139EB4  4B F2 C0 D9 */	bl Fighter_ChangeMotionState
-/* 8013D2D8 00139EB8  7F C3 F3 78 */	mr r3, r30
-/* 8013D2DC 00139EBC  4B F3 18 C9 */	bl ftAnim_8006EBA4
-/* 8013D2E0 00139EC0  38 00 00 00 */	li r0, 0
-/* 8013D2E4 00139EC4  90 1F 22 0C */	stw r0, 8716(r31)
-/* 8013D2E8 00139EC8  90 1F 22 08 */	stw r0, 8712(r31)
-/* 8013D2EC 00139ECC  90 1F 22 04 */	stw r0, 8708(r31)
-/* 8013D2F0 00139ED0  90 1F 22 00 */	stw r0, 8704(r31)
-/* 8013D2F4 00139ED4  80 01 00 1C */	lwz r0, 28(r1)
-/* 8013D2F8 00139ED8  83 E1 00 14 */	lwz r31, 20(r1)
-/* 8013D2FC 00139EDC  83 C1 00 10 */	lwz r30, 16(r1)
-/* 8013D300 00139EE0  38 21 00 18 */	addi r1, r1, 24
-/* 8013D304 00139EE4  7C 08 03 A6 */	mtlr r0
-/* 8013D308 00139EE8  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialAirS_Enter(Fighter_GObj* fighter_gobj)
+{
+    Fighter* fighter = getFighter(fighter_gobj);
+
+    Fighter_ChangeMotionState(fighter_gobj, 0x16C, 0, ftPr_Init_804D9C30,
+                              ftPr_Init_804D9C38, ftPr_Init_804D9C30, NULL);
+    ftAnim_8006EBA4(fighter_gobj);
+    fighter->cmd_vars[3] = 0;
+    fighter->cmd_vars[2] = 0;
+    fighter->cmd_vars[1] = 0;
+    fighter->cmd_vars[0] = 0;
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push

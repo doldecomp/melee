@@ -30,7 +30,11 @@ ftPr_Init_804D9C14:
     .float 0.0
 .global ftPr_Init_804D9C18
 ftPr_Init_804D9C18:
-    .double 0.0078125
+    .float 1.0
+
+# file boundary here
+.section .sdata2
+    .balign 8
 .global ftPr_Init_804D9C20
 ftPr_Init_804D9C20:
     .float -1.0
