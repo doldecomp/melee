@@ -121,19 +121,19 @@ void GXProject(f32 x, f32 y, f32 z, MtxPtr mtx, f32* pm, f32* vp, f32* sx,
 
 #endif
 
-void GXSetProjection(f32* proj, s32 projection_type)
+void GXSetProjection(Mtx44 proj, s32 projection_type)
 {
     __GXContexts.main->projection_type = projection_type;
-    __GXContexts.main->projection_v[0] = proj[0];
-    __GXContexts.main->projection_v[2] = proj[5];
-    __GXContexts.main->projection_v[4] = proj[10];
-    __GXContexts.main->projection_v[5] = proj[11];
+    __GXContexts.main->projection_v[0] = proj[0][0];
+    __GXContexts.main->projection_v[2] = proj[1][1];
+    __GXContexts.main->projection_v[4] = proj[2][2];
+    __GXContexts.main->projection_v[5] = proj[2][3];
     if ((s32) projection_type == 1) {
-        __GXContexts.main->projection_v[1] = proj[3];
-        __GXContexts.main->projection_v[3] = proj[7];
+        __GXContexts.main->projection_v[1] = proj[0][3];
+        __GXContexts.main->projection_v[3] = proj[1][3];
     } else {
-        __GXContexts.main->projection_v[1] = proj[2];
-        __GXContexts.main->projection_v[3] = proj[6];
+        __GXContexts.main->projection_v[1] = proj[0][2];
+        __GXContexts.main->projection_v[3] = proj[1][2];
     }
     WGPIPE.u8 = GX_LOAD_XF_REG;
     WGPIPE.u32 = 0x61020;

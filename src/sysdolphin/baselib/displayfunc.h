@@ -16,4 +16,8 @@ void HSD_JObjDisp(HSD_JObj* jobj, MtxPtr, u32 flags, u32 rendermode);
 
 void HSD_StateInitDirect(int vtxfmt, u32 param_2);
 
+void _HSD_ZListSort(void);
+void _HSD_ZListDisp(void);
+void _HSD_ZListClear(void);
+
 #endif

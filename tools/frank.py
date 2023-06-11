@@ -82,6 +82,11 @@ while idx < len(profile_bytes) - 16:
     profile_inst_b = profile_bytes[epi_pos+8:epi_pos+12]
     profile_inst_c = profile_bytes[epi_pos+12:epi_pos+16]
 
+    # Instruction decoding
+    as_int = lambda x: int.from_bytes(x, "big")
+    RT = lambda x: (as_int(x) >> 21) & 0x1F
+    RA = lambda x: (as_int(x) >> 16) & 0x1F
+
     opcode_a = vanilla_inst_a[0] >> 2
     opcode_b = vanilla_inst_b[0] >> 2
     opcode_c = vanilla_inst_c[0] >> 2
@@ -98,6 +103,8 @@ while idx < len(profile_bytes) - 16:
        vanilla_inst_a == profile_inst_b and \
        vanilla_inst_b == profile_inst_a and \
        vanilla_inst_c == profile_inst_c and \
+       not (opcode_a == LWZ  and RA(vanilla_inst_a) == 1 and
+            opcode_b == ADDI and RA(vanilla_inst_b) != 0) and \
        opcode_c != ADDI: # <- don't reorder if at the very end of the epilogue
 
         # Swap instructions (A) and (B)

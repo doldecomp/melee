@@ -436,10 +436,10 @@ Vec3* lbVector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
         return NULL;
     }
 
-    viewport[0] = cobj->viewport_left;                        // x origin
-    viewport[1] = cobj->viewport_top;                         // y origin
-    viewport[2] = cobj->viewport_right - cobj->viewport_left; // width
-    viewport[3] = cobj->viewport_bottom - cobj->viewport_top; // height
+    viewport[0] = cobj->viewport.left;                        // x origin
+    viewport[1] = cobj->viewport.top;                         // y origin
+    viewport[2] = cobj->viewport.right - cobj->viewport.left; // width
+    viewport[3] = cobj->viewport.bottom - cobj->viewport.top; // height
     viewport[4] = 0.0f;                                       // near z
     viewport[5] = 1.0f;                                       // far z
 
