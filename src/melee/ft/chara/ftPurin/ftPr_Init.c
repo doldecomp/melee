@@ -620,7 +620,7 @@ void ftPr_Init_OnKnockbackExit(HSD_GObj* gobj)
 }
 void ftPr_Init_8013C94C(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (!fp->x2219_b0) {
         efSync_Spawn(1238, gobj, fp->parts[FtPart_WaistN].joint);
@@ -638,7 +638,7 @@ extern f32 const ftPr_Init_804D9C18;
 
 static inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     fp->cmd_vars[0] = 0;
 
@@ -655,7 +655,7 @@ inline void ftPurin_SpecialHi_SetActionFromFacingDirection(HSD_GObj* gobj,
                                                            u32 left_id,
                                                            u32 right_id)
 {
-    Fighter* fighter = getFighter(gobj);
+    Fighter* fighter = GET_FIGHTER(gobj);
 
     if (ftPr_Init_804D9C10 == fighter->facing_dir) {
         Fighter_ChangeMotionState(gobj, left_id, 0, ftPr_Init_804D9C14,
@@ -707,7 +707,7 @@ void ftPr_SpecialAirHi_Enter(HSD_GObj* gobj)
 
 void ftPr_SpecialHi_Anim(Fighter_GObj* fighter_gobj)
 {
-    Fighter* fighter = getFighter(fighter_gobj);
+    Fighter* fighter = GET_FIGHTER(fighter_gobj);
 
     if (fighter->mv.pr.specialhi.x0 != 0 && !fighter->x914[0].x43_b2 &&
         fighter->x914[0].state != HitCapsule_Disabled)
@@ -770,16 +770,16 @@ void ftPr_SpecialAirHi_Coll(HSD_GObj* gobj)
 
 void ftPr_SpecialHi_8013CD34(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D5D4(fp);
 
     if (ftPr_Init_804D9C10 == fp->facing_dir) {
-        Fighter_ChangeMotionState(gobj, 366, 0x0C4C508A, fp->cur_anim_frame,
+        Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirHiL, 0x0C4C508A, fp->cur_anim_frame,
                                   ftPr_Init_804D9C18, ftPr_Init_804D9C14,
                                   NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, 368, 0x0C4C508A, fp->cur_anim_frame,
+        Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirHiR, 0x0C4C508A, fp->cur_anim_frame,
                                   ftPr_Init_804D9C18, ftPr_Init_804D9C14,
                                   NULL);
     }
@@ -792,11 +792,11 @@ void ftPr_SpecialHi_8013CDD8(Fighter_GObj* fighter_gobj)
     Fighter* fighter = fighter_gobj->user_data;
     ftCommon_8007D7FC(fighter);
     if (ftPr_Init_804D9C10 == fighter->facing_dir) {
-        Fighter_ChangeMotionState(fighter_gobj, 0x16D, 0x0C4C508AU,
+        Fighter_ChangeMotionState(fighter_gobj, ftPr_MS_SpecialHiL, 0x0C4C508AU,
                                   fighter->cur_anim_frame, ftPr_Init_804D9C18,
                                   ftPr_Init_804D9C14, NULL);
     } else {
-        Fighter_ChangeMotionState(fighter_gobj, 0x16F, 0x0C4C508AU,
+        Fighter_ChangeMotionState(fighter_gobj, ftPr_MS_SpecialHiR, 0x0C4C508AU,
                                   fighter->cur_anim_frame, ftPr_Init_804D9C18,
                                   ftPr_Init_804D9C14, NULL);
     }
@@ -805,7 +805,7 @@ void ftPr_SpecialHi_8013CDD8(Fighter_GObj* fighter_gobj)
 
 void ftPr_SpecialHi_8013CE7C(Fighter_GObj* fighter_gobj)
 {
-    Fighter* fighter = getFighter(fighter_gobj);
+    Fighter* fighter = GET_FIGHTER(fighter_gobj);
     fighter->cb.x21BC_callback_Accessory4 = NULL;
 }
 
@@ -1060,27 +1060,21 @@ extern f32 const ftPr_Init_804D9C38;
 
 void ftPr_SpecialS_Enter(Fighter_GObj* fighter_gobj)
 {
-    Fighter* fighter = getFighter(fighter_gobj);
+    Fighter* fighter = GET_FIGHTER(fighter_gobj);
     Fighter_ChangeMotionState(fighter_gobj, 0x16B, 0, ftPr_Init_804D9C30,
                               ftPr_Init_804D9C38, ftPr_Init_804D9C30, NULL);
     ftAnim_8006EBA4(fighter_gobj);
-    fighter->cmd_vars[3] = 0;
-    fighter->cmd_vars[2] = 0;
-    fighter->cmd_vars[1] = 0;
-    fighter->cmd_vars[0] = 0;
+    fighter->cmd_vars[0] = fighter->cmd_vars[1] = fighter->cmd_vars[2] = fighter->cmd_vars[3] = 0;
 }
 
 void ftPr_SpecialAirS_Enter(Fighter_GObj* fighter_gobj)
 {
-    Fighter* fighter = getFighter(fighter_gobj);
+    Fighter* fighter = GET_FIGHTER(fighter_gobj);
 
     Fighter_ChangeMotionState(fighter_gobj, 0x16C, 0, ftPr_Init_804D9C30,
                               ftPr_Init_804D9C38, ftPr_Init_804D9C30, NULL);
     ftAnim_8006EBA4(fighter_gobj);
-    fighter->cmd_vars[3] = 0;
-    fighter->cmd_vars[2] = 0;
-    fighter->cmd_vars[1] = 0;
-    fighter->cmd_vars[0] = 0;
+    fighter->cmd_vars[0] = fighter->cmd_vars[1] = fighter->cmd_vars[2] = fighter->cmd_vars[3] = 0;
 }
 
 #ifdef MWERKS_GEKKO
