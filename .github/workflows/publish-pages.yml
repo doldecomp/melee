@@ -34,7 +34,7 @@ jobs:
           esac
 
           result=$(echo "$result/$IMAGE_SUFFIX" | tr '[:upper:]' '[:lower:]')
-          echo "IMAGE=$result" >> $GITHUB_ENV
+          echo "IMAGE=doldecomp/melee/build-linux:latest" >> $GITHUB_ENV
 
       - name: Checkout Melee repository
         uses: actions/checkout@v3
