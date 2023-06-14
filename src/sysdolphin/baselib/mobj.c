@@ -397,9 +397,9 @@ void HSD_MObjSetup(HSD_MObj* mobj, u32 rendermode)
     HSD_StateInitTev();
     rendermode = mobj->rendermode;
     HSD_SetMaterialColor(mobj->mat->ambient, mobj->mat->diffuse,
-                         mobj->mat->specular, mobj->mat, mobj->mat->alpha);
+                         mobj->mat->specular, mobj->mat->alpha);
     if (rendermode & RENDER_SPECULAR) {
-        HSD_SetMaterialShininess(mobj->mat, mobj->mat->shininess);
+        HSD_SetMaterialShininess(mobj->mat->shininess);
     }
 
     tobj = mobj->tobj;
