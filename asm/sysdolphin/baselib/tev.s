@@ -706,8 +706,8 @@ HSD_Tev_80362B6C:
 /* 80362C98 0035F878  38 21 00 20 */	addi r1, r1, 0x20
 /* 80362C9C 0035F87C  4E 80 00 20 */	blr
 
-.global HSD_Tev_80362CA0
-HSD_Tev_80362CA0:
+.global _HSD_StateInvalidateColorChannel
+_HSD_StateInvalidateColorChannel:
 /* 80362CA0 0035F880  7C 08 02 A6 */	mflr r0
 /* 80362CA4 0035F884  3C 60 80 40 */	lis r3, HSD_Tev_80405BC8@ha
 /* 80362CA8 0035F888  90 01 00 04 */	stw r0, 4(r1)
@@ -731,14 +731,14 @@ HSD_Tev_80362CA0:
 /* 80362CF0 0035F8D0  7C 08 03 A6 */	mtlr r0
 /* 80362CF4 0035F8D4  4E 80 00 20 */	blr
 
-.global HSD_Tev_80362CF8
-HSD_Tev_80362CF8:
+.global _HSD_StateInvalidateTevStage
+_HSD_StateInvalidateTevStage:
 /* 80362CF8 0035F8D8  38 00 00 00 */	li r0, 0
 /* 80362CFC 0035F8DC  90 0D BF 58 */	stw r0, current_tev@sda21(r13)
 /* 80362D00 0035F8E0  4E 80 00 20 */	blr
 
-.global HSD_Tev_80362D04
-HSD_Tev_80362D04:
+.global _HSD_StateInvalidateTevRegister
+_HSD_StateInvalidateTevRegister:
 /* 80362D04 0035F8E4  3C 60 80 40 */	lis r3, HSD_Tev_80405B98@ha
 /* 80362D08 0035F8E8  38 63 5B 98 */	addi r3, r3, HSD_Tev_80405B98@l
 /* 80362D0C 0035F8EC  38 00 00 00 */	li r0, 0
@@ -748,8 +748,8 @@ HSD_Tev_80362D04:
 /* 80362D1C 0035F8FC  90 03 00 2C */	stw r0, 0x2c(r3)
 /* 80362D20 0035F900  4E 80 00 20 */	blr
 
-.global HSD_Tev_80362D24
-HSD_Tev_80362D24:
+.global _HSD_StateInvalidateTexCoordGen
+_HSD_StateInvalidateTexCoordGen:
 /* 80362D24 0035F904  38 00 00 00 */	li r0, 0
 /* 80362D28 0035F908  90 0D BF 5C */	stw r0, num_tex_gens@sda21(r13)
 /* 80362D2C 0035F90C  4E 80 00 20 */	blr
