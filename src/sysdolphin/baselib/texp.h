@@ -60,7 +60,7 @@ typedef struct _HSD_TevConf {
     u32 clr_d;
     u32 clr_scale;
     u32 clr_bias;
-    u32 clr_clamp;
+    u8 clr_clamp;
     u32 clr_out_reg;
     u32 alpha_op;
     u32 alpha_a;
@@ -69,7 +69,7 @@ typedef struct _HSD_TevConf {
     u32 alpha_d;
     u32 alpha_scale;
     u32 alpha_bias;
-    u32 alpha_clamp;
+    u8 alpha_clamp;
     u32 alpha_out_reg;
     u32 mode;
     u32 ras_swap;

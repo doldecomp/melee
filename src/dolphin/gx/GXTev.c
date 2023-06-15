@@ -135,7 +135,7 @@ void GXSetTevColor(GXTevRegID id, GXColor color)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void GXSetTevColorS10(s32, GXColor*)
+asm void GXSetTevColorS10(s32, GXColorS10)
 { // clang-format off
     nofralloc
 /* 80340260 0033CE40  A8 04 00 06 */	lha r0, 6(r4)
