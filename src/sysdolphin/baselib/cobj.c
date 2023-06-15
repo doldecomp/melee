@@ -2447,6 +2447,8 @@ void HSD_CObjGetViewportf(HSD_CObj* cobj, struct Viewport* viewport)
     *viewport = cobj->viewport;
 }
 
+extern const f64 HSD_CObj_804DE4C8;
+
 // Uses s16 -> f32 cast literal
 #ifndef MUST_MATCH
 void HSD_CObjSetViewport(HSD_CObj* cobj, s16* viewport)
@@ -2460,7 +2462,6 @@ void HSD_CObjSetViewport(HSD_CObj* cobj, s16* viewport)
     cobj->viewport.bottom = viewport[3];
 }
 #else
-extern const f64 HSD_CObj_804DE4C8;
 #pragma push
 asm void HSD_CObjSetViewport(HSD_CObj* cobj, s16* viewport)
 { // clang-format off
