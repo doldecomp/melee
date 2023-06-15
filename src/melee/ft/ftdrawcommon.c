@@ -33,7 +33,6 @@ extern s32 ftDrawCommon_804D8370[2];
 extern void ftParts_800750C8(void);
 extern void ftCo_800C8AF0(void);
 extern void ftCo_8009F5AC(void);
-extern void HSD_CObjGetInvViewingMtxPtr(void);
 extern void Camera_800310B8(void);
 extern void Camera_80031060(void);
 extern void ftCo_800C2600(void);
