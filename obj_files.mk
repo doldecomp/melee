@@ -754,7 +754,6 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/tev.c.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/tev.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/mobj.c.o\
