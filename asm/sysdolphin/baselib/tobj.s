@@ -1124,7 +1124,8 @@ MakeColorGenTExp:
 /* 80360094 0035CC74  38 21 00 C0 */	addi r1, r1, 0xc0
 /* 80360098 0035CC78  7C 08 03 A6 */	mtlr r0
 /* 8036009C 0035CC7C  4E 80 00 20 */	blr
-.L_803600A0:
+
+TObjMakeTExp:
 /* 803600A0 0035CC80  7C 08 02 A6 */	mflr r0
 /* 803600A4 0035CC84  90 01 00 04 */	stw r0, 4(r1)
 /* 803600A8 0035CC88  38 00 FF FF */	li r0, -1
@@ -1961,6 +1962,8 @@ HSD_TObjSetup:
 /* 80360C2C 0035D80C  38 21 00 90 */	addi r1, r1, 0x90
 /* 80360C30 0035D810  7C 08 03 A6 */	mtlr r0
 /* 80360C34 0035D814  4E 80 00 20 */	blr
+
+HSD_TGTex2Index:
 /* 80360C38 0035D818  7C 08 02 A6 */	mflr r0
 /* 80360C3C 0035D81C  90 01 00 04 */	stw r0, 4(r1)
 /* 80360C40 0035D820  38 03 FF FC */	addi r0, r3, -4
@@ -2054,6 +2057,8 @@ HSD_TexCoordID2TexGenSrc:
 /* 80360D48 0035D928  38 21 00 08 */	addi r1, r1, 8
 /* 80360D4C 0035D92C  7C 08 03 A6 */	mtlr r0
 /* 80360D50 0035D930  4E 80 00 20 */	blr
+
+HSD_TexCoord2Index:
 /* 80360D54 0035D934  7C 08 02 A6 */	mflr r0
 /* 80360D58 0035D938  28 03 00 07 */	cmplwi r3, 7
 /* 80360D5C 0035D93C  90 01 00 04 */	stw r0, 4(r1)
@@ -2320,6 +2325,8 @@ HSD_Index2TexMap:
 /* 80361064 0035DC44  38 21 00 08 */	addi r1, r1, 8
 /* 80361068 0035DC48  7C 08 03 A6 */	mtlr r0
 /* 8036106C 0035DC4C  4E 80 00 20 */	blr
+
+HSD_TexMap2Index:
 /* 80361070 0035DC50  7C 08 02 A6 */	mflr r0
 /* 80361074 0035DC54  28 03 00 07 */	cmplwi r3, 7
 /* 80361078 0035DC58  90 01 00 04 */	stw r0, 4(r1)
@@ -2723,9 +2730,9 @@ TObjInfoInit:
 /* 80361594 0035E174  3C 60 80 36 */	lis r3, TObjLoad@ha
 /* 80361598 0035E178  90 1F 00 38 */	stw r0, 0x38(r31)
 /* 8036159C 0035E17C  38 03 EC 08 */	addi r0, r3, TObjLoad@l
-/* 803615A0 0035E180  3C 60 80 36 */	lis r3, .L_803600A0@ha
+/* 803615A0 0035E180  3C 60 80 36 */	lis r3, TObjMakeTExp@ha
 /* 803615A4 0035E184  90 1F 00 40 */	stw r0, 0x40(r31)
-/* 803615A8 0035E188  38 03 00 A0 */	addi r0, r3, .L_803600A0@l
+/* 803615A8 0035E188  38 03 00 A0 */	addi r0, r3, TObjMakeTExp@l
 /* 803615AC 0035E18C  3C 60 80 36 */	lis r3, MakeTextureMtx@ha
 /* 803615B0 0035E190  90 1F 00 44 */	stw r0, 0x44(r31)
 /* 803615B4 0035E194  38 03 EF 38 */	addi r0, r3, MakeTextureMtx@l
@@ -3016,7 +3023,6 @@ tobj_head:
 
 .set .L_804DE3EC, tobj_c_sdata2_start + 0xC
 .set .L_804DE3F0, tobj_c_sdata2_start + 0x10
-.set .L_804DE3F8, tobj_c_sdata2_start + 0x18
 
 .global HSD_TObj_804DE400
 HSD_TObj_804DE400:
