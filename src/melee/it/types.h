@@ -800,10 +800,7 @@ struct ItemCommonData {
     s32 x5C_float;
     s32 x60_float;
     s32 x64_float;
-    union {
-        s32 x68_float;
-        f32 x68_f32;
-    };
+    f32 x68_float;
     f32 x6C_float;
     f32 x70_float;
     f32 x74_float;

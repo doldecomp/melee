@@ -137,7 +137,7 @@ void it_8027D230(Item_GObj* gobj)
 void it_8027D258(Item_GObj* item_gobj)
 {
     it_8027D178(item_gobj);
-    it_80274658(item_gobj, it_804D6D28->x68_f32);
+    it_80274658(item_gobj, it_804D6D28->x68_float);
 }
 
 bool it_8027D2A4(Item_GObj* item_gobj)
