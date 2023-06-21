@@ -19598,10 +19598,6 @@ it_804D51E0:
 it_804D51E8:
     .asciz "jobj"
     .balign 4
-.global it_804D51F0
-it_804D51F0:
-    .asciz "jobj.h"
-    .balign 4
 
 
 .section .sbss
