@@ -1,8 +1,8 @@
 #include "itcapsule.h"
 
-#include "it_266F.h"
-#include "it_26B1.h"
-#include "item.h"
+#include <melee/it/it_266F.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/item.h>
 
 #include <melee/lb/lb_00F9.h>
 
