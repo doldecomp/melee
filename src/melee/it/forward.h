@@ -81,7 +81,7 @@ typedef enum Item_UnkKinds {
 // Based on "ID Lists" from the SSBM datasheet, in-game references, and further
 // research by VetriTheRetri
 // https://docs.google.com/spreadsheets/d/1JX2w-r2fuvWuNgGb6D3Cs4wHQKLFegZe2jhbBuIhCG8
-//
+// Development JP name strings are listed starting at data address 0x803EA7A8
 
 typedef enum ItemKind {
     // COMMON ITEMS

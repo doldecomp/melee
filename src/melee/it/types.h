@@ -654,6 +654,7 @@ struct Item {
     UnkFlagStruct xDD2_flag;
     UnkFlagStruct xDD3_flag;
     union {
+        ItCapsuleAttrs capsule;
         BobOmbVars BobOmb;
         HeartContainerVars HeartContainer;
         MaximTomatoVars MaximTomato;
@@ -799,7 +800,7 @@ struct ItemCommonData {
     s32 x5C_float;
     s32 x60_float;
     s32 x64_float;
-    s32 x68_float;
+    f32 x68_float;
     f32 x6C_float;
     f32 x70_float;
     f32 x74_float;
