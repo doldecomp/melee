@@ -3,6 +3,11 @@
 
 #include <platform.h>
 
+typedef struct {
+    bool x0;
+    bool x4;
+} ItCapsuleAttrs;
+
 typedef struct BobOmbVars {
     s32 xDD4;
     s32 xDD8;

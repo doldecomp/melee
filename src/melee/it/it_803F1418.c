@@ -1,3 +1,4 @@
+#include <melee/it/it_27CF.h>
 #include <melee/it/types.h>
 
 extern void it_8026EECC(HSD_GObj*, s32);
@@ -50,17 +51,6 @@ struct sdata_ItemGXLink it_803F1418[43] = {
 };
 
 void it_8027CF00();
-void it_8027D1D4();
-void it_8027D208();
-void it_8027D230();
-int it_8027D338();
-int it_8027D414();
-void it_8027D450();
-int it_8027D4B8();
-int it_8027D4F4();
-int it_8027D530();
-int it_8027D614();
-void it_8027D650();
 void it_8027D76C();
 void it_8027E0B4();
 void it_8027E648();

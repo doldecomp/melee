@@ -22,7 +22,6 @@ extern u32 it_804D6D10;
 ///       <tt>unsigned int</tt> first.
 extern uint it_804D6D14;
 
-extern ItemCommonData* it_804D6D28;
 extern CommonItemArticles* it_804D6D24;
 
 void it_8027B4A4(HSD_GObj*, u32);
