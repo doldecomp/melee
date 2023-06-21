@@ -21,7 +21,7 @@ void it_8027D230(Item_GObj*);
 void it_8027D258(Item_GObj*);
 bool it_8027D2A4(Item_GObj*);
 void it_8027D2DC(Item_GObj*);
-void it_8027D30C(Item_GObj*);
+bool it_8027D30C(Item_GObj*);
 void it_8027D32C(Item_GObj*);
 bool it_8027D330(Item_GObj*);
 bool it_8027D338(Item_GObj*);
