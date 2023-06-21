@@ -1,6 +1,5 @@
 #include <melee/it/it_27CF.h>
-#include <melee/it/itcapsule.h>
-#include <melee/it/types.h>
+#include <melee/it/items/itcapsule.h>
 
 extern void it_8026EECC(HSD_GObj*, s32);
 extern void it_80284E10(HSD_GObj*, s32);
