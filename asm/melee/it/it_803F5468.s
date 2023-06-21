@@ -2,36 +2,6 @@
 
 .section .data
     .balign 8
-.global it_803F5468
-it_803F5468:
-    .4byte 0xFFFFFFFF
-    .4byte it_8027D110
-    .4byte it_8027D118
-    .4byte it_8027D11C
-    .4byte 0xFFFFFFFF
-    .4byte it_8027D170
-    .4byte it_8027D178
-    .4byte it_8027D1A8
-    .4byte 0xFFFFFFFF
-    .4byte it_8027D1FC
-    .4byte it_8027D204
-    .4byte NULL
-    .4byte NULL
-    .4byte it_8027D170
-    .4byte it_8027D258
-    .4byte it_8027D2A4
-    .4byte NULL
-    .4byte it_8027D170
-    .4byte it_8027D178
-    .4byte it_8027D1A8
-    .4byte 0x00000001
-    .4byte it_8027D30C
-    .4byte it_8027D32C
-    .4byte it_8027D330
-    .4byte 0xFFFFFFFF
-    .4byte it_8027D478
-    .4byte it_8027D480
-    .4byte it_8027D484
 .global it_803F54D8
 it_803F54D8:
     .4byte 0xFFFFFFFF

@@ -16,13 +16,58 @@ void it_80272C08();
 void it_80273454();
 void it_80274658(Item_GObj*, f32);
 void it_8027518C();
-void it_802751D8(Item_GObj*);
+bool it_802751D8(Item_GObj*);
 void it_80275444();
 void it_802756D0();
 void it_8027D258(Item_GObj*);
 void it_8027D2DC();
 void it_8026E8C4(Item_GObj*, HSD_GObjEvent, HSD_GObjEvent);
 void itColl_BounceOffShield(Item_GObj*);
+
+ItemStateTable it_803F5468[] = {
+    {
+        -1,
+        it_8027D110,
+        it_8027D118,
+        it_8027D11C,
+    },
+    {
+        -1,
+        it_8027D170,
+        it_8027D178,
+        it_8027D1A8,
+    },
+    {
+        -1,
+        it_8027D1FC,
+        it_8027D204,
+        NULL,
+    },
+    {
+        0,
+        it_8027D170,
+        it_8027D258,
+        it_8027D2A4,
+    },
+    {
+        0,
+        it_8027D170,
+        it_8027D178,
+        it_8027D1A8,
+    },
+    {
+        1,
+        it_8027D30C,
+        it_8027D32C,
+        it_8027D330,
+    },
+    {
+        -1,
+        it_8027D478,
+        it_8027D480,
+        it_8027D484,
+    },
+};
 
 void it_8027CF30(Item_GObj* gobj)
 {
@@ -155,9 +200,9 @@ void it_8027D2DC(Item_GObj* item_gobj)
     }
 }
 
-void it_8027D30C(Item_GObj* item_gobj)
+bool it_8027D30C(Item_GObj* item_gobj)
 {
-    it_802751D8(item_gobj);
+    return it_802751D8(item_gobj);
 }
 
 void it_8027D32C(Item_GObj*) {}
