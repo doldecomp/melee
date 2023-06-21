@@ -96,22 +96,22 @@ void it_80284AAC();
 void it_80284B30();
 void it_80284BA0();
 void it_80284C10();
-void it_80284C78();
-void it_80284CAC();
-void it_80284CCC();
-void it_80284CF0();
-void it_80284D14();
+bool it_80284C78();
+bool it_80284CAC();
+bool it_80284CCC();
+bool it_80284CF0();
+bool it_80284D14();
 void it_80284D34();
 void it_80285338();
 void it_80285804();
 void it_80285B00();
 void it_80285C78();
 void it_80285DF0();
-void it_80285FAC();
-void it_80285FE0();
-void it_80286000();
-void it_80286024();
-void it_80286048();
+bool it_80285FAC();
+bool it_80285FE0();
+bool it_80286000();
+bool it_80286024();
+bool it_80286048();
 void it_80286068();
 void it_802861CC();
 void it_80286208();
@@ -159,11 +159,11 @@ void it_8028B06C();
 void it_8028B0B8();
 void it_8028B3C0();
 void it_8028B3E0();
-void it_8028B4D4();
-void it_8028B4F8();
-void it_8028B51C();
-void it_8028B540();
-void it_8028B560();
+bool it_8028B4D4();
+bool it_8028B4F8();
+bool it_8028B51C();
+bool it_8028B540();
+bool it_8028B560();
 void it_8028B580();
 void it_8028B5E8();
 void it_8028B8B8();
@@ -172,34 +172,34 @@ void it_8028C148();
 void it_8028C1AC();
 void it_8028C300();
 void it_8028CB24();
-void it_8028CCA8();
-void it_8028CCCC();
-void it_8028CD04();
-void it_8028CD3C();
-void it_8028CE1C();
-void it_8028CF2C();
+bool it_8028CCA8();
+bool it_8028CCCC();
+bool it_8028CD04();
+bool it_8028CD3C();
+bool it_8028CE1C();
+bool it_8028CF2C();
 void it_8028CFC0();
 void it_8028D59C();
 void it_8028D898();
 void it_8028D8E0();
 void it_8028D9F4();
 void it_8028E3CC();
-void it_8028E540();
-void it_8028E584();
-void it_8028E5C8();
-void it_8028E600();
-void it_8028E624();
-void it_8028E684();
+bool it_8028E540();
+bool it_8028E584();
+bool it_8028E5C8();
+bool it_8028E600();
+bool it_8028E624();
+bool it_8028E684();
 void it_8028E718();
 void it_8028E738();
 void it_8028E904();
 void it_8028E9B8();
 void it_8028E9E0();
-void it_8028EA54();
-void it_8028EA78();
-void it_8028EA9C();
-void it_8028EAC0();
-void it_8028EAE0();
+bool it_8028EA54();
+bool it_8028EA78();
+bool it_8028EA9C();
+bool it_8028EAC0();
+bool it_8028EAE0();
 void it_8028EB00();
 void it_8028EB68();
 void it_8028ED10();
@@ -207,13 +207,13 @@ void it_8028ED50();
 void it_8028F2B4();
 void it_8028F318();
 void it_8028F340();
-void it_8028F3CC();
-void it_8028F3D4();
-void it_8028F3DC();
-void it_8028F3E4();
-void it_8028F3EC();
-void it_8028F40C();
-void it_8028F42C();
+bool it_8028F3CC();
+bool it_8028F3D4();
+bool it_8028F3DC();
+bool it_8028F3E4();
+bool it_8028F3EC();
+bool it_8028F40C();
+bool it_8028F42C();
 void it_8028F8C4();
 void it_8028FBE4();
 void it_8028FD7C();
@@ -223,75 +223,75 @@ void it_8028FED4();
 void it_802900CC();
 void it_802900F4();
 void it_80290114();
-void it_802906E4();
-void it_80290738();
+bool it_802906E4();
+bool it_80290738();
 void it_80290794();
-void it_802907F0();
-void it_80290830();
-void it_80290850();
-void it_802908A4();
+bool it_802907F0();
+bool it_80290830();
+bool it_80290850();
+bool it_802908A4();
 void it_80290918();
 void it_80290A20();
 void it_80290F8C();
 void it_80290FC0();
 void it_80290FE0();
-void it_802915E8();
-void it_802917C8();
-void it_802918A0();
-void it_80291978();
-void it_80291998();
-void it_802919B8();
+bool it_802915E8();
+bool it_802917C8();
+bool it_802918A0();
+bool it_80291978();
+bool it_80291998();
+bool it_802919B8();
 void it_80291B58();
 void it_80291BC0();
 void it_80291C98();
 void it_8029215C();
 void it_80292190();
 void it_802921B8();
-void it_8029222C();
-void it_80292250();
-void it_80292274();
-void it_80292298();
-void it_802922B8();
+bool it_8029222C();
+bool it_80292250();
+bool it_80292274();
+bool it_80292298();
+bool it_802922B8();
 void it_802922D8();
 void it_80292340();
 void it_80292360();
 void it_80292514();
 void it_80292548();
 void it_802925B4();
-void it_8029266C();
+bool it_8029266C();
 void it_802926A8();
-void it_80292710();
-void it_8029274C();
-void it_8029276C();
-void it_802927A8();
+bool it_80292710();
+bool it_8029274C();
+bool it_8029276C();
+bool it_802927A8();
 void it_802927C8();
 void it_8029285C();
 void it_80292A5C();
 void it_80292A90();
 void it_80292B2C();
-void it_80292BCC();
+bool it_80292BCC();
 void it_80292C08();
-void it_80292C70();
-void it_80292CAC();
-void it_80292CCC();
-void it_80292D08();
+bool it_80292C70();
+bool it_80292CAC();
+bool it_80292CCC();
+bool it_80292D08();
 void it_80292D28();
 void it_80292E04();
 void it_80293284();
 void it_802933C4();
 void it_802933EC();
-void it_80293488();
-void it_802934AC();
-void it_802934D0();
-void it_802934F4();
-void it_80293514();
+bool it_80293488();
+bool it_802934AC();
+bool it_802934D0();
+bool it_802934F4();
+bool it_80293514();
 void it_80293534();
 void it_80293640();
 void it_8029367C();
-void it_802939E0();
+bool it_802939E0();
 void it_802939E8();
 void it_80293A08();
-void it_80293D6C();
+bool it_80293D6C();
 void it_80293D74();
 void it_80293F58();
 void it_802940FC();
@@ -308,11 +308,11 @@ void it_80294BE4();
 void it_80294C14();
 void it_80294C3C();
 void it_80294CE4();
-void it_80294D4C();
-void it_80294D54();
-void it_80294D5C();
-void it_80294D7C();
-void it_80294DA0();
+bool it_80294D4C();
+bool it_80294D54();
+bool it_80294D5C();
+bool it_80294D7C();
+bool it_80294DA0();
 void it_80295118();
 void it_8029524C();
 void it_80295298();
@@ -321,19 +321,19 @@ void it_802953A8();
 void it_802953C8();
 void it_80295524();
 void it_80295554();
-void it_802955E0();
+bool it_802955E0();
 void it_80295684();
 void it_802956EC();
 void it_8029570C();
 void it_802958C8();
 void it_80295908();
 void it_80295974();
-void it_80295ACC();
+bool it_80295ACC();
 void it_80295B08();
-void it_80295B70();
-void it_80295BAC();
-void it_80295BCC();
-void it_80295C08();
+bool it_80295B70();
+bool it_80295BAC();
+bool it_80295BCC();
+bool it_80295C08();
 void it_80295C28();
 void it_80295C48();
 void it_80295D90();
@@ -355,57 +355,57 @@ void it_80297904();
 void it_80297ABC();
 void it_80297AF0();
 void it_80297B18();
-void it_80297BB8();
+bool it_80297BB8();
 void it_80297BF8();
-void it_80298060();
-void it_802980A0();
-void it_802980D4();
-void it_80298114();
+bool it_80298060();
+bool it_802980A0();
+bool it_802980D4();
+bool it_80298114();
 void it_80298148();
-void it_80298634();
-void it_8029863C();
-void it_80298644();
-void it_8029864C();
-void it_80298654();
-void it_80298828();
+bool it_80298634();
+bool it_8029863C();
+bool it_80298644();
+bool it_8029864C();
+bool it_80298654();
+bool it_80298828();
 void it_802988C4();
-void it_80298BE4();
-void it_80298BEC();
-void it_80298BF4();
-void it_80298BFC();
-void it_80298C04();
-void it_80298CE8();
+bool it_80298BE4();
+bool it_80298BEC();
+bool it_80298BF4();
+bool it_80298BFC();
+bool it_80298C04();
+bool it_80298CE8();
 void it_80298DCC();
-void it_80299360();
-void it_80299368();
-void it_80299370();
-void it_80299378();
-void it_80299380();
-void it_802993A0();
+bool it_80299360();
+bool it_80299368();
+bool it_80299370();
+bool it_80299378();
+bool it_80299380();
+bool it_802993A0();
 void it_802993C0();
-void it_80299B6C();
-void it_80299B74();
-void it_80299C08();
-void it_80299C10();
-void it_80299C18();
-void it_80299C20();
+bool it_80299B6C();
+bool it_80299B74();
+bool it_80299C08();
+bool it_80299C10();
+bool it_80299C18();
+bool it_80299C20();
 void it_80299C28();
 void it_80299D4C();
 void it_80299DD0();
 void it_80299E28();
 void it_80299E48();
-void it_8029A0B0();
-void it_8029A0B8();
-void it_8029A0C0();
-void it_8029A0C8();
-void it_8029A0EC();
+bool it_8029A0B0();
+bool it_8029A0B8();
+bool it_8029A0C0();
+bool it_8029A0C8();
+bool it_8029A0EC();
 void it_8029A0F4();
-void it_8029A600();
-void it_8029A608();
-void it_8029A610();
-void it_8029A618();
-void it_8029A620();
-void it_8029A704();
+bool it_8029A600();
+bool it_8029A608();
+bool it_8029A610();
+bool it_8029A618();
+bool it_8029A620();
+bool it_8029A704();
 void it_8029A728();
 void it_8029A9FC();
 void it_8029AD1C();
@@ -417,11 +417,11 @@ void it_8029B1AC();
 void it_8029B2F4();
 void it_8029B328();
 void it_8029B348();
-void it_8029B46C();
-void it_8029B4AC();
-void it_8029B4EC();
-void it_8029B52C();
-void it_8029B56C();
+bool it_8029B46C();
+bool it_8029B4AC();
+bool it_8029B4EC();
+bool it_8029B52C();
+bool it_8029B56C();
 void it_8029B670();
 void it_8029B6D8();
 extern ItemStateContainer it_803F5468;
@@ -430,46 +430,46 @@ extern ItemStateContainer it_803F55D0;
 extern ItemStateContainer it_803F56C8;
 extern ItemStateContainer it_803F5740;
 extern ItemStateContainer it_803F57A0;
-void it_803F57B0();
-void it_803F5800();
+extern ItemStateContainer it_803F57B0;
+extern ItemStateContainer it_803F5800;
 extern ItemStateContainer it_803F5850;
 extern ItemStateContainer it_803F58E0;
 extern ItemStateContainer it_803F5988;
 extern ItemStateContainer it_803F59F8;
-void it_803F5AB0();
-void it_803F5BA8();
-void it_803F5C48();
-void it_803F5CC8();
-void it_803F5D28();
-void it_803F5DB0();
-void it_803F5E00();
-void it_803F5EA8();
-void it_803F5F40();
-void it_803F5F90();
-void it_803F5FF0();
-void it_803F6090();
-void it_803F6110();
-void it_803F6130();
-void it_803F6150();
-void it_803F61B0();
-void it_803F6220();
-void it_803F6270();
-void it_803F62C0();
-void it_803F6310();
-void it_803F6370();
+extern ItemStateContainer it_803F5AB0;
+extern ItemStateContainer it_803F5BA8;
+extern ItemStateContainer it_803F5C48;
+extern ItemStateContainer it_803F5CC8;
+extern ItemStateContainer it_803F5D28;
+extern ItemStateContainer it_803F5DB0;
+extern ItemStateContainer it_803F5E00;
+extern ItemStateContainer it_803F5EA8;
+extern ItemStateContainer it_803F5F40;
+extern ItemStateContainer it_803F5F90;
+extern ItemStateContainer it_803F5FF0;
+extern ItemStateContainer it_803F6090;
+extern ItemStateContainer it_803F6110;
+extern ItemStateContainer it_803F6130;
+extern ItemStateContainer it_803F6150;
+extern ItemStateContainer it_803F61B0;
+extern ItemStateContainer it_803F6220;
+extern ItemStateContainer it_803F6270;
+extern ItemStateContainer it_803F62C0;
+extern ItemStateContainer it_803F6310;
+extern ItemStateContainer it_803F6370;
 extern ItemStateContainer it_803F63C0;
-void it_803F6488();
-void it_803F64F8();
-void it_803F6530();
-void it_803F6568();
-void it_803F6630();
-void it_803F6640();
-void it_803F6680();
-void it_803F66C8();
-void it_803F6728();
+extern ItemStateContainer it_803F6488;
+extern ItemStateContainer it_803F64F8;
+extern ItemStateContainer it_803F6530;
+extern ItemStateContainer it_803F6568;
+extern ItemStateContainer it_803F6630;
+extern ItemStateContainer it_803F6640;
+extern ItemStateContainer it_803F6680;
+extern ItemStateContainer it_803F66C8;
+extern ItemStateContainer it_803F6728;
 
 
-struct ItemLogicTable it_803F14C4[/*43*/] = {
+struct ItemLogicTable it_803F14C4[43] = {
     { // Capsule
         &it_803F5468,
         it_8027CF00,
@@ -657,13 +657,8 @@ struct ItemLogicTable it_803F14C4[/*43*/] = {
         NULL,
         it_80284834,
     },
-};
-
-// TODO merge all these into it_803F14C4
-#pragma push
-#pragma force_active on
-void* it_803F14C4_after[] = {
-        it_803F57B0,
+    { // Bat
+        &it_803F57B0,
         it_80284910,
         NULL,
         it_80284AAC,
@@ -678,7 +673,9 @@ void* it_803F14C4_after[] = {
         it_80284D14,
         it_80284CF0,
         it_80284D34,
-        it_803F5800,
+    },
+    { // Sword
+        &it_803F5800,
         it_80285338,
         NULL,
         it_80285804,
@@ -693,7 +690,9 @@ void* it_803F14C4_after[] = {
         it_80286048,
         it_80286024,
         it_80286068,
-        it_803F5AB0,
+    },
+    { // Parasol
+        &it_803F5AB0,
         it_8028B0B8,
         NULL,
         it_8028B5E8,
@@ -708,7 +707,9 @@ void* it_803F14C4_after[] = {
         it_8028B560,
         it_8028B51C,
         it_8028B8B8,
-        it_803F5BA8,
+    },
+    { // G Shell
+        &it_803F5BA8,
         it_8028BDAC,
         NULL,
         it_8028C148,
@@ -723,7 +724,9 @@ void* it_803F14C4_after[] = {
         it_8028CF2C,
         it_8028CE1C,
         it_8028CFC0,
-        it_803F5C48,
+    },
+    { // R Shell
+        &it_803F5C48,
         it_8028D59C,
         NULL,
         it_8028D898,
@@ -738,7 +741,9 @@ void* it_803F14C4_after[] = {
         it_8028E684,
         it_8028E624,
         it_8028E718,
-        it_803F5CC8,
+    },
+    { // L Gun
+        &it_803F5CC8,
         it_8028E738,
         NULL,
         it_8028E904,
@@ -753,7 +758,9 @@ void* it_803F14C4_after[] = {
         it_8028EAE0,
         it_8028EA9C,
         it_8028EB68,
-        it_803F5D28,
+    },
+    { // Freeze
+        &it_803F5D28,
         it_8028ED50,
         it_8028ED10,
         it_8028F2B4,
@@ -768,7 +775,9 @@ void* it_803F14C4_after[] = {
         it_8028F40C,
         it_8028F3DC,
         it_8028F8C4,
-        it_803F5DB0,
+    },
+    { // Foods
+        &it_803F5DB0,
         it_8028FBE4,
         NULL,
         it_8028FD7C,
@@ -783,7 +792,9 @@ void* it_803F14C4_after[] = {
         NULL,
         NULL,
         it_8028FE70,
-        it_803F5E00,
+    },
+    { // MSBomb
+        &it_803F5E00,
         it_8028FED4,
         NULL,
         it_802900CC,
@@ -798,7 +809,9 @@ void* it_803F14C4_after[] = {
         it_802908A4,
         it_80290850,
         it_80290918,
-        it_803F5EA8,
+    },
+    { // Flipper
+        &it_803F5EA8,
         it_80290A20,
         NULL,
         it_80290F8C,
@@ -813,7 +826,9 @@ void* it_803F14C4_after[] = {
         it_80291998,
         it_802918A0,
         it_80291BC0,
-        it_803F5F40,
+    },
+    { // S_Scope
+        &it_803F5F40,
         it_80291C98,
         NULL,
         it_8029215C,
@@ -828,7 +843,9 @@ void* it_803F14C4_after[] = {
         it_802922B8,
         it_80292274,
         it_80292340,
-        it_803F5F90,
+    },
+    { // StarRod
+        &it_803F5F90,
         it_80292360,
         NULL,
         it_80292514,
@@ -843,7 +860,9 @@ void* it_803F14C4_after[] = {
         it_802927A8,
         it_8029276C,
         it_802927C8,
-        it_803F6310,
+    },
+    { // LipStick
+        &it_803F6310,
         it_8029570C,
         NULL,
         it_802958C8,
@@ -858,7 +877,9 @@ void* it_803F14C4_after[] = {
         it_80295C08,
         it_80295BCC,
         it_80295C28,
-        it_803F5FF0,
+    },
+    { // Harisen
+        &it_803F5FF0,
         it_8029285C,
         NULL,
         it_80292A5C,
@@ -873,7 +894,9 @@ void* it_803F14C4_after[] = {
         it_80292D08,
         it_80292CCC,
         it_80292D28,
-        it_803F6090,
+    },
+    { // F Flower
+        &it_803F6090,
         it_80292E04,
         NULL,
         it_80293284,
@@ -888,7 +911,9 @@ void* it_803F14C4_after[] = {
         it_80293514,
         it_802934D0,
         it_80293640,
-        it_803F6110,
+    },
+    { // Kinoko
+        &it_803F6110,
         it_8029367C,
         NULL,
         NULL,
@@ -903,7 +928,9 @@ void* it_803F14C4_after[] = {
         NULL,
         NULL,
         it_802939E8,
-        it_803F6130,
+    },
+    { // DKinoko
+        &it_803F6130,
         it_80293A08,
         NULL,
         NULL,
@@ -918,7 +945,9 @@ void* it_803F14C4_after[] = {
         NULL,
         NULL,
         it_80293D74,
-        it_803F6150,
+    },
+    { // Hammer
+        &it_803F6150,
         it_80293F58,
         NULL,
         it_802940FC,
@@ -933,7 +962,9 @@ void* it_803F14C4_after[] = {
         NULL,
         NULL,
         it_80294344,
-        it_803F61B0,
+    },
+    { // WStar
+        &it_803F61B0,
         it_8029451C,
         NULL,
         it_80294728,
@@ -948,7 +979,9 @@ void* it_803F14C4_after[] = {
         NULL,
         NULL,
         it_80294A90,
-        it_803F6220,
+    },
+    { // ScBall
+        &it_803F6220,
         it_80294AB0,
         NULL,
         it_80294BE4,
@@ -963,7 +996,9 @@ void* it_803F14C4_after[] = {
         it_80294DA0,
         it_80294D7C,
         it_80294A90,
-        it_803F6270,
+    },
+    { // Rabbit
+        &it_803F6270,
         it_80295118,
         NULL,
         it_8029524C,
@@ -978,7 +1013,9 @@ void* it_803F14C4_after[] = {
         NULL,
         NULL,
         it_802953A8,
-        it_803F62C0,
+    },
+    { // Metal Box
+        &it_803F62C0,
         it_802953C8,
         NULL,
         it_80295524,
@@ -993,7 +1030,9 @@ void* it_803F14C4_after[] = {
         NULL,
         NULL,
         it_802956EC,
-        it_803F6370,
+    },
+    { // Spycloak
+        &it_803F6370,
         it_80295C48,
         NULL,
         it_80295D90,
@@ -1008,7 +1047,9 @@ void* it_803F14C4_after[] = {
         NULL,
         NULL,
         it_80295EB4,
-        it_803F6488,
+    },
+    { // M Ball
+        &it_803F6488,
         it_80297904,
         it_802978DC,
         it_80297ABC,
@@ -1023,7 +1064,9 @@ void* it_803F14C4_after[] = {
         it_80298114,
         it_802980D4,
         it_80298148,
-        it_803F64F8,
+    },
+    { // L Gun Ray
+        &it_803F64F8,
         NULL,
         NULL,
         NULL,
@@ -1038,7 +1081,9 @@ void* it_803F14C4_after[] = {
         it_80298828,
         it_80298644,
         it_802988C4,
-        it_803F6530,
+    },
+    { // Star Rod Star
+        &it_803F6530,
         NULL,
         NULL,
         NULL,
@@ -1053,7 +1098,9 @@ void* it_803F14C4_after[] = {
         it_80298CE8,
         it_80298BF4,
         it_80298DCC,
-        it_803F6680,
+    },
+    { // LipStick Spore
+        &it_803F6680,
         NULL,
         NULL,
         NULL,
@@ -1068,7 +1115,9 @@ void* it_803F14C4_after[] = {
         it_8029A704,
         it_8029A610,
         it_8029A728,
-        it_803F6568,
+    },
+    { // S Scope Beam
+        &it_803F6568,
         NULL,
         NULL,
         NULL,
@@ -1083,7 +1132,9 @@ void* it_803F14C4_after[] = {
         it_80299380,
         it_80299370,
         it_802993C0,
-        it_803F6630,
+    },
+    { // L Gun Beam
+        &it_803F6630,
         NULL,
         NULL,
         NULL,
@@ -1098,7 +1149,9 @@ void* it_803F14C4_after[] = {
         it_80299C18,
         it_80299C20,
         it_80299C28,
-        it_803F6640,
+    },
+    { // Hammer Head
+        &it_803F6640,
         it_80299D4C,
         NULL,
         it_80299DD0,
@@ -1113,7 +1166,9 @@ void* it_803F14C4_after[] = {
         NULL,
         it_8029A0C0,
         it_8029A0F4,
-        it_803F66C8,
+    },
+    { // F Flower Flame
+        &it_803F66C8,
         it_8029A9FC,
         NULL,
         it_8029AD1C,
@@ -1128,7 +1183,9 @@ void* it_803F14C4_after[] = {
         NULL,
         NULL,
         it_8029B0A8,
-        it_803F6728,
+    },
+    { // EvYoshiEgg
+        &it_803F6728,
         it_8029B1AC,
         it_8029B188,
         it_8029B2F4,
@@ -1143,5 +1200,5 @@ void* it_803F14C4_after[] = {
         NULL,
         it_8029B4EC,
         it_8029B6D8,
+    },
 };
-#pragma pop
