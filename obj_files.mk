@@ -542,6 +542,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/it_266F.s.o\
     $(BUILD_DIR)/src/melee/it/it_803F1418.c.o\
     $(BUILD_DIR)/asm/melee/it/it_803F1418.s.o\
+    $(BUILD_DIR)/src/melee/it/it_803F3100.c.o\
+    $(BUILD_DIR)/asm/melee/it/it_803F3100.s.o\
     $(BUILD_DIR)/src/melee/it/items/itcapsule.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itbombhei.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itdosei.s.o\

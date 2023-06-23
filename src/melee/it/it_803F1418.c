@@ -467,7 +467,7 @@ extern ItemStateContainer it_803F6680;
 extern ItemStateContainer it_803F66C8;
 extern ItemStateContainer it_803F6728;
 
-
+// Common items
 struct ItemLogicTable it_803F14C4[43] = {
     { // Capsule
         &it_803F5468,
