@@ -1216,7 +1216,7 @@ void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
 
     item_data->xCC8_knockback = 0.0F;
     temp_r30 =
-        (new_var = &item_data->xBC_itemStateContainer->stateTable[msid]);
+        (new_var = &item_data->xBC_itemStateContainer[msid]);
     item_data->anim_id = temp_r30->msid;
     item_data->x5CC_currentAnimFrame = 0.0F;
     temp_r0 = item_data->anim_id;
