@@ -50,7 +50,6 @@ struct sdata_ItemGXLink it_803F1418[43] = {
     it_8026EECC,
 };
 
-void it_8027CF00();
 void it_8027D76C();
 void it_8027E0B4();
 void it_8027E648();

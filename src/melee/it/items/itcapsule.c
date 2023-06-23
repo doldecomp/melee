@@ -69,6 +69,14 @@ ItemStateTable it_803F5468[] = {
     },
 };
 
+void it_8027CF00(Item_GObj* item_gobj)
+{
+    Item* it = item_gobj->user_data;
+    it->xDD4_itemVar.capsule.x0 = 0;
+    it->xDD4_itemVar.capsule.x4 = 0;
+    it_8027D148(item_gobj);
+}
+
 void it_8027CF30(Item_GObj* gobj)
 {
     Vec3 sp18;

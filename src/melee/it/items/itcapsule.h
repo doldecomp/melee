@@ -5,6 +5,7 @@
 
 extern ItemStateTable it_803F5468[];
 
+void it_8027CF00(Item_GObj*);
 void it_8027CF30(Item_GObj*);
 void it_8027CFE8(Item_GObj*);
 void it_8027D0B8(Item_GObj*);
