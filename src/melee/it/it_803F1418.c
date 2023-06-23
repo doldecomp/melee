@@ -423,54 +423,53 @@ bool it_8029B52C();
 bool it_8029B56C();
 void it_8029B670();
 void it_8029B6D8();
-extern ItemStateContainer it_803F5468;
-extern ItemStateContainer it_803F54D8;
-extern ItemStateContainer it_803F55D0;
-extern ItemStateContainer it_803F56C8;
-extern ItemStateContainer it_803F5740;
-extern ItemStateContainer it_803F57A0;
-extern ItemStateContainer it_803F57B0;
-extern ItemStateContainer it_803F5800;
-extern ItemStateContainer it_803F5850;
-extern ItemStateContainer it_803F58E0;
-extern ItemStateContainer it_803F5988;
-extern ItemStateContainer it_803F59F8;
-extern ItemStateContainer it_803F5AB0;
-extern ItemStateContainer it_803F5BA8;
-extern ItemStateContainer it_803F5C48;
-extern ItemStateContainer it_803F5CC8;
-extern ItemStateContainer it_803F5D28;
-extern ItemStateContainer it_803F5DB0;
-extern ItemStateContainer it_803F5E00;
-extern ItemStateContainer it_803F5EA8;
-extern ItemStateContainer it_803F5F40;
-extern ItemStateContainer it_803F5F90;
-extern ItemStateContainer it_803F5FF0;
-extern ItemStateContainer it_803F6090;
-extern ItemStateContainer it_803F6110;
-extern ItemStateContainer it_803F6130;
-extern ItemStateContainer it_803F6150;
-extern ItemStateContainer it_803F61B0;
-extern ItemStateContainer it_803F6220;
-extern ItemStateContainer it_803F6270;
-extern ItemStateContainer it_803F62C0;
-extern ItemStateContainer it_803F6310;
-extern ItemStateContainer it_803F6370;
-extern ItemStateContainer it_803F63C0;
-extern ItemStateContainer it_803F6488;
-extern ItemStateContainer it_803F64F8;
-extern ItemStateContainer it_803F6530;
-extern ItemStateContainer it_803F6568;
-extern ItemStateContainer it_803F6630;
-extern ItemStateContainer it_803F6640;
-extern ItemStateContainer it_803F6680;
-extern ItemStateContainer it_803F66C8;
-extern ItemStateContainer it_803F6728;
+extern ItemStateTable it_803F54D8[];
+extern ItemStateTable it_803F55D0[];
+extern ItemStateTable it_803F56C8[];
+extern ItemStateTable it_803F5740[];
+extern ItemStateTable it_803F57A0[];
+extern ItemStateTable it_803F57B0[];
+extern ItemStateTable it_803F5800[];
+extern ItemStateTable it_803F5850[];
+extern ItemStateTable it_803F58E0[];
+extern ItemStateTable it_803F5988[];
+extern ItemStateTable it_803F59F8[];
+extern ItemStateTable it_803F5AB0[];
+extern ItemStateTable it_803F5BA8[];
+extern ItemStateTable it_803F5C48[];
+extern ItemStateTable it_803F5CC8[];
+extern ItemStateTable it_803F5D28[];
+extern ItemStateTable it_803F5DB0[];
+extern ItemStateTable it_803F5E00[];
+extern ItemStateTable it_803F5EA8[];
+extern ItemStateTable it_803F5F40[];
+extern ItemStateTable it_803F5F90[];
+extern ItemStateTable it_803F5FF0[];
+extern ItemStateTable it_803F6090[];
+extern ItemStateTable it_803F6110[];
+extern ItemStateTable it_803F6130[];
+extern ItemStateTable it_803F6150[];
+extern ItemStateTable it_803F61B0[];
+extern ItemStateTable it_803F6220[];
+extern ItemStateTable it_803F6270[];
+extern ItemStateTable it_803F62C0[];
+extern ItemStateTable it_803F6310[];
+extern ItemStateTable it_803F6370[];
+extern ItemStateTable it_803F63C0[];
+extern ItemStateTable it_803F6488[];
+extern ItemStateTable it_803F64F8[];
+extern ItemStateTable it_803F6530[];
+extern ItemStateTable it_803F6568[];
+extern ItemStateTable it_803F6630[];
+extern ItemStateTable it_803F6640[];
+extern ItemStateTable it_803F6680[];
+extern ItemStateTable it_803F66C8[];
+extern ItemStateTable it_803F6728[];
 
 // Common items
 struct ItemLogicTable it_803F14C4[43] = {
     { // Capsule
-        &it_803F5468,
+        it_803F5468,
         it_8027CF00,
         NULL,
         it_8027D1D4,
@@ -487,7 +486,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_8027D650,
     },
     { // Box
-        &it_803F5850,
+        it_803F5850,
         it_802861CC,
         it_80286208,
         it_80286780,
@@ -504,7 +503,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80287084,
     },
     { // Taru
-        &it_803F58E0,
+        it_803F58E0,
         it_80287458,
         NULL,
         it_80287E68,
@@ -521,7 +520,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80288C68,
     },
     { // Egg
-        &it_803F5988,
+        it_803F5988,
         it_80288D98,
         NULL,
         it_80288F88,
@@ -538,7 +537,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_802896AC,
     },
     { // Kusudama
-        &it_803F59F8,
+        it_803F59F8,
         it_80289784,
         NULL,
         it_8028A93C,
@@ -555,7 +554,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_8028B06C,
     },
     { // TaruCann
-        &it_803F63C0,
+        it_803F63C0,
         it_80296120,
         it_802960E0,
         it_8029683C,
@@ -572,7 +571,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_802978BC,
     },
     { // BombHei
-        &it_803F54D8,
+        it_803F54D8,
         it_8027D76C,
         NULL,
         it_8027E0B4,
@@ -589,7 +588,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80281144,
     },
     { // Dosei
-        &it_803F55D0,
+        it_803F55D0,
         it_80281164,
         NULL,
         it_8028218C,
@@ -606,7 +605,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80283AC4,
     },
     { // Heart
-        &it_803F56C8,
+        it_803F56C8,
         it_80283BEC,
         it_80283C48,
         it_80283F28,
@@ -623,7 +622,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80284194,
     },
     { // Tomato
-        &it_803F5740,
+        it_803F5740,
         it_802842A4,
         it_80284324,
         it_802844E4,
@@ -640,7 +639,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80284624,
     },
     { // Star
-        &it_803F57A0,
+        it_803F57A0,
         it_80284644,
         NULL,
         NULL,
@@ -657,7 +656,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80284834,
     },
     { // Bat
-        &it_803F57B0,
+        it_803F57B0,
         it_80284910,
         NULL,
         it_80284AAC,
@@ -674,7 +673,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80284D34,
     },
     { // Sword
-        &it_803F5800,
+        it_803F5800,
         it_80285338,
         NULL,
         it_80285804,
@@ -691,7 +690,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80286068,
     },
     { // Parasol
-        &it_803F5AB0,
+        it_803F5AB0,
         it_8028B0B8,
         NULL,
         it_8028B5E8,
@@ -708,7 +707,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_8028B8B8,
     },
     { // G Shell
-        &it_803F5BA8,
+        it_803F5BA8,
         it_8028BDAC,
         NULL,
         it_8028C148,
@@ -725,7 +724,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_8028CFC0,
     },
     { // R Shell
-        &it_803F5C48,
+        it_803F5C48,
         it_8028D59C,
         NULL,
         it_8028D898,
@@ -742,7 +741,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_8028E718,
     },
     { // L Gun
-        &it_803F5CC8,
+        it_803F5CC8,
         it_8028E738,
         NULL,
         it_8028E904,
@@ -759,7 +758,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_8028EB68,
     },
     { // Freeze
-        &it_803F5D28,
+        it_803F5D28,
         it_8028ED50,
         it_8028ED10,
         it_8028F2B4,
@@ -776,7 +775,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_8028F8C4,
     },
     { // Foods
-        &it_803F5DB0,
+        it_803F5DB0,
         it_8028FBE4,
         NULL,
         it_8028FD7C,
@@ -793,7 +792,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_8028FE70,
     },
     { // MSBomb
-        &it_803F5E00,
+        it_803F5E00,
         it_8028FED4,
         NULL,
         it_802900CC,
@@ -810,7 +809,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80290918,
     },
     { // Flipper
-        &it_803F5EA8,
+        it_803F5EA8,
         it_80290A20,
         NULL,
         it_80290F8C,
@@ -827,7 +826,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80291BC0,
     },
     { // S_Scope
-        &it_803F5F40,
+        it_803F5F40,
         it_80291C98,
         NULL,
         it_8029215C,
@@ -844,7 +843,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80292340,
     },
     { // StarRod
-        &it_803F5F90,
+        it_803F5F90,
         it_80292360,
         NULL,
         it_80292514,
@@ -861,7 +860,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_802927C8,
     },
     { // LipStick
-        &it_803F6310,
+        it_803F6310,
         it_8029570C,
         NULL,
         it_802958C8,
@@ -878,7 +877,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80295C28,
     },
     { // Harisen
-        &it_803F5FF0,
+        it_803F5FF0,
         it_8029285C,
         NULL,
         it_80292A5C,
@@ -895,7 +894,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80292D28,
     },
     { // F Flower
-        &it_803F6090,
+        it_803F6090,
         it_80292E04,
         NULL,
         it_80293284,
@@ -912,7 +911,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80293640,
     },
     { // Kinoko
-        &it_803F6110,
+        it_803F6110,
         it_8029367C,
         NULL,
         NULL,
@@ -929,7 +928,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_802939E8,
     },
     { // DKinoko
-        &it_803F6130,
+        it_803F6130,
         it_80293A08,
         NULL,
         NULL,
@@ -946,7 +945,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80293D74,
     },
     { // Hammer
-        &it_803F6150,
+        it_803F6150,
         it_80293F58,
         NULL,
         it_802940FC,
@@ -963,7 +962,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80294344,
     },
     { // WStar
-        &it_803F61B0,
+        it_803F61B0,
         it_8029451C,
         NULL,
         it_80294728,
@@ -980,7 +979,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80294A90,
     },
     { // ScBall
-        &it_803F6220,
+        it_803F6220,
         it_80294AB0,
         NULL,
         it_80294BE4,
@@ -997,7 +996,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80294A90,
     },
     { // RabbitC
-        &it_803F6270,
+        it_803F6270,
         it_80295118,
         NULL,
         it_8029524C,
@@ -1014,7 +1013,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_802953A8,
     },
     { // MetalB
-        &it_803F62C0,
+        it_803F62C0,
         it_802953C8,
         NULL,
         it_80295524,
@@ -1031,7 +1030,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_802956EC,
     },
     { // Spycloak
-        &it_803F6370,
+        it_803F6370,
         it_80295C48,
         NULL,
         it_80295D90,
@@ -1048,7 +1047,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80295EB4,
     },
     { // M Ball
-        &it_803F6488,
+        it_803F6488,
         it_80297904,
         it_802978DC,
         it_80297ABC,
@@ -1065,7 +1064,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80298148,
     },
     { // L Gun Ray
-        &it_803F64F8,
+        it_803F64F8,
         NULL,
         NULL,
         NULL,
@@ -1082,7 +1081,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_802988C4,
     },
     { // Star Rod Star
-        &it_803F6530,
+        it_803F6530,
         NULL,
         NULL,
         NULL,
@@ -1099,7 +1098,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80298DCC,
     },
     { // LipStick Spore
-        &it_803F6680,
+        it_803F6680,
         NULL,
         NULL,
         NULL,
@@ -1116,7 +1115,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_8029A728,
     },
     { // S Scope Beam
-        &it_803F6568,
+        it_803F6568,
         NULL,
         NULL,
         NULL,
@@ -1133,7 +1132,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_802993C0,
     },
     { // L Gun Beam
-        &it_803F6630,
+        it_803F6630,
         NULL,
         NULL,
         NULL,
@@ -1150,7 +1149,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80299C28,
     },
     { // Hammer Head
-        &it_803F6640,
+        it_803F6640,
         it_80299D4C,
         NULL,
         it_80299DD0,
@@ -1167,7 +1166,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_8029A0F4,
     },
     { // F Flower Flame
-        &it_803F66C8,
+        it_803F66C8,
         it_8029A9FC,
         NULL,
         it_8029AD1C,
@@ -1184,7 +1183,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_8029B0A8,
     },
     { // EvYoshiEgg
-        &it_803F6728,
+        it_803F6728,
         it_8029B1AC,
         it_8029B188,
         it_8029B2F4,

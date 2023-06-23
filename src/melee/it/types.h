@@ -40,15 +40,9 @@ struct ItemStateTable {
     HSD_GObjPredicate collided;
 };
 
-/// @todo Size unknown.
-struct ItemStateContainer {
-    /// @at{0}
-    ItemStateTable stateTable UNK_SIZE_ARRAY;
-};
-
 struct ItemLogicTable {
     /// @at{0} @sz{4}
-    ItemStateContainer* states;
+    ItemStateTable* states;
 
     /// @at{4} @sz{4}
     HSD_GObjEvent spawned;
@@ -388,7 +382,7 @@ struct Item {
 
     ItemLogicTable* xB8_itemLogicTable; // Global item callbacks
 
-    ItemStateContainer* xBC_itemStateContainer;
+    ItemStateTable* xBC_itemStateContainer;
     GroundOrAir ground_or_air;
     Article* xC4_article_data;
     HSD_Joint* xC8_joint;

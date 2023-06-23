@@ -51,7 +51,6 @@ typedef struct ItemLogicTable ItemLogicTable;
 typedef struct ItemModelDesc ItemModelDesc;
 typedef struct ItemModStruct ItemModStruct;
 typedef struct ItemStateArray ItemStateArray;
-typedef struct ItemStateContainer ItemStateContainer;
 typedef struct ItemStateDesc ItemStateDesc;
 typedef struct ItemStateTable ItemStateTable;
 typedef struct itHit itHit;
