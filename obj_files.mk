@@ -546,6 +546,45 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itbombhei.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itdosei.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itheart.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ittomato.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itstar.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itbat.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsword.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itbox.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ittaru.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itegg.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkusudama.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itparasol.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgshell.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itrshell.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlgun.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfreeze.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfoods.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmsbomb.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itflipper.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsscope.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itstarrod.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itharisen.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfflower.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkinoko.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itdkinoko.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ithammer.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itwstar.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itscball.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itrabbitc.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmetalb.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlipstick.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itspycloak.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ittarucann.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmball.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlgunray.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itstarrodstar.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsscopebeam.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlgunbeam.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ithammerhead.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlipstickspore.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfflowerflame.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itevyoshiegg.s.o\
     $(BUILD_DIR)/asm/melee/it/it_803F5468.s.o\
     $(BUILD_DIR)/asm/melee/it/it_27CF.s.o\
 

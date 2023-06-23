@@ -996,7 +996,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         it_80294D7C,
         it_80294A90,
     },
-    { // Rabbit
+    { // RabbitC
         &it_803F6270,
         it_80295118,
         NULL,
@@ -1013,7 +1013,7 @@ struct ItemLogicTable it_803F14C4[43] = {
         NULL,
         it_802953A8,
     },
-    { // Metal Box
+    { // MetalB
         &it_803F62C0,
         it_802953C8,
         NULL,
