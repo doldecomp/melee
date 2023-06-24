@@ -658,6 +658,7 @@ struct Item {
         PKFlashExplVars PKFlashExpl;
         PKThunderVars PKThunderVars;
         FoxLaserVars foxlaser;
+        FoxIllusionVars foxillusion;
         u8 padding[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };

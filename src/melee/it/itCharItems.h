@@ -10,4 +10,10 @@ typedef struct {
     Vec3 xDE0;
 } FoxLaserVars;
 
+typedef struct {
+    HSD_Joint* xDD4;
+    f32 xDD8;
+    HSD_JObj* xDDC;
+} FoxIllusionVars;
+
 #endif
