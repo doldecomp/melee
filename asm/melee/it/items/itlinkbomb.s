@@ -2678,6 +2678,16 @@ it_803F68F8:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
 
 
+.section .rodata
+    .balign 8
+.global it_803B8640
+it_803B8640:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+
+
 .section .sdata
     .balign 8
 .global it_804D5380

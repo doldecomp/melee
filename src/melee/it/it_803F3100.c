@@ -751,7 +751,7 @@ struct ItemLogicTable it_803F3100[118] = {
         it_802A2288,
         it_802A23CC,
     },
-    {
+    { // Link hookshot
         it_803F6998,
         it_802A2418,
         NULL,
@@ -768,7 +768,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         it_802A7D40,
     },
-    {
+    { // Young Link hookshot
         it_803F6998,
         NULL,
         NULL,
@@ -785,7 +785,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         it_802A7D40,
     },
-    {
+    { // Link arrow
         it_803F6A28,
         NULL,
         it_802A8984,
@@ -802,7 +802,7 @@ struct ItemLogicTable it_803F3100[118] = {
         it_802A9B08,
         it_802AA034,
     },
-    {
+    { // Young Link arrow
         it_803F6A28,
         NULL,
         it_802A8984,
@@ -819,7 +819,7 @@ struct ItemLogicTable it_803F3100[118] = {
         it_802A9B08,
         it_802AA034,
     },
-    {
+    { // Ness PK fire
         it_803F6B28,
         NULL,
         NULL,
@@ -836,7 +836,7 @@ struct ItemLogicTable it_803F3100[118] = {
         it_802AA354,
         it_802AA474,
     },
-    {
+    { // Ness PK fire pillar
         it_803F6B60,
         NULL,
         NULL,
@@ -853,7 +853,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         it_802AA7C4,
     },
-    {
+    { // Ness PK flash
         it_803F6B70,
         NULL,
         it_802AA9CC,
@@ -870,7 +870,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         it_802AB3D0,
     },
-    {
+    { // Ness PK thunder ball
         it_803F6BC8,
         NULL,
         it_802AB90C,
@@ -887,7 +887,7 @@ struct ItemLogicTable it_803F3100[118] = {
         it_802AC3F8,
         it_802AC41C,
     },
-    {
+    { // Ness PK thunder trail 1
         it_803F6C08,
         NULL,
         NULL,
@@ -904,7 +904,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         NULL,
     },
-    {
+    { // Ness PK thunder trail 2
         it_803F6C08,
         NULL,
         NULL,
@@ -921,7 +921,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         NULL,
     },
-    {
+    { // Ness PK thunder trail 3
         it_803F6C08,
         NULL,
         NULL,
@@ -938,7 +938,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         NULL,
     },
-    {
+    { // Ness PK thunder trail 4
         it_803F6C08,
         NULL,
         NULL,
