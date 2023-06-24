@@ -38,7 +38,7 @@ void Item_802680CC(HSD_GObj* gobj);
 void Item_8026849C(HSD_GObj* gobj);
 
 /// Item spawn prefunction - spawn airborne
-void Item_80268B18(SpawnItem* spawnItem);
+HSD_GObj* Item_80268B18(SpawnItem* spawnItem);
 
 /// Item spawn prefunction - spawn grounded
 void Item_80268B5C(SpawnItem* spawnItem);

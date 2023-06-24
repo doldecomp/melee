@@ -1,4 +1,6 @@
 #include <melee/it/it_27CF.h>
+#include <melee/it/items/itfoxlaser.h>
+#include <melee/it/items/itfoxillusion.h>
 
 void it_8027C8B0();
 bool it_8029BA38();
@@ -15,15 +17,6 @@ bool it_8029BFCC();
 bool it_8029C208();
 bool it_8029C4AC();
 void it_8029C4B4();
-bool it_8029CA78();
-bool it_8029CA80();
-bool it_8029CC4C();
-bool it_8029CC54();
-bool it_8029CCF0();
-void it_8029CCF8();
-bool it_8029CF8C();
-void it_8029CFA0();
-void it_8029D948();
 void it_8029DEB0();
 void it_8029E5D0();
 void it_8029EC34();
@@ -362,8 +355,6 @@ bool it_802F3330();
 void it_802F3374();
 extern ItemStateTable it_803F6788[];
 extern ItemStateTable it_803F6798[];
-extern ItemStateTable it_803F67D0[];
-extern ItemStateTable it_803F6818[];
 extern ItemStateTable it_803F6888[];
 extern ItemStateTable it_803F6920[];
 extern ItemStateTable it_803F6998[];
@@ -436,8 +427,8 @@ extern ItemStateTable it_803F9470[];
 extern ItemStateTable it_803F94A0[];
 
 // Character-specific items
-struct ItemLogicTable it_803F3100[] = {
-    { // Mario fireball
+struct ItemLogicTable it_803F3100[118] = {
+    { // Kuriboh
         it_803F8320,
         it_802D73F0,
         it_8027C8B0,
@@ -454,7 +445,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         NULL,
     },
-    { // Dr Mario pill
+    { // Leadead
         it_803F8EB0,
         it_802E8BCC,
         it_802EA41C,
@@ -471,7 +462,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         NULL,
     },
-    { // Kirby cutter beam
+    { // Octarock
         it_803F8B48,
         it_802E4A44,
         it_8027C8B0,
@@ -488,7 +479,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         it_802E5AA4,
     },
-    { // Kirby hammer
+    { // Ottosea
         it_803F89C8,
         it_802E2470,
         it_802E34DC,
@@ -505,7 +496,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         it_802E3784,
     },
-    {
+    { // Octarock stone
         it_803F8E90,
         it_802E878C,
         NULL,
@@ -522,7 +513,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_802E87E8,
         it_802E89B0,
     },
-    {
+    { // Mario fireball
         it_803F6788,
         NULL,
         NULL,
@@ -539,7 +530,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_8029BA68,
         it_8029BA98,
     },
-    {
+    { // Dr Mario pill
         it_803F75D0,
         NULL,
         NULL,
@@ -556,7 +547,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_802C145C,
         it_802C1570,
     },
-    {
+    { // Kirby cutter beam
         it_803F6798,
         NULL,
         NULL,
@@ -573,7 +564,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_8029C4AC,
         it_8029C4B4,
     },
-    {
+    { // Kirby hammer
         it_803F6C98,
         NULL,
         it_802ADC04,
@@ -624,7 +615,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         it_802F2BDC,
     },
-    {
+    { // Fox laser
         it_803F67D0,
         NULL,
         NULL,
@@ -641,7 +632,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_8029CCF0,
         it_8029CCF8,
     },
-    {
+    { // Falco laser
         it_803F67D0,
         NULL,
         NULL,
@@ -658,7 +649,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_8029CCF0,
         it_8029CCF8,
     },
-    {
+    { // Fox illusion
         it_803F6818,
         NULL,
         it_8029CFA0,
@@ -675,7 +666,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         it_8029D948,
     },
-    {
+    { // Falco phantasm
         it_803F6818,
         NULL,
         it_8029CFA0,
@@ -692,7 +683,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         it_8029D948,
     },
-    {
+    { // Link bomb
         it_803F6888,
         NULL,
         NULL,
@@ -709,7 +700,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_8029FD40,
         it_8029FD84,
     },
-    {
+    { // Young Link bomb
         it_803F6888,
         NULL,
         NULL,
@@ -726,7 +717,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_8029FD40,
         it_8029FD84,
     },
-    {
+    { // Link boomerang
         it_803F6920,
         NULL,
         it_802A087C,
@@ -743,7 +734,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_802A2288,
         it_802A23CC,
     },
-    {
+    { // Young Link boomerang
         it_803F6920,
         NULL,
         it_802A087C,
@@ -760,7 +751,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_802A2288,
         it_802A23CC,
     },
-    {
+    { // Link hookshot
         it_803F6998,
         it_802A2418,
         NULL,
@@ -777,7 +768,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         it_802A7D40,
     },
-    {
+    { // Young Link hookshot
         it_803F6998,
         NULL,
         NULL,
@@ -794,7 +785,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         it_802A7D40,
     },
-    {
+    { // Link arrow
         it_803F6A28,
         NULL,
         it_802A8984,
@@ -811,7 +802,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_802A9B08,
         it_802AA034,
     },
-    {
+    { // Young Link arrow
         it_803F6A28,
         NULL,
         it_802A8984,
@@ -828,7 +819,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_802A9B08,
         it_802AA034,
     },
-    {
+    { // Ness PK fire
         it_803F6B28,
         NULL,
         NULL,
@@ -845,7 +836,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_802AA354,
         it_802AA474,
     },
-    {
+    { // Ness PK fire pillar
         it_803F6B60,
         NULL,
         NULL,
@@ -862,7 +853,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         it_802AA7C4,
     },
-    {
+    { // Ness PK flash
         it_803F6B70,
         NULL,
         it_802AA9CC,
@@ -879,7 +870,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         it_802AB3D0,
     },
-    {
+    { // Ness PK thunder ball
         it_803F6BC8,
         NULL,
         it_802AB90C,
@@ -896,7 +887,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_802AC3F8,
         it_802AC41C,
     },
-    {
+    { // Ness PK thunder trail 1
         it_803F6C08,
         NULL,
         NULL,
@@ -913,7 +904,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         NULL,
     },
-    {
+    { // Ness PK thunder trail 2
         it_803F6C08,
         NULL,
         NULL,
@@ -930,7 +921,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         NULL,
     },
-    {
+    { // Ness PK thunder trail 3
         it_803F6C08,
         NULL,
         NULL,
@@ -947,7 +938,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         NULL,
     },
-    {
+    { // Ness PK thunder trail 4
         it_803F6C08,
         NULL,
         NULL,

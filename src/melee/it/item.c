@@ -615,9 +615,9 @@ void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     item_data->xDCE_flag.bits.b5 = 0;
     item_data->xDCE_flag.bits.b4 = 0;
     item_data->xC54 = 0.0f;
-    item_data->xC58 = 0.0f;
-    item_data->xC58 = 0.0f;
-    item_data->xC58 = 0.0f;
+    item_data->xC58.x = 0.0f;
+    item_data->xC58.x = 0.0f;
+    item_data->xC58.x = 0.0f;
     item_data->xDC8_word.flags.x9 = 0;
     item_data->xDC8_word.flags.x3 = 0;
     item_data->xDC8_word.flags.x4 = 0;
@@ -1007,12 +1007,12 @@ HSD_GObj* Item_8026862C(SpawnItem* spawnItem)
 }
 
 /// Item spawn prefunction - spawn airborne
-void Item_80268B18(SpawnItem* spawnItem)
+HSD_GObj* Item_80268B18(SpawnItem* spawnItem)
 {
     spawnItem->x48_ground_or_air = GA_Air;
     spawnItem->x10 = 0;
     Item_802674AC(spawnItem);
-    Item_8026862C(spawnItem);
+    return Item_8026862C(spawnItem);
 }
 
 /// Item spawn prefunction - spawn grounded

@@ -16,6 +16,8 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "it/it_27CF.h"
 
+#include <melee/it/items/itfoxillusion.h>
+
 #define FTFOX_SPECIALS_COLL_FLAG                                              \
     Ft_MF_SkipMatAnim | Ft_MF_SkipRumble | Ft_MF_UpdateCmd |                  \
         Ft_MF_SkipColAnim | Ft_MF_SkipItemVis | Ft_MF_Unk19 |                 \
@@ -55,7 +57,7 @@ bool ftFx_SpecialS_CheckGhostRemove(HSD_GObj* gobj)
 
 // 0x800E9EA0
 // https://decomp.me/scratch/jUfwc // Return 0x2208 from Fighter Struct
-u32 ftFx_SpecialS_GetCmdVar2(HSD_GObj* gobj)
+s32 ftFx_SpecialS_GetCmdVar2(HSD_GObj* gobj)
 {
     return (GET_FIGHTER(gobj))->cmd_vars[2];
 }

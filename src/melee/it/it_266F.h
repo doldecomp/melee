@@ -142,4 +142,10 @@ UNK_RET it_8026FC00(UNK_PARAMS);
 UNK_RET it_80272818(UNK_PARAMS);
 HSD_JObj* it_80272C90(Item_GObj* gobj);
 
+bool it_8026E9A4(Item_GObj*, Vec3*, Vec3*, int);
+bool it_80273130(Item_GObj*);
+void it_802750F8(Item_GObj*);
+void it_80274594(Item_GObj*);
+void it_8026EECC(Item_GObj*, int);
+
 #endif

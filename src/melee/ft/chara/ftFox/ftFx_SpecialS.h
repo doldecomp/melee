@@ -6,7 +6,7 @@
 
 /* 0E9DF8 */ void ftFx_SpecialS_CreateGFX(HSD_GObj* gobj);
 /* 0E9E78 */ bool ftFx_SpecialS_CheckGhostRemove(HSD_GObj* gobj);
-/* 0E9EA0 */ u32 ftFx_SpecialS_GetCmdVar2(HSD_GObj* gobj);
+/* 0E9EA0 */ s32 ftFx_SpecialS_GetCmdVar2(HSD_GObj* gobj);
 /* 0E9EAC */ void ftFx_SpecialS_CopyGhostPosIndexed(HSD_GObj* gobj, s32 index,
                                                     Vec3* ghostPos);
 /* 0E9ED4 */ f32 ftFx_SpecialS_ReturnFloatVarIndexed(HSD_GObj* gobj,

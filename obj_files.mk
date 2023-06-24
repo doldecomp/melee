@@ -587,6 +587,18 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itlipstickspore.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itfflowerflame.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itevyoshiegg.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmariofireball.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkirbycutterbeam.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itfoxlaser.c.o\
+    $(BUILD_DIR)/src/melee/it/items/itfoxillusion.c.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlinkbomb.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlinkboomerang.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlinkhookshot.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlinkarrow.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnesspkfire.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnesspkfirepillar.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnesspkflush.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnesspkthunderball.s.o\
     $(BUILD_DIR)/asm/melee/it/it_803F5468.s.o\
     $(BUILD_DIR)/asm/melee/it/it_27CF.s.o\
 
