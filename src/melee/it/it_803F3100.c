@@ -436,8 +436,8 @@ extern ItemStateTable it_803F9470[];
 extern ItemStateTable it_803F94A0[];
 
 // Character-specific items
-struct ItemLogicTable it_803F3100[] = {
-    { // Mario fireball
+struct ItemLogicTable it_803F3100[118] = {
+    { // Kuriboh
         it_803F8320,
         it_802D73F0,
         it_8027C8B0,
@@ -454,7 +454,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         NULL,
     },
-    { // Dr Mario pill
+    { // Leadead
         it_803F8EB0,
         it_802E8BCC,
         it_802EA41C,
@@ -471,7 +471,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         NULL,
     },
-    { // Kirby cutter beam
+    { // Octarock
         it_803F8B48,
         it_802E4A44,
         it_8027C8B0,
@@ -488,7 +488,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         it_802E5AA4,
     },
-    { // Kirby hammer
+    { // Ottosea
         it_803F89C8,
         it_802E2470,
         it_802E34DC,
@@ -505,7 +505,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         it_802E3784,
     },
-    {
+    { // Octarock stone
         it_803F8E90,
         it_802E878C,
         NULL,
@@ -522,7 +522,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_802E87E8,
         it_802E89B0,
     },
-    {
+    { // Mario fireball
         it_803F6788,
         NULL,
         NULL,
@@ -539,7 +539,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_8029BA68,
         it_8029BA98,
     },
-    {
+    { // Dr Mario pill
         it_803F75D0,
         NULL,
         NULL,
@@ -556,7 +556,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_802C145C,
         it_802C1570,
     },
-    {
+    { // Kirby cutter beam
         it_803F6798,
         NULL,
         NULL,
@@ -573,7 +573,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_8029C4AC,
         it_8029C4B4,
     },
-    {
+    { // Kirby hammer
         it_803F6C98,
         NULL,
         it_802ADC04,
@@ -624,7 +624,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         it_802F2BDC,
     },
-    {
+    { // Fox laser
         it_803F67D0,
         NULL,
         NULL,
@@ -641,7 +641,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_8029CCF0,
         it_8029CCF8,
     },
-    {
+    { // Falco laser
         it_803F67D0,
         NULL,
         NULL,
@@ -658,7 +658,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_8029CCF0,
         it_8029CCF8,
     },
-    {
+    { // Fox illusion
         it_803F6818,
         NULL,
         it_8029CFA0,
@@ -675,7 +675,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         it_8029D948,
     },
-    {
+    { // Falco phantasm
         it_803F6818,
         NULL,
         it_8029CFA0,
@@ -692,7 +692,7 @@ struct ItemLogicTable it_803F3100[] = {
         NULL,
         it_8029D948,
     },
-    {
+    { // Link bomb
         it_803F6888,
         NULL,
         NULL,
@@ -709,7 +709,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_8029FD40,
         it_8029FD84,
     },
-    {
+    { // Young Link bomb
         it_803F6888,
         NULL,
         NULL,
@@ -726,7 +726,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_8029FD40,
         it_8029FD84,
     },
-    {
+    { // Link boomerang
         it_803F6920,
         NULL,
         it_802A087C,
@@ -743,7 +743,7 @@ struct ItemLogicTable it_803F3100[] = {
         it_802A2288,
         it_802A23CC,
     },
-    {
+    { // Young Link boomerang
         it_803F6920,
         NULL,
         it_802A087C,

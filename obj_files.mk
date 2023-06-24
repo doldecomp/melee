@@ -587,6 +587,12 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itlipstickspore.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itfflowerflame.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itevyoshiegg.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmariofireball.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkirbycutterbeam.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfoxlaser.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfoxillusion.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlinkbomb.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlinkboomerang.s.o\
     $(BUILD_DIR)/asm/melee/it/it_803F5468.s.o\
     $(BUILD_DIR)/asm/melee/it/it_27CF.s.o\
 
