@@ -6,6 +6,7 @@
 
 #include "ft/types.h"
 #include "gr/stage.h"
+#include "it/itCharItems.h"
 #include "it/itCommonItems.h"
 #include "it/itPKFlash.h"
 #include "it/itPKThunder.h"
@@ -470,9 +471,7 @@ struct Item {
               // reflectors' maximum damage threshold
     s32 xC50; // 0xc50
     f32 xC54; // 0xc54
-    f32 xC58; // 0xc58
-    s32 xC5C; // 0xc5c
-    s32 xC60; // 0xc60
+    Vec3 xC58;                  // 0xc58
     HSD_GObj* xC64_reflectGObj; // GObj that reflected this item?
     f32 xC68;                   // 0xc68
     f32 xC6C;                   // 0xc6c
@@ -658,6 +657,7 @@ struct Item {
         PKFlashVars PKFlash;
         PKFlashExplVars PKFlashExpl;
         PKThunderVars PKThunderVars;
+        FoxLaserVars foxlaser;
         u8 padding[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };

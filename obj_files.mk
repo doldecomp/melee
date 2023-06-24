@@ -589,7 +589,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itevyoshiegg.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itmariofireball.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itkirbycutterbeam.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itfoxlaser.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itfoxlaser.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itfoxillusion.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itlinkbomb.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itlinkboomerang.s.o\

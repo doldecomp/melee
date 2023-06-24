@@ -51,7 +51,6 @@ void it_802C0DBC(u32 arg0);
 u32 it_802C0850(Item_GObj*, Vec3*, u32, s32, f32 facing_direction);
 void it_802C8C34(Item_GObj*);
 
-void it_8029C6A4(f32, f32, HSD_GObj*, Vec3*, s32);
 void it_802AE1D0(Item_GObj*);
 void it_802AEAB4(Item_GObj*);
 HSD_GObj* it_802AE8A8(f32, HSD_GObj*, Vec3*, s32, s32);
@@ -130,7 +129,6 @@ HSD_GObj* it_802C3BAC(Item_GObj*, Vec3*, f32 facing_dir, f32);
 /// Clones an entity?
 HSD_GObj* it_802C3AF0(Item_GObj*);
 void it_802AE608(Item_GObj*);
-void it_8029C6CC(f32 radians, f32 vel, HSD_GObj* owner, Vec3*, ItemKind);
 HSD_GObj* it_8029CEB4(Item_GObj*, Vec3*, s32, f32 facing_dir);
 HSD_GObj* it_802C720C(Item_GObj*, Vec3*, s32, f32);
 void it_802C7340(Item_GObj*);

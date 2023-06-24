@@ -1,4 +1,5 @@
 #include <melee/it/it_27CF.h>
+#include <melee/it/items/itfoxlaser.h>
 
 void it_8027C8B0();
 bool it_8029BA38();
@@ -15,12 +16,6 @@ bool it_8029BFCC();
 bool it_8029C208();
 bool it_8029C4AC();
 void it_8029C4B4();
-bool it_8029CA78();
-bool it_8029CA80();
-bool it_8029CC4C();
-bool it_8029CC54();
-bool it_8029CCF0();
-void it_8029CCF8();
 bool it_8029CF8C();
 void it_8029CFA0();
 void it_8029D948();
@@ -362,7 +357,6 @@ bool it_802F3330();
 void it_802F3374();
 extern ItemStateTable it_803F6788[];
 extern ItemStateTable it_803F6798[];
-extern ItemStateTable it_803F67D0[];
 extern ItemStateTable it_803F6818[];
 extern ItemStateTable it_803F6888[];
 extern ItemStateTable it_803F6920[];
