@@ -1346,7 +1346,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         it_802BAEA0,
     },
-    { // Sheik  chain
+    { // Sheik chain
         it_803F7438,
         NULL,
         NULL,
