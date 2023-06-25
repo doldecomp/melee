@@ -146,7 +146,7 @@ typedef enum ItemKind {
     It_Kind_DrMario_Vitamin, // Dr. Mario's pill
     It_Kind_Kirby_CBeam,     // Kirby's Cutter beam
     It_Kind_Kirby_Hammer,    // Kirby's Hammer
-    It_Kind_Unk1,
+    It_Kind_Unk1,            // Maybe Kirby copy star?
     It_Kind_Unk2,
     It_Kind_Fox_Laser,                 // Fox's Laser
     It_Kind_Falco_Laser,               // Falco's Laser

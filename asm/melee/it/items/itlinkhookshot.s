@@ -6375,6 +6375,13 @@ it_803B8650:
     .4byte 0x00000000
 
 
+.section .sbss
+    .balign 8
+.global it_804D6D48
+it_804D6D48:
+    .skip 0x8
+
+
 .section .sdata
     .balign 8
 .global it_804D53A0

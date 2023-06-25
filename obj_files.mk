@@ -599,6 +599,49 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itnesspkfirepillar.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itnesspkflush.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itnesspkthunderball.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnesspkthundertrail.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkoopaflame.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnessbat.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itunk1.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkirbyhammer.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfoxblaster.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlinkbow.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnesspkflushexplode.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itseakneedlethrown.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itseakneedleheld.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itseakvanish.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpikachuthunder.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmariocape.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ityoshieggthrow.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ityoshistar.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpikachutjoltground.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpikachutjoltair.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsamusbomb.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsamuschargeshot.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsamusmissile.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsamusgrapple.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itseakchain.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpeachexplode.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpeachturnip.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpeachparasol.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpeachtoad.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpeachtoadspore.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnessyoyo.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itluigifireball.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itdrmariopill.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itclimbersice.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itclimbersblizzard.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itclimbersstring.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itzeldadinfire.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itzeldadinfireexplode.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmewtwodisable.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmewtwoshadowball.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchgreenhouse.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchmanhole.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchfire.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchparachute.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchturtle.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchbreath.s.o\
     $(BUILD_DIR)/asm/melee/it/it_803F5468.s.o\
     $(BUILD_DIR)/asm/melee/it/it_27CF.s.o\
 
