@@ -1754,7 +1754,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         it_802C7D40,
     },
-    {
+    { // Game & Watch panic
         it_803F79A0,
         NULL,
         it_802C7E64,
@@ -1771,7 +1771,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         it_802C8018,
     },
-    {
+    { // Game & Watch chef
         it_803F79E0,
         NULL,
         NULL,
@@ -1788,7 +1788,7 @@ struct ItemLogicTable it_803F3100[118] = {
         it_802C8940,
         it_802C8B08,
     },
-    {
+    { // Young Link milk
         it_803F7A28,
         NULL,
         NULL,
@@ -1805,7 +1805,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         it_802C8F2C,
     },
-    {
+    { // Game & Watch rescue
         it_803F79C0,
         NULL,
         NULL,

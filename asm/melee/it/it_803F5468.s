@@ -2,66 +2,6 @@
 
 .section .data
     .balign 8
-.global it_803F7958
-it_803F7958:
-    .4byte -1
-    .4byte it_802C76E8
-    .4byte NULL
-    .4byte NULL
-.global it_803F7968
-it_803F7968:
-    .4byte 0
-    .4byte it_802C7B54
-    .4byte NULL
-    .4byte NULL
-.global it_803F7978
-it_803F7978:
-    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
-    .balign 4
-.global it_803F79A0
-it_803F79A0:
-    .4byte 0
-    .4byte it_802C7FAC
-    .4byte NULL
-    .4byte NULL
-    .4byte 1
-    .4byte it_802C7FAC
-    .4byte NULL
-    .4byte NULL
-.global it_803F79C0
-it_803F79C0:
-    .4byte 0
-    .4byte it_802C8240
-    .4byte it_802C8350
-    .4byte it_802C8354
-    .4byte 0
-    .4byte it_802C8240
-    .4byte it_802C8350
-    .4byte it_802C8354
-.global it_803F79E0
-it_803F79E0:
-    .4byte 0
-    .4byte it_802C8540
-    .4byte it_802C8690
-    .4byte it_802C86D0
-    .4byte 1
-    .4byte it_802C87B4
-    .4byte it_802C8828
-    .4byte it_802C882C
-.global it_803F7A00
-it_803F7A00:
-    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
-    .balign 4
-.global it_803F7A28
-it_803F7A28:
-    .4byte 0
-    .4byte it_802C8CDC
-    .4byte it_802C8F20
-    .4byte it_802C8F24
-    .4byte 1
-    .4byte it_802C8CDC
-    .4byte it_802C8F20
-    .4byte it_802C8F24
 .global it_803F7A48
 it_803F7A48:
     .4byte NULL
