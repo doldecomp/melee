@@ -642,6 +642,12 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itgamewatchparachute.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itgamewatchturtle.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itgamewatchbreath.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkirbygamewatchchefpan.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchjudge.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchpanic.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchrescue.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchchef.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itclinkmilk.s.o\
     $(BUILD_DIR)/asm/melee/it/it_803F5468.s.o\
     $(BUILD_DIR)/asm/melee/it/it_27CF.s.o\
 
