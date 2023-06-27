@@ -1822,7 +1822,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         it_802C835C,
     },
-    {
+    { // Master Hand laser
         it_803F9378,
         NULL,
         NULL,
@@ -1839,7 +1839,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         it_802F044C,
     },
-    {
+    { // Master Hand bullet
         it_803F9388,
         NULL,
         NULL,
@@ -1856,7 +1856,7 @@ struct ItemLogicTable it_803F3100[118] = {
         it_802F0F64,
         it_802F0BC8,
     },
-    {
+    { // Crazy Hand laser
         it_803F9378,
         NULL,
         NULL,
@@ -1873,7 +1873,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         it_802F044C,
     },
-    {
+    { // Crazy Hand bullet
         it_803F9388,
         NULL,
         NULL,
@@ -1890,7 +1890,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         it_802F0BC8,
     },
-    {
+    { // Crazy Hand bomb
         it_803F93A8,
         NULL,
         NULL,
@@ -2383,7 +2383,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         it_802F3374,
     },
-    {
+    { // Unk4
         it_803F8BD8,
         NULL,
         NULL,
@@ -2400,7 +2400,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         it_802E6ACC,
     },
-    {
+    { // Coin
         it_803F93C8,
         it_802F14E4,
         it_802F1518,
@@ -2417,7 +2417,7 @@ struct ItemLogicTable it_803F3100[118] = {
         NULL,
         it_802F18F0,
     },
-    {
+    { // Pokemon random
         it_803F8C8C,
         NULL,
         NULL,
