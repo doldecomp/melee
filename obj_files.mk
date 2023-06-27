@@ -542,8 +542,12 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/it_266F.s.o\
     $(BUILD_DIR)/src/melee/it/it_803F1418.c.o\
     $(BUILD_DIR)/asm/melee/it/it_803F1418.s.o\
+    $(BUILD_DIR)/src/melee/it/it_803F23CC.c.o\
+    $(BUILD_DIR)/asm/melee/it/it_803F23CC.s.o\
     $(BUILD_DIR)/src/melee/it/it_803F3100.c.o\
     $(BUILD_DIR)/asm/melee/it/it_803F3100.s.o\
+
+TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/it/items/itcapsule.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itbombhei.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itdosei.s.o\
@@ -587,6 +591,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itlipstickspore.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itfflowerflame.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itevyoshiegg.s.o\
+
+TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itmariofireball.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itkirbycutterbeam.s.o\
     $(BUILD_DIR)/src/melee/it/items/itfoxlaser.c.o\
@@ -648,7 +654,74 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itgamewatchrescue.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itgamewatchchef.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itclinkmilk.s.o\
-    $(BUILD_DIR)/asm/melee/it/it_803F5468.s.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/melee/it/items/ittosakinto.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itchicorita.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itchicoritaleaf.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkabigon.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkamex.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmatadogas.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlizardon.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfire.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itthunder.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfreezer.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsonans.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ithassam.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itunknown.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itentei.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itraikou.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsuikun.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkireihana.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmarumine.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlugia.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ithouou.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmetamon.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpippi.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ittogepy.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmew.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itcerebi.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ithitodeman.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlucky.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itporygon2.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ithinoarashi.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmaril.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfushigibana.s.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/melee/it/items/itoldkuri.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmato.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itheiho.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlikelike.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnokonoko.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itzgshell.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itzrshell.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpatapata.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itklap.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itoldottosea.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itwhitebea.s.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/melee/it/items/itoctarock.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itunk4.s.o\
+    $(BUILD_DIR)/asm/melee/it/it_802E6AEC.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itarwinglaser.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itoctarockstone.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itleadead.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgreatfoxlaser.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ittincle.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkyasarin.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itwhispyapple.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ittools.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkyasarinegg.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmasterhandlaser.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmasterhandbullet.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itcrazyhandbomb.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itcoin.s.o\
+    $(BUILD_DIR)/asm/melee/it/itkirbyunk.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itunk2.s.o\
+    $(BUILD_DIR)/asm/melee/it/it_802F2BFC.s.o\
+    $(BUILD_DIR)/asm/melee/it/itkirbyyoshispecialn.s.o\
     $(BUILD_DIR)/asm/melee/it/it_27CF.s.o\
 
 TEXT_O_FILES +=\

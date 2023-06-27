@@ -327,3 +327,24 @@ it_803F7A28:
     .4byte it_802C8CDC
     .4byte it_802C8F20
     .4byte it_802C8F24
+
+
+.section .sdata
+    .balign 8
+.global it_804D55A0
+it_804D55A0:
+    .asciz "jobj.h"
+    .balign 4
+.global it_804D55A8
+it_804D55A8:
+    .asciz "jobj"
+
+
+.section .sdata2
+    .balign 8
+.global it_804DD310
+it_804DD310:
+    .4byte 0x00000000
+.global it_804DD314
+it_804DD314:
+    .4byte 0x3F800000
