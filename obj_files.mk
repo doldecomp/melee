@@ -689,6 +689,19 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itfushigibana.s.o\
 
 TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/melee/it/items/itoldkuri.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmato.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itheiho.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlikelike.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnokonoko.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itzgshell.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itzrshell.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpatapata.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itklap.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itoldottosea.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itwhitebea.s.o\
+
+TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/it_803F5468.s.o\
     $(BUILD_DIR)/asm/melee/it/it_27CF.s.o\
 

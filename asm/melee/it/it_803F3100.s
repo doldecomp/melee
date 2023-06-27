@@ -38,6 +38,7 @@ it_803F4CA8:
 
 .global it_803F4D20
 it_803F4D20:
+    # Old Kuri
     .4byte it_803F8320
     .4byte it_802D73F0
     .4byte it_8027C8B0
@@ -53,6 +54,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte it_802D84D8
+    # Mato
     .4byte it_803F83E0
     .4byte it_802D84F8
     .4byte it_8027C8B0
@@ -68,6 +70,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+    # Heiho
     .4byte it_803F83F0
     .4byte it_802D8688
     .4byte it_8027C8B0
@@ -83,6 +86,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte it_802D9A0C
+    # Nokonoko (green koopa)
     .4byte it_803F85F0
     .4byte it_802DC69C
     .4byte it_8027C8B0
@@ -98,6 +102,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte it_802DD7D0
+    # Patapata (red koopa)
     .4byte it_803F88C0
     .4byte it_802E05A0
     .4byte it_8027C8B0
@@ -113,6 +118,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte it_802E16D8
+    # Likelike
     .4byte it_803F8468
     .4byte it_802D9BA8
     .4byte it_802DC480
@@ -128,6 +134,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte it_802E16D8
+
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -143,6 +150,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -158,6 +166,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+    # Old Ottosea
     .4byte it_803F89C8
     .4byte it_802E2470
     .4byte NULL
@@ -173,6 +182,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+    # Whitebea (Polar Bear)
     .4byte it_803F8A88
     .4byte it_802E37BC
     .4byte it_8027C8B0
@@ -188,6 +198,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte it_802E4A24
+    # Klap
     .4byte it_803F8940
     .4byte it_802E1820
     .4byte it_802E1874
@@ -203,6 +214,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte it_802E2450
+    # ZGShell
     .4byte it_803F86C8
     .4byte it_802DE040
     .4byte it_802DFEF4
@@ -218,6 +230,7 @@ it_803F4D20:
     .4byte it_802DFE40
     .4byte it_802DFD60
     .4byte it_802DFED4
+    # ZRShell
     .4byte it_803F87F0
     .4byte it_802E02E8
     .4byte it_802E0388
@@ -233,6 +246,7 @@ it_803F4D20:
     .4byte it_802E0448
     .4byte it_802E0428
     .4byte it_802E0468
+    # Tincle
     .4byte it_803F9000
     .4byte it_802EB5C8
     .4byte NULL
@@ -248,6 +262,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte it_802EC850
+
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -263,6 +278,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -278,6 +294,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -293,6 +310,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+    # WhispyApple
     .4byte it_803F91D0
     .4byte NULL
     .4byte NULL
@@ -308,6 +326,7 @@ it_803F4D20:
     .4byte it_802EEF68
     .4byte it_802EEF30
     .4byte it_802EEF88
+    # WhispyHealApple
     .4byte it_803F91D0
     .4byte NULL
     .4byte NULL
@@ -323,6 +342,7 @@ it_803F4D20:
     .4byte it_802EEF68
     .4byte it_802EEF30
     .4byte it_802EEF88
+
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -338,6 +358,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -353,6 +374,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -368,6 +390,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+    # Tools (Flat Zone)
     .4byte it_803F9260
     .4byte NULL
     .4byte NULL
@@ -383,6 +406,7 @@ it_803F4D20:
     .4byte it_802EF924
     .4byte it_802EF7CC
     .4byte it_802EFA24
+
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -398,6 +422,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -413,6 +438,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+    # Kyasarin (Birdo)
     .4byte it_803F90D0
     .4byte it_802ECE90
     .4byte it_802ECCDC
@@ -428,6 +454,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte it_802EE1E0
+    # Arwing Laser
     .4byte it_803F8DE8
     .4byte NULL
     .4byte it_802E79C8
@@ -443,6 +470,7 @@ it_803F4D20:
     .4byte it_802E85F4
     .4byte it_802E8784
     .4byte NULL
+    # GreatFox Laser
     .4byte it_803F8FD0
     .4byte it_802EB1EC
     .4byte NULL
@@ -458,6 +486,7 @@ it_803F4D20:
     .4byte NULL
     .4byte NULL
     .4byte it_802EB5A8
+    # Kyasarin Egg
     .4byte it_803F9328
     .4byte NULL
     .4byte NULL
