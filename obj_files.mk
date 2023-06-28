@@ -176,6 +176,23 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureMewtwo.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ThrownMewtwo.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_08A4.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftmaterial.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftcolanim.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftdevice.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0C08.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftafterimage.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0C31.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftmetal.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0C88.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftswing.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0CD1.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftstarrodswing.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftlipstickswing.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0CDD.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftattacks4combo.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0CEE.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftchangeparam.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0D14.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyWait0.c.o\
