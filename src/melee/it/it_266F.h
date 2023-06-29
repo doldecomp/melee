@@ -133,5 +133,9 @@ bool it_80273130(Item_GObj*);
 void it_802750F8(Item_GObj*);
 void it_80274594(Item_GObj*);
 void it_8026EECC(Item_GObj*, int);
+bool it_8026DA08(Item_GObj*);
+bool it_80276308(Item_GObj*);
+bool it_802763E0(Item_GObj*);
+void it_80272860(Item_GObj*, f32, f32);
 
 #endif

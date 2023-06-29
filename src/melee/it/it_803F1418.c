@@ -1,5 +1,6 @@
 #include <melee/it/it_27CF.h>
 #include <melee/it/items/itcapsule.h>
+#include <melee/it/items/itstar.h>
 
 extern void it_8026EECC(HSD_GObj*, s32);
 extern void it_80284E10(HSD_GObj*, s32);
@@ -86,9 +87,6 @@ void it_802844E4();
 void it_8028454C();
 void it_802845BC();
 void it_80284624();
-void it_80284644();
-int it_8028482C();
-void it_80284834();
 void it_80284910();
 void it_80284AAC();
 void it_80284B30();
@@ -426,7 +424,6 @@ extern ItemStateTable it_803F54D8[];
 extern ItemStateTable it_803F55D0[];
 extern ItemStateTable it_803F56C8[];
 extern ItemStateTable it_803F5740[];
-extern ItemStateTable it_803F57A0[];
 extern ItemStateTable it_803F57B0[];
 extern ItemStateTable it_803F5800[];
 extern ItemStateTable it_803F5850[];
