@@ -42,6 +42,7 @@ void ftCommon_ClampFallSpeed(ftCo_Fighter*, float);
 void ftCommon_8007D508(ftCo_Fighter*, float, float);
 bool ftCommon_8007D528(ftCo_Fighter*);
 void ftCommon_8007D5BC(ftCo_Fighter*);
+void ftCommon_8007D5D4(ftCo_Fighter*);
 void ftCommon_8007D60C(ftCo_Fighter*);
 void ftCommon_8007D698(ftCo_Fighter*);
 void ftCommon_8007D6A4(ftCo_Fighter*);
@@ -103,7 +104,6 @@ void ftCommon_8007FA00(ftCo_GObj*);
 void ftCommon_8007FA58(ftCo_GObj*, ftCo_GObj*);
 void ftCommon_8007FC7C(ftCo_GObj*, float);
 void ftCommon_8007FDA0(ftCo_GObj*);
-void ftCommon_8007FE84(ftCo_GObj*, ftCo_GObj* gobj, s32, float);
 void ftCommon_8007FF74(ftCo_GObj*);
 bool ftCommon_8007FFD8(ftCo_Fighter*, float);
 bool ftCommon_80080144(ftCo_Fighter*);
@@ -114,43 +114,13 @@ void ftCommon_80080460(ftCo_Fighter*);
 void ftCommon_80080474(ftCo_Fighter*);
 void ftCommon_80080484(ftCo_Fighter*);
 void ftCommon_800804A0(ftCo_Fighter*, float);
-float ftCommon_800804EC(ftCo_Fighter*);
 void ftCommon_800804FC(ftCo_Fighter*);
-
-void ftCommon_8007CB74(ftCo_GObj*);
-void ftCommon_8007CC78(ftCo_Fighter*, float);
-void ftCommon_8007CCA0(ftCo_Fighter*, float);
-float ftCommon_8007CD6C(float value, float decrement);
-float ftCommon_8007CDA4(ftCo_Fighter*);
-float ftCommon_8007CDF8(ftCo_Fighter*);
-void ftCommon_8007CE4C(ftCo_Fighter*, float);
-void ftCommon_8007CE94(ftCo_Fighter*, float);
-bool ftCommon_8007CF58(ftCo_Fighter*);
-void ftCommon_8007D344(ftCo_Fighter*, float, float, float);
-void ftCommon_8007D4B8(ftCo_Fighter*);
-void ftCommon_8007D5D4(ftCo_Fighter*);
-void ftCommon_8007D6A4(ftCo_Fighter*);
-void ftCommon_8007D780(ftCo_Fighter*);
-void ftCommon_8007D7FC(ftCo_Fighter*);
-void ftCommon_8007D92C(ftCo_GObj*);
-void ftCommon_8007D9FC(ftCo_Fighter*);
 
 void ftCommon_8007E2D0(ftCo_Fighter*, s16, HSD_GObjEvent, HSD_GObjEvent,
                        void (*)(ftCo_GObj*, ftCo_GObj*));
 
-void ftCommon_8007E2FC(ftCo_GObj*);
-void ftCommon_8007E83C(ftCo_GObj*, s32, float div);
-s32 ftCo_GetParasolStatus(ftCo_GObj*);
-void ftCommon_8007EA90(ftCo_Fighter*, s32);
-void ftCommon_8007ED50(ftCo_Fighter*, s32);
-void ftCommon_8007EFC0(ftCo_Fighter*, u32);
-float ftCommon_GetModelScale(ftCo_Fighter*);
-void ftCommon_8007FC7C(ftCo_GObj*, float);
-
 /// @todo static
 void ftCommon_8007FE84(ftCo_GObj*, ftCo_GObj*, s32, float);
-
-bool ftCommon_8007FFD8(ftCo_Fighter*, float);
 
 /// @todo @c DataOffset_PlayerScale_MultiplyBySomething
 /// @returns <tt>fp->x40*fp->x34</tt>

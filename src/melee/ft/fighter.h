@@ -105,7 +105,4 @@ void Fighter_UnkCallCameraCallback_8006D9EC(Fighter_GObj* gobj);
 void Fighter_8006DA4C(Fighter_GObj* gobj);
 void Fighter_Unload_8006DABC(void* user_data);
 
-void Fighter_UnkProcessDeath_80068354(Fighter_GObj*);
-u32 Fighter_NewSpawn_80068E40(void);
-
 #endif

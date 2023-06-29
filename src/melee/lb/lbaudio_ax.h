@@ -25,7 +25,6 @@ void lbAudioAx_8002500C(s32);
 void lbAudioAx_80025038(s32);
 void lbAudioAx_8002838C(void);
 bool lbAudioAx_80023710(s32);
-bool lbAudioAx_80023710(s32);
 void lbAudioAx_80023870(unk_t, s32, s32, s32);
 s32 lbAudioAx_8002305C(s32, s32);
 void lbAudioAx_80026510(HSD_GObj*);

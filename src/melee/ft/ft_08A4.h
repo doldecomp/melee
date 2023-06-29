@@ -365,7 +365,6 @@ void ftCo_800D5BF8(ftCo_GObj* gobj);
 void ftCo_800D5CB0(ftCo_GObj*, bool, float landing_lag);
 void ftCo_800D638C(ftCo_GObj* gobj);
 void ftCo_800D6B00(ftCo_GObj*, s32);
-void ftCo_800D6C60(ftCo_GObj*, HSD_GObjEvent);
 void ftCo_800D6C60(ftCo_GObj*, HSD_GObjEvent callback);
 void ftCo_800D71D8(ftCo_GObj* gobj);
 void ftCo_800D94D8(ftCo_GObj* gobj);

@@ -3,7 +3,6 @@
 
 #include <platform.h>
 
-typedef struct DynamicModelDesc DynamicModelDesc;
 typedef struct HSD_AnimJoint HSD_AnimJoint;
 typedef struct HSD_AObj HSD_AObj;
 typedef struct HSD_AObjDesc HSD_AObjDesc;
@@ -74,8 +73,6 @@ typedef struct HSD_WObjInfo HSD_WObjInfo;
 typedef struct PadLibData PadLibData;
 typedef struct RumbleCommand RumbleCommand;
 typedef struct RumbleInfo RumbleInfo;
-typedef struct SceneDesc SceneDesc;
-typedef struct StaticModelDesc StaticModelDesc;
 typedef struct Struct804C22E0 Struct804C22E0;
 typedef struct TextKerning TextKerning;
 typedef struct UnkGeneratorStruct UnkGeneratorStruct;

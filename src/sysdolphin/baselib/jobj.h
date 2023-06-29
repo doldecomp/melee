@@ -145,7 +145,6 @@ void HSD_JObjCheckDepend(HSD_JObj* jobj);
 u32 HSD_JObjGetFlags(HSD_JObj* jobj);
 void HSD_JObjReqAnimAll(HSD_JObj*, f32);
 void HSD_JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint);
-void HSD_JObjReqAnimAll(HSD_JObj*, f32);
 void HSD_JObjSetupMatrixSub(HSD_JObj*);
 void HSD_JObjSetMtxDirtySub(HSD_JObj*);
 void HSD_JObjUnref(HSD_JObj* jobj);

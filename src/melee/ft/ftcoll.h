@@ -30,8 +30,6 @@ f32 ftColl_800765F0(Fighter* fp, Fighter_GObj* victim,
                     f32 unk_floatvar); // Unk knockback related ?
 bool ftColl_8007B868(Fighter_GObj* gobj);
 
-void ftColl_80076528(Fighter_GObj*);
-void ftColl_800765E0(void);
 void ftColl_80078754(Fighter_GObj*, Fighter_GObj*, bool);
 void ftColl_80078A2C(Fighter_GObj*);
 void ftColl_80078C70(Fighter_GObj*);

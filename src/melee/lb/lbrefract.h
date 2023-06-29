@@ -55,7 +55,6 @@ extern RefractCallbackTypeA lbRefract_80021F34;
 extern RefractCallbackTypeA lbRefract_80021F70;
 
 extern RefractCallbackTypeB lbRefract_80021FB4;
-extern RefractCallbackTypeB lbRefract_80021FB4;
 
 extern RefractCallbackTypeC lbRefract_80021FF8;
 extern RefractCallbackTypeC lbRefract_8002206C;

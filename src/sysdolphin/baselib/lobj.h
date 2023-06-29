@@ -135,8 +135,6 @@ bool HSD_LObjGetInterest(HSD_LObj*, Vec3*);
 
 HSD_WObj* HSD_LObjGetPositionWObj(HSD_LObj* lobj);
 HSD_WObj* HSD_LObjGetInterestWObj(HSD_LObj* lobj);
-void HSD_LObjReqAnim(HSD_LObj* lobj, f32 startframe);
-void HSD_LObjReqAnimAll(HSD_LObj* lobj, f32 startframe);
 
 s32 HSD_LightID2Index(GXLightID);
 void HSD_LObjDeleteCurrent(HSD_LObj* lobj);
