@@ -51,9 +51,4 @@ HSD_LObj* lb_8000CDC0(HSD_LObj*);
 void lb_8000CE30(HSD_DObj*, HSD_DObj*);
 void lb_8000CE40(HSD_JObj*, HSD_DObj*);
 
-f32 lb_8000BDB4(HSD_JObj*);
-void lb_8000C1C0(HSD_JObj*, HSD_JObj*);
-void lb_8000C228(HSD_JObj*, HSD_JObj*);
-void lb_8000C420(HSD_JObj*, u32, f32);
-
 #endif

@@ -115,7 +115,6 @@ void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
 void HSD_CObjRemoveAnim(HSD_CObj* cobj);
 HSD_WObj* HSD_CObjGetEyePositionWObj(HSD_CObj* cobj);
 HSD_WObj* HSD_CObjGetInterestWObj(HSD_CObj* cobj);
-void HSD_CObjSetOrtho(HSD_CObj* cobj, f32, f32, f32, f32);
 void HSD_CObjSetInterest(HSD_CObj* cobj, Vec3*);
 void HSD_CObjSetEyePosition(HSD_CObj* cobj, Vec3*);
 bool HSD_CObjSetCurrent(HSD_CObj*, cobj_UnkCallback1);

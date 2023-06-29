@@ -188,8 +188,6 @@ void Item_8026A0FC(HSD_GObj* gobj);
 /// Item Think - Exit Hitlag
 void Item_8026A1E8(HSD_GObj* gobj);
 
-void Item_802693E4(HSD_GObj* gobj);
-
 /// Item Think - Check for Blast Zones
 bool Item_802696CC(HSD_GObj* gobj);
 

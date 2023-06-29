@@ -2,6 +2,7 @@
 #define MELEE_SC_SCENE_H
 
 #include <baselib/forward.h>
+#include <melee/sc/forward.h>
 
 /// Model with a single animation or no animation
 struct StaticModelDesc {

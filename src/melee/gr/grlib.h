@@ -27,8 +27,6 @@ HSD_GObj* grLib_801C9CEC(s32);
 s16 grLib_801C9E40(void);
 void grLib_801C9E50(s16);
 bool grLib_801C9E60(Vec3*);
-bool grLib_801C9EE8(void);
-Vec3* grLib_801C9A10(void);
 
 /// @remarks Only called from yorster and inishie1
 bool grLib_801C9EE8(void);

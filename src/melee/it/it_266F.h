@@ -47,16 +47,12 @@ void it_8027163C(HSD_GObj* gobj);
 void it_80271A58(HSD_GObj* gobj);
 void it_802721B8(HSD_GObj* gobj);
 void it_80272280(HSD_GObj* gobj);
-void it_8027163C(HSD_GObj* gobj);
-void it_80271A58(HSD_GObj* gobj);
-void it_802721B8(HSD_GObj* gobj);
 void it_80272298(HSD_GObj* gobj);
 void it_802722B0(HSD_GObj* gobj);
 void it_80272304(HSD_GObj* gobj);
 void it_80272460(itHit* hitbox, s32 damage, HSD_GObj* gobj);
 void it_802725D4(HSD_GObj*);
 void it_80272784(HSD_GObj* gobj);
-void it_802728C8(HSD_GObj* gobj);
 void it_80272A18(HSD_JObj* item_jobj);
 void it_80272A3C(HSD_JObj* item_jobj);
 
@@ -66,16 +62,8 @@ bool it_80272D1C(HSD_GObj* gobj);
 /// Check GObj entity class
 s32 it_80272D40(HSD_GObj* gobj);
 
-void it_80272F7C(HSD_JObj*, f32);
 void it_802728C8(HSD_GObj* gobj);
-void it_80273168(HSD_GObj* gobj);
-void it_802731A4(HSD_GObj*);
-void it_802731E0(HSD_GObj*);
-void it_8027327C(HSD_GObj* gobj, s32 ID1, s32 ID2);
-void it_8027346C(HSD_GObj* gobj);
-void it_80273484(HSD_GObj* gobj);
 void it_80272F7C(HSD_JObj*, f32);
-void it_802728C8(HSD_GObj* gobj);
 void it_80273168(HSD_GObj* gobj);
 void it_802731A4(HSD_GObj*);
 void it_802731E0(HSD_GObj*);
@@ -108,8 +96,6 @@ void it_80275158(HSD_GObj* gobj, f32 lifetime);
 void it_80275390(HSD_GObj*);
 void it_802753BC(HSD_GObj*, s16);
 void it_802753DC(HSD_GObj*);
-void it_80274740(HSD_GObj* gobj);
-void it_80274A64(HSD_GObj* gobj);
 
 /// Toggle several flags in 0xDCD off
 void it_80275474(HSD_GObj* gobj);

@@ -44,8 +44,5 @@ void HSD_ShadowDeleteObject(HSD_Shadow*, bool);
 HSD_TObj* makeShadowTObj(void);
 void HSD_ShadowRemove(HSD_Shadow* shadow);
 void HSD_ShadowInit(HSD_Shadow* shadow);
-HSD_TObj* makeShadowTObj(void);
-void HSD_ShadowRemove(HSD_Shadow* shadow);
-void HSD_ShadowInit(HSD_Shadow* shadow);
 
 #endif

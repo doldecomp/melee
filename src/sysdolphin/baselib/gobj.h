@@ -130,7 +130,6 @@ void HSD_GObj_803911C0(HSD_Obj* obj);
 void HSD_GObj_80391260(struct _GObjUnkStruct* arg0);
 void HSD_GObj_803912E0(GObjFuncs* arg0);
 void HSD_GObj_80390ED0(HSD_GObj* gobj, u32 mask);
-void HSD_GObj_80390ED0(HSD_GObj* gobj, u32 mask);
 
 static inline any_t HSD_GObjGetUserData(HSD_GObj* gobj)
 {
