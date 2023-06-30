@@ -8,6 +8,15 @@ typedef struct {
     bool x4;
 } ItCapsuleAttrs;
 
+typedef struct {
+    f32 dir;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 xvel;
+    f32 yvel;
+} ItStarVars;
+
 typedef struct BobOmbVars {
     s32 xDD4;
     s32 xDD8;

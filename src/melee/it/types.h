@@ -648,6 +648,7 @@ struct Item {
     UnkFlagStruct xDD3_flag;
     union {
         ItCapsuleAttrs capsule;
+        ItStarVars star;
         BobOmbVars BobOmb;
         HeartContainerVars HeartContainer;
         MaximTomatoVars MaximTomato;
