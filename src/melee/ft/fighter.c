@@ -2412,15 +2412,8 @@ void Fighter_UnkApplyTransformation_8006C0F0(Fighter_GObj* gobj)
         Vec3 translation;
         Quaternion rotation;
 
-        /// @todo This usually implies an inline, but inlines reserve more
-        /// stack
-        ///       (usually in 8 byte increments) than a single allocation
-        ///       (removed) like this.
-        jobj = GET_JOBJ(gobj);
-
         HSD_JObjSetupMatrix(jobj);
-        HSD_JObjGetMtx(jobj);
-        HSD_MtxInverse(jobj->mtx, mtx1);
+        HSD_MtxInverse(HSD_JObjGetMtxPtr(jobj), mtx1);
         HSD_JObjGetScale(jobj, &scale);
 
         scale.x = ftCommon_GetModelScale(fp);

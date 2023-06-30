@@ -189,11 +189,12 @@ static inline bool HSD_JObjMtxIsDirty(HSD_JObj* jobj)
     return result;
 }
 
-static inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
+inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
 {
-    if (jobj != NULL && HSD_JObjMtxIsDirty(jobj)) {
-        HSD_JObjSetupMatrixSub(jobj);
+    if (jobj == NULL || !HSD_JObjMtxIsDirty(jobj)) {
+        return;
     }
+    HSD_JObjSetupMatrixSub(jobj);
 }
 
 // Why does this seem to be a define while the others are inline functions?
@@ -390,14 +391,16 @@ static inline void HSD_JObjAddTranslationZ(HSD_JObj* jobj, float z)
     }
 }
 
-/// @todo This is misplaced or something; @c jobj.h must not include @c
-///       lbcollision.
+/// @todo This is inlined into lbcoll, and linker deduplication
+/// only kept that definition.
+/// Rename it back to HSD_JObjSetupMatrix once lbcoll is matched.
 void lbColl_JObjSetupMatrix(HSD_JObj*);
 
-static inline void HSD_JObjGetMtx(HSD_JObj* jobj)
+static inline MtxPtr HSD_JObjGetMtxPtr(HSD_JObj* jobj)
 {
     HSD_ASSERT(1144, jobj);
     lbColl_JObjSetupMatrix(jobj);
+    return jobj->mtx;
 }
 
 static inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx mtx)
