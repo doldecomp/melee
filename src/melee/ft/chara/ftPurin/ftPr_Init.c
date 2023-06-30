@@ -504,21 +504,15 @@ void ftPr_Init_8013C494(HSD_GObj* gobj)
 
 void ftPr_Init_UnkMtxFunc0(HSD_GObj* gobj, int arg1, Mtx vmtx)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u8 _[8];
-#endif
-
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.pr.x223C && fp->x2225_b2) {
-        Mtx* mtx;
+        MtxPtr mtx;
         HSD_JObj* jobj;
         HSD_JObj* bone_jobj = fp->parts[FtPart_LLegJA].joint;
-        HSD_JObjGetMtx(fp->parts[FtPart_LLegJA].joint);
-        mtx = (0, &bone_jobj->mtx);
+        mtx = HSD_JObjGetMtxPtr(fp->parts[FtPart_LLegJA].joint);
         jobj = fp->fv.pr.x223C;
-        HSD_JObjCopyMtx(fp->fv.pr.x223C, *mtx);
+        HSD_JObjCopyMtx(fp->fv.pr.x223C, mtx);
         jobj->flags |= (1 << 23) | (1 << 24) | (1 << 25);
         HSD_JObjSetMtxDirty(jobj);
 

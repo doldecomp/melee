@@ -3661,8 +3661,8 @@ void lbColl_80007B78(Mtx a, Mtx b, f32 x, f32 y)
                     b[0][0] * y, a[0][0] * x, x);
 }
 
-extern char* lbColl_804D3700;
-extern char* lbColl_804D3708;
+extern char lbColl_804D3700[8];
+extern char lbColl_804D3708[8];
 f32 const lbColl_804D7A34 = 20;
 
 #ifdef MUST_MATCH
@@ -3855,53 +3855,26 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
 }
 #endif
 
-#ifdef MUST_MATCH
-#pragma push
-asm void lbColl_JObjSetupMatrix(HSD_JObj*)
-{ // clang-format off
-    nofralloc
-/* 80007D68 00004948  7C 08 02 A6 */	mflr r0
-/* 80007D6C 0000494C  90 01 00 04 */	stw r0, 4(r1)
-/* 80007D70 00004950  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80007D74 00004954  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80007D78 00004958  7C 7F 1B 79 */	or. r31, r3, r3
-/* 80007D7C 0000495C  41 82 00 48 */	beq lbl_80007DC4
-/* 80007D80 00004960  40 82 00 14 */	bne lbl_80007D94
-/* 80007D84 00004964  38 6D 80 60 */	addi r3, r13, lbColl_804D3700
-/* 80007D88 00004968  38 80 02 34 */	li r4, 0x234
-/* 80007D8C 0000496C  38 AD 80 68 */	addi r5, r13, lbColl_804D3708
-/* 80007D90 00004970  48 38 04 91 */	bl __assert
-lbl_80007D94:
-/* 80007D94 00004974  80 9F 00 14 */	lwz r4, 0x14(r31)
-/* 80007D98 00004978  38 60 00 00 */	li r3, 0
-/* 80007D9C 0000497C  54 80 02 11 */	rlwinm. r0, r4, 0, 8, 8
-/* 80007DA0 00004980  40 82 00 10 */	bne lbl_80007DB0
-/* 80007DA4 00004984  54 80 06 73 */	rlwinm. r0, r4, 0, 0x19, 0x19
-/* 80007DA8 00004988  41 82 00 08 */	beq lbl_80007DB0
-/* 80007DAC 0000498C  38 60 00 01 */	li r3, 1
-lbl_80007DB0:
-/* 80007DB0 00004990  2C 03 00 00 */	cmpwi r3, 0
-/* 80007DB4 00004994  40 82 00 08 */	bne lbl_80007DBC
-/* 80007DB8 00004998  48 00 00 0C */	b lbl_80007DC4
-lbl_80007DBC:
-/* 80007DBC 0000499C  7F E3 FB 78 */	mr r3, r31
-/* 80007DC0 000049A0  48 36 B2 B9 */	bl HSD_JObjSetupMatrixSub
-lbl_80007DC4:
-/* 80007DC4 000049A4  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80007DC8 000049A8  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80007DCC 000049AC  38 21 00 18 */	addi r1, r1, 0x18
-/* 80007DD0 000049B0  7C 08 03 A6 */	mtlr r0
-/* 80007DD4 000049B4  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#else
-
-void lbColl_JObjSetupMatrix(HSD_JObj* arg0)
+static inline bool lbColl_JObjMtxIsDirty(HSD_JObj* jobj)
 {
-    /// @todo Missing branch somehow
-    HSD_JObjSetupMatrix(arg0);
+    bool result;
+    jobj ? (void) 0 : __assert(lbColl_804D3700, 564, lbColl_804D3708);
+    result = false;
+    if (!(jobj->flags & JOBJ_USER_DEF_MTX) && (jobj->flags & JOBJ_MTX_DIRTY)) {
+        result = true;
+    }
+    return result;
 }
-#endif
+
+/// @todo This is an inlined copy of JObjSetupMatrix from lbColl_80007BCC which
+/// was too deeply nested to inline. Remove this when matching lbColl_80007BCC.
+void lbColl_JObjSetupMatrix(HSD_JObj* jobj)
+{
+    if (jobj == NULL || !lbColl_JObjMtxIsDirty(jobj)) {
+        return;
+    }
+    HSD_JObjSetupMatrixSub(jobj);
+}
 
 #ifdef MUST_MATCH
 #pragma push
@@ -4549,23 +4522,18 @@ inline void mtxConcat(HurtCapsule* hurt, Mtx mtx)
 {
     Mtx sp34;
     if (mtx != NULL) {
-        HSD_JObj* temp_r31;
-        temp_r31 = hurt->bone;
-        HSD_JObjGetMtx(temp_r31);
-        PSMTXConcat(mtx, temp_r31->mtx, &sp34[0]);
+        PSMTXConcat(mtx, HSD_JObjGetMtxPtr(hurt->bone), &sp34[0]);
     }
 }
 
-inline Mtx* pickMtx(HurtCapsule* hurt, Mtx mtx)
+inline MtxPtr pickMtx(HurtCapsule* hurt, Mtx mtx)
 {
-    Mtx* var_r9;
+    MtxPtr var_r9;
     Mtx sp34;
     if (mtx != NULL) {
-        var_r9 = &sp34;
+        var_r9 = sp34;
     } else {
-        HSD_JObj* temp_r31_2 = hurt->bone;
-        HSD_JObjGetMtx(temp_r31_2);
-        var_r9 = &temp_r31_2->mtx;
+        var_r9 = HSD_JObjGetMtxPtr(hurt->bone);
     }
     return var_r9;
 }
@@ -4591,7 +4559,7 @@ bool lbColl_80008248(HitCapsule* hit, HurtCapsule* hurt, Mtx mtx, f32 arg3,
     mtxConcat(hurt, mtx);
 
     return lbColl_80006E58(&hit->x58, &hit->x4C, &hurt->a_pos, &hurt->b_pos,
-                           sp70, sp64, *pickMtx(hurt, mtx), &hit->x64,
+                           sp70, sp64, pickMtx(hurt, mtx), &hit->x64,
                            getHit1C(hit, arg3), hurt->scl, 3.0f * arg4);
 }
 #endif
