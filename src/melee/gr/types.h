@@ -188,7 +188,7 @@ typedef struct StageInfo {
     }** x6A8;
     void* x6AC;
     struct _UnkStage6B0* x6B0;
-    u32* x6B4;
+    unk_t** x6B4;
     void* x6B8;
     void* x6BC;
     void* x6C0;

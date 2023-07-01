@@ -40,6 +40,10 @@ typedef struct FoodVars {
     s32 xDD8_heal;
 } FoodVars;
 
+typedef struct {
+    u32 x0;
+} ItLGunVars;
+
 typedef struct EggVars // Eggs spawned on Yoshi stages / by Chansey
 {
     u8 filler[0x60];

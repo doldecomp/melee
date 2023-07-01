@@ -171,21 +171,16 @@ int it_8026B3C0(ItemKind kind) // Count identical item GObj entities?
     return i;
 }
 
-extern struct r13_ItemTable* it_804D6D38;
-
 void it_8026B3F8(Article* article,
                  s32 kind) // Store Item article pointer to table
 {
-    it_804D6D38->x0_article[kind - It_Kind_Leadead] =
-        article; // This feels very wrong
+    it_804D6D38[kind - It_Kind_Kuriboh] = article;
 }
-
-extern UnkItemArticles3 it_804A0F60[];
 
 void it_8026B40C(Article* article,
                  s32 kind) // Store Stage Item article pointer to table
 {
-    *it_804A0F60[kind - It_Kind_Old_Kuri].unkptr = article;
+    it_804A0F60[kind - It_Kind_Old_Kuri] = article;
 }
 
 f32 it_8026B424(s32 damage) // Item Damage Math
@@ -1179,10 +1174,10 @@ void it_8026C1B4(HSD_GObj* gobj)
     it_80275870(gobj);
 }
 
-/// Get unknown var from r13 pointer
 u32 it_8026C1D4(void)
 {
-    return it_804D6D24->x40->x4->x0;
+    ItLGunVars* lgun = it_804D6D24[It_Kind_L_Gun]->x4_specialAttributes;
+    return lgun->x0;
 }
 
 /// Check if item has grabbed a GObj?

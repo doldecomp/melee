@@ -490,11 +490,6 @@ bool Item_8026784C(enum_t dropItem, int _)
     return result;
 }
 
-extern CommonItemArticles* it_804D6D24;
-extern UnkItemArticles* it_804D6D38;
-extern UnkItemArticles2* it_804D6D30;
-extern UnkItemArticles3 it_804A0F60[];
-
 extern struct ItemLogicTable it_803F14C4[];
 extern struct ItemLogicTable it_803F3100[];
 extern struct ItemLogicTable it_803F23CC[];
@@ -505,23 +500,22 @@ void Item_80267978(HSD_GObj* gobj)
     Item* item_data = gobj->user_data;
     if (item_data->kind < It_Kind_Kuriboh) {
         // Common items
-        item_data->xC4_article_data =
-            it_804D6D24->article_ptr[item_data->kind];
+        item_data->xC4_article_data = it_804D6D24[item_data->kind];
         item_data->xB8_itemLogicTable = &it_803F14C4[item_data->kind];
     } else if (item_data->kind < Pokemon_Tosakinto) {
         // Character items
         int idx = item_data->kind - It_Kind_Kuriboh;
-        item_data->xC4_article_data = it_804D6D38->unkptr[idx];
+        item_data->xC4_article_data = it_804D6D38[idx];
         item_data->xB8_itemLogicTable = &it_803F3100[idx];
     } else if (item_data->kind < It_Kind_Old_Kuri) {
         // Pokemon
         int idx = item_data->kind - Pokemon_Tosakinto;
-        item_data->xC4_article_data = it_804D6D30->unkptr[idx];
+        item_data->xC4_article_data = it_804D6D30[idx];
         item_data->xB8_itemLogicTable = &it_803F23CC[idx];
     } else {
         // Stage items
         int idx = item_data->kind - It_Kind_Old_Kuri;
-        item_data->xC4_article_data = it_804A0F60->unkptr[idx];
+        item_data->xC4_article_data = it_804A0F60[idx];
         item_data->xB8_itemLogicTable = &it_803F4D20[idx];
         if (item_data->xC4_article_data == NULL) {
             OSReport("not found zako model data! check ground dat file!\n");
