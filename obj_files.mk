@@ -636,7 +636,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itnesspkflushexplode.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itseakneedlethrown.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itseakneedleheld.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itseakvanish.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itseakvanish.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itpikachuthunder.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itmariocape.s.o\
     $(BUILD_DIR)/asm/melee/it/items/ityoshieggthrow.s.o\
