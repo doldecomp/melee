@@ -418,17 +418,6 @@ void Ground_801C0754(StructPairWithStageID* pair)
     Ground_801C5878();
 }
 
-extern struct {
-    u8 x0_pad[0x1D4];
-    struct {
-        u8 x0_pad[0xC];
-        struct {
-            u8 x0_pad[0xC];
-            s32 xC;
-        }* xC;
-    }* x1D4;
-}* it_804D6D38;
-
 void Ground_801C0800(StructPairWithStageID* pair)
 {
     StageData* stage_data = Ground_803DFEDC[pair->stage_id];
@@ -457,8 +446,10 @@ void Ground_801C0800(StructPairWithStageID* pair)
         }
 
         if (stage_info.x6B4 != NULL) {
-            for (i = 1; stage_info.x6B4[i] != 0; i++) {
-                it_804D6D38->x1D4->xC[i].xC = stage_info.x6B4[i];
+            for (i = 1; stage_info.x6B4[i] != NULL; i++) {
+                Article* a = it_804D6D38[Pokemon_Random - It_Kind_Kuriboh];
+                a->xC_itemStates->x0_itemStateDesc[i].xC_script =
+                    stage_info.x6B4[i];
             }
         }
     }

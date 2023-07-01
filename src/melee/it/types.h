@@ -694,32 +694,6 @@ struct r13_ItemTable {
     Article* x0_article[0x9F];
 };
 
-typedef struct UnkCommonArticlePtr {
-    u32 x0;
-} UnkCommonArticlePtr;
-
-typedef struct UnkCommonArticleStruct {
-    s32 x0;
-    UnkCommonArticlePtr* x4;
-} UnkCommonArticleStruct;
-
-typedef struct CommonItemArticles {
-    void* article_ptr[0x10];
-    UnkCommonArticleStruct* x40;
-} CommonItemArticles;
-
-typedef struct UnkItemArticles {
-    void* unkptr UNK_SIZE_ARRAY;
-} UnkItemArticles;
-
-typedef struct UnkItemArticles2 {
-    void* unkptr UNK_SIZE_ARRAY;
-} UnkItemArticles2;
-
-struct UnkItemArticles3 {
-    void* unkptr[1];
-};
-
 struct BobOmbRain {
     enum_t x0;
     HSD_JObj* x4;
