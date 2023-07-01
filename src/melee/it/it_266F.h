@@ -143,5 +143,9 @@ bool it_80272C6C(HSD_GObj*);
 void it_80279CDC(HSD_GObj*, f32);
 void it_8027A344(Item_GObj*);
 void it_8027A160(HSD_JObj* bone, Item*);
+bool itColl_BounceOffShield(Item_GObj*);
+void it_8026E0F4(Item_GObj*);
+void it_80272BA4(Item_GObj*);
+void it_80273030(Item_GObj*);
 
 #endif

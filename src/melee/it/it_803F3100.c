@@ -3,6 +3,7 @@
 #include <melee/it/items/itfoxillusion.h>
 #include <melee/it/items/itpeachparasol.h>
 #include <melee/it/items/itseakvanish.h>
+#include <melee/it/items/ityoshistar.h>
 
 void it_8027C8B0();
 bool it_8029BA38();
@@ -122,13 +123,6 @@ bool it_802B2E5C();
 bool it_802B2E7C();
 bool it_802B2F88();
 void it_802B2FA8();
-bool it_802B309C();
-bool it_802B30C0();
-bool it_802B30E4();
-bool it_802B3108();
-bool it_802B312C();
-bool it_802B314C();
-void it_802B3348();
 void it_802B34E4();
 bool it_802B3A94();
 bool it_802B3AF8();
@@ -373,7 +367,6 @@ extern ItemStateTable it_803F70A8[];
 extern ItemStateTable it_803F70C8[];
 extern ItemStateTable it_803F70F8[];
 extern ItemStateTable it_803F7118[];
-extern ItemStateTable it_803F7158[];
 extern ItemStateTable it_803F7190[];
 extern ItemStateTable it_803F71D8[];
 extern ItemStateTable it_803F7220[];
