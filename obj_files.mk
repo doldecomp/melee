@@ -704,7 +704,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itcerebi.s.o\
     $(BUILD_DIR)/asm/melee/it/items/ithitodeman.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itlucky.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itporygon2.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itporygon2.c.o\
     $(BUILD_DIR)/asm/melee/it/items/ithinoarashi.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itmaril.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itfushigibana.s.o\
