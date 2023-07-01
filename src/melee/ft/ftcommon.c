@@ -25,6 +25,8 @@
 #include "pl/pl_0371.h"
 #include "un/un_2FC9.h"
 
+#include <melee/it/items/itpeachparasol.h>
+
 #include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
 #include <baselib/rumble.h>
@@ -1246,7 +1248,6 @@ static s32 parasol_table_4[7] = {
 };
 
 s32 it_8028B08C(void*, s32);
-s32 it_802BDA40(void*, s32);
 
 static const int FtParasol_None = -1;
 
