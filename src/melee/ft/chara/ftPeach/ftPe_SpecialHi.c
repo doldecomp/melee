@@ -22,6 +22,8 @@
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
+#include <melee/it/items/itpeachparasol.h>
+
 #include <math.h>
 #include <placeholder.h>
 #include <baselib/gobj.h>

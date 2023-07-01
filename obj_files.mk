@@ -650,7 +650,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itseakchain.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itpeachexplode.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itpeachturnip.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itpeachparasol.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itpeachparasol.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itpeachtoad.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itpeachtoadspore.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itnessyoyo.s.o\

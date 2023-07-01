@@ -173,7 +173,6 @@ void it_802BD158(Item_GObj* gobj, Vec3*, int, float);
 HSD_GObj* it_802BD4AC(Item_GObj*, Vec3*, u8, s32, f32);
 
 void it_802BD45C(Item_GObj* gobj);
-HSD_GObj* it_802BDA64(Item_GObj*, Vec3*, int, f32);
 void it_802BDB94(Item_GObj* gobj);
 void it_802BDBF8(Item_GObj* gobj);
 void it_802BDC18(Item_GObj* gobj);
