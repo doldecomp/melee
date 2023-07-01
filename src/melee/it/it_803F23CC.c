@@ -1,4 +1,5 @@
 #include <melee/it/types.h>
+#include <melee/it/items/itporygon2.h>
 
 void it_8026EECC();
 void it_802C8F4C();
@@ -101,8 +102,6 @@ void it_802D59A8();
 void it_802D59DC();
 void it_802D5A04();
 void it_802D5A9C();
-void it_802D5ABC();
-void it_802D5CD8();
 void it_802D5CF8();
 bool it_802D6100();
 void it_802D61A8();
@@ -153,7 +152,6 @@ extern ItemStateTable it_803F8128;
 extern ItemStateTable it_803F8180;
 extern ItemStateTable it_803F8190;
 extern ItemStateTable it_803F8200;
-extern ItemStateTable it_803F8250;
 extern ItemStateTable it_803F8270;
 extern ItemStateTable it_803F82A0;
 extern ItemStateTable it_803F82B0;
@@ -653,7 +651,7 @@ ItemLogicTable it_803F23CC[] = {
         it_802D56F0,
     },
     { // Porygon2
-        &it_803F8250,
+        it_803F8250,
         it_802D5ABC,
         NULL,
         NULL,
