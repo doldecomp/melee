@@ -11,17 +11,10 @@ void it_8026E15C(Item_GObj*, HSD_GObjEvent);
 void it_8026E414(Item_GObj*, HSD_GObjEvent);
 void it_8026F3D4(Item_GObj*, int, bool, int);
 bool it_8026F8B4(Item_GObj*, Vec3*, Vec3*, int);
-void it_80272860(Item_GObj*, f32, f32);
 void it_80272C08();
 void it_80273454();
-void it_80274658(Item_GObj*, f32);
-void it_8027518C();
 void it_80275444();
-void it_802756D0();
-void it_8027D258(Item_GObj*);
-void it_8027D2DC();
 void it_8026E8C4(Item_GObj*, HSD_GObjEvent, HSD_GObjEvent);
-void itColl_BounceOffShield(Item_GObj*);
 
 ItemStateTable it_803F5468[] = {
     {

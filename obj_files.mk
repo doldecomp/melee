@@ -640,7 +640,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itpikachuthunder.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itmariocape.s.o\
     $(BUILD_DIR)/asm/melee/it/items/ityoshieggthrow.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/ityoshistar.s.o\
+    $(BUILD_DIR)/src/melee/it/items/ityoshistar.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itpikachutjoltground.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itpikachutjoltair.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itsamusbomb.s.o\
