@@ -16,7 +16,6 @@ void it_80272C08();
 void it_80273454();
 void it_80274658(Item_GObj*, f32);
 void it_8027518C();
-bool it_802751D8(Item_GObj*);
 void it_80275444();
 void it_802756D0();
 void it_8027D258(Item_GObj*);

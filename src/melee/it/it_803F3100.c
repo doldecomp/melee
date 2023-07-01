@@ -1,6 +1,7 @@
 #include <melee/it/it_27CF.h>
 #include <melee/it/items/itfoxlaser.h>
 #include <melee/it/items/itfoxillusion.h>
+#include <melee/it/items/itseakvanish.h>
 
 void it_8027C8B0();
 bool it_8029BA38();
@@ -104,8 +105,6 @@ bool it_802B16E4();
 void it_802B1890();
 void it_802B1AAC();
 void it_802B1C40();
-bool it_802B1D38();
-void it_802B1DCC();
 void it_802B202C();
 bool it_802B2508();
 bool it_802B2510();
@@ -373,7 +372,6 @@ extern ItemStateTable it_803F6E98[];
 extern ItemStateTable it_803F6F40[];
 extern ItemStateTable it_803F6F50[];
 extern ItemStateTable it_803F70A8[];
-extern ItemStateTable it_803F70B8[];
 extern ItemStateTable it_803F70C8[];
 extern ItemStateTable it_803F70F8[];
 extern ItemStateTable it_803F7118[];
