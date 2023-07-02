@@ -250,6 +250,12 @@ static inline void HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion* quat)
     *quat = jobj->rotate;
 }
 
+static inline f32 HSD_JObjGetRotationY(HSD_JObj* jobj)
+{
+    HSD_ASSERT(730, jobj);
+    return jobj->rotate.y;
+}
+
 static inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec3* scale)
 {
     HSD_ASSERT(760, jobj);
