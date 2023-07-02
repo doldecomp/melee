@@ -23,9 +23,14 @@ ItemStateTable it_803F67D0[] = {
     }
 };
 
+inline void* getFoxLaser(Item* item)
+{
+    return &item->xDD4_itemVar;
+}
+
 bool it_8029C4D4(Item_GObj* item_gobj)
 {
-    Item* item = item_gobj->user_data;
+    Item* item = GET_ITEM(item_gobj);
     return it_8026E9A4(item_gobj, &item->xDD4_itemVar.foxlaser.xDE0,
                        &item->pos, 0);
 }
@@ -44,7 +49,6 @@ void it_8029C504(HSD_GObj* parent, Vec3* pos, enum_t msid, int kind, f32 angle,
                  f32 arg9)
 {
     SpawnItem spawn;
-    u32 unused[1];
     Item_GObj* item_gobj;
     bool right_facing;
 
@@ -66,7 +70,7 @@ void it_8029C504(HSD_GObj* parent, Vec3* pos, enum_t msid, int kind, f32 angle,
     spawn.x40 = 0;
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
-        Item* item = item_gobj->user_data;
+        Item* item = GET_ITEM(item_gobj);
         FoxLaserVars* attr = item->xC4_article_data->x4_specialAttributes;
         Item_80268E5C(item_gobj, msid, ITEM_ANIM_UPDATE);
         it_80275158(item_gobj, attr->xDD4);
@@ -90,7 +94,11 @@ void it_8029C6CC(f32 angle, f32 vel, HSD_GObj* parent, Vec3* vec, int kind)
 
 static inline f32 fabsf(f32 x)
 {
-    return (x < 0) ? -x : x;
+    if (x < 0) {
+        return -x;
+    } else {
+        return +x;
+    }
 }
 
 bool it_8029C6F4(Item_GObj* item_gobj)
@@ -102,8 +110,8 @@ bool it_8029C6F4(Item_GObj* item_gobj)
     f32 dir;
     f32 vel_x;
 
-    item = item_gobj->user_data;
-    jobj = item_gobj->hsd_obj;
+    item = GET_ITEM(item_gobj);
+    jobj = GET_JOBJ(item_gobj);
     article = item->xC4_article_data;
     attr = article->x4_specialAttributes;
     item->x40_vel.x = item->xDD4_itemVar.foxlaser.xDDC *
@@ -138,15 +146,15 @@ bool it_8029C6F4(Item_GObj* item_gobj)
 
 void it_8029C9CC(Item_GObj* item_gobj)
 {
-    Item* item = item_gobj->user_data;
+    Item* item = GET_ITEM(item_gobj);
     item->xDD4_itemVar.foxlaser.xDE0 = item->pos;
 }
 
 bool it_8029C9EC(Item_GObj* item_gobj)
 {
-    Item* item = item_gobj->user_data;
+    Item* item = GET_ITEM(item_gobj);
     Vec3 sp18 = item->pos;
-    Vec3 unused;
+    u32 unused[1];
     if (it_8029C4D4(item_gobj)) {
         it_80275158(item_gobj, 1.0F);
         item->pos = sp18;
@@ -161,10 +169,8 @@ bool it_8029CA78(Item_GObj*)
 
 bool it_8029CA80(Item_GObj* item_gobj)
 {
-    u32 unused[2];
-
-    Item* item = item_gobj->user_data;
-    HSD_JObj* jobj = item_gobj->hsd_obj;
+    Item* item = GET_ITEM(item_gobj);
+    HSD_JObj* jobj = GET_JOBJ(item_gobj);
     if (item->facing_dir != item->xC68) {
         item->facing_dir = item->xC68;
         HSD_JObjSetRotationY(jobj, (M_PI / 2) * item->facing_dir);
@@ -182,8 +188,8 @@ bool it_8029CC4C(Item_GObj*)
 
 bool it_8029CC54(Item_GObj* item_gobj)
 {
-    Item* item = item_gobj->user_data;
-    u32 unused[2];
+    Item* item = GET_ITEM(item_gobj);
+    u32 unused[1];
     lbVector_Mirror(&item->x40_vel, &item->xC58);
     item->xDD4_itemVar.foxlaser.xDD4 = 1e-3;
     item->xDD4_itemVar.foxlaser.xDD8 =

@@ -30,7 +30,7 @@ ItemStateTable it_803F6818[] = {
 
 void it_8029CD18(Item_GObj* item_gobj, int arg1)
 {
-    Item* item = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* item = GET_ITEM(item_gobj);
     HSD_JObj* jobj = item->xDD4_itemVar.foxillusion.xDDC;
     it_8026EECC(item_gobj, arg1);
     if (jobj != NULL) {
@@ -45,8 +45,8 @@ HSD_JObj* it_8029CD78(Item_GObj* item_gobj)
     HSD_JObj* temp_r29;
     Item* item;
 
-    item = (Item*) HSD_GObjGetUserData(item_gobj);
-    temp_r30 = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
+    item = GET_ITEM(item_gobj);
+    temp_r30 = GET_JOBJ(item_gobj);
     if (item->xDD4_itemVar.foxillusion.xDDC != NULL) {
         OSReport("illusion add twice.\n");
         while (1) {}
@@ -85,7 +85,7 @@ Item_GObj* it_8029CEB4(HSD_GObj* parent, Vec3* pos, ItemKind kind, f32 dir)
 
 bool it_8029CF8C(Item_GObj* item_gobj)
 {
-    Item* item = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* item = GET_ITEM(item_gobj);
     item->xCA8 = 0;
     return false;
 }
@@ -93,7 +93,7 @@ bool it_8029CF8C(Item_GObj* item_gobj)
 void it_8029CFA0(Item_GObj* item_gobj)
 {
     u32 unused[1];
-    Item* item = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* item = GET_ITEM(item_gobj);
     if (item->xDD4_itemVar.foxillusion.xDDC != NULL) {
         HSD_JObjRemoveAll(item->xDD4_itemVar.foxillusion.xDDC);
     }
@@ -104,10 +104,9 @@ void it_8029CFA0(Item_GObj* item_gobj)
 
 void it_8029CFF0(Item_GObj* item_gobj)
 {
-    Item* item;
+    Item* item = GET_ITEM(item_gobj);
     u32 unused[1];
 
-    item = (Item*) HSD_GObjGetUserData(item_gobj);
     item->xD44_lifeTimer = *(f32*) item->xC4_article_data->x4_specialAttributes;
     item->xD5C = 0;
     item->xDD4_itemVar.foxillusion.xDD4 = item->xC4_article_data->x10_modelDesc->x0_joint;
@@ -125,12 +124,12 @@ bool it_8029D094(Item_GObj* item_gobj) {
     Item* temp_r31;
     Item* item;
 
-    temp_r31 = (Item*) HSD_GObjGetUserData(item_gobj);
+    temp_r31 = GET_ITEM(item_gobj);
     if (temp_r31->owner != NULL && ftFx_SpecialS_GetCmdVar2(temp_r31->owner) == 2 &&
             temp_r31->xDD4_itemVar.foxillusion.xDDC == NULL) {
             temp_r31->xDD4_itemVar.foxillusion.xDDC = it_8029CD78(item_gobj);
     }
-    item = (Item*) HSD_GObjGetUserData(item_gobj);
+    item = GET_ITEM(item_gobj);
     if (item->owner != NULL ? ftFx_SpecialS_CheckGhostRemove(item->owner) : 1) {
         return true;
     }
@@ -144,8 +143,8 @@ bool it_8029D094(Item_GObj* item_gobj) {
 
 void it_8029D24C(Item_GObj* item_gobj)
 {
-    Item* item = (Item*) HSD_GObjGetUserData(item_gobj);
-    HSD_JObj* jobj = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
+    Item* item = GET_ITEM(item_gobj);
+    HSD_JObj* jobj = GET_JOBJ(item_gobj);
     HSD_JObj* ghost_jobj = item->xDD4_itemVar.foxillusion.xDDC;
     if (item->owner != NULL) {
         ftFx_SpecialS_CopyGhostPosIndexed(item->owner, 1, &item->pos);
@@ -171,8 +170,8 @@ bool it_8029D490(Item_GObj* item_gobj)
 
 void it_8029D554(Item_GObj* item_gobj)
 {
-    Item* item = (Item*) HSD_GObjGetUserData(item_gobj);
-    HSD_JObj* jobj = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
+    Item* item = GET_ITEM(item_gobj);
+    HSD_JObj* jobj = GET_JOBJ(item_gobj);
     HSD_JObj* ghost_jobj = item->xDD4_itemVar.foxillusion.xDDC;
     if (item->owner != NULL) {
         ftFx_SpecialS_CopyGhostPosIndexed(item->owner, 1, &item->pos);
@@ -194,8 +193,8 @@ bool it_8029D790(Item_GObj*)
 
 void it_8029D798(Item_GObj* item_gobj)
 {
-    Item* item = (Item*) HSD_GObjGetUserData(item_gobj);
-    HSD_JObj* jobj = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
+    Item* item = GET_ITEM(item_gobj);
+    HSD_JObj* jobj = GET_JOBJ(item_gobj);
     f32* attr = item->xC4_article_data->x4_specialAttributes;
     item->xD44_lifeTimer = attr[1];
     it_80272A3C(jobj);
@@ -204,9 +203,9 @@ void it_8029D798(Item_GObj* item_gobj)
 
 bool it_8029D7EC(Item_GObj* item_gobj)
 {
-    Item* item = (Item*) HSD_GObjGetUserData(item_gobj);
-    u32 unused[1];
-    if (item->owner != NULL ? ftFx_SpecialS_CheckGhostRemove(item->owner) : 1) {
+    Item* item = GET_ITEM(item_gobj);
+    bool tmp = item->owner != NULL ? ftFx_SpecialS_CheckGhostRemove(item->owner) : true;
+    if (tmp) {
         return true;
     }
     item->xD44_lifeTimer -= 1.0F;
@@ -220,7 +219,7 @@ bool it_8029D7EC(Item_GObj* item_gobj)
 void it_8029D870(Item_GObj* item_gobj)
 {
     Vec3 sp10;
-    Item* item = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* item = GET_ITEM(item_gobj);
     HSD_JObj* jobj = item->xDD4_itemVar.foxillusion.xDDC;
     if (item->owner != NULL && jobj != NULL) {
         ftFx_SpecialS_CopyGhostPosIndexed(item->owner, 3, &sp10);
