@@ -63,7 +63,7 @@ ItemStateTable it_803F5468[] = {
 
 void it_8027CF00(Item_GObj* item_gobj)
 {
-    Item* it = item_gobj->user_data;
+    Item* it = GET_ITEM(item_gobj);
     it->xDD4_itemVar.capsule.x0 = 0;
     it->xDD4_itemVar.capsule.x4 = 0;
     it_8027D148(item_gobj);
@@ -72,9 +72,9 @@ void it_8027CF00(Item_GObj* item_gobj)
 void it_8027CF30(Item_GObj* gobj)
 {
     Vec3 sp18;
-    u32 unused[1];
+    u32 unused[2];
 
-    Item* it = GetItemData(gobj);
+    Item* it = GET_ITEM(gobj);
     ItCapsuleAttrs* capsule = it->xC4_article_data->x4_specialAttributes;
 
     sp18.x = sp18.y = sp18.z = 0.0F;
@@ -93,9 +93,9 @@ void it_8027CF30(Item_GObj* gobj)
 
 void it_8027CFE8(Item_GObj* item_gobj)
 {
-    u32 unused1[1];
-    HSD_JObj* jobj = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
-    Item* it = (Item*) HSD_GObjGetUserData(item_gobj);
+    u32 unused[1];
+    HSD_JObj* jobj = GET_JOBJ(item_gobj);
+    Item* it = GET_ITEM(item_gobj);
     Vec3 sp14;
 
     it_8026B3A8(item_gobj);
@@ -115,7 +115,8 @@ void it_8027CFE8(Item_GObj* item_gobj)
 
 void it_8027D0B8(Item_GObj* gobj)
 {
-    Item* it = GetItemData(gobj);
+    Item* it = GET_ITEM(gobj);
+    u32 unused[1];
     it_8026B390(gobj);
     it->x40_vel.x = it->x40_vel.y = it->x40_vel.z = 0.0F;
     Item_80268E5C(gobj, 0, 2);
@@ -146,9 +147,8 @@ bool it_8027D170(Item_GObj* gobj)
 
 void it_8027D178(Item_GObj* gobj)
 {
-    Item* it = gobj->user_data;
-    ItemAttr* attr = it->xCC_item_attr;
-    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
+    Item* it = GET_ITEM(gobj);
+    it_80272860(gobj, it->xCC_item_attr->x10_fall_speed, it->xCC_item_attr->x14_fall_speed_max);
 }
 
 bool it_8027D1A8(Item_GObj* gobj)
@@ -187,14 +187,14 @@ void it_8027D258(Item_GObj* item_gobj)
 
 bool it_8027D2A4(Item_GObj* item_gobj)
 {
-    Item* it = item_gobj->user_data;
+    Item* it = GET_ITEM(item_gobj);
     it_8026E414(item_gobj, it_8027CF30);
     return it->xDD4_itemVar.capsule.x0;
 }
 
 void it_8027D2DC(Item_GObj* item_gobj)
 {
-    Item* it = item_gobj->user_data;
+    Item* it = GET_ITEM(item_gobj);
     if (!it->xDD4_itemVar.capsule.x4) {
         it_8027CFE8(item_gobj);
     }
@@ -216,7 +216,7 @@ bool it_8027D330(Item_GObj*)
 // Incorrect stack offsets for inlined it_8027CF30
 bool it_8027D338(HSD_GObj* item_gobj)
 {
-    Item* it = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* it = GET_ITEM(item_gobj);
     u32 unused[1];
 
     if (it->msid != 5) {
@@ -296,7 +296,7 @@ bool it_8027D338_autoinlined(Item_GObj* item_gobj);
 
 bool it_8027D338_autoinlined(Item_GObj* item_gobj)
 {
-    Item* it = item_gobj->user_data;
+    Item* it = GET_ITEM(item_gobj);
     if (it->msid != 5) {
         it_8027CF30(item_gobj);
     }
@@ -408,7 +408,7 @@ lbl_8027D5F8:
 
 bool it_8027D614(Item_GObj* item_gobj)
 {
-    Item* it = item_gobj->user_data;
+    Item* it = GET_ITEM(item_gobj);
     if (it->msid == 3 || it->msid == 4) {
         itColl_BounceOffShield(item_gobj);
     }

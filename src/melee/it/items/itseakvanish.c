@@ -20,7 +20,7 @@ Item_GObj* it_802B1C60(HSD_GObj* parent, Vec3* pos, f32 dir)
     SpawnItem spawn;
     Item_GObj* item_gobj;
 
-    spawn.kind = 0x55;
+    spawn.kind = It_Kind_Seak_Vanish;
     spawn.prev_pos = *pos;
     spawn.pos = spawn.prev_pos;
     spawn.facing_dir = dir;
