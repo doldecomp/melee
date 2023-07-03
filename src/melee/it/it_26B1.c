@@ -38,10 +38,10 @@ static inline float _sqrtfItem(float x)
     return x;
 }
 
-/// Apply Item Damage -  may not be itHit* ???
-f32 it_8026B1D4(HSD_GObj* gobj, itHit* itemHitboxUnk)
+/// Apply Item Damage -  may not be HitCapsule* ???
+f32 it_8026B1D4(HSD_GObj* gobj, HitCapsule* itemHitboxUnk)
 {
-    f32 ret = itemHitboxUnk->xC_damage_staled;
+    f32 ret = itemHitboxUnk->damage;
     const Item* ip = gobj->user_data;
     if (ip->xDC8_word.flags.x14 != 0) {
         f32 itemSpeed = _sqrtfItem(ip->x40_vel.x * ip->x40_vel.x +

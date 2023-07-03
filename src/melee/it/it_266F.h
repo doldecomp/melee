@@ -54,7 +54,7 @@ void it_80272280(HSD_GObj* gobj);
 void it_80272298(HSD_GObj* gobj);
 void it_802722B0(HSD_GObj* gobj);
 void it_80272304(HSD_GObj* gobj);
-void it_80272460(itHit* hitbox, s32 damage, HSD_GObj* gobj);
+void it_80272460(HitCapsule* hitbox, s32 damage, HSD_GObj* gobj);
 void it_802725D4(HSD_GObj*);
 void it_80272784(HSD_GObj* gobj);
 void it_80272A18(HSD_JObj* item_jobj);

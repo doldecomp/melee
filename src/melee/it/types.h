@@ -275,47 +275,6 @@ struct Article {
     ItemDynamics* x14_dynamics;
 };
 
-struct itHit {
-    bool x0_toggle; // Toggles hitbox on/off.
-    s32 x4_unk;
-    s32 x8_damage;        // Projected damage
-    f32 xC_damage_staled; // Staled damage, actually applied
-    Vec3 x10_offset;
-    f32 x1C_hitbox_size;
-    s32 x20_angle;
-    s32 x24_knockback_growth;
-    s32 x28_wdsk; // Weight-Dependent Set Knockback
-    s32 x2C_base_knockback;
-    s32 x30_element;       // Normal, fire, electric, etc.
-    s32 x34_shield_damage; // If hitbox damage + shield damage is less than 0
-                           // (negative), this will effectively restore shield
-                           // health
-    s32 x38_SFX_severity; // 0x38. hurtbox interaction. 0 = none, 1 = grounded,
-                          // 2 = aerial, 3 = both // What
-    s32 x3C_SFX_kind;
-    UnkFlagStruct x40_flags; // 0x20 -> check against aerial fighters; 0x10 ->
-                             // check against grounded fighters
-    UnkFlagStruct x41_flags; // 0x8/0x4/0x2 = timed rehit on
-                             // item/fighter/shield; 0x1 = can reflect
-    UnkFlagStruct x42_flags; // 0x80 = can absorb; 0x20 = hit only fighters
-                             // facing the item; 0x10 = can shield; 0x8 =
-                             // ignore reflect/absorb bubbles(?); 0x4 = ignore
-                             // hurtboxes; 0x2 = ignore ungrabbable hurtboxes
-    UnkFlagStruct x43_flags; // 0x80 = interact with items only; 0x20 =
-                             // interact with all?
-    s32 x44;
-    HSD_JObj* x48_jobj;
-    Vec3 pos;
-    Vec3 x58_posPrev;
-    Vec3 x64_posColl;      // 0x64   position of hurt collision
-    f32 x70_coll_distance; // 0x70   Distance From Collding HurtCapsule (Used
-                           // for phantom hit collision calculation)
-    HitVictim x74_tipLog[12];
-    HitVictim xD4_damageLog[12];
-    s32 x134;
-    s32 x138;
-};
-
 struct Item {
     void* x0;
 
@@ -415,7 +374,10 @@ struct Item {
     u8 x5CB;
     f32 x5CC_currentAnimFrame;
     f32 x5D0_animFrameSpeed;
-    itHit x5D4_hitboxes[4];
+    struct {
+        HitCapsule hit;
+        s32 x138;
+    } x5D4_hitboxes[4];
     s32 xAC4_ignoreItemID; // Cannot hit items with this index?
     s32 xAC8_hurtboxNum;   // Number of hurtboxes this item has
     HurtCapsule xACC_itemHurtbox[2];
