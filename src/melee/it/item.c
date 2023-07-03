@@ -1657,15 +1657,15 @@ bool Item_80269F14(HSD_GObj* gobj)
         for (i = 0; i < 4; i++) // 4 here is the maximum amount of hitboxes
                                 // available in the vanilla Item struct
         {
-            if (temp_item->x5D4_hitboxes[i].x0_toggle) {
-                temp_f30 = temp_item->x5D4_hitboxes[i].xC_damage_staled *
+            if (temp_item->x5D4_hitboxes[i].hit.state != HitCapsule_Disabled) {
+                temp_f30 = temp_item->x5D4_hitboxes[i].hit.damage *
                                temp_item->xC6C +
                            0.99f;
                 var_r27 = temp_f30;
                 if (var_r27 > it_804D6D28->xD8) {
                     var_r27 = it_804D6D28->xD8;
                 }
-                it_80272460(&temp_item->x5D4_hitboxes[i], var_r27, gobj);
+                it_80272460(&temp_item->x5D4_hitboxes[i].hit, var_r27, gobj);
             }
         }
     }

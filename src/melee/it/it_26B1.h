@@ -15,7 +15,7 @@ enum_t it_8026B30C(Item_GObj* gobj);
 enum_t it_8026B320(Item_GObj* gobj);
 
 /// Apply Item Damage
-f32 it_8026B1D4(Item_GObj* gobj, itHit* itemHitboxUnk);
+f32 it_8026B1D4(Item_GObj* gobj, HitCapsule* itemHitboxUnk);
 
 /// Copy Item position vector
 void it_8026B294(Item_GObj* gobj, Vec3* pos);
