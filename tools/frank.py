@@ -26,6 +26,9 @@ b"\x4C\x82\x00\x20", b"\x4C\x82\x00\x21", b"\x4C\x81\x00\x20", b"\x4C\x81\x00\x2
 b"\x4D\x83\x00\x20", b"\x4D\x83\x00\x21", b"\x4C\x83\x00\x20", b"\x4C\x83\x00\x21",
 b"\x4D\x83\x00\x20", b"\x4D\x83\x00\x21", b"\x4C\x83\x00\x20", b"\x4C\x83\x00\x21"]
 
+# MWCC puts the .text section at this offset in the file
+code_offset = 0x34
+
 # Example invocation: ./frank.py vanilla.o profile.o output.o
 parser = argparse.ArgumentParser()
 parser.add_argument("vanilla", help="Path to the vanilla object", type=argparse.FileType('rb'))
@@ -38,16 +41,31 @@ args = parser.parse_args()
 vanilla_bytes = args.vanilla.read()
 args.vanilla.close()
 
-# If the file contains no code, the codesize magic will not be found.
-# The vanilla object requires no modification.
-code_size_magic_idx = vanilla_bytes.find(CODESIZE_MAGIC)
-if code_size_magic_idx == -1:
+def get_code_size(object_bytes):
+    code_size_magic_idx = object_bytes.index(CODESIZE_MAGIC)
+    code_size_offset = code_size_magic_idx + len(CODESIZE_MAGIC)
+    code_size_bytes = object_bytes[code_size_offset:code_size_offset+4]
+    return int.from_bytes(code_size_bytes, byteorder='big')
+
+try:
+    vanilla_code_size = get_code_size(vanilla_bytes)
+    code_size = vanilla_code_size
+except ValueError:
+    # If the file contains no code, the codesize magic will not be found.
+    # The vanilla object requires no modification.
     with open(args.target, "wb") as f:
         f.write(vanilla_bytes)
     sys.exit(0)
 
 profile_bytes = args.profile.read()
 args.profile.close()
+profile_code_size = get_code_size(profile_bytes)
+
+# Strip out .text section, to be reassembled at end
+header = vanilla_bytes[:code_offset]
+footer = vanilla_bytes[code_offset + vanilla_code_size:]
+vanilla_bytes = vanilla_bytes[code_offset:code_offset + vanilla_code_size]
+profile_bytes = profile_bytes[code_offset:code_offset + profile_code_size]
 
 # Peephole rescheduling
 #
@@ -60,17 +78,18 @@ args.profile.close()
 # If the profiled schedule swaps the
 # instructions around the bl/nop, we
 # instead use the vanilla schedule.
-#
-idx = 8
+
+# Search forward for the next 4-byte aligned epilogue
+# Returns either the index of the epilogue, or -1 (not found)
+def get_next_epi(idx):
+    while True:
+        idx = profile_bytes.find(PROFILE_EXTRA_BYTES, idx)
+        if idx == -1 or idx % 4 == 0:
+            return idx
+
+epi_pos = 0
 shift = 0 # difference between vanilla and profile code, due to bl/nops
-while idx < len(profile_bytes) - 16:
-    # Find next epilogue
-    epi_pos = profile_bytes.find(PROFILE_EXTRA_BYTES, idx)
-    if epi_pos == -1:
-        break # break while loop when no targets remain
-    if epi_pos % 4 != 0: # check 4-byte alignment
-        idx += 4
-        continue
+while (epi_pos := get_next_epi(epi_pos)) != -1:
 
     v_pos = epi_pos - shift
     shift += 8
@@ -87,61 +106,50 @@ while idx < len(profile_bytes) - 16:
     RT = lambda x: (as_int(x) >> 21) & 0x1F
     RA = lambda x: (as_int(x) >> 16) & 0x1F
 
-    opcode_a = vanilla_inst_a[0] >> 2
-    opcode_b = vanilla_inst_b[0] >> 2
-    opcode_c = vanilla_inst_c[0] >> 2
+    if epi_pos >= 4 and epi_pos + 16 < profile_code_size and \
+            v_pos >= 4 and v_pos + 8 < vanilla_code_size:
 
-    LWZ = 0x80 >> 2
-    LFS = 0xC0 >> 2
-    ADDI = 0x38 >> 2
-    LI = ADDI # an LI instruction is just an ADDI with RA=0
-    LMW = 0xB8 >> 2
-    FDIVS = 0xEC >> 2
+        opcode_a = vanilla_inst_a[0] >> 2
+        opcode_b = vanilla_inst_b[0] >> 2
+        opcode_c = vanilla_inst_c[0] >> 2
 
-    if opcode_a == LWZ and \
-       opcode_b in [LI, LFS, FDIVS] and \
-       vanilla_inst_a == profile_inst_b and \
-       vanilla_inst_b == profile_inst_a and \
-       vanilla_inst_c == profile_inst_c and \
-       not (opcode_a == LWZ  and RA(vanilla_inst_a) == 1 and
-            opcode_b == ADDI and RA(vanilla_inst_b) != 0) and \
-       opcode_c != ADDI: # <- don't reorder if at the very end of the epilogue
+        LWZ = 0x80 >> 2
+        LFS = 0xC0 >> 2
+        ADDI = 0x38 >> 2
+        LI = ADDI # an LI instruction is just an ADDI with RA=0
+        LMW = 0xB8 >> 2
+        FDIVS = 0xEC >> 2
 
-        # Swap instructions (A) and (B)
-        profile_bytes = profile_bytes[:epi_pos-4] \
-                + vanilla_inst_a \
-                + PROFILE_EXTRA_BYTES \
-                + vanilla_inst_b \
-                + profile_bytes[epi_pos+12:]
+        if opcode_a == LWZ and \
+           opcode_b in [LI, LFS, FDIVS] and \
+           vanilla_inst_a == profile_inst_b and \
+           vanilla_inst_b == profile_inst_a and \
+           vanilla_inst_c == profile_inst_c and \
+           not (opcode_b == ADDI and RA(vanilla_inst_b) != 0) and \
+           opcode_c != ADDI: # <- don't reorder if at the very end of the epilogue
 
-    # Similar reordering for lwz/lmw, except both insns follow the bl/nop
-    elif opcode_b == LWZ and \
-         opcode_c == LMW and \
-         vanilla_inst_b == profile_inst_c and \
-         vanilla_inst_c == profile_inst_b:
+            # Swap instructions (A) and (B)
+            profile_bytes = profile_bytes[:epi_pos-4] \
+                    + vanilla_inst_a \
+                    + PROFILE_EXTRA_BYTES \
+                    + vanilla_inst_b \
+                    + profile_bytes[epi_pos+12:]
 
-        profile_bytes = profile_bytes[:epi_pos+8] \
-                + vanilla_inst_b \
-                + vanilla_inst_c \
-                + profile_bytes[epi_pos+16:]
+        # Similar reordering for lwz/lmw, except both insns follow the bl/nop
+        elif opcode_b == LWZ and \
+             opcode_c == LMW and \
+             vanilla_inst_b == profile_inst_c and \
+             vanilla_inst_c == profile_inst_b:
 
-    idx = epi_pos + 8
+            profile_bytes = profile_bytes[:epi_pos+8] \
+                    + vanilla_inst_b \
+                    + vanilla_inst_c \
+                    + profile_bytes[epi_pos+16:]
+
+    epi_pos += 8
 
 # Remove byte sequence
-stripped_bytes = profile_bytes.replace(PROFILE_EXTRA_BYTES, b"")
-
-# Find end of code sections in vanilla and stripped bytes
-code_size_offset = code_size_magic_idx + len(CODESIZE_MAGIC)
-code_size_bytes = vanilla_bytes[code_size_offset:code_size_offset+4]
-code_size = int.from_bytes(code_size_bytes, byteorder='big')
-
-eoc_offset = 0x34 + code_size
-
-# Break if the eoc is not found
-assert(eoc_offset != len(vanilla_bytes))
-
-# Replace 0x34 - eoc in vanilla with bytes from stripped
-final_bytes = vanilla_bytes[:0x34] + stripped_bytes[0x34:eoc_offset] + vanilla_bytes[eoc_offset:]
+final_bytes = profile_bytes.replace(PROFILE_EXTRA_BYTES, b"")
 
 # Fix branches to link register
 for seq in BLR_BYTE_SEQ_ARRAY:
@@ -217,5 +225,8 @@ while idx+4 < len(final_bytes):
         continue
     idx += 4
 
+# Replace .text section in vanilla with rescheduled code
+assert(len(final_bytes) == code_size)
+final_bytes = header + final_bytes + footer
 with open(args.target, "wb") as f:
     f.write(final_bytes)
