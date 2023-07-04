@@ -157,6 +157,16 @@ while (epi_pos := get_next_epi(epi_pos)) != -1:
 # Remove byte sequence
 final_bytes = profile_bytes.replace(PROFILE_EXTRA_BYTES, b"")
 
+# If the code sizes don't match, we can't use the profile bytes at all,
+# because any instructions with relocs won't line up and will be wrong.
+# Usually this happens when a vanilla function emits beqlr/bnelr/etc
+# instructions and can omit its epilogue, but the profile code has to
+# emit b -> bl, nop, blr.
+if len(final_bytes) != len(vanilla_bytes):
+    print("Warning: profile code size does not match, using vanilla code")
+    final_bytes = vanilla_bytes
+    epi_pos_list = []
+
 # Fix branches to link register
 for seq in BLR_BYTE_SEQ_ARRAY:
     idx = 0
