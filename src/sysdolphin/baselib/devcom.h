@@ -6,6 +6,7 @@
 
 #include <baselib/archive.h>
 
+s32 HSD_DevComIsBusy(s32 idx);
 void HSD_DevComRequest(int, int, HSD_Archive*, int, int, int,
                        HSD_DevComCallback, int);
 
