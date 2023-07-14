@@ -4,9 +4,9 @@
 
 .global HSD_DevComIsBusy
 HSD_DevComIsBusy:
-/* 8038EA50 0038B630  3C 80 80 4C */	lis r4, HSD_DevCom_804C6320@ha
+/* 8038EA50 0038B630  3C 80 80 4C */	lis r4, devComStatus@ha
 /* 8038EA54 0038B634  54 63 10 3A */	slwi r3, r3, 2
-/* 8038EA58 0038B638  38 04 63 20 */	addi r0, r4, HSD_DevCom_804C6320@l
+/* 8038EA58 0038B638  38 04 63 20 */	addi r0, r4, devComStatus@l
 /* 8038EA5C 0038B63C  7C 60 1A 14 */	add r3, r0, r3
 /* 8038EA60 0038B640  80 63 00 00 */	lwz r3, 0(r3)
 /* 8038EA64 0038B644  4E 80 00 20 */	blr
@@ -1056,8 +1056,8 @@ HSD_DevComRequest:
 .L_8038F8F4:
 /* 8038F8F4 0038C4D4  93 A6 00 00 */	stw r29, 0(r6)
 /* 8038F8F8 0038C4D8  38 80 00 00 */	li r4, 0
-/* 8038F8FC 0038C4DC  3C 60 80 4C */	lis r3, HSD_DevCom_804C6320@ha
-/* 8038F900 0038C4E0  38 03 63 20 */	addi r0, r3, HSD_DevCom_804C6320@l
+/* 8038F8FC 0038C4DC  3C 60 80 4C */	lis r3, devComStatus@ha
+/* 8038F900 0038C4E0  38 03 63 20 */	addi r0, r3, devComStatus@l
 /* 8038F904 0038C4E4  90 9D 00 00 */	stw r4, 0(r29)
 /* 8038F908 0038C4E8  7C 60 3A 14 */	add r3, r0, r7
 /* 8038F90C 0038C4EC  80 03 00 00 */	lwz r0, 0(r3)
@@ -1093,9 +1093,9 @@ HSD_DevComCancelEx:
 /* 8038F96C 0038C54C  3B A5 00 00 */	addi r29, r5, 0
 /* 8038F970 0038C550  3B C6 00 00 */	addi r30, r6, 0
 /* 8038F974 0038C554  4B FB 79 F1 */	bl OSDisableInterrupts
-/* 8038F978 0038C558  3C 80 80 4C */	lis r4, HSD_DevCom_804C6320@ha
+/* 8038F978 0038C558  3C 80 80 4C */	lis r4, devComStatus@ha
 /* 8038F97C 0038C55C  57 85 17 3A */	rlwinm r5, r28, 2, 0x1c, 0x1d
-/* 8038F980 0038C560  38 04 63 20 */	addi r0, r4, HSD_DevCom_804C6320@l
+/* 8038F980 0038C560  38 04 63 20 */	addi r0, r4, devComStatus@l
 /* 8038F984 0038C564  7C 80 2A 14 */	add r4, r0, r5
 /* 8038F988 0038C568  80 A4 00 00 */	lwz r5, 0(r4)
 /* 8038F98C 0038C56C  57 86 07 BE */	clrlwi r6, r28, 0x1e
@@ -1123,9 +1123,9 @@ HSD_DevComCancelEx:
 /* 8038F9D0 0038C5B0  41 82 00 08 */	beq .L_8038F9D8
 /* 8038F9D4 0038C5B4  93 C5 00 20 */	stw r30, 0x20(r5)
 .L_8038F9D8:
-/* 8038F9D8 0038C5B8  3C 60 80 4C */	lis r3, HSD_DevCom_804C6320@ha
+/* 8038F9D8 0038C5B8  3C 60 80 4C */	lis r3, devComStatus@ha
 /* 8038F9DC 0038C5BC  54 C4 10 3A */	slwi r4, r6, 2
-/* 8038F9E0 0038C5C0  38 03 63 20 */	addi r0, r3, HSD_DevCom_804C6320@l
+/* 8038F9E0 0038C5C0  38 03 63 20 */	addi r0, r3, devComStatus@l
 /* 8038F9E4 0038C5C4  7C 60 22 14 */	add r3, r0, r4
 /* 8038F9E8 0038C5C8  80 03 00 00 */	lwz r0, 0(r3)
 /* 8038F9EC 0038C5CC  7C 00 28 40 */	cmplw r0, r5
@@ -1209,8 +1209,8 @@ HSD_DevCom_804083B8:
 .global devComARQR
 devComARQR:
     .skip 0x80
-.global HSD_DevCom_804C6320
-HSD_DevCom_804C6320:
+.global devComStatus
+devComStatus:
     .skip 0x10
 .global HSD_DevCom_804C6330
 HSD_DevCom_804C6330:
