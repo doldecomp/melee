@@ -537,38 +537,7 @@ bool it_8026B894(HSD_GObj* gobj, HSD_GObj* ref_gobj)
     return result;
 }
 
-/// @todo Inlined ASM due to compiler version generating mismatch
-#ifdef MUST_MATCH
-#pragma push
-asm s32 it_8026B924(register HSD_GObj* gobj)
-{ // clang-format off
-    // Get Item Data
-    lwz r4, 0x2C(gobj);
-    // Default return value
-    li r3, -1;
-    // Get Item ID
-    lwz r0, 0x10(r4);
-    // Item ID Switch
-    cmpwi r0, 0x17;
-    bge - lbl_compare;
-    cmpwi r0, 0x10;
-    beq - lbl_getVar;
-    bltlr - ;
-    cmpwi r0, 0x15;
-    bge - lbl_getVar;
-    blr;
-lbl_compare:
-    cmpwi r0, 0x19;
-    bnelr - ;
-lbl_getVar:
-    lwz r3, 0xD4C(r4);
-} // clang-format on
-#pragma pop
-
-#else
-
 /// Return result of unk item check
-/// @todo Requires @c -g compiler flag / Frank modifications to match.
 s32 it_8026B924(HSD_GObj* gobj)
 {
     s32 result;
@@ -592,44 +561,7 @@ s32 it_8026B924(HSD_GObj* gobj)
     return result;
 }
 
-#endif
-
-#ifdef MUST_MATCH
-#pragma push
-f32 it_8026B960(register HSD_GObj* gobj)
-{ // clang-format off
-    register s32 kind;
-    register f32 unk_timer = -1.0f;
-
-    register Item* ip;
-    ip = GET_ITEM(gobj);
-    kind = ip->kind;
-
-    asm {
-        cmpwi kind, It_Kind_Link_Bomb
-        beq- lbl_block
-        bgelr-
-        cmpwi kind, It_Kind_BombHei
-        bnelr-
-        lwz kind, 0x24(ip);
-        cmpwi kind, 0xB;
-        beqlr-
-    }
-
-    return unk_timer = ip->xDD4_itemVar.BobOmb.xDEC;
-
-lbl_block:
-    if (ip->msid != 0x5) {
-        return unk_timer = ip->xD44_lifeTimer;
-    }
-
-    return unk_timer;
-} // clang-format on
-#pragma pop
-#else
-
 /// Return float result of item kind and state checks
-/// @todo Requires @c -g compiler flag / Frank modifications to match.
 f32 it_8026B960(HSD_GObj* gobj)
 {
     s32 kind;
@@ -651,8 +583,6 @@ f32 it_8026B960(HSD_GObj* gobj)
     }
     return unk_timer;
 }
-
-#endif
 
 extern void lb_8000B804(HSD_JObj*, HSD_Joint*);
 extern void lb_8000BA0C(HSD_JObj*, f32);

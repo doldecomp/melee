@@ -1,7 +1,6 @@
 
 GENERATE_MAP ?= 0
 NON_MATCHING ?= 0
-EPILOGUE_PROCESS ?= 1
 SKIP_CHECK ?= 0
 REQUIRE_PROTOS ?= 1
 MSG_STYLE ?= gcc
@@ -32,9 +31,6 @@ else
 	BUILD_DIR := build/$(TARGET)
 endif
 
-VANILLA_DIR := $(BUILD_DIR)/vanilla
-PROFILE_DIR := $(BUILD_DIR)/profile
-
 # Inputs
 LDSCRIPT := ldscript.lcf
 
@@ -54,10 +50,7 @@ DEP_FILES := $(O_FILES:.o=.dep)
 #-------------------------------------------------------------------------------
 
 MWCC_VERSION := 1.2.5
-ifeq ($(EPILOGUE_PROCESS),1)
-MWCC_EPI_VERSION := 1.2.5e
-MWCC_EPI_EXE := mwcceppc.exe
-endif
+MWCC_EPI_VERSION := 1.2.5n
 MWCC_LD_VERSION := 1.1
 
 # Programs
@@ -83,16 +76,12 @@ else
 endif
 
 CC      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwcceppc.exe
-ifeq ($(EPILOGUE_PROCESS),1)
-CC_EPI   = $(WINE) tools/mwcc_compiler/$(MWCC_EPI_VERSION)/$(MWCC_EPI_EXE)
-endif
+CC_EPI  := $(WINE) tools/mwcc_compiler/$(MWCC_EPI_VERSION)/mwcceppc.exe
 LD      := $(WINE) tools/mwcc_compiler/$(MWCC_LD_VERSION)/mwldeppc.exe
 ELF2DOL := tools/elf2dol
 HOSTCC  := gcc
 PYTHON  := python
 FORMAT  := clang-format -i -style=file
-
-FRANK := tools/frank.py
 
 # Options
 INCLUDE_DIRS = src/melee src/melee/ft/chara
@@ -147,9 +136,6 @@ ifeq ($(WIP),1)
 	CFLAGS += -DWIP
 endif
 
-$(BUILD_DIR)/src/melee/pl/player.c.o: CC_EPI := $(CC)
-$(BUILD_DIR)/src/melee/lb/lbtime.c.o: CC_EPI := $(CC)
-
 HOSTCFLAGS := -Wall -O3 -s
 
 #-------------------------------------------------------------------------------
@@ -181,8 +167,6 @@ clean:
 	rm -f -d -r $(BUILD_DIR) build/o_files $(ELF2DOL)
 
 ALL_DIRS := $(sort $(dir $(O_FILES)))
-ALL_DIRS += $(patsubst $(BUILD_DIR)/%,$(VANILLA_DIR)/%,$(ALL_DIRS)) \
-			$(patsubst $(BUILD_DIR)/%,$(PROFILE_DIR)/%,$(ALL_DIRS))
 
 # Make sure build directory exists before compiling anything
 DUMMY != mkdir -p $(ALL_DIRS)
@@ -206,37 +190,16 @@ $(BUILD_DIR)/%.s.o: %.s
 
 $(BUILD_DIR)/%.c.dep: %.c
 	$(QUIET) $(HOSTCC) -E $(addprefix -I ,$(INCLUDE_DIRS) $(SYSTEM_INCLUDE_DIRS)) -MMD -MF $(@:.o=.dep) \
-		-MT "$(VANILLA_DIR)/$<.o $(PROFILE_DIR)/$<.o" $< >/dev/null
+		-MT "$(BUILD_DIR)/$<.o" $< >/dev/null
 
-$(BUILD_DIR)/%.c.o: $(VANILLA_DIR)/%.c.o
-	cp $< $@
-
-$(VANILLA_DIR)/%.c.o: %.c $(BUILD_DIR)/%.c.dep
-	@echo "Compiling (vanilla)" $<
+$(BUILD_DIR)/%.c.o: %.c $(BUILD_DIR)/%.c.dep
+	@echo "Compiling " $<
 	$(QUIET) $(CC) $(CFLAGS) -c -o $@ $<
 
-# Overrides for targets using frank to simulate patched MWCC 1.2.5
-ifeq ($(EPILOGUE_PROCESS),1)
-$(PROFILE_DIR)/%.c.o: %.c $(BUILD_DIR)/%.c.dep
-	@echo "Compiling (profile)" $<
-	$(QUIET) $(CC_EPI) $(CFLAGS) -c -o $@ $<
-
-$(BUILD_DIR)/src/melee/%.c.o: $(VANILLA_DIR)/src/melee/%.c.o $(PROFILE_DIR)/src/melee/%.c.o $(FRANK)
-	@echo Frank is fixing $@
-	$(QUIET) $(PYTHON) $(FRANK) $(word 1,$^) $(word 2,$^) $@
-
-$(BUILD_DIR)/src/sysdolphin/%.c.o: $(VANILLA_DIR)/src/sysdolphin/%.c.o $(PROFILE_DIR)/src/sysdolphin/%.c.o $(FRANK)
-	@echo Frank is fixing $@
-	$(QUIET) $(PYTHON) $(FRANK) $(word 1,$^) $(word 2,$^) $@
-
-$(BUILD_DIR)/src/dolphin/card/%.c.o: $(VANILLA_DIR)/src/dolphin/card/%.c.o $(PROFILE_DIR)/src/dolphin/card/%.c.o $(FRANK)
-	@echo Frank is fixing $@
-	$(QUIET) $(PYTHON) $(FRANK) $(word 1,$^) $(word 2,$^) $@
-
-$(BUILD_DIR)/src/dolphin/pad/%.c.o: $(VANILLA_DIR)/src/dolphin/pad/%.c.o $(PROFILE_DIR)/src/dolphin/pad/%.c.o $(FRANK)
-	@echo Frank is fixing $@
-	$(QUIET) $(PYTHON) $(FRANK) $(word 1,$^) $(word 2,$^) $@
-endif
+$(BUILD_DIR)/src/melee/%.c.o: CC := $(CC_EPI)
+$(BUILD_DIR)/src/sysdolphin/%.c.o: CC := $(CC_EPI)
+$(BUILD_DIR)/src/dolphin/card/%.c.o: CC := $(CC_EPI)
+$(BUILD_DIR)/src/dolphin/pad/%.c.o: CC := $(CC_EPI)
 
 -include $(DEP_FILES)
 
