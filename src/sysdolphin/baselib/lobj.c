@@ -882,34 +882,6 @@ void HSD_LObj_803668EC(HSD_LObj* lobj)
     LObjReplaceAll(lobj);
 }
 
-#ifdef MUST_MATCH
-
-#pragma push
-asm HSD_LObj* HSD_LObjGetCurrentByType(u16 type)
-{ // clang-format off
-    nofralloc
-/* 80366A44 00363624  80 8D BF 9C */	lwz r4, current_lights(r13)
-/* 80366A48 00363628  54 65 07 BE */	clrlwi r5, r3, 0x1e
-/* 80366A4C 0036362C  48 00 00 1C */	b lbl_80366A68
-lbl_80366A50:
-/* 80366A50 00363630  80 64 00 04 */	lwz r3, 4(r4)
-/* 80366A54 00363634  A0 03 00 08 */	lhz r0, 8(r3)
-/* 80366A58 00363638  54 00 07 BE */	clrlwi r0, r0, 0x1e
-/* 80366A5C 0036363C  7C 05 00 40 */	cmplw r5, r0
-/* 80366A60 00363640  4D 82 00 20 */	beqlr
-/* 80366A64 00363644  80 84 00 00 */	lwz r4, 0(r4)
-lbl_80366A68:
-/* 80366A68 00363648  28 04 00 00 */	cmplwi r4, 0
-/* 80366A6C 0036364C  40 82 FF E4 */	bne lbl_80366A50
-/* 80366A70 00363650  38 60 00 00 */	li r3, 0
-/* 80366A74 00363654  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-
-#else
-
-/// @todo Broken by frank.
-/// (Profile compiler does not generate beqlr, so instructions do not match)
 HSD_LObj* HSD_LObjGetCurrentByType(u16 flags)
 {
     HSD_SList* cur = current_lights;
@@ -923,8 +895,6 @@ HSD_LObj* HSD_LObjGetCurrentByType(u16 flags)
     }
     return NULL;
 }
-
-#endif
 
 s32 HSD_LightID2Index(GXLightID arg0)
 {

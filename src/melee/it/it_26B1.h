@@ -134,12 +134,10 @@ void it_8026B7F8(Item_GObj* gobj);
 /// Remove all GObj interaction references from item
 bool it_8026B894(Item_GObj* gobj, HSD_GObj* referenced_gobj);
 
-/// Return result of unk item check - requires -g compiler flag / Frank
-/// modifications to match
+/// Return result of unk item check
 s32 it_8026B924(Item_GObj* gobj);
 
-/// Return float result of item kind and state checks - requires -g compiler
-/// flag / Frank modifications to match
+/// Return float result of item kind and state checks
 f32 it_8026B960(Item_GObj* gobj);
 
 /// Multiply item's scale
