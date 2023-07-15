@@ -11,7 +11,7 @@ COPY --from=devkitpro/devkitppc:latest  \
 COPY .github/packages/build-linux/setup.sh /usr/local/bin
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C
-ENV MELEE_COMPILERS_URL="https://cdn.discordapp.com/attachments/727909624342380615/1079286377230909440/MELEE_COMPILERS.zip"
+ENV MELEE_COMPILERS_URL="https://cdn.discordapp.com/attachments/727909624342380615/1129879865433264158/MELEE_COMPILERS_N.zip"
 RUN chmod +x /usr/local/bin/setup.sh && setup.sh
 VOLUME [ "/input", "/output" ]
 ENV WINE=${WIBO_PATH}
