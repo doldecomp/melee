@@ -33,9 +33,9 @@ The easiest way to get set up is with [scoop](https://scoop.sh/). You will also 
     git clone 'https://github.com/doldecomp/melee.git'
     cd melee
     ```
-1. Download our [compilers zip archive](https://cdn.discordapp.com/attachments/727909624342380615/1079286377230909440/MELEE_COMPILERS.zip) and rename the `GC` subfolder to `mwcc_compiler`, and place it in `/tools`. You can do this manually, or use the following PowerShell snippet (from inside your melee directory):
+1. Download our [compilers zip archive](https://cdn.discordapp.com/attachments/727909624342380615/1129879865433264158/MELEE_COMPILERS_N.zip) and rename the `GC` subfolder to `mwcc_compiler`, and place it in `/tools`. You can do this manually, or use the following PowerShell snippet (from inside your melee directory):
     ```ps1
-    $url = 'https://cdn.discordapp.com/attachments/727909624342380615/1079286377230909440/MELEE_COMPILERS.zip'
+    $url = 'https://cdn.discordapp.com/attachments/727909624342380615/1129879865433264158/MELEE_COMPILERS_N.zip'
     $tmp = New-TemporaryFile
     Invoke-WebRequest -Uri $url -OutFile $tmp
     $zip = Rename-Item $tmp -NewName ($tmp.BaseName + '.zip') -PassThru
@@ -84,7 +84,7 @@ The easiest way to get set up is with [scoop](https://scoop.sh/). You will also 
 
 ### Instructions
 
-1. Download [`MELEE_COMPILERS.zip`](https://cdn.discordapp.com/attachments/727909624342380615/1079286377230909440/MELEE_COMPILERS.zip) and extract the GC compilers to `tools/mwcc_compiler/`.
+1. Download [`MELEE_COMPILERS.zip`](https://cdn.discordapp.com/attachments/727909624342380615/1129879865433264158/MELEE_COMPILERS_N.zip) and extract the GC compilers to `tools/mwcc_compiler/`.
 2. Run the `make` command:
     ```sh
     make -j$(nproc) GENERATE_MAP=1
