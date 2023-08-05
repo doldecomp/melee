@@ -523,7 +523,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gr/grtyoshi.c.o\
     $(BUILD_DIR)/asm/melee/gr/grtzelda.s.o\
     $(BUILD_DIR)/asm/melee/gr/grtgamewatch.s.o\
-    $(BUILD_DIR)/asm/melee/gr/grtemblem.s.o\
+    $(BUILD_DIR)/src/melee/gr/grtemblem.c.o\
     $(BUILD_DIR)/asm/melee/gr/grtganon.s.o\
     $(BUILD_DIR)/src/melee/gr/stage.c.o\
     $(BUILD_DIR)/asm/melee/gr/stage.s.o\
