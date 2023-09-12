@@ -421,6 +421,13 @@ grFigureGet_803B8470:
     .4byte 0x00000000
     .4byte 0x00000000
 
+	
+.section .sbss
+    .balign 8
+.global grFigureGet_804D6AC0
+grFigureGet_804D6AC0:
+    .skip 0x4
+
 
 .section .sdata2
     .balign 8
