@@ -9,6 +9,13 @@
 #include <dolphin/os/os.h>
 #include <baselib/gobjgxlink.h>
 
+extern void grFigureGet_802196F0(HSD_GObj*);
+extern bool grFigureGet_80219890(HSD_GObj*);
+extern void grFigureGet_80219898(HSD_GObj*);
+extern void grFigureGet_80219B0C(HSD_GObj*);
+extern int grFigureGet_80219C88(int);
+extern int grFigureGet_80219C90(Vec3*, int, HSD_JObj*);
+
 static StageCallbacks grFigureGet_803E7D00[2] = {
     { grFigureGet_802196B4, grFigureGet_802196E0, grFigureGet_802196E8,
       grFigureGet_802196EC, 0 },
