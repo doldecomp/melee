@@ -171,20 +171,12 @@ HSD_TExpType HSD_TExpGetType(HSD_TExp* texp);
 HSD_TExp* HSD_TExpTev(HSD_TExp**);
 HSD_TExp* HSD_TExpCnst(void*, HSD_TEInput, HSD_TEType, HSD_TExp**);
 void HSD_TExpOrder(HSD_TExp*, HSD_TObj*, GXChannelID);
+
 void HSD_TExpColorOp(HSD_TExp*, GXTevOp, GXTevBias, GXTevScale, u8);
 void HSD_TExpColorIn(HSD_TExp*, HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*);
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wstrict-prototypes"
-#endif
-/// @todo Find real parameters
-void HSD_TExpColorIn();
 void HSD_TExpAlphaOp(HSD_TExp*, GXTevOp, GXTevBias, GXTevScale, u8);
-/// @todo Find real parameters
-void HSD_TExpAlphaIn();
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
+void HSD_TExpAlphaIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a, HSD_TEInput sel_b, HSD_TExp* exp_b, 
+    HSD_TEInput sel_c, HSD_TExp* exp_c, HSD_TEInput sel_d, HSD_TExp* exp_d);
 
 void HSD_TExpFreeTevDesc(HSD_TExpTevDesc*);
 HSD_TExp* HSD_TExpFreeList(HSD_TExp*, HSD_TExpType, s32);
