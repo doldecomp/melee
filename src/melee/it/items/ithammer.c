@@ -16,42 +16,13 @@ extern void it_8026E8C4(Item_GObj*, HSD_GObjEvent, HSD_GObjEvent);
 extern HSD_JObj* it_80272CC0(Item_GObj*, int);
 extern void it_80299C48(HSD_GObj*, Vec3*, Vec3*, f32);
 
-ItemStateTable it_803F6150[] = { {
-                                     -1,
-                                     it_80293FF4,
-                                     it_80293FFC,
-                                     it_80294000,
-                                 },
-                                 {
-                                     -1,
-                                     it_80294080,
-                                     it_80294088,
-                                     it_802940B8,
-                                 },
-                                 {
-                                     0,
-                                     it_80294170,
-                                     NULL,
-                                     NULL,
-                                 },
-                                 {
-                                     1,
-                                     it_80294170,
-                                     NULL,
-                                     NULL,
-                                 },
-                                 {
-                                     -1,
-                                     it_80294080,
-                                     it_8029424C,
-                                     it_8029427C,
-                                 },
-                                 {
-                                     -1,
-                                     it_80294304,
-                                     it_8029430C,
-                                     it_80294310,
-                                 } };
+ItemStateTable it_803F6150[] = { { -1, it_80293FF4, it_80293FFC, it_80294000 },
+                                 { -1, it_80294080, it_80294088, it_802940B8 },
+                                 { 0, it_80294170, NULL, NULL },
+                                 { 1, it_80294170, NULL, NULL },
+                                 { -1, it_80294080, it_8029424C, it_8029427C },
+                                 { -1, it_80294304, it_8029430C,
+                                   it_80294310 } };
 
 static inline void thing(void* gobj)
 {
