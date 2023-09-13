@@ -3,6 +3,14 @@
 
 #include <melee/it/types.h>
 
+typedef struct itHammerData {
+    u32 x0;
+    u32 x4;
+    f32 x8;
+} itHammerData;
+
+extern ItemStateTable it_803F6150[];
+
 void it_80293D94(Item_GObj* gobj);
 int it_80293DCC(Item_GObj* gobj);
 void it_80293E34(Item_GObj* gobj);

@@ -73,7 +73,7 @@ int it_80293DCC(Item_GObj* gobj)
 {
     Item* item = GET_ITEM((HSD_GObj*) gobj);
     Article* article = item->xC4_article_data;
-    ItemCommonData* temp_r31 = article->x4_specialAttributes;
+    itHammerData* temp_r31 = article->x4_specialAttributes;
     if (HSD_Randf() < temp_r31->x8 / 100.0f) {
         int rng = HSD_Randi(temp_r31->x4 - temp_r31->x0);
         return rng + temp_r31->x0;
