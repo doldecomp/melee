@@ -3,4 +3,10 @@
 
 void __DVDFSInit(void);
 
+typedef struct FSTEntry {
+    unsigned int isDirAndStringOff;
+    unsigned int parentOrPosition;
+    unsigned int nextEntryOrLength;
+} FSTEntry;
+
 #endif

@@ -2,23 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global __DVDFSInit
-__DVDFSInit:
-/* 80337934 00334514  3C 60 80 00 */	lis r3, 0x80000038@ha
-/* 80337938 00334518  90 6D BB D8 */	stw r3, BootInfo@sda21(r13)
-/* 8033793C 0033451C  80 03 00 38 */	lwz r0, 0x80000038@l(r3)
-/* 80337940 00334520  90 0D BB DC */	stw r0, FstStart@sda21(r13)
-/* 80337944 00334524  80 6D BB DC */	lwz r3, FstStart@sda21(r13)
-/* 80337948 00334528  28 03 00 00 */	cmplwi r3, 0
-/* 8033794C 0033452C  4D 82 00 20 */	beqlr
-/* 80337950 00334530  80 03 00 08 */	lwz r0, 8(r3)
-/* 80337954 00334534  90 0D BB E4 */	stw r0, MaxEntryNum@sda21(r13)
-/* 80337958 00334538  80 0D BB E4 */	lwz r0, MaxEntryNum@sda21(r13)
-/* 8033795C 0033453C  1C 00 00 0C */	mulli r0, r0, 0xc
-/* 80337960 00334540  7C 03 02 14 */	add r0, r3, r0
-/* 80337964 00334544  90 0D BB E0 */	stw r0, FstStringStart@sda21(r13)
-/* 80337968 00334548  4E 80 00 20 */	blr
-
 .global DVDConvertPathToEntrynum
 DVDConvertPathToEntrynum:
 /* 8033796C 0033454C  7C 08 02 A6 */	mflr r0
@@ -392,6 +375,7 @@ DVDFS_804D5B88:
 
 .section .sbss
     .balign 8
+.global BootInfo
 BootInfo:
     .skip 0x4
 .global FstStart
