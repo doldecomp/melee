@@ -4,6 +4,8 @@
 #include <platform.h>
 #include <dolphin/dvd/forward.h>
 
+#include <dolphin/os/OSThread.h>
+
 struct bb2struct {
     u32 _00;
     u32 _04;
@@ -54,6 +56,7 @@ struct DVDFileInfo {
     /*0x00*/ DVDCommandBlock cb;
     /*0x30*/ u32 startAddr;
     /*0x34*/ u32 length;
+    /*0x38*/ DVDCallback callback;
 };
 
 typedef struct DVDDriveInfo {
@@ -62,6 +65,38 @@ typedef struct DVDDriveInfo {
     u32 releaseDate;
     u8 padding[24];
 } DVDDriveInfo;
+
+// Minimum transfer size.
+#define DVD_MIN_TRANSFER_SIZE 32
+
+// DVD states.
+#define DVD_STATE_FATAL_ERROR -1
+#define DVD_STATE_END 0
+#define DVD_STATE_BUSY 1
+#define DVD_STATE_WAITING 2
+#define DVD_STATE_COVER_CLOSED 3
+#define DVD_STATE_NO_DISK 4
+#define DVD_STATE_COVER_OPEN 5
+#define DVD_STATE_WRONG_DISK 6
+#define DVD_STATE_MOTOR_STOPPED 7
+#define DVD_STATE_PAUSING 8
+#define DVD_STATE_IGNORED 9
+#define DVD_STATE_CANCELED 10
+#define DVD_STATE_RETRY 11
+
+// File info states.
+#define DVD_FILEINFO_READY 0
+#define DVD_FILEINFO_BUSY 1
+
+// DVD results.
+#define DVD_RESULT_GOOD 0
+#define DVD_RESULT_FATAL_ERROR -1
+#define DVD_RESULT_IGNORED -2
+#define DVD_RESULT_CANCELED -3
+
+#define DVD_AIS_SUCCESS 0
+
+extern OSThreadQueue __DVDThreadQueue;
 
 typedef void (*DVDLowCallback)(u32 intType);
 DVDLowCallback DVDLowClearCallback(void);
