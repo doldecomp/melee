@@ -494,6 +494,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/gr/grgreens.s.o\
     $(BUILD_DIR)/asm/melee/gr/grflatzone.s.o\
     $(BUILD_DIR)/asm/melee/gr/grpushon.s.o\
+    $(BUILD_DIR)/src/melee/gr/grfigureget.c.o\
     $(BUILD_DIR)/asm/melee/gr/grfigureget.s.o\
     $(BUILD_DIR)/src/melee/gr/grbattle.c.o\
     $(BUILD_DIR)/asm/melee/gr/grlast.s.o\
