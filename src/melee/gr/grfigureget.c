@@ -24,7 +24,7 @@ static StageCallbacks grFigureGet_803E7D00[2] = {
 };
 
 StageData grFigureGet_803E7D34 = {
-	26,
+	0x26,
 	grFigureGet_803E7D00,
 	"/GrNFg.dat",
 	grFigureGet_80219534,
