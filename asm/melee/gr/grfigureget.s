@@ -421,7 +421,7 @@ grFigureGet_803B8470:
     .4byte 0x00000000
     .4byte 0x00000000
 
-	
+
 .section .sbss
     .balign 8
 .global grFigureGet_804D6AC0

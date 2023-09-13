@@ -19,24 +19,24 @@ extern int grFigureGet_80219C90(Vec3*, int, HSD_JObj*);
 static StageCallbacks grFigureGet_803E7D00[2] = {
     { grFigureGet_802196B4, grFigureGet_802196E0, grFigureGet_802196E8,
       grFigureGet_802196EC, 0 },
-	{ grFigureGet_802196F0, grFigureGet_80219890, grFigureGet_80219898,
-	  grFigureGet_80219B0C, (1 << 30) | (1 << 31) },
+    { grFigureGet_802196F0, grFigureGet_80219890, grFigureGet_80219898,
+      grFigureGet_80219B0C, (1 << 30) | (1 << 31) },
 };
 
 StageData grFigureGet_803E7D34 = {
-	0x26,
-	grFigureGet_803E7D00,
-	"/GrNFg.dat",
-	grFigureGet_80219534,
-	grFigureGet_80219530,
-	grFigureGet_8021959C,
-	grFigureGet_802195A0,
-	grFigureGet_802195C4,
-	grFigureGet_80219C88,
-	grFigureGet_80219C90,
-	1,
-	NULL,
-	0,
+    0x26,
+    grFigureGet_803E7D00,
+    "/GrNFg.dat",
+    grFigureGet_80219534,
+    grFigureGet_80219530,
+    grFigureGet_8021959C,
+    grFigureGet_802195A0,
+    grFigureGet_802195C4,
+    grFigureGet_80219C88,
+    grFigureGet_80219C90,
+    1,
+    NULL,
+    0,
 };
 
 extern unk_t grFigureGet_804D6AC0;
@@ -65,10 +65,11 @@ static void grFigureGet_802195A0(void)
 
 static bool grFigureGet_802195C4(void)
 {
-	return false;
+    return false;
 }
 
-static HSD_GObj* grFigureGet_802195CC(int gobj_id) {
+static HSD_GObj* grFigureGet_802195CC(int gobj_id)
+{
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grFigureGet_803E7D00[gobj_id];
 
@@ -104,7 +105,7 @@ static void grFigureGet_802196B4(HSD_GObj* gobj)
 
 static bool grFigureGet_802196E0(HSD_GObj* gobj)
 {
-	return false;
+    return false;
 }
 
 static void grFigureGet_802196E8(HSD_GObj* gobj) {}
