@@ -211,7 +211,7 @@ void it_8029424C(HSD_GObj* gobj)
     it_80272860(gobj, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
 }
 
-bool it_8029427C(Item_GObj* gobj)
+bool it_8029427C(HSD_GObj* gobj)
 {
     if (it_8026DA08(gobj) != 0) {
         return 1;

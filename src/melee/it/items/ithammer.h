@@ -20,7 +20,7 @@ static int it_80294170(HSD_GObj* gobj);
 void it_802941F8(HSD_GObj* gobj);
 static void it_802941A4(HSD_GObj* gobj);
 static void it_8029424C(HSD_GObj* gobj);
-static bool it_8029427C(Item_GObj* gobj);
+static bool it_8029427C(HSD_GObj* gobj);
 void it_802942B0(HSD_GObj* gobj);
 static int it_80294304(HSD_GObj* gobj);
 static void it_8029430C(HSD_GObj* gobj);
