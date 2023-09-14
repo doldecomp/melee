@@ -13,9 +13,5 @@ typedef struct FSTEntry {
 } FSTEntry;
 
 void __DVDFSInit(void);
-s32 DVDConvertPathToEntrynum(const char* pathPtr);
-bool DVDFastOpen(s32 entrynum, DVDFileInfo* fileInfo);
-bool DVDReadAsyncPrio(DVDFileInfo* fileInfo, void* addr, s32 length,
-                      s32 offset, DVDCallback callback, s32 prio);
 
 #endif
