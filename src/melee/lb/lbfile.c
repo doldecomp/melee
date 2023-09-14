@@ -86,19 +86,30 @@ char* lbFile_80016204(const char* basename)
     return lbFile_80432058;
 }
 
+typedef struct OldDVDFileInfo {
+    /*0x00*/ DVDCommandBlock cb;
+    /*0x30*/ u32 startAddr;
+    /*0x34*/ u32 length;
+} OldDVDFileInfo;
+
+/* BUG: OldDVDFileInfo is needed to match stack allocation sizes. However,
+ * the actual DVDFileInfo is 4 bytes longer due to callback.
+ * This means that calls to lbFile_8001634C write 4 bytes past where it should
+ * on the stack.
+ */
 size_t lbFile_8001634C(s32 fileno)
 {
-    DVDFileInfo info;
+    OldDVDFileInfo info;
     size_t length;
     bool intr = OSDisableInterrupts();
 
-    if (!DVDFastOpen(fileno, &info)) {
+    if (!DVDFastOpen(fileno, (DVDFileInfo*) &info)) {
         OSReport("Cannot open file no=%d.", fileno);
         __assert(lbFile_803BA508, 0xD8, "0");
     }
 
     length = info.length;
-    DVDClose(&info);
+    DVDClose((DVDFileInfo*) &info);
     OSRestoreInterrupts(intr);
     return length;
 }

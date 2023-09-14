@@ -838,7 +838,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/dolphin/dvd/dvdlow.s.o\
-    $(BUILD_DIR)/asm/dolphin/dvd/dvdfs.s.o\
+    $(BUILD_DIR)/src/dolphin/dvd/dvdfs.c.o\
     $(BUILD_DIR)/src/dolphin/dvd/dvd.c.o\
     $(BUILD_DIR)/asm/dolphin/dvd/dvd.s.o\
     $(BUILD_DIR)/src/dolphin/dvd/dvdqueue.c.o\
