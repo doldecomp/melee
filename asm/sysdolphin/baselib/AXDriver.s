@@ -2,39 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global AXDriverAlloc
-AXDriverAlloc:
-/* 8038BB34 00388714  7C 08 02 A6 */	mflr r0
-/* 8038BB38 00388718  90 01 00 04 */	stw r0, 4(r1)
-/* 8038BB3C 0038871C  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8038BB40 00388720  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8038BB44 00388724  80 8D C1 38 */	lwz r4, axfxallocsize@sda21(r13)
-/* 8038BB48 00388728  80 AD C1 34 */	lwz r5, AXDriver_804D77D4@sda21(r13)
-/* 8038BB4C 0038872C  7C 64 1A 14 */	add r3, r4, r3
-/* 8038BB50 00388730  80 0D C1 3C */	lwz r0, axfxmaxsize@sda21(r13)
-/* 8038BB54 00388734  90 6D C1 38 */	stw r3, axfxallocsize@sda21(r13)
-/* 8038BB58 00388738  7F E5 22 14 */	add r31, r5, r4
-/* 8038BB5C 0038873C  80 6D C1 38 */	lwz r3, axfxallocsize@sda21(r13)
-/* 8038BB60 00388740  7C 03 00 40 */	cmplw r3, r0
-/* 8038BB64 00388744  41 80 00 1C */	blt .L_8038BB80
-/* 8038BB68 00388748  3C 60 80 41 */	lis r3, AXDriver_80408140@ha
-/* 8038BB6C 0038874C  3C 80 80 41 */	lis r4, AXDriver_8040814C@ha
-/* 8038BB70 00388750  38 A4 81 4C */	addi r5, r4, AXDriver_8040814C@l
-/* 8038BB74 00388754  38 63 81 40 */	addi r3, r3, AXDriver_80408140@l
-/* 8038BB78 00388758  38 80 00 4E */	li r4, 0x4e
-/* 8038BB7C 0038875C  4B FF C6 A5 */	bl __assert
-.L_8038BB80:
-/* 8038BB80 00388760  7F E3 FB 78 */	mr r3, r31
-/* 8038BB84 00388764  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8038BB88 00388768  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8038BB8C 0038876C  38 21 00 18 */	addi r1, r1, 0x18
-/* 8038BB90 00388770  7C 08 03 A6 */	mtlr r0
-/* 8038BB94 00388774  4E 80 00 20 */	blr
-
-.global AXDriverFree
-AXDriverFree:
-/* 8038BB98 00388778  4E 80 00 20 */	blr
-
 .global AXDriverUnlink
 AXDriverUnlink:
 /* 8038BB9C 0038877C  7C 08 02 A6 */	mflr r0
