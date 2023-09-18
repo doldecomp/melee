@@ -1007,30 +1007,12 @@ void ftPr_SpecialAirS_Enter(Fighter_GObj* fighter_gobj)
         fighter->cmd_vars[3] = 0;
 }
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialS_Anim(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013D30C 00139EEC  7C 08 02 A6 */	mflr r0
-/* 8013D310 00139EF0  90 01 00 04 */	stw r0, 4(r1)
-/* 8013D314 00139EF4  94 21 FF E8 */	stwu r1, -24(r1)
-/* 8013D318 00139EF8  93 E1 00 14 */	stw r31, 20(r1)
-/* 8013D31C 00139EFC  7C 7F 1B 78 */	mr r31, r3
-/* 8013D320 00139F00  4B F3 1F 19 */	bl ftAnim_IsFramesRemaining
-/* 8013D324 00139F04  2C 03 00 00 */	cmpwi r3, 0
-/* 8013D328 00139F08  40 82 00 0C */	bne lbl_8013D334
-/* 8013D32C 00139F0C  7F E3 FB 78 */	mr r3, r31
-/* 8013D330 00139F10  4B F4 CF 8D */	bl ft_8008A2BC
-lbl_8013D334:
-/* 8013D334 00139F14  80 01 00 1C */	lwz r0, 28(r1)
-/* 8013D338 00139F18  83 E1 00 14 */	lwz r31, 20(r1)
-/* 8013D33C 00139F1C  38 21 00 18 */	addi r1, r1, 24
-/* 8013D340 00139F20  7C 08 03 A6 */	mtlr r0
-/* 8013D344 00139F24  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialS_Anim(Fighter_GObj* gobj)
+{
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+        ft_8008A2BC(gobj);
+    }
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push
