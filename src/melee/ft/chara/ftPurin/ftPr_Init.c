@@ -1364,27 +1364,11 @@ lbl_8013D894:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialS_8013D8B0(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013D8B0 0013A490  7C 08 02 A6 */	mflr r0
-/* 8013D8B4 0013A494  90 01 00 04 */	stw r0, 4(r1)
-/* 8013D8B8 0013A498  94 21 FF E8 */	stwu r1, -24(r1)
-/* 8013D8BC 0013A49C  93 E1 00 14 */	stw r31, 20(r1)
-/* 8013D8C0 0013A4A0  7C 7F 1B 78 */	mr r31, r3
-/* 8013D8C4 0013A4A4  4B F4 BF 61 */	bl ft_80089824
-/* 8013D8C8 0013A4A8  7F E3 FB 78 */	mr r3, r31
-/* 8013D8CC 0013A4AC  4B F4 B9 D5 */	bl ft_800892A0
-/* 8013D8D0 0013A4B0  80 01 00 1C */	lwz r0, 28(r1)
-/* 8013D8D4 0013A4B4  83 E1 00 14 */	lwz r31, 20(r1)
-/* 8013D8D8 0013A4B8  38 21 00 18 */	addi r1, r1, 24
-/* 8013D8DC 0013A4BC  7C 08 03 A6 */	mtlr r0
-/* 8013D8E0 0013A4C0  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialS_8013D8B0(Fighter_GObj* gobj)
+{
+    ft_80089824(gobj);
+    ft_800892A0(gobj);
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push
@@ -1490,7 +1474,8 @@ extern f32 const ftPr_Init_804D9C50;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPr_SpecialS_8013DA24(HSD_GObj*)
+asm void ftPr_SpecialS_8013DA24(HSD_GObj*, bool unk, MotionFlags flags,
+                                f32 anim_start)
 { // clang-format off
     nofralloc
 /* 8013DA24 0013A604  7C 08 02 A6 */	mflr r0
@@ -5188,29 +5173,12 @@ lbl_80140B7C:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialNEnd_Phys(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 80140BAC 0013D78C  7C 08 02 A6 */	mflr r0
-/* 80140BB0 0013D790  90 01 00 04 */	stw r0, 4(r1)
-/* 80140BB4 0013D794  94 21 FF E8 */	stwu r1, -24(r1)
-/* 80140BB8 0013D798  93 E1 00 14 */	stw r31, 20(r1)
-/* 80140BBC 0013D79C  7C 7F 1B 78 */	mr r31, r3
-/* 80140BC0 0013D7A0  80 63 00 2C */	lwz r3, 44(r3)
-/* 80140BC4 0013D7A4  C0 23 01 28 */	lfs f1, 296(r3)
-/* 80140BC8 0013D7A8  4B F3 BD 69 */	bl ftCommon_8007C930
-/* 80140BCC 0013D7AC  7F E3 FB 78 */	mr r3, r31
-/* 80140BD0 0013D7B0  4B F3 BF A5 */	bl ftCommon_8007CB74
-/* 80140BD4 0013D7B4  80 01 00 1C */	lwz r0, 28(r1)
-/* 80140BD8 0013D7B8  83 E1 00 14 */	lwz r31, 20(r1)
-/* 80140BDC 0013D7BC  38 21 00 18 */	addi r1, r1, 24
-/* 80140BE0 0013D7C0  7C 08 03 A6 */	mtlr r0
-/* 80140BE4 0013D7C4  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialNEnd_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftCommon_8007C930(fp, fp->co_attrs.gr_friction);
+    ftCommon_8007CB74(gobj);
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push
@@ -6071,39 +6039,14 @@ lbl_801416B8:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialNEnd_Coll(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 801416D0 0013E2B0  7C 08 02 A6 */	mflr r0
-/* 801416D4 0013E2B4  90 01 00 04 */	stw r0, 4(r1)
-/* 801416D8 0013E2B8  94 21 FF E8 */	stwu r1, -24(r1)
-/* 801416DC 0013E2BC  93 E1 00 14 */	stw r31, 20(r1)
-/* 801416E0 0013E2C0  93 C1 00 10 */	stw r30, 16(r1)
-/* 801416E4 0013E2C4  7C 7E 1B 78 */	mr r30, r3
-/* 801416E8 0013E2C8  83 E3 00 2C */	lwz r31, 44(r3)
-/* 801416EC 0013E2CC  4B F4 10 1D */	bl ft_80082708
-/* 801416F0 0013E2D0  2C 03 00 00 */	cmpwi r3, 0
-/* 801416F4 0013E2D4  40 82 00 24 */	bne lbl_80141718
-/* 801416F8 0013E2D8  7F E3 FB 78 */	mr r3, r31
-/* 801416FC 0013E2DC  4B F3 BE D9 */	bl ftCommon_8007D5D4
-/* 80141700 0013E2E0  3C 80 0C 4C */	lis r4, 0x0C4C5092@ha
-/* 80141704 0013E2E4  C0 3F 08 94 */	lfs f1, 2196(r31)
-/* 80141708 0013E2E8  38 7E 00 00 */	addi r3, r30, 0
-/* 8014170C 0013E2EC  38 A4 50 92 */	addi r5, r4, 0x0C4C5092@l
-/* 80141710 0013E2F0  38 80 00 01 */	li r4, 1
-/* 80141714 0013E2F4  4B FF C3 11 */	bl ftPr_SpecialS_8013DA24
-lbl_80141718:
-/* 80141718 0013E2F8  80 01 00 1C */	lwz r0, 28(r1)
-/* 8014171C 0013E2FC  83 E1 00 14 */	lwz r31, 20(r1)
-/* 80141720 0013E300  83 C1 00 10 */	lwz r30, 16(r1)
-/* 80141724 0013E304  38 21 00 18 */	addi r1, r1, 24
-/* 80141728 0013E308  7C 08 03 A6 */	mtlr r0
-/* 8014172C 0013E30C  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialNEnd_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (ft_80082708(gobj) == GA_Ground) {
+        ftCommon_8007D5D4(fp);
+        ftPr_SpecialS_8013DA24(gobj, 1, 0x0C4C5092, fp->cur_anim_frame);
+    }
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push
