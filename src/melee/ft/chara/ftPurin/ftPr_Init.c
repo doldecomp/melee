@@ -769,13 +769,13 @@ void ftPr_SpecialHi_8013CD34(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
 
     if (ftPr_Init_804D9C10 == fp->facing_dir) {
-        Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirHiL, 0x0C4C508A, fp->cur_anim_frame,
-                                  ftPr_Init_804D9C18, ftPr_Init_804D9C14,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirHiL, 0x0C4C508A,
+                                  fp->cur_anim_frame, ftPr_Init_804D9C18,
+                                  ftPr_Init_804D9C14, NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirHiR, 0x0C4C508A, fp->cur_anim_frame,
-                                  ftPr_Init_804D9C18, ftPr_Init_804D9C14,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirHiR, 0x0C4C508A,
+                                  fp->cur_anim_frame, ftPr_Init_804D9C18,
+                                  ftPr_Init_804D9C14, NULL);
     }
 
     fp->cb.x21BC_callback_Accessory4 = ftPr_Init_8013C94C;
@@ -786,13 +786,15 @@ void ftPr_SpecialHi_8013CDD8(Fighter_GObj* fighter_gobj)
     Fighter* fighter = fighter_gobj->user_data;
     ftCommon_8007D7FC(fighter);
     if (ftPr_Init_804D9C10 == fighter->facing_dir) {
-        Fighter_ChangeMotionState(fighter_gobj, ftPr_MS_SpecialHiL, 0x0C4C508AU,
-                                  fighter->cur_anim_frame, ftPr_Init_804D9C18,
-                                  ftPr_Init_804D9C14, NULL);
+        Fighter_ChangeMotionState(fighter_gobj, ftPr_MS_SpecialHiL,
+                                  0x0C4C508AU, fighter->cur_anim_frame,
+                                  ftPr_Init_804D9C18, ftPr_Init_804D9C14,
+                                  NULL);
     } else {
-        Fighter_ChangeMotionState(fighter_gobj, ftPr_MS_SpecialHiR, 0x0C4C508AU,
-                                  fighter->cur_anim_frame, ftPr_Init_804D9C18,
-                                  ftPr_Init_804D9C14, NULL);
+        Fighter_ChangeMotionState(fighter_gobj, ftPr_MS_SpecialHiR,
+                                  0x0C4C508AU, fighter->cur_anim_frame,
+                                  ftPr_Init_804D9C18, ftPr_Init_804D9C14,
+                                  NULL);
     }
     fighter->cb.x21BC_callback_Accessory4 = ftPr_Init_8013C94C;
 }
@@ -951,54 +953,20 @@ void ftPr_SpecialAirLw_Coll(HSD_GObj* gobj)
     }
 }
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialLw_8013D104(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013D104 00139CE4  7C 08 02 A6 */	mflr r0
-/* 8013D108 00139CE8  90 01 00 04 */	stw r0, 4(r1)
-/* 8013D10C 00139CEC  94 21 FF E8 */	stwu r1, -24(r1)
-/* 8013D110 00139CF0  93 E1 00 14 */	stw r31, 20(r1)
-/* 8013D114 00139CF4  93 C1 00 10 */	stw r30, 16(r1)
-/* 8013D118 00139CF8  7C 7E 1B 78 */	mr r30, r3
-/* 8013D11C 00139CFC  83 E3 00 2C */	lwz r31, 44(r3)
-/* 8013D120 00139D00  7F E3 FB 78 */	mr r3, r31
-/* 8013D124 00139D04  4B F4 04 B1 */	bl ftCommon_8007D5D4
-/* 8013D128 00139D08  C0 22 A2 40 */	lfs f1, ftPr_Init_804D9C20(r2)
-/* 8013D12C 00139D0C  C0 1F 00 2C */	lfs f0, 44(r31)
-/* 8013D130 00139D10  FC 01 00 00 */	fcmpu cr0, f1, f0
-/* 8013D134 00139D14  40 82 00 2C */	bne lbl_8013D160
-/* 8013D138 00139D18  3C 80 0C 4C */	lis r4, 0x0C4C508E@ha
-/* 8013D13C 00139D1C  C0 3F 08 94 */	lfs f1, 2196(r31)
-/* 8013D140 00139D20  C0 42 A2 48 */	lfs f2, ftPr_Init_804D9C28(r2)
-/* 8013D144 00139D24  7F C3 F3 78 */	mr r3, r30
-/* 8013D148 00139D28  C0 62 A2 44 */	lfs f3, ftPr_Init_804D9C24(r2)
-/* 8013D14C 00139D2C  38 A4 50 8E */	addi r5, r4, 0x0C4C508E@l
-/* 8013D150 00139D30  38 80 01 72 */	li r4, 370
-/* 8013D154 00139D34  38 C0 00 00 */	li r6, 0
-/* 8013D158 00139D38  4B F2 C2 55 */	bl Fighter_ChangeMotionState
-/* 8013D15C 00139D3C  48 00 00 28 */	b lbl_8013D184
-lbl_8013D160:
-/* 8013D160 00139D40  3C 80 0C 4C */	lis r4, 0x0C4C508E@ha
-/* 8013D164 00139D44  C0 3F 08 94 */	lfs f1, 2196(r31)
-/* 8013D168 00139D48  C0 42 A2 48 */	lfs f2, ftPr_Init_804D9C28(r2)
-/* 8013D16C 00139D4C  7F C3 F3 78 */	mr r3, r30
-/* 8013D170 00139D50  C0 62 A2 44 */	lfs f3, ftPr_Init_804D9C24(r2)
-/* 8013D174 00139D54  38 A4 50 8E */	addi r5, r4, 0x0C4C508E@l
-/* 8013D178 00139D58  38 80 01 74 */	li r4, 372
-/* 8013D17C 00139D5C  38 C0 00 00 */	li r6, 0
-/* 8013D180 00139D60  4B F2 C2 2D */	bl Fighter_ChangeMotionState
-lbl_8013D184:
-/* 8013D184 00139D64  80 01 00 1C */	lwz r0, 28(r1)
-/* 8013D188 00139D68  83 E1 00 14 */	lwz r31, 20(r1)
-/* 8013D18C 00139D6C  83 C1 00 10 */	lwz r30, 16(r1)
-/* 8013D190 00139D70  38 21 00 18 */	addi r1, r1, 24
-/* 8013D194 00139D74  7C 08 03 A6 */	mtlr r0
-/* 8013D198 00139D78  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialLw_8013D104(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftCommon_8007D5D4(fp);
+    if (ftPr_Init_804D9C20 == fp->facing_dir) {
+        Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirLwL, 0x0C4C508EU,
+                                  fp->cur_anim_frame, ftPr_Init_804D9C28,
+                                  ftPr_Init_804D9C24, NULL);
+        return;
+    }
+    Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirLwR, 0x0C4C508EU,
+                              fp->cur_anim_frame, ftPr_Init_804D9C28,
+                              ftPr_Init_804D9C24, NULL);
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push
@@ -1058,7 +1026,8 @@ void ftPr_SpecialS_Enter(Fighter_GObj* fighter_gobj)
     Fighter_ChangeMotionState(fighter_gobj, 0x16B, 0, ftPr_Init_804D9C30,
                               ftPr_Init_804D9C38, ftPr_Init_804D9C30, NULL);
     ftAnim_8006EBA4(fighter_gobj);
-    fighter->cmd_vars[0] = fighter->cmd_vars[1] = fighter->cmd_vars[2] = fighter->cmd_vars[3] = 0;
+    fighter->cmd_vars[0] = fighter->cmd_vars[1] = fighter->cmd_vars[2] =
+        fighter->cmd_vars[3] = 0;
 }
 
 void ftPr_SpecialAirS_Enter(Fighter_GObj* fighter_gobj)
@@ -1068,7 +1037,8 @@ void ftPr_SpecialAirS_Enter(Fighter_GObj* fighter_gobj)
     Fighter_ChangeMotionState(fighter_gobj, 0x16C, 0, ftPr_Init_804D9C30,
                               ftPr_Init_804D9C38, ftPr_Init_804D9C30, NULL);
     ftAnim_8006EBA4(fighter_gobj);
-    fighter->cmd_vars[0] = fighter->cmd_vars[1] = fighter->cmd_vars[2] = fighter->cmd_vars[3] = 0;
+    fighter->cmd_vars[0] = fighter->cmd_vars[1] = fighter->cmd_vars[2] =
+        fighter->cmd_vars[3] = 0;
 }
 
 #ifdef MWERKS_GEKKO
