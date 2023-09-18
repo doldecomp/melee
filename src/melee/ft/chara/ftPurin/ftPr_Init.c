@@ -953,7 +953,7 @@ void ftPr_SpecialAirLw_Coll(HSD_GObj* gobj)
     }
 }
 
-void ftPr_SpecialLw_8013D104(HSD_GObj* gobj)
+void ftPr_SpecialLw_8013D104(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
@@ -968,54 +968,20 @@ void ftPr_SpecialLw_8013D104(HSD_GObj* gobj)
                               ftPr_Init_804D9C24, NULL);
 }
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialLw_8013D19C(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013D19C 00139D7C  7C 08 02 A6 */	mflr r0
-/* 8013D1A0 00139D80  90 01 00 04 */	stw r0, 4(r1)
-/* 8013D1A4 00139D84  94 21 FF E8 */	stwu r1, -24(r1)
-/* 8013D1A8 00139D88  93 E1 00 14 */	stw r31, 20(r1)
-/* 8013D1AC 00139D8C  93 C1 00 10 */	stw r30, 16(r1)
-/* 8013D1B0 00139D90  7C 7E 1B 78 */	mr r30, r3
-/* 8013D1B4 00139D94  83 E3 00 2C */	lwz r31, 44(r3)
-/* 8013D1B8 00139D98  7F E3 FB 78 */	mr r3, r31
-/* 8013D1BC 00139D9C  4B F4 06 41 */	bl ftCommon_8007D7FC
-/* 8013D1C0 00139DA0  C0 22 A2 40 */	lfs f1, ftPr_Init_804D9C20(r2)
-/* 8013D1C4 00139DA4  C0 1F 00 2C */	lfs f0, 44(r31)
-/* 8013D1C8 00139DA8  FC 01 00 00 */	fcmpu cr0, f1, f0
-/* 8013D1CC 00139DAC  40 82 00 2C */	bne lbl_8013D1F8
-/* 8013D1D0 00139DB0  3C 80 0C 4C */	lis r4, 0x0C4C508E@ha
-/* 8013D1D4 00139DB4  C0 3F 08 94 */	lfs f1, 2196(r31)
-/* 8013D1D8 00139DB8  C0 42 A2 48 */	lfs f2, ftPr_Init_804D9C28(r2)
-/* 8013D1DC 00139DBC  7F C3 F3 78 */	mr r3, r30
-/* 8013D1E0 00139DC0  C0 62 A2 44 */	lfs f3, ftPr_Init_804D9C24(r2)
-/* 8013D1E4 00139DC4  38 A4 50 8E */	addi r5, r4, 0x0C4C508E@l
-/* 8013D1E8 00139DC8  38 80 01 71 */	li r4, 369
-/* 8013D1EC 00139DCC  38 C0 00 00 */	li r6, 0
-/* 8013D1F0 00139DD0  4B F2 C1 BD */	bl Fighter_ChangeMotionState
-/* 8013D1F4 00139DD4  48 00 00 28 */	b lbl_8013D21C
-lbl_8013D1F8:
-/* 8013D1F8 00139DD8  3C 80 0C 4C */	lis r4, 0x0C4C508E@ha
-/* 8013D1FC 00139DDC  C0 3F 08 94 */	lfs f1, 2196(r31)
-/* 8013D200 00139DE0  C0 42 A2 48 */	lfs f2, ftPr_Init_804D9C28(r2)
-/* 8013D204 00139DE4  7F C3 F3 78 */	mr r3, r30
-/* 8013D208 00139DE8  C0 62 A2 44 */	lfs f3, ftPr_Init_804D9C24(r2)
-/* 8013D20C 00139DEC  38 A4 50 8E */	addi r5, r4, 0x0C4C508E@l
-/* 8013D210 00139DF0  38 80 01 73 */	li r4, 371
-/* 8013D214 00139DF4  38 C0 00 00 */	li r6, 0
-/* 8013D218 00139DF8  4B F2 C1 95 */	bl Fighter_ChangeMotionState
-lbl_8013D21C:
-/* 8013D21C 00139DFC  80 01 00 1C */	lwz r0, 28(r1)
-/* 8013D220 00139E00  83 E1 00 14 */	lwz r31, 20(r1)
-/* 8013D224 00139E04  83 C1 00 10 */	lwz r30, 16(r1)
-/* 8013D228 00139E08  38 21 00 18 */	addi r1, r1, 24
-/* 8013D22C 00139E0C  7C 08 03 A6 */	mtlr r0
-/* 8013D230 00139E10  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPr_SpecialLw_8013D19C(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftCommon_8007D7FC(fp);
+    if (ftPr_Init_804D9C20 == fp->facing_dir) {
+        Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialLwL, 0x0C4C508EU,
+                                  fp->cur_anim_frame, ftPr_Init_804D9C28,
+                                  ftPr_Init_804D9C24, NULL);
+        return;
+    }
+    Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialLwR, 0x0C4C508EU,
+                              fp->cur_anim_frame, ftPr_Init_804D9C28,
+                              ftPr_Init_804D9C24, NULL);
+}
 
 extern f32 const ftPr_Init_804D9C30;
 extern f32 const ftPr_Init_804D9C38;
