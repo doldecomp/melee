@@ -15,11 +15,15 @@ struct ftPurin_FighterVars {
     /* 0x2248 */ u32 x2248;
 };
 
-union ftPurin_MotionVars {
+typedef union ftPurin_MotionVars {
     struct ftPurin_SpecialHiVars {
         bool x0;
     } specialhi;
-};
+    struct ftPurin_SpecialNVars {
+        u8 fill[0x34];
+        f32 x34;
+    } specialn;
+} ftPurin_MotionVars;
 
 typedef struct _ftPurinAttributes {
     f32 x0;
