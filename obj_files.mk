@@ -1080,6 +1080,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/synth.s.o\
 
 TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/sysdolphin/baselib/axdriver.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/AXDriver.s.o\
 
 TEXT_O_FILES +=\
