@@ -34,7 +34,12 @@ typedef struct _ftPurinAttributes {
     s32 x24;
     s32 x28;
     s32 x2C;
-    u8 data_filler_1[0x100 - 0x30];
+    s32 x30;
+    s32 x34;
+    s32 x38;
+    f32 x3C;
+    f32 x40;
+    u8 data_filler_1[0x100 - 0x44];
 } ftPurinAttributes;
 
 #endif

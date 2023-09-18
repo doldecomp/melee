@@ -5436,40 +5436,23 @@ asm void ftPr_SpecialAirNEnd_Phys(HSD_GObj*)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPr_SpecialNHit_Phys(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 80140F40 0013DB20  7C 08 02 A6 */	mflr r0
-/* 80140F44 0013DB24  90 01 00 04 */	stw r0, 4(r1)
-/* 80140F48 0013DB28  94 21 FF E0 */	stwu r1, -32(r1)
-/* 80140F4C 0013DB2C  93 E1 00 1C */	stw r31, 28(r1)
-/* 80140F50 0013DB30  93 C1 00 18 */	stw r30, 24(r1)
-/* 80140F54 0013DB34  83 C3 00 2C */	lwz r30, 44(r3)
-/* 80140F58 0013DB38  83 FE 02 D4 */	lwz r31, 724(r30)
-/* 80140F5C 0013DB3C  C0 3E 00 84 */	lfs f1, 132(r30)
-/* 80140F60 0013DB40  C0 1F 00 40 */	lfs f0, 64(r31)
-/* 80140F64 0013DB44  FC 00 00 50 */	fneg f0, f0
-/* 80140F68 0013DB48  FC 01 00 40 */	fcmpo cr0, f1, f0
-/* 80140F6C 0013DB4C  4C 40 13 82 */	cror 2, 0, 2
-/* 80140F70 0013DB50  40 82 00 0C */	bne lbl_80140F7C
-/* 80140F74 0013DB54  7F C3 F3 78 */	mr r3, r30
-/* 80140F78 0013DB58  4B F3 C2 F1 */	bl ftCommon_8007D268
-lbl_80140F7C:
-/* 80140F7C 0013DB5C  C0 3F 00 3C */	lfs f1, 60(r31)
-/* 80140F80 0013DB60  7F C3 F3 78 */	mr r3, r30
-/* 80140F84 0013DB64  C0 5F 00 40 */	lfs f2, 64(r31)
-/* 80140F88 0013DB68  4B F3 C5 0D */	bl ftCommon_8007D494
-/* 80140F8C 0013DB6C  80 01 00 24 */	lwz r0, 36(r1)
-/* 80140F90 0013DB70  83 E1 00 1C */	lwz r31, 28(r1)
-/* 80140F94 0013DB74  83 C1 00 18 */	lwz r30, 24(r1)
-/* 80140F98 0013DB78  38 21 00 20 */	addi r1, r1, 32
-/* 80140F9C 0013DB7C  7C 08 03 A6 */	mtlr r0
-/* 80140FA0 0013DB80  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
+void ftPr_SpecialNHit_Phys(HSD_GObj* gobj)
+{
+    Fighter* fp;
+    ftPurinAttributes* da;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
 #endif
+
+    fp = gobj->user_data;
+    da = fp->dat_attrs;
+
+    if (fp->self_vel.y <= -da->x40) {
+        ftCommon_8007D268(fp);
+    }
+    ftCommon_8007D494(fp, da->x3C, da->x40);
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push
