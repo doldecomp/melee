@@ -551,7 +551,7 @@ void ftPr_Init_OnLoad(HSD_GObj* gobj)
     ftPr_Init_8013C360(gobj);
 }
 
-void ftPr_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftPr_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!it_8026B2B4(fp->item_gobj)) {
@@ -567,7 +567,7 @@ void ftPr_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
             ftAnim_80070FB4(gobj, 0, 1);
             break;
         }
-        if (bool) {
+        if (flag) {
             ftAnim_80070C48(gobj, 0);
         }
     }
