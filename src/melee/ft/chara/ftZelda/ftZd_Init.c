@@ -273,9 +273,9 @@ void ftZd_Init_801393AC(HSD_GObj* gobj)
     ftZd_SpecialLw_8013B5EC(gobj);
 }
 
-void ftZd_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftZd_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
 void ftZd_Init_OnItemInvisible(HSD_GObj* gobj)
@@ -288,9 +288,9 @@ void ftZd_Init_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftZd_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftZd_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, flag, 1, 1);
 }
 
 void ftZd_Init_LoadSpecialAttrs(HSD_GObj* gobj)

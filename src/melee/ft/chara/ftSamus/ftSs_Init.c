@@ -285,9 +285,9 @@ void ftSs_Init_80128428(HSD_GObj* gobj)
     ftCo_800D9C98(gobj);
 }
 
-void ftSs_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftSs_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 0, 0);
+    Fighter_OnItemPickup(gobj, flag, 0, 0);
 }
 
 void ftSs_Init_OnItemInvisible(HSD_GObj* gobj)

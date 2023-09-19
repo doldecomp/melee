@@ -353,9 +353,9 @@ void ftKp_Init_OnLoad(HSD_GObj* gobj)
 
 void ftKp_Init_80132B38(void) {}
 
-void ftKp_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftKp_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, true, true);
+    Fighter_OnItemPickup(gobj, flag, true, true);
 }
 
 void ftKp_Init_OnItemInvisible(HSD_GObj* gobj)

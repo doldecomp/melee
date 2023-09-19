@@ -200,9 +200,9 @@ void ftDr_Init_80149540(HSD_GObj* gobj)
     ftDr_Init_801497CC(gobj);
 }
 
-void ftDr_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftDr_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
 void ftDr_Init_OnItemInvisible(HSD_GObj* gobj)

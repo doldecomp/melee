@@ -382,9 +382,9 @@ void ftPc_Init_OnDeath(HSD_GObj* gobj)
     }
 }
 
-void ftPc_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftPc_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 0, 0);
+    Fighter_OnItemPickup(gobj, flag, 0, 0);
 }
 
 void ftPc_Init_OnItemInvisible(HSD_GObj* gobj)

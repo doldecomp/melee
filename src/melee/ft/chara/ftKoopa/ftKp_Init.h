@@ -11,7 +11,7 @@
 /* 132A84 */ void ftKp_Init_OnLoadForGKoopa(Fighter* fp);
 /* 132ABC */ void ftKp_Init_OnLoad(HSD_GObj* gobj);
 /* 132B38 */ void ftKp_Init_80132B38(void);
-/* 132B3C */ void ftKp_Init_OnItemPickup(HSD_GObj* gobj, bool bool);
+/* 132B3C */ void ftKp_Init_OnItemPickup(HSD_GObj* gobj, bool flag);
 /* 132C1C */ void ftKp_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 132C64 */ void ftKp_Init_OnItemVisible(HSD_GObj* gobj);
 /* 132CAC */ void ftKp_Init_OnItemDrop(HSD_GObj* gobj, bool bool1);

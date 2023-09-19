@@ -453,9 +453,9 @@ void ftFx_Init_800E5588(HSD_GObj* gobj)
     ftFx_SpecialN_RemoveBlaster(gobj);
 }
 
-void ftFx_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftFx_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
 void ftFx_Init_OnItemInvisible(HSD_GObj* gobj)
@@ -468,9 +468,9 @@ void ftFx_Init_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftFx_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftFx_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, flag, 1, 1);
 }
 
 void ftFx_Init_OnLoadForFalco(Fighter* fp)

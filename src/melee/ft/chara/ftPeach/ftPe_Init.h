@@ -9,10 +9,10 @@
 /* 11B51C */ void ftPe_Init_OnDeath(HSD_GObj* gobj);
 /* 11B628 */ void ftPe_Init_OnLoad(HSD_GObj* gobj);
 /* 11B704 */ void ftPe_Init_OnDeath2(HSD_GObj* gobj);
-/* 11B740 */ void ftPe_Init_OnItemPickup(HSD_GObj* gobj, bool bool);
+/* 11B740 */ void ftPe_Init_OnItemPickup(HSD_GObj* gobj, bool flag);
 /* 11B820 */ void ftPe_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 11B868 */ void ftPe_Init_OnItemVisible(HSD_GObj* gobj);
-/* 11B8B0 */ void ftPe_Init_OnItemDrop(HSD_GObj* gobj, bool bool1);
+/* 11B8B0 */ void ftPe_Init_OnItemDrop(HSD_GObj* gobj, bool flag);
 /* 11B904 */ void ftPe_Init_LoadSpecialAttrs(HSD_GObj* gobj);
 /* 11B93C */ void ftPe_Init_8011B93C(HSD_GObj* gobj);
 /* 11B998 */ void ftPe_Init_OnKnockbackEnter(HSD_GObj* gobj);

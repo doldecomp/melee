@@ -411,9 +411,9 @@ void ftFe_Init_OnDeath(HSD_GObj* gobj)
     fp->fv.ms.x222C = 0;
 }
 
-void ftFe_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftFe_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 0, 1);
+    Fighter_OnItemPickup(gobj, flag, 0, 1);
 }
 
 void ftFe_Init_OnItemInvisible(HSD_GObj* gobj)
@@ -426,9 +426,9 @@ void ftFe_Init_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 0);
 }
 
-void ftFe_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftFe_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, bool1, 0, 1);
+    Fighter_OnItemDrop(gobj, flag, 0, 1);
 }
 
 void ftFe_Init_OnLoad(HSD_GObj* gobj)

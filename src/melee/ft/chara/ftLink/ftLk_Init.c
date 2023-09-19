@@ -390,9 +390,9 @@ void ftLk_Init_OnItemDropExt(HSD_GObj* gobj, bool arg1)
     ftLk_Init_OnItemDrop(gobj, arg1);
 }
 
-void ftLk_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftLk_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
 void ftLk_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)

@@ -137,19 +137,19 @@ static inline void Fighter_OnItemPickup(Fighter_GObj* gobj, bool catchItemFlag,
     }
 }
 
-static inline void Fighter_OnItemInvisible(Fighter_GObj* gobj, bool bool)
+static inline void Fighter_OnItemInvisible(Fighter_GObj* gobj, bool flag)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!it_8026B2B4(fp->item_gobj)) {
-        ftAnim_80070CC4(gobj, bool);
+        ftAnim_80070CC4(gobj, flag);
     }
 }
 
-static inline void Fighter_OnItemVisible(Fighter_GObj* gobj, bool bool)
+static inline void Fighter_OnItemVisible(Fighter_GObj* gobj, bool flag)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!it_8026B2B4(fp->item_gobj)) {
-        ftAnim_80070C48(gobj, bool);
+        ftAnim_80070C48(gobj, flag);
     }
 }
 

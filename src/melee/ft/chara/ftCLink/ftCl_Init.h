@@ -8,12 +8,12 @@
 
 /* 148C64 */ void ftCl_Init_OnDeath(ftLk_GObj* gobj);
 /* 148CE4 */ void ftCl_Init_OnLoad(ftLk_GObj* gobj);
-/* 148DC0 */ void ftCl_Init_OnItemPickup(ftLk_GObj* gobj, bool);
+/* 148DC0 */ void ftCl_Init_OnItemPickup(ftLk_GObj* gobj, bool flag);
 /* 148E34 */ void ftCl_Init_OnItemInvisible(ftLk_GObj* gobj);
 /* 148E7C */ void ftCl_Init_OnItemVisible(ftLk_GObj* gobj);
-/* 148EC4 */ void ftCl_Init_OnItemDrop(ftLk_GObj* gobj, bool);
-/* 148F38 */ void ftCl_Init_OnItemPickupExt(ftLk_GObj* gobj, bool arg1);
-/* 149018 */ void ftCl_Init_OnItemDropExt(ftLk_GObj* gobj, bool arg1);
+/* 148EC4 */ void ftCl_Init_OnItemDrop(ftLk_GObj* gobj, bool flag);
+/* 148F38 */ void ftCl_Init_OnItemPickupExt(ftLk_GObj* gobj, bool flag);
+/* 149018 */ void ftCl_Init_OnItemDropExt(ftLk_GObj* gobj, bool flag);
 /* 14906C */ void ftCl_Init_LoadSpecialAttrs(ftLk_GObj* gobj);
 /* 14908C */ void ftCl_Init_OnKnockbackEnter(ftLk_GObj* gobj);
 /* 1490D0 */ void ftCl_Init_OnKnockbackExit(ftLk_GObj* gobj);

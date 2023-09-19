@@ -6,10 +6,10 @@
 
 #include "ft/types.h"
 
-/* 11ED38 */ void ftPp_Init_OnItemPickup(HSD_GObj* gobj, bool arg1);
+/* 11ED38 */ void ftPp_Init_OnItemPickup(HSD_GObj* gobj, bool flag);
 /* 11EE18 */ void ftPp_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 11EE60 */ void ftPp_Init_OnItemVisible(HSD_GObj* gobj);
-/* 11EEA8 */ void ftPp_Init_OnItemDrop(HSD_GObj* gobj, bool arg1);
+/* 11EEA8 */ void ftPp_Init_OnItemDrop(HSD_GObj* gobj, bool flag);
 /* 11EEFC */ void ftPp_Init_OnLoad(HSD_GObj* gobj);
 /* 11EF3C */ void ftPp_Init_OnLoadForNana(Fighter* fp);
 /* 11EFE8 */ void ftPp_Init_OnDeath(HSD_GObj* gobj);

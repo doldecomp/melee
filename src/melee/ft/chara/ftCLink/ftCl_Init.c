@@ -334,7 +334,7 @@ void ftCl_Init_OnLoad(HSD_GObj* gobj)
     ftParts_800753D4(fp, *Fighter_804D6540[fp->kind], items[6]);
 }
 
-void ftCl_Init_OnItemPickupExt(HSD_GObj* gobj, bool arg1)
+void ftCl_Init_OnItemPickupExt(HSD_GObj* gobj, bool flag)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -348,7 +348,7 @@ void ftCl_Init_OnItemPickupExt(HSD_GObj* gobj, bool arg1)
     }
 
     ftParts_80074A4C(gobj, 2, 1);
-    ftCl_Init_OnItemPickup(gobj, arg1);
+    ftCl_Init_OnItemPickup(gobj, flag);
 }
 
 void ftCl_Init_OnItemInvisible(HSD_GObj* gobj)
@@ -361,7 +361,7 @@ void ftCl_Init_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftCl_Init_OnItemDropExt(HSD_GObj* gobj, bool arg1)
+void ftCl_Init_OnItemDropExt(HSD_GObj* gobj, bool flag)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -375,21 +375,21 @@ void ftCl_Init_OnItemDropExt(HSD_GObj* gobj, bool arg1)
     }
 
     ftParts_80074A4C(gobj, 2, 0);
-    ftCl_Init_OnItemDrop(gobj, arg1);
+    ftCl_Init_OnItemDrop(gobj, flag);
 }
 
-void ftCl_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftCl_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
-void ftCl_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftCl_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, flag, 1, 1);
 }
 
 void ftCl_Init_LoadSpecialAttrs(HSD_GObj* gobj)
