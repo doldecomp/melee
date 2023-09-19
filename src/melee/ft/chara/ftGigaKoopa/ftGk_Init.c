@@ -331,9 +331,9 @@ void ftGk_Init_OnLoad(HSD_GObj* gobj)
     fp->x222A_flag.bits.b0 = true;
 }
 
-void ftGk_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftGk_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, true, true);
+    Fighter_OnItemPickup(gobj, flag, true, true);
 }
 
 void ftGk_Init_OnItemInvisible(HSD_GObj* gobj)

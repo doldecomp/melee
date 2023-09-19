@@ -588,9 +588,9 @@ void ftDk_Init_8010D774(HSD_GObj* gobj)
     ftDk_SpecialHi_DestroyAllEffects(gobj);
 }
 
-void ftDk_Init_OnItemPickup(HSD_GObj* gobj, bool arg1)
+void ftDk_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, arg1, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
 void ftDk_Init_OnItemInvisible(HSD_GObj* gobj)

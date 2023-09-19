@@ -10,10 +10,10 @@
 /* 1100EC */ void ftSk_Init_OnLoad(HSD_GObj* gobj);
 /* 110198 */ void ftSk_Init_80110198(HSD_GObj* gobj);
 /* 1101CC */ void ftSk_Init_UnkMotionStates4(HSD_GObj* gobj);
-/* 110204 */ void ftSk_Init_OnItemPickup(HSD_GObj* gobj, bool arg1);
+/* 110204 */ void ftSk_Init_OnItemPickup(HSD_GObj* gobj, bool flag);
 /* 1102E4 */ void ftSk_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 11032C */ void ftSk_Init_OnItemVisible(HSD_GObj* gobj);
-/* 110374 */ void ftSk_Init_OnItemDrop(HSD_GObj* gobj, bool arg1);
+/* 110374 */ void ftSk_Init_OnItemDrop(HSD_GObj* gobj, bool flag);
 /* 1103C8 */ void ftSk_Init_LoadSpecialAttrs(HSD_GObj* gobj);
 /* 110408 */ void ftSk_Init_OnKnockbackEnter(HSD_GObj* gobj);
 /* 11044C */ void ftSk_Init_OnKnockbackExit(HSD_GObj* gobj);

@@ -8,10 +8,10 @@
 
 /* 1422E8 */ void ftLg_Init_OnDeath(HSD_GObj* gobj);
 /* 142324 */ void ftLg_Init_OnLoad(HSD_GObj* gobj);
-/* 142388 */ void ftLg_Init_OnItemPickup(HSD_GObj* gobj, bool arg1);
+/* 142388 */ void ftLg_Init_OnItemPickup(HSD_GObj* gobj, bool flag);
 /* 142468 */ void ftLg_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 1424B0 */ void ftLg_Init_OnItemVisible(HSD_GObj* gobj);
-/* 1424F8 */ void ftLg_Init_OnItemDrop(HSD_GObj* gobj, bool arg1);
+/* 1424F8 */ void ftLg_Init_OnItemDrop(HSD_GObj* gobj, bool flag);
 /* 14254C */ void ftLg_Init_LoadSpecialAttrs(HSD_GObj* gobj);
 /* 142584 */ void ftLg_Init_OnKnockbackEnter(HSD_GObj* gobj);
 /* 1425C8 */ void ftLg_Init_OnKnockbackExit(HSD_GObj* gobj);

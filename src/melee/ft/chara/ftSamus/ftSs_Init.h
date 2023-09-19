@@ -9,7 +9,7 @@
 /* 12832C */ void ftSs_Init_OnDeath(HSD_GObj* gobj);
 /* 12837C */ void ftSs_Init_OnLoad(HSD_GObj* gobj);
 /* 128428 */ void ftSs_Init_80128428(HSD_GObj* gobj);
-/* 128464 */ void ftSs_Init_OnItemPickup(HSD_GObj* gobj, bool bool);
+/* 128464 */ void ftSs_Init_OnItemPickup(HSD_GObj* gobj, bool flag);
 /* 128544 */ void ftSs_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 12858C */ void ftSs_Init_OnItemVisible(HSD_GObj* gobj);
 /* 1285D4 */ void ftSs_Init_OnItemDrop(HSD_GObj* gobj, bool bool1);

@@ -421,9 +421,9 @@ void ftMs_Init_OnDeath(HSD_GObj* gobj)
 
 // 801362B0 00132E90
 // ftMs_Init_OnItemPickup
-void ftMs_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftMs_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 0, 1);
+    Fighter_OnItemPickup(gobj, flag, 0, 1);
 }
 
 // 80136390 00132F70
@@ -445,9 +445,9 @@ void ftMs_Init_OnItemVisible(HSD_GObj* gobj)
 // 80136420 00133000
 // ftMs_Init_OnItemDrop
 // https://decomp.me/scratch/Ws8ow
-void ftMs_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftMs_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, bool1, 0, 1);
+    Fighter_OnItemDrop(gobj, flag, 0, 1);
 }
 
 // 80136474 00133054

@@ -499,9 +499,9 @@ f32 ftYs_Init_8012BAC0(Fighter* fp)
     return da->x120;
 }
 
-void ftYs_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftYs_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
 void ftYs_Init_OnItemInvisible(HSD_GObj* gobj)

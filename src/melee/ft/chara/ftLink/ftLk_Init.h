@@ -13,7 +13,7 @@
 /* 0EAE44 */ void ftLk_Init_OnLoad(HSD_GObj* gobj);
 /* 0EAF38 */ void ftLk_800EAF38(HSD_GObj* gobj);
 /* 0EAF58 */ void ftLk_800EAF58(HSD_GObj* gobj);
-/* 0EAFA4 */ void ftLk_Init_OnItemPickup(HSD_GObj* gobj, bool bool);
+/* 0EAFA4 */ void ftLk_Init_OnItemPickup(HSD_GObj* gobj, bool flag);
 /* 0EB018 */ void ftLk_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 0EB060 */ void ftLk_Init_OnItemVisible(HSD_GObj* gobj);
 /* 0EB0A8 */ void ftLk_Init_OnItemDrop(HSD_GObj* gobj, bool arg1);

@@ -8,10 +8,10 @@
 
 /* 144DFC */ void ftMt_Init_OnDeath2(HSD_GObj* gobj);
 /* 144E48 */ void ftMt_Init_OnLoad(HSD_GObj* gobj);
-/* 144EE0 */ void ftMt_Init_OnItemPickup(HSD_GObj* gobj, bool bool);
+/* 144EE0 */ void ftMt_Init_OnItemPickup(HSD_GObj* gobj, bool flag);
 /* 144EE4 */ void ftMt_Init_OnDeath(HSD_GObj* gobj);
 /* 144F18 */ void ftMt_Init_OnTakeDamage(HSD_GObj* gobj);
-/* 144F4C */ void ftMt_Init_OnItemDrop(HSD_GObj* gobj, bool bool);
+/* 144F4C */ void ftMt_Init_OnItemDrop(HSD_GObj* gobj, bool flag);
 /* 144F50 */ void ftMt_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 144F54 */ void ftMt_Init_OnItemVisible(HSD_GObj* gobj);
 /* 144F58 */ void ftMt_Init_UnkMotionStates4(HSD_GObj* gobj);

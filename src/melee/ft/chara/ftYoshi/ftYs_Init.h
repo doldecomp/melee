@@ -18,7 +18,7 @@
 /* 12B99C */ void ftYs_Init_OnLoad(HSD_GObj* gobj);
 /* 12BA8C */ void ftYs_Init_8012BA8C(HSD_GObj* gobj);
 /* 12BAC0 */ f32 ftYs_Init_8012BAC0(Fighter* fp);
-/* 12BACC */ void ftYs_Init_OnItemPickup(HSD_GObj* gobj, bool bool);
+/* 12BACC */ void ftYs_Init_OnItemPickup(HSD_GObj* gobj, bool flag);
 /* 12BBAC */ void ftYs_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 12BBF4 */ void ftYs_Init_OnItemVisible(HSD_GObj* gobj);
 /* 12BC3C */ void ftYs_Init_OnItemDrop(HSD_GObj* gobj, bool bool1);

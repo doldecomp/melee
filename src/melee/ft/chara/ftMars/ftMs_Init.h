@@ -7,10 +7,10 @@
 #include "ft/types.h"
 
 /* 136258 */ void ftMs_Init_OnDeath(HSD_GObj* gobj);
-/* 1362B0 */ void ftMs_Init_OnItemPickup(HSD_GObj* gobj, bool arg1);
+/* 1362B0 */ void ftMs_Init_OnItemPickup(HSD_GObj* gobj, bool flag);
 /* 136390 */ void ftMs_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 1363D8 */ void ftMs_Init_OnItemVisible(HSD_GObj* gobj);
-/* 136420 */ void ftMs_Init_OnItemDrop(HSD_GObj* gobj, bool arg1);
+/* 136420 */ void ftMs_Init_OnItemDrop(HSD_GObj* gobj, bool flag);
 /* 136474 */ void ftMs_Init_OnLoadForRoy(Fighter* fp);
 /* 1364AC */ void ftMs_Init_OnLoad(HSD_GObj* gobj);
 /* 1364E8 */ void ftMs_Init_LoadSpecialAttrs(HSD_GObj* gobj);

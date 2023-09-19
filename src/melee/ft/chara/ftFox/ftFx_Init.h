@@ -12,10 +12,10 @@
 /* 0E5534 */ bool ftFx_Init_800E5534(HSD_GObj* gobj);
 /* 0E5554 */ void ftFx_Init_OnDeath(HSD_GObj* gobj);
 /* 0E5588 */ void ftFx_Init_800E5588(HSD_GObj* gobj);
-/* 0E55A8 */ void ftFx_Init_OnItemPickup(HSD_GObj* gobj, bool arg1);
+/* 0E55A8 */ void ftFx_Init_OnItemPickup(HSD_GObj* gobj, bool flag);
 /* 0E5688 */ void ftFx_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 0E56D0 */ void ftFx_Init_OnItemVisible(HSD_GObj* gobj);
-/* 0E5718 */ void ftFx_Init_OnItemDrop(HSD_GObj* gobj, bool arg1);
+/* 0E5718 */ void ftFx_Init_OnItemDrop(HSD_GObj* gobj, bool flag);
 /* 0E576C */ void ftFx_Init_OnLoadForFalco(Fighter* fp);
 /* 0E57AC */ void ftFx_Init_OnLoad(HSD_GObj* gobj);
 /* 0E5858 */ void ftFx_Init_LoadSpecialAttrs(HSD_GObj*);

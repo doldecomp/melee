@@ -12,7 +12,7 @@
 /* 0EE74C */ void ftKb_Init_800EE74C(HSD_GObj* gobj);
 /* 0EE7B8 */ void ftKb_Init_800EE7B8(HSD_GObj* gobj);
 /* 0EE818 */ void ftKb_Init_UnkMotionStates4(HSD_GObj* gobj);
-/* 0EE914 */ void ftKb_Init_OnItemPickup(HSD_GObj* gobj, bool bool);
+/* 0EE914 */ void ftKb_Init_OnItemPickup(HSD_GObj* gobj, bool flag);
 /* 0EE9DC */ void ftKb_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 0EEA24 */ void ftKb_Init_OnItemVisible(HSD_GObj* gobj);
 /* 0EEA6C */ void ftKb_Init_OnItemDrop(HSD_GObj* gobj, bool);

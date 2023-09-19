@@ -292,7 +292,7 @@ void ftMt_Init_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(item_list[1], It_Kind_Mewtwo_ShadowBall);
 }
 
-void ftMt_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftMt_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
     return;
 }
@@ -309,7 +309,7 @@ void ftMt_Init_OnTakeDamage(HSD_GObj* gobj)
     ftMt_SpecialN_OnDeath(gobj);
 }
 
-void ftMt_Init_OnItemDrop(HSD_GObj* gobj, bool bool) {}
+void ftMt_Init_OnItemDrop(HSD_GObj* gobj, bool flag) {}
 
 void ftMt_Init_OnItemInvisible(HSD_GObj* gobj)
 {

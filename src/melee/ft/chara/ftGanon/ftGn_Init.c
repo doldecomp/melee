@@ -309,9 +309,9 @@ void ftGn_Init_OnDeath(HSD_GObj* gobj)
     fp->fv.gn.during_specials_start = false;
 }
 
-void ftGn_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftGn_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, true, true);
+    Fighter_OnItemPickup(gobj, flag, true, true);
 }
 
 void ftGn_Init_OnItemInvisible(HSD_GObj* gobj)

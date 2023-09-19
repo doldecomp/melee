@@ -578,9 +578,9 @@ void ftGw_Init_8014A538(HSD_GObj* gobj)
     }
 }
 
-void ftGw_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftGw_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
 void ftGw_Init_OnItemInvisible(HSD_GObj* gobj)

@@ -452,9 +452,9 @@ void ftPe_Init_OnDeath2(HSD_GObj* gobj)
     ftPe_SpecialLw_8011CFA0(gobj);
 }
 
-void ftPe_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftPe_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
 void ftPe_Init_OnItemInvisible(HSD_GObj* gobj)
@@ -467,9 +467,9 @@ void ftPe_Init_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftPe_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftPe_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, flag, 1, 1);
 }
 
 void ftPe_Init_LoadSpecialAttrs(HSD_GObj* gobj)
