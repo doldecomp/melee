@@ -85,6 +85,7 @@
 #include "ftPikachu/ftPk_SpecialS.h"
 #include "ftPopo/ftPp_1211.h"
 #include "ftPopo/ftPp_Init.h"
+#include "ftPopo/ftPp_SpecialN.h"
 #include "ftPopo/ftPp_SpecialS.h"
 #include "ftPurin/ftPr_Init.h"
 #include "ftSamus/ftSs_Init.h"

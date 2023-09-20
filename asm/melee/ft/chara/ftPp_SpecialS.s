@@ -4096,18 +4096,6 @@ ftPp_Unk0_804D3E18:
 .section .sdata2
     .balign 8
 
-.global ftPp_Init_804D9838
-ftPp_Init_804D9838:
-    .float 0.0
-
-.global ftPp_Init_804D983C
-ftPp_Init_804D983C:
-    .float 1.0
-
-.global ftPp_Init_804D9840
-ftPp_Init_804D9840:
-    .double -524288.0
-
 .global ftPp_Init_804D9848
 ftPp_Init_804D9848:
     .float 0.0
