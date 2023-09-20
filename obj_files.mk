@@ -284,6 +284,8 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftPopo/ftPp_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPopo/ftPp_SpecialN.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPopo/ftPp_SpecialS.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftPp_SpecialS.s.o\
 
 TEXT_O_FILES +=\

@@ -10,6 +10,7 @@
 #include "ft/types.h"
 #include "ftPopo/ftPp_1211.h"
 #include "ftPopo/ftPp_Init.h"
+#include "ftPopo/ftPp_SpecialN.h"
 #include "ftPopo/ftPp_SpecialS.h"
 #include "ftPopo/types.h"
 

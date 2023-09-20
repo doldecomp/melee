@@ -18,18 +18,6 @@
 /* 11F0E4 */ void ftPp_Init_OnKnockbackEnter(HSD_GObj* gobj);
 /* 11F128 */ void ftPp_Init_OnKnockbackExit(HSD_GObj* gobj);
 /* 11F16C */ void ftPp_Init_8011F16C(HSD_GObj* gobj, uint arg1);
-/* 11F1F8 */ void ftPp_SpecialN_Enter(HSD_GObj* gobj);
-/* 11F26C */ void ftPp_SpecialAirN_Enter(HSD_GObj* gobj);
-/* 11F318 */ void ftPp_SpecialN_Anim(HSD_GObj* gobj);
-/* 11F354 */ void ftPp_SpecialAirN_Anim(HSD_GObj* gobj);
-/* 11F390 */ void ftPp_SpecialN_IASA(HSD_GObj* gobj);
-/* 11F394 */ void ftPp_SpecialAirN_IASA(HSD_GObj* gobj);
-/* 11F398 */ void ftPp_SpecialN_Phys(HSD_GObj* gobj);
-/* 11F3B8 */ void ftPp_SpecialAirN_Phys(HSD_GObj* gobj);
-/* 11F3D8 */ void ftPp_SpecialN_Coll(HSD_GObj* gobj);
-/* 11F454 */ void ftPp_SpecialAirN_Coll(HSD_GObj* gobj);
-/* 11F500 */ void ftPp_SpecialN_8011F500(HSD_GObj* gobj);
-/* 11F68C */ bool ftPp_SpecialN_8011F6FC(HSD_GObj* gobj);
 /* 3CD2D0 */ extern MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount];
 /* 3CD610 */ extern char ftPp_Init_DatFilename[];
 /* 3CD61C */ extern char ftPp_Init_DataName[];
