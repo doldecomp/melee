@@ -2,26 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-# https://decomp.me/scratch/6K1oj // 405 (74.69%)
-.global psInitAppSRT
-psInitAppSRT:
-/* 803A4138 003A0D18  7C 08 02 A6 */	mflr r0
-/* 803A413C 003A0D1C  3C 60 80 4D */	lis r3, HSD_PSAppSrt_804D10B0@ha
-/* 803A4140 003A0D20  90 01 00 04 */	stw r0, 4(r1)
-/* 803A4144 003A0D24  38 00 00 00 */	li r0, 0
-/* 803A4148 003A0D28  38 63 10 B0 */	addi r3, r3, HSD_PSAppSrt_804D10B0@l
-/* 803A414C 003A0D2C  94 21 FF F8 */	stwu r1, -8(r1)
-/* 803A4150 003A0D30  38 A0 00 04 */	li r5, 4
-/* 803A4154 003A0D34  B0 0D C2 3E */	sth r0, hsd_804D78DE@sda21(r13)
-/* 803A4158 003A0D38  B0 0D C2 38 */	sth r0, hsd_804D78D8@sda21(r13)
-/* 803A415C 003A0D3C  B0 8D C2 B8 */	sth r4, HSD_PSAppSrt_804D7958@sda21(r13)
-/* 803A4160 003A0D40  4B FD 6B E9 */	bl HSD_ObjAllocInit
-/* 803A4164 003A0D44  38 60 00 00 */	li r3, 0
-/* 803A4168 003A0D48  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 803A416C 003A0D4C  38 21 00 08 */	addi r1, r1, 8
-/* 803A4170 003A0D50  7C 08 03 A6 */	mtlr r0
-/* 803A4174 003A0D54  4E 80 00 20 */	blr
-
 # https://decomp.me/scratch/BtnBu
 .global psAddGeneratorAppSRT
 psAddGeneratorAppSRT:
