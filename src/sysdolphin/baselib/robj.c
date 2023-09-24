@@ -1,3 +1,4 @@
+#include <string.h>
 #include <baselib/robj.h>
 
 HSD_ObjAllocData robj_alloc_data;   // robj_alloc_data
@@ -180,6 +181,15 @@ void HSD_RObjAddAnimAll(HSD_RObj* robj, HSD_RObjAnimJoint* anim)
     }
 }
 
+static u32 HSD_RObjGetConstraintType(HSD_RObj* robj)
+{
+    if (robj == NULL) {
+        return 0;
+    }
+
+    return robj->flags & 0x0FFFFFFF;
+}
+
 int HSD_RObjGetGlobalPosition(HSD_RObj* robj, int type, Vec3* p)
 {
     Vec3 v = { 0, 0, 0 };
@@ -210,4 +220,45 @@ int HSD_RObjGetGlobalPosition(HSD_RObj* robj, int type, Vec3* p)
         p->z = f * v.z;
     }
     return n;
+}
+
+void HSD_RObjRemove(HSD_RObj* robj)
+{
+    s32 flags;
+
+    if (robj != NULL) {
+        switch (robj->flags & 0x70000000) {
+        case 0x10000000:
+            HSD_JObjUnrefThis(robj->u.jobj);
+            break;
+        case 0x0:
+            HSD_RvalueRemoveAll(robj->u.exp.rvalue);
+            break;
+        }
+        HSD_AObjRemove(robj->aobj);
+        HSD_RObjFree(robj);
+    }
+}
+
+void HSD_RObjRemoveAll(HSD_RObj* robj)
+{
+    HSD_RObj* next;
+
+    for (; robj != NULL; robj = next) {
+        next = robj->next;
+        HSD_RObjRemove(robj);
+    }
+}
+
+HSD_RObj* HSD_RObjAlloc(void)
+{
+    HSD_RObj* new = HSD_ObjAlloc(&robj_alloc_data);
+    HSD_ASSERT(0x408U, new);
+    memset(new, 0, 0x1CU);
+    return new;
+}
+
+void HSD_RObjFree(HSD_RObj* robj)
+{
+    HSD_ObjFree(&robj_alloc_data, robj);
 }
