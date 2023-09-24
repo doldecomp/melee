@@ -17,9 +17,6 @@
 
 HSD_ObjAllocData aobj_alloc_data;
 
-char lbl_80405FB8[9] = "object.h\0";
-char lbl_80405FC4[39] = "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF\0";
-
 static HSD_SList* endcallback_list;
 
 static s32 HSD_AObj_804D762C;
@@ -206,14 +203,7 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
             HSD_Obj* hsd_obj = HSD_IDGetDataFromTable(0, id, 0);
             phi_r30 = hsd_obj;
             if (hsd_obj != NULL) {
-                if (hsd_obj != NULL) {
-                    u16* ref_count = &hsd_obj->ref_count;
-                    *ref_count += 1;
-                    if (*ref_count == (u16) -1) {
-                        __assert("object.h", 0x5D,
-                                 "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF");
-                    }
-                }
+                ref_INC(hsd_obj);
             } else {
                 phi_r30 =
                     (HSD_Obj*) HSD_JObjLoadJoint((void*) aobjdesc->obj_id);
