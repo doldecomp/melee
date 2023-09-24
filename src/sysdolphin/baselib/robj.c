@@ -179,3 +179,35 @@ void HSD_RObjAddAnimAll(HSD_RObj* robj, HSD_RObjAnimJoint* anim)
         HSD_RObjAddAnim(i, j);
     }
 }
+
+int HSD_RObjGetGlobalPosition(HSD_RObj* robj, int type, Vec3* p)
+{
+    Vec3 v = { 0, 0, 0 };
+    HSD_RObj* rp;
+    int n = 0;
+
+    if (robj == NULL) {
+        return 0;
+    }
+    for (rp = robj; rp != NULL; rp = rp->next) {
+        if (((rp->flags & TYPE_MASK) == REFTYPE_JOBJ ? 1 : 0) != 0) {
+            if (((rp->flags & 0x80000000) ? 1 : 0) != 0 &&
+                type == HSD_RObjGetConstraintType(rp))
+            {
+                HSD_ASSERT(498, rp->u.jobj);
+                HSD_JObjSetupMatrix(rp->u.jobj);
+                n += 1;
+                v.x += rp->u.jobj->mtx[0][3];
+                v.y += rp->u.jobj->mtx[1][3];
+                v.z += rp->u.jobj->mtx[2][3];
+            }
+        }
+    }
+    if (n != 0) {
+        f32 f = (f32) 1.0 / (f32) n;
+        p->x = f * v.x;
+        p->y = f * v.y;
+        p->z = f * v.z;
+    }
+    return n;
+}
