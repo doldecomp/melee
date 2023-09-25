@@ -21,7 +21,6 @@ struct HSD_Rvalue {
 struct HSD_RvalueList {
     u32 flags;
     struct HSD_Joint* joint;
-    struct HSD_RvalueList* next;
 };
 
 struct HSD_IKHint {
