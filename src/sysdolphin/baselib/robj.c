@@ -226,6 +226,75 @@ int HSD_RObjGetGlobalPosition(HSD_RObj* robj, int type, Vec3* p)
     return n;
 }
 
+void set_dirup_matrix(Vec3* dir_ptr, Vec3* uv_ptr, Vec3* scale_ptr, void* obj,
+                      HSD_ObjUpdateFunc update_func)
+{
+    Vec3 z_vec;
+    Vec3 v;
+    f32 kz;
+    f32 kdir;
+
+    PSVECCrossProduct(dir_ptr, uv_ptr, &z_vec);
+    kdir =
+        sqrtf(1.0F / (1.00000001335e-10f + PSVECDotProduct(dir_ptr, dir_ptr)));
+    PSVECScale(dir_ptr, dir_ptr, kdir);
+    kz = sqrtf(1.0F / (1.00000001335e-10f + PSVECDotProduct(&z_vec, &z_vec)));
+    PSVECScale(&z_vec, &z_vec, kz);
+    PSVECCrossProduct(&z_vec, dir_ptr, uv_ptr);
+    v.x = dir_ptr->x * scale_ptr->x;
+    v.y = dir_ptr->y * scale_ptr->x;
+    v.z = dir_ptr->z * scale_ptr->x;
+    update_func(obj, 50, (HSD_ObjData*) &v);
+    v.x = uv_ptr->x * scale_ptr->y;
+    v.y = uv_ptr->y * scale_ptr->y;
+    v.z = uv_ptr->z * scale_ptr->y;
+    update_func(obj, 51, (HSD_ObjData*) &v);
+    v.x = z_vec.x * scale_ptr->z;
+    v.y = z_vec.y * scale_ptr->z;
+    v.z = z_vec.z * scale_ptr->z;
+    update_func(obj, 52, (HSD_ObjData*) &v);
+    update_func(obj, 55, NULL);
+}
+
+void resolveCnsDirUp(HSD_RObj* robj, void* obj, HSD_ObjUpdateFunc update_func)
+{
+    Vec3 this_scale = { 1.0f, 1.0f, 1.0f };
+    Vec3 up = { 0.0f, 1.0f, 0.0f };
+    Vec3 this_pos;
+    Vec3 dir;
+    union {
+        f32 fv;
+        s32 iv;
+    } k;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
+    if (HSD_RObjGetGlobalPosition(robj, 2, &this_pos) != 0) {
+        dir.x = ((HSD_JObj*) obj)->mtx[0][3];
+        dir.y = ((HSD_JObj*) obj)->mtx[1][3];
+        dir.z = ((HSD_JObj*) obj)->mtx[2][3];
+        PSVECSubtract(&this_pos, &dir, &this_pos);
+        if (HSD_RObjGetGlobalPosition(robj, 3, &up) != 0) {
+            PSVECSubtract(&up, &dir, &up);
+        } else {
+            k.fv = 1.0f - PSVECDotProduct(&this_pos, &up);
+            k.iv &= ~0x80000000;
+            if (k.fv < 1.00000001335e-10f) {
+                up.x = 0.0f;
+                up.y = 0.0f;
+                up.z = 1.0;
+            }
+        }
+
+        if (((HSD_JObj*) obj)->scl != NULL) {
+            this_scale = *((HSD_JObj*) obj)->scl;
+        }
+        set_dirup_matrix(&this_pos, &up, &this_scale, obj, update_func);
+    }
+}
+
 void HSD_RObjRemove(HSD_RObj* robj)
 {
     s32 flags;
