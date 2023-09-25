@@ -3,6 +3,7 @@
 #include <string.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
+#include <baselib/mtx.h>
 #include <baselib/robj.h>
 
 HSD_ObjAllocData robj_alloc_data;   // robj_alloc_data
@@ -259,7 +260,8 @@ static void set_dirup_matrix(Vec3* dir_ptr, Vec3* uv_ptr, Vec3* scale_ptr,
     update_func(obj, 55, NULL);
 }
 
-void resolveCnsDirUp(HSD_RObj* robj, void* obj, HSD_ObjUpdateFunc update_func)
+static void resolveCnsDirUp(HSD_RObj* robj, void* obj,
+                            HSD_ObjUpdateFunc update_func)
 {
     Vec3 this_scale = { 1.0f, 1.0f, 1.0f };
     Vec3 up = { 0.0f, 1.0f, 0.0f };
