@@ -1,4 +1,7 @@
+#include <math.h>
+#include <placeholder.h>
 #include <string.h>
+#include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
 #include <baselib/robj.h>
 
@@ -226,8 +229,8 @@ int HSD_RObjGetGlobalPosition(HSD_RObj* robj, int type, Vec3* p)
     return n;
 }
 
-void set_dirup_matrix(Vec3* dir_ptr, Vec3* uv_ptr, Vec3* scale_ptr, void* obj,
-                      HSD_ObjUpdateFunc update_func)
+static void set_dirup_matrix(Vec3* dir_ptr, Vec3* uv_ptr, Vec3* scale_ptr,
+                             void* obj, HSD_ObjUpdateFunc update_func)
 {
     Vec3 z_vec;
     Vec3 v;
@@ -262,14 +265,7 @@ void resolveCnsDirUp(HSD_RObj* robj, void* obj, HSD_ObjUpdateFunc update_func)
     Vec3 up = { 0.0f, 1.0f, 0.0f };
     Vec3 this_pos;
     Vec3 dir;
-    union {
-        f32 fv;
-        s32 iv;
-    } k;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u8 _[8];
-#endif
+    f32 k;
 
     if (HSD_RObjGetGlobalPosition(robj, 2, &this_pos) != 0) {
         dir.x = ((HSD_JObj*) obj)->mtx[0][3];
@@ -279,9 +275,8 @@ void resolveCnsDirUp(HSD_RObj* robj, void* obj, HSD_ObjUpdateFunc update_func)
         if (HSD_RObjGetGlobalPosition(robj, 3, &up) != 0) {
             PSVECSubtract(&up, &dir, &up);
         } else {
-            k.fv = 1.0f - PSVECDotProduct(&this_pos, &up);
-            k.iv &= ~0x80000000;
-            if (k.fv < 1.00000001335e-10f) {
+            k = 1.0f - PSVECDotProduct(&this_pos, &up);
+            if (fabsf_bitwise(k) < 1.00000001335e-10f) {
                 up.x = 0.0f;
                 up.y = 0.0f;
                 up.z = 1.0;
@@ -293,6 +288,12 @@ void resolveCnsDirUp(HSD_RObj* robj, void* obj, HSD_ObjUpdateFunc update_func)
         }
         set_dirup_matrix(&this_pos, &up, &this_scale, obj, update_func);
     }
+}
+
+static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
+                                  HSD_ObjUpdateFunc update_func)
+{
+    NOT_IMPLEMENTED;
 }
 
 void HSD_RObjRemove(HSD_RObj* robj)
