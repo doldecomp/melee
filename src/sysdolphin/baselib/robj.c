@@ -1,4 +1,5 @@
 #include <string.h>
+#include <dolphin/os/os.h>
 #include <baselib/robj.h>
 
 HSD_ObjAllocData robj_alloc_data;   // robj_alloc_data
@@ -286,6 +287,28 @@ void HSD_RvalueRemoveAll(HSD_Rvalue* rvalue)
     for (; rvalue != NULL; rvalue = next) {
         next = rvalue->next;
         HSD_RvalueRemove(rvalue);
+    }
+}
+
+void HSD_RvalueResolveRefs(HSD_Rvalue* rvalue, HSD_RvalueList* list)
+{
+    if (rvalue != NULL && list != NULL) {
+        HSD_JObjUnrefThis(rvalue->jobj);
+        rvalue->jobj = HSD_IDGetData((u32) list->joint, NULL);
+        HSD_ASSERT(0x535, rvalue->jobj);
+        iref_INC(rvalue->jobj);
+    }
+}
+
+void HSD_RvalueResolveRefsAll(HSD_Rvalue* rvalue, HSD_RvalueList* list)
+{
+    if (list == NULL) {
+        return;
+    }
+    for (; rvalue != NULL && list->joint != NULL;
+         rvalue = rvalue->next, list++)
+    {
+        HSD_RvalueResolveRefs(rvalue, list);
     }
 }
 

@@ -112,6 +112,9 @@ void HSD_RObjReqAnimByFlags(HSD_RObj* robj, f32 startframe, u32 flags);
 void HSD_RObjAddAnim(HSD_RObj* robj, HSD_RObjAnimJoint* anim);
 void HSD_RObjAnim(HSD_RObj* robj);
 
+void HSD_RvalueRemove(HSD_Rvalue* rvalue);
 void HSD_RvalueRemoveAll(HSD_Rvalue* rvalue);
+void HSD_RvalueResolveRefs(HSD_Rvalue* rvalue, HSD_RvalueList* list);
+void HSD_RvalueResolveRefsAll(HSD_Rvalue* rvalue, HSD_RvalueList* list);
 
 #endif
