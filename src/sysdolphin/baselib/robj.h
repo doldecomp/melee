@@ -13,7 +13,7 @@
 #define REFTYPE_IKHINT 0x40000000
 
 struct HSD_Rvalue {
-    struct _HSD_Rvalue* next;
+    struct HSD_Rvalue* next;
     u32 flags;
     HSD_JObj* jobj;
 };
@@ -21,7 +21,7 @@ struct HSD_Rvalue {
 struct HSD_RvalueList {
     u32 flags;
     struct HSD_Joint* joint;
-    struct _HSD_RvalueList* next;
+    struct HSD_RvalueList* next;
 };
 
 struct HSD_IKHint {
@@ -46,12 +46,12 @@ struct HSD_Exp {
 
 struct HSD_ExpDesc {
     f32 (*func)(void);
-    struct _HSD_RvalueList* rvalue;
+    struct HSD_RvalueList* rvalue;
 };
 
 struct HSD_ByteCodeExpDesc {
     u8* bytecode;
-    struct _HSD_RvalueList* rvalue;
+    struct HSD_RvalueList* rvalue;
 };
 
 struct HSD_RObj {
@@ -67,13 +67,13 @@ struct HSD_RObj {
 };
 
 struct HSD_RObjDesc {
-    struct _HSD_RObjDesc* next;
+    struct HSD_RObjDesc* next;
     u32 flags; // 0x04
     union {
         u32 i;
-        struct _HSD_ExpDesc* exp;
-        struct _HSD_ByteCodeExpDesc* bcexp;
-        struct _HSD_IKHintDesc* ik_hint;
+        struct HSD_ExpDesc* exp;
+        struct HSD_ByteCodeExpDesc* bcexp;
+        struct HSD_IKHintDesc* ik_hint;
         struct HSD_Joint* joint;
         f32 limit;
     } u;

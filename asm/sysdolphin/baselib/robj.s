@@ -1455,43 +1455,9 @@ expEvaluate:
 /* 8037C94C 0037952C  4E 80 00 20 */	blr
 
 
-dummy_func:
-/* 8037C950 00379530  C0 22 EC DC */	lfs f1, HSD_RObj_804DE6BC@sda21(r2)
-/* 8037C954 00379534  4E 80 00 20 */	blr
+/* dummy_func */
 
-.global HSD_RvalueRemoveAll
-HSD_RvalueRemoveAll:
-/* 8037C958 00379538  7C 08 02 A6 */	mflr r0
-/* 8037C95C 0037953C  3C 80 80 4C */	lis r4, rvalue_alloc_data@ha
-/* 8037C960 00379540  90 01 00 04 */	stw r0, 4(r1)
-/* 8037C964 00379544  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 8037C968 00379548  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8037C96C 0037954C  3B E4 23 94 */	addi r31, r4, rvalue_alloc_data@l
-/* 8037C970 00379550  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 8037C974 00379554  93 A1 00 14 */	stw r29, 0x14(r1)
-/* 8037C978 00379558  3B A3 00 00 */	addi r29, r3, 0
-/* 8037C97C 0037955C  48 00 00 28 */	b .L_8037C9A4
-.L_8037C980:
-/* 8037C980 00379560  28 1D 00 00 */	cmplwi r29, 0
-/* 8037C984 00379564  83 DD 00 00 */	lwz r30, 0(r29)
-/* 8037C988 00379568  41 82 00 18 */	beq .L_8037C9A0
-/* 8037C98C 0037956C  80 7D 00 08 */	lwz r3, 8(r29)
-/* 8037C990 00379570  4B FF 49 31 */	bl HSD_JObjUnrefThis
-/* 8037C994 00379574  38 7F 00 00 */	addi r3, r31, 0
-/* 8037C998 00379578  38 9D 00 00 */	addi r4, r29, 0
-/* 8037C99C 0037957C  4B FF E3 85 */	bl HSD_ObjFree
-.L_8037C9A0:
-/* 8037C9A0 00379580  7F DD F3 78 */	mr r29, r30
-.L_8037C9A4:
-/* 8037C9A4 00379584  28 1D 00 00 */	cmplwi r29, 0
-/* 8037C9A8 00379588  40 82 FF D8 */	bne .L_8037C980
-/* 8037C9AC 0037958C  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 8037C9B0 00379590  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 8037C9B4 00379594  83 C1 00 18 */	lwz r30, 0x18(r1)
-/* 8037C9B8 00379598  83 A1 00 14 */	lwz r29, 0x14(r1)
-/* 8037C9BC 0037959C  38 21 00 20 */	addi r1, r1, 0x20
-/* 8037C9C0 003795A0  7C 08 03 A6 */	mtlr r0
-/* 8037C9C4 003795A4  4E 80 00 20 */	blr
+/* HSD_RvalueRemoveAll */
 
 .global expLoadDesc
 expLoadDesc:
@@ -1758,17 +1724,7 @@ HSD_RObjSetConstraintObj:
 /* 8037CD54 00379934  7C 08 03 A6 */	mtlr r0
 /* 8037CD58 00379938  4E 80 00 20 */	blr
 
-.global _HSD_RObjForgetMemory
-_HSD_RObjForgetMemory:
-/* 8037CD5C 0037993C  80 0D C0 48 */	lwz r0, arg_buf@sda21(r13)
-/* 8037CD60 00379940  7C 03 00 40 */	cmplw r3, r0
-/* 8037CD64 00379944  4D 81 00 20 */	bgtlr
-/* 8037CD68 00379948  7C 00 20 40 */	cmplw r0, r4
-/* 8037CD6C 0037994C  4C 80 00 20 */	bgelr
-/* 8037CD70 00379950  38 00 00 00 */	li r0, 0
-/* 8037CD74 00379954  90 0D C0 48 */	stw r0, arg_buf@sda21(r13)
-/* 8037CD78 00379958  90 0D C0 4C */	stw r0, arg_buf_size@sda21(r13)
-/* 8037CD7C 0037995C  4E 80 00 20 */	blr
+/* _HSD_RObjForgetMemory */
 
 
 .section .rodata
@@ -1876,16 +1832,6 @@ HSD_RObj_804D5EE4:
     .balign 4
 
 
-.section .sbss
-    .balign 8
-.global arg_buf
-arg_buf:
-    .skip 0x4
-.global arg_buf_size
-arg_buf_size:
-    .skip 0x4
-
-
 .section .sdata2
     .balign 8
 .global HSD_RObj_804DE6A0
@@ -1896,7 +1842,7 @@ HSD_RObj_804DE6A0:
 HSD_RObj_804DE6A8:
     .4byte 0x3F800000
     .4byte 0x00000000
-    
+
 .global HSD_RObj_804DE6B8
 HSD_RObj_804DE6B8:
     .4byte 0x2EDBE6FF

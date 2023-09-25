@@ -4,6 +4,9 @@
 HSD_ObjAllocData robj_alloc_data;   // robj_alloc_data
 HSD_ObjAllocData rvalue_alloc_data; // rvalue_alloc_data
 
+static u32 arg_buf;
+static u32 arg_buf_size;
+
 extern const f64 HSD_RObj_804DE6A0; // 1.75
 
 void HSD_RObjInitAllocData(void)
@@ -261,4 +264,35 @@ HSD_RObj* HSD_RObjAlloc(void)
 void HSD_RObjFree(HSD_RObj* robj)
 {
     HSD_ObjFree(&robj_alloc_data, robj);
+}
+
+static f32 dummy_func()
+{
+    return 0.0f;
+}
+
+void HSD_RvalueRemove(HSD_Rvalue* rvalue)
+{
+    if (rvalue != NULL) {
+        HSD_JObjUnrefThis(rvalue->jobj);
+        HSD_ObjFree(&rvalue_alloc_data, rvalue);
+    }
+}
+
+void HSD_RvalueRemoveAll(HSD_Rvalue* rvalue)
+{
+    HSD_Rvalue* next;
+
+    for (; rvalue != NULL; rvalue = next) {
+        next = rvalue->next;
+        HSD_RvalueRemove(rvalue);
+    }
+}
+
+void _HSD_RObjForgetMemory(void* low, void* high)
+{
+    if (((u32) low <= arg_buf) && (arg_buf < (u32) high)) {
+        arg_buf = 0U;
+        arg_buf_size = 0U;
+    }
 }
