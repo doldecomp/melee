@@ -289,6 +289,36 @@ void HSD_RvalueRemoveAll(HSD_Rvalue* rvalue)
     }
 }
 
+static inline void ref_JObj(HSD_RObj* robj, HSD_JObj* o)
+{
+    HSD_JObj* jobj;
+    bool isDesc;
+
+    if (isDesc = hsdObjIsDescendantOf(&o->object, &hsdJObj.parent.parent),
+        isDesc != 0)
+    {
+        robj->u.jobj = o;
+        iref_INC(o);
+    } else {
+        OSReport("constraint only support jobj target.\n");
+        HSD_ASSERT(0x560, 0);
+    }
+}
+
+void HSD_RObjSetConstraintObj(HSD_RObj* robj, void* obj)
+{
+    HSD_JObj* jobj;
+
+    if (robj != NULL) {
+        if (robj->u.jobj != NULL) {
+            HSD_JObjUnrefThis(robj->u.jobj);
+            robj->u.jobj = NULL;
+        }
+
+        ref_JObj(robj, obj);
+    }
+}
+
 void _HSD_RObjForgetMemory(void* low, void* high)
 {
     if (((u32) low <= arg_buf) && (arg_buf < (u32) high)) {
