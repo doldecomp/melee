@@ -1,5 +1,6 @@
 #include <string.h>
 #include <baselib/class.h>
+#include <baselib/jobj.h>
 #include <baselib/memory.h>
 #include <baselib/pobj.h>
 
@@ -8,6 +9,14 @@ static void PObjInfoInit(void);
 HSD_PObjInfo hsdPObj = { PObjInfoInit };
 
 static HSD_PObjInfo* default_class = NULL;
+
+static f32 (*vertex_buffer)[3] = NULL;
+static f32 (*normal_buffer)[3] = NULL;
+static u32 vertex_buffer_size = 0;
+static u32 normal_buffer_size = 0;
+
+static HSD_VtxDescList* prev_vtxdesclist_array = NULL;
+static HSD_VtxDescList* prev_vtxdesc = NULL;
 
 u32 HSD_PObjGetFlags(HSD_PObj* pobj)
 {
@@ -310,5 +319,62 @@ static void resolveEnvelope(HSD_SList* list, HSD_EnvelopeDesc** edesc_p)
             env = env->next;
             edesc++;
         }
+    }
+}
+
+void HSD_PObjResolveRefs(HSD_PObj* pobj, HSD_PObjDesc* pdesc)
+{
+    if (!pobj || !pdesc) {
+        return;
+    }
+
+    switch (pobj_type(pobj)) {
+    case POBJ_ENVELOPE:
+        resolveEnvelope(pobj->u.envelope_list, pdesc->u.envelope_p);
+        break;
+
+    case POBJ_SKIN:
+        HSD_JObjUnrefThis(pobj->u.jobj);
+        pobj->u.jobj = NULL;
+        if (pdesc->u.joint != NULL) {
+            pobj->u.jobj = HSD_IDGetData((u32) pdesc->u.joint, NULL);
+            HSD_ASSERT(0x2FB, pobj->u.jobj);
+            HSD_JObjRefThis(pobj->u.jobj);
+        }
+        break;
+
+    default:
+        break;
+    }
+}
+
+// https://decomp.me/scratch/YRMg1
+void HSD_PObjResolveRefsAll(HSD_PObj* pobj, HSD_PObjDesc* pdesc)
+{
+    for (; pobj != NULL && pdesc != NULL;
+         pobj = pobj->next, pdesc = pdesc->next)
+    {
+        HSD_PObjResolveRefs(pobj, pdesc);
+    }
+}
+
+void HSD_ClearVtxDesc(void)
+{
+    GXClearVtxDesc();
+    prev_vtxdesclist_array = 0;
+    prev_vtxdesc = 0;
+}
+
+static void setupArrayDesc(HSD_VtxDescList* desc_list)
+{
+    HSD_VtxDescList* desc;
+
+    if (prev_vtxdesclist_array != desc_list) {
+        for (desc = desc_list; desc->attr != GX_VA_NULL; desc++) {
+            if (desc->attr_type != GX_DIRECT) {
+                GXSetArray(desc->attr, (s32) desc->vertex, desc->stride);
+            }
+        }
+        prev_vtxdesclist_array = desc_list;
     }
 }

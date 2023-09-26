@@ -46,8 +46,8 @@ struct HSD_PObjDesc {
 };
 
 struct HSD_VtxDescList {
-    u32 attr;
-    u32 attr_type;
+    GXAttr attr;
+    int attr_type;
     u32 comp_cnt;
     u32 comp_type;
     u8 frac;
@@ -135,6 +135,7 @@ void HSD_PObjAddAnim(HSD_PObj*, HSD_ShapeAnim*);
 void HSD_PObjAddAnimAll(HSD_PObj*, HSD_ShapeAnim*);
 void HSD_PObjAnim(HSD_PObj* pobj);
 void HSD_PObjAnimAll(HSD_PObj*);
+void HSD_PObjResolveRefs(HSD_PObj*, HSD_PObjDesc*);
 void HSD_PObjResolveRefsAll(HSD_PObj*, HSD_PObjDesc*);
 void HSD_PObjRemove(HSD_PObj*);
 void HSD_PObjRemoveAll(HSD_PObj*);
