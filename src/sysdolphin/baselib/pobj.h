@@ -10,6 +10,9 @@
 
 #include <dolphin/gx/GXEnum.h>
 
+#define HSD_MTX_RIGID 1
+#define HSD_MTX_ENVELOPE 2
+
 struct HSD_PObj {
     HSD_Class parent;
     HSD_PObj* next;

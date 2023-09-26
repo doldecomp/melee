@@ -6,8 +6,6 @@
 #include <math.h>
 #include <baselib/objalloc.h>
 
-#define HSD_MTX_RIGID 1
-
 void HSD_MtxInverse(Mtx src, Mtx dest);
 void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest);
 void HSD_MtxInverseTranspose(Mtx src, Mtx dest);
