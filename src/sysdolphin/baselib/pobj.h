@@ -28,6 +28,7 @@ struct HSD_PObj {
         HSD_SList* envelope_list;
         struct unk_struct_pobj* x14_unk;
     } u;
+    HSD_AObj* aobj;
 };
 
 struct HSD_PObjDesc {
@@ -92,7 +93,7 @@ struct HSD_ShapeSetDesc {
 };
 
 struct HSD_ShapeAnim {
-    struct _HSD_ShapeAnim* next;
+    HSD_ShapeAnim* next;
     HSD_AObjDesc* aobjdesc;
 };
 

@@ -33,3 +33,36 @@ void HSD_PObjRemoveAnimAllByFlags(HSD_PObj* pobj, u32 flags)
         HSD_PObjRemoveAnimByFlags(pp, flags);
     }
 }
+
+void HSD_PObjAddAnim(HSD_PObj* pobj, HSD_ShapeAnim* shapeanim)
+{
+    struct unk_struct_pobj* st;
+    if (pobj == NULL) {
+        return;
+    }
+    HSD_ASSERT(247, pobj_type(pobj) == POBJ_SHAPEANIM && pobj->u.shape_set);
+    if (shapeanim == NULL) {
+        return;
+    }
+
+    st = pobj->u.x14_unk;
+    if (st->aobj) {
+        HSD_AObjRemove(st->aobj);
+    }
+    st->aobj = HSD_AObjLoadDesc(shapeanim->aobjdesc);
+}
+
+void HSD_PObjAddAnimAll(HSD_PObj* pobj, HSD_ShapeAnim* shapeanim)
+{
+    HSD_PObj* po;
+    HSD_ShapeAnim* sa;
+
+    if (pobj == NULL || shapeanim == NULL) {
+        return;
+    }
+
+    for (po = pobj, sa = shapeanim; po != NULL; po = po->next, sa = next_p(sa))
+    {
+        HSD_PObjAddAnim(po, sa);
+    }
+}
