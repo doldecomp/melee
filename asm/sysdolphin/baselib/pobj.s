@@ -2735,44 +2735,6 @@ PObjAmnesia:
 /* 8036EB80 0036B760  7C 08 03 A6 */	mtlr r0
 /* 8036EB84 0036B764  4E 80 00 20 */	blr
 
-.global PObjInfoInit
-PObjInfoInit:
-/* 8036EB88 0036B768  7C 08 02 A6 */	mflr r0
-/* 8036EB8C 0036B76C  3C 60 80 40 */	lis r3, hsdPObj@ha
-/* 8036EB90 0036B770  90 01 00 04 */	stw r0, 4(r1)
-/* 8036EB94 0036B774  38 E0 00 48 */	li r7, 0x48
-/* 8036EB98 0036B778  39 00 00 18 */	li r8, 0x18
-/* 8036EB9C 0036B77C  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 8036EBA0 0036B780  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 8036EBA4 0036B784  3B E3 63 98 */	addi r31, r3, hsdPObj@l
-/* 8036EBA8 0036B788  3C 60 80 40 */	lis r3, hsdClass@ha
-/* 8036EBAC 0036B78C  38 83 75 90 */	addi r4, r3, hsdClass@l
-/* 8036EBB0 0036B790  38 7F 00 00 */	addi r3, r31, 0
-/* 8036EBB4 0036B794  38 BF 03 4C */	addi r5, r31, 0x34c
-/* 8036EBB8 0036B798  38 DF 03 64 */	addi r6, r31, 0x364
-/* 8036EBBC 0036B79C  48 01 30 5D */	bl hsdInitClassInfo
-/* 8036EBC0 0036B7A0  3C 60 80 37 */	lis r3, PObjRelease@ha
-/* 8036EBC4 0036B7A4  38 03 E9 F0 */	addi r0, r3, PObjRelease@l
-/* 8036EBC8 0036B7A8  3C 60 80 37 */	lis r3, PObjAmnesia@ha
-/* 8036EBCC 0036B7AC  90 1F 00 30 */	stw r0, 0x30(r31)
-/* 8036EBD0 0036B7B0  38 03 EB 14 */	addi r0, r3, PObjAmnesia@l
-/* 8036EBD4 0036B7B4  3C 60 80 37 */	lis r3, HSD_PObjDisp@ha
-/* 8036EBD8 0036B7B8  90 1F 00 38 */	stw r0, 0x38(r31)
-/* 8036EBDC 0036B7BC  38 03 E8 AC */	addi r0, r3, HSD_PObjDisp@l
-/* 8036EBE0 0036B7C0  3C 60 80 37 */	lis r3, PObjSetupMtx@ha
-/* 8036EBE4 0036B7C4  90 1F 00 3C */	stw r0, 0x3c(r31)
-/* 8036EBE8 0036B7C8  38 03 E8 3C */	addi r0, r3, PObjSetupMtx@l
-/* 8036EBEC 0036B7CC  3C 60 80 37 */	lis r3, PObjLoad@ha
-/* 8036EBF0 0036B7D0  90 1F 00 40 */	stw r0, 0x40(r31)
-/* 8036EBF4 0036B7D4  38 03 BD A0 */	addi r0, r3, PObjLoad@l
-/* 8036EBF8 0036B7D8  90 1F 00 44 */	stw r0, 0x44(r31)
-/* 8036EBFC 0036B7DC  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 8036EC00 0036B7E0  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 8036EC04 0036B7E4  38 21 00 10 */	addi r1, r1, 0x10
-/* 8036EC08 0036B7E8  7C 08 03 A6 */	mtlr r0
-/* 8036EC0C 0036B7EC  4E 80 00 20 */	blr
-
-
 .section .data
     .balign 8
 
@@ -2839,10 +2801,6 @@ HSD_PObj_804065A8:
 .global HSD_PObj_804066D0
 HSD_PObj_804066D0:
     .asciz "pobj->u.shape_set"
-    .balign 4
-    .asciz "sysdolphin_base_library"
-    .balign 4
-    .asciz "hsd_pobj"
     .balign 4
 
 

@@ -460,3 +460,15 @@ static void setupShapeAnimVtxDesc(HSD_PObj* pobj)
     }
     prev_vtxdesc = NULL;
 }
+
+static void PObjInfoInit(void)
+{
+    hsdInitClassInfo(HSD_CLASS_INFO(&hsdPObj), HSD_CLASS_INFO(&hsdClass),
+                     "sysdolphin_base_library", "hsd_pobj",
+                     sizeof(HSD_PObjInfo), sizeof(HSD_PObj));
+    HSD_CLASS_INFO(&hsdPObj)->release = PObjRelease;
+    HSD_CLASS_INFO(&hsdPObj)->amnesia = PObjAmnesia;
+    HSD_POBJ_INFO(&hsdPObj)->disp = HSD_PObjDisp;
+    HSD_POBJ_INFO(&hsdPObj)->setup_mtx = PObjSetupMtx;
+    HSD_POBJ_INFO(&hsdPObj)->load = PObjLoad;
+}
