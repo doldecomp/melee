@@ -406,3 +406,22 @@ static void setupVtxDesc(HSD_PObj* pobj)
         prev_vtxdesc = pobj->verts;
     }
 }
+
+static void setupShapeAnimArrayDesc(HSD_VtxDescList* desc_list)
+{
+    HSD_VtxDescList* desc;
+
+    for (desc = desc_list; desc->attr != GX_VA_NULL; desc++) {
+        if (desc->attr_type != GX_DIRECT) {
+            switch (desc->attr) {
+            case GX_VA_POS:
+            case GX_VA_NRM:
+            case GX_VA_NBT:
+                break;
+            default:
+                GXSetArray(desc->attr, (s32) desc->vertex, desc->stride);
+            }
+        }
+    }
+    prev_vtxdesclist_array = NULL;
+}

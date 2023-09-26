@@ -47,7 +47,7 @@ struct HSD_PObjDesc {
 
 struct HSD_VtxDescList {
     GXAttr attr;
-    int attr_type;
+    GXAttrType attr_type;
     u32 comp_cnt;
     u32 comp_type;
     u8 frac;
