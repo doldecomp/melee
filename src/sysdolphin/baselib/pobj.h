@@ -136,4 +136,6 @@ void HSD_PObjRemoveAll(HSD_PObj*);
 
 void HSD_PObjRemoveAnimByFlags(HSD_PObj* pobj, u32 flags);
 
+void HSD_PObjDisp(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
+
 #endif

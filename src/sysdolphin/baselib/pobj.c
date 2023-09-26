@@ -504,6 +504,47 @@ static void setupShapeAnimVtxDesc(HSD_PObj* pobj)
     prev_vtxdesc = NULL;
 }
 
+static void PObjDispSimplePrimitive(HSD_PObj* pobj, u32 rendermode)
+{
+    setupArrayDesc(pobj->verts);
+    setupVtxDesc(pobj);
+
+    GXCallDisplayList((s32) pobj->display, pobj->n_display << 5);
+}
+
+static void PObjDispShapeAnim(HSD_PObj* pobj, u32 rendermode)
+{
+    setupShapeAnimArrayDesc(pobj->verts);
+    setupShapeAnimVtxDesc(pobj);
+
+    HSD_ASSERT(0x7B1, pobj->u.shape_set);
+    drawShapeAnim(pobj);
+}
+
+void HSD_PObjDisp(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
+{
+    switch (pobj->flags & (POBJ_CULLFRONT | POBJ_CULLBACK)) {
+    case 0x0:
+        HSD_StateSetCullMode(GX_CULL_NONE);
+        break;
+    case POBJ_CULLFRONT:
+        HSD_StateSetCullMode(GX_CULL_FRONT);
+        break;
+    case POBJ_CULLBACK:
+        HSD_StateSetCullMode(GX_CULL_BACK);
+        break;
+    case POBJ_CULLFRONT | POBJ_CULLBACK:
+        return;
+    }
+
+    HSD_POBJ_METHOD(pobj)->setup_mtx(pobj, vmtx, pmtx, rendermode);
+    if (pobj_type(pobj) == POBJ_SHAPEANIM) {
+        PObjDispShapeAnim(pobj, rendermode);
+    } else {
+        PObjDispSimplePrimitive(pobj, rendermode);
+    }
+}
+
 static void PObjRelease(HSD_Class* o)
 {
     HSD_PObj* pobj = HSD_POBJ(o);
