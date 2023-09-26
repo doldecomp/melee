@@ -112,3 +112,58 @@ static void PObjUpdateFunc(void* obj, int type, HSD_ObjData* val)
         ShapeSetSetAnimResult(pobj->u.shape_set, type, val);
     }
 }
+
+void HSD_PObjAnim(HSD_PObj* pobj)
+{
+    if (pobj != NULL && pobj_type(pobj) == POBJ_SHAPEANIM) {
+        HSD_AObjInterpretAnim(pobj->u.x14_unk->aobj, pobj, PObjUpdateFunc);
+    }
+}
+
+void HSD_PObjAnimAll(HSD_PObj* pobj)
+{
+    HSD_PObj* pp;
+
+    if (pobj != NULL) {
+        for (pp = pobj; pp != NULL; pp = pp->next) {
+            HSD_PObjAnim(pp);
+        }
+    }
+}
+
+static HSD_Envelope* HSD_EnvelopeAlloc(void)
+{
+    HSD_Envelope* envelope = hsdAllocMemPiece(sizeof(HSD_Envelope));
+    HSD_ASSERT(0x1B9, envelope);
+    memset(envelope, 0, sizeof(HSD_Envelope));
+    return envelope;
+}
+
+static HSD_SList* loadEnvelopeDesc(HSD_EnvelopeDesc** edesc_p)
+{
+    HSD_SList* list = NULL;
+    HSD_SList** list_p = &list;
+
+    if (edesc_p == NULL) {
+        return NULL;
+    }
+
+    while (*edesc_p) {
+        HSD_Envelope* envelope = NULL;
+        HSD_Envelope** env_p = &envelope;
+        HSD_EnvelopeDesc* edesc = *edesc_p;
+
+        while (edesc->joint) {
+            *env_p = HSD_EnvelopeAlloc();
+            (*env_p)->weight = edesc->weight;
+            env_p = &((*env_p)->next);
+            edesc++;
+        }
+
+        (*list_p) = HSD_SListAlloc();
+        (*list_p)->data = envelope;
+        list_p = &((*list_p)->next);
+        edesc_p++;
+    }
+    return list;
+}
