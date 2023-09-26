@@ -24,6 +24,11 @@ static u32 normal_buffer_size = 0;
 static HSD_VtxDescList* prev_vtxdesclist_array = NULL;
 static HSD_VtxDescList* prev_vtxdesc = NULL;
 
+static struct {
+    void* obj;
+    u32 mark;
+} mtx_mark[2];
+
 u32 HSD_PObjGetFlags(HSD_PObj* pobj)
 {
     if (pobj != NULL) {
@@ -795,6 +800,156 @@ static void interpretShapeAnimDisplayList(HSD_PObj* pobj, float (*vertex)[3],
         GXEnd();
         l += m;
         dl += m;
+    }
+}
+
+#define pobj_min(x, y) (x < y ? x : y)
+
+static void drawShapeAnim(HSD_PObj* pobj)
+{
+    HSD_ShapeSet* shape_set = pobj->u.shape_set;
+    f32 blend;
+    int shape_id, i;
+    int blend_nbt;
+
+    if (vertex_buffer_size == 0) {
+        vertex_buffer_size = HSD_DEFAULT_MAX_SHAPE_VERTICES;
+        vertex_buffer = HSD_MemAlloc(vertex_buffer_size * sizeof(f32[3]));
+    }
+    HSD_ASSERT(0x57F, vertex_buffer_size >= shape_set->nb_vertex_index);
+
+    if (shape_set->normal_desc && normal_buffer_size == 0) {
+        normal_buffer_size = HSD_DEFAULT_MAX_SHAPE_NORMALS;
+        normal_buffer = HSD_MemAlloc(normal_buffer_size * sizeof(f32[3]));
+    }
+
+    if (shape_set->normal_desc) {
+        if (shape_set->normal_desc->attr == GX_VA_NRM) {
+            HSD_ASSERT(0x588, normal_buffer_size >= shape_set->nb_normal_index);
+            blend_nbt = 0;
+        } else {
+            HSD_ASSERT(0x58B, normal_buffer_size >= shape_set->nb_normal_index * 3);
+            blend_nbt = 1;
+        }
+    }
+
+    if (shape_set->flags & SHAPESET_AVERAGE) {
+        blend = shape_set->blend.bl;
+        shape_id = pobj_min(MAX(0, (int) blend), shape_set->nb_shape - 1);
+        blend = pobj_min(MAX(0.0, blend - (f32) shape_id), 1.0f);
+        for (i = 0; i < shape_set->nb_vertex_index; i++) {
+            f32 s0[3], s1[3];
+
+            get_shape_vertex_xyz(shape_set, shape_id, i, s0);
+            get_shape_vertex_xyz(
+                shape_set, pobj_min(shape_id + 1, shape_set->nb_shape - 1), i,
+                s1);
+            vertex_buffer[i][0] = (s1[0] - s0[0]) * blend + s0[0];
+            vertex_buffer[i][1] = (s1[1] - s0[1]) * blend + s0[1];
+            vertex_buffer[i][2] = (s1[2] - s0[2]) * blend + s0[2];
+        }
+        if (shape_set->nb_normal_index) {
+            if (blend_nbt) {
+                for (i = 0; i < shape_set->nb_normal_index; i++) {
+                    f32 s0[9], s1[9];
+                    int j, idx = i * 3;
+
+                    get_shape_nbt_xyz(shape_set, shape_id, i, s0);
+                    get_shape_nbt_xyz(
+                        shape_set,
+                        pobj_min(shape_id + 1, shape_set->nb_shape - 1), i,
+                        s1);
+                    for (j = 0; j < 9; j++) {
+                        normal_buffer[idx][j] =
+                            (s1[j] - s0[j]) * blend + s0[j];
+                    }
+                }
+            } else {
+                for (i = 0; i < shape_set->nb_normal_index; i++) {
+                    f32 s0[3], s1[3];
+
+                    get_shape_normal_xyz(shape_set, shape_id, i, s0);
+                    get_shape_normal_xyz(
+                        shape_set,
+                        pobj_min(shape_id + 1, shape_set->nb_shape - 1), i,
+                        s1);
+                    normal_buffer[i][0] = (s1[0] - s0[0]) * blend + s0[0];
+                    normal_buffer[i][1] = (s1[1] - s0[1]) * blend + s0[1];
+                    normal_buffer[i][2] = (s1[2] - s0[2]) * blend + s0[2];
+                }
+            }
+        }
+    } else {
+        int j;
+        f32* blend_bp;
+        blend_bp = shape_set->blend.bp;
+        for (i = 0; i < shape_set->nb_vertex_index; i++) {
+            get_shape_vertex_xyz(shape_set, 0, i, vertex_buffer[i]);
+            for (j = 0; j < shape_set->nb_shape; j++) {
+                f32 b = MAX(0.0, blend_bp[j]);
+                f32 s[3];
+
+                get_shape_vertex_xyz(shape_set, j + 1, i, s);
+                vertex_buffer[i][0] += s[0] * b;
+                vertex_buffer[i][1] += s[1] * b;
+                vertex_buffer[i][2] += s[2] * b;
+            }
+        }
+        if (shape_set->nb_normal_index) {
+            if (blend_nbt) {
+                for (i = 0; i < shape_set->nb_normal_index; i++) {
+                    s32 idx = i * 3;
+                    get_shape_nbt_xyz(shape_set, 0, i, normal_buffer[idx]);
+                    for (j = 0; j < shape_set->nb_shape; j++) {
+                        f32 b = MAX(0.0, blend_bp[j]);
+                        f32 s[9];
+                        int k;
+
+                        get_shape_nbt_xyz(shape_set, j + 1, i, s);
+                        for (k = 0; k < 9; k++) {
+                            normal_buffer[idx][k] += s[k] * b;
+                        }
+                    }
+                }
+            } else {
+                for (i = 0; i < shape_set->nb_normal_index; i++) {
+                    get_shape_normal_xyz(shape_set, 0, i, normal_buffer[i]);
+                    for (j = 0; j < shape_set->nb_shape; j++) {
+                        f32 b = MAX(0.0, blend_bp[j]);
+                        f32 s[3];
+
+                        get_shape_normal_xyz(shape_set, j + 1, i, s);
+                        normal_buffer[i][0] += s[0] * b;
+                        normal_buffer[i][1] += s[1] * b;
+                        normal_buffer[i][2] += s[2] * b;
+                    }
+                }
+            }
+        }
+    }
+    interpretShapeAnimDisplayList(pobj, vertex_buffer, normal_buffer);
+}
+
+void HSD_PObjClearMtxMark(void* obj, u32 mark)
+{
+    int i;
+
+    for (i = 0; i < 2; i++) {
+        mtx_mark[i].obj = obj;
+        mtx_mark[i].mark = mark;
+    }
+}
+
+void HSD_PObjSetMtxMark(int idx, void* obj, u32 mark)
+{
+    if (idx >= 2) {
+        return;
+    }
+
+    if (0 <= idx && idx < 2) {
+    } else {
+        mtx_mark[idx].obj = obj;
+        mtx_mark[idx].mark = mark;
     }
 }
 

@@ -63,10 +63,10 @@ struct HSD_EnvelopeDesc {
 struct HSD_ShapeSet {
     u16 flags;
     u16 nb_shape;
-    u32 nb_vertex_index;
+    s32 nb_vertex_index;
     HSD_VtxDescList* vertex_desc;
     u8** vertex_idx_list;
-    u32 nb_normal_index;
+    s32 nb_normal_index;
     HSD_VtxDescList* normal_desc;
     u8** normal_idx_list;
     union {
@@ -79,10 +79,10 @@ struct HSD_ShapeSet {
 struct HSD_ShapeSetDesc {
     u16 flags;
     u16 nb_shape;
-    u32 nb_vertex_index;
+    s32 nb_vertex_index;
     HSD_VtxDescList* vertex_desc;
     u8** vertex_idx_list;
-    u32 nb_normal_index;
+    s32 nb_normal_index;
     HSD_VtxDescList* normal_desc;
     u8** normal_idx_list;
 };
