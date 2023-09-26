@@ -2,68 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global setupShapeAnimVtxDesc
-setupShapeAnimVtxDesc:
-/* 8036C404 00368FE4  7C 08 02 A6 */	mflr r0
-/* 8036C408 00368FE8  90 01 00 04 */	stw r0, 4(r1)
-/* 8036C40C 00368FEC  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8036C410 00368FF0  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8036C414 00368FF4  7C 7F 1B 78 */	mr r31, r3
-/* 8036C418 00368FF8  4B FC FF B1 */	bl GXClearVtxDesc
-/* 8036C41C 00368FFC  83 FF 00 08 */	lwz r31, 8(r31)
-/* 8036C420 00369000  48 00 00 8C */	b .L_8036C4AC
-.L_8036C424:
-/* 8036C424 00369004  2C 00 00 0B */	cmpwi r0, 0xb
-/* 8036C428 00369008  40 80 00 18 */	bge .L_8036C440
-/* 8036C42C 0036900C  2C 00 00 09 */	cmpwi r0, 9
-/* 8036C430 00369010  40 80 00 1C */	bge .L_8036C44C
-/* 8036C434 00369014  2C 00 00 00 */	cmpwi r0, 0
-/* 8036C438 00369018  40 80 00 3C */	bge .L_8036C474
-/* 8036C43C 0036901C  48 00 00 48 */	b .L_8036C484
-.L_8036C440:
-/* 8036C440 00369020  2C 00 00 19 */	cmpwi r0, 0x19
-/* 8036C444 00369024  41 82 00 08 */	beq .L_8036C44C
-/* 8036C448 00369028  48 00 00 3C */	b .L_8036C484
-.L_8036C44C:
-/* 8036C44C 0036902C  80 7F 00 00 */	lwz r3, 0(r31)
-/* 8036C450 00369030  38 80 00 01 */	li r4, 1
-/* 8036C454 00369034  4B FC FA AD */	bl GXSetVtxDesc
-/* 8036C458 00369038  80 9F 00 00 */	lwz r4, 0(r31)
-/* 8036C45C 0036903C  38 60 00 00 */	li r3, 0
-/* 8036C460 00369040  80 BF 00 08 */	lwz r5, 8(r31)
-/* 8036C464 00369044  38 C0 00 04 */	li r6, 4
-/* 8036C468 00369048  38 E0 00 00 */	li r7, 0
-/* 8036C46C 0036904C  4B FC FF A9 */	bl GXSetVtxAttrFmt
-/* 8036C470 00369050  48 00 00 38 */	b .L_8036C4A8
-.L_8036C474:
-/* 8036C474 00369054  80 7F 00 00 */	lwz r3, 0(r31)
-/* 8036C478 00369058  80 9F 00 04 */	lwz r4, 4(r31)
-/* 8036C47C 0036905C  4B FC FA 85 */	bl GXSetVtxDesc
-/* 8036C480 00369060  48 00 00 28 */	b .L_8036C4A8
-.L_8036C484:
-/* 8036C484 00369064  80 7F 00 00 */	lwz r3, 0(r31)
-/* 8036C488 00369068  80 9F 00 04 */	lwz r4, 4(r31)
-/* 8036C48C 0036906C  4B FC FA 75 */	bl GXSetVtxDesc
-/* 8036C490 00369070  80 9F 00 00 */	lwz r4, 0(r31)
-/* 8036C494 00369074  38 60 00 00 */	li r3, 0
-/* 8036C498 00369078  80 BF 00 08 */	lwz r5, 8(r31)
-/* 8036C49C 0036907C  80 DF 00 0C */	lwz r6, 0xc(r31)
-/* 8036C4A0 00369080  88 FF 00 10 */	lbz r7, 0x10(r31)
-/* 8036C4A4 00369084  4B FC FF 71 */	bl GXSetVtxAttrFmt
-.L_8036C4A8:
-/* 8036C4A8 00369088  3B FF 00 18 */	addi r31, r31, 0x18
-.L_8036C4AC:
-/* 8036C4AC 0036908C  80 1F 00 00 */	lwz r0, 0(r31)
-/* 8036C4B0 00369090  2C 00 00 FF */	cmpwi r0, 0xff
-/* 8036C4B4 00369094  40 82 FF 70 */	bne .L_8036C424
-/* 8036C4B8 00369098  38 00 00 00 */	li r0, 0
-/* 8036C4BC 0036909C  90 0D BF D8 */	stw r0, prev_vtxdesc@sda21(r13)
-/* 8036C4C0 003690A0  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8036C4C4 003690A4  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8036C4C8 003690A8  38 21 00 18 */	addi r1, r1, 0x18
-/* 8036C4CC 003690AC  7C 08 03 A6 */	mtlr r0
-/* 8036C4D0 003690B0  4E 80 00 20 */	blr
-
 .global get_shape_vertex_xyz
 get_shape_vertex_xyz:
 /* 8036C4D4 003690B4  7C 08 02 A6 */	mflr r0
@@ -2838,18 +2776,6 @@ PObjInfoInit:
 .section .data
     .balign 8
 
-.global HSD_PObj_80406448
-HSD_PObj_80406448:
-    .asciz "hsdIsDescendantOf(info, &hsdPObj)"
-    .balign 4
-    .asciz "env->jobj"
-    .balign 4
-    .asciz "object.h"
-    .balign 4
-    .asciz "HSD_OBJ(o)->ref_count_individual != 0"
-    .balign 4
-    .asciz "pobj->u.jobj"
-    .balign 4
 .global HSD_PObj_804064BC
 HSD_PObj_804064BC:
     .asciz "shape_set->vertex_desc->comp_cnt == GX_POS_XYZ"
