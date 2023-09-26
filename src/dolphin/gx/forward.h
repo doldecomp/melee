@@ -20,4 +20,6 @@ typedef void (*GXDrawDoneCallback)(void);
 /// @todo Signature unknown.
 typedef void* (*GXTexRegionCallback)(void);
 
+static inline void GXEnd(void) {}
+
 #endif

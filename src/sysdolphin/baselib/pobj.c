@@ -1,5 +1,10 @@
+#include <dolphin/gx/forward.h>
+
 #include <string.h>
 #include <dolphin/gx/GXAttr.h>
+#include <dolphin/gx/GXGeometry.h>
+#include <dolphin/gx/GXVert.h>
+#include <dolphin/os/os.h>
 #include <baselib/class.h>
 #include <baselib/jobj.h>
 #include <baselib/memory.h>
@@ -665,6 +670,131 @@ static void get_shape_nbt_xyz(HSD_ShapeSet* shape_set, int shape_id,
         default:
             HSD_Panic(__FILE__, 1261, "unexpected normal type.");
         }
+    }
+}
+
+static void interpretShapeAnimDisplayList(HSD_PObj* pobj, float (*vertex)[3],
+                                          float (*normal)[3])
+{
+    u8* dl = pobj->display;
+    int length = pobj->n_display << 5;
+    int l;
+
+    for (l = 0; l + 3 < length;) {
+        int n = dl[1] << 8 | dl[2];
+        int m = 3;
+        int i, j;
+
+        if ((dl[0] & GX_OPCODE_MASK) == GX_NOP) {
+            break;
+        }
+        GXBegin((GXPrimitive) (dl[0] & GX_OPCODE_MASK),
+                (GXVtxFmt) (dl[0] & GX_VAT_MASK), n);
+        for (i = 0; i < n; i++) {
+            for (j = 0;; j++) {
+                HSD_VtxDescList* desc = &pobj->verts[j];
+                if (desc->attr == GX_VA_NULL) {
+                    break;
+                } else {
+                    u16 idx = dl[m++];
+                    switch (desc->attr) {
+                    case GX_VA_PNMTXIDX:
+                    case GX_VA_TEX0MTXIDX:
+                    case GX_VA_TEX1MTXIDX:
+                    case GX_VA_TEX2MTXIDX:
+                    case GX_VA_TEX3MTXIDX:
+                    case GX_VA_TEX4MTXIDX:
+                    case GX_VA_TEX5MTXIDX:
+                    case GX_VA_TEX6MTXIDX:
+                    case GX_VA_TEX7MTXIDX:
+                        GXMatrixIndex1u8(idx);
+                        break;
+
+                    case GX_VA_POS:
+                        if (desc->attr_type == GX_INDEX16) {
+                            idx = (idx << 8) | dl[m++];
+                        }
+                        GXPosition3f32(vertex[idx][0], vertex[idx][1],
+                                       vertex[idx][2]);
+                        break;
+
+                    case GX_VA_NRM:
+                        if (desc->attr_type == GX_INDEX16) {
+                            idx = (idx << 8) | dl[m++];
+                        }
+                        GXNormal3f32(normal[idx][0], normal[idx][1],
+                                     normal[idx][2]);
+                        break;
+
+                    case GX_VA_NBT:
+                        if (desc->attr_type == GX_INDEX16) {
+                            idx = (idx << 8) | dl[m++];
+                        }
+                        idx *= 3;
+                        GXNormal3f32(normal[idx + 0][0], normal[idx + 0][1],
+                                     normal[idx + 0][2]);
+                        GXNormal3f32(normal[idx + 1][0], normal[idx + 1][1],
+                                     normal[idx + 1][2]);
+                        GXNormal3f32(normal[idx + 2][0], normal[idx + 2][1],
+                                     normal[idx + 2][2]);
+                        break;
+
+                    case GX_VA_TEX0:
+                    case GX_VA_TEX1:
+                    case GX_VA_TEX2:
+                    case GX_VA_TEX3:
+                    case GX_VA_TEX4:
+                    case GX_VA_TEX5:
+                    case GX_VA_TEX6:
+                    case GX_VA_TEX7:
+                        if (desc->attr_type == GX_INDEX16) {
+                            idx = (idx << 8) | dl[m++];
+                            GXTexCoord1x16(idx);
+                        } else {
+                            GXTexCoord1x8(idx);
+                        }
+                        break;
+
+                    case GX_VA_CLR0:
+                    case GX_VA_CLR1:
+                        if (desc->attr_type == GX_INDEX16) {
+                            idx = (idx << 8) | dl[m++];
+                            GXColor1x16(idx);
+                        } else if (desc->attr_type == GX_INDEX8) {
+                            GXColor1x8(idx);
+                        } else {
+                            switch (desc->comp_type) {
+                            case GX_RGB565:
+                            case GX_RGBA4:
+                                GXColor1u16((idx << 8) | dl[m++]);
+                                break;
+                            case GX_RGB8:
+                            case GX_RGBA6:
+                                GXColor3u8(idx, dl[m], dl[m + 1]);
+                                m += 2;
+                                break;
+                            case GX_RGBA8:
+                            case GX_RGBX8:
+                                GXColor4u8(idx, dl[m], dl[m + 1], dl[m + 2]);
+                                m += 3;
+                                break;
+                            }
+                        }
+                        break;
+                    default:
+                        if (desc->attr_type == GX_INDEX16) {
+                            idx = (idx << 8) | dl[m++];
+                        }
+                        OSReport("attr(%d) is not supported by sysdolphin\n",
+                                 desc->attr);
+                        break;
+                    }
+                }
+            }
+        }
+        GXEnd();
+        l += m;
+        dl += m;
     }
 }
 
