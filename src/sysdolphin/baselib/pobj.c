@@ -90,3 +90,25 @@ void HSD_PObjReqAnimAllByFlags(HSD_PObj* pobj, float startframe, u32 flags)
         HSD_PObjReqAnimByFlags(pp, startframe, flags);
     }
 }
+
+static void ShapeSetSetAnimResult(HSD_ShapeSet* shape_set, u32 type,
+                                  HSD_ObjData* val)
+{
+    if (shape_set->flags & SHAPESET_ADDITIVE) {
+        shape_set->blend.bp[type - HSD_A_S_W0] = val->fv;
+    } else {
+        *(f32*) (&shape_set->blend.bp) = val->fv;
+    }
+}
+
+static void PObjUpdateFunc(void* obj, int type, HSD_ObjData* val)
+{
+    HSD_PObj* pobj = HSD_POBJ(obj);
+    if (pobj == NULL) {
+        return;
+    }
+
+    if (pobj_type(pobj) == POBJ_SHAPEANIM) {
+        ShapeSetSetAnimResult(pobj->u.shape_set, type, val);
+    }
+}

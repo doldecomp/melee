@@ -86,7 +86,7 @@ typedef void (*HSD_UserDataEvent)(any_t user_data);
 typedef bool (*HSD_GObjPredicate)(HSD_GObj* gobj);
 typedef void (*HSD_GObjInteraction)(HSD_GObj* gobj0, HSD_GObj* gobj1);
 
-#define HSD_A_S_W0 8
+#define HSD_A_S_W0 2
 #define HSD_DEFAULT_MAX_SHAPE_VERTICES 2000
 #define HSD_DEFAULT_MAX_SHAPE_NORMALS 2000
 
