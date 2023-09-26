@@ -504,6 +504,25 @@ static void setupShapeAnimVtxDesc(HSD_PObj* pobj)
     prev_vtxdesc = NULL;
 }
 
+static void PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
+{
+    switch (pobj_type(pobj)) {
+    case POBJ_SKIN:
+        if (!pobj->u.jobj) {
+            SetupRigidModelMtx(pobj, vmtx, pmtx, rendermode);
+        } else {
+            SetupSharedVtxModelMtx(pobj, vmtx, pmtx, rendermode);
+        }
+        break;
+    case POBJ_SHAPEANIM:
+        SetupRigidModelMtx(pobj, vmtx, pmtx, rendermode);
+        break;
+    case POBJ_ENVELOPE:
+        SetupEnvelopeModelMtx(pobj, vmtx, pmtx, rendermode);
+        break;
+    }
+}
+
 static void PObjDispSimplePrimitive(HSD_PObj* pobj, u32 rendermode)
 {
     setupArrayDesc(pobj->verts);
