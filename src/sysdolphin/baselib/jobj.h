@@ -418,6 +418,7 @@ static inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx mtx)
 
 void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint);
 void HSD_JObjUnrefThis(HSD_JObj* jobj);
+void HSD_JObjRefThis(HSD_JObj* jobj);
 void HSD_JObjMakeMatrix(HSD_JObj* jobj);
 void RecalcParentTrspBits(HSD_JObj* jobj);
 void HSD_JObjAddChild(HSD_JObj* jobj, HSD_JObj* child);

@@ -83,4 +83,14 @@ void hsdDumpClassStat(HSD_ClassInfo* info, bool recursive, s32 level);
 void ForgetClassLibraryChild(const char* library_name,
                              HSD_ClassInfo* class_info);
 
+static inline void hsdDelete(void* object)
+{
+    if (object == NULL) {
+        return;
+    }
+
+    HSD_CLASS_METHOD(object)->release((HSD_Class*) object);
+    HSD_CLASS_METHOD(object)->destroy((HSD_Class*) object);
+}
+
 #endif

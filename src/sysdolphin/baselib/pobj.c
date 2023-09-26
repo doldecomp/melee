@@ -1,4 +1,13 @@
+#include <string.h>
+#include <baselib/class.h>
+#include <baselib/memory.h>
 #include <baselib/pobj.h>
+
+static void PObjInfoInit(void);
+
+HSD_PObjInfo hsdPObj = { PObjInfoInit };
+
+static HSD_PObjInfo* default_class = NULL;
 
 u32 HSD_PObjGetFlags(HSD_PObj* pobj)
 {
@@ -216,11 +225,90 @@ static s32 PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
         break;
 
     default:
-        HSD_Panic(__FILE__, 0x244, "PObjLoad: Unexpected type");
+        HSD_Panic(__FILE__, 580, "PObjLoad: Unexpected type");
     }
 
     // _HSD_NeedCacheInvalidate(HSD_CACHE_VTX); // NOTE: This does not exist in
     // Melee's sysdolphin, but is a potential optimization
 
     return 0;
+}
+
+HSD_PObj* HSD_PObjLoadDesc(HSD_PObjDesc* pobjdesc)
+{
+    if (pobjdesc != NULL) {
+        HSD_PObj* pobj;
+        HSD_ClassInfo* info;
+
+        if (!pobjdesc->class_name ||
+            !(info = hsdSearchClassInfo(pobjdesc->class_name)))
+        {
+            pobj = HSD_PObjAlloc();
+        } else {
+            pobj = hsdNew(info);
+            HSD_ASSERT(605, pobj);
+        }
+        HSD_POBJ_METHOD(pobj)->load(pobj, pobjdesc);
+        return pobj;
+    } else {
+        return NULL;
+    }
+}
+
+void HSD_PObjRemove(HSD_PObj* pobj)
+{
+    hsdDelete(pobj);
+}
+
+void HSD_PObjRemoveAll(HSD_PObj* pobj)
+{
+    HSD_PObj* next;
+
+    while (pobj != NULL) {
+        next = pobj->next;
+        HSD_PObjRemove(pobj);
+        pobj = next;
+    }
+}
+
+HSD_PObjInfo* HSD_PObjGetDefaultClass(void)
+{
+    return default_class ? default_class : &hsdPObj;
+}
+
+void HSD_PObjSetDefaultClass(HSD_PObjInfo* info)
+{
+    if (info != NULL) {
+        HSD_ASSERT(673, hsdIsDescendantOf(&info->parent, &hsdPObj));
+    }
+    default_class = info;
+}
+
+HSD_PObj* HSD_PObjAlloc(void)
+{
+    HSD_PObj* pobj = hsdNew((HSD_ClassInfo*) (HSD_PObjGetDefaultClass()));
+    HSD_ASSERT(703, pobj);
+    return pobj;
+}
+
+// https://decomp.me/scratch/ezLH1
+static void resolveEnvelope(HSD_SList* list, HSD_EnvelopeDesc** edesc_p)
+{
+    if (list == NULL || edesc_p == NULL) {
+        return;
+    }
+
+    for (; list && *edesc_p; list = list->next, edesc_p++) {
+        HSD_Envelope* env = list->data;
+        HSD_EnvelopeDesc* edesc = *edesc_p;
+
+        while (env && edesc->joint) {
+            HSD_JObjUnrefThis(env->jobj);
+            env->jobj = HSD_IDGetData((u32) edesc->joint, NULL);
+            HSD_ASSERT(0x2E0, env->jobj);
+            HSD_JObjRefThis(env->jobj);
+            env = env->next;
+            edesc++;
+        }
+    }
 }
