@@ -2702,39 +2702,6 @@ PObjRelease:
 /* 8036EB0C 0036B6EC  7C 08 03 A6 */	mtlr r0
 /* 8036EB10 0036B6F0  4E 80 00 20 */	blr
 
-PObjAmnesia:
-/* 8036EB14 0036B6F4  7C 08 02 A6 */	mflr r0
-/* 8036EB18 0036B6F8  90 01 00 04 */	stw r0, 4(r1)
-/* 8036EB1C 0036B6FC  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8036EB20 0036B700  80 0D BF C0 */	lwz r0, default_class@sda21(r13)
-/* 8036EB24 0036B704  7C 03 00 40 */	cmplw r3, r0
-/* 8036EB28 0036B708  40 82 00 0C */	bne .L_8036EB34
-/* 8036EB2C 0036B70C  38 00 00 00 */	li r0, 0
-/* 8036EB30 0036B710  90 0D BF C0 */	stw r0, default_class@sda21(r13)
-.L_8036EB34:
-/* 8036EB34 0036B714  3C 80 80 40 */	lis r4, hsdPObj@ha
-/* 8036EB38 0036B718  38 04 63 98 */	addi r0, r4, hsdPObj@l
-/* 8036EB3C 0036B71C  7C 03 00 40 */	cmplw r3, r0
-/* 8036EB40 0036B720  40 82 00 20 */	bne .L_8036EB60
-/* 8036EB44 0036B724  38 00 00 00 */	li r0, 0
-/* 8036EB48 0036B728  90 0D BF C4 */	stw r0, vertex_buffer@sda21(r13)
-/* 8036EB4C 0036B72C  90 0D BF CC */	stw r0, vertex_buffer_size@sda21(r13)
-/* 8036EB50 0036B730  90 0D BF C8 */	stw r0, normal_buffer@sda21(r13)
-/* 8036EB54 0036B734  90 0D BF D0 */	stw r0, normal_buffer_size@sda21(r13)
-/* 8036EB58 0036B738  90 0D BF D4 */	stw r0, prev_vtxdesclist_array@sda21(r13)
-/* 8036EB5C 0036B73C  90 0D BF D8 */	stw r0, prev_vtxdesc@sda21(r13)
-.L_8036EB60:
-/* 8036EB60 0036B740  3C 80 80 40 */	lis r4, hsdPObj@ha
-/* 8036EB64 0036B744  38 84 63 98 */	addi r4, r4, hsdPObj@l
-/* 8036EB68 0036B748  80 84 00 14 */	lwz r4, 0x14(r4)
-/* 8036EB6C 0036B74C  81 84 00 38 */	lwz r12, 0x38(r4)
-/* 8036EB70 0036B750  7D 88 03 A6 */	mtlr r12
-/* 8036EB74 0036B754  4E 80 00 21 */	blrl
-/* 8036EB78 0036B758  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8036EB7C 0036B75C  38 21 00 08 */	addi r1, r1, 8
-/* 8036EB80 0036B760  7C 08 03 A6 */	mtlr r0
-/* 8036EB84 0036B764  4E 80 00 20 */	blr
-
 .section .data
     .balign 8
 

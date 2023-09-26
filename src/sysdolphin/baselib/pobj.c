@@ -461,6 +461,22 @@ static void setupShapeAnimVtxDesc(HSD_PObj* pobj)
     prev_vtxdesc = NULL;
 }
 
+static void PObjAmnesia(HSD_ClassInfo* info)
+{
+    if (info == HSD_CLASS_INFO(default_class)) {
+        default_class = NULL;
+    }
+    if (info == HSD_CLASS_INFO(&hsdPObj)) {
+        vertex_buffer = NULL;
+        vertex_buffer_size = 0;
+        normal_buffer = NULL;
+        normal_buffer_size = 0;
+        prev_vtxdesclist_array = NULL;
+        prev_vtxdesc = NULL;
+    }
+    HSD_PARENT_INFO(&hsdPObj)->amnesia(info);
+}
+
 static void PObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&hsdPObj), HSD_CLASS_INFO(&hsdClass),
