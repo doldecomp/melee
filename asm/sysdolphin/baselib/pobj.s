@@ -2,57 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global HSD_PObjGetMtxMark
-HSD_PObjGetMtxMark:
-/* 8036E080 0036AC60  7C 08 02 A6 */	mflr r0
-/* 8036E084 0036AC64  90 01 00 04 */	stw r0, 4(r1)
-/* 8036E088 0036AC68  94 21 FF D8 */	stwu r1, -0x28(r1)
-/* 8036E08C 0036AC6C  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 8036E090 0036AC70  3B E5 00 00 */	addi r31, r5, 0
-/* 8036E094 0036AC74  93 C1 00 20 */	stw r30, 0x20(r1)
-/* 8036E098 0036AC78  7C 9E 23 79 */	or. r30, r4, r4
-/* 8036E09C 0036AC7C  93 A1 00 1C */	stw r29, 0x1c(r1)
-/* 8036E0A0 0036AC80  3B A3 00 00 */	addi r29, r3, 0
-/* 8036E0A4 0036AC84  40 82 00 14 */	bne .L_8036E0B8
-/* 8036E0A8 0036AC88  38 6D A6 C8 */	addi r3, r13, HSD_PObj_804D5D68@sda21
-/* 8036E0AC 0036AC8C  38 80 06 77 */	li r4, 0x677
-/* 8036E0B0 0036AC90  38 AD A6 D8 */	addi r5, r13, HSD_PObj_804D5D78@sda21
-/* 8036E0B4 0036AC94  48 01 A1 6D */	bl __assert
-.L_8036E0B8:
-/* 8036E0B8 0036AC98  28 1F 00 00 */	cmplwi r31, 0
-/* 8036E0BC 0036AC9C  40 82 00 14 */	bne .L_8036E0D0
-/* 8036E0C0 0036ACA0  38 6D A6 C8 */	addi r3, r13, HSD_PObj_804D5D68@sda21
-/* 8036E0C4 0036ACA4  38 80 06 78 */	li r4, 0x678
-/* 8036E0C8 0036ACA8  38 AD A6 DC */	addi r5, r13, HSD_PObj_804D5D7C@sda21
-/* 8036E0CC 0036ACAC  48 01 A1 55 */	bl __assert
-.L_8036E0D0:
-/* 8036E0D0 0036ACB0  2C 1D 00 00 */	cmpwi r29, 0
-/* 8036E0D4 0036ACB4  41 80 00 0C */	blt .L_8036E0E0
-/* 8036E0D8 0036ACB8  2C 1D 00 02 */	cmpwi r29, 2
-/* 8036E0DC 0036ACBC  41 80 00 14 */	blt .L_8036E0F0
-.L_8036E0E0:
-/* 8036E0E0 0036ACC0  38 00 00 00 */	li r0, 0
-/* 8036E0E4 0036ACC4  90 1E 00 00 */	stw r0, 0(r30)
-/* 8036E0E8 0036ACC8  90 1F 00 00 */	stw r0, 0(r31)
-/* 8036E0EC 0036ACCC  48 00 00 24 */	b .L_8036E110
-.L_8036E0F0:
-/* 8036E0F0 0036ACD0  3C 60 80 4C */	lis r3, mtx_mark@ha
-/* 8036E0F4 0036ACD4  57 A4 18 38 */	slwi r4, r29, 3
-/* 8036E0F8 0036ACD8  38 03 09 08 */	addi r0, r3, mtx_mark@l
-/* 8036E0FC 0036ACDC  7C 60 22 14 */	add r3, r0, r4
-/* 8036E100 0036ACE0  80 03 00 00 */	lwz r0, 0(r3)
-/* 8036E104 0036ACE4  90 1E 00 00 */	stw r0, 0(r30)
-/* 8036E108 0036ACE8  80 03 00 04 */	lwz r0, 4(r3)
-/* 8036E10C 0036ACEC  90 1F 00 00 */	stw r0, 0(r31)
-.L_8036E110:
-/* 8036E110 0036ACF0  80 01 00 2C */	lwz r0, 0x2c(r1)
-/* 8036E114 0036ACF4  83 E1 00 24 */	lwz r31, 0x24(r1)
-/* 8036E118 0036ACF8  83 C1 00 20 */	lwz r30, 0x20(r1)
-/* 8036E11C 0036ACFC  83 A1 00 1C */	lwz r29, 0x1c(r1)
-/* 8036E120 0036AD00  38 21 00 28 */	addi r1, r1, 0x28
-/* 8036E124 0036AD04  7C 08 03 A6 */	mtlr r0
-/* 8036E128 0036AD08  4E 80 00 20 */	blr
-
 .global SetupRigidModelMtx
 SetupRigidModelMtx:
 /* 8036E12C 0036AD0C  7C 08 02 A6 */	mflr r0
@@ -560,11 +509,6 @@ SetupEnvelopeModelMtx:
 .section .data
     .balign 8
 
-    .asciz "vertex_buffer_size >= shape_set->nb_vertex_index"
-    .balign 4
-    .asciz "normal_buffer_size >= shape_set->nb_normal_index"
-    .balign 4
-    .asciz "normal_buffer_size >= shape_set->nb_normal_index * 3"
     .balign 4
     .asciz "envelope->jobj"
     .balign 4
@@ -576,13 +520,6 @@ HSD_PObj_804066D0:
     .balign 4
 
 
-.section .bss, "wa"
-    .balign 8
-.global mtx_mark
-mtx_mark:
-    .skip 0x10
-
-
 .section .sdata
     .balign 8
 .global HSD_PObj_804D5D68
@@ -590,14 +527,6 @@ HSD_PObj_804D5D68:
     .asciz "pobj.c"
     .balign 4
 
-.global HSD_PObj_804D5D78
-HSD_PObj_804D5D78:
-    .asciz "obj"
-    .balign 4
-.global HSD_PObj_804D5D7C
-HSD_PObj_804D5D7C:
-    .asciz "mark"
-    .balign 4
 .global HSD_PObj_804D5D84
 HSD_PObj_804D5D84:
     .asciz "jobj.h"

@@ -953,6 +953,20 @@ void HSD_PObjSetMtxMark(int idx, void* obj, u32 mark)
     }
 }
 
+void HSD_PObjGetMtxMark(int idx, void** obj, u32* mark)
+{
+    HSD_ASSERT(1655, obj);
+    HSD_ASSERT(1656, mark);
+
+    if (idx < 0 || 2 <= idx) {
+        *obj = NULL;
+        *mark = 0;
+    } else {
+        *obj = mtx_mark[idx].obj;
+        *mark = mtx_mark[idx].mark;
+    }
+}
+
 static void PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
 {
     switch (pobj_type(pobj)) {
