@@ -40,5 +40,5 @@ void HSD_PerfSetTotalTime(void)
 void HSD_PerfCountEnvelopeBlending(s32 n)
 {
     HSD_ASSERT(0xA4, n < 32);
-    HSD_PerfCurrentStat.count[n]++;
+    HSD_PerfCurrentStat.env_blend[n]++;
 }

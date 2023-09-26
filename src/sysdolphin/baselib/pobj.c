@@ -8,6 +8,8 @@
 #include <baselib/class.h>
 #include <baselib/jobj.h>
 #include <baselib/memory.h>
+#include <baselib/mtx.h>
+#include <baselib/perf.h>
 #include <baselib/pobj.h>
 
 static void PObjInfoInit(void);
@@ -964,6 +966,65 @@ void HSD_PObjGetMtxMark(int idx, void** obj, u32* mark)
     } else {
         *obj = mtx_mark[idx].obj;
         *mark = mtx_mark[idx].mark;
+    }
+}
+
+static PObjSetupFlag GetSetupFlags(HSD_JObj* jobj, u32 rendermode)
+{
+    PObjSetupFlag flags = SETUP_NONE;
+    if (!(rendermode & 0x4000000)) {
+        if (jobj->flags & JOBJ_LIGHTING) {
+            flags |= SETUP_NORMAL;
+        }
+
+        if (_HSD_TObjGetCurrentByType(NULL, TEX_COORD_REFLECTION)) {
+            flags |= SETUP_NORMAL | SETUP_REFLECTION;
+        }
+
+        if (_HSD_TObjGetCurrentByType(NULL, TEX_COORD_HILIGHT)) {
+            flags |= SETUP_NORMAL | SETUP_HIGHLIGHT;
+        }
+    }
+
+    return flags;
+}
+
+static void SetupRigidModelMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
+                               u32 rendermode)
+{
+    HSD_JObj* jobj;
+    Mtx n;
+    PObjSetupFlag flags;
+
+    jobj = HSD_JObjGetCurrent();
+
+    {
+        void* obj;
+        u32 mark;
+
+        HSD_PObjGetMtxMark(0, &obj, &mark);
+        if (obj == jobj && mark == HSD_MTX_RIGID) {
+            return;
+        }
+        HSD_PObjSetMtxMark(0, jobj, HSD_MTX_RIGID);
+    }
+
+    GXSetCurrentMtx(GX_PNMTX0);
+    GXLoadPosMtxImm(pmtx, GX_PNMTX0);
+    HSD_PerfCountMtxLoad();
+
+    flags = GetSetupFlags(jobj, rendermode);
+
+    if (flags & SETUP_NORMAL) {
+        HSD_MtxInverseTranspose(pmtx, n);
+        if (jobj->flags & JOBJ_LIGHTING) {
+            GXLoadNrmMtxImm(n, GX_PNMTX0);
+            HSD_PerfCountMtxLoad();
+        }
+        if (flags & SETUP_NORMAL_PROJECTION) {
+            GXLoadTexMtxImm(n, GX_TEXMTX0, GX_MTX3x4);
+            HSD_PerfCountMtxLoad();
+        }
     }
 }
 
