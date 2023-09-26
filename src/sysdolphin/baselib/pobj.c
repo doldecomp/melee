@@ -97,7 +97,7 @@ static void ShapeSetSetAnimResult(HSD_ShapeSet* shape_set, u32 type,
     if (shape_set->flags & SHAPESET_ADDITIVE) {
         shape_set->blend.bp[type - HSD_A_S_W0] = val->fv;
     } else {
-        *(f32*) (&shape_set->blend.bp) = val->fv;
+        shape_set->blend.bl = val->fv;
     }
 }
 
@@ -134,7 +134,7 @@ void HSD_PObjAnimAll(HSD_PObj* pobj)
 static HSD_Envelope* HSD_EnvelopeAlloc(void)
 {
     HSD_Envelope* envelope = hsdAllocMemPiece(sizeof(HSD_Envelope));
-    HSD_ASSERT(0x1B9, envelope);
+    HSD_ASSERT(441, envelope);
     memset(envelope, 0, sizeof(HSD_Envelope));
     return envelope;
 }
@@ -166,4 +166,32 @@ static HSD_SList* loadEnvelopeDesc(HSD_EnvelopeDesc** edesc_p)
         edesc_p++;
     }
     return list;
+}
+
+static HSD_ShapeSet* loadShapeSetDesc(HSD_ShapeSetDesc* sdesc)
+{
+    int i;
+
+    HSD_ShapeSet* shape_set = hsdAllocMemPiece(sizeof(HSD_ShapeSet));
+    HSD_ASSERT(0x1F2, shape_set);
+    memset(shape_set, 0, sizeof(HSD_ShapeSet));
+    shape_set->flags = sdesc->flags;
+    shape_set->nb_shape = sdesc->nb_shape;
+    shape_set->nb_vertex_index = sdesc->nb_vertex_index;
+    shape_set->vertex_desc = sdesc->vertex_desc;
+    shape_set->vertex_idx_list = sdesc->vertex_idx_list;
+    shape_set->nb_normal_index = sdesc->nb_normal_index;
+    shape_set->normal_desc = sdesc->normal_desc;
+    shape_set->normal_idx_list = sdesc->normal_idx_list;
+    if (shape_set->flags & SHAPESET_ADDITIVE) {
+        shape_set->blend.bp =
+            (f32*) HSD_MemAlloc(shape_set->nb_shape * sizeof(f32));
+        for (i = 0; i < shape_set->nb_shape; i++) {
+            shape_set->blend.bp[i] = 0.0f;
+        }
+    } else {
+        shape_set->blend.bl = 0.0f;
+    }
+    shape_set->unk = 0;
+    return shape_set;
 }

@@ -75,20 +75,21 @@ struct HSD_ShapeSet {
     u32 nb_normal_index;
     HSD_VtxDescList* normal_desc;
     u8** normal_idx_list;
-    struct HSD_ShapeSetBlend {
+    union {
         f32* bp;
         f32 bl;
     } blend;
+    u32 unk;
 };
 
 struct HSD_ShapeSetDesc {
     u16 flags;
     u16 nb_shape;
     u32 nb_vertex_index;
-    struct _HSD_VtxDescList* vertex_desc;
+    HSD_VtxDescList* vertex_desc;
     u8** vertex_idx_list;
     u32 nb_normal_index;
-    struct _HSD_VtxDescList* normal_desc;
+    HSD_VtxDescList* normal_desc;
     u8** normal_idx_list;
 };
 
