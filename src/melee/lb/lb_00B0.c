@@ -230,9 +230,9 @@ void lb_8000BA44(HSD_DObj* dobj, f32 val)
         HSD_PObj* cur;
         for (cur = dobj->pobj; cur != NULL; cur = cur->next) {
             if (pobj_type(cur) == POBJ_SHAPEANIM &&
-                cur->u.x14_unk->aobj != NULL)
+                cur->u.shape_set->aobj != NULL)
             {
-                HSD_AObjSetRate(cur->u.x14_unk->aobj, val);
+                HSD_AObjSetRate(cur->u.shape_set->aobj, val);
             }
         }
     }
@@ -262,9 +262,9 @@ void lb_8000BB24(HSD_DObj* dobj, f32 val)
         HSD_PObj* cur;
         for (cur = dobj->pobj; cur != NULL; cur = cur->next) {
             if (pobj_type(cur) == POBJ_SHAPEANIM &&
-                cur->u.x14_unk->aobj != NULL)
+                cur->u.shape_set->aobj != NULL)
             {
-                HSD_AObjReqAnim(cur->u.x14_unk->aobj, val);
+                HSD_AObjReqAnim(cur->u.shape_set->aobj, val);
             }
         }
     }

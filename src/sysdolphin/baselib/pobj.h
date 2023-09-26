@@ -10,11 +10,6 @@
 
 #include <dolphin/gx/GXEnum.h>
 
-struct unk_struct_pobj {
-    u32 data[8];
-    HSD_AObj* aobj; // 0x20
-};
-
 struct HSD_PObj {
     HSD_Class parent;
     HSD_PObj* next;
@@ -26,7 +21,6 @@ struct HSD_PObj {
         HSD_JObj* jobj;
         HSD_ShapeSet* shape_set;
         HSD_SList* envelope_list;
-        struct unk_struct_pobj* x14_unk;
     } u;
     HSD_AObj* aobj;
 };
@@ -79,7 +73,7 @@ struct HSD_ShapeSet {
         f32* bp;
         f32 bl;
     } blend;
-    u32 unk;
+    HSD_AObj* aobj;
 };
 
 struct HSD_ShapeSetDesc {

@@ -33,9 +33,9 @@ void HSD_PObjRemoveAnimByFlags(HSD_PObj* pobj, u32 flags)
     }
 
     if (flags & POBJ_ANIM && pobj_type(pobj) == POBJ_SHAPEANIM) {
-        struct unk_struct_pobj* unk_struct = pobj->u.x14_unk;
-        HSD_AObjRemove(unk_struct->aobj);
-        unk_struct->aobj = NULL;
+        HSD_ShapeSet* shape_set = pobj->u.shape_set;
+        HSD_AObjRemove(shape_set->aobj);
+        shape_set->aobj = NULL;
     }
 }
 
@@ -54,7 +54,7 @@ void HSD_PObjRemoveAnimAllByFlags(HSD_PObj* pobj, u32 flags)
 
 void HSD_PObjAddAnim(HSD_PObj* pobj, HSD_ShapeAnim* shapeanim)
 {
-    struct unk_struct_pobj* st;
+    HSD_ShapeSet* st;
     if (pobj == NULL) {
         return;
     }
@@ -63,7 +63,7 @@ void HSD_PObjAddAnim(HSD_PObj* pobj, HSD_ShapeAnim* shapeanim)
         return;
     }
 
-    st = pobj->u.x14_unk;
+    st = pobj->u.shape_set;
     if (st->aobj) {
         HSD_AObjRemove(st->aobj);
     }
@@ -92,7 +92,7 @@ void HSD_PObjReqAnimByFlags(HSD_PObj* pobj, f32 startframe, u32 flags)
     }
 
     if (flags & POBJ_ANIM && pobj_type(pobj) == POBJ_SHAPEANIM) {
-        HSD_AObjReqAnim(pobj->u.x14_unk->aobj, startframe);
+        HSD_AObjReqAnim(pobj->u.shape_set->aobj, startframe);
     }
 }
 
@@ -134,7 +134,7 @@ static void PObjUpdateFunc(void* obj, int type, HSD_ObjData* val)
 void HSD_PObjAnim(HSD_PObj* pobj)
 {
     if (pobj != NULL && pobj_type(pobj) == POBJ_SHAPEANIM) {
-        HSD_AObjInterpretAnim(pobj->u.x14_unk->aobj, pobj, PObjUpdateFunc);
+        HSD_AObjInterpretAnim(pobj->u.shape_set->aobj, pobj, PObjUpdateFunc);
     }
 }
 

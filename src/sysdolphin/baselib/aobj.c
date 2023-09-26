@@ -383,10 +383,10 @@ static void PObjForeachAnim(HSD_PObj* pobj, HSD_TypeMask mask, Event func,
                             AObj_Arg_Type arg_type, callbackArg* arg)
 {
     if (mask & POBJ_MASK && pobj != NULL &&
-        pobj_type(pobj) == POBJ_SHAPEANIM && pobj->u.x14_unk != NULL &&
-        pobj->u.x14_unk->aobj != NULL)
+        pobj_type(pobj) == POBJ_SHAPEANIM && pobj->u.shape_set != NULL &&
+        pobj->u.shape_set->aobj != NULL)
     {
-        callbackForeachFunc(pobj->u.x14_unk->aobj, pobj, POBJ_TYPE, func,
+        callbackForeachFunc(pobj->u.shape_set->aobj, pobj, POBJ_TYPE, func,
                             arg_type, arg);
     }
 }
