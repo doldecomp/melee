@@ -195,3 +195,32 @@ static HSD_ShapeSet* loadShapeSetDesc(HSD_ShapeSetDesc* sdesc)
     shape_set->unk = 0;
     return shape_set;
 }
+
+static s32 PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
+{
+    pobj->next = HSD_PObjLoadDesc(desc->next);
+    pobj->verts = desc->verts;
+    pobj->flags = desc->flags;
+    pobj->n_display = desc->n_display;
+    pobj->display = desc->display;
+    switch (pobj_type(pobj)) {
+    case POBJ_SHAPEANIM:
+        pobj->u.shape_set = loadShapeSetDesc(desc->u.shape_set);
+        break;
+
+    case POBJ_ENVELOPE:
+        pobj->u.envelope_list = loadEnvelopeDesc(desc->u.envelope_p);
+        break;
+
+    case POBJ_SKIN:
+        break;
+
+    default:
+        HSD_Panic(__FILE__, 0x244, "PObjLoad: Unexpected type");
+    }
+
+    // _HSD_NeedCacheInvalidate(HSD_CACHE_VTX); // NOTE: This does not exist in
+    // Melee's sysdolphin, but is a potential optimization
+
+    return 0;
+}
