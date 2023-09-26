@@ -157,6 +157,27 @@ static HSD_Envelope* HSD_EnvelopeAlloc(void)
     return envelope;
 }
 
+static void HSD_EnvelopeFree(HSD_Envelope* env)
+{
+    if (env != NULL) {
+        hsdFreeMemPiece(env, sizeof(HSD_Envelope));
+    }
+}
+
+static void HSD_EnvelopeListFree(HSD_SList* list)
+{
+    while (list) {
+        HSD_Envelope* env = list->data;
+        while (env) {
+            HSD_Envelope* next = env->next;
+            HSD_JObjUnrefThis(env->jobj);
+            HSD_EnvelopeFree(env);
+            env = next;
+        }
+        list = HSD_SListRemove(list);
+    }
+}
+
 static HSD_SList* loadEnvelopeDesc(HSD_EnvelopeDesc** edesc_p)
 {
     HSD_SList* list = NULL;
@@ -184,6 +205,28 @@ static HSD_SList* loadEnvelopeDesc(HSD_EnvelopeDesc** edesc_p)
         edesc_p++;
     }
     return list;
+}
+
+static void HSD_ShapeSetFree(HSD_ShapeSet* shape_set)
+{
+    if (!shape_set) {
+        return;
+    }
+    hsdFreeMemPiece(shape_set, sizeof(HSD_ShapeSet));
+}
+
+static void HSD_ShapeSetRemove(HSD_ShapeSet* shape_set)
+{
+    if (shape_set == NULL) {
+        return;
+    }
+
+    if (shape_set->flags & SHAPESET_ADDITIVE) {
+        HSD_Free(shape_set->blend.bp);
+    }
+
+    HSD_AObjRemove(shape_set->aobj);
+    HSD_ShapeSetFree(shape_set);
 }
 
 static HSD_ShapeSet* loadShapeSetDesc(HSD_ShapeSetDesc* sdesc)
@@ -459,6 +502,26 @@ static void setupShapeAnimVtxDesc(HSD_PObj* pobj)
         }
     }
     prev_vtxdesc = NULL;
+}
+
+static void PObjRelease(HSD_Class* o)
+{
+    HSD_PObj* pobj = HSD_POBJ(o);
+
+    switch (pobj_type(pobj)) {
+    case POBJ_SHAPEANIM:
+        HSD_ShapeSetRemove(pobj->u.shape_set);
+        break;
+    case POBJ_ENVELOPE:
+        HSD_EnvelopeListFree(pobj->u.envelope_list);
+        break;
+    case POBJ_SKIN:
+        HSD_JObjUnrefThis(pobj->u.jobj);
+        break;
+    default:
+        break;
+    }
+    HSD_PARENT_INFO(&hsdPObj)->release(o);
 }
 
 static void PObjAmnesia(HSD_ClassInfo* info)
