@@ -120,6 +120,7 @@ void HSD_PObjSetDefaultClass(HSD_PObjInfo* info);
 
 u32 HSD_PObjGetFlags(HSD_PObj* pobj);
 void HSD_PObjRemoveAnimAllByFlags(HSD_PObj* pobj, u32 flags);
+void HSD_PObjReqAnimByFlags(HSD_PObj* pobj, f32 startframe, u32 flags);
 void HSD_PObjReqAnimAllByFlags(HSD_PObj* pobj, f32 startframe, u32 flags);
 void HSD_ClearVtxDesc(void);
 HSD_PObj* HSD_PObjLoadDesc(HSD_PObjDesc*);
@@ -127,6 +128,7 @@ HSD_PObj* HSD_PObjLoadDesc(HSD_PObjDesc*);
 void HSD_PObjClearMtxMark(void* obj, u32 mark);
 void HSD_PObjSetMtxMark(int idx, void* obj, u32 mark);
 void HSD_PObjGetMtxMark(int idx, void** obj, u32* mark);
+void HSD_PObjAddAnim(HSD_PObj*, HSD_ShapeAnim*);
 void HSD_PObjAddAnimAll(HSD_PObj*, HSD_ShapeAnim*);
 void HSD_PObjAnimAll(HSD_PObj*);
 void HSD_PObjResolveRefsAll(HSD_PObj*, HSD_PObjDesc*);

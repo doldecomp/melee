@@ -67,7 +67,7 @@ void HSD_PObjAddAnimAll(HSD_PObj* pobj, HSD_ShapeAnim* shapeanim)
     }
 }
 
-void HSD_PObjReqAnimByFlags(HSD_PObj* pobj, float startframe, u32 flags)
+void HSD_PObjReqAnimByFlags(HSD_PObj* pobj, f32 startframe, u32 flags)
 {
     if (pobj == NULL) {
         return;
@@ -78,7 +78,7 @@ void HSD_PObjReqAnimByFlags(HSD_PObj* pobj, float startframe, u32 flags)
     }
 }
 
-void HSD_PObjReqAnimAllByFlags(HSD_PObj* pobj, float startframe, u32 flags)
+void HSD_PObjReqAnimAllByFlags(HSD_PObj* pobj, f32 startframe, u32 flags)
 {
     HSD_PObj* pp;
 
