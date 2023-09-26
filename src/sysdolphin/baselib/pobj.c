@@ -562,6 +562,112 @@ static void get_shape_vertex_xyz(HSD_ShapeSet* shape_set, int shape_id,
     }
 }
 
+static void get_shape_normal_xyz(HSD_ShapeSet* shape_set, int shape_id,
+                                 int arrayidx, float dst[3])
+{
+    u8* index_array = shape_set->normal_idx_list[shape_id];
+    int idx;
+    void* src_base;
+
+    if (shape_set->normal_desc->attr_type == GX_INDEX16) {
+        idx = index_array[arrayidx * 2];
+        idx = (idx << 8) + index_array[arrayidx * 2 + 1];
+    } else {
+        idx = index_array[arrayidx];
+    }
+
+    HSD_ASSERT(1165, shape_set->normal_desc->comp_cnt == GX_NRM_XYZ);
+    src_base = ((u8*) shape_set->normal_desc->vertex) +
+               idx * shape_set->normal_desc->stride;
+
+    if (shape_set->normal_desc->comp_type == GX_F32) {
+        memcpy(dst, src_base, sizeof(f32[3]));
+    } else {
+        int decimal_point = 1 << shape_set->normal_desc->frac;
+        switch (shape_set->normal_desc->comp_type) {
+        case GX_U8: {
+            u8* src = src_base;
+            dst[0] = (float) src[0] / decimal_point;
+            dst[1] = (float) src[1] / decimal_point;
+            dst[2] = (float) src[2] / decimal_point;
+        } break;
+        case GX_S8: {
+            s8* src = src_base;
+            dst[0] = (float) src[0] / decimal_point;
+            dst[1] = (float) src[1] / decimal_point;
+            dst[2] = (float) src[2] / decimal_point;
+        } break;
+        case GX_U16: {
+            u16* src = src_base;
+            dst[0] = (float) src[0] / decimal_point;
+            dst[1] = (float) src[1] / decimal_point;
+            dst[2] = (float) src[2] / decimal_point;
+        } break;
+        case GX_S16: {
+            s16* src = src_base;
+            dst[0] = (float) src[0] / decimal_point;
+            dst[1] = (float) src[1] / decimal_point;
+            dst[2] = (float) src[2] / decimal_point;
+        } break;
+        default:
+            HSD_Panic(__FILE__, 1208, "unexpected normal type.");
+        }
+    }
+}
+
+// https://decomp.me/scratch/aleJ2
+static void get_shape_nbt_xyz(HSD_ShapeSet* shape_set, int shape_id,
+                              int arrayidx, float* dst)
+{
+    u8* index_array = shape_set->normal_idx_list[shape_id];
+    int i, idx;
+    void* src_base;
+
+    HSD_ASSERT(1221, shape_set->normal_desc->attr == GX_VA_NBT);
+
+    if (shape_set->normal_desc->attr_type == GX_INDEX16) {
+        idx = index_array[arrayidx * 2];
+        idx = (idx << 8) + index_array[arrayidx * 2 + 1];
+    } else {
+        idx = index_array[arrayidx];
+    }
+
+    HSD_ASSERT(1230, shape_set->normal_desc->comp_cnt == GX_NRM_XYZ);
+
+    src_base = ((u8*) shape_set->normal_desc->vertex) +
+               idx * shape_set->normal_desc->stride;
+
+    if (shape_set->normal_desc->comp_type == GX_F32) {
+        memcpy(dst, src_base, sizeof(f32[9]));
+    } else {
+        int decimal_point = 1 << shape_set->normal_desc->frac;
+        switch (shape_set->normal_desc->comp_type) {
+        case GX_U8:
+            for (i = 0; i < 9; i++) {
+                dst[i] = (float) ((u8*) src_base)[i] / decimal_point;
+            }
+            break;
+        case GX_S8:
+            for (i = 0; i < 9; i++) {
+                dst[i] = (float) ((s8*) src_base)[i] / decimal_point;
+            }
+            break;
+        case GX_U16:
+            for (i = 0; i < 9; i++) {
+                dst[i] = (float) ((u16*) src_base)[i] / decimal_point;
+            }
+            break;
+        case GX_S16:
+            for (i = 0; i < 9; i++) {
+                dst[i] = (float) ((s16*) src_base)[i] / decimal_point;
+            }
+            break;
+        default:
+            HSD_Panic(__FILE__, 1261, "unexpected normal type.");
+        }
+    }
+}
+
 static void PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
 {
     switch (pobj_type(pobj)) {
