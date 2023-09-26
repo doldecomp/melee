@@ -378,3 +378,31 @@ static void setupArrayDesc(HSD_VtxDescList* desc_list)
         prev_vtxdesclist_array = desc_list;
     }
 }
+
+static void setupVtxDesc(HSD_PObj* pobj)
+{
+    HSD_VtxDescList* desc;
+
+    if (prev_vtxdesc != pobj->verts) {
+        GXClearVtxDesc();
+        for (desc = pobj->verts; desc->attr != GX_VA_NULL; desc++) {
+            GXSetVtxDesc(desc->attr, desc->attr_type);
+            switch (desc->attr) {
+            case GX_VA_PNMTXIDX:
+            case GX_VA_TEX0MTXIDX:
+            case GX_VA_TEX1MTXIDX:
+            case GX_VA_TEX2MTXIDX:
+            case GX_VA_TEX3MTXIDX:
+            case GX_VA_TEX4MTXIDX:
+            case GX_VA_TEX5MTXIDX:
+            case GX_VA_TEX6MTXIDX:
+            case GX_VA_TEX7MTXIDX:
+                break;
+            default:
+                GXSetVtxAttrFmt(GX_VTXFMT0, desc->attr, desc->comp_cnt,
+                                desc->comp_type, desc->frac);
+            }
+        }
+        prev_vtxdesc = pobj->verts;
+    }
+}
