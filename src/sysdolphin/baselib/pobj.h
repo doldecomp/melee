@@ -42,8 +42,8 @@ struct HSD_PObjDesc {
 struct HSD_VtxDescList {
     GXAttr attr;
     GXAttrType attr_type;
-    u32 comp_cnt;
-    u32 comp_type;
+    GXCompCnt comp_cnt;
+    GXCompType comp_type;
     u8 frac;
     u16 stride;
     void* vertex;

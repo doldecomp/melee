@@ -1,4 +1,5 @@
 #include <string.h>
+#include <dolphin/gx/GXAttr.h>
 #include <baselib/class.h>
 #include <baselib/jobj.h>
 #include <baselib/memory.h>
@@ -253,7 +254,7 @@ static HSD_ShapeSet* loadShapeSetDesc(HSD_ShapeSetDesc* sdesc)
     } else {
         shape_set->blend.bl = 0.0f;
     }
-    shape_set->unk = 0;
+    shape_set->aobj = NULL;
     return shape_set;
 }
 
@@ -502,6 +503,63 @@ static void setupShapeAnimVtxDesc(HSD_PObj* pobj)
         }
     }
     prev_vtxdesc = NULL;
+}
+
+static void get_shape_vertex_xyz(HSD_ShapeSet* shape_set, int shape_id,
+                                 int arrayidx, f32 dst[3])
+{
+    u8* index_array = shape_set->vertex_idx_list[shape_id];
+    int idx;
+    void* src_base;
+
+    if (shape_set->vertex_desc->attr_type == GX_INDEX16) {
+        idx = index_array[arrayidx * 2];
+        idx = (idx << 8) + index_array[arrayidx * 2 + 1];
+    } else {
+        idx = index_array[arrayidx];
+    }
+
+    HSD_ASSERT(1102, shape_set->vertex_desc->comp_cnt == GX_POS_XYZ);
+    src_base = ((u8*) shape_set->vertex_desc->vertex) +
+               idx * shape_set->vertex_desc->stride;
+
+    if (shape_set->vertex_desc->comp_type == GX_F32) {
+        memcpy(dst, src_base, sizeof(f32[3]));
+    } else {
+        int decimal_point = 1 << shape_set->vertex_desc->frac;
+        switch (shape_set->vertex_desc->comp_type) {
+        case GX_U8: {
+            u8* src = src_base;
+            dst[0] = (f32) src[0] / decimal_point;
+            dst[1] = (f32) src[1] / decimal_point;
+            dst[2] = (f32) src[2] / decimal_point;
+        } break;
+
+        case GX_S8: {
+            s8* src = src_base;
+            dst[0] = (f32) src[0] / decimal_point;
+            dst[1] = (f32) src[1] / decimal_point;
+            dst[2] = (f32) src[2] / decimal_point;
+        } break;
+
+        case GX_U16: {
+            u16* src = src_base;
+            dst[0] = (f32) src[0] / decimal_point;
+            dst[1] = (f32) src[1] / decimal_point;
+            dst[2] = (f32) src[2] / decimal_point;
+        } break;
+
+        case GX_S16: {
+            s16* src = src_base;
+            dst[0] = (f32) src[0] / decimal_point;
+            dst[1] = (f32) src[1] / decimal_point;
+            dst[2] = (f32) src[2] / decimal_point;
+        } break;
+
+        default:
+            HSD_Panic(__FILE__, 1145, "unexpected vertex type.\n");
+        }
+    }
 }
 
 static void PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
