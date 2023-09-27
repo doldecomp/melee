@@ -269,9 +269,6 @@ void HSD_LObjSetup(HSD_LObj* lobj, GXColor color, f32 shininess)
     }
 }
 
-extern char HSD_LObj_804D5D18[8];
-extern char HSD_LObj_804D5D20[8];
-
 void HSD_LObjSetupSpecularInit(Mtx pmtx)
 {
     int i;
@@ -306,7 +303,7 @@ void HSD_LObjSetupSpecularInit(Mtx pmtx)
             break;
 
         default:
-            __assert(HSD_LObj_804D5D18, 0x269, HSD_LObj_804D5D20);
+            __assert(__FILE__, 617, "0");
         }
         PSVECNormalize(&half, &half);
         GXInitLightDir(&lobj->spec_lightobj, half.x, half.y, half.z);
@@ -344,7 +341,7 @@ void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id)
             PSVECNormalize(&lobj->lvec, &lobj->lvec);
             break;
         default:
-            __assert(HSD_LObj_804D5D18, 0x2A8, HSD_LObj_804D5D20);
+            __assert(__FILE__, 680, "0");
         }
         lobj->flags |= 0x100;
         lightmask_specular |= spec_id;
@@ -756,15 +753,6 @@ void HSD_LObjSetupInit(HSD_CObj* arg0)
 
 #endif
 
-extern char HSD_LObj_804D5D2C[8];
-inline u8 HSD_LObjGetPriority(HSD_LObj* lobj)
-{
-    if (lobj == NULL) {
-        __assert(HSD_LObj_804D5D2C, 0x16F, HSD_LObj_804D5D24);
-    }
-    return lobj->priority;
-}
-
 void HSD_LObjAddCurrent(HSD_LObj* lobj)
 {
     HSD_SList* node;
@@ -898,72 +886,72 @@ HSD_LObj* HSD_LObjGetCurrentByType(u16 flags)
     return NULL;
 }
 
-s32 HSD_LightID2Index(GXLightID arg0)
+s32 HSD_LightID2Index(GXLightID id)
 {
-    s32 var_r31;
-    switch (arg0) {
+    s32 index;
+    switch (id) {
     case GX_LIGHT0:
-        var_r31 = 0;
+        index = 0;
         break;
     case GX_LIGHT1:
-        var_r31 = 1;
+        index = 1;
         break;
     case GX_LIGHT2:
-        var_r31 = 2;
+        index = 2;
         break;
     case GX_LIGHT3:
-        var_r31 = 3;
+        index = 3;
         break;
     case GX_LIGHT4:
-        var_r31 = 4;
+        index = 4;
         break;
     case GX_LIGHT5:
-        var_r31 = 5;
+        index = 5;
         break;
     case GX_LIGHT6:
-        var_r31 = 6;
+        index = 6;
         break;
     case GX_LIGHT7:
-        var_r31 = 7;
+        index = 7;
         break;
-    case 0x100:
-        var_r31 = 8;
+    case GX_LIGHT_AMBIENT:
+        index = 8;
         break;
     default:
-        __assert(HSD_LObj_804D5D18, 0x492U, HSD_LObj_804D5D20);
+        __assert(__FILE__, 1170, "0");
 
         /// @todo Find a better fix for uninitialized @c var_r31
 #ifndef MUST_MATCH
-        var_r31 = 0;
+        index = 0;
         break;
 #endif
     }
-    return var_r31;
+    return index;
 }
 
-s32 HSD_Index2LightID(u32 arg0)
+s32 HSD_Index2LightID(u32 index)
 {
-    switch (arg0) {
+    switch (index) {
     case 0:
-        return 1;
+        return GX_LIGHT0;
     case 1:
-        return 2;
+        return GX_LIGHT1;
     case 2:
-        return 4;
+        return GX_LIGHT2;
     case 3:
-        return 8;
+        return GX_LIGHT3;
     case 4:
-        return 0x10;
+        return GX_LIGHT4;
     case 5:
-        return 0x20;
+        return GX_LIGHT5;
     case 6:
-        return 0x40;
+        return GX_LIGHT6;
     case 7:
-        return 0x80;
+        return GX_LIGHT7;
     case 8:
-        return 0x100;
+        return GX_LIGHT_AMBIENT;
     default:
-        return 0;
+        return GX_LIGHT_NULL;
     }
 }
 
@@ -1042,14 +1030,10 @@ extern char lbl_80406190[10];
 
 void HSD_LObjSetPosition(HSD_LObj* lobj, Vec3* position)
 {
-    if (lobj == NULL) {
-        __assert(HSD_LObj_804D5D18, 0x559, HSD_LObj_804D5D24);
-    }
+    HSD_ASSERT(1369, lobj);
     if (lobj->position == NULL) {
         lobj->position = HSD_WObjAlloc();
-        if (lobj->position == NULL) {
-            __assert(HSD_LObj_804D5D18, 0x55C, "lobj->position");
-        }
+        HSD_ASSERT(1372, lobj->position)
     }
     HSD_WObjSetPosition(lobj->position, position);
 }
@@ -1065,14 +1049,10 @@ bool HSD_LObjGetPosition(HSD_LObj* lobj, Vec3* position)
 
 void HSD_LObjSetInterest(HSD_LObj* lobj, Vec3* interest)
 {
-    if (lobj == NULL) {
-        __assert(HSD_LObj_804D5D18, 1405, HSD_LObj_804D5D24);
-    }
+    HSD_ASSERT(1405, lobj);
     if (lobj->interest == NULL) {
         lobj->interest = HSD_WObjAlloc();
-        if (lobj->interest == NULL) {
-            __assert(HSD_LObj_804D5D18, 1408, "lobj->interest");
-        }
+        HSD_ASSERT(1408, lobj->interest);
     }
     HSD_WObjSetPosition(lobj->interest, interest);
 }
@@ -1142,7 +1122,7 @@ void HSD_LObjSetInterestWObj(HSD_LObj* lobj, HSD_WObj* wobj)
     lobj->interest = wobj;
 }
 
-static bool LObjLoad(HSD_LObj* lobj, HSD_LightDesc* ldesc)
+static int LObjLoad(HSD_LObj* lobj, HSD_LightDesc* ldesc)
 {
     HSD_LObjSetColor(lobj, ldesc->color);
     HSD_LObjSetFlags(lobj, ldesc->flags);
@@ -1182,10 +1162,33 @@ static bool LObjLoad(HSD_LObj* lobj, HSD_LightDesc* ldesc)
         break;
     default:
         OSReport("unexpected lightdesc flags (%x)\n", ldesc->flags);
-        HSD_Panic(__FILE__, 0x64AU, "");
+        HSD_Panic(__FILE__, 1610, "");
         break;
     }
     return 0;
+}
+
+HSD_LObj* HSD_LObjLoadDesc(HSD_LightDesc* ldesc)
+{
+    HSD_LObj *top, **p = &top;
+
+    for (; ldesc; ldesc = ldesc->next) {
+        HSD_ClassInfo* info;
+
+        if (!ldesc->class_name ||
+            !(info = hsdSearchClassInfo(ldesc->class_name)))
+        {
+            *p = HSD_LObjAlloc();
+        } else {
+            *p = hsdNew(info);
+            HSD_ASSERT(1644, *p);
+        }
+        HSD_LOBJ_METHOD(*p)->load(*p, ldesc);
+        p = &(*p)->next;
+    }
+    *p = NULL;
+
+    return top;
 }
 
 #ifdef MWERKS_GEKKO

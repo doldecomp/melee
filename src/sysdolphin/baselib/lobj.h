@@ -104,7 +104,13 @@ struct HSD_LObjInfo {
 
 #define HSD_LOBJ(o) ((HSD_LObj*) (o))
 #define HSD_LOBJ_INFO(i) ((HSD_LObjInfo*) (i))
-#define HSD_LOBJ_METHOD(o) HSD_LOBJ_INFO(HSD_OBJECT_METHOD(o))
+#define HSD_LOBJ_METHOD(o) HSD_LOBJ_INFO(HSD_OBJECT_METHOD((o)))
+
+inline u8 HSD_LObjGetPriority(HSD_LObj* lobj)
+{
+    HSD_ASSERT(367, lobj);
+    return lobj->priority;
+}
 
 extern HSD_LObjInfo hsdLobj;
 
@@ -169,5 +175,6 @@ HSD_LObj* HSD_LObjGetCurrentByType(u16 type);
 void HSD_LObjSetDefaultClass(HSD_LObjInfo* info);
 HSD_LObjInfo* HSD_LObjGetDefaultClass(void);
 HSD_LObj* HSD_LObjAlloc(void);
+HSD_LObj* HSD_LObjLoadDesc(HSD_LightDesc* ldesc);
 
 #endif
