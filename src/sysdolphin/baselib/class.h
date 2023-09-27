@@ -64,7 +64,7 @@ void* hsdAllocMemPiece(s32 size);
 void hsdFreeMemPiece(void* mem, s32 size);
 void* hsdNew(HSD_ClassInfo*);
 bool hsdChangeClass(void* object, void* class_info);
-bool hsdIsDescendantOf(HSD_ClassInfo* info, any_t p);
+bool hsdIsDescendantOf(void* info, void* p);
 bool hsdObjIsDescendantOf(HSD_Obj* o, HSD_ClassInfo* p);
 HSD_ClassInfo* hsdSearchClassInfo(const char* class_name);
 void hsdForgetClassLibrary(const char* library_name);
@@ -82,5 +82,15 @@ void hsdDumpClassStat(HSD_ClassInfo* info, bool recursive, s32 level);
 
 void ForgetClassLibraryChild(const char* library_name,
                              HSD_ClassInfo* class_info);
+
+static inline void hsdDelete(void* object)
+{
+    if (object == NULL) {
+        return;
+    }
+
+    HSD_CLASS_METHOD(object)->release((HSD_Class*) object);
+    HSD_CLASS_METHOD(object)->destroy((HSD_Class*) object);
+}
 
 #endif
