@@ -98,8 +98,8 @@ AXDriverKeyOff:
 /* 8038BD64 00388944  7C 08 03 A6 */	mtlr r0
 /* 8038BD68 00388948  4E 80 00 20 */	blr
 
-.global AXDriver_8038BD6C
-AXDriver_8038BD6C:
+.global HSD_AudioSFXKeyOffAll
+HSD_AudioSFXKeyOffAll:
 /* 8038BD6C 0038894C  7C 08 02 A6 */	mflr r0
 /* 8038BD70 00388950  90 01 00 04 */	stw r0, 4(r1)
 /* 8038BD74 00388954  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -169,8 +169,8 @@ AXDriver_8038BD6C:
 /* 8038BE5C 00388A3C  7C 08 03 A6 */	mtlr r0
 /* 8038BE60 00388A40  4E 80 00 20 */	blr
 
-.global AXDriver_8038BE64
-AXDriver_8038BE64:
+.global HSD_AudioSFXKeyOffTrack
+HSD_AudioSFXKeyOffTrack:
 /* 8038BE64 00388A44  7C 08 02 A6 */	mflr r0
 /* 8038BE68 00388A48  90 01 00 04 */	stw r0, 4(r1)
 /* 8038BE6C 00388A4C  94 21 FF D8 */	stwu r1, -0x28(r1)

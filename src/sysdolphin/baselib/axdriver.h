@@ -4,13 +4,18 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
+#define SMSTATE_MASK 0xC0000000
+
+#define SMSTATE_ACTIVE 0x40000000
+#define SMSTATE_SLEEP 0x80000000
+
 struct HSD_SM {
     HSD_SM* prev;
     HSD_SM* next;
     u32 flags;
     int vid;
     int pid;
-    u16 samID;
+    int fid;
     u8 track;
     u8 pri;
     u8 pri0[2];
@@ -36,5 +41,8 @@ struct HSD_SM {
 u8* AXDriverAlloc(s32 size);
 void AXDriverFree(void* ptr);
 void AXDriverUnlink(HSD_SM* v, HSD_SM** head);
+void AXDriverKeyOff(HSD_SM* v);
+void AXDriverKeyOffAll(void);
+void AXDriverKeyOffTrack(int track);
 
 #endif
