@@ -441,6 +441,7 @@ typedef enum {
     GX_LIGHT6 = 0x040,
     GX_LIGHT7 = 0x080,
     GX_MAX_LIGHT = 9,
+    GX_LIGHT_AMBIENT = 0x100,
     GX_LIGHT_NULL = 0,
 } GXLightID;
 
