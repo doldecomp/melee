@@ -10,6 +10,8 @@ void LObjInfoInit(void);
 
 HSD_LObjInfo hsdLObj = { LObjInfoInit };
 
+static HSD_LObjInfo* default_class = NULL;
+
 extern s32 lightmask_diffuse;
 extern s32 lightmask_attnfunc;
 extern s32 lightmask_alpha;
@@ -1007,6 +1009,35 @@ void HSD_LObjSetDistAttn(HSD_LObj* lobj, f32 ref_dist, f32 ref_br,
     }
 }
 
+void HSD_LObjSetAttnA(HSD_LObj* lobj, f32 a0, f32 a1, f32 a2)
+{
+    if (lobj == NULL) {
+        return;
+    }
+
+    lobj->u.attn.a0 = a0;
+    lobj->u.attn.a1 = a1;
+    lobj->u.attn.a2 = a2;
+}
+
+void HSD_LObjSetAttnK(HSD_LObj* lobj, f32 k0, f32 k1, f32 k2)
+{
+    if (lobj == NULL) {
+        return;
+    }
+
+    lobj->u.attn.k0 = k0;
+    lobj->u.attn.k1 = k1;
+    lobj->u.attn.k2 = k2;
+}
+
+void HSD_LObjSetAttn(HSD_LObj* lobj, f32 a0, f32 a1, f32 a2, f32 k0, f32 k1,
+                     f32 k2)
+{
+    HSD_LObjSetAttnA(lobj, a0, a1, a2);
+    HSD_LObjSetAttnK(lobj, k0, k1, k2);
+}
+
 extern char lbl_80406190[10];
 
 void HSD_LObjSetPosition(HSD_LObj* lobj, Vec3* position)
@@ -1035,12 +1066,12 @@ bool HSD_LObjGetPosition(HSD_LObj* lobj, Vec3* position)
 void HSD_LObjSetInterest(HSD_LObj* lobj, Vec3* interest)
 {
     if (lobj == NULL) {
-        __assert(HSD_LObj_804D5D18, 0x57D, HSD_LObj_804D5D24);
+        __assert(HSD_LObj_804D5D18, 1405, HSD_LObj_804D5D24);
     }
     if (lobj->interest == NULL) {
         lobj->interest = HSD_WObjAlloc();
         if (lobj->interest == NULL) {
-            __assert(HSD_LObj_804D5D18, 0x580, "lobj->interest");
+            __assert(HSD_LObj_804D5D18, 1408, "lobj->interest");
         }
     }
     HSD_WObjSetPosition(lobj->interest, interest);
@@ -1053,6 +1084,26 @@ bool HSD_LObjGetInterest(HSD_LObj* lobj, Vec3* interest)
         return true;
     }
     return false;
+}
+
+void HSD_LObjSetDefaultClass(HSD_LObjInfo* info)
+{
+    if (info != NULL) {
+        HSD_ASSERT(1420, hsdIsDescendantOf(info, &hsdLObj));
+    }
+    default_class = info;
+}
+
+HSD_LObjInfo* HSD_LObjGetDefaultClass(void)
+{
+    return default_class ? default_class : &hsdLObj;
+}
+
+HSD_LObj* HSD_LObjAlloc(void)
+{
+    HSD_LObj* new = hsdNew(HSD_LObjGetDefaultClass());
+    HSD_ASSERT(1478, new);
+    return new;
 }
 
 HSD_WObj* HSD_LObjGetPositionWObj(HSD_LObj* lobj)
@@ -1071,11 +1122,75 @@ HSD_WObj* HSD_LObjGetInterestWObj(HSD_LObj* lobj)
     return NULL;
 }
 
+void HSD_LObjSetPositionWObj(HSD_LObj* lobj, HSD_WObj* wobj)
+{
+    if (lobj == NULL) {
+        return;
+    }
+
+    HSD_WObjUnref(lobj->position);
+    lobj->position = wobj;
+}
+
+void HSD_LObjSetInterestWObj(HSD_LObj* lobj, HSD_WObj* wobj)
+{
+    if (lobj == NULL) {
+        return;
+    }
+
+    HSD_WObjUnref(lobj->interest);
+    lobj->interest = wobj;
+}
+
+static bool LObjLoad(HSD_LObj* lobj, HSD_LightDesc* ldesc)
+{
+    HSD_LObjSetColor(lobj, ldesc->color);
+    HSD_LObjSetFlags(lobj, ldesc->flags);
+    switch (ldesc->flags & LOBJ_TYPE_MASK) {
+    case LOBJ_AMBIENT:
+        break;
+    case LOBJ_INFINITE:
+        HSD_LObjSetPositionWObj(lobj, HSD_WObjLoadDesc(ldesc->position));
+        break;
+    case LOBJ_POINT:
+        HSD_LObjSetPositionWObj(lobj, HSD_WObjLoadDesc(ldesc->position));
+        if (ldesc->attnflags & LOBJ_LIGHT_ATTN) {
+            HSD_LObjSetFlags(lobj, LOBJ_RAW_PARAM);
+            HSD_LObjSetAttnK(lobj, ldesc->u.attn->k0, ldesc->u.attn->k1,
+                             ldesc->u.attn->k2);
+        } else {
+            HSD_LObjSetDistAttn(lobj, ldesc->u.point->ref_dist,
+                                ldesc->u.point->ref_br,
+                                ldesc->u.point->dist_func);
+        }
+        break;
+    case LOBJ_SPOT:
+        HSD_LObjSetPositionWObj(lobj, HSD_WObjLoadDesc(ldesc->position));
+        HSD_LObjSetInterestWObj(lobj, HSD_WObjLoadDesc(ldesc->interest));
+        if (ldesc->attnflags != 0) {
+            HSD_LObjSetFlags(lobj, LOBJ_RAW_PARAM);
+            HSD_LObjSetAttn(lobj, ldesc->u.attn->a0, ldesc->u.attn->a1,
+                            ldesc->u.attn->a2, ldesc->u.attn->k0,
+                            ldesc->u.attn->k1, ldesc->u.attn->k2);
+        } else {
+            HSD_LObjSetDistAttn(lobj, ldesc->u.spot->ref_dist,
+                                ldesc->u.spot->ref_br,
+                                ldesc->u.spot->dist_func);
+            HSD_LObjSetSpot(lobj, ldesc->u.spot->cutoff,
+                            ldesc->u.spot->spot_func);
+        }
+        break;
+    default:
+        OSReport("unexpected lightdesc flags (%x)\n", ldesc->flags);
+        HSD_Panic(__FILE__, 0x64AU, "");
+        break;
+    }
+    return 0;
+}
+
 #ifdef MWERKS_GEKKO
 #pragma push
 #pragma force_active on
-static char unused1[] = "hsdIsDescendantOf(info, &hsdLObj)";
-char HSD_LObj_804061D4[] = "unexpected lightdesc flags (%x)\n";
 static char unused2[] = "sysdolphin_base_library";
 static char unused3[] = "hsd_lobj";
 #pragma pop
