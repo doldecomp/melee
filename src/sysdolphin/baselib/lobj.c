@@ -1221,6 +1221,21 @@ void HSD_LObjAddAnimAll(HSD_LObj* lobj, HSD_LightAnim* lanim)
     }
 }
 
+static void LObjRelease(HSD_Class* o)
+{
+    HSD_LObj* lobj = HSD_LOBJ(o);
+    ///@todo Unused stack
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
+    HSD_AObjRemove(lobj->aobj);
+    HSD_WObjUnref(HSD_LObjGetPositionWObj(lobj));
+    HSD_WObjUnref(HSD_LObjGetInterestWObj(lobj));
+
+    HSD_OBJECT_PARENT_INFO(&hsdLObj)->release(o);
+}
+
 #ifdef MWERKS_GEKKO
 #pragma push
 #pragma force_active on
