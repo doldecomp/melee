@@ -6,6 +6,7 @@ extern u32 axfxallocsize;
 extern u32 axfxmaxsize;
 extern char AXDriver_80408140[]; // axdriver.c
 extern char AXDriver_8040814C[]; // "axfxallocsize < axfxmaxsize"
+extern char AXDriver_80408168[]; // *head != v
 
 u8* AXDriverAlloc(s32 size)
 {
@@ -23,3 +24,28 @@ u8* AXDriverAlloc(s32 size)
 }
 
 void AXDriverFree(void* ptr) {}
+
+void AXDriverUnlink(HSD_SM* v, HSD_SM** head)
+{
+    HSD_SM* p;
+    HSD_SM* n;
+
+    if (v != NULL) {
+        p = v->prev;
+        n = v->next;
+        v->next = NULL;
+        v->prev = NULL;
+        if (p != NULL) {
+            p->next = n;
+        }
+        if (n != NULL) {
+            n->prev = p;
+        }
+        if (*head == v) {
+            *head = n;
+        }
+        if (*head == v) {
+            __assert(AXDriver_80408140, 113, AXDriver_80408168);
+        }
+    }
+}

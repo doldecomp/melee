@@ -62,6 +62,7 @@ typedef struct HSD_ShapeAnimDObj HSD_ShapeAnimDObj;
 typedef struct HSD_ShapeAnimJoint HSD_ShapeAnimJoint;
 typedef struct HSD_ShapeSet HSD_ShapeSet;
 typedef struct HSD_ShapeSetDesc HSD_ShapeSetDesc;
+typedef struct HSD_SM HSD_SM;
 typedef struct HSD_Spline HSD_Spline;
 typedef struct HSD_TObj HSD_TObj;
 typedef struct HSD_ViewingRect HSD_ViewingRect;
