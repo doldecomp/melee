@@ -91,10 +91,10 @@ struct HSD_LightDesc {
 };
 
 struct HSD_LightAnim {
-    struct _HSD_LightAnim* next;
+    HSD_LightAnim* next;
     HSD_AObjDesc* aobjdesc;
-    struct _HSD_WObjAnim* position_anim;
-    struct _HSD_WObjAnim* interest_anim;
+    HSD_WObjAnim* position_anim;
+    HSD_WObjAnim* interest_anim;
 };
 
 struct HSD_LObjInfo {
@@ -127,6 +127,8 @@ HSD_LObj* HSD_LObjGetActiveByIndex(s32 idx);
 
 void LObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val);
 
+void HSD_LObjAddAnim(HSD_LObj* lobj, HSD_LightAnim* lanim);
+void HSD_LObjAddAnimAll(HSD_LObj* lobj, HSD_LightAnim* lanim);
 void HSD_LObjAnim(HSD_LObj* lobj);
 void HSD_LObjAnimAll(HSD_LObj* lobj);
 void HSD_LObjReqAnim(HSD_LObj* lobj, f32 startframe);

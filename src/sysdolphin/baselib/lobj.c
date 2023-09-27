@@ -1191,6 +1191,36 @@ HSD_LObj* HSD_LObjLoadDesc(HSD_LightDesc* ldesc)
     return top;
 }
 
+void HSD_LObjAddAnim(HSD_LObj* lobj, HSD_LightAnim* lanim)
+{
+    if (lobj == NULL) {
+        return;
+    }
+
+    if (lanim != NULL) {
+        if (lobj->aobj) {
+            HSD_AObjRemove(lobj->aobj);
+        }
+        lobj->aobj = HSD_AObjLoadDesc(lanim->aobjdesc);
+        HSD_WObjAddAnim(HSD_LObjGetPositionWObj(lobj), lanim->position_anim);
+        HSD_WObjAddAnim(HSD_LObjGetInterestWObj(lobj), lanim->interest_anim);
+    }
+}
+
+void HSD_LObjAddAnimAll(HSD_LObj* lobj, HSD_LightAnim* lanim)
+{
+    HSD_LObj* lp;
+    HSD_LightAnim* la;
+
+    if (lobj == NULL) {
+        return;
+    }
+
+    for (lp = lobj, la = lanim; lp; lp = next_p(lp), la = next_p(la)) {
+        HSD_LObjAddAnimAll(lp, la);
+    }
+}
+
 #ifdef MWERKS_GEKKO
 #pragma push
 #pragma force_active on
