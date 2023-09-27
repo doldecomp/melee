@@ -121,9 +121,11 @@ s32 HSD_LObjGetLightMaskDiffuse(void);
 s32 HSD_LObjGetLightMaskAttnFunc(void);
 s32 HSD_LObjGetLightMaskAlpha(void);
 s32 HSD_LObjGetLightMaskSpecular(void);
+void HSD_LObjSetActive(HSD_LObj* lobj);
 s32 HSD_LObjGetNbActive(void);
 HSD_LObj* HSD_LObjGetActiveByID(GXLightID id);
 HSD_LObj* HSD_LObjGetActiveByIndex(s32 idx);
+void HSD_LObjClearActive(void);
 
 void LObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val);
 
