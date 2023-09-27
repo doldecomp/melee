@@ -602,9 +602,7 @@ void HSD_LObjAddCurrent(HSD_LObj* lobj)
         }
         ref_INC(lobj);
         for (p = &current_lights; *p != NULL; p = &(*p)->next) {
-            u8 priority1 = HSD_LObjGetPriority(lobj);
-            u8 priority2 = HSD_LObjGetPriority((*p)->data);
-            if (priority2 > priority1) {
+            if (HSD_LObjGetPriority((*p)->data) > HSD_LObjGetPriority(lobj)) {
                 break;
             }
         }
@@ -1050,7 +1048,7 @@ void HSD_LObjAddAnimAll(HSD_LObj* lobj, HSD_LightAnim* lanim)
     }
 
     for (lp = lobj, la = lanim; lp; lp = next_p(lp), la = next_p(la)) {
-        HSD_LObjAddAnimAll(lp, la);
+        HSD_LObjAddAnim(lp, la);
     }
 }
 
@@ -1066,7 +1064,7 @@ static void LObjRelease(HSD_Class* o)
     HSD_WObjUnref(HSD_LObjGetPositionWObj(lobj));
     HSD_WObjUnref(HSD_LObjGetInterestWObj(lobj));
 
-    HSD_CLASS_INFO(&hsdLObj)->release(o);
+    HSD_OBJECT_PARENT_INFO(&hsdLObj)->release(o);
 }
 
 static void LObjAmnesia(HSD_ClassInfo* info)
@@ -1077,7 +1075,7 @@ static void LObjAmnesia(HSD_ClassInfo* info)
     if (info == HSD_CLASS_INFO(&hsdLObj)) {
         current_lights = NULL;
     }
-    HSD_CLASS_INFO(&hsdLObj)->amnesia(info);
+    HSD_OBJECT_PARENT_INFO(&hsdLObj)->amnesia(info);
 }
 
 static void LObjInfoInit(void)
