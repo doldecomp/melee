@@ -145,7 +145,7 @@ void HSD_LObjSetInterest(HSD_LObj* lobj, Vec3* interest);
 void HSD_LObj_803668EC(HSD_LObj* lobj);
 void HSD_LObjSetupInit(HSD_CObj* arg0);
 
-void HSD_LObjSetColor(HSD_LObj* lobj, GXColor* color);
+void HSD_LObjSetColor(HSD_LObj* lobj, GXColor color);
 void HSD_LObjGetColor(HSD_LObj* lobj, GXColor* color);
 void HSD_LObjSetSpot(HSD_LObj* lobj, f32 cutoff, s32 point_func);
 void HSD_LObjSetDistAttn(HSD_LObj* lobj, f32 ref_dist, f32 ref_br,

@@ -979,9 +979,9 @@ void HSD_LObjRemoveAll(HSD_LObj* lobj)
     }
 }
 
-void HSD_LObjSetColor(HSD_LObj* lobj, GXColor* color)
+void HSD_LObjSetColor(HSD_LObj* lobj, GXColor color)
 {
-    lobj->color = *color;
+    lobj->color = color;
 }
 
 void HSD_LObjGetColor(HSD_LObj* lobj, GXColor* color)
