@@ -979,17 +979,17 @@ void HSD_LObjRemoveAll(HSD_LObj* lobj)
     }
 }
 
-void HSD_LObj_80366CA4(HSD_LObj* lobj, GXColor* color)
+void HSD_LObjSetColor(HSD_LObj* lobj, GXColor* color)
 {
     lobj->color = *color;
 }
 
-void HSD_LObj_80366CB0(HSD_LObj* lobj, GXColor* color)
+void HSD_LObjGetColor(HSD_LObj* lobj, GXColor* color)
 {
     *color = lobj->color;
 }
 
-void HSD_LObj_80366CBC(HSD_LObj* lobj, f32 cutoff, s32 point_func)
+void HSD_LObjSetSpot(HSD_LObj* lobj, f32 cutoff, s32 point_func)
 {
     if (lobj != NULL) {
         lobj->u.point.cutoff = cutoff;
@@ -997,7 +997,8 @@ void HSD_LObj_80366CBC(HSD_LObj* lobj, f32 cutoff, s32 point_func)
     }
 }
 
-void HSD_LObj_80366CD0(HSD_LObj* lobj, f32 ref_dist, f32 ref_br, s32 dist_func)
+void HSD_LObjSetDistAttn(HSD_LObj* lobj, f32 ref_dist, f32 ref_br,
+                         s32 dist_func)
 {
     if (lobj != NULL) {
         lobj->u.point.ref_dist = ref_dist;
