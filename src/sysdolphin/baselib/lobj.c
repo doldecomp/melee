@@ -12,12 +12,13 @@ HSD_LObjInfo hsdLObj = { LObjInfoInit };
 
 static HSD_LObjInfo* default_class = NULL;
 
-extern s32 lightmask_diffuse;
-extern s32 lightmask_attnfunc;
-extern s32 lightmask_alpha;
-extern s32 lightmask_specular;
-extern s32 nb_active_lights;
-extern HSD_SList* current_lights;
+static HSD_SList* current_lights;
+static s32 nb_active_lights;
+
+static s32 lightmask_diffuse;
+static s32 lightmask_specular;
+static s32 lightmask_attnfunc;
+static s32 lightmask_alpha;
 
 HSD_LObj* active_lights[GX_MAX_LIGHT];
 
@@ -1234,6 +1235,17 @@ static void LObjRelease(HSD_Class* o)
     HSD_WObjUnref(HSD_LObjGetInterestWObj(lobj));
 
     HSD_OBJECT_PARENT_INFO(&hsdLObj)->release(o);
+}
+
+static void LObjAmnesia(HSD_ClassInfo* info)
+{
+    if (info == HSD_CLASS_INFO(default_class)) {
+        default_class = NULL;
+    }
+    if (info == HSD_CLASS_INFO(&hsdLObj)) {
+        current_lights = NULL;
+    }
+    HSD_OBJECT_PARENT_INFO(&hsdLObj)->amnesia(info);
 }
 
 #ifdef MWERKS_GEKKO
