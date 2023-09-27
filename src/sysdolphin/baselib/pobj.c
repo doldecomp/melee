@@ -252,7 +252,7 @@ static HSD_ShapeSet* loadShapeSetDesc(HSD_ShapeSetDesc* sdesc)
     int i;
 
     HSD_ShapeSet* shape_set = hsdAllocMemPiece(sizeof(HSD_ShapeSet));
-    HSD_ASSERT(0x1F2, shape_set);
+    HSD_ASSERT(498, shape_set);
     memset(shape_set, 0, sizeof(HSD_ShapeSet));
     shape_set->flags = sdesc->flags;
     shape_set->nb_shape = sdesc->nb_shape;
@@ -295,7 +295,7 @@ static s32 PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
         break;
 
     default:
-        HSD_Panic(__FILE__, 580, "PObjLoad: Unexpected type");
+        HSD_Panic(__FILE__, 580, "pobj: unexected type.\n");
     }
 
     // _HSD_NeedCacheInvalidate(HSD_CACHE_VTX); // NOTE: This does not exist in
@@ -349,7 +349,7 @@ HSD_PObjInfo* HSD_PObjGetDefaultClass(void)
 void HSD_PObjSetDefaultClass(HSD_PObjInfo* info)
 {
     if (info != NULL) {
-        HSD_ASSERT(673, hsdIsDescendantOf(&info->parent, &hsdPObj));
+        HSD_ASSERT(673, hsdIsDescendantOf(info, &hsdPObj));
     }
     default_class = info;
 }
@@ -361,7 +361,13 @@ HSD_PObj* HSD_PObjAlloc(void)
     return pobj;
 }
 
-// https://decomp.me/scratch/ezLH1
+void HSD_PObjFree(HSD_PObj* pobj)
+{
+    if (pobj) {
+        HSD_CLASS_METHOD(pobj)->destroy((HSD_Class*) (pobj));
+    }
+}
+
 static void resolveEnvelope(HSD_SList* list, HSD_EnvelopeDesc** edesc_p)
 {
     if (list == NULL || edesc_p == NULL) {
@@ -409,7 +415,6 @@ void HSD_PObjResolveRefs(HSD_PObj* pobj, HSD_PObjDesc* pdesc)
     }
 }
 
-// https://decomp.me/scratch/YRMg1
 void HSD_PObjResolveRefsAll(HSD_PObj* pobj, HSD_PObjDesc* pdesc)
 {
     for (; pobj != NULL && pdesc != NULL;

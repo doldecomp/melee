@@ -64,7 +64,7 @@ void* hsdAllocMemPiece(s32 size);
 void hsdFreeMemPiece(void* mem, s32 size);
 void* hsdNew(HSD_ClassInfo*);
 bool hsdChangeClass(void* object, void* class_info);
-bool hsdIsDescendantOf(HSD_ClassInfo* info, any_t p);
+bool hsdIsDescendantOf(void* info, void* p);
 bool hsdObjIsDescendantOf(HSD_Obj* o, HSD_ClassInfo* p);
 HSD_ClassInfo* hsdSearchClassInfo(const char* class_name);
 void hsdForgetClassLibrary(const char* library_name);

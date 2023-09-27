@@ -1132,13 +1132,6 @@ void HSD_JObjUnrefThis(HSD_JObj* jobj)
     }
 }
 
-void HSD_JObjRefThis(HSD_JObj* jobj)
-{
-    if (jobj != NULL) {
-        jobj_iref_INC(jobj);
-    }
-}
-
 HSD_JObj* HSD_JObjGetPrev(HSD_JObj*);
 
 HSD_JObj* HSD_JObjRemove(HSD_JObj* jobj)

@@ -25,7 +25,6 @@ struct HSD_PObj {
         HSD_ShapeSet* shape_set;
         HSD_SList* envelope_list;
     } u;
-    HSD_AObj* aobj;
 };
 
 struct HSD_PObjDesc {
@@ -117,6 +116,7 @@ extern HSD_PObjInfo hsdPObj;
 HSD_PObjInfo* HSD_PObjGetDefaultClass(void);
 void HSD_PObjSetDefaultClass(HSD_PObjInfo* info);
 HSD_PObj* HSD_PObjAlloc(void);
+void HSD_PObjFree(HSD_PObj*);
 
 u32 HSD_PObjGetFlags(HSD_PObj* pobj);
 void HSD_PObjRemoveAnimAllByFlags(HSD_PObj* pobj, u32 flags);
