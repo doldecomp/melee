@@ -42,7 +42,7 @@ u8* AXDriverAlloc(s32 size);
 void AXDriverFree(void* ptr);
 void AXDriverUnlink(HSD_SM* v, HSD_SM** head);
 void AXDriverKeyOff(HSD_SM* v);
-void AXDriverKeyOffAll(void);
-void AXDriverKeyOffTrack(int track);
+void HSD_AudioSFXKeyOffAll(void);
+void HSD_AudioSFXKeyOffTrack(int track);
 
 #endif
