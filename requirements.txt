@@ -9,7 +9,7 @@ isort==5.12.0
 humanfriendly==10.0
 pcpp==1.30
 pyelftools==0.29
-Pygments==2.14.0
+Pygments>=2.15.0
 pyperclip==1.8.2
 python_Levenshtein==0.20.9
 watchdog==2.2.1
