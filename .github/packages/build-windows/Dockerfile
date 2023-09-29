@@ -29,7 +29,7 @@ RUN net user melee /add; \
     # grant melee user read access to requirements.txt
     icacls 'C:/Windows/Temp/requirements.txt' /grant 'melee:(R)';
 USER melee
-ENV MELEE_COMPILERS_URL="https://cdn.discordapp.com/attachments/727909624342380615/1129879865433264158/MELEE_COMPILERS_N.zip"
+ENV MELEE_COMPILERS_URL="https://mega.nz/file/BU43wKxT#rVC11Rl7DPxfSn7V9Iu--8E7m7gc1gsJWtfVBbfmKwQ"
 RUN setup.ps1
 VOLUME [ "C:/Input", "C:/Output" ]
 ENTRYPOINT entrypoint.ps1
