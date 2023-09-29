@@ -33,12 +33,12 @@ The easiest way to get set up is with [scoop](https://scoop.sh/). You will also 
     git clone 'https://github.com/doldecomp/melee.git'
     cd melee
     ```
-1. Download our [compilers zip archive](https://cdn.discordapp.com/attachments/727909624342380615/1129879865433264158/MELEE_COMPILERS_N.zip) and rename the `GC` subfolder to `mwcc_compiler`, and place it in `/tools`. You can do this manually, or use the following PowerShell snippet (from inside your melee directory):
+1. Download our [compilers zip archive](https://mega.nz/file/BU43wKxT#rVC11Rl7DPxfSn7V9Iu--8E7m7gc1gsJWtfVBbfmKwQ) and rename the `GC` subfolder to `mwcc_compiler`, and place it in `/tools`. You can do this manually, or use the following PowerShell snippet (from inside your melee directory):
     ```ps1
-    $url = 'https://cdn.discordapp.com/attachments/727909624342380615/1129879865433264158/MELEE_COMPILERS_N.zip'
-    $tmp = New-TemporaryFile
-    Invoke-WebRequest -Uri $url -OutFile $tmp
-    $zip = Rename-Item $tmp -NewName ($tmp.BaseName + '.zip') -PassThru
+    & scoop install megatools
+    $url = 'https://mega.nz/file/BU43wKxT#rVC11Rl7DPxfSn7V9Iu--8E7m7gc1gsJWtfVBbfmKwQ'
+    $zip = [System.IO.Path]::GetTempFileName() -replace '\.[^.]+$','.zip'
+    & megatools dl --no-progress --path "$zip" "$url"
 
     $dir = New-Item -ItemType Directory `
         -Path (Join-Path $env:Temp 'MELEE_COMPILERS')
@@ -51,6 +51,9 @@ The easiest way to get set up is with [scoop](https://scoop.sh/). You will also 
 
     Remove-Item -Force $zip
     Remove-Item -Recurse -Force $dir
+
+    # Optional: Uninstall megatools
+    & scoop uninstall megatools
     ```
 1. Run `make` using `bash` to build the project:
     ```ps1
