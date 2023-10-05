@@ -1,0 +1,13 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Explicitly declare text files
+*.py   text
+
+# Enforce platform-specific encodings
+*.bat  text eol=crlf
+*.sh   text eol=lf
+*.sha1 text eol=lf
+
+# DTK keeps these files with LF
+config/**/*.txt  text eol=lf

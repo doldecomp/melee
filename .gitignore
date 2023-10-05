@@ -1,0 +1,11 @@
+__pycache__
+.idea
+.vscode
+.ninja_*
+*.exe
+build
+build.ninja
+objdiff.json
+orig/*/*
+!orig/*/.gitkeep
+/*.txt

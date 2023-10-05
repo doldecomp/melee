@@ -1,0 +1,100 @@
+# Path to the main.dol file.
+object: orig/GAMEID/sys/main.dol
+# (optional) SHA-1 hash of the main.dol file for verification.
+hash: 0123456789abcdef0123456789abcdef01234567
+# (optional) Name override. Defaults to "main".
+name: main
+
+# (optional) Path to the symbols.txt file.
+# This file will be created if it does not exist.
+# See docs/symbols.md for more information.
+symbols: config/GAMEID/symbols.txt
+# (optional) Path to the splits.txt file.
+# This file will be created if it does not exist.
+# See docs/splits.md for more information.
+splits: config/GAMEID/splits.txt
+
+# (optional) Path to the DOL's .map file.
+# This should only used for initial analysis, and generating the symbols and splits files.
+# Once those files are generated, remove this to avoid conflicts.
+map: orig/GAMEID/files/main.MAP
+# (optional) Start address of common BSS symbols, if any.
+# Useful along with `map`, but not required otherwise, since common BSS
+# is marked in the splits file.
+common_start: 0x80001234
+
+# (optional) Version used to generate `.comment` sections in the split objects.
+# If not specified, no `.comment` sections will be generated.
+# See docs/comment_section.md for more information.
+mw_comment_version: 8
+
+# (optional) Path to `selfile.sel` for Wii games with RSO files.
+selfile: orig/GAMEID/files/selfile.sel
+# (optional) SHA-1 hash of the `selfile.sel` file for verification.
+selfile_hash: 0123456789abcdef0123456789abcdef01234567
+
+# (optional) When enabled, function boundary analysis will be skipped.
+# Only valid _after_ initial analysis has been performed and
+# the symbols and splits files have been generated. 
+quick_analysis: false
+
+# (optional) When enabled, the analyzer will attempt to detect sizes
+# and data types of objects based on code usage and alignment.
+detect_objects: true
+
+# (optional) When enabled, the analyzer will attempt to detect strings,
+# wide strings, and string tables.
+detect_strings: true
+
+# (optional) Whether to write disassembly to the split output directory.
+# While not used in the build process, the disassembly is useful
+# for reading and usage with other tools, like decomp.me.
+write_asm: true
+
+# (optional) If symbols are _fully_ known (e.g. from a complete map file),
+# this can be set to true to skip most analysis steps, and ensure new
+# symbols are not created by the analyzer.
+# If you're not sure, leave this false.
+symbols_known: false
+
+# (optional) Whether to create `gap_` symbols to prevent the linker from
+# adjusting the alignment / address of symbols.
+# When alignments are fully known (e.g. from a complete map file),
+# this can be set to false.
+fill_gaps: true
+
+# (optional) Custom template for `ldscript.lcf`. Avoid unless necessary.
+# See https://github.com/encounter/decomp-toolkit/blob/main/assets/ldscript.lcf
+ldscript_template: config/GAMEID/module/ldscript.tpl
+
+# (optional) Configuration for modules.
+modules:
+
+- # Path to the module.
+  object: orig/GAMEID/files/module.rel
+
+  # (optional) SHA-1 hash of the module for verification.
+  hash: 0123456789abcdef0123456789abcdef01234567
+
+  # (optional) Name of the module. Defaults to the module's filename.
+  name: module
+
+  # (optional) Path to the module's symbols.txt file.
+  # This file will be created if it does not exist.
+  # See docs/symbols.md for more information.
+  symbols: config/GAMEID/module/symbols.txt
+  # (optional) Path to the module's splits.txt file.
+  # This file will be created if it does not exist.
+  # See docs/splits.md for more information.
+  splits: config/GAMEID/module/splits.txt
+
+  # (optional) Path to the module's .map file.
+  # See `map` above for more information.
+  map: orig/GAMEID/files/module.MAP
+
+  # (optional) Mark symbols as "force active" / "exported".
+  force_active: []
+
+  # (optional) Custom template for `ldscript.lcf`, if needed.
+  # See https://github.com/encounter/decomp-toolkit/blob/main/assets/ldscript_partial.lcf
+  ldscript_template: config/GAMEID/module/ldscript.tpl
