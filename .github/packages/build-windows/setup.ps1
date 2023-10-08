@@ -20,6 +20,7 @@
         git `
         python `
         mingw `
+        cmake `
         megatools
     if ($LASTEXITCODE -ne 0)
     {
