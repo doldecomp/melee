@@ -21,11 +21,11 @@ v1.02 - main.dol: `sha1: 08e0bf20134dfcb260699671004527b2d6bb1a45`
 The easiest way to get set up is with [scoop](https://scoop.sh/). You will also need our compilers (linked below).
 
 1. Open a PowerShell window (`Win+X`). You do not need admin privileges.
-1. Install `scoop`, `git`, `python`, and `mingw`. You can skip these if you already have `git`, `python` (3.9+), `bash`, `gcc`, and `make` in your `PATH`.
+1. Install `scoop`, `git`, `python`, `mingw`, and `cmake`. You can skip these if you already have `git`, `python` (3.9+), `bash`, `gcc`, `make`, and `cmake` in your `PATH`.
     ```ps1
     Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
     irm get.scoop.sh | iex
-    scoop install git python mingw
+    scoop install git python mingw cmake
     ```
 1. Clone the repository and change directory into it.
     ```ps1
