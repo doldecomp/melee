@@ -1,7 +1,13 @@
-#ifndef MELEE_IT_ITEMS_ITFOXLASER_H
-#define MELEE_IT_ITEMS_ITFOXLASER_H
+#ifndef GALE01_29C4D4
+#define GALE01_29C4D4
 
-#include <melee/it/types.h>
+#include <platform.h>
+#include "it/forward.h"
+
+#include "it/types.h"
+
+#include <dolphin/mtx/types.h>
+#include <baselib/jobj.h>
 
 extern ItemStateTable it_803F67D0[];
 

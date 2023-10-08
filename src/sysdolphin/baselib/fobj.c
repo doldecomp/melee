@@ -208,7 +208,7 @@ static u32 FObjLoadWait(HSD_FObj* fobj)
     u32 st = HSD_FObjGetState(fobj);
     HSD_ASSERT(0x16C, st == FOBJ_LOAD_WAIT);
 
-    if ((fobj->ad - fobj->ad_head) >= fobj->length) {
+    if ((unsigned) (fobj->ad - fobj->ad_head) >= fobj->length) {
         return 6;
     } else {
         fobj->fterm = parseWait(&fobj->ad);
@@ -298,7 +298,7 @@ static u32 FObjAnimKey(HSD_FObj* fobj)
 
 inline u32 FObjLoadData(HSD_FObj* fobj)
 {
-    if ((fobj->ad - fobj->ad_head) >= fobj->length) {
+    if ((unsigned) (fobj->ad - fobj->ad_head) >= fobj->length) {
         return 6;
     } else {
         fobj->op_intrp = fobj->op;
@@ -388,8 +388,8 @@ void FObjUpdateAnim(HSD_FObj* fobj, void* obj, HSD_ObjUpdateFunc obj_update)
     obj_update(obj, fobj->obj_type, &fobjdata);
 }
 
-void HSD_FObjInterpretAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(),
-                           f32 rate)
+void HSD_FObjInterpretAnim(HSD_FObj* fobj, void* obj,
+                           HSD_ObjUpdateFunc obj_update, f32 rate)
 {
     f32 fterm;
     u32 state;
@@ -419,20 +419,36 @@ void HSD_FObjInterpretAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(),
             }
             case 4: {
                 if (fobj->fterm <= fobj->time) {
-                    u8 _[8];
+                    /// @todo Unused stack.
+#ifdef MUST_MATCH
+                    u8 _[8] = { 0 };
+#endif
+#ifdef MUST_MATCH
                     state = state = 3;
+#else
+                    state = 3;
+#endif
+
                     fterm = fobj->fterm;
                     fobj->time -= fobj->fterm;
                     HSD_FObjSetState(fobj, state);
                     break;
                 }
                 FObjUpdateAnim(fobj, obj, obj_update);
+#ifdef MUST_MATCH
                 state = state = 5;
+#else
+                state = 5;
+#endif
                 HSD_FObjSetState(fobj, state);
                 return;
             }
             case 5: {
+#ifdef MUST_MATCH
                 state = state = 4;
+#else
+                state = 4;
+#endif
                 HSD_FObjSetState(fobj, state);
                 break;
             }

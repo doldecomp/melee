@@ -1,15 +1,15 @@
-#ifndef MELEE_IT_ITEMS_ITHAMMER_H
-#define MELEE_IT_ITEMS_ITHAMMER_H
+#ifndef GALE01_293D94
+#define GALE01_293D94
 
-#include <melee/it/types.h>
+#include "it/forward.h"
+
+#include "it/types.h"
 
 typedef struct itHammerData {
     u32 x0;
     u32 x4;
     f32 x8;
 } itHammerData;
-
-extern ItemStateTable it_803F6150[];
 
 void it_80293D94(Item_GObj* gobj);
 int it_80293DCC(Item_GObj* gobj);
@@ -34,5 +34,7 @@ static int it_80294304(HSD_GObj* gobj);
 static void it_8029430C(HSD_GObj* gobj);
 static int it_80294310(HSD_GObj* gobj);
 void it_80294344(Item_GObj* gobj, HSD_GObj* gobj2);
+
+extern ItemStateTable it_803F6150[];
 
 #endif

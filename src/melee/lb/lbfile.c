@@ -25,14 +25,18 @@ void lbFile_8001615C(int r3, int r4, int r5, bool cancelflag)
     cancel = true;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool lbFile_800161A0(void)
 {
     lb_800195D0();
     return cancel;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void lbFile_800161C4(int arg0, int arg1, HSD_Archive* arg2, int arg3, int arg4,
                      int arg5)

@@ -1,7 +1,12 @@
+/// @file
+/// @todo Restructure this, possibly items/chara/types.h
 #ifndef MELEE_IT_ITCHARITEMS_H
 #define MELEE_IT_ITCHARITEMS_H
 
 #include <platform.h>
+
+#include <dolphin/mtx/types.h>
+#include <baselib/jobj.h>
 
 typedef struct {
     f32 xDD4;

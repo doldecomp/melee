@@ -297,7 +297,7 @@ typedef struct _generator {
         auxCone cone;
         auxSphere sphere;
     } aux;
-};
+} _generator;
 
 extern u32* ptclref[64];
 

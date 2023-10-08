@@ -1,20 +1,9 @@
 #include "itcapsule.h"
 
-#include <melee/it/it_266F.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/item.h>
-
-#include <melee/lb/lb_00F9.h>
-
-void it_8026D62C(Item_GObj*, HSD_GObjEvent);
-void it_8026E15C(Item_GObj*, HSD_GObjEvent);
-void it_8026E414(Item_GObj*, HSD_GObjEvent);
-void it_8026F3D4(Item_GObj*, int, bool, int);
-bool it_8026F8B4(Item_GObj*, Vec3*, Vec3*, int);
-void it_80272C08();
-void it_80273454();
-void it_80275444();
-void it_8026E8C4(Item_GObj*, HSD_GObjEvent, HSD_GObjEvent);
+#include "it/it_266F.h"
+#include "it/it_26B1.h"
+#include "it/item.h"
+#include "lb/lb_00F9.h"
 
 ItemStateTable it_803F5468[] = {
     {
@@ -72,7 +61,10 @@ void it_8027CF00(Item_GObj* item_gobj)
 void it_8027CF30(Item_GObj* gobj)
 {
     Vec3 sp18;
-    u32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8] = { 0 };
+#endif
 
     Item* it = GET_ITEM(gobj);
     ItCapsuleAttrs* capsule = it->xC4_article_data->x4_specialAttributes;
@@ -93,7 +85,10 @@ void it_8027CF30(Item_GObj* gobj)
 
 void it_8027CFE8(Item_GObj* item_gobj)
 {
-    u32 unused[1];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4] = { 0 };
+#endif
     HSD_JObj* jobj = GET_JOBJ(item_gobj);
     Item* it = GET_ITEM(item_gobj);
     Vec3 sp14;
@@ -116,7 +111,10 @@ void it_8027CFE8(Item_GObj* item_gobj)
 void it_8027D0B8(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
-    u32 unused[1];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4] = { 0 };
+#endif
     it_8026B390(gobj);
     it->x40_vel.x = it->x40_vel.y = it->x40_vel.z = 0.0F;
     Item_80268E5C(gobj, 0, 2);
@@ -148,7 +146,8 @@ bool it_8027D170(Item_GObj* gobj)
 void it_8027D178(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
-    it_80272860(gobj, it->xCC_item_attr->x10_fall_speed, it->xCC_item_attr->x14_fall_speed_max);
+    it_80272860(gobj, it->xCC_item_attr->x10_fall_speed,
+                it->xCC_item_attr->x14_fall_speed_max);
 }
 
 bool it_8027D1A8(Item_GObj* gobj)
@@ -205,9 +204,9 @@ bool it_8027D30C(Item_GObj* item_gobj)
     return it_802751D8(item_gobj);
 }
 
-void it_8027D32C(Item_GObj*) {}
+void it_8027D32C(Item_GObj* gobj) {}
 
-bool it_8027D330(Item_GObj*)
+bool it_8027D330(Item_GObj* gobj)
 {
     return false;
 }
@@ -217,7 +216,10 @@ bool it_8027D330(Item_GObj*)
 bool it_8027D338(HSD_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
-    u32 unused[1];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4] = { 0 };
+#endif
 
     if (it->msid != 5) {
         it_8027CF30(item_gobj);
@@ -311,12 +313,12 @@ void it_8027D450(Item_GObj* item_gobj) {
     Item_80268E5C(item_gobj, 6, ITEM_ANIM_UPDATE);
 }
 
-bool it_8027D478(Item_GObj*)
+bool it_8027D478(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_8027D480(Item_GObj*)
+void it_8027D480(Item_GObj* gobj)
 {
 }
 
@@ -336,6 +338,7 @@ bool it_8027D4F4(Item_GObj* item_gobj)
     return it_8027D338_autoinlined(item_gobj);
 }
 
+#ifdef MWERKS_GEKKO
 #pragma push
 asm bool it_8027D530(Item_GObj* item_gobj)
 { // clang-format off
@@ -405,6 +408,7 @@ lbl_8027D5F8:
 /* 8027D610 0027A1F0  4E 80 00 20 */	blr
 } // clang-format off
 #pragma pop
+#endif
 
 bool it_8027D614(Item_GObj* item_gobj)
 {
@@ -412,7 +416,7 @@ bool it_8027D614(Item_GObj* item_gobj)
     if (it->msid == 3 || it->msid == 4) {
         itColl_BounceOffShield(item_gobj);
     }
-    return 0;
+    return false;
 }
 
 void it_8027D650(Item_GObj* item_gobj, HSD_GObj* ref)

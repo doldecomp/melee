@@ -1,28 +1,26 @@
 #include "ithammer.h"
 
-#include <melee/db/db_2253.h>
-#include <melee/it/it_266F.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/item.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbrefract.h>
-#include <melee/lb/lbvector.h>
+#include "ithammerhead.h"
+
+#include "db/db_2253.h"
+#include "it/it_266F.h"
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/item.h"
+#include "lb/lb_00B0.h"
+#include "lb/lbrefract.h"
+#include "lb/lbvector.h"
+
 #include <MSL/math.h>
 
-extern void it_8026D62C(Item_GObj*, HSD_GObjEvent);
-extern s32 it_8026DF34();
-extern void it_8026E15C(Item_GObj*, HSD_GObjEvent);
-extern void it_8026E8C4(Item_GObj*, HSD_GObjEvent, HSD_GObjEvent);
-extern HSD_JObj* it_80272CC0(Item_GObj*, int);
-extern void it_80299C48(HSD_GObj*, Vec3*, Vec3*, f32);
-
-ItemStateTable it_803F6150[] = { { -1, it_80293FF4, it_80293FFC, it_80294000 },
-                                 { -1, it_80294080, it_80294088, it_802940B8 },
-                                 { 0, it_80294170, NULL, NULL },
-                                 { 1, it_80294170, NULL, NULL },
-                                 { -1, it_80294080, it_8029424C, it_8029427C },
-                                 { -1, it_80294304, it_8029430C,
-                                   it_80294310 } };
+ItemStateTable it_803F6150[] = {
+    { -1, it_80293FF4, it_80293FFC, it_80294000 },
+    { -1, it_80294080, it_80294088, it_802940B8 },
+    { 0, it_80294170, NULL, NULL },
+    { 1, it_80294170, NULL, NULL },
+    { -1, it_80294080, it_8029424C, it_8029427C },
+    { -1, it_80294304, it_8029430C, it_80294310 },
+};
 
 static inline void thing(void* gobj)
 {

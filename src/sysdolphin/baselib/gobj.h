@@ -14,8 +14,10 @@
 #define HSD_GOBJ_CLASS_STAGE 0x3
 #define HSD_GOBJ_CLASS_FIGHTER 0x4
 #define HSD_GOBJ_CLASS_ITEM 0x6
-#define HSD_GOBJ_CLASS_ITEMLINK                                               \
-    0x7 // Used by chain-type items in-game to link multiple parts together
+
+/// Used by chain-type items in-game to link multiple parts together
+#define HSD_GOBJ_CLASS_ITEMLINK 0x7
+
 #define HSD_GOBJ_CLASS_EFFECT 0x8
 
 struct HSD_GObj {
@@ -31,7 +33,7 @@ struct HSD_GObj {
     /* +10 */ HSD_GObj* next_gx;
     /* +14 */ HSD_GObj* prev_gx;
     /* +18 */ HSD_GObjProc* proc;
-    /* +1C */ void (*render_cb)(HSD_GObj* gobj, s32 code);
+    /* +1C */ GObj_RenderFunc rendered;
     /* +20 */ u64 gxlink_prios;
     /* +28 */ void* hsd_obj;
     /* +2C */ void* user_data;
@@ -121,7 +123,7 @@ HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority);
 void HSD_GObj_80391070(HSD_GObj* gobj, s32 arg1);
 void HSD_GObj_80390CD4(HSD_GObj* gobj);
 void HSD_GObj_80390CFC(void);
-void render_gobj(HSD_GObj* cur, s32 i);
+void render_gobj(HSD_GObj* cur, int i);
 void HSD_GObj_80390FC0(void);
 void HSD_GObj_80391044(HSD_GObj* gobj);
 void HSD_GObj_803910B4(HSD_GObj* gobj);

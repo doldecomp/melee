@@ -13,7 +13,7 @@
 
 struct HSD_CObj {
     HSD_Obj parent;
-    u32 flags;              // 0x08
+    u32 flags; // 0x08
     struct Viewport {
         f32 left;   // 0x0C
         f32 right;  // 0x10
@@ -132,8 +132,8 @@ void HSD_CObjAnim(HSD_CObj* cobj);
 void HSD_CObjReqAnim(HSD_CObj* cobj, f32 startframe);
 bool makeProjectionMtx(HSD_CObj* cobj, Mtx mtx);
 bool setupNormalCamera(HSD_CObj* cobj);
-bool setupTopHalfCamera(UNK_PARAMS);
-bool setupBottomHalfCamera(UNK_PARAMS);
+bool setupTopHalfCamera(HSD_CObj* cobj);
+bool setupBottomHalfCamera(HSD_CObj* cobj);
 void HSD_CObjSetupViewingMtx(HSD_CObj* cobj);
 f32 HSD_CObjGetEyeDistance(HSD_CObj* cobj);
 void HSD_CObjSetUpVector(UNK_PARAMS);

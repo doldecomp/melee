@@ -238,7 +238,7 @@ void HSD_SetupPEMode(u32 flags, HSD_PEDesc* pe)
     HSD_StateSetDither(0);
 }
 
-static void setupTevMode_last()
+static void setupTevMode_last(void)
 {
     if (!HSD_StateGetNumTevStages()) {
         HSD_TevDesc tevdesc;

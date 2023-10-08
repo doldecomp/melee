@@ -20,7 +20,7 @@ void HSD_PerfSetDrawTime(void);
 void HSD_PerfSetTotalTime(void);
 void HSD_PerfCountEnvelopeBlending(s32 n);
 
-static inline void HSD_PerfCountMtxLoad()
+static inline void HSD_PerfCountMtxLoad(void)
 {
     HSD_PerfCurrentStat.nb_mtx_load += 1;
 }

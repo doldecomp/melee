@@ -13,7 +13,7 @@ u32 __DVDLongFileNameFlag = 0;
 
 static void cbForReadAsync(s32 result, DVDCommandBlock* block);
 
-void __DVDFSInit()
+void __DVDFSInit(void)
 {
     BootInfo = (OSBootInfo*) OSPhysicalToCached(0);
     FstStart = (FSTEntry*) BootInfo->FSTLocation;
@@ -155,7 +155,9 @@ s32 DVDConvertPathToEntrynum(const char* pathPtr)
 
 bool DVDFastOpen(s32 entrynum, DVDFileInfo* fileInfo)
 {
-    if ((entrynum < 0) || (entrynum >= MaxEntryNum) || entryIsDir(entrynum)) {
+    if ((entrynum < 0) || ((unsigned) entrynum >= MaxEntryNum) ||
+        entryIsDir(entrynum))
+    {
         return false;
     }
 
@@ -176,13 +178,14 @@ bool DVDClose(DVDFileInfo* fileInfo)
 bool DVDReadAsyncPrio(DVDFileInfo* fileInfo, void* addr, s32 length,
                       s32 offset, DVDCallback callback, s32 prio)
 {
-    if (!((0 <= offset) && (offset < fileInfo->length))) {
+    if (!((0 <= offset) && ((unsigned) offset < fileInfo->length))) {
         OSPanic("dvdfs.c", 739,
                 "DVDReadAsync(): specified area is out of the file  ");
     }
 
     if (!((0 <= offset + length) &&
-          (offset + length < fileInfo->length + DVD_MIN_TRANSFER_SIZE)))
+          ((unsigned) (offset + length) <
+           fileInfo->length + DVD_MIN_TRANSFER_SIZE)))
     {
         OSPanic("dvdfs.c", 745,
                 "DVDReadAsync(): specified area is out of the file  ");

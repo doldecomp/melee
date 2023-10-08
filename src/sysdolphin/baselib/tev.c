@@ -1,9 +1,9 @@
 #include <placeholder.h>
+#include <string.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXTev.h>
 #include <baselib/tev.h>
-#include <string.h>
 
 static struct {
     GXColorS10 a;
@@ -11,10 +11,8 @@ static struct {
 } TevReg[4] = { 0 };
 
 static int prev_ch[48] = {
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0,
-    0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0,
-    0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0,
-    0, 3, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0,
+    0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0,
 };
 
 HSD_ObjAllocData render_alloc_data;
@@ -344,24 +342,38 @@ void HSD_StateSetNumTevStages(void)
 
 void HSD_SetupTevStage(HSD_TevDesc* desc)
 {
-    u32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8] = { 0 };
+#endif
     GXSetTevOrder(desc->stage, desc->coord, desc->map, desc->color);
     if (desc->flags == 0) {
         GXSetTevOp(desc->stage, desc->u.tevconf.clr_op);
         GXSetTevSwapMode(desc->stage, GX_TEV_SWAP0, GX_TEV_SWAP0);
         return;
     }
-    GXSetTevColorOp(desc->stage, desc->u.tevconf.clr_op, desc->u.tevconf.clr_bias, desc->u.tevconf.clr_scale, desc->u.tevconf.clr_clamp, desc->u.tevconf.clr_out_reg);
-    GXSetTevColorIn(desc->stage, desc->u.tevconf.clr_a, desc->u.tevconf.clr_b, desc->u.tevconf.clr_c, desc->u.tevconf.clr_d);
-    GXSetTevAlphaOp(desc->stage, desc->u.tevconf.alpha_op, desc->u.tevconf.alpha_bias, desc->u.tevconf.alpha_scale, desc->u.tevconf.alpha_clamp, desc->u.tevconf.alpha_out_reg);
-    GXSetTevAlphaIn(desc->stage, desc->u.tevconf.alpha_a, desc->u.tevconf.alpha_b, desc->u.tevconf.alpha_c, desc->u.tevconf.alpha_d);
-    GXSetTevSwapMode(desc->stage, desc->u.tevconf.ras_swap, desc->u.tevconf.tex_swap);
+    GXSetTevColorOp(desc->stage, desc->u.tevconf.clr_op,
+                    desc->u.tevconf.clr_bias, desc->u.tevconf.clr_scale,
+                    desc->u.tevconf.clr_clamp, desc->u.tevconf.clr_out_reg);
+    GXSetTevColorIn(desc->stage, desc->u.tevconf.clr_a, desc->u.tevconf.clr_b,
+                    desc->u.tevconf.clr_c, desc->u.tevconf.clr_d);
+    GXSetTevAlphaOp(desc->stage, desc->u.tevconf.alpha_op,
+                    desc->u.tevconf.alpha_bias, desc->u.tevconf.alpha_scale,
+                    desc->u.tevconf.alpha_clamp,
+                    desc->u.tevconf.alpha_out_reg);
+    GXSetTevAlphaIn(desc->stage, desc->u.tevconf.alpha_a,
+                    desc->u.tevconf.alpha_b, desc->u.tevconf.alpha_c,
+                    desc->u.tevconf.alpha_d);
+    GXSetTevSwapMode(desc->stage, desc->u.tevconf.ras_swap,
+                     desc->u.tevconf.tex_swap);
     GXSetTevKColorSel(desc->stage, desc->u.tevconf.kcsel);
     GXSetTevKAlphaSel(desc->stage, desc->u.tevconf.kasel);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void HSD_SetupTevStageAll(HSD_TevDesc* desc)
 {
     int var_r31 = 0;
@@ -377,7 +389,9 @@ void HSD_SetupTevStageAll(HSD_TevDesc* desc)
     GXSetNumTevStages(current_tev);
     current_tev = 0;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 int HSD_Channel2Num(int chan)
 {
@@ -405,77 +419,127 @@ int HSD_Channel2Num(int chan)
 int HSD_Index2TevStage(int idx)
 {
     switch (idx) {
-    case 0: return 0;
-    case 1: return 1;
-    case 2: return 2;
-    case 3: return 3;
-    case 4: return 4;
-    case 5: return 5;
-    case 6: return 6;
-    case 7: return 7;
-    case 8: return 8;
-    case 9: return 9;
-    case 10: return 10;
-    case 11: return 11;
-    case 12: return 12;
-    case 13: return 13;
-    case 14: return 14;
-    case 15: return 15;
+    case 0:
+        return 0;
+    case 1:
+        return 1;
+    case 2:
+        return 2;
+    case 3:
+        return 3;
+    case 4:
+        return 4;
+    case 5:
+        return 5;
+    case 6:
+        return 6;
+    case 7:
+        return 7;
+    case 8:
+        return 8;
+    case 9:
+        return 9;
+    case 10:
+        return 10;
+    case 11:
+        return 11;
+    case 12:
+        return 12;
+    case 13:
+        return 13;
+    case 14:
+        return 14;
+    case 15:
+        return 15;
     default:
         __assert(__FILE__, 0x2C5, "0");
         return 15;
     }
 }
 
-#pragma push
 #ifdef MUST_MATCH
+#pragma push
 #pragma force_active on
 #endif
 int HSD_TevStage2Index(int stage)
 {
     switch (stage) {
-    case 0: return 0;
-    case 1: return 1;
-    case 2: return 2;
-    case 3: return 3;
-    case 4: return 4;
-    case 5: return 5;
-    case 6: return 6;
-    case 7: return 7;
-    case 8: return 8;
-    case 9: return 9;
-    case 10: return 10;
-    case 11: return 11;
-    case 12: return 12;
-    case 13: return 13;
-    case 14: return 14;
-    case 15: return 15;
+    case 0:
+        return 0;
+    case 1:
+        return 1;
+    case 2:
+        return 2;
+    case 3:
+        return 3;
+    case 4:
+        return 4;
+    case 5:
+        return 5;
+    case 6:
+        return 6;
+    case 7:
+        return 7;
+    case 8:
+        return 8;
+    case 9:
+        return 9;
+    case 10:
+        return 10;
+    case 11:
+        return 11;
+    case 12:
+        return 12;
+    case 13:
+        return 13;
+    case 14:
+        return 14;
+    case 15:
+        return 15;
     default:
         __assert(__FILE__, 0x2FA, "0");
         return 0;
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 int HSD_TevStage2Num(int stage)
 {
     switch (stage) {
-    case 0: return 1;
-    case 1: return 2;
-    case 2: return 3;
-    case 3: return 4;
-    case 4: return 5;
-    case 5: return 6;
-    case 6: return 7;
-    case 7: return 8;
-    case 8: return 9;
-    case 9: return 10;
-    case 10: return 11;
-    case 11: return 12;
-    case 12: return 13;
-    case 13: return 14;
-    case 14: return 15;
-    case 15: return 16;
+    case 0:
+        return 1;
+    case 1:
+        return 2;
+    case 2:
+        return 3;
+    case 3:
+        return 4;
+    case 4:
+        return 5;
+    case 5:
+        return 6;
+    case 6:
+        return 7;
+    case 7:
+        return 8;
+    case 8:
+        return 9;
+    case 9:
+        return 10;
+    case 10:
+        return 11;
+    case 11:
+        return 12;
+    case 12:
+        return 13;
+    case 13:
+        return 14;
+    case 14:
+        return 15;
+    case 15:
+        return 16;
     default:
         __assert(__FILE__, 0x319, "0");
         return 0;
@@ -538,8 +602,8 @@ int HSD_TexCoordID2Num(int id)
     }
 }
 
-#pragma push
 #ifdef MUST_MATCH
+#pragma push
 #pragma force_active on
 #endif
 void ChanUpdateFunc(HSD_Chan* chan, int arg1, f32* arg2)
@@ -573,16 +637,17 @@ void ChanUpdateFunc(HSD_Chan* chan, int arg1, f32* arg2)
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static int invalid_prev_ch[48] = {
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0,
-    0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0,
-    0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0,
-    0, 3, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0,
+    0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0,
 };
 
-void _HSD_StateInvalidateColorChannel(void) {
+void _HSD_StateInvalidateColorChannel(void)
+{
     memcpy(&prev_ch, &invalid_prev_ch, sizeof(prev_ch));
     prev_amb_invalid.unk0 = 1;
     prev_amb_invalid.unk4 = 1;

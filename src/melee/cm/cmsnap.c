@@ -28,7 +28,7 @@ s32 cmSnap_80031618(void)
     return cmsnap_data.unk1;
 }
 
-void cmSnap_80031640(HSD_GObj* arg0, s32 arg1)
+void cmSnap_80031640(HSD_GObj* arg0, int code)
 {
     switch (cmsnap_data.unk0) {
     case 0:

@@ -26,7 +26,7 @@ struct Fighter_GObj {
     /* +10 */ Fighter_GObj* next_gx;
     /* +14 */ Fighter_GObj* prev_gx;
     /* +18 */ HSD_GObjProc* proc;
-    /* +1C */ void (*render_cb)(Fighter_GObj* gobj, s32 code);
+    /* +1C */ void (*rendered)(Fighter_GObj* gobj, s32 code);
     /* +20 */ u64 gxlink_prios;
     /* +28 */ HSD_JObj* hsd_obj;
     /* +2C */ Fighter* user_data;

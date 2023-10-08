@@ -1,11 +1,9 @@
-#ifndef MELEE_IT_ITYOSHISTAR_H
-#define MELEE_IT_ITYOSHISTAR_H
+#ifndef GALE01_2B2FC8
+#define GALE01_2B2FC8
 
-#include <melee/it/forward.h>
-#include <dolphin/mtx/forward.h>
-#include <sysdolphin/baselib/forward.h>
+#include "it/forward.h"
 
-extern ItemStateTable it_803F7158[];
+#include "it/types.h"
 
 Item_GObj* it_802B2FC8(HSD_GObj* parent, Vec3* pos, f32 dir);
 bool it_802B309C(Item_GObj*);
@@ -19,5 +17,7 @@ bool it_802B3294(Item_GObj*);
 void it_802B32C8(Item_GObj*);
 bool it_802B3324(Item_GObj*);
 void it_802B3348(Item_GObj*, HSD_GObj*);
+
+extern ItemStateTable it_803F7158[];
 
 #endif

@@ -565,13 +565,13 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/it/it_26B1.c.o\
     $(BUILD_DIR)/asm/melee/it/it_266F.s.o\
     $(BUILD_DIR)/asm/melee/it/itcoll.s.o\
+    $(BUILD_DIR)/src/melee/it/it_3F14.c.o\
+    $(BUILD_DIR)/asm/melee/it/it_3F14.s.o\
+    $(BUILD_DIR)/src/melee/it/it_3F23.c.o\
+    $(BUILD_DIR)/asm/melee/it/it_3F23.s.o\
+    $(BUILD_DIR)/src/melee/it/it_3F31.c.o\
+    $(BUILD_DIR)/asm/melee/it/it_3F31.s.o\
     $(BUILD_DIR)/asm/melee/it/it_2725.s.o\
-    $(BUILD_DIR)/src/melee/it/it_803F1418.c.o\
-    $(BUILD_DIR)/asm/melee/it/it_803F1418.s.o\
-    $(BUILD_DIR)/src/melee/it/it_803F23CC.c.o\
-    $(BUILD_DIR)/asm/melee/it/it_803F23CC.s.o\
-    $(BUILD_DIR)/src/melee/it/it_803F3100.c.o\
-    $(BUILD_DIR)/asm/melee/it/it_803F3100.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/it/items/itcapsule.c.o\
@@ -634,7 +634,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itnesspkthundertrail.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itkoopaflame.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itnessbat.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itunk1.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/it_2ADA.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itkirbyhammer.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itfoxblaster.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itlinkbow.s.o\
@@ -729,8 +729,8 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itoctarock.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itunk4.s.o\
-    $(BUILD_DIR)/asm/melee/it/it_802E6AEC.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/it_2E5A.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/it_2E6A.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itarwinglaser.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itoctarockstone.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itleadead.s.o\
@@ -744,11 +744,11 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itmasterhandbullet.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itcrazyhandbomb.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itcoin.s.o\
-    $(BUILD_DIR)/asm/melee/it/itkirbyunk.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itunk2.s.o\
-    $(BUILD_DIR)/asm/melee/it/it_802F2BFC.s.o\
-    $(BUILD_DIR)/asm/melee/it/itkirbyyoshispecialn.s.o\
-    $(BUILD_DIR)/asm/melee/it/it_27CF.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkirby_2F23.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/it_2F28.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/it_2F2B.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkirbyyoshispecialn.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/it_27CF.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/if/ifall.s.o\
