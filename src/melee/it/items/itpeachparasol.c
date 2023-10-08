@@ -30,7 +30,7 @@ ItemStateTable it_803F74F8[] = {
 int it_802BDA40(Item_GObj* item_gobj, int i)
 {
     static int it_804D5518[] = { 15, 16 };
-    return it_804D5518[it_803F74F8[i].msid];
+    return it_804D5518[it_803F74F8[i].anim_id];
 }
 
 Item_GObj* it_802BDA64(HSD_GObj* parent, Vec3* pos, u8 arg2, f32 dir)

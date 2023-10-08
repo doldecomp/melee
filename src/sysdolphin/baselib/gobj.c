@@ -112,11 +112,11 @@ u32 HSD_GObj_80390EB8(s32 i)
 
 extern HSD_GObj* HSD_GObj_804D7814;
 
-inline void render_gobj(HSD_GObj* cur, s32 i)
+inline void render_gobj(HSD_GObj* cur, int i)
 {
     HSD_GObj* saved = HSD_GObj_804D7814;
     HSD_GObj_804D7814 = cur;
-    cur->render_cb(cur, i);
+    cur->rendered(cur, i);
     HSD_GObj_804D7814 = saved;
 }
 
@@ -134,7 +134,7 @@ void HSD_GObj_80390ED0(HSD_GObj* gobj, u32 mask)
                     for (cur = HSD_GObj_804D7824[j]; cur != NULL;
                          cur = cur->next_gx)
                     {
-                        if (cur->render_cb != NULL) {
+                        if (cur->rendered != NULL) {
                             render_gobj(cur, i);
                         }
                     }
@@ -154,10 +154,10 @@ void HSD_GObj_80390FC0(void)
     HSD_GObj* saved;
     HSD_GObj* cur = HSD_GObj_804D7824[HSD_GObjLibInitData.gx_link_max + 1];
     while (cur != NULL) {
-        if (cur->render_cb != NULL) {
+        if (cur->rendered != NULL) {
             saved = HSD_GObj_804D7818;
             HSD_GObj_804D7818 = cur;
-            cur->render_cb(cur, 0);
+            cur->rendered(cur, 0);
             HSD_GObj_804D7818 = saved;
         }
         cur = cur->next_gx;

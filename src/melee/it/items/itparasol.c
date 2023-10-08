@@ -1,8 +1,8 @@
 #include "itparasol.h"
 
-#include <melee/it/it_266F.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/item.h>
+#include "it/it_266F.h"
+#include "it/it_26B1.h"
+#include "it/item.h"
 
 // externs
 void it_8026D62C(Item_GObj*, HSD_GObjEvent);
@@ -83,7 +83,7 @@ int it_8028B08C(Item_GObj* item_gobj, int statenum)
     static int it_803F5B60[] = {
         20, 16, 45, 2, 20, 30, 40, 16,
     };
-    return it_803F5B60[it_803F5AB0[statenum].msid];
+    return it_803F5B60[it_803F5AB0[statenum].anim_id];
 }
 
 void it_8028B0B8(Item_GObj* item_gobj)
@@ -262,7 +262,7 @@ bool it_8028B1A4(Item_GObj* item_gobj)
 
 #endif
 
-inline f32 decelerateItemX(Item* item, f32 decel_x)
+inline void decelerateItemX(Item* item, f32 decel_x)
 {
     if (fabsf(item->x40_vel.x) > decel_x) {
         if (item->x40_vel.x > decel_x) {
@@ -330,14 +330,14 @@ bool it_8028B51C(Item_GObj* item_gobj)
     return false;
 }
 
-void it_8028B540(Item_GObj* item_gobj)
+bool it_8028B540(Item_GObj* item_gobj)
 {
-    it_80273030(item_gobj);
+    return it_80273030(item_gobj);
 }
 
-void it_8028B560(Item_GObj* item_gobj)
+bool it_8028B560(Item_GObj* item_gobj)
 {
-    itColl_BounceOffShield(item_gobj);
+    return itColl_BounceOffShield(item_gobj);
 }
 
 void it_8028B580(Item_GObj* item_gobj)
@@ -370,7 +370,7 @@ bool it_8028B60C(Item_GObj* item_gobj)
 
 void it_8028B614(Item_GObj* item_gobj) {}
 
-static inline animSpeed(Item_GObj* item_gobj, f32 speed, int statenum)
+static inline void animSpeed(Item_GObj* item_gobj, f32 speed, int statenum)
 {
     Item* item = GET_ITEM(item_gobj);
     if (statenum > 4) {

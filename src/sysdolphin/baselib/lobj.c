@@ -7,7 +7,7 @@
 #include <dolphin/mtx/vec.h>
 #include <baselib/cobj.h>
 
-void LObjInfoInit(void);
+static void LObjInfoInit(void);
 
 HSD_LObjInfo hsdLObj = { LObjInfoInit };
 
@@ -340,7 +340,9 @@ void HSD_LObjSetupSpecularInit(Mtx pmtx)
 
 static void setup_diffuse_lightobj(HSD_LObj* lobj)
 {
-    u32 flags = lobj->flags;
+#ifdef MUST_MATCH
+    u32 _ = lobj->flags;
+#endif
 
     GXInitLightColor(&lobj->lightobj, lobj->color);
     lobj->hw_color = lobj->color;
@@ -372,7 +374,11 @@ static void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id)
         GXInitLightColor(&lobj->spec_lightobj, lobj->color);
         lobj->shininess = 50.0F;
 
+#ifdef MUST_MATCH
         x = x = lobj->shininess;
+#else
+        x = lobj->shininess;
+#endif
 
         x *= 0.5F;
         GXInitLightAttn(&lobj->spec_lightobj, 0.0F, 0.0F, 1.0F, x, 0.0F,

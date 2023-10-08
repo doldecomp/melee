@@ -9,18 +9,8 @@
 #include <MSL/math.h>
 
 ItemStateTable it_803F67D0[] = {
-    {
-        0,
-        it_8029C6F4,
-        it_8029C9CC,
-        it_8029C9EC,
-    },
-    {
-        1,
-        it_8029C6F4,
-        it_8029C9CC,
-        it_8029C9EC,
-    }
+    { 0, it_8029C6F4, it_8029C9CC, it_8029C9EC },
+    { 1, it_8029C6F4, it_8029C9CC, it_8029C9EC },
 };
 
 inline void* getFoxLaser(Item* item)
@@ -154,7 +144,10 @@ bool it_8029C9EC(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     Vec3 sp18 = item->pos;
-    u32 unused[1];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4] = { 0 };
+#endif
     if (it_8029C4D4(item_gobj)) {
         it_80275158(item_gobj, 1.0F);
         item->pos = sp18;
@@ -162,7 +155,7 @@ bool it_8029C9EC(Item_GObj* item_gobj)
     return false;
 }
 
-bool it_8029CA78(Item_GObj*)
+bool it_8029CA78(Item_GObj* arg0)
 {
     return true;
 }
@@ -181,7 +174,7 @@ bool it_8029CA80(Item_GObj* item_gobj)
     return false;
 }
 
-bool it_8029CC4C(Item_GObj*)
+bool it_8029CC4C(Item_GObj* arg0)
 {
     return true;
 }
@@ -189,7 +182,10 @@ bool it_8029CC4C(Item_GObj*)
 bool it_8029CC54(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
-    u32 unused[1];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4] = { 0 };
+#endif
     lbVector_Mirror(&item->x40_vel, &item->xC58);
     item->xDD4_itemVar.foxlaser.xDD4 = 1e-3;
     item->xDD4_itemVar.foxlaser.xDD8 =
@@ -198,7 +194,7 @@ bool it_8029CC54(Item_GObj* item_gobj)
     return false;
 }
 
-bool it_8029CCF0(Item_GObj*)
+bool it_8029CCF0(Item_GObj* arg0)
 {
     return true;
 }

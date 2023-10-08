@@ -166,9 +166,6 @@ void HSD_LObjSetAttn(HSD_LObj* lobj, f32 a0, f32 a1, f32 a2, f32 k0, f32 k1,
                      f32 k2);
 
 void HSD_LObjSetupSpecularInit(Mtx pmtx);
-void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id);
-void setup_point_lightobj(HSD_LObj* lobj, Mtx mtx);
-void setup_spot_lightobj(HSD_LObj* lobj, Mtx mtx);
 u32 HSD_LObjGetType(HSD_LObj* lobj);
 void HSD_LObjAddCurrent(HSD_LObj* lobj);
 void HSD_LObjUnrefThis(HSD_LObj* lobj);

@@ -1,4 +1,5 @@
 #include <math.h>
+#include <placeholder.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/vec.h>
@@ -10,13 +11,13 @@
 #include <MSL/trigf.h>
 #include <Runtime/runtime.h>
 
-// TODO doesn't seem like this file should be in melee/
+/// @todo doesn't seem like this file should be in melee/
 #include <melee/lb/lbrefract.h>
 
 static HSD_ClassInfo* default_class;
 static HSD_CObj* current;
 
-extern const f32 HSD_CObj_804DE474; // 0.01745329252F
+extern const float HSD_CObj_804DE474; // 0.01745329252F
 
 #define DegToRad(a) ((a) *0.01745329252F)
 
@@ -146,7 +147,7 @@ lbl_80367840:
 void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
                          s32 enable_depth)
 {
-    f32 m_val, z_val, left_res, right_res, top_res, bottom_res;
+    float m_val, z_val, left_res, right_res, top_res, bottom_res;
 
     if (cobj != NULL &&
         ((enable_color != 0 || enable_alpha != 0 || enable_depth == 0)))
@@ -230,7 +231,7 @@ void HSD_CObjAddAnim(HSD_CObj* cobj, HSD_CameraAnim* canim)
 HSD_CObjInfo hsdCObj = { CObjInfoInit };
 
 typedef struct _HSD_FObjData {
-    f32 fv;
+    float fv;
     s32 iv;
     Vec3 p;
 } FObjData;
@@ -301,7 +302,7 @@ void HSD_CObjAnim(HSD_CObj* cobj)
     HSD_WObjInterpretAnim(cobj->interest);
 }
 
-void HSD_CObjReqAnim(HSD_CObj* cobj, f32 startframe)
+void HSD_CObjReqAnim(HSD_CObj* cobj, float startframe)
 {
     if (cobj == NULL) {
         return;
@@ -347,9 +348,9 @@ bool makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
 }
 
 extern GXRenderModeObj HSD_VIData;
-extern const f32 HSD_CObj_804DE478;
-extern const f32 HSD_CObj_804DE47C;
 extern const f64 HSD_CObj_804DE480;
+extern const float HSD_CObj_804DE478;
+extern const float HSD_CObj_804DE47C;
 
 // Matching, but references extern float conversion value
 #ifdef MUST_MATCH
@@ -529,22 +530,26 @@ lbl_80367E74:
 } // clang-format on
 #pragma pop
 #else
+
 int setupNormalCamera(HSD_CObj* cobj)
 {
     Mtx44 sp1C;
-    f32 height_scale;
-    f32 top_scaled;
-    f32 left_scaled;
-    f32 width_scaled;
-    f32 bottom_scaled;
-    f32 width_scale;
-    f32 height_scaled;
-    f32 right_scaled;
+    float height_scale;
+    float top_scaled;
+    float left_scaled;
+    float width_scaled;
+    float bottom_scaled;
+    float width_scale;
+    float height_scaled;
+    float right_scaled;
 
-    u32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8] = { 0 };
+#endif
 
-    width_scale = (f32) HSD_VIData.fbWidth / HSD_VIData.viWidth;
-    height_scale = (f32) HSD_VIData.efbHeight / HSD_VIData.viHeight;
+    width_scale = (float) HSD_VIData.fbWidth / HSD_VIData.viWidth;
+    height_scale = (float) HSD_VIData.efbHeight / HSD_VIData.viHeight;
 
     left_scaled = cobj->viewport.left * width_scale;
     right_scaled = cobj->viewport.right * width_scale;
@@ -573,9 +578,10 @@ int setupNormalCamera(HSD_CObj* cobj)
 #endif
 
 extern const f64 HSD_CObj_804DE488;
-extern const f32 HSD_CObj_804DE490;
-extern const f32 HSD_CObj_804DE494;
+extern const float HSD_CObj_804DE490;
+extern const float HSD_CObj_804DE494;
 
+#ifdef MWERKS_GEKKO
 #pragma push
 asm bool setupTopHalfCamera()
 { // clang-format off
@@ -739,7 +745,9 @@ lbl_803680D8:
 /* 803680F4 00364CD4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#endif
 
+#ifdef MWERKS_GEKKO
 #pragma push
 asm bool setupBottomHalfCamera()
 { // clang-format off
@@ -928,6 +936,7 @@ lbl_80368384:
 /* 803683A0 00364F80  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#endif
 
 inline void HSD_WObjClearFlags(HSD_WObj* wobj, u32 flags)
 {
@@ -1008,7 +1017,7 @@ bool HSD_CObjSetCurrent(HSD_CObj* cobj, cobj_UnkCallback1 arg1)
     }
 }
 
-void HSD_CObjEndCurrent()
+void HSD_CObjEndCurrent(void)
 {
     _HSD_ZListSort();
     _HSD_ZListDisp();
@@ -1058,13 +1067,13 @@ void HSD_CObjSetEyePosition(HSD_CObj* cobj, Vec3* position)
     HSD_WObjSetPosition(HSD_CObjGetEyePositionWObj(cobj), position);
 }
 
-static inline f32 fabsf(f32 x)
+static inline float fabsf(float x)
 {
     *(u32*) &x &= 0x7FFFFFFF;
     return x;
 }
 
-extern f32 HSD_CObj_804DE498;
+extern float HSD_CObj_804DE498;
 #define FLT_MIN HSD_CObj_804DE498
 
 static inline int _vec_normalize_check(Vec3* src, Vec3* dst)
@@ -1104,7 +1113,7 @@ int HSD_CObjGetEyeVector(HSD_CObj* cobj, Vec3* eye)
     return -1;
 }
 
-f32 HSD_CObjGetEyeDistance(HSD_CObj* cobj)
+float HSD_CObjGetEyeDistance(HSD_CObj* cobj)
 {
     Vec3 position;
     Vec3 interest;
@@ -1124,7 +1133,7 @@ f32 HSD_CObjGetEyeDistance(HSD_CObj* cobj)
 #ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
-static f32 unused1[] = {
+static float unused1[] = {
     0.0F, 0.0F, 0.0F,
 
     0.0F, 1.0F, 0.0F,
@@ -1143,20 +1152,20 @@ int vec_normalize_check(Vec3* src, Vec3* dst)
     return _vec_normalize_check(src, dst);
 }
 
-int roll2upvec(HSD_CObj* cobj, Vec3* up, f32 roll);
+int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll);
 
 extern const f64 HSD_CObj_804DE4B0;
 extern const f64 HSD_CObj_804DE4B8;
 extern const f64 HSD_CObj_804DE4C0;
 
 #ifndef MUST_MATCH
-int roll2upvec(HSD_CObj* cobj, Vec3* up, f32 roll)
+int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
 {
     Vec3 sp88;
     Vec3 sp7C;
     Vec3 sp70;
     Mtx sp40;
-    f32 var_f4;
+    float var_f4;
     s32 var_r3;
 
     var_r3 = HSD_CObjGetEyeVector(cobj, &sp88);
@@ -1182,7 +1191,7 @@ int roll2upvec(HSD_CObj* cobj, Vec3* up, f32 roll)
 }
 #else
 #pragma push
-asm int roll2upvec(HSD_CObj* cobj, Vec3* up, f32 roll)
+asm int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
 { // clang-format off
     nofralloc
 /* 80368BC0 003657A0  7C 08 02 A6 */	mflr r0
@@ -1373,6 +1382,7 @@ lbl_80368E54:
 #pragma pop
 #endif
 
+#ifdef MWERKS_GEKKO
 #pragma push
 asm void HSD_CObjGetUpVector()
 { // clang-format off
@@ -1533,11 +1543,14 @@ lbl_8036909C:
 /* 803690AC 00365C8C  7C 08 03 A6 */	mtlr r0
 /* 803690B0 00365C90  4E 80 00 20 */	blr
 } // clang-format on
+#endif
 
-extern const f64 HSD_CObj_804DE4A0;
-extern const f64 HSD_CObj_804DE4A8;
+#ifdef MWERKS_GEKKO
+/* static */ extern const f64 HSD_CObj_804DE4A0;
+/* static */ extern const f64 HSD_CObj_804DE4A8;
 
-asm void HSD_CObjSetUpVector()
+#pragma push
+asm void HSD_CObjSetUpVector(void)
 { // clang-format off
     nofralloc
 /* 803690B4 00365C94  7C 08 02 A6 */	mflr r0
@@ -1699,8 +1712,11 @@ lbl_803692CC:
 /* 803692E0 00365EC0  7C 08 03 A6 */	mtlr r0
 /* 803692E4 00365EC4  4E 80 00 20 */	blr
 } // clang-format on
+#pragma pop
+#endif
 
-asm void HSD_CObjGetLeftVector()
+#ifdef MWERKS_GEKKO
+asm void HSD_CObjGetLeftVector(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 803692E8 00365EC8  7C 08 02 A6 */	mflr r0
@@ -1880,15 +1896,16 @@ lbl_8036954C:
 /* 80369560 00366140  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#endif
 
 void HSD_CObjSetMtxDirty(HSD_CObj* cobj)
 {
-    cobj->flags |= 0xC0000000;
+    cobj->flags |= (1 << 30) | (1 << 31);
 }
 
 bool HSD_CObjMtxIsDirty(HSD_CObj* cobj)
 {
-    return (cobj->flags & 0x40000000) ||
+    return (cobj->flags & (1 << 30)) ||
            (cobj->eyepos != NULL && (cobj->eyepos->flags & 2)) ||
            (cobj->interest != NULL && (cobj->interest->flags & 2));
 }
@@ -1900,12 +1917,12 @@ void HSD_CObjGetViewingMtx(HSD_CObj* cobj, Mtx mtx)
 
 MtxPtr HSD_CObjGetInvViewingMtxPtrDirect(HSD_CObj* cobj)
 {
-    if (cobj->flags & 0x80000000) {
+    if (cobj->flags & (1 << 31)) {
         if (cobj->proj_mtx == NULL) {
             cobj->proj_mtx = HSD_MtxAlloc();
         }
         PSMTXInverse(cobj->view_mtx, *cobj->proj_mtx);
-        HSD_CObjClearFlags(cobj, 0x80000000);
+        HSD_CObjClearFlags(cobj, (1 << 31));
     }
     return *cobj->proj_mtx;
 }
@@ -1958,8 +1975,10 @@ MtxPtr HSD_CObjGetInvViewingMtxPtr(HSD_CObj* cobj)
     return HSD_CObjGetInvViewingMtxPtrDirect(cobj);
 }
 
+#ifdef MWERKS_GEKKO
 #pragma push
-asm void HSD_CObjSetRoll(HSD_CObj* cobj, f32){
+asm void HSD_CObjSetRoll(HSD_CObj* cobj, float)
+{
     // clang-format off
     nofralloc
 /* 803699C0 003665A0  7C 08 02 A6 */	mflr r0
@@ -2102,8 +2121,9 @@ lbl_80369BB0:
 /* 80369BC4 003667A4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#endif
 
-f32 HSD_CObjGetFov(HSD_CObj* cobj)
+float HSD_CObjGetFov(HSD_CObj* cobj)
 {
     if (cobj == NULL || cobj->projection_type != 1) {
         return HSD_CObj_804DE478;
@@ -2111,7 +2131,7 @@ f32 HSD_CObjGetFov(HSD_CObj* cobj)
     return cobj->projection_param.perspective.fov;
 }
 
-void HSD_CObjSetFov(HSD_CObj* cobj, f32 fov)
+void HSD_CObjSetFov(HSD_CObj* cobj, float fov)
 {
     if (cobj == NULL || cobj->projection_type != 1) {
         return;
@@ -2119,7 +2139,7 @@ void HSD_CObjSetFov(HSD_CObj* cobj, f32 fov)
     cobj->projection_param.perspective.fov = fov;
 }
 
-f32 HSD_CObjGetAspect(HSD_CObj* cobj)
+float HSD_CObjGetAspect(HSD_CObj* cobj)
 {
     if (cobj == NULL || cobj->projection_type != 1) {
         return HSD_CObj_804DE478;
@@ -2127,7 +2147,7 @@ f32 HSD_CObjGetAspect(HSD_CObj* cobj)
     return cobj->projection_param.perspective.aspect;
 }
 
-void HSD_CObjSetAspect(HSD_CObj* cobj, f32 aspect)
+void HSD_CObjSetAspect(HSD_CObj* cobj, float aspect)
 {
     if (cobj == NULL || cobj->projection_type != 1) {
         return;
@@ -2135,9 +2155,9 @@ void HSD_CObjSetAspect(HSD_CObj* cobj, f32 aspect)
     cobj->projection_param.perspective.aspect = aspect;
 }
 
-f32 HSD_CObjGetTop(HSD_CObj* cobj)
+float HSD_CObjGetTop(HSD_CObj* cobj)
 {
-    f32 result;
+    float result;
 
     if (cobj == NULL) {
         return HSD_CObj_804DE478;
@@ -2162,7 +2182,7 @@ f32 HSD_CObjGetTop(HSD_CObj* cobj)
 }
 
 #ifndef MUST_MATCH
-void HSD_CObjSetTop(HSD_CObj* cobj, f32 top)
+void HSD_CObjSetTop(HSD_CObj* cobj, float top)
 {
     if (cobj == NULL) {
         return;
@@ -2178,7 +2198,8 @@ void HSD_CObjSetTop(HSD_CObj* cobj, f32 top)
 }
 #else
 #pragma push
-asm void HSD_CObjSetTop(HSD_CObj* cobj, f32 top){
+asm void HSD_CObjSetTop(HSD_CObj* cobj, float top)
+{
     // clang-format off
     nofralloc
 /* 80369CE4 003668C4  28 03 00 00 */	cmplwi r3, 0
@@ -2200,7 +2221,7 @@ lbl_80369D10:
 #pragma pop
 #endif
 
-f32 HSD_CObjGetBottom(HSD_CObj* cobj)
+float HSD_CObjGetBottom(HSD_CObj* cobj)
 {
     if (cobj == NULL) {
         return HSD_CObj_804DE478;
@@ -2220,7 +2241,7 @@ f32 HSD_CObjGetBottom(HSD_CObj* cobj)
 }
 
 #ifndef MUST_MATCH
-void HSD_CObjSetBottom(HSD_CObj* cobj, f32 bottom)
+void HSD_CObjSetBottom(HSD_CObj* cobj, float bottom)
 {
     if (cobj == NULL) {
         return;
@@ -2236,7 +2257,8 @@ void HSD_CObjSetBottom(HSD_CObj* cobj, f32 bottom)
 }
 #else
 #pragma push
-asm void HSD_CObjSetBottom(HSD_CObj* cobj, f32 bottom){
+asm void HSD_CObjSetBottom(HSD_CObj* cobj, float bottom)
+{
     // clang-format off
     nofralloc
 /* 80369DB0 00366990  28 03 00 00 */    cmplwi r3, 0
@@ -2258,7 +2280,7 @@ lbl_80369DDC:
 #pragma pop
 #endif
 
-f32 HSD_CObjGetLeft(HSD_CObj* cobj)
+float HSD_CObjGetLeft(HSD_CObj* cobj)
 {
     if (cobj == NULL) {
         return HSD_CObj_804DE478;
@@ -2279,7 +2301,7 @@ f32 HSD_CObjGetLeft(HSD_CObj* cobj)
 }
 
 #ifndef MUST_MATCH
-void HSD_CObjSetLeft(HSD_CObj* cobj, f32 left)
+void HSD_CObjSetLeft(HSD_CObj* cobj, float left)
 {
     if (cobj != NULL) {
         return;
@@ -2295,7 +2317,8 @@ void HSD_CObjSetLeft(HSD_CObj* cobj, f32 left)
 }
 #else
 #pragma push
-asm void HSD_CObjSetLeft(HSD_CObj* cobj, f32 left){
+asm void HSD_CObjSetLeft(HSD_CObj* cobj, float left)
+{
     // clang-format off
     nofralloc
 /* 80369E84 00366A64  28 03 00 00 */    cmplwi r3, 0
@@ -2317,7 +2340,7 @@ lbl_80369EB0:
 #pragma pop
 #endif
 
-f32 HSD_CObjGetRight(HSD_CObj* cobj)
+float HSD_CObjGetRight(HSD_CObj* cobj)
 {
     if (cobj == NULL) {
         return HSD_CObj_804DE478;
@@ -2337,10 +2360,10 @@ f32 HSD_CObjGetRight(HSD_CObj* cobj)
     }
 }
 
-const f32 HSD_CObj_804DE474 = 0.01745329252F;
+const float HSD_CObj_804DE474 = 0.01745329252F;
 
 #ifndef MUST_MATCH
-void HSD_CObjSetRight(HSD_CObj* cobj, f32 right)
+void HSD_CObjSetRight(HSD_CObj* cobj, float right)
 {
     if (cobj != NULL) {
         return;
@@ -2356,7 +2379,8 @@ void HSD_CObjSetRight(HSD_CObj* cobj, f32 right)
 }
 #else
 #pragma push
-asm void HSD_CObjSetRight(HSD_CObj* cobj, f32 right){
+asm void HSD_CObjSetRight(HSD_CObj* cobj, float right)
+{
     // clang-format off
     nofralloc
 /* 80369F54 00366B34  28 03 00 00 */	cmplwi r3, 0
@@ -2378,7 +2402,7 @@ lbl_80369F80:
 #pragma pop
 #endif
 
-f32 HSD_CObjGetNear(HSD_CObj* cobj)
+float HSD_CObjGetNear(HSD_CObj* cobj)
 {
     if (cobj == NULL) {
         return HSD_CObj_804DE478;
@@ -2386,14 +2410,14 @@ f32 HSD_CObjGetNear(HSD_CObj* cobj)
     return cobj->near;
 }
 
-void HSD_CObjSetNear(HSD_CObj* cobj, f32 near)
+void HSD_CObjSetNear(HSD_CObj* cobj, float near)
 {
     if (cobj != NULL) {
         cobj->near = near;
     }
 }
 
-f32 HSD_CObjGetFar(HSD_CObj* cobj)
+float HSD_CObjGetFar(HSD_CObj* cobj)
 {
     if (cobj == NULL) {
         return HSD_CObj_804DE478;
@@ -2401,10 +2425,12 @@ f32 HSD_CObjGetFar(HSD_CObj* cobj)
     return cobj->far;
 }
 
-static const f32 HSD_CObj_804DE478 = 0.0F;
-static const f32 HSD_CObj_804DE47C = 1.0F;
+#ifdef MWERKS_GEKKO
+static const float HSD_CObj_804DE478 = 0.0F;
+static const float HSD_CObj_804DE47C = 1.0F;
+#endif
 
-void HSD_CObjSetFar(HSD_CObj* cobj, f32 far)
+void HSD_CObjSetFar(HSD_CObj* cobj, float far)
 {
     if (cobj != NULL) {
         cobj->far = far;
@@ -2449,7 +2475,7 @@ void HSD_CObjGetViewportf(HSD_CObj* cobj, struct Viewport* viewport)
 
 extern const f64 HSD_CObj_804DE4C8;
 
-// Uses s16 -> f32 cast literal
+// Uses s16 -> float cast literal
 #ifndef MUST_MATCH
 void HSD_CObjSetViewport(HSD_CObj* cobj, s16* viewport)
 {
@@ -2514,8 +2540,8 @@ void HSD_CObjSetViewportf(HSD_CObj* cobj, struct Viewport* viewport)
     cobj->viewport = *viewport;
 }
 
-void HSD_CObjSetViewportfx4(HSD_CObj* cobj, f32 left, f32 right, f32 top,
-                            f32 bottom)
+void HSD_CObjSetViewportfx4(HSD_CObj* cobj, float left, float right, float top,
+                            float bottom)
 {
     if (cobj == NULL) {
         return;
@@ -2542,7 +2568,7 @@ void HSD_CObjSetProjectionType(HSD_CObj* cobj, u32 proj_type)
     cobj->projection_type = proj_type;
 }
 
-void HSD_CObjSetPerspective(HSD_CObj* cobj, f32 fov, f32 aspect)
+void HSD_CObjSetPerspective(HSD_CObj* cobj, float fov, float aspect)
 {
     if (cobj == NULL) {
         return;
@@ -2552,8 +2578,8 @@ void HSD_CObjSetPerspective(HSD_CObj* cobj, f32 fov, f32 aspect)
     cobj->projection_param.perspective.aspect = aspect;
 }
 
-void HSD_CObjSetFrustum(HSD_CObj* cobj, f32 top, f32 bottom, f32 left,
-                        f32 right)
+void HSD_CObjSetFrustum(HSD_CObj* cobj, float top, float bottom, float left,
+                        float right)
 {
     if (cobj == NULL) {
         return;
@@ -2565,7 +2591,8 @@ void HSD_CObjSetFrustum(HSD_CObj* cobj, f32 top, f32 bottom, f32 left,
     cobj->projection_param.frustum.right = right;
 }
 
-void HSD_CObjSetOrtho(HSD_CObj* cobj, f32 top, f32 bottom, f32 left, f32 right)
+void HSD_CObjSetOrtho(HSD_CObj* cobj, float top, float bottom, float left,
+                      float right)
 {
     if (cobj == NULL) {
         return;
@@ -2577,7 +2604,7 @@ void HSD_CObjSetOrtho(HSD_CObj* cobj, f32 top, f32 bottom, f32 left, f32 right)
     cobj->projection_param.ortho.right = right;
 }
 
-void HSD_CObjGetPerspective(HSD_CObj* cobj, f32* top, f32* bottom)
+void HSD_CObjGetPerspective(HSD_CObj* cobj, float* top, float* bottom)
 {
     if (cobj == NULL || cobj->projection_type != PROJ_PERSPECTIVE) {
         return;
@@ -2590,8 +2617,8 @@ void HSD_CObjGetPerspective(HSD_CObj* cobj, f32* top, f32* bottom)
     }
 }
 
-void HSD_CObjGetOrtho(HSD_CObj* cobj, f32* top, f32* bottom, f32* left,
-                      f32* right)
+void HSD_CObjGetOrtho(HSD_CObj* cobj, float* top, float* bottom, float* left,
+                      float* right)
 {
     if (cobj == NULL || cobj->projection_type != PROJ_ORTHO) {
         return;
@@ -2640,10 +2667,11 @@ HSD_CObj* HSD_CObjAlloc(void)
 {
     HSD_CObj* cobj = (HSD_CObj*) hsdNew(
         default_class ? default_class : &hsdCObj.parent.parent);
-    HSD_ASSERT3(0x7A2, HSD_CObj_804D5D48, cobj);
+    HSD_ASSERT3(1954, HSD_CObj_804D5D48, cobj);
     return cobj;
 }
 
+#ifdef MWERKS_GEKKO
 static Vec3 HSD_CObj_8040631C = { 0, 1, 0 };
 static char HSD_CObj_804D5D50[3] = "0";
 
@@ -2825,6 +2853,13 @@ lbl_8036A540:
 /* 8036A558 00367138  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+static int CObjLoad(HSD_CObj* cobj, HSD_CObjDesc* cobjdesc)
+{
+    NOT_IMPLEMENTED;
+}
+#endif
 
 void HSD_CObjInit(HSD_CObj* cobj, HSD_CObjDesc* desc)
 {

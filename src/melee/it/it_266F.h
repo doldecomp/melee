@@ -1,7 +1,7 @@
 /// @file
 /// @attention Symbols in this file are placed correctly.
-#ifndef MELEE_IT_CODE_80266F3C_H
-#define MELEE_IT_CODE_80266F3C_H
+#ifndef GALE01_26C47C
+#define GALE01_26C47C
 
 #include "it/types.h"
 
@@ -37,6 +37,13 @@ void it_8027870C(s32);
 
 bool it_8026D324(bool);
 s32 it_8026D604(HSD_GObj* gobj);
+void it_8026D62C(Item_GObj*, HSD_GObjEvent);
+void it_8026E15C(Item_GObj*, HSD_GObjEvent);
+void it_8026E414(Item_GObj*, HSD_GObjEvent);
+void it_8026F3D4(Item_GObj*, int, bool, int);
+void it_8026E8C4(Item_GObj*, HSD_GObjEvent, HSD_GObjEvent);
+s32 it_8026DF34(void);
+bool it_8026F8B4(Item_GObj*, Vec3*, Vec3*, int);
 void it_8026F9A0(void);
 void it_802701BC(HSD_GObj* gobj);
 void it_802703E8(HSD_GObj* gobj);
@@ -59,6 +66,9 @@ void it_802725D4(HSD_GObj*);
 void it_80272784(HSD_GObj* gobj);
 void it_80272A18(HSD_JObj* item_jobj);
 void it_80272A3C(HSD_JObj* item_jobj);
+void it_80272C08(Item_GObj*);
+void it_80273454(Item_GObj*);
+void it_80275444(Item_GObj*);
 
 /// Check if GObj is Item class
 bool it_80272D1C(HSD_GObj* gobj);
@@ -133,10 +143,10 @@ UNK_RET it_80272818(UNK_PARAMS);
 HSD_JObj* it_80272C90(Item_GObj* gobj);
 
 bool it_8026E9A4(Item_GObj*, Vec3*, Vec3*, int);
+void it_8026EECC(HSD_GObj*, int);
 bool it_80273130(Item_GObj*);
 void it_802750F8(Item_GObj*);
 void it_80274594(Item_GObj*);
-void it_8026EECC(Item_GObj*, int);
 bool it_8026DA08(Item_GObj*);
 bool it_80276308(Item_GObj*);
 bool it_802763E0(Item_GObj*);
@@ -151,6 +161,6 @@ bool itColl_BounceOffShield(Item_GObj*);
 bool itColl_BounceOffVictim(Item_GObj*);
 void it_8026E0F4(Item_GObj*);
 void it_80272BA4(Item_GObj*);
-void it_80273030(Item_GObj*);
+bool it_80273030(Item_GObj*);
 
 #endif

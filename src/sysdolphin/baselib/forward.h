@@ -80,6 +80,7 @@ typedef struct UnkGeneratorStruct UnkGeneratorStruct;
 typedef union HSD_ObjData HSD_ObjData;
 typedef union HSD_Rumble HSD_Rumble;
 
+typedef void (*GObj_RenderFunc)(HSD_GObj* gobj, int code);
 typedef void (*HSD_ObjUpdateFunc)(any_t obj, enum_t type, HSD_ObjData* fval);
 typedef void (*HSD_DevComCallback)(int, int, int, bool cancelflag);
 typedef void (*HSD_GObjEvent)(HSD_GObj* gobj);

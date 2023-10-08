@@ -1044,7 +1044,7 @@ void ftDrawCommmon_80080C28(HSD_GObj* gobj, s32 arg1)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ftDrawCommmon_80080E18(HSD_GObj*, long)
+asm void ftDrawCommmon_80080E18(HSD_GObj*, int)
 { // clang-format off
     nofralloc
 /* 80080E18 0007D9F8  7C 08 02 A6 */	mflr r0
@@ -1255,7 +1255,7 @@ lbl_80081104:
 
 #else
 
-void ftDrawCommmon_80080E18(HSD_GObj* arg0, long arg1)
+void ftDrawCommmon_80080E18(HSD_GObj* arg0, int arg1)
 {
     NOT_IMPLEMENTED;
 }

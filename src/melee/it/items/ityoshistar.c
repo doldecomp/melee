@@ -6,14 +6,12 @@
 #include <melee/it/item.h>
 #include <melee/it/types.h>
 
-ItemStateTable it_803F7158[] = {
-    {
-        0,
-        it_802B3294,
-        it_802B32C8,
-        it_802B3324,
-    }
-};
+ItemStateTable it_803F7158[] = { {
+    0,
+    it_802B3294,
+    it_802B32C8,
+    it_802B3324,
+} };
 
 typedef struct {
     f32 speed;

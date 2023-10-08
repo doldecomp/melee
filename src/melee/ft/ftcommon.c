@@ -25,11 +25,10 @@
 #include "pl/pl_0371.h"
 #include "un/un_2FC9.h"
 
-#include <melee/it/items/itpeachparasol.h>
-
 #include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
 #include <baselib/rumble.h>
+#include <melee/it/items/itpeachparasol.h>
 
 const Vec3 ftCo_803B74A0 = { 0 };
 

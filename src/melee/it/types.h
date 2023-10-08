@@ -29,7 +29,7 @@
 /// @todo Size unknown.
 struct ItemStateTable {
     /// @at{0} @sz{4}
-    enum_t msid;
+    enum_t anim_id;
 
     /// @at{4} @sz{4}
     HSD_GObjPredicate animated;
@@ -429,11 +429,11 @@ struct Item {
     f32 xC40;             // 0xc40
     f32 xC44;             // 0xc44
     s32 xC48;             // 0xc48
-    s32 xC4C; // Something to do with damage. 0x80077464 checks this against
-              // reflectors' maximum damage threshold
-    s32 xC50; // 0xc50
-    f32 xC54; // 0xc54
-    Vec3 xC58;                  // 0xc58
+    s32 xC4C;  // Something to do with damage. 0x80077464 checks this against
+               // reflectors' maximum damage threshold
+    s32 xC50;  // 0xc50
+    f32 xC54;  // 0xc54
+    Vec3 xC58; // 0xc58
     HSD_GObj* xC64_reflectGObj; // GObj that reflected this item?
     f32 xC68;                   // 0xc68
     f32 xC6C;                   // 0xc6c
@@ -648,7 +648,7 @@ typedef struct ItemLink // user_data struct of GObj class 7
 } ItemLink;
 
 struct sdata_ItemGXLink {
-    void (*x0_renderFunc)(HSD_GObj*, s32);
+    GObj_RenderFunc x0_renderFunc;
 };
 
 struct r13_ItemTable {

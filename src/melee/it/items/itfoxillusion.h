@@ -1,7 +1,9 @@
-#ifndef MELEE_IT_ITEMS_ITFOXILLUSION_H
-#define MELEE_IT_ITEMS_ITFOXILLUSION_H
+#ifndef GALE01_29CD18
+#define GALE01_29CD18
 
-#include <melee/it/types.h>
+#include "it/forward.h"
+
+#include "it/types.h"
 
 extern ItemStateTable it_803F6818[];
 

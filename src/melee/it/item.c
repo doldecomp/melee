@@ -490,8 +490,8 @@ bool Item_8026784C(enum_t dropItem, int _)
     return result;
 }
 
-extern struct ItemLogicTable it_803F14C4[];
-extern struct ItemLogicTable it_803F3100[];
+extern struct ItemLogicTable it_803F14C4[43];
+extern struct ItemLogicTable it_803F3100[118];
 extern struct ItemLogicTable it_803F23CC[];
 extern struct ItemLogicTable it_803F4D20[];
 
@@ -1209,9 +1209,8 @@ void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
     }
 
     item_data->xCC8_knockback = 0.0F;
-    temp_r30 =
-        (new_var = &item_data->xBC_itemStateContainer[msid]);
-    item_data->anim_id = temp_r30->msid;
+    temp_r30 = (new_var = &item_data->xBC_itemStateContainer[msid]);
+    item_data->anim_id = temp_r30->anim_id;
     item_data->x5CC_currentAnimFrame = 0.0F;
     temp_r0 = item_data->anim_id;
 
@@ -1658,9 +1657,9 @@ bool Item_80269F14(HSD_GObj* gobj)
                                 // available in the vanilla Item struct
         {
             if (temp_item->x5D4_hitboxes[i].hit.state != HitCapsule_Disabled) {
-                temp_f30 = temp_item->x5D4_hitboxes[i].hit.damage *
-                               temp_item->xC6C +
-                           0.99f;
+                temp_f30 =
+                    temp_item->x5D4_hitboxes[i].hit.damage * temp_item->xC6C +
+                    0.99f;
                 var_r27 = temp_f30;
                 if (var_r27 > it_804D6D28->xD8) {
                     var_r27 = it_804D6D28->xD8;

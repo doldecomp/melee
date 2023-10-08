@@ -65,7 +65,7 @@ struct HSD_EnvelopeDesc {
 struct HSD_ShapeSet {
     u16 flags;
     u16 nb_shape;
-    s32 nb_vertex_index;
+    int nb_vertex_index;
     HSD_VtxDescList* vertex_desc;
     u8** vertex_idx_list;
     s32 nb_normal_index;

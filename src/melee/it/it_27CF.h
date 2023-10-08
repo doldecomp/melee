@@ -1,5 +1,5 @@
-#ifndef MELEE_IT_CODE_8027CF30_H
-#define MELEE_IT_CODE_8027CF30_H
+#ifndef GALE01_27CF30
+#define GALE01_27CF30
 
 #include "ft/forward.h"
 
@@ -204,5 +204,7 @@ void it_802BE100(Item_GObj* gobj);
 /* 2A83E0 */ HSD_GObj* it_802A83E0(float facing_dir, Fighter_GObj*, Vec3*,
                                    Fighter_Part, int);
 /* 2A850C */ void it_802A850C(Item_GObj*, Vec3*, Vec3*, float, float, float);
+
+extern ItemStateTable it_803F94A0[];
 
 #endif

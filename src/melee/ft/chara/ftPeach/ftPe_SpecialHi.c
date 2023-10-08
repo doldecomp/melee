@@ -22,11 +22,10 @@
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
-#include <melee/it/items/itpeachparasol.h>
-
 #include <math.h>
 #include <placeholder.h>
 #include <baselib/gobj.h>
+#include <melee/it/items/itpeachparasol.h>
 
 /* 11D424 */ static void ftPe_SpecialHi_8011D424(HSD_GObj* gobj);
 /* 11D598 */ static void ftPe_SpecialHi_8011DD8C(HSD_GObj* gobj);

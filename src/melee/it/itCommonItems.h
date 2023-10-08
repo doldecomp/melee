@@ -1,5 +1,7 @@
-#ifndef _itCommonItems_h_
-#define _itCommonItems_h_
+/// @file
+/// @todo Restructure this, possibly items/common/types.h
+#ifndef MELEE_IT_ITCOMMONITEMS_H
+#define MELEE_IT_ITCOMMONITEMS_H
 
 #include <platform.h>
 

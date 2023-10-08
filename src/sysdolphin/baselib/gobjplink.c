@@ -70,7 +70,7 @@ HSD_GObj* CreateGObj(s32 where, u16 classifier, u8 p_link, u8 priority,
     gobj->prev_gx = NULL;
     gobj->next_gx = NULL;
     gobj->proc = NULL;
-    gobj->render_cb = NULL;
+    gobj->rendered = NULL;
     gobj->gxlink_prios = 0;
     gobj->hsd_obj = NULL;
     gobj->user_data = NULL;

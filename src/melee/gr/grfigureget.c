@@ -43,7 +43,7 @@ extern unk_t grFigureGet_804D6AC0;
 
 extern StageInfo stage_info;
 
-static void grFigureGet_80219530(int) {}
+static void grFigureGet_80219530(int arg0) {}
 
 static void grFigureGet_80219534(void)
 {

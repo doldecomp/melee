@@ -1,9 +1,9 @@
-#ifndef MELEE_IT_ITSTAR_H
-#define MELEE_IT_ITSTAR_H
+#ifndef GALE01_284644
+#define GALE01_284644
 
-#include <baselib/gobj.h>
+#include "it/forward.h"
 
-extern ItemStateTable it_803F57A0[];
+#include "it/types.h"
 
 void it_80284644(Item_GObj*);
 void it_802846D4(Item_GObj*);
@@ -12,5 +12,7 @@ void it_80284704(Item_GObj*);
 bool it_80284734(Item_GObj*);
 bool it_8028482C(Item_GObj*);
 void it_80284834(Item_GObj*, HSD_GObj* ref);
+
+extern ItemStateTable it_803F57A0[];
 
 #endif

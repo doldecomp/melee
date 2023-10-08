@@ -1,10 +1,10 @@
-#ifndef MELEE_IT_ITPARASOL_H
-#define MELEE_IT_ITPARASOL_H
+#ifndef GALE01_28B08C
+#define GALE01_28B08C
 
-#include <melee/it/forward.h>
-#include <sysdolphin/baselib/forward.h>
+#include "it/forward.h"
+#include <baselib/forward.h>
 
-extern ItemStateTable it_803F70B8[];
+#include "it/types.h"
 
 int it_8028B08C(Item_GObj* item_gobj, int statenum);
 void it_8028B0B8(Item_GObj* item_gobj);
@@ -22,8 +22,8 @@ void it_8028B42C(Item_GObj* item_gobj);
 bool it_8028B4D4(Item_GObj* item_gobj);
 bool it_8028B4F8(Item_GObj* item_gobj);
 bool it_8028B51C(Item_GObj* item_gobj);
-void it_8028B540(Item_GObj* item_gobj);
-void it_8028B560(Item_GObj* item_gobj);
+bool it_8028B540(Item_GObj* item_gobj);
+bool it_8028B560(Item_GObj* item_gobj);
 void it_8028B580(Item_GObj* item_gobj);
 bool it_8028B5A8(Item_GObj* item_gobj);
 void it_8028B5B0(Item_GObj* item_gobj);
@@ -39,5 +39,8 @@ void it_8028B780(Item_GObj* item_gobj, f32 speed);
 void it_8028B7E8(Item_GObj* item_gobj, f32 speed);
 void it_8028B850(Item_GObj* item_gobj, f32 speed);
 void it_8028B8B8(Item_GObj* item_gobj, HSD_GObj*);
+
+extern ItemStateTable it_803F5AB0[];
+extern ItemStateTable it_803F70B8[];
 
 #endif

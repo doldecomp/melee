@@ -11,7 +11,7 @@
 
 extern f32 const ftPp_Init_804D9848; // 0.0f
 
-static setRefGObjFlagAndClear(Fighter* fp)
+static void setRefGObjFlagAndClear(Fighter* fp)
 {
     Fighter_GObj* gobj = fp->x1A5C;
     Fighter* ref_fp;
