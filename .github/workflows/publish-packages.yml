@@ -26,7 +26,7 @@ jobs:
       CONTAINERFILE: .github/packages/${{ matrix.target }}/Dockerfile
     strategy:
       matrix:
-        target: [ "build-linux", "gen-pages" ]
+        target: [ "build-linux", "gen-pages", "check-issues" ]
       fail-fast: false
     runs-on: ubuntu-latest
     permissions:
@@ -77,6 +77,13 @@ jobs:
             --volume "$PWD":/input:ro \
             --volume /tmp/output/non_matching:/output \
             --env MAKE_FLAGS="NON_MATCHING=1" \
+            "$IMAGE:test"
+
+      - name: Try checking for code issues
+        if: matrix.target == 'check-issues'
+        run: |
+          docker run --rm \
+            --volume "$PWD:/input:ro" \
             "$IMAGE:test"
 
       - name: Try generating pages
