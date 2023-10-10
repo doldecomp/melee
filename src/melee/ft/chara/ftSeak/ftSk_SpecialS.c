@@ -387,8 +387,8 @@ void ftSk_SpecialS_80110E4C(HSD_GObj* gobj)
     ftSk_SpecialS_ChainSomething(gobj);
 
     fp->fv.sk.x2234 = NULL;
-    fp->cb.x21E4_callback_OnDeath2 = NULL;
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    fp->death2_cb = NULL;
+    fp->take_dmg_cb = NULL;
 }
 
 void ftSk_SpecialS_CheckAndDestroyChain(HSD_GObj* gobj)
@@ -411,8 +411,8 @@ void ftSk_SpecialS_CheckAndDestroyChain(HSD_GObj* gobj)
     ftSk_SpecialS_ChainSomething(gobj);
 
     fp->fv.sk.x2234 = NULL;
-    fp->cb.x21E4_callback_OnDeath2 = NULL;
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    fp->death2_cb = NULL;
+    fp->take_dmg_cb = NULL;
 }
 
 void ftSk_SpecialS_80110EE8(HSD_GObj* gobj)
@@ -486,7 +486,7 @@ void ftSk_SpecialS_80110F70(HSD_GObj* gobj)
     }
 
     fp->x2222_b2 = true;
-    fp->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
+    fp->accessory4_cb = &ftSk_SpecialS_8011097C;
 }
 
 void ftSk_SpecialS_Enter(HSD_GObj* gobj)
@@ -541,12 +541,12 @@ bool ftSk_SpecialS_CheckInitChain(HSD_GObj* gobj)
         fp2->x1984_heldItemSpec = fp2->fv.sk.x2234;
 
         if (fp2->fv.sk.x2234 != NULL) {
-            fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-            fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+            fp2->death2_cb = &ftSk_Init_80110198;
+            fp2->take_dmg_cb = &ftSk_Init_80110198;
         }
 
-        fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-        fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+        fp2->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+        fp2->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
         fp->mv.sk.specials.x1C = specialAttributes->x18;
 
         if (fp->fv.sk.x2234 == NULL) {
@@ -665,13 +665,13 @@ void ftSk_SpecialS_80111440(HSD_GObj* gobj)
         Fighter* fp2 = GET_FIGHTER(gobj);
 
         if (fp2->fv.sk.x2234 != NULL) {
-            fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-            fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+            fp2->death2_cb = &ftSk_Init_80110198;
+            fp2->take_dmg_cb = &ftSk_Init_80110198;
         }
 
-        fp2->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
-        fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-        fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+        fp2->accessory4_cb = &ftSk_SpecialS_8011097C;
+        fp2->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+        fp2->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
     }
 }
 
@@ -687,13 +687,13 @@ void ftSk_SpecialS_801114E4(HSD_GObj* gobj)
         Fighter* fp2 = GET_FIGHTER(gobj);
 
         if (fp2->fv.sk.x2234 != NULL) {
-            fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-            fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+            fp2->death2_cb = &ftSk_Init_80110198;
+            fp2->take_dmg_cb = &ftSk_Init_80110198;
         }
 
-        fp2->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
-        fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-        fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+        fp2->accessory4_cb = &ftSk_SpecialS_8011097C;
+        fp2->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+        fp2->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
     }
 }
 
@@ -828,14 +828,14 @@ void ftSk_SpecialS_80111830(HSD_GObj* gobj)
     ftSk_SpecialS_80110AEC(gobj);
 
     if (fp2->fv.sk.x2234 != NULL) {
-        fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-        fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+        fp2->death2_cb = &ftSk_Init_80110198;
+        fp2->take_dmg_cb = &ftSk_Init_80110198;
     }
 
     fp2->x2222_b2 = true;
-    fp2->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
-    fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-    fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+    fp2->accessory4_cb = &ftSk_SpecialS_8011097C;
+    fp2->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+    fp2->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
 
     {
         f32 ecb_top;
@@ -874,14 +874,14 @@ void ftSk_SpecialS_80111988(HSD_GObj* gobj)
         ftSk_SpecialS_80110AEC(gobj);
 
         if (fp->fv.sk.x2234 != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-            fp->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+            fp->death2_cb = &ftSk_Init_80110198;
+            fp->take_dmg_cb = &ftSk_Init_80110198;
         }
 
         fp->x2222_b2 = true;
-        fp->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
-        fp->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-        fp->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+        fp->accessory4_cb = &ftSk_SpecialS_8011097C;
+        fp->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+        fp->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
     }
 }
 
@@ -1017,13 +1017,13 @@ void ftSk_SpecialS_80111CB0(HSD_GObj* gobj)
         Fighter* fp2 = gobj->user_data;
 
         if (fp2->fv.sk.x2234 != NULL) {
-            fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-            fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+            fp2->death2_cb = &ftSk_Init_80110198;
+            fp2->take_dmg_cb = &ftSk_Init_80110198;
         }
 
-        fp2->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
-        fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-        fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+        fp2->accessory4_cb = &ftSk_SpecialS_8011097C;
+        fp2->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+        fp2->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
     }
 }
 
@@ -1040,13 +1040,13 @@ void ftSk_SpecialS_80111D54(HSD_GObj* gobj)
         Fighter* fp2 = GET_FIGHTER(gobj);
 
         if (fp2->fv.sk.x2234 != NULL) {
-            fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-            fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+            fp2->death2_cb = &ftSk_Init_80110198;
+            fp2->take_dmg_cb = &ftSk_Init_80110198;
         }
 
-        fp2->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
-        fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-        fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+        fp2->accessory4_cb = &ftSk_SpecialS_8011097C;
+        fp2->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+        fp2->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
     }
 }
 
@@ -1063,14 +1063,14 @@ void ftSk_SpecialS_80111DF8(HSD_GObj* gobj)
         }
 
         if (fp->fv.sk.x2234 != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-            fp->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+            fp->death2_cb = &ftSk_Init_80110198;
+            fp->take_dmg_cb = &ftSk_Init_80110198;
         }
 
         fp->x2222_b2 = true;
-        fp->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
-        fp->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-        fp->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+        fp->accessory4_cb = &ftSk_SpecialS_8011097C;
+        fp->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+        fp->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
     }
 }
 
@@ -1087,14 +1087,14 @@ void ftSk_SpecialS_80111EB4(HSD_GObj* gobj)
         }
 
         if (fp->fv.sk.x2234 != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-            fp->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+            fp->death2_cb = &ftSk_Init_80110198;
+            fp->take_dmg_cb = &ftSk_Init_80110198;
         }
 
         fp->x2222_b2 = true;
-        fp->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
-        fp->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-        fp->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+        fp->accessory4_cb = &ftSk_SpecialS_8011097C;
+        fp->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+        fp->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
     }
 }
 

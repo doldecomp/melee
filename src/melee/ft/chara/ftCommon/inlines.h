@@ -31,7 +31,7 @@ static inline void ftCo_Thrown_Enter(ftCo_GObj* gobj, FtMotionId msid,
     fp->mv.co.capturekoopa.x0 = false;
     Fighter_ChangeMotionState(gobj, msid, mf, anim_start, 1, 0,
                               fp->victim_gobj);
-    fp->cb.x21B0_callback_Accessory1 = (HSD_GObjEvent) ftCo_800DE508;
+    fp->accessory1_cb = (HSD_GObjEvent) ftCo_800DE508;
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 

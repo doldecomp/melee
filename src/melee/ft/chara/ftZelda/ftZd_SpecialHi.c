@@ -28,7 +28,7 @@ void ftZd_SpecialHi_801396AC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftZd_SpecialHi_801396E0(gobj);
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->accessory4_cb = NULL;
 }
 
 void ftZd_SpecialHi_801396E0(HSD_GObj* gobj)
@@ -48,8 +48,8 @@ void ftZd_SpecialHi_801396E0(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
 }
 
 void ftZd_SpecialHi_8013979C(HSD_GObj* gobj)
@@ -66,9 +66,9 @@ void ftZd_SpecialHi_8013979C(HSD_GObj* gobj)
         }
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 static void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
@@ -109,7 +109,7 @@ void ftZd_SpecialHi_Enter(HSD_GObj* gobj)
 
     ftZelda_SpecialHi_StartAction_Helper(fp);
 
-    fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialHi_801396AC;
+    fp->accessory4_cb = &ftZd_SpecialHi_801396AC;
 }
 
 void ftZd_SpecialAirHi_Enter(HSD_GObj* gobj)
@@ -145,7 +145,7 @@ void ftZd_SpecialAirHi_Enter(HSD_GObj* gobj)
             lb_800119DC(&vec, 120, 1.5, 0.02, 60 * (f32) M_PI / 180);
         }
 
-        fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialHi_801396AC;
+        fp->accessory4_cb = &ftZd_SpecialHi_801396AC;
     }
 }
 
@@ -227,7 +227,7 @@ void ftZd_SpecialHi_80139B44(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 352, transition_flags1, fp->cur_anim_frame,
                               1, 0, NULL);
 
-    fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialHi_801396AC;
+    fp->accessory4_cb = &ftZd_SpecialHi_801396AC;
 }
 
 void ftZd_SpecialHi_80139BB0(HSD_GObj* gobj)
@@ -238,7 +238,7 @@ void ftZd_SpecialHi_80139BB0(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 349, transition_flags1, fp->cur_anim_frame,
                               1, 0, NULL);
 
-    fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialHi_801396AC;
+    fp->accessory4_cb = &ftZd_SpecialHi_801396AC;
 }
 
 void ftZd_SpecialHiStart_1_Anim(HSD_GObj* gobj)
@@ -712,7 +712,7 @@ void ftZd_SpecialHi_8013A6A8(HSD_GObj* gobj)
         fp1->self_vel.x = 0;
         fp1->gr_vel = 0;
         fp1->x221E_b0 = false;
-        fp1->cb.x21BC_callback_Accessory4 = &ftZd_SpecialHi_8013979C;
+        fp1->accessory4_cb = &ftZd_SpecialHi_8013979C;
     }
 
     fp0->gr_vel = fp0->mv.zd.specialhi.x18 * attributes->x64;
@@ -736,7 +736,7 @@ void ftZd_SpecialHi_8013A764(HSD_GObj* gobj)
         fp1->self_vel.x = 0;
         fp1->gr_vel = 0;
         fp1->x221E_b0 = false;
-        fp1->cb.x21BC_callback_Accessory4 = &ftZd_SpecialHi_8013979C;
+        fp1->accessory4_cb = &ftZd_SpecialHi_8013979C;
     }
 
     fp0->self_vel.x = fp0->mv.zd.specialhi.x10.x * sa->x64;

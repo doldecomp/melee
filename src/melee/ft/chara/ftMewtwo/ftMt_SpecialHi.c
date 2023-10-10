@@ -26,7 +26,7 @@ void ftMt_SpecialHi_CreateGFX(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMt_SpecialHi_SetStartGFX(gobj);
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->accessory4_cb = NULL;
 }
 
 /// Setup Teleport Start GFX
@@ -45,8 +45,8 @@ void ftMt_SpecialHi_SetStartGFX(HSD_GObj* gobj)
         }
     }
 
-    fp0->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp0->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp0->pre_hitlag_cb = efLib_PauseAll;
+    fp0->post_hitlag_cb = efLib_ResumeAll;
 }
 
 /// Setup Teleport End GFX
@@ -64,9 +64,9 @@ void ftMt_SpecialHi_SetEndGFX(HSD_GObj* gobj)
         }
     }
 
-    fp0->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp0->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp0->cb.x21BC_callback_Accessory4 = NULL;
+    fp0->pre_hitlag_cb = efLib_PauseAll;
+    fp0->post_hitlag_cb = efLib_ResumeAll;
+    fp0->accessory4_cb = NULL;
 }
 
 /// Mewtwo's grounded Teleport Start Motion State handler
@@ -86,7 +86,7 @@ void ftMt_SpecialHiStart_Enter(HSD_GObj* gobj)
 
     fp0->cmd_vars[0] = 0;
     fp0->mv.mt.SpecialHi.unk4 = 0;
-    fp0->cb.x21BC_callback_Accessory4 = ftMt_SpecialHi_CreateGFX;
+    fp0->accessory4_cb = ftMt_SpecialHi_CreateGFX;
 }
 
 /// Mewtwo's aerial Teleport Start Motion State handler
@@ -109,7 +109,7 @@ void ftMt_SpecialAirHiStart_Enter(HSD_GObj* gobj)
 
     fp->cmd_vars[0] = 0;
     fp->mv.mt.SpecialHi.unk4 = 0;
-    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialHi_CreateGFX;
+    fp->accessory4_cb = ftMt_SpecialHi_CreateGFX;
 }
 
 /// Mewtwo's grounded Teleport Start Animation callback
@@ -202,7 +202,7 @@ void ftMt_SpecialHiStart_GroundToAir(HSD_GObj* gobj)
                               transition_flags1, fp->cur_anim_frame, 1, 0,
                               NULL);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialHi_CreateGFX;
+    fp->accessory4_cb = ftMt_SpecialHi_CreateGFX;
 }
 
 /// Mewtwo's air -> ground Teleport Start Motion State handler
@@ -214,7 +214,7 @@ void ftMt_SpecialAirHiStart_AirToGround(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHiStart, transition_flags1,
                               fp->cur_anim_frame, 1, 0, NULL);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialHi_CreateGFX;
+    fp->accessory4_cb = ftMt_SpecialHi_CreateGFX;
 }
 
 /// Mewtwo's grounded Teleport Zoom Animation callback
@@ -644,7 +644,7 @@ static inline void ftMewtwo_SpecialHiLost_SetVars(HSD_GObj* gobj)
     fp->self_vel.x = 0;
     fp->gr_vel = 0;
     fp->x221E_b0 = false;
-    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialHi_SetEndGFX;
+    fp->accessory4_cb = ftMt_SpecialHi_SetEndGFX;
 }
 
 /// Mewtwo's grounded Teleport End Motion State handler

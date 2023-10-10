@@ -14,7 +14,7 @@ static void ftSamus_ClearThrowFlagsUnk(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->throw_flags = 0;
-    fp->cb.x21BC_callback_Accessory4 = &ftSs_SpecialS_8012A074;
+    fp->accessory4_cb = &ftSs_SpecialS_8012A074;
 }
 
 void ftSs_SpecialS_Enter(HSD_GObj* gobj)

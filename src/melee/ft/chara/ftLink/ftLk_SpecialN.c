@@ -266,8 +266,8 @@ lbl_800ECF64:
 static inline void setCallbacks(ftLk_GObj* gobj)
 {
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = ftLk_800EAF58;
-    fp->cb.x21E4_callback_OnDeath2 = ftLk_800EAF58;
+    fp->take_dmg_cb = ftLk_800EAF58;
+    fp->death2_cb = ftLk_800EAF58;
 }
 
 static inline bool unkCondition(ftLk_GObj* gobj)

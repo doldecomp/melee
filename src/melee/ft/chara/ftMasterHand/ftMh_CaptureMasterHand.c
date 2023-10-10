@@ -22,7 +22,7 @@ void ftMh_CaptureMasterHand_80155B80(HSD_GObj* gobj)
                               0, 0);
     fp->x221E_b0 = true;
     fp->x2220_flag.bits.b3 = true;
-    fp->cb.x21B0_callback_Accessory1 = ftCo_800DB464;
+    fp->accessory1_cb = ftCo_800DB464;
     ftCommon_8007E2F4(fp, 511);
     fp->x2220_flag.bits.b3 = true;
     ftAnim_8006EBA4(gobj);

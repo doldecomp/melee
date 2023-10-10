@@ -21,7 +21,7 @@ void ftMh_MS_343_801510B0(HSD_GObj* gobj)
     fp->cur_pos.x = da->x30_pos2.x;
     fp->cur_pos.y = da->x30_pos2.y;
     fp->cur_pos.z = 0;
-    fp->cb.x21BC_callback_Accessory4 = ftMh_MS_343_801511FC;
+    fp->accessory4_cb = ftMh_MS_343_801511FC;
     fp->mv.mh.unk4.x0 = ftMh_UnkEnum0_Unk00;
 
     /// @todo Probably same file if #ftMh_MS_343_801511FC is getting

@@ -96,7 +96,7 @@ static MotionFlags getMotionFlags(ftCo_Fighter* fp)
     switch (fp->kind) {
     case FTKIND_PICHU:
     case FTKIND_PIKACHU:
-        fp->cb.x21EC_callback = onPkPc21EC;
+        fp->x21EC = onPkPc21EC;
         return Ft_MF_SkipAttackCount;
     default:
         return Ft_MF_None;

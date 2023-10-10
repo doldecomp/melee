@@ -17,10 +17,10 @@
 static void setCallbacks(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = ftDk_Init_8010D774;
-    fp->cb.x21E4_callback_OnDeath2 = ftDk_Init_8010D774;
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->take_dmg_cb = ftDk_Init_8010D774;
+    fp->death2_cb = ftDk_Init_8010D774;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
 }
 
 void ftDk_SpecialHi_Enter(HSD_GObj* gobj)

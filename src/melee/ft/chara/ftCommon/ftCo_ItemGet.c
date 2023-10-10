@@ -623,10 +623,10 @@ void ftCo_80094694(HSD_GObj* gobj, FtMotionId msid, bool loop)
     }
     if (msid == ftCo_MS_HeavyGet) {
         fp->mv.co.itemget.x0 = true;
-        fp->cb.x21DC_callback_OnTakeDamage = ftCo_800974C4;
+        fp->take_dmg_cb = ftCo_800974C4;
     } else {
         fp->mv.co.itemget.x0 = false;
-        fp->cb.x21DC_callback_OnTakeDamage = ftCo_80094DF8;
+        fp->take_dmg_cb = ftCo_80094DF8;
     }
 }
 #endif

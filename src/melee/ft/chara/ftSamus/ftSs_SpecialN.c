@@ -481,7 +481,7 @@ void ftSs_SpecialS_8012A074(HSD_GObj* gobj)
         }
 
         ftSs_SpecialS_8012A168(gobj, &position);
-        fp->cb.x21BC_callback_Accessory4 = 0;
+        fp->accessory4_cb = 0;
     }
 }
 
@@ -492,6 +492,6 @@ static void ftSs_SpecialS_8012A168(HSD_GObj* gobj, Vec3* spawnlocation)
         efSync_Spawn(1155, gobj, spawnlocation);
         fp->x2219_b0 = 1;
     }
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
 }

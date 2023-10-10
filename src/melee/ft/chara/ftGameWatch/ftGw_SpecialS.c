@@ -44,14 +44,12 @@ void ftGw_SpecialS_ItemJudgementSetup(HSD_GObj* gobj)
             it_8028FAF4(gobj, &sp20);
         }
         if (fp->fv.gw.x2264_judgementGObj != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
-            fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
+            fp->death2_cb = ftGw_Init_OnDamage;
+            fp->take_dmg_cb = ftGw_Init_OnDamage;
         }
-        fp->cb.x21D4_callback_EnterHitlag =
-            ftGw_SpecialS_ItemJudgementEnterHitlag;
-        fp->cb.x21D8_callback_ExitHitlag =
-            ftGw_SpecialS_ItemJudgementExitHitlag;
-        fp->cb.x21BC_callback_Accessory4 = NULL;
+        fp->pre_hitlag_cb = ftGw_SpecialS_ItemJudgementEnterHitlag;
+        fp->post_hitlag_cb = ftGw_SpecialS_ItemJudgementExitHitlag;
+        fp->accessory4_cb = NULL;
     }
 }
 
@@ -63,8 +61,8 @@ void ftGw_SpecialS_ItemJudgementSetFlag(HSD_GObj* gobj)
 
     ftGw_SpecialS_ItemJudgementExitHitlag(gobj);
     fp->fv.gw.x2264_judgementGObj = NULL;
-    fp->cb.x21E4_callback_OnDeath2 = NULL;
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    fp->death2_cb = NULL;
+    fp->take_dmg_cb = NULL;
 }
 
 // 0x8014C5CC
@@ -171,7 +169,7 @@ static inline void ftGameWatch_SpecialS_SetVars(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialS_ItemJudgementSetup;
+    fp->accessory4_cb = ftGw_SpecialS_ItemJudgementSetup;
 }
 
 // 0x8014C7A0
@@ -321,13 +319,13 @@ static inline void ftGameWatch_SpecialS_SetCall(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.gw.x2264_judgementGObj != NULL) {
-        fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
-        fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
+        fp->death2_cb = ftGw_Init_OnDamage;
+        fp->take_dmg_cb = ftGw_Init_OnDamage;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = ftGw_SpecialS_ItemJudgementEnterHitlag;
-    fp->cb.x21D8_callback_ExitHitlag = ftGw_SpecialS_ItemJudgementExitHitlag;
-    fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialS_ItemJudgementSetup;
+    fp->pre_hitlag_cb = ftGw_SpecialS_ItemJudgementEnterHitlag;
+    fp->post_hitlag_cb = ftGw_SpecialS_ItemJudgementExitHitlag;
+    fp->accessory4_cb = ftGw_SpecialS_ItemJudgementSetup;
 }
 
 static u32 const transition_flags =

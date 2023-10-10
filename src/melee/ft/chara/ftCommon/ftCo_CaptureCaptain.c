@@ -32,7 +32,7 @@ void ftCo_8009CA0C(ftCo_GObj* gobj, ftCo_GObj* vic_gobj)
     Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureCaptain, Ft_MF_None, 0, 1,
                               0, fp->victim_gobj);
     if (!fp->x221B_b7) {
-        fp->cb.x21B0_callback_Accessory1 = ftCo_800DB464;
+        fp->accessory1_cb = ftCo_800DB464;
     }
     ftCommon_8007E2F4(fp, 0x1FF);
     ftAnim_8006EBA4(gobj);

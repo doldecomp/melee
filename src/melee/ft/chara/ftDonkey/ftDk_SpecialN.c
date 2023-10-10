@@ -18,11 +18,11 @@
 static void setCallbacks(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = ftDk_Init_8010D774;
-    fp->cb.x21E4_callback_OnDeath2 = ftDk_Init_8010D774;
-    fp->cb.x21F0_callback = ftDk_SpecialN_DestroyAllEffects;
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->take_dmg_cb = ftDk_Init_8010D774;
+    fp->death2_cb = ftDk_Init_8010D774;
+    fp->x21F0 = ftDk_SpecialN_DestroyAllEffects;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
 }
 
 static void updateVelocity(HSD_GObj* gobj)
@@ -106,9 +106,9 @@ void ftDk_SpecialNStart_Anim(HSD_GObj* gobj)
 static void clearCallbacks(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21F0_callback = NULL;
-    fp->cb.x21D4_callback_EnterHitlag = NULL;
-    fp->cb.x21D8_callback_ExitHitlag = NULL;
+    fp->x21F0 = NULL;
+    fp->pre_hitlag_cb = NULL;
+    fp->post_hitlag_cb = NULL;
 }
 
 void ftDk_SpecialNLoop_Anim(HSD_GObj* gobj)

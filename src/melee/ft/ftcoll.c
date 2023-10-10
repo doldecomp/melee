@@ -6220,7 +6220,7 @@ void ftColl_8007B1B8(Fighter_GObj* gobj, ShieldDesc* shield, HSD_GObjEvent cb)
     fp->x221B_b2 = false;
     fp->x221B_b3 = false;
     fp->x221B_b4 = false;
-    fp->cb.x21C4_callback_OnShieldHit = cb;
+    fp->shield_hit_cb = cb;
     fp->shield_hit.bone = fp->parts[shield->bone].joint;
     fp->shield_hit.size = shield->radius;
     fp->shield_hit.offset = shield->pos;
@@ -6232,7 +6232,7 @@ void ftColl_CreateReflectHit(Fighter_GObj* gobj, ReflectDesc* reflect,
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2218_b3 = true;
     fp->x2218_b4 = false;
-    fp->cb.x21C8_callback_OnReflectHit = cb;
+    fp->reflect_hit_cb = cb;
     fp->ReflectAttr.x1A30_maxDamage = reflect->x4_max_damage;
     fp->ReflectAttr.x1A34_damageMul = reflect->x18_damage_mul;
     fp->ReflectAttr.x1A38_speedMul = reflect->x1C_speed_mul;

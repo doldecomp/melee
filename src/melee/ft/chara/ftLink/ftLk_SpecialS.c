@@ -180,8 +180,8 @@ void onAccessory4(HSD_GObj* gobj)
             fp->fv.lk.boomerang_gobj = boomerang_gobj;
             if (boomerang_gobj != NULL) {
                 fp->fv.lk.used_boomerang = true;
-                fp->cb.x21E8_callback_OnDeath3 = ftLk_800EAF38;
-                fp->cb.x21DC_callback_OnTakeDamage = ftLk_800EAF58;
+                fp->death3_cb = ftLk_800EAF38;
+                fp->take_dmg_cb = ftLk_800EAF58;
             }
         }
     }
@@ -205,7 +205,7 @@ static void doEnter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->throw_flags = 0;
     fp->cmd_vars[cmd_unk0_bool] = false;
-    fp->cb.x21EC_callback = on21EC;
+    fp->x21EC = on21EC;
     if (fp->fv.lk.used_boomerang) {
         Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1Empty, Ft_MF_None, 0,
                                   1, 0, NULL);
@@ -214,7 +214,7 @@ static void doEnter(HSD_GObj* gobj)
                                   NULL);
     }
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = onAccessory4;
+    fp->accessory4_cb = onAccessory4;
 }
 
 void ftLk_SpecialS_Enter(HSD_GObj* gobj)
@@ -222,7 +222,7 @@ void ftLk_SpecialS_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->throw_flags = 0;
     fp->cmd_vars[cmd_unk0_bool] = false;
-    fp->cb.x21EC_callback = on21EC;
+    fp->x21EC = on21EC;
     if (fp->fv.lk.used_boomerang) {
         Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1Empty, Ft_MF_None, 0,
                                   1, 0, NULL);
@@ -231,7 +231,7 @@ void ftLk_SpecialS_Enter(HSD_GObj* gobj)
                                   NULL);
     }
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = onAccessory4;
+    fp->accessory4_cb = onAccessory4;
 }
 
 /// @todo Share code with #ftLk_SpecialS_Enter. A simple inline won't work.
@@ -240,7 +240,7 @@ void ftLk_SpecialAirS_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->throw_flags = 0;
     fp->cmd_vars[cmd_unk0_bool] = 0;
-    fp->cb.x21EC_callback = on21EC;
+    fp->x21EC = on21EC;
     if (fp->fv.lk.used_boomerang) {
         Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirS1Empty, Ft_MF_None,
                                   0, 1, 0, NULL);
@@ -249,7 +249,7 @@ void ftLk_SpecialAirS_Enter(HSD_GObj* gobj)
                                   0, NULL);
     }
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = onAccessory4;
+    fp->accessory4_cb = onAccessory4;
 }
 
 void ftLk_SpecialS2_Enter(HSD_GObj* gobj)
@@ -262,7 +262,7 @@ void ftLk_SpecialS2_Enter(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS2, Ft_MF_None, 0, 1, 0,
                                   NULL);
     }
-    fp->cb.x21DC_callback_OnTakeDamage = ftLk_800EAF58;
+    fp->take_dmg_cb = ftLk_800EAF58;
     ftAnim_8006EBA4(gobj);
 }
 
@@ -406,7 +406,7 @@ void ftLk_SpecialS1_Coll(HSD_GObj* gobj)
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirS1, coll_mf,
                                   fp->cur_anim_frame, 1, 0, NULL);
-        fp->cb.x21BC_callback_Accessory4 = onAccessory4;
+        fp->accessory4_cb = onAccessory4;
     }
 }
 
@@ -439,7 +439,7 @@ void ftLk_SpecialAirS1_Coll(HSD_GObj* gobj)
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1, coll_mf,
                                   fp->cur_anim_frame, 1, 0, NULL);
-        fp->cb.x21BC_callback_Accessory4 = onAccessory4;
+        fp->accessory4_cb = onAccessory4;
     }
 }
 

@@ -41,9 +41,9 @@ static void onAccessory4(HSD_GObj* gobj)
         }
         fp->x2219_b0 = true;
     }
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 void ftLk_SpecialHi_Enter(HSD_GObj* gobj)
@@ -52,7 +52,7 @@ void ftLk_SpecialHi_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialHi, Ft_MF_None, 0, 1, 0,
                               NULL);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = onAccessory4;
+    fp->accessory4_cb = onAccessory4;
 }
 
 void ftLk_SpecialAirHi_Enter(HSD_GObj* gobj)
@@ -69,7 +69,7 @@ void ftLk_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->self_vel.x *= da->x34;
     fp->self_vel.y = da->x40;
     fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
-    fp->cb.x21BC_callback_Accessory4 = onAccessory4;
+    fp->accessory4_cb = onAccessory4;
 }
 
 void ftLk_SpecialHi_Anim(HSD_GObj* gobj)

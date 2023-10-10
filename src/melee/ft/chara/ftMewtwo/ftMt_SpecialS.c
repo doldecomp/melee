@@ -74,7 +74,7 @@ void ftMt_SpecialS_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 
     ftMewtwo_SpecialS_SetGrab(gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialS_ReflectThink;
+    fp->accessory4_cb = ftMt_SpecialS_ReflectThink;
 }
 
 static inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* gobj)
@@ -118,7 +118,7 @@ void ftMt_SpecialAirS_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 
     ftMewtwo_SpecialAirS_SetGrab(gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialS_ReflectThink;
+    fp->accessory4_cb = ftMt_SpecialS_ReflectThink;
 }
 
 static inline void ftMewtwo_SetGrabVictim(HSD_GObj* gobj)
@@ -197,7 +197,7 @@ static inline void ftMewtwo_SpecialS_SetReflect(HSD_GObj* gobj)
     if (fp->mv.mt.SpecialS.isConfusionReflect != false) {
         fp->x2218_b3 = 1;
         fp->x2218_b4 = 1;
-        fp->cb.x21C8_callback_OnReflectHit = ftMt_SpecialS_OnReflect;
+        fp->reflect_hit_cb = ftMt_SpecialS_OnReflect;
     }
 }
 
@@ -218,7 +218,7 @@ void ftMt_SpecialS_GroundToAir(HSD_GObj* gobj)
 
     ftMewtwo_SpecialAirS_SetGrab(gobj);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialS_ReflectThink;
+    fp->accessory4_cb = ftMt_SpecialS_ReflectThink;
 
     ftMewtwo_SpecialS_SetReflect(gobj);
 }
@@ -239,7 +239,7 @@ void ftMt_SpecialAirS_AirToGround(HSD_GObj* gobj)
 
     ftMewtwo_SpecialS_SetGrab(gobj);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialS_ReflectThink;
+    fp->accessory4_cb = ftMt_SpecialS_ReflectThink;
     fp->fv.mt.x223C_isConfusionBoost = false;
 
     ftMewtwo_SpecialS_SetReflect(gobj);
@@ -282,7 +282,7 @@ void ftMt_SpecialS_ReflectThink(HSD_GObj* gobj)
         if (fp->mv.mt.SpecialS.isConfusionReflect != false) {
             fp->x2218_b3 = 0;
             fp->x2218_b4 = 0;
-            fp->cb.x21C8_callback_OnReflectHit = NULL;
+            fp->reflect_hit_cb = NULL;
             fp->mv.mt.SpecialS.isConfusionReflect = false;
         }
         fp->cmd_vars[1] = CONFUSION_REFLECT_NONE;

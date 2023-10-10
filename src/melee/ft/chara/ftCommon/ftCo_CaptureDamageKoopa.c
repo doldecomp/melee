@@ -18,7 +18,7 @@ void ftCo_800BC9C8(ftCo_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageKoopa,
                               fp->x2222_b6 ? Ft_MF_FreezeState : Ft_MF_None, 0,
                               1, 0, fp->victim_gobj);
-    fp->cb.x21B0_callback_Accessory1 = ftCo_800DB464;
+    fp->accessory1_cb = ftCo_800DB464;
     ftCommon_8007E2F4(fp, 0x1FF);
     ftAnim_8006EBA4(gobj);
 }
@@ -63,7 +63,7 @@ void ftCo_800BCAF4(ftCo_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageKoopaAir,
                               fp->x2222_b6 ? Ft_MF_FreezeState : Ft_MF_None, 0,
                               1, 0, fp->victim_gobj);
-    fp->cb.x21B0_callback_Accessory1 = ftCo_800DB464;
+    fp->accessory1_cb = ftCo_800DB464;
     ftCommon_8007E2F4(fp, 0x1FF);
     ftAnim_8006EBA4(gobj);
 }

@@ -14,7 +14,7 @@ void ftCo_800BCC20(ftCo_GObj* gobj)
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureWaitKoopa, Ft_MF_None, 0, 1,
                               0, NULL);
-    fp->cb.x21B0_callback_Accessory1 = ftCo_800DB464;
+    fp->accessory1_cb = ftCo_800DB464;
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 
@@ -46,7 +46,7 @@ void ftCo_800BCD00(ftCo_GObj* gobj)
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureWaitKoopaAir, Ft_MF_None, 0,
                               1, 0, NULL);
-    fp->cb.x21B0_callback_Accessory1 = ftCo_800DB464;
+    fp->accessory1_cb = ftCo_800DB464;
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 

@@ -43,8 +43,8 @@ static inline void ftLuigi_SpecialLw_SetVars(HSD_GObj* gobj)
 static inline void ftLuigi_SpecialLw_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = ftLg_SpecialLw_UpdateRot;
-    fp->cb.x21E4_callback_OnDeath2 = ftLg_SpecialLw_UpdateRot;
+    fp->take_dmg_cb = ftLg_SpecialLw_UpdateRot;
+    fp->death2_cb = ftLg_SpecialLw_UpdateRot;
 }
 
 static inline void ftLuigi_SpecialLw_SetGFX(HSD_GObj* gobj)
@@ -53,8 +53,8 @@ static inline void ftLuigi_SpecialLw_SetGFX(HSD_GObj* gobj)
     HSD_JObj* hsd_obj = gobj->hsd_obj;
     efSync_Spawn(0x509, gobj, hsd_obj);
     fp->x2219_b0 = 1;
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
 }
 
 // 0x801445F0
@@ -84,8 +84,8 @@ void ftLg_SpecialLw_Enter(HSD_GObj* gobj)
     ftLuigi_SpecialLw_SetVars(gobj);
     ftLuigi_SpecialLw_SetCall(gobj);
     ftLuigi_SpecialLw_SetGFX(gobj);
-    fp2->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp2->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp2->pre_hitlag_cb = efLib_PauseAll;
+    fp2->post_hitlag_cb = efLib_ResumeAll;
 }
 
 // 0x80144708
@@ -122,15 +122,15 @@ void ftLg_SpecialAirLw_Enter(HSD_GObj* gobj)
     ftLuigi_SpecialLw_SetVars(gobj);
     ftLuigi_SpecialLw_SetCall(gobj);
     ftLuigi_SpecialLw_SetGFX(gobj);
-    fp2->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp2->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp2->pre_hitlag_cb = efLib_PauseAll;
+    fp2->post_hitlag_cb = efLib_ResumeAll;
 }
 
 static inline void ftLuigi_SpecialLw_SetNULL(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
-    fp->cb.x21E4_callback_OnDeath2 = NULL;
+    fp->take_dmg_cb = NULL;
+    fp->death2_cb = NULL;
 }
 
 /// Luigi's grounded Cyclone Animation callback
@@ -189,8 +189,8 @@ static inline void ftLuigi_SpecialLw_GroundToAir(HSD_GObj* gobj)
                               1.0f, 0.0f, NULL);
     ftCommon_ClampFallSpeed(fp, luigiAttrs->x90_LUIGI_CYCLONE_TAP_GRAVITY);
     ftCommon_8007D440(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
 }
 
 // 0x80144958
@@ -330,8 +330,8 @@ static inline void ftLuigi_SpecialAirLw_AirToGround(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialLw, FTLUIGI_SPECIALLW_FLAG,
                               fp->cur_anim_frame, 1.0f, 0.0f, NULL);
     ftCommon_8007CC78(fp, luigiAttrs->x74_LUIGI_CYCLONE_MOMENTUM_X_GROUND);
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
 }
 
 // 0x80144CEC

@@ -255,8 +255,8 @@ void ftDr_Init_801497CC(HSD_GObj* gobj)
     if (gobj != NULL) {
         fp = gobj->user_data;
         if (fp != NULL) {
-            fp->cb.x21DC_callback_OnTakeDamage = 0;
-            fp->cb.x21E4_callback_OnDeath2 = 0;
+            fp->take_dmg_cb = 0;
+            fp->death2_cb = 0;
         }
     }
 }
@@ -296,8 +296,8 @@ void ftDr_Init_801498A0(HSD_GObj* gobj)
     if (gobj != NULL) {
         fp = gobj->user_data;
         if (fp != NULL) {
-            fp->cb.x21DC_callback_OnTakeDamage = 0;
-            fp->cb.x21E4_callback_OnDeath2 = 0;
+            fp->take_dmg_cb = 0;
+            fp->death2_cb = 0;
         }
     }
 }

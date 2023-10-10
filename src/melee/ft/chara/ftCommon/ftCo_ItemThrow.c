@@ -991,7 +991,7 @@ void ftCo_800957F4(ftCo_GObj* gobj, int msid)
         }
     }
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftCo_80095EFC;
+    fp->accessory4_cb = ftCo_80095EFC;
     ftCo_80095EFC(gobj);
 }
 #endif
@@ -2030,7 +2030,7 @@ static inline void inlineA0(ftCo_GObj* gobj, FtMotionId msid)
 {
     ftCo_Fighter* fp = gobj->user_data;
     inlineA1(gobj, msid);
-    fp->cb.x21BC_callback_Accessory4 = ftCo_80095EFC;
+    fp->accessory4_cb = ftCo_80095EFC;
     ftCo_80095EFC(gobj);
 }
 

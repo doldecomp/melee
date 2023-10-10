@@ -33,7 +33,7 @@ struct HSD_GObj {
     /* +10 */ HSD_GObj* next_gx;
     /* +14 */ HSD_GObj* prev_gx;
     /* +18 */ HSD_GObjProc* proc;
-    /* +1C */ GObj_RenderFunc rendered;
+    /* +1C */ GObj_RenderFunc render_cb;
     /* +20 */ u64 gxlink_prios;
     /* +28 */ void* hsd_obj;
     /* +2C */ void* user_data;

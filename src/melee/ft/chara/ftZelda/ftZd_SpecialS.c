@@ -44,8 +44,8 @@ void ftZd_SpecialS_Enter(HSD_GObj* gobj)
     fighter2->mv.zd.specials.x8 = attributes->x18;
     fighter2->fv.zd.x222C = 0;
     fighter2->mv.zd.specials.xC = attributes->x1C;
-    fighter2->cb.x21E4_callback_OnDeath2 = 0;
-    fighter2->cb.x21DC_callback_OnTakeDamage = 0;
+    fighter2->death2_cb = 0;
+    fighter2->take_dmg_cb = 0;
     ftAnim_8006EBA4(gobj);
 }
 
@@ -78,8 +78,8 @@ void ftZd_SpecialAirS_Enter(HSD_GObj* gobj)
     fighter2->mv.zd.specials.x8 = attributes->x18;
     fighter2->fv.zd.x222C = 0;
     fighter2->mv.zd.specials.xC = attributes->x1C;
-    fighter2->cb.x21E4_callback_OnDeath2 = 0;
-    fighter2->cb.x21DC_callback_OnTakeDamage = 0;
+    fighter2->death2_cb = 0;
+    fighter2->take_dmg_cb = 0;
     ftAnim_8006EBA4(gobj);
 }
 
@@ -115,8 +115,8 @@ void ftZd_SpecialSStart_Anim(HSD_GObj* gobj)
         fp->fv.zd.x222C = temp_r3;
 
         if (temp_r3 != 0) {
-            fp->cb.x21E4_callback_OnDeath2 = &ftZd_Init_801393AC;
-            fp->cb.x21DC_callback_OnTakeDamage = &ftZd_Init_801393AC;
+            fp->death2_cb = &ftZd_Init_801393AC;
+            fp->take_dmg_cb = &ftZd_Init_801393AC;
         }
         efSync_Spawn(1275, gobj, fp->parts[76].joint);
     }
@@ -161,8 +161,8 @@ void ftZd_SpecialSLoop_Anim(HSD_GObj* gobj)
         fp->fv.zd.x222C = temp_r3_u32;
 
         if (temp_r3_u32 != 0) {
-            fp->cb.x21E4_callback_OnDeath2 = &ftZd_Init_801393AC;
-            fp->cb.x21DC_callback_OnTakeDamage = &ftZd_Init_801393AC;
+            fp->death2_cb = &ftZd_Init_801393AC;
+            fp->take_dmg_cb = &ftZd_Init_801393AC;
         }
         efSync_Spawn(1275, gobj, fp->parts[76].joint);
     }
@@ -211,8 +211,8 @@ void ftZd_SpecialSEnd_Anim(HSD_GObj* gobj)
         fp->mv.zd.specials.x8 = attributes->x18;
         fp->fv.zd.x222C = 0;
         fp->mv.zd.specials.xC = attributes->x1C;
-        fp->cb.x21E4_callback_OnDeath2 = 0;
-        fp->cb.x21DC_callback_OnTakeDamage = 0;
+        fp->death2_cb = 0;
+        fp->take_dmg_cb = 0;
 
         ft_8008A2BC(gobj);
     }
@@ -249,8 +249,8 @@ void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
         fp->fv.zd.x222C = temp_r3;
 
         if (temp_r3 != 0) {
-            fp->cb.x21E4_callback_OnDeath2 = &ftZd_Init_801393AC;
-            fp->cb.x21DC_callback_OnTakeDamage = &ftZd_Init_801393AC;
+            fp->death2_cb = &ftZd_Init_801393AC;
+            fp->take_dmg_cb = &ftZd_Init_801393AC;
         }
         efSync_Spawn(1275, gobj, fp->parts[76].joint);
     }
@@ -294,8 +294,8 @@ void ftZd_SpecialAirSLoop_Anim(HSD_GObj* gobj)
         fp->fv.zd.x222C = temp_r3;
 
         if (temp_r3 != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = &ftZd_Init_801393AC;
-            fp->cb.x21DC_callback_OnTakeDamage = &ftZd_Init_801393AC;
+            fp->death2_cb = &ftZd_Init_801393AC;
+            fp->take_dmg_cb = &ftZd_Init_801393AC;
         }
         efSync_Spawn(1275, gobj, fp->parts[76].joint);
     }
@@ -347,8 +347,8 @@ void ftZd_SpecialAirSEnd_Anim(HSD_GObj* gobj)
             fp->mv.zd.specials.x8 = sa->x18;
             fp->fv.zd.x222C = 0;
             fp->mv.zd.specials.xC = sa->x1C;
-            fp->cb.x21E4_callback_OnDeath2 = 0;
-            fp->cb.x21DC_callback_OnTakeDamage = 0;
+            fp->death2_cb = 0;
+            fp->take_dmg_cb = 0;
         }
 
         if (sa->x34 == 0) {

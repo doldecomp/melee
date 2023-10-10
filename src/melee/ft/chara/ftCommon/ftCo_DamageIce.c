@@ -501,8 +501,8 @@ ASM void ftCo_80091030(Fighter_GObj* gobj)
                 sp2C.single_float = fp->co_attrs.bubble_ratio;
                 ftColl_8007B5AC(fp, fp->x11A0_fighterHurtbox, &sp2C);
                 ftCommon_8007EBAC(fp, 1, 0);
-                fp->cb.x21F0_callback = ftCo_80091274;
-                fp->cb.x21DC_callback_OnTakeDamage = ftCo_80090B48;
+                fp->x21F0 = ftCo_80091274;
+                fp->take_dmg_cb = ftCo_80090B48;
             }
         }
     }

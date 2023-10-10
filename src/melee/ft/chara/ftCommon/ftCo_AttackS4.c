@@ -147,8 +147,8 @@ void decideFighter(HSD_GObj* gobj, float stick_x_sign, float stick_angle)
     case FTKIND_PIKACHU:
     case FTKIND_PICHU:
         doEnter(gobj, stick_angle);
-        fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-        fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+        fp->pre_hitlag_cb = efLib_PauseAll;
+        fp->post_hitlag_cb = efLib_ResumeAll;
         return;
     default:
         doEnter(gobj, stick_angle);

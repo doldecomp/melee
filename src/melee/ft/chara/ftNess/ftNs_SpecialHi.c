@@ -283,8 +283,8 @@ void ftNs_SpecialHi_ItemPKThunderRemove(HSD_GObj* gobj) // OnTakeDamage?
         fp->fv.ns.pkthunder_gfx = false;
 
     default:
-        temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
-        temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
+        temp_fp->death2_cb = NULL;
+        temp_fp->take_dmg_cb = NULL;
         ftParts_8007592C(temp_fp, 0, 0.0f);
     }
 }
@@ -319,8 +319,8 @@ void ftNs_SpecialHi_TakeDamage(HSD_GObj* gobj) // OnTakeDamage again?
         efLib_DestroyAll(gobj);
         fighter_data2->fv.ns.pkthunder_gfx = false;
     default:
-        temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
-        temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
+        temp_fp->death2_cb = NULL;
+        temp_fp->take_dmg_cb = NULL;
         ftParts_8007592C(temp_fp, 0, 0.0f);
     }
 }
@@ -458,8 +458,8 @@ void ftNs_SpecialHiStart_Enter(HSD_GObj* gobj) // Ness's grounded PK Thunder
         temp_fp->mv.ns.specialhi.unkVector1.x = 0.0f;
         temp_fp->mv.ns.specialhi.unkVar4 = 0.0f;
         temp_fp->mv.ns.specialhi.unkVar3 = 0.0f;
-        temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
-        temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
+        temp_fp->death2_cb = NULL;
+        temp_fp->take_dmg_cb = NULL;
         ftParts_8007592C(temp_fp, 0, 0.0f);
         fp->mv.ns.specialhi.thunderColl = 1;
         fp->mv.ns.specialhi.gravityDelay =
@@ -536,8 +536,8 @@ void ftNs_SpecialAirHiStart_Enter(
     temp_fp->mv.ns.specialhi.unkVector1.x = 0.0f;
     temp_fp->mv.ns.specialhi.unkVar4 = 0.0f;
     temp_fp->mv.ns.specialhi.unkVar3 = 0.0f;
-    temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
-    temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    temp_fp->death2_cb = NULL;
+    temp_fp->take_dmg_cb = NULL;
     ftParts_8007592C(temp_fp, 0, 0.0f);
     fp->mv.ns.specialhi.thunderColl = 1;
     fp->mv.ns.specialhi.gravityDelay =
@@ -641,8 +641,8 @@ void ftNs_SpecialHi_Enter(
                                                  fighter_data2->self_vel.y)) -
                                              1.5707963705062866f);
                         fighter_data2 = fp;
-                        fighter_data2->cb.x21E4_callback_OnDeath2 = NULL;
-                        fighter_data2->cb.x21DC_callback_OnTakeDamage = NULL;
+                        fighter_data2->death2_cb = NULL;
+                        fighter_data2->take_dmg_cb = NULL;
                         fighter_data2->x1968_jumpsUsed =
                             fighter_data2->co_attrs.max_jumps;
                         return;
@@ -745,8 +745,8 @@ void ftNs_SpecialAirHi_Enter(HSD_GObj* gobj)
         (fighter_data3->facing_dir *
          atan2f(fighter_data3->self_vel.x, fighter_data3->self_vel.y)) -
             (f32) M_PI_2);
-    fighter_data2->cb.x21E4_callback_OnDeath2 = NULL;
-    fighter_data2->cb.x21DC_callback_OnTakeDamage = NULL;
+    fighter_data2->death2_cb = NULL;
+    fighter_data2->take_dmg_cb = NULL;
     fighter_data2->x1968_jumpsUsed = fighter_data2->co_attrs.max_jumps;
 }
 
@@ -781,10 +781,8 @@ void ftNs_SpecialHiStart_Anim(HSD_GObj* gobj)
                 fighter_data2->fv.ns.pkthunder_gobj = pkt_ptr;
 
                 if (pkt_ptr != NULL) {
-                    fighter_data2->cb.x21E4_callback_OnDeath2 =
-                        ftNs_Init_OnDamage;
-                    fighter_data2->cb.x21DC_callback_OnTakeDamage =
-                        ftNs_Init_OnDamage;
+                    fighter_data2->death2_cb = ftNs_Init_OnDamage;
+                    fighter_data2->take_dmg_cb = ftNs_Init_OnDamage;
                 }
             }
         }
@@ -962,8 +960,8 @@ void ftNs_SpecialAirHiStart_Anim(HSD_GObj* gobj)
                 fp2->fv.ns.pkthunder_gobj = pkt_ptr;
 
                 if (pkt_ptr != NULL) {
-                    fp2->cb.x21E4_callback_OnDeath2 = ftNs_Init_OnDamage;
-                    fp2->cb.x21DC_callback_OnTakeDamage = ftNs_Init_OnDamage;
+                    fp2->death2_cb = ftNs_Init_OnDamage;
+                    fp2->take_dmg_cb = ftNs_Init_OnDamage;
                 }
             }
         }
@@ -1053,8 +1051,8 @@ void ftNs_SpecialAirHiHold_Anim(HSD_GObj* gobj)
                             (f32) M_PI_2);
                 }
 
-                fp1->cb.x21E4_callback_OnDeath2 = NULL;
-                fp1->cb.x21DC_callback_OnTakeDamage = NULL;
+                fp1->death2_cb = NULL;
+                fp1->take_dmg_cb = NULL;
                 fp1->x1968_jumpsUsed = fp1->co_attrs.max_jumps;
             }
         }
@@ -1586,8 +1584,8 @@ void ftNs_SpecialHi_Coll(HSD_GObj* gobj)
                 fp1->mv.ns.specialhi.unkVector1.x = 0;
                 fp1->mv.ns.specialhi.unkVar4 = 0;
                 fp1->mv.ns.specialhi.unkVar3 = 0;
-                fp1->cb.x21E4_callback_OnDeath2 = NULL;
-                fp1->cb.x21DC_callback_OnTakeDamage = NULL;
+                fp1->death2_cb = NULL;
+                fp1->take_dmg_cb = NULL;
                 ftParts_8007592C(fp1, 0, 0);
             }
 

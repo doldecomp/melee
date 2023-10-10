@@ -572,15 +572,15 @@ void ftNs_AttackHi4_YoyoCreateItem(HSD_GObj* gobj)
         it_802BE9D8(fp->facing_dir, gobj, &sp10, fp->motion_id);
     fp->x1984_heldItemSpec = fp->fv.ns.yoyo_gobj;
     if (fp->fv.ns.yoyo_gobj != NULL) {
-        if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = ftNs_Init_OnDamage;
+        if (fp->death2_cb == NULL) {
+            fp->death2_cb = ftNs_Init_OnDamage;
         }
-        if (fp->cb.x21DC_callback_OnTakeDamage == NULL) {
-            fp->cb.x21DC_callback_OnTakeDamage = ftNs_Init_OnDamage;
+        if (fp->take_dmg_cb == NULL) {
+            fp->take_dmg_cb = ftNs_Init_OnDamage;
         }
     }
-    fp->cb.x21D4_callback_EnterHitlag = ftNs_AttackHi4_YoyoItemSetUnk;
-    fp->cb.x21D8_callback_ExitHitlag = ftNs_AttackHi4_YoyoItemSetUnk2;
+    fp->pre_hitlag_cb = ftNs_AttackHi4_YoyoItemSetUnk;
+    fp->post_hitlag_cb = ftNs_AttackHi4_YoyoItemSetUnk2;
 }
 
 void ftNs_AttackHi4_YoyoItemSetFlag(HSD_GObj* gobj)
@@ -652,8 +652,8 @@ void ftNs_AttackHi4_Enter(HSD_GObj* gobj)
 
     ftAnim_8006EBA4(gobj);
     fp->x2222_b2 = 1;
-    fp->cb.x21C0_callback_OnGiveDamage = ftNs_AttackHi4_YoyoStartTimedRehit;
-    fp->cb.x21BC_callback_Accessory4 = ftNs_AttackHi4_YoyoUpdateHitPos;
+    fp->deal_dmg_cb = ftNs_AttackHi4_YoyoStartTimedRehit;
+    fp->accessory4_cb = ftNs_AttackHi4_YoyoUpdateHitPos;
 }
 
 void ftNs_AttackHi4_YoyoStartTimedRehit(HSD_GObj* gobj)
@@ -913,8 +913,8 @@ void ftNs_AttackHi4Charge_Enter(
     ftAnim_SetAnimRate(gobj, 0.0f);
     ftNs_AttackHi4_YoyoApplySmash(gobj);
     fp->x2222_b2 = 1;
-    fp->cb.x21C0_callback_OnGiveDamage = ftNs_AttackHi4_YoyoStartTimedRehit;
-    fp->cb.x21BC_callback_Accessory4 = ftNs_AttackHi4_YoyoUpdateHitPos;
+    fp->deal_dmg_cb = ftNs_AttackHi4_YoyoStartTimedRehit;
+    fp->accessory4_cb = ftNs_AttackHi4_YoyoUpdateHitPos;
 }
 
 // 0x8011620C
@@ -1070,6 +1070,6 @@ void ftNs_AttackHi4Release_Enter(HSD_GObj* gobj)
 
     fp->x2222_b2 = 1;
 
-    fp->cb.x21C0_callback_OnGiveDamage = ftNs_AttackHi4_YoyoStartTimedRehit;
-    fp->cb.x21BC_callback_Accessory4 = ftNs_AttackHi4_YoyoUpdateHitPos;
+    fp->deal_dmg_cb = ftNs_AttackHi4_YoyoStartTimedRehit;
+    fp->accessory4_cb = ftNs_AttackHi4_YoyoUpdateHitPos;
 }

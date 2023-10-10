@@ -34,15 +34,15 @@ static void setGfx(HSD_GObj* gobj)
 
     efSync_Spawn(0x47C, gobj, hsd_obj_ptr);
     fp->x2219_b0 = 1;
-    fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+    fp->pre_hitlag_cb = &efLib_PauseAll;
+    fp->post_hitlag_cb = &efLib_ResumeAll;
 }
 
 static void setCallbacks(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = &updateRot;
-    fp->cb.x21E4_callback_OnDeath2 = &updateRot;
+    fp->take_dmg_cb = &updateRot;
+    fp->death2_cb = &updateRot;
 }
 
 static void doStartMotion(HSD_GObj* gobj)
@@ -88,8 +88,8 @@ void ftMr_SpecialLw_Enter(HSD_GObj* gobj)
     fp->self_vel.y = sa->speciallw.vel_y - sa->speciallw.tap_y_vel_max;
     ftCommon_8007D440(fp, sa->speciallw.air_momentum_x);
     doStartMotion(gobj);
-    fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+    fp->pre_hitlag_cb = &efLib_PauseAll;
+    fp->post_hitlag_cb = &efLib_ResumeAll;
 }
 
 void ftMr_SpecialAirLw_Enter(HSD_GObj* gobj)
@@ -114,16 +114,16 @@ void ftMr_SpecialAirLw_Enter(HSD_GObj* gobj)
     fp->self_vel.y = (f32) (sa->speciallw.vel_y - sub_val);
     ftCommon_8007D440(fp, sa->speciallw.air_momentum_x);
     doStartMotion(gobj);
-    fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+    fp->pre_hitlag_cb = &efLib_PauseAll;
+    fp->post_hitlag_cb = &efLib_ResumeAll;
 }
 
 static void unsetCallbacks(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
-    fp->cb.x21E4_callback_OnDeath2 = NULL;
+    fp->take_dmg_cb = NULL;
+    fp->death2_cb = NULL;
 }
 
 void ftMr_SpecialLw_Anim(HSD_GObj* gobj)
@@ -177,8 +177,8 @@ static void doPhys(HSD_GObj* gobj)
                               fp->cur_anim_frame, 1, 0, NULL);
     ftCommon_ClampFallSpeed(fp, sa->speciallw.tap_grav);
     ftCommon_8007D440(fp, sa->speciallw.air_momentum_x);
-    fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+    fp->pre_hitlag_cb = &efLib_PauseAll;
+    fp->post_hitlag_cb = &efLib_ResumeAll;
 }
 
 void ftMr_SpecialLw_Phys(HSD_GObj* gobj)
@@ -309,8 +309,8 @@ static void doAirCollIfUnk(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialLw, transition_flags,
                               fp->cur_anim_frame, 1, 0, NULL);
     ftCommon_8007CC78(ft_tmp = fp, sa->speciallw.momentum_x);
-    fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+    fp->pre_hitlag_cb = &efLib_PauseAll;
+    fp->post_hitlag_cb = &efLib_ResumeAll;
 }
 
 void ftMr_SpecialAirLw_Coll(HSD_GObj* gobj)

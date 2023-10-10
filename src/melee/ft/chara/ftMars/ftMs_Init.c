@@ -506,9 +506,9 @@ void ftMs_SpecialN_801365A8(HSD_GObj* gobj)
         fp->x2219_b0 = 1;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = 0;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = 0;
     return;
 }
 
@@ -531,9 +531,9 @@ void ftMs_SpecialN_8013666C(HSD_GObj* gobj)
         fp->x2219_b0 = 1;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = 0;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = 0;
     return;
 }
 

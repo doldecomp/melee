@@ -104,8 +104,8 @@ void ftCo_80099390(ftCo_GObj* gobj, int msid, int arg2)
     fp->cmd_vars[0] = 0;
     fp->mv.co.escape.x4 = false;
     ftCo_80099314(gobj, msid, arg2);
-    fp->cb.x21A0_callback_Anim = ftCo_80099564;
-    fp->cb.x21A8_callback_Coll = ftCo_80099754;
+    fp->anim_cb = ftCo_80099564;
+    fp->coll_cb = ftCo_80099754;
 }
 
 void ftCo_80099438(ftCo_GObj* gobj, int msid, int arg2)
@@ -118,7 +118,7 @@ void ftCo_80099438(ftCo_GObj* gobj, int msid, int arg2)
     ftCo_80099314(gobj, msid, arg2);
     ftParts_80074B0C(gobj, 0, 1);
     ftYs_Init_8012BDA0(gobj);
-    fp->cb.x21A0_callback_Anim = ftCo_80099644;
+    fp->anim_cb = ftCo_80099644;
 }
 
 void ftCo_Escape_Anim(ftCo_GObj* gobj)

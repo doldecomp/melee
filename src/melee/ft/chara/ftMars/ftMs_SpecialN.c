@@ -25,7 +25,7 @@ void ftMs_SpecialN_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    fp->cb.x21EC_callback = &ftMs_SpecialN_80136730;
+    fp->x21EC = &ftMs_SpecialN_80136730;
 
     fp->gr_vel /= attrs->xC;
     Fighter_ChangeMotionState(gobj, 0x155, 0, 0.0f, 1.0f, 0.0f, 0);
@@ -42,7 +42,7 @@ void ftMs_SpecialAirN_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    fp->cb.x21EC_callback = &ftMs_SpecialN_80136730;
+    fp->x21EC = &ftMs_SpecialN_80136730;
 
     fp->self_vel.x /= attrs->xC;
 
@@ -479,8 +479,8 @@ void ftMs_SpecialN_801371FC(HSD_GObj* gobj)
                               1.0f, 0.0f, 0);
 
     if (fp->x2219_b0 == 1) {
-        fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
-        fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+        fp->pre_hitlag_cb = &efLib_PauseAll;
+        fp->post_hitlag_cb = &efLib_ResumeAll;
     }
 }
 
@@ -505,8 +505,8 @@ void ftMs_SpecialN_801372A8(HSD_GObj* gobj)
                               1.0f, 0.0f, 0);
 
     if (fp->x2219_b0 == 1) {
-        fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
-        fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+        fp->pre_hitlag_cb = &efLib_PauseAll;
+        fp->post_hitlag_cb = &efLib_ResumeAll;
     }
 }
 
@@ -525,7 +525,7 @@ void ftMs_SpecialN_80137354(HSD_GObj* gobj)
     }
 
     Fighter_ChangeMotionState(gobj, thing, 0, 1.0f, 1.0f, 0.0f, 0);
-    fp->cb.x21BC_callback_Accessory4 = &ftMs_SpecialN_801365A8;
+    fp->accessory4_cb = &ftMs_SpecialN_801365A8;
 }
 
 // 801373B8 00133F98
@@ -542,5 +542,5 @@ void ftMs_SpecialN_801373B8(HSD_GObj* gobj)
     }
 
     Fighter_ChangeMotionState(gobj, thing, 0, 1.0f, 1.0f, 0.0f, 0);
-    fp->cb.x21BC_callback_Accessory4 = &ftMs_SpecialN_8013666C;
+    fp->accessory4_cb = &ftMs_SpecialN_8013666C;
 }

@@ -5,6 +5,8 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
+typedef struct HSD_GObj ftKb_GObj;
+
 /// @todo Clean up factorization
 
 static MotionFlags const ftKb_MF_MultiJump ATTRIBUTE_USED =

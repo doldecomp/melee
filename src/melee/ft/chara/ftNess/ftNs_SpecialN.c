@@ -54,8 +54,8 @@ void ftNs_SpecialN_SetNULL(HSD_GObj* gobj)
             fp->fv.ns.pkflash_gobj = NULL;
         }
 
-        fp->cb.x21E4_callback_OnDeath2 = NULL;
-        fp->cb.x21DC_callback_OnTakeDamage = NULL;
+        fp->death2_cb = NULL;
+        fp->take_dmg_cb = NULL;
     }
 }
 
@@ -78,8 +78,8 @@ void ftNs_SpecialN_ItemPKFlushSetNULL(HSD_GObj* gobj)
             fp->fv.ns.pkflash_gobj = NULL;
         }
 
-        fp->cb.x21E4_callback_OnDeath2 = NULL;
-        fp->cb.x21DC_callback_OnTakeDamage = NULL;
+        fp->death2_cb = NULL;
+        fp->take_dmg_cb = NULL;
     }
 }
 
@@ -132,8 +132,8 @@ void ftNs_SpecialNStart_Enter(HSD_GObj* gobj)
 
         fp1->fv.ns.pkflash_gobj = NULL;
         fp1->mv.ns.specialn.flashTimerMin = sa->xC_PKFLASH_MINCHARGEFRAMES;
-        fp1->cb.x21E4_callback_OnDeath2 = NULL;
-        fp1->cb.x21DC_callback_OnTakeDamage = NULL;
+        fp1->death2_cb = NULL;
+        fp1->take_dmg_cb = NULL;
     }
 
     ftAnim_8006EBA4(gobj);
@@ -174,8 +174,8 @@ void ftNs_SpecialAirNStart_Enter(HSD_GObj* gobj)
         temp_fp->mv.ns.specialn.flashTimerMin =
             ness_attr->xC_PKFLASH_MINCHARGEFRAMES;
 
-        temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
-        temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
+        temp_fp->death2_cb = NULL;
+        temp_fp->take_dmg_cb = NULL;
     }
 
     ftAnim_8006EBA4(gobj);
@@ -214,8 +214,8 @@ void ftNs_SpecialNStart_Anim(HSD_GObj* gobj)
                 fp->fv.ns.pkflash_gobj = pk_flash;
 
                 if (pk_flash != NULL) {
-                    fp->cb.x21E4_callback_OnDeath2 = ftNs_Init_OnDamage;
-                    fp->cb.x21DC_callback_OnTakeDamage = ftNs_Init_OnDamage;
+                    fp->death2_cb = ftNs_Init_OnDamage;
+                    fp->take_dmg_cb = ftNs_Init_OnDamage;
                 }
             }
         }
@@ -281,8 +281,8 @@ inline void SetPKFlashAttr(HSD_GObj* gobj)
     fp->mv.ns.specialn.gravityDelay = sa->x8_PKFLASH_GRAVITY_DELAY;
     fp->fv.ns.pkflash_gobj = NULL;
     fp->mv.ns.specialn.flashTimerMin = sa->xC_PKFLASH_MINCHARGEFRAMES;
-    fp->cb.x21E4_callback_OnDeath2 = NULL;
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    fp->death2_cb = NULL;
+    fp->take_dmg_cb = NULL;
 }
 
 /// Ness's grounded PK Flash Release Animation callback
@@ -337,10 +337,8 @@ void ftNs_SpecialAirNStart_Anim(HSD_GObj* gobj)
                                     fighter_data2->facing_dir);
                     fighter_data2->fv.ns.pkflash_gobj = flash_GObj;
                     if (flash_GObj != NULL) {
-                        fighter_data2->cb.x21E4_callback_OnDeath2 =
-                            ftNs_Init_OnDamage;
-                        fighter_data2->cb.x21DC_callback_OnTakeDamage =
-                            ftNs_Init_OnDamage;
+                        fighter_data2->death2_cb = ftNs_Init_OnDamage;
+                        fighter_data2->take_dmg_cb = ftNs_Init_OnDamage;
                     }
                 }
             }
@@ -468,8 +466,8 @@ void ftNs_SpecialNRelease_IASA(HSD_GObj* gobj)
             fp->fv.ns.pkflash_gobj = NULL;
         }
 
-        fp->cb.x21E4_callback_OnDeath2 = NULL;
-        fp->cb.x21DC_callback_OnTakeDamage = NULL;
+        fp->death2_cb = NULL;
+        fp->take_dmg_cb = NULL;
     }
 }
 
@@ -521,8 +519,8 @@ void ftNs_SpecialAirNRelease_IASA(HSD_GObj* gobj)
             fp->fv.ns.pkflash_gobj = NULL;
         }
 
-        fp->cb.x21E4_callback_OnDeath2 = NULL;
-        fp->cb.x21DC_callback_OnTakeDamage = NULL;
+        fp->death2_cb = NULL;
+        fp->take_dmg_cb = NULL;
     }
 }
 

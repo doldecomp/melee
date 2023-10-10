@@ -507,10 +507,6 @@ void ftPr_Init_UnkMtxFunc0(HSD_GObj* gobj, int arg1, Mtx vmtx)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.pr.x223C && fp->x2225_b2) {
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
-        u8 _[4] = { 0 };
-#endif
         MtxPtr mtx = HSD_JObjGetMtxPtr(fp->parts[FtPart_LLegJA].joint);
         HSD_JObj* jobj = fp->fv.pr.x223C;
         HSD_JObjCopyMtx(fp->fv.pr.x223C, mtx);
@@ -622,9 +618,9 @@ void ftPr_Init_8013C94C(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 extern f32 const ftPr_Init_804D9C10;
@@ -637,7 +633,7 @@ static inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
 
     fp->cmd_vars[0] = 0;
 
-    fp->cb.x21BC_callback_Accessory4 = &ftPr_Init_8013C94C;
+    fp->accessory4_cb = &ftPr_Init_8013C94C;
 
     if (gm_8016B1D8() && grStadium_801D4FF8(fp->player_id)) {
         fp->mv.pr.specialhi.x0 = true;
@@ -779,7 +775,7 @@ void ftPr_SpecialHi_8013CD34(HSD_GObj* gobj)
                                   ftPr_Init_804D9C14, NULL);
     }
 
-    fp->cb.x21BC_callback_Accessory4 = ftPr_Init_8013C94C;
+    fp->accessory4_cb = ftPr_Init_8013C94C;
 }
 
 void ftPr_SpecialHi_8013CDD8(Fighter_GObj* fighter_gobj)
@@ -797,13 +793,13 @@ void ftPr_SpecialHi_8013CDD8(Fighter_GObj* fighter_gobj)
                                   ftPr_Init_804D9C18, ftPr_Init_804D9C14,
                                   NULL);
     }
-    fighter->cb.x21BC_callback_Accessory4 = ftPr_Init_8013C94C;
+    fighter->accessory4_cb = ftPr_Init_8013C94C;
 }
 
 void ftPr_SpecialHi_8013CE7C(Fighter_GObj* fighter_gobj)
 {
     Fighter* fighter = GET_FIGHTER(fighter_gobj);
-    fighter->cb.x21BC_callback_Accessory4 = NULL;
+    fighter->accessory4_cb = NULL;
 }
 
 extern f32 const ftPr_Init_804D9C20;
@@ -830,7 +826,7 @@ void ftPr_SpecialLw_Enter(Fighter_GObj* gobj)
     ftAnim_8006EBA4(gobj);
     fp = gobj->user_data;
     fp->cmd_vars[0] = 0;
-    fp->cb.x21BC_callback_Accessory4 = &ftPr_SpecialHi_8013CE7C;
+    fp->accessory4_cb = &ftPr_SpecialHi_8013CE7C;
 }
 
 void ftPr_SpecialAirLw_Enter(Fighter_GObj* gobj)
@@ -853,7 +849,7 @@ void ftPr_SpecialAirLw_Enter(Fighter_GObj* gobj)
     ftAnim_8006EBA4(gobj);
     fp = gobj->user_data;
     fp->cmd_vars[0] = 0;
-    fp->cb.x21BC_callback_Accessory4 = &ftPr_SpecialHi_8013CE7C;
+    fp->accessory4_cb = &ftPr_SpecialHi_8013CE7C;
 }
 
 void ftPr_SpecialLw_Anim(Fighter_GObj* fighter_gobj)
@@ -5435,10 +5431,10 @@ void ftPr_SpecialNStart_Coll(HSD_GObj* gobj)
                                   fp->cur_anim_frame, ftPr_Init_804D9C50,
                                   ftPr_Init_804D9C48, NULL);
         fp = gobj->user_data;
-        fp->cb.x21E4_callback_OnDeath2 = ftPr_SpecialS_8013D658;
-        fp->cb.x21DC_callback_OnTakeDamage = ftPr_SpecialS_8013D658;
-        fp->cb.x21C0_callback_OnGiveDamage = ftPr_SpecialS_8013D764;
-        fp->cb.x21F8_callback = ftPr_SpecialN_8014222C;
+        fp->death2_cb = ftPr_SpecialS_8013D658;
+        fp->take_dmg_cb = ftPr_SpecialS_8013D658;
+        fp->deal_dmg_cb = ftPr_SpecialS_8013D764;
+        fp->x21F8 = ftPr_SpecialN_8014222C;
     }
 }
 #endif

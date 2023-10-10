@@ -822,11 +822,11 @@ void ftCommon_8007DB58(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ft_80088770(fp);
     ft_800887CC(fp);
-    if (fp->cb.x21DC_callback_OnTakeDamage != NULL) {
-        fp->cb.x21DC_callback_OnTakeDamage(gobj);
+    if (fp->take_dmg_cb != NULL) {
+        fp->take_dmg_cb(gobj);
     }
-    if (fp->cb.x21E0_callback_OnDeath != NULL) {
-        fp->cb.x21E0_callback_OnDeath(gobj);
+    if (fp->death1_cb != NULL) {
+        fp->death1_cb(gobj);
     }
 }
 
@@ -1081,9 +1081,9 @@ void ftCommon_8007E2D0(Fighter* fp, s16 arg1, void (*cb0)(HSD_GObj*),
 {
     fp->x221E_b6 = 1;
     fp->x1A68 = arg1;
-    fp->cb.x2190_callback_OnGrabFighter_Self = cb0;
-    fp->cb.x2198_callback_OnGrabFighter_Victim = cb2;
-    fp->cb.x2194_callback = cb1;
+    fp->grab_cb = cb0;
+    fp->grabbed_cb = cb2;
+    fp->x2194 = cb1;
 }
 
 void ftCommon_8007E2F4(Fighter* fp, s16 val)

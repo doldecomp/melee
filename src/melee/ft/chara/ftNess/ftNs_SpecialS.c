@@ -81,7 +81,7 @@ void ftNs_SpecialS_Enter(
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialS, 0, 0.0f, 1.0f, 0.0f,
                               NULL);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 =
+    fp->accessory4_cb =
         ftNs_SpecialS_ItemPKFireSpawn; // Store PK Fire spawn function
 }
 
@@ -98,7 +98,7 @@ void ftNs_SpecialAirS_Enter(
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirS, 0, 0.0f, 1.0f, 0.0f,
                               NULL);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftNs_SpecialS_ItemPKFireSpawn;
+    fp->accessory4_cb = ftNs_SpecialS_ItemPKFireSpawn;
 }
 
 // 0x80116D74

@@ -39,13 +39,12 @@ void ftGw_SpecialHi_ItemRescueSetup(HSD_GObj* gobj)
                                  fp->facing_dir, 2.5f);
         fp->fv.gw.x226C_rescueGObj = rescueGObj;
         if (rescueGObj != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
-            fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
+            fp->death2_cb = ftGw_Init_OnDamage;
+            fp->take_dmg_cb = ftGw_Init_OnDamage;
         }
-        fp->cb.x21D4_callback_EnterHitlag =
-            ftGw_SpecialHi_ItemRescueEnterHitlag;
-        fp->cb.x21D8_callback_ExitHitlag = ftGw_SpecialHi_ItemRescueExitHitlag;
-        fp->cb.x21BC_callback_Accessory4 = NULL;
+        fp->pre_hitlag_cb = ftGw_SpecialHi_ItemRescueEnterHitlag;
+        fp->post_hitlag_cb = ftGw_SpecialHi_ItemRescueExitHitlag;
+        fp->accessory4_cb = NULL;
     }
 }
 
@@ -71,8 +70,8 @@ void ftGw_SpecialHi_ItemRescueSetNULL(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     fp->fv.gw.x226C_rescueGObj = NULL;
-    fp->cb.x21E4_callback_OnDeath2 = NULL;
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    fp->death2_cb = NULL;
+    fp->take_dmg_cb = NULL;
 }
 
 // 0x8014DFFC - Remove Fire Rescue item
@@ -113,7 +112,7 @@ static inline void ftGameWatch_SpecialHi_SetVars(HSD_GObj* gobj)
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialHi_ItemRescueSetup;
+    fp->accessory4_cb = ftGw_SpecialHi_ItemRescueSetup;
 }
 
 // 0x8014E0AC
@@ -266,8 +265,8 @@ void ftGw_SpecialAirHi_Coll(HSD_GObj* gobj)
                 ftGw_SpecialHi_ItemRescueRemove(gobj);
                 ftCommon_8007D7FC(fp);
                 ftCo_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
-                fp->cb.x21E4_callback_OnDeath2 = NULL;
-                fp->cb.x21DC_callback_OnTakeDamage = NULL;
+                fp->death2_cb = NULL;
+                fp->take_dmg_cb = NULL;
             }
         } else {
             if (1.0f == fp->facing_dir) {

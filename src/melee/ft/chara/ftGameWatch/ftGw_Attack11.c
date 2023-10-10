@@ -35,19 +35,17 @@ void ftGw_Attack11_ItemGreenhouseSetup(HSD_GObj* gobj)
         fp->fv.gw.x224C_greenhouseGObj =
             it_802C61F4(gobj, &sp10, FtPart_LHandNb, fp->facing_dir);
         if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
-            if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
-                fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
+            if (fp->death2_cb == NULL) {
+                fp->death2_cb = ftGw_Init_OnDamage;
             }
-            if (fp->cb.x21DC_callback_OnTakeDamage == NULL) {
-                fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
+            if (fp->take_dmg_cb == NULL) {
+                fp->take_dmg_cb = ftGw_Init_OnDamage;
             }
-            fp->cb.x21D4_callback_EnterHitlag =
-                ftGw_Attack11_ItemGreenhouseEnterHitlag;
-            fp->cb.x21D8_callback_ExitHitlag =
-                ftGw_Attack11_ItemGreenhouseExitHitlag;
+            fp->pre_hitlag_cb = ftGw_Attack11_ItemGreenhouseEnterHitlag;
+            fp->post_hitlag_cb = ftGw_Attack11_ItemGreenhouseExitHitlag;
         }
     }
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->accessory4_cb = NULL;
 }
 
 // 0x8014BE84
@@ -69,17 +67,15 @@ void ftGw_Attack11_DecideAction(HSD_GObj* gobj)
             it_802C64A8(fp->fv.gw.x224C_greenhouseGObj);
         }
 
-        if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
+        if (fp->death2_cb == NULL) {
+            fp->death2_cb = ftGw_Init_OnDamage;
         }
-        if (fp->cb.x21DC_callback_OnTakeDamage == NULL) {
-            fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
+        if (fp->take_dmg_cb == NULL) {
+            fp->take_dmg_cb = ftGw_Init_OnDamage;
         }
-        fp->cb.x21D4_callback_EnterHitlag =
-            ftGw_Attack11_ItemGreenhouseEnterHitlag;
-        fp->cb.x21D8_callback_ExitHitlag =
-            ftGw_Attack11_ItemGreenhouseExitHitlag;
-        fp->cb.x21BC_callback_Accessory4 = NULL;
+        fp->pre_hitlag_cb = ftGw_Attack11_ItemGreenhouseEnterHitlag;
+        fp->post_hitlag_cb = ftGw_Attack11_ItemGreenhouseExitHitlag;
+        fp->accessory4_cb = NULL;
     }
 }
 
@@ -176,7 +172,7 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
         fp->x2218_b2 = 0;
         fp->mv.gw.Attack11.unk = 0;
         fp->x1A54 = 0;
-        fp->cb.x21BC_callback_Accessory4 = ftGw_Attack11_ItemGreenhouseSetup;
+        fp->accessory4_cb = ftGw_Attack11_ItemGreenhouseSetup;
     }
 }
 

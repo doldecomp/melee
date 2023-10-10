@@ -136,7 +136,7 @@ asm void ftCa_SpecialHi_Enter(HSD_GObj*)
 void ftCa_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21EC_callback = ftCa_SpecialLw_800E49FC;
+    fp->x21EC = ftCa_SpecialLw_800E49FC;
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialHi, Ft_MF_None, 0, 1, 0,
                               NULL);
     ftCommon_8007E2D0(fp, 2, ftCa_SpecialLw_800E5128, NULL, ftCo_8009CA0C);
@@ -381,7 +381,7 @@ asm void ftCa_SpecialAirHi_Enter(HSD_GObj*)
 void ftCa_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21EC_callback = ftCa_SpecialLw_800E49FC;
+    fp->x21EC = ftCa_SpecialLw_800E49FC;
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirHi, Ft_MF_None, 0, 1, 0,
                               NULL);
     ftCommon_8007E2D0(fp, 2, ftCa_SpecialLw_800E5128, NULL, ftCo_8009CA0C);
@@ -734,7 +734,7 @@ void ftCa_SpecialLw_800E5128(HSD_GObj* gobj)
     } else {
         ftCo_800DB368(vic_fp, fp);
         fp->x221B_b7 = true;
-        fp->cb.x21BC_callback_Accessory4 = ftCa_SpecialLw_800E550C;
+        fp->accessory4_cb = ftCa_SpecialLw_800E550C;
     }
 }
 #endif

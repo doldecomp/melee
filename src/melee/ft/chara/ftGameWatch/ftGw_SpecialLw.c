@@ -39,13 +39,13 @@ void ftGw_SpecialLw_ItemPanicSetup(HSD_GObj* gobj)
     }
 
     if (fp->fv.gw.x2268_panicGObj != NULL) {
-        fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
-        fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
+        fp->death2_cb = ftGw_Init_OnDamage;
+        fp->take_dmg_cb = ftGw_Init_OnDamage;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = ftGw_SpecialLw_ItemPanicEnterHitlag;
-    fp->cb.x21D8_callback_ExitHitlag = ftGw_SpecialLw_ItemPanicExitHitlag;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = ftGw_SpecialLw_ItemPanicEnterHitlag;
+    fp->post_hitlag_cb = ftGw_SpecialLw_ItemPanicExitHitlag;
+    fp->accessory4_cb = NULL;
 }
 
 /// Set Oil Panic flags + clear pointers
@@ -55,8 +55,8 @@ void ftGw_SpecialLw_ItemPanicSetFlag(HSD_GObj* gobj)
 
     ftGw_SpecialLw_ItemPanicExitHitlag(gobj);
     fp->fv.gw.x2268_panicGObj = NULL;
-    fp->cb.x21E4_callback_OnDeath2 = NULL;
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    fp->death2_cb = NULL;
+    fp->take_dmg_cb = NULL;
 }
 
 /// Remove Oil Panic item
@@ -678,7 +678,7 @@ void ftGw_SpecialLwShoot_GroundToAir(HSD_GObj* gobj)
                               NULL);
 
     ftGw_SpecialLw_UpdateBucketModel(gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialLw_ItemPanicSetup;
+    fp->accessory4_cb = ftGw_SpecialLw_ItemPanicSetup;
 }
 
 /// Mr. Game & Watch's air -> ground Oil Panic Release Motion State handler
@@ -692,7 +692,7 @@ void ftGw_SpecialAirLwShoot_AirToGround(HSD_GObj* gobj)
                               fp->cur_anim_frame, 1, 0, NULL);
 
     ftGw_SpecialLw_UpdateBucketModel(gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialLw_ItemPanicSetup;
+    fp->accessory4_cb = ftGw_SpecialLw_ItemPanicSetup;
 }
 
 /// Enter SpecialLwShoot and calculate damage
@@ -730,7 +730,7 @@ void ftGw_SpecialLwShoot_ReleaseOil(HSD_GObj* gobj)
         }
 
         ftGw_SpecialLw_UpdateBucketModel(gobj);
-        fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialLw_ItemPanicSetup;
+        fp->accessory4_cb = ftGw_SpecialLw_ItemPanicSetup;
     }
 }
 
@@ -767,6 +767,6 @@ void ftGw_SpecialAirLwShoot_ReleaseOil(HSD_GObj* gobj)
         }
 
         ftGw_SpecialLw_UpdateBucketModel(gobj);
-        fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialLw_ItemPanicSetup;
+        fp->accessory4_cb = ftGw_SpecialLw_ItemPanicSetup;
     }
 }

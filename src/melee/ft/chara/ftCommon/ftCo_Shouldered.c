@@ -41,7 +41,7 @@ ASM void ftCo_8009C5A4(ftCo_GObj* gobj, FtMotionId msid)
             fp->victim_gobj);
         ftCommon_8007E2FC(gobj);
         ftCommon_8007E2F4(fp, 0x1FF);
-        fp->cb.x21B0_callback_Accessory1 = ftCo_800DB464;
+        fp->accessory1_cb = ftCo_800DB464;
     }
 }
 #else /* clang-format off */

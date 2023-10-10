@@ -118,14 +118,14 @@ void ftFx_AppealS_Anim(HSD_GObj* gobj)
         switch (ftKind) {
         case FTKIND_FOX:
             if (grCorneria_801E2B80() != false) {
-                fp->cb.x21E0_callback_OnDeath = ftFx_AppealS_OnTakeDamage;
+                fp->death1_cb = ftFx_AppealS_OnTakeDamage;
             }
 
             break;
 
         case FTKIND_FALCO:
             if (grCorneria_801E2C34() != false) {
-                fp->cb.x21E0_callback_OnDeath = ftFx_AppealS_OnTakeDamage;
+                fp->death1_cb = ftFx_AppealS_OnTakeDamage;
             }
 
             break;
@@ -165,5 +165,5 @@ static void ftFx_AppealS_OnTakeDamage(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     grCorneria_801E2AF4();
-    fp->cb.x21E0_callback_OnDeath = NULL;
+    fp->death1_cb = NULL;
 }

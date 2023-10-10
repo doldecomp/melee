@@ -71,7 +71,7 @@ ASM void ftCo_800BD1DC(Fighter_GObj* gobj, Fighter_GObj* victim_gobj)
     ftAnim_8006EBA4(gobj);
     ftCommon_8007EBAC(fp, 1, 0);
     ftCommon_8007E2FC(gobj);
-    fp->cb.x21B0_callback_Accessory1 = ftCo_800BD39C;
+    fp->accessory1_cb = ftCo_800BD39C;
 }
 
 #else /* clang-format off */

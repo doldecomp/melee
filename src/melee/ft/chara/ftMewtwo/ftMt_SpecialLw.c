@@ -55,7 +55,7 @@ void ftMt_SpecialLw_Enter(HSD_GObj* gobj)
                               NULL);
     ftAnim_8006EBA4(gobj);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
+    fp->accessory4_cb = ftMt_SpecialLw_CreateDisable;
 }
 
 // 0x80146264
@@ -79,7 +79,7 @@ void ftMt_SpecialAirLw_Enter(HSD_GObj* gobj)
                               NULL);
     ftAnim_8006EBA4(gobj);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
+    fp->accessory4_cb = ftMt_SpecialLw_CreateDisable;
 }
 
 // 0x801462DC
@@ -144,8 +144,8 @@ inline void ftMewtwo_SpecialLw_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.mt.x222C_disableGObj != NULL) {
-        fp->cb.x21E4_callback_OnDeath2 = ftMt_Init_OnDeath2;
-        fp->cb.x21DC_callback_OnTakeDamage = ftMt_Init_OnTakeDamage;
+        fp->death2_cb = ftMt_Init_OnDeath2;
+        fp->take_dmg_cb = ftMt_Init_OnTakeDamage;
     }
 }
 
@@ -164,7 +164,7 @@ void ftMt_SpecialLw_GroundToAir(HSD_GObj* gobj)
                               FTMEWTWO_SPECIALLW_COLL_FLAG, fp->cur_anim_frame,
                               1.0f, 0.0f, NULL);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
+    fp->accessory4_cb = ftMt_SpecialLw_CreateDisable;
 
     ftMewtwo_SpecialLw_SetCall(gobj);
 
@@ -184,7 +184,7 @@ void ftMt_SpecialAirLw_AirToGround(HSD_GObj* gobj)
                               FTMEWTWO_SPECIALLW_COLL_FLAG, fp->cur_anim_frame,
                               1.0f, 0.0f, NULL);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
+    fp->accessory4_cb = ftMt_SpecialLw_CreateDisable;
 
     ftMewtwo_SpecialLw_SetCall(gobj);
 }

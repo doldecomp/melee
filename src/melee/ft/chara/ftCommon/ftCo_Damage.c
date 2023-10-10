@@ -3166,8 +3166,8 @@ void ftCo_8008EC90(ftCo_GObj* gobj)
                         other_fp->x1960_vibrateMult);
                     other_fp->x221A_b2 = true;
                     if (!other_fp->x2219_b5) {
-                        if (other_fp->cb.x21D4_callback_EnterHitlag != NULL) {
-                            other_fp->cb.x21D4_callback_EnterHitlag(gobj);
+                        if (other_fp->pre_hitlag_cb != NULL) {
+                            other_fp->pre_hitlag_cb(gobj);
                         }
                         other_fp->x2219_b5 = true;
                     }

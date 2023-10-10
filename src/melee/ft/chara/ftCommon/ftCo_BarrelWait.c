@@ -40,8 +40,8 @@ void ftCo_8009EB18(ftCo_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCo_MS_BarrelWait, Ft_MF_None, 0, 1, 0,
                               NULL);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21E4_callback_OnDeath2 = ftCo_8009EAF8;
-    fp->cb.x21B0_callback_Accessory1 = ftCo_8009EC44;
+    fp->death2_cb = ftCo_8009EAF8;
+    fp->accessory1_cb = ftCo_8009EC44;
     ftCommon_8007E2FC(gobj);
     fp->x1988 = 2;
     fp->x221E_b0 = true;

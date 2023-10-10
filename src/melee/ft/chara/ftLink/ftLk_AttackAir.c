@@ -40,8 +40,8 @@ void ftLk_AttackAir_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_AttackAir_EnterFromCStick(gobj);
     if (fp->motion_id == ftCo_MS_AttackAirLw) {
-        fp->cb.x21C0_callback_OnGiveDamage = lwOnHit;
-        fp->cb.x21A0_callback_Anim = lwOnAnim;
+        fp->deal_dmg_cb = lwOnHit;
+        fp->anim_cb = lwOnAnim;
         fp->mv.lk.attackair.lw_frame_start = 0;
     }
 }

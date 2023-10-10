@@ -2195,9 +2195,9 @@ void ftCo_80092F2C(HSD_GObj* gobj, bool arg1)
     ftCo_Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_GuardSetOff, Ft_MF_None, 0, 1, 0,
                               NULL);
-    fp->cb.x21D0_callback_EveryHitlag = ftCo_80093240;
+    fp->hitlag_cb = ftCo_80093240;
     fp->x670_timer_lstick_tilt_x = -2;
-    fp->cb.x21D8_callback_ExitHitlag = ftCo_800932DC;
+    fp->post_hitlag_cb = ftCo_800932DC;
     if (!fp->x221C_b2) {
         ftCo_80092158(gobj, 1049, fp->parts[fp->ft_data->x8->unk11].joint);
         fp->x2219_b0 = true;
