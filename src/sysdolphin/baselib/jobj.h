@@ -296,6 +296,7 @@ static inline void HSD_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
 static inline void HSD_JObjGetScale(HSD_JObj* jobj, Vec3* scale)
 {
     HSD_ASSERT(823, jobj);
+    HSD_ASSERT(824, scale);
     *scale = jobj->scale;
 }
 

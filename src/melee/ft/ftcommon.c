@@ -650,8 +650,8 @@ void ftCommon_8007D5D4(Fighter* fp)
     fp->cur_pos.z = 0;
     fp->x74_anim_vel.y = 0;
     fp->x1968_jumpsUsed = 1;
-    fp->coll_data.x19C = 0xA;
-    fp->coll_data.x130_flags |= 0x10;
+    fp->coll_data.x19C = 10;
+    fp->coll_data.x130_flags |= (1 << 4);
 }
 
 void ftCommon_8007D60C(Fighter* fp)

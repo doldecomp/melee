@@ -256,33 +256,33 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
 
     fp->x61D = 255;
 
-    fp->pos_delta.z = 0.0f;
-    fp->pos_delta.y = 0.0f;
-    fp->pos_delta.x = 0.0f;
-    fp->cur_anim_frame = 0.0f;
-    fp->x898_unk = 0.0f;
+    fp->pos_delta.z = 0;
+    fp->pos_delta.y = 0;
+    fp->pos_delta.x = 0;
+    fp->cur_anim_frame = 0;
+    fp->x898_unk = 0;
 
-    fp->frame_spd_mul = 1.0f;
-    fp->x8A0_unk = 1.0f;
-    fp->dmg.kb_applied = 0.0f;
-    fp->dmg.x18A4_knockbackMagnitude = 0.0f;
-    fp->dmg.x18A8 = 0.0f;
+    fp->frame_spd_mul = 1;
+    fp->x8A0_unk = 1;
+    fp->dmg.kb_applied = 0;
+    fp->dmg.x18A4_knockbackMagnitude = 0;
+    fp->dmg.x18A8 = 0;
     fp->dmg.x18ac_time_since_hit = -1;
-    fp->dmg.armor0 = 0.0f;
-    fp->dmg.armor1 = 0.0f;
+    fp->dmg.armor0 = 0;
+    fp->dmg.armor1 = 0;
     fp->x1828 = 0;
 
     fp->x221C_b6 = 0;
 
-    fp->dmg.x18a0 = 0.0f;
+    fp->dmg.x18a0 = 0;
     fp->x1968_jumpsUsed = 0;
     fp->x1969_walljumpUsed = 0;
-    fp->hitlag_mul = 0.0f;
+    fp->hitlag_mul = 0;
     fp->x2064_ledgeCooldown = 0;
 
     fp->dmg.x1830_percent = Player_GetDamage(fp->player_id);
 
-    fp->dmg.x1838_percentTemp = 0.0f;
+    fp->dmg.x1838_percentTemp = 0;
 
     fp->dmg.x183C_applied = 0;
     fp->dmg.x18C0 = 0;
@@ -301,7 +301,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->dmg.x18fa_model_shift_frames = 0;
     fp->dmg.x18FD = 0;
     fp->dmg.x18FC = 0;
-    fp->dmg.x1834 = 0.0f;
+    fp->dmg.x1834 = 0;
 
     fp->x2222_b2 = 0;
 
@@ -313,26 +313,26 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x221A_b0 = 0;
     fp->x221A_b1 = 0;
 
-    fp->dmg.x1954 = 0.0f;
-    fp->dmg.x1958 = 0.0f;
+    fp->dmg.x1954 = 0;
+    fp->dmg.x1958 = 0;
 
     fp->x221A_b2 = 0;
 
-    fp->dmg.x195c_hitlag_frames = 0.0f;
+    fp->dmg.x195c_hitlag_frames = 0;
 
     fp->x221A_b3 = 0;
-    fp->x1960_vibrateMult = 1.0f;
-    fp->x1964 = 0.0f;
-    fp->dmg.x189C_unk_num_frames = 0.0f;
+    fp->x1960_vibrateMult = 1;
+    fp->x1964 = 0;
+    fp->dmg.x189C_unk_num_frames = 0;
 
     fp->x2220_flag.bits.b3 = 0;
     fp->x2220_flag.bits.b4 = 0;
 
     fp->dmg.x1914 = 0;
     fp->dmg.x1918 = 0;
-    fp->dmg.x191C = 0.0f;
+    fp->dmg.x191C = 0;
     fp->dmg.x1924 = 0;
-    fp->dmg.x1928 = 0.0f;
+    fp->dmg.x1928 = 0;
 
     fp->x2223_flag.bits.b5 = 0;
 
@@ -341,9 +341,9 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
 
     fp->x2223_flag.bits.b4 = 0;
 
-    fp->xF8_playerNudgeVel.y = 0.0f;
-    fp->xF8_playerNudgeVel.x = 0.0f;
-    fp->x100 = -1.0f;
+    fp->xF8_playerNudgeVel.y = 0;
+    fp->xF8_playerNudgeVel.x = 0;
+    fp->x100 = -1;
 
     fp->x2222_b7 = 0;
     fp->x2223_flag.bits.b0 = 0;
@@ -352,7 +352,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
 
     fp->x20A0_accessory = 0;
     fp->throw_flags = 0;
-    fp->x2214 = 0.0f;
+    fp->x2214 = 0;
     fp->item_gobj = 0;
     fp->x1978 = 0;
 
@@ -409,92 +409,84 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
 
     fp->x19A0_shieldDamageTaken = 0;
     fp->x19A4 = 0;
-    fp->lightshield_amount = 0.0f;
+    fp->lightshield_amount = 0;
     fp->x19A8 = 0;
-    fp->shield_unk0 = 0.0f;
-    fp->shield_unk1 = 0.0f;
+    fp->shield_unk0 = 0;
+    fp->shield_unk1 = 0;
     fp->x19BC_shieldDamageTaken3 = 6;
 
     fp->x221F_b6 = 0;
     fp->x2218_b3 = 0;
     fp->x2218_b4 = 0;
     fp->ReflectAttr.x1A3C_damageOver = 0;
-    fp->ReflectAttr.x1A2C_reflectHitDirection = 0.0f;
-    fp->x2218_b6 = 0;
-    fp->x2218_b7 = 0;
+    fp->ReflectAttr.x1A2C_reflectHitDirection = 0;
+    fp->x2218_b6 = false;
+    fp->x2218_b7 = false;
 
-    fp->AbsorbAttr.x1A40_absorbHitDirection = 0.0f;
+    fp->AbsorbAttr.x1A40_absorbHitDirection = 0;
 
     fp->AbsorbAttr.x1A44_damageTaken = 0;
     fp->AbsorbAttr.x1A48_hitsTaken = 0;
 
-    fp->x68C_transNPos.z = 0.0f;
-    fp->x68C_transNPos.y = 0.0f;
-    fp->x68C_transNPos.x = 0.0f;
-    fp->x6A4_transNOffset.z = 0.0f;
-    fp->x6A4_transNOffset.y = 0.0f;
-    fp->x6A4_transNOffset.x = 0.0f;
-    fp->lstick_angle = 0.0f;
+    fp->x68C_transNPos.x = fp->x68C_transNPos.y = fp->x68C_transNPos.z = 0;
+    fp->x6A4_transNOffset.x = fp->x6A4_transNOffset.y =
+        fp->x6A4_transNOffset.z = 0;
+    fp->lstick_angle = 0;
 
-    fp->x6C0.z = 0.0f;
-    fp->x6C0.y = 0.0f;
-    fp->x6C0.x = 0.0f;
-
-    fp->x6D8.z = 0.0f;
-    fp->x6D8.y = 0.0f;
-    fp->x6D8.x = 0.0f;
+    fp->x6C0.x = fp->x6C0.y = fp->x6C0.z = 0;
+    fp->x6D8.x = fp->x6D8.y = fp->x6D8.z = 0;
 
     fp->x209C = 0;
-    fp->x2224_b1 = 0;
-    fp->cb.x21E4_callback_OnDeath2 = 0;
+    fp->x2224_b1 = false;
+    fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->x2100 = -1;
     fp->x2101_bits_0to6 = 0;
-    fp->cb.x21B4_callback_Accessory2 = 0;
-    fp->cb.x21B8_callback_Accessory3 = 0;
-    fp->cb.x21E0_callback_OnDeath = 0;
-    fp->cb.x21E8_callback_OnDeath3 = 0;
-    fp->x221E_b4 = 1;
+    fp->cb.x21B4_callback_Accessory2 = NULL;
+    fp->cb.x21B8_callback_Accessory3 = NULL;
+    fp->cb.x21E0_callback_OnDeath = NULL;
+    fp->cb.x21E8_callback_OnDeath3 = NULL;
+    fp->x221E_b4 = true;
     fp->x197C = 0;
-    fp->x2223_flag.bits.b7 = 0;
+    fp->x2223_flag.bits.b7 = false;
     fp->x2028 = 0;
     fp->x202C = 0;
 
     ftCo_800C88A0(fp);
 
-    fp->x2227_flag.bits.b3 = 0;
+    fp->x2227_flag.bits.b3 = false;
     fp->x2034 = 0;
     fp->x2038 = 0;
     fp->x1980 = 0;
 
-    fp->x2224_b2 = fp->x2224_b3 = 0;
+    fp->x2224_b2 = fp->x2224_b3 = false;
 
-    fp->x2224_b4 = 0;
+    fp->x2224_b4 = false;
     fp->x2108 = 0;
-    fp->x2224_b5 = 0;
+    fp->x2224_b5 = false;
     fp->x1A53 = 0;
     fp->x1A52 = 0;
     fp->x210C_walljumpInputTimer = 254;
     fp->dmg.x1910 = 0;
-    fp->x2225_b0 = 0;
-    fp->x2225_b2 = 1;
-    fp->x2225_b4 = 0;
+    fp->x2225_b0 = false;
+    fp->x2225_b2 = true;
+    fp->x2225_b4 = false;
     ftCo_800DEEA8(fp->gobj);
-    fp->dmg.x18BC = 0.0f;
-    fp->dmg.x18B8 = 0.0f;
-    fp->x2226_b2 = 0;
-    fp->x2170 = 0.0f;
+    fp->dmg.x18BC = 0;
+    fp->dmg.x18B8 = 0;
+    fp->x2226_b2 = false;
+    fp->x2170 = 0;
     fp->x2225_b6 = fp->x2225_b5;
     fp->dmg.x1908 = -1;
     fp->dmg.x190C = 0;
-    fp->x2227_flag.bits.b4 = 0;
-    fp->smash_attrs.x2138_smashSinceHitbox = -1.0f;
+    fp->x2227_flag.bits.b4 = false;
+    fp->smash_attrs.x2138_smashSinceHitbox = -1;
     fp->x213C = -1;
-    fp->x2227_flag.bits.b5 = 0;
-    fp->x2228_flag.b1 = 0;
+    fp->x2227_flag.bits.b5 = false;
+    fp->x2228_flag.b1 = false;
     fp->x2140 = 0.0f;
-    fp->x2227_flag.bits.b6 = 0;
+    fp->x2227_flag.bits.b6 = false;
     fp->x2180 = 6;
-    fp->x2229_b4 = 1;
+    fp->x2229_b4 = true;
 }
 
 void Fighter_UnkProcessDeath_80068354(Fighter_GObj* gobj)

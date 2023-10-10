@@ -162,6 +162,16 @@ union ftCommon_MotionVars {
         /* fp+234C */ float xC;
         /* fp+2350 */ float x10;
     } capturekoopa;
+    struct {
+        /* fp+2340 */ Vec2 pos_offset;
+        /* fp+2348 */ Vec2 x8;
+        /* fp+2350 */ Vec3 x10;
+        /* fp+235C */ UNK_T x1C;
+        /* fp+2360 */ UNK_T x20;
+        /* fp+2364 */ UNK_T x24;
+        /* fp+2368 */ UNK_T x28;
+        /* fp+236C */ Vec3 scale;
+    } capturekirby;
 };
 
 #endif
