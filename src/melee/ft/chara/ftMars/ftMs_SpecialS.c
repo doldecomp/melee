@@ -298,7 +298,7 @@ void ftMs_SpecialS_80137A9C(HSD_GObj* gobj)
 
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->cb.x21EC_callback = &ftMs_SpecialS_80137A68;
+    fp->x21EC = &ftMs_SpecialS_80137A68;
 
     if (fp->input.lstick.y > p_ftCommonData->x21C) {
         if (fp->ground_or_air == GA_Ground) {
@@ -443,7 +443,7 @@ void ftMs_SpecialS_80137E0C(HSD_GObj* gobj)
 
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->cb.x21EC_callback = &ftMs_SpecialS_80137A68;
+    fp->x21EC = &ftMs_SpecialS_80137A68;
 
     if (fp->input.lstick.y > p_ftCommonData->x21C) {
         if (fp->ground_or_air == GA_Ground) {
@@ -588,7 +588,7 @@ void ftMs_SpecialS_80138148(HSD_GObj* gobj)
 
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->cb.x21EC_callback = &ftMs_SpecialS_80137A68;
+    fp->x21EC = &ftMs_SpecialS_80137A68;
 
     if (fp->input.lstick.y > p_ftCommonData->x21C) {
         if (fp->ground_or_air == GA_Ground) {

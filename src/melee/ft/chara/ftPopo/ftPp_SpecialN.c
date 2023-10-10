@@ -22,7 +22,7 @@ void ftPp_SpecialN_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 341, 0, 0.0f, 1.0f, 0.0f, NULL);
 
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = &ftPp_SpecialN_8011F500;
+    fp->accessory4_cb = &ftPp_SpecialN_8011F500;
 }
 
 void ftPp_SpecialAirN_Enter(HSD_GObj* gobj)
@@ -50,7 +50,7 @@ void ftPp_SpecialAirN_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 342, 0, 0.0f, 1.0f, 0.0f, NULL);
 
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = &ftPp_SpecialN_8011F500;
+    fp->accessory4_cb = &ftPp_SpecialN_8011F500;
 }
 
 void ftPp_SpecialN_Anim(HSD_GObj* gobj)
@@ -92,8 +92,8 @@ void ftPp_SpecialN_Coll(HSD_GObj* gobj)
             fp2 = GET_FIGHTER(gobj);
             if ((u32) fp1->fv.nn.x222C == (u32) fp2->fv.nn.x222C) {
                 fp2->fv.nn.x222C = 0U;
-                fp2->cb.x21E4_callback_OnDeath2 = 0U;
-                fp2->cb.x21DC_callback_OnTakeDamage = 0U;
+                fp2->death2_cb = 0U;
+                fp2->take_dmg_cb = 0U;
             }
         }
         ftCo_800CC730(gobj);
@@ -118,8 +118,8 @@ void ftPp_SpecialAirN_Coll(Fighter_GObj* gobj)
             fp2 = gobj->user_data;
             if (fp1->fv.pp.x222C == fp2->fv.pp.x222C) {
                 fp2->fv.pp.x222C = 0U;
-                fp2->cb.x21E4_callback_OnDeath2 = NULL;
-                fp2->cb.x21DC_callback_OnTakeDamage = NULL;
+                fp2->death2_cb = NULL;
+                fp2->take_dmg_cb = NULL;
             }
         }
         fp->fv.pp.x224C = 0;

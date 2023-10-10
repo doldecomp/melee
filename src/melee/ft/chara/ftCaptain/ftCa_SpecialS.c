@@ -27,8 +27,8 @@ void ftCa_SpecialS_RemoveGFX(HSD_GObj* gobj)
 static void setCallbacks(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = ftCa_Init_800E28C8;
-    fp->cb.x21E4_callback_OnDeath2 = ftCa_Init_800E28C8;
+    fp->take_dmg_cb = ftCa_Init_800E28C8;
+    fp->death2_cb = ftCa_Init_800E28C8;
 }
 
 static void resetCmdVarsGround(HSD_GObj* gobj)
@@ -64,9 +64,9 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
         break;
     }
     fp->fv.ca.during_specials = false;
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21F4_callback = ftCa_SpecialS_OnDetect;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->x21F4 = ftCa_SpecialS_OnDetect;
 
     resetVel(fp);
 
@@ -97,9 +97,9 @@ static inline void setupAirStart(HSD_GObj* gobj)
     }
     }
     fp->fv.ca.during_specials = false;
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21F4_callback = ftCa_SpecialS_OnDetect;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->x21F4 = ftCa_SpecialS_OnDetect;
     {
         /// @todo Too much stack for #resetVel.
         Vec3* vel = &fp->self_vel;
@@ -218,8 +218,8 @@ void ftCa_SpecialS_Anim(HSD_GObj* gobj)
             fp->fv.ca.during_specials = true;
             break;
         }
-        fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-        fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+        fp->pre_hitlag_cb = efLib_PauseAll;
+        fp->post_hitlag_cb = efLib_ResumeAll;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -267,8 +267,8 @@ void ftCa_SpecialAirS_Anim(HSD_GObj* gobj)
             break;
         }
         }
-        fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-        fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+        fp->pre_hitlag_cb = efLib_PauseAll;
+        fp->post_hitlag_cb = efLib_ResumeAll;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007D60C(fp);

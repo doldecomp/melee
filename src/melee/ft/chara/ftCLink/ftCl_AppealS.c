@@ -30,8 +30,8 @@ void ftCl_AppealS_Anim(HSD_GObj* gobj)
             fp0->facing_dir);
         fp0->fv.lk.x18 = item_gobj;
         if (item_gobj != NULL) {
-            fp0->cb.x21E4_callback_OnDeath2 = ftLk_800EAF58;
-            fp0->cb.x21DC_callback_OnTakeDamage = ftLk_800EAF58;
+            fp0->death2_cb = ftLk_800EAF58;
+            fp0->take_dmg_cb = ftLk_800EAF58;
         }
     } else if (fp1->cmd_vars[1] == 2) {
         ftCl_Init_80149268(gobj);

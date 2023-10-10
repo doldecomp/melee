@@ -41,9 +41,9 @@ void ftFx_SpecialHi_CreateLaunchGFX(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
@@ -57,9 +57,9 @@ void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 void ftFx_SpecialHi_Enter(HSD_GObj* gobj)
@@ -77,7 +77,7 @@ void ftFx_SpecialHi_Enter(HSD_GObj* gobj)
                               NULL);
     ftAnim_8006EBA4(gobj);
 
-    fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialHi_CreateChargeGFX;
+    fp->accessory4_cb = ftFx_SpecialHi_CreateChargeGFX;
 }
 
 void ftFx_SpecialAirHiStart_Enter(HSD_GObj* gobj)
@@ -94,7 +94,7 @@ void ftFx_SpecialAirHiStart_Enter(HSD_GObj* gobj)
 
     ftAnim_8006EBA4(gobj);
 
-    fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialHi_CreateChargeGFX;
+    fp->accessory4_cb = ftFx_SpecialHi_CreateChargeGFX;
 }
 
 static void ftFox_SpecialHi_RotateModel(HSD_GObj* gobj)
@@ -205,7 +205,7 @@ void ftFx_SpecialHiHold_GroundToAir(HSD_GObj* gobj)
                               FTFOX_SPECIALHI_COLL_FLAG, fp->cur_anim_frame,
                               1.0f, 0.0f, NULL);
 
-    fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialHi_CreateChargeGFX;
+    fp->accessory4_cb = ftFx_SpecialHi_CreateChargeGFX;
 }
 
 void ftFx_SpecialHiHoldAir_AirToGround(HSD_GObj* gobj)
@@ -217,7 +217,7 @@ void ftFx_SpecialHiHoldAir_AirToGround(HSD_GObj* gobj)
                               FTFOX_SPECIALHI_COLL_FLAG, fp->cur_anim_frame,
                               1.0f, 0.0f, NULL);
 
-    fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialHi_CreateChargeGFX;
+    fp->accessory4_cb = ftFx_SpecialHi_CreateChargeGFX;
 
     ftCommon_8007D468(fp);
 }
@@ -430,7 +430,7 @@ void ftFx_SpecialHi_GroundToAir(HSD_GObj* gobj)
                               fp->cur_anim_frame, 1.0f, 0.0f, NULL);
 
     fp->x2223_flag.bits.b4 = true;
-    fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialHi_CreateLaunchGFX;
+    fp->accessory4_cb = ftFx_SpecialHi_CreateLaunchGFX;
 }
 
 void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
@@ -491,8 +491,8 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
                        collData->floor.normal.y);
 
             ftFox_SpecialHi_RotateModel(gobj);
-            fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialHi_CreateLaunchGFX;
-            fp->cb.x21F8_callback = ftCommon_8007F76C;
+            fp->accessory4_cb = ftFx_SpecialHi_CreateLaunchGFX;
+            fp->x21F8 = ftCommon_8007F76C;
             return;
         }
     }
@@ -556,8 +556,8 @@ void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->self_vel.y =
         da->x74_FOX_FIREFOX_SPEED * sinf(fp->mv.fx.SpecialHi.rotateModel);
     ftFox_SpecialHi_RotateModel(gobj);
-    fp->cb.x21F8_callback = ftCommon_8007F76C;
-    fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialHi_CreateLaunchGFX;
+    fp->x21F8 = ftCommon_8007F76C;
+    fp->accessory4_cb = ftFx_SpecialHi_CreateLaunchGFX;
     fp->x1968_jumpsUsed = ca->max_jumps;
 }
 
@@ -678,7 +678,7 @@ void ftFx_SpecialHiFall_AirToGround(HSD_GObj* gobj)
     }
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHiLanding, 0, 0.0f, 1.0f,
                               0.0f, NULL);
-    fp->cb.x21F8_callback = ftCommon_8007F76C;
+    fp->x21F8 = ftCommon_8007F76C;
 }
 
 // 0x800E80C0
@@ -692,7 +692,7 @@ void ftFx_SpecialHiLanding_GroundToAir(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHiFall, 0, 0.0f, 1.0f, 0.0f,
                               NULL);
-    fp->cb.x21F8_callback = ftCommon_8007F76C;
+    fp->x21F8 = ftCommon_8007F76C;
 }
 
 // 0x800E8124
@@ -797,8 +797,8 @@ inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* gobj)
     }
     efSync_Spawn(1030, gobj, &fp->cur_pos, &f);
     fp->x2219_b0 = true;
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
 }
 
 // 0x800E82E4
@@ -812,7 +812,7 @@ void ftFx_SpecialHiBound_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHiBound, 0, 0.0f, 1.0f,
                               0.0f, NULL);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21F8_callback = ftCommon_8007F76C;
+    fp->x21F8 = ftCommon_8007F76C;
     fp->self_vel.x *= da->x84_FOX_FIREFOX_BOUND_VEL_X;
     fp->cmd_vars[0] = 0;
     ftFox_SpecialHiBound_SetVars(gobj);

@@ -88,7 +88,7 @@ struct ftCommonData {
     /* +68 */ float x68;
     /* +6C */ UNK_T x6C;
     /* +70 */ float x70_someLStickYMax;
-    /* +74 */ u8 x74[0x78 - 0x74];
+    /* +6C */ int x74;
     /* +78 */ float x78;
     /* +7C */ u8 x7C[0x88 - 0x7C];
     /* +88 */ float x88;
@@ -830,11 +830,11 @@ struct MotionState {
         };
     };
 
-    HSD_GObjEvent animated;
-    HSD_GObjEvent input_updated;
-    HSD_GObjEvent physics_updated;
-    HSD_GObjEvent collided;
-    HSD_GObjEvent camera_updated;
+    HSD_GObjEvent anim_cb;
+    HSD_GObjEvent input_cb;
+    HSD_GObjEvent phys_cb;
+    HSD_GObjEvent coll_cb;
+    HSD_GObjEvent cam_cb;
 };
 
 struct S_TEMP4 {
@@ -1323,37 +1323,34 @@ struct Fighter {
     /* fp+2184 */ HSD_JObj* x2184;
     /* fp+2188 */ S32Vec2 x2188;
     /// callback struct. Not all of them used by fighter.c.
-    struct cb {
-        /* fp+2190 */ void (*x2190_callback_OnGrabFighter_Self)(HSD_GObj* fp);
-        /* fp+2194 */ void (*x2194_callback)(HSD_GObj* fp);
-        /* fp+2198 */ void (*x2198_callback_OnGrabFighter_Victim)(HSD_GObj*,
-                                                                  HSD_GObj*);
-        /* fp+219C */ void (*x219C_callback_IASA)(HSD_GObj* fp);
-        /* fp+21A0 */ void (*x21A0_callback_Anim)(HSD_GObj* fp);
-        /* fp+21A4 */ void (*x21A4_callback_Phys)(HSD_GObj* fp);
-        /* fp+21A8 */ void (*x21A8_callback_Coll)(HSD_GObj* fp);
-        /* fp+21AC */ void (*x21AC_callback_Cam)(HSD_GObj* fp);
-        /* fp+21B0 */ void (*x21B0_callback_Accessory1)(HSD_GObj* fp);
-        /* fp+21B4 */ void (*x21B4_callback_Accessory2)(HSD_GObj* fp);
-        /* fp+21B8 */ void (*x21B8_callback_Accessory3)(HSD_GObj* fp);
-        /* fp+21BC */ void (*x21BC_callback_Accessory4)(HSD_GObj* fp);
-        /* fp+21C0 */ void (*x21C0_callback_OnGiveDamage)(HSD_GObj* fp);
-        /* fp+21C4 */ void (*x21C4_callback_OnShieldHit)(HSD_GObj* fp);
-        /* fp+21C8 */ void (*x21C8_callback_OnReflectHit)(HSD_GObj* fp);
-        /* fp+21CC */ void (*x21CC_callback)(HSD_GObj* fp);
-        /* fp+21D0 */ void (*x21D0_callback_EveryHitlag)(HSD_GObj* fp);
-        /* fp+21D4 */ void (*x21D4_callback_EnterHitlag)(HSD_GObj* fp);
-        /* fp+21D8 */ void (*x21D8_callback_ExitHitlag)(HSD_GObj* fp);
-        /* fp+21DC */ void (*x21DC_callback_OnTakeDamage)(HSD_GObj* fp);
-        /* fp+21E0 */ void (*x21E0_callback_OnDeath)(HSD_GObj* fp);
-        /// @remarks Used. Internally Dead_Proc as evidenced by 800F5430.
-        /* fp+21E4 */ void (*x21E4_callback_OnDeath2)(HSD_GObj* fp);
-        /* fp+21E8 */ void (*x21E8_callback_OnDeath3)(HSD_GObj* fp);
-        /* fp+21EC */ void (*x21EC_callback)(HSD_GObj* fp);
-        /* fp+21F0 */ void (*x21F0_callback)(HSD_GObj* fp);
-        /* fp+21F4 */ void (*x21F4_callback)(HSD_GObj* fp);
-        /* fp+21F8 */ void (*x21F8_callback)(HSD_GObj* fp);
-    } cb;
+    /* fp+2190 */ HSD_GObjEvent grab_cb;
+    /* fp+2194 */ HSD_GObjEvent x2194;
+    /* fp+2198 */ HSD_GObjInteraction grabbed_cb;
+    /* fp+219C */ HSD_GObjEvent input_cb;
+    /* fp+21A0 */ HSD_GObjEvent anim_cb;
+    /* fp+21A4 */ HSD_GObjEvent phys_cb;
+    /* fp+21A8 */ HSD_GObjEvent coll_cb;
+    /* fp+21AC */ HSD_GObjEvent cam_cb;
+    /* fp+21B0 */ HSD_GObjEvent accessory1_cb;
+    /* fp+21B4 */ HSD_GObjEvent accessory2_cb;
+    /* fp+21B8 */ HSD_GObjEvent accessory3_cb;
+    /* fp+21BC */ HSD_GObjEvent accessory4_cb;
+    /* fp+21C0 */ HSD_GObjEvent deal_dmg_cb;
+    /* fp+21C4 */ HSD_GObjEvent shield_hit_cb;
+    /* fp+21C8 */ HSD_GObjEvent reflect_hit_cb;
+    /* fp+21CC */ HSD_GObjEvent x21CC;
+    /* fp+21D0 */ HSD_GObjEvent hitlag_cb;
+    /* fp+21D4 */ HSD_GObjEvent pre_hitlag_cb;
+    /* fp+21D8 */ HSD_GObjEvent post_hitlag_cb;
+    /* fp+21DC */ HSD_GObjEvent take_dmg_cb;
+    /* fp+21E0 */ HSD_GObjEvent death1_cb;
+    /// @remarks Used. Internally Dead_Proc as evidenced by 800F5430.
+    /* fp+21E4 */ HSD_GObjEvent death2_cb;
+    /* fp+21E8 */ HSD_GObjEvent death3_cb;
+    /* fp+21EC */ HSD_GObjEvent x21EC;
+    /* fp+21F0 */ HSD_GObjEvent x21F0;
+    /* fp+21F4 */ HSD_GObjEvent x21F4;
+    /* fp+21F8 */ HSD_GObjEvent x21F8;
     /* fp+21FC */ UnkFlagStruct x21FC_flag;
     /* fp+21FC */ u8 filler_x21FC[0x2200 - 0x21FD];
     /* fp+2200 */ u32 cmd_vars[4];

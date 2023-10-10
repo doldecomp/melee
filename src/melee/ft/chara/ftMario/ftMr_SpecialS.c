@@ -21,12 +21,12 @@
 static void setCallbacks(Fighter* fp)
 {
     if (fp->fv.mr.x223C_capeGObj != NULL) {
-        fp->cb.x21E4_callback_OnDeath2 = ftMr_Init_OnTakeDamage;
-        fp->cb.x21DC_callback_OnTakeDamage = ftMr_Init_OnTakeDamage;
+        fp->death2_cb = ftMr_Init_OnTakeDamage;
+        fp->take_dmg_cb = ftMr_Init_OnTakeDamage;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = ftMr_SpecialS_EnterHitlag;
-    fp->cb.x21D8_callback_ExitHitlag = ftMr_SpecialS_ExitHitlag;
+    fp->pre_hitlag_cb = ftMr_SpecialS_EnterHitlag;
+    fp->post_hitlag_cb = ftMr_SpecialS_ExitHitlag;
 }
 
 void ftMr_SpecialS_CreateCape(HSD_GObj* gobj)
@@ -57,7 +57,7 @@ void ftMr_SpecialS_CreateCape(HSD_GObj* gobj)
 
         fp->x1984_heldItemSpec = fp->fv.mr.x223C_capeGObj;
         setCallbacks(fp);
-        fp->cb.x21BC_callback_Accessory4 = NULL;
+        fp->accessory4_cb = NULL;
     }
 }
 
@@ -66,8 +66,8 @@ void ftMr_SpecialS_Reset(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMr_SpecialS_ExitHitlag(gobj);
     fp->fv.mr.x223C_capeGObj = NULL;
-    fp->cb.x21E4_callback_OnDeath2 = NULL;
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    fp->death2_cb = NULL;
+    fp->take_dmg_cb = NULL;
 }
 
 void ftMr_SpecialS_RemoveCape(HSD_GObj* gobj)
@@ -119,7 +119,7 @@ static void changeAction(HSD_GObj* gobj, ftMario_MotionState msid)
         fp->cmd_vars[1] = 0;
         fp->cmd_vars[0] = 0;
         fp->mv.mr.SpecialS.reflecting = false;
-        fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialS_CreateCape;
+        fp->accessory4_cb = ftMr_SpecialS_CreateCape;
     }
 }
 
@@ -283,7 +283,7 @@ static void collUpdateVars(HSD_GObj* gobj)
         fp->x2218_b3 = 1;
     }
     setCallbacks(fp);
-    fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialS_CreateCape;
+    fp->accessory4_cb = ftMr_SpecialS_CreateCape;
 }
 
 static usize_t const transition_flags =

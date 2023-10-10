@@ -165,7 +165,8 @@ union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ Vec2 pos_offset;
         /* fp+2348 */ Vec2 x8;
-        /* fp+2350 */ Vec3 x10;
+        /* fp+2350 */ Vec2 x10;
+        /* fp+2358 */ bool x18;
         /* fp+235C */ UNK_T x1C;
         /* fp+2360 */ UNK_T x20;
         /* fp+2364 */ UNK_T x24;

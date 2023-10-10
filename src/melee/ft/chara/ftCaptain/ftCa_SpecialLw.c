@@ -208,9 +208,9 @@ void ftCa_SpecialLw_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLw, Ft_MF_None, 0, 1, 0,
                               NULL);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21C0_callback_OnGiveDamage = ftCa_SpecialHi_800E400C;
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->deal_dmg_cb = ftCa_SpecialHi_800E400C;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
 }
 #endif
 
@@ -270,8 +270,8 @@ void ftCa_SpecialAirLw_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLw, Ft_MF_None, 0, 1, 0,
                               NULL);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
 }
 #endif
 
@@ -372,8 +372,8 @@ void ftCa_SpecialLw_Anim(HSD_GObj* gobj)
             Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLwEnd, Ft_MF_None,
                                       0, da->speciallw_ground_lag_mul, 0,
                                       NULL);
-            fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-            fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+            fp->pre_hitlag_cb = efLib_PauseAll;
+            fp->post_hitlag_cb = efLib_ResumeAll;
         } else {
             Fighter* fp = GET_FIGHTER(gobj);
             fp->cmd_vars[2] = 0;
@@ -383,8 +383,8 @@ void ftCa_SpecialLw_Anim(HSD_GObj* gobj)
             ftCommon_8007D5D4(fp);
             Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLwEndAir,
                                       Ft_MF_None, 0, 1, 0, NULL);
-            fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-            fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+            fp->pre_hitlag_cb = efLib_PauseAll;
+            fp->post_hitlag_cb = efLib_ResumeAll;
         }
     }
 }

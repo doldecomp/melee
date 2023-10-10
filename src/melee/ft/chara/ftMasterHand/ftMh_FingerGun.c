@@ -175,7 +175,7 @@ void ftMh_MS_364_801533CC(HSD_GObj* gobj)
     }
     fp->self_vel.x = 0;
     fp->self_vel.y = 0;
-    fp->cb.x21BC_callback_Accessory4 = ftMh_MS_365_801535B0;
+    fp->accessory4_cb = ftMh_MS_365_801535B0;
 }
 
 static inline void lbl_8015346C_inline(HSD_GObj* gobj)
@@ -189,7 +189,7 @@ static inline void lbl_8015346C_inline(HSD_GObj* gobj)
     }
     fp->self_vel.x = 0;
     fp->self_vel.y = 0;
-    fp->cb.x21BC_callback_Accessory4 = ftMh_MS_365_801535B0;
+    fp->accessory4_cb = ftMh_MS_365_801535B0;
 }
 
 void ftMh_FingerGun2_Anim(HSD_GObj* gobj)

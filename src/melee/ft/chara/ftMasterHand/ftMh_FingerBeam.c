@@ -50,7 +50,7 @@ void ftMh_MS_361_80152CD8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftMh_MS_FingerBeamLoop, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftMh_MS_362_80152E28;
+    fp->accessory4_cb = ftMh_MS_362_80152E28;
     fp->cmd_vars[0] = 1;
 }
 

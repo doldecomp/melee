@@ -31,7 +31,7 @@ void ftLg_SpecialN_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialN, 0, 0.0f, 1.0f, 0.0f,
                               NULL);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = &ftLg_SpecialN_FireSpawn;
+    fp->accessory4_cb = &ftLg_SpecialN_FireSpawn;
 }
 
 // 0x801426EC - Luigi's aerial Fireball Motion State handler
@@ -44,7 +44,7 @@ void ftLg_SpecialAirN_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirN, 0, 0.0f, 1.0f, 0.0f,
                               NULL);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = &ftLg_SpecialN_FireSpawn;
+    fp->accessory4_cb = &ftLg_SpecialN_FireSpawn;
 }
 
 // 0x8014275C
@@ -107,7 +107,7 @@ void ftLg_SpecialN_Coll(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirN,
                                   FTLUIGI_SPECIALN_COLL_FLAG,
                                   fp->cur_anim_frame, 1.0f, 0.0f, NULL);
-        fp->cb.x21BC_callback_Accessory4 = &ftLg_SpecialN_FireSpawn;
+        fp->accessory4_cb = &ftLg_SpecialN_FireSpawn;
     }
 }
 
@@ -122,7 +122,7 @@ void ftLg_SpecialAirN_Coll(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialN,
                                   FTLUIGI_SPECIALN_COLL_FLAG,
                                   fp->cur_anim_frame, 1.0f, 0.0f, NULL);
-        fp->cb.x21BC_callback_Accessory4 = &ftLg_SpecialN_FireSpawn;
+        fp->accessory4_cb = &ftLg_SpecialN_FireSpawn;
     }
 }
 

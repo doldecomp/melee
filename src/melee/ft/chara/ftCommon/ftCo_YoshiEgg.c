@@ -49,7 +49,7 @@ ASM void ftCo_800BBCC0(ftCo_GObj* gobj)
     HSD_JObj* jobj1 = gobj->hsd_obj;
     if (fp->mv.co.yoshiegg.x14 <= 0) {
         Fighter_UpdateModelScale(gobj);
-        fp->cb.x21BC_callback_Accessory4 = NULL;
+        fp->accessory4_cb = NULL;
         return;
     }
     fp->mv.co.yoshiegg.x14 -= 1;
@@ -235,7 +235,7 @@ ASM void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
     }
     Fighter_ChangeMotionState(gobj, ftCo_MS_YoshiEgg, Ft_MF_Unk06, 0, 1, 0,
                               arg1);
-    fp->cb.x21DC_callback_OnTakeDamage = ftCo_800BC438;
+    fp->take_dmg_cb = ftCo_800BC438;
     ftCommon_8007E2F4(fp, 0x1FF);
     fp->x221E_b0 = true;
     {
@@ -275,7 +275,7 @@ ASM void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
     fp->dmg.x182c_behavior = ftYs_Shield_8012CCD0(arg1);
     fp->mv.ca.specialhi.vel.y = 0;
     fp->mv.co.yoshiegg.x0 = arg1;
-    fp->cb.x21F0_callback = ftCo_800BC3D0;
+    fp->x21F0 = ftCo_800BC3D0;
     ftCommon_8007EFC0(fp, 1);
     fp->mv.co.yoshiegg.x10 = ftYs_Shield_8012CCF0(arg1);
     fp->mv.co.yoshiegg.x14 = fp->mv.co.walk.fast_anim_frame;
@@ -288,7 +288,7 @@ ASM void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
         }
         HSD_JObjGetScale(jobj, &fp->mv.co.yoshiegg.x18);
     }
-    fp->cb.x21BC_callback_Accessory4 = ftCo_800BBCC0;
+    fp->accessory4_cb = ftCo_800BBCC0;
 }
 #else /* clang-format off */
 { nofralloc

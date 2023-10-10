@@ -35,9 +35,9 @@ void ftFx_SpecialS_CreateGFX(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 // 0x800E9E78
@@ -459,7 +459,7 @@ inline void ftFox_SpecialS_SetVars(HSD_GObj* gobj)
     fp->mv.fx.SpecialS.blendFrames[1] = var;
     fp->mv.fx.SpecialS.blendFrames[0] = var;
 
-    fp->cb.x21BC_callback_Accessory4 = &ftFx_SpecialS_CreateGFX;
+    fp->accessory4_cb = &ftFx_SpecialS_CreateGFX;
 }
 
 // 0x800EA768

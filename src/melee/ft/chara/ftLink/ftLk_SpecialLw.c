@@ -30,7 +30,7 @@ static void doEnter(HSD_GObj* gobj, FtMotionId msid0, FtMotionId msid1)
         fp->throw_flags = 0;
         Fighter_ChangeMotionState(gobj, msid1, Ft_MF_None, 0, 1, 0, NULL);
         ftAnim_8006EBA4(gobj);
-        fp->cb.x21BC_callback_Accessory4 = spawnBomb;
+        fp->accessory4_cb = spawnBomb;
     }
 }
 
@@ -127,7 +127,7 @@ void ftLk_SpecialLw_Coll(HSD_GObj* gobj)
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirLw, coll_mf,
                                   fp->cur_anim_frame, 1, 0, NULL);
-        fp->cb.x21BC_callback_Accessory4 = spawnBomb;
+        fp->accessory4_cb = spawnBomb;
     }
 }
 
@@ -139,6 +139,6 @@ void ftLk_SpecialAirLw_Coll(HSD_GObj* gobj)
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialLw, coll_mf,
                                   fp->cur_anim_frame, 1, 0, NULL);
-        fp->cb.x21BC_callback_Accessory4 = spawnBomb;
+        fp->accessory4_cb = spawnBomb;
     }
 }

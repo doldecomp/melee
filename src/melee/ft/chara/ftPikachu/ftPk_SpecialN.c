@@ -170,9 +170,9 @@ void ftPk_SpecialN_SpawnEffect0(HSD_GObj* gobj)
         efSync_Spawn(1214, tempObj2 = tempObj, fp->parts[part].joint);
         fp->x2219_b0 = true;
     }
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
@@ -188,9 +188,9 @@ void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
         efSync_Spawn(1215, tempObj2 = tempObj, fp->parts[part].joint);
         fp->x2219_b0 = true;
     }
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 void ftPk_SpecialN_80124DC8(HSD_GObj* gobj)

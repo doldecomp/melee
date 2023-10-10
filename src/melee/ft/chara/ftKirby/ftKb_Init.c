@@ -3082,7 +3082,7 @@ void ftKb_Init_800EE74C(HSD_GObj* gobj)
     ftKb_SpecialN_800F9090(gobj);
     ftKb_SpecialN_800F19AC(gobj);
     ftKb_SpecialN_800F5D04(gobj, false);
-    fp->cb.x21E8_callback_OnDeath3 = NULL;
+    fp->death3_cb = NULL;
 }
 
 void ftKb_Init_800EE7B8(HSD_GObj* gobj)
@@ -3093,7 +3093,7 @@ void ftKb_Init_800EE7B8(HSD_GObj* gobj)
     ftKb_SpecialAirLw_800F5318(gobj);
     ftKb_SpecialN_800F9090(gobj);
     ftKb_SpecialN_800F1A8C(gobj);
-    fp->cb.x21E0_callback_OnDeath = NULL;
+    fp->death1_cb = NULL;
 }
 
 /// @file

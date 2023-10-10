@@ -77,7 +77,7 @@ static void doEnter(ftCo_GObj* gobj)
         fp->cmd_vars[cmd_unk0_bool] = false;
         fp->allow_interrupt = false;
         fp->mv.co.attacklw3.x0 = 0;
-        fp->cb.x21EC_callback = callUnk;
+        fp->x21EC = callUnk;
         Fighter_ChangeMotionState(gobj, ftCo_MS_AttackLw3,
                                   Ft_MF_SkipAttackCount, 0, 1, 0, NULL);
         ftAnim_8006EBA4(gobj);

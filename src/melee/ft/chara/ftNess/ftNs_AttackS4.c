@@ -45,8 +45,8 @@ void ftNs_AttackS4_Enter(HSD_GObj* gobj) // Ness's F-Smash Motion State handler
     fp->fv.ns.bat_gobj = baseballBatGObj;
 
     if (baseballBatGObj != NULL) {
-        fp->cb.x21E4_callback_OnDeath2 = ftNs_Init_OnDamage;
-        fp->cb.x21DC_callback_OnTakeDamage = ftNs_Init_OnDamage;
+        fp->death2_cb = ftNs_Init_OnDamage;
+        fp->take_dmg_cb = ftNs_Init_OnDamage;
     }
 };
 

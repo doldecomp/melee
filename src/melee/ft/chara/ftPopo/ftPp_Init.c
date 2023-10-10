@@ -435,8 +435,8 @@ void ftPp_Init_8011F16C(HSD_GObj* gobj, uint i)
     }
 
     fp->fv.nn.x222C = 0;
-    fp->cb.x21E4_callback_OnDeath2 = NULL;
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    fp->death2_cb = NULL;
+    fp->take_dmg_cb = NULL;
 }
 
 static void ftPp_Init_8011F190(HSD_GObj* gobj)

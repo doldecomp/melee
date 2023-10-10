@@ -23,7 +23,7 @@ void ftCo_800BBB8C(ftCo_GObj* gobj, ftCo_GObj* attacker_gobj)
     ftCo_800DB368(attacker_fp, fp);
     Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureYoshi, Ft_MF_None, 0, 1, 0,
                               NULL);
-    fp->cb.x21B0_callback_Accessory1 = ftCo_800DB464;
+    fp->accessory1_cb = ftCo_800DB464;
     ftCommon_8007D5D4(fp);
     ftCommon_8007E2F4(fp, 0x1FF);
     ftAnim_8006EBA4(gobj);

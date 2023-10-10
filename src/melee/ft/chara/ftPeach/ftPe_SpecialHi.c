@@ -54,22 +54,22 @@ void ftPe_SpecialHi_8011D424(HSD_GObj* gobj)
                 it_802BDA64(gobj, &pos, FtPart_109, fp->facing_dir);
             fp->item_gobj = fp->fv.pe.unk_item_gobj;
             if (fp->fv.pe.unk_item_gobj != NULL) {
-                fp->cb.x21E8_callback_OnDeath3 = ftPe_Init_OnDeath2;
-                fp->cb.x21DC_callback_OnTakeDamage = ftPe_Init_OnDeath2;
+                fp->death3_cb = ftPe_Init_OnDeath2;
+                fp->take_dmg_cb = ftPe_Init_OnDeath2;
             }
         }
     }
-    fp->cb.x21BC_callback_Accessory4 = NULL;
-    fp->cb.x21D4_callback_EnterHitlag = ftPe_SpecialHi_8011D620;
-    fp->cb.x21D8_callback_ExitHitlag = ftPe_SpecialHi_8011D650;
+    fp->accessory4_cb = NULL;
+    fp->pre_hitlag_cb = ftPe_SpecialHi_8011D620;
+    fp->post_hitlag_cb = ftPe_SpecialHi_8011D650;
 }
 
 bool ftPe_8011D518(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->fv.pe.unk_item_gobj = NULL;
-    fp->cb.x21E8_callback_OnDeath3 = NULL;
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    fp->death3_cb = NULL;
+    fp->take_dmg_cb = NULL;
     {
         HSD_GObj* parasol_gobj = fp->fv.pe.parasol_gobj;
         if (parasol_gobj != NULL) {
@@ -167,7 +167,7 @@ static void doEnter(HSD_GObj* gobj)
             }
         }
     }
-    fp->cb.x21BC_callback_Accessory4 = ftPe_SpecialHi_8011D424;
+    fp->accessory4_cb = ftPe_SpecialHi_8011D424;
 }
 
 void ftPe_SpecialHi_Enter(HSD_GObj* gobj)

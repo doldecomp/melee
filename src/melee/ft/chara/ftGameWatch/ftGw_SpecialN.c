@@ -191,7 +191,7 @@ static void ftGw_SpecialN_CreateSausage(HSD_GObj* gobj)
             temp_fp->fv.gw.x2240_chefVar1 = temp_r5;
             it_802C837C(gobj, &sp44, 122, temp_r6, fp->facing_dir);
         }
-        fp->cb.x21BC_callback_Accessory4 = NULL;
+        fp->accessory4_cb = NULL;
     }
 }
 
@@ -205,7 +205,7 @@ static inline void ftGameWatch_SpecialN_SetVars(HSD_GObj* gobj)
     fp->cmd_vars[2] = 0;
     fp->mv.gw.SpecialN.isChefLoopDisable = false;
     fp->mv.gw.SpecialN.maxSausage = 0;
-    fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialN_CreateSausage;
+    fp->accessory4_cb = ftGw_SpecialN_CreateSausage;
 }
 
 // 0x8014E644
@@ -383,8 +383,7 @@ void ftGw_SpecialN_GroundToAir(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirN, transition_flags,
                               fp->cur_anim_frame, 1.0f, 0.0f, NULL);
-    GET_FIGHTER(gobj)->cb.x21BC_callback_Accessory4 =
-        &ftGw_SpecialN_CreateSausage;
+    GET_FIGHTER(gobj)->accessory4_cb = &ftGw_SpecialN_CreateSausage;
 }
 
 // 0x8014EAAC
@@ -397,8 +396,7 @@ void ftGw_SpecialAirN_AirToGround(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialN, transition_flags,
                               fp->cur_anim_frame, 1.0f, 0.0f, NULL);
-    GET_FIGHTER(gobj)->cb.x21BC_callback_Accessory4 =
-        &ftGw_SpecialN_CreateSausage;
+    GET_FIGHTER(gobj)->accessory4_cb = &ftGw_SpecialN_CreateSausage;
 }
 
 // 0x8014EB1C
@@ -429,7 +427,7 @@ void ftGw_SpecialN_Loop(HSD_GObj* gobj, f32 anim_frame)
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[2] = 0;
     fp->mv.gw.SpecialN.isChefLoopDisable = false;
-    fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialN_CreateSausage;
+    fp->accessory4_cb = ftGw_SpecialN_CreateSausage;
 }
 
 // 0x8014EB8C
@@ -457,5 +455,5 @@ void ftGw_SpecialAirN_Loop(HSD_GObj* gobj, f32 anim_frame)
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[2] = 0;
     fp->mv.gw.SpecialN.isChefLoopDisable = false;
-    fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialN_CreateSausage;
+    fp->accessory4_cb = ftGw_SpecialN_CreateSausage;
 }

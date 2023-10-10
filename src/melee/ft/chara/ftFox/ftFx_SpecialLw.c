@@ -34,9 +34,9 @@ void ftFx_SpecialLw_CreateLoopGFX(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 /// Create Reflector Start GFX
@@ -49,9 +49,9 @@ void ftFx_SpecialLw_CreateStartGFX(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 void ftFx_SpecialLw_CreateReflectGFX(HSD_GObj* gobj)
@@ -64,9 +64,9 @@ void ftFx_SpecialLw_CreateReflectGFX(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 static inline void ftFox_SpecialLw_SetVars(HSD_GObj* gobj)
@@ -82,7 +82,7 @@ static inline void ftFox_SpecialLw_SetVars(HSD_GObj* gobj)
     fp->mv.fx.SpecialLw.gravityDelay =
         (s32) da->xA4_FOX_REFLECTOR_GRAVITY_DELAY;
 
-    fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialLw_CreateStartGFX;
+    fp->accessory4_cb = ftFx_SpecialLw_CreateStartGFX;
 }
 
 void ftFx_SpecialLw_Enter(HSD_GObj* gobj)
@@ -136,7 +136,7 @@ void ftFx_SpecialLwStart_Anim(HSD_GObj* gobj)
             ftFx_SpecialAirLwLoop_Enter(gobj);
         }
         ftCommon_8007DB24(gobj);
-        fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialLw_CreateLoopGFX;
+        fp->accessory4_cb = ftFx_SpecialLw_CreateLoopGFX;
     }
 }
 
@@ -161,7 +161,7 @@ void ftFx_SpecialAirLwStart_Anim(HSD_GObj* gobj)
         }
         ftCommon_8007DB24(gobj);
 
-        fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialLw_CreateLoopGFX;
+        fp->accessory4_cb = ftFx_SpecialLw_CreateLoopGFX;
     }
 }
 
@@ -631,7 +631,7 @@ inline void ftFox_SpecialLw_SetReflectVars(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2218_b3 = 1;
-    fp->cb.x21C8_callback_OnReflectHit = ftFx_SpecialLwHit_Enter;
+    fp->reflect_hit_cb = ftFx_SpecialLwHit_Enter;
 }
 
 // 0x800E9324
@@ -668,7 +668,7 @@ inline void ftFox_SpecialLwTurn_SetVarAll(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftFoxAttributes* da = getFtSpecialAttrs(fp);
     fp->x2218_b3 = 1;
-    fp->cb.x21C8_callback_OnReflectHit = ftFx_SpecialLwHit_Enter;
+    fp->reflect_hit_cb = ftFx_SpecialLwHit_Enter;
     fp->mv.fx.SpecialLw.turnFrames = da->x9C_FOX_REFLECTOR_TURN_FRAMES;
     fp->cmd_vars[0] = 0;
     ftFx_SpecialLw_Turn(gobj);
@@ -691,7 +691,7 @@ bool ftFx_SpecialLwTurn_Check(HSD_GObj* gobj)
                                       Ft_MF_KeepGfx, 0, 1, 0, NULL);
             ftFox_SpecialLwTurn_SetVarAll(gobj);
         }
-        fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialLw_CreateLoopGFX;
+        fp->accessory4_cb = ftFx_SpecialLw_CreateLoopGFX;
 
         return true;
     }
@@ -756,7 +756,7 @@ void ftFx_SpecialLwHit_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (ftFx_SpecialLwHit_Check(gobj)) {
             ftCommon_8007DB24(gobj);
-            fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialLw_CreateLoopGFX;
+            fp->accessory4_cb = ftFx_SpecialLw_CreateLoopGFX;
         }
     }
 }
@@ -784,7 +784,7 @@ void ftFx_SpecialAirLwHit_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj) && ftFx_SpecialLwHit_Check(gobj)) {
         ftCommon_8007DB24(gobj);
-        fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialLw_CreateLoopGFX;
+        fp->accessory4_cb = ftFx_SpecialLw_CreateLoopGFX;
     }
 }
 #ifdef MUST_MATCH
@@ -888,7 +888,7 @@ void ftFx_SpecialLwHit_SetCall(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     fp->x2218_b3 = 1;
-    fp->cb.x21C8_callback_OnReflectHit = ftFx_SpecialLwHit_Enter;
+    fp->reflect_hit_cb = ftFx_SpecialLwHit_Enter;
 }
 
 // 0x800E9A68
@@ -916,7 +916,7 @@ void ftFx_SpecialLwHit_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, msid, 0, 0, 1, 0, NULL);
     ftFx_SpecialLwHit_SetCall(gobj);
 
-    fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialLw_CreateReflectGFX;
+    fp->accessory4_cb = ftFx_SpecialLw_CreateReflectGFX;
 }
 
 /// Fox & Falco's grounded Reflector End Animation callback

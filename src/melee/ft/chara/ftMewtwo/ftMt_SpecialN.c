@@ -375,9 +375,9 @@ void ftMt_SpecialN_PlayChargeSFX(HSD_GObj* gobj)
 inline void ftMewtwo_SpecialN_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->cb.x21E4_callback_OnDeath2 = ftMt_Init_OnDeath2;
-    fp->cb.x21DC_callback_OnTakeDamage = ftMt_Init_OnTakeDamage;
-    fp->cb.x21E8_callback_OnDeath3 = ftMt_Init_OnDeath2;
+    fp->death2_cb = ftMt_Init_OnDeath2;
+    fp->take_dmg_cb = ftMt_Init_OnTakeDamage;
+    fp->death3_cb = ftMt_Init_OnDeath2;
 }
 
 inline void ftMewtwo_SpecialN_ChangeAction(HSD_GObj* gobj)

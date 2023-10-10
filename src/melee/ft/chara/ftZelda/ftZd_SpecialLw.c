@@ -30,9 +30,9 @@ void ftZd_SpecialLw_8013ADB4(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 // 8013AE30 - 8013AEAC (124 bytes)
@@ -47,9 +47,9 @@ void ftZd_SpecialLw_8013AE30(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 // Zelda_TransformToSubcharacter
@@ -60,7 +60,7 @@ void ftZd_SpecialLw_8013AEAC(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    fp->cb.x21BC_callback_Accessory4 = 0;
+    fp->accessory4_cb = 0;
 
     ftCommon_8007EFC8(gobj, ftSk_SpecialLw_80114758);
 }
@@ -84,7 +84,7 @@ static void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* gobj)
     lb_8000B1CC(fp->parts[FtPart_TopN].joint, NULL, &sp20);
     lb_800119DC(&sp20, 120, 0.4, 0.003, 60 * deg_to_rad);
 
-    fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialLw_8013ADB4;
+    fp->accessory4_cb = &ftZd_SpecialLw_8013ADB4;
 }
 
 // Zelda_AS_355_Transform_Grounded
@@ -121,7 +121,7 @@ void ftZd_SpecialLw_Anim(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialLw_8013AEAC;
+        fp->accessory4_cb = &ftZd_SpecialLw_8013AEAC;
     }
 }
 
@@ -133,7 +133,7 @@ void ftZd_SpecialAirLw_Anim(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialLw_8013AEAC;
+        fp->accessory4_cb = &ftZd_SpecialLw_8013AEAC;
     }
 }
 
@@ -199,7 +199,7 @@ void ftZd_SpecialLw_8013B1CC(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 357, 0x0C4C508E, fp->cur_anim_frame, 1.0,
                               0, NULL);
-    fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialLw_8013ADB4;
+    fp->accessory4_cb = &ftZd_SpecialLw_8013ADB4;
 }
 
 // 8013B238 - 8013B2A4 (108 bytes)
@@ -211,7 +211,7 @@ void ftZd_SpecialLw_8013B238(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 355, 0x0C4C508E, fp->cur_anim_frame, 1.0,
                               0, NULL);
-    fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialLw_8013ADB4;
+    fp->accessory4_cb = &ftZd_SpecialLw_8013ADB4;
 }
 
 // 8013B2A4 - 8013B2E0 (60 bytes)
@@ -292,7 +292,7 @@ void ftZd_SpecialLw_8013B400(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 358, 0x0C4C508E, fp->cur_anim_frame, 1.0,
                               0, NULL);
-    fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialLw_8013AE30;
+    fp->accessory4_cb = &ftZd_SpecialLw_8013AE30;
 }
 
 // 8013B46C - 8013B4D8 (108 bytes)
@@ -305,7 +305,7 @@ void ftZd_SpecialLw_8013B46C(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 356, 0x0C4C508E, fp->cur_anim_frame, 1.0,
                               0, NULL);
-    fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialLw_8013AE30;
+    fp->accessory4_cb = &ftZd_SpecialLw_8013AE30;
 }
 
 // AS_ZeldaFinishTransformation
@@ -331,7 +331,7 @@ void ftZd_SpecialLw_8013B4D8(HSD_GObj* gobj)
 
         Fighter_ChangeMotionState(gobj, msid, 0, sa->x80, 1.0, 0, NULL);
     }
-    fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialLw_8013AE30;
+    fp->accessory4_cb = &ftZd_SpecialLw_8013AE30;
 }
 
 // 8013B540 - 8013B574 (52 bytes)
@@ -385,8 +385,8 @@ void ftZd_SpecialLw_8013B5C4(HSD_GObj* gobj)
         fp->fv.zd.x222C = 0;
     }
 
-    fp->cb.x21E4_callback_OnDeath2 = 0;
-    fp->cb.x21DC_callback_OnTakeDamage = 0;
+    fp->death2_cb = 0;
+    fp->take_dmg_cb = 0;
 }
 
 // 8013B5EC - 8013B638 (76 bytes)
@@ -400,6 +400,6 @@ void ftZd_SpecialLw_8013B5EC(HSD_GObj* gobj)
         fp->fv.zd.x222C = NULL;
     }
 
-    fp->cb.x21E4_callback_OnDeath2 = 0;
-    fp->cb.x21DC_callback_OnTakeDamage = 0;
+    fp->death2_cb = 0;
+    fp->take_dmg_cb = 0;
 }

@@ -18,7 +18,7 @@ void ftGw_Attack100Start_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCo_800D6B00(gobj, ftGw_MS_Attack100Start);
-    fp->cb.x21BC_callback_Accessory4 = ftGw_Attack11_ItemGreenhouseSetup;
+    fp->accessory4_cb = ftGw_Attack11_ItemGreenhouseSetup;
 }
 
 // 0x8014C224
@@ -59,7 +59,7 @@ void ftGw_Attack100Loop_Enter(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_Attack100Loop, 0, 0.0f, 1.0f, 0.0f,
                               NULL);
-    fp->cb.x21BC_callback_Accessory4 = ftGw_Attack11_DecideAction;
+    fp->accessory4_cb = ftGw_Attack11_DecideAction;
 }
 
 // 0x8014C308
@@ -96,7 +96,7 @@ void ftGw_Attack100End_Enter(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_Attack100End, 0, 0.0f, 1.0f, 0.0f,
                               NULL);
-    fp->cb.x21BC_callback_Accessory4 = ftGw_Attack11_DecideAction;
+    fp->accessory4_cb = ftGw_Attack11_DecideAction;
 }
 
 // 0x8014C3F4 - Mr. Game & Watch's Rapid Jab End Animation callback

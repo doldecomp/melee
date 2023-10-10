@@ -41,7 +41,7 @@ void ftSs_SpecialLw_8012ADF0(HSD_GObj* gobj)
         vec.y += samus_attr->x74_vec.y;
         vec.z += samus_attr->x74_vec.z;
         it_802B4AC8(gobj, &vec, fp->facing_dir, vec_x);
-        fp->cb.x21BC_callback_Accessory4 = NULL;
+        fp->accessory4_cb = NULL;
     }
 }
 
@@ -76,7 +76,7 @@ static void ftSamus_SpecialLw_StartAction_inner(HSD_GObj* gobj)
     if (fp->cur_anim_frame == 3.0f) {
         fp->cmd_vars[1] = 1;
     }
-    fp->cb.x21BC_callback_Accessory4 = &ftSs_SpecialLw_8012ADF0;
+    fp->accessory4_cb = &ftSs_SpecialLw_8012ADF0;
 }
 
 void ftSs_SpecialLw_Enter(HSD_GObj* gobj)
@@ -405,7 +405,7 @@ static void ftSamus_UnkSetStateAndCb(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     fp->cmd_vars[1] = 2;
     fp->mv.ss.unk6.x0 = 0;
-    fp->cb.x21BC_callback_Accessory4 = &ftSs_SpecialLw_8012ADF0;
+    fp->accessory4_cb = &ftSs_SpecialLw_8012ADF0;
 }
 
 void ftSs_SpecialLw_8012B570(HSD_GObj* gobj)
@@ -425,7 +425,7 @@ void ftSs_SpecialLw_8012B5F0(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 0x164, 0x0C4C509C, fp->cur_anim_frame,
                               1.0f, 0.0f, NULL);
-    fp->cb.x21BC_callback_Accessory4 = ftSs_SpecialLw_8012ADF0;
+    fp->accessory4_cb = ftSs_SpecialLw_8012ADF0;
 }
 
 void ftSs_SpecialLw_8012B668(HSD_GObj* gobj)

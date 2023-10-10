@@ -189,8 +189,8 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
                         &vec);
             efSync_Spawn(1012, gobj, &vec);
             fp->x2219_b0 = true;
-            fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-            fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+            fp->pre_hitlag_cb = efLib_PauseAll;
+            fp->post_hitlag_cb = efLib_ResumeAll;
         }
     } else {
         fp = GET_FIGHTER(gobj);
@@ -204,8 +204,8 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
             vec2.y += 6 * tempf - 3;
             efSync_Spawn(1012, gobj, &vec2);
             fp->x2219_b0 = true;
-            fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-            fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+            fp->pre_hitlag_cb = efLib_PauseAll;
+            fp->post_hitlag_cb = efLib_ResumeAll;
         }
     }
 }
@@ -231,8 +231,8 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
                         &vec);
             efSync_Spawn(1012, gobj, &vec);
             fp->x2219_b0 = true;
-            fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-            fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+            fp->pre_hitlag_cb = efLib_PauseAll;
+            fp->post_hitlag_cb = efLib_ResumeAll;
         }
     } else {
         fp = GET_FIGHTER(gobj);
@@ -246,8 +246,8 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
             vec2.y += (10 * tempf) - 5;
             efSync_Spawn(1012, gobj, &vec2);
             fp->x2219_b0 = true;
-            fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-            fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+            fp->pre_hitlag_cb = efLib_PauseAll;
+            fp->post_hitlag_cb = efLib_ResumeAll;
         }
     }
 }
@@ -561,7 +561,7 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
             ftAnim_8006EBA4(gobj);
             ftAnim_SetAnimRate(gobj, 0.0f);
             fp->x2223_flag.bits.b4 = 1;
-            fp->cb.x21F8_callback = &ftPk_SpecialHi_UpdateVel;
+            fp->x21F8 = &ftPk_SpecialHi_UpdateVel;
             return;
         }
     }
@@ -649,7 +649,7 @@ void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
     fp->x2223_flag.bits.b4 = 1;
 
     // set velocity to move toward facing direction
-    fp->cb.x21F8_callback = &ftPk_SpecialHi_UpdateVel;
+    fp->x21F8 = &ftPk_SpecialHi_UpdateVel;
 }
 
 static inline bool return_and_fill_stack(void)
@@ -843,7 +843,7 @@ void ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(HSD_GObj* gobj)
     fp->gr_vel = 0.0f;
     fp->gr_vel = fp->mv.pk.unk4.x24 * pika_attr->xA4;
     Fighter_ChangeMotionState(gobj, 355, 2, 0.0f, 1.0f, 0.0f, 0);
-    fp->cb.x21F8_callback = &ftPk_SpecialHi_UpdateVel;
+    fp->x21F8 = &ftPk_SpecialHi_UpdateVel;
 }
 
 void ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(HSD_GObj* gobj)
@@ -866,5 +866,5 @@ void ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(HSD_GObj* gobj)
     fp->self_vel.x = fp->mv.pk.unk4.x1C.x * pika_attr->xA4;
     fp->self_vel.y = fp->mv.pk.unk4.x1C.y * pika_attr->xA4;
     Fighter_ChangeMotionState(gobj, 358, 2, 0.0f, 1.0f, 0.0f, 0);
-    fp->cb.x21F8_callback = &ftPk_SpecialHi_UpdateVel;
+    fp->x21F8 = &ftPk_SpecialHi_UpdateVel;
 }

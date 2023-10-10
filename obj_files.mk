@@ -180,6 +180,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureMewtwo.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ThrownMewtwo.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureKirby.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureWaitKirby.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_08A4.s.o\
     $(BUILD_DIR)/asm/melee/ft/ftmaterial.s.o\
     $(BUILD_DIR)/asm/melee/ft/ftcolanim.s.o\

@@ -418,8 +418,8 @@ void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
             ft_2->x2219_b0 = true;
         }
 
-        ft_2->cb.x21D4_callback_EnterHitlag = NULL;
-        ft_2->cb.x21D8_callback_ExitHitlag = NULL;
-        ft_2->cb.x21BC_callback_Accessory4 = NULL;
+        ft_2->pre_hitlag_cb = NULL;
+        ft_2->post_hitlag_cb = NULL;
+        ft_2->accessory4_cb = NULL;
     }
 }

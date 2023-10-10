@@ -99,8 +99,8 @@ void ftNs_SpecialLwStart_Anim(
                           fp->parts[FtPart_L1stNb].joint);
             fp->x2219_b0 = true;
         }
-        fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-        fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+        fp->pre_hitlag_cb = efLib_PauseAll;
+        fp->post_hitlag_cb = efLib_ResumeAll;
         fighter_data2->mv.ns.speciallw.x10 = 0;
         if ((s32) fighter_data2->ground_or_air == GA_Ground) {
             ftNs_SpecialLwHold_Enter(gobj);
@@ -137,8 +137,8 @@ void ftNs_SpecialAirLwStart_Anim(
                           fp->parts[FtPart_L1stNb].joint);
             fp->x2219_b0 = true;
         }
-        fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-        fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+        fp->pre_hitlag_cb = efLib_PauseAll;
+        fp->post_hitlag_cb = efLib_ResumeAll;
         fighter_data2->mv.ns.speciallw.x10 = 0;
         if ((s32) fighter_data2->ground_or_air == GA_Ground) {
             ftNs_SpecialLwHold_Enter(gobj);
@@ -787,8 +787,8 @@ void ftNs_SpecialLwHit_Anim(
                               temp_r30->parts[FtPart_L1stNb].joint);
                 temp_r30->x2219_b0 = true;
             }
-            temp_r30->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-            temp_r30->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+            temp_r30->pre_hitlag_cb = efLib_PauseAll;
+            temp_r30->post_hitlag_cb = efLib_ResumeAll;
         }
     }
 
@@ -826,8 +826,8 @@ void ftNs_SpecialAirLwHit_Anim(
                               fp->parts[FtPart_L1stNb].joint);
                 fp->x2219_b0 = true;
             }
-            fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-            fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+            fp->pre_hitlag_cb = efLib_PauseAll;
+            fp->post_hitlag_cb = efLib_ResumeAll;
         }
     }
 

@@ -53,7 +53,7 @@ static inline void enter(HSD_GObj* gobj, FtMotionId msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
-    fp->cb.x21EC_callback = reset;
+    fp->x21EC = reset;
     fp->self_vel.y = 0;
     fp->gr_vel = da->x34 * fp->facing_dir;
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
@@ -68,7 +68,7 @@ void ftPe_SpecialS_Enter(HSD_GObj* gobj)
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
-    fp->cb.x21EC_callback = reset;
+    fp->x21EC = reset;
     fp->self_vel.y = 0;
     fp->gr_vel = da->x34 * fp->facing_dir;
     Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialSStart, Ft_MF_None, 0, 1, 0,
@@ -84,7 +84,7 @@ void ftPe_SpecialAirS_Enter(HSD_GObj* gobj)
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
-    fp->cb.x21EC_callback = reset;
+    fp->x21EC = reset;
     fp->self_vel.y = da->x40;
     Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSStart, Ft_MF_None, 0, 1,
                               0, NULL);
@@ -303,8 +303,8 @@ static void enterAirJump(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSJump, Ft_MF_None, 0, 1,
                               0, NULL);
     fp = gobj->user_data;
-    fp->cb.x21F8_callback = ftCommon_8007F76C;
-    fp->cb.x21F4_callback = doAirEnd0;
+    fp->x21F8 = ftCommon_8007F76C;
+    fp->x21F4 = doAirEnd0;
 }
 
 void ftPe_SpecialSEnd_Anim(HSD_GObj* gobj)
@@ -384,7 +384,7 @@ static void doPostEnd(HSD_GObj* gobj)
             fp->self_vel.y = da->specials_end_vel_y;
         }
     }
-    fp->cb.x21F8_callback = ftCommon_8007F7B4;
+    fp->x21F8 = ftCommon_8007F7B4;
 }
 
 static void doPostEnd_SmallerStack(HSD_GObj* gobj)
@@ -406,7 +406,7 @@ static void doPostEnd_SmallerStack(HSD_GObj* gobj)
             fp->self_vel.y = da->specials_end_vel_y;
         }
     }
-    fp->cb.x21F8_callback = ftCommon_8007F7B4;
+    fp->x21F8 = ftCommon_8007F7B4;
 }
 
 static void enterEndSmash(HSD_GObj* gobj)

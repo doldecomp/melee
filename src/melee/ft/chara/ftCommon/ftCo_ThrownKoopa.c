@@ -42,7 +42,7 @@ void ftCo_800BCE64(ftCo_GObj* gobj, FtMotionId msid)
     fp->mv.co.capturekoopa.x0 = false;
     Fighter_ChangeMotionState(gobj, msid, mf, fp->cur_anim_frame, 1, 0,
                               fp->victim_gobj);
-    fp->cb.x21B0_callback_Accessory1 = ftCo_800DE508;
+    fp->accessory1_cb = ftCo_800DE508;
     ftCommon_8007E2F4(fp, 0x1FF);
 #endif
 #undef SOLUTION
