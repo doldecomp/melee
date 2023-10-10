@@ -10,6 +10,7 @@
 #include "ftCo_AttackLw4.h"
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
+#include "ftCo_CaptureKirby.h"
 #include "ftCo_CliffClimb.h"
 #include "ftCo_CliffWait.h"
 #include "ftCo_DownBound.h"
