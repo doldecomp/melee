@@ -4,33 +4,34 @@
 #include <platform.h>
 
 #include <common_structs.h>
+#include <placeholder.h>
 
 struct ftKirby_FighterVars {
-    /* 0x222C */ s32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234:0 */ u8 x2234_b0 : 1;
-    /* 0x2235 */ u8 x2235[3];
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-    /* 0x224C */ u8 x224C[0x228C - 0x224C];
-    /* 0x228C */ u32 x228C;
-    /* 0x2290 */ u32 x2290;
-    /* 0x2294 */ u8 x2294[0x22C8 - 0x2294];
-    /* 0x22C8 */ s32 x22C8;
-    /* 0x22CC */ s32 x22CC;
-    /* 0x22D0 */ s32 x22D0;
-    /* 0x22D4 */ s32 x22D4;
-    /* 0x22D8 */ s32 x22D8;
-    /* 0x22DC */ s32 x22DC;
-    /* 0x22E0 */ s32 x22E0;
-    /* 0x22E4 */ s32 x22E4;
-    /* 0x22E8 */ s32 x22E8;
+    /* fp+222C */ UNK_T x0;
+    /* fp+2230 */ uint x4;
+    /* fp+2234:0 */ u8 x8_b0 : 1;
+    /* fp+2235 */ u8 x9[3];
+    /* fp+2238 */ FighterKind victim_kind;
+    /* fp+223C */ UNK_T x10;
+    /* fp+2240 */ UNK_T x14;
+    /* fp+2244 */ UNK_T x18;
+    /* fp+2248 */ UNK_T x1C;
+    /* fp+224C */ u8 x20[0x60 - 0x20];
+    /* fp+228C */ UNK_T x60;
+    /* fp+2290 */ UNK_T x64;
+    /* fp+2294 */ u8 x68[0x9C - 0x68];
+    /* fp+22C8 */ UNK_T x9C;
+    /* fp+22CC */ UNK_T xA0;
+    /* fp+22D0 */ UNK_T xA4;
+    /* fp+22D4 */ UNK_T xA8;
+    /* fp+22D8 */ UNK_T xAC;
+    /* fp+22DC */ UNK_T xB0;
+    /* fp+22E0 */ UNK_T xB4;
+    /* fp+22E4 */ UNK_T xB8;
+    /* fp+22E8 */ UNK_T xBC;
 };
 
-typedef struct _ftKirbyAttributes {
+struct ftKb_DatAttrs {
     f32 x0;
     f32 x4;
     f32 x8;
@@ -50,6 +51,6 @@ typedef struct _ftKirbyAttributes {
     u8 data_filler_3[0x384 - 0x194];
     f32 x384;
     u8 data_filler_4[0x424 - 0x388];
-} ftKirbyAttributes;
+};
 
 #endif

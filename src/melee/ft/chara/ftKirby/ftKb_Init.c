@@ -3043,13 +3043,13 @@ void ftKb_Init_OnDeath(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
-    fp->fv.kb.x222C = 0;
-    fp->fv.kb.x2230 = (s32) (HSD_Randi(5) + 1);
-    fp->fv.kb.x223C = 0;
-    fp->fv.kb.x2238 = 4;
-    fp->fv.kb.x2244 = 0;
-    fp->fv.kb.x228C = 0;
-    fp->fv.kb.x2290 = 0;
+    fp->fv.kb.x0 = 0;
+    fp->fv.kb.x4 = HSD_Randi(5) + 1;
+    fp->fv.kb.x10 = 0;
+    fp->fv.kb.victim_kind = 4;
+    fp->fv.kb.x18 = 0;
+    fp->fv.kb.x60 = 0;
+    fp->fv.kb.x64 = 0;
     if (Player_GetFlagsBit1(fp->player_id) &&
         Player_GetUnk4D(fp->player_id) != 4)
     {
@@ -3062,11 +3062,11 @@ void ftKb_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     void** item_list = fp->ft_data->x48_items;
 
-    PUSH_ATTRS(fp, ftKirbyAttributes);
+    PUSH_ATTRS(fp, ftKb_DatAttrs);
 
-    fp->x2222_b1 = 1;
+    fp->x2222_b1 = true;
     fp->x2D0 = fp->dat_attrs;
-    fp->fv.kb.x2234_b0 = Player_GetFlagsAEBit1(fp->player_id);
+    fp->fv.kb.x8_b0 = Player_GetFlagsAEBit1(fp->player_id);
     it_8026B3F8(item_list[0], 50);
     it_8026B3F8(item_list[1], 51);
     it_8026B3F8(item_list[2], 52);

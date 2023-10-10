@@ -82,7 +82,6 @@ typedef struct _ReflectDesc {
     /// @remarks Setting this to 1 causes the reflector to skip ownership
     /// change
     u8 x20_behavior;
-
 } ReflectDesc;
 
 typedef struct _AbsorbDesc {

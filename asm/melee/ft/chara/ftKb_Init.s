@@ -10483,6 +10483,7 @@ ftKb_SpecialNDrink0_Anim:
 /* 800F7B14 000F46F4  38 21 00 30 */	addi r1, r1, 0x30
 /* 800F7B18 000F46F8  7C 08 03 A6 */	mtlr r0
 /* 800F7B1C 000F46FC  4E 80 00 20 */	blr
+
 .global ftKb_SpecialNDrink_Anim
 ftKb_SpecialNDrink_Anim:
 /* 800F7B20 000F4700  7C 08 02 A6 */	mflr r0
