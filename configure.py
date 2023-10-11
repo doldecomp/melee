@@ -117,8 +117,8 @@ if not is_windows():
     config.wrapper = args.wrapper
 
 # Tool versions
-config.compilers_tag = "1"
-config.dtk_tag = "v0.5.5"
+config.compilers_tag = "20230715"
+config.dtk_tag = "v0.5.7"
 config.sjiswrap_tag = "v1.1.1"
 config.wibo_tag = "0.6.3"
 
