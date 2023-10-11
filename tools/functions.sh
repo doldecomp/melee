@@ -54,9 +54,9 @@ function gen_header {
     local guard=$(get_include_guard "$out_path")
     local text="$guard
 
-#include \"it/forward.h\"
+#include \"ftCommon/forward.h\"
 
-#include \"it/types.h\"
+#include <placeholder.h>
 
 #endif"
 

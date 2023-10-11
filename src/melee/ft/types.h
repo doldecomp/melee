@@ -609,7 +609,7 @@ typedef struct ftCo_DatAttrs {
     /* +0B4 fp+1C4 */ int xB4;
     /* +0B8 fp+1C8 */ float xB8;
     /* +0BC fp+1CC */ ftCo_DatAttrs_xBC_t xBC;
-    /* +0DC fp+1EC */ int xDC;
+    /* +0DC fp+1EC */ float xDC;
     /* +0E0 fp+1F0 */ float kirby_b_star_damage;
     /* +0E4 fp+1F4 */ float normal_landing_lag;
     /* +0E8 fp+1F8 */ float landingairn_lag;
