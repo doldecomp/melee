@@ -14,6 +14,13 @@
 /* 0BDDC8 */ void ftCo_ThrownKirbyStar_IASA(ftCo_GObj* gobj);
 /* 0BDDCC */ void ftCo_ThrownKirbyStar_Phys(ftCo_GObj* gobj);
 /* 0BDF10 */ void ftCo_ThrownKirbyStar_Coll(ftCo_GObj* gobj);
+/* 0BE000 */ void ftCo_800BE000(ftCo_GObj* gobj, ftKb_GObj* thrower_gobj);
+/* 0BE258 */ void ftCo_ThrownCopyStar_Anim(ftCo_GObj* gobj);
+/* 0BE25C */ void ftCo_ThrownCopyStar_IASA(ftCo_GObj* gobj);
+/* 0BE260 */ void ftCo_ThrownCopyStar_Phys(ftCo_GObj* gobj);
+/* 0BE3A4 */ void ftCo_ThrownCopyStar_Coll(ftCo_GObj* gobj);
 /* 0BE494 */ void ftCo_800BE494(ftCo_GObj* gobj);
+/* 0BE6AC */ void ftCo_800BE6AC(ftCo_GObj* gobj);
+/* 0BE7C0 */ void ftCo_800BE7C0(ftCo_GObj* gobj);
 
 #endif

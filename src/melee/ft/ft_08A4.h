@@ -65,7 +65,6 @@
 /* 0BB220 */ /* static */ UNK_RET ftCo_800BB220(UNK_PARAMS);
 /* 0BB768 */ /* static */ UNK_RET ftCo_800BB768(UNK_PARAMS);
 /* 0BB9B4 */ /* static */ UNK_RET ftCo_800BB9B4(UNK_PARAMS);
-/* 0BE7C0 */ void ftCo_800BE7C0(ftCo_GObj* gobj);
 /* 0C0658 */ /* static */ UNK_RET ftCo_800C0658(UNK_PARAMS);
 /* 0C0874 */ UNK_RET ftCo_800C0874(UNK_PARAMS);
 /* 0C0A28 */ UNK_RET ftCo_800C0A28(UNK_PARAMS);

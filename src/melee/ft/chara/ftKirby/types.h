@@ -6,7 +6,7 @@
 #include <common_structs.h>
 #include <placeholder.h>
 
-struct ftKirby_FighterVars {
+struct ftKb_FighterVars {
     /* fp+222C */ UNK_T x0;
     /* fp+2230 */ uint x4;
     /* fp+2234:0 */ u8 x8_b0 : 1;
