@@ -1544,7 +1544,7 @@ struct Fighter {
         /* fp+222C */ struct ftDonkey_FighterVars dk;
         /* fp+222C */ struct ftFox_FighterVars fx, fc;
         /* fp+222C */ struct ftGameWatch_FighterVars gw;
-        /* fp+222C */ struct ftKirby_FighterVars kb;
+        /* fp+222C */ struct ftKb_FighterVars kb;
         /* fp+222C */ struct ftKoopa_FighterVars kp, gk;
         /* fp+222C */ struct ftLk_FighterVars lk;
         /* fp+222C */ struct ftLuigi_FighterVars lg;

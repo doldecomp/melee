@@ -178,20 +178,25 @@ union ftCommon_MotionVars {
         /* fp+2340 */ ftKb_GObj* thrower_gobj;
         /* fp+2344 */ float x4;
         /* fp+2348 */ float x8;
-        /* fp+234C */ UNK_T xC;
-        /* fp+2350 */ UNK_T x10; /* fp+2354 */
-        int x14;
-        /* fp+2358:0 */ u8 x18_b0 : 1;
-        /* fp+2358:1 */ u8 x18_b1 : 1;
-        /* fp+2358:2 */ u8 x18_b2 : 1;
-        /* fp+2358:3 */ u8 x18_b3 : 1;
-        /* fp+2358:4 */ u8 x18_b4 : 1;
-        /* fp+2358:5 */ u8 x18_b5 : 1;
-        /* fp+2358:6 */ u8 x18_b6 : 1;
-        /* fp+2358:7 */ u8 x18_b7 : 1;
+        /* fp+234C */ float xC;
+        /* fp+2350 */ float x10;
+        /* fp+2354 */ bool x14;
+        union {
+            u8 x18;
+            struct {
+                /* fp+2358:0 */ u8 x18_b0 : 1;
+                /* fp+2358:1 */ u8 x18_b1 : 1;
+                /* fp+2358:2 */ u8 x18_b2 : 1;
+                /* fp+2358:3 */ u8 x18_b3 : 1;
+                /* fp+2358:4 */ u8 x18_b4 : 1;
+                /* fp+2358:5 */ u8 x18_b5 : 1;
+                /* fp+2358:6 */ u8 x18_b6 : 1;
+                /* fp+2358:7 */ u8 x18_b7 : 1;
+            };
+        };
         /* fp+235C */ Vec3 scale;
         /* fp+2368 */ ftCollisionBox coll_box;
-    } thrownkirbystar;
+    } thrownkirby;
 };
 
 #endif

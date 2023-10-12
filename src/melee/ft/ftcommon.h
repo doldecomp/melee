@@ -1,5 +1,5 @@
-#ifndef MELEE_FT_FTCOMMON_H
-#define MELEE_FT_FTCOMMON_H
+#ifndef GALE01_07C930
+#define GALE01_07C930
 
 #include <platform.h>
 #include "ft/forward.h"
