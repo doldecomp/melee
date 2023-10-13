@@ -2,33 +2,6 @@
 
 .section .text
 
-.global ftCo_800BEFD4
-ftCo_800BEFD4:
-/* 800BEFD4 000BBBB4  7C 08 02 A6 */	mflr r0
-/* 800BEFD8 000BBBB8  38 80 00 09 */	li r4, 9
-/* 800BEFDC 000BBBBC  90 01 00 04 */	stw r0, 4(r1)
-/* 800BEFE0 000BBBC0  38 A0 00 00 */	li r5, 0
-/* 800BEFE4 000BBBC4  38 C0 00 00 */	li r6, 0
-/* 800BEFE8 000BBBC8  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800BEFEC 000BBBCC  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800BEFF0 000BBBD0  C0 22 92 30 */	lfs f1, ftCo_804D8C10@sda21(r2)
-/* 800BEFF4 000BBBD4  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 800BEFF8 000BBBD8  FC 60 08 90 */	fmr f3, f1
-/* 800BEFFC 000BBBDC  C0 42 92 34 */	lfs f2, ftCo_804D8C14@sda21(r2)
-/* 800BF000 000BBBE0  4B FA A3 AD */	bl Fighter_ChangeMotionState
-/* 800BF004 000BBBE4  88 1F 22 19 */	lbz r0, 0x2219(r31)
-/* 800BF008 000BBBE8  38 60 00 01 */	li r3, 1
-/* 800BF00C 000BBBEC  50 60 2E B4 */	rlwimi r0, r3, 5, 0x1a, 0x1a
-/* 800BF010 000BBBF0  98 1F 22 19 */	stb r0, 0x2219(r31)
-/* 800BF014 000BBBF4  88 1F 22 19 */	lbz r0, 0x2219(r31)
-/* 800BF018 000BBBF8  50 60 36 72 */	rlwimi r0, r3, 6, 0x19, 0x19
-/* 800BF01C 000BBBFC  98 1F 22 19 */	stb r0, 0x2219(r31)
-/* 800BF020 000BBC00  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 800BF024 000BBC04  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 800BF028 000BBC08  38 21 00 18 */	addi r1, r1, 0x18
-/* 800BF02C 000BBC0C  7C 08 03 A6 */	mtlr r0
-/* 800BF030 000BBC10  4E 80 00 20 */	blr
-
 .global ftCo_800BF034
 ftCo_800BF034:
 /* 800BF034 000BBC14  7C 08 02 A6 */	mflr r0
@@ -302,10 +275,6 @@ ft_8045A6A8:
 
 .section .sdata2
     .balign 8
-ftCo_804D8C10:
-    .float 0
-ftCo_804D8C14:
-    .float 1
 ftCo_804D8C18:
     .float 0
 ftCo_804D8C1C:
