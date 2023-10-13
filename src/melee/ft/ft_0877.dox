@@ -44,7 +44,6 @@ f32 ftCo_Damage_CalcAngle(Fighter*);
 f32 ftCo_80092ED8(s32, void*, f32);
 f32 ftCo_800A1A24(Fighter*);
 f32 ftCo_ScaleBy154(f32);
-HSD_GObj* ftCo_800BE7E0(unk_t);
 s32 ft_800877F8(HSD_GObj*, s32);
 s32 ft_80087818(HSD_GObj*, s32);
 s32 ft_80087838(HSD_GObj*);
@@ -452,8 +451,6 @@ void ftCo_ThrownKirby_Anim(HSD_GObj*);
 void ftCo_ThrownKirby_IASA(HSD_GObj*);
 void ftCo_ThrownKirby_Phys(HSD_GObj*);
 void ftCo_ThrownKirby_Coll(HSD_GObj*);
-void ftCo_800BEB60(int, int, int);
-void ftCo_800BED84(HSD_GObj*);
 void ftCo_800BEF00(HSD_GObj*);
 void ftCo_800BEFD0(HSD_GObj*);
 void ftCo_800BFB4C(HSD_GObj*, s32*);
@@ -977,7 +974,6 @@ UNK_RET ftCo_800CC6C8(UNK_PARAMS);
 bool ftCo_800DF478(Fighter*);
 bool ftCo_80095328(HSD_GObj*, bool);
 void ftCo_800957F4(HSD_GObj* gobj, FtMotionId msid);
-void ftCo_SetFacingDirection(HSD_GObj*, f32 facing_dir);
 void ftCo_800CEFE0(HSD_GObj* gobj, int);
 
 /// Interrupt_Wait

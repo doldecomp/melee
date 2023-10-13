@@ -366,7 +366,7 @@ void ftGk_Init_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, true);
 }
 
-void ftGk_Init_UnkDemoCallbacks0(s32 arg0, s32* arg1, s32* arg2)
+void ftGk_Init_UnkDemoCallbacks0(int arg0, int* arg1, int* arg2)
 {
     if (arg0 == 0xF) {
         *arg2 = 0xE;

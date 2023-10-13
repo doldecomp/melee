@@ -2,6 +2,7 @@
 #define _player_h_
 
 #include <platform.h>
+#include <baselib/forward.h>
 
 #include "pl/types.h"
 
@@ -323,7 +324,7 @@ void Player_80036D24(s32 slot);
 void Player_InitAllPlayers(void);
 void Player_80036DA4(void);
 void Player_80036DD8(void);
-void Player_80036E20(s32 arg0, s32 arg1, s32 arg2);
+void Player_80036E20(s32 arg0, HSD_Archive* archive, s32 arg2);
 s32 Player_80036EA0(s32 slot);
 void Player_80036F34(s32 slot, s32 arg1);
 void Player_80037054(s32 slot, s32 arg1);

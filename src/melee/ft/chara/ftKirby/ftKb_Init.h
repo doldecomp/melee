@@ -21,7 +21,7 @@
 /* 0EEB1C */ void ftKb_Init_800EEB1C(ftKb_GObj* gobj, void*);
 /* 0EEB38 */ void ftKb_Init_OnKnockbackEnter(ftKb_GObj* gobj);
 /* 0EEB7C */ void ftKb_Init_OnKnockbackExit(ftKb_GObj* gobj);
-/* 0EEBC0 */ void ftKb_Init_UnkDemoCallbacks0(s32, s32*, s32*);
+/* 0EEBC0 */ void ftKb_Init_UnkDemoCallbacks0(int, int*, int*);
 /* 0EEBF8 */ char* ftKb_Init_GetMotionFileString(enum_t);
 /* 0EEC34 */ void ftKb_SpecialN_800EEC34(ftKb_GObj* gobj);
 /* 0EED50 */ void ftKb_SpecialN_800EED50(s32, s32);

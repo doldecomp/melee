@@ -77,12 +77,12 @@ typedef struct _UnkStageDat {
 } UnkStageDat;
 
 typedef struct _UnkArchiveStruct {
-    struct _HSD_Archive* unk0;
+    HSD_Archive* unk0;
     struct _UnkStageDat* unk4;
     s32 unk8;
 } UnkArchiveStruct;
 
-void grDatFiles_801C5FC0(struct _HSD_Archive*, void* data, u32 length);
+void grDatFiles_801C5FC0(HSD_Archive*, void* data, u32 length);
 void grDatFiles_801C6038(void*, s32, s32);
 static void grDatFiles_801C6228(struct _UnkStageDat*);
 void grDatFiles_801C6288(void);

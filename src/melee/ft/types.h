@@ -522,7 +522,9 @@ typedef struct _ftData {
     }* x8;
     /*  +C */ struct S_TEMP4* xC;
     /* +10 */ u8* x10;
-    /* +14 */ u8 x14[0x20 - 0x14];
+    /* +14 */ struct S_TEMP4* x14;
+    /* +18 */ u8* x18;
+    /* +1C */ UNK_T x1C;
     /* +20 */ struct {
         UNK_T x0;
         int x8;
@@ -1596,6 +1598,11 @@ struct Fighter {
 struct gmScriptEventDefault {
     u32 opcode : 6;
     u32 value1 : 26;
+};
+
+struct ftData_UnkCountStruct {
+    void* data;
+    int count;
 };
 
 #endif

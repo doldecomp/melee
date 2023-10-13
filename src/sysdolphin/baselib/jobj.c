@@ -89,7 +89,9 @@ void HSD_JObjWalkTree0(HSD_JObj* jobj, HSD_JObjWalkTreeCallback cb,
     }
     HSD_ASSERT(0xAE, jobj->parent);
     type = jobj->parent->child == jobj ? 1 : 2;
-    INVOKE(cb, jobj, cb_args, type);
+    if (cb != NULL) {
+        cb(jobj, cb_args, type);
+    }
     if (!(jobj->flags & JOBJ_INSTANCE)) {
         HSD_JObj* child = jobj->child;
         while (child != NULL) {

@@ -328,7 +328,7 @@ void ftLg_Init_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, 1);
 }
 
-void ftLg_Init_UnkDemoCallbacks0(s32 arg0, s32* arg1, s32* arg2)
+void ftLg_Init_UnkDemoCallbacks0(int arg0, int* arg1, int* arg2)
 {
     if (arg0 != 10) {
         if (arg0 < 10 && arg0 >= 9) {
