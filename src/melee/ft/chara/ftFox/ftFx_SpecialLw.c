@@ -72,7 +72,7 @@ void ftFx_SpecialLw_CreateReflectGFX(HSD_GObj* gobj)
 static inline void ftFox_SpecialLw_SetVars(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = da = getFtSpecialAttrs(fp);
+    ftFox_DatAttrs* da = da = getFtSpecialAttrs(fp);
 
     fp->mv.fx.SpecialLw.releaseLag = (s32) da->x98_FOX_REFLECTOR_RELEASE_LAG;
 
@@ -101,7 +101,7 @@ void ftFx_SpecialLw_Enter(HSD_GObj* gobj)
 void ftFx_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
 
     fp->self_vel.y = 0;
     fp->self_vel.x /= da->xA8_FOX_REFLECTOR_MOMENTUM_PRESERVE_X;
@@ -216,7 +216,7 @@ void ftFx_SpecialAirLwStart_Phys(HSD_GObj* gobj)
 
     Fighter* fp = gobj->user_data;
     ftCo_DatAttrs* ca = &fp->co_attrs;
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
 
     if (fp->mv.fx.SpecialLw.gravityDelay != 0) {
         fp->mv.fx.SpecialLw.gravityDelay--;
@@ -366,7 +366,7 @@ void ftFx_SpecialLwLoop_Phys(HSD_GObj* gobj)
 static inline void ftFox_SpecialLw_InlinePhys(HSD_GObj* gobj)
 {
     ftCo_DatAttrs* ca;
-    ftFoxAttributes* da;
+    ftFox_DatAttrs* da;
     Fighter* fp = getFighter(gobj);
 
     ca = getFtAttrs(fp);
@@ -439,7 +439,7 @@ static void ftFx_SpecialAirLwLoop_AirToGround(HSD_GObj* gobj)
 static void ftFx_SpecialLw_CreateReflectHit(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftFoxAttributes* da = getFtSpecialAttrs(fp);
+    ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
 
     ftColl_CreateReflectHit(gobj, &da->xB0_FOX_REFLECTOR_REFLECTION,
                             ftFx_SpecialLwHit_Enter);
@@ -471,7 +471,7 @@ static void ftFx_SpecialAirLwLoop_Enter(HSD_GObj* gobj)
 static void ftFx_SpecialLw_Turn(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -497,7 +497,7 @@ static void ftFx_SpecialLw_Turn(HSD_GObj* gobj)
 static inline void ftFox_SpecialLw_Turn_Inline(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
 
     fp->mv.fx.SpecialLw.turnFrames--;
     if (fp->cmd_vars[0] == false &&
@@ -588,7 +588,7 @@ void ftFx_SpecialLwTurn_Phys(HSD_GObj* gobj)
 void ftFx_SpecialAirLwTurn_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = getFtSpecialAttrs(fp);
+    ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
     ftCo_DatAttrs* ca = getFtAttrs(fp);
 
     /// @todo Unused stack.
@@ -666,7 +666,7 @@ void ftFx_SpecialAirLwTurn_GroundToAir(HSD_GObj* gobj)
 inline void ftFox_SpecialLwTurn_SetVarAll(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftFoxAttributes* da = getFtSpecialAttrs(fp);
+    ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
     fp->x2218_b3 = 1;
     fp->reflect_hit_cb = ftFx_SpecialLwHit_Enter;
     fp->mv.fx.SpecialLw.turnFrames = da->x9C_FOX_REFLECTOR_TURN_FRAMES;
@@ -701,7 +701,7 @@ bool ftFx_SpecialLwTurn_Check(HSD_GObj* gobj)
 inline void ftFox_SpecialLwHit_CreateReflectInline(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftFoxAttributes* da = getFtSpecialAttrs(fp);
+    ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
     ftColl_CreateReflectHit(gobj, &da->xB0_FOX_REFLECTOR_REFLECTION,
                             ftFx_SpecialLwHit_Enter);
 }
@@ -816,7 +816,7 @@ void ftFx_SpecialLwHit_Phys(HSD_GObj* gobj)
 void ftFx_SpecialAirLwHit_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = getFtSpecialAttrs(fp);
+    ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
     ftCo_DatAttrs* ca = getFtAttrs(fp);
 
     /// @todo Unused stack.
@@ -969,7 +969,7 @@ void ftFx_SpecialLwEnd_Phys(HSD_GObj* gobj)
 void ftFx_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = getFtSpecialAttrs(fp);
+    ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
     ftCo_DatAttrs* ca = getFtAttrs(fp);
 
     /// @todo Unused stack.

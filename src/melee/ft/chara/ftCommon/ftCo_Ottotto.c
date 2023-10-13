@@ -26,7 +26,7 @@
 bool ftCo_8009A3C8(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (fp->coll_data.env_flags & MPCOLL_FLAGS_B23 && !fp->x2228_flag.b2) {
+    if (fp->coll_data.env_flags & MPCOLL_FLAGS_B23 && !fp->x2228_b2) {
         ftCo_8009A410(gobj);
         return true;
     }

@@ -5,6 +5,7 @@
 #include "cm/camera.h"
 #include "ef/efasync.h"
 #include "ft/fighter.h"
+#include "ft/ft_0BEC.h"
 #include "ft/ft_0C88.h"
 #include "ft/ftcoll.h"
 #include "ft/ftdata.h"

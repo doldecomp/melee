@@ -758,7 +758,7 @@ void ftCo_80097D40(ftCo_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[8] = { 0 };
 #endif
-    if (fp->x2228_flag.b2) {
+    if (fp->x2228_b2) {
         ftCo_80097AF4(gobj);
     } else {
         ftCo_8009794C(gobj);
@@ -771,7 +771,7 @@ void ftCo_80097D40(ftCo_GObj* gobj)
 void ftCo_80097D88(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (fp->x2228_flag.b2) {
+    if (fp->x2228_b2) {
         ftCo_80097AF4(gobj);
     } else {
         ftCo_8009794C(gobj);

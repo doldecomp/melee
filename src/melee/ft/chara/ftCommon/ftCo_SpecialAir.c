@@ -41,8 +41,8 @@ bool ftCo_SpecialAir_CheckInput(ftCo_GObj* gobj)
             return false;
         }
         if (fp->x676_x < p_ftCommonData->x224 &&
-            ((fp->facing_dir == -1 && fp->x2228_flag.b7 == 1) ||
-             (fp->facing_dir == +1 && fp->x2228_flag.b7 == 0)))
+            ((fp->facing_dir == -1 && fp->x2228_b7 == 1) ||
+             (fp->facing_dir == +1 && fp->x2228_b7 == 0)))
         {
             fp->facing_dir = -fp->facing_dir;
         }

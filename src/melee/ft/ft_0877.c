@@ -225,7 +225,7 @@ s32 ft_80087B34(HSD_GObj* gobj)
 void ft_80087BAC(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2228_flag.b5 = arg1;
+    fp->x2228_b5 = arg1;
 }
 
 void ft_80087BC0(HSD_GObj* gobj, s8 arg1)
@@ -276,7 +276,7 @@ s32 ft_80087C70(Fighter* fp, s32 arg1)
     u8 temp_r3_3;
 
     s32 var_r4 = arg1;
-    s32 temp_r0 = (fp->x2228_flag.b3) & 3;
+    s32 temp_r0 = (fp->x2228_b3) & 3;
 
     switch (temp_r0) {
     case 0:

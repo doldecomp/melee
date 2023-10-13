@@ -65,7 +65,7 @@ void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
 void ftFx_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp;
-    ftFoxAttributes* da;
+    ftFox_DatAttrs* da;
 
     fp = GET_FIGHTER(gobj);
     da = getFtSpecialAttrs(fp);
@@ -83,7 +83,7 @@ void ftFx_SpecialHi_Enter(HSD_GObj* gobj)
 void ftFx_SpecialAirHiStart_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = getFtSpecialAttrs(fp);
+    ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
 
     fp->mv.fx.SpecialHi.gravityDelay = (s32) da->x54_FOX_FIREFOX_GRAVITY_DELAY;
     fp->self_vel.x /= da->x58_FOX_FIREFOX_VEL_X;
@@ -149,7 +149,7 @@ void ftFx_SpecialHiHold_Phys(HSD_GObj* gobj)
 void ftFx_SpecialHiHoldAir_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
     ftCo_DatAttrs* ca = &fp->co_attrs;
 
     /// @todo Unused stack.
@@ -269,7 +269,7 @@ void ftFx_SpecialHi_Phys(HSD_GObj* gobj)
 {
     /// @todo Possibly common inline with #ftFx_SpecialAirHi_Phys.
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = getFtSpecialAttrs(fp);
+    ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
 
     fp->mv.fx.SpecialHi.unk++;
 
@@ -283,7 +283,7 @@ void ftFx_SpecialHi_Phys(HSD_GObj* gobj)
 void ftFx_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    ftFoxAttributes* da = da = getFtSpecialAttrs(fp);
+    ftFox_DatAttrs* da = da = getFtSpecialAttrs(fp);
 
     fp->mv.fx.SpecialHi.unk++;
 
@@ -321,7 +321,7 @@ void ftFx_SpecialHi_Coll(HSD_GObj* gobj)
 static inline bool ftFox_SpecialHi_IsBound(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
 
     if (fp->mv.fx.SpecialHi.unk2 >= da->x6C_FOX_FIREFOX_BOUNCE_VAR) {
         return true;
@@ -343,7 +343,7 @@ void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = da = getFtSpecialAttrs(fp);
+    ftFox_DatAttrs* da = da = getFtSpecialAttrs(fp);
     CollData* collData = collData = getFtColl(fp);
 
     if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_BOTH) != false) {
@@ -436,10 +436,10 @@ void ftFx_SpecialHi_GroundToAir(HSD_GObj* gobj)
 void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
 {
     Vec3 sp20;
-    ftFoxAttributes* da;
+    ftFox_DatAttrs* da;
     Fighter* fp;
     CollData* collData;
-    ftFoxAttributes* tempAttrs;
+    ftFox_DatAttrs* tempAttrs;
     f32 temp_stick;
     f32 stick_x;
     f32 stick_y;
@@ -505,10 +505,10 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
 // Launch Motion State handler
 void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
-    ftFoxAttributes* da;
+    ftFox_DatAttrs* da;
     ftCo_DatAttrs* ca;
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* tempAttrs;
+    ftFox_DatAttrs* tempAttrs;
     f32 stick_x;
     f32 stick_y;
     f32 temp_stick;
@@ -582,7 +582,7 @@ void ftFx_SpecialHiLanding_Anim(HSD_GObj* gobj)
 void ftFx_SpecialHiFall_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_80096900(gobj, 1, 0, true, da->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
@@ -608,7 +608,7 @@ void ftFx_SpecialHiFall_IASA(HSD_GObj* gobj)
 void ftFx_SpecialHiLanding_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    ftFoxAttributes* da = getFtSpecialAttrs(fp);
+    ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
 
     ftCommon_8007C930(fp, da->x7C_FOX_FIREFOX_GROUND_MOMENTUM_END);
     ftCommon_8007CB74(gobj);
@@ -626,7 +626,7 @@ void ftFx_SpecialHiFall_Phys(HSD_GObj* gobj)
 void ftFx_SpecialHiLanding_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
 
     if (ft_80082708(gobj) == false) {
         ftCo_80096900(gobj, 1, 0, true, da->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
@@ -702,7 +702,7 @@ void ftFx_SpecialHiBound_Anim(HSD_GObj* gobj)
 {
     ftCo_DatAttrs* ca;
     Fighter* fp;
-    ftFoxAttributes* da;
+    ftFox_DatAttrs* da;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -807,7 +807,7 @@ inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* gobj)
 void ftFx_SpecialHiBound_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
 
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHiBound, 0, 0.0f, 1.0f,
                               0.0f, NULL);

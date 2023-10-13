@@ -1929,7 +1929,7 @@ void ftCo_8008E908(ftCo_GObj* gobj, float facing_dir)
     }
     {
         uint fp_x1860 = fp->dmg.x1860;
-        if ((fp_x1860 == 6 || fp_x1860 == 7) && !fp->x2228_flag.b2) {
+        if ((fp_x1860 == 6 || fp_x1860 == 7) && !fp->x2228_b2) {
             ftCo_800C318C(gobj, fp_x1860 == 6 ? 0 : 1);
         } else {
             ftCo_8008DCE0(gobj, -1, facing_dir);

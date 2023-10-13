@@ -86,7 +86,7 @@ f32 ftFx_SpecialS_ReturnFloatVarIndexed(HSD_GObj* gobj, s32 index)
 void ftFx_SpecialSStart_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = getFtSpecialAttrs(fp);
+    ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
 
     fp = GET_FIGHTER(gobj);
     da = fp->dat_attrs;
@@ -108,7 +108,7 @@ void ftFx_SpecialSStart_Enter(HSD_GObj* gobj)
 void ftFx_SpecialAirSStart_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = getFtSpecialAttrs(fp);
+    ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
 
     fp = GET_FIGHTER(gobj);
     da = getFtSpecialAttrs(fp);
@@ -178,7 +178,7 @@ void ftFx_SpecialSStart_Phys(HSD_GObj* gobj)
 void ftFx_SpecialAirSStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
     ftCo_DatAttrs* ca = &fp->co_attrs;
 
     /// @todo Unused stack.
@@ -508,7 +508,7 @@ void ftFx_SpecialSEnd_Anim(HSD_GObj* gobj)
 void ftFx_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_80096900(gobj, 1, 0, true, da->x4C_FOX_ILLUSION_FREEFALL_MOBILITY,
@@ -534,7 +534,7 @@ void ftFx_SpecialAirSEnd_IASA(HSD_GObj* gobj)
 void ftFx_SpecialSEnd_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -555,7 +555,7 @@ void ftFx_SpecialSEnd_Phys(HSD_GObj* gobj)
 void ftFx_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
     ftCo_DatAttrs* ca = &fp->co_attrs;
 
     /// @todo Unused stack.
@@ -594,7 +594,7 @@ void ftFx_SpecialSEnd_Coll(HSD_GObj* gobj)
 void ftFx_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -620,7 +620,7 @@ void ftFx_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 inline void ftFox_SpecialSEnd_SetVars(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = getFtSpecialAttrs(fp);
+    ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
     fp->mv.fx.SpecialS.gravityDelay = da->x44_FOX_ILLUSION_FALL_ACCEL;
     fp->x2222_b2 = 1;
 }
@@ -631,7 +631,7 @@ inline void ftFox_SpecialSEnd_SetVars(HSD_GObj* gobj)
 void ftFx_SpecialSEnd_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
 
     fp->gr_vel = da->x34_FOX_ILLUSION_GROUND_END_VEL_X * fp->facing_dir;
 
@@ -645,7 +645,7 @@ void ftFx_SpecialSEnd_Enter(HSD_GObj* gobj)
 void ftFx_SpecialAirSEnd_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
 
     fp->self_vel.x = da->x3C_FOX_ILLUSION_AIR_END_VEL_X * fp->facing_dir;
     fp->self_vel.y = 0.0f;

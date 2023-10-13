@@ -2,6 +2,8 @@
 #define MELEE_FT_CHARA_FTFOX_TYPES_H
 
 #include <platform.h>
+#include "ftFox/forward.h"
+#include "it/forward.h"
 #include <baselib/forward.h>
 
 #include <common_structs.h>
@@ -70,18 +72,20 @@ typedef union ftFox_MotionVars {
     ftFoxAppealS AppealS;
 } ftFox_MotionVars;
 
-typedef struct _ftFoxAttributes {
+struct ftFox_DatAttrs {
     // NEUTRAL SPECIAL - BLASTER
 
     f32 x0_FOX_BLASTER_UNK1;
     f32 x4_FOX_BLASTER_UNK2;
     f32 x8_FOX_BLASTER_UNK3;
     f32 xC_FOX_BLASTER_UNK4;
-    f32 x10_FOX_BLASTER_ANGLE; // Angle at which Blaster shots are fired
-    f32 x14_FOX_BLASTER_VEL;   // Velocity at which Blaster shots are fired
+    /// Angle at which Blaster shots are fired
+    f32 x10_FOX_BLASTER_ANGLE;
+    /// Velocity at which Blaster shots are fired
+    f32 x14_FOX_BLASTER_VEL;
     f32 x18_FOX_BLASTER_LANDING_LAG;
-    s32 x1C_FOX_BLASTER_SHOT_ITKIND;
-    s32 x20_FOX_BLASTER_GUN_ITKIND;
+    ItemKind x1C_FOX_BLASTER_SHOT_ITKIND;
+    ItemKind x20_FOX_BLASTER_GUN_ITKIND;
 
     // SIDE SPECIAL - FOX ILLUSION / FALCO PHANTASM
 
@@ -126,19 +130,19 @@ typedef struct _ftFoxAttributes {
 
     // DOWN SPECIAL - REFLECTOR
 
-    f32 x98_FOX_REFLECTOR_RELEASE_LAG; // Auto lag frames after initializing
-                                       // Reflector if B is not being held.
-                                       // Reflector is immediately released
-                                       // with no lag once these frames have
-                                       // passed.
-    f32 x9C_FOX_REFLECTOR_TURN_FRAMES; // Amount of turn frames for changing
-                                       // Reflector direction
+    /**
+     * Auto lag frames after initializing Reflector if B is not being held.
+     * Reflector is immediately released with no lag once these frames have
+     * passed.
+     */
+    f32 x98_FOX_REFLECTOR_RELEASE_LAG;
+    /// Amount of turn frames for changing Reflector direction
+    f32 x9C_FOX_REFLECTOR_TURN_FRAMES;
     f32 xA0_FOX_REFLECTOR_UNK1;
     s32 xA4_FOX_REFLECTOR_GRAVITY_DELAY;
     f32 xA8_FOX_REFLECTOR_MOMENTUM_PRESERVE_X;
     f32 xAC_FOX_REFLECTOR_FALL_ACCEL;
     ReflectDesc xB0_FOX_REFLECTOR_REFLECTION;
-
-} ftFoxAttributes;
+};
 
 #endif

@@ -185,6 +185,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ThrownKirby.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_3C61.s.o\
     $(BUILD_DIR)/src/melee/ft/ftdemo.c.o\
+    $(BUILD_DIR)/src/melee/ft/ft_0BEC.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_08A4.s.o\
     $(BUILD_DIR)/asm/melee/ft/ftmaterial.s.o\
     $(BUILD_DIR)/asm/melee/ft/ftcolanim.s.o\

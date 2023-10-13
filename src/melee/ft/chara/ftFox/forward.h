@@ -4,6 +4,8 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
+typedef struct ftFox_DatAttrs ftFox_DatAttrs;
+
 static MotionFlags const ftFx_MF_Appeal ATTRIBUTE_USED =
     Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipAnimVel | Ft_MF_Unk06;
 
