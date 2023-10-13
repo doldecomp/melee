@@ -11,9 +11,6 @@
 /* 0BEF00 */ void ftCo_800BEF00(Fighter_GObj* gobj);
 /* 0BEF04 */ void ftCo_800BEF04(Fighter_GObj* gobj);
 /* 0BEFD0 */ void ftCo_800BEFD0(Fighter_GObj* gobj);
-/* 0BF034 */ void ftCo_800BF034(Fighter_GObj* gobj);
-/* 0BF108 */ void ftCo_800BF108(Fighter_GObj* gobj);
-/* 0BF228 */ UNK_RET ftCo_800BF228(UNK_PARAMS);
 /* 0C6150 */ void ftCo_800C6150(Fighter_GObj* gobj);
 /* 0C7070 */ void ftCo_800C7070(Fighter_GObj* gobj);
 /* 0C70D0 */ void ftCo_800C70D0(Fighter_GObj* gobj);
