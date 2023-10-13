@@ -20,6 +20,7 @@
 
 #include "ft/ft_0877.h"
 #include "ft/ft_08A4.h"
+#include "ft/ft_0BEC.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftdemo.h"

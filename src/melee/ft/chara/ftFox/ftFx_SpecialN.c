@@ -189,7 +189,7 @@ void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    ftFoxAttributes* da;
+    ftFox_DatAttrs* da;
     Fighter* fp;
     f64 launchAngle;
     s32 ftKind;
@@ -247,7 +247,7 @@ inline void ftFox_SpecialN_SetCall(HSD_GObj* gobj)
 void ftFx_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
     HSD_GObj* blasterGObj;
 
     ftCommon_8007D7FC(fp);
@@ -289,7 +289,7 @@ void ftFx_SpecialAirN_Enter(
     HSD_GObj* gobj) // Fox & Falco's aerial Blaster Motion State handler
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
     HSD_GObj* blasterGObj;
 
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirNStart, 0, 0, 1, 0,
@@ -382,7 +382,7 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
     }
     {
         Vec3 sp2C;
-        ftFoxAttributes* da;
+        ftFox_DatAttrs* da;
         Fighter* fp;
         f64 launchAngle;
         FighterKind ftKind;
@@ -539,7 +539,7 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
     }
     {
         Vec3 sp2C;
-        ftFoxAttributes* da;
+        ftFox_DatAttrs* da;
         Fighter* fp;
 
         /// @todo Fake assignment.
@@ -601,7 +601,7 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
 void ftFx_SpecialAirNEnd_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    ftFoxAttributes* da = getFtSpecialAttrs(fp);
+    ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
 
     it_802ADDD0(fp->fv.fx.x222C_blasterGObj, fp->cmd_vars[1]);
     if ((u32) fp->cmd_vars[1] == 2U) {
@@ -761,7 +761,7 @@ void ftFx_SpecialAirNEnd_Coll(HSD_GObj* gobj)
 void ftFx_Throw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
-    ftFoxAttributes* da = fp->dat_attrs;
+    ftFox_DatAttrs* da = fp->dat_attrs;
     s32 ftKind = ftGetKind(fp);
 
     if ((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) {

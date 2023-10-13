@@ -64,4 +64,6 @@ typedef jmp_t jtbl_t[];
 #define ASM
 #endif
 
+#define LITERAL static ATTRIBUTE_USED
+
 #endif
