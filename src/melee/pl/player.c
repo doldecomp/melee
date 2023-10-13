@@ -3,6 +3,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ft_08A4.h"
 #include "ft/ftdata.h"
+#include "ft/ftdemo.h"
 #include "ft/ftlib.h"
 #include "ftKirby/ftKb_Init.h"
 #include "gm/gm_1601.h"
@@ -24,25 +25,6 @@ struct plAllocInfo {
     s32 internal_id;
     u8 slot;
     s8 unk8;
-    struct {
-        u8 b0 : 1;
-        u8 has_transformation : 1;
-        u8 b2 : 1;
-        u8 b3 : 1;
-        u8 b4 : 1;
-        u8 b5 : 1;
-        u8 b6 : 1;
-        u8 b7 : 1;
-    } bits;
-};
-
-/// @todo Probably the same struct as above, figure out how to make them work
-/// as
-///       one.
-struct plAllocInfo2 {
-    s32 internal_id;
-    u8 slot;
-    s32 unk8;
     struct {
         u8 b0 : 1;
         u8 has_transformation : 1;
@@ -631,7 +613,7 @@ void Player_SetPlayerAndEntityFacingDirection(s32 slot, f32 facing_dir)
         player->facing_direction = facing_dir;
 
         if (player->player_entity[player->transformed[i]]) {
-            ftCo_SetFacingDirection(
+            ftDemo_SetFacingDirection(
                 player->player_entity[player->transformed[i]], facing_dir);
         }
     }
@@ -2109,15 +2091,15 @@ void Player_80036DD8(void)
     pl_804D6470 = *sp8;
 }
 
-void Player_80036E20(s32 arg0, s32 arg1, s32 arg2)
+void Player_80036E20(s32 arg0, HSD_Archive* archive, s32 arg2)
 {
     struct Unk_Struct_w_Array* unkStruct =
         (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
-    ftCo_800BEB60(unkStruct->vec_arr[arg0].x, arg1, arg2);
+    ftDemo_SetArchiveData(unkStruct->vec_arr[arg0].x, archive, arg2);
     if ((unkStruct->vec_arr[arg0].y != -1) &&
         (unkStruct->vec_arr[arg0].z == 0))
     {
-        ftCo_800BEB60(unkStruct->vec_arr[arg0].y, arg1, arg2);
+        ftDemo_SetArchiveData(unkStruct->vec_arr[arg0].y, archive, arg2);
     }
 }
 
@@ -2159,14 +2141,14 @@ void Player_80036F34(s32 slot, s32 arg1)
     some_struct.bits.b0 = 0;
 
     player->slot_type = 2;
-    player->player_entity[0] = ftCo_800BE7E0(&some_struct);
+    player->player_entity[0] = ftDemo_CreateFighter(&some_struct);
     if ((ftMapping_list[player->player_character].extra_internal_id != -1) &&
         (ftMapping_list[player->player_character].has_transformation == 0))
     {
         some_struct.internal_id =
             ftMapping_list[player->player_character].extra_internal_id;
         some_struct.bits.has_transformation = 1;
-        player->player_entity[1] = ftCo_800BE7E0(&some_struct);
+        player->player_entity[1] = ftDemo_CreateFighter(&some_struct);
     }
 }
 
@@ -2191,13 +2173,13 @@ void Player_80037054(s32 slot, s32 arg1)
     some_struct.bits.b0 = 1;
 
     player->slot_type = 2;
-    player->player_entity[0] = ftCo_800BE7E0(&some_struct);
+    player->player_entity[0] = ftDemo_CreateFighter(&some_struct);
     if ((ftMapping_list[player->player_character].extra_internal_id != -1) &&
         (ftMapping_list[player->player_character].has_transformation == 0))
     {
         some_struct.internal_id =
             ftMapping_list[player->player_character].extra_internal_id;
         some_struct.bits.has_transformation = 1;
-        player->player_entity[1] = ftCo_800BE7E0(&some_struct);
+        player->player_entity[1] = ftDemo_CreateFighter(&some_struct);
     }
 }

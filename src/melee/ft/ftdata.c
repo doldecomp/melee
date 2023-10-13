@@ -112,14 +112,6 @@
 
 #include <dolphin/mtx/types.h>
 
-typedef struct ftData_UnkCountStruct {
-    /// Always zero; could be #NULL or the high part of a 64-bit integer.
-    int zero;
-
-    /// A count or msid.
-    int count;
-} ftData_UnkCountStruct;
-
 ftData_UnkCountStruct ftData_Table_Unk0[FTKIND_MAX] = {
     { 0, 303 }, { 0, 327 }, { 0, 318 }, { 0, 337 }, { 0, 479 }, { 0, 316 },
     { 0, 314 }, { 0, 317 }, { 0, 326 }, { 0, 318 }, { 0, 321 }, { 0, 321 },

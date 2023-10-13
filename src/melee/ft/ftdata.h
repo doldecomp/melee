@@ -13,24 +13,30 @@ typedef struct ftData_UnkModelStruct {
 
 extern Fighter_UnkMtxEvent ftData_UnkMtxFunc0[FTKIND_MAX];
 extern ftData_UnkModelStruct ftData_UnkIntBoolFunc0;
+extern Fighter_UnkPtrEvent ftData_UnkDemoCallbacks0[FTKIND_MAX];
 
-void ftData_800855C8(enum_t id, int slot);
-void ftData_8008572C(s32);
-void ftData_8008578C(enum_t id, int slot);
-void ftData_800857E0(bool);
-void ftData_80085820(FighterKind, s32 costume_id);
-void ftData_800859A8(Fighter*);
-void ftData_80085A14(bool);
-void ftData_80085B10(Fighter*);
-void ftData_80085CD8(Fighter*, Fighter*, s32 msid);
-u32 ftData_80085E50(Fighter*, u32);
-void ftData_80085560(s32, bool);
+/* 0855C8 */ void ftData_800855C8(enum_t id, int slot);
+/* 08572C */ void ftData_8008572C(s32);
+/* 08578C */ void ftData_8008578C(enum_t id, int slot);
+/* 0857E0 */ void ftData_800857E0(bool);
+/* 085820 */ void ftData_80085820(FighterKind, int costume_id);
+/* 0858E4 */ void ftData_800858E4(FighterKind, int costume_id);
+/* 0859A8 */ void ftData_800859A8(Fighter*);
+/* 085A14 */ void ftData_80085A14(bool);
+/* 085B10 */ void ftData_80085B10(Fighter*);
+/* 085B98 */ void ftData_80085B98(Fighter*, int, int);
+/* 085CD8 */ void ftData_80085CD8(Fighter*, Fighter*, enum_t msid);
+/* 085E50 */ u32 ftData_80085E50(Fighter*, u32);
 
 /* 085FD4 */ struct {
     /* +0 */ UNK_T x0;
     /* +4 */ UNK_T x4;
     /* +8 */ UNK_T x8;
 }* ftData_80085FD4(Fighter* fp, FtMotionId msid);
+
+/* 086060 */ UNK_RET ftData_80086060(UNK_PARAMS);
+
+void ftData_80085560(s32, bool);
 
 /// One load  callback for every character.
 extern HSD_GObjEvent ftData_OnLoad[FTKIND_MAX];
@@ -51,5 +57,8 @@ extern HSD_GObjEvent ftData_SpecialAirHi[FTKIND_MAX];
 extern HSD_GObjEvent ftData_SpecialAirLw[FTKIND_MAX];
 extern HSD_GObjEvent ftData_SpecialAirS[FTKIND_MAX];
 extern HSD_GObjEvent ftData_SpecialAirN[FTKIND_MAX];
+extern ftData_UnkCountStruct ftData_UnkIntPairs[FTKIND_MAX];
+extern Fighter_DemoStrings* ftData_803C2468[FTKIND_MAX];
+extern Fighter_MotionFileStringGetter ftData_803C24EC[FTKIND_MAX];
 
 #endif

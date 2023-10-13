@@ -1,5 +1,4 @@
 #include <platform.h>
-#include "ftCommon/forward.h"
 
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackAir.h"
@@ -23,6 +22,7 @@
 #include "ft/ft_08A4.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcliffcommon.h"
+#include "ft/ftdemo.h"
 #include "ft/types.h"
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftKirby/ftKb_Init.h"
@@ -3784,7 +3784,7 @@ MotionState ftData_MotionStateList[ftCo_MS_Count] = {
     },
 };
 
-MotionState ftData_803C52A0[] = {
+MotionState ftData_803C52A0[14] = {
     {
         ftCo_SM_DeadUpFallHitCamera,
         Ft_MF_None,

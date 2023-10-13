@@ -60,9 +60,6 @@ struct _m2c_stack_ftCo_80091854 {
 }; /* size = 0x40 */
 #endif
 
-/* static */ extern Vec3 const ftCo_803B74B0; // = { 0 }
-/* static */ extern Vec3 const ftCo_803B74BC; // = { 0 }
-
 /* 090984 */ void ftCo_80090984(ftCo_GObj* gobj);
 /* 0909D0 */ /* static */ void ftCo_800909D0(ftCo_Fighter* fp);
 /* 090AC0 */ /* static */ void ftCo_80090AC0(ftCo_Fighter* fp);

@@ -25,6 +25,7 @@
 #include "db/db_2253.h"
 #include "ef/efasync.h"
 #include "ft/ft_08A4.h"
+#include "ft/ft_0C88.h"
 #include "ft/ftdata.h"
 #include "ftCommon/ftCo_09CB.h"
 #include "ftCommon/ftCo_09F4.h"

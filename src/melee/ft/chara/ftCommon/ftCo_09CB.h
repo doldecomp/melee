@@ -7,7 +7,7 @@
 #include <placeholder.h>
 
 /* 09CB40 */ /* static */ UNK_RET ftCo_8009CB40(UNK_PARAMS);
-/* 09CF84 */ /* static */ void ftCo_8009CF84(ftCo_Fighter* fp);
+/* 09CF84 */ void ftCo_8009CF84(ftCo_Fighter* fp);
 /* 09D074 */ /* static */ UNK_RET ftCo_8009D074(UNK_PARAMS);
 /* 09D18C */ /* static */ UNK_RET ftCo_8009D18C(UNK_PARAMS);
 /* 09D2A4 */ /* static */ UNK_RET ftCo_8009D2A4(UNK_PARAMS);

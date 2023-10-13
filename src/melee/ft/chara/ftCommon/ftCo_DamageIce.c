@@ -30,6 +30,9 @@
 #include <placeholder.h>
 #include <baselib/debug.h>
 
+static Vec3 const ftCo_803B74B0 = { 0 };
+static Vec3 const ftCo_803B74BC = { 0 };
+
 #ifdef MWERKS_GEKKO
 /* static */ extern char* ftCo_804D3AE8; // = "jobj.h";
 /* static */ extern char* ftCo_804D3AF0; // = "jobj";

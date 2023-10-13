@@ -787,7 +787,9 @@ static inline void inlineB0(ftCo_GObj* gobj)
     if (fp->x1978 != NULL) {
         pl_8003E17C(fp->player_id, fp->x221F_b4, fp->x1978);
     } else if (fp->item_gobj != NULL) {
-        INVOKE(ftData_OnItemPickupExt[fp->kind], gobj, true);
+        if (ftData_OnItemPickupExt[fp->kind] != NULL) {
+            ftData_OnItemPickupExt[fp->kind](gobj, true);
+        }
         pl_8003E17C(fp->player_id, fp->x221F_b4, fp->item_gobj);
     }
 }

@@ -19,7 +19,7 @@ static usize_t const aux_states_count = 2;
 /* 0E0BE4 */ void ftMr_Init_LoadSpecialAttrs(HSD_GObj* gobj);
 /* 0E0C24 */ void ftMr_Init_OnKnockbackEnter(HSD_GObj* gobj);
 /* 0E0C68 */ void ftMr_Init_OnKnockbackExit(HSD_GObj* gobj);
-/* 0E0CAC */ void ftMr_Init_UnkDemoCallbacks0(s32, s32*, s32*);
+/* 0E0CAC */ void ftMr_Init_UnkDemoCallbacks0(int, int*, int*);
 /* 0E0CE0 */ char* ftMr_Init_GetMotionFileString(enum_t);
 /* 3C7120 */ extern MotionState ftMr_Init_MotionStateTable[ftMr_MS_SelfCount];
 /* 3C7260 */ extern MotionState ftMr_Init_UnkMotionStates0[aux_states_count];
