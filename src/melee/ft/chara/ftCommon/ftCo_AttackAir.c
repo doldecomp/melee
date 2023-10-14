@@ -9,7 +9,10 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0C31.h"
+#include "ft/ft_0C88.h"
+#include "ft/ft_0CDD.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ftGameWatch/ftGw_AttackAir.h"

@@ -1,15 +1,16 @@
-
 #include <platform.h>
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
 #include "ftCo_AttackHi4.h"
 
+#include "ftCo_ItemThrow.h"
+#include "ftCo_Wait.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
-#include "ftCommon/ftCo_ItemThrow.h"
+#include "ft/ft_0D14.h"
 #include "ftNess/ftNs_AttackHi4.h"
 
 /* 08CA38 */ void doEnter(ftCo_GObj* gobj);

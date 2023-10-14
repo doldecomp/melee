@@ -8,7 +8,7 @@
 #include "ftCo_CaptureWaitKoopa.h"
 
 #include "ft/fighter.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 

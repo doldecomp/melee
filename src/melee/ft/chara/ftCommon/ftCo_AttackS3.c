@@ -8,13 +8,15 @@
 #include "ftCo_ItemGet.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Shouldered.h"
+#include "ftCo_Wait.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0CDD.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
+#include "ft/ftswing.h"
 
 #include <placeholder.h>
 

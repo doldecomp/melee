@@ -8,6 +8,7 @@
 #include "ft/ft_0BEC.h"
 #include "ft/ft_0BEF.h"
 #include "ft/ft_0BF0.h"
+#include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
 #include "ft/ftcoll.h"
 #include "ft/ftdata.h"

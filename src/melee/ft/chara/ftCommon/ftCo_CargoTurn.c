@@ -10,7 +10,7 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0C88.h"
 
 bool ftCo_8009B818(ftCo_GObj* gobj)
 {

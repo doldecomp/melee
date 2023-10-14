@@ -7,8 +7,8 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
 #include "ft/ftanim.h"
+#include "ftCommon/ftCo_Wait.h"
 
 #include <baselib/gobj.h>
 

@@ -4,13 +4,15 @@
 #include "ftCo_CargoKneebend.h"
 
 #include "ftCo_09C4.h"
+#include "ftCo_CargoJump.h"
 #include "ftCo_CargoThrow.h"
+#include "ftCo_CargoWait.h"
 #include "ftCo_Shouldered.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ftDonkey/types.h"
 

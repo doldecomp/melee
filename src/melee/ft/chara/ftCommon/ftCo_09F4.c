@@ -2,7 +2,7 @@
 
 #include "ftCo_09F4.h"
 
-#include "ft/ft_08A4.h"
+#include "ft/ftdevice.h"
 #include "gr/ground.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"

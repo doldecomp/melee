@@ -7,11 +7,13 @@
 #include "ftCo_08A6.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Shouldered.h"
+#include "ftCo_Wait.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0D14.h"
+#include "ft/ftswing.h"
 #include "ftKirby/ftKb_Init.h"
 
 #include <placeholder.h>
@@ -83,7 +85,7 @@ void ftCo_AttackDash_SetMv0(HSD_GObj* gobj)
 void ftCo_AttackDash_IASA(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (!ftCo_800D8AE0() && fp->allow_interrupt) {
+    if (!ftCo_800D8AE0(gobj) && fp->allow_interrupt) {
         ftCo_Wait_IASA(gobj);
     }
 }

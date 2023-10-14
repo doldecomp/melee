@@ -10,7 +10,9 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0C08.h"
+#include "ft/ft_0C31.h"
+#include "ft/ft_0C88.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 

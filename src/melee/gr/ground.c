@@ -13,7 +13,7 @@
 
 #include "cm/camera.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gm/gm_1601.h"
 #include "it/it_266F.h"

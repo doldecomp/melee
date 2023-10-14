@@ -1,7 +1,7 @@
 #include "ft/ft_0819.h"
 
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0C31.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
 #include "lb/lb_00F9.h"

@@ -7,7 +7,6 @@
 
 #include "cm/camera.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
 #include "ft/ftlib.h"
 #include "ftPopo/ftPp_1211.h"
 #include "gm/gm_1601.h"

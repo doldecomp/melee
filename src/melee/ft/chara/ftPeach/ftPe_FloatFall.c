@@ -6,7 +6,7 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0C88.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 
 #include <baselib/gobj.h>
@@ -42,7 +42,7 @@ void ftPe_FloatFall_IASA(HSD_GObj* gobj) {}
 
 void ftPe_FloatFall_Phys(HSD_GObj* gobj)
 {
-    ftCo_800CC6C8();
+    ftCo_800CC6C8(gobj);
 }
 
 void ftPe_FloatFall_Coll(HSD_GObj* gobj)

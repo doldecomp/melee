@@ -5,6 +5,8 @@
 #include "ftCommon/forward.h"
 #include "ftKirby/forward.h"
 
+#include <placeholder.h>
+
 /* 0BD9E0 */ FighterKind ftCo_800BD9E0(ftKb_GObj* gobj,
                                        Fighter_GObj* victim_gobj);
 /* 0BDA50 */ void ftCo_800BDA50(ftCo_GObj* gobj);
@@ -20,6 +22,10 @@
 /* 0BE260 */ void ftCo_ThrownCopyStar_Phys(ftCo_GObj* gobj);
 /* 0BE3A4 */ void ftCo_ThrownCopyStar_Coll(ftCo_GObj* gobj);
 /* 0BE494 */ void ftCo_800BE494(ftCo_GObj* gobj);
+/* 0BE618 */ void ftCo_ThrownKirby_Anim(ftCo_GObj* gobj);
+/* 0BE61C */ void ftCo_ThrownKirby_IASA(ftCo_GObj* gobj);
+/* 0BE620 */ void ftCo_ThrownKirby_Phys(ftCo_GObj* gobj);
+/* 0BE6A8 */ void ftCo_ThrownKirby_Coll(ftCo_GObj* gobj);
 /* 0BE6AC */ void ftCo_800BE6AC(ftCo_GObj* gobj);
 /* 0BE7C0 */ void ftCo_800BE7C0(ftCo_GObj* gobj);
 

@@ -58,7 +58,6 @@ struct _m2c_stack_ftCo_8008E5A4 {
 /* 090324 */ void ftCo_DamageFlyRoll_IASA(ftCo_GObj* gobj);
 /* 09035C */ void ftCo_DamageFlyRoll_Phys(ftCo_GObj* gobj);
 /* 0904C0 */ void ftCo_DamageFlyRoll_Coll(ftCo_GObj* gobj);
-/* 0DC284 */ void ftCo_800DC284(ftCo_GObj* gobj);
 /* 3C5520 */ extern int ftCo_803C5520[2][12];
 
 #endif

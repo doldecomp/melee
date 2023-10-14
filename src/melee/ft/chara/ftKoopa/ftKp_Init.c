@@ -5,7 +5,8 @@
 #include "ftKoopa/ftKp_Init.h"
 
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0C88.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"

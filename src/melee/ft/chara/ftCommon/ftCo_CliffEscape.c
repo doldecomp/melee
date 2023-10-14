@@ -6,7 +6,7 @@
 #include "ftCo_CliffClimb.h"
 
 #include "ft/fighter.h"
-#include "ft/ft_08A4.h"
+#include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 
 /// @todo Shared code with #ftCo_8009AEA4.
