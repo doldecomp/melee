@@ -352,6 +352,21 @@ extern const f64 HSD_CObj_804DE480;
 extern const float HSD_CObj_804DE478;
 extern const float HSD_CObj_804DE47C;
 
+static bool setupOffscreenCamera(HSD_CObj* cobj)
+{
+    Mtx44 mtx;
+
+    GXSetViewport(cobj->viewport.left, cobj->viewport.top,
+                  cobj->viewport.right - cobj->viewport.left,
+                  cobj->viewport.bottom - cobj->viewport.top,
+                  HSD_CObj_804DE478, HSD_CObj_804DE47C);
+    GXSetScissor(cobj->scissor.left, cobj->scissor.top,
+                 cobj->scissor.right - cobj->scissor.left,
+                 cobj->scissor.bottom - cobj->scissor.top);
+    GXSetProjection(mtx, makeProjectionMtx(cobj, mtx));
+    return true;
+}
+
 // Matching, but references extern float conversion value
 #ifdef MUST_MATCH
 #pragma push
@@ -969,10 +984,9 @@ static void setNewProjection(HSD_CObj* cobj, Mtx44 mtx)
     GXSetProjection(mtx, makeProjectionMtx(cobj, mtx));
 }
 
-bool HSD_CObjSetCurrent(HSD_CObj* cobj, cobj_UnkCallback1 arg1)
+bool HSD_CObjSetCurrent(HSD_CObj* cobj)
 {
-    Mtx44 mtx;
-    int render_pass;
+    HSD_RenderPass render_pass;
     bool result;
 
     if (cobj == NULL) {
@@ -982,24 +996,16 @@ bool HSD_CObjSetCurrent(HSD_CObj* cobj, cobj_UnkCallback1 arg1)
     _HSD_ZListClear();
     current = cobj;
     switch (render_pass) {
-    case 3:
-        GXSetViewport(cobj->viewport.left, cobj->viewport.top,
-                      cobj->viewport.right - cobj->viewport.left,
-                      cobj->viewport.bottom - cobj->viewport.top,
-                      HSD_CObj_804DE478, HSD_CObj_804DE47C);
-        GXSetScissor(cobj->scissor.left, cobj->scissor.top,
-                     cobj->scissor.right - cobj->scissor.left,
-                     cobj->scissor.bottom - cobj->scissor.top);
-        setNewProjection(cobj, mtx);
-        result = true;
+    case HSD_RP_OFFSCREEN:
+        result = setupOffscreenCamera(cobj);
         break;
-    case 0:
+    case HSD_RP_SCREEN:
         result = setupNormalCamera(cobj);
         break;
-    case 1:
+    case HSD_RP_TOPHALF:
         result = setupTopHalfCamera(cobj);
         break;
-    case 2:
+    case HSD_RP_BOTTOMHALF:
         result = setupBottomHalfCamera(cobj);
         break;
     default:

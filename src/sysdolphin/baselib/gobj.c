@@ -194,9 +194,9 @@ void HSD_GObj_803910B4(HSD_GObj* gobj)
     HSD_FogSet(gobj->hsd_obj);
 }
 
-void HSD_GObj_803910D8(HSD_GObj* gobj, Event arg1)
+void HSD_GObj_803910D8(HSD_GObj* gobj)
 {
-    if (HSD_CObjSetCurrent(gobj->hsd_obj, arg1)) {
+    if (HSD_CObjSetCurrent(gobj->hsd_obj)) {
         HSD_GObj_80390ED0(gobj, 7);
         HSD_CObjEndCurrent();
     }
