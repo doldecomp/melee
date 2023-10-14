@@ -309,7 +309,7 @@ void grIzumi_801CBE64(HSD_GObj* gobj)
         tobj->src = 0;
         tobj->wrap_s = 0;
         tobj->wrap_t = 0;
-        tobj->flags = tobj->flags & ~0x1FF | 0x103;
+        tobj->flags = (tobj->flags & ~0x1FF) | 0x103;
     } else {
         // clang-format off
 // this breaks the line numbers in compile errors >:(
@@ -337,9 +337,17 @@ void grIzumi_801CBE64(HSD_GObj* gobj)
         gp->gv.izumi.xC8;
     jobj = Ground_801C3FA4(gobj, 4);
     { // this looks like inlines, but there's a lot of small differences
-        int pad;
+      /// @todo Unused stack.
+#ifdef MUST_MATCH
+        u8 _[4] = { 0 };
+#endif
         Vec3 x38;
-        int space[2];
+        {
+            /// @todo Unused stack.
+#ifdef MUST_MATCH
+            u8 _[8] = { 0 };
+#endif
+        }
         lb_8000B1CC(jobj, NULL, &x38);
         {
             HSD_GObj* plat =
@@ -639,7 +647,11 @@ void grIzumi_801CCB18(HSD_GObj* gobj)
 
 void grIzumi_801CCB90(HSD_GObj* gobj, int renderpass)
 {
-    int stack[2]; // i guess PointSize is an inline? seems odd
+    /// @remarks i guess PointSize is an inline? seems odd
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8] = { 0 };
+#endif
     HSD_StateSetPointSize(18, 0);
     grDisplay_801C5DB0(gobj, renderpass);
 }
@@ -749,7 +761,10 @@ void grIzumi_801CCEA0(HSD_GObj* gobj, int renderpass)
 {
     Mtx mtx;
     Vec3 vec;
-    int stack[2]; // fake
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8] = { 0 };
+#endif
     HSD_CObj* src;
     HSD_CObj* dst;
     IzumiReflection* refl = (IzumiReflection*) HSD_GObjGetUserData(gobj);

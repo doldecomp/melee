@@ -9,6 +9,7 @@
 #include "lb/lbvector.h"
 
 #include <dolphin/mtx/types.h>
+#include <MetroTRK/intrinsics.h>
 
 void ftMh_PaperCrush_Coll(HSD_GObj* gobj) {}
 
