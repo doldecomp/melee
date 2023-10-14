@@ -4,7 +4,7 @@
 #include "ft_0877.h"
 #include "ftcoll.h"
 
-#include "ft/ft_08A4.h"
+#include "ft/ft_0C31.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 

@@ -4,7 +4,6 @@
 #include <platform.h>
 #include "ftCommon/forward.h"
 
-/* 0BCC20 */ void ftCo_800BCC20(ftCo_GObj* gobj);
 /* 099150 */ void ftCo_CaptureWaitKoopa_Anim(ftCo_GObj* gobj);
 /* 0991C8 */ void ftCo_CaptureWaitKoopa_IASA(ftCo_GObj* gobj);
 /* 0991CC */ void ftCo_CaptureWaitKoopa_Phys(ftCo_GObj* gobj);
@@ -13,5 +12,7 @@
 /* 0992A8 */ void ftCo_CaptureWaitKoopaAir_IASA(ftCo_GObj* gobj);
 /* 0992AC */ void ftCo_CaptureWaitKoopaAir_Phys(ftCo_GObj* gobj);
 /* 0992B0 */ void ftCo_CaptureWaitKoopaAir_Coll(ftCo_GObj* gobj);
+/* 0BCC20 */ void ftCo_800BCC20(ftCo_GObj* gobj);
+/* 0BCD00 */ void ftCo_800BCD00(ftCo_GObj* gobj);
 
 #endif

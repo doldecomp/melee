@@ -12,7 +12,11 @@
 #include "inlines.h"
 
 #include "ef/efsync.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0C08.h"
+#include "ft/ft_0D14.h"
+#include "ft/ftchangeparam.h"
+#include "ft/ftcolanim.h"
+#include "ft/ftdevice.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "gm/gm_1601.h"
 #include "gr/stage.h"

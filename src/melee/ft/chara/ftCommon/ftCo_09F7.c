@@ -6,7 +6,6 @@
 
 #include "ef/efasync.h"
 #include "ft/fighter.h"
-#include "ft/ft_08A4.h"
 #include "ft/ftparts.h"
 
 #include <math.h>

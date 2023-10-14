@@ -12,7 +12,13 @@
 #include "ftparts.h"
 
 #include "ef/eflib.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0C31.h"
+#include "ft/ft_0C88.h"
+#include "ft/ft_0D14.h"
+#include "ft/ftchangeparam.h"
+#include "ft/ftcolanim.h"
+#include "ft/ftmaterial.h"
+#include "ft/ftmetal.h"
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_ItemGet.h"
@@ -1947,7 +1953,7 @@ void ftCommon_8008021C(HSD_GObj* gobj)
         fp->dmg.x18B8 += shift.x;
         fp->dmg.x18BC += shift.y;
     }
-    if (ftCo_800DEEE8(fp, &shift)) {
+    if (ftCo_800DEEE8(fp, &shift) != NULL) {
         fp->dmg.x18B8 += shift.x;
         fp->dmg.x18BC += shift.y;
     }

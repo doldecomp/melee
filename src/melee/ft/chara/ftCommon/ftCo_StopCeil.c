@@ -6,7 +6,7 @@
 #include "ftCo_FallSpecial.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0C88.h"
 #include "ft/inlines.h"
 #include "ftKirby/ftKb_Init.h"
 

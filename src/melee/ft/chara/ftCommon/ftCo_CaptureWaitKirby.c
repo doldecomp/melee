@@ -2,16 +2,16 @@
 
 #include "ftCo_CaptureWaitKirby.h"
 
-#include "ft/ft_08A4.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ftKirby/ftKb_Init.h"
 
-/* static */ float const ftCo_804D8BB8 = 0;
-/* static */ float const ftCo_804D8BBC = 1;
-/* static */ double const ftCo_804D8BC0 = U32_TO_F32;
-/* static */ double const ftCo_804D8BC8 = S32_TO_F32;
+LITERAL float const ftCo_804D8BB8 = 0;
+LITERAL float const ftCo_804D8BBC = 1;
+LITERAL double const ftCo_804D8BC0 = U32_TO_F32;
+LITERAL double const ftCo_804D8BC8 = S32_TO_F32;
 
 ASM void ftCo_800BD620(Fighter_GObj* gobj)
 #if !defined(MUST_MATCH) || defined(WIP)

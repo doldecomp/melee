@@ -9,7 +9,6 @@
 #include "ftCo_CargoWait.h"
 #include "ftCo_Shouldered.h"
 
-#include "ft/ft_08A4.h"
 #include "ft/ftwalkcommon.h"
 
 /* 09B6C8 */ static void ftCo_8009B6C8(ftCo_GObj* gobj, float anim_start);

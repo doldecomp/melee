@@ -6,7 +6,6 @@
 #include "ftCo_Shouldered.h"
 
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
 #include "ft/ftdata.h"
 #include "ft/ftwaitanim.h"
 #include "ftCommon/ftCo_09CB.h"

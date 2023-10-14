@@ -1,5 +1,5 @@
-#ifndef MELEE_FT_CHARA_FTCOMMON_FTCO_SHIELDBREAKSTAND_H
-#define MELEE_FT_CHARA_FTCOMMON_FTCO_SHIELDBREAKSTAND_H
+#ifndef GALE01_098F3C
+#define GALE01_098F3C
 
 #include <platform.h>
 #include "ftCommon/forward.h"

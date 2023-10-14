@@ -16,8 +16,9 @@
 #include "types.h"
 
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
 #include "ft/ftcamera.h"
+#include "ft/ftcolanim.h"
+#include "ft/ftmaterial.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"

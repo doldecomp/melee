@@ -8,6 +8,7 @@
 #include "ftCo_AttackHi3.h"
 #include "ftCo_AttackHi4.h"
 #include "ftCo_AttackLw3.h"
+#include "ftCo_AttackLw4.h"
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
 #include "ftCo_Escape.h"
@@ -17,7 +18,8 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0C88.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcoll.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Guard.h"
@@ -29,7 +31,7 @@ void ftCo_Wait_Anim(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2224_b2) {
-        ftCo_800C8B74();
+        ftCo_800C8B74(gobj);
     } else {
         ftCo_8008A7A8(gobj, fp->ft_data->x24);
     }

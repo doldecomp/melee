@@ -4,7 +4,7 @@
 #include "ftMh_CaptureDamageMasterHand.h"
 
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 
 void ftMh_CaptureMasterHand_Anim(HSD_GObj* gobj) {}

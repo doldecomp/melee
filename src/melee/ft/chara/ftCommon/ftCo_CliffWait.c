@@ -8,7 +8,7 @@
 #include "ftCo_DamageFall.h"
 
 #include "ft/fighter.h"
-#include "ft/ft_08A4.h"
+#include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 

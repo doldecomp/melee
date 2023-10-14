@@ -7,7 +7,7 @@
 #include "ftCo_Shouldered.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 
 void ftCo_8009BD4C(ftCo_GObj* gobj)

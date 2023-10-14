@@ -6,9 +6,10 @@
 
 #include "ftCo_09CB.h"
 #include "ftCo_Damage.h"
+#include "ftCo_Lift.h"
 
 #include "ft/fighter.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"

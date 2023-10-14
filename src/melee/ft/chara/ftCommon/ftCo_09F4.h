@@ -11,6 +11,7 @@
 /* 09F54C */ /* static */ UNK_RET ftCo_8009F54C(UNK_PARAMS);
 /* 09F578 */ void ftCo_8009F578(ftCo_Fighter* fp);
 /* 09F5AC */ /* static */ UNK_RET ftCo_8009F5AC(UNK_PARAMS);
+/* 09F75C */ UNK_RET ftCo_8009F75C(UNK_PARAMS);
 /* 09F7F8 */ UNK_RET ftCo_8009F7F8(UNK_PARAMS);
 
 #endif

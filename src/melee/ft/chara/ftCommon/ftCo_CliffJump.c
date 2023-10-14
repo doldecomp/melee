@@ -4,11 +4,13 @@
 #include "ftCo_CliffJump.h"
 
 #include "ftCo_09C4.h"
+#include "ftCo_CliffClimb.h"
 #include "ftCo_FallSpecial.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0C88.h"
+#include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 
 /* 09B1B8 */ static void ftCo_8009B1B8(ftCo_GObj* gobj);

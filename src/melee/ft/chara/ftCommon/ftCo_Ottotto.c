@@ -17,7 +17,8 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0C88.h"
+#include "ft/ft_0D14.h"
 #include "mp/mplib.h"
 
 /* 09A410 */ static void ftCo_8009A410(ftCo_GObj* gobj);

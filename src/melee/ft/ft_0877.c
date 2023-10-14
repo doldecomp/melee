@@ -4,7 +4,6 @@
 #include "ftcommon.h"
 #include "inlines.h"
 
-#include "ft/ft_08A4.h"
 #include "lb/lbaudio_ax.h"
 
 #define TEST(expr) (expr) ? true : false
