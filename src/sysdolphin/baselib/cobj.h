@@ -117,7 +117,7 @@ HSD_WObj* HSD_CObjGetEyePositionWObj(HSD_CObj* cobj);
 HSD_WObj* HSD_CObjGetInterestWObj(HSD_CObj* cobj);
 void HSD_CObjSetInterest(HSD_CObj* cobj, Vec3*);
 void HSD_CObjSetEyePosition(HSD_CObj* cobj, Vec3*);
-bool HSD_CObjSetCurrent(HSD_CObj*, cobj_UnkCallback1);
+bool HSD_CObjSetCurrent(HSD_CObj*);
 void HSD_CObjEndCurrent(void);
 void HSD_CObjSetViewportfx4(HSD_CObj*, f32, f32, f32, f32);
 void HSD_CObjGetEyePosition(HSD_CObj* cobj, Vec3* cam_pos);
