@@ -5,6 +5,7 @@
 
 #include "ftCo_FallSpecial.h"
 #include "ftCo_ItemThrow.h"
+#include "math.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

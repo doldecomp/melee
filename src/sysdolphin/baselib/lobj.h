@@ -178,4 +178,13 @@ HSD_LObjInfo* HSD_LObjGetDefaultClass(void);
 HSD_LObj* HSD_LObjAlloc(void);
 HSD_LObj* HSD_LObjLoadDesc(HSD_LightDesc* ldesc);
 
+static inline HSD_LObj* HSD_LObjGetNext(HSD_LObj* lobj)
+{
+    if (lobj == NULL) {
+        return NULL;
+    } else {
+        return lobj->next;
+    }
+}
+
 #endif

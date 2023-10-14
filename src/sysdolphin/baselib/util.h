@@ -1,7 +1,6 @@
 #ifndef _UTIL_H_
 #define _UTIL_H_
 
-#include <math.h>
 #include <baselib/objalloc.h>
 
 // functions

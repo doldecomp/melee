@@ -18,7 +18,6 @@ struct HSD_WObjDesc {
     char* class_name;
     Vec3 pos;
     HSD_RObjDesc* robjdesc;
-    HSD_WObjDesc* next;
 };
 
 struct HSD_WObjInfo {

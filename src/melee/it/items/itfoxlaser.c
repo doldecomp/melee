@@ -1,5 +1,7 @@
 #include "itfoxlaser.h"
 
+#include "math.h"
+
 #include <melee/db/db_2253.h>
 #include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>

@@ -9,6 +9,7 @@
 #include "groldkongo.h"
 #include "grstadium.h"
 #include "grzebes.h"
+#include "math.h"
 #include "stage.h"
 
 #include "cm/camera.h"

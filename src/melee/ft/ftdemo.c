@@ -35,7 +35,7 @@ ASM Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
     Fighter_GObj* gobj = GObj_Create(4, 8, 0);
-    GObj_SetupGXLink(gobj, ftDrawCommmon_80080E18, 5, 0);
+    GObj_SetupGXLink(gobj, ftDrawCommon_80080E18, 5, 0);
     {
         Fighter* fp = HSD_ObjAlloc(&fighter_alloc_data);
         fp->x2D8_specialAttributes2 = HSD_ObjAlloc(&Fighter_80458FFC);
@@ -124,9 +124,9 @@ ASM Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
 /* 800BE800 000BB3E0  3B A3 00 00 */	addi r29, r3, 0
 /* 800BE804 000BB3E4  38 60 00 04 */	li r3, 4
 /* 800BE808 000BB3E8  48 2D 19 E9 */	bl GObj_Create
-/* 800BE80C 000BB3EC  3C 80 80 08 */	lis r4, ftDrawCommmon_80080E18@ha
+/* 800BE80C 000BB3EC  3C 80 80 08 */	lis r4, ftDrawCommon_80080E18@ha
 /* 800BE810 000BB3F0  3B E3 00 00 */	addi r31, r3, 0
-/* 800BE814 000BB3F4  38 84 0E 18 */	addi r4, r4, ftDrawCommmon_80080E18@l
+/* 800BE814 000BB3F4  38 84 0E 18 */	addi r4, r4, ftDrawCommon_80080E18@l
 /* 800BE818 000BB3F8  38 A0 00 05 */	li r5, 5
 /* 800BE81C 000BB3FC  38 C0 00 00 */	li r6, 0
 /* 800BE820 000BB400  48 2D 1E 7D */	bl GObj_SetupGXLink

@@ -18,6 +18,7 @@
 #include "un/un_2FC9.h"
 
 #include <common_structs.h>
+#include <math.h>
 #include <placeholder.h>
 
 void ftCo_800968C8(ftCo_GObj* gobj)

@@ -12,6 +12,7 @@
 #include "lb/lbvector.h"
 
 #include <dolphin/mtx/types.h>
+#include <MetroTRK/intrinsics.h>
 
 void ftMh_BackDisappear_Anim(HSD_GObj* gobj)
 {

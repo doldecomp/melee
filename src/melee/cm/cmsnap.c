@@ -3,11 +3,12 @@
 #include "lb/lb_00F9.h"
 
 #include <baselib/gobjgxlink.h>
+#include <baselib/tobj.h>
 
 typedef struct {
     int unk0;
-    int unk1;
-    int _[6];
+    HSD_ImageDesc unk1;
+    int unk2;
 } _cmsnap_data;
 static _cmsnap_data cmsnap_data;
 
@@ -19,13 +20,13 @@ void cmSnap_800315C8(void)
     cmsnap_data.unk0 = 1;
 }
 
-s32 cmSnap_80031618(void)
+void* cmSnap_80031618(void)
 {
     if (cmsnap_data.unk0 != 5) {
         return 0;
     }
     cmsnap_data.unk0 = 0;
-    return cmsnap_data.unk1;
+    return cmsnap_data.unk1.img_ptr;
 }
 
 void cmSnap_80031640(HSD_GObj* arg0, int code)
@@ -48,7 +49,7 @@ void cmSnap_80031640(HSD_GObj* arg0, int code)
 void cmSnap_800316B4(void)
 {
     cmsnap_data.unk0 = 0;
-    cmsnap_data.unk1 = 0;
+    cmsnap_data.unk1.img_ptr = 0;
     GObj_SetupGXLinkMax(GObj_Create(0x12, 0x12, 0), cmSnap_80031640, 4);
     lb_800121FC(&cmsnap_data.unk1, 0x280, 0x1E0, 4, 0x7D6);
 }

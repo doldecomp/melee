@@ -20,4 +20,6 @@ void _HSD_ZListSort(void);
 void _HSD_ZListDisp(void);
 void _HSD_ZListClear(void);
 
+void HSD_SetEraseColor(int, int, int, int);
+
 #endif

@@ -3,6 +3,7 @@
 #include "ftSs_Init.h"
 #include "ftSs_SpecialN.h"
 #include "inlines.h"
+#include "math.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"

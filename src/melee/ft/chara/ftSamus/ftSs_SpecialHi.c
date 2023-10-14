@@ -2,6 +2,7 @@
 
 #include "ftSs_Init.h"
 #include "inlines.h"
+#include "math.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"

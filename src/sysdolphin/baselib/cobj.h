@@ -61,12 +61,21 @@ struct HSD_CObj {
 };
 
 struct HSD_CObjDesc {
-    char* class_name;            // 0x00
-    u16 flags;                   // 0x04
-    u16 projection_type;         // 0x06
-    struct Viewport viewport;    // 0x08
-    u32 scissor_lr;              // 0x10
-    u32 scissor_tb;              // 0x14
+    char* class_name;    // 0x00
+    u16 flags;           // 0x04
+    u16 projection_type; // 0x06
+    struct {
+        u16 left;   // 0x08
+        u16 right;  // 0x0C
+        u16 top;    // 0x10
+        u16 bottom; // 0x14
+    } viewport;
+    struct {
+        u16 left;   // 0x10
+        u16 right;  // 0x12
+        u16 top;    // 0x14
+        u16 bottom; // 0x16
+    } scissor;
     HSD_WObjDesc* eye_desc;      // 0x18
     HSD_WObjDesc* interest_desc; // 0x1C
     f32 roll;                    // 0x20
@@ -79,19 +88,21 @@ struct HSD_CObjDesc {
             f32 aspect;
         } perspective;
 
-        struct {
-            f32 top;
-            f32 bottom;
-            f32 left;
-            f32 right;
-        } frustum;
+        /*
+                struct {
+                    f32 top;
+                    f32 bottom;
+                    f32 left;
+                    f32 right;
+                } frustum;
 
-        struct {
-            f32 top;
-            f32 bottom;
-            f32 left;
-            f32 right;
-        } ortho;
+                struct {
+                    f32 top;
+                    f32 bottom;
+                    f32 left;
+                    f32 right;
+                } ortho;
+        */
     } projection_param;
 };
 
@@ -107,8 +118,6 @@ struct HSD_CameraAnim {
 };
 
 typedef struct _cobj_Unk1 cobj_Unk1;
-
-typedef void (*cobj_UnkCallback1)(void);
 
 void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
                          s32 enable_depth);

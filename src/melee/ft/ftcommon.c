@@ -10,6 +10,7 @@
 #include "ftcoll.h"
 #include "ftlib.h"
 #include "ftparts.h"
+#include "math.h"
 
 #include "ef/eflib.h"
 #include "ft/ft_0C31.h"

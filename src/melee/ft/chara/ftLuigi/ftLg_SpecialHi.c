@@ -3,6 +3,7 @@
 #include "ftLg_SpecialHi.h"
 
 #include "ftLg_Init.h"
+#include "math.h"
 #include "types.h"
 
 #include "ef/efsync.h"

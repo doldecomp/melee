@@ -250,6 +250,52 @@ typedef struct StructPairWithStageID {
     s32 list_idx;
 } StructPairWithStageID;
 
+struct GroundVars_unk {
+    int xC4;
+    int xC8;
+    int xCC;
+    int xD0;
+    int xD4;
+    int xD8;
+    float xDC;
+    u8 xE0_pad[0x218 - 0xE0];
+};
+
+struct GroundVars_izumi {
+    HSD_TObj* xC4;
+    HSD_GObj* xC8;
+    HSD_GObj* xCC;
+    HSD_JObj* xD0;
+    HSD_JObj* xD4;
+    int xD8;
+    float xDC;
+    u8 xE0_pad[0x218 - 0xE0];
+};
+
+struct GroundVars_izumi2 {
+    HSD_JObj* xC4;
+    HSD_JObj* xC8;
+    int xCC;
+    int xD0;
+    int xD4;
+    int xD8;
+    float xDC;
+    u8 xE0_pad[0x218 - 0xE0];
+};
+
+struct GroundVars_izumi3 {
+    short xC4;
+    short xC6;
+    short xC8;
+    short xCA;
+    HSD_JObj* xCC;
+    float xD0;
+    float xD4;
+    float xD8;
+    float xDC;
+    u8 xE0_pad[0x218 - 0xE0];
+};
+
 typedef struct Ground {
     int x0;         // 0x0
     HSD_GObj* gobj; // 0x4
@@ -279,11 +325,13 @@ typedef struct Ground {
     HSD_GObjEvent x1C_callback;
     int x20[8];
     u8 x40_pad[0xC4 - 0x40];
-    int xC4;
-    int xC8;
-    int xCC;
-    int xD0;
-    u8 xD4_pad[0x218 - 0xD4];
+    union GroundVars { // how big should this be?
+        u8 _[0x218 - 0xC4];
+        struct GroundVars_unk unk;
+        struct GroundVars_izumi izumi;
+        struct GroundVars_izumi2 izumi2;
+        struct GroundVars_izumi3 izumi3;
+    } gv;
 } Ground;
 
 #endif

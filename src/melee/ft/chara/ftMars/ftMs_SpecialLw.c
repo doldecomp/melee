@@ -1,6 +1,7 @@
 #include "ftMs_SpecialLw.h"
 
 #include "ftMs_Init.h"
+#include "math.h"
 
 #include "ef/efsync.h"
 #include "ft/ft_081B.h"

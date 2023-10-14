@@ -15,7 +15,6 @@
 #include "pl/player.h"
 
 #include <common_structs.h>
-#include <math.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/archive.h>
 #include <baselib/controller.h>

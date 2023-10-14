@@ -2,6 +2,8 @@
 
 #include "ftCo_SpecialAir.h"
 
+#include "math.h"
+
 #include "ft/fighter.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"

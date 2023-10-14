@@ -145,8 +145,8 @@ void grStory_801E3234(HSD_GObj* gobj)
     grAnime_801C7FF8(gobj, 0, 7, 0, 0.0f, 1.0f);
     grAnime_801C7FF8(gobj, 5, 7, 1, 0.0f, 1.0f);
 
-    gp->xC8 = grSt_804D69B8->unk0 + randi(grSt_804D69B8->unk4);
-    gp->xC8 = 120;
+    gp->gv.unk.xC8 = grSt_804D69B8->unk0 + randi(grSt_804D69B8->unk4);
+    gp->gv.unk.xC8 = 120;
     gp->x10_flags.b5 = true;
 }
 

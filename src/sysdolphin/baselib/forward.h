@@ -84,6 +84,7 @@ typedef struct TextKerning TextKerning;
 typedef struct UnkGeneratorStruct UnkGeneratorStruct;
 typedef union HSD_ObjData HSD_ObjData;
 typedef union HSD_Rumble HSD_Rumble;
+typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
 typedef void (*GObj_RenderFunc)(HSD_GObj* gobj, int code);
 typedef void (*HSD_ObjUpdateFunc)(any_t obj, enum_t type, HSD_ObjData* fval);

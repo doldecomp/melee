@@ -468,7 +468,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gr/grdynamicattr.c.o\
     $(BUILD_DIR)/asm/melee/gr/grzakogenerator.s.o\
     $(BUILD_DIR)/asm/melee/gr/grfzerocar.s.o\
-    $(BUILD_DIR)/asm/melee/gr/grizumi.s.o\
+    $(BUILD_DIR)/src/melee/gr/grizumi.c.o\
     $(BUILD_DIR)/asm/melee/gr/grcastle.s.o\
     $(BUILD_DIR)/asm/melee/gr/grstadium.s.o\
     $(BUILD_DIR)/asm/melee/gr/grkongo.s.o\

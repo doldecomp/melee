@@ -8,7 +8,7 @@
 void cmSnap_800315C8(void);
 void cmSnap_800316B4(void);
 
-s32 cmSnap_80031618(void);
+void* cmSnap_80031618(void);
 void cmSnap_80031640(HSD_GObj* gobj, int code);
 
 #endif

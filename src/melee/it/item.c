@@ -4,6 +4,7 @@
 
 #include "it_266F.h"
 #include "it_26B1.h"
+#include "math.h"
 
 #include "cm/camera.h"
 #include "db/db_2253.h"

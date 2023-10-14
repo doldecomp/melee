@@ -4,6 +4,7 @@
 
 #include "ftCo_CaptureDamageKoopa.h"
 #include "ftCo_Lift.h"
+#include "math.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_0D14.h"

@@ -2,6 +2,7 @@
 
 #include "ftMh_Damage_0.h"
 #include "ftMh_Wait1_2.h"
+#include "math.h"
 #include "types.h"
 
 #include "cm/camera.h"

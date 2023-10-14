@@ -4,6 +4,7 @@
 #include "ftFx_SpecialLw.h"
 
 #include "ftFx_Init.h"
+#include "math.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"

@@ -3,6 +3,7 @@
 #include "ftFx_SpecialN.h"
 
 #include "ftFx_Init.h"
+#include "math.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"

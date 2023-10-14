@@ -2,6 +2,8 @@
 
 #include "ftMt_SpecialHi.h"
 
+#include "math.h"
+
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ft_081B.h"

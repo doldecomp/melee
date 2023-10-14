@@ -48,7 +48,7 @@ static inline void mtx_thing(MtxPtr mtx, Vec3* ptr, f32 val, f32 val2)
     mtx[2][3] = ptr->z + val2;
 }
 
-MtxPtr ftDrawCommmon_8008051C(HSD_GObj* arg1, MtxPtr arg2)
+MtxPtr ftDrawCommon_8008051C(HSD_GObj* arg1, MtxPtr arg2)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -94,7 +94,7 @@ MtxPtr ftDrawCommmon_8008051C(HSD_GObj* arg1, MtxPtr arg2)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
+asm void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
 { // clang-format off
     nofralloc
 /* 800805C8 0007D1A8  7C 08 02 A6 */	mflr r0
@@ -556,7 +556,7 @@ lbl_80080C10:
 #elif false
 
 // https://decomp.me/scratch/wbs6Q // 7183 (82.39%)
-void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
+void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
 {
     u8 padding2[0x4];
 
@@ -812,7 +812,7 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
 
 #else
 
-void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
+void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
 {
     NOT_IMPLEMENTED;
 }
@@ -822,7 +822,7 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ftDrawCommmon_80080C28(HSD_GObj*, s32)
+asm void ftDrawCommon_80080C28(HSD_GObj*, s32)
 { // clang-format off
     nofralloc
 /* 80080C28 0007D808  7C 08 02 A6 */	mflr r0
@@ -960,7 +960,7 @@ lbl_80080E00:
 #elif false
 
 // https://decomp.me/scratch/sjQ3z // 155 (98.75%) @permuter
-void ftDrawCommmon_80080C28(HSD_GObj* gobj, s32 arg1)
+void ftDrawCommon_80080C28(HSD_GObj* gobj, s32 arg1)
 {
     MtxPtr temp_r28;
     f32 temp_f31;
@@ -1034,7 +1034,7 @@ void ftDrawCommmon_80080C28(HSD_GObj* gobj, s32 arg1)
 
 #else
 
-void ftDrawCommmon_80080C28(HSD_GObj* gobj, s32 arg1)
+void ftDrawCommon_80080C28(HSD_GObj* gobj, s32 arg1)
 {
     NOT_IMPLEMENTED;
 }
@@ -1044,7 +1044,7 @@ void ftDrawCommmon_80080C28(HSD_GObj* gobj, s32 arg1)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ftDrawCommmon_80080E18(HSD_GObj*, int)
+asm void ftDrawCommon_80080E18(HSD_GObj*, int)
 { // clang-format off
     nofralloc
 /* 80080E18 0007D9F8  7C 08 02 A6 */	mflr r0
@@ -1170,7 +1170,7 @@ lbl_80080F38:
 /* 80080FE0 0007DBC0  3B C3 00 00 */	addi r30, r3, 0
 /* 80080FE4 0007DBC4  38 7C 00 00 */	addi r3, r28, 0
 /* 80080FE8 0007DBC8  38 81 00 54 */	addi r4, r1, 0x54
-/* 80080FEC 0007DBCC  4B FF F5 31 */	bl ftDrawCommmon_8008051C
+/* 80080FEC 0007DBCC  4B FF F5 31 */	bl ftDrawCommon_8008051C
 /* 80080FF0 0007DBD0  38 83 00 00 */	addi r4, r3, 0
 /* 80080FF4 0007DBD4  38 7B 00 00 */	addi r3, r27, 0
 /* 80080FF8 0007DBD8  38 BE 00 00 */	addi r5, r30, 0
@@ -1180,7 +1180,7 @@ lbl_80081004:
 /* 80081004 0007DBE4  38 7C 00 00 */	addi r3, r28, 0
 /* 80081008 0007DBE8  38 9D 00 00 */	addi r4, r29, 0
 /* 8008100C 0007DBEC  38 A0 00 01 */	li r5, 1
-/* 80081010 0007DBF0  4B FF F5 B9 */	bl ftDrawCommmon_800805C8
+/* 80081010 0007DBF0  4B FF F5 B9 */	bl ftDrawCommon_800805C8
 /* 80081014 0007DBF4  83 7C 00 2C */	lwz r27, 0x2c(r28)
 /* 80081018 0007DBF8  88 1B 21 FC */	lbz r0, 0x21fc(r27)
 /* 8008101C 0007DBFC  54 00 07 FF */	clrlwi. r0, r0, 0x1f
@@ -1222,7 +1222,7 @@ lbl_80081004:
 /* 800810AC 0007DC8C  3B A3 00 00 */	addi r29, r3, 0
 /* 800810B0 0007DC90  38 7C 00 00 */	addi r3, r28, 0
 /* 800810B4 0007DC94  38 81 00 24 */	addi r4, r1, 0x24
-/* 800810B8 0007DC98  4B FF F4 65 */	bl ftDrawCommmon_8008051C
+/* 800810B8 0007DC98  4B FF F4 65 */	bl ftDrawCommon_8008051C
 /* 800810BC 0007DC9C  38 83 00 00 */	addi r4, r3, 0
 /* 800810C0 0007DCA0  38 7B 00 00 */	addi r3, r27, 0
 /* 800810C4 0007DCA4  38 BD 00 00 */	addi r5, r29, 0
@@ -1243,7 +1243,7 @@ lbl_800810F4:
 lbl_800810F8:
 /* 800810F8 0007DCD8  38 7C 00 00 */	addi r3, r28, 0
 /* 800810FC 0007DCDC  38 9D 00 00 */	addi r4, r29, 0
-/* 80081100 0007DCE0  4B FF F4 C9 */	bl ftDrawCommmon_800805C8
+/* 80081100 0007DCE0  4B FF F4 C9 */	bl ftDrawCommon_800805C8
 lbl_80081104:
 /* 80081104 0007DCE4  BB 61 00 8C */	lmw r27, 0x8c(r1)
 /* 80081108 0007DCE8  80 01 00 A4 */	lwz r0, 0xa4(r1)
@@ -1255,7 +1255,7 @@ lbl_80081104:
 
 #else
 
-void ftDrawCommmon_80080E18(HSD_GObj* arg0, int arg1)
+void ftDrawCommon_80080E18(HSD_GObj* arg0, int arg1)
 {
     NOT_IMPLEMENTED;
 }
@@ -1265,12 +1265,12 @@ void ftDrawCommmon_80080E18(HSD_GObj* arg0, int arg1)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ftDrawCommmon_80081118(void)
+asm void ftDrawCommon_80081118(void)
 { // clang-format off
     nofralloc
 /* 80081118 0007DCF8  80 8D C1 8C */	lwz r4, HSD_GObj_Entities(r13)
-/* 8008111C 0007DCFC  3C 60 80 08 */	lis r3, ftDrawCommmon_80080E18@ha
-/* 80081120 0007DD00  38 03 0E 18 */	addi r0, r3, ftDrawCommmon_80080E18@l
+/* 8008111C 0007DCFC  3C 60 80 08 */	lis r3, ftDrawCommon_80080E18@ha
+/* 80081120 0007DD00  38 03 0E 18 */	addi r0, r3, ftDrawCommon_80080E18@l
 /* 80081124 0007DD04  80 64 00 20 */	lwz r3, 0x20(r4)
 /* 80081128 0007DD08  48 00 00 0C */	b lbl_80081134
 lbl_8008112C:
@@ -1285,7 +1285,7 @@ lbl_80081134:
 
 #else
 
-void ftDrawCommmon_80081118(void)
+void ftDrawCommon_80081118(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -1295,12 +1295,12 @@ void ftDrawCommmon_80081118(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ftDrawCommmon_80081140(void)
+asm void ftDrawCommon_80081140(void)
 { // clang-format off
     nofralloc
 /* 80081140 0007DD20  80 8D C1 8C */	lwz r4, HSD_GObj_Entities(r13)
-/* 80081144 0007DD24  3C 60 80 08 */	lis r3, ftDrawCommmon_80080C28@ha
-/* 80081148 0007DD28  38 03 0C 28 */	addi r0, r3, ftDrawCommmon_80080C28@l
+/* 80081144 0007DD24  3C 60 80 08 */	lis r3, ftDrawCommon_80080C28@ha
+/* 80081148 0007DD28  38 03 0C 28 */	addi r0, r3, ftDrawCommon_80080C28@l
 /* 8008114C 0007DD2C  80 64 00 20 */	lwz r3, 0x20(r4)
 /* 80081150 0007DD30  48 00 00 0C */	b lbl_8008115C
 lbl_80081154:
@@ -1315,7 +1315,7 @@ lbl_8008115C:
 
 #else
 
-void ftDrawCommmon_80081140(void)
+void ftDrawCommon_80081140(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -1325,7 +1325,7 @@ void ftDrawCommmon_80081140(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ftDrawCommmon_80081168(void)
+asm void ftDrawCommon_80081168(void)
 { // clang-format off
     nofralloc
 /* 80081168 0007DD48  7C 08 02 A6 */	mflr r0
@@ -1374,7 +1374,7 @@ lbl_800811E0:
 
 #else
 
-void ftDrawCommmon_80081168(void)
+void ftDrawCommon_80081168(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -1384,7 +1384,7 @@ void ftDrawCommmon_80081168(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ftDrawCommmon_80081200(void)
+asm void ftDrawCommon_80081200(void)
 { // clang-format off
     nofralloc
 /* 80081200 0007DDE0  7C 08 02 A6 */	mflr r0
@@ -1433,7 +1433,7 @@ lbl_80081278:
 
 #else
 
-void ftDrawCommmon_80081200(void)
+void ftDrawCommon_80081200(void)
 {
     NOT_IMPLEMENTED;
 }

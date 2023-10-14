@@ -11,6 +11,7 @@
 #include "mp/mplib.h"
 
 #include <dolphin/mtx/types.h>
+#include <MetroTRK/intrinsics.h>
 
 void ftMh_WalkShoot_Anim(HSD_GObj* gobj)
 {

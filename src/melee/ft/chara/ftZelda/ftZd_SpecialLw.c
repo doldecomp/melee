@@ -3,6 +3,8 @@
 
 #include "ftZd_SpecialLw.h"
 
+#include "math.h"
+
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
