@@ -3,6 +3,7 @@
 #include "ftCa_SpecialN.h"
 
 #include "ftCa_Init.h"
+#include "math.h"
 #include "types.h"
 
 #include "ef/eflib.h"

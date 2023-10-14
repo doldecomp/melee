@@ -1,5 +1,6 @@
 #include <dolphin/gx/forward.h>
 
+#include <math.h>
 #include <string.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXDisplayList.h>

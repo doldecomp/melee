@@ -143,6 +143,18 @@ static inline any_t HSD_GObjGetHSDObj(HSD_GObj* gobj)
     return gobj->hsd_obj;
 }
 
+static inline u16 HSD_GObjGetClassifier(HSD_GObj* gobj)
+{
+    return gobj->classifier;
+}
+
+static inline HSD_GObj* HSD_GObjGetNext(HSD_GObj* gobj)
+{
+    return gobj->next;
+}
+
 #define GET_JOBJ(gobj) ((HSD_JObj*) HSD_GObjGetHSDObj(gobj))
+#define GET_COBJ(gobj) ((HSD_CObj*) HSD_GObjGetHSDObj(gobj))
+#define GET_LOBJ(gobj) ((HSD_LObj*) HSD_GObjGetHSDObj(gobj))
 
 #endif

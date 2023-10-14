@@ -1,5 +1,7 @@
 #include "mp/mpcoll.h"
 
+#include "math.h"
+
 #include "db/db_2253.h"
 #include "ft/ftlib.h"
 #include "gr/grdynamicattr.h"

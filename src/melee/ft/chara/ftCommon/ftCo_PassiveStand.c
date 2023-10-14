@@ -4,6 +4,7 @@
 #include "ftCo_PassiveStand.h"
 
 #include "ftCo_DownAttack.h"
+#include "math.h"
 
 #include "ef/efasync.h"
 #include "ft/fighter.h"

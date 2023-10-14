@@ -1,3 +1,5 @@
+#include "math.h"
+
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>

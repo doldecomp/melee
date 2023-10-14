@@ -9,6 +9,7 @@
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Shouldered.h"
 #include "ftCo_Wait.h"
+#include "math.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

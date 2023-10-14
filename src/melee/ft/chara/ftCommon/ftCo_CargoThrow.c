@@ -6,6 +6,7 @@
 #include "ftCo_CargoFall.h"
 #include "ftCo_CargoWait.h"
 #include "ftCo_Damage.h"
+#include "math.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0D14.h"

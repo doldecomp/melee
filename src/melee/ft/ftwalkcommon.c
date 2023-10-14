@@ -7,6 +7,7 @@
 #include "ft_081B.h"
 #include "ftcommon.h"
 #include "inlines.h"
+#include "math.h"
 
 #include <dolphin/os/os.h>
 

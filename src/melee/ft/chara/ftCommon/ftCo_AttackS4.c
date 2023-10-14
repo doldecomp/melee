@@ -16,6 +16,7 @@
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Shouldered.h"
 #include "ftCo_SpecialS.h"
+#include "math.h"
 
 #include "ef/eflib.h"
 #include "ft/fighter.h"

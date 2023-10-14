@@ -20,6 +20,7 @@
 #include "ftSandbag/ftSb_Init.h"
 
 #include <common_structs.h>
+#include <math.h>
 #include <placeholder.h>
 #include <baselib/jobj.h>
 

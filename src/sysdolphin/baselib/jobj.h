@@ -172,6 +172,33 @@ void HSD_JObjWalkTree(HSD_JObj* jobj, HSD_JObjWalkTreeCallback cb,
 void HSD_JObjPrependRObj(HSD_JObj* jobj, HSD_RObj* robj);
 void HSD_JObjDeleteRObj(HSD_JObj* jobj, HSD_RObj* robj);
 
+static inline HSD_JObj* HSD_JObjGetChild(HSD_JObj* jobj)
+{
+    if (jobj == NULL) {
+        return NULL;
+    } else {
+        return jobj->child;
+    }
+}
+
+static inline HSD_JObj* HSD_JObjGetNext(HSD_JObj* jobj)
+{
+    if (jobj == NULL) {
+        return NULL;
+    } else {
+        return jobj->next;
+    }
+}
+
+static inline HSD_JObj* HSD_JObjGetParent(HSD_JObj* jobj)
+{
+    if (jobj == NULL) {
+        return NULL;
+    } else {
+        return jobj->parent;
+    }
+}
+
 static inline HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
 {
     HSD_ASSERT(405, jobj);

@@ -3,6 +3,7 @@
 #include "ftPk_SpecialLw.h"
 
 #include "ftPk_Init.h"
+#include "math.h"
 
 #include "cm/camera.h"
 #include "ef/efasync.h"

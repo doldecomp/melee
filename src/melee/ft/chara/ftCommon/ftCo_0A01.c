@@ -4,6 +4,7 @@
 
 #include "ftCo_0B3E.h"
 #include "ftCo_ItemGet.h"
+#include "math.h"
 
 #include "cm/camera.h"
 #include "ft/ft_0877.h"
