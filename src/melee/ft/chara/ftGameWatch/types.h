@@ -27,7 +27,7 @@ struct ftGameWatch_FighterVars {
 };
 
 typedef struct ftGameWatchChef {
-    s32 sausageCount[5];
+    int sausageCount[6];
 } ftGameWatchChef;
 
 typedef struct ftGameWatchJudge {

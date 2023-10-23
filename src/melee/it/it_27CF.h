@@ -81,7 +81,7 @@ HSD_GObj* it_802C7D60(Item_GObj*, Vec3*, s32, f32);
 void it_802C7E94(Item_GObj*);
 void it_802C7EE0(Item_GObj*);
 void it_802C7F00(Item_GObj*);
-HSD_GObj* it_802C837C(Item_GObj*, Vec3*, s32, u32, f32);
+HSD_GObj* it_802C837C(Item_GObj*, Vec3*, enum_t, u32, f32);
 HSD_GObj* it_802C7774(f32, HSD_GObj*, Vec3*, s32, u32);
 void it_8028FAF4(Item_GObj*, Vec3*);
 void it_802C7A84(Item_GObj*);
