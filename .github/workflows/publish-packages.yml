@@ -23,7 +23,7 @@ jobs:
     name: Publish package
     env:
       REGISTRY: ghcr.io
-      CONTAINERFILE: .github/packages/${{ matrix.target }}/Dockerfile
+      CONTAINERFILE: .github/packages/build-linux/Dockerfile
     strategy:
       matrix:
         target: [ "build-linux", "gen-pages", "check-issues" ]
