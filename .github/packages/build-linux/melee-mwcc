@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+mwcc_exe=/opt/mwcc_compiler/1.2.5n/mwcceppc.exe
+mwcc_args=(
+	'-nowraplines'
+	'-msgstyle' 'gcc'
+	'-lang' 'c'
+	'-cwd' 'source'
+	'-Cpp_exceptions' 'off'
+	'-proc' 'gekko'
+	'-DGEKKO'
+	'-fp' 'hard'
+	'-fp_contract' 'on'
+	'-O4,p'
+	'-enum' 'int'
+	'-nodefaults'
+	'-inline' 'auto'
+	'-requireprotos'
+	'-warn' 'iserror'
+	'-i' 'src/melee'
+	'-i' 'src/melee/ft/chara'
+	'-I-'
+	'-i' 'src'
+	'-i' 'src/MSL'
+	'-i' 'src/Runtime'
+	'-i' 'src/sysdolphin'
+	'-c'
+)
+
+"$WINE" "$mwcc_exe" "${mwcc_args[@]}" "$@"
