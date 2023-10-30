@@ -392,7 +392,7 @@ void ftZd_SpecialHi_80139F6C(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 353, transition_flags1, fp->cur_anim_frame,
                               0, 0, NULL);
 
-    fp->x2223_flag.bits.b4 = true;
+    fp->x2223_b4 = true;
     fp->x221E_b0 = true;
 }
 
@@ -490,7 +490,7 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
                 attributes = fp->dat_attrs;
                 fp->mv.zd.specialhi.x0 = attributes->x48;
                 fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
-                fp->x2223_flag.bits.b4 = 1;
+                fp->x2223_b4 = 1;
 
                 ftColl_8007B62C(gobj, 2);
                 fp->x221E_b0 = 1;
@@ -585,7 +585,7 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
     attributes = fp->dat_attrs;
     fp->mv.zd.specialhi.x0 = attributes->x48;
     fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
-    fp->x2223_flag.bits.b4 = 1;
+    fp->x2223_b4 = 1;
 
     ftColl_8007B62C(gobj, 2);
 

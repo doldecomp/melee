@@ -277,7 +277,7 @@ lbl_8009F738:
 #pragma peephole on
 #endif /* clang-format on */
 
-ASM UNK_RET ftCo_8009F75C(UNK_PARAMS)
+ASM UNK_T ftCo_8009F75C(Fighter* fp, bool arg1)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
     NOT_IMPLEMENTED;

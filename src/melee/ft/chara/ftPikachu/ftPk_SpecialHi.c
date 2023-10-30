@@ -446,7 +446,7 @@ void ftPk_SpecialHi_ChangeMotion_Unk02(HSD_GObj* gobj)
     ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(gobj, 357, 206327946, fp->cur_anim_frame, 0.0f,
                               0.0f, 0);
-    fp->x2223_flag.bits.b4 = true;
+    fp->x2223_b4 = true;
     ftPk_SpecialHi_8012642C(gobj);
 }
 
@@ -561,7 +561,7 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
             Fighter_ChangeMotionState(gobj, 354, 10, 13.0f, 1.0f, 0.0f, 0);
             ftAnim_8006EBA4(gobj);
             ftAnim_SetAnimRate(gobj, 0.0f);
-            fp->x2223_flag.bits.b4 = 1;
+            fp->x2223_b4 = 1;
             fp->x21F8 = &ftPk_SpecialHi_UpdateVel;
             return;
         }
@@ -647,7 +647,7 @@ void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 357, 10, 13.0f, 1.0f, 0.0f, 0);
     ftAnim_8006EBA4(gobj);
     ftAnim_SetAnimRate(gobj, 0.0f);
-    fp->x2223_flag.bits.b4 = 1;
+    fp->x2223_b4 = 1;
 
     // set velocity to move toward facing direction
     fp->x21F8 = &ftPk_SpecialHi_UpdateVel;

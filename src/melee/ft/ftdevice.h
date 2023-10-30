@@ -7,7 +7,7 @@
 
 #include <placeholder.h>
 
-/* 0C0658 */ UNK_RET ftCo_800C0658(UNK_PARAMS);
+/* 0C0658 */ UNK_T ftCo_800C0658(UNK_T arg0);
 /* 0C0674 */ UNK_RET ftCo_800C0674(UNK_PARAMS);
 /* 0C0694 */ enum_t ftCo_800C0694(Fighter* fp);
 /* 0C06B4 */ UNK_RET ftCo_800C06B4(UNK_PARAMS);

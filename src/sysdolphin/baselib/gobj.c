@@ -110,8 +110,6 @@ u32 HSD_GObj_80390EB8(s32 i)
     return HSD_GObj_804085F0[i];
 }
 
-extern HSD_GObj* HSD_GObj_804D7814;
-
 inline void render_gobj(HSD_GObj* cur, int i)
 {
     HSD_GObj* saved = HSD_GObj_804D7814;

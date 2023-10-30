@@ -86,7 +86,7 @@
 /* 0D4CE8 */ void ftCo_DeadUpFall_Phys(ftCo_GObj* gobj);
 /* 0D4E30 */ void ftCo_DeadUpFall_Cam(ftCo_GObj* gobj);
 /* 0D4E50 */ UNK_RET ftCo_800D4E50(UNK_PARAMS);
-/* 0D4F24 */ void ftCo_800D4F24(ftCo_GObj*, s32);
+/* 0D4F24 */ void ftCo_800D4F24(ftCo_GObj* gobj, int index);
 /* 0D4FF4 */ void ftCo_800D4FF4(ftCo_GObj* gobj);
 /* 0D52F8 */ void ftCo_Rebirth_Anim(ftCo_GObj* gobj);
 /* 0D5358 */ void ftCo_Rebirth_IASA(ftCo_GObj* gobj);

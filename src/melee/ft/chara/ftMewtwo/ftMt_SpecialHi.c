@@ -370,7 +370,7 @@ void ftMt_SpecialHi_GroundToAir(HSD_GObj* gobj)
                               transition_flags1, fp->cur_anim_frame, 0, 0,
                               NULL);
 
-    fp->x2223_flag.bits.b4 = true;
+    fp->x2223_b4 = true;
     fp->x221E_b0 = true;
 }
 
@@ -399,7 +399,7 @@ static inline void ftMewtwo_SpecialHi_SetVars(HSD_GObj* gobj)
         mewtwoAttrs->x50_MEWTWO_TELEPORT_DURATION;
 
     fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
-    fp->x2223_flag.bits.b4 = true;
+    fp->x2223_b4 = true;
 
     ftColl_8007B62C(gobj, 2);
 

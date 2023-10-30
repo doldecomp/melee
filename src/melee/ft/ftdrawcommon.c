@@ -706,8 +706,7 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
     {
         phi_r30 = 1U;
     }
-    if ((fighter->x21FC_flag.bits.b4 != 0) &&
-        (fighter->x2223_flag.bits.b5 != 0) &&
+    if ((fighter->x21FC_flag.bits.b4 != 0) && (fighter->x2223_b5 != 0) &&
         (lb_80014770(fighter + 0x1930, arg1) != 0))
     {
         phi_r30 = 1U;
@@ -734,8 +733,7 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             phi_r30 = 1U;
         }
     }
-    if ((fighter->x21FC_flag.bits.b2 != 0) &&
-        (fighter->x2227_flag.bits.b2 == 0) &&
+    if ((fighter->x21FC_flag.bits.b2 != 0) && (fighter->x2227_b2 == 0) &&
         (lbColl_8000A044(&fighter->x1064_thrownHitbox, arg1,
                          fighter->x34_scale.y) != 0))
     {
@@ -764,8 +762,8 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         {
             ftParts_800750C8(fighter, 1, 0);
             ftParts_800750C8(fighter, 4, 0);
-            if ((fighter->x2223_flag.bits.b7 != 0) ||
-                (fighter->x2226_b5 != 0) || (fighter->x2227_flag.bits.b3 != 0))
+            if ((fighter->x2223_b7 != 0) || (fighter->x2226_b5 != 0) ||
+                (fighter->x2227_b3 != 0))
             {
                 ftParts_800750C8(fighter, 0, 0);
                 ftParts_800750C8(fighter, 2, 1);
@@ -774,9 +772,9 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
                 ftParts_800750C8(fighter, 0, 1);
             }
             ftCo_8009F5AC(fighter);
-            fighter->x2223_flag.bits.b2 = 0;
+            fighter->x2223_b2 = 0;
             temp_r4 = &sp30;
-            fighter->x2227_flag.bits.b7 = 1;
+            fighter->x2227_b7 = 1;
             fighter->x2228_b0 = 0;
             temp_f31 = temp_f0 = 0.0f;
             sp30.z = temp_f31;
@@ -995,9 +993,9 @@ void ftDrawCommon_80080C28(HSD_GObj* gobj, s32 arg1)
 
             phi_r28 = NULL;
 
-            fighter->x2223_flag.bits.b2 = 0;
-            fighter->x2223_flag.bits.b3 = 0;
-            fighter->x2227_flag.bits.b7 = 0;
+            fighter->x2223_b2 = 0;
+            fighter->x2223_b3 = 0;
+            fighter->x2227_b7 = 0;
             fighter->x2228_b0 = 1;
 
             temp_f31 = temp_f0 = 0.0f;

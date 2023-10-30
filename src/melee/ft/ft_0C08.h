@@ -51,5 +51,7 @@
 /* 0C25AC */ void ftCo_PassiveCeil_IASA(ftCo_GObj* gobj);
 /* 0C25B0 */ void ftCo_PassiveCeil_Phys(ftCo_GObj* gobj);
 /* 0C25D0 */ void ftCo_PassiveCeil_Coll(ftCo_GObj* gobj);
+/* 4D6580 */ extern HSD_MObj* ft_804D6580;
+/* 4D6588 */ extern HSD_MObj* ft_804D6588;
 
 #endif

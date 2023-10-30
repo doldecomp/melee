@@ -104,7 +104,7 @@ void ftCo_80090AC0(Fighter* fp)
 void ftCo_80090B48(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    fp->x2227_flag.bits.b6 = false;
+    fp->x2227_b6 = false;
 }
 
 ASM void ftCo_80090B60(ftCo_GObj* gobj)
@@ -460,7 +460,7 @@ ASM void ftCo_80091030(Fighter_GObj* gobj)
     ftCommon_8007DB58(gobj);
     ftCo_8009750C(gobj);
     ftCo_800DD168(gobj);
-    fp->x2227_flag.bits.b6 = true;
+    fp->x2227_b6 = true;
     Fighter_ChangeMotionState(gobj, ftCo_MS_DamageIce,
                               Ft_MF_KeepGfx | Ft_MF_Unk06, 0, 1, 0, NULL);
     ftCo_8009E140(fp, 0);
@@ -1122,7 +1122,7 @@ ASM void ftCo_80091854(HSD_GObj* gobj)
         ftCo_800C5A98(gobj);
     } else {
         ftCommon_8007D5D4(fp);
-        fp->x2227_flag.bits.b5 = false;
+        fp->x2227_b5 = false;
         Fighter_ChangeMotionState(gobj, 0x146, 0x40U, 0, 0, 0, NULL);
         ft_80088148(fp, 0x123, 0x7F, 0x40);
         {
