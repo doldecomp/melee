@@ -73,7 +73,7 @@ struct HSD_MObj {
     HSD_PEDesc* pe;
     HSD_AObj* aobj;
     struct _HSD_TExpTevDesc* tevdesc;
-    union _HSD_TExp* texp;
+    HSD_TExp* texp;
 };
 
 struct HSD_Material {
@@ -136,15 +136,16 @@ struct HSD_MatAnimJoint {
     HSD_MatAnim* matanim;
 };
 
-typedef struct _HSD_MObjInfo {
-    HSD_ClassInfo parent;
-    void (*setup)(HSD_MObj* mobj, u32 rendermode);
-    int (*load)(HSD_MObj* mobj, HSD_MObjDesc* desc);
-    HSD_TExp* (*make_texp)(HSD_MObj* mobj, HSD_TObj* tobj_top,
-                           HSD_TExp** list);
-    void (*setup_tev)(HSD_MObj* mobj, HSD_TObj* tobj, u32 rendermode);
-    void (*unset)(HSD_MObj* mobj, u32 rendermode);
-} HSD_MObjInfo;
+struct HSD_MObjInfo {
+    /*  +0 */ HSD_ClassInfo parent;
+    /* +3C */ HSD_MObjSetupFunc setup;
+    /* +40 */ int (*load)(HSD_MObj* mobj, HSD_MObjDesc* desc);
+    /* +44 */ HSD_TExp* (*make_texp)(HSD_MObj* mobj, HSD_TObj* tobj_top,
+                                     HSD_TExp** list);
+    /* +48 */ void (*setup_tev)(HSD_MObj* mobj, HSD_TObj* tobj,
+                                u32 rendermode);
+    /* +4C */ void (*unset)(HSD_MObj* mobj, u32 rendermode);
+};
 
 #define HSD_MOBJ(o) ((HSD_MObj*) (o))
 #define HSD_MOBJ_INFO(i) ((HSD_MObjInfo*) (i))
@@ -176,5 +177,7 @@ void HSD_MObjSetToonTextureImage(HSD_ImageDesc* imagedesc);
 void HSD_MObjSetDiffuseColor(HSD_MObj* mobj, u8 r, u8 g, u8 b);
 void HSD_MObjSetAlpha(HSD_MObj* mobj, f32 alpha);
 void HSD_MObjAddShadowTexture(HSD_TObj* tobj);
+extern HSD_TObj* tobj_shadows;
+extern HSD_TObj* tobj_toon;
 
 #endif

@@ -1060,10 +1060,12 @@ HSD_GObj* Player_GetEntity(s32 slot)
     return player->player_entity[player->transformed[0]];
 }
 
-HSD_GObj* Player_GetEntityAtIndex(s32 slot, s32 index)
-{ //   Mostly called by Ice Climbers code, must be because they have 2nd entity
+/// @remarks Mostly called by Ice Climbers code, must be because they have 2nd
+///          entity
+HSD_GObj* Player_GetEntityAtIndex(int slot, int index)
+{
     StaticPlayer* player;
-    s32 entity_index;
+    int entity_index;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
     entity_index = player->transformed[index];

@@ -293,7 +293,7 @@ not_squatwait:
     {
         float armor =
             fp->dmg.armor0 > fp->dmg.armor1 ? fp->dmg.armor0 : fp->dmg.armor1;
-        if (fp->x2223_flag.bits.b7) {
+        if (fp->x2223_b7) {
             armor += p_ftCommonData->unk_armor;
         }
         fp->dmg.kb_applied -= armor;
@@ -3566,7 +3566,7 @@ bool doIasa(ftCo_GObj* gobj)
     fp->x8c_kb_vel.x = fp->x8c_kb_vel.y = fp->x8c_kb_vel.z = 0;
     ftCommon_8007EBAC(fp, 12, 0);
     ftCo_800BFFD0(fp, 121, 0);
-    fp->x2227_flag.bits.b4 = true;
+    fp->x2227_b4 = true;
     return true;
 ret_inline:
     if (ftCo_800CAE80(gobj)) {

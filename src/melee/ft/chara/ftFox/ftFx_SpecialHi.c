@@ -431,7 +431,7 @@ void ftFx_SpecialHi_GroundToAir(HSD_GObj* gobj)
                               (Ft_MF_SkipHit | FTFOX_SPECIALHI_COLL_FLAG),
                               fp->cur_anim_frame, 1.0f, 0.0f, NULL);
 
-    fp->x2223_flag.bits.b4 = true;
+    fp->x2223_b4 = true;
     fp->accessory4_cb = ftFx_SpecialHi_CreateLaunchGFX;
 }
 
@@ -478,7 +478,7 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
                                       0.0f, NULL);
 
             tempAttrs = fp->dat_attrs;
-            fp->x2223_flag.bits.b4 = 1;
+            fp->x2223_b4 = 1;
 
             fp->mv.fx.SpecialHi.travelFrames =
                 (u32) (s32) tempAttrs->x68_FOX_FIREFOX_DURATION;
@@ -546,7 +546,7 @@ void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
                               NULL);
 
     tempAttrs = fp->dat_attrs;
-    fp->x2223_flag.bits.b4 = 1;
+    fp->x2223_b4 = 1;
 
     fp->mv.fx.SpecialHi.travelFrames =
         (u32) (s32) tempAttrs->x68_FOX_FIREFOX_DURATION;

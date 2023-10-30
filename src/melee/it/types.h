@@ -701,7 +701,7 @@ struct SpawnItem {
 };
 
 struct ItemModStruct {
-    s32 x0_unk;
+    GXColor x0_unk;
 };
 
 struct ItemCommonData {

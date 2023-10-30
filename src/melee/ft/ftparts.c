@@ -5,6 +5,7 @@
 #include "ft/fighter.h"
 #include "ft/ftanim.h"
 #include "ft/ftdata.h"
+#include "ft/ftmaterial.h"
 #include "lb/lbrefract.h"
 
 #include <placeholder.h>

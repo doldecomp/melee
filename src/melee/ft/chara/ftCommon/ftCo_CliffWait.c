@@ -61,7 +61,7 @@ bool ftCo_8009A9AC(ftCo_GObj* gobj)
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->mv.co.cliff.x4 <= 0) {
         fp->x2064_ledgeCooldown = p_ftCommonData->ledge_cooldown;
-        fp->x2227_flag.bits.b1 = true;
+        fp->x2227_b1 = true;
         ftCo_80090780(gobj);
         return true;
     }

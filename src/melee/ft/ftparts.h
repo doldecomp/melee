@@ -8,9 +8,7 @@
 #include <dolphin/mtx/types.h>
 #include <baselib/perf.h>
 
-extern HSD_GObj* HSD_GObj_804D7814;
 extern HSD_PerfStat HSD_PerfCurrentStat;
-extern HSD_MObjInfo ftMObj;
 
 void ftParts_80074ACC(ftCo_GObj* gobj);
 u32 ftParts_8007506C(s32 ftkind, u32 part);

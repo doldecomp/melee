@@ -524,7 +524,7 @@ void ftGw_Init_OnLoad(HSD_GObj* gobj)
     void** items = fp->ft_data->x48_items;
 
     fp->x2222_b6 = false;
-    fp->x2223_flag.bits.b1 = true;
+    fp->x2223_b1 = true;
     fp->x2224_b0 = true;
 
     PUSH_ATTRS(fp, ftGameWatchAttributes);
@@ -534,7 +534,8 @@ void ftGw_Init_OnLoad(HSD_GObj* gobj)
         ftGameWatchAttributes* da = fp->dat_attrs;
         fp->x34_scale.z = da->x0_GAMEWATCH_WIDTH;
         fp->x614 = da->x14_GAMEWATCH_OUTLINE;
-        ftCo_800BFB4C(gobj, &da->x4_GAMEWATCH_COLOR[fp->x619_costume_id]);
+        ftMaterial_800BFB4C(gobj,
+                            &da->x4_GAMEWATCH_COLOR[fp->x619_costume_id]);
         fp->x5C8 = items[10];
 
         it_8026B3F8(items[0], It_Kind_GameWatch_Greenhouse);

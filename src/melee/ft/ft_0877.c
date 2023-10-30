@@ -31,7 +31,7 @@ s32 ft_80087838(HSD_GObj* gobj)
 s32 ft_80087858(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return TEST(fp->x2227_flag.bits.b1 & 1);
+    return TEST(fp->x2227_b1 & 1);
 }
 
 s32 ft_80087878(HSD_GObj* gobj, s32 arg1)
@@ -150,7 +150,7 @@ s32 ft_80087A98(HSD_GObj* gobj)
 u8 ft_80087AA4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x2227_flag.bits.b5;
+    return fp->x2227_b5;
 }
 
 u8 ft_80087AB4(HSD_GObj* gobj)
@@ -181,7 +181,7 @@ s32 ft_80087AEC(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((fp->x34_scale.y != fp->x34_scale.x) ||
-        ((fp->x2226_b4) || (fp->x2223_flag.bits.b7) || (fp->x197C != 0)))
+        ((fp->x2226_b4) || (fp->x2223_b7) || (fp->x197C != 0)))
     {
         return true;
     }
@@ -597,7 +597,7 @@ s32 ft_80087D0C(Fighter* fighter, s32 arg1)
             sfx = ft_80087C70(
                 fighter,
                 sfx); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx)
-            if (fighter->x2223_flag.bits.b7) {
+            if (fighter->x2223_b7) {
                 sfx += 3;
             }
             break;

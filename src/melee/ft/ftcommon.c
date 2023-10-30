@@ -664,7 +664,7 @@ void ftCommon_8007D5D4(Fighter* fp)
 void ftCommon_8007D60C(Fighter* fp)
 {
     struct ftCo_DatAttrs* ca = &fp->co_attrs;
-    if (fp->x2227_flag.bits.b0 && fp->x1968_jumpsUsed <= 1) {
+    if (fp->x2227_b0 && fp->x1968_jumpsUsed <= 1) {
         pl_8003FC44(fp->player_id, fp->x221F_b4);
     }
     fp->ground_or_air = GA_Air;
@@ -696,7 +696,7 @@ void ftCommon_8007D6A4(Fighter* fp)
     fp->gr_vel = fp->self_vel.x;
     fp->x1968_jumpsUsed = 0;
     fp->x1969_walljumpUsed = 0;
-    fp->x2227_flag.bits.b0 = 0;
+    fp->x2227_b0 = 0;
     fp->coll_data.x19C = 0;
     fp->coll_data.x130_flags &= 0xFFFFFFEF;
     if (!ft_80084A18(fp->gobj)) {
@@ -717,7 +717,7 @@ void ftCommon_8007D780(Fighter* fp)
     {
         fp->dmg.x18A4_knockbackMagnitude = 0;
     }
-    if (fp->x2227_flag.bits.b0 && fp->x1968_jumpsUsed <= 1) {
+    if (fp->x2227_b0 && fp->x1968_jumpsUsed <= 1) {
         pl_8003FC44(fp->player_id, fp->x221F_b4);
     }
 }
@@ -731,7 +731,7 @@ void ftCommon_8007D7FC(Fighter* fp)
         {
             fp->dmg.x18A4_knockbackMagnitude = 0;
         }
-        if (fp->x2227_flag.bits.b0 && fp->x1968_jumpsUsed <= 1) {
+        if (fp->x2227_b0 && fp->x1968_jumpsUsed <= 1) {
             pl_8003FC44(fp->player_id, fp->x221F_b4);
         }
     }
@@ -748,7 +748,7 @@ void ftCommon_8007D7FC(Fighter* fp)
     fp->gr_vel = fp->self_vel.x;
     fp->x1968_jumpsUsed = 0;
     fp->x1969_walljumpUsed = 0;
-    fp->x2227_flag.bits.b0 = 0;
+    fp->x2227_b0 = 0;
     fp->coll_data.x19C = 0;
     fp->coll_data.x130_flags &= 0xFFFFFFEF;
     if (!ft_80084A18(fp->gobj)) {
@@ -1535,7 +1535,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->x2220_flag.bits.b6 = src->x2220_flag.bits.b6;
     dst->x2008 = src->x2008;
     ftLib_SetScale(dst_gobj, src->x34_scale.y);
-    if (src->x2223_flag.bits.b7) {
+    if (src->x2223_b7) {
         ftCo_800C8348(dst_gobj, src->x2028, src->x202C);
         ftCo_800C8540(gobj);
     }
@@ -1572,7 +1572,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
         it_8026B9A8(src->item_gobj, dst_gobj, dst->ft_data->x8->unk10);
     }
     un_80322314();
-    ftCo_800BFD04(gobj);
+    ftMaterial_800BFD04(gobj);
     arg1(dst_gobj);
 }
 

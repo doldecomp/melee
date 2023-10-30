@@ -17,7 +17,7 @@ bool ftCo_SpecialAir_CheckInput(ftCo_GObj* gobj)
                 return false;
             }
             ftData_SpecialAirHi[fp->kind](gobj);
-            fp->x2227_flag.bits.b5 = true;
+            fp->x2227_b5 = true;
             return true;
         }
         if (fp->input.lstick.y <= -p_ftCommonData->x21C) {
@@ -25,7 +25,7 @@ bool ftCo_SpecialAir_CheckInput(ftCo_GObj* gobj)
                 return false;
             }
             ftData_SpecialAirLw[fp->kind](gobj);
-            fp->x2227_flag.bits.b5 = true;
+            fp->x2227_b5 = true;
             return true;
         }
         if (ABS(fp->input.lstick.x) >= p_ftCommonData->x218) {
@@ -36,7 +36,7 @@ bool ftCo_SpecialAir_CheckInput(ftCo_GObj* gobj)
                 ftCommon_8007D9FC(fp);
             }
             ftData_SpecialAirS[fp->kind](gobj);
-            fp->x2227_flag.bits.b5 = true;
+            fp->x2227_b5 = true;
             return true;
         }
         if (ftData_SpecialAirN[fp->kind] == NULL) {
@@ -49,7 +49,7 @@ bool ftCo_SpecialAir_CheckInput(ftCo_GObj* gobj)
             fp->facing_dir = -fp->facing_dir;
         }
         ftData_SpecialAirN[fp->kind](gobj);
-        fp->x2227_flag.bits.b5 = true;
+        fp->x2227_b5 = true;
         return true;
     }
     return false;

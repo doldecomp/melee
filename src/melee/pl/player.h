@@ -240,7 +240,7 @@ void Player_SetUnk98(s32 slot, s32 unk98);
 s32 Player_GetUnk9C(s32 slot);
 void Player_SetUnk9C(s32 slot, s32 unk9C);
 HSD_GObj* Player_GetEntity(s32 slot);
-HSD_GObj* Player_GetEntityAtIndex(s32 slot, s32 index);
+HSD_GObj* Player_GetEntityAtIndex(int slot, int index);
 void Player_SwapTransformedStates(s32 slot, s32 arg1, s32 arg2);
 s32 Player_GetDamage(s32 slot);
 void Player_SetHUDDamage(s32 slot, s32 arg1);

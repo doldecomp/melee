@@ -662,7 +662,7 @@ typedef struct _FighterBone {
 
 typedef struct _CameraBox {
     u32 data_filler[2];
-    s32 x8;
+    bool x8;
     /* +C:0 */ u8 xC_b0 : 1;
     u8 xD_fill[0x10 - 0xD];
     Vec3 x10; // might be Vec2?
@@ -949,7 +949,9 @@ struct Fighter {
     /*  fp+2F8 */ u8 filler_x2F0[0x3E0 - 0x2F8];
     /*  fp+3E0 */ u32 x3E0;
     /*  fp+3E4 */ ftCmdScript x3E4_fighterCmdScript;
-    /*  fp+3F8 */ u8 x3F8[0x588 - 0x3F8];
+    /*  fp+3F8 */ u8 x3F8[0x430 - 0x3F8];
+    /*  fp+430 */ UNK_T x430;
+    /*  fp+3F8 */ u8 x434[0x588 - 0x434];
     /*  fp+588 */ HSD_LObj* x588;
     /*  fp+58C */ s32 x58C;
     /*  fp+590 */ s32 x590;
@@ -992,7 +994,7 @@ struct Fighter {
         /* fp+610 */ GXColor x610_color_rgba[2];
         /* fp+610 */ struct {
             /* fp+610 */ s32 x610;
-            /* fp+614 */ s32 x614;
+            /* fp+614 */ GXColor x614;
         };
     };
     /*  fp+618 */ u8 x618_player_id;
@@ -1493,7 +1495,14 @@ struct Fighter {
     /* fp+2222:5 */ u8 x2222_b5 : 1;
     /* fp+2222:6 */ u8 x2222_b6 : 1;
     /* fp+2222:7 */ u8 x2222_b7 : 1;
-    /* fp+2223 */ UnkFlagStruct x2223_flag;
+    /* fp+2223:0 */ u8 x2223_b0 : 1;
+    /* fp+2223:1 */ u8 x2223_b1 : 1;
+    /* fp+2223:2 */ u8 x2223_b2 : 1;
+    /* fp+2223:3 */ u8 x2223_b3 : 1;
+    /* fp+2223:4 */ u8 x2223_b4 : 1;
+    /* fp+2223:5 */ u8 x2223_b5 : 1;
+    /* fp+2223:6 */ u8 x2223_b6 : 1;
+    /* fp+2223:7 */ u8 x2223_b7 : 1;
     /* fp+2224:0 */ u8 x2224_b0 : 1;
     /* fp+2224:1 */ u8 x2224_b1 : 1;
     /* fp+2224:2 */ u8 x2224_b2 : 1;
@@ -1518,7 +1527,14 @@ struct Fighter {
     /* fp+2226:5 */ u8 x2226_b5 : 1;
     /* fp+2226:6 */ u8 x2226_b6 : 1;
     /* fp+2226:7 */ u8 x2226_b7 : 1;
-    /* fp+2227 */ UnkFlagStruct x2227_flag;
+    /* fp+2227:0 */ u8 x2227_b0 : 1;
+    /* fp+2227:1 */ u8 x2227_b1 : 1;
+    /* fp+2227:2 */ u8 x2227_b2 : 1;
+    /* fp+2227:3 */ u8 x2227_b3 : 1;
+    /* fp+2227:4 */ u8 x2227_b4 : 1;
+    /* fp+2227:5 */ u8 x2227_b5 : 1;
+    /* fp+2227:6 */ u8 x2227_b6 : 1;
+    /* fp+2227:7 */ u8 x2227_b7 : 1;
     /* fp+2228:0 */ u8 x2228_b0 : 1;
     /* fp+2228:1 */ u8 x2228_b1 : 1;
     /* fp+2228:2 */ u8 x2228_b2 : 1;

@@ -46,11 +46,12 @@ typedef struct ftCmdScript ftCmdScript;
 typedef struct ftCo_DatAttrs_xBC_t ftCo_DatAttrs_xBC_t;
 typedef struct ftCollisionBox ftCollisionBox;
 typedef struct ftCommonData ftCommonData;
+typedef struct ftData_UnkCountStruct ftData_UnkCountStruct;
 typedef struct ftLk_SpecialN_Vec3Group ftLk_SpecialN_Vec3Group;
+typedef struct ftMaterial_UnkTevStruct ftMaterial_UnkTevStruct;
 typedef struct ftSubactionList ftSubactionList;
 typedef struct gmScriptEventDefault gmScriptEventDefault;
 typedef u32 MotionFlags;
-typedef struct ftData_UnkCountStruct ftData_UnkCountStruct;
 
 typedef void (*FighterEvent)(Fighter* fp);
 typedef char* (*Fighter_MotionFileStringGetter)(enum_t arg0);
