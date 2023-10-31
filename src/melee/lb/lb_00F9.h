@@ -24,5 +24,8 @@ void lb_8000FD18(unk_t);
 void lb_800115F4(void);
 void lb_800121FC(HSD_ImageDesc*, int, int, int, int);
 /* 011ABC */ /* static */ UNK_RET lb_80011ABC(UNK_PARAMS);
+/* 014498 */ void lb_80014498(UNK_T arg0);
+/* 0144C8 */ UNK_RET lb_800144C8(UNK_PARAMS);
+/* 014258 */ bool lb_80014258(HSD_GObj* gobj, UNK_T arg1, FtCmd cmd);
 
 #endif

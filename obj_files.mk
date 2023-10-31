@@ -190,6 +190,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/ft_0BF0.c.o\
     $(BUILD_DIR)/src/melee/ft/ftmaterial.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftmaterial.s.o\
+    $(BUILD_DIR)/src/melee/ft/ftcolanim.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftcolanim.s.o\
     $(BUILD_DIR)/asm/melee/ft/ftdevice.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0C08.s.o\

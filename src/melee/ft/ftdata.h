@@ -60,5 +60,6 @@ extern HSD_GObjEvent ftData_SpecialAirN[FTKIND_MAX];
 extern ftData_UnkCountStruct ftData_UnkIntPairs[FTKIND_MAX];
 extern Fighter_DemoStrings* ftData_803C2468[FTKIND_MAX];
 extern Fighter_MotionFileStringGetter ftData_803C24EC[FTKIND_MAX];
+extern HSD_GObjEvent ftData_UnkMotionStates4[FTKIND_MAX];
 
 #endif
