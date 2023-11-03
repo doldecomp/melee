@@ -26,7 +26,7 @@ jobs:
       CONTAINERFILE: .github/packages/build-linux/Dockerfile
     strategy:
       matrix:
-        target: [ "build-linux", "gen-pages", "check-issues" ]
+        target: [ "build-linux", "gen-pages", "check-issues", "dump-asm" ]
       fail-fast: false
     runs-on: ubuntu-latest
     permissions:
@@ -88,6 +88,14 @@ jobs:
 
       - name: Try generating pages
         if: matrix.target == 'gen-pages'
+        run: |
+          docker run --rm \
+            --volume "$PWD:/input:ro" \
+            --volume /tmp/output:/output \
+            "$IMAGE:test"
+
+      - name: Try dumping assembly
+        if: matrix.target == 'dump-asm'
         run: |
           docker run --rm \
             --volume "$PWD:/input:ro" \
