@@ -43,6 +43,12 @@ COPY .github/packages/gen-pages/entrypoint.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT entrypoint.sh
 
+FROM linux-base AS dump-asm
+VOLUME [ "/input", "/output" ]
+COPY .github/packages/dump-asm/entrypoint.sh /usr/local/bin
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT entrypoint.sh
+
 # TODO
 FROM rust:latest AS check-issues
 COPY .github/packages/check-issues/setup.sh /usr/local/bin
