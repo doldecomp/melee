@@ -20,7 +20,7 @@ foo.cpp:
 	.text       start:0x80047E5C end:0x8004875C
 	.ctors      start:0x803A54C4 end:0x803A54C8
 	.data       start:0x803B1B40 end:0x803B1B60
-    .bss        start:0x803DF828 end:0x803DFA8C
+	.bss        start:0x803DF828 end:0x803DFA8C
 	.bss        start:0x8040D4AC end:0x8040D4D8 common
 ```
 
