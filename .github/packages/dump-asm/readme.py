@@ -30,7 +30,7 @@ This is a dump of the built ELF from Super Smash Bros Melee.
 
 * For files built from raw assembly, see [`asm`](/asm).
 * For files built from C source code, see [`src`](/src).
-* For the MetroWorks map file, which can be used with Dolphin, see [`GALE01.map`](/GALE01.map).
+* For the CodeWarrior map file, which can be used with Dolphin, see [`GALE01.map`](/GALE01.map).
 * For the context file that can be used on [decomp.me](https://decomp.me/), see [`ctx.c`](/ctx.c).
 * This dump was created from commit [`{short_sha}`]({tree_url}).
 
