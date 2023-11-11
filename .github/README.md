@@ -105,6 +105,7 @@ make_flags='GENERATE_MAP=1'
 build_target="$melee_path/build"
 
 docker run --rm \
+  --user "$(id -u):$(id -g)" \
   --volume "$melee_path:/input:ro" \
   --volume "$build_target:/output" \
   --env MAKE_FLAGS="$make_flags" \
