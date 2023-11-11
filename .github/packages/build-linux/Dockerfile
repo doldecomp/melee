@@ -44,9 +44,15 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT entrypoint.sh
 
 FROM linux-base AS dump-asm
+ARG SHORT_SHA
+ARG TREE_URL
 VOLUME [ "/input", "/output" ]
+COPY .github/packages/dump-asm/readme.py /usr/local/bin
+RUN chmod +x /usr/local/bin/readme.py
 COPY .github/packages/dump-asm/entrypoint.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/entrypoint.sh
+ENV SHORT_SHA="${SHORT_SHA}"
+ENV TREE_URL="${TREE_URL}"
 ENTRYPOINT entrypoint.sh
 
 # TODO
