@@ -97,9 +97,13 @@ jobs:
       - name: Try dumping assembly
         if: matrix.target == 'dump-asm'
         run: |
+          short_sha="$(echo "${{ github.sha }}" | cut -c 1-7)"
+          tree_url="${{ github.server_url }}/${{ github.repository }}/tree/${{ github.sha }}"
           docker run --rm \
             --volume "$PWD:/input:ro" \
             --volume /tmp/output:/output \
+            -e SHORT_SHA="$short_sha" \
+            -e TREE_URL="$tree_url" \
             "$IMAGE:test"
 
       - name: Extract tags and labels

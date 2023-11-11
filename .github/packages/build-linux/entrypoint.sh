@@ -1,5 +1,5 @@
-#!/bin/sh
-set -e
+#!/bin/bash
+set -euox pipefail
 
 git clone /input /tmp/input
 cd /tmp/input
