@@ -55,10 +55,13 @@ jobs:
       env:
         MAKE_FLAGS: ${{ matrix.make_flags }}
       run: |
+        output="${{ github.workspace }}/output"
+        mkdir -p "$output"
         docker run --rm \
-          --volume "$PWD:/input:ro" \
-          --volume /tmp/output:/output \
-          --env MAKE_FLAGS="$MAKE_FLAGS" \
+          --user "$(id -u):$(id -g)" \
+          --volume "$PWD":/input:ro \
+          --volume "$output:/output" \
+          --env MAKE_FLAGS="NON_MATCHING=1" \
           "$REGISTRY/$IMAGE"
 
     - name: Upload map
@@ -182,6 +185,7 @@ jobs:
     - name: Check for code issues
       run: |
         result=$(docker run --rm \
+            --user "$(id -u):$(id -g)" \
             --volume "$PWD:/input:ro" \
             "$REGISTRY/$IMAGE")
         echo "$result"

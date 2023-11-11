@@ -49,11 +49,14 @@ jobs:
 
       - name: Dump assembly
         run: |
+          output="${{ github.workspace }}/output"
+          mkdir -p "$output"
           short_sha="$(echo "${{ github.sha }}" | cut -c 1-7)"
           tree_url="${{ github.server_url }}/${{ github.repository }}/tree/${{ github.sha }}"
           docker run --rm \
+            --user "$(id -u):$(id -g)" \
             --volume "$PWD:/input:ro" \
-            --volume /tmp/output:/output \
+            --volume "$output:/output" \
             -e SHORT_SHA="$short_sha" \
             -e TREE_URL="$tree_url" \
             ${{ env.REGISTRY }}/${{ env.IMAGE }}
