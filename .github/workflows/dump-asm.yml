@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REGISTRY: ghcr.io
+      OUTPUT: ${{ github.workspace }}/output
     steps:
       - name: Get image name
         env:
@@ -49,14 +50,13 @@ jobs:
 
       - name: Dump assembly
         run: |
-          output="${{ github.workspace }}/output"
-          mkdir -p "$output"
+          mkdir -p "${{ env.OUTPUT }}"
           short_sha="$(echo "${{ github.sha }}" | cut -c 1-7)"
           tree_url="${{ github.server_url }}/${{ github.repository }}/tree/${{ github.sha }}"
           docker run --rm \
             --user "$(id -u):$(id -g)" \
             --volume "$PWD:/input:ro" \
-            --volume "$output:/output" \
+            --volume "${{ env.OUTPUT }}:/output" \
             -e SHORT_SHA="$short_sha" \
             -e TREE_URL="$tree_url" \
             ${{ env.REGISTRY }}/${{ env.IMAGE }}
@@ -65,7 +65,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: dump
-          path: /tmp/output
+          path: ${{ env.OUTPUT }}
 
   push-dump:
     name: Push dump
