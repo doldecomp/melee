@@ -892,6 +892,25 @@ struct ftCmdScript {
     void* x3F4_scriptReturn;             // 0x3F4
 };
 
+struct ftDeviceUnk1 {
+    /*  +0 */ u8 x0[0x7B - 0x00];
+    /* +7B */ u8 x7B;
+};
+
+struct ftDeviceUnk2 {
+    /*  +0 */ UNK_T x0;
+    /*  +4 */ UNK_T x4;
+    /*  +8 */ UNK_T x8;
+    /*  +C */ UNK_T xC;
+    /* +10 */ UNK_T x10;
+    /* +14 */ UNK_T x14;
+    /* +18 */ UNK_T x18;
+    /* +1C */ UNK_T x1C;
+    /* +20 */ UNK_T x20;
+    /* +24 */ UNK_T x24;
+    /* +28 */ enum_t x28;
+};
+
 struct Fighter {
     /*    fp+0 */ HSD_GObj* gobj;
     /*    fp+4 */ FighterKind kind;
@@ -953,17 +972,7 @@ struct Fighter {
     /*  fp+3FC */ UNK_T x3FC;
     /*  fp+400 */ UNK_T x400;
     /*  fp+404 */ UNK_T x404;
-    /*  fp+408 */ UNK_T x408;
-    /*  fp+40C */ UNK_T x40C;
-    /*  fp+410 */ UNK_T x410;
-    /*  fp+414 */ UNK_T x414;
-    /*  fp+418 */ UNK_T x418;
-    /*  fp+41C */ UNK_T x41C;
-    /*  fp+420 */ UNK_T x420;
-    /*  fp+424 */ UNK_T x424;
-    /*  fp+428 */ UNK_T x428;
-    /*  fp+42C */ UNK_T x42C;
-    /*  fp+430 */ UNK_T x430;
+    /*  fp+408 */ ftDeviceUnk2 x408;
     /*  fp+434 */ UNK_T x434;
     /*  fp+438 */ UNK_T x438;
     /*  fp+43C */ UNK_T x43C;
@@ -985,17 +994,7 @@ struct Fighter {
     /*  fp+47C */ UNK_T x47C;
     /*  fp+480 */ UNK_T x480;
     /*  fp+484 */ UNK_T x484;
-    /*  fp+488 */ UNK_T x488;
-    /*  fp+48C */ UNK_T x48C;
-    /*  fp+490 */ UNK_T x490;
-    /*  fp+494 */ UNK_T x494;
-    /*  fp+498 */ UNK_T x498;
-    /*  fp+49C */ UNK_T x49C;
-    /*  fp+4A0 */ UNK_T x4A0;
-    /*  fp+4A4 */ UNK_T x4A4;
-    /*  fp+4A8 */ UNK_T x4A8;
-    /*  fp+4AC */ UNK_T x4AC;
-    /*  fp+4B0 */ UNK_T x4B0;
+    /*  fp+488 */ ftDeviceUnk2 x488;
     /*  fp+4B4 */ UNK_T x4B4;
     /*  fp+4B8 */ UNK_T x4B8;
     /*  fp+4BC */ UNK_T x4BC;
@@ -1027,7 +1026,7 @@ struct Fighter {
     /*  fp+524 */ UNK_T x524;
     /*  fp+528 */ UNK_T x528;
     /*  fp+52C */ UNK_T x52C;
-    /*  fp+530 */ UNK_T x530;
+    /*  fp+530 */ ftDeviceUnk1* x530;
     /*  fp+534 */ UNK_T x534;
     /*  fp+538 */ UNK_T x538;
     /*  fp+53C */ UNK_T x53C;

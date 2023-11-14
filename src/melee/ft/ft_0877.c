@@ -2,13 +2,12 @@
 
 #include "fighter.h"
 #include "ftcommon.h"
+#include "ftdevice.h"
 #include "inlines.h"
 
 #include "lb/lbaudio_ax.h"
 
 #define TEST(expr) (expr) ? true : false
-
-/* static */ s32 ftCo_800C06B4(Fighter*);
 
 s32 ft_800877F8(HSD_GObj* gobj, s32 arg1)
 {
