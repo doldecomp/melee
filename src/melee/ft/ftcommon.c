@@ -1517,7 +1517,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->x1968_jumpsUsed = src->x1968_jumpsUsed;
     dst->x1969_walljumpUsed = src->x1969_walljumpUsed;
     dst->shield_health = src->shield_health;
-    dst->x232C = src->x232C;
+    dst->bury_timer_2 = src->bury_timer_2;
     dst->x2330 = src->x2330;
     dst->x2338 = src->x2338;
     dst->x2224_b2 = src->x2224_b2;

@@ -2,6 +2,7 @@
 #define MELEE_GR_TYPES_H
 
 #include "it/forward.h"
+#include "lb/forward.h"
 
 #include "sc/scene.h"
 
@@ -99,6 +100,16 @@ typedef enum InternalStageId {
 
     /// Kongo Jungle (64)
     OLDKONGO,
+
+    STAGEKIND_UNK31,
+    STAGEKIND_UNK32,
+    STAGEKIND_UNK33,
+    STAGEKIND_UNK34,
+    STAGEKIND_UNK35,
+    STAGEKIND_UNK36,
+    STAGEKIND_UNK37,
+    STAGEKIND_UNK38,
+    STAGEKIND_UNK39,
 } InternalStageId;
 
 /// @remarks This struct is based in part on the datasheet however the info
@@ -175,7 +186,7 @@ typedef struct StageInfo {
         }* ptr;
     }* x12C;
     Vec3 x130, x13C, x148, x154, x160, x16C;
-    bool (*x178)(int);
+    lb_UnkAnimStruct* (*x178)(int);
     void* x17C;
     HSD_GObj* x180[4];
     u8 x190_pad[0x280 - 0x190];
@@ -238,7 +249,7 @@ typedef struct StageData {
     void (*callback2)(void);
     void (*callback3)(void);
     bool (*callback4)(void);
-    bool (*callback5)(enum_t);
+    lb_UnkAnimStruct* (*callback5)(enum_t);
     bool (*callback6)(Vec3*, int, HSD_JObj*);
     u32 flags2;
     S16Vec3* x2C;

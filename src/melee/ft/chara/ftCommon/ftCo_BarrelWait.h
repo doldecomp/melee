@@ -13,5 +13,5 @@
 /* 09EC40 */ void ftCo_BarrelWait_Coll(ftCo_GObj* gobj);
 /* 09EC44 */ /* static */ void ftCo_8009EC44(ftCo_GObj* gobj);
 /* 09EC70 */ /* static */ void ftCo_8009EC70(ftCo_GObj* gobj, Vec3* pos,
-                                             int arg2, float kb_angle);
+                                             UNK_T arg2, float kb_angle);
 #endif

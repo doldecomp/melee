@@ -880,9 +880,9 @@ void grIzumi_801CD220(HSD_GObj* gobj, int renderpass)
     grDisplay_801C5DB0(gobj, renderpass);
 }
 
-bool grIzumi_801CD278(enum_t x)
+lb_UnkAnimStruct* grIzumi_801CD278(enum_t x)
 {
-    return false;
+    return NULL;
 }
 
 bool grIzumi_801CD280(Vec3* a, int b, HSD_JObj* jobj)

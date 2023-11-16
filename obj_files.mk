@@ -194,6 +194,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/ftcolanim.s.o\
     $(BUILD_DIR)/src/melee/ft/ftdevice.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftdevice.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Bury.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0C08.s.o\
     $(BUILD_DIR)/asm/melee/ft/ftafterimage.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0C31.s.o\

@@ -3,6 +3,7 @@
 
 #include "ftCo_DownDamage.h"
 
+#include "ftCo_Bury.h"
 #include "ftCo_Damage.h"
 #include "ftCo_DamageFall.h"
 #include "ftCo_DownBound.h"

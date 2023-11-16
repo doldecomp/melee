@@ -2,9 +2,10 @@
 #define MELEE_FT_CHARA_FTZAKOBOY_TYPES_H
 
 #include <platform.h>
+#include "ft/forward.h"
 
 struct ftZakoBoy_FighterVars {
-    char filler0[0x100];
+    char filler0[FIGHTERVARS_SIZE];
 };
 
 typedef struct _ftZakoboyAttributes {

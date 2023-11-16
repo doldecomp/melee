@@ -162,7 +162,7 @@ bool lbColl_80007BCC(HitCapsule*, HitResult* shield_hit, unk_t, s32, f32, f32,
                      f32);
 bool lbColl_80007AFC(HitCapsule*, HitCapsule*, f32, f32);
 void lbColl_80007DD8(HitCapsule*, HitResult*, Mtx, unk_t, unk_t, f32);
-void lbColl_80008D30(HitCapsule*, int);
+void lbColl_80008D30(HitCapsule*, UNK_T);
 void lbColl_80008428(HitCapsule*);
 bool lbColl_80005C44(Vec3*, Vec3*, Vec3*, Vec3*, f32, f32);
 f32 lbColl_80005EBC(Vec3*, Vec3*, Vec3*, f32*);

@@ -1,6 +1,8 @@
 #ifndef _ground_h_
 #define _ground_h_
 
+#include "lb/forward.h"
+
 #include "gr/granime.h"
 #include "gr/types.h"
 
@@ -153,7 +155,7 @@ void Ground_801C5440(Ground* gp, s32 i, u32 arg2);
 bool Ground_801C54DC(Ground* gp, s32 i);
 void Ground_801C5630(Ground* gp, s32 i, f32 val);
 void Ground_801C5694(Ground* gp, s32 i, f32 val);
-bool Ground_801C5700(int i);
+lb_UnkAnimStruct* Ground_801C5700(int i);
 void Ground_801C5740(s32 arg0);
 void Ground_801C5750(void);
 s32 Ground_801C5764(void);

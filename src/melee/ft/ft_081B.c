@@ -4054,7 +4054,7 @@ asm bool ft_80084C74(Fighter_GObj*, int*, int*, int*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ft_80084CB0(void)
+asm void ft_80084CB0(Fighter*, ftCollisionBox*)
 { // clang-format off
     nofralloc
 /* 80084CB0 00081890  C0 03 07 98 */	lfs f0, 0x798(r3)

@@ -32,6 +32,7 @@
 #include "ftZakoBoy/types.h"
 #include "ftZelda/types.h"
 #include "gr/stage.h"
+#include "gr/types.h"
 #include "lb/lbcollision.h"
 #include "lb/lbrefract.h"
 #include "pl/player.h"
@@ -415,16 +416,24 @@ struct ftCommonData {
     /* +5D0 */ UNK_T x5D0;
     /* +5D4 */ UNK_T x5D4;
     /* +5D8 */ UNK_T x5D8;
-    /* +5DC */ UNK_T x5DC;
-    /* +5E0 */ int x5E0;
-    /* +5E4 */ UNK_T x5E4;
+    /* +5DC */ uint bury_timer_unk1;
+    /* +5E0 */ uint bury_timer_unk2;
+    /* +5E4 */ uint bury_timer_unk3;
     /* +5E8 */ UNK_T x5E8;
     /* +5EC */ UNK_T x5EC;
     /* +5F0 */ u32 x5F0;
-    /* +5F4 */ UNK_T x5F4;
-    /* +5F8 */ UNK_T x5F8;
-    /* +5FC */ UNK_T x5FC;
-    /* +5F4 */ u8 x600[0x6D8 - 0x600];
+    /* +5F4 */ int x5F4;
+    /* +5F8 */ float x5F8;
+    /* +5FC */ float x5FC;
+    /* +600 */ float x600;
+    /* +604 */ float x604;
+    /* +608 */ float x608;
+    /* +60C */ float x60C;
+    /* +610 */ float x610;
+    /* +614 */ float x614;
+    /* +618 */ UNK_T x618;
+    /* +61C */ UNK_T x61C;
+    /* +620 */ u8 x620[0x6D8 - 0x620];
     /// @todo expand to actual size
     /* +6D8 */ void* x6D8[1];
     /* +6DC */ GXColor x6DC_colorsByPlayer[4];
@@ -695,7 +704,7 @@ typedef struct _ECBFlagStruct {
 } ECBFlagStruct;
 
 typedef struct SurfaceData {
-    s32 index;
+    int index;
     u32 unk;
     Vec3 normal;
 } SurfaceData;
@@ -1674,7 +1683,9 @@ struct Fighter {
         /* fp+222C */ struct ftZakoBoy_FighterVars bo, gl;
         /* fp+222C */ struct ftZelda_FighterVars zd;
     } fv;
-    /* fp+232C */ s32 x232C;
+    /* fp+2324 */ InternalStageId bury_stage_kind;
+    /* fp+2328 */ uint bury_timer_1;
+    /* fp+232C */ uint bury_timer_2;
     /* fp+2330 */ Vec2 x2330;
     /* fp+2338 */ IntVec2 x2338;
     /// @at{2340} @sz{AC}

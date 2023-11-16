@@ -2,6 +2,7 @@
 #define MELEE_GR_GRIZUMI_H
 
 #include <platform.h>
+#include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx/types.h>
@@ -44,7 +45,7 @@ HSD_GObj* grIzumi_801CCD98(void);
 void grIzumi_801CCEA0(HSD_GObj* gobj, int renderpass);
 HSD_TObj* grIzumi_801CD090(HSD_GObj* gobj, HSD_ImageDesc* image);
 void grIzumi_801CD220(HSD_GObj* gobj, int);
-bool grIzumi_801CD278(enum_t);
+lb_UnkAnimStruct* grIzumi_801CD278(enum_t);
 bool grIzumi_801CD280(Vec3*, int, HSD_JObj*);
 void grIzumi_801CD2D4(void);
 

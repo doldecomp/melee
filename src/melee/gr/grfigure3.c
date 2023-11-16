@@ -1,13 +1,37 @@
-#include "gr/grfigure3.h"
+#include "lb/forward.h"
+
+#include "grfigure3.h"
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
+#include "gr/grfigure3.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "lb/lb_00F9.h"
 
 #include <dolphin/os/os.h>
 #include <baselib/gobjgxlink.h>
+
+static void grFigure3_8020E504(int number);
+static void grFigure3_8020E508(void);
+static void grFigure3_8020E578(void);
+static void grFigure3_8020E57C(void);
+static bool grFigure3_8020E5A0(void);
+static HSD_GObj* grFigure3_8020E5A8(int gobj_id);
+static void grFigure3_8020E690(HSD_GObj* gobj);
+static bool grFigure3_8020E6BC(HSD_GObj*);
+static void grFigure3_8020E6C4(HSD_GObj* gobj);
+static void grFigure3_8020E6C8(HSD_GObj*);
+static void grFigure3_8020E6CC(HSD_GObj* gobj);
+static bool grFigure3_8020E6F8(HSD_GObj*);
+static void grFigure3_8020E700(HSD_GObj* gobj);
+static void grFigure3_8020E724(HSD_GObj*);
+static void grFigure3_8020E728(HSD_GObj* gobj);
+static bool grFigure3_8020E778(HSD_GObj*);
+static void grFigure3_8020E780(HSD_GObj* gobj);
+static void grFigure3_8020E784(HSD_GObj*);
+static lb_UnkAnimStruct* grFigure3_8020E788(enum_t);
+static int grFigure3_8020E790(Vec3* vector, int number, HSD_JObj* jobj);
 
 static StageCallbacks grEF2_803E63D8[3] = {
     { grFigure3_8020E690, grFigure3_8020E6BC, grFigure3_8020E6C4,
@@ -18,19 +42,21 @@ static StageCallbacks grEF2_803E63D8[3] = {
       grFigure3_8020E784, 0UL }
 };
 
-StageData grEF2_803E6420 = { 0x00000046,
-                             grEF2_803E63D8,
-                             "/GrEF3.dat",
-                             grFigure3_8020E508,
-                             grFigure3_8020E504,
-                             grFigure3_8020E578,
-                             grFigure3_8020E57C,
-                             grFigure3_8020E5A0,
-                             grFigure3_8020E788,
-                             grFigure3_8020E790,
-                             0x00000001,
-                             NULL,
-                             0UL };
+StageData grEF2_803E6420 = {
+    0x00000046,
+    grEF2_803E63D8,
+    "/GrEF3.dat",
+    grFigure3_8020E508,
+    grFigure3_8020E504,
+    grFigure3_8020E578,
+    grFigure3_8020E57C,
+    grFigure3_8020E5A0,
+    grFigure3_8020E788,
+    grFigure3_8020E790,
+    0x00000001,
+    NULL,
+    0UL,
+};
 
 void* grEF2_804D6A80;
 
@@ -146,9 +172,9 @@ static void grFigure3_8020E780(HSD_GObj* gobj) {}
 
 static void grFigure3_8020E784(HSD_GObj* arg0) {}
 
-static bool grFigure3_8020E788(int number)
+static lb_UnkAnimStruct* grFigure3_8020E788(enum_t arg0)
 {
-    return false;
+    return NULL;
 }
 
 static bool grFigure3_8020E790(Vec3* vector, int number, HSD_JObj* jobj)

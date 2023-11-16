@@ -17,6 +17,8 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/random.h>
 
+static lb_UnkAnimStruct* grStory_801E36D0(enum_t);
+
 extern StageInfo stage_info;
 
 static StageCallbacks grSt_803E26F0[4] = {
@@ -300,9 +302,9 @@ void grStory_801E366C(HSD_GObj* gobj)
     }
 }
 
-static bool grStory_801E36D0(bool arg0)
+static lb_UnkAnimStruct* grStory_801E36D0(enum_t arg0)
 {
-    return false;
+    return NULL;
 }
 
 bool grStory_801E36D8(Vec3* a, int _, HSD_JObj* joint)

@@ -5,15 +5,11 @@
 
 #include <baselib/gobj.h>
 
-static void grFigureGet_80219530(int);
-static void grFigureGet_80219534(void);
-static void grFigureGet_8021959C(void);
-static void grFigureGet_802195A0(void);
-static bool grFigureGet_802195C4(void);
-static HSD_GObj* grFigureGet_802195CC(int);
-static void grFigureGet_802196B4(HSD_GObj*);
-static bool grFigureGet_802196E0(HSD_GObj*);
-static void grFigureGet_802196E8(HSD_GObj*);
-static void grFigureGet_802196EC(HSD_GObj*);
+/* static */ extern void grFigureGet_802196F0(HSD_GObj*);
+/* static */ extern bool grFigureGet_80219890(HSD_GObj*);
+/* static */ extern void grFigureGet_80219898(HSD_GObj*);
+/* static */ extern void grFigureGet_80219B0C(HSD_GObj*);
+/* static */ extern lb_UnkAnimStruct* grFigureGet_80219C88(enum_t);
+/* static */ extern int grFigureGet_80219C90(Vec3*, int, HSD_JObj*);
 
 #endif
