@@ -3,9 +3,11 @@
 
 #include <platform.h>
 
-typedef struct _UnkAnimStruct {
-    unk_t x0_data;
+#include <placeholder.h>
+
+struct lb_UnkAnimStruct {
+    UNK_T x0_data;
     size_t x4_size;
-} UnkAnimStruct;
+};
 
 #endif

@@ -9,10 +9,10 @@
 #include <dolphin/mtx/types.h>
 
 struct ftCollisionBox {
-    float top;
-    float bottom;
-    Vec2 left;
-    Vec2 right;
+    /*  +0 */ float top;
+    /*  +4 */ float bottom;
+    /*  +8 */ Vec2 left;
+    /* +10 */ Vec2 right;
 };
 
 struct UNK_SAMUS_S2 {

@@ -4641,12 +4641,12 @@ void Ground_801C5694(Ground* gp, s32 i, f32 val)
     }
 }
 
-bool Ground_801C5700(int i)
+lb_UnkAnimStruct* Ground_801C5700(int i)
 {
     if (stage_info.x178 != NULL) {
         return stage_info.x178(i);
     }
-    return false;
+    return NULL;
 }
 
 void Ground_801C5740(s32 arg0)

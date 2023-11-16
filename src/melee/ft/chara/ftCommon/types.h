@@ -197,6 +197,13 @@ union ftCommon_MotionVars {
         /* fp+235C */ Vec3 scale;
         /* fp+2368 */ ftCollisionBox coll_box;
     } thrownkirby;
+    struct {
+        /* fp+2340 */ int x0;
+        /* fp+2344 */ ftCollisionBox coll_box;
+        /* fp+235C */ float x1C;
+        /* fp+2360 */ enum_t x20;
+        /* fp+2364 */ Vec3 translate;
+    } bury;
 };
 
 #endif

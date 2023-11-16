@@ -74,12 +74,12 @@ void ftCo_8009EC44(ftCo_GObj* gobj)
     Ground_801C4DA0(&GET_FIGHTER(gobj)->cur_pos, &param);
 }
 
-ASM void ftCo_8009EC70(ftCo_GObj* gobj, Vec3* pos, int arg2, float kb_angle)
+ASM void ftCo_8009EC70(ftCo_GObj* gobj, Vec3* pos, UNK_T arg2, float kb_angle)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
     HitCapsule hit;
     Fighter* fp = gobj->user_data;
-    fp->x232C = p_ftCommonData->x5E0;
+    fp->bury_timer_2 = p_ftCommonData->bury_timer_unk2;
     fp->cur_pos = *pos;
     mpColl_80043680(&fp->coll_data, pos);
     ftCamera_80076064(fp);

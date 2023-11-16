@@ -1,6 +1,9 @@
-#ifndef _grfigure2_h_
-#define _grfigure2_h_
+#ifndef GALE01_20E274
+#define GALE01_20E274
 
+#include "lb/forward.h"
+
+#include <placeholder.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
@@ -21,7 +24,7 @@ static void grFigure2_8020E494(HSD_GObj* gobj);
 static bool grFigure2_8020E4E4(HSD_GObj*);
 static void grFigure2_8020E4EC(HSD_GObj* gobj);
 static void grFigure2_8020E4F0(HSD_GObj*);
-static bool grFigure2_8020E4F4(int number);
+static lb_UnkAnimStruct* grFigure2_8020E4F4(enum_t arg0);
 static bool grFigure2_8020E4FC(Vec3* vector, int number, HSD_JObj* jobj);
 
 #endif

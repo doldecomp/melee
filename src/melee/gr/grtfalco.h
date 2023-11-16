@@ -2,8 +2,10 @@
 #define MELEE_GR_GRTFALCO_H
 
 #include <platform.h>
+#include "lb/forward.h"
 #include <baselib/forward.h>
 
+#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
 void grTFalco_80220984(HSD_GObj*);
@@ -23,7 +25,7 @@ void grTFalco_802207F0(int);
 void grTFalco_8022086C(void);
 void grTFalco_80220870(void);
 bool grTFalco_80220894(void);
-bool grTFalco_80220ACC(enum_t);
+lb_UnkAnimStruct* grTFalco_80220ACC(enum_t);
 bool grTFalco_80220B78(Vec3*, int, HSD_JObj*);
 HSD_GObj* grTFalco_8022089C(int);
 

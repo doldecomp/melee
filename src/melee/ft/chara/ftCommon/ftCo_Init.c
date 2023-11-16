@@ -10,6 +10,7 @@
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
 #include "ftCo_BarrelWait.h"
+#include "ftCo_Bury.h"
 #include "ftCo_CaptureCaptain.h"
 #include "ftCo_CaptureDamageKoopa.h"
 #include "ftCo_CaptureKirby.h"

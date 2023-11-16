@@ -17,6 +17,7 @@
 #include "ft/ftchangeparam.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftdevice.h"
+#include "ftCommon/ftCo_Bury.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "gm/gm_1601.h"
 #include "gr/stage.h"
@@ -28,6 +29,7 @@
 
 #include <common_structs.h>
 #include <math.h>
+#include <placeholder.h>
 #include <runtime.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
@@ -213,7 +215,7 @@ float ftColl_800765F0(Fighter* fp, Fighter_GObj* victim, float arg2)
     return arg2 * fp->dmg.x182c_behavior;
 }
 
-ASM void ftColl_80076640(void)
+ASM bool ftColl_80076640(Fighter* fp, float* arg1)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
     NOT_IMPLEMENTED;
@@ -306,8 +308,8 @@ lbl_80076748:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftColl_80076764(int arg0, int arg1, int arg2, UNK_T arg3,
-                         ftCo_Fighter* arg4, int arg5)
+asm void ftColl_80076764(int arg0, enum_t arg1, enum_t arg2, UNK_T arg3,
+                         ftCo_Fighter* arg4, HurtCapsule* arg5)
 { // clang-format off
     nofralloc
 /* 80076764 00073344  7C 08 02 A6 */	mflr r0
@@ -2406,7 +2408,7 @@ lbl_80078368:
 }
 #endif /* clang-format on */
 
-ASM void ftColl_80078384(void)
+ASM void ftColl_80078384(Fighter* fp, HurtCapsule* hurt, HitCapsule* hit)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
     NOT_IMPLEMENTED;

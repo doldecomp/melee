@@ -9,6 +9,27 @@
 #include <dolphin/os/os.h>
 #include <baselib/gobjgxlink.h>
 
+static void grFigure1_8020DFDC(int);
+static void grFigure1_8020DFE0(void);
+static void grFigure1_8020E050(void);
+static void grFigure1_8020E054(void);
+static bool grFigure1_8020E078(void);
+static HSD_GObj* grFigure1_8020E080(int);
+static void grFigure1_8020E168(HSD_GObj*);
+static bool grFigure1_8020E194(HSD_GObj*);
+static void grFigure1_8020E19C(HSD_GObj*);
+static void grFigure1_8020E1A0(HSD_GObj*);
+static void grFigure1_8020E1A4(HSD_GObj*);
+static bool grFigure1_8020E1D0(HSD_GObj*);
+static void grFigure1_8020E1D8(HSD_GObj*);
+static void grFigure1_8020E1FC(HSD_GObj*);
+static void grFigure1_8020E200(HSD_GObj*);
+static bool grFigure1_8020E250(HSD_GObj*);
+static void grFigure1_8020E258(HSD_GObj*);
+static void grFigure1_8020E25C(HSD_GObj*);
+static lb_UnkAnimStruct* grFigure1_8020E260(enum_t);
+static bool grFigure1_8020E268(Vec3*, int, HSD_JObj*);
+
 static StageCallbacks grEF1_803E6278[3] = {
     { grFigure1_8020E168, grFigure1_8020E194, grFigure1_8020E19C,
       grFigure1_8020E1A0, 0 },
@@ -148,9 +169,9 @@ static void grFigure1_8020E258(HSD_GObj* gobj) {}
 
 static void grFigure1_8020E25C(HSD_GObj* arg0) {}
 
-static bool grFigure1_8020E260(int n)
+static lb_UnkAnimStruct* grFigure1_8020E260(enum_t arg0)
 {
-    return false;
+    return NULL;
 }
 
 static bool grFigure1_8020E268(Vec3* v, int n, HSD_JObj* o)

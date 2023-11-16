@@ -5502,7 +5502,7 @@ f64 const lbColl_804D7A48 = 4503599627370496;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_80008D30(HitCapsule*, int){
+asm void lbColl_80008D30(HitCapsule*, UNK_T){
     // clang-format off
     nofralloc
 /* 80008D30 00005910  94 21 FF E8 */	stwu r1, -0x18(r1)

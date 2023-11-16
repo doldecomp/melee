@@ -156,9 +156,9 @@ void grTLuigi_80221EC0(HSD_GObj* gobj)
 
 void grTLuigi_80221EE0(HSD_GObj* arg0) {}
 
-bool grTLuigi_80221EE4(int arg0)
+lb_UnkAnimStruct* grTLuigi_80221EE4(enum_t arg0)
 {
-    return false;
+    return NULL;
 }
 
 int grTLuigi_80221EEC(Vec3* arg0, int arg1, HSD_JObj* arg2)

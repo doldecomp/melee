@@ -70,9 +70,9 @@ void ftColl_8007AF10(Fighter_GObj*);
 void ftColl_8007B5AC(ftCo_Fighter* fp, HurtCapsule* arg1,
                      struct UNK_SAMUS_S2* arg2);
 void ftColl_8007B7FC(Fighter*, int);
-void ftColl_80076640(void);
-void ftColl_80076764(int arg0, int arg1, int arg2, UNK_T arg3,
-                     ftCo_Fighter* arg4, int arg5);
+bool ftColl_80076640(Fighter*, float*);
+void ftColl_80076764(int arg0, enum_t arg1, enum_t arg2, UNK_T arg3,
+                     ftCo_Fighter* arg4, HurtCapsule* arg5);
 void ftColl_80076808(Fighter* attacker, HitCapsule*, int, Fighter* victim,
                      int);
 void ftColl_800768A0(void);
@@ -85,7 +85,7 @@ UNK_RET ftColl_80078488(UNK_PARAMS);
 UNK_RET ftColl_80077970(UNK_PARAMS);
 UNK_RET ftColl_80077C60(UNK_PARAMS);
 UNK_RET ftColl_80078998(UNK_PARAMS);
-UNK_RET ftColl_80078384(UNK_PARAMS);
+void ftColl_80078384(Fighter*, HurtCapsule*, HitCapsule*);
 UNK_RET ftColl_80078538(UNK_PARAMS);
 UNK_RET ftColl_8007861C(UNK_PARAMS);
 UNK_RET ftColl_800787B4(UNK_PARAMS);

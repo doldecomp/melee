@@ -9,6 +9,27 @@
 #include <dolphin/os/os.h>
 #include <baselib/gobjgxlink.h>
 
+static void grTPichu_80222B98(int);
+static void grTPichu_80222B9C(void);
+static void grTPichu_80222C0C(void);
+static void grTPichu_80222C10(void);
+static bool grTPichu_80222C34(void);
+static HSD_GObj* grTPichu_80222C3C(int gobj_id);
+static void grTPichu_80222D24(HSD_GObj* gobj);
+static bool grTPichu_80222D50(HSD_GObj*);
+static void grTPichu_80222D58(HSD_GObj*);
+static void grTPichu_80222D5C(HSD_GObj*);
+static void grTPichu_80222D60(HSD_GObj* gobj);
+static bool grTPichu_80222DB0(HSD_GObj*);
+static void grTPichu_80222DB8(HSD_GObj* gobj);
+static void grTPichu_80222DEC(HSD_GObj*);
+static void grTPichu_80222DF0(HSD_GObj* gobj);
+static bool grTPichu_80222E40(HSD_GObj*);
+static void grTPichu_80222E48(HSD_GObj*);
+static void grTPichu_80222E68(HSD_GObj*);
+static lb_UnkAnimStruct* grTPichu_80222E6C(int);
+static bool grTPichu_80222E74(Vec3*, int, HSD_JObj*);
+
 static StageCallbacks grTPc_803E91B0[] = {
     { grTPichu_80222D24, grTPichu_80222D50, grTPichu_80222D58,
       grTPichu_80222D5C, 0 },
@@ -156,9 +177,9 @@ static void grTPichu_80222E48(HSD_GObj* arg0)
 
 static void grTPichu_80222E68(HSD_GObj* arg0) {}
 
-static bool grTPichu_80222E6C(int arg0)
+static lb_UnkAnimStruct* grTPichu_80222E6C(int arg0)
 {
-    return false;
+    return NULL;
 }
 
 static bool grTPichu_80222E74(Vec3* arg0, int arg1, HSD_JObj* arg2)

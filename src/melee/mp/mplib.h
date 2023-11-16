@@ -71,5 +71,6 @@ enum_t mpLib_8004E090(int idx, Vec3*, f32*, u32*, Vec3* normal);
 void mpLib_800569EC(void);
 /* 04F8A4 */ UNK_RET mpLib_8004F8A4(UNK_PARAMS);
 /* 052508 */ UNK_RET mpLib_80052508(UNK_PARAMS);
+/* 054DFC */ void mpLib_80054DFC(enum_t, Vec3*);
 
 #endif

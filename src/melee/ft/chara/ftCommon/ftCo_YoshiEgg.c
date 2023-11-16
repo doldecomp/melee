@@ -3,6 +3,7 @@
 
 #include "ftCo_YoshiEgg.h"
 
+#include "ftCo_Bury.h"
 #include "ftCo_CaptureCaptain.h"
 #include "ftCo_CaptureKoopa.h"
 

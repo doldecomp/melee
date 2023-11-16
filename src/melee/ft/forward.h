@@ -7,7 +7,7 @@
 #include <stddef.h>
 #include <dolphin/mtx/types.h>
 
-#define FIGHTERVARS_SIZE 0x100
+#define FIGHTERVARS_SIZE 0xF8
 
 typedef struct Fighter Fighter;
 
@@ -396,5 +396,12 @@ typedef enum SmashState {
     SmashState_Charging,
     SmashState_Release,
 } SmashState;
+
+typedef enum ftCommon_BuryType {
+    BuryType_Unk0,
+    BuryType_Unk1,
+    BuryType_Unk2,
+    BuryType_Unk3,
+} ftCommon_BuryType;
 
 #endif

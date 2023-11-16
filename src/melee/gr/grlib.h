@@ -1,8 +1,9 @@
 #ifndef _grtlib_h_
 #define _grtlib_h_
 
+#include "lb/forward.h"
+
 #include "gr/stage.h"
-#include "lb/types.h"
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
@@ -18,7 +19,7 @@ void grLib_801C9908(HSD_JObj*);
 void grLib_801C99C0(s32, s32, HSD_JObj*, s32);
 Vec3* grLib_801C9A10(void);
 void grLib_801C9A70(enum_t, Vec3*);
-void grLib_801C9B20(void* arg1, UnkAnimStruct* arg2, void* arg3);
+void grLib_801C9B20(void* arg1, lb_UnkAnimStruct* arg2, void* arg3);
 void grLib_801C9B6C(void*);
 void grLib_801C9B8C(void*);
 static void grLib_801C9BC8(HSD_GObj*);

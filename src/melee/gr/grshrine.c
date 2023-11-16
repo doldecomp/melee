@@ -12,6 +12,28 @@
 #include <dolphin/os/os.h>
 #include <baselib/gobjgxlink.h>
 
+static void grShrine_80201C60(int);
+static void grShrine_80201C64(void);
+static void grShrine_80201CF0(void);
+static void grShrine_80201CF4(void);
+static bool grShrine_80201D18(void);
+static HSD_GObj* grShrine_80201D20(s32);
+static void grShrine_80201E08(HSD_GObj*);
+static bool grShrine_80201E34(HSD_GObj*);
+static void grShrine_80201E3C(HSD_GObj*);
+static void grShrine_80201E40(HSD_GObj*);
+static void grShrine_80201E44(HSD_GObj*);
+static bool grShrine_80201E88(HSD_GObj*);
+static void grShrine_80201E90(HSD_GObj*);
+static void grShrine_80201E94(HSD_GObj*);
+static void grShrine_80201E98(HSD_GObj*);
+static void grShrine_80201E9C(HSD_GObj*);
+static bool grShrine_80201F14(HSD_GObj*);
+static void grShrine_80201F1C(HSD_GObj*);
+static void grShrine_80201F40(HSD_GObj*);
+static lb_UnkAnimStruct* grShrine_80201F44(enum_t);
+static bool grShrine_80201F4C(Vec3*, int, HSD_JObj*);
+
 static void* grSh_804D6A18;
 
 static StageCallbacks grSh_803E50E8[3] = {
@@ -169,9 +191,9 @@ static void grShrine_80201F1C(HSD_GObj* arg0)
 
 static void grShrine_80201F40(HSD_GObj* arg0) {}
 
-static bool grShrine_80201F44(bool arg0)
+static lb_UnkAnimStruct* grShrine_80201F44(enum_t arg0)
 {
-    return false;
+    return NULL;
 }
 
 static bool grShrine_80201F4C(Vec3* a, int _, HSD_JObj* joint)

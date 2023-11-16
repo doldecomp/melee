@@ -91,7 +91,7 @@ UNK_RET ft_80084A80(UNK_PARAMS);
 bool ft_80084BFC(Fighter_GObj* gobj, int*, int*);
 bool ft_80084C38(Fighter_GObj*, int*, int*, int*, char*);
 bool ft_80084C74(Fighter_GObj*, int*, int*, int*);
-UNK_RET ft_80084CB0(UNK_PARAMS);
+void ft_80084CB0(Fighter*, ftCollisionBox*);
 bool ft_80084CE4(Fighter* attacker, Fighter* victim);
 UNK_RET ft_80084E1C(UNK_PARAMS);
 UNK_RET ft_80082084(UNK_PARAMS);
