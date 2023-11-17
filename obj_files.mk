@@ -198,6 +198,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_Bury.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_FlyReflect.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_FlyReflect.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_PassiveWall.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_PassiveWall.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0C08.s.o\
     $(BUILD_DIR)/asm/melee/ft/ftafterimage.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0C31.s.o\

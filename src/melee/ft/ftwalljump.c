@@ -5,6 +5,7 @@
 #include "inlines.h"
 
 #include "ft/ft_0C08.h"
+#include "ftCommon/ftCo_PassiveWall.h"
 #include "mp/mplib.h"
 
 #include <dolphin/mtx/types.h>

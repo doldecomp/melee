@@ -129,7 +129,7 @@ void ftCo_800BFFAC(Fighter* fp)
     lb_80014498(&fp->x488);
 }
 
-ASM bool ftCo_800BFFD0(Fighter* fp, int arg1, int arg2)
+ASM bool ftCo_800BFFD0(Fighter* fp, enum_t arg1, bool arg2)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
     NOT_IMPLEMENTED;

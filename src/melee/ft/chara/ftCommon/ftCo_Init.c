@@ -46,6 +46,7 @@
 #include "ftCo_Pass.h"
 #include "ftCo_Passive.h"
 #include "ftCo_PassiveStand.h"
+#include "ftCo_PassiveWall.h"
 #include "ftCo_Rebound.h"
 #include "ftCo_ShieldBreakDown.h"
 #include "ftCo_ShieldBreakFall.h"

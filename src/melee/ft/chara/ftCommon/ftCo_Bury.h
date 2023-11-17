@@ -9,7 +9,6 @@
 
 #include <placeholder.h>
 
-/* 0C1D38 */ bool ftCo_800C1D38(ftCo_GObj* gobj);
 /* 0C0874 */ void ftCo_800C0874(ftCo_GObj* gobj, UNK_T arg1,
                                 ftCommon_BuryType arg2);
 /* 0C08A0 */ void ftCo_800C08A0(ftCo_GObj* gobj, int arg1,

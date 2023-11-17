@@ -9,6 +9,7 @@
 #include "ftCo_DownBound.h"
 #include "ftCo_DownStand.h"
 #include "ftCo_FlyReflect.h"
+#include "ftCo_PassiveWall.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -70,9 +71,9 @@ void ftCo_DownDamage_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_DownDamage_IASA(HSD_GObj* gobj) {}
+void ftCo_DownDamage_IASA(ftCo_GObj* gobj) {}
 
-void ftCo_DownDamage_Phys(Fighter_GObj* gobj)
+void ftCo_DownDamage_Phys(ftCo_GObj* gobj)
 {
     ftCo_Damage_Phys(gobj);
 }
