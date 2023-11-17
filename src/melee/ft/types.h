@@ -631,10 +631,10 @@ typedef struct ftCo_DatAttrs {
     /* +0F4 fp+204 */ float landingairhi_lag;
     /* +0F8 fp+208 */ float landingairlw_lag;
     /* +0FC fp+20C */ float name_tag_height;
-    /* +100 fp+210 */ float x100;
+    /* +100 fp+210 */ float passivewall_vel_x;
     /* +104 fp+214 */ float wall_jump_horizontal_velocity;
     /* +108 fp+218 */ float wall_jump_vertical_velocity;
-    /* +10C fp+21C */ int x10C;
+    /* +10C fp+21C */ float passiveceil_vel_x;
     /* +110 fp+220 */ float trophy_scale;
     /* +114 fp+224 */ Vec3 x114;
     /* +118 fp+230 */ Vec3 x118;
