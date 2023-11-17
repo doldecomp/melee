@@ -450,9 +450,9 @@ struct ftCommonData {
     /* +710 */ float x710;
     /* +714 */ float x714;
     /* +718 */ float kb_ice_mul;
-    /* +718 */ u8 x71C[0x760 - 0x71C];
+    /* +71C */ u8 x71C[0x760 - 0x71C];
     /* +760 */ int x760;
-    /* +760 */ int x764;
+    /* +764 */ int x764;
     /* +768 */ float x768;
     /* +76C */ float x76C;
     /* +770 */ float x770;
