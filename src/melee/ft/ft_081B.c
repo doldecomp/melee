@@ -1959,7 +1959,7 @@ lbl_80083304:
 #pragma push
 asm void ft_80083318(Fighter_GObj* gobj,
                      bool (*arg1)(Fighter_GObj* gobj, enum_t),
-                     HSD_GObjEvent arg1)
+                     HSD_GObjEvent arg2)
 {
     // clang-format off
     nofralloc
