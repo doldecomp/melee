@@ -3,8 +3,6 @@
 
 #include "ftCommon/forward.h"
 
-#include <placeholder.h>
-
 /* 0C1D38 */ bool ftCo_800C1D38(ftCo_GObj* gobj);
 /* 0C1E0C */ bool ftCo_800C1E0C(Fighter* fp);
 /* 0C1E64 */ void ftCo_800C1E64(ftCo_GObj* gobj, int msid, int timer,
