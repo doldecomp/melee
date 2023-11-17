@@ -101,7 +101,7 @@
 /* 0F1CD8 */ UNK_RET ftKb_SpecialN_800F1CD8(UNK_PARAMS);
 /* 0F1D24 */ void ftKb_SpecialN_800F1D24(ftKb_GObj* gobj);
 /* 0F1DAC */ UNK_RET ftKb_SpecialN_800F1DAC(UNK_PARAMS);
-/* 0F1F1C */ void ftKb_SpecialN_800F1F1C(ftKb_GObj* gobj, Vec3*);
+/* 0F1F1C */ void ftKb_SpecialN_800F1F1C(ftCo_GObj* gobj, Vec3*);
 /* 0F1F68 */ void ftKb_SpecialN_800F1F68(ftKb_GObj* gobj);
 /* 0F203C */ void ftKb_AttackDash_Anim(ftKb_GObj* gobj);
 /* 0F205C */ void ftKb_AttackDash_IASA(ftKb_GObj* gobj);

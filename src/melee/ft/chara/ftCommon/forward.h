@@ -947,4 +947,11 @@ typedef enum ftCo_Submotion {
     ftCo_SM_Count,
 } ftCo_Submotion;
 
+typedef enum ftCo_Surface {
+    FTCO_Surface_None,
+    ftCo_Surface_LeftWall,
+    ftCo_Surface_RightWall,
+    ftCo_Surface_Ceiling,
+} ftCo_Surface;
+
 #endif

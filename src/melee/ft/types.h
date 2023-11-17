@@ -164,11 +164,11 @@ struct ftCommonData {
     /* +1A4 */ UNK_T x1A4;
     /* +1A8 */ float x1A8;
     /* +1AC */ float x1AC;
-    /* +1B0 */ UNK_T x1B0;
+    /* +1B0 */ float x1B0;
     /* +1B4 */ UNK_T x1B4;
-    /* +1B8 */ UNK_T x1B8;
-    /* +1BC */ UNK_T x1BC;
-    /* +1C0 */ UNK_T x1C0;
+    /* +1B8 */ int x1B8;
+    /* +1BC */ float x1BC;
+    /* +1C0 */ float x1C0;
     /* +1C4 */ UNK_T x1C4;
     /* +1C8 */ float x1C8;
     /* +1CC */ UNK_T x1CC;
