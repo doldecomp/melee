@@ -208,6 +208,12 @@ union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ float x0;
     } buryjump;
+    struct {
+        /* fp+2340 */ int timer;
+        /* fp+2344 */ int x4;
+        /* fp+2348 */ bool x8;
+        /* fp+234C */ int vel_y_exponent;
+    } passivewall;
 };
 
 #endif

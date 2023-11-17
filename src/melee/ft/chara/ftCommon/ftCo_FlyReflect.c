@@ -2,9 +2,9 @@
 
 #include "ftCo_FlyReflect.h"
 
-#include "ftCo_Bury.h"
 #include "ftCo_Damage.h"
 #include "ftCo_DownBound.h"
+#include "ftCo_PassiveWall.h"
 
 #include "cm/camera.h"
 #include "ef/efasync.h"

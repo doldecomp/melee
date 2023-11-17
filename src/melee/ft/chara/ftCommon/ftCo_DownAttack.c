@@ -59,10 +59,10 @@ void ftCo_DownAttack_Coll(ftCo_GObj* gobj)
     ft_80084104(gobj);
 }
 
-void ftCo_80098634(HSD_ObjAllocUnk2* gobj)
+void ftCo_80098634(HSD_ObjAllocUnk2* arg0)
 {
-    Vec4* cur_vec4 = (Vec4*) gobj;
-    Vec3* cur_pos = (Vec3*) gobj;
+    Vec4* cur_vec4 = (Vec4*) arg0;
+    Vec3* cur_pos = (Vec3*) arg0;
     ftCo_GObj* cur_gobj;
     int count = 0;
     for (cur_gobj = HSD_GObj_Entities->fighters; cur_gobj != NULL;
@@ -78,12 +78,12 @@ void ftCo_80098634(HSD_ObjAllocUnk2* gobj)
         cur_pos[16] = fp->cur_pos;
         ++cur_pos;
     }
-    gobj->x150 = count;
+    arg0->x150 = count;
 }
 
 bool ftCo_800986B0(ftCo_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (!ftCo_800C5240(gobj) && fp->x680 < p_ftCommonData->x250 &&
         fp->x684 >= p_ftCommonData->x1C)
     {

@@ -450,12 +450,14 @@ struct ftCommonData {
     /* +710 */ float x710;
     /* +714 */ float x714;
     /* +718 */ float kb_ice_mul;
-    /* +718 */ u8 x71C[0x768 - 0x71C];
+    /* +718 */ u8 x71C[0x760 - 0x71C];
+    /* +760 */ int x760;
+    /* +760 */ int x764;
     /* +768 */ float x768;
     /* +76C */ float x76C;
     /* +770 */ float x770;
     /* +774 */ int x774;
-    /* +778 */ UNK_T x778;
+    /* +778 */ float passive_wall_vel_y_base;
     /* +77C */ float x77C;
     /* +780 */ UNK_T x780;
     /* +784 */ UNK_T x784;
@@ -629,7 +631,7 @@ typedef struct ftCo_DatAttrs {
     /* +0F4 fp+204 */ float landingairhi_lag;
     /* +0F8 fp+208 */ float landingairlw_lag;
     /* +0FC fp+20C */ float name_tag_height;
-    /* +100 fp+210 */ int x100;
+    /* +100 fp+210 */ float x100;
     /* +104 fp+214 */ float wall_jump_horizontal_velocity;
     /* +108 fp+218 */ float wall_jump_vertical_velocity;
     /* +10C fp+21C */ int x10C;

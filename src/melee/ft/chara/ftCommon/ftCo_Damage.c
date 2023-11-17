@@ -12,6 +12,7 @@
 #include "ftCo_DownDamage.h"
 #include "ftCo_FlyReflect.h"
 #include "ftCo_PassiveStand.h"
+#include "ftCo_PassiveWall.h"
 #include "ftCo_Wait.h"
 
 #include "cm/camera.h"
