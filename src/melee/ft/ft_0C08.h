@@ -5,14 +5,6 @@
 
 #include <placeholder.h>
 
-/* 0C15F4 */ UNK_RET ftCo_800C15F4(UNK_PARAMS);
-/* 0C1718 */ UNK_RET ftCo_800C1718(UNK_PARAMS);
-/* 0C17CC */ bool ftCo_800C17CC(ftCo_GObj* gobj);
-/* 0C18A8 */ UNK_RET ftCo_800C18A8(UNK_PARAMS);
-/* 0C1B2C */ void ftCo_FlyReflect_Anim(ftCo_GObj* gobj);
-/* 0C1B64 */ void ftCo_FlyReflect_IASA(ftCo_GObj* gobj);
-/* 0C1B84 */ void ftCo_FlyReflect_Phys(ftCo_GObj* gobj);
-/* 0C1BA4 */ void ftCo_FlyReflect_Coll(ftCo_GObj* gobj);
 /* 0C1E0C */ UNK_RET ftCo_800C1E0C(UNK_PARAMS);
 /* 0C1E64 */ void ftCo_800C1E64(ftCo_GObj* pPlayerEntityStruct, s32, s32, u8,
                                 float);

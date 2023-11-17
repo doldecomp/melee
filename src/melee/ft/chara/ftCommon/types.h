@@ -38,7 +38,8 @@ union ftCommon_MotionVars {
         /* fp+234C */ UNK_T xC;
         /* fp+2350 */ UNK_T x10;
         /* fp+2354 */ float x14;
-        /* fp+2358 */ u8 x18[0x1A - 0x18];
+        /* fp+2358 */ u8 x18;
+        /* fp+2359 */ u8 x19;
         /* fp+235A */ u8 x1A;
         /* fp+235B */ u8 x1B;
     } damage;

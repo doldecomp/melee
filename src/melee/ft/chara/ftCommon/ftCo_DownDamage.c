@@ -8,6 +8,7 @@
 #include "ftCo_DamageFall.h"
 #include "ftCo_DownBound.h"
 #include "ftCo_DownStand.h"
+#include "ftCo_FlyReflect.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

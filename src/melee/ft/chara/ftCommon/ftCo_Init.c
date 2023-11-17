@@ -34,6 +34,7 @@
 #include "ftCo_Escape.h"
 #include "ftCo_EscapeAir.h"
 #include "ftCo_FallSpecial.h"
+#include "ftCo_FlyReflect.h"
 #include "ftCo_Furafura.h"
 #include "ftCo_Guard.h"
 #include "ftCo_ItemGet.h"
