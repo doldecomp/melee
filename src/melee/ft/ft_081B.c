@@ -1487,7 +1487,7 @@ lbl_80082D2C:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_80082D40(Fighter_GObj* gobj, float, float)
+asm void ft_80082D40(Fighter_GObj* gobj, float)
 {
     // clang-format off
     nofralloc

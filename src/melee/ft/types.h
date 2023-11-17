@@ -431,9 +431,10 @@ struct ftCommonData {
     /* +60C */ float x60C;
     /* +610 */ float x610;
     /* +614 */ float x614;
-    /* +618 */ UNK_T x618;
-    /* +61C */ UNK_T x61C;
-    /* +620 */ u8 x620[0x6D8 - 0x620];
+    /* +618 */ float x618;
+    /* +61C */ float x61C;
+    /* +620 */ int x620;
+    /* +620 */ u8 x624[0x6D8 - 0x624];
     /// @todo expand to actual size
     /* +6D8 */ void* x6D8[1];
     /* +6DC */ GXColor x6DC_colorsByPlayer[4];

@@ -61,7 +61,7 @@ void ft_800831CC(Fighter_GObj*, bool (*)(Fighter_GObj*, enum_t),
                  HSD_GObjEvent);
 
 UNK_RET ft_80082978(UNK_PARAMS);
-void ft_80082D40(Fighter_GObj* gobj, float, float);
+void ft_80082D40(Fighter_GObj* gobj, float);
 void ft_80082F28(Fighter_GObj* gobj);
 void ft_80083090(Fighter_GObj* gobj, bool (*)(Fighter_GObj*, enum_t),
                  HSD_GObjEvent);
