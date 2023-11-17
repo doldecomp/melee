@@ -98,7 +98,7 @@ lbl_800C1E5C:
 #endif /* clang-format on */
 
 ASM void ftCo_800C1E64(ftCo_GObj* gobj, int msid, int timer,
-                       int veL_y_exponent, float facing_dir)
+                       int vel_y_exponent, float facing_dir)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -119,24 +119,22 @@ ASM void ftCo_800C1E64(ftCo_GObj* gobj, int msid, int timer,
         }
     }
     ftKb_SpecialN_800F1F1C(gobj, &ef_offset);
-    {
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
-        u8 _[4] = { 0 };
-#endif
-        Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, ftCo_804D8C70,
-                                  timer != 0 ? ftCo_804D8C70 : ftCo_804D8C64,
-                                  ftCo_804D8C70, NULL);
-    }
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, ftCo_804D8C70,
+                              timer != 0 ? ftCo_804D8C70 : ftCo_804D8C64,
+                              ftCo_804D8C70, NULL);
     fp->x670_timer_lstick_tilt_x = 0xFE;
     fp->x671_timer_lstick_tilt_y = 0xFE;
     fp->mv.co.passivewall.timer = timer;
     fp->mv.co.passivewall.x4 = 0;
     fp->mv.co.passivewall.x8 = false;
-    fp->mv.co.passivewall.vel_y_exponent = veL_y_exponent;
+    fp->mv.co.passivewall.vel_y_exponent = vel_y_exponent;
     {
         Vec3 ef_pos;
         float pos_x_offset = fp->cur_pos.x + ef_offset.x;
+        /// @todo Unused stack.
+#ifdef MUST_MATCH
+        u8 _[4] = { 0 };
+#endif
         ef_pos.x = pos_x_offset;
         ef_pos.y = fp->cur_pos.y + ef_offset.y;
         ef_pos.z = fp->cur_pos.z;
@@ -147,7 +145,7 @@ ASM void ftCo_800C1E64(ftCo_GObj* gobj, int msid, int timer,
             -(fp->x68C_transNPos.z * -fp->facing_dir - pos_x_offset);
     }
     ft_80081F2C(gobj);
-    ft_800881D8(fp, fp->ft_data->x4C_collisionData->x24, 0x7FU, 0x40U);
+    ft_800881D8(fp, fp->ft_data->x4C_collisionData->x24, 0x7F, 0x40);
     ftCommon_8007EBAC(fp, 12, 0);
     if (timer == 0) {
         ft_80088148(fp, 3, 0x7F, 0x40);
@@ -308,7 +306,8 @@ ASM void ftCo_PassiveWall_Anim(ftCo_GObj* gobj)
                 ftAnim_SetAnimRate(gobj, ftCo_804D8C64);
             }
             if (fp->motion_id == ftCo_MS_PassiveWall) {
-                fp->self_vel.x = fp->facing_dir * fp->co_attrs.x100;
+                fp->self_vel.x =
+                    fp->facing_dir * fp->co_attrs.passivewall_vel_x;
             } else {
                 fp->self_vel.x = fp->facing_dir *
                                  fp->co_attrs.wall_jump_horizontal_velocity;

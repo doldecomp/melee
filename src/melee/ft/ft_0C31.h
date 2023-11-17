@@ -165,5 +165,7 @@
 /* 0C8028 */ void ftCo_DownReflect_Coll(ftCo_GObj* gobj);
 /* 0C8064 */ void ftCo_800C8064(void);
 /* 0C80A4 */ UNK_RET ft_800C80A4(UNK_PARAMS);
+/* 4D6580 */ extern HSD_MObj* ft_804D6580;
+/* 4D6588 */ extern HSD_MObj* ft_804D6588;
 
 #endif

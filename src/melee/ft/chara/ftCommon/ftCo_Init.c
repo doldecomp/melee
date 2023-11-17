@@ -45,6 +45,7 @@
 #include "ftCo_Ottotto.h"
 #include "ftCo_Pass.h"
 #include "ftCo_Passive.h"
+#include "ftCo_PassiveCeil.h"
 #include "ftCo_PassiveStand.h"
 #include "ftCo_PassiveWall.h"
 #include "ftCo_Rebound.h"
@@ -62,7 +63,6 @@
 #include "ftCo_YoshiEgg.h"
 
 #include "ft/ft_0BEC.h"
-#include "ft/ft_0C08.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0CD1.h"

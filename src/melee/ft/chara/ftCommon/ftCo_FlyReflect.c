@@ -4,13 +4,14 @@
 
 #include "ftCo_Damage.h"
 #include "ftCo_DownBound.h"
+#include "ftCo_PassiveCeil.h"
 #include "ftCo_PassiveWall.h"
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0C08.h"
+#include "ft/ft_0C31.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"

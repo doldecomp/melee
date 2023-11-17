@@ -5871,6 +5871,16 @@ ft_800C80A4:
 /* 800C816C 000C4D4C  4E 80 00 20 */	blr
 
 
+.section .sbss
+    .balign 8
+.global ft_804D6580
+ft_804D6580:
+    .skip 0x8
+.global ft_804D6588
+ft_804D6588:
+    .skip 0x8
+
+
 .section .data
     .balign 8
 .L_803C6CA8:
