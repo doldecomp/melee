@@ -27,10 +27,6 @@ void ftCo_8009EFA4(ftCo_GObj* gobj)
     fp->throw_flags = 0;
     {
         Vec3 vec;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
-        u8 _[4] = { 0 };
-#endif
         vec.x = 0;
         vec.y = fp->coll_data.xA4_ecbCurrCorrect.top.y;
         vec.z = 0;
@@ -41,7 +37,7 @@ void ftCo_8009EFA4(ftCo_GObj* gobj)
             float pos_y = fp->cur_pos.y;
             float transn_y = fp->x68C_transNPos.y;
             fp->cur_pos.y = transn_y + (pos_y + vec.y);
-            ft_80082D40(gobj, pos_y, transn_y);
+            ft_80082D40(gobj, pos_y);
             fp->self_vel.y = fp->self_vel.z = 0;
         }
     }

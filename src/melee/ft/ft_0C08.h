@@ -1,19 +1,10 @@
-#ifndef GALE01_0C12D8
-#define GALE01_0C12D8
+#ifndef GALE01_0C08
+#define GALE01_0C08
 
 #include "ftCommon/forward.h"
 
 #include <placeholder.h>
 
-/* 0C12D8 */ void ftCo_BuryWait_Anim(ftCo_GObj* gobj);
-/* 0C134C */ void ftCo_BuryWait_IASA(ftCo_GObj* gobj);
-/* 0C1350 */ void ftCo_BuryWait_Phys(ftCo_GObj* gobj);
-/* 0C1354 */ void ftCo_BuryWait_Coll(ftCo_GObj* gobj);
-/* 0C13BC */ void ftCo_800C13BC(ftCo_GObj* gobj);
-/* 0C1460 */ void ftCo_BuryJump_Anim(ftCo_GObj* gobj);
-/* 0C14B0 */ void ftCo_BuryJump_IASA(ftCo_GObj* gobj);
-/* 0C1574 */ void ftCo_BuryJump_Phys(ftCo_GObj* gobj);
-/* 0C15B4 */ void ftCo_BuryJump_Coll(ftCo_GObj* gobj);
 /* 0C15F4 */ UNK_RET ftCo_800C15F4(UNK_PARAMS);
 /* 0C1718 */ UNK_RET ftCo_800C1718(UNK_PARAMS);
 /* 0C17CC */ bool ftCo_800C17CC(ftCo_GObj* gobj);

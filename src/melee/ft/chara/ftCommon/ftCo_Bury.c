@@ -3,14 +3,20 @@
 
 #include "ftCo_Bury.h"
 
+#include "ftCo_AttackAir.h"
 #include "ftCo_BarrelWait.h"
 #include "ftCo_Damage.h"
+#include "ftCo_EscapeAir.h"
+#include "ftCo_ItemThrow.h"
 #include "ftCo_Lift.h"
+#include "ftCo_SpecialAir.h"
 
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0C08.h"
+#include "ft/ft_0C31.h"
+#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
@@ -359,14 +365,14 @@ lbl_800C0C6C:
 #pragma peephole on
 #endif /* clang-format on */
 
-bool ftCo_800C0C88(enum_t arg0)
+bool ftCo_800C0C88(ftCommon_BuryType arg0)
 {
     switch (arg0) {
-    case 1:
-    case 3:
+    case BuryType_Unk1:
+    case BuryType_Unk3:
         return true;
     default:
-    case 2:
+    case BuryType_Unk2:
         return false;
     }
 }
@@ -856,4 +862,202 @@ void ftCo_800C124C(ftCo_GObj* gobj)
     fp->x221D_b5 = true;
     fp->x2220_flag.bits.b3 = true;
     fp->x2224_b4 = true;
+}
+
+void ftCo_BuryWait_Anim(ftCo_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x1A4C -= p_ftCommonData->x610;
+    ftCommon_8007DC08(fp, p_ftCommonData->x614);
+    if (fp->x1A4C <= ftCo_804D8C38) {
+        ftCo_800C13BC(gobj);
+    }
+}
+
+void ftCo_BuryWait_IASA(ftCo_GObj* gobj) {}
+
+void ftCo_BuryWait_Phys(ftCo_GObj* gobj) {}
+
+ASM void ftCo_BuryWait_Coll(ftCo_GObj* gobj)
+#if !defined(MUST_MATCH) || defined(WIP)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8] = { 0 };
+#endif
+    ftCo_Bury_Coll(gobj);
+}
+
+#else /* clang-format off */
+{ nofralloc
+/* 800C1354 000BDF34  7C 08 02 A6 */	mflr r0
+/* 800C1358 000BDF38  90 01 00 04 */	stw r0, 4(r1)
+/* 800C135C 000BDF3C  94 21 FF D8 */	stwu r1, -0x28(r1)
+/* 800C1360 000BDF40  93 E1 00 24 */	stw r31, 0x24(r1)
+/* 800C1364 000BDF44  93 C1 00 20 */	stw r30, 0x20(r1)
+/* 800C1368 000BDF48  7C 7E 1B 78 */	mr r30, r3
+/* 800C136C 000BDF4C  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 800C1370 000BDF50  38 9F 23 44 */	addi r4, r31, 0x2344
+/* 800C1374 000BDF54  4B FC 15 15 */	bl ft_80082888
+/* 800C1378 000BDF58  2C 03 00 00 */	cmpwi r3, 0
+/* 800C137C 000BDF5C  41 82 00 20 */	beq lbl_800C139C
+/* 800C1380 000BDF60  80 7F 23 60 */	lwz r3, 0x2360(r31)
+/* 800C1384 000BDF64  80 1F 08 3C */	lwz r0, 0x83c(r31)
+/* 800C1388 000BDF68  7C 03 00 00 */	cmpw r3, r0
+/* 800C138C 000BDF6C  40 82 00 10 */	bne lbl_800C139C
+/* 800C1390 000BDF70  48 10 43 71 */	bl Ground_801C5700
+/* 800C1394 000BDF74  28 03 00 00 */	cmplwi r3, 0
+/* 800C1398 000BDF78  41 82 00 0C */	beq lbl_800C13A4
+lbl_800C139C:
+/* 800C139C 000BDF7C  7F C3 F3 78 */	mr r3, r30
+/* 800C13A0 000BDF80  48 00 00 1D */	bl ftCo_800C13BC
+lbl_800C13A4:
+/* 800C13A4 000BDF84  80 01 00 2C */	lwz r0, 0x2c(r1)
+/* 800C13A8 000BDF88  83 E1 00 24 */	lwz r31, 0x24(r1)
+/* 800C13AC 000BDF8C  83 C1 00 20 */	lwz r30, 0x20(r1)
+/* 800C13B0 000BDF90  38 21 00 28 */	addi r1, r1, 0x28
+/* 800C13B4 000BDF94  7C 08 03 A6 */	mtlr r0
+/* 800C13B8 000BDF98  4E 80 00 20 */	blr
+}
+#pragma peephole on
+#endif /* clang-format on */
+
+ASM void ftCo_800C13BC(ftCo_GObj* gobj)
+#if !defined(MUST_MATCH) || defined(WIP)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (ftCo_800C5240(gobj)) {
+        ftCo_800C5A98(gobj);
+        return;
+    }
+    ftCommon_8007D5D4(fp);
+    fp->self_vel.x = 0;
+    fp->self_vel.y = p_ftCommonData->x618;
+    fp->mv.co.buryjump.x0 = 0;
+    Fighter_ChangeMotionState(gobj, ftCo_MS_BuryJump, Ft_MF_None, 0, 1, 0,
+                              NULL);
+    ftCommon_8007E2F4(fp, 0x1FF);
+    ftColl_8007B7A4(gobj, p_ftCommonData->x620);
+}
+
+#else /* clang-format off */
+{ nofralloc
+/* 800C13BC 000BDF9C  7C 08 02 A6 */	mflr r0
+/* 800C13C0 000BDFA0  90 01 00 04 */	stw r0, 4(r1)
+/* 800C13C4 000BDFA4  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 800C13C8 000BDFA8  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 800C13CC 000BDFAC  93 C1 00 10 */	stw r30, 0x10(r1)
+/* 800C13D0 000BDFB0  7C 7E 1B 78 */	mr r30, r3
+/* 800C13D4 000BDFB4  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 800C13D8 000BDFB8  48 00 3E 69 */	bl ftCo_800C5240
+/* 800C13DC 000BDFBC  2C 03 00 00 */	cmpwi r3, 0
+/* 800C13E0 000BDFC0  41 82 00 10 */	beq lbl_800C13F0
+/* 800C13E4 000BDFC4  7F C3 F3 78 */	mr r3, r30
+/* 800C13E8 000BDFC8  48 00 46 B1 */	bl ftCo_800C5A98
+/* 800C13EC 000BDFCC  48 00 00 5C */	b lbl_800C1448
+lbl_800C13F0:
+/* 800C13F0 000BDFD0  7F E3 FB 78 */	mr r3, r31
+/* 800C13F4 000BDFD4  4B FB C1 E1 */	bl ftCommon_8007D5D4
+/* 800C13F8 000BDFD8  C0 22 92 58 */	lfs f1, ftCo_804D8C38
+/* 800C13FC 000BDFDC  38 7E 00 00 */	addi r3, r30, 0
+/* 800C1400 000BDFE0  38 80 01 28 */	li r4, 0x128
+/* 800C1404 000BDFE4  D0 3F 00 80 */	stfs f1, 0x80(r31)
+/* 800C1408 000BDFE8  FC 60 08 90 */	fmr f3, f1
+/* 800C140C 000BDFEC  38 A0 00 00 */	li r5, 0
+/* 800C1410 000BDFF0  80 ED AE B4 */	lwz r7, p_ftCommonData
+/* 800C1414 000BDFF4  38 C0 00 00 */	li r6, 0
+/* 800C1418 000BDFF8  C0 07 06 18 */	lfs f0, 0x618(r7)
+/* 800C141C 000BDFFC  D0 1F 00 84 */	stfs f0, 0x84(r31)
+/* 800C1420 000BE000  D0 3F 23 40 */	stfs f1, 0x2340(r31)
+/* 800C1424 000BE004  C0 42 92 5C */	lfs f2, ftCo_804D8C3C
+/* 800C1428 000BE008  4B FA 7F 85 */	bl Fighter_ChangeMotionState
+/* 800C142C 000BE00C  38 7F 00 00 */	addi r3, r31, 0
+/* 800C1430 000BE010  38 80 01 FF */	li r4, 0x1ff
+/* 800C1434 000BE014  4B FB CE C1 */	bl ftCommon_8007E2F4
+/* 800C1438 000BE018  80 8D AE B4 */	lwz r4, p_ftCommonData
+/* 800C143C 000BE01C  7F C3 F3 78 */	mr r3, r30
+/* 800C1440 000BE020  80 84 06 20 */	lwz r4, 0x620(r4)
+/* 800C1444 000BE024  4B FB A3 61 */	bl ftColl_8007B7A4
+lbl_800C1448:
+/* 800C1448 000BE028  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 800C144C 000BE02C  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 800C1450 000BE030  83 C1 00 10 */	lwz r30, 0x10(r1)
+/* 800C1454 000BE034  38 21 00 18 */	addi r1, r1, 0x18
+/* 800C1458 000BE038  7C 08 03 A6 */	mtlr r0
+/* 800C145C 000BE03C  4E 80 00 20 */	blr
+}
+#pragma peephole on
+#endif /* clang-format on */
+
+ASM void ftCo_BuryJump_Anim(ftCo_GObj* gobj)
+#if !defined(MUST_MATCH) || defined(WIP)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->mv.co.buryjump.x0 += ftCo_804D8C3C;
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_800CC730(gobj);
+    }
+}
+
+#else /* clang-format off */
+{ nofralloc
+/* 800C1460 000BE040  7C 08 02 A6 */	mflr r0
+/* 800C1464 000BE044  90 01 00 04 */	stw r0, 4(r1)
+/* 800C1468 000BE048  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 800C146C 000BE04C  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 800C1470 000BE050  7C 7F 1B 78 */	mr r31, r3
+/* 800C1474 000BE054  80 83 00 2C */	lwz r4, 0x2c(r3)
+/* 800C1478 000BE058  C0 02 92 5C */	lfs f0, ftCo_804D8C3C
+/* 800C147C 000BE05C  C0 24 23 40 */	lfs f1, 0x2340(r4)
+/* 800C1480 000BE060  EC 01 00 2A */	fadds f0, f1, f0
+/* 800C1484 000BE064  D0 04 23 40 */	stfs f0, 0x2340(r4)
+/* 800C1488 000BE068  4B FA DD B1 */	bl ftAnim_IsFramesRemaining
+/* 800C148C 000BE06C  2C 03 00 00 */	cmpwi r3, 0
+/* 800C1490 000BE070  40 82 00 0C */	bne lbl_800C149C
+/* 800C1494 000BE074  7F E3 FB 78 */	mr r3, r31
+/* 800C1498 000BE078  48 00 B2 99 */	bl ftCo_800CC730
+lbl_800C149C:
+/* 800C149C 000BE07C  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 800C14A0 000BE080  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 800C14A4 000BE084  38 21 00 20 */	addi r1, r1, 0x20
+/* 800C14A8 000BE088  7C 08 03 A6 */	mtlr r0
+/* 800C14AC 000BE08C  4E 80 00 20 */	blr
+}
+#pragma peephole on
+#endif /* clang-format on */
+
+void ftCo_BuryJump_IASA(ftCo_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->mv.ca.specials.grav >= p_ftCommonData->x61C) {
+        RETURN_IF(ftCo_SpecialAir_CheckInput(gobj))
+        RETURN_IF(ftCo_80095328(gobj, NULL))
+        RETURN_IF(ftCo_800D7100(gobj))
+        RETURN_IF(ftCo_800C3B10(gobj))
+        RETURN_IF(ftCo_80099A58(gobj))
+        RETURN_IF(ftCo_AttackAir_CheckItemThrowInput(gobj))
+        RETURN_IF(ftCo_800D705C(gobj))
+        RETURN_IF(ftCo_800CB870(gobj))
+    }
+}
+
+void ftCo_BuryJump_Phys(ftCo_GObj* gobj)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8] = { 0 };
+#endif
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCommon_8007D494(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
+    ftCommon_8007D268(fp);
+}
+
+void ftCo_BuryJump_Coll(ftCo_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->self_vel.y >= ftCo_804D8C38) {
+        ft_80082D40(gobj, fp->self_vel.y);
+    } else {
+        ftCo_AirCatchHit_Coll(gobj);
+    }
 }

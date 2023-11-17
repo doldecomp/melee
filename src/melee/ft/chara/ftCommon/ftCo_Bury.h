@@ -9,12 +9,6 @@
 
 #include <placeholder.h>
 
-struct _m2c_stack_ftCo_800C08A0 {
-    /* 0x000 */ char pad_0[0x1C];
-    /* 0x01C */ HitCapsule hit; /* inferred */
-    /* 0x154 */ char pad_154[0x24];
-}; /* size = 0x178 */
-
 /* 0C1D38 */ bool ftCo_800C1D38(ftCo_GObj* gobj);
 /* 0C0874 */ void ftCo_800C0874(ftCo_GObj* gobj, UNK_T arg1,
                                 ftCommon_BuryType arg2);
@@ -26,7 +20,7 @@ struct _m2c_stack_ftCo_800C08A0 {
                                 ftCommon_BuryType arg2);
 /* 0C0A98 */ void ftCo_800C0A98(ftCo_GObj* gobj);
 /* 0C0B20 */ void ftCo_800C0B20(ftCo_GObj* gobj);
-/* 0C0C88 */ bool ftCo_800C0C88(enum_t);
+/* 0C0C88 */ bool ftCo_800C0C88(ftCommon_BuryType);
 /* 0C0CB8 */ bool ftCo_800C0CB8(ftCo_GObj* gobj);
 /* 0C0D0C */ void ftCo_800C0D0C(ftCo_GObj* gobj);
 /* 0C0F34 */ void ftCo_Bury_Anim(ftCo_GObj* gobj);
@@ -35,5 +29,14 @@ struct _m2c_stack_ftCo_800C08A0 {
 /* 0C1194 */ void ftCo_Bury_Phys(ftCo_GObj* gobj);
 /* 0C11E4 */ void ftCo_Bury_Coll(ftCo_GObj* gobj);
 /* 0C124C */ void ftCo_800C124C(ftCo_GObj* gobj);
+/* 0C12D8 */ void ftCo_BuryWait_Anim(ftCo_GObj* gobj);
+/* 0C134C */ void ftCo_BuryWait_IASA(ftCo_GObj* gobj);
+/* 0C1350 */ void ftCo_BuryWait_Phys(ftCo_GObj* gobj);
+/* 0C1354 */ void ftCo_BuryWait_Coll(ftCo_GObj* gobj);
+/* 0C13BC */ void ftCo_800C13BC(ftCo_GObj* gobj);
+/* 0C1460 */ void ftCo_BuryJump_Anim(ftCo_GObj* gobj);
+/* 0C14B0 */ void ftCo_BuryJump_IASA(ftCo_GObj* gobj);
+/* 0C1574 */ void ftCo_BuryJump_Phys(ftCo_GObj* gobj);
+/* 0C15B4 */ void ftCo_BuryJump_Coll(ftCo_GObj* gobj);
 
 #endif

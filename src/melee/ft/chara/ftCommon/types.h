@@ -204,6 +204,9 @@ union ftCommon_MotionVars {
         /* fp+2360 */ enum_t x20;
         /* fp+2364 */ Vec3 translate;
     } bury;
+    struct {
+        /* fp+2340 */ float x0;
+    } buryjump;
 };
 
 #endif
