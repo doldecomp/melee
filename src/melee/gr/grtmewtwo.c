@@ -38,9 +38,9 @@ typedef struct grTMewtwo_UnkStruct {
 /* 2225C8 */ static bool grTMewtwo_802225C8(Vec3* arg0, int arg1,
                                             HSD_JObj* arg2);
 /* 3E8FC0 */ static void grTMewtwo_803E8FC0(Ground_GObj* gobj);
-/* 4D6B08 */ grTMewtwo_UnkStruct* grTMewtwo_804D6B08;
+/* 4D6B08 */ static grTMewtwo_UnkStruct* grTMewtwo_804D6B08;
 
-StageCallbacks grTMewtwo_803E8F70[4] = {
+static StageCallbacks grTMewtwo_803E8F70[4] = {
     {
         grTMewtwo_8022236C,
         grTMewtwo_80222398,
