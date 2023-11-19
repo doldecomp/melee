@@ -15,8 +15,8 @@ typedef struct itPKThunderAttributes {
 } itPKThunderAttributes;
 
 typedef struct PKThunderVars {
-    HSD_GObj* xDD4[6]; // GObj pointers?
-    Vec3 xDEC;         // Start of vars
+    HSD_GObj* xDD4[6];
+    Vec3 xDEC;
     Vec3 xDFC;
     Vec3 xE08;
     Vec3 xE14;
@@ -50,7 +50,7 @@ typedef struct PKThunderVars {
     f32 xEE8;
     s32 xEEC;
     s32 xEF0;
-    HSD_GObj* xEF4; // MOAR pointars!
+    HSD_GObj* xEF4;
     HSD_GObj* xEF8;
     HSD_GObj* xEFC;
     HSD_GObj* xF00;

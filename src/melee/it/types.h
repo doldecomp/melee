@@ -267,8 +267,8 @@ struct ItemModelDesc {
 
 struct Article {
     ItemAttr* x0_common_attr;
-    unk_t x4_specialAttributes;
-    unk_t x8_hurtbox;
+    void* x4_specialAttributes;
+    UNK_T x8_hurtbox;
     ItemStateArray* xC_itemStates;
     ItemModelDesc* x10_modelDesc;
     ItemDynamics* x14_dynamics;
@@ -610,6 +610,7 @@ struct Item {
     union {
         ItCapsuleAttrs capsule;
         ItStarVars star;
+        itSword_ItemVars sword;
         BobOmbVars BobOmb;
         HeartContainerVars HeartContainer;
         MaximTomatoVars MaximTomato;
@@ -665,39 +666,23 @@ struct BobOmbRain {
 };
 
 struct SpawnItem {
-    HSD_GObj* x0_parent_gobj;  // Primary owner of the item; usually a fp GObj
-    HSD_GObj* x4_parent_gobj2; // Secondary owner GObj of the item; e.g. Ness'
-                               // PK Fire Pillar has this set to PK Fire
-                               // Spark's item GObj
-    ItemKind kind;             // 0x8, ID of the item to spawn
-
-    /// @at{C} @sz{4}
-    /// @brief Defines the behavior of the item, such as thrown and pickup.
-    /// @todo 0 = capsule.
-    enum_t hold_kind;
-
-    s32 x10;
-
-    /// @at{14} @sz{C}
-    Vec3 pos;
-
-    /// @at{20} @sz{C}
-    Vec3 prev_pos;
-
-    /// @at{2C} @sz{C}
-    Vec3 vel;
-
-    /// @at{38} @sz{4}
-    f32 facing_dir;
-
-    s16 x3C_damage;
-    s16 x3E;
-    s32 x40;                // 0x1 = correct initial position
-    UnkFlagStruct x44_flag; // 0x80 = perform initial collision check
-    UnkFlagStruct x45_flag;
-    UnkFlagStruct x46_flag;
-    UnkFlagStruct x47_flag;
-    GroundOrAir x48_ground_or_air; // 0x0 = stationary, 0x1 = air (?)
+    /*  +0 */ HSD_GObj* x0_parent_gobj;
+    /*  +4 */ HSD_GObj* x4_parent_gobj2;
+    /*  +8 */ ItemKind kind;
+    /*  +C */ enum_t hold_kind;
+    /* +10 */ s32 x10;
+    /* +14 */ Vec3 pos;
+    /* +20 */ Vec3 prev_pos;
+    /* +2C */ Vec3 vel;
+    /* +38 */ f32 facing_dir;
+    /* +3C */ s16 x3C_damage;
+    /* +3E */ s16 x3E;
+    /* +40 */ s32 x40;
+    /* +44 */ UnkFlagStruct x44_flag;
+    /* +45 */ UnkFlagStruct x45_flag;
+    /* +46 */ UnkFlagStruct x46_flag;
+    /* +47 */ UnkFlagStruct x47_flag;
+    /* +48 */ GroundOrAir x48_ground_or_air;
 };
 
 struct ItemModStruct {

@@ -291,7 +291,7 @@ struct ItemLogicTable it_803F14C4[count] = {
         it_80285FE0,
         it_80286000,
         NULL,
-        it_80286048,
+        itSword_BounceOffShield,
         it_80286024,
         it_80286068,
     },

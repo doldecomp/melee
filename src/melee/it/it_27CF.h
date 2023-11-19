@@ -17,7 +17,6 @@ HSD_GObj* it_80284854(Vec3*);
 HSD_GObj* it_802896CC(Vec3*);
 void it_8028FE90(Item_GObj*);
 
-HSD_GObj* it_80284D54(Vec3*);
 void it_8028428C(Item_GObj*);
 void it_80283BD4(Item_GObj*);
 HSD_GObj* it_80286088(s32);
@@ -150,8 +149,6 @@ void it_802C519C(Item_GObj*, Vec3*, s32, s32, f32, f32);
 void it_802B4AC8(Item_GObj* gobj, Vec3*, f32 facing_dir, f32 x);
 void it_802C53F0(Item_GObj*, Vec3*, f32, f32, f32);
 s32 it_802E5F8C(Item_GObj*, Vec3*, s32, bool, f32, f32);
-void it_80284FC4(Item_GObj*, s32, f32);
-void it_80285024(Item_GObj*, s32);
 void it_802950D4(Item_GObj*, bool);
 void it_80294EB0(Item_GObj*, Vec3*, Vec3*);
 s32 it_802F2094(s32, Vec3*, s32, s32);
