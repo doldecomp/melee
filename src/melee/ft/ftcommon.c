@@ -27,6 +27,7 @@
 #include "it/it_26B1.h"
 #include "it/it_27CF.h"
 #include "it/item.h"
+#include "it/items/itsword.h"
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 #include "pl/pl_0371.h"

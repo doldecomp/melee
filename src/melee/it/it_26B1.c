@@ -8,6 +8,7 @@
 #include "it/it_266F.h"
 #include "it/it_27CF.h"
 #include "it/item.h"
+#include "items/itsword.h"
 
 #include <common_structs.h>
 #include <math.h>
@@ -1002,7 +1003,7 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
         break;
 
     case 12:
-        bobOmbGObj = it_80284D54(&bobOmbRain->x8_vec);
+        bobOmbGObj = itSword_Spawn(&bobOmbRain->x8_vec);
         if (bobOmbGObj != NULL) {
             it_80274F10(bobOmbGObj);
         }

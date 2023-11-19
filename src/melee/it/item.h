@@ -41,7 +41,7 @@ void Item_8026849C(HSD_GObj* gobj);
 HSD_GObj* Item_80268B18(SpawnItem* spawnItem);
 
 /// Item spawn prefunction - spawn grounded
-void Item_80268B5C(SpawnItem* spawnItem);
+Item_GObj* Item_80268B5C(SpawnItem* spawnItem);
 
 /// Item spawn prefunction - spawn grounded and toggle unknown true
 void Item_80268B9C(SpawnItem* spawnItem);

@@ -1011,12 +1011,12 @@ HSD_GObj* Item_80268B18(SpawnItem* spawnItem)
 }
 
 /// Item spawn prefunction - spawn grounded
-void Item_80268B5C(SpawnItem* spawnItem)
+HSD_GObj* Item_80268B5C(SpawnItem* spawnItem)
 {
     spawnItem->x48_ground_or_air = GA_Ground;
     spawnItem->x10 = 0;
     Item_802674AC(spawnItem);
-    Item_8026862C(spawnItem);
+    return Item_8026862C(spawnItem);
 }
 
 /// Item spawn prefunction - spawn grounded and toggle unknown true

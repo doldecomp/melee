@@ -3,7 +3,7 @@
 
 #include "it/forward.h"
 
-HSD_JObj* it_80272CC0(Item_GObj*, int);
+HSD_JObj* it_80272CC0(Item_GObj*, enum_t);
 void it_8027C8B0(Item_GObj*);
 
 #endif
