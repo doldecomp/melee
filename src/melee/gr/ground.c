@@ -79,7 +79,7 @@ extern StageData Ground_803DFEA8, grTe_803E5764, grCs_803E11A4, grRc_803E4ECC,
     grFigureGet_803E7D34, grPushOn_803E7B10, grTMr_803E85A4, grTCa_803E8664,
     grTCl_803E872C, grTDk_803E87EC, grTDr_803E88AC, grTFc_803E8974,
     grTFx_803E8A34, grTIc_803E8AF4, grTKb_803E8C0C, grTKp_803E8CCC,
-    grTLk_803E8D8C, grTLg_803E8E4C, grTMs_803E8F0C, grTMt_803E8FCC,
+    grTLk_803E8D8C, grTLg_803E8E4C, grTMs_803E8F0C, grTMewtwo_803E8FCC,
     grTNs_803E908C, grTPe_803E914C, grTPc_803E920C, grTPk_803E92CC,
     grTPr_803E9394, grTSs_803E9454, grTSk_803E9514, grTYs_803E95D4,
     grTZd_803E9694, grTGw_803E9754, grTFe_803E981C, grTGn_803E98DC,
@@ -104,7 +104,7 @@ static StageData* Ground_803DFEDC[] = {
     &grTCl_803E872C,      &grTDk_803E87EC,      &grTDr_803E88AC,
     &grTFc_803E8974,      &grTFx_803E8A34,      &grTIc_803E8AF4,
     &grTKb_803E8C0C,      &grTKp_803E8CCC,      &grTLk_803E8D8C,
-    &grTLg_803E8E4C,      &grTMs_803E8F0C,      &grTMt_803E8FCC,
+    &grTLg_803E8E4C,      &grTMs_803E8F0C,      &grTMewtwo_803E8FCC,
     &grTNs_803E908C,      &grTPe_803E914C,      &grTPc_803E920C,
     &grTPk_803E92CC,      &grTPr_803E9394,      &grTSs_803E9454,
     &grTSk_803E9514,      &grTYs_803E95D4,      &grTZd_803E9694,
@@ -247,7 +247,7 @@ void Ground_801C0478(void* ptr)
 
 f32 Ground_801C0498(void)
 {
-    UnkStage6B0* temp_r3 = stage_info.x6B0;
+    UnkStage6B0* temp_r3 = stage_info.param;
 
     if (temp_r3 != NULL) {
         return temp_r3->x0;
@@ -260,7 +260,7 @@ static char get_userdata_ground[] = "%s:%d: couldn t get user data(Ground)\n";
 
 void Ground_801C04BC(f32 arg8)
 {
-    UnkStage6B0* temp_r3 = stage_info.x6B0;
+    UnkStage6B0* temp_r3 = stage_info.param;
 
     if (temp_r3 != NULL) {
         temp_r3->x0 = arg8;
@@ -271,115 +271,115 @@ void Ground_801C04BC(f32 arg8)
 
 s32 Ground_801C0508(void)
 {
-    UnkStage6B0* temp_r3 = stage_info.x6B0;
+    UnkStage6B0* temp_r3 = stage_info.param;
     return temp_r3 != NULL ? temp_r3->x4 : 128;
 }
 
 void Ground_801C052C(s32* arg0)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     x->xB8 = *arg0;
 }
 
 void Ground_801C0544(s32* arg0)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     x->xC0 = *arg0;
 }
 
 void Ground_801C055C(s32* arg0)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     x->xD0 = *arg0;
 }
 
 void Ground_801C0574(s32* arg0)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     x->xD8 = *arg0;
 }
 
 void Ground_801C058C(s32* arg0)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     x->xC4 = *arg0;
 }
 
 void Ground_801C05A4(s32* arg0)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     x->xCC = *arg0;
 }
 
 void Ground_801C05BC(s32* arg0)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     x->xD4 = *arg0;
 }
 
 void Ground_801C05D4(s32* arg0)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     x->xBC = *arg0;
 }
 
 void Ground_801C05EC(s32* arg0)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     x->xC8 = *arg0;
 }
 
 s32* Ground_801C0604(void)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     return &x->xB8;
 }
 
 s32* Ground_801C0618(void)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     return &x->xC0;
 }
 
 s32* Ground_801C062C(void)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     return &x->xD0;
 }
 
 s32* Ground_801C0640(void)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     return &x->xD8;
 }
 
 s32* Ground_801C0654(void)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     return &x->xC4;
 }
 
 s32* Ground_801C0668(void)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     return &x->xCC;
 }
 
 s32* Ground_801C067C(void)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     return &x->xD4;
 }
 
 s32* Ground_801C0690(void)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     return &x->xBC;
 }
 
 s32* Ground_801C06A4(void)
 {
-    UnkStage6B0* x = stage_info.x6B0;
+    UnkStage6B0* x = stage_info.param;
     return &x->xC8;
 }
 
@@ -423,43 +423,44 @@ void Ground_801C0800(StructPairWithStageID* pair)
 {
     StageData* stage_data = Ground_803DFEDC[pair->stage_id];
 
-    Ground_801C38D0(stage_info.x6B0->x8, stage_info.x6B0->x14,
-                    stage_info.x6B0->x1C, stage_info.x6B0->x18);
-    Ground_801C38EC(stage_info.x6B0->x10, stage_info.x6B0->xC);
-    Ground_801C3970(stage_info.x6B0->x28);
-    Ground_801C3900(stage_info.x6B0->x2E, stage_info.x6B0->x30,
-                    stage_info.x6B0->x34, stage_info.x6B0->x38,
-                    stage_info.x6B0->x3C, stage_info.x6B0->x40,
-                    stage_info.x6B0->x44, stage_info.x6B0->x48);
-    Ground_801C392C(stage_info.x6B0->x50, stage_info.x6B0->x54,
-                    stage_info.x6B0->x58, stage_info.x6B0->x5C,
-                    stage_info.x6B0->x60, stage_info.x6B0->x64);
-    Ground_801C3960(stage_info.x6B0->x20);
-    Ground_801C3950(stage_info.x6B0->x24);
+    Ground_801C38D0(stage_info.param->x8, stage_info.param->x14,
+                    stage_info.param->x1C, stage_info.param->x18);
+    Ground_801C38EC(stage_info.param->x10, stage_info.param->xC);
+    Ground_801C3970(stage_info.param->x28);
+    Ground_801C3900(stage_info.param->x2E, stage_info.param->x30,
+                    stage_info.param->x34, stage_info.param->x38,
+                    stage_info.param->x3C, stage_info.param->x40,
+                    stage_info.param->x44, stage_info.param->x48);
+    Ground_801C392C(stage_info.param->x50, stage_info.param->x54,
+                    stage_info.param->x58, stage_info.param->x5C,
+                    stage_info.param->x60, stage_info.param->x64);
+    Ground_801C3960(stage_info.param->x20);
+    Ground_801C3950(stage_info.param->x24);
 
     {
         int i;
-        if (stage_info.x6A8 != NULL) {
-            for (i = 0; stage_info.x6A8[i] != NULL; i++) {
-                it_8026B40C(stage_info.x6A8[i]->unk4,
-                            stage_info.x6A8[i]->unk0);
+        if (stage_info.itemdata != NULL) {
+            for (i = 0; stage_info.itemdata[i] != NULL; i++) {
+                it_8026B40C(stage_info.itemdata[i]->unk4,
+                            stage_info.itemdata[i]->unk0);
             }
         }
 
-        if (stage_info.x6B4 != NULL) {
-            for (i = 1; stage_info.x6B4[i] != NULL; i++) {
+        if (stage_info.ald_yaku_all != NULL) {
+            for (i = 1; stage_info.ald_yaku_all[i] != NULL; i++) {
                 Article* a = it_804D6D38[Pokemon_Random - It_Kind_Kuriboh];
                 a->xC_itemStates->x0_itemStateDesc[i].xC_script =
-                    stage_info.x6B4[i];
+                    stage_info.ald_yaku_all[i];
             }
         }
     }
 
-    if (stage_info.x6B8 != NULL && stage_info.x6BC != NULL) {
-        psInitDataBankLoad(0x1E, stage_info.x6B8, stage_info.x6BC, 0, 0);
+    if (stage_info.map_ptcl != NULL && stage_info.map_texg != NULL) {
+        psInitDataBankLoad(0x1E, stage_info.map_ptcl, stage_info.map_texg, 0,
+                           0);
     }
 
-    mpLib_8004D288(stage_info.x6AC);
+    mpLib_8004D288(stage_info.coll_data);
     mpLib_80058820();
     Ground_801C1E94();
     Ground_801C466C();
@@ -1909,13 +1910,13 @@ static bool Ground_801C24F8(s32 arg0, u32 arg1, s32* arg2)
     /// @todo @c phi_r30 probably belongs to an @c inline.
     UnkBgmStruct* phi_r30;
 
-    UnkBgmStruct* phi_r30_0 = stage_info.x6B0->xB0;
+    UnkBgmStruct* phi_r30_0 = stage_info.param->xB0;
     enum_t bgm = BGM_Undefined;
     bool result = false;
 
     int i;
 
-    for (i = 0; i < stage_info.x6B0->xB4; i++) {
+    for (i = 0; i < stage_info.param->xB4; i++) {
         phi_r30 = &phi_r30_0[i];
         if (phi_r30->x0 == arg0) {
             if (arg1 & 4) {
@@ -2227,11 +2228,11 @@ u8* Ground_801C2AD8(void)
 
 f32 Ground_801C2AE8(s32 arg0)
 {
-    UnkBgmStruct* phi_r5 = stage_info.x6B0->xB0;
+    UnkBgmStruct* phi_r5 = stage_info.param->xB0;
     int i;
-    for (i = 0; i < stage_info.x6B0->xB4; i++) {
+    for (i = 0; i < stage_info.param->xB4; i++) {
         if (phi_r5->x0 == arg0) {
-            return (0.01f * stage_info.x6B0->x68) * (0.01f * phi_r5->x18);
+            return (0.01f * stage_info.param->x68) * (0.01f * phi_r5->x18);
         }
         phi_r5 += 1;
     }
@@ -3727,7 +3728,7 @@ void Ground_801C445C(HSD_LObj* lobj)
         if (wobj != NULL) {
             HSD_WObjGetPosition(wobj, &pos1);
             if (pos0.x != pos1.x || pos0.y != pos1.y || pos0.z != pos1.z) {
-                pos_mul = stage_info.x6B0 != NULL ? stage_info.x6B0->x0 : 1;
+                pos_mul = stage_info.param != NULL ? stage_info.param->x0 : 1;
                 pos1.x *= pos_mul;
                 pos1.y *= pos_mul;
                 pos1.z *= pos_mul;
@@ -3740,7 +3741,8 @@ void Ground_801C445C(HSD_LObj* lobj)
         if (wobj != NULL) {
             HSD_WObjGetPosition(wobj, &pos3);
             if (pos2.x != pos3.x || pos2.y != pos3.y || pos2.z != pos3.z) {
-                pos_mul = stage_info.x6B0 != NULL ? stage_info.x6B0->x0 : 1.0F;
+                pos_mul =
+                    stage_info.param != NULL ? stage_info.param->x0 : 1.0F;
                 pos3.x *= pos_mul;
                 pos3.y *= pos_mul;
                 pos3.z *= pos_mul;
@@ -4020,8 +4022,8 @@ unk_t Ground_801C49B4(void)
 {
     UnkArchiveStruct* archive = grDatFiles_801C6324();
 
-    if (stage_info.x6C4 != NULL) {
-        return Ground_801C20E0(archive, stage_info.x6C4);
+    if (stage_info.map_plit != NULL) {
+        return Ground_801C20E0(archive, stage_info.map_plit);
     }
 
     return &Ground_803E06C8;
@@ -4029,7 +4031,7 @@ unk_t Ground_801C49B4(void)
 
 void* Ground_801C49F8(void)
 {
-    return stage_info.x6C0;
+    return stage_info.yakumono_param;
 }
 
 static inline void removeStageGObj(HSD_GObj* gobj)
@@ -4696,7 +4698,7 @@ f32 Ground_801C57F0(void)
 
 void Ground_801C5800(void)
 {
-    if (stage_info.x6B0->x4C_fixed_cam) {
+    if (stage_info.param->x4C_fixed_cam) {
         Camera_8002F8F4();
     } else {
         Camera_8002F474();
