@@ -233,11 +233,11 @@ typedef struct StageInfo {
 } StageInfo;
 
 typedef struct StageCallbacks {
-    void (*callback0)(HSD_GObj*);
-    bool (*callback1)(HSD_GObj*);
-    void (*callback2)(HSD_GObj*);
-    void (*callback3)(HSD_GObj*);
-    u32 flags;
+    /*  +0 */ void (*callback0)(HSD_GObj*);
+    /*  +4 */ bool (*callback1)(HSD_GObj*);
+    /*  +8 */ void (*callback2)(HSD_GObj*);
+    /*  +C */ void (*callback3)(HSD_GObj*);
+    /* +10 */ u32 flags;
 } StageCallbacks;
 
 typedef struct StageData {
