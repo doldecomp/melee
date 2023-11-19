@@ -52,40 +52,47 @@ void grDatFiles_801C6038(void* arg0, s32 arg1, s32 arg2)
         }
         temp_r3->unk8 = 0;
         if (arg1 == 0) {
-            stage_info.x6AC = HSD_ArchiveGetPublicAddress(sp14, "coll_data");
-            stage_info.x6B0 =
+            stage_info.coll_data =
+                HSD_ArchiveGetPublicAddress(sp14, "coll_data");
+            stage_info.param =
                 HSD_ArchiveGetPublicAddress(sp14, "grGroundParam");
-            stage_info.x6A8 = HSD_ArchiveGetPublicAddress(sp14, "itemdata");
-            stage_info.x6B4 = HSD_ArchiveGetPublicAddress(sp14, "ALDYakuAll");
-            stage_info.x6B8 = HSD_ArchiveGetPublicAddress(sp14, "map_ptcl");
-            stage_info.x6BC = HSD_ArchiveGetPublicAddress(sp14, "map_texg");
-            stage_info.x6C0 =
+            stage_info.itemdata =
+                HSD_ArchiveGetPublicAddress(sp14, "itemdata");
+            stage_info.ald_yaku_all =
+                HSD_ArchiveGetPublicAddress(sp14, "ALDYakuAll");
+            stage_info.map_ptcl =
+                HSD_ArchiveGetPublicAddress(sp14, "map_ptcl");
+            stage_info.map_texg =
+                HSD_ArchiveGetPublicAddress(sp14, "map_texg");
+            stage_info.yakumono_param =
                 HSD_ArchiveGetPublicAddress(sp14, "yakumono_param");
-            stage_info.x6C4 = HSD_ArchiveGetPublicAddress(sp14, "map_plit");
-            stage_info.x6CC =
+            stage_info.map_plit =
+                HSD_ArchiveGetPublicAddress(sp14, "map_plit");
+            stage_info.quake_model_set =
                 HSD_ArchiveGetPublicAddress(sp14, "quake_model_set");
         }
         temp_r3->unk0 = sp14;
-        if (stage_info.x6B8 != NULL && stage_info.x6BC != NULL) {
+        if (stage_info.map_ptcl != NULL && stage_info.map_texg != NULL) {
             if (phi_r28 != 0) {
-                psInitDataBankLoad(0x40, stage_info.x6B8, stage_info.x6BC, 0,
-                                   0);
+                psInitDataBankLoad(0x40, stage_info.map_ptcl,
+                                   stage_info.map_texg, 0, 0);
             } else {
-                psInitDataBank(0x40, stage_info.x6B8, stage_info.x6BC, 0, 0);
+                psInitDataBank(0x40, stage_info.map_ptcl, stage_info.map_texg,
+                               0, 0);
             }
         }
         grDatFiles_801C6228(temp_r3->unk4);
     } else {
         temp_r3->unk4 = &grDatFiles_803E0924;
         if (arg1 == 0) {
-            stage_info.x6AC = NULL;
-            stage_info.x6B0 = &grDatFiles_803E0848;
-            stage_info.x6A8 = NULL;
-            stage_info.x6B4 = NULL;
-            stage_info.x6B8 = NULL;
-            stage_info.x6BC = NULL;
-            stage_info.x6C0 = NULL;
-            stage_info.x6C4 = NULL;
+            stage_info.coll_data = NULL;
+            stage_info.param = &grDatFiles_803E0848;
+            stage_info.itemdata = NULL;
+            stage_info.ald_yaku_all = NULL;
+            stage_info.map_ptcl = NULL;
+            stage_info.map_texg = NULL;
+            stage_info.yakumono_param = NULL;
+            stage_info.map_plit = NULL;
             stage_info.x6C8 = NULL;
         }
         temp_r3->unk0 = (void*) -1;

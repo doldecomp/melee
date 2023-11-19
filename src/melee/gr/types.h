@@ -193,19 +193,19 @@ typedef struct StageInfo {
     HSD_JObj* x280[261];
     void* x694[4];
     void* x6A4;
-    struct {
+    /* +6A8 */ struct {
         s32 unk0;
         Article* unk4;
-    }** x6A8;
-    void* x6AC;
-    struct _UnkStage6B0* x6B0;
-    unk_t** x6B4;
-    void* x6B8;
-    void* x6BC;
-    void* x6C0;
-    void* x6C4;
-    void* x6C8;
-    DynamicModelDesc* x6CC;
+    }** itemdata;
+    /* +6AC */ void* coll_data;
+    /* +6B0 */ struct _UnkStage6B0* param;
+    /* +6B4 */ unk_t** ald_yaku_all;
+    /* +6B8 */ void* map_ptcl;
+    /* +6BC */ void* map_texg;
+    /* +6C0 */ void* yakumono_param;
+    /* +6C4 */ void* map_plit;
+    /* +6C8 */ void* x6C8;
+    /* +6CC */ DynamicModelDesc* quake_model_set;
     s16 x6D0;
     s16 x6D2;
     s16 x6D4;
