@@ -34,9 +34,9 @@ FtCmd ftCo_803C6ADC[3] = {
     ftCo_800BFF14,
 };
 
-/* literal */ extern char* ftCo_803C6AE8;
-/* literal */ extern char* ftCo_803C6B08;
-/* literal */ extern char* ftCo_804D3C10;
+/* literal */ char ftCo_803C6AE8[] = "don't reset spycloak colanim!\n";
+/* literal */ char ftCo_803C6B08[] = "ftcolanimlist.c";
+/* literal */ SDATA char ftCo_804D3C10[] = "0";
 
 void ftCo_Sleep_Anim(ftCo_GObj* gobj) {}
 

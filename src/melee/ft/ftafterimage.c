@@ -16,6 +16,7 @@
 
 /* literal */ char ftCo_803C6BD8[] = "no afterimage item!\n";
 /* literal */ char ftCo_803C6BF0[] = "ftafterimage.c";
+/* literal */ SDATA char ftCo_804D3C30[] = "0";
 
 /* literal */ float const ftCo_804D8C88 = 0;
 /* literal */ double const ftCo_804D8C90 = 0.5;

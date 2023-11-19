@@ -36,8 +36,6 @@ struct _m2c_stack_ftCo_800C2600 {
     /* 0xA20 */ char pad_A20[0xE8];
 }; /* size = 0xB10 */
 
-/* literal */ extern char* ftCo_804D3C30;
-
 /* generated */ extern jtbl_t jtbl_803C6C00;
 /* label */ extern void lbl_800C27C0(void);
 /* label */ extern void lbl_800C27C8(void);
