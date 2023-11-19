@@ -157,7 +157,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Shouldered.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureCaptain.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_09CB.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_09CB.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_BarrelWait.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_StopWall.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_StopCeil.c.o\
@@ -191,7 +190,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/ftmaterial.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftmaterial.s.o\
     $(BUILD_DIR)/src/melee/ft/ftcolanim.c.o\
-    $(BUILD_DIR)/asm/melee/ft/ftcolanim.s.o\
     $(BUILD_DIR)/src/melee/ft/ftdevice.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftdevice.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Bury.c.o\
@@ -202,7 +200,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_PassiveWall.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_PassiveCeil.c.o\
     $(BUILD_DIR)/src/melee/ft/ftafterimage.c.o\
-    $(BUILD_DIR)/asm/melee/ft/ftafterimage.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0C31.s.o\
     $(BUILD_DIR)/asm/melee/ft/ftmetal.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0C88.s.o\

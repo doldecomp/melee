@@ -12,20 +12,19 @@
 #include <placeholder.h>
 #include <baselib/jobj.h>
 
-#ifdef MWERKS_GEKKO
 #ifdef WIP
 #pragma force_active on
 #endif
-float const ftCo_804D8768 = 0;
-float const ftCo_804D876C = 1;
-extern char* ftCo_804D3B28;
-extern char* ftCo_804D3B30;
-extern char* ftCo_804D3B38;
-extern char* ftCo_804D3B40;
-char ftDynamics_803C5720[] = "translate";
-char ftDynamics_803C572C[] = "fighter dynamics num over!\n";
-char ftDynamics_803C5748[] = "ftdynamics.c";
-#endif
+
+/* literal */ float const ftCo_804D8768 = 0;
+/* literal */ float const ftCo_804D876C = 1;
+/* literal */ SDATA char ftCo_804D3B28[] = "jobj.h";
+/* literal */ SDATA char ftCo_804D3B30[] = "jobj";
+/* literal */ SDATA char ftCo_804D3B38[] = "scale";
+/* literal */ SDATA char ftCo_804D3B40[] = "0";
+/* literal */ char ftDynamics_803C5720[] = "translate";
+/* literal */ char ftDynamics_803C572C[] = "fighter dynamics num over!\n";
+/* literal */ char ftDynamics_803C5748[] = "ftdynamics.c";
 
 ASM UNK_RET ftCo_8009CB40(UNK_PARAMS)
 #if !defined(MUST_MATCH) || defined(WIP)
