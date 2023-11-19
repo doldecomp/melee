@@ -6,7 +6,23 @@
 #include <placeholder.h>
 
 struct itSword_UnkBytes {
-    /*  +0 */ u8 x0;
+    /*   +0 */ u8 x0;
+    /*   +1 */ u8 x1;
+    /*   +2 */ u8 x2;
+    /*   +3 */ u8 x3;
+    /*   +4 */ u8 x4;
+    /*   +5 */ u8 x5;
+    /*   +6 */ u8 x6;
+    /*   +7 */ u8 x7;
+    /*   +8 */ u8 x8;
+    /*   +9 */ u8 x9;
+    /*   +A */ u8 xA;
+    /*   +B */ u8 xB;
+    /*   +C */ u8 xC;
+    /*   +D */ u8 xD;
+    /*   +E */ u8 xE;
+    /*   +F */ u8 xF;
+    /*  +10 */ u8 x10;
 };
 
 struct itSword_UnkArticle1 {
