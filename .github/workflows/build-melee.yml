@@ -69,7 +69,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: GALE01.map
-        path: /tmp/output/ssbm.us.1.2/GALE01.map
+        path: ${{ github.workspace }}/output/GALE01.map
 
     - name: Set step summary
       if: matrix.make_flags == 'GENERATE_MAP=1'
