@@ -63,6 +63,7 @@ jobs:
         with:
           name: pages
           path: ${{ env.OUTPUT }}
+          if-no-files-found: error
 
   deploy-pages:
     name: Deploy to GitHub Pages

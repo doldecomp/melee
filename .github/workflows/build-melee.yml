@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REGISTRY: ghcr.io
+      OUTPUT: ${{ github.workspace }}/output
     strategy:
       matrix:
         make_flags: ["GENERATE_MAP=1", "NON_MATCHING=1"]
@@ -55,13 +56,12 @@ jobs:
       env:
         MAKE_FLAGS: ${{ matrix.make_flags }}
       run: |
-        output="${{ github.workspace }}/output"
-        mkdir -p "$output"
+        mkdir -p "$OUTPUT"
         docker run --rm \
           --user "$(id -u):$(id -g)" \
           --volume "$PWD":/input:ro \
-          --volume "$output:/output" \
-          --env MAKE_FLAGS="NON_MATCHING=1" \
+          --volume "$OUTPUT:/output" \
+          --env MAKE_FLAGS="$MAKE_FLAGS" \
           "$REGISTRY/$IMAGE"
 
     - name: Upload map
@@ -69,12 +69,13 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: GALE01.map
-        path: /tmp/output/ssbm.us.1.2/GALE01.map
+        path: ${{ env.OUTPUT }}/ssbm.us.1.2/GALE01.map
+        if-no-files-found: error
 
     - name: Set step summary
       if: matrix.make_flags == 'GENERATE_MAP=1'
       run: |
-        printf "\`\`\`\n%s\n\`\`\`" "$(cat /tmp/output/PROGRESS.md)" \
+        printf "\`\`\`\n%s\n\`\`\`" "$(cat "$OUTPUT/PROGRESS.md")" \
           >> $GITHUB_STEP_SUMMARY
 
   build-windows:
