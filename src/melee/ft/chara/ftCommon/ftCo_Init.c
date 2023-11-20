@@ -24,6 +24,7 @@
 #include "ftCo_CliffJump.h"
 #include "ftCo_CliffWait.h"
 #include "ftCo_Damage.h"
+#include "ftCo_DamageBind.h"
 #include "ftCo_DamageFall.h"
 #include "ftCo_DamageIce.h"
 #include "ftCo_DamageSong.h"

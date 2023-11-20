@@ -6,6 +6,7 @@
 
 #include "ftCo_0C35.h"
 #include "ftCo_Bury.h"
+#include "ftCo_DamageBind.h"
 #include "ftCo_DamageFall.h"
 #include "ftCo_DamageIce.h"
 #include "ftCo_DamageSong.h"
