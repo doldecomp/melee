@@ -70,6 +70,7 @@ jobs:
       with:
         name: GALE01.map
         path: ${{ env.OUTPUT }}/ssbm.us.1.2/GALE01.map
+        if-no-files-found: error
 
     - name: Set step summary
       if: matrix.make_flags == 'GENERATE_MAP=1'

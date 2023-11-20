@@ -66,6 +66,7 @@ jobs:
         with:
           name: dump
           path: ${{ env.OUTPUT }}
+          if-no-files-found: error
 
   push-dump:
     name: Push dump
