@@ -6,9 +6,6 @@
 
 #include <placeholder.h>
 
-/* 0C3598 */ void ftCo_800C3598(ftCo_GObj* gobj);
-/* 0C36DC */ void ftCo_800C36DC(ftCo_GObj* gobj);
-/* 0C37A0 */ void ftCo_800C37A0(ftCo_GObj* gobj);
 /* 0C3A14 */ UNK_RET ftCo_800C3A14(UNK_PARAMS);
 /* 0C3B10 */ bool ftCo_800C3B10(ftCo_GObj* gobj);
 /* 0C3BE8 */ UNK_RET ftCo_800C3BE8(UNK_PARAMS);

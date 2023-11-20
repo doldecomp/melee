@@ -201,6 +201,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_PassiveCeil.c.o\
     $(BUILD_DIR)/src/melee/ft/ftafterimage.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DamageSong.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_0C35.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0C31.s.o\
     $(BUILD_DIR)/asm/melee/ft/ftmetal.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0C88.s.o\

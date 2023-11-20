@@ -30,8 +30,7 @@ struct _m2c_stack_ftCo_8008E5A4 {
 /* 08D8E8 */ bool ftCo_8008D8E8(float);
 /* 08D930 */ void ftCo_Damage_CalcKnockback(ftCo_Fighter* fp);
 /* 08DB10 */ void ftCo_8008DB10(ftCo_GObj* gobj, enum_t, float);
-/* 08DC0C */ /* static */ void ftCo_Damage_CalcVel(ftCo_Fighter* fp, float x,
-                                                   float y);
+/* 08DC0C */ void ftCo_Damage_CalcVel(ftCo_Fighter* fp, float x, float y);
 /* 08DCE0 */ void ftCo_8008DCE0(ftCo_GObj* gobj, int, float facing_dir);
 /* 08E498 */ bool ftCo_Damage_CheckAirMotion(ftCo_Fighter* fp);
 /* 08E4F0 */ void ftCo_Damage_OnEveryHitlag(ftCo_GObj* gobj);

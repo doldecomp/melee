@@ -4,6 +4,7 @@
 
 #include "ftCo_Guard.h"
 
+#include "ftCo_0C35.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackHi3.h"
 #include "ftCo_AttackHi4.h"

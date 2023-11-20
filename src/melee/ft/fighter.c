@@ -37,6 +37,7 @@
 #include "ftCommon/ftCo_09CB.h"
 #include "ftCommon/ftCo_09F4.h"
 #include "ftCommon/ftCo_0A01.h"
+#include "ftCommon/ftCo_0C35.h"
 #include "ftCommon/ftCo_Bury.h"
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"

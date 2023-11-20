@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
+import argparse
 import json
 import subprocess
 from pathlib import Path
 from typing import List, Tuple
 
 import humanfriendly
+from elftools.common.py3compat import sys
 from elftools.elf.elffile import ELFFile
 from elftools.elf.sections import SymbolTableSection
 
@@ -32,7 +34,8 @@ def calc_percent(current_score, max_score):
     return max(0, 100 - round(100 * current_score / max_score, 2))
 
 
-def main(obj_path: str) -> None:
+def main(args) -> None:
+    obj_path = Path(args.obj_path)
     expected_root = Path("./expected/build/ssbm.us.1.2/")
     wip_root = Path("./build/wip/ssbm.us.1.2/")
     expected_path = expected_root / obj_path
@@ -84,29 +87,37 @@ def main(obj_path: str) -> None:
     # then by max score (descending)
     # then by name (ascending)
     entries.sort(key=lambda x: (x[4], -x[1], -x[3], x[0]))
-
-    print(f"## Report of `{obj_name}`")
-    print("Function|Size|Score|Max|%\n-|-|-|-|-")
     file_percent = calc_percent(file_current_score, file_max_score)
-    print(
-        f"**File**|"
-        f"`{humanfriendly.format_size(file_size)}`|"
-        f"`{humanfriendly.format_number(file_current_score)}`|"
-        f"`{humanfriendly.format_number(file_max_score)}`|"
-        f"`{file_percent:.2f}%`"
-    )
-    for entry in entries:
+    friendly_file_size = humanfriendly.format_size(file_size)
+
+    if args.title:
+        friendly_obj_name = Path(obj_name).stem
         print(
-            f"`{entry[0]}`|"
-            f"`{humanfriendly.format_size(entry[1])}`|"
-            f"`{humanfriendly.format_number(entry[2])}`|"
-            f"`{humanfriendly.format_number(entry[3])}`|"
-            f"`{entry[4]:.2f}%`"
+            f"Match {file_percent:.2f}% of `{friendly_obj_name}` ({friendly_file_size})"
         )
+    else:
+        print(f"## Report of `{obj_name}`")
+        print("Function|Size|Score|Max|%\n-|-|-|-|-")
+        print(
+            f"**File**|"
+            f"`{friendly_file_size}`|"
+            f"`{humanfriendly.format_number(file_current_score)}`|"
+            f"`{humanfriendly.format_number(file_max_score)}`|"
+            f"`{file_percent:.2f}%`"
+        )
+        for entry in entries:
+            print(
+                f"`{entry[0]}`|"
+                f"`{humanfriendly.format_size(entry[1])}`|"
+                f"`{humanfriendly.format_number(entry[2])}`|"
+                f"`{humanfriendly.format_number(entry[3])}`|"
+                f"`{entry[4]:.2f}%`"
+            )
 
 
 if __name__ == "__main__":
-    import sys
-
-    obj_path = sys.argv[1]
-    main(obj_path)
+    parser = argparse.ArgumentParser(description="Process some integers.")
+    parser.add_argument("obj_path", type=str, help="Path to the object file")
+    parser.add_argument("--title", action="store_true", help="Output only a title")
+    args = parser.parse_args()
+    main(args)
