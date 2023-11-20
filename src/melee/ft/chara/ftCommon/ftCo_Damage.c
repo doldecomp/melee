@@ -4,6 +4,7 @@
 
 #include "ftCo_Damage.h"
 
+#include "ftCo_0C35.h"
 #include "ftCo_Bury.h"
 #include "ftCo_DamageFall.h"
 #include "ftCo_DamageIce.h"
@@ -512,82 +513,8 @@ void ftCo_8008DB10(ftCo_GObj* gobj, enum_t arg1, float arg2)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
-#pragma push
-asm /* 08DC0C */ /* static */ void ftCo_Damage_CalcVel(ftCo_Fighter* fp, float,
-                                                       float)
-{ // clang-format off
-    nofralloc
-/* 8008DC0C 0008A7EC  80 8D AE B4 */	lwz r4, p_ftCommonData
-/* 8008DC10 0008A7F0  80 A3 18 AC */	lwz r5, 0x18ac(r3)
-/* 8008DC14 0008A7F4  80 04 00 FC */	lwz r0, 0xfc(r4)
-/* 8008DC18 0008A7F8  7C 05 00 00 */	cmpw r5, r0
-/* 8008DC1C 0008A7FC  40 80 00 10 */	bge lbl_8008DC2C
-/* 8008DC20 0008A800  D0 23 00 8C */	stfs f1, 0x8c(r3)
-/* 8008DC24 0008A804  D0 43 00 90 */	stfs f2, 0x90(r3)
-/* 8008DC28 0008A808  4E 80 00 20 */	blr
-lbl_8008DC2C:
-/* 8008DC2C 0008A80C  C0 83 00 8C */	lfs f4, 0x8c(r3)
-/* 8008DC30 0008A810  C0 02 8A F4 */	lfs f0, lbl_804D84D4
-/* 8008DC34 0008A814  EC 64 00 72 */	fmuls f3, f4, f1
-/* 8008DC38 0008A818  C0 A3 00 90 */	lfs f5, 0x90(r3)
-/* 8008DC3C 0008A81C  FC 03 00 40 */	fcmpo cr0, f3, f0
-/* 8008DC40 0008A820  40 80 00 10 */	bge lbl_8008DC50
-/* 8008DC44 0008A824  EC 04 08 2A */	fadds f0, f4, f1
-/* 8008DC48 0008A828  D0 03 00 8C */	stfs f0, 0x8c(r3)
-/* 8008DC4C 0008A82C  48 00 00 3C */	b lbl_8008DC88
-lbl_8008DC50:
-/* 8008DC50 0008A830  FC 04 00 40 */	fcmpo cr0, f4, f0
-/* 8008DC54 0008A834  40 80 00 0C */	bge lbl_8008DC60
-/* 8008DC58 0008A838  FC 60 20 50 */	fneg f3, f4
-/* 8008DC5C 0008A83C  48 00 00 08 */	b lbl_8008DC64
-lbl_8008DC60:
-/* 8008DC60 0008A840  FC 60 20 90 */	fmr f3, f4
-lbl_8008DC64:
-/* 8008DC64 0008A844  C0 02 8A F4 */	lfs f0, lbl_804D84D4
-/* 8008DC68 0008A848  FC 01 00 40 */	fcmpo cr0, f1, f0
-/* 8008DC6C 0008A84C  40 80 00 0C */	bge lbl_8008DC78
-/* 8008DC70 0008A850  FC 00 08 50 */	fneg f0, f1
-/* 8008DC74 0008A854  48 00 00 08 */	b lbl_8008DC7C
-lbl_8008DC78:
-/* 8008DC78 0008A858  FC 00 08 90 */	fmr f0, f1
-lbl_8008DC7C:
-/* 8008DC7C 0008A85C  FC 00 18 40 */	fcmpo cr0, f0, f3
-/* 8008DC80 0008A860  40 81 00 08 */	ble lbl_8008DC88
-/* 8008DC84 0008A864  D0 23 00 8C */	stfs f1, 0x8c(r3)
-lbl_8008DC88:
-/* 8008DC88 0008A868  EC 25 00 B2 */	fmuls f1, f5, f2
-/* 8008DC8C 0008A86C  C0 02 8A F4 */	lfs f0, lbl_804D84D4
-/* 8008DC90 0008A870  FC 01 00 40 */	fcmpo cr0, f1, f0
-/* 8008DC94 0008A874  40 80 00 10 */	bge lbl_8008DCA4
-/* 8008DC98 0008A878  EC 05 10 2A */	fadds f0, f5, f2
-/* 8008DC9C 0008A87C  D0 03 00 90 */	stfs f0, 0x90(r3)
-/* 8008DCA0 0008A880  4E 80 00 20 */	blr
-lbl_8008DCA4:
-/* 8008DCA4 0008A884  FC 05 00 40 */	fcmpo cr0, f5, f0
-/* 8008DCA8 0008A888  40 80 00 0C */	bge lbl_8008DCB4
-/* 8008DCAC 0008A88C  FC 20 28 50 */	fneg f1, f5
-/* 8008DCB0 0008A890  48 00 00 08 */	b lbl_8008DCB8
-lbl_8008DCB4:
-/* 8008DCB4 0008A894  FC 20 28 90 */	fmr f1, f5
-lbl_8008DCB8:
-/* 8008DCB8 0008A898  C0 02 8A F4 */	lfs f0, lbl_804D84D4
-/* 8008DCBC 0008A89C  FC 02 00 40 */	fcmpo cr0, f2, f0
-/* 8008DCC0 0008A8A0  40 80 00 0C */	bge lbl_8008DCCC
-/* 8008DCC4 0008A8A4  FC 00 10 50 */	fneg f0, f2
-/* 8008DCC8 0008A8A8  48 00 00 08 */	b lbl_8008DCD0
-lbl_8008DCCC:
-/* 8008DCCC 0008A8AC  FC 00 10 90 */	fmr f0, f2
-lbl_8008DCD0:
-/* 8008DCD0 0008A8B0  FC 00 08 40 */	fcmpo cr0, f0, f1
-/* 8008DCD4 0008A8B4  4C 81 00 20 */	blelr
-/* 8008DCD8 0008A8B8  D0 43 00 90 */	stfs f2, 0x90(r3)
-/* 8008DCDC 0008A8BC  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#else
-
-void ftCo_Damage_CalcVel(Fighter* fp, float x, float y)
+ASM void ftCo_Damage_CalcVel(Fighter* fp, float x, float y)
+#if !defined(MUST_MATCH) || defined(WIP)
 {
     if (fp->dmg.x18ac_time_since_hit < p_ftCommonData->xFC) {
         fp->x8c_kb_vel.x = x;
@@ -607,7 +534,78 @@ void ftCo_Damage_CalcVel(Fighter* fp, float x, float y)
         }
     }
 }
-#endif
+
+#else /* clang-format off */
+{ nofralloc
+/* 8008DC0C 00000000  80 8D AE B4 */	lwz r4, p_ftCommonData
+/* 8008DC10 00000004  80 A3 18 AC */	lwz r5, 0x18ac(r3)
+/* 8008DC14 00000008  80 04 00 FC */	lwz r0, 0xfc(r4)
+/* 8008DC18 0000000C  7C 05 00 00 */	cmpw r5, r0
+/* 8008DC1C 00000010  40 80 00 10 */	bge lbl_8008DC2C
+/* 8008DC20 00000014  D0 23 00 8C */	stfs f1, 0x8c(r3)
+/* 8008DC24 00000018  D0 43 00 90 */	stfs f2, 0x90(r3)
+/* 8008DC28 0000001C  4E 80 00 20 */	blr
+lbl_8008DC2C:
+/* 8008DC2C 00000020  C0 83 00 8C */	lfs f4, 0x8c(r3)
+/* 8008DC30 00000024  C0 02 8A F4 */	lfs f0, lbl_804D84D4
+/* 8008DC34 00000028  EC 64 00 72 */	fmuls f3, f4, f1
+/* 8008DC38 0000002C  C0 A3 00 90 */	lfs f5, 0x90(r3)
+/* 8008DC3C 00000030  FC 03 00 40 */	fcmpo cr0, f3, f0
+/* 8008DC40 00000034  40 80 00 10 */	bge lbl_8008DC50
+/* 8008DC44 00000038  EC 04 08 2A */	fadds f0, f4, f1
+/* 8008DC48 0000003C  D0 03 00 8C */	stfs f0, 0x8c(r3)
+/* 8008DC4C 00000040  48 00 00 3C */	b lbl_8008DC88
+lbl_8008DC50:
+/* 8008DC50 00000044  FC 04 00 40 */	fcmpo cr0, f4, f0
+/* 8008DC54 00000048  40 80 00 0C */	bge lbl_8008DC60
+/* 8008DC58 0000004C  FC 60 20 50 */	fneg f3, f4
+/* 8008DC5C 00000050  48 00 00 08 */	b lbl_8008DC64
+lbl_8008DC60:
+/* 8008DC60 00000054  FC 60 20 90 */	fmr f3, f4
+lbl_8008DC64:
+/* 8008DC64 00000058  C0 02 8A F4 */	lfs f0, lbl_804D84D4
+/* 8008DC68 0000005C  FC 01 00 40 */	fcmpo cr0, f1, f0
+/* 8008DC6C 00000060  40 80 00 0C */	bge lbl_8008DC78
+/* 8008DC70 00000064  FC 00 08 50 */	fneg f0, f1
+/* 8008DC74 00000068  48 00 00 08 */	b lbl_8008DC7C
+lbl_8008DC78:
+/* 8008DC78 0000006C  FC 00 08 90 */	fmr f0, f1
+lbl_8008DC7C:
+/* 8008DC7C 00000070  FC 00 18 40 */	fcmpo cr0, f0, f3
+/* 8008DC80 00000074  40 81 00 08 */	ble lbl_8008DC88
+/* 8008DC84 00000078  D0 23 00 8C */	stfs f1, 0x8c(r3)
+lbl_8008DC88:
+/* 8008DC88 0000007C  EC 25 00 B2 */	fmuls f1, f5, f2
+/* 8008DC8C 00000080  C0 02 8A F4 */	lfs f0, lbl_804D84D4
+/* 8008DC90 00000084  FC 01 00 40 */	fcmpo cr0, f1, f0
+/* 8008DC94 00000088  40 80 00 10 */	bge lbl_8008DCA4
+/* 8008DC98 0000008C  EC 05 10 2A */	fadds f0, f5, f2
+/* 8008DC9C 00000090  D0 03 00 90 */	stfs f0, 0x90(r3)
+/* 8008DCA0 00000094  4E 80 00 20 */	blr
+lbl_8008DCA4:
+/* 8008DCA4 00000098  FC 05 00 40 */	fcmpo cr0, f5, f0
+/* 8008DCA8 0000009C  40 80 00 0C */	bge lbl_8008DCB4
+/* 8008DCAC 000000A0  FC 20 28 50 */	fneg f1, f5
+/* 8008DCB0 000000A4  48 00 00 08 */	b lbl_8008DCB8
+lbl_8008DCB4:
+/* 8008DCB4 000000A8  FC 20 28 90 */	fmr f1, f5
+lbl_8008DCB8:
+/* 8008DCB8 000000AC  C0 02 8A F4 */	lfs f0, lbl_804D84D4
+/* 8008DCBC 000000B0  FC 02 00 40 */	fcmpo cr0, f2, f0
+/* 8008DCC0 000000B4  40 80 00 0C */	bge lbl_8008DCCC
+/* 8008DCC4 000000B8  FC 00 10 50 */	fneg f0, f2
+/* 8008DCC8 000000BC  48 00 00 08 */	b lbl_8008DCD0
+lbl_8008DCCC:
+/* 8008DCCC 000000C0  FC 00 10 90 */	fmr f0, f2
+lbl_8008DCD0:
+/* 8008DCD0 000000C4  FC 00 08 40 */	fcmpo cr0, f0, f1
+/* 8008DCD4 000000C8  4C 81 00 20 */	blelr
+/* 8008DCD8 000000CC  D0 43 00 90 */	stfs f2, 0x90(r3)
+/* 8008DCDC 000000D0  4E 80 00 20 */	blr
+
+}
+#pragma peephole on
+#endif /* clang-format on */
 
 #if defined(MUST_MATCH) && !defined(WIP)
 #pragma push

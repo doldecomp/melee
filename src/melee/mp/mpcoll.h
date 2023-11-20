@@ -71,5 +71,7 @@ void mpColl_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2,
                      f32 arg3, f32 arg4);
 /* 04CBC0 */ bool mpColl_8004CBC0(CollData*);
 /* 04CBE8 */ void mpColl_8004CBE8(CollData*);
+/* 0443C4 */ UNK_RET mpColl_800443C4(UNK_PARAMS);
+/* 044164 */ UNK_RET mpColl_80044164(UNK_PARAMS);
 
 #endif

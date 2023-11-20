@@ -2,6 +2,7 @@
 
 #include "ftCo_DamageSong.h"
 
+#include "ftCo_0C35.h"
 #include "ftCo_Lift.h"
 
 #include "ft/fighter.h"
