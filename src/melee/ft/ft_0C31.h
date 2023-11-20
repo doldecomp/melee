@@ -6,12 +6,6 @@
 
 #include <placeholder.h>
 
-/* 0C44CC */ bool ftCo_800C44CC(ftCo_GObj* gobj);
-/* 0C4550 */ UNK_RET ftCo_800C4550(UNK_PARAMS);
-/* 0C466C */ void ftCo_DamageBind_Anim(ftCo_GObj* gobj);
-/* 0C46E0 */ void ftCo_DamageBind_IASA(ftCo_GObj* gobj);
-/* 0C46E4 */ void ftCo_DamageBind_Phys(ftCo_GObj* gobj);
-/* 0C4704 */ void ftCo_DamageBind_Coll(ftCo_GObj* gobj);
 /* 0C4724 */ void ftCo_800C4724(ftCo_GObj* gobj);
 /* 0C4900 */ void ftCo_WarpStarJump_Anim(ftCo_GObj* gobj);
 /* 0C4964 */ void ftCo_WarpStarJump_IASA(ftCo_GObj* gobj);
