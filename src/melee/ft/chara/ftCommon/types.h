@@ -221,6 +221,13 @@ union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ float x0;
     } aircatch;
+    struct {
+        /* fp+2340 */ Vec3 cur_pos;
+        /* fp+234C */ Vec3 self_vel;
+        /* fp+2358 */ float facing_dir;
+        /* fp+235C */ int x1C;
+        /* fp+2360 */ UNK_T x20;
+    } warpstarjump;
 };
 
 #endif

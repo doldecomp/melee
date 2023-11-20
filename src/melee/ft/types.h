@@ -694,7 +694,7 @@ typedef struct ftCo_DatAttrs {
     /* +140 fp+268 */ float x140;
     /* +144 fp+26C */ int x144;
     /* +148 fp+270 */ float respawn_platform_scale;
-    /* +14C fp+274 */ int x14C;
+    /* +14C fp+274 */ float x14C;
     /* +150 fp+278 */ int x150;
     /* +154 fp+27C */ int camera_zoom_target_bone;
     /* +158 fp+280 */ Vec3 x158;

@@ -17,6 +17,7 @@
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_WarpStarJump.h"
 #include "ftDonkey/ftDk_HeavyWait0.h"
 #include "it/item.h"
 #include "pl/pl_0371.h"
