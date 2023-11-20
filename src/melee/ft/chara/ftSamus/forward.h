@@ -5,6 +5,9 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
+typedef struct HSD_GObj ftSs_GObj;
+typedef struct Fighter ftSs_Fighter;
+
 static MotionFlags const ftSs_MF_Special ATTRIBUTE_USED =
     Ft_MF_SkipModel | Ft_MF_SkipItemVis | Ft_MF_UnkUpdatePhys |
     Ft_MF_FreezeState;

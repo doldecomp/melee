@@ -22,6 +22,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCLink/ftCl_Init.h"
+#include "ftCommon/ftCo_AirCatch.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "lb/lbmthp.h"
 

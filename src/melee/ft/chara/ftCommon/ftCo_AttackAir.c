@@ -4,6 +4,7 @@
 
 #include "ftCo_AttackAir.h"
 
+#include "ftCo_AirCatch.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_LandingAir.h"
 #include "math.h"

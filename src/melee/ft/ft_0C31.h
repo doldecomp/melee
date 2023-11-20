@@ -6,17 +6,6 @@
 
 #include <placeholder.h>
 
-/* 0C3A14 */ UNK_RET ftCo_800C3A14(UNK_PARAMS);
-/* 0C3B10 */ bool ftCo_800C3B10(ftCo_GObj* gobj);
-/* 0C3BE8 */ UNK_RET ftCo_800C3BE8(UNK_PARAMS);
-/* 0C3CC0 */ UNK_RET ftCo_800C3CC0(UNK_PARAMS);
-/* 0C3D6C */ void ftCo_AirCatch_Anim(ftCo_GObj* gobj);
-/* 0C4380 */ void ftCo_AirCatchHit_Anim(ftCo_GObj* gobj);
-/* 0C4384 */ void ftCo_AirCatch_IASA(ftCo_GObj* gobj);
-/* 0C4388 */ void ftCo_AirCatchHit_IASA(ftCo_GObj* gobj);
-/* 0C438C */ void ftCo_AirCatch_Phys(ftCo_GObj* gobj);
-/* 0C4438 */ void ftCo_AirCatchHit_Phys(ftCo_GObj* gobj);
-/* 0C447C */ void ftCo_AirCatch_Coll(ftCo_GObj* gobj);
 /* 0C44CC */ bool ftCo_800C44CC(ftCo_GObj* gobj);
 /* 0C4550 */ UNK_RET ftCo_800C4550(UNK_PARAMS);
 /* 0C466C */ void ftCo_DamageBind_Anim(ftCo_GObj* gobj);

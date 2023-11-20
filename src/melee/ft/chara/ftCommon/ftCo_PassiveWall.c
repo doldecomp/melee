@@ -3,6 +3,7 @@
 
 #include "ftCo_PassiveWall.h"
 
+#include "ftCo_AirCatch.h"
 #include "ftCo_AttackAir.h"
 #include "ftCo_DownAttack.h"
 #include "ftCo_EscapeAir.h"
