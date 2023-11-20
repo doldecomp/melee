@@ -214,6 +214,13 @@ union ftCommon_MotionVars {
         /* fp+2348 */ bool x8;
         /* fp+234C */ int vel_y_exponent;
     } passivewall;
+    struct {
+        /* fp+2340 */ int x0;
+        /* fp+2344 */ float x4;
+    } aircatchhit;
+    struct {
+        /* fp+2340 */ float x0;
+    } aircatch;
 };
 
 #endif

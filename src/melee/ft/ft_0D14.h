@@ -98,7 +98,8 @@
 /* 0D58F4 */ void ftCo_RebirthWait_Phys(ftCo_GObj* gobj);
 /* 0D5A08 */ void ftCo_RebirthWait_Coll(ftCo_GObj* gobj);
 /* 0D5A6C */ void ftCo_Rebirth_Cam(ftCo_GObj* gobj);
-/* 0D5AEC */ void ftCo_800D5AEC(ftCo_GObj*, s32, s32, s32, f32, f32);
+/* 0D5AEC */ void ftCo_800D5AEC(ftCo_GObj* gobj, enum_t, int, int, float,
+                                float);
 /* 0D5BF8 */ void ftCo_800D5BF8(ftCo_GObj* gobj);
 /* 0D5C54 */ UNK_RET ft_800D5C54(UNK_PARAMS);
 /* 0D5CB0 */ void ftCo_800D5CB0(ftCo_GObj*, bool, float landing_lag);

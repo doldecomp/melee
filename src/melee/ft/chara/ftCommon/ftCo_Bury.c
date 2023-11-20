@@ -3,6 +3,7 @@
 
 #include "ftCo_Bury.h"
 
+#include "ftCo_AirCatch.h"
 #include "ftCo_AttackAir.h"
 #include "ftCo_BarrelWait.h"
 #include "ftCo_Damage.h"

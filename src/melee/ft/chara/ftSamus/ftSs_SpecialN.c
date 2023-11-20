@@ -445,7 +445,7 @@ void ftSs_SpecialAirN_Coll(HSD_GObj* gobj)
     }
 }
 
-s32 ftSs_SpecialS_8012A068(HSD_GObj* gobj)
+int ftSs_SpecialS_8012A068(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->fv.ss.x2238;
