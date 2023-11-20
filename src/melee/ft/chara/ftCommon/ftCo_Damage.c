@@ -7,6 +7,7 @@
 #include "ftCo_Bury.h"
 #include "ftCo_DamageFall.h"
 #include "ftCo_DamageIce.h"
+#include "ftCo_DamageSong.h"
 #include "ftCo_DownAttack.h"
 #include "ftCo_DownBound.h"
 #include "ftCo_DownDamage.h"
