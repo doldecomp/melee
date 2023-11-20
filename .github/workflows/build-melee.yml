@@ -61,7 +61,7 @@ jobs:
           --user "$(id -u):$(id -g)" \
           --volume "$PWD":/input:ro \
           --volume "$output:/output" \
-          --env MAKE_FLAGS="NON_MATCHING=1" \
+          --env MAKE_FLAGS="$MAKE_FLAGS" \
           "$REGISTRY/$IMAGE"
 
     - name: Upload map
