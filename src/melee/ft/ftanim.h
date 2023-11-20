@@ -37,5 +37,6 @@ void ftAnim_8006FB88(Fighter* fp, int, HSD_Joint* joint);
 void ftAnim_80070710(HSD_JObj* joint, f32);
 void ftAnim_8006F4C8(Fighter* fp, int, u32);
 /* 06EED4 */ /* static */ UNK_RET ftAnim_8006EED4(UNK_PARAMS);
+/* 070734 */ void ftAnim_80070734(HSD_JObj* jobj, float);
 
 #endif

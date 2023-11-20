@@ -79,6 +79,7 @@
 #include "ft/ftstarrodswing.h"
 #include "ft/ftswing.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_WarpStarJump.h"
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftKirby/ftKb_Init.h"
 #include "ftMasterHand/ftMh_CaptureDamageMasterHand.h"
