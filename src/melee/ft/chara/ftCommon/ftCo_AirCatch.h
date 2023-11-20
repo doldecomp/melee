@@ -1,5 +1,5 @@
-#ifndef MELEE_FT_CHARA_FTCOMMON_FTCO_AIRCATCH_H
-#define MELEE_FT_CHARA_FTCOMMON_FTCO_AIRCATCH_H
+#ifndef GALE01_0C3A14
+#define GALE01_0C3A14
 
 #include "ftCommon/forward.h"
 
