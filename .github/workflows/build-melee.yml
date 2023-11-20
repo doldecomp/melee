@@ -56,7 +56,7 @@ jobs:
       env:
         MAKE_FLAGS: ${{ matrix.make_flags }}
       run: |
-        mkdir -p "$output"
+        mkdir -p "$OUTPUT"
         docker run --rm \
           --user "$(id -u):$(id -g)" \
           --volume "$PWD":/input:ro \
