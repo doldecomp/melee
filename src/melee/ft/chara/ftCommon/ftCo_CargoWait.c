@@ -53,11 +53,11 @@ void ftCo_CargoWait_Anim(ftCo_GObj* gobj) {}
 
 void ftCo_CargoWait_IASA(ftCo_GObj* gobj)
 {
-    RETURN_IF(ftCo_8009BF3C(gobj))
-    RETURN_IF(ftCo_8009BB1C(gobj))
-    RETURN_IF(ftCo_8009C4F8(gobj))
-    RETURN_IF(ftCo_8009B818(gobj))
-    RETURN_IF(ftCo_8009B67C(gobj))
+    RETURN_IF(ftCo_8009BF3C(gobj));
+    RETURN_IF(ftCo_8009BB1C(gobj));
+    RETURN_IF(ftCo_8009C4F8(gobj));
+    RETURN_IF(ftCo_8009B818(gobj));
+    RETURN_IF(ftCo_8009B67C(gobj));
 }
 
 void ftCo_CargoWait_Phys(ftCo_GObj* gobj)

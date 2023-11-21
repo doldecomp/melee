@@ -39,11 +39,11 @@ void ftCo_CliffWait_Anim(ftCo_GObj* gobj)
 
 void ftCo_CliffWait_IASA(ftCo_GObj* gobj)
 {
-    RETURN_IF(ftCo_8009AE38(gobj))
-    RETURN_IF(ftCo_8009AFD4(gobj))
-    RETURN_IF(ftCo_8009B170(gobj))
-    RETURN_IF(ftCo_8009AA0C(gobj))
-    RETURN_IF(ftCo_8009A9AC(gobj))
+    RETURN_IF(ftCo_8009AE38(gobj));
+    RETURN_IF(ftCo_8009AFD4(gobj));
+    RETURN_IF(ftCo_8009B170(gobj));
+    RETURN_IF(ftCo_8009AA0C(gobj));
+    RETURN_IF(ftCo_8009A9AC(gobj));
 }
 
 void ftCo_CliffWait_Phys(Fighter_GObj* gobj)

@@ -14,6 +14,7 @@
 #include "ftCo_DownBound.h"
 #include "ftCo_DownDamage.h"
 #include "ftCo_FlyReflect.h"
+#include "ftCo_HammerWait.h"
 #include "ftCo_PassiveCeil.h"
 #include "ftCo_PassiveStand.h"
 #include "ftCo_PassiveWall.h"
@@ -3671,7 +3672,7 @@ void ftCo_Damage_IASA(ftCo_GObj* gobj)
             }
         }
     } else {
-        RETURN_IF(doIasa(gobj))
+        RETURN_IF(doIasa(gobj));
     }
 }
 #endif
@@ -4065,7 +4066,7 @@ void ftCo_DamageFly_IASA(ftCo_GObj* gobj)
     if (!GET_FIGHTER(gobj)->x221C_b6) {
         ftCo_DamageFall_IASA(gobj);
     } else {
-        RETURN_IF(doIasa(gobj))
+        RETURN_IF(doIasa(gobj));
     }
 }
 
@@ -4225,17 +4226,17 @@ void ftCo_DamageFly_Coll(ftCo_GObj* gobj)
         if (env_flags & MPCOLL_FLAGS_B11 || env_flags & MPCOLL_FLAGS_B05 ||
             env_flags & MPCOLL_FLAGS_B14)
         {
-            RETURN_IF(ftCo_800C1D38(gobj))
-            RETURN_IF(ftCo_800C23A0(gobj))
-            RETURN_IF(ftCo_800C17CC(gobj))
+            RETURN_IF(ftCo_800C1D38(gobj));
+            RETURN_IF(ftCo_800C23A0(gobj));
+            RETURN_IF(ftCo_800C17CC(gobj));
         }
     }
 }
 
 void ftCo_80090184(ftCo_GObj* gobj)
 {
-    RETURN_IF(ftCo_80098928(gobj))
-    RETURN_IF(ftCo_8009872C(gobj))
+    RETURN_IF(ftCo_80098928(gobj));
+    RETURN_IF(ftCo_8009872C(gobj));
     ftCo_80097D40(gobj);
 }
 
@@ -4407,16 +4408,16 @@ void ftCo_DamageFlyRoll_Coll(ftCo_GObj* gobj)
 #endif
     CollData* coll = &GET_FIGHTER(gobj)->coll_data;
     if (ft_80081DD4(gobj)) {
-        RETURN_IF(ftCo_80098928(gobj))
-        RETURN_IF(ftCo_8009872C(gobj))
+        RETURN_IF(ftCo_80098928(gobj));
+        RETURN_IF(ftCo_8009872C(gobj));
         ftCo_80097D40(gobj);
     } else {
         u32 env_flags = coll->env_flags;
         if (env_flags & MPCOLL_FLAGS_B11 || env_flags & MPCOLL_FLAGS_B05 ||
             env_flags & MPCOLL_FLAGS_B14)
         {
-            RETURN_IF(ftCo_800C1D38(gobj))
-            RETURN_IF(ftCo_800C23A0(gobj))
+            RETURN_IF(ftCo_800C1D38(gobj));
+            RETURN_IF(ftCo_800C23A0(gobj));
             ftCo_800C17CC(gobj);
         }
     }

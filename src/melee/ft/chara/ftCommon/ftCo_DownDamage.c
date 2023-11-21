@@ -52,7 +52,7 @@ void ftCo_DownDamage_Anim(ftCo_GObj* gobj)
     if (!fp->x2224_b2) {
         fp->mv.co.downdamage.x0 -= 1;
     }
-    RETURN_IF(ftAnim_IsFramesRemaining(gobj))
+    RETURN_IF(ftAnim_IsFramesRemaining(gobj));
     if (fp->ground_or_air == GA_Air) {
         if (fp->x2224_b2) {
             ftCo_80090780(gobj);
@@ -84,7 +84,7 @@ void ftCo_DownDamage_Coll(ftCo_GObj* gobj)
         if (ft_80082708(gobj) == GA_Ground) {
             ftCo_8008FC94(gobj);
         } else {
-            RETURN_IF(ftCo_800C7CA0(gobj))
+            RETURN_IF(ftCo_800C7CA0(gobj));
         }
     } else {
         if (ft_80081DD4(gobj)) {
@@ -94,8 +94,8 @@ void ftCo_DownDamage_Coll(ftCo_GObj* gobj)
             if (coll->env_flags & MPCOLL_FLAGS_B11 ||
                 coll->env_flags & MPCOLL_FLAGS_B05)
             {
-                RETURN_IF(ftCo_800C1D38(gobj))
-                RETURN_IF(ftCo_800C17CC(gobj))
+                RETURN_IF(ftCo_800C1D38(gobj));
+                RETURN_IF(ftCo_800C17CC(gobj));
             }
         }
     }

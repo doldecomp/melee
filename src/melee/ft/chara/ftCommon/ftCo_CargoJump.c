@@ -43,7 +43,7 @@ void ftCo_CargoJump_Anim(HSD_GObj* gobj) {}
 
 void ftCo_CargoJump_IASA(Fighter_GObj* gobj)
 {
-    RETURN_IF(ftCo_8009BF3C(gobj))
+    RETURN_IF(ftCo_8009BF3C(gobj));
 }
 
 void ftCo_CargoJump_Phys(Fighter_GObj* gobj)

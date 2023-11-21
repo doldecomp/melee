@@ -44,10 +44,10 @@ void ftCo_CargoWalk_Anim(ftCo_GObj* gobj)
 
 void ftCo_CargoWalk_IASA(ftCo_GObj* gobj)
 {
-    RETURN_IF(ftCo_8009BF3C(gobj))
-    RETURN_IF(ftCo_8009BB1C(gobj))
-    RETURN_IF(ftCo_8009C4F8(gobj))
-    RETURN_IF(ftCo_8009B4D0(gobj))
+    RETURN_IF(ftCo_8009BF3C(gobj));
+    RETURN_IF(ftCo_8009BB1C(gobj));
+    RETURN_IF(ftCo_8009C4F8(gobj));
+    RETURN_IF(ftCo_8009B4D0(gobj));
     ftWalkCommon_800DFEC8(gobj, ftCo_8009B6C8);
 }
 

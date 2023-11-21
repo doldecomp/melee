@@ -172,7 +172,7 @@ void ftCo_80099644(ftCo_GObj* gobj)
 
 void ftCo_Escape_IASA(ftCo_GObj* gobj)
 {
-    RETURN_IF(ftCo_8009563C(gobj))
+    RETURN_IF(ftCo_8009563C(gobj));
 }
 
 void ftCo_Escape_Phys(ftCo_GObj* gobj)

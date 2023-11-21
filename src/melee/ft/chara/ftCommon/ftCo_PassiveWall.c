@@ -428,18 +428,18 @@ ASM void ftCo_PassiveWall_IASA(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->mv.co.passivewall.timer) {
-        RETURN_IF(ftCo_SpecialAir_CheckInput(gobj))
-        RETURN_IF(ftCo_80095328(gobj, NULL))
-        RETURN_IF(ftCo_800D7100(gobj))
-        RETURN_IF(ftCo_800C3B10(gobj))
-        RETURN_IF(ftCo_80099A58(gobj))
-        RETURN_IF(ftCo_AttackAir_CheckItemThrowInput(gobj))
-        RETURN_IF(ftCo_800D705C(gobj))
-        RETURN_IF(ftCo_800CB870(gobj))
-        RETURN_IF(fp->cmd_vars[0] == 0)
-        RETURN_IF(ftCo_800CEE70(gobj))
+        RETURN_IF(ftCo_SpecialAir_CheckInput(gobj));
+        RETURN_IF(ftCo_80095328(gobj, NULL));
+        RETURN_IF(ftCo_800D7100(gobj));
+        RETURN_IF(ftCo_800C3B10(gobj));
+        RETURN_IF(ftCo_80099A58(gobj));
+        RETURN_IF(ftCo_AttackAir_CheckItemThrowInput(gobj));
+        RETURN_IF(ftCo_800D705C(gobj));
+        RETURN_IF(ftCo_800CB870(gobj));
+        RETURN_IF(fp->cmd_vars[0] == 0);
+        RETURN_IF(ftCo_800CEE70(gobj));
     } else {
-        RETURN_IF(!ftCo_800C1E0C(fp))
+        RETURN_IF(!ftCo_800C1E0C(fp));
         fp->mv.co.passivewall.x8 = true;
     }
 }

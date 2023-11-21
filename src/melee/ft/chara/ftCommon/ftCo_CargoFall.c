@@ -32,7 +32,7 @@ void ftCo_CargoFall_Anim(ftCo_GObj* gobj) {}
 
 void ftCo_CargoFall_IASA(ftCo_GObj* gobj)
 {
-    RETURN_IF(ftCo_8009BF3C(gobj))
+    RETURN_IF(ftCo_8009BF3C(gobj));
 }
 
 void ftCo_CargoFall_Phys(ftCo_GObj* gobj)

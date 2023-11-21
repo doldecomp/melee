@@ -6,40 +6,18 @@
 
 #include <placeholder.h>
 
-/* 0C4E4C */ UNK_RET ftCo_800C4E4C(UNK_PARAMS);
-/* 0C4E94 */ UNK_RET ftCo_800C4E94(UNK_PARAMS);
-/* 0C4ED8 */ UNK_RET ftCo_800C4ED8(UNK_PARAMS);
-/* 0C4F64 */ UNK_RET ftCo_800C4F64(UNK_PARAMS);
-/* 0C4FEC */ void ftCo_HammerWait_Anim(ftCo_GObj* gobj);
-/* 0C5074 */ void ftCo_HammerWait_IASA(ftCo_GObj* gobj);
-/* 0C50D4 */ void ftCo_HammerWait_Phys(ftCo_GObj* gobj);
-/* 0C50F4 */ void ftCo_HammerWait_Coll(ftCo_GObj* gobj);
-/* 0C511C */ void ftCo_800C511C(ftCo_GObj* gobj);
-/* 0C5240 */ bool ftCo_800C5240(ftCo_GObj* gobj);
-/* 0C5284 */ void ftCo_800C5284(ftCo_GObj* gobj);
-/* 0C52F4 */ void ftCo_800C52F4(ftCo_GObj* gobj);
-/* 0C53E4 */ UNK_RET ftCo_800C53E4(UNK_PARAMS);
-/* 0C5408 */ UNK_RET ftCo_800C5408(UNK_PARAMS);
-/* 0C544C */ UNK_RET ftCo_800C544C(UNK_PARAMS);
-/* 0C548C */ UNK_RET ftCo_800C548C(UNK_PARAMS);
-/* 0C54C4 */ UNK_RET ftCo_800C54C4(UNK_PARAMS);
-/* 0C5500 */ void ftCo_800C5500(ftCo_GObj* gobj);
-/* 0C554C */ void ftCo_800C554C(ftCo_Fighter* fp);
-/* 0C555C */ void ftCo_800C555C(ftCo_GObj* gobj);
-/* 0C5588 */ UNK_RET ftCo_800C5588(UNK_PARAMS);
-/* 0C55CC */ UNK_RET ftCo_800C55CC(UNK_PARAMS);
 /* 0C5614 */ UNK_RET ftCo_800C5614(UNK_PARAMS);
 /* 0C56BC */ void ftCo_HammerWalk_Anim(ftCo_GObj* gobj);
 /* 0C56DC */ void ftCo_HammerWalk_IASA(ftCo_GObj* gobj);
 /* 0C572C */ void ftCo_HammerWalk_Phys(ftCo_GObj* gobj);
 /* 0C574C */ void ftCo_HammerWalk_Coll(ftCo_GObj* gobj);
-/* 0C576C */ UNK_RET ftCo_800C576C(UNK_PARAMS);
+/* 0C576C */ bool ftCo_800C576C(ftCo_GObj* gobj);
 /* 0C57B4 */ UNK_RET ftCo_800C57B4(UNK_PARAMS);
 /* 0C5848 */ void ftCo_HammerTurn_Anim(ftCo_GObj* gobj);
 /* 0C59EC */ void ftCo_HammerTurn_IASA(ftCo_GObj* gobj);
 /* 0C5A10 */ void ftCo_HammerTurn_Phys(ftCo_GObj* gobj);
 /* 0C5A30 */ void ftCo_HammerTurn_Coll(ftCo_GObj* gobj);
-/* 0C5A50 */ UNK_RET ftCo_800C5A50(UNK_PARAMS);
+/* 0C5A50 */ bool ftCo_800C5A50(ftCo_GObj* gobj);
 /* 0C5A98 */ void ftCo_800C5A98(ftCo_GObj* gobj);
 /* 0C5B24 */ void ftCo_HammerJump_Anim(ftCo_GObj* gobj);
 /* 0C5B44 */ void ftCo_HammerJump_IASA(ftCo_GObj* gobj);
@@ -51,7 +29,7 @@
 /* 0C5C94 */ void ftCo_HammerKneeBend_Phys(ftCo_GObj* gobj);
 /* 0C5CB4 */ void ftCo_HammerKneeBend_Coll(ftCo_GObj* gobj);
 /* 0C5CD4 */ bool ftCo_800C5CD4(ftCo_GObj* gobj);
-/* 0C5D34 */ UNK_RET ftCo_800C5D34(UNK_PARAMS);
+/* 0C5D34 */ void ftCo_800C5D34(ftCo_GObj* gobj);
 /* 0C5DBC */ void ftCo_HammerFall_Anim(ftCo_GObj* gobj);
 /* 0C5DDC */ bool ftCo_800C5DDC(ftCo_GObj* gobj);
 /* 0C5E94 */ void ftCo_HammerFall_IASA(ftCo_GObj* gobj);

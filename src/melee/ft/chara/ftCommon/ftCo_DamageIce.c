@@ -9,6 +9,7 @@
 #include "ftCo_DownAttack.h"
 #include "ftCo_DownBound.h"
 #include "ftCo_FallSpecial.h"
+#include "ftCo_HammerWait.h"
 #include "ftCo_Lift.h"
 #include "ftCo_PassiveStand.h"
 
@@ -43,8 +44,8 @@ static Vec3 const ftCo_803B74BC = { 0 };
 
 void ftCo_80090984(ftCo_GObj* gobj)
 {
-    RETURN_IF(ftCo_80098928(gobj))
-    RETURN_IF(ftCo_8009872C(gobj))
+    RETURN_IF(ftCo_80098928(gobj));
+    RETURN_IF(ftCo_8009872C(gobj));
     ftCo_80097D40(gobj);
 }
 

@@ -42,6 +42,7 @@
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/ftCo_HammerWait.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_Rebound.h"
 #include "ftCommon/ftCo_ShieldBreakFly.h"

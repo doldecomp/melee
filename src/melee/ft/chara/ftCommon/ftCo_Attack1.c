@@ -144,21 +144,21 @@ void ftCo_Attack11_IASA(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->allow_interrupt) {
-        RETURN_IF(ftCo_AttackS4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackHi4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackLw4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackS3_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackHi3_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackLw3_CheckInput(gobj))
+        RETURN_IF(ftCo_AttackS4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackHi4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackLw4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackS3_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackHi3_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackLw3_CheckInput(gobj));
     }
-    RETURN_IF(ftCo_Attack_800D6A50(gobj))
-    RETURN_IF(checkAttack12(gobj))
+    RETURN_IF(ftCo_Attack_800D6A50(gobj));
+    RETURN_IF(checkAttack12(gobj));
     if (fp->allow_interrupt) {
-        RETURN_IF(ftCo_Jump_CheckInput(gobj))
-        RETURN_IF(ftCo_Dash_CheckInput(gobj))
-        RETURN_IF(ftCo_800D5FB0(gobj))
-        RETURN_IF(ftCo_Turn_CheckInput(gobj))
-        RETURN_IF(ftCo_Walk_CheckInput(gobj))
+        RETURN_IF(ftCo_Jump_CheckInput(gobj));
+        RETURN_IF(ftCo_Dash_CheckInput(gobj));
+        RETURN_IF(ftCo_800D5FB0(gobj));
+        RETURN_IF(ftCo_Turn_CheckInput(gobj));
+        RETURN_IF(ftCo_Walk_CheckInput(gobj));
     }
 }
 
@@ -247,21 +247,21 @@ void ftCo_Attack12_IASA(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->allow_interrupt) {
-        RETURN_IF(ftCo_AttackS4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackHi4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackLw4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackS3_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackHi3_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackLw3_CheckInput(gobj))
+        RETURN_IF(ftCo_AttackS4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackHi4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackLw4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackS3_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackHi3_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackLw3_CheckInput(gobj));
     }
-    RETURN_IF(ftCo_Attack_800D6A50(gobj))
-    RETURN_IF(checkAttack13(gobj))
+    RETURN_IF(ftCo_Attack_800D6A50(gobj));
+    RETURN_IF(checkAttack13(gobj));
     if (fp->allow_interrupt) {
-        RETURN_IF(ftCo_Jump_CheckInput(gobj))
-        RETURN_IF(ftCo_Dash_CheckInput(gobj))
-        RETURN_IF(ftCo_800D5FB0(gobj))
-        RETURN_IF(ftCo_Turn_CheckInput(gobj))
-        RETURN_IF(ftCo_Walk_CheckInput(gobj))
+        RETURN_IF(ftCo_Jump_CheckInput(gobj));
+        RETURN_IF(ftCo_Dash_CheckInput(gobj));
+        RETURN_IF(ftCo_800D5FB0(gobj));
+        RETURN_IF(ftCo_Turn_CheckInput(gobj));
+        RETURN_IF(ftCo_Walk_CheckInput(gobj));
     }
 }
 

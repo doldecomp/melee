@@ -782,9 +782,9 @@ void ftCo_80097D88(ftCo_GObj* gobj)
 
 void ftCo_DownBound_Anim(ftCo_GObj* gobj)
 {
-    RETURN_IF(ftAnim_IsFramesRemaining(gobj))
-    RETURN_IF(ftCo_80098400(gobj))
-    RETURN_IF(ftCo_Down_CheckInput(gobj))
+    RETURN_IF(ftAnim_IsFramesRemaining(gobj));
+    RETURN_IF(ftCo_80098400(gobj));
+    RETURN_IF(ftCo_Down_CheckInput(gobj));
     ftCo_80097E8C(gobj);
 }
 
@@ -804,7 +804,7 @@ void ftCo_DownBound_Coll(ftCo_GObj* gobj)
     if (ft_80082708(gobj) == GA_Ground) {
         ftCo_800CC730(gobj);
     } else {
-        RETURN_IF(ftCo_800C7CA0(gobj))
+        RETURN_IF(ftCo_800C7CA0(gobj));
     }
 }
 
@@ -1008,9 +1008,9 @@ void ftCo_DownWait_Anim(ftCo_GObj* gobj)
 
 void ftCo_DownWait_IASA(ftCo_GObj* gobj)
 {
-    RETURN_IF(ftCo_800984D4(gobj))
-    RETURN_IF(ftCo_Down_CheckInput(gobj))
-    RETURN_IF(ftCo_800980BC(gobj))
+    RETURN_IF(ftCo_800984D4(gobj));
+    RETURN_IF(ftCo_Down_CheckInput(gobj));
+    RETURN_IF(ftCo_800980BC(gobj));
 }
 
 void ftCo_DownWait_Phys(ftCo_GObj* gobj)

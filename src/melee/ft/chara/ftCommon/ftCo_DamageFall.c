@@ -7,6 +7,7 @@
 #include "ftCo_AttackAir.h"
 #include "ftCo_DamageIce.h"
 #include "ftCo_FallSpecial.h"
+#include "ftCo_HammerWait.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_SpecialAir.h"
 #include "math.h"
@@ -181,13 +182,13 @@ void ftCo_DamageFall_IASA(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (!ftCo_800C5240(gobj)) {
-        RETURN_IF(ftCo_SpecialAir_CheckInput(gobj))
-        RETURN_IF(ftCo_80095328(gobj, 0))
-        RETURN_IF(ftCo_800D7100(gobj))
-        RETURN_IF(ftCo_800C3B10(gobj))
-        RETURN_IF(ftCo_AttackAir_CheckItemThrowInput(gobj))
-        RETURN_IF(ftCo_800D705C(gobj))
-        RETURN_IF(ftCo_800CB870(gobj))
+        RETURN_IF(ftCo_SpecialAir_CheckInput(gobj));
+        RETURN_IF(ftCo_80095328(gobj, 0));
+        RETURN_IF(ftCo_800D7100(gobj));
+        RETURN_IF(ftCo_800C3B10(gobj));
+        RETURN_IF(ftCo_AttackAir_CheckItemThrowInput(gobj));
+        RETURN_IF(ftCo_800D705C(gobj));
+        RETURN_IF(ftCo_800CB870(gobj));
         if (ABS(fp->input.lstick.x) >= p_ftCommonData->x210 &&
             fp->x670_timer_lstick_tilt_x < p_ftCommonData->x214)
         {
@@ -195,8 +196,8 @@ void ftCo_DamageFall_IASA(HSD_GObj* gobj)
             return;
         }
     }
-    RETURN_IF(ftCo_800C5DDC(gobj))
-    RETURN_IF(ftCo_800C5CD4(gobj))
+    RETURN_IF(ftCo_800C5DDC(gobj));
+    RETURN_IF(ftCo_800C5CD4(gobj));
 }
 
 void ftCo_DamageFall_Phys(ftCo_GObj* gobj)

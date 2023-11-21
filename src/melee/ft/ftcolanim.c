@@ -6,6 +6,7 @@
 #include "ft/ft_0C31.h"
 #include "ft/ftaction.h"
 #include "ft/ftdata.h"
+#include "ftCommon/ftCo_HammerWait.h"
 #include "lb/lb_00F9.h"
 
 #ifdef WIP

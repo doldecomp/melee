@@ -1506,15 +1506,15 @@ static inline bool inlineC0(ftCo_GObj* gobj, HSD_GObjEvent cb)
 
 void ftCo_GuardOn_IASA(ftCo_GObj* gobj)
 {
-    RETURN_IF(inlineC0(gobj, ftCo_80092BE8))
-    RETURN_IF(ftCo_80093694(gobj))
-    RETURN_IF(ftCo_8009515C(gobj))
-    RETURN_IF(ftCo_8009980C(gobj))
-    RETURN_IF(ftCo_8009917C(gobj))
-    RETURN_IF(ftCo_800D8B9C(gobj))
-    RETURN_IF(ftCo_Catch_CheckInput(gobj))
-    RETURN_IF(ftCo_800CB024(gobj))
-    RETURN_IF(ftCo_8009A080(gobj))
+    RETURN_IF(inlineC0(gobj, ftCo_80092BE8));
+    RETURN_IF(ftCo_80093694(gobj));
+    RETURN_IF(ftCo_8009515C(gobj));
+    RETURN_IF(ftCo_8009980C(gobj));
+    RETURN_IF(ftCo_8009917C(gobj));
+    RETURN_IF(ftCo_800D8B9C(gobj));
+    RETURN_IF(ftCo_Catch_CheckInput(gobj));
+    RETURN_IF(ftCo_800CB024(gobj));
+    RETURN_IF(ftCo_8009A080(gobj));
 }
 #endif
 
@@ -1758,13 +1758,13 @@ lbl_80092B58:
 
 void ftCo_Guard_IASA(ftCo_GObj* gobj)
 {
-    RETURN_IF(inlineC0(gobj, ftCo_80092BE8))
-    RETURN_IF(ftCo_8009515C(gobj))
-    RETURN_IF(ftCo_8009980C(gobj))
-    RETURN_IF(ftCo_8009917C(gobj))
-    RETURN_IF(ftCo_Catch_CheckInput(gobj))
-    RETURN_IF(ftCo_800CB024(gobj))
-    RETURN_IF(ftCo_8009A080(gobj))
+    RETURN_IF(inlineC0(gobj, ftCo_80092BE8));
+    RETURN_IF(ftCo_8009515C(gobj));
+    RETURN_IF(ftCo_8009980C(gobj));
+    RETURN_IF(ftCo_8009917C(gobj));
+    RETURN_IF(ftCo_Catch_CheckInput(gobj));
+    RETURN_IF(ftCo_800CB024(gobj));
+    RETURN_IF(ftCo_8009A080(gobj));
 }
 #endif
 
@@ -1899,8 +1899,8 @@ void ftCo_GuardOff_IASA(ftCo_GObj* gobj)
          !ftCo_AttackHi3_CheckInput(gobj) &&
          !ftCo_AttackLw3_CheckInput(gobj) && !ftCo_Attack1_CheckInput(gobj)))
     {
-        RETURN_IF(ftCo_8009980C(gobj))
-        RETURN_IF(!ftCo_800CB024(gobj))
+        RETURN_IF(ftCo_8009980C(gobj));
+        RETURN_IF(!ftCo_800CB024(gobj));
     }
 }
 
@@ -3412,14 +3412,14 @@ void ftCo_GuardReflect_IASA(HSD_GObj* gobj)
     u8 _[16] = { 0 };
 #endif
     /// @todo Inline depth.
-    RETURN_IF(inlineC0(gobj, ftCo_80092BE8))
-    RETURN_IF(ftCo_8009515C(gobj))
-    RETURN_IF(ftCo_8009980C(gobj))
-    RETURN_IF(ftCo_8009917C(gobj))
-    RETURN_IF(ftCo_800D8B9C(gobj))
-    RETURN_IF(ftCo_Catch_CheckInput(gobj))
-    RETURN_IF(ftCo_800CB024(gobj))
-    RETURN_IF(ftCo_8009A080(gobj))
+    RETURN_IF(inlineC0(gobj, ftCo_80092BE8));
+    RETURN_IF(ftCo_8009515C(gobj));
+    RETURN_IF(ftCo_8009980C(gobj));
+    RETURN_IF(ftCo_8009917C(gobj));
+    RETURN_IF(ftCo_800D8B9C(gobj));
+    RETURN_IF(ftCo_Catch_CheckInput(gobj));
+    RETURN_IF(ftCo_800CB024(gobj));
+    RETURN_IF(ftCo_8009A080(gobj));
 }
 #endif
 

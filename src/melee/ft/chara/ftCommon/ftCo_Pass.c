@@ -6,6 +6,7 @@
 #include "ftCo_AirCatch.h"
 #include "ftCo_AttackAir.h"
 #include "ftCo_EscapeAir.h"
+#include "ftCo_HammerWait.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_SpecialAir.h"
 
@@ -117,14 +118,14 @@ void ftCo_Pass_Anim(ftCo_GObj* gobj)
 
 void ftCo_Pass_IASA(ftCo_GObj* gobj)
 {
-    RETURN_IF(ftCo_SpecialAir_CheckInput(gobj))
-    RETURN_IF(ftCo_80095328(gobj, NULL))
-    RETURN_IF(ftCo_800D7100(gobj))
-    RETURN_IF(ftCo_800C3B10(gobj))
-    RETURN_IF(ftCo_80099A58(gobj))
-    RETURN_IF(ftCo_AttackAir_CheckItemThrowInput(gobj))
-    RETURN_IF(ftCo_800D705C(gobj))
-    RETURN_IF(ftCo_800CB870(gobj))
+    RETURN_IF(ftCo_SpecialAir_CheckInput(gobj));
+    RETURN_IF(ftCo_80095328(gobj, NULL));
+    RETURN_IF(ftCo_800D7100(gobj));
+    RETURN_IF(ftCo_800C3B10(gobj));
+    RETURN_IF(ftCo_80099A58(gobj));
+    RETURN_IF(ftCo_AttackAir_CheckItemThrowInput(gobj));
+    RETURN_IF(ftCo_800D705C(gobj));
+    RETURN_IF(ftCo_800CB870(gobj));
 }
 
 void ftCo_Pass_Phys(ftCo_GObj* gobj)

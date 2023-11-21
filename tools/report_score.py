@@ -92,9 +92,12 @@ def main(args) -> None:
 
     if args.title:
         friendly_obj_name = Path(obj_name).stem
-        print(
+        msg = (
             f"Match {file_percent:.2f}% of `{friendly_obj_name}` ({friendly_file_size})"
+            if file_percent < 100
+            else f"Match `{friendly_obj_name}` ({friendly_file_size})"
         )
+        print(msg)
     else:
         print(f"## Report of `{obj_name}`")
         print("Function|Size|Score|Max|%\n-|-|-|-|-")
