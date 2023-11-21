@@ -19,7 +19,8 @@ struct HSD_PObj {
     HSD_VtxDescList* verts;
     u16 flags;
     u16 n_display;
-    u8* display; // u8 primitive, u8 vtxcnt, u16* indices
+    /// #u8 primitive, #u16 vtxcnt, #u16* indices
+    u8* display;
     union HSD_PObjUnion {
         HSD_JObj* jobj;
         HSD_ShapeSet* shape_set;
