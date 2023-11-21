@@ -6,12 +6,6 @@
 
 #include <placeholder.h>
 
-/* 0C576C */ bool ftCo_800C576C(ftCo_GObj* gobj);
-/* 0C57B4 */ UNK_RET ftCo_800C57B4(UNK_PARAMS);
-/* 0C5848 */ void ftCo_HammerTurn_Anim(ftCo_GObj* gobj);
-/* 0C59EC */ void ftCo_HammerTurn_IASA(ftCo_GObj* gobj);
-/* 0C5A10 */ void ftCo_HammerTurn_Phys(ftCo_GObj* gobj);
-/* 0C5A30 */ void ftCo_HammerTurn_Coll(ftCo_GObj* gobj);
 /* 0C5A50 */ bool ftCo_800C5A50(ftCo_GObj* gobj);
 /* 0C5A98 */ void ftCo_800C5A98(ftCo_GObj* gobj);
 /* 0C5B24 */ void ftCo_HammerJump_Anim(ftCo_GObj* gobj);

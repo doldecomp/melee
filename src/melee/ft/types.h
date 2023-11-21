@@ -469,7 +469,7 @@ struct ftCommonData {
     /* +6A4 */ float x6A4;
     /* +6A8 */ float x6A8;
     /* +6AC */ int x6AC;
-    /* +6B0 */ UNK_T x6B0;
+    /* +6B0 */ int x6B0;
     /* +6B4 */ UNK_T x6B4;
     /* +6B8 */ int x6B8;
     /* +6BC */ UNK_T x6BC;
