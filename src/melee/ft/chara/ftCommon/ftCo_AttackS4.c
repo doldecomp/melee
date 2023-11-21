@@ -203,28 +203,28 @@ void ftCo_AttackS4_IASA(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->allow_interrupt) {
-        RETURN_IF(ftCo_SpecialS_CheckInput(gobj))
-        RETURN_IF(ftCo_Attack100_CheckInput(gobj))
-        RETURN_IF(ftCo_800D6824(gobj))
-        RETURN_IF(ftCo_800D68C0(gobj))
-        RETURN_IF(ftCo_Catch_CheckInput(gobj))
+        RETURN_IF(ftCo_SpecialS_CheckInput(gobj));
+        RETURN_IF(ftCo_Attack100_CheckInput(gobj));
+        RETURN_IF(ftCo_800D6824(gobj));
+        RETURN_IF(ftCo_800D68C0(gobj));
+        RETURN_IF(ftCo_Catch_CheckInput(gobj));
     }
-    RETURN_IF(ftCo_800CECE8(gobj))
+    RETURN_IF(ftCo_800CECE8(gobj));
     if (fp->allow_interrupt) {
-        RETURN_IF(ftCo_AttackS4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackHi4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackLw4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackS3_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackHi3_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackLw3_CheckInput(gobj))
-        RETURN_IF(ftCo_Attack1_CheckInput(gobj))
-        RETURN_IF(ftCo_80091A4C(gobj))
-        RETURN_IF(ftCo_800DE9D8(gobj))
-        RETURN_IF(ftCo_Jump_CheckInput(gobj))
-        RETURN_IF(ftCo_Dash_CheckInput(gobj))
-        RETURN_IF(ftCo_800D5FB0(gobj))
-        RETURN_IF(ftCo_Turn_CheckInput(gobj))
-        RETURN_IF(ftCo_Walk_CheckInput(gobj))
+        RETURN_IF(ftCo_AttackS4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackHi4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackLw4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackS3_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackHi3_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackLw3_CheckInput(gobj));
+        RETURN_IF(ftCo_Attack1_CheckInput(gobj));
+        RETURN_IF(ftCo_80091A4C(gobj));
+        RETURN_IF(ftCo_800DE9D8(gobj));
+        RETURN_IF(ftCo_Jump_CheckInput(gobj));
+        RETURN_IF(ftCo_Dash_CheckInput(gobj));
+        RETURN_IF(ftCo_800D5FB0(gobj));
+        RETURN_IF(ftCo_Turn_CheckInput(gobj));
+        RETURN_IF(ftCo_Walk_CheckInput(gobj));
     }
 }
 

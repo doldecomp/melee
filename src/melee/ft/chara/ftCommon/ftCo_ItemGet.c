@@ -4,6 +4,7 @@
 
 #include "ftCo_ItemGet.h"
 
+#include "ftCo_HammerWait.h"
 #include "ftCo_Lift.h"
 
 #include "ft/fighter.h"

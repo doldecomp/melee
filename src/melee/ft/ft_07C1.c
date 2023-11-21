@@ -5,6 +5,7 @@
 #include "ftcoll.h"
 
 #include "ft/ft_0C31.h"
+#include "ftCommon/ftCo_HammerWait.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 

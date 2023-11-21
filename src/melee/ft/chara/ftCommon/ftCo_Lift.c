@@ -31,9 +31,10 @@ void ftCo_LiftWait_Anim(ftCo_GObj* gobj) {}
 
 void ftCo_LiftWait_IASA(ftCo_GObj* arg0)
 {
-    RETURN_IF(ftCo_80094EA4(arg0))
-    RETURN_IF(ftCo_800970E0(arg0))
+    RETURN_IF(ftCo_80094EA4(arg0));
+    RETURN_IF(ftCo_800970E0(arg0));
     RETURN_IF(ftCo_80096EF8(arg0));
+    ;
 }
 
 void ftCo_LiftWait_Phys(ftCo_GObj* gobj)
@@ -108,7 +109,7 @@ void ftCo_LiftWalk_Anim(HSD_GObj* gobj)
 
 void ftCo_LiftWalk_IASA(ftCo_GObj* gobj)
 {
-    RETURN_IF(ftCo_80094EA4(gobj))
+    RETURN_IF(ftCo_80094EA4(gobj));
 }
 
 void ftCo_LiftWalk_Phys(ftCo_GObj* gobj)
@@ -181,7 +182,7 @@ void ftCo_LiftTurn_Anim(HSD_GObj* gobj)
 
 void ftCo_LiftTurn_IASA(HSD_GObj* arg0)
 {
-    RETURN_IF(ftCo_80094EA4(arg0))
+    RETURN_IF(ftCo_80094EA4(arg0));
 }
 
 void ftCo_LiftTurn_Phys(HSD_GObj* arg0)

@@ -457,19 +457,19 @@ ASM void ftCo_FlyReflect_Coll(ftCo_GObj* gobj)
             ftCo_80090184(gobj);
             return;
         }
-        RETURN_IF(ftCo_800C23A0(gobj))
-        RETURN_IF(ftCo_800C1718(gobj))
+        RETURN_IF(ftCo_800C23A0(gobj));
+        RETURN_IF(ftCo_800C1718(gobj));
         if (fp->mv.co.damage.x18 == 0) {
-            RETURN_IF(ftCo_800C1D38(gobj))
-            RETURN_IF(ftCo_800C17CC(gobj))
+            RETURN_IF(ftCo_800C1D38(gobj));
+            RETURN_IF(ftCo_800C17CC(gobj));
         }
     } else {
         if (ft_80082084(gobj)) {
             ftCo_80090184(gobj);
             return;
         }
-        RETURN_IF(ftCo_800C1D38(gobj))
-        RETURN_IF(ftCo_800C15F4(gobj))
+        RETURN_IF(ftCo_800C1D38(gobj));
+        RETURN_IF(ftCo_800C15F4(gobj));
     }
 }
 

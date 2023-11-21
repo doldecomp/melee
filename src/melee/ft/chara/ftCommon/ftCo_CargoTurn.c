@@ -57,8 +57,8 @@ void ftCo_CargoTurn_Anim(ftCo_GObj* gobj)
 
 void ftCo_CargoTurn_IASA(ftCo_GObj* gobj)
 {
-    RETURN_IF(ftCo_8009BF3C(gobj))
-    RETURN_IF(ftCo_8009BB1C(gobj))
+    RETURN_IF(ftCo_8009BF3C(gobj));
+    RETURN_IF(ftCo_8009BB1C(gobj));
 }
 
 void ftCo_CargoTurn_Phys(ftCo_GObj* gobj)

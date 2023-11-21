@@ -468,10 +468,10 @@ struct ftCommonData {
     /* +6A0 */ float x6A0;
     /* +6A4 */ float x6A4;
     /* +6A8 */ float x6A8;
-    /* +6AC */ UNK_T x6AC;
+    /* +6AC */ int x6AC;
     /* +6B0 */ UNK_T x6B0;
     /* +6B4 */ UNK_T x6B4;
-    /* +6B8 */ UNK_T x6B8;
+    /* +6B8 */ int x6B8;
     /* +6BC */ UNK_T x6BC;
     /* +6C0 */ UNK_T x6C0;
     /* +6C4 */ UNK_T x6C4;
@@ -1752,7 +1752,7 @@ struct Fighter {
     /* fp+2324 */ InternalStageId bury_stage_kind;
     /* fp+2328 */ uint bury_timer_1;
     /* fp+232C */ uint bury_timer_2;
-    /* fp+2330 */ Vec2 x2330;
+    /* fp+2330 */ IntVec2 x2330;
     /* fp+2338 */ IntVec2 x2338;
     /// @at{2340} @sz{AC}
     /* fp+2340 */ union Fighter_MotionVars {

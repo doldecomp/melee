@@ -101,12 +101,12 @@ void ftYs_GuardOn_0_Anim(HSD_GObj* gobj)
 
 void ftYs_GuardOn_0_IASA(HSD_GObj* gobj)
 {
-    RETURN_IF(ftCo_80093694(gobj))
-    RETURN_IF(ftCo_8009515C(gobj))
-    RETURN_IF(ftCo_80099794(gobj))
-    RETURN_IF(ftCo_8009917C(gobj))
-    RETURN_IF(ftCo_Catch_CheckInput(gobj))
-    RETURN_IF(ftCo_8009A080(gobj))
+    RETURN_IF(ftCo_80093694(gobj));
+    RETURN_IF(ftCo_8009515C(gobj));
+    RETURN_IF(ftCo_80099794(gobj));
+    RETURN_IF(ftCo_8009917C(gobj));
+    RETURN_IF(ftCo_Catch_CheckInput(gobj));
+    RETURN_IF(ftCo_8009A080(gobj));
 }
 
 void ftYs_GuardOn_0_Phys(HSD_GObj* arg0)

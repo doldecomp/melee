@@ -149,12 +149,12 @@ void ftCo_AttackAir_Anim(ftCo_GObj* gobj)
 /// @remarks Trying to use an @c inline function breaks inlining.
 #define DO_IASA(gobj)                                                         \
     if (GET_FIGHTER(gobj)->allow_interrupt) {                                 \
-        RETURN_IF(ftCo_80095328(gobj, false))                                 \
-        RETURN_IF(ftCo_800D7100(gobj))                                        \
-        RETURN_IF(ftCo_800C3B10(gobj))                                        \
-        RETURN_IF(checkItemThrowInput(gobj))                                  \
-        RETURN_IF(ftCo_800D705C(gobj))                                        \
-        RETURN_IF(ftCo_800CB870(gobj))                                        \
+        RETURN_IF(ftCo_80095328(gobj, false));                                \
+        RETURN_IF(ftCo_800D7100(gobj));                                       \
+        RETURN_IF(ftCo_800C3B10(gobj));                                       \
+        RETURN_IF(checkItemThrowInput(gobj));                                 \
+        RETURN_IF(ftCo_800D705C(gobj));                                       \
+        RETURN_IF(ftCo_800CB870(gobj));                                       \
     }
 
 void ftCo_AttackAirN_IASA(ftCo_GObj* gobj)

@@ -57,25 +57,25 @@ void ftCo_Ottotto_IASA(ftCo_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[8] = { 0 };
 #endif
-    RETURN_IF(ftCo_SpecialS_CheckInput(gobj))
-    RETURN_IF(ftCo_Attack100_CheckInput(gobj))
-    RETURN_IF(ftCo_800D6824(gobj))
-    RETURN_IF(ftCo_800D68C0(gobj))
-    RETURN_IF(ftCo_Catch_CheckInput(gobj))
-    RETURN_IF(ftCo_AttackS4_CheckInput(gobj))
-    RETURN_IF(ftCo_AttackHi4_CheckInput(gobj))
-    RETURN_IF(ftCo_AttackLw4_CheckInput(gobj))
-    RETURN_IF(ftCo_AttackS3_CheckInput(gobj))
-    RETURN_IF(ftCo_AttackHi3_CheckInput(gobj))
-    RETURN_IF(ftCo_AttackLw3_CheckInput(gobj))
-    RETURN_IF(ftCo_Attack1_CheckInput(gobj))
-    RETURN_IF(ftCo_80091A4C(gobj))
-    RETURN_IF(ftCo_800DE9D8(gobj))
-    RETURN_IF(ftCo_Jump_CheckInput(gobj))
-    RETURN_IF(ftCo_Dash_CheckInput(gobj))
-    RETURN_IF(ftCo_800D5FB0(gobj))
-    RETURN_IF(ftCo_Turn_CheckInput(gobj))
-    RETURN_IF(ftCo_800C94B4(gobj))
+    RETURN_IF(ftCo_SpecialS_CheckInput(gobj));
+    RETURN_IF(ftCo_Attack100_CheckInput(gobj));
+    RETURN_IF(ftCo_800D6824(gobj));
+    RETURN_IF(ftCo_800D68C0(gobj));
+    RETURN_IF(ftCo_Catch_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackS4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackHi4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackLw4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackS3_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackHi3_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackLw3_CheckInput(gobj));
+    RETURN_IF(ftCo_Attack1_CheckInput(gobj));
+    RETURN_IF(ftCo_80091A4C(gobj));
+    RETURN_IF(ftCo_800DE9D8(gobj));
+    RETURN_IF(ftCo_Jump_CheckInput(gobj));
+    RETURN_IF(ftCo_Dash_CheckInput(gobj));
+    RETURN_IF(ftCo_800D5FB0(gobj));
+    RETURN_IF(ftCo_Turn_CheckInput(gobj));
+    RETURN_IF(ftCo_800C94B4(gobj));
 }
 
 void ftCo_Ottotto_Phys(HSD_GObj* gobj) {}

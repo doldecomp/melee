@@ -44,7 +44,7 @@ void ftCo_CargoKneebend_Anim(ftCo_GObj* gobj)
 
 void ftCo_CargoKneebend_IASA(Fighter_GObj* gobj)
 {
-    RETURN_IF(ftCo_8009BF3C(gobj))
+    RETURN_IF(ftCo_8009BF3C(gobj));
     ftCo_800CB59C(gobj);
 }
 
