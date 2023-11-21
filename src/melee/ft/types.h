@@ -321,7 +321,7 @@ struct ftCommonData {
     /* +42C */ UNK_T x42C;
     /* +430 */ UNK_T x430;
     /* +434 */ UNK_T x434;
-    /* +438 */ UNK_T x438;
+    /* +438 */ float x438;
     /* +43C */ UNK_T x43C;
     /* +440 */ float x440;
     /* +444 */ float x444;
@@ -462,12 +462,12 @@ struct ftCommonData {
     /* +688 */ UNK_T x688;
     /* +68C */ UNK_T x68C;
     /* +690 */ UNK_T x690;
-    /* +694 */ UNK_T x694;
-    /* +698 */ UNK_T x698;
-    /* +69C */ UNK_T x69C;
-    /* +6A0 */ UNK_T x6A0;
-    /* +6A4 */ UNK_T x6A4;
-    /* +6A8 */ UNK_T x6A8;
+    /* +694 */ float x694;
+    /* +698 */ float x698;
+    /* +69C */ float x69C;
+    /* +6A0 */ float x6A0;
+    /* +6A4 */ float x6A4;
+    /* +6A8 */ float x6A8;
     /* +6AC */ UNK_T x6AC;
     /* +6B0 */ UNK_T x6B0;
     /* +6B4 */ UNK_T x6B4;

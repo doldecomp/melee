@@ -12,6 +12,7 @@
 /* 2946B0 */ void it_802946B0(Item_GObj*);
 /* 294728 */ void it_80294728(Item_GObj*);
 /* 294790 */ void it_80294790(Item_GObj*);
+/* 2947CC */ void it_802947CC(Item_GObj* gobj, Vec3* pos);
 /* 294A28 */ void it_80294A28(Item_GObj*);
 /* 294A90 */ void it_80294A90(Item_GObj*, Item_GObj*);
 /* 3F61B0 */ extern ItemStateTable it_803F61B0[];

@@ -79,7 +79,7 @@ UNK_RET ft_80083A48(UNK_PARAMS);
 UNK_RET ft_80083C00(UNK_PARAMS);
 UNK_RET ft_80083CE4(UNK_PARAMS);
 UNK_RET ft_80083DCC(UNK_PARAMS);
-UNK_RET ft_80083E64(UNK_PARAMS);
+void ft_80083E64(Fighter_GObj* gobj, UNK_T arg1, HSD_GObjEvent cb);
 void ft_800841B8(Fighter_GObj* gobj, HSD_GObjEvent cb);
 void ft_800843FC(Fighter_GObj* gobj);
 bool ft_80081F2C(Fighter_GObj* gobj);

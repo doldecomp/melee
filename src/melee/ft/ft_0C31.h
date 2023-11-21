@@ -6,11 +6,6 @@
 
 #include <placeholder.h>
 
-/* 0C4BA4 */ void ftCo_WarpStarFall_Anim(ftCo_GObj* gobj);
-/* 0C4BA8 */ void ftCo_WarpStarFall_IASA(ftCo_GObj* gobj);
-/* 0C4BAC */ void ftCo_WarpStarFall_Phys(ftCo_GObj* gobj);
-/* 0C4C30 */ void ftCo_WarpStarFall_Coll(ftCo_GObj* gobj);
-/* 0C4E2C */ void ftCo_WarpStarFall_Cam(ftCo_GObj* gobj);
 /* 0C4E4C */ UNK_RET ftCo_800C4E4C(UNK_PARAMS);
 /* 0C4E94 */ UNK_RET ftCo_800C4E94(UNK_PARAMS);
 /* 0C4ED8 */ UNK_RET ftCo_800C4ED8(UNK_PARAMS);
