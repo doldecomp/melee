@@ -9,6 +9,7 @@
 #include "ftCo_DownAttack.h"
 #include "ftCo_DownBound.h"
 #include "ftCo_FallSpecial.h"
+#include "ftCo_HammerJump.h"
 #include "ftCo_HammerWait.h"
 #include "ftCo_Lift.h"
 #include "ftCo_PassiveStand.h"

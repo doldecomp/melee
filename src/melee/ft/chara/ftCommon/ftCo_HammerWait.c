@@ -1,9 +1,9 @@
 #include "ft/forward.h"
-#include "ftCommon/forward.h"
 #include "it/forward.h"
 
 #include "ftCo_HammerWait.h"
 
+#include "ftCo_HammerJump.h"
 #include "ftCo_HammerTurn.h"
 #include "ftCo_HammerWalk.h"
 

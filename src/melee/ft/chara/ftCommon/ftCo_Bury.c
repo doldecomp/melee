@@ -8,6 +8,7 @@
 #include "ftCo_BarrelWait.h"
 #include "ftCo_Damage.h"
 #include "ftCo_EscapeAir.h"
+#include "ftCo_HammerJump.h"
 #include "ftCo_HammerWait.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Lift.h"

@@ -39,6 +39,7 @@
 #include "ftCo_FlyReflect.h"
 #include "ftCo_Furafura.h"
 #include "ftCo_Guard.h"
+#include "ftCo_HammerJump.h"
 #include "ftCo_HammerTurn.h"
 #include "ftCo_HammerWait.h"
 #include "ftCo_HammerWalk.h"
