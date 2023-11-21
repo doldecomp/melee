@@ -233,6 +233,11 @@ union ftCommon_MotionVars {
         /* fp+2344 */ int x4;
         /* fp+2344 */ float x8;
     } jumpb;
+    struct {
+        /* fp+2340 */ int x0;
+        /* fp+2344 */ int x4;
+        /* fp+2348 */ float x8;
+    } hammerkneebend;
 };
 
 #endif

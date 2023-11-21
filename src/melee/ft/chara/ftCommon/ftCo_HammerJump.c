@@ -1,5 +1,6 @@
 #include "ftCo_HammerJump.h"
 
+#include "ftCo_HammerKneeBend.h"
 #include "ftCo_HammerWait.h"
 
 #include "ft/fighter.h"
