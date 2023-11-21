@@ -14,6 +14,7 @@
 #include "ftCo_DownBound.h"
 #include "ftCo_DownDamage.h"
 #include "ftCo_FlyReflect.h"
+#include "ftCo_HammerFall.h"
 #include "ftCo_HammerWait.h"
 #include "ftCo_PassiveCeil.h"
 #include "ftCo_PassiveStand.h"

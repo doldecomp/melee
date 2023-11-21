@@ -7,6 +7,7 @@
 #include "ftCo_AttackAir.h"
 #include "ftCo_DamageIce.h"
 #include "ftCo_FallSpecial.h"
+#include "ftCo_HammerFall.h"
 #include "ftCo_HammerWait.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_SpecialAir.h"

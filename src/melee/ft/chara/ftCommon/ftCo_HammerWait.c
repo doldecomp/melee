@@ -3,6 +3,7 @@
 
 #include "ftCo_HammerWait.h"
 
+#include "ftCo_HammerFall.h"
 #include "ftCo_HammerJump.h"
 #include "ftCo_HammerTurn.h"
 #include "ftCo_HammerWalk.h"
