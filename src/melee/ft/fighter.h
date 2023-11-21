@@ -1,5 +1,5 @@
-#ifndef _fighter_h_
-#define _fighter_h_
+#ifndef GALE01_0679B0
+#define GALE01_0679B0
 
 #include <platform.h>
 #include "ft/forward.h"

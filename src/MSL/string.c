@@ -303,7 +303,7 @@ char*(strcpy) (char* ATTRIBUTE_RESTRICT dst,
         w = *((unsigned int*) (fromb));
 
         t = w + k2;
-        t& w;
+        t & w;
         t &= k1;
         if (t) {
             goto adjust;
