@@ -238,6 +238,10 @@ union ftCommon_MotionVars {
         /* fp+2344 */ int x4;
         /* fp+2348 */ float x8;
     } hammerkneebend;
+    struct {
+        /* fp+2340 */ UNK_T x0;
+        /* fp+2344 */ float x4;
+    } hammerlanding;
 };
 
 #endif

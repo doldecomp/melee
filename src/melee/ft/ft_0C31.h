@@ -6,11 +6,6 @@
 
 #include <placeholder.h>
 
-/* 0C5F88 */ void ftCo_800C5F88(ftCo_GObj* gobj);
-/* 0C6020 */ void ftCo_HammerLanding_Anim(ftCo_GObj* gobj);
-/* 0C6084 */ void ftCo_HammerLanding_IASA(ftCo_GObj* gobj);
-/* 0C6088 */ void ftCo_HammerLanding_Phys(ftCo_GObj* gobj);
-/* 0C60A8 */ void ftCo_HammerLanding_Coll(ftCo_GObj* gobj);
 /* 0C60C8 */ bool ftCo_800C60C8(ftCo_GObj* gobj);
 /* 0C6110 */ UNK_RET ftCo_800C6110(UNK_PARAMS);
 /* 0C6150 */ void ftCo_800C6150(Fighter_GObj* gobj);
