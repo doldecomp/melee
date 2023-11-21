@@ -22,6 +22,5 @@
 /* 0C5500 */ void ftCo_800C5500(ftCo_GObj* gobj);
 /* 0C554C */ void ftCo_800C554C(ftCo_Fighter* fp);
 /* 0C555C */ void ftCo_800C555C(ftCo_GObj* gobj);
-/* 0C55CC */ bool ftCo_800C55CC(ftCo_GObj* gobj);
 
 #endif

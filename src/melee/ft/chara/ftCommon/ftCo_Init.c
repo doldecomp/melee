@@ -40,6 +40,7 @@
 #include "ftCo_Furafura.h"
 #include "ftCo_Guard.h"
 #include "ftCo_HammerWait.h"
+#include "ftCo_HammerWalk.h"
 #include "ftCo_ItemGet.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_LandingAir.h"
