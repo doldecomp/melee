@@ -212,6 +212,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_HammerKneeBend.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_HammerFall.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_HammerLanding.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_0C60.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0C31.s.o\
     $(BUILD_DIR)/asm/melee/ft/ftmetal.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0C88.s.o\

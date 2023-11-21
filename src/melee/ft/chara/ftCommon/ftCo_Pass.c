@@ -3,6 +3,7 @@
 
 #include "ftCo_Pass.h"
 
+#include "ftCo_0C60.h"
 #include "ftCo_AirCatch.h"
 #include "ftCo_AttackAir.h"
 #include "ftCo_EscapeAir.h"

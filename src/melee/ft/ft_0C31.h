@@ -6,9 +6,7 @@
 
 #include <placeholder.h>
 
-/* 0C60C8 */ bool ftCo_800C60C8(ftCo_GObj* gobj);
-/* 0C6110 */ UNK_RET ftCo_800C6110(UNK_PARAMS);
-/* 0C6150 */ void ftCo_800C6150(Fighter_GObj* gobj);
+/* 0C6150 */ void ftCo_800C6150(ftCo_GObj* gobj);
 /* 0C61B0 */ void ftCo_800C61B0(ftCo_GObj* gobj);
 /* 0C6370 */ void ftCo_Entry_Anim(ftCo_GObj* gobj);
 /* 0C63B4 */ void ftCo_Entry_IASA(ftCo_GObj* gobj);
