@@ -2873,7 +2873,7 @@ asm void ft_80083DCC(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_80083E64(Fighter_GObj* gobj, UNK_T arg1, HSD_GObjEvent cb)
+asm void ft_80083E64(Fighter_GObj* gobj, ftCollisionBox* ecb, HSD_GObjEvent cb)
 {
     // clang-format off
     nofralloc

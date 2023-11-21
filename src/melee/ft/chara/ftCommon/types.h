@@ -227,11 +227,7 @@ union ftCommon_MotionVars {
         /* fp+234C */ Vec3 self_vel;
         /* fp+2358 */ float facing_dir;
         /* fp+235C */ int x1C;
-        /**
-         * @todo Probably a #HSD_GObj (not a pointer) but putting that here
-         *       messes with @c sizeof(Fighter).
-         */
-        /* fp+2360 */ UNK_T x20;
+        /* fp+2360 */ ftCollisionBox ecb;
     } warpstar;
     struct {
         /* fp+2340 */ int x0;

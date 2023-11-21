@@ -1,13 +1,14 @@
 #ifndef GALE01_294364
 #define GALE01_294364
 
+#include "ft/forward.h"
 #include "it/forward.h"
 
 #include "it/types.h"
 
 /* 294364 */ HSD_AnimJoint* it_80294364(Item_GObj*);
 /* 294430 */ void it_80294430(Item_GObj*, float, float);
-/* 2944AC */ void it_802944AC(Item_GObj*, UNK_T);
+/* 2944AC */ void it_802944AC(Item_GObj*, ftCollisionBox*);
 /* 29451C */ void it_8029451C(Item_GObj*);
 /* 2946B0 */ void it_802946B0(Item_GObj*);
 /* 294728 */ void it_80294728(Item_GObj*);

@@ -342,7 +342,7 @@ ASM void ftCo_800C4A38(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Quaternion rot;
-    it_802944AC(fp->item_gobj, &fp->mv.co.warpstar.x20);
+    it_802944AC(fp->item_gobj, &fp->mv.co.warpstar.ecb);
     Fighter_ChangeMotionState(gobj, ftCo_MS_WarpStarFall, Ft_MF_None, 0, 1, 0,
                               NULL);
     fp->x2222_b7 = true;
@@ -527,7 +527,7 @@ ASM void ftCo_WarpStarFall_Coll(ftCo_GObj* gobj)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    ft_80083E64(gobj, &fp->mv.co.warpstar.x20, ftCo_800C4C60);
+    ft_80083E64(gobj, &fp->mv.co.warpstar.ecb, ftCo_800C4C60);
 }
 
 #else /* clang-format off */
