@@ -8,7 +8,7 @@
 #include "ft/ftchangeparam.h"
 #include "ft/ftwalkcommon.h"
 
-/* 0C5614 */ void static ftCo_800C5614(ftCo_GObj* gobj);
+/* 0C5614 */ static void ftCo_800C5614(ftCo_GObj* gobj);
 
 bool ftCo_800C55CC(ftCo_GObj* gobj)
 {
