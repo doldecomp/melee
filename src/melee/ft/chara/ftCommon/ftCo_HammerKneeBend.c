@@ -1,5 +1,3 @@
-#include "ftCommon/forward.h"
-
 #include "ftCo_HammerKneeBend.h"
 
 #include "ftCo_HammerJump.h"

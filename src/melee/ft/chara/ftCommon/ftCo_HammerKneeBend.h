@@ -3,8 +3,6 @@
 
 #include "ftCommon/forward.h"
 
-#include <placeholder.h>
-
 /* 0C5B88 */ void ftCo_800C5B88(ftCo_GObj* gobj, enum_t);
 /* 0C5C10 */ void ftCo_HammerKneeBend_Anim(ftCo_GObj* gobj);
 /* 0C5C74 */ void ftCo_HammerKneeBend_IASA(ftCo_GObj* gobj);
