@@ -9,7 +9,6 @@
 #include "ft/ftcolltypes.h"
 
 #include <placeholder.h>
-#include <baselib/gobj.h>
 
 union ftCommon_MotionVars {
     struct {
