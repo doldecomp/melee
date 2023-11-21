@@ -41,9 +41,7 @@ static inline void inlineA0(ftCo_GObj* gobj)
     u32 flags = ftCo_800C54C4(fp);
     Fighter_ChangeMotionState(gobj, ftCo_MS_HammerWait, flags,
                               ftCo_800C548C(fp), 1, 0, NULL);
-    ftCo_800C5408(fp);
-    ftCo_800C5588(fp);
-    ftCommon_8007EBAC(fp, 1, 0);
+    ftCo_800C4E94(fp);
 }
 
 void ftCo_800C4ED8(ftCo_GObj* gobj)
