@@ -39,6 +39,7 @@
 #include "ftCo_FlyReflect.h"
 #include "ftCo_Furafura.h"
 #include "ftCo_Guard.h"
+#include "ftCo_HammerTurn.h"
 #include "ftCo_HammerWait.h"
 #include "ftCo_HammerWalk.h"
 #include "ftCo_ItemGet.h"
@@ -64,6 +65,7 @@
 #include "ftCo_ThrownKoopa.h"
 #include "ftCo_ThrownMewtwo.h"
 #include "ftCo_Wait.h"
+#include "ftCo_WarpStar.h"
 #include "ftCo_YoshiEgg.h"
 
 #include "ft/ft_0BEC.h"
@@ -81,7 +83,6 @@
 #include "ft/ftstarrodswing.h"
 #include "ft/ftswing.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_WarpStar.h"
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftKirby/ftKb_Init.h"
 #include "ftMasterHand/ftMh_CaptureDamageMasterHand.h"

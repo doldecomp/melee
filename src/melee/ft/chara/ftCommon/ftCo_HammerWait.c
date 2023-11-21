@@ -4,6 +4,7 @@
 
 #include "ftCo_HammerWait.h"
 
+#include "ftCo_HammerTurn.h"
 #include "ftCo_HammerWalk.h"
 
 #include "ft/ft_081B.h"
