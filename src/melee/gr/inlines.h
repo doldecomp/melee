@@ -1,8 +1,6 @@
 #ifndef MELEE_GR_INLINES_H
 #define MELEE_GR_INLINES_H
 
-#include "ftCommon/forward.h"
-
 #include "gr/granime.h"
 #include "gr/ground.h"
 #include "gr/types.h"
