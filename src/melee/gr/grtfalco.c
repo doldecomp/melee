@@ -3,6 +3,7 @@
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
