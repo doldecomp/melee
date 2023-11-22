@@ -29,10 +29,16 @@ References
 
 Projects using this structure:
 - [zeldaret/tww](https://github.com/zeldaret/tww)
+- [PrimeDecomp/prime](https://github.com/PrimeDecomp/prime)
 - [PrimeDecomp/echoes](https://github.com/PrimeDecomp/echoes)
 - [DarkRTA/rb3](https://github.com/DarkRTA/rb3)
+- [InputEvelution/sadx-dtk](https://github.com/InputEvelution/sadx-dtk)
 - [InputEvelution/wp](https://github.com/InputEvelution/wp)
+- [lepelog/ss-dtk](https://github.com/lepelog/ss-dtk)
+- [NWPlayer123/AnimalCrossing-dtk](https://github.com/NWPlayer123/AnimalCrossing-dtk)
+- [Rainchus/mp4-dtk](https://github.com/Rainchus/mp4-dtk)
 - [Rainchus/ttyd_dtk](https://github.com/Rainchus/ttyd_dtk)
+- [Sage-of-Mirrors/zmansion](https://github.com/Sage-of-Mirrors/zmansion)
 
 Features
 --------

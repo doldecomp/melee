@@ -9,3 +9,4 @@ objdiff.json
 orig/*/*
 !orig/*/.gitkeep
 /*.txt
+ctx.c

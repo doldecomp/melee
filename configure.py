@@ -117,10 +117,10 @@ if not is_windows():
     config.wrapper = args.wrapper
 
 # Tool versions
-config.compilers_tag = "20230715"
-config.dtk_tag = "v0.5.7"
+config.compilers_tag = "20231018"
+config.dtk_tag = "v0.6.0"
 config.sjiswrap_tag = "v1.1.1"
-config.wibo_tag = "0.6.3"
+config.wibo_tag = "0.6.9"
 
 # Project
 config.config_path = Path("config") / config.version / "config.yml"
@@ -128,7 +128,7 @@ config.check_sha_path = Path("config") / config.version / "build.sha1"
 config.ldflags = [
     "-fp hardware",
     "-nodefaults",
-    "-listclosure",
+    # "-listclosure", # Uncomment for Wii linkers
 ]
 
 # Base flags, common to most GC/Wii games.
@@ -151,8 +151,7 @@ cflags_base = [
     "-fp_contract on",
     "-str reuse",
     "-i include",
-    "-i libc",
-	"-enc SJIS",
+	"-multibyte", # For Wii compilers, replace with `-enc SJIS`
     f"-DVERSION={version_num}",
 ]
 
@@ -179,14 +178,14 @@ cflags_rel = [
     "-sdata2 0",
 ]
 
-config.linker_version = "Wii/1.3"
+config.linker_version = "GC/1.3.2"
 
 
 # Helper function for Dolphin libraries
 def DolphinLib(lib_name, objects):
     return {
         "lib": lib_name,
-        "mw_version": "Wii/1.1",
+        "mw_version": "GC/1.2.5n",
         "cflags": cflags_base,
         "host": False,
         "objects": objects,
@@ -197,7 +196,7 @@ def DolphinLib(lib_name, objects):
 def Rel(lib_name, objects):
     return {
         "lib": lib_name,
-        "mw_version": "Wii/1.3",
+        "mw_version": "GC/1.3.2",
         "cflags": cflags_rel,
         "host": True,
         "objects": objects,

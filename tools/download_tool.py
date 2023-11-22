@@ -16,7 +16,6 @@ import os
 import platform
 import shutil
 import stat
-import sys
 import urllib.request
 import zipfile
 
@@ -51,6 +50,7 @@ def wibo_url(tag):
 
 def compilers_url(tag):
     return f"https://files.decomp.dev/compilers_{tag}.zip"
+
 
 TOOLS = {
     "dtk": dtk_url,
