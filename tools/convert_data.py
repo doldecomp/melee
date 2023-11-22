@@ -7,17 +7,17 @@ from pathlib import Path
 from typing import Any, Callable, List, Match, TextIO, Tuple, Union
 
 root = Path(__file__).parent.parent
-options = {"input_glob": r"**/grtmewtwo.s"}
+options = {"input_glob": r"**/ground.s"}
 
 default_options = {
-    "zero": "float",  # How to treat zero-value dwords
+    "zero": None,  # How to treat zero-value dwords
     # None: replace zero with 'NULL'
     # 'hex': replace zero with '0x00000000'
     # 'int': replace zero with '0'
     # 'float': replace zero with '0.0'
     "find_asciz": True,  # Attempt to find zero-terminated ASCII strings
     "find_f32": True,  # Attempt to find 4-byte floating-point values
-    "find_f64": True,  # Attempt to find 8-byte floating-point values
+    "find_f64": False,  # Attempt to find 8-byte floating-point values
     "find_s32": True,  # Attempt to find negative 4-byte values
     "find_u32": True,  # Attempt to find positive 4-byte values
     "min_asciz_len": 4,  # Minimum length for a byte array to be considered a string

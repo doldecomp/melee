@@ -15,11 +15,6 @@
 #include <dolphin/os/os.h>
 #include <MSL/trigf.h>
 
-extern s32 mpColl_804D64A0;
-extern s32 mpColl_804D64A4;
-extern s32 mpColl_804D64A8;
-extern u32 mpColl_804D64AC;
-
 // 80041C78 https://decomp.me/scratch/V6eYQ
 void mpColl_80041C78(void)
 {

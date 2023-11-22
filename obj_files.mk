@@ -557,7 +557,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gr/grtemblem.c.o\
     $(BUILD_DIR)/asm/melee/gr/grtganon.s.o\
     $(BUILD_DIR)/src/melee/gr/stage.c.o\
-    $(BUILD_DIR)/asm/melee/gr/stage.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/db/db_2253.s.o\

@@ -1191,7 +1191,7 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                 }
             }
 
-        block_13: {
+        block_13 : {
             temp_f1 = arg1->y;
             if (arg4_offset.y > temp_f1) {
                 {
@@ -1228,7 +1228,7 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                 }
             }
         }
-        block_26: {
+        block_26 : {
             f32 temp_f2_5 = arg1->z;
             if (arg4_offset.z > temp_f2_5) {
                 {
@@ -1261,7 +1261,7 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                     return false;
                 }
             }
-        block_39: {
+        block_39 : {
             f32 arg4_scl;
 
             f32 temp_f25 = temp_f1 - arg4_offset.y;
