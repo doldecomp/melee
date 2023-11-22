@@ -69,3 +69,4 @@ Temporary, delete when done:
 - `config/GAMEID/config.example.yml` - Example configuration file and documentation.
 - `docs/` - Documentation for decomp-toolkit configuration.
 - `README.md` - This file, replace with your own. For a template, see [`README.example.md`](README.example.md).
+- `LICENSE` - This repository is licensed under the CC0 license. Replace with your own if desired.
