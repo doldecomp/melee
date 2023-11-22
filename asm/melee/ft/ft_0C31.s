@@ -2,33 +2,6 @@
 
 .section .text
 
-.global ftCo_800C6150
-ftCo_800C6150:
-/* 800C6150 000C2D30  7C 08 02 A6 */	mflr r0
-/* 800C6154 000C2D34  38 80 00 0C */	li r4, 0xc
-/* 800C6158 000C2D38  90 01 00 04 */	stw r0, 4(r1)
-/* 800C615C 000C2D3C  38 A0 00 00 */	li r5, 0
-/* 800C6160 000C2D40  38 C0 00 00 */	li r6, 0
-/* 800C6164 000C2D44  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800C6168 000C2D48  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800C616C 000C2D4C  C0 22 93 E0 */	lfs f1, ftCo_804D8DC0@sda21(r2)
-/* 800C6170 000C2D50  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 800C6174 000C2D54  FC 60 08 90 */	fmr f3, f1
-/* 800C6178 000C2D58  C0 42 93 E4 */	lfs f2, ftCo_804D8DC4@sda21(r2)
-/* 800C617C 000C2D5C  4B FA 32 31 */	bl Fighter_ChangeMotionState
-/* 800C6180 000C2D60  88 1F 22 19 */	lbz r0, 0x2219(r31)
-/* 800C6184 000C2D64  38 60 00 01 */	li r3, 1
-/* 800C6188 000C2D68  50 60 2E B4 */	rlwimi r0, r3, 5, 0x1a, 0x1a
-/* 800C618C 000C2D6C  98 1F 22 19 */	stb r0, 0x2219(r31)
-/* 800C6190 000C2D70  88 1F 22 19 */	lbz r0, 0x2219(r31)
-/* 800C6194 000C2D74  50 60 36 72 */	rlwimi r0, r3, 6, 0x19, 0x19
-/* 800C6198 000C2D78  98 1F 22 19 */	stb r0, 0x2219(r31)
-/* 800C619C 000C2D7C  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 800C61A0 000C2D80  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 800C61A4 000C2D84  38 21 00 18 */	addi r1, r1, 0x18
-/* 800C61A8 000C2D88  7C 08 03 A6 */	mtlr r0
-/* 800C61AC 000C2D8C  4E 80 00 20 */	blr
-
 .global ftCo_800C61B0
 ftCo_800C61B0:
 /* 800C61B0 000C2D90  7C 08 02 A6 */	mflr r0
@@ -2369,10 +2342,6 @@ ftCo_804D3C88:
 
 .section .sdata2
     .balign 8
-ftCo_804D8DC0:
-    .4byte NULL
-ftCo_804D8DC4:
-    .float 1
 ftCo_804D8DC8:
     .4byte NULL
 ftCo_804D8DCC:
