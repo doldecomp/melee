@@ -98,3 +98,18 @@ modules:
   # (optional) Custom template for `ldscript.lcf`, if needed.
   # See https://github.com/encounter/decomp-toolkit/blob/main/assets/ldscript_partial.lcf
   ldscript_template: config/GAMEID/module/ldscript.tpl
+
+# (optional) Configuration for asset extraction.
+extract:
+
+- # The symbol name to extract.
+  symbol: SomeSymbol
+
+  # (optional) The path to extract raw binary data to.
+  # Path is relative to `build/GAMEID/bin`.
+  binary: Lib/SomeSymbol.bin
+
+  # (optional) The path to extract a C array representation to.
+  # In a C/C++ file, the symbol can be included with `#include "Lib/SomeSymbol.inc"`.
+  # Path is relative to `build/GAMEID/include`.
+  header: Lib/SomeSymbol.inc

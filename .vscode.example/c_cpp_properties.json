@@ -3,7 +3,8 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/include/**"
+                "${workspaceFolder}/include/**",
+                "${workspaceFolder}/build/*/include"
             ],
             "cStandard": "c99",
             "cppStandard": "c++98",
