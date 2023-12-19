@@ -30,8 +30,8 @@ void GObj_GXReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
 #pragma pop
 #endif
 
-void GObj_SetupGXLink(HSD_GObj* gobj, void (*render_cb)(HSD_GObj*, s32),
-                      u8 gx_link, u32 priority)
+void GObj_SetupGXLink(HSD_GObj* gobj, GObj_RenderFunc render_cb, u8 gx_link,
+                      u32 priority)
 {
     HSD_GObj* i;
     HSD_GObj* prev;
@@ -49,7 +49,7 @@ void GObj_SetupGXLink(HSD_GObj* gobj, void (*render_cb)(HSD_GObj*, s32),
     GObj_GXReorder(gobj, i);
 }
 
-void GObj_SetupGXLinkMax(HSD_GObj* gobj, void (*render_cb)(HSD_GObj*, s32),
+void GObj_SetupGXLinkMax(HSD_GObj* gobj, GObj_RenderFunc render_cb,
                          u32 priority)
 {
     HSD_GObj* i;
@@ -78,8 +78,8 @@ inline HSD_GObj* GObj_GXFindPrioPosition(HSD_GObj* gobj)
     return i;
 }
 
-void GObj_SetupGXLinkMaxSorted(HSD_GObj* gobj,
-                               void (*render_cb)(HSD_GObj*, s32), u32 priority)
+void GObj_SetupGXLinkMaxSorted(HSD_GObj* gobj, GObj_RenderFunc render_cb,
+                               u32 priority)
 {
     HSD_GObj* i;
     u8 max_link = HSD_GObjLibInitData.gx_link_max;

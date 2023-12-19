@@ -3,12 +3,14 @@
 #include "ftCa_SpecialN.h"
 
 #include "ftCa_Init.h"
+#include "math.h"
 #include "types.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
@@ -77,10 +79,10 @@ void ftCa_SpecialN_Enter(HSD_GObj* gobj)
 #endif
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialN, 0, NULL, 0, 1, 0);
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->throw_flags = 0;
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialN, 0, 0, 1, 0, NULL);
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
     ftAnim_8006EBA4(gobj);
 }
 
@@ -93,10 +95,10 @@ void ftCa_SpecialAirN_Enter(HSD_GObj* gobj)
 #endif
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirN, 0, NULL, 0, 1, 0);
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->throw_flags = 0;
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirN, 0, 0, 1, 0, NULL);
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
     ftAnim_8006EBA4(gobj);
 }
 
@@ -112,7 +114,7 @@ void ftCa_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     ftCaptain_SpecialN_CreateWindEffect(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -137,8 +139,8 @@ static inline void doPhys(HSD_GObj* gobj)
 {
     bool throw_b1;
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->throw_flags.b1) {
-        fp->throw_flags.b1 = false;
+    if (fp->throw_flags_b1) {
+        fp->throw_flags_b1 = false;
         throw_b1 = true;
     } else {
         throw_b1 = false;
@@ -148,12 +150,12 @@ static inline void doPhys(HSD_GObj* gobj)
             FighterKind kind = ftLib_800872A4(gobj);
             switch (kind) {
             case FTKIND_CAPTAIN:
-                efSync_Spawn(1167, gobj, fp->parts[FtPart_TopN].x0_jobj,
-                             fp->parts[57].x0_jobj);
+                efSync_Spawn(1167, gobj, fp->parts[FtPart_TopN].joint,
+                             fp->parts[57].joint);
                 break;
             case FTKIND_GANON:
-                efSync_Spawn(1291, gobj, fp->parts[FtPart_TopN].x0_jobj,
-                             fp->parts[78].x0_jobj);
+                efSync_Spawn(1291, gobj, fp->parts[FtPart_TopN].joint,
+                             fp->parts[78].joint);
                 break;
             }
             fp->x2219_b0 = true;
@@ -210,9 +212,9 @@ void ftCa_SpecialN_Coll(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirN, transition_flags,
-                                  NULL, fp->cur_anim_frame, 1, 0);
-        fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-        fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+                                  fp->cur_anim_frame, 1, 0, NULL);
+        fp->pre_hitlag_cb = efLib_PauseAll;
+        fp->post_hitlag_cb = efLib_ResumeAll;
         ftCommon_8007D468(fp);
     }
 }
@@ -223,8 +225,8 @@ void ftCa_SpecialAirN_Coll(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialN, transition_flags,
-                                  NULL, fp->cur_anim_frame, 1, 0);
-        fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-        fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+                                  fp->cur_anim_frame, 1, 0, NULL);
+        fp->pre_hitlag_cb = efLib_PauseAll;
+        fp->post_hitlag_cb = efLib_ResumeAll;
     }
 }

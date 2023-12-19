@@ -2,8 +2,10 @@
 #define MELEE_GR_GRTLUIGI_H
 
 #include <platform.h>
+#include "lb/forward.h"
 #include <baselib/forward.h>
 
+#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
 void grTLuigi_80221D9C(HSD_GObj*);
@@ -25,7 +27,7 @@ void grTLuigi_80221C10(int);
 void grTLuigi_80221C84(void);
 void grTLuigi_80221C88(void);
 bool grTLuigi_80221CAC(void);
-bool grTLuigi_80221EE4(int);
+lb_UnkAnimStruct* grTLuigi_80221EE4(enum_t);
 bool grTLuigi_80221EEC(Vec3*, int, HSD_JObj*);
 
 HSD_GObj* grTLuigi_80221CB4(int);

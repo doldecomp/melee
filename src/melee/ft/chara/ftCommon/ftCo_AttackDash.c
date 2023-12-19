@@ -5,11 +5,15 @@
 #include "ftCo_AttackDash.h"
 
 #include "ftCo_08A6.h"
+#include "ftCo_ItemThrow.h"
+#include "ftCo_Shouldered.h"
+#include "ftCo_Wait.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0D14.h"
+#include "ft/ftswing.h"
 #include "ftKirby/ftKb_Init.h"
 
 #include <placeholder.h>
@@ -20,12 +24,12 @@
 bool ftCo_AttackDash_CheckInput(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_Pad_A) {
+    if (fp->input.x668 & HSD_PAD_A) {
         if (fp->item_gobj != NULL) {
-            if (fp->input.held_inputs & HSD_Pad_LR ||
+            if (fp->input.held_inputs & HSD_PAD_LR ||
                 it_8026B30C(fp->item_gobj) == 0)
             {
-                ft_800957F4(gobj, ftCo_MS_LightThrowDash);
+                ftCo_800957F4(gobj, ftCo_MS_LightThrowDash);
                 return true;
             }
             switch (it_8026B30C(fp->item_gobj)) {
@@ -56,8 +60,8 @@ static void doEnter(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     fp->allow_interrupt = false;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_AttackDash, Ft_MF_None, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_AttackDash, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     fp->mv.co.attackdash.x0 = 0;
 }
@@ -81,7 +85,7 @@ void ftCo_AttackDash_SetMv0(HSD_GObj* gobj)
 void ftCo_AttackDash_IASA(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (!lbl_800D8AE0() && fp->allow_interrupt) {
+    if (!ftCo_800D8AE0(gobj) && fp->allow_interrupt) {
         ftCo_Wait_IASA(gobj);
     }
 }
@@ -89,8 +93,7 @@ void ftCo_AttackDash_IASA(ftCo_GObj* gobj)
 void ftCo_AttackDash_Phys(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    ft_80085030(gobj, p_ftCommonData,
-                p_ftCommonData->x50 * fp->co_attrs.gr_friction,
+    ft_80085030(gobj, p_ftCommonData->x50 * fp->co_attrs.gr_friction,
                 fp->facing_dir);
 }
 

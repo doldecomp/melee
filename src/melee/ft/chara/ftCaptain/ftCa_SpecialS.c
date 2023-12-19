@@ -7,10 +7,13 @@
 #include "ef/efsync.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_FallSpecial.h"
 
 #include <dolphin/mtx/types.h>
 
@@ -25,8 +28,8 @@ void ftCa_SpecialS_RemoveGFX(HSD_GObj* gobj)
 static void setCallbacks(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = ftCa_Init_800E28C8;
-    fp->cb.x21E4_callback_OnDeath2 = ftCa_Init_800E28C8;
+    fp->take_dmg_cb = ftCa_Init_800E28C8;
+    fp->death2_cb = ftCa_Init_800E28C8;
 }
 
 static void resetCmdVarsGround(HSD_GObj* gobj)
@@ -47,24 +50,24 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     resetCmdVarsGround(gobj);
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialSStart, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialSStart, 0, 0, 1, 0, NULL);
     setCallbacks(gobj);
     ftAnim_8006EBA4(gobj);
     switch (ftLib_800872A4(gobj)) {
     case FTKIND_CAPTAIN: {
-        efSync_Spawn(1169, gobj, fp->parts[FtPart_HeadN].x0_jobj);
+        efSync_Spawn(1169, gobj, fp->parts[FtPart_HeadN].joint);
         fp->fv.ca.during_specials_start = true;
         break;
     }
     case FTKIND_GANON:
-        efSync_Spawn(1293, gobj, fp->parts[FtPart_L2ndNb].x0_jobj);
+        efSync_Spawn(1293, gobj, fp->parts[FtPart_L2ndNb].joint);
         fp->fv.ca.during_specials_start = true;
         break;
     }
     fp->fv.ca.during_specials = false;
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21F4_callback = ftCa_SpecialS_OnDetect;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->x21F4 = ftCa_SpecialS_OnDetect;
 
     resetVel(fp);
 
@@ -78,26 +81,26 @@ static inline void setupAirStart(HSD_GObj* gobj)
         u32* vars = &fp->cmd_vars[0];
         vars[0] = vars[1] = vars[2] = vars[3] = 0;
     }
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirSStart, 0, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirSStart, 0, 0, 1, 0,
+                              NULL);
     setCallbacks(gobj);
     ftAnim_8006EBA4(gobj);
     switch (ftLib_800872A4(gobj)) {
     case FTKIND_CAPTAIN: {
-        efSync_Spawn(1169, gobj, fp->parts[FtPart_HeadN].x0_jobj);
+        efSync_Spawn(1169, gobj, fp->parts[FtPart_HeadN].joint);
         fp->fv.ca.during_specials_start = true;
         break;
     }
     case FTKIND_GANON: {
-        efSync_Spawn(1293, gobj, fp->parts[FtPart_L2ndNb].x0_jobj);
+        efSync_Spawn(1293, gobj, fp->parts[FtPart_L2ndNb].joint);
         fp->fv.ca.during_specials_start = true;
         break;
     }
     }
     fp->fv.ca.during_specials = false;
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21F4_callback = ftCa_SpecialS_OnDetect;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->x21F4 = ftCa_SpecialS_OnDetect;
     {
         /// @todo Too much stack for #resetVel.
         Vec3* vel = &fp->self_vel;
@@ -123,8 +126,8 @@ static void onDetectGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* sa = getFtSpecialAttrsD(fp);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialS, transition_flags, NULL,
-                              0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialS, transition_flags, 0, 1,
+                              0, NULL);
     setCallbacks(gobj);
     {
         Vec3* vel = &fp->self_vel;
@@ -136,8 +139,8 @@ static void onDetectGround(HSD_GObj* gobj)
 static void onDetectAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirS, transition_flags,
-                              NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirS, transition_flags, 0,
+                              1, 0, NULL);
     setCallbacks(gobj);
     fp->self_vel.z = 0;
 }
@@ -205,19 +208,19 @@ void ftCa_SpecialS_Anim(HSD_GObj* gobj)
     if (!fp->fv.ca.during_specials) {
         switch (ftLib_800872A4(gobj)) {
         case FTKIND_CAPTAIN: {
-            efSync_Spawn(1170, gobj, fp->parts[FtPart_TransN].x0_jobj,
+            efSync_Spawn(1170, gobj, fp->parts[FtPart_TransN].joint,
                          &fp->facing_dir);
             fp->fv.ca.during_specials = true;
             break;
         }
         case FTKIND_GANON:
-            efSync_Spawn(1294, gobj, fp->parts[FtPart_TransN].x0_jobj,
+            efSync_Spawn(1294, gobj, fp->parts[FtPart_TransN].joint,
                          &fp->facing_dir);
             fp->fv.ca.during_specials = true;
             break;
         }
-        fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-        fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+        fp->pre_hitlag_cb = efLib_PauseAll;
+        fp->post_hitlag_cb = efLib_ResumeAll;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -235,9 +238,9 @@ void ftCa_SpecialAirSStart_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007D60C(fp);
         if (da->specials_miss_landing_lag == 0) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         } else {
-            ft_80096900(gobj, 1, 1, 0, 1, da->specials_miss_landing_lag);
+            ftCo_80096900(gobj, 1, 1, 0, 1, da->specials_miss_landing_lag);
         }
     }
 }
@@ -253,28 +256,28 @@ void ftCa_SpecialAirS_Anim(HSD_GObj* gobj)
     if (!fp->fv.ca.during_specials) {
         switch (ftLib_800872A4(gobj)) {
         case FTKIND_CAPTAIN: {
-            efSync_Spawn(1171, gobj, fp->parts[FtPart_TransN].x0_jobj,
+            efSync_Spawn(1171, gobj, fp->parts[FtPart_TransN].joint,
                          &fp->facing_dir);
             fp->fv.ca.during_specials = true;
             break;
         }
         case FTKIND_GANON: {
-            efSync_Spawn(1295, gobj, fp->parts[FtPart_TransN].x0_jobj,
+            efSync_Spawn(1295, gobj, fp->parts[FtPart_TransN].joint,
                          &fp->facing_dir);
             fp->fv.ca.during_specials = true;
             break;
         }
         }
-        fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-        fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+        fp->pre_hitlag_cb = efLib_PauseAll;
+        fp->post_hitlag_cb = efLib_ResumeAll;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007D60C(fp);
         if (captainAttrs->specials_hit_landing_lag == 0) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         } else {
-            ft_80096900(gobj, 1, 1, 0, 1,
-                        captainAttrs->specials_hit_landing_lag);
+            ftCo_80096900(gobj, 1, 1, 0, 1,
+                          captainAttrs->specials_hit_landing_lag);
         }
     }
 }
@@ -349,11 +352,11 @@ void ftCa_SpecialSStart_Coll(HSD_GObj* gobj)
         efLib_DestroyAll(gobj);
         ftCommon_8007D60C(fp);
         if (da->specials_miss_landing_lag == 0) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
             return;
         }
         ftCommon_8007D468(fp);
-        ft_80096900(gobj, 1, 1, 0, 1, da->specials_miss_landing_lag);
+        ftCo_80096900(gobj, 1, 1, 0, 1, da->specials_miss_landing_lag);
         return;
     }
     if (fp->cmd_vars[0] == 1) {
@@ -388,11 +391,11 @@ void ftCa_SpecialS_Coll(HSD_GObj* gobj)
             efLib_DestroyAll(gobj);
             ftCommon_8007D60C(fp1);
             if (da->specials_hit_landing_lag == 0) {
-                ft_800CC730(gobj);
+                ftCo_800CC730(gobj);
                 return;
             } else {
                 ftCommon_8007D468(fp1);
-                ft_80096900(gobj, 1, 1, 0, 1, da->specials_hit_landing_lag);
+                ftCo_80096900(gobj, 1, 1, 0, 1, da->specials_hit_landing_lag);
             }
         }
     }
@@ -404,7 +407,7 @@ void ftCa_SpecialAirSStart_Coll(HSD_GObj* gobj)
     ftCaptain_DatAttrs* da = fp->dat_attrs;
     if (ft_80081D0C(gobj) == true) {
         efLib_DestroyAll(gobj);
-        ft_800D5CB0(gobj, 0, da->specials_miss_landing_lag);
+        ftCo_800D5CB0(gobj, 0, da->specials_miss_landing_lag);
     }
 }
 
@@ -421,6 +424,6 @@ void ftCa_SpecialAirS_Coll(HSD_GObj* gobj)
     if (ft_80081D0C(gobj) == true) {
         fp->gr_vel = fp->self_vel.x;
         efLib_DestroyAll(gobj);
-        ft_800D5CB0(gobj, 0, da->specials_hit_landing_lag);
+        ftCo_800D5CB0(gobj, 0, da->specials_hit_landing_lag);
     }
 }

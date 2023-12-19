@@ -7,6 +7,7 @@
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 #include "gr/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -235,9 +236,9 @@ void grTIceClimber_80221288(HSD_GObj* ground_gobj)
     }
 }
 
-bool grTIceClimber_80221354(int arg0)
+lb_UnkAnimStruct* grTIceClimber_80221354(enum_t arg0)
 {
-    return false;
+    return NULL;
 }
 
 bool grTIceClimber_8022135C(Vec3* arg0, int arg1, HSD_JObj* arg2)

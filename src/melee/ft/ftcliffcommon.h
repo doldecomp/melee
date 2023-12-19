@@ -1,19 +1,16 @@
-#ifndef _ftcliffcommon_h_
-#define _ftcliffcommon_h_
+#ifndef GALE01_081298
+#define GALE01_081298
 
-#include <platform.h>
+#include "ftCommon/forward.h"
 
-#include "ft/fighter.h"
+#include <placeholder.h>
 
-#include <baselib/gobj.h>
-
-bool ftCliffCommon_80081298(HSD_GObj* gobj);
-void ftCliffCommon_80081370(HSD_GObj* gobj);
-void ftCo_CliffCatch_Anim(HSD_GObj* gobj);
-void ftCo_CliffCatch_IASA(HSD_GObj*);
-void ftCo_CliffCatch_Phys(HSD_GObj* gobj);
-void ftCo_Cliff_Cam(HSD_GObj* gobj);
-
-void ftCo_CliffCatch_Coll(HSD_GObj* gobj);
+/* 081298 */ bool ftCliffCommon_80081298(ftCo_GObj* gobj);
+/* 081370 */ void ftCliffCommon_80081370(ftCo_GObj* gobj);
+/* 081504 */ void ftCo_CliffCatch_Anim(ftCo_GObj* gobj);
+/* 081540 */ void ftCo_CliffCatch_IASA(ftCo_GObj* gobj);
+/* 081544 */ void ftCo_CliffCatch_Phys(ftCo_GObj* gobj);
+/* 0815E4 */ void ftCo_CliffCatch_Coll(ftCo_GObj* gobj);
+/* 081644 */ void ftCo_Cliff_Cam(ftCo_GObj* gobj);
 
 #endif

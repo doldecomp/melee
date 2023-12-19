@@ -9,15 +9,26 @@
 #include "ftCo_AttackHi3.h"
 #include "ftCo_AttackHi4.h"
 #include "ftCo_AttackLw3.h"
+#include "ftCo_AttackLw4.h"
 #include "ftCo_AttackS3.h"
+#include "ftCo_FallSpecial.h"
+#include "ftCo_Guard.h"
+#include "ftCo_ItemThrow.h"
+#include "ftCo_Shouldered.h"
+#include "ftCo_SpecialS.h"
+#include "math.h"
 
 #include "ef/eflib.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0C88.h"
+#include "ft/ft_0CDD.h"
+#include "ft/ft_0D14.h"
+#include "ft/ftattacks4combo.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
+#include "ft/ftswing.h"
 #include "ftGameWatch/ftGw_AttackS4.h"
 #include "ftNess/ftNs_AttackS4.h"
 #include "ftPeach/ftPe_AttackS4.h"
@@ -36,7 +47,7 @@ typedef enum cmd_var_idx {
 
 static bool checkLStick(Fighter* fp)
 {
-    if (fp->input.x668 & HSD_Pad_A &&
+    if (fp->input.x668 & HSD_PAD_A &&
         ABS(fp->input.lstick.x) >= p_ftCommonData->x3C &&
         fp->x670_timer_lstick_tilt_x < p_ftCommonData->x40)
     {
@@ -52,7 +63,7 @@ bool ftCo_AttackS4_CheckInput(ftCo_GObj* gobj)
     if (checkLStick(fp)) {
         stick_x_sign = fp->input.lstick.x >= 0 ? (float) +1 : -1;
         stick_angle = ftCo_GetLStickAngle(fp);
-    } else if (ft_800DF1C8(fp)) {
+    } else if (ftCo_800DF1C8(fp)) {
         stick_x_sign = fp->input.cstick.x >= 0 ? (float) +1 : -1;
         stick_angle = ftCo_GetCStickAngle(fp);
     } else {
@@ -67,7 +78,7 @@ bool ftCo_AttackS4_CheckInput(ftCo_GObj* gobj)
 
 static bool checkFacingDir(Fighter* fp)
 {
-    if (fp->input.x668 & HSD_Pad_A &&
+    if (fp->input.x668 & HSD_PAD_A &&
         fp->input.lstick.x * fp->facing_dir >= p_ftCommonData->x3C)
     {
         return true;
@@ -84,7 +95,7 @@ bool ftCo_AttackS4_8008C114(ftCo_GObj* gobj)
     if (checkFacingDir(fp)) {
         stick_x_sign = fp->facing_dir;
         stick_angle = ftCo_GetLStickAngle(fp);
-    } else if (ft_800DF1C8(fp)) {
+    } else if (ftCo_800DF1C8(fp)) {
         stick_x_sign = fp->input.cstick.x >= 0 ? (float) +1 : -1;
         stick_angle = ftCo_GetCStickAngle(fp);
     } else {
@@ -101,14 +112,14 @@ static bool checkItemThrow(ftCo_GObj* gobj, float stick_x_sign)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->item_gobj != NULL) {
-        if (fp->input.held_inputs & HSD_Pad_LR ||
+        if (fp->input.held_inputs & HSD_PAD_LR ||
             it_8026B30C(fp->item_gobj) == 0 ||
             (it_8026B30C(fp->item_gobj) == 3 && it_8026B594(fp->item_gobj)) ||
-            ft_800DF21C(fp))
+            ftCo_800DF21C(fp))
         {
-            ft_800957F4(gobj, stick_x_sign * fp->facing_dir >= 0
-                                  ? ftCo_MS_LightThrowF4
-                                  : ftCo_MS_LightThrowB4);
+            ftCo_800957F4(gobj, stick_x_sign * fp->facing_dir >= 0
+                                    ? ftCo_MS_LightThrowF4
+                                    : ftCo_MS_LightThrowB4);
             return true;
         }
         switch (it_8026B30C(fp->item_gobj)) {
@@ -142,8 +153,8 @@ void decideFighter(HSD_GObj* gobj, float stick_x_sign, float stick_angle)
     case FTKIND_PIKACHU:
     case FTKIND_PICHU:
         doEnter(gobj, stick_angle);
-        fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-        fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+        fp->pre_hitlag_cb = efLib_PauseAll;
+        fp->post_hitlag_cb = efLib_ResumeAll;
         return;
     default:
         doEnter(gobj, stick_angle);
@@ -176,8 +187,8 @@ static void doEnter(ftCo_GObj* gobj, float stick_angle)
     }
     fp->allow_interrupt = false;
     fp->cmd_vars[cmd_unk0_bool] = false;
-    fp->throw_flags.flags = 0;
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0, 1, 0);
+    fp->throw_flags = 0;
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -192,28 +203,28 @@ void ftCo_AttackS4_IASA(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->allow_interrupt) {
-        RETURN_IF(ft_80096540(gobj))
-        RETURN_IF(ftCo_Attack100_CheckInput(gobj))
-        RETURN_IF(ft_800D6824(gobj))
-        RETURN_IF(ft_800D68C0(gobj))
-        RETURN_IF(ftCo_Catch_CheckInput(gobj))
+        RETURN_IF(ftCo_SpecialS_CheckInput(gobj));
+        RETURN_IF(ftCo_Attack100_CheckInput(gobj));
+        RETURN_IF(ftCo_800D6824(gobj));
+        RETURN_IF(ftCo_800D68C0(gobj));
+        RETURN_IF(ftCo_Catch_CheckInput(gobj));
     }
-    RETURN_IF(ftCo_800CECE8(gobj))
+    RETURN_IF(ftCo_800CECE8(gobj));
     if (fp->allow_interrupt) {
-        RETURN_IF(ftCo_AttackS4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackHi4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackLw4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackS3_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackHi3_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackLw3_CheckInput(gobj))
-        RETURN_IF(ftCo_Attack1_CheckInput(gobj))
-        RETURN_IF(ft_80091A4C(gobj))
-        RETURN_IF(ft_800DE9D8(gobj))
-        RETURN_IF(ftCo_Jump_CheckInput(gobj))
-        RETURN_IF(ftCo_Dash_CheckInput(gobj))
-        RETURN_IF(ft_800D5FB0(gobj))
-        RETURN_IF(ftCo_Turn_CheckInput(gobj))
-        RETURN_IF(ftCo_Walk_CheckInput(gobj))
+        RETURN_IF(ftCo_AttackS4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackHi4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackLw4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackS3_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackHi3_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackLw3_CheckInput(gobj));
+        RETURN_IF(ftCo_Attack1_CheckInput(gobj));
+        RETURN_IF(ftCo_80091A4C(gobj));
+        RETURN_IF(ftCo_800DE9D8(gobj));
+        RETURN_IF(ftCo_Jump_CheckInput(gobj));
+        RETURN_IF(ftCo_Dash_CheckInput(gobj));
+        RETURN_IF(ftCo_800D5FB0(gobj));
+        RETURN_IF(ftCo_Turn_CheckInput(gobj));
+        RETURN_IF(ftCo_Walk_CheckInput(gobj));
     }
 }
 

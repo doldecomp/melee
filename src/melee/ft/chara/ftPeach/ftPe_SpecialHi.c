@@ -10,10 +10,14 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0CEE.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/ftCo_ItemGet.h"
 #include "ftPeach/types.h"
 #include "it/it_26B1.h"
 #include "it/it_27CF.h"
@@ -22,6 +26,7 @@
 #include <math.h>
 #include <placeholder.h>
 #include <baselib/gobj.h>
+#include <melee/it/items/itpeachparasol.h>
 
 /* 11D424 */ static void ftPe_SpecialHi_8011D424(HSD_GObj* gobj);
 /* 11D598 */ static void ftPe_SpecialHi_8011DD8C(HSD_GObj* gobj);
@@ -36,7 +41,7 @@ void ftPe_SpecialHi_8011D424(HSD_GObj* gobj)
         fp->mv.pe.specialhi.kind = It_Kind_Peach_Parasol;
         if (fp->fv.pe.unk_item_gobj == NULL) {
             Vec3 pos;
-            lb_8000B1CC(fp->parts[FtPart_109].x0_jobj, NULL, &pos);
+            lb_8000B1CC(fp->parts[FtPart_109].joint, NULL, &pos);
             {
                 HSD_GObj* igobj = fp->item_gobj;
                 if (igobj != NULL) {
@@ -50,22 +55,22 @@ void ftPe_SpecialHi_8011D424(HSD_GObj* gobj)
                 it_802BDA64(gobj, &pos, FtPart_109, fp->facing_dir);
             fp->item_gobj = fp->fv.pe.unk_item_gobj;
             if (fp->fv.pe.unk_item_gobj != NULL) {
-                fp->cb.x21E8_callback_OnDeath3 = ftPe_Init_OnDeath2;
-                fp->cb.x21DC_callback_OnTakeDamage = ftPe_Init_OnDeath2;
+                fp->death3_cb = ftPe_Init_OnDeath2;
+                fp->take_dmg_cb = ftPe_Init_OnDeath2;
             }
         }
     }
-    fp->cb.x21BC_callback_Accessory4 = NULL;
-    fp->cb.x21D4_callback_EnterHitlag = ftPe_SpecialHi_8011D620;
-    fp->cb.x21D8_callback_ExitHitlag = ftPe_SpecialHi_8011D650;
+    fp->accessory4_cb = NULL;
+    fp->pre_hitlag_cb = ftPe_SpecialHi_8011D620;
+    fp->post_hitlag_cb = ftPe_SpecialHi_8011D650;
 }
 
 bool ftPe_8011D518(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->fv.pe.unk_item_gobj = NULL;
-    fp->cb.x21E8_callback_OnDeath3 = NULL;
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    fp->death3_cb = NULL;
+    fp->take_dmg_cb = NULL;
     {
         HSD_GObj* parasol_gobj = fp->fv.pe.parasol_gobj;
         if (parasol_gobj != NULL) {
@@ -73,7 +78,7 @@ bool ftPe_8011D518(HSD_GObj* gobj)
             fp->fv.pe.parasol_gobj = NULL;
             it_8026BB20(fp->item_gobj);
             it_8026B73C(fp->item_gobj);
-            ft_80094818(gobj, true);
+            ftCo_80094818(gobj, true);
             return true;
         }
     }
@@ -147,7 +152,7 @@ static void doEnter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = 0;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->mv.pe.specialhi.kind = It_Kind_Capsule;
     fp->x2222_b2 = true;
     {
@@ -163,7 +168,7 @@ static void doEnter(HSD_GObj* gobj)
             }
         }
     }
-    fp->cb.x21BC_callback_Accessory4 = ftPe_SpecialHi_8011D424;
+    fp->accessory4_cb = ftPe_SpecialHi_8011D424;
 }
 
 void ftPe_SpecialHi_Enter(HSD_GObj* gobj)
@@ -172,8 +177,8 @@ void ftPe_SpecialHi_Enter(HSD_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[16];
 #endif
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialHiStart, FtMoveId_None,
-                              NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialHiStart, FtMoveId_None, 0,
+                              1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     doEnter(gobj);
 }
@@ -189,7 +194,7 @@ void ftPe_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->self_vel.y = 0;
     fp->self_vel.x *= da->x84;
     Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirHiStart, FtMoveId_None,
-                              NULL, 0, 1, 0);
+                              0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     doEnter(gobj);
 }
@@ -215,10 +220,10 @@ void ftPe_SpecialHiStart_Anim(HSD_GObj* gobj)
         ftPe_DatAttrs* da = fp->dat_attrs;
         if (fp->mv.pe.specialhi.kind == It_Kind_Parasol) {
             fp->motion_id = ftCo_MS_FallSpecial;
-            ft_800CEFE0(gobj, p_ftCommonData->x59C);
+            ftCo_800CEFE0(gobj, p_ftCommonData->x59C);
         } else {
             fp->motion_id = ftCo_MS_FallSpecial;
-            ft_800CEFE0(gobj, da->x90);
+            ftCo_800CEFE0(gobj, da->x90);
         }
     }
 }
@@ -294,7 +299,7 @@ void ftPe_SpecialAirHiStart_Phys(HSD_GObj* gobj)
 static void ftPe_SpecialHi_8011DD8C(HSD_GObj* gobj)
 {
     ftPe_DatAttrs* da = GET_FIGHTER(gobj)->dat_attrs;
-    ft_800D5CB0(gobj, 0, da->x74);
+    ftCo_800D5CB0(gobj, 0, da->x74);
 }
 
 static void doColl(HSD_GObj* gobj, HSD_GObjEvent cb)
@@ -305,7 +310,7 @@ static void doColl(HSD_GObj* gobj, HSD_GObjEvent cb)
             ft_80083B68(gobj);
             return;
         }
-        ft_800831CC(gobj, ft_80096CC8, cb);
+        ft_800831CC(gobj, ftCo_80096CC8, cb);
         return;
     }
     ft_80084104(gobj);
@@ -326,7 +331,7 @@ void ftPe_SpecialHiEnd_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_80096900(gobj, 0, 1, 0, da->x70, da->x74);
+        ftCo_80096900(gobj, 0, 1, 0, da->x70, da->x74);
     }
 }
 

@@ -8,13 +8,17 @@
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackHi3.h"
 #include "ftCo_AttackHi4.h"
+#include "ftCo_AttackLw4.h"
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
+#include "ftCo_ItemGet.h"
+#include "ftCo_ItemThrow.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0C88.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ftGameWatch/ftGw_AttackLw3.h"
 
@@ -31,12 +35,12 @@ typedef enum cmd_var_idx {
 bool ftCo_AttackLw3_CheckInput(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_Pad_A) {
+    if (fp->input.x668 & HSD_PAD_A) {
         if (fp->input.lstick.y <= p_ftCommonData->xB0 &&
             ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20)
         {
-            if (fp->item_gobj != NULL && ft_80094E54(fp)) {
-                ft_800957F4(gobj, ftCo_MS_LightThrowLw);
+            if (fp->item_gobj != NULL && ftCo_80094E54(fp)) {
+                ftCo_800957F4(gobj, ftCo_MS_LightThrowLw);
                 return true;
             }
             decideFighter(gobj);
@@ -71,13 +75,13 @@ void decideFighter(HSD_GObj* gobj)
 static void doEnter(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (!ft_80094790(gobj)) {
+    if (!ftCo_80094790(gobj)) {
         fp->cmd_vars[cmd_unk0_bool] = false;
         fp->allow_interrupt = false;
         fp->mv.co.attacklw3.x0 = 0;
-        fp->cb.x21EC_callback = callUnk;
+        fp->x21EC = callUnk;
         Fighter_ChangeMotionState(gobj, ftCo_MS_AttackLw3,
-                                  Ft_MF_SkipAttackCount, NULL, 0, 1, 0);
+                                  Ft_MF_SkipAttackCount, 0, 1, 0, NULL);
         ftAnim_8006EBA4(gobj);
     }
 }
@@ -96,14 +100,14 @@ void ftCo_AttackLw3_Anim(HSD_GObj* gobj)
         return;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800D638C(gobj);
+        ftCo_800D638C(gobj);
     }
 }
 
 static bool checkPadA(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_Pad_A) {
+    if (fp->input.x668 & HSD_PAD_A) {
         if (fp->cmd_vars[cmd_unk0_bool]) {
             decideFighter(gobj);
             return true;
@@ -116,12 +120,12 @@ static bool checkPadA(ftCo_GObj* gobj)
 static bool checkItemThrowInput(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_Pad_A &&
+    if (fp->input.x668 & HSD_PAD_A &&
         fp->input.lstick.y <= p_ftCommonData->xB0 &&
         ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20)
     {
-        if (fp->item_gobj != NULL && ft_80094E54(fp)) {
-            ft_800957F4(gobj, ftCo_MS_LightThrowLw);
+        if (fp->item_gobj != NULL && ftCo_80094E54(fp)) {
+            ftCo_800957F4(gobj, ftCo_MS_LightThrowLw);
             return true;
         }
         decideFighter(gobj);
@@ -138,21 +142,21 @@ void ftCo_AttackLw3_IASA(HSD_GObj* gobj)
 #endif
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->allow_interrupt) {
-        RETURN_IF(ftCo_AttackS4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackHi4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackLw4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackS3_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackHi3_CheckInput(gobj))
+        RETURN_IF(ftCo_AttackS4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackHi4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackLw4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackS3_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackHi3_CheckInput(gobj));
     }
-    RETURN_IF(checkPadA(gobj))
+    RETURN_IF(checkPadA(gobj));
     if (fp->allow_interrupt) {
-        RETURN_IF(checkItemThrowInput(gobj))
-        RETURN_IF(ftCo_Attack1_CheckInput(gobj))
-        RETURN_IF(ftCo_Jump_CheckInput(gobj))
-        RETURN_IF(ftCo_Dash_CheckInput(gobj))
-        RETURN_IF(ftCo_Squat_CheckInput(gobj))
-        RETURN_IF(ftCo_Turn_CheckInput(gobj))
-        RETURN_IF(ftCo_Walk_CheckInput(gobj))
+        RETURN_IF(checkItemThrowInput(gobj));
+        RETURN_IF(ftCo_Attack1_CheckInput(gobj));
+        RETURN_IF(ftCo_Jump_CheckInput(gobj));
+        RETURN_IF(ftCo_Dash_CheckInput(gobj));
+        RETURN_IF(ftCo_Squat_CheckInput(gobj));
+        RETURN_IF(ftCo_Turn_CheckInput(gobj));
+        RETURN_IF(ftCo_Walk_CheckInput(gobj));
     }
 }
 

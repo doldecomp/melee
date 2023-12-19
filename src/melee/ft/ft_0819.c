@@ -1,6 +1,7 @@
 #include "ft/ft_0819.h"
 
 #include "ft/ft_0877.h"
+#include "ft/ft_0C31.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
 #include "lb/lb_00F9.h"
@@ -136,7 +137,7 @@ asm void ft_80081A00(void)
 /* 80081A78 0007E658  C0 1F 02 8C */	lfs f0, 0x28c(r31)
 /* 80081A7C 0007E65C  EC 01 00 2A */	fadds f0, f1, f0
 /* 80081A80 0007E660  D0 1F 19 44 */	stfs f0, 0x1944(r31)
-/* 80081A84 0007E664  80 6D C1 8C */	lwz r3, HSD_GObj_804D782C(r13)
+/* 80081A84 0007E664  80 6D C1 8C */	lwz r3, HSD_GObj_Entities(r13)
 /* 80081A88 0007E668  83 7E 00 2C */	lwz r27, 0x2c(r30)
 /* 80081A8C 0007E66C  83 83 00 24 */	lwz r28, 0x24(r3)
 /* 80081A90 0007E670  48 00 00 64 */	b lbl_80081AF4
@@ -175,7 +176,7 @@ lbl_80081AF4:
 /* 80081B00 0007E6E0  2C 00 00 00 */	cmpwi r0, 0
 /* 80081B04 0007E6E4  41 82 00 1C */	beq lbl_80081B20
 /* 80081B08 0007E6E8  7F C3 F3 78 */	mr r3, r30
-/* 80081B0C 0007E6EC  48 04 55 31 */	bl ft_800C703C
+/* 80081B0C 0007E6EC  48 04 55 31 */	bl ftCo_800C703C
 /* 80081B10 0007E6F0  38 00 00 00 */	li r0, 0
 /* 80081B14 0007E6F4  90 1F 19 50 */	stw r0, 0x1950(r31)
 /* 80081B18 0007E6F8  38 60 00 01 */	li r3, 1

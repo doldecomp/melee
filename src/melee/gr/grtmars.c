@@ -10,6 +10,27 @@
 #include <dolphin/os/os.h>
 #include <baselib/gobjgxlink.h>
 
+static void grTMars_80221EF4(int);
+static void grTMars_80221EF8(void);
+static void grTMars_80221F68(void);
+static void grTMars_80221F6C(void);
+static bool grTMars_80221F90(void);
+static HSD_GObj* grTMars_80221F98(int);
+static void grTMars_80222080(HSD_GObj*);
+static bool grTMars_802220AC(HSD_GObj*);
+static void grTMars_802220B4(HSD_GObj*);
+static void grTMars_802220B8(HSD_GObj*);
+static void grTMars_802220BC(HSD_GObj*);
+static bool grTMars_8022210C(HSD_GObj*);
+static void grTMars_80222114(HSD_GObj*);
+static void grTMars_80222148(HSD_GObj*);
+static void grTMars_8022214C(HSD_GObj*);
+static bool grTMars_8022219C(HSD_GObj*);
+static void grTMars_802221A4(HSD_GObj*);
+static void grTMars_802221C4(HSD_GObj*);
+static lb_UnkAnimStruct* grTMars_802221C8(enum_t);
+static bool grTMars_802221D0(Vec3*, int, HSD_JObj*);
+
 extern StageInfo stage_info;
 
 static StageCallbacks grTMs_803E8EB0[4] = {
@@ -172,9 +193,9 @@ static void grTMars_802221A4(HSD_GObj* gobj)
 
 static void grTMars_802221C4(HSD_GObj* arg0) {}
 
-static bool grTMars_802221C8(int arg0)
+static lb_UnkAnimStruct* grTMars_802221C8(enum_t arg0)
 {
-    return false;
+    return NULL;
 }
 
 static bool grTMars_802221D0(Vec3* arg0, int arg1, HSD_JObj* arg2)

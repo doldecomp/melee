@@ -10,7 +10,7 @@ BraceWrapping:
   AfterControlStatement: MultiLine
 InsertBraces: true
 AllowShortFunctionsOnASingleLine: Empty
-AllowShortIfStatementsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: Never
 AllowShortEnumsOnASingleLine: false
 IndentCaseLabels: false
 ColumnLimit: 79

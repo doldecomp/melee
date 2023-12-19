@@ -7,6 +7,7 @@
 #include "types.h"
 
 #include "ft/ft_0877.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
@@ -199,9 +200,9 @@ void ftDr_Init_80149540(HSD_GObj* gobj)
     ftDr_Init_801497CC(gobj);
 }
 
-void ftDr_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftDr_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
 void ftDr_Init_OnItemInvisible(HSD_GObj* gobj)
@@ -254,8 +255,8 @@ void ftDr_Init_801497CC(HSD_GObj* gobj)
     if (gobj != NULL) {
         fp = gobj->user_data;
         if (fp != NULL) {
-            fp->cb.x21DC_callback_OnTakeDamage = 0;
-            fp->cb.x21E4_callback_OnDeath2 = 0;
+            fp->take_dmg_cb = 0;
+            fp->death2_cb = 0;
         }
     }
 }
@@ -295,8 +296,8 @@ void ftDr_Init_801498A0(HSD_GObj* gobj)
     if (gobj != NULL) {
         fp = gobj->user_data;
         if (fp != NULL) {
-            fp->cb.x21DC_callback_OnTakeDamage = 0;
-            fp->cb.x21E4_callback_OnDeath2 = 0;
+            fp->take_dmg_cb = 0;
+            fp->death2_cb = 0;
         }
     }
 }
@@ -319,7 +320,7 @@ void ftDr_Init_80149910(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    ft_800DEAE8(gobj, 0x155, 0x156);
+    ftCo_800DEAE8(gobj, 0x155, 0x156);
     fp->cmd_vars[0] = 1;
     fp->cmd_vars[1] = 0;
 }

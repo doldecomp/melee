@@ -10,8 +10,11 @@
 #include "types.h"
 
 #include "ft/ft_0877.h"
+#include "ft/ft_0CD1.h"
 #include "ft/ftcamera.h"
+#include "ft/ftlipstickswing.h"
 #include "ft/ftparts.h"
+#include "ft/ftstarrodswing.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
@@ -349,7 +352,7 @@ void ftCa_Init_OnLoadForGanon(Fighter* fp)
 void ftCa_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2224_flag.bits.b7 = true;
+    fp->x2224_b7 = true;
     PUSH_ATTRS(fp, ftCaptain_DatAttrs);
 }
 

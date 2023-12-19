@@ -6,6 +6,7 @@
 
 #include "ft/types.h"
 #include "gr/stage.h"
+#include "it/itCharItems.h"
 #include "it/itCommonItems.h"
 #include "it/itPKFlash.h"
 #include "it/itPKThunder.h"
@@ -13,7 +14,6 @@
 #include "pl/player.h"
 
 #include <common_structs.h>
-#include <math.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/aobj.h>
 #include <baselib/controller.h>
@@ -28,7 +28,7 @@
 /// @todo Size unknown.
 struct ItemStateTable {
     /// @at{0} @sz{4}
-    enum_t msid;
+    enum_t anim_id;
 
     /// @at{4} @sz{4}
     HSD_GObjPredicate animated;
@@ -40,15 +40,9 @@ struct ItemStateTable {
     HSD_GObjPredicate collided;
 };
 
-/// @todo Size unknown.
-struct ItemStateContainer {
-    /// @at{0}
-    ItemStateTable stateTable UNK_SIZE_ARRAY;
-};
-
 struct ItemLogicTable {
     /// @at{0} @sz{4}
-    ItemStateContainer* states;
+    ItemStateTable* states;
 
     /// @at{4} @sz{4}
     HSD_GObjEvent spawned;
@@ -273,52 +267,11 @@ struct ItemModelDesc {
 
 struct Article {
     ItemAttr* x0_common_attr;
-    unk_t x4_specialAttributes;
-    unk_t x8_hurtbox;
+    void* x4_specialAttributes;
+    UNK_T x8_hurtbox;
     ItemStateArray* xC_itemStates;
     ItemModelDesc* x10_modelDesc;
     ItemDynamics* x14_dynamics;
-};
-
-struct itHit {
-    bool x0_toggle; // Toggles hitbox on/off.
-    s32 x4_unk;
-    s32 x8_damage;        // Projected damage
-    f32 xC_damage_staled; // Staled damage, actually applied
-    Vec3 x10_offset;
-    f32 x1C_hitbox_size;
-    s32 x20_angle;
-    s32 x24_knockback_growth;
-    s32 x28_wdsk; // Weight-Dependent Set Knockback
-    s32 x2C_base_knockback;
-    s32 x30_element;       // Normal, fire, electric, etc.
-    s32 x34_shield_damage; // If hitbox damage + shield damage is less than 0
-                           // (negative), this will effectively restore shield
-                           // health
-    s32 x38_SFX_severity; // 0x38. hurtbox interaction. 0 = none, 1 = grounded,
-                          // 2 = aerial, 3 = both // What
-    s32 x3C_SFX_kind;
-    UnkFlagStruct x40_flags; // 0x20 -> check against aerial fighters; 0x10 ->
-                             // check against grounded fighters
-    UnkFlagStruct x41_flags; // 0x8/0x4/0x2 = timed rehit on
-                             // item/fighter/shield; 0x1 = can reflect
-    UnkFlagStruct x42_flags; // 0x80 = can absorb; 0x20 = hit only fighters
-                             // facing the item; 0x10 = can shield; 0x8 =
-                             // ignore reflect/absorb bubbles(?); 0x4 = ignore
-                             // hurtboxes; 0x2 = ignore ungrabbable hurtboxes
-    UnkFlagStruct x43_flags; // 0x80 = interact with items only; 0x20 =
-                             // interact with all?
-    s32 x44;
-    HSD_JObj* x48_jobj;
-    Vec3 pos;
-    Vec3 x58_posPrev;
-    Vec3 x64_posColl;      // 0x64   position of hurt collision
-    f32 x70_coll_distance; // 0x70   Distance From Collding HurtCapsule (Used
-                           // for phantom hit collision calculation)
-    HitVictim x74_tipLog[12];
-    HitVictim xD4_damageLog[12];
-    s32 x134;
-    s32 x138;
 };
 
 struct Item {
@@ -388,7 +341,7 @@ struct Item {
 
     ItemLogicTable* xB8_itemLogicTable; // Global item callbacks
 
-    ItemStateContainer* xBC_itemStateContainer;
+    ItemStateTable* xBC_itemStateContainer;
     GroundOrAir ground_or_air;
     Article* xC4_article_data;
     HSD_Joint* xC8_joint;
@@ -420,7 +373,10 @@ struct Item {
     u8 x5CB;
     f32 x5CC_currentAnimFrame;
     f32 x5D0_animFrameSpeed;
-    itHit x5D4_hitboxes[4];
+    struct {
+        HitCapsule hit;
+        s32 x138;
+    } x5D4_hitboxes[4];
     s32 xAC4_ignoreItemID; // Cannot hit items with this index?
     s32 xAC8_hurtboxNum;   // Number of hurtboxes this item has
     HurtCapsule xACC_itemHurtbox[2];
@@ -472,13 +428,11 @@ struct Item {
     f32 xC40;             // 0xc40
     f32 xC44;             // 0xc44
     s32 xC48;             // 0xc48
-    s32 xC4C; // Something to do with damage. 0x80077464 checks this against
-              // reflectors' maximum damage threshold
-    s32 xC50; // 0xc50
-    f32 xC54; // 0xc54
-    f32 xC58; // 0xc58
-    s32 xC5C; // 0xc5c
-    s32 xC60; // 0xc60
+    s32 xC4C;  // Something to do with damage. 0x80077464 checks this against
+               // reflectors' maximum damage threshold
+    s32 xC50;  // 0xc50
+    f32 xC54;  // 0xc54
+    Vec3 xC58; // 0xc58
     HSD_GObj* xC64_reflectGObj; // GObj that reflected this item?
     f32 xC68;                   // 0xc68
     f32 xC6C;                   // 0xc6c
@@ -654,6 +608,9 @@ struct Item {
     UnkFlagStruct xDD2_flag;
     UnkFlagStruct xDD3_flag;
     union {
+        ItCapsuleAttrs capsule;
+        ItStarVars star;
+        itSword_ItemVars sword;
         BobOmbVars BobOmb;
         HeartContainerVars HeartContainer;
         MaximTomatoVars MaximTomato;
@@ -663,6 +620,8 @@ struct Item {
         PKFlashVars PKFlash;
         PKFlashExplVars PKFlashExpl;
         PKThunderVars PKThunderVars;
+        FoxLaserVars foxlaser;
+        FoxIllusionVars foxillusion;
         u8 padding[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
@@ -689,38 +648,12 @@ typedef struct ItemLink // user_data struct of GObj class 7
 } ItemLink;
 
 struct sdata_ItemGXLink {
-    void (*x0_renderFunc)(HSD_GObj*, s32);
+    GObj_RenderFunc x0_renderFunc;
 };
 
 struct r13_ItemTable {
     s32 filler;
     Article* x0_article[0x9F];
-};
-
-typedef struct UnkCommonArticlePtr {
-    u32 x0;
-} UnkCommonArticlePtr;
-
-typedef struct UnkCommonArticleStruct {
-    s32 x0;
-    UnkCommonArticlePtr* x4;
-} UnkCommonArticleStruct;
-
-typedef struct CommonItemArticles {
-    void* article_ptr[0x10];
-    UnkCommonArticleStruct* x40;
-} CommonItemArticles;
-
-typedef struct UnkItemArticles {
-    void* unkptr UNK_SIZE_ARRAY;
-} UnkItemArticles;
-
-typedef struct UnkItemArticles2 {
-    void* unkptr UNK_SIZE_ARRAY;
-} UnkItemArticles2;
-
-struct UnkItemArticles3 {
-    void* unkptr[1];
 };
 
 struct BobOmbRain {
@@ -733,43 +666,27 @@ struct BobOmbRain {
 };
 
 struct SpawnItem {
-    HSD_GObj* x0_parent_gobj;  // Primary owner of the item; usually a fp GObj
-    HSD_GObj* x4_parent_gobj2; // Secondary owner GObj of the item; e.g. Ness'
-                               // PK Fire Pillar has this set to PK Fire
-                               // Spark's item GObj
-    ItemKind kind;             // 0x8, ID of the item to spawn
-
-    /// @at{C} @sz{4}
-    /// @brief Defines the behavior of the item, such as thrown and pickup.
-    /// @todo 0 = capsule.
-    enum_t hold_kind;
-
-    s32 x10;
-
-    /// @at{14} @sz{C}
-    Vec3 pos;
-
-    /// @at{20} @sz{C}
-    Vec3 prev_pos;
-
-    /// @at{2C} @sz{C}
-    Vec3 vel;
-
-    /// @at{38} @sz{4}
-    f32 facing_dir;
-
-    s16 x3C_damage;
-    s16 x3E;
-    s32 x40;                // 0x1 = correct initial position
-    UnkFlagStruct x44_flag; // 0x80 = perform initial collision check
-    UnkFlagStruct x45_flag;
-    UnkFlagStruct x46_flag;
-    UnkFlagStruct x47_flag;
-    GroundOrAir x48_ground_or_air; // 0x0 = stationary, 0x1 = air (?)
+    /*  +0 */ HSD_GObj* x0_parent_gobj;
+    /*  +4 */ HSD_GObj* x4_parent_gobj2;
+    /*  +8 */ ItemKind kind;
+    /*  +C */ enum_t hold_kind;
+    /* +10 */ s32 x10;
+    /* +14 */ Vec3 pos;
+    /* +20 */ Vec3 prev_pos;
+    /* +2C */ Vec3 vel;
+    /* +38 */ f32 facing_dir;
+    /* +3C */ s16 x3C_damage;
+    /* +3E */ s16 x3E;
+    /* +40 */ s32 x40;
+    /* +44 */ UnkFlagStruct x44_flag;
+    /* +45 */ UnkFlagStruct x45_flag;
+    /* +46 */ UnkFlagStruct x46_flag;
+    /* +47 */ UnkFlagStruct x47_flag;
+    /* +48 */ GroundOrAir x48_ground_or_air;
 };
 
 struct ItemModStruct {
-    s32 x0_unk;
+    GXColor x0_unk;
 };
 
 struct ItemCommonData {
@@ -799,7 +716,7 @@ struct ItemCommonData {
     s32 x5C_float;
     s32 x60_float;
     s32 x64_float;
-    s32 x68_float;
+    f32 x68_float;
     f32 x6C_float;
     f32 x70_float;
     f32 x74_float;
@@ -837,7 +754,17 @@ struct Item_r13_Data {
 };
 
 struct HSD_ObjAllocUnk2 {
-    u8 x0_filler[0x148];
+    float x0;
+    float x4;
+    float x8;
+    float xC;
+    u8 pad_10[0xB0 - 0x10];
+    int xB0;
+    int xB4;
+    int xB8;
+    UNK_T xBC;
+    Vec3 xC0;
+    u8 pad_CC[0x148 - 0xCC];
     u32 x148;
     u32 x14C;
     u32 x150;

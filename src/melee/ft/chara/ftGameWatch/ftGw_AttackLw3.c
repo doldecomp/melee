@@ -7,14 +7,18 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_Attack1.h"
 #include "ftCommon/ftCo_AttackHi3.h"
 #include "ftCommon/ftCo_AttackHi4.h"
 #include "ftCommon/ftCo_AttackLw3.h"
+#include "ftCommon/ftCo_AttackLw4.h"
 #include "ftCommon/ftCo_AttackS3.h"
 #include "ftCommon/ftCo_AttackS4.h"
+#include "ftCommon/ftCo_ItemGet.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
@@ -38,7 +42,7 @@ void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
 
     if (fp->fv.gw.x2250_manholeGObj2 == NULL) {
-        lb_8000B1CC(fp->parts[FtPart_LHandNb].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->parts[FtPart_LHandNb].joint, NULL, &sp10);
         manholeGObj = fp->item_gobj;
         if (manholeGObj != NULL) {
             fp->fv.gw.x2248_manholeGObj = manholeGObj;
@@ -50,16 +54,16 @@ void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj)
             it_802C65E4(gobj, &sp10, FtPart_LHandNb, fp->facing_dir);
     }
     if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
-        if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
+        if (fp->death2_cb == NULL) {
+            fp->death2_cb = ftGw_Init_OnDamage;
         }
-        if (fp->cb.x21DC_callback_OnTakeDamage == NULL) {
-            fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
+        if (fp->take_dmg_cb == NULL) {
+            fp->take_dmg_cb = ftGw_Init_OnDamage;
         }
     }
-    fp->cb.x21D4_callback_EnterHitlag = ftGw_AttackLw3_ItemManholeEnterHitlag;
-    fp->cb.x21D8_callback_ExitHitlag = ftGw_AttackLw3_ItemManholeExitHitlag;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = ftGw_AttackLw3_ItemManholeEnterHitlag;
+    fp->post_hitlag_cb = ftGw_AttackLw3_ItemManholeExitHitlag;
+    fp->accessory4_cb = NULL;
 }
 
 // 0x8014AC40
@@ -77,7 +81,7 @@ void ftGw_AttackLw3_ItemManholeRemove(HSD_GObj* gobj)
         fp->fv.gw.x2248_manholeGObj = NULL;
         it_8026BB20(fp->item_gobj);
         it_8026B73C(fp->item_gobj);
-        ft_80094818(gobj, 1);
+        ftCo_80094818(gobj, 1);
     }
 }
 
@@ -136,12 +140,12 @@ void ftGw_AttackLw3_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (ft_80094790(gobj) == false) {
+    if (ftCo_80094790(gobj) == false) {
         fp->allow_interrupt = 0;
-        Fighter_ChangeMotionState(gobj, ftGw_MS_AttackLw3, 0, NULL, 0.0f, 1.0f,
-                                  0.0f);
+        Fighter_ChangeMotionState(gobj, ftGw_MS_AttackLw3, 0, 0.0f, 1.0f, 0.0f,
+                                  NULL);
         ftAnim_8006EBA4(gobj);
-        fp->cb.x21BC_callback_Accessory4 = ftGw_AttackLw3_ItemManholeSetup;
+        fp->accessory4_cb = ftGw_AttackLw3_ItemManholeSetup;
     }
 }
 
@@ -156,7 +160,7 @@ void ftGw_AttackLw3_Anim(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800D638C(gobj);
+        ftCo_800D638C(gobj);
     }
 }
 
@@ -165,18 +169,18 @@ void ftGw_AttackLw3_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->allow_interrupt) {
-        RETURN_IF(ftCo_AttackS4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackHi4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackLw4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackS3_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackHi3_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackLw3_CheckInput(gobj))
-        RETURN_IF(ftCo_Attack1_CheckInput(gobj))
-        RETURN_IF(ftCo_Jump_CheckInput(gobj))
-        RETURN_IF(ftCo_Dash_CheckInput(gobj))
-        RETURN_IF(ftCo_Squat_CheckInput(gobj))
-        RETURN_IF(ftCo_Turn_CheckInput(gobj))
-        RETURN_IF(ftCo_Walk_CheckInput(gobj))
+        RETURN_IF(ftCo_AttackS4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackHi4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackLw4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackS3_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackHi3_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackLw3_CheckInput(gobj));
+        RETURN_IF(ftCo_Attack1_CheckInput(gobj));
+        RETURN_IF(ftCo_Jump_CheckInput(gobj));
+        RETURN_IF(ftCo_Dash_CheckInput(gobj));
+        RETURN_IF(ftCo_Squat_CheckInput(gobj));
+        RETURN_IF(ftCo_Turn_CheckInput(gobj));
+        RETURN_IF(ftCo_Walk_CheckInput(gobj));
     }
 }
 

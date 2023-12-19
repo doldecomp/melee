@@ -15,6 +15,42 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
+static void grBattle_80219C98(int);
+static void grBattle_80219CA4(void);
+static void grBattle_80219D54(void);
+static void grBattle_80219D58(void);
+static bool grBattle_80219D7C(void);
+static HSD_GObj* grBattle_80219D84(int gobj_id);
+static void grBattle_80219E6C(HSD_GObj*);
+static void grBattle_8021A114(HSD_GObj*);
+static void grBattle_8021A118(HSD_GObj*);
+static void grBattle_8021A11C(HSD_GObj*);
+static bool grBattle_8021A16C(HSD_GObj*);
+static void grBattle_8021A174(HSD_GObj*);
+static void grBattle_8021A198(HSD_GObj*);
+static void grBattle_8021A19C(HSD_GObj*);
+static bool grBattle_8021A1FC(HSD_GObj*);
+static void grBattle_8021A204(HSD_GObj*);
+static void grBattle_8021A208(HSD_GObj*);
+static void grBattle_8021A20C(HSD_GObj*);
+static bool grBattle_8021A264(HSD_GObj*);
+static void grBattle_8021A26C(HSD_GObj*);
+static void grBattle_8021A270(HSD_GObj*);
+static void grBattle_8021A274(HSD_GObj*);
+static bool grBattle_8021A2CC(HSD_GObj*);
+static void grBattle_8021A2D4(HSD_GObj*);
+static void grBattle_8021A2D8(HSD_GObj*);
+static void grBattle_8021A2DC(HSD_GObj*);
+static bool grBattle_8021A334(HSD_GObj*);
+static void grBattle_8021A33C(HSD_GObj*);
+static void grBattle_8021A340(HSD_GObj*);
+static void grBattle_8021A344(HSD_GObj*);
+static bool grBattle_8021A3B4(HSD_GObj*);
+static void grBattle_8021A3BC(HSD_GObj*);
+static void grBattle_8021A60C(HSD_GObj*);
+static lb_UnkAnimStruct* grBattle_8021A610(enum_t);
+static bool grBattle_8021A618(Vec3*, int, HSD_JObj*);
+
 extern StageInfo stage_info;
 
 struct {
@@ -330,9 +366,9 @@ static void grBattle_8021A344(HSD_GObj* gobj)
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj = gobj->hsd_obj;
     gp->x11_flags.b012 = 2;
-    gp->xC4 = 0;
-    gp->xD0 = HSD_Randi(1200) + 2400;
-    gp->xC8 = -1;
+    gp->gv.unk.xC4 = 0;
+    gp->gv.unk.xD0 = HSD_Randi(1200) + 2400;
+    gp->gv.unk.xC8 = -1;
     HSD_JObjSetFlagsAll(jobj, 0x10);
 }
 
@@ -355,10 +391,10 @@ static void grBattle_8021A3BC(HSD_GObj* gobj)
     u8 _[28];
 #endif
 
-    switch (gp->xC4) {
+    switch (gp->gv.unk.xC4) {
     case 0:
-        if (gp->xD0-- < 0) {
-            gp->xC4 = 1;
+        if (gp->gv.unk.xD0-- < 0) {
+            gp->gv.unk.xC4 = 1;
             grAnime_801C8138(gobj, gp->map_id, 0);
         }
         break;
@@ -367,40 +403,40 @@ static void grBattle_8021A3BC(HSD_GObj* gobj)
             HSD_JObjClearFlagsAll(jobj, 0x10);
         }
         if (grAnime_801C83D0(gobj, 0, 7)) {
-            if (gp->xC8 == -1) {
+            if (gp->gv.unk.xC8 == -1) {
                 u32 i;
                 for (i = 0; i < BATTLE_BG_MAX; i++) {
                     if (Ground_801C2BA4(sp28[i])) {
-                        gp->xC8 = sp28[i];
+                        gp->gv.unk.xC8 = sp28[i];
                         break;
                     }
                 }
                 HSD_ASSERT(527, i<BATTLE_BG_MAX);
             }
-            gp->xCC = gp->xC8;
+            gp->gv.unk.xCC = gp->gv.unk.xC8;
             do {
                 temp_r0_2 = sp28[HSD_Randi(BATTLE_BG_MAX)];
-            } while ((tmp = gp->xCC) == (gp->xC8 = temp_r0_2));
+            } while ((tmp = gp->gv.unk.xCC) == (gp->gv.unk.xC8 = temp_r0_2));
 
             bg_gobj = Ground_801C2BA4(tmp);
             HSD_ASSERT(535, bg_gobj);
             grMaterial_801C9604(bg_gobj, grNBa_804D6ACC->unk4, 0);
 
-            bg_gobj = grBattle_80219D84(gp->xC8);
+            bg_gobj = grBattle_80219D84(gp->gv.unk.xC8);
             HSD_ASSERT(539, bg_gobj);
             grMaterial_801C9604(bg_gobj, grNBa_804D6ACC->unk0, 0);
 
-            gp->xC4 = 2;
+            gp->gv.unk.xC4 = 2;
         }
         break;
     case 2:
-        bg_gobj = Ground_801C2BA4(gp->xCC);
+        bg_gobj = Ground_801C2BA4(gp->gv.unk.xCC);
         HSD_ASSERT(546, bg_gobj);
         if (grLib_801C96E8(bg_gobj)) {
             Ground_801C4A08(bg_gobj);
             HSD_JObjSetFlagsAll(jobj, 0x10);
-            gp->xC4 = 0;
-            gp->xD0 = HSD_Randi(1200) + 2400;
+            gp->gv.unk.xC4 = 0;
+            gp->gv.unk.xD0 = HSD_Randi(1200) + 2400;
         }
         break;
     }
@@ -408,9 +444,9 @@ static void grBattle_8021A3BC(HSD_GObj* gobj)
 
 static void grBattle_8021A60C(HSD_GObj* arg0) {}
 
-static bool grBattle_8021A610(int arg0)
+static lb_UnkAnimStruct* grBattle_8021A610(enum_t arg0)
 {
-    return false;
+    return NULL;
 }
 
 static bool grBattle_8021A618(Vec3* arg0, int arg1, HSD_JObj* arg2)

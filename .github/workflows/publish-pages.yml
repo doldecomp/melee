@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REGISTRY: ghcr.io
+      OUTPUT: ${{ github.workspace }}/output
     steps:
       - name: Get image name
         env:
@@ -50,16 +51,19 @@ jobs:
 
       - name: Generate pages
         run: |
+          mkdir -p "${{ env.OUTPUT }}"
           docker run --rm \
+            --user "$(id -u):$(id -g)" \
             --volume "$PWD:/input:ro" \
-            --volume /tmp/output:/output \
+            --volume "${{ env.OUTPUT }}:/output" \
             ${{ env.REGISTRY }}/${{ env.IMAGE }}
 
       - name: Upload generated pages
         uses: actions/upload-artifact@v3
         with:
           name: pages
-          path: /tmp/output
+          path: ${{ env.OUTPUT }}
+          if-no-files-found: error
 
   deploy-pages:
     name: Deploy to GitHub Pages

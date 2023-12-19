@@ -18,16 +18,16 @@
 /* 12B99C */ void ftYs_Init_OnLoad(HSD_GObj* gobj);
 /* 12BA8C */ void ftYs_Init_8012BA8C(HSD_GObj* gobj);
 /* 12BAC0 */ f32 ftYs_Init_8012BAC0(Fighter* fp);
-/* 12BACC */ void ftYs_Init_OnItemPickup(HSD_GObj* gobj, bool bool);
+/* 12BACC */ void ftYs_Init_OnItemPickup(HSD_GObj* gobj, bool flag);
 /* 12BBAC */ void ftYs_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 12BBF4 */ void ftYs_Init_OnItemVisible(HSD_GObj* gobj);
 /* 12BC3C */ void ftYs_Init_OnItemDrop(HSD_GObj* gobj, bool bool1);
 /* 12BC90 */ void ftYs_Init_LoadSpecialAttrs(HSD_GObj* gobj);
 /* 12BCC8 */ void ftYs_Init_OnKnockbackEnter(HSD_GObj* gobj);
 /* 12BD34 */ void ftYs_Init_OnKnockbackExit(HSD_GObj* gobj);
-/* 12BDA0 */ unk_t ftYs_Init_8012BDA0(void);
+/* 12BDA0 */ void ftYs_Init_8012BDA0(ftCo_GObj* gobj);
 /* 12BE3C */ void ftYs_Init_8012BE3C(HSD_GObj* gobj);
-/* 12BECC */ unk_t ftYs_Init_8012BECC(void);
+/* 12BECC */ void ftYs_Init_8012BECC(ftCo_GObj* gobj);
 /* 3CE6D0 */ extern MotionState ftYs_Init_MotionStateTable[ftYs_MS_SelfCount];
 
 #endif

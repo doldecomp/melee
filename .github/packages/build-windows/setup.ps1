@@ -19,7 +19,9 @@
     & scoop install `
         git `
         python `
-        mingw
+        mingw `
+        cmake `
+        megatools
     if ($LASTEXITCODE -ne 0)
     {
         Exit $LASTEXITCODE
@@ -49,10 +51,9 @@ $data = New-Item -Path "$env:LocalAppData/Melee" -ItemType Directory
 
 # download and save melee compilers
 & {
-    $tmp = New-TemporaryFile
-    Invoke-WebRequest -Uri "$env:MELEE_COMPILERS_URL" -OutFile $tmp
     # Expand-Archive won't unzip it if its extension isn't .zip lol
-    $zip = Rename-Item $tmp -NewName ($tmp.BaseName + '.zip') -PassThru
+    $zip = [System.IO.Path]::GetTempFileName() -replace '\.[^.]+$','.zip'
+    & megatools dl --no-progress --path "$zip" "$env:MELEE_COMPILERS_URL"
 
     $dir = New-Item -ItemType Directory `
         -Path (Join-Path $env:Temp 'MELEE_COMPILERS')
@@ -65,4 +66,5 @@ $data = New-Item -Path "$env:LocalAppData/Melee" -ItemType Directory
 
     Remove-Item -Force $zip
     Remove-Item -Recurse -Force $dir
+    & scoop uninstall megatools
 }

@@ -18,23 +18,21 @@ def env(name: str, default: Optional[str] = None) -> Optional[str]:
 
 def apply(config, _):
     config["baseimg"] = "expected/build/ssbm.us.1.2/main.dol"
-    config["myimg"] = "build/ssbm.us.1.2/main.dol"
-    config["mapfile"] = "build/ssbm.us.1.2/GALE01.map"
+    config["myimg"] = "build/wip/ssbm.us.1.2/main.dol"
+    config["mapfile"] = "build/wip/ssbm.us.1.2/GALE01.map"
     config["source_directories"] = ["src", "asm"]
     config["arch"] = "ppc"
     config["map_format"] = "mw"
-    config["build_dir"] = "build/ssbm.us.1.2/src"
+    config["build_dir"] = "build/wip/ssbm.us.1.2/src"
+    config["expected_dir"] = "expected/build/ssbm.us.1.2/src"
 
     config["makeflags"] = [
         f"WINE={env('WINE', 'wine')}",
         "GENERATE_MAP=1",
-        "NON_MATCHING=0",
-        "EPILOGUE_PROCESS=1",
+        "WIP=1",
         "MAX_ERRORS=0",
         "WARN_ERROR=0",
-        "REQUIRE_PROTOS=0",
         "MSG_STYLE=std",
-        "SKIP_CHECK=1",
     ]
 
     devkitpro = env("DEVKITPRO", "/opt/devkitpro")

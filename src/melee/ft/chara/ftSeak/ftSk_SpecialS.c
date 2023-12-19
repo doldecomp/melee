@@ -3,6 +3,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
@@ -386,8 +387,8 @@ void ftSk_SpecialS_80110E4C(HSD_GObj* gobj)
     ftSk_SpecialS_ChainSomething(gobj);
 
     fp->fv.sk.x2234 = NULL;
-    fp->cb.x21E4_callback_OnDeath2 = NULL;
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    fp->death2_cb = NULL;
+    fp->take_dmg_cb = NULL;
 }
 
 void ftSk_SpecialS_CheckAndDestroyChain(HSD_GObj* gobj)
@@ -410,8 +411,8 @@ void ftSk_SpecialS_CheckAndDestroyChain(HSD_GObj* gobj)
     ftSk_SpecialS_ChainSomething(gobj);
 
     fp->fv.sk.x2234 = NULL;
-    fp->cb.x21E4_callback_OnDeath2 = NULL;
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    fp->death2_cb = NULL;
+    fp->take_dmg_cb = NULL;
 }
 
 void ftSk_SpecialS_80110EE8(HSD_GObj* gobj)
@@ -485,12 +486,12 @@ void ftSk_SpecialS_80110F70(HSD_GObj* gobj)
     }
 
     fp->x2222_b2 = true;
-    fp->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
+    fp->accessory4_cb = &ftSk_SpecialS_8011097C;
 }
 
 void ftSk_SpecialS_Enter(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 349, 0, NULL, 0.0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 349, 0, 0.0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     ftSk_SpecialS_80110F70(gobj);
 }
@@ -500,7 +501,7 @@ void ftSk_SpecialAirS_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->self_vel.y = 0;
 
-    Fighter_ChangeMotionState(gobj, 352, 0, NULL, 0.0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 352, 0, 0.0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     ftSk_SpecialS_80110F70(gobj);
 }
@@ -533,24 +534,24 @@ bool ftSk_SpecialS_CheckInitChain(HSD_GObj* gobj)
 #endif
         Fighter* fp2 = gobj->user_data;
 
-        lb_8000B1CC(fp2->parts[FtPart_L3rdNa].x0_jobj, NULL, &vec1);
+        lb_8000B1CC(fp2->parts[FtPart_L3rdNa].joint, NULL, &vec1);
 
         fp2->fv.sk.x2234 = it_802BB290(gobj, &vec1, fp2->facing_dir);
 
         fp2->x1984_heldItemSpec = fp2->fv.sk.x2234;
 
         if (fp2->fv.sk.x2234 != NULL) {
-            fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-            fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+            fp2->death2_cb = &ftSk_Init_80110198;
+            fp2->take_dmg_cb = &ftSk_Init_80110198;
         }
 
-        fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-        fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+        fp2->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+        fp2->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
         fp->mv.sk.specials.x1C = specialAttributes->x18;
 
         if (fp->fv.sk.x2234 == NULL) {
             if (fp->ground_or_air == GA_Air) {
-                ft_800CC730(gobj);
+                ftCo_800CC730(gobj);
             } else {
                 ft_8008A2BC(gobj);
             }
@@ -628,7 +629,7 @@ void ftSk_SpecialAirSStart_Phys(HSD_GObj* gobj)
         ftCommon_8007D494(fp, fighter_attr->grav, fighter_attr->terminal_vel);
     }
 
-    ftCommon_8007CE94(fp, fighter_attr->x180_AerialFriction);
+    ftCommon_8007CE94(fp, fighter_attr->aerial_friction);
 }
 
 void ftSk_SpecialSStart_Coll(HSD_GObj* gobj)
@@ -656,21 +657,21 @@ void ftSk_SpecialS_80111440(HSD_GObj* gobj)
 
     ftCommon_8007D5D4(fp);
     {
-        Fighter_ChangeMotionState(gobj, 352, transition_flags, NULL,
-                                  fp->cur_anim_frame, 1, 0);
+        Fighter_ChangeMotionState(gobj, 352, transition_flags,
+                                  fp->cur_anim_frame, 1, 0, NULL);
     }
 
     {
         Fighter* fp2 = GET_FIGHTER(gobj);
 
         if (fp2->fv.sk.x2234 != NULL) {
-            fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-            fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+            fp2->death2_cb = &ftSk_Init_80110198;
+            fp2->take_dmg_cb = &ftSk_Init_80110198;
         }
 
-        fp2->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
-        fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-        fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+        fp2->accessory4_cb = &ftSk_SpecialS_8011097C;
+        fp2->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+        fp2->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
     }
 }
 
@@ -679,20 +680,20 @@ void ftSk_SpecialS_801114E4(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 349, transition_flags, NULL,
-                              fp->cur_anim_frame, 1.0, 0.0);
+    Fighter_ChangeMotionState(gobj, 349, transition_flags, fp->cur_anim_frame,
+                              1.0, 0.0, NULL);
 
     {
         Fighter* fp2 = GET_FIGHTER(gobj);
 
         if (fp2->fv.sk.x2234 != NULL) {
-            fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-            fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+            fp2->death2_cb = &ftSk_Init_80110198;
+            fp2->take_dmg_cb = &ftSk_Init_80110198;
         }
 
-        fp2->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
-        fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-        fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+        fp2->accessory4_cb = &ftSk_SpecialS_8011097C;
+        fp2->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+        fp2->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
     }
 }
 
@@ -767,7 +768,7 @@ void ftSk_SpecialS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!(fp->input.held_inputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
         fp->mv.sk.specials.x4 = true;
     }
 
@@ -778,7 +779,7 @@ void ftSk_SpecialAirS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!(fp->input.held_inputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
         fp->mv.sk.specials.x4 = true;
     }
 
@@ -818,7 +819,7 @@ void ftSk_SpecialS_80111830(HSD_GObj* gobj)
 
     Fighter* fp = gobj->user_data;
 
-    Fighter_ChangeMotionState(gobj, 350, 8, NULL, 0.0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 350, 8, 0.0, 1, 0, NULL);
     ftSk_SpecialS_80110610(gobj, 305, 0);
 
     fp2 = gobj->user_data;
@@ -827,14 +828,14 @@ void ftSk_SpecialS_80111830(HSD_GObj* gobj)
     ftSk_SpecialS_80110AEC(gobj);
 
     if (fp2->fv.sk.x2234 != NULL) {
-        fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-        fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+        fp2->death2_cb = &ftSk_Init_80110198;
+        fp2->take_dmg_cb = &ftSk_Init_80110198;
     }
 
     fp2->x2222_b2 = true;
-    fp2->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
-    fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-    fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+    fp2->accessory4_cb = &ftSk_SpecialS_8011097C;
+    fp2->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+    fp2->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
 
     {
         f32 ecb_top;
@@ -848,7 +849,7 @@ void ftSk_SpecialS_80111830(HSD_GObj* gobj)
         vec0.y += fp->cur_pos.y;
         vec0.z += fp->cur_pos.z;
 
-        lb_8000B1CC(fp->parts[FtPart_L3rdNa].x0_jobj, NULL, &vec1);
+        lb_8000B1CC(fp->parts[FtPart_L3rdNa].joint, NULL, &vec1);
 
         {
             s32 flags =
@@ -863,7 +864,7 @@ void ftSk_SpecialS_80111830(HSD_GObj* gobj)
 
 void ftSk_SpecialS_80111988(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 353, 8, NULL, 0.0, 1.0, 0.0);
+    Fighter_ChangeMotionState(gobj, 353, 8, 0.0, 1.0, 0.0, NULL);
     ftSk_SpecialS_80110610(gobj, 308, 0.0);
 
     {
@@ -873,14 +874,14 @@ void ftSk_SpecialS_80111988(HSD_GObj* gobj)
         ftSk_SpecialS_80110AEC(gobj);
 
         if (fp->fv.sk.x2234 != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-            fp->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+            fp->death2_cb = &ftSk_Init_80110198;
+            fp->take_dmg_cb = &ftSk_Init_80110198;
         }
 
         fp->x2222_b2 = true;
-        fp->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
-        fp->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-        fp->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+        fp->accessory4_cb = &ftSk_SpecialS_8011097C;
+        fp->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+        fp->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
     }
 }
 
@@ -959,7 +960,7 @@ void ftSk_SpecialAirSEnd_Anim(HSD_GObj* gobj)
         }
 
         if (!ftAnim_IsFramesRemaining(gobj)) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
         }
     }
 }
@@ -1009,20 +1010,20 @@ void ftSk_SpecialS_80111CB0(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
 
-    Fighter_ChangeMotionState(gobj, 354, transition_flags, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 354, transition_flags, fp->cur_anim_frame,
+                              1, 0, NULL);
 
     {
         Fighter* fp2 = gobj->user_data;
 
         if (fp2->fv.sk.x2234 != NULL) {
-            fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-            fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+            fp2->death2_cb = &ftSk_Init_80110198;
+            fp2->take_dmg_cb = &ftSk_Init_80110198;
         }
 
-        fp2->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
-        fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-        fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+        fp2->accessory4_cb = &ftSk_SpecialS_8011097C;
+        fp2->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+        fp2->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
     }
 }
 
@@ -1032,26 +1033,26 @@ void ftSk_SpecialS_80111D54(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, 351, transition_flags, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 351, transition_flags, fp->cur_anim_frame,
+                              1, 0, NULL);
 
     {
         Fighter* fp2 = GET_FIGHTER(gobj);
 
         if (fp2->fv.sk.x2234 != NULL) {
-            fp2->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-            fp2->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+            fp2->death2_cb = &ftSk_Init_80110198;
+            fp2->take_dmg_cb = &ftSk_Init_80110198;
         }
 
-        fp2->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
-        fp2->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-        fp2->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+        fp2->accessory4_cb = &ftSk_SpecialS_8011097C;
+        fp2->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+        fp2->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
     }
 }
 
 void ftSk_SpecialS_80111DF8(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 351, 8, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 351, 8, 0, 1, 0, NULL);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -1062,20 +1063,20 @@ void ftSk_SpecialS_80111DF8(HSD_GObj* gobj)
         }
 
         if (fp->fv.sk.x2234 != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-            fp->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+            fp->death2_cb = &ftSk_Init_80110198;
+            fp->take_dmg_cb = &ftSk_Init_80110198;
         }
 
         fp->x2222_b2 = true;
-        fp->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
-        fp->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-        fp->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+        fp->accessory4_cb = &ftSk_SpecialS_8011097C;
+        fp->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+        fp->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
     }
 }
 
 void ftSk_SpecialS_80111EB4(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 354, 8, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 354, 8, 0, 1, 0, NULL);
 
     {
         Fighter* fp = gobj->user_data;
@@ -1086,14 +1087,14 @@ void ftSk_SpecialS_80111EB4(HSD_GObj* gobj)
         }
 
         if (fp->fv.sk.x2234 != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = &ftSk_Init_80110198;
-            fp->cb.x21DC_callback_OnTakeDamage = &ftSk_Init_80110198;
+            fp->death2_cb = &ftSk_Init_80110198;
+            fp->take_dmg_cb = &ftSk_Init_80110198;
         }
 
         fp->x2222_b2 = true;
-        fp->cb.x21BC_callback_Accessory4 = &ftSk_SpecialS_8011097C;
-        fp->cb.x21D4_callback_EnterHitlag = &ftSk_SpecialS_80110EE8;
-        fp->cb.x21D8_callback_ExitHitlag = &ftSk_SpecialS_ChainSomething;
+        fp->accessory4_cb = &ftSk_SpecialS_8011097C;
+        fp->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+        fp->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
     }
 }
 

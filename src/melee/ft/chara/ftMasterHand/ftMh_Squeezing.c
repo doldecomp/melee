@@ -7,6 +7,7 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
@@ -27,7 +28,7 @@ void ftMh_Squeezing_Anim(HSD_GObj* gobj)
 void ftMh_Squeezing_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }
@@ -47,7 +48,7 @@ void ftMh_Squeezing_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_376_80154E78(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Throw, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Throw, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
     fp->cmd_vars[0] = 0;
 }
@@ -58,15 +59,15 @@ void ftMh_Throw_Anim(HSD_GObj* gobj)
 
     if (fp->cmd_vars[0] != 0) {
         fp->cmd_vars[0] = 0;
-        ftMh_CaptureWaitMasterHand_80155D6C(fp->x1A58_interactedFighter,
+        ftMh_CaptureWaitMasterHand_80155D6C(fp->victim_gobj,
                                             ftCo_MS_ThrownMasterHand);
-        if (fp->x1A58_interactedFighter != 0) {
-            HSD_GObj* victim = fp->x1A58_interactedFighter;
+        if (fp->victim_gobj != 0) {
+            HSD_GObj* victim = fp->victim_gobj;
             Fighter* victim_fp = GET_FIGHTER(victim);
             ftCommon_8007E2F4(fp, 0);
-            ft_800DE2A8(gobj, victim);
+            ftCo_800DE2A8(gobj, victim);
             victim_fp->dmg.x1844_direction *= -1;
-            ft_800DE7C0(victim, 0, 0);
+            ftCo_800DE7C0(victim, 0, 0);
         }
         fp->mv.mh.unk0.x20 = 0;
     }

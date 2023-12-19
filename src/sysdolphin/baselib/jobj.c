@@ -1,3 +1,5 @@
+#include "math.h"
+
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
@@ -1077,7 +1079,7 @@ void HSD_JObjResolveRefsAll(HSD_JObj* jobj, HSD_Joint* joint)
 
 char HSD_JObj_80406918[] = "HSD_OBJ(o)->ref_count_individual != 0";
 
-static inline void iref_INC(void* o)
+static inline void jobj_iref_INC(void* o)
 {
     HSD_OBJ(o)->ref_count_individual += 1;
     HSD_OBJ(o)->ref_count_individual != 0
@@ -1112,7 +1114,7 @@ void HSD_JObjUnref(HSD_JObj* jobj)
                 jobj->object.parent.class_info->destroy((HSD_Class*) jobj);
             }
         } else {
-            iref_INC(jobj);
+            jobj_iref_INC(jobj);
             HSD_JOBJ_METHOD(jobj)->release_child(jobj);
             if (iref_DEC(jobj)) {
                 if (jobj != NULL) {

@@ -1,5 +1,5 @@
-#ifndef MELEE_IT_CODE_8027CF30_H
-#define MELEE_IT_CODE_8027CF30_H
+#ifndef GALE01_27CF30
+#define GALE01_27CF30
 
 #include "ft/forward.h"
 
@@ -17,7 +17,6 @@ HSD_GObj* it_80284854(Vec3*);
 HSD_GObj* it_802896CC(Vec3*);
 void it_8028FE90(Item_GObj*);
 
-HSD_GObj* it_80284D54(Vec3*);
 void it_8028428C(Item_GObj*);
 void it_80283BD4(Item_GObj*);
 HSD_GObj* it_80286088(s32);
@@ -51,7 +50,6 @@ void it_802C0DBC(u32 arg0);
 u32 it_802C0850(Item_GObj*, Vec3*, u32, s32, f32 facing_direction);
 void it_802C8C34(Item_GObj*);
 
-void it_8029C6A4(f32, f32, HSD_GObj*, Vec3*, s32);
 void it_802AE1D0(Item_GObj*);
 void it_802AEAB4(Item_GObj*);
 HSD_GObj* it_802AE8A8(f32, HSD_GObj*, Vec3*, s32, s32);
@@ -82,7 +80,7 @@ HSD_GObj* it_802C7D60(Item_GObj*, Vec3*, s32, f32);
 void it_802C7E94(Item_GObj*);
 void it_802C7EE0(Item_GObj*);
 void it_802C7F00(Item_GObj*);
-HSD_GObj* it_802C837C(Item_GObj*, Vec3*, s32, u32, f32);
+HSD_GObj* it_802C837C(Item_GObj*, Vec3*, enum_t, u32, f32);
 HSD_GObj* it_802C7774(f32, HSD_GObj*, Vec3*, s32, u32);
 void it_8028FAF4(Item_GObj*, Vec3*);
 void it_802C7A84(Item_GObj*);
@@ -130,8 +128,6 @@ HSD_GObj* it_802C3BAC(Item_GObj*, Vec3*, f32 facing_dir, f32);
 /// Clones an entity?
 HSD_GObj* it_802C3AF0(Item_GObj*);
 void it_802AE608(Item_GObj*);
-void it_8029C6CC(f32 radians, f32 vel, HSD_GObj* owner, Vec3*, ItemKind);
-HSD_GObj* it_8029CEB4(Item_GObj*, Vec3*, s32, f32 facing_dir);
 HSD_GObj* it_802C720C(Item_GObj*, Vec3*, s32, f32);
 void it_802C7340(Item_GObj*);
 void it_802C6DB8(Item_GObj*);
@@ -153,8 +149,6 @@ void it_802C519C(Item_GObj*, Vec3*, s32, s32, f32, f32);
 void it_802B4AC8(Item_GObj* gobj, Vec3*, f32 facing_dir, f32 x);
 void it_802C53F0(Item_GObj*, Vec3*, f32, f32, f32);
 s32 it_802E5F8C(Item_GObj*, Vec3*, s32, bool, f32, f32);
-void it_80284FC4(Item_GObj*, s32, f32);
-void it_80285024(Item_GObj*, s32);
 void it_802950D4(Item_GObj*, bool);
 void it_80294EB0(Item_GObj*, Vec3*, Vec3*);
 s32 it_802F2094(s32, Vec3*, s32, s32);
@@ -176,7 +170,6 @@ void it_802BD158(Item_GObj* gobj, Vec3*, int, float);
 HSD_GObj* it_802BD4AC(Item_GObj*, Vec3*, u8, s32, f32);
 
 void it_802BD45C(Item_GObj* gobj);
-HSD_GObj* it_802BDA64(Item_GObj*, Vec3*, int, f32);
 void it_802BDB94(Item_GObj* gobj);
 void it_802BDBF8(Item_GObj* gobj);
 void it_802BDC18(Item_GObj* gobj);
@@ -208,5 +201,7 @@ void it_802BE100(Item_GObj* gobj);
 /* 2A83E0 */ HSD_GObj* it_802A83E0(float facing_dir, Fighter_GObj*, Vec3*,
                                    Fighter_Part, int);
 /* 2A850C */ void it_802A850C(Item_GObj*, Vec3*, Vec3*, float, float, float);
+
+extern ItemStateTable it_803F94A0[];
 
 #endif

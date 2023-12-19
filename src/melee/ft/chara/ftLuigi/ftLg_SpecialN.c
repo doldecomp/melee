@@ -7,9 +7,11 @@
 #include "ef/efsync.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_Wait.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
@@ -26,11 +28,11 @@ void ftLg_SpecialN_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialN, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    fp->throw_flags = 0;
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialN, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = &ftLg_SpecialN_FireSpawn;
+    fp->accessory4_cb = &ftLg_SpecialN_FireSpawn;
 }
 
 // 0x801426EC - Luigi's aerial Fireball Motion State handler
@@ -39,11 +41,11 @@ void ftLg_SpecialAirN_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirN, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    fp->throw_flags = 0;
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirN, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = &ftLg_SpecialN_FireSpawn;
+    fp->accessory4_cb = &ftLg_SpecialN_FireSpawn;
 }
 
 // 0x8014275C
@@ -60,7 +62,7 @@ void ftLg_SpecialN_Anim(HSD_GObj* gobj)
 void ftLg_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -77,7 +79,7 @@ void ftLg_SpecialN_IASA(HSD_GObj* gobj)
 void ftLg_SpecialAirN_IASA(HSD_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->cmd_vars[0] != 0U) {
-        ft_800CCAAC(gobj);
+        ftCo_800CCAAC(gobj);
     }
 }
 
@@ -104,9 +106,9 @@ void ftLg_SpecialN_Coll(HSD_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirN,
-                                  FTLUIGI_SPECIALN_COLL_FLAG, NULL,
-                                  fp->cur_anim_frame, 1.0f, 0.0f);
-        fp->cb.x21BC_callback_Accessory4 = &ftLg_SpecialN_FireSpawn;
+                                  FTLUIGI_SPECIALN_COLL_FLAG,
+                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        fp->accessory4_cb = &ftLg_SpecialN_FireSpawn;
     }
 }
 
@@ -119,9 +121,9 @@ void ftLg_SpecialAirN_Coll(HSD_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialN,
-                                  FTLUIGI_SPECIALN_COLL_FLAG, NULL,
-                                  fp->cur_anim_frame, 1.0f, 0.0f);
-        fp->cb.x21BC_callback_Accessory4 = &ftLg_SpecialN_FireSpawn;
+                                  FTLUIGI_SPECIALN_COLL_FLAG,
+                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        fp->accessory4_cb = &ftLg_SpecialN_FireSpawn;
     }
 }
 
@@ -133,19 +135,19 @@ void ftLg_SpecialN_FireSpawn(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     bool flag;
 
-    if (fp->throw_flags.b0 != 0) {
-        fp->throw_flags.b0 = 0;
+    if (fp->throw_flags_b0 != 0) {
+        fp->throw_flags_b0 = 0;
         flag = true;
     } else {
         flag = false;
     }
 
     if (flag != false) {
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_L1stNb)].x0_jobj,
-                    NULL, &sp10);
+        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_L1stNb)].joint, NULL,
+                    &sp10);
         it_802C01AC(gobj, &sp10, It_Kind_Luigi_Fire, fp->facing_dir);
         efSync_Spawn(1287, gobj,
-                     fp->parts[ftParts_8007500C(fp, FtPart_L1stNb)].x0_jobj,
+                     fp->parts[ftParts_8007500C(fp, FtPart_L1stNb)].joint,
                      &fp->facing_dir);
     }
 }

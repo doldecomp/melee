@@ -4,6 +4,8 @@
 #include "ft_0877.h"
 #include "ftcoll.h"
 
+#include "ft/ft_0C31.h"
+#include "ftCommon/ftCo_HammerWait.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 
@@ -22,7 +24,7 @@ void ft_8007C114(HSD_GObj* gobj)
     if (fp->item_gobj != NULL) {
         switch (itGetKind(fp->item_gobj)) {
         case It_Kind_Hammer:
-            ft_800C555C(gobj);
+            ftCo_800C555C(gobj);
             break;
         }
     }
@@ -344,7 +346,7 @@ lbl_8007C518:
 lbl_8007C52C:
 /* 8007C52C 0007910C  3B 40 00 00 */	li r26, 0
 lbl_8007C530:
-/* 8007C530 00079110  80 6D C1 8C */	lwz r3, HSD_GObj_804D782C(r13)
+/* 8007C530 00079110  80 6D C1 8C */	lwz r3, HSD_GObj_Entities(r13)
 /* 8007C534 00079114  3B BF 10 64 */	addi r29, r31, 0x1064
 /* 8007C538 00079118  83 63 00 20 */	lwz r27, 0x20(r3)
 /* 8007C53C 0007911C  48 00 00 D8 */	b lbl_8007C614

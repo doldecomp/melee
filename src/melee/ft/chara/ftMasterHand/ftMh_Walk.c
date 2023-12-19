@@ -11,6 +11,7 @@
 #include "mp/mplib.h"
 
 #include <dolphin/mtx/types.h>
+#include <MetroTRK/intrinsics.h>
 
 void ftMh_WalkShoot_Anim(HSD_GObj* gobj)
 {
@@ -22,7 +23,7 @@ void ftMh_WalkShoot_Anim(HSD_GObj* gobj)
 void ftMh_WalkShoot_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }
@@ -36,7 +37,7 @@ void ftMh_WalkShoot_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_353_80151DC4(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Walk2, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Walk2, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -50,7 +51,7 @@ void ftMh_Walk2_Anim(HSD_GObj* gobj)
 void ftMh_Walk2_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }
@@ -64,7 +65,7 @@ void ftMh_Walk2_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_350_80151EB4(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftMh_MS_WalkLoop, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_WalkLoop, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -126,7 +127,7 @@ void ftMh_WalkLoop_Anim(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_WalkLoop, 0, 0, 0, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_WalkLoop, 0, 0, 1, 0, 0);
         ftAnim_8006EBA4(gobj);
     }
 }
@@ -134,7 +135,7 @@ void ftMh_WalkLoop_Anim(HSD_GObj* gobj)
 void ftMh_WalkLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }
@@ -154,7 +155,7 @@ void ftMh_WalkLoop_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_351_801520D8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftMh_MS_WalkWait, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_WalkWait, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
     fp->self_vel.x = 0;
 }

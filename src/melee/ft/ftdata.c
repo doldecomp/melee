@@ -85,6 +85,7 @@
 #include "ftPikachu/ftPk_SpecialS.h"
 #include "ftPopo/ftPp_1211.h"
 #include "ftPopo/ftPp_Init.h"
+#include "ftPopo/ftPp_SpecialN.h"
 #include "ftPopo/ftPp_SpecialS.h"
 #include "ftPurin/ftPr_Init.h"
 #include "ftSamus/ftSs_Init.h"
@@ -110,14 +111,6 @@
 #include "ftZelda/ftZd_SpecialS.h"
 
 #include <dolphin/mtx/types.h>
-
-typedef struct ftData_UnkCountStruct {
-    /// Always zero; could be #NULL or the high part of a 64-bit integer.
-    int zero;
-
-    /// A count or msid.
-    int count;
-} ftData_UnkCountStruct;
 
 ftData_UnkCountStruct ftData_Table_Unk0[FTKIND_MAX] = {
     { 0, 303 }, { 0, 327 }, { 0, 318 }, { 0, 337 }, { 0, 479 }, { 0, 316 },

@@ -30,9 +30,9 @@ struct HitCapsule {
     /// @at{0} @sz{4}
     HitCapsuleState state;
 
-    /// @at{4} @sz{C}
-    /// The offset of point @e a of the capsule.
-    Vec3 a_offset;
+    int x4;
+    int x8;
+    float damage;
 
     /// @at{10} @sz{C}
     /// The offset of point @e b of the capsule.
@@ -42,9 +42,11 @@ struct HitCapsule {
     /// The scale of the capsule.
     f32 scl;
 
-    HSD_JObj* bone;
+    int kb_angle;
 
-    u8 x24[0x30 - 0x24];
+    int x24;
+    int x28;
+    int x2C;
 
     /// @at{30} @sz{4}
     HitElement element;
@@ -98,8 +100,11 @@ struct HitCapsule {
     HitVictim victims_1[12];
     /// @at{D4} @sz{60}
     HitVictim victims_2[12];
-
-    HSD_GObj* owner;
+    // @at{134}
+    union {
+        HSD_GObj* owner;
+        u8 hit_grabbed_victim_only : 1;
+    };
 };
 
 struct HurtCapsule {
@@ -157,7 +162,7 @@ bool lbColl_80007BCC(HitCapsule*, HitResult* shield_hit, unk_t, s32, f32, f32,
                      f32);
 bool lbColl_80007AFC(HitCapsule*, HitCapsule*, f32, f32);
 void lbColl_80007DD8(HitCapsule*, HitResult*, Mtx, unk_t, unk_t, f32);
-UNK_RET lbColl_80008D30(UNK_PARAMS);
+void lbColl_80008D30(HitCapsule*, UNK_T);
 void lbColl_80008428(HitCapsule*);
 bool lbColl_80005C44(Vec3*, Vec3*, Vec3*, Vec3*, f32, f32);
 f32 lbColl_80005EBC(Vec3*, Vec3*, Vec3*, f32*);

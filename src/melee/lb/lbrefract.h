@@ -14,16 +14,16 @@ void lbRefract_8002247C(HSD_CObj*);
 void lbRefract_80022560(void);
 void lbRefract_800225D4(void);
 s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc);
-void lbRefract_80022998(s32, s32);
+void lbRefract_80022998(HSD_MObj*, u32 rendermode);
 void lbRefract_80022BB8(void);
 void lbRefract_80022BD0(void);
 
 #pragma region lbrefract_003
 
-f32 atan2f(f32 y, f32 x);
-f32 acosf(f32);
-f32 asinf(f32);
-f32 atanf(f32);
+float atan2f(float y, float x);
+float acosf(float);
+float asinf(float);
+float atanf(float);
 
 #pragma endregion
 
@@ -54,7 +54,6 @@ void lbRefract_80021CE8(void*, s32);
 extern RefractCallbackTypeA lbRefract_80021F34;
 extern RefractCallbackTypeA lbRefract_80021F70;
 
-extern RefractCallbackTypeB lbRefract_80021FB4;
 extern RefractCallbackTypeB lbRefract_80021FB4;
 
 extern RefractCallbackTypeC lbRefract_80021FF8;

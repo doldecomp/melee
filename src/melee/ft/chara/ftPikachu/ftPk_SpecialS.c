@@ -6,6 +6,7 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
@@ -21,10 +22,10 @@ void ftPk_SpecialS_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
 
-    fp->cb.x21EC_callback = ftPk_SpecialN_80124DC8;
+    fp->x21EC = ftPk_SpecialN_80124DC8;
 
     fp->gr_vel /= sa->x30;
-    Fighter_ChangeMotionState(gobj, 343, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 343, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -38,11 +39,11 @@ void ftPk_SpecialAirS_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
 
-    fp->cb.x21EC_callback = ftPk_SpecialN_80124DC8;
+    fp->x21EC = ftPk_SpecialN_80124DC8;
 
     fp->self_vel.x /= sa->x30;
     fp->self_vel.y = 0;
-    Fighter_ChangeMotionState(gobj, 348, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 348, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -121,16 +122,16 @@ void ftPk_SpecialS_ChangeMotion_Unk00(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 348, transition_flags0, 0,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 348, transition_flags0, fp->cur_anim_frame,
+                              1, 0, 0);
 }
 
 void ftPk_SpecialS_ChangeMotion_Unk01(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 343, transition_flags0, 0,
-                              fp->cur_anim_frame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 343, transition_flags0, fp->cur_anim_frame,
+                              1.0f, 0.0f, 0);
 }
 
 void ftPk_SpecialSHold_Anim(HSD_GObj* gobj)
@@ -145,7 +146,7 @@ void ftPk_SpecialSHold_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007DB24(gobj);
-        fp->cb.x21BC_callback_Accessory4 = &ftPk_SpecialN_SpawnEffect0;
+        fp->accessory4_cb = &ftPk_SpecialN_SpawnEffect0;
     }
 
     fp->mv.pk.unk3.x0++;
@@ -167,7 +168,7 @@ void ftPk_SpecialAirSHold_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007DB24(gobj);
-        fp->cb.x21BC_callback_Accessory4 = &ftPk_SpecialN_SpawnEffect0;
+        fp->accessory4_cb = &ftPk_SpecialN_SpawnEffect0;
     }
 
     fp->mv.pk.unk3.x0++;
@@ -180,7 +181,7 @@ void ftPk_SpecialAirSHold_Anim(HSD_GObj* gobj)
 void ftPk_SpecialSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.held_inputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
         ftPk_SpecialS_ChangeMotion_Unk08(gobj);
     }
 }
@@ -188,7 +189,7 @@ void ftPk_SpecialSHold_IASA(HSD_GObj* gobj)
 void ftPk_SpecialAirSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.held_inputs & HSD_Pad_B)) {
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
         ftPk_SpecialS_ChangeMotion_Unk09(gobj);
     }
 }
@@ -226,16 +227,16 @@ void ftPk_SpecialS_ChangeMotion_Unk02(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 349, transition_flags1, 0,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 349, transition_flags1, fp->cur_anim_frame,
+                              1, 0, 0);
 }
 
 void ftPk_SpecialS_ChangeMotion_Unk03(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 344, transition_flags1, 0,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 344, transition_flags1, fp->cur_anim_frame,
+                              1, 0, 0);
 }
 
 void ftPk_SpecialS_ChangeMotion_Unk04(HSD_GObj* gobj)
@@ -244,11 +245,11 @@ void ftPk_SpecialS_ChangeMotion_Unk04(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, 344, Ft_MF_KeepSfx, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 344, Ft_MF_KeepSfx, 0, 1, 0, 0);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        fp->cb.x21BC_callback_Accessory4 = &ftPk_SpecialN_SpawnEffect0;
+        fp->accessory4_cb = &ftPk_SpecialN_SpawnEffect0;
     }
 }
 
@@ -259,11 +260,11 @@ void ftPk_SpecialS_ChangeMotion_Unk05(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, 349, Ft_MF_KeepSfx, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 349, Ft_MF_KeepSfx, 0, 1, 0, 0);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        fp->cb.x21BC_callback_Accessory4 = &ftPk_SpecialN_SpawnEffect0;
+        fp->accessory4_cb = &ftPk_SpecialN_SpawnEffect0;
     }
 }
 
@@ -345,16 +346,16 @@ void ftPk_SpecialS_ChangeMotion_Unk06(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 352, transition_flags2, 0,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 352, transition_flags2, fp->cur_anim_frame,
+                              1, 0, 0);
 }
 
 void ftPk_SpecialS_ChangeMotion_Unk07(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 347, transition_flags2, 0,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 347, transition_flags2, fp->cur_anim_frame,
+                              1, 0, 0);
 }
 
 void ftPk_SpecialS_ChangeMotion_Unk08(HSD_GObj* gobj)
@@ -364,12 +365,12 @@ void ftPk_SpecialS_ChangeMotion_Unk08(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, 347, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 347, 0, 0, 1, 0, 0);
     {
         Fighter* fp = GET_FIGHTER(gobj);
         fp->cmd_vars[0] = 0;
         ftCommon_8007DB24(gobj);
-        fp->cb.x21BC_callback_Accessory4 = &ftPk_SpecialN_SpawnEffect1;
+        fp->accessory4_cb = &ftPk_SpecialN_SpawnEffect1;
     }
 }
 
@@ -380,13 +381,13 @@ void ftPk_SpecialS_ChangeMotion_Unk09(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, 352, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 352, 0, 0, 1, 0, 0);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
         fp->cmd_vars[0] = 0;
         ftCommon_8007DB24(gobj);
-        fp->cb.x21BC_callback_Accessory4 = &ftPk_SpecialN_SpawnEffect1;
+        fp->accessory4_cb = &ftPk_SpecialN_SpawnEffect1;
     }
 }
 
@@ -462,11 +463,11 @@ void ftPk_SpecialS_ChangeMotion_Unk10(HSD_GObj* gobj)
         fp->self_vel.y = 0.5f * sa->x44 + sa->x44 * temp;
     }
 
-    Fighter_ChangeMotionState(gobj, 350, transition_flags3, 0,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 350, transition_flags3, fp->cur_anim_frame,
+                              1, 0, 0);
 
-    fp->cb.x21F8_callback = &ftCommon_8007F76C;
-    fp->cb.x21C0_callback_OnGiveDamage = &ftPk_SpecialS_ZeroVelocity;
+    fp->x21F8 = &ftCommon_8007F76C;
+    fp->deal_dmg_cb = &ftPk_SpecialS_ZeroVelocity;
 }
 
 void ftPk_SpecialSEnd_Anim(HSD_GObj* gobj)
@@ -479,7 +480,7 @@ void ftPk_SpecialSEnd_Anim(HSD_GObj* gobj)
 void ftPk_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -516,7 +517,7 @@ void ftPk_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 void ftPk_SpecialSEnd_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -542,7 +543,7 @@ void ftPk_SpecialS_ChangeMotion_Unk11(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->gr_vel /= sa->x50;
 
-    Fighter_ChangeMotionState(gobj, 346, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 346, 0, 0, 1, 0, 0);
 }
 
 void ftPk_SpecialS_ChangeMotion_Unk12(HSD_GObj* gobj)
@@ -558,5 +559,5 @@ void ftPk_SpecialS_ChangeMotion_Unk12(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->self_vel.x /= sa->x50;
 
-    Fighter_ChangeMotionState(gobj, 351, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 351, 0, 0, 1, 0, 0);
 }

@@ -56,6 +56,10 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/pl/player.c.o\
     $(BUILD_DIR)/asm/melee/pl/pl_0371.s.o\
+    $(BUILD_DIR)/asm/melee/pl/pltrick.s.o\
+    $(BUILD_DIR)/asm/melee/pl/plbonus.s.o\
+    $(BUILD_DIR)/asm/melee/pl/plbonuslib.s.o\
+    $(BUILD_DIR)/asm/melee/pl/pl_040D.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/mp/mpcoll.c.o\
@@ -72,7 +76,7 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/fighter.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftanim.s.o\
-    $(BUILD_DIR)/asm/melee/ft/ftaction.s.o\
+    $(BUILD_DIR)/src/melee/ft/ftaction.c.o\
     $(BUILD_DIR)/src/melee/ft/ftparts.c.o\
     $(BUILD_DIR)/src/melee/ft/ftcamera.c.o\
     $(BUILD_DIR)/src/melee/ft/ftcoll.c.o\
@@ -107,10 +111,121 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackLw4.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackAir.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_LandingAir.c.o\
-    $(BUILD_DIR)/src/melee/ft/ftitempickup.c.o\
-    $(BUILD_DIR)/src/melee/ft/ftdynamics.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Damage.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DamageFall.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DamageIce.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_DamageIce.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Guard.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_Guard.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ItemGet.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ItemThrow.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_SpecialS.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_SpecialAir.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_FallSpecial.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Lift.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DownBound.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_DownBound.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DownStand.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Down.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DownAttack.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Passive.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_PassiveStand.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ShieldBreakFly.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ShieldBreakFall.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ShieldBreakDown.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ShieldBreakStand.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Furafura.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Escape.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_EscapeAir.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Rebound.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Pass.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Ottotto.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CliffWait.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CliffClimb.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CliffAttack.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CliffEscape.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CliffJump.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CargoWait.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CargoWalk.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CargoTurn.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CargoKneebend.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CargoJump.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CargoFall.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CargoLanding.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CargoThrow.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_09C4.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Shouldered.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureCaptain.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_09CB.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_BarrelWait.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_StopWall.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_StopCeil.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DownDamage.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_MissFoot.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_09F4.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_09F4.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_09F7.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMr_Strings.c.o\
-    $(BUILD_DIR)/asm/melee/ft/ft_08A4.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_0A01.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_0B3E.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_0B3E.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureYoshi.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_YoshiEgg.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_YoshiEgg.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureKoopa.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureDamageKoopa.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureWaitKoopa.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ThrownKoopa.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureMewtwo.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ThrownMewtwo.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureKirby.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_CaptureKirby.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureWaitKirby.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ThrownKirby.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_3C61.s.o\
+    $(BUILD_DIR)/src/melee/ft/ftdemo.c.o\
+    $(BUILD_DIR)/src/melee/ft/ft_0BEC.c.o\
+    $(BUILD_DIR)/src/melee/ft/ft_0BEF.c.o\
+    $(BUILD_DIR)/src/melee/ft/ft_0BF0.c.o\
+    $(BUILD_DIR)/src/melee/ft/ftmaterial.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ftmaterial.s.o\
+    $(BUILD_DIR)/src/melee/ft/ftcolanim.c.o\
+    $(BUILD_DIR)/src/melee/ft/ftdevice.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ftdevice.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Bury.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_Bury.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_FlyReflect.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_FlyReflect.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_PassiveWall.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_PassiveWall.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_PassiveCeil.c.o\
+    $(BUILD_DIR)/src/melee/ft/ftafterimage.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DamageSong.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_0C35.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AirCatch.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DamageBind.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_WarpStar.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_HammerWait.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_HammerWalk.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_HammerTurn.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_HammerJump.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_HammerKneeBend.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_HammerFall.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_HammerLanding.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_0C60.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DemoCallback0.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0C31.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftmetal.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0C88.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftswing.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0CD1.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftstarrodswing.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftlipstickswing.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0CDD.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftattacks4combo.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0CEE.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftchangeparam.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0D14.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyWait0.c.o\
@@ -198,6 +313,8 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftPopo/ftPp_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPopo/ftPp_SpecialN.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPopo/ftPp_SpecialS.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftPp_SpecialS.s.o\
 
 TEXT_O_FILES +=\
@@ -372,7 +489,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gr/grdynamicattr.c.o\
     $(BUILD_DIR)/asm/melee/gr/grzakogenerator.s.o\
     $(BUILD_DIR)/asm/melee/gr/grfzerocar.s.o\
-    $(BUILD_DIR)/asm/melee/gr/grizumi.s.o\
+    $(BUILD_DIR)/src/melee/gr/grizumi.c.o\
     $(BUILD_DIR)/asm/melee/gr/grcastle.s.o\
     $(BUILD_DIR)/asm/melee/gr/grstadium.s.o\
     $(BUILD_DIR)/asm/melee/gr/grkongo.s.o\
@@ -408,6 +525,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/gr/grgreens.s.o\
     $(BUILD_DIR)/asm/melee/gr/grflatzone.s.o\
     $(BUILD_DIR)/asm/melee/gr/grpushon.s.o\
+    $(BUILD_DIR)/src/melee/gr/grfigureget.c.o\
     $(BUILD_DIR)/asm/melee/gr/grfigureget.s.o\
     $(BUILD_DIR)/src/melee/gr/grbattle.c.o\
     $(BUILD_DIR)/asm/melee/gr/grlast.s.o\
@@ -426,9 +544,9 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/gr/grtlink.s.o\
     $(BUILD_DIR)/src/melee/gr/grtluigi.c.o\
     $(BUILD_DIR)/src/melee/gr/grtmars.c.o\
-    $(BUILD_DIR)/asm/melee/gr/grtmewtwo.s.o\
+    $(BUILD_DIR)/src/melee/gr/grtmewtwo.c.o\
     $(BUILD_DIR)/src/melee/gr/grtness.c.o\
-    $(BUILD_DIR)/asm/melee/gr/grtpeach.s.o\
+    $(BUILD_DIR)/src/melee/gr/grtpeach.c.o\
     $(BUILD_DIR)/src/melee/gr/grtpichu.c.o\
     $(BUILD_DIR)/asm/melee/gr/grtpikachu.s.o\
     $(BUILD_DIR)/asm/melee/gr/grtpurin.s.o\
@@ -437,10 +555,9 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gr/grtyoshi.c.o\
     $(BUILD_DIR)/asm/melee/gr/grtzelda.s.o\
     $(BUILD_DIR)/asm/melee/gr/grtgamewatch.s.o\
-    $(BUILD_DIR)/asm/melee/gr/grtemblem.s.o\
+    $(BUILD_DIR)/src/melee/gr/grtemblem.c.o\
     $(BUILD_DIR)/asm/melee/gr/grtganon.s.o\
     $(BUILD_DIR)/src/melee/gr/stage.c.o\
-    $(BUILD_DIR)/asm/melee/gr/stage.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/db/db_2253.s.o\
@@ -475,7 +592,192 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/it/item.c.o\
     $(BUILD_DIR)/src/melee/it/it_26B1.c.o\
     $(BUILD_DIR)/asm/melee/it/it_266F.s.o\
-    $(BUILD_DIR)/asm/melee/it/it_27CF.s.o\
+    $(BUILD_DIR)/asm/melee/it/itcoll.s.o\
+    $(BUILD_DIR)/src/melee/it/it_3F14.c.o\
+    $(BUILD_DIR)/asm/melee/it/it_3F14.s.o\
+    $(BUILD_DIR)/src/melee/it/it_3F23.c.o\
+    $(BUILD_DIR)/asm/melee/it/it_3F23.s.o\
+    $(BUILD_DIR)/src/melee/it/it_3F31.c.o\
+    $(BUILD_DIR)/asm/melee/it/it_3F31.s.o\
+    $(BUILD_DIR)/asm/melee/it/it_2725.s.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/it/items/itcapsule.c.o\
+    $(BUILD_DIR)/asm/melee/it/items/itbombhei.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itdosei.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itheart.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ittomato.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itstar.c.o\
+    $(BUILD_DIR)/asm/melee/it/items/itbat.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itsword.c.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsword.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itbox.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ittaru.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itegg.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkusudama.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itparasol.c.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgshell.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itrshell.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlgun.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfreeze.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfoods.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmsbomb.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itflipper.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsscope.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itstarrod.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itharisen.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfflower.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkinoko.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itdkinoko.s.o\
+    $(BUILD_DIR)/src/melee/it/items/ithammer.c.o\
+    $(BUILD_DIR)/asm/melee/it/items/itwstar.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itscball.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itrabbitc.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmetalb.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlipstick.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itspycloak.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ittarucann.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmball.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlgunray.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itstarrodstar.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsscopebeam.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlgunbeam.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ithammerhead.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlipstickspore.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfflowerflame.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itevyoshiegg.s.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/melee/it/items/itmariofireball.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkirbycutterbeam.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itfoxlaser.c.o\
+    $(BUILD_DIR)/src/melee/it/items/itfoxillusion.c.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlinkbomb.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlinkboomerang.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlinkhookshot.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlinkarrow.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnesspkfire.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnesspkfirepillar.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnesspkflush.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnesspkthunderball.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnesspkthundertrail.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkoopaflame.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnessbat.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/it_2ADA.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkirbyhammer.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfoxblaster.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlinkbow.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnesspkflushexplode.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itseakneedlethrown.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itseakneedleheld.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itseakvanish.c.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpikachuthunder.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmariocape.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ityoshieggthrow.s.o\
+    $(BUILD_DIR)/src/melee/it/items/ityoshistar.c.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpikachutjoltground.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpikachutjoltair.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsamusbomb.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsamuschargeshot.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsamusmissile.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsamusgrapple.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itseakchain.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpeachexplode.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpeachturnip.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itpeachparasol.c.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpeachtoad.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpeachtoadspore.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnessyoyo.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itluigifireball.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itdrmariopill.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itclimbersice.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itclimbersblizzard.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itclimbersstring.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itzeldadinfire.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itzeldadinfireexplode.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmewtwodisable.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmewtwoshadowball.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchgreenhouse.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchmanhole.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchfire.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchparachute.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchturtle.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchbreath.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkirbygamewatchchefpan.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchjudge.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchpanic.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchrescue.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgamewatchchef.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itclinkmilk.s.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/melee/it/items/ittosakinto.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itchicorita.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itchicoritaleaf.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkabigon.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkamex.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmatadogas.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlizardon.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfire.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itthunder.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfreezer.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsonans.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ithassam.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itunknown.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itentei.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itraikou.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itsuikun.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkireihana.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmarumine.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlugia.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ithouou.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmetamon.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpippi.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ittogepy.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmew.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itcerebi.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ithitodeman.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlucky.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itporygon2.c.o\
+    $(BUILD_DIR)/asm/melee/it/items/ithinoarashi.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmaril.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itfushigibana.s.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/melee/it/items/itoldkuri.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmato.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itheiho.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlikelike.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itnokonoko.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itzgshell.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itzrshell.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itpatapata.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itklap.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itoldottosea.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itwhitebea.s.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/melee/it/items/itoctarock.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/it_2E5A.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/it_2E6A.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itarwinglaser.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itoctarockstone.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itleadead.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itgreatfoxlaser.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ittincle.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkyasarin.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itwhispyapple.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/ittools.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkyasarinegg.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmasterhandlaser.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itmasterhandbullet.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itcrazyhandbomb.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itcoin.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkirby_2F23.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/it_2F28.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/it_2F2B.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/itkirbyyoshispecialn.s.o\
+    $(BUILD_DIR)/asm/melee/it/items/it_27CF.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/if/ifall.s.o\
@@ -567,7 +869,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/dolphin/dvd/dvdlow.s.o\
-    $(BUILD_DIR)/asm/dolphin/dvd/dvdfs.s.o\
+    $(BUILD_DIR)/src/dolphin/dvd/dvdfs.c.o\
     $(BUILD_DIR)/src/dolphin/dvd/dvd.c.o\
     $(BUILD_DIR)/asm/dolphin/dvd/dvd.s.o\
     $(BUILD_DIR)/src/dolphin/dvd/dvdqueue.c.o\
@@ -685,22 +987,19 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/tobj.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/state.s.o\
+    $(BUILD_DIR)/src/sysdolphin/baselib/state.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/tev.c.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/tev.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/mobj.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/aobj.c.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/aobj.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/lobj.c.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/lobj.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/cobj.c.o\
@@ -708,11 +1007,9 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/fobj.c.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/fobj.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/pobj.c.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/pobj.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/jobj.c.o\
@@ -810,6 +1107,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/synth.s.o\
 
 TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/sysdolphin/baselib/axdriver.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/AXDriver.s.o\
 
 TEXT_O_FILES +=\

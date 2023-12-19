@@ -5,6 +5,7 @@
 #include "ft/forward.h"
 #include "it/forward.h"
 
+#include <common_structs.h>
 #include <placeholder.h>
 
 struct ftPeach_FighterVars {
@@ -60,8 +61,7 @@ typedef struct ftPe_DatAttrs {
     /* +A0 */ float xA0;
     /* +A4 */ float xA4;
     /* +A8 */ float xA8;
-    /* +AC */ float xAC;
-    /* +B0 */ u8 xB0[0xC0 - 0xB0];
+    /* +AC */ AbsorbDesc xAC;
 } ftPe_DatAttrs;
 
 union ftPe_MotionVars {

@@ -27,7 +27,7 @@ struct ftGameWatch_FighterVars {
 };
 
 typedef struct ftGameWatchChef {
-    s32 sausageCount[5];
+    int sausageCount[6];
 } ftGameWatchChef;
 
 typedef struct ftGameWatchJudge {
@@ -42,10 +42,10 @@ typedef struct _ftGameWatchAttributes {
 
     /// Array of four GXColor values, one for each Mr. Game & Watch costume
     /// color
-    s32 x4_GAMEWATCH_COLOR[4];
+    GXColor x4_GAMEWATCH_COLOR[4];
 
     /// Outline color of Mr. Game & Watch's model
-    s32 x14_GAMEWATCH_OUTLINE;
+    GXColor x14_GAMEWATCH_OUTLINE;
 
     /// NEUTRAL SPECIAL - CHEF
 

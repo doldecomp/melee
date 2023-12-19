@@ -69,5 +69,13 @@ bool mpColl_80043BBC(CollData* arg0, s32* arg1);
 void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2);
 void mpColl_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2,
                      f32 arg3, f32 arg4);
+/* 04CBC0 */ bool mpColl_8004CBC0(CollData*);
+/* 04CBE8 */ void mpColl_8004CBE8(CollData*);
+/* 0443C4 */ bool mpColl_800443C4(CollData* cd, int* p_ledge_id);
+/* 044164 */ bool mpColl_80044164(CollData* cd, int* p_ledge_id);
+/* 4D64A0 */ extern s32 mpColl_804D64A0;
+/* 4D64A4 */ extern s32 mpColl_804D64A4;
+/* 4D64A8 */ extern s32 mpColl_804D64A8;
+/* 4D64AC */ extern u32 mpColl_804D64AC;
 
 #endif

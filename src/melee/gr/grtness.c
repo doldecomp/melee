@@ -9,6 +9,27 @@
 
 #include <dolphin/os/os.h>
 
+static void grTNess_802225D0(int);
+static void grTNess_802225D4(void);
+static void grTNess_80222644(void);
+static void grTNess_80222648(void);
+static bool grTNess_8022266C(void);
+static HSD_GObj* grTNess_80222674(int param_1);
+static void grTNess_8022275C(HSD_GObj* gobj);
+static bool grTNess_80222788(HSD_GObj*);
+static void grTNess_80222790(HSD_GObj*);
+static void grTNess_80222794(HSD_GObj*);
+static void grTNess_80222798(HSD_GObj* gobj);
+static bool grTNess_802227E8(HSD_GObj*);
+static void grTNess_802227F0(HSD_GObj* gobj);
+static void grTNess_80222824(HSD_GObj*);
+static void grTNess_80222828(HSD_GObj* gobj);
+static bool grTNess_80222878(HSD_GObj*);
+static void grTNess_80222880(HSD_GObj* gobj);
+static void grTNess_802228A0(HSD_GObj*);
+static lb_UnkAnimStruct* grTNess_802228A4(enum_t);
+static bool grTNess_802228AC(Vec3*, int, HSD_JObj*);
+
 extern StageInfo stage_info;
 
 static StageCallbacks grTNs_803E9030[4] = {
@@ -174,9 +195,9 @@ static void grTNess_802228A0(HSD_GObj* arg0)
     return;
 }
 
-static bool grTNess_802228A4(int arg0)
+static lb_UnkAnimStruct* grTNess_802228A4(enum_t arg0)
 {
-    return false;
+    return NULL;
 }
 
 static bool grTNess_802228AC(Vec3* arg0, int arg1, HSD_JObj* arg2)

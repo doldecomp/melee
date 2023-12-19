@@ -6,13 +6,20 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
+#include "ft/ft_0D14.h"
+#include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ftCommon/ftCo_Attack1.h"
 #include "ftCommon/ftCo_AttackHi3.h"
 #include "ftCommon/ftCo_AttackHi4.h"
 #include "ftCommon/ftCo_AttackLw3.h"
+#include "ftCommon/ftCo_AttackLw4.h"
 #include "ftCommon/ftCo_AttackS3.h"
 #include "ftCommon/ftCo_AttackS4.h"
+#include "ftCommon/ftCo_Escape.h"
+#include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/ftCo_SpecialS.h"
 
 #include <trigf.h>
 
@@ -106,7 +113,7 @@ void ftSs_Init_80128B1C(HSD_GObj* gobj, f32 angle, f32 arg9, f32 argA)
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4(fighter2);
     }
-    Fighter_ChangeMotionState(gobj, 0x156, 0, 0, arg9, argA, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x156, 0, arg9, argA, 0.0f, 0);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -138,7 +145,7 @@ void ftSs_SpecialAirLw_Anim(HSD_GObj* gobj)
         fp->mv.ss.unk2.x0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -152,27 +159,27 @@ void ftSs_SpecialLw_IASA(HSD_GObj* gobj)
     ftSs_DatAttrs* da = fp->dat_attrs;
     if (fp->cmd_vars[1] && fp->input.lstick.y < da->x14) {
         fp->cmd_vars[1] = 0;
-        ft_800D638C(gobj);
+        ftCo_800D638C(gobj);
         return;
     }
-    RETURN_IF(ft_80096540(gobj))
-    RETURN_IF(ftCo_Attack100_CheckInput(gobj))
-    RETURN_IF(ft_800D6824(gobj))
-    RETURN_IF(ft_800D68C0(gobj))
-    RETURN_IF(ftCo_Catch_CheckInput(gobj))
-    RETURN_IF(ftCo_AttackS4_CheckInput(gobj))
-    RETURN_IF(ftCo_AttackHi4_CheckInput(gobj))
-    RETURN_IF(ftCo_AttackLw4_CheckInput(gobj))
-    RETURN_IF(ftCo_AttackS3_CheckInput(gobj))
-    RETURN_IF(ftCo_AttackHi3_CheckInput(gobj))
-    RETURN_IF(ftCo_AttackLw3_CheckInput(gobj))
-    RETURN_IF(ftCo_Attack1_CheckInput(gobj))
-    RETURN_IF(ft_80099794(gobj))
+    RETURN_IF(ftCo_SpecialS_CheckInput(gobj));
+    RETURN_IF(ftCo_Attack100_CheckInput(gobj));
+    RETURN_IF(ftCo_800D6824(gobj));
+    RETURN_IF(ftCo_800D68C0(gobj));
+    RETURN_IF(ftCo_Catch_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackS4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackHi4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackLw4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackS3_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackHi3_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackLw3_CheckInput(gobj));
+    RETURN_IF(ftCo_Attack1_CheckInput(gobj));
+    RETURN_IF(ftCo_80099794(gobj));
 }
 
 void ftSs_SpecialAirLw_IASA(HSD_GObj* gobj)
 {
-    ft_800CCAAC(gobj);
+    ftCo_800CCAAC(gobj);
 }
 
 void ftSs_SpecialLw_Phys(HSD_GObj* gobj)
@@ -210,9 +217,9 @@ void ftSs_SpecialAirLw_Phys(HSD_GObj* gobj)
 
     ftCommon_8007D4B8(fp);
     ftCommon_8007D344(fp, 0.0f,
-                      ftAttr->x154_GroundToAirJumpMomentumMultiplier *
+                      ftAttr->ground_to_air_jump_momentum_multiplier *
                           samus_attr->x10,
-                      ftAttr->x158_JumpHMaxVelocity * samus_attr->x10);
+                      ftAttr->jump_h_max_velocity * samus_attr->x10);
 }
 
 void ftSs_SpecialLw_Coll(HSD_GObj* gobj)
@@ -262,16 +269,16 @@ void ftSs_SpecialLw_80129048(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 0x156, 0x10, 0, fp->cur_anim_frame,
-                              fp->x89C_frameSpeedMul, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x156, 0x10, fp->cur_anim_frame,
+                              fp->frame_spd_mul, 0.0f, 0);
 }
 
 void ftSs_SpecialLw_801290A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x155, 0x10, 0, fp->cur_anim_frame,
-                              fp->x89C_frameSpeedMul, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x155, 0x10, fp->cur_anim_frame,
+                              fp->frame_spd_mul, 0.0f, 0);
 }
 
 int ftSs_SpecialLw_80129100(HSD_GObj* gobj, s32* arg1, s32* arg2)

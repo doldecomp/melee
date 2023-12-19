@@ -20,10 +20,19 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
+#include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_CargoFall.h"
+#include "ftCommon/ftCo_CargoJump.h"
+#include "ftCommon/ftCo_CargoKneebend.h"
+#include "ftCommon/ftCo_CargoLanding.h"
+#include "ftCommon/ftCo_CargoThrow.h"
+#include "ftCommon/ftCo_CargoTurn.h"
+#include "ftCommon/ftCo_CargoWait.h"
+#include "ftCommon/ftCo_CargoWalk.h"
 #include "lb/lbmthp.h"
 #include "mp/mplib.h"
 
@@ -145,10 +154,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFWait0,
         ftDk_MF_CargoWait,
         (FtMoveId_ThrowF << 24) | (1 << 22),
-        ftDk_ThrowFWait0_Anim,
-        ftDk_ThrowFWait0_IASA,
-        ftDk_ThrowFWait0_Phys,
-        ftDk_ThrowFWait0_Coll,
+        ftCo_CargoWait_Anim,
+        ftCo_CargoWait_IASA,
+        ftCo_CargoWait_Phys,
+        ftCo_CargoWait_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -156,10 +165,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFWalkSlow,
         ftDk_MF_CargoWalk,
         FtMoveId_ThrowF << 24,
-        ftDk_ThrowFWalk_Anim,
-        ftDk_ThrowFWalk_IASA,
-        ftDk_ThrowFWalk_Phys,
-        ftDk_ThrowFWalk_Coll,
+        ftCo_CargoWalk_Anim,
+        ftCo_CargoWalk_IASA,
+        ftCo_CargoWalk_Phys,
+        ftCo_CargoWalk_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -167,10 +176,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFWalkMiddle,
         ftDk_MF_CargoWalk,
         FtMoveId_ThrowF << 24,
-        ftDk_ThrowFWalk_Anim,
-        ftDk_ThrowFWalk_IASA,
-        ftDk_ThrowFWalk_Phys,
-        ftDk_ThrowFWalk_Coll,
+        ftCo_CargoWalk_Anim,
+        ftCo_CargoWalk_IASA,
+        ftCo_CargoWalk_Phys,
+        ftCo_CargoWalk_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -178,10 +187,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFWalkFast,
         ftDk_MF_CargoWalk,
         FtMoveId_ThrowF << 24,
-        ftDk_ThrowFWalk_Anim,
-        ftDk_ThrowFWalk_IASA,
-        ftDk_ThrowFWalk_Phys,
-        ftDk_ThrowFWalk_Coll,
+        ftCo_CargoWalk_Anim,
+        ftCo_CargoWalk_IASA,
+        ftCo_CargoWalk_Phys,
+        ftCo_CargoWalk_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -189,10 +198,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFTurn,
         ftDk_MF_CargoTurn,
         FtMoveId_ThrowF << 24,
-        ftDk_ThrowFTurn_Anim,
-        ftDk_ThrowFTurn_IASA,
-        ftDk_ThrowFTurn_Phys,
-        ftDk_ThrowFTurn_Coll,
+        ftCo_CargoTurn_Anim,
+        ftCo_CargoTurn_IASA,
+        ftCo_CargoTurn_Phys,
+        ftCo_CargoTurn_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -200,10 +209,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFKneebend,
         ftDk_MF_CargoWait,
         FtMoveId_ThrowF << 24,
-        ftDk_ThrowFKneebend_Anim,
-        ftDk_ThrowFKneebend_IASA,
-        ftDk_ThrowFKneebend_Phys,
-        ftDk_ThrowFKneebend_Coll,
+        ftCo_CargoKneebend_Anim,
+        ftCo_CargoKneebend_IASA,
+        ftCo_CargoKneebend_Phys,
+        ftCo_CargoKneebend_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -211,10 +220,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFFall,
         ftDk_MF_CargoWait,
         FtMoveId_ThrowF << 24,
-        ftDk_ThrowFFall_Anim,
-        ftDk_ThrowFFall_IASA,
-        ftDk_ThrowFFall_Phys,
-        ftDk_ThrowFFall_Coll,
+        ftCo_CargoFall_Anim,
+        ftCo_CargoFall_IASA,
+        ftCo_CargoFall_Phys,
+        ftCo_CargoFall_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -222,10 +231,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFJump,
         ftDk_MF_CargoJump,
         FtMoveId_ThrowF << 24,
-        ftDk_ThrowFJump_Anim,
-        ftDk_ThrowFJump_IASA,
-        ftDk_ThrowFJump_Phys,
-        ftDk_ThrowFJump_Coll,
+        ftCo_CargoJump_Anim,
+        ftCo_CargoJump_IASA,
+        ftCo_CargoJump_Phys,
+        ftCo_CargoJump_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -233,10 +242,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFLanding,
         ftDk_MF_CargoWait,
         (FtMoveId_ThrowF << 24) | (1 << 22),
-        ftDk_ThrowFLanding_Anim,
+        ftCo_CargoLanding_Anim,
         NULL,
-        ftDk_ThrowFLanding_Phys,
-        ftDk_ThrowFLanding_Coll,
+        ftCo_CargoLanding_Phys,
+        ftCo_CargoLanding_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -244,10 +253,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFWait2,
         ftDk_MF_MS_360,
         FtMoveId_ThrowF << 24,
-        ftDk_ThrowFWait2_Anim,
+        ftCo_CargoWait2_Anim,
         NULL,
-        ftDk_ThrowFWait2_Phys,
-        ftDk_ThrowFWait2_Coll,
+        ftCo_CargoWait2_Phys,
+        ftCo_CargoWait2_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -255,10 +264,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFF,
         ftDk_MF_CargoThrowF,
         FtMoveId_CargoThrowF << 24,
-        ftDk_ThrowFF_Anim,
-        ftDk_ThrowFF_IASA,
-        ftDk_ThrowFF_Phys,
-        ftDk_ThrowFF_Coll,
+        ftCo_CargoThrowF_Anim,
+        ftCo_CargoThrowF_IASA,
+        ftCo_CargoThrowF_Phys,
+        ftCo_CargoThrowF_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -266,10 +275,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFB,
         ftDk_MF_CargoThrowB,
         FtMoveId_CargoThrowB << 24,
-        ftDk_ThrowFB_Anim,
-        ftDk_ThrowFB_IASA,
-        ftDk_ThrowFB_Phys,
-        ftDk_ThrowFB_Coll,
+        ftCo_CargoThrowB_Anim,
+        ftCo_CargoThrowB_IASA,
+        ftCo_CargoThrowB_Phys,
+        ftCo_CargoThrowB_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -277,10 +286,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFHi,
         ftDk_MF_CargoThrowHi,
         FtMoveId_CargoThrowHi << 24,
-        ftDk_ThrowFHi_Anim,
-        ftDk_ThrowFHi_IASA,
-        ftDk_ThrowFHi_Phys,
-        ftDk_ThrowFHi_Coll,
+        ftCo_CargoThrowHi_Anim,
+        ftCo_CargoThrowHi_IASA,
+        ftCo_CargoThrowHi_Phys,
+        ftCo_CargoThrowHi_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -288,10 +297,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFLw,
         ftDk_MF_CargoThrowLw,
         FtMoveId_CargoThrowLw << 24,
-        ftDk_ThrowFLw_Anim,
-        ftDk_ThrowFLw_IASA,
-        ftDk_ThrowFLw_Phys,
-        ftDk_ThrowFLw_Coll,
+        ftCo_CargoThrowLw_Anim,
+        ftCo_CargoThrowLw_IASA,
+        ftCo_CargoThrowLw_Phys,
+        ftCo_CargoThrowLw_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -299,10 +308,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFF,
         ftDk_MF_CargoThrowF,
         FtMoveId_CargoThrowF << 24,
-        ftDk_ThrowF_Anim,
-        ftDk_ThrowF_IASA,
-        ftDk_ThrowF_Phys,
-        ftDk_ThrowF_Coll,
+        ftCo_CargoThrowAir_Anim,
+        ftCo_CargoThrowAir_IASA,
+        ftCo_CargoThrowAir_Phys,
+        ftCo_CargoThrowAir_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -310,10 +319,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFB,
         ftDk_MF_CargoThrowB,
         FtMoveId_CargoThrowB << 24,
-        ftDk_ThrowF_Anim,
-        ftDk_ThrowF_IASA,
-        ftDk_ThrowF_Phys,
-        ftDk_ThrowF_Coll,
+        ftCo_CargoThrowAir_Anim,
+        ftCo_CargoThrowAir_IASA,
+        ftCo_CargoThrowAir_Phys,
+        ftCo_CargoThrowAir_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -321,10 +330,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFHi,
         ftDk_MF_CargoThrowHi,
         FtMoveId_CargoThrowHi << 24,
-        ftDk_ThrowF_Anim,
-        ftDk_ThrowF_IASA,
-        ftDk_ThrowF_Phys,
-        ftDk_ThrowF_Coll,
+        ftCo_CargoThrowAir_Anim,
+        ftCo_CargoThrowAir_IASA,
+        ftCo_CargoThrowAir_Phys,
+        ftCo_CargoThrowAir_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -332,10 +341,10 @@ MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
         ftDk_SM_ThrowFLw,
         ftDk_MF_CargoThrowLw,
         FtMoveId_CargoThrowLw << 24,
-        ftDk_ThrowF_Anim,
-        ftDk_ThrowF_IASA,
-        ftDk_ThrowF_Phys,
-        ftDk_ThrowF_Coll,
+        ftCo_CargoThrowAir_Anim,
+        ftCo_CargoThrowAir_IASA,
+        ftCo_CargoThrowAir_Phys,
+        ftCo_CargoThrowAir_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -585,9 +594,9 @@ void ftDk_Init_8010D774(HSD_GObj* gobj)
     ftDk_SpecialHi_DestroyAllEffects(gobj);
 }
 
-void ftDk_Init_OnItemPickup(HSD_GObj* gobj, bool arg1)
+void ftDk_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, arg1, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
 void ftDk_Init_OnItemInvisible(HSD_GObj* gobj)
@@ -610,7 +619,7 @@ void ftDk_Init_UnkMotionStates4(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* da = fp->dat_attrs;
     if (fp->fv.dk.x222C == da->SpecialN.x2C_MAX_ARM_SWINGS) {
-        ft_800BFFD0(fp, 57, 0);
+        ftCo_800BFFD0(fp, 57, 0);
     }
 }
 
@@ -661,7 +670,7 @@ void ftDk_Init_8010DB3C(HSD_GObj* gobj)
             f32 temp_f3 = donkey_attr->SpecialLw.x6C * fp->facing_dir;
             f32 temp_f6 = temp_f5 + temp_f3;
 
-            if (!mpLib_80056C54(colldata->x14C_ground.index, &fp->cur_pos, 0,
+            if (!mpLib_80056C54(colldata->floor.index, &fp->cur_pos, 0,
                                 &vec_list[i], 0, 0, temp_f6,
                                 donkey_attr->SpecialLw.x70,
                                 donkey_attr->SpecialLw.x68 * 1.5f,

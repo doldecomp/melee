@@ -38,10 +38,10 @@ void Item_802680CC(HSD_GObj* gobj);
 void Item_8026849C(HSD_GObj* gobj);
 
 /// Item spawn prefunction - spawn airborne
-void Item_80268B18(SpawnItem* spawnItem);
+HSD_GObj* Item_80268B18(SpawnItem* spawnItem);
 
 /// Item spawn prefunction - spawn grounded
-void Item_80268B5C(SpawnItem* spawnItem);
+Item_GObj* Item_80268B5C(SpawnItem* spawnItem);
 
 /// Item spawn prefunction - spawn grounded and toggle unknown true
 void Item_80268B9C(SpawnItem* spawnItem);
@@ -50,7 +50,7 @@ void Item_80268B9C(SpawnItem* spawnItem);
 void Item_80268D34(HSD_GObj* gobj, struct ItemStateDesc* itemStateDesc);
 
 /// Advance item animation?
-void Item_80268DD4(HSD_GObj* gobj, f32 arg8);
+void Item_80268DD4(HSD_GObj* gobj, float arg8);
 
 /// Copy item script
 void Item_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc);
@@ -77,16 +77,16 @@ void Item_8026A848(HSD_GObj* gobj, HSD_GObj* fgobj);
 void Item_8026A8EC(HSD_GObj* gobj);
 
 /// Make Item Held
-void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* pickupGFX, u8 pickupSFX);
+void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* owner_gobj, u8 part);
 
 /// Drop Item
-void Item_8026ABD8(HSD_GObj* gobj, Vec3* pos, f32 arg2);
+void Item_8026ABD8(HSD_GObj* gobj, Vec3* pos, float arg2);
 
 /// This is actually another Item Drop function
-void Item_8026AC74(HSD_GObj* gobj, enum_t drop_gfx, enum_t drop_sfx, f32 arg3);
+void Item_8026AC74(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, float arg3);
 
 /// Throw Item
-void Item_8026AD20(HSD_GObj* gobj, s32 drop_gfx, s32 drop_sfx, f32 arg8);
+void Item_8026AD20(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, float arg3);
 
 /// Make Item Airborne
 void Item_8026ADC0(HSD_GObj* gobj);
@@ -188,8 +188,6 @@ void Item_8026A0FC(HSD_GObj* gobj);
 /// Item Think - Exit Hitlag
 void Item_8026A1E8(HSD_GObj* gobj);
 
-void Item_802693E4(HSD_GObj* gobj);
-
 /// Item Think - Check for Blast Zones
 bool Item_802696CC(HSD_GObj* gobj);
 
@@ -215,7 +213,7 @@ bool OnTakeDamageThink(HSD_GObj* gobj, Item* item_data);
 bool OnClankThink(HSD_GObj* gobj, Item* item_data);
 bool OnGiveDamageThink(HSD_GObj* gobj, Item* item_data);
 void EnterHitlagThink(HSD_GObj* gobj, Item* item_data);
-void checkHitLag(f32 min_value, Item* item_data);
+void checkHitLag(float min_value, Item* item_data);
 void DestroyItemInline(HSD_GObj* gobj, Item* item_data);
 void ItemSwitch(HSD_GObj* gobj);
 void RunCallback(HSD_GObj* gobj, HSD_GObjEvent arg1);

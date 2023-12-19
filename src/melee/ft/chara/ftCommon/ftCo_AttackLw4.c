@@ -4,10 +4,14 @@
 
 #include "ftCo_AttackLw4.h"
 
+#include "ftCo_ItemGet.h"
+#include "ftCo_Wait.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 #include "ftNess/ftNs_AttackLw4.h"
 
 #include <placeholder.h>
@@ -16,7 +20,7 @@
 
 static bool checkLStick(ftCo_Fighter* fp)
 {
-    if (fp->input.x668 & HSD_Pad_A &&
+    if (fp->input.x668 & HSD_PAD_A &&
         fp->input.lstick.y <= p_ftCommonData->xD4 &&
         fp->x671_timer_lstick_tilt_y < p_ftCommonData->xD8)
     {
@@ -28,9 +32,10 @@ static bool checkLStick(ftCo_Fighter* fp)
 bool ftCo_AttackLw4_CheckInput(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (checkLStick(fp) || ft_800DF3A8(fp)) {
-        if (fp->item_gobj != NULL && (ft_80094E54(fp) || ft_800DF3DC(fp))) {
-            ft_800957F4(gobj, ftCo_MS_LightThrowLw4);
+    if (checkLStick(fp) || ftCo_800DF3A8(fp)) {
+        if (fp->item_gobj != NULL && (ftCo_80094E54(fp) || ftCo_800DF3DC(fp)))
+        {
+            ftCo_800957F4(gobj, ftCo_MS_LightThrowLw4);
             return true;
         }
         switch (fp->kind) {
@@ -49,8 +54,8 @@ void doEnter(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     fp->allow_interrupt = false;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_AttackLw4, Ft_MF_None, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_AttackLw4, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 }
 

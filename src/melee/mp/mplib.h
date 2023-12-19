@@ -1,9 +1,11 @@
-#ifndef MELEE_MP_MPLIB_H
-#define MELEE_MP_MPLIB_H
+#ifndef GALE01_04D164
+#define GALE01_04D164
+
+#include <dolphin/mtx/forward.h>
 
 #include "ft/fighter.h"
 
-#include <dolphin/mtx/types.h>
+#include <common_structs.h>
 
 typedef void (*mpLib_Callback)(s32, s32, CollData*, s32, s32, f32);
 
@@ -23,11 +25,11 @@ unk_t mpLib_80056A1C(void);
 bool mpLib_800509B8(f32 surface_normal_y, f32 surface_normal_x, f32 left_x,
                     f32 left_y, Vec3* coll_vec, unk_t, unk_t, unk_t, u32, u32);
 
-unk_t mpLib_80054CEC(void);
+u32 mpLib_80054CEC(enum_t);
 
 s32 mpLib_80051EC8(Vec3*, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32);
-void mpLib_80053DA4(u32, f32*);
-void mpLib_80053ECC(u32, f32*);
+void mpLib_80053DA4(int ledge_id, Vec3*);
+void mpLib_80053ECC(int ledge_id, Vec3*);
 void mpLib_80053FF4(s32, Vec3*);
 void mpLib_80054158(s32, Vec3*);
 
@@ -67,5 +69,10 @@ enum_t mpLib_80054C6C(int);
 void mpLib_80058AA0(void);
 enum_t mpLib_8004E090(int idx, Vec3*, f32*, u32*, Vec3* normal);
 void mpLib_800569EC(void);
+/* 04F8A4 */ UNK_RET mpLib_8004F8A4(UNK_PARAMS);
+/* 052508 */ UNK_RET mpLib_80052508(UNK_PARAMS);
+/* 054DFC */ void mpLib_80054DFC(enum_t, Vec3*);
+/* 0524DC */ bool mpLib_800524DC(int, int, int, int, int, int, float x,
+                                 float y, float z, float);
 
 #endif

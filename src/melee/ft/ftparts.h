@@ -6,8 +6,17 @@
 #include "ft/fighter.h"
 
 #include <dolphin/mtx/types.h>
+#include <baselib/perf.h>
 
-void ftParts_80074B0C(HSD_GObj*, s32, s32);
+extern HSD_PerfStat HSD_PerfCurrentStat;
+
+void ftParts_80074ACC(ftCo_GObj* gobj);
+u32 ftParts_8007506C(s32 ftkind, u32 part);
+
+void ftParts_JObjInfoInit(void);
+void ftParts_IntpJObjInfoInit(void);
+void ftParts_PObjInfoInit(void);
+void ftParts_80074B0C(HSD_GObj*, int, int);
 void ftParts_80073758(HSD_JObj*);
 void ftParts_80074148(void);
 void ftParts_80074170(void);

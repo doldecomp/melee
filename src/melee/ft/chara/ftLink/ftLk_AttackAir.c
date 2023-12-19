@@ -28,7 +28,7 @@ void ftLk_AttackAir_800EB3BC(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x5F8 == 0) {
         ftLk_DatAttrs* da = fp->dat_attrs;
-        ftColl_8007B1B8(gobj, &da->xC4, ftLk_800EB334);
+        ftColl_8007B1B8(gobj, (ShieldDesc*) &da->xC4, ftLk_800EB334);
         fp->x221B_b3 = true;
         fp->x221B_b4 = true;
         fp->x221B_b2 = true;
@@ -40,8 +40,8 @@ void ftLk_AttackAir_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_AttackAir_EnterFromCStick(gobj);
     if (fp->motion_id == ftCo_MS_AttackAirLw) {
-        fp->cb.x21C0_callback_OnGiveDamage = lwOnHit;
-        fp->cb.x21A0_callback_Anim = lwOnAnim;
+        fp->deal_dmg_cb = lwOnHit;
+        fp->anim_cb = lwOnAnim;
         fp->mv.lk.attackair.lw_frame_start = 0;
     }
 }
@@ -58,11 +58,11 @@ static void lwOnHit(HSD_GObj* gobj)
                       da->attackairlw_hit_anim_frame_start;
     ftColl_8007AFF8(gobj);
     fp->self_vel.y = da->attackairlw_hit_vel_y;
-    fp->x221A_flag.bits.b4 = false;
+    fp->x221A_b4 = false;
     fp->mv.lk.attackair.lw_frame_start = da->attackairlw_hit_anim_frame_start;
     if (fp->cur_anim_frame > frame_len) {
-        Fighter_ChangeMotionState(gobj, ftCo_MS_AttackAirLw, Ft_MF_None, NULL,
-                                  frame_len, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_AttackAirLw, Ft_MF_None,
+                                  frame_len, 1, 0, NULL);
     }
 }
 
@@ -84,8 +84,7 @@ static void lwOnAnim(HSD_GObj* gobj)
     float frame_start = fp->mv.lk.attackair.lw_frame_start;
     ftLk_DatAttrs* da = fp->dat_attrs;
     if (frame_start > 0) {
-        fp->mv.lk.attackair.lw_frame_start =
-            frame_start - fp->x89C_frameSpeedMul;
+        fp->mv.lk.attackair.lw_frame_start = frame_start - fp->frame_spd_mul;
         if (fp->mv.lk.attackair.lw_frame_start <= 0 &&
             fp->cur_anim_frame < da->attackairlw_hit_anim_frame_end)
         {

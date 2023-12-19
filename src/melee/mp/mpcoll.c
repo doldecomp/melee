@@ -1,5 +1,7 @@
 #include "mp/mpcoll.h"
 
+#include "math.h"
+
 #include "db/db_2253.h"
 #include "ft/ftlib.h"
 #include "gr/grdynamicattr.h"
@@ -12,11 +14,6 @@
 #include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
 #include <MSL/trigf.h>
-
-extern s32 mpColl_804D64A0;
-extern s32 mpColl_804D64A4;
-extern s32 mpColl_804D64A8;
-extern u32 mpColl_804D64AC;
 
 // 80041C78 https://decomp.me/scratch/V6eYQ
 void mpColl_80041C78(void)
@@ -131,28 +128,28 @@ void mpColl_80041EE4(CollData* cd)
     cd->x1C_vec = cd->x4_vec;
     cd->x28_vec = cd->x4_vec;
     cd->x3C = -1;
-    cd->x40 = -1;
-    cd->x44 = -1;
-    cd->x14C_ground.index = -1;
-    cd->x14C_ground.unk = 0;
-    cd->x14C_ground.normal.x = 0.0f;
-    cd->x14C_ground.normal.y = 1.0f;
-    cd->x14C_ground.normal.z = 0.0f;
-    cd->x188_ceiling.index = -1;
-    cd->x188_ceiling.unk = 0;
-    cd->x188_ceiling.normal.x = 0.0f;
-    cd->x188_ceiling.normal.y = -1.0f;
-    cd->x188_ceiling.normal.z = 0.0f;
-    cd->x174_leftwall.index = -1;
-    cd->x174_leftwall.unk = 0;
-    cd->x174_leftwall.normal.x = 0.0f;
-    cd->x174_leftwall.normal.y = 1.0f;
-    cd->x174_leftwall.normal.z = 0.0f;
-    cd->x160_rightwall.index = -1;
-    cd->x160_rightwall.unk = 0;
-    cd->x160_rightwall.normal.x = 0.0f;
-    cd->x160_rightwall.normal.y = -1.0f;
-    cd->x160_rightwall.normal.z = 0.0f;
+    cd->ledge_id_unk0 = -1;
+    cd->ledge_id_unk1 = -1;
+    cd->floor.index = -1;
+    cd->floor.unk = 0;
+    cd->floor.normal.x = 0.0f;
+    cd->floor.normal.y = 1.0f;
+    cd->floor.normal.z = 0.0f;
+    cd->ceiling.index = -1;
+    cd->ceiling.unk = 0;
+    cd->ceiling.normal.x = 0.0f;
+    cd->ceiling.normal.y = -1.0f;
+    cd->ceiling.normal.z = 0.0f;
+    cd->left_wall.index = -1;
+    cd->left_wall.unk = 0;
+    cd->left_wall.normal.x = 0.0f;
+    cd->left_wall.normal.y = 1.0f;
+    cd->left_wall.normal.z = 0.0f;
+    cd->right_wall.index = -1;
+    cd->right_wall.unk = 0;
+    cd->right_wall.normal.x = 0.0f;
+    cd->right_wall.normal.y = -1.0f;
+    cd->right_wall.normal.z = 0.0f;
     cd->x38 = mpColl_804D64AC;
     cd->x50 = 0.0f;
     cd->x48 = -1;
@@ -687,22 +684,21 @@ void mpColl_80043324(CollData* arg0, s32 arg1, s32 arg2)
     u8 temp_r3_2[4];
 #endif
 
-    if (arg0->x14C_ground.index != -1) {
-        temp_r3 =
-            grDynamicAttr_801CA284(&arg0->x4_vec, arg0->x14C_ground.index);
+    if (arg0->floor.index != -1) {
+        temp_r3 = grDynamicAttr_801CA284(&arg0->x4_vec, arg0->floor.index);
         if (temp_r3 != 0) {
-            arg0->x14C_ground.unk =
-                (arg0->x14C_ground.unk & 0xFFFFFF00) | (temp_r3 & 0xFF);
+            arg0->floor.unk =
+                (arg0->floor.unk & 0xFFFFFF00) | (temp_r3 & 0xFF);
         }
     }
     if ((arg1 != 0) || (arg0->env_flags & 0x800000) ||
         (arg0->env_flags & 0x100000) || (arg0->env_flags & 0x200000))
     {
-        func_80043324_inline(arg0, arg0->x14C_ground.index, arg2,
+        func_80043324_inline(arg0, arg0->floor.index, arg2,
                              arg0->x4_vec.y - arg0->x1C_vec.y);
     }
     if (arg0->env_flags & 0x6000) {
-        func_80043324_inline2(arg0, arg0->x188_ceiling.index, arg2,
+        func_80043324_inline2(arg0, arg0->ceiling.index, arg2,
                               arg0->x4_vec.y - arg0->x1C_vec.y);
     }
     if (g_debugLevel >= 3) {
@@ -929,16 +925,16 @@ void mpColl_800439FC(CollData* arg0)
     if (var_f31 < 0.0f) {
         var_f31 = -var_f31;
     }
-    if (mpLib_800501CC((arg0->x188_ceiling.normal.y * var_f31) + temp_f3,
-                       -((arg0->x188_ceiling.normal.x * var_f31) - temp_f4),
+    if (mpLib_800501CC((arg0->ceiling.normal.y * var_f31) + temp_f3,
+                       -((arg0->ceiling.normal.x * var_f31) - temp_f4),
                        temp_f3, temp_f4, &arg0->x140, NULL, NULL, NULL,
                        arg0->x48, arg0->x4C) != 0)
     {
         sp10.x = arg0->x140.x - var_f31;
         sp10.y = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.top.y;
-        if (mpLib_8004E090(arg0->x188_ceiling.index, (Vec3*) &sp10, &spC,
-                           (u32*) &arg0->x188_ceiling.unk,
-                           &arg0->x188_ceiling.normal) != -1)
+        if (mpLib_8004E090(arg0->ceiling.index, (Vec3*) &sp10, &spC,
+                           (u32*) &arg0->ceiling.unk,
+                           &arg0->ceiling.normal) != -1)
         {
             arg0->x4_vec.y += spC;
             arg0->x4_vec.x = sp10.x;
@@ -961,16 +957,15 @@ void mpColl_80043ADC(CollData* arg0)
     if (var_f31 < 0.0f) {
         var_f31 = -var_f31;
     }
-    if (mpLib_800509B8(-((arg0->x188_ceiling.normal.y * var_f31) - temp_f3),
-                       ((arg0->x188_ceiling.normal.x * var_f31) + temp_f4),
-                       temp_f3, temp_f4, &arg0->x140, NULL, NULL, NULL,
-                       arg0->x48, arg0->x4C) != 0)
+    if (mpLib_800509B8(-((arg0->ceiling.normal.y * var_f31) - temp_f3),
+                       ((arg0->ceiling.normal.x * var_f31) + temp_f4), temp_f3,
+                       temp_f4, &arg0->x140, NULL, NULL, NULL, arg0->x48,
+                       arg0->x4C) != 0)
     {
         sp10.x = arg0->x140.x + var_f31;
         sp10.y = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.top.y;
-        if (mpLib_8004E090(arg0->x188_ceiling.index, &sp10, &spC,
-                           &arg0->x188_ceiling.unk,
-                           &arg0->x188_ceiling.normal) != -1)
+        if (mpLib_8004E090(arg0->ceiling.index, &sp10, &spC,
+                           &arg0->ceiling.unk, &arg0->ceiling.normal) != -1)
         {
             arg0->x4_vec.y += spC;
             arg0->x4_vec.x = sp10.x;
@@ -985,7 +980,7 @@ bool mpColl_80043BBC(CollData* arg0, s32* arg1)
     s32 temp_r31;
     f32 new_var;
 
-    temp_r31 = mpLib_80052700(arg0->x14C_ground.index);
+    temp_r31 = mpLib_80052700(arg0->floor.index);
     new_var = arg0->x4_vec.x + arg0->xA4_ecbCurrCorrect.bottom.x;
     if ((mpLib_800501CC(new_var,
                         arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y,
@@ -1182,8 +1177,8 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
     if (mpLib_8004E398(arg1, &sp20, 0, 0, 0, temp_f1_2) != -1) {
         if (mpLib_800501CC(&arg0->x140, (s32) &sp1C, 0, 0, arg0->x48,
                            arg0->x4C,
-                           -((arg0->x14C_ground.normal.y * var_f31) - sp20),
-                           (arg0->x14C_ground.normal.x * var_f31) + sp24) != 0)
+                           -((arg0->floor.normal.y * var_f31) - sp20),
+                           (arg0->floor.normal.x * var_f31) + sp24) != 0)
         {
             sp20 = arg0->x140.x - var_f31;
             if (arg2 != 0) {
@@ -1191,9 +1186,8 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
             } else {
                 sp24 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y;
             }
-            if (mpLib_8004DD90(arg0->x14C_ground.index, &sp20, &sp30,
-                               &arg0->x14C_ground.unk,
-                               &arg0->x14C_ground.normal) != -1)
+            if (mpLib_8004DD90(arg0->floor.index, &sp20, &sp30,
+                               &arg0->floor.unk, &arg0->floor.normal) != -1)
             {
                 arg0->x4_vec.y += sp30;
                 arg0->x4_vec.x = sp20;
@@ -1219,9 +1213,8 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
             } else {
                 sp24 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y;
             }
-            if (mpLib_8004DD90(arg0->x14C_ground.index, &sp20, &sp30,
-                               &arg0->x14C_ground.unk,
-                               &arg0->x14C_ground.normal) != -1)
+            if (mpLib_8004DD90(arg0->floor.index, &sp20, &sp30,
+                               &arg0->floor.unk, &arg0->floor.normal) != -1)
             {
                 arg0->x4_vec.y += sp30;
                 arg0->x4_vec.x = sp20;

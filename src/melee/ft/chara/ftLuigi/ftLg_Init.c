@@ -11,6 +11,7 @@
 #include "types.h"
 
 #include "ft/ft_0877.h"
+#include "ft/ft_0C31.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
@@ -224,7 +225,7 @@ MotionState ftLg_Init_UnkMotionStates0[] = {
         FtMoveId_Default << 24,
         NULL,
         NULL,
-        ft_800C7158,
+        ftCo_800C7158,
         NULL,
         NULL,
     },
@@ -234,7 +235,7 @@ MotionState ftLg_Init_UnkMotionStates0[] = {
         FtMoveId_Default << 24,
         NULL,
         NULL,
-        ft_800C7200,
+        ftCo_800C7200,
         NULL,
         NULL,
     },
@@ -292,9 +293,9 @@ void ftLg_Init_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(item_list[0], It_Kind_Luigi_Fire);
 }
 
-void ftLg_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftLg_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
 void ftLg_Init_OnItemInvisible(HSD_GObj* gobj)
@@ -307,9 +308,9 @@ void ftLg_Init_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftLg_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftLg_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, flag, 1, 1);
 }
 
 void ftLg_Init_LoadSpecialAttrs(HSD_GObj* gobj)
@@ -327,7 +328,7 @@ void ftLg_Init_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, 1);
 }
 
-void ftLg_Init_UnkDemoCallbacks0(s32 arg0, s32* arg1, s32* arg2)
+void ftLg_Init_UnkDemoCallbacks0(int arg0, int* arg1, int* arg2)
 {
     if (arg0 != 10) {
         if (arg0 < 10 && arg0 >= 9) {

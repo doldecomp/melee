@@ -47,9 +47,7 @@ void C_MTXLookAt(Mtx m, Vec3* cam_pos, Vec3* up, Vec3* target);
 
 void PSMTXQuat(Mtx m, const Quaternion* q);
 void PSMTXReflect(Mtx m, const Vec3* p, const Vec3* n);
-void PSMTXTrans(Mtx m, f32 xT, f32 yT, f32 zT);
 void PSMTXTransApply(const Mtx src, Mtx dst, f32 xT, f32 yT, f32 zT);
-void PSMTXScale(Mtx m, f32 xS, f32 yS, f32 zS);
 void PSMTXScaleApply(const Mtx src, Mtx dst, f32 xS, f32 yS, f32 zS);
 void PSMTXRotRad(Mtx m, char axis, f32 rad);
 void PSMTXRotTrig(Mtx m, char axis, f32 sinA, f32 cosA);
@@ -70,10 +68,10 @@ void PSVECSubtract(Vec3 const* a, Vec3 const* b, Vec3* ab);
 void PSVECNormalize(Vec3* a, Vec3* b);
 
 void PSMTXIdentity(Mtx m);
-u32 PSMTXInverse(const Mtx src, Mtx inv);
-void PSMTXRotAxisRad(Mtx m, const Vec3* axis, f32 rad);
 void PSMTXTrans(Mtx m, f32 x_trans, f32 y_trans, f32 z_trans);
 void PSMTXScale(Mtx m, f32 x_scale, f32 y_scale, f32 z_scale);
-void PSMTXQuat(Mtx m, const Quaternion* q);
+
+void C_MTXLightPerspective(Mtx m, f32 fov, f32 aspect, f32 x_scale,
+                           f32 y_scale, f32 z_x_mult, f32 z_y_mult);
 
 #endif

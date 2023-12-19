@@ -2,14 +2,18 @@
 
 #include "ftSs_Init.h"
 #include "inlines.h"
+#include "math.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ftCommon/ftCo_FallSpecial.h"
 
 void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
 {
@@ -20,10 +24,10 @@ void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, 353, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 353, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftSamus_updateDamageDeathCBs(gobj);
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
     ftCommon_8007D7FC(fp);
     fp->cmd_vars[3] = 0;
     fp->cmd_vars[2] = 0;
@@ -31,7 +35,7 @@ void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->mv.ss.unk5.x0 = 0;
     ftAnim_8006EBA4(gobj);
-    efSync_Spawn(1154, gobj, fp->parts[FtPart_YRotN].x0_jobj);
+    efSync_Spawn(1154, gobj, fp->parts[FtPart_YRotN].joint);
     fp->fv.ss.x2244 = 1;
 }
 
@@ -40,10 +44,10 @@ void ftSs_SpecialAirHi_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    Fighter_ChangeMotionState(gobj, 354, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 354, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftSamus_updateDamageDeathCBs(gobj);
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
     ftCommon_8007D60C(fp);
     fp->cmd_vars[3] = 0;
     fp->cmd_vars[2] = 0;
@@ -53,7 +57,7 @@ void ftSs_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->self_vel.y = samus_attr->x44;
     ftCommon_8007D440(fp, samus_attr->x40);
     ftAnim_8006EBA4(gobj);
-    efSync_Spawn(1154, gobj, fp->parts[FtPart_YRotN].x0_jobj);
+    efSync_Spawn(1154, gobj, fp->parts[FtPart_YRotN].joint);
     fp->fv.ss.x2244 = 1;
 }
 
@@ -76,10 +80,10 @@ void ftSs_SpecialHi_Anim(HSD_GObj* gobj)
         ftSamus_DestroyAllUnsetx2444(gobj);
         ftCommon_8007D60C(fighter2);
         if (samus_attr->x50 == 0.0f) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
             return;
         }
-        ft_80096900(gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
+        ftCo_80096900(gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
     }
 }
 
@@ -95,10 +99,10 @@ void ftSs_SpecialAirHi_Anim(HSD_GObj* gobj)
         ftSamus_DestroyAllUnsetx2444(gobj);
         ftCommon_8007D60C(fighter2);
         if (samus_attr->x50 == 0.0f) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
             return;
         }
-        ft_80096900(gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
+        ftCo_80096900(gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
     }
 }
 
@@ -221,7 +225,7 @@ void ftSs_SpecialHi_Coll(HSD_GObj* gobj)
         }
         if (ft_CheckGroundAndLedge(gobj, direction)) {
             ftSamus_DestroyAllUnsetx2444(gobj);
-            ft_800D5CB0(gobj, 0, samus_attr->x50);
+            ftCo_800D5CB0(gobj, 0, samus_attr->x50);
             return;
         }
         if (ftCliffCommon_80081298(gobj)) {
@@ -257,7 +261,7 @@ void ftSs_SpecialAirHi_Coll(HSD_GObj* gobj)
         }
         if (ft_CheckGroundAndLedge(gobj, direction)) {
             ftSamus_DestroyAllUnsetx2444(gobj);
-            ft_800D5CB0(gobj, 0, samus_attr->x50);
+            ftCo_800D5CB0(gobj, 0, samus_attr->x50);
             return;
         }
         if (ftCliffCommon_80081298(gobj)) {

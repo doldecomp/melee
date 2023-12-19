@@ -833,7 +833,7 @@ grZakoGenerator_801CAF08:
 /* 801CAF28 001C7B08  88 03 00 0A */    lbz r0, 0xa(r3)
 /* 801CAF2C 001C7B0C  50 80 3E 30 */    rlwimi r0, r4, 7, 0x18, 0x18
 /* 801CAF30 001C7B10  98 03 00 0A */    stb r0, 0xa(r3)
-/* 801CAF34 001C7B14  80 6D C1 8C */    lwz r3, HSD_GObj_804D782C@sda21(r13)
+/* 801CAF34 001C7B14  80 6D C1 8C */    lwz r3, HSD_GObj_Entities@sda21(r13)
 /* 801CAF38 001C7B18  83 C3 00 24 */    lwz r30, 0x24(r3)
 /* 801CAF3C 001C7B1C  48 00 00 60 */    b .L_801CAF9C
 .L_801CAF40:

@@ -9,12 +9,20 @@
 #include "ftCo_AttackHi3.h"
 #include "ftCo_AttackHi4.h"
 #include "ftCo_AttackLw3.h"
+#include "ftCo_AttackLw4.h"
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
+#include "ftCo_ItemGet.h"
+#include "ftCo_ItemThrow.h"
+#include "ftCo_Shouldered.h"
+#include "ftCo_Wait.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
+#include "ft/ft_0C88.h"
+#include "ft/ft_0CDD.h"
+#include "ft/ft_0D14.h"
+#include "ft/ftswing.h"
 #include "ftGameWatch/ftGw_Attack11.h"
 
 #include <common_structs.h>
@@ -31,14 +39,14 @@
 bool ftCo_Attack1_CheckInput(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_Pad_A) {
+    if (fp->input.x668 & HSD_PAD_A) {
         if (fp->item_gobj != NULL) {
             if (it_8026B30C(fp->item_gobj) == 0) {
-                ft_800957F4(gobj, ftCo_MS_LightThrowF);
+                ftCo_800957F4(gobj, ftCo_MS_LightThrowF);
                 return true;
             }
-            if (fp->input.held_inputs & HSD_Pad_LR) {
-                ft_800957F4(gobj, ftCo_MS_LightThrowDrop);
+            if (fp->input.held_inputs & HSD_PAD_LR) {
+                ftCo_800957F4(gobj, ftCo_MS_LightThrowDrop);
                 return true;
             }
             switch (it_8026B30C(fp->item_gobj)) {
@@ -93,7 +101,7 @@ static MotionFlags getMotionFlags(ftCo_Fighter* fp)
     switch (fp->kind) {
     case FTKIND_PICHU:
     case FTKIND_PIKACHU:
-        fp->cb.x21EC_callback = onPkPc21EC;
+        fp->x21EC = onPkPc21EC;
         return Ft_MF_SkipAttackCount;
     default:
         return Ft_MF_None;
@@ -107,13 +115,13 @@ static void checkAttack11(ftCo_GObj* gobj)
     u8 _[8] = { 0 };
 #endif
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (!ft_80094790(gobj)) {
+    if (!ftCo_80094790(gobj)) {
         fp->allow_interrupt = false;
         fp->x2218_b1 = false;
         Fighter_ChangeMotionState(gobj, ftCo_MS_Attack11, getMotionFlags(fp),
-                                  NULL, 0, 1, 0);
+                                  0, 1, 0, NULL);
         ftAnim_8006EBA4(gobj);
-        fp->hitlag_mul = fp->co_attrs.x18C_Jab_2InputWindow;
+        fp->hitlag_mul = fp->co_attrs.jab_2_input_window;
         fp->unk_msid = ftCo_MS_Attack11;
         fp->x2218_b2 = false;
         fp->mv.co.attack1.x0 = 0;
@@ -136,21 +144,21 @@ void ftCo_Attack11_IASA(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->allow_interrupt) {
-        RETURN_IF(ftCo_AttackS4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackHi4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackLw4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackS3_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackHi3_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackLw3_CheckInput(gobj))
+        RETURN_IF(ftCo_AttackS4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackHi4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackLw4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackS3_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackHi3_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackLw3_CheckInput(gobj));
     }
-    RETURN_IF(ftCo_Attack_800D6A50(gobj))
-    RETURN_IF(checkAttack12(gobj))
+    RETURN_IF(ftCo_Attack_800D6A50(gobj));
+    RETURN_IF(checkAttack12(gobj));
     if (fp->allow_interrupt) {
-        RETURN_IF(ftCo_Jump_CheckInput(gobj))
-        RETURN_IF(ftCo_Dash_CheckInput(gobj))
-        RETURN_IF(ft_800D5FB0(gobj))
-        RETURN_IF(ftCo_Turn_CheckInput(gobj))
-        RETURN_IF(ftCo_Walk_CheckInput(gobj))
+        RETURN_IF(ftCo_Jump_CheckInput(gobj));
+        RETURN_IF(ftCo_Dash_CheckInput(gobj));
+        RETURN_IF(ftCo_800D5FB0(gobj));
+        RETURN_IF(ftCo_Turn_CheckInput(gobj));
+        RETURN_IF(ftCo_Walk_CheckInput(gobj));
     }
 }
 
@@ -180,12 +188,12 @@ static void doAttack12Rapid(ftCo_GObj* gobj)
 static void doAttack12Normal(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (!ft_80094790(gobj)) {
+    if (!ftCo_80094790(gobj)) {
         fp->allow_interrupt = false;
         fp->x2218_b1 = false;
-        Fighter_ChangeMotionState(gobj, ftCo_MS_Attack12, Ft_MF_None, NULL, 0,
-                                  1, 0);
-        fp->hitlag_mul = fp->co_attrs.x190_Jab_3InputWindow;
+        Fighter_ChangeMotionState(gobj, ftCo_MS_Attack12, Ft_MF_None, 0, 1, 0,
+                                  NULL);
+        fp->hitlag_mul = fp->co_attrs.jab_3_input_window;
         fp->unk_msid = ftCo_MS_Attack12;
         fp->mv.co.attack1.x0 = 0;
     }
@@ -213,7 +221,7 @@ bool checkAttack12(ftCo_GObj* gobj)
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->hitlag_mul > 0) {
         fp->hitlag_mul -= 1;
-        if (fp->input.x668 & HSD_Pad_A) {
+        if (fp->input.x668 & HSD_PAD_A) {
             fp->mv.co.attack1.x0 = true;
         }
     }
@@ -239,21 +247,21 @@ void ftCo_Attack12_IASA(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->allow_interrupt) {
-        RETURN_IF(ftCo_AttackS4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackHi4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackLw4_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackS3_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackHi3_CheckInput(gobj))
-        RETURN_IF(ftCo_AttackLw3_CheckInput(gobj))
+        RETURN_IF(ftCo_AttackS4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackHi4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackLw4_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackS3_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackHi3_CheckInput(gobj));
+        RETURN_IF(ftCo_AttackLw3_CheckInput(gobj));
     }
-    RETURN_IF(ftCo_Attack_800D6A50(gobj))
-    RETURN_IF(checkAttack13(gobj))
+    RETURN_IF(ftCo_Attack_800D6A50(gobj));
+    RETURN_IF(checkAttack13(gobj));
     if (fp->allow_interrupt) {
-        RETURN_IF(ftCo_Jump_CheckInput(gobj))
-        RETURN_IF(ftCo_Dash_CheckInput(gobj))
-        RETURN_IF(ft_800D5FB0(gobj))
-        RETURN_IF(ftCo_Turn_CheckInput(gobj))
-        RETURN_IF(ftCo_Walk_CheckInput(gobj))
+        RETURN_IF(ftCo_Jump_CheckInput(gobj));
+        RETURN_IF(ftCo_Dash_CheckInput(gobj));
+        RETURN_IF(ftCo_800D5FB0(gobj));
+        RETURN_IF(ftCo_Turn_CheckInput(gobj));
+        RETURN_IF(ftCo_Walk_CheckInput(gobj));
     }
 }
 
@@ -265,11 +273,11 @@ static void doAttack13(ftCo_GObj* gobj)
         doAttack12Rapid(gobj);
         return;
     default:
-        if (!ft_80094790(gobj)) {
+        if (!ftCo_80094790(gobj)) {
             fp->allow_interrupt = false;
             fp->x2218_b1 = false;
-            Fighter_ChangeMotionState(gobj, ftCo_MS_Attack13, Ft_MF_None, NULL,
-                                      0, 1, 0);
+            Fighter_ChangeMotionState(gobj, ftCo_MS_Attack13, Ft_MF_None, 0, 1,
+                                      0, NULL);
         }
         return;
     }
@@ -280,7 +288,7 @@ bool checkAttack13(ftCo_GObj* gobj)
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->hitlag_mul > 0) {
         fp->hitlag_mul -= 1;
-        if (fp->input.x668 & HSD_Pad_A) {
+        if (fp->input.x668 & HSD_PAD_A) {
             fp->mv.co.attack1.x0 = true;
         }
     }

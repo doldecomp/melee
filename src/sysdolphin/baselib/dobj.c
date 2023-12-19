@@ -224,16 +224,6 @@ HSD_DObj* HSD_DObjLoadDesc(HSD_DObjDesc* desc)
     return dobj;
 }
 
-inline void hsdDelete(void* object)
-{
-    if (object == NULL) {
-        return;
-    }
-
-    HSD_CLASS_METHOD(object)->release((HSD_Class*) object);
-    HSD_CLASS_METHOD(object)->destroy((HSD_Class*) object);
-}
-
 void HSD_DObjRemove(HSD_DObj* dobj)
 {
     hsdDelete(dobj);

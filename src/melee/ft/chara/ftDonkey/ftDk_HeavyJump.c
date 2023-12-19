@@ -3,19 +3,19 @@
 #include "ftDk_HeavyFall.h"
 
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_Wait.h"
 
 void ftDk_HeavyJump_IASA(HSD_GObj* gobj)
 {
-    if (ft_80094EA4(gobj)) {
-        return;
-    }
+    RETURN_IF(ftCo_80094EA4(gobj));
 }
 
 void ftDk_HeavyJump_Phys(HSD_GObj* gobj)
 {
-    ft_800CB438(gobj);
+    ftCo_800CB438(gobj);
 }
 
 void ftDk_HeavyJump_Coll(HSD_GObj* gobj)
@@ -33,8 +33,8 @@ void ftDk_MS_348_800E04A4(HSD_GObj* gobj, s32 arg1)
     fp->mv.dk.unk7.x0 = 0;
     fp->mv.dk.unk7.x8 = donkey_attr->cargo_hold.x24_JUMP_STARTUP_LAG;
     donkey_attr2 = getFtSpecialAttrs2CC(fp);
-    Fighter_ChangeMotionState(gobj, donkey_attr2->motion_state + 5, 0, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, donkey_attr2->motion_state + 5, 0, 0, 1, 0,
+                              NULL);
     ftAnim_SetAnimRate(gobj, 0);
 }
 

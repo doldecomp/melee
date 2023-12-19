@@ -13,7 +13,7 @@
 
 bool ftFx_AppealS_CheckIfUsed(Fighter* fp)
 {
-    s32* attackCount = Player_GetTotalAttackCountPtr((s32) fp->xC_playerID);
+    s32* attackCount = Player_GetTotalAttackCountPtr((s32) fp->player_id);
     if ((pl_800386D8(attackCount, FTFOX_APPEALS_ATTACKID) != 0U) &&
         (grCorneria_801E2D14() != false))
     {
@@ -46,12 +46,12 @@ bool ftFx_AppealS_CheckInput(HSD_GObj* gobj)
 
     if (((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) &&
         (grCorneria_801E2CE8() != false) &&
-        ((fp->input.held_inputs & HSD_Pad_DpadDown) == false) &&
+        ((fp->input.held_inputs & HSD_PAD_DPADDOWN) == false) &&
         ((u8) fp->x682 == true))
     {
         if (ftFox_CheckAppealSCount() == 0) {
             ftFx_AppealS_Enter(gobj);
-            pl_80040120(fp->xC_playerID, fp->x221F_flag.bits.b4);
+            pl_80040120(fp->player_id, fp->x221F_b4);
             return true;
         }
     }
@@ -90,13 +90,13 @@ void ftFx_AppealS_Enter(HSD_GObj* gobj)
     facingDir = ftFox_AppealS_GetLR(1.0f, fp->facing_dir);
 
     fp->mv.fx.AppealS.facingDir = facingDir;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
 
     actionDir = fp->mv.fx.AppealS.facingDir;
     animCount = fp->mv.fx.AppealS.animCount;
 
     Fighter_ChangeMotionState(gobj, ASID_AppealS[actionDir][animCount], 0,
-                              NULL, 0.0f, 1.0f, 0.0f);
+                              0.0f, 1.0f, 0.0f, NULL);
 }
 
 /// Fox & Falco's Special Taunt OnTakeDamage/OnDeath callback
@@ -118,14 +118,14 @@ void ftFx_AppealS_Anim(HSD_GObj* gobj)
         switch (ftKind) {
         case FTKIND_FOX:
             if (grCorneria_801E2B80() != false) {
-                fp->cb.x21E0_callback_OnDeath = ftFx_AppealS_OnTakeDamage;
+                fp->death1_cb = ftFx_AppealS_OnTakeDamage;
             }
 
             break;
 
         case FTKIND_FALCO:
             if (grCorneria_801E2C34() != false) {
-                fp->cb.x21E0_callback_OnDeath = ftFx_AppealS_OnTakeDamage;
+                fp->death1_cb = ftFx_AppealS_OnTakeDamage;
             }
 
             break;
@@ -141,7 +141,7 @@ void ftFx_AppealS_Anim(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj,
                                   ASID_AppealS[fp->mv.fx.AppealS.facingDir]
                                               [fp->mv.fx.AppealS.animCount],
-                                  0, NULL, 0.0f, 1.0f, 0.0f);
+                                  0, 0.0f, 1.0f, 0.0f, NULL);
     }
 }
 
@@ -165,5 +165,5 @@ static void ftFx_AppealS_OnTakeDamage(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     grCorneria_801E2AF4();
-    fp->cb.x21E0_callback_OnDeath = NULL;
+    fp->death1_cb = NULL;
 }

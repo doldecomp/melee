@@ -10,10 +10,12 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_FallSpecial.h"
 #include "it/it_27CF.h"
 
 #include <dolphin/mtx/types.h>
@@ -21,7 +23,7 @@
 void ftPk_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 341, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 341, 0, 0.0f, 1.0f, 0.0f, 0);
     fp->cmd_vars[3] = 0;
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
@@ -32,7 +34,7 @@ void ftPk_SpecialN_Enter(HSD_GObj* gobj)
 void ftPk_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 342, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 342, 0, 0.0f, 1.0f, 0.0f, 0);
     fp->cmd_vars[3] = 0;
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
@@ -111,10 +113,10 @@ void ftPk_SpecialAirN_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (0.0f == pika_attr->x10) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
             return;
         }
-        ft_80096900(gobj, 1, 0, 1, 1.0f, pika_attr->x10);
+        ftCo_80096900(gobj, 1, 0, 1, 1.0f, pika_attr->x10);
     }
 }
 
@@ -138,8 +140,8 @@ void ftPk_SpecialN_Coll(HSD_GObj* gobj)
     if (!ft_80082708(gobj)) {
         fp = GET_FIGHTER(gobj);
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 342, 206327938, 0, fp->cur_anim_frame,
-                                  1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 342, 206327938, fp->cur_anim_frame,
+                                  1.0f, 0.0f, 0);
     }
 }
 
@@ -150,8 +152,8 @@ void ftPk_SpecialAirN_Coll(HSD_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         ftCommon_8007D7FC(fp);
         fp->self_vel.y = 0.0f;
-        Fighter_ChangeMotionState(gobj, 341, 206327938, 0, fp->cur_anim_frame,
-                                  1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 341, 206327938, fp->cur_anim_frame,
+                                  1.0f, 0.0f, 0);
     }
 }
 
@@ -165,12 +167,12 @@ void ftPk_SpecialN_SpawnEffect0(HSD_GObj* gobj)
     if (!fp->x2219_b0) {
         Fighter_Part part = ftParts_8007500C(fp, FtPart_HipN);
         tempObj = gobj;
-        efSync_Spawn(1214, tempObj2 = tempObj, fp->parts[part].x0_jobj);
+        efSync_Spawn(1214, tempObj2 = tempObj, fp->parts[part].joint);
         fp->x2219_b0 = true;
     }
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
@@ -183,12 +185,12 @@ void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
     if (!fp->x2219_b0) {
         Fighter_Part part = ftParts_8007500C(fp, FtPart_HipN);
         tempObj = gobj;
-        efSync_Spawn(1215, tempObj2 = tempObj, fp->parts[part].x0_jobj);
+        efSync_Spawn(1215, tempObj2 = tempObj, fp->parts[part].joint);
         fp->x2219_b0 = true;
     }
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 void ftPk_SpecialN_80124DC8(HSD_GObj* gobj)

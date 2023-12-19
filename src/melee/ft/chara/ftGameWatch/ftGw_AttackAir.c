@@ -7,6 +7,7 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0D14.h"
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_AttackAir.h"
 #include "ftCommon/ftCo_LandingAir.h"
@@ -27,18 +28,17 @@ void ftGw_AttackAirN_ItemParachuteSetup(HSD_GObj* gobj)
     if (fp->fv.gw.x2258_parachuteGObj != NULL) {
         ftGw_AttackAirN_ItemParachuteOnLand(gobj);
     } else {
-        lb_8000B1CC(fp->parts[FtPart_TransN].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->parts[FtPart_TransN].joint, NULL, &sp10);
         fp->fv.gw.x2258_parachuteGObj =
             it_802C6C38(gobj, &sp10, FtPart_TransN, fp->facing_dir);
         if (fp->fv.gw.x2258_parachuteGObj != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
-            fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
-            fp->cb.x21D4_callback_EnterHitlag =
-                ftGw_AttackAirN_EnterItemHitlag;
-            fp->cb.x21D8_callback_ExitHitlag = ftGw_AttackAirN_ExitItemHitlag;
+            fp->death2_cb = ftGw_Init_OnDamage;
+            fp->take_dmg_cb = ftGw_Init_OnDamage;
+            fp->pre_hitlag_cb = ftGw_AttackAirN_EnterItemHitlag;
+            fp->post_hitlag_cb = ftGw_AttackAirN_ExitItemHitlag;
         }
     }
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->accessory4_cb = NULL;
 }
 
 // 0x8014B074
@@ -53,11 +53,11 @@ void ftGw_AttackAirN_ItemParachuteOnLand(HSD_GObj* gobj)
         if (fp->motion_id == ftGw_MS_LandingAirN) {
             it_802C6E50(fp->fv.gw.x2258_parachuteGObj);
         }
-        fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
-        fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
-        fp->cb.x21D4_callback_EnterHitlag = ftGw_AttackAirN_EnterItemHitlag;
-        fp->cb.x21D8_callback_ExitHitlag = ftGw_AttackAirN_ExitItemHitlag;
-        fp->cb.x21BC_callback_Accessory4 = NULL;
+        fp->death2_cb = ftGw_Init_OnDamage;
+        fp->take_dmg_cb = ftGw_Init_OnDamage;
+        fp->pre_hitlag_cb = ftGw_AttackAirN_EnterItemHitlag;
+        fp->post_hitlag_cb = ftGw_AttackAirN_ExitItemHitlag;
+        fp->accessory4_cb = NULL;
     }
 }
 
@@ -70,8 +70,8 @@ void ftGw_AttackAirN_ItemParachuteSetFlag(HSD_GObj* gobj)
 
     ftGw_AttackAirN_ExitItemHitlag(gobj);
     fp->fv.gw.x2258_parachuteGObj = NULL;
-    fp->cb.x21E4_callback_OnDeath2 = NULL;
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    fp->death2_cb = NULL;
+    fp->take_dmg_cb = NULL;
 }
 
 /// Remove Parachute item
@@ -117,18 +117,17 @@ void ftGw_AttackAirN_ItemTurtleSetup(HSD_GObj* gobj)
     if (fp->fv.gw.x225C_turtleGObj != NULL) {
         ftGw_AttackAirN_ItemTurtleOnLand(gobj);
     } else {
-        lb_8000B1CC(fp->parts[FtPart_LShoulderN].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->parts[FtPart_LShoulderN].joint, NULL, &sp10);
         fp->fv.gw.x225C_turtleGObj =
             it_802C6F40(gobj, &sp10, FtPart_LShoulderN, fp->facing_dir);
         if (fp->fv.gw.x225C_turtleGObj != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
-            fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
-            fp->cb.x21D4_callback_EnterHitlag =
-                ftGw_AttackAirN_EnterItemHitlag;
-            fp->cb.x21D8_callback_ExitHitlag = ftGw_AttackAirN_ExitItemHitlag;
+            fp->death2_cb = ftGw_Init_OnDamage;
+            fp->take_dmg_cb = ftGw_Init_OnDamage;
+            fp->pre_hitlag_cb = ftGw_AttackAirN_EnterItemHitlag;
+            fp->post_hitlag_cb = ftGw_AttackAirN_ExitItemHitlag;
         }
     }
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->accessory4_cb = NULL;
 }
 
 // 0x8014B268
@@ -145,11 +144,11 @@ static void ftGw_AttackAirN_ItemTurtleOnLand(HSD_GObj* gobj)
             it_802C7158(fp->fv.gw.x225C_turtleGObj);
         }
 
-        fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
-        fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
-        fp->cb.x21D4_callback_EnterHitlag = ftGw_AttackAirN_EnterItemHitlag;
-        fp->cb.x21D8_callback_ExitHitlag = ftGw_AttackAirN_ExitItemHitlag;
-        fp->cb.x21BC_callback_Accessory4 = NULL;
+        fp->death2_cb = ftGw_Init_OnDamage;
+        fp->take_dmg_cb = ftGw_Init_OnDamage;
+        fp->pre_hitlag_cb = ftGw_AttackAirN_EnterItemHitlag;
+        fp->post_hitlag_cb = ftGw_AttackAirN_ExitItemHitlag;
+        fp->accessory4_cb = NULL;
     }
 }
 
@@ -162,8 +161,8 @@ void ftGw_AttackAirN_ItemTurtleSetFlag(HSD_GObj* gobj)
 
     ftGw_AttackAirN_ExitItemHitlag(gobj);
     fp->fv.gw.x225C_turtleGObj = NULL;
-    fp->cb.x21E4_callback_OnDeath2 = NULL;
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    fp->death2_cb = NULL;
+    fp->take_dmg_cb = NULL;
 }
 
 // 0x8014B320
@@ -206,18 +205,17 @@ void ftGw_AttackAirN_ItemSparkySetup(HSD_GObj* gobj)
     if (fp->fv.gw.x2260_sparkyGObj != NULL) {
         ftGw_AttackAirN_ItemSparkyOnLand(gobj);
     } else {
-        lb_8000B1CC(fp->parts[FtPart_LHandN].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->parts[FtPart_LHandN].joint, NULL, &sp10);
         fp->fv.gw.x2260_sparkyGObj =
             it_802C720C(gobj, &sp10, FtPart_LHandN, fp->facing_dir);
         if (fp->fv.gw.x2260_sparkyGObj != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
-            fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
-            fp->cb.x21D4_callback_EnterHitlag =
-                ftGw_AttackAirN_EnterItemHitlag;
-            fp->cb.x21D8_callback_ExitHitlag = ftGw_AttackAirN_ExitItemHitlag;
+            fp->death2_cb = ftGw_Init_OnDamage;
+            fp->take_dmg_cb = ftGw_Init_OnDamage;
+            fp->pre_hitlag_cb = ftGw_AttackAirN_EnterItemHitlag;
+            fp->post_hitlag_cb = ftGw_AttackAirN_ExitItemHitlag;
         }
     }
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->accessory4_cb = NULL;
 }
 
 // 0x8014B45C
@@ -233,11 +231,11 @@ void ftGw_AttackAirN_ItemSparkyOnLand(HSD_GObj* gobj)
             it_802C7424(fp->fv.gw.x2260_sparkyGObj);
         }
 
-        fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
-        fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
-        fp->cb.x21D4_callback_EnterHitlag = ftGw_AttackAirN_EnterItemHitlag;
-        fp->cb.x21D8_callback_ExitHitlag = ftGw_AttackAirN_ExitItemHitlag;
-        fp->cb.x21BC_callback_Accessory4 = NULL;
+        fp->death2_cb = ftGw_Init_OnDamage;
+        fp->take_dmg_cb = ftGw_Init_OnDamage;
+        fp->pre_hitlag_cb = ftGw_AttackAirN_EnterItemHitlag;
+        fp->post_hitlag_cb = ftGw_AttackAirN_ExitItemHitlag;
+        fp->accessory4_cb = NULL;
     }
 }
 
@@ -250,8 +248,8 @@ void ftGw_AttackAirN_ItemSparkySetFlag(HSD_GObj* gobj)
 
     ftGw_AttackAirN_ExitItemHitlag(gobj);
     fp->fv.gw.x2260_sparkyGObj = NULL;
-    fp->cb.x21E4_callback_OnDeath2 = NULL;
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    fp->death2_cb = NULL;
+    fp->take_dmg_cb = NULL;
 }
 
 // 0x8014B514
@@ -351,7 +349,7 @@ void ftGw_AttackAirN_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCo_AttackAir_EnterFromMsid(gobj, ftGw_MS_AttackAirN);
-    fp->cb.x21BC_callback_Accessory4 = ftGw_AttackAirN_ItemParachuteSetup;
+    fp->accessory4_cb = ftGw_AttackAirN_ItemParachuteSetup;
 }
 
 // 0x8014B720
@@ -389,7 +387,7 @@ void ftGw_AttackAirN_Coll(HSD_GObj* gobj)
 static void ftGw_LandingAirN_Init(HSD_GObj*);
 
 /// Mr. Game & Watch - LandingAirN Think
-void ftGw_LandingAirN_Enter(HSD_GObj* gobj, float lag)
+void ftGw_LandingAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -412,11 +410,11 @@ void ftGw_LandingAirN_Enter(HSD_GObj* gobj, float lag)
 
     if ((u32) fp->cmd_vars[0] != 0U) {
         ftGw_LandingAirN_Init(gobj);
-        fp->cb.x21BC_callback_Accessory4 = ftGw_AttackAirN_ItemParachuteOnLand;
+        fp->accessory4_cb = ftGw_AttackAirN_ItemParachuteOnLand;
         return;
     }
 
-    ft_800D5BF8(gobj);
+    ftCo_800D5BF8(gobj);
     ftGw_Init_OnDamage(gobj);
 }
 
@@ -428,7 +426,7 @@ static void ftGw_AttackAirB_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCo_AttackAir_EnterFromMsid(gobj, ftGw_MS_AttackAirB);
-    fp->cb.x21BC_callback_Accessory4 = ftGw_AttackAirN_ItemTurtleSetup;
+    fp->accessory4_cb = ftGw_AttackAirN_ItemTurtleSetup;
 }
 
 // 0x8014B87C
@@ -464,7 +462,7 @@ void ftGw_AttackAirB_Coll(HSD_GObj* gobj)
 }
 
 /// Mr. Game & Watch - LandingAirB Think
-void ftGw_LandingAirB_Enter(HSD_GObj* gobj, float lag)
+void ftGw_LandingAirB_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -487,11 +485,11 @@ void ftGw_LandingAirB_Enter(HSD_GObj* gobj, float lag)
 
     if ((u32) fp->cmd_vars[0] != 0) {
         ftGw_LandingAirB_Init(gobj);
-        fp->cb.x21BC_callback_Accessory4 = ftGw_AttackAirN_ItemTurtleOnLand;
+        fp->accessory4_cb = ftGw_AttackAirN_ItemTurtleOnLand;
         return;
     }
 
-    ft_800D5BF8(gobj);
+    ftCo_800D5BF8(gobj);
     ftGw_Init_OnDamage(gobj);
 }
 
@@ -501,7 +499,7 @@ static void ftGw_AttackAirHi_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCo_AttackAir_EnterFromMsid(gobj, ftGw_MS_AttackAirHi);
-    fp->cb.x21BC_callback_Accessory4 = ftGw_AttackAirN_ItemSparkySetup;
+    fp->accessory4_cb = ftGw_AttackAirN_ItemSparkySetup;
 }
 
 /// Mr. Game & Watch's Up Aerial Animation callback
@@ -529,7 +527,7 @@ void ftGw_AttackAirHi_Coll(HSD_GObj* gobj)
 }
 
 /// Mr. Game & Watch - LandingAirHi Think
-void ftGw_LandingAirHi_Enter(HSD_GObj* gobj, float lag)
+void ftGw_LandingAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -552,11 +550,11 @@ void ftGw_LandingAirHi_Enter(HSD_GObj* gobj, float lag)
 
     if (fp->cmd_vars[0] != 0) {
         ftGw_LandingAirHi_Init(gobj);
-        fp->cb.x21BC_callback_Accessory4 = ftGw_AttackAirN_ItemSparkyOnLand;
+        fp->accessory4_cb = ftGw_AttackAirN_ItemSparkyOnLand;
         return;
     }
 
-    ft_800D5BF8(gobj);
+    ftCo_800D5BF8(gobj);
     ftGw_Init_OnDamage(gobj);
 }
 

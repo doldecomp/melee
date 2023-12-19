@@ -4,12 +4,16 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
+#include "ft/ft_0D14.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_ItemGet.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 
 void ftDk_HeavyWait1_IASA(HSD_GObj* gobj)
 {
-    if (!ft_80094EA4(gobj)) {
-        ft_800CB59C(gobj);
+    if (!ftCo_80094EA4(gobj)) {
+        ftCo_800CB59C(gobj);
     }
 }
 
@@ -23,14 +27,14 @@ void ftDk_HeavyWait1_Coll(HSD_GObj* gobj)
     ftDk_HeavyWait0_Coll(gobj);
 }
 
-void ftDk_MS_346_800E05E4(HSD_GObj* gobj, float lag)
+void ftDk_MS_346_800E05E4(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
     fp->mv.dk.unk8.x4 = donkey_attr->cargo_hold.x28_LANDING_LAG;
     donkey_attr = getFtSpecialAttrs2CC(fp);
-    ft_800D5AEC(gobj, donkey_attr->motion_state + 8, 1, 0, fp, 0, 1);
+    ftCo_800D5AEC(gobj, donkey_attr->motion_state + 8, 1, 0, 0, 1);
     ftAnim_SetAnimRate(gobj, 0);
 }
 

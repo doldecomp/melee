@@ -5,12 +5,15 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_ItemGet.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 
 void ftDk_HeavyFall_IASA(HSD_GObj* gobj)
 {
-    if (ft_80094EA4(gobj)) {
+    if (ftCo_80094EA4(gobj)) {
         return;
     }
 }
@@ -27,7 +30,7 @@ void ftDk_HeavyFall_Coll(HSD_GObj* gobj)
 
 bool ftDk_MS_347_800E0378(HSD_GObj* gobj)
 {
-    bool result = ft_800CAE80(gobj);
+    bool result = ftCo_800CAE80(gobj);
     if (result) {
         ftDk_MS_348_800E04A4(gobj, result);
         return true;
@@ -42,8 +45,8 @@ void ftDk_MS_347_800E03C0(HSD_GObj* gobj)
     ftDonkeyAttributes* donkey_attr;
     ftCommon_8007D5D4(fp);
     donkey_attr = getFtSpecialAttrs2CC(fp);
-    Fighter_ChangeMotionState(gobj, donkey_attr->motion_state + 7, 0, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, donkey_attr->motion_state + 7, 0, 0, 1, 0,
+                              NULL);
     ftAnim_SetAnimRate(gobj, 0);
-    ft_800CB110(gobj, 1, 1);
+    ftCo_800CB110(gobj, 1, 1);
 }

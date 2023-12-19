@@ -3,6 +3,7 @@
 #include "ftMh_ThrownMasterHand.h"
 
 #include "ft/ft_0877.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftbosslib.h"
 #include "ft/inlines.h"
 #include "it/it_27CF.h"
@@ -14,7 +15,7 @@ bool ftMh_MS_343_80151428(Vec3* vec)
     HSD_GObj* gobj = ftBossLib_8015C3E8(27);
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
-        lb_8000B1CC(fp->parts[FtPart_WaistN].x0_jobj, 0, vec);
+        lb_8000B1CC(fp->parts[FtPart_WaistN].joint, 0, vec);
         return true;
     }
     return false;
@@ -38,7 +39,7 @@ inline void func_80151484_inline1(HSD_GObj* gobj)
     lbAudioAx_800236B8(fp->mv.mh.unk0.x2C);
     lbAudioAx_800236B8(fp->mv.mh.unk0.x30);
     if (fp->mv.mh.unk0.x20) {
-        ftMh_CaptureWaitMasterHand_80155D1C(fp->x1A58_interactedFighter);
+        ftMh_CaptureWaitMasterHand_80155D1C(fp->victim_gobj);
     }
     fp->self_vel.y = da->x14C;
     fp->self_vel.z = da->x154;
@@ -55,7 +56,7 @@ void ftMh_MS_343_80151484(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = 0;
     func_80151484_inline1(gobj);
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Damage, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Damage, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
     ft_800881D8(fp, 320023, 127, 64);
     ft_80088148(fp, 320024, 127, 64);
@@ -78,11 +79,11 @@ void ftMh_Damage_Anim(HSD_GObj* gobj)
         fp->cmd_vars[0] = 0;
     }
     if (fp->mv.mh.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Damage2, 0, 0, 0, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Damage2, 0, 0, 1, 0, 0);
         ftAnim_8006EBA4(gobj);
     }
     if (--fp->mv.mh.unk0.x8 == 0) {
-        ft_800D4F24(gobj, 0);
+        ftCo_800D4F24(gobj, 0);
     }
 }
 
@@ -99,10 +100,10 @@ void ftMh_MS_345_Anim(HSD_GObj* gobj)
         fp->cmd_vars[0] = 0;
     }
     if (fp->mv.mh.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Damage2, 0, 0, 0, 1, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Damage2, 0, 0, 1, 0, 0);
         ftAnim_8006EBA4(gobj);
     }
     if (--fp->mv.mh.unk0.x8 == 0) {
-        ft_800D4F24(gobj, 0);
+        ftCo_800D4F24(gobj, 0);
     }
 }

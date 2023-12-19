@@ -1,16 +1,23 @@
 #include <platform.h>
+#include "forward.h"
 #include "ft/forward.h"
-#include "ftCommon/forward.h"
 
 #include "ftCo_AttackS3.h"
 
 #include "ftCo_08A6.h"
+#include "ftCo_ItemGet.h"
+#include "ftCo_ItemThrow.h"
+#include "ftCo_Shouldered.h"
+#include "ftCo_Wait.h"
+#include "math.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0CDD.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
+#include "ft/ftswing.h"
 
 #include <placeholder.h>
 
@@ -19,15 +26,15 @@
 bool ftCo_AttackS3_CheckInput(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_Pad_A &&
+    if (fp->input.x668 & HSD_PAD_A &&
         fp->input.lstick.x * fp->facing_dir >= p_ftCommonData->x98)
     {
         if (ABS(ftCo_GetLStickAngle(fp)) < p_ftCommonData->x20) {
             if (fp->item_gobj) {
-                if (fp->input.held_inputs & HSD_Pad_LR ||
+                if (fp->input.held_inputs & HSD_PAD_LR ||
                     it_8026B30C(fp->item_gobj) == 0)
                 {
-                    ft_800957F4(gobj, ftCo_MS_LightThrowF);
+                    ftCo_800957F4(gobj, ftCo_MS_LightThrowF);
                     return true;
                 } else {
                     switch (it_8026B30C(fp->item_gobj)) {
@@ -50,7 +57,7 @@ bool ftCo_AttackS3_CheckInput(ftCo_GObj* gobj)
 static void decideAngle(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (!ft_80094790(gobj)) {
+    if (!ftCo_80094790(gobj)) {
         FtMotionId msid;
         float stick_angle = ftCo_GetLStickAngle(fp);
         if (stick_angle > p_ftCommonData->x9C &&
@@ -73,7 +80,7 @@ static void decideAngle(ftCo_GObj* gobj)
             msid = ftCo_MS_AttackS3S;
         }
         fp->allow_interrupt = false;
-        Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0, 1, 0);
+        Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
         ftAnim_8006EBA4(gobj);
     }
 }

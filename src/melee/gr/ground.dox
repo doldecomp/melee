@@ -1,0 +1,10 @@
+/// @file
+/// @todo
+/// Get stage's "yakumono" ("about"?) param
+/* 1C49F8 */ void* Ground_801C49F8(void);
+
+/// @param[in] arg0
+/// @param[in] arg1
+/// @param[out] result
+/// @param[in] arg3
+/* 1C4B50 */ void Ground_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg3);

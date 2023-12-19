@@ -78,4 +78,4 @@ OSSerial_804D73DC:
     .skip 0x4
 .global Reschedule
 Reschedule:
-    .skip 0x8
+    .skip 0x4

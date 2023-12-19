@@ -9,6 +9,7 @@
 
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
+#include "ft/ftcolanim.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
@@ -284,14 +285,14 @@ void ftMt_Init_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(fp, ftMewtwoAttributes);
 
     {
-        fp->parts[FtPart_TransN].flags.bits.b4 = true;
-        fp->x2221_flag.bits.b2 = true;
+        fp->parts[FtPart_TransN].flags_b4 = true;
+        fp->x2221_b2 = true;
     }
     it_8026B3F8(item_list[0], It_Kind_Mewtwo_Disable);
     it_8026B3F8(item_list[1], It_Kind_Mewtwo_ShadowBall);
 }
 
-void ftMt_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftMt_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
     return;
 }
@@ -308,7 +309,7 @@ void ftMt_Init_OnTakeDamage(HSD_GObj* gobj)
     ftMt_SpecialN_OnDeath(gobj);
 }
 
-void ftMt_Init_OnItemDrop(HSD_GObj* gobj, bool bool) {}
+void ftMt_Init_OnItemDrop(HSD_GObj* gobj, bool flag) {}
 
 void ftMt_Init_OnItemInvisible(HSD_GObj* gobj)
 {
@@ -327,7 +328,7 @@ void ftMt_Init_UnkMotionStates4(HSD_GObj* gobj)
     f32 attr_value = da->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
 
     if (fp->fv.mt.x2234_shadowBallCharge == attr_value) {
-        ft_800BFFD0(fp, 92, 0);
+        ftCo_800BFFD0(fp, 92, 0);
     }
 }
 

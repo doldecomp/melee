@@ -6,14 +6,16 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 
-void ftCo_LandingAir_EnterWithLag(ftCo_GObj* gobj, float lag)
+void ftCo_LandingAir_EnterWithLag(ftCo_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[20] = { 0 };
 #endif
+    float lag;
     FtMotionId msid = ftCo_MS_None;
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[0]) {
@@ -51,7 +53,7 @@ void ftCo_LandingAir_EnterWithLag(ftCo_GObj* gobj, float lag)
     if (msid != ftCo_MS_None) {
         ftCo_LandingAir_EnterWithMsidLag(gobj, msid, lag);
     } else {
-        ft_800D5BF8(gobj);
+        ftCo_800D5BF8(gobj);
     }
 }
 
@@ -63,7 +65,7 @@ void ftCo_LandingAir_EnterWithMsidLag(ftCo_GObj* gobj, FtMotionId msid,
     u8 _[8] = { 0 };
 #endif
     ftCommon_8007D7FC(GET_FIGHTER(gobj));
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     ftAnim_SetAnimRate(gobj, (ftAnim_8006F484(gobj) + 0.1f) / lag);
 }
 

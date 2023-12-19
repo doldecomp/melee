@@ -2,6 +2,7 @@
 #define _player_h_
 
 #include <platform.h>
+#include <baselib/forward.h>
 
 #include "pl/types.h"
 
@@ -184,7 +185,7 @@ s32 Player_GetPlayerState(s32 slot);
 enum_t Player_GetPlayerCharacter(int slot);
 void Player_SetPlayerCharacter(s32 slot, s32 value);
 enum_t Player_GetPlayerSlotType(s32 slot);
-s32 Player_8003248C(s32 slot, bool arg1);
+enum_t Player_8003248C(s32 slot, bool arg1);
 void Player_SetSlottype(s32 slot, enum_t value);
 s8 Player_800325C8(s32 slot, bool b);
 s8 Player_80032610(s32 slot, bool arg1);
@@ -239,7 +240,7 @@ void Player_SetUnk98(s32 slot, s32 unk98);
 s32 Player_GetUnk9C(s32 slot);
 void Player_SetUnk9C(s32 slot, s32 unk9C);
 HSD_GObj* Player_GetEntity(s32 slot);
-HSD_GObj* Player_GetEntityAtIndex(s32 slot, s32 index);
+HSD_GObj* Player_GetEntityAtIndex(int slot, int index);
 void Player_SwapTransformedStates(s32 slot, s32 arg1, s32 arg2);
 s32 Player_GetDamage(s32 slot);
 void Player_SetHUDDamage(s32 slot, s32 arg1);
@@ -323,7 +324,7 @@ void Player_80036D24(s32 slot);
 void Player_InitAllPlayers(void);
 void Player_80036DA4(void);
 void Player_80036DD8(void);
-void Player_80036E20(s32 arg0, s32 arg1, s32 arg2);
+void Player_80036E20(s32 arg0, HSD_Archive* archive, s32 arg2);
 s32 Player_80036EA0(s32 slot);
 void Player_80036F34(s32 slot, s32 arg1);
 void Player_80037054(s32 slot, s32 arg1);

@@ -1,6 +1,7 @@
 #ifndef MELEE_SC_SCENE_H
 #define MELEE_SC_SCENE_H
 
+#include <melee/sc/forward.h>
 #include <baselib/forward.h>
 
 /// Model with a single animation or no animation

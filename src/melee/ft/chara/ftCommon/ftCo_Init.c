@@ -1,5 +1,4 @@
 #include <platform.h>
-#include "ftCommon/forward.h"
 
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackAir.h"
@@ -10,12 +9,83 @@
 #include "ftCo_AttackLw4.h"
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
+#include "ftCo_BarrelWait.h"
+#include "ftCo_Bury.h"
+#include "ftCo_CaptureCaptain.h"
+#include "ftCo_CaptureDamageKoopa.h"
+#include "ftCo_CaptureKirby.h"
+#include "ftCo_CaptureKoopa.h"
+#include "ftCo_CaptureWaitKirby.h"
+#include "ftCo_CaptureWaitKoopa.h"
+#include "ftCo_CaptureYoshi.h"
+#include "ftCo_CliffAttack.h"
+#include "ftCo_CliffClimb.h"
+#include "ftCo_CliffEscape.h"
+#include "ftCo_CliffJump.h"
+#include "ftCo_CliffWait.h"
+#include "ftCo_Damage.h"
+#include "ftCo_DamageBind.h"
+#include "ftCo_DamageFall.h"
+#include "ftCo_DamageIce.h"
+#include "ftCo_DamageSong.h"
+#include "ftCo_Down.h"
+#include "ftCo_DownAttack.h"
+#include "ftCo_DownBound.h"
+#include "ftCo_DownDamage.h"
+#include "ftCo_DownStand.h"
+#include "ftCo_Escape.h"
+#include "ftCo_EscapeAir.h"
+#include "ftCo_FallSpecial.h"
+#include "ftCo_FlyReflect.h"
+#include "ftCo_Furafura.h"
+#include "ftCo_Guard.h"
+#include "ftCo_HammerFall.h"
+#include "ftCo_HammerJump.h"
+#include "ftCo_HammerKneeBend.h"
+#include "ftCo_HammerLanding.h"
+#include "ftCo_HammerTurn.h"
+#include "ftCo_HammerWait.h"
+#include "ftCo_HammerWalk.h"
+#include "ftCo_ItemGet.h"
+#include "ftCo_ItemThrow.h"
 #include "ftCo_LandingAir.h"
+#include "ftCo_Lift.h"
+#include "ftCo_MissFoot.h"
+#include "ftCo_Ottotto.h"
+#include "ftCo_Pass.h"
+#include "ftCo_Passive.h"
+#include "ftCo_PassiveCeil.h"
+#include "ftCo_PassiveStand.h"
+#include "ftCo_PassiveWall.h"
+#include "ftCo_Rebound.h"
+#include "ftCo_ShieldBreakDown.h"
+#include "ftCo_ShieldBreakFall.h"
+#include "ftCo_ShieldBreakFly.h"
+#include "ftCo_ShieldBreakStand.h"
+#include "ftCo_Shouldered.h"
+#include "ftCo_StopCeil.h"
+#include "ftCo_StopWall.h"
+#include "ftCo_ThrownKirby.h"
+#include "ftCo_ThrownKoopa.h"
+#include "ftCo_ThrownMewtwo.h"
 #include "ftCo_Wait.h"
+#include "ftCo_WarpStar.h"
+#include "ftCo_YoshiEgg.h"
 
-#include "ft/ft_0877.h"
+#include "ft/ft_0BEC.h"
+#include "ft/ft_0C31.h"
+#include "ft/ft_0C88.h"
+#include "ft/ft_0CD1.h"
+#include "ft/ft_0CDD.h"
+#include "ft/ft_0CEE.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcliffcommon.h"
+#include "ft/ftcolanim.h"
+#include "ft/ftdemo.h"
+#include "ft/ftlipstickswing.h"
+#include "ft/ftstarrodswing.h"
+#include "ft/ftswing.h"
 #include "ft/types.h"
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftKirby/ftKb_Init.h"
@@ -3777,12 +3847,12 @@ MotionState ftData_MotionStateList[ftCo_MS_Count] = {
     },
 };
 
-MotionState ftData_803C52A0[] = {
+MotionState ftData_803C52A0[14] = {
     {
         ftCo_SM_DeadUpFallHitCamera,
         Ft_MF_None,
         FtMoveId_Default << 24,
-        ft_800BED84,
+        ftCo_800BED84,
         NULL,
         NULL,
         NULL,
@@ -3802,7 +3872,7 @@ MotionState ftData_803C52A0[] = {
         ftCo_SM_Wait1_0,
         Ft_MF_None,
         FtMoveId_Default << 24,
-        ft_800BEF00,
+        ftCo_800BEF00,
         NULL,
         NULL,
         NULL,
@@ -3832,7 +3902,7 @@ MotionState ftData_803C52A0[] = {
         ftCo_SM_Unk005,
         Ft_MF_None,
         FtMoveId_Default << 24,
-        ft_800BEFD0,
+        ftCo_800BEFD0,
         NULL,
         NULL,
         NULL,

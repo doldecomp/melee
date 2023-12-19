@@ -4,10 +4,12 @@
 
 #include "ftCo_AttackHi3.h"
 
+#include "ftCo_ItemThrow.h"
+#include "ftCo_Wait.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_08A4.h"
 #include "ft/ftcommon.h"
 
 #include <placeholder.h>
@@ -17,13 +19,13 @@
 bool ftCo_AttackHi3_CheckInput(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_Pad_A) {
+    if (fp->input.x668 & HSD_PAD_A) {
         if (fp->input.lstick.y >=
                 p_ftCommonData->attackhi3_stick_threshold_y &&
             ftCo_GetLStickAngle(fp) > p_ftCommonData->x20)
         {
-            if (fp->item_gobj != NULL && ft_80094E54(fp)) {
-                ft_800957F4(gobj, ftCo_MS_LightThrowHi);
+            if (fp->item_gobj != NULL && ftCo_80094E54(fp)) {
+                ftCo_800957F4(gobj, ftCo_MS_LightThrowHi);
                 return true;
             }
             doEnter(gobj);
@@ -37,8 +39,8 @@ void doEnter(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     fp->allow_interrupt = false;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_AttackHi3, Ft_MF_None, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_AttackHi3, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 }
 

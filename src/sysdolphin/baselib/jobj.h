@@ -145,7 +145,6 @@ void HSD_JObjCheckDepend(HSD_JObj* jobj);
 u32 HSD_JObjGetFlags(HSD_JObj* jobj);
 void HSD_JObjReqAnimAll(HSD_JObj*, f32);
 void HSD_JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint);
-void HSD_JObjReqAnimAll(HSD_JObj*, f32);
 void HSD_JObjSetupMatrixSub(HSD_JObj*);
 void HSD_JObjSetMtxDirtySub(HSD_JObj*);
 void HSD_JObjUnref(HSD_JObj* jobj);
@@ -173,6 +172,33 @@ void HSD_JObjWalkTree(HSD_JObj* jobj, HSD_JObjWalkTreeCallback cb,
 void HSD_JObjPrependRObj(HSD_JObj* jobj, HSD_RObj* robj);
 void HSD_JObjDeleteRObj(HSD_JObj* jobj, HSD_RObj* robj);
 
+static inline HSD_JObj* HSD_JObjGetChild(HSD_JObj* jobj)
+{
+    if (jobj == NULL) {
+        return NULL;
+    } else {
+        return jobj->child;
+    }
+}
+
+static inline HSD_JObj* HSD_JObjGetNext(HSD_JObj* jobj)
+{
+    if (jobj == NULL) {
+        return NULL;
+    } else {
+        return jobj->next;
+    }
+}
+
+static inline HSD_JObj* HSD_JObjGetParent(HSD_JObj* jobj)
+{
+    if (jobj == NULL) {
+        return NULL;
+    } else {
+        return jobj->parent;
+    }
+}
+
 static inline HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
 {
     HSD_ASSERT(405, jobj);
@@ -190,11 +216,12 @@ static inline bool HSD_JObjMtxIsDirty(HSD_JObj* jobj)
     return result;
 }
 
-static inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
+inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
 {
-    if (jobj != NULL && HSD_JObjMtxIsDirty(jobj)) {
-        HSD_JObjSetupMatrixSub(jobj);
+    if (jobj == NULL || !HSD_JObjMtxIsDirty(jobj)) {
+        return;
     }
+    HSD_JObjSetupMatrixSub(jobj);
 }
 
 // Why does this seem to be a define while the others are inline functions?
@@ -216,8 +243,8 @@ static inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
 
 static inline void HSD_JObjSetRotationX(HSD_JObj* jobj, f32 x)
 {
-    HSD_ASSERT(0x27F, jobj);
-    HSD_ASSERT(0x280, !(jobj->flags & JOBJ_USE_QUATERNION));
+    HSD_ASSERT(639, jobj);
+    HSD_ASSERT(640, !(jobj->flags & JOBJ_USE_QUATERNION));
     jobj->rotate.x = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -226,8 +253,8 @@ static inline void HSD_JObjSetRotationX(HSD_JObj* jobj, f32 x)
 
 static inline void HSD_JObjSetRotationY(HSD_JObj* jobj, f32 y)
 {
-    HSD_ASSERT(0x294, jobj);
-    HSD_ASSERT(0x295, !(jobj->flags & JOBJ_USE_QUATERNION));
+    HSD_ASSERT(660, jobj);
+    HSD_ASSERT(661, !(jobj->flags & JOBJ_USE_QUATERNION));
     jobj->rotate.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -236,8 +263,8 @@ static inline void HSD_JObjSetRotationY(HSD_JObj* jobj, f32 y)
 
 static inline void HSD_JObjSetRotationZ(HSD_JObj* jobj, f32 z)
 {
-    HSD_ASSERT(0x2A9, jobj);
-    HSD_ASSERT(0x2AA, !(jobj->flags & JOBJ_USE_QUATERNION));
+    HSD_ASSERT(681, jobj);
+    HSD_ASSERT(682, !(jobj->flags & JOBJ_USE_QUATERNION));
     jobj->rotate.z = z;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -248,6 +275,12 @@ static inline void HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion* quat)
 {
     HSD_ASSERT(699, jobj);
     *quat = jobj->rotate;
+}
+
+static inline f32 HSD_JObjGetRotationY(HSD_JObj* jobj)
+{
+    HSD_ASSERT(730, jobj);
+    return jobj->rotate.y;
 }
 
 static inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec3* scale)
@@ -262,7 +295,7 @@ static inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec3* scale)
 
 static inline void HSD_JObjSetScaleX(HSD_JObj* jobj, f32 x)
 {
-    HSD_ASSERT(0x308, jobj);
+    HSD_ASSERT(776, jobj);
     jobj->scale.x = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -271,7 +304,7 @@ static inline void HSD_JObjSetScaleX(HSD_JObj* jobj, f32 x)
 
 static inline void HSD_JObjSetScaleY(HSD_JObj* jobj, f32 y)
 {
-    HSD_ASSERT(0x317, jobj);
+    HSD_ASSERT(791, jobj);
     jobj->scale.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -280,7 +313,7 @@ static inline void HSD_JObjSetScaleY(HSD_JObj* jobj, f32 y)
 
 static inline void HSD_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
 {
-    HSD_ASSERT(0x326, jobj);
+    HSD_ASSERT(806, jobj);
     jobj->scale.z = z;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -290,6 +323,7 @@ static inline void HSD_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
 static inline void HSD_JObjGetScale(HSD_JObj* jobj, Vec3* scale)
 {
     HSD_ASSERT(823, jobj);
+    HSD_ASSERT(824, scale);
     *scale = jobj->scale;
 }
 
@@ -323,7 +357,7 @@ static inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
 
 static inline void HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
 {
-    HSD_ASSERT(0x3A4, jobj);
+    HSD_ASSERT(932, jobj);
     jobj->translate.x = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -332,7 +366,7 @@ static inline void HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
 
 static inline void HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
 {
-    HSD_ASSERT(0x3B3, jobj);
+    HSD_ASSERT(947, jobj);
     jobj->translate.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -341,7 +375,7 @@ static inline void HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
 
 static inline void HSD_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
 {
-    HSD_ASSERT(0x3C2, jobj);
+    HSD_ASSERT(962, jobj);
     jobj->translate.z = z;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -367,14 +401,40 @@ static inline f32 HSD_JObjGetTranslationY(HSD_JObj* jobj)
     return jobj->translate.y;
 }
 
-/// @todo This is misplaced or something; @c jobj.h must not include @c
-///       lbcollision.
+static inline float HSD_JObjGetTranslationZ(HSD_JObj* jobj)
+{
+    HSD_ASSERT(1019, jobj);
+    return jobj->translate.z;
+}
+
+static inline void HSD_JObjAddTranslationY(HSD_JObj* jobj, float y)
+{
+    HSD_ASSERT(1114, jobj);
+    jobj->translate.y += y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void HSD_JObjAddTranslationZ(HSD_JObj* jobj, float z)
+{
+    HSD_ASSERT(1126, jobj);
+    jobj->translate.z += z;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+/// @todo This is inlined into lbcoll, and linker deduplication
+/// only kept that definition.
+/// Rename it back to HSD_JObjSetupMatrix once lbcoll is matched.
 void lbColl_JObjSetupMatrix(HSD_JObj*);
 
-static inline void HSD_JObjGetMtx(HSD_JObj* jobj)
+static inline MtxPtr HSD_JObjGetMtxPtr(HSD_JObj* jobj)
 {
     HSD_ASSERT(1144, jobj);
     lbColl_JObjSetupMatrix(jobj);
+    return jobj->mtx;
 }
 
 static inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx mtx)
@@ -384,8 +444,16 @@ static inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx mtx)
     PSMTXCopy(mtx, jobj->mtx);
 }
 
+static inline void HSD_JObjRefThis(HSD_JObj* jobj)
+{
+    if (jobj != NULL) {
+        iref_INC(jobj);
+    }
+}
+
 void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint);
 void HSD_JObjUnrefThis(HSD_JObj* jobj);
+void HSD_JObjRefThis(HSD_JObj* jobj);
 void HSD_JObjMakeMatrix(HSD_JObj* jobj);
 void RecalcParentTrspBits(HSD_JObj* jobj);
 void HSD_JObjAddChild(HSD_JObj* jobj, HSD_JObj* child);

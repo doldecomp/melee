@@ -7,6 +7,7 @@
 #include "ef/efasync.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ftCommon/ftCo_Wait.h"
 
 // 0x8011659C
 // https://decomp.me/scratch/xVTx7
@@ -18,12 +19,12 @@ void ftNs_AttackLw4_Enter(
     fp->allow_interrupt = 0;
     fp->mv.ns.attacklw4.isChargeDisable = false;
     ftNs_AttackHi4_YoyoSetVarAll(gobj);
-    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     fp->x2222_b2 = 1;
-    fp->cb.x21C0_callback_OnGiveDamage = ftNs_AttackHi4_YoyoStartTimedRehit;
-    fp->cb.x21BC_callback_Accessory4 = ftNs_AttackHi4_YoyoUpdateHitPos;
+    fp->deal_dmg_cb = ftNs_AttackHi4_YoyoStartTimedRehit;
+    fp->accessory4_cb = ftNs_AttackHi4_YoyoUpdateHitPos;
 }
 
 // 0x80116638
@@ -54,7 +55,7 @@ void ftNs_AttackLw4_IASA(HSD_GObj* gobj) // Ness's Down Smash IASA callback
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.held_inputs & HSD_Pad_A) == false) {
+    if ((fp->input.held_inputs & HSD_PAD_A) == false) {
         fp->mv.ns.attacklw4.isChargeDisable = true;
     }
     if (fp->allow_interrupt != 0) {
@@ -112,7 +113,7 @@ void ftNs_AttackLw4Charge_IASA(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.held_inputs & HSD_Pad_A) == false) {
+    if ((fp->input.held_inputs & HSD_PAD_A) == false) {
         ftNs_AttackLw4Release_Enter(gobj);
     }
 }
@@ -146,13 +147,13 @@ void ftNs_AttackLw4Charge_Enter(
     Fighter* fp = GET_FIGHTER(gobj);
 
     Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4Charge, Ft_MF_SkipItemVis,
-                              NULL, 12.0f, 1.0f, 0.0f);
+                              12.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftAnim_SetAnimRate(gobj, 0.0f);
     ftNs_AttackHi4_YoyoApplySmash(gobj);
     fp->x2222_b2 = 1;
-    fp->cb.x21C0_callback_OnGiveDamage = ftNs_AttackHi4_YoyoStartTimedRehit;
-    fp->cb.x21BC_callback_Accessory4 = ftNs_AttackHi4_YoyoUpdateHitPos;
+    fp->deal_dmg_cb = ftNs_AttackHi4_YoyoStartTimedRehit;
+    fp->accessory4_cb = ftNs_AttackHi4_YoyoUpdateHitPos;
 }
 
 // 0x80116958
@@ -235,10 +236,10 @@ void ftNs_AttackLw4Release_Enter(
     Fighter* fp = GET_FIGHTER(gobj);
 
     Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4Release,
-                              Ft_MF_SkipItemVis, NULL, 13.0f, 1.0f, 0.0f);
+                              Ft_MF_SkipItemVis, 13.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftNs_AttackHi4_YoyoSetChargeDamage(gobj);
     fp->x2222_b2 = 1;
-    fp->cb.x21C0_callback_OnGiveDamage = ftNs_AttackHi4_YoyoStartTimedRehit;
-    fp->cb.x21BC_callback_Accessory4 = ftNs_AttackHi4_YoyoUpdateHitPos;
+    fp->deal_dmg_cb = ftNs_AttackHi4_YoyoStartTimedRehit;
+    fp->accessory4_cb = ftNs_AttackHi4_YoyoUpdateHitPos;
 }

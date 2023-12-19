@@ -4,9 +4,11 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_FallSpecial.h"
 
 // 80138208 00134DE8
 // https://decomp.me/scratch/lrV6F
@@ -17,9 +19,9 @@ void ftMs_SpecialHi_Enter(HSD_GObj* gobj)
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     // MotionStateChange
-    Fighter_ChangeMotionState(gobj, 0x16F, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x16F, 0, 0.0f, 1.0f, 0.0f, NULL);
     // MS_AnimationFrameUpdate&More
     ftAnim_8006EBA4(gobj);
 }
@@ -39,11 +41,11 @@ void ftMs_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->self_vel.y = 0.0f;
     fp->self_vel.x *= da->x3C;
     // MotionStateChange
-    Fighter_ChangeMotionState(gobj, 0x170, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x170, 0, 0.0f, 1.0f, 0.0f, NULL);
     // MS_AnimationFrameUpdate&More
     ftAnim_8006EBA4(gobj);
 }
@@ -58,7 +60,7 @@ void ftMs_SpecialHi_Anim(HSD_GObj* gobj)
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
         // MS_035_FallSpecial
-        ft_80096900(gobj, 0, 1, 0, da->x28, da->x2C);
+        ftCo_80096900(gobj, 0, 1, 0, da->x28, da->x2C);
     }
 }
 
@@ -77,7 +79,7 @@ void ftMs_SpecialAirHi_Anim(HSD_GObj* gobj)
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
         // MS_035_FallSpecial
-        ft_80096900(gobj, 0, 1, 0, da->x28, da->x2C);
+        ftCo_80096900(gobj, 0, 1, 0, da->x28, da->x2C);
     }
 }
 
@@ -227,7 +229,7 @@ void ftMs_SpecialHi_80138884(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* da = fp->dat_attrs;
-    ft_800D5CB0(gobj, 0, da->x2C);
+    ftCo_800D5CB0(gobj, 0, da->x2C);
 }
 
 // 801388B4 00135494
@@ -242,7 +244,7 @@ void ftMs_SpecialHi_Coll(HSD_GObj* gobj)
             fp->cmd_vars[1] = 1;
             ft_80083B68(gobj);
         } else {
-            ft_800831CC(gobj, &ft_80096CC8, &ftMs_SpecialHi_80138884);
+            ft_800831CC(gobj, &ftCo_80096CC8, &ftMs_SpecialHi_80138884);
         }
     } else {
         ft_80084104(gobj);
@@ -261,7 +263,7 @@ void ftMs_SpecialAirHi_Coll(HSD_GObj* gobj)
             fp->cmd_vars[1] = 1;
             ft_80083B68(gobj);
         } else {
-            ft_800831CC(gobj, &ft_80096CC8, &ftMs_SpecialHi_80138884);
+            ft_800831CC(gobj, &ftCo_80096CC8, &ftMs_SpecialHi_80138884);
         }
     } else {
         ft_80084104(gobj);

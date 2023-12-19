@@ -36,3 +36,42 @@
  * @var Item_DynamicBones::unk_vec
  * @at{10} @sz{C}
  */
+
+/// @todo
+struct SpawnItem {
+    // Primary owner of the item; usually a fp GObj
+    /*  +0 */ HSD_GObj* x0_parent_gobj;
+
+    // Secondary owner GObj of the item; e.g. Ness' PK Fire Pillar has this set
+    // to PK Fire Spark's item GObj
+    /*  +4 */ HSD_GObj* x4_parent_gobj2;
+
+    // ID of the item to spawn
+    /*  +8 */ ItemKind kind;
+
+    /// @at{C} @sz{4}
+    /// @brief Defines the behavior of the item, such as thrown and pickup.
+    /// @todo 0 = capsule.
+    /*  +C */ enum_t hold_kind;
+
+    /* +10 */ s32 x10;
+
+    /// @at{14} @sz{C}
+    /* +14 */ Vec3 pos;
+
+    /// @at{20} @sz{C}
+    /* +20 */ Vec3 prev_pos;
+
+    /// @at{2C} @sz{C}
+    /* +2C */ Vec3 vel;
+    /* 38 */ f32 facing_dir;
+
+    s16 x3C_damage;
+    s16 x3E;
+    s32 x40;                // 0x1 = correct initial position
+    UnkFlagStruct x44_flag; // 0x80 = perform initial collision check
+    UnkFlagStruct x45_flag;
+    UnkFlagStruct x46_flag;
+    UnkFlagStruct x47_flag;
+    GroundOrAir x48_ground_or_air; // 0x0 = stationary, 0x1 = air (?)
+};

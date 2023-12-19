@@ -2,6 +2,7 @@
 #define MELEE_GR_TYPES_H
 
 #include "it/forward.h"
+#include "lb/forward.h"
 
 #include "sc/scene.h"
 
@@ -99,6 +100,16 @@ typedef enum InternalStageId {
 
     /// Kongo Jungle (64)
     OLDKONGO,
+
+    STAGEKIND_UNK31,
+    STAGEKIND_UNK32,
+    STAGEKIND_UNK33,
+    STAGEKIND_UNK34,
+    STAGEKIND_UNK35,
+    STAGEKIND_UNK36,
+    STAGEKIND_UNK37,
+    STAGEKIND_UNK38,
+    STAGEKIND_UNK39,
 } InternalStageId;
 
 /// @remarks This struct is based in part on the datasheet however the info
@@ -175,26 +186,26 @@ typedef struct StageInfo {
         }* ptr;
     }* x12C;
     Vec3 x130, x13C, x148, x154, x160, x16C;
-    bool (*x178)(int);
+    lb_UnkAnimStruct* (*x178)(int);
     void* x17C;
     HSD_GObj* x180[4];
     u8 x190_pad[0x280 - 0x190];
     HSD_JObj* x280[261];
     void* x694[4];
     void* x6A4;
-    struct {
+    /* +6A8 */ struct {
         s32 unk0;
         Article* unk4;
-    }** x6A8;
-    void* x6AC;
-    struct _UnkStage6B0* x6B0;
-    u32* x6B4;
-    void* x6B8;
-    void* x6BC;
-    void* x6C0;
-    void* x6C4;
-    void* x6C8;
-    DynamicModelDesc* x6CC;
+    }** itemdata;
+    /* +6AC */ void* coll_data;
+    /* +6B0 */ struct _UnkStage6B0* param;
+    /* +6B4 */ unk_t** ald_yaku_all;
+    /* +6B8 */ void* map_ptcl;
+    /* +6BC */ void* map_texg;
+    /* +6C0 */ void* yakumono_param;
+    /* +6C4 */ void* map_plit;
+    /* +6C8 */ void* x6C8;
+    /* +6CC */ DynamicModelDesc* quake_model_set;
     s16 x6D0;
     s16 x6D2;
     s16 x6D4;
@@ -222,11 +233,11 @@ typedef struct StageInfo {
 } StageInfo;
 
 typedef struct StageCallbacks {
-    void (*callback0)(HSD_GObj*);
-    bool (*callback1)(HSD_GObj*);
-    void (*callback2)(HSD_GObj*);
-    void (*callback3)(HSD_GObj*);
-    u32 flags;
+    /*  +0 */ void (*callback0)(HSD_GObj*);
+    /*  +4 */ bool (*callback1)(HSD_GObj*);
+    /*  +8 */ void (*callback2)(HSD_GObj*);
+    /*  +C */ void (*callback3)(HSD_GObj*);
+    /* +10 */ u32 flags;
 } StageCallbacks;
 
 typedef struct StageData {
@@ -238,7 +249,7 @@ typedef struct StageData {
     void (*callback2)(void);
     void (*callback3)(void);
     bool (*callback4)(void);
-    bool (*callback5)(enum_t);
+    lb_UnkAnimStruct* (*callback5)(enum_t);
     bool (*callback6)(Vec3*, int, HSD_JObj*);
     u32 flags2;
     S16Vec3* x2C;
@@ -249,6 +260,52 @@ typedef struct StructPairWithStageID {
     s32 stage_id;
     s32 list_idx;
 } StructPairWithStageID;
+
+struct GroundVars_unk {
+    int xC4;
+    int xC8;
+    int xCC;
+    int xD0;
+    int xD4;
+    int xD8;
+    float xDC;
+    u8 xE0_pad[0x218 - 0xE0];
+};
+
+struct GroundVars_izumi {
+    HSD_TObj* xC4;
+    HSD_GObj* xC8;
+    HSD_GObj* xCC;
+    HSD_JObj* xD0;
+    HSD_JObj* xD4;
+    int xD8;
+    float xDC;
+    u8 xE0_pad[0x218 - 0xE0];
+};
+
+struct GroundVars_izumi2 {
+    HSD_JObj* xC4;
+    HSD_JObj* xC8;
+    int xCC;
+    int xD0;
+    int xD4;
+    int xD8;
+    float xDC;
+    u8 xE0_pad[0x218 - 0xE0];
+};
+
+struct GroundVars_izumi3 {
+    short xC4;
+    short xC6;
+    short xC8;
+    short xCA;
+    HSD_JObj* xCC;
+    float xD0;
+    float xD4;
+    float xD8;
+    float xDC;
+    u8 xE0_pad[0x218 - 0xE0];
+};
 
 typedef struct Ground {
     int x0;         // 0x0
@@ -279,11 +336,13 @@ typedef struct Ground {
     HSD_GObjEvent x1C_callback;
     int x20[8];
     u8 x40_pad[0xC4 - 0x40];
-    int xC4;
-    int xC8;
-    int xCC;
-    int xD0;
-    u8 xD4_pad[0x218 - 0xD4];
+    union GroundVars { // how big should this be?
+        u8 _[0x218 - 0xC4];
+        struct GroundVars_unk unk;
+        struct GroundVars_izumi izumi;
+        struct GroundVars_izumi2 izumi2;
+        struct GroundVars_izumi3 izumi3;
+    } gv;
 } Ground;
 
 #endif

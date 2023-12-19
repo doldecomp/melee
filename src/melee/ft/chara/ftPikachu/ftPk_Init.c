@@ -365,9 +365,9 @@ void ftPk_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 1, 0);
 }
 
-void ftPk_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftPk_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 0, 0);
+    Fighter_OnItemPickup(gobj, flag, 0, 0);
 }
 
 void ftPk_Init_OnItemInvisible(HSD_GObj* gobj)
@@ -411,7 +411,13 @@ void ftPk_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftPikachuAttributes);
     if (fp->x34_scale.y != 1.0f) {
-        SCALE_HEIGHT_ATTRS(6);
+        int i;
+        for (i = 0;
+             i < (signed) (sizeof(sA2->height_attributes) / sizeof(float));
+             i++)
+        {
+            *(float*) &sA2->height_attributes[i] *= fp->x34_scale.y;
+        }
     }
 }
 

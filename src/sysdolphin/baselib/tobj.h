@@ -303,7 +303,6 @@ u32 HSD_TexMtx2Index(u32 texmtx);
 u32 HSD_Index2TexMtx(u32 index);
 u8 HSD_Index2TexMap(u32 index);
 u32 HSD_TexMap2Index(u8 mapid);
-struct _HSD_ImageDesc* HSD_ImageDescAlloc(void);
 HSD_TObj* allocShadowTObj(void);
 
 void HSD_TObjRemoveAnim(HSD_TObj* tobj);

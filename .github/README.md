@@ -21,11 +21,11 @@ v1.02 - main.dol: `sha1: 08e0bf20134dfcb260699671004527b2d6bb1a45`
 The easiest way to get set up is with [scoop](https://scoop.sh/). You will also need our compilers (linked below).
 
 1. Open a PowerShell window (`Win+X`). You do not need admin privileges.
-1. Install `scoop`, `git`, `python`, and `mingw`. You can skip these if you already have `git`, `python` (3.9+), `bash`, `gcc`, and `make` in your `PATH`.
+1. Install `scoop`, `git`, `python`, `mingw`, and `cmake`. You can skip these if you already have `git`, `python` (3.9+), `bash`, `gcc`, `make`, and `cmake` in your `PATH`.
     ```ps1
     Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
     irm get.scoop.sh | iex
-    scoop install git python mingw
+    scoop install git python mingw cmake
     ```
 1. Clone the repository and change directory into it.
     ```ps1
@@ -33,12 +33,12 @@ The easiest way to get set up is with [scoop](https://scoop.sh/). You will also 
     git clone 'https://github.com/doldecomp/melee.git'
     cd melee
     ```
-1. Download our [compilers zip archive](https://cdn.discordapp.com/attachments/727909624342380615/1079286377230909440/MELEE_COMPILERS.zip) and rename the `GC` subfolder to `mwcc_compiler`, and place it in `/tools`. You can do this manually, or use the following PowerShell snippet (from inside your melee directory):
+1. Download our [compilers zip archive](https://mega.nz/file/BU43wKxT#rVC11Rl7DPxfSn7V9Iu--8E7m7gc1gsJWtfVBbfmKwQ) and rename the `GC` subfolder to `mwcc_compiler`, and place it in `/tools`. You can do this manually, or use the following PowerShell snippet (from inside your melee directory):
     ```ps1
-    $url = 'https://cdn.discordapp.com/attachments/727909624342380615/1079286377230909440/MELEE_COMPILERS.zip'
-    $tmp = New-TemporaryFile
-    Invoke-WebRequest -Uri $url -OutFile $tmp
-    $zip = Rename-Item $tmp -NewName ($tmp.BaseName + '.zip') -PassThru
+    & scoop install megatools
+    $url = 'https://mega.nz/file/BU43wKxT#rVC11Rl7DPxfSn7V9Iu--8E7m7gc1gsJWtfVBbfmKwQ'
+    $zip = [System.IO.Path]::GetTempFileName() -replace '\.[^.]+$','.zip'
+    & megatools dl --no-progress --path "$zip" "$url"
 
     $dir = New-Item -ItemType Directory `
         -Path (Join-Path $env:Temp 'MELEE_COMPILERS')
@@ -51,6 +51,9 @@ The easiest way to get set up is with [scoop](https://scoop.sh/). You will also 
 
     Remove-Item -Force $zip
     Remove-Item -Recurse -Force $dir
+
+    # Optional: Uninstall megatools
+    & scoop uninstall megatools
     ```
 1. Run `make` using `bash` to build the project:
     ```ps1
@@ -84,7 +87,7 @@ The easiest way to get set up is with [scoop](https://scoop.sh/). You will also 
 
 ### Instructions
 
-1. Download [`MELEE_COMPILERS.zip`](https://cdn.discordapp.com/attachments/727909624342380615/1079286377230909440/MELEE_COMPILERS.zip) and extract the GC compilers to `tools/mwcc_compiler/`.
+1. Download [`MELEE_COMPILERS.zip`](https://cdn.discordapp.com/attachments/727909624342380615/1129879865433264158/MELEE_COMPILERS_N.zip) and extract the GC compilers to `tools/mwcc_compiler/`.
 2. Run the `make` command:
     ```sh
     make -j$(nproc) GENERATE_MAP=1
@@ -102,6 +105,7 @@ make_flags='GENERATE_MAP=1'
 build_target="$melee_path/build"
 
 docker run --rm \
+  --user "$(id -u):$(id -g)" \
   --volume "$melee_path:/input:ro" \
   --volume "$build_target:/output" \
   --env MAKE_FLAGS="$make_flags" \

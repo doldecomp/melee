@@ -7,10 +7,10 @@
 #include "ft/types.h"
 
 /* 149ACC */ void ftFc_Init_OnDeath(HSD_GObj*);
-/* 149B00 */ void ftFc_Init_OnItemPickup(HSD_GObj*, bool);
+/* 149B00 */ void ftFc_Init_OnItemPickup(HSD_GObj*, bool flag);
 /* 149BE0 */ void ftFc_Init_OnItemInvisible(HSD_GObj*);
 /* 149C28 */ void ftFc_Init_OnItemVisible(HSD_GObj*);
-/* 149C70 */ void ftFc_Init_OnItemDrop(HSD_GObj*, bool);
+/* 149C70 */ void ftFc_Init_OnItemDrop(HSD_GObj*, bool flag);
 /* 149CC4 */ void ftFc_Init_OnLoad(HSD_GObj*);
 /* 149D3C */ void ftFc_Init_LoadSpecialAttrs(HSD_GObj*);
 /* 149D5C */ void ftFc_Init_OnKnockbackEnter(HSD_GObj*);

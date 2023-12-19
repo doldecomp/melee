@@ -12,10 +12,14 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C31.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcamera.h"
+#include "ft/ftcolanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_AirCatch.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx/types.h>
@@ -267,7 +271,7 @@ void ftSs_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     void** item_list = fp->ft_data->x48_items;
 
-    fp->x2224_flag.bits.b7 = 1;
+    fp->x2224_b7 = 1;
 
     PUSH_ATTRS(fp, ftSs_DatAttrs);
 
@@ -281,12 +285,12 @@ void ftSs_Init_80128428(HSD_GObj* gobj)
 {
     ftSs_SpecialN_80129258(gobj);
     ftSs_SpecialS_8012A640(gobj);
-    ft_800D9C98(gobj);
+    ftCo_800D9C98(gobj);
 }
 
-void ftSs_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftSs_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 0, 0);
+    Fighter_OnItemPickup(gobj, flag, 0, 0);
 }
 
 void ftSs_Init_OnItemInvisible(HSD_GObj* gobj)
@@ -310,7 +314,7 @@ void ftSs_Init_UnkMotionStates4(HSD_GObj* gobj)
     ftSs_DatAttrs* da = fp->dat_attrs;
     s32 samus_x2230 = fp->fv.ss.x2230;
     if (samus_x2230 == da->x18) {
-        ft_800BFFD0(fp, 53, 0);
+        ftCo_800BFFD0(fp, 53, 0);
     }
 }
 
@@ -322,7 +326,16 @@ void ftSs_Init_LoadSpecialAttrs(HSD_GObj* gobj)
         sA2->x74_vec.y *= fp->x34_scale.y;
         sA2->x54 *= fp->x34_scale.y;
         sA2->x58 *= fp->x34_scale.y;
-        SCALE_HEIGHT_ATTRS(6);
+        {
+            /// @todo Shared code wit #ftPk_Init_LoadSpecialAttrs
+            int i;
+            for (i = 0;
+                 i < (signed) (sizeof(sA2->height_attributes) / sizeof(float));
+                 i++)
+            {
+                ((float*) &sA2->height_attributes)[i] *= fp->x34_scale.y;
+            }
+        }
     }
 }
 
@@ -358,5 +371,5 @@ void ftSs_Init_CreateThrowGrappleBeam(HSD_GObj* gobj, s32 motion_state,
     HSD_JObjReqAnimAll(fighter_copy->x20A0_accessory, 0.0f);
     HSD_JObjAnimAll(fighter_copy->x20A0_accessory);
     lb_8000C2F8(fighter_copy->x20A0_accessory,
-                fighter_copy->parts[FtPart_ThrowN].x0_jobj);
+                fighter_copy->parts[FtPart_ThrowN].joint);
 }

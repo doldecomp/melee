@@ -6,6 +6,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ftwalkcommon.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 #include "it/it_27CF.h"
 
 bool ftDk_MS_341_800DFA98(HSD_GObj* gobj)
@@ -35,7 +36,7 @@ void ftDk_HeavyWalk_Anim(HSD_GObj* gobj)
 
 void ftDk_HeavyWalk_IASA(HSD_GObj* gobj)
 {
-    if (!ft_80094EA4(gobj) && !ftDk_MS_347_800E0378(gobj) &&
+    if (!ftCo_80094EA4(gobj) && !ftDk_MS_347_800E0378(gobj) &&
         !ftDk_MS_341_800DF938(gobj))
     {
         ftWalkCommon_800DFEC8(gobj, ftDk_MS_341_800DFAE4);

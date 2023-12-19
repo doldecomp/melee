@@ -21,7 +21,7 @@ void GXSetScissor(s32 left, s32 top, s32 width, s32 height);
 void GXSetScissorBoxOffset(u32 x_off, u32 y_off);
 void GXGetProjectionv(f32* proj);
 void GXGetViewportv(f32* viewport_v);
-void GXSetProjection(f32* proj, s32 projection_type);
+void GXSetProjection(Mtx44 proj, s32 projection_type);
 void WriteMTXPS4x3(float* src, float* dst);
 void WriteMTXPS3x3from3x4(float* src, float* dst);
 void WriteMTXPS4x2(float* src, float* dst);

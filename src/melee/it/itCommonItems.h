@@ -1,7 +1,51 @@
-#ifndef _itCommonItems_h_
-#define _itCommonItems_h_
+/// @file
+/// @todo Restructure this, possibly items/common/types.h
+#ifndef MELEE_IT_ITCOMMONITEMS_H
+#define MELEE_IT_ITCOMMONITEMS_H
 
 #include <platform.h>
+
+#include <placeholder.h>
+
+typedef struct {
+    bool x0;
+    bool x4;
+} ItCapsuleAttrs;
+
+typedef struct {
+    /* ip+DD4 */ float dir;
+    /* ip+DD8 */ float x4;
+    /* ip+DDC */ float x8;
+    /* ip+DE0 */ float xC;
+    /* ip+DE4 */ float xvel;
+    /* ip+DE8 */ float yvel;
+} ItStarVars;
+
+struct itSword_ItemVars {
+    /* ip+DD4 */ UNK_T x0;
+    /* ip+DD8 */ int x4;
+    /* ip+DDC */ int x8;
+    /* ip+DE0 */ int xC;
+    /* ip+DE4 */ float x10;
+    /* ip+DE8 */ float x14;
+    /* ip+DEC */ float x18;
+    /* ip+DF0 */ int x1C;
+    /* ip+DF4 */ int x20;
+    /* ip+DF8 */ int x24;
+    /* ip+DFC */ float x28;
+    /* ip+E00 */ float x2C;
+    /* ip+E04 */ float x30;
+    /* ip+E08 */ int x34;
+    /* ip+E0C */ int x38;
+    /* ip+E10 */ int x3C;
+    /* ip+E14 */ float x40;
+    /* ip+E18 */ float x44;
+    /* ip+E1C */ float x48;
+    /* ip+E20 */ float x4C;
+    /* ip+E24 */ float x50;
+    /* ip+E28 */ int x54;
+    /* ip+E2C */ float x58;
+};
 
 typedef struct BobOmbVars {
     s32 xDD4;
@@ -25,6 +69,10 @@ typedef struct FoodVars {
     s32 xDD4_unk;
     s32 xDD8_heal;
 } FoodVars;
+
+typedef struct {
+    u32 x0;
+} ItLGunVars;
 
 typedef struct EggVars // Eggs spawned on Yoshi stages / by Chansey
 {

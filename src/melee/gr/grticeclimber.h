@@ -1,9 +1,11 @@
-#ifndef MELEE_GR_GRTICECLIMBER_H
-#define MELEE_GR_GRTICECLIMBER_H
+#ifndef GALE01_220F10
+#define GALE01_220F10
 
 #include <platform.h>
+#include "lb/forward.h"
 #include <baselib/forward.h>
 
+#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
 extern s16 grTIc_803E8B5C[];
@@ -29,7 +31,7 @@ void grTIceClimber_80220F84(void);
 void grTIceClimber_80220F88(void);
 bool grTIceClimber_80220FAC(void);
 
-bool grTIceClimber_80221354(int);
+lb_UnkAnimStruct* grTIceClimber_80221354(enum_t);
 bool grTIceClimber_8022135C(Vec3*, int, HSD_JObj*);
 
 HSD_GObj* grTIceClimber_80220FB4(int);

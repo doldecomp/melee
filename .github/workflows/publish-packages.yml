@@ -23,10 +23,10 @@ jobs:
     name: Publish package
     env:
       REGISTRY: ghcr.io
-      CONTAINERFILE: .github/packages/${{ matrix.target }}/Dockerfile
+      CONTAINERFILE: .github/packages/build-linux/Dockerfile
     strategy:
       matrix:
-        target: [ "build-linux", "gen-pages" ]
+        target: [ "build-linux", "gen-pages", "check-issues", "dump-asm" ]
       fail-fast: false
     runs-on: ubuntu-latest
     permissions:
@@ -64,27 +64,59 @@ jobs:
       - name: Try building Melee (GENERATE_MAP=1)
         if: startsWith(matrix.target, 'build-')
         run: |
+          output="${{ github.workspace }}/output/generate_map"
+          mkdir -p "$output"
           docker run --rm \
+            --user "$(id -u):$(id -g)" \
             --volume "$PWD:/input:ro" \
-            --volume /tmp/output/generate_map:/output \
+            --volume "$output:/output" \
             --env MAKE_FLAGS="GENERATE_MAP=1" \
             "$IMAGE:test"
 
       - name: Try building Melee (NON_MATCHING=1)
         if: startsWith(matrix.target, 'build-')
         run: |
+          output="${{ github.workspace }}/output/non_matching"
+          mkdir -p "$output"
           docker run --rm \
+            --user "$(id -u):$(id -g)" \
             --volume "$PWD":/input:ro \
-            --volume /tmp/output/non_matching:/output \
+            --volume "$output:/output" \
             --env MAKE_FLAGS="NON_MATCHING=1" \
+            "$IMAGE:test"
+
+      - name: Try checking for code issues
+        if: matrix.target == 'check-issues'
+        run: |
+          docker run --rm \
+            --user "$(id -u):$(id -g)" \
+            --volume "$PWD:/input:ro" \
             "$IMAGE:test"
 
       - name: Try generating pages
         if: matrix.target == 'gen-pages'
         run: |
+          output="${{ github.workspace }}/output"
+          mkdir -p "$output"
           docker run --rm \
+            --user "$(id -u):$(id -g)" \
             --volume "$PWD:/input:ro" \
-            --volume /tmp/output:/output \
+            --volume "$output:/output" \
+            "$IMAGE:test"
+
+      - name: Try dumping assembly
+        if: matrix.target == 'dump-asm'
+        run: |
+          output="${{ github.workspace }}/output"
+          mkdir -p "$output"
+          short_sha="$(echo "${{ github.sha }}" | cut -c 1-7)"
+          tree_url="${{ github.server_url }}/${{ github.repository }}/tree/${{ github.sha }}"
+          docker run --rm \
+            --user "$(id -u):$(id -g)" \
+            --volume "$PWD:/input:ro" \
+            --volume "$output:/output" \
+            -e SHORT_SHA="$short_sha" \
+            -e TREE_URL="$tree_url" \
             "$IMAGE:test"
 
       - name: Extract tags and labels

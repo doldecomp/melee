@@ -10,8 +10,11 @@
 #include "ef/efsync.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_ItemGet.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 #include "ftPeach/types.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
@@ -22,7 +25,7 @@
 /* 11CE48 */ static ItemKind pickVeg(HSD_GObj* gobj);
 /* 11D018 */ static void spawnVeg(HSD_GObj* gobj);
 /* 11D214 */ static void handleAirColl(HSD_GObj* gobj);
-/* 11D280 */ static void handleColl(HSD_GObj* gobj, float lag);
+/* 11D280 */ static void handleColl(HSD_GObj* gobj);
 
 ItemKind pickVeg(HSD_GObj* gobj)
 {
@@ -133,7 +136,7 @@ lbl_8011D0A0:
 /* 8011D0CC 00119CAC  41 82 00 34 */	beq lbl_8011D100
 /* 8011D0D0 00119CB0  38 7D 00 00 */	addi r3, r29, 0
 /* 8011D0D4 00119CB4  38 80 00 00 */	li r4, 0
-/* 8011D0D8 00119CB8  4B F7 77 41 */	bl ft_80094818
+/* 8011D0D8 00119CB8  4B F7 77 41 */	bl ftCo_80094818
 /* 8011D0DC 00119CBC  38 9D 00 00 */	addi r4, r29, 0
 /* 8011D0E0 00119CC0  4C C6 31 82 */	crclr 6
 /* 8011D0E4 00119CC4  38 BE 00 B0 */	addi r5, r30, 0xb0
@@ -160,7 +163,7 @@ static void spawnVeg(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (ftCheckThrowB0(fp)) {
         Vec3 pos;
-        lb_8000B1CC(fp->parts[FtPart_109].x0_jobj, NULL, &pos);
+        lb_8000B1CC(fp->parts[FtPart_109].joint, NULL, &pos);
         {
             Fighter* fp = GET_FIGHTER(gobj);
 
@@ -178,10 +181,10 @@ static void spawnVeg(HSD_GObj* gobj)
                 fp->item_gobj = veg_gobj;
                 fp->fv.pe.veg_gobj = veg_gobj;
                 if (veg_gobj != NULL) {
-                    ft_80094818(gobj, false);
+                    ftCo_80094818(gobj, false);
                     efSync_Spawn(1234, gobj, &fp->cur_pos);
-                    fp->cb.x21E4_callback_OnDeath2 = ftPe_Init_OnDeath2;
-                    fp->cb.x21DC_callback_OnTakeDamage = ftPe_Init_OnDeath2;
+                    fp->death2_cb = ftPe_Init_OnDeath2;
+                    fp->take_dmg_cb = ftPe_Init_OnDeath2;
                 }
             }
         }
@@ -194,7 +197,7 @@ static bool throwVegIfHeld(HSD_GObj* gobj, FtMotionId msid)
     HSD_GObj* igobj = GET_FIGHTER(gobj)->item_gobj;
     if (igobj != NULL) {
         if (itGetKind(igobj) == It_Kind_Peach_Turnip) {
-            ft_800957F4(gobj, msid);
+            ftCo_800957F4(gobj, msid);
         }
         return true;
     } else {
@@ -206,11 +209,11 @@ void ftPe_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (throwVegIfHeld(gobj, ftCo_MS_LightThrowF4) != true) {
-        fp->throw_flags.flags = 0;
-        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialLw, Ft_MF_None, NULL, 0,
-                                  1, 0);
+        fp->throw_flags = 0;
+        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialLw, Ft_MF_None, 0, 1, 0,
+                                  NULL);
         ftAnim_8006EBA4(gobj);
-        fp->cb.x21BC_callback_Accessory4 = spawnVeg;
+        fp->accessory4_cb = spawnVeg;
     }
 }
 
@@ -228,19 +231,19 @@ static void handleAirColl(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirLw, coll_mf, NULL,
-                              fp->cur_anim_frame, 1, 0);
-    fp->cb.x21BC_callback_Accessory4 = spawnVeg;
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirLw, coll_mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
+    fp->accessory4_cb = spawnVeg;
 }
 
-static void handleColl(HSD_GObj* gobj, float lag)
+static void handleColl(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialLw, coll_mf, NULL,
-                              fp->cur_anim_frame, 1, 0);
-    fp->cb.x21BC_callback_Accessory4 = spawnVeg;
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialLw, coll_mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
+    fp->accessory4_cb = spawnVeg;
 }
 
 static void doAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
@@ -262,7 +265,7 @@ void ftPe_SpecialLw_Anim(HSD_GObj* gobj)
 
 void ftPe_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
-    doAnim(gobj, ft_800CC730);
+    doAnim(gobj, ftCo_800CC730);
 }
 
 void ftPe_SpecialLw_Phys(HSD_GObj* gobj)

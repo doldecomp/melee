@@ -1,7 +1,9 @@
 #include "player.h"
 
 #include "ft/ft_0877.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftdata.h"
+#include "ft/ftdemo.h"
 #include "ft/ftlib.h"
 #include "ftKirby/ftKb_Init.h"
 #include "gm/gm_1601.h"
@@ -23,25 +25,6 @@ struct plAllocInfo {
     s32 internal_id;
     u8 slot;
     s8 unk8;
-    struct {
-        u8 b0 : 1;
-        u8 has_transformation : 1;
-        u8 b2 : 1;
-        u8 b3 : 1;
-        u8 b4 : 1;
-        u8 b5 : 1;
-        u8 b6 : 1;
-        u8 b7 : 1;
-    } bits;
-};
-
-/// @todo Probably the same struct as above, figure out how to make them work
-/// as
-///       one.
-struct plAllocInfo2 {
-    s32 internal_id;
-    u8 slot;
-    s32 unk8;
     struct {
         u8 b0 : 1;
         u8 has_transformation : 1;
@@ -335,7 +318,8 @@ void Player_80031EBC(int slot)
         if ((player->player_entity[player->transformed[i]])) {
             if (!ftLib_8008701C(player->player_entity[player->transformed[i]]))
             {
-                ft_800D4F24(player->player_entity[player->transformed[i]], 1);
+                ftCo_800D4F24(player->player_entity[player->transformed[i]],
+                              1);
             }
             HSD_GObjPLink_80390228(
                 player->player_entity[player->transformed[i]]);
@@ -372,13 +356,13 @@ void Player_80032070(int slot, bool bool_arg)
     player = &player_slots[slot];
 
     if (bool_arg == 0) {
-        ft_800D4FF4(player->player_entity[player->transformed[0]]);
+        ftCo_800D4FF4(player->player_entity[player->transformed[0]]);
 
         if (player->flags.b2 &&
             unkStruct->vec_arr[player->player_character].z == 0 &&
             ftLib_8008701C(player->player_entity[player->transformed[1]]))
         {
-            ft_800D4FF4(player->player_entity[player->transformed[1]]);
+            ftCo_800D4FF4(player->player_entity[player->transformed[1]]);
         }
 
         ifStatus_802F6E1C(slot);
@@ -386,7 +370,7 @@ void Player_80032070(int slot, bool bool_arg)
     }
 
     if (ftLib_800873CC(player->player_entity[player->transformed[0]])) {
-        ft_800D4FF4(player->player_entity[player->transformed[1]]);
+        ftCo_800D4FF4(player->player_entity[player->transformed[1]]);
     }
 }
 
@@ -455,10 +439,9 @@ enum_t Player_GetPlayerSlotType(s32 slot)
     return slot_type;
 }
 
-s32 Player_8003248C(s32 slot, bool arg1)
-{ /// decomp.me/scratch/3yC1W
-
-    s32 slot_type;
+enum_t Player_8003248C(s32 slot, bool arg1)
+{
+    enum_t slot_type;
     struct Unk_Struct_w_Array* unk_struct =
         (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
     StaticPlayer* player;
@@ -630,7 +613,7 @@ void Player_SetPlayerAndEntityFacingDirection(s32 slot, f32 facing_dir)
         player->facing_direction = facing_dir;
 
         if (player->player_entity[player->transformed[i]]) {
-            ft_0877_SetFacingDirection(
+            ftDemo_SetFacingDirection(
                 player->player_entity[player->transformed[i]], facing_dir);
         }
     }
@@ -1077,10 +1060,12 @@ HSD_GObj* Player_GetEntity(s32 slot)
     return player->player_entity[player->transformed[0]];
 }
 
-HSD_GObj* Player_GetEntityAtIndex(s32 slot, s32 index)
-{ //   Mostly called by Ice Climbers code, must be because they have 2nd entity
+/// @remarks Mostly called by Ice Climbers code, must be because they have 2nd
+///          entity
+HSD_GObj* Player_GetEntityAtIndex(int slot, int index)
+{
     StaticPlayer* player;
-    s32 entity_index;
+    int entity_index;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
     entity_index = player->transformed[index];
@@ -2108,15 +2093,15 @@ void Player_80036DD8(void)
     pl_804D6470 = *sp8;
 }
 
-void Player_80036E20(s32 arg0, s32 arg1, s32 arg2)
+void Player_80036E20(s32 arg0, HSD_Archive* archive, s32 arg2)
 {
     struct Unk_Struct_w_Array* unkStruct =
         (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
-    ft_800BEB60(unkStruct->vec_arr[arg0].x, arg1, arg2);
+    ftDemo_SetArchiveData(unkStruct->vec_arr[arg0].x, archive, arg2);
     if ((unkStruct->vec_arr[arg0].y != -1) &&
         (unkStruct->vec_arr[arg0].z == 0))
     {
-        ft_800BEB60(unkStruct->vec_arr[arg0].y, arg1, arg2);
+        ftDemo_SetArchiveData(unkStruct->vec_arr[arg0].y, archive, arg2);
     }
 }
 
@@ -2158,14 +2143,14 @@ void Player_80036F34(s32 slot, s32 arg1)
     some_struct.bits.b0 = 0;
 
     player->slot_type = 2;
-    player->player_entity[0] = ft_800BE7E0(&some_struct);
+    player->player_entity[0] = ftDemo_CreateFighter(&some_struct);
     if ((ftMapping_list[player->player_character].extra_internal_id != -1) &&
         (ftMapping_list[player->player_character].has_transformation == 0))
     {
         some_struct.internal_id =
             ftMapping_list[player->player_character].extra_internal_id;
         some_struct.bits.has_transformation = 1;
-        player->player_entity[1] = ft_800BE7E0(&some_struct);
+        player->player_entity[1] = ftDemo_CreateFighter(&some_struct);
     }
 }
 
@@ -2190,13 +2175,13 @@ void Player_80037054(s32 slot, s32 arg1)
     some_struct.bits.b0 = 1;
 
     player->slot_type = 2;
-    player->player_entity[0] = ft_800BE7E0(&some_struct);
+    player->player_entity[0] = ftDemo_CreateFighter(&some_struct);
     if ((ftMapping_list[player->player_character].extra_internal_id != -1) &&
         (ftMapping_list[player->player_character].has_transformation == 0))
     {
         some_struct.internal_id =
             ftMapping_list[player->player_character].extra_internal_id;
         some_struct.bits.has_transformation = 1;
-        player->player_entity[1] = ft_800BE7E0(&some_struct);
+        player->player_entity[1] = ftDemo_CreateFighter(&some_struct);
     }
 }

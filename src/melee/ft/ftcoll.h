@@ -2,72 +2,77 @@
 #define _ftcoll_h_
 
 #include <platform.h>
+#include "ft/forward.h"
+#include "ftCommon/forward.h"
+#include "lb/forward.h"
 
 #include "ft/fighter.h"
 
+#include <common_structs.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/gobjproc.h>
 
-void ftColl_800763C0(HSD_GObj* attacker, HSD_GObj* victim,
-                     s32 attackID); // Combo Count Logic
-void ftColl_80076444(HSD_GObj* attacker,
-                     HSD_GObj* victim); // Combo Count Logic + Get Attack ID
-void ftColl_8007646C(HSD_GObj* attackItem,
-                     HSD_GObj* victim); // Combo Count Logic w/ Item Owner
-void ftColl_800764DC(HSD_GObj* gobj);   // Check to end combo for victim
+/// Combo Count Logic
+void ftColl_800763C0(Fighter_GObj* attacker, Fighter_GObj* victim,
+                     enum_t attackID);
+void ftColl_80076444(
+    Fighter_GObj* attacker,
+    Fighter_GObj* victim); // Combo Count Logic + Get Attack ID
+void ftColl_8007646C(Fighter_GObj* attackItem,
+                     Fighter_GObj* victim); // Combo Count Logic w/ Item Owner
+void ftColl_800764DC(Fighter_GObj* gobj);   // Check to end combo for victim
 void ftColl_80076528(
-    HSD_GObj* gobj); // Combo count something + adjust FtPart_TopN
-void ftColl_800765AC(HSD_GObj* victim); // Clear victim pointer from attacker
-                                        // upon freeing memory?
+    Fighter_GObj* gobj); // Combo count something + adjust FtPart_TopN
+void ftColl_800765AC(Fighter_GObj* victim); // Clear victim pointer from
+                                            // attacker upon freeing memory?
 void ftColl_800765E0(void); // Reset hitbox and phantom collision count?
-f32 ftColl_800765F0(Fighter* fp, HSD_GObj* victim,
+f32 ftColl_800765F0(Fighter* fp, Fighter_GObj* victim,
                     f32 unk_floatvar); // Unk knockback related ?
-bool ftColl_8007B868(HSD_GObj* gobj);
+bool ftColl_8007B868(Fighter_GObj* gobj);
 
-void ftColl_80076528(HSD_GObj*);
-void ftColl_800765E0(void);
-void ftColl_80078754(HSD_GObj*, HSD_GObj*, bool);
-void ftColl_80078A2C(HSD_GObj*);
-void ftColl_80078C70(HSD_GObj*);
-void ftColl_8007925C(HSD_GObj*);
-void ftColl_8007AB48(HSD_GObj*);
-void ftColl_8007AB80(HSD_GObj*);
-void ftColl_8007ABD0(HitCapsule*, u32 damageAmount, HSD_GObj*);
-void ftColl_8007AE80(HSD_GObj*);
-void ftColl_8007AEE0(HSD_GObj*);
-void ftColl_8007AF28(HSD_GObj* gobj);
-void ftColl_8007AFF8(HSD_GObj*);
-void ftColl_8007B0C0(HSD_GObj*, int);
-void ftColl_8007B1B8(HSD_GObj*, f32*, HSD_GObjEvent);
-void ftColl_8007B320(HSD_GObj*);
-void ftColl_8007B4E0(HSD_GObj*);
-void ftColl_8007B62C(HSD_GObj*, bool);
-void ftColl_8007B6EC(HSD_GObj*);
-void ftColl_8007B760(HSD_GObj*, s32);
-void ftColl_8007B8CC(Fighter*, HSD_GObj*);
-void ftColl_8007B8E8(HSD_GObj*);
-void ftColl_GetWindOffsetVec(HSD_GObj*, Vec3* out_wind);
-void ftColl_8007BA0C(HSD_GObj*);
-void ftColl_8007BAC0(HSD_GObj*);
-f32 ftColl_8007BBCC(HSD_GObj*);
-void ftColl_8007BC90(HSD_GObj*);
-void ftColl_8007BE3C(HSD_GObj*);
+void ftColl_80078754(Fighter_GObj*, Fighter_GObj*, bool);
+void ftColl_80078A2C(Fighter_GObj*);
+void ftColl_80078C70(Fighter_GObj*);
+void ftColl_8007925C(Fighter_GObj*);
+void ftColl_8007AB48(Fighter_GObj*);
+void ftColl_8007AB80(Fighter_GObj*);
+void ftColl_8007ABD0(HitCapsule*, u32 damageAmount, Fighter_GObj*);
+void ftColl_8007AE80(Fighter_GObj*);
+void ftColl_8007AEE0(Fighter_GObj*);
+void ftColl_8007AF28(Fighter_GObj* gobj);
+void ftColl_8007AFF8(Fighter_GObj*);
+void ftColl_8007B0C0(Fighter_GObj*, Tangibility);
+void ftColl_8007B1B8(Fighter_GObj* gobj, ShieldDesc* shield, HSD_GObjEvent cb);
+void ftColl_8007B320(Fighter_GObj*);
+void ftColl_8007B4E0(Fighter_GObj*);
+void ftColl_8007B62C(Fighter_GObj*, bool);
+void ftColl_8007B6EC(Fighter_GObj*);
+void ftColl_8007B760(Fighter_GObj*, int);
+void ftColl_8007B8CC(Fighter*, Fighter_GObj*);
+void ftColl_8007B8E8(Fighter_GObj*);
+void ftColl_GetWindOffsetVec(Fighter_GObj*, Vec3* out_wind);
+void ftColl_8007BA0C(Fighter_GObj*);
+void ftColl_8007BAC0(Fighter_GObj*);
+f32 ftColl_8007BBCC(Fighter_GObj*);
+void ftColl_8007BC90(Fighter_GObj*);
+void ftColl_8007BE3C(Fighter_GObj*);
 
 ///  Update hitbox positions
 void ftColl_8007B8A8(HitCapsule*, Vec3*);
 
 /// Enable Reflect Bubble Update
-void ftColl_8007AEF8(HSD_GObj*);
+void ftColl_8007AEF8(Fighter_GObj*);
 
-void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*,
+void ftColl_CreateReflectHit(Fighter_GObj*, ReflectDesc*,
                              HSD_GObjEvent on_reflect);
-void ftColl_CreateAbsorbHit(HSD_GObj*, AbsorbDesc*);
-void ftColl_8007AF10(HSD_GObj*);
-void ftColl_8007B5AC(void* arg0, void* arg1, void* arg2);
-void ftColl_8007B7FC(Fighter*, s32);
-void ftColl_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID);
-void ftColl_80076640(void);
-void ftColl_80076764(void);
+void ftColl_CreateAbsorbHit(Fighter_GObj*, AbsorbDesc*);
+void ftColl_8007AF10(Fighter_GObj*);
+void ftColl_8007B5AC(ftCo_Fighter* fp, HurtCapsule* arg1,
+                     struct UNK_SAMUS_S2* arg2);
+void ftColl_8007B7FC(Fighter*, int);
+bool ftColl_80076640(Fighter*, float*);
+void ftColl_80076764(int arg0, enum_t arg1, enum_t arg2, UNK_T arg3,
+                     ftCo_Fighter* arg4, HurtCapsule* arg5);
 void ftColl_80076808(Fighter* attacker, HitCapsule*, int, Fighter* victim,
                      int);
 void ftColl_800768A0(void);
@@ -80,22 +85,25 @@ UNK_RET ftColl_80078488(UNK_PARAMS);
 UNK_RET ftColl_80077970(UNK_PARAMS);
 UNK_RET ftColl_80077C60(UNK_PARAMS);
 UNK_RET ftColl_80078998(UNK_PARAMS);
-UNK_RET ftColl_80078384(UNK_PARAMS);
+void ftColl_80078384(Fighter*, HurtCapsule*, HitCapsule*);
 UNK_RET ftColl_80078538(UNK_PARAMS);
 UNK_RET ftColl_8007861C(UNK_PARAMS);
 UNK_RET ftColl_800787B4(UNK_PARAMS);
-UNK_RET ftColl_800788D4(UNK_PARAMS);
+void ftColl_800788D4(Fighter_GObj* gobj);
 UNK_RET ftColl_80079AB0(UNK_PARAMS);
-UNK_RET ftColl_80079C70(UNK_PARAMS);
-UNK_RET ftColl_80079EA8(UNK_PARAMS);
+float ftColl_80079C70(Fighter*, Fighter*, void*, int);
+float ftColl_80079EA8(Fighter*, HitCapsule*, int);
 UNK_RET ftColl_8007A06C(UNK_PARAMS);
-UNK_RET ftColl_8007AC68(UNK_PARAMS);
-UNK_RET ftColl_8007AC9C(UNK_PARAMS);
-UNK_RET ftColl_8007AD18(UNK_PARAMS);
+bool ftColl_8007AC68(int kb_angle);
+void ftColl_8007AC9C(HitCapsule*, int, Fighter_GObj*);
+void ftColl_8007AD18(ftCo_Fighter* fp, HitCapsule*);
 UNK_RET ftColl_8007AF60(UNK_PARAMS);
-UNK_RET ftColl_8007AFC8(UNK_PARAMS);
-void ftColl_8007B064(HSD_GObj* gobj, enum_t arg1);
-UNK_RET ftColl_8007B128(UNK_PARAMS);
+void ftColl_8007AFC8(Fighter_GObj* gobj, int);
+void ftColl_8007B064(Fighter_GObj* gobj, enum_t arg1);
+void ftColl_8007B128(s8, int);
 UNK_RET ftColl_80077464(UNK_PARAMS);
+/* 07B6A0 */ void ftColl_8007B6A0(Fighter_GObj* gobj);
+/* 07B7A4 */ void ftColl_8007B7A4(Fighter_GObj* gobj, int);
+void ftColl_80078710(Fighter_GObj* gobj);
 
 #endif

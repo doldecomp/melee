@@ -17,6 +17,8 @@
 
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
+#include "ft/ftcolanim.h"
+#include "ft/ftmaterial.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -522,8 +524,8 @@ void ftGw_Init_OnLoad(HSD_GObj* gobj)
     void** items = fp->ft_data->x48_items;
 
     fp->x2222_b6 = false;
-    fp->x2223_flag.bits.b1 = true;
-    fp->x2224_flag.bits.b0 = true;
+    fp->x2223_b1 = true;
+    fp->x2224_b0 = true;
 
     PUSH_ATTRS(fp, ftGameWatchAttributes);
     fp->fv.gw.x2238_panicCharge = ftGw_Panic_Empty;
@@ -532,7 +534,8 @@ void ftGw_Init_OnLoad(HSD_GObj* gobj)
         ftGameWatchAttributes* da = fp->dat_attrs;
         fp->x34_scale.z = da->x0_GAMEWATCH_WIDTH;
         fp->x614 = da->x14_GAMEWATCH_OUTLINE;
-        ft_800BFB4C(gobj, &da->x4_GAMEWATCH_COLOR[fp->x619_costume_id]);
+        ftMaterial_800BFB4C(gobj,
+                            &da->x4_GAMEWATCH_COLOR[fp->x619_costume_id]);
         fp->x5C8 = items[10];
 
         it_8026B3F8(items[0], It_Kind_GameWatch_Greenhouse);
@@ -577,9 +580,9 @@ void ftGw_Init_8014A538(HSD_GObj* gobj)
     }
 }
 
-void ftGw_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftGw_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
 void ftGw_Init_OnItemInvisible(HSD_GObj* gobj)
@@ -609,7 +612,7 @@ void ftGw_Init_UnkMotionStates4(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.gw.x2238_panicCharge >= ftGw_Panic_Full) {
-        ft_800BFFD0(fp, 5, 0);
+        ftCo_800BFFD0(fp, 5, 0);
     }
 }
 

@@ -17,6 +17,7 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Guard.h"
 
 #include <placeholder.h>
 #include <dolphin/os/os.h>
@@ -428,8 +429,9 @@ void ftYs_Init_8012B8A4(HSD_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-    f32 tempf = da->xC * (1.0f - (fp->x1998_shieldHealth /
-                                  p_ftCommonData->x260_startShieldHealth));
+    f32 tempf =
+        da->xC *
+        (1.0f - (fp->shield_health / p_ftCommonData->x260_startShieldHealth));
     ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5B8, tempf);
     ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5BC, tempf);
 }
@@ -479,7 +481,7 @@ void ftYs_Init_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(item_list[0], It_Kind_Yoshi_EggThrow);
     it_8026B3F8(item_list[1], It_Kind_Yoshi_Star);
     it_8026B3F8(item_list[2], It_Kind_Yoshi_EggLay);
-    fp->x2226_flag.bits.b1 = 1;
+    fp->x2226_b1 = 1;
 }
 
 /* static */ void ftYs_SpecialS_8012E270(HSD_GObj* gobj);
@@ -497,9 +499,9 @@ f32 ftYs_Init_8012BAC0(Fighter* fp)
     return da->x120;
 }
 
-void ftYs_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftYs_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
 void ftYs_Init_OnItemInvisible(HSD_GObj* gobj)
@@ -542,7 +544,7 @@ void ftYs_Init_OnKnockbackExit(HSD_GObj* gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t ftYs_Init_8012BDA0(void)
+asm /* 12BDA0 */ void ftYs_Init_8012BDA0(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8012BDA0 00128980  7C 08 02 A6 */	mflr r0
@@ -590,7 +592,7 @@ asm unk_t ftYs_Init_8012BDA0(void)
 #endif
 
 void ftYs_Init_8012BE3C(HSD_GObj* gobj) {
-    s32* x1CC;
+    ftCo_DatAttrs_xBC_t* co_xBC;
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_Part part;
     Fighter* fp2;
@@ -598,11 +600,11 @@ void ftYs_Init_8012BE3C(HSD_GObj* gobj) {
     ftParts_80074B0C(gobj, 0, 0);
     ftColl_8007B0C0(gobj, 0);
 
-    x1CC = &fp->co_attrs.x1CC;
+    co_xBC = &fp->co_attrs.xBC;
     part = ftParts_8007500C(fp, FtPart_HipN);
     fp2 = GET_FIGHTER(gobj);
-    jobj = fp->parts[part].x0_jobj;
-    efAsync_Spawn(gobj, &fp2->x60C, FtPart_HipN, 1231, jobj, x1CC);
+    jobj = fp->parts[part].joint;
+    efAsync_Spawn(gobj, &fp2->x60C, FtPart_HipN, 1231, jobj, co_xBC);
 }
 
 #ifdef MWERKS_GEKKO
@@ -611,7 +613,7 @@ void ftYs_Init_8012BE3C(HSD_GObj* gobj) {
 /* static */ extern f32 const ftYs_Init_804D9A28;
 
 #pragma push
-asm unk_t ftYs_Init_8012BECC(void)
+asm void ftYs_Init_8012BECC(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 ftYs_Init_8012BECC:
@@ -632,7 +634,7 @@ ftYs_Init_8012BECC:
 /* 8012BF04 00128AE4  7F E3 FB 78 */	mr r3, r31
 /* 8012BF08 00128AE8  4B F4 2C 9D */	bl ftAnim_8006EBA4
 /* 8012BF0C 00128AEC  7F E3 FB 78 */	mr r3, r31
-/* 8012BF10 00128AF0  4B F6 65 41 */	bl ft_80092450
+/* 8012BF10 00128AF0  4B F6 65 41 */	bl ftCo_80092450
 /* 8012BF14 00128AF4  83 DF 00 2C */	lwz r30, 44(r31)
 /* 8012BF18 00128AF8  38 7F 00 00 */	addi r3, r31, 0
 /* 8012BF1C 00128AFC  38 80 00 01 */	li r4, 1
@@ -695,7 +697,7 @@ lbl_8012BFF0:
 /* 8012BFF0 00128BD0  7F E3 FB 78 */	mr r3, r31
 /* 8012BFF4 00128BD4  4B FF F8 B1 */	bl ftYs_Init_8012B8A4
 /* 8012BFF8 00128BD8  7F C3 F3 78 */	mr r3, r30
-/* 8012BFFC 00128BDC  4B F6 5D 5D */	bl ft_80091D58
+/* 8012BFFC 00128BDC  4B F6 5D 5D */	bl ftCo_80091D58
 /* 8012C000 00128BE0  38 7E 00 00 */	addi r3, r30, 0
 /* 8012C004 00128BE4  38 80 00 6E */	li r4, 110
 /* 8012C008 00128BE8  38 A0 00 7F */	li r5, 127

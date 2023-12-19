@@ -3,14 +3,17 @@
 
 #include "ftCo_08A6.h"
 
+#include "ftCo_Shouldered.h"
+
 #include "ft/ft_0877.h"
 #include "ft/ftdata.h"
 #include "ft/ftwaitanim.h"
+#include "ftCommon/ftCo_09CB.h"
 #include "it/it_26B1.h"
 
 #include <placeholder.h>
 
-#if defined(MWERKS_GEKKO) && !defined(WIP)
+#if defined(MWERKS_GEKKO)
 /* static */ float const lbl_804D8448 = 0;
 /* static */ float const lbl_804D844C = 1;
 /* static */ double const ftCo_804D8450 = 4503599627370496;
@@ -19,7 +22,7 @@ static char lbl_804D3AE0[] = "0";
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm UNK_RET lbl_8008A698(UNK_PARAMS)
+asm UNK_RET ftCo_8008A698(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 8008A698 00087278  7C 08 02 A6 */	mflr r0
@@ -46,7 +49,7 @@ lbl_8008A6C8:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm UNK_RET lbl_8008A6D8(UNK_PARAMS)
+asm UNK_RET ftCo_8008A6D8(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 8008A6D8 000872B8  7C 08 02 A6 */	mflr r0
@@ -71,7 +74,7 @@ asm UNK_RET lbl_8008A6D8(UNK_PARAMS)
 /* 8008A724 00087304  93 9F 00 14 */	stw r28, 0x14(r31)
 /* 8008A728 00087308  38 7F 00 00 */	addi r3, r31, 0
 /* 8008A72C 0008730C  38 9D 00 00 */	addi r4, r29, 0
-/* 8008A730 00087310  48 01 40 85 */	bl ft_8009E7B4
+/* 8008A730 00087310  48 01 40 85 */	bl ftCo_8009E7B4
 /* 8008A734 00087314  80 7E 00 0C */	lwz r3, 0xc(r30)
 /* 8008A738 00087318  38 00 00 00 */	li r0, 0
 /* 8008A73C 0008731C  90 7F 03 EC */	stw r3, 0x3ec(r31)
@@ -109,7 +112,7 @@ lbl_8008A794:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ft_8008A7A8(ftCo_GObj*, int)
+asm void ftCo_8008A7A8(ftCo_GObj*, int)
 { // clang-format off
     nofralloc
 /* 8008A7A8 00087388  7C 08 02 A6 */	mflr r0
@@ -150,7 +153,7 @@ lbl_8008A7F8:
 /* 8008A830 00087410  93 FE 00 14 */	stw r31, 0x14(r30)
 /* 8008A834 00087414  38 7E 00 00 */	addi r3, r30, 0
 /* 8008A838 00087418  38 9B 00 00 */	addi r4, r27, 0
-/* 8008A83C 0008741C  48 01 3F 79 */	bl ft_8009E7B4
+/* 8008A83C 0008741C  48 01 3F 79 */	bl ftCo_8009E7B4
 /* 8008A840 00087420  80 7C 00 0C */	lwz r3, 0xc(r28)
 /* 8008A844 00087424  38 00 00 00 */	li r0, 0
 /* 8008A848 00087428  90 7E 03 EC */	stw r3, 0x3ec(r30)
@@ -242,7 +245,7 @@ lbl_8008A944:
 /* 8008A974 00087554  93 5C 00 14 */	stw r26, 0x14(r28)
 /* 8008A978 00087558  38 7C 00 00 */	addi r3, r28, 0
 /* 8008A97C 0008755C  38 99 00 00 */	addi r4, r25, 0
-/* 8008A980 00087560  48 01 3E 35 */	bl ft_8009E7B4
+/* 8008A980 00087560  48 01 3E 35 */	bl ftCo_8009E7B4
 /* 8008A984 00087564  80 7B 00 0C */	lwz r3, 0xc(r27)
 /* 8008A988 00087568  38 00 00 00 */	li r0, 0
 /* 8008A98C 0008756C  90 7C 03 EC */	stw r3, 0x3ec(r28)

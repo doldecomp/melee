@@ -5,6 +5,7 @@
 #include "ftCommon/forward.h"
 
 struct S_UNK_YOSHI1;
+typedef struct HSD_GObj ftYs_GObj;
 
 /// @todo Fix names
 static MotionFlags const ftYs_MF_Special ATTRIBUTE_USED =

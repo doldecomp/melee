@@ -6,6 +6,7 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
 #include "ft/ftcommon.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
@@ -46,15 +47,15 @@ void ftMt_SpecialLw_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;
     fp->fv.mt.x222C_disableGObj = NULL;
 
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialLw, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialLw, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
+    fp->accessory4_cb = ftMt_SpecialLw_CreateDisable;
 }
 
 // 0x80146264
@@ -69,16 +70,16 @@ void ftMt_SpecialAirLw_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;
     fp->fv.mt.x222C_disableGObj = NULL;
     fp->self_vel.y = 0.0f;
 
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirLw, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirLw, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
+    fp->accessory4_cb = ftMt_SpecialLw_CreateDisable;
 }
 
 // 0x801462DC
@@ -104,7 +105,7 @@ void ftMt_SpecialAirLw_Anim(HSD_GObj* gobj)
             it_802C49E0(GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj);
             GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj = NULL;
         }
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -136,15 +137,15 @@ void ftMt_SpecialAirLw_Phys(HSD_GObj* gobj)
 
     ftCommon_8007D494(fp, mewtwoAttrs->x78_MEWTWO_DISABLE_GRAVITY,
                       mewtwoAttrs->x7C_MEWTWO_DISABLE_TERMINAL_VELOCITY);
-    ftCommon_8007CE94(fp, ca->x180_AerialFriction);
+    ftCommon_8007CE94(fp, ca->aerial_friction);
 }
 
 inline void ftMewtwo_SpecialLw_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.mt.x222C_disableGObj != NULL) {
-        fp->cb.x21E4_callback_OnDeath2 = ftMt_Init_OnDeath2;
-        fp->cb.x21DC_callback_OnTakeDamage = ftMt_Init_OnTakeDamage;
+        fp->death2_cb = ftMt_Init_OnDeath2;
+        fp->take_dmg_cb = ftMt_Init_OnTakeDamage;
     }
 }
 
@@ -160,10 +161,10 @@ void ftMt_SpecialLw_GroundToAir(HSD_GObj* gobj)
     fp->self_vel.y = 0.0f;
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirLw,
-                              FTMEWTWO_SPECIALLW_COLL_FLAG, NULL,
-                              fp->cur_anim_frame, 1.0f, 0.0f);
+                              FTMEWTWO_SPECIALLW_COLL_FLAG, fp->cur_anim_frame,
+                              1.0f, 0.0f, NULL);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
+    fp->accessory4_cb = ftMt_SpecialLw_CreateDisable;
 
     ftMewtwo_SpecialLw_SetCall(gobj);
 
@@ -173,17 +174,17 @@ void ftMt_SpecialLw_GroundToAir(HSD_GObj* gobj)
 // 0x801464B0
 // https://decomp.me/scratch/xNFhq // Mewtwo's air -> ground Disable Action
 // State handler
-void ftMt_SpecialAirLw_AirToGround(HSD_GObj* gobj, float lag)
+void ftMt_SpecialAirLw_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialLw,
-                              FTMEWTWO_SPECIALLW_COLL_FLAG, NULL,
-                              fp->cur_anim_frame, 1.0f, 0.0f);
+                              FTMEWTWO_SPECIALLW_COLL_FLAG, fp->cur_anim_frame,
+                              1.0f, 0.0f, NULL);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
+    fp->accessory4_cb = ftMt_SpecialLw_CreateDisable;
 
     ftMewtwo_SpecialLw_SetCall(gobj);
 }
@@ -216,7 +217,7 @@ void ftMt_SpecialLw_CreateDisable(HSD_GObj* gobj)
     if ((u32) fp->cmd_vars[0] != 0U) {
         mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-        lb_8000B1CC(fp->parts[FtPart_L3rdNb].x0_jobj, NULL, &sp18);
+        lb_8000B1CC(fp->parts[FtPart_L3rdNb].joint, NULL, &sp18);
 
         sp18.x += (mewtwoAttrs->x80_MEWTWO_DISABLE_OFFSET_X * fp->facing_dir);
         sp18.y += mewtwoAttrs->x84_MEWTWO_DISABLE_OFFSET_Y;

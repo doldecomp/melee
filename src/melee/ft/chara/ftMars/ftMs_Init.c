@@ -421,9 +421,9 @@ void ftMs_Init_OnDeath(HSD_GObj* gobj)
 
 // 801362B0 00132E90
 // ftMs_Init_OnItemPickup
-void ftMs_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftMs_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 0, 1);
+    Fighter_OnItemPickup(gobj, flag, 0, 1);
 }
 
 // 80136390 00132F70
@@ -445,9 +445,9 @@ void ftMs_Init_OnItemVisible(HSD_GObj* gobj)
 // 80136420 00133000
 // ftMs_Init_OnItemDrop
 // https://decomp.me/scratch/Ws8ow
-void ftMs_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftMs_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, bool1, 0, 1);
+    Fighter_OnItemDrop(gobj, flag, 0, 1);
 }
 
 // 80136474 00133054
@@ -497,18 +497,18 @@ void ftMs_SpecialN_801365A8(HSD_GObj* gobj)
         result = ftLib_800872A4(gobj);
         switch (result) {
         case 18:
-            efSync_Spawn(1266, gobj, fp->parts->x0_jobj);
+            efSync_Spawn(1266, gobj, fp->parts->joint);
             break;
         case 26:
-            efSync_Spawn(1297, gobj, fp->parts->x0_jobj);
+            efSync_Spawn(1297, gobj, fp->parts->joint);
             break;
         }
         fp->x2219_b0 = 1;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = 0;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = 0;
     return;
 }
 
@@ -522,18 +522,18 @@ void ftMs_SpecialN_8013666C(HSD_GObj* gobj)
         result = ftLib_800872A4(gobj);
         switch (result) {
         case 18:
-            efSync_Spawn(1267, gobj, fp->parts->x0_jobj);
+            efSync_Spawn(1267, gobj, fp->parts->joint);
             break;
         case 26:
-            efSync_Spawn(1298, gobj, fp->parts->x0_jobj);
+            efSync_Spawn(1298, gobj, fp->parts->joint);
             break;
         }
         fp->x2219_b0 = 1;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = 0;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = 0;
     return;
 }
 

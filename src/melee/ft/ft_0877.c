@@ -2,13 +2,12 @@
 
 #include "fighter.h"
 #include "ftcommon.h"
+#include "ftdevice.h"
 #include "inlines.h"
 
 #include "lb/lbaudio_ax.h"
 
 #define TEST(expr) (expr) ? true : false
-
-/* static */ s32 ft_800C06B4(Fighter*);
 
 s32 ft_800877F8(HSD_GObj* gobj, s32 arg1)
 {
@@ -25,13 +24,13 @@ s32 ft_80087818(HSD_GObj* gobj, s32 arg1)
 s32 ft_80087838(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return TEST(fp->x221D_flag.bits.b7 & 1);
+    return TEST(fp->x221D_b7 & 1);
 }
 
 s32 ft_80087858(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return TEST(fp->x2227_flag.bits.b1 & 1);
+    return TEST(fp->x2227_b1 & 1);
 }
 
 s32 ft_80087878(HSD_GObj* gobj, s32 arg1)
@@ -106,7 +105,7 @@ s32 ft_800879F8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x221D_flag.bits.b6 & 1) {
+    if (fp->x221D_b6 & 1) {
         return true;
     }
 
@@ -118,9 +117,10 @@ s32 ft_80087A18(HSD_GObj* gobj)
     s32 var1;
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->x2226_flag.bits.b4) &&
-        ((var1 = ft_800C06B4(fp), ((var1 == 0x7B) != 0)) || (var1 == 0x80)) &&
-        ((fp->x2226_flag.bits.b5)))
+    if ((fp->x2226_b4) &&
+        ((var1 = ftCo_800C06B4(fp), ((var1 == 0x7B) != 0)) ||
+         (var1 == 0x80)) &&
+        ((fp->x2226_b5)))
     {
         return true;
     }
@@ -131,13 +131,13 @@ s32 ft_80087A18(HSD_GObj* gobj)
 u8 ft_80087A80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x2114_SmashAttr.x2134_vibrateFrame;
+    return fp->smash_attrs.x2134_vibrateFrame;
 }
 
 f32 ft_80087A8C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x2114_SmashAttr.x2138_smashSinceHitbox;
+    return fp->smash_attrs.x2138_smashSinceHitbox;
 }
 
 s32 ft_80087A98(HSD_GObj* gobj)
@@ -149,7 +149,7 @@ s32 ft_80087A98(HSD_GObj* gobj)
 u8 ft_80087AA4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x2227_flag.bits.b5;
+    return fp->x2227_b5;
 }
 
 u8 ft_80087AB4(HSD_GObj* gobj)
@@ -180,8 +180,7 @@ s32 ft_80087AEC(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((fp->x34_scale.y != fp->x34_scale.x) ||
-        ((fp->x2226_flag.bits.b4) || (fp->x2223_flag.bits.b7) ||
-         (fp->x197C != 0)))
+        ((fp->x2226_b4) || (fp->x2223_b7) || (fp->x197C != 0)))
     {
         return true;
     }
@@ -224,21 +223,21 @@ s32 ft_80087B34(HSD_GObj* gobj)
 void ft_80087BAC(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2228_flag.b5 = arg1;
+    fp->x2228_b5 = arg1;
 }
 
 void ft_80087BC0(HSD_GObj* gobj, s8 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     u64 var0 = fp->x1A98;
-    ft_800A101C(fp, arg1, var0, fp->x1A9C);
+    ftCo_800A101C(fp, arg1, var0, fp->x1A9C);
 }
 
 void ft_80087BEC(HSD_GObj* gobj, u8 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     u64 var0 = fp->x1A94;
-    ft_800A101C(fp, var0, arg1, fp->x1A9C);
+    ftCo_800A101C(fp, var0, arg1, fp->x1A9C);
 }
 
 s32 ft_80087C1C(void)
@@ -247,8 +246,7 @@ s32 ft_80087C1C(void)
     s32 ftKind;
     u32 result = 0;
 
-    for (gobj = HSD_GObj_804D782C->x20_fighters; gobj != 0; gobj = gobj->next)
-    {
+    for (gobj = HSD_GObj_Entities->fighters; gobj != 0; gobj = gobj->next) {
         ftKind = (GET_FIGHTER(gobj))->kind;
         if (ftKind < 27) {
             result = result | 1 << ftKind;
@@ -276,7 +274,7 @@ s32 ft_80087C70(Fighter* fp, s32 arg1)
     u8 temp_r3_3;
 
     s32 var_r4 = arg1;
-    s32 temp_r0 = (fp->x2228_flag.b3) & 3;
+    s32 temp_r0 = (fp->x2228_b3) & 3;
 
     switch (temp_r0) {
     case 0:
@@ -598,7 +596,7 @@ s32 ft_80087D0C(Fighter* fighter, s32 arg1)
             sfx = ft_80087C70(
                 fighter,
                 sfx); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx)
-            if (fighter->x2223_flag.bits.b7) {
+            if (fighter->x2223_b7) {
                 sfx += 3;
             }
             break;

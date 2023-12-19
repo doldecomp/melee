@@ -2,6 +2,7 @@
 
 #include "ftMh_Damage_0.h"
 #include "ftMh_Wait1_2.h"
+#include "math.h"
 #include "types.h"
 
 #include "cm/camera.h"
@@ -16,12 +17,12 @@ void ftMh_MS_343_801510B0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Entry, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Entry, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
     fp->cur_pos.x = da->x30_pos2.x;
     fp->cur_pos.y = da->x30_pos2.y;
     fp->cur_pos.z = 0;
-    fp->cb.x21BC_callback_Accessory4 = ftMh_MS_343_801511FC;
+    fp->accessory4_cb = ftMh_MS_343_801511FC;
     fp->mv.mh.unk4.x0 = ftMh_UnkEnum0_Unk00;
 
     /// @todo Probably same file if #ftMh_MS_343_801511FC is getting
@@ -43,7 +44,7 @@ void ftMh_Entry_Anim(HSD_GObj* gobj)
 void ftMh_Entry_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!Player_GetPlayerSlotType(fp->xC_playerID)) {
+    if (!Player_GetPlayerSlotType(fp->player_id)) {
         ftBossLib_8015BD20(gobj);
     }
 }

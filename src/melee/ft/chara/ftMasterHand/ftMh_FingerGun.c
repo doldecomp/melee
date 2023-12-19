@@ -11,6 +11,7 @@
 #include "lb/lbvector.h"
 
 #include <dolphin/mtx/types.h>
+#include <MetroTRK/intrinsics.h>
 
 void ftMh_FingerBeamEnd_Anim(HSD_GObj* gobj)
 {
@@ -22,7 +23,7 @@ void ftMh_FingerBeamEnd_Anim(HSD_GObj* gobj)
 void ftMh_FingerBeamEnd_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }
@@ -44,7 +45,7 @@ void ftMh_MS_363_801530A4(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerGun1, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerGun1, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
 
     {
@@ -88,7 +89,7 @@ void ftMh_FingerGun1_Anim(HSD_GObj* gobj)
 void ftMh_FingerGun1_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }
@@ -168,28 +169,28 @@ void ftMh_MS_364_801533CC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
-    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerGun2, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerGun2, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
     if (ftLib_80087120(gobj) > da->xEC) {
         ftAnim_SetAnimRate(gobj, da->xF4);
     }
     fp->self_vel.x = 0;
     fp->self_vel.y = 0;
-    fp->cb.x21BC_callback_Accessory4 = ftMh_MS_365_801535B0;
+    fp->accessory4_cb = ftMh_MS_365_801535B0;
 }
 
 static inline void lbl_8015346C_inline(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
-    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerGun2, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerGun2, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
     if (ftLib_80087120(gobj) > da->xEC) {
         ftAnim_SetAnimRate(gobj, da->xF4);
     }
     fp->self_vel.x = 0;
     fp->self_vel.y = 0;
-    fp->cb.x21BC_callback_Accessory4 = ftMh_MS_365_801535B0;
+    fp->accessory4_cb = ftMh_MS_365_801535B0;
 }
 
 void ftMh_FingerGun2_Anim(HSD_GObj* gobj)
@@ -208,7 +209,7 @@ void ftMh_FingerGun2_Anim(HSD_GObj* gobj)
 void ftMh_FingerGun2_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }
@@ -229,12 +230,12 @@ void ftMh_MS_365_801535B0(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
 
     if (fp->cmd_vars[0] != 0) {
-        ftMh_MS_365_8015364C(gobj, fp->parts[FtPart_LKneeJ].x0_jobj, da->xF8,
+        ftMh_MS_365_8015364C(gobj, fp->parts[FtPart_LKneeJ].joint, da->xF8,
                              da->xFC);
         fp->cmd_vars[0] = 0;
     }
     if (fp->cmd_vars[1] != 0) {
-        ftMh_MS_365_8015364C(gobj, fp->parts[FtPart_RKneeJ].x0_jobj, da->x100,
+        ftMh_MS_365_8015364C(gobj, fp->parts[FtPart_RKneeJ].joint, da->x100,
                              da->x104);
         fp->cmd_vars[1] = 0;
     }
@@ -272,6 +273,6 @@ void ftMh_MS_365_80153730(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerGun3, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerGun3, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
 }

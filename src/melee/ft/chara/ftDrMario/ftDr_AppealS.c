@@ -4,6 +4,7 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0D14.h"
 #include "ftMario/ftMr_SpecialN.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
@@ -23,13 +24,13 @@ void ftDr_AppealS_Anim(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     if (fp->cmd_vars[0] == 1 && fp->fv.mr.x2240 == 0U) {
-        lb_8000B1CC(fp->parts->x0_jobj, 0, &sp18);
+        lb_8000B1CC(fp->parts->joint, 0, &sp18);
         tmp = ftMr_SpecialN_VitaminRandom(gobj);
         tmp = it_802C0850(gobj, &sp18, tmp, 0x31, fp->facing_dir);
         fp->fv.mr.x2240 = tmp;
         if (tmp != 0) {
-            fp->cb.x21E4_callback_OnDeath2 = ftDr_Init_80149540;
-            fp->cb.x21DC_callback_OnTakeDamage = ftDr_Init_80149540;
+            fp->death2_cb = ftDr_Init_80149540;
+            fp->take_dmg_cb = ftDr_Init_80149540;
         }
     } else if (fp->cmd_vars[0] == 2) {
         ftDr_Init_801497CC(gobj);
@@ -45,8 +46,8 @@ void ftDr_AppealS_Anim(HSD_GObj* gobj)
         if (gobj != NULL) {
             fp = gobj->user_data;
             if (fp != NULL) {
-                fp->cb.x21DC_callback_OnTakeDamage = 0;
-                fp->cb.x21E4_callback_OnDeath2 = 0;
+                fp->take_dmg_cb = 0;
+                fp->death2_cb = 0;
             }
         }
         ft_8008A2BC(gobj);

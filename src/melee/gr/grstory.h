@@ -25,7 +25,6 @@ void grStory_801E33E0(HSD_GObj*);
 void grStory_801E3414(HSD_GObj*);
 void grStory_801E3418(HSD_GObj*);
 void grStory_801E366C(HSD_GObj*);
-static bool grStory_801E36D0(bool);
 bool grStory_801E36D8(Vec3*, int, HSD_JObj*);
 
 #endif

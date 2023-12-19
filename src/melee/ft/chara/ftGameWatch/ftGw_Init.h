@@ -10,7 +10,7 @@
 /* 14A37C */ void ftGw_Init_OnLoad(HSD_GObj* gobj);
 /* 14A4CC */ void ftGw_Init_OnDamage(HSD_GObj* gobj);
 /* 14A538 */ void ftGw_Init_8014A538(HSD_GObj* gobj);
-/* 14A5B8 */ void ftGw_Init_OnItemPickup(HSD_GObj* gobj, bool arg1);
+/* 14A5B8 */ void ftGw_Init_OnItemPickup(HSD_GObj* gobj, bool flag);
 /* 14A698 */ void ftGw_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 14A6E0 */ void ftGw_Init_OnItemVisible(HSD_GObj* gobj);
 /* 14A728 */ void ftGw_Init_OnItemDrop(HSD_GObj* gobj, bool dropItemFlag);

@@ -5,7 +5,7 @@
 #include "ft/forward.h"
 
 typedef Fighter ftCo_Fighter;
-typedef HSD_GObj ftCo_GObj;
+typedef Fighter_GObj ftCo_GObj;
 
 static MotionFlags const ftCo_MF_5_6 ATTRIBUTE_USED =
     Ft_MF_SkipAnimVel | Ft_MF_Unk06;
@@ -946,5 +946,12 @@ typedef enum ftCo_Submotion {
     ftCo_SM_KirbyYoshiEgg,
     ftCo_SM_Count,
 } ftCo_Submotion;
+
+typedef enum ftCo_Surface {
+    FTCO_Surface_None,
+    ftCo_Surface_LeftWall,
+    ftCo_Surface_RightWall,
+    ftCo_Surface_Ceiling,
+} ftCo_Surface;
 
 #endif

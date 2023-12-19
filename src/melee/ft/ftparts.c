@@ -5,6 +5,7 @@
 #include "ft/fighter.h"
 #include "ft/ftanim.h"
 #include "ft/ftdata.h"
+#include "ft/ftmaterial.h"
 #include "lb/lbrefract.h"
 
 #include <placeholder.h>
@@ -24,17 +25,6 @@
 #define JOBJ_NEXT(jobj) ((jobj) == NULL ? NULL : (jobj)->next)
 #define JOBJ_PARENT(jobj) ((jobj) == NULL ? NULL : (jobj)->parent)
 #define JOBJ_CHILD(jobj) ((jobj) == NULL ? NULL : (jobj)->child)
-
-extern HSD_GObj* HSD_GObj_804D7814;
-extern HSD_PerfStat HSD_PerfCurrentStat;
-extern HSD_MObjInfo ftMObj;
-
-void ftParts_80074ACC(void);
-u32 ftParts_8007506C(s32 ftkind, u32 part);
-
-void ftParts_JObjInfoInit(void);
-void ftParts_IntpJObjInfoInit(void);
-void ftParts_PObjInfoInit(void);
 
 HSD_JObjInfo ftJObj = { ftParts_JObjInfoInit };
 HSD_JObjInfo ftIntpJObj = { ftParts_IntpJObjInfoInit };
@@ -1168,13 +1158,13 @@ void ftParts_SetupParts(HSD_GObj* fighter_obj)
     u32 dobj_count = 0;
 
     if (ftPartsTable[fighter->kind]->parts_num > MAX_FT_PARTS) {
-        OSReport(ftParts_803C0A94, fighter->xC_playerID);
+        OSReport(ftParts_803C0A94, fighter->player_id);
         __assert(ftParts_803C0A08, 503, ftParts_804D3A58);
     }
 
     while (jobj != NULL) {
         if (ftParts_8007506C(fighter->kind, part) != 0) {
-            fighter->parts[part].x0_jobj = NULL;
+            fighter->parts[part].joint = NULL;
             part++;
             continue;
         }
@@ -1224,7 +1214,7 @@ void ftParts_SetupParts(HSD_GObj* fighter_obj)
     fighter->dobj_list.count = dobj_count;
 
     if (part != ftPartsTable[fighter->kind]->parts_num) {
-        OSReport(ftParts_803C0AB8, fighter->xC_playerID);
+        OSReport(ftParts_803C0AB8, fighter->player_id);
         __assert(ftParts_803C0A08, 546, ftParts_804D3A58);
     }
 }
@@ -1393,18 +1383,14 @@ lbl_8007480C:
 /* 80074828 00071408  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
 #else
-
 void ftParts_8007462C(void)
 {
     NOT_IMPLEMENTED;
 }
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void ftParts_8007482C(void)
 { // clang-format off
@@ -1431,18 +1417,14 @@ asm void ftParts_8007482C(void)
 /* 80074878 00071458  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
 #else
-
 void ftParts_8007482C(void)
 {
     NOT_IMPLEMENTED;
 }
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void ftParts_8007487C(unk_t item, u32*, u8 costume_id, u32*, u32*)
 { // clang-format off
@@ -1542,15 +1524,12 @@ lbl_80074944:
 /* 800749C8 000715A8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
 #else
-
 void ftParts_8007487C(unk_t item, u32* arg1, u8 costume_id, u32* arg3,
                       u32* arg4)
 {
     NOT_IMPLEMENTED;
 }
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -1595,18 +1574,14 @@ lbl_80074A20:
 /* 80074A48 00071628  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
 #else
-
 void ftParts_800749CC(HSD_GObj* arg0)
 {
     NOT_IMPLEMENTED;
 }
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void ftParts_80074A4C(HSD_GObj*, enum_t, enum_t)
 { // clang-format off
@@ -1623,18 +1598,14 @@ asm void ftParts_80074A4C(HSD_GObj*, enum_t, enum_t)
 /* 80074A70 00071650  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
 #else
-
 void ftParts_80074A4C(HSD_GObj* arg0, enum_t arg1, enum_t arg2)
 {
     NOT_IMPLEMENTED;
 }
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm s32 ftParts_80074A74(HSD_GObj*,
                          s32){ // clang-format off
@@ -1647,18 +1618,14 @@ asm s32 ftParts_80074A74(HSD_GObj*,
 /* 80074A88 00071668  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
 #else
-
 s32 ftParts_80074A74(HSD_GObj* arg0, s32 arg1)
 {
     NOT_IMPLEMENTED;
 }
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void ftParts_80074A8C(HSD_GObj*)
 { // clang-format off
@@ -1683,20 +1650,17 @@ lbl_80074AAC:
 /* 80074AC8 000716A8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
 #else
-
 void ftParts_80074A8C(HSD_GObj* arg0)
 {
     NOT_IMPLEMENTED;
 }
-
 #endif
 
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ftParts_80074ACC(void)
+asm void ftParts_80074ACC(ftCo_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80074ACC 000716AC  80 A3 00 2C */	lwz r5, 0x2c(r3)
@@ -1719,20 +1683,17 @@ lbl_80074AEC:
 /* 80074B08 000716E8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
 #else
-
-void ftParts_80074ACC(void)
+void ftParts_80074ACC(ftCo_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
-
 #endif
 
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ftParts_80074B0C(HSD_GObj*, s32, s32)
+asm void ftParts_80074B0C(HSD_GObj*, int, int)
 { // clang-format off
     nofralloc
 /* 80074B0C 000716EC  7C 08 02 A6 */	mflr r0
@@ -1762,14 +1723,11 @@ lbl_80074B5C:
 /* 80074B68 00071748  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
 #else
-
-void ftParts_80074B0C(HSD_GObj* arg0, s32 arg1, s32 arg2)
+void ftParts_80074B0C(HSD_GObj* gobj, int arg1, int arg2)
 {
     NOT_IMPLEMENTED;
 }
-
 #endif
 
 #ifdef MWERKS_GEKKO

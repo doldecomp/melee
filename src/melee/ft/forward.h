@@ -7,22 +7,61 @@
 #include <stddef.h>
 #include <dolphin/mtx/types.h>
 
-#define FIGHTERVARS_SIZE 0x100
+#define FIGHTERVARS_SIZE 0xF8
 
-typedef HSD_GObj Fighter_GObj;
 typedef struct Fighter Fighter;
+
+#ifdef M2CTX
+typedef struct Fighter_GObj Fighter_GObj;
+struct Fighter_GObj {
+    /*  +0 */ u16 classifier;
+    /*  +2 */ u8 p_link;
+    /*  +3 */ u8 gx_link;
+    /*  +4 */ u8 p_priority;
+    /*  +5 */ u8 render_priority;
+    /*  +6 */ u8 obj_kind;
+    /*  +7 */ u8 user_data_kind;
+    /*  +8 */ Fighter_GObj* next;
+    /*  +C */ Fighter_GObj* prev;
+    /* +10 */ Fighter_GObj* next_gx;
+    /* +14 */ Fighter_GObj* prev_gx;
+    /* +18 */ HSD_GObjProc* proc;
+    /* +1C */ void (*rendered)(Fighter_GObj* gobj, s32 code);
+    /* +20 */ u64 gxlink_prios;
+    /* +28 */ HSD_JObj* hsd_obj;
+    /* +2C */ Fighter* user_data;
+    /* +30 */ void (*user_data_remove_func)(Fighter* data);
+    /* +34 */ void* x34_unk;
+};
+#else
+typedef struct HSD_GObj Fighter_GObj;
+#endif
+
 typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;
 typedef struct Fighter_DemoStrings Fighter_DemoStrings;
+typedef struct FtCmdState FtCmdState;
 typedef struct MotionState MotionState;
 typedef struct UnkFloat6_Camera UnkFloat6_Camera;
+typedef struct ftCmdScript ftCmdScript;
+typedef struct ftCo_DatAttrs_xBC_t ftCo_DatAttrs_xBC_t;
+typedef struct ftCollisionBox ftCollisionBox;
+typedef struct ftCommonData ftCommonData;
+typedef struct ftData_UnkCountStruct ftData_UnkCountStruct;
+typedef struct ftDeviceUnk1 ftDeviceUnk1;
+typedef struct ftDeviceUnk2 ftDeviceUnk2;
 typedef struct ftLk_SpecialN_Vec3Group ftLk_SpecialN_Vec3Group;
+typedef struct ftMaterial_UnkTevStruct ftMaterial_UnkTevStruct;
+typedef struct ftSubactionList ftSubactionList;
+typedef struct gmScriptEventDefault gmScriptEventDefault;
 typedef u32 MotionFlags;
 
-typedef void (*Fighter_ItemEvent)(HSD_GObj* this, bool arg1);
-typedef void (*Fighter_UnkMtxEvent)(HSD_GObj* this, int arg1, Mtx vmtx);
-typedef void (*Fighter_ModelEvent)(Fighter* fp, int arg1, bool arg2);
+typedef void (*FighterEvent)(Fighter* fp);
 typedef char* (*Fighter_MotionFileStringGetter)(enum_t arg0);
-typedef void (*Fighter_UnkPtrEvent)(s32 arg0, s32* arg1, s32* arg2);
+typedef void (*Fighter_ItemEvent)(HSD_GObj* gobj, bool arg1);
+typedef void (*Fighter_ModelEvent)(Fighter* fp, int arg1, bool arg2);
+typedef void (*Fighter_UnkMtxEvent)(HSD_GObj* gobj, int arg1, Mtx vmtx);
+typedef void (*Fighter_UnkPtrEvent)(int arg0, int* arg1, int* arg2);
+typedef void (*FtCmd)(Fighter_GObj* gobj, FtCmdState* cmd);
 
 typedef enum_t FtMotionId;
 
@@ -350,5 +389,19 @@ typedef enum FtMoveId {
     FtMoveId_Hammer,
     FtMoveId_WarpStarFall,
 } FtMoveId;
+
+typedef enum SmashState {
+    SmashState_None,
+    SmashState_PreCharge,
+    SmashState_Charging,
+    SmashState_Release,
+} SmashState;
+
+typedef enum ftCommon_BuryType {
+    BuryType_Unk0,
+    BuryType_Unk1,
+    BuryType_Unk2,
+    BuryType_Unk3,
+} ftCommon_BuryType;
 
 #endif

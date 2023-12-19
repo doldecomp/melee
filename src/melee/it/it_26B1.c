@@ -8,6 +8,7 @@
 #include "it/it_266F.h"
 #include "it/it_27CF.h"
 #include "it/item.h"
+#include "items/itsword.h"
 
 #include <common_structs.h>
 #include <math.h>
@@ -38,10 +39,10 @@ static inline float _sqrtfItem(float x)
     return x;
 }
 
-/// Apply Item Damage -  may not be itHit* ???
-f32 it_8026B1D4(HSD_GObj* gobj, itHit* itemHitboxUnk)
+/// Apply Item Damage -  may not be HitCapsule* ???
+f32 it_8026B1D4(HSD_GObj* gobj, HitCapsule* itemHitboxUnk)
 {
-    f32 ret = itemHitboxUnk->xC_damage_staled;
+    f32 ret = itemHitboxUnk->damage;
     const Item* ip = gobj->user_data;
     if (ip->xDC8_word.flags.x14 != 0) {
         f32 itemSpeed = _sqrtfItem(ip->x40_vel.x * ip->x40_vel.x +
@@ -99,7 +100,8 @@ enum_t it_8026B30C(Item_GObj* gobj)
     return ip->xCC_item_attr->x0_78;
 }
 
-s32 it_8026B320(HSD_GObj* gobj) // Return item hold kind
+/// Return item hold kind
+enum_t it_8026B320(HSD_GObj* gobj)
 {
     Item* temp_item = gobj->user_data;
     return temp_item->xCC_item_attr->x0_hold_kind;
@@ -156,7 +158,7 @@ int it_8026B3C0(ItemKind kind) // Count identical item GObj entities?
     HSD_GObj* unkItemGObj;
 
     int i = 0;
-    unkItemGObj = HSD_GObj_804D782C->x24_items;
+    unkItemGObj = HSD_GObj_Entities->items;
 
     while (unkItemGObj != NULL) {
         temp_item = unkItemGObj->user_data;
@@ -170,21 +172,16 @@ int it_8026B3C0(ItemKind kind) // Count identical item GObj entities?
     return i;
 }
 
-extern struct r13_ItemTable* it_804D6D38;
-
 void it_8026B3F8(Article* article,
                  s32 kind) // Store Item article pointer to table
 {
-    it_804D6D38->x0_article[kind - It_Kind_Leadead] =
-        article; // This feels very wrong
+    it_804D6D38[kind - It_Kind_Kuriboh] = article;
 }
-
-extern UnkItemArticles3 it_804A0F60[];
 
 void it_8026B40C(Article* article,
                  s32 kind) // Store Stage Item article pointer to table
 {
-    *it_804A0F60[kind - It_Kind_Old_Kuri].unkptr = article;
+    it_804A0F60[kind - It_Kind_Old_Kuri] = article;
 }
 
 f32 it_8026B424(s32 damage) // Item Damage Math
@@ -494,7 +491,7 @@ void it_8026B7F8(HSD_GObj* fighter_gobj)
 #endif
 
     HSD_GObj *cur, *owner;
-    for (cur = HSD_GObj_804D782C->x24_items; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
         Item* ip = GET_ITEM(cur);
         owner = ip->owner;
         RunCallbackUnk(ip->xB8_itemLogicTable->evt_unk, cur, fighter_gobj);
@@ -541,38 +538,7 @@ bool it_8026B894(HSD_GObj* gobj, HSD_GObj* ref_gobj)
     return result;
 }
 
-/// @todo Inlined ASM due to compiler version generating mismatch
-#ifdef MUST_MATCH
-#pragma push
-asm s32 it_8026B924(register HSD_GObj* gobj)
-{ // clang-format off
-    // Get Item Data
-    lwz r4, 0x2C(gobj);
-    // Default return value
-    li r3, -1;
-    // Get Item ID
-    lwz r0, 0x10(r4);
-    // Item ID Switch
-    cmpwi r0, 0x17;
-    bge - lbl_compare;
-    cmpwi r0, 0x10;
-    beq - lbl_getVar;
-    bltlr - ;
-    cmpwi r0, 0x15;
-    bge - lbl_getVar;
-    blr;
-lbl_compare:
-    cmpwi r0, 0x19;
-    bnelr - ;
-lbl_getVar:
-    lwz r3, 0xD4C(r4);
-} // clang-format on
-#pragma pop
-
-#else
-
 /// Return result of unk item check
-/// @todo Requires @c -g compiler flag / Frank modifications to match.
 s32 it_8026B924(HSD_GObj* gobj)
 {
     s32 result;
@@ -596,44 +562,7 @@ s32 it_8026B924(HSD_GObj* gobj)
     return result;
 }
 
-#endif
-
-#ifdef MUST_MATCH
-#pragma push
-f32 it_8026B960(register HSD_GObj* gobj)
-{ // clang-format off
-    register s32 kind;
-    register f32 unk_timer = -1.0f;
-
-    register Item* ip;
-    ip = GET_ITEM(gobj);
-    kind = ip->kind;
-
-    asm {
-        cmpwi kind, It_Kind_Link_Bomb
-        beq- lbl_block
-        bgelr-
-        cmpwi kind, It_Kind_BombHei
-        bnelr-
-        lwz kind, 0x24(ip);
-        cmpwi kind, 0xB;
-        beqlr-
-    }
-
-    return unk_timer = ip->xDD4_itemVar.BobOmb.xDEC;
-
-lbl_block:
-    if (ip->msid != 0x5) {
-        return unk_timer = ip->xD44_lifeTimer;
-    }
-
-    return unk_timer;
-} // clang-format on
-#pragma pop
-#else
-
 /// Return float result of item kind and state checks
-/// @todo Requires @c -g compiler flag / Frank modifications to match.
 f32 it_8026B960(HSD_GObj* gobj)
 {
     s32 kind;
@@ -655,8 +584,6 @@ f32 it_8026B960(HSD_GObj* gobj)
     }
     return unk_timer;
 }
-
-#endif
 
 extern void lb_8000B804(HSD_JObj*, HSD_Joint*);
 extern void lb_8000BA0C(HSD_JObj*, f32);
@@ -1076,7 +1003,7 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
         break;
 
     case 12:
-        bobOmbGObj = it_80284D54(&bobOmbRain->x8_vec);
+        bobOmbGObj = itSword_Spawn(&bobOmbRain->x8_vec);
         if (bobOmbGObj != NULL) {
             it_80274F10(bobOmbGObj);
         }
@@ -1178,10 +1105,10 @@ void it_8026C1B4(HSD_GObj* gobj)
     it_80275870(gobj);
 }
 
-/// Get unknown var from r13 pointer
 u32 it_8026C1D4(void)
 {
-    return it_804D6D24->x40->x4->x0;
+    ItLGunVars* lgun = it_804D6D24[It_Kind_L_Gun]->x4_specialAttributes;
+    return lgun->x0;
 }
 
 /// Check if item has grabbed a GObj?
@@ -1212,7 +1139,7 @@ HSD_GObj* it_8026C258(Vec3* pos, f32 facing_dir)
 {
     f32 min_sq_dist = F32_MAX;
     HSD_GObj *cur, *result = NULL;
-    for (cur = HSD_GObj_804D782C->x24_items; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
         Item* ip = GET_ITEM(cur);
 
         // Might not actually be (exclusively) hold kind in the end???
@@ -1290,7 +1217,7 @@ void it_8026C368(HSD_GObj* gobj)
 void it_8026C3FC(void)
 {
     HSD_GObj* cur;
-    for (cur = HSD_GObj_804D782C->x24_items; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
         it_8026B724(cur);
     }
 }
@@ -1299,7 +1226,7 @@ void it_8026C3FC(void)
 void it_8026C42C(void)
 {
     HSD_GObj* cur;
-    for (cur = HSD_GObj_804D782C->x24_items; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
         Item* ip = GET_ITEM(cur);
 
         if (ip->xDC8_word.flags.x7) {

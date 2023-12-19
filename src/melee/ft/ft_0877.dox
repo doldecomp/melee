@@ -1,0 +1,18 @@
+/** @file
+ * @todo Fix formatting
+ */
+
+/// @remarks Only used by Purin.
+extern HSD_Joint* ft_8045A1E0[6];
+
+// SFX_PlayCharacterSFX
+void ft_80088148(Fighter*, enum_t, int, int);
+
+/// Interrupt_Wait
+void ftCo_Wait_IASA(HSD_GObj*);
+
+/// @todo UnclePunch Map file: AS_203_PassiveWalljump_Walljump
+void ftCo_800C1E64(HSD_GObj* pPlayerEntityStruct, s32, s32, u8, f32);
+
+/// @todo enum params
+void ftCo_800DEAE8(HSD_GObj* gobj, enum_t asid0, enum_t asid1);

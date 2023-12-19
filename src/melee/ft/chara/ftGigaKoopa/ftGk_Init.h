@@ -16,7 +16,7 @@
 /* 14F8E4 */ void ftGk_Init_LoadSpecialAttrs(HSD_GObj*);
 /* 14F904 */ void ftGk_Init_OnKnockbackEnter(HSD_GObj*);
 /* 14F948 */ void ftGk_Init_OnKnockbackExit(HSD_GObj*);
-/* 14F98C */ void ftGk_Init_UnkDemoCallbacks0(s32, s32*, s32*);
+/* 14F98C */ void ftGk_Init_UnkDemoCallbacks0(int, int*, int*);
 /* 14F9A4 */ char* ftGk_Init_GetMotionFileString(enum_t);
 /* 3D35E8 */ extern MotionState ftGk_Init_MotionStateTable[ftKp_MS_SelfCount];
 /* 3D38C8 */ extern MotionState ftGk_Init_UnkMotionStates0[];

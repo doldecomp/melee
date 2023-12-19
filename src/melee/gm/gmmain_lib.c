@@ -256,40 +256,10 @@ s32* gmMainLib_8015D06C(u8 arg0)
     return &base[arg0].x84;
 }
 
-#ifdef MUST_MATCH
-
-#pragma push
-asm s32* gmMainLib_8015D084(s32 arg0)
-{
-    // clang-format off
-    nofralloc
-/* 8015D084 00159C64  7C 08 02 A6 */	mflr r0
-/* 8015D088 00159C68  90 01 00 04 */	stw r0, 4(r1)
-/* 8015D08C 00159C6C  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8015D090 00159C70  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8015D094 00159C74  7C 7F 1B 78 */	mr r31, r3
-/* 8015D098 00159C78  48 00 1D 25 */	bl gmMainLib_8015EDBC
-/* 8015D09C 00159C7C  57 E4 15 BA */	rlwinm r4, r31, 2, 0x16, 0x1d
-/* 8015D0A0 00159C80  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8015D0A4 00159C84  38 03 00 00 */	addi r0, r3, 0
-/* 8015D0A8 00159C88  38 64 00 B0 */	addi r3, r4, 0xb0
-/* 8015D0AC 00159C8C  7C 60 1A 14 */	add r3, r0, r3
-/* 8015D0B0 00159C90  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8015D0B4 00159C94  38 21 00 18 */	addi r1, r1, 0x18
-/* 8015D0B8 00159C98  7C 08 03 A6 */	mtlr r0
-/* 8015D0BC 00159C9C  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-
-#else
-
-// needs a @frank patch
 s32* gmMainLib_8015D084(s32 arg0)
 {
     return &gmMainLib_8015EDBC()->xB0[arg0 & 0xFF];
 }
-
-#endif
 
 s32* gmMainLib_8015D0C0(u8 arg0)
 {
@@ -441,40 +411,10 @@ s32* gmMainLib_8015D438(u8 arg0)
     return &base[arg0].x94;
 }
 
-#ifdef MUST_MATCH
-
-#pragma push
-asm s32* gmMainLib_8015D450(s32 arg0)
-{
-    // clang-format off
-    nofralloc
-/* 8015D450 0015A030  7C 08 02 A6 */	mflr r0
-/* 8015D454 0015A034  90 01 00 04 */	stw r0, 4(r1)
-/* 8015D458 0015A038  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8015D45C 0015A03C  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8015D460 0015A040  7C 7F 1B 78 */	mr r31, r3
-/* 8015D464 0015A044  48 00 19 59 */	bl gmMainLib_8015EDBC
-/* 8015D468 0015A048  57 E4 15 BA */	rlwinm r4, r31, 2, 0x16, 0x1d
-/* 8015D46C 0015A04C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8015D470 0015A050  38 03 00 00 */	addi r0, r3, 0
-/* 8015D474 0015A054  38 64 00 4C */	addi r3, r4, 0x4c
-/* 8015D478 0015A058  7C 60 1A 14 */	add r3, r0, r3
-/* 8015D47C 0015A05C  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8015D480 0015A060  38 21 00 18 */	addi r1, r1, 0x18
-/* 8015D484 0015A064  7C 08 03 A6 */	mtlr r0
-/* 8015D488 0015A068  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-
-#else
-
-// needs a @frank patch
 s32* gmMainLib_8015D450(s32 arg0)
 {
     return &gmMainLib_8015EDBC()->x4C[arg0 & 255];
 }
-
-#endif
 
 s32 gmMainLib_8015D48C(u8 arg0)
 {

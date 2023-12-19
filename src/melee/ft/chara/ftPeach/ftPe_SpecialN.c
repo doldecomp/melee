@@ -9,6 +9,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ftPeach/types.h"
@@ -62,25 +63,25 @@ void onAccessory4(HSD_GObj* gobj)
     fp->cmd_vars[cmd_accessory4] = accessory4_state_1;
     {
         Vec3 pos;
-        lb_8000B1CC(fp->parts[FtPart_109].x0_jobj, NULL, &pos);
+        lb_8000B1CC(fp->parts[FtPart_109].joint, NULL, &pos);
         fp->fv.pe.toad_gobj =
             it_802BDE18(gobj, &pos, FtPart_109, 104, fp->facing_dir);
     }
     fp->x1984_heldItemSpec = fp->fv.pe.toad_gobj;
     if (fp->fv.pe.toad_gobj != NULL) {
-        fp->cb.x21E4_callback_OnDeath2 = ftPe_Init_OnDeath2;
-        fp->cb.x21DC_callback_OnTakeDamage = ftPe_Init_OnDeath2;
+        fp->death2_cb = ftPe_Init_OnDeath2;
+        fp->take_dmg_cb = ftPe_Init_OnDeath2;
     }
-    fp->cb.x21BC_callback_Accessory4 = NULL;
-    fp->cb.x21D4_callback_EnterHitlag = onEnterHitlag;
-    fp->cb.x21D8_callback_ExitHitlag = onExitHitlag;
+    fp->accessory4_cb = NULL;
+    fp->pre_hitlag_cb = onEnterHitlag;
+    fp->post_hitlag_cb = onExitHitlag;
 }
 
 static void doHitAccessory4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Vec3 pos;
-    lb_8000B1CC(fp->parts[FtPart_109].x0_jobj, NULL, &pos);
+    lb_8000B1CC(fp->parts[FtPart_109].joint, NULL, &pos);
     pos.y += 2.5f;
     pos.z = 0;
     it_802BE214(gobj, &pos, 111, fp->facing_dir);
@@ -94,7 +95,7 @@ static void onHitAccessory4(HSD_GObj* gobj)
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
     doHitAccessory4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->accessory4_cb = NULL;
 }
 
 void ftPe_SpecialN_DoDeath2(HSD_GObj* gobj)
@@ -102,8 +103,8 @@ void ftPe_SpecialN_DoDeath2(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     onExitHitlag(gobj);
     fp->fv.pe.toad_gobj = NULL;
-    fp->cb.x21E4_callback_OnDeath2 = NULL;
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    fp->death2_cb = NULL;
+    fp->take_dmg_cb = NULL;
 }
 
 void ftPe_SpecialN_OnDeath2(HSD_GObj* gobj)
@@ -147,7 +148,7 @@ static void reset(HSD_GObj* gobj)
     fp->cmd_vars[cmd_phys_state] = fp->cmd_vars[cmd_anim_state] =
         fp->cmd_vars[cmd_accessory4] = fp->cmd_vars[cmd_hit_anim_state] = 0;
     fp->mv.pe.specialn.facing_dir = fp->facing_dir;
-    fp->cb.x21BC_callback_Accessory4 = onAccessory4;
+    fp->accessory4_cb = onAccessory4;
 }
 
 void ftPe_SpecialN_Enter(HSD_GObj* gobj)
@@ -157,8 +158,8 @@ void ftPe_SpecialN_Enter(HSD_GObj* gobj)
     u8 _[8];
 #endif
     GET_FIGHTER(gobj)->self_vel.y = 0;
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialN, Ft_MF_None, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialN, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     reset(gobj);
 }
@@ -172,8 +173,8 @@ void ftPe_SpecialAirN_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     fp->self_vel.x /= da->specialairn_vel_x_div;
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirN, Ft_MF_None, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirN, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     reset(gobj);
 }
@@ -184,7 +185,7 @@ static void doAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
     ftPe_DatAttrs* da = fp->dat_attrs;
     if (fp->cmd_vars[cmd_anim_state] == anim_state_1) {
         fp->cmd_vars[cmd_anim_state] = anim_state_2;
-        ftColl_8007B1B8(gobj, &da->xAC, onUnkHit);
+        ftColl_8007B1B8(gobj, (ShieldDesc*) &da->xAC, onUnkHit);
         fp->x221B_b3 = true;
         fp->shield_unk0 = da->xA8;
         fp->shield_unk1 = da->xA8;
@@ -211,7 +212,7 @@ void ftPe_SpecialAirN_Anim(HSD_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[16];
 #endif
-    doAnim(gobj, ft_800CC730);
+    doAnim(gobj, ftCo_800CC730);
 }
 
 void ftPe_SpecialN_IASA(HSD_GObj* gobj) {}
@@ -269,14 +270,14 @@ static void setupColl(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     if (fp->fv.pe.toad_gobj != NULL) {
-        fp->cb.x21E4_callback_OnDeath2 = ftPe_Init_OnDeath2;
-        fp->cb.x21DC_callback_OnTakeDamage = ftPe_Init_OnDeath2;
+        fp->death2_cb = ftPe_Init_OnDeath2;
+        fp->take_dmg_cb = ftPe_Init_OnDeath2;
     }
-    fp->cb.x21BC_callback_Accessory4 = onAccessory4;
-    fp->cb.x21D4_callback_EnterHitlag = onEnterHitlag;
-    fp->cb.x21D8_callback_ExitHitlag = onExitHitlag;
+    fp->accessory4_cb = onAccessory4;
+    fp->pre_hitlag_cb = onEnterHitlag;
+    fp->post_hitlag_cb = onExitHitlag;
     if (fp->cmd_vars[cmd_anim_state] == anim_state_2) {
-        ftColl_8007B1B8(gobj, &da->xAC, onUnkHit);
+        ftColl_8007B1B8(gobj, (ShieldDesc*) &da->xAC, onUnkHit);
         fp->x221B_b3 = true;
     }
 }
@@ -294,8 +295,8 @@ static void doColl(HSD_GObj* gobj)
 #endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirN, coll_mf, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirN, coll_mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
     if (fp->cmd_vars[cmd_phys_state] == phys_state_1) {
         fp->cmd_vars[cmd_phys_state] = phys_state_2;
     }
@@ -311,8 +312,8 @@ static void doAirColl(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->fv.pe.specialairn_used = false;
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialN, coll_mf, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialN, coll_mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
     setupColl(gobj);
 }
 
@@ -321,7 +322,7 @@ static void doHitAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[cmd_hit_anim_state]) {
         fp->cmd_vars[cmd_hit_anim_state] = false;
-        fp->cb.x21BC_callback_Accessory4 = onHitAccessory4;
+        fp->accessory4_cb = onHitAccessory4;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         cb(gobj);
@@ -335,7 +336,7 @@ void ftPe_SpecialNHit_Anim(HSD_GObj* gobj)
 
 void ftPe_SpecialAirNHit_Anim(HSD_GObj* gobj)
 {
-    doHitAnim(gobj, ft_800CC730);
+    doHitAnim(gobj, ftCo_800CC730);
 }
 
 void ftPe_SpecialNHit_IASA(HSD_GObj* gobj) {}
@@ -377,8 +378,8 @@ static void doHitColl(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirNHit, coll_mf, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirNHit, coll_mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
     setupHitColl(gobj);
 }
 
@@ -388,8 +389,8 @@ void doAirHitColl(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->fv.pe.specialairn_used = false;
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialNHit, coll_mf, NULL,
-                              fp->cur_anim_frame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialNHit, coll_mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
     setupHitColl(gobj);
 }
 
@@ -397,12 +398,12 @@ static void setupHitColl(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.pe.toad_gobj != NULL) {
-        fp->cb.x21E4_callback_OnDeath2 = ftPe_Init_OnDeath2;
-        fp->cb.x21DC_callback_OnTakeDamage = ftPe_Init_OnDeath2;
+        fp->death2_cb = ftPe_Init_OnDeath2;
+        fp->take_dmg_cb = ftPe_Init_OnDeath2;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = onEnterHitlag;
-    fp->cb.x21D8_callback_ExitHitlag = onExitHitlag;
+    fp->pre_hitlag_cb = onEnterHitlag;
+    fp->post_hitlag_cb = onExitHitlag;
 }
 
 static void onUnkHit(HSD_GObj* gobj)
@@ -415,7 +416,7 @@ static void onUnkHit(HSD_GObj* gobj)
     } else {
         msid = ftPe_MS_SpecialAirNHit;
     }
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, NULL, 9, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 9, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     if (fp->fv.pe.toad_gobj != NULL) {
         it_802BE100(fp->fv.pe.toad_gobj);

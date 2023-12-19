@@ -26,7 +26,6 @@ void ftCamera_80076064(Fighter* fp)
 {
     CameraBox* camera_box;
     UnkFloat6_Camera spC;
-
     camera_box = fp->x890_cameraBox;
     ftCamera_80076018(fp->ft_data->x3C, &spC, fp->x34_scale.y);
     camera_box->x8 = 0;
@@ -83,7 +82,7 @@ void ftCamera_UpdateCameraBox(HSD_GObj* gobj)
         camera_box->x10.z = fp->cur_pos.z;
     }
 
-    camera_box->xC_flag.bits.b0 = false;
+    camera_box->xC_b0 = false;
 
     // Fighter_GetCameraBonePos
     ftLib_800866DC(gobj, &camera_box->x1C);

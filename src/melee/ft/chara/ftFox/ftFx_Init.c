@@ -453,9 +453,9 @@ void ftFx_Init_800E5588(HSD_GObj* gobj)
     ftFx_SpecialN_RemoveBlaster(gobj);
 }
 
-void ftFx_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftFx_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
 void ftFx_Init_OnItemInvisible(HSD_GObj* gobj)
@@ -468,14 +468,14 @@ void ftFx_Init_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftFx_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftFx_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, flag, 1, 1);
 }
 
 void ftFx_Init_OnLoadForFalco(Fighter* fp)
 {
-    PUSH_ATTRS(fp, ftFoxAttributes);
+    PUSH_ATTRS(fp, ftFox_DatAttrs);
 }
 
 void ftFx_Init_OnLoad(HSD_GObj* gobj)
@@ -483,12 +483,12 @@ void ftFx_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     void** item_list = fp->ft_data->x48_items;
 
-    fp->x2224_flag.bits.b7 = 1;
+    fp->x2224_b7 = 1;
 
-    PUSH_ATTRS(fp, ftFoxAttributes);
+    PUSH_ATTRS(fp, ftFox_DatAttrs);
 
     {
-        ftFoxAttributes* fox_attr = fp->dat_attrs;
+        ftFox_DatAttrs* fox_attr = fp->dat_attrs;
         it_8026B3F8(item_list[0], fox_attr->x1C_FOX_BLASTER_SHOT_ITKIND);
         it_8026B3F8(item_list[1], fox_attr->x20_FOX_BLASTER_GUN_ITKIND);
         it_8026B3F8(item_list[2], It_Kind_Fox_Illusion);
@@ -497,7 +497,7 @@ void ftFx_Init_OnLoad(HSD_GObj* gobj)
 
 void ftFx_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(gobj, ftFoxAttributes);
+    COPY_ATTRS(gobj, ftFox_DatAttrs);
 }
 
 extern f32 lbl_804D9244; /// 0.0f

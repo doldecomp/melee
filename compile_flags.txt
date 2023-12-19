@@ -17,6 +17,7 @@
 -Wno-unused-value
 -Wno-switch
 -Wno-incompatible-library-redeclaration
+-Wno-tautological-bitwise-compare
 -Wno-gnu-folding-constant
 -Wno-missing-braces
 -Wno-missing-field-initializers

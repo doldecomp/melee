@@ -6,13 +6,15 @@
 #include "ef/eflib.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
 #include "ft/ftcommon.h"
+#include "ftCommon/ftCo_SpecialS.h"
 
 static void ftSamus_ClearThrowFlagsUnk(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->throw_flags.flags = 0;
-    fp->cb.x21BC_callback_Accessory4 = &ftSs_SpecialS_8012A074;
+    fp->throw_flags = 0;
+    fp->accessory4_cb = &ftSs_SpecialS_8012A074;
 }
 
 void ftSs_SpecialS_Enter(HSD_GObj* gobj)
@@ -22,10 +24,10 @@ void ftSs_SpecialS_Enter(HSD_GObj* gobj)
     fp->gr_vel /= samus_attr->x2C;
     fp->self_vel.y = 0.0f;
     if (fp->x673 < samus_attr->x28) {
-        Fighter_ChangeMotionState(gobj, 0x15E, 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 0x15E, 0, 0.0f, 1.0f, 0.0f, NULL);
         ftAnim_8006EBA4(gobj);
     } else {
-        Fighter_ChangeMotionState(gobj, 0x15D, 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 0x15D, 0, 0.0f, 1.0f, 0.0f, NULL);
         ftAnim_8006EBA4(gobj);
     }
     ftSamus_ClearThrowFlagsUnk(gobj);
@@ -37,10 +39,10 @@ void ftSs_SpecialAirS_Enter(HSD_GObj* gobj)
     ftSs_DatAttrs* samus_attr = getFtSpecialAttrs(fp);
     fp->self_vel.x /= samus_attr->x2C;
     if (fp->x673 < samus_attr->x28) {
-        Fighter_ChangeMotionState(gobj, 0x160, 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 0x160, 0, 0.0f, 1.0f, 0.0f, NULL);
         ftAnim_8006EBA4(gobj);
     } else {
-        Fighter_ChangeMotionState(gobj, 0x15F, 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 0x15F, 0, 0.0f, 1.0f, 0.0f, NULL);
         ftAnim_8006EBA4(gobj);
     }
     ftSamus_ClearThrowFlagsUnk(gobj);
@@ -66,7 +68,7 @@ void ftSs_SpecialAirS_Anim(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -97,7 +99,7 @@ void ftSs_SpecialAirS_Phys(HSD_GObj* gobj)
 void ftSs_SpecialS_Coll(HSD_GObj* gobj)
 {
     if (!ft_800827A0(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -128,7 +130,7 @@ void ftSs_SpecialAirSSmash_Anim(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -162,7 +164,7 @@ void ftSs_SpecialAirSSmash_Phys(HSD_GObj* gobj)
 void ftSs_SpecialSSmash_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 

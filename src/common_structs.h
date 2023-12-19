@@ -19,28 +19,28 @@
 /// @todo @c PascalCase members
 typedef u32 HSD_Pad;
 
-static HSD_Pad const HSD_Pad_DpadLeft ATTRIBUTE_USED = 1 << 0;
-static HSD_Pad const HSD_Pad_DpadRight ATTRIBUTE_USED = 1 << 1;
-static HSD_Pad const HSD_Pad_DpadDown ATTRIBUTE_USED = 1 << 2;
-static HSD_Pad const HSD_Pad_DpadUp ATTRIBUTE_USED = 1 << 3;
-static HSD_Pad const HSD_Pad_Z ATTRIBUTE_USED = 1 << 4;
-static HSD_Pad const HSD_Pad_R ATTRIBUTE_USED = 1 << 5;
-static HSD_Pad const HSD_Pad_L ATTRIBUTE_USED = 1 << 6;
-static HSD_Pad const HSD_Pad_7 ATTRIBUTE_USED = 1 << 7;
+#define HSD_PAD_DPADLEFT (1 << 0)
+#define HSD_PAD_DPADRIGHT (1 << 1)
+#define HSD_PAD_DPADDOWN (1 << 2)
+#define HSD_PAD_DPADUP (1 << 3)
+#define HSD_PAD_Z (1 << 4)
+#define HSD_PAD_R (1 << 5)
+#define HSD_PAD_L (1 << 6)
+#define HSD_PAD_7 (1 << 7)
 
 /// @remarks Also covers Z-Button macro in-game.
-static HSD_Pad const HSD_Pad_A ATTRIBUTE_USED = 1 << 8;
+#define HSD_PAD_A (1 << 8)
 
-static HSD_Pad const HSD_Pad_B ATTRIBUTE_USED = 1 << 9;
-static HSD_Pad const HSD_Pad_X ATTRIBUTE_USED = 1 << 10;
-static HSD_Pad const HSD_Pad_Y ATTRIBUTE_USED = 1 << 11;
-static HSD_Pad const HSD_Pad_Start ATTRIBUTE_USED = 1 << 12;
+#define HSD_PAD_B (1 << 9)
+#define HSD_PAD_X (1 << 10)
+#define HSD_PAD_Y (1 << 11)
+#define HSD_PAD_START (1 << 12)
 
 /// Digital input of either L or R
-static HSD_Pad const HSD_Pad_LR ATTRIBUTE_USED = 1 << 31;
+#define HSD_PAD_LR (1 << 31)
 
-static HSD_Pad const HSD_Pad_AB ATTRIBUTE_USED = HSD_Pad_A | HSD_Pad_B;
-static HSD_Pad const HSD_Pad_XY ATTRIBUTE_USED = HSD_Pad_X | HSD_Pad_Y;
+#define HSD_PAD_AB (HSD_PAD_A | HSD_PAD_B)
+#define HSD_PAD_XY (HSD_PAD_X | HSD_PAD_Y)
 
 // COLLISION FLAGS
 
@@ -48,11 +48,16 @@ static HSD_Pad const HSD_Pad_XY ATTRIBUTE_USED = HSD_Pad_X | HSD_Pad_Y;
 
 /// @todo These (and #CollData::env_flags) should be a bitfield struct
 #define MPCOLL_RIGHTWALL 0x3F ///< Bits 0-5
-#define MPCOLL_FLAGS_B5 (1 << 5)
+#define MPCOLL_FLAGS_B05 (1 << 5)
 #define MPCOLL_LEFTWALL 0xFC0 ///< Bits 6-11
 #define MPCOLL_FLAGS_B11 (1 << 11)
 #define MPCOLL_CEIL 0x6000 ///< Bits 13-14
+#define MPCOLL_FLAGS_B14 (1 << 14)
 #define MPCOLL_GRPUSH (1 << 15)
+#define MPCOLL_FLAGS_B16 (1 << 16)
+#define MPCOLL_FLAGS_B23 (1 << 23)
+#define MPCOLL_FLAGS_B24 (1 << 24)
+#define MPCOLL_FLAGS_B25 (1 << 25)
 
 typedef union _UnkFlagStruct {
     u8 u8;
@@ -78,16 +83,23 @@ typedef struct _ReflectDesc {
 
     /// @remarks Setting this to 1 causes the reflector to skip ownership
     /// change
-    u8 x20_behavior : 8;
-
+    u8 x20_behavior;
 } ReflectDesc;
 
 typedef struct _AbsorbDesc {
-    u32 x0_bone_id;
-    Vec3 x4_offset;
-    f32 x10_size;
-
+    /*  +0 */ int x0_bone_id;
+    /*  +4 */ Vec3 x4_offset;
+    /* +10 */ float x10_size;
 } AbsorbDesc;
+
+typedef struct _ShieldDesc {
+    int bone;
+    Vec3 pos;
+    f32 radius;
+    f32 dmg_mul;
+    f32 vel_mul;
+    u8 flags : 8;
+} ShieldDesc;
 
 typedef struct ColorOverlay {
     s32 x0_timer;        // 0x0

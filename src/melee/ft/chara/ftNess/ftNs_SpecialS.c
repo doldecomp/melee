@@ -4,6 +4,8 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
+#include "ft/ft_0D14.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
@@ -30,15 +32,15 @@ void ftNs_SpecialS_ItemPKFireSpawn(
     f32 PKFireLaunch;
     f32 PKFireVel;
 
-    if (fp->throw_flags.b0 != 0) {
-        fp->throw_flags.b0 = 0;
+    if (fp->throw_flags_b0 != 0) {
+        fp->throw_flags_b0 = 0;
         FlagResult = true;
     } else {
         FlagResult = false;
     }
 
     if (FlagResult != false) {
-        lb_8000B1CC(fp->parts[FtPart_R2ndNa].x0_jobj, NULL, &ItemBonePos);
+        lb_8000B1CC(fp->parts[FtPart_R2ndNa].joint, NULL, &ItemBonePos);
 
         ItemBonePos.x += ness_attr->x30_PKFIRE_SPAWN_X * fp->facing_dir;
         ItemBonePos.y += ness_attr->x34_PKFIRE_SPAWN_Y;
@@ -75,12 +77,12 @@ void ftNs_SpecialS_Enter(
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    fp->throw_flags.flags = 0; // Set projectile summon flag to 0
-    fp->cmd_vars[0] = 0;       // Set ftcmd flag0 to 0; _ in PK Fire?
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialS, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    fp->throw_flags = 0; // Set projectile summon flag to 0
+    fp->cmd_vars[0] = 0; // Set ftcmd flag0 to 0; _ in PK Fire?
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialS, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 =
+    fp->accessory4_cb =
         ftNs_SpecialS_ItemPKFireSpawn; // Store PK Fire spawn function
 }
 
@@ -92,12 +94,12 @@ void ftNs_SpecialAirS_Enter(
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    fp->throw_flags.flags = 0; // Set projectile summon flag to 0
-    fp->cmd_vars[0] = 0;       // Set ftcmd flag0 to 0; _ in PK Fire?
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirS, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    fp->throw_flags = 0; // Set projectile summon flag to 0
+    fp->cmd_vars[0] = 0; // Set ftcmd flag0 to 0; _ in PK Fire?
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirS, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftNs_SpecialS_ItemPKFireSpawn;
+    fp->accessory4_cb = ftNs_SpecialS_ItemPKFireSpawn;
 }
 
 // 0x80116D74
@@ -116,7 +118,7 @@ void ftNs_SpecialAirS_Anim(
     HSD_GObj* gobj) // Ness's aerial PK Fire Animation callback
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -142,7 +144,7 @@ void ftNs_SpecialS_Coll(
     HSD_GObj* gobj) // Ness's grounded PK Fire Collision callback
 {
     if (ft_800827A0(gobj) == false) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -156,6 +158,6 @@ void ftNs_SpecialAirS_Coll(
 
     ness_attr = fp->dat_attrs;
     if (ft_80081D0C(gobj) != false) {
-        ft_800D5CB0(gobj, 0, ness_attr->x38_PKFIRE_LANDING_LAG);
+        ftCo_800D5CB0(gobj, 0, ness_attr->x38_PKFIRE_LANDING_LAG);
     }
 }

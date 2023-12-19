@@ -3,7 +3,6 @@
 
 #include "lb/lbrefract.h"
 
-#include <math.h>
 #include <baselib/objalloc.h>
 
 void HSD_MtxInverse(Mtx src, Mtx dest);

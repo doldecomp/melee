@@ -7,6 +7,7 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0D14.h"
 #include "ft/inlines.h"
 
 // 0x8014C1E8
@@ -16,8 +17,8 @@ void ftGw_Attack100Start_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ft_800D6B00(gobj, ftGw_MS_Attack100Start);
-    fp->cb.x21BC_callback_Accessory4 = ftGw_Attack11_ItemGreenhouseSetup;
+    ftCo_800D6B00(gobj, ftGw_MS_Attack100Start);
+    fp->accessory4_cb = ftGw_Attack11_ItemGreenhouseSetup;
 }
 
 // 0x8014C224
@@ -56,9 +57,9 @@ void ftGw_Attack100Loop_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_Attack100Loop, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
-    fp->cb.x21BC_callback_Accessory4 = ftGw_Attack11_DecideAction;
+    Fighter_ChangeMotionState(gobj, ftGw_MS_Attack100Loop, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
+    fp->accessory4_cb = ftGw_Attack11_DecideAction;
 }
 
 // 0x8014C308
@@ -66,7 +67,7 @@ void ftGw_Attack100Loop_Enter(HSD_GObj* gobj)
 // Animation callback
 void ftGw_Attack100Loop_Anim(HSD_GObj* gobj)
 {
-    ft_800D6C60(gobj, ftGw_Attack100End_Enter);
+    ftCo_800D6C60(gobj, ftGw_Attack100End_Enter);
 }
 
 // 0x8014C330 - Mr. Game & Watch's Rapid Jab Loop IASA callback
@@ -93,9 +94,9 @@ void ftGw_Attack100End_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_Attack100End, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
-    fp->cb.x21BC_callback_Accessory4 = ftGw_Attack11_DecideAction;
+    Fighter_ChangeMotionState(gobj, ftGw_MS_Attack100End, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
+    fp->accessory4_cb = ftGw_Attack11_DecideAction;
 }
 
 // 0x8014C3F4 - Mr. Game & Watch's Rapid Jab End Animation callback

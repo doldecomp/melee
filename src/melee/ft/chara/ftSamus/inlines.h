@@ -10,8 +10,8 @@
 static inline void ftSamus_updateDamageDeathCBs(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = ftSs_Init_80128428;
-    fp->cb.x21E4_callback_OnDeath2 = ftSs_Init_80128428;
+    fp->take_dmg_cb = ftSs_Init_80128428;
+    fp->death2_cb = ftSs_Init_80128428;
 }
 
 //// only used in ftsamus3 so far (maybe move to there)
@@ -34,9 +34,9 @@ static inline void ftSamus_destroyAllEF(HSD_GObj* gobj)
 
 static inline void ftSamus_UnkAndDestroyAllEF(HSD_GObj* gobj)
 {
-    if (gobj) {
+    if (gobj != NULL) {
         Fighter* fp = gobj->user_data;
-        HSD_GObj* x222C = fp->fv.ss.x222C;
+        Item_GObj* x222C = fp->fv.ss.x222C;
         if (x222C != NULL) {
             it_802B5974(x222C);
             fp->fv.ss.x222C = NULL;

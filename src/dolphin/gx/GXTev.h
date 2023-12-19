@@ -28,8 +28,7 @@ void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map,
                    GXChannelID color);
 void GXSetNumTevStages(u8 nStages);
 
-void GXSetTevColorS10(s32, GXColor*);
+void GXSetTevColorS10(s32, GXColorS10);
 void GXSetTevClampMode(s32 arg0, s32 arg1);
-void GXSetTevColorS10(s32, GXColor*);
 
 #endif

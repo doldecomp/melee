@@ -17,7 +17,6 @@
 #include <baselib/psappsrt.h>
 
 extern StageInfo stage_info;
-extern u8 HSD_GObj_804D7849;
 extern struct UnkGeneratorStruct* hsd_804D78FC;
 
 static Vec3 grLib_8049EF58[6];
@@ -190,7 +189,7 @@ void grLib_801C9A70(enum_t arg0, Vec3* v)
     *v = grLib_8049EF58[i];
 }
 
-void grLib_801C9B20(void* arg1, UnkAnimStruct* arg2, unk_t arg3)
+void grLib_801C9B20(void* arg1, lb_UnkAnimStruct* arg2, unk_t arg3)
 {
     lb_8000FD48(arg1, arg3, arg2->x4_size);
     lb_80011710(arg2, arg3);
@@ -247,12 +246,12 @@ HSD_GObj* grLib_801C9CEC(s32 idx1)
         return NULL;
     }
 
-    if (stage_info.x6CC == NULL) {
+    if (stage_info.quake_model_set == NULL) {
         return NULL;
     }
     tmp = idx1;
     gobj = GObj_Create(3, 18, tmp);
-    jobj = HSD_JObjLoadJoint(stage_info.x6CC->joint);
+    jobj = HSD_JObjLoadJoint(stage_info.quake_model_set->joint);
 
     HSD_GObjObjet_80390A70(gobj, HSD_GObj_804D7849, jobj);
     if (idx1 == 1) {
@@ -261,7 +260,8 @@ HSD_GObj* grLib_801C9CEC(s32 idx1)
         HSD_GObjProc_8038FD54(gobj, grLib_801C9C40, 1);
     }
 
-    HSD_JObjAddAnimAll(jobj, stage_info.x6CC->anims[idx0], NULL, NULL);
+    HSD_JObjAddAnimAll(jobj, stage_info.quake_model_set->anims[idx0], NULL,
+                       NULL);
     HSD_JObjReqAnimAll(jobj, 0);
     if (idx1 == 1) {
         HSD_ForeachAnim(jobj, 6, 0x20, HSD_AObjSetFlags, 3, 0x20000000);
@@ -323,7 +323,7 @@ asm bool grLib_801C9EE8(void)
 /* 801C9F04 001C6AE4  93 E1 00 3C */	stw r31, 0x3c(r1)
 /* 801C9F08 001C6AE8  93 C1 00 38 */	stw r30, 0x38(r1)
 /* 801C9F0C 001C6AEC  7C 7E 1B 78 */	mr r30, r3
-/* 801C9F10 001C6AF0  80 8D C1 8C */	lwz r4, HSD_GObj_804D782C
+/* 801C9F10 001C6AF0  80 8D C1 8C */	lwz r4, HSD_GObj_Entities
 /* 801C9F14 001C6AF4  C0 A2 B3 AC */	lfs f5, 0.5f
 /* 801C9F18 001C6AF8  80 A4 00 20 */	lwz r5, 0x20(r4)
 /* 801C9F1C 001C6AFC  C0 02 B3 A8 */	lfs f0, 0.0f

@@ -22,6 +22,10 @@
 #define HSD_A_FRAC_S8 (3 << 5)
 #define HSD_A_FRAC_U8 (4 << 5)
 
+#define FOBJ_LOAD_DATA0 1
+#define FOBJ_LOAD_DATA 2
+#define FOBJ_LOAD_WAIT 3
+
 #define TYPE_ROBJ 1
 #define TYPE_JOBJ 12
 
@@ -67,7 +71,7 @@ HSD_ObjAllocData* HSD_FObjGetAllocData(void);
 void HSD_FObjInitAllocData(void);
 void HSD_FObjRemove(HSD_FObj* fobj);
 void HSD_FObjRemoveAll(HSD_FObj* fobj);
-u8 HSD_FObjSetState(HSD_FObj* fobj, u8 state);
+u32 HSD_FObjSetState(HSD_FObj* fobj, u32 state);
 u32 HSD_FObjGetState(HSD_FObj* fobj);
 void HSD_FObjReqAnimAll(HSD_FObj* fobj, f32 startframe);
 void HSD_FObjStopAnim(HSD_FObj* fobj, void* obj, HSD_ObjUpdateFunc obj_update,
@@ -77,14 +81,10 @@ void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj,
 void FObjUpdateAnim(HSD_FObj* fobj, void* obj, HSD_ObjUpdateFunc update_func);
 void HSD_FObjInterpretAnim(HSD_FObj* fobj, void* obj,
                            HSD_ObjUpdateFunc obj_update, f32 rate);
-void HSD_FObjInterpretAnimAll(HSD_FObj* fobj, void* obj,
+void HSD_FObjInterpretAnimAll(void* fobj, void* obj,
                               HSD_ObjUpdateFunc obj_update, f32 rate);
 HSD_FObj* HSD_FObjLoadDesc(HSD_FObjDesc* desc);
 HSD_FObj* HSD_FObjAlloc(void);
 void HSD_FObjFree(HSD_FObj* fobj);
-
-/*static*/ f32 parseFloat(u8** pos, u8 frac);
-/*static*/ s32 parsePackInfo(u8** pos);
-/*static*/ void FObjLaunchKeyData(HSD_FObj* fobj);
 
 #endif

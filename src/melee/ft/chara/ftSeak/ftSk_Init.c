@@ -11,6 +11,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
+#include "ft/ftcolanim.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -332,7 +333,7 @@ void ftSk_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     void** item_list = fp->ft_data->x48_items;
 
-    fp->x2224_flag.bits.b7 = 1;
+    fp->x2224_b7 = 1;
 
     PUSH_ATTRS(fp, ftSeakAttributes);
 
@@ -355,13 +356,13 @@ void ftSk_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.sk.x222C == 6) {
-        ft_800BFFD0(fp, 86, 0);
+        ftCo_800BFFD0(fp, 86, 0);
     }
 }
 
-void ftSk_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftSk_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
 void ftSk_Init_OnItemInvisible(HSD_GObj* gobj)
@@ -374,9 +375,9 @@ void ftSk_Init_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftSk_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftSk_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, flag, 1, 1);
 }
 
 void ftSk_Init_LoadSpecialAttrs(HSD_GObj* gobj)

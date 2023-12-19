@@ -19,19 +19,21 @@ static StageCallbacks grEF2_803E6328[3] = {
       grFigure2_8020E4F0, 0UL }
 };
 
-StageData grEF2_803E6370 = { 0x00000045,
-                             grEF2_803E6328,
-                             "/GrEF2.dat",
-                             grFigure2_8020E274,
-                             grFigure1_8020E270,
-                             grFigure2_8020E2E4,
-                             grFigure2_8020E2E8,
-                             grFigure2_8020E30C,
-                             grFigure2_8020E4F4,
-                             grFigure2_8020E4FC,
-                             0x00000001,
-                             NULL,
-                             0UL };
+StageData grEF2_803E6370 = {
+    0x00000045,
+    grEF2_803E6328,
+    "/GrEF2.dat",
+    grFigure2_8020E274,
+    grFigure1_8020E270,
+    grFigure2_8020E2E4,
+    grFigure2_8020E2E8,
+    grFigure2_8020E30C,
+    grFigure2_8020E4F4,
+    grFigure2_8020E4FC,
+    0x00000001,
+    NULL,
+    0UL,
+};
 
 void* grEF2_804D6A78;
 
@@ -142,9 +144,9 @@ static void grFigure2_8020E4EC(HSD_GObj* gobj) {}
 
 static void grFigure2_8020E4F0(HSD_GObj* arg0) {}
 
-static bool grFigure2_8020E4F4(int number)
+static lb_UnkAnimStruct* grFigure2_8020E4F4(enum_t arg0)
 {
-    return false;
+    return NULL;
 }
 
 static bool grFigure2_8020E4FC(Vec3* vector, int number, HSD_JObj* jobj)

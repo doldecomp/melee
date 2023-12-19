@@ -10,6 +10,7 @@
 #include "types.h"
 
 #include "ft/ft_0877.h"
+#include "ft/ft_0C31.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
@@ -137,7 +138,7 @@ MotionState ftMr_Init_UnkMotionStates0[aux_states_count] = {
         FtMoveId_Default << 24,
         NULL,
         NULL,
-        ft_800C7158,
+        ftCo_800C7158,
         NULL,
         NULL,
     },
@@ -147,7 +148,7 @@ MotionState ftMr_Init_UnkMotionStates0[aux_states_count] = {
         FtMoveId_Default << 24,
         NULL,
         NULL,
-        ft_800C7200,
+        ftCo_800C7200,
         NULL,
         NULL,
     },
@@ -177,7 +178,7 @@ void ftMr_Init_OnLoad(HSD_GObj* gobj)
     ftData* ftDataInfo = fp->ft_data;
     void** items = ftDataInfo->x48_items;
 
-    fp->x2224_flag.bits.b7 = true;
+    fp->x2224_b7 = true;
 
     PUSH_ATTRS(fp, ftMario_DatAttrs);
 
@@ -194,9 +195,9 @@ void ftMr_Init_OnTakeDamage(HSD_GObj* gobj)
     ftMr_SpecialS_RemoveCape(gobj);
 }
 
-void ftMr_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftMr_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
 void ftMr_Init_OnItemInvisible(HSD_GObj* gobj)
@@ -209,9 +210,9 @@ void ftMr_Init_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftMr_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftMr_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, flag, 1, 1);
 }
 
 void ftMr_Init_LoadSpecialAttrs(HSD_GObj* gobj)
@@ -229,7 +230,7 @@ void ftMr_Init_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, 1);
 }
 
-void ftMr_Init_UnkDemoCallbacks0(s32 arg0, s32* arg1, s32* arg2)
+void ftMr_Init_UnkDemoCallbacks0(int arg0, int* arg1, int* arg2)
 {
     if (arg0 != 10) {
         if (arg0 >= 10) {

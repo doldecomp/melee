@@ -3,14 +3,17 @@
 #include "ftLg_SpecialHi.h"
 
 #include "ftLg_Init.h"
+#include "math.h"
 #include "types.h"
 
 #include "ef/efsync.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_FallSpecial.h"
 
 // 0x80143FC8
 // https://decomp.me/scratch/MAoxx // Luigi's grounded Super Jump Punch Action
@@ -20,9 +23,9 @@ void ftLg_SpecialHi_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialHi, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    fp->throw_flags = 0;
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialHi, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -38,11 +41,11 @@ void ftLg_SpecialAirHi_Enter(HSD_GObj* gobj)
 #endif
 
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->self_vel.y = 0.0f;
     fp->self_vel.x *= luigiAttrs->x64_LUIGI_SUPERJUMP_VEL_X;
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirHi, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirHi, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -57,9 +60,9 @@ void ftLg_SpecialHi_Anim(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_80096900(gobj, 0, 1, 0,
-                    luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY,
-                    luigiAttrs->x54_LUIGI_SUPERJUMP_LANDING_LAG);
+        ftCo_80096900(gobj, 0, 1, 0,
+                      luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY,
+                      luigiAttrs->x54_LUIGI_SUPERJUMP_LANDING_LAG);
     }
 }
 
@@ -74,9 +77,9 @@ void ftLg_SpecialAirHi_Anim(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_80096900(gobj, 0, 1, 0,
-                    luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY,
-                    luigiAttrs->x54_LUIGI_SUPERJUMP_LANDING_LAG);
+        ftCo_80096900(gobj, 0, 1, 0,
+                      luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY,
+                      luigiAttrs->x54_LUIGI_SUPERJUMP_LANDING_LAG);
     }
 }
 
@@ -236,9 +239,9 @@ void ftLg_SpecialAirHi_Phys(HSD_GObj* gobj)
 // https://decomp.me/scratch/l7min // Luigi's Super Jump Punch Landing check
 void ftLg_SpecialHi_CheckLanding(HSD_GObj* gobj)
 {
-    ft_800D5CB0(gobj, 0,
-                ((ftLuigiAttributes*) GET_FIGHTER(gobj)->dat_attrs)
-                    ->x54_LUIGI_SUPERJUMP_LANDING_LAG);
+    ftCo_800D5CB0(gobj, 0,
+                  ((ftLuigiAttributes*) GET_FIGHTER(gobj)->dat_attrs)
+                      ->x54_LUIGI_SUPERJUMP_LANDING_LAG);
 }
 
 // 0x801444E4
@@ -253,7 +256,7 @@ void ftLg_SpecialHi_Coll(HSD_GObj* gobj)
             ft_80083B68(gobj);
             return;
         }
-        ft_800831CC(gobj, ft_80096CC8, ftLg_SpecialHi_CheckLanding);
+        ft_800831CC(gobj, ftCo_80096CC8, ftLg_SpecialHi_CheckLanding);
         return;
     }
     ft_80084104(gobj);
@@ -271,7 +274,7 @@ void ftLg_SpecialAirHi_Coll(HSD_GObj* gobj)
             ft_80083B68(gobj);
             return;
         }
-        ft_800831CC(gobj, ft_80096CC8, ftLg_SpecialHi_CheckLanding);
+        ft_800831CC(gobj, ftCo_80096CC8, ftLg_SpecialHi_CheckLanding);
         return;
     }
     ft_80084104(gobj);

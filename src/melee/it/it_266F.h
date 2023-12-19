@@ -1,7 +1,7 @@
 /// @file
 /// @attention Symbols in this file are placed correctly.
-#ifndef MELEE_IT_CODE_80266F3C_H
-#define MELEE_IT_CODE_80266F3C_H
+#ifndef GALE01_26C47C
+#define GALE01_26C47C
 
 #include "it/types.h"
 
@@ -22,8 +22,11 @@ extern u32 it_804D6D10;
 ///       <tt>unsigned int</tt> first.
 extern uint it_804D6D14;
 
-extern ItemCommonData* it_804D6D28;
-extern CommonItemArticles* it_804D6D24;
+/// Pointer to array of Article*
+extern Article** it_804D6D24;  // common items
+extern Article** it_804D6D30;  // pokemon items
+extern Article** it_804D6D38;  // character items
+extern Article* it_804A0F60[]; // stage items
 
 void it_8027B4A4(HSD_GObj*, u32);
 void* it_8027B5B0(s32, s32, HSD_JObj*, s32, s32);
@@ -34,6 +37,13 @@ void it_8027870C(s32);
 
 bool it_8026D324(bool);
 s32 it_8026D604(HSD_GObj* gobj);
+void it_8026D62C(Item_GObj*, HSD_GObjEvent);
+void it_8026E15C(Item_GObj*, HSD_GObjEvent);
+void it_8026E414(Item_GObj*, HSD_GObjEvent);
+void it_8026F3D4(Item_GObj*, int, bool, int);
+void it_8026E8C4(Item_GObj*, HSD_GObjEvent, HSD_GObjEvent);
+s32 it_8026DF34(void);
+bool it_8026F8B4(Item_GObj*, Vec3*, Vec3*, int);
 void it_8026F9A0(void);
 void it_802701BC(HSD_GObj* gobj);
 void it_802703E8(HSD_GObj* gobj);
@@ -48,18 +58,17 @@ void it_8027163C(HSD_GObj* gobj);
 void it_80271A58(HSD_GObj* gobj);
 void it_802721B8(HSD_GObj* gobj);
 void it_80272280(HSD_GObj* gobj);
-void it_8027163C(HSD_GObj* gobj);
-void it_80271A58(HSD_GObj* gobj);
-void it_802721B8(HSD_GObj* gobj);
 void it_80272298(HSD_GObj* gobj);
 void it_802722B0(HSD_GObj* gobj);
 void it_80272304(HSD_GObj* gobj);
-void it_80272460(itHit* hitbox, s32 damage, HSD_GObj* gobj);
+void it_80272460(HitCapsule* hitbox, s32 damage, HSD_GObj* gobj);
 void it_802725D4(HSD_GObj*);
 void it_80272784(HSD_GObj* gobj);
-void it_802728C8(HSD_GObj* gobj);
 void it_80272A18(HSD_JObj* item_jobj);
 void it_80272A3C(HSD_JObj* item_jobj);
+void it_80272C08(Item_GObj*);
+void it_80273454(Item_GObj*);
+void it_80275444(Item_GObj*);
 
 /// Check if GObj is Item class
 bool it_80272D1C(HSD_GObj* gobj);
@@ -67,16 +76,8 @@ bool it_80272D1C(HSD_GObj* gobj);
 /// Check GObj entity class
 s32 it_80272D40(HSD_GObj* gobj);
 
-void it_80272F7C(HSD_JObj*, f32);
 void it_802728C8(HSD_GObj* gobj);
-void it_80273168(HSD_GObj* gobj);
-void it_802731A4(HSD_GObj*);
-void it_802731E0(HSD_GObj*);
-void it_8027327C(HSD_GObj* gobj, s32 ID1, s32 ID2);
-void it_8027346C(HSD_GObj* gobj);
-void it_80273484(HSD_GObj* gobj);
 void it_80272F7C(HSD_JObj*, f32);
-void it_802728C8(HSD_GObj* gobj);
 void it_80273168(HSD_GObj* gobj);
 void it_802731A4(HSD_GObj*);
 void it_802731E0(HSD_GObj*);
@@ -84,7 +85,7 @@ void it_8027327C(HSD_GObj* gobj, s32 ID1, s32 ID2);
 void it_8027346C(HSD_GObj* gobj);
 void it_80273484(HSD_GObj* gobj);
 void it_80273500(HSD_GObj*, Vec3*);
-void it_80273748(HSD_GObj*, s32, s32);
+void it_80273748(HSD_GObj*, Vec3*, Vec3*);
 
 void it_80273B50(HSD_GObj*, Vec3*);
 void it_80274198(HSD_GObj*, s32);
@@ -109,8 +110,6 @@ void it_80275158(HSD_GObj* gobj, f32 lifetime);
 void it_80275390(HSD_GObj*);
 void it_802753BC(HSD_GObj*, s16);
 void it_802753DC(HSD_GObj*);
-void it_80274740(HSD_GObj* gobj);
-void it_80274A64(HSD_GObj* gobj);
 
 /// Toggle several flags in 0xDCD off
 void it_80275474(HSD_GObj* gobj);
@@ -141,5 +140,27 @@ UNK_RET it_8026FAC4(UNK_PARAMS);
 UNK_RET ftColl_80077688(UNK_PARAMS);
 UNK_RET it_8026FC00(UNK_PARAMS);
 UNK_RET it_80272818(UNK_PARAMS);
+HSD_JObj* it_80272C90(Item_GObj* gobj);
+
+bool it_8026E9A4(Item_GObj*, Vec3*, Vec3*, int);
+void it_8026EECC(HSD_GObj*, int);
+bool it_80273130(Item_GObj*);
+void it_802750F8(Item_GObj*);
+void it_80274594(Item_GObj*);
+bool it_8026DA08(Item_GObj*);
+bool it_80276308(Item_GObj*);
+bool it_802763E0(Item_GObj*);
+void it_80272860(Item_GObj*, f32, f32);
+void it_8027518C(Item_GObj*);
+bool it_802751D8(Item_GObj*);
+bool it_80272C6C(HSD_GObj*);
+void it_80279CDC(HSD_GObj*, f32);
+void it_8027A344(Item_GObj*);
+void it_8027A160(HSD_JObj* bone, Item*);
+bool itColl_BounceOffShield(Item_GObj*);
+bool itColl_BounceOffVictim(Item_GObj*);
+void it_8026E0F4(Item_GObj*);
+void it_80272BA4(Item_GObj*);
+bool it_80273030(Item_GObj*);
 
 #endif

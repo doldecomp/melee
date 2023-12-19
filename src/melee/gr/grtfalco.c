@@ -3,6 +3,7 @@
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
@@ -49,10 +50,10 @@ StageData grTFc_803E8974 = {
 };
 
 typedef struct grTFalco_UnkStruct {
-    s32 unk_0;
-    s32 unk_4;
-    s32 unk_8;
-    s32 unk_C;
+    UNK_T unk_0;
+    UNK_T unk_4;
+    UNK_T unk_8;
+    UNK_T unk_C;
 } grTFalco_UnkStruct;
 
 grTFalco_UnkStruct* grTFc_804D6AF8;
@@ -166,7 +167,7 @@ void grTFalco_80220AA8(HSD_GObj* gobj)
 
 void grTFalco_80220AC8(HSD_GObj* arg0) {}
 
-bool grTFalco_80220ACC(enum_t arg0)
+lb_UnkAnimStruct* grTFalco_80220ACC(enum_t arg0)
 {
     if (arg0 != -1) {
         enum_t i = mpLib_80056B6C(arg0);
@@ -190,11 +191,11 @@ bool grTFalco_80220ACC(enum_t arg0)
                 return grTFc_804D6AF8->unk_C;
             }
 
-            return false;
+            return NULL;
         }
     }
 
-    return false;
+    return NULL;
 }
 
 bool grTFalco_80220B78(Vec3* arg0, int arg1, HSD_JObj* arg2)

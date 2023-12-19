@@ -17,7 +17,7 @@ void ftMt_SpecialHi_CreateGFX(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftMt_SpecialHi_SetStartGFX(gobj);
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->accessory4_cb = NULL;
 }
 ```
 

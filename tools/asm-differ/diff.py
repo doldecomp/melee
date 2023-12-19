@@ -3,21 +3,8 @@
 import argparse
 import enum
 import sys
-from typing import (
-    Any,
-    Callable,
-    Dict,
-    Iterator,
-    List,
-    Match,
-    NoReturn,
-    Optional,
-    Pattern,
-    Set,
-    Tuple,
-    Type,
-    Union,
-)
+from typing import (Any, Callable, Dict, Iterator, List, Match, NoReturn,
+                    Optional, Pattern, Set, Tuple, Type, Union)
 
 
 def fail(msg: str) -> NoReturn:
@@ -369,8 +356,6 @@ if __name__ == "__main__":
 
 import abc
 import ast
-from collections import Counter, defaultdict
-from dataclasses import asdict, dataclass, field, replace
 import difflib
 import html
 import itertools
@@ -384,7 +369,8 @@ import subprocess
 import threading
 import time
 import traceback
-
+from collections import Counter, defaultdict
+from dataclasses import asdict, dataclass, field, replace
 
 MISSING_PREREQUISITES = (
     "Missing prerequisite python module {}. "
@@ -392,8 +378,8 @@ MISSING_PREREQUISITES = (
 )
 
 try:
-    from colorama import Back, Fore, Style
     import watchdog
+    from colorama import Back, Fore, Style
 except ModuleNotFoundError as e:
     fail(MISSING_PREREQUISITES.format(e.name))
 
@@ -1014,7 +1000,7 @@ def eval_line_num(expr: str) -> Optional[int]:
 
 
 def run_make(target: str, project: ProjectSettings) -> None:
-    subprocess.check_call(project.build_command + [target])
+    subprocess.check_call(project.build_command + [target], stdout=sys.stderr, stderr=sys.stderr)
 
 
 def run_make_capture_output(
@@ -1076,7 +1062,7 @@ def run_objdump(cmd: ObjdumpCommand, config: Config, project: ProjectSettings) -
         ).stdout
     except subprocess.CalledProcessError as e:
         print(e.stdout)
-        print(e.stderr)
+        print(e.stderr, file=sys.stderr)
         if "unrecognized option '--source-comment" in e.stderr:
             fail("** Try using --source-old-binutils instead of --source **")
         raise e
@@ -1445,7 +1431,8 @@ def dump_objfile(
     if not os.path.isfile(objfile):
         fail(f"Not able to find .o file for function: {objfile} is not a file.")
 
-    refobjfile = os.path.join(project.expected_dir, objfile)
+    refobjfile = os.path.relpath(objfile, project.build_dir)
+    refobjfile = os.path.join(project.expected_dir, refobjfile)
     if config.diff_mode != DiffMode.SINGLE and not os.path.isfile(refobjfile):
         refobjfile = refobjfile.replace("/src/", "/asm/").replace(".c.o", ".s.o")
         if not os.path.isfile(refobjfile):

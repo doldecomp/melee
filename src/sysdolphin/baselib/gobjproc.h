@@ -24,7 +24,5 @@ void HSD_GObjProc_8038FC18(HSD_GObjProc* gproc);
 
 void HSD_GObjProc_8038FCE4(HSD_GObjProc* gproc);
 void HSD_GObjProc_8038FE24(HSD_GObjProc* gproc);
-void HSD_GObjProc_8038FCE4(HSD_GObjProc* gproc);
-void HSD_GObjProc_8038FE24(HSD_GObjProc* gproc);
 
 #endif

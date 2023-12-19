@@ -10,6 +10,7 @@
 #include "ft/types.h"
 #include "ftPopo/ftPp_1211.h"
 #include "ftPopo/ftPp_Init.h"
+#include "ftPopo/ftPp_SpecialN.h"
 #include "ftPopo/ftPp_SpecialS.h"
 #include "ftPopo/types.h"
 
@@ -373,12 +374,12 @@ void ftNn_Init_OnDeath(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
-    fp->dmg.x18B0 = da->xC8;
+    fp->dmg.armor0 = da->xC8;
     ftParts_80074A4C(gobj, 0U, 0);
     ftParts_80074A4C(gobj, 1U, 0);
     fp->fv.nn.x2234 = 0;
     fp->fv.nn.x222C = 0;
-    fp->fv.nn.x2230.bits.b0 = 0;
+    fp->fv.nn.x2230_b0 = 0;
     fp->fv.nn.x2238 = 0;
     fp->fv.nn.x224C = 0;
     fp->fv.nn.x2250 = ftNn_Init_804D9898;

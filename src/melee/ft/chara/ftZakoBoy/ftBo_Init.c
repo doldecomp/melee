@@ -36,9 +36,9 @@ void ftBo_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 0, 0);
 }
 
-void ftBo_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftBo_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, 0, 0);
+    Fighter_OnItemPickup(gobj, flag, 0, 0);
 }
 
 void ftBo_Init_OnItemInvisible(HSD_GObj* gobj)

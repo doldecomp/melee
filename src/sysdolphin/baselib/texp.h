@@ -4,6 +4,7 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
+#include <placeholder.h>
 #include <dolphin/gx/GXEnum.h>
 
 #define HSD_TEXP_RAS -2
@@ -60,7 +61,7 @@ typedef struct _HSD_TevConf {
     u32 clr_d;
     u32 clr_scale;
     u32 clr_bias;
-    u32 clr_clamp;
+    u8 clr_clamp;
     u32 clr_out_reg;
     u32 alpha_op;
     u32 alpha_a;
@@ -69,7 +70,7 @@ typedef struct _HSD_TevConf {
     u32 alpha_d;
     u32 alpha_scale;
     u32 alpha_bias;
-    u32 alpha_clamp;
+    u8 alpha_clamp;
     u32 alpha_out_reg;
     u32 mode;
     u32 ras_swap;
@@ -100,12 +101,12 @@ typedef struct _HSD_TExpTevDesc {
 
 typedef struct _HSD_TECommon {
     HSD_TExpType type;
-    union _HSD_TExp* next;
+    HSD_TExp* next;
 } HSD_TECommon;
 
 typedef struct _HSD_TECnst {
     HSD_TExpType type;
-    union _HSD_TExp* next;
+    HSD_TExp* next;
     void* val;
     HSD_TEInput comp;
     HSD_TEType ctype;
@@ -119,12 +120,12 @@ typedef struct _HSD_TEArg {
     u8 type;
     u8 sel;
     u8 arg;
-    union _HSD_TExp* exp;
+    HSD_TExp* exp;
 } HSD_TEArg;
 
 typedef struct _HSD_TETev {
     HSD_TExpType type;
-    union _HSD_TExp* next;
+    HSD_TExp* next;
     s32 c_ref;
     u8 c_dst;
     u8 c_op;
@@ -148,12 +149,12 @@ typedef struct _HSD_TETev {
     u8 chan;
 } HSD_TETev;
 
-typedef union _HSD_TExp {
+union HSD_TExp {
     HSD_TExpType type;
     struct _HSD_TECommon comm;
     struct _HSD_TETev tev;
     struct _HSD_TECnst cnst;
-} HSD_TExp;
+};
 
 HSD_TExpType HSD_TExpGetType(HSD_TExp* texp);
 HSD_TExp* HSD_TExpTev(HSD_TExp**);
@@ -182,7 +183,6 @@ void HSD_TExpSetupTev(HSD_TExpTevDesc*, HSD_TExp*);
 
 void HSD_TExpRef(HSD_TExp* texp, u8 sel);
 void HSD_TExpUnref(HSD_TExp* texp, u8 sel);
-void HSD_TExpRef(HSD_TExp* texp, u8 sel);
-void HSD_TExpUnref(HSD_TExp* texp, u8 sel);
+void HSD_TExpSetReg(HSD_TExp* texp);
 
 #endif

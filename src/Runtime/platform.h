@@ -80,12 +80,6 @@ typedef void* unk_t;
 /// A pointer to an unspecified type, used for polymorphic data
 typedef void* any_t;
 
-/// A label in a jump table
-typedef void (*jmp_t)(void);
-
-/// A jump table
-typedef jmp_t jtbl_t[];
-
 /// A @c void callback with no arguments.
 typedef void (*Event)(void);
 
@@ -160,7 +154,11 @@ typedef void (*Event)(void);
 #define S8_MAX 0x7F
 #define S16_MAX 0x7FFF
 #define S32_MAX 0x7FFFFFFF
-#define F32_MAX 3.4028235E38
+#define F32_MAX 3.4028235e38f
+
+#define SQ(x) ((x) * (x))
+#define MIN(a, b) (((a) > (b)) ? (b) : (a))
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 

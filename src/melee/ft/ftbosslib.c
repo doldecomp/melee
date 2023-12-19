@@ -3,6 +3,7 @@
 #include "fighter.h"
 #include "ft_0877.h"
 #include "ftlib.h"
+#include "math.h"
 
 #include "cm/camera.h"
 #include "ft/inlines.h"
@@ -42,7 +43,7 @@ void ftBossLib_8015BD24(s32 arg0, f32* arg1, f32 arg2, s32 arg3, s32 arg4,
 void ftBossLib_8015BDB4(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
-    Gm_PKind kind = Player_GetPlayerSlotType(fp->xC_playerID);
+    Gm_PKind kind = Player_GetPlayerSlotType(fp->player_id);
     { // TODO: assert macro
         bool bad = (kind == Gm_PKind_Human || kind == Gm_PKind_Boss ||
                     kind == Gm_PKind_Cpu);
@@ -231,7 +232,7 @@ bool ftBossLib_8015C31C(void)
 bool ftBossLib_8015C358(void)
 {
     HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_MASTERH);
-    if (gobj && GET_FIGHTER(gobj)->x221F_flag.bits.b3) {
+    if (gobj && GET_FIGHTER(gobj)->x221F_b3) {
         return true;
     }
 
@@ -241,7 +242,7 @@ bool ftBossLib_8015C358(void)
 bool ftBossLib_8015C3A0(void)
 {
     HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_CREZYH);
-    if (gobj && GET_FIGHTER(gobj)->x221F_flag.bits.b3) {
+    if (gobj && GET_FIGHTER(gobj)->x221F_b3) {
         return true;
     }
 
@@ -258,7 +259,7 @@ HSD_GObj* ftBossLib_8015C3E8(FighterKind kind)
     u8 _[8];
 #endif
 
-    for (cur = HSD_GObj_804D782C->x20_fighters; cur; cur = cur->next) {
+    for (cur = HSD_GObj_Entities->fighters; cur; cur = cur->next) {
         if (kind == ftLib_800872A4(cur)) {
             return cur;
         }

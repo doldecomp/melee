@@ -8,6 +8,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_Wait.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
@@ -27,20 +28,20 @@ void ftGw_ItemTorchSetup(HSD_GObj* gobj)
 #endif
 
     fp = getFighter(gobj);
-    lb_8000B1CC(fp->parts[FtPart_LHandNb].x0_jobj, NULL, &sp10);
+    lb_8000B1CC(fp->parts[FtPart_LHandNb].joint, NULL, &sp10);
     fp->fv.gw.x2254_fireGObj =
         it_802C68F8(gobj, &sp10, FtPart_LHandNb, fp->facing_dir);
     if (fp->fv.gw.x2254_fireGObj != NULL) {
-        if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
+        if (fp->death2_cb == NULL) {
+            fp->death2_cb = ftGw_Init_OnDamage;
         }
-        if (fp->cb.x21DC_callback_OnTakeDamage == NULL) {
-            fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
+        if (fp->take_dmg_cb == NULL) {
+            fp->take_dmg_cb = ftGw_Init_OnDamage;
         }
     }
-    fp->cb.x21D4_callback_EnterHitlag = ftGw_AttackS4_ItemTorchEnterHitlag;
-    fp->cb.x21D8_callback_ExitHitlag = ftGw_AttackS4_ItemTorchExitHitlag;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = ftGw_AttackS4_ItemTorchEnterHitlag;
+    fp->post_hitlag_cb = ftGw_AttackS4_ItemTorchExitHitlag;
+    fp->accessory4_cb = NULL;
 }
 
 // 0x8014A904
@@ -117,10 +118,10 @@ void ftGw_AttackS4_Enter(HSD_GObj* gobj)
 
     fp->allow_interrupt = 0;
     fp->cmd_vars[0] = 0;
-    Fighter_ChangeMotionState(gobj, ftGw_MS_AttackS4, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_AttackS4, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftGw_ItemTorchSetup;
+    fp->accessory4_cb = ftGw_ItemTorchSetup;
 }
 
 // 0x8014AA88

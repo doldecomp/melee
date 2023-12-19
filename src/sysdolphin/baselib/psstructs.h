@@ -7,11 +7,12 @@
 #include <baselib/archive.h>
 #include <baselib/jobj.h>
 
-typedef unk_t HSD_PSAppSRT;
-
-struct _generator;
-
 struct _psAppSRT;
+typedef struct _psAppSRT HSD_psAppSRT;
+struct _particle;
+typedef struct _particle HSD_Particle;
+struct _generator;
+typedef struct _generator HSD_Generator;
 
 enum HSD_ParticleKind {
     Tornado = 1 << 2,
@@ -84,7 +85,31 @@ typedef struct _HSD_PSCmdList {
 } HSD_PSCmdList;
 
 struct _particle;
-typedef struct _particle HSD_Particle;
+
+struct _psAppSRT {
+    struct _psAppSRT* next; /* 0x0 */
+
+    struct _generator* gp; /* 0x4 */
+
+    Vec3 tra;       /* 0x8 */
+    Quaternion rot; /* 0x14 */
+    Vec3 sca;       /* 0x24 */
+
+    u8 status; /* 0x30 */
+
+    u8 frameNum;   /* 0x31 */
+    u16 usedCount; /* 0x32 */
+
+    Mtx mmtx;  /* 0x34 */
+    float ssx; /* 0x64 */
+    float ssy; /* 0x68 */
+
+    void (*freefunc)(struct _psAppSRT* appSrt); /* 0x6C */
+
+    u16 idnum;    /* 0x70 */
+    u8 billboard; /* 0x72 */
+    u8 dummy;     /* 0x73 */
+};
 
 /* size: 0x9C */
 struct _particle {
@@ -181,31 +206,6 @@ struct _particle {
     int (*callback)(HSD_Particle* part); /* 0x98 */
 };
 
-struct _psAppSRT {
-    HSD_PSAppSRT* next; /* 0x0 */
-
-    struct _generator* gp; /* 0x4 */
-
-    Vec3 tra;       /* 0x8 */
-    Quaternion rot; /* 0x14 */
-    Vec3 sca;       /* 0x24 */
-
-    u8 status; /* 0x30 */
-
-    u8 frameNum;   /* 0x31 */
-    u16 usedCount; /* 0x32 */
-
-    Mtx mmtx;  /* 0x34 */
-    float ssx; /* 0x64 */
-    float ssy; /* 0x68 */
-
-    void (*freefunc)(HSD_PSAppSRT* appSrt); /* 0x6C */
-
-    u16 idnum;    /* 0x70 */
-    u8 billboard; /* 0x72 */
-    u8 dummy;     /* 0x73 */
-};
-
 /* size: 0xC */
 typedef struct _PSUserFunc {
     int (*hookCreate)(HSD_Particle* part); /* 0x0 */
@@ -213,6 +213,91 @@ typedef struct _PSUserFunc {
     int (*setUserData)(HSD_Particle* part, u8 unknown1,
                        float unknown2); /* 0x8 */
 } HSD_PSUserFunc;
+
+typedef struct _auxDisc {
+    f32 minAngle;
+    f32 maxAngle;
+} auxDisc;
+
+typedef struct _auxLine {
+    f32 x2;
+    f32 y2;
+    f32 z2;
+} auxLine;
+
+typedef struct _auxTornado {
+    f32 vel;
+} auxTornado;
+
+typedef struct _auxRect {
+    f32 x;
+    f32 y;
+    f32 z;
+    f32 xx;
+    f32 xy;
+    f32 xz;
+    f32 yx;
+    f32 yy;
+    f32 yz;
+    f32 zx;
+    f32 zy;
+    f32 zz;
+    u16 flag;
+} auxRect;
+
+typedef struct _auxCone {
+    f32 minAngle;
+    f32 maxAngle;
+    f32 height;
+} auxCone;
+
+typedef struct _auxSphere {
+    f32 speed;
+    f32 latMid;
+    f32 latRange;
+    f32 lonMid;
+    f32 lonRange;
+} auxSphere;
+
+typedef struct _generator {
+    HSD_Generator* next;
+    u32 kind;
+    f32 random;
+    f32 count;
+    HSD_JObj* jobj;
+    u16 genLife;
+    u16 type;
+    u8 bank;
+    u8 linkNo;
+    u8 texGroup;
+    u8 dummy;
+    u16 idnum;
+    u16 life;
+    u8* cmdList;
+    f32 x;
+    f32 y;
+    f32 z;
+    f32 vx;
+    f32 vy;
+    f32 vz;
+    f32 grav;
+    f32 fric;
+    f32 size;
+    f32 radius;
+    f32 angle;
+    u32 numChild;
+    HSD_psAppSRT* appsrt;
+    HSD_PSUserFunc userfunc;
+    int (*callback)(HSD_Generator* part);
+    union {
+        auxDisc disc;
+        auxLine line;
+        auxTornado tornado;
+        auxRect rect;
+        auxCone cone;
+        auxSphere sphere;
+    } aux;
+} _generator;
 
 extern u32* ptclref[64];
 

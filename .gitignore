@@ -30,9 +30,9 @@ build.bat
 clean.bat
 
 # Other
-src/m2ctx.py
-expected/
-dump/
+/src/m2ctx.py
+/expected/
+/dump/
 *.log
 
 # Epilogue hack folder

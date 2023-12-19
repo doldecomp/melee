@@ -9,6 +9,8 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C31.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
@@ -2444,7 +2446,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
         FtMoveId_Default << 24,
         NULL,
         NULL,
-        ft_800C737C,
+        ftCo_800C737C,
         NULL,
         NULL,
     },
@@ -2454,7 +2456,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
         FtMoveId_Default << 24,
         NULL,
         NULL,
-        ft_800C737C,
+        ftCo_800C737C,
         NULL,
         NULL,
     },
@@ -2464,7 +2466,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
         FtMoveId_Default << 24,
         NULL,
         NULL,
-        ft_800C737C,
+        ftCo_800C737C,
         NULL,
         NULL,
     },
@@ -2474,7 +2476,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
         FtMoveId_Default << 24,
         NULL,
         NULL,
-        ft_800C7414,
+        ftCo_800C7414,
         NULL,
         NULL,
     },
@@ -3042,17 +3044,17 @@ void ftKb_Init_OnDeath(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
-    fp->fv.kb.x222C = 0;
-    fp->fv.kb.x2230 = (s32) (HSD_Randi(5) + 1);
-    fp->fv.kb.x223C = 0;
-    fp->fv.kb.x2238 = 4;
-    fp->fv.kb.x2244 = 0;
-    fp->fv.kb.x228C = 0;
-    fp->fv.kb.x2290 = 0;
-    if (Player_GetFlagsBit1(fp->xC_playerID) &&
-        Player_GetUnk4D(fp->xC_playerID) != 4)
+    fp->fv.kb.x0 = 0;
+    fp->fv.kb.x4 = HSD_Randi(5) + 1;
+    fp->fv.kb.x10 = 0;
+    fp->fv.kb.victim_kind = 4;
+    fp->fv.kb.x18 = 0;
+    fp->fv.kb.x60 = 0;
+    fp->fv.kb.x64 = 0;
+    if (Player_GetFlagsBit1(fp->player_id) &&
+        Player_GetUnk4D(fp->player_id) != 4)
     {
-        ftKb_SpecialN_800F1BAC(gobj, Player_GetUnk4D(fp->xC_playerID), 0);
+        ftKb_SpecialN_800F1BAC(gobj, Player_GetUnk4D(fp->player_id), 0);
     }
 }
 
@@ -3061,11 +3063,11 @@ void ftKb_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     void** item_list = fp->ft_data->x48_items;
 
-    PUSH_ATTRS(fp, ftKirbyAttributes);
+    PUSH_ATTRS(fp, ftKb_DatAttrs);
 
-    fp->x2222_b1 = 1;
+    fp->x2222_b1 = true;
     fp->x2D0 = fp->dat_attrs;
-    fp->fv.kb.x2234.bits.b0 = Player_GetFlagsAEBit1(fp->xC_playerID);
+    fp->fv.kb.x8_b0 = Player_GetFlagsAEBit1(fp->player_id);
     it_8026B3F8(item_list[0], 50);
     it_8026B3F8(item_list[1], 51);
     it_8026B3F8(item_list[2], 52);
@@ -3081,7 +3083,7 @@ void ftKb_Init_800EE74C(HSD_GObj* gobj)
     ftKb_SpecialN_800F9090(gobj);
     ftKb_SpecialN_800F19AC(gobj);
     ftKb_SpecialN_800F5D04(gobj, false);
-    fp->cb.x21E8_callback_OnDeath3 = NULL;
+    fp->death3_cb = NULL;
 }
 
 void ftKb_Init_800EE7B8(HSD_GObj* gobj)
@@ -3092,7 +3094,7 @@ void ftKb_Init_800EE7B8(HSD_GObj* gobj)
     ftKb_SpecialAirLw_800F5318(gobj);
     ftKb_SpecialN_800F9090(gobj);
     ftKb_SpecialN_800F1A8C(gobj);
-    fp->cb.x21E0_callback_OnDeath = NULL;
+    fp->death1_cb = NULL;
 }
 
 /// @file
@@ -3108,23 +3110,23 @@ void ftKb_Init_UnkMotionStates4(HSD_GObj* gobj)
     switch (fp->fv.kb.x2238) {
     case 3:
         if (fp->fv.kb.x22E8 == da->x190) {
-            ft_800BFFD0(fp, 58, 0);
+            ftCo_800BFFD0(fp, 58, 0);
         }
         break;
     case 13:
         if (fp->fv.kb.x22D4 == da->x168) {
-            ft_800BFFD0(fp, 54, 0);
+            ftCo_800BFFD0(fp, 54, 0);
         }
         break;
     case 16:
         if (fp->fv.kb.x22C8 == da->x384) {
-            ft_800BFFD0(fp, 93, 0);
+            ftCo_800BFFD0(fp, 93, 0);
             return;
         }
         break;
     case 7:
         if (fp->fv.kb.x22E0 == 6) {
-            ft_800BFFD0(fp, 87, 0);
+            ftCo_800BFFD0(fp, 87, 0);
         }
         break;
     }

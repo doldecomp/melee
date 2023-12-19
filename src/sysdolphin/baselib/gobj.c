@@ -5,14 +5,6 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 
-extern HSD_GObj* HSD_GObj_804D7818;
-extern HSD_GObj* HSD_GObj_804D781C;
-extern HSD_GObjProc* HSD_GObj_804D7830;
-extern HSD_GObjProc* HSD_GObj_804D7838;
-extern HSD_GObjProc** HSD_GObj_804D7840;
-extern s32 HSD_GObj_804D7834;
-extern s32 HSD_GObj_804D783C;
-
 inline void GObj_SetFlag1_inline(HSD_GObjProc* proc, u8 value)
 {
     while (proc != NULL) {
@@ -118,9 +110,7 @@ u32 HSD_GObj_80390EB8(s32 i)
     return HSD_GObj_804085F0[i];
 }
 
-extern HSD_GObj* HSD_GObj_804D7814;
-
-inline void render_gobj(HSD_GObj* cur, s32 i)
+inline void render_gobj(HSD_GObj* cur, int i)
 {
     HSD_GObj* saved = HSD_GObj_804D7814;
     HSD_GObj_804D7814 = cur;
@@ -202,9 +192,9 @@ void HSD_GObj_803910B4(HSD_GObj* gobj)
     HSD_FogSet(gobj->hsd_obj);
 }
 
-void HSD_GObj_803910D8(HSD_GObj* gobj, Event arg1)
+void HSD_GObj_803910D8(HSD_GObj* gobj)
 {
-    if (HSD_CObjSetCurrent(gobj->hsd_obj, arg1)) {
+    if (HSD_CObjSetCurrent(gobj->hsd_obj)) {
         HSD_GObj_80390ED0(gobj, 7);
         HSD_CObjEndCurrent();
     }
@@ -230,12 +220,6 @@ struct _GObjFuncs {
     u8 size;
     void (**funcs)(void);
 };
-
-extern GObjFuncs HSD_GObj_80408610;
-extern s8 HSD_GObj_804D7848;
-extern s8 HSD_GObj_804D7849;
-extern s8 HSD_GObj_804D784A;
-extern GObjFuncs HSD_GObj_80408620;
 
 void HSD_GObj_80391260(struct _GObjUnkStruct* arg0)
 {

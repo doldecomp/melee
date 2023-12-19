@@ -9,6 +9,7 @@
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_Attack1.h"
+#include "ftCommon/ftCo_ItemGet.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
@@ -30,23 +31,21 @@ void ftGw_Attack11_ItemGreenhouseSetup(HSD_GObj* gobj)
     if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
         ftGw_Attack11_DecideAction(gobj);
     } else {
-        lb_8000B1CC(fp->parts[FtPart_LHandNb].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->parts[FtPart_LHandNb].joint, NULL, &sp10);
         fp->fv.gw.x224C_greenhouseGObj =
             it_802C61F4(gobj, &sp10, FtPart_LHandNb, fp->facing_dir);
         if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
-            if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
-                fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
+            if (fp->death2_cb == NULL) {
+                fp->death2_cb = ftGw_Init_OnDamage;
             }
-            if (fp->cb.x21DC_callback_OnTakeDamage == NULL) {
-                fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
+            if (fp->take_dmg_cb == NULL) {
+                fp->take_dmg_cb = ftGw_Init_OnDamage;
             }
-            fp->cb.x21D4_callback_EnterHitlag =
-                ftGw_Attack11_ItemGreenhouseEnterHitlag;
-            fp->cb.x21D8_callback_ExitHitlag =
-                ftGw_Attack11_ItemGreenhouseExitHitlag;
+            fp->pre_hitlag_cb = ftGw_Attack11_ItemGreenhouseEnterHitlag;
+            fp->post_hitlag_cb = ftGw_Attack11_ItemGreenhouseExitHitlag;
         }
     }
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->accessory4_cb = NULL;
 }
 
 // 0x8014BE84
@@ -68,17 +67,15 @@ void ftGw_Attack11_DecideAction(HSD_GObj* gobj)
             it_802C64A8(fp->fv.gw.x224C_greenhouseGObj);
         }
 
-        if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
+        if (fp->death2_cb == NULL) {
+            fp->death2_cb = ftGw_Init_OnDamage;
         }
-        if (fp->cb.x21DC_callback_OnTakeDamage == NULL) {
-            fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
+        if (fp->take_dmg_cb == NULL) {
+            fp->take_dmg_cb = ftGw_Init_OnDamage;
         }
-        fp->cb.x21D4_callback_EnterHitlag =
-            ftGw_Attack11_ItemGreenhouseEnterHitlag;
-        fp->cb.x21D8_callback_ExitHitlag =
-            ftGw_Attack11_ItemGreenhouseExitHitlag;
-        fp->cb.x21BC_callback_Accessory4 = NULL;
+        fp->pre_hitlag_cb = ftGw_Attack11_ItemGreenhouseEnterHitlag;
+        fp->post_hitlag_cb = ftGw_Attack11_ItemGreenhouseExitHitlag;
+        fp->accessory4_cb = NULL;
     }
 }
 
@@ -164,18 +161,18 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (ft_80094790(gobj) == false) {
+    if (ftCo_80094790(gobj) == false) {
         fp->allow_interrupt = 0;
         fp->x2218_b1 = 0;
-        Fighter_ChangeMotionState(gobj, ftGw_MS_Attack11, 0, NULL, 0.0f, 1.0f,
-                                  0.0f);
+        Fighter_ChangeMotionState(gobj, ftGw_MS_Attack11, 0, 0.0f, 1.0f, 0.0f,
+                                  NULL);
         ftAnim_8006EBA4(gobj);
-        fp->hitlag_mul = (f32) fp->co_attrs.x18C_Jab_2InputWindow;
+        fp->hitlag_mul = (f32) fp->co_attrs.jab_2_input_window;
         fp->unk_msid = 44;
         fp->x2218_b2 = 0;
         fp->mv.gw.Attack11.unk = 0;
         fp->x1A54 = 0;
-        fp->cb.x21BC_callback_Accessory4 = ftGw_Attack11_ItemGreenhouseSetup;
+        fp->accessory4_cb = ftGw_Attack11_ItemGreenhouseSetup;
     }
 }
 

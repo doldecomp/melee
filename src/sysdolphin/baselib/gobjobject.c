@@ -6,7 +6,7 @@ extern void (**HSD_GObj_804D7810)(void*);
 HSD_GObj* HSD_GObjObjet_80390A3C(u16 id, u8 arg1)
 {
     HSD_GObj* cur;
-    for (cur = ((HSD_GObj**) HSD_GObj_804D782C)[arg1]; cur != NULL;
+    for (cur = ((HSD_GObj**) HSD_GObj_Entities)[arg1]; cur != NULL;
          cur = cur->next)
     {
         if (cur->classifier == id) {

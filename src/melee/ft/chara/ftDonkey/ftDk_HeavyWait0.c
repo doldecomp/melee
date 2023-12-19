@@ -9,6 +9,8 @@
 #include "ft/ftcamera.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_ItemGet.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 
 bool ftDk_MS_341_800DF938(HSD_GObj* gobj)
 {
@@ -32,14 +34,14 @@ void ftDk_MS_341_800DF980(HSD_GObj* gobj)
     }
     {
         ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
-        Fighter_ChangeMotionState(gobj, donkey_attr->motion_state, 0, NULL, 0,
-                                  1, 0);
+        Fighter_ChangeMotionState(gobj, donkey_attr->motion_state, 0, 0, 1, 0,
+                                  NULL);
     }
 }
 
 void ftDk_HeavyWait0_IASA(HSD_GObj* gobj)
 {
-    if (!ft_80094EA4(gobj) && !ftDk_MS_347_800E0378(gobj) &&
+    if (!ftCo_80094EA4(gobj) && !ftDk_MS_347_800E0378(gobj) &&
         !ftDk_MS_345_800E0134(gobj))
     {
         if (ftDk_MS_341_800DFA98(gobj)) {

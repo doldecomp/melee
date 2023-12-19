@@ -7,6 +7,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
@@ -15,13 +16,13 @@ void ftZd_SpecialN_8013A830(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_b0) {
-        efSync_Spawn(1268, gobj, fp->parts[FtPart_TransN].x0_jobj);
+        efSync_Spawn(1268, gobj, fp->parts[FtPart_TransN].joint);
         fp->x2219_b0 = true;
     }
 
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 void ftZd_SpecialN_8013A8AC(HSD_GObj* gobj)
@@ -30,12 +31,12 @@ void ftZd_SpecialN_8013A8AC(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (!fp->x2219_b0) {
-        efSync_Spawn(1269, gobj, fp->parts[FtPart_TransN].x0_jobj);
+        efSync_Spawn(1269, gobj, fp->parts[FtPart_TransN].joint);
         fp->x2219_b0 = true;
     }
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 inline void startActionHelper(HSD_GObj* gobj)
@@ -61,10 +62,10 @@ void ftZd_SpecialN_Enter(HSD_GObj* gobj)
     temp_f1 = 0;
     fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, 341, 0, NULL, temp_f1, 1.0, temp_f1);
+    Fighter_ChangeMotionState(gobj, 341, 0, temp_f1, 1.0, temp_f1, NULL);
     ftAnim_8006EBA4(gobj);
     startActionHelper(gobj);
-    fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialN_8013A830;
+    fp->accessory4_cb = &ftZd_SpecialN_8013A830;
 }
 
 void ftZd_SpecialAirN_Enter(HSD_GObj* gobj)
@@ -80,11 +81,11 @@ void ftZd_SpecialAirN_Enter(HSD_GObj* gobj)
     fp->self_vel.y = 0;
     fp->self_vel.x = fp->self_vel.x / sa->x8;
 
-    Fighter_ChangeMotionState(gobj, 342, 0, NULL, 0, 1.0, 0);
+    Fighter_ChangeMotionState(gobj, 342, 0, 0, 1.0, 0, NULL);
     ftAnim_8006EBA4(gobj);
 
     startActionHelper(gobj);
-    fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialN_8013A8AC;
+    fp->accessory4_cb = &ftZd_SpecialN_8013A8AC;
 }
 
 void ftZd_SpecialN_Anim(HSD_GObj* gobj)
@@ -141,7 +142,7 @@ void ftZd_SpecialAirN_Anim(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_800CC730(gobj);
+        ftCo_800CC730(gobj);
     }
 }
 
@@ -219,8 +220,8 @@ void ftZd_SpecialN_8013AC88(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 342, 0x0C4C508E, NULL, fp->cur_anim_frame,
-                              1.0, 0);
+    Fighter_ChangeMotionState(gobj, 342, 0x0C4C508E, fp->cur_anim_frame, 1.0,
+                              0, NULL);
 
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->dat_attrs;
@@ -229,7 +230,7 @@ void ftZd_SpecialN_8013AC88(HSD_GObj* gobj)
         ftColl_CreateReflectHit(gobj, &attributes->x84,
                                 &ftZd_SpecialN_8013ADB0);
     }
-    fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialN_8013A8AC;
+    fp->accessory4_cb = &ftZd_SpecialN_8013A8AC;
 }
 
 void ftZd_SpecialN_8013AD1C(HSD_GObj* gobj)
@@ -245,8 +246,8 @@ void ftZd_SpecialN_8013AD1C(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 341, 0x0C4C508E, NULL, fp->cur_anim_frame,
-                              1.0, 0);
+    Fighter_ChangeMotionState(gobj, 341, 0x0C4C508E, fp->cur_anim_frame, 1.0,
+                              0, NULL);
 
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->dat_attrs;
@@ -255,7 +256,7 @@ void ftZd_SpecialN_8013AD1C(HSD_GObj* gobj)
         ftColl_CreateReflectHit(gobj, &attributes->x84,
                                 &ftZd_SpecialN_8013ADB0);
     }
-    fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialN_8013A830;
+    fp->accessory4_cb = &ftZd_SpecialN_8013A830;
 }
 
 void ftZd_SpecialN_8013ADB0(HSD_GObj* gobj)

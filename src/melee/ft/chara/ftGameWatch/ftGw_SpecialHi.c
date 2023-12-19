@@ -4,14 +4,18 @@
 #include "ftGw_SpecialHi.h"
 
 #include "ftGw_Init.h"
+#include "math.h"
 #include "types.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_FallSpecial.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
 
@@ -30,20 +34,19 @@ void ftGw_SpecialHi_ItemRescueSetup(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (fp->fv.gw.x226C_rescueGObj == NULL) {
-        lb_8000B1CC(fp->parts[FtPart_TopN].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->parts[FtPart_TopN].joint, NULL, &sp10);
         sp10.y = -((2.5f * ftCommon_GetModelScale(fp)) - sp10.y);
         rescueGObj = it_802C8038(gobj, &sp10, FtPart_TopN,
                                  fp->motion_id - ftGw_MS_SpecialHi,
                                  fp->facing_dir, 2.5f);
         fp->fv.gw.x226C_rescueGObj = rescueGObj;
         if (rescueGObj != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
-            fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
+            fp->death2_cb = ftGw_Init_OnDamage;
+            fp->take_dmg_cb = ftGw_Init_OnDamage;
         }
-        fp->cb.x21D4_callback_EnterHitlag =
-            ftGw_SpecialHi_ItemRescueEnterHitlag;
-        fp->cb.x21D8_callback_ExitHitlag = ftGw_SpecialHi_ItemRescueExitHitlag;
-        fp->cb.x21BC_callback_Accessory4 = NULL;
+        fp->pre_hitlag_cb = ftGw_SpecialHi_ItemRescueEnterHitlag;
+        fp->post_hitlag_cb = ftGw_SpecialHi_ItemRescueExitHitlag;
+        fp->accessory4_cb = NULL;
     }
 }
 
@@ -69,8 +72,8 @@ void ftGw_SpecialHi_ItemRescueSetNULL(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     fp->fv.gw.x226C_rescueGObj = NULL;
-    fp->cb.x21E4_callback_OnDeath2 = NULL;
-    fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    fp->death2_cb = NULL;
+    fp->take_dmg_cb = NULL;
 }
 
 // 0x8014DFFC - Remove Fire Rescue item
@@ -111,7 +114,7 @@ static inline void ftGameWatch_SpecialHi_SetVars(HSD_GObj* gobj)
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->cb.x21BC_callback_Accessory4 = ftGw_SpecialHi_ItemRescueSetup;
+    fp->accessory4_cb = ftGw_SpecialHi_ItemRescueSetup;
 }
 
 // 0x8014E0AC
@@ -129,8 +132,8 @@ void ftGw_SpecialHi_Enter(HSD_GObj* gobj)
     fp->x74_anim_vel.y = 0.0f;
     fp->self_vel.y = 0.0f;
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialHi, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialHi, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftGameWatch_SpecialHi_SetVars(gobj);
     ftAnim_8006EBA4(gobj);
     ft_80088510(fp, 290066, 127, 64);
@@ -147,8 +150,8 @@ void ftGw_SpecialAirHi_Enter(HSD_GObj* gobj)
 #endif
 
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirHi, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirHi, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftGameWatch_SpecialHi_SetVars(gobj);
     ftAnim_8006EBA4(gobj);
     ft_80088510(fp, 290066, 127, 64);
@@ -175,11 +178,11 @@ void ftGw_SpecialAirHi_Anim(HSD_GObj* gobj)
     gawAttrs = (GET_FIGHTER(gobj))->dat_attrs;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (0.0f == gawAttrs->x60_GAMEWATCH_RESCUE_LANDING) {
-            ft_800CC730(gobj);
+            ftCo_800CC730(gobj);
             return;
         }
-        ft_80096900(gobj, 1, 0, 1, 1.0f,
-                    gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
+        ftCo_80096900(gobj, 1, 0, 1, 1.0f,
+                      gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
     }
 }
 
@@ -263,9 +266,9 @@ void ftGw_SpecialAirHi_Coll(HSD_GObj* gobj)
             if (ft_80081D0C(gobj) != false) {
                 ftGw_SpecialHi_ItemRescueRemove(gobj);
                 ftCommon_8007D7FC(fp);
-                ft_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
-                fp->cb.x21E4_callback_OnDeath2 = NULL;
-                fp->cb.x21DC_callback_OnTakeDamage = NULL;
+                ftCo_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
+                fp->death2_cb = NULL;
+                fp->take_dmg_cb = NULL;
             }
         } else {
             if (1.0f == fp->facing_dir) {
@@ -274,7 +277,7 @@ void ftGw_SpecialAirHi_Coll(HSD_GObj* gobj)
                 ledgeGrabDir = -1;
             }
             if (ft_CheckGroundAndLedge(gobj, ledgeGrabDir) != false) {
-                ft_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
+                ftCo_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
             } else if (ftCliffCommon_80081298(gobj) != false) {
                 ftCliffCommon_80081370(gobj);
             }

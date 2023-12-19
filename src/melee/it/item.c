@@ -4,6 +4,7 @@
 
 #include "it_266F.h"
 #include "it_26B1.h"
+#include "math.h"
 
 #include "cm/camera.h"
 #include "db/db_2253.h"
@@ -490,13 +491,8 @@ bool Item_8026784C(enum_t dropItem, int _)
     return result;
 }
 
-extern CommonItemArticles* it_804D6D24;
-extern UnkItemArticles* it_804D6D38;
-extern UnkItemArticles2* it_804D6D30;
-extern UnkItemArticles3 it_804A0F60[];
-
-extern struct ItemLogicTable it_803F14C4[];
-extern struct ItemLogicTable it_803F3100[];
+extern struct ItemLogicTable it_803F14C4[43];
+extern struct ItemLogicTable it_803F3100[118];
 extern struct ItemLogicTable it_803F23CC[];
 extern struct ItemLogicTable it_803F4D20[];
 
@@ -505,23 +501,22 @@ void Item_80267978(HSD_GObj* gobj)
     Item* item_data = gobj->user_data;
     if (item_data->kind < It_Kind_Kuriboh) {
         // Common items
-        item_data->xC4_article_data =
-            it_804D6D24->article_ptr[item_data->kind];
+        item_data->xC4_article_data = it_804D6D24[item_data->kind];
         item_data->xB8_itemLogicTable = &it_803F14C4[item_data->kind];
     } else if (item_data->kind < Pokemon_Tosakinto) {
         // Character items
         int idx = item_data->kind - It_Kind_Kuriboh;
-        item_data->xC4_article_data = it_804D6D38->unkptr[idx];
+        item_data->xC4_article_data = it_804D6D38[idx];
         item_data->xB8_itemLogicTable = &it_803F3100[idx];
     } else if (item_data->kind < It_Kind_Old_Kuri) {
         // Pokemon
         int idx = item_data->kind - Pokemon_Tosakinto;
-        item_data->xC4_article_data = it_804D6D30->unkptr[idx];
+        item_data->xC4_article_data = it_804D6D30[idx];
         item_data->xB8_itemLogicTable = &it_803F23CC[idx];
     } else {
         // Stage items
         int idx = item_data->kind - It_Kind_Old_Kuri;
-        item_data->xC4_article_data = it_804A0F60->unkptr[idx];
+        item_data->xC4_article_data = it_804A0F60[idx];
         item_data->xB8_itemLogicTable = &it_803F4D20[idx];
         if (item_data->xC4_article_data == NULL) {
             OSReport("not found zako model data! check ground dat file!\n");
@@ -615,9 +610,9 @@ void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     item_data->xDCE_flag.bits.b5 = 0;
     item_data->xDCE_flag.bits.b4 = 0;
     item_data->xC54 = 0.0f;
-    item_data->xC58 = 0.0f;
-    item_data->xC58 = 0.0f;
-    item_data->xC58 = 0.0f;
+    item_data->xC58.x = 0.0f;
+    item_data->xC58.x = 0.0f;
+    item_data->xC58.x = 0.0f;
     item_data->xDC8_word.flags.x9 = 0;
     item_data->xDC8_word.flags.x3 = 0;
     item_data->xDC8_word.flags.x4 = 0;
@@ -704,7 +699,6 @@ void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
 }
 
 extern void PSMTXIdentity(Mtx); /* extern */
-extern u8 HSD_GObj_804D7849;
 
 /// Setup Item JObj
 void Item_802680CC(HSD_GObj* gobj)
@@ -1008,21 +1002,21 @@ HSD_GObj* Item_8026862C(SpawnItem* spawnItem)
 }
 
 /// Item spawn prefunction - spawn airborne
-void Item_80268B18(SpawnItem* spawnItem)
+HSD_GObj* Item_80268B18(SpawnItem* spawnItem)
 {
     spawnItem->x48_ground_or_air = GA_Air;
     spawnItem->x10 = 0;
     Item_802674AC(spawnItem);
-    Item_8026862C(spawnItem);
+    return Item_8026862C(spawnItem);
 }
 
 /// Item spawn prefunction - spawn grounded
-void Item_80268B5C(SpawnItem* spawnItem)
+HSD_GObj* Item_80268B5C(SpawnItem* spawnItem)
 {
     spawnItem->x48_ground_or_air = GA_Ground;
     spawnItem->x10 = 0;
     Item_802674AC(spawnItem);
-    Item_8026862C(spawnItem);
+    return Item_8026862C(spawnItem);
 }
 
 /// Item spawn prefunction - spawn grounded and toggle unknown true
@@ -1216,9 +1210,8 @@ void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
     }
 
     item_data->xCC8_knockback = 0.0F;
-    temp_r30 =
-        (new_var = &item_data->xBC_itemStateContainer->stateTable[msid]);
-    item_data->anim_id = temp_r30->msid;
+    temp_r30 = (new_var = &item_data->xBC_itemStateContainer[msid]);
+    item_data->anim_id = temp_r30->anim_id;
     item_data->x5CC_currentAnimFrame = 0.0F;
     temp_r0 = item_data->anim_id;
 
@@ -1436,7 +1429,7 @@ void Item_802697D4(HSD_GObj* gobj)
             mpLib_800567C0(item_data->xC30, &item_data->pos,
                            &item_data->x64_vec_unk2);
         } else {
-            mpLib_800567C0(item_data->x378_itemColl.x14C_ground.index,
+            mpLib_800567C0(item_data->x378_itemColl.floor.index,
                            &item_data->pos, &item_data->x64_vec_unk2);
         }
     }
@@ -1664,15 +1657,15 @@ bool Item_80269F14(HSD_GObj* gobj)
         for (i = 0; i < 4; i++) // 4 here is the maximum amount of hitboxes
                                 // available in the vanilla Item struct
         {
-            if (temp_item->x5D4_hitboxes[i].x0_toggle) {
-                temp_f30 = temp_item->x5D4_hitboxes[i].xC_damage_staled *
-                               temp_item->xC6C +
-                           0.99f;
+            if (temp_item->x5D4_hitboxes[i].hit.state != HitCapsule_Disabled) {
+                temp_f30 =
+                    temp_item->x5D4_hitboxes[i].hit.damage * temp_item->xC6C +
+                    0.99f;
                 var_r27 = temp_f30;
                 if (var_r27 > it_804D6D28->xD8) {
                     var_r27 = it_804D6D28->xD8;
                 }
-                it_80272460(&temp_item->x5D4_hitboxes[i], var_r27, gobj);
+                it_80272460(&temp_item->x5D4_hitboxes[i].hit, var_r27, gobj);
             }
         }
     }
@@ -2089,12 +2082,12 @@ void Item_8026ABD8(HSD_GObj* gobj, Vec3* pos, f32 arg2)
     }
 }
 
-void Item_8026AC74(HSD_GObj* gobj, enum_t drop_gfx, enum_t drop_sfx, f32 arg3)
+void Item_8026AC74(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3)
 {
     Item* item_data = GetItemData(gobj);
     item_data->xC44 = arg3;
     it_802731A4(gobj);
-    it_80273748(gobj, drop_gfx, drop_sfx);
+    it_80273748(gobj, arg1, arg2);
     RunCallback(gobj, item_data->xB8_itemLogicTable->dropped);
     it_802741F4(gobj, 1);
     it_802754D4(gobj);
@@ -2104,12 +2097,12 @@ void Item_8026AC74(HSD_GObj* gobj, enum_t drop_gfx, enum_t drop_sfx, f32 arg3)
     }
 }
 
-void Item_8026AD20(HSD_GObj* gobj, s32 drop_gfx, s32 drop_sfx, f32 arg8)
+void Item_8026AD20(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3)
 {
     Item* item_data = GetItemData(gobj);
     it_802731E0(gobj);
-    item_data->xC44 = arg8;
-    it_80273748(gobj, drop_gfx, drop_sfx);
+    item_data->xC44 = arg3;
+    it_80273748(gobj, arg1, arg2);
     RunCallback(gobj, item_data->xB8_itemLogicTable->thrown);
     it_802741F4(gobj, 1);
     it_802754D4(gobj);

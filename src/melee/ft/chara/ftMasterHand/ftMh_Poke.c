@@ -9,6 +9,7 @@
 #include "lb/lbvector.h"
 
 #include <dolphin/mtx/types.h>
+#include <MetroTRK/intrinsics.h>
 
 void ftMh_PaperCrush_Coll(HSD_GObj* gobj) {}
 
@@ -22,7 +23,7 @@ void ftMh_MS_358_80152880(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Poke1, 0, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Poke1, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
     fp->mv.mh.unk13.x0 = da->x94 + HSD_Randi(da->x90 - da->x94);
     fp->mv.mh.unk13.x4 = 0;
@@ -41,7 +42,7 @@ void ftMh_Poke1_Anim(HSD_GObj* gobj)
 
             {
                 Fighter* fp = GET_FIGHTER(gobj);
-                Fighter_ChangeMotionState(gobj, ftMh_MS_Poke2, 0, 0, 0, 1, 0);
+                Fighter_ChangeMotionState(gobj, ftMh_MS_Poke2, 0, 0, 1, 0, 0);
                 ftAnim_8006EBA4(gobj);
                 ft_80088148(fp, 320007, 127, 64);
             }
@@ -59,7 +60,7 @@ void ftMh_Poke2_Anim(HSD_GObj* arg0)
 void ftMh_Poke1_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }

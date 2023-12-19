@@ -6,6 +6,7 @@
 #include "ftGk_Init.h"
 
 #include "ft/ft_0877.h"
+#include "ft/ft_0C31.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
@@ -275,7 +276,7 @@ MotionState ftGk_Init_UnkMotionStates0[] = {
         FtMoveId_Default << 24,
         NULL,
         NULL,
-        ft_800C74AC,
+        ftCo_800C74AC,
         NULL,
         NULL,
     },
@@ -307,7 +308,7 @@ void ftGk_Init_OnDeath(HSD_GObj* gobj)
     ftKoopaAttributes* koopaAttr = fp->dat_attrs;
 
     ftParts_80074A4C(gobj, 0, 0);
-    fp->dmg.x18B0 = koopaAttr->x0;
+    fp->dmg.armor0 = koopaAttr->x0;
     fp->fv.gk.x222C = koopaAttr->x10;
     fp->fv.gk.x2230 = koopaAttr->x18;
 }
@@ -326,13 +327,13 @@ void ftGk_Init_OnLoad(HSD_GObj* gobj)
     ftKp_Init_OnLoadForGKoopa(fp);
     it_8026B3F8(items[0], It_Kind_Koopa_Flame);
 
-    fp->x2226_flag.bits.b1 = true;
+    fp->x2226_b1 = true;
     fp->x222A_flag.bits.b0 = true;
 }
 
-void ftGk_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftGk_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, bool, true, true);
+    Fighter_OnItemPickup(gobj, flag, true, true);
 }
 
 void ftGk_Init_OnItemInvisible(HSD_GObj* gobj)
@@ -365,7 +366,7 @@ void ftGk_Init_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, true);
 }
 
-void ftGk_Init_UnkDemoCallbacks0(s32 arg0, s32* arg1, s32* arg2)
+void ftGk_Init_UnkDemoCallbacks0(int arg0, int* arg1, int* arg2)
 {
     if (arg0 == 0xF) {
         *arg2 = 0xE;

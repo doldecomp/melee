@@ -1,13 +1,16 @@
 #include "ftMr_SpecialHi.h"
 
 #include "inlines.h"
+#include "math.h"
 #include "types.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
+#include "ftCommon/ftCo_FallSpecial.h"
 
 #include <baselib/random.h>
 
@@ -17,8 +20,8 @@ void ftMr_SpecialHi_Enter(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
-    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialHi, 0, NULL, 0, 1, 0);
+    fp->throw_flags = 0;
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialHi, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -33,10 +36,10 @@ void ftMr_SpecialAirHi_Enter(HSD_GObj* gobj)
 #endif
 
     fp->cmd_vars[0] = 0;
-    fp->throw_flags.flags = 0;
+    fp->throw_flags = 0;
     fp->self_vel.y = 0;
     fp->self_vel.x = fp->self_vel.x * sa->specialhi.vel_x;
-    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirHi, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirHi, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -49,8 +52,8 @@ void ftMr_SpecialHi_Anim(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     sa = (ftMario_DatAttrs*) fp->dat_attrs;
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_80096900(gobj, 0, 1, 0, sa->specialhi.freefall_mobility,
-                    sa->specialhi.landing_lag);
+        ftCo_80096900(gobj, 0, 1, 0, sa->specialhi.freefall_mobility,
+                      sa->specialhi.landing_lag);
     }
 }
 
@@ -131,7 +134,7 @@ void ftMr_SpecialHi_CheckLanding(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = fp->dat_attrs;
-    ft_800D5CB0(gobj, 0, sa->specialhi.landing_lag);
+    ftCo_800D5CB0(gobj, 0, sa->specialhi.landing_lag);
 }
 
 void ftMr_SpecialHi_Coll(HSD_GObj* gobj)
@@ -141,7 +144,7 @@ void ftMr_SpecialHi_Coll(HSD_GObj* gobj)
         if (fp->cmd_vars[0] == 0 || fp->self_vel.y >= 0) {
             ft_80083B68(gobj);
         } else {
-            ft_800831CC(gobj, &ft_80096CC8, &ftMr_SpecialHi_CheckLanding);
+            ft_800831CC(gobj, &ftCo_80096CC8, &ftMr_SpecialHi_CheckLanding);
         }
     } else {
         ft_80084104(gobj);

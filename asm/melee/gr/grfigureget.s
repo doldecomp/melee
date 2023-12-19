@@ -2,143 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global grFigureGet_80219530
-grFigureGet_80219530:
-/* 80219530 00216110  4E 80 00 20 */	blr
-.global grFigureGet_80219534
-grFigureGet_80219534:
-/* 80219534 00216114  7C 08 02 A6 */	mflr r0
-/* 80219538 00216118  90 01 00 04 */	stw r0, 4(r1)
-/* 8021953C 0021611C  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80219540 00216120  4B FA B4 B9 */	bl Ground_801C49F8
-/* 80219544 00216124  3C 80 80 4A */	lis r4, stage_info@ha
-/* 80219548 00216128  90 6D B4 20 */	stw r3, grFigureGet_804D6AC0@sda21(r13)
-/* 8021954C 0021612C  38 64 E6 C8 */	addi r3, r4, stage_info@l
-/* 80219550 00216130  38 A3 00 8C */	addi r5, r3, 0x8c
-/* 80219554 00216134  88 03 00 8C */	lbz r0, 0x8c(r3)
-/* 80219558 00216138  38 60 00 00 */	li r3, 0
-/* 8021955C 0021613C  50 60 1F 38 */	rlwimi r0, r3, 3, 0x1c, 0x1c
-/* 80219560 00216140  98 05 00 00 */	stb r0, 0(r5)
-/* 80219564 00216144  38 80 00 01 */	li r4, 1
-/* 80219568 00216148  38 60 00 00 */	li r3, 0
-/* 8021956C 0021614C  88 05 00 00 */	lbz r0, 0(r5)
-/* 80219570 00216150  50 80 17 7A */	rlwimi r0, r4, 2, 0x1d, 0x1d
-/* 80219574 00216154  98 05 00 00 */	stb r0, 0(r5)
-/* 80219578 00216158  48 00 00 55 */	bl grFigureGet_802195CC
-/* 8021957C 0021615C  38 60 00 01 */	li r3, 1
-/* 80219580 00216160  48 00 00 4D */	bl grFigureGet_802195CC
-/* 80219584 00216164  4B FA A4 3D */	bl Ground_801C39C0
-/* 80219588 00216168  4B FA A6 2D */	bl Ground_801C3BB4
-/* 8021958C 0021616C  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 80219590 00216170  38 21 00 08 */	addi r1, r1, 8
-/* 80219594 00216174  7C 08 03 A6 */	mtlr r0
-/* 80219598 00216178  4E 80 00 20 */	blr
-.global grFigureGet_8021959C
-grFigureGet_8021959C:
-/* 8021959C 0021617C  4E 80 00 20 */	blr
-.global grFigureGet_802195A0
-grFigureGet_802195A0:
-/* 802195A0 00216180  7C 08 02 A6 */	mflr r0
-/* 802195A4 00216184  38 60 00 00 */	li r3, 0
-/* 802195A8 00216188  90 01 00 04 */	stw r0, 4(r1)
-/* 802195AC 0021618C  94 21 FF F8 */	stwu r1, -8(r1)
-/* 802195B0 00216190  4B FB 18 55 */	bl grZakoGenerator_801CAE04
-/* 802195B4 00216194  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 802195B8 00216198  38 21 00 08 */	addi r1, r1, 8
-/* 802195BC 0021619C  7C 08 03 A6 */	mtlr r0
-/* 802195C0 002161A0  4E 80 00 20 */	blr
-.global grFigureGet_802195C4
-grFigureGet_802195C4:
-/* 802195C4 002161A4  38 60 00 00 */	li r3, 0
-/* 802195C8 002161A8  4E 80 00 20 */	blr
-
-.global grFigureGet_802195CC
-grFigureGet_802195CC:
-/* 802195CC 002161AC  7C 08 02 A6 */	mflr r0
-/* 802195D0 002161B0  90 01 00 04 */	stw r0, 4(r1)
-/* 802195D4 002161B4  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 802195D8 002161B8  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 802195DC 002161BC  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 802195E0 002161C0  93 A1 00 14 */	stw r29, 0x14(r1)
-/* 802195E4 002161C4  93 81 00 10 */	stw r28, 0x10(r1)
-/* 802195E8 002161C8  3B 83 00 00 */	addi r28, r3, 0
-/* 802195EC 002161CC  1C 1C 00 14 */	mulli r0, r28, 0x14
-/* 802195F0 002161D0  3C 60 80 3E */	lis r3, grFigureGet_803E7D00@ha
-/* 802195F4 002161D4  3B E3 7D 00 */	addi r31, r3, grFigureGet_803E7D00@l
-/* 802195F8 002161D8  38 7C 00 00 */	addi r3, r28, 0
-/* 802195FC 002161DC  7F BF 02 14 */	add r29, r31, r0
-/* 80219600 002161E0  4B FA 7E D1 */	bl Ground_801C14D0
-/* 80219604 002161E4  7C 7E 1B 79 */	or. r30, r3, r3
-/* 80219608 002161E8  41 82 00 70 */	beq .L_80219678
-/* 8021960C 002161EC  83 FE 00 2C */	lwz r31, 0x2c(r30)
-/* 80219610 002161F0  38 00 00 00 */	li r0, 0
-/* 80219614 002161F4  3C 60 80 1C */	lis r3, grDisplay_801C5DB0@ha
-/* 80219618 002161F8  90 1F 00 08 */	stw r0, 8(r31)
-/* 8021961C 002161FC  38 83 5D B0 */	addi r4, r3, grDisplay_801C5DB0@l
-/* 80219620 00216200  38 7E 00 00 */	addi r3, r30, 0
-/* 80219624 00216204  90 1F 00 0C */	stw r0, 0xc(r31)
-/* 80219628 00216208  38 A0 00 03 */	li r5, 3
-/* 8021962C 0021620C  38 C0 00 00 */	li r6, 0
-/* 80219630 00216210  48 17 70 6D */	bl GObj_SetupGXLink
-/* 80219634 00216214  80 1D 00 0C */	lwz r0, 0xc(r29)
-/* 80219638 00216218  28 00 00 00 */	cmplwi r0, 0
-/* 8021963C 0021621C  41 82 00 08 */	beq .L_80219644
-/* 80219640 00216220  90 1F 00 1C */	stw r0, 0x1c(r31)
-.L_80219644:
-/* 80219644 00216224  81 9D 00 00 */	lwz r12, 0(r29)
-/* 80219648 00216228  28 0C 00 00 */	cmplwi r12, 0
-/* 8021964C 0021622C  41 82 00 10 */	beq .L_8021965C
-/* 80219650 00216230  7D 88 03 A6 */	mtlr r12
-/* 80219654 00216234  38 7E 00 00 */	addi r3, r30, 0
-/* 80219658 00216238  4E 80 00 21 */	blrl
-.L_8021965C:
-/* 8021965C 0021623C  80 9D 00 08 */	lwz r4, 8(r29)
-/* 80219660 00216240  28 04 00 00 */	cmplwi r4, 0
-/* 80219664 00216244  41 82 00 2C */	beq .L_80219690
-/* 80219668 00216248  38 7E 00 00 */	addi r3, r30, 0
-/* 8021966C 0021624C  38 A0 00 04 */	li r5, 4
-/* 80219670 00216250  48 17 66 E5 */	bl HSD_GObjProc_8038FD54
-/* 80219674 00216254  48 00 00 1C */	b .L_80219690
-.L_80219678:
-/* 80219678 00216258  38 DC 00 00 */	addi r6, r28, 0
-/* 8021967C 0021625C  4C C6 31 82 */	crclr 6
-/* 80219680 00216260  38 7F 00 68 */	addi r3, r31, 0x68
-/* 80219684 00216264  38 9F 00 8C */	addi r4, r31, 0x8c
-/* 80219688 00216268  38 A0 00 BB */	li r5, 0xbb
-/* 8021968C 0021626C  48 12 C0 1D */	bl OSReport
-.L_80219690:
-/* 80219690 00216270  7F C3 F3 78 */	mr r3, r30
-/* 80219694 00216274  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 80219698 00216278  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 8021969C 0021627C  83 C1 00 18 */	lwz r30, 0x18(r1)
-/* 802196A0 00216280  83 A1 00 14 */	lwz r29, 0x14(r1)
-/* 802196A4 00216284  83 81 00 10 */	lwz r28, 0x10(r1)
-/* 802196A8 00216288  38 21 00 20 */	addi r1, r1, 0x20
-/* 802196AC 0021628C  7C 08 03 A6 */	mtlr r0
-/* 802196B0 00216290  4E 80 00 20 */	blr
-.global grFigureGet_802196B4
-grFigureGet_802196B4:
-/* 802196B4 00216294  7C 08 02 A6 */	mflr r0
-/* 802196B8 00216298  38 A0 00 00 */	li r5, 0
-/* 802196BC 0021629C  90 01 00 04 */	stw r0, 4(r1)
-/* 802196C0 002162A0  94 21 FF F8 */	stwu r1, -8(r1)
-/* 802196C4 002162A4  80 83 00 2C */	lwz r4, 0x2c(r3)
-/* 802196C8 002162A8  80 84 00 14 */	lwz r4, 0x14(r4)
-/* 802196CC 002162AC  4B FA EA 6D */	bl grAnime_801C8138
-/* 802196D0 002162B0  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 802196D4 002162B4  38 21 00 08 */	addi r1, r1, 8
-/* 802196D8 002162B8  7C 08 03 A6 */	mtlr r0
-/* 802196DC 002162BC  4E 80 00 20 */	blr
-.global grFigureGet_802196E0
-grFigureGet_802196E0:
-/* 802196E0 002162C0  38 60 00 00 */	li r3, 0
-/* 802196E4 002162C4  4E 80 00 20 */	blr
-.global grFigureGet_802196E8
-grFigureGet_802196E8:
-/* 802196E8 002162C8  4E 80 00 20 */	blr
-.global grFigureGet_802196EC
-grFigureGet_802196EC:
-/* 802196EC 002162CC  4E 80 00 20 */	blr
 .global grFigureGet_802196F0
 grFigureGet_802196F0:
 /* 802196F0 002162D0  7C 08 02 A6 */	mflr r0
@@ -267,7 +130,7 @@ grFigureGet_80219898:
 /* 802198B0 00216490  93 A1 00 3C */	stw r29, 0x3c(r1)
 /* 802198B4 00216494  3B A0 00 00 */	li r29, 0
 /* 802198B8 00216498  93 81 00 38 */	stw r28, 0x38(r1)
-/* 802198BC 0021649C  80 8D C1 8C */	lwz r4, HSD_GObj_804D782C@sda21(r13)
+/* 802198BC 0021649C  80 8D C1 8C */	lwz r4, HSD_GObj_Entities@sda21(r13)
 /* 802198C0 002164A0  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 802198C4 002164A4  83 84 00 20 */	lwz r28, 0x20(r4)
 /* 802198C8 002164A8  48 00 00 14 */	b .L_802198DC
@@ -557,56 +420,6 @@ grFigureGet_803B8470:
     .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
-
-
-.section .data
-    .balign 8
-.global grFigureGet_803E7D00
-grFigureGet_803E7D00:
-    .4byte grFigureGet_802196B4
-    .4byte grFigureGet_802196E0
-    .4byte grFigureGet_802196E8
-    .4byte grFigureGet_802196EC
-    .4byte NULL
-    .4byte grFigureGet_802196F0
-    .4byte grFigureGet_80219890
-    .4byte grFigureGet_80219898
-    .4byte grFigureGet_80219B0C
-    .4byte 0xC0000000
-.global grFigureGet_803E7D28
-grFigureGet_803E7D28:
-    .4byte 0x2F47724E
-    .4byte 0x46672E64
-    .4byte 0x61740000
-.global grFigureGet_803E7D34
-grFigureGet_803E7D34:
-    .4byte 0x00000026
-    .4byte grFigureGet_803E7D00
-    .4byte grFigureGet_803E7D28
-    .4byte grFigureGet_80219534
-    .4byte grFigureGet_80219530
-    .4byte grFigureGet_8021959C
-    .4byte grFigureGet_802195A0
-    .4byte grFigureGet_802195C4
-    .4byte grFigureGet_80219C88
-    .4byte grFigureGet_80219C90
-    .4byte 0x00000001
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67726669
-    .4byte 0x67757265
-    .4byte 0x6765742E
-    .4byte 0x63000000
-    .4byte NULL
 
 
 .section .sbss

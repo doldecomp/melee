@@ -10,9 +10,12 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0C88.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ftCommon/ftCo_ItemGet.h"
+#include "ftCommon/ftCo_ItemThrow.h"
 #include "ftLink/types.h"
 #include "it/it_27CF.h"
 #include "lb/lb_00B0.h"
@@ -24,10 +27,10 @@ static void doEnter(HSD_GObj* gobj, FtMotionId msid0, FtMotionId msid1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (updateBomb(gobj, msid0) != true) {
-        fp->throw_flags.flags = 0;
-        Fighter_ChangeMotionState(gobj, msid1, Ft_MF_None, NULL, 0, 1, 0);
+        fp->throw_flags = 0;
+        Fighter_ChangeMotionState(gobj, msid1, Ft_MF_None, 0, 1, 0, NULL);
         ftAnim_8006EBA4(gobj);
-        fp->cb.x21BC_callback_Accessory4 = spawnBomb;
+        fp->accessory4_cb = spawnBomb;
     }
 }
 
@@ -47,7 +50,7 @@ static bool updateBomb(HSD_GObj* gobj, FtMotionId msid)
     if (fp->item_gobj != NULL) {
         uint bomb_kind = itGetKind(fp->item_gobj) - It_Kind_Link_Bomb;
         if (bomb_kind <= 1) {
-            ft_800957F4(gobj, msid);
+            ftCo_800957F4(gobj, msid);
         }
         return true;
     }
@@ -64,7 +67,7 @@ static void spawnBomb(HSD_GObj* gobj)
 #ifdef MUST_MATCH
         u8 _[4];
 #endif
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].x0_jobj,
+        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint,
                     NULL, &pos);
         {
             Fighter_Part part = da->x48;
@@ -74,7 +77,7 @@ static void spawnBomb(HSD_GObj* gobj)
             fp->item_gobj = igobj;
             ftParts_80074A4C(gobj, 2, 1);
             if (igobj != NULL) {
-                ft_80094818(gobj, 1);
+                ftCo_80094818(gobj, 1);
             }
         }
     }
@@ -98,7 +101,7 @@ void ftLk_SpecialLw_Anim(HSD_GObj* gobj)
 
 void ftLk_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
-    doAnim(gobj, ft_800CC730);
+    doAnim(gobj, ftCo_800CC730);
 }
 
 void ftLk_SpecialLw_Phys(HSD_GObj* gobj)
@@ -122,9 +125,9 @@ void ftLk_SpecialLw_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ft_80082708(gobj)) {
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirLw, coll_mf, NULL,
-                                  fp->cur_anim_frame, 1, 0);
-        fp->cb.x21BC_callback_Accessory4 = spawnBomb;
+        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirLw, coll_mf,
+                                  fp->cur_anim_frame, 1, 0, NULL);
+        fp->accessory4_cb = spawnBomb;
     }
 }
 
@@ -134,8 +137,8 @@ void ftLk_SpecialAirLw_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj)) {
         ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialLw, coll_mf, NULL,
-                                  fp->cur_anim_frame, 1, 0);
-        fp->cb.x21BC_callback_Accessory4 = spawnBomb;
+        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialLw, coll_mf,
+                                  fp->cur_anim_frame, 1, 0, NULL);
+        fp->accessory4_cb = spawnBomb;
     }
 }
