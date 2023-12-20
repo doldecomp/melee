@@ -745,7 +745,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itoldkuri.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itmato.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itmato.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itheiho.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itlikelike.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itnokonoko.s.o\

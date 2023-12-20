@@ -90,4 +90,8 @@ typedef struct itUnkAttributes // Might be shared?
     f32 x4_float;
 } itUnkAttributes;
 
+typedef struct {
+    HSD_JObj* x0;
+} ItMatoVars;
+
 #endif
