@@ -37,7 +37,7 @@ StageCallbacks grTMr_803E8548[4] = { {
                                      { NULL, NULL, NULL, NULL, 0 } };
 
 StageData grTMr_803E85A4 = {
-    0x00000028,
+    40,
     grTMr_803E8548,
     "/GrTMr.dat",
     grTMario_8021F844,
