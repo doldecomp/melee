@@ -1,5 +1,5 @@
-#ifndef _grtlink_h_
-#define _grtlink_h_
+#ifndef _grtkirby_h_
+#define _grtkirby_h_
 
 #include <sysdolphin/baselib/gobj.h>
 
