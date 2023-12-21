@@ -8,22 +8,28 @@
 #
 # This will also offer to create the new source (.c) files for
 # the user, with function headers including some function info.
+# You may pass -c (--consoleOnly) to prevent creation of these.
 #
 # Usage:
 #         split_suggester.py -s [fileToSplit.s]
 #                     OR
 #         split_suggester.py -s [fileToSplit.s] -m [mapFilePath.map]
 #
-# If a map file is provided, function names from it will be
-# included in the generated function headers. If your data,
-# text, and sdata sections are not in the same file, you may
-# create a new file with them all included and input that.
+# If a .map file is provided, function names from it will be
+# included in the generated function headers. If one is not
+# provided, function names will be pulled from "./build/map.csv".
+# Or, you may pass the -nn (--noNames) argument to suppress
+# looking up new function names altogether.
+#
+# If your data, text, and sdata sections are not in the same file, 
+# you may create a new file with them all included and input that.
 #
 # Exit codes:
 #   0: Success; all parsing properly completed
 #   1: Invalid program input; unable to parse command-line arguments
 #   2: .sdata2 section not found in the file
 #   3: Unable to find and parse floats data from sdata2
+#   4: An unknown/unhandled problem occurred
 
 import argparse
 import errno
@@ -32,15 +38,18 @@ import os
 import struct
 import sys
 import time
+import parse_map
+from pathlib import Path
 from collections import OrderedDict
 
-Version = "1.2.1"
+Version = "1.3"
 
 
 class ProgramError(RuntimeError):
-    def __init__(self, message: str, error_code: int):
-        super().__init__(message)
-        self.error_code = error_code
+
+    """ This provides a way to distinguish known/understood program errors from 
+        any other kind of unknown/unexpected errors. Also included will be an 
+        extra argument to be used as an exit code for the program to return. """
 
 
 class Function(object):
@@ -76,7 +85,7 @@ class Function(object):
 
         return self._length
 
-    def checkForMapName(self):
+    def checkForMapName(self, mapNames):
         if mapNames and self.start != -1:
             name = mapNames.get(self.start)
             if name and not name.startswith("zz") and not name.endswith("_"):
@@ -104,7 +113,7 @@ def createFolders(folderPath):
         while not os.path.exists(folderPath):
             time.sleep(0.3)
             if attempt > 10:
-                raise Exception("Unable to create folder: " + folderPath)
+                raise Exception("Unable to create folder(s): " + folderPath)
             attempt += 1
 
     except OSError as error:  # Python >2.5
@@ -181,6 +190,12 @@ def parseArguments():
             action="store_true",
             help="Console display only; prevents creation of the .c file templates.",
         )
+        parser.add_argument(
+            "-nn",
+            "--noNames",
+            action="store_true",
+            help="Don't look up new function names in a .map file or from map.csv.",
+        )
         parser.add_argument("-v", "--version", action="version", version=Version)
 
         args = parser.parse_args()
@@ -192,31 +207,72 @@ def parseArguments():
     return args
 
 
-def parseMapFile(mapFilePath):
-    """Opens and reads the given .map file to parse out function names.
-    Returns a dictionary of the form key=functionStartAddress, value=functionName"""
+def parseMapCsv():
+    """ Gets function names from the build/map.csv file. """
 
-    global mapNames
     mapNames = {}
 
+    # Build a filepath to the map.csv file
+    root = Path(__file__).parents[1]
+    mapFilePath = os.path.join( root, 'build/map.csv' )
+
+    # Build the map.csv file
+    parse_map.main()
+
+    # Parse the map.csv file for function names
     with open(mapFilePath, "r") as mapFile:
         for line in mapFile:
-            line = line.strip()
-            if not line or line.startswith("."):
-                continue
-
             try:
-                lineParts = line.split()
-                funcStart = lineParts[0].upper()
-                funcName = lineParts[-1]
+                # Parse out the function start [virtual] address and function name
+                lineParts = line.split(',')
+                funcStart = hex(int(lineParts[2]))[2:].upper()
+                funcName = lineParts[4]
                 mapNames[funcStart] = funcName
-            except:
+            except Exception as err:
+                if line.startswith('localAddress'):
+                    # It's the first line (column header); we can ignore this error
+                    continue
                 print(f'Unable to parse map file line: "{line}"')
+                print(err)
 
     return mapNames
 
 
-def parseAssemblyFile(args):
+def parseMapFile(mapFilePath):
+    """Opens and reads the given .map file to parse out function names.
+    Returns a dictionary of the form key=functionStartAddress, value=functionName"""
+
+    mapNames = {}
+    startedTextLayout = False
+
+    with open(mapFilePath, "r") as mapFile:
+        for line in mapFile:
+            line = line.strip()
+
+            # Skip empty lines & headers
+            if not line or line.startswith("."):
+                if line == '.text section layout':
+                    startedTextLayout = True
+                continue
+
+            # Skip lines until the start of the text section descriptions
+            elif not startedTextLayout:
+                continue
+
+            try:
+                # Parse out the function start [virtual] address and function name
+                lineParts = line.split()
+                funcStart = lineParts[2].upper()
+                funcName = ' '.join( lineParts[4:] )
+                mapNames[funcStart] = funcName
+            except Exception as err:
+                print(f'Unable to parse map file line: "{line}"')
+                print(err)
+
+    return mapNames
+
+
+def parseAssemblyFile(args, mapNames):
     # Tracking for which section is being parsed
     fileSections = OrderedDict([])  # Key=sectionName, value=sectionSize
     currentSection = ""
@@ -371,12 +427,13 @@ def parseAssemblyFile(args):
                         functionEndLikely = True
 
                     # Check if this is a line referencing a float from sdata
-                    elif "lbl_" in line:
+                    elif "@sda" in line:
                         asm = line.split("*/")[1].lstrip()
 
                         labelPortion = asm.split(",")[-1]
                         label = labelPortion.split("@")[0].lstrip()
 
+                        # Record the float type if this is a float-load instruction
                         if asm.startswith("lfs "):
                             floatTypes[label] = "f32"
                             currentFunction.addLabel(label)
@@ -388,7 +445,7 @@ def parseAssemblyFile(args):
                     if currentFunction.start == -1:
                         lineParts = line.split()
                         currentFunction.start = lineParts[1]
-                        currentFunction.checkForMapName()
+                        currentFunction.checkForMapName(mapNames)
                         if len(functions) > 1:  # First item is None
                             functions[-1].end = lineParts[1]  # Previous function
 
@@ -459,6 +516,7 @@ def printResults(
     floatsData,
     filename,
     ext,
+    mapNames
 ):
     # Print total functions and floats, and byte length totals for each section
     print(
@@ -511,11 +569,13 @@ def printResults(
 
 
 def main(args):
-    # Parse the map file for function names
-    if args.mapFile:
+    # Parse a map file or map.csv for function names
+    if args.noNames:
+        mapNames = {}
+    elif args.mapFile:
         mapNames = parseMapFile(args.mapFile)
     else:
-        mapNames = {}
+        mapNames = parseMapCsv()
 
     # Parse the assembly file for ASM functions and literals
     (
@@ -525,7 +585,7 @@ def main(args):
         fileSections,
         uncertainBytecounts,
         susPadding,
-    ) = parseAssemblyFile(args)
+    ) = parseAssemblyFile(args, mapNames)
 
     # Sanity checks
     if ".sdata2" not in fileSections:
@@ -750,6 +810,7 @@ def main(args):
         floatsData,
         filename,
         ext,
+        mapNames
     )
 
     # Done, if not wanting the template files
@@ -873,10 +934,11 @@ if __name__ == "__main__":
 
     try:
         main(args)
-        exit(0)
+        sys.exit(0)
     except ProgramError as err:
-        message: str
-        code: int
         message, code = err.args
         print(message, file=sys.stderr)
-        exit(code)
+        sys.exit(code)
+    except Exception as err:
+        print(err, file=sys.stderr)
+        sys.exit(4)
