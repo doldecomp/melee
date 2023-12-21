@@ -32,7 +32,7 @@ void it_802D8554(Item_GObj* item_gobj)
     Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_802D858C(Item_GObj*)
+bool it_802D858C(Item_GObj* item_gobj)
 {
     return false;
 }
@@ -46,7 +46,7 @@ void it_802D8594(Item_GObj* item_gobj) {
     }
 }
 
-bool it_802D85EC(Item_GObj*)
+bool it_802D85EC(Item_GObj* item_gobj)
 {
     return false;
 }

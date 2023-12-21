@@ -42,7 +42,7 @@ void it_802D3008(Item_GObj* item_gobj)
     it_804D6D50 = item_gobj;
 }
 
-void it_802D306C(Item_GObj*)
+void it_802D306C(Item_GObj* item_gobj)
 {
 }
 
@@ -64,14 +64,14 @@ void it_802D30C4(Item_GObj* item_gobj)
 
 bool it_802D30EC(Item_GObj* item_gobj)
 {
-    Item* item = GET_ITEM(item_gobj);
+    GET_ITEM(item_gobj);
     if (!it_80272C6C(item_gobj)) {
         return true;
     }
     return false;
 }
 
-void it_802D3120(Item_GObj*)
+void it_802D3120(Item_GObj* item_gobj)
 {
 }
 
@@ -90,7 +90,7 @@ bool it_802D3150(Item_GObj* item_gobj)
     return false;
 }
 
-void it_802D3184(Item_GObj*)
+void it_802D3184(Item_GObj* item_gobj)
 {
 }
 
