@@ -108,3 +108,65 @@ static void HSD_VIPreRetraceCB(u32 retraceCount)
         _p->pre_cb(retraceCount);
     }
 }
+
+static void HSD_VIPostRetraceCB(u32 retraceCount)
+{
+    int idx;
+    int next;
+
+    if ((next = HSD_VISearchXFBByStatus(HSD_VI_XFB_NEXT)) != -1) {
+        if ((idx = HSD_VISearchXFBByStatus(HSD_VI_XFB_DISPLAY)) != -1) {
+            _p->xfb[idx].status = HSD_VI_XFB_FREE;
+        }
+        _p->xfb[next].status = HSD_VI_XFB_DISPLAY;
+        if ((idx = HSD_VISearchXFBByStatus(HSD_VI_XFB_DRAWDONE)) != -1) {
+            _p->xfb[idx].status = HSD_VI_XFB_NEXT;
+        }
+    } else if ((idx = HSD_VISearchXFBByStatus(HSD_VI_XFB_COPYEFB)) != -1) {
+        HSD_VICopyEFB2XFBPtr(&_p->efb.vi_all.vi, _p->xfb[idx].buffer,
+                             HSD_RP_SCREEN);
+        _p->xfb[idx].status = HSD_VI_XFB_DISPLAY;
+        _p->efb.status = HSD_VI_EFB_FREE;
+    }
+
+    if (_p->post_cb) {
+        _p->post_cb(retraceCount);
+    }
+}
+
+static void HSD_VIGXDrawDoneCB(void)
+{
+    _p->drawdone.waiting = 0;
+
+    if (_p->drawdone.cb) {
+        _p->drawdone.cb(_p->drawdone.arg);
+    }
+}
+
+static int HSD_VIGetDrawDoneWaitingFlag(void)
+{
+    return _p->drawdone.waiting;
+}
+
+int HSD_VIGetXFBDrawEnable(void)
+{
+    bool intr;
+    int idx = -1;
+
+    if (HSD_VIGetNbXFB() < 2) {
+        goto ret;
+    }
+
+    intr = OSDisableInterrupts();
+
+    if ((idx = HSD_VISearchXFBByStatus(HSD_VI_XFB_DRAWING)) == -1) {
+        if ((idx = HSD_VISearchXFBByStatus(HSD_VI_XFB_FREE)) != -1) {
+            _p->xfb[idx].status = HSD_VI_XFB_DRAWING;
+        }
+    }
+
+    OSRestoreInterrupts(intr);
+
+ret:
+    return idx;
+}
