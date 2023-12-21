@@ -21,7 +21,7 @@
 # Or, you may pass the -nn (--noNames) argument to suppress
 # looking up new function names altogether.
 #
-# If your data, text, and sdata sections are not in the same file, 
+# If your data, text, and sdata sections are not in the same file,
 # you may create a new file with them all included and input that.
 #
 # Exit codes:
@@ -47,9 +47,9 @@ Version = "1.3"
 
 class ProgramError(RuntimeError):
 
-    """ This provides a way to distinguish known/understood program errors from 
-        any other kind of unknown/unexpected errors. Also included will be an 
-        extra argument to be used as an exit code for the program to return. """
+    """This provides a way to distinguish known/understood program errors from
+    any other kind of unknown/unexpected errors. Also included will be an
+    extra argument to be used as an exit code for the program to return."""
 
 
 class Function(object):
@@ -208,13 +208,13 @@ def parseArguments():
 
 
 def parseMapCsv():
-    """ Gets function names from the build/map.csv file. """
+    """Gets function names from the build/map.csv file."""
 
     mapNames = {}
 
     # Build a filepath to the map.csv file
     root = Path(__file__).parents[1]
-    mapFilePath = os.path.join( root, 'build/map.csv' )
+    mapFilePath = os.path.join(root, "build/map.csv")
 
     # Build the map.csv file
     parse_map.main()
@@ -224,12 +224,12 @@ def parseMapCsv():
         for line in mapFile:
             try:
                 # Parse out the function start [virtual] address and function name
-                lineParts = line.split(',')
+                lineParts = line.split(",")
                 funcStart = hex(int(lineParts[2]))[2:].upper()
                 funcName = lineParts[4]
                 mapNames[funcStart] = funcName
             except Exception as err:
-                if line.startswith('localAddress'):
+                if line.startswith("localAddress"):
                     # It's the first line (column header); we can ignore this error
                     continue
                 print(f'Unable to parse map file line: "{line}"')
@@ -251,7 +251,7 @@ def parseMapFile(mapFilePath):
 
             # Skip empty lines & headers
             if not line or line.startswith("."):
-                if line == '.text section layout':
+                if line == ".text section layout":
                     startedTextLayout = True
                 continue
 
@@ -263,7 +263,7 @@ def parseMapFile(mapFilePath):
                 # Parse out the function start [virtual] address and function name
                 lineParts = line.split()
                 funcStart = lineParts[2].upper()
-                funcName = ' '.join( lineParts[4:] )
+                funcName = " ".join(lineParts[4:])
                 mapNames[funcStart] = funcName
             except Exception as err:
                 print(f'Unable to parse map file line: "{line}"')
@@ -516,7 +516,7 @@ def printResults(
     floatsData,
     filename,
     ext,
-    mapNames
+    mapNames,
 ):
     # Print total functions and floats, and byte length totals for each section
     print(
@@ -810,7 +810,7 @@ def main(args):
         floatsData,
         filename,
         ext,
-        mapNames
+        mapNames,
     )
 
     # Done, if not wanting the template files
