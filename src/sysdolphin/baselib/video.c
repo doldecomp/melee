@@ -1,3 +1,5 @@
+#include <dolphin/vi/vi.h>
+#include <baselib/debug.h>
 #include <baselib/video.h>
 
 HSD_VIInfo HSD_VIData;
@@ -143,10 +145,13 @@ static void HSD_VIGXDrawDoneCB(void)
     }
 }
 
+#pragma push
+#pragma dont_inline on
 static int HSD_VIGetDrawDoneWaitingFlag(void)
 {
     return _p->drawdone.waiting;
 }
+#pragma pop
 
 int HSD_VIGetXFBDrawEnable(void)
 {
@@ -169,4 +174,179 @@ int HSD_VIGetXFBDrawEnable(void)
 
 ret:
     return idx;
+}
+
+int HSD_VIWaitXFBDrawEnable(void)
+{
+    int idx = -1;
+
+    if (HSD_VIGetNbXFB() < 2) {
+        goto ret;
+    }
+
+    while ((idx = HSD_VIGetXFBDrawEnable()) == -1) {
+        VIWaitForRetrace();
+    }
+
+ret:
+    return idx;
+}
+
+static void HSD_VICopyEFB2XFBHiResoAA(GXRenderModeObj* rmode)
+{
+    int n_xfb_lines;
+
+    GXSetDispCopySrc(0, 0, rmode->fbWidth,
+                     rmode->efbHeight - HSD_ANTIALIAS_OVERLAP);
+    n_xfb_lines = GXSetDispCopyYScale(1.0);
+    GXSetDispCopyDst(rmode->fbWidth, n_xfb_lines);
+}
+
+void HSD_VICopyEFB2XFBPtr(HSD_VIStatus* vi, void* buffer, HSD_RenderPass rpass)
+{
+    GXRenderModeObj* rmode = &vi->rmode;
+    int n_xfb_lines;
+    u16 lines;
+    u32 offset;
+
+    GXSetCopyFilter(rmode->aa, rmode->sample_pattern, vi->vf, rmode->vfilter);
+    GXSetDispCopyGamma(vi->gamma);
+
+    HSD_StateSetColorUpdate(vi->update_clr);
+    HSD_StateSetAlphaUpdate(vi->update_alpha);
+    HSD_StateSetZMode(vi->update_z, GX_LEQUAL, GX_TRUE);
+
+    GXSetCopyClear(vi->clear_clr, vi->clear_z);
+
+    switch (rpass) {
+    case HSD_RP_SCREEN:
+        GXSetCopyClamp((GXFBClamp) (GX_CLAMP_TOP | GX_CLAMP_BOTTOM));
+        GXSetDispCopySrc(0, 0, rmode->fbWidth, rmode->efbHeight);
+        n_xfb_lines = GXSetDispCopyYScale((f32) (rmode->xfbHeight) /
+                                          (f32) (rmode->efbHeight));
+        GXSetDispCopyDst(rmode->fbWidth, n_xfb_lines);
+        GXCopyDisp(buffer, GX_TRUE);
+        break;
+
+    case HSD_RP_TOPHALF:
+        HSD_VICopyEFB2XFBHiResoAA(rmode);
+        GXSetCopyClamp(GX_CLAMP_TOP);
+        lines = rmode->efbHeight - HSD_ANTIALIAS_OVERLAP;
+        GXSetDispCopySrc(0, 0, rmode->fbWidth, lines);
+        GXCopyDisp(buffer, GX_TRUE);
+        GXPixModeSync();
+        return;
+
+    case HSD_RP_BOTTOMHALF:
+        HSD_VICopyEFB2XFBHiResoAA(rmode);
+        GXSetCopyClamp(GX_CLAMP_BOTTOM);
+        lines = rmode->efbHeight - HSD_ANTIALIAS_OVERLAP;
+        GXSetDispCopySrc(0, HSD_ANTIALIAS_OVERLAP, rmode->fbWidth, lines);
+        offset = (VIPadFrameBufferWidth(rmode->fbWidth) * lines *
+                  (u32) VI_DISPLAY_PIX_SZ);
+        GXCopyDisp((void*) ((u32) buffer + offset), GX_TRUE);
+        GXSetDispCopySrc(0, 0, rmode->fbWidth, HSD_ANTIALIAS_OVERLAP);
+        GXSetCopyClamp((GXFBClamp) (GX_CLAMP_TOP | GX_CLAMP_BOTTOM));
+        GXCopyDisp((void*) garbage, GX_TRUE);
+        break;
+
+    default:
+        HSD_Panic(__FILE__, 0x207, "unexpected type of render pass.\n");
+    }
+
+    GXPixModeSync();
+}
+
+void HSD_VIGXDrawDone(int arg)
+{
+    while (HSD_VIGetDrawDoneWaitingFlag()) {
+        GXWaitDrawDone();
+    }
+    _p->drawdone.waiting = 1;
+    _p->drawdone.arg = arg;
+    GXDrawDone();
+}
+
+void HSD_VIGXSetDrawDone(int arg)
+{
+    while (HSD_VIGetDrawDoneWaitingFlag()) {
+        GXWaitDrawDone();
+    }
+    _p->drawdone.waiting = 1;
+    _p->drawdone.arg = arg;
+    GXSetDrawDone();
+}
+
+void HSD_VISetXFBWaitDone(int idx)
+{
+    bool intr;
+
+    intr = OSDisableInterrupts();
+
+    HSD_ASSERT(590, _p->xfb[idx].status == HSD_VI_XFB_DRAWING);
+
+    _p->xfb[idx].status = HSD_VI_XFB_WAITDONE;
+    _p->xfb[idx].vi_all = _p->current;
+    _p->current.chg_flag = 0;
+
+    OSRestoreInterrupts(intr);
+}
+
+void HSD_VICopyXFBAsync(HSD_RenderPass rpass)
+{
+    int idx;
+
+    if (HSD_VIGetNbXFB() < 2) {
+        return;
+    }
+
+    idx = HSD_VIWaitXFBDrawEnable();
+    HSD_VICopyEFB2XFBPtr(HSD_VIGetVIStatus(), HSD_VIGetXFBPtr(idx), rpass);
+    HSD_VISetXFBWaitDone(idx);
+
+    HSD_VIGXSetDrawDone(idx);
+}
+
+void HSD_VIDrawDoneXFB(int idx)
+{
+    bool intr;
+
+    intr = OSDisableInterrupts();
+
+    HSD_ASSERT(722, _p->xfb[idx].status == HSD_VI_XFB_WAITDONE);
+
+    _p->xfb[idx].status = HSD_VISearchXFBByStatus(HSD_VI_XFB_NEXT) != -1
+                              ? HSD_VI_XFB_DRAWDONE
+                              : HSD_VI_XFB_NEXT;
+
+    OSRestoreInterrupts(intr);
+}
+
+static int HSD_VIWaitXFBFlush_sub(void)
+{
+    bool intr;
+    int val;
+
+    intr = OSDisableInterrupts();
+
+    val = (HSD_VISearchXFBByStatus(HSD_VI_XFB_WAITDONE) != -1 ||
+           HSD_VISearchXFBByStatus(HSD_VI_XFB_DRAWDONE) != -1 ||
+           HSD_VISearchXFBByStatus(HSD_VI_XFB_NEXT) != -1)
+              ? 1
+              : 0;
+
+    OSRestoreInterrupts(intr);
+
+    return val;
+}
+
+void HSD_VIWaitXFBFlush(void)
+{
+    if (HSD_VIGetNbXFB() < 2) {
+        return;
+    }
+
+    while (HSD_VIWaitXFBFlush_sub()) {
+        VIWaitForRetrace();
+    }
 }

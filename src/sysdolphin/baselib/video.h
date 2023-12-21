@@ -97,7 +97,7 @@ extern HSD_VIInfo HSD_VIData;
 void HSD_VIInit(struct _HSD_VIStatus* vi_status, void* xfb0, void* xfb1,
                 void* xfb2);
 
-void HSD_Video_803762C4(void);
+void HSD_VIDrawDoneXFB(int idx);
 
 HSD_VIRetraceCallback
 HSD_VISetUserPreRetraceCallback(HSD_VIRetraceCallback cb);
@@ -106,11 +106,33 @@ HSD_VISetUserPostRetraceCallback(HSD_VIRetraceCallback cb);
 HSD_VIGXDrawDoneCallback
 HSD_VISetUserGXDrawDoneCallback(HSD_VIGXDrawDoneCallback cb);
 
+int HSD_VIGetXFBDrawEnable(void);
+int HSD_VIWaitXFBDrawEnable(void);
+void HSD_VICopyEFB2XFBPtr(HSD_VIStatus* vi, void* buffer,
+                          HSD_RenderPass rpass);
+
+void HSD_VIGXDrawDone(int arg);
+void HSD_VIGXSetDrawDone(int arg);
+void HSD_VISetXFBWaitDone(int idx);
+void HSD_VICopyXFBAsync(HSD_RenderPass rpass);
+void HSD_VIDrawDoneXFB(int idx);
+void HSD_VIWaitXFBFlush(void);
+
 void HSD_VISetBlack(s32);
 
-inline s32 HSD_VIGetNbXFB()
+inline int HSD_VIGetNbXFB()
 {
     return HSD_VIData.nb_xfb;
+}
+
+inline void* HSD_VIGetXFBPtr(int idx)
+{
+    return HSD_VIData.xfb[idx].buffer;
+}
+
+inline HSD_VIStatus* HSD_VIGetVIStatus()
+{
+    return &HSD_VIData.current.vi;
 }
 
 #endif
