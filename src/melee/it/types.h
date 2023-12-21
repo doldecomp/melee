@@ -611,6 +611,7 @@ struct Item {
         ItCapsuleAttrs capsule;
         ItStarVars star;
         itSword_ItemVars sword;
+        ItMatoVars mato;
         BobOmbVars BobOmb;
         HeartContainerVars HeartContainer;
         MaximTomatoVars MaximTomato;
