@@ -96,8 +96,8 @@ extern HSD_VIInfo HSD_VIData;
 
 void HSD_VIInit(struct _HSD_VIStatus* vi_status, void* xfb0, void* xfb1,
                 void* xfb2);
-
-void HSD_VIDrawDoneXFB(int idx);
+void HSD_VISetConfigure(GXRenderModeObj* rmode);
+void HSD_VISetBlack(bool);
 
 HSD_VIRetraceCallback
 HSD_VISetUserPreRetraceCallback(HSD_VIRetraceCallback cb);
@@ -117,8 +117,7 @@ void HSD_VISetXFBWaitDone(int idx);
 void HSD_VICopyXFBAsync(HSD_RenderPass rpass);
 void HSD_VIDrawDoneXFB(int idx);
 void HSD_VIWaitXFBFlush(void);
-
-void HSD_VISetBlack(s32);
+void HSD_VIWaitXFBFlushNoYield(void);
 
 inline int HSD_VIGetNbXFB()
 {

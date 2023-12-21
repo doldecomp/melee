@@ -350,3 +350,96 @@ void HSD_VIWaitXFBFlush(void)
         VIWaitForRetrace();
     }
 }
+
+void HSD_VIWaitXFBFlushNoYield(void)
+{
+    if (HSD_VIGetNbXFB() < 2) {
+        return;
+    }
+
+    while (HSD_VIWaitXFBFlush_sub()) {
+    }
+}
+
+int HSD_VIGetXFBLastDrawDone(void)
+{
+    bool intr;
+    int idx = -1;
+
+    intr = OSDisableInterrupts();
+
+    if ((idx = HSD_VISearchXFBByStatus(HSD_VI_XFB_WAITDONE)) == -1) {
+        if ((idx = HSD_VISearchXFBByStatus(HSD_VI_XFB_DRAWDONE)) == -1) {
+            if ((idx = HSD_VISearchXFBByStatus(HSD_VI_XFB_NEXT)) == -1) {
+                idx = HSD_VISearchXFBByStatus(HSD_VI_XFB_DISPLAY);
+            }
+        }
+    }
+
+    OSRestoreInterrupts(intr);
+
+    return idx;
+}
+
+void HSD_VISetConfigure(GXRenderModeObj* rmode)
+{
+    _p->current.vi.rmode = *rmode;
+    _p->current.chg_flag = 1;
+}
+
+void HSD_VISetBlack(bool black)
+{
+    _p->current.vi.black = black;
+    _p->current.chg_flag = 1;
+}
+
+void HSD_VIInit(HSD_VIStatus* vi, void* xfb0, void* xfb1, void* xfb2)
+{
+    int i, fbnum, idx;
+
+    VIInit();
+
+    _p->current.vi = *vi;
+    _p->current.chg_flag = 0;
+    _p->xfb[0].buffer = xfb0;
+    _p->xfb[1].buffer = xfb1;
+    _p->xfb[2].buffer = xfb2;
+
+    for (i = 0, fbnum = 0; i < HSD_VI_XFB_MAX; i++) {
+        _p->xfb[i].vi_all = _p->current;
+        if (_p->xfb[i].buffer) {
+            fbnum++;
+            _p->xfb[i].status = HSD_VI_XFB_FREE;
+        } else {
+            _p->xfb[i].status = HSD_VI_XFB_NONE;
+        }
+    }
+
+    _p->nb_xfb = fbnum;
+
+    _p->efb.status = HSD_VI_EFB_FREE;
+    _p->efb.vi_all = _p->current;
+
+    VISetPreRetraceCallback(HSD_VIPreRetraceCB);
+    VISetPostRetraceCallback(HSD_VIPostRetraceCB);
+
+    _p->pre_cb = NULL;
+    _p->post_cb = NULL;
+
+    _p->drawdone.waiting = 0;
+    _p->drawdone.arg = 0;
+
+    GXSetDrawDoneCallback(HSD_VIGXDrawDoneCB);
+    _p->drawdone.cb = NULL;
+
+    _p->perf.frame_period = VIGetTvFormat() == VI_NTSC ? 60 : 50;
+    _p->perf.frame_renew = 0;
+
+    VIConfigure(&_p->current.vi.rmode);
+    VISetBlack(_p->current.vi.black);
+    VIFlush();
+
+    idx = HSD_VISearchXFBByStatus(HSD_VI_XFB_FREE);
+    HSD_VICopyEFB2XFBPtr(HSD_VIGetVIStatus(), HSD_VIGetXFBPtr(idx),
+                         HSD_RP_SCREEN);
+}
