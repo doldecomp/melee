@@ -5,6 +5,8 @@
 
 #include <placeholder.h>
 
+#define VIPadFrameBufferWidth(width) ((u16) (((u16) (width) + 15) & ~15))
+
 s32 VIGetTvFormat(void);
 void VIConfigure(s32);
 void VIFlush(void);

@@ -146,16 +146,16 @@ GXRenderModeObj GXPal528IntDf = {
     { 8, 8, 10, 12, 10, 8, 8 },
 };
 
-void GXSetDispCopySrc(u16 arg0, u32 arg1, u16 arg2, u16 arg3)
+void GXSetDispCopySrc(u16 left, u16 top, u16 wd, u16 ht)
 {
     __GXContexts.main->x1D0[4] = 0;
-    INSERT_FIELD(__GXContexts.main->x1D0[4], arg0, 10, 0);
+    INSERT_FIELD(__GXContexts.main->x1D0[4], left, 10, 0);
     __GXContexts.main->x1D0[4] = (__GXContexts.main->x1D0[4] & 0xFFF003FF) |
-                                 ((u32) (arg1 << 10) & 0x03FFFC00);
+                                 ((u32) (top << 10) & 0x03FFFC00);
     INSERT_FIELD(__GXContexts.main->x1D0[4], 73, 8, 24);
     __GXContexts.main->x1D0[5] = 0;
-    INSERT_FIELD(__GXContexts.main->x1D0[5], arg2 - 1, 10, 0);
-    INSERT_FIELD(__GXContexts.main->x1D0[5], arg3 - 1, 10, 10);
+    INSERT_FIELD(__GXContexts.main->x1D0[5], wd - 1, 10, 0);
+    INSERT_FIELD(__GXContexts.main->x1D0[5], ht - 1, 10, 10);
     INSERT_FIELD(__GXContexts.main->x1D0[5], 74, 8, 24);
 }
 
@@ -173,9 +173,9 @@ void GXSetTexCopySrc(u16 arg0, u32 arg1, u16 arg2, u16 arg3)
     INSERT_FIELD(__GXContexts.main->x1D0[9], 74, 8, 24);
 }
 
-void GXSetDispCopyDst(s32 arg0, s32 arg1)
+void GXSetDispCopyDst(u16 wd, u16 ht)
 {
-    s32 val = (s32) ((u32) (arg0 << 1) & 0xFFFE) >> 5;
+    s32 val = (s32) ((u32) (wd << 1) & 0xFFFE) >> 5;
     __GXContexts.main->x1D0[6] = 0;
     INSERT_FIELD(__GXContexts.main->x1D0[6], val, 10, 0);
     INSERT_FIELD(__GXContexts.main->x1D0[6], 77, 8, 24);
