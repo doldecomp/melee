@@ -173,7 +173,7 @@ void GXSetTexCopySrc(u16 arg0, u32 arg1, u16 arg2, u16 arg3)
     INSERT_FIELD(__GXContexts.main->x1D0[9], 74, 8, 24);
 }
 
-void GXSetDispCopyDst(s32 arg0)
+void GXSetDispCopyDst(s32 arg0, s32 arg1)
 {
     s32 val = (s32) ((u32) (arg0 << 1) & 0xFFFE) >> 5;
     __GXContexts.main->x1D0[6] = 0;
@@ -400,7 +400,7 @@ asm u32 GXSetDispCopyYScale(f32)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void GXSetCopyClear(u8*, s32)
+asm void GXSetCopyClear(GXColor clear_clr, u32 clear_z)
 { // clang-format off
     nofralloc
 /* 8033D8A0 0033A480  54 80 02 3E */	clrlwi r0, r4, 8
@@ -437,7 +437,8 @@ asm void GXSetCopyClear(u8*, s32)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void GXSetCopyFilter(s8, u8*, s8, u8*)
+asm void GXSetCopyFilter(GXBool aa, u8 sample_pattern[12][2], GXBool vf,
+                         u8 vfilter[7]);
 { // clang-format off
     nofralloc
 /* 8033D908 0033A4E8  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -595,7 +596,7 @@ void GXSetDispCopyGamma(s32 arg0)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void GXCopyDisp(u32, s8)
+asm void GXCopyDisp(void* dest, GXBool clear)
 { // clang-format off
     nofralloc
 /* 8033DB4C 0033A72C  54 80 06 3F */	clrlwi. r0, r4, 0x18

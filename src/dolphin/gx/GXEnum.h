@@ -734,4 +734,10 @@ typedef enum {
     GX_VAT_MASK = 0x07,
 } GXCommand;
 
+typedef enum {
+    GX_CLAMP_NONE,
+    GX_CLAMP_TOP,
+    GX_CLAMP_BOTTOM
+} GXFBClamp;
+
 #endif
