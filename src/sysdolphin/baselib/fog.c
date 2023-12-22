@@ -186,7 +186,7 @@ void HSD_FogInterpretAnim(HSD_Fog* fog)
     }
 }
 
-void FogUpdateFunc(any_t obj, enum_t type, HSD_ObjData* val)
+void FogUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
 {
     HSD_Fog* fog = obj;
     if (fog != NULL) {

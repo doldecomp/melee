@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-void HSD_Free(any_t ptr);
+void HSD_Free(void* ptr);
 void* HSD_MemAlloc(ssize_t size);
 
 #endif

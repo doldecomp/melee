@@ -227,7 +227,7 @@ void foobar3(HSD_GObj* gobj);
 /// Stop All Item SFX
 void Item_8026B0B4(HSD_GObj* gobj);
 
-void Item_OnUserDataRemove(any_t user_data);
+void Item_OnUserDataRemove(void* user_data);
 void HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* ip);
 
 #define GET_ITEM(gobj) ((Item*) HSD_GObjGetUserData(gobj))

@@ -23,6 +23,6 @@ void LCQueueWait(register u32 len);
 void L2GlobalInvalidate(void);
 void L2Enable(void);
 void DMAErrorHandler(OSError error, OSContext* context, ...);
-void LCStoreBlocks(any_t dst, any_t src, u32 nblocks);
+void LCStoreBlocks(void* dst, void* src, u32 nblocks);
 
 #endif

@@ -3,8 +3,8 @@
 
 #include <platform.h>
 
-any_t AXFXAllocFunction(size_t size);
-void AXFXFreeFunction(any_t ptr);
-void AXFXSetHooks(any_t (*alloc_hook)(size_t), void (*free_hook)(any_t));
+void* AXFXAllocFunction(size_t size);
+void AXFXFreeFunction(void* ptr);
+void AXFXSetHooks(void* (*alloc_hook)(size_t), void (*free_hook)(void*));
 
 #endif

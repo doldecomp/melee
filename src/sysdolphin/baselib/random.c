@@ -20,9 +20,9 @@ s32 HSD_Randi(s32 max_val)
     return max_val * HSD_Rand() / (1 << 16);
 }
 
-void _HSD_RandForgetMemory(any_t low, any_t high)
+void _HSD_RandForgetMemory(void* low, void* high)
 {
-    if (low <= (any_t) seed_ptr && (any_t) seed_ptr < high) {
+    if (low <= (void*) seed_ptr && (void*) seed_ptr < high) {
         seed_ptr = &seed;
     }
     return;

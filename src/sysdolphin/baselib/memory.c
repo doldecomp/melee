@@ -5,14 +5,14 @@
 #include <baselib/initialize.h>
 #include <baselib/memory.h>
 
-void HSD_Free(any_t ptr)
+void HSD_Free(void* ptr)
 {
     OSFreeToHeap(HSD_GetHeap(), ptr);
 }
 
-any_t HSD_MemAlloc(ssize_t size)
+void* HSD_MemAlloc(ssize_t size)
 {
-    any_t adr;
+    void* adr;
 
     if (size <= 0) {
         return NULL;
