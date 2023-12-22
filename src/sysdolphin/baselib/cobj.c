@@ -318,18 +318,18 @@ void HSD_CObjReqAnim(HSD_CObj* cobj, float startframe)
     HSD_WObjReqAnim(cobj->interest, startframe);
 }
 
-bool makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
+GXProjectionType makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
 {
-    bool is_ortho;
+    GXProjectionType projection_type;
     switch (cobj->projection_type) {
     case PROJ_PERSPECTIVE:
-        is_ortho = false;
+        projection_type = GX_PERSPECTIVE;
         C_MTXPerspective(mtx, cobj->projection_param.perspective.fov,
                          cobj->projection_param.perspective.aspect, cobj->near,
                          cobj->far);
         break;
     case PROJ_FRUSTUM:
-        is_ortho = false;
+        projection_type = GX_PERSPECTIVE;
         C_MTXFrustum(mtx, cobj->projection_param.perspective.fov,
                      cobj->projection_param.perspective.aspect,
                      cobj->projection_param.frustum.left,
@@ -337,7 +337,7 @@ bool makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
                      cobj->far);
         break;
     case PROJ_ORTHO:
-        is_ortho = true;
+        projection_type = GX_ORTHOGRAPHIC;
         C_MTXOrtho(mtx, cobj->projection_param.perspective.fov,
                    cobj->projection_param.perspective.aspect,
                    cobj->projection_param.frustum.left,
@@ -345,7 +345,7 @@ bool makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
                    cobj->far);
         break;
     }
-    return is_ortho;
+    return projection_type;
 }
 
 extern const f64 HSD_CObj_804DE480;
@@ -370,7 +370,7 @@ static bool setupOffscreenCamera(HSD_CObj* cobj)
 // Matching, but references extern float conversion value
 #ifdef MUST_MATCH
 #pragma push
-asm bool setupNormalCamera(HSD_CObj* cobj)
+asm int setupNormalCamera(HSD_CObj* cobj)
 { // clang-format off
     nofralloc
 /* 80367C28 00364808  7C 08 02 A6 */	mflr r0
@@ -598,7 +598,7 @@ extern const float HSD_CObj_804DE494;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool setupTopHalfCamera()
+asm int setupTopHalfCamera()
 { // clang-format off
     nofralloc
 /* 80367EB0 00364A90  7C 08 02 A6 */	mflr r0
@@ -764,7 +764,7 @@ lbl_803680D8:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool setupBottomHalfCamera()
+asm int setupBottomHalfCamera()
 { // clang-format off
     nofralloc
 /* 803680F8 00364CD8  7C 08 02 A6 */	mflr r0
