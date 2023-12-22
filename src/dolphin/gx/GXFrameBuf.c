@@ -150,8 +150,8 @@ void GXSetDispCopySrc(u16 left, u16 top, u16 wd, u16 ht)
 {
     __GXContexts.main->x1D0[4] = 0;
     INSERT_FIELD(__GXContexts.main->x1D0[4], left, 10, 0);
-    __GXContexts.main->x1D0[4] = (__GXContexts.main->x1D0[4] & 0xFFF003FF) |
-                                 ((u32) (top << 10) & 0x03FFFC00);
+    __GXContexts.main->x1D0[4] =
+        (__GXContexts.main->x1D0[4] & 0xFFF003FF) | ((top << 10) & 0x03FFFC00);
     INSERT_FIELD(__GXContexts.main->x1D0[4], 73, 8, 24);
     __GXContexts.main->x1D0[5] = 0;
     INSERT_FIELD(__GXContexts.main->x1D0[5], wd - 1, 10, 0);
