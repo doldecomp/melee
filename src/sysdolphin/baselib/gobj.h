@@ -134,12 +134,12 @@ void HSD_GObj_803912E0(GObjFuncs* arg0);
 void HSD_GObj_80390ED0(HSD_GObj* gobj, u32 mask);
 extern HSD_GObj* HSD_GObj_804D7814;
 
-static inline any_t HSD_GObjGetUserData(HSD_GObj* gobj)
+static inline void* HSD_GObjGetUserData(HSD_GObj* gobj)
 {
     return gobj->user_data;
 }
 
-static inline any_t HSD_GObjGetHSDObj(HSD_GObj* gobj)
+static inline void* HSD_GObjGetHSDObj(HSD_GObj* gobj)
 {
     return gobj->hsd_obj;
 }

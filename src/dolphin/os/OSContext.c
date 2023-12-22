@@ -381,14 +381,14 @@ void OSLoadContext(OSContext* ctx)
 #endif
 
 #ifdef MWERKS_GEKKO
-any_t OSGetStackPointer(void)
+void* OSGetStackPointer(void)
 {
-    register any_t result;
+    register void* result;
     asm { mr result, r1 }
     return result;
 }
 #else
-any_t OSGetStackPointer(void)
+void* OSGetStackPointer(void)
 {
     NOT_IMPLEMENTED;
 }

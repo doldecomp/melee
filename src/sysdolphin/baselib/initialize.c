@@ -201,7 +201,7 @@ void HSD_GetNextArena(void** lo, void** hi)
 OSHeapHandle HSD_CreateMainHeap(void* lo, void* hi)
 {
     int i;
-    void (*cb_table[])(any_t lo, any_t hi) = {
+    void (*cb_table[])(void* lo, void* hi) = {
         _HSD_AObjForgetMemory,
         _HSD_DispForgetMemory,
         _HSD_IDForgetMemory,

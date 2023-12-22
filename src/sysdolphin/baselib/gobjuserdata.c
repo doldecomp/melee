@@ -1,7 +1,7 @@
 #include <baselib/gobjuserdata.h>
 
 void GObj_InitUserData(HSD_GObj* gobj, u8 kind,
-                       void (*remove_func)(any_t user_data), void* data)
+                       void (*remove_func)(void* user_data), void* data)
 {
     HSD_ASSERT(40, gobj->user_data_kind == HSD_GOBJ_USER_DATA_NONE);
     gobj->user_data_kind = kind;
