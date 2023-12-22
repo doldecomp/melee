@@ -149,13 +149,17 @@ static void HSD_VIGXDrawDoneCB(void)
     }
 }
 
+#ifdef MWERKS_GEKKO
 #pragma push
 #pragma dont_inline on
+#endif
 static int HSD_VIGetDrawDoneWaitingFlag(void)
 {
     return _p->drawdone.waiting;
 }
+#ifdef MWERKS_GEKKO
 #pragma pop
+#endif
 
 int HSD_VIGetXFBDrawEnable(void)
 {

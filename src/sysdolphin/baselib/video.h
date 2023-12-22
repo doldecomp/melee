@@ -120,22 +120,22 @@ void HSD_VIWaitXFBFlush(void);
 void HSD_VIWaitXFBFlushNoYield(void);
 int HSD_VIGetXFBLastDrawDone(void);
 
-inline int HSD_VIGetNbXFB()
+static inline int HSD_VIGetNbXFB()
 {
     return HSD_VIData.nb_xfb;
 }
 
-inline void* HSD_VIGetXFBPtr(int idx)
+static inline void* HSD_VIGetXFBPtr(int idx)
 {
     return HSD_VIData.xfb[idx].buffer;
 }
 
-inline HSD_VIStatus* HSD_VIGetVIStatus()
+static inline HSD_VIStatus* HSD_VIGetVIStatus()
 {
     return &HSD_VIData.current.vi;
 }
 
-inline GXRenderModeObj* HSD_VIGetRenderMode()
+static inline GXRenderModeObj* HSD_VIGetRenderMode()
 {
     return &HSD_VIData.current.vi.rmode;
 }
