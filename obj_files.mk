@@ -1022,7 +1022,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/initialize.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/video.s.o\
+    $(BUILD_DIR)/src/sysdolphin/baselib/video.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/controller.c.o\

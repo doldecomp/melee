@@ -69,7 +69,7 @@ static void gmMain_8015FD24(void)
     HSD_PadLibData.scale_analogLR = 140;
 }
 
-static void gmMain_8015FDA0(void) {}
+static void gmMain_8015FDA0(u32 arg) {}
 
 // set debug level
 static void gmMain_8015FDA4(void)
@@ -177,7 +177,7 @@ int main(void)
     lbAudioAx_8002838C();
     lb_80019AAC(&gmMain_8015FD24);
     HSD_VISetUserPostRetraceCallback(&gmMain_8015FDA0);
-    HSD_VISetUserGXDrawDoneCallback(&HSD_Video_803762C4);
+    HSD_VISetUserGXDrawDoneCallback(&HSD_VIDrawDoneXFB);
     HSD_VISetBlack(0);
     lbMemory_8001564C();
     lbHeap_80015F3C();
