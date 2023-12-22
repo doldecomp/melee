@@ -1,5 +1,9 @@
+#include <dolphin/gx/GXFrameBuf.h>
+#include <dolphin/gx/GXMisc.h>
+#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/vi/vi.h>
 #include <baselib/debug.h>
+#include <baselib/state.h>
 #include <baselib/video.h>
 
 HSD_VIInfo HSD_VIData;
@@ -255,16 +259,6 @@ void HSD_VICopyEFB2XFBPtr(HSD_VIStatus* vi, void* buffer, HSD_RenderPass rpass)
     }
 
     GXPixModeSync();
-}
-
-void HSD_VIGXDrawDone(int arg)
-{
-    while (HSD_VIGetDrawDoneWaitingFlag()) {
-        GXWaitDrawDone();
-    }
-    _p->drawdone.waiting = 1;
-    _p->drawdone.arg = arg;
-    GXDrawDone();
 }
 
 void HSD_VIGXSetDrawDone(int arg)

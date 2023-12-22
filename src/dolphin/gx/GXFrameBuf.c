@@ -438,7 +438,7 @@ asm void GXSetCopyClear(GXColor clear_clr, u32 clear_z)
 
 #pragma push
 asm void GXSetCopyFilter(GXBool aa, u8 sample_pattern[12][2], GXBool vf,
-                         u8 vfilter[7]);
+                         u8 vfilter[7])
 { // clang-format off
     nofralloc
 /* 8033D908 0033A4E8  94 21 FF B0 */	stwu r1, -0x50(r1)

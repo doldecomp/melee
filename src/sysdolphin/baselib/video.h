@@ -118,6 +118,7 @@ void HSD_VICopyXFBAsync(HSD_RenderPass rpass);
 void HSD_VIDrawDoneXFB(int idx);
 void HSD_VIWaitXFBFlush(void);
 void HSD_VIWaitXFBFlushNoYield(void);
+int HSD_VIGetXFBLastDrawDone(void);
 
 inline int HSD_VIGetNbXFB()
 {
@@ -132,6 +133,11 @@ inline void* HSD_VIGetXFBPtr(int idx)
 inline HSD_VIStatus* HSD_VIGetVIStatus()
 {
     return &HSD_VIData.current.vi;
+}
+
+inline GXRenderModeObj* HSD_VIGetRenderMode()
+{
+    return &HSD_VIData.current.vi.rmode;
 }
 
 #endif

@@ -8,6 +8,7 @@
 #include <baselib/displayfunc.h>
 #include <baselib/initialize.h>
 #include <baselib/mtx.h>
+#include <baselib/video.h>
 #include <MSL/trigf.h>
 #include <Runtime/runtime.h>
 
@@ -347,7 +348,6 @@ bool makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
     return is_ortho;
 }
 
-extern GXRenderModeObj HSD_VIData;
 extern const f64 HSD_CObj_804DE480;
 extern const float HSD_CObj_804DE478;
 extern const float HSD_CObj_804DE47C;
