@@ -8,7 +8,7 @@
 #include <baselib/jobj.h>
 #include <baselib/objalloc.h>
 
-#define TYPE_MASK 0x70000000
+#define ROBJ_TYPE_MASK 0x70000000
 #define REFTYPE_JOBJ 0x10000000
 #define REFTYPE_IKHINT 0x40000000
 

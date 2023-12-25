@@ -54,7 +54,7 @@ HSD_RObj* HSD_RObjGetByType(HSD_RObj* robj, u32 type, u32 subtype)
         }
 
         if (has_type) {
-            if ((curr->flags & TYPE_MASK) == type &&
+            if ((curr->flags & ROBJ_TYPE_MASK) == type &&
                 (!subtype || subtype == (curr->flags & 0xFFFFFFF)))
             {
                 return curr;
@@ -208,7 +208,7 @@ int HSD_RObjGetGlobalPosition(HSD_RObj* robj, int type, Vec3* p)
         return 0;
     }
     for (rp = robj; rp != NULL; rp = rp->next) {
-        if (((rp->flags & TYPE_MASK) == REFTYPE_JOBJ ? 1 : 0) != 0) {
+        if (((rp->flags & ROBJ_TYPE_MASK) == REFTYPE_JOBJ ? 1 : 0) != 0) {
             if (((rp->flags & 0x80000000) ? 1 : 0) != 0 &&
                 type == HSD_RObjGetConstraintType(rp))
             {
@@ -331,11 +331,11 @@ void HSD_RObjUpdateAll(HSD_RObj* robj, void* obj,
 void HSD_RObjResolveRefs(HSD_RObj* robj, HSD_RObjDesc* desc)
 {
     if (robj != NULL && desc != NULL) {
-        switch (desc->flags & 0x70000000) {
-        case 0x10000000:
+        switch (desc->flags & ROBJ_TYPE_MASK) {
+        case REFTYPE_JOBJ:
             HSD_JObjUnrefThis(robj->u.jobj);
             robj->u.jobj = HSD_IDGetData((u32) desc->u.joint, NULL);
-            HSD_ASSERT(0x373, robj->u.jobj);
+            HSD_ASSERT(883, robj->u.jobj);
             if (robj->u.jobj != NULL) {
                 iref_INC(robj->u.jobj);
             }
@@ -360,8 +360,8 @@ void HSD_RObjRemove(HSD_RObj* robj)
     s32 flags;
 
     if (robj != NULL) {
-        switch (robj->flags & 0x70000000) {
-        case 0x10000000:
+        switch (robj->flags & ROBJ_TYPE_MASK) {
+        case REFTYPE_JOBJ:
             HSD_JObjUnrefThis(robj->u.jobj);
             break;
         case 0x0:
@@ -386,8 +386,8 @@ void HSD_RObjRemoveAll(HSD_RObj* robj)
 HSD_RObj* HSD_RObjAlloc(void)
 {
     HSD_RObj* new = HSD_ObjAlloc(&robj_alloc_data);
-    HSD_ASSERT(0x408U, new);
-    memset(new, 0, 0x1CU);
+    HSD_ASSERT(1032, new);
+    memset(new, 0, 0x1C);
     return new;
 }
 
@@ -424,7 +424,7 @@ void HSD_RvalueResolveRefs(HSD_Rvalue* rvalue, HSD_RvalueList* list)
     if (rvalue != NULL && list != NULL) {
         HSD_JObjUnrefThis(rvalue->jobj);
         rvalue->jobj = HSD_IDGetData((u32) list->joint, NULL);
-        HSD_ASSERT(0x535, rvalue->jobj);
+        HSD_ASSERT(1333, rvalue->jobj);
         iref_INC(rvalue->jobj);
     }
 }
@@ -453,7 +453,7 @@ static inline void ref_JObj(HSD_RObj* robj, HSD_JObj* o)
         iref_INC(o);
     } else {
         OSReport("constraint only support jobj target.\n");
-        HSD_ASSERT(0x560, 0);
+        HSD_ASSERT(1376, 0);
     }
 }
 
