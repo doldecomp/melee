@@ -298,6 +298,63 @@ static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
     NOT_IMPLEMENTED;
 }
 
+static void resolveLimits(HSD_RObj* robj, void* obj,
+                          HSD_ObjUpdateFunc update_func)
+{
+    NOT_IMPLEMENTED;
+}
+
+void HSD_RObjUpdateAll(HSD_RObj* robj, void* obj,
+                       HSD_ObjUpdateFunc update_func)
+{
+    HSD_RObj* rp;
+    Vec3 vec;
+
+    if (robj != NULL) {
+        if (HSD_RObjGetGlobalPosition(robj, 1, &vec) != 0) {
+            update_func(obj, 0x35, (HSD_ObjData*) &vec);
+            update_func(obj, 0x38, NULL);
+        }
+        resolveCnsDirUp(robj, obj, update_func);
+        resolveCnsOrientation(robj, obj, update_func);
+        resolveLimits(robj, obj, update_func);
+
+        for (rp = robj; rp != NULL; rp = rp->next) {
+            if (RObjHasFlags(rp) && RObjHasFlags2(rp)) {
+                expEvaluate(&rp->u.exp, rp->flags & 0xFFFFFFF, obj,
+                            update_func);
+            }
+        }
+    }
+}
+
+void HSD_RObjResolveRefs(HSD_RObj* robj, HSD_RObjDesc* desc)
+{
+    if (robj != NULL && desc != NULL) {
+        switch (desc->flags & 0x70000000) {
+        case 0x10000000:
+            HSD_JObjUnrefThis(robj->u.jobj);
+            robj->u.jobj = HSD_IDGetData((u32) desc->u.joint, NULL);
+            HSD_ASSERT(0x373, robj->u.jobj);
+            if (robj->u.jobj != NULL) {
+                iref_INC(robj->u.jobj);
+            }
+            break;
+        case 0x0:
+            HSD_RvalueResolveRefsAll(robj->u.exp.rvalue, desc->u.exp->rvalue);
+            break;
+        }
+    }
+}
+
+void HSD_RObjResolveRefsAll(HSD_RObj* robj, HSD_RObjDesc* desc)
+{
+    for (; robj != NULL && desc != NULL; robj = robj->next, desc = desc->next)
+    {
+        HSD_RObjResolveRefs(robj, desc);
+    }
+}
+
 void HSD_RObjRemove(HSD_RObj* robj)
 {
     s32 flags;
