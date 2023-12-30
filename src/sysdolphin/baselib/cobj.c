@@ -8,6 +8,7 @@
 #include <baselib/displayfunc.h>
 #include <baselib/initialize.h>
 #include <baselib/mtx.h>
+#include <baselib/video.h>
 #include <MSL/trigf.h>
 #include <Runtime/runtime.h>
 
@@ -317,18 +318,18 @@ void HSD_CObjReqAnim(HSD_CObj* cobj, float startframe)
     HSD_WObjReqAnim(cobj->interest, startframe);
 }
 
-bool makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
+GXProjectionType makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
 {
-    bool is_ortho;
+    GXProjectionType projection_type;
     switch (cobj->projection_type) {
     case PROJ_PERSPECTIVE:
-        is_ortho = false;
+        projection_type = GX_PERSPECTIVE;
         C_MTXPerspective(mtx, cobj->projection_param.perspective.fov,
                          cobj->projection_param.perspective.aspect, cobj->near,
                          cobj->far);
         break;
     case PROJ_FRUSTUM:
-        is_ortho = false;
+        projection_type = GX_PERSPECTIVE;
         C_MTXFrustum(mtx, cobj->projection_param.perspective.fov,
                      cobj->projection_param.perspective.aspect,
                      cobj->projection_param.frustum.left,
@@ -336,7 +337,7 @@ bool makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
                      cobj->far);
         break;
     case PROJ_ORTHO:
-        is_ortho = true;
+        projection_type = GX_ORTHOGRAPHIC;
         C_MTXOrtho(mtx, cobj->projection_param.perspective.fov,
                    cobj->projection_param.perspective.aspect,
                    cobj->projection_param.frustum.left,
@@ -344,10 +345,9 @@ bool makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
                    cobj->far);
         break;
     }
-    return is_ortho;
+    return projection_type;
 }
 
-extern GXRenderModeObj HSD_VIData;
 extern const f64 HSD_CObj_804DE480;
 extern const float HSD_CObj_804DE478;
 extern const float HSD_CObj_804DE47C;
@@ -370,7 +370,7 @@ static bool setupOffscreenCamera(HSD_CObj* cobj)
 // Matching, but references extern float conversion value
 #ifdef MUST_MATCH
 #pragma push
-asm bool setupNormalCamera(HSD_CObj* cobj)
+asm int setupNormalCamera(HSD_CObj* cobj)
 { // clang-format off
     nofralloc
 /* 80367C28 00364808  7C 08 02 A6 */	mflr r0
@@ -548,46 +548,57 @@ lbl_80367E74:
 
 int setupNormalCamera(HSD_CObj* cobj)
 {
-    Mtx44 sp1C;
-    float height_scale;
-    float top_scaled;
-    float left_scaled;
-    float width_scaled;
-    float bottom_scaled;
-    float width_scale;
-    float height_scaled;
-    float right_scaled;
-
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 _[8] = { 0 };
+    int unused[4];
 #endif
 
-    width_scale = (float) HSD_VIData.fbWidth / HSD_VIData.viWidth;
-    height_scale = (float) HSD_VIData.efbHeight / HSD_VIData.viHeight;
+    GXProjectionType projection_type;
+    Mtx p;
 
-    left_scaled = cobj->viewport.left * width_scale;
-    right_scaled = cobj->viewport.right * width_scale;
-    top_scaled = cobj->viewport.top * height_scale;
-    bottom_scaled = cobj->viewport.bottom * height_scale;
-    width_scaled = right_scaled - left_scaled;
-    height_scaled = bottom_scaled - top_scaled;
-    if (HSD_VIData.field_rendering) {
-        GXSetViewportJitter(left_scaled, top_scaled, width_scaled,
-                            height_scaled, HSD_CObj_804DE478,
+    f32 x_scale;
+    f32 y_scale;
+
+    f32 top;
+    f32 bottom;
+    f32 left;
+    f32 right;
+
+    f32 width;
+    f32 height;
+
+    GXRenderModeObj* rmode = HSD_VIGetRenderMode();
+
+    x_scale = (f32) rmode->fbWidth / (f32) rmode->viWidth;
+    y_scale = (f32) rmode->efbHeight / (f32) rmode->viHeight;
+
+    left = cobj->viewport.left * x_scale;
+    right = cobj->viewport.right * x_scale;
+    top = cobj->viewport.top * y_scale;
+    bottom = cobj->viewport.bottom * y_scale;
+
+    width = right - left;
+    height = bottom - top;
+
+    if (rmode->field_rendering) {
+        GXSetViewportJitter(left, top, width, height, HSD_CObj_804DE478,
                             HSD_CObj_804DE47C, VIGetNextField());
     } else {
-        GXSetViewport(left_scaled, top_scaled, width_scaled, height_scaled,
-                      HSD_CObj_804DE478, HSD_CObj_804DE47C);
+        GXSetViewport(left, top, width, height, HSD_CObj_804DE478,
+                      HSD_CObj_804DE47C);
     }
-    left_scaled = cobj->scissor.left * width_scale;
-    right_scaled = cobj->scissor.right * width_scale;
-    top_scaled = cobj->scissor.top * height_scale;
-    bottom_scaled = cobj->scissor.bottom * height_scale;
-    width_scale = right_scaled - left_scaled;
-    height_scale = bottom_scaled - top_scaled;
-    GXSetScissor(left_scaled, top_scaled, width_scale, height_scale);
-    GXSetProjection(sp1C, makeProjectionMtx(cobj, sp1C));
+
+    left = cobj->scissor.left * x_scale;
+    right = cobj->scissor.right * x_scale;
+    top = cobj->scissor.top * y_scale;
+    bottom = cobj->scissor.bottom * y_scale;
+    width = right - left;
+    height = bottom - top;
+    GXSetScissor((u32) left, (u32) top, (u32) width, (u32) height);
+
+    projection_type = makeProjectionMtx(cobj, p);
+    GXSetProjection(p, projection_type);
+
     return 1;
 }
 #endif
@@ -598,7 +609,7 @@ extern const float HSD_CObj_804DE494;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool setupTopHalfCamera()
+asm int setupTopHalfCamera()
 { // clang-format off
     nofralloc
 /* 80367EB0 00364A90  7C 08 02 A6 */	mflr r0
@@ -764,7 +775,7 @@ lbl_803680D8:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool setupBottomHalfCamera()
+asm int setupBottomHalfCamera()
 { // clang-format off
     nofralloc
 /* 803680F8 00364CD8  7C 08 02 A6 */	mflr r0

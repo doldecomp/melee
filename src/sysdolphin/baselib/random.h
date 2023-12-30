@@ -6,6 +6,6 @@
 s32 HSD_Rand(void);
 f32 HSD_Randf(void);
 s32 HSD_Randi(s32 max_val);
-void _HSD_RandForgetMemory(any_t low, any_t high);
+void _HSD_RandForgetMemory(void* low, void* high);
 
 #endif

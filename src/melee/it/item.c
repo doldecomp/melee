@@ -2117,7 +2117,7 @@ void Item_8026ADC0(HSD_GObj* gobj)
     }
 }
 
-void Item_OnUserDataRemove(any_t user_data)
+void Item_OnUserDataRemove(void* user_data)
 {
     Item* item_data = (Item*) user_data;
 

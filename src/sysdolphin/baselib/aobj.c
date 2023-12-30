@@ -547,7 +547,7 @@ void HSD_AObjSetCurrentFrame(HSD_AObj* aobj, f32 frame)
     }
 }
 
-void _HSD_AObjForgetMemory(any_t low, any_t high)
+void _HSD_AObjForgetMemory(void* low, void* high)
 {
     endcallback_list = NULL;
 }

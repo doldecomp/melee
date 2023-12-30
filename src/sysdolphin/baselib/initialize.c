@@ -20,10 +20,10 @@
 #include <baselib/shadow.h>
 #include <baselib/state.h>
 #include <baselib/tev.h>
+#include <baselib/video.h>
 
 extern OSHeapHandle HSD_Synth_804D6018;
 extern GXRenderModeObj GXNtsc480IntDf;
-extern GXRenderModeObj HSD_VIData;
 
 static void* FrameBuffer[HSD_VI_XFB_MAX];
 static HSD_MemReport memReport;
@@ -201,7 +201,7 @@ void HSD_GetNextArena(void** lo, void** hi)
 OSHeapHandle HSD_CreateMainHeap(void* lo, void* hi)
 {
     int i;
-    void (*cb_table[])(any_t lo, any_t hi) = {
+    void (*cb_table[])(void* lo, void* hi) = {
         _HSD_AObjForgetMemory,
         _HSD_DispForgetMemory,
         _HSD_IDForgetMemory,
@@ -237,7 +237,7 @@ HSD_RenderPass HSD_GetCurrentRenderPass(void)
 
 void HSD_StartRender(HSD_RenderPass pass)
 {
-    GXRenderModeObj* rmode = &HSD_VIData;
+    GXRenderModeObj* rmode = HSD_VIGetRenderMode();
     current_render_pass = pass;
     if (rmode->aa) {
         GXSetPixelFmt(GX_PF_RGB565_Z16, current_z_fmt);

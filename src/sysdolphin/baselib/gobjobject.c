@@ -16,7 +16,7 @@ HSD_GObj* HSD_GObjObjet_80390A3C(u16 id, u8 arg1)
     return cur;
 }
 
-void HSD_GObjObjet_80390A70(HSD_GObj* gobj, u8 kind, any_t obj)
+void HSD_GObjObjet_80390A70(HSD_GObj* gobj, u8 kind, void* obj)
 {
     HSD_ASSERT(42, gobj->obj_kind == HSD_GOBJ_OBJ_NONE);
     gobj->obj_kind = kind;
