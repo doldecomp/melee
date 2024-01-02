@@ -10,12 +10,8 @@
 #include "it/items/itfoxblaster.h"
 #include "it/items/itnessbat.h"
 
-static inline void setupInitialState(Fighter_GObj* gobj,
-                                     FtMotionId initial_motion)
+static inline void setupInitialState(Fighter* fp)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, initial_motion, Ft_MF_None, 0.f, 1.f, 0.f,
-                              NULL);
     fp->x2219_b2 = true;
     fp->x2219_b1 = true;
     fp->x2228_b1 = true;
@@ -25,8 +21,14 @@ static inline void setupInitialState(Fighter_GObj* gobj,
 
 void ftCo_800BECB0(Fighter_GObj* gobj)
 {
+    ///@todo Unused stack
+#ifdef MUST_MATCH
+    int unused[2];
+#endif
     Fighter* fp = GET_FIGHTER(gobj);
-    setupInitialState(gobj, ftCo_MS_DeadDown);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_DeadDown, Ft_MF_None, 0.f, 1.f,
+                              0.f, NULL);
+    setupInitialState(fp);
     switch (fp->kind) {
     case FTKIND_FOX: {
         ftFox_DatAttrs* da = fp->dat_attrs;
@@ -69,11 +71,12 @@ void ftCo_800BED88(Fighter_GObj* gobj)
 {
     ///@todo Unused stack
 #ifdef MUST_MATCH
-    s32 unused;
+    int unused[2];
 #endif
     Fighter* fp = gobj->user_data;
-
-    setupInitialState(gobj, 2);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_DeadRight, Ft_MF_None, 0.f, 1.f,
+                              0.f, NULL);
+    setupInitialState(fp);
 
     switch (fp->kind) {
     case FTKIND_FOX: {
@@ -92,13 +95,9 @@ void ftCo_800BEF00(Fighter_GObj* gobj) {}
 void ftCo_800BEF04(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftCo_MS_DeadUpStarIce, Ft_MF_None, 0, 1, 0,
-                              NULL);
-    fp->x2219_b2 = true;
-    fp->x2219_b1 = true;
-    fp->x2228_b1 = true;
-    fp->item_gobj = NULL;
-    fp->x1984_heldItemSpec = NULL;
+    Fighter_ChangeMotionState(gobj, ftCo_MS_DeadUpStarIce, Ft_MF_None, 0.f,
+                              1.f, 0.f, NULL);
+    setupInitialState(fp);
     switch (fp->kind) {
     case FTKIND_NESS: {
         fp->item_gobj =
