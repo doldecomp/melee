@@ -1109,18 +1109,12 @@ void HSD_JObjUnref(HSD_JObj* jobj)
 {
     if (jobj != NULL && ref_DEC(jobj)) {
         if (iref_CNT(jobj) - 1 < 0) {
-            if (jobj != NULL) {
-                jobj->object.parent.class_info->release((HSD_Class*) jobj);
-                jobj->object.parent.class_info->destroy((HSD_Class*) jobj);
-            }
+            hsdDelete(jobj);
         } else {
             jobj_iref_INC(jobj);
             HSD_JOBJ_METHOD(jobj)->release_child(jobj);
             if (iref_DEC(jobj)) {
-                if (jobj != NULL) {
-                    jobj->object.parent.class_info->release((HSD_Class*) jobj);
-                    jobj->object.parent.class_info->destroy((HSD_Class*) jobj);
-                }
+                hsdDelete(jobj);
             }
         }
     }
@@ -1129,10 +1123,7 @@ void HSD_JObjUnref(HSD_JObj* jobj)
 void HSD_JObjUnrefThis(HSD_JObj* jobj)
 {
     if (jobj != NULL && iref_DEC_alt(jobj) && ref_CNT(jobj) < 0) {
-        if (jobj != NULL) {
-            jobj->object.parent.class_info->release((HSD_Class*) jobj);
-            jobj->object.parent.class_info->destroy((HSD_Class*) jobj);
-        }
+        hsdDelete(jobj);
     }
 }
 
