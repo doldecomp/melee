@@ -65,17 +65,6 @@ HSD_Shadow* HSD_ShadowAlloc(void)
     return shadow;
 }
 
-inline bool dec_refcount(u16* ref_count)
-{
-    u16 current = *ref_count;
-    s32 cond = current == (u16) HSD_OBJ_NOREF;
-    if (cond != false) {
-        return cond;
-    }
-    *ref_count = current - 1;
-    return current == 0;
-}
-
 void HSD_ShadowRemove(HSD_Shadow* shadow)
 {
     HSD_CObj* cobj;
@@ -85,10 +74,8 @@ void HSD_ShadowRemove(HSD_Shadow* shadow)
         return;
     }
     if ((cobj = shadow->camera) != NULL) {
-        u16* ref_count = &cobj->parent.ref_count;
-        if (dec_refcount(ref_count) && cobj != NULL) {
-            cobj->parent.parent.class_info->release(&cobj->parent.parent);
-            cobj->parent.parent.class_info->destroy(&cobj->parent.parent);
+        if (ref_DEC(cobj)) {
+            hsdDelete(cobj);
         }
     }
     HSD_ShadowDeleteObject(shadow, 0);
