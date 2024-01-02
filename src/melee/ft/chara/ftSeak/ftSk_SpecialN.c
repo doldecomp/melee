@@ -262,11 +262,51 @@ void ftSeak_801123B8(Fighter_GObj* fighter_gobj)
 // 80112408 - 80112418 (0x10 bytes)
 // 80112418 - 80112450 (0x38 bytes)
 // https://decomp.me/scratch/sFuUX
+// https://decomp.me/scratch/QoA5Q
+void ftSk_SpecialNEnd_Anim(Fighter_GObj* fighter_gobj)
+{
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    s32 specialN_x0 = fp->mv.sk.specialn.x0;
+    s32 unused[6];
 
-
+    switch (specialN_x0)
+    {
+        case 0: // % 3 == 0
+        case 3:
+        case 6:
+        case 9:
+        case 12:
+        case 15:
+            // fallthrough
+    
+        case 1: // % 3 == 1
+        case 4:
+        case 7:
+        case 10:
+        case 13:
+        case 16:
+            fp->mv.sk.specialn.x4 = 1; //2344
+            fp->fv.sk.x2230 = 0;
+            // fallthrough again
+    
+        case 2: // % 3 == 2
+        case 5:
+        case 8:
+        case 11:
+        case 14:
+        case 17:
+            fp->mv.sk.specialn.x0 += 1;
+            
+            if (ftAnim_IsFramesRemaining(fighter_gobj) == 0)
+            {
+                ft_8008A2BC(fighter_gobj);
+            }
+    }
+}
 
 
 // 80112450 - 801124E0 (0x90 bytes)
+// https://decomp.me/scratch/gGH4h
 
 // 801124E0 - 8011258C (0xAC bytes)
 
