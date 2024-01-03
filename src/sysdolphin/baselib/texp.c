@@ -336,12 +336,12 @@ static void HSD_TExpColorInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
     }
 
     switch (tev->c_in[idx].type) {
-    case 0:
+    case HSD_TE_ZERO:
         tev->c_in[idx].type = HSD_TE_ZERO;
         tev->c_in[idx].sel = HSD_TE_0;
         tev->c_in[idx].arg = GX_CC_ZERO;
         break;
-    case 1: {
+    case HSD_TE_TEV: {
         u8 swap;
         HSD_ASSERT(0x207, sel == HSD_TE_RGB || sel == HSD_TE_A);
         HSD_ASSERT(0x209, idx == 3 || sel != HSD_TE_RGB || exp->tev.c_clamp);
@@ -360,7 +360,7 @@ static void HSD_TExpColorInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
             break;
         }
     } break;
-    case 4: {
+    case HSD_TE_CNST: {
         u8 swap;
         tev->c_in[idx].sel = exp->cnst.comp;
         swap = tev->c_in[idx].sel;
@@ -377,7 +377,7 @@ static void HSD_TExpColorInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
             break;
         }
     } break;
-    case 2: {
+    case HSD_TE_TEX: {
         u8 swap = HSD_TE_UNDEF;
         switch (sel) {
         case HSD_TE_RGB:
@@ -409,7 +409,7 @@ static void HSD_TExpColorInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
             HSD_ASSERT(0x232, swap == HSD_TE_UNDEF || tev->tex_swap == swap);
         }
     } break;
-    case 3: {
+    case HSD_TE_RAS: {
         u8 swap = HSD_TE_UNDEF;
         switch (sel) {
         case HSD_TE_RGB:
