@@ -280,17 +280,17 @@ static void HSD_TExpColorInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
         tev->c_in[idx].arg = GX_CC_ZERO;
         tev->c_in[idx].type = HSD_TE_ZERO;
         tev->c_in[idx].exp = NULL;
-        goto UNREF;
+        break;
     case HSD_TE_1:
         tev->c_in[idx].arg = GX_CC_ONE;
         tev->c_in[idx].type = HSD_TE_IMM;
         tev->c_in[idx].exp = NULL;
-        goto UNREF;
+        break;
     case HSD_TE_4_8:
         tev->c_in[idx].arg = GX_CC_HALF;
         tev->c_in[idx].type = HSD_TE_IMM;
         tev->c_in[idx].exp = NULL;
-        goto UNREF;
+        break;
     case HSD_TE_1_8:
     case HSD_TE_2_8:
     case HSD_TE_3_8:
@@ -329,120 +329,121 @@ static void HSD_TExpColorInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
                       "tev can't select multiple konst input.\n");
         }
         tev->c_in[idx].type = HSD_TE_KONST;
-        goto UNREF;
-    }
+        break;
 
-    switch (tev->c_in[idx].type) {
-    case HSD_TE_ZERO:
-        tev->c_in[idx].type = HSD_TE_ZERO;
-        tev->c_in[idx].sel = HSD_TE_0;
-        tev->c_in[idx].arg = GX_CC_ZERO;
-        break;
-    case HSD_TE_TEV: {
-        u8 swap;
-        HSD_ASSERT(0x207, sel == HSD_TE_RGB || sel == HSD_TE_A);
-        HSD_ASSERT(0x209, idx == 3 || sel != HSD_TE_RGB || exp->tev.c_clamp);
-        HSD_ASSERT(0x20A, idx == 3 || sel != HSD_TE_A || exp->tev.a_clamp);
-        swap = tev->c_in[idx].sel;
-        switch (HSD_TExpGetType(tev->c_in[idx].exp)) {
-        case HSD_TE_TEV:
-            if (swap == 1) {
-                tev->c_in[idx].exp->tev.c_ref += 1;
-            } else {
-                tev->c_in[idx].exp->tev.a_ref += 1;
+    default: {
+        switch (tev->c_in[idx].type) {
+        case HSD_TE_ZERO:
+            tev->c_in[idx].type = HSD_TE_ZERO;
+            tev->c_in[idx].sel = HSD_TE_0;
+            tev->c_in[idx].arg = GX_CC_ZERO;
+            break;
+        case HSD_TE_TEV: {
+            u8 swap;
+            HSD_ASSERT(0x207, sel == HSD_TE_RGB || sel == HSD_TE_A);
+            HSD_ASSERT(0x209, idx == 3 || sel != HSD_TE_RGB || exp->tev.c_clamp);
+            HSD_ASSERT(0x20A, idx == 3 || sel != HSD_TE_A || exp->tev.a_clamp);
+            swap = tev->c_in[idx].sel;
+            switch (HSD_TExpGetType(tev->c_in[idx].exp)) {
+            case HSD_TE_TEV:
+                if (swap == 1) {
+                    tev->c_in[idx].exp->tev.c_ref += 1;
+                } else {
+                    tev->c_in[idx].exp->tev.a_ref += 1;
+                }
+                break;
+            case HSD_TE_CNST: /* switch 2 */
+                tev->c_in[idx].exp->cnst.ref += 1;
+                break;
             }
-            break;
-        case HSD_TE_CNST: /* switch 2 */
-            tev->c_in[idx].exp->cnst.ref += 1;
-            break;
-        }
-    } break;
-    case HSD_TE_CNST: {
-        u8 swap;
-        tev->c_in[idx].sel = exp->cnst.comp;
-        swap = tev->c_in[idx].sel;
-        switch (HSD_TExpGetType(tev->c_in[idx].exp)) {
-        case HSD_TE_TEV:
-            if (swap == 1) {
-                tev->c_in[idx].exp->tev.c_ref += 1;
-            } else {
-                tev->c_in[idx].exp->tev.a_ref += 1;
+        } break;
+        case HSD_TE_CNST: {
+            u8 swap;
+            tev->c_in[idx].sel = exp->cnst.comp;
+            swap = tev->c_in[idx].sel;
+            switch (HSD_TExpGetType(tev->c_in[idx].exp)) {
+            case HSD_TE_TEV:
+                if (swap == 1) {
+                    tev->c_in[idx].exp->tev.c_ref += 1;
+                } else {
+                    tev->c_in[idx].exp->tev.a_ref += 1;
+                }
+                break;
+            case HSD_TE_CNST:
+                tev->c_in[idx].exp->cnst.ref += 1;
+                break;
             }
-            break;
-        case HSD_TE_CNST:
-            tev->c_in[idx].exp->cnst.ref += 1;
-            break;
-        }
-    } break;
-    case HSD_TE_TEX: {
-        u8 swap = HSD_TE_UNDEF;
-        switch (sel) {
-        case HSD_TE_RGB:
-            tev->c_in[idx].arg = GX_CC_TEXC;
-            swap = GX_TEV_SWAP0;
-            break;
-        case HSD_TE_R:
-            tev->c_in[idx].arg = GX_CC_TEXC;
-            swap = GX_TEV_SWAP1;
-            break;
-        case HSD_TE_G:
-            tev->c_in[idx].arg = GX_CC_TEXC;
-            swap = GX_TEV_SWAP2;
-            break;
-        case HSD_TE_B:
-            tev->c_in[idx].arg = GX_CC_TEXC;
-            swap = GX_TEV_SWAP3;
-            break;
-        case HSD_TE_A:
-            tev->c_in[idx].arg = GX_CC_TEXA;
-            break;
+        } break;
+        case HSD_TE_TEX: {
+            u8 swap = HSD_TE_UNDEF;
+            switch (sel) {
+            case HSD_TE_RGB:
+                tev->c_in[idx].arg = GX_CC_TEXC;
+                swap = GX_TEV_SWAP0;
+                break;
+            case HSD_TE_R:
+                tev->c_in[idx].arg = GX_CC_TEXC;
+                swap = GX_TEV_SWAP1;
+                break;
+            case HSD_TE_G:
+                tev->c_in[idx].arg = GX_CC_TEXC;
+                swap = GX_TEV_SWAP2;
+                break;
+            case HSD_TE_B:
+                tev->c_in[idx].arg = GX_CC_TEXC;
+                swap = GX_TEV_SWAP3;
+                break;
+            case HSD_TE_A:
+                tev->c_in[idx].arg = GX_CC_TEXA;
+                break;
+            default:
+                HSD_ASSERT(0x22D, 0);
+                break;
+            }
+            if (tev->tex_swap == HSD_TE_UNDEF) {
+                tev->tex_swap = swap;
+            } else {
+                HSD_ASSERT(0x232, swap == HSD_TE_UNDEF || tev->tex_swap == swap);
+            }
+        } break;
+        case HSD_TE_RAS: {
+            u8 swap = HSD_TE_UNDEF;
+            switch (sel) {
+            case HSD_TE_RGB:
+                tev->c_in[idx].arg = GX_CC_RASC;
+                swap = GX_TEV_SWAP0;
+                break;
+            case HSD_TE_R:
+                tev->c_in[idx].arg = GX_CC_RASC;
+                swap = GX_TEV_SWAP1;
+                break;
+            case HSD_TE_G:
+                tev->c_in[idx].arg = GX_CC_RASC;
+                swap = GX_TEV_SWAP2;
+                break;
+            case HSD_TE_B:
+                tev->c_in[idx].arg = GX_CC_RASC;
+                swap = GX_TEV_SWAP3;
+                break;
+            case HSD_TE_A:
+                tev->c_in[idx].arg = GX_CC_RASA;
+                break;
+            default:
+                HSD_ASSERT(0x25D, 0);
+                break;
+            }
+            if (tev->ras_swap == HSD_TE_UNDEF) {
+                tev->ras_swap = swap;
+            } else {
+                HSD_ASSERT(0x262, swap == HSD_TE_UNDEF || tev->ras_swap == swap);
+            }
+        } break;
         default:
-            HSD_ASSERT(0x22D, 0);
+            HSD_ASSERT(0x274, 0);
             break;
         }
-        if (tev->tex_swap == HSD_TE_UNDEF) {
-            tev->tex_swap = swap;
-        } else {
-            HSD_ASSERT(0x232, swap == HSD_TE_UNDEF || tev->tex_swap == swap);
-        }
-    } break;
-    case HSD_TE_RAS: {
-        u8 swap = HSD_TE_UNDEF;
-        switch (sel) {
-        case HSD_TE_RGB:
-            tev->c_in[idx].arg = GX_CC_RASC;
-            swap = GX_TEV_SWAP0;
-            break;
-        case HSD_TE_R:
-            tev->c_in[idx].arg = GX_CC_RASC;
-            swap = GX_TEV_SWAP1;
-            break;
-        case HSD_TE_G:
-            tev->c_in[idx].arg = GX_CC_RASC;
-            swap = GX_TEV_SWAP2;
-            break;
-        case HSD_TE_B:
-            tev->c_in[idx].arg = GX_CC_RASC;
-            swap = GX_TEV_SWAP3;
-            break;
-        case HSD_TE_A:
-            tev->c_in[idx].arg = GX_CC_RASA;
-            break;
-        default:
-            HSD_ASSERT(0x25D, 0);
-            break;
-        }
-        if (tev->ras_swap == HSD_TE_UNDEF) {
-            tev->ras_swap = swap;
-        } else {
-            HSD_ASSERT(0x262, swap == HSD_TE_UNDEF || tev->ras_swap == swap);
-        }
-    } break;
-    default:
-        HSD_ASSERT(0x274, 0);
-        break;
     }
-UNREF:
+    }
     HSD_TExpUnref(prev.exp, prev.sel);
 }
 
@@ -476,12 +477,12 @@ static void HSD_TExpAlphaInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
 
     switch (sel) {
     case HSD_TE_0:
-    case HSD_TE_1:
         tev->a_in[idx].type = HSD_TE_ZERO;
         tev->a_in[idx].arg = GX_CA_ZERO;
         tev->a_in[idx].exp = NULL;
-        goto UNREF;
+        break;
 
+    case HSD_TE_1:
     case HSD_TE_1_8:
     case HSD_TE_2_8:
     case HSD_TE_3_8:
@@ -524,40 +525,41 @@ static void HSD_TExpAlphaInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
             HSD_ASSERT(0x2EC, tev->kasel == ksel);
         }
         tev->a_in[idx].type = HSD_TE_KONST;
-        goto UNREF;
-    }
+        break;
 
-    switch (tev->a_in[idx].type) {
-    case HSD_TE_ZERO:
-        tev->a_in[idx].exp = NULL;
-        tev->a_in[idx].type = HSD_TE_ZERO;
-        tev->a_in[idx].sel = HSD_TE_0;
-        tev->a_in[idx].arg = GX_CA_ZERO;
-        break;
-    case HSD_TE_TEV:
-        HSD_ASSERT(0x303, sel == HSD_TE_A);
-        HSD_ASSERT(0x304, idx == 3 || exp->tev.a_clamp != 0);
-        HSD_TExpRef(tev->a_in[idx].exp, tev->a_in[idx].sel);
-        break;
-    case HSD_TE_CNST:
-        HSD_ASSERT(0x308, sel == HSD_TE_A || sel == HSD_TE_X);
-        HSD_ASSERT(0x309, exp->cnst.comp == HSD_TE_X);
-        tev->a_in[idx].sel = HSD_TE_X;
-        HSD_TExpRef(tev->a_in[idx].exp, tev->a_in[idx].sel);
-        break;
-    case HSD_TE_TEX:
-        HSD_ASSERT(0x30E, sel == HSD_TE_A);
-        tev->a_in[idx].arg = GX_CA_TEXA;
-        break;
-    case HSD_TE_RAS:
-        HSD_ASSERT(0x312, sel == HSD_TE_A);
-        tev->a_in[idx].arg = GX_CA_RASA;
-        break;
-    default:
-        HSD_ASSERT(0x316, 0);
-        break;
+    default: {
+        switch (tev->a_in[idx].type) {
+        case HSD_TE_ZERO:
+            tev->a_in[idx].exp = NULL;
+            tev->a_in[idx].type = HSD_TE_ZERO;
+            tev->a_in[idx].sel = HSD_TE_0;
+            tev->a_in[idx].arg = GX_CA_ZERO;
+            break;
+        case HSD_TE_TEV:
+            HSD_ASSERT(0x303, sel == HSD_TE_A);
+            HSD_ASSERT(0x304, idx == 3 || exp->tev.a_clamp != 0);
+            HSD_TExpRef(tev->a_in[idx].exp, tev->a_in[idx].sel);
+            break;
+        case HSD_TE_CNST:
+            HSD_ASSERT(0x308, sel == HSD_TE_A || sel == HSD_TE_X);
+            HSD_ASSERT(0x309, exp->cnst.comp == HSD_TE_X);
+            tev->a_in[idx].sel = HSD_TE_X;
+            HSD_TExpRef(tev->a_in[idx].exp, tev->a_in[idx].sel);
+            break;
+        case HSD_TE_TEX:
+            HSD_ASSERT(0x30E, sel == HSD_TE_A);
+            tev->a_in[idx].arg = GX_CA_TEXA;
+            break;
+        case HSD_TE_RAS:
+            HSD_ASSERT(0x312, sel == HSD_TE_A);
+            tev->a_in[idx].arg = GX_CA_RASA;
+            break;
+        default:
+            HSD_ASSERT(0x316, 0);
+            break;
+        }
     }
-UNREF:
+    }
     HSD_TExpUnref(prev.exp, prev.sel);
 }
 
