@@ -1513,48 +1513,6 @@ HSD_TExpFreeTevDesc:
 HSD_TExp_80407738:
     .asciz "texp_list"
     .balign 4
-.global HSD_TExp_80407974
-HSD_TExp_80407974:
-    .4byte 0x00000001
-    .4byte 0x00000002
-    .4byte 0x00000003
-    .4byte NULL
-    .4byte 0x00000010
-    .4byte 0x00000014
-    .4byte 0x00000018
-    .4byte 0x0000001C
-    .4byte 0x00000011
-    .4byte 0x00000015
-    .4byte 0x00000019
-    .4byte 0x0000001D
-    .4byte 0x00000012
-    .4byte 0x00000016
-    .4byte 0x0000001A
-    .4byte 0x0000001E
-    .4byte 0x00000013
-    .4byte 0x00000017
-    .4byte 0x0000001B
-    .4byte 0x0000001F
-    .4byte 0x0000000C
-    .4byte 0x0000000D
-    .4byte 0x0000000E
-    .4byte 0x0000000F
-    .4byte 0x00000010
-    .4byte 0x00000014
-    .4byte 0x00000018
-    .4byte 0x0000001C
-    .4byte 0x00000011
-    .4byte 0x00000015
-    .4byte 0x00000019
-    .4byte 0x0000001D
-    .4byte 0x00000012
-    .4byte 0x00000016
-    .4byte 0x0000001A
-    .4byte 0x0000001E
-    .4byte 0x00000013
-    .4byte 0x00000017
-    .4byte 0x0000001B
-    .4byte 0x0000001F
 .global HSD_TExp_80407A14
 HSD_TExp_80407A14:
     .asciz "val >= 0"

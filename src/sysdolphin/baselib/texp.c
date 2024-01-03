@@ -592,8 +592,8 @@ void HSD_TExpOrder(HSD_TExp* texp, HSD_TObj* tex, GXChannelID chan)
     texp->tev.chan = chan;
 }
 
-static int a_in[4] = { GX_CC_A0, GX_CC_A1, GX_CC_A2, GX_CC_APREV };
-static int c_in[4] = { GX_CC_C0, GX_CC_C1, GX_CC_C2, GX_CC_CPREV };
+static GXTevColorArg a_in[4] = { GX_CC_A0, GX_CC_A1, GX_CC_A2, GX_CC_APREV };
+static GXTevColorArg c_in[4] = { GX_CC_C0, GX_CC_C1, GX_CC_C2, GX_CC_CPREV };
 
 static int AssignColorReg(HSD_TETev* tev, int idx, HSD_TExpRes* res)
 {
@@ -640,6 +640,8 @@ static int AssignColorReg(HSD_TETev* tev, int idx, HSD_TExpRes* res)
     return -1;
 }
 
+static GXTevAlphaArg in[4] = { GX_CA_A0, GX_CA_A1, GX_CA_A2, GX_CA_APREV };
+
 int AssignAlphaReg(HSD_TETev* tev, int idx, HSD_TExpRes* res)
 {
     HSD_TECnst* cnst;
@@ -651,7 +653,7 @@ int AssignAlphaReg(HSD_TETev* tev, int idx, HSD_TExpRes* res)
             return -1;
         }
         tev->a_in[idx].type = HSD_TE_IMM;
-        tev->a_in[idx].arg = a_in[cnst->reg - 4];
+        tev->a_in[idx].arg = in[cnst->reg - 4];
         return 0;
     } else {
         for (j = 4; j < 8; ++j) {
@@ -660,7 +662,7 @@ int AssignAlphaReg(HSD_TETev* tev, int idx, HSD_TExpRes* res)
                 cnst->reg = j;
                 cnst->idx = 3;
                 tev->a_in[idx].type = HSD_TE_IMM;
-                tev->a_in[idx].arg = a_in[j - 4];
+                tev->a_in[idx].arg = in[j - 4];
                 return 0;
             }
         }
