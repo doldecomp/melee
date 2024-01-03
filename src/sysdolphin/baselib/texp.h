@@ -7,9 +7,9 @@
 #include <placeholder.h>
 #include <dolphin/gx/GXEnum.h>
 
-#define HSD_TEXP_RAS -2
-#define HSD_TEXP_TEX -1
-#define HSD_TEXP_ZERO 0
+#define HSD_TEXP_RAS ((HSD_TExp*) -2)
+#define HSD_TEXP_TEX ((HSD_TExp*) -1)
+#define HSD_TEXP_ZERO ((HSD_TExp*) 0)
 
 typedef enum _HSD_TEInput {
     HSD_TE_END = 0,
@@ -80,14 +80,14 @@ typedef struct _HSD_TevConf {
 } HSD_TevConf;
 
 typedef struct _HSD_TExpRes {
-	s32 failed;
-	s32 texmap;
-	s32 cnst_remain;
-	u16 color_reg[8];
-	u8 c_ref;
-	u8 a_ref;
-	u8 c_use;
-	u8 a_use;
+    s32 failed;
+    s32 texmap;
+    s32 cnst_remain;
+    u16 color_reg[8];
+    u8 c_ref;
+    u8 a_ref;
+    u8 c_use;
+    u8 a_use;
 } HSD_TExpRes;
 
 typedef struct _HSD_TevDesc {
@@ -173,10 +173,12 @@ HSD_TExp* HSD_TExpCnst(void*, HSD_TEInput, HSD_TEType, HSD_TExp**);
 void HSD_TExpOrder(HSD_TExp*, HSD_TObj*, GXChannelID);
 
 void HSD_TExpColorOp(HSD_TExp*, GXTevOp, GXTevBias, GXTevScale, u8);
-void HSD_TExpColorIn(HSD_TExp*, HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*);
+void HSD_TExpColorIn(HSD_TExp*, HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*,
+                     HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*);
 void HSD_TExpAlphaOp(HSD_TExp*, GXTevOp, GXTevBias, GXTevScale, u8);
-void HSD_TExpAlphaIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a, HSD_TEInput sel_b, HSD_TExp* exp_b, 
-    HSD_TEInput sel_c, HSD_TExp* exp_c, HSD_TEInput sel_d, HSD_TExp* exp_d);
+void HSD_TExpAlphaIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a,
+                     HSD_TEInput sel_b, HSD_TExp* exp_b, HSD_TEInput sel_c,
+                     HSD_TExp* exp_c, HSD_TEInput sel_d, HSD_TExp* exp_d);
 
 void HSD_TExpFreeTevDesc(HSD_TExpTevDesc*);
 HSD_TExp* HSD_TExpFreeList(HSD_TExp*, HSD_TExpType, s32);

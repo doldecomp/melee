@@ -1,6 +1,5 @@
-#include <baselib/texp.h>
-
 #include <string.h>
+#include <baselib/texp.h>
 #include <sysdolphin/baselib/class.h>
 
 HSD_TExpType HSD_TExpGetType(HSD_TExp* texp)
@@ -71,13 +70,15 @@ void HSD_TExpUnref(HSD_TExp* texp, u8 sel)
     }
 }
 
-static HSD_TExp* TevAlloc() {
+static HSD_TExp* TevAlloc()
+{
     HSD_TExp* texp = hsdAllocMemPiece(sizeof(HSD_TETev));
     HSD_ASSERT(62, texp);
     return texp;
 }
 
-static HSD_TExp* CnstAlloc() {
+static HSD_TExp* CnstAlloc()
+{
     HSD_TExp* texp = hsdAllocMemPiece(sizeof(HSD_TECnst));
     HSD_ASSERT(70, texp);
     return texp;
@@ -141,7 +142,8 @@ HSD_TExp* HSD_TExpFreeList(HSD_TExp* texp_list, HSD_TExpType type, s32 all)
             if (type == HSD_TE_ALL || type == (*handle)->type) {
                 switch ((*handle)->type) {
                 case HSD_TE_TEV:
-                    if ((*handle)->tev.c_ref != 0 || (*handle)->tev.a_ref != 0) {
+                    if ((*handle)->tev.c_ref != 0 || (*handle)->tev.a_ref != 0)
+                    {
                         break;
                     }
                     next = (*handle)->tev.next;
@@ -167,7 +169,8 @@ HSD_TExp* HSD_TExpFreeList(HSD_TExp* texp_list, HSD_TExpType type, s32 all)
     return texp_list;
 }
 
-HSD_TExp* HSD_TExpTev(HSD_TExp** texp_list) {
+HSD_TExp* HSD_TExpTev(HSD_TExp** texp_list)
+{
     int i;
     HSD_TExp* texp;
 
@@ -187,25 +190,28 @@ HSD_TExp* HSD_TExpTev(HSD_TExp** texp_list) {
     return texp;
 }
 
-HSD_TExp* HSD_TExpCnst(void* val, HSD_TEInput comp, HSD_TEType type, HSD_TExp** texp_list) {
+HSD_TExp* HSD_TExpCnst(void* val, HSD_TEInput comp, HSD_TEType type,
+                       HSD_TExp** texp_list)
+{
     HSD_TExp* texp;
 
     HSD_ASSERT(361, texp_list);
 
     texp = *texp_list;
-    do {     
-        while (texp)  {
-            if (texp->type == HSD_TE_CNST && texp->cnst.val == val && texp->cnst.comp == comp) {
+    do {
+        while (texp) {
+            if (texp->type == HSD_TE_CNST && texp->cnst.val == val &&
+                texp->cnst.comp == comp)
+            {
                 HSD_ASSERT(368, texp->cnst.ctype == type);
                 return texp;
             }
             texp = texp->cnst.next;
         }
 
-        
         if (comp == HSD_TE_0) {
             return NULL;
-        } 
+        }
         texp = CnstAlloc();
         texp->cnst.type = HSD_TE_CNST;
         texp->cnst.next = (*texp_list);
@@ -218,11 +224,13 @@ HSD_TExp* HSD_TExpCnst(void* val, HSD_TEInput comp, HSD_TEType type, HSD_TExp** 
         texp->cnst.idx = 0xFF;
         return texp;
     } while (true);
-    
+
     return texp;
 }
 
-void HSD_TExpColorOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias, GXTevScale scale, u8 clamp) {
+void HSD_TExpColorOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias,
+                     GXTevScale scale, u8 clamp)
+{
     s32 unused[2];
 
     HSD_ASSERT(408, texp);
@@ -239,7 +247,9 @@ void HSD_TExpColorOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias, GXTevScale scal
     }
 }
 
-void HSD_TExpAlphaOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias, GXTevScale scale, u8 clamp) {
+void HSD_TExpAlphaOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias,
+                     GXTevScale scale, u8 clamp)
+{
     s32 unused[2];
 
     HSD_ASSERT(434, texp);
@@ -256,24 +266,195 @@ void HSD_TExpAlphaOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias, GXTevScale scal
     }
 }
 
-// https://decomp.me/scratch/A99tU
-static void HSD_TExpColorInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp, s32 idx)
+static void HSD_TExpColorInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
+                               s32 idx)
 {
-	HSD_TEArg prev;
-	u8 ksel;
-	{
-		u8 swap;
-	}
-	{
-		u8 swap;
-	}
+    HSD_TEArg prev;
+    u8 ksel;
+
+    prev = tev->c_in[idx];
+    tev->c_in[idx].type = HSD_TExpGetType(exp);
+    tev->c_in[idx].sel = sel;
+    tev->c_in[idx].exp = exp;
+    tev->c_in[idx].arg = 0xFF;
+
+    switch (sel) {
+    case HSD_TE_0:
+        tev->c_in[idx].arg = GX_CC_ZERO;
+        tev->c_in[idx].type = HSD_TE_ZERO;
+        tev->c_in[idx].exp = NULL;
+        goto UNREF;
+    case HSD_TE_1:
+        tev->c_in[idx].arg = GX_CC_ONE;
+        tev->c_in[idx].type = HSD_TE_IMM;
+        tev->c_in[idx].exp = NULL;
+        goto UNREF;
+    case HSD_TE_4_8:
+        tev->c_in[idx].arg = GX_CC_HALF;
+        tev->c_in[idx].type = HSD_TE_IMM;
+        tev->c_in[idx].exp = NULL;
+        goto UNREF;
+    case HSD_TE_1_8:
+    case HSD_TE_2_8:
+    case HSD_TE_3_8:
+    case HSD_TE_5_8:
+    case HSD_TE_6_8:
+    case HSD_TE_7_8:
+        tev->c_in[idx].arg = GX_CC_KONST;
+        switch (sel) {
+        case HSD_TE_1_8:
+            ksel = GX_TEV_KCSEL_1_8;
+            break;
+        case HSD_TE_2_8:
+            ksel = GX_TEV_KCSEL_1_4;
+            break;
+        case HSD_TE_3_8:
+            ksel = GX_TEV_KCSEL_3_8;
+            break;
+        case HSD_TE_5_8:
+            ksel = GX_TEV_KCSEL_5_8;
+            break;
+        case HSD_TE_6_8:
+            ksel = GX_TEV_KCSEL_3_4;
+            break;
+        case HSD_TE_7_8:
+            ksel = GX_TEV_KCSEL_7_8;
+            break;
+        default:
+            HSD_ASSERT(0x1F2, 0);
+            break;
+        }
+
+        if (tev->kcsel == HSD_TE_UNDEF) {
+            tev->kcsel = ksel;
+        } else if (tev->kcsel == ksel) {
+            HSD_Panic(__FILE__, 0x1F7,
+                      "tev can't select multiple konst input.\n");
+        }
+        tev->c_in[idx].type = HSD_TE_KONST;
+        goto UNREF;
+    }
+
+    switch (tev->c_in[idx].type) {
+    case 0:
+        tev->c_in[idx].type = HSD_TE_ZERO;
+        tev->c_in[idx].sel = HSD_TE_0;
+        tev->c_in[idx].arg = GX_CC_ZERO;
+        break;
+    case 1: {
+        u8 swap;
+        HSD_ASSERT(0x207, sel == HSD_TE_RGB || sel == HSD_TE_A);
+        HSD_ASSERT(0x209, idx == 3 || sel != HSD_TE_RGB || exp->tev.c_clamp);
+        HSD_ASSERT(0x20A, idx == 3 || sel != HSD_TE_A || exp->tev.a_clamp);
+        swap = tev->c_in[idx].sel;
+        switch (HSD_TExpGetType(tev->c_in[idx].exp)) {
+        case HSD_TE_TEV:
+            if (swap == 1) {
+                tev->c_in[idx].exp->tev.c_ref += 1;
+            } else {
+                tev->c_in[idx].exp->tev.a_ref += 1;
+            }
+            break;
+        case HSD_TE_CNST: /* switch 2 */
+            tev->c_in[idx].exp->cnst.ref += 1;
+            break;
+        }
+    } break;
+    case 4: {
+        u8 swap;
+        tev->c_in[idx].sel = exp->cnst.comp;
+        swap = tev->c_in[idx].sel;
+        switch (HSD_TExpGetType(tev->c_in[idx].exp)) {
+        case HSD_TE_TEV:
+            if (swap == 1) {
+                tev->c_in[idx].exp->tev.c_ref += 1;
+            } else {
+                tev->c_in[idx].exp->tev.a_ref += 1;
+            }
+            break;
+        case HSD_TE_CNST:
+            tev->c_in[idx].exp->cnst.ref += 1;
+            break;
+        }
+    } break;
+    case 2: {
+        u8 swap = HSD_TE_UNDEF;
+        switch (sel) {
+        case HSD_TE_RGB:
+            tev->c_in[idx].arg = GX_CC_TEXC;
+            swap = GX_TEV_SWAP0;
+            break;
+        case HSD_TE_R:
+            tev->c_in[idx].arg = GX_CC_TEXC;
+            swap = GX_TEV_SWAP1;
+            break;
+        case HSD_TE_G:
+            tev->c_in[idx].arg = GX_CC_TEXC;
+            swap = GX_TEV_SWAP2;
+            break;
+        case HSD_TE_B:
+            tev->c_in[idx].arg = GX_CC_TEXC;
+            swap = GX_TEV_SWAP3;
+            break;
+        case HSD_TE_A:
+            tev->c_in[idx].arg = GX_CC_TEXA;
+            break;
+        default:
+            HSD_ASSERT(0x22D, 0);
+            break;
+        }
+        if (tev->tex_swap == HSD_TE_UNDEF) {
+            tev->tex_swap = swap;
+        } else {
+            HSD_ASSERT(0x232, swap == HSD_TE_UNDEF || tev->tex_swap == swap);
+        }
+    } break;
+    case 3: {
+        u8 swap = HSD_TE_UNDEF;
+        switch (sel) {
+        case HSD_TE_RGB:
+            tev->c_in[idx].arg = GX_CC_RASC;
+            swap = GX_TEV_SWAP0;
+            break;
+        case HSD_TE_R:
+            tev->c_in[idx].arg = GX_CC_RASC;
+            swap = GX_TEV_SWAP1;
+            break;
+        case HSD_TE_G:
+            tev->c_in[idx].arg = GX_CC_RASC;
+            swap = GX_TEV_SWAP2;
+            break;
+        case HSD_TE_B:
+            tev->c_in[idx].arg = GX_CC_RASC;
+            swap = GX_TEV_SWAP3;
+            break;
+        case HSD_TE_A:
+            tev->c_in[idx].arg = GX_CC_RASA;
+            break;
+        default:
+            HSD_ASSERT(0x25D, 0);
+            break;
+        }
+        if (tev->ras_swap == HSD_TE_UNDEF) {
+            tev->ras_swap = swap;
+        } else {
+            HSD_ASSERT(0x262, swap == HSD_TE_UNDEF || tev->ras_swap == swap);
+        }
+    } break;
+    default:
+        HSD_ASSERT(0x274, 0);
+        break;
+    }
+UNREF:
+    HSD_TExpUnref(prev.exp, prev.sel);
 }
 
-void HSD_TExpColorIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a, HSD_TEInput sel_b, HSD_TExp* exp_b, 
-    HSD_TEInput sel_c, HSD_TExp* exp_c, HSD_TEInput sel_d, HSD_TExp* exp_d) 
+void HSD_TExpColorIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a,
+                     HSD_TEInput sel_b, HSD_TExp* exp_b, HSD_TEInput sel_c,
+                     HSD_TExp* exp_c, HSD_TEInput sel_d, HSD_TExp* exp_d)
 {
     HSD_TETev* tev;
-    
+
     HSD_ASSERT(0x2B3, texp);
     HSD_ASSERT(0x2B4, HSD_TExpGetType(texp) == HSD_TE_TEV);
 
@@ -284,16 +465,19 @@ void HSD_TExpColorIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a, HSD_TEI
     HSD_TExpColorInSub(tev, sel_d, exp_d, 3);
 }
 
-static void HSD_TExpAlphaInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp, s32 idx)
+static void HSD_TExpAlphaInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
+                               s32 idx)
 {
-	HSD_TEArg prev;
-	u8 ksel;
+    HSD_TEArg prev;
+    u8 ksel;
 }
 
-void HSD_TExpAlphaIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a, HSD_TEInput sel_b, HSD_TExp* exp_b, 
-    HSD_TEInput sel_c, HSD_TExp* exp_c, HSD_TEInput sel_d, HSD_TExp* exp_d) {
+void HSD_TExpAlphaIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a,
+                     HSD_TEInput sel_b, HSD_TExp* exp_b, HSD_TEInput sel_c,
+                     HSD_TExp* exp_c, HSD_TEInput sel_d, HSD_TExp* exp_d)
+{
     HSD_TETev* tev;
-    
+
     HSD_ASSERT(0x335, texp);
     HSD_ASSERT(0x336, HSD_TExpGetType(texp) == HSD_TE_TEV);
 
@@ -304,11 +488,11 @@ void HSD_TExpAlphaIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a, HSD_TEI
     HSD_TExpAlphaInSub(tev, sel_d, exp_d, 3);
 }
 
-void HSD_TExpOrder(HSD_TExp* texp, HSD_TObj* tex, GXChannelID chan) 
+void HSD_TExpOrder(HSD_TExp* texp, HSD_TObj* tex, GXChannelID chan)
 {
     HSD_ASSERT(0x345, texp);
     HSD_ASSERT(0x346, HSD_TExpGetType(texp) == HSD_TE_TEV);
-    
+
     texp->tev.tex = tex;
     if (chan == GX_COLOR_NULL) {
         texp->tev.chan = GX_COLOR_NULL;
@@ -319,6 +503,6 @@ void HSD_TExpOrder(HSD_TExp* texp, HSD_TObj* tex, GXChannelID chan)
 
 static int AssignColorReg(HSD_TETev* tev, int idx, HSD_TExpRes* res)
 {
-	HSD_TECnst* cnst;
-	int j;
+    HSD_TECnst* cnst;
+    int j;
 }
