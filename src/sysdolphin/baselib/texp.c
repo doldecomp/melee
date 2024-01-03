@@ -537,7 +537,7 @@ static void HSD_TExpAlphaInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
             break;
         case HSD_TE_TEV:
             HSD_ASSERT(771, sel == HSD_TE_A);
-            HSD_ASSERT(772, idx == 3 || exp->tev.a_clamp != 0);
+            HSD_ASSERT(772, idx == 3 || exp->tev.a_clamp);
             HSD_TExpRef(tev->a_in[idx].exp, tev->a_in[idx].sel);
             break;
         case HSD_TE_CNST:
