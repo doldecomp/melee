@@ -80,14 +80,17 @@ typedef struct _HSD_TevConf {
 } HSD_TevConf;
 
 typedef struct _HSD_TExpRes {
-    s32 failed;
-    s32 texmap;
-    s32 cnst_remain;
-    u16 color_reg[8];
-    u8 c_ref;
-    u8 a_ref;
-    u8 c_use;
-    u8 a_use;
+    int failed;
+    int texmap;
+    int cnst_remain;
+    struct {
+        u8 color;
+        u8 alpha;
+    } reg[8];
+    u8 c_ref[4];
+    u8 a_ref[4];
+    u8 c_use[4];
+    u8 a_use[4];
 } HSD_TExpRes;
 
 typedef struct _HSD_TevDesc {
