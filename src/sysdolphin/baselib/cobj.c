@@ -8,6 +8,7 @@
 #include <baselib/displayfunc.h>
 #include <baselib/initialize.h>
 #include <baselib/mtx.h>
+#include <baselib/video.h>
 #include <MSL/trigf.h>
 #include <Runtime/runtime.h>
 
@@ -19,7 +20,7 @@ static HSD_CObj* current;
 
 extern const float HSD_CObj_804DE474; // 0.01745329252F
 
-#define DegToRad(a) ((a) *0.01745329252F)
+#define DegToRad(a) ((a) * 0.01745329252F)
 
 static int CObjInit(HSD_Class* o);
 static int CObjLoad(HSD_CObj* cobj, HSD_CObjDesc* cobjdesc);
@@ -317,18 +318,18 @@ void HSD_CObjReqAnim(HSD_CObj* cobj, float startframe)
     HSD_WObjReqAnim(cobj->interest, startframe);
 }
 
-bool makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
+GXProjectionType makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
 {
-    bool is_ortho;
+    GXProjectionType projection_type;
     switch (cobj->projection_type) {
     case PROJ_PERSPECTIVE:
-        is_ortho = false;
+        projection_type = GX_PERSPECTIVE;
         C_MTXPerspective(mtx, cobj->projection_param.perspective.fov,
                          cobj->projection_param.perspective.aspect, cobj->near,
                          cobj->far);
         break;
     case PROJ_FRUSTUM:
-        is_ortho = false;
+        projection_type = GX_PERSPECTIVE;
         C_MTXFrustum(mtx, cobj->projection_param.perspective.fov,
                      cobj->projection_param.perspective.aspect,
                      cobj->projection_param.frustum.left,
@@ -336,7 +337,7 @@ bool makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
                      cobj->far);
         break;
     case PROJ_ORTHO:
-        is_ortho = true;
+        projection_type = GX_ORTHOGRAPHIC;
         C_MTXOrtho(mtx, cobj->projection_param.perspective.fov,
                    cobj->projection_param.perspective.aspect,
                    cobj->projection_param.frustum.left,
@@ -344,10 +345,9 @@ bool makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
                    cobj->far);
         break;
     }
-    return is_ortho;
+    return projection_type;
 }
 
-extern GXRenderModeObj HSD_VIData;
 extern const f64 HSD_CObj_804DE480;
 extern const float HSD_CObj_804DE478;
 extern const float HSD_CObj_804DE47C;
@@ -370,7 +370,7 @@ static bool setupOffscreenCamera(HSD_CObj* cobj)
 // Matching, but references extern float conversion value
 #ifdef MUST_MATCH
 #pragma push
-asm bool setupNormalCamera(HSD_CObj* cobj)
+asm int setupNormalCamera(HSD_CObj* cobj)
 { // clang-format off
     nofralloc
 /* 80367C28 00364808  7C 08 02 A6 */	mflr r0
@@ -548,46 +548,57 @@ lbl_80367E74:
 
 int setupNormalCamera(HSD_CObj* cobj)
 {
-    Mtx44 sp1C;
-    float height_scale;
-    float top_scaled;
-    float left_scaled;
-    float width_scaled;
-    float bottom_scaled;
-    float width_scale;
-    float height_scaled;
-    float right_scaled;
-
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 _[8] = { 0 };
+    int unused[4];
 #endif
 
-    width_scale = (float) HSD_VIData.fbWidth / HSD_VIData.viWidth;
-    height_scale = (float) HSD_VIData.efbHeight / HSD_VIData.viHeight;
+    GXProjectionType projection_type;
+    Mtx p;
 
-    left_scaled = cobj->viewport.left * width_scale;
-    right_scaled = cobj->viewport.right * width_scale;
-    top_scaled = cobj->viewport.top * height_scale;
-    bottom_scaled = cobj->viewport.bottom * height_scale;
-    width_scaled = right_scaled - left_scaled;
-    height_scaled = bottom_scaled - top_scaled;
-    if (HSD_VIData.field_rendering) {
-        GXSetViewportJitter(left_scaled, top_scaled, width_scaled,
-                            height_scaled, HSD_CObj_804DE478,
+    f32 x_scale;
+    f32 y_scale;
+
+    f32 top;
+    f32 bottom;
+    f32 left;
+    f32 right;
+
+    f32 width;
+    f32 height;
+
+    GXRenderModeObj* rmode = HSD_VIGetRenderMode();
+
+    x_scale = (f32) rmode->fbWidth / (f32) rmode->viWidth;
+    y_scale = (f32) rmode->efbHeight / (f32) rmode->viHeight;
+
+    left = cobj->viewport.left * x_scale;
+    right = cobj->viewport.right * x_scale;
+    top = cobj->viewport.top * y_scale;
+    bottom = cobj->viewport.bottom * y_scale;
+
+    width = right - left;
+    height = bottom - top;
+
+    if (rmode->field_rendering) {
+        GXSetViewportJitter(left, top, width, height, HSD_CObj_804DE478,
                             HSD_CObj_804DE47C, VIGetNextField());
     } else {
-        GXSetViewport(left_scaled, top_scaled, width_scaled, height_scaled,
-                      HSD_CObj_804DE478, HSD_CObj_804DE47C);
+        GXSetViewport(left, top, width, height, HSD_CObj_804DE478,
+                      HSD_CObj_804DE47C);
     }
-    left_scaled = cobj->scissor.left * width_scale;
-    right_scaled = cobj->scissor.right * width_scale;
-    top_scaled = cobj->scissor.top * height_scale;
-    bottom_scaled = cobj->scissor.bottom * height_scale;
-    width_scale = right_scaled - left_scaled;
-    height_scale = bottom_scaled - top_scaled;
-    GXSetScissor(left_scaled, top_scaled, width_scale, height_scale);
-    GXSetProjection(sp1C, makeProjectionMtx(cobj, sp1C));
+
+    left = cobj->scissor.left * x_scale;
+    right = cobj->scissor.right * x_scale;
+    top = cobj->scissor.top * y_scale;
+    bottom = cobj->scissor.bottom * y_scale;
+    width = right - left;
+    height = bottom - top;
+    GXSetScissor((u32) left, (u32) top, (u32) width, (u32) height);
+
+    projection_type = makeProjectionMtx(cobj, p);
+    GXSetProjection(p, projection_type);
+
     return 1;
 }
 #endif
@@ -598,7 +609,7 @@ extern const float HSD_CObj_804DE494;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool setupTopHalfCamera()
+asm int setupTopHalfCamera()
 { // clang-format off
     nofralloc
 /* 80367EB0 00364A90  7C 08 02 A6 */	mflr r0
@@ -764,7 +775,7 @@ lbl_803680D8:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool setupBottomHalfCamera()
+asm int setupBottomHalfCamera()
 { // clang-format off
     nofralloc
 /* 803680F8 00364CD8  7C 08 02 A6 */	mflr r0
@@ -2169,15 +2180,15 @@ float HSD_CObjGetTop(HSD_CObj* cobj)
         return HSD_CObj_804DE478;
     }
     switch (cobj->projection_type) {
-    case 1:
+    case PROJ_PERSPECTIVE:
         result =
             cobj->near * tanf(0.5F * (HSD_CObj_804DE474 *
                                       cobj->projection_param.perspective.fov));
         break;
-    case 2:
+    case PROJ_FRUSTUM:
         result = cobj->projection_param.perspective.fov;
         break;
-    case 3:
+    case PROJ_ORTHO:
         result = cobj->projection_param.perspective.fov;
         break;
     default:
@@ -2187,45 +2198,22 @@ float HSD_CObjGetTop(HSD_CObj* cobj)
     return result;
 }
 
-#ifndef MUST_MATCH
 void HSD_CObjSetTop(HSD_CObj* cobj, float top)
 {
     if (cobj == NULL) {
         return;
     }
     switch (cobj->projection_type) {
-    case 2:
-        cobj->projection_param.perspective.fov = top;
+    case PROJ_PERSPECTIVE:
         break;
-    case 3:
-        cobj->projection_param.perspective.fov = top;
+    case PROJ_FRUSTUM:
+        cobj->projection_param.frustum.top = top;
+        break;
+    case PROJ_ORTHO:
+        cobj->projection_param.ortho.top = top;
         break;
     }
 }
-#else
-#pragma push
-asm void HSD_CObjSetTop(HSD_CObj* cobj, float top)
-{
-    // clang-format off
-    nofralloc
-/* 80369CE4 003668C4  28 03 00 00 */	cmplwi r3, 0
-/* 80369CE8 003668C8  4D 82 00 20 */	beqlr
-/* 80369CEC 003668CC  88 03 00 50 */	lbz r0, 0x50(r3)
-/* 80369CF0 003668D0  2C 00 00 02 */	cmpwi r0, 2
-/* 80369CF4 003668D4  41 82 00 14 */	beq lbl_80369D08
-/* 80369CF8 003668D8  4D 80 00 20 */	bltlr
-/* 80369CFC 003668DC  2C 00 00 04 */	cmpwi r0, 4
-/* 80369D00 003668E0  4C 80 00 20 */	bgelr
-/* 80369D04 003668E4  48 00 00 0C */	b lbl_80369D10
-lbl_80369D08:
-/* 80369D08 003668E8  D0 23 00 40 */	stfs f1, 0x40(r3)
-/* 80369D0C 003668EC  4E 80 00 20 */	blr
-lbl_80369D10:
-/* 80369D10 003668F0  D0 23 00 40 */	stfs f1, 0x40(r3)
-/* 80369D14 003668F4  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
 
 float HSD_CObjGetBottom(HSD_CObj* cobj)
 {
@@ -2233,58 +2221,35 @@ float HSD_CObjGetBottom(HSD_CObj* cobj)
         return HSD_CObj_804DE478;
     }
     switch (cobj->projection_type) {
-    case 1:
+    case PROJ_PERSPECTIVE:
         return -cobj->near *
                tanf(0.5F * (HSD_CObj_804DE474 *
                             cobj->projection_param.perspective.fov));
-    case 2:
-        return cobj->projection_param.perspective.aspect;
-    case 3:
-        return cobj->projection_param.perspective.aspect;
+    case PROJ_FRUSTUM:
+        return cobj->projection_param.frustum.bottom;
+    case PROJ_ORTHO:
+        return cobj->projection_param.ortho.bottom;
     default:
         return HSD_CObj_804DE478;
     }
 }
 
-#ifndef MUST_MATCH
 void HSD_CObjSetBottom(HSD_CObj* cobj, float bottom)
 {
     if (cobj == NULL) {
         return;
     }
     switch (cobj->projection_type) {
-    case 2:
-        cobj->projection_param.perspective.aspect = bottom;
+    case PROJ_PERSPECTIVE:
         break;
-    case 3:
-        cobj->projection_param.perspective.aspect = bottom;
+    case PROJ_FRUSTUM:
+        cobj->projection_param.frustum.bottom = bottom;
+        break;
+    case PROJ_ORTHO:
+        cobj->projection_param.ortho.bottom = bottom;
         break;
     }
 }
-#else
-#pragma push
-asm void HSD_CObjSetBottom(HSD_CObj* cobj, float bottom)
-{
-    // clang-format off
-    nofralloc
-/* 80369DB0 00366990  28 03 00 00 */    cmplwi r3, 0
-/* 80369DB4 00366994  4D 82 00 20 */    beqlr
-/* 80369DB8 00366998  88 03 00 50 */    lbz r0, 0x50(r3)
-/* 80369DBC 0036699C  2C 00 00 02 */    cmpwi r0, 2
-/* 80369DC0 003669A0  41 82 00 14 */    beq lbl_80369DD4
-/* 80369DC4 003669A4  4D 80 00 20 */    bltlr
-/* 80369DC8 003669A8  2C 00 00 04 */    cmpwi r0, 4
-/* 80369DCC 003669AC  4C 80 00 20 */    bgelr
-/* 80369DD0 003669B0  48 00 00 0C */    b lbl_80369DDC
-lbl_80369DD4:
-/* 80369DD4 003669B4  D0 23 00 44 */    stfs f1, 0x44(r3)
-/* 80369DD8 003669B8  4E 80 00 20 */    blr
-lbl_80369DDC:
-/* 80369DDC 003669BC  D0 23 00 44 */    stfs f1, 0x44(r3)
-/* 80369DE0 003669C0  4E 80 00 20 */    blr
-} // clang-format on
-#pragma pop
-#endif
 
 float HSD_CObjGetLeft(HSD_CObj* cobj)
 {
@@ -2292,59 +2257,36 @@ float HSD_CObjGetLeft(HSD_CObj* cobj)
         return HSD_CObj_804DE478;
     }
     switch (cobj->projection_type) {
-    case 1:
+    case PROJ_PERSPECTIVE:
         return cobj->projection_param.perspective.aspect *
                (-cobj->near *
                 tanf(0.5F * (HSD_CObj_804DE474 *
                              cobj->projection_param.perspective.fov)));
-    case 2:
+    case PROJ_FRUSTUM:
         return cobj->projection_param.frustum.left;
-    case 3:
-        return cobj->projection_param.frustum.left;
+    case PROJ_ORTHO:
+        return cobj->projection_param.ortho.left;
     default:
         return HSD_CObj_804DE478;
     }
 }
 
-#ifndef MUST_MATCH
 void HSD_CObjSetLeft(HSD_CObj* cobj, float left)
 {
-    if (cobj != NULL) {
+    if (cobj == NULL) {
         return;
     }
     switch (cobj->projection_type) {
-    case 2:
+    case PROJ_PERSPECTIVE:
+        break;
+    case PROJ_FRUSTUM:
         cobj->projection_param.frustum.left = left;
         break;
-    case 3:
-        cobj->projection_param.frustum.left = left;
+    case PROJ_ORTHO:
+        cobj->projection_param.ortho.left = left;
         break;
     }
 }
-#else
-#pragma push
-asm void HSD_CObjSetLeft(HSD_CObj* cobj, float left)
-{
-    // clang-format off
-    nofralloc
-/* 80369E84 00366A64  28 03 00 00 */    cmplwi r3, 0
-/* 80369E88 00366A68  4D 82 00 20 */    beqlr
-/* 80369E8C 00366A6C  88 03 00 50 */    lbz r0, 0x50(r3)
-/* 80369E90 00366A70  2C 00 00 02 */    cmpwi r0, 2
-/* 80369E94 00366A74  41 82 00 14 */    beq lbl_80369EA8
-/* 80369E98 00366A78  4D 80 00 20 */    bltlr
-/* 80369E9C 00366A7C  2C 00 00 04 */    cmpwi r0, 4
-/* 80369EA0 00366A80  4C 80 00 20 */    bgelr
-/* 80369EA4 00366A84  48 00 00 0C */    b lbl_80369EB0
-lbl_80369EA8:
-/* 80369EA8 00366A88  D0 23 00 48 */    stfs f1, 0x48(r3)
-/* 80369EAC 00366A8C  4E 80 00 20 */    blr
-lbl_80369EB0:
-/* 80369EB0 00366A90  D0 23 00 48 */    stfs f1, 0x48(r3)
-/* 80369EB4 00366A94  4E 80 00 20 */    blr
-} // clang-format on
-#pragma pop
-#endif
 
 float HSD_CObjGetRight(HSD_CObj* cobj)
 {
@@ -2352,15 +2294,15 @@ float HSD_CObjGetRight(HSD_CObj* cobj)
         return HSD_CObj_804DE478;
     }
     switch (cobj->projection_type) {
-    case 1:
+    case PROJ_PERSPECTIVE:
         return cobj->projection_param.perspective.aspect *
                (cobj->near *
                 tanf(0.5F * (HSD_CObj_804DE474 *
                              cobj->projection_param.perspective.fov)));
-    case 2:
+    case PROJ_FRUSTUM:
         return cobj->projection_param.frustum.right;
-    case 3:
-        return cobj->projection_param.frustum.right;
+    case PROJ_ORTHO:
+        return cobj->projection_param.ortho.right;
     default:
         return HSD_CObj_804DE478;
     }
@@ -2368,45 +2310,22 @@ float HSD_CObjGetRight(HSD_CObj* cobj)
 
 const float HSD_CObj_804DE474 = 0.01745329252F;
 
-#ifndef MUST_MATCH
 void HSD_CObjSetRight(HSD_CObj* cobj, float right)
 {
-    if (cobj != NULL) {
+    if (cobj == NULL) {
         return;
     }
     switch (cobj->projection_type) {
-    case 2:
+    case PROJ_PERSPECTIVE:
+        break;
+    case PROJ_FRUSTUM:
         cobj->projection_param.frustum.right = right;
         break;
-    case 3:
-        cobj->projection_param.frustum.right = right;
+    case PROJ_ORTHO:
+        cobj->projection_param.ortho.right = right;
         break;
     }
 }
-#else
-#pragma push
-asm void HSD_CObjSetRight(HSD_CObj* cobj, float right)
-{
-    // clang-format off
-    nofralloc
-/* 80369F54 00366B34  28 03 00 00 */	cmplwi r3, 0
-/* 80369F58 00366B38  4D 82 00 20 */	beqlr
-/* 80369F5C 00366B3C  88 03 00 50 */	lbz r0, 0x50(r3)
-/* 80369F60 00366B40  2C 00 00 02 */	cmpwi r0, 2
-/* 80369F64 00366B44  41 82 00 14 */	beq lbl_80369F78
-/* 80369F68 00366B48  4D 80 00 20 */	bltlr
-/* 80369F6C 00366B4C  2C 00 00 04 */	cmpwi r0, 4
-/* 80369F70 00366B50  4C 80 00 20 */	bgelr
-/* 80369F74 00366B54  48 00 00 0C */	b lbl_80369F80
-lbl_80369F78:
-/* 80369F78 00366B58  D0 23 00 4C */	stfs f1, 0x4c(r3)
-/* 80369F7C 00366B5C  4E 80 00 20 */	blr
-lbl_80369F80:
-/* 80369F80 00366B60  D0 23 00 4C */	stfs f1, 0x4c(r3)
-/* 80369F84 00366B64  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
 
 float HSD_CObjGetNear(HSD_CObj* cobj)
 {

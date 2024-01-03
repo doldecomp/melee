@@ -23,7 +23,7 @@ void* OSInitAlloc(void*, void*, int);
 OSHeapHandle OSCreateHeap(void*, void*);
 void OSDestroyHeap(size_t idx);
 OSHeapHandle OSSetCurrentHeap(OSHeapHandle);
-any_t OSAllocFromHeap(OSHeapHandle heap, size_t size);
+void* OSAllocFromHeap(OSHeapHandle heap, size_t size);
 size_t OSCheckHeap(OSHeapHandle);
 void OSFreeToHeap(OSHeapHandle heap, void* ptr);
 

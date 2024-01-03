@@ -84,7 +84,7 @@ struct HSD_RObjAnimJoint {
     HSD_AObjDesc* aobjdesc;
 };
 
-void _HSD_RObjForgetMemory(any_t low, any_t high);
+void _HSD_RObjForgetMemory(void* low, void* high);
 void HSD_RObjInitAllocData(void);
 HSD_ObjAllocData* HSD_RObjGetAllocData(void);
 HSD_ObjAllocData* HSD_RvalueObjGetAllocData(void);

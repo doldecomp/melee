@@ -155,7 +155,7 @@ void HSD_ObjAllocInit(HSD_ObjAllocData* data, size_t size, u32 align)
     alloc_datas = data;
 }
 
-void _HSD_ObjAllocForgetMemory(any_t low, any_t high)
+void _HSD_ObjAllocForgetMemory(void* low, void* high)
 {
     alloc_datas = NULL;
 }

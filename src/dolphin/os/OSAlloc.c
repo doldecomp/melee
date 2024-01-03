@@ -5,8 +5,8 @@
 
 static Heap* HeapArray;
 static ssize_t NumHeaps;
-static any_t ArenaStart;
-static any_t ArenaEnd;
+static void* ArenaStart;
+static void* ArenaEnd;
 volatile OSHeapHandle __OSCurrHeap = -1;
 
 #define InRange(addr, start, end)                                             \
@@ -17,7 +17,7 @@ volatile OSHeapHandle __OSCurrHeap = -1;
 #define MINOBJSIZE 64
 
 /// Inserts @p cell before @p neighbor and returns @p cell.
-static any_t DLAddFront(HeapCell* neighbor, HeapCell* cell)
+static void* DLAddFront(HeapCell* neighbor, HeapCell* cell)
 {
     cell->next = neighbor;
     cell->prev = NULL;
@@ -84,7 +84,7 @@ static HeapCell* DLInsert(HeapCell* list, HeapCell* cell, unk_t _)
     return cell;
 }
 
-any_t OSAllocFromHeap(OSHeapHandle heap, size_t size)
+void* OSAllocFromHeap(OSHeapHandle heap, size_t size)
 {
     Heap* hd = &HeapArray[heap];
     size_t sizeAligned = OSRoundUp32B(ALIGNMENT + size);
@@ -109,7 +109,7 @@ any_t OSAllocFromHeap(OSHeapHandle heap, size_t size)
     } else {
         // remove this cell from the free list and make a new cell out of the
         // remaining space
-        HeapCell* newcell = (any_t) ((u8*) cell + sizeAligned);
+        HeapCell* newcell = (void*) ((u8*) cell + sizeAligned);
         cell->size = sizeAligned;
         newcell->size = leftoverSpace;
         newcell->prev = cell->prev;
@@ -130,9 +130,9 @@ any_t OSAllocFromHeap(OSHeapHandle heap, size_t size)
     return (u8*) cell + ALIGNMENT;
 }
 
-void OSFreeToHeap(OSHeapHandle heap, any_t ptr)
+void OSFreeToHeap(OSHeapHandle heap, void* ptr)
 {
-    HeapCell* cell = (any_t) ((u8*) ptr - ALIGNMENT);
+    HeapCell* cell = (void*) ((u8*) ptr - ALIGNMENT);
     Heap* hd = &HeapArray[heap];
     HeapCell* list = hd->allocated;
 
@@ -159,7 +159,7 @@ OSHeapHandle OSSetCurrentHeap(OSHeapHandle heap)
     return old;
 }
 
-any_t OSInitAlloc(any_t arenaStart, any_t arenaEnd, int maxHeaps)
+void* OSInitAlloc(void* arenaStart, void* arenaEnd, int maxHeaps)
 {
     u32 totalSize = maxHeaps * sizeof(Heap);
     int i;
@@ -177,20 +177,20 @@ any_t OSInitAlloc(any_t arenaStart, any_t arenaEnd, int maxHeaps)
     __OSCurrHeap = -1;
 
     arenaStart = (u8*) HeapArray + totalSize;
-    arenaStart = (any_t) OSRoundUp32B(arenaStart);
+    arenaStart = (void*) OSRoundUp32B(arenaStart);
 
     ArenaStart = arenaStart;
-    ArenaEnd = (any_t) OSRoundDown32B(arenaEnd);
+    ArenaEnd = (void*) OSRoundDown32B(arenaEnd);
 
     return arenaStart;
 }
 
-OSHeapHandle OSCreateHeap(any_t start, any_t end)
+OSHeapHandle OSCreateHeap(void* start, void* end)
 {
     int i;
-    HeapCell* cell = (any_t) OSRoundUp32B(start);
+    HeapCell* cell = (void*) OSRoundUp32B(start);
 
-    end = (any_t) OSRoundDown32B(end);
+    end = (void*) OSRoundDown32B(end);
     for (i = 0; i < NumHeaps; i++) {
         Heap* hd = &HeapArray[i];
 

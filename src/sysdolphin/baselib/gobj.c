@@ -203,10 +203,7 @@ void HSD_GObj_803910D8(HSD_GObj* gobj)
 void HSD_GObj_80391120(HSD_Obj* obj)
 {
     if (obj != NULL && ref_DEC(obj)) {
-        if (obj != NULL) {
-            obj->parent.class_info->release((HSD_Class*) obj);
-            obj->parent.class_info->destroy((HSD_Class*) obj);
-        }
+        hsdDelete(obj);
     }
 }
 

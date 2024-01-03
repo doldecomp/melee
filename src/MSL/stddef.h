@@ -16,6 +16,6 @@ typedef signed int intptr_t;
 typedef unsigned int uintptr_t;
 
 /// A null pointer
-#define NULL ((any_t) 0)
+#define NULL ((void*) 0)
 
 #endif
