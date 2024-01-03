@@ -642,7 +642,7 @@ static int AssignColorReg(HSD_TETev* tev, int idx, HSD_TExpRes* res)
     return -1;
 }
 
-int AssignAlphaReg(HSD_TETev* tev, int idx, HSD_TExpRes* res)
+static int AssignAlphaReg(HSD_TETev* tev, int idx, HSD_TExpRes* res)
 {
     static GXTevAlphaArg in[4] = { GX_CA_A0, GX_CA_A1, GX_CA_A2, GX_CA_APREV };
 
