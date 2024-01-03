@@ -592,8 +592,78 @@ void HSD_TExpOrder(HSD_TExp* texp, HSD_TObj* tex, GXChannelID chan)
     texp->tev.chan = chan;
 }
 
+static int a_in[4] = { GX_CC_A0, GX_CC_A1, GX_CC_A2, GX_CC_APREV };
+static int c_in[4] = { GX_CC_C0, GX_CC_C1, GX_CC_C2, GX_CC_CPREV };
+
 static int AssignColorReg(HSD_TETev* tev, int idx, HSD_TExpRes* res)
 {
     HSD_TECnst* cnst;
     int j;
+
+    cnst = &tev->c_in[idx].exp->cnst;
+    if (cnst->reg != HSD_TE_UNDEF) {
+        if (cnst->reg < 4) {
+            return -1;
+        }
+        tev->c_in[idx].type = HSD_TE_IMM;
+        if (cnst->comp == HSD_TE_X) {
+            tev->c_in[idx].arg = a_in[cnst->reg - 4];
+        } else {
+            tev->c_in[idx].arg = c_in[cnst->reg - 4];
+        }
+        return 0;
+    } else {
+        if (cnst->comp == HSD_TE_X) {
+            for (j = 4; j < 8; ++j) {
+                if (res->reg[j].alpha == 0) {
+                    res->reg[j].alpha = 1;
+                    cnst->reg = j;
+                    cnst->idx = 3;
+                    tev->c_in[idx].type = HSD_TE_IMM;
+                    tev->c_in[idx].arg = a_in[j - 4];
+                    return 0;
+                }
+            }
+        } else {
+            for (j = 4; j < 8; ++j) {
+                if (res->reg[j].color == 0) {
+                    res->reg[j].color = 3;
+                    cnst->reg = j;
+                    cnst->idx = 0;
+                    tev->c_in[idx].type = HSD_TE_IMM;
+                    tev->c_in[idx].arg = c_in[j - 4];
+                    return 0;
+                }
+            }
+        }
+    }
+    return -1;
+}
+
+int AssignAlphaReg(HSD_TETev* tev, int idx, HSD_TExpRes* res)
+{
+    HSD_TECnst* cnst;
+    int j;
+
+    cnst = &tev->a_in[idx].exp->cnst;
+    if (cnst->reg != HSD_TE_UNDEF) {
+        if (cnst->reg < 4) {
+            return -1;
+        }
+        tev->a_in[idx].type = HSD_TE_IMM;
+        tev->a_in[idx].arg = a_in[cnst->reg - 4];
+        return 0;
+    } else {
+        for (j = 4; j < 8; ++j) {
+            if (res->reg[j].alpha == 0) {
+                res->reg[j].alpha = 1;
+                cnst->reg = j;
+                cnst->idx = 3;
+                tev->a_in[idx].type = HSD_TE_IMM;
+                tev->a_in[idx].arg = a_in[j - 4];
+                return 0;
+            }
+        }
+    }
+    return -1;
 }
