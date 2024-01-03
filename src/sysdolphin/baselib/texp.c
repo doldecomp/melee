@@ -228,14 +228,12 @@ HSD_TExp* HSD_TExpCnst(void* val, HSD_TEInput comp, HSD_TEType type,
 void HSD_TExpColorOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias,
                      GXTevScale scale, u8 clamp)
 {
-    s32 unused[2];
-
     HSD_ASSERT(408, texp);
     HSD_ASSERT(409, HSD_TExpGetType(texp) == HSD_TE_TEV);
 
     texp->tev.c_op = op;
     texp->tev.c_clamp = (clamp ? GX_ENABLE : GX_DISABLE);
-    if (op <= GX_TEV_SUB) {
+    if ((u32) op <= GX_TEV_SUB) {
         texp->tev.c_bias = bias;
         texp->tev.c_scale = scale;
     } else {
@@ -247,14 +245,12 @@ void HSD_TExpColorOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias,
 void HSD_TExpAlphaOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias,
                      GXTevScale scale, u8 clamp)
 {
-    s32 unused[2];
-
     HSD_ASSERT(434, texp);
     HSD_ASSERT(435, HSD_TExpGetType(texp) == HSD_TE_TEV);
 
     texp->tev.a_op = op;
     texp->tev.a_clamp = (clamp ? GX_ENABLE : GX_DISABLE);
-    if (op <= GX_TEV_SUB) {
+    if ((u32) op <= GX_TEV_SUB) {
         texp->tev.a_bias = bias;
         texp->tev.a_scale = scale;
     } else {
