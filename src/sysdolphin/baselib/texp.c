@@ -1053,3 +1053,15 @@ void HSD_TExpSetupTev(HSD_TExpTevDesc* tevdesc, HSD_TExp* texp)
         HSD_SetupTevStage(&tevdesc->desc);
     }
 }
+
+/* HSD_TExpCompile */
+
+void HSD_TExpFreeTevDesc(HSD_TExpTevDesc* tdesc)
+{
+    HSD_TExpTevDesc* next = tdesc;
+    while (next != NULL) {
+        HSD_TExpTevDesc* temp = (HSD_TExpTevDesc*) next->desc.next;
+        hsdFreeMemPiece(next, sizeof(HSD_TExpTevDesc));
+        next = temp;
+    }
+}
