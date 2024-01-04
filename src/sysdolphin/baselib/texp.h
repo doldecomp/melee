@@ -79,7 +79,7 @@ typedef struct _HSD_TevConf {
     GXTevKAlphaSel kasel;
 } HSD_TevConf;
 
-typedef struct _HSD_TExpRes {
+typedef struct HSD_TExpRes {
     int failed;
     int texmap;
     int cnst_remain;
@@ -91,16 +91,7 @@ typedef struct _HSD_TExpRes {
     u8 a_ref[4];
     u8 c_use[4];
     u8 a_use[4];
-} HSD_TExpRes;
-
-typedef struct _HSD_TExpDag {
-    struct _HSD_TETev* tev;
-    u8 idx;
-    u8 nb_dep;
-    u8 nb_ref;
-    u8 dist;
-    struct _HSD_TExpDag* depend[8];
-} HSD_TExpDag;
+};
 
 typedef struct _HSD_TevDesc {
     struct _HSD_TevDesc* next;

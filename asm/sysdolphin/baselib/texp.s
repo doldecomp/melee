@@ -394,18 +394,6 @@ HSD_TExpSetReg:
 HSD_TExp_80407738:
     .asciz "texp_list"
     .balign 4
-.global HSD_TExp_80407A14
-HSD_TExp_80407A14:
-    .asciz "val >= 0"
-    .balign 4
-    .4byte 0x00000001
-    .4byte 0x00000002
-    .4byte 0x00000003
-    .4byte NULL
-    .asciz "tev->c_dst != HSD_TE_UNDEF"
-    .balign 4
-    .asciz "tev->a_dst != HSD_TE_UNDEF"
-    .balign 4
     .4byte NULL
     .4byte 0x00000001
     .4byte 0x00000002
@@ -421,22 +409,6 @@ HSD_TExp_80407A14:
 .global HSD_TExp_804D5FC8
 HSD_TExp_804D5FC8:
     .asciz "texp.c"
-    .balign 4
-.global HSD_TExp_804D5FD0
-HSD_TExp_804D5FD0:
-    .asciz "texp"
-    .balign 4
-.global HSD_TExp_804D5FD8
-HSD_TExp_804D5FD8:
-    .asciz "0"
-    .balign 4
-.global HSD_TExp_804D5FDC
-HSD_TExp_804D5FDC:
-    .asciz "desc"
-    .balign 4
-.global HSD_TExp_804D5FE4
-HSD_TExp_804D5FE4:
-    .asciz "tevdesc"
     .balign 4
 
 

@@ -2,6 +2,7 @@
 #include <baselib/texp.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/tev.h>
+#include <sysdolphin/baselib/texpdag.h>
 #include <sysdolphin/baselib/tobj.h>
 
 HSD_TExpType HSD_TExpGetType(HSD_TExp* texp)
@@ -1064,8 +1065,8 @@ int HSD_TExpCompile(HSD_TExp* texp, HSD_TExpTevDesc** tevdesc,
     int init_cprev = 1;
     int init_aprev = 1;
 
-    HSD_ASSERT(0x65B, tevdesc != NULL);
-    HSD_ASSERT(0x65C, texp_list != NULL);
+    HSD_ASSERT(1627, tevdesc);
+    HSD_ASSERT(1628, texp_list);
 
     memset(&res, 0, sizeof(HSD_TExpRes));
 
@@ -1077,7 +1078,7 @@ int HSD_TExpCompile(HSD_TExp* texp, HSD_TExpTevDesc** tevdesc,
     HSD_TExpSchedule(num, list, order, &res);
     for (i = 0; i < num; ++i) {
         val = TExpAssignReg(order[i], &res);
-        HSD_ASSERT(0x67C, val >= 0);
+        HSD_ASSERT(1660, val >= 0);
     }
 
     for (i = num - 1; i >= 0; --i) {
