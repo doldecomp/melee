@@ -922,3 +922,117 @@ static int TExpAssignReg(HSD_TExp* texp, HSD_TExpRes* res)
     }
     return 0;
 }
+
+static void TExp2TevDesc(HSD_TExp* texp, HSD_TExpTevDesc* desc,
+                         int* init_cprev, int* init_aprev)
+{
+    static GXTevRegID dst[4] = { GX_TEVREG0, GX_TEVREG1, GX_TEVREG2,
+                                 GX_TEVPREV };
+
+    HSD_TETev* tev;
+    HSD_TevDesc* tevdesc;
+
+    HSD_ASSERT(1296, texp);
+    HSD_ASSERT(1297, desc);
+    HSD_ASSERT(1298, HSD_TExpGetType(texp) == HSD_TE_TEV);
+
+    tev = &texp->tev;
+    tevdesc = &desc->desc;
+
+    tevdesc->next = NULL;
+    tevdesc->flags = 1;
+    desc->tobj = tev->tex;
+    if (tev->tex == NULL) {
+        tevdesc->coord = HSD_TE_UNDEF;
+        tevdesc->map = HSD_TE_UNDEF;
+    }
+    tevdesc->color = tev->chan == HSD_TE_UNDEF ? HSD_TE_UNDEF : tev->chan;
+    tevdesc->u.tevconf.ras_swap =
+        tev->ras_swap == HSD_TE_UNDEF ? 0 : tev->ras_swap;
+    tevdesc->u.tevconf.tex_swap =
+        tev->tex_swap == HSD_TE_UNDEF ? 0 : tev->tex_swap;
+    tevdesc->u.tevconf.kcsel = tev->kcsel == HSD_TE_UNDEF ? 0 : tev->kcsel;
+    tevdesc->u.tevconf.kasel = tev->kasel == HSD_TE_UNDEF ? 0 : tev->kasel;
+
+    if ((tev->c_op == HSD_TE_UNDEF) ||
+        (tev->c_ref == 0 && tev->a_op != 8 && tev->a_op != 9 &&
+         tev->a_op != 0xA && tev->a_op != 0xB && tev->a_op != 0xC &&
+         tev->a_op != 0xD))
+    {
+        tevdesc->u.tevconf.clr_op = 0;
+        tevdesc->u.tevconf.clr_a = GX_CC_ZERO;
+        tevdesc->u.tevconf.clr_b = GX_CC_ZERO;
+        tevdesc->u.tevconf.clr_c = GX_CC_ZERO;
+        if (*init_cprev != 0) {
+            *init_cprev = 0;
+            tevdesc->u.tevconf.clr_d = GX_CC_ZERO;
+        } else {
+            tevdesc->u.tevconf.clr_d = 0;
+        }
+        tevdesc->u.tevconf.clr_scale = 0;
+        tevdesc->u.tevconf.clr_bias = 0;
+        tevdesc->u.tevconf.clr_clamp = 0;
+        tevdesc->u.tevconf.clr_out_reg = 0;
+    } else {
+        tevdesc->u.tevconf.clr_op = tev->c_op;
+        tevdesc->u.tevconf.clr_a =
+            tev->c_in[0].arg == HSD_TE_UNDEF ? GX_CC_ZERO : tev->c_in[0].arg;
+        tevdesc->u.tevconf.clr_b =
+            tev->c_in[1].arg == HSD_TE_UNDEF ? GX_CC_ZERO : tev->c_in[1].arg;
+        tevdesc->u.tevconf.clr_c =
+            tev->c_in[2].arg == HSD_TE_UNDEF ? GX_CC_ZERO : tev->c_in[2].arg;
+        tevdesc->u.tevconf.clr_d =
+            tev->c_in[3].arg == HSD_TE_UNDEF ? GX_CC_ZERO : tev->c_in[3].arg;
+        tevdesc->u.tevconf.clr_scale =
+            tev->c_scale == HSD_TE_UNDEF ? 0 : tev->c_scale;
+        tevdesc->u.tevconf.clr_bias =
+            tev->c_bias == HSD_TE_UNDEF ? 0 : tev->c_bias;
+        tevdesc->u.tevconf.clr_clamp = tev->c_clamp != 0 ? GX_TRUE : GX_FALSE;
+
+        HSD_ASSERT(1361, tev->c_dst != HSD_TE_UNDEF);
+        tevdesc->u.tevconf.clr_out_reg = dst[tev->c_dst];
+        if (tevdesc->u.tevconf.clr_out_reg == 0) {
+            *init_cprev = 0;
+        }
+    }
+
+    if (tev->a_op == HSD_TE_UNDEF || tev->a_ref == 0) {
+        tevdesc->u.tevconf.alpha_op = 0;
+        tevdesc->u.tevconf.alpha_a = GX_CA_ZERO;
+        tevdesc->u.tevconf.alpha_b = GX_CA_ZERO;
+        tevdesc->u.tevconf.alpha_c = GX_CA_ZERO;
+        if (*init_aprev != 0) {
+            *init_aprev = 0;
+            tevdesc->u.tevconf.alpha_d = GX_CA_ZERO;
+        } else {
+            tevdesc->u.tevconf.alpha_d = 0;
+        }
+        tevdesc->u.tevconf.alpha_scale = 0;
+        tevdesc->u.tevconf.alpha_bias = 0;
+        tevdesc->u.tevconf.alpha_clamp = 0;
+        tevdesc->u.tevconf.alpha_out_reg = 0;
+    } else {
+        tevdesc->u.tevconf.alpha_op = tev->a_op;
+        tevdesc->u.tevconf.alpha_a =
+            tev->a_in[0].arg == HSD_TE_UNDEF ? GX_CA_ZERO : tev->a_in[0].arg;
+        tevdesc->u.tevconf.alpha_b =
+            tev->a_in[1].arg == HSD_TE_UNDEF ? GX_CA_ZERO : tev->a_in[1].arg;
+        tevdesc->u.tevconf.alpha_c =
+            tev->a_in[2].arg == HSD_TE_UNDEF ? GX_CA_ZERO : tev->a_in[2].arg;
+        tevdesc->u.tevconf.alpha_d =
+            tev->a_in[3].arg == HSD_TE_UNDEF ? GX_CA_ZERO : tev->a_in[3].arg;
+        tevdesc->u.tevconf.alpha_scale =
+            tev->a_scale == HSD_TE_UNDEF ? 0 : tev->a_scale;
+        tevdesc->u.tevconf.alpha_bias =
+            tev->a_bias == HSD_TE_UNDEF ? 0 : tev->a_bias;
+        tevdesc->u.tevconf.alpha_clamp =
+            tev->a_clamp != 0 ? GX_TRUE : GX_FALSE;
+
+        HSD_ASSERT(1397, tev->a_dst != HSD_TE_UNDEF);
+        tevdesc->u.tevconf.alpha_out_reg = dst[tev->a_dst];
+        if (tevdesc->u.tevconf.alpha_out_reg == 0) {
+            *init_aprev = 0;
+        }
+    }
+    tevdesc->u.tevconf.mode = GX_TC_LINEAR;
+}
