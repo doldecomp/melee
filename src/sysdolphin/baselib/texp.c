@@ -794,3 +794,131 @@ static int AssignAlphaKonst(HSD_TETev* tev, int idx, HSD_TExpRes* res)
     }
     return -1;
 }
+
+static inline bool IsThroughColor(HSD_TExp* texp)
+{
+    bool r0, r1, r2, result;
+    result = false, r2 = false, r1 = false, r0 = false;
+    if (texp->tev.c_op == GX_TEV_ADD && texp->tev.c_in[0].sel == HSD_TE_0) {
+        r0 = true;
+    }
+    if (r0 && texp->tev.c_in[1].sel == HSD_TE_0) {
+        r1 = true;
+    }
+    if (r1 && texp->tev.c_bias == 0) {
+        r2 = true;
+    }
+    if (r2 && texp->tev.c_scale == 0) {
+        result = true;
+    }
+    return result;
+}
+
+static inline bool IsThroughAlpha(HSD_TExp* texp)
+{
+    bool r0, r1, r2, result;
+    result = false, r2 = false, r1 = false, r0 = false;
+    if (texp->tev.a_op == GX_TEV_ADD && texp->tev.a_in[0].sel == HSD_TE_0) {
+        r0 = true;
+    }
+    if (r0 && texp->tev.a_in[1].sel == HSD_TE_0) {
+        r1 = true;
+    }
+    if (r1 && texp->tev.a_bias == 0) {
+        r2 = true;
+    }
+    if (r2 && texp->tev.a_scale == 0) {
+        result = true;
+    }
+    return result;
+}
+
+static int TExpAssignReg(HSD_TExp* texp, HSD_TExpRes* res)
+{
+    HSD_TETev* tev;
+    int i, val;
+
+    tev = &texp->tev;
+    if (tev->c_ref > 0) {
+        if (tev->kcsel != HSD_TE_UNDEF) {
+            for (i = 0; i < 4; i++) {
+                if (tev->c_in[i].type == HSD_TE_CNST &&
+                    (val = AssignColorReg(tev, i, res)) < 0)
+                {
+                    HSD_ASSERT(0x47B, val >= 0);
+                    return val;
+                }
+            }
+        } else {
+            if (IsThroughColor(texp) && tev->c_in[3].type == HSD_TE_CNST) {
+                if (AssignColorKonst(tev, 3, res) < 0 &&
+                    (val = AssignColorReg(tev, 3, res)) < 0)
+                {
+                    HSD_ASSERT(0x488, val >= 0);
+                    return val;
+                }
+            } else {
+                for (i = 0; i < 4; i++) {
+                    if (tev->c_in[i].type == HSD_TE_CNST) {
+                        if (AssignColorKonst(tev, i, res) < 0 &&
+                            (val = AssignColorReg(tev, i, res)) < 0)
+                        {
+                            HSD_ASSERT(0x49D, val >= 0);
+                            return val;
+                        }
+                    }
+                }
+                for (; i < 4; i++) {
+                    if (tev->c_in[i].type == HSD_TE_CNST &&
+                        (val = AssignColorReg(tev, i, res)) < 0)
+                    {
+                        HSD_ASSERT(0x4A6, val >= 0);
+                        return val;
+                    }
+                }
+            }
+        }
+    }
+
+    if (tev->a_ref > 0) {
+        if (tev->kasel != HSD_TE_UNDEF) {
+            for (i = 0; i < 4; i++) {
+                if (tev->a_in[i].type == HSD_TE_CNST &&
+                    (val = AssignAlphaReg(tev, i, res)) < 0)
+                {
+                    HSD_ASSERT(0x4B6, val >= 0);
+                    return val;
+                }
+            }
+        } else {
+            if (IsThroughAlpha(texp) && tev->a_in[3].type == HSD_TE_CNST) {
+                if (AssignAlphaReg(tev, 3, res) < 0 &&
+                    (val = AssignAlphaKonst(tev, 3, res)) < 0)
+                {
+                    HSD_ASSERT(0x4C2, val >= 0);
+                    return val;
+                }
+            } else {
+                for (i = 0; i < 4; i++) {
+                    if (tev->a_in[i].type == HSD_TE_CNST) {
+                        if (AssignAlphaKonst(tev, i, res) < 0 &&
+                            (val = AssignAlphaReg(tev, i, res)) < 0)
+                        {
+                            HSD_ASSERT(0x4CF, val >= 0);
+                            return val;
+                        }
+                    }
+                }
+                for (; i < 4; i++) {
+                    if (tev->a_in[i].type == HSD_TE_CNST &&
+                        (val = AssignAlphaReg(tev, i, res)) < 0)
+                    {
+                        HSD_ASSERT(0x4D8, val >= 0);
+                        return val;
+                    }
+                }
+            }
+        }
+    }
+    return 0;
+}
