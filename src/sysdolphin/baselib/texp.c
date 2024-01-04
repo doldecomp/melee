@@ -959,7 +959,7 @@ static void TExp2TevDesc(HSD_TExp* texp, HSD_TExpTevDesc* desc,
          tev->a_op != 0xA && tev->a_op != 0xB && tev->a_op != 0xC &&
          tev->a_op != 0xD))
     {
-        tevdesc->u.tevconf.clr_op = 0;
+        tevdesc->u.tevconf.clr_op = GX_TEV_ADD;
         tevdesc->u.tevconf.clr_a = GX_CC_ZERO;
         tevdesc->u.tevconf.clr_b = GX_CC_ZERO;
         tevdesc->u.tevconf.clr_c = GX_CC_ZERO;
@@ -967,7 +967,7 @@ static void TExp2TevDesc(HSD_TExp* texp, HSD_TExpTevDesc* desc,
             *init_cprev = 0;
             tevdesc->u.tevconf.clr_d = GX_CC_ZERO;
         } else {
-            tevdesc->u.tevconf.clr_d = 0;
+            tevdesc->u.tevconf.clr_d = GX_CC_CPREV;
         }
         tevdesc->u.tevconf.clr_scale = 0;
         tevdesc->u.tevconf.clr_bias = 0;
@@ -997,7 +997,7 @@ static void TExp2TevDesc(HSD_TExp* texp, HSD_TExpTevDesc* desc,
     }
 
     if (tev->a_op == HSD_TE_UNDEF || tev->a_ref == 0) {
-        tevdesc->u.tevconf.alpha_op = 0;
+        tevdesc->u.tevconf.alpha_op = GX_TEV_ADD;
         tevdesc->u.tevconf.alpha_a = GX_CA_ZERO;
         tevdesc->u.tevconf.alpha_b = GX_CA_ZERO;
         tevdesc->u.tevconf.alpha_c = GX_CA_ZERO;
@@ -1005,7 +1005,7 @@ static void TExp2TevDesc(HSD_TExp* texp, HSD_TExpTevDesc* desc,
             *init_aprev = 0;
             tevdesc->u.tevconf.alpha_d = GX_CA_ZERO;
         } else {
-            tevdesc->u.tevconf.alpha_d = 0;
+            tevdesc->u.tevconf.alpha_d = GX_CA_APREV;
         }
         tevdesc->u.tevconf.alpha_scale = 0;
         tevdesc->u.tevconf.alpha_bias = 0;
