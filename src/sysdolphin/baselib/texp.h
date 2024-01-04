@@ -93,6 +93,15 @@ typedef struct _HSD_TExpRes {
     u8 a_use[4];
 } HSD_TExpRes;
 
+typedef struct _HSD_TExpDag {
+    struct _HSD_TETev* tev;
+    u8 idx;
+    u8 nb_dep;
+    u8 nb_ref;
+    u8 dist;
+    struct _HSD_TExpDag* depend[8];
+} HSD_TExpDag;
+
 typedef struct _HSD_TevDesc {
     struct _HSD_TevDesc* next;
     u32 flags;
