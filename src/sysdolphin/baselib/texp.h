@@ -54,29 +54,29 @@ typedef enum _HSD_TExpType {
 } HSD_TExpType;
 
 typedef struct _HSD_TevConf {
-    u32 clr_op;
-    u32 clr_a;
-    u32 clr_b;
-    u32 clr_c;
-    u32 clr_d;
-    u32 clr_scale;
-    u32 clr_bias;
+    GXTevOp clr_op;
+    GXTevColorArg clr_a;
+    GXTevColorArg clr_b;
+    GXTevColorArg clr_c;
+    GXTevColorArg clr_d;
+    GXTevScale clr_scale;
+    GXTevBias clr_bias;
     u8 clr_clamp;
-    u32 clr_out_reg;
-    u32 alpha_op;
-    u32 alpha_a;
-    u32 alpha_b;
-    u32 alpha_c;
-    u32 alpha_d;
-    u32 alpha_scale;
-    u32 alpha_bias;
+    GXTevRegID clr_out_reg;
+    GXTevOp alpha_op;
+    GXTevAlphaArg alpha_a;
+    GXTevAlphaArg alpha_b;
+    GXTevAlphaArg alpha_c;
+    GXTevAlphaArg alpha_d;
+    GXTevScale alpha_scale;
+    GXTevBias alpha_bias;
     u8 alpha_clamp;
-    u32 alpha_out_reg;
-    u32 mode;
-    u32 ras_swap;
-    u32 tex_swap;
-    u32 kcsel;
-    u32 kasel;
+    GXTevRegID alpha_out_reg;
+    GXTevClampMode mode;
+    GXTevSwapSel ras_swap;
+    GXTevSwapSel tex_swap;
+    GXTevKColorSel kcsel;
+    GXTevKAlphaSel kasel;
 } HSD_TevConf;
 
 typedef struct _HSD_TExpRes {
