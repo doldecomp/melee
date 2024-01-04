@@ -1,6 +1,8 @@
 #include <string.h>
 #include <baselib/texp.h>
 #include <sysdolphin/baselib/class.h>
+#include <sysdolphin/baselib/tev.h>
+#include <sysdolphin/baselib/tobj.h>
 
 HSD_TExpType HSD_TExpGetType(HSD_TExp* texp)
 {
@@ -1035,4 +1037,19 @@ static void TExp2TevDesc(HSD_TExp* texp, HSD_TExpTevDesc* desc,
         }
     }
     tevdesc->u.tevconf.mode = GX_TC_LINEAR;
+}
+
+/* HSD_TExpSetReg */
+
+void HSD_TExpSetupTev(HSD_TExpTevDesc* tevdesc, HSD_TExp* texp)
+{
+    HSD_TExpSetReg(texp);
+    for (; tevdesc != NULL; tevdesc = (HSD_TExpTevDesc*) tevdesc->desc.next) {
+        if (tevdesc->tobj != NULL) {
+            tevdesc->desc.map = tevdesc->tobj->id;
+            tevdesc->desc.coord = tevdesc->tobj->coord;
+        }
+        HSD_StateAssignTev();
+        HSD_SetupTevStage(&tevdesc->desc);
+    }
 }
