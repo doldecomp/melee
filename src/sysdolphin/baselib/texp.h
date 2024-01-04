@@ -194,7 +194,7 @@ void HSD_TExpAlphaIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a,
 
 void HSD_TExpFreeTevDesc(HSD_TExpTevDesc*);
 HSD_TExp* HSD_TExpFreeList(HSD_TExp*, HSD_TExpType, s32);
-void HSD_TExpCompile(HSD_TExp*, HSD_TExpTevDesc**, HSD_TExp**);
+int HSD_TExpCompile(HSD_TExp*, HSD_TExpTevDesc**, HSD_TExp**);
 void HSD_TExpSetupTev(HSD_TExpTevDesc*, HSD_TExp*);
 
 void HSD_TExpFree(HSD_TExp* texp);

@@ -1054,7 +1054,51 @@ void HSD_TExpSetupTev(HSD_TExpTevDesc* tevdesc, HSD_TExp* texp)
     }
 }
 
-/* HSD_TExpCompile */
+int HSD_TExpCompile(HSD_TExp* texp, HSD_TExpTevDesc** tevdesc,
+                    HSD_TExp** texp_list)
+{
+    int num, i, val;
+    HSD_TExpRes res;
+    HSD_TExp* order[32];
+    HSD_TExpDag list[32];
+    int init_cprev = 1;
+    int init_aprev = 1;
+
+    HSD_ASSERT(0x65B, tevdesc != NULL);
+    HSD_ASSERT(0x65C, texp_list != NULL);
+
+    memset(&res, 0, sizeof(HSD_TExpRes));
+
+    HSD_TExpRef(texp, HSD_TE_RGB);
+    HSD_TExpRef(texp, HSD_TE_A);
+    HSD_TExpSimplify(texp);
+
+    num = HSD_TExpMakeDag(texp, list);
+    HSD_TExpSchedule(num, list, order, &res);
+    for (i = 0; i < num; ++i) {
+        val = TExpAssignReg(order[i], &res);
+        HSD_ASSERT(0x67C, val >= 0);
+    }
+
+    for (i = num - 1; i >= 0; --i) {
+        HSD_TExpSimplify2(order[i]);
+    }
+
+    num = HSD_TExpMakeDag(texp, list);
+    HSD_TExpSchedule(num, list, order, &res);
+    *tevdesc = NULL;
+    for (i = 0; i < num; ++i) {
+        HSD_TExpTevDesc* tdesc = hsdAllocMemPiece(sizeof(HSD_TExpTevDesc));
+        tdesc->desc.stage = HSD_Index2TevStage(i);
+        TExp2TevDesc(order[(num - i) - 1], tdesc, &init_cprev, &init_aprev);
+        tdesc->desc.next = &(*tevdesc)->desc;
+        *tevdesc = tdesc;
+    }
+
+    *texp_list = HSD_TExpFreeList(*texp_list, HSD_TE_TEV, 1);
+    *texp_list = HSD_TExpFreeList(*texp_list, HSD_TE_CNST, 0);
+    return num;
+}
 
 void HSD_TExpFreeTevDesc(HSD_TExpTevDesc* tdesc)
 {
