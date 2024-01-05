@@ -357,6 +357,30 @@ void ftSk_SpecialAirNStart_Anim(Fighter_GObj* fighter_gobj) {
 }
 
 // 801124E0 - 8011258C (0xAC bytes)
+// https://decomp.me/scratch/u10kG
+void ftSk_SpecialAirNLoop_Anim(Fighter_GObj* fighter_gobj) {
+    Fighter* fp = GET_FIGHTER(fighter_gobj); // r3
+    s32 specialN_x8 = fp->mv.sk.specialn.x8;
+    
+    switch (specialN_x8) 
+    {
+        case 0:
+            ft_80088148(fighter_gobj->user_data, 0x41F36, 0x7F, 0x40);
+    }
+    
+    fp->mv.sk.specialn.x8 += 1;
+    
+    if (fp->cur_anim_frame == 0) {
+        fp->fv.sk.x222C += 1;
+        fp->mv.sk.specialn.x8 = 0;
+        
+        if (fp->fv.sk.x222C > 6) {
+            fp->fv.sk.x222C = 6;
+            fp->mv.sk.specialn.x8 = 0x64;
+            ftCo_800BFFD0(fp, 0x56, 0);
+        }
+    }
+}
 
 // 8011258C - 8011260C (0x80 bytes)
 
