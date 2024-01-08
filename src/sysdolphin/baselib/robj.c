@@ -304,6 +304,22 @@ static void resolveLimits(HSD_RObj* robj, void* obj,
     NOT_IMPLEMENTED;
 }
 
+static bool RObjHasFlags(HSD_RObj* robj)
+{
+    if ((robj->flags & 0x70000000) == 0) {
+        return true;
+    }
+    return false;
+}
+
+static bool RObjHasFlags2(HSD_RObj* robj)
+{
+    if ((robj->flags & 0x80000000) != 0) {
+        return true;
+    }
+    return false;
+}
+
 void HSD_RObjUpdateAll(HSD_RObj* robj, void* obj,
                        HSD_ObjUpdateFunc update_func)
 {
