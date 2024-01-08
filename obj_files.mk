@@ -797,6 +797,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/un_3181.s.o\
+    $(BUILD_DIR)/asm/melee/un_31CB.s.o\
     $(BUILD_DIR)/asm/melee/un_31D0.s.o\
     $(BUILD_DIR)/asm/melee/un_31D9.s.o\
     $(BUILD_DIR)/asm/melee/un_31E1.s.o\
