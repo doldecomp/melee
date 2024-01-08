@@ -13,7 +13,7 @@ typedef struct HSD_TExpDag {
     u8 nb_ref;
     u8 dist;
     HSD_TExpDag* depend[8];
-};
+} HSD_TExpDag;
 
 void HSD_TExpSchedule(int num, HSD_TExpDag* list, HSD_TExp** result,
                       HSD_TExpRes* resource);

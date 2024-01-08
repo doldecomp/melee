@@ -82,14 +82,14 @@ void HSD_TExpUnref(HSD_TExp* texp, u8 sel)
     }
 }
 
-static HSD_TExp* TevAlloc()
+static HSD_TExp* TevAlloc(void)
 {
     HSD_TExp* texp = hsdAllocMemPiece(sizeof(HSD_TETev));
     HSD_ASSERT3(HSD_TExp_804D5FC8, 62, texp);
     return texp;
 }
 
-static HSD_TExp* CnstAlloc()
+static HSD_TExp* CnstAlloc(void)
 {
     HSD_TExp* texp = hsdAllocMemPiece(sizeof(HSD_TECnst));
     HSD_ASSERT3(HSD_TExp_804D5FC8, 70, texp);
@@ -1385,9 +1385,12 @@ static void TExp2TevDesc(HSD_TExp* texp, HSD_TExpTevDesc* desc,
     tevdesc->u.tevconf.mode = GX_TC_LINEAR;
 }
 
+#ifdef MUST_MATCH
 static GXTevRegID id[7] = { GX_TEVPREV, GX_TEVREG0, GX_TEVREG1, GX_TEVREG2,
                             GX_TEVREG0, GX_TEVREG1, GX_TEVREG2 };
 static char list_type[27] = "clist->type == HSD_TE_CNST";
+#endif
+
 const float HSD_TExp_804DE7D8 = 255.0;
 const double HSD_TExp_804DE7E0 = 255.0;
 
