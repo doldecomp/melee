@@ -811,6 +811,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/vi/vi1101.s.o\
     $(BUILD_DIR)/src/melee/vi/vi1201v1.c.o\
     $(BUILD_DIR)/asm/melee/vi/vi1201v1.s.o\
+    $(BUILD_DIR)/src/melee/vi/vi1201v2.c.o\
     $(BUILD_DIR)/asm/melee/vi/vi1201v2.s.o\
     $(BUILD_DIR)/asm/melee/vi/vi1202.s.o\
 
