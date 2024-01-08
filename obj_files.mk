@@ -793,9 +793,10 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ty/toy.s.o\
+    $(BUILD_DIR)/asm/melee/ty/tylist.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/un_3124.s.o\
+    $(BUILD_DIR)/asm/melee/un_3181.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/Runtime/__va_arg.c.o\
