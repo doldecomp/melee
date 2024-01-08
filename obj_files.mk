@@ -797,10 +797,11 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/un_3181.s.o\
-    $(BUILD_DIR)/asm/melee/un_31CB.s.o\
-    $(BUILD_DIR)/asm/melee/un_31D0.s.o\
-    $(BUILD_DIR)/asm/melee/un_31D9.s.o\
-    $(BUILD_DIR)/asm/melee/un_31E1.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0102.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0401.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0402.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0501.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0502.s.o\
     $(BUILD_DIR)/asm/melee/un_31E6.s.o\
 
 TEXT_O_FILES +=\
