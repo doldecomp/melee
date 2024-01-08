@@ -90,7 +90,7 @@ typedef struct HSD_TExpRes {
     u8 a_ref[4];
     u8 c_use[4];
     u8 a_use[4];
-};
+} HSD_TExpRes;
 
 typedef struct _HSD_TevDesc {
     struct _HSD_TevDesc* next;
