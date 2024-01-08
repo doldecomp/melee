@@ -446,9 +446,7 @@ static inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx mtx)
 
 static inline void HSD_JObjRefThis(HSD_JObj* jobj)
 {
-    if (jobj != NULL) {
-        iref_INC(jobj);
-    }
+    iref_INC(jobj);
 }
 
 void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint);

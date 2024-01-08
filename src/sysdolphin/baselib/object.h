@@ -122,12 +122,4 @@ static inline void iref_INC(void* o)
     }
 }
 
-static inline void iref_INC(void* o)
-{
-    HSD_OBJ(o)->ref_count_individual++;
-    if (!(HSD_OBJ(o)->ref_count_individual != 0)) {
-        __assert("object.h", 158, "HSD_OBJ(o)->ref_count_individual != 0");
-    }
-}
-
 #endif
