@@ -28,4 +28,4 @@
 -Werror=pointer-type-mismatch
 -Werror=implicit-int
 -Werror=c2x-extensions
--Werror=unknown-pragmas
+-Wno-unknown-pragmas
