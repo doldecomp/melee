@@ -1,3 +1,4 @@
+#include <placeholder.h>
 #include <string.h>
 #include <dolphin/gx/GXMisc.h>
 #include <dolphin/gx/GXTev.h>
@@ -1176,7 +1177,7 @@ L_80384B0C:
 /* 80384B14 003816F4  38 21 00 28 */	addi r1, r1, 0x28
 /* 80384B18 003816F8  7C 08 03 A6 */	mtlr r0
 /* 80384B1C 003816FC  4E 80 00 20 */	blr
-}
+} // clang-format on
 #pragma peephole on
 #else
 static int TExpAssignReg(HSD_TExp* texp, HSD_TExpRes* res)
@@ -1390,9 +1391,9 @@ static char list_type[27] = "clist->type == HSD_TE_CNST";
 const float HSD_TExp_804DE7D8 = 255.0;
 const double HSD_TExp_804DE7E0 = 255.0;
 
+#ifdef MUST_MATCH
 asm void HSD_TExpSetReg(HSD_TExp* texp)
 { // clang-format off
-#ifdef MUST_MATCH
     nofralloc
 /* 80384F28 00381B08  7C 08 02 A6 */	mflr r0
 /* 80384F2C 00381B0C  3C 80 80 40 */	lis r4, HSD_TExp_80407738@ha
@@ -1776,8 +1777,13 @@ L_8038542C:
 /* 8038543C 0038201C  38 21 00 80 */	addi r1, r1, 0x80
 /* 80385440 00382020  7C 08 03 A6 */	mtlr r0
 /* 80385444 00382024  4E 80 00 20 */	blr
-}
+} // clang-format on
 #pragma peephole on
+#else
+void HSD_TExpSetReg(HSD_TExp* texp)
+{
+    NOT_IMPLEMENTED;
+}
 #endif
 
 void HSD_TExpSetupTev(HSD_TExpTevDesc* tevdesc, HSD_TExp* texp)
