@@ -18217,30 +18217,6 @@ un_803B8AE0:
 
 .section .data
     .balign 8
-.global un_803FE7C0
-un_803FE7C0:
-    .asciz "*** Couldn't Open Debug Window2!\n"
-    .balign 4
-.global un_803FE7E4
-un_803FE7E4:
-    .asciz "*** Couldn't Open Debug Window!\n"
-    .balign 4
-    .asciz "SdToy.dat"
-    .balign 4
-    .asciz "SIS_ToyData"
-    .balign 4
-    .asciz "SdToyExp.dat"
-    .balign 4
-    .asciz "SIS_ToyDataExp"
-    .balign 4
-    .asciz "SdToy.usd"
-    .balign 4
-    .asciz "SIS_ToyData_E"
-    .balign 4
-    .asciz "SdToyExp.usd"
-    .balign 4
-    .asciz "SIS_ToyDataExp_E"
-    .balign 4
 .global un_803FE880
 un_803FE880:
     .asciz "Pos : %f, %f,%f\n"
