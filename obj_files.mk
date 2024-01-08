@@ -792,6 +792,12 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/un_2FC9.s.o\
 
 TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/melee/ty/toy.s.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/melee/un_3124.s.o\
+
+TEXT_O_FILES +=\
     $(BUILD_DIR)/src/Runtime/__va_arg.c.o\
     $(BUILD_DIR)/src/Runtime/global_destructor_chain.c.o\
     $(BUILD_DIR)/src/Runtime/Gecko_ExceptionPPC.c.o\
