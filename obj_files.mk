@@ -804,7 +804,12 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/vi/vi0402.s.o\
     $(BUILD_DIR)/asm/melee/vi/vi0501.s.o\
     $(BUILD_DIR)/asm/melee/vi/vi0502.s.o\
-    $(BUILD_DIR)/asm/melee/un_31E6.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0601.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0801.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi1101.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi1201v1.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi1201v2.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi1202.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/Runtime/__va_arg.c.o\
