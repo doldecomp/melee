@@ -1387,8 +1387,8 @@ static void TExp2TevDesc(HSD_TExp* texp, HSD_TExpTevDesc* desc,
 static GXTevRegID id[7] = { GX_TEVPREV, GX_TEVREG0, GX_TEVREG1, GX_TEVREG2,
                             GX_TEVREG0, GX_TEVREG1, GX_TEVREG2 };
 static char list_type[27] = "clist->type == HSD_TE_CNST";
-const float HSD_TExp_804DE7E0 = 255.0f;
-const double HSD_TExp_804DE7D8 = 255.0;
+const float HSD_TExp_804DE7D8 = 255.0;
+const double HSD_TExp_804DE7E0 = 255.0;
 
 asm void HSD_TExpSetReg(HSD_TExp* texp)
 { // clang-format off
