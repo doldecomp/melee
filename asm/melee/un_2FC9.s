@@ -15153,6 +15153,526 @@ un_804D5A34:
     .4byte NULL
 
 
+.section .sbss
+    .balign 8
+.global un_804D6D68
+un_804D6D68:
+    .skip 0x4
+.global un_804D6D6C
+un_804D6D6C:
+    .skip 0x4
+.global un_804D6D70
+un_804D6D70:
+    .skip 0x8
+.global un_804D6D78
+un_804D6D78:
+    .skip 0x4
+.global un_804D6D7C
+un_804D6D7C:
+    .skip 0x4
+.global un_804D6D80
+un_804D6D80:
+    .skip 0x4
+.global un_804D6D84
+un_804D6D84:
+    .skip 0x4
+.global un_804D6D88
+un_804D6D88:
+    .skip 0x4
+.global un_804D6D8C
+un_804D6D8C:
+    .skip 0x4
+.global un_804D6D90
+un_804D6D90:
+    .skip 0x8
+.global un_804D6D98
+un_804D6D98:
+    .skip 0x4
+.global un_804D6D9C
+un_804D6D9C:
+    .skip 0x4
+.global un_804D6DA0
+un_804D6DA0:
+    .skip 0x4
+.global un_804D6DA4
+un_804D6DA4:
+    .skip 0x4
+.global un_804D6DA8
+un_804D6DA8:
+    .skip 0x4
+.global un_804D6DAC
+un_804D6DAC:
+    .skip 0x4
+.global un_804D6DB0
+un_804D6DB0:
+    .skip 0x4
+.global un_804D6DB4
+un_804D6DB4:
+    .skip 0x4
+.global un_804D6DB8
+un_804D6DB8:
+    .skip 0x4
+.global un_804D6DBC
+un_804D6DBC:
+    .skip 0x4
+.global un_804D6DC0
+un_804D6DC0:
+    .skip 0x8
+.global un_804D6DC8
+un_804D6DC8:
+    .skip 0x4
+.global un_804D6DCC
+un_804D6DCC:
+    .skip 0x4
+.global un_804D6DD0
+un_804D6DD0:
+    .skip 0x4
+.global un_804D6DD4
+un_804D6DD4:
+    .skip 0x4
+.global un_804D6DD8
+un_804D6DD8:
+    .skip 0x4
+.global un_804D6DDC
+un_804D6DDC:
+    .skip 0x4
+.global un_804D6DE0
+un_804D6DE0:
+    .skip 0x4
+.global un_804D6DE4
+un_804D6DE4:
+    .skip 0x4
+.global un_804D6DE8
+un_804D6DE8:
+    .skip 0x4
+.global un_804D6DEC
+un_804D6DEC:
+    .skip 0x4
+.global un_804D6DF0
+un_804D6DF0:
+    .skip 0x4
+.global un_804D6DF4
+un_804D6DF4:
+    .skip 0x4
+.global un_804D6DF8
+un_804D6DF8:
+    .skip 0x4
+.global un_804D6DFC
+un_804D6DFC:
+    .skip 0x4
+.global un_804D6E00
+un_804D6E00:
+    .skip 0x4
+.global un_804D6E04
+un_804D6E04:
+    .skip 0x4
+.global un_804D6E08
+un_804D6E08:
+    .skip 0x4
+.global un_804D6E0C
+un_804D6E0C:
+    .skip 0x4
+.global un_804D6E10
+un_804D6E10:
+    .skip 0x4
+.global un_804D6E14
+un_804D6E14:
+    .skip 0x4
+.global un_804D6E18
+un_804D6E18:
+    .skip 0x4
+.global un_804D6E1C
+un_804D6E1C:
+    .skip 0x4
+.global un_804D6E20
+un_804D6E20:
+    .skip 0x4
+.global un_804D6E24
+un_804D6E24:
+    .skip 0x4
+.global un_804D6E28
+un_804D6E28:
+    .skip 0x4
+.global un_804D6E2C
+un_804D6E2C:
+    .skip 0x4
+.global un_804D6E30
+un_804D6E30:
+    .skip 0x4
+.global un_804D6E34
+un_804D6E34:
+    .skip 0x4
+.global un_804D6E38
+un_804D6E38:
+    .skip 0x8
+.global un_804D6E40
+un_804D6E40:
+    .skip 0x4
+.global un_804D6E44
+un_804D6E44:
+    .skip 0x4
+.global un_804D6E48
+un_804D6E48:
+    .skip 0x4
+.global un_804D6E4C
+un_804D6E4C:
+    .skip 0x4
+.global un_804D6E50
+un_804D6E50:
+    .skip 0x4
+.global un_804D6E54
+un_804D6E54:
+    .skip 0x4
+.global un_804D6E58
+un_804D6E58:
+    .skip 0x4
+.global un_804D6E5C
+un_804D6E5C:
+    .skip 0x4
+.global un_804D6E60
+un_804D6E60:
+    .skip 0x4
+.global un_804D6E64
+un_804D6E64:
+    .skip 0x4
+.global un_804D6E68
+un_804D6E68:
+    .skip 0x4
+.global un_804D6E6C
+un_804D6E6C:
+    .skip 0x4
+.global un_804D6E70
+un_804D6E70:
+    .skip 0x4
+.global un_804D6E74
+un_804D6E74:
+    .skip 0x4
+.global un_804D6E78
+un_804D6E78:
+    .skip 0x4
+.global un_804D6E7C
+un_804D6E7C:
+    .skip 0x4
+.global un_804D6E80
+un_804D6E80:
+    .skip 0x4
+.global un_804D6E84
+un_804D6E84:
+    .skip 0x4
+.global un_804D6E88
+un_804D6E88:
+    .skip 0x4
+.global un_804D6E8C
+un_804D6E8C:
+    .skip 0x4
+.global un_804D6E90
+un_804D6E90:
+    .skip 0x4
+.global un_804D6E94
+un_804D6E94:
+    .skip 0x4
+.global un_804D6E98
+un_804D6E98:
+    .skip 0x4
+.global un_804D6E9C
+un_804D6E9C:
+    .skip 0x4
+.global un_804D6EA0
+un_804D6EA0:
+    .skip 0x1
+.global un_804D6EA1
+un_804D6EA1:
+    .skip 0x1
+.global un_804D6EA2
+un_804D6EA2:
+    .skip 0x2
+.global un_804D6EA4
+un_804D6EA4:
+    .skip 0x4
+.global un_804D6EA8
+un_804D6EA8:
+    .skip 0x4
+.global un_804D6EAC
+un_804D6EAC:
+    .skip 0x4
+.global un_804D6EB0
+un_804D6EB0:
+    .skip 0x4
+.global un_804D6EB4
+un_804D6EB4:
+    .skip 0x4
+.global un_804D6EB8
+un_804D6EB8:
+    .skip 0x4
+.global un_804D6EBC
+un_804D6EBC:
+    .skip 0x4
+.global un_804D6EC0
+un_804D6EC0:
+    .skip 0x4
+.global un_804D6EC4
+un_804D6EC4:
+    .skip 0x4
+.global un_804D6EC8
+un_804D6EC8:
+    .skip 0x4
+.global un_804D6ECC
+un_804D6ECC:
+    .skip 0x4
+.global un_804D6ED0
+un_804D6ED0:
+    .skip 0x4
+.global un_804D6ED4
+un_804D6ED4:
+    .skip 0x4
+.global un_804D6ED8
+un_804D6ED8:
+    .skip 0x4
+.global un_804D6EDC
+un_804D6EDC:
+    .skip 0x4
+.global un_804D6EE0
+un_804D6EE0:
+    .skip 0x8
+.global un_804D6EE8
+un_804D6EE8:
+    .skip 0x4
+.global un_804D6EEC
+un_804D6EEC:
+    .skip 0x4
+.global un_804D6EF0
+un_804D6EF0:
+    .skip 0x4
+.global un_804D6EF4
+un_804D6EF4:
+    .skip 0x4
+.global un_804D6EF8
+un_804D6EF8:
+    .skip 0x4
+.global un_804D6EFC
+un_804D6EFC:
+    .skip 0x4
+.global un_804D6F00
+un_804D6F00:
+    .skip 0x4
+.global un_804D6F04
+un_804D6F04:
+    .skip 0x4
+.global un_804D6F08
+un_804D6F08:
+    .skip 0x8
+.global un_804D6F10
+un_804D6F10:
+    .skip 0x4
+.global un_804D6F14
+un_804D6F14:
+    .skip 0x4
+.global un_804D6F18
+un_804D6F18:
+    .skip 0x4
+.global un_804D6F1C
+un_804D6F1C:
+    .skip 0x4
+.global un_804D6F20
+un_804D6F20:
+    .skip 0x4
+.global un_804D6F24
+un_804D6F24:
+    .skip 0x4
+.global un_804D6F28
+un_804D6F28:
+    .skip 0x4
+.global un_804D6F2C
+un_804D6F2C:
+    .skip 0x4
+.global un_804D6F30
+un_804D6F30:
+    .skip 0x4
+.global un_804D6F34
+un_804D6F34:
+    .skip 0x4
+.global un_804D6F38
+un_804D6F38:
+    .skip 0x4
+.global un_804D6F3C
+un_804D6F3C:
+    .skip 0xC
+.global un_804D6F48
+un_804D6F48:
+    .skip 0x4
+.global un_804D6F4C
+un_804D6F4C:
+    .skip 0x4
+.global un_804D6F50
+un_804D6F50:
+    .skip 0x4
+.global un_804D6F54
+un_804D6F54:
+    .skip 0x4
+.global un_804D6F58
+un_804D6F58:
+    .skip 0x4
+.global un_804D6F5C
+un_804D6F5C:
+    .skip 0x4
+.global un_804D6F60
+un_804D6F60:
+    .skip 0x8
+.global un_804D6F68
+un_804D6F68:
+    .skip 0x8
+.global un_804D6F70
+un_804D6F70:
+    .skip 0x4
+.global un_804D6F74
+un_804D6F74:
+    .skip 0x4
+.global un_804D6F78
+un_804D6F78:
+    .skip 0x4
+.global un_804D6F7C
+un_804D6F7C:
+    .skip 0x4
+.global un_804D6F80
+un_804D6F80:
+    .skip 0x4
+.global un_804D6F84
+un_804D6F84:
+    .skip 0xC
+.global un_804D6F90
+un_804D6F90:
+    .skip 0x4
+.global un_804D6F94
+un_804D6F94:
+    .skip 0x4
+.global un_804D6F98
+un_804D6F98:
+    .skip 0x4
+.global un_804D6F9C
+un_804D6F9C:
+    .skip 0x4
+.global un_804D6FA0
+un_804D6FA0:
+    .skip 0x4
+.global un_804D6FA4
+un_804D6FA4:
+    .skip 0x4
+.global un_804D6FA8
+un_804D6FA8:
+    .skip 0x8
+.global un_804D6FB0
+un_804D6FB0:
+    .skip 0x4
+.global un_804D6FB4
+un_804D6FB4:
+    .skip 0x4
+.global un_804D6FB8
+un_804D6FB8:
+    .skip 0x4
+.global un_804D6FBC
+un_804D6FBC:
+    .skip 0x4
+.global un_804D6FC0
+un_804D6FC0:
+    .skip 0x4
+.global un_804D6FC4
+un_804D6FC4:
+    .skip 0x4
+.global un_804D6FC8
+un_804D6FC8:
+    .skip 0x4
+.global un_804D6FCC
+un_804D6FCC:
+    .skip 0x4
+.global un_804D6FD0
+un_804D6FD0:
+    .skip 0x8
+.global un_804D6FD8
+un_804D6FD8:
+    .skip 0x8
+.global un_804D6FE0
+un_804D6FE0:
+    .skip 0x4
+.global un_804D6FE4
+un_804D6FE4:
+    .skip 0x4
+.global un_804D6FE8
+un_804D6FE8:
+    .skip 0x4
+.global un_804D6FEC
+un_804D6FEC:
+    .skip 0x4
+.global un_804D6FF0
+un_804D6FF0:
+    .skip 0x4
+.global un_804D6FF4
+un_804D6FF4:
+    .skip 0x4
+.global un_804D6FF8
+un_804D6FF8:
+    .skip 0x4
+.global un_804D6FFC
+un_804D6FFC:
+    .skip 0x1
+.global un_804D6FFD
+un_804D6FFD:
+    .skip 0x3
+.global un_804D7000
+un_804D7000:
+    .skip 0x4
+.global un_804D7004
+un_804D7004:
+    .skip 0xC
+.global un_804D7010
+un_804D7010:
+    .skip 0x4
+.global un_804D7014
+un_804D7014:
+    .skip 0x4
+.global un_804D7018
+un_804D7018:
+    .skip 0x4
+.global un_804D701C
+un_804D701C:
+    .skip 0x4
+.global un_804D7020
+un_804D7020:
+    .skip 0x4
+.global un_804D7024
+un_804D7024:
+    .skip 0x4
+.global un_804D7028
+un_804D7028:
+    .skip 0x4
+.global un_804D702C
+un_804D702C:
+    .skip 0x4
+.global un_804D7030
+un_804D7030:
+    .skip 0x4
+.global un_804D7034
+un_804D7034:
+    .skip 0x4
+.global un_804D7038
+un_804D7038:
+    .skip 0x8
+.global un_804D7040
+un_804D7040:
+    .skip 0x4
+.global un_804D7044
+un_804D7044:
+    .skip 0x4
+.global un_804D7048
+un_804D7048:
+    .skip 0x4
+.global un_804D704C
+un_804D704C:
+    .skip 0x4
+.global un_804D7050
+un_804D7050:
+    .skip 0x4
+
+
 .section .sdata2
     .balign 8
 .global un_804DDB68
