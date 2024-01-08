@@ -794,10 +794,8 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ty/toy.s.o\
     $(BUILD_DIR)/asm/melee/ty/tylist.s.o\
-	$(BUILD_DIR)/asm/melee/ty/tyfigupon.s.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/un_3181.s.o\
+    $(BUILD_DIR)/asm/melee/ty/tyfigupon.s.o\
+    $(BUILD_DIR)/asm/melee/ty/tydisplay.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/vi/vi.s.o\
