@@ -792,6 +792,26 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/un_2FC9.s.o\
 
 TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/melee/ty/toy.s.o\
+    $(BUILD_DIR)/asm/melee/ty/tylist.s.o\
+    $(BUILD_DIR)/asm/melee/ty/tyfigupon.s.o\
+    $(BUILD_DIR)/asm/melee/ty/tydisplay.s.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/melee/vi/vi.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0102.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0401.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0402.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0501.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0502.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0601.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0801.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi1101.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi1201v1.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi1201v2.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi1202.s.o\
+
+TEXT_O_FILES +=\
     $(BUILD_DIR)/src/Runtime/__va_arg.c.o\
     $(BUILD_DIR)/src/Runtime/global_destructor_chain.c.o\
     $(BUILD_DIR)/src/Runtime/Gecko_ExceptionPPC.c.o\
