@@ -1364,13 +1364,6 @@ ifMagnify_803F988C:
     .balign 4
 
 
-.section .bss, "wa"
-    .balign 8
-.global ifMagnify_804A1DE0
-ifMagnify_804A1DE0:
-    .skip 0xF0
-
-
 .section .sdata
     .balign 8
 .global ifMagnify_804D57E8

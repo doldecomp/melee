@@ -27,7 +27,10 @@ typedef struct ifMagnify { // base: 0x804A1DE0
             u8 unk : 6;
         } state;
     } player[6];
+    u8 unk[0xF0 - 0x74];
 } ifMagnify;
+
+extern ifMagnify ifMagnify_804A1DE0;
 
 s32 ifMagnify_802FB6E8(s32);
 bool ifMagnify_802FC998(s32 ply_slot);
