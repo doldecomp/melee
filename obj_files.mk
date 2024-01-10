@@ -786,6 +786,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/if/ifstatus.c.o\
     $(BUILD_DIR)/asm/melee/if/if_2F72.s.o\
     $(BUILD_DIR)/asm/melee/if/ifstock.s.o\
+    $(BUILD_DIR)/src/melee/if/ifmagnify.c.o\
     $(BUILD_DIR)/asm/melee/if/ifmagnify.s.o\
 
 TEXT_O_FILES +=\
