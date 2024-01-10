@@ -153,7 +153,7 @@ unsigned long __strtoul(int base, int max_width,
 
             value *= base;
 
-            if (c > (ULONG_MAX - value)) {
+            if ((unsigned long) c > (ULONG_MAX - value)) {
                 *overflow = 1;
             }
 
