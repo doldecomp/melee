@@ -7,7 +7,7 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/tobj.h>
 
-typedef struct ifMagnify { // base: 0x804A1DE0
+typedef struct ifMagnify {
     HSD_Joint* joint; // // ifMagnify_802fc3c0 accesses 0x804A1DE0 for a Joint
     int x4;
     int x8;
