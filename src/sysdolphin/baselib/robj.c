@@ -371,6 +371,55 @@ void HSD_RObjResolveRefsAll(HSD_RObj* robj, HSD_RObjDesc* desc)
     }
 }
 
+static void bcexpLoadDesc(HSD_Exp* exp, HSD_ByteCodeExpDesc* desc);
+static void expLoadDesc(HSD_Exp* exp, HSD_ExpDesc* desc);
+
+HSD_RObj* HSD_RObjLoadDesc(HSD_RObjDesc* robjdesc)
+{
+    HSD_RObj* robj;
+
+    if (robjdesc != NULL) {
+        robj = HSD_RObjAlloc();
+        robj->next = HSD_RObjLoadDesc((HSD_RObjDesc*) robjdesc->next);
+        robj->flags = robjdesc->flags;
+        switch (robj->flags & 0x70000000) {
+        case 0x10000000:
+            break;
+        case 0x20000000: {
+            switch (robj->flags & 0xFFFFFFF) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+                robj->u.limit = 0.01754533f * robjdesc->u.limit;
+                break;
+            default:
+                robj->u.limit = robjdesc->u.limit;
+                break;
+            }
+        } break;
+        case 0x0:
+            expLoadDesc(&robj->u.exp, robjdesc->u.exp);
+            break;
+        case 0x30000000:
+            bcexpLoadDesc(&robj->u.exp, robjdesc->u.bcexp);
+            robj->flags &= 0x8FFFFFFF;
+            break;
+        case 0x40000000:
+            robj->u.ik_hint.bone_length = robjdesc->u.ik_hint->bone_length;
+            robj->u.ik_hint.rotate_x = robjdesc->u.ik_hint->rotate_x;
+            break;
+        default:
+            HSD_Panic(__FILE__, 0x3C0, "unexpected type of robj.\n");
+            break;
+        }
+        return robj;
+    }
+    return NULL;
+}
+
 void HSD_RObjRemove(HSD_RObj* robj)
 {
     s32 flags;
@@ -412,9 +461,17 @@ void HSD_RObjFree(HSD_RObj* robj)
     HSD_ObjFree(&robj_alloc_data, robj);
 }
 
-static f32 dummy_func()
+static f32 dummy_func(void)
 {
     return 0.0f;
+}
+
+HSD_Rvalue* HSD_RvalueAlloc(void)
+{
+    HSD_Rvalue* rvalue = HSD_ObjAlloc(&rvalue_alloc_data);
+    HSD_ASSERT(1224, rvalue);
+    memset(rvalue, 0, sizeof(HSD_Rvalue));
+    return rvalue;
 }
 
 void HSD_RvalueRemove(HSD_Rvalue* rvalue)
@@ -432,6 +489,54 @@ void HSD_RvalueRemoveAll(HSD_Rvalue* rvalue)
     for (; rvalue != NULL; rvalue = next) {
         next = rvalue->next;
         HSD_RvalueRemove(rvalue);
+    }
+}
+
+static HSD_Rvalue* loadRvalue(HSD_RvalueList* list)
+{
+    HSD_Rvalue* rp;
+    HSD_SList rv;
+
+    rv.next = NULL;
+    rp = (HSD_Rvalue*) &rv;
+    if (list == NULL) {
+        return NULL;
+    } else {
+        for (; list->joint != NULL; list++) {
+            rp->next = HSD_RvalueAlloc();
+            rp->next->flags = list->flags;
+            rp = rp->next;
+        }
+    }
+    return (HSD_Rvalue*) rv.next;
+}
+
+static void expLoadDesc(HSD_Exp* exp, HSD_ExpDesc* desc)
+{
+    memset(exp, 0, sizeof(HSD_Exp));
+    if (desc != NULL) {
+        if (desc->func != NULL) {
+            exp->expr.func = dummy_func;
+        } else {
+            exp->expr.func = NULL;
+        }
+        exp->rvalue = loadRvalue(desc->rvalue);
+        exp->nb_args = -1;
+    }
+}
+
+static void bcexpLoadDesc(HSD_Exp* exp, HSD_ByteCodeExpDesc* desc)
+{
+    memset(exp, 0, sizeof(HSD_Exp));
+    if (desc != NULL) {
+        if (desc->bytecode != NULL) {
+            exp->expr.bytecode = desc->bytecode;
+        } else {
+            exp->expr.bytecode = NULL;
+        }
+        exp->rvalue = loadRvalue(desc->rvalue);
+        exp->nb_args = -1;
+        exp->is_bytecode = 1;
     }
 }
 
