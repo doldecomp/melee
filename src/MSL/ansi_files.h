@@ -113,11 +113,6 @@ typedef struct _files {
 #define _IOFBF 2
 
 extern files __files;
-extern int __close_console(__file_handle file);
-extern int __write_console(__file_handle file, unsigned char* buf,
-                           size_t* count, __idle_proc idle_fn);
-extern int __read_console(__file_handle file, unsigned char* buf,
-                          size_t* count, __idle_proc idle_fn);
 
 unsigned int __flush_all(void);
 void __close_all(void);
