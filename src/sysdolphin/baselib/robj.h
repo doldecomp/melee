@@ -9,7 +9,10 @@
 #include <baselib/objalloc.h>
 
 #define ROBJ_TYPE_MASK 0x70000000
+#define REFTYPE_EXP 0x00000000
 #define REFTYPE_JOBJ 0x10000000
+#define REFTYPE_LIMIT 0x20000000
+#define REFTYPE_BYTECODE 0x30000000
 #define REFTYPE_IKHINT 0x40000000
 
 struct HSD_Rvalue {
@@ -116,5 +119,33 @@ void HSD_RvalueRemove(HSD_Rvalue* rvalue);
 void HSD_RvalueRemoveAll(HSD_Rvalue* rvalue);
 void HSD_RvalueResolveRefs(HSD_Rvalue* rvalue, HSD_RvalueList* list);
 void HSD_RvalueResolveRefsAll(HSD_Rvalue* rvalue, HSD_RvalueList* list);
+
+static inline bool RObjHasFlags(HSD_RObj* robj)
+{
+    if ((robj->flags & ROBJ_TYPE_MASK) == 0) {
+        return true;
+    }
+    return false;
+}
+
+static inline bool RObjHasFlags2(HSD_RObj* robj)
+{
+    if ((robj->flags & 0x80000000) != 0) {
+        return true;
+    }
+    return false;
+}
+
+static inline bool RObjHasLimitReftype(HSD_RObj* robj)
+{
+    bool has_flags;
+    u32 flags = (robj->flags & ROBJ_TYPE_MASK);
+    if (flags == REFTYPE_LIMIT) {
+        has_flags = true;
+    } else {
+        has_flags = false;
+    }
+    return has_flags;
+}
 
 #endif
