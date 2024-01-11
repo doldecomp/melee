@@ -13,11 +13,11 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 
-void grTKirby_80221364();                      /* static */
-void grTKirby_80221368();                      /* static */
-void grTKirby_802213D8();                      /* static */
-void grTKirby_802213DC();                      /* static */
-bool grTKirby_80221400();                      /* static */
+void grTKirby_80221364(void);                  /* static */
+void grTKirby_80221368(void);                  /* static */
+void grTKirby_802213D8(void);                  /* static */
+void grTKirby_802213DC(void);                  /* static */
+bool grTKirby_80221400(void);                  /* static */
 HSD_GObj* grTKirby_80221408(s32);              /* static */
 void grTKirby_802214F0(HSD_GObj*);             /* static */
 bool grTKirby_8022151C(HSD_GObj*);             /* static */

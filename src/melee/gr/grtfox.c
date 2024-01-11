@@ -14,11 +14,11 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 
-void grTFox_80220B80();                      /* static */
-void grTFox_80220B84();                      /* static */
-void grTFox_80220BFC();                      /* static */
-void grTFox_80220C00();                      /* static */
-bool grTFox_80220C24();                      /* static */
+void grTFox_80220B80(void);                  /* static */
+void grTFox_80220B84(void);                  /* static */
+void grTFox_80220BFC(void);                  /* static */
+void grTFox_80220C00(void);                  /* static */
+bool grTFox_80220C24(void);                  /* static */
 HSD_GObj* grTFox_80220C2C(s32);              /* static */
 void grTFox_80220D14(HSD_GObj*);             /* static */
 bool grTFox_80220D40(HSD_GObj*);             /* static */

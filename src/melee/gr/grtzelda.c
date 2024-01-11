@@ -13,11 +13,11 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 
-void grTZelda_80223E2C();                      /* static */
-void grTZelda_80223E30();                      /* static */
-void grTZelda_80223EA0();                      /* static */
-void grTZelda_80223EA4();                      /* static */
-bool grTZelda_80223EC8();                      /* static */
+void grTZelda_80223E2C(void);                  /* static */
+void grTZelda_80223E30(void);                  /* static */
+void grTZelda_80223EA0(void);                  /* static */
+void grTZelda_80223EA4(void);                  /* static */
+bool grTZelda_80223EC8(void);                  /* static */
 HSD_GObj* grTZelda_80223ED0(s32);              /* static */
 void grTZelda_80223FB8(HSD_GObj*);             /* static */
 bool grTZelda_80223FE4(HSD_GObj*);             /* static */

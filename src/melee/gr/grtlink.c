@@ -14,11 +14,11 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 
-void grTLink_8022192C();                      /* static */
-void grTLink_80221930();                      /* static */
-void grTLink_802219A0();                      /* static */
-void grTLink_802219A4();                      /* static */
-bool grTLink_802219C8();                      /* static */
+void grTLink_8022192C(void);                  /* static */
+void grTLink_80221930(void);                  /* static */
+void grTLink_802219A0(void);                  /* static */
+void grTLink_802219A4(void);                  /* static */
+bool grTLink_802219C8(void);                  /* static */
 HSD_GObj* grTLink_802219D0(s32 arg0);         /* static */
 void grTLink_80221AB8(HSD_GObj*);             /* static */
 bool grTLink_80221AE4(HSD_GObj*);             /* static */

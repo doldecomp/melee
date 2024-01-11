@@ -13,11 +13,11 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 
-void grtDrMario_8022050C();                      /* static */
-void grtDrMario_80220510();                      /* static */
-void grtDrMario_80220580();                      /* static */
-void grtDrMario_80220584();                      /* static */
-bool grtDrMario_802205A8();                      /* static */
+void grtDrMario_8022050C(void);                  /* static */
+void grtDrMario_80220510(void);                  /* static */
+void grtDrMario_80220580(void);                  /* static */
+void grtDrMario_80220584(void);                  /* static */
+bool grtDrMario_802205A8(void);                  /* static */
 HSD_GObj* grtDrMario_802205B0(s32);              /* static */
 void grtDrMario_80220698(HSD_GObj*);             /* static */
 bool grtDrMario_802206C4(HSD_GObj*);             /* static */

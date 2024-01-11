@@ -13,11 +13,11 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 
-void grTSeak_80223864();                      /* static */
-void grTSeak_80223868();                      /* static */
-void grTSeak_802238D8();                      /* static */
-void grTSeak_802238DC();                      /* static */
-bool grTSeak_80223900();                      /* static */
+void grTSeak_80223864(void);                  /* static */
+void grTSeak_80223868(void);                  /* static */
+void grTSeak_802238D8(void);                  /* static */
+void grTSeak_802238DC(void);                  /* static */
+bool grTSeak_80223900(void);                  /* static */
 HSD_GObj* grTSeak_80223908(s32);              /* static */
 void grTSeak_802239F0(HSD_GObj*);             /* static */
 bool grTSeak_80223A1C(HSD_GObj*);             /* static */

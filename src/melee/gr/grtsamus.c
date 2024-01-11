@@ -13,11 +13,11 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 
-void grTSamus_80223580();                      /* static */
-void grTSamus_80223584();                      /* static */
-void grTSamus_802235F4();                      /* static */
-void grTSamus_802235F8();                      /* static */
-bool grTSamus_8022361C();                      /* static */
+void grTSamus_80223580(void);                  /* static */
+void grTSamus_80223584(void);                  /* static */
+void grTSamus_802235F4(void);                  /* static */
+void grTSamus_802235F8(void);                  /* static */
+bool grTSamus_8022361C(void);                  /* static */
 HSD_GObj* grTSamus_80223624(s32);              /* static */
 void grTSamus_8022370C(HSD_GObj*);             /* static */
 bool grTSamus_80223738(HSD_GObj*);             /* static */
