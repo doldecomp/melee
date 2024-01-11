@@ -702,6 +702,14 @@ typedef enum {
     GX_CLIP_DISABLE = 1,
 } GXClipMode;
 
+typedef enum {
+    GX_TC_LINEAR,
+    GX_TC_GE,
+    GX_TC_EQ,
+    GX_TC_LE,
+    GX_MAX_TEVCLAMPMODE,
+} GXTevClampMode;
+
 // todo: clean up invocations via defines or inlines
 /* for example,
 static inline void WriteBP(u32 i) {

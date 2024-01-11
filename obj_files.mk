@@ -786,10 +786,36 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/if/ifstatus.c.o\
     $(BUILD_DIR)/asm/melee/if/if_2F72.s.o\
     $(BUILD_DIR)/asm/melee/if/ifstock.s.o\
+    $(BUILD_DIR)/src/melee/if/ifmagnify.c.o\
     $(BUILD_DIR)/asm/melee/if/ifmagnify.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/un_2FC9.s.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/melee/ty/toy.s.o\
+    $(BUILD_DIR)/asm/melee/ty/tylist.s.o\
+    $(BUILD_DIR)/asm/melee/ty/tyfigupon.s.o\
+    $(BUILD_DIR)/asm/melee/ty/tydisplay.s.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/melee/vi/vi.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0102.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0401.s.o\
+    $(BUILD_DIR)/src/melee/vi/vi0402.c.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0402.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0501.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0502.s.o\
+    $(BUILD_DIR)/src/melee/vi/vi0601.c.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0601.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi0801.s.o\
+    $(BUILD_DIR)/asm/melee/vi/vi1101.s.o\
+    $(BUILD_DIR)/src/melee/vi/vi1201v1.c.o\
+    $(BUILD_DIR)/asm/melee/vi/vi1201v1.s.o\
+    $(BUILD_DIR)/src/melee/vi/vi1201v2.c.o\
+    $(BUILD_DIR)/asm/melee/vi/vi1201v2.s.o\
+    $(BUILD_DIR)/src/melee/vi/vi1202.c.o\
+    $(BUILD_DIR)/asm/melee/vi/vi1202.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/Runtime/__va_arg.c.o\
@@ -812,7 +838,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/MSL/printf.s.o\
     $(BUILD_DIR)/src/MSL/rand.c.o\
     $(BUILD_DIR)/src/MSL/string.c.o\
-    $(BUILD_DIR)/asm/MSL/strtoul.s.o\
+    $(BUILD_DIR)/src/MSL/errno.c.o\
+    $(BUILD_DIR)/src/MSL/strtoul.c.o\
     $(BUILD_DIR)/src/MSL/console_io.c.o\
     $(BUILD_DIR)/src/MSL/wchar_io.c.o\
     $(BUILD_DIR)/src/MSL/math_1.c.o\
@@ -1092,7 +1119,6 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/texp.c.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/texp.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/texpdag.s.o\
