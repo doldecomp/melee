@@ -531,17 +531,17 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/gr/grlast.s.o\
     $(BUILD_DIR)/asm/melee/gr/grhomerun.s.o\
     $(BUILD_DIR)/asm/melee/gr/grheal.s.o\
-    $(BUILD_DIR)/asm/melee/gr/grtmario.s.o\
+    $(BUILD_DIR)/src/melee/gr/grtmario.c.o\
     $(BUILD_DIR)/src/melee/gr/grtcaptain.c.o\
     $(BUILD_DIR)/asm/melee/gr/grtclink.s.o\
     $(BUILD_DIR)/src/melee/gr/grtdonkey.c.o\
-    $(BUILD_DIR)/asm/melee/gr/grtdrmario.s.o\
+    $(BUILD_DIR)/src/melee/gr/grtdrmario.c.o\
     $(BUILD_DIR)/src/melee/gr/grtfalco.c.o\
-    $(BUILD_DIR)/asm/melee/gr/grtfox.s.o\
+    $(BUILD_DIR)/src/melee/gr/grtfox.c.o\
     $(BUILD_DIR)/src/melee/gr/grticeclimber.c.o\
-    $(BUILD_DIR)/asm/melee/gr/grtkirby.s.o\
+    $(BUILD_DIR)/src/melee/gr/grtkirby.c.o\
     $(BUILD_DIR)/src/melee/gr/grtkoopa.c.o\
-    $(BUILD_DIR)/asm/melee/gr/grtlink.s.o\
+    $(BUILD_DIR)/src/melee/gr/grtlink.c.o\
     $(BUILD_DIR)/src/melee/gr/grtluigi.c.o\
     $(BUILD_DIR)/src/melee/gr/grtmars.c.o\
     $(BUILD_DIR)/src/melee/gr/grtmewtwo.c.o\
@@ -550,10 +550,10 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gr/grtpichu.c.o\
     $(BUILD_DIR)/asm/melee/gr/grtpikachu.s.o\
     $(BUILD_DIR)/asm/melee/gr/grtpurin.s.o\
-    $(BUILD_DIR)/asm/melee/gr/grtsamus.s.o\
-    $(BUILD_DIR)/asm/melee/gr/grtseak.s.o\
+    $(BUILD_DIR)/src/melee/gr/grtsamus.c.o\
+    $(BUILD_DIR)/src/melee/gr/grtseak.c.o\
     $(BUILD_DIR)/src/melee/gr/grtyoshi.c.o\
-    $(BUILD_DIR)/asm/melee/gr/grtzelda.s.o\
+    $(BUILD_DIR)/src/melee/gr/grtzelda.c.o\
     $(BUILD_DIR)/asm/melee/gr/grtgamewatch.s.o\
     $(BUILD_DIR)/src/melee/gr/grtemblem.c.o\
     $(BUILD_DIR)/asm/melee/gr/grtganon.s.o\
