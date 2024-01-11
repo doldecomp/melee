@@ -14,7 +14,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 
-void grTLink_8022192C(void);                  /* static */
+void grTLink_8022192C(int);                   /* static */
 void grTLink_80221930(void);                  /* static */
 void grTLink_802219A0(void);                  /* static */
 void grTLink_802219A4(void);                  /* static */
@@ -59,7 +59,7 @@ StageData grTLk_803E8D8C = {
     1,
 };
 
-void grTLink_8022192C(void) {}
+void grTLink_8022192C(int unk0) {}
 
 void grTLink_80221930(void)
 {

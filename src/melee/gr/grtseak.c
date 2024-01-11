@@ -13,7 +13,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 
-void grTSeak_80223864(void);                  /* static */
+void grTSeak_80223864(int);                   /* static */
 void grTSeak_80223868(void);                  /* static */
 void grTSeak_802238D8(void);                  /* static */
 void grTSeak_802238DC(void);                  /* static */
@@ -58,7 +58,7 @@ StageData grTSk_803E9514 = {
     1,
 };
 
-void grTSeak_80223864(void) {}
+void grTSeak_80223864(int unk0) {}
 
 void grTSeak_80223868(void)
 {

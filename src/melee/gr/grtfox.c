@@ -14,7 +14,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 
-void grTFox_80220B80(void);                  /* static */
+void grTFox_80220B80(int);                   /* static */
 void grTFox_80220B84(void);                  /* static */
 void grTFox_80220BFC(void);                  /* static */
 void grTFox_80220C00(void);                  /* static */
@@ -66,7 +66,7 @@ StageData grTFx_803E8A34 = {
     1,
 };
 
-void grTFox_80220B80(void) {}
+void grTFox_80220B80(int unk) {}
 
 void grTFox_80220B84(void)
 {

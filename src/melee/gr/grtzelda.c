@@ -13,7 +13,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 
-void grTZelda_80223E2C(void);                  /* static */
+void grTZelda_80223E2C(int);                   /* static */
 void grTZelda_80223E30(void);                  /* static */
 void grTZelda_80223EA0(void);                  /* static */
 void grTZelda_80223EA4(void);                  /* static */
@@ -58,7 +58,7 @@ StageData grTZd_803E9694 = {
     1,
 };
 
-void grTZelda_80223E2C(void) {}
+void grTZelda_80223E2C(int unk0) {}
 
 void grTZelda_80223E30(void)
 {

@@ -52,7 +52,7 @@ StageData grTMr_803E85A4 = {
     0,
 };
 
-void grTMario_8021F840(void) {}
+void grTMario_8021F840(int unk) {}
 
 void grTMario_8021F844(void)
 {
@@ -115,14 +115,14 @@ void grTMario_8021F9CC(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grTMario_8021F9F8(void)
+bool grTMario_8021F9F8(HSD_GObj* gobj)
 {
     return false;
 }
 
-void grTMario_8021FA00(void) {}
+void grTMario_8021FA00(HSD_GObj* gobj) {}
 
-void grTMario_8021FA04(void) {}
+void grTMario_8021FA04(HSD_GObj* gobj) {}
 
 void lbl_8021FA08(HSD_GObj* gobj)
 {
@@ -138,7 +138,7 @@ void grTMario_8021FA34(HSD_GObj* gobj)
     Ground_801C10B8(gobj, lbl_8021FA08);
 }
 
-bool grTMario_8021FA94(void)
+bool grTMario_8021FA94(HSD_GObj* gobj)
 {
     return 0;
 }
@@ -149,14 +149,14 @@ void grTMario_8021FA9C(HSD_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-void grTMario_8021FAD0(void) {}
+void grTMario_8021FAD0(HSD_GObj* gobj) {}
 
 void grTMario_8021FAD4(HSD_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool grTMario_8021FB24(void)
+bool grTMario_8021FB24(HSD_GObj* gobj)
 {
     return false;
 }
@@ -166,7 +166,7 @@ void grTMario_8021FB2C(HSD_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-void grTMario_8021FB4C(void) {}
+void grTMario_8021FB4C(HSD_GObj* gobj) {}
 
 int lbl_8021FB50(s32 unk, HSD_GObj* gobj)
 {
