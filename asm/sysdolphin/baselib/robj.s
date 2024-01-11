@@ -77,7 +77,10 @@ HSD_RObj_804D5EC8:
 HSD_RObj_804D5ED0:
     .asciz "obj"
     .balign 4
-
+.global HSD_RObj_804D5ED4
+HSD_RObj_804D5ED4:
+    .asciz "new"
+    .balign 4
 .global HSD_RObj_804D5ED8
 HSD_RObj_804D5ED8:
     .4byte NULL
