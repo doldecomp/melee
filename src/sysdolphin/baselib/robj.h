@@ -104,6 +104,7 @@ void HSD_RObjAddAnimAll(HSD_RObj* robj, HSD_RObjAnimJoint* anim);
 
 void HSD_RObjRemove(HSD_RObj*);
 void HSD_RObjRemoveAll(HSD_RObj*);
+void HSD_RObjResolveRefs(HSD_RObj*, HSD_RObjDesc*);
 void HSD_RObjResolveRefsAll(HSD_RObj*, HSD_RObjDesc*);
 HSD_RObj* HSD_RObjLoadDesc(HSD_RObjDesc*);
 void HSD_RObjSetConstraintObj(HSD_RObj* robj, void* obj);
@@ -115,6 +116,7 @@ void HSD_RObjReqAnimByFlags(HSD_RObj* robj, f32 startframe, u32 flags);
 void HSD_RObjAddAnim(HSD_RObj* robj, HSD_RObjAnimJoint* anim);
 void HSD_RObjAnim(HSD_RObj* robj);
 
+HSD_Rvalue* HSD_RvalueAlloc(void);
 void HSD_RvalueRemove(HSD_Rvalue* rvalue);
 void HSD_RvalueRemoveAll(HSD_Rvalue* rvalue);
 void HSD_RvalueResolveRefs(HSD_Rvalue* rvalue, HSD_RvalueList* list);
