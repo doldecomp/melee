@@ -58,7 +58,7 @@ StageData grTDr_803E88AC = {
     1,
 };
 
-void grtDrMario_8022050C(int) {}
+void grtDrMario_8022050C(int unk0) {}
 
 void grtDrMario_80220510(void)
 {
