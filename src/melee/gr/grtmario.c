@@ -131,10 +131,7 @@ void lbl_8021FA08(HSD_GObj* gobj)
 
 void grTMario_8021FA34(HSD_GObj* gobj)
 {
-    u64 unused;
-    Ground* gp = gobj->user_data;
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
     Ground_801C10B8(gobj, lbl_8021FA08);
 }
 
@@ -174,9 +171,9 @@ int lbl_8021FB50(s32 unk, HSD_GObj* gobj)
     f32 temp_f31;
     Vec3 current;
     Vec3 previous;
-    u8 unused;
+    f32 unused = -120.0f;
 
-    temp_f31 = -120.0f * Ground_801C0498();
+    temp_f31 = unused * Ground_801C0498();
     ftLib_80086644(gobj, &current);
     ftLib_80086684(gobj, &previous);
     if ((current.y < temp_f31) && (previous.y > temp_f31)) {
