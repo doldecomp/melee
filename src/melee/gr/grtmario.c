@@ -204,7 +204,7 @@ lb_UnkAnimStruct* grTMario_8021FC50(enum_t arg0)
     return NULL;
 }
 
-bool grTMario_8021FC58(void)
+bool grTMario_8021FC58(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return true;
 }

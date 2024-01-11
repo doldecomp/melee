@@ -25,6 +25,6 @@ void grTMario_8021FB4C(HSD_GObj*);                  /* static */
 int lbl_8021FB50(s32, HSD_GObj*);                   /* static */
 void grTMario_8021FBE8(S32Vec3*, f32);              /* static */
 struct lb_UnkAnimStruct* grTMario_8021FC50(enum_t); /* static */
-bool grTMario_8021FC58(void);                       /* static */
+bool grTMario_8021FC58(Vec3*, int, HSD_JObj*);      /* static */
 
 #endif
