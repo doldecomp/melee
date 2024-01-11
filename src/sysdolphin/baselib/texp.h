@@ -4,12 +4,11 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-#include <placeholder.h>
 #include <dolphin/gx/GXEnum.h>
 
-#define HSD_TEXP_RAS -2
-#define HSD_TEXP_TEX -1
-#define HSD_TEXP_ZERO 0
+#define HSD_TEXP_RAS ((HSD_TExp*) -2)
+#define HSD_TEXP_TEX ((HSD_TExp*) -1)
+#define HSD_TEXP_ZERO ((HSD_TExp*) 0)
 
 typedef enum _HSD_TEInput {
     HSD_TE_END = 0,
@@ -54,30 +53,44 @@ typedef enum _HSD_TExpType {
 } HSD_TExpType;
 
 typedef struct _HSD_TevConf {
-    u32 clr_op;
-    u32 clr_a;
-    u32 clr_b;
-    u32 clr_c;
-    u32 clr_d;
-    u32 clr_scale;
-    u32 clr_bias;
+    GXTevOp clr_op;
+    GXTevColorArg clr_a;
+    GXTevColorArg clr_b;
+    GXTevColorArg clr_c;
+    GXTevColorArg clr_d;
+    GXTevScale clr_scale;
+    GXTevBias clr_bias;
     u8 clr_clamp;
-    u32 clr_out_reg;
-    u32 alpha_op;
-    u32 alpha_a;
-    u32 alpha_b;
-    u32 alpha_c;
-    u32 alpha_d;
-    u32 alpha_scale;
-    u32 alpha_bias;
+    GXTevRegID clr_out_reg;
+    GXTevOp alpha_op;
+    GXTevAlphaArg alpha_a;
+    GXTevAlphaArg alpha_b;
+    GXTevAlphaArg alpha_c;
+    GXTevAlphaArg alpha_d;
+    GXTevScale alpha_scale;
+    GXTevBias alpha_bias;
     u8 alpha_clamp;
-    u32 alpha_out_reg;
-    u32 mode;
-    u32 ras_swap;
-    u32 tex_swap;
-    u32 kcsel;
-    u32 kasel;
+    GXTevRegID alpha_out_reg;
+    GXTevClampMode mode;
+    GXTevSwapSel ras_swap;
+    GXTevSwapSel tex_swap;
+    GXTevKColorSel kcsel;
+    GXTevKAlphaSel kasel;
 } HSD_TevConf;
+
+typedef struct HSD_TExpRes {
+    int failed;
+    int texmap;
+    int cnst_remain;
+    struct {
+        u8 color;
+        u8 alpha;
+    } reg[8];
+    u8 c_ref[4];
+    u8 a_ref[4];
+    u8 c_use[4];
+    u8 a_use[4];
+} HSD_TExpRes;
 
 typedef struct _HSD_TevDesc {
     struct _HSD_TevDesc* next;
@@ -159,28 +172,22 @@ union HSD_TExp {
 HSD_TExpType HSD_TExpGetType(HSD_TExp* texp);
 HSD_TExp* HSD_TExpTev(HSD_TExp**);
 HSD_TExp* HSD_TExpCnst(void*, HSD_TEInput, HSD_TEType, HSD_TExp**);
-void HSD_TExpOrder(HSD_TExp*, unk_t, enum_t);
-void HSD_TExpColorOp(HSD_TExp*, enum_t, enum_t, enum_t, GXBool);
+void HSD_TExpOrder(HSD_TExp*, HSD_TObj*, GXChannelID);
 
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wstrict-prototypes"
-#endif
-/// @todo Find real parameters
-void HSD_TExpColorIn();
-/// @todo Find real parameters
-void HSD_TExpAlphaOp();
-/// @todo Find real parameters
-void HSD_TExpAlphaIn();
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
+void HSD_TExpColorOp(HSD_TExp*, GXTevOp, GXTevBias, GXTevScale, u8);
+void HSD_TExpColorIn(HSD_TExp*, HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*,
+                     HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*);
+void HSD_TExpAlphaOp(HSD_TExp*, GXTevOp, GXTevBias, GXTevScale, u8);
+void HSD_TExpAlphaIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a,
+                     HSD_TEInput sel_b, HSD_TExp* exp_b, HSD_TEInput sel_c,
+                     HSD_TExp* exp_c, HSD_TEInput sel_d, HSD_TExp* exp_d);
 
 void HSD_TExpFreeTevDesc(HSD_TExpTevDesc*);
-void HSD_TExpFreeList(HSD_TExp*, HSD_TExpType, int);
-void HSD_TExpCompile(HSD_TExp*, HSD_TExpTevDesc**, HSD_TExp**);
+HSD_TExp* HSD_TExpFreeList(HSD_TExp*, HSD_TExpType, s32);
+int HSD_TExpCompile(HSD_TExp*, HSD_TExpTevDesc**, HSD_TExp**);
 void HSD_TExpSetupTev(HSD_TExpTevDesc*, HSD_TExp*);
 
+void HSD_TExpFree(HSD_TExp* texp);
 void HSD_TExpRef(HSD_TExp* texp, u8 sel);
 void HSD_TExpUnref(HSD_TExp* texp, u8 sel);
 void HSD_TExpSetReg(HSD_TExp* texp);

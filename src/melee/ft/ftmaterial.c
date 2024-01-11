@@ -787,35 +787,22 @@ lbl_800BFB38:
 #pragma peephole on
 #endif /* clang-format on */
 
-ASM void ftMaterial_800BFB4C(ftCo_GObj* gobj, GXColor* diffuse)
-#if !defined(MUST_MATCH) || defined(WIP)
+
+void ftMaterial_800BFB4C(ftCo_GObj* gobj, GXColor* diffuse)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u8 _[8] = { 0 };
-#endif
     HSD_JObj* cur = GET_JOBJ(gobj);
 
     while (cur != NULL) {
         HSD_DObj* dobj = HSD_JObjGetDObj(cur);
         while (dobj != NULL) {
-            HSD_MObj* mobj;
-            if (dobj != NULL) {
-                mobj = dobj->mobj;
-            } else {
-                mobj = NULL;
-            }
+            HSD_MObj* mobj = dobj != NULL ? dobj->mobj : NULL;
             if (mobj != NULL) {
-                HSD_Material* mat = mobj->mat;
-                if (mat != NULL) {
+                if (mobj->mat != NULL) {
+                    HSD_Material* mat = mobj->mat;
                     mat->diffuse = *diffuse;
                 }
             }
-            if (dobj != NULL) {
-                dobj = dobj->next;
-            } else {
-                dobj = NULL;
-            }
+            dobj = dobj != NULL ? dobj->next : NULL;
         }
         if (!(HSD_JObjGetFlags(cur) & JOBJ_INSTANCE)) {
             HSD_JObj* child;
@@ -909,156 +896,7 @@ ASM void ftMaterial_800BFB4C(ftCo_GObj* gobj, GXColor* diffuse)
     }
 }
 
-#else /* clang-format off */
-{ nofralloc
-/* 800BFB4C 000BC72C  7C 08 02 A6 */	mflr r0
-/* 800BFB50 000BC730  90 01 00 04 */	stw r0, 4(r1)
-/* 800BFB54 000BC734  94 21 FF D8 */	stwu r1, -0x28(r1)
-/* 800BFB58 000BC738  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 800BFB5C 000BC73C  7C 9F 23 78 */	mr r31, r4
-/* 800BFB60 000BC740  93 C1 00 20 */	stw r30, 0x20(r1)
-/* 800BFB64 000BC744  83 C3 00 28 */	lwz r30, 0x28(r3)
-/* 800BFB68 000BC748  48 00 01 7C */	b lbl_800BFCE4
-lbl_800BFB6C:
-/* 800BFB6C 000BC74C  7F C3 F3 78 */	mr r3, r30
-/* 800BFB70 000BC750  48 2B 20 7D */	bl HSD_JObjGetDObj
-/* 800BFB74 000BC754  48 00 00 48 */	b lbl_800BFBBC
-lbl_800BFB78:
-/* 800BFB78 000BC758  28 03 00 00 */	cmplwi r3, 0
-/* 800BFB7C 000BC75C  41 82 00 0C */	beq lbl_800BFB88
-/* 800BFB80 000BC760  80 83 00 08 */	lwz r4, 8(r3)
-/* 800BFB84 000BC764  48 00 00 08 */	b lbl_800BFB8C
-lbl_800BFB88:
-/* 800BFB88 000BC768  38 80 00 00 */	li r4, 0
-lbl_800BFB8C:
-/* 800BFB8C 000BC76C  28 04 00 00 */	cmplwi r4, 0
-/* 800BFB90 000BC770  41 82 00 18 */	beq lbl_800BFBA8
-/* 800BFB94 000BC774  80 84 00 0C */	lwz r4, 0xc(r4)
-/* 800BFB98 000BC778  28 04 00 00 */	cmplwi r4, 0
-/* 800BFB9C 000BC77C  41 82 00 0C */	beq lbl_800BFBA8
-/* 800BFBA0 000BC780  80 1F 00 00 */	lwz r0, 0(r31)
-/* 800BFBA4 000BC784  90 04 00 04 */	stw r0, 4(r4)
-lbl_800BFBA8:
-/* 800BFBA8 000BC788  28 03 00 00 */	cmplwi r3, 0
-/* 800BFBAC 000BC78C  41 82 00 0C */	beq lbl_800BFBB8
-/* 800BFBB0 000BC790  80 63 00 04 */	lwz r3, 4(r3)
-/* 800BFBB4 000BC794  48 00 00 08 */	b lbl_800BFBBC
-lbl_800BFBB8:
-/* 800BFBB8 000BC798  38 60 00 00 */	li r3, 0
-lbl_800BFBBC:
-/* 800BFBBC 000BC79C  28 03 00 00 */	cmplwi r3, 0
-/* 800BFBC0 000BC7A0  40 82 FF B8 */	bne lbl_800BFB78
-/* 800BFBC4 000BC7A4  7F C3 F3 78 */	mr r3, r30
-/* 800BFBC8 000BC7A8  48 2B 21 21 */	bl HSD_JObjGetFlags
-/* 800BFBCC 000BC7AC  54 60 04 E7 */	rlwinm. r0, r3, 0, 0x13, 0x13
-/* 800BFBD0 000BC7B0  40 82 00 3C */	bne lbl_800BFC0C
-/* 800BFBD4 000BC7B4  28 1E 00 00 */	cmplwi r30, 0
-/* 800BFBD8 000BC7B8  40 82 00 0C */	bne lbl_800BFBE4
-/* 800BFBDC 000BC7BC  38 00 00 00 */	li r0, 0
-/* 800BFBE0 000BC7C0  48 00 00 08 */	b lbl_800BFBE8
-lbl_800BFBE4:
-/* 800BFBE4 000BC7C4  80 1E 00 10 */	lwz r0, 0x10(r30)
-lbl_800BFBE8:
-/* 800BFBE8 000BC7C8  28 00 00 00 */	cmplwi r0, 0
-/* 800BFBEC 000BC7CC  41 82 00 20 */	beq lbl_800BFC0C
-/* 800BFBF0 000BC7D0  28 1E 00 00 */	cmplwi r30, 0
-/* 800BFBF4 000BC7D4  40 82 00 0C */	bne lbl_800BFC00
-/* 800BFBF8 000BC7D8  38 00 00 00 */	li r0, 0
-/* 800BFBFC 000BC7DC  48 00 00 08 */	b lbl_800BFC04
-lbl_800BFC00:
-/* 800BFC00 000BC7E0  80 1E 00 10 */	lwz r0, 0x10(r30)
-lbl_800BFC04:
-/* 800BFC04 000BC7E4  7C 1E 03 78 */	mr r30, r0
-/* 800BFC08 000BC7E8  48 00 00 DC */	b lbl_800BFCE4
-lbl_800BFC0C:
-/* 800BFC0C 000BC7EC  28 1E 00 00 */	cmplwi r30, 0
-/* 800BFC10 000BC7F0  40 82 00 0C */	bne lbl_800BFC1C
-/* 800BFC14 000BC7F4  38 00 00 00 */	li r0, 0
-/* 800BFC18 000BC7F8  48 00 00 08 */	b lbl_800BFC20
-lbl_800BFC1C:
-/* 800BFC1C 000BC7FC  80 1E 00 08 */	lwz r0, 8(r30)
-lbl_800BFC20:
-/* 800BFC20 000BC800  28 00 00 00 */	cmplwi r0, 0
-/* 800BFC24 000BC804  41 82 00 20 */	beq lbl_800BFC44
-/* 800BFC28 000BC808  28 1E 00 00 */	cmplwi r30, 0
-/* 800BFC2C 000BC80C  40 82 00 0C */	bne lbl_800BFC38
-/* 800BFC30 000BC810  38 00 00 00 */	li r0, 0
-/* 800BFC34 000BC814  48 00 00 08 */	b lbl_800BFC3C
-lbl_800BFC38:
-/* 800BFC38 000BC818  80 1E 00 08 */	lwz r0, 8(r30)
-lbl_800BFC3C:
-/* 800BFC3C 000BC81C  7C 1E 03 78 */	mr r30, r0
-/* 800BFC40 000BC820  48 00 00 A4 */	b lbl_800BFCE4
-lbl_800BFC44:
-/* 800BFC44 000BC824  28 1E 00 00 */	cmplwi r30, 0
-/* 800BFC48 000BC828  40 82 00 0C */	bne lbl_800BFC54
-/* 800BFC4C 000BC82C  38 00 00 00 */	li r0, 0
-/* 800BFC50 000BC830  48 00 00 08 */	b lbl_800BFC58
-lbl_800BFC54:
-/* 800BFC54 000BC834  80 1E 00 0C */	lwz r0, 0xc(r30)
-lbl_800BFC58:
-/* 800BFC58 000BC838  28 00 00 00 */	cmplwi r0, 0
-/* 800BFC5C 000BC83C  40 82 00 0C */	bne lbl_800BFC68
-/* 800BFC60 000BC840  3B C0 00 00 */	li r30, 0
-/* 800BFC64 000BC844  48 00 00 80 */	b lbl_800BFCE4
-lbl_800BFC68:
-/* 800BFC68 000BC848  28 1E 00 00 */	cmplwi r30, 0
-/* 800BFC6C 000BC84C  40 82 00 0C */	bne lbl_800BFC78
-/* 800BFC70 000BC850  38 60 00 00 */	li r3, 0
-/* 800BFC74 000BC854  48 00 00 08 */	b lbl_800BFC7C
-lbl_800BFC78:
-/* 800BFC78 000BC858  80 7E 00 0C */	lwz r3, 0xc(r30)
-lbl_800BFC7C:
-/* 800BFC7C 000BC85C  28 03 00 00 */	cmplwi r3, 0
-/* 800BFC80 000BC860  40 82 00 0C */	bne lbl_800BFC8C
-/* 800BFC84 000BC864  38 00 00 00 */	li r0, 0
-/* 800BFC88 000BC868  48 00 00 08 */	b lbl_800BFC90
-lbl_800BFC8C:
-/* 800BFC8C 000BC86C  80 03 00 08 */	lwz r0, 8(r3)
-lbl_800BFC90:
-/* 800BFC90 000BC870  28 00 00 00 */	cmplwi r0, 0
-/* 800BFC94 000BC874  41 82 00 34 */	beq lbl_800BFCC8
-/* 800BFC98 000BC878  28 1E 00 00 */	cmplwi r30, 0
-/* 800BFC9C 000BC87C  40 82 00 0C */	bne lbl_800BFCA8
-/* 800BFCA0 000BC880  38 60 00 00 */	li r3, 0
-/* 800BFCA4 000BC884  48 00 00 08 */	b lbl_800BFCAC
-lbl_800BFCA8:
-/* 800BFCA8 000BC888  80 7E 00 0C */	lwz r3, 0xc(r30)
-lbl_800BFCAC:
-/* 800BFCAC 000BC88C  28 03 00 00 */	cmplwi r3, 0
-/* 800BFCB0 000BC890  40 82 00 0C */	bne lbl_800BFCBC
-/* 800BFCB4 000BC894  38 00 00 00 */	li r0, 0
-/* 800BFCB8 000BC898  48 00 00 08 */	b lbl_800BFCC0
-lbl_800BFCBC:
-/* 800BFCBC 000BC89C  80 03 00 08 */	lwz r0, 8(r3)
-lbl_800BFCC0:
-/* 800BFCC0 000BC8A0  7C 1E 03 78 */	mr r30, r0
-/* 800BFCC4 000BC8A4  48 00 00 20 */	b lbl_800BFCE4
-lbl_800BFCC8:
-/* 800BFCC8 000BC8A8  28 1E 00 00 */	cmplwi r30, 0
-/* 800BFCCC 000BC8AC  40 82 00 0C */	bne lbl_800BFCD8
-/* 800BFCD0 000BC8B0  38 00 00 00 */	li r0, 0
-/* 800BFCD4 000BC8B4  48 00 00 08 */	b lbl_800BFCDC
-lbl_800BFCD8:
-/* 800BFCD8 000BC8B8  80 1E 00 0C */	lwz r0, 0xc(r30)
-lbl_800BFCDC:
-/* 800BFCDC 000BC8BC  7C 1E 03 78 */	mr r30, r0
-/* 800BFCE0 000BC8C0  4B FF FF 64 */	b lbl_800BFC44
-lbl_800BFCE4:
-/* 800BFCE4 000BC8C4  28 1E 00 00 */	cmplwi r30, 0
-/* 800BFCE8 000BC8C8  40 82 FE 84 */	bne lbl_800BFB6C
-/* 800BFCEC 000BC8CC  80 01 00 2C */	lwz r0, 0x2c(r1)
-/* 800BFCF0 000BC8D0  83 E1 00 24 */	lwz r31, 0x24(r1)
-/* 800BFCF4 000BC8D4  83 C1 00 20 */	lwz r30, 0x20(r1)
-/* 800BFCF8 000BC8D8  38 21 00 28 */	addi r1, r1, 0x28
-/* 800BFCFC 000BC8DC  7C 08 03 A6 */	mtlr r0
-/* 800BFD00 000BC8E0  4E 80 00 20 */	blr
-}
-#pragma peephole on
-#endif /* clang-format on */
-
-ASM void ftMaterial_800BFD04(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+void ftMaterial_800BFD04(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_Sleep, Ft_MF_None, 0, 1, 0, NULL);
@@ -1071,52 +909,7 @@ ASM void ftMaterial_800BFD04(ftCo_GObj* gobj)
     fp->x221F_b1 = true;
 }
 
-#else /* clang-format off */
-{ nofralloc
-/* 800BFD04 000BC8E4  7C 08 02 A6 */	mflr r0
-/* 800BFD08 000BC8E8  38 80 00 0B */	li r4, 0xb
-/* 800BFD0C 000BC8EC  90 01 00 04 */	stw r0, 4(r1)
-/* 800BFD10 000BC8F0  38 A0 00 00 */	li r5, 0
-/* 800BFD14 000BC8F4  38 C0 00 00 */	li r6, 0
-/* 800BFD18 000BC8F8  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800BFD1C 000BC8FC  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800BFD20 000BC900  C0 22 92 40 */	lfs f1, ftCo_804D8C20
-/* 800BFD24 000BC904  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 800BFD28 000BC908  FC 60 08 90 */	fmr f3, f1
-/* 800BFD2C 000BC90C  C0 42 92 44 */	lfs f2, ftCo_804D8C24
-/* 800BFD30 000BC910  4B FA 96 7D */	bl Fighter_ChangeMotionState
-/* 800BFD34 000BC914  88 1F 22 1E */	lbz r0, 0x221e(r31)
-/* 800BFD38 000BC918  38 80 00 01 */	li r4, 1
-/* 800BFD3C 000BC91C  50 80 3E 30 */	rlwimi r0, r4, 7, 0x18, 0x18
-/* 800BFD40 000BC920  98 1F 22 1E */	stb r0, 0x221e(r31)
-/* 800BFD44 000BC924  88 1F 22 1E */	lbz r0, 0x221e(r31)
-/* 800BFD48 000BC928  50 80 36 72 */	rlwimi r0, r4, 6, 0x19, 0x19
-/* 800BFD4C 000BC92C  98 1F 22 1E */	stb r0, 0x221e(r31)
-/* 800BFD50 000BC930  88 1F 22 1E */	lbz r0, 0x221e(r31)
-/* 800BFD54 000BC934  50 80 2E B4 */	rlwimi r0, r4, 5, 0x1a, 0x1a
-/* 800BFD58 000BC938  98 1F 22 1E */	stb r0, 0x221e(r31)
-/* 800BFD5C 000BC93C  88 1F 22 19 */	lbz r0, 0x2219(r31)
-/* 800BFD60 000BC940  50 80 36 72 */	rlwimi r0, r4, 6, 0x19, 0x19
-/* 800BFD64 000BC944  98 1F 22 19 */	stb r0, 0x2219(r31)
-/* 800BFD68 000BC948  80 7F 08 90 */	lwz r3, 0x890(r31)
-/* 800BFD6C 000BC94C  90 83 00 08 */	stw r4, 8(r3)
-/* 800BFD70 000BC950  88 1F 22 1F */	lbz r0, 0x221f(r31)
-/* 800BFD74 000BC954  50 80 26 F6 */	rlwimi r0, r4, 4, 0x1b, 0x1b
-/* 800BFD78 000BC958  98 1F 22 1F */	stb r0, 0x221f(r31)
-/* 800BFD7C 000BC95C  88 1F 22 1F */	lbz r0, 0x221f(r31)
-/* 800BFD80 000BC960  50 80 36 72 */	rlwimi r0, r4, 6, 0x19, 0x19
-/* 800BFD84 000BC964  98 1F 22 1F */	stb r0, 0x221f(r31)
-/* 800BFD88 000BC968  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 800BFD8C 000BC96C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 800BFD90 000BC970  38 21 00 18 */	addi r1, r1, 0x18
-/* 800BFD94 000BC974  7C 08 03 A6 */	mtlr r0
-/* 800BFD98 000BC978  4E 80 00 20 */	blr
-}
-#pragma peephole on
-#endif /* clang-format on */
-
-ASM void ftMaterial_800BFD9C(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+void ftMaterial_800BFD9C(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMaterial_800BFD04(gobj);
@@ -1128,62 +921,3 @@ ASM void ftMaterial_800BFD9C(ftCo_GObj* gobj)
     }
     gm_80167320(fp->player_id, fp->x221F_b4);
 }
-
-#else /* clang-format off */
-{ nofralloc
-/* 800BFD9C 000BC97C  7C 08 02 A6 */	mflr r0
-/* 800BFDA0 000BC980  38 80 00 0B */	li r4, 0xb
-/* 800BFDA4 000BC984  90 01 00 04 */	stw r0, 4(r1)
-/* 800BFDA8 000BC988  38 A0 00 00 */	li r5, 0
-/* 800BFDAC 000BC98C  38 C0 00 00 */	li r6, 0
-/* 800BFDB0 000BC990  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 800BFDB4 000BC994  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 800BFDB8 000BC998  C0 22 92 40 */	lfs f1, ftCo_804D8C20
-/* 800BFDBC 000BC99C  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 800BFDC0 000BC9A0  FC 60 08 90 */	fmr f3, f1
-/* 800BFDC4 000BC9A4  C0 42 92 44 */	lfs f2, ftCo_804D8C24
-/* 800BFDC8 000BC9A8  4B FA 95 E5 */	bl Fighter_ChangeMotionState
-/* 800BFDCC 000BC9AC  88 1F 22 1E */	lbz r0, 0x221e(r31)
-/* 800BFDD0 000BC9B0  38 80 00 01 */	li r4, 1
-/* 800BFDD4 000BC9B4  50 80 3E 30 */	rlwimi r0, r4, 7, 0x18, 0x18
-/* 800BFDD8 000BC9B8  98 1F 22 1E */	stb r0, 0x221e(r31)
-/* 800BFDDC 000BC9BC  88 1F 22 1E */	lbz r0, 0x221e(r31)
-/* 800BFDE0 000BC9C0  50 80 36 72 */	rlwimi r0, r4, 6, 0x19, 0x19
-/* 800BFDE4 000BC9C4  98 1F 22 1E */	stb r0, 0x221e(r31)
-/* 800BFDE8 000BC9C8  88 1F 22 1E */	lbz r0, 0x221e(r31)
-/* 800BFDEC 000BC9CC  50 80 2E B4 */	rlwimi r0, r4, 5, 0x1a, 0x1a
-/* 800BFDF0 000BC9D0  98 1F 22 1E */	stb r0, 0x221e(r31)
-/* 800BFDF4 000BC9D4  88 1F 22 19 */	lbz r0, 0x2219(r31)
-/* 800BFDF8 000BC9D8  50 80 36 72 */	rlwimi r0, r4, 6, 0x19, 0x19
-/* 800BFDFC 000BC9DC  98 1F 22 19 */	stb r0, 0x2219(r31)
-/* 800BFE00 000BC9E0  80 7F 08 90 */	lwz r3, 0x890(r31)
-/* 800BFE04 000BC9E4  90 83 00 08 */	stw r4, 8(r3)
-/* 800BFE08 000BC9E8  88 1F 22 1F */	lbz r0, 0x221f(r31)
-/* 800BFE0C 000BC9EC  50 80 26 F6 */	rlwimi r0, r4, 4, 0x1b, 0x1b
-/* 800BFE10 000BC9F0  98 1F 22 1F */	stb r0, 0x221f(r31)
-/* 800BFE14 000BC9F4  88 1F 22 1F */	lbz r0, 0x221f(r31)
-/* 800BFE18 000BC9F8  50 80 36 72 */	rlwimi r0, r4, 6, 0x19, 0x19
-/* 800BFE1C 000BC9FC  98 1F 22 1F */	stb r0, 0x221f(r31)
-/* 800BFE20 000BCA00  88 1F 22 22 */	lbz r0, 0x2222(r31)
-/* 800BFE24 000BCA04  54 00 F7 FF */	rlwinm. r0, r0, 0x1e, 0x1f, 0x1f
-/* 800BFE28 000BCA08  41 82 00 20 */	beq lbl_800BFE48
-/* 800BFE2C 000BCA0C  88 7F 00 0C */	lbz r3, 0xc(r31)
-/* 800BFE30 000BCA10  38 80 00 01 */	li r4, 1
-/* 800BFE34 000BCA14  4B F7 43 59 */	bl Player_GetEntityAtIndex
-/* 800BFE38 000BCA18  28 03 00 00 */	cmplwi r3, 0
-/* 800BFE3C 000BCA1C  41 82 00 0C */	beq lbl_800BFE48
-/* 800BFE40 000BCA20  38 80 00 01 */	li r4, 1
-/* 800BFE44 000BCA24  48 01 50 E1 */	bl ftCo_800D4F24
-lbl_800BFE48:
-/* 800BFE48 000BCA28  88 9F 22 1F */	lbz r4, 0x221f(r31)
-/* 800BFE4C 000BCA2C  88 7F 00 0C */	lbz r3, 0xc(r31)
-/* 800BFE50 000BCA30  54 84 EF FE */	rlwinm r4, r4, 0x1d, 0x1f, 0x1f
-/* 800BFE54 000BCA34  48 0A 74 CD */	bl gm_80167320
-/* 800BFE58 000BCA38  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 800BFE5C 000BCA3C  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 800BFE60 000BCA40  38 21 00 20 */	addi r1, r1, 0x20
-/* 800BFE64 000BCA44  7C 08 03 A6 */	mtlr r0
-/* 800BFE68 000BCA48  4E 80 00 20 */	blr
-}
-#pragma peephole on
-#endif /* clang-format on */

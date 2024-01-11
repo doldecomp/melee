@@ -2,32 +2,6 @@
 
 .section .text  # 0x802F3394 - 0x8032261C
 
-.global ifMagnify_802FB6E8
-ifMagnify_802FB6E8:
-/* 802FB6E8 002F82C8  7C 08 02 A6 */	mflr r0
-/* 802FB6EC 002F82CC  90 01 00 04 */	stw r0, 4(r1)
-/* 802FB6F0 002F82D0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 802FB6F4 002F82D4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 802FB6F8 002F82D8  7C 7F 1B 78 */	mr r31, r3
-/* 802FB6FC 002F82DC  48 00 12 9D */	bl ifMagnify_802FC998
-/* 802FB700 002F82E0  2C 03 00 00 */	cmpwi r3, 0
-/* 802FB704 002F82E4  41 82 00 20 */	beq .L_802FB724
-/* 802FB708 002F82E8  3C 60 80 4A */	lis r3, ifMagnify_804A1DE0@ha
-/* 802FB70C 002F82EC  57 E4 20 36 */	slwi r4, r31, 4
-/* 802FB710 002F82F0  38 03 1D E0 */	addi r0, r3, ifMagnify_804A1DE0@l
-/* 802FB714 002F82F4  7C 60 22 14 */	add r3, r0, r4
-/* 802FB718 002F82F8  88 63 00 20 */	lbz r3, 0x20(r3)
-/* 802FB71C 002F82FC  54 63 06 BE */	clrlwi r3, r3, 0x1a
-/* 802FB720 002F8300  48 00 00 08 */	b .L_802FB728
-.L_802FB724:
-/* 802FB724 002F8304  38 60 00 00 */	li r3, 0
-.L_802FB728:
-/* 802FB728 002F8308  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 802FB72C 002F830C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 802FB730 002F8310  38 21 00 18 */	addi r1, r1, 0x18
-/* 802FB734 002F8314  7C 08 03 A6 */	mtlr r0
-/* 802FB738 002F8318  4E 80 00 20 */	blr
-
 .global ifMagnify_802FB73C
 ifMagnify_802FB73C:
 /* 802FB73C 002F831C  C0 44 00 00 */	lfs f2, 0(r4)
@@ -144,7 +118,9 @@ ifMagnify_802FB73C:
 /* 802FB8B4 002F8494  50 80 06 BE */	rlwimi r0, r4, 0, 0x1a, 0x1f
 /* 802FB8B8 002F8498  98 03 00 0C */	stb r0, 0xc(r3)
 /* 802FB8BC 002F849C  4E 80 00 20 */	blr
-.L_802FB8C0:
+
+.global ifMagnify_802FB8C0
+ifMagnify_802FB8C0:
 /* 802FB8C0 002F84A0  7C 08 02 A6 */	mflr r0
 /* 802FB8C4 002F84A4  90 01 00 04 */	stw r0, 4(r1)
 /* 802FB8C8 002F84A8  94 21 FF 80 */	stwu r1, -0x80(r1)
@@ -361,7 +337,9 @@ ifMagnify_802FB73C:
 /* 802FBBD0 002F87B0  38 21 00 80 */	addi r1, r1, 0x80
 /* 802FBBD4 002F87B4  7C 08 03 A6 */	mtlr r0
 /* 802FBBD8 002F87B8  4E 80 00 20 */	blr
-.L_802FBBDC:
+
+.global ifMagnify_802FBBDC
+ifMagnify_802FBBDC:
 /* 802FBBDC 002F87BC  7C 08 02 A6 */	mflr r0
 /* 802FBBE0 002F87C0  3C 80 80 4A */	lis r4, ifMagnify_804A1DE0@ha
 /* 802FBBE4 002F87C4  90 01 00 04 */	stw r0, 4(r1)
@@ -898,7 +876,9 @@ ifMagnify_802FB73C:
 /* 802FC3B0 002F8F90  38 21 01 70 */	addi r1, r1, 0x170
 /* 802FC3B4 002F8F94  7C 08 03 A6 */	mtlr r0
 /* 802FC3B8 002F8F98  4E 80 00 20 */	blr
-.L_802FC3BC:
+
+.global ifMagnify_802FC3BC
+ifMagnify_802FC3BC:
 /* 802FC3BC 002F8F9C  4E 80 00 20 */	blr
 
 .global ifMagnify_802FC3C0
@@ -923,8 +903,8 @@ ifMagnify_802FC3C0:
 /* 802FC400 002F8FE0  38 80 00 0F */	li r4, 0xf
 /* 802FC404 002F8FE4  38 A0 00 00 */	li r5, 0
 /* 802FC408 002F8FE8  48 09 3D E9 */	bl GObj_Create
-/* 802FC40C 002F8FEC  3C 80 80 30 */	lis r4, .L_802FC3BC@ha
-/* 802FC410 002F8FF0  38 A4 C3 BC */	addi r5, r4, .L_802FC3BC@l
+/* 802FC40C 002F8FEC  3C 80 80 30 */	lis r4, ifMagnify_802FC3BC@ha
+/* 802FC410 002F8FF0  38 A4 C3 BC */	addi r5, r4, ifMagnify_802FC3BC@l
 /* 802FC414 002F8FF4  3B A3 00 00 */	addi r29, r3, 0
 /* 802FC418 002F8FF8  38 DE 00 00 */	addi r6, r30, 0
 /* 802FC41C 002F8FFC  38 80 00 0E */	li r4, 0xe
@@ -938,8 +918,8 @@ ifMagnify_802FC3C0:
 /* 802FC43C 002F901C  38 7D 00 00 */	addi r3, r29, 0
 /* 802FC440 002F9020  38 BC 00 00 */	addi r5, r28, 0
 /* 802FC444 002F9024  48 09 46 2D */	bl HSD_GObjObjet_80390A70
-/* 802FC448 002F9028  3C 60 80 30 */	lis r3, .L_802FB8C0@ha
-/* 802FC44C 002F902C  38 83 B8 C0 */	addi r4, r3, .L_802FB8C0@l
+/* 802FC448 002F9028  3C 60 80 30 */	lis r3, ifMagnify_802FB8C0@ha
+/* 802FC44C 002F902C  38 83 B8 C0 */	addi r4, r3, ifMagnify_802FB8C0@l
 /* 802FC450 002F9030  38 7D 00 00 */	addi r3, r29, 0
 /* 802FC454 002F9034  38 A0 00 0B */	li r5, 0xb
 /* 802FC458 002F9038  38 C0 00 00 */	li r6, 0
@@ -1083,8 +1063,8 @@ ifMagnify_802FC618:
 /* 802FC66C 002F924C  38 7D 00 00 */	addi r3, r29, 0
 /* 802FC670 002F9250  38 BC 00 00 */	addi r5, r28, 0
 /* 802FC674 002F9254  48 09 43 FD */	bl HSD_GObjObjet_80390A70
-/* 802FC678 002F9258  3C 60 80 30 */	lis r3, .L_802FBBDC@ha
-/* 802FC67C 002F925C  38 83 BB DC */	addi r4, r3, .L_802FBBDC@l
+/* 802FC678 002F9258  3C 60 80 30 */	lis r3, ifMagnify_802FBBDC@ha
+/* 802FC67C 002F925C  38 83 BB DC */	addi r4, r3, ifMagnify_802FBBDC@l
 /* 802FC680 002F9260  38 7D 00 00 */	addi r3, r29, 0
 /* 802FC684 002F9264  38 A0 00 00 */	li r5, 0
 /* 802FC688 002F9268  48 09 40 D5 */	bl GObj_SetupGXLinkMax
@@ -1388,13 +1368,6 @@ ifMagnify_803F984C:
 ifMagnify_803F988C:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
     .balign 4
-
-
-.section .bss, "wa"
-    .balign 8
-.global ifMagnify_804A1DE0
-ifMagnify_804A1DE0:
-    .skip 0xF0
 
 
 .section .sdata

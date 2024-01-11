@@ -6,6 +6,9 @@ on:
     paths: [ "**" ]
   pull_request:
 
+env:
+  IMAGE_REPO: doldecomp/melee
+
 jobs:
   build-linux:
     name: Linux
@@ -21,23 +24,9 @@ jobs:
     steps:
     - name: Get image name
       env:
-        EVENT_NAME: ${{ github.event_name }}
-        PUSH_REPO_NAME: ${{ github.repository }}
-        PR_REPO_NAME: ${{ github.event.repository.full_name }}
         IMAGE_SUFFIX: build-linux:latest
       run: |
-        result=""
-        case "$EVENT_NAME" in
-          push)
-            result="$PUSH_REPO_NAME"
-            ;;
-          pull_request)
-            result="$PR_REPO_NAME"
-            ;;
-        esac
-
-        result=$(echo "$result/$IMAGE_SUFFIX" | tr '[:upper:]' '[:lower:]')
-        echo "IMAGE=$result" >> $GITHUB_ENV
+        echo "IMAGE=$IMAGE_REPO/$IMAGE_SUFFIX" >> $GITHUB_ENV
 
     - name: Checkout Melee repository
       uses: actions/checkout@v3
@@ -92,24 +81,10 @@ jobs:
     steps:
     - name: Get image name
       env:
-        EVENT_NAME: ${{ github.event_name }}
-        PUSH_REPO_NAME: ${{ github.repository }}
-        PR_REPO_NAME: ${{ github.event.repository.full_name }}
         IMAGE_SUFFIX: build-windows:latest
       shell: bash
       run: |
-        result=""
-        case "$EVENT_NAME" in
-          push)
-            result="$PUSH_REPO_NAME"
-            ;;
-          pull_request)
-            result="$PR_REPO_NAME"
-            ;;
-        esac
-
-        result=$(echo "$result/$IMAGE_SUFFIX" | tr '[:upper:]' '[:lower:]')
-        echo "IMAGE=$result" >> $GITHUB_ENV
+        echo "IMAGE=$IMAGE_REPO/$IMAGE_SUFFIX" >> $GITHUB_ENV
 
     - name: Checkout Melee repository
       uses: actions/checkout@v3
@@ -152,23 +127,9 @@ jobs:
     steps:
     - name: Get image name
       env:
-        EVENT_NAME: ${{ github.event_name }}
-        PUSH_REPO_NAME: ${{ github.repository }}
-        PR_REPO_NAME: ${{ github.event.repository.full_name }}
         IMAGE_SUFFIX: check-issues:latest
       run: |
-        result=""
-        case "$EVENT_NAME" in
-          push)
-            result="$PUSH_REPO_NAME"
-            ;;
-          pull_request)
-            result="$PR_REPO_NAME"
-            ;;
-        esac
-
-        result=$(echo "$result/$IMAGE_SUFFIX" | tr '[:upper:]' '[:lower:]')
-        echo "IMAGE=$result" >> $GITHUB_ENV
+        echo "IMAGE=$IMAGE_REPO/$IMAGE_SUFFIX" >> $GITHUB_ENV
 
     - name: Checkout Melee repository
       uses: actions/checkout@v3
@@ -185,9 +146,7 @@ jobs:
 
     - name: Check for code issues
       run: |
-        result=$(docker run --rm \
-            --user "$(id -u):$(id -g)" \
-            --volume "$PWD:/input:ro" \
-            "$REGISTRY/$IMAGE")
-        echo "$result"
-        printf "\`\`\`\n%s\n\`\`\`" "$result" >> $GITHUB_STEP_SUMMARY
+        docker run --rm \
+          --user "$(id -u):$(id -g)" \
+          --volume "$PWD:/input:ro" \
+            "$REGISTRY/$IMAGE"

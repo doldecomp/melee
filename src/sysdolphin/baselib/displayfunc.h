@@ -4,7 +4,7 @@
 #include <baselib/jobj.h>
 #include <baselib/objalloc.h>
 
-void _HSD_DispForgetMemory(any_t low, any_t high);
+void _HSD_DispForgetMemory(void* low, void* high);
 void HSD_ZListInitAllocData(void);
 
 void HSD_EraseRect(f32 top_res, f32 bottom_res, f32 left_res, f32 right_res,

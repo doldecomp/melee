@@ -87,7 +87,7 @@ void HSD_AObjSetRate(HSD_AObj* aobj, f32 rate);
 void HSD_AObjSetRewindFrame(HSD_AObj* aobj, f32 frame);
 void HSD_AObjSetEndFrame(HSD_AObj* aobj, f32 frame);
 void HSD_AObjSetCurrentFrame(HSD_AObj* aobj, f32 frame);
-void _HSD_AObjForgetMemory(any_t low, any_t high);
+void _HSD_AObjForgetMemory(void* low, void* high);
 
 static inline f32 HSD_AObjGetEndFrame(HSD_AObj* aobj)
 {
