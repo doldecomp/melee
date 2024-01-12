@@ -171,7 +171,7 @@ void UnsetRun(OSThread* thread)
 
 s32 __OSGetEffectivePriority(OSThread* thread)
 {
-    s32 prio = thread->WORD_0x2D4;
+    s32 prio = thread->base;
 
     OSMutex* mutex;
     for (mutex = thread->queueMutex.head; mutex != NULL;

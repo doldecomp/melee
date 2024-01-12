@@ -10,7 +10,11 @@
 #define OS_PRIORITY_MIN 0
 #define OS_PRIORITY_MAX 31
 
+#define OS_THREAD_ATTR_DETACH 0x0001u
+
 #define OS_THREAD_STACK_MAGIC 0xDEADBABE
+
+#define OS_THREAD_SPECIFIC_MAX 2
 
 typedef s32 OSPriority; //  0 highest, 31 lowest
 
@@ -57,22 +61,22 @@ struct OSMutexLink {
 
 struct OSThread {
     OSContext context;
-    u16 state;            // at 0x2C8
-    u16 flags;            // at 0x2CA
-    s32 suspend;          // at 0x2CC
-    s32 priority;         // at 0x2D0
-    s32 WORD_0x2D4;       // at 0x2D4
-    u32 WORD_0x2D8;       // at 0x2D8
-    OSThreadQueue* queue; // at 0x2DC
+    u16 state;
+    u16 attr;
+    s32 suspend;
+    OSPriority priority;
+    OSPriority base;
+    void* val;
+    OSThreadQueue* queue;
     OSThreadLink link;
-    OSThreadQueue threadQueue; // at 0x2E8
-    OSMutex* mutex;            // at 0x2F0
-    OSMutexQueue queueMutex;   // at 0x2F4
-    OSThreadLink linkActive;   // at 0x2FC
-    u32* stackBegin;           // at 0x304
-    u32* stackEnd;             // at 0x308
-    u32 WORD_0x30C;            // at 0x30C
-    u32 ARR_0x310[2];          // at 0x310
+    OSThreadQueue queueJoin;
+    OSMutex* mutex;
+    OSMutexQueue queueMutex;
+    OSThreadLink linkActive;
+    u8* stackBase;
+    u32* stackEnd;
+    s32 error;
+    void* specific[OS_THREAD_SPECIFIC_MAX];
 };
 
 typedef void (*OSSwitchThreadCallback)(OSThread* from, OSThread* to);
