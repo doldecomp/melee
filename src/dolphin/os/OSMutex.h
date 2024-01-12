@@ -8,7 +8,7 @@
 typedef struct OSMutex {
     OSThreadQueue queue; // at 0x00
     OSThread* thread;    // at 0x08
-    s32 lock;            // at 0x0C
+    s32 count;           // at 0x0C
     OSMutexLink link;    // at 0x10
 } OSMutex;
 
@@ -18,8 +18,8 @@ void OSUnlockMutex(OSMutex*);
 void __OSUnlockAllMutex(OSThread*);
 bool OSTryLockMutex(OSMutex*);
 
-void __OSCheckDeadLock(void);
-void __OSCheckMutexes(void);
-void __OSCheckMutex(void);
+bool __OSCheckDeadLock(OSThread* thread);
+bool __OSCheckMutexes(OSThread* thread);
+bool __OSCheckMutex(OSMutex* mutex);
 
 #endif

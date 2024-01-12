@@ -187,7 +187,7 @@ static void DecrementerExceptionCallback(register OSException exception,
     OSLoadContext(context);
 }
 
-#if MWERKS_GEKKO
+#ifdef MWERKS_GEKKO
 static asm void DecrementerExceptionHandler(register __OSException exception,
                                             register OSContext* context)
 { // clang-format off

@@ -27,7 +27,7 @@ typedef enum {
     OS_THREAD_STATE_EXITED = 0,
     OS_THREAD_STATE_READY = 1,
     OS_THREAD_STATE_RUNNING = 2,
-    OS_THREAD_STATE_SLEEPING = 4,
+    OS_THREAD_STATE_WAITING = 4,
     OS_THREAD_STATE_MORIBUND = 8
 } OSThreadState;
 
@@ -67,9 +67,8 @@ struct OSThread {
     OSThreadLink link;
     OSThreadQueue threadQueue; // at 0x2E8
     OSMutex* mutex;            // at 0x2F0
-    OSMutexQueue mutexQueue;   // at 0x2F4
-    OSThread* next2;           // at 0x2FC
-    OSThread* prev2;           // at 0x300
+    OSMutexQueue queueMutex;   // at 0x2F4
+    OSThreadLink linkActive;   // at 0x2FC
     u32* stackBegin;           // at 0x304
     u32* stackEnd;             // at 0x308
     u32 WORD_0x30C;            // at 0x30C

@@ -170,7 +170,7 @@ s32 __OSGetEffectivePriority(OSThread* thread)
     s32 prio = thread->WORD_0x2D4;
 
     OSMutex* mutex;
-    for (mutex = thread->mutexQueue.head; mutex != NULL;
+    for (mutex = thread->queueMutex.head; mutex != NULL;
          mutex = mutex->link.next)
     {
         OSThread* mutexThread = mutex->queue.head;

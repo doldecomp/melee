@@ -135,7 +135,7 @@ static void KillThreads(void)
     OSThread* next;
 
     for (thread = __OSActiveThreadQueue.head; thread; thread = next) {
-        next = thread->next2;
+        next = thread->linkActive.next;
         switch (thread->state) {
         case 1:
         case 4:
