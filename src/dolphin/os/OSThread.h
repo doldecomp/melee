@@ -115,6 +115,5 @@ void CheckThreadQueue(void);
 void UnsetRun(OSThread* thread);
 void OSCheckActiveThreads(void);
 void SetEffectivePriority(void);
-void SelectThread(void);
 
 #endif

@@ -339,7 +339,7 @@ void SetEffectivePriority(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void SelectThread(void)
+asm static void SelectThread(bool yield)
 { // clang-format off
     nofralloc
 /* 8034B02C 00347C0C  7C 08 02 A6 */	mflr r0
@@ -489,43 +489,21 @@ lbl_8034B214:
 
 #else
 
-void SelectThread(void)
+static void SelectThread(bool yield)
 {
     NOT_IMPLEMENTED;
 }
 
 #endif
 
-#ifdef MWERKS_GEKKO
-
-#pragma push
-asm void __OSReschedule(void)
-{ // clang-format off
-    nofralloc
-/* 8034B22C 00347E0C  7C 08 02 A6 */	mflr r0
-/* 8034B230 00347E10  90 01 00 04 */	stw r0, 4(r1)
-/* 8034B234 00347E14  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8034B238 00347E18  80 0D BD 3C */	lwz r0, RunQueueHint(r13)
-/* 8034B23C 00347E1C  2C 00 00 00 */	cmpwi r0, 0
-/* 8034B240 00347E20  41 82 00 0C */	beq lbl_8034B24C
-/* 8034B244 00347E24  38 60 00 00 */	li r3, 0
-/* 8034B248 00347E28  4B FF FD E5 */	bl SelectThread
-lbl_8034B24C:
-/* 8034B24C 00347E2C  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8034B250 00347E30  38 21 00 08 */	addi r1, r1, 8
-/* 8034B254 00347E34  7C 08 03 A6 */	mtlr r0
-/* 8034B258 00347E38  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-
-#else
-
-void __OSReschedule(void)
+void __OSReschedule()
 {
-    NOT_IMPLEMENTED;
-}
+    if (!RunQueueHint) {
+        return;
+    }
 
-#endif
+    SelectThread(false);
+}
 
 #ifdef MWERKS_GEKKO
 
