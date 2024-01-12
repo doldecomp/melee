@@ -459,6 +459,7 @@ void __OSDispatchInterrupt(__OSException exception, OSContext* context)
     OSLoadContext(context);
 }
 
+#ifdef MWERKS_GEKKO
 static asm void ExternalInterruptHandler(register __OSException exception,
                                          register OSContext* context)
 {
@@ -469,3 +470,10 @@ static asm void ExternalInterruptHandler(register __OSException exception,
   b __OSDispatchInterrupt
     // clang-format on
 }
+#else
+static void ExternalInterruptHandler(register __OSException exception,
+                                     register OSContext* context)
+{
+    NOT_IMPLEMENTED;
+}
+#endif

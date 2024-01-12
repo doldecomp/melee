@@ -529,6 +529,7 @@ void OSDumpContext(const OSContext* context)
     }
 }
 
+#ifdef MWERKS_GEKKO
 static asm void OSSwitchFPUContext(register __OSException exception,
                                    register OSContext* context)
 {
@@ -571,6 +572,13 @@ _restoreAndExit:
   rfi
     // clang-format on
 }
+#else
+static void OSSwitchFPUContext(register __OSException exception,
+                               register OSContext* context)
+{
+    NOT_IMPLEMENTED;
+}
+#endif
 
 void __OSContextInit(void)
 {

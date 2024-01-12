@@ -187,6 +187,7 @@ static void DecrementerExceptionCallback(register OSException exception,
     OSLoadContext(context);
 }
 
+#if MWERKS_GEKKO
 static asm void DecrementerExceptionHandler(register __OSException exception,
                                             register OSContext* context)
 { // clang-format off
@@ -194,3 +195,10 @@ static asm void DecrementerExceptionHandler(register __OSException exception,
     OS_EXCEPTION_SAVE_GPRS(context)
     b DecrementerExceptionCallback
 } // clang-format on
+#else
+static void DecrementerExceptionHandler(register __OSException exception,
+                                        register OSContext* context)
+{
+    NOT_IMPLEMENTED;
+}
+#endif
