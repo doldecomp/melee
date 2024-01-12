@@ -2,7 +2,7 @@
 
 #include <stddef.h>
 #include <string.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/hash.h>
 #include <baselib/memory.h>
 #include <baselib/object.h>

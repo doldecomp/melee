@@ -18,7 +18,7 @@
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx/types.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <melee/it/items/itfoxlaser.h>
 
 void ftFx_SpecialN_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos)

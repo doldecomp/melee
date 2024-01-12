@@ -7,7 +7,7 @@
 #include "texp.h"
 
 #include <string.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 
 static HSD_ClassInfo* default_class;
 static HSD_MObj* current_mobj;

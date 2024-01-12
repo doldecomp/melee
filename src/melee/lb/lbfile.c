@@ -7,7 +7,7 @@
 
 #include <string.h>
 #include <dolphin/dvd/dvd.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <baselib/archive.h>
 #include <baselib/debug.h>

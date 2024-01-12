@@ -23,7 +23,7 @@
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>

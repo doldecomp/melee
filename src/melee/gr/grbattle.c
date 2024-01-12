@@ -10,7 +10,7 @@
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx/types.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>

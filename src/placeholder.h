@@ -5,7 +5,7 @@
 #include <baselib/forward.h>
 
 #include <m2c_macros.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 
 /// A label in a jump table
 typedef void (*jmp_t)(void);

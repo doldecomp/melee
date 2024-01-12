@@ -4,6 +4,9 @@
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSTime.h>
 
+typedef struct OSAlarm OSAlarm;
+typedef void (*OSAlarmHandler)(OSAlarm* alarm, OSContext* context);
+
 struct OSAlarm {
     OSAlarmHandler handler;
     u32 tag;

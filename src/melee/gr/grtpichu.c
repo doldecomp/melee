@@ -7,7 +7,7 @@
 #include "gr/inlines.h"
 #include "lb/lb_00F9.h"
 
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/gobjgxlink.h>
 
 static void grTPichu_80222B98(int);

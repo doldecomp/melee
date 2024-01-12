@@ -1,5 +1,5 @@
 #include <placeholder.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSMutex.h>
 #include <dolphin/os/OSThread.h>
@@ -142,20 +142,20 @@ void UnsetRun(OSThread* thread)
     OSThread* next;
     OSThread* prev;
 
-    next = thread->next;
+    next = thread->link.next;
     queue = thread->queue;
-    prev = thread->prev;
+    prev = thread->link.prev;
 
     if (next == NULL) {
         queue->tail = prev;
     } else {
-        next->prev = prev;
+        next->link.prev = prev;
     }
 
     if (prev == NULL) {
         queue->head = next;
     } else {
-        prev->next = next;
+        prev->link.next = next;
     }
 
     if (queue->head == NULL) {
@@ -526,8 +526,9 @@ void __OSReschedule(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm bool OSCreateThread(OSThread*, OSThreadFunc, OSThread_Unk1*,
-                        OSThread_Unk2*, u32, s32, u16)
+asm bool OSCreateThread(OSThread* thread, void* (*func)(void*), void* param,
+                        void* stack, u32 stackSize, OSPriority priority,
+                        u16 attr)
 { // clang-format off
     nofralloc
 /* 8034B25C 00347E3C  7C 08 02 A6 */	mflr r0
@@ -612,8 +613,8 @@ lbl_8034B35C:
 
 #else
 
-bool OSCreateThread(OSThread* arg0, OSThreadFunc arg1, OSThread_Unk1* arg2,
-                    OSThread_Unk2* arg3, u32 arg4, s32 arg5, u16 arg6)
+bool OSCreateThread(OSThread* thread, void* (*func)(void*), void* param,
+                    void* stack, u32 stackSize, OSPriority priority, u16 attr)
 {
     NOT_IMPLEMENTED;
 }

@@ -7,6 +7,7 @@
 #include <platform.h>
 
 #include <dolphin/os/OSContext.h>
+#include <dolphin/os/OSException.h>
 
 extern vu32 __DIRegs[0x10] AT_ADDRESS(0xCC006000);
 

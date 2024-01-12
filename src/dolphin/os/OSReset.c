@@ -1,6 +1,6 @@
 #include <__mem.h>
 #include <placeholder.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSAudioSystem.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSInterrupt.h>
@@ -8,7 +8,7 @@
 #include <dolphin/os/OSReset.h>
 #include <dolphin/os/OSRtc.h>
 #include <dolphin/os/OSThread.h>
-#include <dolphin/pad/Pad.h>
+#include <dolphin/pad/pad.h>
 
 typedef struct OSResetQueue {
     OSResetFunctionInfo* first;

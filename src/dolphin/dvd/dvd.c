@@ -6,7 +6,7 @@
 #include <dolphin/dvd/dvdlow.h>
 #include <dolphin/dvd/dvdqueue.h>
 #include <dolphin/dvd/fstload.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSInterrupt.h>
@@ -99,7 +99,7 @@ void DVDInit(void)
         bootInfo = (void*) 0x80000000;
         currID = (void*) 0x80000000;
         __OSSetInterruptHandler(0x15,
-                                (OSInterruptHandler) __DVDInterruptHandler);
+                                (__OSInterruptHandler) __DVDInterruptHandler);
         __OSUnmaskInterrupts(0x400);
         OSInitThreadQueue(&__DVDThreadQueue);
         IO.unk0 = 0x2A;

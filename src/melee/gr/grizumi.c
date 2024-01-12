@@ -15,7 +15,7 @@
 #include "mp/mplib.h"
 
 #include <dolphin/gx/GXTexture.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/displayfunc.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>

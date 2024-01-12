@@ -4,7 +4,7 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-#include <dolphin/pad/Pad.h>
+#include <dolphin/pad/pad.h>
 #include <baselib/rumble.h>
 
 typedef enum _HSD_FlushType {

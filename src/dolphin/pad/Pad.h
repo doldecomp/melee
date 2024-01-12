@@ -2,8 +2,9 @@
 #define _PAD_H_
 
 #include <platform.h>
-#include <dolphin/os/forward.h>
 #include <dolphin/pad/forward.h>
+
+#include <dolphin/os.h>
 
 #define PAD_CHANMAX 4
 
@@ -23,6 +24,8 @@ struct PADStatus {
     u8 analogB;
     s8 err;
 };
+
+extern u32 __PADFixBits;
 
 void PADControlMotor(int chan, u32 command);
 void VISetBlack(bool);

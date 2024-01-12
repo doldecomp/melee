@@ -12,7 +12,7 @@
 #include "un/un_2FC9.h"
 
 #include <placeholder.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
