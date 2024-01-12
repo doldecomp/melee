@@ -881,9 +881,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/dolphin/thp/THPDec.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/dolphin/jpeg/jpegdec.s.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/dolphin/base/PPCArch.c.o\
 
 TEXT_O_FILES +=\
