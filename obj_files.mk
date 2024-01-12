@@ -36,7 +36,6 @@ TEXT_O_FILES :=\
     $(BUILD_DIR)/asm/melee/lb/lbgx.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbanim.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbmthp.s.o\
-    $(BUILD_DIR)/asm/melee/lb/lbjpeg.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbbgflash.s.o\
 
 TEXT_O_FILES +=\
@@ -879,9 +878,6 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/dolphin/thp/THPDec.s.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/dolphin/jpeg/jpegdec.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/dolphin/base/PPCArch.c.o\
