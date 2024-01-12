@@ -761,7 +761,7 @@ u32 EXIGetState(EXIChannel chan)
     return exi->state;
 }
 
-static void UnlockedHandler(EXIChannel chan, OSContext* context)
+static void UnlockedHandler(s32 chan, OSContext* context)
 {
     u32 id;
     EXIGetID(chan, 0, &id);
