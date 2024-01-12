@@ -67,15 +67,3 @@ OSSerial_804A7FB8:
 OSSerial_804D5C28:
     .4byte 0x00000000
     .4byte 0x00000000
-
-.section .sbss
-    .balign 8
-.global RunQueueBits
-RunQueueBits:
-    .skip 0x4
-.global OSSerial_804D73DC
-OSSerial_804D73DC:
-    .skip 0x4
-.global Reschedule
-Reschedule:
-    .skip 0x4
