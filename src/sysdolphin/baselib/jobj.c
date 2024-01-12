@@ -3,7 +3,7 @@
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/class.h>
 #include <baselib/displayfunc.h>
 #include <baselib/dobj.h>

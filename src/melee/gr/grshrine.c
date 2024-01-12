@@ -9,7 +9,7 @@
 
 #include <math.h>
 #include <dolphin/mtx/types.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/gobjgxlink.h>
 
 static void grShrine_80201C60(int);

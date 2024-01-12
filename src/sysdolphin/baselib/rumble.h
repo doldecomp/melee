@@ -4,7 +4,7 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-#include <dolphin/pad/Pad.h>
+#include <dolphin/pad/pad.h>
 
 struct HSD_RumbleData {
     u8 last_status;

@@ -10,7 +10,7 @@
 #include "mp/mplib.h"
 
 #include <dolphin/mtx/types.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 

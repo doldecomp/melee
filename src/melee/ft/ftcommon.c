@@ -35,7 +35,7 @@
 #include "un/un_2FC9.h"
 
 #include <dolphin/mtx/types.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/rumble.h>
 #include <melee/it/items/itpeachparasol.h>
 

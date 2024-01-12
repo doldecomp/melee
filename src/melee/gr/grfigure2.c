@@ -7,7 +7,7 @@
 #include "gr/grzakogenerator.h"
 #include "lb/lb_00F9.h"
 
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/gobjgxlink.h>
 
 static StageCallbacks grEF2_803E6328[3] = {

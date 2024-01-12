@@ -7,7 +7,7 @@
 #include "gr/stage.h"
 #include "lb/lb_00F9.h"
 
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/gobjgxlink.h>
 
 static void grTMars_80221EF4(int);

@@ -9,7 +9,7 @@
 #include "inlines.h"
 #include "math.h"
 
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 
 FtWalkType ftWalkCommon_GetWalkType(HSD_GObj* gobj)
 {

@@ -12,7 +12,7 @@
 
 #include <placeholder.h>
 #include <dolphin/mtx/types.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <MSL/trigf.h>
 
 // 80041C78 https://decomp.me/scratch/V6eYQ

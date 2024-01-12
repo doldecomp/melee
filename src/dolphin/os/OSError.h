@@ -21,6 +21,9 @@
 #define OS_ERROR_PROTECTION 15
 #define OS_ERROR_MAX (OS_ERROR_THERMAL_INTERRUPT + 1)
 
+typedef u16 OSError;
+typedef void (*OSErrorHandler)(OSError error, OSContext* context, ...);
+
 OSErrorHandler OSSetErrorHandler(OSError error, OSErrorHandler handler);
 void __OSUnhandledException(u8 error, OSContext* context, u32 dsisr, u32 dar);
 

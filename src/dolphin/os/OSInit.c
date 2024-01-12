@@ -11,7 +11,7 @@
 #include <dolphin/db/db.h>
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/os/init/__start.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSAudioSystem.h>

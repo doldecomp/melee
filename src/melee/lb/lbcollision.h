@@ -4,8 +4,6 @@
 #include "ft/forward.h"
 #include "lb/forward.h"
 
-#include "dolphin/mtx/types.h"
-
 #include <placeholder.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/jobj.h>

@@ -1,7 +1,7 @@
 #include <stdarg.h>
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXPixel.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/vi/vi.h>

@@ -2,7 +2,8 @@
 #define _OSCACHE_H_
 
 #include <platform.h>
-#include <dolphin/os/forward.h>
+
+#include <dolphin/os.h>
 
 void DCFlushRange(void* addr, size_t nbytes);
 void DCStoreRange(void* addr, size_t nbytes);
@@ -22,7 +23,6 @@ u32 LCStoreData(void* destAddr, void* srcAddr, u32 nBytes);
 void LCQueueWait(register u32 len);
 void L2GlobalInvalidate(void);
 void L2Enable(void);
-void DMAErrorHandler(OSError error, OSContext* context, ...);
 void LCStoreBlocks(void* dst, void* src, u32 nblocks);
 
 #endif

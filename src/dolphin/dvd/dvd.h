@@ -14,7 +14,7 @@ struct bb2struct {
     void* FSTLocationInRam;
 };
 
-typedef struct {
+typedef struct DVDDiskID {
     char gameName[4];
     char company[2];
     u8 diskNumber;

@@ -32,7 +32,7 @@
 #include <placeholder.h>
 #include <runtime.h>
 #include <dolphin/mtx/types.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/archive.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>

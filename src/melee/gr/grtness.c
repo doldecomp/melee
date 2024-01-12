@@ -7,7 +7,7 @@
 #include "gr/stage.h"
 #include "lb/lb_00F9.h"
 
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 
 static void grTNess_802225D0(int);
 static void grTNess_802225D4(void);

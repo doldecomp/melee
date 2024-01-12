@@ -15,14 +15,14 @@
 #include "lb/lbtime.h"
 
 #include <placeholder.h>
+#include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/gx/GXInit.h>
 #include <dolphin/gx/GXMisc.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSInit.h>
-#include <dolphin/os/OSMemory.h>
-#include <dolphin/pad/Pad.h>
+#include <dolphin/pad/pad.h>
 #include <dolphin/vi/vi.h>
 #include <baselib/baselib_unknown_002.h>
 #include <baselib/controller.h>

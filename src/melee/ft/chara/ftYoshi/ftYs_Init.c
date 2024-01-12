@@ -20,7 +20,7 @@
 #include "ftCommon/ftCo_Guard.h"
 
 #include <placeholder.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 
 MotionState ftYs_Init_MotionStateTable[ftYs_MS_SelfCount] = {
     {

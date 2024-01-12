@@ -1,9 +1,11 @@
 #include <placeholder.h>
+#include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSRtc.h>
 #include <dolphin/os/OSSerial.h>
 #include <dolphin/os/OSTime.h>
+#include <dolphin/pad/pad.h>
 
 extern struct {
     enum_t status;
@@ -25,7 +27,7 @@ extern struct {
     u8 pad[32 - 4];
 } Packet[];
 
-bool SIIsChanBusy(enum_t status)
+bool SIIsChanBusy(s32 status)
 {
     bool result = true;
 
@@ -266,10 +268,14 @@ static void CompleteTransfer(void)
 
 extern unk_t OSSerial_804D73C8;
 extern unk_t VIGetCurrentLine();
-extern unk_t OSCancelAlarm();
+
+static bool SIGetResponseRaw(s32 chan);
+static void GetTypeCallback(s32 chan, u32 error, OSContext* context);
+static bool __SITransfer(void);
+static bool SIEnablePollingInterrupt(bool enable);
 
 #pragma push
-asm void SIInterruptHandler(void)
+asm static void SIInterruptHandler(void)
 { // clang-format off
     nofralloc
 /* 80349814 003463F4  7C 08 02 A6 */	mflr r0
@@ -501,7 +507,7 @@ lbl_80349B44:
 
 #else
 
-void SIInterruptHandler(void)
+static void SIInterruptHandler(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -511,7 +517,7 @@ void SIInterruptHandler(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void SIEnablePollingInterrupt(void)
+asm static bool SIEnablePollingInterrupt(bool enable)
 { // clang-format off
     nofralloc
 /* 80349B58 00346738  7C 08 02 A6 */	mflr r0
@@ -561,7 +567,7 @@ lbl_80349BC4:
 
 #else
 
-void SIEnablePollingInterrupt(void)
+static bool SIEnablePollingInterrupt(bool enable)
 {
     NOT_IMPLEMENTED;
 }
@@ -573,7 +579,7 @@ void SIEnablePollingInterrupt(void)
 extern unk_t OSSerial_804A7F58;
 
 #pragma push
-asm void SIRegisterPollingHandler(void)
+asm bool SIRegisterPollingHandler(__OSInterruptHandler handler)
 { // clang-format off
     nofralloc
 /* 80349BF0 003467D0  7C 08 02 A6 */	mflr r0
@@ -637,7 +643,7 @@ lbl_80349CA4:
 
 #else
 
-void SIRegisterPollingHandler(void)
+bool SIRegisterPollingHandler(__OSInterruptHandler handler)
 {
     NOT_IMPLEMENTED;
 }
@@ -647,7 +653,7 @@ void SIRegisterPollingHandler(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void SIUnregisterPollingHandler(void)
+asm bool SIUnregisterPollingHandler(__OSInterruptHandler handler)
 { // clang-format off
     nofralloc
 /* 80349CBC 0034689C  7C 08 02 A6 */	mflr r0
@@ -721,7 +727,7 @@ lbl_80349D98:
 
 #else
 
-void SIUnregisterPollingHandler(void)
+bool SIUnregisterPollingHandler(__OSInterruptHandler handler)
 {
     NOT_IMPLEMENTED;
 }
@@ -787,7 +793,7 @@ void SIInit(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void __SITransfer(void)
+asm static bool __SITransfer(void)
 { // clang-format off
     nofralloc
 /* 80349E44 00346A24  7C 08 02 A6 */	mflr r0
@@ -939,7 +945,7 @@ lbl_8034A03C:
 
 #else
 
-void __SITransfer(void)
+static bool __SITransfer(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -951,7 +957,7 @@ void __SITransfer(void)
 extern unk_t OSSerial_8040236C;
 
 #pragma push
-asm void SIGetStatus(void)
+asm u32 SIGetStatus(s32 chan)
 { // clang-format off
     nofralloc
 /* 8034A050 00346C30  7C 08 02 A6 */	mflr r0
@@ -991,7 +997,7 @@ lbl_8034A0AC:
 
 #else
 
-void SIGetStatus(void)
+u32 SIGetStatus(s32 chan)
 {
     NOT_IMPLEMENTED;
 }
@@ -1012,11 +1018,11 @@ void SITransferCommands(void)
     SIRegs[4].x8 = 0x80000000;
 }
 
-s32 SISetXY(u32 arg0, u32 arg1)
+u32 SISetXY(u32 x, u32 y)
 {
     bool intr;
-    u32 temp_r4 = (arg0 << 0x10);
-    temp_r4 |= (arg1 << 8);
+    u32 temp_r4 = (x << 0x10);
+    temp_r4 |= (y << 8);
     intr = OSDisableInterrupts();
     OSSerial_80402358.xy &= 0xFC0000FF;
     OSSerial_80402358.xy |= temp_r4;
@@ -1028,7 +1034,7 @@ s32 SISetXY(u32 arg0, u32 arg1)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void SIEnablePolling(u32 chan_mask)
+asm u32 SIEnablePolling(u32 poll)
 { // clang-format off
     nofralloc
 /* 8034A150 00346D30  7C 08 02 A6 */	mflr r0
@@ -1077,7 +1083,7 @@ lbl_8034A1D8:
 
 #else
 
-void SIEnablePolling(u32 chan_mask)
+u32 SIEnablePolling(u32 poll)
 {
     NOT_IMPLEMENTED;
 }
@@ -1087,7 +1093,7 @@ void SIEnablePolling(u32 chan_mask)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void SIDisablePolling(u32 chan_mask)
+asm u32 SIDisablePolling(u32 poll)
 { // clang-format off
     nofralloc
 /* 8034A1EC 00346DCC  7C 08 02 A6 */	mflr r0
@@ -1124,7 +1130,7 @@ lbl_8034A244:
 
 #else
 
-void SIDisablePolling(u32 chan_mask)
+u32 SIDisablePolling(u32 poll)
 {
     NOT_IMPLEMENTED;
 }
@@ -1134,7 +1140,7 @@ void SIDisablePolling(u32 chan_mask)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void SIGetResponseRaw(void)
+asm static bool SIGetResponseRaw(s32 chan)
 { // clang-format off
     nofralloc
 /* 8034A258 00346E38  7C 08 02 A6 */	mflr r0
@@ -1208,7 +1214,7 @@ void SIGetResponseRaw(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void SIGetResponse(EXIChannel chan, u32 data[2])
+asm bool SIGetResponse(s32 chan, void* data)
 { // clang-format off
     nofralloc
 /* 8034A32C 00346F0C  7C 08 02 A6 */	mflr r0
@@ -1267,7 +1273,7 @@ lbl_8034A3D0:
 
 #else
 
-void SIGetResponse(EXIChannel chan, u32 data[2])
+bool SIGetResponse(s32 chan, void* data)
 {
     NOT_IMPLEMENTED;
 }
@@ -1332,10 +1338,9 @@ static void AlarmHandler(void)
 
 #ifdef MWERKS_GEKKO
 
-extern unk_t OSSetAlarm();
-
 #pragma push
-asm void SITransfer(void)
+asm bool SITransfer(s32 chan, void* output, u32 outputBytes, void* input,
+                    u32 inputBytes, SICallback callback, OSTime delay)
 { // clang-format off
     nofralloc
 /* 8034A47C 0034705C  7C 08 02 A6 */	mflr r0
@@ -1441,7 +1446,8 @@ lbl_8034A5D4:
 
 #else
 
-void SITransfer(void)
+bool SITransfer(s32 chan, void* output, u32 outputBytes, void* input,
+                u32 inputBytes, SICallback callback, OSTime delay)
 {
     NOT_IMPLEMENTED;
 }
@@ -1451,7 +1457,7 @@ void SITransfer(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void GetTypeCallback(void)
+asm static void GetTypeCallback(s32 chan, u32 error, OSContext* context)
 { // clang-format off
     nofralloc
 /* 8034A5E8 003471C8  7C 08 02 A6 */	mflr r0
@@ -1480,10 +1486,10 @@ asm void GetTypeCallback(void)
 /* 8034A644 00347224  57 40 07 3F */	clrlwi. r0, r26, 0x1c
 /* 8034A648 00347228  90 65 01 20 */	stw r3, 0x120(r5)
 /* 8034A64C 0034722C  7C 84 DC 30 */	srw r4, r4, r27
-/* 8034A650 00347230  80 6D BD 30 */	lwz r3, __PADFixBits(r13)
+/* 8034A650 00347230  80 6D BD 30 */	lwz r3, __PADFixBits
 /* 8034A654 00347234  83 9E 00 00 */	lwz r28, 0(r30)
 /* 8034A658 00347238  7C 60 20 78 */	andc r0, r3, r4
-/* 8034A65C 0034723C  90 0D BD 30 */	stw r0, __PADFixBits(r13)
+/* 8034A65C 0034723C  90 0D BD 30 */	stw r0, __PADFixBits
 /* 8034A660 00347240  7C 7A 20 38 */	and r26, r3, r4
 /* 8034A664 00347244  40 82 00 24 */	bne lbl_8034A688
 /* 8034A668 00347248  57 83 00 C8 */	rlwinm r3, r28, 0, 3, 4
@@ -1637,7 +1643,7 @@ lbl_8034A86C:
 
 #else
 
-void GetTypeCallback(void)
+static void GetTypeCallback(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -1788,7 +1794,7 @@ u32 SIGetType(s32 arg0)
 extern unk_t OSSerial_804A7F18;
 
 #pragma push
-asm void SIGetTypeAsync(s32, SICallback)
+asm u32 SIGetTypeAsync(s32 chan, SITypeAndStatusCallback callback)
 { // clang-format off
     nofralloc
 /* 8034AA44 00347624  7C 08 02 A6 */	mflr r0
@@ -1880,7 +1886,7 @@ lbl_8034AB54:
 
 #else
 
-void SIGetTypeAsync(s32 arg0, SICallback arg1)
+u32 SIGetTypeAsync(s32 chan, SITypeAndStatusCallback callback)
 {
     NOT_IMPLEMENTED;
 }

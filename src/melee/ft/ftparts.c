@@ -11,7 +11,7 @@
 #include <placeholder.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/displayfunc.h>
 #include <baselib/jobj.h>
 #include <baselib/mobj.h>
@@ -963,7 +963,7 @@ void ftParts_80074170(void)
 
 #endif
 
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 
 #ifdef MWERKS_GEKKO
 

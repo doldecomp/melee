@@ -2,7 +2,7 @@
 
 #include <__mem.h>
 #include <dolphin/dvd/dvd.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSArena.h>
 
 static u32 status;
