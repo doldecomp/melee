@@ -190,7 +190,7 @@ static void DecrementerExceptionCallback(register OSException exception,
 static asm void DecrementerExceptionHandler(register __OSException exception,
                                             register OSContext* context)
 { // clang-format off
-    nofralloc 
-    OS_EXCEPTION_SAVE_GPRS(context) 
+    nofralloc
+    OS_EXCEPTION_SAVE_GPRS(context)
     b DecrementerExceptionCallback
 } // clang-format on
