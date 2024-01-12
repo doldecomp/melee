@@ -14,7 +14,8 @@ static struct OSAlarmQueue {
     OSAlarm* tail;
 } AlarmQueue;
 
-void DecrementerExceptionHandler(__OSException exception, OSContext* context);
+static void DecrementerExceptionHandler(__OSException exception,
+                                        OSContext* context);
 
 void OSInitAlarm(void)
 {
