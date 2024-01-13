@@ -5,8 +5,11 @@
 
 #include "it/types.h"
 
-void it_802ADBE4(Item_GObj*, Item_GObj*);
+#include <placeholder.h>
 
-extern ItemStateTable it_803F6C88[];
+/* 2ADA1C */ /* static */ void it_802ADA1C(Vec3* pos, Vec3* vel,
+                                           float facing_dir);
+/* 2ADBE4 */ void it_802ADBE4(Item_GObj*, Item_GObj*);
+/* 3F6C88 */ extern ItemStateTable it_803F6C88[];
 
 #endif

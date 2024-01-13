@@ -20,7 +20,7 @@ static HSD_CObj* current;
 
 extern const float HSD_CObj_804DE474; // 0.01745329252F
 
-#define DegToRad(a) ((a) * 0.01745329252F)
+#define DegToRad(a) ((a) *0.01745329252F)
 
 static int CObjInit(HSD_Class* o);
 static int CObjLoad(HSD_CObj* cobj, HSD_CObjDesc* cobjdesc);

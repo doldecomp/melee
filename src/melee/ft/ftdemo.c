@@ -17,8 +17,8 @@
 #include "ft/ftparts.h"
 #include "ftCommon/ftCo_09CB.h"
 #include "ftCommon/ftCo_09F4.h"
-#include "ftCommon/ftCo_Init.h"
 #include "ftCommon/ftCo_DemoCallback0.h"
+#include "ftCommon/ftCo_Init.h"
 #include "lb/lbshadow.h"
 
 #include <math.h>

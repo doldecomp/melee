@@ -162,5 +162,6 @@ bool itColl_BounceOffVictim(Item_GObj*);
 void it_8026E0F4(Item_GObj*);
 void it_80272BA4(Item_GObj*);
 bool it_80273030(Item_GObj*);
+/* 26DFB0 */ bool it_8026DFB0(void);
 
 #endif
