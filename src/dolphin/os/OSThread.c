@@ -496,7 +496,7 @@ static void SelectThread(bool yield)
 
 #endif
 
-void __OSReschedule()
+void __OSReschedule(void)
 {
     if (!RunQueueHint) {
         return;
