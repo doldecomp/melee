@@ -11,7 +11,7 @@
 /* 274C88 */ void it_80274C88(Item_GObj* gobj);
 /* 274ECC */ void it_80274ECC(Item_GObj* gobj, bool arg1);
 /* 274F48 */ void it_80274F48(Item_GObj* gobj, int bone_attach_id,
-                              HSD_GObj* arg2, int arg3);
+                              HSD_GObj* arg2, Fighter_Part arg3);
 /* 275070 */ void it_80275070(Item_GObj* gobj, int bone_attach_id);
 /* 279FF8 */ void it_80279FF8(Item_GObj*);
 /* 27A09C */ void it_8027A09C(Item_GObj*);

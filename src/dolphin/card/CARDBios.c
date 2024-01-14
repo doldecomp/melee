@@ -351,7 +351,7 @@ s32 __CARDStart(s32 chan, CARDCallback txCallback, CARDCallback exiCallback)
 #define AD1EX(x) ((u8) (AD1(x) | 0x80));
 #define AD2(x) ((u8) (((x) >> 9) & 0xff))
 #define AD3(x) ((u8) (((x) >> 7) & 0x03))
-#define BA(x) ((u8) ((x) &0x7f))
+#define BA(x) ((u8) ((x) & 0x7f))
 
 s32 __CARDReadSegment(s32 chan, CARDCallback callback)
 {
