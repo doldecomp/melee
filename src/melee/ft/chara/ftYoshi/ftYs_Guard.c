@@ -762,9 +762,9 @@ bool ftYs_Shield_8012CC1C(HSD_GObj* gobj)
     return false;
 }
 
-void ftYs_Shield_8012CC6C(HSD_GObj* gobj)
+Fighter_Part ftYs_Shield_8012CC6C(ftYs_GObj* gobj)
 {
-    ftParts_8007500C(GET_FIGHTER(gobj), 52);
+    return ftParts_8007500C(GET_FIGHTER(gobj), 52);
 }
 
 extern f32 const ftYs_Init_804D9A38;

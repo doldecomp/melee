@@ -28,7 +28,7 @@ extern Article** it_804D6D30;  // pokemon items
 extern Article** it_804D6D38;  // character items
 extern Article* it_804A0F60[]; // stage items
 
-void it_8027B4A4(HSD_GObj*, u32);
+void it_8027B4A4(Fighter_GObj*, Item_GObj*);
 void* it_8027B5B0(s32, s32, HSD_JObj*, s32, s32);
 void it_80274EE8(u32);
 

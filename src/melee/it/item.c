@@ -2004,7 +2004,7 @@ void func_8026A8EC_inline3(HSD_GObj* gobj)
     }
 }
 
-void Item_8026A8EC(HSD_GObj* gobj)
+void Item_8026A8EC(Item_GObj* gobj)
 {
     Item* ip = (Item*) HSD_GObjGetUserData(gobj);
 
