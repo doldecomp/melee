@@ -658,7 +658,7 @@ void ftNs_SpecialHi_Enter(
     ftNs_SpecialAirHi_Enter(gobj);
     return;
 
-block_stuff : {
+block_stuff: {
 #ifdef MUST_MATCH
     fighter_data3 = fighter_data3 = GET_FIGHTER(gobj);
 #else
