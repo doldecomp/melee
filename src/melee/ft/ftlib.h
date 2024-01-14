@@ -16,7 +16,7 @@ f32 ftLib_800865C0(HSD_GObj*);
 s32 ftLib_800865CC(HSD_GObj*);
 void ftLib_800865D8(HSD_GObj*, f32*, f32*);
 void* ftLib_800865F0(HSD_GObj*);
-void* ftLib_80086630(HSD_GObj*, s32);
+void* ftLib_80086630(Fighter_GObj*, Fighter_Part part);
 void ftLib_80086644(HSD_GObj*, Vec3*);
 void ftLib_80086664(HSD_GObj*, Vec3*);
 void ftLib_80086684(HSD_GObj*, Vec3*);
