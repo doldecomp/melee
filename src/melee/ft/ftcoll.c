@@ -12,6 +12,7 @@
 #include "inlines.h"
 
 #include "ef/efsync.h"
+#include "ft/ft_0881.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftchangeparam.h"

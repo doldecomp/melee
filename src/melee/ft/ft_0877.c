@@ -267,6 +267,7 @@ void ft_80087C64(HSD_GObj* gobj, s32 arg1)
     fp->x1988 = arg1;
 }
 
+/// Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx)
 s32 ft_80087C70(Fighter* fp, s32 arg1)
 {
     u8 temp_r3;
@@ -568,52 +569,49 @@ s32 ft_80087D0C(Fighter* fighter, s32 arg1)
     switch (ssm_id) {
     case 0:
         switch (sfx) {
-        case 0x197:
-        case 0x1D3:
-        case 0x1F7:
-        case 0x203:
-        case 0x46D03:
-        case 0x1FD:
-        case 0x1E5:
-        case 0x1EB:
-        case 0x1DF:
-        case 0x1D9:
-        case 0x1B5:
-        case 0x1C7:
-        case 0x1CD:
-        case 0x1C1:
-        case 0x1BB:
-        case 0x1A9:
-        case 0x1AF:
-        case 0x1A3:
-        case 0x19D:
-        case 0x179:
-        case 0x18B:
-        case 0x191:
-        case 0x185:
-        case 0x17F:
-        case 0x173:
-            sfx = ft_80087C70(
-                fighter,
-                sfx); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx)
+        case 407:
+        case 467:
+        case 503:
+        case 515:
+        case 290051:
+        case 509:
+        case 485:
+        case 491:
+        case 479:
+        case 473:
+        case 437:
+        case 455:
+        case 461:
+        case 449:
+        case 443:
+        case 425:
+        case 431:
+        case 419:
+        case 413:
+        case 377:
+        case 395:
+        case 401:
+        case 389:
+        case 383:
+        case 371:
+            sfx = ft_80087C70(fighter, sfx);
             if (fighter->x2223_b7) {
                 sfx += 3;
             }
             break;
-        case 0x167:
-        case 0x170:
-        case 0x16D:
-        case 0x16A:
-        case 0x158:
-        case 0x161:
-        case 0x164:
-        case 0x15E:
-        case 0x15B:
-        case 0x152:
-        case 0x155:
-        case 0x14F:
-        case 0x14C:
-            // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx)
+        case 359:
+        case 368:
+        case 365:
+        case 362:
+        case 344:
+        case 353:
+        case 356:
+        case 350:
+        case 347:
+        case 338:
+        case 341:
+        case 335:
+        case 332:
             sfx = ft_80087C70(fighter, sfx);
             break;
         }

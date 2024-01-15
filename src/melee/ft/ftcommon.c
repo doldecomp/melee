@@ -13,6 +13,8 @@
 #include "math.h"
 
 #include "ef/eflib.h"
+#include "ft/ft_0881.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"

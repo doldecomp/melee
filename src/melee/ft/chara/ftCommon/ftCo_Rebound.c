@@ -6,6 +6,8 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0881.h"
+#include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 
 /* 099E44 */ static void ftCo_80099E44(ftCo_GObj* gobj);

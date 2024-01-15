@@ -5,6 +5,8 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0881.h"
+#include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 
 #include <placeholder.h>

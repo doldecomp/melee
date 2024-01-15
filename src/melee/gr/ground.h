@@ -121,7 +121,7 @@
                                   HSD_JObj*, HSD_JObj*);
 /* 1C4FAC */ void Ground_801C4FAC(void);
 /* 1C53EC */ void Ground_801C53EC(u32);
-/* 1C5414 */ void Ground_801C5414(UNK_T, s32);
+/* 1C5414 */ void Ground_801C5414(int, int);
 /* 1C5440 */ void Ground_801C5440(Ground* gp, s32 i, u32);
 /* 1C54DC */ bool Ground_801C54DC(Ground* gp, s32 i);
 /* 1C5544 */ void Ground_801C5544(Ground*, s32);

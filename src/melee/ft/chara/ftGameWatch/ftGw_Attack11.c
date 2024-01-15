@@ -7,6 +7,8 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0881.h"
+#include "ft/ft_0892.h"
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_Attack1.h"
 #include "ftCommon/ftCo_ItemGet.h"
