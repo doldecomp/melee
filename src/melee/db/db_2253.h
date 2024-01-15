@@ -1,19 +1,18 @@
-#ifndef MELEE_DB_DB_UNKNOWN_001_H
-#define MELEE_DB_DB_UNKNOWN_001_H
+#ifndef GALE01_225374
+#define GALE01_225374
 
 #include <platform.h>
+#include "ft/forward.h"
+#include "it/forward.h"
 
-#include <baselib/gobj.h>
-
-extern enum_t g_debugLevel;
-
-void db_80225374(void);
-void db_80228C4C(void);
-void db_8022886C(void);
-void db_80225D2C(void);
-void db_80225D40(void);
-void db_80228A64(void);
-void db_80225DD8(HSD_GObj* item, HSD_GObj* owner);
-void db_80225D64(HSD_GObj* item, HSD_GObj* owner);
+/* 225374 */ void db_80225374(void);
+/* 225D2C */ void db_80225D2C(void);
+/* 225D40 */ void db_80225D40(void);
+/* 225D64 */ void db_80225D64(Item_GObj* item, Fighter_GObj* owner);
+/* 225DD8 */ void db_80225DD8(Item_GObj* item, Fighter_GObj* owner);
+/* 22886C */ void db_8022886C(void);
+/* 228A64 */ void db_80228A64(void);
+/* 228C4C */ void db_80228C4C(void);
+/* 4D4A08 */ extern enum_t g_debugLevel;
 
 #endif

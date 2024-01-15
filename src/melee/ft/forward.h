@@ -54,6 +54,7 @@ typedef struct ftMaterial_UnkTevStruct ftMaterial_UnkTevStruct;
 typedef struct ftSubactionList ftSubactionList;
 typedef struct gmScriptEventDefault gmScriptEventDefault;
 typedef u32 MotionFlags;
+typedef struct FtCollisionData FtCollisionData;
 
 typedef void (*FighterEvent)(Fighter* fp);
 typedef char* (*Fighter_MotionFileStringGetter)(enum_t arg0);

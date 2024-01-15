@@ -8,6 +8,8 @@
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0881.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcoll.h"
 #include "ft/ftparts.h"

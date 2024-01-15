@@ -4,6 +4,8 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0881.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
 #include "ftMario/ftMr_SpecialN.h"
 #include "it/it_27CF.h"

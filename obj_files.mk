@@ -97,7 +97,10 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/ftlib.c.o\
     $(BUILD_DIR)/src/melee/ft/ftwaitanim.c.o\
     $(BUILD_DIR)/src/melee/ft/ft_0877.c.o\
-    $(BUILD_DIR)/asm/melee/ft/ft_0877.s.o\
+    $(BUILD_DIR)/src/melee/ft/ft_0881.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0892.s.o\
+
+TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Wait.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_08A6.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Attack1.c.o\
@@ -182,6 +185,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureWaitKirby.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ThrownKirby.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_3C61.s.o\
+
+TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/ftdemo.c.o\
     $(BUILD_DIR)/src/melee/ft/ft_0BEC.c.o\
     $(BUILD_DIR)/src/melee/ft/ft_0BEF.c.o\
