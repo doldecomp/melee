@@ -1,6 +1,9 @@
+#include "debug.h"
+
+#include "synth.h"
+
 #include <dolphin/os.h>
 #include <dolphin/os/OSContext.h>
-#include <baselib/debug.h>
 
 struct UnkStruct80400430 {
     char filler0[0x52];
@@ -9,43 +12,15 @@ struct UnkStruct80400430 {
     int (*unk84)(s32, s32, s32*, s32);
 };
 
-extern void (*HSD_Synth_804D7710)(s32, s32);
-extern void (*HSD_Synth_804D7714)(OSContext*, ...);
-extern int (*HSD_Synth_804D7718)(s32, s32, s32*, s32);
-
 extern struct UnkStruct80400430 __files;
 
-OSContext HSD_Debug_804C2608;
+struct DebugContext {
+    OSContext context;
+    u8 unk[0x10];
+} HSD_Debug_804C2608;
 
 #ifdef MUST_MATCH
-/*
- * Unused symbol probably used by the myStrippedFunction below, but since it
- * got stripped there's no telling what it was for.
- *
- * Regarding the pragma, normally this works, but in this case the Metrowerks
- * toolchain is out for fuckin' blood or something. See the FORCEACTIVE section
- * we had to add in the LCF just to get the compiler to stop removing this.
- */
-#pragma push
-#pragma force_active on
-extern char HSD_Debug_804C28D0[0x10];
-#pragma pop
-#endif
-
-char HSD_Debug_804C28D0[0x10]; // unk space. what is this?
-
-static char HSD_Debug_804D6010[1] = "";
-
-#ifdef MUST_MATCH
-// required stripped asm function to get the peephole off behavior in early
-// CW versions to occur.
-static void asm myStrippedFunction()
-{ // clang-format off
-    nop
-    nop
-    nop
-    nop
-} // clang-format on
+#pragma peephole off
 #endif
 
 int HSD_Debug_8038815C(s32 arg0, s32 arg1, s32* arg2, s32 arg3)
@@ -69,15 +44,15 @@ void HSD_Debug_803881E4(void)
 void __assert(char* str, u32 arg1, char* arg2)
 {
     OSReport("assertion \"%s\" failed", arg2);
-    HSD_Panic(str, arg1, HSD_Debug_804D6010);
+    HSD_Panic(str, arg1, "");
 }
 
 void HSD_Panic(char* arg0, u32 line, char* arg2)
 {
     if (HSD_Synth_804D7714 != NULL) {
-        OSSaveContext(&HSD_Debug_804C2608);
+        OSSaveContext(&HSD_Debug_804C2608.context);
         OSReport("%s in %s on line %d.\n", arg2, arg0, line);
-        HSD_Synth_804D7714(&HSD_Debug_804C2608);
+        HSD_Synth_804D7714(&HSD_Debug_804C2608.context);
     }
     OSPanic(arg0, line, arg2);
 }
