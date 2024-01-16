@@ -13,6 +13,7 @@
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/gx/GXTev.h>
+#include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/baselib_shared_data_003.h>

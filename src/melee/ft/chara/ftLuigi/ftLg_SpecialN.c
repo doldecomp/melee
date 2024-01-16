@@ -15,6 +15,7 @@
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_Wait.h"
 #include "it/it_27CF.h"
+#include "it/items/itluigifireball.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx/types.h>

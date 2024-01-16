@@ -1,10 +1,12 @@
-#include <melee/db/db_2253.h>
-#include <melee/ft/chara/ftFox/ftFx_SpecialS.h>
-#include <melee/ft/ftlib.h>
-#include <melee/it/it_266F.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/item.h>
-#include <melee/it/items/itfoxillusion.h>
+#include "itfoxillusion.h"
+
+#include "db/db_2253.h"
+#include "ft/chara/ftFox/ftFx_SpecialS.h"
+#include "ft/ftlib.h"
+#include "it/it_266F.h"
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/item.h"
 
 ItemStateTable it_803F6818[] = {
     {
