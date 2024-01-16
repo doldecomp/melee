@@ -692,7 +692,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itpeachtoad.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itpeachtoadspore.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itnessyoyo.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itluigifireball.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itluigifireball.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itdrmariopill.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itclimbersice.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itclimbersblizzard.s.o\

@@ -406,7 +406,7 @@ struct Item {
     u32 xBB4;
     u32 xBB8;
     DynamicBoneTable* xBBC_dynamicBoneTable;
-    unk_t xBC0;
+    UNK_T xBC0;
     u8 xBC4;
     u8 xBC5;
     u8 xBC6;
