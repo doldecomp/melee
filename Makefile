@@ -98,17 +98,26 @@ ifeq ($(GENERATE_MAP),1)
 	LDFLAGS += -map $(MAP)
 endif
 
+# TODO:-W all
+
 CFLAGS = -msgstyle $(MSG_STYLE) \
 		-nowraplines \
 		-cwd source \
 		-Cpp_exceptions off \
-		-proc gekko -fp hard \
-		-fp_contract on -O4,p \
+		-proc gekko \
+		-fp hardware \
+		-align powerpc \
+		-fp_contract on \
+		-O4,p \
 		-enum int \
 		-nodefaults \
 		-inline auto \
-		$(INCLUDES) \
-		-maxerrors $(MAX_ERRORS)
+		-pragma "cats off" \
+		-pragma "warn_notinlined off" \
+		-RTTI off \
+		-str reuse \
+		-maxerrors $(MAX_ERRORS) \
+		$(INCLUDES)
 
 ifneq ($(NON_MATCHING),1)
 	ASFLAGS += --defsym MUST_MATCH=1
