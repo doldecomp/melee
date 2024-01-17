@@ -20,3 +20,6 @@ indent_style = tab
 
 [*.sha1]
 insert_final_newline = false
+
+[/config/GALE01/*.txt]
+indent_style = tab

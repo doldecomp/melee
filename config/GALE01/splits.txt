@@ -1,0 +1,13 @@
+Sections:
+	.init       type:code align:8
+	extab       type:rodata align:8
+	extabindex  type:rodata align:8
+	.text       type:code align:8
+	.ctors      type:rodata align:8
+	.dtors      type:rodata align:8
+	.rodata     type:rodata align:8
+	.data       type:data align:8
+	.bss        type:bss align:8
+	.sdata      type:data align:8
+	.sbss       type:bss align:8
+	.sdata2     type:rodata align:8
