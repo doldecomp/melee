@@ -9,7 +9,9 @@ ctx_includes.h
 build.ninja
 objdiff.json
 orig/*/*
-!orig/*/.gitkeep
+!orig/*/sys
+orig/*/sys/*
+!orig/*/sys/.gitkeep
 /*.txt
 
 # Python
