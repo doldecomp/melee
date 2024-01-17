@@ -1,4 +1,4 @@
-#include "baselib/mobj.h"
+#include "mobj.h"
 
 #include <string.h>
 #include <dolphin/os.h>
