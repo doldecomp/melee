@@ -300,6 +300,7 @@ if args.mode == "configure":
 elif args.mode == "progress":
     # Print progress and write progress.json
     config.progress_each_module = args.verbose
+    config.progress_all = False
     calculate_progress(config)
 else:
     sys.exit("Unknown mode: " + args.mode)
