@@ -224,7 +224,9 @@ config.libs = [
 	SysdolphinLib(
         "Sysdolphin",
         [
+			Object(Matching, "sysdolphin/baselib/mobj.c"),
             Object(Matching, "sysdolphin/baselib/aobj.c"),
+			Object(Matching, "sysdolphin/baselib/lobj.c"),
         ],
     ),
 ]

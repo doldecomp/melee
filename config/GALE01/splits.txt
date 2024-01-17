@@ -11,3 +11,93 @@ Sections:
 	.sdata      type:data align:8
 	.sbss       type:bss align:8
 	.sdata2     type:rodata align:8
+
+sysdolphin/baselib/tobj.c:
+	.text       start:0x8035E560 end:0x803615D0
+
+sysdolphin/baselib/state.c:
+	.text       start:0x803615D0 end:0x80362024
+
+sysdolphin/baselib/tev.c:
+	.text       start:0x80362024 end:0x80362D30
+
+sysdolphin/baselib/mobj.c:
+	.text       start:0x80362D30 end:0x80363FC8
+	.data       start:0x80405E28 end:0x80405FB8
+	.sdata      start:0x804D5CE0 end:0x804D5D08
+	.sbss       start:0x804D7618 end:0x804D7628
+	.sdata2     start:0x804DE428 end:0x804DE438
+
+sysdolphin/baselib/aobj.c:
+	.text       start:0x80363FC8 end:0x8036539C
+	.data       start:0x80405FB8 end:0x804060C0
+	.bss        start:0x804C0880 end:0x804C08B0
+	.sdata      start:0x804D5D08 end:0x804D5D18
+	.sbss       start:0x804D7628 end:0x804D7638
+	.sdata2     start:0x804DE438 end:0x804DE440
+
+sysdolphin/baselib/lobj.c:
+	.text       start:0x8036539C end:0x803676F8
+	.rodata     start:0x803B94A0 end:0x803B94B8
+	.data       start:0x804060C0 end:0x80406220
+	.bss        start:0x804C08B0 end:0x804C08D8
+	.sdata      start:0x804D5D18 end:0x804D5D40
+	.sbss       start:0x804D7638 end:0x804D7658
+	.sdata2     start:0x804DE440 end:0x804DE468
+
+sysdolphin/baselib/cobj.c:
+	.text       start:0x803676F8 end:0x8036A938
+	.data       start:0x80406220 end:0x80406350
+	.sdata      start:0x804D5D40 end:0x804D5D58
+	.sbss       start:0x804D7658 end:0x804D7660
+	.sdata2     start:0x804DE468 end:0x804DE4D0
+
+sysdolphin/baselib/fobj.c:
+	.text       start:0x8036A938 end:0x8036B8D0
+	.data       start:0x80406350 end:0x80406398
+	.bss        start:0x804C08D8 end:0x804C0908
+	.sdata      start:0x804D5D58 end:0x804D5D68
+	.sdata2     start:0x804DE4D0 end:0x804DE4F8
+
+sysdolphin/baselib/pobj.c:
+	.text       start:0x8036B8D0 end:0x8036EC10
+	.data       start:0x80406398 end:0x80406708
+	.bss        start:0x804C0908 end:0x804C0918
+	.sdata      start:0x804D5D68 end:0x804D5DA0
+	.sbss       start:0x804D7660 end:0x804D7680
+	.sdata2     start:0x804DE4F8 end:0x804DE528
+
+sysdolphin/baselib/jobj.c:
+	.text       start:0x8036EC10 end:0x803738A0
+	.data       start:0x80406708 end:0x80406AE0
+	.sdata      start:0x804D5DA0 end:0x804D5DD8
+	.sbss       start:0x804D7680 end:0x804D7698
+	.sdata2     start:0x804DE528 end:0x804DE578
+
+sysdolphin/baselib/util.c:
+	.text       start:0x8037A780 end:0x8037A94C
+
+sysdolphin/baselib/objalloc.c:
+	.text       start:0x8037A94C end:0x8037AE34
+
+sysdolphin/baselib/id.c:
+	.text       start:0x8037CD80 end:0x8037D050
+
+sysdolphin/baselib/wobj.c:
+	.text       start:0x8037D050 end:0x8037D970
+	.data       start:0x80406FD0 end:0x80407078
+
+sysdolphin/baselib/list.c:
+	.text       start:0x8037E3FC end:0x8037E6C4
+
+sysdolphin/baselib/object.c:
+	.text       start:0x8037E6C4 end:0x8037E708
+
+sysdolphin/baselib/random.c:
+	.text       start:0x803804F8 end:0x803805DC
+
+sysdolphin/baselib/texp.c:
+	.text       start:0x80382C00 end:0x80385798
+
+sysdolphin/baselib/texpdag.c:
+	.text       start:0x80385798 end:0x80387DF8
