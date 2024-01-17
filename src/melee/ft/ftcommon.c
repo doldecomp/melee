@@ -1391,7 +1391,7 @@ void ftCommon_8007EC30(u32 arg0, u32 arg1)
 void ftCommon_8007ECD4(Fighter* fp, s32 arg1)
 {
     if (Player_8003544C(fp->player_id, fp->x221F_b4)) {
-        HSD_Rumble_80378280(fp->x618_player_id, arg1 + 2);
+        HSD_PadRumbleRemoveId(fp->x618_player_id, arg1 + 2);
     }
 }
 

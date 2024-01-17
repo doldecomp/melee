@@ -82,7 +82,6 @@ typedef struct HSD_WObjInfo HSD_WObjInfo;
 typedef struct PadLibData PadLibData;
 typedef struct RumbleCommand RumbleCommand;
 typedef struct RumbleInfo RumbleInfo;
-typedef struct Struct804C22E0 Struct804C22E0;
 typedef struct TextKerning TextKerning;
 typedef struct UnkGeneratorStruct UnkGeneratorStruct;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;

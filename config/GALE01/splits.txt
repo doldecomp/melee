@@ -118,6 +118,11 @@ sysdolphin/baselib/video.c:
 	.sbss       start:0x804D76D8 end:0x804D76E0
 	.sdata2     start:0x804DE5A0 end:0x804DE5B0
 
+sysdolphin/baselib/rumble.c:
+	.text       start:0x80378090 end:0x80378A34
+	.data       start:0x80406DE0 end:0x80406DF0
+	.bss        start:0x804C22E0 end:0x804C2310
+
 sysdolphin/baselib/spline.c:
 	.text       start:0x80378A34 end:0x80379310
 
