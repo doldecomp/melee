@@ -122,6 +122,8 @@ sysdolphin/baselib/wobj.c:
 
 sysdolphin/baselib/list.c:
 	.text       start:0x8037E3FC end:0x8037E6C4
+	.bss        start:0x804C2580 end:0x804C25D8
+	.sdata      start:0x804D5F48 end:0x804D5F68
 
 sysdolphin/baselib/object.c:
 	.text       start:0x8037E6C4 end:0x8037E708
