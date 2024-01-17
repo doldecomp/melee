@@ -72,6 +72,11 @@ void it_802C031C(Item_GObj* gobj)
     it_80274658(gobj, it_804D6D28->x68_float);
 }
 
+static double calc_dist_2d_accurate(Vec3* v)
+{
+    return sqrtf_accurate(VEC2_SQ_LEN(*v));
+}
+
 ASM bool it_802C0368(Item_GObj* gobj)
 #if !defined(MUST_MATCH) || defined(WIP)
 {
@@ -80,14 +85,9 @@ ASM bool it_802C0368(Item_GObj* gobj)
         Item* ip = GET_ITEM(gobj);
         HSD_JObj* jobj = GET_JOBJ(gobj);
         itUnkAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
-        u8 _[12] = { 0 };
-#endif
-        if (sqrtf_accurate(VEC2_SQ_LEN(ip->x40_vel)) < attrs->xC) {
+        if (calc_dist_2d_accurate(&ip->x40_vel) < attrs->xC) {
             return true;
         }
-        /// @todo Missing #efAsync_Spawn param?
         if (ip->kind == It_Kind_Luigi_Fire) {
             efAsync_Spawn(gobj, &(GET_ITEM(gobj)->xBC0), 1, 1288, jobj);
         } else {
