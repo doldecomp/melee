@@ -91,12 +91,20 @@ sysdolphin/baselib/objalloc.c:
 	.sdata      start:0x804D5EB0 end:0x804D5EB8
 	.sbss       start:0x804D76E0 end:0x804D76E8
 
+sysdolphin/baselib/robj.c:
+	.text       start:0x8037AE34 end:0x8037CD80
+
 sysdolphin/baselib/id.c:
 	.text       start:0x8037CD80 end:0x8037D050
+	.bss        start:0x804C23C0 end:0x804C2580
+	.sdata      start:0x804D5EE8 end:0x804D5EF8
 
 sysdolphin/baselib/wobj.c:
 	.text       start:0x8037D050 end:0x8037D970
 	.data       start:0x80406FD0 end:0x80407078
+	.sdata      start:0x804D5EF8 end:0x804D5F20
+	.sbss       start:0x804D76F0 end:0x804D76F8
+	.sdata2     start:0x804DE6D0 end:0x804DE6F0
 
 sysdolphin/baselib/list.c:
 	.text       start:0x8037E3FC end:0x8037E6C4
