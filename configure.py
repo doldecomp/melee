@@ -15,15 +15,10 @@
 import argparse
 import sys
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Iterator, List
 
-from tools.project import (
-    Object,
-    ProjectConfig,
-    calculate_progress,
-    generate_build,
-    is_windows,
-)
+from tools.project import (LibDict, Object, ProjectConfig, calculate_progress,
+                           generate_build, is_windows)
 
 # Game versions
 DEFAULT_VERSION = 0
@@ -185,29 +180,21 @@ system_includes_base = [
 
 cflags_melee = [
     *cflags_base,
-    "-i src/melee",
-    "-i src/melee/ft/chara",
-    "-i src/sysdolphin",
-]
-
-# REL flags
-cflags_rel = [
-    *cflags_base,
-    "-sdata 0",
-    "-sdata2 0",
 ]
 
 config.linker_version = "GC/1.3.2"
 
+Objects = List[Object]
+
 
 def Lib(
-    lib_name,
-    objects: Dict[str, Any],
+    lib_name: str,
+    objects: Objects,
     includes: List[str] = includes_base,
     system_includes: List[str] = system_includes_base,
-) -> Dict[str, Any]:
-    def make_includes(l: List[str]) -> List[str]:
-        return list(map(lambda s: f"-i {s}", l))
+) -> LibDict:
+    def make_includes(includes: List[str]) -> Iterator[str]:
+        return map(lambda s: f"-i {s}", includes)
 
     return {
         "lib": lib_name,
@@ -223,11 +210,11 @@ def Lib(
     }
 
 
-def DolphinLib(lib_name, objects):
+def DolphinLib(lib_name: str, objects: Objects) -> LibDict:
     return Lib(lib_name, objects)
 
 
-def SysdolphinLib(lib_name, objects):
+def SysdolphinLib(lib_name: str, objects: Objects) -> LibDict:
     return Lib(
         lib_name,
         objects,
@@ -244,15 +231,21 @@ def SysdolphinLib(lib_name, objects):
     )
 
 
-# Helper function for REL script objects
-def Rel(lib_name, objects):
-    return {
-        "lib": lib_name,
-        "mw_version": "GC/1.3.2",
-        "cflags": cflags_rel,
-        "host": True,
-        "objects": objects,
-    }
+def MeleeLib(lib_name: str, objects: Objects) -> LibDict:
+    return Lib(
+        lib_name,
+        objects,
+        includes=[
+            *includes_base,
+            "src/melee",
+            "src/melee/ft/chara",
+        ],
+        system_includes=[
+            *system_includes_base,
+            "src/dolphin",
+            "src/sysdolphin",
+        ],
+    )
 
 
 Matching = True
@@ -262,7 +255,7 @@ config.warn_missing_config = config.debug
 config.warn_missing_source = config.debug
 config.libs = [
     SysdolphinLib(
-        "Sysdolphin",
+        "sysdolphin",
         [
             Object(NonMatching, "sysdolphin/baselib/tobj.c"),
             Object(Matching, "sysdolphin/baselib/state.c"),
@@ -285,6 +278,18 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/random.c"),
             Object(NonMatching, "sysdolphin/baselib/texp.c"),
             Object(NonMatching, "sysdolphin/baselib/texpdag.c"),
+        ],
+    ),
+    MeleeLib(
+        "cm",
+        [
+            Object(Matching, "melee/cm/cmsnap.c"),
+        ],
+    ),
+    MeleeLib(
+        "db",
+        [
+            Object(NonMatching, "melee/db/db_2253.c"),
         ],
     ),
 ]
