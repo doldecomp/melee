@@ -101,6 +101,15 @@ sysdolphin/baselib/jobj.c:
 	.sbss       start:0x804D7680 end:0x804D7698
 	.sdata2     start:0x804DE528 end:0x804DE578
 
+sysdolphin/baselib/initialize.c:
+	.text       start:0x80374E48 end:0x8037588C
+	.rodata     start:0x803B94E0 end:0x803B9570
+	.data       start:0x80406BC0 end:0x80406CE0
+	.bss        start:0x804C0948 end:0x804C0980
+	.sdata      start:0x804D5E00 end:0x804D5E88
+	.sbss       start:0x804D76B8 end:0x804D76D8
+	.sdata2     start:0x804DE590 end:0x804DE5A0
+
 sysdolphin/baselib/video.c:
 	.text       start:0x8037588C end:0x8037699C
 	.data       start:0x80406CE0 end:0x80406D68
