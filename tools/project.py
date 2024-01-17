@@ -12,12 +12,13 @@
 
 import io
 import json
+import math
 import os
 import platform
 import sys
-import math
-
 from pathlib import Path
+from typing import Any, Dict, List, Optional
+
 from . import ninja_syntax
 
 if sys.platform == "cygwin":
@@ -26,6 +27,8 @@ if sys.platform == "cygwin":
         f"\nPlease use native Windows Python instead."
         f"\n(Current path: {sys.executable})"
     )
+
+LibDict = Dict[str, Any]
 
 
 class ProjectConfig:
@@ -36,13 +39,13 @@ class ProjectConfig:
         self.tools_dir = Path("tools")
 
         # Tooling
-        self.dtk_tag = None  # Git tag
-        self.build_dtk_path = None  # If None, download
-        self.compilers_tag = None  # 1
-        self.compilers_path = None  # If None, download
-        self.wibo_tag = None  # Git tag
+        self.dtk_tag: Optional[str] = None  # Git tag
+        self.build_dtk_path: Optional[str] = None  # If None, download
+        self.compilers_tag: Optional[str] = None  # 1
+        self.compilers_path: Optional[str] = None  # If None, download
+        self.wibo_tag: Optional[str] = None  # Git tag
         self.wrapper = None  # If None, download wibo on Linux
-        self.sjiswrap_tag = None  # Git tag
+        self.sjiswrap_tag: Optional[str] = None  # Git tag
         self.sjiswrap_path = None  # If None, download
 
         # Project config
@@ -51,9 +54,9 @@ class ProjectConfig:
         self.config_path = None  # Path to config.yml
         self.debug = False  # Build with debug info
         self.generate_map = False  # Generate map file(s)
-        self.ldflags = None  # Linker flags
-        self.libs = None  # List of libraries
-        self.linker_version = None  # mwld version
+        self.ldflags: Optional[List[str]] = None  # Linker flags
+        self.libs: Optional[List[LibDict]] = None  # List of libraries
+        self.linker_version: Optional[str] = None  # mwld version
         self.version = None  # Version name
         self.warn_missing_config = False  # Warn on missing unit configuration
         self.warn_missing_source = False  # Warn on missing source file
@@ -63,7 +66,9 @@ class ProjectConfig:
         # Progress output and progress.json config
         self.progress_all = True  # Include combined "all" category
         self.progress_modules = True  # Include combined "modules" category
-        self.progress_each_module = True  # Include individual modules, disable for large numbers of modules
+        self.progress_each_module = (
+            True  # Include individual modules, disable for large numbers of modules
+        )
 
         # Progress fancy printing
         self.progress_use_fancy = False

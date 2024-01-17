@@ -12,6 +12,20 @@ Sections:
 	.sbss       type:bss align:8
 	.sdata2     type:rodata align:8
 
+melee/cm/cmsnap.c:
+	.text       start:0x800315C8 end:0x80031724
+	.data       start:0x803BCD90 end:0x803BCDC0
+	.bss        start:0x80453060 end:0x80453080
+
+melee/db/db_2253.c:
+	.text       start:0x80225374 end:0x802295AC
+	.rodata     start:0x803B84D8 end:0x803B84E8
+	.data       start:0x803EA6C8 end:0x803EAE68
+	.bss        start:0x8049FA00 end:0x804A04F0
+	.sdata      start:0x804D4A08 end:0x804D4B30
+	.sbss       start:0x804D6B20 end:0x804D6BA8
+	.sdata2     start:0x804DBCF0 end:0x804DBD88
+
 sysdolphin/baselib/tobj.c:
 	.text       start:0x8035E560 end:0x803615D0
 
