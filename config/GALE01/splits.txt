@@ -147,6 +147,9 @@ sysdolphin/baselib/random.c:
 
 sysdolphin/baselib/texp.c:
 	.text       start:0x80382C00 end:0x80385798
+	.data       start:0x80407738 end:0x80407AA0
+	.sdata      start:0x804D5FC8 end:0x804D5FF0
+	.sdata2     start:0x804DE7D8 end:0x804DE7E8
 
 sysdolphin/baselib/texpdag.c:
 	.text       start:0x80385798 end:0x80387DF8
