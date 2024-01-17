@@ -15,9 +15,15 @@
 import argparse
 import sys
 from pathlib import Path
+from typing import Any, Dict, List
 
-from tools.project import (Object, ProjectConfig, calculate_progress,
-                           generate_build, is_windows)
+from tools.project import (
+    Object,
+    ProjectConfig,
+    calculate_progress,
+    generate_build,
+    is_windows,
+)
 
 # Game versions
 DEFAULT_VERSION = 0
@@ -129,32 +135,25 @@ config.ldflags = [
 # Base flags, common to most GC/Wii games.
 # Generally leave untouched, with overrides added below.
 cflags_base = [
-    "-nodefaults",
-    "-proc gekko",
-    "-align powerpc",
-    "-enum int",
-    "-fp hardware",
-    "-Cpp_exceptions off",
+    "-msgstyle gcc",  # TODO arg
+    "-nowraplines",
     "-cwd source",
-    # "-W all",
+    "-Cpp_exceptions off",
+    "-proc gekko",
+    "-fp hardware",
+    "-align powerpc",
+    "-fp_contract on",
     "-O4,p",
+    "-enum int",
+    "-nodefaults",
     "-inline auto",
     '-pragma "cats off"',
     '-pragma "warn_notinlined off"',
-    "-maxerrors 1",
-    "-nosyspath",
     "-RTTI off",
-    "-fp_contract on",
     "-str reuse",
-    "-multibyte",  # For Wii compilers, replace with `-enc SJIS`
-    "-i src/melee",
-    "-i src/melee/ft/chara",
-    "-i src",
-    "-i src/MSL",
-    "-i src/Runtime",
-    "-i src/sysdolphin",
-    "-DMUST_MATCH",
-    f"-i build/{config.version}/include",
+    # "-W all",  # TODO
+    "-maxerrors 1",  # TODO arg
+    "-DMUST_MATCH",  # TODO arg
     f"-DVERSION={version_num}",
 ]
 
@@ -175,6 +174,22 @@ cflags_runtime = [
     "-inline auto",
 ]
 
+includes_base = ["src"]
+
+system_includes_base = [
+    "src",
+    "src/MSL",
+    "src/Runtime",
+    f"build/{config.version}/include",
+]
+
+cflags_melee = [
+    *cflags_base,
+    "-i src/melee",
+    "-i src/melee/ft/chara",
+    "-i src/sysdolphin",
+]
+
 # REL flags
 cflags_rel = [
     *cflags_base,
@@ -185,24 +200,49 @@ cflags_rel = [
 config.linker_version = "GC/1.3.2"
 
 
-# Helper function for Dolphin libraries
-def DolphinLib(lib_name, objects):
+def Lib(
+    lib_name,
+    objects: Dict[str, Any],
+    includes: List[str] = includes_base,
+    system_includes: List[str] = system_includes_base,
+) -> Dict[str, Any]:
+    def make_includes(l: List[str]) -> List[str]:
+        return list(map(lambda s: f"-i {s}", l))
+
     return {
         "lib": lib_name,
         "mw_version": "GC/1.2.5n",
-        "cflags": cflags_base,
+        "cflags": [
+            *cflags_base,
+            *make_includes(includes),
+            "-I-",
+            *make_includes(system_includes),
+        ],
         "host": False,
         "objects": objects,
     }
 
+
+def DolphinLib(lib_name, objects):
+    return Lib(lib_name, objects)
+
+
 def SysdolphinLib(lib_name, objects):
-    return {
-        "lib": lib_name,
-        "mw_version": "GC/1.2.5n",
-        "cflags": cflags_base,
-        "host": False,
-        "objects": objects,
-    }
+    return Lib(
+        lib_name,
+        objects,
+        includes=[
+            *includes_base,
+            "src/melee",  # HACK for lbrefract
+            "src/sysdolphin",
+        ],
+        system_includes=[
+            *system_includes_base,
+            "src/dolphin",
+            "src/sysdolphin",
+        ],
+    )
+
 
 # Helper function for REL script objects
 def Rel(lib_name, objects):
@@ -218,8 +258,8 @@ def Rel(lib_name, objects):
 Matching = True
 NonMatching = False
 
-config.warn_missing_config = True
-config.warn_missing_source = True
+config.warn_missing_config = config.debug
+config.warn_missing_source = config.debug
 config.libs = [
     SysdolphinLib(
         "Sysdolphin",
