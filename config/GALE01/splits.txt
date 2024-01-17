@@ -101,6 +101,14 @@ sysdolphin/baselib/jobj.c:
 	.sbss       start:0x804D7680 end:0x804D7698
 	.sdata2     start:0x804DE528 end:0x804DE578
 
+sysdolphin/baselib/video.c:
+	.text       start:0x8037588C end:0x8037699C
+	.data       start:0x80406CE0 end:0x80406D68
+	.bss        start:0x804C0980 end:0x804C1F78
+	.sdata      start:0x804D5E88 end:0x804D5E90
+	.sbss       start:0x804D76D8 end:0x804D76E0
+	.sdata2     start:0x804DE5A0 end:0x804DE5B0
+
 sysdolphin/baselib/spline.c:
 	.text       start:0x80378A34 end:0x80379310
 
@@ -117,6 +125,7 @@ sysdolphin/baselib/objalloc.c:
 
 sysdolphin/baselib/robj.c:
 	.text       start:0x8037AE34 end:0x8037CD80
+	.sbss       start:0x804D76E8 end:0x804D76F0
 
 sysdolphin/baselib/id.c:
 	.text       start:0x8037CD80 end:0x8037D050
