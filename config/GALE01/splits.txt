@@ -74,6 +74,9 @@ sysdolphin/baselib/jobj.c:
 	.sbss       start:0x804D7680 end:0x804D7698
 	.sdata2     start:0x804DE528 end:0x804DE578
 
+sysdolphin/baselib/spline.c:
+	.text       start:0x80378A34 end:0x80379310
+
 sysdolphin/baselib/util.c:
 	.text       start:0x8037A780 end:0x8037A94C
 

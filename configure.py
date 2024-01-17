@@ -227,6 +227,8 @@ config.libs = [
 			Object(Matching, "sysdolphin/baselib/mobj.c"),
             Object(Matching, "sysdolphin/baselib/aobj.c"),
 			Object(Matching, "sysdolphin/baselib/lobj.c"),
+			Object(NonMatching, "sysdolphin/baselib/cobj.c"),
+			Object(Matching, "sysdolphin/baselib/fobj.c"),
         ],
     ),
 ]

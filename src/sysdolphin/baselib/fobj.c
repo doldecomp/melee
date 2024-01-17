@@ -1,10 +1,7 @@
-#include "forward.h"
-
-#include "fobj.h"
-
-#include "spline.h"
+#include "baselib/fobj.h"
 
 #include <string.h>
+#include <baselib/spline.h>
 
 HSD_ObjAllocData fobj_alloc_data;
 
