@@ -10,3 +10,4 @@ members = [
     "tools/replace-symbols",
     "tools/rust-utils",
 ]
+resolver = "2"
