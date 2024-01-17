@@ -4,6 +4,14 @@ ctx.c
 ctx_includes.h
 *.s.c
 
+# decomp-toolkit
+.ninja_*
+build.ninja
+objdiff.json
+orig/*/*
+!orig/*/.gitkeep
+/*.txt
+
 # Python
 venv/
 
@@ -136,3 +144,4 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
+
