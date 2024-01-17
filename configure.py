@@ -257,6 +257,7 @@ config.libs = [
     SysdolphinLib(
         "sysdolphin",
         [
+            Object(Matching, "sysdolphin/baselib/dobj.c"),
             Object(NonMatching, "sysdolphin/baselib/tobj.c"),
             Object(Matching, "sysdolphin/baselib/state.c"),
             Object(NonMatching, "sysdolphin/baselib/tev.c"),
