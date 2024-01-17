@@ -147,6 +147,13 @@ cflags_base = [
     "-str reuse",
     "-multibyte",  # For Wii compilers, replace with `-enc SJIS`
     "-i include",
+    "-i src/melee",
+    "-i src/melee/ft/chara",
+    "-i src",
+    "-i src/MSL",
+    "-i src/Runtime",
+    "-i src/sysdolphin",
+    "-DMUST_MATCH",
     f"-i build/{config.version}/include",
     f"-DVERSION={version_num}",
 ]
@@ -175,7 +182,7 @@ cflags_rel = [
     "-sdata2 0",
 ]
 
-config.linker_version = "GC/1.2.5n"
+config.linker_version = "GC/1.3.2"
 
 
 # Helper function for Dolphin libraries
@@ -188,6 +195,14 @@ def DolphinLib(lib_name, objects):
         "objects": objects,
     }
 
+def SysdolphinLib(lib_name, objects):
+    return {
+        "lib": lib_name,
+        "mw_version": "GC/1.2.5n",
+        "cflags": cflags_base,
+        "host": False,
+        "objects": objects,
+    }
 
 # Helper function for REL script objects
 def Rel(lib_name, objects):
@@ -205,7 +220,34 @@ NonMatching = False
 
 config.warn_missing_config = True
 config.warn_missing_source = True
-config.libs = []
+config.libs = [
+    SysdolphinLib(
+        "Sysdolphin",
+        [
+            Object(NonMatching, "sysdolphin/baselib/tobj.c"),
+            Object(Matching, "sysdolphin/baselib/state.c"),
+            Object(NonMatching, "sysdolphin/baselib/tev.c"),
+            Object(Matching, "sysdolphin/baselib/mobj.c"),
+            Object(Matching, "sysdolphin/baselib/aobj.c"),
+            Object(Matching, "sysdolphin/baselib/lobj.c"),
+            Object(NonMatching, "sysdolphin/baselib/cobj.c"),
+            Object(Matching, "sysdolphin/baselib/fobj.c"),
+            Object(Matching, "sysdolphin/baselib/pobj.c"),
+            Object(NonMatching, "sysdolphin/baselib/jobj.c"),
+            Object(NonMatching, "sysdolphin/baselib/spline.c"),
+            Object(NonMatching, "sysdolphin/baselib/util.c"),
+            Object(Matching, "sysdolphin/baselib/objalloc.c"),
+            Object(NonMatching, "sysdolphin/baselib/robj.c"),
+            Object(Matching, "sysdolphin/baselib/id.c"),
+            Object(Matching, "sysdolphin/baselib/wobj.c"),
+            Object(NonMatching, "sysdolphin/baselib/list.c"),
+            Object(NonMatching, "sysdolphin/baselib/object.c"),
+            Object(Matching, "sysdolphin/baselib/random.c"),
+            Object(NonMatching, "sysdolphin/baselib/texp.c"),
+            Object(NonMatching, "sysdolphin/baselib/texpdag.c"),
+        ],
+    ),
+]
 
 if args.mode == "configure":
     # Write build.ninja and objdiff.json

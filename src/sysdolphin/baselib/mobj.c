@@ -1,13 +1,12 @@
-#include "mobj.h"
-
-#include "class.h"
-#include "memory.h"
-#include "state.h"
-#include "tev.h"
-#include "texp.h"
+#include "baselib/mobj.h"
 
 #include <string.h>
 #include <dolphin/os.h>
+#include <baselib/class.h>
+#include <baselib/memory.h>
+#include <baselib/state.h>
+#include <baselib/tev.h>
+#include <baselib/texp.h>
 
 static HSD_ClassInfo* default_class;
 static HSD_MObj* current_mobj;
