@@ -114,6 +114,8 @@ sysdolphin/baselib/object.c:
 
 sysdolphin/baselib/random.c:
 	.text       start:0x803804F8 end:0x803805DC
+	.sdata      start:0x804D5F90 end:0x804D5F98
+	.sdata2     start:0x804DE790 end:0x804DE7A0
 
 sysdolphin/baselib/texp.c:
 	.text       start:0x80382C00 end:0x80385798
