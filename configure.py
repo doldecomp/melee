@@ -147,6 +147,13 @@ cflags_base = [
     "-str reuse",
     "-multibyte",  # For Wii compilers, replace with `-enc SJIS`
     "-i include",
+	"-i src/melee",
+	"-i src/melee/ft/chara",
+	"-i src",
+	"-i src/MSL",
+	"-i src/Runtime",
+	"-i src/sysdolphin",
+	"-DMUST_MATCH",
     f"-i build/{config.version}/include",
     f"-DVERSION={version_num}",
 ]
@@ -175,7 +182,7 @@ cflags_rel = [
     "-sdata2 0",
 ]
 
-config.linker_version = "GC/1.2.5n"
+config.linker_version = "GC/1.3.2"
 
 
 # Helper function for Dolphin libraries
@@ -188,6 +195,14 @@ def DolphinLib(lib_name, objects):
         "objects": objects,
     }
 
+def SysdolphinLib(lib_name, objects):
+    return {
+        "lib": lib_name,
+        "mw_version": "GC/1.2.5n",
+        "cflags": cflags_base,
+        "host": False,
+        "objects": objects,
+    }
 
 # Helper function for REL script objects
 def Rel(lib_name, objects):
@@ -205,7 +220,14 @@ NonMatching = False
 
 config.warn_missing_config = True
 config.warn_missing_source = True
-config.libs = []
+config.libs = [
+	SysdolphinLib(
+        "Sysdolphin",
+        [
+            Object(Matching, "sysdolphin/baselib/aobj.c"),
+        ],
+    ),
+]
 
 if args.mode == "configure":
     # Write build.ninja and objdiff.json
