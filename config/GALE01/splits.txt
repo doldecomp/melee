@@ -17,6 +17,11 @@ sysdolphin/baselib/tobj.c:
 
 sysdolphin/baselib/state.c:
 	.text       start:0x803615D0 end:0x80362024
+	.data       start:0x80405A38 end:0x80405B98
+	.bss        start:0x804C07E0 end:0x804C07F8
+	.sdata      start:0x804D5CC8 end:0x804D5CD0
+	.sbss       start:0x804D75B0 end:0x804D75F8
+	.sdata2     start:0x804DE418 end:0x804DE420
 
 sysdolphin/baselib/tev.c:
 	.text       start:0x80362024 end:0x80362D30
