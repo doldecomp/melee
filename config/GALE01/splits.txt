@@ -98,6 +98,8 @@ sysdolphin/baselib/spline.c:
 
 sysdolphin/baselib/util.c:
 	.text       start:0x8037A780 end:0x8037A94C
+	.data       start:0x80406DF0 end:0x80406E48
+	.sdata      start:0x804D5EA0 end:0x804D5EB0
 
 sysdolphin/baselib/objalloc.c:
 	.text       start:0x8037A94C end:0x8037AE34
