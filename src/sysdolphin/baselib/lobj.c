@@ -1,4 +1,4 @@
-#include "baselib/lobj.h"
+#include "lobj.h"
 
 #include <placeholder.h>
 #include <dolphin/mtx.h>

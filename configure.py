@@ -135,7 +135,8 @@ cflags_base = [
     "-enum int",
     "-fp hardware",
     "-Cpp_exceptions off",
-    "-W all",
+    "-cwd source",
+    # "-W all",
     "-O4,p",
     "-inline auto",
     '-pragma "cats off"',
@@ -146,7 +147,6 @@ cflags_base = [
     "-fp_contract on",
     "-str reuse",
     "-multibyte",  # For Wii compilers, replace with `-enc SJIS`
-    "-i include",
     "-i src/melee",
     "-i src/melee/ft/chara",
     "-i src",
