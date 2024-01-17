@@ -274,7 +274,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/id.c"),
             Object(Matching, "sysdolphin/baselib/wobj.c"),
             Object(Matching, "sysdolphin/baselib/list.c"),
-            Object(NonMatching, "sysdolphin/baselib/object.c"),
+            Object(Matching, "sysdolphin/baselib/object.c"),
             Object(Matching, "sysdolphin/baselib/random.c"),
             Object(NonMatching, "sysdolphin/baselib/texp.c"),
             Object(NonMatching, "sysdolphin/baselib/texpdag.c"),

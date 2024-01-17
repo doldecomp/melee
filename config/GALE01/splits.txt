@@ -127,6 +127,8 @@ sysdolphin/baselib/list.c:
 
 sysdolphin/baselib/object.c:
 	.text       start:0x8037E6C4 end:0x8037E708
+	.data       start:0x804072A8 end:0x80407300
+	.sdata      start:0x804D5F68 end:0x804D5F70
 
 sysdolphin/baselib/random.c:
 	.text       start:0x803804F8 end:0x803805DC
