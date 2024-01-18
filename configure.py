@@ -282,6 +282,11 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/random.c"),
             Object(NonMatching, "sysdolphin/baselib/texp.c"),
             Object(NonMatching, "sysdolphin/baselib/texpdag.c"),
+            Object(NonMatching, "sysdolphin/baselib/psdisp.c"),
+            Object(NonMatching, "sysdolphin/baselib/psdisptev.c"),
+            Object(NonMatching, "sysdolphin/baselib/psappsrt.c"),
+            Object(NonMatching, "sysdolphin/baselib/sobjlib.c"),
+            Object(NonMatching, "sysdolphin/baselib/sislib.c"),
         ],
     ),
     MeleeLib(

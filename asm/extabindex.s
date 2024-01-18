@@ -89,7 +89,7 @@ extabindex_800056C0:
     .4byte calcTornadoLastPos
     .4byte 0x0000018C
     .4byte extab_80005600
-    .4byte HSD_PSDisp_8039FC70
+    .4byte particleSort
     .4byte 0x00000418
     .4byte extab_80005608
     .4byte psDispParticles

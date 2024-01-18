@@ -2206,9 +2206,9 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
                 if (sqrtf(kb_x * kb_x + kb_y * kb_y) <
                     p_ftCommonData->x3E8_shieldKnockbackFrameDecay)
                 {
-                    // BUG IN THE MELEE CODE THAT CAUSES THE INVISIBLE CEILING
-                    // GLITCH The next line should be 'pAtkShieldKB->y = 0',
-                    // but instead it is:
+                    /// @bug IN THE MELEE CODE THAT CAUSES THE INVISIBLE
+                    /// CEILING GLITCH The next line should be 'pAtkShieldKB->y
+                    /// = 0', but instead it is:
                     pAtkShieldKB->x = p_kb_vel->y = 0;
                 } else {
                     // again, the better implementation would be:

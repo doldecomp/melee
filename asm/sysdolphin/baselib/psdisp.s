@@ -350,8 +350,8 @@ getColorMatAmb:
 /* 8039FC6C 0039C84C  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/bEJl0
-.global HSD_PSDisp_8039FC70
-HSD_PSDisp_8039FC70:
+.global particleSort
+particleSort:
 /* 8039FC70 0039C850  7C 08 02 A6 */	mflr r0
 /* 8039FC74 0039C854  3C E0 80 41 */	lis r7, HSD_PSDisp_8040C360@ha
 /* 8039FC78 0039C858  90 01 00 04 */	stw r0, 4(r1)
@@ -808,7 +808,7 @@ psDispParticles:
 /* 803A0270 0039CE50  38 A1 07 60 */	addi r5, r1, 0x760
 /* 803A0274 0039CE54  80 61 07 B4 */	lwz r3, 0x7b4(r1)
 /* 803A0278 0039CE58  38 C1 07 5C */	addi r6, r1, 0x75c
-/* 803A027C 0039CE5C  4B FF F9 F5 */	bl HSD_PSDisp_8039FC70
+/* 803A027C 0039CE5C  4B FF F9 F5 */	bl particleSort
 /* 803A0280 0039CE60  80 01 07 98 */	lwz r0, 0x798(r1)
 /* 803A0284 0039CE64  28 00 00 01 */	cmplwi r0, 1
 /* 803A0288 0039CE68  40 82 00 0C */	bne .L_803A0294

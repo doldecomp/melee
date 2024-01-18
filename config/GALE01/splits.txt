@@ -176,3 +176,30 @@ sysdolphin/baselib/texp.c:
 
 sysdolphin/baselib/texpdag.c:
 	.text       start:0x80385798 end:0x80387DF8
+
+sysdolphin/baselib/psdisp.c:
+	extab       start:0x800055F8 end:0x80005618
+	extabindex  start:0x80005804 end:0x80005834
+	.text       start:0x8039F78C end:0x803A3920
+	.rodata     start:0x803B9628 end:0x803B9658
+	.data       start:0x8040C300 end:0x8040C3A0
+	.bss        start:0x804D0FC0 end:0x804D10B0
+	.sdata      start:0x804D6380 end:0x804D6388
+	.sbss       start:0x804D7908 end:0x804D7950
+	.sdata2     start:0x804DEA10 end:0x804DEA68
+
+sysdolphin/baselib/psdisptev.c:
+	extab       start:0x80005618 end:0x80005628
+	extabindex  start:0x80005834 end:0x8000584C
+	.text       start:0x803A3920 end:0x803A4138
+
+sysdolphin/baselib/psappsrt.c:
+	extab       start:0x80005628 end:0x80005658
+	extabindex  start:0x8000584C end:0x80005894
+	.text       start:0x803A4138 end:0x803A44A4
+
+sysdolphin/baselib/sobjlib.c:
+	.text       start:0x803A44A4 end:0x803A5798
+
+sysdolphin/baselib/sislib.c:
+	.text       start:0x803A5798 end:0x803A949C
