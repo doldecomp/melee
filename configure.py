@@ -307,8 +307,8 @@ def MeleeLib(lib_name: str, objects: Objects) -> LibDict:
 Matching = True
 NonMatching = False
 
-config.warn_missing_config = config.debug
-config.warn_missing_source = config.debug
+config.warn_missing_config = args.verbose
+config.warn_missing_source = args.verbose
 config.libs = [
     SysdolphinLib(
         "sysdolphin",
