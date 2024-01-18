@@ -318,7 +318,6 @@ config.libs = [
         "lb (Library)",
         [
             Object(Matching, "melee/lb/lbcommand.c"),
-            Object(Matching, "melee/lb/lbcollision.c"),
             Object(NonMatching, "melee/lb/lbcollision.c"),
             Object(Matching, "melee/lb/lblanguage.c"),
             Object(Matching, "melee/lb/lbtime.c"),
@@ -331,7 +330,6 @@ config.libs = [
             Object(NonMatching, "melee/lb/lbmemory.c"),
             Object(NonMatching, "melee/lb/lbheap.c"),
             Object(Matching, "melee/lb/lbfile.c"),
-            Object(Matching, "melee/lb/lbarchive.c"),
             Object(NonMatching, "melee/lb/lbarchive.c"),
             Object(NonMatching, "melee/lb/lbdvd.c"),
             Object(NonMatching, "melee/lb/lb_0192.c"),
@@ -346,7 +344,6 @@ config.libs = [
             Object(NonMatching, "melee/lb/lbrefract1.c"),
             Object(NonMatching, "melee/lb/lbrefract2.c"),
             Object(NonMatching, "melee/lb/lbrefract3.c"),
-            Object(Matching, "melee/lb/lbrefract3.c"),
             #
             Object(NonMatching, "melee/lb/lbaudio_ax.c"),
         ],
