@@ -122,6 +122,10 @@ struct HSD_CameraAnim {
 
 typedef struct _cobj_Unk1 cobj_Unk1;
 
+#define HSD_COBJ(o) ((HSD_CObj*) (o))
+#define HSD_COBJ_INFO(i) ((HSD_CObjInfo*) (i))
+#define HSD_COBJ_METHOD(o) HSD_COBJ_INFO(HSD_OBJECT_METHOD(o))
+
 void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
                          s32 enable_depth);
 void HSD_CObjRemoveAnim(HSD_CObj* cobj);
@@ -192,5 +196,10 @@ void HSD_CObjClearFlags(HSD_CObj*, u32);
 HSD_CObj* HSD_CObjGetCurrent(void);
 void HSD_CObjInit(HSD_CObj* cobj, HSD_CObjDesc* desc);
 HSD_CObj* HSD_CObjLoadDesc(HSD_CObjDesc* desc);
+
+static inline MtxPtr HSD_CObjGetViewingMtxPtrDirect(HSD_CObj* cobj)
+{
+    return cobj->view_mtx;
+}
 
 #endif
