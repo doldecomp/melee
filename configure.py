@@ -115,7 +115,7 @@ parser.add_argument(
     "--no-warn-error",
     action="store_false",
     dest="warn_error",
-    help="all compiler warnings are not considered errors",
+    help="compiler warnings are not considered errors",
 )
 parser.add_argument(
     "--non-matching",
