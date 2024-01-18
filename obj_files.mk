@@ -54,7 +54,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/pl/player.c.o\
-    $(BUILD_DIR)/asm/melee/pl/pl_0371.s.o\
+    $(BUILD_DIR)/asm/melee/pl/plstale.s.o\
     $(BUILD_DIR)/asm/melee/pl/pltrick.s.o\
     $(BUILD_DIR)/asm/melee/pl/plbonus.s.o\
     $(BUILD_DIR)/asm/melee/pl/plbonuslib.s.o\
