@@ -1,8 +1,9 @@
 use std::{
     collections::BTreeMap,
+    fmt::Write as FmtWrite,
     fs::File,
     hash::{BuildHasher, Hash, Hasher},
-    io::{BufWriter, Write},
+    io::{BufWriter, Write as IoWrite},
     marker::PhantomData,
     num::{NonZeroU32, NonZeroU8},
     path::{Path, PathBuf},
@@ -142,13 +143,17 @@ impl<'a> Context<'a> {
             id.hash(&mut hasher);
             hasher.finish()
         };
-        if let Some(_) = map.insert(key, value) {
-            bail!(Self::format_error_raw(
-                line,
-                raw,
-                "tried to insert existing symbol into the map"
-            ));
+        if map.get(&key).is_some() {
+            warn!(
+                "{}",
+                Self::format_error_raw(
+                    line,
+                    raw,
+                    "tried to insert existing symbol into the map"
+                )
+            );
         }
+        map.insert(key, value);
         Ok(())
     }
 
@@ -391,9 +396,7 @@ impl<'a> Context<'a> {
                         },
                     ),
                 depth: _,
-            }) if tu.ends_with(".c.o") => {
-                self.push_tree_symbol(&id, tu, &scope, &r#type)?
-            }
+            }) => self.push_tree_symbol(&id, tu, &scope, &r#type)?,
             map::Line::SectionSymbol(section_table::Symbol {
                 addr: _,
                 virt_addr: addr,
@@ -405,7 +408,7 @@ impl<'a> Context<'a> {
                         src: None,
                         asm: false,
                     },
-            }) if tu.ends_with(".c.o") => {
+            }) => {
                 let (size, align) = match data {
                     section_table::Data::Parent { size, align } => {
                         (*size, Some(align))
@@ -434,35 +437,6 @@ impl<'a> Context<'a> {
                 }
                 self.push_section(name, *addr)?;
             }
-            map::Line::TreeNode(tree::Node {
-                depth: _,
-                data:
-                    tree::Data::Object(
-                        _,
-                        tree::Specifier {
-                            r#type: _,
-                            scope: _,
-                            origin:
-                                map::Origin {
-                                    obj: tu,
-                                    src: None,
-                                    asm: false,
-                                },
-                        },
-                    ),
-            })
-            | map::Line::SectionSymbol(section_table::Symbol {
-                addr: _,
-                virt_addr: _,
-                data: _,
-                id: _,
-                origin:
-                    map::Origin {
-                        obj: tu,
-                        src: None,
-                        asm: false,
-                    },
-            }) if tu.ends_with(".s.o") => (),
             other => error!("Unexpected match: {:?}", other),
         })
     }
@@ -508,7 +482,7 @@ impl<'a> Context<'a> {
 
     fn write_splits<W>(writer: &mut W)
     where
-        W: Write,
+        W: FmtWrite,
     {
     }
 }
@@ -533,7 +507,7 @@ fn main() -> Result<()> {
         .context("Failed to convert to UTF-8.")?;
     let mut ctx = Context::new()?;
 
-    let txt_path = melee_utils::ROOT.join("config/GALE01").canonicalize()?;
+    let txt_path = melee_utils::ROOT.join("build/GALE01").canonicalize()?;
     let splits_path = txt_path.join("splits.txt");
     let symbols_path = txt_path.join("symbols.txt");
 
@@ -555,20 +529,19 @@ fn main() -> Result<()> {
         ctx.push_line(&parsed, raw)?;
     }
 
-    let mut sorted_syms = BTreeMap::new();
-    for key in ctx.tree_symbols.keys() {
-        let tree_sym = ctx.tree_symbols.get(key).unwrap();
-        let table_sym = ctx.table_symbols.get(key).unwrap();
-        let sym_str = format!(
-            "{} = {}:0x{:08X}; // type:{} size:0x{:X} scope:{}",
-            tree_sym.name,
-            table_sym.section,
-            table_sym.addr,
-            tree_sym.r#type,
-            table_sym.size,
-            tree_sym.scope
-        );
-        sorted_syms.insert(table_sym.addr, sym_str);
+    let sorted_keys = ctx
+        .table_symbols
+        .iter()
+        .map(|(key, sym)| (sym.addr, *key))
+        .collect::<BTreeMap<_, _>>();
+
+    let mut prev_addr: Option<NonZeroU32> = None;
+    for (_, key) in sorted_keys.iter().rev() {
+        let sym = ctx.table_symbols.get_mut(key).unwrap();
+        if let (Some(prev_addr), 0) = (prev_addr, sym.size) {
+            sym.size = prev_addr.get() - sym.addr.get();
+        }
+        prev_addr = Some(sym.addr);
     }
 
     let file = File::create(&symbols_path)?;
@@ -578,253 +551,38 @@ fn main() -> Result<()> {
             .to_str()
             .context("Failed to convert the path to a string")?
     );
+
     let mut writer = BufWriter::new(file);
-    for (_, s) in &sorted_syms {
-        writeln!(writer, "{}", s)?;
+
+    for key in sorted_keys.values() {
+        let table_sym = ctx
+            .table_symbols
+            .get(&*key)
+            .context("could not retrieve table symbol again")?;
+
+        let tree_sym = match ctx.tree_symbols.get(key) {
+            Some(v) => v,
+            None => {
+                warn!("missing tree symbol for {:08x}", table_sym.addr);
+                continue;
+            }
+        };
+
+        write!(
+            writer,
+            "{} = {}:0x{:08X}; // type:{} size:0x{:X} scope:{}",
+            tree_sym.name,
+            table_sym.section,
+            table_sym.addr,
+            tree_sym.r#type,
+            table_sym.size,
+            tree_sym.scope,
+        )?;
+        if let Some(align) = table_sym.align.map(|nz| nz.get()) {
+            write!(writer, " align:{}", align)?;
+        }
+        writeln!(writer)?;
     }
 
-    // for (raw, parsed) in lines {
-    //     tracker.push_line(&parsed, raw);
-    // }
-
-    // HACK: Throw in the ctors and dtors
-    // {
-    //     let tu = "__init_cpp_exceptions.c";
-    //     {
-    //         let section = ".ctors";
-    //         let addr = NonZeroU32::new(0x803B7240).unwrap();
-    //         // TODO
-    //         // splits_map.insert(
-    //         //     (tu, section),
-    //         //     SplitSection {
-    //         //         name: section,
-    //         //         start: addr,
-    //         //         size: Some(4),
-    //         //     },
-    //         // );
-
-    //         // TODO
-    //         // let id = map::Identifier::Named {
-    //         //     name: "_ctors",
-    //         //     instance: None,
-    //         // };
-    //         // symbols_map.insert(
-    //         //     hash_builder.hash_one((tu, &id)),
-    //         s//     Symbol {
-    //         //         id: Some(id_to_string(&id)),
-    //         //         section: Some(section),
-    //         //         addr: Some(addr),
-    //         //         r#type: Some("label"),
-    //         //         size: Some(0),
-    //         //         scope: Some("global"),
-    //         //         align: None,
-    //         //     },
-    //         // );
-
-    //         // let id = map::Identifier::Named {
-    //         //     name: "__init_cpp_exceptions_reference",
-    //         //     instance: None,
-    //         // };
-    //         // symbols_map.insert(
-    //         //     hash_builder.hash_one((tu, &id)),
-    //         //     Symbol {
-    //         //         id: Some(id_to_string(&id)),
-    //         //         section: Some(section),
-    //         //         addr: Some(addr),
-    //         //         r#type: Some("object"),
-    //         //         size: Some(4),
-    //         //         scope: Some("global"),
-    //         //         align: None,
-    //         //     },
-    //         // );
-    //     }
-    //     {
-    //         let section = ".dtors";
-    //         let addr = NonZeroU32::new(0x803B7260).unwrap();
-    //         // TODO
-    //         // splits_map.insert(
-    //         //     (tu, section),
-    //         //     SplitSection {
-    //         //         name: section,
-    //         //         start: addr,
-    //         //         size: Some(8),
-    //         //     },
-    //         // );
-
-    //         // TODO
-    //         //     let id = map::Identifier::Named {
-    //         //         name: "_dtors",
-    //         //         instance: None,
-    //         //     };
-    //         //     symbols_map.insert(
-    //         //         hash_builder.hash_one((tu, &id)),
-    //         //         Symbol {
-    //         //             id: Some(id_to_string(&id)),
-    //         //             section: Some(section),
-    //         //             addr: Some(addr),
-    //         //             r#type: Some("label"),
-    //         //             size: Some(0),
-    //         //             scope: Some("global"),
-    //         //             align: None,
-    //         //         },
-    //         //     );
-
-    //         //     let id = map::Identifier::Named {
-    //         //         name: "__destroy_global_chain_reference",
-    //         //         instance: None,
-    //         //     };
-    //         //     symbols_map.insert(
-    //         //         hash_builder.hash_one((tu, &id)),
-    //         //         Symbol {
-    //         //             id: Some(id_to_string(&id)),
-    //         //             section: Some(section),
-    //         //             addr: Some(addr),
-    //         //             r#type: Some("object"),
-    //         //             size: Some(4),
-    //         //             scope: Some("global"),
-    //         //             align: None,
-    //         //         },
-    //         //     );
-
-    //         //     let id = map::Identifier::Named {
-    //         //         name: "__fini_cpp_exceptions_reference",
-    //         //         instance: None,
-    //         //     };
-    //         //     symbols_map.insert(
-    //         //         hash_builder.hash_one((tu, &id)),
-    //         //         Symbol {
-    //         //             id: Some(id_to_string(&id)),
-    //         //             section: Some(section),
-    //         //             addr: Some(NonZeroU32::new(addr.get() + 4).unwrap()),
-    //         //             r#type: Some("object"),
-    //         //             size: Some(4),
-    //         //             scope: Some("global"),
-    //         //             align: None,
-    //         //         },
-    //         //     );
-    //     }
-    // }
-
-    {
-        // let file = File::create(&splits_path)?;
-        // info!(
-        //     "Writing splits to {}",
-        //     splits_path
-        //         .to_str()
-        //         .context("Failed to convert the path to a string")?
-        // );
-        // let mut writer = BufWriter::new(file);
-
-        // writeln!(writer, "Sections:")?;
-
-        // let mut elf_sections = elf_sections.into_iter().collect::<Vec<_>>();
-        // elf_sections.sort_by_key(|s| s.addr);
-
-        // for section in elf_sections {
-        //     const SECTION_ALIGN: u8 = 8;
-        //     writeln!(
-        //         writer,
-        //         "\t{:12}type:{} align:{}",
-        //         section.name, section.r#type, SECTION_ALIGN
-        //     )?;
-        // }
-        // writeln!(writer)?;
-
-        // // TODO
-        // // debug!("Splits are:\n{:#x?}", &splits_map);
-
-        // // for (tu, path) in src_paths.into_iter() {
-        // //     splits.clear();
-        // //     for (_, split) in splits_map.iter().filter(|((k, _), _)| *k == &tu) {
-        // //         splits.push(split);
-        // //     }
-        // //     splits.sort_by_key(|s| s.start);
-
-        // //     writeln!(
-        // //         writer,
-        // //         "{}:",
-        // //         path.to_str().context("Failed to write the path.")?
-        // //     )?;
-        // //     for split in splits.iter() {
-        // //         writeln!(
-        // //             writer,
-        // //             "\t{:12}start:0x{:08X} end:0x{:08X}",
-        // //             split.name,
-        // //             split.start.get(),
-        // //             split.start.get() + split.size.context("Section size is unset.")?
-        // //         )?;
-        // //     }
-        // //     writeln!(writer)?;
-        // // }
-    }
-    {
-        // let mut symbols = symbols_map.into_values().collect::<Vec<_>>();
-        // symbols.par_sort_by(|a, b| a.addr.cmp(&b.addr));
-        // let file = File::create(&symbols_path)?;
-
-        // info!(
-        //     "Writing symbols to {}",
-        //     symbols_path
-        //         .to_str()
-        //         .context("Failed to convert the path to a string")?
-        // );
-
-        // let mut writer = BufWriter::new(file);
-
-        // for symbol in symbols {
-        //     let (id, addr, section) =
-        //         match (symbol.id, symbol.addr, symbol.section) {
-        //             (Some(id), Some(addr), Some(section)) => {
-        //                 (id, addr, section)
-        //             }
-        //             (None, Some(addr), _) => {
-        //                 error!("Failed to get the symbol id at {}", addr);
-        //                 continue;
-        //             }
-        //             (Some(id), None, _) => {
-        //                 error!("Failed to get the symbol address for {}.", id);
-        //                 continue;
-        //             }
-        //             (Some(id), Some(addr), None) => {
-        //                 error!(
-        //                 "Failed to get the symbol section for {} at {:08X}",
-        //                 id, addr
-        //             );
-        //                 continue;
-        //             }
-        //             (None, None, None) => {
-        //                 error!("Failed to get unknown symbol info.");
-        //                 continue;
-        //             }
-        //             (None, None, Some(_)) => todo!(),
-        //         };
-
-        //     write!(writer, "{id} = {section}:0x{addr:08X};")?;
-
-        //     let mut tags = Vec::<String>::new();
-
-        //     if let Some(r#type) = symbol.r#type {
-        //         tags.push(format!("type:{type}"));
-        //     }
-
-        //     if let Some(size) = symbol.size {
-        //         tags.push(format!("size:0x{size:X}"));
-        //     }
-
-        //     if let Some(scope) = symbol.scope {
-        //         tags.push(format!("scope:{scope}"));
-        //     }
-
-        //     if let Some(align) = symbol.align {
-        //         tags.push(format!("align:{align}"));
-        //     }
-
-        //     if tags.len() > 0 {
-        //         write!(writer, " // {}", &tags.join(" "))?;
-        //     }
-
-        //     writeln!(writer)?;
-        // }
-    }
     Ok(())
 }
