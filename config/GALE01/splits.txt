@@ -153,6 +153,13 @@ sysdolphin/baselib/wobj.c:
 	.sbss       start:0x804D76F0 end:0x804D76F8
 	.sdata2     start:0x804DE6D0 end:0x804DE6F0
 
+sysdolphin/baselib/fog.c:
+	.text       start:0x8037D970 end:0x8037E1BC
+	.rodata     start:0x803B95A8 end:0x803B95E8
+	.data       start:0x80407078 end:0x80407188
+	.sdata      start:0x804D5F20 end:0x804D5F38
+	.sdata2     start:0x804DE6F0 end:0x804DE718
+
 sysdolphin/baselib/list.c:
 	.text       start:0x8037E3FC end:0x8037E6C4
 	.bss        start:0x804C2580 end:0x804C25D8
