@@ -28,6 +28,12 @@ melee/lb/lblanguage.c:
 melee/lb/lbtime.c:
 	.text       start:0x8000AEC8 end:0x8000B074
 
+melee/lb/lb_00B0.c:
+	.text       start:0x8000B074 end:0x8000CE50
+	.data       start:0x803B9FC0 end:0x803BA050
+	.sdata      start:0x804D3710 end:0x804D3720
+	.sdata2     start:0x804D7A58 end:0x804D7A68
+
 melee/cm/cmsnap.c:
 	.text       start:0x800315C8 end:0x80031724
 	.data       start:0x803BCD90 end:0x803BCDC0
