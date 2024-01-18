@@ -665,7 +665,7 @@ void ftLib_80086E68(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_8003544C(fp->player_id, fp->x221F_b4)) {
-        HSD_Rumble_80378280(fp->x618_player_id, 1);
+        HSD_PadRumbleRemoveId(fp->x618_player_id, 1);
     }
 }
 

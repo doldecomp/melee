@@ -26,8 +26,16 @@ melee/db/db_2253.c:
 	.sbss       start:0x804D6B20 end:0x804D6BA8
 	.sdata2     start:0x804DBCF0 end:0x804DBD88
 
+sysdolphin/baselib/dobj.c:
+	.text       start:0x8035DD98 end:0x8035E560
+	.data       start:0x80405450 end:0x80405570
+	.sdata      start:0x804D5C78 end:0x804D5C90
+	.sbss       start:0x804D75A0 end:0x804D75A8
+
 sysdolphin/baselib/tobj.c:
 	.text       start:0x8035E560 end:0x803615D0
+	.data       start:0x80405570 end:0x80405A38
+	.sdata      start:0x804D5C90 end:0x804D5CC8
 
 sysdolphin/baselib/state.c:
 	.text       start:0x803615D0 end:0x80362024
@@ -93,11 +101,35 @@ sysdolphin/baselib/jobj.c:
 	.sbss       start:0x804D7680 end:0x804D7698
 	.sdata2     start:0x804DE528 end:0x804DE578
 
+sysdolphin/baselib/initialize.c:
+	.text       start:0x80374E48 end:0x8037588C
+	.rodata     start:0x803B94E0 end:0x803B9570
+	.data       start:0x80406BC0 end:0x80406CE0
+	.bss        start:0x804C0948 end:0x804C0980
+	.sdata      start:0x804D5E00 end:0x804D5E88
+	.sbss       start:0x804D76B8 end:0x804D76D8
+	.sdata2     start:0x804DE590 end:0x804DE5A0
+
+sysdolphin/baselib/video.c:
+	.text       start:0x8037588C end:0x8037699C
+	.data       start:0x80406CE0 end:0x80406D68
+	.bss        start:0x804C0980 end:0x804C1F78
+	.sdata      start:0x804D5E88 end:0x804D5E90
+	.sbss       start:0x804D76D8 end:0x804D76E0
+	.sdata2     start:0x804DE5A0 end:0x804DE5B0
+
+sysdolphin/baselib/rumble.c:
+	.text       start:0x80378090 end:0x80378A34
+	.data       start:0x80406DE0 end:0x80406DF0
+	.bss        start:0x804C22E0 end:0x804C2310
+
 sysdolphin/baselib/spline.c:
 	.text       start:0x80378A34 end:0x80379310
 
 sysdolphin/baselib/util.c:
 	.text       start:0x8037A780 end:0x8037A94C
+	.data       start:0x80406DF0 end:0x80406E48
+	.sdata      start:0x804D5EA0 end:0x804D5EB0
 
 sysdolphin/baselib/objalloc.c:
 	.text       start:0x8037A94C end:0x8037AE34
@@ -107,6 +139,7 @@ sysdolphin/baselib/objalloc.c:
 
 sysdolphin/baselib/robj.c:
 	.text       start:0x8037AE34 end:0x8037CD80
+	.sbss       start:0x804D76E8 end:0x804D76F0
 
 sysdolphin/baselib/id.c:
 	.text       start:0x8037CD80 end:0x8037D050
@@ -120,11 +153,22 @@ sysdolphin/baselib/wobj.c:
 	.sbss       start:0x804D76F0 end:0x804D76F8
 	.sdata2     start:0x804DE6D0 end:0x804DE6F0
 
+sysdolphin/baselib/fog.c:
+	.text       start:0x8037D970 end:0x8037E1BC
+	.rodata     start:0x803B95A8 end:0x803B95E8
+	.data       start:0x80407078 end:0x80407188
+	.sdata      start:0x804D5F20 end:0x804D5F38
+	.sdata2     start:0x804DE6F0 end:0x804DE718
+
 sysdolphin/baselib/list.c:
 	.text       start:0x8037E3FC end:0x8037E6C4
+	.bss        start:0x804C2580 end:0x804C25D8
+	.sdata      start:0x804D5F48 end:0x804D5F68
 
 sysdolphin/baselib/object.c:
 	.text       start:0x8037E6C4 end:0x8037E708
+	.data       start:0x804072A8 end:0x80407300
+	.sdata      start:0x804D5F68 end:0x804D5F70
 
 sysdolphin/baselib/random.c:
 	.text       start:0x803804F8 end:0x803805DC
@@ -133,6 +177,43 @@ sysdolphin/baselib/random.c:
 
 sysdolphin/baselib/texp.c:
 	.text       start:0x80382C00 end:0x80385798
+	.data       start:0x80407738 end:0x80407AA0
+	.sdata      start:0x804D5FC8 end:0x804D5FF0
+	.sdata2     start:0x804DE7D8 end:0x804DE7E8
 
 sysdolphin/baselib/texpdag.c:
 	.text       start:0x80385798 end:0x80387DF8
+
+sysdolphin/baselib/debug.c:
+	.text       start:0x8038815C end:0x80388330
+	.data       start:0x80407D60 end:0x80407D90
+	.bss        start:0x804C2608 end:0x804C28E0
+	.sdata      start:0x804D6010 end:0x804D6018
+	.sbss       start:0x804D7710 end:0x804D7720
+
+sysdolphin/baselib/psdisp.c:
+	extab       start:0x800055F8 end:0x80005618
+	extabindex  start:0x80005804 end:0x80005834
+	.text       start:0x8039F78C end:0x803A3920
+	.rodata     start:0x803B9628 end:0x803B9658
+	.data       start:0x8040C300 end:0x8040C3A0
+	.bss        start:0x804D0FC0 end:0x804D10B0
+	.sdata      start:0x804D6380 end:0x804D6388
+	.sbss       start:0x804D7908 end:0x804D7950
+	.sdata2     start:0x804DEA10 end:0x804DEA68
+
+sysdolphin/baselib/psdisptev.c:
+	extab       start:0x80005618 end:0x80005628
+	extabindex  start:0x80005834 end:0x8000584C
+	.text       start:0x803A3920 end:0x803A4138
+
+sysdolphin/baselib/psappsrt.c:
+	extab       start:0x80005628 end:0x80005658
+	extabindex  start:0x8000584C end:0x80005894
+	.text       start:0x803A4138 end:0x803A44A4
+
+sysdolphin/baselib/sobjlib.c:
+	.text       start:0x803A44A4 end:0x803A5798
+
+sysdolphin/baselib/sislib.c:
+	.text       start:0x803A5798 end:0x803A949C

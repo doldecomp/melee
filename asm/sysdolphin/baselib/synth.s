@@ -2,16 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global HSD_Synth_80388320
-HSD_Synth_80388320:
-/* 80388320 00384F00  90 6D C0 70 */	stw r3, HSD_Synth_804D7710@sda21(r13)
-/* 80388324 00384F04  4E 80 00 20 */	blr
-
-.global HSD_Synth_80388328
-HSD_Synth_80388328:
-/* 80388328 00384F08  90 6D C0 74 */	stw r3, HSD_Synth_804D7714@sda21(r13)
-/* 8038832C 00384F0C  4E 80 00 20 */	blr
-
 .global HSD_AudioMalloc
 HSD_AudioMalloc:
 /* 80388330 00384F10  7C 08 02 A6 */	mflr r0
@@ -4184,15 +4174,6 @@ HSD_Synth_804D6030:
 
 .section .sbss
     .balign 8
-.global HSD_Synth_804D7710
-HSD_Synth_804D7710:
-    .skip 0x4
-.global HSD_Synth_804D7714
-HSD_Synth_804D7714:
-    .skip 0x4
-.global HSD_Synth_804D7718
-HSD_Synth_804D7718:
-    .skip 0x8
 .global HSD_Synth_804D7720
 HSD_Synth_804D7720:
     .skip 0x4
