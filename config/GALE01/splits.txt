@@ -54,6 +54,7 @@ melee/lb/lb_00F9.c:
 	.text       start:0x8000F9F8 end:0x80014ABC
 	.data       start:0x803BA150 end:0x803BA2C0
 	.sdata      start:0x804D3740 end:0x804D3778
+	.sbss       start:0x804D63A0 end:0x804D63C8
 	.sdata2     start:0x804D7BA0 end:0x804D7C80
 
 melee/lb/lbarq.c:
@@ -66,6 +67,22 @@ melee/lb/lbmemory.c:
 	.data       start:0x803BA2C0 end:0x803BA380
 	.bss        start:0x804318B0 end:0x80431FA0
 	.sdata      start:0x804D3788 end:0x804D37A0
+
+melee/lb/lbheap.c:
+	.text       start:0x800158D0 end:0x8001615C
+	.data       start:0x803BA380 end:0x803BA508
+	.bss        start:0x80431FA0 end:0x80432058
+	.sdata      start:0x804D37A0 end:0x804D37A8
+
+melee/lb/lbfile.c:
+	.text       start:0x8001615C end:0x80016A54
+	.data       start:0x803BA508 end:0x803BA588
+	.bss        start:0x80432058 end:0x80432078
+	.sdata      start:0x804D37A8 end:0x804D37C0
+	.sbss       start:0x804D63C8 end:0x804D63D0
+
+melee/lb/lbarchive.c:
+	.text       start:0x80016A54 end:0x800174BC
 
 melee/cm/cmsnap.c:
 	.text       start:0x800315C8 end:0x80031724
