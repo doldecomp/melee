@@ -35,7 +35,7 @@ bool lbFile_800161A0(void)
 }
 #pragma pop
 
-void lbFile_800161C4(int arg0, int arg1, HSD_Archive* arg2, int arg3, int arg4,
+void lbFile_800161C4(int arg0, int arg1, void* arg2, int arg3, int arg4,
                      int arg5)
 {
     cancel = false;
@@ -127,7 +127,7 @@ s32 lbFile_800163D8(const char* basename)
     return lbFile_8001634C(entry_num);
 }
 
-void lbFile_800164A4(s32 arg0, HSD_Archive* arg1, s32* arg2, s32 arg3,
+void lbFile_800164A4(s32 arg0, void* arg1, s32* arg2, s32 arg3,
                      HSD_DevComCallback arg4, s32 arg5)
 {
     s32 var_r0;
@@ -137,7 +137,7 @@ void lbFile_800164A4(s32 arg0, HSD_Archive* arg1, s32* arg2, s32 arg3,
                       arg4, arg5);
 }
 
-void lbFile_80016580(const char* basename, HSD_Archive* arg1, s32* arg2,
+void lbFile_80016580(const char* basename, void* arg1, s32* arg2,
                      HSD_DevComCallback arg3, s32 arg4)
 {
     u8 _[4];
@@ -153,7 +153,7 @@ void lbFile_80016580(const char* basename, HSD_Archive* arg1, s32* arg2,
     lbFile_800164A4(entry_num, arg1, arg2, 1, arg3, arg4);
 }
 
-void lbFile_8001668C(const char* arg0, HSD_Archive* arg1, s32* arg2)
+void lbFile_8001668C(const char* arg0, void* arg1, s32* arg2)
 {
     cancel = false;
     lbFile_80016580(arg0, arg1, arg2, lbFile_8001615C, 0);
@@ -161,7 +161,7 @@ void lbFile_8001668C(const char* arg0, HSD_Archive* arg1, s32* arg2)
     } while (!lbFile_800161A0());
 }
 
-inline void qwer(s32 a, const char* arg0, HSD_Archive** arg1, s32* arg2)
+inline void qwer(s32 a, const char* arg0, void** arg1, s32* arg2)
 {
     *arg2 = lbFile_800163D8(arg0);
     *arg1 = lbHeap_80015BD0(a, (*arg2 + 0x1F) & 0xFFFFFFE0);
@@ -172,7 +172,7 @@ inline void qwer(s32 a, const char* arg0, HSD_Archive** arg1, s32* arg2)
     } while (!lbFile_800161A0());
 }
 
-void lbFile_80016760(const char* arg0, HSD_Archive** arg1, s32* arg2)
+void lbFile_80016760(const char* arg0, void** arg1, s32* arg2)
 {
     cancel = false;
     qwer(0, arg0, arg1, arg2);
@@ -183,7 +183,7 @@ inline s32 func_800163D8_inline(const char* arg1)
     return lbFile_800163D8(arg1);
 }
 
-bool lbFile_800168A0(s32 arg0, const char* arg1, HSD_Archive** arg2, s32* arg3)
+bool lbFile_800168A0(s32 arg0, const char* arg1, void** arg2, s32* arg3)
 {
     if ((*arg2 = lbDvd_8001819C(arg1))) {
         *arg3 = func_800163D8_inline(arg1);

@@ -1,22 +1,23 @@
-#include "lb/lbarchive.h"
+#include "lbarchive.h"
 
-#include <dolphin/os/OSError.h>
+#include "lbfile.h"
+#include "lbheap.h"
+
+#include <stdarg.h>
+#include <dolphin/os.h>
 #include <baselib/archive.h>
 #include <baselib/debug.h>
 
-extern char lbArchive_803BA588[]; //"HSD_ArchiveParse error!\n"
-extern char lbArchive_803BA5A4[]; //"lbarchive.c"
-
-extern char lbArchive_804D37C0[2]; //"0"
-
+#pragma push
+#pragma dont_inline on
 void lbArchive_InitializeDAT(HSD_Archive* archive, u8* data, u32 length)
 {
     char* symbol;
     int i = 0;
 
     if (HSD_ArchiveParse(archive, data, length) == -1) {
-        OSReport(lbArchive_803BA588);
-        __assert(lbArchive_803BA5A4, 73, lbArchive_804D37C0);
+        OSReport("HSD_ArchiveParse error!\n");
+        HSD_ASSERT(73, 0);
     }
 
     while (true) {
@@ -28,4 +29,35 @@ void lbArchive_InitializeDAT(HSD_Archive* archive, u8* data, u32 length)
             return;
         }
     }
+}
+#pragma pop
+
+void lbArchive_LoadSections(HSD_Archive* archive, void** file, ...)
+{
+    char* symbols;
+    va_list sections;
+
+    va_start(sections, file);
+    for (; file != NULL; file = va_arg(sections, void**)) {
+        symbols = va_arg(sections, char*);
+        *file = NULL;
+        *file = HSD_ArchiveGetPublicAddress(archive, symbols);
+        if (*file == NULL) {
+            OSReport("Cannot find symbol %s.\n", symbols);
+        }
+    }
+    va_end(sections);
+}
+
+HSD_Archive* lbArchive_LoadArchive(char* filename)
+{
+    s32 length;
+    u8* data;
+    HSD_Archive* archive;
+
+    data = lbHeap_80015BD0(0, lbFile_800163D8(filename) + 0x1F & 0xFFFFFFE0);
+    archive = lbHeap_80015BD0(0, 0x44);
+    lbFile_8001668C(filename, data, &length);
+    lbArchive_InitializeDAT(archive, data, (u32) length);
+    return archive;
 }
