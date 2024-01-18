@@ -12,6 +12,150 @@ Sections:
 	.sbss       type:bss align:8
 	.sdata2     type:rodata align:8
 
+melee/lb/lbcommand.c:
+	.text       start:0x80005940 end:0x80005BB0
+	.data       start:0x803B9840 end:0x803B9880
+	.sdata2     start:0x804D79E0 end:0x804D79F0
+
+melee/lb/lbcollision.c:
+	.text       start:0x80005BB0 end:0x8000AD8C
+	.data       start:0x803B9880 end:0x803B9FC0
+	.sdata2     start:0x804D79F0 end:0x804D7A58
+
+melee/lb/lblanguage.c:
+	.text       start:0x8000AD8C end:0x8000AEC8
+
+melee/lb/lbtime.c:
+	.text       start:0x8000AEC8 end:0x8000B074
+
+melee/lb/lb_00B0.c:
+	.text       start:0x8000B074 end:0x8000CE50
+	.data       start:0x803B9FC0 end:0x803BA050
+	.sdata      start:0x804D3710 end:0x804D3720
+	.sdata2     start:0x804D7A58 end:0x804D7A68
+
+melee/lb/lb_00CE.c:
+	.text       start:0x8000CE50 end:0x8000D2EC
+	.sdata2     start:0x804D7A68 end:0x804D7AA8
+
+melee/lb/lbvector.c:
+	.text       start:0x8000D2EC end:0x8000E9F0
+	.data       start:0x803BA050 end:0x803BA0D8
+	.sdata      start:0x804D3720 end:0x804D3728
+	.sdata2     start:0x804D7AA8 end:0x804D7B30
+
+melee/lb/lbshadow.c:
+	.text       start:0x8000E9F0 end:0x8000F9F8
+	.data       start:0x803BA0D8 end:0x803BA150
+	.sdata      start:0x804D3728 end:0x804D3740
+	.sdata2     start:0x804D7B30 end:0x804D7BA0
+
+melee/lb/lb_00F9.c:
+	.text       start:0x8000F9F8 end:0x80014ABC
+	.rodata     start:0x803B7280 end:0x803B72C0
+	.data       start:0x803BA150 end:0x803BA2C0
+	.sdata      start:0x804D3740 end:0x804D3778
+	.sbss       start:0x804D63A0 end:0x804D63C8
+	.sdata2     start:0x804D7BA0 end:0x804D7C80
+
+melee/lb/lbarq.c:
+	.text       start:0x80014ABC end:0x80014E24
+	.bss        start:0x804316C0 end:0x804318B0
+	.sdata      start:0x804D3778 end:0x804D3788
+
+melee/lb/lbmemory.c:
+	.text       start:0x80014E24 end:0x800158D0
+	.data       start:0x803BA2C0 end:0x803BA380
+	.bss        start:0x804318B0 end:0x80431FA0
+	.sdata      start:0x804D3788 end:0x804D37A0
+
+melee/lb/lbheap.c:
+	.text       start:0x800158D0 end:0x8001615C
+	.data       start:0x803BA380 end:0x803BA508
+	.bss        start:0x80431FA0 end:0x80432058
+	.sdata      start:0x804D37A0 end:0x804D37A8
+
+melee/lb/lbfile.c:
+	.text       start:0x8001615C end:0x80016A54
+	.data       start:0x803BA508 end:0x803BA588
+	.bss        start:0x80432058 end:0x80432078
+	.sdata      start:0x804D37A8 end:0x804D37C0
+	.sbss       start:0x804D63C8 end:0x804D63D0
+
+melee/lb/lbarchive.c:
+	.text       start:0x80016A54 end:0x800174BC
+	.data       start:0x803BA588 end:0x803BA638
+	.sdata      start:0x804D37C0 end:0x804D37D0
+
+melee/lb/lbdvd.c:
+	.text       start:0x800174BC end:0x80019230
+	.rodata     start:0x803B72C0 end:0x803B7300
+	.data       start:0x803BA638 end:0x803BA708
+	.bss        start:0x80432078 end:0x804329F0
+	.sdata      start:0x804D37D0 end:0x804D3800
+
+melee/lb/lb_0192.c:
+	.text       start:0x80019230 end:0x80019880
+	.data       start:0x803BA708 end:0x803BAAA8
+	.sdata      start:0x804D3800 end:0x804D3804
+
+melee/lb/lb_0198.c:
+	.text       start:0x80019880 end:0x8001D2BC
+	.data       start:0x803BAAA8 end:0x803BACC8
+	.bss        start:0x804329F0 end:0x804333E0
+	.sdata      start:0x804D3804 end:0x804D3828
+	.sbss       start:0x804D63D0 end:0x804D63D8
+	.sdata2     start:0x804D7C80 end:0x804D7CC8
+
+melee/lb/lbsnap.c:
+	.text       start:0x8001D2BC end:0x8001E2F8
+	.data       start:0x803BACC8 end:0x803BADB0
+	.sdata      start:0x804D3828 end:0x804D3830
+
+melee/lb/lbgx.c:
+	.text       start:0x8001E2F8 end:0x8001E560
+
+melee/lb/lbanim.c:
+	.text       start:0x8001E560 end:0x8001E8F8
+
+melee/lb/lbmthp.c:
+	.text       start:0x8001E8F8 end:0x8001FC08
+	.data       start:0x803BADB0 end:0x803BB000
+	.bss        start:0x804333E0 end:0x80433658
+	.sdata      start:0x804D3830 end:0x804D3840
+	.sdata2     start:0x804D7CC8 end:0x804D7CE8
+
+melee/lb/lbbgflash.c:
+	.text       start:0x8001FC08 end:0x80021CE8
+	.data       start:0x803BB000 end:0x803BB0B0
+	.bss        start:0x80433658 end:0x804336D0
+	.sdata      start:0x804D3840 end:0x804D3868
+	.sbss       start:0x804D63D8 end:0x804D63E8
+	.sdata2     start:0x804D7CE8 end:0x804D7D70
+
+melee/lb/lbrefract_data.c:
+	.sbss       start:0x804D63E8 end:0x804D63F0
+
+melee/lb/lbrefract1.c:
+	.text       start:0x80021CE8 end:0x800222A4
+	.sdata2     start:0x804D7D70 end:0x804D7DA8
+
+melee/lb/lbrefract2.c:
+	.text       start:0x800222A4 end:0x8002305C
+	.rodata     start:0x803B7300 end:0x803B73B8
+	.data       start:0x803BB0B0 end:0x803BB300
+	.bss        start:0x804336D0 end:0x80433710
+	.sdata      start:0x804D3868 end:0x804D3870
+	.sdata2     start:0x804D7DA8 end:0x804D7DD8
+
+melee/lb/lbaudio_ax.c:
+	.text       start:0x8002305C end:0x80028B9C
+	.data       start:0x803BB300 end:0x803BCB18
+	.bss        start:0x80433710 end:0x80452C68
+	.sdata      start:0x804D3870 end:0x804D3938
+	.sbss       start:0x804D63F0 end:0x804D6458
+	.sdata2     start:0x804D7DD8 end:0x804D7E00
+
 melee/cm/cmsnap.c:
 	.text       start:0x800315C8 end:0x80031724
 	.data       start:0x803BCD90 end:0x803BCDC0
