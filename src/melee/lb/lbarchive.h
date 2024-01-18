@@ -10,7 +10,7 @@ void lbArchive_InitializeDAT(HSD_Archive* archive, u8* data, u32 length);
 void lbArchive_80016EFC(void);
 HSD_Archive* lbArchive_LoadArchive(char* filename);
 
-void lbArchive_80016C64(char*, void*, char*, int, ...);
+HSD_Archive* lbArchive_80016C64(char*, void**, ...);
 void* lbArchive_80016DBC(void*, ...);
 s32 lbArchive_800171CC(void*, ...);
 void lbArchive_LoadSections(HSD_Archive* archive, void** file, ...);
