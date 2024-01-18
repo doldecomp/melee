@@ -49,7 +49,7 @@ typedef struct {
 /* 00408EE0 */ extern psdisp_UnknownType001 HSD_PSDisp_8040C300;
 /* 003B6208 */ extern f32 HSD_PSDisp_803B9628[12];
 
-#ifndef MUST_MATCH
+#ifdef 0
 void setVtxDesc(s32 fmt)
 {
     GXClearVtxDesc();
