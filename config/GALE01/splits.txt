@@ -34,6 +34,39 @@ melee/lb/lb_00B0.c:
 	.sdata      start:0x804D3710 end:0x804D3720
 	.sdata2     start:0x804D7A58 end:0x804D7A68
 
+melee/lb/lb_00CE.c:
+	.text       start:0x8000CE50 end:0x8000D2EC
+	.sdata2     start:0x804D7A68 end:0x804D7AA8
+
+melee/lb/lbvector.c:
+	.text       start:0x8000D2EC end:0x8000E9F0
+	.data       start:0x803BA050 end:0x803BA0D8
+	.sdata      start:0x804D3720 end:0x804D3728
+	.sdata2     start:0x804D7AA8 end:0x804D7B30
+
+melee/lb/lbshadow.c:
+	.text       start:0x8000E9F0 end:0x8000F9F8
+	.data       start:0x803BA0D8 end:0x803BA150
+	.sdata      start:0x804D3728 end:0x804D3740
+	.sdata2     start:0x804D7B30 end:0x804D7BA0
+
+melee/lb/lb_00F9.c:
+	.text       start:0x8000F9F8 end:0x80014ABC
+	.data       start:0x803BA150 end:0x803BA2C0
+	.sdata      start:0x804D3740 end:0x804D3778
+	.sdata2     start:0x804D7BA0 end:0x804D7C80
+
+melee/lb/lbarq.c:
+	.text       start:0x80014ABC end:0x80014E24
+	.bss        start:0x804316C0 end:0x804318B0
+	.sdata      start:0x804D3778 end:0x804D3788
+
+melee/lb/lbmemory.c:
+	.text       start:0x80014E24 end:0x800158D0
+	.data       start:0x803BA2C0 end:0x803BA380
+	.bss        start:0x804318B0 end:0x80431FA0
+	.sdata      start:0x804D3788 end:0x804D37A0
+
 melee/cm/cmsnap.c:
 	.text       start:0x800315C8 end:0x80031724
 	.data       start:0x803BCD90 end:0x803BCDC0
