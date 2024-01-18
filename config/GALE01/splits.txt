@@ -184,6 +184,13 @@ sysdolphin/baselib/texp.c:
 sysdolphin/baselib/texpdag.c:
 	.text       start:0x80385798 end:0x80387DF8
 
+sysdolphin/baselib/debug.c:
+	.text       start:0x8038815C end:0x80388330
+	.data       start:0x80407D60 end:0x80407D90
+	.bss        start:0x804C2608 end:0x804C28E0
+	.sdata      start:0x804D6010 end:0x804D6018
+	.sbss       start:0x804D7710 end:0x804D7720
+
 sysdolphin/baselib/psdisp.c:
 	extab       start:0x800055F8 end:0x80005618
 	extabindex  start:0x80005804 end:0x80005834

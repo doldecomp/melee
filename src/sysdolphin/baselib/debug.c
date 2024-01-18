@@ -1,10 +1,5 @@
 #include "debug.h"
 
-#include "synth.h"
-
-#include <dolphin/os.h>
-#include <dolphin/os/OSContext.h>
-
 struct UnkStruct80400430 {
     char filler0[0x52];
     char unk52;
@@ -19,25 +14,29 @@ struct DebugContext {
     u8 unk[0x10];
 } HSD_Debug_804C2608;
 
+LogFunc logFunc;
+PanicCallback panicCallback;
+ReportCallback reportCallback;
+
 #ifdef MUST_MATCH
 #pragma peephole off
 #endif
 
-int HSD_Debug_8038815C(s32 arg0, s32 arg1, s32* arg2, s32 arg3)
+int report_func(s32 arg0, s32 arg1, s32* arg2, s32 arg3)
 {
-    if (HSD_Synth_804D7710 != NULL) {
-        HSD_Synth_804D7710(arg1, *arg2);
+    if (reportCallback != NULL) {
+        reportCallback(arg1, *arg2);
     }
-    HSD_Synth_804D7718(arg0, arg1, arg2, arg3);
+    logFunc(arg0, arg1, arg2, arg3);
     return 0;
 }
 
-void HSD_Debug_803881E4(void)
+void HSD_LogInit(void)
 {
-    if (HSD_Synth_804D7718 == NULL) {
-        HSD_Synth_804D7718 = __files.unk84;
+    if (logFunc == NULL) {
+        logFunc = __files.unk84;
     }
-    __files.unk84 = HSD_Debug_8038815C;
+    __files.unk84 = report_func;
     __files.unk52 = 0;
 }
 
@@ -49,10 +48,20 @@ void __assert(char* str, u32 arg1, char* arg2)
 
 void HSD_Panic(char* arg0, u32 line, char* arg2)
 {
-    if (HSD_Synth_804D7714 != NULL) {
+    if (panicCallback != NULL) {
         OSSaveContext(&HSD_Debug_804C2608.context);
         OSReport("%s in %s on line %d.\n", arg2, arg0, line);
-        HSD_Synth_804D7714(&HSD_Debug_804C2608.context);
+        panicCallback(&HSD_Debug_804C2608.context);
     }
     OSPanic(arg0, line, arg2);
+}
+
+void HSD_SetReportCallback(ReportCallback cb)
+{
+    reportCallback = cb;
+}
+
+void HSD_SetPanicCallback(PanicCallback cb)
+{
+    panicCallback = cb;
 }

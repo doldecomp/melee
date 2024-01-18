@@ -3,9 +3,16 @@
 
 #include <platform.h>
 
+#include <dolphin/os.h>
+#include <dolphin/os/OSContext.h>
+
+typedef void (*ReportCallback)(s32, s32);
+typedef void (*PanicCallback)(OSContext*, ...);
+typedef int (*LogFunc)(s32, s32, s32*, s32);
+
 ATTRIBUTE_NORETURN void __assert(char*, u32, char*);
 
-void HSD_Debug_803881E4(void);
+void HSD_LogInit(void);
 ATTRIBUTE_NORETURN void HSD_Panic(char*, u32, char*);
 
 /// @todo Take @c file as another arg, ignore it if @c !MUST_MATCH.
@@ -21,6 +28,9 @@ ATTRIBUTE_NORETURN void HSD_Panic(char*, u32, char*);
 #define HSD_ASSERT2(file, line, msg, cond)                                    \
     ((cond) ? ((void) 0) : __assert((file), (line), (#msg)))
 
-int HSD_Debug_8038815C(s32 arg0, s32 arg1, s32* arg2, s32 arg3);
+int report_func(s32 arg0, s32 arg1, s32* arg2, s32 arg3);
+
+void HSD_SetReportCallback(ReportCallback cb);
+void HSD_SetPanicCallback(PanicCallback cb);
 
 #endif
