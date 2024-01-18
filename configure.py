@@ -94,6 +94,45 @@ parser.add_argument(
     action="store_true",
     help="print verbose output",
 )
+parser.add_argument(
+    "--msg-style",
+    choices=["mpw", "std", "gcc", "ide", "parseable"],
+    default="gcc",
+    help="message style of the compiler (default 'gcc')",
+)
+parser.add_argument(
+    "--max-errors",
+    type=int,
+    default=1,
+    help="the maximum number of errors allowed by the compiler (default 1)",
+)
+parser.add_argument(
+    "--warn-all",
+    action="store_true",
+    help="emit all compiler warnings",
+)
+parser.add_argument(
+    "--no-warn-error",
+    action="store_false",
+    dest="warn_error",
+    help="compiler warnings are not considered errors",
+)
+parser.add_argument(
+    "--non-matching",
+    action="store_true",
+    help="compile non-matching code",
+)
+parser.add_argument(
+    "--wip",
+    action="store_true",
+    help="compile work-in-progress code",
+)
+parser.add_argument(
+    "--no-require-protos",
+    dest="require_protos",
+    action="store_false",
+    help="do not require function prototypes",
+)
 args = parser.parse_args()
 
 config = ProjectConfig()
@@ -130,7 +169,6 @@ config.ldflags = [
 # Base flags, common to most GC/Wii games.
 # Generally leave untouched, with overrides added below.
 cflags_base = [
-    "-msgstyle gcc",  # TODO arg
     "-nowraplines",
     "-cwd source",
     "-Cpp_exceptions off",
@@ -146,18 +184,36 @@ cflags_base = [
     '-pragma "warn_notinlined off"',
     "-RTTI off",
     "-str reuse",
-    # "-W all",  # TODO
-    "-maxerrors 1",  # TODO arg
-    "-DMUST_MATCH",  # TODO arg
     f"-DVERSION={version_num}",
 ]
 
-# Debug flags
-# TODO
 if config.debug:
     cflags_base.extend(["-sym on", "-DDEBUG=1"])
 else:
     cflags_base.append("-DNDEBUG=1")
+
+if args.max_errors is not None:
+    cflags_base.append(f"-maxerrors {args.max_errors}")
+    if args.max_errors == 0:
+        cflags_base.append("-nofail")
+
+if args.msg_style is not None:
+    cflags_base.append(f"-msgstyle {args.msg_style}")
+
+if args.warn_all:
+    cflags_base.append("-warn all")
+
+if args.warn_error:
+    cflags_base.append("-warn iserror")
+
+if not args.non_matching:
+    cflags_base.append("-DMUST_MATCH")
+
+if args.wip:
+    cflags_base.append("-DWIP")
+
+if args.require_protos:
+    cflags_base.append("-requireprotos")
 
 # Metrowerks library flags
 cflags_runtime = [
@@ -251,8 +307,8 @@ def MeleeLib(lib_name: str, objects: Objects) -> LibDict:
 Matching = True
 NonMatching = False
 
-config.warn_missing_config = config.debug
-config.warn_missing_source = config.debug
+config.warn_missing_config = args.verbose
+config.warn_missing_source = args.verbose
 config.libs = [
     SysdolphinLib(
         "sysdolphin",
