@@ -1,1 +1,1 @@
---context orig.c --function func_004000A4 --function func_00400224 --function func_00400404 --function func_004009F4 --function func_00400FFC --function func_00401498
+--context orig.c --function test_s8 --function test_s16 --function test_s32_div --function test_s32_mod --function test_u32_div --function test_u32_mod

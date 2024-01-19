@@ -13,10 +13,10 @@ nop
 test:
 addiu $sp, $sp, -0x34
 sw $s0, 0X20+16($sp)
-beq $zero, $zero, .label
+beq $zero, $zero, .label2
 loc_whatever:
 lui $v0, (0x12345678 >> (8 + 0x4 * 2))
-.label: addiu $v0, 0xFFFF # subtract 1
+.label1: .label2: .label2: .label3: addiu $v0, 0xFFFF # subtract 1
 b jumptarget_label
  li $two, 2 # fictive register names are (currently) fine
 jlabel jumptarget_label

@@ -40,6 +40,8 @@ if "source" in form:
         cmd.append("--no-casts")
     if "allman" in form:
         cmd.append("--allman")
+    elif "knr" in form:
+        cmd.append("--knr")
     if "extraswitchindent" in form:
         cmd.append("--indent-switch-contents")
     if "leftptr" in form:
@@ -265,6 +267,7 @@ label {
     <label><input type="checkbox" name="noandor">Disable &amp;&amp;/||</label>
     <label><input type="checkbox" name="nocasts">Hide type casts</label>
     <label><input type="checkbox" name="allman">Allman braces</label>
+    <label><input type="checkbox" name="knr">K&R braces</label>
     <label><input type="checkbox" name="extraswitchindent">Indent switch contents an extra level</label>
     <label><input type="checkbox" name="leftptr">* to the left</label>
     <label><input type="checkbox" name="zfillconstants">0-fill constants</label>
@@ -353,7 +356,7 @@ contextEl.addEventListener("change", function() {
     localStorage.mips_to_c_saved_context = contextEl.value;
 });
 document.getElementById("options").addEventListener("change", function(event) {
-    var shouldSave = ["usesidebar", "allman", "extraswitchindent", "leftptr", "zfillconstants", "globals", "nocasts", "noandor", "noifs", "noswitches", "dark", "regvarsselect", "regvars", "comment_style", "target", "nounkinference", "stackstructs"];
+    var shouldSave = ["usesidebar", "allman", "knr", "extraswitchindent", "leftptr", "zfillconstants", "globals", "nocasts", "noandor", "noifs", "noswitches", "dark", "regvarsselect", "regvars", "comment_style", "target", "nounkinference", "stackstructs"];
     var options = {};
     for (var key of shouldSave) {
         var el = document.getElementsByName(key)[0];

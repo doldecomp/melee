@@ -168,7 +168,7 @@ class LabelStatement:
     def format(self, fmt: Formatter) -> str:
         lines = []
         if self.node in self.context.case_nodes:
-            for (switch, case_label) in self.context.case_nodes[self.node]:
+            for switch, case_label in self.context.case_nodes[self.node]:
                 comments = comments_for_switch(switch)
                 lines.append(fmt.with_comments(f"{case_label}:", comments, indent=-1))
         if self.node in self.context.goto_nodes:

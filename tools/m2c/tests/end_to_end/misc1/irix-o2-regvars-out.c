@@ -1,4 +1,4 @@
-void *func_00400140(s32, void *, s32, s32, s32);    /* static */
+void *func_00400140(s32, s32, s32, s32, s32);       /* static */
 ? func_00400158(s32, void *, s32);                  /* static */
 extern ? D_410170;
 extern ? D_410178;
@@ -11,11 +11,11 @@ void *test(s32 arg0, s32 arg1) {
     s32 var_a0;
     s32 var_a2;
     s32 var_a3;
+    s32 var_t0;
     s32 var_t1;
     s32 var_t7;
     s32 var_t8;
     s32 var_t9;
-    s8 var_t0;
     void *temp_v0;
     void *var_a1;
     void *var_v0;
@@ -33,7 +33,7 @@ void *test(s32 arg0, s32 arg1) {
     var_a0 = 1;
     var_a1 = (void *)2;
     sp24 = var_t9;
-    temp_v0 = func_00400140(1, (void *)2, var_a2, var_a3, var_t7);
+    temp_v0 = func_00400140(1, 2, var_a2, var_a3, var_t7);
     var_a1 = temp_v0;
     if (temp_v0 == NULL) {
         var_v0 = NULL;
