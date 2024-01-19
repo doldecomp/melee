@@ -44,5 +44,6 @@ u32 it_802B19AC(Fighter_GObj*, Vec3* cur_pos, u32, u32, f32 facing_dir);       /
 /* 112C18 */ void ftSk_SpecialAirNLoop_Coll(Fighter_GObj* gobj);
 /* 112C98 */ void ftSk_SpecialAirNCancel_Coll(Fighter_GObj* gobj);
 /* 112CE4 */ void ftSk_SpecialAirNEnd_Coll(Fighter_GObj* gobj);
+/* 112D44 */ void ftSk_ShootNeedles(HSD_GObj* gobj);
 
 #endif
