@@ -1,5 +1,5 @@
-? test(s32 arg0) {
-    ? var_v1;
+s32 test(s32 arg0) {
+    s32 var_v1;
 
     var_v1 = 0;
     if (arg0 != 0) {

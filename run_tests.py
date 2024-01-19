@@ -9,7 +9,7 @@ import multiprocessing
 import re
 import shlex
 import sys
-from coverage import Coverage  # type: ignore
+from coverage import Coverage
 from pathlib import Path
 from typing import Any, Iterator, List, Optional, Pattern, Tuple
 
@@ -134,7 +134,6 @@ def create_e2e_tests(
     e2e_top_dir: Path,
     e2e_test_path: Path,
 ) -> List[TestCase]:
-
     cases: List[TestCase] = []
     for asm_file in e2e_test_path.glob("*.s"):
         output_file = asm_file.parent.joinpath(asm_file.stem + "-out.c")

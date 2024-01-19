@@ -1,6 +1,7 @@
 import abc
+from collections import defaultdict
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Sequence, Tuple, TypeVar, Union
+from typing import Dict, List, Optional, Sequence, Set, Tuple, TypeVar, Union
 
 from .asm_file import Label
 from .asm_instruction import (
@@ -11,6 +12,7 @@ from .asm_instruction import (
     AsmLiteral,
     BinOp,
     JumpTarget,
+    Macro,
     NaiveParsingArch,
     Register,
     RegFormatter,
@@ -37,7 +39,7 @@ def make_pattern(*parts: str) -> Pattern:
         if part == "*":
             ret.append((None, optional))
         elif part.endswith(":"):
-            ret.append((Label(part.strip(".:")), optional))
+            ret.append((Label([part[:-1]]), optional))
         else:
             ins = parse_asm_instruction(part, NaiveParsingArch(), RegFormatter(), {})
             ret.append((ins, optional))
@@ -84,7 +86,10 @@ class SimpleAsmPattern(AsmPattern):
 @dataclass
 class TryMatchState:
     symbolic_registers: Dict[str, Register] = field(default_factory=dict)
-    symbolic_labels: Dict[str, str] = field(default_factory=dict)
+    symbolic_labels_def: Dict[str, Label] = field(default_factory=dict)
+    symbolic_labels_uses: Dict[str, Set[str]] = field(
+        default_factory=lambda: defaultdict(set)
+    )
     symbolic_literals: Dict[str, int] = field(default_factory=dict)
     wildcard_items: List[BodyPart] = field(default_factory=list)
 
@@ -103,6 +108,18 @@ class TryMatchState:
             return self.match_var(self.symbolic_registers, exp.register_name, actual)
         else:
             return exp.register_name == actual.register_name
+
+    def match_label_def(self, key: str, defn: Label) -> bool:
+        assert key not in self.symbolic_labels_def
+        self.symbolic_labels_def[key] = defn
+        return self.symbolic_labels_uses[key] <= set(defn.names)
+
+    def match_label_use(self, key: str, use: str) -> bool:
+        defn = self.symbolic_labels_def.get(key, None)
+        if defn is not None and use not in defn.names:
+            return False
+        self.symbolic_labels_uses[key].add(use)
+        return True
 
     def eval_math(self, e: Argument) -> int:
         if isinstance(e, AsmLiteral):
@@ -129,7 +146,11 @@ class TryMatchState:
         if isinstance(e, Register):
             return isinstance(a, Register) and self.match_reg(a, e)
         if isinstance(e, AsmGlobalSymbol):
-            if e.symbol_name.isupper():
+            if e.symbol_name.startswith("."):
+                return isinstance(a, AsmGlobalSymbol) and self.match_label_use(
+                    e.symbol_name, a.symbol_name
+                )
+            elif e.symbol_name.isupper():
                 return isinstance(a, AsmLiteral) and self.match_var(
                     self.symbolic_literals, e.symbol_name, a.value
                 )
@@ -143,12 +164,14 @@ class TryMatchState:
                 and self.match_arg(a.lhs, e.lhs)
                 and self.match_reg(a.rhs, e.rhs)
             )
-        if isinstance(e, JumpTarget):
-            return isinstance(a, JumpTarget) and self.match_var(
-                self.symbolic_labels, e.target, a.target
-            )
         if isinstance(e, BinOp):
             return isinstance(a, AsmLiteral) and a.value == self.eval_math(e)
+        if isinstance(e, Macro):
+            return (
+                isinstance(a, Macro)
+                and a.macro_name == e.macro_name
+                and self.match_arg(a.argument, e.argument)
+            )
         assert False, f"bad pattern part: {e}"
 
     def match_one(self, actual: BodyPart, exp: PatternPart) -> bool:
@@ -156,8 +179,9 @@ class TryMatchState:
             self.wildcard_items.append(actual)
             return True
         if isinstance(exp, Label):
-            return isinstance(actual, Label) and self.match_var(
-                self.symbolic_labels, exp.name, actual.name
+            assert len(exp.names) == 1
+            return isinstance(actual, Label) and self.match_label_def(
+                exp.names[0], actual
             )
         if not isinstance(actual, Instruction):
             return False
@@ -167,7 +191,7 @@ class TryMatchState:
         if exp.args:
             if len(ins.args) != len(exp.args):
                 return False
-            for (a, e) in zip(ins.args, exp.args):
+            for a, e in zip(ins.args, exp.args):
                 if not self.match_arg(a, e):
                     return False
         return True
@@ -181,6 +205,7 @@ class TryMatchState:
 @dataclass
 class AsmMatcher:
     input: List[BodyPart]
+    labels: Set[str]
     output: List[BodyPart] = field(default_factory=list)
     index: int = 0
 
@@ -188,7 +213,7 @@ class AsmMatcher:
         state = TryMatchState()
 
         start_index = index = self.index
-        for (pat, optional) in pattern:
+        for pat, optional in pattern:
             if isinstance(pat, AsmInstruction) and pat.mnemonic[0] == ".":
                 if not state.match_meta(pat) and not optional:
                     return None
@@ -208,6 +233,9 @@ class AsmMatcher:
             if isinstance(part, Instruction):
                 return part.meta.derived()
         return InstructionMeta.missing()
+
+    def branch_target_exists(self, name: str) -> bool:
+        return name in self.labels
 
     def apply(self, repl: Replacement, arch: ArchAsm) -> None:
         # Track which registers are overwritten/clobbered in the replacement asm
@@ -245,7 +273,8 @@ def simplify_patterns(
     """Detect and simplify asm standard patterns emitted by known compilers. This is
     especially useful for patterns that involve branches, which are hard to deal with
     in the translate phase."""
-    matcher = AsmMatcher(body)
+    labels = {name for item in body if isinstance(item, Label) for name in item.names}
+    matcher = AsmMatcher(body, labels)
     while matcher.index < len(matcher.input):
         for pattern in patterns:
             m = pattern.match(matcher)

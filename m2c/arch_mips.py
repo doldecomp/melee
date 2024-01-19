@@ -425,11 +425,11 @@ class Mips1DoubleLoadStorePattern(AsmPattern):
         return Replacement([new_instr], len(m.body))
 
 
-class GccSqrtPattern(SimpleAsmPattern):
+class GccSqrtPatternJal(SimpleAsmPattern):
     pattern = make_pattern(
         "sqrt.s $o, $i",
         "c.eq.s",
-        "nop",
+        "nop?",
         "bc1t",
         "*",
         "jal sqrtf",
@@ -438,7 +438,25 @@ class GccSqrtPattern(SimpleAsmPattern):
     )
 
     def replace(self, m: AsmMatch) -> Replacement:
-        return Replacement([m.body[0], m.body[4]], len(m.body))
+        return Replacement([m.body[0], m.wildcard_items[0]], len(m.body))
+
+
+class GccSqrtPatternJalr(SimpleAsmPattern):
+    pattern = make_pattern(
+        "sqrt.s $o, $i",
+        "c.eq.s",
+        "nop?",
+        "bc1t",
+        "*",
+        "lui $x, %hi(sqrtf)",
+        "addiu $x, $x, %lo(sqrtf)",
+        "jalr $ra, $x",
+        "nop",
+        "mov.s $o, $f0?",
+    )
+
+    def replace(self, m: AsmMatch) -> Replacement:
+        return Replacement([m.body[0], m.wildcard_items[0]], len(m.body))
 
 
 class TrapuvPattern(SimpleAsmPattern):
@@ -685,7 +703,7 @@ class MipsArch(Arch):
     frame_pointer_reg = Register("fp")
     return_address_reg = Register("ra")
 
-    base_return_regs = [Register(r) for r in ["v0", "f0"]]
+    base_return_regs = [(Register("v0"), False), (Register("f0"), True)]
     all_return_regs = [Register(r) for r in ["v0", "v1", "f0", "f1"]]
     argument_regs = [
         Register(r) for r in ["a0", "a1", "a2", "a3", "f12", "f13", "f14", "f15"]
@@ -1238,7 +1256,8 @@ class MipsArch(Arch):
         UtfPattern(),
         FtuPattern(),
         Mips1DoubleLoadStorePattern(),
-        GccSqrtPattern(),
+        GccSqrtPatternJal(),
+        GccSqrtPatternJalr(),
         TrapuvPattern(),
         SetGpPattern(),
         AlignedMemcpyPattern(),

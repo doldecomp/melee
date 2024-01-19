@@ -152,6 +152,7 @@ class TailCallPattern(AsmPattern):
             isinstance(instr, Instruction)
             and instr.mnemonic == "b"
             and isinstance(instr.args[0], AsmGlobalSymbol)
+            and not matcher.branch_target_exists(instr.args[0].symbol_name)
         ):
             return Replacement(
                 [
@@ -325,7 +326,7 @@ class PpcArch(Arch):
     frame_pointer_reg = Register("r30")
     return_address_reg = Register("lr")
 
-    base_return_regs = [Register(r) for r in ["r3", "f1"]]
+    base_return_regs = [(Register("r3"), False), (Register("f1"), True)]
     all_return_regs = [Register(r) for r in ["f1", "r3", "r4"]]
     argument_regs = [
         Register(r)
@@ -446,7 +447,7 @@ class PpcArch(Arch):
     def missing_return(cls) -> List[Instruction]:
         return [cls.parse("blr", [], InstructionMeta.missing())]
 
-    # List of all instructions where `$r0` as certian args is interpreted as `0`
+    # List of all instructions where `$r0` as certain args is interpreted as `0`
     # instead of the contents of `$r0`. The dict value represents the argument
     # index that is affected.
     INSTRS_R0_AS_ZERO: ClassVar[Dict[str, int]] = {
@@ -557,12 +558,6 @@ class PpcArch(Arch):
                     "rlwinm",
                     args[:2] + [add(args[2], args[3]), sub(lit(32), args[2]), lit(31)],
                 )
-            if base_mnemonic == "rotlwi":
-                return make_dotted("rlwinm", args[:2] + [args[2], lit(0), lit(31)])
-            if base_mnemonic == "rotrwi":
-                return make_dotted(
-                    "rlwinm", args[:2] + [sub(lit(32), args[2]), lit(0), lit(31)]
-                )
             if base_mnemonic == "clrlslwi":
                 b = args[2]
                 n = args[3]
@@ -575,6 +570,12 @@ class PpcArch(Arch):
                 and args[2].macro_name in ("sda2", "sda21")
             ):
                 return AsmInstruction("li", [args[0], args[2].argument])
+            if base_mnemonic == "rotlwi":
+                return make_dotted("rlwinm", args[:2] + [args[2], lit(0), lit(31)])
+            if base_mnemonic == "rotrwi":
+                return make_dotted(
+                    "rlwinm", args[:2] + [sub(lit(32), args[2]), lit(0), lit(31)]
+                )
             if base_mnemonic == "slwi":
                 return make_dotted(
                     "rlwinm", args[:2] + [args[2], lit(0), sub(lit(31), args[2])]
@@ -769,27 +770,41 @@ class PpcArch(Arch):
                 )
                 inputs = [args[0], args[1], args[2]]
                 outputs = [args[1]]
+
+                def eval_fn(s: NodeState, a: InstrArgs) -> None:
+                    store = cls.instrs_store_update[mnemonic](a)
+
+                    # Update the register in the second argument
+                    update = a.reg_ref(1)
+                    offset = a.reg(2)
+                    s.set_reg(update, add_imm(update, a.regs[update], offset, a))
+
+                    if store is not None:
+                        s.store_memory(store, a.reg_ref(0))
+
             else:
                 assert len(args) == 2 + psq_imms and isinstance(args[1], AsmAddressMode)
                 inputs = [args[0], args[1].rhs]
                 outputs = make_memory_access(args[1], size) + [args[1].rhs]
 
-            def eval_fn(s: NodeState, a: InstrArgs) -> None:
-                store = cls.instrs_store_update[mnemonic](a)
+                def eval_fn(s: NodeState, a: InstrArgs) -> None:
+                    store = cls.instrs_store_update[mnemonic](a)
 
-                # Update the register in the second argument
-                update = a.memory_ref(1)
-                if not isinstance(update, AddressMode):
-                    raise DecompFailure(
-                        f"Unhandled store-and-update arg in {instr_str}: {update!r}"
+                    # Update the register in the second argument
+                    update = a.memory_ref(1)
+                    if not isinstance(update, AddressMode):
+                        raise DecompFailure(
+                            f"Unhandled store-and-update arg in {instr_str}: {update!r}"
+                        )
+                    s.set_reg(
+                        update.rhs,
+                        add_imm(
+                            update.rhs, a.regs[update.rhs], Literal(update.offset), a
+                        ),
                     )
-                s.set_reg(
-                    update.rhs,
-                    add_imm(update.rhs, a.regs[update.rhs], Literal(update.offset), a),
-                )
 
-                if store is not None:
-                    s.store_memory(store, a.reg_ref(0))
+                    if store is not None:
+                        s.store_memory(store, a.reg_ref(0))
 
         elif mnemonic in cls.instrs_load:
             assert isinstance(args[0], Register) and size is not None

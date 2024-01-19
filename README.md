@@ -223,6 +223,7 @@ The following options control the formatting details of the output, such as brac
 
 - `--valid-syntax`
 - `--allman` ("Allman braces")
+- `--knr` ("K&R braces")
 - `--pointer-style` ("`*` to the left")
 - `--unk-underscore`
 - `--hex-case`

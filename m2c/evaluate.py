@@ -252,6 +252,12 @@ def handle_sltiu(args: InstrArgs) -> Expression:
 def handle_addi(args: InstrArgs) -> Expression:
     output_reg = args.reg_ref(0)
     source_reg = args.reg_ref(1)
+
+    ref = args.maybe_gprel_imm(2)
+    if ref is not None and source_reg == Register("gp"):
+        sym = args.stack_info.global_info.address_of_gsym(ref.sym.symbol_name)
+        return add_imm(output_reg, sym, Literal(ref.offset), args)
+
     source = args.reg(1)
     imm = args.imm(2)
 
@@ -568,6 +574,10 @@ def fold_divmod(original_expr: BinaryOp) -> BinaryOp:
     right_expr = early_unwrap_ints(expr.right)
     divisor_shift = 0
 
+    # Normalize MULT_HI(N, x) to MULT_HI(x, N)
+    if isinstance(left_expr, Literal) and not isinstance(right_expr, Literal):
+        left_expr, right_expr = right_expr, left_expr
+
     # Detect signed power-of-two division: (x >> N) + M2C_CARRY --> x / (1 << N)
     if (
         isinstance(left_expr, BinaryOp)
@@ -694,9 +704,6 @@ def fold_divmod(original_expr: BinaryOp) -> BinaryOp:
         expr = left_expr
         left_expr = early_unwrap_ints(expr.left)
         right_expr = early_unwrap_ints(expr.right)
-        # Normalize MULT_HI(N, x) to MULT_HI(x, N)
-        if isinstance(left_expr, Literal) and not isinstance(right_expr, Literal):
-            left_expr, right_expr = right_expr, left_expr
 
         # Remove inner addition: (MULT_HI(x, N) + x) >> M --> MULT_HI(x, N) >> M
         # MULT_HI performs signed multiplication, so the `+ x` acts as setting the 32nd bit
@@ -706,11 +713,18 @@ def fold_divmod(original_expr: BinaryOp) -> BinaryOp:
             isinstance(left_expr, BinaryOp)
             and left_expr.op == "MULT_HI"
             and expr.op == "+"
-            and early_unwrap_ints(left_expr.left) == right_expr
+            and (
+                right_expr == early_unwrap_ints(left_expr.left)
+                or right_expr == early_unwrap_ints(left_expr.right)
+            )
         ):
             expr = left_expr
             left_expr = early_unwrap_ints(expr.left)
             right_expr = early_unwrap_ints(expr.right)
+
+        # Normalize MULT_HI(N, x) to MULT_HI(x, N)
+        if isinstance(left_expr, Literal) and not isinstance(right_expr, Literal):
+            left_expr, right_expr = right_expr, left_expr
 
     # Shift on the LHS of the mul: MULT_HI(x >> M, N) --> MULT_HI(x, N) >> M
     if (

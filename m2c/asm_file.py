@@ -1,5 +1,6 @@
 import csv
 from dataclasses import dataclass, field
+from enum import Enum
 import re
 import struct
 import typing
@@ -19,10 +20,14 @@ from .instruction import (
 
 @dataclass(frozen=True)
 class Label:
-    name: str
+    # Various pattern matching code assumes that there cannot be consecutive
+    # labels, and to deal with this we allow for consecutive labels to be
+    # merged together. As a consequence, we allow a Label to have more than one
+    # name. When we need a single name to refer to one, we use the first one.
+    names: List[str]
 
     def __str__(self) -> str:
-        return f"  .{self.name}:"
+        return self.names[0]
 
 
 @dataclass
@@ -32,7 +37,7 @@ class Function:
     reg_formatter: RegFormatter = field(default_factory=RegFormatter)
 
     def new_label(self, name: str) -> None:
-        label = Label(name)
+        label = Label([name])
         if self.body and self.body[-1] == label:
             # Skip repeated labels
             return
@@ -48,7 +53,10 @@ class Function:
         )
 
     def __str__(self) -> str:
-        body = "\n".join(str(item) for item in self.body)
+        body = "\n".join(
+            str(item) if isinstance(item, Instruction) else f"  {item}:"
+            for item in self.body
+        )
         return f"glabel {self.name}\n{body}"
 
 
@@ -94,7 +102,7 @@ class AsmData:
     mentioned_labels: Set[str] = field(default_factory=set)
 
     def merge_into(self, other: "AsmData") -> None:
-        for (sym, value) in self.values.items():
+        for sym, value in self.values.items():
             other.values[sym] = value
         for label in self.mentioned_labels:
             other.mentioned_labels.add(label)
@@ -153,7 +161,7 @@ class AsmFile:
     def new_data_sym(self, sym: str) -> None:
         if self.current_data is not None:
             self.current_data.data.append(sym)
-        self.asm_data.mentioned_labels.add(sym.lstrip("."))
+        self.asm_data.mentioned_labels.add(sym)
 
     def new_data_bytes(self, data: bytes, *, is_string: bool = False) -> None:
         if self.current_data is None:
@@ -329,10 +337,15 @@ def parse_file(f: typing.TextIO, arch: ArchAsm, options: Options) -> AsmFile:
     re_comment_or_string = re.compile(r'[#;].*|/\*.*?\*/|"(?:\\.|[^\\"])*"')
     re_whitespace_or_string = re.compile(r'\s+|"(?:\\.|[^\\"])*"')
     re_local_glabel = re.compile("L(_.*_)?[0-9A-F]{8}")
-    re_local_label = re.compile("loc_|locret_|def_|lbl_|LAB_")
+    re_local_label = re.compile("loc_|locret_|def_|lbl_|LAB_|jump_")
     re_label = re.compile(r'(?:([a-zA-Z0-9_.$]+)|"([a-zA-Z0-9_.$<>@,-]+)"):')
 
     T = TypeVar("T")
+
+    class LabelKind(Enum):
+        GLOBAL = "global"
+        LOCAL = "local"
+        JUMP_TARGET = "jump_target"
 
     def try_parse(parser: Callable[[], T]) -> T:
         try:
@@ -357,7 +370,7 @@ def parse_file(f: typing.TextIO, arch: ArchAsm, options: Options) -> AsmFile:
         line = re.sub(re_whitespace_or_string, re_comment_replacer, line)
         line = line.strip()
 
-        def process_label(label: str, *, glabel: Optional[bool]) -> None:
+        def process_label(label: str, *, kind: LabelKind) -> None:
             if curr_section == ".rodata":
                 asm_file.new_data_label(label, is_readonly=True, is_bss=False)
             elif curr_section == ".data":
@@ -365,13 +378,13 @@ def parse_file(f: typing.TextIO, arch: ArchAsm, options: Options) -> AsmFile:
             elif curr_section == ".bss":
                 asm_file.new_data_label(label, is_readonly=False, is_bss=True)
             elif curr_section == ".text":
-                if label.startswith(".") or glabel is False:
+                if label.startswith(".") or kind == LabelKind.JUMP_TARGET:
                     if asm_file.current_function is None:
                         raise DecompFailure(f"Label {label} is not within a function!")
-                    asm_file.new_label(label.lstrip("."))
+                    asm_file.new_label(label)
                 elif (
                     re_local_glabel.match(label)
-                    or (not glabel and re_local_label.match(label))
+                    or (kind != LabelKind.GLOBAL and re_local_label.match(label))
                 ) and asm_file.current_function is not None:
                     # Don't treat labels as new functions if they follow a
                     # specific naming pattern. This is used for jump table
@@ -392,7 +405,7 @@ def parse_file(f: typing.TextIO, arch: ArchAsm, options: Options) -> AsmFile:
 
             label = g.group(1) or g.group(2)
             if ifdef_level == 0:
-                process_label(label, glabel=None)
+                process_label(label, kind=LabelKind.LOCAL)
 
             line = line[len(g.group(0)) :].strip()
 
@@ -528,10 +541,15 @@ def parse_file(f: typing.TextIO, arch: ArchAsm, options: Options) -> AsmFile:
                             asm_file.new_data_bytes(data)
 
         elif ifdef_level == 0:
-            if directive in ("glabel", "dlabel", "jlabel"):
+            if directive == "jlabel":
                 parts = line.split()
                 if len(parts) >= 2:
-                    process_label(parts[1], glabel=(directive != "jlabel"))
+                    process_label(parts[1], kind=LabelKind.JUMP_TARGET)
+
+            elif directive in ("glabel", "dlabel"):
+                parts = line.split()
+                if len(parts) >= 2:
+                    process_label(parts[1], kind=LabelKind.GLOBAL)
 
             elif curr_section == ".text":
                 meta = InstructionMeta(
