@@ -14,7 +14,7 @@ use nom::{
 };
 use nom_supreme::error::ErrorTree;
 use rayon::{prelude::ParallelIterator, str::ParallelString};
-use std::{collections::BTreeMap, num::ParseIntError};
+use std::{collections::BTreeMap, fmt::Write, num::ParseIntError};
 
 #[derive(Debug, Default)]
 pub(crate) struct Symbol<'a> {
@@ -27,6 +27,45 @@ pub(crate) struct Symbol<'a> {
     pub(crate) data: Option<&'a str>,
     pub(crate) scope: Option<&'a str>,
     pub(crate) hidden: bool,
+}
+
+impl<'a> Symbol<'a> {
+    pub(crate) fn is_named(&self) -> bool {
+        const PREFIXES: [&str; 3] = ["fn_", "lbl_", "func_"];
+        !PREFIXES.iter().any(|&prefix| self.name.starts_with(prefix))
+    }
+
+    fn write_attr<T: std::fmt::Display>(
+        s: &mut String,
+        label: &str,
+        value: Option<T>,
+    ) -> std::fmt::Result {
+        if let Some(v) = value {
+            write!(s, " {}:{}", label, v)?;
+        }
+        Ok(())
+    }
+
+    pub(crate) fn to_txt(&self) -> Result<String, std::fmt::Error> {
+        let mut s = String::new();
+        write!(
+            &mut s,
+            "{} = {}:0x{:08X}; //",
+            self.name, self.section, self.addr
+        )?;
+        Self::write_attr(&mut s, "type", self.r#type)?;
+        if let Some(v) = self.size {
+            write!(&mut s, " size:0x{:X}", v)?;
+        }
+        Self::write_attr(&mut s, "scope", self.scope)?;
+        Self::write_attr(&mut s, "align", self.align)?;
+        Self::write_attr(&mut s, "data", self.data)?;
+        if self.hidden {
+            write!(&mut s, " hidden")?;
+        }
+
+        return Ok(s);
+    }
 }
 
 enum SymbolAttribute<'a> {
@@ -122,26 +161,21 @@ where
     Ok((input, sym))
 }
 
-#[derive(Default)]
-pub(crate) struct Parser<'a> {
-    pub(crate) symbols: BTreeMap<u32, Symbol<'a>>,
-}
-
-impl<'a> Parser<'a> {
-    pub(crate) fn parse_symbols(input: &'a str) -> Result<Self> {
-        let mut parser = Self::default();
-        let lines = input
-            .par_lines()
-            .map(|line| {
-                self::line::<ErrorTree<&'a str>>(line)
-                    .map(|parsed| (line.trim(), parsed.1))
-            })
-            .collect::<Result<Vec<_>, _>>()
-            .map_err(|err| anyhow!(format!("{err:#?}")))
-            .context("failed to parse symbols")?;
-        for (_, parsed) in lines {
-            parser.symbols.insert(parsed.addr, parsed);
-        }
-        Ok(parser)
+pub(crate) fn parse_symbols<'a>(
+    input: &'a str,
+) -> Result<BTreeMap<u32, Symbol<'a>>> {
+    let mut symbols = BTreeMap::default();
+    let lines = input
+        .par_lines()
+        .map(|line| {
+            self::line::<ErrorTree<&'a str>>(line)
+                .map(|parsed| (line.trim(), parsed.1))
+        })
+        .collect::<Result<Vec<_>, _>>()
+        .map_err(|err| anyhow!(format!("{err:#?}")))
+        .context("failed to parse symbols")?;
+    for (_, parsed) in lines {
+        symbols.insert(parsed.addr, parsed);
     }
+    Ok(symbols)
 }
