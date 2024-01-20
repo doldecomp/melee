@@ -1,6 +1,6 @@
 extern s32 glob;
 
-? test(s32 arg0) {
+s32 test(s32 arg0) {
     s32 var_r31;
 
     var_r31 = arg0;

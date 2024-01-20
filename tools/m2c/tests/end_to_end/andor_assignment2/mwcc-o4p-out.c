@@ -1,6 +1,6 @@
 s32 foo(s32);                                       /* static */
 
-? test(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 test(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_r0;
     s32 temp_r29;
     s32 temp_r30;

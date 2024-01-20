@@ -74,6 +74,9 @@ glabel static_array
 glabel unused_static_array
 .half -8, 10, 12
 
+glabel unused_static_string
+.asciz "abc"
+
 .bss
 glabel static_int
 .space 4

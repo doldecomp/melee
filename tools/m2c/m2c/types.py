@@ -406,6 +406,17 @@ class Type:
             return data.struct
         return None
 
+    def clone_literal_type(self) -> "Type":
+        data = self.data()
+        size_bits = 64 if data.size_bits == 64 else None
+        return Type(
+            TypeData(
+                kind=TypeData.K_ANYREG,
+                likely_kind=data.likely_kind,
+                size_bits=size_bits,
+            )
+        )
+
     GetFieldResult = Tuple[Optional[AccessPath], "Type", int]
 
     def get_field(

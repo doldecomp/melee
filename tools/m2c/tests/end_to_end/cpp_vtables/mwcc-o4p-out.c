@@ -20,7 +20,7 @@ void compute__FR7Derivedi(Derived *arg0, s32 arg1); /* static */
 s32 method__4BaseFi(Base *this, s32 arg0);          /* static */
 s32 static_method__4BaseFi(Base *this, u32 arg0);   /* static */
 u64 virtual_method__7DerivedFi(Derived *this, s32 arg0); /* static */
-static struct RTTI __RTTI__7Derived;                /* unable to generate initializer */
+static struct RTTI __RTTI__7Derived;                /* unable to generate initializer: cannot parse $$210 as integer */
 
 void test(s32 arg0) {
     Derived spC;

@@ -373,11 +373,18 @@ def parse_flags(flags: List[str]) -> Options:
         help="Emit valid C syntax, using macros to indicate unknown types or other "
         "unusual statements. Macro definitions are in `m2c_macros.h`.",
     )
-    group.add_argument(
+    brace_style = group.add_mutually_exclusive_group()
+    brace_style.add_argument(
         "--allman",
         dest="allman",
         action="store_true",
         help="Put braces on separate lines",
+    )
+    brace_style.add_argument(
+        "--knr",
+        dest="knr",
+        action="store_true",
+        help="Put function opening braces on separate lines",
     )
     group.add_argument(
         "--indent-switch-contents",
@@ -567,7 +574,7 @@ def parse_flags(flags: List[str]) -> Options:
         preproc_defines[parts[0]] = int(parts[1], 0) if len(parts) >= 2 else 1
 
     coding_style = CodingStyle(
-        newline_after_function=args.allman,
+        newline_after_function=args.allman or args.knr,
         newline_after_if=args.allman,
         newline_before_else=args.allman,
         switch_indent_level=2 if args.indent_switch_contents else 1,

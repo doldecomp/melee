@@ -1,6 +1,6 @@
 extern s32 glob;
 
-? test(void) {
+s32 test(void) {
     s32 temp_cr0_lt;
 
     temp_cr0_lt = (s32) glob < 1;

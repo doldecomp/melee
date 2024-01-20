@@ -99,12 +99,10 @@ class JumpTarget:
     target: str
 
     def __str__(self) -> str:
-        return f".{self.target}"
+        return self.target
 
 
-Argument = Union[
-    Register, AsmGlobalSymbol, AsmAddressMode, Macro, AsmLiteral, BinOp, JumpTarget
-]
+Argument = Union[Register, AsmGlobalSymbol, AsmAddressMode, Macro, AsmLiteral, BinOp]
 
 
 @dataclass(frozen=True)
@@ -234,10 +232,8 @@ def replace_bare_reg(
 
 
 def get_jump_target(label: Argument) -> JumpTarget:
-    if isinstance(label, AsmGlobalSymbol):
-        return JumpTarget(label.symbol_name)
-    assert isinstance(label, JumpTarget), "invalid branch target"
-    return label
+    assert isinstance(label, AsmGlobalSymbol), "invalid branch target"
+    return JumpTarget(label.symbol_name)
 
 
 # Main parser.
@@ -284,7 +280,7 @@ def parse_arg_elems(
             if word in ["data", "sdata", "rodata", "rdata", "bss", "sbss", "text"]:
                 value = asm_section_global_symbol(word, 0)
             else:
-                value = JumpTarget(word)
+                value = AsmGlobalSymbol("." + word)
         elif tok == "%":
             # A MIPS reloc macro, e.g. %hi(...) or %lo(...).
             assert value is None
