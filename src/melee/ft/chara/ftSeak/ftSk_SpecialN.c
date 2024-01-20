@@ -8,6 +8,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ft_0C88.h"
 #include "ft/ftcolanim.h"
+#include "ft/ftcommon.h"
 
 #include "ftCommon/ftCo_FallSpecial.h"
 
@@ -577,21 +578,81 @@ void ftSk_SpecialNEnd_Phys(Fighter_GObj* fighter_gobj) {
 }
 
 
-
-
 // 801128F8 - 80112918 (0x20 bytes)
+void ftSk_SpecialAirNStart_Phys(Fighter_GObj* fighter_gobj) {
+    ft_80084EEC(fighter_gobj);
+}
 
 // 80112918 - 80112938 (0x20 bytes)
+void ftSk_SpecialAirNLoop_Phys(Fighter_GObj* fighter_gobj) {
+    ft_80084EEC(fighter_gobj);
+}
 
 // 80112938 - 80112958 (0x20 bytes)
+void ftSk_SpecialAirNCancel_Phys(Fighter_GObj* fighter_gobj) {
+    ft_80084EEC(fighter_gobj);
+}
 
 // 80112958 - 80112978 (0x20 bytes)
+void ftSk_SpecialAirNEnd_Phys(Fighter_GObj* fighter_gobj) {
+    ft_80084EEC(fighter_gobj);
+}
+
 
 // 80112978 - 801129F8 (0x80 bytes)
+// https://decomp.me/scratch/wmQQW
+void ftSk_SpecialNStart_Coll(Fighter_GObj* fighter_gobj) {
+    Fighter* fp; // r31
+    Fighter* fp2; // r4
+    // s32 unused[2];
+    
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u32 _[2];
+#endif
+
+    fp = GET_FIGHTER(fighter_gobj);
+    
+    if (ft_80082708(fighter_gobj) == GA_Ground) {
+        ftCommon_8007D5D4(fp);
+        
+        Fighter_ChangeMotionState(fighter_gobj, 0x159, 0x0C4C5080U, fp->cur_anim_frame, 1.0, 0.0, NULL);
+        
+        fp2 = fighter_gobj->user_data;
+        fp2->take_dmg_cb = ftSk_Init_80110198; // x21DC
+        fp2->death2_cb = ftSk_Init_80110198; // x21E4
+    }
+}
+
 
 // 801129F8 - 80112A78 (0x80 bytes)
+// https://decomp.me/scratch/UvU3k
+void ftSk_SpecialNLoop_Coll(Fighter_GObj* fighter_gobj) {
+    Fighter* fp; // r31
+    Fighter* fp2; // r4
+    // s32 unused[2];
+    
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u32 _[2];
+#endif
+
+    fp = GET_FIGHTER(fighter_gobj);
+    
+    if (ft_80082708(fighter_gobj) == GA_Ground) {
+        ftCommon_8007D5D4(fp);
+        
+        Fighter_ChangeMotionState(fighter_gobj, 0x15A, 0x0C4C5080U, fp->cur_anim_frame, 1.0, 0.0, NULL);
+        
+        fp2 = fighter_gobj->user_data;
+        fp2->take_dmg_cb = ftSk_Init_80110198; // x21DC
+        fp2->death2_cb = ftSk_Init_80110198; // x21E4
+    }
+}
 
 // 80112A78 - 80112B00 (0x88 bytes)
+// https://decomp.me/scratch/mwRgz
+
 
 // 80112B00 - 80112B98 (0x98 bytes)
 
