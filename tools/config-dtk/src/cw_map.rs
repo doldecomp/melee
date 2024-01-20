@@ -6,7 +6,7 @@ use std::{
 };
 
 use ahash::{AHashMap, RandomState};
-use anyhow::{anyhow, bail, Context as AnyhowContext, Result};
+use anyhow::{anyhow, bail, Context, Result};
 use cwparse::{
     map::{self},
     memory_table, section_table, tree,
@@ -87,7 +87,7 @@ struct Section<'a> {
     addr: NonZeroU32,
 }
 
-pub(crate) struct Context<'a> {
+pub(crate) struct Parser<'a> {
     pub(crate) tree_symbols: AHashMap<u64, TreeSymbol<'a>>,
     pub(crate) table_symbols: AHashMap<u64, TableSymbol<'a>>,
     splits: Vec<Split<'a>>,
@@ -97,13 +97,13 @@ pub(crate) struct Context<'a> {
     line: usize,
 }
 
-impl<'a> Context<'a> {
+impl<'a> Parser<'a> {
     pub(crate) fn parse(
         input: &'a str,
         root: &Path,
         paths: Vec<PathBuf>,
     ) -> Result<Self> {
-        let mut ctx = Context::new()?;
+        let mut parser = Parser::new();
 
         let lines = input
             .par_lines()
@@ -113,27 +113,26 @@ impl<'a> Context<'a> {
             .collect::<Result<Vec<_>, _>>()
             .context("Failed to parse lines.")?;
 
-        ctx.push_src_paths(root, paths)?;
+        parser.push_src_paths(root, paths)?;
 
         for (raw, parsed) in lines {
-            ctx.push_line(&parsed, raw)?;
+            parser.push_line(&parsed, raw)?;
         }
 
-        Ok(ctx)
+        Ok(parser)
     }
 
-    fn new() -> Result<Context<'a>> {
+    fn new() -> Self {
         let hasher = RandomState::new();
-        Ok(Self {
-            // TODO: parse_lines as separate step
+        Self {
             tree_symbols: AHashMap::with_hasher(hasher.clone()),
             table_symbols: AHashMap::with_hasher(hasher.clone()),
-            splits: Vec::default(),
-            sections: Vec::default(),
+            splits: Default::default(),
+            sections: Default::default(),
             src_paths: AHashMap::with_hasher(hasher.clone()),
             raw: &"",
             line: 0,
-        })
+        }
     }
 
     fn format_error_raw(line: usize, raw: &str, msg: &str) -> String {
