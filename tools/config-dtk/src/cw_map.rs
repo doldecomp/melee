@@ -69,9 +69,9 @@ pub(crate) struct TreeSymbol<'a> {
 
 pub(crate) struct TableSymbol<'a> {
     pub(crate) section: &'a str,
-    pub(crate) addr: NonZeroU32,
+    pub(crate) addr: u32,
     pub(crate) size: u32,
-    pub(crate) align: Option<NonZeroU8>,
+    pub(crate) align: Option<u8>,
 }
 
 struct Split<'a> {
@@ -225,20 +225,14 @@ impl<'a> Parser<'a> {
                     ))
                 }
             },
-            addr: NonZeroU32::new(addr)
-                .with_context(|| self.format_error("address is zero: {}"))?,
+            addr,
             size: {
                 if size == 0 {
                     warn!("{}", self.format_error("size is zero"));
                 }
                 size
             },
-            align: align
-                .map(|n| {
-                    NonZeroU8::new(n)
-                        .with_context(|| self.format_error("align is zero"))
-                })
-                .transpose()?,
+            align: *align,
         };
         Self::push_symbol(
             &mut self.table_symbols,

@@ -42,7 +42,8 @@ fn main() -> Result<()> {
     let out_symbols_path = out_txt_path.join("symbols.txt");
 
     let in_txt_path = root_path("config/GALE01")?;
-    let symbols_file = fs::read_to_string(in_txt_path.join("symbols.txt"))?;
+    let in_symbols_path = in_txt_path.join("symbols.txt");
+    let symbols_file = fs::read_to_string(&in_symbols_path)?;
 
     let mut map_parser = {
         let root = &root_path("src")?;
@@ -50,7 +51,7 @@ fn main() -> Result<()> {
         cw_map::Parser::parse(&map_file, root, paths)?
     };
 
-    let mut config_parser = dtk_config::Parser::parse_symbols(&symbols_file)?;
+    let mut config_symbols = dtk_config::parse_symbols(&symbols_file)?;
 
     let sorted_keys = map_parser
         .table_symbols
@@ -58,61 +59,42 @@ fn main() -> Result<()> {
         .map(|(key, sym)| (sym.addr, *key))
         .collect::<BTreeMap<_, _>>();
 
-    let mut prev_addr: Option<NonZeroU32> = None;
+    let mut prev_addr: Option<u32> = None;
     for (_, key) in sorted_keys.iter().rev() {
         let sym = map_parser.table_symbols.get_mut(key).unwrap();
         if let (Some(prev_addr), 0) = (prev_addr, sym.size) {
-            sym.size = prev_addr.get() - sym.addr.get();
+            sym.size = prev_addr - sym.addr;
         }
         prev_addr = Some(sym.addr);
     }
 
-    {
-        let file = File::create(&out_symbols_path)?;
-        info!(
-            "Writing symbols to {}",
-            out_symbols_path
-                .to_str()
-                .context("Failed to convert the path to a string")?
-        );
-
-        let mut writer = BufWriter::new(file);
-
-        for key in sorted_keys.values() {
-            let table_sym = map_parser
-                .table_symbols
-                .get(&*key)
-                .context("could not retrieve table symbol again")?;
-
-            let tree_sym = match map_parser.tree_symbols.get(key) {
-                Some(v) => v,
-                None => {
-                    warn!("missing tree symbol for {:08x}", table_sym.addr);
-                    continue;
+    for (addr, sym) in config_symbols.iter_mut() {
+        if let Some(key) = sorted_keys.get(addr) {
+            if let Some(tree_sym) = map_parser.tree_symbols.get(key) {
+                if !sym.is_named() {
+                    sym.name = &tree_sym.name;
                 }
-            };
 
-            write!(
-                writer,
-                "{} = {}:0x{:08X}; // type:{} size:0x{:X} scope:{}",
-                tree_sym.name,
-                table_sym.section,
-                table_sym.addr,
-                tree_sym.r#type,
-                table_sym.size,
-                tree_sym.scope,
-            )?;
-            if let Some(align) = table_sym.align.map(|nz| nz.get()) {
-                write!(writer, " align:{}", align)?;
+                if sym.scope.is_none() {
+                    sym.scope = Some(tree_sym.scope);
+                }
             }
-            writeln!(writer)?;
         }
     }
 
     {
-        let mut file = std::io::stdout().lock();
-        for (_, sym) in config_parser.symbols {
-            writeln!(file, "{:X?}", sym)?;
+        let path = &in_symbols_path;
+        let file = File::create(path)?;
+        let mut writer = BufWriter::new(file);
+
+        info!(
+            "Writing symbols to {}",
+            path.to_str()
+                .context("Failed to convert the path to a string")?
+        );
+
+        for sym in config_symbols.values() {
+            writeln!(writer, "{}", sym.to_txt()?)?;
         }
     }
 
