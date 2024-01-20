@@ -7,13 +7,11 @@ edition = "2021"
 ahash = "0.8.6"
 anyhow = "1.0.75"
 cwparse = { git = "https://github.com/ribbanya/cwparse", branch = "main" }
-env_logger = "0.10.1"
-globset = "0.4.14"
-lazy_static = "1.4.0"
+env_logger = "0.11.0"
 log = "0.4.20"
-melee-utils = { version = "0.1.1", path = "../rust-utils" }
-memmap2 = "0.9.0"
+melee-utils = { path = "../rust-utils" }
+nom = "7.1.3"
 pathdiff = "0.2.1"
 rayon = "1.8.0"
-string-interner = "0.14.0"
 walkdir = "2.4.0"
+nom-supreme = "0.8.0"
