@@ -50,7 +50,7 @@ ftCo_800CED30:
 /* 800CED7C 000CB95C  3C 60 80 3C */	lis r3, .L_803C6F60@ha
 /* 800CED80 000CB960  38 63 6F 60 */	addi r3, r3, .L_803C6F60@l
 /* 800CED84 000CB964  38 80 00 36 */	li r4, 0x36
-/* 800CED88 000CB968  38 AD 86 30 */	addi r5, r13, ftCo_804D3CD0@sda21
+/* 800CED88 000CB968  38 AD 86 30 */	addi r5, r13, .L_804D3CD0@sda21
 /* 800CED8C 000CB96C  48 2B 94 95 */	bl __assert
 .L_800CED90:
 /* 800CED90 000CB970  88 1F 22 18 */	lbz r0, 0x2218(r31)
@@ -59,9 +59,9 @@ ftCo_800CED30:
 /* 800CED9C 000CB97C  98 1F 22 18 */	stb r0, 0x2218(r31)
 /* 800CEDA0 000CB980  38 7E 00 00 */	addi r3, r30, 0
 /* 800CEDA4 000CB984  38 80 01 55 */	li r4, 0x155
-/* 800CEDA8 000CB988  C0 22 95 50 */	lfs f1, ftCo_804D8F30@sda21(r2)
+/* 800CEDA8 000CB988  C0 22 95 50 */	lfs f1, .L_804D8F30@sda21(r2)
 /* 800CEDAC 000CB98C  38 A0 00 00 */	li r5, 0
-/* 800CEDB0 000CB990  C0 42 95 54 */	lfs f2, ftCo_804D8F34@sda21(r2)
+/* 800CEDB0 000CB990  C0 42 95 54 */	lfs f2, .L_804D8F34@sda21(r2)
 /* 800CEDB4 000CB994  38 C0 00 00 */	li r6, 0
 /* 800CEDB8 000CB998  FC 60 08 90 */	fmr f3, f1
 /* 800CEDBC 000CB99C  4B F9 A5 F1 */	bl Fighter_ChangeMotionState
@@ -135,13 +135,13 @@ ftCo_AttackS42_Coll:
 
 .section .sdata
     .balign 8
-ftCo_804D3CD0:
+.L_804D3CD0:
     .asciz "0"
 
 
 .section .sdata2
     .balign 8
-ftCo_804D8F30:
+.L_804D8F30:
     .float 0
-ftCo_804D8F34:
+.L_804D8F34:
     .float 1

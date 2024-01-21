@@ -11,12 +11,12 @@ ftCo_804D656C:
 
 .section .sdata
     .balign 8
-ftCo_804D3B48:
+.L_804D3B48:
     .4byte ftDynamics_803C5794
     .4byte NULL
 .global ftCo_804D3B50
 ftCo_804D3B50:
-    .4byte ftCo_804D3B48
+    .4byte .L_804D3B48
     .4byte NULL
 .global ftCo_804D3B58
 ftCo_804D3B58:
