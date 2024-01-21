@@ -2,7 +2,7 @@
 
 .section .data
     .balign 8
-ftCo_803C61F8:
+.L_803C61F8:
     .float 37.0
     .float -143.5
     .4byte NULL
@@ -23,8 +23,8 @@ ftCo_803C61F8:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte ftCo_803C624C
-ftCo_803C624C:
+    .4byte .L_803C624C
+.L_803C624C:
     .float 30.0
     .float -16.0
     .4byte NULL
@@ -45,8 +45,8 @@ ftCo_803C624C:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte ftCo_803C62A0
-ftCo_803C62A0:
+    .4byte .L_803C62A0
+.L_803C62A0:
     .float -60.0
     .float -86.0
     .4byte NULL
@@ -67,8 +67,8 @@ ftCo_803C62A0:
     .4byte 0x01000000
     .float -1000.0
     .float -95.0
-    .4byte ftCo_803C62F4
-ftCo_803C62F4:
+    .4byte .L_803C62F4
+.L_803C62F4:
     .float -60.0
     .float -86.0
     .4byte NULL
@@ -89,8 +89,8 @@ ftCo_803C62F4:
     .4byte 0x01000000
     .float -95.0
     .float -25.0
-    .4byte ftCo_803C6348
-ftCo_803C6348:
+    .4byte .L_803C6348
+.L_803C6348:
     .float -60.0
     .float -86.0
     .4byte NULL
@@ -112,7 +112,7 @@ ftCo_803C6348:
     .float -25.0
     .float 1000.0
     .4byte NULL
-ftCo_803C639C:
+.L_803C639C:
     .float -130.0
     .float 6.0
     .4byte NULL
@@ -133,8 +133,8 @@ ftCo_803C639C:
     .4byte 0x01000000
     .float -120.0
     .float 1000.0
-    .4byte ftCo_803C63F0
-ftCo_803C63F0:
+    .4byte .L_803C63F0
+.L_803C63F0:
     .float -130.0
     .float 6.0
     .4byte NULL
@@ -155,8 +155,8 @@ ftCo_803C63F0:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte ftCo_803C6444
-ftCo_803C6444:
+    .4byte .L_803C6444
+.L_803C6444:
     .float -10.0
     .float 6.0
     .4byte NULL
@@ -177,8 +177,8 @@ ftCo_803C6444:
     .4byte 0x01000000
     .float -1000.0
     .float -20.0
-    .4byte ftCo_803C6498
-ftCo_803C6498:
+    .4byte .L_803C6498
+.L_803C6498:
     .float -10.0
     .float 6.0
     .4byte NULL
@@ -199,8 +199,8 @@ ftCo_803C6498:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte ftCo_803C64EC
-ftCo_803C64EC:
+    .4byte .L_803C64EC
+.L_803C64EC:
     .float -100.0
     .float 34.0
     .4byte NULL
@@ -221,8 +221,8 @@ ftCo_803C64EC:
     .4byte 0x01000000
     .float -50.0
     .4byte NULL
-    .4byte ftCo_803C6540
-ftCo_803C6540:
+    .4byte .L_803C6540
+.L_803C6540:
     .float -100.0
     .float 34.0
     .4byte NULL
@@ -252,8 +252,8 @@ ftCo_803C6594:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte ftCo_803C639C
-    .4byte ftCo_803C61F8
+    .4byte .L_803C639C
+    .4byte .L_803C61F8
     .4byte NULL
     .4byte NULL
     .4byte NULL

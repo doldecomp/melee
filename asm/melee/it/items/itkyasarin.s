@@ -1150,7 +1150,7 @@ it_802ED92C:
 /* 802EDCC4 002EA8A4  38 21 00 58 */	addi r1, r1, 0x58
 /* 802EDCC8 002EA8A8  7C 08 03 A6 */	mtlr r0
 /* 802EDCCC 002EA8AC  4E 80 00 20 */	blr
-it_802EDCD0:
+.L_802EDCD0:
 /* 802EDCD0 002EA8B0  7C 08 02 A6 */	mflr r0
 /* 802EDCD4 002EA8B4  90 01 00 04 */	stw r0, 4(r1)
 /* 802EDCD8 002EA8B8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1570,7 +1570,7 @@ it_803F90D0:
     .4byte NULL
     .4byte NULL
     .4byte 3
-    .4byte it_802EDCD0
+    .4byte .L_802EDCD0
     .4byte it_802EDD18
     .4byte it_802EDD34
     .4byte 3
