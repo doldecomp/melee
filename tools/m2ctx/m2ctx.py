@@ -147,7 +147,7 @@ def main():
         "-f",
         "--format",
         action="store_true",
-        help="colorize the output (requires clang-format)",
+        help="format the output (requires clang-format)",
     )
     parser.add_argument(
         "-p",
