@@ -283,7 +283,12 @@ sysdolphin/baselib/objalloc.c:
 
 sysdolphin/baselib/robj.c:
 	.text       start:0x8037AE34 end:0x8037CD80
+	.rodata     start:0x803B9580 end:0x803B95A8
+	.data       start:0x80406E68 end:0x80406FD0
+	.bss        start:0x804C2368 end:0x804C23C0
+	.sdata      start:0x804D5EB8 end:0x804D5EE8
 	.sbss       start:0x804D76E8 end:0x804D76F0
+	.sdata2     start:0x804DE6A0 end:0x804DE6D0
 
 sysdolphin/baselib/id.c:
 	.text       start:0x8037CD80 end:0x8037D050

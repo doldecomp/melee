@@ -1072,7 +1072,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/objalloc.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/robj.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/robj.s.o\
 
 TEXT_O_FILES +=\
