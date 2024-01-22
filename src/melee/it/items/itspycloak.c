@@ -13,13 +13,10 @@ void it_80295C48(Item_GObj* arg0) {
 }
 
 void it_80295C68(Item_GObj* arg0) {
-    Item* temp_r4;
-
-    temp_r4 = arg0->user_data;
-    temp_r4->x40_vel.x = temp_r4->x40_vel.y = temp_r4->x40_vel.z = it_804DCB70;
-
+    Item* temp_r4 = arg0->user_data;
+    temp_r4->x40_vel.x = temp_r4->x40_vel.y = temp_r4->x40_vel.z = 0;
     it_8026B390(arg0);
-    Item_80268E5C((HSD_GObj* ) arg0, 0, ITEM_ANIM_UPDATE);
+    Item_80268E5C(arg0, 0, ITEM_ANIM_UPDATE);
 }
 
 bool it_80295CB8(void) {
