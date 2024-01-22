@@ -1,7 +1,7 @@
-? test(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    ? var_r8;
+s32 test(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_r5;
     s32 var_r7;
+    s32 var_r8;
 
     var_r5 = arg2;
     var_r8 = 0;

@@ -1,18 +1,18 @@
 #include <placeholder.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSMutex.h>
 #include <dolphin/os/OSThread.h>
 
-extern s32 Reschedule;
-extern u32 RunQueueBits;
+static vu32 RunQueueBits;
+static volatile bool RunQueueHint;
+static vs32 Reschedule;
 
 #ifdef MWERKS_GEKKO
 
 extern unk_t _stack_end;
 extern unk_t _db_stack_end;
 extern unk_t OSSerial_804A7FB8;
-extern unk_t OSSerial_804D73DC;
 
 #pragma push
 asm void __OSThreadInit(void)
@@ -63,7 +63,7 @@ asm void __OSThreadInit(void)
 /* 8034ACAC 0034788C  7F 7C 02 14 */	add r27, r28, r0
 /* 8034ACB0 00347890  93 AD BD 38 */	stw r29, RunQueueBits(r13)
 /* 8034ACB4 00347894  93 FE 00 E4 */	stw r31, 0xe4(r30)
-/* 8034ACB8 00347898  93 AD BD 3C */	stw r29, OSSerial_804D73DC(r13)
+/* 8034ACB8 00347898  93 AD BD 3C */	stw r29, RunQueueHint(r13)
 lbl_8034ACBC:
 /* 8034ACBC 0034789C  7F 63 DB 78 */	mr r3, r27
 /* 8034ACC0 003478A0  48 00 00 6D */	bl OSInitThreadQueue
@@ -120,20 +120,24 @@ OSThread* OSGetCurrentThread(void)
 
 s32 OSDisableScheduler(void)
 {
-    bool intr = OSDisableInterrupts();
-    s32 ret = Reschedule;
-    Reschedule = ret + 1;
-    OSRestoreInterrupts(intr);
-    return ret;
+    bool enabled;
+    s32 count;
+
+    enabled = OSDisableInterrupts();
+    count = Reschedule++;
+    OSRestoreInterrupts(enabled);
+    return count;
 }
 
 s32 OSEnableScheduler(void)
 {
-    bool intr = OSDisableInterrupts();
-    s32 ret = Reschedule;
-    Reschedule = ret - 1;
-    OSRestoreInterrupts(intr);
-    return ret;
+    bool enabled;
+    s32 count;
+
+    enabled = OSDisableInterrupts();
+    count = Reschedule--;
+    OSRestoreInterrupts(enabled);
+    return count;
 }
 
 void UnsetRun(OSThread* thread)
@@ -142,20 +146,20 @@ void UnsetRun(OSThread* thread)
     OSThread* next;
     OSThread* prev;
 
-    next = thread->next;
+    next = thread->link.next;
     queue = thread->queue;
-    prev = thread->prev;
+    prev = thread->link.prev;
 
     if (next == NULL) {
         queue->tail = prev;
     } else {
-        next->prev = prev;
+        next->link.prev = prev;
     }
 
     if (prev == NULL) {
         queue->head = next;
     } else {
-        prev->next = next;
+        prev->link.next = next;
     }
 
     if (queue->head == NULL) {
@@ -167,10 +171,10 @@ void UnsetRun(OSThread* thread)
 
 s32 __OSGetEffectivePriority(OSThread* thread)
 {
-    s32 prio = thread->WORD_0x2D4;
+    s32 prio = thread->base;
 
     OSMutex* mutex;
-    for (mutex = thread->mutexQueue.head; mutex != NULL;
+    for (mutex = thread->queueMutex.head; mutex != NULL;
          mutex = mutex->link.next)
     {
         OSThread* mutexThread = mutex->queue.head;
@@ -238,7 +242,7 @@ lbl_8034AEF4:
 /* 8034AF18 00347AF8  7C 60 00 30 */	slw r0, r3, r0
 /* 8034AF1C 00347AFC  7C 80 03 78 */	or r0, r4, r0
 /* 8034AF20 00347B00  90 0D BD 38 */	stw r0, RunQueueBits(r13)
-/* 8034AF24 00347B04  90 6D BD 3C */	stw r3, OSSerial_804D73DC(r13)
+/* 8034AF24 00347B04  90 6D BD 3C */	stw r3, RunQueueHint(r13)
 /* 8034AF28 00347B08  48 00 00 E8 */	b lbl_8034B010
 lbl_8034AF2C:
 /* 8034AF2C 00347B0C  80 9F 02 E0 */	lwz r4, 0x2e0(r31)
@@ -309,7 +313,7 @@ lbl_8034AFF0:
 /* 8034B000 00347BE0  48 00 00 14 */	b lbl_8034B014
 lbl_8034B004:
 /* 8034B004 00347BE4  38 00 00 01 */	li r0, 1
-/* 8034B008 00347BE8  90 0D BD 3C */	stw r0, OSSerial_804D73DC(r13)
+/* 8034B008 00347BE8  90 0D BD 3C */	stw r0, RunQueueHint(r13)
 /* 8034B00C 00347BEC  93 DF 02 D0 */	stw r30, 0x2d0(r31)
 lbl_8034B010:
 /* 8034B010 00347BF0  38 60 00 00 */	li r3, 0
@@ -335,7 +339,7 @@ void SetEffectivePriority(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void SelectThread(void)
+asm static void SelectThread(bool yield)
 { // clang-format off
     nofralloc
 /* 8034B02C 00347C0C  7C 08 02 A6 */	mflr r0
@@ -403,7 +407,7 @@ lbl_8034B0EC:
 /* 8034B110 00347CF0  7C 80 00 30 */	slw r0, r4, r0
 /* 8034B114 00347CF4  7C A0 03 78 */	or r0, r5, r0
 /* 8034B118 00347CF8  90 0D BD 38 */	stw r0, RunQueueBits(r13)
-/* 8034B11C 00347CFC  90 8D BD 3C */	stw r4, OSSerial_804D73DC(r13)
+/* 8034B11C 00347CFC  90 8D BD 3C */	stw r4, RunQueueHint(r13)
 lbl_8034B120:
 /* 8034B120 00347D00  A0 06 01 A2 */	lhz r0, 0x1a2(r6)
 /* 8034B124 00347D04  54 00 07 BD */	rlwinm. r0, r0, 0, 0x1e, 0x1e
@@ -436,7 +440,7 @@ lbl_8034B164:
 /* 8034B184 00347D64  4B FF A0 D1 */	bl OSClearContext
 lbl_8034B188:
 /* 8034B188 00347D68  38 60 00 00 */	li r3, 0
-/* 8034B18C 00347D6C  90 6D BD 3C */	stw r3, OSSerial_804D73DC(r13)
+/* 8034B18C 00347D6C  90 6D BD 3C */	stw r3, RunQueueHint(r13)
 /* 8034B190 00347D70  80 0D BD 38 */	lwz r0, RunQueueBits(r13)
 /* 8034B194 00347D74  7C 07 00 34 */	cntlzw r7, r0
 /* 8034B198 00347D78  54 E0 18 38 */	slwi r0, r7, 3
@@ -485,49 +489,28 @@ lbl_8034B214:
 
 #else
 
-void SelectThread(void)
+static void SelectThread(bool yield)
 {
     NOT_IMPLEMENTED;
 }
 
 #endif
-
-#ifdef MWERKS_GEKKO
-
-#pragma push
-asm void __OSReschedule(void)
-{ // clang-format off
-    nofralloc
-/* 8034B22C 00347E0C  7C 08 02 A6 */	mflr r0
-/* 8034B230 00347E10  90 01 00 04 */	stw r0, 4(r1)
-/* 8034B234 00347E14  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8034B238 00347E18  80 0D BD 3C */	lwz r0, OSSerial_804D73DC(r13)
-/* 8034B23C 00347E1C  2C 00 00 00 */	cmpwi r0, 0
-/* 8034B240 00347E20  41 82 00 0C */	beq lbl_8034B24C
-/* 8034B244 00347E24  38 60 00 00 */	li r3, 0
-/* 8034B248 00347E28  4B FF FD E5 */	bl SelectThread
-lbl_8034B24C:
-/* 8034B24C 00347E2C  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8034B250 00347E30  38 21 00 08 */	addi r1, r1, 8
-/* 8034B254 00347E34  7C 08 03 A6 */	mtlr r0
-/* 8034B258 00347E38  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-
-#else
 
 void __OSReschedule(void)
 {
-    NOT_IMPLEMENTED;
-}
+    if (!RunQueueHint) {
+        return;
+    }
 
-#endif
+    SelectThread(false);
+}
 
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm bool OSCreateThread(OSThread*, OSThreadFunc, OSThread_Unk1*,
-                        OSThread_Unk2*, u32, s32, u16)
+asm bool OSCreateThread(OSThread* thread, void* (*func)(void*), void* param,
+                        void* stack, u32 stackSize, OSPriority priority,
+                        u16 attr)
 { // clang-format off
     nofralloc
 /* 8034B25C 00347E3C  7C 08 02 A6 */	mflr r0
@@ -612,8 +595,8 @@ lbl_8034B35C:
 
 #else
 
-bool OSCreateThread(OSThread* arg0, OSThreadFunc arg1, OSThread_Unk1* arg2,
-                    OSThread_Unk2* arg3, u32 arg4, s32 arg5, u16 arg6)
+bool OSCreateThread(OSThread* thread, void* (*func)(void*), void* param,
+                    void* stack, u32 stackSize, OSPriority priority, u16 attr)
 {
     NOT_IMPLEMENTED;
 }
@@ -673,8 +656,8 @@ lbl_8034B40C:
 /* 8034B414 00347FF4  38 7E 02 E8 */	addi r3, r30, 0x2e8
 /* 8034B418 00347FF8  48 00 06 E9 */	bl OSWakeupThread
 /* 8034B41C 00347FFC  38 00 00 01 */	li r0, 1
-/* 8034B420 00348000  90 0D BD 3C */	stw r0, OSSerial_804D73DC(r13)
-/* 8034B424 00348004  80 0D BD 3C */	lwz r0, OSSerial_804D73DC(r13)
+/* 8034B420 00348000  90 0D BD 3C */	stw r0, RunQueueHint(r13)
+/* 8034B424 00348004  80 0D BD 3C */	lwz r0, RunQueueHint(r13)
 /* 8034B428 00348008  2C 00 00 00 */	cmpwi r0, 0
 /* 8034B42C 0034800C  41 82 00 0C */	beq lbl_8034B438
 /* 8034B430 00348010  38 60 00 00 */	li r3, 0
@@ -738,7 +721,7 @@ lbl_8034B4B0:
 /* 8034B4C4 003480A4  48 00 00 B0 */	b lbl_8034B574
 lbl_8034B4C8:
 /* 8034B4C8 003480A8  38 00 00 01 */	li r0, 1
-/* 8034B4CC 003480AC  90 0D BD 3C */	stw r0, OSSerial_804D73DC(r13)
+/* 8034B4CC 003480AC  90 0D BD 3C */	stw r0, RunQueueHint(r13)
 /* 8034B4D0 003480B0  48 00 00 A4 */	b lbl_8034B574
 lbl_8034B4D4:
 /* 8034B4D4 003480B4  80 9E 02 E0 */	lwz r4, 0x2e0(r30)
@@ -822,7 +805,7 @@ lbl_8034B5D4:
 /* 8034B5D8 003481B8  4B FF C9 05 */	bl __OSUnlockAllMutex
 /* 8034B5DC 003481BC  38 7E 02 E8 */	addi r3, r30, 0x2e8
 /* 8034B5E0 003481C0  48 00 05 21 */	bl OSWakeupThread
-/* 8034B5E4 003481C4  80 0D BD 3C */	lwz r0, OSSerial_804D73DC(r13)
+/* 8034B5E4 003481C4  80 0D BD 3C */	lwz r0, RunQueueHint(r13)
 /* 8034B5E8 003481C8  2C 00 00 00 */	cmpwi r0, 0
 /* 8034B5EC 003481CC  41 82 00 0C */	beq lbl_8034B5F8
 /* 8034B5F0 003481D0  38 60 00 00 */	li r3, 0
@@ -929,7 +912,7 @@ lbl_8034B6F4:
 /* 8034B718 003482F8  7C 60 00 30 */	slw r0, r3, r0
 /* 8034B71C 003482FC  7C 80 03 78 */	or r0, r4, r0
 /* 8034B720 00348300  90 0D BD 38 */	stw r0, RunQueueBits(r13)
-/* 8034B724 00348304  90 6D BD 3C */	stw r3, OSSerial_804D73DC(r13)
+/* 8034B724 00348304  90 6D BD 3C */	stw r3, RunQueueHint(r13)
 /* 8034B728 00348308  48 00 01 40 */	b lbl_8034B868
 lbl_8034B72C:
 /* 8034B72C 0034830C  80 9D 02 E0 */	lwz r4, 0x2e0(r29)
@@ -1028,7 +1011,7 @@ lbl_8034B834:
 /* 8034B860 00348440  7C 7D 1B 79 */	or. r29, r3, r3
 /* 8034B864 00348444  40 82 FF D0 */	bne lbl_8034B834
 lbl_8034B868:
-/* 8034B868 00348448  80 0D BD 3C */	lwz r0, OSSerial_804D73DC(r13)
+/* 8034B868 00348448  80 0D BD 3C */	lwz r0, RunQueueHint(r13)
 /* 8034B86C 0034844C  2C 00 00 00 */	cmpwi r0, 0
 /* 8034B870 00348450  41 82 00 0C */	beq lbl_8034B87C
 /* 8034B874 00348454  38 60 00 00 */	li r3, 0
@@ -1090,7 +1073,7 @@ lbl_8034B8FC:
 /* 8034B904 003484E4  48 00 00 20 */	b lbl_8034B924
 lbl_8034B908:
 /* 8034B908 003484E8  38 00 00 01 */	li r0, 1
-/* 8034B90C 003484EC  90 0D BD 3C */	stw r0, OSSerial_804D73DC(r13)
+/* 8034B90C 003484EC  90 0D BD 3C */	stw r0, RunQueueHint(r13)
 /* 8034B910 003484F0  B0 1D 02 C8 */	sth r0, 0x2c8(r29)
 /* 8034B914 003484F4  48 00 00 C4 */	b lbl_8034B9D8
 lbl_8034B918:
@@ -1151,7 +1134,7 @@ lbl_8034B9A4:
 /* 8034B9D0 003485B0  7C 7D 1B 79 */	or. r29, r3, r3
 /* 8034B9D4 003485B4  40 82 FF D0 */	bne lbl_8034B9A4
 lbl_8034B9D8:
-/* 8034B9D8 003485B8  80 0D BD 3C */	lwz r0, OSSerial_804D73DC(r13)
+/* 8034B9D8 003485B8  80 0D BD 3C */	lwz r0, RunQueueHint(r13)
 /* 8034B9DC 003485BC  2C 00 00 00 */	cmpwi r0, 0
 /* 8034B9E0 003485C0  41 82 00 0C */	beq lbl_8034B9EC
 /* 8034B9E4 003485C4  38 60 00 00 */	li r3, 0
@@ -1238,8 +1221,8 @@ lbl_8034BAC0:
 /* 8034BAC0 003486A0  90 83 02 E0 */	stw r4, 0x2e0(r3)
 lbl_8034BAC4:
 /* 8034BAC4 003486A4  38 00 00 01 */	li r0, 1
-/* 8034BAC8 003486A8  90 0D BD 3C */	stw r0, OSSerial_804D73DC(r13)
-/* 8034BACC 003486AC  80 0D BD 3C */	lwz r0, OSSerial_804D73DC(r13)
+/* 8034BAC8 003486A8  90 0D BD 3C */	stw r0, RunQueueHint(r13)
+/* 8034BACC 003486AC  80 0D BD 3C */	lwz r0, RunQueueHint(r13)
 /* 8034BAD0 003486B0  2C 00 00 00 */	cmpwi r0, 0
 /* 8034BAD4 003486B4  41 82 00 0C */	beq lbl_8034BAE0
 /* 8034BAD8 003486B8  38 60 00 00 */	li r3, 0
@@ -1324,12 +1307,12 @@ lbl_8034BB90:
 /* 8034BBB4 00348794  7C 60 00 30 */	slw r0, r3, r0
 /* 8034BBB8 00348798  7C 80 03 78 */	or r0, r4, r0
 /* 8034BBBC 0034879C  90 0D BD 38 */	stw r0, RunQueueBits(r13)
-/* 8034BBC0 003487A0  90 6D BD 3C */	stw r3, OSSerial_804D73DC(r13)
+/* 8034BBC0 003487A0  90 6D BD 3C */	stw r3, RunQueueHint(r13)
 lbl_8034BBC4:
 /* 8034BBC4 003487A4  80 DE 00 00 */	lwz r6, 0(r30)
 /* 8034BBC8 003487A8  28 06 00 00 */	cmplwi r6, 0
 /* 8034BBCC 003487AC  40 82 FF 60 */	bne lbl_8034BB2C
-/* 8034BBD0 003487B0  80 0D BD 3C */	lwz r0, OSSerial_804D73DC(r13)
+/* 8034BBD0 003487B0  80 0D BD 3C */	lwz r0, RunQueueHint(r13)
 /* 8034BBD4 003487B4  2C 00 00 00 */	cmpwi r0, 0
 /* 8034BBD8 003487B8  41 82 00 0C */	beq lbl_8034BBE4
 /* 8034BBDC 003487BC  38 60 00 00 */	li r3, 0

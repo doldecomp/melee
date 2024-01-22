@@ -24,6 +24,8 @@
 #include "cm/camera.h"
 #include "db/db_2253.h"
 #include "ef/efasync.h"
+#include "ft/ft_0881.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
@@ -70,7 +72,7 @@
 #include <math.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjobject.h>
 #include <baselib/lobj.h>
@@ -80,7 +82,7 @@
 extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
 
 extern ftData* gFtDataList[FTKIND_MAX];
-extern MotionState ftData_MotionStateList[341];
+extern MotionState ftData_MotionStateList[ftCo_MS_Count];
 extern MotionState* ftData_CharacterStateTables[FTKIND_MAX];
 
 extern s8 ftData_UnkBytePerCharacter[FTKIND_MAX];
@@ -1184,21 +1186,21 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
         ft_800895E0(fp, new_motion_state->x4_flags);
         fp->x2225_b3 = new_motion_state->x9_b0;
 
-        if (fp->x2226_b4 != 0U) {
-            if (fp->x2070.x2071_b5 != 0U) {
+        if (fp->x2226_b4) {
+            if (fp->x2070.x2071_b5) {
                 ftCo_800C8B2C(fp, 0x7E, 0);
             }
-            if (fp->x2070.x2071_b6 != 0U) {
+            if (fp->x2070.x2071_b6) {
                 ftCo_800C8B2C(fp, 0x7F, 0);
             }
         }
 
-        if (fp->x21EC) {
+        if (fp->x21EC != NULL) {
             fp->x21EC(gobj);
-            fp->x21EC = 0U;
+            fp->x21EC = NULL;
         }
 
-        if ((flags & Ft_MF_SkipAttackCount) == 0) {
+        if (!(flags & Ft_MF_SkipAttackCount)) {
             pl_80037C60(gobj, x2070.x2070_int);
         }
 
@@ -2204,9 +2206,9 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
                 if (sqrtf(kb_x * kb_x + kb_y * kb_y) <
                     p_ftCommonData->x3E8_shieldKnockbackFrameDecay)
                 {
-                    // BUG IN THE MELEE CODE THAT CAUSES THE INVISIBLE CEILING
-                    // GLITCH The next line should be 'pAtkShieldKB->y = 0',
-                    // but instead it is:
+                    /// @bug IN THE MELEE CODE THAT CAUSES THE INVISIBLE
+                    /// CEILING GLITCH The next line should be 'pAtkShieldKB->y
+                    /// = 0', but instead it is:
                     pAtkShieldKB->x = p_kb_vel->y = 0;
                 } else {
                     // again, the better implementation would be:

@@ -13,5 +13,5 @@ f64 test(f64 arg0, s32 arg2, f64 arg4) {
         sp0 = 6.0;
     }
     D_4101B0 = (f64) sp0;
-    return (f64) sp0;
+    return (bitwise f64) sp0;
 }

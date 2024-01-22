@@ -2,6 +2,7 @@
 #define ITMATO_H
 
 #include <melee/it/forward.h>
+
 #include <melee/it/types.h>
 
 extern ItemStateTable it_803F83E0[];

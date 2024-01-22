@@ -74,6 +74,11 @@ StoreInstrMap = Mapping[str, Callable[["InstrArgs"], Optional["StoreStmt"]]]
 
 
 class Arch(ArchFlowGraph):
+    """Arch-specific information that relates to the translation level.
+    Extends ArchFlowGraph."""
+
+    base_return_regs: List[Tuple[Register, bool]]
+
     @abc.abstractmethod
     def function_abi(
         self,
@@ -114,6 +119,14 @@ PSEUDO_FUNCTION_OPS: Set[str] = {"MULT_HI", "MULTU_HI", "DMULT_HI", "DMULTU_HI",
 
 def as_type(expr: "Expression", type: Type, silent: bool) -> "Expression":
     type = type.weaken_void_ptr()
+    if isinstance(expr, Literal):
+        # In an interesting twist from how types behave everywhere else, for
+        # literals we (try to) avoid ever propagating information backwards,
+        # by creating a clone of the literal before casting it. This helps
+        # avoid casts when literals are used in multiple unrelated places.
+        # Importantly, we do keep information about maybe-floatness and
+        # 64-bitness of values.
+        expr = Literal(expr.value, expr.type.clone_literal_type())
     ptr_target_type = type.get_pointer_target()
     if expr.type.unify(type):
         if silent or isinstance(expr, Literal):
@@ -818,7 +831,7 @@ class ErrorExpr(Condition):
 
     def format(self, fmt: Formatter) -> str:
         if self.desc is not None:
-            return f"M2C_ERROR({self.desc})"
+            return f"M2C_ERROR(/* {self.desc} */)"
         return "M2C_ERROR()"
 
 
@@ -2373,6 +2386,15 @@ class InstrArgs:
             raise DecompFailure(f"Invalid macro argument {arg.argument}")
         return ref
 
+    def maybe_gprel_imm(self, index: int) -> Optional[RawSymbolRef]:
+        val = self.raw_arg(index)
+        if not isinstance(val, Macro) or val.macro_name != "gp_rel":
+            return None
+        ref = parse_symbol_ref(val.argument)
+        if ref is None:
+            raise DecompFailure(f"Invalid macro argument {val.argument}")
+        return ref
+
     def maybe_got_imm(self, index: int) -> Optional[RawSymbolRef]:
         arg = self.raw_arg(index)
         if not isinstance(arg, AsmAddressMode) or arg.rhs != Register("gp"):
@@ -2380,7 +2402,6 @@ class InstrArgs:
         val = arg.lhs
         if not isinstance(val, Macro) or val.macro_name not in (
             "got",
-            "gp_rel",
             "call16",
         ):
             return None
@@ -2406,11 +2427,12 @@ class InstrArgs:
     def memory_ref(self, index: int) -> Union[AddressMode, RawSymbolRef]:
         ret = strip_macros(self.raw_arg(index))
 
-        # In MIPS, we want to allow "lw $v0, symbol + 4", which is outputted by
+        # For MIPS, we want to allow "lw $v0, symbol + 4", which is outputted by
         # some disassemblers (like IDA) even though it isn't valid assembly.
-        # For PPC, we want to allow "lwz $r1, symbol@sda21($r13)" where $r13 is
-        # assumed to point to the start of a small data area (SDA).
-        # (strip_macros removes the AsmAddressMode wrapper for sda21 relocs.)
+        # We also want to allow "lw $v0, %gp_rel(symbol + 4)($gp)", where $gp is
+        # assumed to point to the start of a small data area.
+        # (strip_macros removes the AsmAddressMode wrapper for gp_rel relocs.)
+        # PPC sda2/sda21 relocs also behave this way.
         ref = parse_symbol_ref(ret)
         if ref is not None:
             return ref
@@ -2861,7 +2883,7 @@ def strip_macros(arg: Argument) -> Argument:
             return AsmLiteral(arg.argument.value)
         return AsmLiteral(0)
     elif isinstance(arg, AsmAddressMode) and isinstance(arg.lhs, Macro):
-        if arg.lhs.macro_name in ["sda2", "sda21"]:
+        if arg.lhs.macro_name in ["sda2", "sda21", "gp_rel"]:
             return arg.lhs.argument
         if arg.lhs.macro_name not in ["lo", "l"]:
             raise DecompFailure(
@@ -3102,9 +3124,10 @@ def propagate_register_meta(nodes: List[Node], reg: Register) -> None:
 
 def determine_return_register(
     return_blocks: List[BlockInfo], fn_decl_provided: bool, arch: Arch
-) -> Optional[Register]:
+) -> Optional[Tuple[Register, bool]]:
     """Determine which of the arch's base_return_regs (i.e. v0, f0) is the most
-    likely to contain the return value, or if the function is likely void."""
+    likely to contain the return value, or if the function is likely void.
+    Returns a tuple (register, is float)."""
 
     def priority(block_info: BlockInfo, reg: Register) -> int:
         meta = block_info.final_register_states.get_meta(reg)
@@ -3121,9 +3144,9 @@ def determine_return_register(
     if not return_blocks:
         return None
 
-    best_reg: Optional[Register] = None
+    best_reg: Optional[Tuple[Register, bool]] = None
     best_prio = -1
-    for reg in arch.base_return_regs:
+    for reg, floating in arch.base_return_regs:
         prios = [priority(b, reg) for b in return_blocks]
         max_prio = max(prios)
         if max_prio == 4:
@@ -3136,7 +3159,7 @@ def determine_return_register(
             continue
         if max_prio > best_prio:
             best_prio = max_prio
-            best_reg = reg
+            best_reg = reg, floating
     return best_reg
 
 
@@ -3825,6 +3848,11 @@ class FunctionInfo:
 
 
 @dataclass
+class FailedToGenerateInitializer(Exception):
+    reason: str
+
+
+@dataclass
 class GlobalInfo:
     asm_data: AsmData
     arch: Arch
@@ -3950,19 +3978,24 @@ class GlobalInfo:
             return False
         return fn.ret_type is None
 
-    def initializer_for_symbol(
-        self, sym: GlobalSymbol, fmt: Formatter
-    ) -> Optional[str]:
+    def initializer_for_symbol(self, sym: GlobalSymbol, fmt: Formatter) -> str:
         assert sym.asm_data_entry is not None
         data = sym.asm_data_entry.data[:]
 
-        def read_uint(n: int) -> Optional[int]:
+        def read_uint(n: int) -> int:
             """Read the next `n` bytes from `data` as an (long) integer"""
             assert 0 < n <= 8
-            if not data or not isinstance(data[0], bytes):
-                return None
+            if not data:
+                raise FailedToGenerateInitializer("not enough data")
+            if not isinstance(data[0], bytes):
+                raise FailedToGenerateInitializer(f"cannot parse {data[0]} as integer")
             if len(data[0]) < n:
-                return None
+                if len(data) > 1:
+                    sym = data[1]
+                    assert isinstance(sym, str)
+                    raise FailedToGenerateInitializer(f"partial read of {sym}")
+                else:
+                    raise FailedToGenerateInitializer("not enough data")
             bs = data[0][:n]
             data[0] = data[0][n:]
             if not data[0]:
@@ -3972,7 +4005,7 @@ class GlobalInfo:
                 value = (value << 8) | b
             return value
 
-        def read_pointer() -> Optional[Expression]:
+        def try_read_pointer() -> Optional[Expression]:
             """Read the next label from `data`"""
             if not data or not isinstance(data[0], str):
                 return None
@@ -3981,12 +4014,15 @@ class GlobalInfo:
             data.pop(0)
             return self.address_of_gsym(label)
 
-        def for_type(type: Type) -> Optional[str]:
+        def for_type(type: Type) -> str:
             """Return the initializer for a single element of type `type`"""
             if type.is_struct() or type.is_array():
                 struct_fields = type.get_initializer_fields()
                 if not struct_fields:
-                    return None
+                    if type.is_array():
+                        raise FailedToGenerateInitializer("unsized array")
+                    else:
+                        raise FailedToGenerateInitializer("confusing struct layout")
                 members = []
                 for field in struct_fields:
                     if isinstance(field, int):
@@ -3994,36 +4030,39 @@ class GlobalInfo:
                         for i in range(field):
                             padding = read_uint(1)
                             if padding != 0:
-                                return None
+                                raise FailedToGenerateInitializer("non-zero padding")
                     else:
-                        m = for_type(field)
-                        if m is None:
-                            return None
-                        members.append(m)
+                        members.append(for_type(field))
                 return fmt.format_array(members)
 
             if type.is_reg():
                 size = type.get_size_bytes()
                 if not size:
-                    return None
+                    raise FailedToGenerateInitializer("unknown size")
 
                 if size == 4:
-                    ptr = read_pointer()
+                    ptr = try_read_pointer()
                     if ptr is not None:
                         return as_type(ptr, type, silent=True).format(fmt)
 
                 value = read_uint(size)
-                if value is not None:
-                    enum_name = type.get_enum_name(value)
-                    if enum_name is not None:
-                        return enum_name
-                    expr = as_type(Literal(value), type, True)
-                    return elide_literal_casts(expr).format(fmt)
+                enum_name = type.get_enum_name(value)
+                if enum_name is not None:
+                    return enum_name
+                expr = as_type(Literal(value), type, True)
+                return elide_literal_casts(expr).format(fmt)
+
+            if type.get_size_bits() is None:
+                raise FailedToGenerateInitializer("unknown type")
 
             # Type kinds K_FN and K_VOID do not have initializers
-            return None
+            raise FailedToGenerateInitializer("bad type")
 
-        return for_type(sym.type)
+        type = sym.type.get_array()[0]
+        if sym.is_string_constant() and type is not None and type.get_size_bytes() == 1:
+            return sym.format_string_constant(fmt)
+        else:
+            return for_type(sym.type)
 
     def find_forward_declares_needed(self, functions: List[FunctionInfo]) -> Set[str]:
         funcs_seen = set()
@@ -4161,11 +4200,12 @@ class GlobalInfo:
 
                 # Try to convert the data from .data/.rodata into an initializer
                 if data_entry and not data_entry.is_bss:
-                    value = self.initializer_for_symbol(sym, fmt)
-                    if value is None:
+                    try:
+                        value = self.initializer_for_symbol(sym, fmt)
+                    except FailedToGenerateInitializer as e:
                         # This warning helps distinguish .bss symbols from .data/.rodata,
                         # IDO only puts symbols in .bss if they don't have any initializer
-                        comments.append("unable to generate initializer")
+                        comments.append(f"unable to generate initializer: {e.reason}")
 
                 if is_const:
                     comments.append("const")
@@ -4367,11 +4407,11 @@ def translate_to_ast(
 
     # Guess return register and mark returns (we should really base this on
     # function signature if known, but so far the heuristic is reliable enough)
-    for reg in arch.base_return_regs:
+    for reg, _ in arch.base_return_regs:
         propagate_register_meta(flow_graph.nodes, reg)
 
     return_type = fn_sig.return_type
-    return_reg: Optional[Register] = None
+    return_reg: Optional[Tuple[Register, bool]] = None
 
     if not options.void and not return_type.is_void():
         return_reg = determine_return_register(
@@ -4379,9 +4419,15 @@ def translate_to_ast(
         )
 
     if return_reg is not None:
+        reg, is_floating = return_reg
+        if is_floating:
+            return_type.unify(Type.floatish())
+        else:
+            return_type.unify(Type.intptr())
+
         for b in return_blocks:
-            if return_reg in b.final_register_states:
-                ret_val = b.final_register_states[return_reg]
+            if reg in b.final_register_states:
+                ret_val = b.final_register_states[reg]
                 ret_val = as_type(ret_val, return_type, True)
                 ret_val.use()
                 b.return_value = ret_val

@@ -1,7 +1,7 @@
 #include <stdarg.h>
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXPixel.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/vi/vi.h>
@@ -69,7 +69,7 @@ void HSD_InitComponent(void)
     HSD_IDSetup();
     VIWaitForRetrace();
     HSD_ObjInit();
-    HSD_Debug_803881E4();
+    HSD_LogInit();
     init_done = true;
 }
 

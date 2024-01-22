@@ -5,7 +5,6 @@
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/types.h>
 #include <baselib/aobj.h>
 #include <baselib/class.h>
 #include <baselib/list.h>

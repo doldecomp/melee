@@ -6,7 +6,7 @@
 #include "gr/grzakogenerator.h"
 #include "lb/lb_00F9.h"
 
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/gobjgxlink.h>
 
 static void grFigure1_8020DFDC(int);

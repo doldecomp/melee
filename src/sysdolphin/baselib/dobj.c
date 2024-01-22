@@ -1,4 +1,4 @@
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/aobj.h>
 #include <baselib/class.h>
 #include <baselib/dobj.h>

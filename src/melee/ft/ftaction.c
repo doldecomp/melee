@@ -5,6 +5,8 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0881.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcolanim.h"
@@ -4059,7 +4061,7 @@ void ftAction_80073354(Fighter_GObj* gobj)
                     goto block_9;
                 }
             } else if (!(timer > 0.0f)) {
-            block_9 : {
+            block_9: {
                 float timer = cmd->timer;
                 u32 temp_r28 = ((u8) *cmd->u.data_position >> 2U) & 0x3F;
                 if (!Command_Execute(cmd, temp_r28)) {
@@ -4195,7 +4197,7 @@ void ftAction_8007349C(Fighter_GObj* gobj)
                     goto block_9;
                 }
             } else if (!(timer > 0.0f)) {
-            block_9 : {
+            block_9: {
                 u32 temp_r28 = ((u8) *cmd->u.data_position >> 2U) & 0x3F;
                 if (Command_Execute(cmd, temp_r28) == 0) {
                     cmd->u.data_position = &cmd->u.data_position[M2C_FIELD(

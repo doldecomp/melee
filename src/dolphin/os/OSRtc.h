@@ -2,7 +2,8 @@
 #define DOLPHIN_OS_OSRTC
 
 #include <platform.h>
-#include <dolphin/os/forward.h>
+
+#include <dolphin/os.h>
 
 typedef struct OSSram {
     u16 checkSum;
@@ -39,7 +40,7 @@ u32 OSGetSoundMode(void);
 void OSSetSoundMode(u32 mode);
 u32 OSGetProgressiveMode(void);
 void OSSetProgressiveMode(u32 mode);
-void WriteSramCallback(EXIChannel unused0, OSContext* unused1);
+void WriteSramCallback(s32 unused0, OSContext* unused1);
 void __OSInitSram(void);
 
 #endif // DOLPHIN_OS_OSRTC

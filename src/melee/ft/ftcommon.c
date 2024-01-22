@@ -13,6 +13,8 @@
 #include "math.h"
 
 #include "ef/eflib.h"
+#include "ft/ft_0881.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
@@ -35,7 +37,7 @@
 #include "un/un_2FC9.h"
 
 #include <dolphin/mtx/types.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/rumble.h>
 #include <melee/it/items/itpeachparasol.h>
 
@@ -1389,7 +1391,7 @@ void ftCommon_8007EC30(u32 arg0, u32 arg1)
 void ftCommon_8007ECD4(Fighter* fp, s32 arg1)
 {
     if (Player_8003544C(fp->player_id, fp->x221F_b4)) {
-        HSD_Rumble_80378280(fp->x618_player_id, arg1 + 2);
+        HSD_PadRumbleRemoveId(fp->x618_player_id, arg1 + 2);
     }
 }
 

@@ -478,8 +478,8 @@ HSD_QuatLib_8037ECE0:
 /* 8037EE04 0037B9E4  7C 08 03 A6 */	mtlr r0
 /* 8037EE08 0037B9E8  4E 80 00 20 */	blr
 
-.global HSD_QuatLib_8037EE0C
-HSD_QuatLib_8037EE0C:
+.global EulerToQuat
+EulerToQuat:
 /* 8037EE0C 0037B9EC  7C 08 02 A6 */	mflr r0
 /* 8037EE10 0037B9F0  90 01 00 04 */	stw r0, 4(r1)
 /* 8037EE14 0037B9F4  94 21 FF C0 */	stwu r1, -0x40(r1)

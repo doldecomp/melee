@@ -34,7 +34,7 @@
 /* 12CBDC */ void ftYs_GuardOn_1_Phys(ftYs_GObj* gobj);
 /* 12CBFC */ void ftYs_GuardOn_1_Coll(ftYs_GObj* gobj);
 /* 12CC1C */ bool ftYs_Shield_8012CC1C(ftYs_GObj* gobj);
-/* 12CC6C */ void ftYs_Shield_8012CC6C(ftYs_GObj* gobj);
+/* 12CC6C */ Fighter_Part ftYs_Shield_8012CC6C(ftYs_GObj* gobj);
 /* 12CC94 */ void ftYs_Shield_8012CC94(ftYs_GObj* gobj, Vec3* out);
 
 /// @returns #Fighter::facing_dir

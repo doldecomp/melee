@@ -163,7 +163,6 @@ class ArchAsm(ArchAsmParsing):
     frame_pointer_reg: Optional[Register]
     return_address_reg: Register
 
-    base_return_regs: List[Register]
     all_return_regs: List[Register]
     argument_regs: List[Register]
     simple_temp_regs: List[Register]

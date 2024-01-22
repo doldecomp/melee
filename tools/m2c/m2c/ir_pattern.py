@@ -117,7 +117,6 @@ class IrMatch:
     """
 
     symbolic_registers: Dict[str, Register] = field(default_factory=dict)
-    symbolic_labels: Dict[str, str] = field(default_factory=dict)
     symbolic_args: Dict[str, Argument] = field(default_factory=dict)
     ref_map: Dict[Reference, RefSet] = field(default_factory=dict)
 
@@ -130,6 +129,10 @@ class IrMatch:
     def _is_symbolic_sym(arg: AsmGlobalSymbol) -> bool:
         # Uppercase symbols are symbolic; everything else is literal
         return arg.symbol_name.isupper()
+
+    @staticmethod
+    def _is_label_sym(arg: AsmGlobalSymbol) -> bool:
+        return arg.symbol_name.startswith(".")
 
     def eval_math(self, pat: Argument) -> Argument:
         # This function can only evaluate math in *patterns*, not candidate
@@ -168,13 +171,12 @@ class IrMatch:
         if isinstance(key, Register):
             return self.map_reg(key)
         if isinstance(key, AsmGlobalSymbol):
+            assert not self._is_label_sym(key), "not supported yet"
             if self._is_symbolic_sym(key):
                 return self.symbolic_args[key.symbol_name]
             return key
         if isinstance(key, AsmAddressMode):
             return AsmAddressMode(lhs=self.map_arg(key.lhs), rhs=self.map_reg(key.rhs))
-        if isinstance(key, JumpTarget):
-            return JumpTarget(self.symbolic_labels[key.target])
         if isinstance(key, BinOp):
             return self.eval_math(key)
         assert False, f"bad pattern part: {key}"
@@ -232,6 +234,7 @@ class TryIrMatch(IrMatch):
                 return False
             return self._match_var(self.symbolic_registers, pat.register_name, cand)
         if isinstance(pat, AsmGlobalSymbol):
+            assert not self._is_label_sym(pat), "not supported yet"
             if self._is_symbolic_sym(pat):
                 return self._match_var(self.symbolic_args, pat.symbol_name, cand)
             return pat == cand
@@ -240,10 +243,6 @@ class TryIrMatch(IrMatch):
                 isinstance(cand, AsmAddressMode)
                 and self.match_arg(pat.lhs, cand.lhs)
                 and self.match_arg(pat.rhs, cand.rhs)
-            )
-        if isinstance(pat, JumpTarget):
-            return isinstance(cand, JumpTarget) and self._match_var(
-                self.symbolic_labels, pat.target, cand.target
             )
         if isinstance(pat, BinOp):
             return self.eval_math(pat) == cand

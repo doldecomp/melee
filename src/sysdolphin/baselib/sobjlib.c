@@ -1,6 +1,6 @@
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXMisc.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/__baselib.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>

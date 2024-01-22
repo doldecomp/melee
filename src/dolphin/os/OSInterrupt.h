@@ -5,6 +5,7 @@
 #include <platform.h>
 
 #include <dolphin/os/OSContext.h>
+#include <dolphin/os/OSException.h>
 
 #define OS_INTRMASK_MEM_0 (0x80000000U >> OS_INTR_MEM_0)
 #define OS_INTRMASK_MEM_1 (0x80000000U >> OS_INTR_MEM_1)
@@ -61,7 +62,48 @@
 
 #define OS_INTRMASK_PI_PE (OS_INTRMASK_PI_PE_TOKEN | OS_INTRMASK_PI_PE_FINISH)
 
-typedef void (*OSInterruptHandler)(__OSInterrupt, OSContext*);
+typedef enum OSInterruptType {
+    OS_INTR_MEM_0,
+    OS_INTR_MEM_1,
+    OS_INTR_MEM_2,
+    OS_INTR_MEM_3,
+    OS_INTR_MEM_ADDRESS,
+    OS_INTR_DSP_AI,
+    OS_INTR_DSP_ARAM,
+    OS_INTR_DSP_DSP,
+    OS_INTR_AI_AI,
+    OS_INTR_EXI_0_EXI,
+    OS_INTR_EXI_0_TC,
+    OS_INTR_EXI_0_EXT,
+    OS_INTR_EXI_1_EXI,
+    OS_INTR_EXI_1_TC,
+    OS_INTR_EXI_1_EXT,
+    OS_INTR_EXI_2_EXI,
+    OS_INTR_EXI_2_TC,
+    OS_INTR_PI_CP,
+    OS_INTR_PI_PE_TOKEN,
+    OS_INTR_PI_PE_FINISH,
+    OS_INTR_PI_SI,
+    OS_INTR_PI_DI,
+    OS_INTR_PI_RSW,
+    OS_INTR_PI_ERROR,
+    OS_INTR_PI_VI,
+    OS_INTR_PI_DEBUG,
+    OS_INTR_PI_HSP,
+    OS_INTR_PI_ACR,
+    OS_INTR_28,
+    OS_INTR_29,
+    OS_INTR_30,
+    OS_INTR_31,
+
+    OS_INTR_MAX
+} OSInterruptType;
+
+typedef s16 __OSInterrupt;
+typedef void (*__OSInterruptHandler)(__OSInterrupt interrupt,
+                                     OSContext* context);
+
+typedef u32 OSInterruptMask;
 
 extern volatile u32 __OSLastInterruptSrr0;
 extern volatile s16 __OSLastInterrupt;
@@ -77,8 +119,9 @@ bool OSDisableInterrupts(void);
 bool OSEnableInterrupts(void);
 bool OSRestoreInterrupts(bool);
 
-OSInterruptHandler __OSSetInterruptHandler(__OSInterrupt, OSInterruptHandler);
-OSInterruptHandler __OSGetInterruptHandler(__OSInterrupt);
+__OSInterruptHandler __OSSetInterruptHandler(__OSInterrupt,
+                                             __OSInterruptHandler);
+__OSInterruptHandler __OSGetInterruptHandler(__OSInterrupt);
 
 void __OSInterruptInit(void);
 
@@ -86,6 +129,6 @@ u32 __OSMaskInterrupts(u32);
 u32 __OSUnmaskInterrupts(u32);
 
 u32 SetInterruptMask(OSInterruptMask mask, OSInterruptMask current);
-void __OSDispatchInterrupt(OSException exception, OSContext* context);
+void __OSDispatchInterrupt(__OSException exception, OSContext* context);
 
 #endif

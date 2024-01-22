@@ -8,7 +8,7 @@
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/GXVert.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/class.h>
 #include <baselib/displayfunc.h>
 #include <baselib/jobj.h>

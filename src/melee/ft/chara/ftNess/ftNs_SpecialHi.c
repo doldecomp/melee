@@ -10,6 +10,8 @@
 #include "ef/efsync.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0881.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
@@ -658,7 +660,7 @@ void ftNs_SpecialHi_Enter(
     ftNs_SpecialAirHi_Enter(gobj);
     return;
 
-block_stuff : {
+block_stuff: {
 #ifdef MUST_MATCH
     fighter_data3 = fighter_data3 = GET_FIGHTER(gobj);
 #else

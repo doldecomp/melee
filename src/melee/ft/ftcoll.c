@@ -12,6 +12,7 @@
 #include "inlines.h"
 
 #include "ef/efsync.h"
+#include "ft/ft_0881.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftchangeparam.h"
@@ -32,7 +33,7 @@
 #include <placeholder.h>
 #include <runtime.h>
 #include <dolphin/mtx/types.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/archive.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>

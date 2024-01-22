@@ -1,6 +1,6 @@
 #include <platform.h>
 
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSAlloc.h>
 
 static Heap* HeapArray;

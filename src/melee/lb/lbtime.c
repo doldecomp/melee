@@ -63,5 +63,5 @@ u32 lbTime_8000AFBC(void)
 void lbTime_8000B028(OSCalendarTime* td, unsigned int ticks)
 {
     OSTicksToCalendarTime(
-        ticks * (long long) ((*(unsigned int*) 0x800000F8) >> 2), td);
+        (u64) ticks * (long long) ((*(unsigned int*) 0x800000F8) >> 2), td);
 }

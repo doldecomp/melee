@@ -1,30 +1,12 @@
 #include "lb/lbvector.h"
 
+#include "lb/lbrefract.h"
+
 #include <math.h>
+#include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/types.h>
-
-// exactly the same as the one from math.h, but with one extra iteration
-extern inline float sqrtf_accurate(float x)
-{
-    static const double _half = .5;
-    static const double _three = 3.0;
-    volatile float y;
-    if (x > 0.0f) {
-        double guess = __frsqrte((double) x); // returns an approximation to
-        guess = _half * guess *
-                (_three - guess * guess * x); // now have 12 sig bits
-        guess = _half * guess *
-                (_three - guess * guess * x); // now have 24 sig bits
-        guess = _half * guess *
-                (_three - guess * guess * x); // now have 32 sig bits
-        guess =
-            _half * guess * (_three - guess * guess * x); // extra iteration
-        y = (float) (x * guess);
-        return y;
-    }
-    return x;
-}
+#include <baselib/cobj.h>
 
 static float lbVector_Len(Vec3* vec)
 {

@@ -12,7 +12,7 @@
 #include "pl/pl_0371.h"
 
 #include <dolphin/mtx/types.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/gobjplink.h>
 
 typedef struct _ftMapping {

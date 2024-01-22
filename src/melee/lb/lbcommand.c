@@ -2,8 +2,6 @@
 
 #include "lb/lbbgflash.h"
 
-extern const f64 lbl_804D79E0;
-
 void (*lbCommand_803B9840[16])(CommandInfo*) = {
     Command_00, Command_01, Command_02, Command_03, Command_04, Command_05,
     Command_06, Command_07, Command_08, Command_09, NULL,       NULL,

@@ -37,7 +37,7 @@
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <baselib/fog.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
@@ -4327,7 +4327,7 @@ void Ground_801C53EC(u32 arg0)
     lbAudioAx_800237A8(arg0, 0x7F, 0x40);
 }
 
-void Ground_801C5414(UNK_T arg0, s32 arg1)
+void Ground_801C5414(int arg0, int arg1)
 {
     lbAudioAx_80023870(arg0, 0x7F, 0x40, arg1);
 }

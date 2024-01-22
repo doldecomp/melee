@@ -4,7 +4,7 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-#include <dolphin/pad/Pad.h>
+#include <dolphin/pad/pad.h>
 
 struct HSD_RumbleData {
     u8 last_status;
@@ -44,32 +44,22 @@ struct HSD_PadRumbleListData {
     /*0x1C*/ /* HSD_Rumble* */ u16* headp;
 };
 
-struct Struct804C22E0 {
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u16 unk4;
-    HSD_PadRumbleListData* unk8;
-};
+void HSD_PadRumbleRemoveId(u8, int);
 
-void HSD_Rumble_80378280(u8, int);
-
-void HSD_Rumble_80378128(struct Struct804C22E0* a, HSD_PadRumbleListData* b);
-void HSD_Rumble_80378170(u8 a);
-void HSD_Rumble_80378208(void);
-void func_80378330_inline(u8 a, int b);
-void HSD_Rumble_80378330(void);
-void HSD_Rumble_803783B0(void);
+void HSD_PadRumbleFree(HSD_RumbleData* a, HSD_PadRumbleListData* b);
+void HSD_PadRumbleRemove(u8 no);
+void HSD_PadRumbleRemoveAll(void);
+void HSD_PadRumblePause(u8 no, int status);
+void HSD_PadRumblePauseAll(void);
+void HSD_PadRumbleUnpauseAll(void);
 void func_80378430_inline(HSD_PadRumbleListData** r6,
                           HSD_PadRumbleListData* r7);
-int HSD_Rumble_80378430(u8 a, int b, int c, int d, void* e);
-void HSD_Rumble_80378524(int a);
-int HSD_Rumble_80378560(HSD_PadRumbleListData* a, u8* b);
+int HSD_PadRumbleAdd(u8 no, int id, int frame, int pri, void* listp);
+void HSD_Rumble_80378524(int max);
+int HSD_PadRumbleInterpret1(HSD_PadRumbleListData* a, u8* b);
 void HSD_PadRumbleInterpret(void);
 void HSD_PadRumbleInit(u16 a, void* b);
-void HSD_PadRumbleOn(u8 a);
-void HSD_Rumble_803780DC(u8 a);
-void HSD_PadRumbleInterpret_inline(HSD_PadRumbleListData** r6,
-                                   HSD_PadRumbleListData* r29);
+void HSD_PadRumbleOn(u8 no);
+void HSD_PadRumbleOffN(u8 no);
 
 #endif

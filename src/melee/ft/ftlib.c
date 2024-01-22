@@ -311,10 +311,10 @@ void* ftLib_800865F0(HSD_GObj* gobj)
     return fp->parts[ftParts_8007500C(fp, 4)].joint;
 }
 
-void* ftLib_80086630(HSD_GObj* gobj, s32 i)
+void* ftLib_80086630(HSD_GObj* gobj, Fighter_Part part)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->parts[i].joint;
+    return fp->parts[part].joint;
 }
 
 void ftLib_80086644(HSD_GObj* gobj, Vec3* pos)
@@ -665,7 +665,7 @@ void ftLib_80086E68(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_8003544C(fp->player_id, fp->x221F_b4)) {
-        HSD_Rumble_80378280(fp->x618_player_id, 1);
+        HSD_PadRumbleRemoveId(fp->x618_player_id, 1);
     }
 }
 

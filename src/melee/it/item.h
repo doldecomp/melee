@@ -38,7 +38,7 @@ void Item_802680CC(HSD_GObj* gobj);
 void Item_8026849C(HSD_GObj* gobj);
 
 /// Item spawn prefunction - spawn airborne
-HSD_GObj* Item_80268B18(SpawnItem* spawnItem);
+Item_GObj* Item_80268B18(SpawnItem* spawnItem);
 
 /// Item spawn prefunction - spawn grounded
 Item_GObj* Item_80268B5C(SpawnItem* spawnItem);
@@ -74,7 +74,7 @@ void Item_80269CA0(Item* item_data, s32 damage);
 void Item_8026A848(HSD_GObj* gobj, HSD_GObj* fgobj);
 
 /// Destroy Item
-void Item_8026A8EC(HSD_GObj* gobj);
+void Item_8026A8EC(Item_GObj* gobj);
 
 /// Make Item Held
 void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* owner_gobj, u8 part);

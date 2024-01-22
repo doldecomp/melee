@@ -787,7 +787,6 @@ lbl_800BFB38:
 #pragma peephole on
 #endif /* clang-format on */
 
-
 void ftMaterial_800BFB4C(ftCo_GObj* gobj, GXColor* diffuse)
 {
     HSD_JObj* cur = GET_JOBJ(gobj);

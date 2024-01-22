@@ -2,7 +2,7 @@ extern f32 a;
 extern f64 b;
 extern f64 c;
 extern ? *d;
-static ? $$25;                                      /* unable to generate initializer */
+static ? $$25;                                      /* unable to generate initializer: unknown type */
 
 void test(void) {
     a = 1.2f;

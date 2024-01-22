@@ -7,7 +7,7 @@
 
 #include <string.h>
 #include <dolphin/dvd/dvd.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <baselib/archive.h>
 #include <baselib/debug.h>
@@ -96,11 +96,11 @@ typedef struct OldDVDFileInfo {
     /*0x34*/ u32 length;
 } OldDVDFileInfo;
 
-/* BUG: OldDVDFileInfo is needed to match stack allocation sizes. However,
- * the actual DVDFileInfo is 4 bytes longer due to callback.
- * This means that calls to lbFile_8001634C write 4 bytes past where it should
- * on the stack.
- */
+/// @bug OldDVDFileInfo is needed to match stack allocation sizes. However,
+/// the actual DVDFileInfo is 4 bytes longer due to callback.
+/// This means that calls to lbFile_8001634C write 4 bytes past where it should
+/// on the stack.
+///
 size_t lbFile_8001634C(s32 fileno)
 {
     OldDVDFileInfo info;

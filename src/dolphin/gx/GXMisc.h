@@ -4,7 +4,7 @@
 #include <dolphin/gx/forward.h>
 
 #include <dolphin/gx/GXEnum.h>
-#include <dolphin/os/OSThread.h>
+#include <dolphin/os.h>
 
 void GXPixModeSync(void);
 void GXWaitDrawDone(void);

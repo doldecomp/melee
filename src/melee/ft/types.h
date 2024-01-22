@@ -537,9 +537,9 @@ struct ftCommonData {
     // lots of more data following, exact size to be determined
 };
 
-typedef struct _FtCollisionData {
-    UNK_T x0;
-    UNK_T x4;
+struct FtCollisionData {
+    int x0;
+    int* x4;
     UNK_T x8;
     UNK_T xC;
     UNK_T x10;
@@ -552,7 +552,7 @@ typedef struct _FtCollisionData {
     u32 x2C;
     s32 x30;
     s32 x34;
-} FtCollisionData;
+};
 
 typedef struct _DObjList {
     usize_t count;
@@ -871,7 +871,7 @@ struct MotionState {
         /// @todo Try to match without this being a @c union.
         u32 _;
         struct {
-            FtMoveId move_id : 8;
+            u8 move_id : 8;
             struct {
                 u8 x9_b0 : 1;
                 u8 x9_b1 : 1;
@@ -1370,7 +1370,7 @@ struct Fighter {
     /* fp+1A54 */ s32 x1A54;
     /* fp+1A58 */ Fighter_GObj* victim_gobj;
     /* fp+1A5C */ Fighter_GObj* x1A5C;
-    /* fp+1A60 */ u32 x1A60;
+    /* fp+1A60 */ Item_GObj* x1A60;
     /* fp+1A64 */ s32 x1A64;
     /* fp+1A68 */ u16 x1A68;
     /* fp+1A6A */ u16 x1A6A;
@@ -1426,8 +1426,9 @@ struct Fighter {
     /* fp+2040 */ void* x2040;
     /* fp+203C */ u8 filler_x203C[0x2064 - 0x2044];
     /* fp+2064 */ int x2064_ledgeCooldown;
-    /* fp+2068 */ enum_t x2068_attackID;
-    /* fp+206C */ u8 filler_x206C[0x2070 - 0x206C];
+    /* fp+2068 */ uint x2068_attackID;
+    /* fp+206C */ short x206C;
+    /* fp+206E */ short x206E;
     /* fp+2070 */ union Struct2070 x2070;
     /* fp+2074 */ u8 filler_x2074[0x208C - 0x2074];
     /* fp+208C */ s32 x208C;
@@ -1480,7 +1481,7 @@ struct Fighter {
     /* fp+2114 */ SmashAttr smash_attrs;
     /* fp+213C */ s32 x213C;
     /* fp+2140 */ float x2140;
-    /* fp+2144 */ s32 x2144;
+    /* fp+2144 */ int x2144;
     /* fp+2148 */ s32 x2148;
     /* fp+214C */ s32 x214C;
     /* fp+2150 */ s32 x2150;
