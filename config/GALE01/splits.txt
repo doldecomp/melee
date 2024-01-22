@@ -170,6 +170,11 @@ melee/db/db_2253.c:
 	.sbss       start:0x804D6B20 end:0x804D6BA8
 	.sdata2     start:0x804DBCF0 end:0x804DBD88
 
+melee/it/items/itspycloak.c:
+	.text       start:0x80295C48 end:0x80295ED4
+	.data       start:0x803F6370 end:0x803F63C0
+	.sdata2     start:0x804DCB70 end:0x804DCB74
+
 sysdolphin/baselib/dobj.c:
 	.text       start:0x8035DD98 end:0x8035E560
 	.data       start:0x80405450 end:0x80405570
