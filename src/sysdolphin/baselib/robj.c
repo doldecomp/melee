@@ -1,6 +1,6 @@
+#include <__mem.h>
 #include <math.h>
 #include <placeholder.h>
-#include <string.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os.h>
 #include <baselib/mtx.h>
