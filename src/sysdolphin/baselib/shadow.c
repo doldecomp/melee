@@ -4,6 +4,7 @@
 #include "mobj.h"
 #include "shadow.h"
 
+#include <__mem.h>
 #include <string.h>
 #include <dolphin/gx/GXFrameBuf.h>
 

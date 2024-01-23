@@ -20,7 +20,7 @@
 #include "ftCommon/ftCo_ItemGet.h"
 #include "ftPeach/types.h"
 #include "it/it_26B1.h"
-#include "it/it_27CF.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 #include <math.h>

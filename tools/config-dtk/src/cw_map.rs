@@ -1,19 +1,13 @@
-use std::{
-    hash::{BuildHasher, Hash, Hasher},
-    num::{NonZeroU32, NonZeroU8},
-    path::{Path, PathBuf},
-    str,
-};
+use std::hash::{BuildHasher, Hash, Hasher};
 
 use ahash::{AHashMap, RandomState};
 use anyhow::{anyhow, bail, Context, Result};
-use cwparse::{
-    map::{self},
-    memory_table, section_table, tree,
-};
-use log::{debug, error, warn};
-use pathdiff::diff_paths;
+use cwparse::{map, memory_table, section_table, tree};
+use itertools::Itertools;
+use log::{debug, error, trace};
 use rayon::{prelude::ParallelIterator, str::ParallelString};
+
+use crate::types::{Split, TableSymbol, TreeSymbol};
 
 fn section_to_string(name: &map::SectionName<&str>) -> Result<&'static str> {
     match name {
@@ -60,50 +54,33 @@ fn id_to_string(id: &map::Identifier<&str>) -> String {
     }
 }
 
-pub(crate) struct TreeSymbol<'a> {
-    pub(crate) name: String,
-    pub(crate) tu: &'a str,
-    pub(crate) r#type: &'a str,
-    pub(crate) scope: &'a str,
-}
-
-pub(crate) struct TableSymbol<'a> {
-    pub(crate) section: &'a str,
-    pub(crate) addr: u32,
-    pub(crate) size: u32,
-    pub(crate) align: Option<u8>,
-}
-
-struct Split<'a> {
-    section: &'a str,
-    tu: &'a str,
-    start: NonZeroU32,
-    end: Option<NonZeroU32>,
-}
-
-struct Section<'a> {
-    name: &'a str,
-    r#type: &'a str,
-    addr: NonZeroU32,
-}
-
 pub(crate) struct Parser<'a> {
     pub(crate) tree_symbols: AHashMap<u64, TreeSymbol<'a>>,
     pub(crate) table_symbols: AHashMap<u64, TableSymbol<'a>>,
-    splits: Vec<Split<'a>>,
-    sections: Vec<Section<'a>>,
-    src_paths: AHashMap<u64, PathBuf>,
+    pub(crate) splits: Vec<Split<'a>>,
     raw: &'a str,
     line: usize,
+    tu_paths: &'a AHashMap<String, String>,
+    cur_tu: &'a str,
+    cur_section: &'a str,
 }
 
 impl<'a> Parser<'a> {
     pub(crate) fn parse(
         input: &'a str,
-        root: &Path,
-        paths: Vec<PathBuf>,
+        tu_paths: &'a AHashMap<String, String>,
     ) -> Result<Self> {
-        let mut parser = Parser::new();
+        let hasher = RandomState::new();
+        let mut parser = Parser {
+            tree_symbols: AHashMap::with_hasher(hasher.clone()),
+            table_symbols: AHashMap::with_hasher(hasher.clone()),
+            splits: Default::default(),
+            raw: Default::default(),
+            line: Default::default(),
+            tu_paths,
+            cur_tu: Default::default(),
+            cur_section: Default::default(),
+        };
 
         let lines = input
             .par_lines()
@@ -113,26 +90,11 @@ impl<'a> Parser<'a> {
             .collect::<Result<Vec<_>, _>>()
             .context("Failed to parse lines.")?;
 
-        parser.push_src_paths(root, paths)?;
-
         for (raw, parsed) in lines {
             parser.push_line(&parsed, raw)?;
         }
 
         Ok(parser)
-    }
-
-    fn new() -> Self {
-        let hasher = RandomState::new();
-        Self {
-            tree_symbols: AHashMap::with_hasher(hasher.clone()),
-            table_symbols: AHashMap::with_hasher(hasher.clone()),
-            splits: Default::default(),
-            sections: Default::default(),
-            src_paths: AHashMap::with_hasher(hasher.clone()),
-            raw: &"",
-            line: 0,
-        }
     }
 
     fn format_error_raw(line: usize, raw: &str, msg: &str) -> String {
@@ -143,8 +105,20 @@ impl<'a> Parser<'a> {
         Self::format_error_raw(self.line, &self.raw, msg)
     }
 
-    fn strip_tu(tu: &str) -> &str {
-        tu.strip_suffix(".o").unwrap_or(tu)
+    fn resolve_tu(&self, tu: &'a str) -> Result<&'a str> {
+        let key = tu.split_once('.').unwrap().0;
+        self.tu_paths
+            .get(key)
+            .ok_or_else(|| {
+                anyhow!(
+                    "{}",
+                    self.format_error(&format!(
+                        "could not resolve translation unit \"{}\"",
+                        &key
+                    ))
+                )
+            })
+            .map(String::as_str)
     }
 
     fn push_symbol<V>(
@@ -162,7 +136,7 @@ impl<'a> Parser<'a> {
             hasher.finish()
         };
         if map.get(&key).is_some() {
-            warn!(
+            trace!(
                 "{}",
                 Self::format_error_raw(
                     line,
@@ -184,7 +158,6 @@ impl<'a> Parser<'a> {
     ) -> Result<()> {
         let sym = TreeSymbol {
             name: id_to_string(id),
-            tu: Self::strip_tu(tu),
             r#type: match r#type {
                 tree::Type::None => "label",
                 tree::Type::Object => "object",
@@ -228,7 +201,7 @@ impl<'a> Parser<'a> {
             addr,
             size: {
                 if size == 0 {
-                    warn!("{}", self.format_error("size is zero"));
+                    trace!("{}", self.format_error("size is zero"));
                 }
                 size
             },
@@ -246,7 +219,7 @@ impl<'a> Parser<'a> {
 
     fn push_split_start(
         &mut self,
-        section: &map::SectionName<&str>,
+        section: &'a str,
         tu: &'a str,
         start: u32,
     ) -> Result<()> {
@@ -254,56 +227,23 @@ impl<'a> Parser<'a> {
             bail!(self.format_error("cannot push a new split when the current split isn't completed"))
         }
         let split = Split {
-            section: section_to_string(section)?,
-            tu: Self::strip_tu(tu),
-            start: NonZeroU32::new(start)
-                .with_context(|| self.format_error("section start is zero"))?,
+            section,
+            tu,
+            start,
             end: None,
         };
-        Ok(self.splits.push(split))
+        self.splits.push(split);
+        Ok(())
     }
 
     fn push_split_end(&mut self, end: u32) -> Result<()> {
-        let end = NonZeroU32::new(end)
-            .with_context(|| self.format_error("section end is zero"))
-            .map(Some)?;
         if let Some(split @ Split { end: None, .. }) = self.splits.last_mut() {
-            Ok(split.end = end)
+            Ok(split.end = Some(end))
         } else {
             Err(anyhow!(self.format_error(
                 "cannot push a new split when one has not been started"
             )))
         }
-    }
-
-    fn push_section(
-        &mut self,
-        section: &map::SectionName<&str>,
-        addr: u32,
-    ) -> Result<()> {
-        Ok(self.sections.push(Section {
-            name: section_to_string(section)?,
-            r#type: match section {
-                map::SectionName::Bss => "bss",
-                map::SectionName::Ctors => "rodata",
-                map::SectionName::Data => "data",
-                map::SectionName::Dtors => "rodata",
-                map::SectionName::ExTab => "rodata",
-                map::SectionName::ExTabIndex => "rodata",
-                map::SectionName::Init => "code",
-                map::SectionName::RoData => "rodata",
-                map::SectionName::SBss => "bss",
-                map::SectionName::SBss2 => "bss",
-                map::SectionName::SData => "data",
-                map::SectionName::SData2 => "rodata",
-                map::SectionName::Text => "code",
-                map::SectionName::Unknown(_) => {
-                    bail!(self.format_error("unknown section name."))
-                }
-            },
-            addr: NonZeroU32::new(addr)
-                .with_context(|| self.format_error("address is zero"))?,
-        }))
     }
 
     fn push_line(
@@ -313,7 +253,29 @@ impl<'a> Parser<'a> {
     ) -> Result<()> {
         self.raw = raw;
         self.line += 1;
-        self.match_line(parsed)
+        self.match_line(parsed)?;
+
+        // match parsed {
+        //     map::Line::SectionSymbol(sym) {
+
+        // }
+        // }
+        // if self.cur_tu == *tu {
+        //     ()
+        // }
+        // // if self.line
+        // if self.splits.len() > 0 {
+        //     if let Err(err) = self.push_split_end(*addr) {
+        //         debug!("{}", err);
+        //     }
+        // }
+        // if let Err(err) =
+        //     self.push_split_start(self.cur_section, tu, *addr)
+        // {
+        //     error!("{}", err);
+        // }
+        // // TODO: Doesn't cover the end of the symbol map
+        Ok(())
     }
 
     fn match_line(&mut self, parsed: &map::Line<&'a str>) -> Result<()> {
@@ -328,7 +290,6 @@ impl<'a> Parser<'a> {
             | map::Line::MemoryColumns1
             | map::Line::LinkerTitle
             | map::Line::LinkerEntry(_)
-            | map::Line::SectionTitle(_)
             | map::Line::TreeNode(tree::Node {
                 data:
                     tree::Data::Linker(_)
@@ -338,6 +299,9 @@ impl<'a> Parser<'a> {
                     ),
                 depth: _,
             }) => (),
+            map::Line::SectionTitle(name) => {
+                self.cur_section = section_to_string(name)?
+            }
             map::Line::TreeNode(tree::Node {
                 data:
                     tree::Data::Object(
@@ -355,43 +319,12 @@ impl<'a> Parser<'a> {
                     ),
                 depth: _,
             })
-            | map::Line::SectionSymbol(section_table::Symbol {
-                addr: _,
-                virt_addr: _,
-                data: section_table::Data::Child { .. },
-                id: map::Identifier::Section { .. },
-                origin:
-                    map::Origin {
-                        obj: _,
-                        src: None,
-                        asm: false,
-                    },
-            })
             | map::Line::MemoryEntry(memory_table::Entry {
                 data: memory_table::Data::Debug { .. },
                 size: _,
                 file_addr: _,
-            }) => debug!("{}", self.format_error("ignoring")),
-            map::Line::SectionSymbol(section_table::Symbol {
-                addr: _,
-                virt_addr: addr,
-                data: _,
-                id: map::Identifier::Section { name, idx: None },
-                origin:
-                    map::Origin {
-                        obj: tu,
-                        src: None,
-                        asm: false,
-                    },
-            }) if tu.ends_with(".c.o") => {
-                // debug!("{}", self.format_error("ignoring"))
-                if self.splits.len() > 0 {
-                    self.push_split_end(*addr)?;
-                }
-                self.push_split_start(name, tu, *addr)?;
-                // error!("{}", self.format_error("not handled"));
-                // TODO: Doesn't cover the end of the symbol map
-            }
+            }) => trace!("{}", self.format_error("ignoring")),
+
             map::Line::TreeNode(tree::Node {
                 data:
                     tree::Data::Object(
@@ -426,69 +359,47 @@ impl<'a> Parser<'a> {
                         (*size, Some(align))
                     }
                     _ => {
-                        warn!("{}", self.format_error("child symbol"));
+                        trace!("{}", self.format_error("child symbol"));
                         (0, None)
                     }
                 };
+
+                if let Ok(tu) = self.resolve_tu(tu) {
+                    if self.cur_tu != tu {
+                        if self.splits.len() > 0 {
+                            if let Err(err) = self.push_split_end(*addr) {
+                                debug!("{}", err);
+                            }
+                        }
+                        if let Err(err) =
+                            self.push_split_start(self.cur_section, tu, *addr)
+                        {
+                            debug!("{}", err);
+                        }
+                        // TODO: Doesn't cover the end of the symbol map
+                        self.cur_tu = tu;
+                    }
+                }
+
                 self.push_table_symbol(&id, tu, *addr, size, &align.copied())?;
             }
             map::Line::MemoryEntry(memory_table::Entry {
                 data:
                     memory_table::Data::Main {
-                        name,
-                        virt_addr: addr,
+                        name: _,
+                        virt_addr: _,
                     },
                 size,
                 file_addr: _,
             }) => {
                 if *size == 0 {
-                    debug!(
+                    trace!(
                         "{}",
                         self.format_error("ignoring zero-length section")
                     );
                 }
-                self.push_section(name, *addr)?;
             }
             other => error!("Unexpected match: {:?}", other),
         })
-    }
-
-    fn push_src_paths(
-        &mut self,
-        root: &Path,
-        paths: Vec<PathBuf>,
-    ) -> Result<()> {
-        for path in paths {
-            if path.extension().and_then(|s| s.to_str()) != Some("c") {
-                continue;
-            }
-            let key = {
-                let file_name = path.file_name().with_context(|| {
-                    format!("failed to get the filename for {:?}", path)
-                })?;
-                let file_str = path
-                    .file_name()
-                    .with_context(|| {
-                        format!("failed to get the filename for {:?}", path)
-                    })?
-                    .to_str()
-                    .with_context(|| {
-                        format!(
-                            "failed to convert the filename for {:?}",
-                            file_name
-                        )
-                    })?;
-                self.src_paths.hasher().hash_one(file_str)
-            };
-            let value = {
-                diff_paths(&path, &root).with_context(|| {
-                    format!("failed to diff {:?} with {:?}", path, root)
-                })?
-            };
-            if let Some(existing) = self.src_paths.insert(key, value) {
-                bail!("duplicate src path: {:?}", existing);
-            }
-        }
-        Ok(())
     }
 }

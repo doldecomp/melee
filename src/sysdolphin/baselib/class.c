@@ -1,5 +1,6 @@
 #include "class.h"
 
+#include <__mem.h>
 #include <stddef.h>
 #include <string.h>
 #include <dolphin/os.h>

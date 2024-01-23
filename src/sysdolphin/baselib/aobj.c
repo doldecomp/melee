@@ -1,5 +1,6 @@
 #include <baselib/forward.h>
 
+#include <__mem.h>
 #include <placeholder.h>
 #include <stdarg.h>
 #include <string.h>

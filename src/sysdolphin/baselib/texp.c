@@ -1,3 +1,4 @@
+#include <__mem.h>
 #include <placeholder.h>
 #include <string.h>
 #include <dolphin/gx/GXMisc.h>

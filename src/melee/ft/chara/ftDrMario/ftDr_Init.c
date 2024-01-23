@@ -17,7 +17,7 @@
 #include "ftMario/ftMr_SpecialLw.h"
 #include "ftMario/ftMr_SpecialN.h"
 #include "ftMario/ftMr_SpecialS.h"
-#include "it/it_27CF.h"
+#include "it/items/it_27CF.h"
 
 MotionState ftDr_Init_MotionStateTable[ftMr_MS_SelfCount] = {
     {

@@ -4,6 +4,7 @@
 #include "memory.h"
 #include "mtx.h"
 
+#include <__mem.h>
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/types.h>
