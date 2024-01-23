@@ -1,0 +1,363 @@
+Sections:
+	.init       type:code align:8
+	extab       type:rodata align:8
+	extabindex  type:rodata align:8
+	.text       type:code align:8
+	.ctors      type:rodata align:8
+	.dtors      type:rodata align:8
+	.rodata     type:rodata align:8
+	.data       type:data align:8
+	.bss        type:bss align:8
+	.sdata      type:data align:8
+	.sbss       type:bss align:8
+	.sdata2     type:rodata align:8
+
+melee/lb/lbcommand.c:
+	.text       start:0x80005940 end:0x80005BB0
+	.data       start:0x803B9840 end:0x803B9880
+	.sdata2     start:0x804D79E0 end:0x804D79F0
+
+melee/lb/lbcollision.c:
+	.text       start:0x80005BB0 end:0x8000AD8C
+	.data       start:0x803B9880 end:0x803B9FC0
+	.sdata2     start:0x804D79F0 end:0x804D7A58
+
+melee/lb/lblanguage.c:
+	.text       start:0x8000AD8C end:0x8000AEC8
+
+melee/lb/lbtime.c:
+	.text       start:0x8000AEC8 end:0x8000B074
+
+melee/lb/lb_00B0.c:
+	.text       start:0x8000B074 end:0x8000CE50
+	.data       start:0x803B9FC0 end:0x803BA050
+	.sdata      start:0x804D3710 end:0x804D3720
+	.sdata2     start:0x804D7A58 end:0x804D7A68
+
+melee/lb/lb_00CE.c:
+	.text       start:0x8000CE50 end:0x8000D2EC
+	.sdata2     start:0x804D7A68 end:0x804D7AA8
+
+melee/lb/lbvector.c:
+	.text       start:0x8000D2EC end:0x8000E9F0
+	.data       start:0x803BA050 end:0x803BA0D8
+	.sdata      start:0x804D3720 end:0x804D3728
+	.sdata2     start:0x804D7AA8 end:0x804D7B30
+
+melee/lb/lbshadow.c:
+	.text       start:0x8000E9F0 end:0x8000F9F8
+	.data       start:0x803BA0D8 end:0x803BA150
+	.sdata      start:0x804D3728 end:0x804D3740
+	.sdata2     start:0x804D7B30 end:0x804D7BA0
+
+melee/lb/lb_00F9.c:
+	.text       start:0x8000F9F8 end:0x80014ABC
+	.rodata     start:0x803B7280 end:0x803B72C0
+	.data       start:0x803BA150 end:0x803BA2C0
+	.sdata      start:0x804D3740 end:0x804D3778
+	.sbss       start:0x804D63A0 end:0x804D63C8
+	.sdata2     start:0x804D7BA0 end:0x804D7C80
+
+melee/lb/lbarq.c:
+	.text       start:0x80014ABC end:0x80014E24
+	.bss        start:0x804316C0 end:0x804318B0
+	.sdata      start:0x804D3778 end:0x804D3788
+
+melee/lb/lbmemory.c:
+	.text       start:0x80014E24 end:0x800158D0
+	.data       start:0x803BA2C0 end:0x803BA380
+	.bss        start:0x804318B0 end:0x80431FA0
+	.sdata      start:0x804D3788 end:0x804D37A0
+
+melee/lb/lbheap.c:
+	.text       start:0x800158D0 end:0x8001615C
+	.data       start:0x803BA380 end:0x803BA508
+	.bss        start:0x80431FA0 end:0x80432058
+	.sdata      start:0x804D37A0 end:0x804D37A8
+
+melee/lb/lbfile.c:
+	.text       start:0x8001615C end:0x80016A54
+	.data       start:0x803BA508 end:0x803BA588
+	.bss        start:0x80432058 end:0x80432078
+	.sdata      start:0x804D37A8 end:0x804D37C0
+	.sbss       start:0x804D63C8 end:0x804D63D0
+
+melee/lb/lbarchive.c:
+	.text       start:0x80016A54 end:0x800174BC
+	.data       start:0x803BA588 end:0x803BA638
+	.sdata      start:0x804D37C0 end:0x804D37D0
+
+melee/lb/lbdvd.c:
+	.text       start:0x800174BC end:0x80019230
+	.rodata     start:0x803B72C0 end:0x803B7300
+	.data       start:0x803BA638 end:0x803BA708
+	.bss        start:0x80432078 end:0x804329F0
+	.sdata      start:0x804D37D0 end:0x804D3800
+
+melee/lb/lb_0192.c:
+	.text       start:0x80019230 end:0x80019880
+	.data       start:0x803BA708 end:0x803BAAA8
+	.sdata      start:0x804D3800 end:0x804D3804
+
+melee/lb/lb_0198.c:
+	.text       start:0x80019880 end:0x8001D2BC
+	.data       start:0x803BAAA8 end:0x803BACC8
+	.bss        start:0x804329F0 end:0x804333E0
+	.sdata      start:0x804D3804 end:0x804D3828
+	.sbss       start:0x804D63D0 end:0x804D63D8
+	.sdata2     start:0x804D7C80 end:0x804D7CC8
+
+melee/lb/lbsnap.c:
+	.text       start:0x8001D2BC end:0x8001E2F8
+	.data       start:0x803BACC8 end:0x803BADB0
+	.sdata      start:0x804D3828 end:0x804D3830
+
+melee/lb/lbgx.c:
+	.text       start:0x8001E2F8 end:0x8001E560
+
+melee/lb/lbanim.c:
+	.text       start:0x8001E560 end:0x8001E8F8
+
+melee/lb/lbmthp.c:
+	.text       start:0x8001E8F8 end:0x8001FC08
+	.data       start:0x803BADB0 end:0x803BB000
+	.bss        start:0x804333E0 end:0x80433658
+	.sdata      start:0x804D3830 end:0x804D3840
+	.sdata2     start:0x804D7CC8 end:0x804D7CE8
+
+melee/lb/lbbgflash.c:
+	.text       start:0x8001FC08 end:0x80021CE8
+	.data       start:0x803BB000 end:0x803BB0B0
+	.bss        start:0x80433658 end:0x804336D0
+	.sdata      start:0x804D3840 end:0x804D3868
+	.sbss       start:0x804D63D8 end:0x804D63E8
+	.sdata2     start:0x804D7CE8 end:0x804D7D70
+
+melee/lb/lbrefract_data.c:
+	.sbss       start:0x804D63E8 end:0x804D63F0
+
+melee/lb/lbrefract1.c:
+	.text       start:0x80021CE8 end:0x800222A4
+	.sdata2     start:0x804D7D70 end:0x804D7DA8
+
+melee/lb/lbrefract2.c:
+	.text       start:0x800222A4 end:0x8002305C
+	.rodata     start:0x803B7300 end:0x803B73B8
+	.data       start:0x803BB0B0 end:0x803BB300
+	.bss        start:0x804336D0 end:0x80433710
+	.sdata      start:0x804D3868 end:0x804D3870
+	.sdata2     start:0x804D7DA8 end:0x804D7DD8
+
+melee/lb/lbaudio_ax.c:
+	.text       start:0x8002305C end:0x80028B9C
+	.data       start:0x803BB300 end:0x803BCB18
+	.bss        start:0x80433710 end:0x80452C68
+	.sdata      start:0x804D3870 end:0x804D3938
+	.sbss       start:0x804D63F0 end:0x804D6458
+	.sdata2     start:0x804D7DD8 end:0x804D7E00
+
+melee/cm/cmsnap.c:
+	.text       start:0x800315C8 end:0x80031724
+	.data       start:0x803BCD90 end:0x803BCDC0
+	.bss        start:0x80453060 end:0x80453080
+
+melee/db/db_2253.c:
+	.text       start:0x80225374 end:0x802295AC
+	.rodata     start:0x803B84D8 end:0x803B84E8
+	.data       start:0x803EA6C8 end:0x803EAE68
+	.bss        start:0x8049FA00 end:0x804A04F0
+	.sdata      start:0x804D4A08 end:0x804D4B30
+	.sbss       start:0x804D6B20 end:0x804D6BA8
+	.sdata2     start:0x804DBCF0 end:0x804DBD88
+
+sysdolphin/baselib/dobj.c:
+	.text       start:0x8035DD98 end:0x8035E560
+	.data       start:0x80405450 end:0x80405570
+	.sdata      start:0x804D5C78 end:0x804D5C90
+	.sbss       start:0x804D75A0 end:0x804D75A8
+
+sysdolphin/baselib/tobj.c:
+	.text       start:0x8035E560 end:0x803615D0
+	.data       start:0x80405570 end:0x80405A38
+	.sdata      start:0x804D5C90 end:0x804D5CC8
+
+sysdolphin/baselib/state.c:
+	.text       start:0x803615D0 end:0x80362024
+	.data       start:0x80405A38 end:0x80405B98
+	.bss        start:0x804C07E0 end:0x804C07F8
+	.sdata      start:0x804D5CC8 end:0x804D5CD0
+	.sbss       start:0x804D75B0 end:0x804D75F8
+	.sdata2     start:0x804DE418 end:0x804DE420
+
+sysdolphin/baselib/tev.c:
+	.text       start:0x80362024 end:0x80362D30
+
+sysdolphin/baselib/mobj.c:
+	.text       start:0x80362D30 end:0x80363FC8
+	.data       start:0x80405E28 end:0x80405FB8
+	.sdata      start:0x804D5CE0 end:0x804D5D08
+	.sbss       start:0x804D7618 end:0x804D7628
+	.sdata2     start:0x804DE428 end:0x804DE438
+
+sysdolphin/baselib/aobj.c:
+	.text       start:0x80363FC8 end:0x8036539C
+	.data       start:0x80405FB8 end:0x804060C0
+	.bss        start:0x804C0880 end:0x804C08B0
+	.sdata      start:0x804D5D08 end:0x804D5D18
+	.sbss       start:0x804D7628 end:0x804D7638
+	.sdata2     start:0x804DE438 end:0x804DE440
+
+sysdolphin/baselib/lobj.c:
+	.text       start:0x8036539C end:0x803676F8
+	.rodata     start:0x803B94A0 end:0x803B94B8
+	.data       start:0x804060C0 end:0x80406220
+	.bss        start:0x804C08B0 end:0x804C08D8
+	.sdata      start:0x804D5D18 end:0x804D5D40
+	.sbss       start:0x804D7638 end:0x804D7658
+	.sdata2     start:0x804DE440 end:0x804DE468
+
+sysdolphin/baselib/cobj.c:
+	.text       start:0x803676F8 end:0x8036A938
+	.data       start:0x80406220 end:0x80406350
+	.sdata      start:0x804D5D40 end:0x804D5D58
+	.sbss       start:0x804D7658 end:0x804D7660
+	.sdata2     start:0x804DE468 end:0x804DE4D0
+
+sysdolphin/baselib/fobj.c:
+	.text       start:0x8036A938 end:0x8036B8D0
+	.data       start:0x80406350 end:0x80406398
+	.bss        start:0x804C08D8 end:0x804C0908
+	.sdata      start:0x804D5D58 end:0x804D5D68
+	.sdata2     start:0x804DE4D0 end:0x804DE4F8
+
+sysdolphin/baselib/pobj.c:
+	.text       start:0x8036B8D0 end:0x8036EC10
+	.data       start:0x80406398 end:0x80406708
+	.bss        start:0x804C0908 end:0x804C0918
+	.sdata      start:0x804D5D68 end:0x804D5DA0
+	.sbss       start:0x804D7660 end:0x804D7680
+	.sdata2     start:0x804DE4F8 end:0x804DE528
+
+sysdolphin/baselib/jobj.c:
+	.text       start:0x8036EC10 end:0x803738A0
+	.data       start:0x80406708 end:0x80406AE0
+	.sdata      start:0x804D5DA0 end:0x804D5DD8
+	.sbss       start:0x804D7680 end:0x804D7698
+	.sdata2     start:0x804DE528 end:0x804DE578
+
+sysdolphin/baselib/initialize.c:
+	.text       start:0x80374E48 end:0x8037588C
+	.rodata     start:0x803B94E0 end:0x803B9570
+	.data       start:0x80406BC0 end:0x80406CE0
+	.bss        start:0x804C0948 end:0x804C0980
+	.sdata      start:0x804D5E00 end:0x804D5E88
+	.sbss       start:0x804D76B8 end:0x804D76D8
+	.sdata2     start:0x804DE590 end:0x804DE5A0
+
+sysdolphin/baselib/video.c:
+	.text       start:0x8037588C end:0x8037699C
+	.data       start:0x80406CE0 end:0x80406D68
+	.bss        start:0x804C0980 end:0x804C1F78
+	.sdata      start:0x804D5E88 end:0x804D5E90
+	.sbss       start:0x804D76D8 end:0x804D76E0
+	.sdata2     start:0x804DE5A0 end:0x804DE5B0
+
+sysdolphin/baselib/rumble.c:
+	.text       start:0x80378090 end:0x80378A34
+	.data       start:0x80406DE0 end:0x80406DF0
+	.bss        start:0x804C22E0 end:0x804C2310
+
+sysdolphin/baselib/spline.c:
+	.text       start:0x80378A34 end:0x80379310
+
+sysdolphin/baselib/util.c:
+	.text       start:0x8037A780 end:0x8037A94C
+	.data       start:0x80406DF0 end:0x80406E48
+	.sdata      start:0x804D5EA0 end:0x804D5EB0
+
+sysdolphin/baselib/objalloc.c:
+	.text       start:0x8037A94C end:0x8037AE34
+	.data       start:0x80406E48 end:0x80406E68
+	.sdata      start:0x804D5EB0 end:0x804D5EB8
+	.sbss       start:0x804D76E0 end:0x804D76E8
+
+sysdolphin/baselib/robj.c:
+	.text       start:0x8037AE34 end:0x8037CD80
+	.sbss       start:0x804D76E8 end:0x804D76F0
+
+sysdolphin/baselib/id.c:
+	.text       start:0x8037CD80 end:0x8037D050
+	.bss        start:0x804C23C0 end:0x804C2580
+	.sdata      start:0x804D5EE8 end:0x804D5EF8
+
+sysdolphin/baselib/wobj.c:
+	.text       start:0x8037D050 end:0x8037D970
+	.data       start:0x80406FD0 end:0x80407078
+	.sdata      start:0x804D5EF8 end:0x804D5F20
+	.sbss       start:0x804D76F0 end:0x804D76F8
+	.sdata2     start:0x804DE6D0 end:0x804DE6F0
+
+sysdolphin/baselib/fog.c:
+	.text       start:0x8037D970 end:0x8037E1BC
+	.rodata     start:0x803B95A8 end:0x803B95E8
+	.data       start:0x80407078 end:0x80407188
+	.sdata      start:0x804D5F20 end:0x804D5F38
+	.sdata2     start:0x804DE6F0 end:0x804DE718
+
+sysdolphin/baselib/list.c:
+	.text       start:0x8037E3FC end:0x8037E6C4
+	.bss        start:0x804C2580 end:0x804C25D8
+	.sdata      start:0x804D5F48 end:0x804D5F68
+
+sysdolphin/baselib/object.c:
+	.text       start:0x8037E6C4 end:0x8037E708
+	.data       start:0x804072A8 end:0x80407300
+	.sdata      start:0x804D5F68 end:0x804D5F70
+
+sysdolphin/baselib/random.c:
+	.text       start:0x803804F8 end:0x803805DC
+	.sdata      start:0x804D5F90 end:0x804D5F98
+	.sdata2     start:0x804DE790 end:0x804DE7A0
+
+sysdolphin/baselib/texp.c:
+	.text       start:0x80382C00 end:0x80385798
+	.data       start:0x80407738 end:0x80407AA0
+	.sdata      start:0x804D5FC8 end:0x804D5FF0
+	.sdata2     start:0x804DE7D8 end:0x804DE7E8
+
+sysdolphin/baselib/texpdag.c:
+	.text       start:0x80385798 end:0x80387DF8
+
+sysdolphin/baselib/debug.c:
+	.text       start:0x8038815C end:0x80388330
+	.data       start:0x80407D60 end:0x80407D90
+	.bss        start:0x804C2608 end:0x804C28E0
+	.sdata      start:0x804D6010 end:0x804D6018
+	.sbss       start:0x804D7710 end:0x804D7720
+
+sysdolphin/baselib/psdisp.c:
+	extab       start:0x800055F8 end:0x80005618
+	extabindex  start:0x80005804 end:0x80005834
+	.text       start:0x8039F78C end:0x803A3920
+	.rodata     start:0x803B9628 end:0x803B9658
+	.data       start:0x8040C300 end:0x8040C3A0
+	.bss        start:0x804D0FC0 end:0x804D10B0
+	.sdata      start:0x804D6380 end:0x804D6388
+	.sbss       start:0x804D7908 end:0x804D7950
+	.sdata2     start:0x804DEA10 end:0x804DEA68
+
+sysdolphin/baselib/psdisptev.c:
+	extab       start:0x80005618 end:0x80005628
+	extabindex  start:0x80005834 end:0x8000584C
+	.text       start:0x803A3920 end:0x803A4138
+
+sysdolphin/baselib/psappsrt.c:
+	extab       start:0x80005628 end:0x80005658
+	extabindex  start:0x8000584C end:0x80005894
+	.text       start:0x803A4138 end:0x803A44A4
+
+sysdolphin/baselib/sobjlib.c:
+	.text       start:0x803A44A4 end:0x803A5798
+
+sysdolphin/baselib/sislib.c:
+	.text       start:0x803A5798 end:0x803A949C

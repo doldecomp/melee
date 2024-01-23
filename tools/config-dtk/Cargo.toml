@@ -6,7 +6,7 @@ edition = "2021"
 [dependencies]
 ahash = "0.8.6"
 anyhow = "1.0.75"
-cwparse = { git = "https://github.com/ribbanya/cwparse", branch = "main" }
+cwparse = { git = "https://github.com/ribbanya/cwparse.git", rev = "3370024" }
 env_logger = "0.11.0"
 log = "0.4.20"
 melee-utils = { path = "../rust-utils" }
@@ -15,3 +15,5 @@ pathdiff = "0.2.1"
 rayon = "1.8.0"
 walkdir = "2.4.0"
 nom-supreme = "0.8.0"
+clap = { version = "4.4.18", features = ["derive"] }
+itertools = "0.12.0"

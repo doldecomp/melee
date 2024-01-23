@@ -275,7 +275,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftKirby/ftKb_Init.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftKb_Init.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftKirby/ftKb_Init.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_Init.c.o\
@@ -319,11 +319,11 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftPopo/ftPp_Init.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPopo/ftPp_SpecialN.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPopo/ftPp_SpecialS.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftPp_SpecialS.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftPopo/ftPp_SpecialS.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftNana/ftNn_Init.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftNn_Init.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftNana/ftNn_Init.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftNana/ftNn_Unk0.c.o\
 
 TEXT_O_FILES +=\
@@ -345,12 +345,12 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYs_Init.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYs_Guard.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYs_SpecialN.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftYs_SpecialN.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftYoshi/ftYs_SpecialN.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftKoopa/ftKp_Init.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftKoopa/ftKp_Unk1.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftKp_SpecialS.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftKoopa/ftKp_SpecialS.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMs_Init.c.o\
@@ -368,7 +368,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftPr_Init.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftPr_Init.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftPurin/ftPr_Init.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLg_Init.c.o\
@@ -468,7 +468,7 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCrazyHand/ftCh_Init.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCrazyHand/ftCh_Unk0.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftCh_Init.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCrazyHand/ftCh_Init.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/ftbosslib.c.o\
@@ -480,7 +480,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/gm/gm_1601.s.o\
     $(BUILD_DIR)/asm/melee/gm/gmtitle.s.o\
     $(BUILD_DIR)/asm/melee/gm/gmcamera.s.o\
-    $(BUILD_DIR)/asm/melee/gm_1A36.s.o\
+    $(BUILD_DIR)/asm/melee/gm/gm_1A36.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gr/ground.c.o\
@@ -567,7 +567,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/db/db_2253.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/mn_2295.s.o\
+    $(BUILD_DIR)/asm/melee/mn/mn_2295.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/mn/mnitemsw.s.o\
@@ -794,7 +794,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/if/ifmagnify.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/un_2FC9.s.o\
+    $(BUILD_DIR)/asm/melee/un/un_2FC9.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ty/toy.s.o\

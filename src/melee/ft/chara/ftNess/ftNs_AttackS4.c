@@ -9,7 +9,7 @@
 #include "ft/ftcoll.h"
 #include "ftCommon/ftCo_Wait.h"
 #include "ftNess/ftNs_Init.h"
-#include "it/it_27CF.h"
+#include "it/items/it_27CF.h"
 
 // 0x80114BF4
 void ftNs_AttackS4_OnReflect(

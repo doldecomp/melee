@@ -11,11 +11,11 @@ extern struct {
     enum_t status;
     u32 xy;
     s32 _[0x20 - 0x8];
-} OSSerial_80402358;
+} Si;
 
 bool SIBusy(void)
 {
-    if (OSSerial_80402358.status != -1) {
+    if (Si.status != -1) {
         return true;
     }
 
@@ -31,7 +31,7 @@ bool SIIsChanBusy(s32 status)
 {
     bool result = true;
 
-    if (Packet[status].x0 == -1 && OSSerial_80402358.status != status) {
+    if (Packet[status].x0 == -1 && Si.status != status) {
         result = false;
     }
 
@@ -59,11 +59,11 @@ static asm void CompleteTransfer(void)
 /* 8034953C 0034611C  93 81 00 10 */	stw r28, 0x10(r1)
 /* 80349540 00346120  80 03 64 34 */	lwz r0, 0x6434(r3)
 /* 80349544 00346124  83 83 64 38 */	lwz r28, 0x6438(r3)
-/* 80349548 00346128  3C 60 80 40 */	lis r3, OSSerial_80402358@ha
+/* 80349548 00346128  3C 60 80 40 */	lis r3, Si@ha
 /* 8034954C 0034612C  64 00 80 00 */	oris r0, r0, 0x8000
 /* 80349550 00346130  54 00 00 3C */	rlwinm r0, r0, 0, 0, 0x1e
 /* 80349554 00346134  90 1E 00 34 */	stw r0, 0x34(r30)
-/* 80349558 00346138  3B E3 23 58 */	addi r31, r3, OSSerial_80402358@l
+/* 80349558 00346138  3B E3 23 58 */	addi r31, r3, Si@l
 /* 8034955C 0034613C  80 1F 00 00 */	lwz r0, 0(r31)
 /* 80349560 00346140  2C 00 FF FF */	cmpwi r0, -1
 /* 80349564 00346144  41 82 02 74 */	beq lbl_803497D8
@@ -282,13 +282,13 @@ asm static void SIInterruptHandler(void)
 /* 80349818 003463F8  3C A0 CC 00 */	lis r5, 0xCC006434@ha
 /* 8034981C 003463FC  90 01 00 04 */	stw r0, 4(r1)
 /* 80349820 00346400  3C E0 80 4A */	lis r7, Packet@ha
-/* 80349824 00346404  3C C0 80 40 */	lis r6, OSSerial_80402358@ha
+/* 80349824 00346404  3C C0 80 40 */	lis r6, Si@ha
 /* 80349828 00346408  94 21 FF B8 */	stwu r1, -0x48(r1)
 /* 8034982C 0034640C  BE A1 00 1C */	stmw r21, 0x1c(r1)
 /* 80349830 00346410  3B C3 00 00 */	addi r30, r3, 0
 /* 80349834 00346414  3B E4 00 00 */	addi r31, r4, 0
 /* 80349838 00346418  3B 87 7D B8 */	addi r28, r7, Packet@l
-/* 8034983C 0034641C  3B A6 23 58 */	addi r29, r6, OSSerial_80402358@l
+/* 8034983C 0034641C  3B A6 23 58 */	addi r29, r6, Si@l
 /* 80349840 00346420  83 05 64 34 */	lwz r24, 0xCC006434@l(r5)
 /* 80349844 00346424  57 05 00 02 */	rlwinm r5, r24, 0, 0, 1
 /* 80349848 00346428  3C 05 40 00 */	addis r0, r5, 0x4000
@@ -797,7 +797,7 @@ asm static bool __SITransfer(void)
 { // clang-format off
     nofralloc
 /* 80349E44 00346A24  7C 08 02 A6 */	mflr r0
-/* 80349E48 00346A28  3D 20 80 40 */	lis r9, OSSerial_80402358@ha
+/* 80349E48 00346A28  3D 20 80 40 */	lis r9, Si@ha
 /* 80349E4C 00346A2C  90 01 00 04 */	stw r0, 4(r1)
 /* 80349E50 00346A30  94 21 FF B8 */	stwu r1, -0x48(r1)
 /* 80349E54 00346A34  BF 21 00 2C */	stmw r25, 0x2c(r1)
@@ -807,7 +807,7 @@ asm static bool __SITransfer(void)
 /* 80349E64 00346A44  3B A6 00 00 */	addi r29, r6, 0
 /* 80349E68 00346A48  3B C7 00 00 */	addi r30, r7, 0
 /* 80349E6C 00346A4C  3B E8 00 00 */	addi r31, r8, 0
-/* 80349E70 00346A50  3B 29 23 58 */	addi r25, r9, OSSerial_80402358@l
+/* 80349E70 00346A50  3B 29 23 58 */	addi r25, r9, Si@l
 /* 80349E74 00346A54  4B FF D4 F1 */	bl OSDisableInterrupts
 /* 80349E78 00346A58  80 19 00 00 */	lwz r0, 0(r25)
 /* 80349E7C 00346A5C  2C 00 FF FF */	cmpwi r0, -1
@@ -1024,9 +1024,9 @@ u32 SISetXY(u32 x, u32 y)
     u32 temp_r4 = (x << 0x10);
     temp_r4 |= (y << 8);
     intr = OSDisableInterrupts();
-    OSSerial_80402358.xy &= 0xFC0000FF;
-    OSSerial_80402358.xy |= temp_r4;
-    temp_r4 = OSSerial_80402358.xy;
+    Si.xy &= 0xFC0000FF;
+    Si.xy |= temp_r4;
+    temp_r4 = Si.xy;
     OSRestoreInterrupts(intr);
     return temp_r4;
 }
@@ -1043,14 +1043,14 @@ asm u32 SIEnablePolling(u32 poll)
 /* 8034A15C 00346D3C  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8034A160 00346D40  7C 7F 1B 79 */	or. r31, r3, r3
 /* 8034A164 00346D44  40 82 00 14 */	bne lbl_8034A178
-/* 8034A168 00346D48  3C 60 80 40 */	lis r3, OSSerial_80402358@ha
-/* 8034A16C 00346D4C  38 63 23 58 */	addi r3, r3, OSSerial_80402358@l
+/* 8034A168 00346D48  3C 60 80 40 */	lis r3, Si@ha
+/* 8034A16C 00346D4C  38 63 23 58 */	addi r3, r3, Si@l
 /* 8034A170 00346D50  80 63 00 04 */	lwz r3, 4(r3)
 /* 8034A174 00346D54  48 00 00 64 */	b lbl_8034A1D8
 lbl_8034A178:
 /* 8034A178 00346D58  4B FF D1 ED */	bl OSDisableInterrupts
-/* 8034A17C 00346D5C  3C 80 80 40 */	lis r4, OSSerial_80402358@ha
-/* 8034A180 00346D60  38 84 23 58 */	addi r4, r4, OSSerial_80402358@l
+/* 8034A17C 00346D5C  3C 80 80 40 */	lis r4, Si@ha
+/* 8034A180 00346D60  38 84 23 58 */	addi r4, r4, Si@l
 /* 8034A184 00346D64  57 FF 46 3E */	srwi r31, r31, 0x18
 /* 8034A188 00346D68  80 04 00 04 */	lwz r0, 4(r4)
 /* 8034A18C 00346D6C  38 A4 00 04 */	addi r5, r4, 4
@@ -1102,14 +1102,14 @@ asm u32 SIDisablePolling(u32 poll)
 /* 8034A1F8 00346DD8  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8034A1FC 00346DDC  7C 7F 1B 79 */	or. r31, r3, r3
 /* 8034A200 00346DE0  40 82 00 14 */	bne lbl_8034A214
-/* 8034A204 00346DE4  3C 60 80 40 */	lis r3, OSSerial_80402358@ha
-/* 8034A208 00346DE8  38 63 23 58 */	addi r3, r3, OSSerial_80402358@l
+/* 8034A204 00346DE4  3C 60 80 40 */	lis r3, Si@ha
+/* 8034A208 00346DE8  38 63 23 58 */	addi r3, r3, Si@l
 /* 8034A20C 00346DEC  80 63 00 04 */	lwz r3, 4(r3)
 /* 8034A210 00346DF0  48 00 00 34 */	b lbl_8034A244
 lbl_8034A214:
 /* 8034A214 00346DF4  4B FF D1 51 */	bl OSDisableInterrupts
-/* 8034A218 00346DF8  3C 80 80 40 */	lis r4, OSSerial_80402358@ha
-/* 8034A21C 00346DFC  38 84 23 58 */	addi r4, r4, OSSerial_80402358@l
+/* 8034A218 00346DF8  3C 80 80 40 */	lis r4, Si@ha
+/* 8034A21C 00346DFC  38 84 23 58 */	addi r4, r4, Si@l
 /* 8034A220 00346E00  80 04 00 04 */	lwz r0, 4(r4)
 /* 8034A224 00346E04  57 FF 46 36 */	rlwinm r31, r31, 8, 0x18, 0x1b
 /* 8034A228 00346E08  38 A4 00 04 */	addi r5, r4, 4
@@ -1364,8 +1364,8 @@ asm bool SITransfer(s32 chan, void* output, u32 outputBytes, void* input,
 /* 8034A4C4 003470A4  3A A3 00 00 */	addi r21, r3, 0
 /* 8034A4C8 003470A8  2C 00 FF FF */	cmpwi r0, -1
 /* 8034A4CC 003470AC  40 82 00 14 */	bne lbl_8034A4E0
-/* 8034A4D0 003470B0  3C 60 80 40 */	lis r3, OSSerial_80402358@ha
-/* 8034A4D4 003470B4  80 03 23 58 */	lwz r0, OSSerial_80402358@l(r3)
+/* 8034A4D0 003470B0  3C 60 80 40 */	lis r3, Si@ha
+/* 8034A4D4 003470B4  80 03 23 58 */	lwz r0, Si@l(r3)
 /* 8034A4D8 003470B8  7C 00 C0 00 */	cmpw r0, r24
 /* 8034A4DC 003470BC  40 82 00 14 */	bne lbl_8034A4F0
 lbl_8034A4E0:
@@ -1676,8 +1676,8 @@ asm u32 SIGetType(s32)
 /* 8034A8BC 0034749C  38 05 7E D8 */	addi r0, r5, OSSerial_804A7ED8@l
 /* 8034A8C0 003474A0  7F E0 32 14 */	add r31, r0, r6
 /* 8034A8C4 003474A4  80 DF 00 04 */	lwz r6, 4(r31)
-/* 8034A8C8 003474A8  3C A0 80 40 */	lis r5, OSSerial_80402358@ha
-/* 8034A8CC 003474AC  38 A5 23 58 */	addi r5, r5, OSSerial_80402358@l
+/* 8034A8C8 003474A8  3C A0 80 40 */	lis r5, Si@ha
+/* 8034A8CC 003474AC  38 A5 23 58 */	addi r5, r5, Si@l
 /* 8034A8D0 003474B0  80 1F 00 00 */	lwz r0, 0(r31)
 /* 8034A8D4 003474B4  7C 86 20 10 */	subfc r4, r6, r4
 /* 8034A8D8 003474B8  7C 00 19 10 */	subfe r0, r0, r3

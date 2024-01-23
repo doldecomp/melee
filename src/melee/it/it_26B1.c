@@ -6,8 +6,8 @@
 #include "ft/ftlib.h"
 #include "gm/gm_1601.h"
 #include "it/it_266F.h"
-#include "it/it_27CF.h"
 #include "it/item.h"
+#include "it/items/it_27CF.h"
 #include "items/itsword.h"
 
 #include <common_structs.h>

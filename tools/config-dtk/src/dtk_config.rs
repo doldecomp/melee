@@ -1,20 +1,21 @@
-use anyhow::{anyhow, Context, Result};
+use anyhow::{anyhow, bail, Context, Result};
 use cwparse::map::{cpp_name, hex};
 use nom::{
     branch::alt,
-    bytes::complete::{tag, take_while1},
+    bytes::complete::{tag, take_until1, take_while1},
     character::complete::{
-        alpha1, alphanumeric1, char, digit1, hex_digit1, line_ending,
+        alpha1, alphanumeric1, char, digit1, hex_digit1, line_ending, space0,
+        space1,
     },
     combinator::{all_consuming, map, map_res, opt, recognize},
     error::{FromExternalError, ParseError},
-    multi::separated_list1,
-    sequence::{preceded, separated_pair, terminated},
-    IResult,
+    multi::{many_m_n, separated_list0, separated_list1},
+    sequence::{preceded, separated_pair, terminated, tuple},
+    IResult, Parser,
 };
 use nom_supreme::error::ErrorTree;
 use rayon::{prelude::ParallelIterator, str::ParallelString};
-use std::{collections::BTreeMap, fmt::Write, num::ParseIntError};
+use std::{collections::BTreeMap, fmt::Write, hash::Hash, num::ParseIntError};
 
 #[derive(Debug, Default)]
 pub(crate) struct Symbol<'a> {
@@ -27,6 +28,23 @@ pub(crate) struct Symbol<'a> {
     pub(crate) data: Option<&'a str>,
     pub(crate) scope: Option<&'a str>,
     pub(crate) hidden: bool,
+}
+
+#[derive(Debug, Eq, PartialEq, Hash, Ord, PartialOrd)]
+pub(crate) struct SplitKey<'a> {
+    pub(crate) tu: &'a str,
+    pub(crate) section: &'a str,
+}
+
+#[derive(Debug)]
+pub(crate) struct SplitValue {
+    pub(crate) start: u32,
+    pub(crate) end: u32,
+}
+
+pub(crate) struct SplitsFile<'a> {
+    pub(crate) layout: &'a str,
+    pub(crate) splits: BTreeMap<SplitKey<'a>, SplitValue>,
 }
 
 impl<'a> Symbol<'a> {
@@ -77,7 +95,14 @@ enum SymbolAttribute<'a> {
     Hidden,
 }
 
-fn line<'a, E>(input: &'a str) -> IResult<&'a str, Symbol<'a>, E>
+fn section_name<'a, E>(input: &'a str) -> IResult<&'a str, &'a str, E>
+where
+    E: ParseError<&'a str>,
+{
+    recognize(preceded(opt(char('.')), alphanumeric1))(input)
+}
+
+fn symbol<'a, E>(input: &'a str) -> IResult<&'a str, Symbol<'a>, E>
 where
     E: ParseError<&'a str> + FromExternalError<&'a str, ParseIntError>,
 {
@@ -91,7 +116,7 @@ where
                         cpp_name,
                         tag(" = "),
                         separated_pair(
-                            recognize(preceded(opt(char('.')), alphanumeric1)),
+                            section_name,
                             char(':'),
                             preceded(tag("0x"), hex(8)),
                         ),
@@ -161,6 +186,81 @@ where
     Ok((input, sym))
 }
 
+fn splits_layout<'a, E>(input: &'a str) -> IResult<&'a str, &'a str, E>
+where
+    E: ParseError<&'a str>,
+{
+    recognize(tuple((
+        tag("Sections:"),
+        line_ending,
+        separated_list0(
+            line_ending,
+            tuple((
+                space0,
+                section_name,
+                space1,
+                separated_list1(
+                    char(' '),
+                    separated_pair(alpha1, char(':'), alphanumeric1),
+                ),
+            )),
+        ),
+    )))(input)
+}
+
+fn split<'a, E>(input: &'a str) -> IResult<&'a str, (&'a str, u32, u32), E>
+where
+    E: ParseError<&'a str> + FromExternalError<&'a str, ParseIntError>,
+{
+    tuple((
+        preceded(space0, section_name),
+        preceded(space1, preceded(tag("start:0x"), hex(8))),
+        preceded(space1, preceded(tag("end:0x"), hex(8))),
+    ))(input)
+}
+
+fn splits_group<'a, E>(
+    input: &'a str,
+) -> IResult<&'a str, (&'a str, Vec<(&'a str, u32, u32)>), E>
+where
+    E: ParseError<&'a str> + FromExternalError<&'a str, ParseIntError>,
+{
+    separated_pair(
+        terminated(
+            take_until1(":").map(|s: &str| match s.rfind('.') {
+                Some(index) => &s[..index],
+                None => s,
+            }),
+            tag(":"),
+        ),
+        line_ending,
+        separated_list0(line_ending, split),
+    )(input)
+}
+
+fn blank_line<'a, E>(input: &'a str) -> IResult<&'a str, &'a str, E>
+where
+    E: ParseError<&'a str>,
+{
+    recognize(many_m_n(2, 2, line_ending))(input)
+}
+
+fn splits_file<'a, E>(
+    input: &'a str,
+) -> IResult<&'a str, (&str, Vec<(&str, Vec<(&str, u32, u32)>)>), E>
+where
+    E: ParseError<&'a str> + FromExternalError<&'a str, ParseIntError>,
+{
+    all_consuming(terminated(
+        separated_pair(
+            splits_layout,
+            blank_line,
+            separated_list0(blank_line, splits_group),
+        ),
+        opt(line_ending),
+    ))(input)
+}
+
 pub(crate) fn parse_symbols<'a>(
     input: &'a str,
 ) -> Result<BTreeMap<u32, Symbol<'a>>> {
@@ -168,7 +268,7 @@ pub(crate) fn parse_symbols<'a>(
     let lines = input
         .par_lines()
         .map(|line| {
-            self::line::<ErrorTree<&'a str>>(line)
+            self::symbol::<ErrorTree<&'a str>>(line)
                 .map(|parsed| (line.trim(), parsed.1))
         })
         .collect::<Result<Vec<_>, _>>()
@@ -178,4 +278,28 @@ pub(crate) fn parse_symbols<'a>(
         symbols.insert(parsed.addr, parsed);
     }
     Ok(symbols)
+}
+
+pub(crate) fn parse_splits<'a>(input: &'a str) -> Result<SplitsFile<'a>> {
+    let (_, (layout, groups)) = splits_file::<ErrorTree<&'a str>>(input)
+        .map_err(|err| anyhow!(format!("{err:#?}")))
+        .context("failed to parse splits")?;
+
+    let mut map = BTreeMap::default();
+
+    for (tu, splits) in groups {
+        for (section, start, end) in splits {
+            let key = SplitKey { tu, section };
+            if map.contains_key(&key) {
+                bail!("duplicate split found for {} {}", key.tu, key.section);
+            }
+            let value = SplitValue { start, end };
+            map.insert(key, value);
+        }
+    }
+
+    Ok(SplitsFile {
+        layout,
+        splits: map,
+    })
 }

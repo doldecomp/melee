@@ -289,6 +289,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "cwparse"
+version = "0.1.2"
+source = "git+https://github.com/ribbanya/cwparse.git?rev=3370024#3370024c53c55f6efc22f9b90c2842099f7ea03e"
+dependencies = [
+ "nom",
+]
+
+[[package]]
 name = "dadosod"
 version = "1.0.1"
 dependencies = [
@@ -471,6 +479,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "itertools"
+version = "0.12.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "25db6b064527c5d482d0423354fcd07a89a2dfe07b67892e62411946db7f07b0"
+dependencies = [
+ "either",
+]
+
+[[package]]
 name = "itoa"
 version = "1.0.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -522,8 +539,10 @@ version = "0.1.0"
 dependencies = [
  "ahash 0.8.7",
  "anyhow",
- "cwparse",
+ "clap",
+ "cwparse 0.1.2 (git+https://github.com/ribbanya/cwparse.git?rev=3370024)",
  "env_logger 0.11.0",
+ "itertools 0.12.0",
  "log",
  "melee-utils",
  "nom",
@@ -540,7 +559,7 @@ dependencies = [
  "ahash 0.8.7",
  "anyhow",
  "clap",
- "cwparse",
+ "cwparse 0.1.2 (git+https://github.com/ribbanya/cwparse?branch=main)",
  "dashmap",
  "melee-utils",
  "memmap2",
@@ -554,10 +573,10 @@ dependencies = [
  "ahash 0.8.7",
  "anyhow",
  "clap",
- "cwparse",
+ "cwparse 0.1.2 (git+https://github.com/ribbanya/cwparse?branch=main)",
  "env_logger 0.10.2",
  "glob",
- "itertools",
+ "itertools 0.10.5",
  "log",
  "melee-utils",
  "memmap2",
@@ -584,7 +603,7 @@ dependencies = [
  "env_logger 0.10.2",
  "exitcode",
  "glob",
- "itertools",
+ "itertools 0.10.5",
  "log",
  "melee-utils",
  "string-interner",
@@ -598,7 +617,7 @@ dependencies = [
  "clap",
  "env_logger 0.10.2",
  "globset",
- "itertools",
+ "itertools 0.10.5",
  "lazy_static",
  "log",
  "melee-utils",
@@ -771,9 +790,9 @@ dependencies = [
 
 [[package]]
 name = "regex"
-version = "1.10.2"
+version = "1.10.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "380b951a9c5e80ddfd6136919eef32310721aa4aacd4889a8d39124b026ab343"
+checksum = "b62dbe01f0b06f9d8dc7d49e05a0785f153b00b2c227856282f671e0318c9b15"
 dependencies = [
  "aho-corasick",
  "memchr",
@@ -783,9 +802,9 @@ dependencies = [
 
 [[package]]
 name = "regex-automata"
-version = "0.4.3"
+version = "0.4.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5f804c7828047e88b2d32e2d7fe5a105da8ee3264f01902f796c8e067dc2483f"
+checksum = "3b7fa1134405e2ec9353fd416b17f8dacd46c473d7d3fd1cf202706a14eb792a"
 dependencies = [
  "aho-corasick",
  "memchr",

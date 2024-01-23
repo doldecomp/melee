@@ -11,7 +11,7 @@
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_AttackAir.h"
 #include "ftCommon/ftCo_LandingAir.h"
-#include "it/it_27CF.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx/types.h>

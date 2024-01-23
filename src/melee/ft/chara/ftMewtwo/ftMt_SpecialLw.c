@@ -10,7 +10,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ftcommon.h"
-#include "it/it_27CF.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 // SpecialLw/SpecialAirLw

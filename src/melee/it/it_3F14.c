@@ -1,6 +1,7 @@
 #include "it_266F.h"
-#include "it_27CF.h"
 
+#include "it/items/it_27CF.h"
+#include "items/it_27CF.h"
 #include "items/itbat.h"
 #include "items/itbombhei.h"
 #include "items/itbox.h"

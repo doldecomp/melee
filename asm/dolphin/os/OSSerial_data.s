@@ -2,8 +2,8 @@
 
 .section .data
     .balign 8
-.global OSSerial_80402358
-OSSerial_80402358:
+.global Si
+Si:
     .4byte 0xFFFFFFFF
     .4byte NULL
     .4byte NULL

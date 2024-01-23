@@ -7,7 +7,7 @@
 #include "ft/ftwalkcommon.h"
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_ItemThrow.h"
-#include "it/it_27CF.h"
+#include "it/items/it_27CF.h"
 
 bool ftDk_MS_341_800DFA98(HSD_GObj* gobj)
 {

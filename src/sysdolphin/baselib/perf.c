@@ -1,3 +1,4 @@
+#include <__mem.h>
 #include <string.h>
 #include <dolphin/os/OSTime.h>
 #include <baselib/debug.h>

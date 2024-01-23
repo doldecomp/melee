@@ -2,6 +2,7 @@
 
 #include "CARDMount.h"
 
+#include <__mem.h>
 #include <rand.h>
 #include <string.h>
 #include <dolphin/card.h>

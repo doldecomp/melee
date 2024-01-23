@@ -1,3 +1,4 @@
+#include <__mem.h>
 #include <string.h>
 #include <baselib/initialize.h>
 #include <baselib/memory.h>

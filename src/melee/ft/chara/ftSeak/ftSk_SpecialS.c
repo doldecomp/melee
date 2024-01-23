@@ -12,7 +12,7 @@
 #include "ft/inlines.h"
 #include "ftNess/ftNs_AttackHi4.h"
 #include "ftSeak/ftSk_Init.h"
-#include "it/it_27CF.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>
