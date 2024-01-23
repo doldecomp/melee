@@ -3,7 +3,6 @@
 
 #include "it/forward.h"
 #include "it/types.h"
-#include "lb/lbshadow.h"
 
 void it_80295C48(Item_GObj*);
 void it_80295D90(Item_GObj*);
