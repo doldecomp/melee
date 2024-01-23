@@ -17,24 +17,17 @@ def env(name: str, default: Optional[str] = None) -> Optional[str]:
 
 
 def apply(config, _):
-    config["baseimg"] = "expected/build/ssbm.us.1.2/main.dol"
-    config["myimg"] = "build/wip/ssbm.us.1.2/main.dol"
-    config["mapfile"] = "build/wip/ssbm.us.1.2/GALE01.map"
+    config["baseimg"] = "orig/GALE01/sys/main.dol"
+    config["myimg"] = "build/GALE01/main.dol"
+    config["mapfile"] = "build/GALE01/main.elf.MAP"
     config["source_directories"] = ["src", "asm"]
     config["arch"] = "ppc"
     config["map_format"] = "mw"
-    config["build_dir"] = "build/wip/ssbm.us.1.2/src"
-    config["expected_dir"] = "expected/build/ssbm.us.1.2/src"
+    config["build_dir"] = "build/GALE01/src"
+    config["expected_dir"] = "build/GALE01/obj"
+    config["make_command"] = ["ninja"]
 
-    config["makeflags"] = [
-        f"WINE={env('WINE', 'wine')}",
-        "GENERATE_MAP=1",
-        "WIP=1",
-        "MAX_ERRORS=0",
-        "WARN_ERROR=0",
-        "MSG_STYLE=std",
-    ]
-
+    # TODO gc-wii-binutils
     devkitpro = env("DEVKITPRO", "/opt/devkitpro")
     devkitppc = env("DEVKITPPC", f"{devkitpro}/devkitPPC")
     objdump = f"{devkitppc}/bin/powerpc-eabi-objdump{get_exe_suffix()}"
