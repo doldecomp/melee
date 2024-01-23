@@ -250,6 +250,7 @@ Objects = List[Object]
 def Lib(
     lib_name: str,
     objects: Objects,
+    fix_epilogue=True,
     includes: List[str] = includes_base,
     system_includes: List[str] = system_includes_base,
 ) -> LibDict:
@@ -258,7 +259,7 @@ def Lib(
 
     return {
         "lib": lib_name,
-        "mw_version": "GC/1.2.5n",
+        "mw_version": f"GC/1.2.5{'n' if fix_epilogue else ''}",
         "cflags": [
             *cflags_base,
             *make_includes(includes),
@@ -270,8 +271,20 @@ def Lib(
     }
 
 
-def DolphinLib(lib_name: str, objects: Objects) -> LibDict:
-    return Lib(lib_name, objects)
+def DolphinLib(lib_name: str, objects: Objects, fix_epilogue=False) -> LibDict:
+    return Lib(
+        lib_name,
+        objects,
+        fix_epilogue=fix_epilogue,
+        includes=[
+            *includes_base,
+            "src/melee",  # HACK
+        ],
+        system_includes=[
+            *system_includes_base,
+            "src/sysdolphin",  # HACK
+        ],
+    )
 
 
 def SysdolphinLib(lib_name: str, objects: Objects) -> LibDict:
@@ -309,7 +322,18 @@ def MeleeLib(lib_name: str, objects: Objects) -> LibDict:
 
 
 def RuntimeLib(lib_name: str, objects: Objects) -> LibDict:
-    return Lib(lib_name, objects)
+    return Lib(
+        lib_name,
+        objects,
+        includes=[
+            *includes_base,
+            "src/melee",  # HACK
+        ],
+        system_includes=[
+            *system_includes_base,
+            "src/sysdolphin",  # HACK
+        ],
+    )
 
 
 Matching = True
@@ -399,17 +423,14 @@ config.libs = [
             Object(Matching, "melee/ft/ft_07C1.c"),
             Object(Matching, "melee/ft/ft_07C6.c"),
             Object(Matching, "melee/ft/ftcommon.c"),
-            Object(Matching, "melee/ft/ftdrawcommon.c"),
-            Object(NonMatching, "melee/ft/ftdrawcommon_data.c"),
+            Object(NonMatching, "melee/ft/ftdrawcommon.c"),
             Object(Matching, "melee/ft/ftcliffcommon.c"),
             Object(Matching, "melee/ft/ftwalljump.c"),
             Object(Matching, "melee/ft/ft_0819.c"),
             Object(Matching, "melee/ft/ft_081B.c"),
             Object(NonMatching, "melee/ft/ft_0852.c"),
-            Object(Matching, "melee/ft/ftdata.c"),
-            Object(Matching, "melee/ft/ftdata2.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Init.c"),
             Object(NonMatching, "melee/ft/ftdata.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Init.c"),
             Object(Matching, "melee/ft/ftlib.c"),
             Object(Matching, "melee/ft/ftwaitanim.c"),
             Object(Matching, "melee/ft/ft_0877.c"),
@@ -569,8 +590,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialS.c"),
             Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialN.c"),
             # Kirby
-            Object(Matching, "melee/ft/chara/ftKirby/ftKb_Init.c"),
-            Object(NonMatching, "melee/ft/chara/ftKb_Init.c"),
+            Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_Init.c"),
             # Donkey Kong
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_Init.c"),
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_SpecialLw.c"),
@@ -605,11 +625,10 @@ config.libs = [
             # Popo
             Object(Matching, "melee/ft/chara/ftPopo/ftPp_Init.c"),
             Object(Matching, "melee/ft/chara/ftPopo/ftPp_SpecialN.c"),
-            Object(Matching, "melee/ft/chara/ftPopo/ftPp_SpecialS.c"),
+            Object(NonMatching, "melee/ft/chara/ftPopo/ftPp_SpecialS.c"),
             Object(NonMatching, "melee/ft/chara/ftPp_SpecialS.c"),
             # Nana
-            Object(Matching, "melee/ft/chara/ftNana/ftNn_Init.c"),
-            Object(NonMatching, "melee/ft/chara/ftNn_Init.c"),
+            Object(NonMatching, "melee/ft/chara/ftNana/ftNn_Init.c"),
             Object(Matching, "melee/ft/chara/ftNana/ftNn_Unk0.c"),
             # Pikachu
             Object(Matching, "melee/ft/chara/ftPikachu/ftPk_Init.c"),
@@ -627,8 +646,7 @@ config.libs = [
             # Yoshi
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_Init.c"),
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_Guard.c"),
-            Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialN.c"),
-            Object(NonMatching, "melee/ft/chara/ftYs_SpecialN.c"),
+            Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_SpecialN.c"),
             # Bowser
             Object(Matching, "melee/ft/chara/ftKoopa/ftKp_Init.c"),
             Object(Matching, "melee/ft/chara/ftKoopa/ftKp_Unk1.c"),
@@ -646,8 +664,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftZelda/ftZd_SpecialLw.c"),
             Object(Matching, "melee/ft/chara/ftZelda/ftZd_SpecialS.c"),
             # Jigglypuff
-            Object(Matching, "melee/ft/chara/ftPurin/ftPr_Init.c"),
-            Object(NonMatching, "melee/ft/chara/ftPr_Init.c"),
+            Object(NonMatching, "melee/ft/chara/ftPurin/ftPr_Init.c"),
             # Luigi
             Object(Matching, "melee/ft/chara/ftLuigi/ftLg_Init.c"),
             Object(Matching, "melee/ft/chara/ftLuigi/ftLg_SpecialN.c"),
@@ -731,9 +748,8 @@ config.libs = [
             ),
             Object(Matching, "melee/ft/chara/ftMasterHand/ftMh_ThrownMasterHand.c"),
             # Crazy Hand
-            Object(Matching, "melee/ft/chara/ftCrazyHand/ftCh_Init.c"),
-            Object(Matching, "melee/ft/chara/ftCrazyHand/ftCh_Unk0.c"),
-            Object(NonMatching, "melee/ft/chara/ftCh_Init.c"),
+            Object(NonMatching, "melee/ft/chara/ftCrazyHand/ftCh_Init.c"),
+            Object(NonMatching, "melee/ft/chara/ftCrazyHand/ftCh_Unk0.c"),
             # Main
             Object(Matching, "melee/ft/ftbosslib.c"),
         ],
@@ -1115,7 +1131,7 @@ config.libs = [
         [
             Object(NonMatching, "MSL/abort_exit.c"),
             Object(NonMatching, "MSL/ansi_fp.c"),
-            Object(Matching, "MSL/buffer_io.c"),
+            Object(NonMatching, "MSL/buffer_io.c"),
             Object(Matching, "MSL/PPC_EABI/critical_regions.gamecube.c"),
             Object(Matching, "MSL/ctype.c"),
             Object(NonMatching, "MSL/direct_io.c"),
@@ -1125,11 +1141,11 @@ config.libs = [
             Object(Matching, "MSL/rand.c"),
             Object(Matching, "MSL/string.c"),
             Object(Matching, "MSL/errno.c"),
-            Object(Matching, "MSL/strtoul.c"),
-            Object(Matching, "MSL/console_io.c"),
+            Object(NonMatching, "MSL/strtoul.c"),
+            Object(NonMatching, "MSL/console_io.c"),
             Object(Matching, "MSL/wchar_io.c"),
             Object(Matching, "MSL/math_1.c"),
-            Object(Matching, "MSL/trigf.c"),
+            Object(NonMatching, "MSL/trigf.c"),
             Object(NonMatching, "MSL/math.c"),
         ],
     ),
@@ -1200,20 +1216,20 @@ config.libs = [
     DolphinLib(
         "dsp",
         [
-            Object(Matching, "dolphin/dsp/dsp.c"),
+            Object(NonMatching, "dolphin/dsp/dsp.c"),
             Object(Matching, "dolphin/dsp/dsp_debug.c"),
-            Object(Matching, "dolphin/dsp/dsp_task.c"),
+            Object(NonMatching, "dolphin/dsp/dsp_task.c"),
         ],
     ),
     DolphinLib(
         "dvd",
         [
             Object(NonMatching, "dolphin/dvd/dvdlow.c"),
-            Object(Matching, "dolphin/dvd/dvdfs.c"),
+            Object(NonMatching, "dolphin/dvd/dvdfs.c"),
             Object(NonMatching, "dolphin/dvd/dvd.c"),
-            Object(Matching, "dolphin/dvd/dvdqueue.c"),
+            Object(NonMatching, "dolphin/dvd/dvdqueue.c"),
             Object(NonMatching, "dolphin/dvd/dvderror.c"),
-            Object(Matching, "dolphin/dvd/fstload.c"),
+            Object(NonMatching, "dolphin/dvd/fstload.c"),
         ],
     ),
     DolphinLib(
@@ -1226,14 +1242,14 @@ config.libs = [
             Object(Matching, "dolphin/gx/GXGeometry.c"),
             Object(Matching, "dolphin/gx/GXFrameBuf.c"),
             Object(Matching, "dolphin/gx/GXLight.c"),
-            Object(Matching, "dolphin/gx/GXTexture.c"),
+            Object(NonMatching, "dolphin/gx/GXTexture.c"),
             Object(Matching, "dolphin/gx/GXBump.c"),
             Object(Matching, "dolphin/gx/GXTev.c"),
             Object(Matching, "dolphin/gx/GXPixel.c"),
             Object(Matching, "dolphin/gx/GXStubs.c"),
             Object(Matching, "dolphin/gx/GXDisplayList.c"),
-            Object(Matching, "dolphin/gx/GXTransform.c"),
-            Object(Matching, "dolphin/gx/GXPerf.c"),
+            Object(NonMatching, "dolphin/gx/GXTransform.c"),
+            Object(NonMatching, "dolphin/gx/GXPerf.c"),
         ],
     ),
     DolphinLib(
@@ -1266,10 +1282,10 @@ config.libs = [
             Object(Matching, "dolphin/os/OSReset.c"),
             Object(Matching, "dolphin/os/OSResetSW.c"),
             Object(Matching, "dolphin/os/OSRtc.c"),
-            Object(Matching, "dolphin/os/OSSerial.c"),
+            Object(NonMatching, "dolphin/os/OSSerial.c"),
             Object(NonMatching, "dolphin/os/OSSerial_data.c"),
-            Object(Matching, "dolphin/os/OSSync.c"),
-            Object(Matching, "dolphin/os/OSThread.c"),
+            Object(NonMatching, "dolphin/os/OSSync.c"),
+            Object(NonMatching, "dolphin/os/OSThread.c"),
             Object(NonMatching, "dolphin/os/OSThread_data.c"),
             Object(Matching, "dolphin/os/OSTime.c"),
             Object(Matching, "dolphin/os/OSUartExi.c"),
@@ -1283,6 +1299,7 @@ config.libs = [
             Object(Matching, "dolphin/pad/PadClamp.c"),
             Object(NonMatching, "dolphin/pad/pad.c"),
         ],
+        fix_epilogue=True,
     ),
     DolphinLib(
         "vi",
@@ -1293,14 +1310,14 @@ config.libs = [
     DolphinLib(
         "ai",
         [
-            Object(Matching, "dolphin/ai/ai.c"),
+            Object(NonMatching, "dolphin/ai/ai.c"),
         ],
     ),
     DolphinLib(
         "ar",
         [
             Object(NonMatching, "dolphin/ar/ar.c"),
-            Object(Matching, "dolphin/ar/arq.c"),
+            Object(NonMatching, "dolphin/ar/arq.c"),
         ],
     ),
     DolphinLib(
@@ -1308,20 +1325,21 @@ config.libs = [
         [
             Object(Matching, "dolphin/card/CARDBios.c"),
             Object(Matching, "dolphin/card/CARDUnlock.c"),
-            Object(Matching, "dolphin/card/CARDRdwr.c"),
+            Object(NonMatching, "dolphin/card/CARDRdwr.c"),
             Object(Matching, "dolphin/card/CARDBlock.c"),
             Object(Matching, "dolphin/card/CARDDir.c"),
             Object(Matching, "dolphin/card/CARDCheck.c"),
             Object(Matching, "dolphin/card/CARDMount.c"),
             Object(Matching, "dolphin/card/CARDFormat.c"),
             Object(Matching, "dolphin/card/CARDOpen.c"),
-            Object(Matching, "dolphin/card/CARDCreate.c"),
+            Object(NonMatching, "dolphin/card/CARDCreate.c"),
             Object(Matching, "dolphin/card/CARDRead.c"),
             Object(Matching, "dolphin/card/CARDWrite.c"),
             Object(Matching, "dolphin/card/CARDDelete.c"),
-            Object(Matching, "dolphin/card/CARDStat.c"),
+            Object(NonMatching, "dolphin/card/CARDStat.c"),
             Object(Matching, "dolphin/card/CARDRename.c"),
         ],
+        fix_epilogue=True,
     ),
     DolphinLib(
         "ax",
@@ -1416,7 +1434,7 @@ config.libs = [
             Object(NonMatching, "sysdolphin/baselib/hsd_3B27.c"),
             Object(NonMatching, "sysdolphin/baselib/hsd_3B2B.c"),
             Object(NonMatching, "sysdolphin/baselib/hsd_3B2E.c"),
-            Object(Matching, "sysdolphin/baselib/hsd_3B33.c"),
+            Object(NonMatching, "sysdolphin/baselib/hsd_3B33.c"),
             Object(NonMatching, "sysdolphin/baselib/hsd_3B34.c"),
         ],
     ),
