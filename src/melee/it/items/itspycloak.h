@@ -25,5 +25,6 @@ void it_80295E7C(void);
 bool it_80295E80(Item_GObj* arg0);
 
 extern ItemStateTable it_803F6370[];
+const float it_804DCB70;
 
 #endif

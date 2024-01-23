@@ -5,7 +5,6 @@
 
 int it_80276CB8(Item_GObj*);                        /* extern */
 void it_80295D04(HSD_GObj* gobj);                   /* extern */
-extern f32 it_804DCB70;
 
 
 void it_80295C48(Item_GObj* arg0) {
@@ -14,7 +13,7 @@ void it_80295C48(Item_GObj* arg0) {
 
 void it_80295C68(Item_GObj* arg0) {
     Item* temp_r4 = arg0->user_data;
-    temp_r4->x40_vel.x = temp_r4->x40_vel.y = temp_r4->x40_vel.z = 0;
+    temp_r4->x40_vel.x = temp_r4->x40_vel.y = temp_r4->x40_vel.z = it_804DCB70;
     it_8026B390(arg0);
     Item_80268E5C(arg0, 0, ITEM_ANIM_UPDATE);
 }
@@ -101,12 +100,30 @@ void it_80295EB4(Item_GObj* arg0, Item_GObj* arg1) {
     it_8026B894(arg0, (HSD_GObj* ) arg1);
 }
 
+
 ItemStateTable it_803F6370[] = {
+    {   // maybe
+        0,
+        it_80295CC4,
+        it_80295D04,
+        it_80276CB8,
+    },
     0,
-    it_80295CC4,
-    NULL,
-    it_80295D64,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
     0,
 };
 
-float it_804DCB70 = 0x00000000;
+const float it_804DCB70 = 0x00000000;
