@@ -127,11 +127,6 @@ parser.add_argument(
     help="compile non-matching code",
 )
 parser.add_argument(
-    "--wip",
-    action="store_true",
-    help="compile work-in-progress code",
-)
-parser.add_argument(
     "--no-require-protos",
     dest="require_protos",
     action="store_false",
@@ -189,6 +184,7 @@ cflags_base = [
     "-RTTI off",
     "-str reuse",
     f"-DVERSION={version_num}",
+    "-DWIP",
 ]
 
 if config.debug:
@@ -212,9 +208,6 @@ if args.warn_error:
 
 if not args.non_matching:
     cflags_base.append("-DMUST_MATCH")
-
-if args.wip:
-    cflags_base.append("-DWIP")
 
 if args.require_protos:
     cflags_base.append("-requireprotos")
@@ -416,7 +409,7 @@ config.libs = [
             # Main
             Object(Matching, "melee/ft/fighter.c"),
             Object(NonMatching, "melee/ft/ftanim.c"),
-            Object(Matching, "melee/ft/ftaction.c"),
+            Object(NonMatching, "melee/ft/ftaction.c"),
             Object(Matching, "melee/ft/ftparts.c"),
             Object(Matching, "melee/ft/ftcamera.c"),
             Object(NonMatching, "melee/ft/ftcoll.c"),
@@ -434,7 +427,7 @@ config.libs = [
             Object(Matching, "melee/ft/ftlib.c"),
             Object(Matching, "melee/ft/ftwaitanim.c"),
             Object(Matching, "melee/ft/ft_0877.c"),
-            Object(Matching, "melee/ft/ft_0881.c"),
+            Object(NonMatching, "melee/ft/ft_0881.c"),
             Object(NonMatching, "melee/ft/ft_0892.c"),
             # Common
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Wait.c"),
@@ -449,15 +442,15 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_AttackLw4.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_AttackAir.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_LandingAir.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Damage.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageFall.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Damage.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_DamageFall.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_DamageIce.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Guard.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemGet.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemThrow.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_ItemGet.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_ItemThrow.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SpecialS.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SpecialAir.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_FallSpecial.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_FallSpecial.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Lift.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_DownBound.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DownStand.c"),
@@ -489,18 +482,18 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CargoLanding.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CargoThrow.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_09C4.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Shouldered.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Shouldered.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureCaptain.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_09CB.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_BarrelWait.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_09CB.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_BarrelWait.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_StopWall.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_StopCeil.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DownDamage.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_MissFoot.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_09F4.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_09F7.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_09F7.c"),
             Object(Matching, "melee/ft/chara/ftMario/ftMr_Strings.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_0A01.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_0A01.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_0B3E.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureYoshi.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_YoshiEgg.c"),
@@ -511,27 +504,27 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureMewtwo.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ThrownMewtwo.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_CaptureKirby.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureWaitKirby.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_ThrownKirby.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_CaptureWaitKirby.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_ThrownKirby.c"),
             Object(NonMatching, "melee/ft/ft_3C61.c"),
             # Main again
-            Object(Matching, "melee/ft/ftdemo.c"),
+            Object(NonMatching, "melee/ft/ftdemo.c"),
             Object(Matching, "melee/ft/ft_0BEC.c"),
             Object(Matching, "melee/ft/ft_0BEF.c"),
             Object(Matching, "melee/ft/ft_0BF0.c"),
             Object(NonMatching, "melee/ft/ftmaterial.c"),
-            Object(Matching, "melee/ft/ftcolanim.c"),
+            Object(NonMatching, "melee/ft/ftcolanim.c"),
             Object(NonMatching, "melee/ft/ftdevice.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Bury.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_FlyReflect.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_PassiveWall.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_PassiveCeil.c"),
-            Object(Matching, "melee/ft/ftafterimage.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageSong.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_0C35.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_AirCatch.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageBind.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_WarpStar.c"),
+            Object(NonMatching, "melee/ft/ftafterimage.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_DamageSong.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_0C35.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_AirCatch.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_DamageBind.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_WarpStar.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_HammerWait.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_HammerWalk.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_HammerTurn.c"),
@@ -573,8 +566,8 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCaptain/ftCa_Init.c"),
             Object(Matching, "melee/ft/chara/ftCaptain/ftCa_SpecialN.c"),
             Object(Matching, "melee/ft/chara/ftCaptain/ftCa_SpecialS.c"),
-            Object(Matching, "melee/ft/chara/ftCaptain/ftCa_SpecialLw.c"),
-            Object(Matching, "melee/ft/chara/ftCaptain/ftCa_SpecialHi.c"),
+            Object(NonMatching, "melee/ft/chara/ftCaptain/ftCa_SpecialLw.c"),
+            Object(NonMatching, "melee/ft/chara/ftCaptain/ftCa_SpecialHi.c"),
             # Fox
             Object(Matching, "melee/ft/chara/ftFox/ftFx_Init.c"),
             Object(Matching, "melee/ft/chara/ftFox/ftFx_AppealS.c"),
@@ -588,7 +581,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialLw.c"),
             Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialHi.c"),
             Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialS.c"),
-            Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialN.c"),
+            Object(NonMatching, "melee/ft/chara/ftLink/ftLk_SpecialN.c"),
             # Kirby
             Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_Init.c"),
             # Donkey Kong
@@ -614,12 +607,12 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftNess/ftNs_SpecialLw.c"),
             # Peach
             Object(Matching, "melee/ft/chara/ftPeach/ftPe_Init.c"),
-            Object(Matching, "melee/ft/chara/ftPeach/ftPe_Float.c"),
+            Object(NonMatching, "melee/ft/chara/ftPeach/ftPe_Float.c"),
             Object(Matching, "melee/ft/chara/ftPeach/ftPe_FloatFall.c"),
             Object(Matching, "melee/ft/chara/ftPeach/ftPe_FloatAttack.c"),
             Object(Matching, "melee/ft/chara/ftPeach/ftPe_AttackS4.c"),
             Object(Matching, "melee/ft/chara/ftPeach/ftPe_SpecialS.c"),
-            Object(Matching, "melee/ft/chara/ftPeach/ftPe_SpecialLw.c"),
+            Object(NonMatching, "melee/ft/chara/ftPeach/ftPe_SpecialLw.c"),
             Object(Matching, "melee/ft/chara/ftPeach/ftPe_SpecialHi.c"),
             Object(Matching, "melee/ft/chara/ftPeach/ftPe_SpecialN.c"),
             # Popo
