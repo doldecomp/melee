@@ -376,8 +376,6 @@ if __name__ == "__main__":
 # (We do imports late to optimize auto-complete performance.)
 
 import abc
-from collections import Counter, defaultdict
-from dataclasses import asdict, dataclass, field, replace
 import difflib
 import html
 import itertools
@@ -1494,12 +1492,11 @@ def dump_objfile(
     if not os.path.isfile(objfile):
         fail(f"Not able to find .o file for function: {objfile} is not a file.")
 
-    refobjfile = os.path.relpath(objfile, project.build_dir)
-    refobjfile = os.path.join(project.expected_dir, refobjfile)
+    refobjfile = os.path.join(
+        project.expected_dir, os.path.relpath(objfile, project.build_dir)
+    )
     if config.diff_mode != DiffMode.SINGLE and not os.path.isfile(refobjfile):
-        refobjfile = refobjfile.replace("/src/", "/asm/").replace(".c.o", ".s.o")
-        if not os.path.isfile(refobjfile):
-            fail(f'Please ensure an OK .o file exists at "{refobjfile}".')
+        fail(f'Please ensure an OK .o file exists at "{refobjfile}".')
 
     if project.disassemble_all:
         disassemble_flag = "-D"
