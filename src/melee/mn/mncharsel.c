@@ -8,7 +8,7 @@
 
 #include <baselib/sislib.h>
 
-CSSData* mnCharSel_804D6CB0;
+extern CSSData* mnCharSel_804D6CB0;
 extern SIS* HSD_SisLib_804D1124[];
 
 TextKerning* mnCharSel_8025BC20(TextKerning* arg0, u32 arg1)
