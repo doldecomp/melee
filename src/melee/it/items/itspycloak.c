@@ -5,7 +5,7 @@
 
 int it_80276CB8(Item_GObj*);                        /* extern */
 void it_80295D04(HSD_GObj* gobj);                   /* extern */
-
+const float it_804DCB70;
 
 void it_80295C48(Item_GObj* arg0) {
     it_80295D04(arg0);
