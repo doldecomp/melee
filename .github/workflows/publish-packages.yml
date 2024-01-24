@@ -151,6 +151,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
   build-windows:
+    if: false
     name: Publish package
     env:
       REGISTRY: ghcr.io

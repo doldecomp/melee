@@ -68,6 +68,7 @@ jobs:
           >> $GITHUB_STEP_SUMMARY
 
   build-windows:
+    if: false
     name: Windows
     runs-on: windows-latest
     env:

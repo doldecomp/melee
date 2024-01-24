@@ -11,6 +11,7 @@ env:
 
 jobs:
   dump-asm:
+    if: false
     name: Dump assembly
     runs-on: ubuntu-latest
     env:
