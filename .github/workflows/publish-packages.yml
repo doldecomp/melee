@@ -26,7 +26,7 @@ jobs:
       CONTAINERFILE: .github/packages/build-linux/Dockerfile
     strategy:
       matrix:
-        target: [ "build-linux", "gen-pages", "check-issues", "dump-asm" ]
+        target: [ "build-linux", "gen-pages", "check-issues" ]
       fail-fast: false
     runs-on: ubuntu-latest
     permissions:
