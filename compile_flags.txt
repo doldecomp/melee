@@ -3,6 +3,7 @@
 -fno-short-enums
 -std=c99
 -nostdinc
+-DBUGFIX
 -Isrc/melee
 -Isrc/melee/ft/chara
 -isystemsrc

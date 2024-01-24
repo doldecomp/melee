@@ -1147,7 +1147,7 @@ float HSD_CObjGetEyeDistance(HSD_CObj* cobj)
     return PSVECMag(&look_vector);
 }
 
-#ifdef MUST_MATCH
+#if defined(MUST_MATCH) || !defined(BUGFIX)
 #pragma push
 #pragma force_active on
 static float unused1[] = {

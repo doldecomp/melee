@@ -1041,7 +1041,7 @@ HSD_LObj* lb_8000CDC0(HSD_LObj* cur)
         }
         cur = lobj_next(cur);
     }
-#ifndef MUST_MATCH
+#ifdef BUGFIX
     return NULL;
 #endif
 }
