@@ -12,6 +12,7 @@ env:
 jobs:
   # Single deploy job since we're just deploying
   gen-pages:
+    if: false
     name: Generate pages
     runs-on: ubuntu-latest
     env:
