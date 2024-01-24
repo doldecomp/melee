@@ -46,9 +46,14 @@ def resolve_path(p: Path) -> str:
 
 
 def run_cmd(cmd: list[str]) -> str:
-    result = subprocess.run(cmd, capture_output=True)
+    if cmd[0] == "python":
+        executable = sys.executable
+    else:
+        executable = None
+    result = subprocess.run(cmd, capture_output=True, executable=executable)
     if result.returncode != 0:
-        print(" ".join(cmd))
+        print(" ".join(cmd), file=sys.stderr)
+        print(result.stdout.decode(), file=sys.stderr)
         print(result.stderr.decode(), file=sys.stderr)
         sys.exit(1)
     else:
