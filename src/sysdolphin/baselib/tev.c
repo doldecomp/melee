@@ -29,9 +29,9 @@ static struct {
 
 void HSD_RenderInitAllocData(void)
 {
-    HSD_ObjAllocInit(&render_alloc_data, 0x1C, 4);
-    HSD_ObjAllocInit(&tevreg_alloc_data, 0x14, 4);
-    HSD_ObjAllocInit(&chan_alloc_data, 0x30, 4);
+    HSD_ObjAllocInit(&render_alloc_data, 28, 4);
+    HSD_ObjAllocInit(&tevreg_alloc_data, 20, 4);
+    HSD_ObjAllocInit(&chan_alloc_data, 48, 4);
 }
 
 HSD_ObjAllocData* HSD_RenderGetAllocData(void)
@@ -49,7 +49,7 @@ HSD_ObjAllocData* HSD_ChanGetAllocData(void)
     return &chan_alloc_data;
 }
 
-#ifdef MWERKS_GEKKO
+#if defined(MUST_MATCH) && !defined(WIP)
 
 #pragma push
 asm void HSD_SetupChannel(HSD_Chan* ch)
@@ -413,7 +413,7 @@ int HSD_Channel2Num(int chan)
     case 0xFF:
         return 0;
     default:
-        __assert(__FILE__, 0x290, "0");
+        HSD_ASSERT(656, 0);
         return 0;
     }
 }
@@ -454,7 +454,7 @@ int HSD_Index2TevStage(int idx)
     case 15:
         return 15;
     default:
-        __assert(__FILE__, 0x2C5, "0");
+        HSD_ASSERT(709, 0);
         return 15;
     }
 }
@@ -499,7 +499,7 @@ int HSD_TevStage2Index(int stage)
     case 15:
         return 15;
     default:
-        __assert(__FILE__, 0x2FA, "0");
+        HSD_ASSERT(762, 0);
         return 0;
     }
 }
@@ -543,7 +543,7 @@ int HSD_TevStage2Num(int stage)
     case 15:
         return 16;
     default:
-        __assert(__FILE__, 0x319, "0");
+        HSD_ASSERT(793, 0);
         return 0;
     }
 }
@@ -599,7 +599,7 @@ int HSD_TexCoordID2Num(int id)
     case 0xFF:
         return 0;
     default:
-        __assert(__FILE__, 0x3F2, "0");
+        HSD_ASSERT(1010, 0);
         return 0;
     }
 }
