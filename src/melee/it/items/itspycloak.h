@@ -2,6 +2,7 @@
 #define GALE01_295C48
 
 #include "it/forward.h"
+
 #include "it/types.h"
 
 void it_80295C48(Item_GObj*);
