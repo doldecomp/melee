@@ -168,7 +168,7 @@ void HSD_GObj_80391044(HSD_GObj* gobj)
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
 }
 
-void HSD_GObj_80391070(HSD_GObj* gobj, s32 arg1)
+void HSD_GObj_80391070(HSD_GObj* gobj, int arg1)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
 

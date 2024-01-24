@@ -61,11 +61,11 @@ unk_t HSD_SisLib_803A6754(void);
 void HSD_SisLib_803A660C(s32, s32, s32);
 void HSD_SisLib_803A6530(s32, s32, s32);
 void HSD_SisLib_803A6478(u8*, u8*);
-void HSD_SisLib_803A6368(unk_t, unk_t, u8*);
+void HSD_SisLib_803A6368(unk_t, int);
 void HSD_SisLib_803A62A0(s32, s32, s8*);
 s32 HSD_SisLib_803A611C(s16, u32, s16, s8, s8, s8, s8, u32);
 void lbl_803A60EC(void);
-unk_t HSD_SisLib_803A5ACC(f32, f32, f32, f32, f32);
+unk_t HSD_SisLib_803A5ACC(char, int, f32, f32, f32, f32, f32);
 void HSD_SisLib_803A594C(u8*);
 
 #endif
