@@ -127,10 +127,10 @@ parser.add_argument(
     help="define MUST_MATCH for make compatibility",
 )
 parser.add_argument(
-    "--no-require-protos",
+    "--require-protos",
     dest="require_protos",
-    action="store_false",
-    help="do not require function prototypes",
+    action="store_true",
+    help="require function prototypes",
 )
 args = parser.parse_args()
 

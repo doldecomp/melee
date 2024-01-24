@@ -5,6 +5,7 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "ftKirby/forward.h"
+#include "it/forward.h"
 
 #include "ft/ftcolltypes.h"
 
@@ -242,6 +243,15 @@ union ftCommon_MotionVars {
         /* fp+2340 */ UNK_T x0;
         /* fp+2344 */ float x4;
     } hammerlanding;
+    struct {
+        /* fp+2340 */ Item_GObj* x0;
+    } captureleadead;
+    struct {
+        /* fp+2340 */ bool timer;
+    } entry;
+    struct {
+        /* fp+2340 */ Item_GObj* x0;
+    } capturelikelike;
 };
 
 #endif
