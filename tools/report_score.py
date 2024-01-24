@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import List, Tuple, cast
 
 import humanfriendly
-from elftools.common.py3compat import sys
+import sys
 from elftools.elf.elffile import ELFFile
 from elftools.elf.sections import SymbolTableSection
 
@@ -59,12 +59,19 @@ def main(args) -> None:
             "json",
             f"{function['name']}",
         ]
-        result = subprocess.run(
+        proc = subprocess.run(
             cmd,
+            executable=sys.executable,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             universal_newlines=True,
-        ).stdout.strip()
+        )
+        if proc.returncode != 0:
+            print(" ".join(cmd), file=sys.stderr)
+            print(proc.stdout.strip(), file=sys.stderr)
+            print(proc.stderr.strip(), file=sys.stderr)
+            sys.exit(1)
+        result = proc.stdout.strip()
         try:
             result = json.loads(result)
             current_score = int(result["current_score"])
