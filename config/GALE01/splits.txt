@@ -3971,7 +3971,6 @@ dolphin/axfx/delay.c:
 dolphin/axfx/axfx.c:
 	.text       start:0x8035DD3C end:0x8035DD98
 	.sdata      start:0x804D5C70 end:0x804D5C78
->>>>>>> master
 
 sysdolphin/baselib/dobj.c:
 	.text       start:0x8035DD98 end:0x8035E560
