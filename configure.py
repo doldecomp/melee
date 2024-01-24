@@ -16,6 +16,7 @@ import sys
 import argparse
 
 from pathlib import Path
+from typing import Dict, List, Any
 from tools.project import (
     Object,
     ProjectConfig,
@@ -27,7 +28,7 @@ from tools.project import (
 # Game versions
 DEFAULT_VERSION = 0
 VERSIONS = [
-    "GAMEID",	# 0
+    "GAMEID",  # 0
 ]
 
 if len(VERSIONS) > 1:
@@ -150,7 +151,7 @@ cflags_base = [
     "-RTTI off",
     "-fp_contract on",
     "-str reuse",
-	"-multibyte", # For Wii compilers, replace with `-enc SJIS`
+    "-multibyte",  # For Wii compilers, replace with `-enc SJIS`
     "-i include",
     f"-i build/{config.version}/include",
     f"-DVERSION={version_num}",
@@ -169,7 +170,7 @@ cflags_runtime = [
     "-str reuse,pool,readonly",
     "-gccinc",
     "-common off",
-	"-inline auto",
+    "-inline auto",
 ]
 
 # REL flags
@@ -183,7 +184,7 @@ config.linker_version = "GC/1.3.2"
 
 
 # Helper function for Dolphin libraries
-def DolphinLib(lib_name, objects):
+def DolphinLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
         "mw_version": "GC/1.2.5n",
@@ -194,7 +195,7 @@ def DolphinLib(lib_name, objects):
 
 
 # Helper function for REL script objects
-def Rel(lib_name, objects):
+def Rel(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
         "mw_version": "GC/1.3.2",

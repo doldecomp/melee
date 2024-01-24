@@ -21,6 +21,7 @@
         "build/**/*.MAP": true,
         "build.ninja": true,
         ".ninja_*": true,
-        "objdiff.json": true
+        "objdiff.json": true,
+        ".mypy_cache": true
     }
 }

@@ -2,6 +2,7 @@ __pycache__
 .idea
 .vscode
 .ninja_*
+.mypy_cache
 *.exe
 build
 build.ninja
