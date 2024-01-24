@@ -476,8 +476,8 @@ struct ftCommonData {
     /* +6C0 */ UNK_T x6C0;
     /* +6C4 */ UNK_T x6C4;
     /* +6C8 */ UNK_T x6C8;
-    /* +6CC */ UNK_T x6CC;
-    /* +6D0 */ UNK_T x6D0;
+    /* +6CC */ int x6CC;
+    /* +6D0 */ float x6D0;
     /* +6D4 */ UNK_T x6D4;
     /// @todo expand to actual size
     /* +6D8 */ void* x6D8[1];
