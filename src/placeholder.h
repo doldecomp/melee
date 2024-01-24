@@ -16,7 +16,7 @@ typedef jmp_t jtbl_t[];
 #if defined(__clang__) || defined(__GNUC__)
 #define NOT_IMPLEMENTED                                                       \
     OSPanic(__FILE__, __LINE__, "%s is not implemented!", __func__)
-#elif MUST_MATCH
+#elif defined(__MWERKS__) && (MUST_MATCH || WIP)
 #define NOT_IMPLEMENTED asm { nop }
 #else
 #define NOT_IMPLEMENTED                                                       \
