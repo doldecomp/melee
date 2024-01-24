@@ -6,6 +6,9 @@ ctx_includes.h
 
 # decomp-toolkit
 .ninja_*
+.mypy_cache
+*.exe
+build
 build.ninja
 objdiff.json
 orig/*/*

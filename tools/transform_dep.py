@@ -25,7 +25,7 @@ def in_wsl() -> bool:
     return "microsoft-standard" in uname().release
 
 
-def import_d_file(in_file) -> str:
+def import_d_file(in_file: str) -> str:
     out_text = ""
 
     with open(in_file) as file:
@@ -60,7 +60,7 @@ def import_d_file(in_file) -> str:
     return out_text
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="""Transform a .d file from Wine paths to normal paths"""
     )
