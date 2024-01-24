@@ -18,11 +18,11 @@ import shutil
 import stat
 import urllib.request
 import zipfile
-
+from typing import Callable, Dict
 from pathlib import Path
 
 
-def dtk_url(tag):
+def dtk_url(tag: str) -> str:
     uname = platform.uname()
     suffix = ""
     system = uname.system.lower()
@@ -38,21 +38,21 @@ def dtk_url(tag):
     return f"{repo}/releases/download/{tag}/dtk-{system}-{arch}{suffix}"
 
 
-def sjiswrap_url(tag):
+def sjiswrap_url(tag: str) -> str:
     repo = "https://github.com/encounter/sjiswrap"
     return f"{repo}/releases/download/{tag}/sjiswrap-windows-x86.exe"
 
 
-def wibo_url(tag):
+def wibo_url(tag: str) -> str:
     repo = "https://github.com/decompals/wibo"
     return f"{repo}/releases/download/{tag}/wibo"
 
 
-def compilers_url(tag):
+def compilers_url(tag: str) -> str:
     return f"https://files.decomp.dev/compilers_{tag}.zip"
 
 
-TOOLS = {
+TOOLS: Dict[str, Callable[[str], str]] = {
     "dtk": dtk_url,
     "sjiswrap": sjiswrap_url,
     "wibo": wibo_url,
@@ -60,7 +60,7 @@ TOOLS = {
 }
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("tool", help="Tool name")
     parser.add_argument("output", type=Path, help="output file path")

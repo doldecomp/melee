@@ -21,50 +21,67 @@ use Python.
 
 import re
 import textwrap
+from typing import Optional, Union, Tuple, Match, Dict, List
+from io import StringIO
+from pathlib import Path
 
 
-def escape_path(word):
+NinjaPath = Union[str, Path]
+NinjaPaths = Union[
+    List[str],
+    List[Path],
+    List[NinjaPath],
+    List[Optional[str]],
+    List[Optional[Path]],
+    List[Optional[NinjaPath]],
+]
+NinjaPathOrPaths = Union[NinjaPath, NinjaPaths]
+
+
+def escape_path(word: str) -> str:
     return word.replace("$ ", "$$ ").replace(" ", "$ ").replace(":", "$:")
 
 
 class Writer(object):
-    def __init__(self, output, width=78):
+    def __init__(self, output: StringIO, width: int = 78) -> None:
         self.output = output
         self.width = width
 
-    def newline(self):
+    def newline(self) -> None:
         self.output.write("\n")
 
-    def comment(self, text):
+    def comment(self, text: str) -> None:
         for line in textwrap.wrap(
             text, self.width - 2, break_long_words=False, break_on_hyphens=False
         ):
             self.output.write("# " + line + "\n")
 
-    def variable(self, key, value, indent=0):
-        if value is None:
-            return
-        if isinstance(value, list):
-            value = " ".join(filter(None, value))  # Filter out empty strings.
+    def variable(
+        self,
+        key: str,
+        value: Optional[NinjaPathOrPaths],
+        indent: int = 0,
+    ) -> None:
+        value = " ".join(serialize_paths(value))
         self._line("%s = %s" % (key, value), indent)
 
-    def pool(self, name, depth):
+    def pool(self, name: str, depth: int) -> None:
         self._line("pool %s" % name)
-        self.variable("depth", depth, indent=1)
+        self.variable("depth", str(depth), indent=1)
 
     def rule(
         self,
-        name,
-        command,
-        description=None,
-        depfile=None,
-        generator=False,
-        pool=None,
-        restat=False,
-        rspfile=None,
-        rspfile_content=None,
-        deps=None,
-    ):
+        name: str,
+        command: str,
+        description: Optional[str] = None,
+        depfile: Optional[NinjaPath] = None,
+        generator: bool = False,
+        pool: Optional[str] = None,
+        restat: bool = False,
+        rspfile: Optional[NinjaPath] = None,
+        rspfile_content: Optional[NinjaPath] = None,
+        deps: Optional[NinjaPathOrPaths] = None,
+    ) -> None:
         self._line("rule %s" % name)
         self.variable("command", command, indent=1)
         if description:
@@ -86,30 +103,37 @@ class Writer(object):
 
     def build(
         self,
-        outputs,
-        rule,
-        inputs=None,
-        implicit=None,
-        order_only=None,
-        variables=None,
-        implicit_outputs=None,
-        pool=None,
-        dyndep=None,
-    ):
-        outputs = as_list(outputs)
+        outputs: NinjaPathOrPaths,
+        rule: str,
+        inputs: Optional[NinjaPathOrPaths] = None,
+        implicit: Optional[NinjaPathOrPaths] = None,
+        order_only: Optional[NinjaPathOrPaths] = None,
+        variables: Optional[
+            Union[
+                List[Tuple[str, Optional[NinjaPathOrPaths]]],
+                Dict[str, Optional[NinjaPathOrPaths]],
+            ]
+        ] = None,
+        implicit_outputs: Optional[NinjaPathOrPaths] = None,
+        pool: Optional[str] = None,
+        dyndep: Optional[NinjaPath] = None,
+    ) -> List[str]:
+        outputs = serialize_paths(outputs)
         out_outputs = [escape_path(x) for x in outputs]
-        all_inputs = [escape_path(x) for x in as_list(inputs)]
+        all_inputs = [escape_path(x) for x in serialize_paths(inputs)]
 
         if implicit:
-            implicit = [escape_path(x) for x in as_list(implicit)]
+            implicit = [escape_path(x) for x in serialize_paths(implicit)]
             all_inputs.append("|")
             all_inputs.extend(implicit)
         if order_only:
-            order_only = [escape_path(x) for x in as_list(order_only)]
+            order_only = [escape_path(x) for x in serialize_paths(order_only)]
             all_inputs.append("||")
             all_inputs.extend(order_only)
         if implicit_outputs:
-            implicit_outputs = [escape_path(x) for x in as_list(implicit_outputs)]
+            implicit_outputs = [
+                escape_path(x) for x in serialize_paths(implicit_outputs)
+            ]
             out_outputs.append("|")
             out_outputs.extend(implicit_outputs)
 
@@ -119,7 +143,7 @@ class Writer(object):
         if pool is not None:
             self._line("  pool = %s" % pool)
         if dyndep is not None:
-            self._line("  dyndep = %s" % dyndep)
+            self._line("  dyndep = %s" % serialize_path(dyndep))
 
         if variables:
             if isinstance(variables, dict):
@@ -132,16 +156,16 @@ class Writer(object):
 
         return outputs
 
-    def include(self, path):
+    def include(self, path: str) -> None:
         self._line("include %s" % path)
 
-    def subninja(self, path):
+    def subninja(self, path: str) -> None:
         self._line("subninja %s" % path)
 
-    def default(self, paths):
-        self._line("default %s" % " ".join(as_list(paths)))
+    def default(self, paths: NinjaPathOrPaths) -> None:
+        self._line("default %s" % " ".join(serialize_paths(paths)))
 
-    def _count_dollars_before_index(self, s, i):
+    def _count_dollars_before_index(self, s: str, i: int) -> int:
         """Returns the number of '$' characters right in front of s[i]."""
         dollar_count = 0
         dollar_index = i - 1
@@ -150,7 +174,7 @@ class Writer(object):
             dollar_index -= 1
         return dollar_count
 
-    def _line(self, text, indent=0):
+    def _line(self, text: str, indent: int = 0) -> None:
         """Write 'text' word-wrapped at self.width characters."""
         leading_space = "  " * indent
         while len(leading_space) + len(text) > self.width:
@@ -187,19 +211,21 @@ class Writer(object):
 
         self.output.write(leading_space + text + "\n")
 
-    def close(self):
+    def close(self) -> None:
         self.output.close()
 
 
-def as_list(input):
-    if input is None:
-        return []
+def serialize_path(input: Optional[NinjaPath]) -> str:
+    return str(input).replace("\\", "/") if input else ""
+
+
+def serialize_paths(input: Optional[NinjaPathOrPaths]) -> List[str]:
     if isinstance(input, list):
-        return input
-    return [input]
+        return [serialize_path(path) for path in input if path]
+    return [serialize_path(input)] if input else []
 
 
-def escape(string):
+def escape(string: str) -> str:
     """Escape a string such that it can be embedded into a Ninja file without
     further interpretation."""
     assert "\n" not in string, "Ninja syntax does not allow newlines"
@@ -207,14 +233,14 @@ def escape(string):
     return string.replace("$", "$$")
 
 
-def expand(string, vars, local_vars={}):
+def expand(string: str, vars: Dict[str, str], local_vars: Dict[str, str] = {}) -> str:
     """Expand a string containing $vars as Ninja would.
 
     Note: doesn't handle the full Ninja variable syntax, but it's enough
     to make configure.py's use of it work.
     """
 
-    def exp(m):
+    def exp(m: Match[str]) -> str:
         var = m.group(1)
         if var == "$":
             return "$"
