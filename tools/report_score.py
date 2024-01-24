@@ -3,7 +3,7 @@ import argparse
 import json
 import subprocess
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Tuple, cast
 
 import humanfriendly
 from elftools.common.py3compat import sys
@@ -35,12 +35,12 @@ def calc_percent(current_score, max_score):
 
 
 def main(args) -> None:
-    obj_path = Path(args.obj_path)
-    expected_root = Path("./expected/build/ssbm.us.1.2/")
-    wip_root = Path("./build/wip/ssbm.us.1.2/")
+    src_path = cast(Path, args.src_path)
+    obj_path = src_path.with_suffix(".o")
+    expected_root = Path("build/GALE01/obj")
+    wip_root = Path("build/GALE01/src")
     expected_path = expected_root / obj_path
     wip_path = wip_root / obj_path
-    obj_name = str(expected_path.relative_to(expected_root)).replace(".o", "")
 
     entries: List[Tuple[str, int, int, int, float]] = []
 
@@ -91,7 +91,7 @@ def main(args) -> None:
     friendly_file_size = humanfriendly.format_size(file_size)
 
     if args.title:
-        friendly_obj_name = Path(obj_name).stem
+        friendly_obj_name = src_path.stem
         msg = (
             f"Match {file_percent:.2f}% of `{friendly_obj_name}` ({friendly_file_size})"
             if file_percent < 100
@@ -99,7 +99,7 @@ def main(args) -> None:
         )
         print(msg)
     else:
-        print(f"## Report of `{obj_name}`")
+        print(f"## Report of `{src_path}`")
         print("Function|Size|Score|Max|%\n-|-|-|-|-")
         print(
             f"**File**|"
@@ -119,8 +119,10 @@ def main(args) -> None:
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Process some integers.")
-    parser.add_argument("obj_path", type=str, help="Path to the object file")
+    parser = argparse.ArgumentParser(
+        description="Report progress of a translation unit"
+    )
+    parser.add_argument("src_path", type=Path, help="Path to the source file")
     parser.add_argument("--title", action="store_true", help="Output only a title")
     args = parser.parse_args()
     main(args)
