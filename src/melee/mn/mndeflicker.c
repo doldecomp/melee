@@ -200,7 +200,7 @@ void mnDeflicker_8024A3E8(HSD_GObj* gobj)
 
 // this feels off
 #define GET_GOBJ_USER_DATA(gobj) ((gobj_user_data*) HSD_GObjGetUserData(gobj))
-static inline void inline_test()
+static inline void inline_test(void)
 {
     struct sislib_idk* temp_r3_6;
     gobj_user_data* user_data = GET_GOBJ_USER_DATA(mnDeflicker_804D6C38);
