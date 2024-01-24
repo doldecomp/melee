@@ -1,5 +1,6 @@
 #include "fobj.h"
 
+#include <__mem.h>
 #include <string.h>
 #include <baselib/spline.h>
 

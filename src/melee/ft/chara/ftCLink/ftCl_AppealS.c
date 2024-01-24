@@ -11,7 +11,7 @@
 #include "ft/ftanim.h"
 #include "ft/ftparts.h"
 #include "ftLink/ftLk_Init.h"
-#include "it/it_27CF.h"
+#include "it/items/it_27CF.h"
 
 void ftCl_AppealS_Anim(HSD_GObj* gobj)
 {

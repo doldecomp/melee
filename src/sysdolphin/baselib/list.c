@@ -1,5 +1,6 @@
 #include <platform.h>
 
+#include <__mem.h>
 #include <string.h>
 #include <baselib/list.h>
 

@@ -8,7 +8,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
-#include "it/it_27CF.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 #include <MSL/trigf.h>

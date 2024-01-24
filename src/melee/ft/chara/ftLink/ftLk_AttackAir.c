@@ -13,7 +13,7 @@
 #include "ft/ftparts.h"
 #include "ftCommon/ftCo_AttackAir.h"
 #include "ftLink/types.h"
-#include "it/it_27CF.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 /* 0EB484 */ static void lwOnHit(HSD_GObj* gobj);

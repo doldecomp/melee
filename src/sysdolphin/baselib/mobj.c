@@ -1,5 +1,6 @@
 #include "mobj.h"
 
+#include <__mem.h>
 #include <string.h>
 #include <dolphin/os.h>
 #include <baselib/class.h>

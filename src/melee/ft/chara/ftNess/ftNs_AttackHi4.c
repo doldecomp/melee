@@ -14,7 +14,7 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_Wait.h"
-#include "it/it_27CF.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 #include "lb/lbvector.h"

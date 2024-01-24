@@ -1,11 +1,12 @@
 #ifndef MELEE_FT_CHARA_FTSAMUS_INLINES_H
+#include "it/items/it_27CF.h"
 #define MELEE_FT_CHARA_FTSAMUS_INLINES_H
 
 #include "ef/eflib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftSamus/ftSs_Init.h"
-#include "it/it_27CF.h"
+#include "it/items/it_27CF.h"
 
 static inline void ftSamus_updateDamageDeathCBs(HSD_GObj* gobj)
 {

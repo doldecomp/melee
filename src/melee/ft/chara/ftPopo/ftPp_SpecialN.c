@@ -13,7 +13,7 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "it/it_27CF.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 void ftPp_SpecialN_Enter(HSD_GObj* gobj)

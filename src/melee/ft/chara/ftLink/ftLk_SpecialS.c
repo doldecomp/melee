@@ -20,7 +20,7 @@
 #include "ftCommon/ftCo_Guard.h"
 #include "ftCommon/ftCo_SpecialAir.h"
 #include "ftCommon/ftCo_SpecialS.h"
-#include "it/it_27CF.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>

@@ -11,7 +11,7 @@
 #include "ft/ftparts.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftNess/ftNs_Init.h"
-#include "it/it_27CF.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 // SpecialN/SpecialAirN (PK Flash)
