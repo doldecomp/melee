@@ -1,12 +1,14 @@
 #ifndef MELEE_FT_CHARA_FTSEAK_FTSEAK_SPECIALN_H
 #define MELEE_FT_CHARA_FTSEAK_FTSEAK_SPECIALN_H
 
-#include <baselib/forward.h>
 #include "ft/forward.h"
+#include <baselib/forward.h>
 
-Fighter_GObj* it_802AFD8C(Fighter_GObj*, Vec3*, u32, f32);                     /* extern */
-void it_802AFEA8(Fighter_GObj*, Fighter_GObj*, u32);                           /* extern */
-u32 it_802B19AC(Fighter_GObj*, Vec3* cur_pos, u32, u32, f32 facing_dir);       /* extern */
+
+Fighter_GObj* it_802AFD8C(Fighter_GObj*, Vec3*, u32, f32);    /* extern */
+Fighter_GObj* it_802AFEA8(Fighter_GObj*, Fighter_GObj*, u32); /* extern */
+u32 it_802B19AC(Fighter_GObj*, Vec3* cur_pos, u32, u32,
+                f32 facing_dir); /* extern */
 
 /* static */ void ftSk_SpecialN_80111FBC(Fighter_GObj* gobj);
 /* static */ void ftSk_SpecialN_801120D4(Fighter_GObj* gobj);
