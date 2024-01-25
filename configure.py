@@ -1229,7 +1229,7 @@ config.libs = [
         "gx",
         [
             Object(NonMatching, "dolphin/gx/GXInit.c"),
-            Object(NonMatching, "dolphin/gx/GXFifo.c"),
+            Object(Matching, "dolphin/gx/GXFifo.c"),
             Object(NonMatching, "dolphin/gx/GXAttr.c"),
             Object(Matching, "dolphin/gx/GXMisc.c"),
             Object(Matching, "dolphin/gx/GXGeometry.c"),
