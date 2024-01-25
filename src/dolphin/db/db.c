@@ -36,8 +36,8 @@ static void __DBExceptionDestinationAux(void)
     PPCHalt();
 }
 
-#ifdef MUST_MATCH
-static asm void __DBExceptionDestination(void)
+#ifdef MWERKS_GEKKO
+asm void __DBExceptionDestination(void)
 { // clang-format off
     nofralloc
     mfmsr r3
@@ -47,7 +47,7 @@ static asm void __DBExceptionDestination(void)
 } // clang-format on
 
 #elif defined(__GNUC__) && defined(__PPCGEKKO__)
-static void __DBExceptionDestination(void)
+void __DBExceptionDestination(void)
 {
     asm("mfmsr %r3\n"
         "ori %r3, %r3, 0x30\n"
@@ -56,7 +56,7 @@ static void __DBExceptionDestination(void)
 }
 
 #else
-static void __DBExceptionDestination(void)
+void __DBExceptionDestination(void)
 {
     NOT_IMPLEMENTED;
 }
