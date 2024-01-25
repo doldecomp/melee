@@ -46,7 +46,7 @@ void __fstLoad(void)
     u8 auStack64[64];
     struct DiskInfo* info;
 
-#ifdef MUST_MATCH
+#ifndef BUGFIX
     /// @todo Unused assignment.
     {
         void* arenaHi = OSGetArenaHi();

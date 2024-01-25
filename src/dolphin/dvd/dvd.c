@@ -58,7 +58,7 @@ extern volatile struct _IO {
 static DVDBuffer tmpBuffer;
 
 /// @todo Unused @c .bss.
-#ifdef MUST_MATCH
+#ifndef BUGFIX
 static u8 _[0x60];
 #endif
 
@@ -857,7 +857,7 @@ static void cbForStateBusy(u32 intType)
     }
 }
 
-static bool issueCommand(s32 prio, DVDCommandBlock* block)
+static inline bool issueCommand(s32 prio, DVDCommandBlock* block)
 {
     bool level;
     bool result;

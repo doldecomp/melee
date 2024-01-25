@@ -3637,7 +3637,7 @@ dolphin/dvd/dvdlow.c:
 
 dolphin/dvd/dvdfs.c:
 	.text       start:0x80337934 end:0x80337DE8
-	.data       start:0x80400D80 end:0x80400E80
+	.data       start:0x80400D80 end:0x80400E7C
 	.sdata      start:0x804D5B88 end:0x804D5B90
 	.sbss       start:0x804D7278 end:0x804D7298
 
@@ -3660,7 +3660,7 @@ dolphin/dvd/fstload.c:
 	.text       start:0x8033A4A0 end:0x8033A6E0
 	.data       start:0x80400FD8 end:0x80401048
 	.bss        start:0x804A7658 end:0x804A76C8
-	.sdata      start:0x804D5B98 end:0x804D5BA8
+	.sdata      start:0x804D5B98 end:0x804D5BA3
 	.sbss       start:0x804D72E0 end:0x804D72F0
 
 dolphin/gx/GXInit.c:
