@@ -2,13 +2,12 @@
 #define SYSDOLPHIN_BASELIB_WOBJ_H
 
 #include <platform.h>
-#include <baselib/forward.h>
+#include "baselib/forward.h" // IWYU pragma: export
 
-#include "baselib/aobj.h"
+#include "baselib/class.h"
 #include "baselib/object.h"
 
 #include <dolphin/mtx/types.h>
-#include <baselib/class.h>
 
 struct HSD_WObj {
     HSD_Obj parent;

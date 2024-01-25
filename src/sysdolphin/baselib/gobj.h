@@ -2,12 +2,11 @@
 #define GALE01_390730
 
 #include <platform.h>
-#include "ft/forward.h"
-#include "it/forward.h"
-#include <baselib/forward.h>
+#include "baselib/forward.h" // IWYU pragma: export
+
+#include "baselib/objalloc.h"
 
 #include <placeholder.h>
-#include <baselib/objalloc.h>
 
 struct _GObjUnkStruct;
 
@@ -64,8 +63,8 @@ typedef struct _HSD_GObjList {
     /* 0x14 */ HSD_GObj* x14;
     /* 0x18 */ HSD_GObj* x18;
     /* 0x1C */ HSD_GObj* x1C;
-    /* 0x20 */ Fighter_GObj* fighters;
-    /* 0x24 */ Item_GObj* items;
+    /* 0x20 */ HSD_GObj* fighters;
+    /* 0x24 */ HSD_GObj* items;
     /* 0x28 */ HSD_GObj* x28;
     /* 0x2C */ HSD_GObj* x2C;
     /* 0x30 */ HSD_GObj* x30;

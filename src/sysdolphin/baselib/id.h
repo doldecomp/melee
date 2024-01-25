@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <baselib/objalloc.h>
+#include "baselib/objalloc.h"
 
 typedef struct _IDEntry {
     struct _IDEntry* next;

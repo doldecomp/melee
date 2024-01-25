@@ -3,6 +3,7 @@
 #include <dolphin/os/init/__ppc_eabi_init.h>
 
 #ifdef MUST_MATCH
+#include "dolphin/os/OSCache.h"
 #include "dolphin/os/OSInit.h"
 #endif
 

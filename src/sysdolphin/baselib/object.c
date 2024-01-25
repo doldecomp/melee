@@ -1,4 +1,4 @@
-#include <baselib/object.h>
+#include "object.h"
 
 HSD_ClassInfo hsdObj = { ObjInfoInit };
 extern HSD_ClassInfo hsdClass;

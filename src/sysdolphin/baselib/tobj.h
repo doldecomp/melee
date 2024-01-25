@@ -2,16 +2,14 @@
 #define _hsd_tobj_h_
 
 #include <platform.h>
-#include <dolphin/gx/forward.h>
-#include <baselib/forward.h>
+#include "baselib/forward.h" // IWYU pragma: export
+
+#include "baselib/class.h"
+#include "baselib/object.h"
 
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/class.h>
-#include <baselib/fobj.h>
-#include <baselib/object.h>
-#include <baselib/texp.h>
 
 struct HSD_TObj;
 

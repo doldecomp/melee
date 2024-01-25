@@ -11,6 +11,7 @@
 #include "melee/gr/ground.h"
 #include "melee/lb/lb_00B0.h"
 #include "melee/lb/lb_00F9.h"
+#include "sysdolphin/baselib/cobj.h"
 #include "sysdolphin/baselib/gobjgxlink.h"
 #include "sysdolphin/baselib/gobjobject.h"
 #include "sysdolphin/baselib/gobjproc.h"

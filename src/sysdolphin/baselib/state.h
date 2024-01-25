@@ -2,8 +2,7 @@
 #define SYSDOLPHIN_BASELIB_S
 
 #include <platform.h>
-#include <dolphin/gx/forward.h>
-#include <baselib/forward.h>
+#include "baselib/forward.h"
 
 #include <dolphin/gx/types.h>
 

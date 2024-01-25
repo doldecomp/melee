@@ -1,4 +1,4 @@
-#include <baselib/random.h>
+#include "random.h"
 
 u32 seed = 1;
 u32* seed_ptr = &seed;

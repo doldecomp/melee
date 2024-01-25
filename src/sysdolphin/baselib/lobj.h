@@ -2,19 +2,15 @@
 #define SYSDOLPHIN_BASELIB_LOBJ_H
 
 #include <platform.h>
-#include "baselib/forward.h"
-#include <dolphin/gx/forward.h>
+#include "baselib/forward.h" // IWYU pragma: export
 
-#include "baselib/cobj.h"
-#include "baselib/fobj.h"
+#include "baselib/debug.h"
 #include "baselib/object.h"
-#include "baselib/wobj.h"
 
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/debug.h>
 
 struct HSD_LightPoint {
     f32 cutoff;

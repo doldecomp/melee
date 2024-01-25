@@ -2,14 +2,12 @@
 #define _aobj_h_
 
 #include <platform.h>
-#include <baselib/forward.h>
+#include "baselib/forward.h" // IWYU pragma: export
 
-#include <baselib/debug.h>
-#include <baselib/fobj.h>
-#include <baselib/id.h>
-#include <baselib/list.h>
-#include <baselib/objalloc.h>
-#include <baselib/object.h>
+#include "baselib/debug.h"
+#include "baselib/fobj.h"
+#include "baselib/objalloc.h"
+#include "baselib/object.h"
 
 #define AOBJ_REWINDED (1 << 26)
 #define AOBJ_FIRST_PLAY (1 << 27)

@@ -268,14 +268,6 @@ def DolphinLib(lib_name: str, objects: Objects, fix_epilogue=False) -> LibDict:
         lib_name,
         objects,
         fix_epilogue=fix_epilogue,
-        includes=[
-            *includes_base,
-            "src/melee",  # HACK
-        ],
-        system_includes=[
-            *system_includes_base,
-            "src/sysdolphin",  # HACK
-        ],
     )
 
 
@@ -285,13 +277,11 @@ def SysdolphinLib(lib_name: str, objects: Objects) -> LibDict:
         objects,
         includes=[
             *includes_base,
-            "src/melee",  # HACK for lbrefract
             "src/sysdolphin",
         ],
         system_includes=[
             *system_includes_base,
             "src/dolphin",
-            "src/sysdolphin",
         ],
     )
 
@@ -318,14 +308,6 @@ def RuntimeLib(lib_name: str, objects: Objects) -> LibDict:
         lib_name,
         objects,
         cflags=cflags_runtime,
-        includes=[
-            *includes_base,
-            "src/melee",  # HACK
-        ],
-        system_includes=[
-            *system_includes_base,
-            "src/sysdolphin",  # HACK
-        ],
     )
 
 
