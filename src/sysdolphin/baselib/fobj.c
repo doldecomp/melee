@@ -1,8 +1,9 @@
 #include "fobj.h"
 
-#include <__mem.h>
 #include "debug.h"
 #include "spline.h"
+
+#include <__mem.h>
 
 HSD_ObjAllocData fobj_alloc_data;
 

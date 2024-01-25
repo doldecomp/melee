@@ -1,6 +1,8 @@
 #include "tobj.h"
 
 #include "aobj.h"
+#include "debug.h"
+#include "fobj.h"
 #include "memory.h"
 #include "mtx.h"
 
@@ -8,8 +10,6 @@
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/types.h>
-#include "debug.h"
-#include "fobj.h"
 #include <MetroTRK/intrinsics.h>
 
 extern void TObjInfoInit(void);

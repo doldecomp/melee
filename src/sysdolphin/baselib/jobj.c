@@ -1,11 +1,5 @@
-#include "math.h"
+#include "jobj.h"
 
-#include "lb/lbrefract.h"
-
-#include <__mem.h>
-#include <dolphin/mtx/mtxvec.h>
-#include <dolphin/mtx/vec.h>
-#include <dolphin/os.h>
 #include "aobj.h"
 #include "class.h"
 #include "cobj.h"
@@ -13,12 +7,19 @@
 #include "dobj.h"
 #include "fobj.h"
 #include "id.h"
-#include "jobj.h"
+#include "math.h"
 #include "mobj.h"
 #include "mtx.h"
 #include "pobj.h"
 #include "robj.h"
 #include "spline.h"
+
+#include "lb/lbrefract.h"
+
+#include <__mem.h>
+#include <dolphin/mtx/mtxvec.h>
+#include <dolphin/mtx/vec.h>
+#include <dolphin/os.h>
 
 void JObjInfoInit(void);
 HSD_JObjInfo hsdJObj = { JObjInfoInit };
