@@ -9,7 +9,7 @@ static AISCallback __AIS_Callback;
 static AIDCallback __AID_Callback;
 static u8* __CallbackStack;
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 static u8* __OldStack;
 #endif
 
@@ -253,7 +253,7 @@ static void __AIDHandler(__OSInterrupt interrupt, struct OSContext* context)
     OSSetCurrentContext(context);
 }
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 static asm void __AICallbackStackSwitch(register AIDCallback cb)
 { // clang-format off
     fralloc
