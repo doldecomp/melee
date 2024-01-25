@@ -1,6 +1,8 @@
 #ifndef DOLPHIN_OS_OSERROR_H
 #define DOLPHIN_OS_OSERROR_H
 
+#include <platform.h>
+
 #include <dolphin/os/OSContext.h>
 
 #define OS_ERROR_SYSTEM_RESET 0

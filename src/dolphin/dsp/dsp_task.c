@@ -2,7 +2,7 @@
 
 #include "dsp.h"
 
-#include <stddef.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSInterrupt.h>
 
 DSPTaskInfo* __DSP_curr_task;

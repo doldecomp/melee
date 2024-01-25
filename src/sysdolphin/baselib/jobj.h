@@ -2,15 +2,19 @@
 #define _jobj_h_
 
 #include <platform.h>
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <baselib/aobj.h>
 #include <baselib/class.h>
+#include <baselib/debug.h>
 #include <baselib/list.h>
 #include <baselib/mobj.h>
 #include <baselib/object.h>
 #include <baselib/pobj.h>
+
+struct HSD_JObj;
 
 #define HSD_A_J_ROTX 1
 #define HSD_A_J_ROTY 2

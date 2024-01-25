@@ -2,28 +2,21 @@
 #define MELEE_IT_TYPES_H
 
 #include <platform.h>
-#include "it/forward.h"
+#include "it/forward.h" // IWYU pragma: export
+#include "lb/forward.h"
+#include <dolphin/gx/forward.h>
+#include <baselib/forward.h>
 
 #include "ft/types.h"
-#include "gr/stage.h"
 #include "it/itCharItems.h"
 #include "it/itCommonItems.h"
 #include "it/itPKFlash.h"
 #include "it/itPKThunder.h"
-#include "it/itYoyo.h"
-#include "pl/player.h"
 
 #include <common_structs.h>
+#include <placeholder.h>
+#include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/aobj.h>
-#include <baselib/controller.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/jobj.h>
-#include <baselib/mobj.h>
-#include <baselib/random.h>
 
 /// @todo Size unknown.
 struct ItemStateTable {

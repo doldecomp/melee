@@ -1,3 +1,7 @@
+#include <platform.h>
+#include "lb/forward.h"
+#include <baselib/forward.h>
+
 #include "gr/grtfox.h"
 
 #include "gr/granime.h"
@@ -9,10 +13,12 @@
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
+#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/os.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
-#include <baselib/jobj.h>
+#include <baselib/gobjproc.h>
 
 void grTFox_80220B80(int);                   /* static */
 void grTFox_80220B84(void);                  /* static */

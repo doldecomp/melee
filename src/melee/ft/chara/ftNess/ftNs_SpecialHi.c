@@ -1,5 +1,5 @@
-#include "forward.h"
-#include "ft/forward.h"
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
 
 #include "ftNs_SpecialHi.h"
 
@@ -8,21 +8,24 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_DownBound.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftNess/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h>
+#include <baselib/gobj.h>
 #include <MetroTRK/intrinsics.h>
 
 // SpecialHi/SpecialAirHi (PK Thunder)

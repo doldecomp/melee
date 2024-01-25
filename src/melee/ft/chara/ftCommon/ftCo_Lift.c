@@ -1,6 +1,7 @@
 #include <platform.h>
-#include "ft/forward.h"
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "ftCo_Lift.h"
 
@@ -9,13 +10,16 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
+#include "it/it_26B1.h"
 #include "it/item.h"
 
 #include <math.h>
-#include <placeholder.h>
+#include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
 void ftCo_80096D9C(ftCo_GObj* gobj)

@@ -1,5 +1,6 @@
+#include <platform.h>
+
 #include <__mem.h>
-#include <stddef.h>
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDCheck.h>

@@ -1,22 +1,24 @@
-#include <platform.h>
-
 #include "ftCo_0B3E.h"
 
-#include "ftCo_09F7.h"
-#include "ftCo_0A01.h"
-
-#include "ft/fighter.h"
-#include "ft/ftlib.h"
-#include "gr/ground.h"
-#include "lb/lb_00CE.h"
-#include "mp/mpisland.h"
-#include "mp/mplib.h"
-
 #include <placeholder.h>
-#include <baselib/debug.h>
-#include <MSL/trigf.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
+#include "melee/ft/chara/ftCommon/ftCo_09F7.h"
+#include "melee/ft/chara/ftCommon/ftCo_0A01.h"
+#include "melee/ft/fighter.h"
+#include "melee/ft/ftlib.h"
+#include "melee/gr/ground.h"
+#include "melee/lb/lb_00CE.h"
+#include "melee/lb/lbcollision.h"
+#include "melee/mp/mpisland.h"
+#include "melee/mp/mplib.h"
+#include "MSL/trigf.h"
+#include "sysdolphin/baselib/aobj.h"
+#include "sysdolphin/baselib/gobj.h"
+#include "sysdolphin/baselib/random.h"
+#endif
+
+#ifdef MUST_MATCH
 double const ftCo_804D89C8 = 0;
 double const ftCo_804D89D0 = S32_TO_F32;
 float const ftCo_804D89D8 = 0;
@@ -250,15 +252,12 @@ extern char* ftCo_804D3B7C;
 // .data
 #endif
 
-#ifdef MUST_MATCH
-#endif
-
 #ifdef WIP
 #pragma force_active on
 #endif
 
 ASM void ftCo_800B3E04(ftCo_Fighter* fp)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -864,7 +863,7 @@ lbl_800B460C:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B462C(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -879,7 +878,7 @@ ASM UNK_RET ftCo_800B462C(UNK_PARAMS)
 #endif /* clang-format on */
 
 ASM void ftCo_800B463C(UNK_T arg0, int arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -922,7 +921,7 @@ lbl_800B468C:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B46B8(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -983,7 +982,7 @@ lbl_800B4750:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B4778(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -1063,7 +1062,7 @@ lbl_800B4858:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B4880(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -1175,7 +1174,7 @@ lbl_800B49CC:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B49F4(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -1220,7 +1219,7 @@ lbl_800B4A3C:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B4A78(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -1245,7 +1244,7 @@ ASM UNK_RET ftCo_800B4A78(UNK_PARAMS)
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B4AB0(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -1821,7 +1820,7 @@ lbl_800B524C:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B52AC(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -2399,7 +2398,7 @@ lbl_800B5A4C:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B5AB0(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -2932,7 +2931,7 @@ lbl_800B61B4:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B6208(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -3018,7 +3017,7 @@ lbl_800B62F8:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B630C(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -3087,7 +3086,7 @@ lbl_800B63C4:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B63D8(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -3217,7 +3216,7 @@ lbl_800B6578:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B658C(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -3412,7 +3411,7 @@ lbl_800B6820:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B683C(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -4048,7 +4047,7 @@ lbl_800B7160:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B7180(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -4176,7 +4175,7 @@ lbl_800B7310:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B732C(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -4403,7 +4402,7 @@ lbl_800B7618:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B7638(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -4532,7 +4531,7 @@ lbl_800B77CC:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B77E8(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -5659,7 +5658,7 @@ entry lbl_800B8840
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B885C(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -5774,7 +5773,7 @@ lbl_800B89C4:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B89CC(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -5844,7 +5843,7 @@ lbl_800B8A84:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B8A9C(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6240,7 +6239,7 @@ lbl_800B900C:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B9020(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6384,7 +6383,7 @@ lbl_800B91F4:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B920C(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6449,7 +6448,7 @@ lbl_800B92C0:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B92D4(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6489,7 +6488,7 @@ lbl_800B932C:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B9340(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6620,7 +6619,7 @@ lbl_800B94E4:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B9504(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6772,7 +6771,7 @@ lbl_800B96EC:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B9704(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6819,7 +6818,7 @@ lbl_800B977C:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B9790(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6915,7 +6914,7 @@ lbl_800B98A8:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B98C8(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -7016,7 +7015,7 @@ lbl_800B99E0:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B9A04(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -7222,7 +7221,7 @@ lbl_800B9C98:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B9CBC(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -7427,7 +7426,7 @@ lbl_800B9F48:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B9F6C(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -7449,7 +7448,7 @@ lbl_800B9F88:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800B9F90(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -7523,7 +7522,7 @@ lbl_800BA068:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800BA080(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -7592,7 +7591,7 @@ lbl_800BA14C:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800BA160(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -7652,7 +7651,7 @@ ASM UNK_RET ftCo_800BA160(UNK_PARAMS)
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800BA224(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -7712,7 +7711,7 @@ ASM UNK_RET ftCo_800BA224(UNK_PARAMS)
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800BA2E8(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -7956,7 +7955,7 @@ lbl_800BA660:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800BA674(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -8174,7 +8173,7 @@ lbl_800BA98C:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800BA9A0(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -8700,7 +8699,7 @@ lbl_800BB0EC:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800BB104(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -8785,7 +8784,7 @@ lbl_800BB204:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800BB220(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -9161,7 +9160,7 @@ lbl_800BB74C:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800BB768(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -9330,7 +9329,7 @@ lbl_800BB998:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800BB9B4(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }

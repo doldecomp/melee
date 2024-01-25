@@ -1,5 +1,4 @@
 #include <platform.h>
-#include "ft/forward.h"
 
 #include "ftCo_09C4.h"
 
@@ -8,6 +7,7 @@
 
 #include "ft/ftanim.h"
 #include "ft/types.h"
+#include "ftDonkey/types.h"
 
 /* 09C540 */ static void ftCo_8009C540(ftCo_GObj* gobj);
 

@@ -1,7 +1,12 @@
 #ifndef _ftlib_h_
 #define _ftlib_h_
 
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
+
 #include "ft/fighter.h"
+#include "ft/types.h"
 
 #include <baselib/gobj.h>
 

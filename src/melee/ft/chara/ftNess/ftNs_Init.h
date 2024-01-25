@@ -1,6 +1,7 @@
 #ifndef GALE01_1147C0
 #define GALE01_1147C0
 
+#include <platform.h>
 #include "ftNess/forward.h"
 #include <baselib/forward.h>
 

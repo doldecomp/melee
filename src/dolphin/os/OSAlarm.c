@@ -2,7 +2,6 @@
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSContext.h>
-#include <dolphin/os/OSError.h>
 #include <dolphin/os/OSException.h>
 #include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>

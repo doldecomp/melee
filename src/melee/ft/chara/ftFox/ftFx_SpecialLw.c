@@ -1,24 +1,27 @@
-#include "forward.h"
-#include "ft/forward.h"
+#include <platform.h>
 
 #include "ftFx_SpecialLw.h"
 
-#include "ftFx_Init.h"
 #include "math.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
+#include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Pass.h"
+#include "ftFox/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
+#include <common_structs.h>
 #include <dolphin/mtx/types.h>
+#include <baselib/gobj.h>
 
 #define FTFOX_SPECIALLW_COLL_FLAG                                             \
     Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_UpdateCmd | Ft_MF_SkipColAnim | \

@@ -1,24 +1,28 @@
-#include "ft/forward.h"
+#include <platform.h>
+#include "lb/forward.h"
 
 #include "ftMs_SpecialN.h"
 
 #include "math.h"
 
 #include "ef/eflib.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftMars/ftMs_Init.h"
+#include "ftMars/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx/types.h>
+#include <baselib/gobj.h>
 
 void ftMs_SpecialN_Enter(HSD_GObj* gobj)
 {

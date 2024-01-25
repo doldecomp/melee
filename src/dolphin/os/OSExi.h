@@ -1,6 +1,9 @@
 #ifndef DOLPHIN_OS_OSEXI_H
 #define DOLPHIN_OS_OSEXI_H
 
+#include <platform.h>
+
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSInterrupt.h>
 
 typedef void (*EXICallback)(s32 chan, OSContext* context);

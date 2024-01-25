@@ -1,23 +1,28 @@
+#include <platform.h>
+#include "lb/forward.h"
+
 #include "ftMs_SpecialLw.h"
 
-#include "ftMs_Init.h"
 #include "math.h"
 
 #include "ef/efsync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
+#include "ftMars/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
+#include <common_structs.h>
 #include <dolphin/mtx/types.h>
+#include <baselib/gobj.h>
 
 void ftMs_SpecialLw_Enter(HSD_GObj* gobj)
 {
@@ -223,7 +228,7 @@ void ftMs_SpecialLwHit_Anim(HSD_GObj* gobj)
 
     if (sv1 > 0 && ftLib_800872A4(gobj) == FTKIND_EMBLEM) {
 /// @todo register swap:
-#ifndef MUST_MATCH
+#if !(defined(MUST_MATCH) && !defined(WIP))
         for (idx = 0; idx < 4; idx++) {
             if (fp->x914[idx].state == HitCapsule_Enabled) {
                 ftColl_8007ABD0(&fp->x914[idx], fp->mv.ms.speciallw.x0, gobj);
@@ -269,7 +274,7 @@ void ftMs_SpecialAirLwHit_Anim(HSD_GObj* gobj)
 
     if (sv1 > 0 && ftLib_800872A4(gobj) == FTKIND_EMBLEM) {
 /// @todo register swap:
-#ifndef MUST_MATCH
+#if !(defined(MUST_MATCH) && !defined(WIP))
         for (idx = 0; idx < 4; idx++) {
             if (fp->x914[idx].state == HitCapsule_Enabled) {
                 ftColl_8007ABD0(&fp->x914[idx], fp->mv.ms.speciallw.x0, gobj);

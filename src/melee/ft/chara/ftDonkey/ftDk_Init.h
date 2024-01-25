@@ -6,6 +6,8 @@
 
 #include "ft/types.h"
 
+#include <stdbool.h>
+
 /* 10D740 */ void ftDk_Init_OnDeath(HSD_GObj* gobj);
 /* 10D774 */ void ftDk_Init_8010D774(HSD_GObj* gobj);
 /* 10D7A8 */ void ftDk_Init_OnItemPickup(HSD_GObj* gobj, bool flag);

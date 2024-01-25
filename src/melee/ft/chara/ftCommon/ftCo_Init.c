@@ -1,4 +1,5 @@
 #include <platform.h>
+#include "ftCommon/forward.h"
 
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackAir.h"
@@ -82,7 +83,6 @@
 #include "ft/ftcamera.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcolanim.h"
-#include "ft/ftdemo.h"
 #include "ft/ftlipstickswing.h"
 #include "ft/ftstarrodswing.h"
 #include "ft/ftswing.h"

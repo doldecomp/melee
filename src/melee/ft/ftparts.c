@@ -3,22 +3,26 @@
 #include "ft/ftparts.h"
 
 #include "ft/fighter.h"
-#include "ft/ftanim.h"
-#include "ft/ftdata.h"
-#include "ft/ftmaterial.h"
 #include "lb/lbrefract.h"
 
 #include <placeholder.h>
-#include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
-#include <baselib/displayfunc.h>
+#include <baselib/class.h>
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <baselib/mobj.h>
 #include <baselib/mtx.h>
-#include <baselib/perf.h>
 #include <baselib/pobj.h>
+
+#ifdef MUST_MATCH
+#include "ftdata.h"
+#include "ftmaterial.h"
+
+#include <dolphin/gx/GXTransform.h>
+#include <baselib/displayfunc.h>
 #include <baselib/util.h>
+#endif
 
 #define MAX_FT_PARTS 140
 
@@ -47,7 +51,7 @@ static char ftParts_803C0A70[] = "fighter dobj num over! player %d\n";
 static char ftParts_803C0A94[] = "fighter parts num over! player %d\n";
 static char ftParts_803C0AB8[] = "fighter parts num not match! player %d\n";
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 static char ftParts_803C0AE0[] = "fighter parts model num over!\n";
 static char ftParts_803C0B00[] = "can't find tobj!\n";
 static char ftParts_803C0B14[] = "fighter parts model dobj num over!\n";
@@ -60,7 +64,7 @@ static char ftParts_803C0B7C[] = "cant set fighter rot y!\n";
 static char ftParts_803C0B98[] = "cant set fighter rot z!\n";
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 static char ftParts_803C0BB4[] = "cant get fighter rot x!\n";
 static char ftParts_803C0BD0[] = "cant get fighter rot y!\n";
 #endif
@@ -81,14 +85,14 @@ static char ftParts_804D3A30[] = "jobj.h";
 static char ftParts_804D3A38[] = "jobj";
 static char ftParts_804D3A40[] = "ft_jobj";
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 static char ftParts_804D3A48[] = "jp->mtx";
 #endif
 
 static char ftParts_804D3A50[] = "ft_pobj";
 static char ftParts_804D3A58[] = "0";
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 static char ftParts_804D3A5C[] = "rotate";
 #endif
 
@@ -142,7 +146,7 @@ void ftParts_JObjInfoInit(void)
     HSD_JOBJ_INFO(&ftJObj)->make_pmtx = ftParts_JObjMakePositionMtx;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_80073758(HSD_JObj*)
@@ -170,7 +174,7 @@ void ftParts_80073758(HSD_JObj* arg0)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm s32 ftParts_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint,
@@ -219,7 +223,7 @@ void ftParts_IntpJObjInfoInit(void)
     HSD_JOBJ_INFO(&ftIntpJObj)->load = ftParts_IntpJObjLoad;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_80073830(void)
@@ -343,7 +347,7 @@ void ftParts_80073830(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_800739B8(void)
@@ -565,7 +569,7 @@ void ftParts_800739B8(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_80073CA8(void)
@@ -841,7 +845,7 @@ void ftParts_80073CA8(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
@@ -908,7 +912,7 @@ void ftParts_PObjInfoInit(void)
     HSD_POBJ_INFO(&ftPObj)->setup_mtx = ftParts_PObjSetupMtx;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_80074148(void)
@@ -936,7 +940,7 @@ void ftParts_80074148(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_80074170(void)
@@ -963,9 +967,7 @@ void ftParts_80074170(void)
 
 #endif
 
-#include <dolphin/os.h>
-
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
@@ -1219,7 +1221,7 @@ void ftParts_SetupParts(HSD_GObj* fighter_obj)
     }
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_8007462C(void)
@@ -1390,7 +1392,7 @@ void ftParts_8007462C(void)
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftParts_8007482C(void)
 { // clang-format off
@@ -1424,7 +1426,7 @@ void ftParts_8007482C(void)
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftParts_8007487C(unk_t item, u32*, u8 costume_id, u32*, u32*)
 { // clang-format off
@@ -1532,7 +1534,7 @@ void ftParts_8007487C(unk_t item, u32* arg1, u8 costume_id, u32* arg3,
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_800749CC(HSD_GObj*)
@@ -1581,7 +1583,7 @@ void ftParts_800749CC(HSD_GObj* arg0)
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftParts_80074A4C(HSD_GObj*, enum_t, enum_t)
 { // clang-format off
@@ -1605,7 +1607,7 @@ void ftParts_80074A4C(HSD_GObj* arg0, enum_t arg1, enum_t arg2)
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm s32 ftParts_80074A74(HSD_GObj*,
                          s32){ // clang-format off
@@ -1625,7 +1627,7 @@ s32 ftParts_80074A74(HSD_GObj* arg0, s32 arg1)
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftParts_80074A8C(HSD_GObj*)
 { // clang-format off
@@ -1657,7 +1659,7 @@ void ftParts_80074A8C(HSD_GObj* arg0)
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_80074ACC(ftCo_GObj* gobj)
@@ -1690,7 +1692,7 @@ void ftParts_80074ACC(ftCo_GObj* gobj)
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_80074B0C(HSD_GObj*, int, int)
@@ -1730,7 +1732,7 @@ void ftParts_80074B0C(HSD_GObj* gobj, int arg1, int arg2)
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_80074B6C(void)
@@ -1828,7 +1830,7 @@ lbl_80074C8C:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_80074CA0(u32*, s32, u32*)
@@ -1900,7 +1902,7 @@ lbl_80074D68:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_80074D7C(u32*, s32, u32*)
@@ -1972,7 +1974,7 @@ lbl_80074E44:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_80074E58(Fighter*)
@@ -2093,7 +2095,7 @@ lbl_80074EC8:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 // clang-format off
 asm Fighter_Part ftParts_8007500C(Fighter*, Fighter_Part)
@@ -2110,7 +2112,7 @@ asm Fighter_Part ftParts_8007500C(Fighter*, Fighter_Part)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftParts_80075028(void)
 { // clang-format off
@@ -2137,7 +2139,7 @@ lbl_80075064:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm u32 ftParts_8007506C(s32 ftkind, u32 part)
 {
@@ -2173,7 +2175,7 @@ lbl_800750C0:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_800750C8(void)
@@ -2294,7 +2296,7 @@ void ftParts_800750C8(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_80075240(void)
@@ -2369,7 +2371,7 @@ void ftParts_80075240(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_80075304(void)
@@ -2452,7 +2454,7 @@ void ftParts_80075304(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_800753D4(Fighter*, s32, unk_t)
@@ -2608,7 +2610,7 @@ void ftParts_800753D4(Fighter* arg0, s32 arg1, unk_t arg2)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_800755E8(void)
@@ -2652,7 +2654,7 @@ void ftParts_800755E8(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_80075650(HSD_GObj* gobj, HSD_JObj*, u32*)
@@ -2829,7 +2831,7 @@ void ftParts_80075650(HSD_GObj* gobj, HSD_JObj* arg1, u32* arg2)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
@@ -2908,7 +2910,7 @@ void ftParts_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_8007592C(Fighter*, s32, f32)
@@ -3050,7 +3052,7 @@ void ftParts_8007592C(Fighter* arg0, s32 arg1, f32 arg2)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_80075AF0(Fighter*, s32, f32)
@@ -3192,7 +3194,7 @@ void ftParts_80075AF0(Fighter* arg0, s32 arg1, f32 arg2)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftParts_80075CB4(Fighter*, s32, f32)
@@ -3334,7 +3336,7 @@ void ftParts_80075CB4(Fighter* arg0, s32 arg1, f32 arg2)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm f32 ftParts_80075E78(Fighter*, bool)
@@ -3409,7 +3411,7 @@ f32 ftParts_80075E78(Fighter* arg0, bool arg1)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm f32 ftParts_80075F48(Fighter*, s32)

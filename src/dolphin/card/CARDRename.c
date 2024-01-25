@@ -5,6 +5,7 @@
 #include <dolphin/card/CARDDir.h>
 #include <dolphin/card/CARDOpen.h>
 #include <dolphin/card/CARDRename.h>
+#include <dolphin/dvd/dvd.h>
 #include <dolphin/os/OSTime.h>
 
 s32 CARDRenameAsync(s32 chan, const char* old, const char* new,

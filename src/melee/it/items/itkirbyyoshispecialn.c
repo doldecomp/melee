@@ -1,3 +1,6 @@
+#include <platform.h>
+#include "ftKirby/forward.h"
+
 #include "itkirbyyoshispecialn.h"
 
 #include "ft/chara/ftKirby/ftKb_Init.h"
@@ -7,6 +10,8 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
+
+#include <common_structs.h>
 
 /* 2F2E68 */ static bool it_802F2E68(Item_GObj* gobj);
 /* 2F2E70 */ static void it_802F2E70(Item_GObj* gobj);

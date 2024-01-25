@@ -1,3 +1,6 @@
+#include <platform.h>
+#include "ftYoshi/forward.h"
+
 #include "it_2F2B.h"
 
 #include "ft/chara/ftYoshi/ftYs_Guard.h"
@@ -7,6 +10,8 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
+
+#include <common_structs.h>
 
 /* 2F2CCC */ static bool it_802F2CCC(Item_GObj* gobj);
 /* 2F2CD4 */ static void it_802F2CD4(Item_GObj* gobj);

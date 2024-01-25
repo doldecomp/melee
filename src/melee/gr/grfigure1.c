@@ -1,13 +1,21 @@
+#include <platform.h>
+#include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
+
 #include "gr/grfigure1.h"
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/types.h"
 #include "lb/lb_00F9.h"
 
 #include <dolphin/os.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 
 static void grFigure1_8020DFDC(int);
 static void grFigure1_8020DFE0(void);

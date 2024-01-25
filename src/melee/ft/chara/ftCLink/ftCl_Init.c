@@ -1,22 +1,23 @@
 #include "forward.h"
+#include "ftCommon/forward.h"
 #include "ftLink/forward.h"
 #include "it/forward.h"
+#include <baselib/forward.h>
 
 #include "ftCl_Init.h"
 
 #include "ftCl_AppealS.h"
 #include "inlines.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftattacks4combo.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_AirCatch.h"
 #include "ftCommon/ftCo_Guard.h"
@@ -26,7 +27,11 @@
 #include "ftLink/ftLk_SpecialN.h"
 #include "ftLink/ftLk_SpecialS.h"
 #include "ftLink/types.h"
+#include "it/it_26B1.h"
 #include "lb/lbmthp.h"
+
+#include <common_structs.h>
+#include <baselib/gobj.h>
 
 MotionState ftCl_Init_MotionStateTable[ftLk_MS_SelfCount] = {
     {

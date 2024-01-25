@@ -1,6 +1,7 @@
 #include <platform.h>
 #include "ft/forward.h"
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_ItemGet.h"
 
@@ -9,26 +10,30 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftchangeparam.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/ftlib.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_0A01.h"
 #include "ftCommon/ftCo_WarpStar.h"
+#include "ftCommon/types.h"
 #include "ftDonkey/ftDk_HeavyWait0.h"
+#include "it/it_26B1.h"
 #include "it/item.h"
 #include "pl/pl_0371.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
+#include <m2c_macros.h>
+#include <dolphin/os.h>
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 /* static */ float const ftCo_804D8580 = 30000;
 /* static */ float const ftCo_804D8584 = 1;
 /* static */ float const ftCo_804D8588 = 0;
@@ -93,7 +98,7 @@ ret_false:
     return false;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm ftCo_GObj* ftCo_800942A0(ftCo_GObj* gobj, u32 flags){
     // clang-format off
@@ -306,7 +311,7 @@ HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm bool ftCo_8009447C(ftCo_GObj* gobj, HSD_GObj* arg1)
 { // clang-format off
@@ -522,7 +527,7 @@ block_35:
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80094694(ftCo_GObj* gobj, enum_t, bool)
 { // clang-format off
@@ -674,7 +679,7 @@ void ftCo_80094818(HSD_GObj* gobj, int arg1)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj)
 { // clang-format off
@@ -829,7 +834,7 @@ void ftCo_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_ItemGet_Anim(ftCo_GObj*)
 { // clang-format off
@@ -972,7 +977,7 @@ void ftCo_ItemGet_Coll(HSD_GObj* gobj)
     ft_800841B8(gobj, ftCo_80094D90);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm static void ftCo_80094B6C(ftCo_GObj* gobj, Item_GObj* item_gobj)
 { // clang-format off
@@ -1208,7 +1213,7 @@ void ftCo_80094D90(HSD_GObj* gobj)
     ftCo_800CC730(gobj);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80094DF8(ftCo_GObj*)
 { // clang-format off

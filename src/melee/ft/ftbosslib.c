@@ -1,19 +1,26 @@
+#include "ftCommon/forward.h"
+
 #include "ftbosslib.h"
 
-#include "fighter.h"
 #include "ft_0877.h"
 #include "ftlib.h"
 #include "math.h"
 
 #include "cm/camera.h"
 #include "ft/inlines.h"
-#include "it/item.h"
+#include "ft/types.h"
+#include "ftMasterHand/types.h"
+#include "it/it_26B1.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
+#include "pl/player.h"
 
-#include <dolphin/mtx/types.h>
 #include <dolphin/os.h>
+#include <baselib/debug.h>
 #include <baselib/gobj.h>
+#include <baselib/jobj.h>
+#include <baselib/random.h>
+#include <MetroTRK/intrinsics.h>
 
 typedef enum {
     Gm_PKind_Human,

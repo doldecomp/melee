@@ -1,4 +1,9 @@
+#include <platform.h>
+#include <dolphin/dvd/forward.h>
+
+#include <dolphin/dvd/dvd.h>
 #include <dolphin/dvd/dvdfs.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSBootInfo.h>
 #include <dolphin/os/OSThread.h>
 #include <MSL/ctype.h>

@@ -7,6 +7,7 @@
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSFont.h>
 #include <dolphin/os/OSRtc.h>
+#include <dolphin/os/OSTime.h>
 
 extern vu16 __VIRegs[59] AT_ADDRESS(0xCC002000);
 

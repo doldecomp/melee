@@ -2,6 +2,7 @@
 #define GALE01_2ADA1C
 
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "it/types.h"
 

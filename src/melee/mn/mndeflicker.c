@@ -2,12 +2,10 @@
 #include <baselib/forward.h>
 
 #include "lb/lbarchive.h"
-#include "sc/scene.h"
+#include "sc/types.h"
 
-#include <common_structs.h>
-#include <dolphin/mtx/types.h>
-#include <baselib/aobj.h>
-#include <baselib/controller.h>
+#include <dolphin/os.h>
+#include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
@@ -16,8 +14,6 @@
 #include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/memory.h>
-#include <baselib/mobj.h>
-#include <baselib/random.h>
 #include <baselib/sislib.h>
 
 //@todo: float order hack

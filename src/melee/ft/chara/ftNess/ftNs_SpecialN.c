@@ -1,18 +1,24 @@
-#include "forward.h"
+#include <platform.h>
+#include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftNess/ftNs_SpecialN.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftNess/ftNs_Init.h"
+#include "ftNess/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
+
+#include <common_structs.h>
 
 // SpecialN/SpecialAirN (PK Flash)
 #define FTNESS_SPECIALN_COLL_FLAG                                             \

@@ -9,8 +9,10 @@
 #include <dolphin/os.h>
 #include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSCache.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
+#include <dolphin/os/OSTime.h>
 
 // Callback / state-change function declarations
 static void cbForCancelAllSync(s32, DVDCommandBlock*);

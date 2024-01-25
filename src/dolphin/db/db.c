@@ -2,6 +2,7 @@
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/db/db.h>
 #include <dolphin/os.h>
+#include <dolphin/os/OSContext.h>
 
 static DBInterface* __DBInterface;
 static int DBVerbose;
@@ -38,7 +39,7 @@ static void __DBExceptionDestinationAux(void)
     PPCHalt();
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 static asm void __DBExceptionDestination(void)
 { // clang-format off
     nofralloc

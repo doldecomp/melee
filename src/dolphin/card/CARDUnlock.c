@@ -4,9 +4,12 @@
 
 #include <__mem.h>
 #include <rand.h>
-#include <string.h>
 #include <dolphin/card.h>
+#include <dolphin/dsp/dsp.h>
 #include <dolphin/os.h>
+#include <dolphin/os/OSCache.h>
+#include <dolphin/os/OSExi.h>
+#include <dolphin/os/OSTime.h>
 
 static u8 CardData[] ATTRIBUTE_ALIGN(32) = {
     // clang-format off

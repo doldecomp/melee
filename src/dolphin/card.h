@@ -1,6 +1,7 @@
 #ifndef DOLPHIN_CARD_H
 #define DOLPHIN_CARD_H
 
+#include <platform.h>
 #include <dolphin/card/forward.h>
 
 #include <dolphin/dsp/dsp.h>

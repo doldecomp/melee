@@ -1,6 +1,8 @@
 #ifndef _robj_h_
 #define _robj_h_
 
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include <baselib/aobj.h>

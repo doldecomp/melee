@@ -1,15 +1,22 @@
 #include "math.h"
 
+#include "lb/lbrefract.h"
+
 #include <__mem.h>
 #include <dolphin/mtx/mtxvec.h>
-#include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os.h>
+#include <baselib/aobj.h>
 #include <baselib/class.h>
+#include <baselib/cobj.h>
 #include <baselib/displayfunc.h>
 #include <baselib/dobj.h>
+#include <baselib/fobj.h>
+#include <baselib/id.h>
 #include <baselib/jobj.h>
+#include <baselib/mobj.h>
 #include <baselib/mtx.h>
+#include <baselib/pobj.h>
 #include <baselib/robj.h>
 #include <baselib/spline.h>
 

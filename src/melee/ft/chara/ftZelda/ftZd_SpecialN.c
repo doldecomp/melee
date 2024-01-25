@@ -1,4 +1,5 @@
-#include "ft/forward.h"
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
 
 #include "ftZd_SpecialN.h"
 
@@ -6,13 +7,13 @@
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
+#include "ftZelda/types.h"
 
 void ftZd_SpecialN_8013A830(HSD_GObj* gobj)
 {

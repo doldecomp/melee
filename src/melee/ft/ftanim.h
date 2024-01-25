@@ -1,7 +1,9 @@
 #ifndef MELEE_FT_FTANIM_H
 #define MELEE_FT_FTANIM_H
 
+#include <platform.h>
 #include "ft/forward.h"
+#include <baselib/forward.h>
 
 #include <placeholder.h>
 #include <baselib/gobj.h>

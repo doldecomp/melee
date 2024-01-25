@@ -22,7 +22,7 @@ s32 ReadUARTN(void)
     return 4;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void WriteUARTN(void)

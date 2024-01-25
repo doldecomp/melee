@@ -1,8 +1,7 @@
-#include "ft/forward.h"
+#include <platform.h>
 
 #include "ftPk_SpecialLw.h"
 
-#include "ftPk_Init.h"
 #include "math.h"
 
 #include "cm/camera.h"
@@ -10,15 +9,16 @@
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
+#include "ftPikachu/types.h"
 #include "it/items/it_27CF.h"
 
 #include <dolphin/mtx/types.h>
+#include <baselib/gobj.h>
 
 bool ftPk_SpecialLw_CheckProperty(HSD_GObj* gobj)
 {

@@ -2,29 +2,13 @@
 #define GALE01_0679B0
 
 #include <platform.h>
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
+#include <dolphin/mtx/forward.h>
 
-#include "ft/ftanim.h"
-#include "ft/inlines.h"
+#include "ft/inlines.h" // IWYU pragma: export
 #include "ft/types.h"
-#include "gr/stage.h"
-#include "it/it_26B1.h"
-#include "lb/lbcollision.h"
-#include "lb/lbrefract.h"
-#include "pl/player.h"
 
-#include <common_structs.h>
-#include <dolphin/mtx/types.h>
-#include <baselib/archive.h>
-#include <baselib/controller.h>
-#include <baselib/dobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/random.h>
+#include <placeholder.h>
+#include <baselib/objalloc.h>
 
 /// @todo #Fighter_804D64FC..#Fighter_804D6550 are initialized to 0 in
 ///       #Fighter_LoadCommonData, probably all pointers

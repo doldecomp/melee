@@ -1,5 +1,5 @@
-#include "forward.h"
-#include "ft/forward.h"
+#include "ftCommon/forward.h"
+#include "it/forward.h"
 
 #include "ftNess/ftNs_Init.h"
 
@@ -15,6 +15,10 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftNess/ftNs_SpecialLw.h"
+#include "ftNess/types.h"
+#include "it/it_26B1.h"
+
+#include <baselib/gobj.h>
 
 MotionState ftNs_Init_MotionStateTable[ftNs_MS_SelfCount] = {
     {

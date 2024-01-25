@@ -1,11 +1,24 @@
+#include <platform.h>
+
 #include <placeholder.h>
-#include <dolphin/os/OSAlarm.h>
-#include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInterrupt.h>
-#include <dolphin/os/OSRtc.h>
 #include <dolphin/os/OSSerial.h>
 #include <dolphin/os/OSTime.h>
-#include <dolphin/pad/pad.h>
+#include <dolphin/sipriv.h>
+
+#ifdef MUST_MATCH
+#include "dolphin/os/OSInit.h"
+#include "dolphin/os/OSRtc.h"
+#include "dolphin/pad/pad.h"
+#endif
+
+extern UNK_T OSSerial_804D73C8;
+extern UNK_T VIGetCurrentLine(UNK_PARAMS);
+
+static bool SIGetResponseRaw(s32 chan);
+static void GetTypeCallback(s32 chan, u32 error, OSContext* context);
+static bool __SITransfer(void);
+static bool SIEnablePollingInterrupt(bool enable);
 
 extern struct {
     enum_t status;
@@ -38,7 +51,7 @@ bool SIIsChanBusy(s32 status)
     return result;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 extern unk_t OSSerial_804A7EF8;
 extern unk_t OSSerial_804A7ED8;
@@ -264,15 +277,7 @@ static void CompleteTransfer(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
-
-extern unk_t OSSerial_804D73C8;
-extern unk_t VIGetCurrentLine();
-
-static bool SIGetResponseRaw(s32 chan);
-static void GetTypeCallback(s32 chan, u32 error, OSContext* context);
-static bool __SITransfer(void);
-static bool SIEnablePollingInterrupt(bool enable);
+#ifdef MUST_MATCH
 
 #pragma push
 asm static void SIInterruptHandler(void)
@@ -514,7 +519,7 @@ static void SIInterruptHandler(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm static bool SIEnablePollingInterrupt(bool enable)
@@ -574,7 +579,7 @@ static bool SIEnablePollingInterrupt(bool enable)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 extern unk_t OSSerial_804A7F58;
 
@@ -650,7 +655,7 @@ bool SIRegisterPollingHandler(__OSInterruptHandler handler)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm bool SIUnregisterPollingHandler(__OSInterruptHandler handler)
@@ -734,7 +739,7 @@ bool SIUnregisterPollingHandler(__OSInterruptHandler handler)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void SIInit(void)
@@ -790,7 +795,7 @@ void SIInit(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm static bool __SITransfer(void)
@@ -952,7 +957,7 @@ static bool __SITransfer(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 extern unk_t OSSerial_8040236C;
 
@@ -1031,7 +1036,7 @@ u32 SISetXY(u32 x, u32 y)
     return temp_r4;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm u32 SIEnablePolling(u32 poll)
@@ -1090,7 +1095,7 @@ u32 SIEnablePolling(u32 poll)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm u32 SIDisablePolling(u32 poll)
@@ -1137,10 +1142,10 @@ u32 SIDisablePolling(u32 poll)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
-asm static bool SIGetResponseRaw(s32 chan)
+asm bool SIGetResponseRaw(s32 chan)
 { // clang-format off
     nofralloc
 /* 8034A258 00346E38  7C 08 02 A6 */	mflr r0
@@ -1204,14 +1209,14 @@ lbl_8034A310:
 
 #else
 
-void SIGetResponseRaw(void)
+bool SIGetResponseRaw(s32 chan)
 {
     NOT_IMPLEMENTED;
 }
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm bool SIGetResponse(s32 chan, void* data)
@@ -1280,7 +1285,7 @@ bool SIGetResponse(s32 chan, void* data)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 extern unk_t Alarm;
 
@@ -1336,7 +1341,7 @@ static void AlarmHandler(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm bool SITransfer(s32 chan, void* output, u32 outputBytes, void* input,
@@ -1454,10 +1459,10 @@ bool SITransfer(s32 chan, void* output, u32 outputBytes, void* input,
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
-asm static void GetTypeCallback(s32 chan, u32 error, OSContext* context)
+asm void GetTypeCallback(s32 chan, u32 error, OSContext* context)
 { // clang-format off
     nofralloc
 /* 8034A5E8 003471C8  7C 08 02 A6 */	mflr r0
@@ -1643,14 +1648,14 @@ lbl_8034A86C:
 
 #else
 
-static void GetTypeCallback(void)
+void GetTypeCallback(s32 chan, u32 error, OSContext* context)
 {
     NOT_IMPLEMENTED;
 }
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 extern unk_t OSSerial_804D73CC;
 
@@ -1789,7 +1794,7 @@ u32 SIGetType(s32 arg0)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 extern unk_t OSSerial_804A7F18;
 

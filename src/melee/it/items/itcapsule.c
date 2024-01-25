@@ -1,11 +1,20 @@
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+
 #include "itcapsule.h"
 
 #include "math.h"
 
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/types.h"
 #include "lb/lb_00F9.h"
+
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
+#include <baselib/random.h>
 
 ItemStateTable it_803F5468[] = {
     {
@@ -340,7 +349,7 @@ bool it_8027D4F4(Item_GObj* item_gobj)
     return it_8027D338_autoinlined(item_gobj);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm bool it_8027D530(Item_GObj* item_gobj)
 { // clang-format off

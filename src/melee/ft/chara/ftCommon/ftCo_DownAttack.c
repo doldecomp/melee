@@ -1,5 +1,6 @@
 #include <platform.h>
 #include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_DownAttack.h"
 
@@ -8,12 +9,13 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
+#include "ft/types.h"
+
+#include <common_structs.h>
+#include <baselib/gobj.h>
 
 static Vec4 unk_vec4 = { 14, 0, -3, +3 };
 

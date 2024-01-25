@@ -1,24 +1,22 @@
 #include <platform.h>
-#include "ft/forward.h"
 #include "ftLink/forward.h"
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ftLk_SpecialLw.h"
 
-#include "ftLk_Init.h"
-
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
-#include "ft/ftcoll.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_ItemGet.h"
 #include "ftCommon/ftCo_ItemThrow.h"
-#include "ftLink/types.h"
+#include "it/it_26B1.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 

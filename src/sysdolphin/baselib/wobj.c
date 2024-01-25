@@ -1,7 +1,11 @@
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
+#include <baselib/aobj.h>
 #include <baselib/class.h>
+#include <baselib/debug.h>
+#include <baselib/fobj.h>
 #include <baselib/jobj.h>
+#include <baselib/object.h>
 #include <baselib/robj.h>
 #include <baselib/spline.h>
 #include <baselib/wobj.h>

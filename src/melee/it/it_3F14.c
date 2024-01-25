@@ -1,7 +1,6 @@
 #include "it_266F.h"
 
-#include "it/items/it_27CF.h"
-#include "items/it_27CF.h"
+#include "it/types.h"
 #include "items/itbat.h"
 #include "items/itbombhei.h"
 #include "items/itbox.h"
@@ -45,6 +44,8 @@
 #include "items/ittarucann.h"
 #include "items/ittomato.h"
 #include "items/itwstar.h"
+
+#include <stddef.h>
 
 static int const count = 43;
 

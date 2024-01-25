@@ -1,18 +1,22 @@
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+
 #include "ftMr_SpecialHi.h"
 
 #include "inlines.h"
 #include "math.h"
 #include "types.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 
-#include <baselib/random.h>
+#include <common_structs.h>
 
 void ftMr_SpecialHi_Enter(HSD_GObj* gobj)
 {

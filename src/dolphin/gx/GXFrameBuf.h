@@ -4,6 +4,9 @@
 #include <platform.h>
 #include <dolphin/gx/forward.h>
 
+#include <dolphin/gx/GXEnum.h>
+#include <dolphin/gx/types.h>
+
 extern GXRenderModeObj GXPal528IntDf;
 extern GXRenderModeObj GXMpal480IntDf;
 extern GXRenderModeObj GXFrameBuf_804011E0;

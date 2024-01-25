@@ -2,6 +2,7 @@
 #define MELEE_IF_IFMAGNIFY_H
 
 #include <platform.h>
+#include <baselib/forward.h>
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>

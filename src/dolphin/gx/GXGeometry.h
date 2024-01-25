@@ -1,6 +1,9 @@
 #ifndef DOLPHIN_GX_GXGEOMETRY_H
 #define DOLPHIN_GX_GXGEOMETRY_H
 
+#include <platform.h>
+
+#include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/types.h>
 
 void GXBegin(GXPrimitive type, GXVtxFmt vtxfmt, u16 nverts);

@@ -2,13 +2,14 @@
 #define MELEE_FT_CHARA_FTMARIO_TYPES_H
 
 #include <platform.h>
-#include "forward.h"
+#include "forward.h" // IWYU pragma: export
 #include "ft/forward.h"
+#include "ftMario/forward.h" // IWYU pragma: export
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include <common_structs.h>
-#include <dolphin/mtx/types.h>
 
 struct ftMario_FighterVars {
     /// Current Megavitamin color combo

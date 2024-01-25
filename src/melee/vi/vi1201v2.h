@@ -2,6 +2,7 @@
 #define _vi1201v2_h_
 
 #include <platform.h>
+#include <baselib/forward.h>
 
 #include <sysdolphin/baselib/gobj.h>
 

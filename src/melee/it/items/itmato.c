@@ -1,4 +1,10 @@
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+
 #include "itmato.h"
+
+#include "it/itCommonItems.h"
+#include "it/types.h"
 
 #include <melee/gr/ground.h>
 #include <melee/it/item.h>

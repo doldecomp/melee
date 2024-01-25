@@ -4,8 +4,10 @@
 #include <dolphin/card/CARDMount.h>
 #include <dolphin/card/CARDRdwr.h>
 #include <dolphin/card/CARDUnlock.h>
+#include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSExi.h>
+#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSRtc.h>
 
 u8 GameChoice AT_ADDRESS(0x800030E3);

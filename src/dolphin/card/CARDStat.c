@@ -4,6 +4,7 @@
 #include <dolphin/card/CARDDir.h>
 #include <dolphin/card/CARDOpen.h>
 #include <dolphin/card/CARDStat.h>
+#include <dolphin/os/OSTime.h>
 
 #define CARDGetBannerFormat(stat)                                             \
     (((stat)->bannerFormat) & CARD_STAT_BANNER_MASK)

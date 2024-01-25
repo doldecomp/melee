@@ -1,17 +1,18 @@
+#include <dolphin/mtx/forward.h>
+
 #include "ithammer.h"
 
 #include "ithammerhead.h"
 
-#include "db/db_2253.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/types.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
-#include <MSL/math.h>
+#include <baselib/random.h>
 
 ItemStateTable it_803F6150[] = {
     { -1, it_80293FF4, it_80293FFC, it_80294000 },

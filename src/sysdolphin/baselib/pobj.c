@@ -1,23 +1,29 @@
 #include <dolphin/gx/forward.h>
+#include <baselib/forward.h>
 
 #include <__mem.h>
 #include <math.h>
-#include <string.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXDisplayList.h>
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/GXVert.h>
+#include <dolphin/mtx.h>
 #include <dolphin/os.h>
+#include <baselib/aobj.h>
 #include <baselib/class.h>
+#include <baselib/debug.h>
 #include <baselib/displayfunc.h>
+#include <baselib/fobj.h>
+#include <baselib/id.h>
 #include <baselib/jobj.h>
 #include <baselib/memory.h>
 #include <baselib/mtx.h>
 #include <baselib/perf.h>
 #include <baselib/pobj.h>
 #include <baselib/state.h>
+#include <baselib/tobj.h>
 #include <baselib/util.h>
 
 static void PObjInfoInit(void);

@@ -1,6 +1,7 @@
 #ifndef GALE01_1422E8
 #define GALE01_1422E8
 
+#include <platform.h>
 #include "ftLuigi/forward.h"
 #include <baselib/forward.h>
 

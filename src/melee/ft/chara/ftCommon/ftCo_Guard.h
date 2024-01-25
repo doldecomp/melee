@@ -4,6 +4,7 @@
 #include <platform.h>
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 #include <placeholder.h>

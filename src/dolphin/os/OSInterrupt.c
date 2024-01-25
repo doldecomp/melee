@@ -1,6 +1,5 @@
 #include <__mem.h>
 #include <placeholder.h>
-#include <string.h>
 #include <dolphin/ai/ai.h>
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/os.h>
@@ -9,6 +8,7 @@
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/os/OSThread.h>
+#include <dolphin/os/OSTime.h>
 #include <MetroTRK/intrinsics.h>
 
 static __OSInterruptHandler* InterruptHandlerTable;

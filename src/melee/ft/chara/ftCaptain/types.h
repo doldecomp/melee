@@ -3,7 +3,9 @@
 
 #include <platform.h>
 #include "ft/forward.h"
-#include "ftCaptain/forward.h"
+#include "ftCaptain/forward.h" // IWYU pragma: export
+
+#include <dolphin/mtx/types.h>
 
 struct ftCaptain_FighterVars {
     /* 0x222C */ u32 during_specials_start;

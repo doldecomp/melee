@@ -1,7 +1,10 @@
 #ifndef DOLPHIN_DVD_DVDLOW_H
 #define DOLPHIN_DVD_DVDLOW_H
 
+#include <platform.h>
+
 #include <dolphin/dvd/dvd.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSInterrupt.h>
 
 void __DVDInitWA(void);

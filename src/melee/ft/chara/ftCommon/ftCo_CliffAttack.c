@@ -1,5 +1,4 @@
 #include <platform.h>
-#include "ft/forward.h"
 
 #include "ftCo_CliffAttack.h"
 
@@ -8,8 +7,12 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+
+#include <common_structs.h>
 
 /* 09AEA4 */ static void ftCo_8009AEA4(ftCo_GObj* gobj);
 

@@ -1,5 +1,5 @@
 #include <platform.h>
-#include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_CliffClimb.h"
 
@@ -9,12 +9,16 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 #include "mp/mplib.h"
+
+#include <common_structs.h>
 
 /* 09AAFC */ static bool ftCo_8009AAFC(ftCo_GObj* gobj, bool arg1,
                                        float stick_x, float stick_angle);

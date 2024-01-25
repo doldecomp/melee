@@ -1,5 +1,6 @@
 #include "vi/vi1202.h"
 
+#include <baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
 void un_8032110C(HSD_GObj* gobj)

@@ -6,6 +6,8 @@
 
 #include "ft/types.h"
 
+#include <stdbool.h>
+
 /* 11B51C */ void ftPe_Init_OnDeath(HSD_GObj* gobj);
 /* 11B628 */ void ftPe_Init_OnLoad(HSD_GObj* gobj);
 /* 11B704 */ void ftPe_Init_OnDeath2(HSD_GObj* gobj);

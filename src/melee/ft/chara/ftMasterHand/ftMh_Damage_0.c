@@ -1,15 +1,22 @@
+#include <platform.h>
+
 #include "ftMh_Damage_0.h"
 
 #include "ftMh_ThrownMasterHand.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
+#include "ftMasterHand/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
+
+#include <baselib/gobj.h>
 
 bool ftMh_MS_343_80151428(Vec3* vec)
 {

@@ -3,6 +3,8 @@
 
 #include <baselib/forward.h>
 
+#include <stdbool.h>
+
 /* 125D80 */ void ftPk_SpecialHi_UpdateVel(HSD_GObj* gobj);
 /* 125DE8 */ void ftPk_SpecialHi_Enter(HSD_GObj* gobj);
 /* 125E60 */ void ftPk_SpecialAirHi_Enter(HSD_GObj* gobj);

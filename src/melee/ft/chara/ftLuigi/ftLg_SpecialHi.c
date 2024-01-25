@@ -1,19 +1,22 @@
+#include <platform.h>
 #include "forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftLg_SpecialHi.h"
 
-#include "ftLg_Init.h"
 #include "math.h"
 #include "types.h"
 
-#include "ef/efsync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+
+#include <common_structs.h>
 
 // 0x80143FC8
 // https://decomp.me/scratch/MAoxx // Luigi's grounded Super Jump Punch Action

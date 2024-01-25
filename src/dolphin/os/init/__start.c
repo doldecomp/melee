@@ -1,5 +1,7 @@
+#include <__mem.h>
 #include <placeholder.h>
 #include <dolphin/os/init/__start.h>
+#include <dolphin/os/OSReset.h>
 
 #define RESET_BUTTON_MASK 0x0EEF
 
@@ -10,7 +12,7 @@ void __check_pad3(void)
     }
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 asm void __start(void)
 { // clang-format off

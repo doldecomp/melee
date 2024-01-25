@@ -1,8 +1,8 @@
 #include "itpeachparasol.h"
 
+#include <common_structs.h>
 #include <melee/db/db_2253.h>
 #include <melee/ft/chara/ftPeach/ftPe_SpecialHi.h>
-#include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
 

@@ -1,6 +1,5 @@
+#include <platform.h>
 #include "forward.h"
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
 
 #include "ftMs_Init.h"
 
@@ -11,14 +10,14 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
-#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftMars/types.h"
 
-#include <common_structs.h>
+#include <baselib/gobj.h>
 
 MotionState ftMs_Init_MotionStateTable[ftMs_MS_SelfCount] = {
     {

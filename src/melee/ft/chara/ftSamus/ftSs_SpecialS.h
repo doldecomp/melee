@@ -1,6 +1,7 @@
 #ifndef GALE01_110490
 #define GALE01_110490
 
+#include <platform.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"

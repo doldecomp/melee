@@ -1,5 +1,6 @@
+#include <platform.h>
+
 #include <__mem.h>
-#include <string.h>
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSAudioSystem.h>

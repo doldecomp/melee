@@ -1,9 +1,12 @@
+#include <platform.h>
+#include "lb/forward.h"
+#include <baselib/forward.h>
+
 #include "gr/grtlink.h"
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
-#include "gr/grtzelda.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
@@ -11,8 +14,9 @@
 
 #include <dolphin/mtx/types.h>
 #include <dolphin/os.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
-#include <baselib/jobj.h>
+#include <baselib/gobjproc.h>
 
 void grTLink_8022192C(int);                   /* static */
 void grTLink_80221930(void);                  /* static */

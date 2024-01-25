@@ -1,22 +1,24 @@
 #include "forward.h"
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
-#include "ftMario/forward.h"
 
 #include "ftKb_Init.h"
 
 #include "types.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "it/it_26B1.h"
+#include "pl/player.h"
 
-#include <dolphin/mtx/types.h>
+#include <baselib/random.h>
+
+#ifdef MUST_MATCH
+#include "melee/ft/ft_0877.h"
+#endif
 
 MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount] = {
     {
@@ -2948,7 +2950,7 @@ f32 const ftKb_Init_803B7548[10] = { 0 };
 Vec3 const ftKb_Init_803B7570 = { 0, 4, 0 };
 Vec3 const ftKb_Init_803B757C = { 0, 4, 0 };
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftKb_Init_800EE528(void)
 { // clang-format off

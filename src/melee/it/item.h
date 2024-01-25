@@ -6,8 +6,13 @@
 #define MELEE_IT_ITEM_H
 
 #include <platform.h>
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "it/types.h"
+
+#include <baselib/gobj.h>
+#include <baselib/objalloc.h>
 
 extern HSD_ObjAllocData itemAllocData;
 extern HSD_ObjAllocData unkAllocData1;

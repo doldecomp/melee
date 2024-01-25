@@ -1,8 +1,10 @@
+#include "ft/forward.h"
+
 #include "ftDk_MS_345_0.h"
 
-#include "ft/ft_0877.h"
 #include "ft/ft_0C88.h"
 #include "ft/inlines.h"
+#include "ftDonkey/types.h"
 
 static void ifSomething(HSD_GObj* gobj);
 

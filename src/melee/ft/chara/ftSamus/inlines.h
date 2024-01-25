@@ -1,5 +1,13 @@
 #ifndef MELEE_FT_CHARA_FTSAMUS_INLINES_H
+#include "it/forward.h"
+#include <baselib/forward.h>
+
+#include "ftSamus/types.h"
 #include "it/items/it_27CF.h"
+
+#include <stddef.h>
+#include <baselib/gobj.h>
+
 #define MELEE_FT_CHARA_FTSAMUS_INLINES_H
 
 #include "ef/eflib.h"

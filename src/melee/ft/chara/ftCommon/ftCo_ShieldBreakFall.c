@@ -1,4 +1,5 @@
 #include <platform.h>
+#include "ft/forward.h"
 
 #include "ftCo_ShieldBreakFall.h"
 
@@ -7,8 +8,6 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ftcommon.h"
-
-#include <placeholder.h>
 
 void ftCo_80098D90(ftCo_GObj* gobj)
 {

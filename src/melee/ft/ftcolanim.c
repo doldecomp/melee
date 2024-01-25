@@ -1,13 +1,14 @@
-#include "ft/forward.h"
-
 #include "ftcolanim.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_0C31.h"
 #include "ft/ftaction.h"
-#include "ft/ftdata.h"
-#include "ftCommon/ftCo_HammerWait.h"
+#include "ft/types.h"
 #include "lb/lb_00F9.h"
+
+#ifdef MUST_MATCH
+#include "melee/ft/chara/ftCommon/ftCo_HammerWait.h"
+#include "melee/ft/fighter.h"
+#include "melee/ft/ftdata.h"
+#endif
 
 #ifdef WIP
 #pragma force_active on
@@ -74,7 +75,7 @@ static void ftCo_800BFF14(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 
 ASM UNK_RET ft_800BFF34(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -100,7 +101,7 @@ ASM UNK_RET ft_800BFF34(UNK_PARAMS)
 #endif /* clang-format on */
 
 ASM void ft_800BFF70(Fighter_GObj* gobj, FtCmdState* cmd, int arg0)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     ftCo_803C6ADC[arg0 - 0x15](gobj, cmd);
 }
@@ -131,7 +132,7 @@ void ftCo_800BFFAC(Fighter* fp)
 }
 
 ASM bool ftCo_800BFFD0(Fighter* fp, enum_t arg1, bool arg2)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -192,7 +193,7 @@ void ftCo_800C0074(Fighter* fp)
 }
 
 ASM UNK_RET ft_800C0098(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -245,7 +246,7 @@ lbl_800C0120:
 #endif /* clang-format on */
 
 ASM void ftCo_800C0134(Fighter* fp)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -311,7 +312,7 @@ lbl_800C01EC:
 #endif /* clang-format on */
 
 ASM void ftCo_800C0200(Fighter* fp, int arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -416,7 +417,7 @@ lbl_800C0344:
 #endif /* clang-format on */
 
 ASM void ftCo_800C0358(Fighter* fp, Fighter* arg1, s32 arg2)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -476,7 +477,7 @@ lbl_800C03F8:
 #endif /* clang-format on */
 
 ASM void ftCo_800C0408(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }

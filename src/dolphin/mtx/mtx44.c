@@ -1,3 +1,6 @@
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+
 #include <dolphin/mtx.h>
 #include <MSL/math.h>
 

@@ -1,23 +1,27 @@
 #include <platform.h>
-#include "ft/forward.h"
-#include "ftCaptain/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCaptain/ftCa_SpecialLw.h"
 
-#include "ef/efasync.h"
 #include "ef/eflib.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
-#include "ft/ftlib.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
+#include "ftCaptain/types.h"
 
 #include <common_structs.h>
+#include <placeholder.h>
 #include <baselib/gobj.h>
+
+#ifdef MUST_MATCH
+#include "melee/ef/efasync.h"
+#include "melee/ft/ftlib.h"
+#endif
 
 /// @todo These are all literals.
 float const ftCa_SpecialHi_804D9220 = 0;
@@ -25,7 +29,7 @@ float const ftCa_SpecialHi_804D9224 = 0.01745329238474369f;
 float const ftCa_SpecialHi_804D9228 = 1;
 float const ftCa_SpecialHi_804D922C = -1;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 static asm void ftCa_SpecialHi_800E3EAC(HSD_GObj*)
 { // clang-format off
@@ -147,7 +151,7 @@ static void ftCa_SpecialHi_800E400C(HSD_GObj* gobj)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialLw_Enter(HSD_GObj*)
 { // clang-format off
@@ -216,7 +220,7 @@ void ftCa_SpecialLw_Enter(HSD_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialAirLw_Enter(HSD_GObj*)
 { // clang-format off
@@ -277,7 +281,7 @@ void ftCa_SpecialAirLw_Enter(HSD_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialLw_Anim(HSD_GObj*)
 { // clang-format off
@@ -406,7 +410,7 @@ void ftCa_SpecialLwEndAir_Anim(HSD_GObj* gobj)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialAirLw_Anim(HSD_GObj*)
 { // clang-format off
@@ -485,7 +489,7 @@ void ftCa_SpecialHiThrow1_Anim(HSD_GObj* gobj)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialLw_Phys(HSD_GObj*)
 { // clang-format off
@@ -552,7 +556,7 @@ void ftCa_SpecialLw_Phys(HSD_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialLwEnd_Phys(HSD_GObj*)
 { // clang-format off
@@ -641,7 +645,7 @@ void ftCa_SpecialLwEnd_Phys(HSD_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialLwEndAir_Phys(HSD_GObj*)
 { // clang-format off
@@ -710,7 +714,7 @@ void ftCa_SpecialAirLw_Phys(HSD_GObj* gobj)
     ftCa_SpecialHi_800E3EAC(gobj);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialAirLwEnd_Phys(HSD_GObj*)
 { // clang-format off
@@ -774,7 +778,7 @@ void ftCa_SpecialHiThrow1_Phys(HSD_GObj* gobj)
     ft_80085134(gobj);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialLw_Coll(HSD_GObj*)
 { // clang-format off
@@ -907,7 +911,7 @@ void ftCa_SpecialLwEndAir_Coll(Fighter_GObj* gobj)
     ftCa_SpecialLwEnd_Coll(gobj);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialAirLw_Coll(HSD_GObj*)
 { // clang-format off
@@ -974,7 +978,7 @@ void ftCa_SpecialAirLwEnd_Coll(HSD_GObj* gobj)
     ft_80084104(gobj);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialAirLwEndAir_Coll(HSD_GObj*)
 { // clang-format off

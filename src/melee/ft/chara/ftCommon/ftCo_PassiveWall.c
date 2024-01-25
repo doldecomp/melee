@@ -1,5 +1,7 @@
+#include <platform.h>
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_PassiveWall.h"
 
@@ -16,16 +18,20 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0CEE.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "ftCommon/types.h"
 #include "ftKirby/ftKb_Init.h"
 #include "lb/lb_00CE.h"
+
+#include <common_structs.h>
+#include <placeholder.h>
 
 /* literal */ extern float const ftCo_804D8C60;
 /* literal */ extern float const ftCo_804D8C64;
@@ -58,7 +64,7 @@ bool ftCo_800C1D38(ftCo_GObj* gobj)
 }
 
 ASM bool ftCo_800C1E0C(Fighter* fp)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     if (fp->x67E < p_ftCommonData->x250 ||
         fp->input.lstick.y >= p_ftCommonData->x70_someLStickYMax)
@@ -101,7 +107,7 @@ lbl_800C1E5C:
 
 ASM void ftCo_800C1E64(ftCo_GObj* gobj, int msid, int timer,
                        int vel_y_exponent, float facing_dir)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Vec3 ef_offset;
@@ -291,7 +297,7 @@ static inline void inlineA0(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_PassiveWall_Anim(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -425,7 +431,7 @@ lbl_800C2164:
 #endif /* clang-format on */
 
 ASM void ftCo_PassiveWall_IASA(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->mv.co.passivewall.timer) {
@@ -537,7 +543,7 @@ lbl_800C22A8:
 #endif /* clang-format on */
 
 ASM void ftCo_PassiveWall_Phys(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH

@@ -2,22 +2,26 @@
 
 #include "ft/ftdrawcommon.h"
 
-#include "ft/fighter.h"
-#include "ft/ftcommon.h"
-#include "ft/ftdata.h"
 #include "ft/ftlib.h"
-#include "ftCommon/ftCo_09F4.h"
 
 #include <placeholder.h>
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/cobj.h>
-#include <baselib/debug.h>
-#include <baselib/jobj.h>
+
+#ifdef MUST_MATCH
+
+#include "ftcommon.h"
+#include "ftdata.h"
+
+#include "ftCommon/ftCo_09F4.h"
+
+#include <dolphin/mtx/mtxvec.h>
 #include <baselib/state.h>
 
-#ifdef MWERKS_GEKKO
+#endif
+
+#ifdef MUST_MATCH
 static char ftDrawCommon_803C0EB0[] = "translate";
 static s32 ftDrawCommon_804D3A88 = -128;
 static s32 ftDrawCommon_804D3A8C = 0x8080FF80;
@@ -91,7 +95,7 @@ MtxPtr ftDrawCommon_8008051C(HSD_GObj* arg1, MtxPtr arg2)
     return NULL;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
@@ -817,7 +821,7 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftDrawCommon_80080C28(HSD_GObj*, s32)
@@ -1039,7 +1043,7 @@ void ftDrawCommon_80080C28(HSD_GObj* gobj, s32 arg1)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftDrawCommon_80080E18(HSD_GObj*, int)
@@ -1260,7 +1264,7 @@ void ftDrawCommon_80080E18(HSD_GObj* arg0, int arg1)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftDrawCommon_80081118(void)
@@ -1290,7 +1294,7 @@ void ftDrawCommon_80081118(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftDrawCommon_80081140(void)
@@ -1320,7 +1324,7 @@ void ftDrawCommon_80081140(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftDrawCommon_80081168(void)
@@ -1379,7 +1383,7 @@ void ftDrawCommon_80081168(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftDrawCommon_80081200(void)

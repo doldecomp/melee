@@ -1,6 +1,8 @@
 #ifndef _tev_h_
 #define _tev_h_
 
+#include <platform.h>
+
 #include <baselib/objalloc.h>
 #include <baselib/state.h>
 #include <baselib/texp.h>

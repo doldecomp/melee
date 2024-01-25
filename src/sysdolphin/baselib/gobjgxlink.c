@@ -1,3 +1,5 @@
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 
 #ifdef MUST_MATCH

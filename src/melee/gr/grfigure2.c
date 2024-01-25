@@ -5,10 +5,13 @@
 #include "gr/grfigure1.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/types.h"
 #include "lb/lb_00F9.h"
 
 #include <dolphin/os.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 
 static StageCallbacks grEF2_803E6328[3] = {
     { grFigure2_8020E3FC, grFigure2_8020E428, grFigure2_8020E430,

@@ -1,7 +1,7 @@
 #include <platform.h>
-#include "ft/forward.h"
 #include "ftLink/forward.h"
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftLk_SpecialN.h"
 
@@ -10,18 +10,21 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_ItemGet.h"
+#include "ftLink/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbrefract.h"
 
 #include <common_structs.h>
+#include <baselib/gobj.h>
 
 #if defined(MWERKS_GEKKO) || defined(M2CTX)
 /* static */ float const ftLk_Init_804D9340 = 0.0;
@@ -136,7 +139,7 @@ void ftLk_SpecialN_ProcessFv14(ftLk_GObj* gobj)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialN_Enter(ftLk_GObj*)
 { // clang-format off
@@ -325,7 +328,7 @@ void ftLk_SpecialN_Enter(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirN_Enter(ftLk_GObj*)
 { // clang-format off
@@ -488,7 +491,7 @@ void ftLk_SpecialAirN_Enter(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialNStart_Anim(ftLk_GObj*)
 { // clang-format off
@@ -787,7 +790,7 @@ void ftLk_SpecialNStart_Anim(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialNLoop_Anim(ftLk_GObj*)
 { // clang-format off
@@ -927,7 +930,7 @@ void ftLk_SpecialNEnd_Anim(ftLk_GObj* gobj)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirNStart_Anim(ftLk_GObj*)
 { // clang-format off
@@ -1190,7 +1193,7 @@ void ftLk_SpecialAirNStart_Anim(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirNLoop_Anim(ftLk_GObj*)
 { // clang-format off
@@ -1295,7 +1298,7 @@ void ftLk_SpecialAirNLoop_Anim(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirNEnd_Anim(ftLk_GObj*)
 { // clang-format off
@@ -1462,7 +1465,7 @@ void ftLk_SpecialAirNEnd_Anim(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialNStart_IASA(ftLk_GObj*)
 { // clang-format off
@@ -1534,7 +1537,7 @@ void ftLk_SpecialNStart_IASA(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialNLoop_IASA(ftLk_GObj*)
 { // clang-format off
@@ -1598,7 +1601,7 @@ void ftLk_SpecialNLoop_IASA(ftLk_GObj* gobj)
 
 void ftLk_SpecialNEnd_IASA(ftLk_GObj* gobj) {}
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirNStart_IASA(ftLk_GObj*)
 { // clang-format off
@@ -1670,7 +1673,7 @@ void ftLk_SpecialAirNStart_IASA(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirNLoop_IASA(ftLk_GObj*)
 { // clang-format off
@@ -1749,7 +1752,7 @@ void ftLk_SpecialAirNEnd_Phys(ftLk_GObj* gobj)
     ft_80084EEC(gobj);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialNStart_Coll(ftLk_GObj*)
 { // clang-format off
@@ -1816,7 +1819,7 @@ void ftLk_SpecialNStart_Coll(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialNLoop_Coll(ftLk_GObj*)
 { // clang-format off
@@ -1866,7 +1869,7 @@ void ftLk_SpecialNLoop_Coll(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialNEnd_Coll(ftLk_GObj*)
 { // clang-format off
@@ -1997,7 +2000,7 @@ void ftLk_SpecialNEnd_Coll(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirNStart_Coll(ftLk_GObj*)
 { // clang-format off
@@ -2059,7 +2062,7 @@ void ftLk_SpecialAirNStart_Coll(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirNLoop_Coll(ftLk_GObj*)
 { // clang-format off
@@ -2109,7 +2112,7 @@ void ftLk_SpecialAirNLoop_Coll(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirNEnd_Coll(ftLk_GObj*)
 { // clang-format off

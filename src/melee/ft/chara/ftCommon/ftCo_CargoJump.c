@@ -1,9 +1,9 @@
 #include <platform.h>
 #include "ft/forward.h"
+#include <baselib/forward.h>
 
 #include "ftCo_CargoJump.h"
 
-#include "ftCo_09C4.h"
 #include "ftCo_CargoFall.h"
 #include "ftCo_CargoKneebend.h"
 #include "ftCo_CargoThrow.h"
@@ -13,6 +13,7 @@
 #include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ftDonkey/types.h"
 
 bool ftCo_8009BB1C(ftCo_GObj* gobj)
 {

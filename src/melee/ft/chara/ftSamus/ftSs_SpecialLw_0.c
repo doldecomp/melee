@@ -1,17 +1,22 @@
+#include "ftCommon/forward.h"
+#include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
+
 #include "ftSs_SpecialLw_0.h"
 
 #include "ftSs_Init.h"
 #include "ftSs_SpecialLw_1.h"
 #include "types.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Attack1.h"
 #include "ftCommon/ftCo_AttackHi3.h"
 #include "ftCommon/ftCo_AttackHi4.h"
@@ -20,9 +25,10 @@
 #include "ftCommon/ftCo_AttackS3.h"
 #include "ftCommon/ftCo_AttackS4.h"
 #include "ftCommon/ftCo_Escape.h"
-#include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_SpecialS.h"
+#include "lb/lbcollision.h"
 
+#include <common_structs.h>
 #include <trigf.h>
 
 void ftSs_Init_80128944(HSD_GObj* gobj, f32 farg1, f32 farg2)

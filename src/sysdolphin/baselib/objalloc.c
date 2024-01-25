@@ -1,5 +1,5 @@
 #include <__mem.h>
-#include <string.h>
+#include <dolphin/os/OSAlloc.h>
 #include <baselib/initialize.h>
 #include <baselib/memory.h>
 #include <baselib/objalloc.h>

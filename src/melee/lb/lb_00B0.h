@@ -1,10 +1,13 @@
-#ifndef _code_8000B074_h_
-#define _code_8000B074_h_
+#ifndef GALE01_00B074
+#define GALE01_00B074
 
-#include "sc/scene.h"
+#include <platform.h>
+#include "sc/forward.h"
+#include <baselib/forward.h>
 
 #include <dolphin/mtx/types.h>
 #include <baselib/jobj.h>
+#include <baselib/texp.h>
 
 bool lb_8000B074(HSD_JObj*);
 bool lb_8000B09C(HSD_JObj*);

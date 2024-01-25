@@ -8,6 +8,8 @@
 
 #include "it/types.h"
 
+#include <stdbool.h>
+
 /* 284D54 */ Item_GObj* itSword_Spawn(Vec3* pos);
 /* 284E10 */ void it_80284E10(HSD_GObj*, int);
 /* 284FC4 */ void it_80284FC4(Item_GObj* gobj, int, float);

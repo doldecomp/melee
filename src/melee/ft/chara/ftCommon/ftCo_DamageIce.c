@@ -1,11 +1,12 @@
 #include <platform.h>
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "ftCo_DamageIce.h"
 
 #include "ftCo_09CB.h"
-#include "ftCo_DamageFall.h"
 #include "ftCo_DownAttack.h"
 #include "ftCo_DownBound.h"
 #include "ftCo_FallSpecial.h"
@@ -14,32 +15,42 @@
 #include "ftCo_Lift.h"
 #include "ftCo_PassiveStand.h"
 
-#include "baselib/mtx.h"
-#include "cm/camera.h"
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftCaptain/types.h"
+#include "ftCommon/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
 #include <common_structs.h>
+#include <m2c_macros.h>
 #include <placeholder.h>
 #include <baselib/debug.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
+#include <baselib/random.h>
+
+#ifdef MUST_MATCH
+#include "ft/ft_0881.h"
+#include "melee/cm/camera.h"
+#include "melee/ft/chara/ftCommon/ftCo_DamageFall.h"
+#include "melee/ft/chara/ftKirby/ftKb_Init.h"
+
+#include <baselib/mtx.h>
+#endif
 
 static Vec3 const ftCo_803B74B0 = { 0 };
 static Vec3 const ftCo_803B74BC = { 0 };
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 /* static */ extern char* ftCo_804D3AE8; // = "jobj.h";
 /* static */ extern char* ftCo_804D3AF0; // = "jobj";
 #endif
@@ -111,7 +122,7 @@ void ftCo_80090B48(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_80090B60(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -451,7 +462,7 @@ lbl_80090EA4:
 #endif
 
 ASM void ftCo_80091030(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     float param;
     struct UNK_SAMUS_S2 sp2C;
@@ -673,7 +684,7 @@ lbl_80091100:
 #endif
 
 ASM void ftCo_80091274(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     ftCo_Fighter* fp = gobj->user_data;
     fp->x1A4C =
@@ -702,7 +713,7 @@ ASM void ftCo_80091274(ftCo_GObj* gobj)
 #endif /* clang-format on */
 
 ASM void ftCo_DamageIce_Anim(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     HSD_JObj* jobj;
     ftCo_Fighter* fp = gobj->user_data;
@@ -842,7 +853,7 @@ void ftCo_DamageIce_Coll(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_800914A4(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -954,7 +965,7 @@ lbl_80091604:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_80091620(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -1116,7 +1127,7 @@ lbl_80091840:
 #endif
 
 ASM void ftCo_80091854(HSD_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Vec3 vec;
     f32 sp24;

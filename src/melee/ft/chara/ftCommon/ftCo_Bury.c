@@ -1,5 +1,7 @@
+#include <platform.h>
 #include "ft/forward.h"
 #include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_Bury.h"
 
@@ -17,21 +19,29 @@
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftCaptain/types.h"
+#include "ftCommon/types.h"
 #include "gr/ground.h"
 #include "gr/types.h"
 #include "lb/lb_00B0.h"
-#include "lb/types.h"
+#include "lb/lbcollision.h"
+#include "lb/lbrefract.h"
 #include "mp/mplib.h"
+#include "pl/player.h"
 #include "pl/plbonuslib.h"
 
+#include <common_structs.h>
 #include <placeholder.h>
 #include <dolphin/mtx/vec.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 #ifdef WIP
 #pragma force_active on
@@ -58,7 +68,7 @@ void ftCo_800C0874(ftCo_GObj* gobj, UNK_T arg1, ftCommon_BuryType arg2)
 
 ASM void ftCo_800C08A0(ftCo_GObj* gobj, int arg1, lb_UnkAnimStruct* arg2,
                        ftCommon_BuryType arg3)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     float f;
     HitCapsule hit;
@@ -230,7 +240,7 @@ void ftCo_800C0A98(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_800C0B20(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     lb_UnkAnimStruct* unk_anim;
@@ -391,7 +401,7 @@ bool ftCo_800C0CB8(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_800C0D0C(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -581,7 +591,7 @@ ASM void ftCo_800C0D0C(ftCo_GObj* gobj)
 #endif /* clang-format on */
 
 ASM void ftCo_Bury_Anim(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -647,7 +657,7 @@ lbl_800C0FB0:
 void ftCo_Bury_IASA(ftCo_GObj* gobj) {}
 
 ASM void ftCo_800C0FCC(HSD_GObj* arg0, ftCo_GObj* arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(arg1);
     if (mpLib_80054ED8(fp->mv.co.bury.x20)) {
@@ -797,7 +807,7 @@ lbl_800C1178:
 #endif /* clang-format on */
 
 ASM void ftCo_Bury_Phys(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCollisionBox* box = &fp->mv.co.bury.coll_box;
@@ -881,7 +891,7 @@ void ftCo_BuryWait_IASA(ftCo_GObj* gobj) {}
 void ftCo_BuryWait_Phys(ftCo_GObj* gobj) {}
 
 ASM void ftCo_BuryWait_Coll(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -925,7 +935,7 @@ lbl_800C13A4:
 #endif /* clang-format on */
 
 ASM void ftCo_800C13BC(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ftCo_800C5240(gobj)) {
@@ -992,7 +1002,7 @@ lbl_800C1448:
 #endif /* clang-format on */
 
 ASM void ftCo_BuryJump_Anim(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.buryjump.x0 += ftCo_804D8C3C;

@@ -7,6 +7,8 @@
 #include <dolphin/card/CARDCreate.h>
 #include <dolphin/card/CARDDir.h>
 #include <dolphin/card/CARDOpen.h>
+#include <dolphin/dvd/dvd.h>
+#include <dolphin/os/OSTime.h>
 
 #define CARDSetIconSpeed(stat, n, f)                                          \
     ((stat)->iconSpeed =                                                      \

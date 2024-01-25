@@ -6,15 +6,25 @@
 #include "grrcruise.h"
 
 #include "cm/camera.h"
-#include "it/it_26B1.h"
+#include "gr/types.h"
 #include "lb/lb_00F9.h"
+#include "lb/types.h"
+#include "sc/types.h"
 
 #include <placeholder.h>
-#include <dolphin/mtx/types.h>
+#include <baselib/aobj.h>
 #include <baselib/baselib_unknown_002.h>
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 #include <baselib/psappsrt.h>
+
+#ifdef MUST_MATCH
+#include "it/it_26B1.h"
+#endif
 
 extern StageInfo stage_info;
 extern struct UnkGeneratorStruct* hsd_804D78FC;
@@ -305,7 +315,7 @@ bool grLib_801C9E60(Vec3* v)
     return false;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 /// @todo @c clang-format why

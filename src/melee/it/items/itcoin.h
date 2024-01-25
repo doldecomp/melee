@@ -5,6 +5,8 @@
 
 #include "it/types.h"
 
+#include <stdbool.h>
+
 void it_802F14E4(Item_GObj*);
 void it_802F1518(Item_GObj*);
 void it_802F1888(Item_GObj*);

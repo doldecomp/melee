@@ -8,6 +8,8 @@
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/types.h>
+#include <baselib/debug.h>
+#include <baselib/fobj.h>
 #include <MetroTRK/intrinsics.h>
 
 extern void TObjInfoInit(void);

@@ -1,5 +1,6 @@
 #include <platform.h>
 #include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ftCo_Guard.h"
@@ -13,7 +14,6 @@
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
 #include "ftCo_Escape.h"
-#include "ftCo_FallSpecial.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Pass.h"
 #include "ftCo_ShieldBreakFly.h"
@@ -24,27 +24,30 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 #include "ftYoshi/ftYs_Guard.h"
 #include "ftYoshi/ftYs_Init.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00CE.h"
 #include "pl/pl_0371.h"
+#include "pl/player.h"
 
 #include <common_structs.h>
+#include <m2c_macros.h>
 #include <math.h>
-#include <placeholder.h>
 #include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 float const ftCo_804D8538 = 0;
 float const ftCo_804D853C = 2 * M_PI;
 float const ftCo_804D8540 = rad_to_deg;
@@ -88,7 +91,7 @@ bool ftCo_80091A2C(ftCo_GObj* gobj)
     return fp->input.held_inputs & HSD_PAD_LR ? true : false;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm bool ftCo_80091A4C(ftCo_GObj* gobj)
 { // clang-format off
@@ -159,7 +162,7 @@ int ftCo_80091A4C(ftCo_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm bool ftCo_80091AD8(ftCo_GObj* gobj, int mv_x20)
 { // clang-format off
@@ -273,7 +276,7 @@ void ftCo_80091B9C(ftCo_GObj* gobj)
     fp->mv.co.guard.x24 = p_ftCommonData->x68;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80091BC4(Fighter* fp)
 { // clang-format off
@@ -449,7 +452,7 @@ void ftCo_80091BC4(Fighter* fp)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80091D58(ftCo_Fighter* fp)
 { // clang-format off
@@ -560,7 +563,7 @@ void ftCo_80091D58(Fighter* fp)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80091E78(ftCo_GObj* gobj, float)
 { // clang-format off
@@ -811,7 +814,7 @@ void ftCo_80091E78(HSD_GObj* gobj, float arg1)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80092158(ftCo_GObj* gobj, int arg1, HSD_JObj* arg2)
 { // clang-format off
@@ -873,7 +876,7 @@ void ftCo_80092158(ftCo_GObj* gobj, int arg1, HSD_JObj* arg2)
 #endif
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_800921DC(ftCo_GObj* gobj)
 { // clang-format off
@@ -1052,7 +1055,7 @@ void ftCo_800923B4(ftCo_GObj* gobj)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80092450(ftCo_GObj* gobj)
 { // clang-format off
@@ -1105,7 +1108,7 @@ void ftCo_80092450(ftCo_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_800924C0(ftCo_GObj* gobj)
 { // clang-format off
@@ -1217,7 +1220,7 @@ void ftCo_800924C0(ftCo_GObj* gobj)
 #endif
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm bool ftCo_800925A4(ftCo_GObj*)
 { // clang-format off
@@ -1350,7 +1353,7 @@ bool ftCo_800925A4(HSD_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_GuardOn_Anim(ftCo_GObj*)
 { // clang-format off
@@ -1406,7 +1409,7 @@ void ftCo_GuardOn_Anim(ftCo_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_GuardOn_IASA(ftCo_GObj*)
 { // clang-format off
@@ -1545,7 +1548,7 @@ void ftCo_800928CC(ftCo_GObj* gobj)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80092908(ftCo_GObj* gobj)
 { // clang-format off
@@ -1640,7 +1643,7 @@ void ftCo_80092908(ftCo_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_Guard_Anim(ftCo_GObj*)
 { // clang-format off
@@ -1681,7 +1684,7 @@ void ftCo_Guard_Anim(ftCo_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_Guard_IASA(ftCo_GObj*)
 { // clang-format off
@@ -1804,7 +1807,7 @@ void ftCo_80092BE8(ftCo_GObj* gobj)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80092C54(ftCo_GObj* gobj)
 { // clang-format off
@@ -1844,7 +1847,7 @@ void ftCo_80092C54(ftCo_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_GuardOff_Anim(ftCo_GObj*)
 { // clang-format off
@@ -1938,7 +1941,7 @@ void ftCo_80092E50(ftCo_GObj* gobj)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm float ftCo_80092ED8(int arg0, float arg2)
 { // clang-format off
@@ -1978,7 +1981,7 @@ float ftCo_80092ED8(int arg0, float arg1)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80092F2C(ftCo_GObj* gobj, bool)
 { // clang-format off
@@ -2236,7 +2239,7 @@ void ftCo_80092F2C(HSD_GObj* gobj, bool arg1)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80093240(ftCo_GObj*)
 { // clang-format off
@@ -2305,7 +2308,7 @@ void ftCo_80093240(ftCo_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_800932DC(ftCo_GObj*)
 { // clang-format off
@@ -2366,7 +2369,7 @@ void ftCo_800932DC(ftCo_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_GuardSetOff_Anim(ftCo_GObj*)
 { // clang-format off
@@ -2601,7 +2604,7 @@ void ftCo_GuardSetOff_Coll(ftCo_GObj* gobj)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm bool ftCo_80093694(ftCo_GObj* gobj)
 {
@@ -2657,7 +2660,7 @@ bool ftCo_80093694(ftCo_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_8009370C(ftCo_GObj*, HSD_GObjEvent)
 { // clang-format off
@@ -2718,7 +2721,7 @@ void ftCo_8009370C(ftCo_GObj* gobj, HSD_GObjEvent on_reflect)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80093790(ftCo_GObj*)
 { // clang-format off
@@ -2801,7 +2804,7 @@ void ftCo_80093850(ftCo_GObj* gobj)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_8009388C(ftCo_GObj*)
 { // clang-format off
@@ -2923,7 +2926,7 @@ void ftCo_800939B4(ftCo_GObj* gobj)
     ftCo_800923B4(gobj);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80093A50(ftCo_GObj*)
 { // clang-format off
@@ -3043,7 +3046,7 @@ void ftCo_80093A50(ftCo_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80093BC0(ftCo_GObj*)
 { // clang-format off
@@ -3146,7 +3149,7 @@ void ftCo_80093BC0(ftCo_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_GuardReflect_Anim(ftCo_GObj*)
 { // clang-format off
@@ -3293,7 +3296,7 @@ void ftCo_GuardReflect_Anim(HSD_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_GuardReflect_IASA(ftCo_GObj*)
 { // clang-format off
@@ -3437,7 +3440,7 @@ void ftCo_GuardReflect_Coll(ftCo_GObj* gobj)
     ft_800845B4(gobj);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET ftCo_80094098(UNK_PARAMS)
 { // clang-format off
@@ -3488,7 +3491,7 @@ lbl_80094124:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET ftCo_80094138(UNK_PARAMS)
 { // clang-format off

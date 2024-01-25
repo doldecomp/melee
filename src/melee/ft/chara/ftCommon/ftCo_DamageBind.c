@@ -1,4 +1,3 @@
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
 
 #include "ftCo_DamageBind.h"
@@ -8,13 +7,15 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "pl/player.h"
 
+#include <common_structs.h>
 #include <placeholder.h>
+#include <stddef.h>
 
 #ifdef WIP
 #pragma force_active on
@@ -43,7 +44,7 @@ bool ftCo_800C44CC(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_800C4550(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007DB58(gobj);
@@ -146,7 +147,7 @@ lbl_800C464C:
 #endif /* clang-format on */
 
 ASM void ftCo_DamageBind_Anim(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x1A4C -= p_ftCommonData->x670;

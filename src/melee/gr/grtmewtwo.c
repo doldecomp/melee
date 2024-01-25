@@ -1,8 +1,11 @@
-#include "gr/forward.h"
+#include <platform.h>
 #include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "grtmewtwo.h"
 
+#include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
@@ -11,7 +14,10 @@
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
+#include <dolphin/os.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 
 typedef struct grTMewtwo_UnkStruct {
     lb_UnkAnimStruct* x0;

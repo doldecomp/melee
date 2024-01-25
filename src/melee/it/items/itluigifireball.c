@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include "itluigifireball.h"
 
 #include "db/db_2253.h"
@@ -9,7 +11,9 @@
 #include "it/item.h"
 #include "lb/lbvector.h"
 
+#include <common_structs.h>
 #include <dolphin/mtx/vec.h>
+#include <baselib/gobj.h>
 
 /* 2C027C */ static void it_802C027C(Item_GObj* gobj);
 /* 2C02E4 */ static bool it_802C02E4(Item_GObj* gobj);

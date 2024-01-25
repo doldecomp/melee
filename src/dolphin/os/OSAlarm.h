@@ -1,6 +1,8 @@
 #ifndef DOLPHIN_OS_OSALARM_H
 #define DOLPHIN_OS_OSALARM_H
 
+#include <platform.h>
+
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSTime.h>
 

@@ -1,13 +1,18 @@
 #include <platform.h>
+#include <dolphin/gx/forward.h>
 
-#include <placeholder.h>
-#include <dolphin/gx/__GX_unknown_001.h>
 #include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/__types.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXEnum.h>
-#include <dolphin/gx/GXTransform.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
+#include "dolphin/gx/GXTransform.h"
+
+#include <placeholder.h>
+#endif
+
+#ifdef MUST_MATCH
 static u32 GXAttr_804D5BB0 = 0x00040102;
 static u32 GXAttr_804D5BB4 = 0x00080102;
 static u64 GXAttr_804D5BB8 = 0x000C010200000000;
@@ -37,7 +42,7 @@ void GXAttr_8033C95C(void);
 void GXAttr_8033C910(void);
 void GXAttr_8033C918(void);
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 // https://decomp.me/scratch/d4i4k // 95 (98.90%)
 #pragma push
@@ -263,7 +268,7 @@ void GXSetVtxDesc(GXAttr attr, s32 type)
     __GXContexts.main->x4F0_flags |= 8;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 // https://decomp.me/scratch/NAwYO // 4529 (49.68%)
 #pragma push
 asm void __GXSetVCD(void)
@@ -501,7 +506,7 @@ void GXSetVtxAttrFmt(size_t vtxfmt, GXAttr attr, enum_t count, GXAttrType type,
     __GXContexts.main->x4EE |= (u8) (1 << (u8) vtxfmt);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 static jtbl_t jtbl_804010F4 = { &GXAttr_8033CA6C, &GXAttr_8033CA8C,
                                 &GXAttr_8033CAAC, &GXAttr_8033CACC,
                                 &GXAttr_8033CAEC, &GXAttr_8033CB04,
@@ -630,7 +635,7 @@ void GXInvalidateVtxCache(void)
     WGPIPE.u8 = GX_CMD_INVL_VC;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 // https://decomp.me/scratch/9TphI // 640 (96.44%)
 #pragma push
 asm void GXSetTexCoordGen2(u32, s32, u32, s32, s32, s32)

@@ -1,6 +1,12 @@
 #ifndef MELEE_IT_ITEM2_H
 #define MELEE_IT_ITEM2_H
 
+#include <platform.h>
+#include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
+
+#include "ft/types.h"
 #include "it/types.h"
 
 #include <baselib/gobj.h>

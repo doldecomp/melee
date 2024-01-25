@@ -1,12 +1,12 @@
 #include <placeholder.h>
-#include <dolphin/dvd/dvd.h>
-#include <dolphin/os/OSCache.h>
-#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSReboot.h>
-#include <dolphin/os/OSReset.h>
-#include <MetroTRK/intrinsics.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
+#include "dolphin/dvd/dvd.h"
+#include "dolphin/pad/pad.h"
+#endif
+
+#ifdef MUST_MATCH
 static unk_t Header[0x20 / sizeof(unk_t)];
 static unk_t SaveStart;
 static unk_t SaveEnd;
@@ -14,7 +14,7 @@ static unk_t SaveEnd;
 
 static bool Prepared;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 void Run(register Event callback)
 {
     OSDisableInterrupts();
@@ -39,7 +39,7 @@ static void Callback(void)
     Prepared = true;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void __OSReboot(u32 resetCode, bool forceMenu)
 { // clang-format off

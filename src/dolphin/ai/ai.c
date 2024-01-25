@@ -1,13 +1,15 @@
 #include <placeholder.h>
 #include <dolphin/ai/ai.h>
 #include <dolphin/dsp/dsp.h>
+#include <dolphin/os/OSContext.h>
+#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSTime.h>
 
 static AISCallback __AIS_Callback;
 static AIDCallback __AID_Callback;
 static u8* __CallbackStack;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 static u8* __OldStack;
 #endif
 
@@ -251,7 +253,7 @@ static void __AIDHandler(__OSInterrupt interrupt, struct OSContext* context)
     OSSetCurrentContext(context);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 static asm void __AICallbackStackSwitch(register AIDCallback cb)
 { // clang-format off
     fralloc

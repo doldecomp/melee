@@ -1,7 +1,7 @@
-#include <placeholder.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__types.h>
 #include <dolphin/gx/GXTev.h>
+#include <dolphin/gx/types.h>
 
 void GXSetTevOp(GXTevStageID id, GXTevMode mode)
 {
@@ -133,7 +133,7 @@ void GXSetTevColor(GXTevRegID id, GXColor color)
     __GXContexts.main->x0.u16[1] = 0;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void GXSetTevColorS10(s32, GXColorS10)
 { // clang-format off
@@ -171,7 +171,7 @@ asm void GXSetTevColorS10(s32, GXColorS10)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void GXSetTevKColor(GXTevKColorID id, GXColor color)
 { // clang-format off
@@ -209,7 +209,7 @@ asm void GXSetTevKColor(GXTevKColorID id, GXColor color)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void GXSetTevKColorSel(GXTevStageID stage, GXTevKColorSel sel)
 { // clang-format off
@@ -247,7 +247,7 @@ lbl_80340390:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void GXSetTevKAlphaSel(GXTevStageID stage, GXTevKAlphaSel sel)
 { // clang-format off
@@ -285,7 +285,7 @@ lbl_803403FC:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void GXSetTevSwapMode(GXTevStageID stage, GXTevSwapSel ras_sel,
                           GXTevSwapSel tex_sel)
@@ -317,7 +317,7 @@ asm void GXSetTevSwapMode(GXTevStageID stage, GXTevSwapSel ras_sel,
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void GXSetTevSwapModeTable(GXTevSwapSel table, GXTevColorChan red,
                                GXTevColorChan green, GXTevColorChan blue,
@@ -385,7 +385,7 @@ void GXSetAlphaCompare(GXCompare comp0, u8 ref0, GXAlphaOp op, GXCompare comp1,
     set_x2(GX_FALSE);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void GXSetZTexture(GXZTexOp op, GXTexFmt fmt, u32 bias)
 { // clang-format off
@@ -433,7 +433,7 @@ lbl_803405B4:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 static u32 GXTev_804014E0[] = { 0, 1, 0, 1, 0, 1, 7, 5, 6, 0 };
 #pragma push
 asm void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map,

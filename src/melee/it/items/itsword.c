@@ -1,5 +1,6 @@
 /// @file
 /// @todo A lot of duplicate code here, can maybe be cleaned up with inlines.
+#include <platform.h>
 #include "it/forward.h"
 #include "it/items/forward.h"
 
@@ -11,9 +12,13 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/types.h"
 
+#include <common_structs.h>
 #include <placeholder.h>
+#include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
 LITERAL float const it_804DC8D0 = 0;
@@ -57,7 +62,7 @@ ItemStateTable it_803F5800[] = {
 };
 
 ASM Item_GObj* itSword_Spawn(Vec3* pos)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     SpawnItem spawn;
     spawn.kind = It_Kind_Sword;
@@ -142,7 +147,7 @@ void it_80284E10(HSD_GObj* gobj, int arg1)
 }
 
 ASM void it_80284E30(Item_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Item* ip = GET_ITEM(gobj);
     float scale_y =
@@ -285,7 +290,7 @@ lbl_80284FA8:
 #endif /* clang-format on */
 
 ASM void it_80284FC4(Item_GObj* gobj, int arg1, float arg2)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.sword.x4 = 0;
@@ -328,7 +333,7 @@ ASM void it_80284FC4(Item_GObj* gobj, int arg1, float arg2)
 #endif /* clang-format on */
 
 ASM void it_80285024(Item_GObj* gobj, int arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.sword.x4 = arg1;
@@ -372,7 +377,7 @@ ASM void it_80285024(Item_GObj* gobj, int arg1)
 
 /// @todo Shared code with #it_802851FC.
 ASM void it_80285084(Item_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.sword.x4 += ip->xDD4_itemVar.sword.xC;
@@ -459,7 +464,7 @@ lbl_80285120:
 
 /// @todo Shared code with #it_802851FC.
 ASM void it_80285140(Item_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.sword.x1C += ip->xDD4_itemVar.sword.x24;
@@ -545,7 +550,7 @@ lbl_802851DC:
 #endif /* clang-format on */
 
 ASM void it_802851FC(Item_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.sword.x34 += ip->xDD4_itemVar.sword.x3C;
@@ -631,7 +636,7 @@ lbl_80285298:
 #endif /* clang-format on */
 
 ASM void it_802852B8(Item_GObj* gobj, float* arg1, float* arg2)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Item* ip = GET_ITEM(gobj);
     if (arg1 != NULL) {
@@ -684,7 +689,7 @@ void it_80285314(Item_GObj* gobj)
 }
 
 ASM void it_80285338(Item_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -841,7 +846,7 @@ static inline void inlineA4(Item_GObj* gobj)
 }
 
 ASM void it_80285424(Item_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     inlineA0(gobj);
     inlineA1(gobj);
@@ -1003,7 +1008,7 @@ static inline void inlineB3(Item_GObj* gobj)
 }
 
 ASM void it_802855F8(Item_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     inlineB0(gobj);
     inlineB1(gobj);
@@ -1146,7 +1151,7 @@ static inline void inlineC1(Item_GObj* gobj)
 }
 
 ASM void it_80285804(Item_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -1294,7 +1299,7 @@ static inline void inlineD3(Item_GObj* gobj)
 }
 
 ASM bool it_80285920(Item_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     inlineD3(gobj);
     inlineA4(gobj);
@@ -1480,7 +1485,7 @@ static inline void inlineE3(Item_GObj* gobj)
 }
 
 ASM void it_80285B00(Item_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     inlineE0(gobj);
     inlineE1(gobj);
@@ -1628,7 +1633,7 @@ static inline void inlineF2(Item_GObj* gobj)
 }
 
 ASM void it_80285C78(Item_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     /// @todo #inlineE0
     {
@@ -1783,7 +1788,7 @@ static inline void inlineG2(Item_GObj* gobj)
 }
 
 ASM void it_80285DF0(Item_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
     inlineG0(gobj);

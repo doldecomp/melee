@@ -10,6 +10,7 @@
 #include "ftCo_Shouldered.h"
 
 #include "ft/ftwalkcommon.h"
+#include "ftDonkey/types.h"
 
 /* 09B6C8 */ static void ftCo_8009B6C8(ftCo_GObj* gobj, float anim_start);
 

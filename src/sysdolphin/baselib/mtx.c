@@ -1,8 +1,10 @@
 #include "math.h"
 
+#include "lb/lbrefract.h"
+
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
+#include <baselib/debug.h>
 #include <baselib/mtx.h>
 #include <MSL/trigf.h>
 

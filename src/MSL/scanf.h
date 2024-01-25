@@ -1,6 +1,7 @@
 #ifndef _MSL_COMMON_SCANF_H
 #define _MSL_COMMON_SCANF_H
 
+#include <stddef.h>
 #include <MSL/ansi_files.h>
 #include <MSL/stddef.h>
 

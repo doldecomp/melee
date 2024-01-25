@@ -1,14 +1,18 @@
 #include <platform.h>
-#include "lb/forward.h"
+#include "ftCommon/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "ftaction.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
@@ -18,9 +22,12 @@
 #include "ftCommon/ftCo_09F7.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcommand.h"
+#include "lb/types.h"
 
-#include <placeholder.h>
+#include <m2c_macros.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjproc.h>
+#include <baselib/random.h>
 
 static FtCmd ftAction_803C06E8[] = {
     ftAction_80071028, ftAction_8007121C, ftAction_8007162C, ftAction_8007169C,
@@ -60,7 +67,7 @@ static FtCmd ftAction_803C06E8[] = {
     01, 01, 01, 01, 01, 01, 01, 01, 03, 03, 02, 01, 04, 00, 00, 00,
 };
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 float const ftAction_804D82A0 = 0.0039059999398887157440185546875;
 double const ftAction_804D82A8 = 4503599627370496;
 double const ftAction_804D82B0 = 4503601774854144;
@@ -70,7 +77,7 @@ float const ftAction_804D82C0 = -1;
 float const ftAction_804D82C4 = F32_MAX;
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071028(Fighter_GObj* gobj, FtCmdState* cmd)
 {
@@ -321,7 +328,7 @@ void ftAction_800711DC(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_8007121C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
@@ -714,7 +721,7 @@ void ftAction_8007168C(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_8007169C(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -765,7 +772,7 @@ void ftAction_800716F8(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071708(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -832,7 +839,7 @@ void ftAction_80071774(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071784(Fighter_GObj* gobj, FtCmdState* cmd)
 {
@@ -882,7 +889,7 @@ void ftAction_80071810(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071820(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -954,7 +961,7 @@ void ftAction_80071820(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_800718A4(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1036,7 +1043,7 @@ void ftAction_80071974(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071998(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1100,7 +1107,7 @@ void ftAction_80071998(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071A14(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1133,7 +1140,7 @@ void ftAction_80071A14(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071A58(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1166,7 +1173,7 @@ void ftAction_80071A58(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071A9C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
@@ -1203,7 +1210,7 @@ void ftAction_80071A9C(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071AE8(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1240,7 +1247,7 @@ void ftAction_80071AE8(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071B28(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1270,7 +1277,7 @@ void ftAction_80071B28(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 jtbl_t jtbl_803C08A4 = {
     lbl_80071BE0, lbl_80071BE8, lbl_80071BF0, lbl_80071BF8,
     lbl_80071C00, lbl_80071C08, lbl_80071C10,
@@ -1477,7 +1484,7 @@ void ftAction_80071CA4(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071CCC(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1535,7 +1542,7 @@ void ftAction_80071D30(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071D40(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1588,7 +1595,7 @@ void ftAction_80071DCC(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071E04(Fighter_GObj* gobj, FtCmdState* cmd)
 {
@@ -1692,7 +1699,7 @@ void ftAction_80071F0C(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071F34(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1729,7 +1736,7 @@ void ftAction_80071F34(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071F78(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1758,7 +1765,7 @@ void ftAction_80071F78(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071FA0(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1787,7 +1794,7 @@ void ftAction_80071FA0(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 jtbl_t jtbl_803C08C0 = {
     lbl_80072210, lbl_80072228, lbl_80072240, lbl_80072258,
     lbl_80072270, lbl_80072288, lbl_800722A0,
@@ -2129,7 +2136,7 @@ void ftAction_800722C8(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 jtbl_t jtbl_803C08DC = {
     lbl_80072408, lbl_8007243C, lbl_80072480, lbl_80072530,
     lbl_80072574, lbl_800725B8, lbl_800725FC,
@@ -2538,7 +2545,7 @@ void ftAction_800726C0(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_800726F4(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -2629,7 +2636,7 @@ void ftAction_800726F4(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_800727C8(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -2679,7 +2686,7 @@ void ftAction_800727C8(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_8007283C(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -2720,7 +2727,7 @@ void ftAction_8007283C(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072894(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -2764,7 +2771,7 @@ void ftAction_80072894(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_800728F8(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -2828,7 +2835,7 @@ void ftAction_8007296C(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_8007297C(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -2871,7 +2878,7 @@ void ftAction_800729C4(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_800729D4(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -2936,7 +2943,7 @@ void ftAction_80072A4C(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072A5C(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -2983,7 +2990,7 @@ void ftAction_80072AAC(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072ABC(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3022,7 +3029,7 @@ void ftAction_80072B04(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072B14(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3052,7 +3059,7 @@ void ftAction_80072B14(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072B3C(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3096,7 +3103,7 @@ void ftAction_80072B84(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072B94(Fighter_GObj* gobj, FtCmdState* cmd)
 {
@@ -3145,7 +3152,7 @@ void ftAction_80072BE4(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072BF4(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3195,7 +3202,7 @@ void ftAction_80072C5C(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072C6C(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3228,7 +3235,7 @@ void ftAction_80072C6C(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072CB0(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3258,7 +3265,7 @@ void ftAction_80072CB0(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072CD8(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3415,7 +3422,7 @@ void ftAction_80072E24(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072E4C(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3597,7 +3604,7 @@ void ftAction_80072FE0(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80073008(Fighter_GObj* gobj, FtCmdState* cmd)
 {
@@ -3666,7 +3673,7 @@ void ftAction_8007309C(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_800730B8(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3713,7 +3720,7 @@ void ftAction_80073108(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80073118(Fighter_GObj* gobj, FtCmdState* cmd)
 {
@@ -3819,7 +3826,7 @@ void ftAction_8007320C(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80073240(Fighter_GObj*)
 { // clang-format off
@@ -3941,7 +3948,7 @@ void ftAction_80073240(Fighter_GObj* fighter_gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80073354(Fighter_GObj*)
 { // clang-format off
@@ -4085,7 +4092,7 @@ void ftAction_80073354(Fighter_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_8007349C(Fighter_GObj*)
 { // clang-format off

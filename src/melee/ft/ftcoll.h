@@ -5,12 +5,16 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "lb/forward.h"
+#include <baselib/forward.h>
 
 #include "ft/fighter.h"
 
 #include <common_structs.h>
+#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/gobjproc.h>
+
+struct UNK_SAMUS_S2;
 
 /// Combo Count Logic
 void ftColl_800763C0(Fighter_GObj* attacker, Fighter_GObj* victim,

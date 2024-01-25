@@ -1,5 +1,3 @@
-#include "stddef.h"
-
 #include <__mem.h>
 #include <string.h>
 #include <dolphin/os.h>

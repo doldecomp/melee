@@ -2,6 +2,7 @@
 #include <dolphin/db/db.h>
 #include <dolphin/os.h>
 #include <dolphin/os/OSContext.h>
+#include <dolphin/os/OSException.h>
 #include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>
 

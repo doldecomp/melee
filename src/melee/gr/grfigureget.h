@@ -1,6 +1,11 @@
 #ifndef _grfigureget_h_
 #define _grfigureget_h_
 
+#include <platform.h>
+#include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
+
 #include "gr/stage.h"
 
 #include <baselib/gobj.h>

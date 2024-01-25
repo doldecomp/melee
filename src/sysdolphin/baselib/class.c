@@ -1,9 +1,9 @@
 #include "class.h"
 
 #include <__mem.h>
-#include <stddef.h>
 #include <string.h>
 #include <dolphin/os.h>
+#include <baselib/debug.h>
 #include <baselib/hash.h>
 #include <baselib/memory.h>
 #include <baselib/object.h>

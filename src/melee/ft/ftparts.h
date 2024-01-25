@@ -1,9 +1,13 @@
 #ifndef MELEE_FT_FTPARTS_H
 #define MELEE_FT_FTPARTS_H
 
+#include <platform.h>
 #include "ft/forward.h"
+#include "ftCommon/forward.h"
+#include <baselib/forward.h>
 
 #include "ft/fighter.h"
+#include "ft/types.h"
 
 #include <dolphin/mtx/types.h>
 #include <baselib/perf.h>

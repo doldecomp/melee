@@ -4,6 +4,8 @@
 #include "ftLink/forward.h"
 #include <baselib/forward.h>
 
+#include <stdbool.h>
+
 /* 0ECBC4 */ ftLk_SpecialNIndex ftLk_SpecialN_GetIndex(ftLk_GObj* gobj);
 /* 0ECC0C */ void ftLk_SpecialN_UnsetArrow(ftLk_GObj* gobj);
 /* 0ECC6C */ void ftLk_SpecialN_UnsetFv14(ftLk_GObj* gobj);

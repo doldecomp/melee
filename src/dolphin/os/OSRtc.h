@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include <dolphin/os.h>
+#include <dolphin/os/OSContext.h>
 
 typedef struct OSSram {
     u16 checkSum;

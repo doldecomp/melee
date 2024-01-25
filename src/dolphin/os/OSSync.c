@@ -1,6 +1,7 @@
+#include <platform.h>
+
 #include <__mem.h>
 #include <placeholder.h>
-#include <string.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSSync.h>
 #include <MetroTRK/intrinsics.h>
@@ -11,7 +12,7 @@
 void __OSSystemCallVectorStart(void);
 void __OSSystemCallVectorEnd(void);
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 asm void __OSSystemCallVector(void)
 { // clang-format off

@@ -1,3 +1,8 @@
+#include <platform.h>
+#include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
+
 #include "gr/grtemblem.h"
 
 #include "gr/granime.h"
@@ -9,7 +14,9 @@
 #include "lb/lb_00F9.h"
 
 #include <dolphin/os.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 
 static void grTRoy_802243F4(int);
 static void grTRoy_802243F8(void);

@@ -1,9 +1,10 @@
-#include "ft/forward.h"
+#include <platform.h>
 #include "ftCommon/forward.h"
 
 #include "ftCo_DemoCallback0.h"
 
 #include "ft/fighter.h"
+#include "ft/types.h"
 
 void ftCo_800C6150(ftCo_GObj* gobj)
 {

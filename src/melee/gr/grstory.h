@@ -1,8 +1,12 @@
 #ifndef _grtstory_h_
 #define _grtstory_h_
 
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
+
 #include "gr/stage.h"
 
+#include <stdbool.h>
 #include <baselib/gobj.h>
 
 static void grStory_801E302C(bool);

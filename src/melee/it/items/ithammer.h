@@ -1,7 +1,9 @@
 #ifndef GALE01_293D94
 #define GALE01_293D94
 
+#include <platform.h>
 #include "it/forward.h"
+#include <baselib/forward.h>
 
 #include "it/types.h"
 

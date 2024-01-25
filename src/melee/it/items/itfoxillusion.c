@@ -6,7 +6,14 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCharItems.h"
 #include "it/item.h"
+#include "it/types.h"
+
+#include <common_structs.h>
+#include <dolphin/os.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 ItemStateTable it_803F6818[] = {
     {

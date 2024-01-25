@@ -1,5 +1,4 @@
 #include <placeholder.h>
-#include <dolphin/os.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSMutex.h>
 #include <dolphin/os/OSThread.h>
@@ -8,7 +7,7 @@ static vu32 RunQueueBits;
 static volatile bool RunQueueHint;
 static vs32 Reschedule;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 extern unk_t _stack_end;
 extern unk_t _db_stack_end;
@@ -186,7 +185,7 @@ s32 __OSGetEffectivePriority(OSThread* thread)
     return prio;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void SetEffectivePriority(void)
@@ -336,7 +335,7 @@ void SetEffectivePriority(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm static void SelectThread(bool yield)
@@ -505,7 +504,7 @@ void __OSReschedule(void)
     SelectThread(false);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm bool OSCreateThread(OSThread* thread, void* (*func)(void*), void* param,
@@ -603,7 +602,7 @@ bool OSCreateThread(OSThread* thread, void* (*func)(void*), void* param,
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void OSExitThread(OSThread*)
@@ -685,7 +684,7 @@ void OSExitThread(OSThread* arg0)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void OSCancelThread(OSThread*)
@@ -833,7 +832,7 @@ void OSCancelThread(OSThread* arg0)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm s32 OSResumeThread(OSThread*)
@@ -1039,7 +1038,7 @@ s32 OSResumeThread(OSThread* arg0)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm s32 OSSuspendThread(OSThread*){
@@ -1162,7 +1161,7 @@ s32 OSSuspendThread(OSThread* arg0)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void OSSleepThread(OSThreadQueue*)
@@ -1248,7 +1247,7 @@ void OSSleepThread(OSThreadQueue* arg0)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void OSWakeupThread(OSThreadQueue*)
@@ -1338,7 +1337,7 @@ void OSWakeupThread(OSThreadQueue* arg0)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void CheckThreadQueue(void)
@@ -1401,7 +1400,7 @@ void CheckThreadQueue(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 extern char* OSSerial_80402420[];
 extern unk_t OSSerial_804D5C28;

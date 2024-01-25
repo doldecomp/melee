@@ -2,16 +2,24 @@
 #define SYSDOLPHIN_BASELIB_PSSTRUCTS_H
 
 #include <platform.h>
+#include <dolphin/gx/forward.h>
+#include <baselib/forward.h>
 
+#include <dolphin/gx/GXEnum.h>
+#include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/archive.h>
 #include <baselib/jobj.h>
 
 struct _psAppSRT;
+struct HSD_Fog;
+
 typedef struct _psAppSRT HSD_psAppSRT;
 struct _particle;
+
 typedef struct _particle HSD_Particle;
 struct _generator;
+
 typedef struct _generator HSD_Generator;
 
 enum HSD_ParticleKind {

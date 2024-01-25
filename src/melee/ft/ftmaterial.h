@@ -1,9 +1,13 @@
 #ifndef GALE01_0BF260
 #define GALE01_0BF260
 
+#include <platform.h>
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include <dolphin/gx/forward.h>
 #include <baselib/forward.h>
+
+#include <baselib/mobj.h>
 
 /* 0BF260 */ void ftMaterial_800BF260(void);
 /* 0BF2B8 */ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode);

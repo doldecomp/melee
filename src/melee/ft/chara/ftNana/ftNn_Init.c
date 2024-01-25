@@ -1,5 +1,4 @@
-#include "ft/forward.h"
-#include "ftNess/forward.h"
+#include <platform.h>
 #include "ftPopo/forward.h"
 
 #include "ftNn_Init.h"

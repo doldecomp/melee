@@ -2,10 +2,15 @@
 
 #ifndef _OS_INTERRUPT_H_
 #define _OS_INTERRUPT_H_
+
 #include <platform.h>
 
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSException.h>
+
+#ifndef __MWERKS__
+enum OSInterruptType;
+#endif
 
 #define OS_INTRMASK_MEM_0 (0x80000000U >> OS_INTR_MEM_0)
 #define OS_INTRMASK_MEM_1 (0x80000000U >> OS_INTR_MEM_1)

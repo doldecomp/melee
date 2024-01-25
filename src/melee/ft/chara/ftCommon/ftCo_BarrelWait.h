@@ -3,6 +3,7 @@
 
 #include <platform.h>
 #include "ftCommon/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include <placeholder.h>
 

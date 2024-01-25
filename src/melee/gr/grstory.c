@@ -1,3 +1,7 @@
+#include <platform.h>
+#include "it/forward.h"
+#include "lb/forward.h"
+
 #include "gr/grstory.h"
 
 #include "gr/granime.h"
@@ -6,15 +10,16 @@
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/types.h"
 #include "it/it_26B1.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-#include <dolphin/mtx/types.h>
 #include <dolphin/os.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 #include <baselib/random.h>
 
 static lb_UnkAnimStruct* grStory_801E36D0(enum_t);

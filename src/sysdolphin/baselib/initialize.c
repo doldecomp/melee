@@ -1,6 +1,8 @@
 #include <stdarg.h>
+#include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXPixel.h>
+#include <dolphin/gx/types.h>
 #include <dolphin/os.h>
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSMemory.h>
@@ -9,9 +11,10 @@
 #include <baselib/class.h>
 #include <baselib/debug.h>
 #include <baselib/displayfunc.h>
+#include <baselib/fobj.h>
 #include <baselib/id.h>
 #include <baselib/initialize.h>
-#include <baselib/leak.h>
+#include <baselib/list.h>
 #include <baselib/lobj.h>
 #include <baselib/mtx.h>
 #include <baselib/objalloc.h>

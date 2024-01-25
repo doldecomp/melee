@@ -2,11 +2,14 @@
 #define GALE01_390730
 
 #include <platform.h>
+#include "ft/forward.h"
 #include "it/forward.h"
 #include <baselib/forward.h>
 
 #include <placeholder.h>
 #include <baselib/objalloc.h>
+
+struct _GObjUnkStruct;
 
 #define HSD_GOBJ_GXLINK_NONE ((u8) 0xFF)
 #define HSD_GOBJ_OBJ_NONE 0xFF
@@ -51,6 +54,7 @@ typedef struct _HSD_GObjLibInitDataType {
     HSD_ObjAllocData gobj_proc_def; // 804CE3B8
 } HSD_GObjLibInitDataType;
 
+/// @todo Belongs in `melee/` somewhere
 typedef struct _HSD_GObjList {
     /* 0x00 */ HSD_GObj* x0;
     /* 0x04 */ HSD_GObj* x4;

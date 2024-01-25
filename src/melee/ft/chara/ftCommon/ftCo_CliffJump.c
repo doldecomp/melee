@@ -1,17 +1,19 @@
 #include <platform.h>
-#include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_CliffJump.h"
 
-#include "ftCo_09C4.h"
 #include "ftCo_CliffClimb.h"
 #include "ftCo_FallSpecial.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 
 /* 09B1B8 */ static void ftCo_8009B1B8(ftCo_GObj* gobj);
 /* 09B2F8 */ static void ftCo_8009B2F8(ftCo_GObj* gobj);
