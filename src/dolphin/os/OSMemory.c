@@ -47,7 +47,7 @@ static void MEMIntrruptHandler(__OSInterrupt interrupt, OSContext* context)
     __OSUnhandledException(OS_ERROR_PROTECTION, context, cause, addr);
 }
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 asm void Config24MB(void)
 { // clang-format off
     nofralloc
@@ -92,7 +92,7 @@ void Config24MB(void)
 }
 #endif
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 asm void Config48MB(void)
 { // clang-format off
     nofralloc
@@ -137,7 +137,7 @@ void Config48MB(void)
 }
 #endif
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 asm void RealMode(register Event)
 { // clang-format off
     nofralloc

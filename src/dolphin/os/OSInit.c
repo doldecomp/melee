@@ -50,6 +50,7 @@ typedef enum OSConsoleType {
     OS_CONSOLE_MINNOW,
 } OSConsoleType;
 
+#ifdef MWERKS_GEKKO
 void __OSEVStart(void);
 void __OSEVEnd(void);
 #define OS_DBJUMPPOINT_ADDR 0x60
@@ -59,6 +60,7 @@ void __OSDBJUMPSTART(void);
 void __OSDBJUMPEND(void);
 static const u32 NOP = 0x60000000;
 #define OS_EXCEPTIONTABLE_ADDR 0x3000
+#endif
 
 static OSBootInfo* BootInfo;
 static u32* BI2DebugFlag;
@@ -70,7 +72,7 @@ OSTime __OSStartTime;
 extern u8 __ArenaHi[];
 extern u8 __ArenaLo[];
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 /// Peephole bug triggered by inline asm function __OSFPRInit (unused in melee)
 #pragma peephole off
 #endif
@@ -118,7 +120,6 @@ void ClearArena(void)
 
 extern bool __DVDLongFileNameFlag;
 extern u32 __PADSpec;
-extern void _db_stack_end(void);
 
 typedef struct BI2Debug {
     s32 debugMonSize;  // 0x0
@@ -222,7 +223,7 @@ void OSInit(void)
         if (BootInfo->arenaLo == NULL && BI2DebugFlag != NULL &&
             *BI2DebugFlag < 2)
         {
-            debugArenaLo = (char*) (((u32) _db_stack_end + 0x1f) & ~0x1f);
+            debugArenaLo = (char*) (((u32) _stack_addr + 0x1f) & ~0x1f);
             OSSetArenaLo(debugArenaLo);
         }
 
@@ -326,6 +327,7 @@ static u32 __OSExceptionLocations[] = {
     0x0900, 0x0C00, 0x0D00, 0x0F00, 0x1300, 0x1400, 0x1700,
 };
 
+#ifdef MWERKS_GEKKO
 void OSExceptionInit(void)
 {
     u8 exception;
@@ -417,8 +419,15 @@ void OSExceptionInit(void)
 
     DBPrintf("Exceptions initialized...\n");
 }
+#else
 
-#ifdef MUST_MATCH
+void OSExceptionInit(void)
+{
+    NOT_IMPLEMENTED;
+}
+#endif
+
+#ifdef MWERKS_GEKKO
 
 asm void __OSDBIntegrator(void)
 { // clang-format off
@@ -445,7 +454,7 @@ void __OSDBIntegrator(void)
 
 #endif
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 
 asm void __OSDBJump(void)
 { // clang-format off
@@ -477,7 +486,7 @@ __OSExceptionHandler __OSGetExceptionHandler(u8 exception)
     return OSExceptionTable[exception];
 }
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 
 asm void OSExceptionVector(void)
 { // clang-format off
@@ -537,7 +546,7 @@ void OSExceptionVector(void)
 
 #endif
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 
 asm void OSDefaultExceptionHandler(void)
 { // clang-format off
@@ -574,7 +583,7 @@ void OSDefaultExceptionHandler(void)
 
 #endif
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 
 void __OSPSInit(void)
 {

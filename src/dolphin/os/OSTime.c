@@ -2,7 +2,7 @@
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSTime.h>
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 
 asm OSTime OSGetTime(void){ // clang-format off
     mftbu r3
@@ -21,7 +21,7 @@ OSTime OSGetTime(void)
 
 #endif
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 
 asm OSTick OSGetTick(void){ // clang-format off
     mftb r3, 0x10c
