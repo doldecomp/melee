@@ -7,23 +7,23 @@
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/vi/vi.h>
-#include <baselib/aobj.h>
-#include <baselib/class.h>
-#include <baselib/debug.h>
-#include <baselib/displayfunc.h>
-#include <baselib/fobj.h>
-#include <baselib/id.h>
-#include <baselib/initialize.h>
-#include <baselib/list.h>
-#include <baselib/lobj.h>
-#include <baselib/mtx.h>
-#include <baselib/objalloc.h>
-#include <baselib/random.h>
-#include <baselib/robj.h>
-#include <baselib/shadow.h>
-#include <baselib/state.h>
-#include <baselib/tev.h>
-#include <baselib/video.h>
+#include "aobj.h"
+#include "class.h"
+#include "debug.h"
+#include "displayfunc.h"
+#include "fobj.h"
+#include "id.h"
+#include "initialize.h"
+#include "list.h"
+#include "lobj.h"
+#include "mtx.h"
+#include "objalloc.h"
+#include "random.h"
+#include "robj.h"
+#include "shadow.h"
+#include "state.h"
+#include "tev.h"
+#include "video.h"
 
 extern OSHeapHandle HSD_Synth_804D6018;
 extern GXRenderModeObj GXNtsc480IntDf;

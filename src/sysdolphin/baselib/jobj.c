@@ -6,19 +6,19 @@
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os.h>
-#include <baselib/aobj.h>
-#include <baselib/class.h>
-#include <baselib/cobj.h>
-#include <baselib/displayfunc.h>
-#include <baselib/dobj.h>
-#include <baselib/fobj.h>
-#include <baselib/id.h>
-#include <baselib/jobj.h>
-#include <baselib/mobj.h>
-#include <baselib/mtx.h>
-#include <baselib/pobj.h>
-#include <baselib/robj.h>
-#include <baselib/spline.h>
+#include "aobj.h"
+#include "class.h"
+#include "cobj.h"
+#include "displayfunc.h"
+#include "dobj.h"
+#include "fobj.h"
+#include "id.h"
+#include "jobj.h"
+#include "mobj.h"
+#include "mtx.h"
+#include "pobj.h"
+#include "robj.h"
+#include "spline.h"
 
 void JObjInfoInit(void);
 HSD_JObjInfo hsdJObj = { JObjInfoInit };

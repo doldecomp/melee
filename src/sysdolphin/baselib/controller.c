@@ -1,6 +1,6 @@
 #include <dolphin/os/OSInterrupt.h>
-#include <baselib/controller.h>
-#include <baselib/rumble.h>
+#include "controller.h"
+#include "rumble.h"
 
 extern PadLibData HSD_PadLibData;
 extern HSD_PadStatus HSD_PadMasterStatus[4];

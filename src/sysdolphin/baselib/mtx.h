@@ -6,7 +6,7 @@
 
 #include "lb/lbrefract.h"
 
-#include <baselib/objalloc.h>
+#include "baselib/objalloc.h"
 
 void HSD_MtxInverse(Mtx src, Mtx dest);
 void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest);

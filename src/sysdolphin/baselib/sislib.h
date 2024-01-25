@@ -2,9 +2,9 @@
 #define SYSDOLPHIN_BASELIB_SISLIB_H
 
 #include <platform.h>
-#include <baselib/forward.h>
+#include "baselib/forward.h"
 
-#include <baselib/archive.h>
+#include "baselib/archive.h"
 
 typedef struct {
     unk_t x0;

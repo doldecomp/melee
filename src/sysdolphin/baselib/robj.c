@@ -4,16 +4,16 @@
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os.h>
-#include <baselib/aobj.h>
-#include <baselib/class.h>
-#include <baselib/debug.h>
-#include <baselib/fobj.h>
-#include <baselib/id.h>
-#include <baselib/jobj.h>
-#include <baselib/list.h>
-#include <baselib/mtx.h>
-#include <baselib/object.h>
-#include <baselib/robj.h>
+#include "aobj.h"
+#include "class.h"
+#include "debug.h"
+#include "fobj.h"
+#include "id.h"
+#include "jobj.h"
+#include "list.h"
+#include "mtx.h"
+#include "object.h"
+#include "robj.h"
 
 HSD_ObjAllocData robj_alloc_data;   // robj_alloc_data
 HSD_ObjAllocData rvalue_alloc_data; // rvalue_alloc_data

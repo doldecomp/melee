@@ -1,7 +1,7 @@
 #include <__mem.h>
 #include <Gecko_setjmp.h>
-#include <baselib/__baselib.h>
-#include <baselib/hsd_3B33.h>
+#include "__baselib.h"
+#include "hsd_3B33.h"
 
 void hsd_803B3344(u8 byte)
 {

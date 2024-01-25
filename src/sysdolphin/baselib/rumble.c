@@ -2,8 +2,8 @@
 
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/pad/pad.h>
-#include <baselib/controller.h>
-#include <baselib/rumble.h>
+#include "controller.h"
+#include "rumble.h"
 
 extern PadLibData HSD_PadLibData;
 

@@ -1,7 +1,7 @@
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/objalloc.h>
+#include "debug.h"
+#include "gobj.h"
+#include "gobjproc.h"
+#include "objalloc.h"
 
 extern HSD_ObjAllocData gobjproc_alloc_data;
 

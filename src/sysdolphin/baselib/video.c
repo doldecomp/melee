@@ -2,9 +2,9 @@
 #include <dolphin/gx/GXMisc.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/vi/vi.h>
-#include <baselib/debug.h>
-#include <baselib/state.h>
-#include <baselib/video.h>
+#include "debug.h"
+#include "state.h"
+#include "video.h"
 
 HSD_VIInfo HSD_VIData;
 static u8 garbage[HSD_ANTIALIAS_GARBAGE_SIZE] ATTRIBUTE_ALIGN(32);

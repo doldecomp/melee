@@ -1,4 +1,4 @@
-#include <baselib/devcom.h>
+#include "devcom.h"
 
 bool devComStatus[4];
 
