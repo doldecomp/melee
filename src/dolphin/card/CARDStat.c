@@ -137,6 +137,9 @@ s32 CARDGetStatus(s32 chan, s32 fileNo, CARDStat* stat)
     return __CARDPutControlBlock(card, result);
 }
 
+/// @todo Used only by #hsd_803AAA48.
+#pragma push
+#pragma force_active on
 s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat* stat,
                        CARDCallback callback)
 {
@@ -183,3 +186,4 @@ s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat* stat,
     }
     return result;
 }
+#pragma pop
