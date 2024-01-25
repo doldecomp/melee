@@ -3626,7 +3626,7 @@ dolphin/dsp/dsp_debug.c:
 
 dolphin/dsp/dsp_task.c:
 	.text       start:0x8033625C end:0x80336AE0
-	.data       start:0x80400C40 end:0x80400D80
+	.data       start:0x80400C40 end:0x80400D7B
 	.sbss       start:0x804D7218 end:0x804D7230
 
 dolphin/dvd/dvdlow.c:

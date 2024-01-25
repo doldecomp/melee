@@ -1310,7 +1310,7 @@ config.libs = [
         "ar",
         [
             Object(NonMatching, "dolphin/ar/ar.c"),
-            Object(NonMatching, "dolphin/ar/arq.c"),
+            Object(Matching, "dolphin/ar/arq.c"),
         ],
     ),
     DolphinLib(
