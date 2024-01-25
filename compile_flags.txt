@@ -26,6 +26,7 @@
 -Wno-missing-field-initializers
 -Wno-switch
 -Wno-tautological-bitwise-compare
+-Wno-undefined-internal
 -Wno-unknown-pragmas
 -Wno-unused-function
 -Wno-unused-parameter

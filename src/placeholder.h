@@ -66,12 +66,4 @@ OSPanic(__FILE__, __LINE__, "Function is not implemented!")
 
 #define LITERAL static ATTRIBUTE_USED
 
-#ifndef SDATA
-#if defined(__MWERKS__) && !defined(M2CTX)
-#define SDATA __declspec(section ".sdata")
-#else
-#define SDATA
-#endif
-#endif
-
 #endif

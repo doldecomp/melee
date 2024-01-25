@@ -9,7 +9,8 @@
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSException.h>
 
-extern vu32 __DIRegs[0x10] AT_ADDRESS(0xCC006000);
+extern vu32 __PIRegs[12] AT_ADDRESS(0xCC003000);
+extern vu32 __DIRegs[16] AT_ADDRESS(0xCC006000);
 
 __OSExceptionHandler __OSGetExceptionHandler(u8);
 __OSExceptionHandler __OSSetExceptionHandler(u8, __OSExceptionHandler);

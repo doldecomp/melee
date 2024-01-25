@@ -524,7 +524,8 @@ static void stateCoverClosed(void)
 
 static void stateCoverClosed_CMD(DVDCommandBlock* block)
 {
-    DVDLowReadDiskID(&tmpBuffer, cbForStateCoverClosed);
+    /// @todo Incorrect cast.
+    DVDLowReadDiskID((DVDDiskID*) &tmpBuffer, cbForStateCoverClosed);
 }
 
 static void cbForStateCoverClosed(u32 intType)
