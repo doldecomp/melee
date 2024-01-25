@@ -1,28 +1,32 @@
+#include <platform.h>
+#include "ftCommon/forward.h"
+
 #include "ftPk_SpecialHi.h"
 
-#include "ftPk_Init.h"
 #include "math.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Pass.h"
+#include "ftPikachu/types.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h>
 #include <dolphin/mtx/types.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
+#include <baselib/random.h>
 
 /// @todo Move elsewhere.
 #define MAX_STICK_MAG 0.999f
@@ -38,10 +42,7 @@ void ftPk_SpecialHi_UpdateVel(HSD_GObj* gobj)
 
 void ftPk_SpecialHi_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     /// @todo Can't move below @c fp.
     ftPikachuAttributes* sa;
@@ -65,10 +66,7 @@ void ftPk_SpecialHi_Enter(HSD_GObj* gobj)
 
 void ftPk_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     /// @todo Can't move below @c fp.
     ftPikachuAttributes* sa;
@@ -115,10 +113,7 @@ void ftPk_SpecialHiStart0_Phys(HSD_GObj* gobj)
 
 void ftPk_SpecialAirHiStart0_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -178,10 +173,7 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->mv.pk.unk4.x4--;
     if (fp->mv.pk.unk4.x4 <= 0) {
@@ -220,10 +212,7 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->mv.pk.unk4.x4--;
     if (fp->mv.pk.unk4.x4 <= 0) {
@@ -322,10 +311,7 @@ void ftPk_SpecialHiStart1_Coll(HSD_GObj* gobj)
 
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     /// @todo Eliminate cast (by changing type of field)
     if (!ft_80082888(gobj, (ftCollisionBox*) &pika_attr->height_attributes)) {
@@ -382,10 +368,7 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
     CollData* collData = &fp->coll_data;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     fp->mv.pk.unk4.x18++;
     if (ft_CheckGroundAndLedge(gobj, fp->facing_dir < 0.0f ? -1 : 1)) {
@@ -440,10 +423,7 @@ void ftPk_SpecialHi_ChangeMotion_Unk02(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(gobj, 357, 206327946, fp->cur_anim_frame, 0.0f,
@@ -468,10 +448,7 @@ void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
 
     HSD_JObj* jobj;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fighter2 = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fighter2);
@@ -682,10 +659,7 @@ bool ftPk_SpecialHi_80127064(HSD_GObj* gobj)
         Vec3 vec1, vec2;
         f32 tempf;
 
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4];
-#endif
 
         // push current stick to temporary vector
         vec1.x = fp->input.lstick.x;
@@ -731,10 +705,7 @@ void ftPk_SpecialHiEnd_Anim(HSD_GObj* gobj)
 
 void ftPk_SpecialAirHiEnd_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
@@ -766,10 +737,7 @@ void ftPk_SpecialHiEnd_Phys(HSD_GObj* gobj)
 
 void ftPk_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
@@ -806,10 +774,7 @@ void ftPk_SpecialAirHiEnd_Coll(HSD_GObj* gobj)
     ///       #ftPikachuAttributes::height_attributes)
     ftCollisionBox* box = (ftCollisionBox*) &pika_attr->height_attributes;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (ft_8008239C(gobj, fp->facing_dir, (f32*) box)) {
         ftCo_800D5CB0(gobj, 0, pika_attr->xB0);
@@ -829,10 +794,7 @@ void ftPk_SpecialHi_ChangeMotion_Unk04(HSD_GObj* gobj)
 
 void ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftPikachuAttributes* pika_attr;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -851,10 +813,7 @@ void ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(HSD_GObj* gobj)
 
 void ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftPikachuAttributes* pika_attr;
     Fighter* fp = GET_FIGHTER(gobj);

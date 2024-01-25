@@ -1,7 +1,9 @@
-#ifndef _grdatfiles_h_
-#define _grdatfiles_h_
+#ifndef GALE01_1C5FC0
+#define GALE01_1C5FC0
 
-#include "gr/stage.h"
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 // Appears to be related to stage audio
 typedef struct _UnkBgmStruct {

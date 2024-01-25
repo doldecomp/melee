@@ -35,9 +35,7 @@ void ARQReset(void);
 void ARQPostRequest(ARQRequest* task, u32 owner, ARQType type,
                     ARQPrio priority, u32 source, u32 dest, size_t length,
                     ARQCallback callback);
-size_t ARQGetChunkSize(void);
 
-void __ARQPopTaskQueueHi(void);
 void __ARQServiceQueueLo(void);
 void __ARQCallbackHack(ARQRequest*);
 void __ARQInitTempQueue(void);

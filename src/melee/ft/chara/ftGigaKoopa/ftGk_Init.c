@@ -1,17 +1,20 @@
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "ftKoopa/forward.h"
 #include "it/forward.h"
 
 #include "ftGk_Init.h"
 
-#include "ft/ft_0877.h"
 #include "ft/ft_0C31.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftKoopa/ftKp_Init.h"
+#include "ftKoopa/types.h"
+#include "it/it_26B1.h"
+
+#include <common_structs.h>
+#include <baselib/gobj.h>
 
 MotionState ftGk_Init_MotionStateTable[ftKp_MS_SelfCount] = {
     {
@@ -299,10 +302,7 @@ Fighter_CostumeStrings ftGk_Init_CostumeStrings[] = {
 
 void ftGk_Init_OnDeath(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* koopaAttr = fp->dat_attrs;

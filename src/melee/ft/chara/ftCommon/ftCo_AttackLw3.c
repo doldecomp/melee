@@ -1,6 +1,6 @@
 #include <platform.h>
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ftCo_AttackLw3.h"
@@ -16,15 +16,17 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 #include "ftGameWatch/ftGw_AttackLw3.h"
 
-#include <placeholder.h>
+#include <common_structs.h>
 
 typedef enum cmd_var_idx {
     cmd_unk0_bool,
@@ -54,10 +56,7 @@ bool ftCo_AttackLw3_CheckInput(ftCo_GObj* gobj)
 
 void callUnk(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ft_800892A0(gobj);
     ft_80089824(gobj);
 }
@@ -138,10 +137,7 @@ static bool checkItemThrowInput(ftCo_GObj* gobj)
 
 void ftCo_AttackLw3_IASA(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->allow_interrupt) {
         RETURN_IF(ftCo_AttackS4_CheckInput(gobj));

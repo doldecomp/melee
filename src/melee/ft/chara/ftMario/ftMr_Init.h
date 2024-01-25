@@ -1,6 +1,7 @@
 #ifndef GALE01_0E08CC
 #define GALE01_0E08CC
 
+#include <platform.h>
 #include "ftMario/forward.h"
 #include <baselib/forward.h>
 

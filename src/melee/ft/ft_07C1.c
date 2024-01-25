@@ -1,17 +1,24 @@
+#include "it/forward.h"
+
 #include "ft/ft_07C1.h"
 
-#include "fighter.h"
-#include "ft_0877.h"
-#include "ftcoll.h"
-
-#include "ft/ft_0C31.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_HammerWait.h"
 #include "it/it_26B1.h"
-#include "lb/lb_00B0.h"
 
 #include <placeholder.h>
+#include <stddef.h>
+#include <baselib/gobj.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
+#include "ftcoll.h"
+
+#include "it/item.h"
+#include "lb/lb_00B0.h"
+#include "lb/lbcollision.h"
+#endif
+
+#ifdef MUST_MATCH
 static f32 const ft_804D8320 = 0.0F;
 static f32 const ft_804D8324 = 1.0F;
 #endif
@@ -31,7 +38,7 @@ void ft_8007C114(HSD_GObj* gobj)
     fp->x2219_b4 = 0;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_8007C17C(HSD_GObj* gobj)
@@ -91,7 +98,7 @@ void ft_8007C17C(HSD_GObj* gobj)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_8007C224(HSD_GObj* gobj)
@@ -161,7 +168,7 @@ void ft_8007C224(HSD_GObj* gobj)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_8007C2E0(void)
@@ -308,7 +315,7 @@ void ft_8007C2E0(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_8007C4BC(HSD_GObj* gobj)

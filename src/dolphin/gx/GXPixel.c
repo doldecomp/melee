@@ -1,11 +1,14 @@
-#include <common_structs.h>
 #include <placeholder.h>
-#include <runtime.h>
-#include <dolphin/gx/__GXBump.h>
-#include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/GXPixel.h>
+#include <dolphin/gx/types.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
+
+#ifdef MUST_MATCH
+#include "dolphin/gx/__GXInit.h"
+#include "dolphin/gx/GXBump.h"
+#include "Runtime/runtime.h"
+#endif
 
 s32 GXPixel_80401508[] = { 0, 1, 2, 3, 4, 4, 4, 5 };
 
@@ -154,7 +157,7 @@ void GXSetFog(s32 arg0, GXColor arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXInitFogAdjTable(GXFogAdjTbl* arg0, u16 arg1, Mtx44 arg2)
@@ -290,7 +293,7 @@ void GXInitFogAdjTable(GXFogAdjTbl* arg0, u16 arg1, Mtx44 arg2)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXSetFogRangeAdj(s8, u16, GXFogAdjTbl*)
@@ -373,7 +376,7 @@ void GXSetFogRangeAdj(s8 arg0, u16 arg1, GXFogAdjTbl* arg2)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXSetBlendMode(s32, s32, s32, s32)
@@ -457,7 +460,7 @@ void GXSetBlendMode(s32 arg0, s32 arg1, s32 arg2, s32 arg3)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 // https://decomp.me/scratch/yi6mS // 440 (72.50%)
 #pragma push
@@ -492,7 +495,7 @@ void GXSetColorUpdate(u8 arg0)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 // https://decomp.me/scratch/NG4ef // 440 (72.50%)
 #pragma push
@@ -527,7 +530,7 @@ void GXSetAlphaUpdate(u8 arg0)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 // https://decomp.me/scratch/MBnZl // 1345 (55.17%)
 #pragma push
@@ -576,7 +579,7 @@ void GXSetZMode(u8 arg0, u32 arg1, u32 arg2)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 // https://decomp.me/scratch/mQjA0 // 440 (72.50%)
 #pragma push
@@ -611,7 +614,7 @@ void GXSetZCompLoc(u8 arg0)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 // https://decomp.me/scratch/RmAUs // 715 (89.49%)
 #pragma push
@@ -702,7 +705,7 @@ void GXSetPixelFmt(int arg0, int arg1)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 // https://decomp.me/scratch/Eo3bb // 440 (72.50%)
 #pragma push
@@ -737,7 +740,7 @@ void GXSetDither(u8 arg0)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXSetDstAlpha(u8, u8)
@@ -776,7 +779,7 @@ void GXSetDstAlpha(u8 arg0, u8 arg1)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXSetFieldMask(s32, s8)
@@ -801,7 +804,7 @@ asm void GXSetFieldMask(s32, s8)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXSetFieldMode(int arg0, int arg1)

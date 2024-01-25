@@ -1,5 +1,6 @@
 #include <platform.h>
 #include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_CargoThrow.h"
 
@@ -8,11 +9,15 @@
 #include "ftCo_Damage.h"
 #include "math.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "ftDonkey/types.h"
 
-#include <placeholder.h>
+#include <common_structs.h>
 
 /* 09C02C */ static bool ftCo_8009C02C(ftCo_GObj* gobj, FtMotionId msid);
 /* 09C170 */ static void ftCo_8009C170(ftCo_GObj* gobj);
@@ -87,10 +92,7 @@ bool ftCo_8009BF3C(ftCo_GObj* gobj)
 
 bool ftCo_8009C02C(ftCo_GObj* gobj, FtMotionId msid)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     {
         MotionFlags mf;
@@ -161,10 +163,7 @@ static inline void inlineB1(ftCo_GObj* gobj, FighterEvent cb, int offset)
 
 void ftCo_8009C170(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     inlineB1(gobj, ftCommon_8007D5D4, 4);
 }
 
@@ -255,9 +254,6 @@ void ftCo_CargoThrowAir_Coll(ftCo_GObj* gobj)
 
 void ftCo_8009C45C(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     inlineB1(gobj, ftCommon_8007D7FC, -4);
 }

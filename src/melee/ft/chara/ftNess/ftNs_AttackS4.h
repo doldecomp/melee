@@ -5,6 +5,8 @@
 
 #include <baselib/forward.h>
 
+#include <stdbool.h>
+
 /* 114BF4 */ void ftNs_AttackS4_OnReflect(HSD_GObj* gobj);
 /* 114C24 */ void ftNs_AttackS4_Enter(HSD_GObj* gobj);
 /* 114CC0 */ bool ftNs_AttackS4_CheckNessBatRemove(HSD_GObj* gobj);

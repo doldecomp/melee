@@ -1,6 +1,6 @@
-#include "forward.h"
-#include "ft/forward.h"
+#include <platform.h>
 #include "ftCommon/forward.h"
+#include "it/forward.h"
 
 #include "ftPe_Init.h"
 
@@ -14,14 +14,16 @@
 #include "ftPe_SpecialS.h"
 #include "types.h"
 
-#include "ft/ft_0877.h"
 #include "ft/ft_0CEE.h"
 #include "ft/ftcamera.h"
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "it/it_26B1.h"
 #include "lb/lbmthp.h"
+
+#include <placeholder.h>
 
 MotionState ftPe_Init_MotionStateTable[ftPe_MS_SelfCount] = {
     {
@@ -479,10 +481,7 @@ void ftPe_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 
 void ftPe_Init_8011B93C(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     s32 result = ftParts_80074A74(gobj, 2);
 

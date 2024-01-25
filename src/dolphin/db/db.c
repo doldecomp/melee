@@ -2,6 +2,7 @@
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/db/db.h>
 #include <dolphin/os.h>
+#include <dolphin/os/OSContext.h>
 
 static DBInterface* __DBInterface;
 static int DBVerbose;
@@ -27,10 +28,7 @@ bool DBIsDebuggerPresent(void)
 
 static void __DBExceptionDestinationAux(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     OSContext* ctx = (void*) (0x80000000 + *(u32*) 0xC0); // WTF??
     OSReport("DBExceptionDestination\n");
@@ -39,7 +37,7 @@ static void __DBExceptionDestinationAux(void)
 }
 
 #ifdef MWERKS_GEKKO
-static asm void __DBExceptionDestination(void)
+asm void __DBExceptionDestination(void)
 { // clang-format off
     nofralloc
     mfmsr r3
@@ -49,7 +47,7 @@ static asm void __DBExceptionDestination(void)
 } // clang-format on
 
 #elif defined(__GNUC__) && defined(__PPCGEKKO__)
-static void __DBExceptionDestination(void)
+void __DBExceptionDestination(void)
 {
     asm("mfmsr %r3\n"
         "ori %r3, %r3, 0x30\n"
@@ -58,7 +56,7 @@ static void __DBExceptionDestination(void)
 }
 
 #else
-static void __DBExceptionDestination(void)
+void __DBExceptionDestination(void)
 {
     NOT_IMPLEMENTED;
 }

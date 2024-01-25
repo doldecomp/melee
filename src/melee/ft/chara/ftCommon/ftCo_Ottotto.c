@@ -1,6 +1,7 @@
 #include <platform.h>
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "ftCo_Ottotto.h"
 
@@ -17,12 +18,15 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
+#include "ft/types.h"
 #include "mp/mplib.h"
+
+#include <common_structs.h>
 
 /* 09A410 */ static void ftCo_8009A410(ftCo_GObj* gobj);
 /* 09A6B8 */ static void ftCo_8009A6B8(ftCo_GObj* gobj);
@@ -55,10 +59,7 @@ void ftCo_Ottotto_Anim(ftCo_GObj* gobj)
 
 void ftCo_Ottotto_IASA(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     RETURN_IF(ftCo_SpecialS_CheckInput(gobj));
     RETURN_IF(ftCo_Attack100_CheckInput(gobj));
     RETURN_IF(ftCo_800D6824(gobj));
@@ -89,16 +90,10 @@ void ftCo_Ottotto_Coll(ftCo_GObj* gobj)
         if (!ft_800827A0(gobj)) {
             ftCo_800CC730(gobj);
         } else {
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[4] = { 0 };
-#endif
             Vec3 pos;
             {
-                /// @todo Unused stack.
-#ifdef MUST_MATCH
                 u8 _[4] = { 0 };
-#endif
                 if (fp->facing_dir > 0) {
                     mpLib_80053FF4(fp->coll_data.floor.index, &pos);
                 } else {
@@ -143,16 +138,10 @@ void ftCo_OttottoWait_Coll(ftCo_GObj* gobj)
         if (!ft_800827A0(gobj)) {
             ftCo_800CC730(gobj);
         } else {
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[4] = { 0 };
-#endif
             Vec3 pos;
             {
-                /// @todo Unused stack.
-#ifdef MUST_MATCH
                 u8 _[20] = { 0 };
-#endif
                 if (fp->facing_dir > 0) {
                     mpLib_80053FF4(fp->coll_data.floor.index, &pos);
                 } else {

@@ -1,11 +1,19 @@
+#include "forward.h"
+
 #include "lobj.h"
 
-#include <placeholder.h>
+#include "aobj.h"
+#include "class.h"
+#include "cobj.h"
+#include "list.h"
+#include "object.h"
+#include "wobj.h"
+
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
-#include <baselib/cobj.h>
+#include <dolphin/os.h>
 
 static void LObjInfoInit(void);
 
@@ -673,7 +681,6 @@ void HSD_LObjDeleteCurrentAll(HSD_LObj* lobj)
 
 void HSD_LObjSetCurrentAll(HSD_LObj* lobj)
 {
-    /// @todo Unused stack.
 #ifdef MUST_MATCH
     u32 _;
 #endif
@@ -701,10 +708,7 @@ inline void LObjReplaceAll(HSD_LObj* lobj)
 
 void HSD_LObj_803668EC(HSD_LObj* lobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     LObjReplaceAll(lobj);
 }
@@ -1062,9 +1066,7 @@ static void LObjRelease(HSD_Class* o)
 {
     HSD_LObj* lobj = HSD_LOBJ(o);
     ///@todo Unused stack
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     HSD_AObjRemove(lobj->aobj);
     HSD_WObjUnref(HSD_LObjGetPositionWObj(lobj));

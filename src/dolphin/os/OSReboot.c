@@ -1,20 +1,23 @@
 #include <placeholder.h>
-#include <dolphin/dvd/dvd.h>
-#include <dolphin/os/OSCache.h>
-#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSReboot.h>
-#include <dolphin/os/OSReset.h>
-#include <MetroTRK/intrinsics.h>
 
 #ifdef MWERKS_GEKKO
-static unk_t Header[0x20 / sizeof(unk_t)];
-static unk_t SaveStart;
-static unk_t SaveEnd;
+#include "dolphin/pad/pad.h"
+#endif
+
+#ifdef MUST_MATCH
+#include <dolphin/dvd/dvd.h>
+#endif
+
+#ifdef MWERKS_GEKKO
+static void* Header[0x20 / sizeof(unk_t)];
+static void* SaveStart;
+static void* SaveEnd;
 #endif
 
 static bool Prepared;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 void Run(register Event callback)
 {
     OSDisableInterrupts();
@@ -39,11 +42,13 @@ static void Callback(void)
     Prepared = true;
 }
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void __OSReboot(u32 resetCode, bool forceMenu)
-{ // clang-format off
-    nofralloc
+ASM void __OSReboot(u32 resetCode, bool forceMenu)
+#ifndef MUST_MATCH
+{
+    NOT_IMPLEMENTED;
+}
+#else /* clang-format off */
+{ nofralloc
 /* 80348144 00344D24  7C 08 02 A6 */	mflr r0
 /* 80348148 00344D28  90 01 00 04 */	stw r0, 4(r1)
 /* 8034814C 00344D2C  94 21 FC B8 */	stwu r1, -0x348(r1)
@@ -175,5 +180,5 @@ lbl_803482E0:
 /* 80348308 00344EE8  38 21 03 48 */	addi r1, r1, 0x348
 /* 8034830C 00344EEC  4E 80 00 20 */	blr
 } // clang-format on
-#pragma pop
-#endif
+#pragma peephole on
+#endif /* clang-format on */

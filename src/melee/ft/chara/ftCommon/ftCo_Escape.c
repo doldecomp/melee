@@ -1,6 +1,7 @@
 #include <platform.h>
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_Escape.h"
 
@@ -9,17 +10,19 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 #include "ftSamus/ftSs_SpecialLw_1.h"
 #include "ftSamus/types.h"
 #include "ftYoshi/ftYs_Guard.h"
 #include "ftYoshi/ftYs_Init.h"
+
+#include <common_structs.h>
 
 static inline bool inlineA0(ftCo_Fighter* fp)
 {
@@ -99,10 +102,7 @@ void ftCo_80099314(ftCo_GObj* gobj, FtMotionId msid, bool arg2)
 
 void ftCo_80099390(ftCo_GObj* gobj, int msid, int arg2)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     fp->cmd_vars[0] = 0;
     fp->mv.co.escape.x4 = false;
@@ -113,10 +113,7 @@ void ftCo_80099390(ftCo_GObj* gobj, int msid, int arg2)
 
 void ftCo_80099438(ftCo_GObj* gobj, int msid, int arg2)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_80099314(gobj, msid, arg2);
     ftParts_80074B0C(gobj, 0, 1);
@@ -138,10 +135,7 @@ void ftCo_Escape_Anim(ftCo_GObj* gobj)
 
 void ftCo_80099564(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->cmd_vars[0] && !fp->mv.co.escape.x4) {
         ftSs_SpecialLw_8012AEBC(gobj);
@@ -253,10 +247,7 @@ void ftCo_800998EC(ftCo_GObj* gobj)
 
 void ftCo_80099954(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->x5F5 == 1) {
         ftYs_Init_8012BE3C(gobj);

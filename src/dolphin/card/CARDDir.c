@@ -1,5 +1,6 @@
+#include <platform.h>
+
 #include <__mem.h>
-#include <stddef.h>
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDCheck.h>
@@ -46,10 +47,7 @@ static void WriteCallback(s32 chan, s32 result)
 
 static void EraseCallback(s32 chan, s32 result)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     CARDControl* card;
     CARDCallback callback;
@@ -88,10 +86,7 @@ error:
 
 s32 __CARDUpdateDir(s32 chan, CARDCallback callback)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     CARDControl* card;
     CARDDirCheck* check;

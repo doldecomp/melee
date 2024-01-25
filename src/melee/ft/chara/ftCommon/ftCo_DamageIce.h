@@ -5,7 +5,7 @@
 #include "ftCommon/forward.h"
 #include <baselib/forward.h>
 
-#include "ft/ftcolltypes.h"
+#include "ft/types.h"
 
 #include <placeholder.h>
 

@@ -1,3 +1,8 @@
+#include <platform.h>
+#include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
+
 #include "gr/grtemblem.h"
 
 #include "gr/granime.h"
@@ -9,7 +14,9 @@
 #include "lb/lb_00F9.h"
 
 #include <dolphin/os.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 
 static void grTRoy_802243F4(int);
 static void grTRoy_802243F8(void);
@@ -144,9 +151,7 @@ static void grTRoy_802245B8(HSD_GObj* gobj) {}
 
 static void grTRoy_802245BC(HSD_GObj* gobj)
 {
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Ground* gp = GET_GROUND(gobj);
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, false);
@@ -167,9 +172,7 @@ static void grTRoy_80224648(HSD_GObj* gobj) {}
 
 static void grTRoy_8022464C(HSD_GObj* gobj)
 {
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Ground* gp = GET_GROUND(gobj);
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, false);

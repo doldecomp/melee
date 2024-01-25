@@ -1,6 +1,6 @@
-#include "forward.h"
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include <dolphin/gx/forward.h>
+#include <dolphin/mtx/forward.h>
 
 #include "ftGw_Init.h"
 
@@ -15,13 +15,17 @@
 #include "ftGw_SpecialS.h"
 #include "types.h"
 
-#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftmaterial.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "it/it_26B1.h"
+
+#include <common_structs.h>
+#include <stddef.h>
+#include <dolphin/gx/types.h>
 
 MotionState ftGw_Init_MotionStateTable[ftGw_MS_SelfCount] = {
     {

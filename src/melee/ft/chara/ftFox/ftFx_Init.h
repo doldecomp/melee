@@ -1,13 +1,17 @@
 #ifndef GALE01_0E5534
 #define GALE01_0E5534
 
+#include "ft/forward.h"
 #include "ftFox/forward.h"
 #include "it/forward.h"
+#include <baselib/forward.h>
 
 #include "ft/fighter.h"
 #include "ft/ftcommon.h"
 #include "it/item.h"
 #include "lb/lbvector.h"
+
+#include <stdbool.h>
 
 /* 0E5534 */ bool ftFx_Init_800E5534(HSD_GObj* gobj);
 /* 0E5554 */ void ftFx_Init_OnDeath(HSD_GObj* gobj);

@@ -1,18 +1,20 @@
+#include "ft/forward.h"
+
 #include "ftDk_HeavyWait0.h"
 
 #include "ftDk_HeavyFall.h"
 #include "ftDk_HeavyTurn.h"
 #include "ftDk_MS_345_0.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/ftcamera.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ftCommon/ftCo_ItemGet.h"
 #include "ftCommon/ftCo_ItemThrow.h"
+#include "ftDonkey/types.h"
+
+#include <common_structs.h>
+#include <stddef.h>
 
 bool ftDk_MS_341_800DF938(HSD_GObj* gobj)
 {
@@ -27,10 +29,7 @@ bool ftDk_MS_341_800DF938(HSD_GObj* gobj)
 void ftDk_MS_341_800DF980(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
     if (fp->ground_or_air == GA_Air) {
         ftCommon_8007D7FC(fp);
     }

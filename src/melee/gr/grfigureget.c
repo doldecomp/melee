@@ -4,10 +4,12 @@
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
-#include "lb/lb_00F9.h"
+#include "gr/types.h"
 
 #include <dolphin/os.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 
 static void grFigureGet_80219530(int);
 static void grFigureGet_80219534(void);

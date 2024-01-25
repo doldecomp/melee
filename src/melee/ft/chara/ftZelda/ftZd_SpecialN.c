@@ -1,4 +1,5 @@
-#include "ft/forward.h"
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
 
 #include "ftZd_SpecialN.h"
 
@@ -6,13 +7,13 @@
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
+#include "ftZelda/types.h"
 
 void ftZd_SpecialN_8013A830(HSD_GObj* gobj)
 {
@@ -56,10 +57,7 @@ void ftZd_SpecialN_Enter(HSD_GObj* gobj)
     f32 temp_f1;
     Fighter* fp; // r31
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[11];
-#endif
 
     temp_f1 = 0;
     fp = GET_FIGHTER(gobj);
@@ -75,10 +73,7 @@ void ftZd_SpecialAirN_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftZelda_DatAttrs* sa = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     fp->self_vel.y = 0;
     fp->self_vel.x = fp->self_vel.x / sa->x8;
@@ -95,10 +90,7 @@ void ftZd_SpecialN_Anim(HSD_GObj* gobj)
     Fighter* fp;
     ftZelda_DatAttrs* attributes;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
@@ -125,10 +117,7 @@ void ftZd_SpecialAirN_Anim(HSD_GObj* gobj)
     Fighter* fp;
     ftZelda_DatAttrs* attributes;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
@@ -170,10 +159,7 @@ void ftZd_SpecialAirN_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     {
         s32 var1 = fp->mv.zd.specialn.x0;
@@ -215,10 +201,7 @@ void ftZd_SpecialN_8013AC88(HSD_GObj* gobj)
     Fighter* fp;
     Fighter* fighter2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
@@ -241,10 +224,7 @@ void ftZd_SpecialN_8013AD1C(HSD_GObj* gobj)
     Fighter* fp;
     Fighter* fighter2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);

@@ -51,7 +51,7 @@ void OSRegisterResetFunction(OSResetFunctionInfo* func)
     tmp->next = func;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 static asm void Reset(s32)
 { // clang-format off
@@ -97,7 +97,7 @@ lbl_80348400:
 
 #else
 
-static void Reset(s32 _)
+static void Reset(s32 arg0)
 {
     NOT_IMPLEMENTED;
 }
@@ -157,9 +157,7 @@ void __OSDoHotReset(s32 arg0)
 
 void OSResetSystem(int reset, u32 resetCode, bool forceMenu)
 {
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     // Not initialized in all branches?
     bool disableRecalibration;

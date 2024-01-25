@@ -2,7 +2,7 @@
 
 #include "dsp.h"
 
-#include <stddef.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSInterrupt.h>
 
 DSPTaskInfo* __DSP_curr_task;
@@ -14,10 +14,7 @@ bool __DSP_rude_task_pending;
 
 void __DSPHandler(__OSInterrupt intr, OSContext* ctx)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     OSContext new_ctx;
     u32 msg;
@@ -250,7 +247,7 @@ void __DSP_boot_task(DSPTaskInfo* task)
 
     /// @todo Unused assignment.
     ///       Is this writing to a hardware reg?
-#ifdef MUST_MATCH
+#ifndef BUGFIX
     {
         vu32 msg = DSPReadMailFromDSP();
     }
@@ -309,7 +306,7 @@ void __DSP_boot_task(DSPTaskInfo* task)
                        task->dsp_init_vector);
 }
 
-#ifdef MUST_MATCH
+#ifndef BUGFIX
 #pragma push
 #pragma force_active on
 static char _[] = "__DSP_add_task() : Added task    : 0x%08X\n";

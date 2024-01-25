@@ -11,6 +11,7 @@
 #include <dolphin/os.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 
 /* static */ StageCallbacks grTLg_803E8DF0[4] = {
     {

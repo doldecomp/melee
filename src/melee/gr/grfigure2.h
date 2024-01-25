@@ -1,7 +1,10 @@
 #ifndef GALE01_20E274
 #define GALE01_20E274
 
+#include <platform.h>
 #include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include <placeholder.h>
 #include <baselib/gobj.h>

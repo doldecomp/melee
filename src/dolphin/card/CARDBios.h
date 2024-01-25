@@ -1,7 +1,11 @@
 #ifndef DOLPHIN_CARD_CARDBIOS_H
 #define DOLPHIN_CARD_CARDBIOS_H
 
+#include <platform.h>
+#include <dolphin/card/forward.h>
+
 #include <dolphin/card.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSExi.h>
 
 s32 __CARDEnableInterrupt(s32 chan, bool enable);

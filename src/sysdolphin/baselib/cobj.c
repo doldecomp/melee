@@ -1,19 +1,31 @@
+#include <dolphin/gx/forward.h>
+
+#include "cobj.h"
+
+#include "aobj.h"
+#include "class.h"
+#include "debug.h"
+#include "displayfunc.h"
+#include "fobj.h"
+#include "initialize.h"
+#include "mtx.h"
+#include "video.h"
+#include "wobj.h"
+
 #include <math.h>
 #include <placeholder.h>
 #include <dolphin/gx/GXTransform.h>
+#include <dolphin/gx/types.h>
+#include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/vi/vi.h>
-#include <baselib/cobj.h>
-#include <baselib/displayfunc.h>
-#include <baselib/initialize.h>
-#include <baselib/mtx.h>
-#include <baselib/video.h>
+#include <MetroTRK/intrinsics.h>
 #include <MSL/trigf.h>
-#include <Runtime/runtime.h>
 
-/// @todo doesn't seem like this file should be in melee/
-#include <melee/lb/lbrefract.h>
+#if defined(MUST_MATCH)
+#include "Runtime/runtime.h"
+#endif
 
 static HSD_ClassInfo* default_class;
 static HSD_CObj* current;
@@ -548,7 +560,6 @@ lbl_80367E74:
 
 int setupNormalCamera(HSD_CObj* cobj)
 {
-    /// @todo Unused stack.
 #ifdef MUST_MATCH
     int unused[4];
 #endif
@@ -607,7 +618,7 @@ extern const f64 HSD_CObj_804DE488;
 extern const float HSD_CObj_804DE490;
 extern const float HSD_CObj_804DE494;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm int setupTopHalfCamera()
 { // clang-format off
@@ -773,7 +784,7 @@ lbl_803680D8:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm int setupBottomHalfCamera()
 { // clang-format off
@@ -1147,7 +1158,7 @@ float HSD_CObjGetEyeDistance(HSD_CObj* cobj)
     return PSVECMag(&look_vector);
 }
 
-#ifdef MUST_MATCH
+#if defined(MUST_MATCH) || !defined(BUGFIX)
 #pragma push
 #pragma force_active on
 static float unused1[] = {
@@ -1399,7 +1410,7 @@ lbl_80368E54:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void HSD_CObjGetUpVector()
 { // clang-format off
@@ -1562,7 +1573,7 @@ lbl_8036909C:
 } // clang-format on
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 /* static */ extern const f64 HSD_CObj_804DE4A0;
 /* static */ extern const f64 HSD_CObj_804DE4A8;
 
@@ -1732,7 +1743,7 @@ lbl_803692CC:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 asm void HSD_CObjGetLeftVector(UNK_PARAMS)
 { // clang-format off
     nofralloc
@@ -1992,7 +2003,7 @@ MtxPtr HSD_CObjGetInvViewingMtxPtr(HSD_CObj* cobj)
     return HSD_CObjGetInvViewingMtxPtrDirect(cobj);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void HSD_CObjSetRoll(HSD_CObj* cobj, float)
 {
@@ -2350,7 +2361,7 @@ float HSD_CObjGetFar(HSD_CObj* cobj)
     return cobj->far;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 static const float HSD_CObj_804DE478 = 0.0F;
 static const float HSD_CObj_804DE47C = 1.0F;
 #endif
@@ -2596,7 +2607,7 @@ HSD_CObj* HSD_CObjAlloc(void)
     return cobj;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 static Vec3 HSD_CObj_8040631C = { 0, 1, 0 };
 static char HSD_CObj_804D5D50[3] = "0";
 

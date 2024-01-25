@@ -2,8 +2,11 @@
 #define GALE01_284644
 
 #include "it/forward.h"
+#include <baselib/forward.h>
 
 #include "it/types.h"
+
+#include <stdbool.h>
 
 void it_80284644(Item_GObj*);
 void it_802846D4(Item_GObj*);

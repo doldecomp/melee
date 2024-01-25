@@ -2,11 +2,12 @@
 #define MELEE_FT_TYPES_H
 
 #include <platform.h>
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
-#include "lb/forward.h"
+#include "ft/forward.h" // IWYU pragma: export
+#include "it/forward.h"
+#include <dolphin/gx/forward.h>
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
-#include "ft/ftanim.h"
 #include "ftCaptain/types.h"
 #include "ftCommon/types.h"
 #include "ftDonkey/types.h"
@@ -31,24 +32,12 @@
 #include "ftYoshi/types.h"
 #include "ftZakoBoy/types.h"
 #include "ftZelda/types.h"
-#include "gr/stage.h"
 #include "gr/types.h"
-#include "lb/lbcollision.h"
-#include "lb/lbrefract.h"
-#include "pl/player.h"
+#include "lb/types.h"
 
 #include <common_structs.h>
+#include <placeholder.h>
 #include <dolphin/gx/types.h>
-#include <dolphin/mtx/types.h>
-#include <baselib/archive.h>
-#include <baselib/controller.h>
-#include <baselib/dobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/random.h>
 
 // Table in PlCo.dat
 typedef struct _FighterPartsTable {
@@ -476,8 +465,8 @@ struct ftCommonData {
     /* +6C0 */ UNK_T x6C0;
     /* +6C4 */ UNK_T x6C4;
     /* +6C8 */ UNK_T x6C8;
-    /* +6CC */ UNK_T x6CC;
-    /* +6D0 */ UNK_T x6D0;
+    /* +6CC */ int x6CC;
+    /* +6D0 */ float x6D0;
     /* +6D4 */ UNK_T x6D4;
     /// @todo expand to actual size
     /* +6D8 */ void* x6D8[1];
@@ -558,8 +547,6 @@ typedef struct _DObjList {
     usize_t count;
     HSD_DObj** data;
 } DObjList;
-
-struct UnkFloat6_Camera;
 
 typedef struct _ftData {
     /*  +0 */ struct {

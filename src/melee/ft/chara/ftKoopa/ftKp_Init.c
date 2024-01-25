@@ -1,23 +1,28 @@
 #include "forward.h"
-#include "ft/forward.h"
+#include "ftCommon/forward.h"
 #include "it/forward.h"
+#include "lb/forward.h"
 
 #include "ftKoopa/ftKp_Init.h"
 
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
+#include "ft/fighter.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_CaptureDamageKoopa.h"
 #include "ftCommon/ftCo_CaptureKoopa.h"
 #include "ftCommon/ftCo_ThrownKoopa.h"
+#include "ftKoopa/types.h"
+#include "it/it_26B1.h"
+
+#include <placeholder.h>
+#include <baselib/gobj.h>
 
 MotionState ftKp_Init_MotionStateTable[ftKp_MS_SelfCount] = {
     {
@@ -310,10 +315,7 @@ Fighter_CostumeStrings ftKp_Init_CostumeStrings[] = {
 
 void ftKp_Init_OnDeath(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* koopaAttr = fp->dat_attrs;
@@ -765,10 +767,7 @@ void ftKp_SpecialSHit_Anim(HSD_GObj* gobj)
     Fighter* fp0 = GET_FIGHTER(gobj);
 
     {
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 unused0[8];
-#endif
 
         Fighter* fp1 = fp0;
 

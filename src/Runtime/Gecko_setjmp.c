@@ -3,7 +3,7 @@
 #include <Gecko_setjmp.h>
 #include <placeholder.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm int __setjmp(register unk_t env, unk_t, unk_t)
@@ -50,7 +50,7 @@ int __setjmp(unk_t env, unk_t arg1, unk_t arg2)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void longjmp(register unk_t env, register int val)

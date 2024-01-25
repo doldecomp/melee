@@ -1,6 +1,7 @@
 #include <platform.h>
-#include "ft/forward.h"
+#include "ftCommon/forward.h"
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ftPe_SpecialHi.h"
@@ -9,22 +10,20 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0CEE.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_ItemGet.h"
 #include "ftPeach/types.h"
 #include "it/it_26B1.h"
-#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
+#include <common_structs.h>
 #include <math.h>
-#include <placeholder.h>
 #include <baselib/gobj.h>
 #include <melee/it/items/itpeachparasol.h>
 
@@ -173,10 +172,7 @@ static void doEnter(HSD_GObj* gobj)
 
 void ftPe_SpecialHi_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialHiStart, FtMoveId_None, 0,
                               1, 0, NULL);
     ftAnim_8006EBA4(gobj);
@@ -185,10 +181,7 @@ void ftPe_SpecialHi_Enter(HSD_GObj* gobj)
 
 void ftPe_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     fp->self_vel.y = 0;
@@ -211,10 +204,7 @@ static bool checkCmdVar2(HSD_GObj* gobj)
 
 void ftPe_SpecialHiStart_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     if (!checkCmdVar2(gobj) && !ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         ftPe_DatAttrs* da = fp->dat_attrs;
@@ -230,10 +220,7 @@ void ftPe_SpecialHiStart_Anim(HSD_GObj* gobj)
 
 void ftPe_SpecialAirHiStart_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     ftPe_SpecialHiStart_Anim(gobj);
 }
 
@@ -260,10 +247,7 @@ void ftPe_SpecialHiStart_IASA(HSD_GObj* gobj)
 
 void ftPe_SpecialAirHiStart_IASA(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     ftPe_SpecialHiStart_IASA(gobj);
 }
 
@@ -278,10 +262,7 @@ void ftPe_SpecialHiStart_Phys(HSD_GObj* gobj)
 
 void ftPe_SpecialAirHiStart_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     ftCo_DatAttrs* ca = &fp->co_attrs;
@@ -337,10 +318,7 @@ void ftPe_SpecialHiEnd_Anim(HSD_GObj* gobj)
 
 void ftPe_SpecialAirHiEnd_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     ftPe_SpecialHiEnd_Anim(gobj);
 }
 
@@ -350,10 +328,7 @@ void ftPe_SpecialAirHiEnd_IASA(HSD_GObj* gobj) {}
 
 void ftPe_SpecialHiEnd_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* ca = &fp->co_attrs;
     if (fp->ground_or_air == GA_Air) {
@@ -368,10 +343,7 @@ void ftPe_SpecialHiEnd_Phys(HSD_GObj* gobj)
 
 void ftPe_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* ca = &fp->co_attrs;
     ftPe_DatAttrs* da = fp->dat_attrs;

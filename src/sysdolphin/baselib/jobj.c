@@ -1,17 +1,25 @@
+#include "jobj.h"
+
+#include "aobj.h"
+#include "class.h"
+#include "cobj.h"
+#include "displayfunc.h"
+#include "dobj.h"
+#include "fobj.h"
+#include "id.h"
 #include "math.h"
+#include "mobj.h"
+#include "mtx.h"
+#include "pobj.h"
+#include "robj.h"
+#include "spline.h"
+
+#include "lb/lbrefract.h"
 
 #include <__mem.h>
 #include <dolphin/mtx/mtxvec.h>
-#include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os.h>
-#include <baselib/class.h>
-#include <baselib/displayfunc.h>
-#include <baselib/dobj.h>
-#include <baselib/jobj.h>
-#include <baselib/mtx.h>
-#include <baselib/robj.h>
-#include <baselib/spline.h>
 
 void JObjInfoInit(void);
 HSD_JObjInfo hsdJObj = { JObjInfoInit };
@@ -405,10 +413,7 @@ lbl_8036FB3C:
 void HSD_JObjAddAnim(HSD_JObj* jobj, HSD_AnimJoint* an_joint,
                      HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     bool has_dobj;
 
@@ -904,10 +909,7 @@ void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
             if (!(jobj->flags & JOBJ_HIDDEN)) {
                 Mtx mtx;
 
-                /// @todo Unused stack.
-#ifdef MUST_MATCH
                 u8 _[8];
-#endif
 
                 HSD_CObj* cobj;
                 HSD_JObjSetupMatrix(jobj);
@@ -1038,10 +1040,7 @@ static inline void ref_INC_alt(void* o)
 
 void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (jobj == NULL || joint == NULL) {
         return;
@@ -1063,10 +1062,7 @@ void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
 
 void HSD_JObjResolveRefsAll(HSD_JObj* jobj, HSD_Joint* joint)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     while (jobj != NULL && joint != NULL) {
         HSD_JObjResolveRefs(jobj, joint);
@@ -1654,10 +1650,7 @@ void resolveIKJoint1(HSD_JObj* jobj)
     f32 var_f4_2;
     Vec3 spB0;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     f32 var_f4_3;
     f32 var_f4_4;
@@ -1808,10 +1801,7 @@ void resolveIKJoint2(HSD_JObj* jobj)
     Vec3 sp28;
     Vec3 sp1C;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     HSD_JObj* var_r29;
     f32 temp_f1_4;

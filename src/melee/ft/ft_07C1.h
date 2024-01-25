@@ -1,6 +1,8 @@
 #ifndef MELEE_FT_CODE_8007C114_H
 #define MELEE_FT_CODE_8007C114_H
 
+#include <baselib/forward.h>
+
 #include <baselib/gobj.h>
 
 void ft_8007C17C(HSD_GObj* gobj);

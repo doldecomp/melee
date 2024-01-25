@@ -1,5 +1,5 @@
-#include "forward.h"
-#include "ft/forward.h"
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
 
 #include "ftNs_SpecialHi.h"
 
@@ -8,21 +8,24 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_DownBound.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftNess/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h>
+#include <baselib/gobj.h>
 #include <MetroTRK/intrinsics.h>
 
 // SpecialHi/SpecialAirHi (PK Thunder)
@@ -192,26 +195,17 @@ inline bool check_distance(Vec3* pos, Vec2* pair)
 // on auto-decomp // https://decomp.me/scratch/hwphL // Proper match
 bool ftNs_SpecialHi_ItemPKThunder_CheckNessCollide(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused0[8];
-#endif
 
     Vec2 pair;
     Vec3 pos;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused1[12];
-#endif
 
     Vec2 pair2;
     Vec3 pos2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused2[36];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     s32 ret = false;
@@ -422,10 +416,7 @@ void ftNs_SpecialHiStart_Enter(HSD_GObj* gobj) // Ness's grounded PK Thunder
     Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* ness_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     ftNessAttributes* temp_attr;
     f64 phi_f0;
@@ -497,10 +488,7 @@ void ftNs_SpecialAirHiStart_Enter(
     ftNessAttributes* temp_attr;
     f64 phi_f0;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
 /// @todo Unused assignment.
 #ifdef MUST_MATCH
@@ -573,10 +561,7 @@ void ftNs_SpecialHi_Enter(
     ftNessAttributes* ness_attr2;
     Fighter* fighter_data2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fighter_data3;
 
     Fighter* fp = getFighter(gobj);
@@ -623,10 +608,7 @@ void ftNs_SpecialHi_Enter(
 
                     fp->mv.ns.specialhi.aerialVel = atan2f(sp40.y, sp40.x);
                     {
-                        /// @todo Unused stack.
-#ifdef MUST_MATCH
                         u8 _[4];
-#endif
 
                         Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialHi, 0,
                                                   0.0f, 1.0f, 0.0f, NULL);
@@ -731,10 +713,7 @@ void ftNs_SpecialAirHi_Enter(HSD_GObj* gobj)
     Fighter* fighter_data3;
     Fighter* fighter_data2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     NessFloatMath_PKThunder2(gobj);
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirHi, 0, 0.0f, 1.0f, 0.0f,
@@ -758,10 +737,7 @@ void ftNs_SpecialHiStart_Anim(HSD_GObj* gobj)
 {
     Vec3 pkt_pos;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[32];
-#endif
 
     Fighter* fp = gobj->user_data;
 
@@ -877,10 +853,7 @@ void ftNs_SpecialHiHold_Anim(HSD_GObj* gobj) // Ness's grounded PK Thunder
 /// Ness's grounded PK Thunder End Animation callback
 void ftNs_SpecialHiEnd_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -890,10 +863,7 @@ void ftNs_SpecialHiEnd_Anim(HSD_GObj* gobj)
 /// Ness's grounded PK Thunder 2 Animation callback
 void ftNs_SpecialHi_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     {
         Fighter* temp_fp = gobj->user_data;
@@ -937,10 +907,7 @@ void ftNs_SpecialAirHiStart_Anim(HSD_GObj* gobj)
 {
     Vec3 pkt_pos;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[32];
-#endif
 
     HSD_GObj* pkt_ptr;
     Fighter* fp = gobj->user_data;
@@ -984,10 +951,7 @@ void ftNs_SpecialAirHiStart_Anim(HSD_GObj* gobj)
 /// Ness's aerial PK Thunder Control Loop Animation callback
 void ftNs_SpecialAirHiHold_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[44];
-#endif
 
     Fighter* fp0 = gobj->user_data;
 
@@ -1086,10 +1050,7 @@ void ftNs_SpecialAirHiHold_Anim(HSD_GObj* gobj)
 /// Ness's aerial PK Thunder End Animation callback
 void ftNs_SpecialAirHiEnd_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = gobj->user_data;
     ftNessAttributes* ness_attr = fp->dat_attrs;
@@ -1112,10 +1073,7 @@ void ftNs_SpecialAirHiEnd_Anim(HSD_GObj* gobj)
 /// Ness's aerial PK Thunder 2 Animation callback
 void ftNs_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp0;
     Fighter* fp1 = gobj->user_data;
@@ -1154,10 +1112,7 @@ void ftNs_SpecialAirHi_Anim(HSD_GObj* gobj)
 /// Ness's PK Thunder 2 Wall Rebound Animation callback
 void ftNs_SpecialAirHiRebound_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp0 = gobj->user_data;
 
@@ -1276,10 +1231,7 @@ static const f32 vel_epsilon = 0.0001f;
 /// Ness's grounded PK Thunder 2 Physics callback
 void ftNs_SpecialHi_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Fighter* fp0 = gobj->user_data;
     f32 ground_vel = fp0->gr_vel;
@@ -1321,10 +1273,7 @@ void ftNs_SpecialHi_Phys(HSD_GObj* gobj)
 /// Ness's aerial PK Thunder Start Physics callback
 void ftNs_SpecialAirHiStart_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = gobj->user_data;
     int gravity_timer = fp->mv.ns.specialhi.gravityDelay;
@@ -1349,10 +1298,7 @@ void ftNs_SpecialAirHiHold_Phys(
     HSD_GObj* gobj) // Ness's aerial PK Thunder Control Loop Physics
                     // callback
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = gobj->user_data;
     int gravity_timer = fp->mv.ns.specialhi.gravityDelay;
@@ -1374,10 +1320,7 @@ void ftNs_SpecialAirHiHold_Phys(
 /// Ness's aerial PK Thunder End Physics callback
 void ftNs_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = gobj->user_data;
     int gravity_timer = fp->mv.ns.specialhi.gravityDelay;
@@ -1400,10 +1343,7 @@ inline void ftNess_atan2(HSD_GObj* gobj)
 {
     Fighter* fighter_data2 = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
 
     ftParts_8007592C(
         fighter_data2, 0,
@@ -1414,10 +1354,7 @@ inline void ftNess_atan2(HSD_GObj* gobj)
 
 inline void* getFtSpecialAttrs2(Fighter* fp)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
 
     return fp->dat_attrs;
 }
@@ -1435,10 +1372,7 @@ void ftNs_SpecialAirHi_Phys(HSD_GObj* gobj)
     f32 temp_f1_6;
     f32 temp_f2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     f32 phi_f1;
     f32 phi_f31;
@@ -1558,10 +1492,7 @@ void ftNs_SpecialHiEnd_Coll(
 /// Ness's grounded PK Thunder 2 Collision callback
 void ftNs_SpecialHi_Coll(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Fighter* fp0;
 
@@ -1637,10 +1568,7 @@ void ftNs_SpecialHi_Coll(HSD_GObj* gobj)
     }
 
     {
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4];
-#endif
 
         if (fp0->coll_data.floor.normal.y > 0.0f) {
             f64 angle;
@@ -1724,19 +1652,13 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* new_var;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused0[4];
-#endif
 
     Vec3 spC4;
     Vec3 spB8;
     Vec3 spAC;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused1[140];
-#endif
 
     s32 ledgeGrabDir;
     f32 temp_f0_2;
@@ -1752,10 +1674,7 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
     f32 temp_f1_5;
     f32 temp_f1_8;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused2[4];
-#endif
 
     f32 DriftMax;
     s32 msid;
@@ -1768,10 +1687,7 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
     Fighter* fighter_r31;
     f32 phi_f0;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused3[8];
-#endif
 
     fighter_r31 = gobj->user_data;
     ness_attr = fighter_r31->dat_attrs;
@@ -1941,10 +1857,7 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
 /// Ness's PK Thunder 2 Wall Rebound Collision callback
 void ftNs_SpecialAirHiRebound_Coll(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp;
     Fighter* fighter_data2;

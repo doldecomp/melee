@@ -1,18 +1,15 @@
 #include <platform.h>
-#include "ft/forward.h"
 #include <baselib/forward.h>
 
 #include "ftLk_SpecialHi.h"
 
-#include "ftLk_Init.h"
-
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
@@ -59,10 +56,7 @@ void ftLk_SpecialHi_Enter(HSD_GObj* gobj)
 
 void ftLk_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
     Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirHi, Ft_MF_None, 0, 1, 0,
@@ -76,10 +70,7 @@ void ftLk_SpecialAirHi_Enter(HSD_GObj* gobj)
 
 void ftLk_SpecialHi_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
@@ -87,10 +78,7 @@ void ftLk_SpecialHi_Anim(HSD_GObj* gobj)
 
 void ftLk_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     ftLk_DatAttrs* da = GET_FIGHTER(gobj)->dat_attrs;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_80096900(gobj, 1, 1, false, da->specialairhi_drift_stick_mul,
@@ -104,10 +92,7 @@ void ftLk_SpecialAirHi_IASA(HSD_GObj* gobj) {}
 
 void ftLk_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* ca = &fp->co_attrs;
     ftLk_DatAttrs* da = fp->dat_attrs;
@@ -119,10 +104,7 @@ void ftLk_SpecialAirHi_Phys(HSD_GObj* gobj)
 
 void ftLk_SpecialHi_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Air) {
         ftLk_SpecialAirHi_Phys(gobj);
@@ -133,10 +115,7 @@ void ftLk_SpecialHi_Phys(HSD_GObj* gobj)
 
 void ftLk_SpecialHi_Coll(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     if (!ft_80082708(gobj)) {
         doColl(gobj);
     }
@@ -144,10 +123,7 @@ void ftLk_SpecialHi_Coll(HSD_GObj* gobj)
 
 void ftLk_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj)->dat_attrs;
     if (ft_CheckGroundAndLedge(gobj, 0)) {
         ftCo_800D5CB0(gobj, 0, fp->facing_dir1);
@@ -158,10 +134,7 @@ void ftLk_SpecialAirHi_Coll(HSD_GObj* gobj)
 
 static void doColl(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     MotionFlags const coll_mf =
         Ft_MF_KeepGfx | Ft_MF_SkipHit | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim |
         Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |

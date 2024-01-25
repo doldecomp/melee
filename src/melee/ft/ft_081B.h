@@ -4,12 +4,11 @@
 #ifndef MELEE_FT_CODE_80081B38_H
 #define MELEE_FT_CODE_80081B38_H
 
+#include <platform.h>
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include <baselib/forward.h>
 
-#include "ft/fighter.h"
-#include "ft/ftcolltypes.h"
 #include "ft/types.h"
 
 #include <common_structs.h>

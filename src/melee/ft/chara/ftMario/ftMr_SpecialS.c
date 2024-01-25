@@ -1,25 +1,27 @@
+#include <platform.h>
+#include "ft/forward.h"
+
 #include "ftMr_SpecialS.h"
 
 #include "ftMr_Init.h"
 #include "math.h"
 #include "types.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-#include <stddef.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/random.h>
+#include <baselib/gobj.h>
 
 static void setCallbacks(Fighter* fp)
 {
@@ -41,10 +43,7 @@ void ftMr_SpecialS_CreateCape(HSD_GObj* gobj)
         /// @todo Can't move below @c _.
         Vec3 coords;
 
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4];
-#endif
 
         fp->cmd_vars[2] = true;
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
@@ -128,10 +127,7 @@ static void changeAction(HSD_GObj* gobj, ftMario_MotionState msid)
 
 void ftMr_SpecialS_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     fp->self_vel.y = 0;
@@ -141,10 +137,7 @@ void ftMr_SpecialS_Enter(HSD_GObj* gobj)
 
 void ftMr_SpecialAirS_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = fp->dat_attrs;
@@ -188,19 +181,13 @@ static void reflect(HSD_GObj* gobj)
 
 void ftMr_SpecialS_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused0[4];
-#endif
 
     {
         /// @todo Cannot be moved above @c unused0 or below @c unused1.
         Vec3 coords;
 
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 unused1[16];
-#endif
 
         Fighter* fp = GET_FIGHTER(gobj);
 
@@ -225,17 +212,11 @@ void ftMr_SpecialAirS_Phys(HSD_GObj* gobj)
     Fighter* fp;
     ftMario_DatAttrs* sa;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused0[4];
-#endif
 
     Vec3 coords;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused1[24];
-#endif
 
     fp = gobj->user_data;
 
@@ -311,10 +292,7 @@ void ftMr_SpecialAirS_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp = gobj->user_data;
     fp->fv.mr.x2238_isCapeBoost = false;

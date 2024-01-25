@@ -51,7 +51,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     api_key = args.api_key or os.environ.get("PROGRESS_API_KEY")
     if not api_key:
-        raise "API key required"
+        raise KeyError("API key required")
     url = generate_url(args)
 
     entries = []
@@ -68,9 +68,12 @@ if __name__ == "__main__":
     print("Publishing entry to", url)
     json.dump(entries[0], sys.stdout, indent=4)
     print()
-    r = requests.post(url, json={
-        "api_key": api_key,
-        "entries": entries,
-    })
+    r = requests.post(
+        url,
+        json={
+            "api_key": api_key,
+            "entries": entries,
+        },
+    )
     r.raise_for_status()
     print("Done!")

@@ -1,23 +1,27 @@
 #include <platform.h>
-#include "ft/forward.h"
-#include "ftCaptain/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCaptain/ftCa_SpecialLw.h"
 
-#include "ef/efasync.h"
 #include "ef/eflib.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
-#include "ft/ftlib.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
+#include "ftCaptain/types.h"
 
 #include <common_structs.h>
+#include <placeholder.h>
 #include <baselib/gobj.h>
+
+#ifdef MUST_MATCH
+#include "melee/ef/efasync.h"
+#include "melee/ft/ftlib.h"
+#endif
 
 /// @todo These are all literals.
 float const ftCa_SpecialHi_804D9220 = 0;
@@ -25,7 +29,7 @@ float const ftCa_SpecialHi_804D9224 = 0.01745329238474369f;
 float const ftCa_SpecialHi_804D9228 = 1;
 float const ftCa_SpecialHi_804D922C = -1;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 static asm void ftCa_SpecialHi_800E3EAC(HSD_GObj*)
 { // clang-format off
@@ -147,7 +151,7 @@ static void ftCa_SpecialHi_800E400C(HSD_GObj* gobj)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialLw_Enter(HSD_GObj*)
 { // clang-format off
@@ -196,10 +200,7 @@ asm void ftCa_SpecialLw_Enter(HSD_GObj*)
 
 void ftCa_SpecialLw_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
@@ -216,7 +217,7 @@ void ftCa_SpecialLw_Enter(HSD_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialAirLw_Enter(HSD_GObj*)
 { // clang-format off
@@ -260,10 +261,7 @@ asm void ftCa_SpecialAirLw_Enter(HSD_GObj*)
 
 void ftCa_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
@@ -277,7 +275,7 @@ void ftCa_SpecialAirLw_Enter(HSD_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialLw_Anim(HSD_GObj*)
 { // clang-format off
@@ -357,10 +355,7 @@ lbl_800E424C:
 
 void ftCa_SpecialLw_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[32];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->ground_or_air == GA_Ground) {
@@ -406,7 +401,7 @@ void ftCa_SpecialLwEndAir_Anim(HSD_GObj* gobj)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialAirLw_Anim(HSD_GObj*)
 { // clang-format off
@@ -447,10 +442,7 @@ lbl_800E4340:
 
 void ftCa_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         fp->cmd_vars[2] = 0;
@@ -485,7 +477,7 @@ void ftCa_SpecialHiThrow1_Anim(HSD_GObj* gobj)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialLw_Phys(HSD_GObj*)
 { // clang-format off
@@ -552,7 +544,7 @@ void ftCa_SpecialLw_Phys(HSD_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialLwEnd_Phys(HSD_GObj*)
 { // clang-format off
@@ -614,10 +606,7 @@ lbl_800E4524:
 
 void ftCa_SpecialLwEnd_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = gobj->user_data;
     ftCaptain_DatAttrs* da = fp->dat_attrs;
     if (fp->ground_or_air == GA_Ground) {
@@ -641,7 +630,7 @@ void ftCa_SpecialLwEnd_Phys(HSD_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialLwEndAir_Phys(HSD_GObj*)
 { // clang-format off
@@ -710,7 +699,7 @@ void ftCa_SpecialAirLw_Phys(HSD_GObj* gobj)
     ftCa_SpecialHi_800E3EAC(gobj);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialAirLwEnd_Phys(HSD_GObj*)
 { // clang-format off
@@ -747,10 +736,7 @@ lbl_800E4664:
 
 void ftCa_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* da = fp->dat_attrs;
     if (fp->cmd_vars[2] != 0) {
@@ -774,7 +760,7 @@ void ftCa_SpecialHiThrow1_Phys(HSD_GObj* gobj)
     ft_80085134(gobj);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialLw_Coll(HSD_GObj*)
 { // clang-format off
@@ -852,10 +838,7 @@ lbl_800E4798:
 
 void ftCa_SpecialLw_Coll(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     if ((s32) fp->ground_or_air == GA_Ground) {
         if (ft_80082708(gobj) == 0) {
@@ -907,7 +890,7 @@ void ftCa_SpecialLwEndAir_Coll(Fighter_GObj* gobj)
     ftCa_SpecialLwEnd_Coll(gobj);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialAirLw_Coll(HSD_GObj*)
 { // clang-format off
@@ -951,10 +934,7 @@ lbl_800E4924:
 
 void ftCa_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
     if (ft_80081D0C(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         ftCaptain_DatAttrs* da = fp->dat_attrs;
@@ -974,7 +954,7 @@ void ftCa_SpecialAirLwEnd_Coll(HSD_GObj* gobj)
     ft_80084104(gobj);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCa_SpecialAirLwEndAir_Coll(HSD_GObj*)
 { // clang-format off

@@ -6,6 +6,8 @@
 
 #include "ft/types.h"
 
+#include <stdbool.h>
+
 /* 110094 */ void ftSk_Init_OnDeath(HSD_GObj* gobj);
 /* 1100EC */ void ftSk_Init_OnLoad(HSD_GObj* gobj);
 /* 110198 */ void ftSk_Init_80110198(HSD_GObj* gobj);

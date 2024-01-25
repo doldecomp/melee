@@ -4,6 +4,7 @@
 #include "ft/forward.h"
 
 #include <placeholder.h>
+#include <dolphin/mtx/types.h>
 
 struct _m2c_stack_ftCo_800BD1DC {
     /* 0x00 */ char pad_0[0x24];

@@ -1,47 +1,37 @@
-#include "forward.h"
-#include "ft/forward.h"
-
 #include "ftGw_SpecialN.h"
 
-#include "ftGw_Init.h"
 #include "types.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
+#include <common_structs.h>
 #include <dolphin/mtx/types.h>
+#include <baselib/gobj.h>
+#include <baselib/random.h>
 
 static void ftGw_SpecialN_CreateSausage(HSD_GObj* gobj)
 {
     Vec3 vec0;
     Vec3 vec1;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
 
     {
         ftGameWatchChef chefStruct;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4] = { 0 };
-#endif
         int i;
         int* pSausage;
         {
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[8] = { 0 };
-#endif
 
             Fighter* fp1;
             {
@@ -153,10 +143,7 @@ static inline void ftGameWatch_SpecialN_ChefLoop(HSD_GObj* gobj)
 // Animation callback
 void ftGw_SpecialN_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     ftGameWatch_SpecialN_ChefLoop(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -186,10 +173,7 @@ static inline void ftGameWatch_SpecialAirN_ChefLoop(HSD_GObj* gobj)
 // callback
 void ftGw_SpecialAirN_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     ftGameWatch_SpecialAirN_ChefLoop(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -307,10 +291,7 @@ void ftGw_SpecialN_Loop(HSD_GObj* gobj, f32 anim_frame)
     /// @todo Shared @c inline with #ftGw_SpecialAirN_Loop.
     Fighter* fp = fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialN, transition_flags,
                               anim_frame - 1.0f, 1.0f, 0.0f, NULL);
@@ -337,10 +318,7 @@ void ftGw_SpecialAirN_Loop(HSD_GObj* gobj, f32 anim_frame)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirN, transition_flags,
                               anim_frame - 1.0f, 1.0f, 0.0f, NULL);

@@ -1,3 +1,4 @@
+#include <stdarg.h>
 #include <stdio.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/dsp/dsp.h>

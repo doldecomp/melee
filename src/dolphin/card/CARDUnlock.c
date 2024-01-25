@@ -4,9 +4,12 @@
 
 #include <__mem.h>
 #include <rand.h>
-#include <string.h>
 #include <dolphin/card.h>
+#include <dolphin/dsp/dsp.h>
 #include <dolphin/os.h>
+#include <dolphin/os/OSCache.h>
+#include <dolphin/os/OSExi.h>
+#include <dolphin/os/OSTime.h>
 
 static u8 CardData[] ATTRIBUTE_ALIGN(32) = {
     // clang-format off
@@ -220,10 +223,7 @@ s32 __CARDUnlock(s32 chan, u8 flashID[12])
     u32 wk, wk1;
     u32 Ans1 = 0;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     u32* dp;
     u8 rbuf[64];

@@ -1,7 +1,11 @@
 #ifndef DOLPHIN_GX___GXINIT_H
 #define DOLPHIN_GX___GXINIT_H
 
+#include <platform.h>
+#include <dolphin/gx/forward.h>
+
 #include <dolphin/gx/__types.h>
+#include <dolphin/gx/GXEnum.h>
 
 /* 004D2788 */ extern GXContexts __GXContexts;
 

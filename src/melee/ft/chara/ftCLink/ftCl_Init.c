@@ -1,22 +1,23 @@
 #include "forward.h"
+#include "ftCommon/forward.h"
 #include "ftLink/forward.h"
 #include "it/forward.h"
+#include <baselib/forward.h>
 
 #include "ftCl_Init.h"
 
 #include "ftCl_AppealS.h"
 #include "inlines.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftattacks4combo.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_AirCatch.h"
 #include "ftCommon/ftCo_Guard.h"
@@ -26,7 +27,11 @@
 #include "ftLink/ftLk_SpecialN.h"
 #include "ftLink/ftLk_SpecialS.h"
 #include "ftLink/types.h"
+#include "it/it_26B1.h"
 #include "lb/lbmthp.h"
+
+#include <common_structs.h>
+#include <baselib/gobj.h>
 
 MotionState ftCl_Init_MotionStateTable[ftLk_MS_SelfCount] = {
     {
@@ -313,10 +318,7 @@ void ftCl_Init_OnDeath(ftLk_GObj* gobj)
 
 void ftCl_Init_OnLoad(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftLk_Fighter* fp = gobj->user_data;
     ftData* ftdata = fp->ft_data;
@@ -339,10 +341,7 @@ void ftCl_Init_OnLoad(HSD_GObj* gobj)
 
 void ftCl_Init_OnItemPickupExt(HSD_GObj* gobj, bool flag)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     ftLk_Fighter* fp = gobj->user_data;
 
@@ -366,10 +365,7 @@ void ftCl_Init_OnItemVisible(HSD_GObj* gobj)
 
 void ftCl_Init_OnItemDropExt(HSD_GObj* gobj, bool flag)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     ftLk_Fighter* fp = gobj->user_data;
 
@@ -388,10 +384,7 @@ void ftCl_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 
 void ftCl_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter_OnItemDrop(gobj, flag, 1, 1);
 }
 
@@ -427,10 +420,7 @@ void ftCl_Init_80149114(HSD_GObj* gobj)
 
 void ftCl_Init_8014919C(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x5F8 == 0) {
@@ -466,10 +456,7 @@ bool ftCl_Init_8014920C(HSD_GObj* gobj)
 
 void ftCl_Init_80149268(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     checkFighter2244(gobj);
 }

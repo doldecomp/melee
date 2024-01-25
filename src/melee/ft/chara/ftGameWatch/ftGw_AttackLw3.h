@@ -5,6 +5,8 @@
 
 #include <baselib/forward.h>
 
+#include <stdbool.h>
+
 /* 14AB48 */ void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj);
 /* 14AC40 */ void ftGw_AttackLw3_ItemManholeRemove(HSD_GObj* gobj);
 /* 14ACB0 */ void ftGw_AttackLw3_ItemManholeOnDamage(HSD_GObj* gobj);

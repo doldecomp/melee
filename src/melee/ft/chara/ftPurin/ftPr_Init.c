@@ -1,10 +1,7 @@
 #include "forward.h"
-#include "ft/forward.h"
-#include "ftMars/forward.h"
 
 #include "ftPr_Init.h"
 
-#include "cm/camera.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
@@ -15,24 +12,34 @@
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcliffcommon.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_09CB.h"
-#include "ftCommon/ftCo_FallSpecial.h"
+#include "ftPurin/types.h"
 #include "gm/gm_1601.h"
 #include "gr/grstadium.h"
 #include "it/it_26B1.h"
-#include "mp/mplib.h"
+#include "lb/types.h"
 
-#include <trigf.h>
-#include <dolphin/mtx/types.h>
+#include <common_structs.h>
+#include <placeholder.h>
+#include <baselib/archive.h>
 #include <baselib/gobj.h>
+#include <baselib/jobj.h>
+#include <baselib/objalloc.h>
+
+#ifdef MUST_MATCH
+#include "melee/cm/camera.h"
+#include "melee/ft/chara/ftCommon/ftCo_FallSpecial.h"
+#include "melee/ft/ftcolanim.h"
+#include "melee/ft/ftcoll.h"
+#include "melee/mp/mplib.h"
+#include "MSL/trigf.h"
+#endif
 
 MotionState ftPr_Init_MotionStateTable[ftPr_MS_SelfCount] = {
     {
@@ -813,10 +820,7 @@ extern f32 const ftPr_Init_804D9C28;
 void ftPr_SpecialLw_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (ftPr_Init_804D9C20 == fp->facing_dir) {
         Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialLwL, 0U,
@@ -836,10 +840,7 @@ void ftPr_SpecialLw_Enter(Fighter_GObj* gobj)
 void ftPr_SpecialAirLw_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (ftPr_Init_804D9C20 == fp->facing_dir) {
         Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirLwL, 0U,
@@ -977,7 +978,7 @@ void ftPr_SpecialS_Phys(Fighter_GObj* gobj)
 
 extern f32 const ftPr_Init_804D9C34;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialAirS_Phys(HSD_GObj*)
 {
@@ -1128,7 +1129,7 @@ extern char* ftPr_Init_804D3EA8;
 extern f64 const ftPr_Init_804D9C40;
 extern f32 const ftPr_Init_804D9C48;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialS_8013D658(HSD_GObj*)
 { // clang-format off
@@ -1212,7 +1213,7 @@ lbl_8013D744:
 
 extern f32 const ftPr_Init_804D9C4C;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialS_8013D764(HSD_GObj*)
 { // clang-format off
@@ -1315,7 +1316,7 @@ void ftPr_SpecialS_8013D8B0(Fighter_GObj* gobj)
     ft_800892A0(gobj);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialS_8013D8E4(HSD_GObj*)
 {
@@ -1417,7 +1418,7 @@ lbl_8013DA08:
 
 extern f32 const ftPr_Init_804D9C50;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialS_8013DA24(HSD_GObj*, bool unk, MotionFlags flags,
                                 f32 anim_start)
@@ -1583,7 +1584,7 @@ lbl_8013DC24:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialS_8013DC64(HSD_GObj*)
 { // clang-format off
@@ -1657,7 +1658,7 @@ lbl_8013DCB8:
 extern f64 const ftPr_Init_804D9C58;
 extern f32 const ftPr_Init_804D9C60;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialS_8013DD54(HSD_GObj*)
 { // clang-format off
@@ -1766,7 +1767,7 @@ lbl_8013DE8C:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialN_Enter(HSD_GObj*)
 { // clang-format off
@@ -1823,7 +1824,7 @@ lbl_8013DEF0:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialAirN_Enter(HSD_GObj*)
 { // clang-format off
@@ -1881,7 +1882,7 @@ lbl_8013DFA8:
 
 extern f32 const ftPr_Init_804D9C64;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNStart_Anim(HSD_GObj*)
 { // clang-format off
@@ -1949,7 +1950,7 @@ lbl_8013E0D8:
 extern f32 const ftPr_Init_804D9C68;
 extern f64 const ftPr_Init_804D9C70;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNLoop_Anim(HSD_GObj*)
 { // clang-format off
@@ -2072,7 +2073,7 @@ lbl_8013E260:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNFull_Anim(HSD_GObj*)
 { // clang-format off
@@ -2182,7 +2183,7 @@ extern f64 const ftPr_Init_804D9C78;
 extern f64 const ftPr_Init_804D9C80;
 extern f64 const ftPr_Init_804D9C88;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNRelease_Anim(HSD_GObj*)
 { // clang-format off
@@ -2456,7 +2457,7 @@ lbl_8013E7C4:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNTurn_Anim(HSD_GObj*)
 { // clang-format off
@@ -2672,7 +2673,7 @@ lbl_8013EAC4:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNEnd_Anim(HSD_GObj*)
 { // clang-format off
@@ -2880,7 +2881,7 @@ lbl_8013ED90:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialAirNStart_Anim(HSD_GObj*)
 { // clang-format off
@@ -2943,7 +2944,7 @@ lbl_8013EE6C:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialAirNChargeLoop_Anim(HSD_GObj*)
 { // clang-format off
@@ -3066,7 +3067,7 @@ lbl_8013EFF4:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialAirNChargeFull_Anim(HSD_GObj*)
 { // clang-format off
@@ -3172,7 +3173,7 @@ lbl_8013F164:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialAirNChargeRelease_Anim(HSD_GObj*)
 { // clang-format off
@@ -3559,7 +3560,7 @@ lbl_8013F6EC:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialAirNStartTurn_Anim(HSD_GObj*)
 { // clang-format off
@@ -3758,7 +3759,7 @@ lbl_8013F9AC:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialAirNEnd_Anim(HSD_GObj*)
 { // clang-format off
@@ -3972,7 +3973,7 @@ lbl_8013FC98:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNHit_Anim(HSD_GObj*)
 { // clang-format off
@@ -4146,7 +4147,7 @@ lbl_8013FEC8:
 
 void ftPr_SpecialNStart_IASA(HSD_GObj* arg0) {}
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNLoop_IASA(HSD_GObj*)
 { // clang-format off
@@ -4248,7 +4249,7 @@ lbl_80140048:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNFull_IASA(HSD_GObj*)
 { // clang-format off
@@ -4352,7 +4353,7 @@ lbl_801401A8:
 
 extern f32 const ftPr_Init_804D9C90;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNRelease_IASA(HSD_GObj*)
 { // clang-format off
@@ -4472,7 +4473,7 @@ void ftPr_SpecialNEnd_IASA(HSD_GObj* arg0) {}
 
 void ftPr_SpecialAirNStart_IASA(HSD_GObj* arg0) {}
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialAirNChargeLoop_IASA(HSD_GObj*)
 { // clang-format off
@@ -4574,7 +4575,7 @@ lbl_80140494:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialAirNChargeFull_IASA(HSD_GObj*)
 { // clang-format off
@@ -4717,7 +4718,7 @@ void ftPr_SpecialNFull_Phys(Fighter_GObj* gobj)
     fp->x74_anim_vel.x = ftPr_Init_804D9C48;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNRelease_Phys(HSD_GObj*)
 { // clang-format off
@@ -4872,7 +4873,7 @@ lbl_8014089C:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNTurn_Phys(HSD_GObj*)
 { // clang-format off
@@ -5125,7 +5126,7 @@ void ftPr_SpecialAirNChargeFull_Phys(HSD_GObj* gobj)
     ftCommon_8007D494(fp, da->x3C, da->x40);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialAirNChargeRelease_Phys(HSD_GObj*)
 { // clang-format off
@@ -5238,7 +5239,7 @@ lbl_80140DDC:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialAirNStartTurn_Phys(HSD_GObj*)
 { // clang-format off
@@ -5341,10 +5342,7 @@ void ftPr_SpecialNHit_Phys(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftPurinAttributes* da;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp = gobj->user_data;
     da = fp->dat_attrs;
@@ -5358,7 +5356,7 @@ void ftPr_SpecialNHit_Phys(HSD_GObj* gobj)
 /* Non-matching due to float allocation https://decomp.me/scratch/OYlcJ
  */
 #ifdef MUST_MATCH
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNStart_Coll(HSD_GObj*)
 { // clang-format off
@@ -5418,10 +5416,7 @@ void ftPr_SpecialNStart_Coll(HSD_GObj* gobj)
 {
     s32 state;
     Fighter* fp;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp = gobj->user_data;
     if (ft_80082708((Fighter_GObj*) gobj) == GA_Ground) {
@@ -5443,7 +5438,7 @@ void ftPr_SpecialNStart_Coll(HSD_GObj* gobj)
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNLoop_Coll(HSD_GObj*)
 { // clang-format off
@@ -5521,7 +5516,7 @@ lbl_8014113C:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNFull_Coll(HSD_GObj*)
 { // clang-format off
@@ -5601,7 +5596,7 @@ lbl_8014123C:
 
 extern f32 const ftPr_Init_804D9C54;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNRelease_Coll(HSD_GObj*)
 { // clang-format off
@@ -5857,7 +5852,7 @@ lbl_801415E0:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNTurn_Coll(HSD_GObj*)
 { // clang-format off
@@ -5934,7 +5929,7 @@ void ftPr_SpecialNEnd_Coll(Fighter_GObj* gobj)
     }
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialAirNStart_Coll(HSD_GObj*)
 { // clang-format off
@@ -5990,7 +5985,7 @@ lbl_801417C8:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialAirNChargeLoop_Coll(HSD_GObj*)
 { // clang-format off
@@ -6068,7 +6063,7 @@ lbl_801418C8:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialAirNChargeFull_Coll(HSD_GObj*)
 { // clang-format off
@@ -6146,7 +6141,7 @@ lbl_801419C8:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialAirNChargeRelease_Coll(HSD_GObj*)
 { // clang-format off
@@ -6563,7 +6558,7 @@ lbl_80141FA4:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialAirNStartTurn_Coll(HSD_GObj*)
 { // clang-format off
@@ -6628,7 +6623,7 @@ void ftPr_SpecialAirNEnd_Coll(Fighter_GObj* gobj)
     }
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialNHit_Coll(HSD_GObj*)
 { // clang-format off
@@ -6732,7 +6727,7 @@ lbl_80142218:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPr_SpecialN_8014222C(HSD_GObj*)
 { // clang-format off

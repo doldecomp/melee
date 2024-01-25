@@ -1,22 +1,24 @@
-#include "ft/forward.h"
+#include <platform.h>
+#include "lb/forward.h"
 
 #include "ftSs_SpecialLw_1.h"
 
-#include "ftSs_Init.h"
-
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
+#include "ftSamus/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx/types.h>
+#include <baselib/gobj.h>
 
 void ftSs_SpecialLw_8012ADF0(HSD_GObj* gobj)
 {
@@ -25,10 +27,7 @@ void ftSs_SpecialLw_8012ADF0(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->throw_flags_b0) {
         fp->throw_flags_b0 = 0;
@@ -105,10 +104,7 @@ void ftSs_SpecialAirLw_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->self_vel.x *= samus_attr->x70;
     fp->self_vel.y = samus_attr->x58;
@@ -350,10 +346,7 @@ void ftSs_SpecialAirLwBomb_Phys(HSD_GObj* gobj)
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
     ftCo_DatAttrs* ft_attr = &fp->co_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     ftCommon_8007D4B8(fp);
     ftCommon_8007D3A8(fp, 0.0f, ft_attr->air_drift_stick_mul * samus_attr->x68,
                       ft_attr->air_drift_max * samus_attr->x60);
@@ -364,10 +357,7 @@ void ftSs_SpecialLwBomb_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->cmd_vars[0]) {
         /// @todo Remove cast
@@ -386,10 +376,7 @@ void ftSs_SpecialAirLwBomb_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->cmd_vars[0]) {
         /// @todo Remove cast

@@ -1,9 +1,13 @@
-#include <baselib/fog.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
+#include "gobj.h"
+
+#include "class.h"
+#include "cobj.h"
+#include "fog.h"
+#include "gobjplink.h"
+#include "gobjproc.h"
+#include "jobj.h"
+#include "lobj.h"
+#include "object.h"
 
 inline void GObj_SetFlag1_inline(HSD_GObjProc* proc, u8 value)
 {
@@ -168,7 +172,7 @@ void HSD_GObj_80391044(HSD_GObj* gobj)
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
 }
 
-void HSD_GObj_80391070(HSD_GObj* gobj, s32 arg1)
+void HSD_GObj_80391070(HSD_GObj* gobj, int arg1)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
 

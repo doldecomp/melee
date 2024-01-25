@@ -1,5 +1,5 @@
 #include <platform.h>
-#include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_EscapeAir.h"
 
@@ -10,13 +10,13 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 
-#include <placeholder.h>
-#include <MSL/trigf.h>
+#include <common_structs.h>
 
 /* 099D70 */ static void ftCo_80099D70(ftCo_GObj* gobj);
 
@@ -53,10 +53,7 @@ static inline void inlineA0(ftCo_Fighter* fp)
 
 void ftCo_80099A9C(Fighter_GObj* gobj, int timer)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_800D705C(gobj);
     inlineA0(fp);
@@ -70,10 +67,7 @@ void ftCo_80099A9C(Fighter_GObj* gobj, int timer)
 
 void ftCo_EscapeAir_Anim(Fighter_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_80096900(gobj, 1, 1, false, p_ftCommonData->x340,
                       p_ftCommonData->x344);
@@ -86,10 +80,7 @@ void ftCo_EscapeAir_IASA(ftCo_GObj* gobj)
     if (fp->mv.co.escapeair.timer != 0) {
         bool b;
         Vec3 self_vel = fp->mv.co.escapeair.self_vel;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4] = { 0 };
-#endif
         if (ftCo_80095328(gobj, &b)) {
             if (b) {
                 fp->self_vel = self_vel;

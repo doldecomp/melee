@@ -1,19 +1,20 @@
-#include <platform.h>
-
 #include "ft_07C6.h"
 
+#include <placeholder.h>
+
+#ifdef MUST_MATCH
 #include "ftcoll.h"
 #include "ftlib.h"
 
 #include "ef/efsync.h"
 #include "gm/gm_1A36.h"
-#include "it/it_26B1.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbcollision.h"
+#include "pl/player.h"
+#endif
 
-#include <placeholder.h>
-
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 static f32 const ft_804D8328 = 0.0F;
 static f32 const ft_804D832C = 1.0F;
@@ -80,7 +81,7 @@ void ft_8007C630(HSD_GObj* gobj)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_8007C6DC(HSD_GObj* gobj)
@@ -140,7 +141,7 @@ void ft_8007C6DC(HSD_GObj* gobj)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 extern unk_t lbAudioAx_80023870();
 extern unk_t it_802E5EF4();

@@ -1,17 +1,4 @@
-#include "lb/lbrefract.h"
-
-#include <math.h>
-#include <dolphin/gx/GXAttr.h>
-#include <dolphin/gx/GXLight.h>
-#include <dolphin/gx/GXMisc.h>
-#include <baselib/__baselib.h>
-#include <baselib/fog.h>
-#include <baselib/lobj.h>
-#include <baselib/mtx.h>
-#include <baselib/psdisp.h>
-#include <baselib/state.h>
-#include <baselib/util.h>
-#include <MSL/math.h>
+#include "psdisp.h"
 
 typedef struct {
     u8 filename[9];

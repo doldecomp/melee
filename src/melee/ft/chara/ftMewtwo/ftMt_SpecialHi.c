@@ -1,3 +1,4 @@
+#include <platform.h>
 #include "forward.h"
 
 #include "ftMt_SpecialHi.h"
@@ -6,24 +7,25 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Pass.h"
-#include "ftMewtwo/ftMt_Init.h"
+#include "ftMewtwo/types.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
+#include <common_structs.h>
 #include <dolphin/mtx/types.h>
-#include <MSL/trigf.h>
 
 /// Create Teleport Start GFX
 void ftMt_SpecialHi_CreateGFX(HSD_GObj* gobj)
@@ -96,10 +98,7 @@ void ftMt_SpecialHiStart_Enter(HSD_GObj* gobj)
 /// Mewtwo's aerial Teleport Start Motion State handler
 void ftMt_SpecialAirHiStart_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
@@ -147,10 +146,7 @@ void ftMt_SpecialHiStart_Phys(HSD_GObj* gobj)
 /// Mewtwo's aerial Teleport Start Physics callback
 void ftMt_SpecialAirHiStart_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp0 = GET_FIGHTER(gobj);
 
@@ -306,10 +302,7 @@ static bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* gobj);
 /// Mewtwo's aerial Teleport Zoom Collision callback
 void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter* fp0 = GET_FIGHTER(gobj);
 
@@ -360,10 +353,7 @@ void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)
 /// Mewtwo's ground -> air Teleport Zoom Motion State handler
 void ftMt_SpecialHi_GroundToAir(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -552,10 +542,7 @@ void ftMt_SpecialAirHi_Enter(HSD_GObj* gobj)
 /// Mewtwo's grounded Teleport End Animation callback
 void ftMt_SpecialHi_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);

@@ -1,14 +1,17 @@
 #include "forward.h"
+#include "ft/forward.h"
 
 #include "ftGw_Attack100.h"
 
 #include "ftGw_Attack11.h"
 #include "ftGw_Init.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0D14.h"
-#include "ft/inlines.h"
+#include "ft/ftanim.h"
+
+#include <stddef.h>
 
 // 0x8014C1E8
 // https://decomp.me/scratch/AyScb // Mr. Game & Watch's Rapid Jab Start Action

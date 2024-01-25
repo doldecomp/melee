@@ -1,12 +1,13 @@
 #include <dolphin/gx/forward.h>
 
-#include <common_structs.h>
-#include <placeholder.h>
-#include <runtime.h>
-#include <dolphin/gx/__GX_unknown_001.h>
 #include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/__types.h>
 #include <dolphin/gx/GXFrameBuf.h>
 #include <dolphin/mtx/types.h>
+
+#ifdef MUST_MATCH
+#include "Runtime/runtime.h"
+#endif
 
 Vec2 const GXFrameBuf_804DE220 = { 256.0F, 0.0F };
 Vec2 const GXFrameBuf_804DE228 = { 176.0F, 0.0F };
@@ -183,7 +184,7 @@ void GXSetDispCopyDst(u16 wd, u16 ht)
 
 extern unk_t __GetImageTileCount(void);
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXSetTexCopyDst(s32, s32, s32, s32)
@@ -296,7 +297,7 @@ void GXSetDispCopyFrame2Field(s32 arg0)
     INSERT_FIELD(__GXContexts.main->x1D0[11], 0, 2, 12);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXSetCopyClamp(s32)
@@ -338,7 +339,7 @@ asm void GXSetCopyClamp(s32)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 // https://decomp.me/scratch/ZNlNl // 620 (86.81%)
 #pragma push
@@ -397,7 +398,7 @@ asm u32 GXSetDispCopyYScale(f32)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXSetCopyClear(GXColor clear_clr, u32 clear_z)
@@ -434,7 +435,7 @@ asm void GXSetCopyClear(GXColor clear_clr, u32 clear_z)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXSetCopyFilter(GXBool aa, u8 sample_pattern[12][2], GXBool vf,
@@ -593,7 +594,7 @@ void GXSetDispCopyGamma(s32 arg0)
     INSERT_FIELD(__GXContexts.main->x1D0[7], arg0, 2, 7);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXCopyDisp(void* dest, GXBool clear)
@@ -701,7 +702,7 @@ lbl_8033DCAC:
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXCopyTex(u32, GXBool)

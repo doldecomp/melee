@@ -3,6 +3,8 @@
 
 #include "ftCommon/forward.h"
 
+#include <stdbool.h>
+
 /* 0C55CC */ bool ftCo_800C55CC(ftCo_GObj* gobj);
 /* 0C56BC */ void ftCo_HammerWalk_Anim(ftCo_GObj* gobj);
 /* 0C56DC */ void ftCo_HammerWalk_IASA(ftCo_GObj* gobj);

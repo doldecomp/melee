@@ -1,4 +1,5 @@
 #include <placeholder.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSMemory.h>
@@ -157,10 +158,7 @@ void RealMode(Event arg0)
 
 void __OSInitMemoryProtection(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[40];
-#endif
 
     u32 simulated_mem = OSGetConsoleSimulatedMemSize();
     bool intr = OSDisableInterrupts();

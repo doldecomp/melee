@@ -1,11 +1,13 @@
-#include <baselib/forward.h>
+#include <platform.h>
 
 #include "it_2ADA.h"
 
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
-#include "it/types.h"
+
+#include <common_structs.h>
 
 /* 2ADAF0 */ static void it_802ADAF0(Item_GObj* gobj);
 /* 2ADB48 */ static bool it_802ADB48(Item_GObj* gobj);
@@ -49,10 +51,7 @@ void it_802ADA1C(Vec3* pos, Vec3* vel, float facing_dir)
 
 void it_802ADAF0(Item_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     Item* item = GET_ITEM(gobj);
     it_8026B3A8(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);

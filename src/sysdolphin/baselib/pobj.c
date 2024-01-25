@@ -1,24 +1,32 @@
+#include "forward.h"
 #include <dolphin/gx/forward.h>
+
+#include "pobj.h"
+
+#include "aobj.h"
+#include "class.h"
+#include "debug.h"
+#include "displayfunc.h"
+#include "fobj.h"
+#include "id.h"
+#include "jobj.h"
+#include "memory.h"
+#include "mtx.h"
+#include "perf.h"
+#include "state.h"
+#include "tobj.h"
+#include "util.h"
 
 #include <__mem.h>
 #include <math.h>
-#include <string.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXDisplayList.h>
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/GXVert.h>
+#include <dolphin/mtx.h>
 #include <dolphin/os.h>
-#include <baselib/class.h>
-#include <baselib/displayfunc.h>
-#include <baselib/jobj.h>
-#include <baselib/memory.h>
-#include <baselib/mtx.h>
-#include <baselib/perf.h>
-#include <baselib/pobj.h>
-#include <baselib/state.h>
-#include <baselib/util.h>
 
 static void PObjInfoInit(void);
 
@@ -1108,9 +1116,7 @@ static void SetupSharedVtxModelMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
     }
     if (flags | SETUP_JOINT1) {
         ///@todo Unused stack
-#ifdef MUST_MATCH
         u8 _[4];
-#endif
         HSD_JObjSetupMatrix(pobj->u.jobj);
         PSMTXConcat(vmtx, pobj->u.jobj->mtx, m);
         GXLoadPosMtxImm(m, GX_PNMTX1);

@@ -1,16 +1,16 @@
 Sections:
-	.init       type:code align:8
-	extab       type:rodata align:8
-	extabindex  type:rodata align:8
-	.text       type:code align:8
-	.ctors      type:rodata align:8
-	.dtors      type:rodata align:8
-	.rodata     type:rodata align:8
-	.data       type:data align:8
-	.bss        type:bss align:8
-	.sdata      type:data align:8
-	.sbss       type:bss align:8
-	.sdata2     type:rodata align:8
+	.init       type:code align:32
+	extab       type:rodata align:32
+	extabindex  type:rodata align:32
+	.text       type:code align:32
+	.ctors      type:rodata align:32
+	.dtors      type:rodata align:32
+	.rodata     type:rodata align:32
+	.data       type:data align:32
+	.bss        type:bss align:32
+	.sdata      type:data align:32
+	.sbss       type:bss align:32
+	.sdata2     type:rodata align:32
 
 melee/lb/lbcommand.c:
 	.text       start:0x80005940 end:0x80005BB0
@@ -3626,7 +3626,7 @@ dolphin/dsp/dsp_debug.c:
 
 dolphin/dsp/dsp_task.c:
 	.text       start:0x8033625C end:0x80336AE0
-	.data       start:0x80400C40 end:0x80400D80
+	.data       start:0x80400C40 end:0x80400D7B
 	.sbss       start:0x804D7218 end:0x804D7230
 
 dolphin/dvd/dvdlow.c:
@@ -3637,7 +3637,7 @@ dolphin/dvd/dvdlow.c:
 
 dolphin/dvd/dvdfs.c:
 	.text       start:0x80337934 end:0x80337DE8
-	.data       start:0x80400D80 end:0x80400E80
+	.data       start:0x80400D80 end:0x80400E7C
 	.sdata      start:0x804D5B88 end:0x804D5B90
 	.sbss       start:0x804D7278 end:0x804D7298
 
@@ -3660,7 +3660,7 @@ dolphin/dvd/fstload.c:
 	.text       start:0x8033A4A0 end:0x8033A6E0
 	.data       start:0x80400FD8 end:0x80401048
 	.bss        start:0x804A7658 end:0x804A76C8
-	.sdata      start:0x804D5B98 end:0x804D5BA8
+	.sdata      start:0x804D5B98 end:0x804D5BA3
 	.sbss       start:0x804D72E0 end:0x804D72F0
 
 dolphin/gx/GXInit.c:
@@ -3817,6 +3817,15 @@ dolphin/os/OSResetSW.c:
 dolphin/os/OSRtc.c:
 	.text       start:0x80348A90 end:0x803494BC
 	.bss        start:0x804A7D60 end:0x804A7DB8
+
+dolphin/os/OSSerial.c:
+	.text       start:0x803494BC end:0x8034AB80
+	.data       start:0x80402358 end:0x80402420
+	.bss        start:0x804A7DB8 end:0x804A7FB8
+	.sbss       start:0x804D73C8 end:0x804D73D8
+
+dolphin/os/OSSync.c:
+	.text       start:0x8034AB80 end:0x8034AC04
 
 dolphin/os/OSThread.c:
 	.text       start:0x8034AC04 end:0x8034C3F0

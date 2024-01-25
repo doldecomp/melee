@@ -3,6 +3,7 @@
 
 #include <melee/it/forward.h>
 
+#include <stdbool.h>
 #include <melee/it/types.h>
 
 extern ItemStateTable it_803F7FC8[];

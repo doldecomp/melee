@@ -1,5 +1,4 @@
 #include <platform.h>
-#include "ft/forward.h"
 
 #include "ftZd_SpecialLw.h"
 
@@ -9,13 +8,13 @@
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftSeak/ftSk_SpecialLw.h"
+#include "ftZelda/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -163,10 +162,7 @@ void ftZd_SpecialAirLw_Phys(HSD_GObj* gobj)
     Fighter* fp;
     ftZelda_DatAttrs* attributes;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
@@ -256,10 +252,7 @@ void ftZd_SpecialAirLw2_Phys(HSD_GObj* gobj)
     Fighter* fp;
     ftZelda_DatAttrs* attributes;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
@@ -320,10 +313,7 @@ void ftZd_SpecialLw_8013B4D8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftZelda_DatAttrs* sa = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     {
         enum_t msid;

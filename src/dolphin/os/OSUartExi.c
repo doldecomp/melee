@@ -1,6 +1,7 @@
 #include <platform.h>
 
 #include <placeholder.h>
+#include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSUartExi.h>
 
 static u32 Enabled[2];
@@ -22,7 +23,7 @@ s32 ReadUARTN(void)
     return 4;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void WriteUARTN(void)

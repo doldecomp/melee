@@ -1,9 +1,14 @@
 #ifndef MELEE_FT_CHARA_FTCLINK_INLINES_H
-#include "it/items/it_27CF.h"
 #define MELEE_FT_CHARA_FTCLINK_INLINES_H
 
+#include <platform.h>
+#include <baselib/forward.h>
+
 #include "ft/types.h"
+#include "ftLink/types.h"
 #include "it/items/it_27CF.h"
+
+#include <baselib/gobj.h>
 
 static inline void checkFighter2244(HSD_GObj* gobj)
 {

@@ -1,8 +1,10 @@
 #ifndef GALE01_272560
 #define GALE01_272560
 
+#include <platform.h>
 #include "ft/forward.h"
 #include "it/forward.h"
+#include <baselib/forward.h>
 
 #include <placeholder.h>
 

@@ -1,6 +1,7 @@
 #include <platform.h>
 #include "ft/forward.h"
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_ItemGet.h"
 
@@ -9,26 +10,30 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftchangeparam.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/ftlib.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_0A01.h"
 #include "ftCommon/ftCo_WarpStar.h"
+#include "ftCommon/types.h"
 #include "ftDonkey/ftDk_HeavyWait0.h"
+#include "it/it_26B1.h"
 #include "it/item.h"
 #include "pl/pl_0371.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
+#include <m2c_macros.h>
+#include <dolphin/os.h>
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 /* static */ float const ftCo_804D8580 = 30000;
 /* static */ float const ftCo_804D8584 = 1;
 /* static */ float const ftCo_804D8588 = 0;
@@ -49,10 +54,7 @@ static char assert_msg2[] = "item_gobj";
 
 bool ftCo_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     itPickup* pickup;
     Vec2* offset0;
     ftCo_Fighter* fp = gobj->user_data;
@@ -93,7 +95,7 @@ ret_false:
     return false;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm ftCo_GObj* ftCo_800942A0(ftCo_GObj* gobj, u32 flags){
     // clang-format off
@@ -236,10 +238,7 @@ lbl_80094460:
 
 HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     itPickup* pickup = &fp->x294_itPickup;
     Vec2* offset0;
@@ -306,7 +305,7 @@ HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm bool ftCo_8009447C(ftCo_GObj* gobj, HSD_GObj* arg1)
 { // clang-format off
@@ -522,7 +521,7 @@ block_35:
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80094694(ftCo_GObj* gobj, enum_t, bool)
 { // clang-format off
@@ -639,10 +638,7 @@ void ftCo_80094694(HSD_GObj* gobj, FtMotionId msid, bool loop)
 
 bool ftCo_80094790(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     if (GET_FIGHTER(gobj)->x1978 == NULL) {
         HSD_GObj* unk_gobj = ftCo_800942A0(gobj, 3);
         if (unk_gobj != NULL) {
@@ -659,10 +655,7 @@ bool ftCo_80094790(HSD_GObj* gobj)
 
 void ftCo_80094818(HSD_GObj* gobj, int arg1)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->x1978 != NULL) {
         pl_8003E17C(fp->player_id, fp->x221F_b4, fp->x1978);
@@ -674,7 +667,7 @@ void ftCo_80094818(HSD_GObj* gobj, int arg1)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj)
 { // clang-format off
@@ -785,7 +778,6 @@ lbl_800949F4:
 
 static inline void inlineB0(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
 #ifdef MUST_MATCH
     u64 _ = { 0 };
 #endif
@@ -829,7 +821,7 @@ void ftCo_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_ItemGet_Anim(ftCo_GObj*)
 { // clang-format off
@@ -972,7 +964,7 @@ void ftCo_ItemGet_Coll(HSD_GObj* gobj)
     ft_800841B8(gobj, ftCo_80094D90);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm static void ftCo_80094B6C(ftCo_GObj* gobj, Item_GObj* item_gobj)
 { // clang-format off
@@ -1137,10 +1129,7 @@ lbl_80094D70:
 void ftCo_80094B6C(HSD_GObj* gobj, HSD_GObj* item_gobj)
 {
     Vec3 vec;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (item_gobj == NULL) {
         OSReport("ftGetImmItem item_gobj is NULL!!\n");
@@ -1208,7 +1197,7 @@ void ftCo_80094D90(HSD_GObj* gobj)
     ftCo_800CC730(gobj);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80094DF8(ftCo_GObj*)
 { // clang-format off

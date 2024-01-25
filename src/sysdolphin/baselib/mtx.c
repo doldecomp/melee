@@ -1,9 +1,12 @@
+#include "mtx.h"
+
+#include "debug.h"
 #include "math.h"
 
+#include "lb/lbrefract.h"
+
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
-#include <baselib/mtx.h>
 #include <MSL/trigf.h>
 
 #define EPSILON 0.0000000001f
@@ -279,10 +282,7 @@ void HSD_MtxGetScale(Mtx arg0, Vec3* arg1)
 {
     f64 scale;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Vec3 vec1;
     Vec3 vec2;

@@ -1,7 +1,11 @@
-#include "stddef.h"
+#include <platform.h>
+#include <dolphin/gx/forward.h>
 
 #include <dolphin/gx/__GXFifo.h>
 #include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/__types.h>
+#include <dolphin/gx/GXEnum.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
 #include <MetroTRK/intrinsics.h>
@@ -137,7 +141,7 @@ void GXSetCPUFifo(GXFifoObj* fifo)
 // Despite this obviously being dead code, it still is needed to match the
 // function.
 /// @todo: This is weird; try to match without it.
-#ifdef MUST_MATCH
+#ifndef BUGFIX
 #pragma push
     asm {nop}
 #pragma pop

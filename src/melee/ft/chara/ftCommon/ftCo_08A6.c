@@ -1,17 +1,12 @@
-#include <platform.h>
-#include "forward.h"
-
 #include "ftCo_08A6.h"
 
-#include "ftCo_Shouldered.h"
-
-#include "ft/ft_0877.h"
-#include "ft/ftdata.h"
-#include "ft/ftwaitanim.h"
-#include "ftCommon/ftCo_09CB.h"
-#include "it/it_26B1.h"
-
-#include <placeholder.h>
+#ifdef MUST_MATCH
+#include "melee/ft/chara/ftCommon/ftCo_09CB.h"
+#include "melee/ft/ftanim.h"
+#include "melee/ft/ftdata.h"
+#include "melee/ft/ftwaitanim.h"
+#include "melee/ft/inlines.h"
+#endif
 
 #if defined(MWERKS_GEKKO)
 /* static */ float const lbl_804D8448 = 0;
@@ -20,7 +15,7 @@
 static char lbl_804D3AE0[] = "0";
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET ftCo_8008A698(UNK_PARAMS)
 { // clang-format off
@@ -47,7 +42,7 @@ lbl_8008A6C8:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET ftCo_8008A6D8(UNK_PARAMS)
 { // clang-format off
@@ -110,7 +105,7 @@ lbl_8008A794:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_8008A7A8(ftCo_GObj*, int)
 { // clang-format off

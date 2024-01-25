@@ -1,7 +1,10 @@
 #ifndef GALE01_27CF30
 #define GALE01_27CF30
 
+#include <platform.h>
 #include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "ftSeak/types.h"
 #include "it/types.h"

@@ -1,12 +1,13 @@
 #include "class.h"
 
+#include "debug.h"
+#include "hash.h"
+#include "memory.h"
+#include "object.h"
+
 #include <__mem.h>
-#include <stddef.h>
 #include <string.h>
 #include <dolphin/os.h>
-#include <baselib/hash.h>
-#include <baselib/memory.h>
-#include <baselib/object.h>
 
 void _hsdClassInfoInit(void);
 HSD_ClassInfo hsdClass = { _hsdClassInfoInit };

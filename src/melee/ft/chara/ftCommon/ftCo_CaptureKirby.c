@@ -1,5 +1,6 @@
 #include <platform.h>
 #include "ft/forward.h"
+#include <baselib/forward.h>
 
 #include "ftCo_CaptureKirby.h"
 
@@ -10,10 +11,14 @@
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 
 #include <math.h>
 #include <placeholder.h>
+#include <baselib/gobj.h>
 #include <baselib/jobj.h>
+#include <MetroTRK/intrinsics.h>
 
 float ftCo_800BD19C(Fighter_GObj* gobj, Vec3* pos)
 {
@@ -54,7 +59,7 @@ static inline void inlineA0(Fighter_GObj* gobj)
 }
 
 ASM void ftCo_800BD1DC(Fighter_GObj* gobj, Fighter_GObj* victim_gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter* victim_fp = GET_FIGHTER(victim_gobj);
@@ -238,7 +243,7 @@ static inline void inlineB1(Fighter_GObj* gobj, Vec3* pos)
 }
 
 ASM void ftCo_800BD39C(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Vec3 pos;

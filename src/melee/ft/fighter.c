@@ -1,5 +1,7 @@
 #include <platform.h>
-#include "ft/forward.h"
+#include "ftCommon/forward.h"
+#include <dolphin/gx/forward.h>
+#include <baselib/forward.h>
 
 #include "ft/fighter.h"
 
@@ -14,12 +16,9 @@
 #include "ftcamera.h"
 #include "ftcoll.h"
 #include "ftcommon.h"
-#include "ftdata.h"
 #include "ftdrawcommon.h"
 #include "ftlib.h"
 #include "ftparts.h"
-#include "inlines.h"
-#include "types.h"
 
 #include "cm/camera.h"
 #include "db/db_2253.h"
@@ -36,6 +35,7 @@
 #include "ft/ftdevice.h"
 #include "ft/ftmaterial.h"
 #include "ft/ftmetal.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_09CB.h"
 #include "ftCommon/ftCo_09F4.h"
 #include "ftCommon/ftCo_0A01.h"
@@ -52,8 +52,11 @@
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftKirby/ftKb_Init.h"
 #include "ftMasterHand/ftMh_Wait1_0.h"
+#include "ftPeach/types.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_1A36.h"
+#include "gr/stage.h"
+#include "gr/types.h"
 #include "if/ifmagnify.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -62,21 +65,32 @@
 #include "lb/lb_00CE.h"
 #include "lb/lbarchive.h"
 #include "lb/lbmthp.h"
+#include "lb/lbrefract.h"
 #include "lb/lbshadow.h"
+#include "lb/types.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 #include "pl/pl_0371.h"
+#include "pl/player.h"
 #include "un/un_2FC9.h"
 
 #include <common_structs.h>
 #include <math.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/gx/types.h>
+#include <dolphin/mtx.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os.h>
+#include <baselib/controller.h>
+#include <baselib/debug.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
+#include <baselib/gobjproc.h>
+#include <baselib/gobjuserdata.h>
+#include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/mtx.h>
+#include <baselib/random.h>
 #include <MSL/trigf.h>
 
 extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
@@ -2495,10 +2509,7 @@ void Fighter_CallAcessoryCallbacks_8006C624(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (!fp->x221F_b3) {
         if (fp->x2219_b5) {
@@ -2644,10 +2655,7 @@ void Fighter_TakeDamage_8006CC7C(Fighter* fp, f32 damage_amount)
 /// https://decomp.me/scratch/9QvFG
 void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     bool temp_bool;
     bool hold_item_bool = 0;
     Vec3 vec;
@@ -2663,10 +2671,7 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2)
     if (fp->motion_id != 0x145 && (unsigned) fp->motion_id - 0x122 > 1 &&
         fp->dmg.x1860 != 0xAU && !fp->x2226_b2)
     {
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4] = { 0 };
-#endif
         if ( ///// giant if condition
             hold_item_bool && temp_bool &&
             ((HSD_Randi(p_ftCommonData->x418) < arg1) ||

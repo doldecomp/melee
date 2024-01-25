@@ -1,5 +1,4 @@
-#include "ft/forward.h"
-#include "ftNess/forward.h"
+#include <platform.h>
 #include "ftPopo/forward.h"
 
 #include "ftNn_Init.h"
@@ -350,10 +349,7 @@ extern f32 ftNn_Init_804D9898;
 
 void ftNn_Init_OnLoad(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2222_b4 = true;
@@ -367,10 +363,7 @@ void ftNn_Init_OnLoad(HSD_GObj* gobj)
 
 void ftNn_Init_OnDeath(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;

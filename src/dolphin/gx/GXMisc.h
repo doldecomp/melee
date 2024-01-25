@@ -1,10 +1,13 @@
 #ifndef DOLPHIN_GX_GXMISC_H
 #define DOLPHIN_GX_GXMISC_H
 
+#include <platform.h>
 #include <dolphin/gx/forward.h>
 
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/os.h>
+#include <dolphin/os/OSContext.h>
+#include <dolphin/os/OSInterrupt.h>
 
 void GXPixModeSync(void);
 void GXWaitDrawDone(void);

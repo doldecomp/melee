@@ -7,12 +7,12 @@
 #include "ftZd_SpecialN.h"
 #include "ftZd_SpecialS.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftZelda/types.h"
+#include "it/it_26B1.h"
 
 MotionState ftZd_Init_MotionStateTable[ftZd_MS_SelfCount] = {
     {
@@ -301,10 +301,7 @@ void ftZd_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 /// Zelda_RemoveDress
 void ftZd_Init_801395C8(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     int result = ftParts_80074A74(gobj, 1);
     if (result == -1) {

@@ -579,7 +579,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/mn/mndiagram3.s.o\
     $(BUILD_DIR)/asm/melee/mn/mnvibration.s.o\
     $(BUILD_DIR)/asm/melee/mn/mnsound.s.o\
-    $(BUILD_DIR)/asm/melee/mn/mndeflicker.s.o\
+    $(BUILD_DIR)/src/melee/mn/mndeflicker.c.o\
     $(BUILD_DIR)/asm/melee/mn/mnsoundtest.s.o\
     $(BUILD_DIR)/asm/melee/mn/mnlanguage.s.o\
     $(BUILD_DIR)/asm/melee/mn/mnhyaku.s.o\

@@ -1,5 +1,6 @@
 #include <platform.h>
 #include "ft/forward.h"
+#include "it/forward.h"
 #include "lb/forward.h"
 
 #include "ftcoll.h"
@@ -9,42 +10,39 @@
 #include "ft_0877.h"
 #include "ftcommon.h"
 #include "ftlib.h"
-#include "inlines.h"
 
-#include "ef/efsync.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0C31.h"
-#include "ft/ft_0D14.h"
-#include "ft/ftchangeparam.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftdevice.h"
-#include "ftCommon/ftCo_Bury.h"
-#include "ftCommon/ftCo_Guard.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 #include "gm/gm_1601.h"
-#include "gr/stage.h"
 #include "it/it_266F.h"
-#include "it/item.h"
-#include "lb/lb_00B0.h"
-#include "pl/pl_0371.h"
-#include "pl/player.h"
+#include "it/it_26B1.h"
+#include "lb/lbcollision.h"
+#include "lb/types.h"
 
 #include <common_structs.h>
-#include <math.h>
+#include <m2c_macros.h>
 #include <placeholder.h>
-#include <runtime.h>
 #include <dolphin/mtx/types.h>
-#include <dolphin/os.h>
-#include <baselib/archive.h>
-#include <baselib/controller.h>
-#include <baselib/dobj.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
-#include <MSL/trigf.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
+#include "ft_0881.h"
+#include "ftchangeparam.h"
+#include "ftcolanim.h"
+#include "ftdevice.h"
+
+#include "ef/efsync.h"
+#include "ftCommon/ftCo_Bury.h"
+#include "lb/lb_00B0.h"
+#include "melee/ft/chara/ftCommon/ftCo_Guard.h"
+#include "melee/ft/ft_0D14.h"
+#include "pl/pl_0371.h"
+#include "Runtime/runtime.h"
+
+#include <math.h>
+#endif
+
+#ifdef MUST_MATCH
 // .data
 IntVec3 ftColl_803C0C40 = { 141, 142, 143 };
 IntVec3 ftColl_803C0C4C = { 107, 108, 109 };
@@ -81,7 +79,7 @@ extern UNK_T ftColl_804D6558;
 extern UNK_T ftColl_804D655C;
 extern bool* ftColl_804D6560;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 // .sdata2
 float const ftColl_804D82E0 = 0;
 float const ftColl_804D82E4 = 500;
@@ -217,7 +215,7 @@ float ftColl_800765F0(Fighter* fp, Fighter_GObj* victim, float arg2)
 }
 
 ASM bool ftColl_80076640(Fighter* fp, float* arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -307,7 +305,7 @@ lbl_80076748:
 }
 #endif /* clang-format on */
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftColl_80076764(int arg0, enum_t arg1, enum_t arg2, UNK_T arg3,
                          ftCo_Fighter* arg4, HurtCapsule* arg5)
@@ -360,7 +358,7 @@ lbl_800767F8:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftColl_80076808(Fighter* attacker, HitCapsule*, int, Fighter* victim,
                          int)
@@ -410,7 +408,7 @@ lbl_80076878:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftColl_800768A0(void){
     // clang-format off
@@ -489,7 +487,7 @@ lbl_8007698C:
 
 ASM bool ftColl_8007699C(Fighter* arg1, HitCapsule* hit0, Fighter* arg2,
                          HitCapsule* hit1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -718,7 +716,7 @@ lbl_80076CA8:
 #endif /* clang-format on */
 
 ASM bool ftColl_80076CBC(Fighter* arg0, HitCapsule* arg1, Fighter* arg2)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -880,7 +878,7 @@ lbl_80076EC4:
 
 ASM bool ftColl_80076ED8(Fighter* arg0, HitCapsule* arg1, Fighter* arg2,
                          HurtCapsule* arg3)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -1284,7 +1282,7 @@ lbl_80077448:
 #endif /* clang-format on */
 
 ASM void ftColl_80077464(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -1453,7 +1451,7 @@ lbl_8007766C:
 #endif /* clang-format on */
 
 ASM void ftColl_80077688(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -1675,7 +1673,7 @@ lbl_80077944:
 #endif /* clang-format on */
 
 ASM void ftColl_80077970(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -1895,7 +1893,7 @@ lbl_80077C4C:
 #endif /* clang-format on */
 
 ASM void ftColl_80077C60(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -2410,7 +2408,7 @@ lbl_80078368:
 #endif /* clang-format on */
 
 ASM void ftColl_80078384(Fighter* fp, HurtCapsule* hurt, HitCapsule* hit)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -2490,7 +2488,7 @@ lbl_80078470:
 #endif /* clang-format on */
 
 ASM void ftColl_80078488(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -2511,7 +2509,7 @@ ASM void ftColl_80078488(void)
 #endif /* clang-format on */
 
 ASM void ftColl_800784B4(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -2556,7 +2554,7 @@ lbl_80078524:
 #endif /* clang-format on */
 
 ASM void ftColl_80078538(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -2628,7 +2626,7 @@ lbl_80078600:
 #endif /* clang-format on */
 
 ASM void ftColl_8007861C(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -2706,7 +2704,7 @@ lbl_800786DC:
 #endif /* clang-format on */
 
 ASM void ftColl_80078710(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -2733,7 +2731,7 @@ ASM void ftColl_80078710(Fighter_GObj* gobj)
 #endif /* clang-format on */
 
 ASM void ftColl_80078754(Fighter_GObj* arg0, Fighter_GObj* arg1, bool arg2)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -2767,7 +2765,7 @@ ASM void ftColl_80078754(Fighter_GObj* arg0, Fighter_GObj* arg1, bool arg2)
 #endif /* clang-format on */
 
 ASM void ftColl_800787B4(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -2853,7 +2851,7 @@ lbl_800788B4:
 #endif /* clang-format on */
 
 ASM void ftColl_800788D4(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -2881,7 +2879,7 @@ ASM void ftColl_800788D4(Fighter_GObj* gobj)
 #endif /* clang-format on */
 
 ASM void ftColl_8007891C(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -2922,7 +2920,7 @@ ASM void ftColl_8007891C(void)
 #endif /* clang-format on */
 
 ASM void ftColl_80078998(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -2993,15 +2991,12 @@ inline void ftGrabDist(Fighter* this_fp, Fighter* victim_fp)
 
 /// Checks for grabbable targets
 ASM void ftColl_80078A2C(Fighter_GObj* this_gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* this_fp;
     Fighter_GObj* victim_gobj;
     Fighter* victim_fp;
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     u32 i;
     HitCapsule* this_hit;
     u32 j;
@@ -3229,7 +3224,7 @@ lbl_80078C50:
 #endif /* clang-format on */
 
 ASM void ftColl_80078C70(Fighter_GObj* this_gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 { // clang-format off
     const static u32 hit_sfx[20];
     Fighter* this_fp;
@@ -3813,7 +3808,7 @@ lbl_80079244:
 #endif /* clang-format on */
 
 ASM void ftColl_8007925C(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -4412,7 +4407,7 @@ extern double const ftColl_804D8308;
 extern float const ftColl_804D8314;
 
 ASM void ftColl_80079AB0(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -4540,7 +4535,7 @@ lbl_80079C68:
 #endif /* clang-format on */
 
 ASM float ftColl_80079C70(Fighter* arg0, Fighter* arg1, UNK_T arg2, int arg3)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -4698,7 +4693,7 @@ lbl_80079E7C:
 #endif /* clang-format on */
 
 ASM float ftColl_80079EA8(Fighter* arg0, HitCapsule* arg1, int arg2)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -4827,7 +4822,7 @@ lbl_8007A064:
 #endif /* clang-format on */
 
 ASM void ftColl_8007A06C(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -5594,7 +5589,7 @@ lbl_8007AB0C:
 #endif /* clang-format on */
 
 ASM void ftColl_8007AB48(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -5618,7 +5613,7 @@ ASM void ftColl_8007AB48(Fighter_GObj* gobj)
 #endif /* clang-format on */
 
 ASM void ftColl_8007AB80(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -5648,7 +5643,7 @@ ASM void ftColl_8007AB80(Fighter_GObj* gobj)
 #endif /* clang-format on */
 
 ASM void ftColl_8007ABD0(HitCapsule* arg0, u32 arg1, Fighter_GObj* arg2)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -5697,7 +5692,7 @@ lbl_8007AC24:
 #endif /* clang-format on */
 
 ASM bool ftColl_8007AC68(int arg0)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -5721,7 +5716,7 @@ lbl_8007AC94:
 #endif /* clang-format on */
 
 ASM void ftColl_8007AC9C(HitCapsule* arg0, int arg1, Fighter_GObj* arg2)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -5765,7 +5760,7 @@ lbl_8007AD08:
 #endif /* clang-format on */
 
 ASM void ftColl_8007AD18(ftCo_Fighter* fp, HitCapsule* arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -5874,7 +5869,7 @@ lbl_8007AE6C:
 #endif /* clang-format on */
 
 ASM void ftColl_8007AE80(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -5909,7 +5904,7 @@ lbl_8007AEA8:
 #endif /* clang-format on */
 
 ASM void ftColl_8007AEE0(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -5925,7 +5920,7 @@ ASM void ftColl_8007AEE0(Fighter_GObj* gobj)
 #endif /* clang-format on */
 
 ASM void ftColl_8007AEF8(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -5941,7 +5936,7 @@ ASM void ftColl_8007AEF8(Fighter_GObj* gobj)
 #endif /* clang-format on */
 
 ASM void ftColl_8007AF10(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -5957,7 +5952,7 @@ ASM void ftColl_8007AF10(Fighter_GObj* gobj)
 #endif /* clang-format on */
 
 ASM void ftColl_8007AF28(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -5983,7 +5978,7 @@ lbl_8007AF50:
 #endif /* clang-format on */
 
 ASM void ftColl_8007AF60(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6021,7 +6016,7 @@ lbl_8007AFA0:
 #endif /* clang-format on */
 
 ASM void ftColl_8007AFC8(Fighter_GObj* gobj, int arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6043,7 +6038,7 @@ ASM void ftColl_8007AFC8(Fighter_GObj* gobj, int arg1)
 #endif /* clang-format on */
 
 ASM void ftColl_8007AFF8(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6081,7 +6076,7 @@ lbl_8007B020:
 #endif /* clang-format on */
 
 ASM void ftColl_8007B064(Fighter_GObj* gobj, enum_t arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6114,7 +6109,7 @@ ASM void ftColl_8007B064(Fighter_GObj* gobj, enum_t arg1)
 #endif /* clang-format on */
 
 ASM void ftColl_8007B0C0(Fighter_GObj* gobj, Tangibility arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp;
     HurtCapsule* fp1;
@@ -6170,7 +6165,7 @@ lbl_8007B114:
 #endif /* clang-format on */
 
 ASM void ftColl_8007B128(s8 arg0, int arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6260,7 +6255,7 @@ void ftColl_CreateAbsorbHit(Fighter_GObj* gobj, AbsorbDesc* absorb)
 }
 
 ASM void ftColl_8007B320(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6389,7 +6384,7 @@ lbl_8007B4B4:
 #endif /* clang-format on */
 
 ASM void ftColl_8007B4E0(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6454,7 +6449,7 @@ lbl_8007B58C:
 
 ASM void ftColl_8007B5AC(Fighter* fp, HurtCapsule* arg1,
                          struct UNK_SAMUS_S2* arg2)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     arg1->bone_idx = arg2->parts[0];
     arg1->kind = arg2->parts[1];
@@ -6510,7 +6505,7 @@ ASM void ftColl_8007B5AC(Fighter* fp, HurtCapsule* arg1,
 #endif /* clang-format on */
 
 ASM void ftColl_8007B62C(Fighter_GObj* gobj, int arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6555,7 +6550,7 @@ lbl_8007B690:
 #endif /* clang-format on */
 
 ASM void ftColl_8007B6A0(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6585,7 +6580,7 @@ ASM void ftColl_8007B6A0(Fighter_GObj* gobj)
 #endif /* clang-format on */
 
 ASM void ftColl_8007B6EC(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6627,7 +6622,7 @@ lbl_8007B74C:
 #endif /* clang-format on */
 
 ASM void ftColl_8007B760(Fighter_GObj* gobj, int arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6656,7 +6651,7 @@ lbl_8007B780:
 #endif /* clang-format on */
 
 ASM void ftColl_8007B7A4(Fighter_GObj* gobj, int arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6692,7 +6687,7 @@ lbl_8007B7DC:
 #endif /* clang-format on */
 
 ASM void ftColl_8007B7FC(Fighter* fp, int arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6731,7 +6726,7 @@ lbl_8007B850:
 #endif /* clang-format on */
 
 ASM bool ftColl_8007B868(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6761,7 +6756,7 @@ lbl_8007B894:
 #endif /* clang-format on */
 
 ASM void ftColl_8007B8A8(HitCapsule* arg0, Vec3* arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6781,7 +6776,7 @@ ASM void ftColl_8007B8A8(HitCapsule* arg0, Vec3* arg1)
 #endif /* clang-format on */
 
 ASM void ftColl_8007B8CC(Fighter* arg0, Fighter_GObj* arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6799,7 +6794,7 @@ ASM void ftColl_8007B8CC(Fighter* arg0, Fighter_GObj* arg1)
 #endif /* clang-format on */
 
 ASM void ftColl_8007B8E8(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6828,7 +6823,7 @@ lbl_8007B918:
 #endif /* clang-format on */
 
 ASM void ftColl_GetWindOffsetVec(Fighter_GObj* gobj, Vec3* arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6901,7 +6896,7 @@ lbl_8007B9F8:
 #endif /* clang-format on */
 
 ASM void ftColl_8007BA0C(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -6961,7 +6956,7 @@ lbl_8007BAAC:
 #endif /* clang-format on */
 
 ASM void ftColl_8007BAC0(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -7047,7 +7042,7 @@ lbl_8007BBB8:
 #endif /* clang-format on */
 
 ASM float ftColl_8007BBCC(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -7113,7 +7108,7 @@ lbl_8007BC70:
 #endif /* clang-format on */
 
 ASM void ftColl_8007BC90(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -7242,7 +7237,7 @@ lbl_8007BE1C:
 #endif /* clang-format on */
 
 ASM void ftColl_8007BE3C(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }

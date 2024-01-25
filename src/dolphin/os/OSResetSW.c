@@ -1,3 +1,4 @@
+#include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSResetSW.h>
 #include <dolphin/os/OSTime.h>
@@ -5,7 +6,6 @@
 typedef void (*OSResetCallback)(void);
 
 extern u8 GameChoice AT_ADDRESS(0x800030E3);
-extern vu32 __PIRegs[12] AT_ADDRESS(0xCC003000);
 
 static OSResetCallback ResetCallback;
 static bool Down;

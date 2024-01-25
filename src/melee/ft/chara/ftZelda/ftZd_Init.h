@@ -6,6 +6,8 @@
 
 #include "ft/types.h"
 
+#include <stdbool.h>
+
 /* 1392DC */ void ftZd_Init_OnDeath(HSD_GObj* gobj);
 /* 139334 */ void ftZd_Init_OnLoad(HSD_GObj* gobj);
 /* 1393AC */ void ftZd_Init_801393AC(HSD_GObj* gobj);

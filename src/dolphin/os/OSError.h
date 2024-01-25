@@ -1,6 +1,8 @@
 #ifndef DOLPHIN_OS_OSERROR_H
 #define DOLPHIN_OS_OSERROR_H
 
+#include <platform.h>
+
 #include <dolphin/os/OSContext.h>
 
 #define OS_ERROR_SYSTEM_RESET 0
@@ -26,5 +28,7 @@ typedef void (*OSErrorHandler)(OSError error, OSContext* context, ...);
 
 OSErrorHandler OSSetErrorHandler(OSError error, OSErrorHandler handler);
 void __OSUnhandledException(u8 error, OSContext* context, u32 dsisr, u32 dar);
+ATTRIBUTE_NORETURN void OSPanic(char* file, int line, char* msg, ...);
+void OSReport(char*, ...);
 
 #endif

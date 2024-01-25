@@ -1,4 +1,4 @@
-#include "forward.h"
+#include "lb/forward.h"
 
 #include "item.h"
 
@@ -11,8 +11,10 @@
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ft/ftlib.h"
+#include "ft/types.h"
 #include "gm/gm_1601.h"
 #include "gr/grlib.h"
+#include "gr/stage.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
@@ -20,14 +22,21 @@
 #include "mp/mplib.h"
 
 #include <common_structs.h>
-#include <dolphin/mtx.h>
-#include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os.h>
+#include <baselib/aobj.h>
+#include <baselib/class.h>
+#include <baselib/debug.h>
+#include <baselib/dobj.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/gobjuserdata.h>
+#include <baselib/jobj.h>
+#include <baselib/mobj.h>
+#include <baselib/pobj.h>
 
 /// Check if items are enabled
 bool Item_80266F3C(void)
@@ -722,9 +731,7 @@ extern void* it_803F1F90[];
 /// @private
 void Item_8026814C(HSD_GObj* gobj)
 {
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     HSD_MObj* temp_r0;
     HSD_DObj* var_r0;
     HSD_JObj* var_r0_2;
@@ -1153,10 +1160,7 @@ void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
     ItemStateTable* temp_r30;
     ItemStateDesc* temp_r29;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     HSD_JObj* item_jobj1_2;
 
@@ -1312,9 +1316,7 @@ void Item_802694CC(HSD_GObj* gobj)
 /// @private
 void Item_80269528(HSD_GObj* gobj)
 {
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     if (item_data->xDC8_word.flags.x9 == 0) {
         Item_802694CC(gobj);
@@ -1389,9 +1391,7 @@ bool Item_802696CC(HSD_GObj* gobj)
 void Item_802697D4(HSD_GObj* gobj)
 {
     Vec3 sp1C;
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     if (item_data->xDC8_word.flags.x9 == 0 &&
@@ -1509,10 +1509,7 @@ void Item_80269BE4(HSD_GObj* gobj)
 /// @private
 void Item_80269C5C(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     it_8026F9A0();
     it_802703E8(gobj);
@@ -2049,10 +2046,7 @@ void Item_8026A8EC(Item_GObj* gobj)
 
 void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* pickup_gfx, u8 pickup_sfx)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
 
@@ -2064,10 +2058,7 @@ void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* pickup_gfx, u8 pickup_sfx)
 
 void Item_8026ABD8(HSD_GObj* gobj, Vec3* pos, f32 arg2)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
 
     item_data->xC44 = arg2;

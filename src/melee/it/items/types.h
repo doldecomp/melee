@@ -1,6 +1,7 @@
 #ifndef MELEE_IT_ITEMS_TYPES_H
 #define MELEE_IT_ITEMS_TYPES_H
 
+#include <platform.h>
 #include "it/items/forward.h"
 
 #include <placeholder.h>

@@ -1,24 +1,30 @@
-#include "ft/forward.h"
+#include <platform.h>
 #include "ftCommon/forward.h"
 #include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "ftCo_WarpStar.h"
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0C31.h"
 #include "ft/ftanim.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
+#include "gr/stage.h"
 #include "it/item.h"
 #include "it/items/itwstar.h"
+#include "lb/lbrefract.h"
 #include "mp/mpcoll.h"
 
 #include <math.h>
 #include <placeholder.h>
-#include <dolphin/mtx.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 #ifdef WIP
 #pragma force_active on
@@ -36,7 +42,7 @@
 /* literal */ SDATA char ftCo_804D3C60[] = "jobj";
 
 ASM void ftCo_800C4724(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -156,7 +162,7 @@ static inline void inlineA0(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_800C4858(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     inlineA0(gobj);
 }
@@ -188,7 +194,7 @@ ASM void ftCo_800C4858(ftCo_GObj* gobj)
 #endif /* clang-format on */
 
 ASM void ftCo_800C48AC(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     inlineA0(gobj);
 }
@@ -221,7 +227,7 @@ ASM void ftCo_800C48AC(ftCo_GObj* gobj)
 #endif /* clang-format on */
 
 ASM void ftCo_WarpStarJump_Anim(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     --fp->mv.co.warpstar.x1C;
@@ -268,7 +274,7 @@ lbl_800C494C:
 void ftCo_WarpStarJump_IASA(ftCo_GObj* gobj) {}
 
 ASM void ftCo_WarpStarJump_Phys(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Fighter* fp = GET_FIGHTER(gobj);
@@ -338,7 +344,7 @@ void ftCo_WarpStarJump_Cam(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_800C4A38(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Quaternion rot;
@@ -468,7 +474,7 @@ void ftCo_WarpStarFall_Anim(ftCo_GObj* gobj) {}
 void ftCo_WarpStarFall_IASA(ftCo_GObj* gobj) {}
 
 ASM void ftCo_WarpStarFall_Phys(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D494(fp, p_ftCommonData->x694, p_ftCommonData->x698);
@@ -524,7 +530,7 @@ lbl_800C4C00:
 #endif /* clang-format on */
 
 ASM void ftCo_WarpStarFall_Coll(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     ft_80083E64(gobj, &fp->mv.co.warpstar.ecb, ftCo_800C4C60);
@@ -549,7 +555,7 @@ ASM void ftCo_WarpStarFall_Coll(ftCo_GObj* gobj)
 #endif /* clang-format on */
 
 ASM void ftCo_800C4C60(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->facing_dir = fp->mv.co.warpstar.facing_dir;

@@ -1,20 +1,34 @@
+#include <platform.h>
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include <baselib/forward.h>
 
 #include "ftCo_ThrownKirby.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftCaptain/types.h"
+#include "ftCommon/types.h"
 #include "ftKirby/ftKb_Init.h"
+#include "ftKirby/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
+#include <common_structs.h>
 #include <math.h>
-#include <runtime.h>
+#include <placeholder.h>
+#include <baselib/gobj.h>
 #include <baselib/jobj.h>
+
+#ifdef MUST_MATCH
+#include "Runtime/runtime.h"
+#endif
 
 typedef float (*KirbyVelocityFunc)(ftKb_GObj* gobj, Vec3* victim_self_vel,
                                    float victim_facing_dir);
@@ -60,7 +74,7 @@ void ftCo_800BDA50(ftKb_GObj* gobj)
 }
 
 ASM void ftCo_800BDA74(ftCo_GObj* gobj, Vec3* normal)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     CollData* coll = &fp->coll_data;
@@ -189,7 +203,7 @@ static inline void inlineB2(ftCo_GObj* gobj, ftKb_GObj* thrower_gobj,
 }
 
 ASM void ftCo_800BDB58(ftCo_GObj* gobj, ftKb_GObj* thrower_gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     Vec3 scale;
@@ -395,7 +409,7 @@ static inline void inlineA0(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_ThrownKirbyStar_Phys(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     inlineA0(gobj);
@@ -501,7 +515,7 @@ lbl_800BDEF8:
 /// @todo Shared code with #ftCo_ThrownCopyStar_Coll but an inline uses too
 ///       much stack.
 ASM void ftCo_ThrownKirbyStar_Coll(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Vec3 self_vel;
@@ -588,7 +602,7 @@ lbl_800BDFE8:
 #endif /* clang-format on */
 
 ASM void ftCo_800BE000(ftCo_GObj* gobj, ftKb_GObj* thrower_gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Vec3 scale;
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
@@ -769,12 +783,9 @@ void ftCo_ThrownCopyStar_Anim(ftCo_GObj* gobj) {}
 void ftCo_ThrownCopyStar_IASA(ftCo_GObj* gobj) {}
 
 ASM void ftCo_ThrownCopyStar_Phys(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     float dist = sqrtf(SQ(fp->self_vel.x) + SQ(fp->self_vel.y));
     if (dist > fp->mv.co.thrownkirby.x4) {
@@ -893,7 +904,7 @@ lbl_800BE38C:
 /// @todo Shared code with #ftCo_ThrownKirbyStar_Coll but an inline uses too
 ///       much stack.
 ASM void ftCo_ThrownCopyStar_Coll(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Vec3 self_vel;
@@ -979,12 +990,9 @@ lbl_800BE47C:
 #endif /* clang-format on */
 
 ASM void ftCo_800BE494(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_ThrownKirby, Ft_MF_Unk06, 0, 1, 0,
                               NULL);
@@ -1136,12 +1144,9 @@ static inline void inlineC0(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_ThrownKirby_Phys(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[28] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x1A4C -= ftKb_SpecialN_800F5AC0();
     if (!fp->mv.co.thrownkirby.x18_b0) {
@@ -1198,7 +1203,7 @@ lbl_800BE690:
 void ftCo_ThrownKirby_Coll(ftCo_GObj* gobj) {}
 
 ASM void ftCo_800BE6AC(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);

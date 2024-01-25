@@ -5,10 +5,13 @@
 #include "gr/grfigure1.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/types.h"
 #include "lb/lb_00F9.h"
 
 #include <dolphin/os.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 
 static StageCallbacks grEF2_803E6328[3] = {
     { grFigure2_8020E3FC, grFigure2_8020E428, grFigure2_8020E430,
@@ -125,10 +128,7 @@ static void grFigure2_8020E490(HSD_GObj* arg0) {}
 
 static void grFigure2_8020E494(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);

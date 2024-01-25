@@ -1,10 +1,9 @@
-#include "ft/forward.h"
+#include <platform.h>
 #include "ftFox/forward.h"
-#include "it/forward.h"
 
 #include "ftFc_Init.h"
 
-#include "ft/ft_0877.h"
+#include "ft/ftanim.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
@@ -15,6 +14,10 @@
 #include "ftFox/ftFx_SpecialLw.h"
 #include "ftFox/ftFx_SpecialN.h"
 #include "ftFox/ftFx_SpecialS.h"
+#include "ftFox/types.h"
+#include "it/it_26B1.h"
+
+#include <baselib/gobj.h>
 
 MotionState ftFc_Init_MotionStateTable[ftFx_MS_SelfCount] = {
     {
@@ -468,10 +471,7 @@ void ftFc_Init_OnLoad(HSD_GObj* gobj)
     s32* sa2;
     void** items = ftdata->x48_items;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->x2224_b7 = 1;
     ftFx_Init_OnLoadForFalco(fp);

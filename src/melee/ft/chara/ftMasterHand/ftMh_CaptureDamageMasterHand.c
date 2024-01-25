@@ -1,8 +1,13 @@
+#include "ftCommon/forward.h"
+
 #include "ftMasterHand/ftMh_CaptureDamageMasterHand.h"
 
 #include "ft/fighter.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+
+#include <stdbool.h>
 
 void ftMh_CaptureDamageMasterHand_IASA(HSD_GObj* gobj) {}
 

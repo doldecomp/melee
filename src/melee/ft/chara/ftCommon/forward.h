@@ -6,6 +6,7 @@
 
 typedef Fighter ftCo_Fighter;
 typedef Fighter_GObj ftCo_GObj;
+typedef struct ftCollisionBox ftCollisionBox;
 
 static MotionFlags const ftCo_MF_5_6 ATTRIBUTE_USED =
     Ft_MF_SkipAnimVel | Ft_MF_Unk06;

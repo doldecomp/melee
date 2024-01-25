@@ -1,5 +1,4 @@
-#include "ft/forward.h"
-#include "it/forward.h"
+#include <baselib/forward.h>
 
 #include "ftYs_Guard.h"
 
@@ -7,21 +6,21 @@
 
 #include "ef/efasync.h"
 #include "ft/fighter.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Escape.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_Pass.h"
+#include "ftYoshi/types.h"
 
-#include <stddef.h>
-#include <dolphin/mtx/types.h>
+#ifdef MUST_MATCH
+#include "melee/ft/ft_0877.h"
+#endif
 
 char ftYs_Init_DatFilename[] = "PlYs.dat";
 char ftYs_Init_DataName[] = "ftDataYoshi";
@@ -84,10 +83,7 @@ static inline void spawnEffect(HSD_GObj* gobj)
 
 void ftYs_GuardOn_0_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
 
     fp->mv.ys.unk2.x0 += ftYs_Init_804D9A28;
@@ -124,7 +120,7 @@ void ftYs_GuardOn_0_Coll(HSD_GObj* arg0)
 extern f32 const ftYs_Init_804D9A2C;
 extern u8 ftYs_Unk1_803B75C0[];
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftYs_Shield_8012C1D4(HSD_GObj*)
 { // clang-format off
@@ -207,10 +203,7 @@ asm void ftYs_Shield_8012C1D4(HSD_GObj*)
 
 void ftYs_GuardHold_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -258,10 +251,7 @@ void ftYs_Shield_8012C49C(HSD_GObj* gobj)
         ftColl_8007B0C0(gobj, 0);
 
         {
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[8];
-#endif
 
             ftCo_DatAttrs_xBC_t* co_xBC = &fp0->co_attrs.xBC;
 
@@ -278,10 +268,7 @@ void ftYs_Shield_8012C49C(HSD_GObj* gobj)
 
 void ftYs_GuardOff_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.ys.unk2.x0 = fp->mv.ys.unk2.x0 + ftYs_Init_804D9A28;
@@ -311,7 +298,7 @@ void ftYs_GuardOff_Coll(HSD_GObj* arg0)
 
 extern f64 const ftYs_Init_804D9A30;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftYs_Shield_8012C600(HSD_GObj*, bool)
 { // clang-format off
@@ -445,7 +432,7 @@ void ftYs_GuardDamage_Anim(HSD_GObj* gobj)
 
 void ftYs_GuardDamage_IASA(HSD_GObj* arg0) {}
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftYs_GuardDamage_Phys(HSD_GObj*)
 { // clang-format off
@@ -462,7 +449,7 @@ asm void ftYs_GuardDamage_Phys(HSD_GObj*)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftYs_GuardDamage_Coll(HSD_GObj*)
 { // clang-format off
@@ -503,7 +490,7 @@ void ftYs_Shield_8012C850(HSD_GObj* gobj)
 extern char* const ftYs_Unk2_804D3E58;
 extern char* const ftYs_Unk2_804D3E60;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftYs_Shield_8012C914(HSD_GObj*)
 { // clang-format off
@@ -628,7 +615,7 @@ lbl_8012CA8C:
 
 void ftYs_Shield_8012CACC(HSD_GObj* arg0) {}
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftYs_GuardOn_1_Anim(HSD_GObj*)
 { // clang-format off
@@ -699,7 +686,7 @@ lbl_8012CBA0:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftYs_GuardOn_1_IASA(HSD_GObj*)
 { // clang-format off
@@ -716,7 +703,7 @@ asm void ftYs_GuardOn_1_IASA(HSD_GObj*)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftYs_GuardOn_1_Phys(HSD_GObj*)
 { // clang-format off
@@ -733,7 +720,7 @@ asm void ftYs_GuardOn_1_Phys(HSD_GObj*)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftYs_GuardOn_1_Coll(HSD_GObj*)
 { // clang-format off

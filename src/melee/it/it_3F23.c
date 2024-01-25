@@ -34,6 +34,8 @@
 #include "items/ittosakinto.h"
 #include "items/itunknown.h"
 
+#include <stddef.h>
+
 static int const count = 47;
 
 struct sdata_ItemGXLink it_803F2310[count] = {

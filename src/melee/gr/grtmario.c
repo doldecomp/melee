@@ -1,3 +1,5 @@
+#include "lb/forward.h"
+
 #include "gr/grtmario.h"
 
 #include "ft/ftdevice.h"
@@ -8,10 +10,14 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "gr/types.h"
 #include "lb/lb_00F9.h"
 #include "sysdolphin/baselib/psappsrt.h"
 
+#include <dolphin/os.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 
 StageCallbacks grTMr_803E8548[4] = { {
                                          grTMario_8021F9CC,

@@ -1,13 +1,15 @@
+#include <platform.h>
+#include "ft/forward.h"
+
 #include "ftDk_HeavyWalk.h"
 
 #include "ftDk_HeavyFall.h"
 #include "ftDk_HeavyWait0.h"
 
-#include "ft/ft_0877.h"
 #include "ft/ftwalkcommon.h"
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_ItemThrow.h"
-#include "it/items/it_27CF.h"
+#include "ftDonkey/types.h"
 
 bool ftDk_MS_341_800DFA98(HSD_GObj* gobj)
 {

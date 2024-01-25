@@ -1,31 +1,36 @@
 #include <platform.h>
-#include "ft/forward.h"
+#include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "ftCo_YoshiEgg.h"
 
 #include "ftCo_Bury.h"
-#include "ftCo_CaptureCaptain.h"
 #include "ftCo_CaptureKoopa.h"
 
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCaptain/types.h"
+#include "ftCommon/types.h"
 #include "ftYoshi/ftYs_Guard.h"
 #include "ftYoshi/ftYs_SpecialN.h"
 #include "lb/lb_00B0.h"
 
+#include <common_structs.h>
 #include <placeholder.h>
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 float const ftCo_804D8B68 = 0;
 float const ftCo_804D8B6C = 1;
 extern char* ftCo_804D3B88;
@@ -45,7 +50,7 @@ void ftCo_800BBC88(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_800BBCC0(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj1 = gobj->hsd_obj;
@@ -224,12 +229,9 @@ lbl_800BBEBC:
 #endif /* clang-format on */
 
 ASM void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     if (fp->ground_or_air == GA_Ground) {
@@ -242,10 +244,7 @@ ASM void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
     fp->x221E_b0 = true;
     {
         Vec3 scale;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4] = { 0 };
-#endif
         float size = fp->co_attrs.xBC.size;
         scale.x = scale.y = scale.z = size;
         ftCommon_SetAccessory(fp, ftYs_SpecialN_8012CDD4(arg1));
@@ -491,12 +490,9 @@ lbl_800BC178:
 #endif /* clang-format on */
 
 ASM void ftCo_YoshiEgg_Anim(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x1A4C -= ftYs_SpecialN_8012CD10(gobj);
     fp->mv.co.yoshiegg.x4 = ftCommon_8007DC08(fp, ftYs_SpecialN_8012CD28());
@@ -654,7 +650,7 @@ void ftCo_800BC3AC(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_800BC3D0(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     fp->x1A4C = -(fp->dmg.x1838_percentTemp * ftYs_SpecialN_8012CDB4(gobj) -

@@ -1,10 +1,16 @@
+#include <dolphin/gx/forward.h>
+
+#include "tev.h"
+
+#include "debug.h"
+
 #include <__mem.h>
 #include <placeholder.h>
-#include <string.h>
 #include <dolphin/gx/GXAttr.h>
+#include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXTev.h>
-#include <baselib/tev.h>
+#include <dolphin/gx/types.h>
 
 static struct {
     GXColorS10 a;
@@ -29,9 +35,9 @@ static struct {
 
 void HSD_RenderInitAllocData(void)
 {
-    HSD_ObjAllocInit(&render_alloc_data, 0x1C, 4);
-    HSD_ObjAllocInit(&tevreg_alloc_data, 0x14, 4);
-    HSD_ObjAllocInit(&chan_alloc_data, 0x30, 4);
+    HSD_ObjAllocInit(&render_alloc_data, 28, 4);
+    HSD_ObjAllocInit(&tevreg_alloc_data, 20, 4);
+    HSD_ObjAllocInit(&chan_alloc_data, 48, 4);
 }
 
 HSD_ObjAllocData* HSD_RenderGetAllocData(void)
@@ -49,7 +55,7 @@ HSD_ObjAllocData* HSD_ChanGetAllocData(void)
     return &chan_alloc_data;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void HSD_SetupChannel(HSD_Chan* ch)
@@ -343,10 +349,7 @@ void HSD_StateSetNumTevStages(void)
 
 void HSD_SetupTevStage(HSD_TevDesc* desc)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     GXSetTevOrder(desc->stage, desc->coord, desc->map, desc->color);
     if (desc->flags == 0) {
         /// @todo Incorrect cast.
@@ -413,7 +416,7 @@ int HSD_Channel2Num(int chan)
     case 0xFF:
         return 0;
     default:
-        __assert(__FILE__, 0x290, "0");
+        HSD_ASSERT(656, 0);
         return 0;
     }
 }
@@ -454,7 +457,7 @@ int HSD_Index2TevStage(int idx)
     case 15:
         return 15;
     default:
-        __assert(__FILE__, 0x2C5, "0");
+        HSD_ASSERT(709, 0);
         return 15;
     }
 }
@@ -499,7 +502,7 @@ int HSD_TevStage2Index(int stage)
     case 15:
         return 15;
     default:
-        __assert(__FILE__, 0x2FA, "0");
+        HSD_ASSERT(762, 0);
         return 0;
     }
 }
@@ -543,7 +546,7 @@ int HSD_TevStage2Num(int stage)
     case 15:
         return 16;
     default:
-        __assert(__FILE__, 0x319, "0");
+        HSD_ASSERT(793, 0);
         return 0;
     }
 }
@@ -599,7 +602,7 @@ int HSD_TexCoordID2Num(int id)
     case 0xFF:
         return 0;
     default:
-        __assert(__FILE__, 0x3F2, "0");
+        HSD_ASSERT(1010, 0);
         return 0;
     }
 }

@@ -1,7 +1,7 @@
 #include <platform.h>
-#include "ft/forward.h"
 #include "ftLink/forward.h"
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftLk_SpecialN.h"
 
@@ -10,18 +10,21 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_ItemGet.h"
+#include "ftLink/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbrefract.h"
 
 #include <common_structs.h>
+#include <baselib/gobj.h>
 
 #if defined(MWERKS_GEKKO) || defined(M2CTX)
 /* static */ float const ftLk_Init_804D9340 = 0.0;
@@ -110,10 +113,7 @@ bool ftLk_SpecialN_IsActiveAnd2071b6(ftLk_GObj* gobj)
 
 void ftLk_SpecialN_ProcessFv10(ftLk_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.lk.arrow_gobj != NULL) {
         it_802A8A7C(fp->fv.lk.arrow_gobj);
@@ -124,10 +124,7 @@ void ftLk_SpecialN_ProcessFv10(ftLk_GObj* gobj)
 
 void ftLk_SpecialN_ProcessFv14(ftLk_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.lk.x14 != NULL) {
         it_802AF304(fp->fv.lk.x14);
@@ -136,7 +133,7 @@ void ftLk_SpecialN_ProcessFv14(ftLk_GObj* gobj)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialN_Enter(ftLk_GObj*)
 { // clang-format off
@@ -278,10 +275,7 @@ static inline bool unkCondition(ftLk_GObj* gobj)
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
     if (fp->fv.lk.x14 == NULL) {
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[36] = { 0 };
-#endif
         Vec3 pos;
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
                     NULL, &pos);
@@ -325,7 +319,7 @@ void ftLk_SpecialN_Enter(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirN_Enter(ftLk_GObj*)
 { // clang-format off
@@ -488,7 +482,7 @@ void ftLk_SpecialAirN_Enter(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialNStart_Anim(ftLk_GObj*)
 { // clang-format off
@@ -737,10 +731,7 @@ MotionFlags const mf = Ft_MF_SkipModel | Ft_MF_SkipItemVis;
 
 static inline void bar(ftLk_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[0x20] = { 0 };
-#endif
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ftLk_SpecialN_Vec3Group vecs = ftLk_Init_Vec3Group;
     lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint, NULL,
@@ -787,7 +778,7 @@ void ftLk_SpecialNStart_Anim(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialNLoop_Anim(ftLk_GObj*)
 { // clang-format off
@@ -914,10 +905,7 @@ static void updateParts(ftLk_GObj* gobj)
 
 void ftLk_SpecialNEnd_Anim(ftLk_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftLk_SpecialN_UnsetFv14(gobj);
         updateParts(gobj);
@@ -927,7 +915,7 @@ void ftLk_SpecialNEnd_Anim(ftLk_GObj* gobj)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirNStart_Anim(ftLk_GObj*)
 { // clang-format off
@@ -1190,7 +1178,7 @@ void ftLk_SpecialAirNStart_Anim(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirNLoop_Anim(ftLk_GObj*)
 { // clang-format off
@@ -1295,7 +1283,7 @@ void ftLk_SpecialAirNLoop_Anim(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirNEnd_Anim(ftLk_GObj*)
 { // clang-format off
@@ -1441,10 +1429,7 @@ lbl_800EDD70:
 
 void ftLk_SpecialAirNEnd_Anim(ftLk_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -1462,7 +1447,7 @@ void ftLk_SpecialAirNEnd_Anim(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialNStart_IASA(ftLk_GObj*)
 { // clang-format off
@@ -1534,7 +1519,7 @@ void ftLk_SpecialNStart_IASA(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialNLoop_IASA(ftLk_GObj*)
 { // clang-format off
@@ -1588,17 +1573,14 @@ static void doLoopIASA(ftLk_GObj* gobj, FtMotionId msid)
 
 void ftLk_SpecialNLoop_IASA(ftLk_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     doLoopIASA(gobj, ftLk_MS_SpecialNEnd);
 }
 #endif
 
 void ftLk_SpecialNEnd_IASA(ftLk_GObj* gobj) {}
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirNStart_IASA(ftLk_GObj*)
 { // clang-format off
@@ -1670,7 +1652,7 @@ void ftLk_SpecialAirNStart_IASA(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirNLoop_IASA(ftLk_GObj*)
 { // clang-format off
@@ -1749,7 +1731,7 @@ void ftLk_SpecialAirNEnd_Phys(ftLk_GObj* gobj)
     ft_80084EEC(gobj);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialNStart_Coll(ftLk_GObj*)
 { // clang-format off
@@ -1816,7 +1798,7 @@ void ftLk_SpecialNStart_Coll(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialNLoop_Coll(ftLk_GObj*)
 { // clang-format off
@@ -1866,7 +1848,7 @@ void ftLk_SpecialNLoop_Coll(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialNEnd_Coll(ftLk_GObj*)
 { // clang-format off
@@ -1957,10 +1939,7 @@ lbl_800EE2CC:
 
 static inline void doEndColl(ftLk_GObj* gobj)
 {
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12] = { 0 };
-#endif
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
     Item_GObj* item_gobj;
@@ -1997,7 +1976,7 @@ void ftLk_SpecialNEnd_Coll(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirNStart_Coll(ftLk_GObj*)
 { // clang-format off
@@ -2059,7 +2038,7 @@ void ftLk_SpecialAirNStart_Coll(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirNLoop_Coll(ftLk_GObj*)
 { // clang-format off
@@ -2109,7 +2088,7 @@ void ftLk_SpecialAirNLoop_Coll(ftLk_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftLk_SpecialAirNEnd_Coll(ftLk_GObj*)
 { // clang-format off
@@ -2201,10 +2180,7 @@ lbl_800EE514:
 /// @todo Combine with #ftLk_SpecialNEnd_Coll.
 void ftLk_SpecialAirNEnd_Coll(ftLk_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     doEndColl(gobj);
     if (ft_80081D0C(gobj) == GA_Air) {

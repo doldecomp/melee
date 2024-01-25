@@ -1,6 +1,7 @@
 #ifndef DOLPHIN_GX___TYPES_H
 #define DOLPHIN_GX___TYPES_H
 
+#include <platform.h>
 #include <dolphin/gx/forward.h>
 
 #include <dolphin/gx/GXEnum.h>

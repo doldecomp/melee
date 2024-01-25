@@ -1,6 +1,6 @@
+#include <platform.h>
 #include "forward.h"
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
+#include "lb/forward.h"
 
 #include "ftDonkey/ftDk_Init.h"
 
@@ -11,14 +11,11 @@
 #include "ftDk_HeavyWait0.h"
 #include "ftDk_HeavyWait1.h"
 #include "ftDk_HeavyWalk.h"
-#include "ftDk_MS_345_0.h"
 #include "ftDk_SpecialHi.h"
 #include "ftDk_SpecialLw.h"
 #include "ftDk_SpecialN.h"
 #include "ftDk_SpecialS.h"
 
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
@@ -33,10 +30,12 @@
 #include "ftCommon/ftCo_CargoTurn.h"
 #include "ftCommon/ftCo_CargoWait.h"
 #include "ftCommon/ftCo_CargoWalk.h"
+#include "ftDonkey/types.h"
 #include "lb/lbmthp.h"
 #include "mp/mplib.h"
 
 #include <dolphin/mtx/types.h>
+#include <baselib/gobj.h>
 
 MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
     {
@@ -657,10 +656,7 @@ void ftDk_Init_8010DB3C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
     CollData* colldata = &fp->coll_data;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (ftCheckThrowB3(fp) && (colldata->env_flags & 98304)) {
         Vec3 vec_list[4];
         int i;

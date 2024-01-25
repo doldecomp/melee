@@ -1,23 +1,25 @@
+#include <platform.h>
 #include "forward.h"
 #include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftLg_SpecialS.h"
 
-#include "ftLg_Init.h"
 #include "types.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 
-#include <baselib/gobjproc.h>
+#include <common_structs.h>
+#include <baselib/random.h>
 
 /// Luigi's Green Missile GFX callback
 void ftLg_SpecialS_SetGFX(HSD_GObj* gobj)
@@ -58,10 +60,7 @@ void ftLg_SpecialS_SetVars(HSD_GObj* gobj)
 /// Luigi's grounded Green Missile Motion State handler
 void ftLg_SpecialS_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     /// @todo Shared @c inline with #ftLg_SpecialAirS_Enter.
     Fighter* fp = GET_FIGHTER(gobj);
@@ -78,10 +77,7 @@ void ftLg_SpecialS_Enter(HSD_GObj* gobj)
 /// Luigi's aerial Green Missile Motion State handler
 void ftLg_SpecialAirS_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = fp->dat_attrs;
@@ -145,10 +141,7 @@ void ftLg_SpecialSStart_Phys(HSD_GObj* gobj)
 /// Luigi's aerial Green Missile Start Physics callback
 void ftLg_SpecialAirSStart_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* da = fp->dat_attrs;
@@ -207,10 +200,7 @@ void ftLg_SpecialAirSStart_AirToGround(HSD_GObj* gobj)
 /// Luigi's grounded Green Missile Charge Animation callback
 void ftLg_SpecialSHold_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     /// @todo Shared @c inline with #ftLg_SpecialAirSHold_Anim.
     Fighter* fp = GET_FIGHTER(gobj);
@@ -233,10 +223,7 @@ void ftLg_SpecialSHold_Anim(HSD_GObj* gobj)
 /// Luigi's aerial Green Missile Charge Animation callback
 void ftLg_SpecialAirSHold_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = fp->dat_attrs;
@@ -326,10 +313,7 @@ void ftLg_SpecialAirSHold_AirToGround(HSD_GObj* gobj)
 /// Luigi's grounded Green Missile Charge Motion State handler
 void ftLg_SpecialSHold_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     /// @todo Shared @c inline with #ftLg_SpecialAirSHold_Enter.
 
@@ -345,10 +329,7 @@ void ftLg_SpecialSHold_Enter(HSD_GObj* gobj)
 /// Luigi's aerial Green Missile Charge Motion State handler
 void ftLg_SpecialAirSHold_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirSHold, Ft_MF_KeepSfx, 0,
                               1, 0, NULL);
@@ -362,10 +343,7 @@ void ftLg_SpecialAirSHold_Enter(HSD_GObj* gobj)
 void ftLg_SpecialS_Anim(HSD_GObj* gobj)
 {
     /// @todo Shared @c inline with #ftLg_SpecialAirS_Anim.
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
@@ -389,10 +367,7 @@ void ftLg_SpecialS_Anim(HSD_GObj* gobj)
 /// Luigi's aerial Green Missile Launch Animation callback
 void ftLg_SpecialAirS_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
@@ -497,10 +472,7 @@ static inline void ftLuigi_SpecialS_Setup(HSD_GObj* gobj)
 /// Luigi's grounded Green Missile Launch Motion State handler
 void ftLg_SpecialSLaunch_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -534,10 +506,7 @@ void ftLg_SpecialAirSLaunch_Enter(HSD_GObj* gobj)
 /// Luigi's grounded Green Missile Misfire Animation callback
 void ftLg_SpecialSMisfire_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
@@ -561,10 +530,7 @@ void ftLg_SpecialSMisfire_Anim(HSD_GObj* gobj)
 /// Luigi's aerial Green Missile Misfire Animation callback
 void ftLg_SpecialAirSMisfire_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
@@ -642,10 +608,7 @@ void ftLg_SpecialAirSMisfire_AirToGround(HSD_GObj* gobj)
 /// Luigi's grounded Green Missile Misfire Motion State handler
 void ftLg_SpecialSMisfire_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialSMisfire, 0, 0, 1, 0, NULL);
 
@@ -656,10 +619,7 @@ void ftLg_SpecialSMisfire_Enter(HSD_GObj* gobj)
 /// Luigi's aerial Green Missile Misfire Motion State handler
 void ftLg_SpecialAirSMisfire_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirSMisfire, 0, 0, 1, 0,
                               NULL);
@@ -691,10 +651,7 @@ void ftLg_SpecialS2_Phys(HSD_GObj* gobj) {}
 /// Luigi's aerial Green Missile Fly Physics callback
 void ftLg_SpecialAirS2_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = getFighter(gobj);
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
@@ -746,10 +703,7 @@ static u32 const transition_flags3 =
 /// Luigi's Green Missile Fly Setup
 void ftLg_SpecialSFly_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp;
     ftLuigiAttributes* sa;

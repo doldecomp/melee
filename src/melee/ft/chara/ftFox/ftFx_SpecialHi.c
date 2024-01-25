@@ -1,5 +1,4 @@
-#include "forward.h"
-#include "ft/forward.h"
+#include <platform.h>
 
 #include "ftFx_SpecialHi.h"
 
@@ -7,21 +6,23 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Pass.h"
+#include "ftFox/types.h"
+#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h>
+#include <common_structs.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/gobjproc.h>
+#include <baselib/gobj.h>
 
 #define FTFOX_SPECIALHI_COLL_FLAG                                             \
     Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_UpdateCmd | Ft_MF_SkipColAnim | \
@@ -156,10 +157,7 @@ void ftFx_SpecialHiHoldAir_Phys(HSD_GObj* gobj)
     ftFox_DatAttrs* da = fp->dat_attrs;
     ftCo_DatAttrs* ca = &fp->co_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->mv.fx.SpecialHi.gravityDelay != 0) {
         fp->mv.fx.SpecialHi.gravityDelay -= 1;
@@ -341,10 +339,7 @@ void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     f32 facingDir;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftFox_DatAttrs* da = da = getFtSpecialAttrs(fp);
@@ -422,10 +417,7 @@ void ftFx_SpecialHi_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftCommon_8007D60C(fp);
 
@@ -448,10 +440,7 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
     f32 stick_x;
     f32 stick_y;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp = getFighter(gobj);
     stick_y = fp->input.lstick.y;
@@ -517,10 +506,7 @@ void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
     f32 stick_y;
     f32 temp_stick;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     ca = &fp->co_attrs;
     da = fp->dat_attrs;
@@ -570,10 +556,7 @@ void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
 // End Animation callback
 void ftFx_SpecialHiLanding_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -643,10 +626,7 @@ void ftFx_SpecialHiLanding_Coll(HSD_GObj* gobj)
 // Collision callback
 void ftFx_SpecialHiFall_Coll(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_BOTH) != false) {
         ftFx_SpecialHiFall_Enter(gobj);
@@ -708,10 +688,7 @@ void ftFx_SpecialHiBound_Anim(HSD_GObj* gobj)
     Fighter* fp;
     ftFox_DatAttrs* da;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp = GET_FIGHTER(gobj);
     ca = &fp->co_attrs;

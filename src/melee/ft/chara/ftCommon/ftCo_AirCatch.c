@@ -1,22 +1,32 @@
-#include "ft/forward.h"
-#include "ftLink/forward.h"
+#include <platform.h>
 #include "ftSamus/forward.h"
+#include "it/forward.h"
+#include <baselib/forward.h>
 
 #include "ftCo_AirCatch.h"
 
 #include "ftCo_FallSpecial.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ftCommon/types.h"
+#include "ftLink/types.h"
+#include "ftSamus/types.h"
 #include "it/item.h"
 #include "it/items/itlinkhookshot.h"
 #include "it/items/itsamusgrapple.h"
 #include "lb/lb_00B0.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
+
+#include <common_structs.h>
+#include <placeholder.h>
+#include <baselib/jobj.h>
 
 #ifdef WIP
 #pragma force_active on
@@ -39,7 +49,7 @@
 /* literal */ SDATA char ftCo_804D3C50[] = "jobj";
 
 ASM bool ftCo_800C3A14(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     CollData coll = { 0 };
     IntVec3 sp14;
@@ -150,7 +160,7 @@ lbl_800C3AFC:
 #endif /* clang-format on */
 
 ASM bool ftCo_800C3B10(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2228_b6) {
@@ -245,7 +255,7 @@ lbl_800C3BD4:
 #endif /* clang-format on */
 
 ASM void ftCo_800C3BE8(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Vec3 anim_vel = { 0 };
@@ -329,7 +339,7 @@ lbl_800C3CAC:
 #endif /* clang-format on */
 
 ASM void ftCo_800C3CC0(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->kind == FTKIND_LINK || fp->kind == FTKIND_CLINK) {
@@ -401,12 +411,9 @@ lbl_800C3D58:
 #endif /* clang-format on */
 
 ASM void ftCo_AirCatch_Anim(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->kind == FTKIND_LINK || fp->kind == FTKIND_CLINK) {
@@ -414,10 +421,7 @@ ASM void ftCo_AirCatch_Anim(ftCo_GObj* gobj)
         fp->mv.co.aircatch.x0 += 1.0;
         if (fp->mv.co.aircatch.x0 == da->xA4) {
             Vec3 pos;
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[4] = { 0 };
-#endif
             lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
                         NULL, &pos);
             fp->fv.lk.xC = it_802A2BA4(gobj, &pos, fp->facing_dir, da->xBC);
@@ -490,10 +494,7 @@ ASM void ftCo_AirCatch_Anim(ftCo_GObj* gobj)
         fp->mv.co.aircatch.x0 += 1.0;
         if (fp->mv.co.aircatch.x0 == da->xBC) {
             Vec3 pos;
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[4] = { 0 };
-#endif
             lb_8000B1CC(fp->parts[FtPart_ThrowN].joint, NULL, &pos);
             fp->fv.ss.x223C = it_802B7C18(gobj, &pos, fp->facing_dir);
             if (fp->fv.ss.x223C == NULL) {
@@ -977,12 +978,9 @@ void ftCo_AirCatch_IASA(ftCo_GObj* gobj) {}
 void ftCo_AirCatchHit_IASA(ftCo_GObj* gobj) {}
 
 ASM void ftCo_AirCatch_Phys(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* co = &fp->co_attrs;
     ftCommon_8007D528(fp);
@@ -1056,12 +1054,9 @@ void ftCo_AirCatchHit_Phys(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_AirCatch_Coll(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     if (ft_80081D0C(gobj) != GA_Ground) {
         ftCo_800D5AEC(gobj, 42, 0, 0, 0, 1);
     }

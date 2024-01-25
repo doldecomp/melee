@@ -1,11 +1,18 @@
+#include <dolphin/mtx/forward.h>
+
 #include "ft_0877.h"
 
-#include "fighter.h"
 #include "ftcommon.h"
 #include "ftdevice.h"
-#include "inlines.h"
 
+#include "ft/fighter.h"
+#include "ft/types.h"
+#include "ftCommon/ftCo_0A01.h"
+#include "it/it_26B1.h"
 #include "lb/lbaudio_ax.h"
+
+#include <baselib/gobj.h>
+#include <baselib/random.h>
 
 #define TEST(expr) (expr) ? true : false
 
@@ -561,10 +568,7 @@ s32 ft_80087D0C(Fighter* fighter, s32 arg1)
     enum_t sfx = lbAudioAx_800233EC(arg1);
     enum_t ssm_id = lbAudioAx_80023130();
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     switch (ssm_id) {
     case 0:

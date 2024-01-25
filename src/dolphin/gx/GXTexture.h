@@ -4,6 +4,8 @@
 #include <platform.h>
 #include <dolphin/gx/forward.h>
 
+#include <dolphin/gx/GXEnum.h>
+
 void __GXSetSUTexSize(void);
 void GXLoadTexObjPreLoaded(unk_t, unk_t, s32);
 

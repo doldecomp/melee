@@ -1,11 +1,16 @@
 #include "ftMh_Sweep.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
+#include "ftMasterHand/types.h"
 #include "mp/mplib.h"
+#include "pl/player.h"
 
 #include <dolphin/mtx/types.h>
+#include <baselib/gobj.h>
 
 void ftMh_Damage_IASA(HSD_GObj* gobj)
 {
@@ -73,10 +78,7 @@ void ftMh_SweepLoop_Anim(HSD_GObj* gobj)
         Fighter* fp = gobj->user_data;
         Vec3 pos;
 
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[8];
-#endif
         mpLib_80054158(0, &pos);
         if (fp->cur_pos.x < pos.x) {
             ftMh_MS_347_80151AC8(gobj);

@@ -1,19 +1,26 @@
+#include "ftCommon/forward.h"
+
 #include "ftbosslib.h"
 
-#include "fighter.h"
 #include "ft_0877.h"
 #include "ftlib.h"
 #include "math.h"
 
 #include "cm/camera.h"
 #include "ft/inlines.h"
-#include "it/item.h"
+#include "ft/types.h"
+#include "ftMasterHand/types.h"
+#include "it/it_26B1.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
+#include "pl/player.h"
 
-#include <dolphin/mtx/types.h>
 #include <dolphin/os.h>
+#include <baselib/debug.h>
 #include <baselib/gobj.h>
+#include <baselib/jobj.h>
+#include <baselib/random.h>
+#include <MetroTRK/intrinsics.h>
 
 typedef enum {
     Gm_PKind_Human,
@@ -61,10 +68,7 @@ static inline float my_sqrtf(float x)
     static const double _half = .5;
     static const double _three = 3.0;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
 
     volatile float y;
     if (x > 0.0f) {
@@ -254,10 +258,7 @@ HSD_GObj* ftBossLib_8015C3E8(FighterKind kind)
 {
     HSD_GObj* cur;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     for (cur = HSD_GObj_Entities->fighters; cur; cur = cur->next) {
         if (kind == ftLib_800872A4(cur)) {
@@ -272,10 +273,7 @@ enum_t ftBossLib_8015C44C(FighterKind kind)
 {
     HSD_GObj* gobj = ftBossLib_8015C3E8(kind);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     if (gobj != NULL) {
         // DataOffset_MotionStateLoad
@@ -289,10 +287,7 @@ enum_t ftBossLib_8015C4C4(void)
 {
     HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_CREZYH);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     if (gobj) {
         return GET_FIGHTER(gobj)->fv.mh.x2250;
@@ -305,10 +300,7 @@ s32 ftBossLib_8015C530(enum_t arg0)
 {
     HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_MASTERH);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     if (gobj != NULL) {
         ftMasterHand_SpecialAttrs* ftCo_DatAttrs =
@@ -354,10 +346,7 @@ void ftBossLib_8015C5F8(HSD_GObj* gobj)
 
 ftMasterHand_SpecialAttrs* ftBossLib_8015C6BC(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     {
         HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_MASTERH);
@@ -387,10 +376,7 @@ ftMasterHand_SpecialAttrs* ftBossLib_8015C6BC(void)
 
 s32 ftBossLib_8015C74C(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     ftMasterHand_SpecialAttrs* da = ftBossLib_8015C6BC();
     if (da == NULL) {
@@ -402,10 +388,7 @@ s32 ftBossLib_8015C74C(void)
 
 s32 ftBossLib_8015C7EC(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     ftMasterHand_SpecialAttrs* da = ftBossLib_8015C6BC();
     if (da == NULL) {
@@ -417,10 +400,7 @@ s32 ftBossLib_8015C7EC(void)
 
 s32 ftBossLib_8015C88C(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     ftMasterHand_SpecialAttrs* da = ftBossLib_8015C6BC();
     if (da == NULL) {
@@ -432,10 +412,7 @@ s32 ftBossLib_8015C88C(void)
 
 s32 ftBossLib_8015C92C(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     ftMasterHand_SpecialAttrs* da = ftBossLib_8015C6BC();
     if (da == NULL) {
@@ -447,10 +424,7 @@ s32 ftBossLib_8015C92C(void)
 
 s32 ftBossLib_8015C9CC(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     ftMasterHand_SpecialAttrs* da = ftBossLib_8015C6BC();
     if (da == NULL) {
@@ -470,10 +444,7 @@ void func_8015CA6C_inline(s32 arg0)
 
 void ftBossLib_8015CA6C(s32 arg0)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[32];
-#endif
 
     Player_80036790(0, arg0);
 

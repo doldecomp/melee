@@ -1,3 +1,5 @@
+#include <dolphin/dvd/forward.h>
+
 #include "lb/lbfile.h"
 
 #include "lb/lb_0192.h"
@@ -9,7 +11,6 @@
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/os.h>
 #include <dolphin/os/OSInterrupt.h>
-#include <baselib/archive.h>
 #include <baselib/debug.h>
 #include <baselib/devcom.h>
 
@@ -143,10 +144,7 @@ void lbFile_800164A4(s32 arg0, HSD_Archive* arg1, s32* arg2, s32 arg3,
 void lbFile_80016580(const char* basename, HSD_Archive* arg1, s32* arg2,
                      HSD_DevComCallback arg3, s32 arg4)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     const char* filename = lbFile_80016204(basename);
     s32 entry_num = DVDConvertPathToEntrynum(filename);

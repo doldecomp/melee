@@ -1,6 +1,8 @@
 #include "tobj.h"
 
 #include "aobj.h"
+#include "debug.h"
+#include "fobj.h"
 #include "memory.h"
 #include "mtx.h"
 
@@ -381,10 +383,7 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
     Vec3 trans;
     Quaternion rot;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     bool no_assert = false;
 

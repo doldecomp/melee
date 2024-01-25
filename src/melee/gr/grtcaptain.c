@@ -1,3 +1,8 @@
+#include <platform.h>
+#include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
+
 #include "gr/grtcaptain.h"
 
 #include "gr/granime.h"
@@ -5,10 +10,13 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "gr/types.h"
 #include "lb/lb_00F9.h"
 
 #include <dolphin/os.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 
 static void grTCaptain_8021FC60(int);
 static void grTCaptain_8021FC64(void);
@@ -133,10 +141,7 @@ static void grTCaptain_8021FE24(HSD_GObj* arg0) {}
 
 static void grTCaptain_8021FE28(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = GET_GROUND(gobj);
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
@@ -158,10 +163,7 @@ static void grTCaptain_8021FEB4(HSD_GObj* arg0) {}
 
 static void grTCaptain_8021FEB8(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = GET_GROUND(gobj);
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);

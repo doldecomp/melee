@@ -1,13 +1,21 @@
+#include <platform.h>
+#include "lb/forward.h"
+#include <baselib/forward.h>
+
 #include "gr/grtness.h"
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
-#include "gr/stage.h"
+#include "gr/types.h"
 #include "lb/lb_00F9.h"
 
+#include <dolphin/mtx/types.h>
 #include <dolphin/os.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 
 static void grTNess_802225D0(int);
 static void grTNess_802225D4(void);
@@ -142,10 +150,7 @@ static void grTNess_80222794(HSD_GObj* arg0)
 
 static void grTNess_80222798(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
@@ -170,10 +175,7 @@ static void grTNess_80222824(HSD_GObj* arg0)
 
 static void grTNess_80222828(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);

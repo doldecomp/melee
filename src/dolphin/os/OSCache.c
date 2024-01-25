@@ -4,6 +4,7 @@
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/os.h>
 #include <dolphin/os/OSCache.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <MetroTRK/intrinsics.h>

@@ -1,3 +1,6 @@
+#include <platform.h>
+#include <baselib/forward.h>
+
 #include "ftCo_HammerTurn.h"
 
 #include "ftCo_HammerJump.h"
@@ -5,11 +8,13 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 
 #include <math.h>
+#include <baselib/jobj.h>
 
 /* 0C57B4 */ static void ftCo_800C57B4(ftCo_GObj* gobj);
 

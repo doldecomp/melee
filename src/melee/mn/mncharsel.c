@@ -2,9 +2,7 @@
 #include "mn/mncharsel.h"
 
 #include "gm/gmmain_lib.h"
-#include "it/it_26B1.h"
 #include "lb/lblanguage.h"
-#include "mn/mntext.h"
 
 #include <baselib/sislib.h>
 

@@ -1,5 +1,5 @@
 #include <platform.h>
-#include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_FallSpecial.h"
 
@@ -7,8 +7,6 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0CEE.h"
@@ -16,12 +14,12 @@
 #include "ft/ftchangeparam.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "ftCommon/types.h"
 #include "mp/mplib.h"
 #include "un/un_2FC9.h"
 
 #include <common_structs.h>
 #include <math.h>
-#include <placeholder.h>
 
 void ftCo_800968C8(ftCo_GObj* gobj)
 {
@@ -29,7 +27,7 @@ void ftCo_800968C8(ftCo_GObj* gobj)
     ftCo_80096900(gobj, 1, 0, true, 1, fp->x2EC);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80096900(ftCo_GObj* gobj, int, int, bool allow_interrupt, float,
                        float)
@@ -107,10 +105,7 @@ void ftCo_80096900(ftCo_GObj* gobj, int arg1, int arg2, bool allow_interrupt,
     ftCo_800969D8(gobj, arg1, arg2, allow_interrupt, arg4, arg5, 0);
 #elif SOLUTION == 1
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_DatAttrs* ca = &fp->co_attrs;
     if (fp->x2224_b2) {
@@ -137,7 +132,7 @@ void ftCo_80096900(ftCo_GObj* gobj, int arg1, int arg2, bool allow_interrupt,
 #undef SOLUTION
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_800969D8(ftCo_GObj* gobj, int, int, int, float, float, float)
 { // clang-format off
@@ -202,10 +197,7 @@ lbl_80096A84:
 void ftCo_800969D8(ftCo_GObj* gobj, int arg1, int arg2, int allow_interrupt,
                    float arg4, float arg5, float arg6)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_DatAttrs* ca = &fp->co_attrs;
     if (fp->x2224_b2) {
@@ -244,7 +236,7 @@ void ftCo_FallSpecial_IASA(ftCo_GObj* gobj)
     ;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_FallSpecial_Phys(ftCo_GObj*)
 { // clang-format off
@@ -406,10 +398,7 @@ void ftCo_FallSpecial_Coll(ftCo_GObj* gobj)
 
 bool ftCo_80096CC8(ftCo_GObj* gobj, enum_t arg1)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (arg1 != -1 && (!(mpLib_80054CEC(arg1) & (1 << 8)) ||
                        fp->input.lstick.y > p_ftCommonData->x25C))

@@ -3,6 +3,7 @@
 
 #include <platform.h>
 
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSTime.h>
 

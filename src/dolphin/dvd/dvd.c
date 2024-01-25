@@ -9,8 +9,10 @@
 #include <dolphin/os.h>
 #include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSCache.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
+#include <dolphin/os/OSTime.h>
 
 // Callback / state-change function declarations
 static void cbForCancelAllSync(s32, DVDCommandBlock*);
@@ -56,7 +58,7 @@ extern volatile struct _IO {
 static DVDBuffer tmpBuffer;
 
 /// @todo Unused @c .bss.
-#ifdef MUST_MATCH
+#ifndef BUGFIX
 static u8 _[0x60];
 #endif
 
@@ -522,7 +524,8 @@ static void stateCoverClosed(void)
 
 static void stateCoverClosed_CMD(DVDCommandBlock* block)
 {
-    DVDLowReadDiskID(&tmpBuffer, cbForStateCoverClosed);
+    /// @todo Incorrect cast.
+    DVDLowReadDiskID((DVDDiskID*) &tmpBuffer, cbForStateCoverClosed);
 }
 
 static void cbForStateCoverClosed(u32 intType)
@@ -855,7 +858,7 @@ static void cbForStateBusy(u32 intType)
     }
 }
 
-static bool issueCommand(s32 prio, DVDCommandBlock* block)
+static inline bool issueCommand(s32 prio, DVDCommandBlock* block)
 {
     bool level;
     bool result;

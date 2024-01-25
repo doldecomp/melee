@@ -1,11 +1,15 @@
 #ifndef GALE01_04D164
 #define GALE01_04D164
 
+#include <platform.h>
 #include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "ft/fighter.h"
+#include "ft/types.h"
 
 #include <common_structs.h>
+#include <placeholder.h>
 
 typedef void (*mpLib_Callback)(s32, s32, CollData*, s32, s32, f32);
 

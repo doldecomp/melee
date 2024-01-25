@@ -1,10 +1,12 @@
+#include "video.h"
+
+#include "debug.h"
+#include "state.h"
+
 #include <dolphin/gx/GXFrameBuf.h>
 #include <dolphin/gx/GXMisc.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/vi/vi.h>
-#include <baselib/debug.h>
-#include <baselib/state.h>
-#include <baselib/video.h>
 
 HSD_VIInfo HSD_VIData;
 static u8 garbage[HSD_ANTIALIAS_GARBAGE_SIZE] ATTRIBUTE_ALIGN(32);
@@ -149,7 +151,7 @@ static void HSD_VIGXDrawDoneCB(void)
     }
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
 #endif
@@ -157,7 +159,7 @@ static int HSD_VIGetDrawDoneWaitingFlag(void)
 {
     return _p->drawdone.waiting;
 }
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma pop
 #endif
 

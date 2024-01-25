@@ -5,6 +5,8 @@
 
 #include <baselib/forward.h>
 
+#include <stdbool.h>
+
 /* 14AFC0 */ void ftGw_AttackAirN_ItemParachuteSetup(HSD_GObj* gobj);
 /* 14B074 */ void ftGw_AttackAirN_ItemParachuteOnLand(HSD_GObj* gobj);
 /* 14B0F0 */ void ftGw_AttackAirN_ItemParachuteSetFlag(HSD_GObj* gobj);

@@ -1,11 +1,20 @@
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+
 #include "itcapsule.h"
 
 #include "math.h"
 
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/types.h"
 #include "lb/lb_00F9.h"
+
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
+#include <baselib/random.h>
 
 ItemStateTable it_803F5468[] = {
     {
@@ -63,10 +72,7 @@ void it_8027CF00(Item_GObj* item_gobj)
 void it_8027CF30(Item_GObj* gobj)
 {
     Vec3 sp18;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
 
     Item* it = GET_ITEM(gobj);
     ItCapsuleAttrs* capsule = it->xC4_article_data->x4_specialAttributes;
@@ -87,10 +93,7 @@ void it_8027CF30(Item_GObj* gobj)
 
 void it_8027CFE8(Item_GObj* item_gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     HSD_JObj* jobj = GET_JOBJ(item_gobj);
     Item* it = GET_ITEM(item_gobj);
     Vec3 sp14;
@@ -113,10 +116,7 @@ void it_8027CFE8(Item_GObj* item_gobj)
 void it_8027D0B8(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     it_8026B390(gobj);
     it->x40_vel.x = it->x40_vel.y = it->x40_vel.z = 0.0F;
     Item_80268E5C(gobj, 0, 2);
@@ -218,10 +218,7 @@ bool it_8027D330(Item_GObj* gobj)
 bool it_8027D338(HSD_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
 
     if (it->msid != 5) {
         it_8027CF30(item_gobj);
@@ -340,7 +337,7 @@ bool it_8027D4F4(Item_GObj* item_gobj)
     return it_8027D338_autoinlined(item_gobj);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm bool it_8027D530(Item_GObj* item_gobj)
 { // clang-format off

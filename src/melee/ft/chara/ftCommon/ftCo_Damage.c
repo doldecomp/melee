@@ -1,6 +1,5 @@
 #include <platform.h>
-#include "forward.h"
-#include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_Damage.h"
 
@@ -25,29 +24,35 @@
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftchangeparam.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+#include "ftCommon/types.h"
 #include "ftDonkey/ftDk_HeavyLanding.h"
 #include "gm/gm_1601.h"
+#include "it/it_26B1.h"
 #include "lb/lbbgflash.h"
+#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
+#include "lb/types.h"
 #include "pl/pl_0371.h"
 #include "un/un_2FC9.h"
 
 #include <common_structs.h>
+#include <m2c_macros.h>
 #include <math.h>
 #include <placeholder.h>
+#include <dolphin/mtx.h>
 #include <dolphin/mtx/vec.h>
+#include <baselib/random.h>
 #include <MetroTRK/intrinsics.h>
 #include <MSL/trigf.h>
 
@@ -56,7 +61,7 @@ int ftCo_803C5520[2][12] = {
     { 84, 84, 84, 85, 85, 85, 86, 86, 86, 89, 88, 87 },
 };
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 float const lbl_804D84D0 = deg_to_rad;
 float const lbl_804D84D4 = 0;
 float const lbl_804D84D8 = 1;
@@ -72,7 +77,7 @@ double const lbl_804D8508 = 3;
 /* 08DA4C */ static bool ftCo_8008DA4C(ftCo_GObj* gobj, enum_t, enum_t);
 /* 08F938 */ static bool doIasa(ftCo_GObj* gobj);
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm /* 08D7F0 */ float ftCo_Damage_CalcAngle(ftCo_Fighter* fp, float)
 {
@@ -185,7 +190,7 @@ bool ftCo_8008D8E8(float f)
                                       : 3;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_Damage_CalcKnockback(ftCo_Fighter*)
 { // clang-format off
@@ -314,7 +319,7 @@ not_squatwait:
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm /* 08DA4C */ /* static */ bool ftCo_8008DA4C(ftCo_GObj* gobj, enum_t,
                                                  enum_t)
@@ -404,7 +409,7 @@ bool ftCo_8008DA4C(ftCo_GObj* gobj, enum_t arg1, enum_t arg2)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm /* 08DB10 */ /* static */ void ftCo_8008DB10(ftCo_GObj* gobj, int, float)
 { // clang-format off
@@ -519,7 +524,7 @@ void ftCo_8008DB10(ftCo_GObj* gobj, enum_t arg1, float arg2)
 #endif
 
 ASM void ftCo_Damage_CalcVel(Fighter* fp, float x, float y)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     if (fp->dmg.x18ac_time_since_hit < p_ftCommonData->xFC) {
         fp->x8c_kb_vel.x = x;
@@ -612,7 +617,7 @@ lbl_8008DCD0:
 #pragma peephole on
 #endif /* clang-format on */
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm /* 08DCE0 */ void ftCo_8008DCE0(ftCo_GObj* gobj, int, float)
 { // clang-format off
@@ -1185,10 +1190,7 @@ static void inlineA1(ftCo_GObj* gobj)
 
 void ftCo_8008DCE0(ftCo_GObj* gobj, int arg1, float facing_dir)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[0x38] = { 0 };
-#endif
     float temp_f30;
     Vec3 pos;
     float sp40;
@@ -1496,7 +1498,7 @@ bool ftCo_Damage_CheckAirMotion(ftCo_Fighter* fp)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm /* 08E4F0 */ /* static */ void ftCo_Damage_OnEveryHitlag(ftCo_GObj* gobj)
 {
@@ -1597,7 +1599,7 @@ void ftCo_Damage_OnEveryHitlag(ftCo_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm /* 08E5A4 */ /* static */ void ftCo_8008E5A4(ftCo_Fighter* fp)
 { // clang-format off
@@ -1740,7 +1742,7 @@ void ftCo_8008E5A4(Fighter* fp)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm /* 08E714 */ /* static */ void ftCo_Damage_OnExitHitlag(ftCo_GObj* gobj)
 {
@@ -1950,7 +1952,7 @@ void ftCo_8008E908(ftCo_GObj* gobj, float facing_dir)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm /* 08E984 */ bool ftCo_8008E984(ftCo_Fighter* fp)
 { // clang-format off
@@ -2002,7 +2004,7 @@ bool ftCo_8008E984(Fighter* fp)
 /* Warning: struct _HSD_Rvalue is not defined (only forward-declared) */
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm /* 08E9D0 */ void ftCo_8008E9D0(ftCo_GObj* gobj)
 { // clang-format off
@@ -2141,10 +2143,7 @@ static inline void inlineF0(ftCo_GObj* gobj)
 
 void ftCo_8008E9D0(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
 
     ftCo_Fighter* fp = gobj->user_data;
     inlineF0(gobj);
@@ -2155,7 +2154,7 @@ void ftCo_8008E9D0(ftCo_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm /* 08EB58 */ void ftCo_8008EB58(ftCo_GObj* gobj)
 { // clang-format off
@@ -2297,7 +2296,7 @@ void ftCo_8008EB58(ftCo_GObj* gobj)
 #endif
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm /* 08EC90 */ void ftCo_8008EC90(ftCo_GObj* gobj)
 { // clang-format off
@@ -3132,10 +3131,6 @@ static inline void inlineB2(ftCo_GObj* gobj)
 
 void ftCo_8008EC90(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    // u8 _[0x60] = { 0 };
-#endif
     bool ret0 = false;
     ftCo_Fighter* fp = gobj->user_data;
     float facing_dir = 0;
@@ -3262,7 +3257,7 @@ ret_A8C:
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm /* 08F744 */ void ftCo_8008F744(ftCo_GObj* gobj)
 { // clang-format off
@@ -3335,7 +3330,7 @@ void ftCo_8008F744(ftCo_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_Damage_Anim(ftCo_GObj*)
 { // clang-format off
@@ -3446,10 +3441,7 @@ static bool inlineC0(ftCo_GObj* gobj)
 
 void ftCo_Damage_Anim(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_8008F744(gobj);
     if (!ftAnim_IsFramesRemaining(gobj) && !fp->x221C_b6) {
@@ -3466,7 +3458,7 @@ void ftCo_Damage_Anim(ftCo_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm static bool doIasa(ftCo_GObj* gobj)
 {
@@ -3584,7 +3576,7 @@ ret_inline:
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_Damage_IASA(ftCo_GObj*)
 { // clang-format off
@@ -3694,7 +3686,7 @@ void ftCo_Damage_Phys(ftCo_GObj* gobj)
     }
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_Damage_Coll(ftCo_GObj*)
 { // clang-format off
@@ -3812,7 +3804,7 @@ void ftCo_8008FC94(ftCo_GObj* gobj)
     ftCommon_8007D5D4(gobj->user_data);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm /* 08FCB8 */ static void
 ftCo_Damage_SetMv8FromKbThreshold(ftCo_Fighter* fp)
@@ -3901,7 +3893,7 @@ void ftCo_Damage_SetMv8FromKbThreshold(Fighter* fp)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_DamageFly_Anim(ftCo_GObj*)
 { // clang-format off
@@ -4082,7 +4074,7 @@ static void doFlyRoll(ftCo_GObj* gobj)
     ftParts_8007592C(fp, ftParts_8007500C(fp, FtPart_XRotN), trajectory);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_DamageFly_Phys(ftCo_GObj*)
 { // clang-format off
@@ -4189,10 +4181,7 @@ lbl_800900CC:
 
 void ftCo_DamageFly_Phys(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Air) {
         if (!fp->x221C_b6) {
@@ -4216,10 +4205,7 @@ void ftCo_DamageFly_Phys(ftCo_GObj* gobj)
 
 void ftCo_DamageFly_Coll(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     CollData* coll = &GET_FIGHTER(gobj)->coll_data;
     if (ft_80081DD4(gobj) != 0) {
         ftCo_80090184(gobj);
@@ -4243,7 +4229,7 @@ void ftCo_80090184(ftCo_GObj* gobj)
     ftCo_80097D40(gobj);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_DamageFlyRoll_Anim(ftCo_GObj*)
 {
@@ -4346,14 +4332,8 @@ lbl_80090308:
 
 void ftCo_DamageFlyRoll_Anim(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _0[8] = { 0 };
-#endif
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _1[0x18] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->mv.co.damage.x8 != 0) {
         inlineD0(gobj);
@@ -4376,10 +4356,7 @@ void ftCo_DamageFlyRoll_IASA(ftCo_GObj* gobj)
 
 void ftCo_DamageFlyRoll_Phys(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Air) {
         if (!fp->x221C_b6) {
@@ -4405,10 +4382,7 @@ void ftCo_DamageFlyRoll_Phys(ftCo_GObj* gobj)
 
 void ftCo_DamageFlyRoll_Coll(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     CollData* coll = &GET_FIGHTER(gobj)->coll_data;
     if (ft_80081DD4(gobj)) {
         RETURN_IF(ftCo_80098928(gobj));

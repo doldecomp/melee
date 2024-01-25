@@ -7,8 +7,7 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-
-#include <placeholder.h>
+#include "ft/ftanim.h"
 
 void ftCo_80098F3C(ftCo_GObj* gobj)
 {

@@ -1,8 +1,10 @@
 #include <__mem.h>
 #include <dolphin/os/OSContext.h>
+#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSRtc.h>
 #include <dolphin/os/OSSerial.h>
 #include <dolphin/pad/pad.h>
+#include <dolphin/sipriv.h>
 #include <MetroTRK/intrinsics.h>
 
 #define PAD_CHAN0_BIT 0x80000000

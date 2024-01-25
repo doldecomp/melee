@@ -24,8 +24,8 @@ typedef struct DVDDiskID {
     u8 padding[22];
 } DVDDiskID;
 
-typedef struct {
-    u32 bootFilePosition;
+typedef struct DVDBuffer {
+    void* bootFilePosition;
     u32 FSTPosition;
     u32 FSTLength;
     u32 FSTMaxLength;

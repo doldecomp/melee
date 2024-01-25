@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include "ftSeak/ftSk_SpecialN.h"
 
 #include <placeholder.h>

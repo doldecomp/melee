@@ -1,4 +1,6 @@
+#include <platform.h>
 #include "forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftPk_Init.h"
 
@@ -8,12 +10,11 @@
 #include "ftPk_SpecialS.h"
 #include "types.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "it/it_26B1.h"
 
 MotionState ftPk_Init_MotionStateTable[ftPk_MS_SelfCount] = {
     {
@@ -356,10 +357,7 @@ void ftPk_Init_OnLoad(HSD_GObj* gobj)
 
 void ftPk_Init_OnDeath(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
@@ -387,10 +385,7 @@ void ftPk_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 
 void ftPk_Init_UnkMotionStates1(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftParts_80074A4C(gobj, 1, -1);
     ftParts_80074B0C(gobj, 1, 0);
@@ -398,10 +393,7 @@ void ftPk_Init_UnkMotionStates1(HSD_GObj* gobj)
 
 void ftPk_Init_UnkMotionStates2(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftParts_80074A4C(gobj, 1, 0);
     ftParts_80074B0C(gobj, 1, 0);

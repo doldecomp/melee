@@ -1,16 +1,16 @@
-#include "forward.h"
-#include "ft/forward.h"
+#include <platform.h>
 
 #include "ftGw_AttackS4.h"
 
 #include "ftGw_Init.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/inlines.h"
+#include "ft/ftanim.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Wait.h"
+#include "ftGameWatch/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
@@ -24,10 +24,7 @@ void ftGw_ItemTorchSetup(HSD_GObj* gobj)
     Vec3 sp10;
     Fighter* fp;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp = getFighter(gobj);
     lb_8000B1CC(fp->parts[FtPart_LHandNb].joint, NULL, &sp10);
@@ -61,10 +58,7 @@ void ftGw_AttackS4_ItemTorchOnDamage(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (fp->fv.gw.x2254_fireGObj != NULL) {
         it_802C6A2C(fp->fv.gw.x2254_fireGObj);
@@ -113,10 +107,7 @@ void ftGw_AttackS4_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp->allow_interrupt = 0;
     fp->cmd_vars[0] = 0;

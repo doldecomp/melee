@@ -5,17 +5,28 @@
 #include "ft/fighter.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0D14.h"
-#include "ft/ftdevice.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_09F4.h"
 #include "gm/gm_1601.h"
-#include "lb/lb_00B0.h"
 #include "lb/lbrefract.h"
+#include "pl/player.h"
 
+#include <m2c_macros.h>
 #include <placeholder.h>
+#include <baselib/class.h>
+#include <baselib/dobj.h>
 #include <baselib/gobj.h>
+#include <baselib/jobj.h>
 #include <baselib/mobj.h>
 #include <baselib/state.h>
 #include <baselib/tev.h>
+#include <baselib/texp.h>
+#include <baselib/tobj.h>
+
+#ifdef MUST_MATCH
+#include "melee/ft/ftdevice.h"
+#include "melee/lb/lb_00B0.h"
+#endif
 
 /* literal */ extern char* ftCo_804D3C00;
 /* literal */ extern char* ftCo_804D3C08;
@@ -27,7 +38,7 @@
 #endif
 
 ASM void ftMaterial_800BF260(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     hsdInitClassInfo(&ftMObj.parent, &hsdMObj.parent,
                      "sysdolphin_base_library", "ft_mobj", 80, 32);
@@ -63,7 +74,7 @@ ASM void ftMaterial_800BF260(void)
 #endif /* clang-format on */
 
 ASM void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     HSD_TExp texp;
     HSD_PEDesc pe;
@@ -340,7 +351,7 @@ lbl_800BF520:
 #endif /* clang-format on */
 
 ASM HSD_TExp* ftMaterial_800BF534(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -456,7 +467,7 @@ lbl_800BF6A8:
 #endif /* clang-format on */
 
 ASM void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }

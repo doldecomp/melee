@@ -1,4 +1,8 @@
-#include <baselib/util.h>
+#include "util.h"
+
+#include "debug.h"
+
+#include <dolphin/gx/types.h>
 
 float HSD_identityMtx[] = { 1.0f, 0, 0, 0, 0, 1.0f, 0, 0, 0, 0, 1.0f, 0 };
 

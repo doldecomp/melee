@@ -1,13 +1,19 @@
+#include <platform.h>
+
 #include "ftMh_BackCrush_0.h"
 
 #include "ftMh_Wait1_2.h"
 
 #include "ft/fighter.h"
+#include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftMasterHand/types.h"
+#include "pl/player.h"
 
 #include <dolphin/mtx/types.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 void ftMh_BackPunch_Coll(HSD_GObj* gobj) {}
 
@@ -28,10 +34,7 @@ void ftMh_MS_370_80153D2C(HSD_GObj* gobj)
     Vec3 pos;
     Vec3 scl;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftMh_MS_BackCrush, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
@@ -107,10 +110,7 @@ void ftMh_BackCrush_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (--fp->mv.mh.unk0.x0 > 0) {
         ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;

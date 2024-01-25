@@ -2,21 +2,25 @@
 
 #include "ftCo_09F4.h"
 
-#include "ft/ftdevice.h"
-#include "gr/ground.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-
-#include <math.h>
 #include <placeholder.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
 #include <baselib/lobj.h>
-#include <MSL/trigf.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
+#include "melee/ft/ftdevice.h"
+#include "melee/gr/ground.h"
+#include "melee/lb/lb_00B0.h"
+#include "melee/lb/lb_00F9.h"
+#include "sysdolphin/baselib/cobj.h"
+#include "sysdolphin/baselib/gobjgxlink.h"
+#include "sysdolphin/baselib/gobjobject.h"
+#include "sysdolphin/baselib/gobjproc.h"
+
+#include <math.h>
+#include <trigf.h>
+#endif
+
+#ifdef MUST_MATCH
 #ifdef WIP
 #pragma force_active on
 #endif
@@ -53,7 +57,7 @@ void ftCo_8009F480(ftCo_GObj* gobj)
 }
 
 ASM UNK_RET ftCo_8009F4A4(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -106,7 +110,7 @@ ASM UNK_RET ftCo_8009F4A4(UNK_PARAMS)
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_8009F54C(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -128,7 +132,7 @@ ASM UNK_RET ftCo_8009F54C(UNK_PARAMS)
 #endif /* clang-format on */
 
 ASM void ftCo_8009F578(ftCo_Fighter* fp)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -152,7 +156,7 @@ ASM void ftCo_8009F578(ftCo_Fighter* fp)
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_8009F5AC(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -278,7 +282,7 @@ lbl_8009F738:
 #endif /* clang-format on */
 
 ASM UNK_T ftCo_8009F75C(Fighter* fp, bool arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -333,7 +337,7 @@ lbl_8009F7E0:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_8009F7F8(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }

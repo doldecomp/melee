@@ -1,26 +1,33 @@
-#include "forward.h"
+#include "ftCommon/forward.h"
 
 #include "ftFx_SpecialN.h"
 
 #include "ftFx_Init.h"
 #include "math.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
+#include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_ItemGet.h"
-#include "it/item.h"
+#include "ftFox/types.h"
+#include "it/it_26B1.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbrefract.h"
 
-#include <dolphin/mtx/types.h>
+#include <common_structs.h>
 #include <dolphin/os.h>
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
 #include <melee/it/items/itfoxlaser.h>
 
 void ftFx_SpecialN_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
@@ -57,10 +64,7 @@ void ftFx_SpecialN_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
 // function
 void ftFx_SpecialN_OnChangeAction(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ft_800892A0(gobj);
     ft_80089824(gobj);
@@ -161,10 +165,7 @@ void ftFx_SpecialN_RemoveBlaster(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (fp->fv.fx.x222C_blasterGObj != NULL) {
         it_802AEAB4(fp->fv.fx.x222C_blasterGObj);
@@ -187,10 +188,7 @@ void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
      */
     Vec3 sp2C;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     ftFox_DatAttrs* da;
     Fighter* fp;
@@ -328,10 +326,7 @@ void ftFx_SpecialNStart_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     it_802ADDD0(fp->fv.fx.x222C_blasterGObj, 1);
     if ((fp->cmd_vars[3] == 1U) && (fp->fv.fx.x222C_blasterGObj != NULL)) {
@@ -453,10 +448,7 @@ void ftFx_SpecialNEnd_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     it_802ADDD0(fp->fv.fx.x222C_blasterGObj, fp->cmd_vars[1]);
 
@@ -482,10 +474,7 @@ void ftFx_SpecialAirNStart_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     it_802ADDD0(fp->fv.fx.x222C_blasterGObj, 1);
     if ((fp->cmd_vars[3] == 1U) && (fp->fv.fx.x222C_blasterGObj != NULL)) {

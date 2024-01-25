@@ -1,19 +1,22 @@
+#include <platform.h>
 #include "ftPikachu/forward.h"
 
 #include "ftPc_Init.h"
 
 #include "types.h"
 
-#include "ft/ft_0877.h"
+#include "ft/fighter.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftPikachu/ftPk_Init.h"
 #include "ftPikachu/ftPk_SpecialHi.h"
 #include "ftPikachu/ftPk_SpecialLw.h"
 #include "ftPikachu/ftPk_SpecialN.h"
 #include "ftPikachu/ftPk_SpecialS.h"
+#include "it/it_26B1.h"
+
+#include <baselib/gobj.h>
 
 MotionState ftPc_Init_MotionStateTable[ftPk_MS_SelfCount] = {
     {

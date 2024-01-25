@@ -2,15 +2,19 @@
 #define _jobj_h_
 
 #include <platform.h>
-#include <baselib/forward.h>
+#include "baselib/forward.h" // IWYU pragma: export
+#include <dolphin/mtx/forward.h>
+
+#include "baselib/aobj.h"
+#include "baselib/class.h"
+#include "baselib/debug.h"
+#include "baselib/list.h"
+#include "baselib/object.h"
+#include "baselib/pobj.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/aobj.h>
-#include <baselib/class.h>
-#include <baselib/list.h>
-#include <baselib/mobj.h>
-#include <baselib/object.h>
-#include <baselib/pobj.h>
+
+struct HSD_JObj;
 
 #define HSD_A_J_ROTX 1
 #define HSD_A_J_ROTY 2
@@ -62,6 +66,9 @@
 #define JOBJ_FLIP_IK (1 << 15)
 #define JOBJ_SPECULAR (1 << 16)
 #define JOBJ_USE_QUATERNION (1 << 17)
+#define JOBJ_UNK_B18 (1 << 18)
+#define JOBJ_UNK_B19 (1 << 19)
+#define JOBJ_UNK_B20 (1 << 20)
 #define JOBJ_NULL_OBJ (0 << 21)
 #define JOBJ_JOINT1 (1 << 21)
 #define JOBJ_JOINT2 (2 << 21)

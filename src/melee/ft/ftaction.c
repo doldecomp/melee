@@ -1,14 +1,18 @@
 #include <platform.h>
-#include "lb/forward.h"
+#include "ftCommon/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "ftaction.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
@@ -18,9 +22,12 @@
 #include "ftCommon/ftCo_09F7.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcommand.h"
+#include "lb/types.h"
 
-#include <placeholder.h>
+#include <m2c_macros.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjproc.h>
+#include <baselib/random.h>
 
 static FtCmd ftAction_803C06E8[] = {
     ftAction_80071028, ftAction_8007121C, ftAction_8007162C, ftAction_8007169C,
@@ -60,7 +67,7 @@ static FtCmd ftAction_803C06E8[] = {
     01, 01, 01, 01, 01, 01, 01, 01, 03, 03, 02, 01, 04, 00, 00, 00,
 };
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 float const ftAction_804D82A0 = 0.0039059999398887157440185546875;
 double const ftAction_804D82A8 = 4503599627370496;
 double const ftAction_804D82B0 = 4503601774854144;
@@ -70,7 +77,7 @@ float const ftAction_804D82C0 = -1;
 float const ftAction_804D82C4 = F32_MAX;
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071028(Fighter_GObj* gobj, FtCmdState* cmd)
 {
@@ -255,10 +262,7 @@ struct test5 {
 #endif
 void ftAction_80071028(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     Fighter* fp = gobj->user_data;
     int gfx_id;
     int bone;
@@ -321,7 +325,7 @@ void ftAction_800711DC(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_8007121C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
@@ -583,10 +587,7 @@ lbl_800715C4:
 
 void ftAction_8007121C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     HitCapsule* hit;
     char* temp_r3;
     char part;
@@ -714,7 +715,7 @@ void ftAction_8007168C(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_8007169C(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -748,10 +749,7 @@ asm void ftAction_8007169C(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_8007169C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     char* cmd_x8 = cmd->x8;
     ftCo_Fighter* fp = gobj->user_data;
     *(float*) (fp + (((((u16) *cmd_x8 >> 7U) & 7) * 0x138) + 0x930)) =
@@ -765,7 +763,7 @@ void ftAction_800716F8(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071708(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -832,7 +830,7 @@ void ftAction_80071774(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071784(Fighter_GObj* gobj, FtCmdState* cmd)
 {
@@ -882,7 +880,7 @@ void ftAction_80071810(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071820(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -954,7 +952,7 @@ void ftAction_80071820(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_800718A4(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1036,7 +1034,7 @@ void ftAction_80071974(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071998(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1100,7 +1098,7 @@ void ftAction_80071998(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071A14(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1133,7 +1131,7 @@ void ftAction_80071A14(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071A58(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1166,7 +1164,7 @@ void ftAction_80071A58(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071A9C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
@@ -1203,7 +1201,7 @@ void ftAction_80071A9C(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071AE8(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1240,7 +1238,7 @@ void ftAction_80071AE8(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071B28(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1270,7 +1268,7 @@ void ftAction_80071B28(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 jtbl_t jtbl_803C08A4 = {
     lbl_80071BE0, lbl_80071BE8, lbl_80071BF0, lbl_80071BF8,
     lbl_80071C00, lbl_80071C08, lbl_80071C10,
@@ -1388,10 +1386,7 @@ lbl_80071C84:
 
 void ftAction_80071B50(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     int temp_r4_2;
     char* temp_r5;
     char* temp_r6;
@@ -1477,7 +1472,7 @@ void ftAction_80071CA4(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071CCC(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1515,10 +1510,7 @@ lbl_80071D1C:
 
 void ftAction_80071CCC(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     FtCollisionData* cd = fp->ft_data->x4C_collisionData;
     if (cd == NULL) {
@@ -1535,7 +1527,7 @@ void ftAction_80071D30(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071D40(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1588,7 +1580,7 @@ void ftAction_80071DCC(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071E04(Fighter_GObj* gobj, FtCmdState* cmd)
 {
@@ -1692,7 +1684,7 @@ void ftAction_80071F0C(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071F34(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1720,16 +1712,13 @@ asm void ftAction_80071F34(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071F34(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCommon_8007F5CC(gobj, *cmd->x8 & 0x03FFFFFF);
     cmd->x8 += 4;
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071F78(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1758,7 +1747,7 @@ void ftAction_80071F78(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80071FA0(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -1787,7 +1776,7 @@ void ftAction_80071FA0(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 jtbl_t jtbl_803C08C0 = {
     lbl_80072210, lbl_80072228, lbl_80072240, lbl_80072258,
     lbl_80072270, lbl_80072288, lbl_800722A0,
@@ -2010,10 +1999,7 @@ lbl_800722B4:
 
 void ftAction_80071FC8(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     int var_r27 = M2C_ERROR(saved_reg_r27);
     char* cmd_x8 = cmd->x8;
     void* fp = gobj->user_data;
@@ -2129,7 +2115,7 @@ void ftAction_800722C8(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 jtbl_t jtbl_803C08DC = {
     lbl_80072408, lbl_8007243C, lbl_80072480, lbl_80072530,
     lbl_80072574, lbl_800725B8, lbl_800725FC,
@@ -2538,7 +2524,7 @@ void ftAction_800726C0(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_800726F4(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -2629,7 +2615,7 @@ void ftAction_800726F4(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_800727C8(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -2679,7 +2665,7 @@ void ftAction_800727C8(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_8007283C(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -2720,7 +2706,7 @@ void ftAction_8007283C(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072894(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -2764,7 +2750,7 @@ void ftAction_80072894(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_800728F8(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -2806,10 +2792,7 @@ lbl_8007294C:
 
 void ftAction_800728F8(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     char* temp_r5 = cmd->x8;
     if (((u8) M2C_FIELD(temp_r5, s8*, 0) >> 1U) & 1) {
         ftCommon_8007EC30(((u32) M2C_FIELD(temp_r5, s8*, 0) >> 0xDU) & 0xFFF,
@@ -2828,7 +2811,7 @@ void ftAction_8007296C(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_8007297C(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -2857,10 +2840,7 @@ asm void ftAction_8007297C(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_8007297C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCommon_8007ECD4(gobj->user_data, *cmd->x8 & 0x03FFFFFF);
     cmd->x8 += 4;
 }
@@ -2871,7 +2851,7 @@ void ftAction_800729C4(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_800729D4(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -2936,7 +2916,7 @@ void ftAction_80072A4C(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072A5C(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -2967,10 +2947,7 @@ asm void ftAction_80072A5C(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80072A5C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     char* cmd_x8 = cmd->x8;
     ftCo_800BFFD0(gobj->user_data, (int) (s8) ((u16) *cmd_x8 >> 2U),
                   (int) *cmd_x8 & 0x3FFFF);
@@ -2983,7 +2960,7 @@ void ftAction_80072AAC(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072ABC(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3022,7 +2999,7 @@ void ftAction_80072B04(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072B14(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3052,7 +3029,7 @@ void ftAction_80072B14(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072B3C(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3096,7 +3073,7 @@ void ftAction_80072B84(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072B94(Fighter_GObj* gobj, FtCmdState* cmd)
 {
@@ -3128,10 +3105,7 @@ asm void ftAction_80072B94(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80072B94(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     u32 cmd_x8 = *cmd->x8;
     ftCo_8009E318((int) ((cmd_x8 << 6) | ((cmd_x8 >> 0x1AU) & 0x20)) >> 6, fp,
@@ -3145,7 +3119,7 @@ void ftAction_80072BE4(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072BF4(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3195,7 +3169,7 @@ void ftAction_80072C5C(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072C6C(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3228,7 +3202,7 @@ void ftAction_80072C6C(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072CB0(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3258,7 +3232,7 @@ void ftAction_80072CB0(Fighter_GObj* gobj, FtCmdState* cmd)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072CD8(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3415,7 +3389,7 @@ void ftAction_80072E24(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80072E4C(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3536,10 +3510,7 @@ lbl_80072FB0:
 #endif
 void ftAction_80072E4C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24] = { 0 };
-#endif
     IntVec3 ivec1; /* compiler-managed */
     int* sp40;
     M2C_UNK sp38;
@@ -3597,7 +3568,7 @@ void ftAction_80072FE0(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80073008(Fighter_GObj* gobj, FtCmdState* cmd)
 {
@@ -3666,7 +3637,7 @@ void ftAction_8007309C(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_800730B8(Fighter_GObj* gobj, FtCmdState* cmd)
 { // clang-format off
@@ -3697,10 +3668,7 @@ asm void ftAction_800730B8(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_800730B8(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     char* cmd_x8 = cmd->x8;
     ftCo_800C8B60(gobj->user_data, ((u8) *cmd_x8 >> 1U) & 1,
                   (s8) ((u16) *cmd_x8 >> 1U));
@@ -3713,7 +3681,7 @@ void ftAction_80073108(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80073118(Fighter_GObj* gobj, FtCmdState* cmd)
 {
@@ -3819,7 +3787,7 @@ void ftAction_8007320C(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80073240(Fighter_GObj*)
 { // clang-format off
@@ -3941,7 +3909,7 @@ void ftAction_80073240(Fighter_GObj* fighter_gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_80073354(Fighter_GObj*)
 { // clang-format off
@@ -4085,7 +4053,7 @@ void ftAction_80073354(Fighter_GObj* gobj)
 }
 #endif
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftAction_8007349C(Fighter_GObj*)
 { // clang-format off
@@ -4174,10 +4142,7 @@ lbl_80073594:
 
 void ftAction_8007349C(Fighter_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     CommandInfo* cmd = (CommandInfo*) &fp->x3E4_fighterCmdScript;
     fp->x3E4_fighterCmdScript.x3E8_scriptFrameTimer =

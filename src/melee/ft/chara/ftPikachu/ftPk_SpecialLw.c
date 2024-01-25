@@ -1,8 +1,7 @@
-#include "ft/forward.h"
+#include <platform.h>
 
 #include "ftPk_SpecialLw.h"
 
-#include "ftPk_Init.h"
 #include "math.h"
 
 #include "cm/camera.h"
@@ -10,15 +9,16 @@
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
+#include "ftPikachu/types.h"
 #include "it/items/it_27CF.h"
 
 #include <dolphin/mtx/types.h>
+#include <baselib/gobj.h>
 
 bool ftPk_SpecialLw_CheckProperty(HSD_GObj* gobj)
 {
@@ -108,10 +108,7 @@ void ftPk_SpecialLw_SetState_Unk1(HSD_GObj* gobj)
 
 void ftPk_SpecialLw_SpawnEffect(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Vec3 pos;
     Vec3 ef_pos;
@@ -121,10 +118,7 @@ void ftPk_SpecialLw_SpawnEffect(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
     {
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4];
-#endif
 
         /// @todo Result of an inner function.
         bool result;
@@ -254,10 +248,7 @@ void ftPk_SpecialLw_ChangeMotion_Unk07(HSD_GObj* gobj)
 
 void ftPk_SpecialLwStart_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fighter_copy;
@@ -272,10 +263,7 @@ void ftPk_SpecialLwStart_Anim(HSD_GObj* gobj)
 
 void ftPk_SpecialAirLwStart_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fighter_copy;
@@ -290,10 +278,7 @@ void ftPk_SpecialAirLwStart_Anim(HSD_GObj* gobj)
 
 void ftPk_SpecialLwLoop0_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->mv.pk.unk4.x4 == 3) || fp->cmd_vars[0]) {
@@ -314,10 +299,7 @@ void ftPk_SpecialLwLoop0_Anim(HSD_GObj* gobj)
 
 void ftPk_SpecialAirLwLoop0_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->mv.pk.unk4.x4 == 3) || fp->cmd_vars[0]) {

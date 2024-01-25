@@ -1,16 +1,16 @@
-#include "forward.h"
-#include "ft/forward.h"
+#include <platform.h>
 
 #include "ftGw_AttackLw3.h"
 
 #include "ftGw_Init.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Attack1.h"
 #include "ftCommon/ftCo_AttackHi3.h"
 #include "ftCommon/ftCo_AttackHi4.h"
@@ -19,6 +19,8 @@
 #include "ftCommon/ftCo_AttackS3.h"
 #include "ftCommon/ftCo_AttackS4.h"
 #include "ftCommon/ftCo_ItemGet.h"
+#include "ftGameWatch/types.h"
+#include "it/it_26B1.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
@@ -34,10 +36,7 @@ void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj)
     Vec3 sp10;
     HSD_GObj* manholeGObj;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter* fp = getFighter(gobj);
 
@@ -89,10 +88,7 @@ void ftGw_AttackLw3_ItemManholeRemove(HSD_GObj* gobj)
 // https://decomp.me/scratch/09CUB // Remove Manhole on damage
 void ftGw_AttackLw3_ItemManholeOnDamage(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = getFighter(gobj);
 
@@ -154,10 +150,7 @@ void ftGw_AttackLw3_Enter(HSD_GObj* gobj)
 // callback
 void ftGw_AttackLw3_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_800D638C(gobj);

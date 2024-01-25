@@ -1,19 +1,21 @@
-#include <baselib/forward.h>
+#include "aobj.h"
+
+#include "cobj.h"
+#include "debug.h"
+#include "dobj.h"
+#include "fog.h"
+#include "id.h"
+#include "jobj.h"
+#include "list.h"
+#include "lobj.h"
+#include "mobj.h"
+#include "pobj.h"
+#include "robj.h"
+#include "tobj.h"
+#include "wobj.h"
 
 #include <__mem.h>
-#include <placeholder.h>
 #include <stdarg.h>
-#include <string.h>
-#include <baselib/aobj.h>
-#include <baselib/cobj.h>
-#include <baselib/debug.h>
-#include <baselib/dobj.h>
-#include <baselib/fog.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/robj.h>
-#include <baselib/tobj.h>
-#include <baselib/wobj.h>
 #include <MetroTRK/intrinsics.h>
 
 HSD_ObjAllocData aobj_alloc_data;
@@ -182,10 +184,7 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
     HSD_FObjDesc* fobjdesc;
     HSD_AObj* aobj;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     HSD_FObj* fobj;
     u32 id;

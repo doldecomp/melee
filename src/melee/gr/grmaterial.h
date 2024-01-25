@@ -1,7 +1,11 @@
 #ifndef MELEE_GR_GRMATERIAL_H
 #define MELEE_GR_GRMATERIAL_H
 
+#include <platform.h>
+#include <baselib/forward.h>
+
 #include "gr/ground.h"
+#include "gr/types.h"
 
 #include <placeholder.h>
 #include <baselib/gobj.h>

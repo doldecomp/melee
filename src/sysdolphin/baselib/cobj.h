@@ -1,11 +1,14 @@
 #ifndef _cobj_h_
 #define _cobj_h_
 
+#include <platform.h>
+#include "baselib/forward.h" // IWYU pragma: export
+
+#include "baselib/object.h"
+
 #include <placeholder.h>
+#include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/aobj.h>
-#include <baselib/object.h>
-#include <baselib/wobj.h>
 
 #define PROJ_PERSPECTIVE 1
 #define PROJ_FRUSTUM 2

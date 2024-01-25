@@ -2,10 +2,8 @@
 #define MELEE_FT_FORWARD_H
 
 #include <platform.h>
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
-
-#include <stddef.h>
-#include <dolphin/mtx/types.h>
 
 #define FIGHTERVARS_SIZE 0xF8
 
@@ -44,7 +42,6 @@ typedef struct MotionState MotionState;
 typedef struct UnkFloat6_Camera UnkFloat6_Camera;
 typedef struct ftCmdScript ftCmdScript;
 typedef struct ftCo_DatAttrs_xBC_t ftCo_DatAttrs_xBC_t;
-typedef struct ftCollisionBox ftCollisionBox;
 typedef struct ftCommonData ftCommonData;
 typedef struct ftData_UnkCountStruct ftData_UnkCountStruct;
 typedef struct ftDeviceUnk1 ftDeviceUnk1;

@@ -1,6 +1,6 @@
 #include "lb/lb_00B0.h"
 
-#include "sc/scene.h"
+#include "sc/types.h"
 
 #include <placeholder.h>
 #include <dolphin/mtx/mtxvec.h>
@@ -11,8 +11,12 @@
 #include <baselib/lobj.h>
 #include <baselib/mobj.h>
 #include <baselib/pobj.h>
-#include <baselib/quatlib.h>
 #include <baselib/robj.h>
+#include <baselib/tobj.h>
+
+#ifdef MUST_MATCH
+#include <baselib/quatlib.h>
+#endif
 
 static s32 lb_803B9FC0[] = { 14, 14, 14, 14, 2, 4, 6, 0 };
 static s32 lb_803B9FE0[] = { 12, 13, 14, 15 };
@@ -467,7 +471,7 @@ void lb_8000C420(HSD_JObj* jobj, u32 flags, f32 limit)
     HSD_JObjPrependRObj(jobj, robj);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 // https://decomp.me/scratch/atKIC
@@ -716,7 +720,7 @@ void lb_8000C7BC(HSD_JObj* src, HSD_JObj* dst)
     HSD_JObjSetFlags(dst, JOBJ_MTX_DIRTY);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 asm void lb_8000C868(HSD_Joint*, HSD_JObj*, HSD_JObj*, f32, f32)
 { // clang-format off
@@ -1041,7 +1045,7 @@ HSD_LObj* lb_8000CDC0(HSD_LObj* cur)
         }
         cur = lobj_next(cur);
     }
-#ifndef MUST_MATCH
+#ifdef BUGFIX
     return NULL;
 #endif
 }

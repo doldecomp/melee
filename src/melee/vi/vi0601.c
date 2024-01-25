@@ -2,6 +2,7 @@
 
 #include "vi/vi.h"
 
+#include <baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
 void un_8031E6CC(void)

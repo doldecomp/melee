@@ -1,23 +1,31 @@
+#include "it/forward.h"
+#include "lb/forward.h"
+
 #include "ftSeak/ftSk_SpecialS.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftNess/ftNs_AttackHi4.h"
 #include "ftSeak/ftSk_Init.h"
+#include "ftSeak/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbcollision.h"
+#include "lb/lbrefract.h"
 
 #include <common_structs.h>
 #include <math.h>
-#include <dolphin/mtx/types.h>
+#include <placeholder.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 /// @todo Fix common data struct
 #define COMMON_DATA_F32 ((f32*) p_ftCommonData)
@@ -76,10 +84,7 @@ void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, f32 arg2)
     Fighter* fp = GET_FIGHTER(gobj);
     UNK_T* items = fp->ft_data->x48_items;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     int* item;
 
@@ -397,10 +402,7 @@ void ftSk_SpecialS_CheckAndDestroyChain(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->fv.sk.x2234 == NULL) {
         return;
@@ -510,17 +512,11 @@ void ftSk_SpecialAirS_Enter(HSD_GObj* gobj)
 
 bool ftSk_SpecialS_CheckInitChain(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused0[4];
-#endif
 
     Vec3 vec0;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused1[4];
-#endif
 
     Vec3 vec1;
 
@@ -530,10 +526,7 @@ bool ftSk_SpecialS_CheckInitChain(HSD_GObj* gobj)
 
     /// @todo Probably an inline.
     if (fp->mv.sk.specials.x0 == specialAttributes->x1C) {
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 unused2[12];
-#endif
         Fighter* fp2 = gobj->user_data;
 
         lb_8000B1CC(fp2->parts[FtPart_L3rdNa].joint, NULL, &vec1);
@@ -619,10 +612,7 @@ void ftSk_SpecialSStart_Phys(HSD_GObj* gobj)
 
 void ftSk_SpecialAirSStart_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* fighter_attr = &fp->co_attrs;
@@ -701,10 +691,7 @@ void ftSk_SpecialS_801114E4(HSD_GObj* gobj)
 
 void ftSk_SpecialS_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* specialAttributes = fp->dat_attrs;
@@ -735,10 +722,7 @@ void ftSk_SpecialS_Anim(HSD_GObj* gobj)
 
 void ftSk_SpecialAirS_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* specialAttributes = fp->dat_attrs;
@@ -889,10 +873,7 @@ void ftSk_SpecialS_80111988(HSD_GObj* gobj)
 
 void ftSk_SpecialSEnd_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[36];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* specialAttributes = fp->dat_attrs;
@@ -931,10 +912,7 @@ void ftSk_SpecialSEnd_Anim(HSD_GObj* gobj)
 
 void ftSk_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[36];
-#endif
 
     Fighter* fp = gobj->user_data;
     ftSeakAttributes* specialAttributes = fp->dat_attrs;
@@ -1004,10 +982,7 @@ void ftSk_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 
 void ftSk_SpecialS_80111CB0(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);

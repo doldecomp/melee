@@ -1,9 +1,8 @@
 #include <platform.h>
-#include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_CargoKneebend.h"
 
-#include "ftCo_09C4.h"
 #include "ftCo_CargoJump.h"
 #include "ftCo_CargoThrow.h"
 #include "ftCo_CargoWait.h"
@@ -11,17 +10,16 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
+#include "ft/types.h"
+#include "ftCaptain/types.h"
+#include "ftCommon/types.h"
 #include "ftDonkey/types.h"
 
 void ftCo_8009B9C8(ftCo_GObj* gobj, int arg1)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20] = { 0 };
-#endif
     Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* fp_x2CC = fp->x2CC;
     fp->mv.co.cargokneebend.x4 = arg1;

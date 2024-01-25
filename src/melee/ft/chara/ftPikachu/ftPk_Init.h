@@ -6,6 +6,8 @@
 
 #include "ft/types.h"
 
+#include <stdbool.h>
+
 /* 1243AC */ void ftPk_Init_OnLoad(HSD_GObj* gobj);
 /* 1243E4 */ void ftPk_Init_OnLoadForPichu(Fighter* fp);
 /* 124474 */ void ftPk_Init_OnDeath(HSD_GObj* gobj);

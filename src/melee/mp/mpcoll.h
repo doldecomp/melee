@@ -2,8 +2,11 @@
 #define MELEE_MP_MPCOLL_H
 
 #include <platform.h>
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "ft/fighter.h"
+#include "ft/types.h"
 
 void mpColl_80042374(CollData*, f32, f32, f32);
 void mpColl_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj*, HSD_JObj*,

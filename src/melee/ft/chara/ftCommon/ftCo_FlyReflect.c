@@ -1,3 +1,4 @@
+#include <platform.h>
 #include "ftCommon/forward.h"
 
 #include "ftCo_FlyReflect.h"
@@ -11,13 +12,15 @@
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0C31.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "ftCommon/types.h"
 #include "ftKirby/ftKb_Init.h"
+#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
+#include <common_structs.h>
 #include <math.h>
 #include <placeholder.h>
 
@@ -41,10 +44,7 @@ bool ftCo_800C15F4(ftCo_GObj* gobj)
     if (kb_vel_x < -threshold && coll->env_flags & MPCOLL_FLAGS_B11 &&
         fp->mv.co.damage.x19 != ftCo_Surface_LeftWall)
     {
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[8] = { 0 };
-#endif
         vec.x = coll->xA4_ecbCurrCorrect.left.x;
         vec.y = coll->xA4_ecbCurrCorrect.left.y;
         vec.z = ftCo_804D8C40;
@@ -76,10 +76,7 @@ bool ftCo_800C15F4(ftCo_GObj* gobj)
 bool ftCo_800C1718(ftCo_GObj* gobj)
 {
     Vec3 vec;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     CollData* coll = &fp->coll_data;
     if (fp->x8c_kb_vel.y > p_ftCommonData->x1B0 &&
@@ -101,7 +98,7 @@ bool ftCo_800C1718(ftCo_GObj* gobj)
 }
 
 ASM bool ftCo_800C17CC(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     if (ftCo_800C15F4(gobj)) {
         return true;
@@ -180,12 +177,9 @@ lbl_800C188C:
 
 ASM void ftCo_800C18A8(ftCo_GObj* gobj, ftCommon_MotionState msid,
                        Vec3* normal, Vec3* offset)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Vec3 vec1;
     Vec3 vec0;
     float param;
@@ -408,7 +402,7 @@ lbl_800C1B00:
 #endif /* clang-format on */
 
 ASM void ftCo_FlyReflect_Anim(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.co.damage.x18 != 0) {
@@ -449,7 +443,7 @@ void ftCo_FlyReflect_Phys(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_FlyReflect_Coll(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->motion_id == ftCo_MS_FlyReflectWall) {

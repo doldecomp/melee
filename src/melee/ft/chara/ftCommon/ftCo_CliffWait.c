@@ -11,6 +11,8 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 
 /* 09A9AC */ static bool ftCo_8009A9AC(ftCo_GObj* gobj);
 

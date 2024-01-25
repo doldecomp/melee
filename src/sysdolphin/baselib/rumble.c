@@ -1,9 +1,11 @@
 #include <platform.h>
 
+#include "rumble.h"
+
+#include "controller.h"
+
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/pad/pad.h>
-#include <baselib/controller.h>
-#include <baselib/rumble.h>
 
 extern PadLibData HSD_PadLibData;
 
@@ -96,10 +98,7 @@ void HSD_PadRumblePause(u8 no, int status)
 
 void HSD_PadRumblePauseAll(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     int i;
     for (i = 0; i < 4; i++) {
@@ -109,10 +108,7 @@ void HSD_PadRumblePauseAll(void)
 
 void HSD_PadRumbleUnpauseAll(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     int i;
     for (i = 0; i < 4; i++) {

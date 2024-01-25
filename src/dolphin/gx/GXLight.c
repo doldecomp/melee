@@ -1,5 +1,5 @@
 #include <dolphin/gx/__GXInit.h>
-#include <dolphin/gx/GX_unknown_001/__GX_unknown_001.h>
+#include <dolphin/gx/__types.h>
 #include <dolphin/gx/GXLight.h>
 #include <MSL/trigf.h>
 

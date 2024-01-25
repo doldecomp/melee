@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include "lb/lbvector.h"
 
 #include "lb/lbrefract.h"
@@ -5,8 +7,8 @@
 #include <math.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/types.h>
 #include <baselib/cobj.h>
+#include <baselib/debug.h>
 
 static float lbVector_Len(Vec3* vec)
 {
@@ -366,10 +368,7 @@ float lbVector_sqrtf_accurate(float x)
 Vec3* lbVector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
                              Vec3* screenCoords, int d)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Mtx projMtx;
     float projection[7]; // projection params

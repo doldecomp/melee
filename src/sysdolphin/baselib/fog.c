@@ -1,8 +1,14 @@
+#include "fog.h"
+
+#include "aobj.h"
+#include "class.h"
+#include "cobj.h"
+#include "debug.h"
+#include "object.h"
+
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
-#include <baselib/cobj.h>
-#include <baselib/fog.h>
 
 static void FogInfoInit(void);
 static void FogAdjInfoInit(void);

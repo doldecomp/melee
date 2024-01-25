@@ -1,6 +1,10 @@
 #ifndef _grtmario_h_
 #define _grtmario_h_
 
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
+
 #include <sysdolphin/baselib/gobj.h>
 
 void lbl_8021FA08(HSD_GObj*);                       /* extern */

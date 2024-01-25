@@ -1,19 +1,23 @@
+#include <platform.h>
 #include "forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftMt_SpecialS.h"
 
-#include "ftMt_Init.h"
-
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_CaptureMewtwo.h"
 #include "ftCommon/ftCo_DamageFall.h"
+#include "ftMewtwo/types.h"
+
+#include <baselib/gobj.h>
 
 // Flag values read during Confusion's reflect think function
 
@@ -63,10 +67,7 @@ void ftMt_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;
@@ -102,10 +103,7 @@ void ftMt_SpecialAirS_Enter(HSD_GObj* gobj)
 
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;

@@ -1,8 +1,7 @@
-#include "ft/forward.h"
+#include <platform.h>
 
 #include "ftPk_SpecialN.h"
 
-#include "ftPk_Init.h"
 #include "types.h"
 
 #include "ef/eflib.h"
@@ -10,13 +9,13 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "it/items/it_27CF.h"
 
@@ -50,10 +49,7 @@ void ftPk_SpecialN_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (fp->cmd_vars[0] == 1) {
         fp->cmd_vars[0] = 0;
@@ -87,10 +83,7 @@ void ftPk_SpecialAirN_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (fp->cmd_vars[0] == 1) {
         fp->cmd_vars[0] = 0;

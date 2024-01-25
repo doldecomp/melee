@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include <cstring.h>
 #include <mem_funcs.h>
 

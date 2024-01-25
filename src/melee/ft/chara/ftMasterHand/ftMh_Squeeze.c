@@ -1,14 +1,20 @@
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+
 #include "ftMh_Squeeze.h"
 
 #include "ftMh_CaptureMasterHand.h"
 #include "ftMh_Squeezing.h"
 #include "ftMh_Throw.h"
-#include "ftMh_Wait1_2.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
+#include "ftMasterHand/types.h"
+#include "pl/player.h"
 
 void ftMh_MS_378_80154A78(HSD_GObj* gobj)
 {

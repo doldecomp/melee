@@ -1,25 +1,25 @@
+#include <platform.h>
 #include "forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftDonkey/ftDk_SpecialS.h"
 
 #include "ftDk_SpecialLw.h"
 
 #include "ef/eflib.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
+#include "ftDonkey/types.h"
 
 void ftDk_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialS, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     Fighter_UnsetCmdVar0(gobj);
