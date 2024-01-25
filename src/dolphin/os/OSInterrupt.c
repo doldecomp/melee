@@ -128,8 +128,6 @@ void __OSInterruptInit(void)
     __OSSetExceptionHandler(4, ExternalInterruptHandler);
 }
 
-extern vu32 __PIRegs[12] AT_ADDRESS(0xCC003000);
-
 u32 SetInterruptMask(OSInterruptMask mask, OSInterruptMask current)
 {
     u32 reg;
