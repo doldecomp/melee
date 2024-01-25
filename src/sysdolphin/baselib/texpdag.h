@@ -2,9 +2,9 @@
 #define _texpdag_h_
 
 #include <platform.h>
-#include <baselib/forward.h>
+#include "baselib/forward.h"
 
-#include <baselib/texp.h>
+#include "baselib/texp.h"
 
 typedef struct HSD_TExpDag {
     struct _HSD_TETev* tev;

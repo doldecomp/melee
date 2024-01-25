@@ -7,8 +7,8 @@
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXTev.h>
 #include <dolphin/gx/types.h>
-#include <baselib/debug.h>
-#include <baselib/tev.h>
+#include "debug.h"
+#include "tev.h"
 
 static struct {
     GXColorS10 a;

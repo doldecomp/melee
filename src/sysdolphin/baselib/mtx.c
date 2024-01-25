@@ -4,8 +4,8 @@
 
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/vec.h>
-#include <baselib/debug.h>
-#include <baselib/mtx.h>
+#include "debug.h"
+#include "mtx.h"
 #include <MSL/trigf.h>
 
 #define EPSILON 0.0000000001f

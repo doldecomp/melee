@@ -1,7 +1,7 @@
 #include <__mem.h>
 #include <placeholder.h>
-#include <baselib/debug.h>
-#include <baselib/texp.h>
+#include "debug.h"
+#include "texp.h"
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/texpdag.h>

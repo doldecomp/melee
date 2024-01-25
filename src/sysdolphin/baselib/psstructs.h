@@ -3,13 +3,13 @@
 
 #include <platform.h>
 #include <dolphin/gx/forward.h>
-#include <baselib/forward.h>
+#include "baselib/forward.h"
 
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/archive.h>
-#include <baselib/jobj.h>
+#include "baselib/archive.h"
+#include "baselib/jobj.h"
 
 struct _psAppSRT;
 struct HSD_Fog;

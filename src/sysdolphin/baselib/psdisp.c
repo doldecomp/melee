@@ -1,4 +1,4 @@
-#include <baselib/psdisp.h>
+#include "psdisp.h"
 
 typedef struct {
     u8 filename[9];

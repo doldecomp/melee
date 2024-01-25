@@ -5,11 +5,11 @@
 
 #include <__mem.h>
 #include <dolphin/gx/GXFrameBuf.h>
-#include <baselib/class.h>
-#include <baselib/cobj.h>
-#include <baselib/debug.h>
-#include <baselib/object.h>
-#include <baselib/tobj.h>
+#include "class.h"
+#include "cobj.h"
+#include "debug.h"
+#include "object.h"
+#include "tobj.h"
 
 extern HSD_ObjAllocData shadow_alloc_data;
 

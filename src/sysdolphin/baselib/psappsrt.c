@@ -1,5 +1,5 @@
-#include <baselib/objalloc.h>
-#include <baselib/psappsrt.h>
+#include "objalloc.h"
+#include "psappsrt.h"
 
 /* 004D4538 */ extern u16 HSD_PSAppSrt_804D7958[4];
 /* 004CDC90 */ extern HSD_ObjAllocData HSD_PSAppSrt_804D10B0;
