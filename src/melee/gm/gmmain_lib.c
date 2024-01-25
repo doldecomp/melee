@@ -240,10 +240,7 @@ s32 gmMainLib_8015CFCC(u8 arg0)
 
 void gmMainLib_8015D00C(u8 arg0)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7A.bits.b0 = true;
@@ -281,10 +278,7 @@ s32 gmMainLib_8015D0F4(u8 arg0)
 
 void gmMainLib_8015D134(u8 arg0)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.bits.b4 = true;
@@ -329,10 +323,7 @@ s32 gmMainLib_8015D21C(u8 arg0)
 
 void gmMainLib_8015D25C(u8 arg0)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.bits.b5 = true;
@@ -377,10 +368,7 @@ s32 gmMainLib_8015D344(u8 arg0)
 
 void gmMainLib_8015D384(u8 arg0)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.bits.b6 = true;
@@ -559,10 +547,7 @@ void* gmMainLib_8015D804(s32 arg0)
 
 s32 gmMainLib_8015D818(u32 arg0)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[40];
-#endif
 
     if ((signed) gmMainLib_8015D94C(arg0) == 0) {
         struct gmm_x1868* base = &gmMainLib_804D3EE0->thing;
@@ -664,10 +649,7 @@ lbl_8015D9DC:
 // register swap
 bool gmMainLib_8015D984(u32 arg0)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     if (gmMainLib_8015DA90(arg0) == 0) {
         u32* base = &gmMainLib_804D3EE0->x6C[0];

@@ -681,7 +681,6 @@ void HSD_LObjDeleteCurrentAll(HSD_LObj* lobj)
 
 void HSD_LObjSetCurrentAll(HSD_LObj* lobj)
 {
-    /// @todo Unused stack.
 #ifdef MUST_MATCH
     u32 _;
 #endif
@@ -709,10 +708,7 @@ inline void LObjReplaceAll(HSD_LObj* lobj)
 
 void HSD_LObj_803668EC(HSD_LObj* lobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     LObjReplaceAll(lobj);
 }
@@ -1070,9 +1066,7 @@ static void LObjRelease(HSD_Class* o)
 {
     HSD_LObj* lobj = HSD_LOBJ(o);
     ///@todo Unused stack
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     HSD_AObjRemove(lobj->aobj);
     HSD_WObjUnref(HSD_LObjGetPositionWObj(lobj));

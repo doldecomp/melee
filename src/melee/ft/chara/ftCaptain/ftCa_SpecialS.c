@@ -236,10 +236,7 @@ void ftCa_SpecialS_Anim(HSD_GObj* gobj)
 
 void ftCa_SpecialAirSStart_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* da = fp->dat_attrs;
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -256,10 +253,7 @@ void ftCa_SpecialAirS_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* captainAttrs = fp->dat_attrs;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (!fp->fv.ca.during_specials) {
         switch (ftLib_800872A4(gobj)) {
         case FTKIND_CAPTAIN: {
@@ -311,10 +305,7 @@ void ftCa_SpecialAirSStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* captainAttrs = fp->dat_attrs;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     ft_80085134(gobj);
     if (fp->cmd_vars[1] == 1) {
         fp->mv.ca.specials.grav -= captainAttrs->specials_grav;
@@ -329,10 +320,7 @@ void ftCa_SpecialAirS_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* da = fp->dat_attrs;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     ft_80085134(gobj);
     fp->mv.ca.specials.grav -= da->specials_grav;
     if (fp->mv.ca.specials.grav < -da->specials_terminal_vel) {
@@ -345,10 +333,7 @@ void ftCa_SpecialAirS_Phys(HSD_GObj* gobj)
 /// Raptor Boost / Gerudo Dragon Start Collision callback
 void ftCa_SpecialSStart_Coll(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* da = fp->dat_attrs;
     if (fp->cmd_vars[2] == 0) {
@@ -389,10 +374,7 @@ void ftCa_SpecialS_Coll(HSD_GObj* gobj)
     {
         Fighter* fp1;
         ftCaptain_DatAttrs* da = fp0->dat_attrs;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[8];
-#endif
         fp1 = fp0;
         if (!ft_80082708(gobj)) {
             efLib_DestroyAll(gobj);
@@ -424,10 +406,7 @@ void ftCa_SpecialAirS_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* da = fp->dat_attrs;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (ft_80081D0C(gobj) == true) {
         fp->gr_vel = fp->self_vel.x;
         efLib_DestroyAll(gobj);

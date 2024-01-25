@@ -39,10 +39,7 @@ void it_802C01AC(Item_GObj* gobj, Vec3* pos, ItemKind kind, float facing_dir)
     spawn_item.x44_flag.bits.b0 = true;
     spawn_item.x40 = 0;
     {
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[8] = { 0 };
-#endif
         Item_GObj* spawned_gobj = Item_80268B18(&spawn_item);
         if (spawned_gobj != NULL) {
             it_802C027C(spawned_gobj);

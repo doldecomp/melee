@@ -14,10 +14,7 @@
 
 void ftCo_80099D9C(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_ReboundStop, Ft_MF_None, 0, 1, 0,
                               NULL);

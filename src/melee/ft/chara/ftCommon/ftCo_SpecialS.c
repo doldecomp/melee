@@ -45,10 +45,7 @@ bool ftCo_SpecialS_CheckInput(ftCo_GObj* gobj)
 
 static void doEnter(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     fp->gr_vel += -(fp->gr_vel * (1 - fp->co_attrs.xB8)) *
                   ft_GetGroundFrictionMultiplier(fp);

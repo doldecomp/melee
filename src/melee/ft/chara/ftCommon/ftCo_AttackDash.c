@@ -77,10 +77,7 @@ void ftCo_AttackDash_Anim(ftCo_GObj* gobj)
 
 void ftCo_AttackDash_SetMv0(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     GET_FIGHTER(gobj)->mv.co.attackdash.x0 = p_ftCommonData->x68;
 }
 

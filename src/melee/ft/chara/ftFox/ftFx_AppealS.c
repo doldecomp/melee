@@ -112,10 +112,7 @@ void ftFx_AppealS_Anim(HSD_GObj* gobj)
     FighterKind ftKind;
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (ftCheckThrowB3(fp)) {
         ftKind = fp->kind;

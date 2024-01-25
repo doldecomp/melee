@@ -54,24 +54,15 @@ static inline void mtx_thing(MtxPtr mtx, Vec3* ptr, f32 val, f32 val2)
 
 MtxPtr ftDrawCommon_8008051C(HSD_GObj* arg1, MtxPtr arg2)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused0[0x4];
-#endif
 
     Vec3 sp54;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused1[0xC];
-#endif
 
     Mtx sp18;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused2[0x8];
-#endif
 
     f32 temp_f31;
     f32 temp_f0;

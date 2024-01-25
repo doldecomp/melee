@@ -27,10 +27,7 @@ void ftSs_SpecialLw_8012ADF0(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->throw_flags_b0) {
         fp->throw_flags_b0 = 0;
@@ -107,10 +104,7 @@ void ftSs_SpecialAirLw_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->self_vel.x *= samus_attr->x70;
     fp->self_vel.y = samus_attr->x58;
@@ -352,10 +346,7 @@ void ftSs_SpecialAirLwBomb_Phys(HSD_GObj* gobj)
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
     ftCo_DatAttrs* ft_attr = &fp->co_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     ftCommon_8007D4B8(fp);
     ftCommon_8007D3A8(fp, 0.0f, ft_attr->air_drift_stick_mul * samus_attr->x68,
                       ft_attr->air_drift_max * samus_attr->x60);
@@ -366,10 +357,7 @@ void ftSs_SpecialLwBomb_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->cmd_vars[0]) {
         /// @todo Remove cast
@@ -388,10 +376,7 @@ void ftSs_SpecialAirLwBomb_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->cmd_vars[0]) {
         /// @todo Remove cast

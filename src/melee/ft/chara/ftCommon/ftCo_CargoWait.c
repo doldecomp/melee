@@ -35,19 +35,13 @@ static inline void inlineA0(ftCo_GObj* gobj, void (*cb)(ftCo_GObj* gobj, int))
 
 void ftCo_8009B518(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     inlineA0(gobj, ftCo_8009C5A4);
 }
 
 void ftCo_8009B56C(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     inlineA0(gobj, ftCo_8009C640);
 }
 

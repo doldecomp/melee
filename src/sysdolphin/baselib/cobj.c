@@ -558,7 +558,6 @@ lbl_80367E74:
 
 int setupNormalCamera(HSD_CObj* cobj)
 {
-    /// @todo Unused stack.
 #ifdef MUST_MATCH
     int unused[4];
 #endif

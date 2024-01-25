@@ -34,10 +34,7 @@ double const ftCo_804D8758 = S32_TO_F32;
 ASM void ftCo_8009C5A4(ftCo_GObj* gobj, FtMotionId msid)
 #ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->motion_id != msid || msid != ftCo_MS_ShoulderedWait) {
         Fighter_ChangeMotionState(
@@ -190,10 +187,7 @@ static ASM void ftCo_8009C744(ftCo_GObj* gobj)
     ftCo_GObj* vic_gobj = fp->victim_gobj;
     ftCo_Fighter* vic_fp = vic_gobj->user_data;
     Vec3 pos;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12] = { 0 };
-#endif
     HitCapsule* hit = &vic_fp->xDF4[1];
     ftCo_800DC920(vic_gobj, gobj);
     lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint, NULL,

@@ -41,10 +41,7 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
             } else {
                 Vec3 wall_pos, ecb;
 
-                /// @todo Unused stack.
-#ifdef MUST_MATCH
                 u8 _[8];
-#endif
 
                 if (env_flags) {
                     // compute absolte position of the ECB's left vertex?

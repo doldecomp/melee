@@ -64,10 +64,7 @@ void ftMh_Entry_Coll(HSD_GObj* gobj) {}
 static void ftMh_MS_343_801511FC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     switch (fp->mv.mh.unk4.x0) {
     case ftMh_UnkEnum0_Unk00: {
         HSD_GObj* enemy_gobj = ftLib_8008627C(&fp->cur_pos, gobj);

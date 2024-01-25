@@ -138,10 +138,7 @@ void HSD_GObjPLink_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,
     s32 flags_cur;
     s32 flags_new;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     HSD_ASSERT(0x1A3, p_link <= HSD_GObjLibInitData.p_link_max);
     if (!HSD_GObj_804CE3E4.b0 && gobj == HSD_GObj_804D781C) {

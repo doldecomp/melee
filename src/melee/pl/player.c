@@ -161,10 +161,7 @@ void Player_80031900(void)
 
 bool Player_800319C4(int slot, bool arg1)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     int i;
     StaticPlayer* player;
@@ -199,18 +196,13 @@ void Player_80031AD0(int slot)
     s8 byte_check;
     s8* offset_arr;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused0[4];
-#endif
 
     StaticPlayer* player;
 
     struct plAllocInfo second_struct;
 
-#ifdef MUST_MATCH
     u8 unused1[12];
-#endif
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -336,10 +328,7 @@ void Player_80031EBC(int slot)
 
 void Player_80031FB0(int slot, s32 entity_index)
 {
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -417,10 +406,7 @@ s32 Player_GetPlayerState(s32 slot)
 
 enum_t Player_GetPlayerCharacter(int slot)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -565,10 +551,7 @@ void Player_800328D4(int slot, Vec3* arg_vec)
     Vec3* dst_vec;
     Vec3* dst_vec2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -697,10 +680,7 @@ void Player_80032FA4(s32 slot, s32 arg)
 {
     StaticPlayer* player;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -709,10 +689,7 @@ void Player_80032FA4(s32 slot, s32 arg)
 
 f32 Player_GetFacingDirection(s32 slot)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -729,10 +706,7 @@ void Player_SetFacingDirection(s32 slot, f32 direction)
 
 void Player_SetFacingDirectionConditional(s32 slot, bool b, f32 direction)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (!b) {
         StaticPlayer* player;
@@ -1336,10 +1310,7 @@ s32 Player_GetFallsByIndex(s32 slot, s32 arg1)
 
 void Player_SetFalls(int slot, s32 falls)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -1368,10 +1339,7 @@ void Player_UpdateKOsBySlot(int slot, bool bool_arg, int other_slot)
     StaticPlayer* player;
     StaticPlayer* other_player;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -1420,10 +1388,7 @@ uint Player_GetMatchFrameCount(int slot)
 
 void Player_UpdateMatchFrameCount(int slot, bool condition)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -1490,10 +1455,7 @@ bool Player_800353BC(s32 slot)
 
 bool Player_8003544C(s32 slot, bool condition)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (!condition) {
         StaticPlayer* player;
@@ -1556,10 +1518,7 @@ void Player_SetFlagsBit1(s32 slot)
 
 void Player_UnsetFlagsBit1(int slot)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[1];
-#endif
 
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -1933,10 +1892,7 @@ void Player_80036978(s32 slot, s32 arg1)
 {
     StaticPlayer* player;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -1954,10 +1910,7 @@ void Player_InitOrResetPlayer(s32 slot)
     f32 zerofloat;
     f32 onefloat;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[56];
-#endif
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -2133,7 +2086,6 @@ void Player_80036F34(s32 slot, s32 arg1)
 {
     struct plAllocInfo2 some_struct;
 
-    /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _;
 #endif
@@ -2165,7 +2117,6 @@ void Player_80037054(s32 slot, s32 arg1)
 {
     struct plAllocInfo2 some_struct;
 
-    /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _;
 #endif

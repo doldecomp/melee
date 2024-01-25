@@ -110,10 +110,7 @@ static MotionFlags getMotionFlags(ftCo_Fighter* fp)
 
 static void checkAttack11(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (!ftCo_80094790(gobj)) {
         fp->allow_interrupt = false;
@@ -131,10 +128,7 @@ static void checkAttack11(ftCo_GObj* gobj)
 
 void ftCo_Attack11_Anim(ftCo_GObj* arg0)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     if (!ftAnim_IsFramesRemaining(arg0)) {
         ft_8008A2BC(arg0);
     }
@@ -214,10 +208,7 @@ static void doAttack12(ftCo_GObj* gobj)
 
 bool checkAttack12(ftCo_GObj* gobj)
 {
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->hitlag_mul > 0) {
         fp->hitlag_mul -= 1;
@@ -234,10 +225,7 @@ bool checkAttack12(ftCo_GObj* gobj)
 
 void ftCo_Attack12_Anim(ftCo_GObj* gobj)
 {
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }

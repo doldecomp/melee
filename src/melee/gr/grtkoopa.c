@@ -136,10 +136,7 @@ static void grTKoopa_8022180C(HSD_GObj* arg0) {}
 
 static void grTKoopa_80221810(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
@@ -161,10 +158,7 @@ static void grTKoopa_8022189C(HSD_GObj* arg0) {}
 
 static void grTKoopa_802218A0(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);

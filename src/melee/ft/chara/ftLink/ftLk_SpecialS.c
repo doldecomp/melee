@@ -123,10 +123,7 @@ void ftLk_SpecialS_RemoveBoomerang1(HSD_GObj* gobj)
  */
 float calcAnglePos(HSD_GObj* gobj, Vec3* pos, float dist)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     float angle = 0;
     ftLk_DatAttrs* da = fp->dat_attrs;
@@ -169,10 +166,7 @@ void onAccessory4(HSD_GObj* gobj)
     ftLk_DatAttrs* da = fp->dat_attrs;
     if (ftCheckThrowB0(fp)) {
         Vec3 pos;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4];
-#endif
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint,
                     NULL, &pos);
         {
@@ -192,10 +186,7 @@ void onAccessory4(HSD_GObj* gobj)
         it_8029FDBC(fp->fv.lk.boomerang_gobj))
     {
         Vec3 pos;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4];
-#endif
         calcAnglePos(gobj, &pos, fp->fv.lk.x4 ? da->x20 : da->x24);
         it_802A0534(fp->fv.lk.boomerang_gobj, &pos);
         fp->cmd_vars[cmd_unk0_bool] = false;

@@ -88,10 +88,7 @@ void ftMh_MS_341_8014FF1C(HSD_GObj* gobj)
 void ftMh_MS_341_8014FFDC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     if (fp->fv.mh.x2258 == ftMh_MS_Wait2_1) {
         if (fp->motion_id == ftMh_MS_Wait1_0 ||
             fp->motion_id == ftMh_MS_Wait2_0)
@@ -207,10 +204,7 @@ inline void doAnim1(HSD_GObj* gobj)
 void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
     if (Player_GetPlayerSlotType(fp->player_id) == 0) {
         ftMh_MS_341_80150894(gobj);
         if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -225,10 +219,7 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
             ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
             Vec3 vec;
 
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[20];
-#endif
 
             ftBossLib_8015BD24(fp->x1A98, &fp->fv.mh.x223C, fp->fv.mh.x2238,
                                da->x18, da->x20, da->x1C);

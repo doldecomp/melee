@@ -25,10 +25,7 @@ bool ftCo_8009B67C(ftCo_GObj* gobj)
 
 void ftCo_8009B6C8(ftCo_GObj* gobj, float anim_start)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20] = { 0 };
-#endif
     Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* fp_x2CC = fp->x2CC;
     ftWalkCommon_800DFCA4(gobj, fp_x2CC->x4_motion_state + 1, Ft_MF_None,

@@ -138,10 +138,7 @@ static void grTDonkey_802203EC(HSD_GObj* arg0) {}
 
 static void grTDonkey_802203F0(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = GET_GROUND(gobj);
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
@@ -163,10 +160,7 @@ static void grTDonkey_8022047C(HSD_GObj* arg0) {}
 
 static void grTDonkey_80220480(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = GET_GROUND(gobj);
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);

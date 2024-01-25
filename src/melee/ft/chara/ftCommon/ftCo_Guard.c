@@ -227,10 +227,7 @@ lbl_80091B78:
 /// @todo @c inline of #ftCo_80091A4C and something else.
 bool ftCo_80091AD8(ftCo_GObj* gobj, int mv_x20)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     bool ret0;
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
@@ -268,10 +265,7 @@ void ftCo_80091B90(ftCo_GObj* gobj, int mv_x20)
 
 void ftCo_80091B9C(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     fp->mv.co.guard.x24 = p_ftCommonData->x68;
 }
@@ -1095,10 +1089,7 @@ asm void ftCo_80092450(ftCo_GObj* gobj)
 void ftCo_80092450(ftCo_GObj* gobj)
 {
     AbsorbDesc absorb;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     absorb.x0_bone_id = fp->ft_data->x8->unk11;
     absorb.x10_size = 1;
@@ -1313,10 +1304,7 @@ lbl_800926C4:
 
 bool ftCo_800925A4(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->x221B_b0) {
         fp->mv.co.guard.x2C = fp->lightshield_amount;
@@ -1889,10 +1877,7 @@ void ftCo_GuardOff_Anim(ftCo_GObj* gobj)
 
 void ftCo_GuardOff_IASA(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     /// @todo #RETURN_IF chain
     if (!fp->mv.co.guard.x1C ||
@@ -2704,10 +2689,7 @@ asm void ftCo_8009370C(ftCo_GObj*, HSD_GObjEvent)
 
 void ftCo_8009370C(ftCo_GObj* gobj, HSD_GObjEvent on_reflect)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ReflectDesc reflect;
     ftCo_Fighter* fp = gobj->user_data;
     reflect.x0_bone_id = fp->ft_data->x8->unk11;
@@ -3412,10 +3394,7 @@ lbl_80094024:
 
 void ftCo_GuardReflect_IASA(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     /// @todo Inline depth.
     RETURN_IF(inlineC0(gobj, ftCo_80092BE8));
     RETURN_IF(ftCo_8009515C(gobj));

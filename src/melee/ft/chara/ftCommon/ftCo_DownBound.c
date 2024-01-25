@@ -295,10 +295,7 @@ lbl_80097894:
 
 void ftCo_800976A4(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     float vel_x = fp->self_vel.x + fp->x8c_kb_vel.x;
     float vel_y = fp->self_vel.y + fp->x8c_kb_vel.y;
@@ -380,10 +377,7 @@ static inline void inlineA0(ftCo_GObj* gobj, enum_t arg1, enum_t arg2,
 
 void ftCo_800978D4(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     float param =
         atan2f(-fp->coll_data.floor.normal.x, fp->coll_data.floor.normal.y);
@@ -520,10 +514,7 @@ lbl_80097A48:
 
 void ftCo_8009794C(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Air) {
         ftCommon_8007D7FC(fp);
@@ -763,10 +754,7 @@ void ftCo_80097D40(ftCo_GObj* gobj)
 #if SOLUTION == 0
     ftCo_80097D88(gobj);
 #else
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     if (fp->x2228_b2) {
         ftCo_80097AF4(gobj);
     } else {
@@ -804,10 +792,7 @@ void ftCo_DownBound_Phys(ftCo_GObj* arg0)
 
 void ftCo_DownBound_Coll(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     if (ft_80082708(gobj) == GA_Ground) {
         ftCo_800CC730(gobj);
     } else {

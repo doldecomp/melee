@@ -568,10 +568,7 @@ s32 ft_80087D0C(Fighter* fighter, s32 arg1)
     enum_t sfx = lbAudioAx_800233EC(arg1);
     enum_t ssm_id = lbAudioAx_80023130();
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     switch (ssm_id) {
     case 0:

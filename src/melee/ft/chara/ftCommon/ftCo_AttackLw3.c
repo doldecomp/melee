@@ -56,10 +56,7 @@ bool ftCo_AttackLw3_CheckInput(ftCo_GObj* gobj)
 
 void callUnk(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ft_800892A0(gobj);
     ft_80089824(gobj);
 }
@@ -140,10 +137,7 @@ static bool checkItemThrowInput(ftCo_GObj* gobj)
 
 void ftCo_AttackLw3_IASA(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->allow_interrupt) {
         RETURN_IF(ftCo_AttackS4_CheckInput(gobj));

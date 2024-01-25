@@ -397,10 +397,7 @@ void ftLk_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 
 void ftLk_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }

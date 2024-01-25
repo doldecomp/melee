@@ -99,10 +99,7 @@ void ftCo_CliffClimb_Phys(ftCo_GObj* gobj)
     if (fp->ground_or_air == GA_Air) {
         if (mpLib_80054ED8(fp->mv.co.cliff.ledge_id)) {
             Vec3 vec;
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[8] = { 0 };
-#endif
             if (fp->facing_dir > 0) {
                 mpLib_80053ECC(fp->mv.co.cliff.ledge_id, &vec);
             } else {
@@ -126,10 +123,7 @@ void ftCo_CliffClimb_Phys(ftCo_GObj* gobj)
 
 void ftCo_CliffClimb_Coll(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Air) {
         if (ft_800821DC(gobj)) {

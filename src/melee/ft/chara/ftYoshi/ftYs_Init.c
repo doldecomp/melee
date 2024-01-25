@@ -351,10 +351,7 @@ extern char* ftYs_Unk2_804D3E78;
 /// https://decomp.me/scratch/ufrFK
 void ftYs_Init_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     struct S_UNK_YOSHI1* unk_struct1;
     s32* ptr2EndIndex;
@@ -396,10 +393,7 @@ void ftYs_Init_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
 void ftYs_Init_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
                         f32 start_frame)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (unk_struct_arg) {
         struct S_UNK_YOSHI2* unk_struct = unk_struct_arg->unk_struct;
@@ -432,10 +426,7 @@ void ftYs_Init_8012B8A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* da = fp->dat_attrs;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     f32 tempf =
         da->xC *
         (1.0f - (fp->shield_health / p_ftCommonData->x260_startShieldHealth));

@@ -121,10 +121,7 @@ lbl_8011BBCC:
 
 void ftPe_8011BB6C(HSD_GObj* gobj, bool arg1)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     Fighter_ChangeMotionState(gobj, ftPe_MS_Float, 0, 0, 1, 0, NULL);

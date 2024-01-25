@@ -38,10 +38,7 @@ void ftLg_SpecialAirHi_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* luigiAttrs = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
@@ -57,10 +54,7 @@ void ftLg_SpecialHi_Anim(HSD_GObj* gobj)
 {
     ftLuigiAttributes* luigiAttrs = GET_FIGHTER(gobj)->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_80096900(gobj, 0, 1, 0,
@@ -74,10 +68,7 @@ void ftLg_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     ftLuigiAttributes* luigiAttrs = GET_FIGHTER(gobj)->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_80096900(gobj, 0, 1, 0,
@@ -160,10 +151,7 @@ void ftLg_SpecialAirHi_IASA(HSD_GObj* gobj)
     f32 stick_range_2;
     f32 stick_angle;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     if (fp->cmd_vars[0] == 0) {
         superJump_StickRange =

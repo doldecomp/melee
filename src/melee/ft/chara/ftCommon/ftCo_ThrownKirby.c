@@ -785,10 +785,7 @@ void ftCo_ThrownCopyStar_IASA(ftCo_GObj* gobj) {}
 ASM void ftCo_ThrownCopyStar_Phys(ftCo_GObj* gobj)
 #ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     float dist = sqrtf(SQ(fp->self_vel.x) + SQ(fp->self_vel.y));
     if (dist > fp->mv.co.thrownkirby.x4) {
@@ -995,10 +992,7 @@ lbl_800BE47C:
 ASM void ftCo_800BE494(ftCo_GObj* gobj)
 #ifndef MUST_MATCH
 {
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_ThrownKirby, Ft_MF_Unk06, 0, 1, 0,
                               NULL);
@@ -1152,10 +1146,7 @@ static inline void inlineC0(ftCo_GObj* gobj)
 ASM void ftCo_ThrownKirby_Phys(ftCo_GObj* gobj)
 #ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[28] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x1A4C -= ftKb_SpecialN_800F5AC0();
     if (!fp->mv.co.thrownkirby.x18_b0) {

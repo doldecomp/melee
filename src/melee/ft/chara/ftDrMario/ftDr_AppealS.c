@@ -23,10 +23,7 @@ void ftDr_AppealS_Anim(HSD_GObj* gobj)
     Fighter* fp;
     u32 tmp;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     fp = gobj->user_data;
     if (fp->cmd_vars[0] == 1 && fp->fv.mr.x2240 == 0U) {

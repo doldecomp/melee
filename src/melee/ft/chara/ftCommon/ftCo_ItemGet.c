@@ -54,10 +54,7 @@ static char assert_msg2[] = "item_gobj";
 
 bool ftCo_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     itPickup* pickup;
     Vec2* offset0;
     ftCo_Fighter* fp = gobj->user_data;
@@ -241,10 +238,7 @@ lbl_80094460:
 
 HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     itPickup* pickup = &fp->x294_itPickup;
     Vec2* offset0;
@@ -644,10 +638,7 @@ void ftCo_80094694(HSD_GObj* gobj, FtMotionId msid, bool loop)
 
 bool ftCo_80094790(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     if (GET_FIGHTER(gobj)->x1978 == NULL) {
         HSD_GObj* unk_gobj = ftCo_800942A0(gobj, 3);
         if (unk_gobj != NULL) {
@@ -664,10 +655,7 @@ bool ftCo_80094790(HSD_GObj* gobj)
 
 void ftCo_80094818(HSD_GObj* gobj, int arg1)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->x1978 != NULL) {
         pl_8003E17C(fp->player_id, fp->x221F_b4, fp->x1978);
@@ -790,7 +778,6 @@ lbl_800949F4:
 
 static inline void inlineB0(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
 #ifdef MUST_MATCH
     u64 _ = { 0 };
 #endif
@@ -1142,10 +1129,7 @@ lbl_80094D70:
 void ftCo_80094B6C(HSD_GObj* gobj, HSD_GObj* item_gobj)
 {
     Vec3 vec;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (item_gobj == NULL) {
         OSReport("ftGetImmItem item_gobj is NULL!!\n");

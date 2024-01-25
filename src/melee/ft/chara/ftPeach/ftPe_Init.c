@@ -481,10 +481,7 @@ void ftPe_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 
 void ftPe_Init_8011B93C(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     s32 result = ftParts_80074A74(gobj, 2);
 

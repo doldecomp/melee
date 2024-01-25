@@ -29,10 +29,7 @@ static void doAnim(HSD_GObj* gobj);
 
 void ftDk_SpecialLwStart_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         doAnim(gobj);
     }
@@ -96,10 +93,7 @@ static void callback(HSD_GObj* gobj)
 static void ftDonkey_8010DE88_inner(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (!fp->x2219_b0) {
         efAsync_Spawn(gobj, &fp->x60C, 1, 1228, fp->parts[FtPart_TopN].joint);
         fp->x2219_b0 = true;
@@ -122,10 +116,7 @@ static void doAnim(HSD_GObj* gobj)
 
 void ftDk_SpecialLwEnd0_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }

@@ -471,10 +471,7 @@ void ftFc_Init_OnLoad(HSD_GObj* gobj)
     s32* sa2;
     void** items = ftdata->x48_items;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->x2224_b7 = 1;
     ftFx_Init_OnLoadForFalco(fp);

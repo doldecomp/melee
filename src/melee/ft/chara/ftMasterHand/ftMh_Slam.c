@@ -22,10 +22,7 @@
 void ftMh_Slam_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (fp->cmd_vars[0] != 0) {
         fp->cmd_vars[0] = 0;
         ftMh_CaptureWaitMasterHand_80155D6C(fp->victim_gobj,

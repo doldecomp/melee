@@ -403,10 +403,7 @@ bool ftCo_800C0CB8(ftCo_GObj* gobj)
 ASM void ftCo_800C0D0C(ftCo_GObj* gobj)
 #ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Vec3 joint_pos;
     Vec3 hip_pos;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -593,10 +590,7 @@ ASM void ftCo_800C0D0C(ftCo_GObj* gobj)
 ASM void ftCo_Bury_Anim(ftCo_GObj* gobj)
 #ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x1A4C -= p_ftCommonData->x610;
     ftCommon_8007DC08(fp, p_ftCommonData->x614);
@@ -849,10 +843,7 @@ lbl_800C11B4:
 
 void ftCo_Bury_Coll(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ft_80082888(gobj, &fp->mv.co.bury.coll_box) ||
         fp->mv.co.bury.x20 != fp->coll_data.floor.index ||
@@ -893,10 +884,7 @@ void ftCo_BuryWait_Phys(ftCo_GObj* gobj) {}
 ASM void ftCo_BuryWait_Coll(ftCo_GObj* gobj)
 #ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Bury_Coll(gobj);
 }
 
@@ -1055,10 +1043,7 @@ void ftCo_BuryJump_IASA(ftCo_GObj* gobj)
 
 void ftCo_BuryJump_Phys(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D494(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
     ftCommon_8007D268(fp);

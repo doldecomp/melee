@@ -26,10 +26,7 @@ bool ftCliffCommon_80081298(ftCo_GObj* gobj)
     Fighter* other_fp;
     ftCo_GObj* other_gobj;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = gobj->user_data;
     if (fp->input.lstick.y <= -p_ftCommonData->x480) {
@@ -57,10 +54,7 @@ void ftCliffCommon_80081370(ftCo_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     Vec3 vec;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     {
         float facing_dir;
         {
@@ -120,10 +114,7 @@ void ftCo_CliffCatch_Phys(ftCo_GObj* gobj)
     Fighter* fp = gobj->user_data;
     if (mpLib_80054ED8(fp->mv.co.cliff.ledge_id) != 0) {
         Vec3 vec;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4] = { 0 };
-#endif
         if (fp->facing_dir > 0) {
             mpLib_80053ECC(fp->mv.co.cliff.ledge_id, &vec);
         } else {
@@ -138,10 +129,7 @@ void ftCo_CliffCatch_Phys(ftCo_GObj* gobj)
 
 void ftCo_CliffCatch_Coll(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (ft_800821DC(gobj)) {
         ft_80082B1C(gobj);

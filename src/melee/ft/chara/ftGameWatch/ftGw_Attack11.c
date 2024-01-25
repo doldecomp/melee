@@ -23,10 +23,7 @@ void ftGw_Attack11_ItemGreenhouseSetup(HSD_GObj* gobj)
 {
     Vec3 sp10;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter* fp = getFighter(gobj);
 
@@ -99,10 +96,7 @@ void ftGw_Attack11_ItemGreenhouseRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
         it_802C6328(fp->fv.gw.x224C_greenhouseGObj);
@@ -158,10 +152,7 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (ftCo_80094790(gobj) == false) {
         fp->allow_interrupt = 0;
@@ -182,10 +173,7 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
 // https://decomp.me/scratch/BKUIu // Mr. Game & Watch's Jab Animation callback
 void ftGw_Attack11_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);

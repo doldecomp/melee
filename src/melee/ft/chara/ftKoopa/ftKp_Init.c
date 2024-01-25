@@ -315,10 +315,7 @@ Fighter_CostumeStrings ftKp_Init_CostumeStrings[] = {
 
 void ftKp_Init_OnDeath(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* koopaAttr = fp->dat_attrs;
@@ -770,10 +767,7 @@ void ftKp_SpecialSHit_Anim(HSD_GObj* gobj)
     Fighter* fp0 = GET_FIGHTER(gobj);
 
     {
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 unused0[8];
-#endif
 
         Fighter* fp1 = fp0;
 

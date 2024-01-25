@@ -184,10 +184,7 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
     HSD_FObjDesc* fobjdesc;
     HSD_AObj* aobj;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     HSD_FObj* fobj;
     u32 id;

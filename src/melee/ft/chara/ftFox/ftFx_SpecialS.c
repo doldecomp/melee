@@ -181,10 +181,7 @@ void ftFx_SpecialAirSStart_Phys(HSD_GObj* gobj)
     ftFox_DatAttrs* da = fp->dat_attrs;
     ftCo_DatAttrs* ca = &fp->co_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->mv.fx.SpecialS.gravityDelay != 0) {
         fp->mv.fx.SpecialS.gravityDelay--;
@@ -278,10 +275,7 @@ static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* gobj)
 // Dash Animation callback
 void ftFx_SpecialS_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftFx_SpecialSEnd_Enter(gobj);
@@ -294,10 +288,7 @@ void ftFx_SpecialS_Anim(HSD_GObj* gobj)
 // Dash Animation callback
 void ftFx_SpecialAirS_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftFx_SpecialAirSEnd_Enter(gobj);
@@ -467,10 +458,7 @@ inline void ftFox_SpecialS_SetVars(HSD_GObj* gobj)
 // Dash Motion State handler
 void ftFx_SpecialS_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[28];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialS, Ft_MF_SkipRumble, 0.0f,
                               1.0f, 0.0f, NULL);
@@ -482,10 +470,7 @@ void ftFx_SpecialS_Enter(HSD_GObj* gobj)
 // Dash Motion State handler
 void ftFx_SpecialAirS_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[36];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirS, Ft_MF_SkipRumble,
                               0.0f, 1.0f, 0.0f, NULL);
@@ -536,10 +521,7 @@ void ftFx_SpecialSEnd_Phys(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftFox_DatAttrs* da = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->mv.fx.SpecialS.gravityDelay != 0) {
         fp->mv.fx.SpecialS.gravityDelay--;
@@ -558,10 +540,7 @@ void ftFx_SpecialAirSEnd_Phys(HSD_GObj* gobj)
     ftFox_DatAttrs* da = fp->dat_attrs;
     ftCo_DatAttrs* ca = &fp->co_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->mv.fx.SpecialS.gravityDelay != 0) {
         fp->mv.fx.SpecialS.gravityDelay--;
@@ -578,10 +557,7 @@ void ftFx_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 // End Collision callback
 void ftFx_SpecialSEnd_Coll(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (ft_800827A0(gobj) == false) {
         ftCo_800CC730(gobj);
@@ -596,10 +572,7 @@ void ftFx_SpecialAirSEnd_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftFox_DatAttrs* da = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     int cliffCatchDir;
 

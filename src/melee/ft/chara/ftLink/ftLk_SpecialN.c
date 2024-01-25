@@ -113,10 +113,7 @@ bool ftLk_SpecialN_IsActiveAnd2071b6(ftLk_GObj* gobj)
 
 void ftLk_SpecialN_ProcessFv10(ftLk_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.lk.arrow_gobj != NULL) {
         it_802A8A7C(fp->fv.lk.arrow_gobj);
@@ -127,10 +124,7 @@ void ftLk_SpecialN_ProcessFv10(ftLk_GObj* gobj)
 
 void ftLk_SpecialN_ProcessFv14(ftLk_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.lk.x14 != NULL) {
         it_802AF304(fp->fv.lk.x14);
@@ -281,10 +275,7 @@ static inline bool unkCondition(ftLk_GObj* gobj)
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
     if (fp->fv.lk.x14 == NULL) {
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[36] = { 0 };
-#endif
         Vec3 pos;
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
                     NULL, &pos);
@@ -740,10 +731,7 @@ MotionFlags const mf = Ft_MF_SkipModel | Ft_MF_SkipItemVis;
 
 static inline void bar(ftLk_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[0x20] = { 0 };
-#endif
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ftLk_SpecialN_Vec3Group vecs = ftLk_Init_Vec3Group;
     lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint, NULL,
@@ -917,10 +905,7 @@ static void updateParts(ftLk_GObj* gobj)
 
 void ftLk_SpecialNEnd_Anim(ftLk_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftLk_SpecialN_UnsetFv14(gobj);
         updateParts(gobj);
@@ -1444,10 +1429,7 @@ lbl_800EDD70:
 
 void ftLk_SpecialAirNEnd_Anim(ftLk_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -1591,10 +1573,7 @@ static void doLoopIASA(ftLk_GObj* gobj, FtMotionId msid)
 
 void ftLk_SpecialNLoop_IASA(ftLk_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     doLoopIASA(gobj, ftLk_MS_SpecialNEnd);
 }
 #endif
@@ -1960,10 +1939,7 @@ lbl_800EE2CC:
 
 static inline void doEndColl(ftLk_GObj* gobj)
 {
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12] = { 0 };
-#endif
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
     Item_GObj* item_gobj;
@@ -2204,10 +2180,7 @@ lbl_800EE514:
 /// @todo Combine with #ftLk_SpecialNEnd_Coll.
 void ftLk_SpecialAirNEnd_Coll(ftLk_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     doEndColl(gobj);
     if (ft_80081D0C(gobj) == GA_Air) {

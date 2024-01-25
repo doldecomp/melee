@@ -347,10 +347,7 @@ void HSD_StateSetNumTevStages(void)
 
 void HSD_SetupTevStage(HSD_TevDesc* desc)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     GXSetTevOrder(desc->stage, desc->coord, desc->map, desc->color);
     if (desc->flags == 0) {
         /// @todo Incorrect cast.

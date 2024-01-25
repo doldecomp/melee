@@ -1114,9 +1114,7 @@ static void SetupSharedVtxModelMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
     }
     if (flags | SETUP_JOINT1) {
         ///@todo Unused stack
-#ifdef MUST_MATCH
         u8 _[4];
-#endif
         HSD_JObjSetupMatrix(pobj->u.jobj);
         PSMTXConcat(vmtx, pobj->u.jobj->mtx, m);
         GXLoadPosMtxImm(m, GX_PNMTX1);

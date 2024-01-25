@@ -85,10 +85,7 @@ static inline float my_sqrtf(float x)
     static const double _half = .5;
     static const double _three = 3.0;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
 
     volatile float y;
     if (x > 0) {
@@ -117,10 +114,7 @@ void ftMh_Wait1_1_Phys(HSD_GObj* gobj)
     Vec3 sp28_pos;
     Vec3 vel;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     ft_80085134(gobj);
     ftBossLib_8015C208(gobj, &sp28_pos);

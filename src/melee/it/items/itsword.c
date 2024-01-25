@@ -691,10 +691,7 @@ void it_80285314(Item_GObj* gobj)
 ASM void it_80285338(Item_GObj* gobj)
 #ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Item* ip = GET_ITEM(gobj);
     itSword_UnkArticle1* attrs = ip->xC4_article_data->x4_specialAttributes;
     it_8026B390(gobj);

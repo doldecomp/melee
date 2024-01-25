@@ -139,10 +139,7 @@ ASM void ftCo_800C1E64(ftCo_GObj* gobj, int msid, int timer,
     {
         Vec3 ef_pos;
         float pos_x_offset = fp->cur_pos.x + ef_offset.x;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4] = { 0 };
-#endif
         ef_pos.x = pos_x_offset;
         ef_pos.y = fp->cur_pos.y + ef_offset.y;
         ef_pos.z = fp->cur_pos.z;
@@ -299,10 +296,7 @@ static inline void inlineA0(ftCo_GObj* gobj)
 ASM void ftCo_PassiveWall_Anim(ftCo_GObj* gobj)
 #ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.co.passivewall.timer != 0) {
         --fp->mv.co.passivewall.timer;
@@ -545,10 +539,7 @@ lbl_800C22A8:
 ASM void ftCo_PassiveWall_Phys(ftCo_GObj* gobj)
 #ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->mv.co.passivewall.timer) {
         ftCo_DatAttrs* co = &fp->co_attrs;

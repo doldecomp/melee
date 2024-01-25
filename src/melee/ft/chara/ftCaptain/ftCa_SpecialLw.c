@@ -200,10 +200,7 @@ asm void ftCa_SpecialLw_Enter(HSD_GObj*)
 
 void ftCa_SpecialLw_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
@@ -264,10 +261,7 @@ asm void ftCa_SpecialAirLw_Enter(HSD_GObj*)
 
 void ftCa_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
@@ -361,10 +355,7 @@ lbl_800E424C:
 
 void ftCa_SpecialLw_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[32];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->ground_or_air == GA_Ground) {
@@ -451,10 +442,7 @@ lbl_800E4340:
 
 void ftCa_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         fp->cmd_vars[2] = 0;
@@ -618,10 +606,7 @@ lbl_800E4524:
 
 void ftCa_SpecialLwEnd_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = gobj->user_data;
     ftCaptain_DatAttrs* da = fp->dat_attrs;
     if (fp->ground_or_air == GA_Ground) {
@@ -751,10 +736,7 @@ lbl_800E4664:
 
 void ftCa_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* da = fp->dat_attrs;
     if (fp->cmd_vars[2] != 0) {
@@ -856,10 +838,7 @@ lbl_800E4798:
 
 void ftCa_SpecialLw_Coll(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     if ((s32) fp->ground_or_air == GA_Ground) {
         if (ft_80082708(gobj) == 0) {
@@ -955,10 +934,7 @@ lbl_800E4924:
 
 void ftCa_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
     if (ft_80081D0C(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         ftCaptain_DatAttrs* da = fp->dat_attrs;

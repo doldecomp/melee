@@ -158,10 +158,7 @@ static void grFigure3_8020E724(HSD_GObj* arg0) {}
 
 static void grFigure3_8020E728(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);

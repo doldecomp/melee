@@ -33,10 +33,7 @@ static inline void setCamData(ftCommonData* cd, CameraBox* cam)
 
 void ftCo_8009EB18(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCommon_8007DB58(gobj);
     ftCo_8009750C(gobj);
@@ -70,10 +67,7 @@ void ftCo_BarrelWait_Coll(ftCo_GObj* gobj) {}
 void ftCo_8009EC44(ftCo_GObj* gobj)
 {
     float param;
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     Ground_801C4DA0(&GET_FIGHTER(gobj)->cur_pos, &param);
 }
 

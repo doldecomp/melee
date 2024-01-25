@@ -186,10 +186,7 @@ void ftDr_Init_OnLoad(HSD_GObj* gobj)
     void** items;
     ftDrMarioAttributes* sa;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp = gobj->user_data;
     items = fp->ft_data->x48_items;
@@ -243,10 +240,7 @@ void ftDr_Init_801497CC(HSD_GObj* gobj)
 {
     Fighter* fp;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (gobj != NULL) {
         fp = gobj->user_data;

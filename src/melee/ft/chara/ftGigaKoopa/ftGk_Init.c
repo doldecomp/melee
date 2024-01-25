@@ -302,10 +302,7 @@ Fighter_CostumeStrings ftGk_Init_CostumeStrings[] = {
 
 void ftGk_Init_OnDeath(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* koopaAttr = fp->dat_attrs;

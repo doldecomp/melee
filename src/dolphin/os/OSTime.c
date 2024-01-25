@@ -40,10 +40,7 @@ extern volatile OSTime OS_SYSTEM_TIME AT_ADDRESS(0x800030D8);
 
 OSTime __OSGetSystemTime(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     bool intr = OSDisableInterrupts();
     OSTime time = OSGetTime() + OS_SYSTEM_TIME;
@@ -53,10 +50,7 @@ OSTime __OSGetSystemTime(void)
 
 OSTime __OSTimeToSystemTime(s64 time)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     bool intr = OSDisableInterrupts();
     OSTime sysTime = OS_SYSTEM_TIME + time;

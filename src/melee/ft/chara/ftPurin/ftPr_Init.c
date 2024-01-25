@@ -820,10 +820,7 @@ extern f32 const ftPr_Init_804D9C28;
 void ftPr_SpecialLw_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (ftPr_Init_804D9C20 == fp->facing_dir) {
         Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialLwL, 0U,
@@ -843,10 +840,7 @@ void ftPr_SpecialLw_Enter(Fighter_GObj* gobj)
 void ftPr_SpecialAirLw_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (ftPr_Init_804D9C20 == fp->facing_dir) {
         Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirLwL, 0U,
@@ -5348,10 +5342,7 @@ void ftPr_SpecialNHit_Phys(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftPurinAttributes* da;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp = gobj->user_data;
     da = fp->dat_attrs;
@@ -5425,10 +5416,7 @@ void ftPr_SpecialNStart_Coll(HSD_GObj* gobj)
 {
     s32 state;
     Fighter* fp;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp = gobj->user_data;
     if (ft_80082708((Fighter_GObj*) gobj) == GA_Ground) {

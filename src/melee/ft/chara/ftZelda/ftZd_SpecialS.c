@@ -29,10 +29,7 @@ void ftZd_SpecialS_Enter(HSD_GObj* gobj)
     ftZelda_DatAttrs* attributes;
     Fighter* fighter2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     temp_f1 = 0;
     fp = GET_FIGHTER(gobj);
@@ -62,10 +59,7 @@ void ftZd_SpecialAirS_Enter(HSD_GObj* gobj)
     ftZelda_DatAttrs* attributes;
     Fighter* fighter2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     temp_f1 = 0;
     fp = GET_FIGHTER(gobj);
@@ -98,10 +92,7 @@ void ftZd_SpecialSStart_Anim(HSD_GObj* gobj)
     ftZelda_DatAttrs* attributes; // r31
     Fighter* fp;                  // r30
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
@@ -144,10 +135,7 @@ void ftZd_SpecialSLoop_Anim(HSD_GObj* gobj)
     HSD_GObj* temp_r3;
     HSD_GObj* temp_r3_u32;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
@@ -233,10 +221,7 @@ void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
     ftZelda_DatAttrs* attributes;
     Fighter* fp;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
@@ -277,10 +262,7 @@ void ftZd_SpecialAirSLoop_Anim(HSD_GObj* gobj)
     ftZelda_DatAttrs* attributes; // r31
     Fighter* fp;                  // r30
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
@@ -338,10 +320,7 @@ void ftZd_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         {
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[4];
-#endif
 
             Fighter* fp = GET_FIGHTER(gobj);
             ftZelda_DatAttrs* sa = getFtSpecialAttrs(fp);
@@ -461,10 +440,7 @@ void ftZd_SpecialAirSStart_Phys(HSD_GObj* gobj)
     ftCo_DatAttrs* fighterAttr;
     f32 aerialFriction;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp = GET_FIGHTER(gobj);
     temp_r3 = fp->mv.zd.specials.x8;
@@ -491,10 +467,7 @@ void ftZd_SpecialAirSLoop_Phys(HSD_GObj* gobj)
     ftCo_DatAttrs* fighterAttr;
     f32 aerialFriction;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp = GET_FIGHTER(gobj);
     temp_r3 = fp->mv.zd.specials.x8;
@@ -521,10 +494,7 @@ void ftZd_SpecialAirSEnd_Phys(HSD_GObj* gobj)
     ftCo_DatAttrs* fighterAttr;
     f32 aerialFriction;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp = GET_FIGHTER(gobj);
     temp_r3 = fp->mv.zd.specials.x8;

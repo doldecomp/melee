@@ -34,10 +34,7 @@ void ftMr_SpecialAirHi_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
@@ -64,10 +61,7 @@ void ftMr_SpecialHi_Anim(HSD_GObj* gobj)
 // 0x800E1B84
 void ftMr_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftMr_SpecialHi_Anim(gobj);
 }
@@ -100,10 +94,7 @@ void ftMr_SpecialHi_IASA(HSD_GObj* gobj)
 
 void ftMr_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     ftMr_SpecialHi_IASA(gobj);
 }
 

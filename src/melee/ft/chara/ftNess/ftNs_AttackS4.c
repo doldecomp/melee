@@ -28,10 +28,7 @@ void ftNs_AttackS4_Enter(HSD_GObj* gobj) // Ness's F-Smash Motion State handler
     Fighter* fp;
     HSD_GObj* baseballBatGObj;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp = GET_FIGHTER(gobj);
 
@@ -141,10 +138,7 @@ void ftNs_AttackS4_IASA(HSD_GObj* gobj) // Ness's F-Smash IASA Callback
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->allow_interrupt != 0) {
         if (fp->fv.ns.bat_gobj != NULL) {

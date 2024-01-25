@@ -29,10 +29,7 @@ void ftNs_SpecialS_ItemPKFireSpawn(
     Vec3 PKFireVelStruct;
     f32 PKFireLaunchNew;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     f32 PKFireRot;
     f32 PKFireLaunch;

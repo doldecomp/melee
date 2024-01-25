@@ -64,17 +64,11 @@ void ftCo_80090984(ftCo_GObj* gobj)
 
 void ftCo_800909D0(Fighter* fp)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Vec3 offset;
     Vec3 pos;
     {
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4] = { 0 };
-#endif
         float radius = fp->x34_scale.y * fp->co_attrs.bubble_ratio;
         lb_8000B1CC(fp->parts[FtPart_TopN].joint, NULL, &pos);
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint, NULL,
@@ -97,10 +91,7 @@ void ftCo_800909D0(Fighter* fp)
 
 static inline void inlineA0(ftCo_GObj* gobj, HSD_JObj* joint, float* param)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     efAsync_Spawn(gobj, &fp->x60C, 3, 1045, joint, param);
 }
@@ -827,10 +818,7 @@ void ftCo_DamageIce_IASA(ftCo_GObj* gobj) {}
 
 void ftCo_DamageIce_Phys(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_DatAttrs* co = &fp->co_attrs;
     if (fp->ground_or_air == GA_Air) {

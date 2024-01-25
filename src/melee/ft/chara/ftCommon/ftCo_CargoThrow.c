@@ -92,10 +92,7 @@ bool ftCo_8009BF3C(ftCo_GObj* gobj)
 
 bool ftCo_8009C02C(ftCo_GObj* gobj, FtMotionId msid)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     {
         MotionFlags mf;
@@ -166,10 +163,7 @@ static inline void inlineB1(ftCo_GObj* gobj, FighterEvent cb, int offset)
 
 void ftCo_8009C170(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     inlineB1(gobj, ftCommon_8007D5D4, 4);
 }
 
@@ -260,9 +254,6 @@ void ftCo_CargoThrowAir_Coll(ftCo_GObj* gobj)
 
 void ftCo_8009C45C(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     inlineB1(gobj, ftCommon_8007D7FC, -4);
 }

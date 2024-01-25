@@ -38,10 +38,7 @@ void ftPp_SpecialN_Enter(HSD_GObj* gobj)
 
 void ftPp_SpecialAirN_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
     ftIceClimberAttributes* icattr = fp->dat_attrs;
@@ -115,10 +112,7 @@ void ftPp_SpecialAirN_Coll(Fighter_GObj* gobj)
 {
     Fighter *fp, *fp1, *fp2;
     ftIceClimberAttributes* da;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp = gobj->user_data;
     da = fp->dat_attrs;

@@ -56,10 +56,7 @@ static void doStartMotion(HSD_GObj* gobj)
     Fighter* fp;
     ftMario_DatAttrs* sa;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp = GET_FIGHTER(gobj);
     sa = (ftMario_DatAttrs*) fp->dat_attrs;
@@ -83,10 +80,7 @@ void ftMr_SpecialLw_Enter(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftMario_DatAttrs* sa = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[28];
-#endif
 
     setCmdVar2(gobj);
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirLw, 0, 0, 1, 0, NULL);
@@ -104,10 +98,7 @@ void ftMr_SpecialAirLw_Enter(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftMario_DatAttrs* sa = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[28];
-#endif
 
     setCmdVar2(gobj);
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirLw, 0, 0, 1, 0, NULL);
@@ -134,10 +125,7 @@ static void unsetCallbacks(HSD_GObj* gobj)
 
 void ftMr_SpecialLw_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         unsetCallbacks(gobj);
@@ -189,10 +177,7 @@ static void doPhys(HSD_GObj* gobj)
 
 void ftMr_SpecialLw_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp0 = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = GetMarioAttr(fp0);
@@ -226,10 +211,7 @@ void ftMr_SpecialAirLw_Phys(HSD_GObj* gobj)
     ftMario_DatAttrs* sa_2;
     Fighter* fp;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp = getFighter(gobj);
     sa = fp->dat_attrs;
@@ -277,10 +259,7 @@ void ftMr_SpecialLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     if (fp->ground_or_air == GA_Ground) {
         if (ft_80082888(gobj, &coll_box) == false) {
@@ -321,10 +300,7 @@ static void doAirCollIfUnk(HSD_GObj* gobj)
 
 void ftMr_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_800824A0(gobj, &coll_box)) {

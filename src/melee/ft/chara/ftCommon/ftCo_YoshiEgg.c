@@ -231,10 +231,7 @@ lbl_800BBEBC:
 ASM void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
 #ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     if (fp->ground_or_air == GA_Ground) {
@@ -247,10 +244,7 @@ ASM void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
     fp->x221E_b0 = true;
     {
         Vec3 scale;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4] = { 0 };
-#endif
         float size = fp->co_attrs.xBC.size;
         scale.x = scale.y = scale.z = size;
         ftCommon_SetAccessory(fp, ftYs_SpecialN_8012CDD4(arg1));
@@ -498,10 +492,7 @@ lbl_800BC178:
 ASM void ftCo_YoshiEgg_Anim(ftCo_GObj* gobj)
 #ifndef MUST_MATCH
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x1A4C -= ftYs_SpecialN_8012CD10(gobj);
     fp->mv.co.yoshiegg.x4 = ftCommon_8007DC08(fp, ftYs_SpecialN_8012CD28());

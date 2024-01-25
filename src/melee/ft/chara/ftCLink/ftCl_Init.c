@@ -318,10 +318,7 @@ void ftCl_Init_OnDeath(ftLk_GObj* gobj)
 
 void ftCl_Init_OnLoad(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftLk_Fighter* fp = gobj->user_data;
     ftData* ftdata = fp->ft_data;
@@ -344,10 +341,7 @@ void ftCl_Init_OnLoad(HSD_GObj* gobj)
 
 void ftCl_Init_OnItemPickupExt(HSD_GObj* gobj, bool flag)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     ftLk_Fighter* fp = gobj->user_data;
 
@@ -371,10 +365,7 @@ void ftCl_Init_OnItemVisible(HSD_GObj* gobj)
 
 void ftCl_Init_OnItemDropExt(HSD_GObj* gobj, bool flag)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     ftLk_Fighter* fp = gobj->user_data;
 
@@ -393,10 +384,7 @@ void ftCl_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 
 void ftCl_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter_OnItemDrop(gobj, flag, 1, 1);
 }
 
@@ -432,10 +420,7 @@ void ftCl_Init_80149114(HSD_GObj* gobj)
 
 void ftCl_Init_8014919C(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x5F8 == 0) {
@@ -471,10 +456,7 @@ bool ftCl_Init_8014920C(HSD_GObj* gobj)
 
 void ftCl_Init_80149268(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     checkFighter2244(gobj);
 }

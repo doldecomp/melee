@@ -91,10 +91,7 @@ static void doHitAccessory4(HSD_GObj* gobj)
 
 static void onHitAccessory4(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     doHitAccessory4(gobj);
     fp->accessory4_cb = NULL;
@@ -155,10 +152,7 @@ static void reset(HSD_GObj* gobj)
 
 void ftPe_SpecialN_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     GET_FIGHTER(gobj)->self_vel.y = 0;
     Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialN, Ft_MF_None, 0, 1, 0,
                               NULL);
@@ -168,10 +162,7 @@ void ftPe_SpecialN_Enter(HSD_GObj* gobj)
 
 void ftPe_SpecialAirN_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     fp->self_vel.x /= da->specialairn_vel_x_div;
@@ -201,19 +192,13 @@ static void doAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
 
 void ftPe_SpecialN_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     doAnim(gobj, ft_8008A2BC);
 }
 
 void ftPe_SpecialAirN_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     doAnim(gobj, ftCo_800CC730);
 }
 
@@ -229,10 +214,7 @@ void ftPe_SpecialN_Phys(HSD_GObj* gobj)
 
 void ftPe_SpecialAirN_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     if (fp->cmd_vars[cmd_phys_state] >= 1) {
@@ -291,10 +273,7 @@ static MotionFlags const coll_mf =
 
 static void doColl(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirN, coll_mf,
@@ -307,10 +286,7 @@ static void doColl(HSD_GObj* gobj)
 
 static void doAirColl(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     fp->fv.pe.specialairn_used = false;
     ftCommon_8007D7FC(fp);
@@ -352,10 +328,7 @@ void ftPe_SpecialNHit_Phys(HSD_GObj* gobj)
 
 void ftPe_SpecialAirNHit_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     ftCommon_8007D494(fp, da->xA0, da->xA4);

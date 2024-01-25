@@ -15,10 +15,7 @@
 
 void ftCo_8009CA0C(ftCo_GObj* gobj, ftCo_GObj* vic_gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_Fighter* vic_fp = vic_gobj->user_data;
     ftCommon_8007DB58(gobj);

@@ -19,10 +19,7 @@
 void ftDk_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialS, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     Fighter_UnsetCmdVar0(gobj);

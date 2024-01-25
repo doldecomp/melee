@@ -357,10 +357,7 @@ void ftPk_Init_OnLoad(HSD_GObj* gobj)
 
 void ftPk_Init_OnDeath(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
@@ -388,10 +385,7 @@ void ftPk_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 
 void ftPk_Init_UnkMotionStates1(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftParts_80074A4C(gobj, 1, -1);
     ftParts_80074B0C(gobj, 1, 0);
@@ -399,10 +393,7 @@ void ftPk_Init_UnkMotionStates1(HSD_GObj* gobj)
 
 void ftPk_Init_UnkMotionStates2(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftParts_80074A4C(gobj, 1, 0);
     ftParts_80074B0C(gobj, 1, 0);

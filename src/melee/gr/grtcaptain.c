@@ -141,10 +141,7 @@ static void grTCaptain_8021FE24(HSD_GObj* arg0) {}
 
 static void grTCaptain_8021FE28(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = GET_GROUND(gobj);
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
@@ -166,10 +163,7 @@ static void grTCaptain_8021FEB4(HSD_GObj* arg0) {}
 
 static void grTCaptain_8021FEB8(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = GET_GROUND(gobj);
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);

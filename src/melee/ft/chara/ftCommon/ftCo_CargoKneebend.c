@@ -19,10 +19,7 @@
 
 void ftCo_8009B9C8(ftCo_GObj* gobj, int arg1)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20] = { 0 };
-#endif
     Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* fp_x2CC = fp->x2CC;
     fp->mv.co.cargokneebend.x4 = arg1;
