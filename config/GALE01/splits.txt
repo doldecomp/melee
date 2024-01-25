@@ -3818,6 +3818,15 @@ dolphin/os/OSRtc.c:
 	.text       start:0x80348A90 end:0x803494BC
 	.bss        start:0x804A7D60 end:0x804A7DB8
 
+dolphin/os/OSSerial.c:
+	.text       start:0x803494BC end:0x8034AB80
+	.data       start:0x80402358 end:0x80402420
+	.bss        start:0x804A7DB8 end:0x804A7FB8
+	.sbss       start:0x804D73C8 end:0x804D73D8
+
+dolphin/os/OSSync.c:
+	.text       start:0x8034AB80 end:0x8034AC04
+
 dolphin/os/OSThread.c:
 	.text       start:0x8034AC04 end:0x8034C3F0
 	.data       start:0x80402420 end:0x80402C30
