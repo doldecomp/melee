@@ -1,5 +1,4 @@
 #include <platform.h>
-#include "ft/forward.h"
 #include "lb/forward.h"
 
 #include "ftCo_BarrelWait.h"
@@ -10,12 +9,16 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
 #include "gr/ground.h"
+#include "lb/lbcollision.h"
 #include "mp/mpcoll.h"
 
+#include <common_structs.h>
 #include <placeholder.h>
 
 #if defined(MWERKS_GEKKO) && defined(WIP)
@@ -75,7 +78,7 @@ void ftCo_8009EC44(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_8009EC70(ftCo_GObj* gobj, Vec3* pos, UNK_T arg2, float kb_angle)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     HitCapsule hit;
     Fighter* fp = gobj->user_data;

@@ -1,7 +1,6 @@
 #ifndef GALE01_1E57BC
 #define GALE01_1E57BC
 
-#include <platform.h>
 #include <dolphin/mtx/forward.h>
 
 #include <placeholder.h>

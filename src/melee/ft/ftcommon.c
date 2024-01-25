@@ -15,13 +15,13 @@
 #include "ef/eflib.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftchangeparam.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftmaterial.h"
 #include "ft/ftmetal.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_HammerWait.h"
@@ -32,12 +32,17 @@
 #include "it/items/it_27CF.h"
 #include "it/items/itsword.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbrefract.h"
 #include "mp/mplib.h"
 #include "pl/pl_0371.h"
+#include "pl/player.h"
 #include "un/un_2FC9.h"
 
-#include <dolphin/mtx/types.h>
+#include <common_structs.h>
 #include <dolphin/os.h>
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 #include <baselib/rumble.h>
 #include <melee/it/items/itpeachparasol.h>
 

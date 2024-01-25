@@ -1,6 +1,7 @@
 #ifndef MELEE_FT_FTDATA3_H
 #define MELEE_FT_FTDATA3_H
 
+#include <platform.h>
 #include "ftCommon/forward.h"
 
 #include "ft/types.h"

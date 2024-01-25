@@ -1,7 +1,11 @@
-#include "stddef.h"
+#include <platform.h>
+#include <dolphin/gx/forward.h>
 
 #include <dolphin/gx/__GXFifo.h>
 #include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/__types.h>
+#include <dolphin/gx/GXEnum.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
 #include <MetroTRK/intrinsics.h>

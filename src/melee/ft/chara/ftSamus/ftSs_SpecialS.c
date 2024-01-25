@@ -1,16 +1,17 @@
 #include "ftSs_SpecialS.h"
 
-#include "ftSs_Init.h"
 #include "ftSs_SpecialN.h"
 
 #include "ef/eflib.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
-#include "ftCommon/ftCo_SpecialS.h"
+#include "ftSamus/types.h"
+
+#include <dolphin/mtx/types.h>
 
 static void ftSamus_ClearThrowFlagsUnk(HSD_GObj* gobj)
 {

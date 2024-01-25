@@ -3,13 +3,17 @@
 #include "ftDk_HeavyFall.h"
 #include "ftDk_HeavyWait0.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ftCommon/ftCo_ItemGet.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_ItemThrow.h"
+#include "ftDonkey/types.h"
+
+#include <common_structs.h>
+#include <stddef.h>
 
 void ftDk_HeavyTurn_Anim(HSD_GObj* gobj)
 {

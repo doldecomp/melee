@@ -1,3 +1,7 @@
+#include <platform.h>
+#include "lb/forward.h"
+#include <baselib/forward.h>
+
 #include "gr/grtseak.h"
 
 #include "gr/granime.h"
@@ -10,8 +14,9 @@
 
 #include <dolphin/mtx/types.h>
 #include <dolphin/os.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
-#include <baselib/jobj.h>
+#include <baselib/gobjproc.h>
 
 void grTSeak_80223864(int);                   /* static */
 void grTSeak_80223868(void);                  /* static */

@@ -2,8 +2,8 @@
 #define MELEE_FT_CHARA_FTKIRBY_TYPES_H
 
 #include <platform.h>
+#include "ft/forward.h"
 
-#include <common_structs.h>
 #include <placeholder.h>
 
 struct ftKb_FighterVars {

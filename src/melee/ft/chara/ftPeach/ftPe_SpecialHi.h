@@ -4,6 +4,7 @@
 #include <baselib/forward.h>
 
 #include <placeholder.h>
+#include <stdbool.h>
 
 /* 11D518 */ bool ftPe_8011D518(HSD_GObj* gobj);
 /* 11D598 */ void ftPe_8011D598(HSD_GObj* gobj);

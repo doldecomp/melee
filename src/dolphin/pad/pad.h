@@ -5,6 +5,7 @@
 #include <dolphin/pad/forward.h>
 
 #include <dolphin/os.h>
+#include <dolphin/os/OSContext.h>
 
 #define PAD_CHANMAX 4
 

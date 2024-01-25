@@ -1,6 +1,9 @@
 #ifndef _UTIL_H_
 #define _UTIL_H_
 
+#include <platform.h>
+#include <dolphin/gx/forward.h>
+
 #include <baselib/objalloc.h>
 
 // functions

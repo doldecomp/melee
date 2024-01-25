@@ -1,6 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTFOX_FTFOX_SPECIALN_H
 #define MELEE_FT_CHARA_FTFOX_FTFOX_SPECIALN_H
 
+#include <platform.h>
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 

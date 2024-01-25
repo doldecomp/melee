@@ -1,9 +1,9 @@
 #include <platform.h>
 #include "forward.h"
+#include <baselib/forward.h>
 
 #include "ftCo_Wait.h"
 
-#include "ftCo_08A6.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackHi3.h"
 #include "ftCo_AttackHi4.h"
@@ -12,20 +12,21 @@
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
 #include "ftCo_Escape.h"
-#include "ftCo_FallSpecial.h"
-#include "ftCo_Shouldered.h"
 #include "ftCo_SpecialS.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcoll.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_08A6.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "ftFox/ftFx_AppealS.h"
 
-#include <placeholder.h>
+#ifdef MUST_MATCH
+
+#endif
 
 void ftCo_Wait_Anim(HSD_GObj* gobj)
 {

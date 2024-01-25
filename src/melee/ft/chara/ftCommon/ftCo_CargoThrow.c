@@ -1,5 +1,6 @@
 #include <platform.h>
 #include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_CargoThrow.h"
 
@@ -8,11 +9,15 @@
 #include "ftCo_Damage.h"
 #include "math.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "ftDonkey/types.h"
 
-#include <placeholder.h>
+#include <common_structs.h>
 
 /* 09C02C */ static bool ftCo_8009C02C(ftCo_GObj* gobj, FtMotionId msid);
 /* 09C170 */ static void ftCo_8009C170(ftCo_GObj* gobj);

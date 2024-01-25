@@ -1,9 +1,13 @@
 #ifndef GALE01_028B9C
 #define GALE01_028B9C
 
+#include <platform.h>
 #include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include <placeholder.h>
+
+struct _CameraBox;
 
 struct _CameraBox* Camera_80029020(void);
 void Camera_800290D4(struct _CameraBox*);

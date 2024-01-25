@@ -1,3 +1,5 @@
+#include <dolphin/dvd/forward.h>
+
 #include "lb/lbfile.h"
 
 #include "lb/lb_0192.h"
@@ -9,7 +11,6 @@
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/os.h>
 #include <dolphin/os/OSInterrupt.h>
-#include <baselib/archive.h>
 #include <baselib/debug.h>
 #include <baselib/devcom.h>
 

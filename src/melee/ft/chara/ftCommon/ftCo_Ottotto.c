@@ -1,6 +1,7 @@
 #include <platform.h>
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "ftCo_Ottotto.h"
 
@@ -17,12 +18,15 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
+#include "ft/types.h"
 #include "mp/mplib.h"
+
+#include <common_structs.h>
 
 /* 09A410 */ static void ftCo_8009A410(ftCo_GObj* gobj);
 /* 09A6B8 */ static void ftCo_8009A6B8(ftCo_GObj* gobj);

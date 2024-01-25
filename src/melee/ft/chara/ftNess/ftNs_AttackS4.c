@@ -1,14 +1,17 @@
-#include "forward.h"
+#include <platform.h>
 
 #include "ftNess/ftNs_AttackS4.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Wait.h"
 #include "ftNess/ftNs_Init.h"
+#include "ftNess/types.h"
 #include "it/items/it_27CF.h"
 
 // 0x80114BF4

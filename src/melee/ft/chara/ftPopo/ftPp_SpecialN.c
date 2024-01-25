@@ -1,20 +1,27 @@
-#include "ftPp_SpecialN.h"
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
 
-#include "ftPp_Init.h"
+#include "ftPp_SpecialN.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
-#include "ft/ftcamera.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/ftanim.h"
 #include "ft/types.h"
+#include "ftPopo/types.h"
 #include "it/items/it_27CF.h"
-#include "lb/lb_00B0.h"
+
+#include <common_structs.h>
+#include <baselib/gobj.h>
+
+#ifdef MUST_MATCH
+#include "melee/ft/chara/ftPopo/ftPp_Init.h"
+#include "melee/ft/ft_0877.h"
+#include "melee/ft/ft_0881.h"
+#include "melee/lb/lb_00B0.h"
+#endif
 
 void ftPp_SpecialN_Enter(HSD_GObj* gobj)
 {
@@ -132,7 +139,7 @@ void ftPp_SpecialAirN_Coll(Fighter_GObj* gobj)
     }
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPp_SpecialN_8011F500(HSD_GObj*)
 { // clang-format off

@@ -1,7 +1,9 @@
 #ifndef GALE01_13C2F8
 #define GALE01_13C2F8
 
+#include <platform.h>
 #include "ftPurin/forward.h"
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"

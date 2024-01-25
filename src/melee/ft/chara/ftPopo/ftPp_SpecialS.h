@@ -6,6 +6,8 @@
 
 #include "ft/types.h"
 
+#include <stdbool.h>
+
 /* 11F68C */ void ftPp_SpecialS_8011F68C(HSD_GObj* gobj);
 /* 11F6FC */ bool ftPp_SpecialS_8011F6FC(HSD_GObj* gobj);
 /* 11F720 */ void ftPp_SpecialS_8011F720(HSD_GObj* gobj);

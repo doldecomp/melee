@@ -1,4 +1,5 @@
 #include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ft_0C31.h"
 
@@ -6,12 +7,18 @@
 #include "ft_0852.h"
 #include "ftcommon.h"
 
+#include "ft/fighter.h"
+#include "ft/ftanim.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_DownBound.h"
+#include "ftCommon/types.h"
+#include "it/it_26B1.h"
 #include "it/items/itleadead.h"
 #include "it/items/itlikelike.h"
 
 #include <placeholder.h>
+#include <baselib/dobj.h>
 #include <baselib/jobj.h>
 
 void ftCo_800C61B0(ftCo_GObj* gobj)

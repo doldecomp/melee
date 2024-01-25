@@ -1,3 +1,5 @@
+#include <dolphin/mtx/forward.h>
+
 #include "itparasol.h"
 
 #include "math.h"
@@ -5,6 +7,10 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
+
+#include <common_structs.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 // externs
 void it_8026D62C(Item_GObj*, HSD_GObjEvent);

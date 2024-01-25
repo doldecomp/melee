@@ -1,10 +1,19 @@
+#include <platform.h>
+#include "ft/forward.h"
+#include "ftMasterHand/forward.h"
+
 #include "ftMh_TagCrush.h"
 
 #include "ftMh_Wait1_2.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
 #include "ftCrazyHand/ftCh_Init.h"
+#include "pl/player.h"
+
+#include <baselib/gobj.h>
 
 void ftMh_TagCrush_Anim(HSD_GObj* gobj)
 {

@@ -1,27 +1,33 @@
 #include <platform.h>
+#include <dolphin/mtx/forward.h>
 
 #include "ft/ft_081B.h"
 
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
-#include "ft/ft_0D14.h"
-#include "ft/ftchangeparam.h"
-#include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
-#include "ft/ftwalljump.h"
-#include "ftCommon/ftCo_MissFoot.h"
-#include "ftCommon/ftCo_Ottotto.h"
-#include "ftCommon/ftCo_StopCeil.h"
-#include "ftCommon/ftCo_StopWall.h"
-#include "mp/mpcoll.h"
-#include "mp/mplib.h"
+#include "ft/types.h"
 
 #include <placeholder.h>
-#include <MSL/trigf.h>
+#include <baselib/gobj.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
+#include "melee/ft/chara/ftCommon/ftCo_MissFoot.h"
+#include "melee/ft/chara/ftCommon/ftCo_Ottotto.h"
+#include "melee/ft/chara/ftCommon/ftCo_StopCeil.h"
+#include "melee/ft/chara/ftCommon/ftCo_StopWall.h"
+#include "melee/ft/fighter.h"
+#include "melee/ft/ft_0877.h"
+#include "melee/ft/ft_0892.h"
+#include "melee/ft/ft_0C88.h"
+#include "melee/ft/ft_0D14.h"
+#include "melee/ft/ftchangeparam.h"
+#include "melee/ft/ftcliffcommon.h"
+#include "melee/ft/ftwalljump.h"
+#include "melee/mp/mpcoll.h"
+#include "melee/mp/mplib.h"
+#include "MSL/trigf.h"
+#endif
+
+#ifdef MUST_MATCH
 
 static f32 const ft_804D83A8 = 10.0F;
 static f32 const ft_804D83AC = 0.0F;
@@ -122,7 +128,7 @@ lbl_80081C6C:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80081C88(HSD_GObj* dst_gobj, f32 scl_y)
@@ -167,7 +173,7 @@ lbl_80081CE0:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 extern void ft_80081A00(void);
 
@@ -232,7 +238,7 @@ lbl_80081DB4:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm bool ft_80081DD4(ftCo_GObj* gobj)
@@ -336,7 +342,7 @@ lbl_80081F0C:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm bool ft_80081F2C(Fighter_GObj* gobj)
@@ -440,7 +446,7 @@ lbl_80082064:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm bool ft_80082084(Fighter_GObj* gobj)
@@ -544,7 +550,7 @@ lbl_800821BC:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm bool ft_800821DC(ftCo_GObj* gobj)
@@ -607,7 +613,7 @@ lbl_80082284:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm bool ft_CheckGroundAndLedge(HSD_GObj* gobj, s32 direction)
@@ -686,7 +692,7 @@ lbl_8008237C:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm bool ft_8008239C(HSD_GObj* gobj, s32 facing_direction,
@@ -776,7 +782,7 @@ bool ft_8008239C(HSD_GObj* gobj, s32 facing_direction, f32* height_attributes)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm bool ft_800824A0(HSD_GObj*, ftCollisionBox*)
@@ -843,7 +849,7 @@ lbl_80082558:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80082578(void)
@@ -905,7 +911,7 @@ lbl_8008261C:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80082638(ftCo_GObj* gobj, ftCollisionBox*)
@@ -971,7 +977,7 @@ lbl_800826EC:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm GroundOrAir ft_80082708(HSD_GObj* gobj)
@@ -1021,7 +1027,7 @@ lbl_80082788:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm bool ft_800827A0(HSD_GObj* gobj)
@@ -1071,7 +1077,7 @@ lbl_80082820:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80082838(void)
@@ -1102,7 +1108,7 @@ lbl_80082880:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm bool ft_80082888(HSD_GObj*, ftCollisionBox*)
@@ -1176,7 +1182,7 @@ lbl_80082960:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80082978(void)
@@ -1251,7 +1257,7 @@ lbl_80082A50:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm bool ft_80082A68(HSD_GObj* gobj)
@@ -1308,7 +1314,7 @@ lbl_80082B04:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80082B1C(HSD_GObj* gobj)
@@ -1343,7 +1349,7 @@ lbl_80082B60:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ftCo_AirCatchHit_Coll(HSD_GObj*)
@@ -1421,7 +1427,7 @@ lbl_80082C54:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80082C74(HSD_GObj*, HSD_GObjEvent)
@@ -1486,7 +1492,7 @@ lbl_80082D2C:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80082D40(Fighter_GObj* gobj, float)
@@ -1565,7 +1571,7 @@ lbl_80082E1C:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm HSD_GObj* ft_80082E3C(HSD_GObj* gobj)
@@ -1640,7 +1646,7 @@ lbl_80082F04:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80082F28(ftCo_GObj* gobj)
@@ -1752,7 +1758,7 @@ lbl_80083070:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80083090(ftCo_GObj* gobj, bool (*)(HSD_GObj*, enum_t),
@@ -1853,7 +1859,7 @@ lbl_800831B8:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_800831CC(HSD_GObj*, bool (*)(HSD_GObj*, enum_t), HSD_GObjEvent)
@@ -1956,7 +1962,7 @@ lbl_80083304:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80083318(Fighter_GObj* gobj,
@@ -2062,7 +2068,7 @@ lbl_80083450:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80083464(Fighter_GObj* gobj, bool (*)(Fighter_GObj* gobj, enum_t),
@@ -2167,7 +2173,7 @@ lbl_8008359C:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_800835B0(Fighter_GObj* gobj, bool (*)(Fighter_GObj*, enum_t),
@@ -2276,7 +2282,7 @@ lbl_800836F8:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_8008370C(ftCo_GObj* gobj, HSD_GObjEvent cb)
@@ -2375,7 +2381,7 @@ lbl_80083830:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80083844(void)
@@ -2441,7 +2447,7 @@ lbl_800838FC:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80083910(void)
@@ -2540,7 +2546,7 @@ lbl_80083A34:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80083A48(void)
@@ -2631,7 +2637,7 @@ lbl_80083B54:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80083B68(HSD_GObj* gobj)
@@ -2679,7 +2685,7 @@ asm void ft_80083B68(HSD_GObj* gobj)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80083C00(void)
@@ -2751,7 +2757,7 @@ lbl_80083CC4:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80083CE4(void)
@@ -2824,7 +2830,7 @@ lbl_80083DAC:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80083DCC(void)
@@ -2872,7 +2878,7 @@ asm void ft_80083DCC(void)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80083E64(Fighter_GObj* gobj, ftCollisionBox* ecb, HSD_GObjEvent cb)
@@ -2962,7 +2968,7 @@ lbl_80083F74:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80083F88(HSD_GObj* gobj)
@@ -3020,7 +3026,7 @@ lbl_80084020:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_8008403C(HSD_GObj*, HSD_GObjEvent)
@@ -3083,7 +3089,7 @@ lbl_800840E4:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80084104(HSD_GObj* gobj)
@@ -3141,7 +3147,7 @@ lbl_8008419C:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_800841B8(ftCo_GObj* gobj, HSD_GObjEvent cb)
@@ -3205,7 +3211,7 @@ lbl_80084260:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80084280(HSD_GObj*)
@@ -3317,7 +3323,7 @@ lbl_800843E0:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_800843FC(ftCo_GObj* gobj)
@@ -3393,7 +3399,7 @@ lbl_800844D0:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_800844EC(void)
@@ -3458,7 +3464,7 @@ lbl_80084598:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_800845B4(ftCo_GObj* gobj)
@@ -3538,7 +3544,7 @@ lbl_80084694:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_800846B0(void)
@@ -3626,7 +3632,7 @@ lbl_800847B0:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_800847D0(ftCo_GObj* gobj, ftCollisionBox*)
@@ -3709,7 +3715,7 @@ lbl_800848C0:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_800848DC(ftCo_GObj* goibj, HSD_GObjEvent cb)
@@ -3794,7 +3800,7 @@ lbl_800849CC:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_800849EC(Fighter*, Fighter*)
@@ -3815,7 +3821,7 @@ asm void ft_800849EC(Fighter*, Fighter*)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm bool ft_80084A18(HSD_GObj*)
 { // clang-format off
@@ -3834,7 +3840,7 @@ asm bool ft_80084A18(HSD_GObj*)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm f32 ft_GetGroundFrictionMultiplier(Fighter* fp)
 {
@@ -3863,7 +3869,7 @@ lbl_80084A70:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ft_80084A80(void)
 {
@@ -3984,7 +3990,7 @@ lbl_80084BE8:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm bool ft_80084BFC(ftCo_GObj* gobj, int*, int*)
 { // clang-format off
@@ -4008,7 +4014,7 @@ asm bool ft_80084BFC(ftCo_GObj* gobj, int*, int*)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm bool ft_80084C38(HSD_GObj*, int*, int*, int*, char*)
 { // clang-format off
@@ -4032,7 +4038,7 @@ asm bool ft_80084C38(HSD_GObj*, int*, int*, int*, char*)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm bool ft_80084C74(Fighter_GObj*, int*, int*, int*)
 { // clang-format off
@@ -4056,7 +4062,7 @@ asm bool ft_80084C74(Fighter_GObj*, int*, int*, int*)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ft_80084CB0(Fighter*, ftCollisionBox*)
 { // clang-format off
@@ -4078,7 +4084,7 @@ asm void ft_80084CB0(Fighter*, ftCollisionBox*)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm bool ft_80084CE4(Fighter* attacker, Fighter* victim)
 {
@@ -4142,7 +4148,7 @@ lbl_80084DA0:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ft_80084DB0(HSD_GObj*)
 { // clang-format off
@@ -4180,7 +4186,7 @@ lbl_80084DFC:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80084E1C(void)
@@ -4249,7 +4255,7 @@ lbl_80084EBC:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80084EEC(HSD_GObj* gobj)
@@ -4279,7 +4285,7 @@ asm void ft_80084EEC(HSD_GObj* gobj)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80084F3C(HSD_GObj* gobj)
@@ -4319,7 +4325,7 @@ lbl_80084F88:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80084FA8(HSD_GObj* gobj)
@@ -4354,7 +4360,7 @@ lbl_80084FEC:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80085004(ftCo_GObj* gobj)
@@ -4389,7 +4395,7 @@ void ft_80085030(HSD_GObj* gobj, float gr_friction, float facing_dir)
 
 void ft_800850E0(void);
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80085088(HSD_GObj*)
@@ -4410,7 +4416,7 @@ asm void ft_80085088(HSD_GObj*)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_800850B4(void)
@@ -4431,7 +4437,7 @@ asm void ft_800850B4(void)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_800850E0(void)
@@ -4465,7 +4471,7 @@ lbl_80085118:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80085134(HSD_GObj* gobj)
@@ -4483,7 +4489,7 @@ asm void ft_80085134(HSD_GObj* gobj)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80085154(HSD_GObj* gobj)
@@ -4520,7 +4526,7 @@ asm void ft_80085154(HSD_GObj* gobj)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_800851C0(HSD_GObj*)
@@ -4534,7 +4540,7 @@ asm void ft_800851C0(HSD_GObj*)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_800851D0(void)
@@ -4559,7 +4565,7 @@ lbl_800851F8:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80085204(HSD_GObj* gobj)

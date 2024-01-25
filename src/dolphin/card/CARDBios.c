@@ -1,9 +1,14 @@
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDMount.h>
+#include <dolphin/dsp/dsp.h>
+#include <dolphin/dvd/dvd.h>
 #include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSExi.h>
+#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSReset.h>
+#include <dolphin/os/OSThread.h>
+#include <dolphin/os/OSTime.h>
 
 CARDControl __CARDBlock[2];
 DVDDiskID __CARDDiskNone;

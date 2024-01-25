@@ -1,21 +1,19 @@
-#include "ft/forward.h"
-
 #include "ftCo_DamageSong.h"
 
 #include "ftCo_0C35.h"
 #include "ftCo_Lift.h"
 
 #include "ft/fighter.h"
-#include "ft/ft_0819.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "pl/player.h"
 
 #include <placeholder.h>
+#include <stddef.h>
 
 /* 0C3390 */ static void ftCo_800C3390(ftCo_GObj* gobj);
 /* 0C3480 */ static void ftCo_800C3480(ftCo_GObj* gobj);
@@ -40,7 +38,7 @@ static inline float inlineA0(ftCo_Fighter* fp, bool arg1)
 }
 
 ASM void ftCo_800C318C(ftCo_GObj* gobj, bool arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007DB58(gobj);
@@ -144,7 +142,7 @@ static inline bool inlineB0(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_DamageSong_Anim(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     if (!inlineB0(gobj) && !ftAnim_IsFramesRemaining(gobj)) {
         ftCo_800C3390(gobj);
@@ -213,7 +211,7 @@ void ftCo_DamageSong_Coll(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_800C3390(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter_ChangeMotionState(gobj, ftCo_MS_DamageSongWait,
                               Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim, 0, 1, 0,
@@ -241,7 +239,7 @@ ASM void ftCo_800C3390(ftCo_GObj* gobj)
 #endif /* clang-format on */
 
 ASM void ftCo_DamageSongWait_Anim(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     inlineB0(gobj);
 }
@@ -295,7 +293,7 @@ void ftCo_DamageSongWait_Coll(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_800C3480(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter_ChangeMotionState(gobj, ftCo_MS_DamageSongRv, Ft_MF_None, 0, 1, 0,
                               NULL);

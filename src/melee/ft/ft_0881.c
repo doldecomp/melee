@@ -1,11 +1,15 @@
 #include "ft_0881.h"
 
-#include "db/db_2253.h"
 #include "ft/ft_0877.h"
+#include "ft/inlines.h"
 #include "lb/lbaudio_ax.h"
 #include "pl/pl_0371.h"
 
 #include <baselib/random.h>
+
+#ifdef MUST_MATCH
+#include "melee/db/db_2253.h"
+#endif
 
 /* literal */ float const ft_804D83E0 = 1;
 
@@ -32,7 +36,7 @@ static void inlineA0(Fighter* fp, int arg1, int arg2, int arg3)
 }
 
 ASM void ft_800881D8(Fighter* fp, int arg1, int arg2, int arg3)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     if (!fp->x2225_b6) {
         inlineA0(fp, arg1, arg2, arg3);
@@ -141,7 +145,7 @@ lbl_80088308:
 #endif /* clang-format on */
 
 ASM void ft_80088328(Fighter* fp, int arg1, int arg2, int arg3)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -241,7 +245,7 @@ lbl_80088458:
 #endif /* clang-format on */
 
 ASM void ft_80088478(Fighter* fp, int arg0, int arg1, int arg2)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -292,7 +296,7 @@ lbl_800884F4:
 #endif /* clang-format on */
 
 ASM void ft_80088510(Fighter* fp, int arg1, int arg2, int arg3)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -343,7 +347,7 @@ lbl_8008858C:
 #endif /* clang-format on */
 
 ASM void ft_800885A8(Fighter* fp, int arg1, int arg2, int arg3)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -394,7 +398,7 @@ lbl_80088624:
 #endif /* clang-format on */
 
 ASM void ft_80088640(Fighter* arg0, int arg1, int arg2, int arg3)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -445,7 +449,7 @@ lbl_800886BC:
 #endif /* clang-format on */
 
 ASM void ftCo_800886D8(Fighter* fp, int arg0, int arg1, int arg2)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -496,7 +500,7 @@ lbl_80088754:
 #endif /* clang-format on */
 
 ASM void ft_80088770(Fighter* fp)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -530,7 +534,7 @@ ASM void ft_80088770(Fighter* fp)
 #endif /* clang-format on */
 
 ASM void ft_800887CC(Fighter* fp)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -564,7 +568,7 @@ ASM void ft_800887CC(Fighter* fp)
 #endif /* clang-format on */
 
 ASM void ft_80088828(Fighter* fp)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -598,7 +602,7 @@ ASM void ft_80088828(Fighter* fp)
 #endif /* clang-format on */
 
 ASM void ft_80088884(Fighter* fp)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -632,7 +636,7 @@ ASM void ft_80088884(Fighter* fp)
 #endif /* clang-format on */
 
 ASM void ft_800888E0(Fighter* fp)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -666,7 +670,7 @@ ASM void ft_800888E0(Fighter* fp)
 #endif /* clang-format on */
 
 ASM void ft_8008893C(Fighter* fp)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -700,7 +704,7 @@ ASM void ft_8008893C(Fighter* fp)
 #endif /* clang-format on */
 
 ASM UNK_RET ft_80088998(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -741,7 +745,7 @@ void ft_800889F4(Fighter* fp, FtCollisionData* coll)
 }
 
 ASM void ft_80088A50(Fighter* fp)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -883,7 +887,7 @@ ASM void ft_80088A50(Fighter* fp)
 #endif /* clang-format on */
 
 ASM void ft_80088C5C(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -1201,7 +1205,7 @@ void ft_800890D0(Fighter* fp, uint move_id)
 }
 
 ASM UNK_RET ft_80089118(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -1293,7 +1297,7 @@ lbl_80089214:
 #endif /* clang-format on */
 
 ASM UNK_RET ft_80089228(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }

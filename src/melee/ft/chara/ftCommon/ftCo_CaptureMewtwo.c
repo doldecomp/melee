@@ -1,5 +1,4 @@
 #include <platform.h>
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
 
 #include "ftCo_CaptureMewtwo.h"
@@ -11,6 +10,7 @@
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
 
 static inline void doEnter(ftCo_GObj* gobj, ftCo_GObj* victim_gobj,
                            FtMotionId msid, FtMotionId victim_msid)

@@ -2,7 +2,6 @@
 
 #include "ftEmblem/ftFe_Init.h"
 
-#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
@@ -12,6 +11,9 @@
 #include "ftMars/ftMs_SpecialLw.h"
 #include "ftMars/ftMs_SpecialN.h"
 #include "ftMars/ftMs_SpecialS.h"
+#include "ftMars/types.h"
+
+#include <baselib/gobj.h>
 
 MotionState ftFe_Init_MotionStateTable[ftMs_MS_SelfCount] = {
     {

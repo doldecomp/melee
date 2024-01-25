@@ -1,12 +1,17 @@
 #ifndef _grtlib_h_
 #define _grtlib_h_
 
+#include <platform.h>
 #include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "gr/stage.h"
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+
+struct UnkGeneratorStruct;
 
 struct UnkGeneratorStruct* grLib_801C96F8(s32, s8, S32Vec3*);
 void grLib_801C97DC(s32, s32, HSD_JObj*);

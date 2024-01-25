@@ -1,3 +1,5 @@
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjuserdata.h>
 
 void GObj_InitUserData(HSD_GObj* gobj, u8 kind,

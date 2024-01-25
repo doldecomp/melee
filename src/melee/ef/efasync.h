@@ -1,6 +1,7 @@
 #ifndef MELEE_EF_EFASYNC_H
 #define MELEE_EF_EFASYNC_H
 
+#include <platform.h>
 #include <baselib/forward.h>
 
 void efAsync_8006737C(s8);

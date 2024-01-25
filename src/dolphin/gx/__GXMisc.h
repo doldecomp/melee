@@ -1,7 +1,10 @@
 #ifndef DOLPHIN_GX___GXMISC_HG
 #define DOLPHIN_GX___GXMISC_HG
 
+#include <platform.h>
+
 #include <dolphin/gx/__types.h>
+#include <dolphin/gx/GXEnum.h>
 
 /* 00339BB0 */ extern void __GXPEInit(void);
 void GXPokeZMode(bool compare_enable, GXCompare func, bool update_enable);

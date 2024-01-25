@@ -2,7 +2,9 @@
 #define _video_h_
 
 #include <platform.h>
+#include <dolphin/gx/forward.h>
 
+#include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/types.h>
 
 #define HSD_VI_XFB_MAX 3

@@ -1,6 +1,7 @@
 #ifndef GALE01_12832C
 #define GALE01_12832C
 
+#include <platform.h>
 #include "ftSamus/forward.h"
 #include <baselib/forward.h>
 

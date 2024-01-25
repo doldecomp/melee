@@ -2,6 +2,7 @@
 #define MELEE_IF_IFSTATUS_H
 
 #include <platform.h>
+#include <baselib/forward.h>
 
 #include "pl/player.h"
 

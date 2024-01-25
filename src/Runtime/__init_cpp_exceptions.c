@@ -12,7 +12,7 @@ static int fragmentID = -2;
  */
 SECTION_INIT extern __eti_init_info _eti_init_info_[];
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 static asm char* GetR2(void)
 { // clang-format off
@@ -29,7 +29,7 @@ void __fini_cpp_exceptions(void)
     }
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 void __init_cpp_exceptions(void)
 {

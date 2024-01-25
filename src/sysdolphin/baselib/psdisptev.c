@@ -1,4 +1,5 @@
-#include <dolphin/gx/GXAttr.h>
+#include <platform.h>
+
 #include <baselib/psdisptev.h>
 
 extern s32 prevTev[2];

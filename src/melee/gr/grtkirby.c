@@ -1,4 +1,7 @@
-#include "gr/grtkirby.h"
+
+#include <platform.h>
+#include "lb/forward.h"
+#include <baselib/forward.h>
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
@@ -10,8 +13,9 @@
 
 #include <dolphin/mtx/types.h>
 #include <dolphin/os.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
-#include <baselib/jobj.h>
+#include <baselib/gobjproc.h>
 
 void grTKirby_80221364(int);                   /* static */
 void grTKirby_80221368(void);                  /* static */

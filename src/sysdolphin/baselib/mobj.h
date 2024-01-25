@@ -2,8 +2,10 @@
 #define _mobj_h_
 
 #include <platform.h>
+#include <dolphin/gx/forward.h>
 #include <baselib/forward.h>
 
+#include <dolphin/gx/types.h>
 #include <baselib/aobj.h>
 #include <baselib/class.h>
 #include <baselib/texp.h>

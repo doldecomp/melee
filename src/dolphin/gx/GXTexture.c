@@ -1,13 +1,16 @@
 #include "dolphin/gx/forward.h"
 
-#include <__mem.h>
-#include <common_structs.h>
 #include <placeholder.h>
 #include <dolphin/gx/__GXBump.h>
 #include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/__types.h>
 #include <dolphin/gx/GXTexture.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
+#include "Runtime/__mem.h"
+#endif
+
+#ifdef MUST_MATCH
 
 static Vec2 const GXTexture_804DE268 = { 16.0F, 0.0F };
 static f64 const GXTexture_804DE270 = 4503599627370496.0L;
@@ -216,7 +219,7 @@ lbl_8033E8D8:
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void __GetImageTileCount(u32, s16, s16, s32*, s32*, s32*)
@@ -287,7 +290,7 @@ lbl_8033E9A8:
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXInitTexObj(unk_t, u32, u16, u16, s32, s32, s32, s8)
@@ -468,7 +471,7 @@ lbl_8033EBCC:
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXInitTexObjCI(unk_t, s32, u16, u16, s32, s32, s32, s8)
@@ -505,7 +508,7 @@ void GXInitTexObjCI(unk_t arg0, s32 arg1, u16 arg2, u16 arg3, s32 arg4,
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXInitTexObjLOD(unk_t, s32, s32, s32, s8, s32, f32, f32, f32){
@@ -642,7 +645,7 @@ GXTexFmt GXGetTexObjFmt(GXTexObj* tex_obj)
     return tex_obj->tex_fmt;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXLoadTexObjPreLoaded(unk_t, unk_t, s32)
@@ -772,7 +775,7 @@ void GXLoadTexObj(unk_t arg0, s32 arg1)
     GXLoadTexObjPreLoaded(arg0, __GXContexts.main->callbacks[0x98](), arg1);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXInitTlutObj(unk_t, u32, s32, u16)
@@ -801,7 +804,7 @@ asm void GXInitTlutObj(unk_t, u32, s32, u16)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXLoadTlut(unk_t, s32)
@@ -851,7 +854,7 @@ asm void GXLoadTlut(unk_t, s32)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXInitTexCacheRegion(unk_t, s8, u32, s32, u32, s32, s32)
@@ -979,7 +982,7 @@ GXTexRegionCallback GXSetTlutRegionCallback(GXTexRegionCallback arg0)
     return result;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void __SetSURegs(s32, s32)
@@ -1041,7 +1044,7 @@ asm void __SetSURegs(s32, s32)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void __GXSetSUTexSize(void)
@@ -1165,7 +1168,7 @@ void __GXSetSUTexSize(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void __GXSetTmemConfig(s32)

@@ -1,3 +1,5 @@
+#include "lb/forward.h"
+
 #include "gr/grbattle.h"
 
 #include "gm/gm_1601.h"
@@ -7,11 +9,16 @@
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/stage.h"
+#include "gr/types.h"
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx/types.h>
 #include <dolphin/os.h>
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 

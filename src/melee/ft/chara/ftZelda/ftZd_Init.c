@@ -7,12 +7,12 @@
 #include "ftZd_SpecialN.h"
 #include "ftZd_SpecialS.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftZelda/types.h"
+#include "it/it_26B1.h"
 
 MotionState ftZd_Init_MotionStateTable[ftZd_MS_SelfCount] = {
     {

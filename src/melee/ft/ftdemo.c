@@ -1,3 +1,4 @@
+#include <platform.h>
 #include "pl/forward.h"
 
 #include "ftdemo.h"
@@ -10,20 +11,30 @@
 #include "ft/ft_0BF0.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftdata.h"
 #include "ft/ftdrawcommon.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_09CB.h"
 #include "ftCommon/ftCo_09F4.h"
 #include "ftCommon/ftCo_DemoCallback0.h"
 #include "ftCommon/ftCo_Init.h"
 #include "lb/lbshadow.h"
+#include "pl/types.h"
 
 #include <math.h>
 #include <placeholder.h>
+#include <dolphin/os.h>
+#include <baselib/archive.h>
 #include <baselib/debug.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
+#include <baselib/gobjuserdata.h>
+#include <baselib/objalloc.h>
 
 static HSD_GObjEvent on_create_fighter[16] = {
     ftCo_800BECB0, ftCo_800BED88, ftCo_800BEF04, NULL,
@@ -33,7 +44,7 @@ static HSD_GObjEvent on_create_fighter[16] = {
 };
 
 ASM Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter_GObj* gobj = GObj_Create(4, 8, 0);
     GObj_SetupGXLink(gobj, ftDrawCommon_80080E18, 5, 0);

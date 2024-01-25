@@ -2,7 +2,6 @@
 
 #include "grcorneria.h"
 #include "grdatfiles.h"
-#include "grdisplay.h"
 #include "grizumi.h"
 #include "grkongo.h"
 #include "grmaterial.h"
@@ -13,18 +12,16 @@
 #include "stage.h"
 
 #include "cm/camera.h"
-#include "ft/ft_0877.h"
 #include "ft/ftdevice.h"
-#include "ft/ftlib.h"
 #include "gm/gm_1601.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
-#include "it/item.h"
 #include "it/items/it_27CF.h"
+#include "it/types.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
+#include "lb/lbrefract.h"
 #include "lb/lbshadow.h"
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
@@ -32,16 +29,19 @@
 #include "pl/player.h"
 #include "un/un_2FC9.h"
 
+#include <common_structs.h>
 #include <placeholder.h>
 #include <trigf.h>
-#include <dolphin/mtx.h>
-#include <dolphin/mtx/types.h>
-#include <dolphin/mtx/vec.h>
+#include <dolphin/gx/types.h>
 #include <dolphin/os.h>
+#include <baselib/aobj.h>
+#include <baselib/cobj.h>
+#include <baselib/debug.h>
 #include <baselib/fog.h>
-#include <baselib/gobjgxlink.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
+#include <baselib/gobjproc.h>
 #include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
@@ -50,6 +50,13 @@
 #include <baselib/random.h>
 #include <baselib/spline.h>
 #include <baselib/wobj.h>
+
+#ifdef MUST_MATCH
+#include "dolphin/mtx/vec.h"
+#include "melee/ft/ftlib.h"
+#include "melee/gr/grdisplay.h"
+#include "melee/lb/lb_00F9.h"
+#endif
 
 /* 1BFFA8 */ static void Ground_801BFFA8(void);
 /* 1BFFAC */ static void Ground_801BFFAC(bool);
@@ -535,7 +542,7 @@ HSD_Joint const Ground_803B7E0C = {
 };
 
 ASM void Ground_801C0C2C(HSD_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -893,7 +900,7 @@ HSD_JObj* Ground_801C13D0(s32 arg0, s32 depth)
 static char Ground_804D44F8[8] = "archive";
 
 ASM HSD_GObj* Ground_801C14D0(int gobj_id)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -1431,7 +1438,7 @@ void* Ground_801C1E84(void)
 }
 
 ASM void Ground_801C1E94(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -1580,7 +1587,7 @@ char lightset[9] = "lightset";
 char plightset[10] = "*lightset";
 
 static ASM UNK_T Ground_801C20E0(UnkArchiveStruct* arg0, UNK_T arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -1980,7 +1987,7 @@ LITERAL char msg1[] =
 LITERAL char msg2[] = " stageid=%d\n";
 
 ASM void Ground_801C28CC(UNK_T arg0, s32 arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -2291,7 +2298,7 @@ bool Ground_801C2ED0(HSD_JObj* jobj, s32 arg1)
 static ATTRIBUTE_USED s16 Ground_804D6954;
 
 ASM void Ground_801C2FE0(HSD_GObj* arg0)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -2568,7 +2575,7 @@ u32 unknown[] = {
 char unkmsg[] = "%s:%d:Error (root=%08x joint=%08x)\n";
 
 static ASM void Ground_801C34AC(s32 arg0, HSD_JObj* arg1, HSD_Joint* arg2)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -2762,7 +2769,7 @@ lbl_801C36E0:
 #endif /* clang-format on */
 
 ASM void Ground_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -3238,7 +3245,7 @@ f32 Ground_801C3F20(HSD_JObj* arg0)
 }
 
 ASM HSD_JObj* Ground_801C3FA4(HSD_GObj* gobj, s32 depth)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -3563,7 +3570,7 @@ static void Ground_801C4640(HSD_GObj* gobj)
 }
 
 ASM void Ground_801C466C(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -4025,7 +4032,7 @@ SDATA char Ground_804D4524[] = "fog.h";
 SDATA char Ground_804D452C[] = "fog";
 
 ASM void Ground_801C4FAC(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -4481,7 +4488,7 @@ s32 Ground_801C5840(void)
 }
 
 ASM void Ground_801C5878(void)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }

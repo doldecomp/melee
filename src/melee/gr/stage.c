@@ -8,6 +8,7 @@
 
 #include <dolphin/mtx/types.h>
 #include <baselib/debug.h>
+#include <baselib/random.h>
 
 extern struct StageInfo stage_info;
 

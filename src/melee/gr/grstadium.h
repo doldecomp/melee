@@ -1,6 +1,9 @@
 #ifndef MELEE_GR_GRSTADIUM_H
 #define MELEE_GR_GRSTADIUM_H
 
+#include <baselib/forward.h>
+
+#include <stdbool.h>
 #include <baselib/gobj.h>
 
 void grStadium_801D511C(void);

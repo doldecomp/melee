@@ -1,17 +1,17 @@
-#include "forward.h"
-#include "ft/forward.h"
+#include <platform.h>
 
 #include "ftGw_Attack11.h"
 
 #include "ftGw_Init.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/inlines.h"
+#include "ft/ftanim.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Attack1.h"
 #include "ftCommon/ftCo_ItemGet.h"
+#include "ftGameWatch/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 

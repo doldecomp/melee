@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include "lb/lbvector.h"
 
 #include "lb/lbrefract.h"
@@ -5,8 +7,8 @@
 #include <math.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/types.h>
 #include <baselib/cobj.h>
+#include <baselib/debug.h>
 
 static float lbVector_Len(Vec3* vec)
 {

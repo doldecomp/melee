@@ -4,6 +4,7 @@
 
 #include "db/db_2253.h"
 #include "ft/ftlib.h"
+#include "ft/types.h"
 #include "gr/grdynamicattr.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
@@ -11,8 +12,9 @@
 #include "mp/mplib.h"
 
 #include <placeholder.h>
-#include <dolphin/mtx/types.h>
 #include <dolphin/os.h>
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
 #include <MSL/trigf.h>
 
 // 80041C78 https://decomp.me/scratch/V6eYQ
@@ -995,7 +997,7 @@ bool mpColl_80043BBC(CollData* arg0, s32* arg1)
     return false;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)

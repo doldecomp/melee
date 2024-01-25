@@ -4,6 +4,7 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
+#include <baselib/debug.h>
 #include <baselib/fobj.h>
 #include <baselib/id.h>
 #include <baselib/list.h>

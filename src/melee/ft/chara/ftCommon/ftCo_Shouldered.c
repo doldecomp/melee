@@ -1,5 +1,6 @@
 #include <platform.h>
-#include "ft/forward.h"
+#include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_Shouldered.h"
 
@@ -7,16 +8,19 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftCaptain/types.h"
+#include "ftCommon/types.h"
 #include "lb/lb_00B0.h"
-#include "pl/pl_0371.h"
 
 #include <common_structs.h>
 #include <placeholder.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #ifdef WIP
 #pragma force_active on
 #endif
@@ -28,7 +32,7 @@ double const ftCo_804D8758 = S32_TO_F32;
 /* 09C744 */ static void ftCo_8009C744(ftCo_GObj* gobj);
 
 ASM void ftCo_8009C5A4(ftCo_GObj* gobj, FtMotionId msid)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -94,7 +98,7 @@ lbl_8009C628:
 #endif /* clang-format on */
 
 ASM void ftCo_8009C640(ftCo_GObj* gobj, FtMotionId msid)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     ftCo_Fighter* fp = gobj->user_data;
     ftCommon_8007DBCC(fp, 0,
@@ -180,7 +184,7 @@ lbl_8009C728:
 #endif /* clang-format on */
 
 static ASM void ftCo_8009C744(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_GObj* vic_gobj = fp->victim_gobj;
@@ -279,7 +283,7 @@ static inline float inlineA0(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_Shouldered_Anim(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     ftCo_Fighter* fp = gobj->user_data;
     fp->mv.co.shouldered.x4 = ftCommon_8007DC08(fp, inlineA0(fp->victim_gobj));

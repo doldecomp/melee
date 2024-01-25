@@ -1,5 +1,7 @@
 #include "debug.h"
 
+#include <dolphin/os.h>
+
 struct UnkStruct80400430 {
     char filler0[0x52];
     char unk52;

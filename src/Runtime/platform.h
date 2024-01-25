@@ -5,8 +5,8 @@
 #define MWERKS_GNUC
 #endif
 
-#include <stdbool.h>
-#include <stddef.h>
+#include <stdbool.h> // IWYU pragma: export
+#include <stddef.h>  // IWYU pragma: export
 
 /// A signed 8-bit integer
 typedef signed char s8;

@@ -1,6 +1,6 @@
 #include "it_2725.h"
 
-#include "it/items/it_27CF.h"
+#include "it/types.h"
 #include "items/it_27CF.h"
 #include "items/it_2ADA.h"
 #include "items/it_2E5A.h"
@@ -75,6 +75,8 @@
 #include "items/ityoshistar.h"
 #include "items/itzeldadinfire.h"
 #include "items/itzeldadinfireexplode.h"
+
+#include <stddef.h>
 
 static int const count = 118;
 

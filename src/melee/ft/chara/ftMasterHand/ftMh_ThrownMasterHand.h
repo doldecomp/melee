@@ -1,6 +1,7 @@
 #ifndef GALE01_155D1C
 #define GALE01_155D1C
 
+#include <platform.h>
 #include <baselib/forward.h>
 
 /* 155D1C */ void ftMh_CaptureWaitMasterHand_80155D1C(HSD_GObj* gobj);

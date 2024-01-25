@@ -1,3 +1,8 @@
+#include <platform.h>
+#include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
+
 #include "gr/grtdonkey.h"
 
 #include "gr/granime.h"
@@ -5,10 +10,13 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "gr/types.h"
 #include "lb/lb_00F9.h"
 
 #include <dolphin/os.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 
 static void grTDonkey_80220228(int);
 static void grTDonkey_8022022C(void);

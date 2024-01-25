@@ -1,7 +1,9 @@
 #ifndef MELEE_FT_FTCAMERA_H
 #define MELEE_FT_FTCAMERA_H
 
+#include <platform.h>
 #include "ft/forward.h"
+#include <baselib/forward.h>
 
 #include "ft/fighter.h"
 

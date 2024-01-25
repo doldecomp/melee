@@ -3,6 +3,7 @@
 #ifndef GALE01_14E4F0
 #define GALE01_14E4F0
 
+#include <platform.h>
 #include <baselib/forward.h>
 
 /* 14E4F0 */ void ftGw_SpecialN_Coll(HSD_GObj* gobj);

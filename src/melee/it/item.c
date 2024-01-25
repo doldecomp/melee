@@ -1,4 +1,4 @@
-#include "forward.h"
+#include "lb/forward.h"
 
 #include "item.h"
 
@@ -11,8 +11,10 @@
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ft/ftlib.h"
+#include "ft/types.h"
 #include "gm/gm_1601.h"
 #include "gr/grlib.h"
+#include "gr/stage.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
@@ -20,14 +22,21 @@
 #include "mp/mplib.h"
 
 #include <common_structs.h>
-#include <dolphin/mtx.h>
-#include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os.h>
+#include <baselib/aobj.h>
+#include <baselib/class.h>
+#include <baselib/debug.h>
+#include <baselib/dobj.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/gobjuserdata.h>
+#include <baselib/jobj.h>
+#include <baselib/mobj.h>
+#include <baselib/pobj.h>
 
 /// Check if items are enabled
 bool Item_80266F3C(void)

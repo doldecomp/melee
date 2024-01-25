@@ -1,10 +1,14 @@
 #include "ftcamera.h"
 
-#include "fighter.h"
 #include "ftlib.h"
-#include "inlines.h"
+
+#include "ft/fighter.h"
+#include "ft/types.h"
+#include "gr/stage.h"
 
 #include <dolphin/mtx/types.h>
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
 
 struct UnkFloat6_Camera {
     Vec3 x0;

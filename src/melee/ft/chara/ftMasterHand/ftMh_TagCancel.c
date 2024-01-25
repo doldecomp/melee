@@ -1,9 +1,16 @@
+#include "ftCommon/forward.h"
+
 #include "ftMh_TagCancel.h"
 
-#include "ft/ft_0877.h"
+#include "ft/fighter.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Lift.h"
+
+#include <stdbool.h>
+#include <baselib/gobj.h>
 
 void ftMh_MS_388_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
 {

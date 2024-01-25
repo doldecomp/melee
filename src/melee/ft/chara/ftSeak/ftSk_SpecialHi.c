@@ -1,6 +1,6 @@
-#include "ftSk_SpecialHi.h"
+#include <platform.h>
 
-#include "ftCommon/ftCo_Shouldered.h"
+#include "ftSk_SpecialHi.h"
 
 #include <math.h>
 #include <placeholder.h>

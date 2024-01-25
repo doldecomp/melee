@@ -1,6 +1,7 @@
 #ifndef MELEE_FT_FTWALKCOMMON_H
 #define MELEE_FT_FTWALKCOMMON_H
 
+#include <platform.h>
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 

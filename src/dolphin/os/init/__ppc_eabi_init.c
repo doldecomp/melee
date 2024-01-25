@@ -1,15 +1,17 @@
 #include <placeholder.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/os/init/__ppc_eabi_init.h>
-#include <dolphin/os/OSCache.h>
-#include <dolphin/os/OSInit.h>
+
+#ifdef MUST_MATCH
+#include "dolphin/os/OSInit.h"
+#endif
 
 #define MSR_FP 0x2000
 
 extern Event __ctors[];
 static void __init_cpp(void);
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 SECTION_INIT asm void __init_hardware(void)
 { // clang-format off
@@ -33,7 +35,7 @@ void __init_hardware(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 SECTION_INIT asm void __flush_cache(void* address, size_t size)
 { // clang-format off

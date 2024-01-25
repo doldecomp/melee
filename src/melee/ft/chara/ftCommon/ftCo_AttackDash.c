@@ -1,24 +1,24 @@
 #include <platform.h>
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include <baselib/forward.h>
 
 #include "ftCo_AttackDash.h"
 
-#include "ftCo_08A6.h"
 #include "ftCo_ItemThrow.h"
-#include "ftCo_Shouldered.h"
 #include "ftCo_Wait.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftswing.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 #include "ftKirby/ftKb_Init.h"
+#include "it/it_26B1.h"
 
-#include <placeholder.h>
+#include <common_structs.h>
 
 /* 08B498 */ static void decideFighter(ftCo_GObj* gobj);
 /* 08B4D4 */ static void doEnter(ftCo_GObj* gobj);

@@ -1,9 +1,11 @@
-#include <common_structs.h>
-#include <placeholder.h>
-#include <dolphin/gx/__GXInit.h>
-#include <dolphin/gx/GXBump.h>
+#include <dolphin/gx/forward.h>
 
-#ifdef MWERKS_GEKKO
+#include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/__types.h>
+#include <dolphin/gx/GXBump.h>
+#include <dolphin/gx/GXEnum.h>
+
+#ifdef MUST_MATCH
 
 static Vec2 const GXBump_804DE290 = { 1024.0F, 0.0F };
 
@@ -56,7 +58,7 @@ asm void GXSetTevIndirect(s32, s32, u8, s32, s32, s32, s32, s32)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXSetIndTexMtx(s32, unk_t, s32)
@@ -161,7 +163,7 @@ lbl_8033F844:
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 // https://decomp.me/scratch/VEhb9 // 355 (96.97%)
 #pragma push
@@ -296,7 +298,7 @@ lbl_8033FB18:
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXSetIndTexOrder(s32, s32, s32)
@@ -398,7 +400,7 @@ void GXSetNumIndStages(s32 arg0)
     __GXContexts.main->x4F0_flags |= 6;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 // https://decomp.me/scratch/aRJcf // 362 (79.89%)
 #pragma push
@@ -428,7 +430,7 @@ asm void GXSetTevDirect(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void __GXUpdateBPMask(void)

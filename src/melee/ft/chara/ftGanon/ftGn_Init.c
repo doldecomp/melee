@@ -1,10 +1,9 @@
-#include "ft/forward.h"
 #include "ftCaptain/forward.h"
 #include "ftCommon/forward.h"
 
 #include "ftGn_Init.h"
 
-#include "ft/ft_0877.h"
+#include "ft/ftanim.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
@@ -14,6 +13,10 @@
 #include "ftCaptain/ftCa_SpecialLw.h"
 #include "ftCaptain/ftCa_SpecialN.h"
 #include "ftCaptain/ftCa_SpecialS.h"
+#include "ftCaptain/types.h"
+
+#include <stddef.h>
+#include <baselib/gobj.h>
 
 MotionState ftGn_Init_MotionStateTable[ftCa_MS_SelfCount] = {
     {

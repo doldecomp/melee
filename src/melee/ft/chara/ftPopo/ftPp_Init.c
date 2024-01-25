@@ -1,5 +1,4 @@
 #include "forward.h"
-#include "ft/forward.h"
 
 #include "ftPp_Init.h"
 
@@ -8,16 +7,13 @@
 #include "ftPp_SpecialS.h"
 #include "types.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftNana/ftNn_Init.h"
+#include "it/it_26B1.h"
 #include "it/items/it_27CF.h"
-#include "lb/lb_00B0.h"
 
 #include <baselib/gobj.h>
 

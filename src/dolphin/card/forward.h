@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include <dolphin/os.h>
+#include <dolphin/os/OSExi.h>
 
 typedef struct CARDFileInfo CARDFileInfo;
 typedef struct CARDStat CARDStat;

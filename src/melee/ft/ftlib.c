@@ -1,28 +1,35 @@
+#include "ftCommon/forward.h"
 #include "it/forward.h"
 
 #include "ftlib.h"
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftchangeparam.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/ftmetal.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ftGameWatch/ftGw_Init.h"
 #include "ftKirby/ftKb_Init.h"
 #include "gm/gm_1601.h"
+#include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbrefract.h"
 #include "pl/pl_0371.h"
 #include "pl/player.h"
 
-#include <dolphin/mtx/types.h>
-#include <baselib/jobj.h>
+#include <common_structs.h>
+#include <baselib/cobj.h>
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
+#include <baselib/random.h>
 #include <baselib/rumble.h>
 
 extern struct {

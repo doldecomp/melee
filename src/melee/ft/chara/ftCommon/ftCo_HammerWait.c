@@ -1,5 +1,5 @@
-#include "ft/forward.h"
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_HammerWait.h"
 
@@ -9,19 +9,23 @@
 #include "ftCo_HammerTurn.h"
 #include "ftCo_HammerWalk.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C31.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdevice.h"
+#include "ft/types.h"
+#include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/ithammer.h"
 #include "pl/plbonuslib.h"
+
+#include <common_structs.h>
 
 /* 0C5408 */ static void ftCo_800C5408(ftCo_Fighter* fp);
 /* 0C5588 */ static void ftCo_800C5588(ftCo_Fighter* fp);

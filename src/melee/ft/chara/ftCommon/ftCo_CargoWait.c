@@ -11,10 +11,10 @@
 #include "ftCo_CargoWalk.h"
 #include "ftCo_Shouldered.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
+#include "ftDonkey/types.h"
 
 bool ftCo_8009B4D0(ftCo_GObj* gobj)
 {

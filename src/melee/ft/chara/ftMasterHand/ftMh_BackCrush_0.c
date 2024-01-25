@@ -1,13 +1,19 @@
+#include <platform.h>
+
 #include "ftMh_BackCrush_0.h"
 
 #include "ftMh_Wait1_2.h"
 
 #include "ft/fighter.h"
+#include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftMasterHand/types.h"
+#include "pl/player.h"
 
 #include <dolphin/mtx/types.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 void ftMh_BackPunch_Coll(HSD_GObj* gobj) {}
 

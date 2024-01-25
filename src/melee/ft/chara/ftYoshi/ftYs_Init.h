@@ -1,11 +1,15 @@
 #ifndef MELEE_FT_CHARA_FTYOSHI_FTYOSHI1_H
 #define MELEE_FT_CHARA_FTYOSHI_FTYOSHI1_H
 
+#include <platform.h>
 #include "ft/forward.h"
+#include "ftCommon/forward.h"
 #include "ftYoshi/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
+
+struct S_UNK_YOSHI1;
 
 /* 12B6E8 */ void ftYs_Init_8012B6E8(Fighter* fp,
                                      struct S_UNK_YOSHI1* unk_struct_arg);

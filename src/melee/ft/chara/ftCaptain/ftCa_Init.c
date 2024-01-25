@@ -1,5 +1,5 @@
-#include "ft/forward.h"
 #include "ftCaptain/forward.h"
+#include "ftCommon/forward.h"
 
 #include "ftCa_Init.h"
 
@@ -9,7 +9,6 @@
 #include "ftCa_SpecialS.h"
 #include "types.h"
 
-#include "ft/ft_0877.h"
 #include "ft/ft_0CD1.h"
 #include "ft/ftcamera.h"
 #include "ft/ftlipstickswing.h"

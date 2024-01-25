@@ -9,20 +9,35 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "gr/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbdvd.h"
 #include "mp/mplib.h"
 
 #include <dolphin/gx/GXTexture.h>
+#include <dolphin/mtx.h>
 #include <dolphin/os.h>
+#include <baselib/aobj.h>
+#include <baselib/archive.h>
+#include <baselib/cobj.h>
+#include <baselib/debug.h>
 #include <baselib/displayfunc.h>
+#include <baselib/dobj.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
-#include <baselib/mtx.h>
+#include <baselib/gobjproc.h>
+#include <baselib/gobjuserdata.h>
+#include <baselib/jobj.h>
+#include <baselib/lobj.h>
+#include <baselib/memory.h>
+#include <baselib/mobj.h>
+#include <baselib/object.h>
+#include <baselib/random.h>
 #include <baselib/state.h>
+#include <baselib/wobj.h>
 
 // context stuff
 typedef struct FountainParams {

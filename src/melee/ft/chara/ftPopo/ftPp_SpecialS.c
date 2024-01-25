@@ -1,9 +1,7 @@
+#include <platform.h>
+
 #include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ftcamera.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
 
 #include <melee/ft/chara/ftPopo/ftPp_SpecialS.h>

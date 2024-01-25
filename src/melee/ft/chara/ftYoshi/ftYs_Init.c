@@ -10,17 +10,24 @@
 #include "types.h"
 
 #include "ef/efasync.h"
-#include "ft/ft_0877.h"
+#include "ft/fighter.h"
 #include "ft/ftanim.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_Guard.h"
+#include "it/it_26B1.h"
 
-#include <placeholder.h>
 #include <dolphin/os.h>
+#include <baselib/aobj.h>
+#include <baselib/debug.h>
+#include <baselib/dobj.h>
+#include <baselib/mobj.h>
+
+#ifdef MUST_MATCH
+#include "melee/ft/chara/ftCommon/ftCo_Guard.h"
+#include "melee/ft/ft_0877.h"
+#endif
 
 MotionState ftYs_Init_MotionStateTable[ftYs_MS_SelfCount] = {
     {
@@ -541,7 +548,7 @@ void ftYs_Init_OnKnockbackExit(HSD_GObj* gobj)
 /* static */ extern f32 const ftYs_Init_804D9A28;
 /* static */ extern u8 ftYs_Unk1_803B75C0[];
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm /* 12BDA0 */ void ftYs_Init_8012BDA0(ftCo_GObj* gobj)
@@ -607,7 +614,7 @@ void ftYs_Init_8012BE3C(HSD_GObj* gobj) {
     efAsync_Spawn(gobj, &fp2->x60C, FtPart_HipN, 1231, jobj, co_xBC);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 /* static */ extern f32 const ftYs_Init_804D9A2C;
 /* static */ extern f32 const ftYs_Init_804D9A28;

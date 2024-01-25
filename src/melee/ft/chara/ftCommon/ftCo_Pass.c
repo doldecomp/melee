@@ -1,5 +1,6 @@
 #include <platform.h>
 #include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_Pass.h"
 
@@ -13,12 +14,15 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 #include "mp/mpcoll.h"
+
+#include <common_structs.h>
 
 bool ftCo_80099F1C(ftCo_GObj* gobj)
 {

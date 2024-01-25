@@ -3,6 +3,8 @@
 
 #include <baselib/forward.h>
 
+#include <stdbool.h>
+
 /* 0DF938 */ bool ftDk_MS_341_800DF938(HSD_GObj* gobj);
 /* 0DF980 */ void ftDk_MS_341_800DF980(HSD_GObj* gobj);
 /* 0DF9F0 */ void ftDk_HeavyWait0_IASA(HSD_GObj* gobj);

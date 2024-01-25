@@ -1,9 +1,12 @@
 #ifndef GALE01_0C2600
 #define GALE01_0C2600
 
-#include "ftCommon/forward.h"
+#include <platform.h>
+#include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include <placeholder.h>
+#include <dolphin/mtx/types.h>
 
 struct _m2c_stack_ftCo_800C2600 {
     /* 0x000 */ char pad_0[0x24];

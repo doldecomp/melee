@@ -1,6 +1,7 @@
 #ifndef GALE01_13ADB4
 #define GALE01_13ADB4
 
+#include <platform.h>
 #include <baselib/forward.h>
 
 /* 13ADB4 */ void ftZd_SpecialLw_8013ADB4(HSD_GObj* gobj);

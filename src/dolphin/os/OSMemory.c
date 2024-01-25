@@ -1,4 +1,5 @@
 #include <placeholder.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSMemory.h>
@@ -46,7 +47,7 @@ static void MEMIntrruptHandler(__OSInterrupt interrupt, OSContext* context)
     __OSUnhandledException(OS_ERROR_PROTECTION, context, cause, addr);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 asm void Config24MB(void)
 { // clang-format off
     nofralloc
@@ -91,7 +92,7 @@ void Config24MB(void)
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 asm void Config48MB(void)
 { // clang-format off
     nofralloc
@@ -136,7 +137,7 @@ void Config48MB(void)
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 asm void RealMode(register Event)
 { // clang-format off
     nofralloc

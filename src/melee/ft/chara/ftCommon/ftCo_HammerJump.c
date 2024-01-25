@@ -1,3 +1,6 @@
+#include <platform.h>
+#include "ft/forward.h"
+
 #include "ftCo_HammerJump.h"
 
 #include "ftCo_HammerFall.h"
@@ -5,7 +8,6 @@
 #include "ftCo_HammerWait.h"
 
 #include "ft/fighter.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
 #include "ft/ftcommon.h"
 

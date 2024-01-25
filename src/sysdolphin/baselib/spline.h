@@ -1,6 +1,7 @@
 #ifndef SYSDOLPHIN_BASELIB_SPLINE_H
 #define SYSDOLPHIN_BASELIB_SPLINE_H
 
+#include <platform.h>
 #include <baselib/forward.h>
 
 #include <dolphin/mtx/types.h>

@@ -1,6 +1,8 @@
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXTransform.h>
 #include <baselib/displayfunc.h>
+#include <baselib/objalloc.h>
+#include <baselib/pobj.h>
 #include <baselib/state.h>
 #include <baselib/tev.h>
 

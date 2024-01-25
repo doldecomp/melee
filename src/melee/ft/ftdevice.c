@@ -1,8 +1,9 @@
 #include "ftdevice.h"
 
 #include "ft/inlines.h"
-#include "ft/types.h"
 
+#include <m2c_macros.h>
+#include <dolphin/os.h>
 #include <baselib/debug.h>
 
 #ifdef WIP
@@ -49,7 +50,7 @@ void ftCo_800C06C0(void)
 }
 
 ASM UNK_RET ftCo_800C06E8(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -93,7 +94,7 @@ lbl_800C0754:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800C0764(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -144,7 +145,7 @@ lbl_800C07E8:
 #endif /* clang-format on */
 
 ASM void ftCo_800C07F8(int arg0, int arg1, int arg2)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     IntVec3* temp_r6;
 

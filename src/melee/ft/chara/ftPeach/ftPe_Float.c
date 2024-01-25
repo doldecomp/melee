@@ -1,19 +1,18 @@
 #include <platform.h>
-#include "forward.h"
 #include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftPe_Float.h"
 
 #include "ftPe_FloatAttack.h"
 #include "ftPe_FloatFall.h"
-#include "ftPe_Init.h"
 
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_SpecialAir.h"
 #include "ftPeach/types.h"
@@ -59,7 +58,7 @@ bool ftPe_8011BAD8(HSD_GObj* gobj)
     return false;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftPe_8011BB6C(HSD_GObj*, bool)
 { // clang-format off

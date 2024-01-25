@@ -1,4 +1,3 @@
-#include "forward.h"
 #include "lb/forward.h"
 
 #include "ftGw_SpecialLw.h"
@@ -6,21 +5,21 @@
 #include "ftGw_Init.h"
 #include "types.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
+#include <common_structs.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/gobjproc.h>
 
 /// Create Oil Panic Item
 void ftGw_SpecialLw_ItemPanicSetup(HSD_GObj* gobj)

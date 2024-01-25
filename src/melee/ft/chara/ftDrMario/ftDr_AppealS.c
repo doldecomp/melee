@@ -1,17 +1,21 @@
+#include <platform.h>
+
 #include "ftDr_AppealS.h"
 
 #include "ftDr_Init.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
+#include "ft/types.h"
 #include "ftMario/ftMr_SpecialN.h"
+#include "ftMario/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx/types.h>
+#include <baselib/gobj.h>
 
 void ftDr_AppealS_Anim(HSD_GObj* gobj)
 {

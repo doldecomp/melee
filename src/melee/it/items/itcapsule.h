@@ -2,8 +2,11 @@
 #define GALE01_27CF00
 
 #include "it/forward.h"
+#include <baselib/forward.h>
 
 #include "it/types.h"
+
+#include <stdbool.h>
 
 void it_8027CF00(Item_GObj*);
 void it_8027CF30(Item_GObj*);

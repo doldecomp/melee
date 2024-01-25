@@ -5,6 +5,8 @@
 
 #include "ft/types.h"
 
+#include <stdbool.h>
+
 /* 14F418 */ void ftGl_Init_OnDeath(HSD_GObj* gobj);
 /* 14F440 */ void ftGl_Init_OnLoad(HSD_GObj* gobj);
 /* 14F460 */ void ftGl_Init_OnItemPickup(HSD_GObj* gobj, bool flag);

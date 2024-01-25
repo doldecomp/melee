@@ -1,15 +1,16 @@
 #ifndef MELEE_GR_TYPES_H
 #define MELEE_GR_TYPES_H
 
+#include <platform.h>
+#include "gr/forward.h" // IWYU pragma: export
 #include "it/forward.h"
 #include "lb/forward.h"
+#include "sc/forward.h"
+#include <dolphin/gx/forward.h>
+#include <baselib/forward.h>
 
-#include "sc/scene.h"
-
+#include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
 
 /// @todo Finish values, use @c PascalCase
 typedef enum InternalStageId {
@@ -307,7 +308,7 @@ struct GroundVars_izumi3 {
     u8 xE0_pad[0x218 - 0xE0];
 };
 
-typedef struct Ground {
+struct Ground {
     int x0;         // 0x0
     HSD_GObj* gobj; // 0x4
     HSD_GObjEvent x8_callback;
@@ -343,6 +344,6 @@ typedef struct Ground {
         struct GroundVars_izumi2 izumi2;
         struct GroundVars_izumi3 izumi3;
     } gv;
-} Ground;
+};
 
 #endif

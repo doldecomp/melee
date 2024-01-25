@@ -1,12 +1,12 @@
 #include <platform.h>
 #include "ftCommon/forward.h"
+#include <baselib/forward.h>
 
 #include "ftCo_DamageFall.h"
 
 #include "ftCo_AirCatch.h"
 #include "ftCo_AttackAir.h"
 #include "ftCo_DamageIce.h"
-#include "ftCo_FallSpecial.h"
 #include "ftCo_HammerFall.h"
 #include "ftCo_HammerWait.h"
 #include "ftCo_ItemThrow.h"
@@ -17,20 +17,21 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0CEE.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
 
-#include <placeholder.h>
+#include <m2c_macros.h>
+#include <baselib/gobj.h>
 
 void ftCo_80090574(ftCo_GObj* gobj)
 {
     ft_80081DD4(gobj);
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #pragma push
 asm void ftCo_80090594(ftCo_Fighter*, enum_t, int, FtMotionId, enum_t, float)
 { // clang-format off

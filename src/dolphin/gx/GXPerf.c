@@ -1,8 +1,13 @@
-#include <placeholder.h>
-#include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/__types.h>
 #include <dolphin/gx/GXPerf.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
+#include "dolphin/gx/__GXInit.h"
+
+#include <placeholder.h>
+#endif
+
+#ifdef MUST_MATCH
 
 void GXPerf_80341E70(void);
 void GXPerf_80341E8C(void);

@@ -1,6 +1,9 @@
 #ifndef SYSDOLPHIN_BASELIB_GOBJOBJECT_H
 #define SYSDOLPHIN_BASELIB_GOBJOBJECT_H
 
+#include <platform.h>
+#include <baselib/forward.h>
+
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 

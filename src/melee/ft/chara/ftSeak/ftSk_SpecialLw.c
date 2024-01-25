@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include "ftSeak/ftSk_SpecialLw.h"
 
 f32 const ftSk_Init_804D9698 = 0.4000000059604645F;

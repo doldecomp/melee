@@ -1,12 +1,22 @@
+#include <platform.h>
 #include "ftCommon/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "ftCo_CaptureWaitKirby.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 #include "ftKirby/ftKb_Init.h"
+
+#include <placeholder.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 LITERAL float const ftCo_804D8BB8 = 0;
 LITERAL float const ftCo_804D8BBC = 1;
@@ -14,7 +24,7 @@ LITERAL double const ftCo_804D8BC0 = U32_TO_F32;
 LITERAL double const ftCo_804D8BC8 = S32_TO_F32;
 
 ASM void ftCo_800BD620(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     ftCo_Fighter* victim_fp = GET_FIGHTER(fp->victim_gobj);
@@ -96,12 +106,12 @@ static inline void inlineA0(ftCo_Fighter* fp, int arg1)
 }
 
 void ftCo_CaptureWaitKirby_Anim(ftCo_GObj* gobj) {}
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
 #endif
 ASM void ftCo_800BD6EC(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.lstick.y >= p_ftCommonData->x70_someLStickYMax &&
@@ -118,7 +128,7 @@ ASM void ftCo_800BD6EC(ftCo_GObj* gobj)
         ftKb_SpecialN_800F5954(fp->victim_gobj);
     }
 }
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma pop
 #endif
 
@@ -201,7 +211,7 @@ static inline void inlineB0(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_CaptureWaitKirby_IASA(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);

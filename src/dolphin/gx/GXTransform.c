@@ -1,12 +1,13 @@
-#include <common_structs.h>
+#include <dolphin/gx/forward.h>
+
 #include <placeholder.h>
-#include <dolphin/gx/__GX_unknown_001.h>
 #include <dolphin/gx/__GXInit.h>
-#include <dolphin/gx/GX_unknown_001/__GX_unknown_001.h>
+#include <dolphin/gx/__types.h>
+#include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/GXStubs.h>
 #include <dolphin/gx/GXTransform.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void GXProject(f32 x, f32 y, f32 z, MtxPtr mtx, f32* pm, f32* vp, f32* sx,
@@ -158,7 +159,7 @@ void GXGetProjectionv(f32* proj)
     proj[6] = __GXContexts.main->projection_v[5];
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 asm void WriteMTXPS4x3(register float* src, register float* dst)
 { // clang-format off
@@ -185,7 +186,7 @@ void WriteMTXPS4x3(float* src, float* dst)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 asm void WriteMTXPS3x3from3x4(register float* src, register float* dst)
 { // clang-format off
@@ -212,7 +213,7 @@ void WriteMTXPS3x3from3x4(float* src, float* dst)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 asm void WriteMTXPS4x2(register float* src, register float* dst)
 { // clang-format off

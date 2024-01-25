@@ -1,6 +1,9 @@
 #ifndef DOLPHIN_CARD_CARDOPEN_H
 #define DOLPHIN_CARD_CARDOPEN_H
 
+#include <platform.h>
+#include <dolphin/card/forward.h>
+
 #include <dolphin/card.h>
 #include <dolphin/os/OSExi.h>
 

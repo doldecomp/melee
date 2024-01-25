@@ -2,6 +2,7 @@
 #define _controller_h_
 
 #include <platform.h>
+#include <dolphin/pad/forward.h>
 #include <baselib/forward.h>
 
 #include <dolphin/pad/pad.h>

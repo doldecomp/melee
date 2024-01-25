@@ -1,5 +1,6 @@
 #include "ftafterimage.h"
 
+#ifdef MUST_MATCH
 #include "it/it_26B1.h"
 #include "it/items/itsword.h"
 #include "lb/lb_00B0.h"
@@ -7,12 +8,14 @@
 
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXGeometry.h>
+#include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/gx/GXTev.h>
 #include <dolphin/gx/GXTransform.h>
 #include <baselib/cobj.h>
 #include <baselib/state.h>
 #include <MetroTRK/intrinsics.h>
+#endif
 
 /* literal */ char ftCo_803C6BD8[] = "no afterimage item!\n";
 /* literal */ char ftCo_803C6BF0[] = "ftafterimage.c";
@@ -48,7 +51,7 @@ jtbl_t jtbl_803C6C54 = {
 #endif
 
 ASM void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -719,7 +722,7 @@ lbl_800C2F7C:
 #endif /* clang-format on */
 
 ASM void ftCo_800C2FD8(Fighter_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }

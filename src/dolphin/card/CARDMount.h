@@ -5,6 +5,7 @@
 #include <dolphin/card/forward.h>
 
 #include <dolphin/os.h>
+#include <dolphin/os/OSExi.h>
 
 s32 CARDUnmount(s32 chan);
 void __CARDMountCallback(s32 chan, s32 result);

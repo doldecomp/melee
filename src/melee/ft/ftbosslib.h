@@ -1,8 +1,11 @@
 #ifndef MELEE_FT_FTBOSSLIB_H
 #define MELEE_FT_FTBOSSLIB_H
 
+#include <platform.h>
 #include "ft/forward.h"
 #include "ftMasterHand/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include <baselib/gobj.h>
 

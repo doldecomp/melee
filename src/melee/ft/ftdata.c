@@ -4,10 +4,8 @@
 #include "ftdata.h"
 
 #include "ft_0877.h"
-#include "types.h"
 
 #include "ftCaptain/ftCa_Init.h"
-#include "ftCaptain/ftCa_SpecialHi.h"
 #include "ftCaptain/ftCa_SpecialLw.h"
 #include "ftCaptain/ftCa_SpecialN.h"
 #include "ftCaptain/ftCa_SpecialS.h"
@@ -57,7 +55,6 @@
 #include "ftMars/ftMs_SpecialN.h"
 #include "ftMars/ftMs_SpecialS.h"
 #include "ftMasterHand/ftMh_Init.h"
-#include "ftMasterHand/ftMh_Wait1_0.h"
 #include "ftMewtwo/ftMt_Init.h"
 #include "ftMewtwo/ftMt_SpecialHi.h"
 #include "ftMewtwo/ftMt_SpecialLw.h"
@@ -69,9 +66,6 @@
 #include "ftNess/ftNs_SpecialLw.h"
 #include "ftNess/ftNs_SpecialN.h"
 #include "ftNess/ftNs_SpecialS.h"
-#include "ftPeach/ftPe_Float.h"
-#include "ftPeach/ftPe_FloatAttack.h"
-#include "ftPeach/ftPe_FloatFall.h"
 #include "ftPeach/ftPe_Init.h"
 #include "ftPeach/ftPe_SpecialHi.h"
 #include "ftPeach/ftPe_SpecialLw.h"
@@ -109,8 +103,6 @@
 #include "ftZelda/ftZd_SpecialLw.h"
 #include "ftZelda/ftZd_SpecialN.h"
 #include "ftZelda/ftZd_SpecialS.h"
-
-#include <dolphin/mtx/types.h>
 
 ftData_UnkCountStruct ftData_Table_Unk0[FTKIND_MAX] = {
     { 0, 303 }, { 0, 327 }, { 0, 318 }, { 0, 337 }, { 0, 479 }, { 0, 316 },

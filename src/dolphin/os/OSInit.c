@@ -1,9 +1,8 @@
 /** @file
+Issues:
  * @todo Should be called @c OS.c.
  */
 #include <platform.h>
-
-#include "stddef.h"
 
 #include <__mem.h>
 #include <placeholder.h>
@@ -16,7 +15,7 @@
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSAudioSystem.h>
 #include <dolphin/os/OSCache.h>
-#include <dolphin/os/OSError.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>
@@ -24,10 +23,10 @@
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/os/OSResetSW.h>
 #include <dolphin/os/OSRtc.h>
-#include <dolphin/os/OSSerial.h>
 #include <dolphin/os/OSSync.h>
 #include <dolphin/os/OSThread.h>
 #include <dolphin/os/OSTime.h>
+#include <dolphin/sipriv.h>
 #include <MetroTRK/dolphin_trk.h>
 #include <MetroTRK/intrinsics.h>
 
@@ -419,7 +418,7 @@ void OSExceptionInit(void)
     DBPrintf("Exceptions initialized...\n");
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 asm void __OSDBIntegrator(void)
 { // clang-format off
@@ -446,7 +445,7 @@ void __OSDBIntegrator(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 asm void __OSDBJump(void)
 { // clang-format off
@@ -478,7 +477,7 @@ __OSExceptionHandler __OSGetExceptionHandler(u8 exception)
     return OSExceptionTable[exception];
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 asm void OSExceptionVector(void)
 { // clang-format off
@@ -538,7 +537,7 @@ void OSExceptionVector(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 asm void OSDefaultExceptionHandler(void)
 { // clang-format off
@@ -575,7 +574,7 @@ void OSDefaultExceptionHandler(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 void __OSPSInit(void)
 {

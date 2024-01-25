@@ -1,4 +1,3 @@
-#include <placeholder.h>
 #include <dolphin/os/OSMutex.h>
 
 void __OSUnlockAllMutex(OSThread* thread)

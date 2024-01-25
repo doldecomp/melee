@@ -1,26 +1,33 @@
-#include "forward.h"
+#include "ftCommon/forward.h"
 
 #include "ftFx_SpecialN.h"
 
 #include "ftFx_Init.h"
 #include "math.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
+#include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_ItemGet.h"
-#include "it/item.h"
+#include "ftFox/types.h"
+#include "it/it_26B1.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbrefract.h"
 
-#include <dolphin/mtx/types.h>
+#include <common_structs.h>
 #include <dolphin/os.h>
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
 #include <melee/it/items/itfoxlaser.h>
 
 void ftFx_SpecialN_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos)

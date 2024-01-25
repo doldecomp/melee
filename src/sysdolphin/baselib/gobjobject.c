@@ -1,3 +1,4 @@
+#include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjobject.h>
 

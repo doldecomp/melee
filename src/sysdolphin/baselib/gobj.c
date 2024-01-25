@@ -1,9 +1,12 @@
+#include <baselib/class.h>
+#include <baselib/cobj.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
+#include <baselib/object.h>
 
 inline void GObj_SetFlag1_inline(HSD_GObjProc* proc, u8 value)
 {

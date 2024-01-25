@@ -3,6 +3,9 @@
 
 #include <baselib/forward.h>
 
+typedef struct Ground Ground;
+typedef struct grDynamicAttr_UnkStruct grDynamicAttr_UnkStruct;
+
 #ifdef M2CTX
 typedef struct Ground_GObj Ground_GObj;
 struct Ground_GObj {
@@ -28,7 +31,5 @@ struct Ground_GObj {
 #else
 typedef HSD_GObj Ground_GObj;
 #endif
-
-typedef struct grDynamicAttr_UnkStruct grDynamicAttr_UnkStruct;
 
 #endif

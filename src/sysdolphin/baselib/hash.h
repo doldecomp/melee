@@ -1,6 +1,8 @@
 #ifndef _hash_h_
 #define _hash_h_
 
+#include <platform.h>
+
 #include <baselib/class.h>
 
 #define hash(s) (s % 0x65)

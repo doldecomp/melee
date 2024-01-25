@@ -149,7 +149,7 @@ static void HSD_VIGXDrawDoneCB(void)
     }
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
 #endif
@@ -157,7 +157,7 @@ static int HSD_VIGetDrawDoneWaitingFlag(void)
 {
     return _p->drawdone.waiting;
 }
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma pop
 #endif
 

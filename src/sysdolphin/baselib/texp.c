@@ -1,13 +1,16 @@
 #include <__mem.h>
 #include <placeholder.h>
-#include <string.h>
-#include <dolphin/gx/GXMisc.h>
-#include <dolphin/gx/GXTev.h>
+#include <baselib/debug.h>
 #include <baselib/texp.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/texpdag.h>
 #include <sysdolphin/baselib/tobj.h>
+
+#ifdef MUST_MATCH
+#include "dolphin/gx/GXMisc.h"
+#include "dolphin/gx/GXTev.h"
+#endif
 
 #define HSD_ASSERT3(file, line, cond)                                         \
     ((cond) ? ((void) 0) : __assert((file), (line), #cond))

@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include "ftCo_HammerLanding.h"
 
 #include "ftCo_HammerWait.h"
@@ -5,6 +7,8 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0D14.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 
 void ftCo_800C5F88(ftCo_GObj* gobj)
 {

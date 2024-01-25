@@ -1,4 +1,4 @@
-#include <placeholder.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSFont.h>
 
 static u16 FontEncode = -1;

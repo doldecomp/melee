@@ -1,11 +1,13 @@
-#include <baselib/forward.h>
+#include <platform.h>
 
 #include "it_2ADA.h"
 
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
-#include "it/types.h"
+
+#include <common_structs.h>
 
 /* 2ADAF0 */ static void it_802ADAF0(Item_GObj* gobj);
 /* 2ADB48 */ static bool it_802ADB48(Item_GObj* gobj);

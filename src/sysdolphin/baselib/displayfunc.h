@@ -1,6 +1,10 @@
 #ifndef INCLUDE_SYSDOLPHIN_BASELIB_DISPLAYFUNC_H
 #define INCLUDE_SYSDOLPHIN_BASELIB_DISPLAYFUNC_H
 
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
+
 #include <baselib/jobj.h>
 #include <baselib/objalloc.h>
 

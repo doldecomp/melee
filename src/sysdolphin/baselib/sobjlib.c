@@ -1,16 +1,9 @@
-#include <dolphin/gx/GXAttr.h>
-#include <dolphin/gx/GXMisc.h>
-#include <dolphin/os.h>
-#include <baselib/__baselib.h>
-#include <baselib/cobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
+
 #include <baselib/objalloc.h>
-#include <baselib/pobj.h>
 #include <baselib/sobjlib.h>
-#include <baselib/state.h>
-#include <baselib/tev.h>
 
 /* 004DB670 */ extern const s32 HSD_SObjLib_804DEA90;
 /* 004DB66C */ extern const s32 HSD_SObjLib_804DEA8C;

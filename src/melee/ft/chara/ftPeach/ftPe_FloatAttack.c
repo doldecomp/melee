@@ -1,23 +1,24 @@
 #include <platform.h>
-#include "ft/forward.h"
+#include "ftCommon/forward.h"
 
 #include "ftPe_FloatAttack.h"
 
 #include "ftPe_Float.h"
-#include "ftPe_Init.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0CDD.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_AttackAir.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_LandingAir.h"
+#include "ftPeach/types.h"
+#include "it/it_26B1.h"
 
-#include <baselib/gobj.h>
+#include <common_structs.h>
 
 static void ftPe_8011BF34(HSD_GObj* gobj);
 

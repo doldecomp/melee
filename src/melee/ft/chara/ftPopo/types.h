@@ -3,8 +3,6 @@
 
 #include <platform.h>
 
-#include <common_structs.h>
-
 struct ftPopo_FighterVars {
     /* 0x222C */ uint x222C;
     /* 0x2230:0 */ u8 x2230_b0 : 1;

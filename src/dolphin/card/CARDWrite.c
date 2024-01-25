@@ -7,6 +7,7 @@
 #include <dolphin/card/CARDWrite.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSExi.h>
+#include <dolphin/os/OSTime.h>
 
 #define OFFSET(n, a) (((u32) (n)) & ((a) -1))
 

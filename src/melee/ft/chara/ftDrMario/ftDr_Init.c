@@ -1,4 +1,5 @@
 #include "forward.h"
+#include "ftCommon/forward.h"
 #include "ftMario/forward.h"
 
 #include "ftDr_Init.h"
@@ -6,7 +7,6 @@
 #include "ftDr_AppealS.h"
 #include "types.h"
 
-#include "ft/ft_0877.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
@@ -17,7 +17,11 @@
 #include "ftMario/ftMr_SpecialLw.h"
 #include "ftMario/ftMr_SpecialN.h"
 #include "ftMario/ftMr_SpecialS.h"
+#include "ftMario/types.h"
+#include "it/it_26B1.h"
 #include "it/items/it_27CF.h"
+
+#include <baselib/gobj.h>
 
 MotionState ftDr_Init_MotionStateTable[ftMr_MS_SelfCount] = {
     {

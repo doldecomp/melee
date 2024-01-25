@@ -1,14 +1,10 @@
 #include <platform.h>
-#include "forward.h"
-#include "ft/forward.h"
 #include <dolphin/mtx/forward.h>
 
 #include "ftPe_SpecialS.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
@@ -18,7 +14,7 @@
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
-#include <baselib/gobj.h>
+#include <common_structs.h>
 
 /* 11C2F4 */ static void reset(HSD_GObj* gobj);
 /* 11C430 */ static void doAirEnd0(HSD_GObj* gobj);

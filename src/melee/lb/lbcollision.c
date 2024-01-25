@@ -1,4 +1,5 @@
-#include "forward.h"
+#include "ft/forward.h"
+#include <dolphin/gx/forward.h>
 
 #include "lbcollision.h"
 
@@ -6,7 +7,22 @@
 #include "lbaudio_ax.h"
 #include "lbvector.h"
 
+#include "lb/types.h"
+
+#include <m2c_macros.h>
 #include <math.h>
+#include <placeholder.h>
+#include <dolphin/gx/types.h>
+#include <dolphin/mtx.h>
+#include <dolphin/mtx/mtxvec.h>
+#include <dolphin/mtx/types.h>
+#include <baselib/baselib_shared_data_003.h>
+#include <baselib/debug.h>
+#include <baselib/jobj.h>
+#include <baselib/mtx.h>
+#include <MetroTRK/intrinsics.h>
+
+#ifdef MUST_MATCH
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXDisplayList.h>
 #include <dolphin/gx/GXGeometry.h>
@@ -14,13 +30,8 @@
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/gx/GXTev.h>
 #include <dolphin/gx/GXTransform.h>
-#include <dolphin/mtx/mtxvec.h>
-#include <dolphin/mtx/types.h>
-#include <baselib/baselib_shared_data_003.h>
-#include <baselib/mtx.h>
-#include <baselib/state.h>
 #include <baselib/tev.h>
-#include <MetroTRK/intrinsics.h>
+#endif
 
 /// @todo Toggle for WIP functions
 #if 0
@@ -4179,7 +4190,7 @@ bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
 f32 const lbColl_804D7A3C = 0.5;
 f32 const lbColl_804D7A40 = 5;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm bool lbColl_8000805C(HitCapsule*, HurtCapsule*, unk_t, s32, f32, f32, f32)
 {
@@ -4586,7 +4597,7 @@ void lbColl_80008434(HitCapsule* arg0)
     arg0->state = HitCapsule_Enabled;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void lbColl_80008440(HitCapsule*)
 { // clang-format off
@@ -4648,7 +4659,8 @@ lbl_800084EC:
 /* 800084F8 000050D8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-#else
+
+#elif false
 
 void lbColl_80008440(HitCapsule* arg0)
 {
@@ -4696,7 +4708,7 @@ void lbColl_80008440(HitCapsule* arg0)
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void lbColl_CopyHitCapsule(HitCapsule*, HitCapsule*)
 { // clang-format off
@@ -4879,7 +4891,7 @@ void lbColl_CopyHitCapsule(HitCapsule* src, HitCapsule* dst)
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm bool lbColl_80008688(HitCapsule*, enum_t, Fighter*)
 { // clang-format off
@@ -5113,7 +5125,7 @@ loop_1:
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET lbColl_80008820(UNK_PARAMS)
 { // clang-format off
@@ -5238,7 +5250,7 @@ lbl_800089B0:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET lbColl_800089B8(UNK_PARAMS)
 { // clang-format off
@@ -5295,7 +5307,7 @@ lbl_80008A4C:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET lbColl_80008A5C(UNK_PARAMS){
     // clang-format off
@@ -5501,7 +5513,7 @@ lbl_80008D20:
 
 f64 const lbColl_804D7A48 = 4503599627370496;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void lbColl_80008D30(HitCapsule*, UNK_T){
     // clang-format off
@@ -5541,7 +5553,7 @@ asm void lbColl_80008D30(HitCapsule*, UNK_T){
 
 GXColor const lbColl_804D7A50 = { 0 };
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET lbColl_80008DA4(UNK_PARAMS){
     // clang-format off
@@ -5695,7 +5707,7 @@ lbl_80008FB0:
 
 f32 const lbColl_804D7A54 = -1;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET lbColl_80008FC8(UNK_PARAMS)
 { // clang-format off
@@ -6168,7 +6180,7 @@ lbl_8000968C:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void lbColl_800096B4(MtxPtr, UNK_T, UNK_T, UNK_T, UNK_T, f32)
 { // clang-format off
@@ -6654,7 +6666,7 @@ lbl_80009DAC:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET lbColl_80009DD4(UNK_PARAMS)
 { // clang-format off
@@ -6764,7 +6776,7 @@ extern int lbColl_804D36A4;
 extern int lbColl_804D36A8;
 extern int lbColl_804D36DC;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET lbColl_80009F54(UNK_PARAMS)
 { // clang-format off
@@ -6846,7 +6858,7 @@ lbl_8000A034:
 extern int lbColl_804D36E8;
 extern int lbColl_804D36EC;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET lbColl_8000A044(UNK_PARAMS)
 { // clang-format off
@@ -6914,7 +6926,7 @@ lbl_8000A0FC:
 extern int lbColl_804D36F8;
 extern int lbColl_804D36FC;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET lbColl_8000A10C(UNK_PARAMS)
 { // clang-format off
@@ -6969,7 +6981,7 @@ lbl_8000A198:
 extern int lbColl_804D36F0;
 extern int lbColl_804D36F4;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET lbColl_8000A1A8(UNK_PARAMS)
 { // clang-format off
@@ -7023,7 +7035,7 @@ lbl_8000A234:
 
 extern unk_t lbColl_803B9928;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void lbColl_8000A244(HurtCapsule* arg0, u32 arg1, Mtx arg2, f32 arg3)
 { // clang-format off
@@ -7181,7 +7193,7 @@ lbl_8000A43C:
 extern int lbColl_804D36E0;
 extern int lbColl_804D36E4;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET lbColl_8000A460(UNK_PARAMS)
 { // clang-format off
@@ -7271,7 +7283,7 @@ lbl_8000A570:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET lbColl_8000A584(UNK_PARAMS)
 { // clang-format off
@@ -7425,7 +7437,7 @@ lbl_8000A774:
 extern int lbColl_804D36C4;
 extern int lbColl_804D36C8;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET lbColl_8000A78C(UNK_PARAMS)
 { // clang-format off
@@ -7564,7 +7576,7 @@ lbl_8000A93C:
 extern int lbColl_804D36CC;
 extern int lbColl_804D36D0;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm bool lbColl_8000A95C(HitResult*, unk_t, Mtx*, f32)
 { // clang-format off
@@ -7794,7 +7806,7 @@ bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
 extern int lbColl_804D36D4;
 extern int lbColl_804D36D8;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm UNK_RET lbColl_8000AB2C(UNK_PARAMS)
 { // clang-format off

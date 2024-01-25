@@ -1,10 +1,12 @@
 #include "mobj.h"
 
 #include <__mem.h>
-#include <string.h>
+#include <dolphin/gx/GXEnum.h>
 #include <dolphin/os.h>
+#include <baselib/aobj.h>
 #include <baselib/class.h>
-#include <baselib/memory.h>
+#include <baselib/debug.h>
+#include <baselib/fobj.h>
 #include <baselib/state.h>
 #include <baselib/tev.h>
 #include <baselib/texp.h>

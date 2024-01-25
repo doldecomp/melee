@@ -5,12 +5,6 @@ SKIP_CHECK ?= 0
 REQUIRE_PROTOS ?= 1
 MSG_STYLE ?= gcc
 WARN_ERROR ?= 1
-WIP ?= 0
-
-ifeq ($(WIP),1)
-	SKIP_CHECK := 1
-	REQUIRE_PROTOS := 0
-endif
 
 VERBOSE ?= 0
 MAX_ERRORS ?= 0     # 0 = no maximum
@@ -25,11 +19,7 @@ endif
 
 TARGET := ssbm.us.1.2
 
-ifeq ($(WIP),1)
-	BUILD_DIR := build/wip/$(TARGET)
-else
-	BUILD_DIR := build/$(TARGET)
-endif
+BUILD_DIR := build/$(TARGET)
 
 # Inputs
 LDSCRIPT := ldscript.lcf
@@ -138,11 +128,6 @@ endif
 
 ifeq ($(VERBOSE),1)
 	CFLAGS += -verbose
-endif
-
-ifeq ($(WIP),1)
-	ASFLAGS += --defsym WIP=1
-	CFLAGS += -DWIP
 endif
 
 HOSTCFLAGS := -Wall -O3 -s

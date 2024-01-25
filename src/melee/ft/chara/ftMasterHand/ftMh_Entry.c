@@ -1,3 +1,6 @@
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+
 #include "ftMh_Entry.h"
 
 #include "ftMh_Damage_0.h"
@@ -6,11 +9,15 @@
 #include "types.h"
 
 #include "cm/camera.h"
-#include "ft/ft_0877.h"
+#include "ft/fighter.h"
 #include "ft/ft_0881.h"
+#include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftlib.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
+#include "pl/player.h"
+
+#include <baselib/debug.h>
 
 static void ftMh_MS_343_801511FC(HSD_GObj* gobj);
 

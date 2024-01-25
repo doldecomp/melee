@@ -1,15 +1,14 @@
 #include "ft/ft_0819.h"
 
-#include "ft/ft_0877.h"
-#include "ft/ft_0C31.h"
-#include "it/it_26B1.h"
-#include "it/item.h"
-#include "lb/lb_00F9.h"
-
 #include <placeholder.h>
-#include <baselib/gobj.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
+#include "melee/ft/ft_0C31.h"
+#include "melee/it/it_26B1.h"
+#include "melee/lb/lb_00F9.h"
+#endif
+
+#ifdef MUST_MATCH
 
 static f32 const ft_804D83A0 = -1.0F;
 static f32 const ft_804D83A4 = 1.0F;
@@ -58,7 +57,7 @@ void ft_80081938(HSD_GObj* gobj)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_800819A8(HSD_GObj* gobj)
@@ -98,7 +97,7 @@ void ft_800819A8(HSD_GObj* gobj)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ft_80081A00(void)

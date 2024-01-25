@@ -1,5 +1,3 @@
-#include <platform.h>
-
 #include <MSL/ctype.h>
 
 #define ctrl __control_char

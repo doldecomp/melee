@@ -1,3 +1,7 @@
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
+
 #include "ftCo_0C35.h"
 
 #include "ftCo_Damage.h"
@@ -5,10 +9,12 @@
 #include "ft/fighter.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "it/items/itlinkhookshot.h"
-#include "mp/mpcoll.h"
+#include "ft/types.h"
 
+#include <common_structs.h>
 #include <math.h>
+#include <placeholder.h>
+#include <baselib/jobj.h>
 #include <MSL/trigf.h>
 
 #ifdef WIP
@@ -36,7 +42,7 @@ static inline void inlineA0(ftCo_GObj* gobj)
 }
 
 ASM void ftCo_800C3598(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     inlineA0(gobj);
@@ -153,7 +159,7 @@ lbl_800C36B4:
 #endif /* clang-format on */
 
 ASM void ftCo_800C36DC(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     inlineA0(gobj);
@@ -221,7 +227,7 @@ lbl_800C3740:
 #endif /* clang-format on */
 
 ASM void ftCo_800C37A0(ftCo_GObj* gobj)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->dmg.x18F4 != 0) {

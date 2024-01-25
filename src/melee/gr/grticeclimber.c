@@ -1,7 +1,5 @@
 #include "gr/grticeclimber.h"
 
-#include "cm/camera.h"
-#include "ef/efsync.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/grmaterial.h"
@@ -9,13 +7,18 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
-#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
 #include <dolphin/os.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+
+#ifdef MUST_MATCH
+#include "melee/cm/camera.h"
+#include "melee/ef/efsync.h"
+#include "melee/lb/lb_00B0.h"
+#endif
 
 /* static */ StageCallbacks grTIc_803E8A98[4] = {
     {
@@ -168,7 +171,7 @@ void grTIceClimber_802211E4(HSD_GObj* gobj)
 
 void grTIceClimber_80221204(HSD_GObj* arg0) {}
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void grTIceClimber_80221208(void){
     // clang-format off

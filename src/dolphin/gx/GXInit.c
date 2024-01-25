@@ -1,22 +1,26 @@
 #include <placeholder.h>
-#include <dolphin/base/PPCArch.h>
-#include <dolphin/gx/__GX_unknown_001.h>
-#include <dolphin/gx/__GXBump.h>
-#include <dolphin/gx/__GXFifo.h>
-#include <dolphin/gx/__GXInit.h>
-#include <dolphin/gx/__GXMisc.h>
-#include <dolphin/gx/GXAttr.h>
-#include <dolphin/gx/GXBump.h>
-#include <dolphin/gx/GXFrameBuf.h>
-#include <dolphin/gx/GXGeometry.h>
+#include <dolphin/gx/__types.h>
 #include <dolphin/gx/GXInit.h>
-#include <dolphin/gx/GXLight.h>
-#include <dolphin/gx/GXPerf.h>
-#include <dolphin/gx/GXPixel.h>
-#include <dolphin/gx/GXTev.h>
-#include <dolphin/gx/GXTexture.h>
-#include <dolphin/gx/GXTransform.h>
-#include <dolphin/vi/vi.h>
+#include <dolphin/gx/types.h>
+
+#ifdef MUST_MATCH
+#include "dolphin/base/PPCArch.h"
+#include "dolphin/gx/__GXFifo.h"
+#include "dolphin/gx/GXAttr.h"
+#include "dolphin/gx/GXBump.h"
+#include "dolphin/gx/GXFrameBuf.h"
+#include "dolphin/gx/GXGeometry.h"
+#include "dolphin/gx/GXLight.h"
+#include "dolphin/gx/GXMisc.h"
+#include "dolphin/gx/GXPerf.h"
+#include "dolphin/gx/GXPixel.h"
+#include "dolphin/gx/GXTev.h"
+#include "dolphin/gx/GXTexture.h"
+#include "dolphin/gx/GXTransform.h"
+#include "dolphin/vi/vi.h"
+#endif
+
+static void __GXInitGX(void);
 
 GXContext __GXContext;
 GXContexts __GXContexts = { &__GXContext, NULL };
@@ -35,7 +39,7 @@ f32 const GXInit_804DE210 = 0.0F;
 f32 const GXInit_804DE214 = 0.10000000149011612F;
 f64 const GXInit_804DE218 = 4503599627370496.0L;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void __GXDefaultTexRegionCallback(void)
@@ -104,9 +108,7 @@ unk_t __GXDefaultTlutRegionCallback(u32 arg0)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
-
-static void __GXInitGX(void);
+#ifdef MUST_MATCH
 
 #pragma push
 asm GXFifoObj* GXInit(GXFifoObj* fifo, u32 size)
@@ -641,7 +643,7 @@ GXFifoObj* GXInit(GXFifoObj* fifo, u32 size)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 // https://decomp.me/scratch/zVpOX // 7812 (85.26%)
 #pragma push

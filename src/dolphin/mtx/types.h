@@ -2,7 +2,8 @@
 #define DOLPHIN_MTX_TYPES_H
 
 #include <platform.h>
-#include "dolphin/mtx/forward.h"
+#include "dolphin/mtx/forward.h" // IWYU pragma: export
+#include <dolphin/mtx/forward.h>
 
 struct Vec2 {
     f32 x, y;

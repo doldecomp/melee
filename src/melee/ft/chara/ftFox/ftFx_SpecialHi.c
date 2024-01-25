@@ -1,5 +1,4 @@
-#include "forward.h"
-#include "ft/forward.h"
+#include <platform.h>
 
 #include "ftFx_SpecialHi.h"
 
@@ -7,21 +6,23 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Pass.h"
+#include "ftFox/types.h"
+#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h>
+#include <common_structs.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/gobjproc.h>
+#include <baselib/gobj.h>
 
 #define FTFOX_SPECIALHI_COLL_FLAG                                             \
     Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_UpdateCmd | Ft_MF_SkipColAnim | \

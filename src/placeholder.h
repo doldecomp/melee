@@ -1,7 +1,7 @@
 #ifndef PLACEHOLDER_H
 #define PLACEHOLDER_H
 
-#include "ft/forward.h"
+#include <platform.h>
 #include <baselib/forward.h>
 
 #include <m2c_macros.h>
@@ -58,7 +58,7 @@ typedef jmp_t jtbl_t[];
 #define U32_TO_F32 4503599627370496.0
 #define S32_TO_F32 4503601774854144.0
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 #define ASM asm
 #else
 #define ASM

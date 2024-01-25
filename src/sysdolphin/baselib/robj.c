@@ -1,9 +1,18 @@
 #include <__mem.h>
 #include <math.h>
 #include <placeholder.h>
+#include <dolphin/mtx.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os.h>
+#include <baselib/aobj.h>
+#include <baselib/class.h>
+#include <baselib/debug.h>
+#include <baselib/fobj.h>
+#include <baselib/id.h>
+#include <baselib/jobj.h>
+#include <baselib/list.h>
 #include <baselib/mtx.h>
+#include <baselib/object.h>
 #include <baselib/robj.h>
 
 HSD_ObjAllocData robj_alloc_data;   // robj_alloc_data

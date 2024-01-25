@@ -1,17 +1,17 @@
-#include <platform.h>
-
 #include "ftCo_09F7.h"
 
-#include "ftCo_0B3E.h"
-
-#include "ef/efasync.h"
-#include "ft/fighter.h"
-#include "ft/ftparts.h"
-
-#include <math.h>
 #include <placeholder.h>
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
+#include "melee/ef/efasync.h"
+#include "melee/ft/chara/ftCommon/ftCo_0B3E.h"
+#include "melee/ft/fighter.h"
+#include "melee/ft/ftparts.h"
+
+#include <math.h>
+#endif
+
+#ifdef MUST_MATCH
 #ifdef WIP
 #pragma always_active on
 #endif
@@ -25,7 +25,7 @@ char ftDynamics_803C57B0[] = "no effect from animlist %d\n";
 
 ASM void ftCo_8009F834(ftCo_GObj* gobj, int arg1, int arg2, int arg3, int arg4,
                        Vec3* arg5, Vec3* arg6, float arg7)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }
@@ -623,7 +623,7 @@ lbl_800A0084:
 #endif /* clang-format on */
 
 ASM UNK_RET ftCo_800A0098(UNK_PARAMS)
-#if !defined(MUST_MATCH) || defined(WIP)
+#ifndef MUST_MATCH
 {
     NOT_IMPLEMENTED;
 }

@@ -1,24 +1,26 @@
 #include "if/ifstatus.h"
 
 #include "ifall.h"
-#include "ifstock.h"
 
-#include "gm/gm_1601.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "mn/mn_2295.h"
-#include "un/un_2FC9.h"
+#include "pl/player.h"
 
 #include <placeholder.h>
-#include <dolphin/os.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+
+#ifdef MUST_MATCH
+#include "melee/gm/gm_1601.h"
+#include "melee/if/ifstock.h"
+#include "melee/lb/lb_00B0.h"
+#include "melee/lb/lb_00F9.h"
+#include "melee/lb/lbarchive.h"
+#include "melee/lb/lbaudio_ax.h"
+#include "melee/mn/mn_2295.h"
+#include "melee/un/un_2FC9.h"
+#include "sysdolphin/baselib/gobjobject.h"
+#include "sysdolphin/baselib/gobjproc.h"
+#include "sysdolphin/baselib/random.h"
+#endif
 
 HudIndex* ifStatus_802F4910(void)
 {
@@ -45,7 +47,7 @@ extern f32 ifStatus_804DDA48;
 extern f32 ifStatus_804DDA4C;
 extern f32 ifStatus_804DDA50;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ifStatus_802F491C(void)
@@ -236,7 +238,7 @@ void ifStatus_802F491C(void)
 
 extern f32 ifStatus_804DDA4C;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ifStatus_802F4B84(void)
@@ -503,7 +505,7 @@ extern f32 ifStatus_804DDA70;
 extern s8 ifStatus_804D6D60;
 extern f32 ifStatus_804DDA98;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ifStatus_802F4EDC(void)
@@ -1362,7 +1364,7 @@ void ifStatus_802F4EDC(void)
 
 extern char* ifStatus_803F95C0;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ifStatus_802F5B48(void)
@@ -1583,7 +1585,7 @@ void ifStatus_802F5DE0(HSD_GObj* player, s32 arg1)
     }
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ifStatus_802F5E50(void)
@@ -1633,7 +1635,7 @@ void ifStatus_802F5E50(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ifStatus_802F5EC0(void)
@@ -1931,7 +1933,7 @@ extern char* ifStatus_804D57C0;
 extern f32 ifStatus_804DDA9C;
 extern f64 ifStatus_804DDAA0;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ifStatus_802F61FC(void)
@@ -2161,7 +2163,7 @@ void ifStatus_802F61FC(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ifStatus_802F6508(s32)
@@ -2284,7 +2286,7 @@ void ifStatus_802F665C(s8 arg0)
 
 extern char* ifStatus_803F95AC;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ifStatus_802F66A4(void)
@@ -2602,7 +2604,7 @@ void ifStatus_802F6E3C(s32 player_num)
 extern Thing_803F9628 ifStatus_803F9628;
 extern f64 ifStatus_804DDAA8;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ifStatus_802F6EA4(void)
@@ -2727,7 +2729,7 @@ void ifStatus_802F6EA4(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ifStatus_802F7034(void)
@@ -2820,7 +2822,7 @@ void ifStatus_802F7034(void)
 
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void ifStatus_802F7134(void)

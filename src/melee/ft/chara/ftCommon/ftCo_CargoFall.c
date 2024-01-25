@@ -1,8 +1,8 @@
 #include <platform.h>
+#include "ft/forward.h"
 
 #include "ftCo_CargoFall.h"
 
-#include "ftCo_09C4.h"
 #include "ftCo_CargoLanding.h"
 #include "ftCo_CargoThrow.h"
 #include "ftCo_Shouldered.h"
@@ -11,6 +11,9 @@
 #include "ft/ft_081B.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ftDonkey/types.h"
+
+#include <common_structs.h>
 
 void ftCo_8009BC58(ftCo_GObj* gobj)
 {

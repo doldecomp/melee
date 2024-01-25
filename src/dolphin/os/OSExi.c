@@ -2,6 +2,7 @@
 #include <placeholder.h>
 #include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInit.h>
+#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSTime.h>
 
 #define EXI_FREQ_1M 0

@@ -3,6 +3,8 @@
 
 #include <baselib/forward.h>
 
+#include <stdbool.h>
+
 /* 0E83E0 */ void ftFx_SpecialLw_CreateLoopGFX(HSD_GObj* gobj);
 /* 0E845C */ void ftFx_SpecialLw_CreateStartGFX(HSD_GObj* gobj);
 /* 0E84D8 */ void ftFx_SpecialLw_CreateReflectGFX(HSD_GObj* gobj);

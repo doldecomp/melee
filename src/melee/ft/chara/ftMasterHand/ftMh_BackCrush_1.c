@@ -3,7 +3,9 @@
 #include "ftMh_BackCrush_1.h"
 
 #include "ft/fighter.h"
-#include "ft/inlines.h"
+#include "ft/ftanim.h"
+#include "ft/types.h"
+#include "ftMasterHand/types.h"
 
 void ftMh_BackCrush_Coll(HSD_GObj* gobj) {}
 

@@ -1,9 +1,13 @@
+#include <dolphin/gx/forward.h>
+
 #include <__mem.h>
 #include <placeholder.h>
-#include <string.h>
 #include <dolphin/gx/GXAttr.h>
+#include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXTev.h>
+#include <dolphin/gx/types.h>
+#include <baselib/debug.h>
 #include <baselib/tev.h>
 
 static struct {
@@ -49,7 +53,7 @@ HSD_ObjAllocData* HSD_ChanGetAllocData(void)
     return &chan_alloc_data;
 }
 
-#if defined(MUST_MATCH) && !defined(WIP)
+#ifdef MUST_MATCH
 
 #pragma push
 asm void HSD_SetupChannel(HSD_Chan* ch)

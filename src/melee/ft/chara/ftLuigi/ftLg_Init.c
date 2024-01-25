@@ -1,6 +1,6 @@
 #include "forward.h"
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include "it/forward.h"
 
 #include "ftLuigi/ftLg_Init.h"
 
@@ -10,12 +10,12 @@
 #include "ftLg_SpecialS.h"
 #include "types.h"
 
-#include "ft/ft_0877.h"
 #include "ft/ft_0C31.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "it/it_26B1.h"
 
 MotionState ftLg_Init_MotionStateTable[ftLg_MS_SelfCount] = {
     {

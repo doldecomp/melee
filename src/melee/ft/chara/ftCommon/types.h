@@ -3,13 +3,26 @@
 
 #include <platform.h>
 #include "ft/forward.h"
-#include "ftCommon/forward.h"
+#include "ftCommon/forward.h" // IWYU pragma: export
 #include "ftKirby/forward.h"
 #include "it/forward.h"
 
-#include "ft/ftcolltypes.h"
-
 #include <placeholder.h>
+#include <dolphin/mtx/types.h>
+
+struct ftCollisionBox {
+    /*  +0 */ float top;
+    /*  +4 */ float bottom;
+    /*  +8 */ Vec2 left;
+    /* +10 */ Vec2 right;
+};
+
+struct UNK_SAMUS_S2 {
+    Fighter_Part parts[3];
+    Vec3 vec1;
+    Vec3 vec2;
+    float single_float;
+};
 
 union ftCommon_MotionVars {
     struct {
