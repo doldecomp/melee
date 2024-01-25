@@ -1,6 +1,7 @@
+#include "gobjgxlink.h"
+
 #include "debug.h"
 #include "gobj.h"
-#include "gobjgxlink.h"
 
 #ifdef MUST_MATCH
 #pragma push

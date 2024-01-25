@@ -1,9 +1,5 @@
-#include <__mem.h>
-#include <math.h>
-#include <placeholder.h>
-#include <dolphin/mtx.h>
-#include <dolphin/mtx/vec.h>
-#include <dolphin/os.h>
+#include "robj.h"
+
 #include "aobj.h"
 #include "class.h"
 #include "debug.h"
@@ -13,7 +9,13 @@
 #include "list.h"
 #include "mtx.h"
 #include "object.h"
-#include "robj.h"
+
+#include <__mem.h>
+#include <math.h>
+#include <placeholder.h>
+#include <dolphin/mtx.h>
+#include <dolphin/mtx/vec.h>
+#include <dolphin/os.h>
 
 HSD_ObjAllocData robj_alloc_data;   // robj_alloc_data
 HSD_ObjAllocData rvalue_alloc_data; // rvalue_alloc_data

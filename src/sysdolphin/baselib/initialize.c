@@ -1,19 +1,11 @@
-#include <stdarg.h>
-#include <dolphin/gx/GXEnum.h>
-#include <dolphin/gx/GXLight.h>
-#include <dolphin/gx/GXPixel.h>
-#include <dolphin/gx/types.h>
-#include <dolphin/os.h>
-#include <dolphin/os/OSArena.h>
-#include <dolphin/os/OSMemory.h>
-#include <dolphin/vi/vi.h>
+#include "initialize.h"
+
 #include "aobj.h"
 #include "class.h"
 #include "debug.h"
 #include "displayfunc.h"
 #include "fobj.h"
 #include "id.h"
-#include "initialize.h"
 #include "list.h"
 #include "lobj.h"
 #include "mtx.h"
@@ -24,6 +16,16 @@
 #include "state.h"
 #include "tev.h"
 #include "video.h"
+
+#include <stdarg.h>
+#include <dolphin/gx/GXEnum.h>
+#include <dolphin/gx/GXLight.h>
+#include <dolphin/gx/GXPixel.h>
+#include <dolphin/gx/types.h>
+#include <dolphin/os.h>
+#include <dolphin/os/OSArena.h>
+#include <dolphin/os/OSMemory.h>
+#include <dolphin/vi/vi.h>
 
 extern OSHeapHandle HSD_Synth_804D6018;
 extern GXRenderModeObj GXNtsc480IntDf;

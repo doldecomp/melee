@@ -1,15 +1,15 @@
 #include "shadow.h"
 
-#include "memory.h"
-#include "mobj.h"
-
-#include <__mem.h>
-#include <dolphin/gx/GXFrameBuf.h>
 #include "class.h"
 #include "cobj.h"
 #include "debug.h"
+#include "memory.h"
+#include "mobj.h"
 #include "object.h"
 #include "tobj.h"
+
+#include <__mem.h>
+#include <dolphin/gx/GXFrameBuf.h>
 
 extern HSD_ObjAllocData shadow_alloc_data;
 

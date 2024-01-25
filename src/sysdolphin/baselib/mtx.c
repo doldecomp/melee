@@ -1,11 +1,12 @@
+#include "mtx.h"
+
+#include "debug.h"
 #include "math.h"
 
 #include "lb/lbrefract.h"
 
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/vec.h>
-#include "debug.h"
-#include "mtx.h"
 #include <MSL/trigf.h>
 
 #define EPSILON 0.0000000001f

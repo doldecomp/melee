@@ -2,11 +2,12 @@
 #define _controller_h_
 
 #include <platform.h>
-#include <dolphin/pad/forward.h>
 #include "baselib/forward.h"
+#include <dolphin/pad/forward.h>
+
+#include "baselib/rumble.h"
 
 #include <dolphin/pad/pad.h>
-#include "baselib/rumble.h"
 
 typedef enum _HSD_FlushType {
     HSD_PAD_FLUSH_QUEUE_MERGE,

@@ -1,7 +1,8 @@
+#include "gobj.h"
+
 #include "class.h"
 #include "cobj.h"
 #include "fog.h"
-#include "gobj.h"
 #include "gobjplink.h"
 #include "gobjproc.h"
 #include "jobj.h"

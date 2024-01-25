@@ -1,5 +1,21 @@
-#include <dolphin/gx/forward.h>
 #include "forward.h"
+#include <dolphin/gx/forward.h>
+
+#include "pobj.h"
+
+#include "aobj.h"
+#include "class.h"
+#include "debug.h"
+#include "displayfunc.h"
+#include "fobj.h"
+#include "id.h"
+#include "jobj.h"
+#include "memory.h"
+#include "mtx.h"
+#include "perf.h"
+#include "state.h"
+#include "tobj.h"
+#include "util.h"
 
 #include <__mem.h>
 #include <math.h>
@@ -11,20 +27,6 @@
 #include <dolphin/gx/GXVert.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
-#include "aobj.h"
-#include "class.h"
-#include "debug.h"
-#include "displayfunc.h"
-#include "fobj.h"
-#include "id.h"
-#include "jobj.h"
-#include "memory.h"
-#include "mtx.h"
-#include "perf.h"
-#include "pobj.h"
-#include "state.h"
-#include "tobj.h"
-#include "util.h"
 
 static void PObjInfoInit(void);
 

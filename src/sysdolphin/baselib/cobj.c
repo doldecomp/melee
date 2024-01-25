@@ -1,5 +1,17 @@
 #include <dolphin/gx/forward.h>
 
+#include "cobj.h"
+
+#include "aobj.h"
+#include "class.h"
+#include "debug.h"
+#include "displayfunc.h"
+#include "fobj.h"
+#include "initialize.h"
+#include "mtx.h"
+#include "video.h"
+#include "wobj.h"
+
 #include <math.h>
 #include <placeholder.h>
 #include <dolphin/gx/GXTransform.h>
@@ -8,16 +20,6 @@
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/vi/vi.h>
-#include "aobj.h"
-#include "class.h"
-#include "cobj.h"
-#include "debug.h"
-#include "displayfunc.h"
-#include "fobj.h"
-#include "initialize.h"
-#include "mtx.h"
-#include "video.h"
-#include "wobj.h"
 #include <MetroTRK/intrinsics.h>
 #include <MSL/trigf.h>
 
