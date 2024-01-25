@@ -176,10 +176,7 @@ void ftNs_AttackHi4_YoyoSetUnkPos(HSD_GObj* gobj, Vec3* pos)
 
     CollData* collData = &fp->coll_data;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (!fp->mv.ns.attackhi4.isPosUpdateMod) {
         lb_8000B1CC(fp->parts[61].joint, NULL, pos);
@@ -204,10 +201,7 @@ void ftNs_AttackHi4_YoyoSetHitPos(HSD_GObj* gobj)
     Vec3 sp20;
     Vec3 sp14;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     /// @todo Can't move below @c fp.
     CollData* collData;
@@ -244,10 +238,7 @@ void ftNs_AttackHi4_YoyoSetHitPosUnk(HSD_GObj* gobj, f32 pos_unk)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     collData = &fp->coll_data;
 
@@ -334,10 +325,7 @@ void ftNs_AttackHi4_YoyoApplySmash(HSD_GObj* gobj)
 {
     HSD_GObj* yoyo_GObj;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Vec3 sp18;
 
@@ -403,10 +391,7 @@ void ftNs_AttackHi4_YoyoSetChargeDamage(HSD_GObj* gobj)
     itYoyoAttributes* yoyo_attr;
     ftNessAttributes* ness_attr;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp = GET_FIGHTER(gobj);
 
@@ -465,10 +450,7 @@ bool ftNs_AttackHi4_YoyoThink_IsRemove(HSD_GObj* gobj)
     s32 yoyoNudgeFrame;
     Vec3 sp14;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if ((u32) fp->cmd_vars[0] != 0U) {
         fp->mv.ns.attackhi4.isPosUpdateMod = 0;
@@ -548,10 +530,7 @@ void ftNs_AttackHi4_YoyoSetUnkRate(HSD_GObj* gobj)
     ftNessAttributes* ness_attr;
     f32 yoyo_float;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp = GET_FIGHTER(gobj);
     ness_attr = fp->dat_attrs;
@@ -603,10 +582,7 @@ void ftNs_AttackHi4_YoyoItemDespawn(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->fv.ns.yoyo_gobj != NULL) {
         it_802BE958(fp->fv.ns.yoyo_gobj);
@@ -714,10 +690,7 @@ void ftNs_AttackHi4_Anim(HSD_GObj* gobj)
         if (((s32) fighter_data2->mv.ns.attackhi4.yoyoCurrentFrame == 13) &&
             ((s32) fighter_data2->mv.ns.attackhi4.isChargeDisable == false))
         {
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[8];
-#endif
 
             fighter_data2 = getFighter(gobj);
             sp18.x = 0.0f;
@@ -1050,10 +1023,7 @@ void ftNs_AttackHi4Release_Enter(HSD_GObj* gobj)
     itYoyoAttributes* yoyo_attr;
     HSD_GObj* yoyo_GObj;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftNs_MS_AttackHi4Release,

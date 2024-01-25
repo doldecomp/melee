@@ -24,10 +24,7 @@ static void ftPe_8011BF34(HSD_GObj* gobj);
 
 bool ftPe_8011BE80(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_PAD_A || ftCo_800DF478(fp)) {
         if (fp->fv.pe.x4 > 0) {

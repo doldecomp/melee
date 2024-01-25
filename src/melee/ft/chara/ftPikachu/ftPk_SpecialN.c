@@ -49,10 +49,7 @@ void ftPk_SpecialN_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (fp->cmd_vars[0] == 1) {
         fp->cmd_vars[0] = 0;
@@ -86,10 +83,7 @@ void ftPk_SpecialAirN_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (fp->cmd_vars[0] == 1) {
         fp->cmd_vars[0] = 0;

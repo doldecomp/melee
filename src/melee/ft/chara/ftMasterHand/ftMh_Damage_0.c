@@ -56,10 +56,7 @@ inline void func_80151484_inline1(HSD_GObj* gobj)
 
 void ftMh_MS_343_80151484(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = 0;

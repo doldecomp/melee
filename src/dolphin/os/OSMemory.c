@@ -158,10 +158,7 @@ void RealMode(Event arg0)
 
 void __OSInitMemoryProtection(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[40];
-#endif
 
     u32 simulated_mem = OSGetConsoleSimulatedMemSize();
     bool intr = OSDisableInterrupts();

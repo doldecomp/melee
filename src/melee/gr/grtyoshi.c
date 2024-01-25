@@ -132,10 +132,7 @@ static void grTYoshi_80223D0C(HSD_GObj* arg0) {}
 
 static void grTYoshi_80223D10(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
@@ -157,10 +154,7 @@ static void grTYoshi_80223D9C(HSD_GObj* arg0) {}
 
 static void grTYoshi_80223DA0(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);

@@ -36,10 +36,7 @@ void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj)
     Vec3 sp10;
     HSD_GObj* manholeGObj;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter* fp = getFighter(gobj);
 
@@ -91,10 +88,7 @@ void ftGw_AttackLw3_ItemManholeRemove(HSD_GObj* gobj)
 // https://decomp.me/scratch/09CUB // Remove Manhole on damage
 void ftGw_AttackLw3_ItemManholeOnDamage(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = getFighter(gobj);
 
@@ -156,10 +150,7 @@ void ftGw_AttackLw3_Enter(HSD_GObj* gobj)
 // callback
 void ftGw_AttackLw3_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_800D638C(gobj);

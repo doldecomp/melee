@@ -157,9 +157,7 @@ void __OSDoHotReset(s32 arg0)
 
 void OSResetSystem(int reset, u32 resetCode, bool forceMenu)
 {
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     // Not initialized in all branches?
     bool disableRecalibration;

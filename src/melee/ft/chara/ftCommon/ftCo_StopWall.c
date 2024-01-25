@@ -35,18 +35,12 @@ bool ftCo_8009EDA4(ftCo_GObj* gobj)
 
 void ftCo_8009EE30(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     CollData* coll = &fp->coll_data;
     {
         Vec3 vec;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4] = { 0 };
-#endif
         if (fp->coll_data.env_flags & MPCOLL_LEFTWALL) {
             vec.x = coll->xA4_ecbCurrCorrect.left.x;
             vec.y = coll->xA4_ecbCurrCorrect.left.y;

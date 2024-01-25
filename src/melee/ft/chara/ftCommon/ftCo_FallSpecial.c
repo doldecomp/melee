@@ -105,10 +105,7 @@ void ftCo_80096900(ftCo_GObj* gobj, int arg1, int arg2, bool allow_interrupt,
     ftCo_800969D8(gobj, arg1, arg2, allow_interrupt, arg4, arg5, 0);
 #elif SOLUTION == 1
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_DatAttrs* ca = &fp->co_attrs;
     if (fp->x2224_b2) {
@@ -200,10 +197,7 @@ lbl_80096A84:
 void ftCo_800969D8(ftCo_GObj* gobj, int arg1, int arg2, int allow_interrupt,
                    float arg4, float arg5, float arg6)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_DatAttrs* ca = &fp->co_attrs;
     if (fp->x2224_b2) {
@@ -404,10 +398,7 @@ void ftCo_FallSpecial_Coll(ftCo_GObj* gobj)
 
 bool ftCo_80096CC8(ftCo_GObj* gobj, enum_t arg1)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (arg1 != -1 && (!(mpLib_80054CEC(arg1) & (1 << 8)) ||
                        fp->input.lstick.y > p_ftCommonData->x25C))

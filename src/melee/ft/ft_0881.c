@@ -1349,10 +1349,7 @@ static void inlineC0(Fighter* fp, uint move_id)
 
 void ft_800892A0(Fighter_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     inlineC0(fp, fp->x2068_attackID);
 }

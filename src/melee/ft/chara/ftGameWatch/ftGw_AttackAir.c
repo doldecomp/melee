@@ -110,10 +110,7 @@ void ftGw_AttackAirN_ItemTurtleSetup(HSD_GObj* gobj)
     Vec3 sp10;
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (fp->fv.gw.x225C_turtleGObj != NULL) {
         ftGw_AttackAirN_ItemTurtleOnLand(gobj);
@@ -198,10 +195,7 @@ void ftGw_AttackAirN_ItemSparkySetup(HSD_GObj* gobj)
     Vec3 sp10;
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (fp->fv.gw.x2260_sparkyGObj != NULL) {
         ftGw_AttackAirN_ItemSparkyOnLand(gobj);
@@ -392,10 +386,7 @@ void ftGw_LandingAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->fv.gw.x2258_parachuteGObj != NULL) {
         it_802C6DD8(fp->fv.gw.x2258_parachuteGObj);
@@ -467,10 +458,7 @@ void ftGw_LandingAirB_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->fv.gw.x2258_parachuteGObj != NULL) {
         it_802C6DD8(fp->fv.gw.x2258_parachuteGObj);
@@ -532,10 +520,7 @@ void ftGw_LandingAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->fv.gw.x2258_parachuteGObj != NULL) {
         it_802C6DD8(fp->fv.gw.x2258_parachuteGObj);

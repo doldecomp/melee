@@ -48,10 +48,7 @@ void ftCo_800C23FC(ftCo_GObj* gobj)
     {
         float pos_y_offset = fp->cur_pos.y + ef_offset.y;
         Vec3 ef_pos;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4] = { 0 };
-#endif
         ef_pos.x = fp->cur_pos.x;
         ef_pos.y = pos_y_offset;
         ef_pos.z = fp->cur_pos.z;
@@ -69,10 +66,7 @@ void ftCo_800C23FC(ftCo_GObj* gobj)
 
 void ftCo_PassiveCeil_Anim(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     if (ftCheckThrowB3(fp)) {
         fp->self_vel.x = fp->input.lstick.x * fp->co_attrs.passiveceil_vel_x;

@@ -23,10 +23,7 @@ s32 HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num)
     u32 pool_size;
     u8* pool_start;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     HSD_ASSERT(0xEE, data);
     pool_size = data->size * num;

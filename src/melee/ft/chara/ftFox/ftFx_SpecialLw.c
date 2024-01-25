@@ -91,10 +91,7 @@ static inline void ftFox_SpecialLw_SetVars(HSD_GObj* gobj)
 
 void ftFx_SpecialLw_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialLwStart, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
@@ -149,10 +146,7 @@ void ftFx_SpecialAirLwStart_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (!(fp->input.held_inputs & HSD_PAD_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
@@ -213,10 +207,7 @@ void ftFx_SpecialLwStart_Phys(HSD_GObj* gobj)
 
 void ftFx_SpecialAirLwStart_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = gobj->user_data;
     ftCo_DatAttrs* ca = &fp->co_attrs;
@@ -477,10 +468,7 @@ static void ftFx_SpecialLw_Turn(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftFox_DatAttrs* da = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->mv.fx.SpecialLw.turnFrames--;
     if (fp->cmd_vars[0] == 0 &&
@@ -523,10 +511,7 @@ void ftFx_SpecialLwTurn_Anim(HSD_GObj* gobj)
     /// @todo Shared @c inline with #ftFx_SpecialAirLwTurn_Anim.
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     if (!(fp->input.held_inputs & HSD_PAD_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
@@ -547,10 +532,7 @@ void ftFx_SpecialAirLwTurn_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     if (!(fp->input.held_inputs & HSD_PAD_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
@@ -595,10 +577,7 @@ void ftFx_SpecialAirLwTurn_Phys(HSD_GObj* gobj)
     ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
     ftCo_DatAttrs* ca = getFtAttrs(fp);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (fp->mv.fx.SpecialLw.gravityDelay != 0) {
         fp->mv.fx.SpecialLw.gravityDelay--;
@@ -744,10 +723,7 @@ void ftFx_SpecialLwHit_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (!(fp->input.held_inputs & HSD_PAD_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
@@ -773,10 +749,7 @@ void ftFx_SpecialAirLwHit_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!(fp->input.held_inputs & HSD_PAD_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
@@ -823,10 +796,7 @@ void ftFx_SpecialAirLwHit_Phys(HSD_GObj* gobj)
     ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
     ftCo_DatAttrs* ca = getFtAttrs(fp);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (fp->mv.fx.SpecialLw.gravityDelay != 0) {
         fp->mv.fx.SpecialLw.gravityDelay--;
@@ -926,10 +896,7 @@ void ftFx_SpecialLwHit_Enter(HSD_GObj* gobj)
 /// Fox & Falco's grounded Reflector End Animation callback
 void ftFx_SpecialLwEnd_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007DB24(gobj);
@@ -940,10 +907,7 @@ void ftFx_SpecialLwEnd_Anim(HSD_GObj* gobj)
 /// Fox & Falco's aerial Reflector End Animation callback
 void ftFx_SpecialAirLwEnd_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007DB24(gobj);
@@ -976,10 +940,7 @@ void ftFx_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
     ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
     ftCo_DatAttrs* ca = getFtAttrs(fp);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (fp->mv.fx.SpecialLw.gravityDelay != 0) {
         fp->mv.fx.SpecialLw.gravityDelay--;

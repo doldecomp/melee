@@ -54,10 +54,7 @@ bool ftCo_Down_CheckInput(ftCo_GObj* gobj)
 
 void ftCo_80098324(ftCo_GObj* gobj, FtMotionId msid)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);

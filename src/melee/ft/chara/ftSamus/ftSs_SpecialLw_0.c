@@ -37,10 +37,7 @@ void ftSs_Init_80128944(HSD_GObj* gobj, f32 farg1, f32 farg2)
     ftSs_DatAttrs* da = fp->dat_attrs;
     f32 float_result = ftSs_Init_80128AC8(gobj, farg1, farg2);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftColl_8007B868(gobj)) {
         switch (fp->x2070.x2071_b0_3) {
@@ -107,10 +104,7 @@ void ftSs_Init_80128B1C(HSD_GObj* gobj, f32 angle, f32 arg9, f32 argA)
     Fighter* fp;
     Fighter* fighter2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp = fighter2 = GET_FIGHTER(gobj);
     ftCommon_8007DB58(gobj);
@@ -159,10 +153,7 @@ void ftSs_SpecialAirLw_Anim(HSD_GObj* gobj)
 
 void ftSs_SpecialLw_IASA(HSD_GObj* gobj)
 {
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* da = fp->dat_attrs;
     if (fp->cmd_vars[1] && fp->input.lstick.y < da->x14) {
@@ -195,10 +186,7 @@ void ftSs_SpecialLw_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     struct ftCo_DatAttrs* ftAttr = &fp->co_attrs;
 
@@ -218,10 +206,7 @@ void ftSs_SpecialAirLw_Phys(HSD_GObj* gobj)
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
     struct ftCo_DatAttrs* ftAttr = &fp->co_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftCommon_8007D4B8(fp);
     ftCommon_8007D344(fp, 0.0f,
@@ -235,10 +220,7 @@ void ftSs_SpecialLw_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->cmd_vars[0]) {
         /// @todo Remove cast.
@@ -257,10 +239,7 @@ void ftSs_SpecialAirLw_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->cmd_vars[0]) {
         if (ft_800824A0(gobj,
@@ -295,10 +274,7 @@ int ftSs_SpecialLw_80129100(HSD_GObj* gobj, s32* arg1, s32* arg2)
         Fighter* fp = GET_FIGHTER(gobj);
         ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4];
-#endif
 
         if (!fp->fv.ss.x222C) {
             return -1;

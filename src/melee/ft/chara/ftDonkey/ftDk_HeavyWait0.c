@@ -29,10 +29,7 @@ bool ftDk_MS_341_800DF938(HSD_GObj* gobj)
 void ftDk_MS_341_800DF980(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
     if (fp->ground_or_air == GA_Air) {
         ftCommon_8007D7FC(fp);
     }

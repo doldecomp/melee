@@ -656,10 +656,7 @@ void ftDk_Init_8010DB3C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
     CollData* colldata = &fp->coll_data;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (ftCheckThrowB3(fp) && (colldata->env_flags & 98304)) {
         Vec3 vec_list[4];
         int i;

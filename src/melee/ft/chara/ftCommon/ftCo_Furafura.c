@@ -29,10 +29,7 @@ void ftCo_80099010(ftCo_GObj* gobj)
 
 void ftCo_Furafura_Anim(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     fp->shield_health = p_ftCommonData->x280_unkShieldHealth;
     fp->x1A4C -= p_ftCommonData->x300;

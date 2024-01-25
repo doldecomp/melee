@@ -162,10 +162,7 @@ void ftZd_SpecialAirLw_Phys(HSD_GObj* gobj)
     Fighter* fp;
     ftZelda_DatAttrs* attributes;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
@@ -255,10 +252,7 @@ void ftZd_SpecialAirLw2_Phys(HSD_GObj* gobj)
     Fighter* fp;
     ftZelda_DatAttrs* attributes;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
@@ -319,10 +313,7 @@ void ftZd_SpecialLw_8013B4D8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftZelda_DatAttrs* sa = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     {
         enum_t msid;

@@ -99,10 +99,7 @@ void ftMr_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
 
     int rand_val_800E0D1C;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp = gobj->user_data;
 

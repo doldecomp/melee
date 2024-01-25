@@ -301,10 +301,7 @@ void ftZd_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 /// Zelda_RemoveDress
 void ftZd_Init_801395C8(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     int result = ftParts_80074A74(gobj, 1);
     if (result == -1) {

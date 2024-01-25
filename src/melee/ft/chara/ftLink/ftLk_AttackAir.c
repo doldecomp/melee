@@ -21,10 +21,7 @@
 
 void ftLk_AttackAir_800EB3BC(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x5F8 == 0) {
         ftLk_DatAttrs* da = fp->dat_attrs;
@@ -48,10 +45,7 @@ void ftLk_AttackAir_Enter(HSD_GObj* gobj)
 
 static void lwOnHit(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
     float frame_len = da->attackairlw_hit_anim_frame_end -
@@ -76,10 +70,7 @@ static void lwDoAnimHitCapsule(HSD_GObj* gobj, ssize_t idx)
 
 static void lwOnAnim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[40];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     float frame_start = fp->mv.lk.attackair.lw_frame_start;
     ftLk_DatAttrs* da = fp->dat_attrs;

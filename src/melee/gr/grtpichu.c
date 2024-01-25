@@ -139,10 +139,7 @@ static void grTPichu_80222D5C(HSD_GObj* arg0) {}
 
 static void grTPichu_80222D60(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Ground* gp = GET_GROUND(gobj);
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
@@ -164,10 +161,7 @@ static void grTPichu_80222DEC(HSD_GObj* arg0) {}
 
 static void grTPichu_80222DF0(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Ground* gp = GET_GROUND(gobj);
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);

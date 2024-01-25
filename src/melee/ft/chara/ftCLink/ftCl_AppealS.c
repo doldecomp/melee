@@ -23,10 +23,7 @@ void ftCl_AppealS_Anim(HSD_GObj* gobj)
     Fighter* fp0;
     Fighter* fp1;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp0 = fp1 = gobj->user_data;
 

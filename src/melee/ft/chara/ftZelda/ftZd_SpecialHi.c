@@ -77,7 +77,6 @@ void ftZd_SpecialHi_8013979C(HSD_GObj* gobj)
 
 static void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
 {
-    /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[4];
     _[0] = 0;
@@ -137,10 +136,7 @@ void ftZd_SpecialAirHi_Enter(HSD_GObj* gobj)
         {
             Vec3 vec;
 
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[20];
-#endif
 
             ssize_t boneIndex = ftParts_8007500C(fp, 4);
             HSD_JObj* jObj = fp->parts[boneIndex].joint;
@@ -325,10 +321,7 @@ static bool ftZelda_80139D60_Helper(HSD_GObj* gobj)
 
 void ftZd_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -385,7 +378,6 @@ void ftZd_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
 
 void ftZd_SpecialHi_80139F6C(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 unused8;
 #endif
@@ -429,10 +421,7 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
     f32 temp_f6;
     CollData* collData;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
@@ -519,10 +508,7 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
     f32 var_f31;
     f32 temp_f0;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     f64 _half;
     f64 _three;
@@ -598,10 +584,7 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
 
 void ftZd_SpecialHi_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -632,10 +615,7 @@ void ftZd_SpecialHi_Phys(HSD_GObj* gobj)
 
 void ftZd_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftZelda_DatAttrs* attributes = fp->dat_attrs;
@@ -663,10 +643,7 @@ void ftZd_SpecialHi_Coll(HSD_GObj* gobj)
 
 void ftZd_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftZelda_DatAttrs* attributes = fp->dat_attrs;

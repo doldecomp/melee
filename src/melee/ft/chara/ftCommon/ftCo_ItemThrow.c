@@ -264,10 +264,7 @@ static FtMotionId getHeavyThrowMsid(ftCo_Fighter* fp, float arg1)
 
 int ftCo_80094EA4(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     float stick_angle;
     float var_f28;
     float var_f29;
@@ -860,10 +857,7 @@ lbl_800957C8:
 void ftCo_80095744(ftCo_GObj* gobj, int* arg1)
 {
     Vec3 vec;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     vec.x = vec.y = vec.z = 0;
     if (ftCo_GetParasolStatus(gobj) != -1) {
@@ -972,10 +966,7 @@ lbl_800958A4:
 
 void ftCo_800957F4(ftCo_GObj* gobj, int msid)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
@@ -1103,10 +1094,7 @@ lbl_80095A08:
 /// @todo Mostly just an inline of #ftCo_800957F4.
 void ftCo_800958FC(HSD_GObj* gobj, FtMotionId msid)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     float temp_f2;
     float var_f31;
     void* temp_r31;
@@ -2040,10 +2028,7 @@ static inline void inlineA0(ftCo_GObj* gobj, FtMotionId msid)
 
 void ftCo_80096250(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
     if (fp->motion_id >= ftCo_MS_LightThrowF4) {
@@ -2137,10 +2122,7 @@ lbl_80096454:
 
 void ftCo_80096374(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCommon_8007D7FC(fp);
     {

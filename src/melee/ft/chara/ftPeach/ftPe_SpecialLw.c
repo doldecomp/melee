@@ -34,10 +34,7 @@
 ItemKind pickVeg(HSD_GObj* gobj)
 {
     ftPe_DatAttrs* a = GET_FIGHTER(gobj)->dat_attrs;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     ssize_t randi, idx;
     {
         int odds;
@@ -260,10 +257,7 @@ static void doAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
 
 void ftPe_SpecialLw_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
     doAnim(gobj, ft_8008A2BC);
 }
 

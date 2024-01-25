@@ -27,10 +27,7 @@ u8 DSPInitCode[] = {
 
 void __OSInitAudioSystem(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     u32 r28;
     u16 r3;

@@ -53,10 +53,7 @@ static bool checkItemThrowInput(ftCo_GObj* gobj)
  */
 bool ftCo_AttackAir_CheckItemThrowInput(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_PAD_A || ftCo_800DF478(fp)) {
         if ((unsigned) ftCo_AttackAir_GetMsidFromCStick(fp) -

@@ -363,10 +363,7 @@ void ftPp_Init_OnLoadForNana(Fighter* fp)
 
 void ftPp_Init_OnLoad(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     void** item_list = fp->ft_data->x48_items;

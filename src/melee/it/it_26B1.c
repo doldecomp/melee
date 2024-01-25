@@ -18,7 +18,6 @@
 
 static inline float _sqrtfItem(float x)
 {
-/// @todo Unused stack and float order hack.
 #ifdef MUST_MATCH
     f64 _half = 0.5;
 #endif
@@ -485,10 +484,7 @@ inline void RunCallbackUnk(HSD_GObjInteraction proc, HSD_GObj* gobj0,
 /// Remove item from player on death?
 void it_8026B7F8(HSD_GObj* fighter_gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     HSD_GObj *cur, *owner;
     for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
@@ -956,10 +952,7 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
         bobOmbGObj =
             it_80283AE4(bobOmbRain->x0, &bobOmbRain->x8_vec, bobOmbRain->x18);
         if (bobOmbGObj != NULL) {
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[8];
-#endif
 
             ip = GET_ITEM(bobOmbGObj);
             kind0 = ip->kind;

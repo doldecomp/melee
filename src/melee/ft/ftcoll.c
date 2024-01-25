@@ -2996,10 +2996,7 @@ ASM void ftColl_80078A2C(Fighter_GObj* this_gobj)
     Fighter* this_fp;
     Fighter_GObj* victim_gobj;
     Fighter* victim_fp;
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     u32 i;
     HitCapsule* this_hit;
     u32 j;

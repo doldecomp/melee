@@ -24,10 +24,7 @@ void ftMh_MS_358_80152880(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftMh_MS_Poke1, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
@@ -76,10 +73,7 @@ static inline float my_sqrtf(float x)
     static const double _half = .5;
     static const double _three = 3.0;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
 
     volatile float y;
     if (x > 0) {

@@ -72,10 +72,7 @@ static f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
 void ftCa_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
@@ -88,10 +85,7 @@ void ftCa_SpecialN_Enter(HSD_GObj* gobj)
 void ftCa_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
@@ -166,10 +160,7 @@ static inline void doPhys(HSD_GObj* gobj)
 
 void ftCa_SpecialN_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     doPhys(gobj);
     ft_80084FA8(gobj);
 }

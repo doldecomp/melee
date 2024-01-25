@@ -41,10 +41,7 @@ void ftMs_SpecialLw_Enter(HSD_GObj* gobj)
 
 void ftMs_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -66,10 +63,7 @@ void ftMs_SpecialAirLw_Enter(HSD_GObj* gobj)
 
 void ftMs_SpecialLw_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* da = getFtSpecialAttrsD(fp);
@@ -92,10 +86,7 @@ void ftMs_SpecialLw_Anim(HSD_GObj* gobj)
 
 void ftMs_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* da = getFtSpecialAttrsD(fp);
@@ -128,10 +119,7 @@ void ftMs_SpecialLw_Phys(HSD_GObj* gobj)
 
 void ftMs_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Fighter* fp = gobj->user_data;
     MarsAttributes* da = getFtSpecialAttrsD(fp);
@@ -160,10 +148,7 @@ void ftMs_SpecialAirLw_Coll(HSD_GObj* gobj)
 
 void ftMs_SpecialLw_80138D38(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     {
         Fighter* fp = gobj->user_data;
@@ -186,10 +171,7 @@ void ftMs_SpecialLw_80138D38(HSD_GObj* gobj)
 
 void ftMs_SpecialLw_80138DD0(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     {
         Fighter* fp0 = gobj->user_data;
@@ -214,7 +196,6 @@ void ftMs_SpecialLwHit_Anim(HSD_GObj* gobj)
 {
     ssize_t idx;
 
-    /// @todo Unused stack.
 #ifdef MUST_MATCH
     s32 hb;
     u8 _[8];
@@ -260,7 +241,6 @@ void ftMs_SpecialAirLwHit_Anim(HSD_GObj* gobj)
 {
     ssize_t idx;
 
-    /// @todo Unused stack.
 #ifdef MUST_MATCH
     s32 hb;
     u8 _[8];
@@ -363,16 +343,10 @@ void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
 {
     s32 temp_r0;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused0[4];
-#endif
     Vec3 sp18;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused1[12];
-#endif
 
     {
         Fighter* fp = gobj->user_data;

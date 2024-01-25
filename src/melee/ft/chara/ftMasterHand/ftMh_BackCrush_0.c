@@ -34,10 +34,7 @@ void ftMh_MS_370_80153D2C(HSD_GObj* gobj)
     Vec3 pos;
     Vec3 scl;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftMh_MS_BackCrush, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
@@ -113,10 +110,7 @@ void ftMh_BackCrush_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (--fp->mv.mh.unk0.x0 > 0) {
         ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;

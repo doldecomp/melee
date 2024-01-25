@@ -54,9 +54,6 @@ void ftCo_ShieldBreakFly_Coll(Fighter_GObj* gobj)
 
 void ftCo_80098C9C(Fighter_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_80098B20(gobj);
 }

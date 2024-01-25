@@ -67,10 +67,7 @@ void ftMt_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;
@@ -106,10 +103,7 @@ void ftMt_SpecialAirS_Enter(HSD_GObj* gobj)
 
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;

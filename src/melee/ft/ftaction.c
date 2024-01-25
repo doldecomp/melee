@@ -262,10 +262,7 @@ struct test5 {
 #endif
 void ftAction_80071028(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     Fighter* fp = gobj->user_data;
     int gfx_id;
     int bone;
@@ -590,10 +587,7 @@ lbl_800715C4:
 
 void ftAction_8007121C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     HitCapsule* hit;
     char* temp_r3;
     char part;
@@ -755,10 +749,7 @@ asm void ftAction_8007169C(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_8007169C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     char* cmd_x8 = cmd->x8;
     ftCo_Fighter* fp = gobj->user_data;
     *(float*) (fp + (((((u16) *cmd_x8 >> 7U) & 7) * 0x138) + 0x930)) =
@@ -1395,10 +1386,7 @@ lbl_80071C84:
 
 void ftAction_80071B50(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     int temp_r4_2;
     char* temp_r5;
     char* temp_r6;
@@ -1522,10 +1510,7 @@ lbl_80071D1C:
 
 void ftAction_80071CCC(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     FtCollisionData* cd = fp->ft_data->x4C_collisionData;
     if (cd == NULL) {
@@ -1727,10 +1712,7 @@ asm void ftAction_80071F34(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071F34(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCommon_8007F5CC(gobj, *cmd->x8 & 0x03FFFFFF);
     cmd->x8 += 4;
 }
@@ -2017,10 +1999,7 @@ lbl_800722B4:
 
 void ftAction_80071FC8(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     int var_r27 = M2C_ERROR(saved_reg_r27);
     char* cmd_x8 = cmd->x8;
     void* fp = gobj->user_data;
@@ -2813,10 +2792,7 @@ lbl_8007294C:
 
 void ftAction_800728F8(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     char* temp_r5 = cmd->x8;
     if (((u8) M2C_FIELD(temp_r5, s8*, 0) >> 1U) & 1) {
         ftCommon_8007EC30(((u32) M2C_FIELD(temp_r5, s8*, 0) >> 0xDU) & 0xFFF,
@@ -2864,10 +2840,7 @@ asm void ftAction_8007297C(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_8007297C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCommon_8007ECD4(gobj->user_data, *cmd->x8 & 0x03FFFFFF);
     cmd->x8 += 4;
 }
@@ -2974,10 +2947,7 @@ asm void ftAction_80072A5C(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80072A5C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     char* cmd_x8 = cmd->x8;
     ftCo_800BFFD0(gobj->user_data, (int) (s8) ((u16) *cmd_x8 >> 2U),
                   (int) *cmd_x8 & 0x3FFFF);
@@ -3135,10 +3105,7 @@ asm void ftAction_80072B94(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80072B94(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     u32 cmd_x8 = *cmd->x8;
     ftCo_8009E318((int) ((cmd_x8 << 6) | ((cmd_x8 >> 0x1AU) & 0x20)) >> 6, fp,
@@ -3543,10 +3510,7 @@ lbl_80072FB0:
 #endif
 void ftAction_80072E4C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24] = { 0 };
-#endif
     IntVec3 ivec1; /* compiler-managed */
     int* sp40;
     M2C_UNK sp38;
@@ -3704,10 +3668,7 @@ asm void ftAction_800730B8(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_800730B8(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     char* cmd_x8 = cmd->x8;
     ftCo_800C8B60(gobj->user_data, ((u8) *cmd_x8 >> 1U) & 1,
                   (s8) ((u16) *cmd_x8 >> 1U));
@@ -4181,10 +4142,7 @@ lbl_80073594:
 
 void ftAction_8007349C(Fighter_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     CommandInfo* cmd = (CommandInfo*) &fp->x3E4_fighterCmdScript;
     fp->x3E4_fighterCmdScript.x3E8_scriptFrameTimer =

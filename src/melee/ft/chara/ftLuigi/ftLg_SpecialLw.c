@@ -74,10 +74,7 @@ void ftLg_SpecialLw_Enter(HSD_GObj* gobj)
     Fighter* temp_fp;
     Fighter* fp2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     temp_fp = (fp = GET_FIGHTER(gobj));
     luigiAttrs = temp_fp->dat_attrs;
@@ -107,10 +104,7 @@ void ftLg_SpecialAirLw_Enter(HSD_GObj* gobj)
     Fighter* fp2;
     f32 cycloneVar;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     temp_fp = (fp = GET_FIGHTER(gobj));
     luigiAttrs = temp_fp->dat_attrs;
@@ -144,10 +138,7 @@ static inline void ftLuigi_SpecialLw_SetNULL(HSD_GObj* gobj)
 /// Luigi's grounded Cyclone Animation callback
 void ftLg_SpecialLw_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftLuigi_SpecialLw_SetNULL(gobj);
@@ -205,10 +196,7 @@ static inline void ftLuigi_SpecialLw_GroundToAir(HSD_GObj* gobj)
 // https://decomp.me/scratch/pXs3o // Luigi's grounded Cyclone Physics callback
 void ftLg_SpecialLw_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* attrs = getFtSpecialAttrs(fp);
@@ -242,10 +230,7 @@ void ftLg_SpecialLw_Phys(HSD_GObj* gobj)
 // https://decomp.me/scratch/85hbq // Luigi's aerial Cyclone Physics callback
 void ftLg_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* attrs0 = fp->dat_attrs;
@@ -305,10 +290,7 @@ void ftLg_SpecialLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     if (fp->ground_or_air == GA_Ground) {
         if (!ft_80082888(gobj, &ftLg_SpecialLw_CollisionBox)) {
@@ -348,10 +330,7 @@ void ftLg_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     if (ft_800824A0(gobj, &ftLg_SpecialLw_CollisionBox) != false) {
         ftLuigi_SpecialAirLw_AirToGround(gobj);

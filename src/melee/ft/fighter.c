@@ -2509,10 +2509,7 @@ void Fighter_CallAcessoryCallbacks_8006C624(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (!fp->x221F_b3) {
         if (fp->x2219_b5) {
@@ -2658,10 +2655,7 @@ void Fighter_TakeDamage_8006CC7C(Fighter* fp, f32 damage_amount)
 /// https://decomp.me/scratch/9QvFG
 void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     bool temp_bool;
     bool hold_item_bool = 0;
     Vec3 vec;
@@ -2677,10 +2671,7 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2)
     if (fp->motion_id != 0x145 && (unsigned) fp->motion_id - 0x122 > 1 &&
         fp->dmg.x1860 != 0xAU && !fp->x2226_b2)
     {
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4] = { 0 };
-#endif
         if ( ///// giant if condition
             hold_item_bool && temp_bool &&
             ((HSD_Randi(p_ftCommonData->x418) < arg1) ||

@@ -353,16 +353,10 @@ void grIzumi_801CBE64(HSD_GObj* gobj)
         gp->gv.izumi.xC8;
     jobj = Ground_801C3FA4(gobj, 4);
     { // this looks like inlines, but there's a lot of small differences
-      /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4] = { 0 };
-#endif
         Vec3 x38;
         {
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[8] = { 0 };
-#endif
         }
         lb_8000B1CC(jobj, NULL, &x38);
         {
@@ -664,10 +658,7 @@ void grIzumi_801CCB18(HSD_GObj* gobj)
 void grIzumi_801CCB90(HSD_GObj* gobj, int renderpass)
 {
     /// @remarks i guess PointSize is an inline? seems odd
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     HSD_StateSetPointSize(18, 0);
     grDisplay_801C5DB0(gobj, renderpass);
 }
@@ -777,10 +768,7 @@ void grIzumi_801CCEA0(HSD_GObj* gobj, int renderpass)
 {
     Mtx mtx;
     Vec3 vec;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     HSD_CObj* src;
     HSD_CObj* dst;
     IzumiReflection* refl = (IzumiReflection*) HSD_GObjGetUserData(gobj);

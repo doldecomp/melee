@@ -125,10 +125,7 @@ void ftGw_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp->x74_anim_vel.y = 0.0f;
     fp->self_vel.y = 0.0f;
@@ -145,10 +142,7 @@ void ftGw_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirHi, 0, 0.0f, 1.0f, 0.0f,
@@ -169,10 +163,7 @@ void ftGw_SpecialHi_Anim(HSD_GObj* gobj)
 // Animation callback
 void ftGw_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftGameWatchAttributes* gawAttrs;
 
@@ -254,10 +245,7 @@ void ftGw_SpecialAirHi_Coll(HSD_GObj* gobj)
     ftGameWatchAttributes* gawAttrs;
     int ledgeGrabDir;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp = GET_FIGHTER(gobj);
     gawAttrs = fp->dat_attrs;

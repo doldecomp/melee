@@ -150,10 +150,7 @@ static void grTNess_80222794(HSD_GObj* arg0)
 
 static void grTNess_80222798(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
@@ -178,10 +175,7 @@ static void grTNess_80222824(HSD_GObj* arg0)
 
 static void grTNess_80222828(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);

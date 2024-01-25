@@ -53,10 +53,7 @@ void ftSs_SpecialAirS_Enter(HSD_GObj* gobj)
 
 void ftSs_SpecialS_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -65,10 +62,7 @@ void ftSs_SpecialS_Anim(HSD_GObj* gobj)
 
 void ftSs_SpecialAirS_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_800CC730(gobj);
@@ -86,10 +80,7 @@ void ftSs_SpecialS_Phys(HSD_GObj* gobj)
 
 void ftSs_SpecialAirS_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = getFtSpecialAttrs(fp);
@@ -115,10 +106,7 @@ void ftSs_SpecialAirS_Coll(HSD_GObj* gobj)
 
 void ftSs_SpecialSSmash_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -127,10 +115,7 @@ void ftSs_SpecialSSmash_Anim(HSD_GObj* gobj)
 
 void ftSs_SpecialAirSSmash_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_800CC730(gobj);
@@ -148,10 +133,7 @@ void ftSs_SpecialSSmash_Phys(HSD_GObj* gobj)
 
 void ftSs_SpecialAirSSmash_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[40];
-#endif
 
     Fighter* fighter2;
     Fighter* fp;
@@ -182,10 +164,7 @@ void ftSs_SpecialS_8012A640(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     efLib_DestroyAll(gobj);
     fp->fv.ss.x2244 = 0;

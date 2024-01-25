@@ -71,10 +71,7 @@ void ftWalkCommon_800DFCA4(Fighter_GObj* gobj, FtMotionId msid,
                            float middle_anim_rate, float fast_anim_rate,
                            float accel_mul)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.walk.accel_mul = accel_mul;
@@ -176,10 +173,7 @@ static float getWalkAccel(Fighter* fp, float mul)
 
 void ftWalkCommon_800E0060(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     float accel_mul = fp->mv.co.walk.accel_mul;

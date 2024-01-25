@@ -17,10 +17,7 @@
 static inline void ftCo_SpawnEf(ftCo_GObj* gobj, HSD_JObj* joint, uint arg2,
                                 enum_t arg3)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     efAsync_Spawn((HSD_GObj*) gobj, &fp->x60C, arg2, arg3, joint);
 }

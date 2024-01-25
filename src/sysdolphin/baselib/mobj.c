@@ -196,10 +196,7 @@ HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
     HSD_TObj *tobj, *tobj_2, *tobj_3, *tobj_4, *toon = NULL;
     u32 done = 0;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     HSD_ASSERT(416, list);
     *list = NULL;

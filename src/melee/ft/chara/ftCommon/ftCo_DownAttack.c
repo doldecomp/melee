@@ -99,10 +99,7 @@ bool ftCo_800986B0(ftCo_GObj* gobj)
 
 int ftCo_8009872C(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     if (ftCo_800986B0(gobj)) {
         ftCo_800987D0(gobj);
         return true;

@@ -108,10 +108,7 @@ void ftPk_SpecialLw_SetState_Unk1(HSD_GObj* gobj)
 
 void ftPk_SpecialLw_SpawnEffect(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Vec3 pos;
     Vec3 ef_pos;
@@ -121,10 +118,7 @@ void ftPk_SpecialLw_SpawnEffect(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
     {
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4];
-#endif
 
         /// @todo Result of an inner function.
         bool result;
@@ -254,10 +248,7 @@ void ftPk_SpecialLw_ChangeMotion_Unk07(HSD_GObj* gobj)
 
 void ftPk_SpecialLwStart_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fighter_copy;
@@ -272,10 +263,7 @@ void ftPk_SpecialLwStart_Anim(HSD_GObj* gobj)
 
 void ftPk_SpecialAirLwStart_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fighter_copy;
@@ -290,10 +278,7 @@ void ftPk_SpecialAirLwStart_Anim(HSD_GObj* gobj)
 
 void ftPk_SpecialLwLoop0_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->mv.pk.unk4.x4 == 3) || fp->cmd_vars[0]) {
@@ -314,10 +299,7 @@ void ftPk_SpecialLwLoop0_Anim(HSD_GObj* gobj)
 
 void ftPk_SpecialAirLwLoop0_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->mv.pk.unk4.x4 == 3) || fp->cmd_vars[0]) {

@@ -83,10 +83,7 @@ static inline void spawnEffect(HSD_GObj* gobj)
 
 void ftYs_GuardOn_0_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
 
     fp->mv.ys.unk2.x0 += ftYs_Init_804D9A28;
@@ -206,10 +203,7 @@ asm void ftYs_Shield_8012C1D4(HSD_GObj*)
 
 void ftYs_GuardHold_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -257,10 +251,7 @@ void ftYs_Shield_8012C49C(HSD_GObj* gobj)
         ftColl_8007B0C0(gobj, 0);
 
         {
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[8];
-#endif
 
             ftCo_DatAttrs_xBC_t* co_xBC = &fp0->co_attrs.xBC;
 
@@ -277,10 +268,7 @@ void ftYs_Shield_8012C49C(HSD_GObj* gobj)
 
 void ftYs_GuardOff_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.ys.unk2.x0 = fp->mv.ys.unk2.x0 + ftYs_Init_804D9A28;

@@ -59,10 +59,7 @@ void ftCo_Ottotto_Anim(ftCo_GObj* gobj)
 
 void ftCo_Ottotto_IASA(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     RETURN_IF(ftCo_SpecialS_CheckInput(gobj));
     RETURN_IF(ftCo_Attack100_CheckInput(gobj));
     RETURN_IF(ftCo_800D6824(gobj));
@@ -93,16 +90,10 @@ void ftCo_Ottotto_Coll(ftCo_GObj* gobj)
         if (!ft_800827A0(gobj)) {
             ftCo_800CC730(gobj);
         } else {
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[4] = { 0 };
-#endif
             Vec3 pos;
             {
-                /// @todo Unused stack.
-#ifdef MUST_MATCH
                 u8 _[4] = { 0 };
-#endif
                 if (fp->facing_dir > 0) {
                     mpLib_80053FF4(fp->coll_data.floor.index, &pos);
                 } else {
@@ -147,16 +138,10 @@ void ftCo_OttottoWait_Coll(ftCo_GObj* gobj)
         if (!ft_800827A0(gobj)) {
             ftCo_800CC730(gobj);
         } else {
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[4] = { 0 };
-#endif
             Vec3 pos;
             {
-                /// @todo Unused stack.
-#ifdef MUST_MATCH
                 u8 _[20] = { 0 };
-#endif
                 if (fp->facing_dir > 0) {
                     mpLib_80053FF4(fp->coll_data.floor.index, &pos);
                 } else {

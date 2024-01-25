@@ -20,10 +20,7 @@ void ftCo_800BCC20(ftCo_GObj* gobj)
 
 void ftCo_CaptureWaitKoopa_Anim(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     ftCo_800BC458(gobj);
     if (fp->x1A4C <= 0) {

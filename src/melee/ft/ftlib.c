@@ -51,10 +51,7 @@ s32 ftLib_800860C4(void)
 
 bool ftLib_800860E8(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     HSD_GObj* cur;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
@@ -68,10 +65,7 @@ bool ftLib_800860E8(void)
 
 bool ftLib_80086140(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     HSD_GObj* cur;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
@@ -91,10 +85,7 @@ HSD_GObj* ftLib_80086198(HSD_GObj* gobj)
     HSD_GObj* result;
     int min_percent = 999;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (gobj != NULL) {
         fp = GET_FIGHTER(gobj);
@@ -140,10 +131,7 @@ HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
     HSD_GObj* cur;
     HSD_GObj* result;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     f32 min_dist = F32_MAX;
 
@@ -191,10 +179,7 @@ HSD_GObj* ftLib_80086368(Vec3* v, HSD_GObj* gobj, f32 facing_dir)
     HSD_GObj* cur;
     HSD_GObj* result;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     f32 min_diff = F32_MAX;
 
@@ -251,10 +236,7 @@ f32 ftLib_800864A8(Vec3* v, HSD_GObj* gobj)
     Fighter* fp;
     HSD_GObj* cur;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     int result = 0;
 
@@ -411,10 +393,7 @@ void ftLib_800867E8(HSD_GObj* gobj)
 
 void ftLib_80086824(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     HSD_GObj* cur;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
@@ -536,10 +515,7 @@ bool ftLib_80086A58(HSD_GObj* gobj, S32Vec2* x)
 
 bool ftLib_80086A8C(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     struct {
         u8 x0_fill[0x28];
@@ -639,10 +615,7 @@ void ftLib_80086C18(HSD_GObj* gobj, s32 arg1, s32 arg2)
 
 void ftLib_80086C9C(s32 arg0, s32 arg1)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     HSD_GObj* cur;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
@@ -657,10 +630,7 @@ void ftLib_80086D40(HSD_GObj* arg0, s32 arg1, s32 arg2)
 
 void ftLib_80086DC4(s32 arg0, s32 arg1)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     HSD_GObj* cur;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {

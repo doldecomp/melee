@@ -15,10 +15,7 @@
 
 void ftCo_8009BD4C(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20] = { 0 };
-#endif
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.ca.specialhi.vel.x = fp->x2CC->cargo_hold.x28_LANDING_LAG;
     ftCo_800D5AEC(gobj, fp->x2CC->x4_motion_state + 8, 1, 0, 0, 1);

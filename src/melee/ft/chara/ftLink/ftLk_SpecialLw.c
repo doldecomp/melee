@@ -63,10 +63,7 @@ static void spawnBomb(HSD_GObj* gobj)
     ftLk_DatAttrs* da = fp->dat_attrs;
     if (ftCheckThrowB0(fp)) {
         Vec3 pos;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4];
-#endif
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint,
                     NULL, &pos);
         {
@@ -85,10 +82,7 @@ static void spawnBomb(HSD_GObj* gobj)
 
 static void doAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         cb(gobj);
     }

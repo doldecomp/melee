@@ -80,10 +80,7 @@ static inline float my_sqrtf(float x)
     static const double _half = .5;
     static const double _three = 3.0;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
 
     volatile float y;
     if (x > 0) {
@@ -114,10 +111,7 @@ void ftMh_WalkLoop_Anim(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     ftLib_800866DC(ftBossLib_8015C244(gobj, &fp->cur_pos), &pos);
     lbVector_Diff(&pos, &fp->cur_pos, &vel);

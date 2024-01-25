@@ -368,10 +368,7 @@ float lbVector_sqrtf_accurate(float x)
 Vec3* lbVector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
                              Vec3* screenCoords, int d)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Mtx projMtx;
     float projection[7]; // projection params

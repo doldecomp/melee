@@ -1190,10 +1190,7 @@ static void inlineA1(ftCo_GObj* gobj)
 
 void ftCo_8008DCE0(ftCo_GObj* gobj, int arg1, float facing_dir)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[0x38] = { 0 };
-#endif
     float temp_f30;
     Vec3 pos;
     float sp40;
@@ -2146,10 +2143,7 @@ static inline void inlineF0(ftCo_GObj* gobj)
 
 void ftCo_8008E9D0(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
 
     ftCo_Fighter* fp = gobj->user_data;
     inlineF0(gobj);
@@ -3447,10 +3441,7 @@ static bool inlineC0(ftCo_GObj* gobj)
 
 void ftCo_Damage_Anim(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_8008F744(gobj);
     if (!ftAnim_IsFramesRemaining(gobj) && !fp->x221C_b6) {
@@ -4190,10 +4181,7 @@ lbl_800900CC:
 
 void ftCo_DamageFly_Phys(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Air) {
         if (!fp->x221C_b6) {
@@ -4217,10 +4205,7 @@ void ftCo_DamageFly_Phys(ftCo_GObj* gobj)
 
 void ftCo_DamageFly_Coll(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     CollData* coll = &GET_FIGHTER(gobj)->coll_data;
     if (ft_80081DD4(gobj) != 0) {
         ftCo_80090184(gobj);
@@ -4347,14 +4332,8 @@ lbl_80090308:
 
 void ftCo_DamageFlyRoll_Anim(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _0[8] = { 0 };
-#endif
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _1[0x18] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->mv.co.damage.x8 != 0) {
         inlineD0(gobj);
@@ -4377,10 +4356,7 @@ void ftCo_DamageFlyRoll_IASA(ftCo_GObj* gobj)
 
 void ftCo_DamageFlyRoll_Phys(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Air) {
         if (!fp->x221C_b6) {
@@ -4406,10 +4382,7 @@ void ftCo_DamageFlyRoll_Phys(ftCo_GObj* gobj)
 
 void ftCo_DamageFlyRoll_Coll(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     CollData* coll = &GET_FIGHTER(gobj)->coll_data;
     if (ft_80081DD4(gobj)) {
         RETURN_IF(ftCo_80098928(gobj));

@@ -20,10 +20,7 @@
 
 bool ftCo_8009B170(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     if (ftCo_800CAE80(gobj)) {
         ftCo_8009B1B8(gobj);
         return true;
@@ -65,10 +62,7 @@ void ftCo_CliffJump1_Coll(ftCo_GObj* gobj)
 
 void ftCo_8009B2F8(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     FtMotionId msid = fp->motion_id == ftCo_MS_CliffJumpQuick1
                           ? ftCo_MS_CliffJumpQuick2
@@ -83,10 +77,7 @@ void ftCo_8009B2F8(ftCo_GObj* gobj)
 
 void ftCo_8009B390(ftCo_GObj* gobj, float force_mul)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     FtMotionId msid = fp->motion_id == ftCo_MS_CliffJumpQuick1
                           ? ftCo_MS_CliffJumpQuick2

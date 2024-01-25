@@ -17,10 +17,7 @@ void ftMh_MS_388_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
     Fighter* ft_1;
     Fighter* ft_2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ft_1 = gobj_1->user_data;
     ft_2 = gobj_2->user_data;

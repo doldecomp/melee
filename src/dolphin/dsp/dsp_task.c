@@ -14,10 +14,7 @@ bool __DSP_rude_task_pending;
 
 void __DSPHandler(__OSInterrupt intr, OSContext* ctx)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     OSContext new_ctx;
     u32 msg;

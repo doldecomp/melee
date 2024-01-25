@@ -101,10 +101,7 @@ bool it_8029CF8C(Item_GObj* item_gobj)
 
 void it_8029CFA0(Item_GObj* item_gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     Item* item = GET_ITEM(item_gobj);
     if (item->xDD4_itemVar.foxillusion.xDDC != NULL) {
         HSD_JObjRemoveAll(item->xDD4_itemVar.foxillusion.xDDC);
@@ -117,10 +114,7 @@ void it_8029CFA0(Item_GObj* item_gobj)
 void it_8029CFF0(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
 
     item->xD44_lifeTimer =
         *(f32*) item->xC4_article_data->x4_specialAttributes;
@@ -203,10 +197,7 @@ void it_8029D554(Item_GObj* item_gobj)
             jobj, ftFx_SpecialS_ReturnFloatVarIndexed(item->owner, 1));
         if (ghost_jobj != NULL) {
             Vec3 ghost_pos;
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[8] = { 0 };
-#endif
             ftFx_SpecialS_CopyGhostPosIndexed(item->owner, 3, &ghost_pos);
             HSD_JObjSetTranslate(ghost_jobj, &ghost_pos);
             HSD_JObjSetRotationX(

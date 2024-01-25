@@ -19,10 +19,7 @@
 
 void ftMs_SpecialS_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -114,10 +111,7 @@ void ftMs_SpecialAirS1_IASA(HSD_GObj* gobj)
 
 void ftMs_SpecialAirS1_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* da = fp->dat_attrs;
@@ -214,10 +208,7 @@ void ftMs_SpecialS2_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* da = getFtSpecialAttrsD(fp);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->ground_or_air == GA_Ground) {
         // Physics_Friction
@@ -362,10 +353,7 @@ void ftMs_SpecialS3_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* sa = getFtSpecialAttrsD(fp);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->ground_or_air == GA_Ground) {
         // somethingFriction
@@ -502,9 +490,7 @@ void ftMs_SpecialS4_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* sa = getFtSpecialAttrsD(fp);
 
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->ground_or_air == GA_Ground) {
         // somethingFriction

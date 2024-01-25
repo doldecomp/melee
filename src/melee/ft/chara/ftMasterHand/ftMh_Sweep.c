@@ -78,10 +78,7 @@ void ftMh_SweepLoop_Anim(HSD_GObj* gobj)
         Fighter* fp = gobj->user_data;
         Vec3 pos;
 
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[8];
-#endif
         mpLib_80054158(0, &pos);
         if (fp->cur_pos.x < pos.x) {
             ftMh_MS_347_80151AC8(gobj);

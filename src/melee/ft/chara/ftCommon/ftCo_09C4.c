@@ -22,10 +22,7 @@ bool ftCo_8009C4F8(ftCo_GObj* gobj)
 
 void ftCo_8009C540(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     Fighter* fp = gobj->user_data;
     ftCo_8009A184(gobj, fp->x2CC->x4_motion_state + 6, Ft_MF_None, 0);
     ftAnim_SetAnimRate(gobj, 0);

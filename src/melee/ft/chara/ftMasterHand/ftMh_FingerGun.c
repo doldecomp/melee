@@ -48,10 +48,7 @@ void ftMh_MS_363_801530A4(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftMh_MS_FingerGun1, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
@@ -107,10 +104,7 @@ static inline float my_sqrtf(float x)
     static const double _half = .5;
     static const double _three = 3.0;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
 
     volatile float y;
     if (x > 0) {
@@ -140,10 +134,7 @@ void ftMh_FingerGun1_Phys(HSD_GObj* gobj)
     Vec3 pos;
     Vec3 vel;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     ft_80085134(gobj);
     if (fp->cmd_vars[2] != 0) {
@@ -276,10 +267,7 @@ void ftMh_MS_365_8015364C(HSD_GObj* gobj, HSD_JObj* arg1, f32 arg2, f32 arg3)
 
 void ftMh_MS_365_80153730(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftMh_MS_FingerGun3, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);

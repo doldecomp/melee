@@ -119,10 +119,7 @@ HSD_GObj* grStory_801E30D8(int gobj_id)
 
 void grStory_801E31C0(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
@@ -183,10 +180,7 @@ void grStory_801E3370(HSD_GObj* gobj)
 {
     UnkUserData* data = gobj->user_data;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground_801C2ED0(gobj->hsd_obj, data->x14);
     grAnime_801C8138(gobj, data->x14, 0);
@@ -230,10 +224,7 @@ void grStory_801E3418(HSD_GObj* gobj)
     s32 i;
     s32 tmp;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     UnkUserData2* gp = gobj->user_data;
 

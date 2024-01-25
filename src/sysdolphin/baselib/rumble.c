@@ -96,10 +96,7 @@ void HSD_PadRumblePause(u8 no, int status)
 
 void HSD_PadRumblePauseAll(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     int i;
     for (i = 0; i < 4; i++) {
@@ -109,10 +106,7 @@ void HSD_PadRumblePauseAll(void)
 
 void HSD_PadRumbleUnpauseAll(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     int i;
     for (i = 0; i < 4; i++) {

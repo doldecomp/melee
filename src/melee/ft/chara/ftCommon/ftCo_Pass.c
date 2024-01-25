@@ -38,10 +38,7 @@ bool ftCo_80099F1C(ftCo_GObj* gobj)
 
 bool ftCo_80099F9C(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (ftCo_800C5240(gobj)) {
         return ftCo_800C60C8(gobj);
@@ -56,10 +53,7 @@ bool ftCo_80099F9C(ftCo_GObj* gobj)
 
 bool ftCo_8009A080(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->input.held_inputs & HSD_PAD_LR && ftCo_80099F1C(gobj)) {
         ftCo_8009A228(gobj);
@@ -70,10 +64,7 @@ bool ftCo_8009A080(ftCo_GObj* gobj)
 
 bool ftCo_8009A134(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     CollData* coll = &fp->coll_data;
     if (mpColl_8004CBC0(coll)) {
@@ -86,10 +77,7 @@ bool ftCo_8009A134(ftCo_GObj* gobj)
 void ftCo_8009A184(ftCo_GObj* gobj, FtMotionId msid, MotionFlags mf,
                    float anim_start)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
     ftCommon_8007D468(fp);
@@ -101,10 +89,7 @@ void ftCo_8009A184(ftCo_GObj* gobj, FtMotionId msid, MotionFlags mf,
 
 void ftCo_8009A228(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
     ftCommon_8007D468(fp);

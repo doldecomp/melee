@@ -26,10 +26,7 @@ void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, 353, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftSamus_updateDamageDeathCBs(gobj);
@@ -120,10 +117,7 @@ void ftSs_SpecialHi_IASA(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if ((!fp->cmd_vars[1]) && (!fp->mv.ss.unk5.x0)) {
         if ((lstick_x = fp->input.lstick.x) < 0.0f) {
@@ -151,10 +145,7 @@ void ftSs_SpecialAirHi_IASA(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if ((!fp->cmd_vars[1]) && (!fp->mv.ss.unk5.x0)) {
         if ((lstick_x = fp->input.lstick.x) < 0.0f) {
@@ -199,10 +190,7 @@ void ftSs_SpecialAirHi_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ft_80084DB0(gobj);
     ftCommon_8007D344(fp, 0.0f, samus_attr->x3C, samus_attr->x40);
@@ -213,10 +201,7 @@ void ftSs_SpecialHi_Coll(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->ground_or_air == GA_Air) {
         int direction;
@@ -249,10 +234,7 @@ void ftSs_SpecialAirHi_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (fp->ground_or_air == GA_Air) {
         int direction;

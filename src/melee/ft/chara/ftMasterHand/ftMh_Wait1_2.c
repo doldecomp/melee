@@ -55,10 +55,7 @@ void ftMh_MS_389_80150D28(HSD_GObj* gobj)
 void ftMh_MS_389_80150DC4(HSD_GObj* gobj, HSD_GObjEvent cb, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     if (fp->fv.mh.x2258 == ftMh_MS_Wait2_0) {
         if ((fp->fv.mh.x2258 == ftMh_MS_Wait2_0) ||
             (fp->fv.mh.x2258 == ftMh_MS_Wait2_1))
@@ -88,10 +85,7 @@ void ftMh_MS_389_80150DC4(HSD_GObj* gobj, HSD_GObjEvent cb, Vec3* pos)
 
 void ftMh_Wait1_2_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         fp->fv.mh.x2258 = ftMh_MS_Wait1_2;
@@ -129,10 +123,7 @@ void ftMh_MS_389_80151018(HSD_GObj* gobj)
     fp->mv.mh.unk0.x20 = 0;
     {
         Vec3 pos;
-/// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[8];
-#endif
         pos.x = da->x30_pos2.x;
         pos.y = da->x30_pos2.y;
         pos.z = 0;

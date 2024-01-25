@@ -172,7 +172,6 @@ static void zeroStageInfoArrays(void)
 
 void Ground_801BFFB0(void)
 {
-    /// @todo Unused stack
 #ifdef MUST_MATCH
     u32 _[2];
 #endif
@@ -1284,7 +1283,6 @@ HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
     f32 phi_f0;
     Ground* gp;
     int i;
-/// @todo Unused stack
 #ifdef MUST_MATCH
     u32 _;
 #endif
@@ -1347,7 +1345,6 @@ HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
 
 static void Ground_801C1CD0(HSD_GObj* gobj)
 {
-    /// @todo Unused stack space
 #ifdef MUST_MATCH
     u32 _[2];
 #endif
@@ -2214,7 +2211,6 @@ bool Ground_801C2D24(enum_t arg0, Vec3* arg1)
 {
     Vec3 sp20;
     Vec3 sp14;
-/// @todo Unused stack
 #ifdef MUST_MATCH
     u32 _;
 #endif
@@ -2262,10 +2258,7 @@ bool Ground_801C2D24(enum_t arg0, Vec3* arg1)
 
 bool Ground_801C2ED0(HSD_JObj* jobj, s32 arg1)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
     bool result = false;
     UnkArchiveStruct* temp_r3 = grDatFiles_801C6330(arg1);
     S16Vec3* cur;
@@ -2465,10 +2458,7 @@ void Ground_801C32AC(s32 arg0)
 s32 Ground_801C32D4(s32 arg0, s32 arg1)
 {
     /// @todo Shared @c inline with #Ground_801C33C0.
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
     s32 result;
     int max;
     S16Vec3* cur;
@@ -2503,10 +2493,7 @@ s32 Ground_801C33C0(s32 arg0, s32 arg1)
 {
     /// @attention @c x and @c z being swapped compared to #Ground_801C32D4
     ///            is the only difference.
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
     s32 result;
     int max;
     S16Vec3* cur;
@@ -3104,10 +3091,7 @@ void Ground_801C3BB4(void)
 {
     Vec3 sp1C;
     Vec3 sp10;
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     f32 lft;
     f32 rgt;
     f32 top;
@@ -3416,10 +3400,7 @@ HSD_JObj* Ground_801C4100(HSD_JObj* jobj)
 
 s32 Ground_801C4210(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     /// @todo With a hard-coded range for @c i, very unlikely it's not
     /// returning
     ///       an @c enum. Probably preset joints (accesses a list of
@@ -3512,10 +3493,7 @@ void Ground_801C445C(HSD_LObj* lobj)
     Vec3 pos1;
     Vec3 pos2;
     Vec3 pos3;
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
     HSD_WObj* wobj;
     HSD_LObj* cur;
     f32 pos_mul;
@@ -3850,10 +3828,7 @@ void Ground_801C4A08(HSD_GObj* gobj)
     Ground* gp;
     HSD_JObj* jobj;
     s32 map_id;
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
     if (gobj == NULL) {
         return;
     }
@@ -4557,10 +4532,7 @@ int Ground_801C5940(void)
     int i, j, out_idx;
     UnkArchiveStruct* archive;
     const size_t vals_count = 32;
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
     int vals[vals_count];
     archive = grDatFiles_801C6324();
     out_idx = 0;

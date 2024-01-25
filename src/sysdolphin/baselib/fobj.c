@@ -417,10 +417,7 @@ void HSD_FObjInterpretAnim(HSD_FObj* fobj, void* obj,
             }
             case 4: {
                 if (fobj->fterm <= fobj->time) {
-                    /// @todo Unused stack.
-#ifdef MUST_MATCH
                     u8 _[8] = { 0 };
-#endif
 #ifdef MUST_MATCH
                     state = state = 3;
 #else

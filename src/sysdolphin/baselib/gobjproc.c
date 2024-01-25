@@ -66,10 +66,7 @@ HSD_GObjProc* HSD_GObjProc_8038FD54(HSD_GObj* gobj, void (*func)(HSD_GObj*),
 {
     HSD_GObjProc* gproc;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     gproc = HSD_ObjAlloc(&gobjproc_alloc_data);
     assertProc(gproc);

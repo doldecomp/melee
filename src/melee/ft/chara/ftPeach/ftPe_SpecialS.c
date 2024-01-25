@@ -60,10 +60,7 @@ static inline void enter(HSD_GObj* gobj, FtMotionId msid)
 
 void ftPe_SpecialS_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     fp->x21EC = reset;
@@ -76,10 +73,7 @@ void ftPe_SpecialS_Enter(HSD_GObj* gobj)
 
 void ftPe_SpecialAirS_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     fp->x21EC = reset;
@@ -126,10 +120,7 @@ static void doAirEnd0(HSD_GObj* gobj)
 
 void ftPe_SpecialSStart_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     if (ftAnim_IsFramesRemaining(gobj)) {
         return;
@@ -162,10 +153,7 @@ void ftPe_SpecialAirSStart_IASA(HSD_GObj* gobj) {}
 
 void ftPe_SpecialSStart_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     ftCommon_8007CA80(fp, da->x38 * fp->facing_dir, da->x3C * fp->facing_dir,
@@ -238,10 +226,7 @@ static void enterStart(HSD_GObj* gobj)
 
 void ftPe_SpecialAirSJump_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (GET_FIGHTER(gobj)->cmd_vars[3] != 0 || !ftAnim_IsFramesRemaining(gobj))
     {
         enterAirEndSmash(gobj);
@@ -252,10 +237,7 @@ void ftPe_SpecialAirSJump_IASA(HSD_GObj* gobj) {}
 
 void ftPe_SpecialAirSJump_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     if (fp->cmd_vars[1]) {
@@ -287,10 +269,7 @@ static void enterAirJump(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftPe_DatAttrs* da = fp->dat_attrs;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->mv.pe.specials.x0) {
         fp->self_vel.x = da->specials_smash_vel_x * fp->facing_dir;
@@ -365,10 +344,7 @@ void enterEnd(HSD_GObj* gobj)
 
 static void doPostEnd(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[38] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     if (fp->cmd_vars[2]) {
@@ -387,10 +363,7 @@ static void doPostEnd(HSD_GObj* gobj)
 
 static void doPostEnd_SmallerStack(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[34] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     if (fp->cmd_vars[2]) {
@@ -409,10 +382,7 @@ static void doPostEnd_SmallerStack(HSD_GObj* gobj)
 
 static void enterEndSmash(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialSEnd, Ft_MF_None, 0, 1, 0,
                               NULL);
     doPostEnd(gobj);

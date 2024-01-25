@@ -153,10 +153,7 @@ static void grTMars_802220BC(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
@@ -179,10 +176,7 @@ static void grTMars_8022214C(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
