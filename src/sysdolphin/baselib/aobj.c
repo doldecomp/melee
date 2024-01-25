@@ -1,21 +1,21 @@
-#include <baselib/forward.h>
+#include "aobj.h"
+
+#include "cobj.h"
+#include "debug.h"
+#include "dobj.h"
+#include "fog.h"
+#include "id.h"
+#include "jobj.h"
+#include "list.h"
+#include "lobj.h"
+#include "mobj.h"
+#include "pobj.h"
+#include "robj.h"
+#include "tobj.h"
+#include "wobj.h"
 
 #include <__mem.h>
 #include <stdarg.h>
-#include <baselib/aobj.h>
-#include <baselib/cobj.h>
-#include <baselib/debug.h>
-#include <baselib/dobj.h>
-#include <baselib/fog.h>
-#include <baselib/id.h>
-#include <baselib/jobj.h>
-#include <baselib/list.h>
-#include <baselib/lobj.h>
-#include <baselib/mobj.h>
-#include <baselib/pobj.h>
-#include <baselib/robj.h>
-#include <baselib/tobj.h>
-#include <baselib/wobj.h>
 #include <MetroTRK/intrinsics.h>
 
 HSD_ObjAllocData aobj_alloc_data;

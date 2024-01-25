@@ -2,10 +2,8 @@
 #define PLACEHOLDER_H
 
 #include <platform.h>
-#include <baselib/forward.h>
 
 #include <m2c_macros.h>
-#include <dolphin/os.h>
 
 /// A label in a jump table
 typedef void (*jmp_t)(void);
@@ -14,13 +12,15 @@ typedef void (*jmp_t)(void);
 typedef jmp_t jtbl_t[];
 
 #if defined(__clang__) || defined(__GNUC__)
+#include <dolphin/os/OSError.h>
 #define NOT_IMPLEMENTED                                                       \
     OSPanic(__FILE__, __LINE__, "%s is not implemented!", __func__)
 #elif defined(__MWERKS__) && !defined(BUGFIX)
 #define NOT_IMPLEMENTED asm { nop }
 #else
-#define NOT_IMPLEMENTED                                                       \
-    OSPanic(__FILE__, __LINE__, "Function is not implemented!")
+#include <dolphin/OSError.h>
+#define NOT_IMPLEMENTED
+OSPanic(__FILE__, __LINE__, "Function is not implemented!")
 #endif
 
 #ifndef UNK_T

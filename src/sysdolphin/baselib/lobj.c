@@ -1,19 +1,19 @@
-#include <baselib/forward.h>
+#include "forward.h"
 
 #include "lobj.h"
+
+#include "aobj.h"
+#include "class.h"
+#include "cobj.h"
+#include "list.h"
+#include "object.h"
+#include "wobj.h"
 
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os.h>
-#include <baselib/aobj.h>
-#include <baselib/class.h>
-#include <baselib/cobj.h>
-#include <baselib/fobj.h>
-#include <baselib/list.h>
-#include <baselib/object.h>
-#include <baselib/wobj.h>
 
 static void LObjInfoInit(void);
 

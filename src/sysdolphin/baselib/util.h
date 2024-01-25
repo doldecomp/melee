@@ -4,8 +4,6 @@
 #include <platform.h>
 #include <dolphin/gx/forward.h>
 
-#include <baselib/objalloc.h>
-
 // functions
 void HSD_MulColor(GXColor* arg0, GXColor* arg1, GXColor* dest);
 u32 HSD_GetNbBits(u32 arg0);

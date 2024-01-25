@@ -1,6 +1,7 @@
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjobject.h>
+#include "gobjobject.h"
+
+#include "debug.h"
+#include "gobj.h"
 
 extern void (**HSD_GObj_804D7810)(void*);
 
