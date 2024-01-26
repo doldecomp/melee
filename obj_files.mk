@@ -639,7 +639,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itrabbitc.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itmetalb.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itlipstick.s.o\
-    $(BUILD_DIR)/src/melee/it/items/itspycloak.c.o\
+    $(BUILD_DIR)/asm/melee/it/items/itspycloak.s.o\
     $(BUILD_DIR)/asm/melee/it/items/ittarucann.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itmball.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itlgunray.s.o\
