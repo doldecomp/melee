@@ -7,6 +7,9 @@ from pathlib import Path
 from sys import stderr
 from typing import Optional, cast
 
+import colorama
+colorama.just_fix_windows_console()
+
 from elftools.elf.elffile import ELFFile
 from elftools.elf.sections import SymbolTableSection
 

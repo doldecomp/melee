@@ -6,6 +6,9 @@ import sys
 from pathlib import Path
 from typing import List
 
+import colorama
+colorama.just_fix_windows_console()
+
 here = Path(__file__).parent
 root = (here / "../../").resolve()
 src = root / "src"
