@@ -17,6 +17,3 @@ readme.py >/output/README.md
 python tools/parse_map.py
 python tools/m2ctx/m2ctx.py -pn \
     >/output/ctx.c
-dadosod dol build/ssbm.us.1.2/main.dol \
-    -m build/map.csv \
-    -o /output

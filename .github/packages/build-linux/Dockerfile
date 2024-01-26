@@ -1,8 +1,3 @@
-FROM rust:latest as build-rust
-COPY tools/dadosod /dadosod
-RUN cd dadosod \
-    && cargo build -r
-
 FROM ubuntu:latest AS linux-base
 ARG WIBO_PATH="/usr/local/sbin/wibo"
 COPY --from=ghcr.io/decompals/wibo:latest \
@@ -44,9 +39,6 @@ ENTRYPOINT entrypoint.sh
 FROM linux-rw AS dump-asm
 ARG SHORT_SHA
 ARG TREE_URL
-COPY --from=build-rust \
-    /dadosod/target/release/dadosod \
-    /usr/local/bin/dadosod
 COPY .github/packages/dump-asm/readme.py /usr/local/bin
 RUN chmod +x /usr/local/bin/readme.py
 COPY .github/packages/dump-asm/entrypoint.sh /usr/local/bin
