@@ -12,10 +12,7 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftSeak/ftSk_Init.h"
 
-
 // #include <placeholder.h>
-
-// HSD_GObj* it_802AFD8C(HSD_GObj*, Vec3*, u32, f32);             /* extern */
 
 f32 ftSk_SpecialN_803CC598[] = {
     -1, -0.75, -0.5, -0.25, 0, +0.25, +0.5, +0.75, +1,
@@ -147,17 +144,8 @@ void ftSk_SpecialN_801120D4(Fighter_GObj* fighter_gobj)
 // https://decomp.me/scratch/X0h7H
 void ftSk_SpecialN_Enter(Fighter_GObj* fighter_gobj)
 {
-    // Fighter* fp = GET_FIGHTER(fighter_gobj);
     Fighter* fp2;
-    Fighter* fp;
-    // u32 unused[1];
-
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u32 _[1];
-#endif
-
-    fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = getFighterPlus(fighter_gobj);
 
     Fighter_ChangeMotionState(fighter_gobj, 0x155, 0, 1.0, 0, 1.0, 0);
 
@@ -189,14 +177,8 @@ void ftSk_SpecialAirN_Enter(Fighter_GObj* fighter_gobj)
 {
     Fighter* fp;
     Fighter* fp2;
-    // u32 unused[1];
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u32 _[1];
-#endif
-
-    fp = GET_FIGHTER(fighter_gobj);
+    fp = getFighterPlus(fighter_gobj);
 
     Fighter_ChangeMotionState(fighter_gobj, 0x159, 0, 1.0, 0.0, 1.0, 0);
 
@@ -337,14 +319,8 @@ void ftSk_SpecialAirNStart_Anim(Fighter_GObj* fighter_gobj)
 {
     Fighter* fp;  // r31
     Fighter* fp2; // r4
-    // s32 unused[2];
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u32 _[2];
-#endif
-
-    fp = GET_FIGHTER(fighter_gobj);
+    fp = getFighterPlus(fighter_gobj);
 
     if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
         fp->fv.sk.x2230 = it_802B19AC(fighter_gobj, &fp->cur_pos, 0x17, 0x50,
@@ -387,14 +363,8 @@ void ftSk_SpecialAirNLoop_Anim(Fighter_GObj* fighter_gobj)
 // https://decomp.me/scratch/suLGJ
 void ftSk_SpecialAirNCancel_Anim(Fighter_GObj* fighter_gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);             // r4
+    Fighter* fp = getFighterPlus(fighter_gobj);          // r4
     ftSeakAttributes* specialAttributes = fp->dat_attrs; // r31
-    // s32 unused[2];
-
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u32 _[2];
-#endif
 
     fp->fv.sk.x2230 = 0;
 
@@ -617,14 +587,8 @@ void ftSk_SpecialNStart_Coll(Fighter_GObj* fighter_gobj)
 {
     Fighter* fp;  // r31
     Fighter* fp2; // r4
-    // s32 unused[2];
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u32 _[2];
-#endif
-
-    fp = GET_FIGHTER(fighter_gobj);
+    fp = getFighterPlus(fighter_gobj);
 
     if (ft_80082708(fighter_gobj) == GA_Ground) {
         ftCommon_8007D5D4(fp);
@@ -644,14 +608,8 @@ void ftSk_SpecialNLoop_Coll(Fighter_GObj* fighter_gobj)
 {
     Fighter* fp;  // r31
     Fighter* fp2; // r4
-    // s32 unused[2];
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u32 _[2];
-#endif
-
-    fp = GET_FIGHTER(fighter_gobj);
+    fp = getFighterPlus(fighter_gobj);
 
     if (ft_80082708(fighter_gobj) == GA_Ground) {
         ftCommon_8007D5D4(fp);
@@ -671,18 +629,12 @@ void ftSk_SpecialNCancel_Coll(Fighter_GObj* fighter_gobj)
 {
     ftSeakAttributes* specialAttributes; // r31
     Fighter* fp;                         // r3
-    // s32 unused[4];
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u32 _[4];
-#endif
-
-    fp = fighter_gobj->user_data;
+    fp = getFighterPlus(fighter_gobj);
     specialAttributes = fp->dat_attrs;
 
     if (ft_80082708(fighter_gobj) == GA_Ground) {
-        fp = fighter_gobj->user_data;
+        fp = getFighter(fighter_gobj);
         fp->take_dmg_cb = 0; // x21DC
         fp->death2_cb = 0;   // x21E4
 
@@ -701,14 +653,8 @@ void ftSk_SpecialNEnd_Coll(Fighter_GObj* fighter_gobj)
     ftSeakAttributes* specialAttributes; // r30
     Fighter* fp;                         // r31
     Fighter* fp2;                        // r3
-    // s32 unused[2];
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u32 _[2];
-#endif
-
-    fp = GET_FIGHTER(fighter_gobj);
+    fp = getFighterPlus(fighter_gobj);
     specialAttributes = fp->dat_attrs;
 
     if (ft_80082708((Fighter_GObj*) fighter_gobj) == GA_Ground) {
@@ -735,21 +681,15 @@ void ftSk_SpecialAirNStart_Coll(Fighter_GObj* fighter_gobj)
 {
     Fighter* fp;
     Fighter* fp2;
-    // s32 unused[2];
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u32 _[2];
-#endif
-
-    fp = fighter_gobj->user_data;
+    fp = getFighter(fighter_gobj);
 
     if (ft_80081D0C(fighter_gobj) != GA_Ground) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(fighter_gobj, 0x155, 0x0C4C5080U,
                                   fp->cur_anim_frame, 1.0, 0.0, NULL);
 
-        fp2 = fighter_gobj->user_data;
+        fp2 = getFighter(fighter_gobj);
         fp2->take_dmg_cb = ftSk_Init_80110198; // x21DC
         fp2->death2_cb = ftSk_Init_80110198;   // x21E4
     }
@@ -762,14 +702,8 @@ void ftSk_SpecialAirNLoop_Coll(Fighter_GObj* fighter_gobj)
 {
     Fighter* fp;  // r31
     Fighter* fp2; // r4
-    // s32 unused[2];
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u32 _[2];
-#endif
-
-    fp = GET_FIGHTER(fighter_gobj);
+    fp = getFighterPlus(fighter_gobj);
 
     if (ft_80081D0C(fighter_gobj) != GA_Ground) {
         ftCommon_8007D7FC(fp);
@@ -789,14 +723,9 @@ void ftSk_SpecialAirNCancel_Coll(Fighter_GObj* fighter_gobj)
 {
     Fighter* fp;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u32 _[2];
-#endif
-
     if (ft_80081D0C((Fighter_GObj*) fighter_gobj) != GA_Ground) {
         ftCo_800D5BF8((Fighter_GObj*) fighter_gobj);
-        fp = fighter_gobj->user_data;
+        fp = getFighterPlus(fighter_gobj);
         fp->take_dmg_cb = 0; // x21DC
         fp->death2_cb = 0;   // x21E4
     }
@@ -810,12 +739,7 @@ void ftSk_SpecialAirNEnd_Coll(Fighter_GObj* fighter_gobj)
     Fighter* fp;
     Fighter* fp2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u32 _[2];
-#endif
-
-    fp = fighter_gobj->user_data;
+    fp = getFighterPlus(fighter_gobj);
 
     if (ft_80081D0C(fighter_gobj) != GA_Ground) {
         fp2 = fighter_gobj->user_data;
