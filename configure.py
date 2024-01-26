@@ -152,7 +152,7 @@ if not is_windows():
 
 # Tool versions
 config.compilers_tag = "20231018"
-config.dtk_tag = "v0.6.2"
+config.dtk_tag = "v0.7.2"
 config.sjiswrap_tag = "v1.1.1"
 config.wibo_tag = "0.6.9"
 
