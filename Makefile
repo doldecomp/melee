@@ -41,7 +41,7 @@ DEP_FILES := $(O_FILES:.o=.dep)
 
 MWCC_VERSION := 1.2.5
 MWCC_EPI_VERSION := 1.2.5n
-MWCC_LD_VERSION := 1.1
+MWCC_LD_VERSION := 1.3.2
 
 # Programs
 ifeq ($(OS),Windows_NT)
