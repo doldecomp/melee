@@ -14,8 +14,6 @@
 #include "robj.h"
 #include "spline.h"
 
-#include "lb/lbrefract.h"
-
 #include <__mem.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/vec.h>
