@@ -15,6 +15,8 @@
 #include "spline.h"
 
 #include <__mem.h>
+#include <math.h>
+#include <trigf.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os.h>

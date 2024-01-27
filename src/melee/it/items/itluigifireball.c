@@ -9,9 +9,9 @@
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
-#include "lb/lbvector.h"
 
 #include <common_structs.h>
+#include <math.h>
 #include <dolphin/mtx/vec.h>
 #include <baselib/gobj.h>
 

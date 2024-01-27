@@ -103,6 +103,24 @@ static inline f32 fabs_inline(f32 x)
     }
 }
 
+inline float sqrtf_accurate(float x)
+{
+    volatile float y;
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x); // returns an approximation to
+        guess =
+            0.5 * guess * (3.0 - guess * guess * x); // now have 12 sig bits
+        guess =
+            0.5 * guess * (3.0 - guess * guess * x); // now have 24 sig bits
+        guess =
+            0.5 * guess * (3.0 - guess * guess * x); // now have 32 sig bits
+        guess = 0.5 * guess * (3.0 - guess * guess * x); // extra iteration
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
+}
+
 double frexp(double x, int* exponent);
 double fabsf__Ff(double);
 float tanf(float x);
