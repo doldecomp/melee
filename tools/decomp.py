@@ -7,9 +7,6 @@ from pathlib import Path
 from sys import stderr
 from typing import Optional, cast
 
-import colorama
-colorama.just_fix_windows_console()
-
 from elftools.elf.elffile import ELFFile
 from elftools.elf.sections import SymbolTableSection
 
@@ -139,6 +136,11 @@ def main():
             pyperclip.copy(output)
         if args.print:
             if args.color:
+                try:
+                    import colorama
+                    colorama.just_fix_windows_console()
+                except ModuleNotFoundError:
+                    pass
                 from pygments import highlight
                 from pygments.formatters import TerminalFormatter
                 from pygments.lexers import CLexer
