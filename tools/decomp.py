@@ -136,6 +136,11 @@ def main():
             pyperclip.copy(output)
         if args.print:
             if args.color:
+                try:
+                    import colorama
+                    colorama.just_fix_windows_console()
+                except ModuleNotFoundError:
+                    pass
                 from pygments import highlight
                 from pygments.formatters import TerminalFormatter
                 from pygments.lexers import CLexer
