@@ -200,7 +200,7 @@ typedef struct _HSD_TexLODDesc {
     u32 max_anisotropy; // GXAnisotropy
 } HSD_TexLODDesc;
 
-typedef struct _HSD_ImageDesc {
+struct _HSD_ImageDesc {
     void* img_ptr;
     u16 width;
     u16 height;
@@ -208,7 +208,7 @@ typedef struct _HSD_ImageDesc {
     u32 mipmap;
     f32 minLOD;
     f32 maxLOD;
-} HSD_ImageDesc;
+};
 
 typedef struct _HSD_TObjTev {
     u8 color_op;

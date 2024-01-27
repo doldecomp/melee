@@ -6,7 +6,6 @@
 #include "class.h"
 #include "debug.h"
 #include "displayfunc.h"
-#include "fobj.h"
 #include "initialize.h"
 #include "mtx.h"
 #include "video.h"

@@ -3,8 +3,12 @@
 
 #include <platform.h>
 
-f32 tanf(f32);
-f32 cosf(f32);
-f32 sinf(f32);
+float acosf(float);
+float asinf(float);
+float atan2f(float y, float x);
+float atanf(float);
+float cosf(float);
+float sinf(float);
+float tanf(float);
 
 #endif

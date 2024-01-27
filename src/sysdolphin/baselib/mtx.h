@@ -5,7 +5,6 @@
 #include <dolphin/mtx/forward.h>
 
 #include "baselib/objalloc.h"
-#include "lb/lbrefract.h"
 
 void HSD_MtxInverse(Mtx src, Mtx dest);
 void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest);
