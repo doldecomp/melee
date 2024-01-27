@@ -822,6 +822,8 @@ def generate_build_ninja(
     n.comment("Default rule")
     if build_config:
         n.default(progress_path)
+        n.default("diff")
+        n.default("all_source")
     else:
         n.default(build_config_path)
 
