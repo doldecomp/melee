@@ -1,0 +1,17 @@
+argcomplete
+beautifulsoup4
+black
+colorama
+coverage
+cxxfilt
+GitPython
+graphviz
+isort
+humanfriendly
+pycparser
+pcpp
+pyelftools
+Pygments
+pyperclip
+python_Levenshtein
+watchdog
