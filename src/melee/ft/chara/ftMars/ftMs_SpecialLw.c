@@ -192,14 +192,13 @@ void ftMs_SpecialLw_80138DD0(HSD_GObj* gobj)
     }
 }
 
+#define SOLUTION 0
 void ftMs_SpecialLwHit_Anim(HSD_GObj* gobj)
 {
     ssize_t idx;
 
-#ifdef MUST_MATCH
     s32 hb;
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     s32 sv1 = fp->mv.ms.speciallw.x0;
@@ -209,7 +208,7 @@ void ftMs_SpecialLwHit_Anim(HSD_GObj* gobj)
 
     if (sv1 > 0 && ftLib_800872A4(gobj) == FTKIND_EMBLEM) {
 /// @todo register swap:
-#if !(defined(MUST_MATCH) && !defined(WIP))
+#if SOLUTION == 0
         for (idx = 0; idx < 4; idx++) {
             if (fp->x914[idx].state == HitCapsule_Enabled) {
                 ftColl_8007ABD0(&fp->x914[idx], fp->mv.ms.speciallw.x0, gobj);
@@ -217,7 +216,7 @@ void ftMs_SpecialLwHit_Anim(HSD_GObj* gobj)
         }
 
 // matches but gross:
-#else
+#elif SOLUTION == 1
         idx = 0;
         hb = (s32) fp;
         while (idx < 4) {
@@ -235,16 +234,16 @@ void ftMs_SpecialLwHit_Anim(HSD_GObj* gobj)
         ft_8008A2BC(gobj);
     }
 }
+#undef SOLUTION
 
+#define SOLUTION 0
 // https://decomp.me/scratch/Jx7Ov
 void ftMs_SpecialAirLwHit_Anim(HSD_GObj* gobj)
 {
     ssize_t idx;
 
-#ifdef MUST_MATCH
     s32 hb;
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     s32 sv1 = fp->mv.ms.speciallw.x0;
@@ -254,7 +253,7 @@ void ftMs_SpecialAirLwHit_Anim(HSD_GObj* gobj)
 
     if (sv1 > 0 && ftLib_800872A4(gobj) == FTKIND_EMBLEM) {
 /// @todo register swap:
-#if !(defined(MUST_MATCH) && !defined(WIP))
+#if SOLUTION == 0
         for (idx = 0; idx < 4; idx++) {
             if (fp->x914[idx].state == HitCapsule_Enabled) {
                 ftColl_8007ABD0(&fp->x914[idx], fp->mv.ms.speciallw.x0, gobj);
@@ -262,7 +261,7 @@ void ftMs_SpecialAirLwHit_Anim(HSD_GObj* gobj)
         }
 
 // matches but gross:
-#else
+#elif SOLUTION == 2
         idx = 0;
         hb = (s32) fp;
         while (idx < 4) {
@@ -280,6 +279,7 @@ void ftMs_SpecialAirLwHit_Anim(HSD_GObj* gobj)
         ftCo_800CC730(gobj);
     }
 }
+#undef SOLUTION
 
 // 80138FC0 00135BA0
 void ftMs_SpecialLwHit_IASA(HSD_GObj* gobj) {}

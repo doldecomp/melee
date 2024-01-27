@@ -28,6 +28,7 @@
 -Wno-tautological-bitwise-compare
 -Wno-undefined-internal
 -Wno-unknown-pragmas
+-Wno-unused-but-set-variable
 -Wno-unused-function
 -Wno-unused-parameter
 -Wno-unused-value
