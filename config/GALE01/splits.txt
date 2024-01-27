@@ -98,13 +98,12 @@ melee/lb/lbdvd.c:
 melee/lb/lb_0192.c:
 	.text       start:0x80019230 end:0x80019880
 	.data       start:0x803BA708 end:0x803BAAA8
-	.sdata      start:0x804D3800 end:0x804D3804
 
 melee/lb/lb_0198.c:
 	.text       start:0x80019880 end:0x8001D2BC
 	.data       start:0x803BAAA8 end:0x803BACC8
 	.bss        start:0x804329F0 end:0x804333E0
-	.sdata      start:0x804D3804 end:0x804D3828
+	.sdata      start:0x804D3800 end:0x804D3828
 	.sbss       start:0x804D63D0 end:0x804D63D8
 	.sdata2     start:0x804D7C80 end:0x804D7CC8
 

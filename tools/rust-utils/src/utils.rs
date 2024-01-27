@@ -38,6 +38,10 @@ lazy_static! {
             Glob::new(&format!("{}/ldscript.lcf", *ROOT_STR))
                 .expect("Failed to parse ldscript glob.")
         )
+        .add(
+            Glob::new(&format!("{}/config/**/{{symbols,splits}}.txt", *ROOT_STR))
+                .expect("Failed to parse dtk config glob.")
+        )
         .build()
         .expect("Failed to create SRC_FILES glob.");
 }
