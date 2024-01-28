@@ -24,7 +24,6 @@
 
 #include <common_structs.h>
 #include <math.h>
-#include <baselib/gobj.h>
 #include <melee/it/items/itpeachparasol.h>
 
 /* 11D424 */ static void ftPe_SpecialHi_8011D424(HSD_GObj* gobj);
