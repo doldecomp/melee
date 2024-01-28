@@ -4,32 +4,40 @@
 #
 #    pip-compile
 #
+ansiwrap==0.8.4
+    # via asm-differ
 argcomplete==3.2.2
+    # via -r requirements.in
+asm-differ @ git+https://github.com/simonlindholm/asm-differ.git
     # via -r requirements.in
 beautifulsoup4==4.12.3
     # via -r requirements.in
-black==24.1.0
+black==24.1.1
     # via -r requirements.in
 click==8.1.7
     # via black
 colorama==0.4.6
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   asm-differ
 coverage==7.4.1
     # via -r requirements.in
 cxxfilt==0.3.0
-    # via -r requirements.in
+    # via asm-differ
 gitdb==4.0.11
     # via gitpython
 gitpython==3.1.41
     # via -r requirements.in
 graphviz==0.20.1
-    # via -r requirements.in
+    # via m2c
 humanfriendly==10.0
     # via -r requirements.in
 isort==5.13.2
     # via -r requirements.in
-levenshtein==0.23.0
-    # via python-levenshtein
+levenshtein==0.20.9
+    # via asm-differ
+m2c @ git+https://github.com/matt-kempster/m2c.git
+    # via -r requirements.in
 mypy-extensions==1.0.0
     # via black
 packaging==23.2
@@ -41,20 +49,20 @@ pcpp==1.30
 platformdirs==4.1.0
     # via black
 pycparser==2.21
-    # via -r requirements.in
+    # via m2c
 pyelftools==0.30
     # via -r requirements.in
 pygments==2.17.2
     # via -r requirements.in
 pyperclip==1.8.2
     # via -r requirements.in
-python-levenshtein==0.23.0
-    # via -r requirements.in
-rapidfuzz==3.6.1
+rapidfuzz==2.15.2
     # via levenshtein
 smmap==5.0.1
     # via gitdb
 soupsieve==2.5
     # via beautifulsoup4
-watchdog==3.0.0
-    # via -r requirements.in
+textwrap3==0.9.2
+    # via ansiwrap
+watchdog==2.3.1
+    # via asm-differ
