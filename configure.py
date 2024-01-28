@@ -356,7 +356,7 @@ config.libs = [
     MeleeLib(
         "pl (Player)",
         [
-            Object(NonMatching, "melee/pl/player.c"),
+            Object(Matching, "melee/pl/player.c"),
             Object(NonMatching, "melee/pl/plstale.c"),
             Object(NonMatching, "melee/pl/pltrick.c"),
             Object(NonMatching, "melee/pl/plbonus.c"),

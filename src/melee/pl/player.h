@@ -294,9 +294,11 @@ s32 Player_GetUnk4D(s32 slot);
 void Player_SetUnk4D(s32 slot, s8 unk4D);
 u8 Player_GetFlagsAEBit1(s32 slot);
 
-/// @todo Output is actually @c void, but needs #u8 to match.
-///       Most likely a typo by HAL.
+#ifdef BUGFIX
+void Player_SetFlagsAEBit1(int slot, u8 bit1);
+#else
 u8 Player_SetFlagsAEBit1(int slot, u8 bit1);
+#endif
 
 u8 Player_GetUnk4C(s32 slot);
 void Player_SetUnk4C(s32 slot, u8 unk4C);

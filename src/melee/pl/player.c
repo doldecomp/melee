@@ -1664,26 +1664,17 @@ u8 Player_GetFlagsAEBit1(s32 slot)
     return bit1;
 }
 
+#ifdef BUGFIX
+void Player_SetFlagsAEBit1(int slot, u8 bit1)
+#else
 u8 Player_SetFlagsAEBit1(int slot, u8 bit1)
+#endif
 {
+    StaticPlayer* player;
     Player_CheckSlot(slot);
-
-/// @todo Unused assignment.
-#ifdef MUST_MATCH
-    {
-        StaticPlayer* player = &player_slots[slot];
-    }
-#endif
-
-    player_slots[slot].flagsAE.b1 = bit1;
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wreturn-type"
-#endif
+    player = &player_slots[slot];
+    player->flagsAE.b1 = bit1;
 }
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
 
 u8 Player_GetUnk4C(s32 slot)
 {
@@ -2085,11 +2076,7 @@ s32 Player_80036EA0(s32 slot)
 void Player_80036F34(s32 slot, s32 arg1)
 {
     struct plAllocInfo2 some_struct;
-
-#ifdef MUST_MATCH
     u8 _;
-#endif
-
     StaticPlayer* player;
 
     Player_CheckSlot(slot);
@@ -2116,11 +2103,7 @@ void Player_80036F34(s32 slot, s32 arg1)
 void Player_80037054(s32 slot, s32 arg1)
 {
     struct plAllocInfo2 some_struct;
-
-#ifdef MUST_MATCH
     u8 _;
-#endif
-
     StaticPlayer* player;
 
     Player_CheckSlot(slot);
