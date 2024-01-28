@@ -1544,7 +1544,7 @@ void Player_SetFlagsBit3(s32 slot, u8 bit3)
     player->flags.b3 = bit3;
 }
 
-u8 Player_GetFlagsBit4(s32 slot)
+int Player_GetFlagsBit4(int slot)
 {
     StaticPlayer* player;
     u8 bit4;

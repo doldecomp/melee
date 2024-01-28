@@ -18,7 +18,7 @@
 /* 0C673C */ void ftCo_EntryStart_IASA(ftCo_GObj* gobj);
 /* 0C6740 */ void ftCo_EntryStart_Phys(ftCo_GObj* gobj);
 /* 0C6950 */ void ftCo_EntryStart_Coll(ftCo_GObj* gobj);
-/* 0C6AFC */ UNK_RET ftCo_800C6AFC(UNK_PARAMS);
+/* 0C6AFC */ void ftCo_800C6AFC(HSD_JObj* jobj);
 /* 0C6B6C */ void ftCo_800C6B6C(ftCo_GObj* gobj);
 /* 0C6CC8 */ void ftCo_EntryEnd_Anim(ftCo_GObj* gobj);
 /* 0C6D34 */ void ftCo_EntryEnd_IASA(ftCo_GObj* gobj);
@@ -39,7 +39,7 @@
 /* 0C7434 */ void ftCo_800C7434(ftCo_GObj* gobj);
 /* 0C74AC */ void ftCo_800C74AC(ftCo_GObj* gobj);
 /* 0C74F4 */ bool ftCo_800C74F4(ftCo_GObj* gobj);
-/* 0C7590 */ UNK_RET ftCo_800C7590(UNK_PARAMS);
+/* 0C7590 */ void ftCo_800C7590(ftCo_GObj* gobj);
 /* 0C7734 */ void ftCo_CaptureLeadead_Anim(ftCo_GObj* gobj);
 /* 0C77B0 */ void ftCo_CaptureLeadead_IASA(ftCo_GObj* gobj);
 /* 0C77B4 */ void ftCo_CaptureLeadead_Phys(ftCo_GObj* gobj);
@@ -52,7 +52,7 @@
 /* 0C7AD8 */ void ftCo_CaptureLikelike_Phys(ftCo_GObj* gobj);
 /* 0C7ADC */ void ftCo_CaptureLikelike_Coll(ftCo_GObj* gobj);
 /* 0C7B0C */ UNK_RET ftCo_800C7B0C(UNK_PARAMS);
-/* 0C7C60 */ UNK_RET ftCo_800C7C60(UNK_PARAMS);
+/* 0C7C60 */ void ftCo_800C7C60(ftCo_GObj* gobj, int damage_amount);
 /* 0C7CA0 */ bool ftCo_800C7CA0(ftCo_GObj* gobj);
 /* 0C7FC8 */ void ftCo_DownReflect_Anim(ftCo_GObj* gobj);
 /* 0C8004 */ void ftCo_DownReflect_IASA(ftCo_GObj* gobj);

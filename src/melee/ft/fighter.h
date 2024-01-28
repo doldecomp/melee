@@ -14,7 +14,7 @@
 ///       #Fighter_LoadCommonData, probably all pointers
 extern UNK_T Fighter_804D64FC;
 extern UNK_T Fighter_804D6500;
-extern UNK_T Fighter_804D6504;
+extern HSD_Joint* Fighter_804D6504;
 extern UNK_T Fighter_804D6508;
 extern int* Fighter_804D650C;
 extern UNK_T Fighter_804D6510;

@@ -6,6 +6,7 @@
 #include "ft/fighter.h"
 #include "ft/types.h"
 
+/// @todo #ftCo_800C7070
 void ftCo_800C6150(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

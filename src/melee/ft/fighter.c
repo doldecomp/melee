@@ -126,7 +126,7 @@ u32 Fighter_804D64F8 = 0;
 // the following seems to be an array, initialized in reverse in
 UNK_T Fighter_804D64FC = NULL;
 UNK_T Fighter_804D6500 = NULL;
-UNK_T Fighter_804D6504 = NULL;
+HSD_Joint* Fighter_804D6504 = NULL;
 UNK_T Fighter_804D6508 = NULL;
 int* Fighter_804D650C = NULL;
 UNK_T Fighter_804D6510 = NULL;
@@ -488,11 +488,11 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x2224_b2 = fp->x2224_b3 = false;
 
     fp->x2224_b4 = false;
-    fp->x2108 = 0;
+    fp->capture_timer = 0;
     fp->x2224_b5 = false;
     fp->x1A53 = 0;
     fp->x1A52 = 0;
-    fp->x210C_walljumpInputTimer = 254;
+    fp->wall_jump_input_timer = 254;
     fp->dmg.x1910 = 0;
     fp->x2225_b0 = false;
     fp->x2225_b2 = true;
@@ -2145,8 +2145,8 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
             fp->x2064_ledgeCooldown -= 1;
         }
 
-        if (fp->x2108) {
-            fp->x2108 -= 1;
+        if (fp->capture_timer != 0) {
+            --fp->capture_timer;
         }
 
         ftCo_800C0A98(gobj);

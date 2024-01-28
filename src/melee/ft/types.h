@@ -464,7 +464,7 @@ struct ftCommonData {
     /* +6BC */ UNK_T x6BC;
     /* +6C0 */ UNK_T x6C0;
     /* +6C4 */ UNK_T x6C4;
-    /* +6C8 */ UNK_T x6C8;
+    /* +6C8 */ int x6C8;
     /* +6CC */ int x6CC;
     /* +6D0 */ float x6D0;
     /* +6D4 */ UNK_T x6D4;
@@ -1461,8 +1461,8 @@ struct Fighter {
     /* fp+2102 */ s8 x2102;
     /* fp+2103 */ s8 x2103;
     /* fp+2104 */ s32 x2104;
-    /* fp+2108 */ s32 x2108;
-    /* fp+210C */ u8 x210C_walljumpInputTimer;
+    /* fp+2108 */ int capture_timer;
+    /* fp+210C */ u8 wall_jump_input_timer;
     /* fp+210C */ u8 filler_x210C[3];
     /* fp+2110 */ float x2110_walljumpWallSide;
     /* fp+2114 */ SmashAttr smash_attrs;
@@ -1776,6 +1776,11 @@ struct gmScriptEventDefault {
 struct ftData_UnkCountStruct {
     void* data;
     int count;
+};
+
+struct UnkFloat6_Camera {
+    Vec3 x0;
+    Vec3 xC;
 };
 
 #endif
