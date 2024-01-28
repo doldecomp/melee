@@ -1,10 +1,10 @@
+-e file:tools/asm-differ#egg=asm-differ
 argcomplete
 beautifulsoup4
 black
 colorama
 coverage
 git+https://github.com/matt-kempster/m2c.git
-git+https://github.com/simonlindholm/asm-differ.git
 GitPython
 humanfriendly
 isort
