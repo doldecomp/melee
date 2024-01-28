@@ -1,1 +1,0 @@
---context orig.c --valid-syntax --globals=all --stack-structs --zfill-constants

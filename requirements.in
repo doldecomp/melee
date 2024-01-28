@@ -1,17 +1,14 @@
+-e file:tools/asm-differ#egg=asm-differ
 argcomplete
 beautifulsoup4
 black
 colorama
 coverage
-cxxfilt
+git+https://github.com/matt-kempster/m2c.git
 GitPython
-graphviz
-isort
 humanfriendly
-pycparser
+isort
 pcpp
 pyelftools
 Pygments
 pyperclip
-python_Levenshtein
-watchdog
