@@ -280,7 +280,7 @@ void Player_SetFlagsBit1(s32 slot);
 void Player_UnsetFlagsBit1(int slot);
 s32 Player_GetFlagsBit3(s32 slot);
 void Player_SetFlagsBit3(s32 slot, u8 bit3);
-u8 Player_GetFlagsBit4(s32 slot);
+int Player_GetFlagsBit4(int slot);
 u8 Player_GetFlagsBit5(s32 slot);
 void Player_SetFlagsBit5(s32 slot, u8 bit5);
 u8 Player_GetFlagsBit6(s32 slot);

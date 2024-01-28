@@ -10,11 +10,6 @@
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 
-struct UnkFloat6_Camera {
-    Vec3 x0;
-    Vec3 xC;
-};
-
 void ftCamera_80076018(UnkFloat6_Camera* in, UnkFloat6_Camera* out, f32 mul)
 {
     out->x0.x = in->x0.x * mul;

@@ -13,7 +13,7 @@ trim_trailing_whitespace = true
 charset = utf-8
 
 [*.s]
-indent_style = ignore
+indent_style = unset
 
 [{*.yml,.clang-format}]
 indent_size = 2
