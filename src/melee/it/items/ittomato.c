@@ -75,19 +75,18 @@ void it_8028428C(Item_GObj* arg0)
 
 void it_802842A4(Item_GObj* arg0)
 {
-    Item* temp_r31;
-    void* temp_r30;
+    Item* item = GET_ITEM(arg0);
+    void* temp_r30 = item->xC4_article_data->x4_specialAttributes;
 
-    temp_r31 = arg0->user_data;
-    temp_r30 = temp_r31->xC4_article_data->x4_specialAttributes;
     it_8026B390(arg0);
-    temp_r31->x40_vel.x = it_804DC8B0;
-    temp_r31->x40_vel.y = M2C_FIELD(temp_r30, f32*, 0x14);
-    temp_r31->x40_vel.z = it_804DC8B0;
-    temp_r31->xDD4_itemVar.capsule.x0 = M2C_FIELD(temp_r30, s32*, 0);
-    temp_r31->xDD4_itemVar.Egg.filler[4] &= ~0x80;
-    temp_r31->xDD4_itemVar.star.x8 = 0.0f;
-    it_80284358(arg0, 0, it_804DC8B0);
+    item->x40_vel.x = it_804DC8B0;
+    item->x40_vel.z = item->x40_vel.y = 0;
+
+    item->xDD4_itemVar.capsule.x0 = M2C_FIELD(temp_r30, s32*, 0);
+    item->xDD4_itemVar.Egg.filler[4] &= ~0x80;
+    item->xDD4_itemVar.star.x8 = 0.0f;
+
+    it_80284358(arg0, 0, 0);
 }
 
 void it_80284324(Item_GObj* arg0)
