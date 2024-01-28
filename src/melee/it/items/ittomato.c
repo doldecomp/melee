@@ -4,7 +4,13 @@
 
 extern f32 it_804DC8B0;
 extern f32 it_804DC8B4;
+extern M2C_UNK gm_80473A18;
 /* Warning: struct HSD_Spline is not defined (only forward-declared) */
+
+void it_802845EC(Item_GObj* arg0) {}           // static and header(?)
+void it_802843E4(HSD_GObj* gobj);              // static and header(?)
+void it_80284458(HSD_GObj* gobj);              // static and header(?)
+M2C_UNK it_80284358(Item_GObj*, M2C_UNK, f32); // static and header(?)
 
 HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2)
 {
@@ -67,9 +73,6 @@ void it_8028428C(Item_GObj* arg0)
         M2C_FIELD(temp_r4->xC4_article_data->x4_specialAttributes, s32*, 4);
 }
 
-M2C_UNK it_80284358(Item_GObj*, M2C_UNK, f32); /* static */
-extern f32 it_804DC8B0;
-
 void it_802842A4(Item_GObj* arg0)
 {
     Item* temp_r31;
@@ -86,8 +89,6 @@ void it_802842A4(Item_GObj* arg0)
     temp_r31->xDD4_itemVar.star.x8 = 0.0f;
     it_80284358(arg0, 0, it_804DC8B0);
 }
-
-extern M2C_UNK gm_80473A18;
 
 void it_80284324(Item_GObj* arg0)
 {
@@ -121,15 +122,11 @@ void it_80284388(Item_GObj* arg0)
     // it_80272860(arg0, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
 }
 
-void it_802843E4(HSD_GObj* gobj); /* static */
-
 bool it_802843B8(Item_GObj* arg0)
 {
     it_8026E15C(arg0, it_802843E4);
     return 0;
 }
-
-extern f32 it_804DC8B0;
 
 void it_802843E4(HSD_GObj* arg0)
 {
@@ -148,8 +145,6 @@ bool it_80284420(HSD_GObj* arg0)
 }
 
 void it_80284428(Item_GObj* arg0) {}
-
-void it_80284458(HSD_GObj* gobj); /* static */
 
 bool it_8028442C(Item_GObj* arg0)
 {
@@ -174,8 +169,6 @@ void it_80284488(Item_GObj* arg0)
     // temp_r4 = arg0->user_data->xCC_item_attr;
     // it_80272860(arg0, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
 }
-
-void it_802843E4(HSD_GObj* gobj); /* static */
 
 bool it_802844B8(Item_GObj* arg0)
 {
@@ -230,11 +223,6 @@ bool it_802845E4(Item_GObj* arg0)
 {
     return 0;
 }
-
-void it_802845EC(Item_GObj* arg0) {}
-
-void it_802843E4(HSD_GObj* gobj); /* static */
-void it_80284458(HSD_GObj* gobj); /* static */
 
 bool it_802845F0(Item_GObj* arg0)
 {
