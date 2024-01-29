@@ -3,7 +3,6 @@
 
 #include <platform.h>
 #include "ft/chara/ftKirby/forward.h"
-#include "it/forward.h"
 
 #include "it/types.h"
 

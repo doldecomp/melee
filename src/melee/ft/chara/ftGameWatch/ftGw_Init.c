@@ -22,6 +22,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "it/it_26B1.h"
+#include "it/types.h"
 
 #include <common_structs.h>
 #include <stddef.h>

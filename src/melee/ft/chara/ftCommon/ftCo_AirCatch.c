@@ -17,6 +17,7 @@
 #include "ftCommon/types.h"
 #include "ftLink/types.h"
 #include "ftSamus/types.h"
+#include "it/inlines.h"
 #include "it/item.h"
 #include "it/items/itlinkhookshot.h"
 #include "it/items/itsamusgrapple.h"

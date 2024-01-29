@@ -3,11 +3,14 @@
 #include "it_26B1.h"
 
 #include "ft/ftlib.h"
+#include "ft/types.h"
 #include "gm/gm_1601.h"
+#include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/it_27CF.h"
+#include "it/types.h"
 #include "items/itsword.h"
 
 #include <common_structs.h>
@@ -18,9 +21,7 @@
 
 static inline float _sqrtfItem(float x)
 {
-#ifdef MUST_MATCH
     f64 _half = 0.5;
-#endif
 
     if (x > 0) {
         vf32 y;

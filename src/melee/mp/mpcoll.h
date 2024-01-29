@@ -46,7 +46,7 @@ void mpColl_800478F4(CollData*);
 void mpColl_8004B5C4(CollData*);
 void mpColl_8004CC00(CollData*);
 void mpColl_8004CA6C(CollData*);
-void mpColl_8004CBF4(struct _CollData*);
+void mpColl_8004CBF4(CollData*);
 
 void mpColl_80041C78(void);
 void mpColl_80042384(CollData* cd);

@@ -1,9 +1,11 @@
+#include <platform.h>
 #include <dolphin/mtx/forward.h>
 
 #include "ithammer.h"
 
 #include "ithammerhead.h"
 
+#include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -13,6 +15,27 @@
 #include "lb/lbvector.h"
 
 #include <baselib/random.h>
+
+typedef struct itHammerData {
+    u32 x0;
+    u32 x4;
+    f32 x8;
+} itHammerData;
+
+/* 293FF4 */ static bool it_80293FF4(HSD_GObj* gobj);
+/* 293FFC */ static void it_80293FFC(HSD_GObj* gobj);
+/* 294000 */ static bool it_80294000(HSD_GObj* gobj);
+/* 29402C */ static void it_8029402C(HSD_GObj* gobj);
+/* 294080 */ static int it_80294080(HSD_GObj* gobj);
+/* 294088 */ static void it_80294088(HSD_GObj* gobj);
+/* 2940B8 */ static int it_802940B8(HSD_GObj* gobj);
+/* 294170 */ static int it_80294170(HSD_GObj* gobj);
+/* 2941A4 */ static void it_802941A4(HSD_GObj* gobj);
+/* 29424C */ static void it_8029424C(HSD_GObj* gobj);
+/* 29427C */ static bool it_8029427C(HSD_GObj* gobj);
+/* 294304 */ static int it_80294304(HSD_GObj* gobj);
+/* 29430C */ static void it_8029430C(HSD_GObj* gobj);
+/* 294310 */ static int it_80294310(HSD_GObj* gobj);
 
 ItemStateTable it_803F6150[] = {
     { -1, it_80293FF4, it_80293FFC, it_80294000 },
