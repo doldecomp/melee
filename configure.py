@@ -1052,11 +1052,10 @@ config.libs = [
         [
             Object(NonMatching, "melee/if/ifall.c"),
             Object(NonMatching, "melee/if/iftime.c"),
-            Object(NonMatching, "melee/if/ifstatus_data.c"),
-            Object(Unknown, "melee/if/ifstatus.c"),
+            Object(NonMatching, "melee/if/ifstatus.c"),
             Object(NonMatching, "melee/if/if_2F72.c"),
             Object(NonMatching, "melee/if/ifstock.c"),
-            Object(Unknown, "melee/if/ifmagnify.c"),
+            Object(NonMatching, "melee/if/ifmagnify.c"),
         ],
     ),
     MeleeLib(

@@ -177,4 +177,39 @@ struct gmm_retval_EDB0 {
     s32 x4;
 };
 
+struct Placeholder_8016AE38_flags {
+    u8 unk80 : 1;
+    u8 unk40 : 1;
+    u8 unk20 : 1;
+    u8 unk10 : 1;
+    u8 unk8 : 1;
+    u8 unk4 : 1;
+    u8 unk2 : 1;
+    u8 unk1 : 1;
+};
+
+struct Placeholder_8016AE38_flags_2 {
+    u8 top3 : 3;
+    u8 bot5 : 5;
+};
+
+struct Placeholder_8016AE38_ret_val {
+    u32 unk0;
+    u32 unk4;
+    u32 unk8;
+    u8 unkC;
+    u8 unkD;
+    u8 unkE;
+    u8 unkF;
+    u32 padding[0x931 - 3];
+    Placeholder_8016AE38_flags_2 unk24C8;
+    u8 unk24C9;
+    Placeholder_8016AE38_flags unk24CA;
+};
+
+struct datetime {
+    u16 year;
+    u8 month, day, hour, minute, second;
+};
+
 #endif

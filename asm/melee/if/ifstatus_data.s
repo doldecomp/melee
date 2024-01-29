@@ -138,8 +138,8 @@ ifStatus_804D57C0:
 
 .section .bss, "wa"
     .balign 8
-.global ifStatus_804A10C8
-ifStatus_804A10C8:
+.global ifStatus_HudInfo
+ifStatus_HudInfo:
     .skip 0x278
 
 
