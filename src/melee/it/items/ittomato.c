@@ -177,17 +177,11 @@ bool it_802844B8(Item_GObj* arg0)
     return 0;
 }
 
-void it_802844E4(Item_GObj* arg0)
+void it_802844E4(Item_GObj* arg0) // contains branch arrows
 {
-    HSD_JObj* temp_r3;
-    HSD_JObj* var_r0;
+    HSD_JObj* temp_r3 = GET_JOBJ(arg0);
+    HSD_JObj* var_r0 = (!temp_r3) ? NULL : temp_r3->child;
 
-    temp_r3 = arg0->hsd_obj;
-    if (temp_r3 == NULL) {
-        var_r0 = NULL;
-    } else {
-        var_r0 = temp_r3->child;
-    }
     HSD_JObjClearFlagsAll(var_r0, 0x10);
     Item_80268E5C(arg0, 3, ITEM_ANIM_UPDATE);
 }
@@ -199,7 +193,7 @@ bool it_80284540(Item_GObj* arg0)
 
 void it_80284548(Item_GObj* arg0) {}
 
-void it_8028454C(Item_GObj* arg0)
+void it_8028454C(Item_GObj* arg0) // contains branch arrows
 {
     HSD_JObj* temp_r3 = GET_JOBJ(arg0);
     HSD_JObj* var_r0 = (!temp_r3) ? NULL : temp_r3->child;
