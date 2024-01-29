@@ -1,8 +1,11 @@
 #ifndef MELEE_GM_FORWARD_H
 #define MELEE_GM_FORWARD_H
 
-#include <placeholder.h>
-
+typedef struct datetime datetime;
 typedef struct GameRules GameRules;
+typedef struct Placeholder_8016AE38_flags Placeholder_8016AE38_flags;
+typedef struct Placeholder_8016AE38_flags_2 Placeholder_8016AE38_flags_2;
+typedef struct Placeholder_8016AE38_ret_val Placeholder_8016AE38_ret_val;
+typedef struct Placeholder_8016AE50_ret_val Placeholder_8016AE50_ret_val;
 
 #endif
