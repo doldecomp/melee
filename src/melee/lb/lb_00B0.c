@@ -1,18 +1,16 @@
 #include "lb/lb_00B0.h"
 
-#include "sc/types.h"
+#include "sc/types.h" // IWYU pragma: keep
 
 #include <placeholder.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/aobj.h>
-#include <baselib/dobj.h>
+#include <baselib/dobj.h> // IWYU pragma: keep
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
-#include <baselib/mobj.h>
 #include <baselib/pobj.h>
 #include <baselib/robj.h>
-#include <baselib/tobj.h>
 
 #ifdef MUST_MATCH
 #include <baselib/quatlib.h>

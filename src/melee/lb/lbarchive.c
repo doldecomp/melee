@@ -1,6 +1,6 @@
 #include "lb/lbarchive.h"
 
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/archive.h>
 #include <baselib/debug.h>
 
