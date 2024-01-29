@@ -84,7 +84,7 @@ pub fn replace(from: &Regex, to: &str, path: impl AsRef<Path>) -> Result<()> {
 }
 
 fn is_identifier(c: char) -> bool {
-    matches!(c, 'a'..='z' | 'A'..='Z' | '0'..='9' | '_')
+    matches!(c, 'a'..='z' | 'A'..='Z' | '0'..='9' | '_' | '.')
 }
 
 pub fn replace_symbols<K, V, S>(

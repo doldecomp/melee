@@ -372,7 +372,7 @@ config.libs = [
     MeleeLib(
         "mp (Map)",
         [
-            Object(Unknown, "melee/mp/mpcoll.c"),
+            Object(NonMatching, "melee/mp/mpcoll.c"),
             Object(NonMatching, "melee/mp/mplib.c"),
             Object(NonMatching, "melee/mp/mpisland.c"),
         ],
@@ -733,12 +733,12 @@ config.libs = [
     MeleeLib(
         "gm (Main game loop)",
         [
-            Object(Unknown, "melee/gm/gmmain_lib.c"),
-            Object(Unknown, "melee/gm/gmmain.c"),
+            Object(NonMatching, "melee/gm/gmmain_lib.c"),
+            Object(Matching, "melee/gm/gmmain.c"),
             Object(NonMatching, "melee/gm/gm_1601.c"),
             Object(NonMatching, "melee/gm/gmtitle.c"),
             Object(NonMatching, "melee/gm/gmcamera.c"),
-            Object(Unknown, "melee/gm_1A36.c"),
+            Object(NonMatching, "melee/gm_1A36.c"),
         ],
     ),
     MeleeLib(
