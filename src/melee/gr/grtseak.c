@@ -2,8 +2,6 @@
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
-#include "gr/grtseak.h"
-
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
@@ -13,40 +11,54 @@
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx/types.h>
-#include <dolphin/os.h>
-#include <baselib/gobj.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-void grTSeak_80223864(int);                   /* static */
-void grTSeak_80223868(void);                  /* static */
-void grTSeak_802238D8(void);                  /* static */
-void grTSeak_802238DC(void);                  /* static */
-bool grTSeak_80223900(void);                  /* static */
-HSD_GObj* grTSeak_80223908(s32);              /* static */
-void grTSeak_802239F0(HSD_GObj*);             /* static */
-bool grTSeak_80223A1C(HSD_GObj*);             /* static */
-void grTSeak_80223A24(HSD_GObj*);             /* static */
-void grTSeak_80223A28(HSD_GObj*);             /* static */
-void grTSeak_80223A2C(HSD_GObj*);             /* static */
-bool grTSeak_80223A7C(HSD_GObj*);             /* static */
-void grTSeak_80223A84(HSD_GObj*);             /* static */
-void grTSeak_80223AB8(HSD_GObj*);             /* static */
-void grTSeak_80223ABC(HSD_GObj*);             /* static */
-bool grTSeak_80223B0C(HSD_GObj*);             /* static */
-void grTSeak_80223B14(HSD_GObj*);             /* static */
-void grTSeak_80223B34(HSD_GObj*);             /* static */
-lb_UnkAnimStruct* grTSeak_80223B38(enum_t);   /* static */
-bool grTSeak_80223B40(Vec3*, int, HSD_JObj*); /* static */
+/* 223864 */ static void grTSeak_80223864(int);
+/* 223868 */ static void grTSeak_80223868(void);
+/* 2238D8 */ static void grTSeak_802238D8(void);
+/* 2238DC */ static void grTSeak_802238DC(void);
+/* 223900 */ static bool grTSeak_80223900(void);
+/* 223908 */ static HSD_GObj* grTSeak_80223908(s32);
+/* 2239F0 */ static void grTSeak_802239F0(HSD_GObj*);
+/* 223A1C */ static bool grTSeak_80223A1C(HSD_GObj*);
+/* 223A24 */ static void grTSeak_80223A24(HSD_GObj*);
+/* 223A28 */ static void grTSeak_80223A28(HSD_GObj*);
+/* 223A2C */ static void grTSeak_80223A2C(HSD_GObj*);
+/* 223A7C */ static bool grTSeak_80223A7C(HSD_GObj*);
+/* 223A84 */ static void grTSeak_80223A84(HSD_GObj*);
+/* 223AB8 */ static void grTSeak_80223AB8(HSD_GObj*);
+/* 223ABC */ static void grTSeak_80223ABC(HSD_GObj*);
+/* 223B0C */ static bool grTSeak_80223B0C(HSD_GObj*);
+/* 223B14 */ static void grTSeak_80223B14(HSD_GObj*);
+/* 223B34 */ static void grTSeak_80223B34(HSD_GObj*);
+/* 223B38 */ static lb_UnkAnimStruct* grTSeak_80223B38(enum_t);
+/* 223B40 */ static bool grTSeak_80223B40(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grTSk_803E94B8[4] = {
-    { grTSeak_802239F0, grTSeak_80223A1C, grTSeak_80223A24, grTSeak_80223A28,
-      0 },
-    { grTSeak_80223ABC, grTSeak_80223B0C, grTSeak_80223B14, grTSeak_80223B34,
-      0 },
-    { grTSeak_80223A2C, grTSeak_80223A7C, grTSeak_80223A84, grTSeak_80223AB8,
-      (1 << 31) | (1 << 30) },
-    { NULL, NULL, NULL, NULL, 0 }
+static StageCallbacks grTSk_803E94B8[] = {
+    {
+        grTSeak_802239F0,
+        grTSeak_80223A1C,
+        grTSeak_80223A24,
+        grTSeak_80223A28,
+        0,
+    },
+    {
+        grTSeak_80223ABC,
+        grTSeak_80223B0C,
+        grTSeak_80223B14,
+        grTSeak_80223B34,
+        0,
+    },
+    {
+        grTSeak_80223A2C,
+        grTSeak_80223A7C,
+        grTSeak_80223A84,
+        grTSeak_80223AB8,
+        (1 << 31) | (1 << 30),
+    },
+    { 0 },
 };
 
 StageData grTSk_803E9514 = {

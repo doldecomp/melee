@@ -1,9 +1,4 @@
-#ifndef _grtness_h_
-#define _grtness_h_
-
-#include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/jobj.h>
+#ifndef GALE01_2225D0
+#define GALE01_2225D0
 
 #endif

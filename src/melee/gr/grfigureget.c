@@ -1,4 +1,6 @@
-#include "gr/grfigureget.h"
+#include <platform.h>
+#include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
@@ -6,21 +8,27 @@
 #include "gr/grzakogenerator.h"
 #include "gr/types.h"
 
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-static void grFigureGet_80219530(int);
-static void grFigureGet_80219534(void);
-static void grFigureGet_8021959C(void);
-static void grFigureGet_802195A0(void);
-static bool grFigureGet_802195C4(void);
-static HSD_GObj* grFigureGet_802195CC(int);
-static void grFigureGet_802196B4(HSD_GObj*);
-static bool grFigureGet_802196E0(HSD_GObj*);
-static void grFigureGet_802196E8(HSD_GObj*);
-static void grFigureGet_802196EC(HSD_GObj*);
+/* 219530 */ static void grFigureGet_80219530(int);
+/* 219534 */ static void grFigureGet_80219534(void);
+/* 21959C */ static void grFigureGet_8021959C(void);
+/* 2195A0 */ static void grFigureGet_802195A0(void);
+/* 2195C4 */ static bool grFigureGet_802195C4(void);
+/* 2195CC */ static HSD_GObj* grFigureGet_802195CC(int);
+/* 2196B4 */ static void grFigureGet_802196B4(HSD_GObj*);
+/* 2196E0 */ static bool grFigureGet_802196E0(HSD_GObj*);
+/* 2196E8 */ static void grFigureGet_802196E8(HSD_GObj*);
+/* 2196EC */ static void grFigureGet_802196EC(HSD_GObj*);
+/* 2196F0 */ /* static */ void grFigureGet_802196F0(HSD_GObj*);
+/* 219890 */ /* static */ bool grFigureGet_80219890(HSD_GObj*);
+/* 219898 */ /* static */ void grFigureGet_80219898(HSD_GObj*);
+/* 219B0C */ /* static */ void grFigureGet_80219B0C(HSD_GObj*);
+/* 219C88 */ /* static */ lb_UnkAnimStruct* grFigureGet_80219C88(enum_t);
+/* 219C90 */ /* static */ int grFigureGet_80219C90(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grFigureGet_803E7D00[2] = {
     { grFigureGet_802196B4, grFigureGet_802196E0, grFigureGet_802196E8,

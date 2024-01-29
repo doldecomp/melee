@@ -1,6 +1,4 @@
-#ifndef _grtseak_h_
-#define _grtseak_h_
-
-#include <sysdolphin/baselib/gobj.h>
+#ifndef GALE01_223864
+#define GALE01_223864
 
 #endif

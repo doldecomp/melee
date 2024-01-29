@@ -17,13 +17,12 @@
 
 #include <dolphin/gx/GXTexture.h>
 #include <dolphin/mtx.h>
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/aobj.h>
 #include <baselib/archive.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
 #include <baselib/displayfunc.h>
-#include <baselib/dobj.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -33,11 +32,10 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
-#include <baselib/mobj.h>
 #include <baselib/object.h>
 #include <baselib/random.h>
 #include <baselib/state.h>
-#include <baselib/wobj.h>
+#include <baselib/wobj.h> // IWYU pragma: keep
 
 // context stuff
 typedef struct FountainParams {

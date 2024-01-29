@@ -1,10 +1,10 @@
 #ifndef GALE01_0CECE8
 #define GALE01_0CECE8
 
+#include <platform.h>
 #include "ftCommon/forward.h"
 
 #include <placeholder.h>
-#include <stdbool.h>
 
 /* 0CECE8 */ bool ftCo_800CECE8(ftCo_GObj* gobj);
 /* 0CED30 */ UNK_RET ftCo_800CED30(UNK_PARAMS);

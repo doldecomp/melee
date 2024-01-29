@@ -3,9 +3,8 @@
 #ifndef GALE01_14BDB0
 #define GALE01_14BDB0
 
+#include <platform.h>
 #include <baselib/forward.h>
-
-#include <stdbool.h>
 
 /* 14BDB0 */ void ftGw_Attack11_ItemGreenhouseSetup(HSD_GObj* gobj);
 /* 14BE84 */ void ftGw_Attack11_DecideAction(HSD_GObj* gobj);

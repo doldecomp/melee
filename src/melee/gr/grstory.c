@@ -16,13 +16,13 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-#include <dolphin/os.h>
-#include <baselib/gobj.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/random.h>
 
-static lb_UnkAnimStruct* grStory_801E36D0(enum_t);
+/* 1E302C */ static void grStory_801E302C(bool);
+/* 1E36D0 */ static lb_UnkAnimStruct* grStory_801E36D0(enum_t);
 
 extern StageInfo stage_info;
 
@@ -315,7 +315,7 @@ bool grStory_801E36D8(Vec3* a, int _, HSD_JObj* joint)
     }
 }
 
-#ifdef MUST_MATCH
+#ifndef BUGFIX
 static u32 _[] = {
     0xC3920000, 0x42D20000, 0xC3920000, 0x42960000, 0xC3920000, 0x42480000,
     0x43980000, 0x42DC0000, 0x43980000, 0x42B40000, 0,          0,

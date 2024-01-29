@@ -1,6 +1,6 @@
+#include <platform.h>
 #include "lb/forward.h"
-
-#include "gr/grtmario.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
@@ -14,33 +14,59 @@
 #include "lb/lb_00F9.h"
 #include "sysdolphin/baselib/psappsrt.h"
 
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-StageCallbacks grTMr_803E8548[4] = { {
-                                         grTMario_8021F9CC,
-                                         grTMario_8021F9F8,
-                                         grTMario_8021FA00,
-                                         grTMario_8021FA04,
-                                         0,
-                                     },
-                                     {
-                                         grTMario_8021FAD4,
-                                         grTMario_8021FB24,
-                                         grTMario_8021FB2C,
-                                         grTMario_8021FB4C,
-                                         0,
-                                     },
-                                     {
-                                         grTMario_8021FA34,
-                                         grTMario_8021FA94,
-                                         grTMario_8021FA9C,
-                                         grTMario_8021FAD0,
-                                         (1 << 30) | (1 << 31),
-                                     },
-                                     { NULL, NULL, NULL, NULL, 0 } };
+/* 21F840 */ static void grTMario_8021F840(int);
+/* 21F844 */ static void grTMario_8021F844(void);
+/* 21F8B4 */ static void grTMario_8021F8B4(void);
+/* 21F8B8 */ static void grTMario_8021F8B8(void);
+/* 21F8DC */ static bool grTMario_8021F8DC(void);
+/* 21F8E4 */ static HSD_GObj* grTMario_8021F8E4(s32);
+/* 21F9CC */ static void grTMario_8021F9CC(HSD_GObj*);
+/* 21F9F8 */ static bool grTMario_8021F9F8(HSD_GObj*);
+/* 21FA00 */ static void grTMario_8021FA00(HSD_GObj*);
+/* 21FA04 */ static void grTMario_8021FA04(HSD_GObj*);
+/* 21FA08 */ static void lbl_8021FA08(HSD_GObj*);
+/* 21FA34 */ static void grTMario_8021FA34(HSD_GObj*);
+/* 21FA94 */ static bool grTMario_8021FA94(HSD_GObj*);
+/* 21FA9C */ static void grTMario_8021FA9C(HSD_GObj*);
+/* 21FAD0 */ static void grTMario_8021FAD0(HSD_GObj*);
+/* 21FAD4 */ static void grTMario_8021FAD4(HSD_GObj*);
+/* 21FB24 */ static bool grTMario_8021FB24(HSD_GObj*);
+/* 21FB2C */ static void grTMario_8021FB2C(HSD_GObj*);
+/* 21FB4C */ static void grTMario_8021FB4C(HSD_GObj*);
+/* 21FB50 */ static int lbl_8021FB50(s32, HSD_GObj*);
+/* 21FBE8 */ static void grTMario_8021FBE8(S32Vec3*, f32);
+/* 21FC50 */ static lb_UnkAnimStruct* grTMario_8021FC50(enum_t);
+/* 21FC58 */ static bool grTMario_8021FC58(Vec3*, int, HSD_JObj*);
+
+StageCallbacks grTMr_803E8548[] = {
+    {
+        grTMario_8021F9CC,
+        grTMario_8021F9F8,
+        grTMario_8021FA00,
+        grTMario_8021FA04,
+        0,
+    },
+    {
+        grTMario_8021FAD4,
+        grTMario_8021FB24,
+        grTMario_8021FB2C,
+        grTMario_8021FB4C,
+        0,
+    },
+    {
+        grTMario_8021FA34,
+        grTMario_8021FA94,
+        grTMario_8021FA9C,
+        grTMario_8021FAD0,
+        (1 << 30) | (1 << 31),
+    },
+    { NULL, NULL, NULL, NULL, 0 },
+};
 
 StageData grTMr_803E85A4 = {
     40,
@@ -214,10 +240,3 @@ bool grTMario_8021FC58(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return true;
 }
-/* Warning: struct HSD_Spline is not defined (only forward-declared) */
-/* Warning: struct _HSD_Rvalue is not defined (only forward-declared) */
-/* Warning: struct _HSD_RObjDesc is not defined (only forward-declared) */
-/* Warning: struct _HSD_ExpDesc is not defined (only forward-declared) */
-/* Warning: struct _HSD_ByteCodeExpDesc is not defined (only forward-declared)
- */
-/* Warning: struct _HSD_IKHintDesc is not defined (only forward-declared) */

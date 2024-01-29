@@ -10,7 +10,7 @@
 #include "mp/mplib.h"
 
 #include <placeholder.h>
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>

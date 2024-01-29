@@ -1,9 +1,8 @@
 #ifndef GALE01_0C5A50
 #define GALE01_0C5A50
 
+#include <platform.h>
 #include "ftCommon/forward.h"
-
-#include <stdbool.h>
 
 /* 0C5A50 */ bool ftCo_800C5A50(ftCo_GObj* gobj);
 /* 0C5A98 */ void ftCo_800C5A98(ftCo_GObj* gobj);

@@ -1,3 +1,4 @@
+#include <platform.h>
 #include "ftCommon/forward.h"
 
 #include "ftMh_CaptureMasterHand.h"
@@ -10,8 +11,6 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
-
-#include <stdbool.h>
 
 void ftMh_CaptureMasterHand_Anim(HSD_GObj* gobj) {}
 

@@ -465,13 +465,12 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/gm/gm_1A36.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/gr/ground.c.o\
     $(BUILD_DIR)/asm/melee/gr/ground.s.o\
     $(BUILD_DIR)/asm/melee/gr/grdisplay.s.o\
     $(BUILD_DIR)/src/melee/gr/grdatfiles.c.o\
     $(BUILD_DIR)/asm/melee/gr/granime.s.o\
     $(BUILD_DIR)/asm/melee/gr/grmaterial.s.o\
-    $(BUILD_DIR)/src/melee/gr/grlib.c.o\
+    $(BUILD_DIR)/asm/melee/gr/grlib.s.o\
     $(BUILD_DIR)/src/melee/gr/grdynamicattr.c.o\
     $(BUILD_DIR)/asm/melee/gr/grzakogenerator.s.o\
     $(BUILD_DIR)/asm/melee/gr/grfzerocar.s.o\
@@ -511,7 +510,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/gr/grgreens.s.o\
     $(BUILD_DIR)/asm/melee/gr/grflatzone.s.o\
     $(BUILD_DIR)/asm/melee/gr/grpushon.s.o\
-    $(BUILD_DIR)/src/melee/gr/grfigureget.c.o\
     $(BUILD_DIR)/asm/melee/gr/grfigureget.s.o\
     $(BUILD_DIR)/src/melee/gr/grbattle.c.o\
     $(BUILD_DIR)/asm/melee/gr/grlast.s.o\
@@ -524,7 +522,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gr/grtdrmario.c.o\
     $(BUILD_DIR)/src/melee/gr/grtfalco.c.o\
     $(BUILD_DIR)/src/melee/gr/grtfox.c.o\
-    $(BUILD_DIR)/src/melee/gr/grticeclimber.c.o\
+    $(BUILD_DIR)/asm/melee/gr/grticeclimber.s.o\
     $(BUILD_DIR)/src/melee/gr/grtkirby.c.o\
     $(BUILD_DIR)/src/melee/gr/grtkoopa.c.o\
     $(BUILD_DIR)/src/melee/gr/grtlink.c.o\

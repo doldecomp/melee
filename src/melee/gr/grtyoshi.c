@@ -1,9 +1,6 @@
 #include <platform.h>
 #include "lb/forward.h"
 #include <dolphin/mtx/forward.h>
-#include <baselib/forward.h>
-
-#include "gr/grtyoshi.h"
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
@@ -12,40 +9,55 @@
 #include "gr/types.h"
 #include "lb/lb_00F9.h"
 
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-static void grTYoshi_80223B48(int);
-static void grTYoshi_80223B4C(void);
-static void grTYoshi_80223BBC(void);
-static void grTYoshi_80223BC0(void);
-static bool grTYoshi_80223BE4(void);
-static HSD_GObj* grTYoshi_80223BEC(int gobj_id);
-static void grTYoshi_80223CD4(HSD_GObj* gobj);
-static bool grTYoshi_80223D00(HSD_GObj*);
-static void grTYoshi_80223D08(HSD_GObj*);
-static void grTYoshi_80223D0C(HSD_GObj*);
-static void grTYoshi_80223D10(HSD_GObj* gobj);
-static bool grTYoshi_80223D60(HSD_GObj*);
-static void grTYoshi_80223D68(HSD_GObj* gobj);
-static void grTYoshi_80223D9C(HSD_GObj*);
-static void grTYoshi_80223DA0(HSD_GObj* gobj);
-static bool grTYoshi_80223DF0(HSD_GObj*);
-static void grTYoshi_80223DF8(HSD_GObj*);
-static void grTYoshi_80223E18(HSD_GObj*);
-static lb_UnkAnimStruct* grTYoshi_80223E1C(enum_t);
-static bool grTYoshi_80223E24(Vec3*, int, HSD_JObj*);
+/* 223B48 */ static void grTYoshi_80223B48(int);
+/* 223B4C */ static void grTYoshi_80223B4C(void);
+/* 223BBC */ static void grTYoshi_80223BBC(void);
+/* 223BC0 */ static void grTYoshi_80223BC0(void);
+/* 223BE4 */ static bool grTYoshi_80223BE4(void);
+/* 223BEC */ static HSD_GObj* grTYoshi_80223BEC(int gobj_id);
+/* 223CD4 */ static void grTYoshi_80223CD4(HSD_GObj* gobj);
+/* 223D00 */ static bool grTYoshi_80223D00(HSD_GObj*);
+/* 223D08 */ static void grTYoshi_80223D08(HSD_GObj*);
+/* 223D0C */ static void grTYoshi_80223D0C(HSD_GObj*);
+/* 223D10 */ static void grTYoshi_80223D10(HSD_GObj* gobj);
+/* 223D60 */ static bool grTYoshi_80223D60(HSD_GObj*);
+/* 223D68 */ static void grTYoshi_80223D68(HSD_GObj* gobj);
+/* 223D9C */ static void grTYoshi_80223D9C(HSD_GObj*);
+/* 223DA0 */ static void grTYoshi_80223DA0(HSD_GObj* gobj);
+/* 223DF0 */ static bool grTYoshi_80223DF0(HSD_GObj*);
+/* 223DF8 */ static void grTYoshi_80223DF8(HSD_GObj*);
+/* 223E18 */ static void grTYoshi_80223E18(HSD_GObj*);
+/* 223E1C */ static lb_UnkAnimStruct* grTYoshi_80223E1C(enum_t);
+/* 223E24 */ static bool grTYoshi_80223E24(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTYs_803E9578[] = {
-    { grTYoshi_80223CD4, grTYoshi_80223D00, grTYoshi_80223D08,
-      grTYoshi_80223D0C, 0 },
-    { grTYoshi_80223DA0, grTYoshi_80223DF0, grTYoshi_80223DF8,
-      grTYoshi_80223E18, 0 },
-    { grTYoshi_80223D10, grTYoshi_80223D60, grTYoshi_80223D68,
-      grTYoshi_80223D9C, (1 << 30) | (1 << 31) },
-    { NULL, NULL, NULL, NULL, 0 }
+    {
+        grTYoshi_80223CD4,
+        grTYoshi_80223D00,
+        grTYoshi_80223D08,
+        grTYoshi_80223D0C,
+        0,
+    },
+    {
+        grTYoshi_80223DA0,
+        grTYoshi_80223DF0,
+        grTYoshi_80223DF8,
+        grTYoshi_80223E18,
+        0,
+    },
+    {
+        grTYoshi_80223D10,
+        grTYoshi_80223D60,
+        grTYoshi_80223D68,
+        grTYoshi_80223D9C,
+        (1 << 30) | (1 << 31),
+    },
+    { 0 },
 };
 
 StageData grTYs_803E95D4 = {

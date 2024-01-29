@@ -1,6 +1,7 @@
 #ifndef GALE01_0C3A14
 #define GALE01_0C3A14
 
+#include <platform.h>
 #include "ftCommon/forward.h"
 #include <dolphin/mtx/forward.h>
 
@@ -8,7 +9,6 @@
 
 #include <m2c_macros.h>
 #include <placeholder.h>
-#include <stdbool.h>
 
 struct _m2c_stack_ftCo_800C3A14 {
     /* 0x000 */ char pad_0[0x14];

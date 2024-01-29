@@ -1,9 +1,6 @@
 #include <platform.h>
 #include "lb/forward.h"
 #include <dolphin/mtx/forward.h>
-#include <baselib/forward.h>
-
-#include "gr/grtmars.h"
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
@@ -12,31 +9,31 @@
 #include "gr/types.h"
 #include "lb/lb_00F9.h"
 
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-static void grTMars_80221EF4(int);
-static void grTMars_80221EF8(void);
-static void grTMars_80221F68(void);
-static void grTMars_80221F6C(void);
-static bool grTMars_80221F90(void);
-static HSD_GObj* grTMars_80221F98(int);
-static void grTMars_80222080(HSD_GObj*);
-static bool grTMars_802220AC(HSD_GObj*);
-static void grTMars_802220B4(HSD_GObj*);
-static void grTMars_802220B8(HSD_GObj*);
-static void grTMars_802220BC(HSD_GObj*);
-static bool grTMars_8022210C(HSD_GObj*);
-static void grTMars_80222114(HSD_GObj*);
-static void grTMars_80222148(HSD_GObj*);
-static void grTMars_8022214C(HSD_GObj*);
-static bool grTMars_8022219C(HSD_GObj*);
-static void grTMars_802221A4(HSD_GObj*);
-static void grTMars_802221C4(HSD_GObj*);
-static lb_UnkAnimStruct* grTMars_802221C8(enum_t);
-static bool grTMars_802221D0(Vec3*, int, HSD_JObj*);
+/* 221EF4 */ static void grTMars_80221EF4(int);
+/* 221EF8 */ static void grTMars_80221EF8(void);
+/* 221F68 */ static void grTMars_80221F68(void);
+/* 221F6C */ static void grTMars_80221F6C(void);
+/* 221F90 */ static bool grTMars_80221F90(void);
+/* 221F98 */ static HSD_GObj* grTMars_80221F98(int);
+/* 222080 */ static void grTMars_80222080(HSD_GObj*);
+/* 2220AC */ static bool grTMars_802220AC(HSD_GObj*);
+/* 2220B4 */ static void grTMars_802220B4(HSD_GObj*);
+/* 2220B8 */ static void grTMars_802220B8(HSD_GObj*);
+/* 2220BC */ static void grTMars_802220BC(HSD_GObj*);
+/* 22210C */ static bool grTMars_8022210C(HSD_GObj*);
+/* 222114 */ static void grTMars_80222114(HSD_GObj*);
+/* 222148 */ static void grTMars_80222148(HSD_GObj*);
+/* 22214C */ static void grTMars_8022214C(HSD_GObj*);
+/* 22219C */ static bool grTMars_8022219C(HSD_GObj*);
+/* 2221A4 */ static void grTMars_802221A4(HSD_GObj*);
+/* 2221C4 */ static void grTMars_802221C4(HSD_GObj*);
+/* 2221C8 */ static lb_UnkAnimStruct* grTMars_802221C8(enum_t);
+/* 2221D0 */ static bool grTMars_802221D0(Vec3*, int, HSD_JObj*);
 
 extern StageInfo stage_info;
 

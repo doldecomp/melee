@@ -1,6 +1,4 @@
-#ifndef _grtlink_h_
-#define _grtlink_h_
-
-#include <sysdolphin/baselib/gobj.h>
+#ifndef GALE01_22192C
+#define GALE01_22192C
 
 #endif

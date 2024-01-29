@@ -1,12 +1,12 @@
 #ifndef GALE01_12CDE8
 #define GALE01_12CDE8
 
+#include <platform.h>
 #include "ftYoshi/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include <placeholder.h>
-#include <stdbool.h>
 
 /* 12CD10 */ float ftYs_SpecialN_8012CD10(ftYs_GObj* gobj);
 /* 12CD28 */ float ftYs_SpecialN_8012CD28(void);
