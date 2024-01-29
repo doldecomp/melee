@@ -201,15 +201,9 @@ void it_80284548(Item_GObj* arg0) {}
 
 void it_8028454C(Item_GObj* arg0)
 {
-    HSD_JObj* temp_r3;
-    HSD_JObj* var_r0;
+    HSD_JObj* temp_r3 = GET_JOBJ(arg0);
+    HSD_JObj* var_r0 = (!temp_r3) ? NULL : temp_r3->child;
 
-    temp_r3 = arg0->hsd_obj;
-    if (temp_r3 == NULL) {
-        var_r0 = NULL;
-    } else {
-        var_r0 = temp_r3->child;
-    }
     it_8026B390(arg0);
     HSD_JObjClearFlagsAll(var_r0, 0x10);
     Item_80268E5C(arg0, 4, 6);
