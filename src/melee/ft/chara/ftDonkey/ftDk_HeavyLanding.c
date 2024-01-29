@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include "ftDk_HeavyLanding.h"
 
 #include "ftDk_HeavyTurn.h"
@@ -12,7 +14,6 @@
 #include "it/item.h"
 
 #include <common_structs.h>
-#include <stdbool.h>
 #include <dolphin/mtx/types.h>
 
 void ftDk_HeavyLanding_Phys(HSD_GObj* gobj)

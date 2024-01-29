@@ -1,8 +1,4 @@
-#ifndef _grtpichu_h_
-#define _grtpichu_h_
-
-#include "gr/stage.h"
-
-#include <baselib/gobj.h>
+#ifndef GALE01_222B98
+#define GALE01_222B98
 
 #endif

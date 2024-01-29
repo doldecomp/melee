@@ -1,11 +1,10 @@
 #ifndef GALE01_2B3EFC
 #define GALE01_2B3EFC
 
+#include <platform.h>
 #include "it/forward.h"
 
 #include "it/types.h"
-
-#include <stdbool.h>
 
 bool it_802B45F0(Item_GObj*);
 bool it_802B4638(Item_GObj*);

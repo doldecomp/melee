@@ -3,41 +3,34 @@
 
 #include <platform.h>
 #include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include <placeholder.h>
-#include <dolphin/mtx/types.h>
 
-extern s16 grTIc_803E8B5C[];
-
-void grTIceClimber_8022109C(HSD_GObj*);
-bool grTIceClimber_802210C8(HSD_GObj*);
-void grTIceClimber_802210D0(HSD_GObj*);
-void grTIceClimber_802210D4(HSD_GObj*);
-
-void grTIceClimber_8022118C(HSD_GObj*);
-bool grTIceClimber_802211DC(HSD_GObj*);
-void grTIceClimber_802211E4(HSD_GObj*);
-void grTIceClimber_80221204(HSD_GObj*);
-
-void grTIceClimber_802210D8(HSD_GObj*);
-bool grTIceClimber_8022114C(HSD_GObj*);
-void grTIceClimber_80221154(HSD_GObj*);
-void grTIceClimber_80221188(HSD_GObj*);
-
-void grTIceClimber_80220F14(void);
-void grTIceClimber_80220F10(int);
-void grTIceClimber_80220F84(void);
-void grTIceClimber_80220F88(void);
-bool grTIceClimber_80220FAC(void);
-
-lb_UnkAnimStruct* grTIceClimber_80221354(enum_t);
-bool grTIceClimber_8022135C(Vec3*, int, HSD_JObj*);
-
-HSD_GObj* grTIceClimber_80220FB4(int);
-void grTIceClimber_80221288(HSD_GObj*);
-
-void grTIceClimber_80221208(void);
-void grMaterial_801C8DE0(s32, f32, f32, f32, f32, f32, f32, f32);
+/* 1C8DE0 */ void grMaterial_801C8DE0(s32, f32, f32, f32, f32, f32, f32, f32);
+/* 220F10 */ void grTIceClimber_80220F10(int);
+/* 220F14 */ void grTIceClimber_80220F14(void);
+/* 220F84 */ void grTIceClimber_80220F84(void);
+/* 220F88 */ void grTIceClimber_80220F88(void);
+/* 220FAC */ bool grTIceClimber_80220FAC(void);
+/* 220FB4 */ HSD_GObj* grTIceClimber_80220FB4(int);
+/* 22109C */ void grTIceClimber_8022109C(HSD_GObj*);
+/* 2210C8 */ bool grTIceClimber_802210C8(HSD_GObj*);
+/* 2210D0 */ void grTIceClimber_802210D0(HSD_GObj*);
+/* 2210D4 */ void grTIceClimber_802210D4(HSD_GObj*);
+/* 2210D8 */ void grTIceClimber_802210D8(HSD_GObj*);
+/* 22114C */ bool grTIceClimber_8022114C(HSD_GObj*);
+/* 221154 */ void grTIceClimber_80221154(HSD_GObj*);
+/* 221188 */ void grTIceClimber_80221188(HSD_GObj*);
+/* 22118C */ void grTIceClimber_8022118C(HSD_GObj*);
+/* 2211DC */ bool grTIceClimber_802211DC(HSD_GObj*);
+/* 2211E4 */ void grTIceClimber_802211E4(HSD_GObj*);
+/* 221204 */ void grTIceClimber_80221204(HSD_GObj*);
+/* 221208 */ void grTIceClimber_80221208(void);
+/* 221288 */ void grTIceClimber_80221288(HSD_GObj*);
+/* 221354 */ lb_UnkAnimStruct* grTIceClimber_80221354(enum_t);
+/* 22135C */ bool grTIceClimber_8022135C(Vec3*, int, HSD_JObj*);
+/* 3E8B5C */ extern s16 grTIc_803E8B5C[];
 
 #endif

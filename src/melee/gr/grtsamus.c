@@ -2,8 +2,6 @@
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
-#include "gr/grtsamus.h"
-
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
@@ -13,40 +11,54 @@
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx/types.h>
-#include <dolphin/os.h>
-#include <baselib/gobj.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-void grTSamus_80223580(int);                   /* static */
-void grTSamus_80223584(void);                  /* static */
-void grTSamus_802235F4(void);                  /* static */
-void grTSamus_802235F8(void);                  /* static */
-bool grTSamus_8022361C(void);                  /* static */
-HSD_GObj* grTSamus_80223624(s32);              /* static */
-void grTSamus_8022370C(HSD_GObj*);             /* static */
-bool grTSamus_80223738(HSD_GObj*);             /* static */
-void grTSamus_80223740(HSD_GObj*);             /* static */
-void grTSamus_80223744(HSD_GObj*);             /* static */
-void grTSamus_80223748(HSD_GObj*);             /* static */
-bool grTSamus_80223798(HSD_GObj*);             /* static */
-void grTSamus_802237A0(HSD_GObj*);             /* static */
-void grTSamus_802237D4(HSD_GObj*);             /* static */
-void grTSamus_802237D8(HSD_GObj*);             /* static */
-bool grTSamus_80223828(HSD_GObj*);             /* static */
-void grTSamus_80223830(HSD_GObj*);             /* static */
-void grTSamus_80223850(HSD_GObj*);             /* static */
-lb_UnkAnimStruct* grTSamus_80223854(enum_t);   /* static */
-bool grTSamus_8022385C(Vec3*, int, HSD_JObj*); /* static */
+/* 223580 */ static void grTSamus_80223580(int);
+/* 223584 */ static void grTSamus_80223584(void);
+/* 2235F4 */ static void grTSamus_802235F4(void);
+/* 2235F8 */ static void grTSamus_802235F8(void);
+/* 22361C */ static bool grTSamus_8022361C(void);
+/* 223624 */ static HSD_GObj* grTSamus_80223624(s32);
+/* 22370C */ static void grTSamus_8022370C(HSD_GObj*);
+/* 223738 */ static bool grTSamus_80223738(HSD_GObj*);
+/* 223740 */ static void grTSamus_80223740(HSD_GObj*);
+/* 223744 */ static void grTSamus_80223744(HSD_GObj*);
+/* 223748 */ static void grTSamus_80223748(HSD_GObj*);
+/* 223798 */ static bool grTSamus_80223798(HSD_GObj*);
+/* 2237A0 */ static void grTSamus_802237A0(HSD_GObj*);
+/* 2237D4 */ static void grTSamus_802237D4(HSD_GObj*);
+/* 2237D8 */ static void grTSamus_802237D8(HSD_GObj*);
+/* 223828 */ static bool grTSamus_80223828(HSD_GObj*);
+/* 223830 */ static void grTSamus_80223830(HSD_GObj*);
+/* 223850 */ static void grTSamus_80223850(HSD_GObj*);
+/* 223854 */ static lb_UnkAnimStruct* grTSamus_80223854(enum_t);
+/* 22385C */ static bool grTSamus_8022385C(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grTSs_803E93F8[4] = {
-    { grTSamus_8022370C, grTSamus_80223738, grTSamus_80223740,
-      grTSamus_80223744, 0 },
-    { grTSamus_802237D8, grTSamus_80223828, grTSamus_80223830,
-      grTSamus_80223850, 0 },
-    { grTSamus_80223748, grTSamus_80223798, grTSamus_802237A0,
-      grTSamus_802237D4, (1 << 31) | (1 << 30) },
-    { NULL, NULL, NULL, NULL, 0 }
+static StageCallbacks grTSs_803E93F8[] = {
+    {
+        grTSamus_8022370C,
+        grTSamus_80223738,
+        grTSamus_80223740,
+        grTSamus_80223744,
+        0,
+    },
+    {
+        grTSamus_802237D8,
+        grTSamus_80223828,
+        grTSamus_80223830,
+        grTSamus_80223850,
+        0,
+    },
+    {
+        grTSamus_80223748,
+        grTSamus_80223798,
+        grTSamus_802237A0,
+        grTSamus_802237D4,
+        (1 << 31) | (1 << 30),
+    },
+    { 0 },
 };
 
 StageData grTSs_803E9454 = {

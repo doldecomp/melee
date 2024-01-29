@@ -1,9 +1,8 @@
 #ifndef GALE01_0C55CC
 #define GALE01_0C55CC
 
+#include <platform.h>
 #include "ftCommon/forward.h"
-
-#include <stdbool.h>
 
 /* 0C55CC */ bool ftCo_800C55CC(ftCo_GObj* gobj);
 /* 0C56BC */ void ftCo_HammerWalk_Anim(ftCo_GObj* gobj);

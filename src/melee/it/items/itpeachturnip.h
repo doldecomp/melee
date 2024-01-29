@@ -1,11 +1,10 @@
 #ifndef MELEE_IT_ITEMS_ITPEACHTURNIP_H
 #define MELEE_IT_ITEMS_ITPEACHTURNIP_H
 
+#include <platform.h>
 #include "it/forward.h"
 
 #include "it/types.h"
-
-#include <stdbool.h>
 
 void it_802BD47C(Item_GObj*);
 void it_802BD628(Item_GObj*);

@@ -1,10 +1,10 @@
-#ifndef MELEE_GR_GRDISPLAY_H
-#define MELEE_GR_GRDISPLAY_H
+#ifndef GALE01_1C5B90
+#define GALE01_1C5B90
 
 #include <platform.h>
 #include <baselib/forward.h>
 
-void grDisplay_801C5DB0(HSD_GObj*, int);
-void grDisplay_801C5F60(void);
+/* 1C5DB0 */ void grDisplay_801C5DB0(HSD_GObj*, int);
+/* 1C5F60 */ void grDisplay_801C5F60(void);
 
 #endif

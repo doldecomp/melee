@@ -1,10 +1,10 @@
 #ifndef GALE01_081298
 #define GALE01_081298
 
+#include <platform.h>
 #include "ftCommon/forward.h"
 
 #include <placeholder.h>
-#include <stdbool.h>
 
 /* 081298 */ bool ftCliffCommon_80081298(ftCo_GObj* gobj);
 /* 081370 */ void ftCliffCommon_80081370(ftCo_GObj* gobj);

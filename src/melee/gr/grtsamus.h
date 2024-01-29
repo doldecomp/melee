@@ -1,6 +1,4 @@
-#ifndef _grtsamus_h_
-#define _grtsamus_h_
-
-#include <sysdolphin/baselib/gobj.h>
+#ifndef GALE01_223580
+#define GALE01_223580
 
 #endif

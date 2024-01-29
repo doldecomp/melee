@@ -1,8 +1,8 @@
-#ifndef MELEE_GR_GRZEBES_H
-#define MELEE_GR_GRZEBES_H
+#ifndef GALE01_1D84A0
+#define GALE01_1D84A0
 
-#include <platform.h>
+#include <placeholder.h>
 
-void grZebes_801DA3F4(unk_t);
+void grZebes_801DA3F4(UNK_T);
 
 #endif

@@ -3,11 +3,10 @@
 #ifndef GALE01_116D04
 #define GALE01_116D04
 
+#include <platform.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
-
-#include <stdbool.h>
 
 /* 116D04 */ void ftNs_SpecialAirS_Enter(HSD_GObj* gobj);
 /* 116DB0 */ void ftNs_SpecialAirS_Anim(HSD_GObj* gobj);

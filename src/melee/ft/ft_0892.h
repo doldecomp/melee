@@ -1,10 +1,10 @@
 #ifndef GALE01_0892D4
 #define GALE01_0892D4
 
+#include <platform.h>
 #include "ft/forward.h"
 
 #include <placeholder.h>
-#include <stdbool.h>
 
 /* 0892D4 */ void ft_800892D4(Fighter*);
 /* 0895E0 */ void ft_800895E0(Fighter*, int);

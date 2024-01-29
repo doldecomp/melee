@@ -3,8 +3,13 @@
 
 #include <baselib/forward.h>
 
-typedef struct Ground Ground;
 typedef struct grDynamicAttr_UnkStruct grDynamicAttr_UnkStruct;
+typedef struct Ground Ground;
+typedef struct UnkArchiveStruct UnkArchiveStruct;
+typedef struct UnkBgmStruct UnkBgmStruct;
+typedef struct UnkStage6B0 UnkStage6B0;
+typedef struct UnkStageDat UnkStageDat;
+typedef struct UnkStageDatInternal UnkStageDatInternal;
 
 #ifdef M2CTX
 typedef struct Ground_GObj Ground_GObj;
@@ -31,5 +36,106 @@ struct Ground_GObj {
 #else
 typedef HSD_GObj Ground_GObj;
 #endif
+
+/// @todo Finish values, use @c PascalCase
+typedef enum InternalStageId {
+    InternalStageID_Unk00,
+    InternalStageID_Unk01,
+
+    /// Princess Peach's Castle
+    CASTLE,
+
+    /// Rainbow Cruise
+    RCRUISE,
+
+    /// Kongo Jungle
+    KONGO,
+
+    /// Jungle Japes
+    GARDEN,
+
+    /// Great Bay
+    GREATBAY,
+
+    /// Hyrule Temple
+    SHRINE,
+
+    /// Brinstar
+    ZEBES,
+
+    /// Brinstar Depths
+    KRAID,
+
+    /// Yoshi's Story
+    STORY,
+
+    /// Yoshi's Island
+    YORSTER,
+
+    /// Fountain of Dreams
+    IZUMI,
+
+    /// Green Greens
+    GREENS,
+
+    /// Corneria
+    CORNERIA,
+
+    /// Venom
+    VENOM,
+
+    /// Pokemon Stadium
+    PSTADIUM,
+
+    /// Poke Floats
+    PURA,
+
+    /// Mute City
+    MUTECITY,
+
+    /// Big Blue
+    BIGBLUE,
+
+    /// Onett
+    ONETT,
+
+    /// Fourside
+    FOURSIDE,
+
+    /// Icicle Mountain
+    ICEMTN,
+
+    InternalStageID_Unk23,
+
+    /// Mushroom Kingdom
+    INISHIE1,
+
+    /// Mushroom Kingdom II
+    INISHIE2,
+
+    InternalStageID_Unk26,
+
+    /// Flat Zone
+    FLATZONE,
+
+    /// Dream Land
+    OLDPUPUPU,
+
+    /// Yoshi's Island (64)
+    OLDYOSHI,
+
+    /// Kongo Jungle (64)
+    OLDKONGO,
+
+    STAGEKIND_UNK31,
+    STAGEKIND_UNK32,
+    STAGEKIND_UNK33,
+    STAGEKIND_UNK34,
+    STAGEKIND_UNK35,
+    STAGEKIND_UNK36,
+    STAGEKIND_UNK37,
+    STAGEKIND_UNK38,
+    STAGEKIND_UNK39,
+} InternalStageId;
 
 #endif

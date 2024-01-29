@@ -1,6 +1,7 @@
 #ifndef GALE01_0C0874
 #define GALE01_0C0874
 
+#include <platform.h>
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "lb/forward.h"
@@ -9,7 +10,6 @@
 #include "lb/lbcollision.h"
 
 #include <placeholder.h>
-#include <stdbool.h>
 
 /* 0C0874 */ void ftCo_800C0874(ftCo_GObj* gobj, UNK_T arg1,
                                 ftCommon_BuryType arg2);

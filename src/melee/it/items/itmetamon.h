@@ -1,9 +1,9 @@
 #ifndef ITMETAMON_H
 #define ITMETAMON_H
 
+#include <platform.h>
 #include <melee/it/forward.h>
 
-#include <stdbool.h>
 #include <melee/it/types.h>
 
 extern ItemStateTable it_803F7FC8[];

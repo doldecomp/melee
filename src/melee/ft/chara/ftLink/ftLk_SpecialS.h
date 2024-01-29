@@ -1,10 +1,9 @@
 #ifndef GALE01_0EC354
 #define GALE01_0EC354
 
+#include <platform.h>
 #include "ftLink/forward.h"
 #include <baselib/forward.h>
-
-#include <stdbool.h>
 
 /* 0EBFCC */ bool ftLk_SepcialS_Get2219b5(HSD_GObj* gobj);
 /* 0EBFDC */ bool ftLk_SpecialS_Is2071b0_5to13(HSD_GObj* gobj);

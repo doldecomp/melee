@@ -3,9 +3,8 @@
 #ifndef GALE01_119E14
 #define GALE01_119E14
 
+#include <platform.h>
 #include <baselib/forward.h>
-
-#include <stdbool.h>
 
 /* 119E14 */ void ftNs_SpecialLwStart_Enter(HSD_GObj* gobj);
 /* 119E90 */ void ftNs_SpecialAirLwStart_Enter(HSD_GObj* gobj);

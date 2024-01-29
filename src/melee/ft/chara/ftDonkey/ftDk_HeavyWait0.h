@@ -1,9 +1,8 @@
 #ifndef GALE01_0DF938
 #define GALE01_0DF938
 
+#include <platform.h>
 #include <baselib/forward.h>
-
-#include <stdbool.h>
 
 /* 0DF938 */ bool ftDk_MS_341_800DF938(HSD_GObj* gobj);
 /* 0DF980 */ void ftDk_MS_341_800DF980(HSD_GObj* gobj);

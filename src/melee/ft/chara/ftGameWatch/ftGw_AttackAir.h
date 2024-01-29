@@ -3,9 +3,8 @@
 #ifndef MELEE_FT_CHARA_FTGAMEWATCH_FTGAMEWATCH_ATTACKAIR_H
 #define MELEE_FT_CHARA_FTGAMEWATCH_FTGAMEWATCH_ATTACKAIR_H
 
+#include <platform.h>
 #include <baselib/forward.h>
-
-#include <stdbool.h>
 
 /* 14AFC0 */ void ftGw_AttackAirN_ItemParachuteSetup(HSD_GObj* gobj);
 /* 14B074 */ void ftGw_AttackAirN_ItemParachuteOnLand(HSD_GObj* gobj);
