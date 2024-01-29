@@ -1,6 +1,6 @@
-#ifndef _vi_h_
-#define _vi_h_
+#ifndef GALE01_31C99C
+#define GALE01_31C99C
 
-void un_8031CAAC(void);
+/* 31CAAC */ void un_8031CAAC(void);
 
 #endif

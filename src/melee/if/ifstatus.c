@@ -1,5 +1,3 @@
-#include "gm/forward.h"
-
 #include "if/ifstatus.h"
 
 #include "ifall.h"

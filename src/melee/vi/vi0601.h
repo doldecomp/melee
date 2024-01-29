@@ -1,12 +1,9 @@
-#ifndef _vi0601_h_
-#define _vi0601_h_
+#ifndef GALE01_31E6CC
+#define GALE01_31E6CC
 
-#include <platform.h>
 #include <baselib/forward.h>
 
-#include <sysdolphin/baselib/gobj.h>
-
-void un_8031E6CC(void);
-void un_8031E6EC(HSD_GObj*);
+/* 31E6CC */ void un_8031E6CC(void);
+/* 31E6EC */ void un_8031E6EC(HSD_GObj*);
 
 #endif

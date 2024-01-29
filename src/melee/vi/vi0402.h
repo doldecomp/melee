@@ -1,11 +1,8 @@
-#ifndef _vi0402_h_
-#define _vi0402_h_
+#ifndef GALE01_31D6E4
+#define GALE01_31D6E4
 
-#include <platform.h>
 #include <baselib/forward.h>
 
-#include <sysdolphin/baselib/gobj.h>
-
-void un_8031D6E4(HSD_GObj*);
+/* 31D6E4 */ void un_8031D6E4(HSD_GObj*);
 
 #endif
