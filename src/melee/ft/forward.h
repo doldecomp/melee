@@ -7,7 +7,26 @@
 
 #define FIGHTERVARS_SIZE 0xF8
 
+typedef enum_t FtMotionId;
+typedef struct CollData CollData;
 typedef struct Fighter Fighter;
+typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;
+typedef struct Fighter_DemoStrings Fighter_DemoStrings;
+typedef struct ftCmdScript ftCmdScript;
+typedef struct FtCmdState FtCmdState;
+typedef struct ftCo_DatAttrs_xBC_t ftCo_DatAttrs_xBC_t;
+typedef struct FtCollisionData FtCollisionData;
+typedef struct ftCommonData ftCommonData;
+typedef struct ftData_UnkCountStruct ftData_UnkCountStruct;
+typedef struct ftDeviceUnk1 ftDeviceUnk1;
+typedef struct ftDeviceUnk2 ftDeviceUnk2;
+typedef struct ftLk_SpecialN_Vec3Group ftLk_SpecialN_Vec3Group;
+typedef struct ftMaterial_UnkTevStruct ftMaterial_UnkTevStruct;
+typedef struct ftSubactionList ftSubactionList;
+typedef struct gmScriptEventDefault gmScriptEventDefault;
+typedef struct MotionState MotionState;
+typedef struct UnkFloat6_Camera UnkFloat6_Camera;
+typedef u32 MotionFlags;
 
 #ifdef M2CTX
 typedef struct Fighter_GObj Fighter_GObj;
@@ -35,33 +54,13 @@ struct Fighter_GObj {
 typedef struct HSD_GObj Fighter_GObj;
 #endif
 
-typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;
-typedef struct Fighter_DemoStrings Fighter_DemoStrings;
-typedef struct FtCmdState FtCmdState;
-typedef struct MotionState MotionState;
-typedef struct UnkFloat6_Camera UnkFloat6_Camera;
-typedef struct ftCmdScript ftCmdScript;
-typedef struct ftCo_DatAttrs_xBC_t ftCo_DatAttrs_xBC_t;
-typedef struct ftCommonData ftCommonData;
-typedef struct ftData_UnkCountStruct ftData_UnkCountStruct;
-typedef struct ftDeviceUnk1 ftDeviceUnk1;
-typedef struct ftDeviceUnk2 ftDeviceUnk2;
-typedef struct ftLk_SpecialN_Vec3Group ftLk_SpecialN_Vec3Group;
-typedef struct ftMaterial_UnkTevStruct ftMaterial_UnkTevStruct;
-typedef struct ftSubactionList ftSubactionList;
-typedef struct gmScriptEventDefault gmScriptEventDefault;
-typedef u32 MotionFlags;
-typedef struct FtCollisionData FtCollisionData;
-
-typedef void (*FighterEvent)(Fighter* fp);
 typedef char* (*Fighter_MotionFileStringGetter)(enum_t arg0);
 typedef void (*Fighter_ItemEvent)(HSD_GObj* gobj, bool arg1);
 typedef void (*Fighter_ModelEvent)(Fighter* fp, int arg1, bool arg2);
 typedef void (*Fighter_UnkMtxEvent)(HSD_GObj* gobj, int arg1, Mtx vmtx);
 typedef void (*Fighter_UnkPtrEvent)(int arg0, int* arg1, int* arg2);
+typedef void (*FighterEvent)(Fighter* fp);
 typedef void (*FtCmd)(Fighter_GObj* gobj, FtCmdState* cmd);
-
-typedef enum_t FtMotionId;
 
 typedef enum FighterKind {
     FTKIND_MARIO,

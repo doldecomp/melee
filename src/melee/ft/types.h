@@ -743,7 +743,7 @@ typedef struct SurfaceData {
     Vec3 normal;
 } SurfaceData;
 
-typedef struct _CollData {
+struct CollData {
     /* fp+6F0 */ HSD_GObj* x0_gobj;
     /* fp+6F4 */ Vec3 x4_vec;
     /* fp+700 */ Vec3 x10_vec;
@@ -798,7 +798,7 @@ typedef struct _CollData {
     /* fp+864 */ SurfaceData left_wall;
     /* fp+878 */ SurfaceData ceiling;
     /* fp+88C */ s32 x19C;
-} CollData;
+};
 
 /* fp+2114 */ typedef struct _SmashAttr {
     /* fp+2114 */ SmashState state;

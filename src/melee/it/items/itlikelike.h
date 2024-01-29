@@ -3,8 +3,6 @@
 
 #include "it/forward.h"
 
-#include <placeholder.h>
-
 /* 2DBA68 */ void it_802DBA68(Item_GObj*);
 
 #endif

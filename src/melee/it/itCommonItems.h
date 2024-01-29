@@ -55,7 +55,7 @@ typedef struct BobOmbVars {
     s32 xDE0;
     s32 xDE4;
     s32 xDE8;
-    f32 xDEC;
+    float xDEC;
 } BobOmbVars;
 
 typedef struct HeartContainerVars {

@@ -2327,17 +2327,9 @@ melee/it/itcoll.c:
 	.sdata      start:0x804D5170 end:0x804D5188
 	.sdata2     start:0x804DC6C8 end:0x804DC708
 
-melee/it/it_3F14.c:
-	.data       start:0x803F1418 end:0x803F2310
-
-melee/it/it_3F23.c:
-	.data       start:0x803F2310 end:0x803F3100
-
-melee/it/it_3F31.c:
-	.data       start:0x803F3100 end:0x803F5468
-
 melee/it/it_2725.c:
 	.text       start:0x80272560 end:0x8027CF00
+	.data       start:0x803F1418 end:0x803F5468
 	.bss        start:0x804A0E30 end:0x804A0FD8
 	.sdata      start:0x804D5188 end:0x804D51F0
 	.sbss       start:0x804D6D00 end:0x804D6D48

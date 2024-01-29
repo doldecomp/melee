@@ -3,6 +3,7 @@
 
 #include "itmato.h"
 
+#include "it/inlines.h"
 #include "it/itCommonItems.h"
 #include "it/types.h"
 

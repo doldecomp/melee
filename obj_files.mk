@@ -577,29 +577,22 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/it/it_26B1.c.o\
     $(BUILD_DIR)/asm/melee/it/it_266F.s.o\
     $(BUILD_DIR)/asm/melee/it/itcoll.s.o\
-    $(BUILD_DIR)/src/melee/it/it_3F14.c.o\
-    $(BUILD_DIR)/asm/melee/it/it_3F14.s.o\
-    $(BUILD_DIR)/src/melee/it/it_3F23.c.o\
-    $(BUILD_DIR)/asm/melee/it/it_3F23.s.o\
-    $(BUILD_DIR)/src/melee/it/it_3F31.c.o\
-    $(BUILD_DIR)/asm/melee/it/it_3F31.s.o\
     $(BUILD_DIR)/asm/melee/it/it_2725.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/it/items/itcapsule.c.o\
+    $(BUILD_DIR)/asm/melee/it/items/itcapsule.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itbombhei.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itdosei.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itheart.s.o\
     $(BUILD_DIR)/asm/melee/it/items/ittomato.s.o\
     $(BUILD_DIR)/src/melee/it/items/itstar.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itbat.s.o\
-    $(BUILD_DIR)/src/melee/it/items/itsword.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itsword.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itbox.s.o\
     $(BUILD_DIR)/asm/melee/it/items/ittaru.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itegg.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itkusudama.s.o\
-    $(BUILD_DIR)/src/melee/it/items/itparasol.c.o\
+    $(BUILD_DIR)/asm/melee/it/items/itparasol.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itgshell.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itrshell.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itlgun.s.o\
