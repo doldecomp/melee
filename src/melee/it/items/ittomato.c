@@ -7,7 +7,6 @@ extern f32 it_804DC8B4;
 extern M2C_UNK gm_80473A18;
 /* Warning: struct HSD_Spline is not defined (only forward-declared) */
 
-void it_802845EC(Item_GObj* arg0) {}        // static and header(?)
 void it_802843E4(HSD_GObj* gobj);           // static and header(?)
 void it_80284458(HSD_GObj* gobj);           // static and header(?)
 void it_80284358(Item_GObj*, M2C_UNK, f32); // static and header(?)
@@ -211,6 +210,11 @@ void it_802845BC(Item_GObj* arg0)
 bool it_802845E4(Item_GObj* arg0)
 {
     return 0;
+}
+
+void it_802845EC(Item_GObj* arg0)
+{
+    return;
 }
 
 bool it_802845F0(Item_GObj* arg0)
