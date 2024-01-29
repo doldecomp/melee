@@ -1061,7 +1061,7 @@ config.libs = [
     MeleeLib(
         "un (Unknown)",
         [
-            Object(Unknown, "melee/un_2FC9.c"),
+            Object(NonMatching, "melee/un_2FC9.c"),
         ],
     ),
     MeleeLib(
@@ -1076,18 +1076,18 @@ config.libs = [
     MeleeLib(
         "vi (Visual, cutscenes)",
         [
-            Object(Unknown, "melee/vi/vi.c"),
+            Object(NonMatching, "melee/vi/vi.c"),
             Object(NonMatching, "melee/vi/vi0102.c"),
             Object(NonMatching, "melee/vi/vi0401.c"),
-            Object(Unknown, "melee/vi/vi0402.c"),
+            Object(NonMatching, "melee/vi/vi0402.c"),
             Object(NonMatching, "melee/vi/vi0501.c"),
             Object(NonMatching, "melee/vi/vi0502.c"),
-            Object(Unknown, "melee/vi/vi0601.c"),
+            Object(NonMatching, "melee/vi/vi0601.c"),
             Object(NonMatching, "melee/vi/vi0801.c"),
             Object(NonMatching, "melee/vi/vi1101.c"),
-            Object(Unknown, "melee/vi/vi1201v1.c"),
-            Object(Unknown, "melee/vi/vi1201v2.c"),
-            Object(Unknown, "melee/vi/vi1202.c"),
+            Object(NonMatching, "melee/vi/vi1201v1.c"),
+            Object(NonMatching, "melee/vi/vi1201v2.c"),
+            Object(NonMatching, "melee/vi/vi1202.c"),
         ],
     ),
     RuntimeLib(

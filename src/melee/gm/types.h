@@ -1,7 +1,7 @@
 #ifndef MELEE_GM_TYPES_H
 #define MELEE_GM_TYPES_H
 
-#include "gm/forward.h"
+#include "gm/forward.h" // IWYU pragma: export
 
 #include <common_structs.h>
 #include <placeholder.h>
