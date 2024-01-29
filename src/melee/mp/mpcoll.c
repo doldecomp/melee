@@ -12,9 +12,8 @@
 #include "mp/mplib.h"
 
 #include <placeholder.h>
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
-#include <baselib/gobj.h>
 #include <MSL/trigf.h>
 
 // 80041C78 https://decomp.me/scratch/V6eYQ

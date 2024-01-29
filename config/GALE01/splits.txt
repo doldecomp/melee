@@ -1623,7 +1623,7 @@ melee/gm/gm_1A36.c:
 	.bss        start:0x80479C30 end:0x8049E6C8
 	.sdata      start:0x804D4268 end:0x804D44E0
 	.sbss       start:0x804D6720 end:0x804D6950
-	.sdata2     start:0x804DA9E8 end:0x804DAC80
+	.sdata2     start:0x804DA9E8 end:0x804DAC90
 
 melee/gr/ground.c:
 	.text       start:0x801BFFA8 end:0x801C5B90
@@ -1632,7 +1632,7 @@ melee/gr/ground.c:
 	.bss        start:0x8049E6C8 end:0x8049EE10
 	.sdata      start:0x804D44E0 end:0x804D4530
 	.sbss       start:0x804D6950 end:0x804D6958
-	.sdata2     start:0x804DAC80 end:0x804DAD78
+	.sdata2     start:0x804DAC90 end:0x804DAD78
 
 melee/gr/grdisplay.c:
 	.text       start:0x801C5B90 end:0x801C5FC0

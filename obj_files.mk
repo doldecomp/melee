@@ -457,7 +457,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/ftbosslib.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/gm/gmmain_lib.c.o\
     $(BUILD_DIR)/asm/melee/gm/gmmain_lib.s.o\
     $(BUILD_DIR)/src/melee/gm/gmmain.c.o\
     $(BUILD_DIR)/asm/melee/gm/gm_1601.s.o\
