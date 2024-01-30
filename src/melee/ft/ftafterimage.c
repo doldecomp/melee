@@ -1,5 +1,7 @@
 #include "ftafterimage.h"
 
+#include <placeholder.h>
+
 /* literal */ char ftCo_803C6BD8[] = "no afterimage item!\n";
 /* literal */ char ftCo_803C6BF0[] = "ftafterimage.c";
 /* literal */ SDATA char ftCo_804D3C30[] = "0";

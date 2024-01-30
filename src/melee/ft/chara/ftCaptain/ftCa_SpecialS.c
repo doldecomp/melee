@@ -352,10 +352,7 @@ void ftCa_SpecialSStart_Coll(HSD_GObj* gobj)
         return;
     }
     if (fp->cmd_vars[0] == 1) {
-        /// @todo Unused assignment.
-#ifdef MUST_MATCH
-        f32 _ = fp->facing_dir;
-#endif
+        float _ = fp->facing_dir;
         if ((fp->facing_dir == +1 &&
              (fp->coll_data.env_flags & MPCOLL_RIGHTWALL)) ||
             (fp->facing_dir == -1 &&

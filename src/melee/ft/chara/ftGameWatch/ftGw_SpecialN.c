@@ -15,7 +15,6 @@
 
 #include <common_structs.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
 #include <baselib/random.h>
 
 static void ftGw_SpecialN_CreateSausage(HSD_GObj* gobj)
@@ -129,7 +128,7 @@ static inline void ftGameWatch_SpecialN_ChefLoop(HSD_GObj* gobj)
 
     if ((u32) fp->cmd_vars[2] != 0U) {
         fp->cmd_vars[2] = 0U;
-        if (((f32) fp->mv.gw.SpecialN.maxSausage <
+        if (((float) fp->mv.gw.SpecialN.maxSausage <
              gawAttrs->x1C_GAMEWATCH_CHEF_MAX) &&
             ((s32) fp->mv.gw.SpecialN.isChefLoopDisable == false))
         {
@@ -159,7 +158,7 @@ static inline void ftGameWatch_SpecialAirN_ChefLoop(HSD_GObj* gobj)
     if ((u32) fp->cmd_vars[2] != 0U) {
         fp->cmd_vars[2] = 0U;
         if (((s32) fp->mv.gw.SpecialN.isChefLoopDisable == false) &&
-            ((f32) fp->mv.gw.SpecialN.maxSausage <
+            ((float) fp->mv.gw.SpecialN.maxSausage <
              gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
         {
             ftGw_SpecialAirN_Loop(gobj,
@@ -193,7 +192,7 @@ void ftGw_SpecialN_IASA(HSD_GObj* gobj)
         fp->mv.gw.SpecialN.isChefLoopDisable = true;
     }
     if (((u32) fp->cmd_vars[1] != 0U) && (fp->input.x668 & HSD_PAD_B) &&
-        ((f32) fp->mv.gw.SpecialN.maxSausage <
+        ((float) fp->mv.gw.SpecialN.maxSausage <
          gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
     {
         ftGw_SpecialN_Loop(gobj, gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
@@ -212,7 +211,7 @@ void ftGw_SpecialAirN_IASA(HSD_GObj* gobj)
         fp->mv.gw.SpecialN.isChefLoopDisable = true;
     }
     if (((u32) fp->cmd_vars[1] != 0U) && (fp->input.x668 & HSD_PAD_B) &&
-        ((f32) fp->mv.gw.SpecialN.maxSausage <
+        ((float) fp->mv.gw.SpecialN.maxSausage <
          gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
     {
         ftGw_SpecialAirN_Loop(gobj, gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
@@ -286,7 +285,7 @@ void ftGw_SpecialAirN_AirToGround(HSD_GObj* gobj)
 // 0x8014EB1C
 // https://decomp.me/scratch/KLilJ // Mr. Game & Watch's grounded Chef Loop
 // Motion State handler
-void ftGw_SpecialN_Loop(HSD_GObj* gobj, f32 anim_frame)
+void ftGw_SpecialN_Loop(HSD_GObj* gobj, float anim_frame)
 {
     /// @todo Shared @c inline with #ftGw_SpecialAirN_Loop.
     Fighter* fp = fp = GET_FIGHTER(gobj);
@@ -314,7 +313,7 @@ void ftGw_SpecialN_Loop(HSD_GObj* gobj, f32 anim_frame)
 // 0x8014EB8C
 // https://decomp.me/scratch/KLilJ // Mr. Game & Watch's aerial Chef Loop
 // Motion State handler
-void ftGw_SpecialAirN_Loop(HSD_GObj* gobj, f32 anim_frame)
+void ftGw_SpecialAirN_Loop(HSD_GObj* gobj, float anim_frame)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
 

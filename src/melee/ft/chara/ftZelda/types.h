@@ -4,6 +4,8 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
+#include "lb/types.h"
+
 #include <common_structs.h>
 #include <dolphin/mtx/types.h>
 
@@ -12,39 +14,39 @@ struct ftZelda_FighterVars {
 };
 
 typedef struct ftZelda_DatAttrs {
-    f32 x0;
+    float x0;
     s32 x4; // Type confirmed
-    f32 x8;
-    f32 xC;
-    s32 x10; // Type confirmed
-    s32 x14; // Type confirmed
-    s32 x18; // Type confirmed
-    s32 x1C; // Type confirmed
-    f32 x20; // Type confirmed
-    f32 x24; // Type confirmed
+    float x8;
+    float xC;
+    s32 x10;   // Type confirmed
+    s32 x14;   // Type confirmed
+    s32 x18;   // Type confirmed
+    s32 x1C;   // Type confirmed
+    float x20; // Type confirmed
+    float x24; // Type confirmed
     s32 x28;
-    f32 x2C; // Type confirmed
+    float x2C; // Type confirmed
     s32 x30;
-    f32 x34; // Type confirmed
-    f32 x38; // Type confirmed
-    f32 x3C; // Type confirmed
-    f32 x40; // Type confirmed
-    f32 x44; // Type confirmed
-    s32 x48; // Type confirmed
-    f32 x4C; // Type confirmed
-    f32 x50; // Type confirmed
-    f32 x54;
-    f32 x58;
-    f32 x5C;
-    s32 x60; // Type confirmed
-    f32 x64; // Type confirmed
-    f32 x68; // Type confirmed
-    f32 x6C; // Type confirmed
-    f32 x70; // Type confirmed
-    f32 x74; // Type confirmed
-    f32 x78; // Type confirmed
-    f32 x7C; // Type confirmed
-    f32 x80; // Type confirmed
+    float x34; // Type confirmed
+    float x38; // Type confirmed
+    float x3C; // Type confirmed
+    float x40; // Type confirmed
+    float x44; // Type confirmed
+    s32 x48;   // Type confirmed
+    float x4C; // Type confirmed
+    float x50; // Type confirmed
+    float x54;
+    float x58;
+    float x5C;
+    s32 x60;   // Type confirmed
+    float x64; // Type confirmed
+    float x68; // Type confirmed
+    float x6C; // Type confirmed
+    float x70; // Type confirmed
+    float x74; // Type confirmed
+    float x78; // Type confirmed
+    float x7C; // Type confirmed
+    float x80; // Type confirmed
     ReflectDesc x84;
 } ftZelda_DatAttrs;
 

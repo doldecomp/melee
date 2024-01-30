@@ -18,8 +18,6 @@
 #include "ftFox/types.h"
 #include "it/it_26B1.h"
 
-#include <baselib/gobj.h>
-
 MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
     {
         // ftFx_MS_SpecialNStart = 341
@@ -505,7 +503,7 @@ void ftFx_Init_LoadSpecialAttrs(HSD_GObj* gobj)
     COPY_ATTRS(gobj, ftFox_DatAttrs);
 }
 
-extern f32 lbl_804D9244; /// 0.0f
+extern float lbl_804D9244; /// 0.0f
 
 void ftFx_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {

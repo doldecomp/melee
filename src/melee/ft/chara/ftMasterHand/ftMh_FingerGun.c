@@ -17,7 +17,6 @@
 #include "pl/player.h"
 
 #include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
 #include <baselib/random.h>
 #include <MetroTRK/intrinsics.h>
 
@@ -220,8 +219,8 @@ void ftMh_FingerGun2_Phys(HSD_GObj* gobj)
 
 void ftMh_FingerGun2_Coll(HSD_GObj* gobj) {}
 
-static void ftMh_MS_365_8015364C(HSD_GObj* gobj, HSD_JObj* arg1, f32 arg2,
-                                 f32 arg3);
+static void ftMh_MS_365_8015364C(HSD_GObj* gobj, HSD_JObj* arg1, float arg2,
+                                 float arg3);
 
 void ftMh_MS_365_801535B0(HSD_GObj* gobj)
 {
@@ -240,7 +239,8 @@ void ftMh_MS_365_801535B0(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_365_8015364C(HSD_GObj* gobj, HSD_JObj* arg1, f32 arg2, f32 arg3)
+void ftMh_MS_365_8015364C(HSD_GObj* gobj, HSD_JObj* arg1, float arg2,
+                          float arg3)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;

@@ -1,7 +1,6 @@
 #ifndef GALE01_0C31
 #define GALE01_0C31
 
-#include <platform.h>
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include <baselib/forward.h>
@@ -51,6 +50,7 @@
 /* 0C7AD4 */ void ftCo_CaptureLikelike_IASA(ftCo_GObj* gobj);
 /* 0C7AD8 */ void ftCo_CaptureLikelike_Phys(ftCo_GObj* gobj);
 /* 0C7ADC */ void ftCo_CaptureLikelike_Coll(ftCo_GObj* gobj);
+/* 0C7AE0 */ void fn_800C7AE0(ftCo_GObj* gobj);
 /* 0C7B0C */ UNK_RET ftCo_800C7B0C(UNK_PARAMS);
 /* 0C7C60 */ void ftCo_800C7C60(ftCo_GObj* gobj, int damage_amount);
 /* 0C7CA0 */ bool ftCo_800C7CA0(ftCo_GObj* gobj);
@@ -62,6 +62,5 @@
 /* 0C80A4 */ void ft_800C80A4(Fighter* fp);
 /* 4D6580 */ extern HSD_MObj* ft_804D6580;
 /* 4D6588 */ extern HSD_MObj* ft_804D6588;
-/* 0C7AE0 */ void fn_800C7AE0(ftCo_GObj* gobj);
 
 #endif

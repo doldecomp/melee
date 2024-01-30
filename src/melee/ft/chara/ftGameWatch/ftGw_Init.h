@@ -1,7 +1,6 @@
 #ifndef GALE01_14A250
 #define GALE01_14A250
 
-#include <platform.h>
 #include "ftGameWatch/forward.h"
 #include "it/forward.h"
 #include <baselib/forward.h>

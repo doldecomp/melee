@@ -41,7 +41,6 @@
 
 #include <common_structs.h>
 #include <placeholder.h>
-#include <baselib/gobj.h>
 
 MotionState ftMh_Init_MotionStateTable[ftMh_MS_SelfCount] = {
     {

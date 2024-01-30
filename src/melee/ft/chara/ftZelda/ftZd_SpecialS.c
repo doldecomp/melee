@@ -24,7 +24,7 @@
 // https://decomp.me/scratch/QnXK1
 void ftZd_SpecialS_Enter(HSD_GObj* gobj)
 {
-    f32 temp_f1;
+    float temp_f1;
     Fighter* fp; // r31
     ftZelda_DatAttrs* attributes;
     Fighter* fighter2;
@@ -54,7 +54,7 @@ void ftZd_SpecialS_Enter(HSD_GObj* gobj)
 // https://decomp.me/scratch/F0dW9
 void ftZd_SpecialAirS_Enter(HSD_GObj* gobj)
 {
-    f32 temp_f1;
+    float temp_f1;
     Fighter* fp;
     ftZelda_DatAttrs* attributes;
     Fighter* fighter2;
@@ -86,8 +86,8 @@ void ftZd_SpecialAirS_Enter(HSD_GObj* gobj)
 void ftZd_SpecialSStart_Anim(HSD_GObj* gobj)
 {
     Vec3 sp24;
-    f32 temp_f1;
-    f32 temp_f2;
+    float temp_f1;
+    float temp_f2;
     HSD_GObj* temp_r3;
     ftZelda_DatAttrs* attributes; // r31
     Fighter* fp;                  // r30
@@ -130,8 +130,8 @@ void ftZd_SpecialSLoop_Anim(HSD_GObj* gobj)
     Vec3 sp20;
     ftZelda_DatAttrs* attributes;
     Fighter* fp; // r30
-    f32 temp_f1;
-    f32 temp_f2;
+    float temp_f1;
+    float temp_f2;
     HSD_GObj* temp_r3;
     HSD_GObj* temp_r3_u32;
 
@@ -215,8 +215,8 @@ void ftZd_SpecialSEnd_Anim(HSD_GObj* gobj)
 void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
 {
     Vec3 sp24;
-    f32 temp_f1;
-    f32 temp_f2;
+    float temp_f1;
+    float temp_f2;
     HSD_GObj* temp_r3;
     ftZelda_DatAttrs* attributes;
     Fighter* fp;
@@ -256,8 +256,8 @@ void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
 void ftZd_SpecialAirSLoop_Anim(HSD_GObj* gobj)
 {
     Vec3 sp20;
-    f32 temp_f1;
-    f32 temp_f2;
+    float temp_f1;
+    float temp_f2;
     HSD_GObj* temp_r3;
     ftZelda_DatAttrs* attributes; // r31
     Fighter* fp;                  // r30
@@ -348,7 +348,7 @@ void ftZd_SpecialSStart_IASA(HSD_GObj* gobj) {}
 // https://decomp.me/scratch/MaYEA
 void ftZd_SpecialSLoop_IASA(HSD_GObj* gobj)
 {
-    f32 temp_f1;
+    float temp_f1;
     s32 var_r0;
     Fighter* fp;
 
@@ -376,7 +376,7 @@ void ftZd_SpecialAirSStart_IASA(HSD_GObj* gobj) {}
 // https://decomp.me/scratch/Zxkmg
 void ftZd_SpecialAirSLoop_IASA(HSD_GObj* gobj)
 {
-    f32 temp_f1;
+    float temp_f1;
     s32 var_r0;
     Fighter* fp;
 
@@ -438,7 +438,7 @@ void ftZd_SpecialAirSStart_Phys(HSD_GObj* gobj)
     s32 temp_r3;
     ftZelda_DatAttrs* charAttr;
     ftCo_DatAttrs* fighterAttr;
-    f32 aerialFriction;
+    float aerialFriction;
 
     u8 _[4];
 
@@ -465,7 +465,7 @@ void ftZd_SpecialAirSLoop_Phys(HSD_GObj* gobj)
     s32 temp_r3;
     ftZelda_DatAttrs* charAttr;
     ftCo_DatAttrs* fighterAttr;
-    f32 aerialFriction;
+    float aerialFriction;
 
     u8 _[4];
 
@@ -492,7 +492,7 @@ void ftZd_SpecialAirSEnd_Phys(HSD_GObj* gobj)
     s32 temp_r3;
     ftZelda_DatAttrs* charAttr;
     ftCo_DatAttrs* fighterAttr;
-    f32 aerialFriction;
+    float aerialFriction;
 
     u8 _[4];
 

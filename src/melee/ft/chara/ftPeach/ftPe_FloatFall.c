@@ -19,7 +19,7 @@ static ftPeach_MotionState getFloatDir(HSD_GObj* gobj)
                : ftPe_MS_FloatFallB;
 }
 
-void updateFloatDir(HSD_GObj* gobj)
+void ftPe_UpdateFloatDir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;

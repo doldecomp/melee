@@ -8,9 +8,8 @@
 
 #include <dolphin/mtx/types.h>
 #include <baselib/debug.h>
-#include <baselib/gobj.h>
 
-void ftCamera_80076018(UnkFloat6_Camera* in, UnkFloat6_Camera* out, f32 mul)
+void ftCamera_80076018(UnkFloat6_Camera* in, UnkFloat6_Camera* out, float mul)
 {
     out->x0.x = in->x0.x * mul;
     out->x0.y = in->x0.y * mul;
@@ -98,8 +97,8 @@ void ftCamera_80076320(HSD_GObj* gobj)
     Vec3 center_pos;
     Fighter* fp = gobj->user_data;
     CameraBox* camera_box;
-    f32 temp_f1;
-    f32 temp_f31;
+    float temp_f1;
+    float temp_f31;
 
     camera_box = fp->x890_cameraBox;
     ftCamera_UpdateCameraBox(gobj); // Fighter_UpdateCameraBox

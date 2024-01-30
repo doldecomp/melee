@@ -7,8 +7,6 @@
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
-#include "lb/lbcollision.h"
-
 #include <placeholder.h>
 
 /* 0C0874 */ void ftCo_800C0874(ftCo_GObj* gobj, UNK_T arg1,

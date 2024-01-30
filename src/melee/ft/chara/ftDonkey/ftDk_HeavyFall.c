@@ -13,8 +13,6 @@
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftDonkey/types.h"
 
-#include <stddef.h>
-
 void ftDk_HeavyFall_IASA(HSD_GObj* gobj)
 {
     if (ftCo_80094EA4(gobj)) {

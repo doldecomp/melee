@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <m2c_macros.h>
+#include <m2c_macros.h> // IWYU pragma: export
 
 /// A label in a jump table
 typedef void (*jmp_t)(void);
@@ -64,6 +64,6 @@ OSPanic(__FILE__, __LINE__, "Function is not implemented!")
 #define ASM
 #endif
 
-#define LITERAL static ATTRIBUTE_USED
+#define LITERAL static
 
 #endif

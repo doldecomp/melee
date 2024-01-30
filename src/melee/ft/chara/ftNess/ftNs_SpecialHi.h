@@ -6,8 +6,6 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-#include "ft/types.h"
-
 /* 116D04 */ void ftNs_SpecialAirS_Enter(HSD_GObj* gobj);
 /* 116DB0 */ void ftNs_SpecialAirS_Anim(HSD_GObj* gobj);
 /* 116E0C */ void ftNs_SpecialAirS_Phys(HSD_GObj* gobj);

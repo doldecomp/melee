@@ -20,6 +20,7 @@
 -Werror=pointer-type-mismatch
 -Werror=strict-prototypes
 -Werror=typedef-redefinition
+-Wno-builtin-macro-redefined
 -Wno-gnu-folding-constant
 -Wno-incompatible-library-redeclaration
 -Wno-missing-braces
@@ -28,6 +29,7 @@
 -Wno-tautological-bitwise-compare
 -Wno-undefined-internal
 -Wno-unknown-pragmas
+-Wno-unsequenced
 -Wno-unused-but-set-variable
 -Wno-unused-function
 -Wno-unused-parameter

@@ -27,13 +27,13 @@ void ftNs_SpecialS_ItemPKFireSpawn(
     bool FlagResult;
     Vec3 ItemBonePos;
     Vec3 PKFireVelStruct;
-    f32 PKFireLaunchNew;
+    float PKFireLaunchNew;
 
     u8 _[4];
 
-    f32 PKFireRot;
-    f32 PKFireLaunch;
-    f32 PKFireVel;
+    float PKFireRot;
+    float PKFireLaunch;
+    float PKFireVel;
 
     if (fp->throw_flags_b0 != 0) {
         fp->throw_flags_b0 = 0;

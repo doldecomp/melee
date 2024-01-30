@@ -1,7 +1,6 @@
 #ifndef GALE01_0E030C
 #define GALE01_0E030C
 
-#include <platform.h>
 #include <baselib/forward.h>
 
 /* 0E030C */ void ftDk_HeavyFall_IASA(HSD_GObj* gobj);

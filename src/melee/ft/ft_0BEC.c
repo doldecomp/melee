@@ -26,10 +26,7 @@ static inline void setupInitialState(Fighter* fp)
 
 void ftCo_800BECB0(Fighter_GObj* gobj)
 {
-    ///@todo Unused stack
-#ifdef MUST_MATCH
     int unused[2];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_DeadDown, Ft_MF_None, 0.f, 1.f,
                               0.f, NULL);
@@ -74,10 +71,7 @@ static inline void DocHelper(Fighter_GObj* gobj, Fighter* fp)
 
 void ftCo_800BED88(Fighter_GObj* gobj)
 {
-    ///@todo Unused stack
-#ifdef MUST_MATCH
     int unused[2];
-#endif
     Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_DeadRight, Ft_MF_None, 0.f, 1.f,
                               0.f, NULL);

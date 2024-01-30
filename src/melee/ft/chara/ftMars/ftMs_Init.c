@@ -17,8 +17,6 @@
 #include "ft/types.h"
 #include "ftMars/types.h"
 
-#include <baselib/gobj.h>
-
 MotionState ftMs_Init_MotionStateTable[ftMs_MS_SelfCount] = {
     {
         // ftMs_MS_SpecialNStart = 341

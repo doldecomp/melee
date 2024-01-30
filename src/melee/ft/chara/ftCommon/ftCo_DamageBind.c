@@ -15,7 +15,6 @@
 
 #include <common_structs.h>
 #include <placeholder.h>
-#include <stddef.h>
 
 #pragma force_active on
 

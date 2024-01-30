@@ -92,19 +92,19 @@ void ftNs_SpecialN_ItemPKFlushSetNULL(HSD_GObj* gobj)
 }
 
 /// @todo Float order hack.
-static f32 return_void(void)
+static float return_void(void)
 {
     return 0.0f;
 }
 
 /// @todo Float order hack.
-static f32 return_void2(void)
+static float return_void2(void)
 {
     return 3.0f;
 }
 
 /// @todo Float order hack.
-static f32 return_void3(void)
+static float return_void3(void)
 {
     return 1.0f;
 }
@@ -400,7 +400,7 @@ void ftNs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
     }
 
     {
-        f32 landing_lag = sa->x1C_PKFLASH_LANDING_LAG;
+        float landing_lag = sa->x1C_PKFLASH_LANDING_LAG;
 
         if (landing_lag == 0) {
             ftCo_800CC730(gobj);
@@ -562,7 +562,7 @@ void ftNs_SpecialAirNStart_Phys(HSD_GObj* gobj)
     }
 
     {
-        f32 airFriction = fp->co_attrs.aerial_friction;
+        float airFriction = fp->co_attrs.aerial_friction;
         ftCommon_8007CE94(fp, airFriction);
     }
 }
@@ -583,7 +583,7 @@ void ftNs_SpecialAirNRelease_Phys(HSD_GObj* gobj)
     }
 
     {
-        f32 airFriction = fp->co_attrs.aerial_friction;
+        float airFriction = fp->co_attrs.aerial_friction;
         ftCommon_8007CE94(fp, airFriction);
     }
 }
@@ -604,7 +604,7 @@ void ftNs_SpecialAirNEnd_Phys(HSD_GObj* gobj)
     }
 
     {
-        f32 airFriction = fp->co_attrs.aerial_friction;
+        float airFriction = fp->co_attrs.aerial_friction;
         ftCommon_8007CE94(fp, airFriction);
     }
 }

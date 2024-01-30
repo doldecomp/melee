@@ -1,21 +1,17 @@
-#include <platform.h>
-
-#include "ftSk_SpecialHi.h"
-
 #include <math.h>
 #include <placeholder.h>
 
-f32 const ftSk_Init_804D9660 = 0;
-f32 const ftSk_Init_804D9664 = 1;
-f64 const ftSk_Init_804D9668 = S32_TO_F32;
-f32 const ftSk_Init_804D9670 = deg_to_rad;
-f32 const ftSk_Init_804D9674 = 90;
-f64 const ftSk_Init_804D9678 = 0.5;
-f64 const ftSk_Init_804D9680 = 3;
-f32 const ftSk_Init_804D9688 = M_PI / 2;
-f32 const ftSk_Init_804D968C = 35;
-f32 const ftSk_Init_804D9690 = 0.001;
-f32 const ftSk_Init_804D9694 = 10;
+static float const ftSk_Init_804D9660 = 0;
+static float const ftSk_Init_804D9664 = 1;
+static double const ftSk_Init_804D9668 = S32_TO_F32;
+static float const ftSk_Init_804D9670 = deg_to_rad;
+static float const ftSk_Init_804D9674 = 90;
+static double const ftSk_Init_804D9678 = 0.5;
+static double const ftSk_Init_804D9680 = 3;
+static float const ftSk_Init_804D9688 = M_PI / 2;
+static float const ftSk_Init_804D968C = 35;
+static float const ftSk_Init_804D9690 = 0.001;
+static float const ftSk_Init_804D9694 = 10;
 
 // 80112ED8 - 80112F48 (0x70 bytes)
 

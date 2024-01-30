@@ -1,7 +1,6 @@
 #ifndef GALE01_097D9C
 #define GALE01_097D9C
 
-#include <platform.h>
 #include "ftCommon/forward.h"
 
 /* 097D9C */ bool ftCo_Down_CheckInput(ftCo_GObj* gobj);

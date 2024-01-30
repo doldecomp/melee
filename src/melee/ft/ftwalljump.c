@@ -29,7 +29,7 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
             s32 env_flags = coll_data->env_flags & MPCOLL_FLAGS_B11;
 
             // side of the collision?
-            f32 wall_dir = env_flags ? -1.f : +1.f;
+            float wall_dir = env_flags ? -1.f : +1.f;
 
             // wall_jump_input_timer = some walljump animation/input timer?
             // is initialized in the else-block when the user does the right
@@ -77,7 +77,7 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                     // not sure what this computes, I guess it checks if we are
                     // close to the wall and move towards it with sufficent
                     // speed
-                    f32 x_diff = fp0->pos_delta.x - wall_pos.x;
+                    float x_diff = fp0->pos_delta.x - wall_pos.x;
                     x_diff = x_diff < 0 ? -x_diff : x_diff;
 
                     if (x_diff > fp0->co_attrs.x130) {

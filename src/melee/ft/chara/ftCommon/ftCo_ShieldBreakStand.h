@@ -1,7 +1,6 @@
 #ifndef GALE01_098F3C
 #define GALE01_098F3C
 
-#include <platform.h>
 #include "ftCommon/forward.h"
 
 /* 098F3C */ void ftCo_80098F3C(ftCo_GObj* gobj);

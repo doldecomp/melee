@@ -22,7 +22,6 @@
 
 #include <common_structs.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
 
 void ftMs_SpecialLw_Enter(HSD_GObj* gobj)
 {
@@ -192,7 +191,7 @@ void ftMs_SpecialLw_80138DD0(HSD_GObj* gobj)
     }
 }
 
-#define SOLUTION 0
+#define SOLUTION 1
 void ftMs_SpecialLwHit_Anim(HSD_GObj* gobj)
 {
     ssize_t idx;
@@ -236,7 +235,7 @@ void ftMs_SpecialLwHit_Anim(HSD_GObj* gobj)
 }
 #undef SOLUTION
 
-#define SOLUTION 0
+#define SOLUTION 1
 // https://decomp.me/scratch/Jx7Ov
 void ftMs_SpecialAirLwHit_Anim(HSD_GObj* gobj)
 {
@@ -261,7 +260,7 @@ void ftMs_SpecialAirLwHit_Anim(HSD_GObj* gobj)
         }
 
 // matches but gross:
-#elif SOLUTION == 2
+#elif SOLUTION == 1
         idx = 0;
         hb = (s32) fp;
         while (idx < 4) {

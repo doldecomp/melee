@@ -2,7 +2,6 @@
 #define GALE01_155E18
 
 #include "ftCrazyHand/forward.h"
-#include <baselib/forward.h>
 
 #include "ft/types.h"
 

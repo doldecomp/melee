@@ -22,13 +22,6 @@
 
 #include <common_structs.h>
 #include <math.h>
-#include <placeholder.h>
-
-/* literal */ extern float const ftCo_804D8C40;  // = 0
-/* literal */ extern float const ftCo_804D8C44;  // = -1
-/* literal */ extern float const ftCo_804D8C48;  // = +1
-/* literal */ extern double const ftCo_804D8C50; // = 0.5
-/* literal */ extern double const ftCo_804D8C58; // = 3
 
 #pragma force_active on
 
@@ -45,7 +38,7 @@ bool ftCo_800C15F4(ftCo_GObj* gobj)
         u8 _[8] = { 0 };
         vec.x = coll->xA4_ecbCurrCorrect.left.x;
         vec.y = coll->xA4_ecbCurrCorrect.left.y;
-        vec.z = ftCo_804D8C40;
+        vec.z = 0;
         ftKb_SpecialN_800F1F1C(gobj, &vec);
         {
             Vec3* normal = &coll->left_wall.normal;
@@ -59,7 +52,7 @@ bool ftCo_800C15F4(ftCo_GObj* gobj)
     {
         vec.x = coll->xA4_ecbCurrCorrect.right.x;
         vec.y = coll->xA4_ecbCurrCorrect.right.y;
-        vec.z = ftCo_804D8C40;
+        vec.z = 0;
         ftKb_SpecialN_800F1F1C(gobj, &vec);
         {
             Vec3* normal = &coll->right_wall.normal;
@@ -81,9 +74,9 @@ bool ftCo_800C1718(ftCo_GObj* gobj)
         coll->env_flags & MPCOLL_FLAGS_B14 &&
         fp->mv.co.damage.x19 != ftCo_Surface_Ceiling)
     {
-        vec.x = ftCo_804D8C40;
+        vec.x = 0;
         vec.y = coll->xA4_ecbCurrCorrect.top.y;
-        vec.z = ftCo_804D8C40;
+        vec.z = 0;
         ftKb_SpecialN_800F1F1C(gobj, &vec);
         {
             Vec3* normal = &coll->ceiling.normal;
@@ -132,14 +125,13 @@ void ftCo_800C18A8(ftCo_GObj* gobj, ftCommon_MotionState msid, Vec3* normal,
         vec1.y *= co_x1BC;
     }
     fp->x8c_kb_vel = vec1;
-    fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = ftCo_804D8C40;
-    fp->facing_dir =
-        fp->x8c_kb_vel.x < ftCo_804D8C40 ? ftCo_804D8C44 : ftCo_804D8C48;
-    Fighter_ChangeMotionState(
-        gobj, msid,
-        Ft_MF_Unk06 | Ft_MF_SkipNametagVis | Ft_MF_KeepColAnimPartHitStatus |
-            Ft_MF_SkipHitStun,
-        ftCo_804D8C40, ftCo_804D8C48, ftCo_804D8C40, NULL);
+    fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
+    fp->facing_dir = fp->x8c_kb_vel.x < 0 ? -1 : 1;
+    Fighter_ChangeMotionState(gobj, msid,
+                              Ft_MF_Unk06 | Ft_MF_SkipNametagVis |
+                                  Ft_MF_KeepColAnimPartHitStatus |
+                                  Ft_MF_SkipHitStun,
+                              0, 1, 0, NULL);
     if (msid == ftCo_MS_FlyReflectWall) {
         fp->cur_pos.x = -(fp->x68C_transNPos.z * -fp->facing_dir -
                           (fp->cur_pos.x + offset->x));

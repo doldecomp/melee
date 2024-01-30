@@ -31,7 +31,6 @@
 #include "lb/lbmthp.h"
 
 #include <common_structs.h>
-#include <baselib/gobj.h>
 
 MotionState ftCl_Init_MotionStateTable[ftLk_MS_SelfCount] = {
     {
@@ -407,7 +406,7 @@ void ftCl_Init_80149114(HSD_GObj* gobj)
 {
     ftLk_Fighter* fp = gobj->user_data;
     ftLk_DatAttrs* ea = fp->ft_data->ext_attr;
-    f32 ftmp = ftCo_80092ED8(fp->x19A4, ea->xD8);
+    float ftmp = ftCo_80092ED8(fp->x19A4, ea->xD8);
     fp->gr_vel = ftmp * p_ftCommonData->x294;
     if (fp->specialn_facing_dir < 0.0f) {
         ftmp = fp->gr_vel;

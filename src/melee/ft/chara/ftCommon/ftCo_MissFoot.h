@@ -1,10 +1,7 @@
 #ifndef GALE01_09CD5C
 #define GALE01_09CD5C
 
-#include <platform.h>
 #include "ftCommon/forward.h"
-
-#include <placeholder.h>
 
 /* 09CD5C */ void ftCo_8009F39C(ftCo_GObj* gobj);
 /* 09CDC0 */ void ftCo_MissFoot_Anim(ftCo_GObj* gobj);

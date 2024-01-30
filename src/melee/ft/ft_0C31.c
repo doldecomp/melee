@@ -11,7 +11,6 @@
 #include "ft/fighter.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_DownBound.h"
@@ -20,6 +19,7 @@
 #include "it/items/itgreatfoxlaser.h"
 #include "it/items/itleadead.h"
 #include "it/items/itlikelike.h"
+#include "pl/player.h"
 
 #include <placeholder.h>
 #include <baselib/dobj.h>

@@ -13,20 +13,20 @@ struct ftYoshi_FighterVars {
 };
 
 typedef struct _ftYoshiAttributes {
-    f32 x0;
-    f32 x4;
-    f32 x8;
-    f32 xC;
-    f32 x10;
-    f32 x14;
-    f32 x18;
-    f32 x1C;
-    f32 x20;
-    f32 x24;
+    float x0;
+    float x4;
+    float x8;
+    float xC;
+    float x10;
+    float x14;
+    float x18;
+    float x1C;
+    float x20;
+    float x24;
     s32 x28;
     s32 x2C;
     u8 data_filler1[0xEF];
-    f32 x120;
+    float x120;
     u8 data_filler2[0x14];
 } ftYoshiAttributes;
 
@@ -45,13 +45,13 @@ struct S_UNK_YOSHI1 {
 union ftYoshi_MotionVars {
     /// @todo Proper state name.
     struct ftYoshi_State2Vars {
-        f32 x0;
+        float x0;
         UNK_T x4;
         UNK_T x8;
         bool xC;
         UNK_T x10;
-        f32 x14;
-        f32 x18;
+        float x14;
+        float x18;
     } unk2;
 };
 

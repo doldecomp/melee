@@ -114,14 +114,6 @@ typedef void (*Event)(void);
 #endif
 #endif
 
-#ifndef ATTRIBUTE_USED
-#if defined(__clang__)
-#define ATTRIBUTE_USED __attribute__((used))
-#else
-#define ATTRIBUTE_USED
-#endif
-#endif
-
 #ifdef PERMUTER
 #define AT_ADDRESS(x) = FIXEDADDR(x)
 #elif defined(__MWERKS__) && !defined(M2CTX)

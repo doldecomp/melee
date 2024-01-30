@@ -21,7 +21,7 @@ bool ftDk_MS_341_800DFA98(HSD_GObj* gobj)
     }
 }
 
-void ftDk_MS_341_800DFAE4(HSD_GObj* gobj, f32 argf)
+void ftDk_MS_341_800DFAE4(HSD_GObj* gobj, float argf)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);

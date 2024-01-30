@@ -1,8 +1,6 @@
 #ifndef GALE01_0BCDE0
 #define GALE01_0BCDE0
 
-#include <platform.h>
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
 
 /* 0BCDE0 */ void ftCo_800BCDE0(ftCo_GObj* gobj, FtMotionId msid);

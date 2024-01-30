@@ -22,7 +22,6 @@
 #include "it/it_26B1.h"
 
 #include <placeholder.h>
-#include <baselib/gobj.h>
 
 MotionState ftKp_Init_MotionStateTable[ftKp_MS_SelfCount] = {
     {
@@ -310,8 +309,8 @@ Fighter_CostumeStrings ftKp_Init_CostumeStrings[] = {
     { ftKp_Init_803CF194, ftKp_Init_803CF1A0, ftKp_Init_803CF1BC },
 };
 
-/* static */ extern const f32 ftKp_Init_804D9ADC; // = 1.0F
-/* static */ extern const f32 ftKp_Init_804D9AD8; // = 0.0F
+/* static */ extern const float ftKp_Init_804D9ADC; // = 1.0F
+/* static */ extern const float ftKp_Init_804D9AD8; // = 0.0F
 
 void ftKp_Init_OnDeath(HSD_GObj* gobj)
 {
@@ -393,49 +392,49 @@ void ftKp_Init_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, true);
 }
 
-f32 ftKp_SpecialS_80132DC0(HSD_GObj* gobj)
+float ftKp_SpecialS_80132DC0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->dat_attrs;
     return sa->x4C;
 }
 
-f32 ftKp_SpecialS_80132DD0(HSD_GObj* gobj)
+float ftKp_SpecialS_80132DD0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->dat_attrs;
     return sa->x48;
 }
 
-f32 ftKp_SpecialS_80132DE0(HSD_GObj* gobj)
+float ftKp_SpecialS_80132DE0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->dat_attrs;
     return sa->x44;
 }
 
-f32 ftKp_SpecialS_80132DF0(HSD_GObj* gobj)
+float ftKp_SpecialS_80132DF0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->dat_attrs;
     return sa->x40;
 }
 
-f32 ftKp_SpecialS_80132E00(HSD_GObj* gobj)
+float ftKp_SpecialS_80132E00(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->dat_attrs;
     return sa->x3C;
 }
 
-f32 ftKp_SpecialS_80132E10(HSD_GObj* gobj)
+float ftKp_SpecialS_80132E10(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->dat_attrs;
     return sa->x34;
 }
 
-f32 ftKp_SpecialS_80132E20(HSD_GObj* gobj)
+float ftKp_SpecialS_80132E20(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->dat_attrs;

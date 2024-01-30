@@ -3,7 +3,6 @@
 #ifndef GALE01_14A848
 #define GALE01_14A848
 
-#include <platform.h>
 #include <baselib/forward.h>
 
 /* 14A848 */ void ftGw_ItemTorchSetup(HSD_GObj* gobj);

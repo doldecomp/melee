@@ -12,8 +12,6 @@
 #include "it/items/itfoxblaster.h"
 #include "it/items/itnessbat.h"
 
-#include <stddef.h>
-
 void ftCo_800BF034(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };

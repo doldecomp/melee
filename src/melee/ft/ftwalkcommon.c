@@ -14,7 +14,7 @@
 #include "ft/types.h"
 #include "ftCommon/types.h"
 
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 
 FtWalkType ftWalkCommon_GetWalkType(HSD_GObj* gobj)
@@ -38,8 +38,8 @@ FtWalkType ftWalkCommon_GetWalkType(HSD_GObj* gobj)
 static inline FtWalkType ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    f32 walking_velocity = fabs_inline(fp->gr_vel);
-    f32 tempf = fp->mv.co.walk.accel_mul;
+    float walking_velocity = fabs_inline(fp->gr_vel);
+    float tempf = fp->mv.co.walk.accel_mul;
     if (walking_velocity >=
         (tempf * (p_ftCommonData->x2C * fp->co_attrs.walk_max_vel)))
     {
@@ -123,7 +123,7 @@ void ftWalkCommon_800DFDDC(HSD_GObj* gobj)
     ftAnim_SetAnimRate(gobj, anim_rate);
 }
 
-void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
+void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, float))
 {
     int motion_state_sum;
     int motion_state_base;
@@ -134,10 +134,10 @@ void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
     motion_state_sum = motion_state_base + walk_action_type;
 
     if (motion_state_sum != (int) fp->motion_id) {
-        f32 float_result;
-        f32 frame;
-        f32 init_animFrame;
-        f32 adjusted_animFrame;
+        float float_result;
+        float frame;
+        float init_animFrame;
+        float adjusted_animFrame;
         s32 final_animFrame;
         s32 quotient;
 

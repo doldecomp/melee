@@ -35,7 +35,6 @@
 #include "mp/mplib.h"
 
 #include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
 
 MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
     {
@@ -661,10 +660,10 @@ void ftDk_Init_8010DB3C(HSD_GObj* gobj)
         Vec3 vec_list[4];
         int i;
         for (i = 0; i < 4; i++) {
-            f32 temp_f5 = (donkey_attr->SpecialLw.x68 * i) -
-                          (donkey_attr->SpecialLw.x68 * 1.5f);
-            f32 temp_f3 = donkey_attr->SpecialLw.x6C * fp->facing_dir;
-            f32 temp_f6 = temp_f5 + temp_f3;
+            float temp_f5 = (donkey_attr->SpecialLw.x68 * i) -
+                            (donkey_attr->SpecialLw.x68 * 1.5f);
+            float temp_f3 = donkey_attr->SpecialLw.x6C * fp->facing_dir;
+            float temp_f6 = temp_f5 + temp_f3;
 
             if (!mpLib_80056C54(colldata->floor.index, &fp->cur_pos, 0,
                                 &vec_list[i], 0, 0, temp_f6,

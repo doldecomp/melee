@@ -1,7 +1,6 @@
 #ifndef GALE01_09EDA4
 #define GALE01_09EDA4
 
-#include <platform.h>
 #include "ftCommon/forward.h"
 
 /* 09EDA4 */ bool ftCo_8009EDA4(ftCo_GObj* gobj);

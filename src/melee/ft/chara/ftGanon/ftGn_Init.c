@@ -15,9 +15,6 @@
 #include "ftCaptain/ftCa_SpecialS.h"
 #include "ftCaptain/types.h"
 
-#include <stddef.h>
-#include <baselib/gobj.h>
-
 MotionState ftGn_Init_MotionStateTable[ftCa_MS_SelfCount] = {
     {
         // ftCa_MS_SwordSwing4 = 341

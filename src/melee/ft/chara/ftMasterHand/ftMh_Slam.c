@@ -17,8 +17,6 @@
 #include "ftMasterHand/types.h"
 #include "pl/player.h"
 
-#include <baselib/gobj.h>
-
 void ftMh_Slam_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

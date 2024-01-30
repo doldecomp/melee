@@ -31,13 +31,6 @@
 #include "lb/lb_00CE.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
-
-/* literal */ extern float const ftCo_804D8C60;
-/* literal */ extern float const ftCo_804D8C64;
-/* literal */ extern double const ftCo_804D8C68;
-/* literal */ extern float const ftCo_804D8C70;
-/* literal */ extern double const ftCo_804D8C78;
 
 #pragma force_active on
 
@@ -52,9 +45,9 @@ bool ftCo_800C1D38(ftCo_GObj* gobj)
         ftCommon_MotionState msid =
             ftCo_800C1E0C(fp) ? ftCo_MS_PassiveWallJump : ftCo_MS_PassiveWall;
         if (coll->env_flags & MPCOLL_FLAGS_B11) {
-            ftCo_800C1E64(gobj, msid, p_ftCommonData->x760, 0, ftCo_804D8C60);
+            ftCo_800C1E64(gobj, msid, p_ftCommonData->x760, 0, -1);
         } else {
-            ftCo_800C1E64(gobj, msid, p_ftCommonData->x760, 0, ftCo_804D8C64);
+            ftCo_800C1E64(gobj, msid, p_ftCommonData->x760, 0, +1);
         }
         return true;
     }
@@ -84,17 +77,16 @@ void ftCo_800C1E64(ftCo_GObj* gobj, int msid, int timer, int vel_y_exponent,
         if (fp->coll_data.env_flags & MPCOLL_FLAGS_B11) {
             ef_offset.x = coll->xA4_ecbCurrCorrect.left.x;
             ef_offset.y = coll->xA4_ecbCurrCorrect.left.y;
-            ef_offset.z = ftCo_804D8C70;
+            ef_offset.z = 0;
         } else {
             ef_offset.x = coll->xA4_ecbCurrCorrect.right.x;
             ef_offset.y = coll->xA4_ecbCurrCorrect.right.y;
-            ef_offset.z = ftCo_804D8C70;
+            ef_offset.z = 0;
         }
     }
     ftKb_SpecialN_800F1F1C(gobj, &ef_offset);
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, ftCo_804D8C70,
-                              timer != 0 ? ftCo_804D8C70 : ftCo_804D8C64,
-                              ftCo_804D8C70, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, timer != 0 ? 0 : 1, 0,
+                              NULL);
     fp->x670_timer_lstick_tilt_x = 0xFE;
     fp->x671_timer_lstick_tilt_y = 0xFE;
     fp->mv.co.passivewall.timer = timer;
@@ -128,8 +120,7 @@ static inline void inlineA0(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_PassiveWallJump, Ft_MF_None,
-                              fp->cur_anim_frame, ftCo_804D8C64, ftCo_804D8C70,
-                              NULL);
+                              fp->cur_anim_frame, 1, 0, NULL);
     fp->x671_timer_lstick_tilt_y = 0xFE;
     fp->mv.co.passivewall.timer = 0;
 }
@@ -145,7 +136,7 @@ void ftCo_PassiveWall_Anim(ftCo_GObj* gobj)
             if (fp->mv.co.passivewall.x8) {
                 inlineA0(gobj);
             } else {
-                ftAnim_SetAnimRate(gobj, ftCo_804D8C64);
+                ftAnim_SetAnimRate(gobj, 1);
             }
             if (fp->motion_id == ftCo_MS_PassiveWall) {
                 fp->self_vel.x =
@@ -199,8 +190,7 @@ void ftCo_PassiveWall_Phys(ftCo_GObj* gobj)
         } else {
             ftCommon_8007D494(fp, co->grav, co->terminal_vel);
         }
-        ftCommon_8007D140(fp, ftCo_804D8C70, ftCo_804D8C70,
-                          fp->co_attrs.aerial_friction);
+        ftCommon_8007D140(fp, 0, 0, fp->co_attrs.aerial_friction);
     }
 }
 

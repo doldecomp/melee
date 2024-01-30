@@ -1,21 +1,14 @@
 #ifndef GALE01_0877F8
 #define GALE01_0877F8
 
-#include <platform.h>
 #include "ft/forward.h"
 #include <baselib/forward.h>
 
-#include "ft/fighter.h"
-#include "ftCommon/ftCo_0A01.h"
+#include "ft/types.h"
 
-extern HSD_Joint* ft_8045A1E0[6];
-extern s32 ft_80459B88[FTKIND_MAX];
-extern char ftMr_Init_DatFilename[];
-extern char ftMr_Init_DataName[];
-extern Fighter_CostumeStrings ftMr_Init_CostumeStrings[];
-extern char ftMr_Init_AnimDatFilename[];
+#include <placeholder.h>
 
-/* 04B4B0 */ unk_t mpColl_8004B4B0(void);
+/* 04B4B0 */ UNK_T mpColl_8004B4B0(void);
 /* 0877F8 */ s32 ft_800877F8(Fighter_GObj*, s32);
 /* 087818 */ s32 ft_80087818(Fighter_GObj*, s32);
 /* 087838 */ s32 ft_80087838(Fighter_GObj* gobj);
@@ -29,7 +22,7 @@ extern char ftMr_Init_AnimDatFilename[];
 /* 0879F8 */ s32 ft_800879F8(Fighter_GObj* gobj);
 /* 087A18 */ s32 ft_80087A18(Fighter_GObj* gobj);
 /* 087A80 */ u8 ft_80087A80(Fighter_GObj* gobj);
-/* 087A8C */ f32 ft_80087A8C(Fighter_GObj* gobj);
+/* 087A8C */ float ft_80087A8C(Fighter_GObj* gobj);
 /* 087A98 */ s32 ft_80087A98(Fighter_GObj* gobj);
 /* 087AA4 */ u8 ft_80087AA4(Fighter_GObj* gobj);
 /* 087AB4 */ u8 ft_80087AB4(Fighter_GObj* gobj);
@@ -50,5 +43,11 @@ extern char ftMr_Init_AnimDatFilename[];
 /* 0880D8 */ void ft_800880D8(Fighter*);
 /* 088110 */ void ft_80088110(Fighter*);
 /* 088148 */ void ft_80088148(Fighter*, enum_t, int, int);
+/* 3C57D0 */ extern char ftMr_Init_DatFilename[];
+/* 3C57DC */ extern char ftMr_Init_DataName[];
+/* 3C595C */ extern char ftMr_Init_AnimDatFilename[];
+/* 3C5A28 */ extern Fighter_CostumeStrings ftMr_Init_CostumeStrings[];
+/* 459B88 */ extern s32 ft_80459B88[FTKIND_MAX];
+/* 45A1E0 */ extern HSD_Joint* ft_8045A1E0[6];
 
 #endif

@@ -21,8 +21,6 @@
 #include "it/it_26B1.h"
 #include "it/items/it_27CF.h"
 
-#include <baselib/gobj.h>
-
 MotionState ftDr_Init_MotionStateTable[ftMr_MS_SelfCount] = {
     {
         // ftMr_MS_AppealSR = 341

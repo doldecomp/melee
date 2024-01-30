@@ -332,11 +332,8 @@ melee/ft/ft_0852.c:
 
 melee/ft/ftdata.c:
 	.text       start:0x80085560 end:0x800860C4
-	.data       start:0x803C0FC8 end:0x803C2800
+	.data       start:0x803C0FC8 end:0x803C5460
 	.sdata      start:0x804D3AB8 end:0x804D3AC8
-
-melee/ft/chara/ftCommon/ftCo_Init.c:
-	.data       start:0x803C2800 end:0x803C5460
 
 melee/ft/ftlib.c:
 	.text       start:0x800860C4 end:0x800877F8
@@ -1228,10 +1225,6 @@ melee/ft/chara/ftKoopa/ftKp_Unk1.c:
 	.data       start:0x803CF2A0 end:0x803CF420
 
 melee/ft/chara/ftKoopa/ftKp_SpecialS.c:
-	.text       start:0x8013383C end:0x8013383C
-	.sdata2     start:0x804D9AD0 end:0x804D9AD0
-
-melee/ft/chara/ftKp_SpecialS.c:
 	.text       start:0x8013383C end:0x80136258
 	.sdata2     start:0x804D9AD0 end:0x804D9B08
 
@@ -1563,12 +1556,9 @@ melee/ft/chara/ftMasterHand/ftMh_ThrownMasterHand.c:
 
 melee/ft/chara/ftCrazyHand/ftCh_Init.c:
 	.text       start:0x80155E18 end:0x8015BD20
-	.data       start:0x803D41F8 end:0x803D4878
+	.data       start:0x803D41F8 end:0x803D49C0
 	.sdata      start:0x804D3EC0 end:0x804D3ED0
 	.sdata2     start:0x804DA050 end:0x804DA1F8
-
-melee/ft/chara/ftCrazyHand/ftCh_Unk0.c:
-	.data       start:0x803D4878 end:0x803D49C0
 
 melee/ft/ftbosslib.c:
 	.text       start:0x8015BD20 end:0x8015CC34

@@ -14,7 +14,6 @@
 #include "ftDonkey/types.h"
 
 #include <common_structs.h>
-#include <stddef.h>
 
 bool ftDk_MS_341_800DF938(HSD_GObj* gobj)
 {

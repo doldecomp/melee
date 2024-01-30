@@ -9,6 +9,8 @@
 #include "ft/types.h"
 #include "ftDonkey/types.h"
 
+#include <baselib/gobj.h>
+
 /* 09C540 */ static void ftCo_8009C540(ftCo_GObj* gobj);
 
 bool ftCo_8009C4F8(ftCo_GObj* gobj)

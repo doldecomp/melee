@@ -1225,7 +1225,7 @@ bool Ground_801C2ED0(HSD_JObj* jobj, s32 arg1)
     return result;
 }
 
-static ATTRIBUTE_USED s16 Ground_804D6954;
+static s16 Ground_804D6954;
 
 void Ground_801C2FE0(HSD_GObj* arg0)
 {

@@ -19,7 +19,6 @@
 #include "ftZelda/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
-#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
 #include <common_structs.h>
@@ -77,10 +76,8 @@ void ftZd_SpecialHi_8013979C(HSD_GObj* gobj)
 
 static void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
 {
-#ifdef MUST_MATCH
     u8 _[4];
     _[0] = 0;
-#endif
 
     {
         ssize_t boneIndex = ftParts_8007500C(fp, 4);
@@ -90,7 +87,7 @@ static void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
             Vec3 vec;
             lb_8000B1CC(jObj, NULL, &vec);
 
-            lb_800119DC(&vec, 120, 1.5f, 0.02, 60 * (f32) M_PI / 180);
+            lb_800119DC(&vec, 120, 1.5f, 0.02, 60 * (float) M_PI / 180);
         }
     }
 }
@@ -142,7 +139,7 @@ void ftZd_SpecialAirHi_Enter(HSD_GObj* gobj)
             HSD_JObj* jObj = fp->parts[boneIndex].joint;
 
             lb_8000B1CC(jObj, NULL, &vec);
-            lb_800119DC(&vec, 120, 1.5, 0.02, 60 * (f32) M_PI / 180);
+            lb_800119DC(&vec, 120, 1.5, 0.02, 60 * (float) M_PI / 180);
         }
 
         fp->accessory4_cb = &ftZd_SpecialHi_801396AC;
@@ -195,7 +192,7 @@ void ftZd_SpecialHiStart_0_Coll(HSD_GObj* gobj)
 void ftZd_SpecialAirHiStart_0_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    f32 facing_dir = fp->facing_dir;
+    float facing_dir = fp->facing_dir;
     int ledge_grab_dir;
 
     if (facing_dir < 0) {
@@ -352,7 +349,7 @@ void ftZd_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
 
     if (!ftCliffCommon_80081298(gobj)) {
         if ((coll_data->env_flags & MPCOLL_CEIL) != 0) {
-            f32 angle =
+            float angle =
                 lbVector_AngleXY(&coll_data->ceiling.normal, &fp->self_vel);
             if (angle > deg_to_rad * (90.0F + sa->x60)) {
                 ftZd_SpecialHi_8013A764(gobj);
@@ -360,14 +357,14 @@ void ftZd_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
         }
 
         if ((coll_data->env_flags & MPCOLL_RIGHTWALL) != 0) {
-            f32 angle =
+            float angle =
                 lbVector_AngleXY(&coll_data->right_wall.normal, &fp->self_vel);
             if (angle > (deg_to_rad * (90.0F + sa->x60))) {
                 ftZd_SpecialHi_8013A764(gobj);
             }
         }
         if ((coll_data->env_flags & MPCOLL_LEFTWALL) != 0) {
-            f32 angle =
+            float angle =
                 lbVector_AngleXY(&coll_data->left_wall.normal, &fp->self_vel);
             if (angle > (deg_to_rad * (90.0F + sa->x60))) {
                 ftZd_SpecialHi_8013A764(gobj);
@@ -378,9 +375,7 @@ void ftZd_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
 
 void ftZd_SpecialHi_80139F6C(HSD_GObj* gobj)
 {
-#ifdef MUST_MATCH
     u8 unused8;
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D60C(fp);
@@ -412,13 +407,13 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
     f64 _half;
     Fighter* fp;                  // r30
     ftZelda_DatAttrs* attributes; // r31
-    f32 temp_f0;
-    f32 temp_f1;
-    f32 temp_f2;
-    f32 var_f31;
-    f32 var_f4;
-    f32 temp_f5;
-    f32 temp_f6;
+    float temp_f0;
+    float temp_f1;
+    float temp_f2;
+    float var_f31;
+    float var_f4;
+    float temp_f5;
+    float temp_f6;
     CollData* collData;
 
     u8 _[16];
@@ -459,7 +454,7 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
         inputVector.z = 0;
 
         if (!(lbVector_AngleXY(groundVector, (Vec3*) &inputVector.x) <
-              (f32) M_PI_2))
+              (float) M_PI_2))
         {
             if (ftCo_8009A134(gobj) == 0) {
                 ftCommon_8007D9FC(fp);
@@ -500,13 +495,13 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
     volatile float y;
     Fighter* fp;                  // r30
     ftZelda_DatAttrs* attributes; // r31
-    f32 temp_f1;
-    f32 temp_f2;
-    f32 var_f4;
-    f32 var_f5;
-    f32 var_f30;
-    f32 var_f31;
-    f32 temp_f0;
+    float temp_f1;
+    float temp_f2;
+    float var_f4;
+    float var_f5;
+    float var_f30;
+    float var_f31;
+    float temp_f0;
 
     u8 _[12];
 
@@ -556,7 +551,7 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
         fp->mv.zd.specialhi.x4.y = fp->input.lstick.y;
     } else {
         ftCommon_8007DA24(fp);
-        var_f30 = (f32) M_PI_2;
+        var_f30 = (float) M_PI_2;
         fp->mv.zd.specialhi.x4.x = 0;
         var_f31 = fp->mv.zd.specialhi.x4.y = 1.0;
     }
@@ -597,7 +592,7 @@ void ftZd_SpecialAirHi_Anim(HSD_GObj* gobj)
     ftZelda_DatAttrs* attributes = fp->dat_attrs;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        f32 x, y;
+        float x, y;
         x = attributes->x68;
         y = attributes->x6C;
         ftCo_80096900(gobj, 1, 0, 1, x, y);
@@ -627,7 +622,7 @@ void ftZd_SpecialAirHi_Phys(HSD_GObj* gobj)
     }
 
     {
-        f32 vel_y = fp->self_vel.y;
+        float vel_y = fp->self_vel.y;
         fp->self_vel.y = vel_y - vel_y / 10;
     }
 
