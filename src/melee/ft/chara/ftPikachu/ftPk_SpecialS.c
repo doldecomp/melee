@@ -81,7 +81,7 @@ void ftPk_SpecialSStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = getFtSpecialAttrsD(fp);
-    f32 pika_attr_x34 = sa->x34;
+    float pika_attr_x34 = sa->x34;
     ftCommon_8007C930(fp, pika_attr_x34);
     ftCommon_8007CB74(gobj);
 }
@@ -265,7 +265,7 @@ void ftPk_SpecialS0_Anim(HSD_GObj* gobj)
     ftPikachuAttributes* sa = fp->dat_attrs;
 
     if (fp->x914[0].state == HitCapsule_Enabled) {
-        f32 damage_amount = fp->mv.pk.unk3.x0 * sa->x2C + sa->x28;
+        float damage_amount = fp->mv.pk.unk3.x0 * sa->x2C + sa->x28;
         ftColl_8007ABD0(&fp->x914[0], damage_amount, gobj);
     }
 
@@ -283,7 +283,7 @@ void ftPk_SpecialAirS0_Anim(HSD_GObj* gobj)
     ftPikachuAttributes* sa = fp->dat_attrs;
 
     if (fp->x914[0].state == HitCapsule_Enabled) {
-        f32 damage_amount = fp->mv.pk.unk3.x0 * sa->x2C + sa->x28;
+        float damage_amount = fp->mv.pk.unk3.x0 * sa->x2C + sa->x28;
         ftColl_8007ABD0(&fp->x914[0], damage_amount, gobj);
     }
 
@@ -433,7 +433,7 @@ void ftPk_SpecialS_ChangeMotion_Unk10(HSD_GObj* gobj)
     fp->self_vel.x *= fp->facing_dir;
 
     {
-        f32 temp = 0.5f * fp->mv.pk.unk3.x0 / sa->x24;
+        float temp = 0.5f * fp->mv.pk.unk3.x0 / sa->x24;
         fp->self_vel.y = 0.5f * sa->x44 + sa->x44 * temp;
     }
 

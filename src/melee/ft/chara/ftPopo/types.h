@@ -14,25 +14,25 @@ struct ftPopo_FighterVars {
     /* 0x2244 */ u32 x2244;
     /* 0x2248 */ u32 x2248;
     /* 0x224C */ u32 x224C;
-    /* 0x2250 */ f32 x2250;
+    /* 0x2250 */ float x2250;
 };
 
 typedef struct _ftIceClimberAttributes {
-    f32 x0;
-    f32 x4;
-    f32 x8;
-    f32 xC;
-    f32 x10;
-    f32 x14;
-    f32 x18;
+    float x0;
+    float x4;
+    float x8;
+    float xC;
+    float x10;
+    float x14;
+    float x18;
     s32 x1C;
     s32 x20;
     s32 x24;
     s32 x28;
     s32 x2C;
     u8 data_filler_1[0xC4 - 0x30];
-    f32 xC4;
-    f32 xC8;
+    float xC4;
+    float xC8;
     u8 data_filler_2[0x90];
 } ftIceClimberAttributes;
 

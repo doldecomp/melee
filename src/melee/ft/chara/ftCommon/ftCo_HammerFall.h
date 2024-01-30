@@ -1,7 +1,6 @@
 #ifndef GALE01_0C5CD4
 #define GALE01_0C5CD4
 
-#include <platform.h>
 #include "ftCommon/forward.h"
 
 /* 0C5CD4 */ bool ftCo_800C5CD4(ftCo_GObj* gobj);

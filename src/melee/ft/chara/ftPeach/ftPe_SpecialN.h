@@ -1,10 +1,7 @@
 #ifndef GALE01_11E3D0
 #define GALE01_11E3D0
 
-#include <platform.h>
 #include <baselib/forward.h>
-
-#include <placeholder.h>
 
 /* 11E2AC */ void ftPe_SpecialN_DoDeath2(HSD_GObj* gobj);
 /* 11E2E8 */ void ftPe_SpecialN_OnDeath2(HSD_GObj* gobj);

@@ -80,7 +80,7 @@ void ftPe_Float_Anim(HSD_GObj* gobj)
         fp->fv.pe.x4 -= 1;
     }
     if (fp->fv.pe.x4 <= 0) {
-        updateFloatDir(gobj);
+        ftPe_UpdateFloatDir(gobj);
     }
 }
 
@@ -93,7 +93,7 @@ void ftPe_Float_IASA(HSD_GObj* gobj)
             fp->input.lstick.y >= p_ftCommonData->x70_someLStickYMax ||
             fp->input.held_inputs & HSD_PAD_XY;
         if (!float_input) {
-            updateFloatDir(gobj);
+            ftPe_UpdateFloatDir(gobj);
         }
     }
 }

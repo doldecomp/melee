@@ -66,34 +66,29 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/fighter.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftanim.s.o\
-    $(BUILD_DIR)/src/melee/ft/ftaction.c.o\
-    $(BUILD_DIR)/src/melee/ft/ftparts.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ftaction.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftparts.s.o\
     $(BUILD_DIR)/src/melee/ft/ftcamera.c.o\
-    $(BUILD_DIR)/src/melee/ft/ftcoll.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftcoll.s.o\
-    $(BUILD_DIR)/src/melee/ft/ft_07C1.c.o\
-    $(BUILD_DIR)/src/melee/ft/ft_07C6.c.o\
-    $(BUILD_DIR)/src/melee/ft/ftcommon.c.o\
-    $(BUILD_DIR)/src/melee/ft/ftdrawcommon.c.o\
-    $(BUILD_DIR)/asm/melee/ft/ftdrawcommon_data.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_07C1.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_07C6.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftcommon.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftdrawcommon.s.o\
     $(BUILD_DIR)/src/melee/ft/ftcliffcommon.c.o\
     $(BUILD_DIR)/src/melee/ft/ftwalljump.c.o\
-    $(BUILD_DIR)/src/melee/ft/ft_0819.c.o\
-    $(BUILD_DIR)/src/melee/ft/ft_081B.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0819.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_081B.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0852.s.o\
-    $(BUILD_DIR)/src/melee/ft/ftdata.c.o\
-    $(BUILD_DIR)/src/melee/ft/ftdata2.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Init.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftdata.s.o\
     $(BUILD_DIR)/src/melee/ft/ftlib.c.o\
     $(BUILD_DIR)/src/melee/ft/ftwaitanim.c.o\
-    $(BUILD_DIR)/src/melee/ft/ft_0877.c.o\
-    $(BUILD_DIR)/src/melee/ft/ft_0881.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0877.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0881.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0892.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Wait.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_08A6.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_08A6.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Attack1.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackDash.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackS3.c.o\
@@ -104,19 +99,16 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackLw4.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackAir.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_LandingAir.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Damage.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DamageFall.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DamageIce.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_Damage.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_DamageFall.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_DamageIce.s.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Guard.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_Guard.s.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ItemGet.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ItemThrow.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_ItemGet.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_ItemThrow.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_SpecialS.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_SpecialAir.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_FallSpecial.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_FallSpecial.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Lift.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DownBound.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_DownBound.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DownStand.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Down.c.o\
@@ -168,14 +160,13 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ThrownKoopa.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureMewtwo.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ThrownMewtwo.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureKirby.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_CaptureKirby.s.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureWaitKirby.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_ThrownKirby.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_CaptureWaitKirby.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_ThrownKirby.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_3C61.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/ftdemo.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ftdemo.s.o\
     $(BUILD_DIR)/src/melee/ft/ft_0BEC.c.o\
     $(BUILD_DIR)/src/melee/ft/ft_0BEF.c.o\
     $(BUILD_DIR)/src/melee/ft/ft_0BF0.c.o\
@@ -187,7 +178,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_PassiveWall.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_PassiveCeil.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftafterimage.s.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DamageSong.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_DamageSong.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_0C35.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_AirCatch.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_DamageBind.s.o\
@@ -217,7 +208,7 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyWait0.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyWalk.c.o\
-    $(BUILD_DIR)/src/melee/ft/ftwalkcommon.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ftwalkcommon.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_MS_345_0.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyTurn.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyFall.c.o\
@@ -236,8 +227,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_Init.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialN.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialS.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialLw.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialHi.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftCa_SpecialLw.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftCa_SpecialHi.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFx_Init.c.o\
@@ -254,10 +245,9 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftLk_SpecialLw.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftLk_SpecialHi.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftLk_SpecialS.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftLk_SpecialN.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftLink/ftLk_SpecialN.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftKirby/ftKb_Init.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftKirby/ftKb_Init.s.o\
 
 TEXT_O_FILES +=\
@@ -271,11 +261,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSk_Init.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSk_SpecialS.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftSeak/ftSk_SpecialN.s.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSk_SpecialN.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftSeak/ftSk_SpecialHi.s.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSk_SpecialHi.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftSeak/ftSk_SpecialLw.s.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSk_SpecialLw.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNs_Init.c.o\
@@ -300,12 +287,10 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftPopo/ftPp_Init.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftPopo/ftPp_SpecialN.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftPopo/ftPp_SpecialS.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftPopo/ftPp_SpecialN.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftPopo/ftPp_SpecialS.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftNana/ftNn_Init.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftNana/ftNn_Init.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftNana/ftNn_Unk0.c.o\
 
@@ -322,12 +307,11 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_SpecialN.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_SpecialS.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_SpecialHi.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_SpecialLw_1.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftSamus/ftSs_SpecialLw_1.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYs_Init.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYs_Guard.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYs_SpecialN.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftYoshi/ftYs_Init.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftYoshi/ftYs_Guard.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftYoshi/ftYs_SpecialN.s.o\
 
 TEXT_O_FILES +=\
@@ -337,7 +321,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMs_Init.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMs_SpecialN.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftMars/ftMs_SpecialN.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMs_SpecialS.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMs_SpecialHi.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftMars/ftMs_SpecialLw.s.o\
@@ -350,7 +334,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftZd_SpecialS.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftPr_Init.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftPurin/ftPr_Init.s.o\
 
 TEXT_O_FILES +=\
@@ -449,8 +432,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMh_ThrownMasterHand.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCrazyHand/ftCh_Init.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCrazyHand/ftCh_Unk0.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCrazyHand/ftCh_Init.s.o\
 
 TEXT_O_FILES +=\

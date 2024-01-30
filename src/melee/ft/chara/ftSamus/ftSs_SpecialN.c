@@ -207,7 +207,7 @@ void ftSs_SpecialNHold_Anim(HSD_GObj* gobj)
     if (fighter2->cmd_vars[2]) {
         /// this block might be an inline, but couldn't get the regalloc to
         /// behave
-        f32 var_f1;
+        float var_f1;
         s32 index;
         fighter2->cmd_vars[2] = 0;
         if (fighter2->fv.ss.x2230) {

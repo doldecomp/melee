@@ -18,8 +18,6 @@
 #include "ftNess/types.h"
 #include "it/it_26B1.h"
 
-#include <baselib/gobj.h>
-
 MotionState ftNs_Init_MotionStateTable[ftNs_MS_SelfCount] = {
     {
         // ftNs_MS_AttackS4 = 341
@@ -493,7 +491,7 @@ void ftNs_Init_OnAbsorb(HSD_GObj* gobj)
     ftNs_AbsorbThink_DecideAction(gobj);
 }
 
-f32 ftNs_Init_GetAbsorbHeal(Fighter* fp)
+float ftNs_Init_GetAbsorbHeal(Fighter* fp)
 {
     return ((ftNessAttributes*) fp->dat_attrs)->x94_PSI_MAGNET_HEAL_MUL;
 }

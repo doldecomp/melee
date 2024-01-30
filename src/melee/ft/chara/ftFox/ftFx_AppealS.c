@@ -64,17 +64,17 @@ bool ftFx_AppealS_CheckInput(HSD_GObj* gobj)
     return false;
 }
 
-static f32 setFloatOrder(void)
+static float setFloatOrder(void)
 {
     return 0.0f;
 }
 
-static f32 setFloatOrder2(void)
+static float setFloatOrder2(void)
 {
     return 1.0f;
 }
 
-static inline bool ftFox_AppealS_GetLR(f32 x1, f32 x2)
+static inline bool ftFox_AppealS_GetLR(float x1, float x2)
 {
     return x1 == x2 ? false : true;
 }

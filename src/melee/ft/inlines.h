@@ -3,15 +3,10 @@
 
 #include <platform.h>
 #include "ft/forward.h"
-#include "ftCommon/forward.h"
 
 #include "ft/ftanim.h"
 #include "ft/types.h"
-#include "gr/stage.h"
 #include "it/it_26B1.h"
-#include "lb/lbcollision.h"
-#include "lb/lbrefract.h"
-#include "pl/player.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx/types.h>
@@ -102,7 +97,7 @@ static inline bool ftGetGroundAir(Fighter* fp)
     return fp->ground_or_air;
 }
 
-static inline f32 stickGetDir(f32 x1, f32 x2)
+static inline float stickGetDir(float x1, float x2)
 {
     if (x1 < x2) {
         return -x1;

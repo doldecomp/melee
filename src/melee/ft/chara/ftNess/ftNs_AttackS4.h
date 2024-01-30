@@ -3,7 +3,6 @@
 #ifndef GALE01_114BF4
 #define GALE01_114BF4
 
-#include <platform.h>
 #include <baselib/forward.h>
 
 /* 114BF4 */ void ftNs_AttackS4_OnReflect(HSD_GObj* gobj);

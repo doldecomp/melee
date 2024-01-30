@@ -35,7 +35,6 @@
 #include <common_structs.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/controller.h>
-#include <baselib/gobj.h>
 #include <baselib/random.h>
 
 static void ifStage251(HSD_GObj* gobj);
@@ -254,7 +253,7 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
                 s32 tmp;
                 s32 tmp2;
                 u8_pair* qwe;
-                f32 rand;
+                float rand;
                 if (fp->fv.mh.x2254 == da->x24) {
                     fp->fv.mh.x2254 = 0;
                     tmp = 2;

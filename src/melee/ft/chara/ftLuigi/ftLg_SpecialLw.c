@@ -21,7 +21,6 @@
 #include "lb/lbrefract.h"
 
 #include <common_structs.h>
-#include <baselib/gobj.h>
 
 // SpecialLw (Luigi Cyclone)
 #define FTLUIGI_SPECIALLW_FLAG                                                \
@@ -43,7 +42,7 @@ static inline void ftLuigi_SpecialLw_SetVars(HSD_GObj* gobj)
     ftLuigiAttributes* luigiAttrs = fp->dat_attrs;
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
-    fp->mv.lg.SpecialLw.groundVelX = (f32) 0.0f;
+    fp->mv.lg.SpecialLw.groundVelX = (float) 0.0f;
     fp->mv.lg.SpecialLw.unk = (s32) luigiAttrs->x88_LUIGI_CYCLONE_UNK + 1;
     fp->mv.lg.SpecialLw.isUnkColl = false;
 }
@@ -83,8 +82,8 @@ void ftLg_SpecialLw_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirLw, 0, 0.0f, 1.0f, 0.0f,
                               NULL);
     ftAnim_8006EBA4(gobj);
-    fp2->self_vel.y = (f32) (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM -
-                             luigiAttrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX);
+    fp2->self_vel.y = (float) (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM -
+                               luigiAttrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX);
     ftCommon_8007D440(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
     ftLuigi_SpecialLw_SetVars(gobj);
     ftLuigi_SpecialLw_SetCall(gobj);
@@ -102,7 +101,7 @@ void ftLg_SpecialAirLw_Enter(HSD_GObj* gobj)
     ftLuigiAttributes* luigiAttrs;
     Fighter* temp_fp;
     Fighter* fp2;
-    f32 cycloneVar;
+    float cycloneVar;
 
     u8 _[16];
 
@@ -119,7 +118,7 @@ void ftLg_SpecialAirLw_Enter(HSD_GObj* gobj)
         cycloneVar = luigiAttrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX;
     }
     fp2->self_vel.y =
-        (f32) (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM - cycloneVar);
+        (float) (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM - cycloneVar);
     ftCommon_8007D440(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
     ftLuigi_SpecialLw_SetVars(gobj);
     ftLuigi_SpecialLw_SetCall(gobj);
@@ -167,7 +166,7 @@ void ftLg_SpecialAirLw_Anim(HSD_GObj* gobj)
                 return;
             }
 
-            ftCo_80096900(gobj, 1, 0, 1, 1, (f32) landing_lag);
+            ftCo_80096900(gobj, 1, 0, 1, 1, (float) landing_lag);
         }
     }
 }
@@ -202,7 +201,7 @@ void ftLg_SpecialLw_Phys(HSD_GObj* gobj)
     ftLuigiAttributes* attrs = getFtSpecialAttrs(fp);
 
     {
-        f32 var2 = attrs->x74_LUIGI_CYCLONE_MOMENTUM_X_GROUND;
+        float var2 = attrs->x74_LUIGI_CYCLONE_MOMENTUM_X_GROUND;
 
         if (fp->cmd_vars[0] != 0) {
             fp->mv.lg.SpecialLw.groundVelX -=
@@ -245,7 +244,7 @@ void ftLg_SpecialAirLw_Phys(HSD_GObj* gobj)
     ftCommon_8007D4B8(fp);
 
     {
-        f32 spd_x = attrs0->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR;
+        float spd_x = attrs0->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR;
 
         {
             ftLuigiAttributes* attrs1 = fp->dat_attrs;

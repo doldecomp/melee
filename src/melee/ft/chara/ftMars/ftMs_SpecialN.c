@@ -22,7 +22,6 @@
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
 
 void ftMs_SpecialN_Enter(HSD_GObj* gobj)
 {
@@ -311,13 +310,7 @@ void ftMs_SpecialNEnd_Anim(HSD_GObj* gobj)
             if (*(s32*) (hb + 0x914) == 1) {
                 ftColl_8007ABD0(
                     (HitCapsule*) (hb + 0x914),
-
-#if MUST_MATCH
-                    (f32) (da->x4 + fp->mv.ms.specialn.x0 / 30 * da->x8),
-#else
-                    da->x4 + fp->mv.ms.specialn.x0 / 30.0F * da->x8,
-#endif
-
+                    (float) (da->x4 + fp->mv.ms.specialn.x0 / 30.0f * da->x8),
                     gobj);
             }
             ndx++;
@@ -360,7 +353,7 @@ void ftMs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
         // for (ndx = 0; ndx < 4; ndx++) {
         //     if (fp->x914[ndx].x0 == 1) {
         //         // Hitbox_ApplyDamageStalingAndMore
-        //         ftColl_8007ABD0(&fp->x914[ndx], (f32) (ftCo_DatAttrs->x4 +
+        //         ftColl_8007ABD0(&fp->x914[ndx], (float) (ftCo_DatAttrs->x4 +
         //         (s32)fp->mv.ms.specialn.x0 / 30 * ftCo_DatAttrs->x8), gobj);
         //     }
         // }
@@ -372,13 +365,7 @@ void ftMs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
             if (*(s32*) (hb + 0x914) == 1) {
                 ftColl_8007ABD0(
                     (HitCapsule*) (hb + 0x914),
-
-#if MUST_MATCH
-                    (f32) (da->x4 + fp->mv.ms.specialn.x0 / 30 * da->x8),
-#else
-                    da->x4 + fp->mv.ms.specialn.x0 / 30.0F * da->x8,
-#endif
-
+                    (float) (da->x4 + fp->mv.ms.specialn.x0 / 30.0f * da->x8),
                     gobj);
             }
             ndx++;

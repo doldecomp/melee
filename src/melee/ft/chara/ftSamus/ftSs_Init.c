@@ -342,7 +342,7 @@ void ftSs_Init_LoadSpecialAttrs(HSD_GObj* gobj)
     }
 }
 
-void ftSs_Init_80128770(HSD_AObj* gobj, f32 rate)
+void ftSs_Init_80128770(HSD_AObj* gobj, float rate)
 {
     if (gobj && !(HSD_AObjGetFlags(gobj) & 0x20000000)) {
         HSD_AObjSetRate(gobj, rate);
@@ -350,7 +350,7 @@ void ftSs_Init_80128770(HSD_AObj* gobj, f32 rate)
 }
 
 void ftSs_Init_CreateThrowGrappleBeam(HSD_GObj* gobj, s32 motion_state,
-                                      f32 anim_speed)
+                                      float anim_speed)
 {
     Fighter* fighter_copy;
     Vec3 scale;

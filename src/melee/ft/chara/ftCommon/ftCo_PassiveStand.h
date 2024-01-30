@@ -1,11 +1,7 @@
 #ifndef GALE01_0984B0
 #define GALE01_0984B0
 
-#include <platform.h>
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
-
-#include <placeholder.h>
 
 /* 0984B0 */ bool ftCo_80098928(ftCo_GObj* gobj);
 /* 098628 */ void ftCo_PassiveStand_Anim(ftCo_GObj* gobj);

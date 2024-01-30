@@ -2,8 +2,8 @@
 
 #include "ft/inlines.h"
 
-#include <m2c_macros.h>
-#include <dolphin/os.h>
+#include <placeholder.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 
 #pragma force_active on

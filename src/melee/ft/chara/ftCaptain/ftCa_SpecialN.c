@@ -41,14 +41,14 @@ static void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
 }
 
 /// Calculate angle from control stick input - inline
-static f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
+static float ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
 {
     ftCaptain_DatAttrs* da = fp->dat_attrs;
     {
         /// @todo Join declarations and assignments somehow.
-        f32 max;
-        f32 stick_y = stickGetDir(fp->input.lstick.y, 0);
-        f32 min;
+        float max;
+        float stick_y = stickGetDir(fp->input.lstick.y, 0);
+        float min;
         max = da->specialn_stick_range_y_pos;
         if (stick_y > max) {
             stick_y = max;
@@ -63,7 +63,7 @@ static f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
         }
         {
             /// @todo Eliminate @c f.
-            f32 f = deg_to_rad;
+            float f = deg_to_rad;
             return f * (stick_y * da->specialn_angle_diff / (max - min));
         }
     }
@@ -121,7 +121,7 @@ void ftCa_SpecialAirN_IASA(HSD_GObj* gobj)
     if (fp->cmd_vars[0] != 0) {
         fp->cmd_vars[0] = 0;
         {
-            f32 vel = ftCaptain_SpecialN_GetAngleVel(fp);
+            float vel = ftCaptain_SpecialN_GetAngleVel(fp);
             fp->self_vel.y = da->specialn_vel_x * sinf(vel);
             fp->self_vel.x = da->specialn_vel_x * (fp->facing_dir * cosf(vel));
         }

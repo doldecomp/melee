@@ -1,7 +1,6 @@
 #ifndef GALE01_1147C0
 #define GALE01_1147C0
 
-#include <platform.h>
 #include "ftNess/forward.h"
 #include <baselib/forward.h>
 
@@ -11,7 +10,7 @@
 /* 11480C */ void ftNs_Init_OnLoad(HSD_GObj* gobj);
 /* 1148F8 */ void ftNs_Init_OnDamage(HSD_GObj* gobj);
 /* 11493C */ void ftNs_Init_OnAbsorb(HSD_GObj* gobj);
-/* 11495C */ f32 ftNs_Init_GetAbsorbHeal(Fighter* fp);
+/* 11495C */ float ftNs_Init_GetAbsorbHeal(Fighter* fp);
 /* 114968 */ void ftNs_Init_OnItemPickup(HSD_GObj* gobj, bool catchItemFlag);
 /* 114A48 */ void ftNs_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 114A90 */ void ftNs_Init_OnItemVisible(HSD_GObj* gobj);

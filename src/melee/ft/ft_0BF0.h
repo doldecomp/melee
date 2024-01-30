@@ -1,7 +1,6 @@
 #ifndef GALE01_0BF034
 #define GALE01_0BF034
 
-#include <platform.h>
 #include "ft/forward.h"
 
 /* 0BF034 */ void ftCo_800BF034(Fighter_GObj* gobj);

@@ -3,7 +3,6 @@
 #ifndef GALE01_14DEF0
 #define GALE01_14DEF0
 
-#include <platform.h>
 #include <baselib/forward.h>
 
 /* 14DEF0 */ void ftGw_SpecialHi_ItemRescueSetup(HSD_GObj* gobj);

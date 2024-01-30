@@ -1,5 +1,4 @@
 #include <platform.h>
-#include <baselib/forward.h>
 
 #include "ftCo_HammerTurn.h"
 

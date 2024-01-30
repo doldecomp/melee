@@ -1,12 +1,9 @@
-#include <platform.h>
 
-#include "ftSeak/ftSk_SpecialLw.h"
-
-f32 const ftSk_Init_804D9698 = 0.4000000059604645F;
-f32 const ftSk_Init_804D969C = 0.003000000026077032F;
-f32 const ftSk_Init_804D96A0 = 1.0471975803375244F;
-f32 const ftSk_Init_804D96A4 = 0.0F;
-f64 const ftSk_Init_804D96A8 = 0.0078125;
+static float const ftSk_Init_804D9698 = 0.4000000059604645F;
+static float const ftSk_Init_804D969C = 0.003000000026077032F;
+static float const ftSk_Init_804D96A0 = 1.0471975803375244F;
+static float const ftSk_Init_804D96A4 = 0.0F;
+static double const ftSk_Init_804D96A8 = 0.0078125;
 
 // 80114034 - 801140B0 (0x7C bytes)
 

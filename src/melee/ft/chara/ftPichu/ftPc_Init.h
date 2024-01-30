@@ -6,7 +6,7 @@
 #include "ftPikachu/forward.h"
 #include <baselib/forward.h>
 
-#include "ft/fighter.h"
+#include "ft/types.h"
 
 /* 149E34 */ void ftPc_Init_OnLoad(HSD_GObj* gobj);
 /* 149EAC */ void ftPc_Init_OnDeath(HSD_GObj* gobj);

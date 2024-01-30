@@ -12,8 +12,8 @@
 #define M_PI_2 (M_PI / 2)
 #define M_PI_3 (M_PI / 3)
 
-static float const deg_to_rad ATTRIBUTE_USED = M_PI / 180;
-static float const rad_to_deg ATTRIBUTE_USED = 180 / M_PI;
+static float const deg_to_rad = M_PI / 180;
+static float const rad_to_deg = 180 / M_PI;
 
 #ifdef __MWERKS__
 #pragma push

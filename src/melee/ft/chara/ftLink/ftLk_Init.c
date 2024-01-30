@@ -422,12 +422,12 @@ void ftLk_Init_OnKnockbackExit(HSD_GObj* gobj)
 
 void ftLk_800EB334(HSD_GObj* gobj)
 {
-    f32 new_ground_vel;
+    float new_ground_vel;
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* link_attr = fp->ft_data->ext_attr;
 
-    f32 resultf = ftCo_80092ED8(fp->x19A4, link_attr->xD8);
+    float resultf = ftCo_80092ED8(fp->x19A4, link_attr->xD8);
     fp->gr_vel = resultf * p_ftCommonData->x294;
     if (fp->specialn_facing_dir < 0) {
         new_ground_vel = fp->gr_vel;

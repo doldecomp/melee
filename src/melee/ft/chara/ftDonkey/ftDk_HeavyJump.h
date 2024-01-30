@@ -1,7 +1,6 @@
 #ifndef GALE01_0E0440
 #define GALE01_0E0440
 
-#include <platform.h>
 #include <baselib/forward.h>
 
 /* 0E0440 */ void ftDk_HeavyJump_IASA(HSD_GObj* gobj);

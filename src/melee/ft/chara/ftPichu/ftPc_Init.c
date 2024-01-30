@@ -16,8 +16,6 @@
 #include "ftPikachu/ftPk_SpecialS.h"
 #include "it/it_26B1.h"
 
-#include <baselib/gobj.h>
-
 MotionState ftPc_Init_MotionStateTable[ftPk_MS_SelfCount] = {
     {
         // ftPk_MS_SpecialN = 341

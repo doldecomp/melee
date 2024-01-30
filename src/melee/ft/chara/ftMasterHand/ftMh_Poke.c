@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include "ftMh_Poke.h"
 
 #include "ftMh_Wait1_2.h"
@@ -13,7 +15,6 @@
 #include "pl/player.h"
 
 #include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
 #include <baselib/random.h>
 #include <MetroTRK/intrinsics.h>
 

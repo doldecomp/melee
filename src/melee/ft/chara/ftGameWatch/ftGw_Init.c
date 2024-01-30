@@ -25,7 +25,6 @@
 #include "it/types.h"
 
 #include <common_structs.h>
-#include <stddef.h>
 #include <dolphin/gx/types.h>
 
 MotionState ftGw_Init_MotionStateTable[ftGw_MS_SelfCount] = {

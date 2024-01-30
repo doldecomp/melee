@@ -1,9 +1,7 @@
 #ifndef GALE01_10D740
 #define GALE01_10D740
 
-#include <platform.h>
 #include "ftDonkey/forward.h"
-#include <baselib/forward.h>
 
 #include "ft/types.h"
 

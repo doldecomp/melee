@@ -1,7 +1,6 @@
 #include <platform.h>
 #include "ftCommon/forward.h"
 #include <dolphin/gx/forward.h>
-#include <baselib/forward.h>
 
 #include "ft/fighter.h"
 
@@ -65,7 +64,6 @@
 #include "lb/lb_00CE.h"
 #include "lb/lbarchive.h"
 #include "lb/lbmthp.h"
-#include "lb/lbrefract.h"
 #include "lb/lbshadow.h"
 #include "lb/types.h"
 #include "mp/mpcoll.h"
@@ -79,7 +77,7 @@
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/vec.h>
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/controller.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
@@ -98,8 +96,6 @@ extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
 extern ftData* gFtDataList[FTKIND_MAX];
 extern MotionState ftData_MotionStateList[ftCo_MS_Count];
 extern MotionState* ftData_CharacterStateTables[FTKIND_MAX];
-
-extern s8 ftData_UnkBytePerCharacter[FTKIND_MAX];
 
 extern HSD_PadStatus HSD_PadRumbleData[4];
 
@@ -221,7 +217,7 @@ void Fighter_UpdateModelScale(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Vec3 scale;
-    f32 modelScale = ftCommon_GetModelScale(fp);
+    float modelScale = ftCommon_GetModelScale(fp);
 
     if (fp->x34_scale.z != 1.0f) {
         scale.x = fp->x34_scale.z;
@@ -238,7 +234,7 @@ void Fighter_UpdateModelScale(Fighter_GObj* gobj)
 void Fighter_UnkInitReset_80067C98(Fighter* fp)
 {
     Vec3 player_coords;
-    f32 x, y, z;
+    float x, y, z;
 
     fp->x8_spawnNum = Fighter_NewSpawn_80068E40();
     Player_LoadPlayerCoords(fp->player_id, &player_coords);
@@ -1321,7 +1317,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                     } else if (((flags & Ft_MF_SkipAnimVel) == 0) &&
                                (fp->ground_or_air == GA_Ground))
                     {
-                        f32 temp_vel =
+                        float temp_vel =
                             fp->x6A4_transNOffset.z * fp->facing_dir;
                         fp->self_vel.x = temp_vel;
                         fp->gr_vel = temp_vel;
@@ -1337,7 +1333,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                     } else if (((flags & Ft_MF_SkipAnimVel) == 0) &&
                                (fp->ground_or_air == GA_Ground))
                     {
-                        f32 temp_vel = fp->x6D8.z * fp->facing_dir;
+                        float temp_vel = fp->x6D8.z * fp->facing_dir;
                         fp->self_vel.x = temp_vel;
                         fp->gr_vel = temp_vel;
                     }
@@ -1752,8 +1748,8 @@ void Fighter_UnkIncrementCounters_8006ABEC(Fighter_GObj* gobj)
 // 2, or a struct of 2 floats.. if it still matches.
 #define SET_STICKS(stickXPtr, stickYPtr, x, y)                                \
     do {                                                                      \
-        f32* stickX = (f32*) &stickXPtr;                                      \
-        f32* stickY = (f32*) &stickYPtr;                                      \
+        float* stickX = (float*) &stickXPtr;                                  \
+        float* stickY = (float*) &stickYPtr;                                  \
         *stickX = x;                                                          \
         *stickY = y;                                                          \
     } while (0)
@@ -1779,8 +1775,8 @@ static void Fighter_Spaghetti_8006AD10_Inner1(Fighter* fp)
 void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    f32 tempf1;
-    f32 tempf0;
+    float tempf1;
+    float tempf0;
 
     if (!fp->x221F_b3) {
         if (!fp->x2224_b2) {
@@ -2122,7 +2118,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
 #define VEC_CLEAR(vec)                                                        \
     do {                                                                      \
         Vec3* vecLocal = (void*) &vec;                                        \
-        f32 c = 0;                                                            \
+        float c = 0;                                                          \
         vecLocal->x = vecLocal->y = vecLocal->z = c;                          \
     } while (0)
 
@@ -2485,8 +2481,8 @@ void Fighter_8006C27C(Fighter_GObj* gobj)
                 fpclassify(fp->cur_pos.y) == FP_NAN ||
                 fpclassify(fp->cur_pos.z) == FP_NAN)
             {
-                f32 x = Fighter_GetPosX(fp);
-                f32 y = Fighter_GetPosY(fp);
+                float x = Fighter_GetPosX(fp);
+                float y = Fighter_GetPosY(fp);
                 OSReport("fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n", x,
                          y);
                 __assert("fighter.c", 2590, "0");
@@ -2605,7 +2601,7 @@ void Fighter_UnkProcessGrab_8006CA5C(Fighter_GObj* gobj)
 void Fighter_8006CB94(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    f32 func_8007BBCC_float_output;
+    float func_8007BBCC_float_output;
 
     if (!fp->x221F_b3 && !fp->x2219_b1) {
         ftColl_800765E0();
@@ -2623,13 +2619,13 @@ void Fighter_8006CB94(Fighter_GObj* gobj)
     }
 }
 
-void Fighter_UnkTakeDamage_8006CC30(Fighter* fp, f32 arg0)
+void Fighter_UnkTakeDamage_8006CC30(Fighter* fp, float arg0)
 {
     Fighter_TakeDamage_8006CC7C(fp, arg0);
     ftCommon_8007EA90(fp, arg0);
 }
 
-void Fighter_TakeDamage_8006CC7C(Fighter* fp, f32 damage_amount)
+void Fighter_TakeDamage_8006CC7C(Fighter* fp, float damage_amount)
 {
     if (!fp->x2226_b4 || fp->x2226_b3) {
         fp->dmg.x1830_percent += damage_amount;
@@ -2800,7 +2796,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(Fighter_GObj* gobj)
     bool bool2 = 0;
     bool bool3 = 0;
     bool bool4 = 0;
-    f32 forceAppliedOnHit;
+    float forceAppliedOnHit;
 
     if (!fp->x221F_b3) {
         if (!fp->x221A_b7) {

@@ -1,7 +1,6 @@
 #ifndef GALE01_0E83E0
 #define GALE01_0E83E0
 
-#include <platform.h>
 #include <baselib/forward.h>
 
 /* 0E83E0 */ void ftFx_SpecialLw_CreateLoopGFX(HSD_GObj* gobj);

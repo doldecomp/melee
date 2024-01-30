@@ -725,7 +725,7 @@ void ftLg_SpecialSFly_Enter(HSD_GObj* gobj)
     if (fp->mv.lg.SpecialS.isMisfire) {
         fp->self_vel.y = sa->x4C_LUIGI_GREENMISSILE_MISFIRE_VEL_Y;
     } else {
-        f32 vel_y = sa->x2C_LUIGI_GREENMISSILE_VEL_Y;
+        float vel_y = sa->x2C_LUIGI_GREENMISSILE_VEL_Y;
 
         fp->self_vel.y = 0.5f * vel_y +
                          vel_y * (0.5f * fp->mv.lg.SpecialS.chargeFrames /

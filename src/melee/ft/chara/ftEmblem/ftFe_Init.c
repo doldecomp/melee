@@ -13,8 +13,6 @@
 #include "ftMars/ftMs_SpecialS.h"
 #include "ftMars/types.h"
 
-#include <baselib/gobj.h>
-
 MotionState ftFe_Init_MotionStateTable[ftMs_MS_SelfCount] = {
     {
         // ftMs_MS_SpecialNStart = 341

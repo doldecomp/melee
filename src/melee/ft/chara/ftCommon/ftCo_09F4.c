@@ -7,6 +7,10 @@
 #include <baselib/gobj.h>
 #include <baselib/lobj.h>
 
+/* 09F480 */ static void ftCo_8009F480(ftCo_GObj* gobj);
+/* 09F54C */ static UNK_RET ftCo_8009F54C(UNK_PARAMS);
+/* 09F5AC */ static UNK_RET ftCo_8009F5AC(UNK_PARAMS);
+
 #pragma force_active on
 
 static float const ftCo_804D87B0 = 0;
@@ -27,7 +31,7 @@ struct {
     int zero2;
     u32 flags;
     int neg1;
-    f32* floats;
+    float* floats;
     int zero3;
     int zero4;
 } ftDynamics_803C5794 = {

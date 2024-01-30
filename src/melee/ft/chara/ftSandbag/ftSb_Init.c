@@ -13,7 +13,6 @@
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>
-#include <baselib/gobj.h>
 
 MotionState ftSb_Init_MotionStateTable[ftSb_MS_SelfCount] = {
     {

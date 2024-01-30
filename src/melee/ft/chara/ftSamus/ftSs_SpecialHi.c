@@ -112,8 +112,8 @@ void ftSs_SpecialAirHi_Anim(HSD_GObj* gobj)
 
 void ftSs_SpecialHi_IASA(HSD_GObj* gobj)
 {
-    f32 mag;
-    f32 lstick_x;
+    float mag;
+    float lstick_x;
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
@@ -140,8 +140,8 @@ void ftSs_SpecialHi_IASA(HSD_GObj* gobj)
 
 void ftSs_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
-    f32 mag;
-    f32 lstick_x;
+    float mag;
+    float lstick_x;
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 

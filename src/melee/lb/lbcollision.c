@@ -9,7 +9,6 @@
 
 #include "lb/types.h"
 
-#include <m2c_macros.h>
 #include <math.h>
 #include <placeholder.h>
 #include <dolphin/gx/types.h>

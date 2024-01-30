@@ -1,44 +1,41 @@
-#ifndef MELEE_FT_FTANIM_H
-#define MELEE_FT_FTANIM_H
+#ifndef GALE01_06DBF4
+#define GALE01_06DBF4
 
-#include <platform.h>
 #include "ft/forward.h"
 #include <baselib/forward.h>
 
 #include <placeholder.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
 
-void ftAnim_8006E9B4(Fighter_GObj*);
-void ftAnim_8006EBA4(Fighter_GObj*);
-void ftAnim_8006EBE8(Fighter_GObj* gobj, f32, f32, f32);
-void ftAnim_8006F0FC(Fighter_GObj* gobj, f32);
-void ftAnim_SetAnimRate(Fighter_GObj*, f32);
-bool ftAnim_IsFramesRemaining(Fighter_GObj*);
-f32 ftAnim_8006F484(void*);
-void ftAnim_8006FE48(Fighter_GObj*);
-void ftAnim_80070308(Fighter_GObj*);
-void ftAnim_800704F0(Fighter_GObj*, s32, f32);
-void ftAnim_80070654(Fighter_GObj*);
-void ftAnim_80070758(HSD_JObj*);
-void ftAnim_8007077C(Fighter_GObj*);
-void ftAnim_ApplyPartAnim(Fighter_GObj*, s32, s32, f32);
-void ftAnim_80070C48(Fighter_GObj*, s32);
-void ftAnim_80070CC4(Fighter_GObj*, s32);
-void ftAnim_80070E74(Fighter_GObj*);
-void ftAnim_80070F28(Fighter_GObj*);
-void ftAnim_80070FB4(Fighter_GObj*, s32, s32);
-bool ftAnim_80070FD0(Fighter*);
-void ftAnim_GetNextJointInTree(HSD_Joint** pjoint, s32* pdepth);
-void ftAnim_8006FA58(Fighter* fp, int, int item);
-void ftAnim_80070010(Fighter* fp, int, int item, f32, f32);
-void ftAnim_8006FF74(Fighter* fp, int);
-void ftAnim_8006FE9C(Fighter* fp, int, f32, f32);
-void ftAnim_80070108(Fighter* fp, int, int item, f32, f32);
-void ftAnim_8006FB88(Fighter* fp, int, HSD_Joint* joint);
-void ftAnim_80070710(HSD_JObj* joint, f32);
-void ftAnim_8006F4C8(Fighter* fp, int, u32);
-/* 06EED4 */ /* static */ UNK_RET ftAnim_8006EED4(UNK_PARAMS);
+/* 06DE00 */ void ftAnim_GetNextJointInTree(HSD_Joint** pjoint, s32* pdepth);
+/* 06E9B4 */ void ftAnim_8006E9B4(Fighter_GObj*);
+/* 06EBA4 */ void ftAnim_8006EBA4(Fighter_GObj*);
+/* 06EBE8 */ void ftAnim_8006EBE8(Fighter_GObj* gobj, float, float, float);
+/* 06EED4 */ UNK_RET ftAnim_8006EED4(UNK_PARAMS);
+/* 06F0FC */ void ftAnim_8006F0FC(Fighter_GObj* gobj, float);
+/* 06F190 */ void ftAnim_SetAnimRate(Fighter_GObj*, float);
+/* 06F238 */ bool ftAnim_IsFramesRemaining(Fighter_GObj*);
+/* 06F484 */ float ftAnim_8006F484(void*);
+/* 06F4C8 */ void ftAnim_8006F4C8(Fighter* fp, int, u32);
+/* 06FA58 */ void ftAnim_8006FA58(Fighter* fp, int, int item);
+/* 06FB88 */ void ftAnim_8006FB88(Fighter* fp, int, HSD_Joint* joint);
+/* 06FE48 */ void ftAnim_8006FE48(Fighter_GObj*);
+/* 06FE9C */ void ftAnim_8006FE9C(Fighter* fp, int, float, float);
+/* 06FF74 */ void ftAnim_8006FF74(Fighter* fp, int);
+/* 070010 */ void ftAnim_80070010(Fighter* fp, int, int item, float, float);
+/* 070108 */ void ftAnim_80070108(Fighter* fp, int, int item, float, float);
+/* 070308 */ void ftAnim_80070308(Fighter_GObj*);
+/* 0704F0 */ void ftAnim_800704F0(Fighter_GObj*, s32, float);
+/* 070654 */ void ftAnim_80070654(Fighter_GObj*);
+/* 070710 */ void ftAnim_80070710(HSD_JObj* joint, float);
 /* 070734 */ void ftAnim_80070734(HSD_JObj* jobj, float);
+/* 070758 */ void ftAnim_80070758(HSD_JObj*);
+/* 07077C */ void ftAnim_8007077C(Fighter_GObj*);
+/* 070B88 */ void ftAnim_ApplyPartAnim(Fighter_GObj*, s32, s32, float);
+/* 070C48 */ void ftAnim_80070C48(Fighter_GObj*, s32);
+/* 070CC4 */ void ftAnim_80070CC4(Fighter_GObj*, s32);
+/* 070E74 */ void ftAnim_80070E74(Fighter_GObj*);
+/* 070F28 */ void ftAnim_80070F28(Fighter_GObj*);
+/* 070FB4 */ void ftAnim_80070FB4(Fighter_GObj*, s32, s32);
+/* 070FD0 */ bool ftAnim_80070FD0(Fighter*);
 
 #endif

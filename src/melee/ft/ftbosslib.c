@@ -15,7 +15,7 @@
 #include "mp/mplib.h"
 #include "pl/player.h"
 
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
@@ -41,7 +41,7 @@ void ftBossLib_8015BD20(HSD_GObj* gobj)
     return;
 }
 
-void ftBossLib_8015BD24(s32 arg0, f32* arg1, f32 arg2, s32 arg3, s32 arg4,
+void ftBossLib_8015BD24(s32 arg0, float* arg1, float arg2, s32 arg3, s32 arg4,
                         s32 arg5)
 {
     *arg1 = ((s32) (arg3 / arg0) + HSD_Randi(arg4 - arg5) + arg5) / arg2;
@@ -91,15 +91,15 @@ static inline float my_lbvector_Len(Vec3* vec)
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-void ftBossLib_8015BE40(HSD_GObj* gobj, Vec3* arg1, f32* arg2, f32 arg3,
-                        f32 arg4)
+void ftBossLib_8015BE40(HSD_GObj* gobj, Vec3* arg1, float* arg2, float arg3,
+                        float arg4)
 {
     Fighter* fp = gobj->user_data;
     Vec3 diff;
     lbVector_Diff(arg1, &fp->cur_pos, &diff);
 
     {
-        f32 distance = my_lbvector_Len(&diff);
+        float distance = my_lbvector_Len(&diff);
         if (distance < arg3) {
             *arg2 = 0.0f;
         } else {
@@ -115,7 +115,7 @@ void ftBossLib_8015BE40(HSD_GObj* gobj, Vec3* arg1, f32* arg2, f32 arg3,
     fp->self_vel.y = diff.y;
 }
 
-void ftBossLib_8015BF74(HSD_GObj* gobj, f32 x_diff_max)
+void ftBossLib_8015BF74(HSD_GObj* gobj, float x_diff_max)
 {
     Fighter* fp = gobj->user_data;
     Vec3 vec;
@@ -123,8 +123,8 @@ void ftBossLib_8015BF74(HSD_GObj* gobj, f32 x_diff_max)
     ftBossLib_8015C208(gobj, &vec);
 
     {
-        f32 x_diff = vec.x - fp->cur_pos.x;
-        f32 abs_x_diff = fabs_inline(x_diff);
+        float x_diff = vec.x - fp->cur_pos.x;
+        float abs_x_diff = fabs_inline(x_diff);
         if (abs_x_diff > x_diff_max) {
             fp->self_vel.x += x_diff > 0 ? x_diff_max : -x_diff_max;
         } else {
@@ -133,15 +133,15 @@ void ftBossLib_8015BF74(HSD_GObj* gobj, f32 x_diff_max)
     }
 }
 
-void ftBossLib_8015C010(HSD_GObj* gobj, f32 x_diff_max)
+void ftBossLib_8015C010(HSD_GObj* gobj, float x_diff_max)
 {
     Vec3 vec;
     Fighter* fp = gobj->user_data;
     ftBossLib_8015C208(gobj, &vec);
 
     {
-        f32 x_diff = vec.x - fp->cur_pos.x;
-        f32 abs_x_diff = fabs_inline(x_diff);
+        float x_diff = vec.x - fp->cur_pos.x;
+        float abs_x_diff = fabs_inline(x_diff);
         if (abs_x_diff > x_diff_max) {
             fp->self_vel.x = x_diff > 0 ? x_diff_max : -x_diff_max;
         } else {
@@ -150,7 +150,7 @@ void ftBossLib_8015C010(HSD_GObj* gobj, f32 x_diff_max)
     }
 }
 
-void ftBossLib_8015C09C(HSD_GObj* gobj, f32 facing_dir)
+void ftBossLib_8015C09C(HSD_GObj* gobj, float facing_dir)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Fighter* fp = GET_FIGHTER(gobj);
@@ -434,7 +434,7 @@ s32 ftBossLib_8015C9CC(void)
     return da->x174;
 }
 
-void func_8015CA6C_inline(s32 arg0)
+static void func_8015CA6C_inline(s32 arg0)
 {
     HSD_GObj* ch_gobj = ftBossLib_8015C3E8(FTKIND_CREZYH);
     if (ch_gobj) {
@@ -464,7 +464,7 @@ void ftBossLib_8015CB7C(void)
     it_8026C42C();
 }
 
-void func_8015CB9C_inline(Vec3 spC)
+static void func_8015CB9C_inline(Vec3 spC)
 {
     ftMasterHand_SpecialAttrs* da = ftBossLib_8015C6BC();
     spC.z += da == NULL ? -1 : da->x178;

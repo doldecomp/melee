@@ -4,6 +4,8 @@
 #include <platform.h>
 #include "ft/forward.h"
 
+#include "lb/types.h"
+
 #include <common_structs.h>
 
 struct ftMars_FighterVars {

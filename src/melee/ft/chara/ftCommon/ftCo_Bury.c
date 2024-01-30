@@ -43,19 +43,6 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-#pragma force_active on
-
-/* literal */ extern double const ftCo_804D8C28;
-/* literal */ extern double const ftCo_804D8C30;
-/* literal */ extern float const ftCo_804D8C38;
-/* literal */ extern float const ftCo_804D8C3C;
-
-/* literal */ extern char* const ftCo_803C6BA0;
-/* literal */ extern char* const ftCo_803C6BC8;
-
-/* literal */ extern char* const ftCo_804D3C20;
-/* literal */ extern char* const ftCo_804D3C28;
-
 void ftCo_800C0874(ftCo_GObj* gobj, UNK_T arg1, ftCommon_BuryType arg2)
 {
     switch (arg2) {
@@ -223,11 +210,11 @@ void ftCo_800C0D0C(ftCo_GObj* gobj)
     ftCommon_8007DB58(gobj);
     ftCo_8009750C(gobj);
     ftCo_800DD168(gobj);
-    ftCo_8008DCE0(gobj, -1, ftCo_804D8C38);
+    ftCo_8008DCE0(gobj, -1, 0);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(
-        gobj, ftCo_MS_Bury, Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim,
-        ftCo_804D8C38, ftCo_804D8C3C, ftCo_804D8C38, NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_Bury,
+                              Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim, 0, 1, 0,
+                              NULL);
     ftCommon_8007E2FC(gobj);
     ftCommon_8007DBCC(
         fp, 0,
@@ -262,7 +249,7 @@ void ftCo_Bury_Anim(ftCo_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x1A4C -= p_ftCommonData->x610;
     ftCommon_8007DC08(fp, p_ftCommonData->x614);
-    if (fp->x1A4C <= ftCo_804D8C38) {
+    if (fp->x1A4C <= 0) {
         ftCo_800C13BC(gobj);
     }
     --fp->mv.co.bury.x0;
@@ -299,8 +286,8 @@ void ftCo_Bury_Phys(ftCo_GObj* gobj)
     float mv_x18_x =
         MAX(fp->mv.co.bury.coll_box.right.x, fp->mv.co.bury.coll_box.right.y);
     box->bottom += fp->mv.co.bury.coll_box.right.x;
-    if (ftCo_804D8C3C + box->bottom > mv_x18_x) {
-        box->bottom = mv_x18_x - ftCo_804D8C3C;
+    if (1 + box->bottom > mv_x18_x) {
+        box->bottom = mv_x18_x - 1;
     }
 }
 
@@ -321,8 +308,7 @@ void ftCo_800C124C(ftCo_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(
         gobj, ftCo_MS_BuryWait,
-        Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim, ftCo_804D8C38,
-        ftCo_804D8C3C, ftCo_804D8C38, NULL);
+        Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim, 0, 1, 0, NULL);
     ftCommon_8007E2FC(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
     fp->x221D_b5 = true;
@@ -335,7 +321,7 @@ void ftCo_BuryWait_Anim(ftCo_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x1A4C -= p_ftCommonData->x610;
     ftCommon_8007DC08(fp, p_ftCommonData->x614);
-    if (fp->x1A4C <= ftCo_804D8C38) {
+    if (fp->x1A4C <= 0) {
         ftCo_800C13BC(gobj);
     }
 }
@@ -370,7 +356,7 @@ void ftCo_800C13BC(ftCo_GObj* gobj)
 void ftCo_BuryJump_Anim(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->mv.co.buryjump.x0 += ftCo_804D8C3C;
+    fp->mv.co.buryjump.x0 += 1;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_800CC730(gobj);
     }
@@ -402,7 +388,7 @@ void ftCo_BuryJump_Phys(ftCo_GObj* gobj)
 void ftCo_BuryJump_Coll(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->self_vel.y >= ftCo_804D8C38) {
+    if (fp->self_vel.y >= 0) {
         ft_80082D40(gobj, fp->self_vel.y);
     } else {
         ftCo_AirCatchHit_Coll(gobj);

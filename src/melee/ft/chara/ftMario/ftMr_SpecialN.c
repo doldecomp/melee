@@ -1,5 +1,4 @@
 #include <platform.h>
-#include "ft/forward.h"
 
 #include "ftMr_SpecialN.h"
 
@@ -18,7 +17,6 @@
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
 #include <baselib/random.h>
 
 static int pickMegavitamin(Fighter* fp, int* arr, int outpos)
