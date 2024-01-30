@@ -1,8 +1,8 @@
-
 #include "mn/mncharsel.h"
 
 #include "gm/gmmain_lib.h"
 #include "lb/lblanguage.h"
+#include "mn/types.h"
 
 #include <baselib/sislib.h>
 

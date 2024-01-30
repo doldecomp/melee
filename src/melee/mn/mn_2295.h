@@ -1,8 +1,8 @@
-#ifndef MELEE_TEXT_3_H
-#define MELEE_TEXT_3_H
+#ifndef GALE01_2295AC
+#define GALE01_2295AC
 
 #include <platform.h>
 
-void mn_8022F3D8(void);
+/* 22F3D8 */ void mn_8022F3D8(void);
 
 #endif
