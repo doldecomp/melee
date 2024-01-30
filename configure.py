@@ -836,7 +836,7 @@ config.libs = [
     MeleeLib(
         "mn (Menus)",
         [
-            Object(Unknown, "melee/mn_2295.c"),
+            Object(NonMatching, "melee/mn_2295.c"),
             Object(NonMatching, "melee/mn/mnitemsw.c"),
             Object(NonMatching, "melee/mn/mnstagesw.c"),
             Object(NonMatching, "melee/mn/mnname.c"),
@@ -858,7 +858,7 @@ config.libs = [
             Object(NonMatching, "melee/mn/mnsnap.c"),
             Object(NonMatching, "melee/mn/mngallery.c"),
             Object(NonMatching, "melee/mn/mnstagesel.c"),
-            Object(Unknown, "melee/mn/mncharsel.c"),
+            Object(NonMatching, "melee/mn/mncharsel.c"),
         ],
     ),
     MeleeLib(

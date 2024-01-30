@@ -1,5 +1,5 @@
-#ifndef MELEE_FT_CHARA_FTFOX_FTFOX_SPECIALN_H
-#define MELEE_FT_CHARA_FTFOX_FTFOX_SPECIALN_H
+#ifndef GALE01_0E5CB0
+#define GALE01_0E5CB0
 
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>

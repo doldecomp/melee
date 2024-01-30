@@ -552,7 +552,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/mn/mnsnap.s.o\
     $(BUILD_DIR)/asm/melee/mn/mngallery.s.o\
     $(BUILD_DIR)/asm/melee/mn/mnstagesel.s.o\
-    $(BUILD_DIR)/src/melee/mn/mncharsel.c.o\
     $(BUILD_DIR)/asm/melee/mn/mncharsel.s.o\
     $(BUILD_DIR)/src/melee/it/item.c.o\
     $(BUILD_DIR)/src/melee/it/it_26B1.c.o\
