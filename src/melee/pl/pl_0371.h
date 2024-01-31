@@ -8,11 +8,6 @@
 
 #include <placeholder.h>
 
-/* 03715C */ void pl_8003715C(void);
-/* 037208 */ short pl_80037208(void);
-/* 03722C */ void pl_8003722C(void);
-/* 0373CC */ void pl_800373CC(void);
-/* 037590 */ void pl_80037590(void);
 /* 037C60 */ void pl_80037C60(HSD_GObj*, s32);
 /* 037ECC */ void pl_80037ECC(void);
 /* 038144 */ void pl_80038144(void);

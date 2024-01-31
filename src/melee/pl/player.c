@@ -1728,14 +1728,14 @@ s32* Player_GetTotalAttackCountPtr(s32 slot)
     return attack_count;
 }
 
-s32* Player_GetStaleMoveTableIndexPtr(s32 slot)
+StaleMoveTable* Player_GetStaleMoveTableIndexPtr(s32 slot)
 {
     StaticPlayer* player;
-    s32* stale_move_table_index;
+    StaleMoveTable* stale_move_table;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    stale_move_table_index = &player->stale_move_table_current_write_index;
-    return stale_move_table_index;
+    stale_move_table = &player->stale_moves;
+    return stale_move_table;
 }
 
 s32* Player_GetUnk6A8Ptr(s32 slot)
@@ -1748,14 +1748,14 @@ s32* Player_GetUnk6A8Ptr(s32 slot)
     return unk6A8;
 }
 
-s32* Player_GetStaleMoveTableIndexPtr2(s32 slot)
+StaleMoveTable* Player_GetStaleMoveTableIndexPtr2(s32 slot)
 {
     StaticPlayer* player;
-    s32* stale_move_table_index;
+    StaleMoveTable* stale_move_table;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    stale_move_table_index = &player->stale_move_table_current_write_index;
-    return stale_move_table_index;
+    stale_move_table = &player->stale_moves;
+    return stale_move_table;
 }
 
 s32 Player_80036394(s32 slot)
@@ -2020,8 +2020,8 @@ void Player_80036D24(s32 slot)
 void Player_InitAllPlayers(void)
 {
     int i;
-    pl_8003715C();
-    pl_80037590();
+    plStale_8003715C();
+    plStale_80037590();
 
     for (i = 0; i < PL_SLOT_MAX; i++) {
         Player_InitOrResetPlayer(i);
