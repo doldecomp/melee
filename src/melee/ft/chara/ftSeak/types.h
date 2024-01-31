@@ -17,17 +17,17 @@ struct ftSeak_FighterVars { // x222C (fp->fv.sk._)
 
 /// @sz{74}
 typedef struct _ftSeakAttributes { // x2D4 (fp->dat_attrs)
-    f32 x0;
-    f32 x4;
-    f32 x8;
-    f32 xC;
-    f32 x10;
-    f32 x14;
-    f32 x18;
-    f32 x1C;
-    f32 x20;
-    f32 x24;
-    f32 x28;
+    float x0;
+    float x4;
+    float x8;
+    float xC;
+    float x10;
+    float x14;
+    float x18;
+    float x1C;
+    float x20;
+    float x24;
+    float x28;
     s32 x2C;
     s32 x30;
     s32 x34;

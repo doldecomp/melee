@@ -1,3 +1,4 @@
+#include "ftSk_SpecialN.h"
 
 #include "ef/efsync.h"
 #include "ft/fighter.h"
@@ -11,6 +12,9 @@
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftSeak/ftSk_Init.h"
+#include "it/items/itseakneedleheld.h"
+
+/* 1120D4 */ static void ftSk_SpecialN_801120D4(Fighter_GObj* gobj);
 
 float ftSk_SpecialN_803CC598[] = {
     -1, -0.75, -0.5, -0.25, 0, +0.25, +0.5, +0.75, +1,
