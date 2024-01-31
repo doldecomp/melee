@@ -75,7 +75,7 @@ ftMapping ftMapping_list[FTKIND_MAX] = { //////ftMapping_list
 StaticPlayer player_slots[PL_SLOT_MAX];
 HSD_ObjAllocData Player_804587E0;
 
-int pl_804D6470;
+void* pl_804D6470;
 
 /// @todo This can be used in more places when functions are fixed to use
 ///       correct structs.
@@ -2039,7 +2039,7 @@ void Player_80036DA4(void)
 
 void Player_80036DD8(void)
 {
-    int* sp8;
+    void** sp8;
 
     lbArchive_80016C64(str_PdPmdat_start_of_data, (void**) &sp8,
                        str_plLoadCommonData, 0);
