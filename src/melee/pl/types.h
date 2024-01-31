@@ -21,4 +21,14 @@ struct plAllocInfo2 {
     } bits;
 };
 
+typedef struct _StaleMoveTable {
+    s32 current_index; // Zero-Indexed. Rolls over
+                       // after 9. Increments after
+                       // each write.
+    struct {
+        s16 move_id;
+        s16 num_action_states;
+    } StaleMoves[10];
+} StaleMoveTable;
+
 #endif

@@ -4,6 +4,7 @@
 #include "ft/inlines.h"
 #include "lb/lbaudio_ax.h"
 #include "pl/pl_0371.h"
+#include "pl/plstale.h"
 
 #include <baselib/random.h>
 
@@ -135,7 +136,7 @@ void ft_800890BC(Fighter* fp)
 static inline void inlineB0(Fighter* fp, uint move_id)
 {
     fp->x2068_attackID = move_id;
-    fp->x206C = pl_80037208();
+    fp->x206C = plStale_80037208();
 }
 
 void ft_800890D0(Fighter* fp, uint move_id)
