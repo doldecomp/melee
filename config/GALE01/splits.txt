@@ -3442,7 +3442,7 @@ MSL/ansi_fp.c:
 	.sdata2     start:0x804DE160 end:0x804DE188
 
 MSL/buffer_io.c:
-	.text       start:0x8032345C end:0x80323560
+	.text       start:0x8032345C end:0x8032355C
 
 MSL/ctype.c:
 	.text       start:0x80323560 end:0x803235B0
