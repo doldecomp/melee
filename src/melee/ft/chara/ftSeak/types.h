@@ -6,7 +6,7 @@
 
 #include <dolphin/mtx/types.h>
 
-struct ftSeak_FighterVars {
+struct ftSeak_FighterVars { // x222C (fp->fv.sk._)
     /* 0x222C */ int x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ HSD_GObj* x2234;
@@ -16,7 +16,7 @@ struct ftSeak_FighterVars {
 };
 
 /// @sz{74}
-typedef struct _ftSeakAttributes {
+typedef struct _ftSeakAttributes { // x2D4 (fp->dat_attrs)
     float x0;
     float x4;
     float x8;
@@ -64,7 +64,7 @@ typedef struct itChainSegment {
     float x50;
 } itChainSegment;
 
-union ftSeak_MotionVars {
+union ftSeak_MotionVars { // x2340 (fp->mv.sk._._)
     struct ftSeak_SpecialNVars {
         s32 x0;
         s32 x4;
