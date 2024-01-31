@@ -341,9 +341,6 @@ void ftSk_Init_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(item_list[3], 97);
 }
 
-/* static */ void ftSk_SpecialN_80111FBC(HSD_GObj* gobj);
-/* static */ void ftSk_SpecialS_CheckAndDestroyChain(HSD_GObj* gobj);
-
 void ftSk_Init_80110198(HSD_GObj* gobj)
 {
     ftSk_SpecialN_80111FBC(gobj);
