@@ -57,7 +57,7 @@ HSD_Archive* lbArchive_LoadArchive(char* filename)
 
     data = lbHeap_80015BD0(0, lbFile_800163D8(filename) + 0x1F & 0xFFFFFFE0);
     archive = lbHeap_80015BD0(0, sizeof(HSD_Archive));
-    lbFile_8001668C(filename, *data, &length);
+    lbFile_8001668C(filename, data, &length);
     lbArchive_InitializeDAT(archive, data, length);
     return archive;
 }

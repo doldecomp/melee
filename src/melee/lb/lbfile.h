@@ -11,7 +11,7 @@ bool lbFile_800161A0(void);
 
 size_t lbFile_8001634C(s32 fileno);
 s32 lbFile_800163D8(const char* basename);
-void lbFile_8001668C(const char* basename, u32 src, u32* dest);
+void lbFile_8001668C(const char* basename, u32* src, u32* dest);
 void lbFile_80016760(const char* basename, u32* src, u32* dest);
 bool lbFile_800168A0(s32 arg0, const char* basename, u32* src, u32* dest);
 char* lbFile_80016204(const char* basename);

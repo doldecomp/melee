@@ -153,7 +153,7 @@ void lbFile_80016580(const char* basename, u32 src, u32* dest,
     lbFile_800164A4(entry_num, src, dest, 1, callback, args);
 }
 
-void lbFile_8001668C(const char* basename, u32 src, u32* dest)
+void lbFile_8001668C(const char* basename, u32* src, u32* dest)
 {
     cancel = false;
     lbFile_80016580(basename, src, dest, lbFile_8001615C, 0);
