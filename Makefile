@@ -173,7 +173,7 @@ ifeq ($(GENERATE_MAP),1)
 endif
 
 # ELF creation makefile instructions
-$(ELF): $(O_FILES) $(LDSCRIPT)
+$(ELF): $(O_FILES) $(LDSCRIPT) obj_files.mk
 	@echo Linking ELF $@
 	$(file >build/o_files, $(O_FILES))
 	$(QUIET) $(LD) $(LDFLAGS) -o $@ -lcf $(LDSCRIPT) @build/o_files

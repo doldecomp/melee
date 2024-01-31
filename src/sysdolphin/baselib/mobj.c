@@ -3,7 +3,6 @@
 #include "aobj.h"
 #include "class.h"
 #include "debug.h"
-#include "fobj.h"
 #include "state.h"
 #include "tev.h"
 #include "texp.h"
@@ -521,7 +520,7 @@ void HSD_MObjAddShadowTexture(HSD_TObj* tobj)
     tobj_shadows = tobj;
 }
 
-#if defined(MUST_MATCH) || !defined(BUGFIX)
+#ifndef BUGFIX
 #pragma push
 #pragma force_active on
 static char unused2[] = "mobj->rendermode&RENDER_SPECULAR";

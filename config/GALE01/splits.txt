@@ -4097,7 +4097,13 @@ sysdolphin/baselib/rumble.c:
 
 sysdolphin/baselib/spline.c:
 	.text       start:0x80378A34 end:0x80379310
-	.sdata2     start:0x804DE620 end:0x804DE6A0
+	.sdata2     start:0x804DE620 end:0x804DE658
+
+sysdolphin/baselib/mtx.c:
+	.text       start:0x80379310 end:0x8037A780
+	.bss        start:0x804C2310 end:0x804C2368
+	.sdata      start:0x804D5E90 end:0x804D5EA0
+	.sdata2     start:0x804DE658 end:0x804DE6A0
 
 sysdolphin/baselib/util.c:
 	.text       start:0x8037A780 end:0x8037A94C
@@ -4230,7 +4236,7 @@ sysdolphin/baselib/synth.c:
 	.sbss       start:0x804D7720 end:0x804D7788
 	.sdata2     start:0x804DE7F0 end:0x804DE840
 
-sysdolphin/baselib/AXDriver.c:
+sysdolphin/baselib/axdriver.c:
 	.text       start:0x8038BB34 end:0x8038EA50
 	.rodata     start:0x803B95F8 end:0x803B9628
 	.data       start:0x80408140 end:0x804083B8
@@ -4274,30 +4280,15 @@ sysdolphin/baselib/gobj.c:
 	.bss        start:0x804CE380 end:0x804CE3F8
 	.sbss       start:0x804D7810 end:0x804D7850
 
-sysdolphin/baselib/baselib_shared_data_003.c:
-	.sbss       start:0x804D7850 end:0x804D7908
-
-sysdolphin/baselib/baselib_unknown_009.c:
-	.text       start:0x80391580 end:0x80391664
-
-sysdolphin/baselib/baselib_unknown_010.c:
-	.text       start:0x80391664 end:0x803921B8
-	.data       start:0x80408630 end:0x80408898
-	.sdata      start:0x804D6070 end:0x804D6080
-	.sdata2     start:0x804DE890 end:0x804DE8E0
-
-sysdolphin/baselib/baselib_unknown_011.c:
-	.text       start:0x803921B8 end:0x8039254C
-	.data       start:0x80408898 end:0x804088B8
-
-sysdolphin/baselib/baselib_unknown_002.c:
+sysdolphin/baselib/hsd_3915.c:
 	extab       start:0x80005520 end:0x800055F8
 	extabindex  start:0x800056C0 end:0x80005804
-	.text       start:0x8039254C end:0x8039F78C
-	.data       start:0x804088B8 end:0x8040C300
+	.text       start:0x80391580 end:0x8039F78C
+	.data       start:0x80408630 end:0x8040C300
 	.bss        start:0x804CE3F8 end:0x804D0FC0
-	.sdata      start:0x804D6080 end:0x804D6380
-	.sdata2     start:0x804DE8E0 end:0x804DEA10
+	.sdata      start:0x804D6070 end:0x804D6380
+	.sbss       start:0x804D7850 end:0x804D7908
+	.sdata2     start:0x804DE890 end:0x804DEA10
 
 sysdolphin/baselib/psdisp.c:
 	extab       start:0x800055F8 end:0x80005618
@@ -4314,6 +4305,7 @@ sysdolphin/baselib/psdisptev.c:
 	extab       start:0x80005618 end:0x80005628
 	extabindex  start:0x80005834 end:0x8000584C
 	.text       start:0x803A3920 end:0x803A4138
+	.sbss       start:0x804D7950 end:0x804D7958
 
 sysdolphin/baselib/psappsrt.c:
 	extab       start:0x80005628 end:0x80005658

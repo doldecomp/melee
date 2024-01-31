@@ -274,7 +274,7 @@ static void HSD_ObjInit(void)
     HSD_ZListInitAllocData();
 }
 
-#ifdef MUST_MATCH
+#ifndef BUGFIX
 static char str_pix_fmt_neq_gx_pf_rgb565_z16[] = "pix_fmt != GX_PF_RGB565_Z16";
 #endif
 

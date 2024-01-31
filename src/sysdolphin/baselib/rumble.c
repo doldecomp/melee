@@ -2,7 +2,8 @@
 
 #include "rumble.h"
 
-#include "controller.h"
+/// @todo Circular dependency
+#include "controller.h" // IWYU pragma: keep
 
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/pad/pad.h>

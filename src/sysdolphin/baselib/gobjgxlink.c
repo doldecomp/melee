@@ -3,10 +3,8 @@
 #include "debug.h"
 #include "gobj.h"
 
-#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
-#endif
 void GObj_GXReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
 {
     u32 link = gobj->gx_link;
@@ -29,9 +27,7 @@ void GObj_GXReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
         HSD_GObj_804D7820[gobj->gx_link] = gobj;
     }
 }
-#ifdef MUST_MATCH
 #pragma pop
-#endif
 
 void GObj_SetupGXLink(HSD_GObj* gobj, GObj_RenderFunc render_cb, u8 gx_link,
                       u32 priority)

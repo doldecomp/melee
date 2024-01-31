@@ -1,7 +1,5 @@
 #include "controller.h"
 
-#include "rumble.h"
-
 #include <dolphin/os/OSInterrupt.h>
 
 extern PadLibData HSD_PadLibData;

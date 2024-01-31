@@ -314,15 +314,11 @@ def RuntimeLib(lib_name: str, objects: Objects) -> LibDict:
 
 
 Matching = True
-
-# Unconfirmed, might link as-is or with minor changes
-Unknown = False
-
-# Definitely not matching yet
 NonMatching = False
 
-config.warn_missing_config = args.verbose
-config.warn_missing_source = args.verbose
+config.warn_missing_config = True
+config.warn_missing_source = True
+
 config.libs = [
     MeleeLib(
         "lb (Library)",
@@ -739,7 +735,7 @@ config.libs = [
             Object(NonMatching, "melee/gm/gm_1601.c"),
             Object(NonMatching, "melee/gm/gmtitle.c"),
             Object(NonMatching, "melee/gm/gmcamera.c"),
-            Object(NonMatching, "melee/gm_1A36.c"),
+            Object(NonMatching, "melee/gm/gm_1A36.c"),
         ],
     ),
     MeleeLib(
@@ -837,7 +833,7 @@ config.libs = [
     MeleeLib(
         "mn (Menus)",
         [
-            Object(NonMatching, "melee/mn_2295.c"),
+            Object(NonMatching, "melee/mn/mn_2295.c"),
             Object(NonMatching, "melee/mn/mnitemsw.c"),
             Object(NonMatching, "melee/mn/mnstagesw.c"),
             Object(NonMatching, "melee/mn/mnname.c"),
@@ -1059,7 +1055,7 @@ config.libs = [
     MeleeLib(
         "un (Unknown)",
         [
-            Object(NonMatching, "melee/un_2FC9.c"),
+            Object(NonMatching, "melee/un/un_2FC9.c"),
         ],
     ),
     MeleeLib(
@@ -1091,6 +1087,7 @@ config.libs = [
     RuntimeLib(
         "Gekko runtime",
         [
+            Object(NonMatching, "Runtime/__mem.c"),
             Object(Matching, "Runtime/__va_arg.c"),
             Object(Matching, "Runtime/global_destructor_chain.c"),
             Object(Matching, "Runtime/Gecko_ExceptionPPC.c"),
@@ -1138,6 +1135,7 @@ config.libs = [
             Object(NonMatching, "MetroTRK/targimpl.c"),
             Object(NonMatching, "MetroTRK/dolphin_trk.c"),
             Object(NonMatching, "MetroTRK/mpc_7xx_603e.c"),
+            Object(NonMatching, "MetroTRK/main_TRK.c"),
             Object(NonMatching, "MetroTRK/dolphin_trk_glue.c"),
             Object(NonMatching, "MetroTRK/targcont.c"),
         ],
@@ -1337,26 +1335,26 @@ config.libs = [
         "sysdolphin (HAL base library)",
         [
             Object(Matching, "sysdolphin/baselib/dobj.c"),
-            Object(Unknown, "sysdolphin/baselib/tobj.c"),
+            Object(NonMatching, "sysdolphin/baselib/tobj.c"),
             Object(Matching, "sysdolphin/baselib/state.c"),
-            Object(Unknown, "sysdolphin/baselib/tev.c"),
-            Object(Unknown, "sysdolphin/baselib/mobj.c"),
+            Object(NonMatching, "sysdolphin/baselib/tev.c"),
+            Object(Matching, "sysdolphin/baselib/mobj.c"),
             Object(Matching, "sysdolphin/baselib/aobj.c"),
-            Object(Unknown, "sysdolphin/baselib/lobj.c"),
-            Object(Unknown, "sysdolphin/baselib/cobj.c"),
-            Object(Unknown, "sysdolphin/baselib/fobj.c"),
-            Object(Unknown, "sysdolphin/baselib/pobj.c"),
-            Object(Unknown, "sysdolphin/baselib/jobj.c"),
-            Object(Unknown, "sysdolphin/baselib/displayfunc.c"),
-            Object(Unknown, "sysdolphin/baselib/initialize.c"),
-            Object(Unknown, "sysdolphin/baselib/video.c"),
-            Object(Unknown, "sysdolphin/baselib/controller.c"),
-            Object(Unknown, "sysdolphin/baselib/rumble.c"),
-            Object(Unknown, "sysdolphin/baselib/spline.c"),
+            Object(NonMatching, "sysdolphin/baselib/lobj.c"),
+            Object(NonMatching, "sysdolphin/baselib/cobj.c"),
+            Object(Matching, "sysdolphin/baselib/fobj.c"),
+            Object(NonMatching, "sysdolphin/baselib/pobj.c"),
+            Object(NonMatching, "sysdolphin/baselib/jobj.c"),
+            Object(NonMatching, "sysdolphin/baselib/displayfunc.c"),
+            Object(Matching, "sysdolphin/baselib/initialize.c"),
+            Object(Matching, "sysdolphin/baselib/video.c"),
+            Object(NonMatching, "sysdolphin/baselib/controller.c"),
+            Object(Matching, "sysdolphin/baselib/rumble.c"),
+            Object(NonMatching, "sysdolphin/baselib/spline.c"),
             Object(Matching, "sysdolphin/baselib/mtx.c"),
             Object(Matching, "sysdolphin/baselib/util.c"),
-            Object(Unknown, "sysdolphin/baselib/objalloc.c"),
-            Object(Unknown, "sysdolphin/baselib/robj.c"),
+            Object(Matching, "sysdolphin/baselib/objalloc.c"),
+            Object(NonMatching, "sysdolphin/baselib/robj.c"),
             Object(Matching, "sysdolphin/baselib/id.c"),
             Object(Matching, "sysdolphin/baselib/wobj.c"),
             Object(Matching, "sysdolphin/baselib/fog.c"),
@@ -1365,34 +1363,30 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/object.c"),
             Object(NonMatching, "sysdolphin/baselib/quatlib.c"),
             Object(Matching, "sysdolphin/baselib/memory.c"),
-            Object(Unknown, "sysdolphin/baselib/shadow.c"),
+            Object(NonMatching, "sysdolphin/baselib/shadow.c"),
             Object(Matching, "sysdolphin/baselib/archive.c"),
             Object(Matching, "sysdolphin/baselib/random.c"),
             Object(NonMatching, "sysdolphin/baselib/bytecode.c"),
-            Object(Unknown, "sysdolphin/baselib/class.c"),
+            Object(Matching, "sysdolphin/baselib/class.c"),
             Object(NonMatching, "sysdolphin/baselib/hash.c"),
-            Object(Unknown, "sysdolphin/baselib/texp.c"),
+            Object(NonMatching, "sysdolphin/baselib/texp.c"),
             Object(NonMatching, "sysdolphin/baselib/texpdag.c"),
             Object(NonMatching, "sysdolphin/baselib/leak.c"),
-            Object(Unknown, "sysdolphin/baselib/debug.c"),
+            Object(Matching, "sysdolphin/baselib/debug.c"),
             Object(NonMatching, "sysdolphin/baselib/synth.c"),
-            Object(Unknown, "sysdolphin/baselib/axdriver.c"),
-            Object(Unknown, "sysdolphin/baselib/devcom.c"),
-            Object(Unknown, "sysdolphin/baselib/gobjproc.c"),
-            Object(Unknown, "sysdolphin/baselib/gobjplink.c"),
-            Object(Unknown, "sysdolphin/baselib/gobjgxlink.c"),
+            Object(NonMatching, "sysdolphin/baselib/axdriver.c"),
+            Object(NonMatching, "sysdolphin/baselib/devcom.c"),
+            Object(NonMatching, "sysdolphin/baselib/gobjproc.c"),
+            Object(Matching, "sysdolphin/baselib/gobjplink.c"),
+            Object(NonMatching, "sysdolphin/baselib/gobjgxlink.c"),
             Object(Matching, "sysdolphin/baselib/gobjobject.c"),
             Object(Matching, "sysdolphin/baselib/gobjuserdata.c"),
-            Object(Unknown, "sysdolphin/baselib/gobj.c"),
-            Object(NonMatching, "sysdolphin/baselib/baselib_shared_data_003.c"),
-            Object(NonMatching, "sysdolphin/baselib/baselib_unknown_009.c"),
-            Object(NonMatching, "sysdolphin/baselib/baselib_unknown_010.c"),
-            Object(NonMatching, "sysdolphin/baselib/baselib_unknown_011.c"),
-            Object(NonMatching, "sysdolphin/baselib/baselib_unknown_002.c"),
-            Object(Unknown, "sysdolphin/baselib/psdisp.c"),
-            Object(Unknown, "sysdolphin/baselib/psdisptev.c"),
-            Object(Unknown, "sysdolphin/baselib/psappsrt.c"),
-            Object(Unknown, "sysdolphin/baselib/sobjlib.c"),
+            Object(NonMatching, "sysdolphin/baselib/gobj.c"),
+            Object(NonMatching, "sysdolphin/baselib/hsd_3915.c"),
+            Object(NonMatching, "sysdolphin/baselib/psdisp.c"),
+            Object(NonMatching, "sysdolphin/baselib/psdisptev.c"),
+            Object(NonMatching, "sysdolphin/baselib/psappsrt.c"),
+            Object(NonMatching, "sysdolphin/baselib/sobjlib.c"),
             Object(NonMatching, "sysdolphin/baselib/sislib.c"),
             Object(NonMatching, "sysdolphin/baselib/baselib_shared_data_001.c"),
             Object(NonMatching, "sysdolphin/baselib/baselib_shared_data_002.c"),
@@ -1402,7 +1396,7 @@ config.libs = [
             Object(NonMatching, "sysdolphin/baselib/hsd_3B27.c"),
             Object(NonMatching, "sysdolphin/baselib/hsd_3B2B.c"),
             Object(NonMatching, "sysdolphin/baselib/hsd_3B2E.c"),
-            Object(Unknown, "sysdolphin/baselib/hsd_3B33.c"),
+            Object(NonMatching, "sysdolphin/baselib/hsd_3B33.c"),
             Object(NonMatching, "sysdolphin/baselib/hsd_3B34.c"),
         ],
     ),

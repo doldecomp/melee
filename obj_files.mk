@@ -951,188 +951,66 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/dobj.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/tobj.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/tobj.s.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/state.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/tev.c.o\
-
-TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/tev.s.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/mobj.c.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/aobj.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/lobj.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/cobj.c.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/lobj.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/cobj.s.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/fobj.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/pobj.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/jobj.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/displayfunc.c.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/pobj.s.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/jobj.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/displayfunc.s.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/initialize.c.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/video.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/controller.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/controller.s.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/rumble.c.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/spline.s.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/mtx.c.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/util.c.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/objalloc.c.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/robj.s.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/id.c.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/wobj.c.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/fog.c.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/perf.c.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/list.c.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/object.c.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/quatlib.s.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/memory.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/shadow.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/shadow.s.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/archive.c.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/random.c.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/bytecode.s.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/class.c.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/hash.s.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/texp.c.o\
-
-TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/texp.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/texpdag.s.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/leak.s.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/debug.c.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/synth.s.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/axdriver.c.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/AXDriver.s.o\
-
-TEXT_O_FILES +=\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/axdriver.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/devcom.s.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/gobjproc.s.o\
-    $(BUILD_DIR)/src/sysdolphin/baselib/gobjproc.c.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/gobjplink.c.o\
-    $(BUILD_DIR)/src/sysdolphin/baselib/gobjgxlink.c.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/gobjgxlink.s.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/gobjobject.c.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/gobjuserdata.c.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/gobj.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/gobj.s.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_shared_data_003.s.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_009.s.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_010.s.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_011.s.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_002.s.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/psdisp.c.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3915.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/psdisp.s.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/psdisptev.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/psdisptev.s.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/psappsrt.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/psappsrt.s.o\
-
-TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/sobjlib.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/sobjlib.s.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/sislib.s.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_shared_data_001.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_shared_data_002.s.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_40FF.s.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3A94.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3AA7.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3B27.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3B2B.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3B2E.s.o\
-    $(BUILD_DIR)/src/sysdolphin/baselib/hsd_3B33.c.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3B33.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3B34.s.o\

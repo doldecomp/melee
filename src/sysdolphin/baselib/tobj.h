@@ -280,8 +280,6 @@ HSD_Tlut* HSD_TlutLoadDesc(HSD_TlutDesc* tlutdesc);
 HSD_TObjTev* HSD_TObjTevLoadDesc(HSD_TObjTevDesc* tevdesc);
 HSD_TObj* _HSD_TObjGetCurrentByType(HSD_TObj* from, u32 mapping);
 
-void MakeTextureMtx(HSD_TObj* tobj);
-
 void HSD_TObjRemoveAll(HSD_TObj* tobj);
 HSD_TObj* HSD_TObjGetNext(HSD_TObj* tobj);
 HSD_TObj* HSD_TObjAlloc(void);
