@@ -109,6 +109,11 @@ Select an object from the left sidebar to begin diffing. Changes to the project 
 
 ![](assets/objdiff.png)
 
+> [!TIP]
+> It's recommended that you enable the `Relax relocation diffs` option under `Diff Options`.
+
+![](assets/relax.png)
+
 # Contributing
 
 Contributions are welcome! If you're new to decomp, check out our [Getting Started guide](https://doldecomp.github.io/melee/getting_started.html). Before [opening a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request), please read our [contributing guidelines](CONTRIBUTING.md). If you're new to Git and don't know how to create a pull request, we encourage you to [create an issue](https://github.com/doldecomp/melee/issues/new) with your decomp.me link and a maintainer will add your code to the repository.
