@@ -21,7 +21,6 @@ float ftSk_SpecialN_803CC598[] = {
 };
 
 // Sheik_CheckAndDestroyNeedles
-// 80111FBC - 801120D4 (0x118 bytes)
 // https://decomp.me/scratch/rKi8R (initial work; old context)
 // https://decomp.me/scratch/5rjkN
 void ftSk_SpecialN_80111FBC(Fighter_GObj* fighter_gobj)
@@ -68,7 +67,6 @@ void ftSk_SpecialN_80111FBC(Fighter_GObj* fighter_gobj)
     fp->fv.sk.x222C = 0;
 }
 
-// 801120D4 - 801120E8 (0x14 bytes)
 // https://decomp.me/scratch/IJZbn
 void ftSk_SpecialN_801120D4(Fighter_GObj* fighter_gobj)
 {
@@ -79,8 +77,6 @@ void ftSk_SpecialN_801120D4(Fighter_GObj* fighter_gobj)
     fp->death2_cb = 0;
 }
 
-// AS_SheikChargeNeedlesStartGround
-// 801120E8 - 80112198 (0xB0 bytes)
 // https://decomp.me/scratch/86XVe
 // https://decomp.me/scratch/X0h7H
 void ftSk_SpecialN_Enter(Fighter_GObj* fighter_gobj)
@@ -111,7 +107,6 @@ void ftSk_SpecialN_Enter(Fighter_GObj* fighter_gobj)
     ftAnim_8006EBA4(fighter_gobj);
 }
 
-// 80112198 - 80112248 (0xB0 bytes)
 // https://decomp.me/scratch/i6fz7
 // https://decomp.me/scratch/pBB3D
 void ftSk_SpecialAirN_Enter(Fighter_GObj* fighter_gobj)
@@ -144,7 +139,6 @@ void ftSk_SpecialAirN_Enter(Fighter_GObj* fighter_gobj)
     ftAnim_8006EBA4(fighter_gobj);
 }
 
-// 80112248 - 801122D8 (0x90 bytes)
 // https://decomp.me/scratch/NUVmH
 void ftSk_SpecialNStart_Anim(Fighter_GObj* fighter_gobj)
 {
@@ -165,7 +159,6 @@ void ftSk_SpecialNStart_Anim(Fighter_GObj* fighter_gobj)
 }
 
 // Sheik_ChargeNeedlesIncrementer
-// 801122D8 - 80112384 (0xAC bytes)
 // https://decomp.me/scratch/fctpe (old/incomplete)
 // https://decomp.me/scratch/tnaEG
 void ftSk_SpecialNLoop_Anim(Fighter_GObj* fighter_gobj)
@@ -191,8 +184,6 @@ void ftSk_SpecialNLoop_Anim(Fighter_GObj* fighter_gobj)
     }
 }
 
-// Animation_SheikNeedleCancelGround
-// 80112384 - 801123CC (0x48 bytes)
 // https://decomp.me/scratch/39tsN
 void ftSk_SpecialNCancel_Anim(Fighter_GObj* fighter_gobj)
 {
@@ -205,9 +196,6 @@ void ftSk_SpecialNCancel_Anim(Fighter_GObj* fighter_gobj)
     }
 }
 
-// 801123CC - 80112408 (0x3C bytes)
-// 80112408 - 80112418 (0x10 bytes)
-// 80112418 - 80112450 (0x38 bytes)
 // https://decomp.me/scratch/sFuUX
 // https://decomp.me/scratch/QoA5Q
 void ftSk_SpecialNEnd_Anim(Fighter_GObj* fighter_gobj)
@@ -254,7 +242,6 @@ void ftSk_SpecialNEnd_Anim(Fighter_GObj* fighter_gobj)
     }
 }
 
-// 80112450 - 801124E0 (0x90 bytes)
 // https://decomp.me/scratch/Wx7qX
 void ftSk_SpecialAirNStart_Anim(Fighter_GObj* fighter_gobj)
 {
@@ -274,7 +261,6 @@ void ftSk_SpecialAirNStart_Anim(Fighter_GObj* fighter_gobj)
     }
 }
 
-// 801124E0 - 8011258C (0xAC bytes)
 // https://decomp.me/scratch/u10kG
 void ftSk_SpecialAirNLoop_Anim(Fighter_GObj* fighter_gobj)
 {
@@ -300,7 +286,6 @@ void ftSk_SpecialAirNLoop_Anim(Fighter_GObj* fighter_gobj)
     }
 }
 
-// 8011258C - 8011260C (0x80 bytes)
 // https://decomp.me/scratch/suLGJ
 void ftSk_SpecialAirNCancel_Anim(Fighter_GObj* fighter_gobj)
 {
@@ -318,9 +303,6 @@ void ftSk_SpecialAirNCancel_Anim(Fighter_GObj* fighter_gobj)
     }
 }
 
-// 8011260C - 80112650 (0x44 bytes)
-// 80112650 - 80112660 (0x10 bytes)
-// 80112660 - 801126C8 (0x68 bytes)
 // https://decomp.me/scratch/pfUaf
 void ftSk_SpecialAirNEnd_Anim(Fighter_GObj* fighter_gobj)
 {
@@ -372,13 +354,8 @@ void ftSk_SpecialAirNEnd_Anim(Fighter_GObj* fighter_gobj)
     }
 }
 
-// 801126C8 - 801126CC (0x4 bytes)
-void ftSk_SpecialNStart_IASA(Fighter_GObj* fighter_gobj)
-{
-    return;
-}
+void ftSk_SpecialNStart_IASA(Fighter_GObj* fighter_gobj) {}
 
-// 801126CC - 80112798 (0xCC bytes)
 // https://decomp.me/scratch/qkbGV
 void ftSk_SpecialNLoop_IASA(Fighter_GObj* fighter_gobj)
 {
@@ -416,25 +393,12 @@ void ftSk_SpecialNLoop_IASA(Fighter_GObj* fighter_gobj)
     }
 }
 
-// 80112798 - 8011279C (0x4 bytes)
-void ftSk_SpecialNCancel_IASA(Fighter_GObj* fighter_gobj)
-{
-    return;
-}
+void ftSk_SpecialNCancel_IASA(Fighter_GObj* fighter_gobj) {}
 
-// 8011279C - 801127A0 (0x4 bytes)
-void ftSk_SpecialNEnd_IASA(Fighter_GObj* fighter_gobj)
-{
-    return;
-}
+void ftSk_SpecialNEnd_IASA(Fighter_GObj* fighter_gobj) {}
 
-// 801127A0 - 801127A4 (0x4 bytes)
-void ftSk_SpecialAirNStart_IASA(Fighter_GObj* fighter_gobj)
-{
-    return;
-}
+void ftSk_SpecialAirNStart_IASA(Fighter_GObj* fighter_gobj) {}
 
-// 801127A4 - 80112870 (0xCC bytes)
 // https://decomp.me/scratch/jz1FA
 void ftSk_SpecialAirNLoop_IASA(Fighter_GObj* fighter_gobj)
 {
@@ -462,67 +426,50 @@ void ftSk_SpecialAirNLoop_IASA(Fighter_GObj* fighter_gobj)
     }
 }
 
-// 80112870 - 80112874 (0x4 bytes)
-void ftSk_SpecialAirNCancel_IASA(Fighter_GObj* fighter_gobj)
-{
-    return;
-}
+void ftSk_SpecialAirNCancel_IASA(Fighter_GObj* fighter_gobj) {}
 
-// 80112874 - 80112878 (0x4 bytes)
-void ftSk_SpecialAirNEnd_IASA(Fighter_GObj* fighter_gobj)
-{
-    return;
-}
+void ftSk_SpecialAirNEnd_IASA(Fighter_GObj* fighter_gobj) {}
 
-// 80112878 - 80112898 (0x20 bytes)
 void ftSk_SpecialNStart_Phys(Fighter_GObj* fighter_gobj)
 {
     ft_80084F3C(fighter_gobj);
 }
 
-// 80112898 - 801128B8 (0x20 bytes)
 void ftSk_SpecialNLoop_Phys(Fighter_GObj* fighter_gobj)
 {
     ft_80084F3C(fighter_gobj);
 }
 
-// 801128B8 - 801128D8 (0x20 bytes)
 void ftSk_SpecialNCancel_Phys(Fighter_GObj* fighter_gobj)
 {
     ft_80084F3C(fighter_gobj);
 }
 
-// 801128D8 - 801128F8 (0x20 bytes)
 void ftSk_SpecialNEnd_Phys(Fighter_GObj* fighter_gobj)
 {
     ft_80084F3C(fighter_gobj);
 }
 
-// 801128F8 - 80112918 (0x20 bytes)
 void ftSk_SpecialAirNStart_Phys(Fighter_GObj* fighter_gobj)
 {
     ft_80084EEC(fighter_gobj);
 }
 
-// 80112918 - 80112938 (0x20 bytes)
 void ftSk_SpecialAirNLoop_Phys(Fighter_GObj* fighter_gobj)
 {
     ft_80084EEC(fighter_gobj);
 }
 
-// 80112938 - 80112958 (0x20 bytes)
 void ftSk_SpecialAirNCancel_Phys(Fighter_GObj* fighter_gobj)
 {
     ft_80084EEC(fighter_gobj);
 }
 
-// 80112958 - 80112978 (0x20 bytes)
 void ftSk_SpecialAirNEnd_Phys(Fighter_GObj* fighter_gobj)
 {
     ft_80084EEC(fighter_gobj);
 }
 
-// 80112978 - 801129F8 (0x80 bytes)
 // https://decomp.me/scratch/wmQQW
 void ftSk_SpecialNStart_Coll(Fighter_GObj* fighter_gobj)
 {
@@ -543,7 +490,6 @@ void ftSk_SpecialNStart_Coll(Fighter_GObj* fighter_gobj)
     }
 }
 
-// 801129F8 - 80112A78 (0x80 bytes)
 // https://decomp.me/scratch/UvU3k
 void ftSk_SpecialNLoop_Coll(Fighter_GObj* fighter_gobj)
 {
@@ -564,7 +510,6 @@ void ftSk_SpecialNLoop_Coll(Fighter_GObj* fighter_gobj)
     }
 }
 
-// 80112A78 - 80112B00 (0x88 bytes)
 // https://decomp.me/scratch/mwRgz
 void ftSk_SpecialNCancel_Coll(Fighter_GObj* fighter_gobj)
 {
@@ -587,7 +532,6 @@ void ftSk_SpecialNCancel_Coll(Fighter_GObj* fighter_gobj)
     }
 }
 
-// 80112B00 - 80112B98 (0x98 bytes)
 // https://decomp.me/scratch/M5S4j
 void ftSk_SpecialNEnd_Coll(Fighter_GObj* fighter_gobj)
 {
@@ -615,8 +559,6 @@ void ftSk_SpecialNEnd_Coll(Fighter_GObj* fighter_gobj)
     }
 }
 
-// Collision_SheikNeedleStartupAir
-// 80112B98 - 80112C18 (0x80 bytes)
 // https://decomp.me/scratch/a2Cj5
 void ftSk_SpecialAirNStart_Coll(Fighter_GObj* fighter_gobj)
 {
@@ -636,8 +578,6 @@ void ftSk_SpecialAirNStart_Coll(Fighter_GObj* fighter_gobj)
     }
 }
 
-// Collision_SheikNeedleChargeAir
-// 80112C18 - 80112C98 (0x80 bytes)
 // https://decomp.me/scratch/NlYTd
 void ftSk_SpecialAirNLoop_Coll(Fighter_GObj* fighter_gobj)
 {
@@ -658,7 +598,6 @@ void ftSk_SpecialAirNLoop_Coll(Fighter_GObj* fighter_gobj)
     }
 }
 
-// 80112C98 - 80112CE4 (0x4C bytes)
 // https://decomp.me/scratch/rmdBY
 void ftSk_SpecialAirNCancel_Coll(Fighter_GObj* fighter_gobj)
 {
@@ -672,8 +611,6 @@ void ftSk_SpecialAirNCancel_Coll(Fighter_GObj* fighter_gobj)
     }
 }
 
-// Collision_SheikNeedleThrowAir
-// 80112CE4 - 80112D44 (0x60 bytes)
 // https://decomp.me/scratch/7AUrU
 void ftSk_SpecialAirNEnd_Coll(Fighter_GObj* fighter_gobj)
 {
@@ -694,8 +631,6 @@ void ftSk_SpecialAirNEnd_Coll(Fighter_GObj* fighter_gobj)
     }
 }
 
-// Sheik_ShootNeedles
-// 80112D44 - 80112ED8 (0x194 bytes)
 // https://decomp.me/scratch/TvVmk
 void ftSk_Sheik_ShootNeedles(Fighter_GObj* fighter_gobj)
 {
