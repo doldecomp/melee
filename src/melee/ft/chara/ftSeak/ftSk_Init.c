@@ -1,5 +1,4 @@
 #include "forward.h"
-#include "ft/forward.h"
 
 #include "ftSeak/ftSk_Init.h"
 
@@ -8,14 +7,13 @@
 #include "ftSk_SpecialN.h"
 #include "ftSk_SpecialS.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftSeak/types.h"
+#include "it/it_26B1.h"
 
 MotionState ftSk_Init_MotionStateTable[ftSk_MS_SelfCount] = {
     {

@@ -181,7 +181,7 @@ void Fighter_FirstInitialize_80067A84(void)
 void Fighter_LoadCommonData(void)
 {
     void** pData;
-    lbArchive_80016C64("PlCo.dat", &pData, "ftLoadCommonData", 0);
+    lbArchive_80016C64("PlCo.dat", (void**) &pData, "ftLoadCommonData", 0);
 
     // copy 23 4-byte chunks from pData to p_ftCommonData in reverse order,
     // equivalent to this: for(i=0; i<23; i++)

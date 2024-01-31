@@ -43,7 +43,8 @@ void grDatFiles_801C6038(void* arg0, s32 arg1, s32 arg2)
             phi_r28 =
                 lbArchive_800171CC(&sp14, r4, &temp_r3->unk4, "map_head", 0);
         } else {
-            sp14 = lbArchive_80016DBC(r4, &temp_r3->unk4, "map_head", 0);
+            sp14 =
+                lbArchive_80016DBC(r4, (void**) &temp_r3->unk4, "map_head", 0);
             phi_r28 = 0;
         }
         temp_r3->unk8 = 0;

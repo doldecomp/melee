@@ -1,4 +1,3 @@
-#include "ftSeak/ftSk_SpecialN.h"
 
 #include "ef/efsync.h"
 #include "ft/fighter.h"
