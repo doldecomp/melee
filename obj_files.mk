@@ -851,21 +851,21 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/dolphin/dvd/fstload.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/dolphin/gx/GXInit.c.o\
+    $(BUILD_DIR)/asm/dolphin/gx/GXInit.s.o\
     $(BUILD_DIR)/src/dolphin/gx/GXFifo.c.o\
-    $(BUILD_DIR)/src/dolphin/gx/GXAttr.c.o\
+    $(BUILD_DIR)/asm/dolphin/gx/GXAttr.s.o\
     $(BUILD_DIR)/src/dolphin/gx/GXMisc.c.o\
     $(BUILD_DIR)/src/dolphin/gx/GXGeometry.c.o\
-    $(BUILD_DIR)/src/dolphin/gx/GXFrameBuf.c.o\
+    $(BUILD_DIR)/asm/dolphin/gx/GXFrameBuf.s.o\
     $(BUILD_DIR)/src/dolphin/gx/GXLight.c.o\
-    $(BUILD_DIR)/src/dolphin/gx/GXTexture.c.o\
-    $(BUILD_DIR)/src/dolphin/gx/GXBump.c.o\
-    $(BUILD_DIR)/src/dolphin/gx/GXTev.c.o\
-    $(BUILD_DIR)/src/dolphin/gx/GXPixel.c.o\
+    $(BUILD_DIR)/asm/dolphin/gx/GXTexture.s.o\
+    $(BUILD_DIR)/asm/dolphin/gx/GXBump.s.o\
+    $(BUILD_DIR)/asm/dolphin/gx/GXTev.s.o\
+    $(BUILD_DIR)/asm/dolphin/gx/GXPixel.s.o\
     $(BUILD_DIR)/src/dolphin/gx/GXStubs.c.o\
     $(BUILD_DIR)/src/dolphin/gx/GXDisplayList.c.o\
-    $(BUILD_DIR)/src/dolphin/gx/GXTransform.c.o\
-    $(BUILD_DIR)/src/dolphin/gx/GXPerf.c.o\
+    $(BUILD_DIR)/asm/dolphin/gx/GXTransform.s.o\
+    $(BUILD_DIR)/asm/dolphin/gx/GXPerf.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/dolphin/mtx/mtx.s.o\
@@ -888,23 +888,20 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/dolphin/os/OSLink.c.o\
     $(BUILD_DIR)/src/dolphin/os/OSMemory.c.o\
     $(BUILD_DIR)/src/dolphin/os/OSMutex.c.o\
-    $(BUILD_DIR)/src/dolphin/os/OSReboot.c.o\
-    $(BUILD_DIR)/src/dolphin/os/OSReset.c.o\
+    $(BUILD_DIR)/asm/dolphin/os/OSReboot.s.o\
+    $(BUILD_DIR)/asm/dolphin/os/OSReset.s.o\
     $(BUILD_DIR)/src/dolphin/os/OSResetSW.c.o\
     $(BUILD_DIR)/src/dolphin/os/OSRtc.c.o\
-    $(BUILD_DIR)/src/dolphin/os/OSSerial.c.o\
-    $(BUILD_DIR)/asm/dolphin/os/OSSerial_data.s.o\
+    $(BUILD_DIR)/asm/dolphin/os/OSSerial.s.o\
     $(BUILD_DIR)/src/dolphin/os/OSSync.c.o\
-    $(BUILD_DIR)/src/dolphin/os/OSThread.c.o\
-    $(BUILD_DIR)/asm/dolphin/os/OSThread_data.s.o\
+    $(BUILD_DIR)/asm/dolphin/os/OSThread.s.o\
     $(BUILD_DIR)/src/dolphin/os/OSTime.c.o\
-    $(BUILD_DIR)/src/dolphin/os/OSUartExi.c.o\
+    $(BUILD_DIR)/asm/dolphin/os/OSUartExi.s.o\
     $(BUILD_DIR)/asm/dolphin/os/init/__ppc_eabi_init_data.s.o\
     $(BUILD_DIR)/src/dolphin/os/init/__ppc_eabi_init.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/dolphin/pad/PadClamp.c.o\
-    $(BUILD_DIR)/src/dolphin/pad/pad.c.o\
     $(BUILD_DIR)/asm/dolphin/pad/pad.s.o\
 
 TEXT_O_FILES +=\
@@ -914,7 +911,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/dolphin/ai/ai.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/dolphin/ar/ar.c.o\
     $(BUILD_DIR)/asm/dolphin/ar/ar.s.o\
     $(BUILD_DIR)/src/dolphin/ar/arq.c.o\
 
