@@ -309,6 +309,7 @@ def RuntimeLib(lib_name: str, objects: Objects) -> LibDict:
         lib_name,
         objects,
         cflags=cflags_runtime,
+        fix_epilogue=False,
     )
 
 
@@ -1092,8 +1093,8 @@ config.libs = [
         [
             Object(Matching, "Runtime/__va_arg.c"),
             Object(Matching, "Runtime/global_destructor_chain.c"),
-            Object(Unknown, "Runtime/Gecko_ExceptionPPC.c"),
-            Object(Unknown, "Runtime/Gecko_setjmp.c"),
+            Object(Matching, "Runtime/Gecko_ExceptionPPC.c"),
+            Object(NonMatching, "Runtime/Gecko_setjmp.c"),
             Object(NonMatching, "Runtime/runtime.c"),
             Object(Matching, "Runtime/__init_cpp_exceptions.c"),
         ],
@@ -1101,9 +1102,9 @@ config.libs = [
     RuntimeLib(
         "MSL (Metrowerks Standard Libraries)",
         [
-            Object(Unknown, "MSL/abort_exit.c"),
+            Object(NonMatching, "MSL/abort_exit.c"),
             Object(NonMatching, "MSL/ansi_fp.c"),
-            Object(Unknown, "MSL/buffer_io.c"),
+            Object(Matching, "MSL/buffer_io.c"),
             Object(Matching, "MSL/PPC_EABI/critical_regions.gamecube.c"),
             Object(Matching, "MSL/ctype.c"),
             Object(NonMatching, "MSL/direct_io.c"),
@@ -1113,11 +1114,11 @@ config.libs = [
             Object(Matching, "MSL/rand.c"),
             Object(Matching, "MSL/string.c"),
             Object(Matching, "MSL/errno.c"),
-            Object(Unknown, "MSL/strtoul.c"),
-            Object(Unknown, "MSL/console_io.c"),
+            Object(Matching, "MSL/strtoul.c"),
+            Object(Matching, "MSL/console_io.c"),
             Object(Matching, "MSL/wchar_io.c"),
             Object(Matching, "MSL/math_1.c"),
-            Object(Unknown, "MSL/trigf.c"),
+            Object(NonMatching, "MSL/trigf.c"),
             Object(NonMatching, "MSL/math.c"),
         ],
     ),
@@ -1133,11 +1134,10 @@ config.libs = [
             Object(NonMatching, "MetroTRK/dispatch.c"),
             Object(NonMatching, "MetroTRK/msghndlr.c"),
             Object(NonMatching, "MetroTRK/flush_cache.c"),
-            Object(Unknown, "MetroTRK/mem_TRK.c"),
+            Object(NonMatching, "MetroTRK/mem_TRK.c"),
             Object(NonMatching, "MetroTRK/targimpl.c"),
             Object(NonMatching, "MetroTRK/dolphin_trk.c"),
             Object(NonMatching, "MetroTRK/mpc_7xx_603e.c"),
-            Object(NonMatching, "MetroTRK/main_TRK.c"),
             Object(NonMatching, "MetroTRK/dolphin_trk_glue.c"),
             Object(NonMatching, "MetroTRK/targcont.c"),
         ],
