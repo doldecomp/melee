@@ -156,7 +156,7 @@ void lbFile_80016580(const char* basename, u32 src, u32* dest,
 void lbFile_8001668C(const char* basename, u32* src, u32* dest)
 {
     cancel = false;
-    lbFile_80016580(basename, src, dest, lbFile_8001615C, 0);
+    lbFile_80016580(basename, (u32)src, dest, lbFile_8001615C, 0);
     do {
     } while (!lbFile_800161A0());
 }
