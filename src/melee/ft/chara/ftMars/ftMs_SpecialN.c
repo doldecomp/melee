@@ -1,18 +1,23 @@
-#include "ft/forward.h"
+#include <platform.h>
+#include "lb/forward.h"
 
 #include "ftMs_SpecialN.h"
 
 #include "math.h"
 
 #include "ef/eflib.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftMars/ftMs_Init.h"
+#include "ftMars/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
@@ -23,10 +28,7 @@ void ftMs_SpecialN_Enter(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     MarsAttributes* attrs = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->x21EC = &ftMs_SpecialN_80136730;
 
@@ -40,10 +42,7 @@ void ftMs_SpecialAirN_Enter(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     MarsAttributes* attrs = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->x21EC = &ftMs_SpecialN_80136730;
 
@@ -104,10 +103,7 @@ void ftMs_SpecialNStart_Phys(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     MarsAttributes* da = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftCommon_8007C930(fp, da->x10);
     ftCommon_8007CB74(gobj);
@@ -118,10 +114,7 @@ void ftMs_SpecialAirNStart_Phys(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     MarsAttributes* da = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftCommon_8007D4B8(fp);
     ftCommon_8007CE94(fp, da->x10);
@@ -173,10 +166,7 @@ void ftMs_SpecialNLoop_Anim(HSD_GObj* gobj)
     s32* specialAttrs = fp->dat_attrs;
     Vec3 sp28;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[28];
-#endif
 
     if (fp->mv.ms.specialn.x0 % 30 == 0) {
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint, 0,
@@ -198,10 +188,7 @@ void ftMs_SpecialAirNLoop_Anim(HSD_GObj* gobj)
     MarsAttributes* attrs = fp->dat_attrs;
     Vec3 sp28;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[28];
-#endif
 
     if ((s32) fp->mv.ms.specialn.x0 % 30 == 0) {
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint, 0,
@@ -323,13 +310,7 @@ void ftMs_SpecialNEnd_Anim(HSD_GObj* gobj)
             if (*(s32*) (hb + 0x914) == 1) {
                 ftColl_8007ABD0(
                     (HitCapsule*) (hb + 0x914),
-
-#if MUST_MATCH
-                    (f32) (da->x4 + fp->mv.ms.specialn.x0 / 30 * da->x8),
-#else
-                    da->x4 + fp->mv.ms.specialn.x0 / 30.0F * da->x8,
-#endif
-
+                    (float) (da->x4 + fp->mv.ms.specialn.x0 / 30.0f * da->x8),
                     gobj);
             }
             ndx++;
@@ -339,10 +320,7 @@ void ftMs_SpecialNEnd_Anim(HSD_GObj* gobj)
     if (fp->cur_anim_frame == 9.0f) {
         Vec3 position;
 
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[20];
-#endif
 
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
         //         Fighter_BonePersonalToCommon
@@ -375,7 +353,7 @@ void ftMs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
         // for (ndx = 0; ndx < 4; ndx++) {
         //     if (fp->x914[ndx].x0 == 1) {
         //         // Hitbox_ApplyDamageStalingAndMore
-        //         ftColl_8007ABD0(&fp->x914[ndx], (f32) (ftCo_DatAttrs->x4 +
+        //         ftColl_8007ABD0(&fp->x914[ndx], (float) (ftCo_DatAttrs->x4 +
         //         (s32)fp->mv.ms.specialn.x0 / 30 * ftCo_DatAttrs->x8), gobj);
         //     }
         // }
@@ -387,13 +365,7 @@ void ftMs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
             if (*(s32*) (hb + 0x914) == 1) {
                 ftColl_8007ABD0(
                     (HitCapsule*) (hb + 0x914),
-
-#if MUST_MATCH
-                    (f32) (da->x4 + fp->mv.ms.specialn.x0 / 30 * da->x8),
-#else
-                    da->x4 + fp->mv.ms.specialn.x0 / 30.0F * da->x8,
-#endif
-
+                    (float) (da->x4 + fp->mv.ms.specialn.x0 / 30.0f * da->x8),
                     gobj);
             }
             ndx++;
@@ -403,10 +375,7 @@ void ftMs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
     if (fp->cur_anim_frame == 9.0f) {
         Vec3 pos;
 
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[20];
-#endif
 
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
         //         Fighter_BonePersonalToCommon

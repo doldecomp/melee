@@ -1,6 +1,6 @@
-#include "forward.h"
+#include <platform.h>
 #include "ft/forward.h"
-#include "ftCommon/forward.h"
+#include "it/forward.h"
 
 #include "ftFox/ftFx_Init.h"
 
@@ -10,10 +10,13 @@
 #include "ftFx_SpecialN.h"
 #include "ftFx_SpecialS.h"
 
+#include "ft/fighter.h"
+#include "ft/ftanim.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftFox/types.h"
+#include "it/it_26B1.h"
 
 MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
     {
@@ -500,7 +503,7 @@ void ftFx_Init_LoadSpecialAttrs(HSD_GObj* gobj)
     COPY_ATTRS(gobj, ftFox_DatAttrs);
 }
 
-extern f32 lbl_804D9244; /// 0.0f
+extern float lbl_804D9244; /// 0.0f
 
 void ftFx_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {

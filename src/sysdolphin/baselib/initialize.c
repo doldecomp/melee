@@ -1,26 +1,31 @@
+#include "initialize.h"
+
+#include "aobj.h"
+#include "class.h"
+#include "debug.h"
+#include "displayfunc.h"
+#include "fobj.h"
+#include "id.h"
+#include "list.h"
+#include "lobj.h"
+#include "mtx.h"
+#include "objalloc.h"
+#include "random.h"
+#include "robj.h"
+#include "shadow.h"
+#include "state.h"
+#include "tev.h"
+#include "video.h"
+
 #include <stdarg.h>
+#include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXPixel.h>
-#include <dolphin/os/os.h>
+#include <dolphin/gx/types.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/vi/vi.h>
-#include <baselib/aobj.h>
-#include <baselib/class.h>
-#include <baselib/debug.h>
-#include <baselib/displayfunc.h>
-#include <baselib/id.h>
-#include <baselib/initialize.h>
-#include <baselib/leak.h>
-#include <baselib/lobj.h>
-#include <baselib/mtx.h>
-#include <baselib/objalloc.h>
-#include <baselib/random.h>
-#include <baselib/robj.h>
-#include <baselib/shadow.h>
-#include <baselib/state.h>
-#include <baselib/tev.h>
-#include <baselib/video.h>
 
 extern OSHeapHandle HSD_Synth_804D6018;
 extern GXRenderModeObj GXNtsc480IntDf;
@@ -69,7 +74,7 @@ void HSD_InitComponent(void)
     HSD_IDSetup();
     VIWaitForRetrace();
     HSD_ObjInit();
-    HSD_Debug_803881E4();
+    HSD_LogInit();
     init_done = true;
 }
 
@@ -269,7 +274,7 @@ static void HSD_ObjInit(void)
     HSD_ZListInitAllocData();
 }
 
-#ifdef MUST_MATCH
+#ifndef BUGFIX
 static char str_pix_fmt_neq_gx_pf_rgb565_z16[] = "pix_fmt != GX_PF_RGB565_Z16";
 #endif
 

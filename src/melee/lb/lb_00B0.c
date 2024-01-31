@@ -1,18 +1,20 @@
 #include "lb/lb_00B0.h"
 
-#include "sc/scene.h"
+#include "sc/types.h" // IWYU pragma: keep
 
 #include <placeholder.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/aobj.h>
-#include <baselib/dobj.h>
+#include <baselib/dobj.h> // IWYU pragma: keep
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
-#include <baselib/mobj.h>
 #include <baselib/pobj.h>
-#include <baselib/quatlib.h>
 #include <baselib/robj.h>
+
+#ifdef MUST_MATCH
+#include <baselib/quatlib.h>
+#endif
 
 static s32 lb_803B9FC0[] = { 14, 14, 14, 14, 2, 4, 6, 0 };
 static s32 lb_803B9FE0[] = { 12, 13, 14, 15 };
@@ -467,7 +469,7 @@ void lb_8000C420(HSD_JObj* jobj, u32 flags, f32 limit)
     HSD_JObjPrependRObj(jobj, robj);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 // https://decomp.me/scratch/atKIC
@@ -604,7 +606,7 @@ lbl_8000C658:
 /* 8000C66C 0000924C  D0 01 00 64 */	stfs f0, 0x64(r1)
 /* 8000C670 00009250  C0 1B 00 24 */	lfs f0, 0x24(r27)
 /* 8000C674 00009254  D0 01 00 68 */	stfs f0, 0x68(r1)
-/* 8000C678 00009258  48 37 27 95 */	bl HSD_QuatLib_8037EE0C
+/* 8000C678 00009258  48 37 27 95 */	bl EulerToQuat
 lbl_8000C67C:
 /* 8000C67C 0000925C  2C 1E 00 00 */	cmpwi r30, 0
 /* 8000C680 00009260  41 82 00 28 */	beq lbl_8000C6A8
@@ -626,7 +628,7 @@ lbl_8000C6A8:
 /* 8000C6BC 0000929C  D0 01 00 58 */	stfs f0, 0x58(r1)
 /* 8000C6C0 000092A0  C0 1C 00 24 */	lfs f0, 0x24(r28)
 /* 8000C6C4 000092A4  D0 01 00 5C */	stfs f0, 0x5c(r1)
-/* 8000C6C8 000092A8  48 37 27 45 */	bl HSD_QuatLib_8037EE0C
+/* 8000C6C8 000092A8  48 37 27 45 */	bl EulerToQuat
 lbl_8000C6CC:
 /* 8000C6CC 000092AC  C0 01 00 38 */	lfs f0, 0x38(r1)
 /* 8000C6D0 000092B0  C0 21 00 48 */	lfs f1, 0x48(r1)
@@ -716,7 +718,7 @@ void lb_8000C7BC(HSD_JObj* src, HSD_JObj* dst)
     HSD_JObjSetFlags(dst, JOBJ_MTX_DIRTY);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 asm void lb_8000C868(HSD_Joint*, HSD_JObj*, HSD_JObj*, f32, f32)
 { // clang-format off
@@ -834,7 +836,7 @@ lbl_8000C9F0:
 /* 8000CA04 000095E4  D0 01 00 C4 */	stfs f0, 0xc4(r1)
 /* 8000CA08 000095E8  C0 1C 00 1C */	lfs f0, 0x1c(r28)
 /* 8000CA0C 000095EC  D0 01 00 C8 */	stfs f0, 0xc8(r1)
-/* 8000CA10 000095F0  48 37 23 FD */	bl HSD_QuatLib_8037EE0C
+/* 8000CA10 000095F0  48 37 23 FD */	bl EulerToQuat
 /* 8000CA14 000095F4  2C 1F 00 00 */	cmpwi r31, 0
 /* 8000CA18 000095F8  41 82 00 28 */	beq lbl_8000CA40
 /* 8000CA1C 000095FC  80 7D 00 1C */	lwz r3, 0x1c(r29)
@@ -855,7 +857,7 @@ lbl_8000CA40:
 /* 8000CA54 00009634  D0 01 00 B8 */	stfs f0, 0xb8(r1)
 /* 8000CA58 00009638  C0 1D 00 24 */	lfs f0, 0x24(r29)
 /* 8000CA5C 0000963C  D0 01 00 BC */	stfs f0, 0xbc(r1)
-/* 8000CA60 00009640  48 37 23 AD */	bl HSD_QuatLib_8037EE0C
+/* 8000CA60 00009640  48 37 23 AD */	bl EulerToQuat
 lbl_8000CA64:
 /* 8000CA64 00009644  C0 01 00 98 */	lfs f0, 0x98(r1)
 /* 8000CA68 00009648  C0 21 00 A8 */	lfs f1, 0xa8(r1)
@@ -1041,7 +1043,7 @@ HSD_LObj* lb_8000CDC0(HSD_LObj* cur)
         }
         cur = lobj_next(cur);
     }
-#ifndef MUST_MATCH
+#ifdef BUGFIX
     return NULL;
 #endif
 }

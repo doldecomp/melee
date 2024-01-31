@@ -2,6 +2,7 @@
 #define DOLPHIN_OS_OSSERIAL_H
 
 #include <dolphin/os/OSExi.h>
+#include <dolphin/sipriv.h>
 
 #define SI_MAX_CHAN 4
 #define SI_MAX_COMCSR_INLNGTH 128
@@ -54,37 +55,5 @@
      SI_WIRELESS_FIX_ID)
 #define SI_GC_KEYBOARD (SI_TYPE_GC | 0x00200000)
 #define SI_GC_STEERING (SI_TYPE_GC | 0x00000000)
-
-/// @todo @c chan should be #EXIChannel.
-typedef void (*SICallback)(s32 chan, u32 type);
-
-/// @sz{8}
-extern unk_t __PADFixBits;
-
-void SIGetResponse(EXIChannel chan, u32 data[2]);
-void SISetCommand(s32 index, u32 value);
-void SIEnablePolling(u32 chan_mask);
-void SIDisablePolling(u32 chan_mask);
-u32 SIProbe(s32 chan);
-char* SIGetTypeString(u32 type);
-void SIRefreshSamplingRate(void);
-void SISetSamplingRate(u32 msec);
-void SIGetTypeAsync(s32, SICallback);
-u32 SIGetType(s32);
-void __SITransfer(void);
-void SIGetResponseRaw(void);
-void SITransfer(void);
-void GetTypeCallback(void);
-
-void SITransferCommands(void);
-s32 SISetXY(u32 arg0, u32 arg1);
-bool SIBusy(void);
-void SIInterruptHandler(void);
-bool SIIsChanBusy(enum_t status);
-void SIEnablePollingInterrupt(void);
-void SIRegisterPollingHandler(void);
-void SIUnregisterPollingHandler(void);
-void SIInit(void);
-void SIGetStatus(void);
 
 #endif

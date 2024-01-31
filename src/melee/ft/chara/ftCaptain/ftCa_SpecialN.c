@@ -1,23 +1,22 @@
-#include "ft/forward.h"
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
 
 #include "ftCa_SpecialN.h"
 
-#include "ftCa_Init.h"
 #include "math.h"
 #include "types.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
 #include "lb/lb_00F9.h"
-
-#include <trigf.h>
 
 /// Create Aesthetic Wind Effect for Warlock Punch
 static void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
@@ -42,14 +41,14 @@ static void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
 }
 
 /// Calculate angle from control stick input - inline
-static f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
+static float ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
 {
     ftCaptain_DatAttrs* da = fp->dat_attrs;
     {
         /// @todo Join declarations and assignments somehow.
-        f32 max;
-        f32 stick_y = stickGetDir(fp->input.lstick.y, 0);
-        f32 min;
+        float max;
+        float stick_y = stickGetDir(fp->input.lstick.y, 0);
+        float min;
         max = da->specialn_stick_range_y_pos;
         if (stick_y > max) {
             stick_y = max;
@@ -64,7 +63,7 @@ static f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
         }
         {
             /// @todo Eliminate @c f.
-            f32 f = deg_to_rad;
+            float f = deg_to_rad;
             return f * (stick_y * da->specialn_angle_diff / (max - min));
         }
     }
@@ -73,10 +72,7 @@ static f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
 void ftCa_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
@@ -89,10 +85,7 @@ void ftCa_SpecialN_Enter(HSD_GObj* gobj)
 void ftCa_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
@@ -128,7 +121,7 @@ void ftCa_SpecialAirN_IASA(HSD_GObj* gobj)
     if (fp->cmd_vars[0] != 0) {
         fp->cmd_vars[0] = 0;
         {
-            f32 vel = ftCaptain_SpecialN_GetAngleVel(fp);
+            float vel = ftCaptain_SpecialN_GetAngleVel(fp);
             fp->self_vel.y = da->specialn_vel_x * sinf(vel);
             fp->self_vel.x = da->specialn_vel_x * (fp->facing_dir * cosf(vel));
         }
@@ -167,10 +160,7 @@ static inline void doPhys(HSD_GObj* gobj)
 
 void ftCa_SpecialN_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     doPhys(gobj);
     ft_80084FA8(gobj);
 }

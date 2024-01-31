@@ -1,7 +1,12 @@
 #include "itfoxlaser.h"
 
-#include "math.h"
+#include "it/inlines.h"
+#include "it/itCharItems.h"
+#include "it/types.h"
 
+#include <common_structs.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 #include <melee/db/db_2253.h>
 #include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>
@@ -146,10 +151,7 @@ bool it_8029C9EC(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     Vec3 sp18 = item->pos;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     if (it_8029C4D4(item_gobj)) {
         it_80275158(item_gobj, 1.0F);
         item->pos = sp18;
@@ -184,10 +186,7 @@ bool it_8029CC4C(Item_GObj* arg0)
 bool it_8029CC54(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     lbVector_Mirror(&item->x40_vel, &item->xC58);
     item->xDD4_itemVar.foxlaser.xDD4 = 1e-3;
     item->xDD4_itemVar.foxlaser.xDD8 =

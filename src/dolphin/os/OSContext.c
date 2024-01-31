@@ -1,7 +1,8 @@
 #include <placeholder.h>
 #include <dolphin/db/db.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSContext.h>
+#include <dolphin/os/OSException.h>
 #include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>
 
@@ -468,8 +469,6 @@ void OSInitContext(OSContext* ctx, u32 pc, u32 newsp)
 }
 #endif
 
-#define OS_CONTEXT_STATE_FPSAVED 1U
-
 void OSDumpContext(const OSContext* context)
 {
     u32 i;
@@ -532,47 +531,51 @@ void OSDumpContext(const OSContext* context)
 }
 
 #ifdef MWERKS_GEKKO
-asm void OSSwitchFPUContext(OSException _, register OSContext* ctx)
-{ // clang-format off
-    nofralloc
-    mfmsr r5
-    ori r5, r5, 0x2000
-    mtmsr r5
-    isync
-    lwz r5, ctx->srr1
-    ori r5, r5, 0x2000
-    mtspr 0x1b, r5
-    lis r3, 0x800000D8@ha
-    lwz r5, 0x800000D8@l(r3)
-    stw ctx, 0xd8(r3)
-    cmpw r5, ctx
-    beq restore_and_exit
-    cmpwi r5, 0
-    beq load_new_fpu_context
-    bl __OSSaveFPUContext
-load_new_fpu_context:
-    bl __OSLoadFPUContext
-restore_and_exit:
-    lwz r3, ctx->cr
-    mtcr r3
-    lwz r3, ctx->lr
-    mtlr r3
-    lwz r3, ctx->srr0
-    mtsrr0 r3
-    lwz r3, ctx->ctr
-    mtctr r3
-    lwz r3, ctx->xer
-    mtxer r3
-    lhz r3, ctx->state
-    rlwinm r3, r3, 0, 31, 29
-    sth r3, ctx->state
-    lwz r5, ctx->gprs[5]
-    lwz r3, ctx->gprs[3]
-    lwz r4, ctx->gprs[4]
-    rfi
-} // clang-format on
+static asm void OSSwitchFPUContext(register __OSException exception,
+                                   register OSContext* context)
+{
+    // clang-format off
+  nofralloc
+  mfmsr   r5
+  ori     r5, r5, 0x2000
+  mtmsr   r5
+  isync
+  lwz     r5, OS_CONTEXT_SRR1(context)
+  ori     r5, r5, 0x2000
+  mtsrr1  r5
+  addis   r3, r0, OS_CACHED_REGION_PREFIX
+  lwz     r5, 0x00D8(r3)
+  stw     context, 0x00D8(r3)
+  cmpw    r5, r4
+  beq     _restoreAndExit
+  cmpwi   r5, 0x0
+  beq     _loadNewFPUContext
+  bl      __OSSaveFPUContext
+_loadNewFPUContext:
+  bl      __OSLoadFPUContext
+_restoreAndExit:
+  lwz     r3, OS_CONTEXT_CR(context)
+  mtcr    r3
+  lwz     r3, OS_CONTEXT_LR(context)
+  mtlr    r3
+  lwz     r3, OS_CONTEXT_SRR0(context)
+  mtsrr0  r3
+  lwz     r3, OS_CONTEXT_CTR(context)
+  mtctr   r3
+  lwz     r3, OS_CONTEXT_XER(context)
+  mtxer   r3
+  lhz     r3, context->state
+  rlwinm  r3, r3, 0, 31, 29
+  sth     r3, context->state
+  lwz     r5, OS_CONTEXT_R5(context)
+  lwz     r3, OS_CONTEXT_R3(context)
+  lwz     r4, OS_CONTEXT_R4(context)
+  rfi
+    // clang-format on
+}
 #else
-void OSSwitchFPUContext(OSException _, OSContext* ctx)
+static void OSSwitchFPUContext(register __OSException exception,
+                               register OSContext* context)
 {
     NOT_IMPLEMENTED;
 }

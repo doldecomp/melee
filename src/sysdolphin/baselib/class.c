@@ -1,11 +1,13 @@
 #include "class.h"
 
-#include <stddef.h>
+#include "debug.h"
+#include "hash.h"
+#include "memory.h"
+#include "object.h" // IWYU pragma: keep
+
+#include <__mem.h>
 #include <string.h>
-#include <dolphin/os/os.h>
-#include <baselib/hash.h>
-#include <baselib/memory.h>
-#include <baselib/object.h>
+#include <dolphin/os.h>
 
 void _hsdClassInfoInit(void);
 HSD_ClassInfo hsdClass = { _hsdClassInfoInit };
@@ -14,21 +16,15 @@ static HSD_MemoryEntry** memory_list;
 static s32 nb_memory_list;
 static u32 HSD_Class_804D7708;
 
-#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
-#endif
-
 void ClassInfoInit(HSD_ClassInfo* info)
 {
     if ((info->head.flags & 1) == 0) {
         (*info->head.info_init)();
     }
 }
-
-#ifdef MUST_MATCH
 #pragma pop
-#endif
 
 void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info,
                       char* base_class_library, char* type, s32 info_size,
@@ -67,7 +63,7 @@ void OSReport_PrintSpaces(s32 count)
     }
 }
 
-#ifdef MUST_MATCH
+#ifndef BUGFIX
 #pragma push
 #pragma force_active on
 static char unused1[] = "entry %d <null>\n";
@@ -129,12 +125,7 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
         ssize_t i;
         bool found;
         HSD_MemoryEntry* entry;
-
-/// @todo Unused assignment.
-#ifdef MUST_MATCH
         usize_t size = idx * 4;
-#endif
-
         if (memory_list[idx] == NULL) {
             entry = HSD_MemAlloc(sizeof(HSD_MemoryEntry));
             if (entry == NULL) {
@@ -382,12 +373,7 @@ bool hsdIsDescendantOf(void* info, void* p)
         return false;
     }
 
-    /// @todo Duplicate assignment.
-#ifdef MUST_MATCH
     var_r31 = var_r31 = info;
-#else
-    var_r31 = info;
-#endif
 
     if (!(HSD_CLASS_INFO(info)->head.flags & 1)) {
         var_r31->head.info_init();
@@ -483,7 +469,7 @@ HSD_ClassInfo* hsdSearchClassInfo(const char* class_name)
     return NULL;
 }
 
-#ifdef MUST_MATCH
+#ifndef BUGFIX
 #pragma push
 #pragma force_active on
 static char unused5[] = "info_hash";

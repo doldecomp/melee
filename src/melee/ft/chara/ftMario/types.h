@@ -2,13 +2,16 @@
 #define MELEE_FT_CHARA_FTMARIO_TYPES_H
 
 #include <platform.h>
-#include "forward.h"
+#include "forward.h" // IWYU pragma: export
 #include "ft/forward.h"
+#include "ftMario/forward.h" // IWYU pragma: export
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
+#include "lb/types.h"
+
 #include <common_structs.h>
-#include <dolphin/mtx/types.h>
 
 struct ftMario_FighterVars {
     /// Current Megavitamin color combo
@@ -24,34 +27,34 @@ struct ftMario_FighterVars {
 
 typedef struct ftMario_DatAttrs {
     struct ftMario_SpecialS_DatAttrs {
-        f32 vel_x_decay;
+        float vel_x_decay;
         Vec2 vel;
-        f32 grav;
-        f32 terminal_vel;
+        float grav;
+        float terminal_vel;
         ItemKind cape_kind;
     } specials;
 
     struct ftMario_SpecialHi_DatAttrs {
-        f32 freefall_mobility;
-        f32 landing_lag;
-        f32 reverse_stick_range;
-        f32 momentum_stick_range;
-        f32 angle_diff;
-        f32 vel_x;
-        f32 grav;
-        f32 vel_mul;
+        float freefall_mobility;
+        float landing_lag;
+        float reverse_stick_range;
+        float momentum_stick_range;
+        float angle_diff;
+        float vel_x;
+        float grav;
+        float vel_mul;
     } specialhi;
 
     struct ftMario_SpecialLw_DatAttrs {
-        f32 vel_y;
-        f32 momentum_x;
-        f32 air_momentum_x;
-        f32 momentum_x_mul;
-        f32 air_momentum_x_mul;
-        f32 friction_end;
+        float vel_y;
+        float momentum_x;
+        float air_momentum_x;
+        float momentum_x_mul;
+        float air_momentum_x_mul;
+        float friction_end;
         s32 unk0;
-        f32 tap_y_vel_max;
-        f32 tap_grav;
+        float tap_y_vel_max;
+        float tap_grav;
         s32 landing_lag;
     } speciallw;
 
@@ -75,7 +78,7 @@ typedef struct ftMarioSpecialS {
 
 typedef struct ftMarioSpecialLw {
     /// 0x2340 - Grounded momentum of Mario / Dr. Tornado
-    f32 groundVelX;
+    float groundVelX;
     /// 0x2344 - Set but never used?
     s32 unk;
     /// 0x2348 - Skipped entirely

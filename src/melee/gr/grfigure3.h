@@ -1,8 +1,4 @@
-#ifndef _grfigure3_h_
-#define _grfigure3_h_
-
-#include "gr/stage.h"
-
-#include <baselib/gobj.h>
+#ifndef GALE01_20E504
+#define GALE01_20E504
 
 #endif

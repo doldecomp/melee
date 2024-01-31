@@ -1,26 +1,31 @@
+#include <platform.h>
+#include "ftCommon/forward.h"
+
 #include "ftPk_SpecialHi.h"
 
-#include "ftPk_Init.h"
 #include "math.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Pass.h"
+#include "ftPikachu/types.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h>
 #include <dolphin/mtx/types.h>
+#include <baselib/jobj.h>
+#include <baselib/random.h>
 
 /// @todo Move elsewhere.
 #define MAX_STICK_MAG 0.999f
@@ -36,10 +41,7 @@ void ftPk_SpecialHi_UpdateVel(HSD_GObj* gobj)
 
 void ftPk_SpecialHi_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     /// @todo Can't move below @c fp.
     ftPikachuAttributes* sa;
@@ -63,10 +65,7 @@ void ftPk_SpecialHi_Enter(HSD_GObj* gobj)
 
 void ftPk_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     /// @todo Can't move below @c fp.
     ftPikachuAttributes* sa;
@@ -113,10 +112,7 @@ void ftPk_SpecialHiStart0_Phys(HSD_GObj* gobj)
 
 void ftPk_SpecialAirHiStart0_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -176,10 +172,7 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->mv.pk.unk4.x4--;
     if (fp->mv.pk.unk4.x4 <= 0) {
@@ -196,7 +189,7 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
     } else {
         fp = GET_FIGHTER(gobj);
         if (fp->kind != FTKIND_PICHU) {
-            f32 tempf;
+            float tempf;
             lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint, 0,
                         &vec2);
             tempf = HSD_Randf();
@@ -218,10 +211,7 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->mv.pk.unk4.x4--;
     if (fp->mv.pk.unk4.x4 <= 0) {
@@ -238,7 +228,7 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
     } else {
         fp = GET_FIGHTER(gobj);
         if (fp->kind != FTKIND_PICHU) {
-            f32 tempf;
+            float tempf;
             lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint, 0,
                         &vec2);
             tempf = HSD_Randf();
@@ -266,9 +256,9 @@ void ftPk_SpecialHi_8012642C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
-    f32 half_pi = (f32) M_PI_2;
-    f32 tempf = (fp->facing_dir * atan2f(fp->self_vel.x, fp->self_vel.y)) +
-                (pika_attr->x78 - half_pi);
+    float half_pi = (float) M_PI_2;
+    float tempf = (fp->facing_dir * atan2f(fp->self_vel.x, fp->self_vel.y)) +
+                  (pika_attr->x78 - half_pi);
 
     ftParts_8007592C(fp, ftParts_8007500C(fp, FtPart_XRotN), tempf);
     scl.x = pika_attr->x7C_scale.x;
@@ -293,19 +283,13 @@ void ftPk_SpecialHiStart1_Phys(HSD_GObj* gobj)
     ftCommon_8007CB74(gobj);
 }
 
-#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
-#endif
-
 void ftPk_SpecialAirHiStart1_Phys(HSD_GObj* gobj)
 {
     ftPk_SpecialHi_8012642C(gobj);
 }
-
-#ifdef MUST_MATCH
 #pragma pop
-#endif
 
 void ftPk_SpecialHiStart1_Coll(HSD_GObj* gobj)
 {
@@ -320,10 +304,7 @@ void ftPk_SpecialHiStart1_Coll(HSD_GObj* gobj)
 
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     /// @todo Eliminate cast (by changing type of field)
     if (!ft_80082888(gobj, (ftCollisionBox*) &pika_attr->height_attributes)) {
@@ -342,9 +323,9 @@ void ftPk_SpecialHiStart1_Coll(HSD_GObj* gobj)
         collData = &fighter2->coll_data;
         pika_attr = fighter2->dat_attrs;
         if (collData->env_flags & 98304) {
-            f32 angle =
+            float angle =
                 atan2f(collData->floor.normal.x, collData->floor.normal.y);
-            f32 angle2 = (fighter2->facing_dir * angle) + pika_attr->x68;
+            float angle2 = (fighter2->facing_dir * angle) + pika_attr->x68;
             ftParts_8007592C(fighter2,
                              ftParts_8007500C(fighter2, FtPart_XRotN), angle2);
         }
@@ -380,17 +361,14 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
     CollData* collData = &fp->coll_data;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     fp->mv.pk.unk4.x18++;
     if (ft_CheckGroundAndLedge(gobj, fp->facing_dir < 0.0f ? -1 : 1)) {
         bool0 = ftPikachu_GetBool(gobj);
 
         if (bool0) {
-            f32 tempf =
+            float tempf =
                 lbVector_AngleXY(&collData->floor.normal, &fp->self_vel);
             if (tempf > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftCommon_8007D7FC(fp);
@@ -404,7 +382,7 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
 
     if (!ftCliffCommon_80081298(gobj)) {
         if (collData->env_flags & 24576) {
-            f32 angle =
+            float angle =
                 lbVector_AngleXY(&collData->ceiling.normal, &fp->self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
@@ -412,7 +390,7 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
         }
 
         if (collData->env_flags & 63) {
-            f32 angle =
+            float angle =
                 lbVector_AngleXY(&collData->right_wall.normal, &fp->self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
@@ -420,7 +398,7 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
         }
 
         if (collData->env_flags & 4032) {
-            f32 angle =
+            float angle =
                 lbVector_AngleXY(&collData->left_wall.normal, &fp->self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
@@ -429,19 +407,13 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
     }
 }
 
-#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
-#endif
-
 void ftPk_SpecialHi_ChangeMotion_Unk02(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(gobj, 357, 206327946, fp->cur_anim_frame, 0.0f,
@@ -449,10 +421,7 @@ void ftPk_SpecialHi_ChangeMotion_Unk02(HSD_GObj* gobj)
     fp->x2223_b4 = true;
     ftPk_SpecialHi_8012642C(gobj);
 }
-
-#ifdef MUST_MATCH
 #pragma pop
-#endif
 
 void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
 {
@@ -466,10 +435,7 @@ void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
 
     HSD_JObj* jobj;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fighter2 = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fighter2);
@@ -480,9 +446,9 @@ void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
     collData = &fp->coll_data;
     pika_attr = fp->dat_attrs;
     if (fp->coll_data.env_flags & 98304) {
-        f32 angle = (fp->facing_dir * atan2f(collData->floor.normal.x,
-                                             collData->floor.normal.y)) +
-                    pika_attr->x68;
+        float angle = (fp->facing_dir * atan2f(collData->floor.normal.x,
+                                               collData->floor.normal.y)) +
+                      pika_attr->x68;
         ftParts_8007592C(fp, ftParts_8007500C(fp, FtPart_XRotN), angle);
     }
 
@@ -510,8 +476,8 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
     // distance formula
-    f32 stick_mag = sqrtf(fp->input.lstick.x * fp->input.lstick.x +
-                          fp->input.lstick.y * fp->input.lstick.y);
+    float stick_mag = sqrtf(fp->input.lstick.x * fp->input.lstick.x +
+                            fp->input.lstick.y * fp->input.lstick.y);
 
     // cap stick magnitude to MAX_STICK_MAG
     if (stick_mag > MAX_STICK_MAG) {
@@ -526,7 +492,7 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
         lstick_direction.z = 0.0f;
 
         if (!(lbVector_AngleXY(&collData->floor.normal, &lstick_direction) <
-              (f32) M_PI_2) &&
+              (float) M_PI_2) &&
             (!ftCo_8009A134(gobj)))
         {
             Fighter* fighter2;
@@ -573,9 +539,9 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
 // aerial up b zip
 void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
 {
-    f32 temp_f2_2;
-    f32 some_angle;
-    f32 final_stick_mag;
+    float temp_f2_2;
+    float some_angle;
+    float final_stick_mag;
 
     Fighter* fighter2;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -583,8 +549,8 @@ void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
     // distance formula
-    f32 temp_stick_mag = sqrtf((fp->input.lstick.x * fp->input.lstick.x) +
-                               (fp->input.lstick.y * fp->input.lstick.y));
+    float temp_stick_mag = sqrtf((fp->input.lstick.x * fp->input.lstick.x) +
+                                 (fp->input.lstick.y * fp->input.lstick.y));
 
     final_stick_mag = temp_stick_mag;
 
@@ -611,7 +577,7 @@ void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
 
         // use max stick_mag and 90°
         final_stick_mag = MAX_STICK_MAG;
-        some_angle = (f32) M_PI_2;
+        some_angle = (float) M_PI_2;
 
         // store inputs as if x=0 and y=max
         fp->mv.pk.unk4.x10.x = 0.0f;
@@ -667,8 +633,8 @@ bool ftPk_SpecialHi_80127064(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
     // distance formula
-    f32 stick_mag = sqrtf((fp->input.lstick.x * fp->input.lstick.x) +
-                          (fp->input.lstick.y * fp->input.lstick.y));
+    float stick_mag = sqrtf((fp->input.lstick.x * fp->input.lstick.x) +
+                            (fp->input.lstick.y * fp->input.lstick.y));
 
     // if stick_mag is less than the threshold, push the max stick magnitude
     // onto the stack and return 0
@@ -678,12 +644,9 @@ bool ftPk_SpecialHi_80127064(HSD_GObj* gobj)
 
     if (!fp->mv.pk.unk4.x8) {
         Vec3 vec1, vec2;
-        f32 tempf;
+        float tempf;
 
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4];
-#endif
 
         // push current stick to temporary vector
         vec1.x = fp->input.lstick.x;
@@ -729,10 +692,7 @@ void ftPk_SpecialHiEnd_Anim(HSD_GObj* gobj)
 
 void ftPk_SpecialAirHiEnd_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
@@ -764,10 +724,7 @@ void ftPk_SpecialHiEnd_Phys(HSD_GObj* gobj)
 
 void ftPk_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
@@ -804,12 +761,9 @@ void ftPk_SpecialAirHiEnd_Coll(HSD_GObj* gobj)
     ///       #ftPikachuAttributes::height_attributes)
     ftCollisionBox* box = (ftCollisionBox*) &pika_attr->height_attributes;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
-    if (ft_8008239C(gobj, fp->facing_dir, (f32*) box)) {
+    if (ft_8008239C(gobj, fp->facing_dir, (float*) box)) {
         ftCo_800D5CB0(gobj, 0, pika_attr->xB0);
     } else if (!ftCliffCommon_80081298(gobj)) {
         /// @todo Fix weird control flow.
@@ -827,10 +781,7 @@ void ftPk_SpecialHi_ChangeMotion_Unk04(HSD_GObj* gobj)
 
 void ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftPikachuAttributes* pika_attr;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -849,10 +800,7 @@ void ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(HSD_GObj* gobj)
 
 void ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftPikachuAttributes* pika_attr;
     Fighter* fp = GET_FIGHTER(gobj);

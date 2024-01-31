@@ -2,11 +2,15 @@
 
 #include "math.h"
 
+#include "it/inlines.h"
+
+#include <common_structs.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 #include <melee/db/db_2253.h>
 #include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
-#include <melee/it/types.h>
 
 ItemStateTable it_803F7158[] = { {
     0,

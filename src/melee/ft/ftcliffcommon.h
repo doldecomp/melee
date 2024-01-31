@@ -3,8 +3,6 @@
 
 #include "ftCommon/forward.h"
 
-#include <placeholder.h>
-
 /* 081298 */ bool ftCliffCommon_80081298(ftCo_GObj* gobj);
 /* 081370 */ void ftCliffCommon_80081370(ftCo_GObj* gobj);
 /* 081504 */ void ftCo_CliffCatch_Anim(ftCo_GObj* gobj);

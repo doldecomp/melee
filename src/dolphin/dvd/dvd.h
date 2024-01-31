@@ -14,7 +14,7 @@ struct bb2struct {
     void* FSTLocationInRam;
 };
 
-typedef struct {
+typedef struct DVDDiskID {
     char gameName[4];
     char company[2];
     u8 diskNumber;
@@ -24,8 +24,8 @@ typedef struct {
     u8 padding[22];
 } DVDDiskID;
 
-typedef struct {
-    u32 bootFilePosition;
+typedef struct DVDBuffer {
+    void* bootFilePosition;
     u32 FSTPosition;
     u32 FSTLength;
     u32 FSTMaxLength;

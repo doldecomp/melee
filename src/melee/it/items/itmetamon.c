@@ -1,9 +1,13 @@
+#include <platform.h>
+
 #include "itmetamon.h"
 
-#include <melee/it/item.h>
+#include "it/inlines.h"
+
 #include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
+#include <melee/it/item.h>
 
 static Item_GObj* it_804D6D50;
 
@@ -42,9 +46,7 @@ void it_802D3008(Item_GObj* item_gobj)
     it_804D6D50 = item_gobj;
 }
 
-void it_802D306C(Item_GObj* item_gobj)
-{
-}
+void it_802D306C(Item_GObj* item_gobj) {}
 
 void it_802D3070(Item_GObj* item_gobj, Item_GObj* gobj)
 {
@@ -71,9 +73,7 @@ bool it_802D30EC(Item_GObj* item_gobj)
     return false;
 }
 
-void it_802D3120(Item_GObj* item_gobj)
-{
-}
+void it_802D3120(Item_GObj* item_gobj) {}
 
 bool it_802D3124(Item_GObj* item_gobj)
 {
@@ -83,16 +83,13 @@ bool it_802D3124(Item_GObj* item_gobj)
 
 bool it_802D3150(Item_GObj* item_gobj)
 {
-    if (!it_80272C6C(item_gobj))
-    {
+    if (!it_80272C6C(item_gobj)) {
         return true;
     }
     return false;
 }
 
-void it_802D3184(Item_GObj* item_gobj)
-{
-}
+void it_802D3184(Item_GObj* item_gobj) {}
 
 bool it_802D3188(Item_GObj* item_gobj)
 {

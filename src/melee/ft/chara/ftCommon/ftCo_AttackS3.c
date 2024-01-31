@@ -1,25 +1,26 @@
 #include <platform.h>
 #include "forward.h"
-#include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_AttackS3.h"
 
-#include "ftCo_08A6.h"
 #include "ftCo_ItemGet.h"
 #include "ftCo_ItemThrow.h"
-#include "ftCo_Shouldered.h"
 #include "ftCo_Wait.h"
 #include "math.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0CDD.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/ftswing.h"
+#include "ft/types.h"
+#include "it/it_26B1.h"
 
-#include <placeholder.h>
+#include <common_structs.h>
 
 /* 08B788 */ static void decideAngle(ftCo_GObj* gobj);
 

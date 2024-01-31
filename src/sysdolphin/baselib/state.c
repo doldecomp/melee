@@ -1,12 +1,16 @@
+#include "state.h"
+
+#include "lobj.h"
+#include "mobj.h"
+#include "pobj.h"
+#include "tev.h"
+#include "texp.h"
+#include "util.h"
+
+#include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/gx/GXTev.h>
-#include <baselib/lobj.h>
-#include <baselib/mobj.h>
-#include <baselib/pobj.h>
-#include <baselib/state.h>
-#include <baselib/tev.h>
-#include <baselib/util.h>
 
 static GXColor dark_matter = { 0x00, 0x00, 0x00, 0xFF };
 

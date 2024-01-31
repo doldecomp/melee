@@ -1,11 +1,7 @@
 #include <platform.h>
-#include "forward.h"
-#include "ft/forward.h"
-#include <baselib/forward.h>
 
 #include "ftCo_Attack1.h"
 
-#include "ftCo_08A6.h"
 #include "ftCo_AttackHi3.h"
 #include "ftCo_AttackHi4.h"
 #include "ftCo_AttackLw3.h"
@@ -14,19 +10,23 @@
 #include "ftCo_AttackS4.h"
 #include "ftCo_ItemGet.h"
 #include "ftCo_ItemThrow.h"
-#include "ftCo_Shouldered.h"
 #include "ftCo_Wait.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0881.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0CDD.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftswing.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 #include "ftGameWatch/ftGw_Attack11.h"
+#include "it/it_26B1.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 
 /* 08AB50 */ static void onPkPc21EC(ftCo_GObj* gobj);
 /* 08AB84 */ static void decideAttack11(ftCo_GObj* gobj);
@@ -110,10 +110,7 @@ static MotionFlags getMotionFlags(ftCo_Fighter* fp)
 
 static void checkAttack11(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (!ftCo_80094790(gobj)) {
         fp->allow_interrupt = false;
@@ -131,10 +128,7 @@ static void checkAttack11(ftCo_GObj* gobj)
 
 void ftCo_Attack11_Anim(ftCo_GObj* arg0)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     if (!ftAnim_IsFramesRemaining(arg0)) {
         ft_8008A2BC(arg0);
     }
@@ -214,10 +208,7 @@ static void doAttack12(ftCo_GObj* gobj)
 
 bool checkAttack12(ftCo_GObj* gobj)
 {
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->hitlag_mul > 0) {
         fp->hitlag_mul -= 1;
@@ -234,10 +225,7 @@ bool checkAttack12(ftCo_GObj* gobj)
 
 void ftCo_Attack12_Anim(ftCo_GObj* gobj)
 {
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }

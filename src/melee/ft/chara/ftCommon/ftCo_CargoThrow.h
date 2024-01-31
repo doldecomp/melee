@@ -1,8 +1,6 @@
 #ifndef GALE01_09BE54
 #define GALE01_09BE54
 
-#include <platform.h>
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
 
 /* 09BE54 */ void ftCo_CargoWait2_Anim(ftCo_GObj* gobj);

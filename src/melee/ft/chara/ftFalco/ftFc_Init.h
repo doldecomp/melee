@@ -1,6 +1,7 @@
 #ifndef GALE01_149ACC
 #define GALE01_149ACC
 
+#include <platform.h>
 #include "ftFox/forward.h"
 #include <baselib/forward.h>
 

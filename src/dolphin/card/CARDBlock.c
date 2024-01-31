@@ -49,10 +49,7 @@ static void EraseCallback(s32 chan, s32 result)
     CARDControl* card;
     CARDCallback callback;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     u16* fat;
     u32 addr;
@@ -87,6 +84,8 @@ error:
     }
 }
 
+#pragma push
+#pragma force_active on
 s32 __CARDAllocBlock(s32 chan, u32 cBlock, CARDCallback callback)
 {
     CARDControl* card;
@@ -136,6 +135,7 @@ s32 __CARDAllocBlock(s32 chan, u32 cBlock, CARDCallback callback)
 
     return __CARDUpdateFatBlock(chan, fat, callback);
 }
+#pragma pop
 
 s32 __CARDFreeBlock(s32 chan, u16 nBlock, CARDCallback callback)
 {
@@ -144,7 +144,7 @@ s32 __CARDFreeBlock(s32 chan, u16 nBlock, CARDCallback callback)
     u16 nextBlock;
 
 /// @todo Looks like a missing inline.
-#ifdef MUST_MATCH
+#ifndef BUGFIX
     card =
 #endif
         card = &__CARDBlock[chan];

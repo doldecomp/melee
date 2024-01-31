@@ -4,29 +4,29 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
-static MotionFlags const ftMr_MF_Special ATTRIBUTE_USED =
+static MotionFlags const ftMr_MF_Special =
     Ft_MF_SkipModel | Ft_MF_SkipItemVis | Ft_MF_UnkUpdatePhys |
     Ft_MF_FreezeState;
 
-static MotionFlags const ftMr_MF_SpecialN ATTRIBUTE_USED =
+static MotionFlags const ftMr_MF_SpecialN =
     ftMr_MF_Special | Ft_MF_KeepFastFall | Ft_MF_SkipThrowException;
 
-static MotionFlags const ftMr_MF_SpecialHi ATTRIBUTE_USED =
+static MotionFlags const ftMr_MF_SpecialHi =
     ftMr_MF_Special | Ft_MF_KeepFastFall | Ft_MF_KeepGfx | Ft_MF_KeepSfx;
 
-static MotionFlags const ftMr_MF_SpecialLw ATTRIBUTE_USED =
+static MotionFlags const ftMr_MF_SpecialLw =
     ftMr_MF_Special | Ft_MF_KeepColAnimHitStatus | Ft_MF_KeepSfx;
 
-static MotionFlags const ftMr_MF_SpecialAirN ATTRIBUTE_USED =
+static MotionFlags const ftMr_MF_SpecialAirN =
     ftMr_MF_SpecialN | Ft_MF_SkipParasol;
 
-static MotionFlags const ftMr_MF_SpecialAirHi ATTRIBUTE_USED =
+static MotionFlags const ftMr_MF_SpecialAirHi =
     ftMr_MF_SpecialHi | Ft_MF_SkipParasol;
 
-static MotionFlags const ftMr_MF_SpecialAirLw ATTRIBUTE_USED =
+static MotionFlags const ftMr_MF_SpecialAirLw =
     ftMr_MF_SpecialLw | Ft_MF_SkipParasol;
 
-static MotionFlags const ftMr_MF_SpecialS ATTRIBUTE_USED =
+static MotionFlags const ftMr_MF_SpecialS =
     ftMr_MF_Special | Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipColAnim;
 
 typedef enum ftMario_MotionState {

@@ -1,8 +1,11 @@
 #ifndef GALE01_0D14E4
 #define GALE01_0D14E4
 
+#include <platform.h>
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include <placeholder.h>
 
@@ -219,7 +222,7 @@
 /* 0DA780 */ void ftCo_CatchCut_IASA(ftCo_GObj* gobj);
 /* 0DA784 */ void ftCo_CatchCut_Phys(ftCo_GObj* gobj);
 /* 0DA7E4 */ void ftCo_CatchCut_Coll(ftCo_GObj* gobj);
-/* 0DA824 */ f32 ftCo_800DA824(Fighter*);
+/* 0DA824 */ float ftCo_800DA824(Fighter*);
 /* 0DAC70 */ void ftCo_CapturePulledHi_Anim(ftCo_GObj* gobj);
 /* 0DAC74 */ void ftCo_CapturePulledHi_IASA(ftCo_GObj* gobj);
 /* 0DADE8 */ void ftCo_CapturePulledHi_Phys(ftCo_GObj* gobj);

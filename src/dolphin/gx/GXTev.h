@@ -1,7 +1,11 @@
 #ifndef DOLPHIN_GX_GXTEV_H
 #define DOLPHIN_GX_GXTEV_H
 
+#include <platform.h>
+#include <dolphin/gx/forward.h>
+
 #include <dolphin/gx/__types.h>
+#include <dolphin/gx/GXEnum.h>
 
 void GXSetTevOp(GXTevStageID id, GXTevMode mode);
 void GXSetTevColorIn(GXTevStageID stage, GXTevColorArg a, GXTevColorArg b,

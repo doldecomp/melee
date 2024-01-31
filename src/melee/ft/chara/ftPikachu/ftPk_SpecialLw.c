@@ -1,8 +1,7 @@
-#include "ft/forward.h"
+#include <platform.h>
 
 #include "ftPk_SpecialLw.h"
 
-#include "ftPk_Init.h"
 #include "math.h"
 
 #include "cm/camera.h"
@@ -10,11 +9,13 @@
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "it/it_27CF.h"
+#include "ft/types.h"
+#include "ftPikachu/types.h"
+#include "it/items/it_27CF.h"
 
 #include <dolphin/mtx/types.h>
 
@@ -56,8 +57,8 @@ void ftPk_SpecialLw_SetState_Unk0(HSD_GObj* gobj)
     fp->mv.pk.unk4.x4 = 3;
 }
 
-static inline f32 nested_sum_fabs(f32 fighter_pos_y, f32 pika_attr_xBC,
-                                  f32 pika_attr_xBC_abs, f32 vec_y)
+static inline float nested_sum_fabs(float fighter_pos_y, float pika_attr_xBC,
+                                    float pika_attr_xBC_abs, float vec_y)
 {
     if (fighter_pos_y + pika_attr_xBC_abs - vec_y < 0.0f) {
         return -(fighter_pos_y + fabs_inline(pika_attr_xBC) - vec_y);
@@ -84,8 +85,8 @@ bool ftPk_SpecialLw_8012765C(HSD_GObj* gobj)
     }
 
     if (fabs_inline(fp->cur_pos.x - vec.x) < fabs_inline(pika_attr->xC4)) {
-        f32 final_y_pos = nested_sum_fabs(fp->cur_pos.y, pika_attr->xBC,
-                                          fabs_inline(pika_attr->xBC), vec.y);
+        float final_y_pos = nested_sum_fabs(
+            fp->cur_pos.y, pika_attr->xBC, fabs_inline(pika_attr->xBC), vec.y);
 
         if ((final_y_pos < pika_attr->xC8) && fp->mv.pk.unk4.x0 != 0 &&
             !it_802B1DEC(fp->mv.pk.unk4.x0))
@@ -106,10 +107,7 @@ void ftPk_SpecialLw_SetState_Unk1(HSD_GObj* gobj)
 
 void ftPk_SpecialLw_SpawnEffect(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Vec3 pos;
     Vec3 ef_pos;
@@ -119,10 +117,7 @@ void ftPk_SpecialLw_SpawnEffect(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
     {
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4];
-#endif
 
         /// @todo Result of an inner function.
         bool result;
@@ -252,10 +247,7 @@ void ftPk_SpecialLw_ChangeMotion_Unk07(HSD_GObj* gobj)
 
 void ftPk_SpecialLwStart_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fighter_copy;
@@ -270,10 +262,7 @@ void ftPk_SpecialLwStart_Anim(HSD_GObj* gobj)
 
 void ftPk_SpecialAirLwStart_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fighter_copy;
@@ -288,10 +277,7 @@ void ftPk_SpecialAirLwStart_Anim(HSD_GObj* gobj)
 
 void ftPk_SpecialLwLoop0_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->mv.pk.unk4.x4 == 3) || fp->cmd_vars[0]) {
@@ -312,10 +298,7 @@ void ftPk_SpecialLwLoop0_Anim(HSD_GObj* gobj)
 
 void ftPk_SpecialAirLwLoop0_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->mv.pk.unk4.x4 == 3) || fp->cmd_vars[0]) {
@@ -329,7 +312,7 @@ void ftPk_SpecialAirLwLoop0_Anim(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, 365, 0, 0.0f, 1.0f, 0.0f, 0);
         fighter_copy->cmd_vars[0] = 0;
         fighter_copy->take_dmg_cb = NULL;
-        fighter_copy->self_vel.y = (f32) pika_attr->xB4;
+        fighter_copy->self_vel.y = (float) pika_attr->xB4;
         fp = GET_FIGHTER(gobj);
         efAsync_Spawn(gobj, &fp->x60C, 0, 1216,
                       fighter_copy->parts[FtPart_TopN].joint);
@@ -397,8 +380,8 @@ void ftPk_SpecialAirLwLoop1_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
-    f32 pika_B8 = pika_attr->xB8;
-    f32 terminal_velocity = fp->co_attrs.terminal_vel;
+    float pika_B8 = pika_attr->xB8;
+    float terminal_velocity = fp->co_attrs.terminal_vel;
     ftCommon_8007D494(fp, pika_B8, terminal_velocity);
     ftCommon_8007CF58(fp);
 }

@@ -2,7 +2,6 @@
 #define GALE01_10D740
 
 #include "ftDonkey/forward.h"
-#include <baselib/forward.h>
 
 #include "ft/types.h"
 

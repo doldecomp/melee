@@ -10,14 +10,12 @@
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 
 void ftCo_800BCDE0(ftCo_GObj* gobj, FtMotionId msid)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Thrown_Enter(gobj, msid, Ft_MF_None, 0);
     ftAnim_8006EBA4(gobj);
 }
@@ -34,10 +32,7 @@ void ftCo_800BCE64(ftCo_GObj* gobj, FtMotionId msid)
 #if SOLUTION == 0
     ftCo_Thrown_Enter(gobj, msid, mf, fp->cur_anim_frame);
 #elif SOLUTION == 1
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     fp->facing_dir = GET_FIGHTER(fp->victim_gobj)->facing_dir;
     fp->mv.co.capturekoopa.x0 = false;
     Fighter_ChangeMotionState(gobj, msid, mf, fp->cur_anim_frame, 1, 0,

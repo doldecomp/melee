@@ -1,22 +1,21 @@
 #include "forward.h"
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
-#include "ftMario/forward.h"
 
 #include "ftKb_Init.h"
 
 #include "types.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcamera.h"
+#include "ft/ftcolanim.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "it/it_26B1.h"
+#include "pl/player.h"
 
-#include <dolphin/mtx/types.h>
+#include <baselib/random.h>
 
 MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount] = {
     {
@@ -2898,7 +2897,7 @@ Vec3 ftKb_Init_803CB758[] = {
     { +4, +4, +4 },
 };
 
-f32 ftKb_Init_803CB770[] = {
+float ftKb_Init_803CB770[] = {
     -1, -0.75, -0.5, -0.25, 0, +0.25, +0.5, +0.75, +1,
 };
 
@@ -2944,11 +2943,11 @@ jtbl_t ftKb_Init_803CB7DC = {
 
 uint ftKb_Init_803CB828[] = { 0x00030DB9, 0x00030DBC, 0x00030DBF, 0x00030DC2 };
 
-f32 const ftKb_Init_803B7548[10] = { 0 };
+float const ftKb_Init_803B7548[10] = { 0 };
 Vec3 const ftKb_Init_803B7570 = { 0, 4, 0 };
 Vec3 const ftKb_Init_803B757C = { 0, 4, 0 };
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void ftKb_Init_800EE528(void)
 { // clang-format off
@@ -3100,32 +3099,30 @@ void ftKb_Init_800EE7B8(HSD_GObj* gobj)
 /// @file
 /// @todo Matching, but needs more data moved over for DOL match
 
-#if false
-
 void ftKb_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     s32 _[2];
     Fighter* fp = GET_FIGHTER(gobj);
-    ftKirbyAttributes* da = fp->dat_attrs;
-    switch (fp->fv.kb.x2238) {
+    ftKb_DatAttrs* da = fp->dat_attrs;
+    switch (fp->fv.kb.victim_kind) {
     case 3:
-        if (fp->fv.kb.x22E8 == da->x190) {
+        if (fp->fv.kb.xBC == da->x190) {
             ftCo_800BFFD0(fp, 58, 0);
         }
         break;
     case 13:
-        if (fp->fv.kb.x22D4 == da->x168) {
+        if (fp->fv.kb.xA8 == da->x168) {
             ftCo_800BFFD0(fp, 54, 0);
         }
         break;
     case 16:
-        if (fp->fv.kb.x22C8 == da->x384) {
+        if (fp->fv.kb.x9C == da->x384) {
             ftCo_800BFFD0(fp, 93, 0);
             return;
         }
         break;
     case 7:
-        if (fp->fv.kb.x22E0 == 6) {
+        if (fp->fv.kb.xB4 == 6) {
             ftCo_800BFFD0(fp, 87, 0);
         }
         break;
@@ -3149,7 +3146,7 @@ void ftKb_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 
 void ftKb_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(gobj, ftKirbyAttributes);
+    COPY_ATTRS(gobj, ftKb_DatAttrs);
 }
 
 void ftKb_Init_OnKnockbackEnter(HSD_GObj* gobj)
@@ -3161,5 +3158,3 @@ void ftKb_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, 1);
 }
-
-#endif

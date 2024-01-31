@@ -4,8 +4,6 @@
 #include <platform.h>
 #include "ftCommon/forward.h"
 
-#include <placeholder.h>
-
 /* 0BC9C8 */ void ftCo_800BC9C8(ftCo_GObj* gobj);
 /* 0BCA54 */ void ftCo_CaptureDamageKoopa_Anim(ftCo_GObj* gobj);
 /* 0BCAE8 */ void ftCo_CaptureDamageKoopa_IASA(ftCo_GObj* gobj);

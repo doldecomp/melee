@@ -1,30 +1,28 @@
 #include <platform.h>
-#include "ft/forward.h"
+#include "ftCommon/forward.h"
+#include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ftLk_AttackAir.h"
 
 #include "ftLk_Init.h"
 
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/fighter.h"
 #include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_AttackAir.h"
 #include "ftLink/types.h"
-#include "it/it_27CF.h"
-#include "lb/lb_00B0.h"
+
+#include <common_structs.h>
 
 /* 0EB484 */ static void lwOnHit(HSD_GObj* gobj);
 /* 0EB528 */ static void lwOnAnim(HSD_GObj* gobj);
 
 void ftLk_AttackAir_800EB3BC(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x5F8 == 0) {
         ftLk_DatAttrs* da = fp->dat_attrs;
@@ -48,10 +46,7 @@ void ftLk_AttackAir_Enter(HSD_GObj* gobj)
 
 static void lwOnHit(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
     float frame_len = da->attackairlw_hit_anim_frame_end -
@@ -76,10 +71,7 @@ static void lwDoAnimHitCapsule(HSD_GObj* gobj, ssize_t idx)
 
 static void lwOnAnim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[40];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     float frame_start = fp->mv.lk.attackair.lw_frame_start;
     ftLk_DatAttrs* da = fp->dat_attrs;

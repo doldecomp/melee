@@ -4,6 +4,7 @@
 #define MELEE_IT_ITCOMMONITEMS_H
 
 #include <platform.h>
+#include <baselib/forward.h>
 
 #include <placeholder.h>
 
@@ -54,7 +55,7 @@ typedef struct BobOmbVars {
     s32 xDE0;
     s32 xDE4;
     s32 xDE8;
-    f32 xDEC;
+    float xDEC;
 } BobOmbVars;
 
 typedef struct HeartContainerVars {
@@ -84,10 +85,12 @@ typedef struct WhispyAppleVars {
     s32 xDD4_heal;
 } WhispyAppleVars;
 
-typedef struct itUnkAttributes // Might be shared?
-{
-    f32 x0_float;
-    f32 x4_float;
+/// @remarks Might be shared?
+typedef struct itUnkAttributes {
+    float x0_float;
+    float x4_float;
+    float x8;
+    float xC;
 } itUnkAttributes;
 
 typedef struct {

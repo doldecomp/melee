@@ -2,6 +2,7 @@
 #define _vi_h_
 
 #include <platform.h>
+#include <dolphin/gx/forward.h>
 
 #include <placeholder.h>
 #include <dolphin/gx/types.h>

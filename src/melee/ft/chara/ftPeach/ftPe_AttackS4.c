@@ -1,16 +1,16 @@
 #include <platform.h>
-#include "forward.h"
-#include "ft/forward.h"
 
 #include "ftPe_AttackS4.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ftanim.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Wait.h"
+#include "ftPeach/types.h"
 
-#include <baselib/gobj.h>
+#include <baselib/random.h>
 
 void ftPe_AttackS4_Enter(HSD_GObj* gobj)
 {

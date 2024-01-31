@@ -1,10 +1,7 @@
 #ifndef GALE01_11F99C
 #define GALE01_11F99C
 
-#include "ftPopo/forward.h"
 #include <baselib/forward.h>
-
-#include "ft/types.h"
 
 /* 11F68C */ void ftPp_SpecialS_8011F68C(HSD_GObj* gobj);
 /* 11F6FC */ bool ftPp_SpecialS_8011F6FC(HSD_GObj* gobj);

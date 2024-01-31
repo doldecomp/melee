@@ -23,9 +23,9 @@
 /* 14D3F0 */ void ftGw_SpecialAirLw_Coll(HSD_GObj* gobj);
 /* 14D42C */ void ftGw_SpecialLw_GroundToAir(HSD_GObj* gobj);
 /* 14D4DC */ void ftGw_SpecialAirLw_AirToGround(HSD_GObj* gobj);
-/* 14D58C */ void ftGw_SpecialLw_UpdateAction(HSD_GObj* gobj, f32 animFrame);
+/* 14D58C */ void ftGw_SpecialLw_UpdateAction(HSD_GObj* gobj, float animFrame);
 /* 14D620 */ void ftGw_SpecialAirLw_UpdateAction(HSD_GObj* gobj,
-                                                 f32 animFrame);
+                                                 float animFrame);
 /* 14D6B4 */ void ftGw_SpecialLwCatch_Anim(HSD_GObj* gobj);
 /* 14D774 */ void ftGw_SpecialAirLwCatch_Anim(HSD_GObj* gobj);
 /* 14D834 */ void ftGw_SpecialLwCatch_IASA(HSD_GObj* gobj);

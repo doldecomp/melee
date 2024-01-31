@@ -3,6 +3,7 @@
 #include "types.h"
 
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 char ftBo_Init_DatFilename[] = "PlBo.dat";

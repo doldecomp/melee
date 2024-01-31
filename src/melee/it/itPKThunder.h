@@ -1,17 +1,17 @@
-#ifndef _itPKThunder_h_
-#define _itPKThunder_h_
+#ifndef MELEE_IT_ITPKTHUNDER_H
+#define MELEE_IT_ITPKTHUNDER_H
 
 #include <platform.h>
+#include <baselib/forward.h>
 
 #include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
 
 typedef struct itPKThunderAttributes {
-    f32 x0_PKTHUNDER_LIFETIME;
-    f32 x4_PKTHUNDER_SPEED;
-    f32 x8_PKTHUNDER_SPAWN_ANGLE;
-    f32 xC_PKTHUNDER_STICK_THRESHOLD;
-    f32 x10_PKTHUNDER_TURN_RADIUS;
+    float x0_PKTHUNDER_LIFETIME;
+    float x4_PKTHUNDER_SPEED;
+    float x8_PKTHUNDER_SPAWN_ANGLE;
+    float xC_PKTHUNDER_STICK_THRESHOLD;
+    float x10_PKTHUNDER_TURN_RADIUS;
 } itPKThunderAttributes;
 
 typedef struct PKThunderVars {
@@ -32,22 +32,22 @@ typedef struct PKThunderVars {
     Vec3 xE8C;
     Vec3 xE98;
     Vec3 xEA0;
-    f32 xEAC; // PK Thunder release angles?
-    f32 xEB0;
-    f32 xEB4;
-    f32 xEB8;
-    f32 xEBC;
-    f32 xEC0;
-    f32 xEC4;
-    f32 xEC8;
-    f32 xECC;
-    f32 xED0;
-    f32 xED4;
-    f32 xED8;
-    f32 xEDC;
-    f32 xEE0;
-    f32 xEE4;
-    f32 xEE8;
+    float xEAC; // PK Thunder release angles?
+    float xEB0;
+    float xEB4;
+    float xEB8;
+    float xEBC;
+    float xEC0;
+    float xEC4;
+    float xEC8;
+    float xECC;
+    float xED0;
+    float xED4;
+    float xED8;
+    float xEDC;
+    float xEE0;
+    float xEE4;
+    float xEE8;
     s32 xEEC;
     s32 xEF0;
     HSD_GObj* xEF4;

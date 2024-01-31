@@ -1,17 +1,15 @@
 #include "ftcamera.h"
 
-#include "fighter.h"
 #include "ftlib.h"
-#include "inlines.h"
+
+#include "ft/fighter.h"
+#include "ft/types.h"
+#include "gr/stage.h"
 
 #include <dolphin/mtx/types.h>
+#include <baselib/debug.h>
 
-struct UnkFloat6_Camera {
-    Vec3 x0;
-    Vec3 xC;
-};
-
-void ftCamera_80076018(UnkFloat6_Camera* in, UnkFloat6_Camera* out, f32 mul)
+void ftCamera_80076018(UnkFloat6_Camera* in, UnkFloat6_Camera* out, float mul)
 {
     out->x0.x = in->x0.x * mul;
     out->x0.y = in->x0.y * mul;
@@ -99,8 +97,8 @@ void ftCamera_80076320(HSD_GObj* gobj)
     Vec3 center_pos;
     Fighter* fp = gobj->user_data;
     CameraBox* camera_box;
-    f32 temp_f1;
-    f32 temp_f31;
+    float temp_f1;
+    float temp_f31;
 
     camera_box = fp->x890_cameraBox;
     ftCamera_UpdateCameraBox(gobj); // Fighter_UpdateCameraBox

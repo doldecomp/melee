@@ -1,4 +1,5 @@
 #include <platform.h>
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_CaptureKoopa.h"
 
@@ -8,8 +9,12 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftCaptain/types.h"
+#include "ftCommon/types.h"
 #include "ftKoopa/ftKp_Init.h"
 
 #include <baselib/jobj.h>

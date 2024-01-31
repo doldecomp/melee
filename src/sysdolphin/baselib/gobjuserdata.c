@@ -1,4 +1,7 @@
-#include <baselib/gobjuserdata.h>
+#include "gobjuserdata.h"
+
+#include "debug.h"
+#include "gobj.h"
 
 void GObj_InitUserData(HSD_GObj* gobj, u8 kind,
                        void (*remove_func)(void* user_data), void* data)

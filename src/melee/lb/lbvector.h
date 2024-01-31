@@ -1,13 +1,10 @@
-#ifndef _lbvector_h_
-#define _lbvector_h_
+#ifndef GALE01_00D2EC
+#define GALE01_00D2EC
 
-#include "lb/lbrefract.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
-#include <dolphin/gx/GXTransform.h>
-#include <dolphin/mtx/types.h>
-#include <baselib/cobj.h>
-
-extern inline float sqrtf_accurate(float x);
+#include <MetroTRK/intrinsics.h>
 
 static float lbVector_Len(Vec3* vec);
 static float lbVector_Len_xy(Vec3* vec);

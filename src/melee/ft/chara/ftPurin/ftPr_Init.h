@@ -1,7 +1,9 @@
 #ifndef GALE01_13C2F8
 #define GALE01_13C2F8
 
+#include <platform.h>
 #include "ftPurin/forward.h"
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -65,7 +67,7 @@
 /* 13D8B0 */ void ftPr_SpecialS_8013D8B0(HSD_GObj* gobj);
 /* 13D8E4 */ void ftPr_SpecialS_8013D8E4(HSD_GObj* gobj);
 /* 13DA24 */ void ftPr_SpecialS_8013DA24(HSD_GObj* gobj, bool unk,
-                                         MotionFlags flags, f32 anim_start);
+                                         MotionFlags flags, float anim_start);
 /* 13DC64 */ void ftPr_SpecialS_8013DC64(HSD_GObj* gobj);
 /* 13DD54 */ void ftPr_SpecialS_8013DD54(HSD_GObj* gobj);
 /* 13DEA8 */ void ftPr_SpecialN_Enter(HSD_GObj* gobj);

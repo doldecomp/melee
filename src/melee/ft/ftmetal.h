@@ -1,6 +1,7 @@
 #ifndef GALE01_0C8170
 #define GALE01_0C8170
 
+#include <platform.h>
 #include "ftCommon/forward.h"
 
 #include <placeholder.h>

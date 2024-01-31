@@ -1,5 +1,5 @@
 #include <platform.h>
-#include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_CliffClimb.h"
 
@@ -9,12 +9,16 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 #include "mp/mplib.h"
+
+#include <common_structs.h>
 
 /* 09AAFC */ static bool ftCo_8009AAFC(ftCo_GObj* gobj, bool arg1,
                                        float stick_x, float stick_angle);
@@ -95,10 +99,7 @@ void ftCo_CliffClimb_Phys(ftCo_GObj* gobj)
     if (fp->ground_or_air == GA_Air) {
         if (mpLib_80054ED8(fp->mv.co.cliff.ledge_id)) {
             Vec3 vec;
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[8] = { 0 };
-#endif
             if (fp->facing_dir > 0) {
                 mpLib_80053ECC(fp->mv.co.cliff.ledge_id, &vec);
             } else {
@@ -122,10 +123,7 @@ void ftCo_CliffClimb_Phys(ftCo_GObj* gobj)
 
 void ftCo_CliffClimb_Coll(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Air) {
         if (ft_800821DC(gobj)) {

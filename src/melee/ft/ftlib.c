@@ -1,28 +1,35 @@
+#include "ftCommon/forward.h"
 #include "it/forward.h"
 
 #include "ftlib.h"
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftchangeparam.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/ftmetal.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ftGameWatch/ftGw_Init.h"
 #include "ftKirby/ftKb_Init.h"
 #include "gm/gm_1601.h"
+#include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbrefract.h"
 #include "pl/pl_0371.h"
 #include "pl/player.h"
 
-#include <dolphin/mtx/types.h>
-#include <baselib/jobj.h>
+#include <common_structs.h>
+#include <baselib/cobj.h>
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
+#include <baselib/random.h>
 #include <baselib/rumble.h>
 
 extern struct {
@@ -44,10 +51,7 @@ s32 ftLib_800860C4(void)
 
 bool ftLib_800860E8(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     HSD_GObj* cur;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
@@ -61,10 +65,7 @@ bool ftLib_800860E8(void)
 
 bool ftLib_80086140(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     HSD_GObj* cur;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
@@ -84,10 +85,7 @@ HSD_GObj* ftLib_80086198(HSD_GObj* gobj)
     HSD_GObj* result;
     int min_percent = 999;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (gobj != NULL) {
         fp = GET_FIGHTER(gobj);
@@ -125,20 +123,17 @@ HSD_GObj* ftLib_80086198(HSD_GObj* gobj)
 HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
 {
     Vec3 cur_v;
-    f32 dist;
-    f32 dx;
-    f32 dy;
+    float dist;
+    float dx;
+    float dy;
     Fighter* cur_fp;
     Fighter* fp;
     HSD_GObj* cur;
     HSD_GObj* result;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
-    f32 min_dist = F32_MAX;
+    float min_dist = F32_MAX;
 
     if (gobj != NULL) {
         fp = gobj->user_data;
@@ -175,21 +170,18 @@ HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
 }
 
 // get closest opposing fp, on given side (left/right)
-HSD_GObj* ftLib_80086368(Vec3* v, HSD_GObj* gobj, f32 facing_dir)
+HSD_GObj* ftLib_80086368(Vec3* v, HSD_GObj* gobj, float facing_dir)
 {
     Vec3 sp24;
-    f32 dx, dy, diff;
+    float dx, dy, diff;
     Fighter* cur_fp;
     Fighter* fp;
     HSD_GObj* cur;
     HSD_GObj* result;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
-    f32 min_diff = F32_MAX;
+    float min_diff = F32_MAX;
 
     if (gobj != NULL) {
         fp = gobj->user_data;
@@ -229,7 +221,7 @@ HSD_GObj* ftLib_80086368(Vec3* v, HSD_GObj* gobj, f32 facing_dir)
     return result;
 }
 
-inline s32 sgn(f32 x)
+inline s32 sgn(float x)
 {
     if (x < 0.0f) {
         return -1;
@@ -238,16 +230,13 @@ inline s32 sgn(f32 x)
     }
 }
 
-f32 ftLib_800864A8(Vec3* v, HSD_GObj* gobj)
+float ftLib_800864A8(Vec3* v, HSD_GObj* gobj)
 {
     Vec3 vec;
     Fighter* fp;
     HSD_GObj* cur;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     int result = 0;
 
@@ -286,7 +275,7 @@ f32 ftLib_800864A8(Vec3* v, HSD_GObj* gobj)
     }
 }
 
-f32 ftLib_800865C0(HSD_GObj* gobj)
+float ftLib_800865C0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->facing_dir;
@@ -298,7 +287,7 @@ s32 ftLib_800865CC(HSD_GObj* gobj)
     return fp->ground_or_air;
 }
 
-void ftLib_800865D8(HSD_GObj* gobj, f32* x, f32* y)
+void ftLib_800865D8(HSD_GObj* gobj, float* x, float* y)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     *x = fp->input.lstick.x;
@@ -311,10 +300,10 @@ void* ftLib_800865F0(HSD_GObj* gobj)
     return fp->parts[ftParts_8007500C(fp, 4)].joint;
 }
 
-void* ftLib_80086630(HSD_GObj* gobj, s32 i)
+void* ftLib_80086630(HSD_GObj* gobj, Fighter_Part part)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->parts[i].joint;
+    return fp->parts[part].joint;
 }
 
 void ftLib_80086644(HSD_GObj* gobj, Vec3* pos)
@@ -335,7 +324,7 @@ void ftLib_80086684(HSD_GObj* gobj, Vec3* pos)
     *pos = fp->prev_pos;
 }
 
-void ftLib_SetScale(HSD_GObj* gobj, f32 val)
+void ftLib_SetScale(HSD_GObj* gobj, float val)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x34_scale.y = val;
@@ -404,10 +393,7 @@ void ftLib_800867E8(HSD_GObj* gobj)
 
 void ftLib_80086824(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     HSD_GObj* cur;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
@@ -462,7 +448,7 @@ CollData* ftLib_80086984(HSD_GObj* gobj)
     return Fighter_GetCollData(fp);
 }
 
-inline void vector_add(Vec3* dst, Vec3* src, f32 x, f32 y, f32 z)
+inline void vector_add(Vec3* dst, Vec3* src, float x, float y, float z)
 {
     dst->x = src->x + x;
     dst->y = src->y + y;
@@ -472,24 +458,24 @@ inline void vector_add(Vec3* dst, Vec3* src, f32 x, f32 y, f32 z)
 void ftLib_80086990(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    f32 tmp = 0.5f * (fp->coll_data.xA4_ecbCurrCorrect.top.y +
-                      fp->coll_data.xA4_ecbCurrCorrect.bottom.y);
+    float tmp = 0.5f * (fp->coll_data.xA4_ecbCurrCorrect.top.y +
+                        fp->coll_data.xA4_ecbCurrCorrect.bottom.y);
     vector_add(v, &fp->cur_pos, 0, tmp, 0);
 }
 
-f32 ftLib_800869D4(HSD_GObj* gobj)
+float ftLib_800869D4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return ftCommon_GetModelScale(fp);
 }
 
-f32 ftLib_800869F8(HSD_GObj* gobj)
+float ftLib_800869F8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x34_scale.x * fp->co_attrs.model_scaling;
 }
 
-f32 ftLib_80086A0C(HSD_GObj* gobj)
+float ftLib_80086A0C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x34_scale.y;
@@ -510,7 +496,7 @@ bool ftLib_80086A18(HSD_GObj* gobj)
     return result;
 }
 
-void ftLib_80086A4C(HSD_GObj* gobj, f32 val)
+void ftLib_80086A4C(HSD_GObj* gobj, float val)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->dmg.x1958 = val;
@@ -529,10 +515,7 @@ bool ftLib_80086A58(HSD_GObj* gobj, S32Vec2* x)
 
 bool ftLib_80086A8C(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     struct {
         u8 x0_fill[0x28];
@@ -574,7 +557,7 @@ CameraBox* ftLib_80086B74(HSD_GObj* gobj)
     return fp->x890_cameraBox;
 }
 
-f32 ftLib_80086B80(HSD_GObj* gobj)
+float ftLib_80086B80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x890_cameraBox->x48.z;
@@ -632,10 +615,7 @@ void ftLib_80086C18(HSD_GObj* gobj, s32 arg1, s32 arg2)
 
 void ftLib_80086C9C(s32 arg0, s32 arg1)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     HSD_GObj* cur;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
@@ -650,10 +630,7 @@ void ftLib_80086D40(HSD_GObj* arg0, s32 arg1, s32 arg2)
 
 void ftLib_80086DC4(s32 arg0, s32 arg1)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     HSD_GObj* cur;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
@@ -665,7 +642,7 @@ void ftLib_80086E68(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_8003544C(fp->player_id, fp->x221F_b4)) {
-        HSD_Rumble_80378280(fp->x618_player_id, 1);
+        HSD_PadRumbleRemoveId(fp->x618_player_id, 1);
     }
 }
 
@@ -704,7 +681,7 @@ bool ftLib_80086F4C(HSD_GObj* gobj)
     return false;
 }
 
-f32 ftLib_80086F80(HSD_GObj* gobj)
+float ftLib_80086F80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x221E_b0) {
@@ -952,7 +929,7 @@ HSD_GObj* ftLib_8008741C(u32 i)
     return NULL;
 }
 
-f32 ftLib_80087454(HSD_GObj* gobj)
+float ftLib_80087454(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->dmg.x18A4_knockbackMagnitude;

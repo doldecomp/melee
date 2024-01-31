@@ -1,13 +1,20 @@
+#include <platform.h>
+#include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
+
 #include "gr/grfigure1.h"
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/types.h"
 #include "lb/lb_00F9.h"
 
-#include <dolphin/os/os.h>
+#include <dolphin/os/OSError.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 
 static void grFigure1_8020DFDC(int);
 static void grFigure1_8020DFE0(void);
@@ -150,10 +157,7 @@ static void grFigure1_8020E1FC(HSD_GObj* arg0) {}
 
 static void grFigure1_8020E200(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);

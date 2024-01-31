@@ -13,37 +13,44 @@
 #include "math.h"
 
 #include "ef/eflib.h"
-#include "ft/ft_0C31.h"
+#include "ft/ft_0881.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftchangeparam.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftmaterial.h"
 #include "ft/ftmetal.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_HammerWait.h"
 #include "ftCommon/ftCo_ItemGet.h"
 #include "gm/gm_1601.h"
 #include "it/it_26B1.h"
-#include "it/it_27CF.h"
 #include "it/item.h"
+#include "it/items/it_27CF.h"
 #include "it/items/itsword.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbrefract.h"
 #include "mp/mplib.h"
 #include "pl/pl_0371.h"
+#include "pl/player.h"
 #include "un/un_2FC9.h"
 
-#include <dolphin/mtx/types.h>
-#include <dolphin/os/os.h>
+#include <common_structs.h>
+#include <dolphin/os/OSError.h>
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 #include <baselib/rumble.h>
 #include <melee/it/items/itpeachparasol.h>
 
 const Vec3 ftCo_803B74A0 = { 0 };
 
-void ftCommon_8007C930(Fighter* fp, f32 result)
+void ftCommon_8007C930(Fighter* fp, float result)
 {
-    f32 absvel = fabs_inline(fp->gr_vel);
+    float absvel = fabs_inline(fp->gr_vel);
     if (fabs_inline(result) > absvel) {
         result = -fp->gr_vel;
     } else if (fp->gr_vel > 0) {
@@ -52,14 +59,14 @@ void ftCommon_8007C930(Fighter* fp, f32 result)
     fp->xE4_ground_accel_1 = result;
 }
 
-void ftCommon_8007C98C(Fighter* fp, f32 arg8, f32 arg9, f32 argA)
+void ftCommon_8007C98C(Fighter* fp, float arg8, float arg9, float argA)
 {
-    f32 temp_f1;
-    f32 phi_f0;
-    f32 phi_f1;
-    f32 phi_f3;
-    f32 phi_f1_2;
-    f32 result;
+    float temp_f1;
+    float phi_f0;
+    float phi_f1;
+    float phi_f3;
+    float phi_f1_2;
+    float result;
 
     phi_f3 = argA;
     result = arg8;
@@ -122,11 +129,11 @@ void ftCommon_8007CA80(Fighter* fp, float result, float arg2, float arg3)
     fp->xE4_ground_accel_1 = result;
 }
 
-void ftCommon_8007CADC(Fighter* fp, f32 arg8, f32 arg9, f32 argA)
+void ftCommon_8007CADC(Fighter* fp, float arg8, float arg9, float argA)
 {
-    f32 phi_f1 = fp->input.lstick.x;
-    f32 phi_f2;
-    f32 phi_f4;
+    float phi_f1 = fp->input.lstick.x;
+    float phi_f2;
+    float phi_f4;
 
     if (fabs_inline(phi_f1) >= arg8) {
         phi_f2 = phi_f1 * arg9;
@@ -140,14 +147,11 @@ void ftCommon_8007CADC(Fighter* fp, f32 arg8, f32 arg9, f32 argA)
 
 void ftCommon_8007CB74(HSD_GObj* gobj)
 {
-    f32 temp_f1;
+    float temp_f1;
     Vec3* ground_normal;
     Fighter* fp = gobj->user_data;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ground_normal = &fp->coll_data.floor.normal;
     temp_f1 = ft_GetGroundFrictionMultiplier(fp);
@@ -175,7 +179,7 @@ HSD_GObj* ftCommon_8007CC1C(HSD_GObj* gobj)
     return gobj;
 }
 
-void ftCommon_8007CC78(Fighter* fp, f32 max)
+void ftCommon_8007CC78(Fighter* fp, float max)
 {
     if (fp->gr_vel < -max) {
         fp->gr_vel = -max;
@@ -184,7 +188,7 @@ void ftCommon_8007CC78(Fighter* fp, f32 max)
     }
 }
 
-void ftCommon_8007CCA0(Fighter* fp, f32 arg1)
+void ftCommon_8007CCA0(Fighter* fp, float arg1)
 {
     if (fp->xF0_ground_kb_vel < 0) {
         fp->xF0_ground_kb_vel = fp->xF0_ground_kb_vel + arg1;
@@ -216,9 +220,9 @@ void ftCommon_8007CCE8(Fighter* fp)
     }
 }
 
-f32 ftCommon_8007CD6C(f32 value, f32 decrement)
+float ftCommon_8007CD6C(float value, float decrement)
 {
-    f32 result = value;
+    float result = value;
     if (value > 0) {
         result = value - decrement;
         if (result < 0) {
@@ -244,7 +248,7 @@ char ftCo_803C0D64[] = "fp->kind == Ft_Kind_Sandbag";
 #define HSD_ASSERT(line, cond)                                                \
     ((cond) ? ((void) 0) : __assert(ftCo_803C0D58, line, #cond))
 
-asm f32 ftCommon_8007CDA4(Fighter*)
+asm float ftCommon_8007CDA4(Fighter*)
 { // clang-format off
     nofralloc
 /* 8007CDA4 00079984  7C 08 02 A6 */   mflr r0
@@ -271,7 +275,7 @@ lbl_8007CDDC:
 /* 8007CDF4 000799D4  4E 80 00 20 */   blr
 } // clang-format on
 
-asm f32 ftCommon_8007CDF8(Fighter*)
+asm float ftCommon_8007CDF8(Fighter*)
 { // clang-format off
     nofralloc
 /* 8007CDF8 000799D8  7C 08 02 A6 */	mflr r0
@@ -305,20 +309,20 @@ lbl_8007CE30:
 #define kind kind
 
 static const int Ft_Kind_Sandbag = 0x20;
-f32 ftCommon_8007CDA4(Fighter* fp)
+float ftCommon_8007CDA4(Fighter* fp)
 {
     HSD_ASSERT(299, fp->kind == Ft_Kind_Sandbag);
-    return ((f32*) fp->dat_attrs)[0];
+    return ((float*) fp->dat_attrs)[0];
 }
 
-f32 ftCommon_8007CDF8(Fighter* fp)
+float ftCommon_8007CDF8(Fighter* fp)
 {
     HSD_ASSERT(308, fp->kind == Ft_Kind_Sandbag);
-    return ((f32*) fp->dat_attrs)[1];
+    return ((float*) fp->dat_attrs)[1];
 }
 #endif
 
-void ftCommon_8007CE4C(Fighter* fp, f32 val)
+void ftCommon_8007CE4C(Fighter* fp, float val)
 {
     if (fp->xF4_ground_attacker_shield_kb_vel < 0) {
         fp->xF4_ground_attacker_shield_kb_vel += val;
@@ -333,9 +337,9 @@ void ftCommon_8007CE4C(Fighter* fp, f32 val)
     }
 }
 
-void ftCommon_8007CE94(Fighter* fp, f32 val)
+void ftCommon_8007CE94(Fighter* fp, float val)
 {
-    f32 phi_f2 = fabs_inline(fp->self_vel.x);
+    float phi_f2 = fabs_inline(fp->self_vel.x);
     if (fabs_inline(val) >= phi_f2) {
         val = -fp->self_vel.x;
     } else if (fp->self_vel.x > 0) {
@@ -348,9 +352,9 @@ void ftCommon_8007CE94(Fighter* fp, f32 val)
 /// @todo This surely calls #ftCommon_8007CE94 somehow...
 void ftCommon_8007CEF4(Fighter* fp)
 {
-    f32 result = fp->co_attrs.aerial_friction;
-    f32 lhs = fabs_inline(result);
-    f32 phi_f1 = fabs_inline(fp->self_vel.x);
+    float result = fp->co_attrs.aerial_friction;
+    float lhs = fabs_inline(result);
+    float phi_f1 = fabs_inline(fp->self_vel.x);
     if (fabs_inline(result) >= phi_f1) {
         result = -fp->self_vel.x;
     } else if (fp->self_vel.x > 0) {
@@ -368,10 +372,10 @@ void ftCommon_8007CEF4(Fighter* fp)
 
 bool ftCommon_8007CF58(Fighter* fp)
 {
-    f32 temp_f3;
-    f32 phi_f1;
-    f32 phi_f0;
-    f32 phi_f2;
+    float temp_f3;
+    float phi_f1;
+    float phi_f0;
+    float phi_f2;
     struct ftCo_DatAttrs* ca = &fp->co_attrs;
 
     temp_f3 = fp->self_vel.x;
@@ -401,25 +405,22 @@ bool ftCommon_8007CF58(Fighter* fp)
     }
 }
 
-bool ftCommon_8007D050(Fighter* fp, f32 val)
+bool ftCommon_8007D050(Fighter* fp, float val)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
-    f32 temp_f3;
-    f32 phi_f0_2;
-    f32 phi_f1;
-    f32 phi_f2;
-    f32 phi_f0_3;
-    f32 phi_f1_2;
+    float temp_f3;
+    float phi_f0_2;
+    float phi_f1;
+    float phi_f2;
+    float phi_f0_3;
+    float phi_f1_2;
 
     temp_f3 = fp->self_vel.x;
 
 #ifdef MUST_MATCH
     {
-        f32 _ = fabs_inline(temp_f3);
+        float _ = fabs_inline(temp_f3);
     }
 #endif
 
@@ -448,15 +449,16 @@ bool ftCommon_8007D050(Fighter* fp, f32 val)
     }
 }
 
-void ftCommon_8007D140(Fighter* fp, f32 arg8, f32 arg9, f32 argA)
+void ftCommon_8007D140(Fighter* fp, float arg8, float arg9, float argA)
 {
     ftCommon_8007D174(fp, fp->self_vel.x, arg8, arg9, argA);
 }
 
-void ftCommon_8007D174(Fighter* fp, f32 arg8, f32 arg9, f32 argA, f32 argB)
+void ftCommon_8007D174(Fighter* fp, float arg8, float arg9, float argA,
+                       float argB)
 {
-    f32 phi_f1;
-    f32 phi_f2;
+    float phi_f1;
+    float phi_f2;
 
     phi_f2 = argB;
     if (!argA) {
@@ -504,11 +506,11 @@ void ftCommon_8007D268(Fighter* fp)
     ftCommon_8007D28C(fp, fp->self_vel.x);
 }
 
-void ftCommon_8007D28C(Fighter* fp, f32 arg8)
+void ftCommon_8007D28C(Fighter* fp, float arg8)
 {
-    f32 tmp;
-    f32 phi_f3;
-    f32 f5;
+    float tmp;
+    float phi_f3;
+    float f5;
     struct ftCo_DatAttrs* temp_r4;
 
     f5 = fp->input.lstick.x;
@@ -524,9 +526,9 @@ void ftCommon_8007D28C(Fighter* fp, f32 arg8)
                       temp_r4->aerial_friction);
 }
 
-void ftCommon_8007D2E8(Fighter* fp, f32 arg8, f32 arg9)
+void ftCommon_8007D2E8(Fighter* fp, float arg8, float arg9)
 {
-    f32 result = arg8;
+    float result = arg8;
     if (!arg9) {
         result = -fp->self_vel.x;
     } else if (!((fp->self_vel.x * arg8) < 0)) {
@@ -543,10 +545,10 @@ void ftCommon_8007D2E8(Fighter* fp, f32 arg8, f32 arg9)
     fp->x74_anim_vel.x = result;
 }
 
-void ftCommon_8007D344(Fighter* fp, f32 arg8, f32 arg9, f32 argA)
+void ftCommon_8007D344(Fighter* fp, float arg8, float arg9, float argA)
 {
-    f32 argx, argy;
-    f32 friction;
+    float argx, argy;
+    float friction;
 
     if (fabs_inline(fp->input.lstick.x) >= arg8) {
         argx = fp->input.lstick.x * arg9;
@@ -559,10 +561,10 @@ void ftCommon_8007D344(Fighter* fp, f32 arg8, f32 arg9, f32 argA)
     ftCommon_8007D174(fp, fp->self_vel.x, argx, argy, friction);
 }
 
-void ftCommon_8007D3A8(Fighter* fp, f32 arg8, f32 arg9, f32 argA)
+void ftCommon_8007D3A8(Fighter* fp, float arg8, float arg9, float argA)
 {
-    f32 phi_f2;
-    f32 phi_f4;
+    float phi_f2;
+    float phi_f4;
 
     if (fabs_inline(fp->input.lstick.x) >= arg8) {
         phi_f2 = fp->input.lstick.x * arg9;
@@ -575,9 +577,9 @@ void ftCommon_8007D3A8(Fighter* fp, f32 arg8, f32 arg9, f32 argA)
     ftCommon_8007D2E8(fp, phi_f2, phi_f4);
 }
 
-void ftCommon_8007D440(Fighter* fp, f32 val)
+void ftCommon_8007D440(Fighter* fp, float val)
 {
-    f32 temp_f0 = fp->self_vel.x;
+    float temp_f0 = fp->self_vel.x;
     if (temp_f0 < -val) {
         fp->self_vel.x = -val;
     } else if (temp_f0 > val) {
@@ -594,7 +596,7 @@ void ftCommon_8007D468(Fighter* fp)
     }
 }
 
-void ftCommon_8007D494(Fighter* fp, f32 arg8, f32 arg9)
+void ftCommon_8007D494(Fighter* fp, float arg8, float arg9)
 {
     fp->self_vel.y -= arg8;
     if (fp->self_vel.y < -arg9) {
@@ -604,7 +606,7 @@ void ftCommon_8007D494(Fighter* fp, f32 arg8, f32 arg9)
 
 void ftCommon_8007D4B8(Fighter* fp)
 {
-    f32 tmp = -fp->co_attrs.terminal_vel;
+    float tmp = -fp->co_attrs.terminal_vel;
     fp->self_vel.y -= fp->co_attrs.grav;
     if (fp->self_vel.y < tmp) {
         fp->self_vel.y = tmp;
@@ -616,14 +618,14 @@ void ftCommon_8007D4E4(Fighter* fp)
     fp->self_vel.y = -fp->co_attrs.fast_fall_velocity;
 }
 
-void ftCommon_ClampFallSpeed(Fighter* fp, f32 val)
+void ftCommon_ClampFallSpeed(Fighter* fp, float val)
 {
     if (fp->self_vel.y > val) {
         fp->self_vel.y = val;
     }
 }
 
-void ftCommon_8007D508(Fighter* fp, f32 arg8, f32 arg9)
+void ftCommon_8007D508(Fighter* fp, float arg8, float arg9)
 {
     fp->self_vel.y += arg8;
     if (fp->self_vel.y > arg9) {
@@ -684,7 +686,7 @@ void ftCommon_8007D698(Fighter* fp)
 
 void ftCommon_8007D6A4(Fighter* fp)
 {
-    f32 tmp;
+    float tmp;
     if (fp->x594_b0) {
         fp->self_vel.x = fp->x6A4_transNOffset.z * fp->facing_dir;
     }
@@ -726,7 +728,7 @@ void ftCommon_8007D780(Fighter* fp)
 
 void ftCommon_8007D7FC(Fighter* fp)
 {
-    f32 fmp;
+    float fmp;
     if (fp->ground_or_air == GA_Air) {
         if (un_803224DC(fp->x8_spawnNum, fp->cur_pos.x,
                         fp->dmg.x18A4_knockbackMagnitude))
@@ -780,14 +782,14 @@ float ftCo_GetCStickAngle(Fighter* fp)
     return atan2f(fp->input.cstick.y, fabs_inline(fp->input.cstick.x));
 }
 
-f32 ftCommon_8007D9D4(Fighter* fp)
+float ftCommon_8007D9D4(Fighter* fp)
 {
     return atan2f(fp->input.lstick.y, fp->input.lstick.x);
 }
 
 void ftCommon_8007D9FC(Fighter* fp)
 {
-    f32 phi_f0;
+    float phi_f0;
     if (fp->input.lstick.x >= 0) {
         phi_f0 = +1;
     } else {
@@ -798,7 +800,7 @@ void ftCommon_8007D9FC(Fighter* fp)
 
 void ftCommon_8007DA24(Fighter* fp)
 {
-    f32 phi_f0;
+    float phi_f0;
     if (fabs_inline(fp->input.lstick.x) > p_ftCommonData->x0) {
         if (fp->input.lstick.x >= 0) {
             phi_f0 = +1;
@@ -844,7 +846,7 @@ extern struct {
     s32 x4;
 }* Fighter_804D652C;
 
-void ftCommon_8007DBCC(Fighter* fp, bool arg1, f32 arg8)
+void ftCommon_8007DBCC(Fighter* fp, bool arg1, float arg8)
 {
     fp->x1A4C = arg8;
     fp->x1A51 = 0;
@@ -898,26 +900,20 @@ bool ftCommon_8007DC08(Fighter* fp, float arg1)
 
 void ftCommon_8007DD7C(HSD_GObj* gobj, Vec3* v)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused0[4];
-#endif
 
     Vec2* temp_r31;
     Vec3 sp24;
     Fighter* arg_ft;
     Fighter* cur_ft;
-    f32 temp_f0;
+    float temp_f0;
     s32 arg_gnd;
     s32 cur_gnd;
     HSD_GObj* cur;
     bool phi_r28;
     Vec2* vtmp;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused1[20];
-#endif
 
     arg_ft = gobj->user_data;
     phi_r28 = false;
@@ -972,10 +968,7 @@ void ftCommon_8007DD7C(HSD_GObj* gobj, Vec3* v)
 
 void ftCommon_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused0[4];
-#endif
 
     Vec3 sp1C;
     Vec2* temp_r31;
@@ -983,14 +976,11 @@ void ftCommon_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
     s32 new_var2;
     Fighter* fp;
     Fighter* temp_r3;
-    f32 temp_f1;
+    float temp_f1;
     s32 temp_r0;
     s32 temp_r30;
     Vec2* tmp;
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused1[12];
-#endif
     fp = gobj->user_data;
     temp_r31 = &fp->x2C4;
     new_var = Player_GetEntity(fp->player_id);
@@ -1018,14 +1008,11 @@ void ftCommon_8007E0E4(HSD_GObj* gobj)
     Vec3 sp10;
     Fighter* fp;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
-    f32 phi_f0;
-    f32 phi_f31;
-    f32 phi_f30;
+    float phi_f0;
+    float phi_f31;
+    float phi_f30;
 
     fp = gobj->user_data;
     fp->xF8_playerNudgeVel.y = 0;
@@ -1144,10 +1131,7 @@ void ftCommon_8007E3EC(HSD_GObj* gobj)
     HSD_JObj* jobj = fp->parts[ftParts_8007500C(fp, 4)].joint;
     Vec3 sp10;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (HSD_JObjMtxIsDirty(jobj)) {
         HSD_JObjGetTranslation(jobj, &sp10);
@@ -1167,7 +1151,7 @@ void ftCommon_8007E3EC(HSD_GObj* gobj)
 void ftCommon_8007E5AC(Fighter* fp)
 {
     Vec3* ground_normal = &fp->coll_data.floor.normal;
-    f32 tmp = -atan2f(ground_normal->x, ground_normal->y);
+    float tmp = -atan2f(ground_normal->x, ground_normal->y);
     HSD_ASSERT(1146, fp->ground_or_air == GA_Ground);
     ftParts_80075CB4(fp, 0, tmp);
 }
@@ -1232,23 +1216,23 @@ void ftCommon_8007E82C(HSD_GObj* gobj)
     fp->x1984_heldItemSpec = NULL;
 }
 
-void it_8028B718(HSD_GObj*, f32);
-void it_8028B780(HSD_GObj*, f32);
-void it_8028B7E8(HSD_GObj*, f32);
-void it_8028B850(HSD_GObj*, f32);
-void it_8028B648(HSD_GObj*, f32);
-void it_8028B6B0(HSD_GObj*, f32);
-void it_8028B618(HSD_GObj*, f32);
-void it_802BDD40(HSD_GObj*, f32);
-void it_802BDDB4(HSD_GObj*, f32);
-static void (*parasol_table_1[7])(HSD_GObj*, f32) = {
+void it_8028B718(HSD_GObj*, float);
+void it_8028B780(HSD_GObj*, float);
+void it_8028B7E8(HSD_GObj*, float);
+void it_8028B850(HSD_GObj*, float);
+void it_8028B648(HSD_GObj*, float);
+void it_8028B6B0(HSD_GObj*, float);
+void it_8028B618(HSD_GObj*, float);
+void it_802BDD40(HSD_GObj*, float);
+void it_802BDDB4(HSD_GObj*, float);
+static void (*parasol_table_1[7])(HSD_GObj*, float) = {
     it_8028B718, it_8028B780, it_8028B7E8, it_8028B850,
     it_8028B648, it_8028B6B0, it_8028B618,
 };
 static s32 parasol_table_2[7] = {
     7, 8, 9, 10, 5, 6, 4,
 };
-static void (*parasol_table_3[7])(HSD_GObj*, f32) = {
+static void (*parasol_table_3[7])(HSD_GObj*, float) = {
     NULL, NULL, NULL, NULL, it_802BDD40, NULL, it_802BDDB4,
 };
 static s32 parasol_table_4[7] = {
@@ -1259,9 +1243,9 @@ s32 it_8028B08C(void*, s32);
 
 static const int FtParasol_None = -1;
 
-void ftCommon_8007E83C(HSD_GObj* gobj, s32 arg1, f32 div)
+void ftCommon_8007E83C(HSD_GObj* gobj, s32 arg1, float div)
 {
-    f32 val;
+    float val;
 
     Fighter* fp = gobj->user_data;
 
@@ -1328,8 +1312,8 @@ s32 ftCo_GetParasolStatus(HSD_GObj* gobj)
 void ftCommon_8007EA90(Fighter* fp, s32 arg1)
 {
     s32 temp_r31;
-    f32 phi_f31;
-    f32 phi_f30;
+    float phi_f31;
+    float phi_f30;
     Vec3 sp10;
 
     if (gm_8016B0B4() == 0) {
@@ -1374,10 +1358,7 @@ void ftCommon_8007EC30(u32 arg0, u32 arg1)
     Fighter* fp;
     HSD_GObj* cur = HSD_GObj_Entities->fighters;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     while (cur != NULL) {
         fp = cur->user_data;
@@ -1389,7 +1370,7 @@ void ftCommon_8007EC30(u32 arg0, u32 arg1)
 void ftCommon_8007ECD4(Fighter* fp, s32 arg1)
 {
     if (Player_8003544C(fp->player_id, fp->x221F_b4)) {
-        HSD_Rumble_80378280(fp->x618_player_id, arg1 + 2);
+        HSD_PadRumbleRemoveId(fp->x618_player_id, arg1 + 2);
     }
 }
 
@@ -1400,7 +1381,7 @@ void ftCommon_8007ED2C(Fighter* fp)
 
 void ftCommon_8007ED50(Fighter* fp, s32 arg1)
 {
-    f32 tmp = arg1 * p_ftCommonData->x138 + p_ftCommonData->x13C;
+    float tmp = arg1 * p_ftCommonData->x138 + p_ftCommonData->x13C;
     s32 val2 = tmp;
     if ((s32) tmp < 1) {
         return;
@@ -1410,7 +1391,7 @@ void ftCommon_8007ED50(Fighter* fp, s32 arg1)
 
 void ftCommon_8007EE0C(Fighter* fp, s32 arg1)
 {
-    f32 tmp = arg1 * p_ftCommonData->xEC + p_ftCommonData->xF0;
+    float tmp = arg1 * p_ftCommonData->xEC + p_ftCommonData->xF0;
     s32 val2 = tmp;
     if ((s32) tmp < 1) {
         return;
@@ -1423,8 +1404,8 @@ void ftCommon_8007EEC8(Fighter* fp, s32 arg1, s32 arg2)
     if (fp->item_gobj != NULL && fp->item_gobj->classifier == 6 &&
         itGetKind(fp->item_gobj) == It_Kind_Sword)
     {
-        f32 multiplier = 1.0 / 256;
-        f32 tmp = arg2 * multiplier;
+        float multiplier = 1.0 / 256;
+        float tmp = arg2 * multiplier;
         it_80284FC4(fp->item_gobj, arg1, tmp);
     }
 }
@@ -1450,10 +1431,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     Fighter* dst = dst_gobj->user_data;
     s32 tmp_bit;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Player_SwapTransformedStates(src->player_id, src->x221F_b4, dst->x221F_b4);
     tmp_bit = src->x221F_b4;
@@ -1599,10 +1577,7 @@ void ftCommon_8007F5CC(HSD_GObj* gobj, s32 arg1)
     Fighter* fp = gobj->user_data;
     HSD_GObj* item = fp->item_gobj;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (item != NULL && fp->x221E_b3 != arg1) {
         if (arg1 == 0) {
@@ -1616,7 +1591,7 @@ void ftCommon_8007F5CC(HSD_GObj* gobj, s32 arg1)
     fp->x221E_b3 = arg1;
 }
 
-f32 ftCommon_GetModelScale(Fighter* fp)
+float ftCommon_GetModelScale(Fighter* fp)
 {
     return fp->x34_scale.y * fp->co_attrs.model_scaling;
 }
@@ -1624,7 +1599,7 @@ f32 ftCommon_GetModelScale(Fighter* fp)
 void ftCommon_8007F6A4(Fighter* fp, HSD_JObj* jobj)
 {
     Vec3 scale;
-    f32 val = 1.0f / fp->ft_data->x0->x8C;
+    float val = 1.0f / fp->ft_data->x0->x8C;
     scale.z = val;
     scale.y = val;
     scale.x = val;
@@ -1721,10 +1696,7 @@ void ftCommon_8007FA00(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     Vec3* vec = &fp->co_attrs.x114;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     it_80294EB0(fp->x197C, &vec[1], &vec[0]);
     it_80294E78(fp->x197C, fp->x34_scale.y * vec[2].x);
@@ -1739,10 +1711,7 @@ void ftCommon_8007FA58(HSD_GObj* gobj, HSD_GObj* arg1)
     {
         Fighter* fp2 = fp;
 
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[24];
-#endif
 
         if (fp2->x197C != NULL) {
             fp->x2014 = it_8026B54C(arg1);
@@ -1766,16 +1735,13 @@ void ftCommon_8007FA58(HSD_GObj* gobj, HSD_GObj* arg1)
     ftCommon_8007FA00(gobj);
 }
 
-void ftCommon_8007FC7C(HSD_GObj* gobj, f32 arg8)
+void ftCommon_8007FC7C(HSD_GObj* gobj, float arg8)
 {
     HSD_GObj* item_gobj;
     Fighter* fp;
     s32 sp20;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp = gobj->user_data;
     sp20 = arg8 * p_ftCommonData->x704;
@@ -1798,9 +1764,9 @@ void ftCommon_8007FC7C(HSD_GObj* gobj, f32 arg8)
     ft_80088148(fp, 0x11F, 0x7F, 0x40);
 }
 
-inline f32 fminf(f32 a, f32 b)
+inline float fminf(float a, float b)
 {
-    f32 result = a;
+    float result = a;
     if (a > b) {
         result = b;
     }
@@ -1811,14 +1777,11 @@ void ftCommon_8007FDA0(HSD_GObj* gobj)
 {
     Vec3 sp20;
     Fighter* fp;
-    f32 temp_f1;
+    float temp_f1;
     Vec3* temp_r30;
-    f32 phi_f31;
+    float phi_f31;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp = gobj->user_data;
     temp_r30 = &fp->co_attrs.x120;
@@ -1833,12 +1796,10 @@ void ftCommon_8007FDA0(HSD_GObj* gobj)
     it_8029A89C(fp->x1980, phi_f31 * temp_r30[1].x * fp->x34_scale.y);
 }
 
-void ftCommon_8007FE84(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2, f32 arg3)
+void ftCommon_8007FE84(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2,
+                       float arg3)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = gobj->user_data;
     fp->x1980 = item_gobj;
@@ -1859,7 +1820,7 @@ void ftCommon_8007FF74(HSD_GObj* gobj)
     pl_80040460(fp->player_id, fp->x221F_b4);
 }
 
-bool ftCommon_8007FFD8(Fighter* fp, f32 arg8)
+bool ftCommon_8007FFD8(Fighter* fp, float arg8)
 {
     s32 phi_r31;
     s8 b0, b1;
@@ -1904,14 +1865,11 @@ bool ftCommon_80080144(Fighter* fp)
 // https://decomp.me/scratch/Jjkwx
 void ftCommon_80080174(Fighter* fp)
 {
-    f32 phi_f2;
-    f32 phi_f3;
+    float phi_f2;
+    float phi_f3;
     Vec3* v;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     if (fp->x197C != NULL) {
         it_80294E78(fp->x197C, fp->x34_scale.y * fp->co_attrs.x11C);
@@ -1933,10 +1891,7 @@ void ftCommon_8008021C(HSD_GObj* gobj)
     Vec2 shift;
     Vec2* result;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp->dmg.x18BC = 0;
     fp->dmg.x18B8 = 0;
@@ -2000,17 +1955,17 @@ void ftCommon_80080484(Fighter* fp)
     }
 }
 
-void ftCommon_800804A0(Fighter* fp, f32 arg8)
+void ftCommon_800804A0(Fighter* fp, float arg8)
 {
-    f32 temp_f1;
-    f32 phi_f31 = arg8;
+    float temp_f1;
+    float phi_f31 = arg8;
     if ((temp_f1 = ft_GetGroundFrictionMultiplier(fp)) < 1) {
         phi_f31 *= temp_f1;
     }
     fp->xE8_ground_accel_2 = phi_f31;
 }
 
-f32 ftCommon_800804EC(Fighter* fp)
+float ftCommon_800804EC(Fighter* fp)
 {
     return fp->x40 * fp->x34_scale.x;
 }

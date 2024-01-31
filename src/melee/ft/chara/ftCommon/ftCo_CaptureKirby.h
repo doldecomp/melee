@@ -3,29 +3,7 @@
 
 #include "ft/forward.h"
 
-#include <placeholder.h>
-
-struct _m2c_stack_ftCo_800BD1DC {
-    /* 0x00 */ char pad_0[0x24];
-    /* 0x24 */ float sp24; /* inferred */
-    /* 0x28 */ float sp28; /* inferred */
-    /* 0x2C */ char pad_2C[4];
-    /* 0x30 */ float sp30; /* inferred */
-    /* 0x34 */ float sp34; /* inferred */
-    /* 0x38 */ char pad_38[0x20];
-}; /* size = 0x58 */
-
-struct _m2c_stack_ftCo_800BD39C {
-    /* 0x00 */ char pad_0[0x24];
-    /* 0x24 */ Vec3 scale;
-    /* 0x30 */ char pad_30[4];
-    /* 0x34 */ Vec3 pos;
-    /* 0x40 */ char pad_40[0x18];
-}; /* size = 0x58 */
-
-/* static */ extern char* ftCo_804D3BB0;
-/* static */ extern char* ftCo_804D3BB8;
-/* static */ extern char* ftCo_804D3BC0;
+#include <dolphin/mtx/types.h>
 
 /* 0BD19C */ float ftCo_800BD19C(Fighter_GObj* gobj, Vec3* pos);
 /* 0BD1DC */ void ftCo_800BD1DC(Fighter_GObj* gobj, Fighter_GObj* victim_gobj);

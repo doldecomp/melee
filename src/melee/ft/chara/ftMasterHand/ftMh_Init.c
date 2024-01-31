@@ -1,4 +1,5 @@
-#include "ftCommon/forward.h"
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
 
 #include "ftMh_Init.h"
 
@@ -32,11 +33,14 @@
 #include "ftMh_Walk.h"
 #include "types.h"
 
-#include "ft/ft_0877.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcamera.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "it/it_26B1.h"
+
+#include <common_structs.h>
+#include <placeholder.h>
 
 MotionState ftMh_Init_MotionStateTable[ftMh_MS_SelfCount] = {
     {

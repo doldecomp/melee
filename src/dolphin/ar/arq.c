@@ -14,7 +14,7 @@ static size_t __ARQChunkSize;
 
 static volatile bool __ARQ_init_flag = false;
 
-void __ARQPopTaskQueueHi(void)
+static inline void __ARQPopTaskQueueHi(void)
 {
     if (__ARQRequestQueueHi) {
         if (__ARQRequestQueueHi->type == ARQ_TYPE_MRAM_TO_ARAM) {
@@ -158,7 +158,7 @@ void ARQPostRequest(ARQRequest* request, u32 owner, ARQType type,
     }
 }
 
-size_t ARQGetChunkSize(void)
+static inline size_t ARQGetChunkSize(void)
 {
     return __ARQChunkSize;
 }

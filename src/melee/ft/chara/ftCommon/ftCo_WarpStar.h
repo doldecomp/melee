@@ -2,7 +2,6 @@
 #define GALE01_0C4724
 
 #include "ftCommon/forward.h"
-#include <dolphin/mtx/forward.h>
 
 /* 0C4724 */ void ftCo_800C4724(ftCo_GObj* gobj);
 /* 0C4900 */ void ftCo_WarpStarJump_Anim(ftCo_GObj* gobj);

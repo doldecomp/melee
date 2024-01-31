@@ -1,5 +1,3 @@
-#include "forward.h"
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
 
 #include "ftLk_Init.h"
@@ -13,17 +11,16 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftattacks4combo.h"
 #include "ft/ftcamera.h"
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCLink/ftCl_Init.h"
 #include "ftCommon/ftCo_AirCatch.h"
 #include "ftCommon/ftCo_Guard.h"
+#include "it/it_26B1.h"
 #include "lb/lbmthp.h"
 
 #include <dolphin/mtx/types.h>
@@ -400,10 +397,7 @@ void ftLk_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 
 void ftLk_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
@@ -428,12 +422,12 @@ void ftLk_Init_OnKnockbackExit(HSD_GObj* gobj)
 
 void ftLk_800EB334(HSD_GObj* gobj)
 {
-    f32 new_ground_vel;
+    float new_ground_vel;
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* link_attr = fp->ft_data->ext_attr;
 
-    f32 resultf = ftCo_80092ED8(fp->x19A4, link_attr->xD8);
+    float resultf = ftCo_80092ED8(fp->x19A4, link_attr->xD8);
     fp->gr_vel = resultf * p_ftCommonData->x294;
     if (fp->specialn_facing_dir < 0) {
         new_ground_vel = fp->gr_vel;

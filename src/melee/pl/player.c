@@ -1,19 +1,26 @@
+#include "pl/forward.h"
+
 #include "player.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftdata.h"
 #include "ft/ftdemo.h"
 #include "ft/ftlib.h"
+#include "ft/types.h"
 #include "ftKirby/ftKb_Init.h"
 #include "gm/gm_1601.h"
 #include "if/ifstatus.h"
 #include "lb/lbarchive.h"
 #include "pl/pl_0371.h"
+#include "pl/types.h"
 
 #include <dolphin/mtx/types.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
+#include <baselib/debug.h>
 #include <baselib/gobjplink.h>
+#include <baselib/objalloc.h>
 
 typedef struct _ftMapping {
     s8 internal_id;
@@ -154,10 +161,7 @@ void Player_80031900(void)
 
 bool Player_800319C4(int slot, bool arg1)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     int i;
     StaticPlayer* player;
@@ -192,18 +196,13 @@ void Player_80031AD0(int slot)
     s8 byte_check;
     s8* offset_arr;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused0[4];
-#endif
 
     StaticPlayer* player;
 
     struct plAllocInfo second_struct;
 
-#ifdef MUST_MATCH
     u8 unused1[12];
-#endif
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -329,10 +328,7 @@ void Player_80031EBC(int slot)
 
 void Player_80031FB0(int slot, s32 entity_index)
 {
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -410,10 +406,7 @@ s32 Player_GetPlayerState(s32 slot)
 
 enum_t Player_GetPlayerCharacter(int slot)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -558,10 +551,7 @@ void Player_800328D4(int slot, Vec3* arg_vec)
     Vec3* dst_vec;
     Vec3* dst_vec2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -690,10 +680,7 @@ void Player_80032FA4(s32 slot, s32 arg)
 {
     StaticPlayer* player;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -702,10 +689,7 @@ void Player_80032FA4(s32 slot, s32 arg)
 
 f32 Player_GetFacingDirection(s32 slot)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -722,10 +706,7 @@ void Player_SetFacingDirection(s32 slot, f32 direction)
 
 void Player_SetFacingDirectionConditional(s32 slot, bool b, f32 direction)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (!b) {
         StaticPlayer* player;
@@ -1329,10 +1310,7 @@ s32 Player_GetFallsByIndex(s32 slot, s32 arg1)
 
 void Player_SetFalls(int slot, s32 falls)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -1361,10 +1339,7 @@ void Player_UpdateKOsBySlot(int slot, bool bool_arg, int other_slot)
     StaticPlayer* player;
     StaticPlayer* other_player;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -1413,10 +1388,7 @@ uint Player_GetMatchFrameCount(int slot)
 
 void Player_UpdateMatchFrameCount(int slot, bool condition)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -1483,10 +1455,7 @@ bool Player_800353BC(s32 slot)
 
 bool Player_8003544C(s32 slot, bool condition)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (!condition) {
         StaticPlayer* player;
@@ -1549,10 +1518,7 @@ void Player_SetFlagsBit1(s32 slot)
 
 void Player_UnsetFlagsBit1(int slot)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[1];
-#endif
 
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -1578,7 +1544,7 @@ void Player_SetFlagsBit3(s32 slot, u8 bit3)
     player->flags.b3 = bit3;
 }
 
-u8 Player_GetFlagsBit4(s32 slot)
+int Player_GetFlagsBit4(int slot)
 {
     StaticPlayer* player;
     u8 bit4;
@@ -1698,26 +1664,17 @@ u8 Player_GetFlagsAEBit1(s32 slot)
     return bit1;
 }
 
+#ifdef BUGFIX
+void Player_SetFlagsAEBit1(int slot, u8 bit1)
+#else
 u8 Player_SetFlagsAEBit1(int slot, u8 bit1)
+#endif
 {
+    StaticPlayer* player;
     Player_CheckSlot(slot);
-
-/// @todo Unused assignment.
-#ifdef MUST_MATCH
-    {
-        StaticPlayer* player = &player_slots[slot];
-    }
-#endif
-
-    player_slots[slot].flagsAE.b1 = bit1;
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wreturn-type"
-#endif
+    player = &player_slots[slot];
+    player->flagsAE.b1 = bit1;
 }
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
 
 u8 Player_GetUnk4C(s32 slot)
 {
@@ -1926,10 +1883,7 @@ void Player_80036978(s32 slot, s32 arg1)
 {
     StaticPlayer* player;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -1947,10 +1901,7 @@ void Player_InitOrResetPlayer(s32 slot)
     f32 zerofloat;
     f32 onefloat;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[56];
-#endif
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -2125,12 +2076,7 @@ s32 Player_80036EA0(s32 slot)
 void Player_80036F34(s32 slot, s32 arg1)
 {
     struct plAllocInfo2 some_struct;
-
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _;
-#endif
-
     StaticPlayer* player;
 
     Player_CheckSlot(slot);
@@ -2157,12 +2103,7 @@ void Player_80036F34(s32 slot, s32 arg1)
 void Player_80037054(s32 slot, s32 arg1)
 {
     struct plAllocInfo2 some_struct;
-
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _;
-#endif
-
     StaticPlayer* player;
 
     Player_CheckSlot(slot);

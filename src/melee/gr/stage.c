@@ -2,12 +2,13 @@
 
 #include "gm/gm_1601.h"
 #include "gr/ground.h"
+#include "gr/types.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
-#include <dolphin/mtx/types.h>
 #include <baselib/debug.h>
+#include <baselib/random.h>
 
 extern struct StageInfo stage_info;
 

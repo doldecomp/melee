@@ -1,8 +1,12 @@
+#include "displayfunc.h"
+
+#include "objalloc.h"
+#include "pobj.h"
+#include "state.h"
+#include "tev.h"
+
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXTransform.h>
-#include <baselib/displayfunc.h>
-#include <baselib/state.h>
-#include <baselib/tev.h>
 
 typedef struct _HSD_ZList {
     Mtx pmtx;

@@ -1,3 +1,4 @@
+#include <ansi_files.h>
 #include <stdio.h>
 #include <MSL/wchar_io.h>
 
@@ -6,25 +7,25 @@ int fwide(FILE* stream, int mode)
     int orientation;
     int result;
 
-    if (stream->mode.file_kind == __closed_file) {
+    if (stream->file_mode.file_kind == __closed_file) {
         return 0;
     }
-    orientation = stream->mode.file_orientation;
+    orientation = stream->file_mode.file_orientation;
     switch (orientation) {
-    case __unoriented:
+    case UNORIENTED:
         if (mode > 0) {
-            stream->mode.file_orientation = __wide_oriented;
+            stream->file_mode.file_orientation = WIDE_ORIENTED;
         } else if (mode < 0) {
-            stream->mode.file_orientation = __char_oriented;
+            stream->file_mode.file_orientation = CHAR_ORIENTED;
         }
         result = mode;
         break;
 
-    case __wide_oriented:
+    case WIDE_ORIENTED:
         result = 1;
         break;
 
-    case __char_oriented:
+    case CHAR_ORIENTED:
         result = -1;
         break;
     }

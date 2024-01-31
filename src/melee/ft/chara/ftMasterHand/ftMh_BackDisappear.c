@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include "ftMh_BackDisappear.h"
 
 #include "ftMh_TagCancel.h"
@@ -5,11 +7,15 @@
 #include "ftMh_Wait1_1.h"
 #include "ftMh_Wait1_2.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
+#include "ftMasterHand/types.h"
 #include "lb/lbvector.h"
+#include "pl/player.h"
 
 #include <dolphin/mtx/types.h>
 #include <MetroTRK/intrinsics.h>
@@ -78,10 +84,7 @@ static inline float my_sqrtf(float x)
     static const double _half = .5;
     static const double _three = 3.0;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
 
     volatile float y;
     if (x > 0) {
@@ -105,15 +108,12 @@ void ftMh_Wait1_1_Phys(HSD_GObj* gobj)
     /// @todo #GET_FIGHTER doesn't fit the stack.
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
-    f32 len;
-    f32 speed;
+    float len;
+    float speed;
     Vec3 sp28_pos;
     Vec3 vel;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     ft_80085134(gobj);
     ftBossLib_8015C208(gobj, &sp28_pos);

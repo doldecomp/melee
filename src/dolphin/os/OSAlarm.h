@@ -1,8 +1,13 @@
 #ifndef DOLPHIN_OS_OSALARM_H
 #define DOLPHIN_OS_OSALARM_H
 
+#include <platform.h>
+
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSTime.h>
+
+typedef struct OSAlarm OSAlarm;
+typedef void (*OSAlarmHandler)(OSAlarm* alarm, OSContext* context);
 
 struct OSAlarm {
     OSAlarmHandler handler;

@@ -1,7 +1,7 @@
 #ifndef GALE01_284D54
 #define GALE01_284D54
 
-#include "it/forward.h"
+#include <platform.h>
 #include "it/items/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>

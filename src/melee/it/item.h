@@ -1,244 +1,60 @@
-/// @file
-/// @attention Symbols in this file are placed correctly.
-/// @defgroup melee_it_item item
-/// @{
-#ifndef MELEE_IT_ITEM_H
-#define MELEE_IT_ITEM_H
+#ifndef GALE01_266F3C
+#define GALE01_266F3C
 
 #include <platform.h>
-
-#include "it/types.h"
-
-extern HSD_ObjAllocData itemAllocData;
-extern HSD_ObjAllocData unkAllocData1;
-extern HSD_ObjAllocData Item_804A0C38;
-extern HSD_ObjAllocUnk Item_804A0C64;
-extern HSD_ObjAllocUnk2 Item_804A0CCC;
-extern S32Vec3 Item_804A0E24;
-
-/// Checks if items are enabled
-bool Item_80266F3C(void);
-
-/// Check to load ItCo.dat/usd
-void Item_80266F70(void);
-
-/// ItCo prefunction with 0
-void Item_80266FA8(void);
-
-/// Init item struct?
-void Item_80266FCC(void);
-
-/// Remove Camera Box
-void Item_80267454(HSD_GObj* gobj);
-
-/// Setup Item JObj
-void Item_802680CC(HSD_GObj* gobj);
-
-/// Set item model scale
-void Item_8026849C(HSD_GObj* gobj);
-
-/// Item spawn prefunction - spawn airborne
-HSD_GObj* Item_80268B18(SpawnItem* spawnItem);
-
-/// Item spawn prefunction - spawn grounded
-Item_GObj* Item_80268B5C(SpawnItem* spawnItem);
-
-/// Item spawn prefunction - spawn grounded and toggle unknown true
-void Item_80268B9C(SpawnItem* spawnItem);
-
-/// Unk Item AObj-related function
-void Item_80268D34(HSD_GObj* gobj, struct ItemStateDesc* itemStateDesc);
-
-/// Advance item animation?
-void Item_80268DD4(HSD_GObj* gobj, float arg8);
-
-/// Copy item script
-void Item_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc);
-
-/// Item State Change
-void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags);
-
-/// Advance item animation + script?
-void Item_802694CC(HSD_GObj* gobj);
-
-/// Item Think - Physics
-void Item_802697D4(HSD_GObj* gobj);
-
-/// Item Think - Collision
-void Item_80269978(HSD_GObj* gobj);
-
-/// Set damage taken
-void Item_80269CA0(Item* item_data, s32 damage);
-
-/// Remove Item from Player
-void Item_8026A848(HSD_GObj* gobj, HSD_GObj* fgobj);
-
-/// Destroy Item
-void Item_8026A8EC(HSD_GObj* gobj);
-
-/// Make Item Held
-void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* owner_gobj, u8 part);
-
-/// Drop Item
-void Item_8026ABD8(HSD_GObj* gobj, Vec3* pos, float arg2);
-
-/// This is actually another Item Drop function
-void Item_8026AC74(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, float arg3);
-
-/// Throw Item
-void Item_8026AD20(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, float arg3);
-
-/// Make Item Airborne
-void Item_8026ADC0(HSD_GObj* gobj);
-
-/// Increment something
-uint Item_8026AE60(void);
-
-/// Play Item SFX
-void Item_8026AE84(Item* item_data, enum_t sfx, int pan, int volume);
-
-/// Play Item SFX 2
-void Item_8026AF0C(Item* item_data, enum_t sfx, int pan, int volume);
-
-/// Play Item SFX 3
-void Item_8026AFA0(Item* item_data, enum_t sfx, int pan, int volume);
-
-/// Stop Item SFX
-void Item_8026B034(Item* item_data);
-
-/// Stop Item SFX 2
-void Item_8026B074(Item* item_data);
-
-/// Check if item is grabbable
-bool Item_IsGrabbable(HSD_GObj* gobj);
-
-/// Initialize item coordinates?
-void Item_80267130(HSD_GObj* gobj, SpawnItem* spawnItem);
-
-/// Set Item Hold kind
-void Item_802674AC(SpawnItem* spawnItem);
-
-void Item_802675A8(HSD_GObj* gobj);
-
-void Item_802676F4(HSD_GObj* gobj);
-
-bool Item_8026784C(enum_t dropItem, int _);
-
-/// Store Item Pointers
-void Item_80267978(HSD_GObj* gobj);
-
-void ItUnkHoldKind(HSD_GObj* gobj);
-void HSD_JObjSetScaleItem(Item* it, HSD_JObj* jobj, Vec3* scl);
-
-/// Initialize item variables
-void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem);
-
-/// Set up item render objects?
-void Item_8026814C(HSD_GObj* gobj);
-
-/// Initialize item bones
-bool Item_802682F0(HSD_GObj* gobj);
-
-/// Set up item dynamic bones
-void Item_80268560(HSD_GObj* gobj);
-
-void Item_802693E4(HSD_GObj* gobj);
-
-/// Item Think - Animation
-void Item_80269528(HSD_GObj* gobj);
-
-/// Item Think - Accessory + Camera Box
-void Item_80269A9C(HSD_GObj* gobj);
-
-/// Item Think - Yellow Bar Collision (cb_JumpedOn)
-void Item_80269B60(HSD_GObj* gobj);
-
-/// Item Think - Grab
-void Item_80269BE4(HSD_GObj* gobj);
-
-/// Item Think - Hit Collision Logic
-void Item_80269C5C(HSD_GObj* gobj);
-
-/// Item Think - Hit Collision
-void Item_8026A294(HSD_GObj* gobj);
-
-/// Item Think - Process Dynamic Bones
-void Item_8026A788(HSD_GObj* gobj);
-
-/// Item Think - Spawn
-void Item_8026A810(HSD_GObj* gobj);
-
-/// Clear Item Struct ?
-void lbl_8026AE10(void* user_data);
-
-/// Create Item
-HSD_GObj* Item_8026862C(SpawnItem* spawnItem);
-
-/// Adds #HSD_AObj instances to item model
-void Item_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
-                   HSD_MatAnimJoint* matanim_joint,
-                   HSD_ShapeAnimJoint* shapeanim_joint, Item* item_data);
-
-/// Item Think - Exit Hitlag Check
-void Item_8026A0A0(HSD_GObj* gobj);
-
-/// Item Think - Exit Hitlag Check 2
-void Item_8026A0FC(HSD_GObj* gobj);
-
-/// Item Think - Exit Hitlag
-void Item_8026A1E8(HSD_GObj* gobj);
-
-/// Item Think - Check for Blast Zones
-bool Item_802696CC(HSD_GObj* gobj);
-
-/// Set damage struct
-void Item_80269CC4(HSD_GObj* gobj);
-
-/// Item Think - Shield Collision
-bool Item_80269DC8(HSD_GObj* gobj);
-
-/// Item Think - On Reflect
-bool Item_80269F14(HSD_GObj* gobj);
-
-/// Item Think - Enter Hitlag
-void Item_8026A158(HSD_GObj* gobj);
-
-void func_8026A158_helper(HSD_GObj* atkCollGObj);
-
-void func_8026A1E8_inline(HSD_GObj* atkCollGObj);
-
-bool processCallback(HSD_GObjPredicate cb, HSD_GObj* gobj, Item* item_data);
-
-bool OnTakeDamageThink(HSD_GObj* gobj, Item* item_data);
-bool OnClankThink(HSD_GObj* gobj, Item* item_data);
-bool OnGiveDamageThink(HSD_GObj* gobj, Item* item_data);
-void EnterHitlagThink(HSD_GObj* gobj, Item* item_data);
-void checkHitLag(float min_value, Item* item_data);
-void DestroyItemInline(HSD_GObj* gobj, Item* item_data);
-void ItemSwitch(HSD_GObj* gobj);
-void RunCallback(HSD_GObj* gobj, HSD_GObjEvent arg1);
-void func_8026A8EC_inline1(HSD_GObj* gobj);
-void func_8026A8EC_inline2(HSD_GObj* gobj);
-void func_8026A8EC_inline3(HSD_GObj* gobj);
-void foobar(HSD_GObj* gobj);
-void foobar2(HSD_GObj* gobj);
-void foobar3(HSD_GObj* gobj);
-
-/// Stop All Item SFX
-void Item_8026B0B4(HSD_GObj* gobj);
-
-void Item_OnUserDataRemove(void* user_data);
-void HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* ip);
-
-#define GET_ITEM(gobj) ((Item*) HSD_GObjGetUserData(gobj))
-
-/// @deprecated Use #GET_ITEM instead.
-static inline Item* GetItemData(HSD_GObj* gobj)
-{
-    Item* item_data = gobj->user_data;
-    return item_data;
-}
+#include "it/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
+
+#include <baselib/objalloc.h>
+
+struct ItemStateDesc;
+
+/* 266F3C */ bool Item_80266F3C(void);
+/* 266F70 */ void Item_80266F70(void);
+/* 266FA8 */ void Item_80266FA8(void);
+/* 266FCC */ void Item_80266FCC(void);
+/* 267454 */ void Item_80267454(HSD_GObj* gobj);
+/* 267978 */ void Item_80267978(HSD_GObj* gobj);
+/* 2680CC */ void Item_802680CC(HSD_GObj* gobj);
+/* 26849C */ void Item_8026849C(HSD_GObj* gobj);
+/* 268B18 */ Item_GObj* Item_80268B18(SpawnItem* spawnItem);
+/* 268B5C */ Item_GObj* Item_80268B5C(SpawnItem* spawnItem);
+/* 268B9C */ void Item_80268B9C(SpawnItem* spawnItem);
+/* 268D34 */ void Item_80268D34(HSD_GObj* gobj,
+                                struct ItemStateDesc* itemStateDesc);
+/* 268DD4 */ void Item_80268DD4(HSD_GObj* gobj, float);
+/* 268E40 */ void Item_80268E40(Item* item_data,
+                                struct ItemStateDesc* itemStateDesc);
+/* 268E5C */ void Item_80268E5C(HSD_GObj* gobj, enum_t msid,
+                                Item_StateChangeFlags flags);
+/* 2693E4 */ void Item_802693E4(HSD_GObj* gobj);
+/* 2694CC */ void Item_802694CC(HSD_GObj* gobj);
+/* 2697D4 */ void Item_802697D4(HSD_GObj* gobj);
+/* 269978 */ void Item_80269978(HSD_GObj* gobj);
+/* 269CA0 */ void Item_80269CA0(Item* item_data, s32 damage);
+/* 26A848 */ void Item_8026A848(HSD_GObj* gobj, HSD_GObj* fgobj);
+/* 26A8EC */ void Item_8026A8EC(Item_GObj* gobj);
+/* 26AB54 */ void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* owner_gobj, u8 part);
+/* 26ABD8 */ void Item_8026ABD8(HSD_GObj* gobj, Vec3* pos, float);
+/* 26AC74 */ void Item_8026AC74(HSD_GObj* gobj, Vec3*, Vec3*, float);
+/* 26AD20 */ void Item_8026AD20(HSD_GObj* gobj, Vec3*, Vec3*, float);
+/* 26ADC0 */ void Item_8026ADC0(HSD_GObj* gobj);
+/* 26AE10 */ void Item_OnUserDataRemove(void* user_data);
+/* 26AE10 */ void lbl_8026AE10(void* user_data);
+/* 26AE60 */ uint Item_8026AE60(void);
+/* 26AE84 */ void Item_8026AE84(Item* item_data, enum_t sfx, int pan,
+                                int volume);
+/* 26AF0C */ void Item_8026AF0C(Item* item_data, enum_t sfx, int pan,
+                                int volume);
+/* 26AFA0 */ void Item_8026AFA0(Item* item_data, enum_t sfx, int pan,
+                                int volume);
+/* 26B034 */ void Item_8026B034(Item* item_data);
+/* 26B074 */ void Item_8026B074(Item* item_data);
+/* 26B1A4 */ bool Item_IsGrabbable(HSD_GObj* gobj);
+/* 4A0C38 */ extern HSD_ObjAllocData Item_804A0C38;
+/* 4A0C64 */ extern HSD_ObjAllocUnk Item_804A0C64;
+/* 4A0CCC */ extern HSD_ObjAllocUnk2 Item_804A0CCC;
+/* 4A0E24 */ extern S32Vec3 Item_804A0E24;
 
 #endif
-
-/// @}

@@ -1,5 +1,3 @@
-#include "ft/forward.h"
-
 #include "ftMr_Strings.h"
 
 #include "ft/types.h"

@@ -1,8 +1,8 @@
-#ifndef MELEE_FT_FTWALLJUMP_H
-#define MELEE_FT_FTWALLJUMP_H
+#ifndef GALE01_08169C
+#define GALE01_08169C
 
-#include <baselib/gobj.h>
+#include <baselib/forward.h>
 
-bool ftWallJump_8008169C(HSD_GObj* gobj);
+/* 08169C */ bool ftWallJump_8008169C(HSD_GObj* gobj);
 
 #endif

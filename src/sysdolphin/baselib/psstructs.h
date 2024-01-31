@@ -2,16 +2,25 @@
 #define SYSDOLPHIN_BASELIB_PSSTRUCTS_H
 
 #include <platform.h>
+#include "baselib/forward.h"
+#include <dolphin/gx/forward.h>
 
+#include "baselib/archive.h"
+#include "baselib/jobj.h"
+
+#include <dolphin/gx/GXEnum.h>
+#include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/archive.h>
-#include <baselib/jobj.h>
 
 struct _psAppSRT;
+struct HSD_Fog;
+
 typedef struct _psAppSRT HSD_psAppSRT;
 struct _particle;
+
 typedef struct _particle HSD_Particle;
 struct _generator;
+
 typedef struct _generator HSD_Generator;
 
 enum HSD_ParticleKind {
@@ -111,7 +120,7 @@ struct _psAppSRT {
     u8 dummy;     /* 0x73 */
 };
 
-/* size: 0x9C */
+/* size: 0x94 */
 struct _particle {
     HSD_Particle* next; /* 0x0 */
 
@@ -123,27 +132,27 @@ struct _particle {
     u8 poseNum; /* 0xA */
     u8 palNum;  /* 0xB */
 
-    u16 sizeCount; /* 0xC */
+    u16 sizeCount;
 
     u16 primColCount; /* 0xE */
     u16 envColCount;  /* 0x10 */
     GXColor primCol;  /* 0x12 */
     GXColor envCol;   /* 0x16 */
 
-    u16 cmdWait; /* 0x1A */
+    u16 cmdWait;
 
-    u8 loopCount; /* 0x1C */
+    u8 loopCount;
 
     u8 linkNo; /* 0x1D */
 
-    u16 idnum; /* 0x1E */
+    u16 idnum;
 
-    u8* cmdList;    /* 0x20 */
-    u16 cmdPtr;     /* 0x24 */
-    u16 cmdMarkPtr; /* 0x26 */
-    u16 cmdLoopPtr; /* 0x28 */
+    u8* cmdList;
+    u16 cmdPtr;
+    u16 cmdMarkPtr;
+    u16 cmdLoopPtr;
 
-    u16 life; /* 0x2A */
+    u16 life;
 
     float vx; /* 0x2C */
     float vy; /* 0x30 */
@@ -168,42 +177,40 @@ struct _particle {
 
     u16 matColCount; /* 0x5A */
     u16 ambColCount; /* 0x5C */
-    u16 rotateCount; /* 0x5E */
+    u16 rotateCount;
 
-    float sizeTarget;   /* 0x60 */
-    float rotateTarget; /* 0x64 */
-    float rotateAcc;    /* 0x68 */
+    float sizeTarget;
+    float rotateTarget;
 
-    u16 primColRemain;     /* 0x6C */
-    u16 envColRemain;      /* 0x6E */
-    GXColor primColTarget; /* 0x70 */
-    GXColor envColTarget;  /* 0x74 */
+    u16 primColRemain;     /* 0x68 */
+    u16 envColRemain;      /* 0x6A */
+    GXColor primColTarget; /* 0x6C */
+    GXColor envColTarget;  /* 0x70 */
 
-    u16 matColRemain; /* 0x78 */
+    u16 matColRemain; /* 0x74 */
+    u16 ambColRemain; /* 0x76 */
 
-    u16 ambColRemain;    /* 0x7A */
-    u16 aCmpRemain;      /* 0x7C */
-    u8 aCmpParam1Target; /* 0x7E */
-    u8 aCmpParam2Target; /* 0x7F */
+    u16 aCmpRemain;      /* 0x78 */
+    u8 aCmpParam1Target; /* 0x7A */
+    u8 aCmpParam2Target; /* 0x7B */
 
-    u8 matRGB; /* 0x80 */
-    u8 matA;   /* 0x81 */
+    u8 matRGB; /* 0x7C */
+    u8 matA;   /* 0x7D */
 
-    u8 ambRGB; /* 0x82 */
-    u8 ambA;   /* 0x83 */
+    u8 ambRGB; /* 0x7E */
+    u8 ambA;   /* 0x7F */
 
-    u8 matRGBTarget; /* 0x84 */
-    u8 matATarget;   /* 0x85 */
+    u8 matRGBTarget; /* 0x80 */
+    u8 matATarget;   /* 0x81 */
+    u8 ambRGBTarget; /* 0x82 */
+    u8 ambATarget;   /* 0x83 */
 
-    u8 ambRGBTarget; /* 0x86 */
-    u8 ambATarget;   /* 0x87 */
+    float trail; /* 0x84 */
 
-    float trail; /* 0x88 */
-
-    struct _generator* gen;              /* 0x8C */
-    struct _psAppSRT* appsrt;            /* 0x90 */
-    float* userdata;                     /* 0x94 */
-    int (*callback)(HSD_Particle* part); /* 0x98 */
+    struct _generator* gen; /* 0x88 */
+    struct _psAppSRT* appsrt;
+    float* userdata;
+    int (*callback)(HSD_Particle* part);
 };
 
 /* size: 0xC */
@@ -260,35 +267,35 @@ typedef struct _auxSphere {
 } auxSphere;
 
 typedef struct _generator {
-    HSD_Generator* next;
-    u32 kind;
-    f32 random;
-    f32 count;
-    HSD_JObj* jobj;
-    u16 genLife;
-    u16 type;
-    u8 bank;
-    u8 linkNo;
-    u8 texGroup;
-    u8 dummy;
-    u16 idnum;
-    u16 life;
-    u8* cmdList;
-    f32 x;
-    f32 y;
-    f32 z;
-    f32 vx;
-    f32 vy;
-    f32 vz;
-    f32 grav;
-    f32 fric;
-    f32 size;
-    f32 radius;
-    f32 angle;
-    u32 numChild;
-    HSD_psAppSRT* appsrt;
-    HSD_PSUserFunc userfunc;
-    int (*callback)(HSD_Generator* part);
+    HSD_Generator* next;                  // 0x0
+    u32 kind;                             // 0x4
+    f32 random;                           // 0x8
+    f32 count;                            // 0xC
+    HSD_JObj* jobj;                       // 0x10
+    u16 genLife;                          // 0x14
+    u16 type;                             // 0x16
+    u8 bank;                              // 0x18
+    u8 linkNo;                            // 0x19
+    u8 texGroup;                          // x1A
+    u8 dummy;                             // 0x1B
+    u16 idnum;                            // 0x1C
+    u16 life;                             // 0x1E
+    u8* cmdList;                          // 0x20
+    f32 x;                                // 0x24
+    f32 y;                                // 0x28
+    f32 z;                                // 0x2C
+    f32 vx;                               // 0x30
+    f32 vy;                               // 0x34
+    f32 vz;                               // 0x38
+    f32 grav;                             // 0x3C
+    f32 fric;                             // 0x40
+    f32 size;                             // 0x44
+    f32 radius;                           // 0x48
+    f32 angle;                            // 0x4C
+    u32 numChild;                         // 0x50
+    HSD_psAppSRT* appsrt;                 // 0x54
+    HSD_PSUserFunc* userfunc;             // 0x58
+    int (*callback)(HSD_Generator* part); // 0x5C
     union {
         auxDisc disc;
         auxLine line;
@@ -296,7 +303,7 @@ typedef struct _generator {
         auxRect rect;
         auxCone cone;
         auxSphere sphere;
-    } aux;
+    } aux; // 0z60
 } _generator;
 
 extern u32* ptclref[64];
@@ -342,14 +349,6 @@ static inline void psDispSubMakePolygon(struct _particle* pp, u8* texform,
                                         float z1);
 
 static inline void psDispSub(struct _particle* pp, u8* texform);
-
-#define PS_APPSRT
-#ifdef PS_APPSRT
-static inline void psDispSubAppSRT(struct _particle* pp, u8* texform);
-static inline void psDispSubAPPSRTPoint(struct _particle* pp);
-#endif
-
-void psDispParticles(u32 target_link, u32 sw);
 
 void psInitDataBankLoad(int bank, int* cmdBank, int* texBank, u32* ref,
                         int* formBank);

@@ -1,10 +1,8 @@
 #ifndef GALE01_08A7A8
 #define GALE01_08A7A8
 
-#include <platform.h>
 #include "ftCommon/forward.h"
 
-/* 08A7A8 */ void ftCo_8008A7A8(ftCo_GObj* gobj, int);
 /* 09C5A4 */ void ftCo_8009C5A4(ftCo_GObj* gobj, int);
 /* 09C640 */ void ftCo_8009C640(ftCo_GObj* gobj, int);
 /* 09C830 */ void ftCo_Shouldered_Anim(ftCo_GObj* gobj);

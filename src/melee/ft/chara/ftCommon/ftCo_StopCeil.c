@@ -1,14 +1,18 @@
 #include <platform.h>
-#include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_StopCeil.h"
 
 #include "ftCo_FallSpecial.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0C88.h"
-#include "ft/inlines.h"
+#include "ft/ftanim.h"
+#include "ft/types.h"
 #include "ftKirby/ftKb_Init.h"
+
+#include <common_structs.h>
 
 /* 09CAD4 */ static void ftCo_8009EFA4(ftCo_GObj* gobj);
 

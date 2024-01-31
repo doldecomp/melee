@@ -1,10 +1,9 @@
-#include "forward.h"
-
 #include "fobj.h"
 
+#include "debug.h"
 #include "spline.h"
 
-#include <string.h>
+#include <__mem.h>
 
 HSD_ObjAllocData fobj_alloc_data;
 
@@ -419,15 +418,8 @@ void HSD_FObjInterpretAnim(HSD_FObj* fobj, void* obj,
             }
             case 4: {
                 if (fobj->fterm <= fobj->time) {
-                    /// @todo Unused stack.
-#ifdef MUST_MATCH
                     u8 _[8] = { 0 };
-#endif
-#ifdef MUST_MATCH
                     state = state = 3;
-#else
-                    state = 3;
-#endif
 
                     fterm = fobj->fterm;
                     fobj->time -= fobj->fterm;
@@ -435,20 +427,12 @@ void HSD_FObjInterpretAnim(HSD_FObj* fobj, void* obj,
                     break;
                 }
                 FObjUpdateAnim(fobj, obj, obj_update);
-#ifdef MUST_MATCH
                 state = state = 5;
-#else
-                state = 5;
-#endif
                 HSD_FObjSetState(fobj, state);
                 return;
             }
             case 5: {
-#ifdef MUST_MATCH
                 state = state = 4;
-#else
-                state = 4;
-#endif
                 HSD_FObjSetState(fobj, state);
                 break;
             }

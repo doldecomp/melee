@@ -1,7 +1,9 @@
 #ifndef _lbrefract_h_
 #define _lbrefract_h_
 
-#include <string.h>
+#include <platform.h>
+#include <baselib/forward.h>
+
 #include <dolphin/gx/GXMisc.h>
 #include <dolphin/os/OSCache.h>
 #include <baselib/cobj.h>

@@ -1,12 +1,8 @@
 #ifndef RUNTIME_PLATFORM_H
 #define RUNTIME_PLATFORM_H
 
-#if defined(__MWERKS__) || defined(__GNUC__)
-#define MWERKS_GNUC
-#endif
-
-#include <stdbool.h>
-#include <stddef.h>
+#include <stdbool.h> // IWYU pragma: export
+#include <stddef.h>  // IWYU pragma: export
 
 /// A signed 8-bit integer
 typedef signed char s8;
@@ -118,14 +114,6 @@ typedef void (*Event)(void);
 #endif
 #endif
 
-#ifndef ATTRIBUTE_USED
-#if defined(__clang__)
-#define ATTRIBUTE_USED __attribute__((used))
-#else
-#define ATTRIBUTE_USED
-#endif
-#endif
-
 #ifdef PERMUTER
 #define AT_ADDRESS(x) = FIXEDADDR(x)
 #elif defined(__MWERKS__) && !defined(M2CTX)
@@ -163,5 +151,13 @@ typedef void (*Event)(void);
     if ((cond)) {                                                             \
         return;                                                               \
     }
+
+#if defined(__MWERKS__) && !defined(M2CTX)
+#define SDATA __declspec(section ".sdata")
+#define WEAK __declspec(weak)
+#else
+#define SDATA
+#define WEAK
+#endif
 
 #endif

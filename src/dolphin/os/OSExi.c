@@ -2,6 +2,7 @@
 #include <placeholder.h>
 #include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInit.h>
+#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSTime.h>
 
 #define EXI_FREQ_1M 0
@@ -480,7 +481,7 @@ bool EXIDetach(EXIChannel chan)
     return true;
 }
 
-bool EXISelect(EXIChannel chan, u32 dev, u32 freq)
+bool EXISelect(s32 chan, u32 dev, u32 freq)
 {
     EXIControl* exi = &Ecb[chan];
     u32 cpr;
@@ -699,7 +700,7 @@ void EXIInit(void)
     }
 }
 
-bool EXILock(EXIChannel chan, u32 dev, EXICallback unlockedCallback)
+bool EXILock(s32 chan, u32 dev, EXICallback unlockedCallback)
 {
     EXIControl* exi = &Ecb[chan];
     bool enabled = OSDisableInterrupts();
@@ -761,7 +762,7 @@ u32 EXIGetState(EXIChannel chan)
     return exi->state;
 }
 
-static void UnlockedHandler(EXIChannel chan, OSContext* context)
+static void UnlockedHandler(s32 chan, OSContext* context)
 {
     u32 id;
     EXIGetID(chan, 0, &id);

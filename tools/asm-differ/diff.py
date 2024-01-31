@@ -3,8 +3,21 @@
 import argparse
 import enum
 import sys
-from typing import (Any, Callable, Dict, Iterator, List, Match, NoReturn,
-                    Optional, Pattern, Set, Tuple, Type, Union)
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    Iterator,
+    List,
+    Match,
+    NoReturn,
+    Optional,
+    Pattern,
+    Set,
+    Tuple,
+    Type,
+    Union,
+)
 
 
 def fail(msg: str) -> NoReturn:
@@ -41,7 +54,7 @@ if __name__ == "__main__":
         argcomplete = None
 
     parser = argparse.ArgumentParser(
-        description="Diff MIPS, PPC, AArch64, or ARM32 assembly."
+        description="Diff MIPS, PPC, AArch64, ARM32, SH2, SH4, or m68k assembly."
     )
 
     start_argument = parser.add_argument(
@@ -107,11 +120,11 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "-f",
-        "--objfile",
-        dest="objfile",
+        "--file",
+        dest="file",
         type=str,
-        help="""File path for an object file being diffed. When used
-        the map file isn't searched for the function given. Useful for dynamically
+        help="""File path for a file being diffed. When used the map
+        file isn't searched for the function given. Useful for dynamically
         linked libraries.""",
     )
     parser.add_argument(
@@ -199,9 +212,9 @@ if __name__ == "__main__":
         "-s",
         "--stop-at-ret",
         dest="stop_at_ret",
-        action="store_true",
+        action="count",
         help="""Stop disassembling at the first return instruction.
-        Some functions have multiple return points, so use with care!""",
+        You can also pass -ss to stop at the second return instruction, and so on.""",
     )
     parser.add_argument(
         "-i",
@@ -250,6 +263,14 @@ if __name__ == "__main__":
         action="store_true",
         help="""Automatically update when source/object files change.
         Recommended in combination with -m.""",
+    )
+    parser.add_argument(
+        "-y",
+        "--yes",
+        dest="agree",
+        action="store_true",
+        help="""Automatically agree to any yes/no questions asked.
+        Useful if you really want to use the -w option without -m.""",
     )
     parser.add_argument(
         "-0",
@@ -355,7 +376,6 @@ if __name__ == "__main__":
 # (We do imports late to optimize auto-complete performance.)
 
 import abc
-import ast
 import difflib
 import html
 import itertools
@@ -394,7 +414,7 @@ class ProjectSettings:
     build_command: List[str]
     map_format: str
     build_dir: str
-    ms_map_address_offset: int
+    map_address_offset: int
     baseimg: Optional[str]
     myimg: Optional[str]
     mapfile: Optional[str]
@@ -418,7 +438,7 @@ class Config:
 
     # Build/objdump options
     diff_obj: bool
-    objfile: Optional[str]
+    file: Optional[str]
     make: bool
     source_old_binutils: bool
     diff_section: str
@@ -436,7 +456,7 @@ class Config:
     show_branches: bool
     show_line_numbers: bool
     show_source: bool
-    stop_at_ret: bool
+    stop_at_ret: Optional[int]
     ignore_large_imms: bool
     ignore_addr_diffs: bool
     algorithm: str
@@ -468,7 +488,9 @@ def create_project_settings(settings: Dict[str, Any]) -> ProjectSettings:
         objdump_flags=settings.get("objdump_flags", []),
         expected_dir=settings.get("expected_dir", "expected/"),
         map_format=settings.get("map_format", "gnu"),
-        ms_map_address_offset=settings.get("ms_map_address_offset", 0),
+        map_address_offset=settings.get(
+            "map_address_offset", settings.get("ms_map_address_offset", 0)
+        ),
         build_dir=settings.get("build_dir", settings.get("mw_build_dir", "build/")),
         show_line_numbers_default=settings.get("show_line_numbers_default", True),
         disassemble_all=settings.get("disassemble_all", False),
@@ -509,7 +531,7 @@ def create_config(args: argparse.Namespace, project: ProjectSettings) -> Config:
         arch=arch,
         # Build/objdump options
         diff_obj=args.diff_obj,
-        objfile=args.objfile,
+        file=args.file,
         make=args.make,
         source_old_binutils=args.source_old_binutils,
         diff_section=args.diff_section,
@@ -544,6 +566,9 @@ def get_objdump_executable(objdump_executable: Optional[str]) -> str:
         "mips-linux-gnu-objdump",
         "mips64-elf-objdump",
         "mips-elf-objdump",
+        "sh-elf-objdump",
+        "sh4-linux-gnu-objdump",
+        "m68k-elf-objdump",
     ]
     for objdump_cand in objdump_candidates:
         try:
@@ -577,7 +602,7 @@ BUFFER_CMD: List[str] = ["tail", "-c", str(10**9)]
 # -i ignores case when searching
 # -c something about how the screen gets redrawn; I don't remember the purpose
 # -#6 makes left/right arrow keys scroll by 6 characters
-LESS_CMD: List[str] = ["less", "-SRic", "-#6"]
+LESS_CMD: List[str] = ["less", "-SRic", "-+F", "-+X", "-#6"]
 
 DEBOUNCE_DELAY: float = 0.1
 
@@ -753,7 +778,6 @@ class AnsiFormatter(Formatter):
         BasicFormat.STACK: Fore.YELLOW,
         BasicFormat.REGISTER: Fore.YELLOW,
         BasicFormat.REGISTER_CATEGORY: Fore.LIGHTYELLOW_EX,
-        BasicFormat.DELAY_SLOT: Fore.LIGHTBLACK_EX,
         BasicFormat.DIFF_CHANGE: Fore.LIGHTBLUE_EX,
         BasicFormat.DIFF_ADD: Fore.GREEN,
         BasicFormat.DIFF_REMOVE: Fore.RED,
@@ -974,10 +998,49 @@ def symbol_formatter(group: str, base_index: int) -> FormatFunction:
 
 ObjdumpCommand = Tuple[List[str], str, Optional[str]]
 
+# eval_expr adapted from https://stackoverflow.com/a/9558001
+
+import ast
+import operator as op
+
+operators: Dict[Type[Union[ast.operator, ast.unaryop]], Any] = {
+    ast.Add: op.add,
+    ast.Sub: op.sub,
+    ast.Mult: op.mul,
+    ast.Div: op.floordiv,
+    ast.USub: op.neg,
+    ast.Pow: op.pow,
+    ast.BitXor: op.xor,
+    ast.BitOr: op.or_,
+    ast.BitAnd: op.and_,
+    ast.Invert: op.inv,
+}
+
+
+def eval_expr(expr: str) -> Any:
+    return eval_(ast.parse(expr, mode="eval").body)
+
+
+def eval_(node: ast.AST) -> Any:
+    if (
+        hasattr(ast, "Constant")
+        and isinstance(node, ast.Constant)
+        and isinstance(node.value, int)
+    ):  # Python 3.8+
+        return node.value
+    elif isinstance(node, ast.BinOp):
+        return operators[type(node.op)](eval_(node.left), eval_(node.right))
+    elif isinstance(node, ast.UnaryOp):
+        return operators[type(node.op)](eval_(node.operand))
+    elif sys.version_info < (3, 8) and isinstance(node, ast.Num):
+        return node.n
+    else:
+        raise TypeError(node)
+
 
 def maybe_eval_int(expr: str) -> Optional[int]:
     try:
-        ret = ast.literal_eval(expr)
+        ret = eval_expr(expr)
         if not isinstance(ret, int):
             raise Exception("not an integer")
         return ret
@@ -1000,7 +1063,9 @@ def eval_line_num(expr: str) -> Optional[int]:
 
 
 def run_make(target: str, project: ProjectSettings) -> None:
-    subprocess.check_call(project.build_command + [target], stdout=sys.stderr, stderr=sys.stderr)
+    subprocess.check_call(
+        project.build_command + [target], stdout=sys.stderr, stderr=sys.stderr
+    )
 
 
 def run_make_capture_output(
@@ -1227,11 +1292,7 @@ def search_map_file(
         if len(find) == 1:
             names_find = re.search(r"(\S+) ... (\S+)", find[0])
             assert names_find is not None
-            fileofs = (
-                int(names_find.group(1), 16)
-                - load_address
-                + project.ms_map_address_offset
-            )
+            fileofs = int(names_find.group(1), 16) - load_address
             if for_binary:
                 return None, fileofs
 
@@ -1418,7 +1479,7 @@ def dump_objfile(
     if start.startswith("0"):
         fail("numerical start address not supported with -o; pass a function name")
 
-    objfile = config.objfile
+    objfile = config.file
     if not objfile:
         objfile, _ = search_map_file(start, project, config, for_binary=False)
 
@@ -1431,12 +1492,11 @@ def dump_objfile(
     if not os.path.isfile(objfile):
         fail(f"Not able to find .o file for function: {objfile} is not a file.")
 
-    refobjfile = os.path.relpath(objfile, project.build_dir)
-    refobjfile = os.path.join(project.expected_dir, refobjfile)
+    refobjfile = os.path.join(
+        project.expected_dir, os.path.relpath(objfile, project.build_dir)
+    )
     if config.diff_mode != DiffMode.SINGLE and not os.path.isfile(refobjfile):
-        refobjfile = refobjfile.replace("/src/", "/asm/").replace(".c.o", ".s.o")
-        if not os.path.isfile(refobjfile):
-            fail(f'Please ensure an OK .o file exists at "{refobjfile}".')
+        fail(f'Please ensure an OK .o file exists at "{refobjfile}".')
 
     if project.disassemble_all:
         disassemble_flag = "-D"
@@ -1454,15 +1514,21 @@ def dump_objfile(
 def dump_binary(
     start: str, end: Optional[str], config: Config, project: ProjectSettings
 ) -> Tuple[str, ObjdumpCommand, ObjdumpCommand]:
-    if not project.baseimg or not project.myimg:
+    binfile = config.file or project.myimg
+    if not project.baseimg or not binfile:
         fail("Missing myimg/baseimg in config.")
     if config.make:
-        run_make(project.myimg, project)
+        run_make(binfile, project)
+    if not os.path.isfile(binfile):
+        fail(f"Not able to find binary file: {binfile}")
     start_addr = maybe_eval_int(start)
-    if start_addr is None:
+    if start_addr is None and config.file is None:
         _, start_addr = search_map_file(start, project, config, for_binary=True)
         if start_addr is None:
             fail("Not able to find function in map file.")
+        start_addr += project.map_address_offset
+    elif start_addr is None:
+        fail("Start address must be an integer expression when using binary -f")
     if end is not None:
         end_addr = eval_int(end, "End address must be an integer expression.")
     else:
@@ -1474,9 +1540,9 @@ def dump_binary(
     ]
     flags2 = [f"--start-address={start_addr}", f"--stop-address={end_addr}"]
     return (
-        project.myimg,
+        binfile,
         (objdump_flags + flags1, project.baseimg, None),
-        (objdump_flags + flags2, project.myimg, None),
+        (objdump_flags + flags2, binfile, None),
     )
 
 
@@ -1528,7 +1594,8 @@ class AsmProcessorMIPS(AsmProcessor):
             # integer.
             return prev, None
         before, imm, after = parse_relocated_line(prev)
-        repl = row.split()[-1] + reloc_addend_from_imm(imm, before, self.config.arch)
+        addend = reloc_addend_from_imm(imm, before, self.config.arch)
+        repl = row.split()[-1] + addend
         if "R_MIPS_LO16" in row:
             repl = f"%lo({repl})"
         elif "R_MIPS_HI16" in row:
@@ -1549,6 +1616,8 @@ class AsmProcessorMIPS(AsmProcessor):
             repl = f"%got({repl})"
         elif "R_MIPS_CALL16" in row:
             repl = f"%call16({repl})"
+        elif "R_MIPS_LITERAL" in row:
+            repl = repl[: -len(addend)]
         else:
             assert False, f"unknown relocation type '{row}' for line '{prev}'"
         return before + repl + after, repl
@@ -1565,7 +1634,6 @@ class AsmProcessorPPC(AsmProcessor):
     def pre_process(
         self, mnemonic: str, args: str, next_row: Optional[str]
     ) -> Tuple[str, str]:
-
         if next_row and "R_PPC_EMB_SDA21" in next_row:
             # With sda21 relocs, the linker transforms `r0` into `r2`/`r13`, and
             # we may encounter this in either pre-transformed or post-transformed
@@ -1586,10 +1654,27 @@ class AsmProcessorPPC(AsmProcessor):
                 mnemonic = mnemonic.replace("li", "addi")
                 args_parts = args.split(",")
                 args = args_parts[0] + ",0," + args_parts[1]
+        if (
+            next_row
+            and ("R_PPC_REL24" in next_row or "R_PPC_REL14" in next_row)
+            and ".text+0x" in next_row
+            and mnemonic in PPC_BRANCH_INSTRUCTIONS
+        ):
+            # GCC emits a relocation of "R_PPC_REL14" or "R_PPC_REL24" with a .text offset
+            # fixup the args to use the offset from the relocation
+
+            # Split args by ',' which will result in either [cr, offset] or [offset]
+            # Replace the current offset with the next line's ".text+0x" offset
+            splitArgs = args.split(",")
+            splitArgs[-1] = next_row.split(".text+0x")[-1]
+            args = ",".join(splitArgs)
 
         return mnemonic, args
 
     def process_reloc(self, row: str, prev: str) -> Tuple[str, Optional[str]]:
+        # row is the line with the relocations
+        # prev is the line to apply relocations to
+
         arch = self.config.arch
         assert any(
             r in row
@@ -1597,11 +1682,18 @@ class AsmProcessorPPC(AsmProcessor):
         ), f"unknown relocation type '{row}' for line '{prev}'"
         before, imm, after = parse_relocated_line(prev)
         repl = row.split()[-1]
+        mnemonic, args = prev.split(maxsplit=1)
+
         if "R_PPC_REL24" in row:
             # function calls
-            pass
-        if "R_PPC_REL14" in row:
-            pass
+            # or unconditional branches generated by GCC "b offset"
+            if mnemonic in PPC_BRANCH_INSTRUCTIONS and ".text+0x" in row:
+                # this has been handled in pre_process
+                return prev, None
+        elif "R_PPC_REL14" in row:
+            if mnemonic in PPC_BRANCH_INSTRUCTIONS and ".text+0x" in row:
+                # this has been handled in pre_process
+                return prev, None
         elif "R_PPC_ADDR16_HI" in row:
             # absolute hi of addr
             repl = f"{repl}@h"
@@ -1728,12 +1820,42 @@ class AsmProcessorAArch64(AsmProcessor):
 
 class AsmProcessorI686(AsmProcessor):
     def process_reloc(self, row: str, prev: str) -> Tuple[str, Optional[str]]:
+        if "WRTSEG" in row:  # ignore WRTSEG (watcom)
+            return prev, None
         repl = row.split()[-1]
         mnemonic, args = prev.split(maxsplit=1)
+        offset = False
 
-        addr_imm = re.search(r"(?<!\$)0x[0-9a-f]+", args)
+        # Calls
+        # Example call a2f
+        # Example call *0
+        if mnemonic == "call":
+            addr_imm = re.search(r"(^|(?<=\*)|(?<=\*\%cs\:))[0-9a-f]+", args)
+
+        # Direct use of reloc
+        # Example 0x0,0x8(%edi)
+        # Example 0x0,%edi
+        # Example *0x0(,%edx,4)
+        # Example %edi,0
+        # Example movb $0x0,0x0
+        # Example $0x0,0x4(%edi)
+        # Match 0x0 part to replace
+        else:
+            addr_imm = re.search(r"(?:0x)?0+$", args)
+
+        if not addr_imm:
+            addr_imm = re.search(r"(^\$?|(?<=\*))0x0", args)
+
+        # Offset value
+        # Example 0x4,%eax
+        # Example $0x4,%eax
+        if not addr_imm:
+            addr_imm = re.search(r"(^|(?<=\*)|(?<=\$))0x[0-9a-f]+", args)
+            offset = True
+
         if not addr_imm:
             assert False, f"failed to find address immediate for line '{prev}'"
+
         start, end = addr_imm.span()
 
         if "R_386_NONE" in row:
@@ -1750,6 +1872,16 @@ class AsmProcessorI686(AsmProcessor):
             pass
         elif "R_386_PC8" in row:
             pass
+        elif "dir32" in row:
+            if "+" in repl:
+                repl = repl.split("+")[0]
+        elif "DISP32" in row:
+            pass
+        elif "OFF32" in row:
+            pass
+        elif "OFFPC32" in row:
+            if "+" in repl:
+                repl = repl.split("+")[0]
         elif "R_386_GOT32" in row:
             repl = f"%got({repl})"
         elif "R_386_PLT32" in row:
@@ -1765,10 +1897,73 @@ class AsmProcessorI686(AsmProcessor):
         else:
             assert False, f"unknown relocation type '{row}' for line '{prev}'"
 
+        if offset:
+            repl = f"{repl}+{addr_imm.group()}"
+
         return f"{mnemonic}\t{args[:start]+repl+args[end:]}", repl
 
     def is_end_of_function(self, mnemonic: str, args: str) -> bool:
         return mnemonic == "ret"
+
+
+class AsmProcessorSH2(AsmProcessor):
+    def __init__(self, config: Config) -> None:
+        super().__init__(config)
+
+    def process_reloc(self, row: str, prev: str) -> Tuple[str, Optional[str]]:
+        return prev, None
+
+    def is_end_of_function(self, mnemonic: str, args: str) -> bool:
+        return mnemonic == "rts"
+
+
+class AsmProcessorM68k(AsmProcessor):
+    def pre_process(
+        self, mnemonic: str, args: str, next_row: Optional[str]
+    ) -> Tuple[str, str]:
+        # replace objdump's syntax of pointer accesses with the equivilant in AT&T syntax for readability
+        return mnemonic, re.sub(
+            r"%(sp|a[0-7]|fp|pc)@(?:(?:\((-?(?:0x[0-9a-f]+|[0-9]+)) *(,%d[0-7]:[wl])?\))|(\+)|(-))?",
+            r"\5\2(%\1\3)\4",
+            args,
+        )
+
+    def process_reloc(self, row: str, prev: str) -> Tuple[str, Optional[str]]:
+        repl = row.split()[-1]
+        mnemonic, args = prev.split(maxsplit=1)
+
+        addr_imm = re.search(r"(?<![#da])(0x[0-9a-f]+|[0-9]+) ?", args)
+        if not addr_imm:
+            assert False, f"failed to find address immediate for line '{prev}'"
+        start, end = addr_imm.span()
+
+        if "R_68K_NONE" in row:
+            pass
+        elif "R_68K_32" in row:
+            pass
+        elif "R_68K_16" in row:
+            pass
+        elif "R_68K_8" in row:
+            pass
+        elif "R_68K_GOT32O" in row:
+            repl = "@GOT"
+        elif "R_68K_GOT16O" in row:
+            repl += "@GOT"
+        elif "R_68K_GOT8O" in row:
+            repl += "@GOT"
+        elif "R_68K_GOT32" in row:
+            repl += "@GOTPC"
+        elif "R_68K_GOT16" in row:
+            repl += "@GOTPC"
+        elif "R_68K_GOT8" in row:
+            repl += "@GOTPC"
+        else:
+            assert False, f"unknown relocation type '{row}' for line '{prev}'"
+
+        return f"{mnemonic}\t{args[:start]+repl+args[end:]}", repl
+
+    def is_end_of_function(self, mnemonic: str, args: str) -> bool:
+        return mnemonic == "rts" or mnemonic == "rte" or mnemonic == "rtr"
 
 
 @dataclass
@@ -1893,6 +2088,12 @@ PPC_BRANCH_INSTRUCTIONS = {
     "bgt",
     "bgt+",
     "bgt-",
+    "bso",
+    "bso+",
+    "bso-",
+    "bns",
+    "bns+",
+    "bns-",
 }
 
 I686_BRANCH_INSTRUCTIONS = {
@@ -1965,6 +2166,48 @@ I686_BRANCH_INSTRUCTIONS = {
     "jz",
 }
 
+SH2_BRANCH_INSTRUCTIONS = {
+    "bf",
+    "bf.s",
+    "bt",
+    "bt.s",
+    "bra",
+    "bsr",
+}
+
+M68K_CONDS = {
+    "ra",
+    "cc",
+    "cs",
+    "eq",
+    "ge",
+    "gt",
+    "hi",
+    "le",
+    "ls",
+    "lt",
+    "mi",
+    "ne",
+    "pl",
+    "vc",
+    "vs",
+}
+
+M68K_BRANCH_INSTRUCTIONS = {
+    f"{prefix}{cond}{suffix}"
+    for prefix in {"b", "db"}
+    for cond in M68K_CONDS
+    for suffix in {"s", "w"}
+}.union(
+    {
+        "dbt",
+        "dbf",
+        "bsrw",
+        "bsrs",
+    }
+)
+
+
 MIPS_SETTINGS = ArchSettings(
     name="mips",
     re_int=re.compile(r"[0-9]+"),
@@ -1989,7 +2232,9 @@ MIPS_SETTINGS = ArchSettings(
     proc=AsmProcessorMIPS,
 )
 
-MIPSEL_SETTINGS = replace(MIPS_SETTINGS, name="mipsel", big_endian=False)
+MIPSEL_SETTINGS = replace(
+    MIPS_SETTINGS, name="mipsel", big_endian=False, arch_flags=["-m", "mips:3000"]
+)
 
 MIPSEE_SETTINGS = replace(
     MIPSEL_SETTINGS, name="mipsee", arch_flags=["-m", "mips:5900"]
@@ -2076,7 +2321,7 @@ I686_SETTINGS = ArchSettings(
     re_large_imm=re.compile(r"-?[1-9][0-9]{2,}|-?0x[0-9a-f]{3,}"),
     re_sprel=re.compile(r"-?(0x[0-9a-f]+|[0-9]+)(?=\((%ebp|%esi)\))"),
     re_imm=re.compile(r"-?(0x[0-9a-f]+|[0-9]+)"),
-    re_reloc=re.compile(r"R_386_"),
+    re_reloc=re.compile(r"R_386_|dir32|DISP32|WRTSEG|OFF32|OFFPC32"),
     # The x86 architecture has a variable instruction length. The raw bytes of
     # an instruction as displayed by objdump can line wrap if it's long enough.
     # This destroys the objdump output processor logic, so we avoid this.
@@ -2084,6 +2329,72 @@ I686_SETTINGS = ArchSettings(
     branch_instructions=I686_BRANCH_INSTRUCTIONS,
     instructions_with_address_immediates=I686_BRANCH_INSTRUCTIONS.union({"mov"}),
     proc=AsmProcessorI686,
+)
+
+SH2_SETTINGS = ArchSettings(
+    name="sh2",
+    # match -128-127 preceded by a '#' with a ',' after (8 bit immediates)
+    re_int=re.compile(r"(?<=#)(-?(?:1[01][0-9]|12[0-8]|[1-9][0-9]?|0))(?=,)"),
+    # match <text>, match ! and after
+    re_comment=re.compile(r"<.*?>|!.*"),
+    #   - r0-r15 general purpose registers, r15 is stack pointer during exceptions
+    #   - sr, gbr, vbr - control registers
+    #   - mach, macl, pr, pc - system registers
+    re_reg=re.compile(r"r1[0-5]|r[0-9]"),
+    # sh2 has pc-relative and gbr-relative but not stack-pointer-relative
+    re_sprel=re.compile(r"(?<=,)([0-9]+|0x[0-9a-f]+)\(sp\)"),
+    # max immediate size is 8-bit
+    re_large_imm=re.compile(r"-?[1-9][0-9]{2,}|-?0x[0-9a-f]{3,}"),
+    re_imm=re.compile(r"\b0[xX][0-9a-fA-F]+\b"),
+    # https://github.com/bminor/binutils-gdb/blob/master/bfd/elf32-sh-relocs.h#L21
+    re_reloc=re.compile(r"R_SH_"),
+    arch_flags=["-m", "sh2"],
+    branch_instructions=SH2_BRANCH_INSTRUCTIONS,
+    instructions_with_address_immediates=SH2_BRANCH_INSTRUCTIONS.union(
+        {"bf", "bf.s", "bt", "bt.s", "bra", "bsr"}
+    ),
+    delay_slot_instructions=SH2_BRANCH_INSTRUCTIONS.union(
+        {"bf.s", "bt.s", "bra", "braf", "bsr", "bsrf", "jmp", "jsr", "rts"}
+    ),
+    proc=AsmProcessorSH2,
+)
+
+SH4_SETTINGS = replace(
+    SH2_SETTINGS,
+    name="sh4",
+    #   - fr0-fr15, dr0-dr14, xd0-xd14, fv0-fv12 FP registers
+    #     dr/xd registers can only be even-numbered, and fv registers can only be a multiple of 4
+    re_reg=re.compile(
+        r"r1[0-5]|r[0-9]|fr1[0-5]|fr[0-9]|dr[02468]|dr1[024]|xd[02468]|xd1[024]|fv[048]|fv12"
+    ),
+    arch_flags=["-m", "sh4"],
+)
+
+SH4EL_SETTINGS = replace(SH4_SETTINGS, name="sh4el", big_endian=False)
+
+M68K_SETTINGS = ArchSettings(
+    name="m68k",
+    re_int=re.compile(r"[0-9]+"),
+    # '|' is used by assemblers, but is not used by objdump
+    re_comment=re.compile(r"<.*>"),
+    # Includes:
+    # - d0-d7 data registers
+    # - a0-a6 address registers
+    # - fp0-fp7 floating-point registers
+    # - usp (user sp)
+    # - fp, sr, ccr
+    # - fpcr, fpsr, fpiar
+    re_reg=re.compile(r"%\b(d[0-7]|a[0-6]|usp|fp([0-7]|cr|sr|iar)?|sr|ccr)(:[wl])?\b"),
+    # This matches all stack accesses that do not use an index register
+    re_sprel=re.compile(r"-?(0x[0-9a-f]+|[0-9]+)(?=\((%sp|%a7)\))"),
+    re_imm=re.compile(r"#?-?\b(0x[0-9a-f]+|[0-9]+)(?!\()"),
+    re_large_imm=re.compile(r"#?-?([1-9][0-9]{2,}|0x[0-9a-f]{3,})"),
+    re_reloc=re.compile(r"R_68K_"),
+    arch_flags=["-m", "m68k"],
+    branch_instructions=M68K_BRANCH_INSTRUCTIONS,
+    # Pretty much every instruction can take an address immediate
+    instructions_with_address_immediates=M68K_BRANCH_INSTRUCTIONS.union("jmp", "jsr"),
+    proc=AsmProcessorM68k,
 )
 
 ARCH_SETTINGS = [
@@ -2095,11 +2406,21 @@ ARCH_SETTINGS = [
     AARCH64_SETTINGS,
     PPC_SETTINGS,
     I686_SETTINGS,
+    SH2_SETTINGS,
+    SH4_SETTINGS,
+    SH4EL_SETTINGS,
+    M68K_SETTINGS,
 ]
 
 
 def hexify_int(row: str, pat: Match[str], arch: ArchSettings) -> str:
     full = pat.group(0)
+
+    # sh2/sh4 only has 8-bit immediates, just convert them uniformly without
+    # any -hex stuff
+    if arch.name == "sh2" or arch.name == "sh4" or arch.name == "sh4el":
+        return hex(int(full) & 0xFF)
+
     if len(full) <= 1:
         # leave one-digit ints alone
         return full
@@ -2179,16 +2500,15 @@ class Line:
 def process(dump: str, config: Config) -> List[Line]:
     arch = config.arch
     processor = arch.proc(config)
-    skip_next = False
     source_lines = []
     source_filename = None
     source_line_num = None
+    rets_remaining = config.stop_at_ret
 
     i = 0
     num_instr = 0
     data_refs: Dict[int, Dict[str, List[int]]] = defaultdict(lambda: defaultdict(list))
     output: List[Line] = []
-    stop_after_delay_slot = False
     lines = dump.split("\n")
     while i < len(lines):
         row = lines[i]
@@ -2323,17 +2643,8 @@ def process(dump: str, config: Config) -> List[Line]:
         if not config.score_stack_differences:
             scorable_line = re.sub(arch.re_sprel, "addr(sp)", scorable_line)
 
-        if skip_next:
-            skip_next = False
-            row = "<delay-slot>"
-            mnemonic = "<delay-slot>"
-            scorable_line = "<delay-slot>"
-        if mnemonic in arch.branch_likely_instructions:
-            skip_next = True
-
         row = re.sub(arch.re_reg, "<reg>", row)
         row = re.sub(arch.re_sprel, "addr(sp)", row)
-        row_with_imm = row
         if mnemonic in arch.instructions_with_address_immediates:
             row = row.strip()
             row, _ = split_off_address(row)
@@ -2345,13 +2656,27 @@ def process(dump: str, config: Config) -> List[Line]:
         if (
             mnemonic in arch.branch_instructions or is_text_relative_j
         ) and symbol is None:
+            # Here, we try to match a wide variety of addressing mode:
+            # - Global deref with offset: *0x1234(%eax)
+            # - Global deref: *0x1234
+            # - Register deref: *(%eax)
+            #
+            # We first have a single regex to match register deref and global
+            # deref with offset
             x86_longjmp = re.search(r"\*(.*)\(", args)
             if x86_longjmp:
                 capture = x86_longjmp.group(1)
-                if capture != "":
+                if capture != "" and capture.isnumeric():
                     branch_target = int(capture, 16)
             else:
-                branch_target = int(args.split(",")[-1], 16)
+                # Then, we try to match the global deref in a separate regex.
+                x86_longjmp = re.search(r"\*(.*)", args)
+                if x86_longjmp:
+                    capture = x86_longjmp.group(1)
+                    if capture != "" and capture.isnumeric():
+                        branch_target = int(capture, 16)
+                else:
+                    branch_target = int(args.split(",")[-1], 16)
 
         output.append(
             Line(
@@ -2373,8 +2698,10 @@ def process(dump: str, config: Config) -> List[Line]:
         num_instr += 1
         source_lines = []
 
-        if config.stop_at_ret and processor.is_end_of_function(mnemonic, args):
-            break
+        if rets_remaining and processor.is_end_of_function(mnemonic, args):
+            rets_remaining -= 1
+            if rets_remaining == 0:
+                break
 
     processor.post_process(output)
     return output
@@ -2391,7 +2718,6 @@ def normalize_stack(row: str, arch: ArchSettings) -> str:
 def check_for_symbol_mismatch(
     old_line: Line, new_line: Line, symbol_map: Dict[str, str]
 ) -> bool:
-
     assert old_line.symbol is not None
     assert new_line.symbol is not None
 
@@ -2468,7 +2794,7 @@ def diff_sequences(
     try:
         rem1 = remap(seq1)
         rem2 = remap(seq2)
-    except ValueError as e:
+    except ValueError:
         if len(seq1) + len(seq2) < 0x110000:
             raise
         # If there are too many unique elements, chr() doesn't work.
@@ -2487,7 +2813,7 @@ def diff_lines(
     algorithm: str,
 ) -> List[Tuple[Optional[Line], Optional[Line]]]:
     ret = []
-    for (tag, i1, i2, j1, j2) in diff_sequences(
+    for tag, i1, i2, j1, j2 in diff_sequences(
         [line.mnemonic for line in lines1],
         [line.mnemonic for line in lines2],
         algorithm,
@@ -2510,7 +2836,6 @@ def diff_lines(
 def diff_sameline(
     old_line: Line, new_line: Line, config: Config, symbol_map: Dict[str, str]
 ) -> Tuple[int, int, bool]:
-
     old = old_line.scorable_line
     new = new_line.scorable_line
     if old == new:
@@ -2534,7 +2859,8 @@ def diff_sameline(
 
     # Compare each field in order
     new_parts, old_parts = new.split(None, 1), old.split(None, 1)
-    newfields, oldfields = new_parts[1].split(","), old_parts[1].split(",")
+    newfields = new_parts[1].split(",") if len(new_parts) > 1 else []
+    oldfields = old_parts[1].split(",") if len(old_parts) > 1 else []
     if ignore_last_field:
         newfields = newfields[:-1]
         oldfields = oldfields[:-1]
@@ -2543,8 +2869,12 @@ def diff_sameline(
         # we split that part out to make it a separate field
         # however, we don't split if it has a proceeding % macro, e.g. "%lo(.data)"
         re_paren = re.compile(r"(?<!%hi)(?<!%lo)(?<!%got)(?<!%call16)(?<!%gp_rel)\(")
-        oldfields = oldfields[:-1] + re_paren.split(oldfields[-1])
-        newfields = newfields[:-1] + re_paren.split(newfields[-1])
+        oldfields = oldfields[:-1] + (
+            re_paren.split(oldfields[-1]) if len(oldfields) > 0 else []
+        )
+        newfields = newfields[:-1] + (
+            re_paren.split(newfields[-1]) if len(newfields) > 0 else []
+        )
 
     for nf, of in zip(newfields, oldfields):
         if nf != of:
@@ -2685,7 +3015,7 @@ def do_diff(lines1: List[Line], lines2: List[Line], config: Config) -> Diff:
     bts2: Set[int] = set()
 
     if config.show_branches:
-        for (lines, btset, sc) in [
+        for lines, btset, sc in [
             (lines1, bts1, sc5),
             (lines2, bts2, sc6),
         ]:
@@ -2703,7 +3033,7 @@ def do_diff(lines1: List[Line], lines2: List[Line], config: Config) -> Diff:
     line_num_base = -1
     line_num_offset = 0
     line_num_2to1 = {}
-    for (line1, line2) in diffed_lines:
+    for line1, line2 in diffed_lines:
         if line1 is not None and line1.line_num is not None:
             line_num_base = line1.line_num
             line_num_offset = 0
@@ -2712,7 +3042,7 @@ def do_diff(lines1: List[Line], lines2: List[Line], config: Config) -> Diff:
         if line2 is not None and line2.line_num is not None:
             line_num_2to1[line2.line_num] = (line_num_base, line_num_offset)
 
-    for (line1, line2) in diffed_lines:
+    for line1, line2 in diffed_lines:
         line_color1 = line_color2 = sym_color = BasicFormat.NONE
         line_prefix = " "
         is_data_ref = False
@@ -2735,13 +3065,6 @@ def do_diff(lines1: List[Line], lines2: List[Line], config: Config) -> Diff:
                 # the diff, and don't just happen to have the are the same address
                 # by accident.
                 pass
-            elif line1.diff_row == "<delay-slot>":
-                # Don't draw attention to differing branch-likely delay slots: they
-                # typically mirror the branch destination - 1 so the real difference
-                # is elsewhere. Still, do mark them as different to avoid confusion.
-                # No need to consider branches because delay slots can't branch.
-                out1 = out1.reformat(BasicFormat.DELAY_SLOT)
-                out2 = out2.reformat(BasicFormat.DELAY_SLOT)
             else:
                 mnemonic = line1.original.split()[0]
                 branchless1, address1 = out1.plain(), ""
@@ -2885,7 +3208,7 @@ def do_diff(lines1: List[Line], lines2: List[Line], config: Config) -> Diff:
             for source_line in line2.source_lines:
                 line_format = BasicFormat.SOURCE_OTHER
                 if config.source_old_binutils:
-                    if source_line and re.fullmatch(".*\.c(?:pp)?:\d+", source_line):
+                    if source_line and re.fullmatch(r".*\.c(?:pp)?:\d+", source_line):
                         line_format = BasicFormat.SOURCE_FILENAME
                     elif source_line and source_line.endswith("():"):
                         line_format = BasicFormat.SOURCE_FUNCTION
@@ -3041,7 +3364,7 @@ def align_diffs(old_diff: Diff, new_diff: Diff, config: Config) -> TableData:
                 differ = difflib.SequenceMatcher(
                     a=old_chunk, b=new_chunk, autojunk=False
                 )
-                for (tag, i1, i2, j1, j2) in differ.get_opcodes():
+                for tag, i1, i2, j1, j2 in differ.get_opcodes():
                     if tag in ["equal", "replace"]:
                         for i, j in zip(range(i1, i2), range(j1, j2)):
                             diff_lines.append((empty, new_chunk[j], old_chunk[i]))
@@ -3090,7 +3413,7 @@ def align_diffs(old_diff: Diff, new_diff: Diff, config: Config) -> TableData:
 
     def diff_line_to_table_line(line: Tuple[OutputLine, ...]) -> TableLine:
         cells = [
-            (line[0].base or Text(), line[0].line1)
+            (line[0].base or Text(), line[0].line1),
         ]
         for ol in line[1:]:
             cells.append((ol.fmt2, ol.line2))
@@ -3156,14 +3479,14 @@ def debounced_fs_watch(
         observed = set()
         for target in targets:
             if os.path.isdir(target):
-                observer.schedule(event_handler, target, recursive=True)
+                observer.schedule(event_handler, target, recursive=True)  # type: ignore
             else:
                 file_targets.append(os.path.normpath(target))
                 target = os.path.dirname(target) or "."
                 if target not in observed:
                     observed.add(target)
-                    observer.schedule(event_handler, target)
-        observer.start()
+                    observer.schedule(event_handler, target)  # type: ignore
+        observer.start()  # type: ignore
         while True:
             t = listenq.get()
             more = True
@@ -3392,9 +3715,9 @@ def main() -> None:
     elif not args.watch:
         display.run_sync()
     else:
-        if not args.make:
+        if not args.make and not args.agree:
             yn = input(
-                "Warning: watch-mode (-w) enabled without auto-make (-m). "
+                "Warning: watch-mode (-w) enabled without auto-make (-m) or agree-all (-y). "
                 "You will have to run make manually. Ok? (Y/n) "
             )
             if yn.lower() == "n":

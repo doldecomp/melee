@@ -2,14 +2,32 @@
 #define MELEE_FT_FORWARD_H
 
 #include <platform.h>
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
-
-#include <stddef.h>
-#include <dolphin/mtx/types.h>
 
 #define FIGHTERVARS_SIZE 0xF8
 
+typedef enum_t FtMotionId;
+typedef struct CollData CollData;
 typedef struct Fighter Fighter;
+typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;
+typedef struct Fighter_DemoStrings Fighter_DemoStrings;
+typedef struct FighterBone FighterBone;
+typedef struct ftCmdScript ftCmdScript;
+typedef struct FtCmdState FtCmdState;
+typedef struct ftCo_DatAttrs_xBC_t ftCo_DatAttrs_xBC_t;
+typedef struct FtCollisionData FtCollisionData;
+typedef struct ftCommonData ftCommonData;
+typedef struct ftData_UnkCountStruct ftData_UnkCountStruct;
+typedef struct ftDeviceUnk1 ftDeviceUnk1;
+typedef struct ftDeviceUnk2 ftDeviceUnk2;
+typedef struct ftLk_SpecialN_Vec3Group ftLk_SpecialN_Vec3Group;
+typedef struct ftMaterial_UnkTevStruct ftMaterial_UnkTevStruct;
+typedef struct ftSubactionList ftSubactionList;
+typedef struct gmScriptEventDefault gmScriptEventDefault;
+typedef struct MotionState MotionState;
+typedef struct UnkFloat6_Camera UnkFloat6_Camera;
+typedef u32 MotionFlags;
 
 #ifdef M2CTX
 typedef struct Fighter_GObj Fighter_GObj;
@@ -37,33 +55,13 @@ struct Fighter_GObj {
 typedef struct HSD_GObj Fighter_GObj;
 #endif
 
-typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;
-typedef struct Fighter_DemoStrings Fighter_DemoStrings;
-typedef struct FtCmdState FtCmdState;
-typedef struct MotionState MotionState;
-typedef struct UnkFloat6_Camera UnkFloat6_Camera;
-typedef struct ftCmdScript ftCmdScript;
-typedef struct ftCo_DatAttrs_xBC_t ftCo_DatAttrs_xBC_t;
-typedef struct ftCollisionBox ftCollisionBox;
-typedef struct ftCommonData ftCommonData;
-typedef struct ftData_UnkCountStruct ftData_UnkCountStruct;
-typedef struct ftDeviceUnk1 ftDeviceUnk1;
-typedef struct ftDeviceUnk2 ftDeviceUnk2;
-typedef struct ftLk_SpecialN_Vec3Group ftLk_SpecialN_Vec3Group;
-typedef struct ftMaterial_UnkTevStruct ftMaterial_UnkTevStruct;
-typedef struct ftSubactionList ftSubactionList;
-typedef struct gmScriptEventDefault gmScriptEventDefault;
-typedef u32 MotionFlags;
-
-typedef void (*FighterEvent)(Fighter* fp);
 typedef char* (*Fighter_MotionFileStringGetter)(enum_t arg0);
 typedef void (*Fighter_ItemEvent)(HSD_GObj* gobj, bool arg1);
 typedef void (*Fighter_ModelEvent)(Fighter* fp, int arg1, bool arg2);
 typedef void (*Fighter_UnkMtxEvent)(HSD_GObj* gobj, int arg1, Mtx vmtx);
 typedef void (*Fighter_UnkPtrEvent)(int arg0, int* arg1, int* arg2);
+typedef void (*FighterEvent)(Fighter* fp);
 typedef void (*FtCmd)(Fighter_GObj* gobj, FtCmdState* cmd);
-
-typedef enum_t FtMotionId;
 
 typedef enum FighterKind {
     FTKIND_MARIO,
@@ -141,87 +139,86 @@ typedef enum CharacterKind {
     CHKIND_MAX = CHKIND_NONE
 } CharacterKind;
 
-static MotionFlags const Ft_MF_None ATTRIBUTE_USED = 0;
+static MotionFlags const Ft_MF_None = 0;
 
-static MotionFlags const Ft_MF_KeepFastFall ATTRIBUTE_USED = 1 << 0;
+static MotionFlags const Ft_MF_KeepFastFall = 1 << 0;
 
-static MotionFlags const Ft_MF_KeepGfx ATTRIBUTE_USED = 1 << 1;
+static MotionFlags const Ft_MF_KeepGfx = 1 << 1;
 
 /// Preserve full body collision state
-static MotionFlags const Ft_MF_KeepColAnimHitStatus ATTRIBUTE_USED = 1 << 2;
+static MotionFlags const Ft_MF_KeepColAnimHitStatus = 1 << 2;
 
 /// Keep hitboxes
-static MotionFlags const Ft_MF_SkipHit ATTRIBUTE_USED = 1 << 3;
+static MotionFlags const Ft_MF_SkipHit = 1 << 3;
 
 /// Ignore model state change ?
-static MotionFlags const Ft_MF_SkipModel ATTRIBUTE_USED = 1 << 4;
+static MotionFlags const Ft_MF_SkipModel = 1 << 4;
 
-static MotionFlags const Ft_MF_SkipAnimVel ATTRIBUTE_USED = 1 << 5;
+static MotionFlags const Ft_MF_SkipAnimVel = 1 << 5;
 
-static MotionFlags const Ft_MF_Unk06 ATTRIBUTE_USED = 1 << 6;
+static MotionFlags const Ft_MF_Unk06 = 1 << 6;
 
 /// Ignore switching to character's "hurt" textures ?
-static MotionFlags const Ft_MF_SkipMatAnim ATTRIBUTE_USED = 1 << 7;
+static MotionFlags const Ft_MF_SkipMatAnim = 1 << 7;
 
 /// Resets thrower GObj pointer to NULL if false?
-static MotionFlags const Ft_MF_SkipThrowException ATTRIBUTE_USED = 1 << 8;
+static MotionFlags const Ft_MF_SkipThrowException = 1 << 8;
 
-static MotionFlags const Ft_MF_KeepSfx ATTRIBUTE_USED = 1 << 9;
+static MotionFlags const Ft_MF_KeepSfx = 1 << 9;
 
 /// Ignore Parasol state change
-static MotionFlags const Ft_MF_SkipParasol ATTRIBUTE_USED = 1 << 10;
+static MotionFlags const Ft_MF_SkipParasol = 1 << 10;
 
 /// Ignore rumble update?
-static MotionFlags const Ft_MF_SkipRumble ATTRIBUTE_USED = 1 << 11;
+static MotionFlags const Ft_MF_SkipRumble = 1 << 11;
 
-static MotionFlags const Ft_MF_SkipColAnim ATTRIBUTE_USED = 1 << 12;
+static MotionFlags const Ft_MF_SkipColAnim = 1 << 12;
 
 /// Keep respawn platform?
-static MotionFlags const Ft_MF_KeepAccessory ATTRIBUTE_USED = 1 << 13;
+static MotionFlags const Ft_MF_KeepAccessory = 1 << 13;
 
 /// Run all Subaction Events up to the current animation frame
-static MotionFlags const Ft_MF_UpdateCmd ATTRIBUTE_USED = 1 << 14;
+static MotionFlags const Ft_MF_UpdateCmd = 1 << 14;
 
-static MotionFlags const Ft_MF_SkipNametagVis ATTRIBUTE_USED = 1 << 15;
+static MotionFlags const Ft_MF_SkipNametagVis = 1 << 15;
 
 /// Assume this is for individual bones?
-static MotionFlags const Ft_MF_KeepColAnimPartHitStatus ATTRIBUTE_USED = 1
-                                                                         << 16;
+static MotionFlags const Ft_MF_KeepColAnimPartHitStatus = 1 << 16;
 
-static MotionFlags const Ft_MF_KeepSwordTrail ATTRIBUTE_USED = 1 << 17;
+static MotionFlags const Ft_MF_KeepSwordTrail = 1 << 17;
 
 /// Used by Ness during Up/Down Smash
-static MotionFlags const Ft_MF_SkipItemVis ATTRIBUTE_USED = 1 << 18;
+static MotionFlags const Ft_MF_SkipItemVis = 1 << 18;
 
 /// Skips updating bit 5 of #Fighter::x2222_flag?
-static MotionFlags const Ft_MF_Unk19 ATTRIBUTE_USED = 1 << 19;
+static MotionFlags const Ft_MF_Unk19 = 1 << 19;
 
-static MotionFlags const Ft_MF_UnkUpdatePhys ATTRIBUTE_USED = 1 << 20;
+static MotionFlags const Ft_MF_UnkUpdatePhys = 1 << 20;
 
 /// Sets anim rate to 0 and some other stuff
-static MotionFlags const Ft_MF_FreezeState ATTRIBUTE_USED = 1 << 21;
+static MotionFlags const Ft_MF_FreezeState = 1 << 21;
 
-static MotionFlags const Ft_MF_SkipModelPartVis ATTRIBUTE_USED = 1 << 22;
+static MotionFlags const Ft_MF_SkipModelPartVis = 1 << 22;
 
-static MotionFlags const Ft_MF_SkipMetalB ATTRIBUTE_USED = 1 << 23;
+static MotionFlags const Ft_MF_SkipMetalB = 1 << 23;
 
-static MotionFlags const Ft_MF_Unk24 ATTRIBUTE_USED = 1 << 24;
+static MotionFlags const Ft_MF_Unk24 = 1 << 24;
 
-static MotionFlags const Ft_MF_SkipAttackCount ATTRIBUTE_USED = 1 << 25;
+static MotionFlags const Ft_MF_SkipAttackCount = 1 << 25;
 
-static MotionFlags const Ft_MF_SkipModelFlags ATTRIBUTE_USED = 1 << 26;
+static MotionFlags const Ft_MF_SkipModelFlags = 1 << 26;
 
-static MotionFlags const Ft_MF_Unk27 ATTRIBUTE_USED = 1 << 27;
+static MotionFlags const Ft_MF_Unk27 = 1 << 27;
 
-static MotionFlags const Ft_MF_SkipHitStun ATTRIBUTE_USED = 1 << 28;
+static MotionFlags const Ft_MF_SkipHitStun = 1 << 28;
 
 /// Keeps current fighter animation?
-static MotionFlags const Ft_MF_SkipAnim ATTRIBUTE_USED = 1 << 29;
+static MotionFlags const Ft_MF_SkipAnim = 1 << 29;
 
-static MotionFlags const Ft_MF_Unk30 ATTRIBUTE_USED = 1 << 30;
+static MotionFlags const Ft_MF_Unk30 = 1 << 30;
 
 /// Unused?
-static MotionFlags const Ft_MF_Unk31 ATTRIBUTE_USED = 1 << 31;
+static MotionFlags const Ft_MF_Unk31 = 1 << 31;
 
 // Ledge Grab Macros
 

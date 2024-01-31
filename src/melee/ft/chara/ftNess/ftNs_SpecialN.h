@@ -3,6 +3,7 @@
 #ifndef GALE01_116EBC
 #define GALE01_116EBC
 
+#include <platform.h>
 #include <baselib/forward.h>
 
 /* 116EBC */ bool ftNs_SpecialN_CheckSpecialNHold(HSD_GObj* gobj);

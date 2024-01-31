@@ -2,6 +2,7 @@
 #define _lbarchive_h_
 
 #include <platform.h>
+#include <baselib/forward.h>
 
 #include <baselib/archive.h>
 
@@ -12,6 +13,6 @@ void lbArchive_80016BE0(void);
 void lbArchive_80016C64(char*, void*, char*, int, ...);
 void* lbArchive_80016DBC(void*, ...);
 s32 lbArchive_800171CC(void*, ...);
-void lbArchive_80016AF0(void);
+void lbArchive_80016AF0(HSD_Archive*, void*, ...);
 
 #endif

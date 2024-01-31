@@ -1,18 +1,22 @@
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+
 #include "ftMr_SpecialHi.h"
 
 #include "inlines.h"
 #include "math.h"
 #include "types.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 
-#include <baselib/random.h>
+#include <common_structs.h>
 
 void ftMr_SpecialHi_Enter(HSD_GObj* gobj)
 {
@@ -30,10 +34,7 @@ void ftMr_SpecialAirHi_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
@@ -60,10 +61,7 @@ void ftMr_SpecialHi_Anim(HSD_GObj* gobj)
 // 0x800E1B84
 void ftMr_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftMr_SpecialHi_Anim(gobj);
 }
@@ -74,13 +72,13 @@ void ftMr_SpecialHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = (ftMario_DatAttrs*) fp->dat_attrs;
-    f32 lstick_x = abs(fp->input.lstick.x);
+    float lstick_x = abs(fp->input.lstick.x);
     if (fp->cmd_vars[0] == 0 && lstick_x > sa->specialhi.momentum_stick_range)
     {
-        f32 deg = sa->specialhi.angle_diff *
-                  ((lstick_x - sa->specialhi.momentum_stick_range) /
-                   (1.0 - sa->specialhi.momentum_stick_range));
-        f32 rad =
+        float deg = sa->specialhi.angle_diff *
+                    ((lstick_x - sa->specialhi.momentum_stick_range) /
+                     (1.0 - sa->specialhi.momentum_stick_range));
+        float rad =
             fp->input.lstick.x > 0 ? -(deg_to_rad * deg) : +(deg_to_rad * deg);
         if (abs(rad) > abs(fp->lstick_angle)) {
             fp->lstick_angle = rad;
@@ -96,10 +94,7 @@ void ftMr_SpecialHi_IASA(HSD_GObj* gobj)
 
 void ftMr_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     ftMr_SpecialHi_IASA(gobj);
 }
 

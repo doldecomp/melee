@@ -1,12 +1,18 @@
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+
 #include "ftCo_HammerWalk.h"
 
 #include "ftCo_0C60.h"
 #include "ftCo_HammerJump.h"
 #include "ftCo_HammerWait.h"
 
-#include "ft/ft_0C31.h"
+#include "ft/fighter.h"
+#include "ft/ftanim.h"
 #include "ft/ftchangeparam.h"
 #include "ft/ftwalkcommon.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 
 /* 0C5614 */ static void ftCo_800C5614(ftCo_GObj* gobj);
 

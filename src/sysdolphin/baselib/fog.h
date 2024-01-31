@@ -1,7 +1,9 @@
 #ifndef SYSDOLPHIN_BASELIB_FOG_H
 #define SYSDOLPHIN_BASELIB_FOG_H
 
-#include "baselib/forward.h"
+#include <platform.h>
+#include "baselib/forward.h" // IWYU pragma: export
+#include <dolphin/gx/forward.h>
 
 #include "baselib/fobj.h"
 #include "baselib/object.h"

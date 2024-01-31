@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include "ftZd_SpecialS.h"
 
 #include "ftZd_Init.h"
@@ -5,13 +7,15 @@
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
-#include "it/it_27CF.h"
+#include "ftZelda/types.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx/types.h>
@@ -20,15 +24,12 @@
 // https://decomp.me/scratch/QnXK1
 void ftZd_SpecialS_Enter(HSD_GObj* gobj)
 {
-    f32 temp_f1;
+    float temp_f1;
     Fighter* fp; // r31
     ftZelda_DatAttrs* attributes;
     Fighter* fighter2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     temp_f1 = 0;
     fp = GET_FIGHTER(gobj);
@@ -53,15 +54,12 @@ void ftZd_SpecialS_Enter(HSD_GObj* gobj)
 // https://decomp.me/scratch/F0dW9
 void ftZd_SpecialAirS_Enter(HSD_GObj* gobj)
 {
-    f32 temp_f1;
+    float temp_f1;
     Fighter* fp;
     ftZelda_DatAttrs* attributes;
     Fighter* fighter2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     temp_f1 = 0;
     fp = GET_FIGHTER(gobj);
@@ -88,16 +86,13 @@ void ftZd_SpecialAirS_Enter(HSD_GObj* gobj)
 void ftZd_SpecialSStart_Anim(HSD_GObj* gobj)
 {
     Vec3 sp24;
-    f32 temp_f1;
-    f32 temp_f2;
+    float temp_f1;
+    float temp_f2;
     HSD_GObj* temp_r3;
     ftZelda_DatAttrs* attributes; // r31
     Fighter* fp;                  // r30
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
@@ -135,15 +130,12 @@ void ftZd_SpecialSLoop_Anim(HSD_GObj* gobj)
     Vec3 sp20;
     ftZelda_DatAttrs* attributes;
     Fighter* fp; // r30
-    f32 temp_f1;
-    f32 temp_f2;
+    float temp_f1;
+    float temp_f2;
     HSD_GObj* temp_r3;
     HSD_GObj* temp_r3_u32;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
@@ -223,16 +215,13 @@ void ftZd_SpecialSEnd_Anim(HSD_GObj* gobj)
 void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
 {
     Vec3 sp24;
-    f32 temp_f1;
-    f32 temp_f2;
+    float temp_f1;
+    float temp_f2;
     HSD_GObj* temp_r3;
     ftZelda_DatAttrs* attributes;
     Fighter* fp;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
@@ -267,16 +256,13 @@ void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
 void ftZd_SpecialAirSLoop_Anim(HSD_GObj* gobj)
 {
     Vec3 sp20;
-    f32 temp_f1;
-    f32 temp_f2;
+    float temp_f1;
+    float temp_f2;
     HSD_GObj* temp_r3;
     ftZelda_DatAttrs* attributes; // r31
     Fighter* fp;                  // r30
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
@@ -334,10 +320,7 @@ void ftZd_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         {
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[4];
-#endif
 
             Fighter* fp = GET_FIGHTER(gobj);
             ftZelda_DatAttrs* sa = getFtSpecialAttrs(fp);
@@ -365,7 +348,7 @@ void ftZd_SpecialSStart_IASA(HSD_GObj* gobj) {}
 // https://decomp.me/scratch/MaYEA
 void ftZd_SpecialSLoop_IASA(HSD_GObj* gobj)
 {
-    f32 temp_f1;
+    float temp_f1;
     s32 var_r0;
     Fighter* fp;
 
@@ -393,7 +376,7 @@ void ftZd_SpecialAirSStart_IASA(HSD_GObj* gobj) {}
 // https://decomp.me/scratch/Zxkmg
 void ftZd_SpecialAirSLoop_IASA(HSD_GObj* gobj)
 {
-    f32 temp_f1;
+    float temp_f1;
     s32 var_r0;
     Fighter* fp;
 
@@ -455,12 +438,9 @@ void ftZd_SpecialAirSStart_Phys(HSD_GObj* gobj)
     s32 temp_r3;
     ftZelda_DatAttrs* charAttr;
     ftCo_DatAttrs* fighterAttr;
-    f32 aerialFriction;
+    float aerialFriction;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp = GET_FIGHTER(gobj);
     temp_r3 = fp->mv.zd.specials.x8;
@@ -485,12 +465,9 @@ void ftZd_SpecialAirSLoop_Phys(HSD_GObj* gobj)
     s32 temp_r3;
     ftZelda_DatAttrs* charAttr;
     ftCo_DatAttrs* fighterAttr;
-    f32 aerialFriction;
+    float aerialFriction;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp = GET_FIGHTER(gobj);
     temp_r3 = fp->mv.zd.specials.x8;
@@ -515,12 +492,9 @@ void ftZd_SpecialAirSEnd_Phys(HSD_GObj* gobj)
     s32 temp_r3;
     ftZelda_DatAttrs* charAttr;
     ftCo_DatAttrs* fighterAttr;
-    f32 aerialFriction;
+    float aerialFriction;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     fp = GET_FIGHTER(gobj);
     temp_r3 = fp->mv.zd.specials.x8;

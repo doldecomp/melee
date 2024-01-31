@@ -2,6 +2,7 @@
 #define GALE01_14A250
 
 #include "ftGameWatch/forward.h"
+#include "it/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"

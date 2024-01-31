@@ -1,15 +1,21 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "ftwalkcommon.h"
 
 #include "fighter.h"
 #include "ft_081B.h"
 #include "ftcommon.h"
-#include "inlines.h"
 #include "math.h"
 
-#include <dolphin/os/os.h>
+#include "ft/ftanim.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
+
+#include <dolphin/os/OSError.h>
+#include <baselib/debug.h>
 
 FtWalkType ftWalkCommon_GetWalkType(HSD_GObj* gobj)
 {
@@ -32,8 +38,8 @@ FtWalkType ftWalkCommon_GetWalkType(HSD_GObj* gobj)
 static inline FtWalkType ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    f32 walking_velocity = fabs_inline(fp->gr_vel);
-    f32 tempf = fp->mv.co.walk.accel_mul;
+    float walking_velocity = fabs_inline(fp->gr_vel);
+    float tempf = fp->mv.co.walk.accel_mul;
     if (walking_velocity >=
         (tempf * (p_ftCommonData->x2C * fp->co_attrs.walk_max_vel)))
     {
@@ -65,10 +71,7 @@ void ftWalkCommon_800DFCA4(Fighter_GObj* gobj, FtMotionId msid,
                            float middle_anim_rate, float fast_anim_rate,
                            float accel_mul)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.walk.accel_mul = accel_mul;
@@ -120,7 +123,7 @@ void ftWalkCommon_800DFDDC(HSD_GObj* gobj)
     ftAnim_SetAnimRate(gobj, anim_rate);
 }
 
-void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
+void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, float))
 {
     int motion_state_sum;
     int motion_state_base;
@@ -131,10 +134,10 @@ void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
     motion_state_sum = motion_state_base + walk_action_type;
 
     if (motion_state_sum != (int) fp->motion_id) {
-        f32 float_result;
-        f32 frame;
-        f32 init_animFrame;
-        f32 adjusted_animFrame;
+        float float_result;
+        float frame;
+        float init_animFrame;
+        float adjusted_animFrame;
         s32 final_animFrame;
         s32 quotient;
 
@@ -170,10 +173,7 @@ static float getWalkAccel(Fighter* fp, float mul)
 
 void ftWalkCommon_800E0060(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     float accel_mul = fp->mv.co.walk.accel_mul;

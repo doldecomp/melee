@@ -1,4 +1,4 @@
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSExi.h>
@@ -28,7 +28,7 @@ static SramControlBlock Scb ATTRIBUTE_ALIGN(32);
 
 bool WriteSram(void* buffer, u32 offset, u32 size);
 
-void WriteSramCallback(EXIChannel unused0, OSContext* unused1)
+void WriteSramCallback(s32 unused0, OSContext* unused1)
 {
     Scb.sync = WriteSram(&Scb.sram[Scb.offset], Scb.offset, 0x40 - Scb.offset);
     if (Scb.sync) {

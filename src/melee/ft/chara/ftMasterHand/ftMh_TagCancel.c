@@ -1,8 +1,13 @@
+#include <platform.h>
+#include "ftCommon/forward.h"
+
 #include "ftMh_TagCancel.h"
 
-#include "ft/ft_0877.h"
+#include "ft/fighter.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Lift.h"
 
 void ftMh_MS_388_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
@@ -10,10 +15,7 @@ void ftMh_MS_388_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
     Fighter* ft_1;
     Fighter* ft_2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ft_1 = gobj_1->user_data;
     ft_2 = gobj_2->user_data;

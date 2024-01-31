@@ -1,5 +1,5 @@
-#include "ft/forward.h"
 #include "ftCaptain/forward.h"
+#include "ftCommon/forward.h"
 
 #include "ftCa_Init.h"
 
@@ -9,7 +9,6 @@
 #include "ftCa_SpecialS.h"
 #include "types.h"
 
-#include "ft/ft_0877.h"
 #include "ft/ft_0CD1.h"
 #include "ft/ftcamera.h"
 #include "ft/ftlipstickswing.h"
@@ -281,11 +280,11 @@ static char nr_joint[] = "PlyCaptain5K_Share_joint";
 static char gy_dat[] = "PlCaGy.dat";
 static char gy_joint[] = "PlyCaptain5KGy_Share_joint";
 
-#ifdef MUST_MATCH
-char re_dat[] = "PlCaRe.";
-#else
+#ifdef BUGFIX
 /// @todo What.
 char re_dat[] = "PlCaRe.dat";
+#else
+char re_dat[] = "PlCaRe.";
 #endif
 
 static char re_joint[] = "PlyCaptain5KRe_Share_joint";

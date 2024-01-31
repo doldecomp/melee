@@ -1,15 +1,19 @@
+#include <platform.h>
+
 #include "ftDk_HeavyLanding.h"
 
 #include "ftDk_HeavyTurn.h"
 #include "ftDk_HeavyWait0.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Damage.h"
+#include "ftDonkey/types.h"
 #include "it/item.h"
 
+#include <common_structs.h>
 #include <dolphin/mtx/types.h>
 
 void ftDk_HeavyLanding_Phys(HSD_GObj* gobj)

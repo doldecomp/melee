@@ -1,7 +1,8 @@
+#include <stdarg.h>
 #include <stdio.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/dsp/dsp.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>

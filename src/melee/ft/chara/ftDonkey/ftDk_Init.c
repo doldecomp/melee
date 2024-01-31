@@ -1,6 +1,6 @@
+#include <platform.h>
 #include "forward.h"
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
+#include "lb/forward.h"
 
 #include "ftDonkey/ftDk_Init.h"
 
@@ -11,14 +11,11 @@
 #include "ftDk_HeavyWait0.h"
 #include "ftDk_HeavyWait1.h"
 #include "ftDk_HeavyWalk.h"
-#include "ftDk_MS_345_0.h"
 #include "ftDk_SpecialHi.h"
 #include "ftDk_SpecialLw.h"
 #include "ftDk_SpecialN.h"
 #include "ftDk_SpecialS.h"
 
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
@@ -33,6 +30,7 @@
 #include "ftCommon/ftCo_CargoTurn.h"
 #include "ftCommon/ftCo_CargoWait.h"
 #include "ftCommon/ftCo_CargoWalk.h"
+#include "ftDonkey/types.h"
 #include "lb/lbmthp.h"
 #include "mp/mplib.h"
 
@@ -657,18 +655,15 @@ void ftDk_Init_8010DB3C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
     CollData* colldata = &fp->coll_data;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (ftCheckThrowB3(fp) && (colldata->env_flags & 98304)) {
         Vec3 vec_list[4];
         int i;
         for (i = 0; i < 4; i++) {
-            f32 temp_f5 = (donkey_attr->SpecialLw.x68 * i) -
-                          (donkey_attr->SpecialLw.x68 * 1.5f);
-            f32 temp_f3 = donkey_attr->SpecialLw.x6C * fp->facing_dir;
-            f32 temp_f6 = temp_f5 + temp_f3;
+            float temp_f5 = (donkey_attr->SpecialLw.x68 * i) -
+                            (donkey_attr->SpecialLw.x68 * 1.5f);
+            float temp_f3 = donkey_attr->SpecialLw.x6C * fp->facing_dir;
+            float temp_f6 = temp_f5 + temp_f3;
 
             if (!mpLib_80056C54(colldata->floor.index, &fp->cur_pos, 0,
                                 &vec_list[i], 0, 0, temp_f6,

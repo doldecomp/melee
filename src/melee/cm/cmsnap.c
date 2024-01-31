@@ -2,6 +2,8 @@
 
 #include "lb/lb_00F9.h"
 
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/tobj.h>
 

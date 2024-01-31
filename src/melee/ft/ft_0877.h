@@ -4,78 +4,50 @@
 #include "ft/forward.h"
 #include <baselib/forward.h>
 
-#include "ft/fighter.h"
-#include "ftCommon/ftCo_0A01.h"
+#include "ft/types.h"
 
-extern HSD_Joint* ft_8045A1E0[6];
-extern s32 ft_80459B88[FTKIND_MAX];
-extern char ftMr_Init_DatFilename[];
-extern char ftMr_Init_DataName[];
-extern Fighter_CostumeStrings ftMr_Init_CostumeStrings[];
-extern char ftMr_Init_AnimDatFilename[];
+#include <placeholder.h>
 
-s32 ft_800877F8(Fighter_GObj*, s32);
-s32 ft_80087818(Fighter_GObj*, s32);
-s32 ft_80087838(Fighter_GObj* gobj);
-s32 ft_80087858(Fighter_GObj* gobj);
-s32 ft_80087878(Fighter_GObj*, s32);
-s32 ft_800878BC(Fighter_GObj* gobj);
-s32 ft_80087900(Fighter_GObj* gobj);
-s32 ft_80087944(Fighter_GObj* gobj);
-s32 ft_80087988(Fighter_GObj* gobj);
-s32 ft_800879D8(Fighter_GObj* gobj);
-s32 ft_800879F8(Fighter_GObj* gobj);
-s32 ft_80087A18(Fighter_GObj* gobj);
-u8 ft_80087A80(Fighter_GObj* gobj);
-f32 ft_80087A8C(Fighter_GObj* gobj);
-s32 ft_80087A98(Fighter_GObj* gobj);
-u8 ft_80087AA4(Fighter_GObj* gobj);
-u8 ft_80087AB4(Fighter_GObj* gobj);
-void ft_80087AC0(Fighter_GObj*, s32);
-s32 ft_80087AEC(Fighter_GObj* gobj);
-s32 ft_80087B34(Fighter_GObj* gobj);
-void ft_80087BAC(Fighter_GObj*, s32);
-void ft_80087BC0(Fighter_GObj*, s8);
-void ft_80087BEC(Fighter_GObj*, u8);
-s32 ft_80087C1C(void);
-s32 ft_80087C58(Fighter_GObj* gobj);
-void ft_80087C64(Fighter_GObj*, s32);
-s32 ft_80087C70(Fighter*, s32);
-s32 ft_80087D0C(Fighter*, s32);
-void ft_8008805C(Fighter*, s32);
-void ft_80088080(Fighter*);
-void ft_800880AC(Fighter*);
-void ft_800880D8(Fighter*);
-void ft_80088110(Fighter*);
-void ft_80088148(Fighter*, enum_t, int, int);
-void ft_800881D8(Fighter*, u32, u32, u32);
-void ft_80088478(Fighter*, s32, s32, s32);
-void ft_80088510(Fighter*, s32, u8, u8);
-void ft_80088640(Fighter*, bool, bool, bool);
-void ft_80088770(Fighter*);
-void ft_800887CC(Fighter*);
-void ft_80088884(Fighter*);
-void ft_800888E0(Fighter*);
-void ft_80088A50(Fighter*);
-void ft_80088C5C(Fighter_GObj* gobj);
-void ft_800890BC(Fighter*);
-void ft_800890D0(Fighter*, u8);
-void ft_80089228(void);
-void ft_800892A0(Fighter_GObj* gobj);
-void ft_800892D4(Fighter*);
-void ft_800895E0(Fighter*, s32);
-void ft_80089824(Fighter_GObj* gobj);
-void ft_80089B08(Fighter_GObj* gobj);
-bool ft_8008A1FC(Fighter_GObj* gobj);
-void ft_8008A2BC(Fighter_GObj* gobj);
-void ft_8008A324(Fighter_GObj* gobj);
-unk_t mpColl_8004B4B0(void);
-/* 0889F4 */ void ft_800889F4(Fighter* fp, FtCollisionData*);
-/* 0886D8 */ void ftCo_800886D8(Fighter* fp, UNK_T, UNK_T, UNK_T);
-/* 08893C */ void ft_8008893C(Fighter* fp);
-/* 088828 */ void ft_80088828(Fighter* fp);
-/* 088328 */ void ft_80088328(Fighter* fp, int, int, int);
-/* 0885A8 */ void ft_800885A8(Fighter* fp, int, int, int);
-/* 08A1B8 */ void ft_8008A1B8(Fighter_GObj* gobj, int);
+/* 04B4B0 */ UNK_T mpColl_8004B4B0(void);
+/* 0877F8 */ s32 ft_800877F8(Fighter_GObj*, s32);
+/* 087818 */ s32 ft_80087818(Fighter_GObj*, s32);
+/* 087838 */ s32 ft_80087838(Fighter_GObj* gobj);
+/* 087858 */ s32 ft_80087858(Fighter_GObj* gobj);
+/* 087878 */ s32 ft_80087878(Fighter_GObj*, s32);
+/* 0878BC */ s32 ft_800878BC(Fighter_GObj* gobj);
+/* 087900 */ s32 ft_80087900(Fighter_GObj* gobj);
+/* 087944 */ s32 ft_80087944(Fighter_GObj* gobj);
+/* 087988 */ s32 ft_80087988(Fighter_GObj* gobj);
+/* 0879D8 */ s32 ft_800879D8(Fighter_GObj* gobj);
+/* 0879F8 */ s32 ft_800879F8(Fighter_GObj* gobj);
+/* 087A18 */ s32 ft_80087A18(Fighter_GObj* gobj);
+/* 087A80 */ u8 ft_80087A80(Fighter_GObj* gobj);
+/* 087A8C */ float ft_80087A8C(Fighter_GObj* gobj);
+/* 087A98 */ s32 ft_80087A98(Fighter_GObj* gobj);
+/* 087AA4 */ u8 ft_80087AA4(Fighter_GObj* gobj);
+/* 087AB4 */ u8 ft_80087AB4(Fighter_GObj* gobj);
+/* 087AC0 */ void ft_80087AC0(Fighter_GObj*, s32);
+/* 087AEC */ s32 ft_80087AEC(Fighter_GObj* gobj);
+/* 087B34 */ s32 ft_80087B34(Fighter_GObj* gobj);
+/* 087BAC */ void ft_80087BAC(Fighter_GObj*, s32);
+/* 087BC0 */ void ft_80087BC0(Fighter_GObj*, s8);
+/* 087BEC */ void ft_80087BEC(Fighter_GObj*, u8);
+/* 087C1C */ s32 ft_80087C1C(void);
+/* 087C58 */ s32 ft_80087C58(Fighter_GObj* gobj);
+/* 087C64 */ void ft_80087C64(Fighter_GObj*, s32);
+/* 087C70 */ s32 ft_80087C70(Fighter*, s32);
+/* 087D0C */ s32 ft_80087D0C(Fighter*, s32);
+/* 08805C */ void ft_8008805C(Fighter*, s32);
+/* 088080 */ void ft_80088080(Fighter*);
+/* 0880AC */ void ft_800880AC(Fighter*);
+/* 0880D8 */ void ft_800880D8(Fighter*);
+/* 088110 */ void ft_80088110(Fighter*);
+/* 088148 */ void ft_80088148(Fighter*, enum_t, int, int);
+/* 3C57D0 */ extern char ftMr_Init_DatFilename[];
+/* 3C57DC */ extern char ftMr_Init_DataName[];
+/* 3C595C */ extern char ftMr_Init_AnimDatFilename[];
+/* 3C5A28 */ extern Fighter_CostumeStrings ftMr_Init_CostumeStrings[];
+/* 459B88 */ extern s32 ft_80459B88[FTKIND_MAX];
+/* 45A1E0 */ extern HSD_Joint* ft_8045A1E0[6];
 
 #endif

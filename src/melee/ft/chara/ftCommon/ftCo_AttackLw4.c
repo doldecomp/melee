@@ -1,20 +1,21 @@
 #include <platform.h>
 #include "forward.h"
-#include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_AttackLw4.h"
 
-#include "ftCo_ItemGet.h"
 #include "ftCo_Wait.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftNess/ftNs_AttackLw4.h"
 
-#include <placeholder.h>
+#include <common_structs.h>
 
 /* 08CC5C */ static void doEnter(ftCo_GObj* gobj);
 

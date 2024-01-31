@@ -1,116 +1,16 @@
 #ifndef MELEE_GR_TYPES_H
 #define MELEE_GR_TYPES_H
 
+#include <platform.h>
+#include "gr/forward.h" // IWYU pragma: export
 #include "it/forward.h"
 #include "lb/forward.h"
+#include "sc/forward.h"
+#include <dolphin/gx/forward.h>
+#include <baselib/forward.h>
 
-#include "sc/scene.h"
-
+#include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-
-/// @todo Finish values, use @c PascalCase
-typedef enum InternalStageId {
-    InternalStageID_Unk00,
-    InternalStageID_Unk01,
-
-    /// Princess Peach's Castle
-    CASTLE,
-
-    /// Rainbow Cruise
-    RCRUISE,
-
-    /// Kongo Jungle
-    KONGO,
-
-    /// Jungle Japes
-    GARDEN,
-
-    /// Great Bay
-    GREATBAY,
-
-    /// Hyrule Temple
-    SHRINE,
-
-    /// Brinstar
-    ZEBES,
-
-    /// Brinstar Depths
-    KRAID,
-
-    /// Yoshi's Story
-    STORY,
-
-    /// Yoshi's Island
-    YORSTER,
-
-    /// Fountain of Dreams
-    IZUMI,
-
-    /// Green Greens
-    GREENS,
-
-    /// Corneria
-    CORNERIA,
-
-    /// Venom
-    VENOM,
-
-    /// Pokemon Stadium
-    PSTADIUM,
-
-    /// Poke Floats
-    PURA,
-
-    /// Mute City
-    MUTECITY,
-
-    /// Big Blue
-    BIGBLUE,
-
-    /// Onett
-    ONETT,
-
-    /// Fourside
-    FOURSIDE,
-
-    /// Icicle Mountain
-    ICEMTN,
-
-    InternalStageID_Unk23,
-
-    /// Mushroom Kingdom
-    INISHIE1,
-
-    /// Mushroom Kingdom II
-    INISHIE2,
-
-    InternalStageID_Unk26,
-
-    /// Flat Zone
-    FLATZONE,
-
-    /// Dream Land
-    OLDPUPUPU,
-
-    /// Yoshi's Island (64)
-    OLDYOSHI,
-
-    /// Kongo Jungle (64)
-    OLDKONGO,
-
-    STAGEKIND_UNK31,
-    STAGEKIND_UNK32,
-    STAGEKIND_UNK33,
-    STAGEKIND_UNK34,
-    STAGEKIND_UNK35,
-    STAGEKIND_UNK36,
-    STAGEKIND_UNK37,
-    STAGEKIND_UNK38,
-    STAGEKIND_UNK39,
-} InternalStageId;
 
 /// @remarks This struct is based in part on the datasheet however the info
 ///          there is likely incorrect as this doesn't quite match @c
@@ -198,7 +98,7 @@ typedef struct StageInfo {
         Article* unk4;
     }** itemdata;
     /* +6AC */ void* coll_data;
-    /* +6B0 */ struct _UnkStage6B0* param;
+    /* +6B0 */ UnkStage6B0* param;
     /* +6B4 */ unk_t** ald_yaku_all;
     /* +6B8 */ void* map_ptcl;
     /* +6BC */ void* map_texg;
@@ -307,7 +207,7 @@ struct GroundVars_izumi3 {
     u8 xE0_pad[0x218 - 0xE0];
 };
 
-typedef struct Ground {
+struct Ground {
     int x0;         // 0x0
     HSD_GObj* gobj; // 0x4
     HSD_GObjEvent x8_callback;
@@ -343,6 +243,100 @@ typedef struct Ground {
         struct GroundVars_izumi2 izumi2;
         struct GroundVars_izumi3 izumi3;
     } gv;
-} Ground;
+};
+
+// Appears to be related to stage audio
+struct UnkBgmStruct {
+    s32 x0;
+    s32 x4;
+    s32 x8;
+    u32 xC;
+    u32 x10;
+    s16 x14;
+    s16 x16;
+    s16 x18;
+    u8 pad[0x64 - 0x1A];
+};
+
+// TODO: what is this struct?
+struct UnkStage6B0 {
+    f32 x0;
+    s16 x4;
+    u8 x6_pad[2];
+    s16 x8;
+    s16 xA;
+    s32 xC;
+    s32 x10;
+    s32 x14;
+    f32 x18;
+    f32 x1C, x20, x24, x28;
+    u8 x2C_pad[0x2E - 0x2C];
+    s16 x2E;
+    s32 x30;
+    s32 x34;
+    s32 x38;
+    f32 x3C, x40, x44, x48;
+    bool x4C_fixed_cam;
+    f32 x50, x54, x58, x5C, x60, x64;
+    s16 x68;
+    u8 x6C_pad[0xB0 - 0x6A];
+    UnkBgmStruct* xB0;
+    s32 xB4; // number of entries in xB0
+    s32 xB8;
+    s32 xBC;
+    s32 xC0;
+    s32 xC4;
+    s32 xC8;
+    s32 xCC;
+    s32 xD0;
+    s32 xD4;
+    s32 xD8;
+};
+
+struct UnkStageDatInternal {
+    u8 x0_fill[0x4];
+    u32 unk4; // flags
+};
+
+struct UnkStageDat {
+    void* unk0;
+    s32 unk4;
+
+    struct {
+        struct HSD_Joint* unk0;
+        u8 x4_fill[0x20 - 0x4];
+        S16Vec3* unk20;
+        s32 unk24; // size of unk20 array
+        u8 x28_fill[0x34 - 0x28];
+    }* unk8;
+    s32 unkC;
+
+    s32* unk10;
+    s32 unk14;
+
+    u8 x18_fill[0x20 - 0x18];
+
+    void* unk20;
+    s32 unk24;
+
+    UnkStageDatInternal** unk28;
+    s32 unk2C; // size
+};
+
+struct UnkArchiveStruct {
+    HSD_Archive* unk0;
+    UnkStageDat* unk4;
+    s32 unk8;
+};
+
+struct grDynamicAttr_UnkStruct {
+    grDynamicAttr_UnkStruct* next;
+    s32 unk4;
+    Vec3 unk8;
+    s32 unk14;
+    f32 unk18;
+    s32 unk1C;
+    u8 x0_fill[0x24 - 0x20];
+};
 
 #endif

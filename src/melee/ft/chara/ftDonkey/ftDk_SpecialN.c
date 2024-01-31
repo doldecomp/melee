@@ -1,4 +1,7 @@
+#include <platform.h>
 #include "forward.h"
+#include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftDk_SpecialN.h"
 
@@ -6,15 +9,20 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Escape.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftDonkey/types.h"
+
+#include <common_structs.h>
 
 static void setCallbacks(HSD_GObj* gobj)
 {
@@ -39,10 +47,7 @@ void ftDk_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (fp->fv.dk.x222C == donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
         Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialNFull, 0, 0, 1, 0,
                                   NULL);
@@ -70,10 +75,7 @@ void ftDk_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (fp->fv.dk.x222C == donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
         Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirNFull, 0, 0, 1, 0,
                                   NULL);
@@ -190,10 +192,7 @@ void ftDk_SpecialN_Anim(HSD_GObj* gobj)
 void ftDk_SpecialNFull_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (fp->cmd_vars[0]) {
         if (fp->mv.dk.specialn.x8 == 0) {
             fp->mv.dk.specialn.x8++;
@@ -252,10 +251,7 @@ void ftDk_SpecialAirNLoop_Anim(HSD_GObj* gobj)
 
 void ftDk_SpecialAirNCancel_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         clearCallbacks(gobj);
         ftCo_800CC730(gobj);
@@ -266,10 +262,7 @@ void ftDk_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (fp->cmd_vars[0]) {
         if (fp->mv.dk.specialn.x8 == 0) {
             fp->mv.dk.specialn.x8++;
@@ -320,10 +313,7 @@ void ftDk_SpecialAirNFull_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
-/// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (fp->cmd_vars[0]) {
         if (fp->mv.dk.specialn.x8 == 0) {
             fp->mv.dk.specialn.x8++;
@@ -356,10 +346,7 @@ void ftDk_SpecialNStart_IASA(HSD_GObj* gobj) {}
 void ftDk_SpecialNLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (!ftCo_8009917C(gobj)) {
         if ((fp->input.x668 & 512)) {
             Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialN, 0, 0, 1, 0,
@@ -391,10 +378,7 @@ void ftDk_SpecialAirNStart_IASA(HSD_GObj* gobj) {}
 void ftDk_SpecialAirNLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
     if (fp->input.x668 & 512) {
         Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirN, 0, 0, 1, 0, NULL);
         fp->mv.dk.specialn.xC = fp->fv.dk.x222C;

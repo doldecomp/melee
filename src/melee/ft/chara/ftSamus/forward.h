@@ -8,41 +8,41 @@
 typedef struct HSD_GObj ftSs_GObj;
 typedef struct Fighter ftSs_Fighter;
 
-static MotionFlags const ftSs_MF_Special ATTRIBUTE_USED =
+static MotionFlags const ftSs_MF_Special =
     Ft_MF_SkipModel | Ft_MF_SkipItemVis | Ft_MF_UnkUpdatePhys |
     Ft_MF_FreezeState;
 
-static MotionFlags const ftSs_MF_SpecialN ATTRIBUTE_USED =
+static MotionFlags const ftSs_MF_SpecialN =
     ftSs_MF_Special | Ft_MF_KeepFastFall | Ft_MF_SkipThrowException;
 
-static MotionFlags const ftSs_MF_SpecialS ATTRIBUTE_USED =
+static MotionFlags const ftSs_MF_SpecialS =
     ftSs_MF_Special | Ft_MF_KeepGfx | Ft_MF_SkipThrowException;
 
-static MotionFlags const ftSs_MF_SpecialLw ATTRIBUTE_USED =
+static MotionFlags const ftSs_MF_SpecialLw =
     ftSs_MF_Special | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipThrowException;
 
-static MotionFlags const ftSs_MF_SpecialHi ATTRIBUTE_USED =
+static MotionFlags const ftSs_MF_SpecialHi =
     ftSs_MF_Special | Ft_MF_KeepFastFall | Ft_MF_KeepGfx | Ft_MF_KeepSfx;
 
-static MotionFlags const ftSs_MF_SpecialAirN ATTRIBUTE_USED =
+static MotionFlags const ftSs_MF_SpecialAirN =
     ftSs_MF_SpecialN | Ft_MF_SkipParasol;
 
-static MotionFlags const ftSs_MF_SpecialAirS ATTRIBUTE_USED =
+static MotionFlags const ftSs_MF_SpecialAirS =
     ftSs_MF_SpecialS | Ft_MF_SkipParasol;
 
-static MotionFlags const ftSs_MF_SpecialAirLw ATTRIBUTE_USED =
+static MotionFlags const ftSs_MF_SpecialAirLw =
     ftSs_MF_SpecialLw | Ft_MF_SkipParasol;
 
-static MotionFlags const ftSs_MF_SpecialAirHi ATTRIBUTE_USED =
+static MotionFlags const ftSs_MF_SpecialAirHi =
     ftSs_MF_SpecialHi | Ft_MF_SkipParasol;
 
-static MotionFlags const ftSs_MF_SpecialSSmash ATTRIBUTE_USED =
+static MotionFlags const ftSs_MF_SpecialSSmash =
     ftSs_MF_SpecialS | Ft_MF_SkipRumble;
 
-static MotionFlags const ftSs_MF_SpecialAirSSmash ATTRIBUTE_USED =
+static MotionFlags const ftSs_MF_SpecialAirSSmash =
     ftSs_MF_SpecialSSmash | Ft_MF_SkipParasol;
 
-static MotionFlags const ftSs_MF_ZairCatch ATTRIBUTE_USED =
+static MotionFlags const ftSs_MF_ZairCatch =
     Ft_MF_SkipModelPartVis | Ft_MF_SkipMetalB;
 
 typedef enum ftSamus_MotionState {

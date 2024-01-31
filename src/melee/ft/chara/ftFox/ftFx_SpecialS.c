@@ -1,22 +1,21 @@
-#include "forward.h"
-#include "ft/forward.h"
-
 #include "ftFx_SpecialS.h"
-
-#include "ftFx_Init.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
+#include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
-#include "it/it_27CF.h"
+#include "ftFox/types.h"
 
+#include <common_structs.h>
 #include <melee/it/items/itfoxillusion.h>
 
 #define FTFOX_SPECIALS_COLL_FLAG                                              \
@@ -76,7 +75,7 @@ void ftFx_SpecialS_CopyGhostPosIndexed(HSD_GObj* gobj, s32 index,
 // 0x800E9ED4
 // https://decomp.me/scratch/bkSg9 // Return float from array @ 0x2374 for Fox
 // & Falco's Illusion/Phantasm
-f32 ftFx_SpecialS_ReturnFloatVarIndexed(HSD_GObj* gobj, s32 index)
+float ftFx_SpecialS_ReturnFloatVarIndexed(HSD_GObj* gobj, s32 index)
 {
     return getFighter(gobj)->mv.fx.SpecialS.blendFrames[index];
 }
@@ -182,10 +181,7 @@ void ftFx_SpecialAirSStart_Phys(HSD_GObj* gobj)
     ftFox_DatAttrs* da = fp->dat_attrs;
     ftCo_DatAttrs* ca = &fp->co_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->mv.fx.SpecialS.gravityDelay != 0) {
         fp->mv.fx.SpecialS.gravityDelay--;
@@ -279,10 +275,7 @@ static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* gobj)
 // Dash Animation callback
 void ftFx_SpecialS_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftFx_SpecialSEnd_Enter(gobj);
@@ -295,10 +288,7 @@ void ftFx_SpecialS_Anim(HSD_GObj* gobj)
 // Dash Animation callback
 void ftFx_SpecialAirS_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftFx_SpecialAirSEnd_Enter(gobj);
@@ -445,7 +435,7 @@ void ftFx_SpecialAirS_AirToGround(HSD_GObj* gobj)
 
 inline void ftFox_SpecialS_SetVars(HSD_GObj* gobj)
 {
-    f32 var;
+    float var;
     Fighter* fp = GET_FIGHTER(gobj);
 
     fp->mv.fx.SpecialS.ghostEffectPos[3] = fp->cur_pos;
@@ -468,10 +458,7 @@ inline void ftFox_SpecialS_SetVars(HSD_GObj* gobj)
 // Dash Motion State handler
 void ftFx_SpecialS_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[28];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialS, Ft_MF_SkipRumble, 0.0f,
                               1.0f, 0.0f, NULL);
@@ -483,10 +470,7 @@ void ftFx_SpecialS_Enter(HSD_GObj* gobj)
 // Dash Motion State handler
 void ftFx_SpecialAirS_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[36];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirS, Ft_MF_SkipRumble,
                               0.0f, 1.0f, 0.0f, NULL);
@@ -537,10 +521,7 @@ void ftFx_SpecialSEnd_Phys(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftFox_DatAttrs* da = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->mv.fx.SpecialS.gravityDelay != 0) {
         fp->mv.fx.SpecialS.gravityDelay--;
@@ -559,10 +540,7 @@ void ftFx_SpecialAirSEnd_Phys(HSD_GObj* gobj)
     ftFox_DatAttrs* da = fp->dat_attrs;
     ftCo_DatAttrs* ca = &fp->co_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->mv.fx.SpecialS.gravityDelay != 0) {
         fp->mv.fx.SpecialS.gravityDelay--;
@@ -579,10 +557,7 @@ void ftFx_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 // End Collision callback
 void ftFx_SpecialSEnd_Coll(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (ft_800827A0(gobj) == false) {
         ftCo_800CC730(gobj);
@@ -597,10 +572,7 @@ void ftFx_SpecialAirSEnd_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftFox_DatAttrs* da = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     int cliffCatchDir;
 

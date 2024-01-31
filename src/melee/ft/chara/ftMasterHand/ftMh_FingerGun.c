@@ -1,16 +1,23 @@
+#include <platform.h>
+
 #include "ftMh_FingerGun.h"
 
 #include "ftMh_Wait1_2.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftlib.h"
-#include "ft/inlines.h"
-#include "it/it_27CF.h"
+#include "ft/types.h"
+#include "ftMasterHand/types.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
+#include "pl/player.h"
 
 #include <dolphin/mtx/types.h>
+#include <baselib/random.h>
 #include <MetroTRK/intrinsics.h>
 
 void ftMh_FingerBeamEnd_Anim(HSD_GObj* gobj)
@@ -40,10 +47,7 @@ void ftMh_MS_363_801530A4(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftMh_MS_FingerGun1, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
@@ -99,10 +103,7 @@ static inline float my_sqrtf(float x)
     static const double _half = .5;
     static const double _three = 3.0;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
 
     volatile float y;
     if (x > 0) {
@@ -132,10 +133,7 @@ void ftMh_FingerGun1_Phys(HSD_GObj* gobj)
     Vec3 pos;
     Vec3 vel;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     ft_80085134(gobj);
     if (fp->cmd_vars[2] != 0) {
@@ -221,8 +219,8 @@ void ftMh_FingerGun2_Phys(HSD_GObj* gobj)
 
 void ftMh_FingerGun2_Coll(HSD_GObj* gobj) {}
 
-static void ftMh_MS_365_8015364C(HSD_GObj* gobj, HSD_JObj* arg1, f32 arg2,
-                                 f32 arg3);
+static void ftMh_MS_365_8015364C(HSD_GObj* gobj, HSD_JObj* arg1, float arg2,
+                                 float arg3);
 
 void ftMh_MS_365_801535B0(HSD_GObj* gobj)
 {
@@ -241,7 +239,8 @@ void ftMh_MS_365_801535B0(HSD_GObj* gobj)
     }
 }
 
-void ftMh_MS_365_8015364C(HSD_GObj* gobj, HSD_JObj* arg1, f32 arg2, f32 arg3)
+void ftMh_MS_365_8015364C(HSD_GObj* gobj, HSD_JObj* arg1, float arg2,
+                          float arg3)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
@@ -268,10 +267,7 @@ void ftMh_MS_365_8015364C(HSD_GObj* gobj, HSD_JObj* arg1, f32 arg2, f32 arg3)
 
 void ftMh_MS_365_80153730(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftMh_MS_FingerGun3, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);

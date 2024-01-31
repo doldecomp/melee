@@ -1,7 +1,12 @@
 #ifndef DOLPHIN_GX_GXLIGHT_H
 #define DOLPHIN_GX_GXLIGHT_H
 
+#include <platform.h>
+#include <dolphin/gx/forward.h>
+
 #include <dolphin/gx/__types.h>
+#include <dolphin/gx/GXEnum.h>
+#include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
 
 typedef struct _GXLightObj {

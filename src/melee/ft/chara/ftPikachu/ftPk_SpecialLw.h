@@ -1,6 +1,7 @@
 #ifndef GALE01_1275CC
 #define GALE01_1275CC
 
+#include <platform.h>
 #include <baselib/forward.h>
 
 /* 1275CC */ bool ftPk_SpecialLw_CheckProperty(HSD_GObj* gobj);

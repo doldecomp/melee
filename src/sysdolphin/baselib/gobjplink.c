@@ -1,9 +1,12 @@
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
+#include "gobjplink.h"
+
+#include "debug.h"
+#include "gobj.h"
+#include "gobjgxlink.h"
+#include "gobjobject.h"
+#include "gobjproc.h"
+#include "gobjuserdata.h"
+#include "objalloc.h"
 
 void GObj_PReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
 {
@@ -136,10 +139,7 @@ void HSD_GObjPLink_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,
     s32 flags_cur;
     s32 flags_new;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     HSD_ASSERT(0x1A3, p_link <= HSD_GObjLibInitData.p_link_max);
     if (!HSD_GObj_804CE3E4.b0 && gobj == HSD_GObj_804D781C) {

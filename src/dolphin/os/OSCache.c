@@ -2,8 +2,9 @@
 
 #include <placeholder.h>
 #include <dolphin/base/PPCArch.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSCache.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <MetroTRK/intrinsics.h>
@@ -454,7 +455,7 @@ void L2Enable(void)
     PPCMtl2cr((PPCMfl2cr() | L2CR_L2E) & ~L2CR_L2I);
 }
 
-void DMAErrorHandler(OSError error, OSContext* context, ...)
+static void DMAErrorHandler(OSError error, OSContext* context, ...)
 {
     u32 hid2 = PPCMfhid2();
 

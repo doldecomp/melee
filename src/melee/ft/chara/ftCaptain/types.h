@@ -3,7 +3,9 @@
 
 #include <platform.h>
 #include "ft/forward.h"
-#include "ftCaptain/forward.h"
+#include "ftCaptain/forward.h" // IWYU pragma: export
+
+#include <dolphin/mtx/types.h>
 
 struct ftCaptain_FighterVars {
     /* 0x222C */ u32 during_specials_start;
@@ -12,46 +14,46 @@ struct ftCaptain_FighterVars {
 };
 
 struct ftCaptain_DatAttrs {
-    /* +0 */ f32 specialn_stick_range_y_neg;
-    /* +4 */ f32 specialn_stick_range_y_pos;
-    /* +8 */ f32 specialn_angle_diff;
-    /* +C */ f32 specialn_vel_x;
-    /* +10 */ f32 specialn_vel_mul;
-    /* +14 */ f32 specials_gr_vel_x;
-    /* +18 */ f32 specials_grav;
-    /* +1C */ f32 specials_terminal_vel;
-    /* +20 */ f32 specials_unk0;
-    /* +24 */ f32 specials_unk1;
-    /* +28 */ f32 specials_unk2;
-    /* +2C */ f32 specials_unk3;
-    /* +30 */ f32 specials_unk4;
-    /* +34 */ f32 specials_unk5;
-    /* +38 */ f32 specials_miss_landing_lag;
-    /* +3C */ f32 specials_hit_landing_lag;
-    /* +40 */ f32 specialhi_air_friction_mul;
-    /* +44 */ f32 specialhi_horz_vel;
-    /* +48 */ f32 specialhi_freefall_air_spd_mul;
-    /* +4C */ f32 specialhi_landing_lag;
-    /* +50 */ f32 specialhi_unk0;
-    /* +54 */ f32 specialhi_unk1;
-    /* +58 */ f32 specialhi_input_var;
-    /* +5C */ f32 specialhi_unk2;
-    /* +60 */ f32 specialhi_catch_grav;
+    /* +0 */ float specialn_stick_range_y_neg;
+    /* +4 */ float specialn_stick_range_y_pos;
+    /* +8 */ float specialn_angle_diff;
+    /* +C */ float specialn_vel_x;
+    /* +10 */ float specialn_vel_mul;
+    /* +14 */ float specials_gr_vel_x;
+    /* +18 */ float specials_grav;
+    /* +1C */ float specials_terminal_vel;
+    /* +20 */ float specials_unk0;
+    /* +24 */ float specials_unk1;
+    /* +28 */ float specials_unk2;
+    /* +2C */ float specials_unk3;
+    /* +30 */ float specials_unk4;
+    /* +34 */ float specials_unk5;
+    /* +38 */ float specials_miss_landing_lag;
+    /* +3C */ float specials_hit_landing_lag;
+    /* +40 */ float specialhi_air_friction_mul;
+    /* +44 */ float specialhi_horz_vel;
+    /* +48 */ float specialhi_freefall_air_spd_mul;
+    /* +4C */ float specialhi_landing_lag;
+    /* +50 */ float specialhi_unk0;
+    /* +54 */ float specialhi_unk1;
+    /* +58 */ float specialhi_input_var;
+    /* +5C */ float specialhi_unk2;
+    /* +60 */ float specialhi_catch_grav;
     /* +64 */ s32 specialhi_air_var;
-    /* +68 */ f32 x68;
+    /* +68 */ float x68;
     /* +6C */ u32 speciallw_unk1;
-    /* +70 */ f32 speciallw_flame_particle_angle;
-    /* +74 */ f32 speciallw_on_hit_spd_modifier;
+    /* +70 */ float speciallw_flame_particle_angle;
+    /* +74 */ float speciallw_on_hit_spd_modifier;
     /* +78 */ s32 speciallw_unk2;
-    /* +7C */ f32 speciallw_ground_lag_mul;
-    /* +80 */ f32 speciallw_landing_lag_mul;
-    /* +84 */ f32 speciallw_ground_traction;
-    /* +88 */ f32 speciallw_air_landing_traction;
+    /* +7C */ float speciallw_ground_lag_mul;
+    /* +80 */ float speciallw_landing_lag_mul;
+    /* +84 */ float speciallw_ground_traction;
+    /* +88 */ float speciallw_air_landing_traction;
 };
 
 union ftCaptain_MotionVars {
     struct ftCaptainSpecialSVars {
-        /* fp+2340 */ f32 grav;
+        /* fp+2340 */ float grav;
     } specials;
     struct ftCaptainSpecialHiVars {
         /* fp+2340 */ u16 x0;
@@ -69,7 +71,7 @@ union ftCaptain_MotionVars {
     struct ftCaptainSpecialLwVars {
         /* fp+2340 */ u16 x0;
         /* fp+2342 */ u16 x2;
-        /* fp+2344 */ f32 friction;
+        /* fp+2344 */ float friction;
     } speciallw;
 };
 

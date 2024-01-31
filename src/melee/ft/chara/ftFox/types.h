@@ -2,12 +2,14 @@
 #define MELEE_FT_CHARA_FTFOX_TYPES_H
 
 #include <platform.h>
-#include "ftFox/forward.h"
+#include "ftFox/forward.h" // IWYU pragma: export
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
+#include "lb/types.h"
+
 #include <common_structs.h>
-#include <dolphin/mtx/types.h>
 
 struct ftFox_FighterVars {
     /* 0x222C */ HSD_GObj* x222C_blasterGObj;
@@ -24,7 +26,7 @@ typedef struct ftFoxSpecialS {
     /// 0x2344 through 0x2370 - Related to Illusion/Phantasm model's position?
     Vec3 ghostEffectPos[4];
     /// 0x2374 through 0x2380 - ColAnim blend frames?
-    f32 blendFrames[4];
+    float blendFrames[4];
     /// 0x2384 - Illusion/Phantasm GObj pointer
     HSD_GObj* ghostGObj;
 } ftFoxSpecialS;
@@ -33,7 +35,7 @@ typedef struct ftFoxSpecialHi {
     /// 0x2340 - Number of frames to pass before gravity takes effect
     s32 gravityDelay;
     /// 0x2344 - Used to rotate Fox/Falco's model?
-    f32 rotateModel;
+    float rotateModel;
     /// 0x2348 - Number of frames Firefox/Firebird's launch animation lasts for
     s32 travelFrames;
     /// 0x234C - ???
@@ -75,58 +77,60 @@ typedef union ftFox_MotionVars {
 struct ftFox_DatAttrs {
     // NEUTRAL SPECIAL - BLASTER
 
-    f32 x0_FOX_BLASTER_UNK1;
-    f32 x4_FOX_BLASTER_UNK2;
-    f32 x8_FOX_BLASTER_UNK3;
-    f32 xC_FOX_BLASTER_UNK4;
+    float x0_FOX_BLASTER_UNK1;
+    float x4_FOX_BLASTER_UNK2;
+    float x8_FOX_BLASTER_UNK3;
+    float xC_FOX_BLASTER_UNK4;
     /// Angle at which Blaster shots are fired
-    f32 x10_FOX_BLASTER_ANGLE;
+    float x10_FOX_BLASTER_ANGLE;
     /// Velocity at which Blaster shots are fired
-    f32 x14_FOX_BLASTER_VEL;
-    f32 x18_FOX_BLASTER_LANDING_LAG;
+    float x14_FOX_BLASTER_VEL;
+    float x18_FOX_BLASTER_LANDING_LAG;
     ItemKind x1C_FOX_BLASTER_SHOT_ITKIND;
     ItemKind x20_FOX_BLASTER_GUN_ITKIND;
 
     // SIDE SPECIAL - FOX ILLUSION / FALCO PHANTASM
 
-    f32 x24_FOX_ILLUSION_GRAVITY_DELAY; // Frames required to pass before
-                                        // gravity is applied
-    f32 x28_FOX_ILLUSION_GROUND_VEL_X;  // Horizontal velocity?
-    f32 x2C_FOX_ILLUSION_UNK1;
-    f32 x30_FOX_ILLUSION_UNK2;
-    f32 x34_FOX_ILLUSION_GROUND_END_VEL_X;
-    f32 x38_FOX_ILLUSION_GROUND_FRICTION;
-    f32 x3C_FOX_ILLUSION_AIR_END_VEL_X;
-    f32 x40_FOX_ILLUSION_AIR_MUL_X;
-    f32 x44_FOX_ILLUSION_FALL_ACCEL;
-    f32 x48_FOX_ILLUSION_TERMINAL_VELOCITY;
-    f32 x4C_FOX_ILLUSION_FREEFALL_MOBILITY;
-    f32 x50_FOX_ILLUSION_LANDING_LAG;
+    float x24_FOX_ILLUSION_GRAVITY_DELAY; // Frames required to pass before
+                                          // gravity is applied
+    float x28_FOX_ILLUSION_GROUND_VEL_X;  // Horizontal velocity?
+    float x2C_FOX_ILLUSION_UNK1;
+    float x30_FOX_ILLUSION_UNK2;
+    float x34_FOX_ILLUSION_GROUND_END_VEL_X;
+    float x38_FOX_ILLUSION_GROUND_FRICTION;
+    float x3C_FOX_ILLUSION_AIR_END_VEL_X;
+    float x40_FOX_ILLUSION_AIR_MUL_X;
+    float x44_FOX_ILLUSION_FALL_ACCEL;
+    float x48_FOX_ILLUSION_TERMINAL_VELOCITY;
+    float x4C_FOX_ILLUSION_FREEFALL_MOBILITY;
+    float x50_FOX_ILLUSION_LANDING_LAG;
 
     // UP SPECIAL - FIREFOX / FIREBIRD
 
-    f32 x54_FOX_FIREFOX_GRAVITY_DELAY;
-    f32 x58_FOX_FIREFOX_VEL_X; // Initial velocity
-    f32 x5C_FOX_FIREFOX_AIR_MOMENTUM_PRESERVE_X;
-    f32 x60_FOX_FIREFOX_FALL_ACCEL;
-    f32 x64_FOX_FIREFOX_DIRECTION_STICK_RANGE_MIN; // Minimum control stick
-                                                   // range required for
-                                                   // direction change
-    f32 x68_FOX_FIREFOX_DURATION; // Amount of frames Firefox/Firebird travels
+    float x54_FOX_FIREFOX_GRAVITY_DELAY;
+    float x58_FOX_FIREFOX_VEL_X; // Initial velocity
+    float x5C_FOX_FIREFOX_AIR_MOMENTUM_PRESERVE_X;
+    float x60_FOX_FIREFOX_FALL_ACCEL;
+    float x64_FOX_FIREFOX_DIRECTION_STICK_RANGE_MIN; // Minimum control stick
+                                                     // range required for
+                                                     // direction change
+    float
+        x68_FOX_FIREFOX_DURATION; // Amount of frames Firefox/Firebird travels
     s32 x6C_FOX_FIREFOX_BOUNCE_VAR;
-    f32 x70_FOX_FIREFOX_DURATION_END;
-    f32 x74_FOX_FIREFOX_SPEED;
-    f32 x78_FOX_FIREFOX_REVERSE_ACCEL; // ???
-    f32 x7C_FOX_FIREFOX_GROUND_MOMENTUM_END;
-    f32 x80_FOX_FIREFOX_UNK2;
-    f32 x84_FOX_FIREFOX_BOUND_VEL_X; // Horizontal velocity of SpecialHiBound
-                                     // action state
-    f32 x88_FOX_FIREFOX_FACING_STICK_RANGE_MIN; // Minimum control stick range
+    float x70_FOX_FIREFOX_DURATION_END;
+    float x74_FOX_FIREFOX_SPEED;
+    float x78_FOX_FIREFOX_REVERSE_ACCEL; // ???
+    float x7C_FOX_FIREFOX_GROUND_MOMENTUM_END;
+    float x80_FOX_FIREFOX_UNK2;
+    float x84_FOX_FIREFOX_BOUND_VEL_X; // Horizontal velocity of SpecialHiBound
+                                       // action state
+    float
+        x88_FOX_FIREFOX_FACING_STICK_RANGE_MIN; // Minimum control stick range
                                                 // required to change
                                                 // character's facing direction
-    f32 x8C_FOX_FIREFOX_FREEFALL_MOBILITY;
-    f32 x90_FOX_FIREFOX_LANDING_LAG;
-    f32 x94_FOX_FIREFOX_BOUND_ANGLE;
+    float x8C_FOX_FIREFOX_FREEFALL_MOBILITY;
+    float x90_FOX_FIREFOX_LANDING_LAG;
+    float x94_FOX_FIREFOX_BOUND_ANGLE;
 
     // DOWN SPECIAL - REFLECTOR
 
@@ -135,13 +139,13 @@ struct ftFox_DatAttrs {
      * Reflector is immediately released with no lag once these frames have
      * passed.
      */
-    f32 x98_FOX_REFLECTOR_RELEASE_LAG;
+    float x98_FOX_REFLECTOR_RELEASE_LAG;
     /// Amount of turn frames for changing Reflector direction
-    f32 x9C_FOX_REFLECTOR_TURN_FRAMES;
-    f32 xA0_FOX_REFLECTOR_UNK1;
+    float x9C_FOX_REFLECTOR_TURN_FRAMES;
+    float xA0_FOX_REFLECTOR_UNK1;
     s32 xA4_FOX_REFLECTOR_GRAVITY_DELAY;
-    f32 xA8_FOX_REFLECTOR_MOMENTUM_PRESERVE_X;
-    f32 xAC_FOX_REFLECTOR_FALL_ACCEL;
+    float xA8_FOX_REFLECTOR_MOMENTUM_PRESERVE_X;
+    float xAC_FOX_REFLECTOR_FALL_ACCEL;
     ReflectDesc xB0_FOX_REFLECTOR_REFLECTION;
 };
 

@@ -1,15 +1,19 @@
+#include <platform.h>
+
 #include "ftCl_AppealS.h"
 
 #include "ftCl_Init.h"
 #include "inlines.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftLink/ftLk_Init.h"
-#include "it/it_27CF.h"
+#include "ftLink/types.h"
+#include "it/items/it_27CF.h"
 
 void ftCl_AppealS_Anim(HSD_GObj* gobj)
 {
@@ -17,10 +21,7 @@ void ftCl_AppealS_Anim(HSD_GObj* gobj)
     Fighter* fp0;
     Fighter* fp1;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp0 = fp1 = gobj->user_data;
 

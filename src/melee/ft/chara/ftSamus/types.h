@@ -2,12 +2,12 @@
 #define MELEE_FT_CHARA_FTSAMUS_TYPES_H
 
 #include <platform.h>
-#include "ft/forward.h"
 #include "it/forward.h"
 #include <baselib/forward.h>
 
 #include "ftCommon/types.h"
 
+#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
 struct ftSamus_FighterVars {
@@ -93,7 +93,7 @@ union ftSamus_MotionVars {
     struct ftSamus_State3Vars {
         s32 x0;
         s32 x4;
-        f32 x8;
+        float x8;
     } unk3;
 
     /// @todo Proper state name.

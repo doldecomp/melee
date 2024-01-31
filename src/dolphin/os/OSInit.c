@@ -1,22 +1,21 @@
 /** @file
+Issues:
  * @todo Should be called @c OS.c.
  */
 #include <platform.h>
-
-#include "stddef.h"
 
 #include <__mem.h>
 #include <placeholder.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/db/db.h>
 #include <dolphin/dvd/dvd.h>
+#include <dolphin/os.h>
 #include <dolphin/os/init/__start.h>
-#include <dolphin/os/os.h>
 #include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSAudioSystem.h>
 #include <dolphin/os/OSCache.h>
-#include <dolphin/os/OSError.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>
@@ -24,10 +23,10 @@
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/os/OSResetSW.h>
 #include <dolphin/os/OSRtc.h>
-#include <dolphin/os/OSSerial.h>
 #include <dolphin/os/OSSync.h>
 #include <dolphin/os/OSThread.h>
 #include <dolphin/os/OSTime.h>
+#include <dolphin/sipriv.h>
 #include <MetroTRK/dolphin_trk.h>
 #include <MetroTRK/intrinsics.h>
 
@@ -51,6 +50,7 @@ typedef enum OSConsoleType {
     OS_CONSOLE_MINNOW,
 } OSConsoleType;
 
+#ifdef MWERKS_GEKKO
 void __OSEVStart(void);
 void __OSEVEnd(void);
 #define OS_DBJUMPPOINT_ADDR 0x60
@@ -60,6 +60,7 @@ void __OSDBJUMPSTART(void);
 void __OSDBJUMPEND(void);
 static const u32 NOP = 0x60000000;
 #define OS_EXCEPTIONTABLE_ADDR 0x3000
+#endif
 
 static OSBootInfo* BootInfo;
 static u32* BI2DebugFlag;
@@ -71,7 +72,7 @@ OSTime __OSStartTime;
 extern u8 __ArenaHi[];
 extern u8 __ArenaLo[];
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 /// Peephole bug triggered by inline asm function __OSFPRInit (unused in melee)
 #pragma peephole off
 #endif
@@ -119,7 +120,6 @@ void ClearArena(void)
 
 extern bool __DVDLongFileNameFlag;
 extern u32 __PADSpec;
-extern void _db_stack_end(void);
 
 typedef struct BI2Debug {
     s32 debugMonSize;  // 0x0
@@ -223,7 +223,7 @@ void OSInit(void)
         if (BootInfo->arenaLo == NULL && BI2DebugFlag != NULL &&
             *BI2DebugFlag < 2)
         {
-            debugArenaLo = (char*) (((u32) _db_stack_end + 0x1f) & ~0x1f);
+            debugArenaLo = (char*) (((u32) _stack_addr + 0x1f) & ~0x1f);
             OSSetArenaLo(debugArenaLo);
         }
 
@@ -327,6 +327,7 @@ static u32 __OSExceptionLocations[] = {
     0x0900, 0x0C00, 0x0D00, 0x0F00, 0x1300, 0x1400, 0x1700,
 };
 
+#ifdef MWERKS_GEKKO
 void OSExceptionInit(void)
 {
     u8 exception;
@@ -418,6 +419,13 @@ void OSExceptionInit(void)
 
     DBPrintf("Exceptions initialized...\n");
 }
+#else
+
+void OSExceptionInit(void)
+{
+    NOT_IMPLEMENTED;
+}
+#endif
 
 #ifdef MWERKS_GEKKO
 

@@ -1,17 +1,18 @@
-#include "forward.h"
-#include "ft/forward.h"
+#include <platform.h>
+#include "ftCommon/forward.h"
 
 #include "ftGw_AttackAir.h"
 
 #include "ftGw_Init.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0D14.h"
 #include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_AttackAir.h"
 #include "ftCommon/ftCo_LandingAir.h"
-#include "it/it_27CF.h"
+#include "ftGameWatch/types.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx/types.h>
@@ -109,10 +110,7 @@ void ftGw_AttackAirN_ItemTurtleSetup(HSD_GObj* gobj)
     Vec3 sp10;
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (fp->fv.gw.x225C_turtleGObj != NULL) {
         ftGw_AttackAirN_ItemTurtleOnLand(gobj);
@@ -197,10 +195,7 @@ void ftGw_AttackAirN_ItemSparkySetup(HSD_GObj* gobj)
     Vec3 sp10;
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (fp->fv.gw.x2260_sparkyGObj != NULL) {
         ftGw_AttackAirN_ItemSparkyOnLand(gobj);
@@ -391,10 +386,7 @@ void ftGw_LandingAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->fv.gw.x2258_parachuteGObj != NULL) {
         it_802C6DD8(fp->fv.gw.x2258_parachuteGObj);
@@ -466,10 +458,7 @@ void ftGw_LandingAirB_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->fv.gw.x2258_parachuteGObj != NULL) {
         it_802C6DD8(fp->fv.gw.x2258_parachuteGObj);
@@ -531,10 +520,7 @@ void ftGw_LandingAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->fv.gw.x2258_parachuteGObj != NULL) {
         it_802C6DD8(fp->fv.gw.x2258_parachuteGObj);

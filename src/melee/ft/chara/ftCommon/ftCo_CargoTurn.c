@@ -2,15 +2,19 @@
 
 #include "ftCo_CargoTurn.h"
 
-#include "ftCo_09C4.h"
 #include "ftCo_CargoJump.h"
 #include "ftCo_CargoThrow.h"
 #include "ftCo_CargoWait.h"
 #include "ftCo_Shouldered.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
+#include "ftDonkey/types.h"
+
+#include <baselib/gobj.h>
 
 bool ftCo_8009B818(ftCo_GObj* gobj)
 {
@@ -23,10 +27,7 @@ bool ftCo_8009B818(ftCo_GObj* gobj)
 
 void ftCo_8009B860(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* fp_x2CC = fp->x2CC;
     ftCo_800C9840(gobj, fp_x2CC->x4_motion_state + 4, 0, 0,
@@ -36,10 +37,7 @@ void ftCo_8009B860(ftCo_GObj* gobj)
 
 void ftCo_CargoTurn_Anim(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->mv.co.walk.fast_anim_frame > 0) {
         fp->mv.co.walk.fast_anim_frame -= 1;

@@ -1,27 +1,26 @@
 #include <platform.h>
-#include "ft/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_CliffJump.h"
 
-#include "ftCo_09C4.h"
 #include "ftCo_CliffClimb.h"
 #include "ftCo_FallSpecial.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 
 /* 09B1B8 */ static void ftCo_8009B1B8(ftCo_GObj* gobj);
 /* 09B2F8 */ static void ftCo_8009B2F8(ftCo_GObj* gobj);
 
 bool ftCo_8009B170(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     if (ftCo_800CAE80(gobj)) {
         ftCo_8009B1B8(gobj);
         return true;
@@ -63,10 +62,7 @@ void ftCo_CliffJump1_Coll(ftCo_GObj* gobj)
 
 void ftCo_8009B2F8(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     FtMotionId msid = fp->motion_id == ftCo_MS_CliffJumpQuick1
                           ? ftCo_MS_CliffJumpQuick2
@@ -81,10 +77,7 @@ void ftCo_8009B2F8(ftCo_GObj* gobj)
 
 void ftCo_8009B390(ftCo_GObj* gobj, float force_mul)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     FtMotionId msid = fp->motion_id == ftCo_MS_CliffJumpQuick1
                           ? ftCo_MS_CliffJumpQuick2

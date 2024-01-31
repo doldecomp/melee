@@ -110,7 +110,11 @@ s32 __CARDWrite(s32 chan, u32 addr, u32 length, void* dst,
     return __CARDWritePage(chan, (CARDCallback) BlockWriteCallback);
 }
 
+/// @todo Used only by #hsd_803AAA48
+#pragma push
+#pragma force_active on
 u32 CARDGetXferredBytes(s32 chan)
 {
     return __CARDBlock[chan].xferred;
 }
+#pragma pop

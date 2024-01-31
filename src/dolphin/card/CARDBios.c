@@ -1,9 +1,14 @@
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDMount.h>
+#include <dolphin/dsp/dsp.h>
+#include <dolphin/dvd/dvd.h>
 #include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSExi.h>
+#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSReset.h>
+#include <dolphin/os/OSThread.h>
+#include <dolphin/os/OSTime.h>
 
 CARDControl __CARDBlock[2];
 DVDDiskID __CARDDiskNone;
@@ -18,7 +23,7 @@ void __CARDSyncCallback(s32 i, s32 arg1)
     OSWakeupThread(&__CARDBlock[i].threadQueue);
 }
 
-void __CARDExtHandler(EXIChannel chan, OSContext* context)
+void __CARDExtHandler(s32 chan, OSContext* context)
 {
     CARDControl* card;
     CARDCallback callback;
@@ -47,7 +52,7 @@ void __CARDExtHandler(EXIChannel chan, OSContext* context)
     }
 }
 
-void __CARDExiHandler(EXIChannel chan, OSContext* context)
+void __CARDExiHandler(s32 chan, OSContext* context)
 {
     CARDControl* card;
     CARDCallback callback;
@@ -95,7 +100,7 @@ fatal:
     }
 }
 
-void __CARDTxHandler(EXIChannel chan, OSContext* context)
+void __CARDTxHandler(s32 chan, OSContext* context)
 {
     CARDControl* card;
     CARDCallback callback;
@@ -112,7 +117,7 @@ void __CARDTxHandler(EXIChannel chan, OSContext* context)
     }
 }
 
-void __CARDUnlockedHandler(EXIChannel chan, OSContext* context)
+void __CARDUnlockedHandler(s32 chan, OSContext* context)
 {
     CARDControl* card;
     CARDCallback callback;
@@ -126,7 +131,7 @@ void __CARDUnlockedHandler(EXIChannel chan, OSContext* context)
     }
 }
 
-s32 __CARDEnableInterrupt(EXIChannel chan, bool enable)
+s32 __CARDEnableInterrupt(s32 chan, bool enable)
 {
     bool err;
     u32 cmd;
@@ -351,7 +356,7 @@ s32 __CARDStart(s32 chan, CARDCallback txCallback, CARDCallback exiCallback)
 #define AD1EX(x) ((u8) (AD1(x) | 0x80));
 #define AD2(x) ((u8) (((x) >> 9) & 0xff))
 #define AD3(x) ((u8) (((x) >> 7) & 0x03))
-#define BA(x) ((u8) ((x) &0x7f))
+#define BA(x) ((u8) ((x) & 0x7f))
 
 s32 __CARDReadSegment(s32 chan, CARDCallback callback)
 {
@@ -422,7 +427,7 @@ s32 __CARDWritePage(s32 chan, CARDCallback callback)
     return result;
 }
 
-s32 __CARDEraseSector(EXIChannel chan, u32 addr, CARDCallback callback)
+s32 __CARDEraseSector(s32 chan, u32 addr, CARDCallback callback)
 {
     CARDControl* card;
     s32 result;
@@ -482,7 +487,7 @@ void __CARDSetDiskID(const DVDDiskID* id)
     __CARDBlock[1].diskID = id ? id : &__CARDDiskNone;
 }
 
-s32 __CARDGetControlBlock(EXIChannel chan, CARDControl** pcard)
+s32 __CARDGetControlBlock(s32 chan, CARDControl** pcard)
 {
     bool enabled;
     s32 result;

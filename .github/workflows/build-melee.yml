@@ -68,6 +68,7 @@ jobs:
           >> $GITHUB_STEP_SUMMARY
 
   build-windows:
+    if: false
     name: Windows
     runs-on: windows-latest
     env:
@@ -146,9 +147,7 @@ jobs:
 
     - name: Check for code issues
       run: |
-        result=$(docker run --rm \
-            --user "$(id -u):$(id -g)" \
-            --volume "$PWD:/input:ro" \
-            "$REGISTRY/$IMAGE")
-        echo "$result"
-        printf "\`\`\`\n%s\n\`\`\`" "$result" >> $GITHUB_STEP_SUMMARY
+        docker run --rm \
+          --user "$(id -u):$(id -g)" \
+          --volume "$PWD:/input:ro" \
+            "$REGISTRY/$IMAGE"

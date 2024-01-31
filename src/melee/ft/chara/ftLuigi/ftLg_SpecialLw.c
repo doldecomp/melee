@@ -1,4 +1,7 @@
+#include <platform.h>
 #include "forward.h"
+#include "ftCommon/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftLg_SpecialLw.h"
 
@@ -6,14 +9,18 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
-#include "ftLuigi/ftLg_Init.h"
-#include "melee/ft/inlines.h"
+#include "lb/lbrefract.h"
+
+#include <common_structs.h>
 
 // SpecialLw (Luigi Cyclone)
 #define FTLUIGI_SPECIALLW_FLAG                                                \
@@ -35,7 +42,7 @@ static inline void ftLuigi_SpecialLw_SetVars(HSD_GObj* gobj)
     ftLuigiAttributes* luigiAttrs = fp->dat_attrs;
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
-    fp->mv.lg.SpecialLw.groundVelX = (f32) 0.0f;
+    fp->mv.lg.SpecialLw.groundVelX = (float) 0.0f;
     fp->mv.lg.SpecialLw.unk = (s32) luigiAttrs->x88_LUIGI_CYCLONE_UNK + 1;
     fp->mv.lg.SpecialLw.isUnkColl = false;
 }
@@ -66,10 +73,7 @@ void ftLg_SpecialLw_Enter(HSD_GObj* gobj)
     Fighter* temp_fp;
     Fighter* fp2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     temp_fp = (fp = GET_FIGHTER(gobj));
     luigiAttrs = temp_fp->dat_attrs;
@@ -78,8 +82,8 @@ void ftLg_SpecialLw_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirLw, 0, 0.0f, 1.0f, 0.0f,
                               NULL);
     ftAnim_8006EBA4(gobj);
-    fp2->self_vel.y = (f32) (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM -
-                             luigiAttrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX);
+    fp2->self_vel.y = (float) (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM -
+                               luigiAttrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX);
     ftCommon_8007D440(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
     ftLuigi_SpecialLw_SetVars(gobj);
     ftLuigi_SpecialLw_SetCall(gobj);
@@ -97,12 +101,9 @@ void ftLg_SpecialAirLw_Enter(HSD_GObj* gobj)
     ftLuigiAttributes* luigiAttrs;
     Fighter* temp_fp;
     Fighter* fp2;
-    f32 cycloneVar;
+    float cycloneVar;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     temp_fp = (fp = GET_FIGHTER(gobj));
     luigiAttrs = temp_fp->dat_attrs;
@@ -117,7 +118,7 @@ void ftLg_SpecialAirLw_Enter(HSD_GObj* gobj)
         cycloneVar = luigiAttrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX;
     }
     fp2->self_vel.y =
-        (f32) (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM - cycloneVar);
+        (float) (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM - cycloneVar);
     ftCommon_8007D440(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
     ftLuigi_SpecialLw_SetVars(gobj);
     ftLuigi_SpecialLw_SetCall(gobj);
@@ -136,10 +137,7 @@ static inline void ftLuigi_SpecialLw_SetNULL(HSD_GObj* gobj)
 /// Luigi's grounded Cyclone Animation callback
 void ftLg_SpecialLw_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftLuigi_SpecialLw_SetNULL(gobj);
@@ -168,7 +166,7 @@ void ftLg_SpecialAirLw_Anim(HSD_GObj* gobj)
                 return;
             }
 
-            ftCo_80096900(gobj, 1, 0, 1, 1, (f32) landing_lag);
+            ftCo_80096900(gobj, 1, 0, 1, 1, (float) landing_lag);
         }
     }
 }
@@ -197,16 +195,13 @@ static inline void ftLuigi_SpecialLw_GroundToAir(HSD_GObj* gobj)
 // https://decomp.me/scratch/pXs3o // Luigi's grounded Cyclone Physics callback
 void ftLg_SpecialLw_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* attrs = getFtSpecialAttrs(fp);
 
     {
-        f32 var2 = attrs->x74_LUIGI_CYCLONE_MOMENTUM_X_GROUND;
+        float var2 = attrs->x74_LUIGI_CYCLONE_MOMENTUM_X_GROUND;
 
         if (fp->cmd_vars[0] != 0) {
             fp->mv.lg.SpecialLw.groundVelX -=
@@ -234,10 +229,7 @@ void ftLg_SpecialLw_Phys(HSD_GObj* gobj)
 // https://decomp.me/scratch/85hbq // Luigi's aerial Cyclone Physics callback
 void ftLg_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* attrs0 = fp->dat_attrs;
@@ -252,7 +244,7 @@ void ftLg_SpecialAirLw_Phys(HSD_GObj* gobj)
     ftCommon_8007D4B8(fp);
 
     {
-        f32 spd_x = attrs0->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR;
+        float spd_x = attrs0->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR;
 
         {
             ftLuigiAttributes* attrs1 = fp->dat_attrs;
@@ -297,10 +289,7 @@ void ftLg_SpecialLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     if (fp->ground_or_air == GA_Ground) {
         if (!ft_80082888(gobj, &ftLg_SpecialLw_CollisionBox)) {
@@ -340,10 +329,7 @@ void ftLg_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     if (ft_800824A0(gobj, &ftLg_SpecialLw_CollisionBox) != false) {
         ftLuigi_SpecialAirLw_AirToGround(gobj);

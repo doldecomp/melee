@@ -1,14 +1,20 @@
+#include <platform.h>
 #include "forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftMt_SpecialLw.h"
 
 #include "ftMt_Init.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
-#include "it/it_27CF.h"
+#include "ft/types.h"
+#include "ftMewtwo/types.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 // SpecialLw/SpecialAirLw
@@ -42,10 +48,7 @@ void ftMt_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;
@@ -65,10 +68,7 @@ void ftMt_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;
@@ -209,10 +209,7 @@ void ftMt_SpecialLw_CreateDisable(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftMewtwoAttributes* mewtwoAttrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if ((u32) fp->cmd_vars[0] != 0U) {
         mewtwoAttrs = getFtSpecialAttrsD(fp);

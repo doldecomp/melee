@@ -4,8 +4,27 @@ ctx.c
 ctx_includes.h
 *.s.c
 
+# decomp-toolkit
+.ninja_*
+.mypy_cache
+*.exe
+build
+build.ninja
+objdiff.json
+orig/*/*
+!orig/*/sys
+orig/*/sys/*
+!orig/*/sys/.gitkeep
+/*.txt
+
 # Python
+.env
+.venv
+env/
 venv/
+ENV/
+env.bak/
+venv.bak/
 
 # .DS_Store
 .DS_Store
@@ -34,6 +53,7 @@ clean.bat
 /expected/
 /dump/
 *.log
+.aider*
 
 # Epilogue hack folder
 epilogue/

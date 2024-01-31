@@ -1,3 +1,7 @@
+#include <platform.h>
+#include <dolphin/gx/forward.h>
+#include <baselib/forward.h>
+
 #include "gm_1A36.h"
 
 #include "db/db_2253.h"
@@ -19,12 +23,16 @@
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/gx/GXInit.h>
 #include <dolphin/gx/GXMisc.h>
-#include <dolphin/os/os.h>
+#include <dolphin/gx/types.h>
+#include <dolphin/os.h>
+#include <dolphin/os/OSAlarm.h>
+#include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSMemory.h>
-#include <dolphin/pad/Pad.h>
+#include <dolphin/os/OSTime.h>
+#include <dolphin/pad/pad.h>
 #include <dolphin/vi/vi.h>
-#include <baselib/baselib_unknown_002.h>
+#include <baselib/hsd_3915.h>
 #include <baselib/controller.h>
 #include <baselib/debug.h>
 #include <baselib/initialize.h>
@@ -117,10 +125,11 @@ static void gmMain_8015FDA4(void)
     }
 }
 
-#ifdef MWERKS_GEKKO
-
-static inline void init_spr_unk(void)
+/// @remarks Might not do anything relevant to a port, but should still
+///          understand its purpose before ignoring it.
+static void init_spr_unk(void)
 {
+#ifdef MWERKS_GEKKO
 #define MTSPR(spr, val)                                                       \
     asm { li r3, val }                                                        \
     asm                                                                       \
@@ -133,24 +142,15 @@ static inline void init_spr_unk(void)
     MTSPR(0x393, 5);
     MTSPR(0x394, 6);
     MTSPR(0x395, 7);
-}
 #else
-
-/// @remarks Might not do anything relevant to a port, but should still
-///          understand its purpose before ignoring it.
-static inline void init_spr_unk(void)
-{
     NOT_IMPLEMENTED;
-}
-
 #endif
+}
 
 int main(void)
 {
-#ifdef MUST_MATCH
     char* unused_format_string = "Data %lx\n";
     u32 _[2];
-#endif
 
     OSInit();
     VIInit();

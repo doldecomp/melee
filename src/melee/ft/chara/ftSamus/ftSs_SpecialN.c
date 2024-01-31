@@ -1,23 +1,30 @@
+#include <platform.h>
+#include <baselib/forward.h>
+
 #include "ftSs_SpecialN.h"
 
-#include "ftSs_Init.h"
-#include "ftSs_SpecialN.h"
 #include "inlines.h"
 #include "math.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0881.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Escape.h"
 #include "ftCommon/ftCo_FallSpecial.h"
-#include "it/it_27CF.h"
+#include "ftSamus/types.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
+#include <common_structs.h>
 #include <dolphin/mtx/types.h>
 
 static void ftSamus_801293BC_inner(HSD_GObj* gobj)
@@ -25,10 +32,7 @@ static void ftSamus_801293BC_inner(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     s32 x2230 = fp->fv.ss.x2230;
     fp->self_vel.x = (fp->facing_dir * (samus_attr->x1C * x2230));
@@ -36,10 +40,7 @@ static void ftSamus_801293BC_inner(HSD_GObj* gobj)
 
 void ftSs_SpecialN_801291F0(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (gobj) {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -52,10 +53,7 @@ void ftSs_SpecialN_801291F0(HSD_GObj* gobj)
 
 void ftSs_SpecialN_80129258(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (gobj) {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -71,10 +69,7 @@ static bool ftSs_SpecialN_801292E4(HSD_GObj* gobj)
 
     HSD_GObj* result;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = getFighter(gobj);
 
@@ -103,10 +98,7 @@ static void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
     HSD_GObj* held_item;
     Fighter* fp;
     f64 var_f0;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused0[20];
-#endif
 
     fp = getFighterPlus(gobj);
     samus_attr = fp->dat_attrs;
@@ -127,10 +119,7 @@ static void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
         x2230 = fp->fv.ss.x2230;
         it_802B56E4(fp->fv.ss.x222C, &vec1, var_f0, x2230, samus_attr->x18);
         if ((fp->motion_id == 348) || (fp->ground_or_air == GA_Air)) {
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 unused1[28];
-#endif
             ftSamus_801293BC_inner(gobj);
         }
         fp->fv.ss.x2230 = 0U;
@@ -146,10 +135,7 @@ void ftSs_SpecialN_Enter(HSD_GObj* gobj)
     Vec3* self_vel;
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, 343, 0, 0, 1, 0, NULL);
     fp->cmd_vars[3] = 0;
@@ -170,10 +156,7 @@ void ftSs_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, 347, 0, 0, 1, 0, NULL);
     fp->cmd_vars[3] = 0;
@@ -192,10 +175,7 @@ void ftSs_SpecialNStart_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftSs_SpecialN_801292E4(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -220,17 +200,14 @@ void ftSs_SpecialNHold_Anim(HSD_GObj* gobj)
     ftSs_DatAttrs* samus_attr;
     ftSs_DatAttrs* samus_attr2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused1[40];
-#endif
 
     fp = fighter2 = getFighter(gobj);
     samus_attr = samus_attr2 = fp->dat_attrs;
     if (fighter2->cmd_vars[2]) {
         /// this block might be an inline, but couldn't get the regalloc to
         /// behave
-        f32 var_f1;
+        float var_f1;
         s32 index;
         fighter2->cmd_vars[2] = 0;
         if (fighter2->fv.ss.x2230) {
@@ -258,10 +235,7 @@ void ftSs_SpecialNHold_Anim(HSD_GObj* gobj)
 
 void ftSs_SpecialNCancel_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     ftSamus_UnkAndDestroyAllEF(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -271,10 +245,7 @@ void ftSs_SpecialNCancel_Anim(HSD_GObj* gobj)
 
 void ftSs_SpecialN_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     ftSs_SpecialN_801293BC(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -315,10 +286,7 @@ void ftSs_SpecialNHold_IASA(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_GObj* fighterObj2;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[32];
-#endif
 
     if (ftCo_8009917C(gobj)) {
         fighterObj2 = gobj;
@@ -472,10 +440,7 @@ void ftSs_SpecialS_8012A074(HSD_GObj* gobj)
         position.x += (samus_attr->x34 * fp->facing_dir);
 
         if ((fp->motion_id == 349) || (fp->motion_id == 351)) {
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[8];
-#endif
 
             it_802B62D0(gobj, &position, 0, fp->facing_dir);
         } else {

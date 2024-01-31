@@ -1,9 +1,11 @@
 #ifndef _object_h_
 #define _object_h_
 
-#include <baselib/forward.h>
+#include <platform.h>
+#include "baselib/forward.h"
 
-#include <baselib/class.h>
+#include "baselib/class.h"
+#include "baselib/debug.h"
 
 #define HSD_OBJ_NOREF ((u16) -1)
 
@@ -114,9 +116,7 @@ static inline void ref_INC(void* o)
 static inline void iref_INC(void* o)
 {
     HSD_OBJ(o)->ref_count_individual++;
-    if (!(HSD_OBJ(o)->ref_count_individual != 0)) {
-        __assert("object.h", 158, "HSD_OBJ(o)->ref_count_individual != 0");
-    }
+    HSD_ASSERT(158, HSD_OBJ(o)->ref_count_individual != 0);
 }
 
 #endif

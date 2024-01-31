@@ -1,15 +1,21 @@
+#include <platform.h>
+#include "ftCommon/forward.h"
+#include <dolphin/mtx/forward.h>
+
 #include "ftMh_TagRockPaper.h"
 
-#include "ftMh_TagCancel.h"
 #include "ftMh_ThrownMasterHand.h"
 #include "ftMh_Wait1_2.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
+#include "ftMasterHand/types.h"
+#include "pl/player.h"
 
 void ftMh_TagRockPaper_Anim(HSD_GObj* gobj)
 {
@@ -68,16 +74,13 @@ void ftMh_TagGrab_Phys(HSD_GObj* gobj)
 void ftMh_TagGrab_Coll(HSD_GObj* gobj) {}
 
 /// @todo Fix weird forward declaration
-extern const f32 neg1;
+extern const float neg1;
 
 void ftMh_TagSqueeze_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->cmd_vars[0] != 0) {
         fp->cmd_vars[0] = 0;
@@ -181,4 +184,4 @@ void ftMh_TagCancel_Coll(HSD_GObj* gobj)
     }
 }
 
-const f32 neg1 = -1;
+const float neg1 = -1;

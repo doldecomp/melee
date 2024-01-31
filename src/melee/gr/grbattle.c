@@ -1,3 +1,6 @@
+#include <platform.h>
+#include "lb/forward.h"
+
 #include "gr/grbattle.h"
 
 #include "gm/gm_1601.h"
@@ -7,11 +10,15 @@
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/stage.h"
+#include "gr/types.h"
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx/types.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os/OSError.h>
+#include <baselib/debug.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
@@ -238,10 +245,7 @@ static void grBattle_8021A118(HSD_GObj* arg0) {}
 
 static void grBattle_8021A11C(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
@@ -263,10 +267,7 @@ static void grBattle_8021A198(HSD_GObj* arg0) {}
 
 static void grBattle_8021A19C(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
@@ -285,10 +286,7 @@ static void grBattle_8021A208(HSD_GObj* arg0) {}
 
 static void grBattle_8021A20C(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
 
@@ -311,10 +309,7 @@ static void grBattle_8021A270(HSD_GObj* arg0) {}
 
 static void grBattle_8021A274(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     void* hsd_obj = gobj->hsd_obj;
@@ -334,10 +329,7 @@ static void grBattle_8021A2D8(HSD_GObj* arg0) {}
 
 static void grBattle_8021A2DC(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     void* hsd_obj = gobj->hsd_obj;
@@ -358,10 +350,7 @@ static void grBattle_8021A340(HSD_GObj* arg0) {}
 
 static void grBattle_8021A344(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj = gobj->hsd_obj;
@@ -386,10 +375,7 @@ static void grBattle_8021A3BC(HSD_GObj* gobj)
     s16 sp28[BATTLE_BG_MAX] = { 1, 2, 4 };
     s32 tmp;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[28];
-#endif
 
     switch (gp->gv.unk.xC4) {
     case 0:

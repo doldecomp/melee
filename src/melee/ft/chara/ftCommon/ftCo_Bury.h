@@ -1,11 +1,11 @@
 #ifndef GALE01_0C0874
 #define GALE01_0C0874
 
+#include <platform.h>
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "lb/forward.h"
-
-#include "lb/lbcollision.h"
+#include <baselib/forward.h>
 
 #include <placeholder.h>
 

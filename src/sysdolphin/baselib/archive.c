@@ -1,8 +1,8 @@
-#include "stddef.h"
+#include "archive.h"
 
+#include <__mem.h>
 #include <string.h>
-#include <dolphin/os/os.h>
-#include <baselib/archive.h>
+#include <dolphin/os.h>
 
 inline void Locate(HSD_Archive* archive)
 {

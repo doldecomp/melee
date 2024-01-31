@@ -1,4 +1,11 @@
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+
 #include "itmato.h"
+
+#include "it/inlines.h"
+#include "it/itCommonItems.h"
+#include "it/types.h"
 
 #include <melee/gr/ground.h>
 #include <melee/it/item.h>
@@ -37,7 +44,8 @@ bool it_802D858C(Item_GObj* item_gobj)
     return false;
 }
 
-void it_802D8594(Item_GObj* item_gobj) {
+void it_802D8594(Item_GObj* item_gobj)
+{
     Item* it = GET_ITEM(item_gobj);
     if (it->xDD4_itemVar.mato.x0 != NULL) {
         Vec3 pos;

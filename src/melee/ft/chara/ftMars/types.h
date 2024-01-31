@@ -4,8 +4,9 @@
 #include <platform.h>
 #include "ft/forward.h"
 
+#include "lb/types.h"
+
 #include <common_structs.h>
-#include <placeholder.h>
 
 struct ftMars_FighterVars {
     /* 0x222C */ u32 x222C;

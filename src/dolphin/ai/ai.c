@@ -1,6 +1,8 @@
 #include <placeholder.h>
 #include <dolphin/ai/ai.h>
 #include <dolphin/dsp/dsp.h>
+#include <dolphin/os/OSContext.h>
+#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSTime.h>
 
 static AISCallback __AIS_Callback;
@@ -298,10 +300,7 @@ static inline void waitForAIRegs(void)
 
 static void __AI_SRC_INIT(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     OSTime rise48 = 0;
     uint done = false;

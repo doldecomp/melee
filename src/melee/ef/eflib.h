@@ -1,6 +1,7 @@
 #ifndef GALE01_05B4B8
 #define GALE01_05B4B8
 
+#include <platform.h>
 #include <baselib/forward.h>
 
 #include <placeholder.h>

@@ -1,8 +1,8 @@
 #include <platform.h>
+#include "ft/forward.h"
 
 #include "ftCo_CargoFall.h"
 
-#include "ftCo_09C4.h"
 #include "ftCo_CargoLanding.h"
 #include "ftCo_CargoThrow.h"
 #include "ftCo_Shouldered.h"
@@ -11,13 +11,13 @@
 #include "ft/ft_081B.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ftDonkey/types.h"
+
+#include <common_structs.h>
 
 void ftCo_8009BC58(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, fp->x2CC->x4_motion_state + 6,
                               Ft_MF_KeepFastFall, 0, 1, 0, NULL);

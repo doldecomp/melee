@@ -1,16 +1,18 @@
 #ifndef GALE01_114EB8
 #define GALE01_114EB8
 
+#include <platform.h>
 #include "dolphin/mtx/forward.h"
 #include <baselib/forward.h>
 
 /* 114EB8 */ void ftNs_AttackHi4_YoyoUpdateHitPos(HSD_GObj* gobj);
 /* 114F0C */ void ftNs_AttackHi4_YoyoCheckTimedRehit(HSD_GObj* gobj);
 /* 114FF8 */ s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
-                                                 Vec3* ECBUnk2, f32 float_unk);
+                                                 Vec3* ECBUnk2,
+                                                 float float_unk);
 /* 115114 */ void ftNs_AttackHi4_YoyoSetUnkPos(HSD_GObj* gobj, Vec3* arg1);
 /* 1151EC */ void ftNs_AttackHi4_YoyoSetHitPos(HSD_GObj* gobj);
-/* 1152D0 */ void ftNs_AttackHi4_YoyoSetHitPosUnk(HSD_GObj* gobj, f32 arg8);
+/* 1152D0 */ void ftNs_AttackHi4_YoyoSetHitPosUnk(HSD_GObj* gobj, float arg8);
 /* 115404 */ bool ftNs_AttackHi4_YoyoCheckNoObstruct(HSD_GObj* gobj);
 /* 115534 */ void ftNs_AttackHi4_YoyoSetVarAll(HSD_GObj* gobj);
 /* 11556C */ void ftNs_AttackHi4_YoyoApplySmash(HSD_GObj* gobj);

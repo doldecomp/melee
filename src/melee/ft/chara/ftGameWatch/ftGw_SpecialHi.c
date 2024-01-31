@@ -1,5 +1,4 @@
-#include "forward.h"
-#include "ft/forward.h"
+#include <platform.h>
 
 #include "ftGw_SpecialHi.h"
 
@@ -7,16 +6,18 @@
 #include "math.h"
 #include "types.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0881.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
-#include "it/it_27CF.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx/types.h>
@@ -124,10 +125,7 @@ void ftGw_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp->x74_anim_vel.y = 0.0f;
     fp->self_vel.y = 0.0f;
@@ -144,10 +142,7 @@ void ftGw_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirHi, 0, 0.0f, 1.0f, 0.0f,
@@ -168,10 +163,7 @@ void ftGw_SpecialHi_Anim(HSD_GObj* gobj)
 // Animation callback
 void ftGw_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftGameWatchAttributes* gawAttrs;
 
@@ -199,11 +191,11 @@ void ftGw_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* gawAttrs = fp->dat_attrs;
-    f32 stick_x;
-    f32 temp;
-    f32 angle;
-    f32 facing_dir;
-    f32 stick_range_threshold;
+    float stick_x;
+    float temp;
+    float angle;
+    float facing_dir;
+    float stick_range_threshold;
 
     if ((u32) fp->cmd_vars[0] == 0) {
         stick_x = stickGetDir(fp->input.lstick.x, 0.0f);
@@ -253,10 +245,7 @@ void ftGw_SpecialAirHi_Coll(HSD_GObj* gobj)
     ftGameWatchAttributes* gawAttrs;
     int ledgeGrabDir;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp = GET_FIGHTER(gobj);
     gawAttrs = fp->dat_attrs;

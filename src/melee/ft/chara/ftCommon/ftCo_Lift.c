@@ -1,6 +1,6 @@
 #include <platform.h>
-#include "ft/forward.h"
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_Lift.h"
 
@@ -9,13 +9,15 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
+#include "it/it_26B1.h"
 #include "it/item.h"
 
 #include <math.h>
-#include <placeholder.h>
 #include <baselib/jobj.h>
 
 void ftCo_80096D9C(ftCo_GObj* gobj)
@@ -44,17 +46,11 @@ void ftCo_LiftWait_Phys(ftCo_GObj* gobj)
 
 void ftCo_80096E68(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->item_gobj != NULL) {
         Vec3 vec;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4] = { 0 };
-#endif
         vec.x = vec.y = vec.z = 0.0f;
         Item_8026ABD8(fp->item_gobj, &vec, 0.0f);
         ftCo_80090780(gobj);
@@ -95,10 +91,7 @@ void ftCo_80096F48(HSD_GObj* gobj)
 
 void ftCo_LiftWalk_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     if (!ftAnim_IsFramesRemaining(gobj) && !ftCo_80096EF8(gobj)) {
         ftCo_Fighter* fp = gobj->user_data;
         Fighter_ChangeMotionState(gobj, ftCo_MS_LiftWait, Ft_MF_Unk24, 0, 1, 0,
@@ -146,10 +139,7 @@ void ftCo_80097130(HSD_GObj* gobj)
 
 void ftCo_LiftTurn_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     Fighter_Part part = ftParts_8007500C(fp, FtPart_TransN);
     HSD_JObj* jobj = fp->parts[part].x4_jobj2;
@@ -197,17 +187,11 @@ void ftCo_LiftTurn_Coll(HSD_GObj* arg0)
 
 void ftCo_800974C4(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->item_gobj != NULL) {
         Vec3 vec;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4] = { 0 };
-#endif
         vec.x = vec.y = vec.z = 0;
         Item_8026ABD8(fp->item_gobj, &vec, 0);
     }
@@ -219,10 +203,7 @@ void ftCo_8009750C(HSD_GObj* gobj)
     Item_GObj* item_gobj = fp->item_gobj;
     if (item_gobj && it_8026B2B4(item_gobj) == 1) {
         Vec3 vec;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4] = { 0 };
-#endif
         vec.x = vec.y = vec.z = 0;
         Item_8026ABD8(item_gobj, &vec, 0);
     }

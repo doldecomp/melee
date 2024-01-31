@@ -1,3 +1,7 @@
+#include <platform.h>
+#include "it/forward.h"
+#include "lb/forward.h"
+
 #include "gr/grstory.h"
 
 #include "gr/granime.h"
@@ -6,18 +10,19 @@
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/types.h"
 #include "it/it_26B1.h"
-#include "it/it_27CF.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-#include <dolphin/mtx/types.h>
-#include <dolphin/os/os.h>
-#include <baselib/gobj.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 #include <baselib/random.h>
 
-static lb_UnkAnimStruct* grStory_801E36D0(enum_t);
+/* 1E302C */ static void grStory_801E302C(bool);
+/* 1E36D0 */ static lb_UnkAnimStruct* grStory_801E36D0(enum_t);
 
 extern StageInfo stage_info;
 
@@ -114,10 +119,7 @@ HSD_GObj* grStory_801E30D8(int gobj_id)
 
 void grStory_801E31C0(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
@@ -178,10 +180,7 @@ void grStory_801E3370(HSD_GObj* gobj)
 {
     UnkUserData* data = gobj->user_data;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground_801C2ED0(gobj->hsd_obj, data->x14);
     grAnime_801C8138(gobj, data->x14, 0);
@@ -225,10 +224,7 @@ void grStory_801E3418(HSD_GObj* gobj)
     s32 i;
     s32 tmp;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     UnkUserData2* gp = gobj->user_data;
 
@@ -319,7 +315,7 @@ bool grStory_801E36D8(Vec3* a, int _, HSD_JObj* joint)
     }
 }
 
-#ifdef MUST_MATCH
+#ifndef BUGFIX
 static u32 _[] = {
     0xC3920000, 0x42D20000, 0xC3920000, 0x42960000, 0xC3920000, 0x42480000,
     0x43980000, 0x42DC0000, 0x43980000, 0x42B40000, 0,          0,

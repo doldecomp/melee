@@ -1,6 +1,7 @@
 #ifndef GALE01_0E2888
 #define GALE01_0E2888
 
+#include <platform.h>
 #include "ftCaptain/forward.h"
 #include <baselib/forward.h>
 

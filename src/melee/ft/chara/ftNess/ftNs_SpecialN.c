@@ -1,16 +1,24 @@
-#include "forward.h"
+#include <platform.h>
+#include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftNess/ftNs_SpecialN.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftNess/ftNs_Init.h"
-#include "it/it_27CF.h"
+#include "ftNess/types.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
+
+#include <common_structs.h>
 
 // SpecialN/SpecialAirN (PK Flash)
 #define FTNESS_SPECIALN_COLL_FLAG                                             \
@@ -84,19 +92,19 @@ void ftNs_SpecialN_ItemPKFlushSetNULL(HSD_GObj* gobj)
 }
 
 /// @todo Float order hack.
-static f32 return_void(void)
+static float return_void(void)
 {
     return 0.0f;
 }
 
 /// @todo Float order hack.
-static f32 return_void2(void)
+static float return_void2(void)
 {
     return 3.0f;
 }
 
 /// @todo Float order hack.
-static f32 return_void3(void)
+static float return_void3(void)
 {
     return 1.0f;
 }
@@ -104,10 +112,7 @@ static f32 return_void3(void)
 /// Ness's grounded PK Flash Start Motion State handler
 void ftNs_SpecialNStart_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     {
         Fighter* fp0;
@@ -142,10 +147,7 @@ void ftNs_SpecialNStart_Enter(HSD_GObj* gobj)
 /// Ness's aerial PK Flash Start Motion State handler
 void ftNs_SpecialAirNStart_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -198,10 +200,7 @@ void ftNs_SpecialNStart_Anim(HSD_GObj* gobj)
             /// @todo Can't move below @c _.
             Vec3 vec;
 
-            /// @todo Unused stack.
-#ifdef MUST_MATCH
             u8 _[20];
-#endif
 
             lb_8000B1CC(fp->parts[FtPart_L2ndNa].joint, NULL, &vec);
             vec.z = 0;
@@ -290,10 +289,7 @@ void ftNs_SpecialNEnd_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     SetPKFlashAttr(gobj);
     ftParts_8007592C(fp, 0, 0);
@@ -321,10 +317,7 @@ void ftNs_SpecialAirNStart_Anim(HSD_GObj* gobj)
             if (fighter_data2->fv.ns.pkflash_gobj == NULL) {
                 Vec3 vec;
 
-                /// @todo Unused stack.
-#ifdef MUST_MATCH
                 u8 _[20];
-#endif
 
                 lb_8000B1CC(fighter_data2->parts[FtPart_L2ndNa].joint, NULL,
                             &vec);
@@ -397,10 +390,7 @@ void ftNs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* sa = getFtSpecialAttrs(fp);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     SetPKFlashAttr(gobj);
     ftParts_8007592C(fp, 0, 0);
@@ -410,7 +400,7 @@ void ftNs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
     }
 
     {
-        f32 landing_lag = sa->x1C_PKFLASH_LANDING_LAG;
+        float landing_lag = sa->x1C_PKFLASH_LANDING_LAG;
 
         if (landing_lag == 0) {
             ftCo_800CC730(gobj);
@@ -559,10 +549,7 @@ void ftNs_SpecialNEnd_Phys(HSD_GObj* gobj)
 /// Ness's aerial PK Flash Start Physics callback
 void ftNs_SpecialAirNStart_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* sa = fp->dat_attrs;
@@ -575,7 +562,7 @@ void ftNs_SpecialAirNStart_Phys(HSD_GObj* gobj)
     }
 
     {
-        f32 airFriction = fp->co_attrs.aerial_friction;
+        float airFriction = fp->co_attrs.aerial_friction;
         ftCommon_8007CE94(fp, airFriction);
     }
 }
@@ -583,10 +570,7 @@ void ftNs_SpecialAirNStart_Phys(HSD_GObj* gobj)
 /// Ness's aerial PK Flash Charge Physics callback
 void ftNs_SpecialAirNRelease_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* sa = fp->dat_attrs;
@@ -599,7 +583,7 @@ void ftNs_SpecialAirNRelease_Phys(HSD_GObj* gobj)
     }
 
     {
-        f32 airFriction = fp->co_attrs.aerial_friction;
+        float airFriction = fp->co_attrs.aerial_friction;
         ftCommon_8007CE94(fp, airFriction);
     }
 }
@@ -607,10 +591,7 @@ void ftNs_SpecialAirNRelease_Phys(HSD_GObj* gobj)
 /// Ness's aerial PK Flash Release Physics callback
 void ftNs_SpecialAirNEnd_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* sa = fp->dat_attrs;
@@ -623,7 +604,7 @@ void ftNs_SpecialAirNEnd_Phys(HSD_GObj* gobj)
     }
 
     {
-        f32 airFriction = fp->co_attrs.aerial_friction;
+        float airFriction = fp->co_attrs.aerial_friction;
         ftCommon_8007CE94(fp, airFriction);
     }
 }

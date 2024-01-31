@@ -3,6 +3,8 @@
 
 #include <platform.h>
 
+#include <dolphin/os.h>
+
 typedef bool (*OSResetFunction)(bool);
 
 typedef struct OSResetFunctionInfo OSResetFunctionInfo;
@@ -13,7 +15,7 @@ struct OSResetFunctionInfo {
     OSResetFunctionInfo* prev;
 };
 
-void OSResetSystem(bool reset, u32 resetCode, bool forceMenu);
+void OSResetSystem(int reset, u32 resetCode, bool forceMenu);
 void OSRegisterResetFunction(OSResetFunctionInfo* func);
 void __OSDoHotReset(s32 arg0);
 

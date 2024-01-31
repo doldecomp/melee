@@ -9,7 +9,7 @@ augroup END
 
 command! -nargs=1 FpGrep vimgrep /\<fp+\<0*<args>\>\>/ src/melee/ft/**/*.h
 command! -nargs=1 OffsetGrep vimgrep /+\<0*<args>\>/ src/**/*.h
-command! -nargs=1 LblGrep vimgrep /^<args>:$/ expected/dump/**/*.s
+command! -nargs=1 LblGrep vimgrep /^\.\(fn\|obj\) <args>\>/ build/GALE01/asm/**/*.s
 
 let &path.="src,src/melee,src/melee/ft/chara,src/MSL,src/sysdolphin,src/dolphin,"
 let g:c_syntax_for_h = 1

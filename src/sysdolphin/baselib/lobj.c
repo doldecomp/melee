@@ -1,11 +1,19 @@
+#include "forward.h"
+
 #include "lobj.h"
 
-#include <placeholder.h>
+#include "aobj.h"
+#include "class.h"
+#include "cobj.h"
+#include "list.h"
+#include "object.h"
+#include "wobj.h"
+
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
-#include <baselib/cobj.h>
+#include <dolphin/os.h>
 
 static void LObjInfoInit(void);
 
@@ -340,9 +348,7 @@ void HSD_LObjSetupSpecularInit(Mtx pmtx)
 
 static void setup_diffuse_lightobj(HSD_LObj* lobj)
 {
-#ifdef MUST_MATCH
     u32 _ = lobj->flags;
-#endif
 
     GXInitLightColor(&lobj->lightobj, lobj->color);
     lobj->hw_color = lobj->color;
@@ -374,11 +380,7 @@ static void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id)
         GXInitLightColor(&lobj->spec_lightobj, lobj->color);
         lobj->shininess = 50.0F;
 
-#ifdef MUST_MATCH
         x = x = lobj->shininess;
-#else
-        x = lobj->shininess;
-#endif
 
         x *= 0.5F;
         GXInitLightAttn(&lobj->spec_lightobj, 0.0F, 0.0F, 1.0F, x, 0.0F,
@@ -673,10 +675,7 @@ void HSD_LObjDeleteCurrentAll(HSD_LObj* lobj)
 
 void HSD_LObjSetCurrentAll(HSD_LObj* lobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u32 _;
-#endif
 
     LObjRemoveAll();
     HSD_LObjAddCurrent(lobj);
@@ -701,10 +700,7 @@ inline void LObjReplaceAll(HSD_LObj* lobj)
 
 void HSD_LObj_803668EC(HSD_LObj* lobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     LObjReplaceAll(lobj);
 }
@@ -758,10 +754,8 @@ s32 HSD_LightID2Index(GXLightID id)
         __assert(__FILE__, 1170, "0");
 
         /// @todo Find a better fix for uninitialized @c var_r31
-#ifndef MUST_MATCH
         index = 0;
         break;
-#endif
     }
     return index;
 }
@@ -1062,9 +1056,7 @@ static void LObjRelease(HSD_Class* o)
 {
     HSD_LObj* lobj = HSD_LOBJ(o);
     ///@todo Unused stack
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     HSD_AObjRemove(lobj->aobj);
     HSD_WObjUnref(HSD_LObjGetPositionWObj(lobj));

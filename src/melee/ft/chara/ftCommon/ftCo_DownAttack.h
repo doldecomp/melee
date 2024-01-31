@@ -1,12 +1,10 @@
 #ifndef GALE01_09805C
 #define GALE01_09805C
 
-#include <platform.h>
 #include "ftCommon/forward.h"
 #include "it/forward.h"
 
-#include <placeholder.h>
-
+/* 097270 */ void ftCo_800978D4(ftCo_GObj* gobj);
 /* 09813C */ void ftCo_DownAttack_Anim(ftCo_GObj* gobj);
 /* 098178 */ void ftCo_DownAttack_IASA(ftCo_GObj* gobj);
 /* 09817C */ void ftCo_DownAttack_Phys(ftCo_GObj* gobj);

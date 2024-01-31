@@ -1,23 +1,26 @@
+#include <platform.h>
 #include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftPk_SpecialS.h"
 
 #include "ftPk_SpecialN.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ftPikachu/ftPk_Init.h"
+#include "ft/types.h"
+#include "ftPikachu/types.h"
+
+#include <common_structs.h>
 
 void ftPk_SpecialS_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
@@ -31,10 +34,7 @@ void ftPk_SpecialS_Enter(HSD_GObj* gobj)
 
 void ftPk_SpecialAirS_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
@@ -81,7 +81,7 @@ void ftPk_SpecialSStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = getFtSpecialAttrsD(fp);
-    f32 pika_attr_x34 = sa->x34;
+    float pika_attr_x34 = sa->x34;
     ftCommon_8007C930(fp, pika_attr_x34);
     ftCommon_8007CB74(gobj);
 }
@@ -136,10 +136,7 @@ void ftPk_SpecialS_ChangeMotion_Unk01(HSD_GObj* gobj)
 
 void ftPk_SpecialSHold_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
@@ -158,10 +155,7 @@ void ftPk_SpecialSHold_Anim(HSD_GObj* gobj)
 
 void ftPk_SpecialAirSHold_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
@@ -241,9 +235,7 @@ void ftPk_SpecialS_ChangeMotion_Unk03(HSD_GObj* gobj)
 
 void ftPk_SpecialS_ChangeMotion_Unk04(HSD_GObj* gobj)
 {
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, 344, Ft_MF_KeepSfx, 0, 1, 0, 0);
 
@@ -255,10 +247,7 @@ void ftPk_SpecialS_ChangeMotion_Unk04(HSD_GObj* gobj)
 
 void ftPk_SpecialS_ChangeMotion_Unk05(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, 349, Ft_MF_KeepSfx, 0, 1, 0, 0);
 
@@ -270,16 +259,13 @@ void ftPk_SpecialS_ChangeMotion_Unk05(HSD_GObj* gobj)
 
 void ftPk_SpecialS0_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
 
     if (fp->x914[0].state == HitCapsule_Enabled) {
-        f32 damage_amount = fp->mv.pk.unk3.x0 * sa->x2C + sa->x28;
+        float damage_amount = fp->mv.pk.unk3.x0 * sa->x2C + sa->x28;
         ftColl_8007ABD0(&fp->x914[0], damage_amount, gobj);
     }
 
@@ -291,16 +277,13 @@ void ftPk_SpecialS0_Anim(HSD_GObj* gobj)
 
 void ftPk_SpecialAirS0_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
 
     if (fp->x914[0].state == HitCapsule_Enabled) {
-        f32 damage_amount = fp->mv.pk.unk3.x0 * sa->x2C + sa->x28;
+        float damage_amount = fp->mv.pk.unk3.x0 * sa->x2C + sa->x28;
         ftColl_8007ABD0(&fp->x914[0], damage_amount, gobj);
     }
 
@@ -360,10 +343,7 @@ void ftPk_SpecialS_ChangeMotion_Unk07(HSD_GObj* gobj)
 
 void ftPk_SpecialS_ChangeMotion_Unk08(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, 347, 0, 0, 1, 0, 0);
     {
@@ -376,10 +356,7 @@ void ftPk_SpecialS_ChangeMotion_Unk08(HSD_GObj* gobj)
 
 void ftPk_SpecialS_ChangeMotion_Unk09(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, 352, 0, 0, 1, 0, 0);
 
@@ -408,10 +385,7 @@ void ftPk_SpecialS1_Phys(HSD_GObj* arg0) {}
 
 void ftPk_SpecialAirS1_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
@@ -459,7 +433,7 @@ void ftPk_SpecialS_ChangeMotion_Unk10(HSD_GObj* gobj)
     fp->self_vel.x *= fp->facing_dir;
 
     {
-        f32 temp = 0.5f * fp->mv.pk.unk3.x0 / sa->x24;
+        float temp = 0.5f * fp->mv.pk.unk3.x0 / sa->x24;
         fp->self_vel.y = 0.5f * sa->x44 + sa->x44 * temp;
     }
 
@@ -490,10 +464,7 @@ void ftPk_SpecialAirSEnd_IASA(HSD_GObj* arg0) {}
 
 void ftPk_SpecialSEnd_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
@@ -503,10 +474,7 @@ void ftPk_SpecialSEnd_Phys(HSD_GObj* gobj)
 
 void ftPk_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
@@ -532,10 +500,7 @@ void ftPk_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 
 void ftPk_SpecialS_ChangeMotion_Unk11(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
@@ -548,10 +513,7 @@ void ftPk_SpecialS_ChangeMotion_Unk11(HSD_GObj* gobj)
 
 void ftPk_SpecialS_ChangeMotion_Unk12(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;

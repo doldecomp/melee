@@ -2,11 +2,12 @@
 
 #include "ftDk_HeavyFall.h"
 
-#include "ft/ft_0877.h"
+#include "ft/fighter.h"
 #include "ft/ft_0C88.h"
-#include "ft/inlines.h"
+#include "ft/ftanim.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_ItemThrow.h"
-#include "ftCommon/ftCo_Wait.h"
+#include "ftDonkey/types.h"
 
 void ftDk_HeavyJump_IASA(HSD_GObj* gobj)
 {

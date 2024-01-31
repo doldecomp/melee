@@ -5,12 +5,6 @@ SKIP_CHECK ?= 0
 REQUIRE_PROTOS ?= 1
 MSG_STYLE ?= gcc
 WARN_ERROR ?= 1
-WIP ?= 0
-
-ifeq ($(WIP),1)
-	SKIP_CHECK := 1
-	REQUIRE_PROTOS := 0
-endif
 
 VERBOSE ?= 0
 MAX_ERRORS ?= 0     # 0 = no maximum
@@ -25,11 +19,7 @@ endif
 
 TARGET := ssbm.us.1.2
 
-ifeq ($(WIP),1)
-	BUILD_DIR := build/wip/$(TARGET)
-else
-	BUILD_DIR := build/$(TARGET)
-endif
+BUILD_DIR := build/$(TARGET)
 
 # Inputs
 LDSCRIPT := ldscript.lcf
@@ -98,17 +88,26 @@ ifeq ($(GENERATE_MAP),1)
 	LDFLAGS += -map $(MAP)
 endif
 
+# TODO:-W all
+
 CFLAGS = -msgstyle $(MSG_STYLE) \
 		-nowraplines \
 		-cwd source \
 		-Cpp_exceptions off \
-		-proc gekko -fp hard \
-		-fp_contract on -O4,p \
+		-proc gekko \
+		-fp hardware \
+		-align powerpc \
+		-fp_contract on \
+		-O4,p \
 		-enum int \
 		-nodefaults \
 		-inline auto \
-		$(INCLUDES) \
-		-maxerrors $(MAX_ERRORS)
+		-pragma "cats off" \
+		-pragma "warn_notinlined off" \
+		-RTTI off \
+		-str reuse \
+		-maxerrors $(MAX_ERRORS) \
+		$(INCLUDES)
 
 ifneq ($(NON_MATCHING),1)
 	ASFLAGS += --defsym MUST_MATCH=1
@@ -129,11 +128,6 @@ endif
 
 ifeq ($(VERBOSE),1)
 	CFLAGS += -verbose
-endif
-
-ifeq ($(WIP),1)
-	ASFLAGS += --defsym WIP=1
-	CFLAGS += -DWIP
 endif
 
 HOSTCFLAGS := -Wall -O3 -s
@@ -179,7 +173,7 @@ ifeq ($(GENERATE_MAP),1)
 endif
 
 # ELF creation makefile instructions
-$(ELF): $(O_FILES) $(LDSCRIPT)
+$(ELF): $(O_FILES) $(LDSCRIPT) obj_files.mk
 	@echo Linking ELF $@
 	$(file >build/o_files, $(O_FILES))
 	$(QUIET) $(LD) $(LDFLAGS) -o $@ -lcf $(LDSCRIPT) @build/o_files

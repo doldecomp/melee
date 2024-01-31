@@ -7,13 +7,19 @@
 #include <dolphin/card/CARDCreate.h>
 #include <dolphin/card/CARDDir.h>
 #include <dolphin/card/CARDOpen.h>
+#include <dolphin/dvd/dvd.h>
+#include <dolphin/os/OSTime.h>
 
 #define CARDSetIconSpeed(stat, n, f)                                          \
     ((stat)->iconSpeed =                                                      \
          (((stat)->iconSpeed & ~(CARD_STAT_SPEED_MASK << (2 * (n)))) |        \
           ((f) << (2 * (n)))))
 
-static void CreateCallbackFat(s32 chan, s32 result)
+#ifndef BUGFIX
+#pragma push
+#pragma force_active on
+#endif
+void CreateCallbackFat(s32 chan, s32 result)
 {
     CARDControl* card;
     CARDDir* dir;
@@ -59,7 +65,13 @@ error:
         callback(chan, result);
     }
 }
+#ifndef BUGFIX
+#pragma pop
+#endif
 
+/// @todo Used only by #hsd_803AAA48.
+#pragma push
+#pragma force_active on
 s32 CARDCreateAsync(s32 chan, const char* fileName, u32 size,
                     CARDFileInfo* fileInfo, CARDCallback callback)
 {
@@ -135,3 +147,4 @@ s32 CARDCreateAsync(s32 chan, const char* fileName, u32 size,
 
     return result;
 }
+#pragma pop

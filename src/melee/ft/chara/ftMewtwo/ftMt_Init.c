@@ -1,4 +1,7 @@
+#include <platform.h>
 #include "forward.h"
+#include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftMt_Init.h"
 
@@ -7,11 +10,13 @@
 #include "ftMt_SpecialN.h"
 #include "ftMt_SpecialS.h"
 
-#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftMewtwo/types.h"
+#include "it/it_26B1.h"
 
 MotionState ftMt_Init_MotionStateTable[ftMt_MS_SelfCount] = {
     {
@@ -325,7 +330,7 @@ void ftMt_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMewtwoAttributes* da = fp->dat_attrs;
-    f32 attr_value = da->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
+    float attr_value = da->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
 
     if (fp->fv.mt.x2234_shadowBallCharge == attr_value) {
         ftCo_800BFFD0(fp, 92, 0);

@@ -1,5 +1,4 @@
 #include "forward.h"
-#include "ft/forward.h"
 
 #include "ftPp_Init.h"
 
@@ -8,16 +7,13 @@
 #include "ftPp_SpecialS.h"
 #include "types.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftNana/ftNn_Init.h"
-#include "it/it_27CF.h"
-#include "lb/lb_00B0.h"
+#include "it/it_26B1.h"
+#include "it/items/it_27CF.h"
 
 #include <baselib/gobj.h>
 
@@ -367,10 +363,7 @@ void ftPp_Init_OnLoadForNana(Fighter* fp)
 
 void ftPp_Init_OnLoad(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     void** item_list = fp->ft_data->x48_items;

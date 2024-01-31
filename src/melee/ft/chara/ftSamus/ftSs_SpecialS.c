@@ -1,14 +1,17 @@
 #include "ftSs_SpecialS.h"
 
-#include "ftSs_Init.h"
 #include "ftSs_SpecialN.h"
 
 #include "ef/eflib.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
-#include "ftCommon/ftCo_SpecialS.h"
+#include "ftSamus/types.h"
+
+#include <dolphin/mtx/types.h>
 
 static void ftSamus_ClearThrowFlagsUnk(HSD_GObj* gobj)
 {
@@ -50,10 +53,7 @@ void ftSs_SpecialAirS_Enter(HSD_GObj* gobj)
 
 void ftSs_SpecialS_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -62,10 +62,7 @@ void ftSs_SpecialS_Anim(HSD_GObj* gobj)
 
 void ftSs_SpecialAirS_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_800CC730(gobj);
@@ -83,10 +80,7 @@ void ftSs_SpecialS_Phys(HSD_GObj* gobj)
 
 void ftSs_SpecialAirS_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = getFtSpecialAttrs(fp);
@@ -112,10 +106,7 @@ void ftSs_SpecialAirS_Coll(HSD_GObj* gobj)
 
 void ftSs_SpecialSSmash_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -124,10 +115,7 @@ void ftSs_SpecialSSmash_Anim(HSD_GObj* gobj)
 
 void ftSs_SpecialAirSSmash_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_800CC730(gobj);
@@ -145,10 +133,7 @@ void ftSs_SpecialSSmash_Phys(HSD_GObj* gobj)
 
 void ftSs_SpecialAirSSmash_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[40];
-#endif
 
     Fighter* fighter2;
     Fighter* fp;
@@ -179,10 +164,7 @@ void ftSs_SpecialS_8012A640(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     efLib_DestroyAll(gobj);
     fp->fv.ss.x2244 = 0;

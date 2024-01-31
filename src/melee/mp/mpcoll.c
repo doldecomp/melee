@@ -4,6 +4,7 @@
 
 #include "db/db_2253.h"
 #include "ft/ftlib.h"
+#include "ft/types.h"
 #include "gr/grdynamicattr.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
@@ -11,8 +12,8 @@
 #include "mp/mplib.h"
 
 #include <placeholder.h>
-#include <dolphin/mtx/types.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os/OSError.h>
+#include <baselib/debug.h>
 #include <MSL/trigf.h>
 
 // 80041C78 https://decomp.me/scratch/V6eYQ
@@ -28,10 +29,7 @@ char mpColl_804D3948[2] = "0";
 // 80041C8C https://decomp.me/scratch/VvSaI
 void mpColl_80041C8C(CollData* cd)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     mpColl_804D64A0 = 0;
     mpColl_804D64A4 = 0;
@@ -679,10 +677,7 @@ void mpColl_80043324(CollData* arg0, s32 arg1, s32 arg2)
 {
     s32 temp_r3;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 temp_r3_2[4];
-#endif
 
     if (arg0->floor.index != -1) {
         temp_r3 = grDynamicAttr_801CA284(&arg0->x4_vec, arg0->floor.index);
@@ -836,10 +831,7 @@ s32 mpColl_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2)
 {
     Vec3 vel;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     f32 dist_right_x;
     f32 dist_right_y;
@@ -995,7 +987,7 @@ bool mpColl_80043BBC(CollData* arg0, s32* arg1)
     return false;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 
 #pragma push
 asm void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)

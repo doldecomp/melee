@@ -1,13 +1,18 @@
-#include "forward.h"
+#include <platform.h>
 
 #include "ftNs_AttackLw4.h"
 
 #include "ftNs_AttackHi4.h"
 
-#include "ef/efasync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
+#include "ft/ftanim.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Wait.h"
+#include "ftNess/types.h"
+
+#include <common_structs.h>
 
 // 0x8011659C
 // https://decomp.me/scratch/xVTx7
@@ -99,7 +104,7 @@ void ftNs_AttackLw4Charge_Anim(
     fp->mv.ns.attacklw4.yoyoCurrentFrame = (s32) (yoyoSmashFrameCurr + 1);
     ftNs_AttackHi4_YoyoSetUnkRate(gobj);
     ftNs_AttackHi4_YoyoCheckTimedRehit(gobj);
-    if ((f32) fp->mv.ns.attacklw4.yoyoCurrentFrame >=
+    if ((float) fp->mv.ns.attacklw4.yoyoCurrentFrame >=
         ness_attr->xAC_YOYO_CHARGE_DURATION)
     {
         ftNs_AttackLw4Release_Enter(gobj);
@@ -191,7 +196,7 @@ void ftNs_AttackLw4Release_IASA(
 void ftNs_AttackLw4Release_Phys(
     HSD_GObj* gobj) // Ness's Down Smash Post-Charge Physics callback
 {
-    f32 yoyoSmashUnk;
+    float yoyoSmashUnk;
     s32 yoyoSmashFrameCurr;
     Fighter* fp;
 
@@ -200,7 +205,7 @@ void ftNs_AttackLw4Release_Phys(
     yoyoSmashFrameCurr = fp->mv.ns.attacklw4.yoyoCurrentFrame;
     if (yoyoSmashFrameCurr < 0x13) {
         yoyoSmashUnk =
-            0.20000000298023224f * ((f32) yoyoSmashFrameCurr - 14.0f);
+            0.20000000298023224f * ((float) yoyoSmashFrameCurr - 14.0f);
         if (yoyoSmashUnk >= 1.0f) {
             yoyoSmashUnk = 1.0f;
         }

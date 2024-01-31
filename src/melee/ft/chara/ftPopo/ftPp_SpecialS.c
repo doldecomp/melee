@@ -1,14 +1,12 @@
+#include <platform.h>
+
 #include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ftcamera.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
 #include "ft/types.h"
 
 #include <melee/ft/chara/ftPopo/ftPp_SpecialS.h>
 
-extern f32 const ftPp_Init_804D9848; // 0.0f
+extern float const ftPp_Init_804D9848; // 0.0f
 
 static void setRefGObjFlagAndClear(Fighter* fp)
 {
@@ -26,10 +24,7 @@ static void setRefGObjFlagAndClear(Fighter* fp)
 void ftPp_SpecialS_8011F68C(Fighter_GObj* gobj)
 {
     Fighter* fp;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp = gobj->user_data;
     ftParts_8007592C(fp, 0, ftPp_Init_804D9848);

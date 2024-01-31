@@ -1,9 +1,11 @@
 #include <platform.h>
 
+#include "memory.h"
+
+#include "debug.h"
+#include "initialize.h"
+
 #include <dolphin/os/OSAlloc.h>
-#include <baselib/debug.h>
-#include <baselib/initialize.h>
-#include <baselib/memory.h>
 
 void HSD_Free(void* ptr)
 {

@@ -1,18 +1,20 @@
 #include <platform.h>
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "ftCo_ShieldBreakFly.h"
 
 #include "ftCo_ShieldBreakDown.h"
 #include "ftCo_ShieldBreakFall.h"
 
-#include "ef/efasync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
 #include "ftCommon/inlines.h"
-
-#include <placeholder.h>
 
 void ftCo_80098B20(Fighter_GObj* gobj)
 {
@@ -52,9 +54,6 @@ void ftCo_ShieldBreakFly_Coll(Fighter_GObj* gobj)
 
 void ftCo_80098C9C(Fighter_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_80098B20(gobj);
 }

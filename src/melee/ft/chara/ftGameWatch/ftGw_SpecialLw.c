@@ -1,4 +1,3 @@
-#include "forward.h"
 #include "lb/forward.h"
 
 #include "ftGw_SpecialLw.h"
@@ -6,19 +5,21 @@
 #include "ftGw_Init.h"
 #include "types.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "it/it_27CF.h"
+#include "ft/types.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
+#include <common_structs.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/gobjproc.h>
 
 /// Create Oil Panic Item
 void ftGw_SpecialLw_ItemPanicSetup(HSD_GObj* gobj)
@@ -29,10 +30,7 @@ void ftGw_SpecialLw_ItemPanicSetup(HSD_GObj* gobj)
         /// @todo Can't move below @c _.
         Vec3 vec;
 
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[16];
-#endif
 
         lb_8000B1CC(fp->parts[FtPart_TopN].joint, NULL, &vec);
 
@@ -207,10 +205,7 @@ static int const anim_update_frame = 38;
 /// Mr. Game & Watch's grounded Oil Panic Loop Animation callback
 void ftGw_SpecialLw_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     /// @todo Shared @c inline with #ftGw_SpecialAirLw_Anim.
     Fighter* fp = GET_FIGHTER(gobj);
@@ -234,10 +229,7 @@ void ftGw_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->cur_anim_frame == anim_update_frame &&
         !fp->mv.gw.SpecialLw.isRelease)
@@ -255,10 +247,7 @@ void ftGw_SpecialAirLw_Anim(HSD_GObj* gobj)
 /// Mr. Game & Watch's grounded Oil Panic Loop IASA callback
 void ftGw_SpecialLw_IASA(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     /// @todo Shared @c inline with #ftGw_SpecialAirLw_IASA.
     Fighter* fp = GET_FIGHTER(gobj);
@@ -271,14 +260,14 @@ void ftGw_SpecialLw_IASA(HSD_GObj* gobj)
         if (turn_frames > 0) {
             fp->mv.gw.SpecialLw.turnFrames = turn_frames - 1;
         } else {
-            f32 stick_range = fp->input.lstick.x;
+            float stick_range = fp->input.lstick.x;
 
             if (stick_range < 0) {
                 stick_range = -stick_range;
             }
 
             if (stick_range > p_ftCommonData->x0) {
-                f32 facing_dir = fp->facing_dir;
+                float facing_dir = fp->facing_dir;
 
                 ftCommon_8007D9FC(fp);
 
@@ -308,14 +297,14 @@ void ftGw_SpecialAirLw_IASA(HSD_GObj* gobj)
         if (turnFrames > 0) {
             fp->mv.gw.SpecialLw.turnFrames = turnFrames - 1;
         } else {
-            f32 stick_range = fp->input.lstick.x;
+            float stick_range = fp->input.lstick.x;
 
             if (stick_range < 0) {
                 stick_range = -stick_range;
             }
 
             if (stick_range > p_ftCommonData->x0) {
-                f32 facingDir = fp->facing_dir;
+                float facingDir = fp->facing_dir;
                 ftCommon_8007D9FC(fp);
 
                 if (facingDir != fp->facing_dir) {
@@ -341,10 +330,7 @@ void ftGw_SpecialLw_Phys(HSD_GObj* gobj)
 /// Mr. Game & Watch's aerial Oil Panic Loop Physics callback
 void ftGw_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* sa = fp->dat_attrs;
@@ -399,10 +385,7 @@ void ftGw_SpecialLw_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw, transition_flags0,
@@ -415,10 +398,7 @@ void ftGw_SpecialAirLw_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftCommon_8007D7FC(fp);
 
@@ -450,7 +430,7 @@ static u32 const transition_flags1 =
     Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
     Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
-void ftGw_SpecialLw_UpdateAction(HSD_GObj* gobj, f32 anim_frame)
+void ftGw_SpecialLw_UpdateAction(HSD_GObj* gobj, float anim_frame)
 {
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw, transition_flags1,
                               anim_frame - 1, 1, 0, NULL);
@@ -459,7 +439,7 @@ void ftGw_SpecialLw_UpdateAction(HSD_GObj* gobj, f32 anim_frame)
     ftGameWatch_SpecialLw_UpdateVarsAction(gobj);
 }
 
-void ftGw_SpecialAirLw_UpdateAction(HSD_GObj* gobj, f32 anim_frame)
+void ftGw_SpecialAirLw_UpdateAction(HSD_GObj* gobj, float anim_frame)
 {
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw, transition_flags1,
                               anim_frame - 1, 1, 0, NULL);
@@ -605,10 +585,7 @@ static inline void ftGameWatch_SpecialLwShoot_ApplyDamage(HSD_GObj* gobj)
 /// Mr. Game & Watch's grounded Oil Panic Release Animation callback
 void ftGw_SpecialLwShoot_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     /// @todo Shared @c inline with #ftGw_SpecialAirLwShoot_Anim.
     ftGameWatch_SpecialLwShoot_ApplyDamage(gobj);
@@ -621,10 +598,7 @@ void ftGw_SpecialLwShoot_Anim(HSD_GObj* gobj)
 /// Mr. Game & Watch's aerial Oil Panic Release Animation callback
 void ftGw_SpecialAirLwShoot_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftGameWatch_SpecialLwShoot_ApplyDamage(gobj);
 
@@ -699,10 +673,7 @@ void ftGw_SpecialAirLwShoot_AirToGround(HSD_GObj* gobj)
 /// Enter SpecialLwShoot and calculate damage
 void ftGw_SpecialLwShoot_ReleaseOil(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     /// @todo Shared @c inline with #ftGw_SpecialAirLwShoot_ReleaseOil
     /// @todo Please for the love of god stop copy-pasting code
@@ -721,7 +692,7 @@ void ftGw_SpecialLwShoot_ReleaseOil(HSD_GObj* gobj)
                               sa->x78_GAMEWATCH_PANIC_DAMAGE_MUL;
 
             {
-                f32 panicDamage =
+                float panicDamage =
                     fp->cmd_vars[1] + sa->x74_GAMEWATCH_PANIC_DAMAGE_ADD;
 
                 fp->cmd_vars[1] = panicDamage;
@@ -738,10 +709,7 @@ void ftGw_SpecialLwShoot_ReleaseOil(HSD_GObj* gobj)
 /// Enter SpecialAirLwShoot and calculate damage
 void ftGw_SpecialAirLwShoot_ReleaseOil(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLwShoot, 0, 0, 1, 0,
                               NULL);
@@ -758,7 +726,7 @@ void ftGw_SpecialAirLwShoot_ReleaseOil(HSD_GObj* gobj)
                               sa->x78_GAMEWATCH_PANIC_DAMAGE_MUL;
 
             {
-                f32 panicDamage =
+                float panicDamage =
                     fp->cmd_vars[1] + sa->x74_GAMEWATCH_PANIC_DAMAGE_ADD;
                 fp->cmd_vars[1] = panicDamage;
             }

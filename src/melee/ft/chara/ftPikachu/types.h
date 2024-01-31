@@ -11,65 +11,65 @@ struct ftPikachu_FighterVars {
 };
 
 typedef struct _ftPikachuAttributes {
-    f32 x0;
-    f32 x4;
-    f32 x8;
-    f32 xC;
-    f32 x10;
+    float x0;
+    float x4;
+    float x8;
+    float xC;
+    float x10;
     u32 x14;
     u32 x18;
-    f32 x1C;
-    f32 x20;
-    f32 x24;
-    f32 x28;
-    f32 x2C;
-    f32 x30;
-    f32 x34;
-    f32 x38;
-    f32 x3C;
-    f32 x40;
-    f32 x44;
-    f32 x48;
-    f32 x4C;
-    f32 x50;
-    f32 x54;
-    f32 x58;
+    float x1C;
+    float x20;
+    float x24;
+    float x28;
+    float x2C;
+    float x30;
+    float x34;
+    float x38;
+    float x3C;
+    float x40;
+    float x44;
+    float x48;
+    float x4C;
+    float x50;
+    float x54;
+    float x58;
     s32 x5C;
     s32 x60; // up b zip duration
-    f32 x64;
-    f32 x68; // up b angle offset 1
+    float x64;
+    float x68; // up b angle offset 1
     Vec3 x6C_scale;
-    f32 x78; // up b angle offset 2
+    float x78; // up b angle offset 2
     Vec3 x7C_scale;
-    f32 x88;
-    f32 x8C; // up b minimum stick magnitude
+    float x88;
+    float x8C; // up b minimum stick magnitude
 
-    f32 x90; // up b zip stick magnitude to velocity slope
-    f32 x94; // up b zip stick magnitude to velocity intercept
-    f32 x98; // second zip velocity decay
-    f32 x9C;
+    float x90; // up b zip stick magnitude to velocity slope
+    float x94; // up b zip stick magnitude to velocity intercept
+    float x98; // second zip velocity decay
+    float x9C;
 
     s32 xA0;
-    f32 xA4;
+    float xA4;
     s32 xA8; // minimum stick angle difference between two up b zips
-    f32 xAC;
+    float xAC;
 
-    f32 xB0;
-    f32 xB4;
-    f32 xB8;
-    f32 xBC;
+    float xB0;
+    float xB4;
+    float xB8;
+    float xBC;
 
-    f32 xC0;
-    f32 xC4;
-    f32 xC8;
-    f32 xCC;
+    float xC0;
+    float xC4;
+    float xC8;
+    float xCC;
 
-    f32 xD0;
+    float xD0;
     s32 xD4;
     s32 xD8;
     u32 xDC;
 
-    f32 height_attributes[6];
+    float height_attributes[6];
 } ftPikachuAttributes;
 
 union ftPikachu_MotionVars {
@@ -92,7 +92,7 @@ union ftPikachu_MotionVars {
         Vec2 x10;
         s32 x18;
         Vec2 x1C;
-        f32 x24;
+        float x24;
     } unk4;
 
     /// @todo Proper state name.

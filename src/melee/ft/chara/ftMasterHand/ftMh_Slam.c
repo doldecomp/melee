@@ -1,23 +1,26 @@
+#include <platform.h>
+#include "ftCommon/forward.h"
+
 #include "ftMh_Slam.h"
 
 #include "ftMh_ThrownMasterHand.h"
 #include "ftMh_Wait1_2.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCrazyHand/ftCh_Init.h"
+#include "ftMasterHand/types.h"
+#include "pl/player.h"
 
 void ftMh_Slam_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (fp->cmd_vars[0] != 0) {
         fp->cmd_vars[0] = 0;
         ftMh_CaptureWaitMasterHand_80155D6C(fp->victim_gobj,

@@ -25,10 +25,7 @@ void ftCo_800BC9C8(ftCo_GObj* gobj)
 
 static inline void inlineA0(ftCo_GObj* gobj, HSD_GObjEvent cb)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         cb(gobj);

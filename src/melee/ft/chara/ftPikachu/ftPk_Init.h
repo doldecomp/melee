@@ -1,6 +1,7 @@
 #ifndef GALE01_1243AC
 #define GALE01_1243AC
 
+#include <platform.h>
 #include "ftPikachu/forward.h"
 #include <baselib/forward.h>
 

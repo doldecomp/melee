@@ -1,13 +1,15 @@
 #include "mobj.h"
 
+#include "aobj.h"
 #include "class.h"
-#include "memory.h"
+#include "debug.h"
 #include "state.h"
 #include "tev.h"
 #include "texp.h"
 
-#include <string.h>
-#include <dolphin/os/os.h>
+#include <__mem.h>
+#include <dolphin/gx/GXEnum.h>
+#include <dolphin/os.h>
 
 static HSD_ClassInfo* default_class;
 static HSD_MObj* current_mobj;
@@ -194,10 +196,7 @@ HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
     HSD_TObj *tobj, *tobj_2, *tobj_3, *tobj_4, *toon = NULL;
     u32 done = 0;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     HSD_ASSERT(416, list);
     *list = NULL;
@@ -376,7 +375,7 @@ void HSD_MObjCompileTev(HSD_MObj* mobj)
     }
 }
 
-#ifdef MUST_MATCH
+#if defined(MUST_MATCH) || !defined(BUGFIX)
 #pragma push
 #pragma force_active on
 static char unused1[] = "hsdIsDescendantOf(info, &hsdMObj)";
@@ -521,7 +520,7 @@ void HSD_MObjAddShadowTexture(HSD_TObj* tobj)
     tobj_shadows = tobj;
 }
 
-#ifdef MUST_MATCH
+#ifndef BUGFIX
 #pragma push
 #pragma force_active on
 static char unused2[] = "mobj->rendermode&RENDER_SPECULAR";

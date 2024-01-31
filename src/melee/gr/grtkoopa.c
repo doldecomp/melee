@@ -1,13 +1,20 @@
+#include <platform.h>
+#include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
+
 #include "gr/grtkoopa.h"
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/types.h"
 #include "lb/lb_00F9.h"
 
-#include <dolphin/os/os.h>
+#include <dolphin/os/OSError.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 
 static void grTKoopa_80221648(int);
 static void grTKoopa_8022164C(void);
@@ -128,10 +135,7 @@ static void grTKoopa_8022180C(HSD_GObj* arg0) {}
 
 static void grTKoopa_80221810(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
@@ -153,10 +157,7 @@ static void grTKoopa_8022189C(HSD_GObj* arg0) {}
 
 static void grTKoopa_802218A0(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);

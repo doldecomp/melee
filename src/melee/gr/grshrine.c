@@ -1,16 +1,22 @@
+#include <platform.h>
+#include "lb/forward.h"
+
 #include "gr/grshrine.h"
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
 #include <math.h>
 #include <dolphin/mtx/types.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os/OSError.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 
 static void grShrine_80201C60(int);
 static void grShrine_80201C64(void);
@@ -65,10 +71,7 @@ static void grShrine_80201C60(int arg0) {}
 
 static void grShrine_80201C64(void)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 unused0[8];
-#endif
 
     grSh_804D6A18 = Ground_801C49F8();
     grShrine_80201D20(0);
@@ -80,10 +83,7 @@ static void grShrine_80201C64(void)
     {
         Vec3 v = { 0.5F, 0.0F, 0.0F };
 
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 unused1[4];
-#endif
 
         lb_80011A50(&v, -1, 0.5f, 0.0f, M_PI / 3, -10000.0f, 10000.0f,
                     10000.0f, -10000.0f);
@@ -165,10 +165,7 @@ static void grShrine_80201E98(HSD_GObj* arg0) {}
 
 static void grShrine_80201E9C(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);

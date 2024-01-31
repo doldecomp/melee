@@ -1,4 +1,6 @@
+#include <platform.h>
 #include "forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftDk_SpecialHi.h"
 
@@ -6,13 +8,16 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftDonkey/types.h"
 
 static void setCallbacks(HSD_GObj* gobj)
 {
@@ -43,10 +48,7 @@ void ftDk_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirHi, 0, 0, 1, 0, NULL);
     setCallbacks(gobj);
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
@@ -69,10 +71,7 @@ void ftDk_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007D60C(fp);
         if (donkey_attr->SpecialHi.x64_LANDING_LAG == 0) {
@@ -99,13 +98,10 @@ void ftDk_SpecialHi_Phys(HSD_GObj* gobj)
 
 void ftDk_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
-    f32 grav_mul;
+    float grav_mul;
     if (fp->cmd_vars[0]) {
         grav_mul = 1;
     } else {
@@ -136,10 +132,7 @@ void ftDk_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
     if (fp->self_vel.y >= 0) {
         if (ft_80081D0C(gobj)) {
             ftCommon_8007D7FC(fp);

@@ -1,23 +1,23 @@
 #include <platform.h>
-#include "ft/forward.h"
 #include "ftLink/forward.h"
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ftLk_SpecialLw.h"
 
-#include "ftLk_Init.h"
-
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
-#include "ft/ftcoll.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_ItemGet.h"
 #include "ftCommon/ftCo_ItemThrow.h"
-#include "ftLink/types.h"
-#include "it/it_27CF.h"
+#include "it/it_26B1.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 /* 0EB75C */ static bool updateBomb(HSD_GObj* gobj, FtMotionId msid);
@@ -63,10 +63,7 @@ static void spawnBomb(HSD_GObj* gobj)
     ftLk_DatAttrs* da = fp->dat_attrs;
     if (ftCheckThrowB0(fp)) {
         Vec3 pos;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4];
-#endif
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint,
                     NULL, &pos);
         {
@@ -85,10 +82,7 @@ static void spawnBomb(HSD_GObj* gobj)
 
 static void doAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     if (!ftAnim_IsFramesRemaining(gobj)) {
         cb(gobj);
     }

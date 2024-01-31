@@ -1,6 +1,6 @@
 #include <platform.h>
 
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSAlloc.h>
 
 static Heap* HeapArray;
@@ -262,7 +262,7 @@ size_t OSCheckHeap(OSHeapHandle heap)
     return totalFree;
 }
 
-#ifdef MUST_MATCH
+#if defined(MUST_MATCH) || !defined(BUGFIX)
 #pragma push
 #pragma force_active on
 static char _unused_str0[] = "\nOSDumpHeap(%d):\n";

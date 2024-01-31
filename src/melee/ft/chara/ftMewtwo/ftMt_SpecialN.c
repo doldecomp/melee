@@ -1,5 +1,7 @@
 #include "forward.h"
 #include "ft/forward.h"
+#include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftMt_SpecialN.h"
 
@@ -7,16 +9,25 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0881.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Escape.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftMewtwo/ftMt_Init.h"
-#include "it/it_27CF.h"
+#include "ftMewtwo/types.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbrefract.h"
+
+#include <common_structs.h>
 
 // SpecialN/SpecialAirN
 
@@ -164,10 +175,7 @@ static inline void ftMewtwo_SpecialN_RemoveHeldShadowBall(HSD_GObj* gobj)
 /// Remove Shadow Ball when taking damage
 void ftMt_SpecialN_OnTakeDamage(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (gobj != NULL) {
         ftMewtwo_SpecialN_RemoveHeldShadowBall(gobj);
@@ -177,10 +185,7 @@ void ftMt_SpecialN_OnTakeDamage(HSD_GObj* gobj)
 /// Remove Shadow Ball OnDeath2?
 void ftMt_SpecialN_OnDeath(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (gobj != NULL) {
         Fighter* fp = fp = GET_FIGHTER(gobj);
@@ -201,7 +206,7 @@ void ftMt_SpecialN_OnDeath(HSD_GObj* gobj)
                 }
             }
         }
-        if ((f32) fp2->fv.mt.x2234_shadowBallCharge !=
+        if ((float) fp2->fv.mt.x2234_shadowBallCharge !=
             mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
         {
             fp2->fv.mt.x2234_shadowBallCharge = 0;
@@ -230,14 +235,14 @@ static void ftMewtwo_SpecialN_SetRecoil(HSD_GObj* gobj)
     {
         fp->self_vel.x =
             fp->facing_dir * (mewtwoAttrs->x8_MEWTWO_SHADOWBALL_AIR_RECOIL_X *
-                              (f32) fp->fv.mt.x2234_shadowBallCharge);
+                              (float) fp->fv.mt.x2234_shadowBallCharge);
     }
     if (((s32) fp->motion_id == ftMt_MS_SpecialNEnd) ||
         ((s32) fp->ground_or_air == GA_Ground))
     {
         fp->gr_vel = fp->facing_dir *
                      (mewtwoAttrs->x4_MEWTWO_SHADOWBALL_GROUND_RECOIL_X *
-                      (f32) fp->fv.mt.x2234_shadowBallCharge);
+                      (float) fp->fv.mt.x2234_shadowBallCharge);
     }
 }
 
@@ -252,19 +257,11 @@ void ftMt_SpecialN_ReleaseShadowBall(HSD_GObj* gobj)
     HSD_GObj* shadowBallGObj;
     f64 facingDir;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
-/// @todo Missing @c inline function(s).
-#ifdef MUST_MATCH
+    /// @todo Missing @c inline function(s).
     fp = fp = getFighter(gobj);
     mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
-#else
-    fp = getFighter(gobj);
-    mewtwoAttrs = getFtSpecialAttrsD(fp);
-#endif
 
     if (((u32) fp->cmd_vars[1] == 1U) &&
         (fp->fv.mt.x2230_shadowHeldGObj != NULL))
@@ -278,29 +275,20 @@ void ftMt_SpecialN_ReleaseShadowBall(HSD_GObj* gobj)
         } else {
             facingDir = M_PI;
         }
-        it_802C53F0(fp->fv.mt.x2230_shadowHeldGObj, &sp38, (f32) facingDir,
-                    (f32) (u32) fp->fv.mt.x2234_shadowBallCharge,
+        it_802C53F0(fp->fv.mt.x2230_shadowHeldGObj, &sp38, (float) facingDir,
+                    (float) (u32) fp->fv.mt.x2234_shadowBallCharge,
                     mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES);
         ftMewtwo_SpecialN_SetRecoil(gobj);
         fp->fv.mt.x2234_shadowBallCharge = 0;
         if (gobj != NULL) {
-/// @todo Missing @c inline function(s).
-#ifdef MUST_MATCH
             temp_fp = temp_fp = getFighter(gobj);
-#else
-            temp_fp = getFighter(gobj);
-#endif
 
             if (temp_fp->fv.mt.x2230_shadowHeldGObj != NULL) {
                 temp_fp->fv.mt.x2230_shadowHeldGObj = NULL;
             }
             if (gobj != NULL) {
-/// @todo Missing @c inline function(s).
-#ifdef MUST_MATCH
+                /// @todo Missing @c inline function(s).
                 fp2 = fp2 = getFighter(gobj);
-#else
-                fp2 = getFighter(gobj);
-#endif
 
                 if (fp2->fv.mt.x2238_shadowBallGObj != NULL) {
                     efLib_DestroyAll(gobj);
@@ -309,7 +297,7 @@ void ftMt_SpecialN_ReleaseShadowBall(HSD_GObj* gobj)
             }
         }
         fp->item_gobj = shadowBallGObj;
-        if ((f32) fp->fv.mt.x2234_shadowBallCharge ==
+        if ((float) fp->fv.mt.x2234_shadowBallCharge ==
             mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
         {
             ft_80088148(fp, 200118, SFX_VOLUME_MAX, SFX_PAN_MID);
@@ -326,16 +314,13 @@ void ftMt_SpecialN_PlayChargeSFX(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftMewtwoAttributes* mewtwoAttrs = fp->dat_attrs;
     static u32 shadowBallSFX[4] = { 200121, 200124, 200127, 200130 };
-    f32 chargeLevel;
+    float chargeLevel;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if ((u32) fp->cmd_vars[2] != 0U) {
         if (fp->fv.mt.x2234_shadowBallCharge != 0) {
-            chargeLevel = (f32) fp->fv.mt.x2234_shadowBallCharge /
+            chargeLevel = (float) fp->fv.mt.x2234_shadowBallCharge /
                           mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
         } else {
             chargeLevel = 0.0f;
@@ -369,7 +354,7 @@ void ftMt_SpecialN_PlayChargeSFX(HSD_GObj* gobj)
                 ft_80088510(fp, shadowBallSFX[0], SFX_VOLUME_MAX, SFX_PAN_MID);
             }
         } else {
-            fp->mv.mt.SpecialN.chargeLevel = (f32) 9.999999747378752e-5f;
+            fp->mv.mt.SpecialN.chargeLevel = (float) 9.999999747378752e-5f;
             ft_80088510(fp, shadowBallSFX[0], SFX_VOLUME_MAX, SFX_PAN_MID);
         }
     }
@@ -477,10 +462,7 @@ void ftMt_SpecialNStart_Anim(HSD_GObj* gobj)
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
     HSD_GObj* shadowHeldGObj;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     if (((u32) fp->cmd_vars[3] == 1U) &&
         (fp->fv.mt.x2230_shadowHeldGObj == NULL))
@@ -502,7 +484,7 @@ void ftMt_SpecialNStart_Anim(HSD_GObj* gobj)
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (((s32) fp->mv.mt.SpecialN.isFull == true) ||
-            ((f32) fp->fv.mt.x2234_shadowBallCharge ==
+            ((float) fp->fv.mt.x2234_shadowBallCharge ==
              mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES))
         {
             Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialNEnd, 0, 0.0f, 1.0f,
@@ -571,7 +553,7 @@ void ftMt_SpecialNLoop_Anim(HSD_GObj* gobj)
             {
                 fp->mv.mt.SpecialN.x2344 = 0;
                 fp->fv.mt.x2234_shadowBallCharge++;
-                if ((f32) fp->fv.mt.x2234_shadowBallCharge >=
+                if ((float) fp->fv.mt.x2234_shadowBallCharge >=
                     mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
                 {
                     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialNLoopFull,
@@ -619,9 +601,7 @@ inline void ftMewtwo_SpecialN_RemoveShadowBall2(HSD_GObj* gobj)
 /// Mewtwo's grounded Shadow Ball Cancel Animation callback
 void ftMt_SpecialNCancel_Anim(HSD_GObj* gobj)
 {
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     ftMewtwo_SpecialN_RemoveShadowBall2(gobj);
 
@@ -633,10 +613,7 @@ void ftMt_SpecialNCancel_Anim(HSD_GObj* gobj)
 /// Mewtwo's grounded Shadow Ball End Animation callback
 void ftMt_SpecialNEnd_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     ftMt_SpecialN_ReleaseShadowBall(gobj);
 
@@ -656,10 +633,7 @@ void ftMt_SpecialAirNStart_Anim(HSD_GObj* gobj)
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
     HSD_GObj* shadowHeldGObj;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[12];
-#endif
 
     if (((u32) fp->cmd_vars[3] == 1U) &&
         (fp->fv.mt.x2230_shadowHeldGObj == NULL))
@@ -682,7 +656,7 @@ void ftMt_SpecialAirNStart_Anim(HSD_GObj* gobj)
     fp->mv.mt.SpecialN.isFull = false;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (((s32) fp->mv.mt.SpecialN.isFull == true) ||
-            ((f32) fp->fv.mt.x2234_shadowBallCharge ==
+            ((float) fp->fv.mt.x2234_shadowBallCharge ==
              mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES))
         {
             Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirNEnd, 0, 0.0f,
@@ -724,7 +698,7 @@ void ftMt_SpecialAirNLoop_Anim(HSD_GObj* gobj)
             {
                 fp->mv.mt.SpecialN.x2344 = 0;
                 fp->fv.mt.x2234_shadowBallCharge++;
-                if ((f32) fp->fv.mt.x2234_shadowBallCharge >=
+                if ((float) fp->fv.mt.x2234_shadowBallCharge >=
                     mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
                 {
                     Fighter_ChangeMotionState(
@@ -762,10 +736,7 @@ void ftMt_SpecialAirNLoopFull_Anim(HSD_GObj* gobj)
 // Animation callback
 void ftMt_SpecialAirNCancel_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     ftMewtwo_SpecialN_RemoveShadowBall2(gobj);
 
@@ -780,10 +751,7 @@ void ftMt_SpecialAirNEnd_Anim(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     ftMt_SpecialN_ReleaseShadowBall(gobj);
 
@@ -809,10 +777,7 @@ void ftMt_SpecialNLoop_IASA(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     u32 recentInput;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[48];
-#endif
 
     if (ftCo_8009917C(gobj) != false) {
         ftMewtwo_SpecialN_RemoveShadowBall2(gobj);
@@ -848,10 +813,7 @@ void ftMt_SpecialNLoopFull_IASA(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     u32 recentInput;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[48];
-#endif
 
     if (ftCo_8009917C(gobj) != false) {
         ftMewtwo_SpecialN_RemoveShadowBall2(gobj);
@@ -902,10 +864,7 @@ void ftMt_SpecialAirNLoop_IASA(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     u32 recentInput;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[32];
-#endif
 
     recentInput = fp->input.x668;
     if (((recentInput & HSD_PAD_A) != false) &&
@@ -936,10 +895,7 @@ void ftMt_SpecialAirNLoopFull_IASA(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     u32 recentInput;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[32];
-#endif
 
     recentInput = fp->input.x668;
     if ((recentInput & HSD_PAD_A) != false) {
@@ -1039,10 +995,7 @@ void ftMt_SpecialNStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (ft_80082708(gobj) == false) {
         ftCommon_8007D5D4(fp);
@@ -1058,10 +1011,7 @@ void ftMt_SpecialNLoop_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (ft_80082708(gobj) == false) {
         ftCommon_8007D5D4(fp);
@@ -1078,10 +1028,7 @@ void ftMt_SpecialNLoopFull_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (ft_80082708(gobj) == false) {
         ftCommon_8007D5D4(fp);
@@ -1098,10 +1045,7 @@ void ftMt_SpecialNCancel_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (ft_80082708(gobj) == false) {
         ftCommon_8007D5D4(fp);
@@ -1117,10 +1061,7 @@ void ftMt_SpecialNEnd_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (ft_80082708(gobj) == false) {
         ftCommon_8007D5D4(fp);
@@ -1136,10 +1077,7 @@ void ftMt_SpecialAirNStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (ft_80081D0C(gobj) == true) {
         ftCommon_8007D7FC(fp);
@@ -1155,10 +1093,7 @@ void ftMt_SpecialAirNLoop_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (ft_80081D0C(gobj) == true) {
         ftCommon_8007D7FC(fp);
@@ -1175,10 +1110,7 @@ void ftMt_SpecialAirNLoopFull_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (ft_80081D0C(gobj) == true) {
         ftCommon_8007D7FC(fp);
@@ -1195,10 +1127,7 @@ void ftMt_SpecialAirNCancel_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (ft_80081D0C(gobj) == true) {
         ftCommon_8007D7FC(fp);
@@ -1214,10 +1143,7 @@ void ftMt_SpecialAirNEnd_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (ft_80081D0C(gobj) == true) {
         ftCommon_8007D7FC(fp);
@@ -1255,10 +1181,7 @@ static inline void ftMewtwo_SpecialN_LaunchShadowBall(HSD_GObj* gobj)
 /// Create F-Throw Shadow Ball
 void ftMt_SpecialN_Shoot(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     ftMewtwo_SpecialN_LaunchShadowBall(gobj);
 }

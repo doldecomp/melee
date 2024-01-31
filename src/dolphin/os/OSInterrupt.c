@@ -1,16 +1,17 @@
+#include <__mem.h>
 #include <placeholder.h>
-#include <string.h>
 #include <dolphin/ai/ai.h>
 #include <dolphin/dsp/dsp.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/os/OSThread.h>
+#include <dolphin/os/OSTime.h>
 #include <MetroTRK/intrinsics.h>
 
-static OSInterruptHandler* InterruptHandlerTable;
+static __OSInterruptHandler* InterruptHandlerTable;
 
 static OSInterruptMask InterruptPrioTable[] = {
     OS_INTRMASK_PI_ERROR,
@@ -90,22 +91,22 @@ bool OSRestoreInterrupts(bool level)
 }
 #endif
 
-extern OSInterruptHandler* InterruptHandlerTable;
+extern __OSInterruptHandler* InterruptHandlerTable;
 
-OSInterruptHandler __OSSetInterruptHandler(__OSInterrupt id,
-                                           OSInterruptHandler handler)
+__OSInterruptHandler __OSSetInterruptHandler(__OSInterrupt id,
+                                             __OSInterruptHandler handler)
 {
-    OSInterruptHandler old_handler = InterruptHandlerTable[id];
+    __OSInterruptHandler old_handler = InterruptHandlerTable[id];
     InterruptHandlerTable[id] = handler;
     return old_handler;
 }
 
-OSInterruptHandler __OSGetInterruptHandler(__OSInterrupt id)
+__OSInterruptHandler __OSGetInterruptHandler(__OSInterrupt id)
 {
     return InterruptHandlerTable[id];
 }
 
-static void ExternalInterruptHandler(OSException exception,
+static void ExternalInterruptHandler(__OSException exception,
                                      OSContext* context);
 
 extern volatile struct {
@@ -126,8 +127,6 @@ void __OSInterruptInit(void)
     __OSMaskInterrupts(~0x1F);
     __OSSetExceptionHandler(4, ExternalInterruptHandler);
 }
-
-extern vu32 __PIRegs[12] AT_ADDRESS(0xCC003000);
 
 u32 SetInterruptMask(OSInterruptMask mask, OSInterruptMask current)
 {
@@ -312,7 +311,7 @@ OSInterruptMask __OSUnmaskInterrupts(OSInterruptMask global)
     return prev;
 }
 
-void __OSDispatchInterrupt(OSException exception, OSContext* context)
+void __OSDispatchInterrupt(__OSException exception, OSContext* context)
 {
     u32 intsr;
     u32 reg;
@@ -320,7 +319,7 @@ void __OSDispatchInterrupt(OSException exception, OSContext* context)
     OSInterruptMask unmasked;
     OSInterruptMask* prio;
     __OSInterrupt interrupt;
-    OSInterruptHandler handler;
+    __OSInterruptHandler handler;
     intsr = __PIRegs[0];
     intsr &= ~0x00010000;
 
@@ -460,31 +459,19 @@ void __OSDispatchInterrupt(OSException exception, OSContext* context)
 }
 
 #ifdef MWERKS_GEKKO
-static asm void ExternalInterruptHandler(OSException _, OSContext* ctx)
-{ // clang-format off
-    nofralloc
-    stw r0, 0(r4)
-    stw r1, 4(r4)
-    stw r2, 8(r4)
-    stmw r6, 0x18(r4)
-    mfspr r0, 0x391
-    stw r0, 0x1a8(r4)
-    mfspr r0, 0x392
-    stw r0, 0x1ac(r4)
-    mfspr r0, 0x393
-    stw r0, 0x1b0(r4)
-    mfspr r0, 0x394
-    stw r0, 0x1b4(r4)
-    mfspr r0, 0x395
-    stw r0, 0x1b8(r4)
-    mfspr r0, 0x396
-    stw r0, 0x1bc(r4)
-    mfspr r0, 0x397
-    stw r0, 0x1c0(r4)
-    b __OSDispatchInterrupt
-} // clang-format on
+static asm void ExternalInterruptHandler(register __OSException exception,
+                                         register OSContext* context)
+{
+#pragma unused(exception)
+    // clang-format off
+  nofralloc
+  OS_EXCEPTION_SAVE_GPRS(context)
+  b __OSDispatchInterrupt
+    // clang-format on
+}
 #else
-static void ExternalInterruptHandler(OSException _, OSContext* ctx)
+static void ExternalInterruptHandler(register __OSException exception,
+                                     register OSContext* context)
 {
     NOT_IMPLEMENTED;
 }

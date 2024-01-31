@@ -1,5 +1,8 @@
-#include <string.h>
-#include <baselib/id.h>
+#include "id.h"
+
+#include "debug.h"
+
+#include <__mem.h>
 
 HSD_ObjAllocData hsd_iddata;
 

@@ -1,7 +1,7 @@
 /// @file
 /// Aerial Attacks (AttackAir)
-#ifndef MELEE_FT_CHARA_FTGAMEWATCH_FTGAMEWATCH_ATTACKAIR_H
-#define MELEE_FT_CHARA_FTGAMEWATCH_FTGAMEWATCH_ATTACKAIR_H
+#ifndef GALE01_14AFC0
+#define GALE01_14AFC0
 
 #include <baselib/forward.h>
 

@@ -1,7 +1,9 @@
 #ifndef GALE01_12CDE8
 #define GALE01_12CDE8
 
+#include <platform.h>
 #include "ftYoshi/forward.h"
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include <placeholder.h>

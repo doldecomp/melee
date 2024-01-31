@@ -1,3 +1,5 @@
+#include <dolphin/dvd/forward.h>
+
 #include "lb/lbfile.h"
 
 #include "lb/lb_0192.h"
@@ -7,9 +9,8 @@
 
 #include <string.h>
 #include <dolphin/dvd/dvd.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
-#include <baselib/archive.h>
 #include <baselib/debug.h>
 #include <baselib/devcom.h>
 
@@ -25,18 +26,14 @@ void lbFile_8001615C(int r3, int r4, int r5, bool cancelflag)
     cancel = true;
 }
 
-#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
-#endif
 bool lbFile_800161A0(void)
 {
     lb_800195D0();
     return cancel;
 }
-#ifdef MUST_MATCH
 #pragma pop
-#endif
 
 void lbFile_800161C4(int arg0, int arg1, HSD_Archive* arg2, int arg3, int arg4,
                      int arg5)
@@ -96,11 +93,11 @@ typedef struct OldDVDFileInfo {
     /*0x34*/ u32 length;
 } OldDVDFileInfo;
 
-/* BUG: OldDVDFileInfo is needed to match stack allocation sizes. However,
- * the actual DVDFileInfo is 4 bytes longer due to callback.
- * This means that calls to lbFile_8001634C write 4 bytes past where it should
- * on the stack.
- */
+/// @bug OldDVDFileInfo is needed to match stack allocation sizes. However,
+/// the actual DVDFileInfo is 4 bytes longer due to callback.
+/// This means that calls to lbFile_8001634C write 4 bytes past where it should
+/// on the stack.
+///
 size_t lbFile_8001634C(s32 fileno)
 {
     OldDVDFileInfo info;
@@ -143,10 +140,7 @@ void lbFile_800164A4(s32 arg0, HSD_Archive* arg1, s32* arg2, s32 arg3,
 void lbFile_80016580(const char* basename, HSD_Archive* arg1, s32* arg2,
                      HSD_DevComCallback arg3, s32 arg4)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     const char* filename = lbFile_80016204(basename);
     s32 entry_num = DVDConvertPathToEntrynum(filename);

@@ -2,7 +2,7 @@
 
 #include <__mem.h>
 #include <dolphin/dvd/dvd.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSArena.h>
 
 static u32 status;
@@ -46,7 +46,7 @@ void __fstLoad(void)
     u8 auStack64[64];
     struct DiskInfo* info;
 
-#ifdef MUST_MATCH
+#ifndef BUGFIX
     /// @todo Unused assignment.
     {
         void* arenaHi = OSGetArenaHi();

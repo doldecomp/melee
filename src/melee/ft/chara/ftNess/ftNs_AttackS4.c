@@ -1,13 +1,18 @@
-#include "forward.h"
+#include <platform.h>
 
 #include "ftNess/ftNs_AttackS4.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Wait.h"
 #include "ftNess/ftNs_Init.h"
-#include "it/it_27CF.h"
+#include "ftNess/types.h"
+#include "it/items/it_27CF.h"
 
 // 0x80114BF4
 void ftNs_AttackS4_OnReflect(
@@ -23,10 +28,7 @@ void ftNs_AttackS4_Enter(HSD_GObj* gobj) // Ness's F-Smash Motion State handler
     Fighter* fp;
     HSD_GObj* baseballBatGObj;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp = GET_FIGHTER(gobj);
 
@@ -136,10 +138,7 @@ void ftNs_AttackS4_IASA(HSD_GObj* gobj) // Ness's F-Smash IASA Callback
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->allow_interrupt != 0) {
         if (fp->fv.ns.bat_gobj != NULL) {

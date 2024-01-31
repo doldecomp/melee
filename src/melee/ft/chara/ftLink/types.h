@@ -3,8 +3,11 @@
 
 #include <platform.h>
 #include "ft/forward.h"
-#include "ftLink/forward.h"
+#include "ftLink/forward.h" // IWYU pragma: export
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
+
+#include "lb/types.h"
 
 #include <common_structs.h>
 #include <placeholder.h>

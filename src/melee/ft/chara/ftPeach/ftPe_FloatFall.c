@@ -1,15 +1,15 @@
 #include <platform.h>
-#include <melee/ft/chara/ftPeach/forward.h>
-#include <melee/ft/forward.h>
+#include <dolphin/mtx/forward.h>
 
 #include "ftPe_FloatFall.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
-
-#include <baselib/gobj.h>
+#include "ftPeach/types.h"
 
 static ftPeach_MotionState getFloatDir(HSD_GObj* gobj)
 {
@@ -19,7 +19,7 @@ static ftPeach_MotionState getFloatDir(HSD_GObj* gobj)
                : ftPe_MS_FloatFallB;
 }
 
-void updateFloatDir(HSD_GObj* gobj)
+void ftPe_UpdateFloatDir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;

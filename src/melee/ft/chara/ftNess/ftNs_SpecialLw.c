@@ -1,4 +1,5 @@
-#include "forward.h"
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
 
 #include "ftNs_SpecialLw.h"
 
@@ -6,12 +7,19 @@
 
 #include "ef/efasync.h"
 #include "ef/eflib.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0881.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftNess/types.h"
 #include "pl/pl_0371.h"
+#include "pl/player.h"
+
+#include <common_structs.h>
 
 // SpecialLw (PSI Magnet)
 #define FTNESS_SPECIALLW_COLL_FLAG                                            \
@@ -32,10 +40,7 @@ void ftNs_SpecialLwStart_Enter(HSD_GObj* gobj) // Ness's grounded PSI Magnet
     ftNessAttributes* ness_attr;
     Fighter* temp_fp;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     temp_fp = GET_FIGHTER(gobj);
     ness_attr = temp_fp->dat_attrs;
@@ -57,10 +62,7 @@ void ftNs_SpecialAirLwStart_Enter(
     Fighter* temp_fp;
     ftNessAttributes* ness_attr;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[20];
-#endif
 
     temp_fp = GET_FIGHTER(gobj);
     ness_attr = temp_fp->dat_attrs;
@@ -118,10 +120,7 @@ void ftNs_SpecialAirLwStart_Anim(
     Fighter* fighter_data2;
     Fighter* fp;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fighter_data2 = fp = GET_FIGHTER(gobj);
 
@@ -171,10 +170,7 @@ void ftNs_SpecialLwStart_Phys(HSD_GObj* gobj)
 /// Ness's aerial PSI Magnet Start Physics callback
 void ftNs_SpecialAirLwStart_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* da = &fp->co_attrs;
@@ -285,10 +281,7 @@ void ftNs_SpecialAirLwHold_Anim(
     Fighter* temp_r31;
     Fighter* fp;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp = GET_FIGHTER(gobj);
     if ((fp->input.held_inputs & HSD_PAD_B) == false) {
@@ -344,10 +337,7 @@ void ftNs_SpecialLwHold_Phys(
 /// Ness's aerial PSI Magnet Hold Physics callback
 void ftNs_SpecialAirLwHold_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* ness_attr = fp->dat_attrs;
@@ -397,10 +387,7 @@ void ftNs_SpecialLwHold_GroundToAir(
     Fighter* fp;
     ftNessAttributes* ness_attr;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
@@ -421,10 +408,7 @@ void ftNs_SpecialAirLwHold_AirToGround(
     Fighter* fp;
     ftNessAttributes* ness_attr;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
@@ -445,10 +429,7 @@ void ftNs_SpecialLwHold_Enter(
     Fighter* fp;
     ftNessAttributes* ness_attr;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialLwHold, Ft_MF_KeepGfx, 0.0f,
                               1.0f, 0.0f, NULL);
@@ -465,10 +446,7 @@ void ftNs_SpecialAirLwHold_Enter(
     Fighter* fp;
     ftNessAttributes* ness_attr;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirLwHold, Ft_MF_KeepGfx,
                               0.0f, 1.0f, 0.0f, NULL);
@@ -477,9 +455,9 @@ void ftNs_SpecialAirLwHold_Enter(
     ftColl_CreateAbsorbHit(gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
-static inline f32 returnStateVar(s32 stateVar)
+static inline float returnStateVar(s32 stateVar)
 {
-    return (f32) stateVar;
+    return (float) stateVar;
 }
 
 static inline void getAttrStuff(HSD_GObj* arg0)
@@ -504,10 +482,7 @@ static inline void getAttrStuff(HSD_GObj* arg0)
 /// Ness's grounded PSI Magnet Turnaround Animation callback - _
 void ftNs_SpecialLwTurn_Anim(HSD_GObj* arg0)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter* fp0 = arg0->user_data;
 
@@ -534,10 +509,7 @@ void ftNs_SpecialLwTurn_Anim(HSD_GObj* arg0)
 /// Ness's aerial PSI Magnet Turnaround Animation callback - _
 void ftNs_SpecialAirLwTurn_Anim(HSD_GObj* arg0)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     Fighter* fp0 = arg0->user_data;
 
@@ -591,10 +563,7 @@ void ftNs_SpecialAirLwTurn_Phys(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     s32 magnetTimer;
     ftNessAttributes* ness_attr = fp->dat_attrs;
@@ -671,10 +640,7 @@ void ftNs_SpecialAirLwTurn_AirToGround(
 bool ftNs_SpecialLwHold_GroundOrAir(
     HSD_GObj* arg0) // Decide grounded or aerial PSI Magnet Hold
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     Fighter* fp = GET_FIGHTER(arg0);
 
@@ -729,10 +695,7 @@ void ftNs_SpecialLwHit_Anim(
     Fighter* temp_r3_2;
     Fighter* temp_r4;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[44];
-#endif
 
     s32 phi_r0;
 
@@ -800,10 +763,7 @@ void ftNs_SpecialLwHit_Anim(
 void ftNs_SpecialAirLwHit_Anim(
     HSD_GObj* arg0) // Ness's aerial PSI Magnet Absorb Animation callback
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Fighter* fp = GET_FIGHTER(arg0);
 
@@ -867,10 +827,7 @@ void ftNs_SpecialLwHit_Phys(
 void ftNs_SpecialAirLwHit_Phys(
     HSD_GObj* arg0) // Ness's aerial PSI Magnet Absorb Physics callback
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     s32 temp_r3;
 
@@ -919,10 +876,7 @@ void ftNs_SpecialLwHit_GroundToAir(
     Fighter* fp;
     ftNessAttributes* ness_attr;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
@@ -943,10 +897,7 @@ void ftNs_SpecialAirLwHit_AirToGround(
     Fighter* fp;
     ftNessAttributes* ness_attr;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
@@ -964,23 +915,20 @@ void ftNs_SpecialAirLwHit_AirToGround(
 void ftNs_AbsorbThink_DecideAction(
     HSD_GObj* gobj) // Ness's PSI Magnet OnAbsorb hook
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     enum_t msid;
     Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* sa = fp->dat_attrs;
 
     {
-        f32 heal_amount = (int) (fp->AbsorbAttr.x1A44_damageTaken *
-                                 ftNs_Init_GetAbsorbHeal(fp));
+        float heal_amount = (int) (fp->AbsorbAttr.x1A44_damageTaken *
+                                   ftNs_Init_GetAbsorbHeal(fp));
 
         fp->dmg.x1830_percent -= heal_amount;
 
         {
-            f32 cur_percent = fp->dmg.x1830_percent;
+            float cur_percent = fp->dmg.x1830_percent;
 
             if (fp->dmg.x1830_percent < 0) {
                 heal_amount = cur_percent + heal_amount;
@@ -993,7 +941,7 @@ void ftNs_AbsorbThink_DecideAction(
         pl_80040B8C(fp->player_id, fp->x221F_b4, heal_amount);
     }
 
-    fp->facing_dir = (f32) fp->AbsorbAttr.x1A40_absorbHitDirection;
+    fp->facing_dir = (float) fp->AbsorbAttr.x1A40_absorbHitDirection;
     msid = fp->motion_id;
 
     if ((msid != ftNs_MS_SpecialLwHit && msid != ftNs_MS_SpecialAirLwHit) ||
@@ -1016,10 +964,7 @@ void ftNs_AbsorbThink_DecideAction(
 void ftNs_SpecialLwEnd_Anim(
     HSD_GObj* gobj) // Ness's grounded PSI Magnet End Animation callback
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007DB24(gobj);
@@ -1032,10 +977,7 @@ void ftNs_SpecialLwEnd_Anim(
 void ftNs_SpecialAirLwEnd_Anim(
     HSD_GObj* gobj) // Ness's aerial PSI Magnet End Animation callback
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007DB24(gobj);
@@ -1070,10 +1012,7 @@ void ftNs_SpecialLwEnd_Phys(
 void ftNs_SpecialAirLwEnd_Phys(
     HSD_GObj* arg0) // Ness's aerial PSI Magnet End Physics callback
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[24];
-#endif
 
     Fighter* fp = GET_FIGHTER(arg0);
     ftNessAttributes* attrs = fp->dat_attrs;

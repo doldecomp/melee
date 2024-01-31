@@ -1,15 +1,19 @@
 #include "gr/grtfalco.h"
 
+#include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "gr/types.h"
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
-#include <dolphin/os/os.h>
+#include <placeholder.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 
 /* static */ StageCallbacks grTFc_803E8918[4] = {
     {

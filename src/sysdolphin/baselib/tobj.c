@@ -1,15 +1,18 @@
 #include "tobj.h"
 
 #include "aobj.h"
+#include "debug.h"
 #include "memory.h"
 #include "mtx.h"
 
-#include <math.h>
+#include <__mem.h>
+#include <math.h> // IWYU pragma: keep
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/types.h>
 #include <MetroTRK/intrinsics.h>
 
-extern void TObjInfoInit(void);
+static void MakeTextureMtx(HSD_TObj* tobj);
+static void TObjInfoInit(void);
 
 HSD_TObjInfo hsdTObj = { TObjInfoInit };
 
@@ -339,11 +342,8 @@ END:
 
 char HSD_TObj_8040562C[23] = "unexpected texmap id.\n\0";
 
-#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
-#endif
-
 static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
 {
     switch (id) {
@@ -368,22 +368,16 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
     }
     return 0;
 }
-
-#ifdef MUST_MATCH
 #pragma pop
-#endif
 
-/*static*/ void MakeTextureMtx(HSD_TObj* tobj)
+static void MakeTextureMtx(HSD_TObj* tobj)
 {
     Vec3 scale;
     Mtx m;
     Vec3 trans;
     Quaternion rot;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     bool no_assert = false;
 

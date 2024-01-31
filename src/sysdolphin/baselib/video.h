@@ -2,7 +2,9 @@
 #define _video_h_
 
 #include <platform.h>
+#include <dolphin/gx/forward.h>
 
+#include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/types.h>
 
 #define HSD_VI_XFB_MAX 3
@@ -120,7 +122,7 @@ void HSD_VIWaitXFBFlush(void);
 void HSD_VIWaitXFBFlushNoYield(void);
 int HSD_VIGetXFBLastDrawDone(void);
 
-static inline int HSD_VIGetNbXFB()
+static inline int HSD_VIGetNbXFB(void)
 {
     return HSD_VIData.nb_xfb;
 }
@@ -130,12 +132,12 @@ static inline void* HSD_VIGetXFBPtr(int idx)
     return HSD_VIData.xfb[idx].buffer;
 }
 
-static inline HSD_VIStatus* HSD_VIGetVIStatus()
+static inline HSD_VIStatus* HSD_VIGetVIStatus(void)
 {
     return &HSD_VIData.current.vi;
 }
 
-static inline GXRenderModeObj* HSD_VIGetRenderMode()
+static inline GXRenderModeObj* HSD_VIGetRenderMode(void)
 {
     return &HSD_VIData.current.vi.rmode;
 }

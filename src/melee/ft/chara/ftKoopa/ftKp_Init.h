@@ -1,6 +1,7 @@
 #ifndef GALE01_132A0C
 #define GALE01_132A0C
 
+#include <platform.h>
 #include "ftKoopa/forward.h"
 #include <baselib/forward.h>
 
@@ -18,13 +19,13 @@
 /* 132D00 */ void ftKp_Init_LoadSpecialAttrs(HSD_GObj* gobj);
 /* 132D38 */ void ftKp_Init_OnKnockbackEnter(HSD_GObj* gobj);
 /* 132D7C */ void ftKp_Init_OnKnockbackExit(HSD_GObj* gobj);
-/* 132DC0 */ f32 ftKp_SpecialS_80132DC0(HSD_GObj* gobj);
-/* 132DD0 */ f32 ftKp_SpecialS_80132DD0(HSD_GObj* gobj);
-/* 132DE0 */ f32 ftKp_SpecialS_80132DE0(HSD_GObj* gobj);
-/* 132DF0 */ f32 ftKp_SpecialS_80132DF0(HSD_GObj* gobj);
-/* 132E00 */ f32 ftKp_SpecialS_80132E00(HSD_GObj* gobj);
-/* 132E10 */ f32 ftKp_SpecialS_80132E10(HSD_GObj* gobj);
-/* 132E20 */ f32 ftKp_SpecialS_80132E20(HSD_GObj* gobj);
+/* 132DC0 */ float ftKp_SpecialS_80132DC0(HSD_GObj* gobj);
+/* 132DD0 */ float ftKp_SpecialS_80132DD0(HSD_GObj* gobj);
+/* 132DE0 */ float ftKp_SpecialS_80132DE0(HSD_GObj* gobj);
+/* 132DF0 */ float ftKp_SpecialS_80132DF0(HSD_GObj* gobj);
+/* 132E00 */ float ftKp_SpecialS_80132E00(HSD_GObj* gobj);
+/* 132E10 */ float ftKp_SpecialS_80132E10(HSD_GObj* gobj);
+/* 132E20 */ float ftKp_SpecialS_80132E20(HSD_GObj* gobj);
 /* 132E30 */ void ftKp_SpecialS_80132E30(HSD_GObj* gobj);
 /* 132EFC */ void ftKp_SpecialS_Enter(HSD_GObj* gobj);
 /* 132F94 */ void ftKp_SpecialAirS_Enter(HSD_GObj* gobj);

@@ -1,5 +1,5 @@
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "ftCo_PassiveCeil.h"
 
@@ -8,12 +8,18 @@
 #include "ftCo_FallSpecial.h"
 
 #include "ef/efasync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0881.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
 #include "ftKirby/ftKb_Init.h"
+
+#include <common_structs.h>
 
 bool ftCo_800C23A0(ftCo_GObj* gobj)
 {
@@ -41,10 +47,7 @@ void ftCo_800C23FC(ftCo_GObj* gobj)
     {
         float pos_y_offset = fp->cur_pos.y + ef_offset.y;
         Vec3 ef_pos;
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
         u8 _[4] = { 0 };
-#endif
         ef_pos.x = fp->cur_pos.x;
         ef_pos.y = pos_y_offset;
         ef_pos.z = fp->cur_pos.z;
@@ -62,10 +65,7 @@ void ftCo_800C23FC(ftCo_GObj* gobj)
 
 void ftCo_PassiveCeil_Anim(ftCo_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     if (ftCheckThrowB3(fp)) {
         fp->self_vel.x = fp->input.lstick.x * fp->co_attrs.passiveceil_vel_x;

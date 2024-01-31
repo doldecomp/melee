@@ -3,7 +3,9 @@
 
 #include "ft_0BF0.h"
 
+#include "ft/fighter.h"
 #include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftFox/types.h"
 #include "ftMario/ftMr_SpecialN.h"
 #include "it/items/itdrmariopill.h"
@@ -12,10 +14,7 @@
 
 void ftCo_800BF034(Fighter_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_DeadUpFallHitCameraIce, Ft_MF_None,
                               0, 1, 0, NULL);
@@ -39,10 +38,7 @@ void ftCo_800BF034(Fighter_GObj* gobj)
 
 void ftCo_800BF108(Fighter_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_Sleep, Ft_MF_None, 0, 1, 0, NULL);
     fp->x2219_b2 = true;

@@ -1,16 +1,18 @@
-#include "forward.h"
-#include "ft/forward.h"
+#include <platform.h>
 
 #include "ftGw_Attack11.h"
 
 #include "ftGw_Init.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/inlines.h"
+#include "ft/ft_0892.h"
+#include "ft/ftanim.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_Attack1.h"
 #include "ftCommon/ftCo_ItemGet.h"
-#include "it/it_27CF.h"
+#include "ftGameWatch/types.h"
+#include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx/types.h>
@@ -21,10 +23,7 @@ void ftGw_Attack11_ItemGreenhouseSetup(HSD_GObj* gobj)
 {
     Vec3 sp10;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     Fighter* fp = getFighter(gobj);
 
@@ -97,10 +96,7 @@ void ftGw_Attack11_ItemGreenhouseRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
         it_802C6328(fp->fv.gw.x224C_greenhouseGObj);
@@ -156,10 +152,7 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     if (ftCo_80094790(gobj) == false) {
         fp->allow_interrupt = 0;
@@ -167,7 +160,7 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftGw_MS_Attack11, 0, 0.0f, 1.0f, 0.0f,
                                   NULL);
         ftAnim_8006EBA4(gobj);
-        fp->hitlag_mul = (f32) fp->co_attrs.jab_2_input_window;
+        fp->hitlag_mul = (float) fp->co_attrs.jab_2_input_window;
         fp->unk_msid = 44;
         fp->x2218_b2 = 0;
         fp->mv.gw.Attack11.unk = 0;
@@ -180,10 +173,7 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
 // https://decomp.me/scratch/BKUIu // Mr. Game & Watch's Jab Animation callback
 void ftGw_Attack11_Anim(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);

@@ -1,14 +1,19 @@
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+
 #include "ftMs_SpecialHi.h"
 
-#include "ftMs_Init.h"
-
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftMars/types.h"
+
+#include <common_structs.h>
 
 // 80138208 00134DE8
 // https://decomp.me/scratch/lrV6F
@@ -33,10 +38,7 @@ void ftMs_SpecialAirHi_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* da = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
@@ -71,10 +73,7 @@ void ftMs_SpecialAirHi_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* da = fp->dat_attrs;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -91,9 +90,9 @@ void ftMs_SpecialHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* da = fp->dat_attrs;
-    f32 abs_lstick_x = abs(fp->input.lstick.x);
+    float abs_lstick_x = abs(fp->input.lstick.x);
     if (fp->cmd_vars[0] == 0 && abs_lstick_x > da->x34) {
-        f32 temp_f1 =
+        float temp_f1 =
             da->x38 * ((abs_lstick_x - da->x34) / (1.0 /*d*/ - da->x34));
         temp_f1 = (fp->input.lstick.x > 0.0f) ? -(DEGREES_TO_RADIANS * temp_f1)
                                               : (DEGREES_TO_RADIANS * temp_f1);
@@ -104,7 +103,7 @@ void ftMs_SpecialHi_IASA(HSD_GObj* gobj)
     if (ftCheckThrowB3(fp)) {
         if (abs(fp->input.lstick.x) > da->x30) {
             ftCommon_8007D9FC(fp);
-            ftParts_80075AF0(fp, 0, (f32) (HALF_PI * fp->facing_dir));
+            ftParts_80075AF0(fp, 0, (float) (HALF_PI * fp->facing_dir));
         }
     }
 }
@@ -115,13 +114,10 @@ void ftMs_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* da = fp->dat_attrs;
-    f32 abs_lstick_x = abs(fp->input.lstick.x);
-/// @todo Unused stack.
-#ifdef MUST_MATCH
+    float abs_lstick_x = abs(fp->input.lstick.x);
     u8 _[16];
-#endif
     if (fp->cmd_vars[0] == 0 && abs_lstick_x > da->x34) {
-        f32 temp_f1 =
+        float temp_f1 =
             da->x38 * ((abs_lstick_x - da->x34) / (1.0 /*d*/ - da->x34));
         temp_f1 = (fp->input.lstick.x > 0.0f) ? -(DEGREES_TO_RADIANS * temp_f1)
                                               : (DEGREES_TO_RADIANS * temp_f1);
@@ -132,7 +128,7 @@ void ftMs_SpecialAirHi_IASA(HSD_GObj* gobj)
     if (ftCheckThrowB3(fp)) {
         if (abs(fp->input.lstick.x) > da->x30) {
             ftCommon_8007D9FC(fp);
-            ftParts_80075AF0(fp, 0, (f32) (HALF_PI * fp->facing_dir));
+            ftParts_80075AF0(fp, 0, (float) (HALF_PI * fp->facing_dir));
         }
     }
 }
@@ -145,10 +141,7 @@ void ftMs_SpecialHi_Phys(HSD_GObj* gobj)
     MarsAttributes* da;
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[32];
-#endif
 
     s32 num;
 
@@ -190,10 +183,7 @@ void ftMs_SpecialAirHi_Phys(HSD_GObj* gobj)
     struct ftCo_DatAttrs* attr2 = &fp->co_attrs;
     s32 num;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[40];
-#endif
 
     if (fp->cmd_vars[0] != 0) {
         if (fp->cmd_vars[2] == 0) {

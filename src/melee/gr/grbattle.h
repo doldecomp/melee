@@ -1,10 +1,9 @@
-#ifndef _grtbattle_h_
-#define _grtbattle_h_
+#ifndef GALE01_219C98
+#define GALE01_219C98
 
-#include "gr/stage.h"
+#include <platform.h>
+#include <baselib/forward.h>
 
-#include <baselib/gobj.h>
-
-bool grBattle_8021A10C(HSD_GObj*);
+/* 21A10C */ bool grBattle_8021A10C(HSD_GObj*);
 
 #endif

@@ -4,12 +4,12 @@
 
 #include "ftCo_ThrownMewtwo.h"
 
-#include "inlines.h"
-
 #include "ft/fighter.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "ftCommon/types.h"
 
 void ftCo_800BD0E8(ftCo_GObj* gobj, FtMotionId msid)
 {
@@ -20,10 +20,7 @@ void ftCo_800BD0E8(ftCo_GObj* gobj, FtMotionId msid)
     ftCo_Thrown_Enter(gobj, msid,
                       fp->x2222_b6 ? Ft_MF_None : Ft_MF_FreezeState, 0);
 #elif SOLUTION == 1
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8] = { 0 };
-#endif
     fp->facing_dir = GET_FIGHTER(fp->victim_gobj)->facing_dir;
     fp->mv.co.capturekoopa.x0 = false;
     Fighter_ChangeMotionState(gobj, msid,

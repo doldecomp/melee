@@ -1,8 +1,8 @@
-#ifndef MELEE_GR_GRZAKOGENERATOR_H
-#define MELEE_GR_GRZAKOGENERATOR_H
+#ifndef GALE01_1CA394
+#define GALE01_1CA394
 
 #include <platform.h>
 
-void grZakoGenerator_801CAE04(bool);
+/* 1CAE04 */ void grZakoGenerator_801CAE04(bool);
 
 #endif

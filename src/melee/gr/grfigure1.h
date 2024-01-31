@@ -1,9 +1,5 @@
-#ifndef _grfigure1_h_
-#define _grfigure1_h_
-
-#include "gr/stage.h"
-
-#include <baselib/gobj.h>
+#ifndef GALE01_20DFDC
+#define GALE01_20DFDC
 
 void grFigure1_8020E270(int);
 

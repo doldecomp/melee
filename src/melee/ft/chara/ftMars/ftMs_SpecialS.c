@@ -1,18 +1,24 @@
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+
 #include "ftMs_SpecialS.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0881.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcommon.h"
-#include "ftMars/ftMs_Init.h"
-#include "melee/ft/inlines.h"
+#include "ft/types.h"
+#include "ftMars/types.h"
+
+#include <common_structs.h>
+#include <baselib/debug.h>
 
 void ftMs_SpecialS_Enter(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -104,10 +110,7 @@ void ftMs_SpecialAirS1_IASA(HSD_GObj* gobj)
 
 void ftMs_SpecialAirS1_Phys(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* da = fp->dat_attrs;
@@ -204,10 +207,7 @@ void ftMs_SpecialS2_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* da = getFtSpecialAttrsD(fp);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->ground_or_air == GA_Ground) {
         // Physics_Friction
@@ -250,7 +250,7 @@ void ftMs_SpecialS_80137940(HSD_GObj* gobj)
     case 351:
         msid = 360;
         break;
-#ifndef MUST_MATCH
+#ifdef BUGFIX
     default:
         HSD_ASSERT(__LINE__, false);
 #endif
@@ -275,7 +275,7 @@ void ftMs_SpecialS_801379D0(HSD_GObj* gobj)
     case 360:
         msid = 351;
         break;
-#ifndef MUST_MATCH
+#ifdef BUGFIX
     default:
         HSD_ASSERT(__LINE__, false);
 #endif
@@ -352,10 +352,7 @@ void ftMs_SpecialS3_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* sa = getFtSpecialAttrsD(fp);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->ground_or_air == GA_Ground) {
         // somethingFriction
@@ -401,7 +398,7 @@ void ftMs_SpecialS_80137CBC(HSD_GObj* gobj)
     case 353:
         msid = 362;
         break;
-#ifndef MUST_MATCH
+#ifdef BUGFIX
     default:
         HSD_ASSERT(__LINE__, false);
 #endif
@@ -492,9 +489,7 @@ void ftMs_SpecialS4_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* sa = getFtSpecialAttrsD(fp);
 
-#ifdef MUST_MATCH
     u8 _[8];
-#endif
 
     if (fp->ground_or_air == GA_Ground) {
         // somethingFriction
@@ -541,7 +536,7 @@ void ftMs_SpecialS_80137FF8(HSD_GObj* gobj)
     case 356:
         msid = 365;
         break;
-#ifndef MUST_MATCH
+#ifdef BUGFIX
     default:
         HSD_ASSERT(__LINE__, false);
 #endif
@@ -571,7 +566,7 @@ void ftMs_SpecialS_8013809C(HSD_GObj* gobj)
     case 365:
         msid = 356;
         break;
-#ifndef MUST_MATCH
+#ifdef BUGFIX
     default:
         HSD_ASSERT(__LINE__, false);
 #endif

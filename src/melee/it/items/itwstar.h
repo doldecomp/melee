@@ -1,8 +1,9 @@
 #ifndef GALE01_294364
 #define GALE01_294364
 
-#include "ft/forward.h"
-#include "it/forward.h"
+#include "ftCommon/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "it/types.h"
 

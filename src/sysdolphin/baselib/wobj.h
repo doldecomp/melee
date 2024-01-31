@@ -1,7 +1,10 @@
 #ifndef SYSDOLPHIN_BASELIB_WOBJ_H
 #define SYSDOLPHIN_BASELIB_WOBJ_H
 
-#include "baselib/aobj.h"
+#include <platform.h>
+#include "baselib/forward.h" // IWYU pragma: export
+
+#include "baselib/class.h"
 #include "baselib/object.h"
 
 #include <dolphin/mtx/types.h>

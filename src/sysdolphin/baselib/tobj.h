@@ -2,12 +2,16 @@
 #define _hsd_tobj_h_
 
 #include <platform.h>
-#include <baselib/forward.h>
+#include "baselib/forward.h" // IWYU pragma: export
 
+#include "baselib/class.h"
+#include "baselib/object.h"
+
+#include <dolphin/gx/GXEnum.h>
+#include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/fobj.h>
-#include <baselib/object.h>
-#include <baselib/texp.h>
+
+struct HSD_TObj;
 
 #define TOBJ_ANIM 0x10
 
@@ -196,7 +200,7 @@ typedef struct _HSD_TexLODDesc {
     u32 max_anisotropy; // GXAnisotropy
 } HSD_TexLODDesc;
 
-typedef struct _HSD_ImageDesc {
+struct _HSD_ImageDesc {
     void* img_ptr;
     u16 width;
     u16 height;
@@ -204,7 +208,7 @@ typedef struct _HSD_ImageDesc {
     u32 mipmap;
     f32 minLOD;
     f32 maxLOD;
-} HSD_ImageDesc;
+};
 
 typedef struct _HSD_TObjTev {
     u8 color_op;
@@ -275,8 +279,6 @@ HSD_TObj* HSD_TObjLoadDesc(HSD_TObjDesc* td);
 HSD_Tlut* HSD_TlutLoadDesc(HSD_TlutDesc* tlutdesc);
 HSD_TObjTev* HSD_TObjTevLoadDesc(HSD_TObjTevDesc* tevdesc);
 HSD_TObj* _HSD_TObjGetCurrentByType(HSD_TObj* from, u32 mapping);
-
-void MakeTextureMtx(HSD_TObj* tobj);
 
 void HSD_TObjRemoveAll(HSD_TObj* tobj);
 HSD_TObj* HSD_TObjGetNext(HSD_TObj* tobj);

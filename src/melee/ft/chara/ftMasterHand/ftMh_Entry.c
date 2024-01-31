@@ -1,3 +1,6 @@
+#include <platform.h>
+#include <dolphin/mtx/forward.h>
+
 #include "ftMh_Entry.h"
 
 #include "ftMh_Damage_0.h"
@@ -6,10 +9,15 @@
 #include "types.h"
 
 #include "cm/camera.h"
-#include "ft/ft_0877.h"
+#include "ft/fighter.h"
+#include "ft/ft_0881.h"
+#include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftlib.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
+#include "pl/player.h"
+
+#include <baselib/debug.h>
 
 static void ftMh_MS_343_801511FC(HSD_GObj* gobj);
 
@@ -56,10 +64,7 @@ void ftMh_Entry_Coll(HSD_GObj* gobj) {}
 static void ftMh_MS_343_801511FC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[16];
-#endif
     switch (fp->mv.mh.unk4.x0) {
     case ftMh_UnkEnum0_Unk00: {
         HSD_GObj* enemy_gobj = ftLib_8008627C(&fp->cur_pos, gobj);
@@ -152,7 +157,7 @@ static void ftMh_MS_343_801511FC(HSD_GObj* gobj)
         }
         return;
     }
-#ifndef MUST_MATCH
+#ifdef BUGFIX
     case ftMh_UnkEnum0_Unk10: {
         return;
     }

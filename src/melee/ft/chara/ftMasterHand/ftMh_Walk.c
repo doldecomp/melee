@@ -1,14 +1,20 @@
+#include <platform.h>
+#include "ftMasterHand/forward.h"
+
 #include "ftMh_Walk.h"
 
 #include "ftMh_Slap.h"
 #include "ftMh_Wait1_2.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftlib.h"
-#include "ft/inlines.h"
+#include "ft/types.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
+#include "pl/player.h"
 
 #include <dolphin/mtx/types.h>
 #include <MetroTRK/intrinsics.h>
@@ -74,10 +80,7 @@ static inline float my_sqrtf(float x)
     static const double _half = .5;
     static const double _three = 3.0;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4] = { 0 };
-#endif
 
     volatile float y;
     if (x > 0) {
@@ -108,10 +111,7 @@ void ftMh_WalkLoop_Anim(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u8 _[4];
-#endif
 
     ftLib_800866DC(ftBossLib_8015C244(gobj, &fp->cur_pos), &pos);
     lbVector_Diff(&pos, &fp->cur_pos, &vel);

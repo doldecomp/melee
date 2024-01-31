@@ -1,40 +1,40 @@
 #include <platform.h>
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include <dolphin/mtx/forward.h>
+#include <baselib/forward.h>
 
 #include "ftCo_AttackS4.h"
 
-#include "ftCo_08A6.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackHi3.h"
 #include "ftCo_AttackHi4.h"
 #include "ftCo_AttackLw3.h"
 #include "ftCo_AttackLw4.h"
 #include "ftCo_AttackS3.h"
-#include "ftCo_FallSpecial.h"
 #include "ftCo_Guard.h"
 #include "ftCo_ItemThrow.h"
-#include "ftCo_Shouldered.h"
 #include "ftCo_SpecialS.h"
 #include "math.h"
 
 #include "ef/eflib.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0CDD.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftanim.h"
 #include "ft/ftattacks4combo.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/ftswing.h"
+#include "ft/types.h"
 #include "ftGameWatch/ftGw_AttackS4.h"
 #include "ftNess/ftNs_AttackS4.h"
 #include "ftPeach/ftPe_AttackS4.h"
+#include "it/it_26B1.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 
 typedef enum cmd_var_idx {
     cmd_unk0_bool,

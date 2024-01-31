@@ -4,7 +4,7 @@
 #include <platform.h>
 
 #include <dolphin/dvd/dvd.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os.h>
 
 typedef struct FSTEntry {
     unsigned int isDirAndStringOff;

@@ -1,6 +1,7 @@
 #ifndef GALE01_1393AC
 #define GALE01_1393AC
 
+#include <platform.h>
 #include "ftZelda/forward.h"
 #include <baselib/forward.h>
 
