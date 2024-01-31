@@ -2039,8 +2039,8 @@ void Player_80036DD8(void)
 {
     int* sp8;
 
-    lbArchive_80016C64(str_PdPmdat_start_of_data, &sp8, str_plLoadCommonData,
-                       0);
+    lbArchive_80016C64(str_PdPmdat_start_of_data, (void**) &sp8,
+                       str_plLoadCommonData, 0);
     pl_804D6470 = *sp8;
 }
 
