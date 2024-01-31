@@ -286,11 +286,6 @@
 /* 000003E8 00000428  4E 80 00 20 */	blr
 .endfn __sinit_trigf_c
 
-# 0x00000000 - 0x00000004
-.section .ctors, "a"
-.balign 4
-	.4byte __sinit_trigf_c
-
 # 0x00000000 - 0x00000010
 .rodata
 .balign 8
