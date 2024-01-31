@@ -26,7 +26,6 @@ TEXT_O_FILES :=\
     $(BUILD_DIR)/asm/melee/lb/lbmemory.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbheap.s.o\
     $(BUILD_DIR)/src/melee/lb/lbfile.c.o\
-    $(BUILD_DIR)/src/melee/lb/lbarchive.c.o\
     $(BUILD_DIR)/asm/melee/lb/lbarchive.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbdvd.s.o\
     $(BUILD_DIR)/asm/melee/lb/lb_0192.s.o\
