@@ -14,6 +14,8 @@
 #include "if/ifstatus.h"
 #include "lb/lbarchive.h"
 #include "pl/pl_0371.h"
+#include "pl/plattack.h"
+#include "pl/plstale.h"
 #include "pl/types.h"
 
 #include <dolphin/mtx/types.h>
@@ -73,7 +75,7 @@ ftMapping ftMapping_list[FTKIND_MAX] = { //////ftMapping_list
 StaticPlayer player_slots[PL_SLOT_MAX];
 HSD_ObjAllocData Player_804587E0;
 
-extern int pl_804D6470;
+int pl_804D6470;
 
 /// @todo This can be used in more places when functions are fixed to use
 ///       correct structs.
@@ -2021,7 +2023,7 @@ void Player_InitAllPlayers(void)
 {
     int i;
     plStale_8003715C();
-    plStale_80037590();
+    plAttack_80037590();
 
     for (i = 0; i < PL_SLOT_MAX; i++) {
         Player_InitOrResetPlayer(i);

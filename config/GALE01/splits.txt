@@ -169,11 +169,16 @@ melee/pl/player.c:
 	.data       start:0x803BCDC0 end:0x803BCE70
 	.bss        start:0x80453080 end:0x80458810
 	.sdata      start:0x804D3940 end:0x804D3948
+	.sbss       start:0x804D6470 end:0x804D6478
 	.sdata2     start:0x804D7F10 end:0x804D7F18
 
 melee/pl/plstale.c:
-	.text       start:0x8003715C end:0x80037B2C
-	.sbss       start:0x804D6470 end:0x804D6488
+	.text       start:0x8003715C end:0x80037590
+	.sbss       start:0x804D6478 end:0x804D6480
+
+melee/pl/plattack.c:
+	.text       start:0x80037590 end:0x80037B2C
+	.sbss       start:0x804D6480 end:0x804D6488
 
 melee/pl/pltrick.c:
 	.text       start:0x80037B2C end:0x800386D8
