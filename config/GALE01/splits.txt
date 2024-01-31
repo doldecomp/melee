@@ -3682,7 +3682,7 @@ dolphin/gx/GXLight.c:
 dolphin/gx/GXTexture.c:
 	.text       start:0x8033E78C end:0x8033F758
 	.data       start:0x804012B8 end:0x804014E0
-	.sdata      start:0x804D5BC0 end:0x804D5C08
+	.sdata      start:0x804D5BC0 end:0x804D5C00
 	.sdata2     start:0x804DE268 end:0x804DE290
 
 dolphin/gx/GXBump.c:
@@ -3706,11 +3706,16 @@ dolphin/gx/GXDisplayList.c:
 
 dolphin/gx/GXTransform.c:
 	.text       start:0x80341148 end:0x803418FC
-	.sdata2     start:0x804DE2F0 end:0x804DE328
+	.sdata2     start:0x804DE2F0 end:0x804DE310
 
 dolphin/gx/GXPerf.c:
-	.text       start:0x803418FC end:0x80342AA8
+	.text       start:0x803418FC end:0x803421A4
 	.data       start:0x80401528 end:0x80401618
+
+dolphin/mtx/mtx.c:
+	.text       start:0x803421A4 end:0x80342AA8
+	.sdata      start:0x804D5C00 end:0x804D5C08
+	.sdata2     start:0x804DE310 end:0x804DE328
 
 dolphin/mtx/mtxvec.c:
 	.text       start:0x80342AA8 end:0x80342B50
@@ -3830,11 +3835,17 @@ dolphin/pad/PadClamp.c:
 	.sdata      start:0x804D5C30 end:0x804D5C38
 
 dolphin/pad/pad.c:
-	.text       start:0x8034CD88 end:0x803503E4
-	.data       start:0x80402C90 end:0x80402FF0
-	.bss        start:0x804A89A0 end:0x804A8B38
+	.text       start:0x8034CD88 end:0x8034E964
+	.data       start:0x80402C90 end:0x80402D28
+	.bss        start:0x804A89A0 end:0x804A89F0
 	.sdata      start:0x804D5C38 end:0x804D5C60
-	.sbss       start:0x804D73F0 end:0x804D7470
+	.sbss       start:0x804D73F0 end:0x804D7420
+
+dolphin/vi/vi.c:
+	.text       start:0x8034E964 end:0x803503E4
+	.data       start:0x80402D28 end:0x80402FF0
+	.bss        start:0x804A89F0 end:0x804A8B38
+	.sbss       start:0x804D7420 end:0x804D7470
 
 dolphin/ai/ai.c:
 	.text       start:0x803503E4 end:0x80350C8C
