@@ -4,6 +4,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcolanim.h"
@@ -12,72 +13,9 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftSeak/ftSk_Init.h"
 
-// #include <placeholder.h>
-
-f32 ftSk_SpecialN_803CC598[] = {
+float ftSk_SpecialN_803CC598[] = {
     -1, -0.75, -0.5, -0.25, 0, +0.25, +0.5, +0.75, +1,
 };
-
-// /* static */ void ftSk_SpecialN_80112418(void);
-// /* static */ void ftSk_SpecialN_80112418(void);
-// /* static */ void ftSk_SpecialN_80112408(void);
-// /* static */ void ftSk_SpecialN_80112418(void);
-// /* static */ void ftSk_SpecialN_80112418(void);
-// /* static */ void ftSk_SpecialN_80112408(void);
-// /* static */ void ftSk_SpecialN_80112418(void);
-// /* static */ void ftSk_SpecialN_80112418(void);
-// /* static */ void ftSk_SpecialN_80112408(void);
-// /* static */ void ftSk_SpecialN_80112418(void);
-// /* static */ void ftSk_SpecialN_80112418(void);
-// /* static */ void ftSk_SpecialN_80112408(void);
-// /* static */ void ftSk_SpecialN_80112418(void);
-// /* static */ void ftSk_SpecialN_80112418(void);
-// /* static */ void ftSk_SpecialN_80112408(void);
-// /* static */ void ftSk_SpecialN_80112418(void);
-
-// /* static */ void ftSk_SpecialN_80112418(void);
-// /* static */ void ftSk_SpecialN_80112408(void);
-
-// jtbl_t ftSk_SpecialN_803CC5BC = {
-//     ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408,
-//     ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408,
-//     ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408,
-//     ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408,
-//     ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408,
-//     ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408,
-// };
-
-// /* static */ void ftSk_SpecialN_80112660(void);
-// /* static */ void ftSk_SpecialN_80112660(void);
-// /* static */ void ftSk_SpecialN_80112650(void);
-// /* static */ void ftSk_SpecialN_80112660(void);
-// /* static */ void ftSk_SpecialN_80112660(void);
-// /* static */ void ftSk_SpecialN_80112650(void);
-// /* static */ void ftSk_SpecialN_80112660(void);
-// /* static */ void ftSk_SpecialN_80112660(void);
-// /* static */ void ftSk_SpecialN_80112650(void);
-// /* static */ void ftSk_SpecialN_80112660(void);
-// /* static */ void ftSk_SpecialN_80112660(void);
-// /* static */ void ftSk_SpecialN_80112650(void);
-// /* static */ void ftSk_SpecialN_80112660(void);
-// /* static */ void ftSk_SpecialN_80112660(void);
-// /* static */ void ftSk_SpecialN_80112650(void);
-// /* static */ void ftSk_SpecialN_80112660(void);
-// /* static */ void ftSk_SpecialN_80112660(void);
-// /* static */ void ftSk_SpecialN_80112650(void);
-
-// jtbl_t ftSk_SpecialN_803CC604 = {
-//     ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650,
-//     ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650,
-//     ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650,
-//     ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650,
-//     ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650,
-//     ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650,
-// };
-
-// f32 const ftSk_Init_804D9650 = 0;
-// f32 const ftSk_Init_804D9654 = 1;
-// f32 const ftSk_Init_804D9658 = 2;
 
 // Sheik_CheckAndDestroyNeedles
 // 80111FBC - 801120D4 (0x118 bytes)
@@ -89,8 +27,8 @@ void ftSk_SpecialN_80111FBC(Fighter_GObj* fighter_gobj)
     Fighter_GObj* fighter_gobj2;
     ftSeakAttributes* specialAttributes; // r29
     Vec3 sp14;
-    f32 temp_f31;
-    f32 var_f2;
+    float temp_f31;
+    float var_f2;
 
     fp = GET_FIGHTER(fighter_gobj);
     specialAttributes = fp->dat_attrs;
@@ -444,8 +382,8 @@ void ftSk_SpecialNLoop_IASA(Fighter_GObj* fighter_gobj)
     Fighter* fp;
     Fighter* fp2;
     Fighter* fp3;
-    f32 lbl_804D9650;
-    f32 lbl_804D9654;
+    float lbl_804D9650;
+    float lbl_804D9654;
 
     fp = fighter_gobj->user_data;
 
@@ -762,7 +700,7 @@ void ftSk_Sheik_ShootNeedles(Fighter_GObj* fighter_gobj)
     Fighter* fp; // r31
     Fighter_GObj* gobj;
     ftSeakAttributes* specialAttributes; // r29
-    f32 xVector, yVector;
+    float xVector, yVector;
     s32 rand;
 
     fp = getFighter(fighter_gobj);

@@ -548,8 +548,8 @@
 /* 00000764 000007A4  80 BE 00 2C */	lwz r5, 0x2c(r30)
 /* 00000768 000007A8  38 83 00 00 */	addi r4, r3, ftSk_Init_80110198@l
 /* 0000076C 000007AC  90 85 21 DC */	stw r4, 0x21dc(r5)
-/* 00000770 000007B0  3C 60 00 00 */	lis r3, fn_80112D44@ha
-/* 00000774 000007B4  38 03 00 00 */	addi r0, r3, fn_80112D44@l
+/* 00000770 000007B0  3C 60 00 00 */	lis r3, ftSk_Sheik_ShootNeedles@ha
+/* 00000774 000007B4  38 03 00 00 */	addi r0, r3, ftSk_Sheik_ShootNeedles@l
 /* 00000778 000007B8  90 85 21 E4 */	stw r4, 0x21e4(r5)
 /* 0000077C 000007BC  90 1F 21 BC */	stw r0, 0x21bc(r31)
 /* 00000780 000007C0  48 00 00 44 */	b .L_000007C4
@@ -616,8 +616,8 @@
 /* 0000083C 0000087C  80 BE 00 2C */	lwz r5, 0x2c(r30)
 /* 00000840 00000880  38 83 00 00 */	addi r4, r3, ftSk_Init_80110198@l
 /* 00000844 00000884  90 85 21 DC */	stw r4, 0x21dc(r5)
-/* 00000848 00000888  3C 60 00 00 */	lis r3, fn_80112D44@ha
-/* 0000084C 0000088C  38 03 00 00 */	addi r0, r3, fn_80112D44@l
+/* 00000848 00000888  3C 60 00 00 */	lis r3, ftSk_Sheik_ShootNeedles@ha
+/* 0000084C 0000088C  38 03 00 00 */	addi r0, r3, ftSk_Sheik_ShootNeedles@l
 /* 00000850 00000890  90 85 21 E4 */	stw r4, 0x21e4(r5)
 /* 00000854 00000894  90 1F 21 BC */	stw r0, 0x21bc(r31)
 /* 00000858 00000898  48 00 00 44 */	b .L_0000089C
@@ -1020,7 +1020,7 @@
 /* 00000D84 00000DC4  4E 80 00 20 */	blr
 .endfn ftSk_SpecialAirNEnd_Coll
 
-.fn fn_80112D44, global
+.fn ftSk_Sheik_ShootNeedles, global
 /* 00000D88 00000DC8  7C 08 02 A6 */	mflr r0
 /* 00000D8C 00000DCC  90 01 00 04 */	stw r0, 0x4(r1)
 /* 00000D90 00000DD0  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1126,7 +1126,7 @@
 /* 00000F10 00000F50  38 21 00 30 */	addi r1, r1, 0x30
 /* 00000F14 00000F54  7C 08 03 A6 */	mtlr r0
 /* 00000F18 00000F58  4E 80 00 20 */	blr
-.endfn fn_80112D44
+.endfn ftSk_Sheik_ShootNeedles
 
 # 0x00000000 - 0x000000B8
 .data
