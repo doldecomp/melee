@@ -10,12 +10,12 @@
 
 #pragma push
 #pragma dont_inline on
-void lbArchive_InitializeDAT(HSD_Archive* archive, u8* data, u32 length)
+void lbArchive_InitializeDAT(HSD_Archive* archive, u32* data, u32 length)
 {
     char* symbol;
     int i = 0;
 
-    if (HSD_ArchiveParse(archive, data, length) == -1) {
+    if (HSD_ArchiveParse(archive, (u8*)data, length) == -1) {
         OSReport("HSD_ArchiveParse error!\n");
         HSD_ASSERT(73, 0);
     }
@@ -51,14 +51,14 @@ void lbArchive_LoadSections(HSD_Archive* archive, void** file, ...)
 
 HSD_Archive* lbArchive_LoadArchive(char* filename)
 {
-    s32 length;
-    u8* data;
+    u32 length;
+    u32* data;
     HSD_Archive* archive;
 
     data = lbHeap_80015BD0(0, lbFile_800163D8(filename) + 0x1F & 0xFFFFFFE0);
     archive = lbHeap_80015BD0(0, sizeof(HSD_Archive));
-    lbFile_8001668C(filename, data, &length);
-    lbArchive_InitializeDAT(archive, data, (u32) length);
+    lbFile_8001668C(filename, *data, &length);
+    lbArchive_InitializeDAT(archive, data, length);
     return archive;
 }
 
