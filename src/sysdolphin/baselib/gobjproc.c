@@ -4,12 +4,22 @@
 #include "gobj.h"
 #include "objalloc.h"
 
+#include <placeholder.h>
+
 extern HSD_ObjAllocData gobjproc_alloc_data;
 
 extern HSD_GObjProc* HSD_GObj_804D7830;
 extern HSD_GObjProc* HSD_GObj_804D7838;
 extern HSD_GObjProc** HSD_GObj_804D7840;
 extern HSD_GObjProc** HSD_GObj_804D7844;
+
+#pragma push
+#pragma dont_inline on
+void HSD_GObjProc_8038FAA8(HSD_GObjProc* gproc)
+{
+    NOT_IMPLEMENTED;
+}
+#pragma pop
 
 void HSD_GObjProc_8038FC18(HSD_GObjProc* gproc)
 {

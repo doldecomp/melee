@@ -5,6 +5,7 @@
 #include "baselib/forward.h"
 #include <dolphin/pad/forward.h>
 
+/// @todo Circular dependency
 #include "baselib/rumble.h"
 
 #include <dolphin/pad/pad.h>
