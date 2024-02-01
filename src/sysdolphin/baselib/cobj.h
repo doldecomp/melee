@@ -14,6 +14,13 @@
 #define PROJ_FRUSTUM 2
 #define PROJ_ORTHO 3
 
+typedef struct _Scissor {
+    u16 left;
+    u16 right;
+    u16 top;
+    u16 bottom;
+} Scissor;
+
 struct HSD_CObj {
     HSD_Obj parent;
     u32 flags; // 0x08
@@ -23,12 +30,7 @@ struct HSD_CObj {
         f32 top;    // 0x14
         f32 bottom; // 0x18
     } viewport;
-    struct Scissor {
-        u16 left;   // 0x1C
-        u16 right;  // 0x1E
-        u16 top;    // 0x20
-        u16 bottom; // 0x22
-    } scissor;
+    Scissor scissor;
     HSD_WObj* eyepos;   // 0x24
     HSD_WObj* interest; // 0x28
     union {
@@ -68,17 +70,12 @@ struct HSD_CObjDesc {
     u16 flags;           // 0x04
     u16 projection_type; // 0x06
     struct {
-        u16 left;   // 0x08
-        u16 right;  // 0x0C
-        u16 top;    // 0x10
-        u16 bottom; // 0x14
+        s16 left;   // 0x08
+        s16 right;  // 0x0C
+        s16 top;    // 0x10
+        s16 bottom; // 0x14
     } viewport;
-    struct {
-        u16 left;   // 0x10
-        u16 right;  // 0x12
-        u16 top;    // 0x14
-        u16 bottom; // 0x16
-    } scissor;
+    Scissor scissor;
     HSD_WObjDesc* eye_desc;      // 0x18
     HSD_WObjDesc* interest_desc; // 0x1C
     f32 roll;                    // 0x20
@@ -91,21 +88,19 @@ struct HSD_CObjDesc {
             f32 aspect;
         } perspective;
 
-        /*
-                struct {
-                    f32 top;
-                    f32 bottom;
-                    f32 left;
-                    f32 right;
-                } frustum;
+        struct {
+            f32 top;
+            f32 bottom;
+            f32 left;
+            f32 right;
+        } frustum;
 
-                struct {
-                    f32 top;
-                    f32 bottom;
-                    f32 left;
-                    f32 right;
-                } ortho;
-        */
+        struct {
+            f32 top;
+            f32 bottom;
+            f32 left;
+            f32 right;
+        } ortho;
     } projection_param;
 };
 
@@ -152,7 +147,7 @@ int setupTopHalfCamera(HSD_CObj* cobj);
 int setupBottomHalfCamera(HSD_CObj* cobj);
 void HSD_CObjSetupViewingMtx(HSD_CObj* cobj);
 f32 HSD_CObjGetEyeDistance(HSD_CObj* cobj);
-void HSD_CObjSetUpVector(UNK_PARAMS);
+void HSD_CObjSetUpVector(HSD_CObj* cobj, Vec3* up);
 void HSD_CObjGetLeftVector(UNK_PARAMS);
 void HSD_CObjSetMtxDirty(HSD_CObj* cobj);
 bool HSD_CObjMtxIsDirty(HSD_CObj*);
@@ -177,8 +172,8 @@ f32 HSD_CObjGetNear(HSD_CObj*);
 void HSD_CObjSetNear(HSD_CObj* cobj, f32 near);
 f32 HSD_CObjGetFar(HSD_CObj*);
 void HSD_CObjSetFar(HSD_CObj* cobj, f32 far);
-void HSD_CObjGetScissor(HSD_CObj* cobj, struct Scissor*);
-void HSD_CObjSetScissor(HSD_CObj* cobj, struct Scissor*);
+void HSD_CObjGetScissor(HSD_CObj* cobj, Scissor*);
+void HSD_CObjSetScissor(HSD_CObj* cobj, Scissor*);
 void HSD_CObjSetScissorx4(HSD_CObj*, u16 left, u16 right, u16 top, u16 bottom);
 void HSD_CObjGetViewportf(HSD_CObj* cobj, struct Viewport*);
 void HSD_CObjSetViewport(HSD_CObj* cobj, s16* viewport);
