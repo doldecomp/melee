@@ -17,9 +17,11 @@ static struct {
     int c;
 } TevReg[4] = { 0 };
 
-static int prev_ch[48] = {
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0,
-    0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0,
+static HSD_Chan prev_ch[4] = {
+    { NULL, 0, 0, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, 0, 0, 0, 0, 2, 0, NULL },
+    { NULL, 1, 0, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, 0, 0, 0, 0, 2, 2, NULL },
+    { NULL, 2, 0, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, 0, 0, 0, 0, 2, 0, NULL },
+    { NULL, 3, 0, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, 0, 0, 0, 0, 2, 2, NULL },
 };
 
 HSD_ObjAllocData render_alloc_data;
@@ -29,9 +31,9 @@ HSD_ObjAllocData chan_alloc_data;
 static int current_tev;
 static int num_tex_gens;
 static int prev_num_chans;
-static struct {
-    int unk0, unk4;
-} prev_amb_invalid, prev_mat_invalid;
+
+int prev_mat_invalid[2];
+int prev_amb_invalid[2];
 
 void HSD_RenderInitAllocData(void)
 {
@@ -57,6 +59,10 @@ HSD_ObjAllocData* HSD_ChanGetAllocData(void)
 
 void HSD_SetupChannel(HSD_Chan* ch)
 {
+    int idx;
+    GXChannelID chan;
+    int no;
+
     NOT_IMPLEMENTED;
 }
 
@@ -69,16 +75,16 @@ void HSD_StateSetNumChans(int num)
 
 void HSD_SetupChannelAll(HSD_Chan* channel)
 {
-    int var_r31 = 0;
+    int num = 0;
     while (channel != NULL) {
-        int temp_r3 = HSD_Channel2Num(channel->chan);
-        if (temp_r3 > var_r31) {
-            var_r31 = temp_r3;
+        int temp = HSD_Channel2Num(channel->chan);
+        if (temp > num) {
+            num = temp;
         }
         HSD_SetupChannel(channel);
         channel = channel->next;
     }
-    HSD_StateSetNumChans((u8) var_r31);
+    HSD_StateSetNumChans((u8) num);
 }
 
 int HSD_TexCoordID2Num(int);
@@ -405,18 +411,20 @@ void ChanUpdateFunc(HSD_Chan* chan, int arg1, f32* arg2)
 }
 #pragma pop
 
-static int invalid_prev_ch[48] = {
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0,
-    0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0,
+static HSD_Chan invalid_prev_ch[4] = {
+    { NULL, 0, 0, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, 0, 0, 0, 0, 2, 0, NULL },
+    { NULL, 1, 0, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, 0, 0, 0, 0, 2, 2, NULL },
+    { NULL, 2, 0, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, 0, 0, 0, 0, 2, 0, NULL },
+    { NULL, 3, 0, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, 0, 0, 0, 0, 2, 2, NULL },
 };
 
 void _HSD_StateInvalidateColorChannel(void)
 {
     memcpy(&prev_ch, &invalid_prev_ch, sizeof(prev_ch));
-    prev_amb_invalid.unk0 = 1;
-    prev_amb_invalid.unk4 = 1;
-    prev_mat_invalid.unk0 = 1;
-    prev_mat_invalid.unk4 = 1;
+    prev_amb_invalid[0] = 1;
+    prev_amb_invalid[1] = 1;
+    prev_mat_invalid[0] = 1;
+    prev_mat_invalid[1] = 1;
     prev_num_chans = -1;
 }
 
