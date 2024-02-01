@@ -391,9 +391,7 @@ int setupTopHalfCamera(HSD_CObj* cobj)
 
 int setupBottomHalfCamera(HSD_CObj* cobj)
 {
-#ifdef MUST_MATCH
     int unused[4];
-#endif
 
     GXProjectionType projection_type;
     Mtx p;
@@ -676,18 +674,16 @@ static char unused2[] = "hsdIsDescendantOf(info, &hsdCObj)";
 #pragma pop
 #endif
 
-int vec_normalize_check(Vec3* src, Vec3* dst)
+static int vec_normalize_check(Vec3* src, Vec3* dst)
 {
     return _vec_normalize_check(src, dst);
 }
-
-int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll);
 
 extern const f64 HSD_CObj_804DE4B0;
 extern const f64 HSD_CObj_804DE4B8;
 extern const f64 HSD_CObj_804DE4C0;
 
-int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
+static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
 {
     Vec3 eye;
     Vec3 v0;
@@ -856,9 +852,8 @@ float HSD_CObjGetTop(HSD_CObj* cobj)
     }
     switch (cobj->projection_type) {
     case PROJ_PERSPECTIVE:
-        result =
-            cobj->near * tanf(0.5F * (0.01745329252F *
-                                      cobj->projection_param.perspective.fov));
+        result = cobj->near *
+                 tanf(0.5F * DegToRad(cobj->projection_param.perspective.fov));
         break;
     case PROJ_FRUSTUM:
         result = cobj->projection_param.perspective.fov;
@@ -898,8 +893,7 @@ float HSD_CObjGetBottom(HSD_CObj* cobj)
     switch (cobj->projection_type) {
     case PROJ_PERSPECTIVE:
         return -cobj->near *
-               tanf(0.5F *
-                    (0.01745329252F * cobj->projection_param.perspective.fov));
+               tanf(0.5F * DegToRad(cobj->projection_param.perspective.fov));
     case PROJ_FRUSTUM:
         return cobj->projection_param.frustum.bottom;
     case PROJ_ORTHO:
@@ -935,8 +929,7 @@ float HSD_CObjGetLeft(HSD_CObj* cobj)
     case PROJ_PERSPECTIVE:
         return cobj->projection_param.perspective.aspect *
                (-cobj->near *
-                tanf(0.5F * (0.01745329252F *
-                             cobj->projection_param.perspective.fov)));
+                tanf(0.5F * DegToRad(cobj->projection_param.perspective.fov)));
     case PROJ_FRUSTUM:
         return cobj->projection_param.frustum.left;
     case PROJ_ORTHO:
@@ -972,8 +965,7 @@ float HSD_CObjGetRight(HSD_CObj* cobj)
     case PROJ_PERSPECTIVE:
         return cobj->projection_param.perspective.aspect *
                (cobj->near *
-                tanf(0.5F * (0.01745329252F *
-                             cobj->projection_param.perspective.fov)));
+                tanf(0.5F * DegToRad(cobj->projection_param.perspective.fov)));
     case PROJ_FRUSTUM:
         return cobj->projection_param.frustum.right;
     case PROJ_ORTHO:
