@@ -244,9 +244,9 @@ static bool setupOffscreenCamera(HSD_CObj* cobj)
 {
     Mtx44 mtx;
 
-    GXSetViewport(cobj->viewport.left, cobj->viewport.top,
-                  cobj->viewport.right - cobj->viewport.left,
-                  cobj->viewport.bottom - cobj->viewport.top, 0.0f, 1.0f);
+    GXSetViewport(cobj->viewport.xmin, cobj->viewport.ymin,
+                  cobj->viewport.xmax - cobj->viewport.xmin,
+                  cobj->viewport.ymax - cobj->viewport.ymin, 0.0f, 1.0f);
     GXSetScissor(cobj->scissor.left, cobj->scissor.top,
                  cobj->scissor.right - cobj->scissor.left,
                  cobj->scissor.bottom - cobj->scissor.top);
@@ -277,10 +277,10 @@ int setupNormalCamera(HSD_CObj* cobj)
     x_scale = (f32) rmode->fbWidth / (f32) rmode->viWidth;
     y_scale = (f32) rmode->efbHeight / (f32) rmode->viHeight;
 
-    left = cobj->viewport.left * x_scale;
-    right = cobj->viewport.right * x_scale;
-    top = cobj->viewport.top * y_scale;
-    bottom = cobj->viewport.bottom * y_scale;
+    left = cobj->viewport.xmin * x_scale;
+    right = cobj->viewport.xmax * x_scale;
+    top = cobj->viewport.ymin * y_scale;
+    bottom = cobj->viewport.ymax * y_scale;
 
     width = right - left;
     height = bottom - top;
@@ -327,21 +327,21 @@ int setupTopHalfCamera(HSD_CObj* cobj)
 
     GXRenderModeObj* rmode = HSD_VIGetRenderMode();
 
-    if (cobj->viewport.top >= rmode->efbHeight) {
+    if (cobj->viewport.ymin >= rmode->efbHeight) {
         return 0;
     }
-    left = cobj->viewport.left;
-    right = cobj->viewport.right;
-    top = cobj->viewport.top;
-    bottom = bottom = cobj->viewport.bottom;
+    left = cobj->viewport.xmin;
+    right = cobj->viewport.xmax;
+    top = cobj->viewport.ymin;
+    bottom = bottom = cobj->viewport.ymax;
     bottom = bottom < rmode->efbHeight ? bottom : rmode->efbHeight;
     width = right - left;
     height = bottom - top;
     GXSetScissor((u32) left, (u32) top, (u32) width, (u32) height);
-    top = cobj->viewport.top;
-    bottom = cobj->viewport.bottom;
-    left = cobj->viewport.left;
-    right = cobj->viewport.right;
+    top = cobj->viewport.ymin;
+    bottom = cobj->viewport.ymax;
+    left = cobj->viewport.xmin;
+    right = cobj->viewport.xmax;
     height = (bottom < rmode->efbHeight ? bottom : rmode->efbHeight) - top;
     h_scale = height / (bottom - top);
     width = right - left;
@@ -406,7 +406,7 @@ int setupBottomHalfCamera(HSD_CObj* cobj)
 
     screen_top = rmode->efbHeight - 8;
 
-    if (cobj->viewport.bottom < screen_top) {
+    if (cobj->viewport.ymax < screen_top) {
         return 0;
     }
 
@@ -419,16 +419,16 @@ int setupBottomHalfCamera(HSD_CObj* cobj)
     height = bottom - top;
     GXSetScissor((u32) left, (u32) top, (u32) width, (u32) height);
 
-    top = cobj->viewport.top;
-    left = cobj->viewport.left;
-    right = cobj->viewport.right;
+    top = cobj->viewport.ymin;
+    left = cobj->viewport.xmin;
+    right = cobj->viewport.xmax;
 
     if (top > screen_top) {
         abs_top = top;
     } else {
         abs_top = screen_top;
     }
-    bottom = cobj->viewport.bottom;
+    bottom = cobj->viewport.ymax;
     width = right - left;
     height = bottom - top;
 
@@ -1058,7 +1058,7 @@ void HSD_CObjSetScissorx4(HSD_CObj* cobj, u16 left, u16 right, u16 top,
     cobj->scissor.bottom = bottom;
 }
 
-void HSD_CObjGetViewportf(HSD_CObj* cobj, struct Viewport* viewport)
+void HSD_CObjGetViewportf(HSD_CObj* cobj, HSD_RectF32* viewport)
 {
     if (cobj == NULL) {
         return;
@@ -1069,18 +1069,18 @@ void HSD_CObjGetViewportf(HSD_CObj* cobj, struct Viewport* viewport)
 extern const f64 HSD_CObj_804DE4C8;
 
 // Uses s16 -> float cast literal
-void HSD_CObjSetViewport(HSD_CObj* cobj, s16* viewport)
+void HSD_CObjSetViewport(HSD_CObj* cobj, HSD_RectS16* viewport)
 {
     if (cobj == NULL) {
         return;
     }
-    cobj->viewport.left = viewport[0];
-    cobj->viewport.right = viewport[1];
-    cobj->viewport.top = viewport[2];
-    cobj->viewport.bottom = viewport[3];
+    cobj->viewport.xmin = viewport->xmin;
+    cobj->viewport.xmax = viewport->xmax;
+    cobj->viewport.ymin = viewport->ymin;
+    cobj->viewport.ymax = viewport->ymax;
 }
 
-void HSD_CObjSetViewportf(HSD_CObj* cobj, struct Viewport* viewport)
+void HSD_CObjSetViewportf(HSD_CObj* cobj, HSD_RectF32* viewport)
 {
     if (cobj == NULL) {
         return;
@@ -1094,10 +1094,10 @@ void HSD_CObjSetViewportfx4(HSD_CObj* cobj, float left, float right, float top,
     if (cobj == NULL) {
         return;
     }
-    cobj->viewport.left = left;
-    cobj->viewport.right = right;
-    cobj->viewport.top = top;
-    cobj->viewport.bottom = bottom;
+    cobj->viewport.xmin = left;
+    cobj->viewport.xmax = right;
+    cobj->viewport.ymin = top;
+    cobj->viewport.ymax = bottom;
 }
 
 u32 HSD_CObjGetProjectionType(HSD_CObj* cobj)
@@ -1232,39 +1232,35 @@ static char HSD_CObj_804D5D50[3] = "0";
 
 static int CObjLoad(HSD_CObj* cobj, HSD_CObjDesc* desc)
 {
-    cobj->flags = desc->flags;
-    CObjResetFlags(cobj, desc->flags);
-    HSD_CObjSetViewport(cobj, &desc->viewport.left);
-    HSD_CObjSetScissor(cobj, &desc->scissor);
-    HSD_WObjInit(cobj->eyepos, desc->eye_desc);
-    HSD_WObjInit(cobj->interest, desc->interest_desc);
-    HSD_CObjSetNear(cobj, desc->near);
-    HSD_CObjSetFar(cobj, desc->far);
-    if (desc->flags & 1) {
-        if (desc->vector != NULL) {
-            HSD_CObjSetUpVector(cobj, desc->vector);
+    cobj->flags = desc->common.flags;
+    CObjResetFlags(cobj, desc->common.flags);
+    HSD_CObjSetViewport(cobj, &desc->common.viewport);
+    HSD_CObjSetScissor(cobj, &desc->common.scissor);
+    HSD_WObjInit(cobj->eyepos, desc->common.eyepos);
+    HSD_WObjInit(cobj->interest, desc->common.interest);
+    HSD_CObjSetNear(cobj, desc->common.nnear);
+    HSD_CObjSetFar(cobj, desc->common.ffar);
+    if (desc->common.flags & 1) {
+        if (desc->common.up_vector != NULL) {
+            HSD_CObjSetUpVector(cobj, desc->common.up_vector);
         } else {
             HSD_CObjSetUpVector(cobj, &HSD_CObj_8040631C);
         }
     } else {
-        HSD_CObjSetRoll(cobj, desc->roll);
+        HSD_CObjSetRoll(cobj, desc->common.roll);
     }
-    switch (desc->projection_type) {
+    switch (desc->common.projection_type) {
     case PROJ_PERSPECTIVE:
-        HSD_CObjSetPerspective(cobj, desc->projection_param.perspective.fov,
-                               desc->projection_param.perspective.aspect);
+        HSD_CObjSetPerspective(cobj, desc->perspective.fov,
+                               desc->perspective.aspect);
         break;
     case PROJ_ORTHO:
-        HSD_CObjSetOrtho(cobj, desc->projection_param.ortho.top,
-                         desc->projection_param.ortho.bottom,
-                         desc->projection_param.ortho.left,
-                         desc->projection_param.ortho.right);
+        HSD_CObjSetOrtho(cobj, desc->ortho.top, desc->ortho.bottom,
+                         desc->ortho.left, desc->ortho.right);
         break;
     case PROJ_FRUSTUM:
-        HSD_CObjSetFrustum(cobj, desc->projection_param.frustum.top,
-                           desc->projection_param.frustum.bottom,
-                           desc->projection_param.frustum.left,
-                           desc->projection_param.frustum.right);
+        HSD_CObjSetFrustum(cobj, desc->frustum.top, desc->frustum.bottom,
+                           desc->frustum.left, desc->frustum.right);
         break;
     default:
         __assert(HSD_CObj_804D5D40, 0x7D0, HSD_CObj_804D5D50);
