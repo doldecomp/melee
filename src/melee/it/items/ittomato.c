@@ -1,6 +1,11 @@
 #include "ittomato.h"
 
+#include <baselib/jobj.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_266F.h>
+#include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
+#include <melee/it/items/it_27CF.h>
 
 extern f32 it_804DC8B0;
 extern f32 it_804DC8B4;
