@@ -237,9 +237,6 @@ GXProjectionType makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
     return projection_type;
 }
 
-static const float HSD_CObj_804DE478 = 0.0F;
-static const float HSD_CObj_804DE47C = 1.0F;
-
 static bool setupOffscreenCamera(HSD_CObj* cobj)
 {
     Mtx44 mtx;
@@ -498,9 +495,6 @@ void HSD_CObjSetupViewingMtx(HSD_CObj* cobj)
     }
 }
 
-static char HSD_CObj_804D5D40[7] = "cobj.c";
-static char HSD_CObj_80406294[] = "unkown type of render pass.\n";
-
 static void setNewProjection(HSD_CObj* cobj, Mtx44 mtx)
 {
     GXSetProjection(mtx, makeProjectionMtx(cobj, mtx));
@@ -531,10 +525,7 @@ bool HSD_CObjSetCurrent(HSD_CObj* cobj)
         result = setupBottomHalfCamera(cobj);
         break;
     default:
-        HSD_Panic(HSD_CObj_804D5D40,
-                  //"cobj.c",
-                  0x270, HSD_CObj_80406294);
-        //"unkown type of render pass.\n");
+        HSD_Panic("cobj.c", 0x270, "unkown type of render pass.\n");
         return false;
     }
     if (!result) {
@@ -551,47 +542,39 @@ void HSD_CObjEndCurrent(void)
     _HSD_ZListDisp();
 }
 
-#define HSD_ASSERT3(line, msg, cond)                                          \
-    ((cond) ? (void) 0 : __assert(HSD_CObj_804D5D40, line, msg))
-
-#define HSD_ASSERT4(line, cond)                                               \
-    ((cond) ? (void) 0 : __assert(HSD_CObj_804D5D40, line, #cond))
-
-char HSD_CObj_804D5D48[8] = "cobj";
-
 HSD_WObj* HSD_CObjGetInterestWObj(HSD_CObj* cobj)
 {
-    HSD_ASSERT3(0x295, HSD_CObj_804D5D48, cobj);
+    HSD_ASSERT(0x295, cobj);
     return cobj->interest;
 }
 
 HSD_WObj* HSD_CObjGetEyePositionWObj(HSD_CObj* cobj)
 {
-    HSD_ASSERT3(0x2AD, HSD_CObj_804D5D48, cobj);
+    HSD_ASSERT(0x2AD, cobj);
     return cobj->eyepos;
 }
 
 void HSD_CObjGetInterest(HSD_CObj* cobj, Vec3* interest)
 {
-    HSD_ASSERT3(0x2C5, HSD_CObj_804D5D48, cobj);
+    HSD_ASSERT(0x2C5, cobj);
     HSD_WObjGetPosition(HSD_CObjGetInterestWObj(cobj), interest);
 }
 
 void HSD_CObjSetInterest(HSD_CObj* cobj, Vec3* interest)
 {
-    HSD_ASSERT3(0x2D1, HSD_CObj_804D5D48, cobj);
+    HSD_ASSERT(0x2D1, cobj);
     HSD_WObjSetPosition(HSD_CObjGetInterestWObj(cobj), interest);
 }
 
 void HSD_CObjGetEyePosition(HSD_CObj* cobj, Vec3* position)
 {
-    HSD_ASSERT3(0x2DD, HSD_CObj_804D5D48, cobj);
+    HSD_ASSERT(0x2DD, cobj);
     HSD_WObjGetPosition(HSD_CObjGetEyePositionWObj(cobj), position);
 }
 
 void HSD_CObjSetEyePosition(HSD_CObj* cobj, Vec3* position)
 {
-    HSD_ASSERT3(0x2E9, HSD_CObj_804D5D48, cobj);
+    HSD_ASSERT(0x2E9, cobj);
     HSD_WObjSetPosition(HSD_CObjGetEyePositionWObj(cobj), position);
 }
 
@@ -649,8 +632,8 @@ float HSD_CObjGetEyeDistance(HSD_CObj* cobj)
     if (cobj == NULL) {
         return 0.0f;
     }
-    HSD_ASSERT4(0x327, cobj->eyepos);
-    HSD_ASSERT4(0x328, cobj->interest);
+    HSD_ASSERT(0x327, cobj->eyepos);
+    HSD_ASSERT(0x328, cobj->interest);
     HSD_CObjGetEyePosition(cobj, &position);
     HSD_CObjGetInterest(cobj, &interest);
     PSVECSubtract(&interest, &position, &look_vector);
@@ -1205,7 +1188,7 @@ HSD_CObj* HSD_CObjAlloc(void)
 {
     HSD_CObj* cobj = (HSD_CObj*) hsdNew(
         default_class ? default_class : &hsdCObj.parent.parent);
-    HSD_ASSERT3(1954, HSD_CObj_804D5D48, cobj);
+    HSD_ASSERT(1954, cobj);
     return cobj;
 }
 
@@ -1218,7 +1201,6 @@ inline static void CObjResetFlags(HSD_CObj* cobj, u32 flags)
 }
 
 static Vec3 HSD_CObj_8040631C = { 0, 1, 0 };
-static char HSD_CObj_804D5D50[3] = "0";
 
 static int CObjLoad(HSD_CObj* cobj, HSD_CObjDesc* desc)
 {
@@ -1253,7 +1235,7 @@ static int CObjLoad(HSD_CObj* cobj, HSD_CObjDesc* desc)
                            desc->frustum.left, desc->frustum.right);
         break;
     default:
-        __assert(HSD_CObj_804D5D40, 0x7D0, HSD_CObj_804D5D50);
+        HSD_ASSERT(0x7D0, 0);
         break;
     }
     return 0;
@@ -1279,7 +1261,7 @@ HSD_CObj* HSD_CObjLoadDesc(HSD_CObjDesc* desc)
             cobj = HSD_CObjAlloc();
         } else {
             cobj = hsdNew(info);
-            HSD_ASSERT3(0x7F7, HSD_CObj_804D5D48, cobj);
+            HSD_ASSERT(0x7F7, cobj);
         }
         HSD_COBJ_METHOD(cobj)->load(cobj, desc);
         return cobj;
