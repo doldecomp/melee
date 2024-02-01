@@ -710,7 +710,7 @@ ret:
 
 HSD_WObjDesc EyeDesc = { NULL, { 0.0f, 0.0f, 1.0f }, NULL };
 HSD_WObjDesc InterestDesc = { NULL, { 0.0f, 0.0f, 0.0f }, NULL };
-HSD_CObjDesc ReflectCObjDesc = {
+HSD_CameraDescPerspective ReflectCObjDesc = {
     NULL,
     0,
     1,
@@ -732,10 +732,8 @@ HSD_CObjDesc ReflectCObjDesc = {
     NULL,
     0.1f,
     32768.0f,
-    {
-        30.0f,
-        1.2173333168029785f,
-    },
+    30.0f,
+    1.2173333168029785f,
 };
 
 HSD_GObj* grIzumi_801CCD98(void)
