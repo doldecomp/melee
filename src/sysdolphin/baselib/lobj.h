@@ -147,7 +147,7 @@ HSD_WObj* HSD_LObjGetInterestWObj(HSD_LObj* lobj);
 void HSD_LObjSetPositionWObj(HSD_LObj* lobj, HSD_WObj* wobj);
 void HSD_LObjSetInterestWObj(HSD_LObj* lobj, HSD_WObj* wobj);
 
-s32 HSD_LightID2Index(GXLightID);
+u32 HSD_LightID2Index(GXLightID);
 void HSD_LObjDeleteCurrent(HSD_LObj* lobj);
 s32 HSD_Index2LightID(u32);
 void HSD_LObjRemoveAll(HSD_LObj* lobj);

@@ -719,9 +719,9 @@ HSD_LObj* HSD_LObjGetCurrentByType(u16 flags)
     return NULL;
 }
 
-s32 HSD_LightID2Index(GXLightID id)
+u32 HSD_LightID2Index(GXLightID id)
 {
-    s32 index;
+    u32 index;
     switch (id) {
     case GX_LIGHT0:
         index = 0;
@@ -751,10 +751,7 @@ s32 HSD_LightID2Index(GXLightID id)
         index = 8;
         break;
     default:
-        __assert(__FILE__, 1170, "0");
-
-        /// @todo Find a better fix for uninitialized @c var_r31
-        index = 0;
+        HSD_ASSERT(1170, 0);
         break;
     }
     return index;

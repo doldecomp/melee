@@ -1341,7 +1341,7 @@ config.libs = [
             Object(NonMatching, "sysdolphin/baselib/tev.c"),
             Object(Matching, "sysdolphin/baselib/mobj.c"),
             Object(Matching, "sysdolphin/baselib/aobj.c"),
-            Object(NonMatching, "sysdolphin/baselib/lobj.c"),
+            Object(Matching, "sysdolphin/baselib/lobj.c"),
             Object(NonMatching, "sysdolphin/baselib/cobj.c"),
             Object(Matching, "sysdolphin/baselib/fobj.c"),
             Object(NonMatching, "sysdolphin/baselib/pobj.c"),
