@@ -506,11 +506,6 @@ static void setNewProjection(HSD_CObj* cobj, Mtx44 mtx)
     GXSetProjection(mtx, makeProjectionMtx(cobj, mtx));
 }
 
-static bool setupNormalCamera(HSD_CObj* cobj);
-static bool setupTopHalfCamera(HSD_CObj* cobj);
-static bool setupBottomHalfCamera(HSD_CObj* cobj);
-static bool setupOffscreenCamera(HSD_CObj* cobj);
-
 bool HSD_CObjSetCurrent(HSD_CObj* cobj)
 {
     HSD_RenderPass render_pass;
