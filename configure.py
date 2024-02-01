@@ -999,7 +999,7 @@ config.libs = [
             Object(NonMatching, "melee/it/items/itpippi.c"),
             Object(NonMatching, "melee/it/items/ittogepy.c"),
             Object(NonMatching, "melee/it/items/itmew.c"),
-            Object(NonMatching, "melee/it/items/itcerebi.c"),
+            Object(Matching, "melee/it/items/itcerebi.c"),
             Object(NonMatching, "melee/it/items/ithitodeman.c"),
             Object(NonMatching, "melee/it/items/itlucky.c"),
             Object(Matching, "melee/it/items/itporygon2.c"),

@@ -691,7 +691,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itpippi.s.o\
     $(BUILD_DIR)/asm/melee/it/items/ittogepy.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itmew.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itcerebi.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itcerebi.c.o\
     $(BUILD_DIR)/asm/melee/it/items/ithitodeman.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itlucky.s.o\
     $(BUILD_DIR)/src/melee/it/items/itporygon2.c.o\
