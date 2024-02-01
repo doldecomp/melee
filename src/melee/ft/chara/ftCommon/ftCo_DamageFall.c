@@ -90,7 +90,7 @@ void ftCo_80090780(HSD_GObj* gobj)
     if ((s32) M2C_FIELD(fp, s32*, 0xE0) == 0) {
         ftCommon_8007D5D4((Fighter*) fp);
     }
-    if (ftCo_GetParasolStatus(gobj) != -1) {
+    if (ftGetParasolStatus(gobj) != -1) {
         ftCo_800CF4DC(gobj);
     } else {
         Fighter_ChangeMotionState(gobj, 0x26, 0x18001U, 0.0f, 1.0f, 0.0f,

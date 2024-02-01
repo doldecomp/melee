@@ -178,12 +178,9 @@ void ftWalkCommon_800E0060(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     float accel_mul = fp->mv.co.walk.accel_mul;
 
-/// @todo Unused assignment.
-#ifdef MUST_MATCH
     {
         float _ = accel_mul;
     }
-#endif
 
     {
         float walk_vel =

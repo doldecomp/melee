@@ -237,78 +237,7 @@ float ftCommon_8007CD6C(float value, float decrement)
     return result;
 }
 
-// These do not match due to unpatched epilogue scheduling
-#ifdef MUST_MATCH
-char ftCo_803C0D58[] = "ftcommon.c";
-char ftCo_803C0D64[] = "fp->kind == Ft_Kind_Sandbag";
-
-// Not sure why this is needed
-// Maybe __FILE__ is allocated separate from ordinary string literals?
-#undef HSD_ASSERT
-#define HSD_ASSERT(line, cond)                                                \
-    ((cond) ? ((void) 0) : __assert(ftCo_803C0D58, line, #cond))
-
-asm float ftCommon_8007CDA4(Fighter*)
-{ // clang-format off
-    nofralloc
-/* 8007CDA4 00079984  7C 08 02 A6 */   mflr r0
-/* 8007CDA8 00079988  90 01 00 04 */   stw r0, 4(r1)
-/* 8007CDAC 0007998C  94 21 FF E8 */   stwu r1, -0x18(r1)
-/* 8007CDB0 00079990  93 E1 00 14 */   stw r31, 0x14(r1)
-/* 8007CDB4 00079994  7C 7F 1B 78 */   mr r31, r3
-/* 8007CDB8 00079998  80 03 00 04 */   lwz r0, 4(r3)
-/* 8007CDBC 0007999C  2C 00 00 20 */   cmpwi r0, 0x20
-/* 8007CDC0 000799A0  41 82 00 1C */   beq lbl_8007CDDC
-/* 8007CDC4 000799A4  3C 60 80 3C */   lis r3, ftCo_803C0D58@ha
-/* 8007CDC8 000799A8  3C 80 80 3C */   lis r4, ftCo_803C0D64@ha
-/* 8007CDCC 000799AC  38 A4 0D 64 */   addi r5, r4, ftCo_803C0D64@l
-/* 8007CDD0 000799B0  38 63 0D 58 */   addi r3, r3, ftCo_803C0D58@l
-/* 8007CDD4 000799B4  38 80 01 2B */   li r4, 0x12b
-/* 8007CDD8 000799B8  48 30 B4 49 */   bl __assert
-lbl_8007CDDC:
-/* 8007CDDC 000799BC  80 7F 02 D4 */   lwz r3, 0x2d4(r31)
-/* 8007CDE0 000799C0  80 01 00 1C */   lwz r0, 0x1c(r1)
-/* 8007CDE4 000799C4  C0 23 00 00 */   lfs f1, 0(r3)
-/* 8007CDE8 000799C8  83 E1 00 14 */   lwz r31, 0x14(r1)
-/* 8007CDEC 000799CC  38 21 00 18 */   addi r1, r1, 0x18
-/* 8007CDF0 000799D0  7C 08 03 A6 */   mtlr r0
-/* 8007CDF4 000799D4  4E 80 00 20 */   blr
-} // clang-format on
-
-asm float ftCommon_8007CDF8(Fighter*)
-{ // clang-format off
-    nofralloc
-/* 8007CDF8 000799D8  7C 08 02 A6 */	mflr r0
-/* 8007CDFC 000799DC  90 01 00 04 */	stw r0, 4(r1)
-/* 8007CE00 000799E0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8007CE04 000799E4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8007CE08 000799E8  7C 7F 1B 78 */	mr r31, r3
-/* 8007CE0C 000799EC  80 03 00 04 */	lwz r0, 4(r3)
-/* 8007CE10 000799F0  2C 00 00 20 */	cmpwi r0, 0x20
-/* 8007CE14 000799F4  41 82 00 1C */	beq lbl_8007CE30
-/* 8007CE18 000799F8  3C 60 80 3C */	lis r3, ftCo_803C0D58@ha
-/* 8007CE1C 000799FC  3C 80 80 3C */	lis r4, ftCo_803C0D64@ha
-/* 8007CE20 00079A00  38 A4 0D 64 */	addi r5, r4, ftCo_803C0D64@l
-/* 8007CE24 00079A04  38 63 0D 58 */	addi r3, r3, ftCo_803C0D58@l
-/* 8007CE28 00079A08  38 80 01 34 */	li r4, 0x134
-/* 8007CE2C 00079A0C  48 30 B3 F5 */	bl __assert
-lbl_8007CE30:
-/* 8007CE30 00079A10  80 7F 02 D4 */	lwz r3, 0x2d4(r31)
-/* 8007CE34 00079A14  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8007CE38 00079A18  C0 23 00 04 */	lfs f1, 4(r3)
-/* 8007CE3C 00079A1C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8007CE40 00079A20  38 21 00 18 */	addi r1, r1, 0x18
-/* 8007CE44 00079A24  7C 08 03 A6 */	mtlr r0
-/* 8007CE48 00079A28  4E 80 00 20 */	blr
-} // clang-format on
-#pragma peephole on
-
-#else
-
-// to match assert statement
-#define kind kind
-
-static const int Ft_Kind_Sandbag = 0x20;
+#define Ft_Kind_Sandbag FTKIND_SANDBAG
 float ftCommon_8007CDA4(Fighter* fp)
 {
     HSD_ASSERT(299, fp->kind == Ft_Kind_Sandbag);
@@ -320,7 +249,6 @@ float ftCommon_8007CDF8(Fighter* fp)
     HSD_ASSERT(308, fp->kind == Ft_Kind_Sandbag);
     return ((float*) fp->dat_attrs)[1];
 }
-#endif
 
 void ftCommon_8007CE4C(Fighter* fp, float val)
 {
@@ -348,10 +276,11 @@ void ftCommon_8007CE94(Fighter* fp, float val)
     fp->x74_anim_vel.x = val;
 }
 
-#ifdef MUST_MATCH
+#define SOLUTION 0
 /// @todo This surely calls #ftCommon_8007CE94 somehow...
 void ftCommon_8007CEF4(Fighter* fp)
 {
+#if SOLUTION == 0
     float result = fp->co_attrs.aerial_friction;
     float lhs = fabs_inline(result);
     float phi_f1 = fabs_inline(fp->self_vel.x);
@@ -361,14 +290,11 @@ void ftCommon_8007CEF4(Fighter* fp)
         result = -fp->co_attrs.aerial_friction;
     }
     fp->x74_anim_vel.x = result;
-}
-
-#else
-void ftCommon_8007CEF4(Fighter* fp)
-{
+#elif SOLUTION == 1
     ftCommon_8007CE94(fp, fp->co_attrs.aerial_friction);
-}
 #endif
+}
+#undef SOLUTION
 
 bool ftCommon_8007CF58(Fighter* fp)
 {
@@ -417,13 +343,9 @@ bool ftCommon_8007D050(Fighter* fp, float val)
     float phi_f1_2;
 
     temp_f3 = fp->self_vel.x;
-
-#ifdef MUST_MATCH
     {
         float _ = fabs_inline(temp_f3);
     }
-#endif
-
     if (fabs_inline(temp_f3) > val) {
         phi_f2 = p_ftCommonData->x1FC;
         phi_f1 = fabs_inline(temp_f3);
@@ -1249,13 +1171,7 @@ void ftCommon_8007E83C(HSD_GObj* gobj, s32 arg1, float div)
 
     Fighter* fp = gobj->user_data;
 
-#ifdef MUST_MATCH
-#define ftGetParasolStatus ftCo_GetParasolStatus
     HSD_ASSERT(1276, ftGetParasolStatus(gobj) != FtParasol_None);
-#undef ftGetParasolStatus
-#else
-    HSD_ASSERT(__LINE__, ftCo_GetParasolStatus(gobj) != FtParasol_None);
-#endif
 
     if (div == 0) {
         val = fp->frame_spd_mul;
@@ -1274,7 +1190,7 @@ void ftCommon_8007E83C(HSD_GObj* gobj, s32 arg1, float div)
 }
 
 /// @was{ftGetParasolStatus}
-s32 ftCo_GetParasolStatus(HSD_GObj* gobj)
+s32 ftGetParasolStatus(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->item_gobj != NULL && itGetKind(fp->item_gobj) == It_Kind_Parasol) {

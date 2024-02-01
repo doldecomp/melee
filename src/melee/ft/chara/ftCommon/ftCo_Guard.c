@@ -652,7 +652,7 @@ void ftCo_80092F2C(HSD_GObj* gobj, bool arg1)
                               (p_ftCommonData->x2E8 - p_ftCommonData->x2E4)) +
                              p_ftCommonData->x2E4)))) +
                   p_ftCommonData->x290;
-        ftAnim_SetAnimRate(gobj, (0.1f + lb_8000BE40(GET_JOBJ(gobj))) / f);
+        ftAnim_SetAnimRate(gobj, (0.1f + lbGetJObjEndFrame(GET_JOBJ(gobj))) / f);
         if (!arg1) {
             float var_f2 = f * p_ftCommonData->x294;
             if (!fp->x221C_b2) {

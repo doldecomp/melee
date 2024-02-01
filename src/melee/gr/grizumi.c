@@ -23,6 +23,7 @@
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
 #include <baselib/displayfunc.h>
+#include <baselib/dobj.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -35,6 +36,7 @@
 #include <baselib/object.h>
 #include <baselib/random.h>
 #include <baselib/state.h>
+#include <baselib/tobj.h>
 #include <baselib/wobj.h> // IWYU pragma: keep
 
 // context stuff

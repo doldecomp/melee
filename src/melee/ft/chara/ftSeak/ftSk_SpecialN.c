@@ -202,12 +202,8 @@ void ftSk_SpecialNEnd_Anim(Fighter_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 specialN_x0 = fp->mv.sk.specialn.x0;
-    // s32 unused[6];
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u32 _[6];
-#endif
 
     switch (specialN_x0) {
     case 0: // % 3 == 0
@@ -310,10 +306,7 @@ void ftSk_SpecialAirNEnd_Anim(Fighter_GObj* fighter_gobj)
     ftSeakAttributes* specialAttributes = fp->dat_attrs; // r31
     // s32 unused[8];
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     u32 _[8];
-#endif
 
     switch (fp->mv.sk.specialn.x0) {
     case 0: // % 3 == 0

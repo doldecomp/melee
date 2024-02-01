@@ -77,7 +77,7 @@ void ftCommon_8007E79C(ftCo_GObj*, s32);
 void ftCommon_8007E7E4(ftCo_GObj*, s32);
 void ftCommon_8007E82C(ftCo_GObj*);
 void ftCommon_8007E83C(ftCo_GObj*, s32, float div);
-s32 ftCo_GetParasolStatus(ftCo_GObj*);
+s32 ftGetParasolStatus(ftCo_GObj*);
 void ftCommon_8007EA90(ftCo_Fighter*, s32);
 void ftCommon_8007EBAC(ftCo_Fighter*, u32, u32);
 void ftCommon_8007EC30(u32, u32);

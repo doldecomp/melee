@@ -11,21 +11,15 @@ char ftGl_Init_803D3580[] = "PlGlNr.dat";
 char ftGl_Init_803D358C[] = "PlyGirl_Share_joint";
 char ftGl_Init_AnimDatFilename[] = "PlGlAJ.dat";
 
-#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
-#endif
-
 Fighter_DemoStrings ftGl_Init_DemoStrings = {
     NULL,
     "ftDemoIntroMotionFileGirl",
     NULL,
     NULL,
 };
-
-#ifdef MUST_MATCH
 #pragma pop
-#endif
 
 Fighter_CostumeStrings ftGl_Init_CostumeStrings[] = {
     { ftGl_Init_803D3580, ftGl_Init_803D358C, NULL },
