@@ -16,6 +16,8 @@
 #include <baselib/debug.h>
 #include <MSL/trigf.h>
 
+static bool mpColl_804D649C;
+
 // 80041C78 https://decomp.me/scratch/V6eYQ
 void mpColl_80041C78(void)
 {
@@ -1228,3 +1230,44 @@ const f32 flt_804D7FF8 = 5.0f;
 const f64 flt_804D8000 = -0.75;
 const f64 flt_804D8008 = 0.75;
 const f32 flt_804D8010 = -3.0f;
+
+bool mpColl_800477E0(CollData* arg0)
+{
+    f32 ecb_y;
+    f32 ecb_x;
+    bool ret;
+
+    mpColl_80041C8C(arg0);
+    if (arg0->x130_flags & 0x10) {
+        ecb_x = arg0->x84_ecb.bottom.x;
+        ecb_y = arg0->x84_ecb.bottom.y;
+    }
+    if ((s32) arg0->x104 == 1) {
+        mpColl_800424DC(arg0, 6U);
+    } else {
+        mpColl_8004293C(arg0);
+    }
+    if (arg0->x130_flags & 0x10) {
+        arg0->x84_ecb.bottom.x = ecb_x;
+        arg0->x84_ecb.bottom.y = ecb_y;
+    }
+    mpColl_80042384(arg0);
+    arg0->x138 = arg0->env_flags;
+    arg0->env_flags = 0;
+    if (((arg0->xA4_ecbCurrCorrect.top.y - arg0->xA4_ecbCurrCorrect.bottom.y) <
+         flt_804D7FD8) &&
+        ((arg0->xA4_ecbCurrCorrect.right.y - arg0->xA4_ecbCurrCorrect.left.y) <
+         flt_804D7FD8))
+    {
+        mpColl_804D649C = 1;
+    } else {
+        mpColl_804D649C = 0;
+    }
+    // mpColl_80043754's return value is mpColl_80046904's return value (the
+    // passed in function, scratch here: https://decomp.me/scratch/NL2sf) i.e.
+    // var_22, which is only ever set to 0 or 1. Probably a bool
+    ret = mpColl_80043754(mpColl_80046904, arg0, 1U);
+    mpColl_80043324(arg0, ret, 1);
+
+    return ret;
+}
