@@ -76,7 +76,7 @@
 /* 07E7E4 */ void ftCommon_8007E7E4(ftCo_GObj*, s32);
 /* 07E82C */ void ftCommon_8007E82C(ftCo_GObj*);
 /* 07E83C */ void ftCommon_8007E83C(ftCo_GObj*, s32, float div);
-/* 07E994 */ s32 ftCo_GetParasolStatus(ftCo_GObj*);
+/* 07E994 */ s32 ftGetParasolStatus(ftCo_GObj*);
 /* 07EA90 */ void ftCommon_8007EA90(ftCo_Fighter*, s32);
 /* 07EBAC */ void ftCommon_8007EBAC(ftCo_Fighter*, u32, u32);
 /* 07EC30 */ void ftCommon_8007EC30(u32, u32);

@@ -1526,14 +1526,9 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
     } else {
         var_f1 = arg0->scl * arg4;
     }
-
-/// @todo Unused assignment.
-#ifdef MUST_MATCH
     {
         int* sp8 = &arg0->x70;
     }
-#endif
-
     temp_r5 = &shield_hit->pos;
     return lbColl_80006E58(&arg0->x58, &arg0->x4C, temp_r5, temp_r5, &sp74,
                            &sp68, (f32(*)[4]) var_r9, &arg0->x64, var_f1,
@@ -1643,12 +1638,9 @@ bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
         } else {
             var_f1 = arg0->scl * hit_scl_y;
         }
-/// @todo Unused assignment.
-#ifdef MUST_MATCH
         {
             int* sp8 = &arg0->x70;
         }
-#endif
         return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos,
                                &arg1->b_pos, &sp70, &sp64, *var_r9, &arg0->x64,
                                var_f1, arg1->scl, 3.0f * hurt_scl_y);
@@ -1709,12 +1701,9 @@ bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, UNK_T arg2, s32 arg3,
         } else {
             var_f1 = arg0->scl * arg4;
         }
-/// @todo Unused assignment.
-#ifdef MUST_MATCH
         {
             int* sp8 = &arg0->x70;
         }
-#endif
         return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos,
                                &arg1->b_pos, &sp74, &sp68, (f32(*)[4]) var_r9,
                                &arg0->x64, var_f1, arg1->scl, 3.0f * arg5);

@@ -1299,14 +1299,7 @@ void ftPr_SpecialNHit_Phys(HSD_GObj* gobj)
     ftCommon_8007D494(fp, da->x3C, da->x40);
 }
 
-/* Non-matching due to float allocation https://decomp.me/scratch/OYlcJ
- */
-#ifdef MUST_MATCH
-void ftPr_SpecialNStart_Coll(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
-#else
+// Non-matching due to float allocation https://decomp.me/scratch/OYlcJ
 void ftPr_SpecialNStart_Coll(HSD_GObj* gobj)
 {
     s32 state;
@@ -1331,7 +1324,6 @@ void ftPr_SpecialNStart_Coll(HSD_GObj* gobj)
         fp->x21F8 = ftPr_SpecialN_8014222C;
     }
 }
-#endif
 
 void ftPr_SpecialNLoop_Coll(HSD_GObj* gobj)
 {

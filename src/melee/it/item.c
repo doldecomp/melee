@@ -28,6 +28,7 @@
 #include <dolphin/os/OSError.h>
 #include <baselib/class.h>
 #include <baselib/debug.h>
+#include <baselib/dobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
@@ -1157,7 +1158,7 @@ void Item_80268DD4(HSD_GObj* gobj, f32 frame)
     lb_8000BA0C(item_jobj, item_data->x5D0_animFrameSpeed);
     HSD_JObjReqAnimAll(item_jobj, frame);
     HSD_JObjAnimAll(item_jobj);
-    item_data->x5CC_currentAnimFrame = lb_8000BDB4(item_jobj);
+    item_data->x5CC_currentAnimFrame = lbGetJObjCurrFrame(item_jobj);
 }
 
 /// Copy item script
@@ -1326,7 +1327,7 @@ void Item_802694CC(HSD_GObj* gobj)
     HSD_JObj* item_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     HSD_JObjAnimAll(item_jobj);
-    item_data->x5CC_currentAnimFrame = lb_8000BDB4(item_jobj);
+    item_data->x5CC_currentAnimFrame = lbGetJObjCurrFrame(item_jobj);
     it_802799E4(gobj);
 }
 

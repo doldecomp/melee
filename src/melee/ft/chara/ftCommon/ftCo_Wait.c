@@ -24,10 +24,6 @@
 #include "ftCommon/ftCo_Guard.h"
 #include "ftFox/ftFx_AppealS.h"
 
-#ifdef MUST_MATCH
-
-#endif
-
 void ftCo_Wait_Anim(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);

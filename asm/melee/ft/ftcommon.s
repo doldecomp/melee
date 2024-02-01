@@ -2404,7 +2404,7 @@
 /* 00001F30 00001F70  93 A1 00 24 */	stw r29, 0x24(r1)
 /* 00001F34 00001F74  3B A4 00 00 */	addi r29, r4, 0x0
 /* 00001F38 00001F78  83 C3 00 2C */	lwz r30, 0x2c(r3)
-/* 00001F3C 00001F7C  48 00 00 01 */	bl ftCo_GetParasolStatus
+/* 00001F3C 00001F7C  48 00 00 01 */	bl ftGetParasolStatus
 /* 00001F40 00001F80  2C 03 FF FF */	cmpwi r3, -0x1
 /* 00001F44 00001F84  40 82 00 14 */	bne .L_00001F58
 /* 00001F48 00001F88  38 7F 00 00 */	addi r3, r31, 0x0
@@ -2486,7 +2486,7 @@
 /* 00002060 000020A0  4E 80 00 20 */	blr
 .endfn ftCommon_8007E83C
 
-.fn ftCo_GetParasolStatus, global
+.fn ftGetParasolStatus, global
 /* 00002064 000020A4  7C 08 02 A6 */	mflr r0
 /* 00002068 000020A8  90 01 00 04 */	stw r0, 0x4(r1)
 /* 0000206C 000020AC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -2563,7 +2563,7 @@
 /* 00002154 00002194  38 21 00 18 */	addi r1, r1, 0x18
 /* 00002158 00002198  7C 08 03 A6 */	mtlr r0
 /* 0000215C 0000219C  4E 80 00 20 */	blr
-.endfn ftCo_GetParasolStatus
+.endfn ftGetParasolStatus
 
 .fn ftCommon_8007EA90, global
 /* 00002160 000021A0  7C 08 02 A6 */	mflr r0
@@ -4631,13 +4631,13 @@
 .endobj gap_07_803C0E8F_data
 
 .obj "@939", local
-	.rel ftCo_GetParasolStatus, .L_000020EC
-	.rel ftCo_GetParasolStatus, .L_000020DC
-	.rel ftCo_GetParasolStatus, .L_000020E4
-	.rel ftCo_GetParasolStatus, .L_000020BC
-	.rel ftCo_GetParasolStatus, .L_000020C4
-	.rel ftCo_GetParasolStatus, .L_000020CC
-	.rel ftCo_GetParasolStatus, .L_000020D4
+	.rel ftGetParasolStatus, .L_000020EC
+	.rel ftGetParasolStatus, .L_000020DC
+	.rel ftGetParasolStatus, .L_000020E4
+	.rel ftGetParasolStatus, .L_000020BC
+	.rel ftGetParasolStatus, .L_000020C4
+	.rel ftGetParasolStatus, .L_000020CC
+	.rel ftGetParasolStatus, .L_000020D4
 .endobj "@939"
 
 .obj gap_07_803C0EAC_data, global

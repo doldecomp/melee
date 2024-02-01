@@ -297,12 +297,7 @@ void ftGw_SpecialN_Loop(HSD_GObj* gobj, float anim_frame)
 
     ftAnim_8006EBA4(gobj);
 
-#ifdef MUST_MATCH
-    /// @todo Repeated assignment
     fp = fp = GET_FIGHTER(gobj);
-#else
-    fp = GET_FIGHTER(gobj);
-#endif
 
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[2] = 0;
@@ -323,11 +318,7 @@ void ftGw_SpecialAirN_Loop(HSD_GObj* gobj, float anim_frame)
                               anim_frame - 1.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 
-#ifdef MUST_MATCH
     fp = fp = GET_FIGHTER(gobj);
-#else
-    fp = GET_FIGHTER(gobj);
-#endif
 
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[2] = 0;

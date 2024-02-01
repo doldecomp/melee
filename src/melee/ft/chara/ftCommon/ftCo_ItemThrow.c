@@ -371,7 +371,7 @@ void ftCo_80095744(ftCo_GObj* gobj, int* arg1)
     u8 _[4] = { 0 };
     ftCo_Fighter* fp = gobj->user_data;
     vec.x = vec.y = vec.z = 0;
-    if (ftCo_GetParasolStatus(gobj) != -1) {
+    if (ftGetParasolStatus(gobj) != -1) {
         if (fp->motion_id == ftCo_MS_ItemParasolFallSpecial) {
             ftCo_800968C8(gobj);
         } else {

@@ -49,13 +49,6 @@
 #include <baselib/spline.h>
 #include <baselib/wobj.h>
 
-#ifdef MUST_MATCH
-#include "dolphin/mtx/vec.h"
-#include "melee/ft/ftlib.h"
-#include "melee/gr/grdisplay.h"
-#include "melee/lb/lb_00F9.h"
-#endif
-
 /* 1BFFA8 */ static void Ground_801BFFA8(void);
 /* 1BFFAC */ static void Ground_801BFFAC(bool);
 /* 1C0A70 */ static bool Ground_801C0A70(Vec3* pos);
@@ -497,10 +490,7 @@ static bool Ground_801C0A70(Vec3* pos)
         };
         enum_t player_slot;
         size_t nstages = sizeof(enabled_stages) / sizeof(enabled_stages[0]);
-/// @todo Fix _ stack
-#ifdef MUST_MATCH
         u32 _[5];
-#endif
         size_t i;
         InternalStageId stage_id = stage_info.internal_stage_id;
         for (i = 0; i < nstages; i++) {
@@ -672,9 +662,7 @@ HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
     f32 phi_f0;
     Ground* gp;
     int i;
-#ifdef MUST_MATCH
     u32 _;
-#endif
     HSD_Joint sp18;
     temp_r30 = GObj_Create(3, 5, 0);
     if (temp_r30 == NULL) {
@@ -734,9 +722,7 @@ HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
 
 static void Ground_801C1CD0(HSD_GObj* gobj)
 {
-#ifdef MUST_MATCH
     u32 _[2];
-#endif
     HSD_JObj* jobj = gobj->hsd_obj;
     Ground* gp = gobj->user_data;
     HSD_JObjAnimAll(jobj);
@@ -1148,9 +1134,7 @@ bool Ground_801C2D24(enum_t arg0, Vec3* arg1)
 {
     Vec3 sp20;
     Vec3 sp14;
-#ifdef MUST_MATCH
     u32 _;
-#endif
     if (arg0 == 8) {
         Ground_801C2D24(4, arg1);
         Ground_801C2D24(5, &sp20);
@@ -1235,9 +1219,7 @@ void Ground_801C2FE0(HSD_GObj* arg0)
 bool Ground_801C3128(s32 arg0, void (*arg1)(s16))
 {
     /// @todo Unused variable; is this an argument?
-#ifdef MUST_MATCH
     StageData* stage_data;
-#endif
     bool result;
     mpLib_8004D17C();
     result = false;

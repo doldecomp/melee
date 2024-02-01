@@ -13,12 +13,12 @@
 
 #include <placeholder.h>
 #include <baselib/aobj.h>
-#include <baselib/hsd_3915.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/hsd_3915.h>
 #include <baselib/jobj.h>
 #include <baselib/psappsrt.h>
 
@@ -190,7 +190,7 @@ void grLib_801C9A70(enum_t arg0, Vec3* v)
         break;
     default:
         HSD_ASSERT(290, 0);
-#ifndef MUST_MATCH
+#ifdef BUGFIX
         // Asserts 0 but the compiler doesn't know that.
         return;
 #endif
