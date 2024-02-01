@@ -12,18 +12,188 @@
 #include <placeholder.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjplink.h>
+#include <baselib/mtx.h>
+#include <baselib/random.h>
 
-Thing_803F9628 ifStatus_803F9628;
-s8 ifStatus_804D6D60;
+typedef struct FlagsX {
+    u32 b80 : 1;
+    u32 b40 : 1;
+    u32 b20 : 1;
+    u32 b10 : 1;
+    u32 b8 : 1;
+    u32 b4 : 2;
+    u32 b1 : 1;
+    u8 x;
+    u16 y;
+} FlagsX;
+
+typedef struct UnkX {
+    u8 filler1[0x10];
+    FlagsX x10_flags;
+    u8 filler2[0x34 - 0x14];
+    Vec4 x34_vec; // or float[4] instead of Vec4
+    Vec4 x44_vec;
+    HSD_JObj* x54_jobj[4];
+} UnkX; // HudIndex
+
+/* 2F491C */ static void ifStatus_PercentOnDeathAnimationThink(UnkX* value, s32, s32);
+/* 3F9628 */ static Thing_803F9628 ifStatus_803F9628;
+/* 4D6D60 */ static s8 ifStatus_804D6D60;
+/* 4D6D61 */ static s8 ifStatus_804D6D61;
 
 HudIndex* ifStatus_802F4910(void)
 {
     return &ifStatus_HudInfo;
 }
 
-void ifStatus_802F491C(void)
+// "jobj.h" @ lbl_804D57B0
+// "jobj" @ lbl_804D57B8
+#define ASSERT_NOT_NULL(value, line)                                          \
+    if (value == NULL) {                                                      \
+        __assert("jobj.h", line, "jobj");                                     \
+    }
+
+static inline float foo(float a, float b)
 {
-    NOT_IMPLEMENTED;
+    float result;
+    if (ifStatus_804D6D61 != 0) {
+        result = -a - b;
+        ifStatus_804D6D61 = 0;
+    } else {
+        result = a + b;
+        ifStatus_804D6D61 = 1;
+    }
+    return result;
+}
+
+static inline void
+jobj_flagCheckSetMtxDirtySub(HSD_JObj* jobj) // jobj @ r30 when inlined
+{
+    //@12c
+    if (!(jobj->flags & 0x02000000) && jobj) {
+        //@140
+        ASSERT_NOT_NULL(jobj, 0x234);
+        //@154
+        if ((!(jobj->flags & 0x800000) && (jobj->flags & 0x40)) == 0) {
+            //@178
+            HSD_JObjSetMtxDirtySub(jobj);
+        }
+    }
+}
+
+inline void jobj_translate_x(HSD_JObj* jobj, float dx);
+inline void jobj_translate_y(HSD_JObj* jobj, float dy);
+
+inline void jobj_unk_x(UnkX* value, s32 i)
+{
+    HSD_JObj* jobj_r30 = value->x54_jobj[i];
+    //@c8
+    ASSERT_NOT_NULL(jobj_r30, 993);
+    //@e0
+    if (fabsf_bitwise(jobj_r30->translate.x) < 100.0f)
+    { // 100.0f @ lbl_804DDA6C
+        //@100
+        jobj_r30 = value->x54_jobj[i];
+        //@108
+        jobj_translate_x(jobj_r30, (&value->x34_vec.x)[i]);
+        //@12c
+        jobj_flagCheckSetMtxDirtySub(jobj_r30);
+    }
+}
+
+inline void jobj_unk_y(UnkX* value, s32 i)
+{
+    HSD_JObj* jobj_r30 = value->x54_jobj[i];
+    //@184
+    ASSERT_NOT_NULL(jobj_r30, 1006);
+    //@19c
+    if (jobj_r30->translate.y > -100.0f) { // -100.0f @ lbl_804DDA8C
+        //@1a8
+        jobj_r30 = value->x54_jobj[i];
+        //@1b0
+        jobj_translate_y(jobj_r30, (&value->x44_vec.x)[i]);
+
+        //@1d4
+        jobj_flagCheckSetMtxDirtySub(jobj_r30);
+        //@228
+        (&value->x44_vec.x)[i] -= 0.2028f; // gravity that makes percent tokens
+                                           // fall down? @ lbl_804DDA90
+    }
+}
+
+inline void jobj_translate_x(HSD_JObj* jobj, float dx)
+{
+    //@108
+    ASSERT_NOT_NULL(jobj, 1102);
+    //@120
+    jobj->translate.x += dx;
+}
+
+inline void jobj_translate_y(HSD_JObj* jobj, float dy)
+{
+    //@1b0
+    ASSERT_NOT_NULL(jobj, 1114);
+    //@1c8
+    jobj->translate.y += dy;
+}
+
+inline void jobj_unk(UnkX* value)
+{
+    //@b0
+    s32 i;
+    for (i = 0; i < 4; i++) // i@r31
+    {
+        jobj_unk_x(value, i);
+        jobj_unk_y(value, i);
+        //@234 loop increment
+    }
+}
+
+inline void* jobj_get(HSD_JObj* jobj_r30, UnkX* value, s32 i)
+{
+    return value->x54_jobj[i];
+}
+
+void ifStatus_PercentOnDeathAnimationThink(UnkX* value, s32 arg1, s32 arg2)
+{
+    s32 i;
+
+    if (value->x10_flags.b40) {
+        for (i = 0; i < 4; i++) // i@r28
+        {
+            (&value->x34_vec.x)[i] =
+                foo(0.6083f * HSD_Randf(), 0.3041f); // var_f0;
+            (&value->x44_vec.x)[i] = 0.811f * HSD_Randf() + 1.2165f;
+        }
+        value->x10_flags.b40 = 0;
+        return;
+    }
+
+    for (i = 0; i < 4; i++) // i@r31
+    {
+        HSD_JObj* jobj_r30 = value->x54_jobj[i];
+        ASSERT_NOT_NULL(jobj_r30, 993);
+        if (fabsf_bitwise(jobj_r30->translate.x) < 100.0f)
+        { // 100.0f @ lbl_804DDA6C
+            float f = (&value->x34_vec.x)[i];
+            jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
+            ASSERT_NOT_NULL(jobj_r30, 1102);
+            jobj_r30->translate.x += f;
+            jobj_flagCheckSetMtxDirtySub(jobj_r30);
+        }
+        jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
+        ASSERT_NOT_NULL(jobj_r30, 1006);
+
+        if (jobj_r30->translate.y > -100.0f) {
+            float f = (&value->x44_vec.x)[i];
+            jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
+            jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
+            ASSERT_NOT_NULL(jobj_r30, 1114);
+            jobj_r30->translate.y += f;
+            jobj_flagCheckSetMtxDirtySub(jobj_r30);
+            (&value->x44_vec.x)[i] -= 0.2028f; // @ lbl_804DDA90
+        }
+    }
 }
 
 void ifStatus_802F4B84(void)
@@ -41,7 +211,7 @@ void ifStatus_802F5B48(void)
     NOT_IMPLEMENTED;
 }
 
-inline HudValue* getPlayerByHUDParent(HSD_GObj* parent)
+inline IfDamageState* getPlayerByHUDParent(HSD_GObj* parent)
 {
     s32 var_ctr;
     for (var_ctr = 0; var_ctr < 6; var_ctr++) {
@@ -130,7 +300,7 @@ void ifStatus_802F66A4(void)
 
 void ifStatus_802F6788(s32 player_idx)
 {
-    HudValue* player_hud;
+    IfDamageState* player_hud;
     s8 p_idx = (u8) player_idx;
     player_hud = &ifStatus_HudInfo.players[p_idx & 0xFF];
     if (player_hud->HUD_parent_entity != NULL) {
@@ -147,7 +317,7 @@ void ifStatus_802F6788(s32 player_idx)
 void ifStatus_802F6804(void)
 {
     s32 i;
-    HudValue* v;
+    IfDamageState* v;
 
     i = 0;
     do {
@@ -187,16 +357,16 @@ void ifStatus_802F68F0(void)
 
 void ifStatus_802F6948(s32 player_idx)
 {
-    HudValue* hud_player;
+    IfDamageState* hud_player;
     Placeholder_8016AE50_ret_val* small_thing;
-    HudFlags* hud_player_flags;
+    IfDamageFlags* hud_player_flags;
 
     small_thing = gm_8016AE50();
     hud_player = &ifStatus_HudInfo.players[player_idx];
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
-        hud_player_flags->unk40 = 1;
+        hud_player_flags->randomize_velocity = 1;
         if (small_thing->flags.unk1 != 0) {
             hud_player->unk9 = 1;
         }
@@ -205,8 +375,8 @@ void ifStatus_802F6948(s32 player_idx)
 
 void ifStatus_802F69C0(s32 player_idx, s32 arg1)
 {
-    HudValue* hud_player;
-    HudFlags* hud_player_flags;
+    IfDamageState* hud_player;
+    IfDamageFlags* hud_player_flags;
     Placeholder_8016AE38_ret_val* big_thing;
     Placeholder_8016AE50_ret_val* small_thing;
 
@@ -222,7 +392,7 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
-        hud_player_flags->unk40 = 1;
+        hud_player_flags->randomize_velocity = 1;
         if (small_thing->flags.unk1 != 0) {
             hud_player->unk9 = 1;
         }
@@ -245,10 +415,10 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
 
 void ifStatus_802F6AF8(s32 player_idx)
 {
-    HudValue* hud_player;
+    IfDamageState* hud_player;
     Placeholder_8016AE38_ret_val* big_thing;
     Placeholder_8016AE50_ret_val* small_thing;
-    HudFlags* hud_player_flags;
+    IfDamageFlags* hud_player_flags;
 
     big_thing = gm_8016AE38();
     big_thing->unkD = player_idx;
@@ -257,7 +427,7 @@ void ifStatus_802F6AF8(s32 player_idx)
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
-        hud_player_flags->unk40 = 1;
+        hud_player_flags->randomize_velocity = 1;
         if (small_thing->flags.unk1 != 0) {
             hud_player->unk9 = 1;
         }
@@ -280,8 +450,8 @@ void ifStatus_802F6AF8(s32 player_idx)
 
 void ifStatus_802F6C04(s32 player_idx)
 {
-    HudValue* hud_player;
-    HudFlags* hud_player_flags;
+    IfDamageState* hud_player;
+    IfDamageFlags* hud_player_flags;
     Placeholder_8016AE38_ret_val* big_thing;
     Placeholder_8016AE50_ret_val* small_thing;
 
@@ -292,7 +462,7 @@ void ifStatus_802F6C04(s32 player_idx)
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
-        hud_player_flags->unk40 = 1;
+        hud_player_flags->randomize_velocity = 1;
         if (small_thing->flags.unk1 != 0) {
             hud_player->unk9 = 1;
         }
@@ -315,10 +485,10 @@ void ifStatus_802F6C04(s32 player_idx)
 
 void ifStatus_802F6D10(s32 player_idx)
 {
-    HudValue* hud_player;
+    IfDamageState* hud_player;
     Placeholder_8016AE38_ret_val* big_thing;
     Placeholder_8016AE50_ret_val* small_thing;
-    HudFlags* hud_player_flags;
+    IfDamageFlags* hud_player_flags;
 
     big_thing = gm_8016AE38();
     big_thing->unkD = player_idx;
@@ -327,7 +497,7 @@ void ifStatus_802F6D10(s32 player_idx)
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
-        hud_player_flags->unk40 = 1;
+        hud_player_flags->randomize_velocity = 1;
         if (small_thing->flags.unk1 != 0) {
             hud_player->unk9 = 1;
         }
@@ -355,7 +525,7 @@ void ifStatus_802F6E1C(int slot)
 
 void ifStatus_802F6E3C(s32 player_num)
 {
-    HudValue* player;
+    IfDamageState* player;
 
     player = &ifStatus_HudInfo.players[player_num];
     if (player->HUD_parent_entity != NULL) {
@@ -387,9 +557,9 @@ void ifStatus_802F7220(void)
 {
     s32 i;
     for (i = 0; i < 8; i++) {
-        if (ifStatus_803F9628.things[i].unk0 != NULL) {
-            HSD_GObjPLink_80390228(ifStatus_803F9628.things[i].unk0);
-            ifStatus_803F9628.things[i].unk0 = NULL;
+        if (ifStatus_803F9628.things[i].x0 != NULL) {
+            HSD_GObjPLink_80390228(ifStatus_803F9628.things[i].x0);
+            ifStatus_803F9628.things[i].x0 = NULL;
         }
     }
 }
