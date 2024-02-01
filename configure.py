@@ -1379,7 +1379,7 @@ config.libs = [
             Object(NonMatching, "sysdolphin/baselib/devcom.c"),
             Object(NonMatching, "sysdolphin/baselib/gobjproc.c"),
             Object(Matching, "sysdolphin/baselib/gobjplink.c"),
-            Object(NonMatching, "sysdolphin/baselib/gobjgxlink.c"),
+            Object(Matching, "sysdolphin/baselib/gobjgxlink.c"),
             Object(Matching, "sysdolphin/baselib/gobjobject.c"),
             Object(Matching, "sysdolphin/baselib/gobjuserdata.c"),
             Object(NonMatching, "sysdolphin/baselib/gobj.c"),
