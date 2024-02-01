@@ -427,11 +427,7 @@ int setupNormalCamera(HSD_CObj* cobj)
 
 int setupTopHalfCamera(HSD_CObj* cobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
     int unused[3];
-#endif
-
     GXProjectionType projection_type;
     Mtx p;
 
@@ -472,10 +468,7 @@ int setupTopHalfCamera(HSD_CObj* cobj)
     GXSetViewport(left, top, width, height, 0.0f, 1.0f);
 
     {
-        /// @todo Unused stack.
-#ifdef MUST_MATCH
-        int unused[1];
-#endif
+        int unused_2[1];
 
         switch (cobj->projection_type) {
         case PROJ_PERSPECTIVE:
@@ -932,6 +925,7 @@ MtxPtr HSD_CObjGetInvViewingMtxPtr(HSD_CObj* cobj)
         HSD_CObjSetFlags(cobj, 0x80000000);
     }
     return HSD_CObjGetInvViewingMtxPtrDirect(cobj);
+#endif
 }
 #undef SOLUTION
 
