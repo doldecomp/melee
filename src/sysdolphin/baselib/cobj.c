@@ -254,7 +254,7 @@ static bool setupOffscreenCamera(HSD_CObj* cobj)
     return true;
 }
 
-int setupNormalCamera(HSD_CObj* cobj)
+static bool setupNormalCamera(HSD_CObj* cobj)
 {
     int unused[4];
 
@@ -303,10 +303,10 @@ int setupNormalCamera(HSD_CObj* cobj)
     projection_type = makeProjectionMtx(cobj, p);
     GXSetProjection(p, projection_type);
 
-    return 1;
+    return true;
 }
 
-int setupTopHalfCamera(HSD_CObj* cobj)
+static bool setupTopHalfCamera(HSD_CObj* cobj)
 {
     int unused[3];
     GXProjectionType projection_type;
@@ -355,8 +355,7 @@ int setupTopHalfCamera(HSD_CObj* cobj)
         case PROJ_PERSPECTIVE:
             projection_type = GX_PERSPECTIVE;
             t = cobj->near *
-                tanf(0.01745329238474369 *
-                     (0.5 * cobj->projection_param.perspective.fov));
+                tanf(DegToRad(0.5 * cobj->projection_param.perspective.fov));
             w = t * cobj->projection_param.perspective.aspect;
             b = t * -(2.0f * h_scale - 1.0f);
             C_MTXFrustum(p, t, b, -w, w, cobj->near, cobj->far);
@@ -386,10 +385,10 @@ int setupTopHalfCamera(HSD_CObj* cobj)
 
     GXSetProjection(p, projection_type);
 
-    return 1;
+    return true;
 }
 
-int setupBottomHalfCamera(HSD_CObj* cobj)
+static bool setupBottomHalfCamera(HSD_CObj* cobj)
 {
     int unused[4];
 
@@ -441,8 +440,7 @@ int setupBottomHalfCamera(HSD_CObj* cobj)
         case PROJ_PERSPECTIVE:
             projection_type = GX_PERSPECTIVE;
             b = cobj->near *
-                tanf(0.01745329238474369 *
-                     (0.5 * cobj->projection_param.perspective.fov));
+                tanf(DegToRad(0.5 * cobj->projection_param.perspective.fov));
             w = b * cobj->projection_param.perspective.aspect;
             t = b * (2.0f * h_scale + 1.0f);
             C_MTXFrustum(p, t, -b, -w, w, cobj->near, cobj->far);
@@ -474,7 +472,7 @@ int setupBottomHalfCamera(HSD_CObj* cobj)
 
     GXSetProjection(p, projection_type);
 
-    return 1;
+    return true;
 }
 
 inline void HSD_WObjClearFlags(HSD_WObj* wobj, u32 flags)
@@ -507,6 +505,11 @@ static void setNewProjection(HSD_CObj* cobj, Mtx44 mtx)
 {
     GXSetProjection(mtx, makeProjectionMtx(cobj, mtx));
 }
+
+static bool setupNormalCamera(HSD_CObj* cobj);
+static bool setupTopHalfCamera(HSD_CObj* cobj);
+static bool setupBottomHalfCamera(HSD_CObj* cobj);
+static bool setupOffscreenCamera(HSD_CObj* cobj);
 
 bool HSD_CObjSetCurrent(HSD_CObj* cobj)
 {
