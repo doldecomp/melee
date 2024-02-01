@@ -569,13 +569,17 @@ def printResults(
 
 
 def main(args):
-    # Parse a map file or map.csv for function names
-    if args.noNames:
+    # Parse a .map file or map.csv for function names
+    try:
+        if args.noNames:
+            mapNames = {}
+        elif args.mapFile:
+            mapNames = parseMapFile(args.mapFile)
+        else:
+            mapNames = parseMapCsv()
+    except Exception as err:
+        print(f"Unable to check for external function names; {err}")
         mapNames = {}
-    elif args.mapFile:
-        mapNames = parseMapFile(args.mapFile)
-    else:
-        mapNames = parseMapCsv()
 
     # Parse the assembly file for ASM functions and literals
     (

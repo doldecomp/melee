@@ -25,9 +25,8 @@
 #include "lb/lbrefract.h"
 
 #include <common_structs.h>
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
-#include <baselib/gobj.h>
 #include <melee/it/items/itfoxlaser.h>
 
 void ftFx_SpecialN_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
@@ -195,12 +194,8 @@ void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
     f64 launchAngle;
     s32 ftKind;
 
-#ifdef MUST_MATCH
     /// @todo Seems fake, probably one or more missing @c inline functions.
     fp = fp = GET_FIGHTER(gobj);
-#else
-    fp = GET_FIGHTER(gobj);
-#endif
 
     da = getFtSpecialAttrs(fp);
 
@@ -386,20 +381,13 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
         FighterKind ftKind;
 
         /// @todo Fake assignment.
-#ifdef MUST_MATCH
         fp = fp = GET_FIGHTER(gobj);
-#else
-        fp = GET_FIGHTER(gobj);
-#endif
 
         da = getFtSpecialAttrs(fp);
 
-/// @todo Unused assignment.
-#ifdef MUST_MATCH
         {
             Fighter* _ = GET_FIGHTER(gobj);
         }
-#endif
 
         if (fp->cmd_vars[2] != 0) {
             fp->cmd_vars[2] = 0;
@@ -535,20 +523,14 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
         Fighter* fp;
 
         /// @todo Fake assignment.
-#ifdef MUST_MATCH
         fp = fp = GET_FIGHTER(gobj);
-#else
-        fp = GET_FIGHTER(gobj);
-#endif
 
         da = getFtSpecialAttrs(fp);
 
-/// @todo Unused assignment.
-#ifdef MUST_MATCH
+        /// @todo Unused assignment.
         {
             Fighter* _ = GET_FIGHTER(gobj);
         }
-#endif
 
         if ((u32) fp->cmd_vars[2] != 0U) {
             f64 launchAngle;

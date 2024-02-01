@@ -39,8 +39,11 @@ lazy_static! {
                 .expect("Failed to parse ldscript glob.")
         )
         .add(
-            Glob::new(&format!("{}/config/**/{{symbols,splits}}.txt", *ROOT_STR))
-                .expect("Failed to parse dtk config glob.")
+            Glob::new(&format!(
+                "{}/config/**/{{symbols,splits}}.txt",
+                *ROOT_STR
+            ))
+            .expect("Failed to parse dtk config glob.")
         )
         .build()
         .expect("Failed to create SRC_FILES glob.");
@@ -87,6 +90,7 @@ fn is_identifier(c: char) -> bool {
     matches!(c, 'a'..='z' | 'A'..='Z' | '0'..='9' | '_')
 }
 
+/// TODO: Rewrite this using simple regex or nom
 pub fn replace_symbols<K, V, S>(
     path: impl AsRef<Path>,
     replacements: &HashMap<K, V, S>,

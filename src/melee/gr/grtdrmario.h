@@ -1,6 +1,4 @@
-#ifndef _grtdrmario_h_
-#define _grtdrmario_h_
-
-#include <sysdolphin/baselib/gobj.h>
+#ifndef GALE01_221EF4
+#define GALE01_221EF4
 
 #endif

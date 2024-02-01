@@ -7,8 +7,6 @@
 
 #include "ft/types.h"
 
-#include <stdbool.h>
-
 /* 14A250 */ void ftGw_Init_OnDeath(HSD_GObj* gobj);
 /* 14A37C */ void ftGw_Init_OnLoad(HSD_GObj* gobj);
 /* 14A4CC */ void ftGw_Init_OnDamage(HSD_GObj* gobj);

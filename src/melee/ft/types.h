@@ -464,7 +464,7 @@ struct ftCommonData {
     /* +6BC */ UNK_T x6BC;
     /* +6C0 */ UNK_T x6C0;
     /* +6C4 */ UNK_T x6C4;
-    /* +6C8 */ UNK_T x6C8;
+    /* +6C8 */ int x6C8;
     /* +6CC */ int x6CC;
     /* +6D0 */ float x6D0;
     /* +6D4 */ UNK_T x6D4;
@@ -551,9 +551,9 @@ typedef struct _DObjList {
 typedef struct _ftData {
     /*  +0 */ struct {
         u8 x0_fill[0x8C];
-        f32 x8C;
+        float x8C;
         u8 x90_fill[0xFC - 0x90];
-        f32 xFC;
+        float xFC;
         u8 x100_fill[0x16C - 0x100];
         s32 x16C_idx;
     }* x0;
@@ -689,7 +689,7 @@ typedef struct ftCo_DatAttrs {
     /* +160 fp+290 */ int weight_dependent_throw_speed_flags;
 } ftCo_DatAttrs;
 
-typedef struct _FighterBone {
+struct FighterBone {
     /* +0 */ HSD_JObj* joint;
     /* +4 */ HSD_JObj* x4_jobj2; // used for interpolation
     /* +5:0 */ u8 flags_b0 : 1;
@@ -701,7 +701,7 @@ typedef struct _FighterBone {
     /* +5:6 */ u8 flags_b6 : 1;
     /* +5:7 */ u8 flags_b7 : 1;
     /* +6 */ u8 filler_x6[7];
-} FighterBone;
+};
 
 typedef struct _CameraBox {
     u32 data_filler[2];
@@ -710,7 +710,7 @@ typedef struct _CameraBox {
     u8 xD_fill[0x10 - 0xD];
     Vec3 x10; // might be Vec2?
     Vec3 x1C;
-    f32 x28;
+    float x28;
     Vec2 x2C;
     Vec3 x34;
     Vec2 x40;
@@ -743,7 +743,7 @@ typedef struct SurfaceData {
     Vec3 normal;
 } SurfaceData;
 
-typedef struct _CollData {
+struct CollData {
     /* fp+6F0 */ HSD_GObj* x0_gobj;
     /* fp+6F4 */ Vec3 x4_vec;
     /* fp+700 */ Vec3 x10_vec;
@@ -758,10 +758,10 @@ typedef struct _CollData {
     /* fp+734 */ int ledge_id_unk1;
     /* fp+738 */ u32 x48;
     /* fp+73C */ u32 x4C;
-    /* fp+740 */ f32 x50;
-    /* fp+744 */ f32 x54;
-    /* fp+748 */ f32 x58;
-    /* fp+74C */ f32 x5C;
+    /* fp+740 */ float x50;
+    /* fp+744 */ float x54;
+    /* fp+748 */ float x58;
+    /* fp+74C */ float x5C;
     /* fp+750 */ s32 x60;
     /* fp+754 */ ftECB x64_ecb;
     /* fp+774 */ ftECB x84_ecb;
@@ -776,18 +776,18 @@ typedef struct _CollData {
             /* fp+7FC */ HSD_JObj* x10C_joint[6];
         };
         /* fp+7F8 */ struct {
-            /* fp+7F8 */ f32 x108_f32;
-            /* fp+7FC */ f32 x10C_f32;
-            /* fp+800 */ f32 x110_f32;
-            /* fp+804 */ f32 x114_f32;
-            /* fp+808 */ f32 x118_f32;
-            /* fp+80C */ f32 x11C_f32;
-            /* fp+810 */ f32 x120_f32;
+            /* fp+7F8 */ float x108_f32;
+            /* fp+7FC */ float x10C_f32;
+            /* fp+800 */ float x110_f32;
+            /* fp+804 */ float x114_f32;
+            /* fp+808 */ float x118_f32;
+            /* fp+80C */ float x11C_f32;
+            /* fp+810 */ float x120_f32;
         };
     };
-    /* fp+814 */ f32 x124;
-    /* fp+818 */ f32 x128;
-    /* fp+81C */ f32 x12C;
+    /* fp+814 */ float x124;
+    /* fp+818 */ float x128;
+    /* fp+81C */ float x12C;
     /* fp+820 */ u32 x130_flags;
     /* fp+824 */ s32 env_flags;
     /* fp+828 */ s32 x138;
@@ -798,18 +798,18 @@ typedef struct _CollData {
     /* fp+864 */ SurfaceData left_wall;
     /* fp+878 */ SurfaceData ceiling;
     /* fp+88C */ s32 x19C;
-} CollData;
+};
 
 /* fp+2114 */ typedef struct _SmashAttr {
     /* fp+2114 */ SmashState state;
     /// number of frames fp has charged for
-    /* fp+2118 */ f32 x2118_frames;
+    /* fp+2118 */ float x2118_frames;
     /// frame that charge begins/ends
-    /* fp+211C */ f32 x211C_holdFrame;
+    /* fp+211C */ float x211C_holdFrame;
     /// damage multiplier
-    /* fp+2120 */ f32 x2120_damageMul;
+    /* fp+2120 */ float x2120_damageMul;
     /// speed multiplier?
-    /* fp+2124 */ f32 x2124_frameSpeedMul;
+    /* fp+2124 */ float x2124_frameSpeedMul;
     /* fp+2128 */ s32 x2128;
     /* fp+212C */ s8 x212C;
     /* fp+212D */ s8 x212D;
@@ -821,7 +821,7 @@ typedef struct _CollData {
     /* fp+2135 */ s8 x2135;
     /* fp+2136 */ s8 x2136;
     /* fp+2137 */ s8 x2137;
-    /* fp+2138 */ f32 x2138_smashSinceHitbox;
+    /* fp+2138 */ float x2138_smashSinceHitbox;
 } SmashAttr;
 
 typedef struct itPickup {
@@ -928,8 +928,8 @@ struct ftSubactionList {
 };
 
 struct ftCmdScript {
-    f32 x3E4_scriptEventTimer;           // 0x3E4
-    f32 x3E8_scriptFrameTimer;           // 0x3E8
+    float x3E4_scriptEventTimer;         // 0x3E4
+    float x3E8_scriptFrameTimer;         // 0x3E8
     ftSubactionList* x3EC_scriptCurrent; // 0x3EC
     s32 x3F0_scriptLoopNum;              // 0x3F0
     void* x3F4_scriptReturn;             // 0x3F4
@@ -1461,8 +1461,8 @@ struct Fighter {
     /* fp+2102 */ s8 x2102;
     /* fp+2103 */ s8 x2103;
     /* fp+2104 */ s32 x2104;
-    /* fp+2108 */ s32 x2108;
-    /* fp+210C */ u8 x210C_walljumpInputTimer;
+    /* fp+2108 */ int capture_timer;
+    /* fp+210C */ u8 wall_jump_input_timer;
     /* fp+210C */ u8 filler_x210C[3];
     /* fp+2110 */ float x2110_walljumpWallSide;
     /* fp+2114 */ SmashAttr smash_attrs;
@@ -1776,6 +1776,30 @@ struct gmScriptEventDefault {
 struct ftData_UnkCountStruct {
     void* data;
     int count;
+};
+
+struct UnkFloat6_Camera {
+    Vec3 x0;
+    Vec3 xC;
+};
+
+struct FtCmdState {
+    float x0;      // timer
+    float x4;      // frame
+    char* x8;      // script
+    int xC;        // stack_depth
+    void*(x10[5]); // stack
+};
+
+typedef struct ftData_UnkModelStruct {
+    Fighter_ModelEvent model_events[FTKIND_MAX];
+    unk_t (*getter[FTKIND_MAX])(HSD_GObj*);
+} ftData_UnkModelStruct;
+
+struct ftData_80085FD4_ret {
+    /* +0 */ UNK_T x0;
+    /* +4 */ UNK_T x4;
+    /* +8 */ UNK_T x8;
 };
 
 #endif

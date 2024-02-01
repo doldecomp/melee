@@ -31,11 +31,11 @@
 #include <common_structs.h>
 #include <trigf.h>
 
-void ftSs_Init_80128944(HSD_GObj* gobj, f32 farg1, f32 farg2)
+void ftSs_Init_80128944(HSD_GObj* gobj, float farg1, float farg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* da = fp->dat_attrs;
-    f32 float_result = ftSs_Init_80128AC8(gobj, farg1, farg2);
+    float float_result = ftSs_Init_80128AC8(gobj, farg1, farg2);
 
     u8 _[8];
 
@@ -56,7 +56,7 @@ void ftSs_Init_80128944(HSD_GObj* gobj, f32 farg1, f32 farg2)
     }
 }
 
-bool ftSs_Init_80128A1C(HSD_GObj* gobj, unk_t arg1, f32 farg1)
+bool ftSs_Init_80128A1C(HSD_GObj* gobj, unk_t arg1, float farg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     int i;
@@ -73,11 +73,11 @@ bool ftSs_Init_80128A1C(HSD_GObj* gobj, unk_t arg1, f32 farg1)
     return false;
 }
 
-f32 ftSs_Init_80128AC8(HSD_GObj* gobj, f32 farg1, f32 farg2)
+float ftSs_Init_80128AC8(HSD_GObj* gobj, float farg1, float farg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* da = getFtSpecialAttrs(fp);
-    f32 value = (fp->cur_pos.x - farg1) / farg2;
+    float value = (fp->cur_pos.x - farg1) / farg2;
     if (value >= 1.0f) {
         value = 1.0f;
     }
@@ -87,7 +87,7 @@ f32 ftSs_Init_80128AC8(HSD_GObj* gobj, f32 farg1, f32 farg2)
     return (-da->x4 * value) + 1.5707963705062866f;
 }
 
-inline void ftSamus_80128B1C_inner(HSD_GObj* gobj, f32 angle)
+inline void ftSamus_80128B1C_inner(HSD_GObj* gobj, float angle)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     struct ftCo_DatAttrs* ftAttr = &fp->co_attrs;
@@ -99,7 +99,7 @@ inline void ftSamus_80128B1C_inner(HSD_GObj* gobj, f32 angle)
     ftCommon_8007D440(fp, ftAttr->air_drift_max * samus_attr->x10);
 }
 
-void ftSs_Init_80128B1C(HSD_GObj* gobj, f32 angle, f32 arg9, f32 argA)
+void ftSs_Init_80128B1C(HSD_GObj* gobj, float angle, float arg9, float argA)
 {
     Fighter* fp;
     Fighter* fighter2;
@@ -191,7 +191,7 @@ void ftSs_SpecialLw_Phys(HSD_GObj* gobj)
     struct ftCo_DatAttrs* ftAttr = &fp->co_attrs;
 
     if (fp->cmd_vars[0]) {
-        f32 samus_attr_xC = samus_attr->xC;
+        float samus_attr_xC = samus_attr->xC;
         ftCommon_8007CADC(fp, 0.0f, ftAttr->walk_init_vel * samus_attr_xC,
                           ftAttr->walk_max_vel * samus_attr_xC);
         ftCommon_8007CB74(gobj);

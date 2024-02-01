@@ -72,13 +72,13 @@ void ftMr_SpecialHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = (ftMario_DatAttrs*) fp->dat_attrs;
-    f32 lstick_x = abs(fp->input.lstick.x);
+    float lstick_x = abs(fp->input.lstick.x);
     if (fp->cmd_vars[0] == 0 && lstick_x > sa->specialhi.momentum_stick_range)
     {
-        f32 deg = sa->specialhi.angle_diff *
-                  ((lstick_x - sa->specialhi.momentum_stick_range) /
-                   (1.0 - sa->specialhi.momentum_stick_range));
-        f32 rad =
+        float deg = sa->specialhi.angle_diff *
+                    ((lstick_x - sa->specialhi.momentum_stick_range) /
+                     (1.0 - sa->specialhi.momentum_stick_range));
+        float rad =
             fp->input.lstick.x > 0 ? -(deg_to_rad * deg) : +(deg_to_rad * deg);
         if (abs(rad) > abs(fp->lstick_angle)) {
             fp->lstick_angle = rad;

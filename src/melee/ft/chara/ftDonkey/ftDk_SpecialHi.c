@@ -101,7 +101,7 @@ void ftDk_SpecialAirHi_Phys(HSD_GObj* gobj)
     u8 _[8];
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
-    f32 grav_mul;
+    float grav_mul;
     if (fp->cmd_vars[0]) {
         grav_mul = 1;
     } else {

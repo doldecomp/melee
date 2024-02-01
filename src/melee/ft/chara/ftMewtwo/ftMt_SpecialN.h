@@ -1,15 +1,14 @@
 /// @file
 /// Neutral Special - Shadow Ball (SpecialN/SpecialAirN)
-#ifndef MELEE_FT_CHARA_FTMEWTWO_FTMEWTWO_SPECIALN_H
-#define MELEE_FT_CHARA_FTMEWTWO_FTMEWTWO_SPECIALN_H
+#ifndef GALE01_146CCC
+#define GALE01_146CCC
 
 #include <platform.h>
-#include "ft/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
-s32 ftMt_SpecialN_GetChargeLevel(HSD_GObj* gobj, s32* chargeLevel,
-                                 s32* chargeCycles);
+/* 146CCC */ s32 ftMt_SpecialN_GetChargeLevel(HSD_GObj* gobj, s32* chargeLevel,
+                                              s32* chargeCycles);
 /* 146D24 */ bool ftMt_SpecialN_CheckShadowBallRemove(HSD_GObj* gobj);
 /* 146D74 */ bool ftMt_SpecialN_CheckShadowBallCancel(HSD_GObj* gobj);
 /* 146DC8 */ void ftMt_SpecialN_SetNULL(HSD_GObj* gobj);

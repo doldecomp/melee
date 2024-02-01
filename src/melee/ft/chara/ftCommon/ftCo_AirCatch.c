@@ -1,7 +1,6 @@
 #include <platform.h>
 #include "ftSamus/forward.h"
 #include "it/forward.h"
-#include <baselib/forward.h>
 
 #include "ftCo_AirCatch.h"
 
@@ -17,7 +16,7 @@
 #include "ftCommon/types.h"
 #include "ftLink/types.h"
 #include "ftSamus/types.h"
-#include "it/item.h"
+#include "it/inlines.h"
 #include "it/items/itlinkhookshot.h"
 #include "it/items/itsamusgrapple.h"
 #include "lb/lb_00B0.h"

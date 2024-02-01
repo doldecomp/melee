@@ -11,16 +11,13 @@
 #include "lb/lbrefract.h"
 #include "pl/player.h"
 
-#include <m2c_macros.h>
 #include <placeholder.h>
 #include <baselib/class.h>
-#include <baselib/dobj.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/mobj.h>
 #include <baselib/state.h>
 #include <baselib/tev.h>
-#include <baselib/texp.h>
 #include <baselib/tobj.h>
 
 /* literal */ extern char* ftCo_804D3C00;

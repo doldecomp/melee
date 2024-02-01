@@ -6,7 +6,7 @@
 
 #include <dolphin/mtx/types.h>
 
-struct ftSeak_FighterVars {
+struct ftSeak_FighterVars { // x222C (fp->fv.sk._)
     /* 0x222C */ int x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ HSD_GObj* x2234;
@@ -16,18 +16,18 @@ struct ftSeak_FighterVars {
 };
 
 /// @sz{74}
-typedef struct _ftSeakAttributes {
-    f32 x0;
-    f32 x4;
-    f32 x8;
-    f32 xC;
-    f32 x10;
-    f32 x14;
-    f32 x18;
-    f32 x1C;
-    f32 x20;
-    f32 x24;
-    f32 x28;
+typedef struct _ftSeakAttributes { // x2D4 (fp->dat_attrs)
+    float x0;
+    float x4;
+    float x8;
+    float xC;
+    float x10;
+    float x14;
+    float x18;
+    float x1C;
+    float x20;
+    float x24;
+    float x28;
     s32 x2C;
     s32 x30;
     s32 x34;
@@ -41,30 +41,30 @@ typedef struct _ftSeakAttributes {
 } ftSeakAttributes;
 
 typedef struct itChainSegment {
-    f32 x00;
-    f32 x04;
-    f32 x08;
-    f32 x0C;
-    f32 x10;
-    f32 x14;
-    f32 x18;
-    f32 x1C;
-    f32 x20;
-    f32 x24;
-    f32 x28;
-    f32 x2C;
-    f32 x30;
-    f32 x34;
-    f32 x38;
-    f32 x3C;
-    f32 x40;
-    f32 x44;
-    f32 x48;
-    f32 x4C;
-    f32 x50;
+    float x00;
+    float x04;
+    float x08;
+    float x0C;
+    float x10;
+    float x14;
+    float x18;
+    float x1C;
+    float x20;
+    float x24;
+    float x28;
+    float x2C;
+    float x30;
+    float x34;
+    float x38;
+    float x3C;
+    float x40;
+    float x44;
+    float x48;
+    float x4C;
+    float x50;
 } itChainSegment;
 
-union ftSeak_MotionVars {
+union ftSeak_MotionVars { // x2340 (fp->mv.sk._._)
     struct ftSeak_SpecialNVars {
         s32 x0;
         s32 x4;
@@ -85,9 +85,9 @@ union ftSeak_MotionVars {
         s32 x4;
         s32 x8;
         s32 xC;
-        f32 x10;
-        f32 x14;
-        f32 x18;
+        float x10;
+        float x14;
+        float x18;
         s32 x1C;
         s32 x20;
         s32 x24;

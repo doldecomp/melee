@@ -7,11 +7,13 @@
 #include "it/forward.h"
 #include <baselib/forward.h>
 
+#include "lb/types.h"
+
 #include <common_structs.h>
 
 struct ftPeach_FighterVars {
     /* fp+222C */ bool has_float;
-    /* fp+2230 */ f32 x4;
+    /* fp+2230 */ float x4;
     /* fp+2234 */ FtMotionId attacks4_motion_id;
     /* fp+2238 */ HSD_GObj* unk_item_gobj;
     /* fp+223C */ HSD_GObj* parasol_gobj;

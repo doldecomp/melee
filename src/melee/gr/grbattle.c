@@ -1,3 +1,4 @@
+#include <platform.h>
 #include "lb/forward.h"
 
 #include "gr/grbattle.h"
@@ -14,9 +15,8 @@
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx/types.h>
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
-#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>

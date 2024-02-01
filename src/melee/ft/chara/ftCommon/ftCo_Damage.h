@@ -1,29 +1,7 @@
 #ifndef GALE01_08D7F0
 #define GALE01_08D7F0
 
-#include <platform.h>
 #include "ftCommon/forward.h"
-
-#include <placeholder.h>
-
-#ifdef M2CTX
-struct _m2c_stack_ft_8008DCE0 {
-    /* 0x00 */ char pad_0[0x40];
-    /* 0x40 */ f32 sp40;
-    /* 0x44 */ Vec3 sp44;
-    /* 0x50 */ char pad_50[0x78];
-}; /* size = 0xC8 */
-
-struct _m2c_stack_ftCo_8008E5A4 {
-    /* 0x00 */ char pad_0[0xC];
-    /* 0x0C */ f32 spC; /* inferred */
-    /* 0x10 */ char pad_10[4];
-    /* 0x14 */ Vec3 sp14; /* inferred */
-    /* 0x20 */ Vec3 sp20; /* inferred */
-    /* 0x2C */ char pad_2C[0x2C];
-}; /* size = 0x58 */
-
-#endif
 
 /* 08D7F0 */ float ftCo_Damage_CalcAngle(ftCo_Fighter* fp, float kb_applied);
 /* 08D8D8 */ float ftCo_ScaleBy154(float);
@@ -34,7 +12,6 @@ struct _m2c_stack_ftCo_8008E5A4 {
 /* 08DCE0 */ void ftCo_8008DCE0(ftCo_GObj* gobj, int, float facing_dir);
 /* 08E498 */ bool ftCo_Damage_CheckAirMotion(ftCo_Fighter* fp);
 /* 08E4F0 */ void ftCo_Damage_OnEveryHitlag(ftCo_GObj* gobj);
-/* 08E5A4 */ /* static */ void ftCo_8008E5A4(ftCo_Fighter* fp);
 /* 08E714 */ void ftCo_Damage_OnExitHitlag(ftCo_GObj* gobj);
 /* 08E908 */ void ftCo_8008E908(ftCo_GObj* gobj, float);
 /* 08E984 */ bool ftCo_8008E984(ftCo_Fighter* fp);

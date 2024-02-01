@@ -1,12 +1,11 @@
 #ifndef GALE01_1393AC
 #define GALE01_1393AC
 
+#include <platform.h>
 #include "ftZelda/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
-
-#include <stdbool.h>
 
 /* 1392DC */ void ftZd_Init_OnDeath(HSD_GObj* gobj);
 /* 139334 */ void ftZd_Init_OnLoad(HSD_GObj* gobj);

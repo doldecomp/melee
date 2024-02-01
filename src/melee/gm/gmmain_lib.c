@@ -2,6 +2,8 @@
 
 #include "lb/lbtime.h"
 
+/* 15D888 */ static void gmMainLib_8015D888(u32);
+
 GameRules* gmMainLib_8015CC34(void)
 {
     return &gmMainLib_804D3EE0->x1850;
@@ -603,48 +605,6 @@ u32* gmMainLib_8015D970(ssize_t idx)
     return &base[idx];
 }
 
-void gmMainLib_8015D9F4(u32 arg0);
-void gmMainLib_8015DA40(u32 arg0);
-
-#ifdef MUST_MATCH
-#pragma push
-asm bool gmMainLib_8015D984(u32 arg0)
-{ // clang-format off
-    nofralloc
-/* 8015D984 0015A564  7C 08 02 A6 */	mflr r0
-/* 8015D988 0015A568  90 01 00 04 */	stw r0, 4(r1)
-/* 8015D98C 0015A56C  94 21 FF D8 */	stwu r1, -0x28(r1)
-/* 8015D990 0015A570  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 8015D994 0015A574  93 C1 00 20 */	stw r30, 0x20(r1)
-/* 8015D998 0015A578  7C 7E 1B 78 */	mr r30, r3
-/* 8015D99C 0015A57C  48 00 00 F5 */	bl gmMainLib_8015DA90
-/* 8015D9A0 0015A580  2C 03 00 00 */	cmpwi r3, 0
-/* 8015D9A4 0015A584  40 82 00 34 */	bne lbl_8015D9D8
-/* 8015D9A8 0015A588  80 6D 88 40 */	lwz r3, gmMainLib_804D3EE0
-/* 8015D9AC 0015A58C  57 C0 10 3A */	slwi r0, r30, 2
-/* 8015D9B0 0015A590  7C 63 02 14 */	add r3, r3, r0
-/* 8015D9B4 0015A594  3B E3 00 6C */	addi r31, r3, 0x6c
-/* 8015D9B8 0015A598  4B EA D6 05 */	bl lbTime_8000AFBC
-/* 8015D9BC 0015A59C  90 7F 00 00 */	stw r3, 0(r31)
-/* 8015D9C0 0015A5A0  7F C3 F3 78 */	mr r3, r30
-/* 8015D9C4 0015A5A4  48 00 00 31 */	bl gmMainLib_8015D9F4
-/* 8015D9C8 0015A5A8  7F C3 F3 78 */	mr r3, r30
-/* 8015D9CC 0015A5AC  48 00 00 75 */	bl gmMainLib_8015DA40
-/* 8015D9D0 0015A5B0  38 60 00 01 */	li r3, 1
-/* 8015D9D4 0015A5B4  48 00 00 08 */	b lbl_8015D9DC
-lbl_8015D9D8:
-/* 8015D9D8 0015A5B8  38 60 00 00 */	li r3, 0
-lbl_8015D9DC:
-/* 8015D9DC 0015A5BC  80 01 00 2C */	lwz r0, 0x2c(r1)
-/* 8015D9E0 0015A5C0  83 E1 00 24 */	lwz r31, 0x24(r1)
-/* 8015D9E4 0015A5C4  83 C1 00 20 */	lwz r30, 0x20(r1)
-/* 8015D9E8 0015A5C8  38 21 00 28 */	addi r1, r1, 0x28
-/* 8015D9EC 0015A5CC  7C 08 03 A6 */	mtlr r0
-/* 8015D9F0 0015A5D0  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-
-#else
 // https://decomp.me/scratch/CJy8X
 // register swap
 bool gmMainLib_8015D984(u32 arg0)
@@ -663,7 +623,6 @@ bool gmMainLib_8015D984(u32 arg0)
 
     return false;
 }
-#endif
 
 void gmMainLib_8015D9F4(u32 arg0)
 {

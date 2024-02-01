@@ -5,8 +5,6 @@
 
 #include <baselib/forward.h>
 
-#include <stdbool.h>
-
 /* 14BDB0 */ void ftGw_Attack11_ItemGreenhouseSetup(HSD_GObj* gobj);
 /* 14BE84 */ void ftGw_Attack11_DecideAction(HSD_GObj* gobj);
 /* 14BF48 */ void ftGw_Attack11_ItemGreenhouseSetFlag(HSD_GObj* gobj);

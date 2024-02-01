@@ -17,7 +17,7 @@ void lb_800145C0(u8);
 void lb_800122C8(HSD_ImageDesc*, int, int, int);
 void lb_80011C18(void);
 void lb_8000F9F8(void);
-HSD_CObj* lb_80013B14(HSD_CObjDesc*);
+HSD_CObj* lb_80013B14(HSD_CameraDescPerspective*);
 void lb_80011AC4(void);
 void lb_8000FD48(HSD_JObj*, unk_t, size_t);
 void lb_80011710(unk_t, unk_t);

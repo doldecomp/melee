@@ -11,7 +11,6 @@
 #include "pl/player.h"
 
 #include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
 
 void ftMh_BackAirplane3_Anim(HSD_GObj* gobj)
 {

@@ -1,11 +1,14 @@
 #ifndef MELEE_LB_FORWARD_H
 #define MELEE_LB_FORWARD_H
 
-typedef struct lb_UnkAnimStruct lb_UnkAnimStruct;
-typedef struct HurtCapsule HurtCapsule;
+typedef struct AbsorbDesc AbsorbDesc;
 typedef struct HitCapsule HitCapsule;
-typedef struct HitVictim HitVictim;
 typedef struct HitResult HitResult;
+typedef struct HitVictim HitVictim;
+typedef struct HurtCapsule HurtCapsule;
+typedef struct lb_UnkAnimStruct lb_UnkAnimStruct;
+typedef struct ReflectDesc ReflectDesc;
+typedef struct ShieldDesc ShieldDesc;
 
 typedef enum Tangibility {
     Vulnerable,

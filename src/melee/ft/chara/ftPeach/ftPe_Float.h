@@ -5,10 +5,6 @@
 #include "ft/forward.h"
 #include <baselib/forward.h>
 
-#include "ft/ft_0877.h"
-
-#include <placeholder.h>
-
 /* 11BA20 */ bool ftPe_Float_CheckContinueInput(Fighter* fp);
 /* 11BA54 */ bool ftPe_8011BA54(HSD_GObj* gobj);
 /* 11BAD8 */ bool ftPe_8011BAD8(HSD_GObj* gobj);

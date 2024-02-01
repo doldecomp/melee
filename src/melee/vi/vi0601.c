@@ -3,7 +3,7 @@
 #include "vi/vi.h"
 
 #include <baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/jobj.h>
 
 void un_8031E6CC(void)
 {
@@ -12,5 +12,5 @@ void un_8031E6CC(void)
 
 void un_8031E6EC(HSD_GObj* gobj)
 {
-    HSD_JObjAnimAll((HSD_JObj*) gobj->hsd_obj);
+    HSD_JObjAnimAll(GET_JOBJ(gobj));
 }

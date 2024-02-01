@@ -54,7 +54,7 @@ inline void startActionHelper(HSD_GObj* gobj)
 
 void ftZd_SpecialN_Enter(HSD_GObj* gobj)
 {
-    f32 temp_f1;
+    float temp_f1;
     Fighter* fp; // r31
 
     u8 _[11];

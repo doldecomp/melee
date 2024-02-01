@@ -1,8 +1,4 @@
-#ifndef _grtkoopa_h_
-#define _grtkoopa_h_
-
-#include "gr/stage.h"
-
-#include <baselib/gobj.h>
+#ifndef GALE01_221648
+#define GALE01_221648
 
 #endif

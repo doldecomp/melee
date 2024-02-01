@@ -18,7 +18,6 @@
 #include "pl/player.h"
 
 #include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
 #include <MetroTRK/intrinsics.h>
 
 void ftMh_BackDisappear_Anim(HSD_GObj* gobj)
@@ -109,8 +108,8 @@ void ftMh_Wait1_1_Phys(HSD_GObj* gobj)
     /// @todo #GET_FIGHTER doesn't fit the stack.
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
-    f32 len;
-    f32 speed;
+    float len;
+    float speed;
     Vec3 sp28_pos;
     Vec3 vel;
 

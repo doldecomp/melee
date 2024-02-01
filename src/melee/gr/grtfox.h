@@ -1,6 +1,4 @@
-#ifndef _grtfox_h_
-#define _grtfox_h_
-
-#include <sysdolphin/baselib/gobj.h>
+#ifndef GALE01_220B80
+#define GALE01_220B80
 
 #endif

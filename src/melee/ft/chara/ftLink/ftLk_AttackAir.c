@@ -1,5 +1,6 @@
 #include <platform.h>
 #include "ftCommon/forward.h"
+#include "lb/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 

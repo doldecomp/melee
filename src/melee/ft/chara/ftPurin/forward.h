@@ -5,38 +5,38 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
-static MotionFlags const ftPr_MF_Special ATTRIBUTE_USED =
+static MotionFlags const ftPr_MF_Special =
     Ft_MF_SkipModel | Ft_MF_SkipItemVis | Ft_MF_UnkUpdatePhys |
     Ft_MF_FreezeState;
 
-static MotionFlags const ftPr_MF_SpecialHi ATTRIBUTE_USED =
+static MotionFlags const ftPr_MF_SpecialHi =
     ftPr_MF_Special | Ft_MF_KeepFastFall | Ft_MF_KeepGfx;
 
-static MotionFlags const ftPr_MF_SpecialLw ATTRIBUTE_USED =
+static MotionFlags const ftPr_MF_SpecialLw =
     ftPr_MF_Special | Ft_MF_KeepColAnimHitStatus;
 
-static MotionFlags const ftPr_MF_SpecialN ATTRIBUTE_USED =
+static MotionFlags const ftPr_MF_SpecialN =
     ftPr_MF_Special | Ft_MF_KeepFastFall | Ft_MF_KeepSfx;
 
-static MotionFlags const ftPr_MF_SpecialS ATTRIBUTE_USED =
+static MotionFlags const ftPr_MF_SpecialS =
     ftPr_MF_Special | Ft_MF_KeepGfx | Ft_MF_KeepSfx;
 
-static MotionFlags const ftPr_MF_SpecialAirHi ATTRIBUTE_USED =
+static MotionFlags const ftPr_MF_SpecialAirHi =
     ftPr_MF_SpecialHi | Ft_MF_SkipParasol;
 
-static MotionFlags const ftPr_MF_SpecialAirLw ATTRIBUTE_USED =
+static MotionFlags const ftPr_MF_SpecialAirLw =
     ftPr_MF_SpecialLw | Ft_MF_SkipParasol;
 
-static MotionFlags const ftPr_MF_SpecialAirN ATTRIBUTE_USED =
+static MotionFlags const ftPr_MF_SpecialAirN =
     ftPr_MF_SpecialN | Ft_MF_SkipParasol;
 
-static MotionFlags const ftPr_MF_SpecialAirS ATTRIBUTE_USED =
+static MotionFlags const ftPr_MF_SpecialAirS =
     ftPr_MF_SpecialS | Ft_MF_SkipParasol;
 
-static MotionFlags const ftPr_MF_SpecialNCharged ATTRIBUTE_USED =
+static MotionFlags const ftPr_MF_SpecialNCharged =
     ftPr_MF_SpecialN | Ft_MF_Unk19;
 
-static MotionFlags const ftPr_SpecialAirNCharged ATTRIBUTE_USED =
+static MotionFlags const ftPr_SpecialAirNCharged =
     ftPr_MF_SpecialNCharged | Ft_MF_SkipParasol;
 
 typedef enum ftPurin_MotionState {

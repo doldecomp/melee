@@ -14,6 +14,8 @@
 #include "if/ifstatus.h"
 #include "lb/lbarchive.h"
 #include "pl/pl_0371.h"
+#include "pl/plattack.h"
+#include "pl/plstale.h"
 #include "pl/types.h"
 
 #include <dolphin/mtx/types.h>
@@ -73,7 +75,7 @@ ftMapping ftMapping_list[FTKIND_MAX] = { //////ftMapping_list
 StaticPlayer player_slots[PL_SLOT_MAX];
 HSD_ObjAllocData Player_804587E0;
 
-extern int pl_804D6470;
+void* pl_804D6470;
 
 /// @todo This can be used in more places when functions are fixed to use
 ///       correct structs.
@@ -1544,7 +1546,7 @@ void Player_SetFlagsBit3(s32 slot, u8 bit3)
     player->flags.b3 = bit3;
 }
 
-u8 Player_GetFlagsBit4(s32 slot)
+int Player_GetFlagsBit4(int slot)
 {
     StaticPlayer* player;
     u8 bit4;
@@ -1664,26 +1666,17 @@ u8 Player_GetFlagsAEBit1(s32 slot)
     return bit1;
 }
 
+#ifdef BUGFIX
+void Player_SetFlagsAEBit1(int slot, u8 bit1)
+#else
 u8 Player_SetFlagsAEBit1(int slot, u8 bit1)
+#endif
 {
+    StaticPlayer* player;
     Player_CheckSlot(slot);
-
-/// @todo Unused assignment.
-#ifdef MUST_MATCH
-    {
-        StaticPlayer* player = &player_slots[slot];
-    }
-#endif
-
-    player_slots[slot].flagsAE.b1 = bit1;
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wreturn-type"
-#endif
+    player = &player_slots[slot];
+    player->flagsAE.b1 = bit1;
 }
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
 
 u8 Player_GetUnk4C(s32 slot)
 {
@@ -1737,14 +1730,14 @@ s32* Player_GetTotalAttackCountPtr(s32 slot)
     return attack_count;
 }
 
-s32* Player_GetStaleMoveTableIndexPtr(s32 slot)
+StaleMoveTable* Player_GetStaleMoveTableIndexPtr(s32 slot)
 {
     StaticPlayer* player;
-    s32* stale_move_table_index;
+    StaleMoveTable* stale_move_table;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    stale_move_table_index = &player->stale_move_table_current_write_index;
-    return stale_move_table_index;
+    stale_move_table = &player->stale_moves;
+    return stale_move_table;
 }
 
 s32* Player_GetUnk6A8Ptr(s32 slot)
@@ -1757,14 +1750,14 @@ s32* Player_GetUnk6A8Ptr(s32 slot)
     return unk6A8;
 }
 
-s32* Player_GetStaleMoveTableIndexPtr2(s32 slot)
+StaleMoveTable* Player_GetStaleMoveTableIndexPtr2(s32 slot)
 {
     StaticPlayer* player;
-    s32* stale_move_table_index;
+    StaleMoveTable* stale_move_table;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    stale_move_table_index = &player->stale_move_table_current_write_index;
-    return stale_move_table_index;
+    stale_move_table = &player->stale_moves;
+    return stale_move_table;
 }
 
 s32 Player_80036394(s32 slot)
@@ -2029,8 +2022,8 @@ void Player_80036D24(s32 slot)
 void Player_InitAllPlayers(void)
 {
     int i;
-    pl_8003715C();
-    pl_80037590();
+    plStale_8003715C();
+    plAttack_80037590();
 
     for (i = 0; i < PL_SLOT_MAX; i++) {
         Player_InitOrResetPlayer(i);
@@ -2046,10 +2039,10 @@ void Player_80036DA4(void)
 
 void Player_80036DD8(void)
 {
-    int* sp8;
+    void** sp8;
 
-    lbArchive_80016C64(str_PdPmdat_start_of_data, &sp8, str_plLoadCommonData,
-                       0);
+    lbArchive_80016C64(str_PdPmdat_start_of_data, (void**) &sp8,
+                       str_plLoadCommonData, 0);
     pl_804D6470 = *sp8;
 }
 
@@ -2085,11 +2078,7 @@ s32 Player_80036EA0(s32 slot)
 void Player_80036F34(s32 slot, s32 arg1)
 {
     struct plAllocInfo2 some_struct;
-
-#ifdef MUST_MATCH
     u8 _;
-#endif
-
     StaticPlayer* player;
 
     Player_CheckSlot(slot);
@@ -2116,11 +2105,7 @@ void Player_80036F34(s32 slot, s32 arg1)
 void Player_80037054(s32 slot, s32 arg1)
 {
     struct plAllocInfo2 some_struct;
-
-#ifdef MUST_MATCH
     u8 _;
-#endif
-
     StaticPlayer* player;
 
     Player_CheckSlot(slot);

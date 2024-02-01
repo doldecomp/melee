@@ -1,3 +1,4 @@
+#include <platform.h>
 #include "ftMasterHand/forward.h"
 
 #include "ftMh_Walk.h"
@@ -16,7 +17,6 @@
 #include "pl/player.h"
 
 #include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
 #include <MetroTRK/intrinsics.h>
 
 void ftMh_WalkShoot_Anim(HSD_GObj* gobj)

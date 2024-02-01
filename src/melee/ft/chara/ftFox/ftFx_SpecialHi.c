@@ -22,7 +22,6 @@
 
 #include <common_structs.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
 
 #define FTFOX_SPECIALHI_COLL_FLAG                                             \
     Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_UpdateCmd | Ft_MF_SkipColAnim | \
@@ -106,7 +105,7 @@ static void ftFox_SpecialHi_RotateModel(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_8007592C(fp, ftParts_8007500C(fp, FtPart_XRotN),
-                     2 * (f32) M_PI - fp->mv.fx.SpecialHi.rotateModel);
+                     2 * (float) M_PI - fp->mv.fx.SpecialHi.rotateModel);
 }
 
 void ftFx_SpecialHiHold_Anim(HSD_GObj* gobj)
@@ -337,7 +336,7 @@ static inline bool ftFox_SpecialHi_IsBound(HSD_GObj* gobj)
 /// @todo Rework this entire match.
 void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
-    f32 facingDir;
+    float facingDir;
 
     u8 _[4];
 
@@ -366,7 +365,7 @@ void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
      */
     if (ftCliffCommon_80081298(gobj) == false) {
         s32 envFlags = collData->env_flags;
-        f32 var;
+        float var;
         do {
             if (envFlags & 24576) {
                 var =
@@ -436,9 +435,9 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
     Fighter* fp;
     CollData* collData;
     ftFox_DatAttrs* tempAttrs;
-    f32 temp_stick;
-    f32 stick_x;
-    f32 stick_y;
+    float temp_stick;
+    float stick_x;
+    float stick_y;
 
     u8 _[4];
 
@@ -502,9 +501,9 @@ void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
     ftCo_DatAttrs* ca;
     Fighter* fp = GET_FIGHTER(gobj);
     ftFox_DatAttrs* tempAttrs;
-    f32 stick_x;
-    f32 stick_y;
-    f32 temp_stick;
+    float stick_x;
+    float stick_y;
+    float temp_stick;
 
     u8 _[4];
 

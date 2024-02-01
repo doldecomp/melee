@@ -21,7 +21,6 @@
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
 
 static void setCallbacks(Fighter* fp)
 {

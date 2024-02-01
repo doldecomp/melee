@@ -149,4 +149,32 @@ struct HurtCapsule {
     bool is_grabbable; // 0x48
 };
 
+struct ReflectDesc {
+    u32 x0_bone_id;
+    s32 x4_max_damage;
+    Vec3 x8_offset;
+    f32 x14_size;
+    f32 x18_damage_mul;
+    f32 x1C_speed_mul;
+
+    /// @remarks Setting this to 1 causes the reflector to skip ownership
+    /// change
+    u8 x20_behavior;
+};
+
+struct AbsorbDesc {
+    /*  +0 */ int x0_bone_id;
+    /*  +4 */ Vec3 x4_offset;
+    /* +10 */ float x10_size;
+};
+
+struct ShieldDesc {
+    int bone;
+    Vec3 pos;
+    f32 radius;
+    f32 dmg_mul;
+    f32 vel_mul;
+    u8 flags : 8;
+};
+
 #endif

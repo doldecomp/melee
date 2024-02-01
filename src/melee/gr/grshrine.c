@@ -1,6 +1,5 @@
 #include <platform.h>
 #include "lb/forward.h"
-#include <baselib/forward.h>
 
 #include "gr/grshrine.h"
 
@@ -14,7 +13,7 @@
 
 #include <math.h>
 #include <dolphin/mtx/types.h>
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>

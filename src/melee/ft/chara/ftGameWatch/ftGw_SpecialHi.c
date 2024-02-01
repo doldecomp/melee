@@ -191,11 +191,11 @@ void ftGw_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* gawAttrs = fp->dat_attrs;
-    f32 stick_x;
-    f32 temp;
-    f32 angle;
-    f32 facing_dir;
-    f32 stick_range_threshold;
+    float stick_x;
+    float temp;
+    float angle;
+    float facing_dir;
+    float stick_range_threshold;
 
     if ((u32) fp->cmd_vars[0] == 0) {
         stick_x = stickGetDir(fp->input.lstick.x, 0.0f);

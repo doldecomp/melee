@@ -1,7 +1,6 @@
 #include <platform.h>
 #include "lb/forward.h"
 #include <dolphin/mtx/forward.h>
-#include <baselib/forward.h>
 
 #include "ftCo_YoshiEgg.h"
 
@@ -25,10 +24,12 @@
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+
+/* 09D7E4 */ static void ftCo_800BBC88(ftCo_GObj* gobj);
+/* 0BBCC0 */ static void ftCo_800BBCC0(ftCo_GObj* gobj);
 
 float const ftCo_804D8B68 = 0;
 float const ftCo_804D8B6C = 1;

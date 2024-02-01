@@ -169,11 +169,16 @@ melee/pl/player.c:
 	.data       start:0x803BCDC0 end:0x803BCE70
 	.bss        start:0x80453080 end:0x80458810
 	.sdata      start:0x804D3940 end:0x804D3948
+	.sbss       start:0x804D6470 end:0x804D6478
 	.sdata2     start:0x804D7F10 end:0x804D7F18
 
 melee/pl/plstale.c:
-	.text       start:0x8003715C end:0x80037B2C
-	.sbss       start:0x804D6470 end:0x804D6488
+	.text       start:0x8003715C end:0x80037590
+	.sbss       start:0x804D6478 end:0x804D6480
+
+melee/pl/plattack.c:
+	.text       start:0x80037590 end:0x80037B2C
+	.sbss       start:0x804D6480 end:0x804D6488
 
 melee/pl/pltrick.c:
 	.text       start:0x80037B2C end:0x800386D8
@@ -332,11 +337,8 @@ melee/ft/ft_0852.c:
 
 melee/ft/ftdata.c:
 	.text       start:0x80085560 end:0x800860C4
-	.data       start:0x803C0FC8 end:0x803C2800
+	.data       start:0x803C0FC8 end:0x803C5460
 	.sdata      start:0x804D3AB8 end:0x804D3AC8
-
-melee/ft/chara/ftCommon/ftCo_Init.c:
-	.data       start:0x803C2800 end:0x803C5460
 
 melee/ft/ftlib.c:
 	.text       start:0x800860C4 end:0x800877F8
@@ -1228,10 +1230,6 @@ melee/ft/chara/ftKoopa/ftKp_Unk1.c:
 	.data       start:0x803CF2A0 end:0x803CF420
 
 melee/ft/chara/ftKoopa/ftKp_SpecialS.c:
-	.text       start:0x8013383C end:0x8013383C
-	.sdata2     start:0x804D9AD0 end:0x804D9AD0
-
-melee/ft/chara/ftKp_SpecialS.c:
 	.text       start:0x8013383C end:0x80136258
 	.sdata2     start:0x804D9AD0 end:0x804D9B08
 
@@ -1563,12 +1561,9 @@ melee/ft/chara/ftMasterHand/ftMh_ThrownMasterHand.c:
 
 melee/ft/chara/ftCrazyHand/ftCh_Init.c:
 	.text       start:0x80155E18 end:0x8015BD20
-	.data       start:0x803D41F8 end:0x803D4878
+	.data       start:0x803D41F8 end:0x803D49C0
 	.sdata      start:0x804D3EC0 end:0x804D3ED0
 	.sdata2     start:0x804DA050 end:0x804DA1F8
-
-melee/ft/chara/ftCrazyHand/ftCh_Unk0.c:
-	.data       start:0x803D4878 end:0x803D49C0
 
 melee/ft/ftbosslib.c:
 	.text       start:0x8015BD20 end:0x8015CC34
@@ -1623,7 +1618,7 @@ melee/gm/gm_1A36.c:
 	.bss        start:0x80479C30 end:0x8049E6C8
 	.sdata      start:0x804D4268 end:0x804D44E0
 	.sbss       start:0x804D6720 end:0x804D6950
-	.sdata2     start:0x804DA9E8 end:0x804DAC80
+	.sdata2     start:0x804DA9E8 end:0x804DAC90
 
 melee/gr/ground.c:
 	.text       start:0x801BFFA8 end:0x801C5B90
@@ -1632,7 +1627,7 @@ melee/gr/ground.c:
 	.bss        start:0x8049E6C8 end:0x8049EE10
 	.sdata      start:0x804D44E0 end:0x804D4530
 	.sbss       start:0x804D6950 end:0x804D6958
-	.sdata2     start:0x804DAC80 end:0x804DAD78
+	.sdata2     start:0x804DAC90 end:0x804DAD78
 
 melee/gr/grdisplay.c:
 	.text       start:0x801C5B90 end:0x801C5FC0
@@ -2327,17 +2322,9 @@ melee/it/itcoll.c:
 	.sdata      start:0x804D5170 end:0x804D5188
 	.sdata2     start:0x804DC6C8 end:0x804DC708
 
-melee/it/it_3F14.c:
-	.data       start:0x803F1418 end:0x803F2310
-
-melee/it/it_3F23.c:
-	.data       start:0x803F2310 end:0x803F3100
-
-melee/it/it_3F31.c:
-	.data       start:0x803F3100 end:0x803F5468
-
 melee/it/it_2725.c:
 	.text       start:0x80272560 end:0x8027CF00
+	.data       start:0x803F1418 end:0x803F5468
 	.bss        start:0x804A0E30 end:0x804A0FD8
 	.sdata      start:0x804D5188 end:0x804D51F0
 	.sbss       start:0x804D6D00 end:0x804D6D48
@@ -3298,15 +3285,13 @@ melee/if/iftime.c:
 	.sdata      start:0x804D5788 end:0x804D57A8
 	.sdata2     start:0x804DDA38 end:0x804DDA48
 
-melee/if/ifstatus_data.c:
+melee/if/ifstatus.c:
+	.text       start:0x802F4910 end:0x802F7288
 	.data       start:0x803F9598 end:0x803F9780
 	.bss        start:0x804A10C8 end:0x804A1340
 	.sdata      start:0x804D57A8 end:0x804D57C8
-	.sbss       start:0x804D6D60 end:0x804D7058
+	.sbss       start:0x804D6D60 end:0x804D6D68
 	.sdata2     start:0x804DDA48 end:0x804DDAB0
-
-melee/if/ifstatus.c:
-	.text       start:0x802F4910 end:0x802F7288
 
 melee/if/if_2F72.c:
 	.text       start:0x802F7288 end:0x802F7EFC
@@ -3358,11 +3343,15 @@ melee/ty/tyfigupon.c:
 	.sdata2     start:0x804DDEA0 end:0x804DDF70
 
 melee/ty/tydisplay.c:
-	.text       start:0x803182D4 end:0x8031CB00
+	.text       start:0x803182D4 end:0x8031C99C
 	.rodata     start:0x803B8988 end:0x803B8B90
-	.data       start:0x803FEFF0 end:0x80400010
+	.data       start:0x803FEFF0 end:0x803FFDA0
 	.sdata      start:0x804D5AA8 end:0x804D5AC8
 	.sdata2     start:0x804DDF70 end:0x804DE040
+
+melee/vi/vi.c:
+	.text       start:0x8031C99C end:0x8031CB00
+	.data       start:0x803FFDA0 end:0x80400010
 
 melee/vi/vi0102.c:
 	.text       start:0x8031CB00 end:0x8031D030
@@ -3458,7 +3447,7 @@ MSL/ansi_fp.c:
 	.sdata2     start:0x804DE160 end:0x804DE188
 
 MSL/buffer_io.c:
-	.text       start:0x8032345C end:0x80323560
+	.text       start:0x8032345C end:0x8032355C
 
 MSL/ctype.c:
 	.text       start:0x80323560 end:0x803235B0
@@ -3698,7 +3687,7 @@ dolphin/gx/GXLight.c:
 dolphin/gx/GXTexture.c:
 	.text       start:0x8033E78C end:0x8033F758
 	.data       start:0x804012B8 end:0x804014E0
-	.sdata      start:0x804D5BC0 end:0x804D5C08
+	.sdata      start:0x804D5BC0 end:0x804D5C00
 	.sdata2     start:0x804DE268 end:0x804DE290
 
 dolphin/gx/GXBump.c:
@@ -3722,11 +3711,16 @@ dolphin/gx/GXDisplayList.c:
 
 dolphin/gx/GXTransform.c:
 	.text       start:0x80341148 end:0x803418FC
-	.sdata2     start:0x804DE2F0 end:0x804DE328
+	.sdata2     start:0x804DE2F0 end:0x804DE310
 
 dolphin/gx/GXPerf.c:
-	.text       start:0x803418FC end:0x80342AA8
+	.text       start:0x803418FC end:0x803421A4
 	.data       start:0x80401528 end:0x80401618
+
+dolphin/mtx/mtx.c:
+	.text       start:0x803421A4 end:0x80342AA8
+	.sdata      start:0x804D5C00 end:0x804D5C08
+	.sdata2     start:0x804DE310 end:0x804DE328
 
 dolphin/mtx/mtxvec.c:
 	.text       start:0x80342AA8 end:0x80342B50
@@ -3846,11 +3840,17 @@ dolphin/pad/PadClamp.c:
 	.sdata      start:0x804D5C30 end:0x804D5C38
 
 dolphin/pad/pad.c:
-	.text       start:0x8034CD88 end:0x803503E4
-	.data       start:0x80402C90 end:0x80402FF0
-	.bss        start:0x804A89A0 end:0x804A8B38
+	.text       start:0x8034CD88 end:0x8034E964
+	.data       start:0x80402C90 end:0x80402D28
+	.bss        start:0x804A89A0 end:0x804A89F0
 	.sdata      start:0x804D5C38 end:0x804D5C60
-	.sbss       start:0x804D73F0 end:0x804D7470
+	.sbss       start:0x804D73F0 end:0x804D7420
+
+dolphin/vi/vi.c:
+	.text       start:0x8034E964 end:0x803503E4
+	.data       start:0x80402D28 end:0x80402FF0
+	.bss        start:0x804A89F0 end:0x804A8B38
+	.sbss       start:0x804D7420 end:0x804D7470
 
 dolphin/ai/ai.c:
 	.text       start:0x803503E4 end:0x80350C8C
@@ -4102,7 +4102,13 @@ sysdolphin/baselib/rumble.c:
 
 sysdolphin/baselib/spline.c:
 	.text       start:0x80378A34 end:0x80379310
-	.sdata2     start:0x804DE620 end:0x804DE6A0
+	.sdata2     start:0x804DE620 end:0x804DE658
+
+sysdolphin/baselib/mtx.c:
+	.text       start:0x80379310 end:0x8037A780
+	.bss        start:0x804C2310 end:0x804C2368
+	.sdata      start:0x804D5E90 end:0x804D5EA0
+	.sdata2     start:0x804DE658 end:0x804DE6A0
 
 sysdolphin/baselib/util.c:
 	.text       start:0x8037A780 end:0x8037A94C
@@ -4235,7 +4241,7 @@ sysdolphin/baselib/synth.c:
 	.sbss       start:0x804D7720 end:0x804D7788
 	.sdata2     start:0x804DE7F0 end:0x804DE840
 
-sysdolphin/baselib/AXDriver.c:
+sysdolphin/baselib/axdriver.c:
 	.text       start:0x8038BB34 end:0x8038EA50
 	.rodata     start:0x803B95F8 end:0x803B9628
 	.data       start:0x80408140 end:0x804083B8
@@ -4279,30 +4285,15 @@ sysdolphin/baselib/gobj.c:
 	.bss        start:0x804CE380 end:0x804CE3F8
 	.sbss       start:0x804D7810 end:0x804D7850
 
-sysdolphin/baselib/baselib_shared_data_003.c:
-	.sbss       start:0x804D7850 end:0x804D7908
-
-sysdolphin/baselib/baselib_unknown_009.c:
-	.text       start:0x80391580 end:0x80391664
-
-sysdolphin/baselib/baselib_unknown_010.c:
-	.text       start:0x80391664 end:0x803921B8
-	.data       start:0x80408630 end:0x80408898
-	.sdata      start:0x804D6070 end:0x804D6080
-	.sdata2     start:0x804DE890 end:0x804DE8E0
-
-sysdolphin/baselib/baselib_unknown_011.c:
-	.text       start:0x803921B8 end:0x8039254C
-	.data       start:0x80408898 end:0x804088B8
-
-sysdolphin/baselib/baselib_unknown_002.c:
+sysdolphin/baselib/hsd_3915.c:
 	extab       start:0x80005520 end:0x800055F8
 	extabindex  start:0x800056C0 end:0x80005804
-	.text       start:0x8039254C end:0x8039F78C
-	.data       start:0x804088B8 end:0x8040C300
+	.text       start:0x80391580 end:0x8039F78C
+	.data       start:0x80408630 end:0x8040C300
 	.bss        start:0x804CE3F8 end:0x804D0FC0
-	.sdata      start:0x804D6080 end:0x804D6380
-	.sdata2     start:0x804DE8E0 end:0x804DEA10
+	.sdata      start:0x804D6070 end:0x804D6380
+	.sbss       start:0x804D7850 end:0x804D7908
+	.sdata2     start:0x804DE890 end:0x804DEA10
 
 sysdolphin/baselib/psdisp.c:
 	extab       start:0x800055F8 end:0x80005618
@@ -4319,6 +4310,7 @@ sysdolphin/baselib/psdisptev.c:
 	extab       start:0x80005618 end:0x80005628
 	extabindex  start:0x80005834 end:0x8000584C
 	.text       start:0x803A3920 end:0x803A4138
+	.sbss       start:0x804D7950 end:0x804D7958
 
 sysdolphin/baselib/psappsrt.c:
 	extab       start:0x80005628 end:0x80005658

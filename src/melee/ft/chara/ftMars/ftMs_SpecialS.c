@@ -15,7 +15,6 @@
 
 #include <common_structs.h>
 #include <baselib/debug.h>
-#include <baselib/gobj.h>
 
 void ftMs_SpecialS_Enter(HSD_GObj* gobj)
 {
@@ -251,7 +250,7 @@ void ftMs_SpecialS_80137940(HSD_GObj* gobj)
     case 351:
         msid = 360;
         break;
-#ifndef MUST_MATCH
+#ifdef BUGFIX
     default:
         HSD_ASSERT(__LINE__, false);
 #endif
@@ -276,7 +275,7 @@ void ftMs_SpecialS_801379D0(HSD_GObj* gobj)
     case 360:
         msid = 351;
         break;
-#ifndef MUST_MATCH
+#ifdef BUGFIX
     default:
         HSD_ASSERT(__LINE__, false);
 #endif
@@ -399,7 +398,7 @@ void ftMs_SpecialS_80137CBC(HSD_GObj* gobj)
     case 353:
         msid = 362;
         break;
-#ifndef MUST_MATCH
+#ifdef BUGFIX
     default:
         HSD_ASSERT(__LINE__, false);
 #endif
@@ -537,7 +536,7 @@ void ftMs_SpecialS_80137FF8(HSD_GObj* gobj)
     case 356:
         msid = 365;
         break;
-#ifndef MUST_MATCH
+#ifdef BUGFIX
     default:
         HSD_ASSERT(__LINE__, false);
 #endif
@@ -567,7 +566,7 @@ void ftMs_SpecialS_8013809C(HSD_GObj* gobj)
     case 365:
         msid = 356;
         break;
-#ifndef MUST_MATCH
+#ifdef BUGFIX
     default:
         HSD_ASSERT(__LINE__, false);
 #endif

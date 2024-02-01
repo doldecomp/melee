@@ -1,7 +1,6 @@
 #ifndef GALE01_110490
 #define GALE01_110490
 
-#include <platform.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -9,7 +8,7 @@
 #include <dolphin/mtx/types.h>
 
 /* 110490 */ void ftSk_SpecialS_80110490(Fighter* fp);
-/* 110610 */ void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, f32 arg8);
+/* 110610 */ void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, float arg8);
 /* 110788 */ void ftSk_SpecialS_80110788(HSD_GObj* gobj);
 /* 11097C */ void ftSk_SpecialS_8011097C(HSD_GObj* gobj);
 /* 110A80 */ void ftSk_SpecialS_ZeroHitboxPositions(HSD_GObj* gobj);
@@ -19,8 +18,8 @@
 /* 110E88 */ void ftSk_SpecialS_CheckAndDestroyChain(HSD_GObj* gobj);
 /* 110EE8 */ void ftSk_SpecialS_80110EE8(HSD_GObj* gobj);
 /* 110F18 */ void ftSk_SpecialS_ChainSomething(HSD_GObj* gobj);
-/* 110F58 */ f32 ftSk_SpecialS_80110F58(HSD_GObj* gobj);
-/* 110F64 */ f32 ftSk_SpecialS_80110F64(HSD_GObj* gobj);
+/* 110F58 */ float ftSk_SpecialS_80110F58(HSD_GObj* gobj);
+/* 110F64 */ float ftSk_SpecialS_80110F64(HSD_GObj* gobj);
 /* 110F70 */ void ftSk_SpecialS_80110F70(HSD_GObj* gobj);
 /* 111038 */ void ftSk_SpecialS_Enter(HSD_GObj* gobj);
 /* 1110E8 */ bool ftSk_SpecialS_CheckInitChain(HSD_GObj* gobj);

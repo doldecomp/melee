@@ -14,6 +14,8 @@
 #include "ftCommon/types.h"
 #include "ftDonkey/types.h"
 
+#include <baselib/gobj.h>
+
 bool ftCo_8009B818(ftCo_GObj* gobj)
 {
     if (ftCo_800C97A8(gobj)) {

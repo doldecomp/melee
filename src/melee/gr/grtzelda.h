@@ -1,6 +1,4 @@
-#ifndef _grtzelda_h_
-#define _grtzelda_h_
-
-#include <sysdolphin/baselib/gobj.h>
+#ifndef GALE01_223E2C
+#define GALE01_223E2C
 
 #endif

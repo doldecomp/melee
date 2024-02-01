@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include "it_266F.h"
 
 #include "it/types.h"
@@ -45,11 +47,7 @@
 #include "items/ittomato.h"
 #include "items/itwstar.h"
 
-#include <stddef.h>
-
-static int const count = 43;
-
-struct sdata_ItemGXLink it_803F1418[count] = {
+struct sdata_ItemGXLink it_803F1418[] = {
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
     it_8026EECC, it_80284E10, it_8026EECC, it_8026EECC, it_8026EECC,
@@ -62,7 +60,7 @@ struct sdata_ItemGXLink it_803F1418[count] = {
 };
 
 // Common items
-struct ItemLogicTable it_803F14C4[count] = {
+struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
     {
         // Capsule
         it_803F5468,

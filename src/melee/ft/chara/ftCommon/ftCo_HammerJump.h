@@ -3,8 +3,6 @@
 
 #include "ftCommon/forward.h"
 
-#include <stdbool.h>
-
 /* 0C5A50 */ bool ftCo_800C5A50(ftCo_GObj* gobj);
 /* 0C5A98 */ void ftCo_800C5A98(ftCo_GObj* gobj);
 /* 0C5B24 */ void ftCo_HammerJump_Anim(ftCo_GObj* gobj);

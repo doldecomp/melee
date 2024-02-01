@@ -32,7 +32,7 @@
 #include <dolphin/os/OSTime.h>
 #include <dolphin/pad/pad.h>
 #include <dolphin/vi/vi.h>
-#include <baselib/baselib_unknown_002.h>
+#include <baselib/hsd_3915.h>
 #include <baselib/controller.h>
 #include <baselib/debug.h>
 #include <baselib/initialize.h>
@@ -125,10 +125,11 @@ static void gmMain_8015FDA4(void)
     }
 }
 
-#ifdef MUST_MATCH
-
-static inline void init_spr_unk(void)
+/// @remarks Might not do anything relevant to a port, but should still
+///          understand its purpose before ignoring it.
+static void init_spr_unk(void)
 {
+#ifdef MWERKS_GEKKO
 #define MTSPR(spr, val)                                                       \
     asm { li r3, val }                                                        \
     asm                                                                       \
@@ -141,24 +142,15 @@ static inline void init_spr_unk(void)
     MTSPR(0x393, 5);
     MTSPR(0x394, 6);
     MTSPR(0x395, 7);
-}
 #else
-
-/// @remarks Might not do anything relevant to a port, but should still
-///          understand its purpose before ignoring it.
-static inline void init_spr_unk(void)
-{
     NOT_IMPLEMENTED;
-}
-
 #endif
+}
 
 int main(void)
 {
-#ifdef MUST_MATCH
     char* unused_format_string = "Data %lx\n";
     u32 _[2];
-#endif
 
     OSInit();
     VIInit();

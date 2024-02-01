@@ -74,7 +74,7 @@ void ftMh_TagGrab_Phys(HSD_GObj* gobj)
 void ftMh_TagGrab_Coll(HSD_GObj* gobj) {}
 
 /// @todo Fix weird forward declaration
-extern const f32 neg1;
+extern const float neg1;
 
 void ftMh_TagSqueeze_Anim(HSD_GObj* gobj)
 {
@@ -184,4 +184,4 @@ void ftMh_TagCancel_Coll(HSD_GObj* gobj)
     }
 }
 
-const f32 neg1 = -1;
+const float neg1 = -1;

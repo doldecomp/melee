@@ -5,8 +5,6 @@
 
 #include <baselib/forward.h>
 
-#include <stdbool.h>
-
 /* 14A848 */ void ftGw_ItemTorchSetup(HSD_GObj* gobj);
 /* 14A904 */ void ftGw_AttackS4_ItemTorchSetFlag(HSD_GObj* gobj);
 /* 14A938 */ void ftGw_AttackS4_ItemTorchOnDamage(HSD_GObj* gobj);

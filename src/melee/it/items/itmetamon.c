@@ -1,7 +1,8 @@
 #include <platform.h>
-#include "it/forward.h"
 
 #include "itmetamon.h"
+
+#include "it/inlines.h"
 
 #include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>

@@ -5,9 +5,8 @@
 
 #include <placeholder.h>
 
-unk_t gm_801A4BB8(void);
-bool gm_801A45E8(s32);
-void gm_801A4510(void);
-/* 1A4310 */ /* static */ UNK_RET gm_801A4310(UNK_PARAMS);
+/* 1A4510 */ void gm_801A4510(void);
+/* 1A45E8 */ bool gm_801A45E8(s32);
+/* 1A4BB8 */ UNK_T gm_801A4BB8(void);
 
 #endif

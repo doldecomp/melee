@@ -8,10 +8,7 @@ typedef struct ProcessInfo {
 
 static ProcessInfo fragment_info[1];
 
-#ifdef MUST_MATCH
-/// unused asm function to trigger peephole off bug
-static asm void _(void) {}
-#endif
+#pragma peephole off
 
 void __unregister_fragment(int fragmentID)
 {

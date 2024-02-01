@@ -1,10 +1,7 @@
 #ifndef GALE01_0E1248
 #define GALE01_0E1248
 
-#include "ft/forward.h"
 #include <baselib/forward.h>
-
-#include <stdbool.h>
 
 /* 0E1248 */ void ftMr_SpecialS_CreateCape(HSD_GObj* gobj);
 /* 0E132C */ void ftMr_SpecialS_Reset(HSD_GObj* gobj);

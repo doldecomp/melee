@@ -1,7 +1,6 @@
 #ifndef GALE01_128944
 #define GALE01_128944
 
-#include <platform.h>
 #include <baselib/forward.h>
 
 /* 128C04 */ void ftSs_SpecialLw_Anim(HSD_GObj* gobj);

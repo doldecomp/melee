@@ -1,5 +1,4 @@
 #include <platform.h>
-#include "ft/forward.h"
 
 #include "ftCo_CargoWalk.h"
 
@@ -10,7 +9,10 @@
 #include "ftCo_Shouldered.h"
 
 #include "ft/ftwalkcommon.h"
+#include "ft/types.h"
 #include "ftDonkey/types.h"
+
+#include <baselib/gobj.h>
 
 /* 09B6C8 */ static void ftCo_8009B6C8(ftCo_GObj* gobj, float anim_start);
 

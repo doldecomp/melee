@@ -267,10 +267,11 @@ void mnDeflicker_8024A6C4(HSD_GObj* arg0)
     mn_804A04F0.x2 = 0;
     mnDeflicker_804D6C3C = 0;
     archive = mn_804D6BB8;
-    lbArchive_80016AF0(
-        archive, &mnDeflicker_804A08B8.joint, "MenMainConDf_Top_joint",
-        &mnDeflicker_804A08B8.animjoint, "MenMainConDf_Top_animjoint",
-        &mnDeflicker_804A08B8.matanim_joint, "MenMainConDf_Top_matanim_joint",
+    lbArchive_LoadSections(
+        archive, (void**) &mnDeflicker_804A08B8.joint,
+        "MenMainConDf_Top_joint", &mnDeflicker_804A08B8.animjoint,
+        "MenMainConDf_Top_animjoint", &mnDeflicker_804A08B8.matanim_joint,
+        "MenMainConDf_Top_matanim_joint",
         &mnDeflicker_804A08B8.shapeanim_joint,
         "MenMainConDf_Top_shapeanim_joint", 0);
     mnDeflicker_8024A4BC(arg0);

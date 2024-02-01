@@ -11,11 +11,6 @@
 
 extern StageInfo stage_info;
 
-typedef struct _UnkStageDatInternal {
-    u8 x0_fill[0x4];
-    u32 unk4; // flags
-} UnkStageDatInternal;
-
 /// @todo Bad split?
 /* static */ extern UnkStage6B0 grDatFiles_803E0848;
 
@@ -48,7 +43,8 @@ void grDatFiles_801C6038(void* arg0, s32 arg1, s32 arg2)
             phi_r28 =
                 lbArchive_800171CC(&sp14, r4, &temp_r3->unk4, "map_head", 0);
         } else {
-            sp14 = lbArchive_80016DBC(r4, &temp_r3->unk4, "map_head", 0);
+            sp14 =
+                lbArchive_80016DBC(r4, (void**) &temp_r3->unk4, "map_head", 0);
             phi_r28 = 0;
         }
         temp_r3->unk8 = 0;
@@ -128,7 +124,7 @@ static UnkArchiveStruct* grDatFiles_801C62B4(void)
     }
     HSD_ASSERT(229, 0);
 
-#ifndef MUST_MATCH
+#ifdef BUGFIX
     // Asserts 0 but the compiler doesn't know that.
     return NULL;
 #endif
@@ -179,10 +175,10 @@ static UnkBgmStruct grDatFiles_803E07E4 = {
 };
 
 UnkStage6B0 grDatFiles_803E0848 = {
-    1,  0x80, {}, 0x1E, 0,  1,  0x8000, 10,
-    0,  0,    1,  1,    1,  {}, 40,     10,
-    50, 100,  10, 10,   10, 10, false,  0,
-    0,  0,    30, 10,   0,  0,  {},     &grDatFiles_803E07E4,
+    1,  0x80, { 0 }, 0x1E, 0,  1,     0x8000, 10,
+    0,  0,    1,     1,    1,  { 0 }, 40,     10,
+    50, 100,  10,    10,   10, 10,    false,  0,
+    0,  0,    30,    10,   0,  0,     { 0 },  &grDatFiles_803E07E4,
     1,
 };
 
