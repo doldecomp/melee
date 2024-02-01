@@ -40,7 +40,7 @@ void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
     float m_val, z_val, left_res, right_res, top_res, bottom_res;
 
     if (cobj == NULL ||
-        enable_color == 0 && enable_alpha == 0 && enable_depth == 0)
+        (enable_color == 0 && enable_alpha == 0 && enable_depth == 0))
     {
         return;
     }
@@ -605,7 +605,7 @@ static inline float fabsf(float x)
     return x;
 }
 
-#define FLT_MIN 2.848094538889218e-306f
+#define FLT_MIN 1.17549435e-38f
 
 static inline int _vec_normalize_check(Vec3* src, Vec3* dst)
 {
@@ -1217,6 +1217,14 @@ HSD_CObj* HSD_CObjAlloc(void)
         default_class ? default_class : &hsdCObj.parent.parent);
     HSD_ASSERT3(1954, HSD_CObj_804D5D48, cobj);
     return cobj;
+}
+
+inline static void CObjResetFlags(HSD_CObj* cobj, u32 flags)
+{
+    if (cobj == NULL) {
+        return;
+    }
+    cobj->flags = (cobj->flags & 0xC0000000) | flags;
 }
 
 static Vec3 HSD_CObj_8040631C = { 0, 1, 0 };
