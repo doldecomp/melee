@@ -10,6 +10,7 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+/* 2D3F6C */ static void it_802D3F6C(Item_GObj* gobj);
 /* 2D3FA0 */ static void it_802D3FA0(Item_GObj* gobj);
 /* 2D4024 */ static bool it_802D4024(Item_GObj* gobj);
 /* 2D4064 */ static void it_802D4064(Item_GObj*);
@@ -22,12 +23,11 @@
 /* 2D41DC */ static bool it_802D41DC(Item_GObj* gobj);
 /* 2D4200 */ static void it_802D4200(Item_GObj* gobj);
 /* 2D429C */ static bool it_802D429C(Item_GObj* gobj);
-/* 2D3F6C */ static void it_802D3F6C(Item_GObj* gobj);
 
 ItemStateTable it_803F80F8[] = {
     { 0, it_802D41DC, it_802D4200, it_802D429C },
     { 1, it_802D4024, it_802D4064, it_802D4068 },
-    { 2, it_802D40FC, it_802D4140, it_802D4160 }
+    { 2, it_802D40FC, it_802D4140, it_802D4160 },
 };
 
 void it_802D3EF8(Item_GObj* gobj)
