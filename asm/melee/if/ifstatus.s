@@ -11,7 +11,7 @@
 /* 00000008 00000048  4E 80 00 20 */	blr
 .endfn ifStatus_802F4910
 
-.fn ifStatus_802F491C, global
+.fn ifStatus_PercentOnDeathAnimationThink, global
 /* 0000000C 0000004C  7C 08 02 A6 */	mflr r0
 /* 00000010 00000050  90 01 00 04 */	stw r0, 0x4(r1)
 /* 00000014 00000054  94 21 FF 90 */	stwu r1, -0x70(r1)
@@ -183,7 +183,7 @@
 /* 00000268 000002A8  38 21 00 70 */	addi r1, r1, 0x70
 /* 0000026C 000002AC  7C 08 03 A6 */	mtlr r0
 /* 00000270 000002B0  4E 80 00 20 */	blr
-.endfn ifStatus_802F491C
+.endfn ifStatus_PercentOnDeathAnimationThink
 
 .fn ifStatus_802F4B84, global
 /* 00000274 000002B4  7C 08 02 A6 */	mflr r0
@@ -460,7 +460,7 @@
 /* 00000630 00000670  54 00 CF FF */	extrwi. r0, r0, 1, 24
 /* 00000634 00000674  41 82 00 10 */	beq .L_00000644
 /* 00000638 00000678  7F E3 FB 78 */	mr r3, r31
-/* 0000063C 0000067C  48 00 00 01 */	bl ifStatus_802F491C
+/* 0000063C 0000067C  48 00 00 01 */	bl ifStatus_PercentOnDeathAnimationThink
 /* 00000640 00000680  48 00 0B D8 */	b .L_00001218
 .L_00000644:
 /* 00000644 00000684  7F C3 F3 78 */	mr r3, r30

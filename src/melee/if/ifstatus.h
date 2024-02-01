@@ -6,7 +6,6 @@
 #include <baselib/forward.h>
 
 /* 2F4910 */ HudIndex* ifStatus_802F4910(void);
-/* 2F491C */ void ifStatus_802F491C(void);
 /* 2F4B84 */ void ifStatus_802F4B84(void);
 /* 2F4EDC */ void ifStatus_802F4EDC(void);
 /* 2F5B48 */ void ifStatus_802F5B48(void);
