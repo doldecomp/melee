@@ -447,9 +447,7 @@ void HSD_RObjResolveRefs(HSD_RObj* robj, HSD_RObjDesc* desc)
             HSD_JObjUnrefThis(robj->u.jobj);
             robj->u.jobj = HSD_IDGetData((u32) desc->u.joint, NULL);
             HSD_ASSERT(883, robj->u.jobj);
-            if (robj->u.jobj != NULL) {
-                iref_INC(robj->u.jobj);
-            }
+            iref_INC(robj->u.jobj);
             break;
         case 0x0:
             HSD_RvalueResolveRefsAll(robj->u.exp.rvalue, desc->u.exp->rvalue);
