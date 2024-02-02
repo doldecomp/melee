@@ -62,6 +62,11 @@ static HSD_ZList* HSD_ZListAlloc(void)
     return list;
 }
 
+static void HSD_ZListFree(HSD_ZList* ptr)
+{
+    HSD_ObjFree(&zlist_alloc_data, ptr);
+}
+
 void HSD_StateInitDirect(int vtxfmt, u32 param_2)
 {
     HSD_ClearVtxDesc();
@@ -309,4 +314,28 @@ void _HSD_ZListDisp(void)
     }
 
     _HSD_ZListClear();
+}
+
+void _HSD_ZListClear(void)
+{
+    HSD_ZList* list = zlist_top;
+
+    while (list != NULL) {
+        HSD_ZList* next = list->next;
+        if (list->vmtx) {
+            HSD_MtxFree(list->vmtx);
+        }
+        HSD_ZListFree(list);
+        list = next;
+    }
+    zlist_top = NULL;
+    zlist_bottom = &zlist_top;
+
+    zlist_texedge_top = NULL;
+    zlist_texedge_bottom = &zlist_texedge_top;
+    zlist_texedge_nb = 0;
+
+    zlist_xlu_top = NULL;
+    zlist_xlu_bottom = &zlist_xlu_top;
+    zlist_xlu_nb = 0;
 }
