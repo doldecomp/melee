@@ -1,13 +1,16 @@
 #include "tobj.h"
 
 #include "aobj.h"
+#include "cobj.h"
 #include "debug.h"
+#include "lobj.h"
 #include "memory.h"
 #include "mtx.h"
 
 #include <__mem.h>
 #include <math.h> // IWYU pragma: keep
 #include <dolphin/mtx.h>
+#include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
 #include <MetroTRK/intrinsics.h>
 
@@ -413,4 +416,88 @@ static void MakeTextureMtx(HSD_TObj* tobj)
     MTXConcat(m, tobj->mtx, tobj->mtx);
 }
 
-// SetupTexMtx https://decomp.me/scratch/iZ3Ye
+void TObjSetupMtx(HSD_TObj* tobj)
+{
+    int i;
+
+    if (tobj_coord(tobj) == TEX_COORD_TOON) {
+        return;
+    }
+
+    if (tobj->flags & TEX_MTX_DIRTY) {
+        HSD_TOBJ_METHOD(tobj)->make_mtx(tobj);
+        tobj->flags &= ~TEX_MTX_DIRTY;
+    }
+
+    switch (tobj_coord(tobj)) {
+    case TEX_COORD_REFLECTION: {
+        Mtx mtx;
+
+        for (i = 0; i < 3; i++) {
+            mtx[i][0] = 0.5F * tobj->mtx[i][0];
+            mtx[i][1] = -0.5F * tobj->mtx[i][1];
+            mtx[i][2] = 0.0F;
+            mtx[i][3] = 0.5F * tobj->mtx[i][0] + 0.5F * tobj->mtx[i][1] +
+                        tobj->mtx[i][2] + tobj->mtx[i][3];
+        }
+        GXLoadTexMtxImm(mtx, tobj->mtxid, GX_MTX3x4);
+    } break;
+
+    case TEX_COORD_HILIGHT: {
+        HSD_LObj* lobj;
+
+        if ((lobj = HSD_LObjGetCurrentByType(LOBJ_INFINITE)) != NULL) {
+            HSD_CObj* cobj;
+            Vec3 ldir, half;
+            Mtx mtx;
+            MtxPtr vmtx;
+
+            cobj = HSD_CObjGetCurrent();
+            HSD_ASSERT(0x2A8, cobj);
+            vmtx = HSD_CObjGetViewingMtxPtrDirect(cobj);
+            HSD_LObjGetLightVector(lobj, &ldir);
+            PSMTXMultVecSR(vmtx, &ldir, &ldir);
+            ldir.z += -1.0F;
+
+            PSVECNormalize(&ldir, &half);
+
+            half.x *= -0.5;
+            half.y *= -0.5;
+            half.z *= -0.5;
+
+            mtx[0][0] = tobj->mtx[0][0] * half.x;
+            mtx[0][1] = tobj->mtx[0][0] * half.y;
+            mtx[0][2] = tobj->mtx[0][0] * half.z;
+            mtx[0][3] = tobj->mtx[0][0] * 0.5F + tobj->mtx[0][3];
+            mtx[1][0] = tobj->mtx[1][0] * half.x;
+            mtx[1][1] = tobj->mtx[1][0] * half.y;
+            mtx[1][2] = tobj->mtx[1][0] * half.z;
+            mtx[1][3] = tobj->mtx[1][0] * 0.5F + tobj->mtx[1][3];
+            mtx[2][0] = mtx[2][1] = mtx[2][2] = 0.0F;
+            mtx[2][3] = 1.0F;
+
+            GXLoadTexMtxImm(mtx, tobj->mtxid, GX_MTX3x4);
+        } else {
+            static Mtx zero = { 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F,
+                                0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F };
+            GXLoadTexMtxImm(zero, tobj->mtxid, GX_MTX3x4);
+        }
+    } break;
+
+    case TEX_COORD_SHADOW: {
+        HSD_CObj* cobj = HSD_CObjGetCurrent();
+        Mtx mtx;
+
+        PSMTXConcat(tobj->mtx, HSD_CObjGetInvViewingMtxPtrDirect(cobj), mtx);
+        GXLoadTexMtxImm(mtx, tobj->mtxid, GX_MTX3x4);
+    } break;
+
+    default:
+        if (tobj_bump(tobj)) {
+            GXLoadTexMtxImm(tobj->mtx, tobj->mtxid, GX_MTX2x4);
+        } else {
+            GXLoadTexMtxImm(tobj->mtx, tobj->mtxid, GX_MTX3x4);
+        }
+        break;
+    }
+}
