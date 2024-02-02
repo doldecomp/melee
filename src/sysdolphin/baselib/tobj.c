@@ -6,6 +6,7 @@
 #include "lobj.h"
 #include "memory.h"
 #include "mtx.h"
+#include "tev.h"
 
 #include <__mem.h>
 #include <math.h> // IWYU pragma: keep
@@ -571,6 +572,73 @@ void HSD_TObjSetupTextureCoordGen(HSD_TObj* tobj)
             setupTextureCoordGenToon(tobj);
         } else {
             setupTextureCoordGen(tobj);
+        }
+    }
+}
+
+static void TObjSetupTevModulateShadow(HSD_TObj* shadow)
+{
+    static HSD_TevDesc tevdesc = {
+        NULL,           TEVCONF_MODE,  (GXTevStageID) (-1), GX_TEXCOORD_NULL,
+        GX_TEXMAP_NULL, GX_COLOR_NULL, GX_TEV_ADD,          GX_CC_ZERO,
+        GX_CC_CPREV,    GX_CC_TEXC,    GX_CC_ZERO,          GX_CS_SCALE_1,
+        GX_TB_ZERO,     GX_ENABLE,     GX_TEVPREV,          GX_TEV_ADD,
+        GX_CA_ZERO,     GX_CA_ZERO,    GX_CA_ZERO,          GX_CA_APREV,
+        GX_CS_SCALE_1,  GX_TB_ZERO,    GX_ENABLE,           GX_TEVPREV,
+        GX_TC_LINEAR,
+    };
+
+    for (; shadow && tobj_coord(shadow) == TEX_COORD_SHADOW;
+         shadow = shadow->next)
+    {
+        tevdesc.stage = HSD_StateAssignTev();
+        tevdesc.coord = shadow->coord;
+        tevdesc.map = shadow->id;
+        HSD_SetupTevStage(&tevdesc);
+    }
+}
+
+static void SetupEmbossBumpTev(HSD_TObj* bump)
+{
+    static HSD_TevDesc tevdesc = {
+        NULL,           TEVCONF_MODE, (GXTevStageID) (-1), GX_TEXCOORD_NULL,
+        GX_TEXMAP_NULL, GX_COLOR0A0,  GX_TEV_SUB,          GX_CC_ZERO,
+        GX_CC_TEXC,     GX_CC_RASC,   GX_CC_CPREV,         GX_CS_SCALE_1,
+        GX_TB_ZERO,     GX_ENABLE,    GX_TEVPREV,          GX_TEV_SUB,
+        GX_CA_ZERO,     GX_CA_ZERO,   GX_CA_ZERO,          GX_CA_APREV,
+        GX_CS_SCALE_1,  GX_TB_ZERO,   GX_ENABLE,           GX_TEVPREV,
+        GX_TC_LINEAR,
+    };
+
+    tevdesc.stage = HSD_StateAssignTev();
+    tevdesc.coord = bump->coord;
+    tevdesc.map = bump->id;
+    tevdesc.u.tevconf.clr_op = GX_TEV_ADD;
+    tevdesc.u.tevconf.alpha_op = GX_TEV_ADD;
+    tevdesc.u.tevconf.clr_clamp = GX_DISABLE;
+    HSD_SetupTevStage(&tevdesc);
+    tevdesc.stage = HSD_StateAssignTev();
+    tevdesc.coord = (GXTexCoordID) (bump->coord + 1);
+    tevdesc.u.tevconf.clr_op = GX_TEV_SUB;
+    tevdesc.u.tevconf.alpha_op = GX_TEV_SUB;
+    tevdesc.u.tevconf.clr_clamp = GX_ENABLE;
+    HSD_SetupTevStage(&tevdesc);
+}
+
+void HSD_TObjSetupVolatileTev(HSD_TObj* tobj, u32 rendermode)
+{
+    for (; tobj; tobj = tobj->next) {
+        if (tobj->id == GX_TEXMAP_NULL) {
+            continue;
+        }
+
+        if (tobj_bump(tobj)) {
+            SetupEmbossBumpTev(tobj);
+        }
+
+        if (tobj_lightmap(tobj) & TEX_LIGHTMAP_SHADOW) {
+            TObjSetupTevModulateShadow(tobj);
+            break;
         }
     }
 }
