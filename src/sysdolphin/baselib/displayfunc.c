@@ -1,14 +1,14 @@
 #include "displayfunc.h"
 
-#include "cobj.h"
-#include "dobj.h"
-#include "lobj.h"
-#include "mobj.h"
-#include "mtx.h"
-#include "objalloc.h"
-#include "pobj.h"
-#include "state.h"
-#include "tev.h"
+#include "baselib/cobj.h"
+#include "baselib/dobj.h"
+#include "baselib/lobj.h"
+#include "baselib/mobj.h"
+#include "baselib/mtx.h"
+#include "baselib/objalloc.h"
+#include "baselib/pobj.h"
+#include "baselib/state.h"
+#include "baselib/tev.h"
 
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXTransform.h>
@@ -32,6 +32,8 @@ typedef struct _HSD_ZList {
 HSD_ObjAllocData zlist_alloc_data;
 
 static void (*sptcl_callback)(s32, s32, s32, HSD_JObj*) = NULL;
+
+static GXColor erase_color = { 0, 0, 0, 0 };
 
 static int zsort_listing = 0;
 static int zsort_sorting = 0;
@@ -361,4 +363,17 @@ void HSD_JObjDisp(HSD_JObj* jobj, MtxPtr vmtx, HSD_TrspMask trsp_mask,
             }
         }
     }
+}
+
+void HSD_JObjSetSPtclCallback(void (*func)(s32, s32, s32, HSD_JObj*))
+{
+    sptcl_callback = func;
+}
+
+void HSD_SetEraseColor(u8 r, u8 g, u8 b, u8 a)
+{
+    erase_color.r = r;
+    erase_color.g = g;
+    erase_color.b = b;
+    erase_color.a = a;
 }

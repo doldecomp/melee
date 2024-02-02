@@ -31,6 +31,8 @@ void _HSD_ZListSort(void);
 void _HSD_ZListDisp(void);
 void _HSD_ZListClear(void);
 
-void HSD_SetEraseColor(int, int, int, int);
+void HSD_JObjSetSPtclCallback(void (*func)(s32, s32, s32, HSD_JObj*));
+
+void HSD_SetEraseColor(u8 r, u8 g, u8 b, u8 a);
 
 #endif
