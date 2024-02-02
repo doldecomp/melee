@@ -1,8 +1,10 @@
 #include "displayfunc.h"
 
+#include "cobj.h"
 #include "dobj.h"
 #include "lobj.h"
 #include "mobj.h"
+#include "mtx.h"
 #include "objalloc.h"
 #include "pobj.h"
 #include "state.h"
@@ -29,9 +31,33 @@ typedef struct _HSD_ZList {
 
 HSD_ObjAllocData zlist_alloc_data;
 
+static int zsort_listing = 0;
+static int zsort_sorting = 0;
+
+static HSD_ZList* zlist_top = NULL;
+static HSD_ZList** zlist_bottom = &zlist_top;
+
+static HSD_ZList* zlist_texedge_top = NULL;
+static HSD_ZList** zlist_texedge_bottom = &zlist_texedge_top;
+static int zlist_texedge_nb = 0;
+
+static HSD_ZList* zlist_xlu_top = NULL;
+static HSD_ZList** zlist_xlu_bottom = &zlist_xlu_top;
+static int zlist_xlu_nb = 0;
+
 void HSD_ZListInitAllocData(void)
 {
     HSD_ObjAllocInit(&zlist_alloc_data, sizeof(HSD_ZList), 4);
+}
+
+static HSD_ZList* HSD_ZListAlloc(void)
+{
+    HSD_ZList* list;
+
+    list = HSD_ObjAlloc(&zlist_alloc_data);
+    memset(&list->vmtx, 0, sizeof(HSD_ZList) - sizeof(Mtx));
+
+    return list;
 }
 
 void HSD_StateInitDirect(int vtxfmt, u32 param_2)
@@ -135,4 +161,64 @@ void HSD_JObjDispSub(HSD_JObj* jobj, MtxPtr vmtx, MtxPtr pmtx,
     }
     HSD_DObjSetCurrent(NULL);
     HSD_JObjSetCurrent(NULL);
+}
+
+void HSD_JObjDispDObj(HSD_JObj* jobj, MtxPtr vmtx, HSD_TrspMask trsp_mask,
+                      u32 rendermode)
+{
+    HSD_CObj* cobj;
+    Mtx mtx;
+
+    if ((jobj->flags & JOBJ_HIDDEN) == 0) {
+        u32 xlu_bits = jobj->flags & (trsp_mask << JOBJ_TRSP_SHIFT);
+        if (xlu_bits != 0) {
+            HSD_JObjSetupMatrix(jobj);
+
+            if (vmtx == NULL) {
+                cobj = HSD_CObjGetCurrent();
+                vmtx = HSD_CObjGetViewingMtxPtrDirect(cobj);
+            }
+
+            HSD_JOBJ_METHOD(jobj)->make_pmtx(jobj, vmtx, mtx);
+            if ((xlu_bits & JOBJ_OPA) != 0) {
+                HSD_JOBJ_METHOD(jobj)->disp(jobj, vmtx, mtx, HSD_TRSP_OPA,
+                                            rendermode);
+            }
+            if (zsort_listing == 0) {
+                if ((xlu_bits & JOBJ_TEXEDGE) != 0) {
+                    HSD_JOBJ_METHOD(jobj)->disp(jobj, vmtx, mtx,
+                                                HSD_TRSP_TEXEDGE, rendermode);
+                }
+                if ((xlu_bits & JOBJ_XLU) != 0) {
+                    HSD_JOBJ_METHOD(jobj)->disp(jobj, vmtx, mtx, HSD_TRSP_XLU,
+                                                rendermode);
+                }
+            } else {
+                if ((xlu_bits & (JOBJ_TEXEDGE | JOBJ_XLU)) != 0) {
+                    HSD_ZList* zlist;
+
+                    zlist = HSD_ZListAlloc();
+                    MTXCopy(mtx, zlist->pmtx);
+                    if (vmtx != NULL) {
+                        zlist->vmtx = (MtxPtr) HSD_MtxAlloc();
+                        MTXCopy(vmtx, zlist->vmtx);
+                    }
+                    zlist->jobj = jobj;
+                    zlist->rendermode = rendermode;
+                    *zlist_bottom = zlist;
+                    zlist_bottom = &zlist->next;
+                    if ((xlu_bits & JOBJ_TEXEDGE) != 0) {
+                        *zlist_texedge_bottom = zlist;
+                        zlist_texedge_bottom = &zlist->sort.texedge;
+                        zlist_texedge_nb += 1;
+                    }
+                    if ((xlu_bits & JOBJ_XLU) != 0) {
+                        *zlist_xlu_bottom = zlist;
+                        zlist_xlu_bottom = &zlist->sort.xlu;
+                        zlist_xlu_nb += 1;
+                    }
+                }
+            }
+        }
+    }
 }

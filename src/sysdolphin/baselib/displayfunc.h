@@ -11,6 +11,10 @@
 #define DOBJ_TRSP_SHIFT 1
 #define JOBJ_TRSP_SHIFT 18
 
+#define JOBJ_OPA 0x40000
+#define JOBJ_XLU 0x80000
+#define JOBJ_TEXEDGE 0x100000
+
 void _HSD_DispForgetMemory(void* low, void* high);
 void HSD_ZListInitAllocData(void);
 
