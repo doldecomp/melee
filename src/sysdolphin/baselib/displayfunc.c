@@ -282,3 +282,31 @@ void _HSD_ZListSort(void)
         zlist_xlu_top = zlist_sort(zlist_xlu_top, zlist_xlu_nb, 0x40);
     }
 }
+
+void _HSD_ZListDisp(void)
+{
+    HSD_ZList* list;
+    MtxPtr vmtx;
+    HSD_CObj* cobj;
+
+    cobj = HSD_CObjGetCurrent();
+    vmtx = HSD_CObjGetViewingMtxPtrDirect(cobj);
+
+    list = zlist_texedge_top;
+    while (list != NULL) {
+        HSD_JOBJ_METHOD(list->jobj)
+            ->disp(list->jobj, (list->vmtx) ? list->vmtx : vmtx, list->pmtx,
+                   HSD_TRSP_TEXEDGE, list->rendermode);
+        list = list->sort.texedge;
+    }
+
+    list = zlist_xlu_top;
+    while (list != NULL) {
+        HSD_JOBJ_METHOD(list->jobj)
+            ->disp(list->jobj, (list->vmtx) ? list->vmtx : vmtx, list->pmtx,
+                   HSD_TRSP_XLU, list->rendermode);
+        list = list->sort.xlu;
+    }
+
+    _HSD_ZListClear();
+}
