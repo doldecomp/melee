@@ -503,6 +503,78 @@ void TObjSetupMtx(HSD_TObj* tobj)
     }
 }
 
+static void setupTextureCoordGen(HSD_TObj* tobj)
+{
+    switch (tobj_coord(tobj)) {
+    case TEX_COORD_SHADOW:
+        GXSetTexCoordGen2(tobj->coord, GX_TG_MTX3x4, GX_TG_POS, GX_PNMTX0,
+                          GX_DISABLE, tobj->mtxid);
+        break;
+    case TEX_COORD_REFLECTION:
+    case TEX_COORD_HILIGHT:
+        GXSetTexCoordGen2(tobj->coord, GX_TG_MTX3x4, GX_TG_NRM, GX_TEXMTX0,
+                          GX_ENABLE, tobj->mtxid);
+        break;
+    default:
+        if (tobj_bump(tobj)) {
+            GXSetTexCoordGen2(tobj->coord, GX_TG_MTX2x4, tobj->src,
+                              tobj->mtxid, GX_FALSE, GX_PTIDENTITY);
+        } else {
+            GXSetTexCoordGen2(tobj->coord, GX_TG_MTX2x4, tobj->src,
+                              GX_IDENTITY, GX_FALSE, tobj->mtxid);
+        }
+    }
+}
+
+static void setupTextureCoordGenBump(HSD_TObj* bump)
+{
+    u32 mask;
+    int i;
+    static GXTexGenType func[] = {
+        GX_TG_BUMP0, GX_TG_BUMP1, GX_TG_BUMP2, GX_TG_BUMP3,
+        GX_TG_BUMP4, GX_TG_BUMP5, GX_TG_BUMP6, GX_TG_BUMP7,
+    };
+
+    mask = HSD_LObjGetLightMaskDiffuse();
+    for (i = 0; i < GX_MAX_LIGHT - 1; i++) {
+        if (mask & (1 << i)) {
+            break;
+        }
+    }
+    if (i >= GX_MAX_LIGHT - 1) {
+        i = 0;
+    }
+
+    GXSetTexCoordGen2((GXTexCoordID) (bump->coord + 1), func[i],
+                      HSD_TexCoordID2TexGenSrc(bump->coord), GX_IDENTITY,
+                      GX_FALSE, GX_PTIDENTITY);
+}
+
+static void setupTextureCoordGenToon(HSD_TObj* toon)
+{
+    GXSetTexCoordGen2(toon->coord, GX_TG_SRTG, toon->src, GX_IDENTITY,
+                      GX_FALSE, GX_PTIDENTITY);
+}
+
+void HSD_TObjSetupTextureCoordGen(HSD_TObj* tobj)
+{
+    for (; tobj != NULL; tobj = tobj->next) {
+        if (tobj->id == GX_TEXMAP_NULL) {
+            continue;
+        }
+
+        if (tobj_bump(tobj)) {
+            setupTextureCoordGen(tobj);
+
+            setupTextureCoordGenBump(tobj);
+        } else if (tobj_coord(tobj) == TEX_COORD_TOON) {
+            setupTextureCoordGenToon(tobj);
+        } else {
+            setupTextureCoordGen(tobj);
+        }
+    }
+}
+
 GXTexGenSrc HSD_TexCoordID2TexGenSrc(GXTexCoordID coord)
 {
     switch (coord) {
