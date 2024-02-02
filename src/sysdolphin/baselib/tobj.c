@@ -9,6 +9,7 @@
 
 #include <__mem.h>
 #include <math.h> // IWYU pragma: keep
+#include <dolphin/gx/GXAttr.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
@@ -500,4 +501,28 @@ void TObjSetupMtx(HSD_TObj* tobj)
         }
         break;
     }
+}
+
+GXTexGenSrc HSD_TexCoordID2TexGenSrc(GXTexCoordID coord)
+{
+    switch (coord) {
+    case GX_TEXCOORD0:
+        return GX_TG_TEXCOORD0;
+    case GX_TEXCOORD1:
+        return GX_TG_TEXCOORD1;
+    case GX_TEXCOORD2:
+        return GX_TG_TEXCOORD2;
+    case GX_TEXCOORD3:
+        return GX_TG_TEXCOORD3;
+    case GX_TEXCOORD4:
+        return GX_TG_TEXCOORD4;
+    case GX_TEXCOORD5:
+        return GX_TG_TEXCOORD5;
+    case GX_TEXCOORD6:
+        return GX_TG_TEXCOORD6;
+    case GX_TEXCOORD7:
+    default:
+        HSD_ASSERT(1738, 0);
+    }
+    return GX_TG_TEXCOORD0;
 }

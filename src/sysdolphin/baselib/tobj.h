@@ -132,19 +132,19 @@ struct HSD_TObj;
 struct HSD_TObj {
     HSD_Obj parent;
     HSD_TObj* next;
-    s32 id;  // GXTexMapID
-    u32 src; // GXTexGenSrc
+    GXTexMapID id;
+    GXTexGenSrc src;
     GXTexMtx mtxid;
     Quaternion rotate;
     Vec3 scale;
     Vec3 translate;
-    u32 wrap_s; // GXTexWrapMode
-    s32 wrap_t; // GXTexWrapMode
+    GXTexWrapMode wrap_s;
+    GXTexWrapMode wrap_t;
     u8 repeat_s;
     u8 repeat_t;
     u32 flags;
     f32 blending;
-    u32 magFilt; // GXTexFilter
+    GXTexFilter magFilt;
     struct _HSD_ImageDesc* imagedesc;
     struct _HSD_Tlut* tlut;
     struct _HSD_TexLODDesc* lod;
@@ -153,25 +153,25 @@ struct HSD_TObj {
     struct _HSD_Tlut** tluttbl;
     u8 tlut_no;
     Mtx mtx;
-    u32 coord; // GXTexCoordID
+    GXTexCoordID coord;
     struct _HSD_TObjTev* tev;
 };
 
 typedef struct _HSD_TObjDesc {
     char* class_name;
     struct _HSD_TObjDesc* next;
-    u32 id;  // GXTexMapID
-    u32 src; // GXTexGenSrc
+    GXTexMapID id;
+    GXTexGenSrc src;
     Vec3 rotate;
     Vec3 scale;
     Vec3 translate;
-    u32 wrap_s; // GXTexWrapMode
-    u32 wrap_t; // GXTexWrapMode
+    GXTexWrapMode wrap_s;
+    GXTexWrapMode wrap_t;
     u8 repeat_s;
     u8 repeat_t;
     u32 blend_flags;
     f32 blending;
-    u32 magFilt; // GXTexFilter
+    GXTexFilter magFilt;
     struct _HSD_ImageDesc* imagedesc;
     struct _HSD_TlutDesc* tlutdesc;
     struct _HSD_TexLODDesc* lod;
@@ -298,7 +298,7 @@ void HSD_TObjSetupVolatileTev(HSD_TObj* tobj, u32 rendermode);
 s32 HSD_TObjAssignResources(HSD_TObj* tobj_top);
 void HSD_TObjSetup(HSD_TObj* tobj);
 u32 HSD_TGTex2Index(u32 tgtex);
-u32 HSD_TexCoordID2TexGenSrc(u32 coord);
+GXTexGenSrc HSD_TexCoordID2TexGenSrc(GXTexCoordID coord);
 u32 HSD_TexCoord2Index(u32 coord_id);
 u32 HSD_Index2TexCoord(u32 index);
 u32 HSD_TexMtx2Index(u32 texmtx);
