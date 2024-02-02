@@ -134,7 +134,7 @@ struct HSD_TObj {
     HSD_TObj* next;
     GXTexMapID id;
     GXTexGenSrc src;
-    GXTexMtx mtxid;
+    u32 mtxid;
     Quaternion rotate;
     Vec3 scale;
     Vec3 translate;
@@ -180,14 +180,14 @@ typedef struct _HSD_TObjDesc {
 
 typedef struct _HSD_Tlut {
     void* lut;
-    u32 fmt;
+    GXTlutFmt fmt;
     u32 tlut_name;
     u16 n_entries;
 } HSD_Tlut;
 
 typedef struct _HSD_TlutDesc {
     void* lut;
-    u32 fmt;
+    GXTlutFmt fmt;
     u32 tlut_name;
     u16 n_entries;
 } HSD_TlutDesc;
