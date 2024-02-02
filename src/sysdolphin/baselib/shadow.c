@@ -329,6 +329,29 @@ void HSD_ShadowAddObject(HSD_Shadow* shadow, HSD_JObj* jobj)
     HSD_JObjRef(jobj);
 }
 
+void HSD_ShadowDeleteObject(HSD_Shadow* shadow, HSD_JObj* jobj)
+{
+    if (!shadow) {
+        return;
+    }
+
+    if (jobj) {
+        HSD_SList** list = &(shadow->objects);
+        for (; *list; list = &((*list)->next)) {
+            if ((*list)->data == jobj) {
+                HSD_JObjUnref(jobj);
+                (*list) = HSD_SListRemove(*list);
+                return;
+            }
+        }
+    } else {
+        while (shadow->objects) {
+            HSD_JObjUnref(shadow->objects->data);
+            shadow->objects = HSD_SListRemove(shadow->objects);
+        }
+    }
+}
+
 static void makeMatrix(HSD_Shadow* shadow)
 {
     Mtx Mprj;
