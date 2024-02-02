@@ -31,6 +31,8 @@ typedef struct _HSD_ZList {
 
 HSD_ObjAllocData zlist_alloc_data;
 
+static void (*sptcl_callback)(s32, s32, s32, HSD_JObj*) = NULL;
+
 static int zsort_listing = 0;
 static int zsort_sorting = 0;
 
@@ -338,4 +340,25 @@ void _HSD_ZListClear(void)
     zlist_xlu_top = NULL;
     zlist_xlu_bottom = &zlist_xlu_top;
     zlist_xlu_nb = 0;
+}
+
+void HSD_JObjDisp(HSD_JObj* jobj, MtxPtr vmtx, HSD_TrspMask trsp_mask,
+                  u32 rendermode)
+{
+    if (jobj != NULL) {
+        if (union_type_dobj(jobj)) {
+            HSD_JObjDispDObj(jobj, vmtx, trsp_mask, rendermode);
+        } else if (union_type_ptcl(jobj) && sptcl_callback != NULL) {
+            HSD_SList* sp;
+            for (sp = jobj->u.ptcl; sp != NULL; sp = sp->next) {
+                if ((((u32) sp->data) & 0x80000000) != 0) {
+                    u32 bank = JOBJ_PTCL_BANK_MASK & ((u32) sp->data);
+                    u32 offset = (((u32) sp->data) >> JOBJ_PTCL_OFFSET_SHIFT) &
+                                 JOBJ_PTCL_OFFSET_MASK;
+                    (*sptcl_callback)(0, bank, offset, jobj);
+                }
+                sp->data = (void*) ((u32) sp->data & JOBJ_PTCL_ACTIVE);
+            }
+        }
+    }
 }

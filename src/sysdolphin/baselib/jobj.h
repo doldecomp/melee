@@ -16,6 +16,11 @@
 
 struct HSD_JObj;
 
+#define JOBJ_PTCL_ACTIVE 0x7FFFFFFF
+#define JOBJ_PTCL_OFFSET_MASK 0xFFFFFF
+#define JOBJ_PTCL_OFFSET_SHIFT 6
+#define JOBJ_PTCL_BANK_MASK 0x3F
+
 #define HSD_A_J_ROTX 1
 #define HSD_A_J_ROTY 2
 #define HSD_A_J_ROTZ 3
