@@ -1206,7 +1206,7 @@ void HSD_TObjSetup(HSD_TObj* tobj)
             if (i < nb_tluts) {
                 tlut->tlut_name = tluts[i]->tlut_name;
             } else if (nb_tluts < 8) {
-                if (tlut->n_entries > 256) {
+                if (tlut->n_entries >= 256) {
                     tlut->tlut_name = big_tlut_name++;
                 } else {
                     tlut->tlut_name = tlut_name++;

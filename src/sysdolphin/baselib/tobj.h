@@ -204,7 +204,7 @@ struct _HSD_ImageDesc {
     void* image_ptr;
     u16 width;
     u16 height;
-    u32 format;
+    GXTexFmt format;
     u32 mipmap;
     f32 minLOD;
     f32 maxLOD;
