@@ -13,6 +13,7 @@
 #include <dolphin/gx/GXFrameBuf.h>
 #include <dolphin/gx/GXMisc.h>
 #include <dolphin/gx/GXTexture.h>
+#include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
@@ -54,7 +55,7 @@ static HSD_TexAnim* lookupTextureAnim(s32 id, HSD_TexAnim* texanim)
 {
     HSD_TexAnim* ta;
     for (ta = texanim; ta; ta = ta->next) {
-        if (ta->id == id) {
+        if (ta->id == (GXTexMapID) id) {
             return ta;
         }
     }

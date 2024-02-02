@@ -28,7 +28,7 @@ void* cmSnap_80031618(void)
         return 0;
     }
     cmsnap_data.unk0 = 0;
-    return cmsnap_data.unk1.img_ptr;
+    return cmsnap_data.unk1.image_ptr;
 }
 
 void cmSnap_80031640(HSD_GObj* arg0, int code)
@@ -51,7 +51,7 @@ void cmSnap_80031640(HSD_GObj* arg0, int code)
 void cmSnap_800316B4(void)
 {
     cmsnap_data.unk0 = 0;
-    cmsnap_data.unk1.img_ptr = 0;
+    cmsnap_data.unk1.image_ptr = NULL;
     GObj_SetupGXLinkMax(GObj_Create(0x12, 0x12, 0), cmSnap_80031640, 4);
     lb_800121FC(&cmsnap_data.unk1, 0x280, 0x1E0, 4, 0x7D6);
 }
