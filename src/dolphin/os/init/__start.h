@@ -29,7 +29,6 @@ extern void DBInit(void);
 
 SECTION_INIT void __check_pad3(void);
 SECTION_INIT void __start(void);
-SECTION_INIT void __init_registers(void);
 SECTION_INIT void __init_data(void);
 SECTION_INIT void __init_hardware(void);
 SECTION_INIT void __flush_cache(void* address, size_t size);

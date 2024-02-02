@@ -58,7 +58,7 @@ OSPanic(__FILE__, __LINE__, "Function is not implemented!")
 #define U32_TO_F32 4503599627370496.0
 #define S32_TO_F32 4503601774854144.0
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 #define ASM asm
 #else
 #define ASM

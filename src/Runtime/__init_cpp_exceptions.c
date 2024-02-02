@@ -12,13 +12,11 @@ static int fragmentID = -2;
  */
 SECTION_INIT extern __eti_init_info _eti_init_info_[];
 
-#ifdef MUST_MATCH
-
+#ifdef MWERKS_GEKKO
 static asm char* GetR2(void)
 { // clang-format off
     mr r3, r2
 } // clang-format on
-
 #endif
 
 void __fini_cpp_exceptions(void)
@@ -29,20 +27,13 @@ void __fini_cpp_exceptions(void)
     }
 }
 
-#ifdef MUST_MATCH
-
 void __init_cpp_exceptions(void)
 {
+#ifdef MWERKS_GEKKO
     if (fragmentID == -2) {
         fragmentID = __register_fragment(_eti_init_info_, GetR2());
     }
-}
-
 #else
-
-void __init_cpp_exceptions(void)
-{
     NOT_IMPLEMENTED;
-}
-
 #endif
+}

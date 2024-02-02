@@ -123,11 +123,6 @@ parser.add_argument(
     help="compiler warnings are not considered errors",
 )
 parser.add_argument(
-    "--must-match",
-    action="store_true",
-    help="define MUST_MATCH for make compatibility",
-)
-parser.add_argument(
     "--require-protos",
     dest="require_protos",
     action="store_true",
@@ -205,9 +200,6 @@ if args.warn is not None:
 
 if args.warn_error:
     cflags_base.append("-warn iserror")
-
-if args.must_match:
-    cflags_base.append("-DMUST_MATCH")
 
 if args.require_protos:
     cflags_base.append("-requireprotos")
@@ -1258,6 +1250,7 @@ config.libs = [
             Object(NonMatching, "dolphin/os/OSThread.c"),
             Object(Matching, "dolphin/os/OSTime.c"),
             Object(NonMatching, "dolphin/os/OSUartExi.c"),
+            Object(NonMatching, "dolphin/os/init/__ppc_eabi_init.c"),
         ],
     ),
     DolphinLib(
