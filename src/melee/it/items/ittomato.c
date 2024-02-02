@@ -12,9 +12,9 @@ extern f32 it_804DC8B4;
 extern M2C_UNK gm_80473A18;
 /* Warning: struct HSD_Spline is not defined (only forward-declared) */
 
-void it_802843E4(HSD_GObj* gobj);           // static and header(?)
-void it_80284458(HSD_GObj* gobj);           // static and header(?)
-void it_80284358(Item_GObj*, M2C_UNK, f32); // static and header(?)
+void it_802843E4(HSD_GObj* gobj); // static and header(?)
+void it_80284458(HSD_GObj* gobj); // static and header(?)
+void it_80284358(Item_GObj*);     // static and header(?)
 
 HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2)
 {
@@ -108,7 +108,7 @@ void it_80284324(Item_GObj* arg0)
     }
 }
 
-void it_80284358(Item_GObj* arg0, M2C_UNK arg1, f32 arg3)
+void it_80284358(Item_GObj* arg0)
 {
     Item_80268E5C(arg0, 0, ITEM_ANIM_UPDATE);
 }
