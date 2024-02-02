@@ -28,11 +28,6 @@
 
 extern HSD_ObjAllocData shadow_alloc_data;
 
-extern const f32 lbl_804DE768;
-extern const f32 lbl_804DE76C;
-extern const f32 HSD_Shadow_804DE770;
-extern const f32 HSD_Shadow_804DE774;
-
 static void makeMatrix(HSD_Shadow* shadow);
 
 HSD_ObjAllocData* HSD_ShadowGetAllocData(void)
@@ -76,8 +71,7 @@ HSD_Shadow* HSD_ShadowAlloc(void)
     shadow->texture->imagedesc->width = 256;
     shadow->texture->imagedesc->height = 256;
 
-    HSD_CObjSetViewportfx4(shadow->camera, 0.0f, HSD_Shadow_804DE774, 0.0f,
-                           HSD_Shadow_804DE774); // 0f, 256f, 0f, 256f
+    HSD_CObjSetViewportfx4(shadow->camera, 0.0f, 256.f, 0.0f, 256.f);
     HSD_CObjSetScissorx4(shadow->camera, 0, 256, 0, 256);
 
     return shadow;
