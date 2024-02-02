@@ -11,6 +11,7 @@
 #include "perf.h"
 #include "pobj.h"
 #include "state.h"
+#include "tev.h"
 #include "tobj.h"
 #include "util.h"
 
@@ -18,6 +19,8 @@
 #include <math.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXFrameBuf.h>
+#include <dolphin/gx/GXGeometry.h>
+#include <dolphin/gx/GXMisc.h>
 #include <dolphin/gx/GXTexture.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/GXVert.h>

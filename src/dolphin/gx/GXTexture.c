@@ -107,7 +107,7 @@ void GXInitTlutRegion(s32* arg0, s32 arg1, s32 arg2)
     INSERT_FIELD(*arg0, 0x65, 8, 24);
 }
 
-void GXInvalidateTexAll()
+void GXInvalidateTexAll(void)
 {
     __GXFlushTextureState();
     WGPIPE.u8 = GX_LOAD_BP_REG;
