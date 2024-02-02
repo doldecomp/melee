@@ -54,8 +54,9 @@ void GXInitTexObjCI(GXTexObj* obj, void* image_ptr, u16 width, u16 height,
     NOT_IMPLEMENTED;
 }
 
-void GXInitTexObjLOD(unk_t arg0, s32 arg1, s32 arg2, s32 arg3, s8 arg4,
-                     s32 arg5, f32 arg6, f32 arg7, f32 arg8)
+void GXInitTexObjLOD(GXTexObj* obj, GXTexFilter min_filt, GXTexFilter mag_filt,
+                     f32 min_lod, f32 max_lod, f32 lod_bias, GXBool bias_clamp,
+                     GXBool do_edge_lod, GXAnisotropy max_aniso)
 {
     NOT_IMPLEMENTED;
 }
@@ -75,12 +76,12 @@ GXTexFmt GXGetTexObjFmt(GXTexObj* tex_obj)
     return tex_obj->tex_fmt;
 }
 
-void GXLoadTexObjPreLoaded(unk_t arg0, unk_t arg1, s32 arg2)
+void GXLoadTexObjPreLoaded(const GXTexObj* arg0, unk_t arg1, GXTexMapID arg2)
 {
     NOT_IMPLEMENTED;
 }
 
-void GXLoadTexObj(unk_t arg0, s32 arg1)
+void GXLoadTexObj(const GXTexObj* arg0, GXTexMapID arg1)
 {
     GXLoadTexObjPreLoaded(arg0, __GXContexts.main->callbacks[0x98](), arg1);
 }

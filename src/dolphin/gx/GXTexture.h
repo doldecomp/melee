@@ -7,7 +7,7 @@
 #include <dolphin/gx/GXEnum.h>
 
 void __GXSetSUTexSize(void);
-void GXLoadTexObjPreLoaded(unk_t, unk_t, s32);
+void GXLoadTexObjPreLoaded(const GXTexObj*, unk_t, GXTexMapID);
 
 void GXInvalidateTexAll(void);
 GXTexRegionCallback GXSetTlutRegionCallback(GXTexRegionCallback arg0);
@@ -17,12 +17,13 @@ void GXInitTexObj(GXTexObj*, void*, u16, u16, GXTexFmt, GXTexWrapMode,
 s32 GXGetTexObjWidth(GXTexObj* tex_obj);
 s32 GXGetTexObjHeight(GXTexObj* tex_obj);
 GXTexFmt GXGetTexObjFmt(GXTexObj* tex_obj);
-void GXLoadTexObj(unk_t arg0, s32 arg1);
+void GXLoadTexObj(const GXTexObj*, GXTexMapID);
 void GXInitTlutRegion(s32* arg0, s32 arg1, s32 arg2);
 s32 GXGetTexBufferSize(u16, u16, u32, u8, u8);
 void GXInitTexObjCI(GXTexObj*, void*, u16, u16, GXCITexFmt, GXTexWrapMode,
                     GXTexWrapMode, GXBool, u32);
-void GXInitTexObjLOD(unk_t, s32, s32, s32, s8, s32, f32, f32, f32);
+void GXInitTexObjLOD(GXTexObj*, GXTexFilter, GXTexFilter, f32, f32, f32,
+                     GXBool, GXBool, GXAnisotropy);
 void GXInitTlutObj(GXTlutObj*, void*, GXTlutFmt, u16);
 void GXLoadTlut(GXTlutObj*, s32);
 void __GXSetTmemConfig(s32);

@@ -253,7 +253,7 @@ void HSD_TObjAnimAll(HSD_TObj* tobj)
     }
 }
 
-/*static*/ int TObjLoad(HSD_TObj* tobj, HSD_TObjDesc* td)
+static int TObjLoad(HSD_TObj* tobj, HSD_TObjDesc* td)
 {
     tobj->next = HSD_TObjLoadDesc(td->next);
     tobj->id = td->id;

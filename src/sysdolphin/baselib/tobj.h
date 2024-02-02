@@ -273,8 +273,6 @@ void HSD_TObjReqAnimAll(HSD_TObj* tobj, f32 startframe);
 void HSD_TObjAnim(HSD_TObj* tobj);
 void HSD_TObjAnimAll(HSD_TObj* tobj);
 
-int TObjLoad(HSD_TObj* tobj, HSD_TObjDesc* td);
-
 HSD_TObj* HSD_TObjLoadDesc(HSD_TObjDesc* td);
 HSD_Tlut* HSD_TlutLoadDesc(HSD_TlutDesc* tlutdesc);
 HSD_TObjTev* HSD_TObjTevLoadDesc(HSD_TObjTevDesc* tevdesc);
