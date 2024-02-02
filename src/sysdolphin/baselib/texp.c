@@ -1050,7 +1050,7 @@ static void TExp2TevDesc(HSD_TExp* texp, HSD_TExpTevDesc* desc,
     tevdesc->u.tevconf.mode = GX_TC_LINEAR;
 }
 
-#ifdef MUST_MATCH
+#ifndef BUGFIX
 static GXTevRegID id[7] = { GX_TEVPREV, GX_TEVREG0, GX_TEVREG1, GX_TEVREG2,
                             GX_TEVREG0, GX_TEVREG1, GX_TEVREG2 };
 static char list_type[27] = "clist->type == HSD_TE_CNST";

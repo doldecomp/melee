@@ -183,6 +183,9 @@ void ftCo_80091274(ftCo_GObj* gobj)
     }
 }
 
+#define HSD_ASSERT2(file, line, msg, cond)                                    \
+    ((cond) ? ((void) 0) : __assert((file), (line), (#msg)))
+
 void ftCo_DamageIce_Anim(ftCo_GObj* gobj)
 {
     HSD_JObj* jobj;

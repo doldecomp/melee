@@ -375,7 +375,7 @@ void HSD_MObjCompileTev(HSD_MObj* mobj)
     }
 }
 
-#if defined(MUST_MATCH) || !defined(BUGFIX)
+#ifndef BUGFIX
 #pragma push
 #pragma force_active on
 static char unused1[] = "hsdIsDescendantOf(info, &hsdMObj)";

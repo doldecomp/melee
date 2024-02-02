@@ -262,7 +262,7 @@ size_t OSCheckHeap(OSHeapHandle heap)
     return totalFree;
 }
 
-#if defined(MUST_MATCH) || !defined(BUGFIX)
+#ifndef BUGFIX
 #pragma push
 #pragma force_active on
 static char _unused_str0[] = "\nOSDumpHeap(%d):\n";
