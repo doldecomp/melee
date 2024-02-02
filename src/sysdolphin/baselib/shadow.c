@@ -389,3 +389,9 @@ static void makeMatrix(HSD_Shadow* shadow)
     MTXConcat(Mprj, HSD_CObjGetViewingMtxPtrDirect(shadow->camera),
               shadow->texture->mtx);
 }
+
+int HSD_ViewingRectCheck(HSD_ViewingRect* rect)
+{
+    HSD_ASSERT(818, rect);
+    return rect->top > rect->bottom && rect->right > rect->left;
+}

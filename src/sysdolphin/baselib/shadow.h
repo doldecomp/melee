@@ -47,4 +47,6 @@ HSD_TObj* makeShadowTObj(void);
 void HSD_ShadowRemove(HSD_Shadow* shadow);
 void HSD_ShadowInit(HSD_Shadow* shadow);
 
+int HSD_ViewingRectCheck(HSD_ViewingRect* rect);
+
 #endif
