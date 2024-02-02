@@ -267,3 +267,22 @@ void HSD_ShadowStartRender(HSD_Shadow* shadow)
         HSD_CObjEndCurrent();
     }
 }
+
+void HSD_ShadowEndRender(HSD_Shadow* shadow)
+{
+    HSD_ImageDesc* idesc;
+
+    HSD_ASSERT(0x1F5, shadow);
+
+    idesc = shadow->texture->imagedesc;
+    if (!idesc->img_ptr) {
+        HSD_ShadowSetSize(shadow, idesc->width, idesc->height);
+    }
+
+    GXCopyTex(idesc->img_ptr, GX_TRUE);
+    GXPixModeSync();
+
+    GXInvalidateTexAll();
+
+    makeMatrix(shadow);
+}
