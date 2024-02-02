@@ -1596,20 +1596,6 @@ void HSD_ImageDescCopyFromEFB(HSD_ImageDesc* idesc, u16 origx, u16 origy,
     }
 }
 
-static int TObjInit(HSD_Class* o)
-{
-    int res;
-
-    if ((res = HSD_PARENT_INFO(&hsdTObj)->init(o)) >= 0) {
-        HSD_TObj* tobj = HSD_TOBJ(o);
-
-        // tobj->anim_id = -1;
-
-        return 0;
-    }
-    return res;
-}
-
 static void TObjRelease(HSD_Class* o)
 {
     HSD_TObj* tobj = HSD_TOBJ(o);
@@ -1639,18 +1625,16 @@ static void TObjAmnesia(HSD_ClassInfo* info)
     HSD_PARENT_INFO(&hsdTObj)->amnesia(info);
 }
 
-/*static void TObjInfoInit(void)
+static void TObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&hsdTObj), HSD_CLASS_INFO(&hsdObj),
                      "sysdolphin_base_library", "hsd_tobj",
                      sizeof(HSD_TObjInfo), sizeof(HSD_TObj));
 
-    HSD_CLASS_INFO(&hsdTObj)->init = TObjInit;
     HSD_CLASS_INFO(&hsdTObj)->release = TObjRelease;
     HSD_CLASS_INFO(&hsdTObj)->amnesia = TObjAmnesia;
     HSD_TOBJ_INFO(&hsdTObj)->load = TObjLoad;
     HSD_TOBJ_INFO(&hsdTObj)->make_texp = TObjMakeTExp;
 
     hsdTObj.make_mtx = MakeTextureMtx;
-    // hsdTObj.update = TObjUpdateFunc;
-}*/
+}
