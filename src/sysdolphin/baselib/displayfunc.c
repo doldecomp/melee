@@ -9,9 +9,15 @@
 #include "baselib/pobj.h"
 #include "baselib/state.h"
 #include "baselib/tev.h"
+#include "baselib/util.h"
 
 #include <dolphin/gx/GXAttr.h>
+#include <dolphin/gx/GXGeometry.h>
+#include <dolphin/gx/GXPixel.h>
+#include <dolphin/gx/GXTev.h>
+#include <dolphin/gx/GXTexture.h>
 #include <dolphin/gx/GXTransform.h>
+#include <dolphin/gx/GXVert.h>
 
 #define FLT_EPSILON 1.00000001335e-10F
 
@@ -376,6 +382,92 @@ void HSD_SetEraseColor(u8 r, u8 g, u8 b, u8 a)
     erase_color.g = g;
     erase_color.b = b;
     erase_color.a = a;
+}
+
+void HSD_EraseRect(f32 top, f32 bottom, f32 left, f32 right, f32 z,
+                   int enable_color, int enable_alpha, int enable_depth)
+{
+    GXTexObj texobj;
+    static u8 depth_image[] = {
+        255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+        255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+        255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+        255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+        255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+        255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+        255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+        255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+        255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+        255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+    };
+    GXColor color;
+    u8 _[4];
+
+    if (!enable_color && !enable_alpha && !enable_depth) {
+        return;
+    }
+
+    if (enable_depth) {
+        GXInitTexObj(&texobj, depth_image, 4, 4, GX_TF_Z8, GX_REPEAT,
+                     GX_REPEAT, GX_DISABLE);
+        GXLoadTexObj(&texobj, GX_TEXMAP0);
+        GXSetNumTexGens(1);
+        GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY,
+                          GX_NONE, GX_PTIDENTITY);
+        GXSetNumTevStages(1);
+        GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR0A0);
+        GXSetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
+        GXSetZTexture(GX_ZT_REPLACE, GX_TF_Z8, 0);
+    } else {
+        GXSetNumTexGens(0);
+        GXSetNumTevStages(1);
+        GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL,
+                      GX_COLOR0A0);
+        GXSetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
+    }
+
+    GXSetCullMode(GX_CULL_NONE);
+
+    GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_OR, GX_ALWAYS, 0);
+    GXSetZCompLoc(GX_TRUE);
+    GXSetZMode(GX_ENABLE, GX_ALWAYS, enable_depth ? true : false);
+    GXSetBlendMode(GX_BM_LOGIC, GX_BL_ONE, GX_BL_ZERO, GX_LO_COPY);
+    GXSetColorUpdate(enable_color ? GX_ENABLE : GX_DISABLE);
+    GXSetAlphaUpdate(enable_alpha ? GX_ENABLE : GX_DISABLE);
+
+    GXSetNumChans(1);
+    GXSetChanCtrl(GX_COLOR0A0, GX_DISABLE, GX_SRC_REG, GX_SRC_VTX,
+                  GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE);
+
+    GXClearVtxDesc();
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_F32, 0);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_CLR0, GX_CLR_RGBA, GX_RGBA8, 0);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_U8, 0);
+    GXLoadPosMtxImm(HSD_identityMtx, GX_PNMTX0);
+    GXSetCurrentMtx(GX_PNMTX0);
+    GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
+    GXSetVtxDesc(GX_VA_CLR0, GX_DIRECT);
+    GXSetVtxDesc(GX_VA_TEX0, GX_DIRECT);
+
+    color = erase_color;
+    GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+    GXPosition3f32(left, top, z);
+    GXColor4u8(color.r, color.g, color.b, color.a);
+    GXTexCoord2u8(0, 0);
+    GXPosition3f32(right, top, z);
+    GXColor4u8(color.r, color.g, color.b, color.a);
+    GXTexCoord2u8(1, 0);
+    GXPosition3f32(right, bottom, z);
+    GXColor4u8(color.r, color.g, color.b, color.a);
+    GXTexCoord2u8(1, 1);
+    GXPosition3f32(left, bottom, z);
+    GXColor4u8(color.r, color.g, color.b, color.a);
+    GXTexCoord2u8(0, 1);
+    GXEnd();
+
+    GXSetZTexture(GX_ZT_DISABLE, GX_TF_Z8, 0);
+
+    HSD_StateInvalidate(HSD_STATE_ALL);
 }
 
 void _HSD_DispForgetMemory(void)

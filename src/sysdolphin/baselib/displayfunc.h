@@ -19,8 +19,8 @@ void _HSD_DispForgetMemory(void);
 void HSD_ZListInitAllocData(void);
 
 void HSD_EraseRect(f32 top_res, f32 bottom_res, f32 left_res, f32 right_res,
-                   f32 neg_z_val, bool enable_color, bool enable_alpha,
-                   bool enable_depth);
+                   f32 neg_z_val, int enable_color, int enable_alpha,
+                   int enable_depth);
 
 MtxPtr _HSD_mkEnvelopeModelNodeMtx(HSD_JObj* m, MtxPtr mtx);
 void HSD_JObjDisp(HSD_JObj* jobj, MtxPtr, HSD_TrspMask flags, u32 rendermode);
