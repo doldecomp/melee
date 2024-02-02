@@ -288,6 +288,29 @@ void HSD_ShadowEndRender(HSD_Shadow* shadow)
     makeMatrix(shadow);
 }
 
+void HSD_ShadowSetActive(HSD_Shadow* shadow, int active)
+{
+    HSD_ImageDesc* idesc;
+
+    HSD_ASSERT(580, shadow);
+
+    if ((shadow->active && active) || (!shadow->active && !active)) {
+        return;
+    }
+
+    shadow->active = active;
+    if (active) {
+        idesc = shadow->texture->imagedesc;
+        if (!idesc->img_ptr) {
+            HSD_ShadowSetSize(shadow, idesc->width, idesc->height);
+        }
+
+        HSD_MObjAddShadowTexture(shadow->texture);
+    } else {
+        HSD_MObjDeleteShadowTexture(shadow->texture);
+    }
+}
+
 static void makeMatrix(HSD_Shadow* shadow)
 {
     Mtx Mprj;
