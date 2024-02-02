@@ -1,5 +1,8 @@
 #include "displayfunc.h"
 
+#include "dobj.h"
+#include "lobj.h"
+#include "mobj.h"
 #include "objalloc.h"
 #include "pobj.h"
 #include "state.h"
@@ -101,4 +104,35 @@ MtxPtr _HSD_mkEnvelopeModelNodeMtx(HSD_JObj* m, MtxPtr mtx)
 
         return mtx;
     }
+}
+
+void HSD_JObjDispSub(HSD_JObj* jobj, MtxPtr vmtx, MtxPtr pmtx,
+                     HSD_TrspMask trsp_mask, u32 rendermode)
+{
+    HSD_DObj* dobj;
+    u32 dobj_trsp;
+
+    HSD_JObjSetCurrent(jobj);
+
+    dobj_trsp = trsp_mask << DOBJ_TRSP_SHIFT;
+
+    if (!(rendermode & RENDER_SHADOW)) {
+        if (jobj->flags & JOBJ_SPECULAR) {
+            HSD_LObjSetupSpecularInit(pmtx);
+        }
+    }
+
+    HSD_PObjClearMtxMark(NULL, 0);
+    for (dobj = jobj->u.dobj; dobj; dobj = dobj->next) {
+        if (dobj->flags & DOBJ_HIDDEN) {
+            continue;
+        }
+
+        if (dobj->flags & dobj_trsp) {
+            HSD_DObjSetCurrent(dobj);
+            HSD_DOBJ_METHOD(dobj)->disp(dobj, vmtx, pmtx, rendermode);
+        }
+    }
+    HSD_DObjSetCurrent(NULL);
+    HSD_JObjSetCurrent(NULL);
 }

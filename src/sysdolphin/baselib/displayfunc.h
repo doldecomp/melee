@@ -8,6 +8,9 @@
 #include "baselib/jobj.h"
 #include "baselib/objalloc.h"
 
+#define DOBJ_TRSP_SHIFT 1
+#define JOBJ_TRSP_SHIFT 18
+
 void _HSD_DispForgetMemory(void* low, void* high);
 void HSD_ZListInitAllocData(void);
 
