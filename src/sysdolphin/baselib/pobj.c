@@ -479,9 +479,8 @@ static void setupVtxDesc(HSD_PObj* pobj)
             case GX_VA_TEX7MTXIDX:
                 break;
             default:
-                /// @todo Fix cast
                 GXSetVtxAttrFmt(GX_VTXFMT0, desc->attr, desc->comp_cnt,
-                                (GXAttrType) desc->comp_type, desc->frac);
+                                desc->comp_type, desc->frac);
             }
         }
         prev_vtxdesc = pobj->verts;
@@ -518,9 +517,7 @@ static void setupShapeAnimVtxDesc(HSD_PObj* pobj)
         case GX_VA_POS:
         case GX_VA_NBT:
             GXSetVtxDesc(desc->attr, GX_DIRECT);
-            /// @todo Fix cast
-            GXSetVtxAttrFmt(GX_VTXFMT0, desc->attr, desc->comp_cnt,
-                            (GXAttrType) GX_F32, 0);
+            GXSetVtxAttrFmt(GX_VTXFMT0, desc->attr, desc->comp_cnt, GX_F32, 0);
             break;
 
         case GX_VA_PNMTXIDX:
@@ -537,9 +534,8 @@ static void setupShapeAnimVtxDesc(HSD_PObj* pobj)
 
         default:
             GXSetVtxDesc(desc->attr, desc->attr_type);
-            /// @todo Fix cast
             GXSetVtxAttrFmt(GX_VTXFMT0, desc->attr, desc->comp_cnt,
-                            (GXAttrType) desc->comp_type, desc->frac);
+                            desc->comp_type, desc->frac);
         }
     }
     prev_vtxdesc = NULL;
