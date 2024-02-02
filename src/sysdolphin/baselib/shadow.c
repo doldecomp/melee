@@ -312,6 +312,8 @@ void HSD_ShadowSetActive(HSD_Shadow* shadow, int active)
     }
 }
 
+static char distAssert[16] = "distance > 0.0F";
+
 void HSD_ShadowAddObject(HSD_Shadow* shadow, HSD_JObj* jobj)
 {
     HSD_SList* list;
