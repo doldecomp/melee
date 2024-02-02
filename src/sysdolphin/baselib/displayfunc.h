@@ -15,7 +15,7 @@
 #define JOBJ_XLU 0x80000
 #define JOBJ_TEXEDGE 0x100000
 
-void _HSD_DispForgetMemory(void* low, void* high);
+void _HSD_DispForgetMemory(void);
 void HSD_ZListInitAllocData(void);
 
 void HSD_EraseRect(f32 top_res, f32 bottom_res, f32 left_res, f32 right_res,

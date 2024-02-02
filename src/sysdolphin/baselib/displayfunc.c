@@ -377,3 +377,17 @@ void HSD_SetEraseColor(u8 r, u8 g, u8 b, u8 a)
     erase_color.b = b;
     erase_color.a = a;
 }
+
+void _HSD_DispForgetMemory(void)
+{
+    zlist_top = NULL;
+    zlist_bottom = &zlist_top;
+
+    zlist_texedge_top = NULL;
+    zlist_texedge_bottom = &zlist_texedge_top;
+    zlist_texedge_nb = 0;
+
+    zlist_xlu_top = NULL;
+    zlist_xlu_bottom = &zlist_xlu_top;
+    zlist_xlu_nb = 0;
+}
