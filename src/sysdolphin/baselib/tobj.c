@@ -77,7 +77,7 @@ void HSD_TObjAddAnim(HSD_TObj* tobj, HSD_TexAnim* texanim)
 
             if (tobj->tluttbl != NULL) {
                 for (i = 0; tobj->tluttbl[i]; i++) {
-                    HSD_TlutFree(tobj->tluttbl[i]);
+                    HSD_TlutRemove(tobj->tluttbl[i]);
                 }
                 HSD_Free(tobj->tluttbl);
             }
@@ -363,7 +363,7 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
     case GX_TEXMAP7:
         return GX_PTTEXMTX7;
     default:
-        HSD_Panic(__FILE__, 574, "unexpected texmap id.\n\0");
+        HSD_Panic(__FILE__, 574, "unexpected texmap id.\n");
     }
     return 0;
 }
@@ -1537,7 +1537,7 @@ void HSD_TlutFree(HSD_Tlut* tlut)
 void HSD_TlutRemove(HSD_Tlut* tlut)
 {
     if (tlut) {
-        HSD_TlutFree(tlut);
+        hsdFreeMemPiece(tlut, sizeof(HSD_Tlut));
     }
 }
 

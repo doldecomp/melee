@@ -286,6 +286,7 @@ void HSD_TObjSetDefaultClass(HSD_TObjInfo* info);
 HSD_TObjInfo* HSD_TObjGetDefaultClass(void);
 HSD_Tlut* HSD_TlutAlloc(void);
 void HSD_TlutFree(HSD_Tlut* tlut);
+void HSD_TlutRemove(HSD_Tlut* tlut);
 HSD_TObjTev* HSD_TObjTevAlloc(void);
 HSD_ImageDesc* HSD_ImageDescAlloc(void);
 void HSD_ImageDescFree(HSD_ImageDesc* idesc);
