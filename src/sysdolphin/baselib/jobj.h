@@ -448,6 +448,11 @@ static inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx mtx)
     PSMTXCopy(mtx, jobj->mtx);
 }
 
+static inline void HSD_JObjRef(HSD_JObj* jobj)
+{
+    ref_INC(jobj);
+}
+
 static inline void HSD_JObjRefThis(HSD_JObj* jobj)
 {
     if (jobj != NULL) {

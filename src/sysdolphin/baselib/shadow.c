@@ -4,6 +4,7 @@
 #include "cobj.h"
 #include "debug.h"
 #include "jobj.h"
+#include "list.h"
 #include "memory.h"
 #include "mobj.h"
 #include "object.h"
@@ -309,6 +310,23 @@ void HSD_ShadowSetActive(HSD_Shadow* shadow, int active)
     } else {
         HSD_MObjDeleteShadowTexture(shadow->texture);
     }
+}
+
+void HSD_ShadowAddObject(HSD_Shadow* shadow, HSD_JObj* jobj)
+{
+    HSD_SList* list;
+
+    if (!shadow || !jobj) {
+        return;
+    }
+
+    for (list = shadow->objects; list; list = list->next) {
+        if (list->data == jobj) {
+            return;
+        }
+    }
+    shadow->objects = HSD_SListAllocAndPrepend(shadow->objects, jobj);
+    HSD_JObjRef(jobj);
 }
 
 static void makeMatrix(HSD_Shadow* shadow)
