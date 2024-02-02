@@ -6,6 +6,7 @@
 #include <dolphin/gx/GXEnum.h>
 
 typedef struct GXTexObj GXTexObj;
+typedef struct GXTlutObj GXTlutObj;
 typedef struct GXColor GXColor;
 typedef struct GXColorS10 GXColorS10;
 typedef struct GXRenderModeObj GXRenderModeObj;

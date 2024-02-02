@@ -6,6 +6,7 @@
 #include <dolphin/gx/__types.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXEnum.h>
+#include <dolphin/gx/GXTransform.h>
 
 // https://decomp.me/scratch/d4i4k // 95 (98.90%)
 void __GXXfVtxSpecs(void)
@@ -374,11 +375,133 @@ void GXInvalidateVtxCache(void)
     WGPIPE.u8 = GX_CMD_INVL_VC;
 }
 
-// https://decomp.me/scratch/9TphI // 640 (96.44%)
-void GXSetTexCoordGen2(u32 arg0, s32 arg1, u32 arg2, s32 arg3, s32 arg4,
-                       s32 arg5)
+void GXSetTexCoordGen2(GXTexCoordID arg0, GXTexGenType arg1, GXTexGenSrc arg2,
+                       u32 arg3, GXBool arg4, u32 arg5)
 {
-    NOT_IMPLEMENTED;
+    s32 var_r0;
+    s32 var_r10;
+    s32 var_r11;
+    s32 var_r12;
+
+    var_r11 = 0;
+    var_r12 = 0;
+    var_r10 = 5;
+    switch (arg2) {
+    case GX_TG_POS:
+        var_r10 = 0;
+        var_r12 = 1;
+        break;
+    case GX_TG_NRM:
+        var_r10 = 1;
+        var_r12 = 1;
+        break;
+    case GX_TG_BINRM:
+        var_r10 = 3;
+        var_r12 = 1;
+        break;
+    case GX_TG_TANGENT:
+        var_r10 = 4;
+        var_r12 = 1;
+        break;
+    case GX_TG_COLOR0:
+        var_r10 = 2;
+        break;
+    case GX_TG_COLOR1:
+        var_r10 = 2;
+        break;
+    case GX_TG_TEX0:
+        var_r10 = 5;
+        break;
+    case GX_TG_TEX1:
+        var_r10 = 6;
+        break;
+    case GX_TG_TEX2:
+        var_r10 = 7;
+        break;
+    case GX_TG_TEX3:
+        var_r10 = 8;
+        break;
+    case GX_TG_TEX4:
+        var_r10 = 9;
+        break;
+    case GX_TG_TEX5:
+        var_r10 = 0xA;
+        break;
+    case GX_TG_TEX6:
+        var_r10 = 0xB;
+        break;
+    case GX_TG_TEX7:
+        var_r10 = 0xC;
+        break;
+    }
+    switch (arg1) {
+    case GX_TG_MTX2x4:
+        var_r11 = var_r12 * 4;
+        INSERT_FIELD(var_r11, var_r10 << 3, 8, 4);
+        break;
+    case GX_TG_MTX3x4:
+        var_r11 = var_r12 * 4 | 2;
+        INSERT_FIELD(var_r11, var_r10 << 3, 8, 4);
+        break;
+    case GX_TG_BUMP0:
+    case GX_TG_BUMP1:
+    case GX_TG_BUMP2:
+    case GX_TG_BUMP3:
+    case GX_TG_BUMP4:
+    case GX_TG_BUMP5:
+    case GX_TG_BUMP6:
+    case GX_TG_BUMP7:
+        var_r11 = var_r12 * 4;
+        INSERT_FIELD(var_r11, 1, 3, 4);
+        INSERT_FIELD(var_r11, var_r10, 5, 7);
+        INSERT_FIELD(var_r11, arg2 - 12, 3, 12);
+        INSERT_FIELD(var_r11, arg1 - 2, 3, 15);
+        break;
+    case GX_TG_SRTG:
+        var_r11 = var_r12 * 4;
+        if (arg2 == 0x13) {
+            INSERT_FIELD(var_r11, 2, 3, 4);
+        } else {
+            INSERT_FIELD(var_r11, 3, 3, 4);
+        }
+        INSERT_FIELD(var_r11, 2, 5, 7);
+        break;
+    }
+    WGPIPE.u8 = GX_LOAD_XF_REG;
+    WGPIPE.u32 = arg0 + 0x1040;
+    WGPIPE.u32 = var_r11;
+    WGPIPE.u8 = GX_LOAD_XF_REG;
+    arg5 -= 0x40;
+    INSERT_FIELD(arg5, arg4, 1, 8);
+    WGPIPE.u32 = arg0 + 0x1050;
+    WGPIPE.u32 = arg5;
+    switch (arg0) {
+    case GX_TEXCOORD0:
+        INSERT_FIELD(__GXContexts.main->x80, arg3, 6, 6);
+        break;
+    case GX_TEXCOORD1:
+        INSERT_FIELD(__GXContexts.main->x80, arg3, 6, 12);
+        break;
+    case GX_TEXCOORD2:
+        INSERT_FIELD(__GXContexts.main->x80, arg3, 6, 18);
+        break;
+    case GX_TEXCOORD3:
+        INSERT_FIELD(__GXContexts.main->x80, arg3, 6, 24);
+        break;
+    case GX_TEXCOORD4:
+        INSERT_FIELD(__GXContexts.main->x84, arg3, 6, 0);
+        break;
+    case GX_TEXCOORD5:
+        INSERT_FIELD(__GXContexts.main->x84, arg3, 6, 6);
+        break;
+    case GX_TEXCOORD6:
+        INSERT_FIELD(__GXContexts.main->x84, arg3, 6, 12);
+        break;
+    default:
+        INSERT_FIELD(__GXContexts.main->x84, arg3, 6, 18);
+        break;
+    }
+    __GXSetMatrixIndex(arg0 + 1);
 }
 
 /**
@@ -386,7 +509,7 @@ void GXSetTexCoordGen2(u32 arg0, s32 arg1, u32 arg2, s32 arg3, s32 arg4,
  * use in the Texture Environment (TEV) stages.
  *
  * Texture coordinates are generated from input data as described by
- * #GXSetTexCoordGen. The generated texture coordinates are linked to specific
+ * #GXSetTexCoordGen2. The generated texture coordinates are linked to specific
  * textures and specific Texture Environment (TEV) stages using #GXSetTevOrder.
  *
  * A consecutive number of texture coordinates may be generated, starting

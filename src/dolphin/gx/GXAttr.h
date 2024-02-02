@@ -6,7 +6,8 @@
 #include <dolphin/gx/GXEnum.h>
 
 void GXSetNumTexGens(u8 num);
-void GXSetTexCoordGen2(u32, s32, u32, s32, s32, s32);
+void GXSetTexCoordGen2(GXTexCoordID, GXTexGenType, GXTexGenSrc, u32, GXBool,
+                       u32);
 void GXInvalidateVtxCache(void);
 void GXSetArray(GXAttr attr, s32 base_ptr, u8 stride);
 void GXSetVtxAttrFmt(size_t vtxfmt, GXAttr attr, enum_t count, GXCompType type,
