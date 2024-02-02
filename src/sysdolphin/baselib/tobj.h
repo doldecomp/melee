@@ -278,6 +278,7 @@ HSD_Tlut* HSD_TlutLoadDesc(HSD_TlutDesc* tlutdesc);
 HSD_TObjTev* HSD_TObjTevLoadDesc(HSD_TObjTevDesc* tevdesc);
 HSD_TObj* _HSD_TObjGetCurrentByType(HSD_TObj* from, u32 mapping);
 
+void HSD_TObjRemove(HSD_TObj* tobj);
 void HSD_TObjRemoveAll(HSD_TObj* tobj);
 HSD_TObj* HSD_TObjGetNext(HSD_TObj* tobj);
 HSD_TObj* HSD_TObjAlloc(void);
@@ -288,6 +289,8 @@ HSD_Tlut* HSD_TlutAlloc(void);
 void HSD_TlutFree(HSD_Tlut* tlut);
 void HSD_TlutRemove(HSD_Tlut* tlut);
 HSD_TObjTev* HSD_TObjTevAlloc(void);
+void HSD_TObjTevFree(HSD_TObjTev* tev);
+void HSD_TObjTevRemove(HSD_TObjTev* tev);
 HSD_ImageDesc* HSD_ImageDescAlloc(void);
 void HSD_ImageDescFree(HSD_ImageDesc* idesc);
 void HSD_ImageDescCopyFromEFB(HSD_ImageDesc* idesc, u16 origx, u16 origy,

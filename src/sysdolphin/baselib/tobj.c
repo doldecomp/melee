@@ -411,7 +411,7 @@ static void MakeTextureMtx(HSD_TObj* tobj)
     MTXConcat(m, tobj->mtx, tobj->mtx);
 }
 
-void TObjSetupMtx(HSD_TObj* tobj)
+static void TObjSetupMtx(HSD_TObj* tobj)
 {
     int i;
 
