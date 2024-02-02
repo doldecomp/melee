@@ -6,11 +6,18 @@
 #include "memory.h"
 #include "mobj.h"
 #include "object.h"
+#include "perf.h"
+#include "pobj.h"
+#include "state.h"
 #include "tobj.h"
+#include "util.h"
 
 #include <__mem.h>
+#include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXFrameBuf.h>
 #include <dolphin/gx/GXTexture.h>
+#include <dolphin/gx/GXTransform.h>
+#include <dolphin/gx/GXVert.h>
 
 extern HSD_ObjAllocData shadow_alloc_data;
 
@@ -135,4 +142,39 @@ void HSD_ShadowSetSize(HSD_Shadow* shadow, u16 width, u16 height)
         HSD_CObjSetViewportfx4(shadow->camera, 0, width, 0, height);
         HSD_CObjSetScissorx4(shadow->camera, 0, width, 0, height);
     }
+}
+
+static void drawBackgroundRect(HSD_Shadow* shadow)
+{
+    f32 top, bottom, left, right, near;
+    HSD_CObj* cobj = shadow->camera;
+
+    GXLoadPosMtxImm(HSD_identityMtx, GX_PNMTX0);
+    HSD_PerfCountMtxLoad();
+    GXSetCurrentMtx(GX_PNMTX0);
+    HSD_ClearVtxDesc();
+    GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_F32, 0);
+    HSD_StateSetCullMode(GX_CULL_BACK);
+
+    top = HSD_CObjGetTop(cobj);
+    bottom = HSD_CObjGetBottom(cobj);
+    left = HSD_CObjGetLeft(cobj);
+    right = HSD_CObjGetRight(cobj);
+    near = HSD_CObjGetNear(cobj);
+
+    top *= 1.20000004768f;
+    bottom *= 1.20000004768f;
+    left *= 1.20000004768f;
+    right *= 1.20000004768f;
+    near *= -1.10000002384f;
+
+    GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+    GXPosition2f32(left, top);
+    GXPosition2f32(near, right);
+    GXPosition2f32(top, near);
+    GXPosition2f32(right, bottom);
+    GXPosition2f32(near, left);
+    GXPosition2f32(bottom, near);
+    GXEnd();
 }
