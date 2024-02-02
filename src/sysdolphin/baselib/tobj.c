@@ -511,10 +511,10 @@ static void setupTextureCoordGen(HSD_TObj* tobj)
     default:
         if (tobj_bump(tobj)) {
             GXSetTexCoordGen2(tobj->coord, GX_TG_MTX2x4, tobj->src,
-                              tobj->mtxid, GX_FALSE, GX_PTIDENTITY);
+                              tobj->mtxid, GX_DISABLE, GX_PTIDENTITY);
         } else {
             GXSetTexCoordGen2(tobj->coord, GX_TG_MTX2x4, tobj->src,
-                              GX_IDENTITY, GX_FALSE, tobj->mtxid);
+                              GX_IDENTITY, GX_DISABLE, tobj->mtxid);
         }
     }
 }
@@ -540,13 +540,13 @@ static void setupTextureCoordGenBump(HSD_TObj* bump)
 
     GXSetTexCoordGen2((GXTexCoordID) (bump->coord + 1), func[i],
                       HSD_TexCoordID2TexGenSrc(bump->coord), GX_IDENTITY,
-                      GX_FALSE, GX_PTIDENTITY);
+                      GX_DISABLE, GX_PTIDENTITY);
 }
 
 static void setupTextureCoordGenToon(HSD_TObj* toon)
 {
     GXSetTexCoordGen2(toon->coord, GX_TG_SRTG, toon->src, GX_IDENTITY,
-                      GX_FALSE, GX_PTIDENTITY);
+                      GX_DISABLE, GX_PTIDENTITY);
 }
 
 void HSD_TObjSetupTextureCoordGen(HSD_TObj* tobj)
