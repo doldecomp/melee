@@ -9,7 +9,6 @@
 #include "tev.h"
 
 #include <__mem.h>
-#include <math.h> // IWYU pragma: keep
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXFrameBuf.h>
 #include <dolphin/gx/GXMisc.h>
@@ -19,6 +18,8 @@
 #include <dolphin/mtx/types.h>
 #include <MetroTRK/intrinsics.h>
 
+#define FLT_EPSILON 1.00000001335e-10F
+
 static void MakeTextureMtx(HSD_TObj* tobj);
 static void TObjInfoInit(void);
 
@@ -26,12 +27,7 @@ HSD_TObjInfo hsdTObj = { TObjInfoInit };
 
 static HSD_TObjInfo* default_class = NULL;
 
-extern HSD_TObj* tobj_head;
-
-extern char lbl_804055B8[];
-
-char HSD_TObj_804D5C90[7] = "tobj.c\0";
-char HSD_TObj_804D5C98[5] = "tobj\0";
+HSD_TObj* tobj_head;
 
 void HSD_TObjRemoveAnim(HSD_TObj* tobj)
 {
@@ -152,9 +148,7 @@ static void TObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
     switch (type) {
     case HSD_A_T_TIMG: {
         int n;
-        if (tobj->imagetbl == NULL) {
-            __assert(HSD_TObj_804D5C90, 276, "tobj->imagetbl");
-        }
+        HSD_ASSERT(276, tobj->imagetbl);
         n = (int) val->fv;
         if (tobj->imagetbl[n]) {
             tobj->imagedesc = tobj->imagetbl[n];
@@ -298,9 +292,7 @@ HSD_TObj* HSD_TObjLoadDesc(HSD_TObjDesc* td)
             tobj = HSD_TObjAlloc();
         } else {
             tobj = hsdNew(info);
-            if (tobj == NULL) {
-                __assert(HSD_TObj_804D5C90, 468, HSD_TObj_804D5C98);
-            }
+            HSD_ASSERT(468, tobj);
         }
         HSD_TOBJ_METHOD(tobj)->load(tobj, td);
         return tobj;
@@ -350,10 +342,6 @@ END:
     return tp;
 }
 
-char HSD_TObj_8040562C[23] = "unexpected texmap id.\n\0";
-
-#pragma push
-#pragma force_active on
 static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
 {
     switch (id) {
@@ -374,11 +362,10 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
     case GX_TEXMAP7:
         return GX_PTTEXMTX7;
     default:
-        HSD_Panic(HSD_TObj_804D5C90, 574, HSD_TObj_8040562C);
+        HSD_Panic(__FILE__, 574, "unexpected texmap id.\n\0");
     }
     return 0;
 }
-#pragma pop
 
 static void MakeTextureMtx(HSD_TObj* tobj)
 {
@@ -396,7 +383,7 @@ static void MakeTextureMtx(HSD_TObj* tobj)
     }
 
     if (!no_assert) {
-        __assert(HSD_TObj_804D5C90, 589, "tobj->repeat_s && tobj->repeat_t");
+        __assert(__FILE__, 589, "tobj->repeat_s && tobj->repeat_t");
     }
 
     scale.x = __fabsf(tobj->scale.x) < FLT_EPSILON
@@ -1192,7 +1179,7 @@ void HSD_TObjSetup(HSD_TObj* tobj)
 
         TObjSetupMtx(tobj);
         HSD_ASSERT(1578, imagedesc);
-        HSD_ASSERT(1579, imagedesc->img_ptr);
+        HSD_ASSERT(1579, imagedesc->image_ptr);
 
         lod = tobj->lod != NULL ? tobj->lod : &default_lod;
         min_filter = lod->minFilt;
@@ -1231,7 +1218,7 @@ void HSD_TObjSetup(HSD_TObj* tobj)
                 tlut->tlut_name = GX_TLUT0;
             }
 
-            GXInitTexObjCI(&texobj, imagedesc->img_ptr, imagedesc->width,
+            GXInitTexObjCI(&texobj, imagedesc->image_ptr, imagedesc->width,
                            imagedesc->height, (GXCITexFmt) imagedesc->format,
                            tobj->wrap_s, tobj->wrap_t,
                            imagedesc->mipmap ? GX_TRUE : GX_FALSE,
@@ -1249,7 +1236,7 @@ void HSD_TObjSetup(HSD_TObj* tobj)
         case GX_TF_RGB5A3:
         case GX_TF_RGBA8:
         case GX_TF_CMPR:
-            GXInitTexObj(&texobj, imagedesc->img_ptr, imagedesc->width,
+            GXInitTexObj(&texobj, imagedesc->image_ptr, imagedesc->width,
                          imagedesc->height, imagedesc->format, tobj->wrap_s,
                          tobj->wrap_t, imagedesc->mipmap ? GX_TRUE : GX_FALSE);
             break;
@@ -1504,6 +1491,14 @@ HSD_TObj* HSD_TObjGetNext(HSD_TObj* tobj)
     return tobj->next;
 }
 
+void HSD_TObjSetDefaultClass(HSD_TObjInfo* info)
+{
+    if (info) {
+        HSD_ASSERT(2027, hsdIsDescendantOf(info, &hsdTObj));
+    }
+    default_class = info;
+}
+
 HSD_TObjInfo* HSD_TObjGetDefaultClass(void)
 {
     return default_class ? default_class : &hsdTObj;
@@ -1589,7 +1584,7 @@ void HSD_ImageDescCopyFromEFB(HSD_ImageDesc* idesc, u16 origx, u16 origy,
     if (clear) {
         HSD_StateSetZMode(GX_TRUE, GX_LEQUAL, GX_TRUE);
     }
-    GXCopyTex(idesc->img_ptr, clear);
+    GXCopyTex(idesc->image_ptr, clear);
     if (sync) {
         GXPixModeSync();
         GXInvalidateTexAll();

@@ -201,7 +201,7 @@ typedef struct _HSD_TexLODDesc {
 } HSD_TexLODDesc;
 
 struct _HSD_ImageDesc {
-    void* img_ptr;
+    void* image_ptr;
     u16 width;
     u16 height;
     u32 format;
