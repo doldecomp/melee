@@ -43,7 +43,7 @@ void HSD_ShadowInitAllocData(void)
 HSD_TObj* makeShadowTObj(void)
 {
     HSD_TObj* shadowTObj;
-    shadowTObj = allocShadowTObj();
+    shadowTObj = HSD_TObjAlloc();
     shadowTObj->src = 0;
     shadowTObj->wrap_s = 0;
     shadowTObj->wrap_t = 0;

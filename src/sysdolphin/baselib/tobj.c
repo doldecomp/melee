@@ -11,6 +11,9 @@
 #include <__mem.h>
 #include <math.h> // IWYU pragma: keep
 #include <dolphin/gx/GXAttr.h>
+#include <dolphin/gx/GXFrameBuf.h>
+#include <dolphin/gx/GXMisc.h>
+#include <dolphin/gx/GXTexture.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
@@ -20,6 +23,8 @@ static void MakeTextureMtx(HSD_TObj* tobj);
 static void TObjInfoInit(void);
 
 HSD_TObjInfo hsdTObj = { TObjInfoInit };
+
+static HSD_TObjInfo* default_class = NULL;
 
 extern HSD_TObj* tobj_head;
 
@@ -290,7 +295,7 @@ HSD_TObj* HSD_TObjLoadDesc(HSD_TObjDesc* td)
         HSD_ClassInfo* info;
 
         if (!td->class_name || !(info = hsdSearchClassInfo(td->class_name))) {
-            tobj = allocShadowTObj();
+            tobj = HSD_TObjAlloc();
         } else {
             tobj = hsdNew(info);
             if (tobj == NULL) {
@@ -939,6 +944,229 @@ static void MakeColorGenTExp(u32 lightmap, HSD_TObj* tobj, HSD_TExp** c,
     }
 }
 
+s32 HSD_TObjAssignResources(HSD_TObj* tobj_top)
+{
+    HSD_TObj* tobj;
+    u32 texmap_no = 0;
+    u32 texcoord_no = 0;
+    u32 limit = 8;
+    HSD_TObj* bump = NULL;
+    HSD_TObj* toon = NULL;
+
+    if (tobj_top == NULL) {
+        return 0;
+    }
+
+    for (tobj = tobj_top; tobj; tobj = tobj->next) {
+        if (tobj_coord(tobj) == TEX_COORD_TOON) {
+            toon = tobj;
+        } else if (tobj_bump(tobj)) {
+            bump = tobj;
+        }
+    }
+
+    if (toon) {
+        limit -= 1;
+    }
+    if (bump) {
+        limit -= 2;
+    }
+
+    for (tobj = tobj_top; tobj; tobj = tobj->next) {
+        if (tobj_coord(tobj) == TEX_COORD_TOON) {
+            if (tobj != toon) {
+                tobj->id = GX_TEXMAP_NULL;
+            }
+        } else if (tobj_bump(tobj)) {
+            if (tobj != bump) {
+                tobj->id = GX_TEXMAP_NULL;
+            }
+        } else if (texmap_no < limit) {
+            tobj->id = HSD_Index2TexMap(texmap_no++);
+            tobj->mtxid = HSD_TexMapID2PTTexMtx(tobj->id);
+            switch (tobj_coord(tobj)) {
+            case TEX_COORD_REFLECTION:
+            case TEX_COORD_HILIGHT:
+            case TEX_COORD_SHADOW:
+                tobj->coord = HSD_Index2TexCoord(texcoord_no++);
+                break;
+            default:
+                break;
+            }
+        } else {
+            tobj->id = GX_TEXMAP_NULL;
+        }
+    }
+
+    for (tobj = tobj_top; tobj; tobj = tobj->next) {
+        if (tobj->id != GX_TEXMAP_NULL && !tobj_bump(tobj)) {
+            switch (tobj_coord(tobj)) {
+            case TEX_COORD_UV:
+                tobj->coord = HSD_Index2TexCoord(texcoord_no++);
+                break;
+            default:
+                break;
+            }
+        }
+    }
+
+    if (bump) {
+        bump->id = HSD_Index2TexMap(texmap_no++);
+        bump->mtxid = GX_TEXMTX9;
+        bump->coord = HSD_Index2TexCoord(texcoord_no);
+        texcoord_no += 2;
+    }
+    if (toon) {
+        toon->id = HSD_Index2TexMap(texmap_no++);
+        toon->coord = HSD_Index2TexCoord(texcoord_no++);
+    }
+
+    return (int) texcoord_no;
+}
+
+static int DifferentTluts(HSD_Tlut* t0, HSD_Tlut* t1)
+{
+    return (t0->lut != t0->lut) || (t0->n_entries != t1->n_entries);
+}
+
+void HSD_TObjSetup(HSD_TObj* tobj)
+{
+    GXTlutObj tlutobj;
+    GXTexObj texobj;
+    int num;
+    HSD_Tlut* tluts[8];
+    int nb_tluts = 0;
+    u32 tlut_name = GX_TLUT0;
+    u32 big_tlut_name = GX_BIGTLUT0;
+    int i;
+
+    tobj_head = tobj;
+
+    if (tobj == NULL) {
+        return;
+    }
+
+    num = HSD_TObjAssignResources(tobj);
+    if (num > 0) {
+        HSD_StateRegisterTexGen(HSD_Index2TexCoord(num - 1));
+    }
+
+    for (; tobj; tobj = tobj->next) {
+        static HSD_TexLODDesc default_lod = {
+            GX_LIN_MIP_LIN, 0.0F, GX_FALSE, GX_FALSE, GX_ANISO_1,
+        };
+        HSD_TexLODDesc* lod;
+        HSD_ImageDesc* imagedesc = tobj->imagedesc;
+        GXTexFilter min_filter;
+
+        if (tobj->id == GX_TEXMAP_NULL) {
+            continue;
+        }
+
+        TObjSetupMtx(tobj);
+        HSD_ASSERT(1578, imagedesc);
+        HSD_ASSERT(1579, imagedesc->img_ptr);
+
+        lod = tobj->lod != NULL ? tobj->lod : &default_lod;
+        min_filter = lod->minFilt;
+
+        switch (imagedesc->format) {
+        case GX_TF_C4:
+        case GX_TF_C8:
+        case GX_TF_C14X2: {
+            HSD_Tlut* tlut;
+
+            if (tobj->tlut_no != (u8) -1) {
+                tlut = tobj->tluttbl[tobj->tlut_no];
+            } else {
+                tlut = tobj->tlut;
+            }
+
+            HSD_ASSERT(1595, tlut);
+
+            for (i = 0; i < nb_tluts; i++) {
+                if (!DifferentTluts(tluts[i], tlut)) {
+                    break;
+                }
+            }
+            if (i < nb_tluts) {
+                tlut->tlut_name = tluts[i]->tlut_name;
+            } else if (nb_tluts < 8) {
+                if (tlut->n_entries > 256) {
+                    tlut->tlut_name = big_tlut_name++;
+                } else {
+                    tlut->tlut_name = tlut_name++;
+                }
+                GXInitTlutObj(&tlutobj, tlut->lut, tlut->fmt, tlut->n_entries);
+                GXLoadTlut(&tlutobj, tlut->tlut_name);
+                tluts[nb_tluts++] = tlut;
+            } else {
+                tlut->tlut_name = GX_TLUT0;
+            }
+
+            GXInitTexObjCI(&texobj, imagedesc->img_ptr, imagedesc->width,
+                           imagedesc->height, (GXCITexFmt) imagedesc->format,
+                           tobj->wrap_s, tobj->wrap_t,
+                           imagedesc->mipmap ? GX_TRUE : GX_FALSE,
+                           tlut->tlut_name);
+            if (min_filter == GX_LIN_MIP_LIN) {
+                min_filter = GX_LIN_MIP_NEAR;
+            }
+        } break;
+
+        case GX_TF_I4:
+        case GX_TF_I8:
+        case GX_TF_IA4:
+        case GX_TF_IA8:
+        case GX_TF_RGB565:
+        case GX_TF_RGB5A3:
+        case GX_TF_RGBA8:
+        case GX_TF_CMPR:
+            GXInitTexObj(&texobj, imagedesc->img_ptr, imagedesc->width,
+                         imagedesc->height, imagedesc->format, tobj->wrap_s,
+                         tobj->wrap_t, imagedesc->mipmap ? GX_TRUE : GX_FALSE);
+            break;
+
+        default:
+            HSD_ASSERT(0x677, 0);
+        }
+
+        if (!imagedesc->mipmap) {
+            min_filter &= 0x01;
+        }
+        GXInitTexObjLOD(&texobj, min_filter, tobj->magFilt, imagedesc->minLOD,
+                        imagedesc->maxLOD, lod->LODBias, lod->bias_clamp,
+                        lod->edgeLODEnable, lod->max_anisotropy);
+
+        GXLoadTexObj(&texobj, tobj->id);
+    }
+}
+
+u32 HSD_TGTex2Index(GXTexGenSrc tgtex)
+{
+    switch (tgtex) {
+    case GX_TG_TEX0:
+        return 0;
+    case GX_TG_TEX1:
+        return 1;
+    case GX_TG_TEX2:
+        return 2;
+    case GX_TG_TEX3:
+        return 3;
+    case GX_TG_TEX4:
+        return 4;
+    case GX_TG_TEX5:
+        return 5;
+    case GX_TG_TEX6:
+        return 6;
+    case GX_TG_TEX7:
+        return 7;
+    default:
+        HSD_ASSERT(1701, 0);
+    }
+    return GX_TG_TEX0;
+}
+
 GXTexGenSrc HSD_TexCoordID2TexGenSrc(GXTexCoordID coord)
 {
     switch (coord) {
@@ -962,3 +1190,340 @@ GXTexGenSrc HSD_TexCoordID2TexGenSrc(GXTexCoordID coord)
     }
     return GX_TG_TEXCOORD0;
 }
+
+u32 HSD_TexCoord2Index(GXTexCoordID coord_id)
+{
+    switch (coord_id) {
+    case GX_TEXCOORD0:
+        return 0;
+    case GX_TEXCOORD1:
+        return 1;
+    case GX_TEXCOORD2:
+        return 2;
+    case GX_TEXCOORD3:
+        return 3;
+    case GX_TEXCOORD4:
+        return 4;
+    case GX_TEXCOORD5:
+        return 5;
+    case GX_TEXCOORD6:
+        return 6;
+    case GX_TEXCOORD7:
+        return 7;
+    default:
+        HSD_ASSERT(1776, 0);
+    }
+    return GX_TEXCOORD0;
+}
+
+GXTexCoordID HSD_Index2TexCoord(u32 index)
+{
+    switch (index) {
+    case 0:
+        return GX_TEXCOORD0;
+    case 1:
+        return GX_TEXCOORD1;
+    case 2:
+        return GX_TEXCOORD2;
+    case 3:
+        return GX_TEXCOORD3;
+    case 4:
+        return GX_TEXCOORD4;
+    case 5:
+        return GX_TEXCOORD5;
+    case 6:
+        return GX_TEXCOORD6;
+    case 7:
+        return GX_TEXCOORD7;
+    default:
+        HSD_ASSERT(1800, 0);
+    }
+    return GX_TEXCOORD0;
+}
+
+u32 HSD_TexMtx2Index(GXTexMtx texmtx)
+{
+    switch (texmtx) {
+    case GX_TEXMTX0:
+        return 0;
+    case GX_TEXMTX1:
+        return 1;
+    case GX_TEXMTX2:
+        return 2;
+    case GX_TEXMTX3:
+        return 3;
+    case GX_TEXMTX4:
+        return 4;
+    case GX_TEXMTX5:
+        return 5;
+    case GX_TEXMTX6:
+        return 6;
+    case GX_TEXMTX7:
+        return 7;
+    case GX_TEXMTX8:
+        return 8;
+    case GX_TEXMTX9:
+        return 9;
+    case GX_IDENTITY:
+        return 10;
+    default:
+        HSD_Panic(__FILE__, 1845, "specified texmtx id desn't exist.\n");
+    }
+    return (u32) -1;
+}
+
+GXTexMtx HSD_Index2TexMtx(u32 index)
+{
+    switch (index) {
+    case 0:
+        return GX_TEXMTX0;
+    case 1:
+        return GX_TEXMTX1;
+    case 2:
+        return GX_TEXMTX2;
+    case 3:
+        return GX_TEXMTX3;
+    case 4:
+        return GX_TEXMTX4;
+    case 5:
+        return GX_TEXMTX5;
+    case 6:
+        return GX_TEXMTX6;
+    case 7:
+        return GX_TEXMTX7;
+    case 8:
+        return GX_TEXMTX8;
+    case 9:
+        return GX_TEXMTX9;
+    case 10:
+        return GX_IDENTITY;
+    default:
+        OSReport("texmtx index exceed hardware limit (%d).\n", index);
+        HSD_Panic(__FILE__, 1877, "");
+    }
+    return GX_IDENTITY;
+}
+
+GXTexMapID HSD_Index2TexMap(u32 index)
+{
+    switch (index) {
+    case 0:
+        return GX_TEXMAP0;
+    case 1:
+        return GX_TEXMAP1;
+    case 2:
+        return GX_TEXMAP2;
+    case 3:
+        return GX_TEXMAP3;
+    case 4:
+        return GX_TEXMAP4;
+    case 5:
+        return GX_TEXMAP5;
+    case 6:
+        return GX_TEXMAP6;
+    case 7:
+        return GX_TEXMAP7;
+    default:
+        HSD_ASSERT(1915, 0);
+    }
+    return GX_TEXMAP0;
+}
+
+u32 HSD_TexMap2Index(GXTexMapID mapid)
+{
+    switch (mapid) {
+    case GX_TEXMAP0:
+        return 0;
+    case GX_TEXMAP1:
+        return 1;
+    case GX_TEXMAP2:
+        return 2;
+    case GX_TEXMAP3:
+        return 3;
+    case GX_TEXMAP4:
+        return 4;
+    case GX_TEXMAP5:
+        return 5;
+    case GX_TEXMAP6:
+        return 6;
+    case GX_TEXMAP7:
+        return 7;
+    default:
+        HSD_ASSERT(1939, 0);
+    }
+    return 0;
+}
+
+void HSD_TObjRemove(HSD_TObj* tobj)
+{
+    hsdDelete(tobj);
+}
+
+void HSD_TObjRemoveAll(HSD_TObj* tobj)
+{
+    while (tobj) {
+        HSD_TObj* next = tobj->next;
+        HSD_TObjRemove(tobj);
+        tobj = next;
+    }
+}
+
+HSD_TObj* HSD_TObjGetNext(HSD_TObj* tobj)
+{
+    if (tobj == NULL) {
+        return NULL;
+    }
+
+    return tobj->next;
+}
+
+HSD_TObjInfo* HSD_TObjGetDefaultClass(void)
+{
+    return default_class ? default_class : &hsdTObj;
+}
+
+HSD_TObj* HSD_TObjAlloc(void)
+{
+    HSD_TObj* new = hsdNew((HSD_ClassInfo*) HSD_TObjGetDefaultClass());
+    HSD_ASSERT(2040, new);
+    return new;
+}
+
+void HSD_TObjFree(HSD_TObj* tobj)
+{
+    if (tobj) {
+        HSD_CLASS_METHOD(tobj)->destroy((HSD_Class*) tobj);
+    }
+}
+
+HSD_Tlut* HSD_TlutAlloc(void)
+{
+    HSD_Tlut* tlut = hsdAllocMemPiece(sizeof(HSD_Tlut));
+    HSD_ASSERT(2069, tlut);
+    memset(tlut, 0, sizeof(HSD_Tlut));
+    return tlut;
+}
+
+void HSD_TlutFree(HSD_Tlut* tlut)
+{
+    hsdFreeMemPiece(tlut, sizeof(HSD_Tlut));
+}
+
+void HSD_TlutRemove(HSD_Tlut* tlut)
+{
+    if (tlut) {
+        HSD_TlutFree(tlut);
+    }
+}
+
+HSD_TObjTev* HSD_TObjTevAlloc(void)
+{
+    HSD_TObjTev* tev = hsdAllocMemPiece(sizeof(HSD_TObjTev));
+    HSD_ASSERT(2112, tev);
+    memset(tev, 0, sizeof(HSD_TObjTev));
+    return tev;
+}
+
+void HSD_TObjTevFree(HSD_TObjTev* tev)
+{
+    hsdFreeMemPiece(tev, sizeof(HSD_TObjTev));
+}
+
+void HSD_TObjTevRemove(HSD_TObjTev* tev)
+{
+    if (tev) {
+        HSD_TObjTevFree(tev);
+    }
+}
+
+HSD_ImageDesc* HSD_ImageDescAlloc(void)
+{
+    HSD_ImageDesc* idesc = hsdAllocMemPiece(sizeof(HSD_ImageDesc));
+    HSD_ASSERT(2155, idesc);
+    memset(idesc, 0, sizeof(HSD_ImageDesc));
+    return idesc;
+}
+
+void HSD_ImageDescFree(HSD_ImageDesc* idesc)
+{
+    hsdFreeMemPiece(idesc, sizeof(HSD_ImageDesc));
+}
+
+void HSD_ImageDescCopyFromEFB(HSD_ImageDesc* idesc, u16 origx, u16 origy,
+                              GXBool clear, int sync)
+{
+    if (!idesc) {
+        return;
+    }
+
+    GXSetTexCopySrc(origx, origy, idesc->width, idesc->height);
+    GXSetTexCopyDst(idesc->width, idesc->height, idesc->format,
+                    idesc->mipmap ? GX_TRUE : GX_FALSE);
+    if (clear) {
+        HSD_StateSetZMode(GX_TRUE, GX_LEQUAL, GX_TRUE);
+    }
+    GXCopyTex(idesc->img_ptr, clear);
+    if (sync) {
+        GXPixModeSync();
+        GXInvalidateTexAll();
+    }
+}
+
+static int TObjInit(HSD_Class* o)
+{
+    int res;
+
+    if ((res = HSD_PARENT_INFO(&hsdTObj)->init(o)) >= 0) {
+        HSD_TObj* tobj = HSD_TOBJ(o);
+
+        // tobj->anim_id = -1;
+
+        return 0;
+    }
+    return res;
+}
+
+static void TObjRelease(HSD_Class* o)
+{
+    HSD_TObj* tobj = HSD_TOBJ(o);
+
+    HSD_AObjRemove(tobj->aobj);
+    HSD_TlutRemove(tobj->tlut);
+    HSD_TObjTevRemove(tobj->tev);
+    if (tobj->tluttbl) {
+        int i;
+        for (i = 0; tobj->tluttbl[i]; i++) {
+            HSD_TlutRemove(tobj->tluttbl[i]);
+        }
+        HSD_Free(tobj->tluttbl);
+    }
+
+    HSD_PARENT_INFO(&hsdTObj)->release(o);
+}
+
+static void TObjAmnesia(HSD_ClassInfo* info)
+{
+    if (info == HSD_CLASS_INFO(default_class)) {
+        default_class = NULL;
+    }
+    if (info == HSD_CLASS_INFO(&hsdTObj)) {
+        tobj_head = NULL;
+    }
+    HSD_PARENT_INFO(&hsdTObj)->amnesia(info);
+}
+
+/*static void TObjInfoInit(void)
+{
+    hsdInitClassInfo(HSD_CLASS_INFO(&hsdTObj), HSD_CLASS_INFO(&hsdObj),
+                     "sysdolphin_base_library", "hsd_tobj",
+                     sizeof(HSD_TObjInfo), sizeof(HSD_TObj));
+
+    HSD_CLASS_INFO(&hsdTObj)->init = TObjInit;
+    HSD_CLASS_INFO(&hsdTObj)->release = TObjRelease;
+    HSD_CLASS_INFO(&hsdTObj)->amnesia = TObjAmnesia;
+    HSD_TOBJ_INFO(&hsdTObj)->load = TObjLoad;
+    HSD_TOBJ_INFO(&hsdTObj)->make_texp = TObjMakeTExp;
+
+    hsdTObj.make_mtx = MakeTextureMtx;
+    // hsdTObj.update = TObjUpdateFunc;
+}*/

@@ -80,7 +80,7 @@
 /* 000000EC 0000012C  54 1D 10 3A */	slwi r29, r0, 2
 /* 000000F0 00000130  48 00 00 0C */	b .L_000000FC
 .L_000000F4:
-/* 000000F4 00000134  48 00 00 01 */	bl HSD_TlutFree
+/* 000000F4 00000134  48 00 00 01 */	bl HSD_TlutRemove
 /* 000000F8 00000138  3B BD 00 04 */	addi r29, r29, 0x4
 .L_000000FC:
 /* 000000FC 0000013C  80 9F 00 6C */	lwz r4, 0x6c(r31)
@@ -609,7 +609,7 @@
 /* 000007F4 00000834  28 03 00 00 */	cmplwi r3, 0x0
 /* 000007F8 00000838  40 82 00 10 */	bne .L_00000808
 .L_000007FC:
-/* 000007FC 0000083C  48 00 00 01 */	bl allocShadowTObj
+/* 000007FC 0000083C  48 00 00 01 */	bl HSD_TObjAlloc
 /* 00000800 00000840  7C 7F 1B 78 */	mr r31, r3
 /* 00000804 00000844  48 00 00 20 */	b .L_00000824
 .L_00000808:
@@ -3305,7 +3305,7 @@
 /* 00002C28 00002C68  4E 80 00 20 */	blr
 .endfn HSD_TObjGetNext
 
-.fn allocShadowTObj, global
+.fn HSD_TObjAlloc, global
 /* 00002C2C 00002C6C  7C 08 02 A6 */	mflr r0
 /* 00002C30 00002C70  90 01 00 04 */	stw r0, 0x4(r1)
 /* 00002C34 00002C74  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -3332,7 +3332,7 @@
 /* 00002C7C 00002CBC  38 21 00 10 */	addi r1, r1, 0x10
 /* 00002C80 00002CC0  7C 08 03 A6 */	mtlr r0
 /* 00002C84 00002CC4  4E 80 00 20 */	blr
-.endfn allocShadowTObj
+.endfn HSD_TObjAlloc
 
 .fn HSD_TObjFree, global
 /* 00002C88 00002CC8  7C 08 02 A6 */	mflr r0
@@ -3377,7 +3377,7 @@
 /* 00002D10 00002D50  4E 80 00 20 */	blr
 .endfn HSD_TlutAlloc
 
-.fn HSD_TlutFree, global
+.fn HSD_TlutRemove, global
 /* 00002D14 00002D54  7C 08 02 A6 */	mflr r0
 /* 00002D18 00002D58  28 03 00 00 */	cmplwi r3, 0x0
 /* 00002D1C 00002D5C  90 01 00 04 */	stw r0, 0x4(r1)
@@ -3390,7 +3390,7 @@
 /* 00002D34 00002D74  38 21 00 08 */	addi r1, r1, 0x8
 /* 00002D38 00002D78  7C 08 03 A6 */	mtlr r0
 /* 00002D3C 00002D7C  4E 80 00 20 */	blr
-.endfn HSD_TlutFree
+.endfn HSD_TlutRemove
 
 .fn HSD_TObjTevAlloc, global
 /* 00002D40 00002D80  7C 08 02 A6 */	mflr r0

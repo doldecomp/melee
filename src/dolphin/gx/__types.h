@@ -138,4 +138,8 @@ struct GXTexObj {
     u8 x18_pad[8];    // at 0x18
 };
 
+struct GXTlutObj {
+    u32 dummy[3];
+};
+
 #endif
