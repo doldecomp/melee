@@ -45,6 +45,8 @@ static HSD_ZList* zlist_xlu_top = NULL;
 static HSD_ZList** zlist_xlu_bottom = &zlist_xlu_top;
 static int zlist_xlu_nb = 0;
 
+#define ZLIST_NEXT(list, offset) (*(HSD_ZList**) (((u8*) (list)) + (offset)))
+
 void HSD_ZListInitAllocData(void)
 {
     HSD_ObjAllocInit(&zlist_alloc_data, sizeof(HSD_ZList), 4);
@@ -221,4 +223,51 @@ void HSD_JObjDispDObj(HSD_JObj* jobj, MtxPtr vmtx, HSD_TrspMask trsp_mask,
             }
         }
     }
+}
+
+static HSD_ZList* zlist_sort(HSD_ZList* list, s32 nb, s32 offset)
+{
+    HSD_ZList *fore, *hind, **ptr;
+    int nb_fore, nb_hind;
+    int i;
+
+    if (nb <= 1) {
+        if (list != NULL) {
+            ZLIST_NEXT(list, offset) = NULL;
+        }
+        return list;
+    }
+
+    nb_fore = nb / 2;
+    nb_hind = nb - nb_fore;
+
+    hind = list;
+    for (i = 0; i < nb_fore; i++) {
+        hind = ZLIST_NEXT(hind, offset);
+    }
+
+    fore = zlist_sort(list, nb_fore, offset);
+    hind = zlist_sort(hind, nb_hind, offset);
+
+    list = NULL;
+    ptr = &list;
+
+    while (fore != NULL && hind != NULL) {
+        if (fore->pmtx[2][3] <= hind->pmtx[2][3]) {
+            *ptr = fore;
+            fore = ZLIST_NEXT(fore, offset);
+        } else {
+            *ptr = hind;
+            hind = ZLIST_NEXT(hind, offset);
+        }
+        ptr = &ZLIST_NEXT(*ptr, offset);
+    }
+
+    if (fore != NULL) {
+        *ptr = fore;
+    } else if (hind != NULL) {
+        *ptr = hind;
+    }
+
+    return list;
 }
