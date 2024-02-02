@@ -1628,8 +1628,8 @@ static char unused13[] = "  tra(G): ";
 #pragma pop
 #endif
 
-void HSD_JObjDispSub(HSD_JObj* jobj, MtxPtr vmtx, MtxPtr pmtx, u32 trsp_mask,
-                     u32 rendermode);
+void HSD_JObjDispSub(HSD_JObj* jobj, MtxPtr vmtx, MtxPtr pmtx,
+                     HSD_TrspMask trsp_mask, u32 rendermode);
 void HSD_JObjMakeMatrix(HSD_JObj* jobj);
 void HSD_JObjMakePositionMtx(HSD_JObj* jobj, MtxPtr mtx, MtxPtr rmtx);
 

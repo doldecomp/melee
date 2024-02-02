@@ -128,6 +128,13 @@ typedef enum PObjSetupFlag {
     SETUP_NONE = 0
 } PObjSetupFlag;
 
+typedef enum HSD_TrspMask {
+    HSD_TRSP_OPA = 1,
+    HSD_TRSP_XLU = 2,
+    HSD_TRSP_TEXEDGE = 4,
+    HSD_TRSP_ALL = 7,
+} HSD_TrspMask;
+
 #define HSD_A_L_LITC_R 9
 #define HSD_A_L_LITC_G 10
 #define HSD_A_L_LITC_B 11

@@ -184,7 +184,7 @@ void GXClearVtxDesc(void)
  * @see          GXSetVtxAttrFmt
  * @see          GXSetVtxDesc
  */
-void GXSetVtxAttrFmt(size_t vtxfmt, GXAttr attr, enum_t count, GXAttrType type,
+void GXSetVtxAttrFmt(size_t vtxfmt, GXAttr attr, enum_t count, GXCompType type,
                      u8 frac)
 {
     s32* temp_r4 = &__GXContexts.main->x1C_data[vtxfmt];

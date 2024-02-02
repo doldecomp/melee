@@ -222,7 +222,7 @@ void GXCopyDisp(void* dest, GXBool clear)
     NOT_IMPLEMENTED;
 }
 
-void GXCopyTex(u32 arg0, GXBool arg1)
+void GXCopyTex(void* arg0, GXBool arg1)
 {
     NOT_IMPLEMENTED;
 }

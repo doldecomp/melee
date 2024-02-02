@@ -9,7 +9,7 @@
 void __GXSetSUTexSize(void);
 void GXLoadTexObjPreLoaded(unk_t, unk_t, s32);
 
-void GXInvalidateTexAll(GXContext*, s32, u8*);
+void GXInvalidateTexAll(void);
 GXTexRegionCallback GXSetTlutRegionCallback(GXTexRegionCallback arg0);
 void __SetSURegs(s32, s32);
 void GXInitTexObj(unk_t, u32, u16, u16, s32, s32, s32, s8);

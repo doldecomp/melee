@@ -90,8 +90,6 @@ struct HSD_JObj;
 #define HSD_JOBJ_INFO(i) ((HSD_JObjInfo*) (i))
 #define HSD_JOBJ_METHOD(o) HSD_JOBJ_INFO((o)->object.parent.class_info)
 
-typedef u32 HSD_TrspMask;
-
 struct HSD_JObj {
     /* +0 */ HSD_Obj object;
     /* +8 */ HSD_JObj* next;
@@ -448,6 +446,11 @@ static inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx mtx)
     HSD_ASSERT(1170, jobj);
     HSD_ASSERT(1171, mtx);
     PSMTXCopy(mtx, jobj->mtx);
+}
+
+static inline void HSD_JObjRef(HSD_JObj* jobj)
+{
+    ref_INC(jobj);
 }
 
 static inline void HSD_JObjRefThis(HSD_JObj* jobj)
