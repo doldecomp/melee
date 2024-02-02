@@ -77,7 +77,7 @@ void HSD_TObjAddAnim(HSD_TObj* tobj, HSD_TexAnim* texanim)
 
             if (tobj->tluttbl != NULL) {
                 for (i = 0; tobj->tluttbl[i]; i++) {
-                    HSD_TlutFree(tobj->tluttbl[i]);
+                    HSD_TlutRemove(tobj->tluttbl[i]);
                 }
                 HSD_Free(tobj->tluttbl);
             }
@@ -363,7 +363,7 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
     case GX_TEXMAP7:
         return GX_PTTEXMTX7;
     default:
-        HSD_Panic(__FILE__, 574, "unexpected texmap id.\n\0");
+        HSD_Panic(__FILE__, 574, "unexpected texmap id.\n");
     }
     return 0;
 }
@@ -411,7 +411,7 @@ static void MakeTextureMtx(HSD_TObj* tobj)
     MTXConcat(m, tobj->mtx, tobj->mtx);
 }
 
-void TObjSetupMtx(HSD_TObj* tobj)
+static void TObjSetupMtx(HSD_TObj* tobj)
 {
     int i;
 
@@ -499,6 +499,9 @@ void TObjSetupMtx(HSD_TObj* tobj)
 
 static void setupTextureCoordGen(HSD_TObj* tobj)
 {
+    u32 mtxid;
+    GXTexGenSrc src;
+
     switch (tobj_coord(tobj)) {
     case TEX_COORD_SHADOW:
         GXSetTexCoordGen2(tobj->coord, GX_TG_MTX3x4, GX_TG_POS, GX_PNMTX0,
@@ -511,8 +514,9 @@ static void setupTextureCoordGen(HSD_TObj* tobj)
         break;
     default:
         if (tobj_bump(tobj)) {
-            GXSetTexCoordGen2(tobj->coord, GX_TG_MTX2x4, tobj->src,
-                              tobj->mtxid, GX_DISABLE, GX_PTIDENTITY);
+            mtxid = tobj->mtxid;
+            src = tobj->src;
+            GXSetTexCoordGen(tobj->coord, GX_TG_MTX2x4, src, mtxid);
         } else {
             GXSetTexCoordGen2(tobj->coord, GX_TG_MTX2x4, tobj->src,
                               GX_IDENTITY, GX_DISABLE, tobj->mtxid);
@@ -530,6 +534,7 @@ static void setupTextureCoordGenBump(HSD_TObj* bump)
     };
 
     mask = HSD_LObjGetLightMaskDiffuse();
+
     for (i = 0; i < GX_MAX_LIGHT - 1; i++) {
         if (mask & (1 << i)) {
             break;
@@ -539,15 +544,14 @@ static void setupTextureCoordGenBump(HSD_TObj* bump)
         i = 0;
     }
 
-    GXSetTexCoordGen2((GXTexCoordID) (bump->coord + 1), func[i],
-                      HSD_TexCoordID2TexGenSrc(bump->coord), GX_IDENTITY,
-                      GX_DISABLE, GX_PTIDENTITY);
+    GXSetTexCoordGen((GXTexCoordID) (bump->coord + 1), func[i],
+                     HSD_TexCoordID2TexGenSrc(bump->coord), GX_IDENTITY);
 }
 
 static void setupTextureCoordGenToon(HSD_TObj* toon)
 {
-    GXSetTexCoordGen2(toon->coord, GX_TG_SRTG, toon->src, GX_IDENTITY,
-                      GX_DISABLE, GX_PTIDENTITY);
+    GXTexGenSrc src = toon->src;
+    GXSetTexCoordGen(toon->coord, GX_TG_SRTG, src, GX_IDENTITY);
 }
 
 void HSD_TObjSetupTextureCoordGen(HSD_TObj* tobj)
@@ -556,10 +560,8 @@ void HSD_TObjSetupTextureCoordGen(HSD_TObj* tobj)
         if (tobj->id == GX_TEXMAP_NULL) {
             continue;
         }
-
         if (tobj_bump(tobj)) {
             setupTextureCoordGen(tobj);
-
             setupTextureCoordGenBump(tobj);
         } else if (tobj_coord(tobj) == TEX_COORD_TOON) {
             setupTextureCoordGenToon(tobj);
@@ -1535,7 +1537,7 @@ void HSD_TlutFree(HSD_Tlut* tlut)
 void HSD_TlutRemove(HSD_Tlut* tlut)
 {
     if (tlut) {
-        HSD_TlutFree(tlut);
+        hsdFreeMemPiece(tlut, sizeof(HSD_Tlut));
     }
 }
 

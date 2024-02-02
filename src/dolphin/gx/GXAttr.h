@@ -5,6 +5,10 @@
 
 #include <dolphin/gx/GXEnum.h>
 
+#define GXSetTexCoordGen(dst_coord, func, src_param, mtx)                     \
+    GXSetTexCoordGen2(dst_coord, func, src_param, mtx, GX_DISABLE,            \
+                      GX_PTIDENTITY)
+
 void GXSetNumTexGens(u8 num);
 void GXSetTexCoordGen2(GXTexCoordID, GXTexGenType, GXTexGenSrc, u32, GXBool,
                        u32);
