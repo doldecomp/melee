@@ -14,11 +14,13 @@
 #include "util.h"
 
 #include <__mem.h>
+#include <math.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXFrameBuf.h>
 #include <dolphin/gx/GXTexture.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/GXVert.h>
+#include <dolphin/mtx.h>
 
 extern HSD_ObjAllocData shadow_alloc_data;
 
@@ -26,6 +28,8 @@ extern const f32 lbl_804DE768;
 extern const f32 lbl_804DE76C;
 extern const f32 HSD_Shadow_804DE770;
 extern const f32 HSD_Shadow_804DE774;
+
+static void makeMatrix(HSD_Shadow* shadow);
 
 HSD_ObjAllocData* HSD_ShadowGetAllocData(void)
 {
@@ -52,8 +56,6 @@ HSD_TObj* makeShadowTObj(void)
 HSD_Shadow* HSD_ShadowAlloc(void)
 {
     HSD_Shadow* shadow;
-    f32 hack; // TODO: remove once the whole file is converted and we can use
-              // float constants
 
     shadow = HSD_ObjAlloc(&shadow_alloc_data);
     memset(shadow, 0, sizeof(HSD_Shadow));
@@ -70,8 +72,7 @@ HSD_Shadow* HSD_ShadowAlloc(void)
     shadow->texture->imagedesc->width = 256;
     shadow->texture->imagedesc->height = 256;
 
-    hack = HSD_Shadow_804DE770;
-    HSD_CObjSetViewportfx4(shadow->camera, hack, HSD_Shadow_804DE774, hack,
+    HSD_CObjSetViewportfx4(shadow->camera, 0.0f, HSD_Shadow_804DE774, 0.0f,
                            HSD_Shadow_804DE774); // 0f, 256f, 0f, 256f
     HSD_CObjSetScissorx4(shadow->camera, 0, 256, 0, 256);
 
@@ -124,9 +125,9 @@ void HSD_ShadowSetSize(HSD_Shadow* shadow, u16 width, u16 height)
     u32 size;
     HSD_ImageDesc* idesc;
 
-    HSD_ASSERT(0x115, shadow);
-    HSD_ASSERT(0x116, width > 0);
-    HSD_ASSERT(0x117, height > 0);
+    HSD_ASSERT(277, shadow);
+    HSD_ASSERT(278, width > 0);
+    HSD_ASSERT(279, height > 0);
 
     idesc = shadow->texture->imagedesc;
     if (!idesc->img_ptr || idesc->width != width || idesc->height != height) {
@@ -186,10 +187,10 @@ void HSD_ShadowStartRender(HSD_Shadow* shadow)
     HSD_ImageDesc* idesc;
     HSD_SList* list;
 
-    HSD_ASSERT(0x167, shadow);
-    HSD_ASSERT(0x168, shadow->camera);
-    HSD_ASSERT(0x169, shadow->texture);
-    HSD_ASSERT(0x16A, shadow->texture->imagedesc);
+    HSD_ASSERT(359, shadow);
+    HSD_ASSERT(360, shadow->camera);
+    HSD_ASSERT(361, shadow->texture);
+    HSD_ASSERT(362, shadow->texture->imagedesc);
 
     list = shadow->objects;
     cobj = shadow->camera;
@@ -220,7 +221,7 @@ void HSD_ShadowStartRender(HSD_Shadow* shadow)
                 }
             };
             static HSD_PEDesc pedesc = {
-                1 << 0 | 1 << 1, // ENABLE_COLOR_UPDATE | BEFORE_TEX,
+                9, // ENABLE_COLOR_UPDATE | BEFORE_TEX,
                 0,
                 0,
                 0,
@@ -272,7 +273,7 @@ void HSD_ShadowEndRender(HSD_Shadow* shadow)
 {
     HSD_ImageDesc* idesc;
 
-    HSD_ASSERT(0x1F5, shadow);
+    HSD_ASSERT(501, shadow);
 
     idesc = shadow->texture->imagedesc;
     if (!idesc->img_ptr) {
@@ -285,4 +286,42 @@ void HSD_ShadowEndRender(HSD_Shadow* shadow)
     GXInvalidateTexAll();
 
     makeMatrix(shadow);
+}
+
+static void makeMatrix(HSD_Shadow* shadow)
+{
+    Mtx Mprj;
+
+    switch (HSD_CObjGetProjectionType(shadow->camera)) {
+    case PROJ_PERSPECTIVE:
+        MTXLightPerspective(
+            Mprj, shadow->camera->projection_param.perspective.fov,
+            shadow->camera->projection_param.perspective.aspect,
+            shadow->scaleS, shadow->scaleT, shadow->transS, shadow->transT);
+        break;
+
+    case PROJ_FRUSTUM:
+        MTXLightFrustum(Mprj, shadow->camera->projection_param.frustum.top,
+                        shadow->camera->projection_param.frustum.bottom,
+                        shadow->camera->projection_param.frustum.left,
+                        shadow->camera->projection_param.frustum.right,
+                        shadow->camera->near, shadow->scaleS, shadow->scaleT,
+                        shadow->transS, shadow->transT);
+        break;
+
+    case PROJ_ORTHO:
+        MTXLightOrtho(Mprj, shadow->camera->projection_param.ortho.top,
+                      shadow->camera->projection_param.ortho.bottom,
+                      shadow->camera->projection_param.ortho.left,
+                      shadow->camera->projection_param.ortho.right,
+                      shadow->scaleS, shadow->scaleT, shadow->transS,
+                      shadow->transT);
+        break;
+
+    default:
+        HSD_ASSERT(698, 0);
+    }
+
+    MTXConcat(Mprj, HSD_CObjGetViewingMtxPtrDirect(shadow->camera),
+              shadow->texture->mtx);
 }
