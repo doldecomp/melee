@@ -3,6 +3,7 @@
 #include "class.h"
 #include "cobj.h"
 #include "debug.h"
+#include "jobj.h"
 #include "memory.h"
 #include "mobj.h"
 #include "object.h"
@@ -177,4 +178,92 @@ static void drawBackgroundRect(HSD_Shadow* shadow)
     GXPosition2f32(near, left);
     GXPosition2f32(bottom, near);
     GXEnd();
+}
+
+void HSD_ShadowStartRender(HSD_Shadow* shadow)
+{
+    HSD_CObj* cobj;
+    HSD_ImageDesc* idesc;
+    HSD_SList* list;
+
+    HSD_ASSERT(0x167, shadow);
+    HSD_ASSERT(0x168, shadow->camera);
+    HSD_ASSERT(0x169, shadow->texture);
+    HSD_ASSERT(0x16A, shadow->texture->imagedesc);
+
+    list = shadow->objects;
+    cobj = shadow->camera;
+    idesc = shadow->texture->imagedesc;
+
+    if (list != NULL) {
+        HSD_CObjSetCurrent(cobj);
+        {
+            static HSD_Chan chan = {
+                NULL,           GX_COLOR0A0,      0,
+                { 0, 0, 0, 0 }, { 0, 0, 0, 255 }, GX_FALSE,
+                GX_SRC_REG,     GX_SRC_REG,       GX_LIGHT_NULL,
+                GX_DF_CLAMP,    GX_AF_NONE,       NULL,
+            };
+            static HSD_TevDesc tev = {
+                NULL,
+                TEVCONF_MODE,
+                GX_TEVSTAGE0,
+                GX_TEXCOORD_NULL,
+                GX_TEXMAP_NULL,
+                GX_COLOR0A0,
+                {
+                    GX_TEV_ADD, GX_CC_ZERO,    GX_CC_ZERO,    GX_CC_ZERO,
+                    GX_CC_RASC, GX_CS_SCALE_1, GX_TB_ZERO,    GX_TRUE,
+                    GX_TEVPREV, GX_TEV_ADD,    GX_CA_ZERO,    GX_CA_ZERO,
+                    GX_CA_ZERO, GX_CA_RASA,    GX_CS_SCALE_1, GX_TB_ZERO,
+                    GX_TRUE,    GX_TEVPREV,    GX_TC_LINEAR,
+                }
+            };
+            static HSD_PEDesc pedesc = {
+                1 << 0 | 1 << 1, // ENABLE_COLOR_UPDATE | BEFORE_TEX,
+                0,
+                0,
+                0,
+                GX_BM_NONE,
+                GX_BL_SRCALPHA,
+                GX_BL_INVSRCALPHA,
+                GX_LO_SET,
+                GX_ALWAYS,
+                GX_ALWAYS,
+                GX_AOP_AND,
+                GX_ALWAYS
+            };
+
+            HSD_StateInitTev();
+            HSD_SetupTevStageAll(&tev);
+
+            HSD_StateSetNumTexGens();
+
+            HSD_SetupPEMode(0, &pedesc);
+
+            chan.mat_color.r = 255;
+            chan.mat_color.g = 255;
+            chan.mat_color.b = 255;
+
+            HSD_SetupChannelAll(&chan);
+            GXSetScissor(0, 0, idesc->width, idesc->height);
+
+            drawBackgroundRect(shadow);
+
+            chan.mat_color.r = shadow->intensity;
+            chan.mat_color.g = shadow->intensity;
+            chan.mat_color.b = shadow->intensity;
+
+            HSD_SetupChannelAll(&chan);
+            GXSetScissor(2, 2, idesc->width - 4, idesc->height - 4);
+        }
+
+        for (list = shadow->objects; list != NULL; list = list->next) {
+            HSD_JObjDispAll(list->data, NULL,
+                            (HSD_TrspMask) (HSD_TRSP_OPA | HSD_TRSP_TEXEDGE),
+                            RENDER_SHADOW);
+        }
+
+        HSD_CObjEndCurrent();
+    }
 }

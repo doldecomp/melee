@@ -10,6 +10,8 @@
 #define HSD_TEXP_TEX ((HSD_TExp*) -1)
 #define HSD_TEXP_ZERO ((HSD_TExp*) 0)
 
+#define TEVCONF_MODE 0
+
 typedef enum _HSD_TEInput {
     HSD_TE_END = 0,
     HSD_TE_RGB = 1,
