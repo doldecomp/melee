@@ -10,6 +10,7 @@
 
 #include <__mem.h>
 #include <dolphin/gx/GXFrameBuf.h>
+#include <dolphin/gx/GXTexture.h>
 
 extern HSD_ObjAllocData shadow_alloc_data;
 
@@ -108,4 +109,30 @@ void HSD_ShadowInit(HSD_Shadow* shadow)
     imagedesc = shadow->texture->imagedesc;
     GXSetTexCopySrc(0, 0, imagedesc->width, imagedesc->height);
     GXSetTexCopyDst(imagedesc->width, imagedesc->height, 0x20, 0);
+}
+
+void HSD_ShadowSetSize(HSD_Shadow* shadow, u16 width, u16 height)
+{
+    u32 size;
+    HSD_ImageDesc* idesc;
+
+    HSD_ASSERT(0x115, shadow);
+    HSD_ASSERT(0x116, width > 0);
+    HSD_ASSERT(0x117, height > 0);
+
+    idesc = shadow->texture->imagedesc;
+    if (!idesc->img_ptr || idesc->width != width || idesc->height != height) {
+        if (idesc->img_ptr) {
+            HSD_Free(idesc->img_ptr);
+        }
+
+        size = GXGetTexBufferSize(width, height, GX_TF_I4, GX_FALSE, 0);
+        HSD_ASSERT(0x122, size > 0);
+        idesc->img_ptr = HSD_MemAlloc(size);
+        idesc->width = width;
+        idesc->height = height;
+
+        HSD_CObjSetViewportfx4(shadow->camera, 0, width, 0, height);
+        HSD_CObjSetScissorx4(shadow->camera, 0, width, 0, height);
+    }
 }
