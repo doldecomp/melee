@@ -83,8 +83,9 @@ void it_802842A4(Item_GObj* arg0)
     void* temp_r30 = item->xC4_article_data->x4_specialAttributes;
 
     it_8026B390(arg0);
-    item->x40_vel.x = it_804DC8B0;
-    item->x40_vel.z = item->x40_vel.y = 0;
+    item->x40_vel.x = 0;
+    item->x40_vel.y = it_804DC8B0;
+    item->x40_vel.z = 0;
 
     item->xDD4_itemVar.capsule.x0 = M2C_FIELD(temp_r30, s32*, 0);
     item->xDD4_itemVar.Egg.filler[4] &= ~0x80;
