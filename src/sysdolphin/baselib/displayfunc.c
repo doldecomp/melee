@@ -102,7 +102,7 @@ static void mkRBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
     rot[0][3] = src[0][3];
     rot[1][3] = src[1][3];
     rot[2][3] = src[2][3];
-    guMtxConcat(rot, scl, dst);
+    MTXConcat(rot, scl, dst);
 }
 
 void HSD_JObjMakePositionMtx(HSD_JObj* jobj, Mtx vmtx, Mtx pmtx)
