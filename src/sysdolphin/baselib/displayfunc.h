@@ -25,7 +25,7 @@ void HSD_EraseRect(f32 top_res, f32 bottom_res, f32 left_res, f32 right_res,
 MtxPtr _HSD_mkEnvelopeModelNodeMtx(HSD_JObj* m, MtxPtr mtx);
 void HSD_JObjDisp(HSD_JObj* jobj, MtxPtr, HSD_TrspMask flags, u32 rendermode);
 
-void HSD_StateInitDirect(int vtxfmt, u32 param_2);
+void HSD_StateInitDirect(int vtxfmt, u32 rendermode);
 
 void _HSD_ZListSort(void);
 void _HSD_ZListDisp(void);

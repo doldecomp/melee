@@ -78,16 +78,16 @@ static void HSD_ZListFree(HSD_ZList* ptr)
     HSD_ObjFree(&zlist_alloc_data, ptr);
 }
 
-void HSD_StateInitDirect(int vtxfmt, u32 param_2)
+void HSD_StateInitDirect(int vtxfmt, u32 rendermode)
 {
     HSD_ClearVtxDesc();
-    GXSetVtxAttrFmt(vtxfmt, 9, 1, 4, 0);
-    GXSetVtxAttrFmt(vtxfmt, 0xB, 1, 5, 0);
+    GXSetVtxAttrFmt(vtxfmt, GX_VA_POS, GX_POS_XYZ, GX_F32, 0);
+    GXSetVtxAttrFmt(vtxfmt, GX_VA_CLR0, GX_CLR_RGBA, GX_RGBA8, 0);
     HSD_StateInitTev();
-    HSD_SetupRenderMode(param_2 | 0x28000000);
-    GXSetVtxDesc(9, 1);
-    GXSetVtxDesc(0xB, 1);
-    GXSetCurrentMtx(0);
+    HSD_SetupRenderMode(rendermode | 0x28000000);
+    GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
+    GXSetVtxDesc(GX_VA_CLR0, GX_DIRECT);
+    GXSetCurrentMtx(GX_PNMTX0);
 }
 
 static void mkRBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
