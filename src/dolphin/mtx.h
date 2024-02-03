@@ -63,14 +63,6 @@ void PSMTXRotAxisRad(Mtx m, const Vec3* axis, f32 rad);
 #define MTXRotTrig PSMTXRotTrig
 #define MTXRotAxisRad PSMTXRotAxisRad
 
-#define VECCrossProduct PSVECCrossProduct
-#define VECSubtract PSVECSubtract
-#define VECNormalize PSVECNormalize
-
-void PSVECCrossProduct(Vec3* a, Vec3* b, Vec3* axb);
-void PSVECSubtract(Vec3 const* a, Vec3 const* b, Vec3* ab);
-void PSVECNormalize(Vec3* a, Vec3* b);
-
 void PSMTXIdentity(Mtx m);
 void PSMTXTrans(Mtx m, f32 x_trans, f32 y_trans, f32 z_trans);
 void PSMTXScale(Mtx m, f32 x_scale, f32 y_scale, f32 z_scale);

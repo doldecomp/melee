@@ -18,6 +18,7 @@
 #include <dolphin/gx/GXTexture.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/GXVert.h>
+#include <dolphin/mtx/vec.h>
 
 #define FLT_EPSILON 1.00000001335e-10F
 
@@ -87,6 +88,21 @@ void HSD_StateInitDirect(int vtxfmt, u32 param_2)
     GXSetVtxDesc(9, 1);
     GXSetVtxDesc(0xB, 1);
     GXSetCurrentMtx(0);
+}
+
+static void mkRBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
+{
+    Mtx rot, scl;
+    f32 sx, sy, sz;
+    sx = HSD_MtxColMag(src, 0);
+    sy = HSD_MtxColMag(src, 1);
+    sz = HSD_MtxColMag(src, 2);
+    MTXScale(scl, sx, sy, sz);
+    MTXRotRad(rot, 'z', jobj->rotate.z);
+    rot[0][3] = src[0][3];
+    rot[1][3] = src[1][3];
+    rot[2][3] = src[2][3];
+    guMtxConcat(rot, scl, dst);
 }
 
 void HSD_JObjMakePositionMtx(HSD_JObj* jobj, Mtx vmtx, Mtx pmtx)
@@ -470,7 +486,7 @@ void HSD_EraseRect(f32 top, f32 bottom, f32 left, f32 right, f32 z,
     HSD_StateInvalidate(HSD_STATE_ALL);
 }
 
-void _HSD_DispForgetMemory(void)
+void _HSD_DispForgetMemory(void* lo, void* hi)
 {
     zlist_top = NULL;
     zlist_bottom = &zlist_top;
