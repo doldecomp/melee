@@ -129,17 +129,17 @@ HSD_JObj* HSD_JObjFindSkeleton(HSD_JObj* jobj)
 
 MtxPtr _HSD_mkEnvelopeModelNodeMtx(HSD_JObj* m, MtxPtr mtx)
 {
-    if (m->flags & JOBJ_SKELETON_ROOT) { /* r == x == m */
+    if (m->flags & JOBJ_SKELETON_ROOT) {
         return NULL;
     } else {
         HSD_JObj* x = HSD_JObjFindSkeleton(m);
         HSD_ASSERT(422, x);
 
-        if (x == m) { /* r != x == m */
+        if (x == m) {
             MTXInverse(x->envelopemtx, mtx);
-        } else if (x->flags & JOBJ_SKELETON_ROOT) { /* r == x != m */
+        } else if (x->flags & JOBJ_SKELETON_ROOT) {
             HSD_MtxInverseConcat(x->mtx, m->mtx, mtx);
-        } else { /* r != x != m */
+        } else {
             Mtx n;
             MTXConcat(x->mtx, x->envelopemtx, n);
             HSD_MtxInverseConcat(n, m->mtx, mtx);
@@ -388,7 +388,7 @@ void HSD_EraseRect(f32 top, f32 bottom, f32 left, f32 right, f32 z,
                    int enable_color, int enable_alpha, int enable_depth)
 {
     GXTexObj texobj;
-    static u8 depth_image[] = {
+    static u8 depth_image[] ATTRIBUTE_ALIGN(32) = {
         255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
         255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
         255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
