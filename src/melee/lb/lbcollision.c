@@ -15,6 +15,7 @@
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
+#include <dolphin/mtx/vec.h>
 #include <baselib/baselib_shared_data_003.h>
 #include <baselib/debug.h>
 #include <baselib/jobj.h>
