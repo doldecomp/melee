@@ -1,5 +1,5 @@
 .include "macros.inc"
-.file "hsd_3915.c"
+.file "particle.c"
 
 # 0x00000000 - 0x0000E20C
 .text
