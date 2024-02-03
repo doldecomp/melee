@@ -97,3 +97,11 @@ static void HSD_PadCrossDir(HSD_PadStatus* mp)
         }
     }
 }
+
+void HSD_PadRenewStatus(void)
+{
+    HSD_PadRenewRawStatus(0);
+    HSD_PadRenewMasterStatus();
+    HSD_PadRenewCopyStatus();
+    HSD_PadZeroQueue();
+}
