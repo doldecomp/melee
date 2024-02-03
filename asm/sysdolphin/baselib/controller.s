@@ -1360,7 +1360,7 @@
 /* 00001378 000013B8  4E 80 00 20 */	blr
 .endfn HSD_PadRenewStatus
 
-.fn HSD_Controller_80377D18, global
+.fn HSD_PadReset, global
 /* 0000137C 000013BC  7C 08 02 A6 */	mflr r0
 /* 00001380 000013C0  3C 60 00 00 */	lis r3, HSD_PadLibData@ha
 /* 00001384 000013C4  90 01 00 04 */	stw r0, 0x4(r1)
@@ -1394,7 +1394,7 @@
 /* 000013F0 00001430  38 21 00 18 */	addi r1, r1, 0x18
 /* 000013F4 00001434  7C 08 03 A6 */	mtlr r0
 /* 000013F8 00001438  4E 80 00 20 */	blr
-.endfn HSD_Controller_80377D18
+.endfn HSD_PadReset
 
 .fn HSD_PadInit, global
 /* 000013FC 0000143C  7C 08 02 A6 */	mflr r0

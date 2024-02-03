@@ -89,6 +89,7 @@ u8 HSD_PadGetRawQueueCount(void);
 s32 HSD_PadGetResetSwitch(void);
 void HSD_PadRenewRawStatus();
 void HSD_PadRenewStatus(void);
+void HSD_PadReset(void);
 void HSD_PadInit(s32, u8*, s32, HSD_PadRumbleListData*);
 
 #endif

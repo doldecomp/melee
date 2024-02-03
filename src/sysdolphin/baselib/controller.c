@@ -1,5 +1,7 @@
 #include "controller.h"
 
+#include "baselib/rumble.h"
+
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/pad/pad.h>
 
@@ -104,4 +106,26 @@ void HSD_PadRenewStatus(void)
     HSD_PadRenewMasterStatus();
     HSD_PadRenewCopyStatus();
     HSD_PadZeroQueue();
+}
+
+void HSD_PadReset(void)
+{
+    PadLibData* p;
+    bool intr;
+    int i;
+
+    p = &HSD_PadLibData;
+    intr = OSDisableInterrupts();
+
+    HSD_PadRumbleRemoveAll();
+
+    for (i = 0; i < 4; ++i) {
+        HSD_PadRumbleOffN(i);
+    }
+
+    HSD_PadFlushQueue(HSD_PAD_FLUSH_QUEUE_THROWAWAY);
+    PAD_Recalibrate(0xF0000000);
+    p->reset_switch = 0;
+
+    OSRestoreInterrupts(intr);
 }
