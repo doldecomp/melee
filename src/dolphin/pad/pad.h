@@ -48,6 +48,7 @@ void PADTypeAndStatusCallback(s32 chan, u32 type);
 void PADSetSpec(s32);
 void PADInit(void);
 bool __PADDisableRecalibration(bool);
+void PADRecalibrate(s32);
 
 void PADOriginCallback(s32 unused0, s32 arg1);
 void PADOriginUpdateCallback(s32 chan, u32 error, OSContext* context);

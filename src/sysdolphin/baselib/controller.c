@@ -1,5 +1,7 @@
 #include "controller.h"
 
+#include "placeholder.h"
+
 #include "baselib/rumble.h"
 
 #include <dolphin/os/OSInterrupt.h>
@@ -99,6 +101,21 @@ static void HSD_PadCrossDir(HSD_PadStatus* mp)
     }
 }
 
+void HSD_PadRenewMasterStatus(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+void HSD_PadRenewCopyStatus(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+void HSD_PadZeroQueue(void)
+{
+    NOT_IMPLEMENTED;
+}
+
 void HSD_PadRenewStatus(void)
 {
     HSD_PadRenewRawStatus(0);
@@ -123,7 +140,7 @@ void HSD_PadReset(void)
     }
 
     HSD_PadFlushQueue(HSD_PAD_FLUSH_QUEUE_THROWAWAY);
-    PAD_Recalibrate(0xF0000000);
+    PADRecalibrate(0xF0000000);
     p->reset_switch = 0;
 
     OSRestoreInterrupts(intr);
