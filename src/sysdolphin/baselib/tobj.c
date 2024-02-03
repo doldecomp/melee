@@ -17,6 +17,7 @@
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
+#include <dolphin/mtx/vec.h>
 #include <MetroTRK/intrinsics.h>
 
 #define FLT_EPSILON 1.00000001335e-10F

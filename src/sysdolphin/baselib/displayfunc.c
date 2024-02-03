@@ -90,6 +90,21 @@ void HSD_StateInitDirect(int vtxfmt, u32 rendermode)
     GXSetCurrentMtx(GX_PNMTX0);
 }
 
+static void mkBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
+{
+    NOT_IMPLEMENTED;
+}
+
+static void mkVBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
+{
+    NOT_IMPLEMENTED;
+}
+
+static void mkHBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
+{
+    NOT_IMPLEMENTED;
+}
+
 static void mkRBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
 {
     Mtx rot, scl;
