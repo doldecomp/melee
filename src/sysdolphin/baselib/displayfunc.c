@@ -19,6 +19,7 @@
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/GXVert.h>
 #include <dolphin/mtx/vec.h>
+#include <Runtime/__mem.h>
 
 #define FLT_EPSILON 1.00000001335e-10F
 
