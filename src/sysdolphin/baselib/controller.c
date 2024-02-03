@@ -5,10 +5,9 @@
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/pad/pad.h>
 
-extern PadLibData HSD_PadLibData;
-extern HSD_PadStatus HSD_PadMasterStatus[4];
-extern HSD_PadStatus HSD_PadCopyStatus[4];
-extern HSD_RumbleData HSD_PadRumbleData[4];
+PadLibData HSD_PadLibData;
+HSD_PadStatus HSD_PadMasterStatus[4];
+HSD_PadStatus HSD_PadCopyStatus[4];
 
 u8 HSD_PadGetRawQueueCount(void)
 {
