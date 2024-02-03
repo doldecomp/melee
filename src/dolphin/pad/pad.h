@@ -7,8 +7,18 @@
 #include <dolphin/os.h>
 #include <dolphin/os/OSContext.h>
 
+#define PAD_CHAN0 0
+#define PAD_CHAN1 1
+#define PAD_CHAN2 2
+#define PAD_CHAN3 3
 #define PAD_CHANMAX 4
 
+#define PAD_CHAN0_BIT 0x80000000
+#define PAD_CHAN1_BIT 0x40000000
+#define PAD_CHAN2_BIT 0x20000000
+#define PAD_CHAN3_BIT 0x10000000
+
+#define PAD_ERR_NO_CONTROLLER -1
 #define PAD_ERR_NONE 0
 
 #define PAD_SPEC_2 2

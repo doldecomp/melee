@@ -10,6 +10,8 @@
 
 #include <dolphin/pad/pad.h>
 
+#define PAD_ERR_NO_CONTROLLER -1
+
 typedef enum _HSD_FlushType {
     HSD_PAD_FLUSH_QUEUE_MERGE,
     HSD_PAD_FLUSH_QUEUE_THROWAWAY,

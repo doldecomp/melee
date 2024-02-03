@@ -249,7 +249,7 @@
 /* 00000364 000003A4  4E 80 00 20 */	blr
 .endfn HSD_PadRenewRawStatus
 
-.fn HSD_Controller_80376D04, global
+.fn HSD_PadFlushQueue, global
 /* 00000368 000003A8  7C 08 02 A6 */	mflr r0
 /* 0000036C 000003AC  3C 80 00 00 */	lis r4, HSD_PadLibData@ha
 /* 00000370 000003B0  90 01 00 04 */	stw r0, 0x4(r1)
@@ -339,7 +339,7 @@
 /* 000004A0 000004E0  38 21 00 28 */	addi r1, r1, 0x28
 /* 000004A4 000004E4  7C 08 03 A6 */	mtlr r0
 /* 000004A8 000004E8  4E 80 00 20 */	blr
-.endfn HSD_Controller_80376D04
+.endfn HSD_PadFlushQueue
 
 .fn HSD_PadClampCheck1, global
 /* 000004AC 000004EC  88 E3 00 00 */	lbz r7, 0x0(r3)
@@ -1380,7 +1380,7 @@
 /* 000013B8 000013F8  2C 1D 00 04 */	cmpwi r29, 0x4
 /* 000013BC 000013FC  41 80 FF F0 */	blt .L_000013AC
 /* 000013C0 00001400  38 60 00 01 */	li r3, 0x1
-/* 000013C4 00001404  48 00 00 01 */	bl HSD_Controller_80376D04
+/* 000013C4 00001404  48 00 00 01 */	bl HSD_PadFlushQueue
 /* 000013C8 00001408  3C 60 F0 00 */	lis r3, 0xf000
 /* 000013CC 0000140C  48 00 00 01 */	bl PADRecalibrate
 /* 000013D0 00001410  38 00 00 00 */	li r0, 0x0
