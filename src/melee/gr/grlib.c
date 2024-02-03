@@ -18,7 +18,7 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/hsd_3915.h>
+#include <baselib/particle.h>
 #include <baselib/jobj.h>
 #include <baselib/psappsrt.h>
 

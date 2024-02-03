@@ -32,7 +32,7 @@
 #include <dolphin/os/OSTime.h>
 #include <dolphin/pad/pad.h>
 #include <dolphin/vi/vi.h>
-#include <baselib/hsd_3915.h>
+#include <baselib/particle.h>
 #include <baselib/controller.h>
 #include <baselib/debug.h>
 #include <baselib/initialize.h>
