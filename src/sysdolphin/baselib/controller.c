@@ -56,3 +56,44 @@ void HSD_PadClampCheck1(u8* val, u8 shift, u8 min, u8 max)
     }
     *val = *val - min;
 }
+
+static void HSD_PadCrossDir(HSD_PadStatus* mp)
+{
+    switch (HSD_PadLibData.cross_dir) {
+    case 0:
+        break;
+
+    case 1:
+        if ((mp->button & 0xC) == 0) {
+            return;
+        }
+        mp->button = mp->button & 0xFFFFFFFC;
+        return;
+
+    case 2:
+        if ((mp->button & 0x3) == 0) {
+            return;
+        }
+        mp->button = mp->button & 0xFFFFFFF3;
+        return;
+
+    case 3:
+        if ((mp->button & 0xC) != 0) {
+            if ((mp->button & 3) != 0) {
+                if (mp->cross_dir == 1) {
+                    mp->button = mp->button & 0xFFFFFFFC;
+                    return;
+                }
+                mp->button = mp->button & 0xFFFFFFF3;
+                return;
+            } else {
+                mp->cross_dir = 1;
+                return;
+            }
+        }
+        if ((mp->button & 3) != 0) {
+            mp->cross_dir = 2;
+            return;
+        }
+    }
+}
