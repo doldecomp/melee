@@ -109,11 +109,6 @@ CFLAGS = -msgstyle $(MSG_STYLE) \
 		-maxerrors $(MAX_ERRORS) \
 		$(INCLUDES)
 
-ifneq ($(NON_MATCHING),1)
-	ASFLAGS += --defsym MUST_MATCH=1
-	CFLAGS += -DMUST_MATCH
-endif
-
 ifeq ($(REQUIRE_PROTOS),1)
 	CFLAGS += -requireprotos
 endif

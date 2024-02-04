@@ -157,17 +157,17 @@ void GXSetDispCopySrc(u16 left, u16 top, u16 wd, u16 ht)
     INSERT_FIELD(__GXContexts.main->x1D0[5], 74, 8, 24);
 }
 
-void GXSetTexCopySrc(u16 arg0, u32 arg1, u16 arg2, u16 arg3)
+void GXSetTexCopySrc(u16 left, u16 top, u16 wd, u16 ht)
 {
     __GXContexts.main->x1D0[8] = 0;
-    INSERT_FIELD(__GXContexts.main->x1D0[8], arg0, 10, 0);
+    INSERT_FIELD(__GXContexts.main->x1D0[8], left, 10, 0);
     __GXContexts.main->x1D0[8] =
         (((u32) __GXContexts.main->x1D0[8] & 0xFFF003FF) |
-         ((u32) (arg1 << 10) & 0x03FFFC00));
+         ((u32) (top << 10) & 0x03FFFC00));
     INSERT_FIELD(__GXContexts.main->x1D0[8], 73, 8, 24);
     __GXContexts.main->x1D0[9] = 0;
-    INSERT_FIELD(__GXContexts.main->x1D0[9], arg2 - 1, 10, 0);
-    INSERT_FIELD(__GXContexts.main->x1D0[9], arg3 - 1, 10, 10);
+    INSERT_FIELD(__GXContexts.main->x1D0[9], wd - 1, 10, 0);
+    INSERT_FIELD(__GXContexts.main->x1D0[9], ht - 1, 10, 10);
     INSERT_FIELD(__GXContexts.main->x1D0[9], 74, 8, 24);
 }
 
@@ -179,7 +179,7 @@ void GXSetDispCopyDst(u16 wd, u16 ht)
     INSERT_FIELD(__GXContexts.main->x1D0[6], 77, 8, 24);
 }
 
-void GXSetTexCopyDst(s32 arg0, s32 arg1, s32 arg2, s32 arg3)
+void GXSetTexCopyDst(u16 wd, u16 ht, GXTexFmt fmt, GXBool mipmap)
 {
     NOT_IMPLEMENTED;
 }
@@ -222,7 +222,7 @@ void GXCopyDisp(void* dest, GXBool clear)
     NOT_IMPLEMENTED;
 }
 
-void GXCopyTex(u32 arg0, GXBool arg1)
+void GXCopyTex(void* arg0, GXBool arg1)
 {
     NOT_IMPLEMENTED;
 }

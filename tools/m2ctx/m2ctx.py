@@ -69,8 +69,6 @@ PCPP_FLAGS = [
     "__MWERKS__",
     "-D",
     "M2CTX",
-    "-D",
-    "MUST_MATCH",
     "-U",
     "FIGHTERVARS_SIZE",
 ]

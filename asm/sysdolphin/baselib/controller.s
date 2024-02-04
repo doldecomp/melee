@@ -249,7 +249,7 @@
 /* 00000364 000003A4  4E 80 00 20 */	blr
 .endfn HSD_PadRenewRawStatus
 
-.fn HSD_Controller_80376D04, global
+.fn HSD_PadFlushQueue, global
 /* 00000368 000003A8  7C 08 02 A6 */	mflr r0
 /* 0000036C 000003AC  3C 80 00 00 */	lis r4, HSD_PadLibData@ha
 /* 00000370 000003B0  90 01 00 04 */	stw r0, 0x4(r1)
@@ -339,7 +339,7 @@
 /* 000004A0 000004E0  38 21 00 28 */	addi r1, r1, 0x28
 /* 000004A4 000004E4  7C 08 03 A6 */	mtlr r0
 /* 000004A8 000004E8  4E 80 00 20 */	blr
-.endfn HSD_Controller_80376D04
+.endfn HSD_PadFlushQueue
 
 .fn HSD_PadClampCheck1, global
 /* 000004AC 000004EC  88 E3 00 00 */	lbz r7, 0x0(r3)
@@ -1235,7 +1235,7 @@
 /* 000011B4 000011F4  4E 80 00 20 */	blr
 .endfn HSD_PadRenewCopyStatus
 
-.fn HSD_Controller_80377B54, global
+.fn HSD_PadZeroQueue, global
 /* 000011B8 000011F8  3C 60 00 00 */	lis r3, HSD_PadLibData@ha
 /* 000011BC 000011FC  C0 00 00 00 */	lfs f0, HSD_Controller_804DE5B0@sda21(r0)
 /* 000011C0 00001200  38 63 00 00 */	addi r3, r3, HSD_PadLibData@l
@@ -1343,9 +1343,9 @@
 /* 00001340 00001380  38 A5 00 44 */	addi r5, r5, 0x44
 /* 00001344 00001384  42 00 FE 90 */	bdnz .L_000011D4
 /* 00001348 00001388  4E 80 00 20 */	blr
-.endfn HSD_Controller_80377B54
+.endfn HSD_PadZeroQueue
 
-.fn HSD_Controller_80377CE8, global
+.fn HSD_PadRenewStatus, global
 /* 0000134C 0000138C  7C 08 02 A6 */	mflr r0
 /* 00001350 00001390  38 60 00 00 */	li r3, 0x0
 /* 00001354 00001394  90 01 00 04 */	stw r0, 0x4(r1)
@@ -1353,14 +1353,14 @@
 /* 0000135C 0000139C  48 00 00 01 */	bl HSD_PadRenewRawStatus
 /* 00001360 000013A0  48 00 00 01 */	bl HSD_PadRenewMasterStatus
 /* 00001364 000013A4  48 00 00 01 */	bl HSD_PadRenewCopyStatus
-/* 00001368 000013A8  48 00 00 01 */	bl HSD_Controller_80377B54
+/* 00001368 000013A8  48 00 00 01 */	bl HSD_PadZeroQueue
 /* 0000136C 000013AC  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 00001370 000013B0  38 21 00 08 */	addi r1, r1, 0x8
 /* 00001374 000013B4  7C 08 03 A6 */	mtlr r0
 /* 00001378 000013B8  4E 80 00 20 */	blr
-.endfn HSD_Controller_80377CE8
+.endfn HSD_PadRenewStatus
 
-.fn HSD_Controller_80377D18, global
+.fn HSD_PadReset, global
 /* 0000137C 000013BC  7C 08 02 A6 */	mflr r0
 /* 00001380 000013C0  3C 60 00 00 */	lis r3, HSD_PadLibData@ha
 /* 00001384 000013C4  90 01 00 04 */	stw r0, 0x4(r1)
@@ -1380,7 +1380,7 @@
 /* 000013B8 000013F8  2C 1D 00 04 */	cmpwi r29, 0x4
 /* 000013BC 000013FC  41 80 FF F0 */	blt .L_000013AC
 /* 000013C0 00001400  38 60 00 01 */	li r3, 0x1
-/* 000013C4 00001404  48 00 00 01 */	bl HSD_Controller_80376D04
+/* 000013C4 00001404  48 00 00 01 */	bl HSD_PadFlushQueue
 /* 000013C8 00001408  3C 60 F0 00 */	lis r3, 0xf000
 /* 000013CC 0000140C  48 00 00 01 */	bl PADRecalibrate
 /* 000013D0 00001410  38 00 00 00 */	li r0, 0x0
@@ -1394,7 +1394,7 @@
 /* 000013F0 00001430  38 21 00 18 */	addi r1, r1, 0x18
 /* 000013F4 00001434  7C 08 03 A6 */	mtlr r0
 /* 000013F8 00001438  4E 80 00 20 */	blr
-.endfn HSD_Controller_80377D18
+.endfn HSD_PadReset
 
 .fn HSD_PadInit, global
 /* 000013FC 0000143C  7C 08 02 A6 */	mflr r0

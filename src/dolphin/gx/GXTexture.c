@@ -40,20 +40,23 @@ void __GetImageTileCount(u32 arg0, s16 arg1, s16 arg2, s32* arg3, s32* arg4,
     NOT_IMPLEMENTED;
 }
 
-void GXInitTexObj(unk_t arg0, u32 arg1, u16 arg2, u16 arg3, s32 arg4, s32 arg5,
-                  s32 arg6, s8 arg7)
+void GXInitTexObj(GXTexObj* obj, void* image_ptr, u16 width, u16 height,
+                  GXTexFmt format, GXTexWrapMode wrap_s, GXTexWrapMode wrap_t,
+                  GXBool mipmap)
 {
     NOT_IMPLEMENTED;
 }
 
-void GXInitTexObjCI(unk_t arg0, s32 arg1, u16 arg2, u16 arg3, s32 arg4,
-                    s32 arg5, s32 arg6, s8 arg7)
+void GXInitTexObjCI(GXTexObj* obj, void* image_ptr, u16 width, u16 height,
+                    GXCITexFmt format, GXTexWrapMode wrap_s,
+                    GXTexWrapMode wrap_t, GXBool mipmap, u32 tlut_name)
 {
     NOT_IMPLEMENTED;
 }
 
-void GXInitTexObjLOD(unk_t arg0, s32 arg1, s32 arg2, s32 arg3, s8 arg4,
-                     s32 arg5, f32 arg6, f32 arg7, f32 arg8)
+void GXInitTexObjLOD(GXTexObj* obj, GXTexFilter min_filt, GXTexFilter mag_filt,
+                     f32 min_lod, f32 max_lod, f32 lod_bias, GXBool bias_clamp,
+                     GXBool do_edge_lod, GXAnisotropy max_aniso)
 {
     NOT_IMPLEMENTED;
 }
@@ -73,22 +76,23 @@ GXTexFmt GXGetTexObjFmt(GXTexObj* tex_obj)
     return tex_obj->tex_fmt;
 }
 
-void GXLoadTexObjPreLoaded(unk_t arg0, unk_t arg1, s32 arg2)
+void GXLoadTexObjPreLoaded(const GXTexObj* arg0, unk_t arg1, GXTexMapID arg2)
 {
     NOT_IMPLEMENTED;
 }
 
-void GXLoadTexObj(unk_t arg0, s32 arg1)
+void GXLoadTexObj(const GXTexObj* arg0, GXTexMapID arg1)
 {
     GXLoadTexObjPreLoaded(arg0, __GXContexts.main->callbacks[0x98](), arg1);
 }
 
-void GXInitTlutObj(unk_t arg0, u32 arg1, s32 arg2, u16 arg3)
+void GXInitTlutObj(GXTlutObj* tlut_obj, void* lut, GXTlutFmt fmt,
+                   u16 n_entries)
 {
     NOT_IMPLEMENTED;
 }
 
-void GXLoadTlut(unk_t arg0, s32 arg1)
+void GXLoadTlut(GXTlutObj* arg0, s32 arg1)
 {
     NOT_IMPLEMENTED;
 }
@@ -107,7 +111,7 @@ void GXInitTlutRegion(s32* arg0, s32 arg1, s32 arg2)
     INSERT_FIELD(*arg0, 0x65, 8, 24);
 }
 
-void GXInvalidateTexAll(GXContext* arg0, s32 arg1, u8* arg2)
+void GXInvalidateTexAll(void)
 {
     __GXFlushTextureState();
     WGPIPE.u8 = GX_LOAD_BP_REG;

@@ -950,7 +950,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/dobj.c.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/tobj.s.o\
+    $(BUILD_DIR)/src/sysdolphin/baselib/tobj.c.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/state.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/tev.s.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/mobj.c.o\
@@ -997,14 +997,12 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/gobjobject.c.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/gobjuserdata.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/gobj.s.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3915.s.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/particle.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/psdisp.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/psdisptev.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/psappsrt.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/sobjlib.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/sislib.s.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_shared_data_001.s.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_shared_data_002.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_40FF.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3A94.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3AA7.s.o\

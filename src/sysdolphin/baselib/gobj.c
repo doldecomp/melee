@@ -175,21 +175,14 @@ void HSD_GObj_80391044(HSD_GObj* gobj)
 void HSD_GObj_80391070(HSD_GObj* gobj, int arg1)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
-
-#ifdef MUST_MATCH
-// don't inline HSD_GObj_80390EB8
-// TODO is there a file boundary between HSD_GObj_80390EB8 and
-// HSD_GObj_80391070?
+    /// @todo don't inline #HSD_GObj_80390EB8
+    ///       is there a file boundary between #HSD_GObj_80390EB8 and
+    ///       #HSD_GObj_80391070?
 #pragma push
 #pragma dont_inline on
-#endif
-
     HSD_JObjDispAll(jobj, NULL, HSD_GObj_80390EB8(arg1), 0);
 }
-
-#ifdef MUST_MATCH
 #pragma pop
-#endif
 
 void HSD_GObj_803910B4(HSD_GObj* gobj)
 {

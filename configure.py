@@ -123,11 +123,6 @@ parser.add_argument(
     help="compiler warnings are not considered errors",
 )
 parser.add_argument(
-    "--must-match",
-    action="store_true",
-    help="define MUST_MATCH for make compatibility",
-)
-parser.add_argument(
     "--require-protos",
     dest="require_protos",
     action="store_true",
@@ -205,9 +200,6 @@ if args.warn is not None:
 
 if args.warn_error:
     cflags_base.append("-warn iserror")
-
-if args.must_match:
-    cflags_base.append("-DMUST_MATCH")
 
 if args.require_protos:
     cflags_base.append("-requireprotos")
@@ -1258,6 +1250,7 @@ config.libs = [
             Object(NonMatching, "dolphin/os/OSThread.c"),
             Object(Matching, "dolphin/os/OSTime.c"),
             Object(NonMatching, "dolphin/os/OSUartExi.c"),
+            Object(NonMatching, "dolphin/os/init/__ppc_eabi_init.c"),
         ],
     ),
     DolphinLib(
@@ -1336,7 +1329,7 @@ config.libs = [
         "sysdolphin (HAL base library)",
         [
             Object(Matching, "sysdolphin/baselib/dobj.c"),
-            Object(NonMatching, "sysdolphin/baselib/tobj.c"),
+            Object(Matching, "sysdolphin/baselib/tobj.c"),
             Object(Matching, "sysdolphin/baselib/state.c"),
             Object(NonMatching, "sysdolphin/baselib/tev.c"),
             Object(Matching, "sysdolphin/baselib/mobj.c"),
@@ -1383,14 +1376,12 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/gobjobject.c"),
             Object(Matching, "sysdolphin/baselib/gobjuserdata.c"),
             Object(NonMatching, "sysdolphin/baselib/gobj.c"),
-            Object(NonMatching, "sysdolphin/baselib/hsd_3915.c"),
+            Object(NonMatching, "sysdolphin/baselib/particle.c"),
             Object(NonMatching, "sysdolphin/baselib/psdisp.c"),
             Object(NonMatching, "sysdolphin/baselib/psdisptev.c"),
             Object(NonMatching, "sysdolphin/baselib/psappsrt.c"),
             Object(NonMatching, "sysdolphin/baselib/sobjlib.c"),
             Object(NonMatching, "sysdolphin/baselib/sislib.c"),
-            Object(NonMatching, "sysdolphin/baselib/baselib_shared_data_001.c"),
-            Object(NonMatching, "sysdolphin/baselib/baselib_shared_data_002.c"),
             Object(NonMatching, "sysdolphin/baselib/hsd_40FF.c"),
             Object(NonMatching, "sysdolphin/baselib/hsd_3A94.c"),
             Object(NonMatching, "sysdolphin/baselib/hsd_3AA7.c"),

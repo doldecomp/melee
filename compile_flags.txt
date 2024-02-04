@@ -26,6 +26,7 @@
 -Wno-missing-braces
 -Wno-missing-field-initializers
 -Wno-switch
+-Wno-tautological-compare
 -Wno-tautological-bitwise-compare
 -Wno-undefined-internal
 -Wno-unknown-pragmas

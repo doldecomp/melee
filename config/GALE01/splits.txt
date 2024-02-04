@@ -3835,6 +3835,10 @@ dolphin/os/OSUartExi.c:
 	.text       start:0x8034C86C end:0x8034CABC
 	.sbss       start:0x804D73E8 end:0x804D73F0
 
+dolphin/os/init/__ppc_eabi_init.c:
+	.init       start:0x8000541C end:0x80005470
+	.text       start:0x8034CABC end:0x8034CB50
+
 dolphin/pad/PadClamp.c:
 	.text       start:0x8034CB50 end:0x8034CD88
 	.sdata      start:0x804D5C30 end:0x804D5C38
@@ -4285,7 +4289,7 @@ sysdolphin/baselib/gobj.c:
 	.bss        start:0x804CE380 end:0x804CE3F8
 	.sbss       start:0x804D7810 end:0x804D7850
 
-sysdolphin/baselib/hsd_3915.c:
+sysdolphin/baselib/particle.c:
 	extab       start:0x80005520 end:0x800055F8
 	extabindex  start:0x800056C0 end:0x80005804
 	.text       start:0x80391580 end:0x8039F78C
@@ -4337,18 +4341,14 @@ sysdolphin/baselib/sislib.c:
 	.sbss       start:0x804D7968 end:0x804D7980
 	.sdata2     start:0x804DEAA8 end:0x804DEB10
 
-sysdolphin/baselib/baselib_shared_data_002.c:
-	.sbss       start:0x804D7980 end:0x804D79C9
-
-sysdolphin/baselib/baselib_shared_data_001.c:
-	.bss        start:0x804D1138 end:0x804D3694
-
 sysdolphin/baselib/hsd_40FF.c:
 	.data       start:0x8040FF80 end:0x80430B40
 
 sysdolphin/baselib/hsd_3A94.c:
 	.text       start:0x803A949C end:0x803AA790
 	.data       start:0x80430B40 end:0x80430B84
+	.bss        start:0x804D1138 end:0x804D3694
+	.sbss       start:0x804D7980 end:0x804D79C9
 
 sysdolphin/baselib/hsd_3AA7.c:
 	.text       start:0x803AA790 end:0x803B27F4

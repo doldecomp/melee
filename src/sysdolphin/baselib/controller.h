@@ -10,6 +10,8 @@
 
 #include <dolphin/pad/pad.h>
 
+#define PAD_ERR_NO_CONTROLLER -1
+
 typedef enum _HSD_FlushType {
     HSD_PAD_FLUSH_QUEUE_MERGE,
     HSD_PAD_FLUSH_QUEUE_THROWAWAY,
@@ -83,8 +85,14 @@ struct PadLibData {
 
 extern HSD_PadStatus HSD_PadMasterStatus[4];
 
+void HSD_PadFlushQueue(HSD_FlushType);
 u8 HSD_PadGetRawQueueCount(void);
 s32 HSD_PadGetResetSwitch(void);
+void HSD_PadRenewRawStatus(int);
+void HSD_PadRenewMasterStatus(void);
+void HSD_PadZeroQueue(void);
+void HSD_PadRenewStatus(void);
+void HSD_PadReset(void);
 void HSD_PadInit(s32, u8*, s32, HSD_PadRumbleListData*);
 
 #endif

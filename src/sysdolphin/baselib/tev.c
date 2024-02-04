@@ -129,7 +129,6 @@ void HSD_SetupTevStage(HSD_TevDesc* desc)
     u8 _[8] = { 0 };
     GXSetTevOrder(desc->stage, desc->coord, desc->map, desc->color);
     if (desc->flags == 0) {
-        /// @todo Incorrect cast.
         GXSetTevOp(desc->stage, (GXTevMode) desc->u.tevconf.clr_op);
         GXSetTevSwapMode(desc->stage, GX_TEV_SWAP0, GX_TEV_SWAP0);
         return;

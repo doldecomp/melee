@@ -7,6 +7,7 @@
 #include <math.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
+#include <dolphin/mtx/vec.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
 

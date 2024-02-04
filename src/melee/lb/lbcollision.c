@@ -15,8 +15,9 @@
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/baselib_shared_data_003.h>
+#include <dolphin/mtx/vec.h>
 #include <baselib/debug.h>
+#include <baselib/particle.h>
 #include <baselib/jobj.h>
 #include <baselib/mtx.h>
 #include <MetroTRK/intrinsics.h>

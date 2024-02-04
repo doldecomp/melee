@@ -16,6 +16,11 @@
 
 struct HSD_JObj;
 
+#define JOBJ_PTCL_ACTIVE 0x7FFFFFFF
+#define JOBJ_PTCL_OFFSET_MASK 0xFFFFFF
+#define JOBJ_PTCL_OFFSET_SHIFT 6
+#define JOBJ_PTCL_BANK_MASK 0x3F
+
 #define HSD_A_J_ROTX 1
 #define HSD_A_J_ROTY 2
 #define HSD_A_J_ROTZ 3
@@ -51,6 +56,13 @@ struct HSD_JObj;
 #define HSD_A_J_SETFLOAT8 38
 #define HSD_A_J_SETFLOAT9 39
 
+#define JOBJ_BILLBOARD_FIELD 0xE00
+#define JOBJ_BILLBOARD 0x200
+#define JOBJ_VBILLBOARD 0x400
+#define JOBJ_HBILLBOARD 0x600
+#define JOBJ_RBILLBOARD 0x800
+#define JOBJ_PBILLBOARD 0x2000
+
 #define JOBJ_SKELETON (1 << 0)
 #define JOBJ_SKELETON_ROOT (1 << 1)
 #define JOBJ_ENVELOPE_MODEL (1 << 2)
@@ -61,7 +73,6 @@ struct HSD_JObj;
 #define JOBJ_LIGHTING (1 << 7)
 #define JOBJ_TEXGEN (1 << 8)
 #define JOBJ_INSTANCE (1 << 12)
-#define JOBJ_PBILLBOARD (1 << 13)
 #define JOBJ_SPLINE (1 << 14)
 #define JOBJ_FLIP_IK (1 << 15)
 #define JOBJ_SPECULAR (1 << 16)
@@ -89,8 +100,6 @@ struct HSD_JObj;
 
 #define HSD_JOBJ_INFO(i) ((HSD_JObjInfo*) (i))
 #define HSD_JOBJ_METHOD(o) HSD_JOBJ_INFO((o)->object.parent.class_info)
-
-typedef u32 HSD_TrspMask;
 
 struct HSD_JObj {
     /* +0 */ HSD_Obj object;
@@ -448,6 +457,11 @@ static inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx mtx)
     HSD_ASSERT(1170, jobj);
     HSD_ASSERT(1171, mtx);
     PSMTXCopy(mtx, jobj->mtx);
+}
+
+static inline void HSD_JObjRef(HSD_JObj* jobj)
+{
+    ref_INC(jobj);
 }
 
 static inline void HSD_JObjRefThis(HSD_JObj* jobj)

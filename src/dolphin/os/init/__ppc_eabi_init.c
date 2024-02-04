@@ -2,7 +2,7 @@
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/os/init/__ppc_eabi_init.h>
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 #include "dolphin/os/OSCache.h"
 #include "dolphin/os/OSInit.h"
 #endif
@@ -12,8 +12,7 @@
 extern Event __ctors[];
 static void __init_cpp(void);
 
-#ifdef MUST_MATCH
-
+#ifdef MWERKS_GEKKO
 SECTION_INIT asm void __init_hardware(void)
 { // clang-format off
     nofralloc
@@ -26,18 +25,15 @@ SECTION_INIT asm void __init_hardware(void)
     mtlr    r31
     blr
 } // clang-format on
-
 #else
 
 void __init_hardware(void)
 {
     NOT_IMPLEMENTED;
 }
-
 #endif
 
-#ifdef MUST_MATCH
-
+#ifdef MWERKS_GEKKO
 SECTION_INIT asm void __flush_cache(void* address, size_t size)
 { // clang-format off
     nofralloc
@@ -56,14 +52,12 @@ rept:
     isync
     blr
 } // clang-format on
-
 #else
 
 void __flush_cache(void* address, size_t size)
 {
     NOT_IMPLEMENTED;
 }
-
 #endif
 
 void __init_user(void)

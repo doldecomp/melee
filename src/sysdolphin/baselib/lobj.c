@@ -51,7 +51,7 @@ void HSD_LObjClearFlags(HSD_LObj* lobj, u32 flags)
     lobj->flags &= ~flags;
 }
 
-s32 HSD_LObjGetLightMaskDiffuse(void)
+GXLightID HSD_LObjGetLightMaskDiffuse(void)
 {
     return lightmask_diffuse;
 }
