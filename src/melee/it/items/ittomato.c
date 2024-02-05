@@ -11,9 +11,25 @@ const f32 it_804DC8B0 = 0x00000000;
 const f32 it_804DC8B4 = 0xBF800000;
 extern M2C_UNK gm_80473A18;
 
-void it_802843E4(HSD_GObj* gobj);
-void it_80284458(HSD_GObj* gobj);
-void it_80284358(Item_GObj* gobj);
+/* 2841B4 */ static HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2);
+/* 28428C */ static void it_8028428C(Item_GObj* gobj);
+/* 284358 */ static void it_80284358(Item_GObj* gobj);
+/* 284380 */ static bool it_80284380(HSD_GObj* gobj);
+/* 284388 */ static void it_80284388(Item_GObj* gobj);
+/* 2843B8 */ static bool it_802843B8(Item_GObj* gobj);
+/* 2843E4 */ static void it_802843E4(HSD_GObj* gobj);
+/* 284420 */ static bool it_80284420(HSD_GObj* gobj);
+/* 284428 */ static void it_80284428(Item_GObj* gobj);
+/* 28442C */ static bool it_8028442C(Item_GObj* gobj);
+/* 284458 */ static void it_80284458(HSD_GObj* gobj);
+/* 284480 */ static bool it_80284480(Item_GObj* gobj);
+/* 284488 */ static void it_80284488(Item_GObj* gobj);
+/* 2844B8 */ static bool it_802844B8(Item_GObj* gobj);
+/* 284540 */ static bool it_80284540(Item_GObj* gobj);
+/* 284548 */ static void it_80284548(Item_GObj* gobj);
+/* 2845E4 */ static bool it_802845E4(Item_GObj* gobj);
+/* 2845EC */ static void it_802845EC(Item_GObj* gobj);
+/* 2845F0 */ static bool it_802845F0(Item_GObj* gobj);
 
 HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2)
 {
