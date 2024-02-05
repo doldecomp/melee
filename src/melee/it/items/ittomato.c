@@ -7,14 +7,13 @@
 #include <melee/it/item.h>
 #include <melee/it/items/it_27CF.h>
 
-extern f32 it_804DC8B0;
-extern f32 it_804DC8B4;
+const f32 it_804DC8B0 = 0x00000000;
+const f32 it_804DC8B4 = 0xBF800000;
 extern M2C_UNK gm_80473A18;
-/* Warning: struct HSD_Spline is not defined (only forward-declared) */
 
-void it_802843E4(HSD_GObj* gobj); // static and header(?)
-void it_80284458(HSD_GObj* gobj); // static and header(?)
-void it_80284358(Item_GObj*);     // static and header(?)
+void it_802843E4(HSD_GObj* gobj);
+void it_80284458(HSD_GObj* gobj);
+void it_80284358(Item_GObj* gobj);
 
 HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2)
 {
@@ -91,7 +90,7 @@ void it_802842A4(Item_GObj* arg0)
     item->xDD4_itemVar.Egg.filler[4] &= ~0x80;
     item->xDD4_itemVar.star.x8 = 0.0f;
 
-    it_80284358(arg0, 0, 0);
+    it_80284358(arg0);
 }
 
 void it_80284324(Item_GObj* arg0)
