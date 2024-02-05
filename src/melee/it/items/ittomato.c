@@ -184,7 +184,7 @@ bool it_802844B8(Item_GObj* gobj)
 void it_802844E4(Item_GObj* gobj) // contains branch arrows
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    HSD_JObj* jobj2 = (!jobj) ? NULL : jobj->child;
+    HSD_JObj* jobj2 = HSD_JObjGetChild(jobj);
 
     HSD_JObjClearFlagsAll(jobj2, 0x10);
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
@@ -200,7 +200,7 @@ void it_80284548(Item_GObj* gobj) {}
 void it_8028454C(Item_GObj* gobj) // contains branch arrows
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    HSD_JObj* jobj2 = (!jobj) ? NULL : jobj->child;
+    HSD_JObj* jobj2 = HSD_JObjGetChild(jobj);
 
     it_8026B390(gobj);
     HSD_JObjClearFlagsAll(jobj2, 0x10);
