@@ -115,7 +115,7 @@ void it_80284358(Item_GObj* arg0)
 
 bool it_80284380(HSD_GObj* arg0)
 {
-    return 0;
+    return false;
 }
 
 void it_80284388(Item_GObj* arg0)
@@ -130,7 +130,7 @@ void it_80284388(Item_GObj* arg0)
 bool it_802843B8(Item_GObj* arg0)
 {
     it_8026E15C(arg0, it_802843E4);
-    return 0;
+    return false;
 }
 
 void it_802843E4(HSD_GObj* arg0)
@@ -146,7 +146,7 @@ void it_802843E4(HSD_GObj* arg0)
 
 bool it_80284420(HSD_GObj* arg0)
 {
-    return 0;
+    return false;
 }
 
 void it_80284428(Item_GObj* arg0) {}
@@ -154,7 +154,7 @@ void it_80284428(Item_GObj* arg0) {}
 bool it_8028442C(Item_GObj* arg0)
 {
     it_8026D62C(arg0, it_80284458);
-    return 0;
+    return false;
 }
 
 void it_80284458(HSD_GObj* arg0)
@@ -164,7 +164,7 @@ void it_80284458(HSD_GObj* arg0)
 
 bool it_80284480(Item_GObj* arg0)
 {
-    return 0;
+    return false;
 }
 
 void it_80284488(Item_GObj* arg0)
@@ -179,7 +179,7 @@ void it_80284488(Item_GObj* arg0)
 bool it_802844B8(Item_GObj* arg0)
 {
     it_8026E15C(arg0, it_802843E4);
-    return 0;
+    return false;
 }
 
 void it_802844E4(Item_GObj* arg0) // contains branch arrows
@@ -193,7 +193,7 @@ void it_802844E4(Item_GObj* arg0) // contains branch arrows
 
 bool it_80284540(Item_GObj* arg0)
 {
-    return 0;
+    return false;
 }
 
 void it_80284548(Item_GObj* arg0) {}
@@ -215,7 +215,7 @@ void it_802845BC(Item_GObj* arg0)
 
 bool it_802845E4(Item_GObj* arg0)
 {
-    return 0;
+    return false;
 }
 
 void it_802845EC(Item_GObj* arg0)
@@ -226,7 +226,7 @@ void it_802845EC(Item_GObj* arg0)
 bool it_802845F0(Item_GObj* arg0)
 {
     it_8026E8C4(arg0, it_802843E4, it_80284458);
-    return 0;
+    return false;
 }
 
 void it_80284624(Item_GObj* arg0, Item_GObj* arg1)
