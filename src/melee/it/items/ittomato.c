@@ -1,11 +1,10 @@
 #include "ittomato.h"
 
-#include <baselib/jobj.h>
-#include <melee/it/inlines.h>
-#include <melee/it/it_266F.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/item.h>
-#include <melee/it/items/it_27CF.h>
+#include "baselib/jobj.h"
+#include "it/inlines.h"
+#include "it/it_266F.h"
+#include "it/it_26B1.h"
+#include "it/item.h"
 
 const f32 it_804DC8B0 = 0x00000000;
 const f32 it_804DC8B4 = 0xBF800000;
@@ -33,7 +32,7 @@ extern M2C_UNK gm_80473A18;
 
 HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2)
 {
-    u8 sp5C; // idk
+    u8 sp5C;
     s32 sp58;
     s16 sp54;
     f32 sp50;
@@ -75,7 +74,7 @@ HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2)
         sp58 = 0;
         var_r3 = Item_80268B18(NULL);
     }
-    if (var_r3) {
+    if (var_r3 != NULL) {
         temp_r5 = var_r3->user_data;
         temp_r5->xDD4_itemVar.Egg.filler[4] |= 0x80;
         temp_r5->xDD4_itemVar.star.x8 = M2C_BITWISE(f32, arg2);
@@ -197,7 +196,7 @@ bool it_802844B8(Item_GObj* gobj)
     return false;
 }
 
-void it_802844E4(Item_GObj* gobj) // contains branch arrows
+void it_802844E4(Item_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* jobj2 = HSD_JObjGetChild(jobj);
@@ -213,7 +212,7 @@ bool it_80284540(Item_GObj* gobj)
 
 void it_80284548(Item_GObj* gobj) {}
 
-void it_8028454C(Item_GObj* gobj) // contains branch arrows
+void it_8028454C(Item_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* jobj2 = HSD_JObjGetChild(jobj);
