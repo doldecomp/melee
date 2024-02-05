@@ -149,12 +149,8 @@ bool it_802843B8(Item_GObj* gobj)
 
 void it_802843E4(HSD_GObj* gobj)
 {
-    void* ip;
-
-    ip = gobj->user_data;
-    M2C_FIELD(ip, f32*, 0x40) = it_804DC8B0;
-    M2C_FIELD(ip, f32*, 0x44) = it_804DC8B0;
-    M2C_FIELD(ip, f32*, 0x48) = it_804DC8B0;
+    Item* item = GET_ITEM(gobj);
+    item->x40_vel.z = item->x40_vel.y = item->x40_vel.x = 0;
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
 }
 
