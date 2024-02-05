@@ -69,11 +69,11 @@ HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2)
 
 void it_8028428C(Item_GObj* gobj)
 {
-    Item* temp_r4;
+    Item* ip;
 
-    temp_r4 = gobj->user_data;
-    temp_r4->xDD4_itemVar.capsule.x0 =
-        M2C_FIELD(temp_r4->xC4_article_data->x4_specialAttributes, s32*, 4);
+    ip = gobj->user_data;
+    ip->xDD4_itemVar.capsule.x0 =
+        M2C_FIELD(ip->xC4_article_data->x4_specialAttributes, s32*, 4);
 }
 
 void it_802842A4(Item_GObj* arg0)
