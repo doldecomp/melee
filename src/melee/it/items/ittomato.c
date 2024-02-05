@@ -6,6 +6,8 @@
 #include "it/it_26B1.h"
 #include "it/item.h"
 
+#include <placeholder.h>
+
 extern M2C_UNK gm_80473A18;
 
 /* 2841B4 */ static HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2);
@@ -30,54 +32,7 @@ extern M2C_UNK gm_80473A18;
 
 HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2)
 {
-    u8 sp5C;
-    s32 sp58;
-    s16 sp54;
-    f32 sp50;
-    f32 sp4C;
-    f32 sp48;
-    f32 sp44;
-    f32 sp40;
-    f32 sp3C;
-    f32 sp38;
-    f32 sp34;
-    f32 sp30;
-    f32 sp2C;
-    s32 sp20;
-    s32 sp1C;
-    s32 sp18;
-    Item* temp_r5;
-    Item_GObj* var_r3;
-    f32 temp_r0;
-
-    var_r3 = NULL;
-    if (arg0 != 0) {
-        sp20 = 9;
-        temp_r0 = arg1->y;
-        sp38 = arg1->x;
-        sp3C = temp_r0;
-        sp40 = arg1->z;
-        sp40 = 0.0F;
-        sp2C = sp38;
-        sp30 = temp_r0;
-        sp34 = sp40;
-        sp50 = 0xBF800000;
-        sp54 = 0;
-        sp4C = 0.0F;
-        sp48 = 0.0F;
-        sp44 = 0.0F;
-        sp18 = 0;
-        sp1C = sp18;
-        sp5C = 0x80;
-        sp58 = 0;
-        var_r3 = Item_80268B18(NULL);
-    }
-    if (var_r3 != NULL) {
-        temp_r5 = var_r3->user_data;
-        temp_r5->xDD4_itemVar.Egg.filler[4] |= 0x80;
-        temp_r5->xDD4_itemVar.star.x8 = M2C_BITWISE(f32, arg2);
-    }
-    return var_r3;
+    NOT_IMPLEMENTED;
 }
 
 void it_8028428C(Item_GObj* gobj)
@@ -91,33 +46,12 @@ void it_8028428C(Item_GObj* gobj)
 
 void it_802842A4(Item_GObj* arg0)
 {
-    Item* item = GET_ITEM(arg0);
-    void* temp_r30 = item->xC4_article_data->x4_specialAttributes;
-
-    it_8026B390(arg0);
-    item->x40_vel.x = 0;
-    item->x40_vel.y = 0.0F;
-    item->x40_vel.z = 0;
-
-    item->xDD4_itemVar.capsule.x0 = M2C_FIELD(temp_r30, s32*, 0);
-    item->xDD4_itemVar.Egg.filler[4] &= ~0x80;
-    item->xDD4_itemVar.star.x8 = 0.0F;
-
-    it_80284358(arg0);
+    NOT_IMPLEMENTED;
 }
 
 void it_80284324(Item_GObj* arg0)
 {
-    Item* temp_r4;
-
-    temp_r4 = arg0->user_data;
-    if ((((temp_r4->xDD4_itemVar.Egg.filler[4] << 0x18) & 0xC0000000) >>
-         0x1F) != 0)
-    {
-        M2C_FIELD(
-            (&gm_80473A18 + M2C_BITWISE(s32, temp_r4->xDD4_itemVar.star.x8)),
-            s8*, 0x90) = 0;
-    }
+    NOT_IMPLEMENTED;
 }
 
 void it_80284358(Item_GObj* gobj)
