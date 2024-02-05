@@ -6,8 +6,6 @@
 #include "it/it_26B1.h"
 #include "it/item.h"
 
-const f32 it_804DC8B0 = 0x00000000;
-const f32 it_804DC8B4 = 0xBF800000;
 extern M2C_UNK gm_80473A18;
 
 /* 2841B4 */ static HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2);
@@ -59,15 +57,15 @@ HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2)
         sp38 = arg1->x;
         sp3C = temp_r0;
         sp40 = arg1->z;
-        sp40 = it_804DC8B0;
+        sp40 = 0.0F;
         sp2C = sp38;
         sp30 = temp_r0;
         sp34 = sp40;
-        sp50 = it_804DC8B4;
+        sp50 = 0xBF800000;
         sp54 = 0;
-        sp4C = it_804DC8B0;
-        sp48 = it_804DC8B0;
-        sp44 = it_804DC8B0;
+        sp4C = 0.0F;
+        sp48 = 0.0F;
+        sp44 = 0.0F;
         sp18 = 0;
         sp1C = sp18;
         sp5C = 0x80;
@@ -98,12 +96,12 @@ void it_802842A4(Item_GObj* arg0)
 
     it_8026B390(arg0);
     item->x40_vel.x = 0;
-    item->x40_vel.y = it_804DC8B0;
+    item->x40_vel.y = 0.0F;
     item->x40_vel.z = 0;
 
     item->xDD4_itemVar.capsule.x0 = M2C_FIELD(temp_r30, s32*, 0);
     item->xDD4_itemVar.Egg.filler[4] &= ~0x80;
-    item->xDD4_itemVar.star.x8 = 0.0f;
+    item->xDD4_itemVar.star.x8 = 0.0F;
 
     it_80284358(arg0);
 }
