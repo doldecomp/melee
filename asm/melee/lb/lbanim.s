@@ -271,7 +271,7 @@
 .endfn lbAnim_8001E7E8
 
 .section .sdata2
-
+    .balign 8
 .global lb_804D7CC0
 lb_804D7CC0:
     .4byte 0x00000000
