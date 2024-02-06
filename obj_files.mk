@@ -81,7 +81,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/ftdata.s.o\
     $(BUILD_DIR)/src/melee/ft/ftlib.c.o\
     $(BUILD_DIR)/src/melee/ft/ftwaitanim.c.o\
-    $(BUILD_DIR)/asm/melee/ft/ft_0877.s.o\
+    $(BUILD_DIR)/src/melee/ft/ft_0877.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0881.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0892.s.o\
 
