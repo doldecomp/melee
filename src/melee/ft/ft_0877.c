@@ -88,9 +88,7 @@ s32 ft_80087944(HSD_GObj* gobj)
 
 s32 ft_80087988(HSD_GObj* gobj)
 {
-    if ((ftGetParasolStatus(gobj) == 4) ||
-        (ftGetParasolStatus(gobj) == 5))
-    {
+    if ((ftGetParasolStatus(gobj) == 4) || (ftGetParasolStatus(gobj) == 5)) {
         return true;
     }
 
@@ -315,12 +313,10 @@ s32 ft_80087C70(Fighter* fp, s32 arg1)
     return var_r4;
 }
 
-s32 ft_80087D0C(Fighter* fighter, s32 arg1)
+s32 ft_80087D0C(Fighter* fighter, s32 sfx_id)
 {
-    enum_t sfx = lbAudioAx_800233EC(arg1);
+    enum_t sfx = lbAudioAx_800233EC(sfx_id);
     enum_t ssm_id = lbAudioAx_80023130();
-
-    u8 _[12];
 
     switch (ssm_id) {
     case 0:
@@ -350,10 +346,11 @@ s32 ft_80087D0C(Fighter* fighter, s32 arg1)
         case 389:
         case 383:
         case 371:
-            sfx = ft_80087C70(fighter, sfx);
+            sfx_id = ft_80087C70(fighter, sfx);
             if (fighter->x2223_b7) {
-                sfx += 3;
+                sfx_id += 3;
             }
+            sfx = sfx_id;
             break;
         case 359:
         case 368:
@@ -373,21 +370,21 @@ s32 ft_80087D0C(Fighter* fighter, s32 arg1)
         }
         break;
     case 13: {
-        FighterKind ftKind = fighter->kind;
-
-        /// @todo What a weird comparison, is it part of a macro?
-        if (ftKind < FTKIND_PIKACHU && ftKind <= FTKIND_POPO) {
-            if (0x1FBFD < sfx && sfx < 0x1FC62 &&
+        switch (fighter->kind) {
+        case FTKIND_POPO:
+        case FTKIND_NANA:
+            if (0x1FBFD <= sfx && sfx <= 0x1FC62 &&
                 ftCommon_80080144(fighter) == true)
             {
                 sfx += 0x66;
             }
 
-            if (0x1FC63 < sfx && sfx < 0x1FCC8 &&
+            if (0x1FC63 <= sfx && sfx <= 0x1FCC8 &&
                 ftCommon_80080144(fighter) != true)
             {
                 sfx -= 0x66;
             }
+            break;
         }
     }
     case 6:
@@ -418,6 +415,8 @@ s32 ft_80087D0C(Fighter* fighter, s32 arg1)
     case 33: {
         int sfx_offset;
         int unused_output;
+        int _[1];
+
         if (lbAudioAx_800230C8(ssm_id, &sfx_offset, &unused_output) == 0 &&
             sfx >= sfx_offset + lbAudioAx_80023220(ssm_id))
         {
