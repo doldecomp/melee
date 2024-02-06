@@ -114,11 +114,11 @@ melee/lb/lbsnap.c:
 
 melee/lb/lbgx.c:
 	.text       start:0x8001E2F8 end:0x8001E560
-	.sdata2		start:0x804D7CB8 end:0x804D7CC0
+	.sdata2     start:0x804D7CB8 end:0x804D7CC0
 
 melee/lb/lbanim.c:
 	.text       start:0x8001E560 end:0x8001E8F8
-	.sdata2		start:0x804D7CC0 end:0x804D7CC8
+	.sdata2     start:0x804D7CC0 end:0x804D7CC8
 
 melee/lb/lbmthp.c:
 	.text       start:0x8001E8F8 end:0x8001FC08
