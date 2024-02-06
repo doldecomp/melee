@@ -3,6 +3,8 @@
 
 #include "it/types.h"
 
+#include <placeholder.h>
+
 /* 2842A4 */ void it_802842A4(Item_GObj*);
 /* 284324 */ void it_80284324(Item_GObj*);
 /* 2844E4 */ void it_802844E4(Item_GObj*);
