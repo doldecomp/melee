@@ -3,6 +3,8 @@
 
 #include "it/types.h"
 
+#include <placeholder.h>
+
 /* 2842A4 */ void it_802842A4(Item_GObj*);
 /* 284324 */ void it_80284324(Item_GObj*);
 /* 2844E4 */ void it_802844E4(Item_GObj*);
@@ -10,5 +12,6 @@
 /* 2845BC */ void it_802845BC(Item_GObj*);
 /* 284624 */ void it_80284624(Item_GObj*, Item_GObj*);
 /* 3F5740 */ extern ItemStateTable it_803F5740[];
+extern M2C_UNK gm_80473A18;
 
 #endif

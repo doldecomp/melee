@@ -6,10 +6,6 @@
 #include "it/it_26B1.h"
 #include "it/item.h"
 
-#include <placeholder.h>
-
-extern M2C_UNK gm_80473A18;
-
 /* 2841B4 */ static HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2);
 /* 28428C */ static void it_8028428C(Item_GObj* gobj);
 /* 284358 */ static void it_80284358(Item_GObj* gobj);
