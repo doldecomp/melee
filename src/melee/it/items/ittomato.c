@@ -37,9 +37,7 @@ HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2)
 
 void it_8028428C(Item_GObj* gobj)
 {
-    Item* ip;
-
-    ip = gobj->user_data;
+    Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.capsule.x0 =
         M2C_FIELD(ip->xC4_article_data->x4_specialAttributes, s32*, 4);
 }
@@ -160,10 +158,7 @@ bool it_802845E4(Item_GObj* gobj)
     return false;
 }
 
-void it_802845EC(Item_GObj* gobj)
-{
-    return;
-}
+void it_802845EC(Item_GObj* gobj) {}
 
 bool it_802845F0(Item_GObj* gobj)
 {
