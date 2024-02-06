@@ -31,7 +31,7 @@ TEXT_O_FILES :=\
     $(BUILD_DIR)/asm/melee/lb/lb_0192.s.o\
     $(BUILD_DIR)/asm/melee/lb/lb_0198.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbsnap.s.o\
-    $(BUILD_DIR)/asm/melee/lb/lbgx.s.o\
+    $(BUILD_DIR)/src/melee/lb/lbgx.c.o\
     $(BUILD_DIR)/asm/melee/lb/lbanim.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbmthp.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbbgflash.s.o\

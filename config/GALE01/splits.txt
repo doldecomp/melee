@@ -105,7 +105,7 @@ melee/lb/lb_0198.c:
 	.bss        start:0x804329F0 end:0x804333E0
 	.sdata      start:0x804D3800 end:0x804D3828
 	.sbss       start:0x804D63D0 end:0x804D63D8
-	.sdata2     start:0x804D7C80 end:0x804D7CC8
+	.sdata2     start:0x804D7C80 end:0x804D7CB8
 
 melee/lb/lbsnap.c:
 	.text       start:0x8001D2BC end:0x8001E2F8
@@ -114,9 +114,11 @@ melee/lb/lbsnap.c:
 
 melee/lb/lbgx.c:
 	.text       start:0x8001E2F8 end:0x8001E560
+	.sdata2		start:0x804D7CB8 end:0x804D7CC0
 
 melee/lb/lbanim.c:
 	.text       start:0x8001E560 end:0x8001E8F8
+	.sdata2		start:0x804D7CC0 end:0x804D7CC8
 
 melee/lb/lbmthp.c:
 	.text       start:0x8001E8F8 end:0x8001FC08

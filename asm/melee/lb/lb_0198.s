@@ -4545,11 +4545,3 @@ lb_804D7CA8:
 lb_804D7CB0:
     .4byte 0x00000000
     .4byte 0x00000000
-.global lb_804D7CB8
-lb_804D7CB8:
-    .4byte 0x00000000
-    .4byte 0x00000000
-.global lb_804D7CC0
-lb_804D7CC0:
-    .4byte 0x00000000
-    .4byte 0x00000000
