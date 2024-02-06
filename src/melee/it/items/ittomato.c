@@ -30,6 +30,15 @@ extern M2C_UNK gm_80473A18;
 /* 2845EC */ static void it_802845EC(Item_GObj* gobj);
 /* 2845F0 */ static bool it_802845F0(Item_GObj* gobj);
 
+ItemStateTable it_803F5740[] = {
+    { -1, it_80284380, it_80284388, it_802843B8 },
+    { -1, it_80284420, it_80284428, it_8028442C },
+    { -1, it_80284480, it_80284488, it_802844B8 },
+    { -1, it_80284540, it_80284548, NULL },
+    { -1, it_80284480, it_80284488, it_802844B8 },
+    { -1, it_802845E4, it_802845EC, it_802845F0 },
+};
+
 HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2)
 {
     NOT_IMPLEMENTED;
@@ -170,12 +179,3 @@ void it_80284624(Item_GObj* gobj, Item_GObj* gobj_ref)
 {
     it_8026B894(gobj, gobj_ref);
 }
-
-ItemStateTable it_803F5740[] = {
-    { 0xFFFFFFFF, it_80284380, it_80284388, it_802843B8 },
-    { 0xFFFFFFFF, it_80284420, it_80284428, it_8028442C },
-    { 0xFFFFFFFF, it_80284480, it_80284488, it_802844B8 },
-    { 0xFFFFFFFF, it_80284540, it_80284548, NULL },
-    { 0xFFFFFFFF, it_80284480, it_80284488, it_802844B8 },
-    { 0xFFFFFFFF, it_802845E4, it_802845EC, it_802845F0 },
-};
