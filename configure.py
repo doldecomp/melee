@@ -523,7 +523,7 @@ config.libs = [
             # Donkey Kong (common states)
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_HeavyWait0.c"),
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_HeavyWalk.c"),
-            Object(NonMatching, "melee/ft/ftwalkcommon.c"),
+            Object(Matching, "melee/ft/ftwalkcommon.c"),
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_MS_345_0.c"),
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_HeavyTurn.c"),
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_HeavyFall.c"),
