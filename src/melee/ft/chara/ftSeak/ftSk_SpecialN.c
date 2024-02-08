@@ -624,7 +624,6 @@ void ftSk_SpecialAirNEnd_Coll(Fighter_GObj* fighter_gobj)
     }
 }
 
-// https://decomp.me/scratch/TvVmk
 void ftSk_Sheik_ShootNeedles(Fighter_GObj* fighter_gobj)
 {
     Vec3 vec;

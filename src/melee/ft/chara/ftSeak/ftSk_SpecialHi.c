@@ -1,5 +1,22 @@
+#include "ft/forward.h"
+#include "ftSeak/forward.h"
+
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/fighter.h"
+#include "ft/ft_0877.h"
+#include "ft/inlines.h"
+#include "ft/types.h"
+#include "it/items/itseakvanish.h"
+#include "lb/lb_00B0.h"
+
 #include <math.h>
 #include <placeholder.h>
+#include <baselib/gobj.h>
+
+/* 112F48 */ static void ftSk_SpecialHi_80112F48(Fighter_GObj* gobj);
+/* 112FA8 */ static void ftSk_SpecialHi_80112FA8(Fighter_GObj* gobj);
+/* 113038 */ static void fn_80113038(Fighter_GObj* gobj);
 
 static float const ftSk_Init_804D9660 = 0;
 static float const ftSk_Init_804D9664 = 1;
@@ -13,21 +30,80 @@ static float const ftSk_Init_804D968C = 35;
 static float const ftSk_Init_804D9690 = 0.001;
 static float const ftSk_Init_804D9694 = 10;
 
-// 80112ED8 - 80112F48 (0x70 bytes)
+void fn_80112ED8(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (!fp->x2219_b0) {
+        ftSk_SpecialHi_80112F48(gobj);
+        ftSk_SpecialHi_80112FA8(gobj);
+        ft_80088148(fp, 115, 127, 64);
+    }
+    fp->accessory4_cb = NULL;
+}
 
-// 80112F48 - 80112FA8 (0x60 bytes)
+void ftSk_SpecialHi_80112F48(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    u8 _[4];
+    {
+        Vec3 pos;
+        u8 _[4];
+        lb_8000B1CC(fp->parts[FtPart_HipN].joint, 0, &pos);
+        pos.z = 0;
+        it_802B1C60(gobj, &pos, fp->facing_dir);
+    }
+}
 
-// 80112FA8 - 80113038 (0x90 bytes)
+void ftSk_SpecialHi_80112FA8(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Vec3 pos;
+    lb_8000B1CC(fp->parts[FtPart_HipN].joint, 0, &pos);
+    if (!fp->x2219_b0) {
+        efSync_Spawn(1284, gobj, &pos);
+        fp->x2219_b0 = true;
+    }
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+}
 
-// 80113038 - 801130D0 (0x98 bytes)
+void fn_80113038(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Vec3 pos;
+    if (!fp->x2219_b0) {
+        lb_8000B1CC(fp->parts[FtPart_HipN].joint, 0, &pos);
+        efSync_Spawn(1285, gobj, &pos);
+        fp->x2219_b0 = true;
+    }
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
+}
 
-// AS_SheikUpBStartGround
-// 801130D0 - 8011312C (0x5C bytes)
+void ftSk_SpecialHi_Enter(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    u8 _[20];
+    fp->cmd_vars[0] = 0;
+    fp->mv.sk.specialhi.xC = 0;
+    Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialHiStart_0, 0, 0, 1, 0,
+                              NULL);
+    ftAnim_8006EBA4(gobj);
+}
 
-// Sheik_AS_358_Up-B_Vanish
-// 8011312C - 80113194 (0x68 bytes)
-
-// 80113194 - 801131D0 (0x3C bytes)
+void ftSk_SpecialAirHi_Enter(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftSeakAttributes* da = fp->dat_attrs;
+    u8 _[20];
+    fp->cmd_vars[0] = 0;
+    fp->mv.sk.specialhi.xC = 0;
+    fp->self_vel.y = da->self_vel_y;
+    Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialAirHiStart_0, 0, 0, 1, 0,
+                              NULL);
+    ftAnim_8006EBA4(gobj);
+}
 
 // 801131D0 - 8011320C (0x3C bytes)
 
