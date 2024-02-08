@@ -1,3 +1,9 @@
+#include "ft/ftcommon.h"
+#include "ft/inlines.h"
+#include "ft/types.h"
+#include "ftZelda/ftZd_SpecialLw.h"
+
+#include <baselib/gobj.h>
 
 static float const ftSk_Init_804D9698 = 0.4000000059604645F;
 static float const ftSk_Init_804D969C = 0.003000000026077032F;
@@ -7,7 +13,12 @@ static double const ftSk_Init_804D96A8 = 0.0078125;
 
 // 80114034 - 801140B0 (0x7C bytes)
 
-// 801140B0 - 8011412C (0x7C bytes)
+void fn_8011412C(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->accessory4_cb = NULL;
+    ftCommon_8007EFC8(gobj, &ftZd_SpecialLw_8013B4D8);
+}
 
 // Sheik_AS_361_Transform_Grounded
 // 80114160 - 80114224 (0xC4 bytes)
