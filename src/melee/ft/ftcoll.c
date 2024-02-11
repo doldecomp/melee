@@ -374,7 +374,7 @@ void ftColl_80078A2C(Fighter_GObj* this_gobj)
                                             this_hit,
                                             &victim_fp
                                                  ->x11A0_fighterHurtbox[j],
-                                            *ftCommon_8007F804(victim_fp),
+                                            ftCommon_8007F804(victim_fp),
                                             this_fp->x34_scale.y,
                                             victim_fp->x34_scale.y,
                                             victim_fp->cur_pos.z) != 0)

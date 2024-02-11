@@ -1,5 +1,4 @@
 #include "ftCommon/forward.h"
-#include "lb/forward.h"
 #include <dolphin/mtx/forward.h>
 
 #include "ftSs_SpecialLw_0.h"
@@ -63,7 +62,7 @@ bool ftSs_Init_80128A1C(HSD_GObj* gobj, unk_t arg1, float farg1)
 
     for (i = 0; i < fp->x119E_hurtboxNum; i++) {
         if (lbColl_80008248(arg1, &fp->x11A0_fighterHurtbox[i],
-                            *ftCommon_8007F804(fp), farg1, fp->x34_scale.y,
+                            ftCommon_8007F804(fp), farg1, fp->x34_scale.y,
                             fp->cur_pos.z))
         {
             return true;
