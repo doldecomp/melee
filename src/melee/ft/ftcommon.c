@@ -1536,10 +1536,10 @@ void ftCommon_8007F7B4(HSD_GObj* gobj)
     fp->self_vel.x = -fp->facing_dir * fabs_inline(fp->self_vel.x);
 }
 
-Mtx* ftCommon_8007F804(Fighter* fp)
+MtxPtr ftCommon_8007F804(Fighter* fp)
 {
     if (fp->x34_scale.z != 1) {
-        return &fp->x44_mtx;
+        return fp->x44_mtx;
     }
     return NULL;
 }

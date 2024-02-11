@@ -1,3 +1,4 @@
+#include <platform.h>
 #include "ft/forward.h"
 #include <dolphin/gx/forward.h>
 
@@ -17,10 +18,15 @@
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
 #include <baselib/debug.h>
-#include <baselib/particle.h>
 #include <baselib/jobj.h>
 #include <baselib/mtx.h>
+#include <baselib/particle.h>
 #include <MetroTRK/intrinsics.h>
+
+/* 006E58 */ static bool lbColl_80006E58(Vec3* arg0, Vec3* arg1, Vec3* arg2,
+                                         Vec3* arg3, Vec3* arg4, Vec3* arg5,
+                                         MtxPtr arg6, Vec3* arg7, float* arg8,
+                                         float scl, float arg10, float arg11);
 
 // .sdata
 extern char lbColl_804D3700[8];
@@ -29,21 +35,21 @@ extern int lbColl_804D36D4;
 extern int lbColl_804D36D8;
 
 // .sdata2
-f32 const lbColl_804D79F0 = 1e-5;
-f32 const lbColl_804D79F4 = -1e-5;
-f32 const lbColl_804D79F8 = 0;
+float const lbColl_804D79F0 = 1e-5;
+float const lbColl_804D79F4 = -1e-5;
+float const lbColl_804D79F8 = 0;
 f64 const lbColl_804D7A00 = 1;
-f32 const lbColl_804D7A08 = 1;
+float const lbColl_804D7A08 = 1;
 f64 const lbColl_804D7A10 = 0;
 f64 const lbColl_804D7A18 = 0.5;
 f64 const lbColl_804D7A20 = 3.0;
-f32 const lbColl_804D7A28 = 2;
-f32 const lbColl_804D7A2C = 4;
-f32 const lbColl_804D7A30 = M_PI;
-f32 const lbColl_804D7A34 = 20;
-f32 const lbColl_804D7A38 = 3;
-f32 const lbColl_804D7A3C = 0.5;
-f32 const lbColl_804D7A40 = 5;
+float const lbColl_804D7A28 = 2;
+float const lbColl_804D7A2C = 4;
+float const lbColl_804D7A30 = M_PI;
+float const lbColl_804D7A34 = 20;
+float const lbColl_804D7A38 = 3;
+float const lbColl_804D7A3C = 0.5;
+float const lbColl_804D7A40 = 5;
 
 // .data
 int lbColl_803B9880[] = {
@@ -55,6 +61,10 @@ int lbColl_803B9880[] = {
     0x000000F1, 0x000000F1, 0x000000F1, 0x0000005E, 0x0000005D, 0x0000005C,
     0x00035BAF, 0x00035BB2, 0x00035BB5, 0x00083D60, 0x00083D60, 0x0000020D,
 };
+extern struct unk {
+    u8* pad;
+    UNK_T pad_x;
+} lbColl_803B9928[];
 
 // .text
 
@@ -77,28 +87,28 @@ int lbColl_80005BB0(HitCapsule* arg0, int arg1)
         -1);
 }
 
-int lbColl_80005C44(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, f32 arg8,
-                    f32 arg9)
+int lbColl_80005C44(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, float arg8,
+                    float arg9)
 {
-    f32 sp40;
-    f32 sp3C;
-    f32 sp38;
-    f32 sp34;
-    f32 sp30;
-    f32 sp2C;
-    f32 temp_f10;
-    f32 temp_f1;
-    f32 temp_f1_2;
-    f32 temp_f2;
-    f32 temp_f3;
-    f32 temp_f3_2;
-    f32 temp_f4;
-    f32 temp_f4_2;
-    f32 temp_f5;
-    f32 temp_f7;
-    f32 temp_f8;
-    f32 temp_f9;
-    f32 var_f6;
+    float sp40;
+    float sp3C;
+    float sp38;
+    float sp34;
+    float sp30;
+    float sp2C;
+    float temp_f10;
+    float temp_f1;
+    float temp_f1_2;
+    float temp_f2;
+    float temp_f3;
+    float temp_f3_2;
+    float temp_f4;
+    float temp_f4_2;
+    float temp_f5;
+    float temp_f7;
+    float temp_f8;
+    float temp_f9;
+    float var_f6;
     int var_r0;
 
     temp_f2 = arg8 + arg9;
@@ -177,9 +187,9 @@ block_27:
               ((temp_f8 * (sp38 - sp2C)) + (temp_f9 * (sp3C - sp30)))) /
             temp_f7;
         var_f6 = temp_f4_2;
-        if (temp_f4_2 > (f32) hsd_804D78E0) {
+        if (temp_f4_2 > (float) hsd_804D78E0) {
             var_f6 = hsd_804D78E8;
-        } else if (var_f6 < (f32) hsd_804D78F0) {
+        } else if (var_f6 < (float) hsd_804D78F0) {
             var_f6 = hsd_804D78D8;
         }
     }
@@ -198,22 +208,22 @@ block_27:
     return 1;
 }
 
-f32 lbColl_80005EBC(Vec3* arg0, Vec3* arg1, Vec3* arg2, f32* arg3)
+float lbColl_80005EBC(Vec3* arg0, Vec3* arg1, Vec3* arg2, float* arg3)
 {
-    f32 sp58;
-    f32 sp54;
-    f32 sp50;
-    f32 sp40;
-    f32 sp3C;
-    f32 sp38;
-    f32 temp_f1;
-    f32 temp_f1_2;
-    f32 temp_f4;
-    f32 temp_f6;
-    f32 temp_f7;
-    f32 temp_f7_2;
-    f32 temp_f8;
-    f32 var_f5;
+    float sp58;
+    float sp54;
+    float sp50;
+    float sp40;
+    float sp3C;
+    float sp38;
+    float temp_f1;
+    float temp_f1_2;
+    float temp_f4;
+    float temp_f6;
+    float temp_f7;
+    float temp_f7_2;
+    float temp_f8;
+    float var_f5;
 
     sp50 = arg0->x;
     sp54 = arg0->y;
@@ -229,9 +239,9 @@ f32 lbColl_80005EBC(Vec3* arg0, Vec3* arg1, Vec3* arg2, f32* arg3)
                 ((temp_f8 * temp_f8) +
                  ((temp_f6 * temp_f6) + (temp_f7_2 * temp_f7_2)));
     var_f5 = temp_f1_2;
-    if (temp_f1_2 > (f32) hsd_804D78E0) {
+    if (temp_f1_2 > (float) hsd_804D78E0) {
         var_f5 = hsd_804D78E8;
-    } else if (var_f5 < (f32) hsd_804D78F0) {
+    } else if (var_f5 < (float) hsd_804D78F0) {
         var_f5 = hsd_804D78D8;
     }
     temp_f7 = ((temp_f7_2 * var_f5) + sp54) - arg2->y;
@@ -241,7 +251,7 @@ f32 lbColl_80005EBC(Vec3* arg0, Vec3* arg1, Vec3* arg2, f32* arg3)
     return (temp_f4 * temp_f4) + ((temp_f1 * temp_f1) + (temp_f7 * temp_f7));
 }
 
-f32 lbColl_80005FC0(Vec3* a, Vec3* b, Vec3* c, f32* out)
+float lbColl_80005FC0(Vec3* a, Vec3* b, Vec3* c, float* out)
 {
     {
         Vec3 temp_a;
@@ -249,26 +259,27 @@ f32 lbColl_80005FC0(Vec3* a, Vec3* b, Vec3* c, f32* out)
         temp_a.y = a->y;
         temp_a.z = a->z;
         {
-            f32 diff_ba_x = b->x - a->x;
-            f32 diff_ba_y = b->y - a->y;
+            float diff_ba_x = b->x - a->x;
+            float diff_ba_y = b->y - a->y;
 
             Vec3 temp_c;
             temp_c.x = c->x;
             temp_c.y = c->y;
             temp_c.z = c->z;
             {
-                f32 result0 = -(diff_ba_x * (temp_a.x - temp_c.x) +
-                                (diff_ba_y * (temp_a.y - temp_c.y))) /
-                              (diff_ba_x * diff_ba_x + diff_ba_y * diff_ba_y);
+                float result0 =
+                    -(diff_ba_x * (temp_a.x - temp_c.x) +
+                      (diff_ba_y * (temp_a.y - temp_c.y))) /
+                    (diff_ba_x * diff_ba_x + diff_ba_y * diff_ba_y);
                 {
-                    f32 result1 = result0;
-                    if (result0 > (f32) 1.0) {
+                    float result1 = result0;
+                    if (result0 > (float) 1.0) {
                         result1 = 1.0f;
-                    } else if (result1 < (f32) 0.0) {
+                    } else if (result1 < (float) 0.0) {
                         result1 = 0.0f;
                     }
                     {
-                        f32 x, y;
+                        float x, y;
 
                         y = diff_ba_y * result1 + temp_a.y - c->y;
                         *out = result1;
@@ -281,11 +292,11 @@ f32 lbColl_80005FC0(Vec3* a, Vec3* b, Vec3* c, f32* out)
     }
 }
 
-inline bool end(Vec3* a, Vec3* b, f32 unk_sum)
+inline bool end(Vec3* a, Vec3* b, float unk_sum)
 {
-    f32 y = a->y - b->y;
-    f32 x = a->x - b->x;
-    f32 z = a->z - b->z;
+    float y = a->y - b->y;
+    float x = a->x - b->x;
+    float z = a->z - b->z;
 
     if (unk_sum * unk_sum < z * z + (x * x + y * y)) {
         return false;
@@ -295,18 +306,18 @@ inline bool end(Vec3* a, Vec3* b, f32 unk_sum)
 }
 
 int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
-                    Vec3* arg5, f32 arg6, f32 arg7)
+                    Vec3* arg5, float arg6, float arg7)
 {
     {
         Vec3 vec4;
-        f32 sp30;
-        f32 sp34;
-        f32 sp38;
+        float sp30;
+        float sp34;
+        float sp38;
         Vec3 arg4_offset;
         Vec3 arg5_offset;
-        f32 sp3C;
-        f32 temp_f1;
-        f32 unk_sum = arg6 + arg7;
+        float sp3C;
+        float temp_f1;
+        float unk_sum = arg6 + arg7;
         vec4.x = arg0->x;
         vec4.y = arg0->y;
         vec4.z = arg0->z;
@@ -320,7 +331,7 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
         arg4_offset.z = vec4.z;
 
         {
-            f32 temp_r0_2 = arg2->z;
+            float temp_r0_2 = arg2->z;
             sp3C = temp_r0_2;
 
             arg5_offset.x = sp34;
@@ -329,7 +340,7 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
         }
 
         {
-            f32 arg1_x = arg1->x;
+            float arg1_x = arg1->x;
             if (arg4_offset.x > arg1_x) {
                 if (!testPlusX(&arg4_offset, &arg5_offset, arg3, unk_sum)) {
                     return false;
@@ -347,7 +358,7 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                 }
             }
             {
-                f32 x = arg1_x + unk_sum;
+                float x = arg1_x + unk_sum;
                 if (x < arg5_offset.x && x < arg3->x) {
                     return false;
                 }
@@ -357,7 +368,7 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
             temp_f1 = arg1->y;
             if (arg4_offset.y > temp_f1) {
                 {
-                    f32 temp_f3;
+                    float temp_f3;
                     temp_f3 = arg4_offset.y + unk_sum;
 
                     if (temp_f3 < arg5_offset.y && temp_f3 < arg3->y) {
@@ -366,7 +377,7 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                 }
 
                 {
-                    f32 temp_f3_2 = temp_f1 - unk_sum;
+                    float temp_f3_2 = temp_f1 - unk_sum;
 
                     if (temp_f3_2 > arg5_offset.y && temp_f3_2 > arg3->y) {
                         return false;
@@ -377,31 +388,31 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
             }
 
             {
-                f32 y = arg4_offset.y - unk_sum;
+                float y = arg4_offset.y - unk_sum;
                 if (y > arg5_offset.y && y > arg3->y) {
                     return false;
                 }
             }
 
             {
-                f32 y = temp_f1 + unk_sum;
+                float y = temp_f1 + unk_sum;
                 if (y < arg5_offset.y && y < arg3->y) {
                     return false;
                 }
             }
         }
         block_26: {
-            f32 temp_f2_5 = arg1->z;
+            float temp_f2_5 = arg1->z;
             if (arg4_offset.z > temp_f2_5) {
                 {
-                    f32 temp_f4;
+                    float temp_f4;
                     temp_f4 = arg4_offset.z + unk_sum;
                     if ((temp_f4 < arg5_offset.z) && (temp_f4 < arg3->z)) {
                         return false;
                     }
                 }
                 {
-                    f32 temp_f4_2;
+                    float temp_f4_2;
                     temp_f4_2 = temp_f2_5 - unk_sum;
                     if ((temp_f4_2 > arg5_offset.z) && (temp_f4_2 > arg3->z)) {
                         return false;
@@ -410,48 +421,48 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                 goto block_39;
             }
             {
-                f32 temp_f4_3;
+                float temp_f4_3;
                 temp_f4_3 = arg4_offset.z - unk_sum;
                 if ((temp_f4_3 > arg5_offset.z) && (temp_f4_3 > arg3->z)) {
                     return false;
                 }
             }
             {
-                f32 temp_f4_4;
+                float temp_f4_4;
                 temp_f4_4 = temp_f2_5 + unk_sum;
                 if ((temp_f4_4 < arg5_offset.z) && (temp_f4_4 < arg3->z)) {
                     return false;
                 }
             }
         block_39: {
-            f32 arg4_scl;
+            float arg4_scl;
 
-            f32 temp_f25 = temp_f1 - arg4_offset.y;
-            f32 temp_f5 = arg3->y;
-            f32 temp_f24 = temp_f2_5 - arg4_offset.z;
-            f32 temp_f22 = temp_f5 - arg5_offset.y;
-            f32 temp_f13 = arg4_offset.y - arg5_offset.y;
-            f32 temp_f4_5 = arg3->x;
-            f32 temp_f26 = arg1_x - arg4_offset.x;
-            f32 temp_f23 = temp_f4_5 - arg5_offset.x;
-            f32 temp_f6 = arg3->z;
-            f32 arg5_offset_base = temp_f6 - arg5_offset.z;
-            f32 temp_f8 = temp_f24 * arg5_offset_base + temp_f26 * temp_f23 +
-                          temp_f25 * temp_f22;
-            f32 temp_f7 = arg5_offset_base * arg5_offset_base +
-                          temp_f23 * temp_f23 + temp_f22 * temp_f22;
-            f32 temp_f19 = arg4_offset.x - arg5_offset.x;
-            f32 temp_f3_5 = (temp_f24 * temp_f24) +
-                            ((temp_f26 * temp_f26) + (temp_f25 * temp_f25));
-            f32 temp_f13_2 = arg4_offset.z - arg5_offset.z;
-            f32 temp_f12 = arg5_offset_base * temp_f13_2 +
-                           temp_f23 * temp_f19 + temp_f22 * temp_f13;
-            f32 temp_f11 = (temp_f24 * temp_f13_2) + temp_f26 * temp_f19 +
-                           temp_f25 * temp_f13;
-            f32 temp_f10 = temp_f3_5 * temp_f7 - temp_f8 * temp_f8;
+            float temp_f25 = temp_f1 - arg4_offset.y;
+            float temp_f5 = arg3->y;
+            float temp_f24 = temp_f2_5 - arg4_offset.z;
+            float temp_f22 = temp_f5 - arg5_offset.y;
+            float temp_f13 = arg4_offset.y - arg5_offset.y;
+            float temp_f4_5 = arg3->x;
+            float temp_f26 = arg1_x - arg4_offset.x;
+            float temp_f23 = temp_f4_5 - arg5_offset.x;
+            float temp_f6 = arg3->z;
+            float arg5_offset_base = temp_f6 - arg5_offset.z;
+            float temp_f8 = temp_f24 * arg5_offset_base + temp_f26 * temp_f23 +
+                            temp_f25 * temp_f22;
+            float temp_f7 = arg5_offset_base * arg5_offset_base +
+                            temp_f23 * temp_f23 + temp_f22 * temp_f22;
+            float temp_f19 = arg4_offset.x - arg5_offset.x;
+            float temp_f3_5 = (temp_f24 * temp_f24) +
+                              ((temp_f26 * temp_f26) + (temp_f25 * temp_f25));
+            float temp_f13_2 = arg4_offset.z - arg5_offset.z;
+            float temp_f12 = arg5_offset_base * temp_f13_2 +
+                             temp_f23 * temp_f19 + temp_f22 * temp_f13;
+            float temp_f11 = (temp_f24 * temp_f13_2) + temp_f26 * temp_f19 +
+                             temp_f25 * temp_f13;
+            float temp_f10 = temp_f3_5 * temp_f7 - temp_f8 * temp_f8;
 
             {
-                f32 arg5_scl;
+                float arg5_scl;
                 if (approximatelyZero(temp_f7)) {
                     if (approximatelyZero(temp_f3_5)) {
                         arg4_scl = 0.0f;
@@ -459,27 +470,28 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                     } else {
                         arg5_scl = 0.0f;
                         {
-                            f32 temp_f1_2 = -temp_f11 / temp_f3_5;
+                            float temp_f1_2 = -temp_f11 / temp_f3_5;
                             arg4_scl = temp_f1_2;
 
-                            if (temp_f1_2 > (f32) 1.0) {
+                            if (temp_f1_2 > (float) 1.0) {
                                 arg4_scl = 1.0f;
-                            } else if (arg4_scl < (f32) 0.0) {
+                            } else if (arg4_scl < (float) 0.0) {
                                 arg4_scl = 0.0f;
                             }
                         }
                     }
                 } else {
                     if (approximatelyZero(temp_f10)) {
-                        f32 temp_f9 = (0.5 * temp_f22 + arg5_offset.y);
-                        f32 temp_f7_2 = (0.5 * temp_f23 + arg5_offset.x);
-                        f32 temp_f10_2 = arg4_offset.y - temp_f9;
-                        f32 temp_f11_2 = temp_f1 - temp_f9;
-                        f32 temp_f8_2 = 0.5 * arg5_offset_base + arg5_offset.z;
-                        f32 temp_f3_6 = arg4_offset.x - temp_f7_2;
-                        f32 temp_f9_2 = arg1_x - temp_f7_2;
-                        f32 arg4_offset_z = arg4_offset.z - temp_f8_2;
-                        f32 temp_f2_6 = temp_f2_5 - temp_f8_2;
+                        float temp_f9 = (0.5 * temp_f22 + arg5_offset.y);
+                        float temp_f7_2 = (0.5 * temp_f23 + arg5_offset.x);
+                        float temp_f10_2 = arg4_offset.y - temp_f9;
+                        float temp_f11_2 = temp_f1 - temp_f9;
+                        float temp_f8_2 =
+                            0.5 * arg5_offset_base + arg5_offset.z;
+                        float temp_f3_6 = arg4_offset.x - temp_f7_2;
+                        float temp_f9_2 = arg1_x - temp_f7_2;
+                        float arg4_offset_z = arg4_offset.z - temp_f8_2;
+                        float temp_f2_6 = temp_f2_5 - temp_f8_2;
 
                         // lhs and rhs each the same inline
                         if ((arg4_offset_z * arg4_offset_z +
@@ -490,12 +502,12 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                               (temp_f11_2 * temp_f11_2))))
                         {
                             Vec3 vec2;
-                            f32 sp90;
-                            f32 sp8C;
-                            f32 sp88;
-                            f32 temp_f7_4;
-                            f32 temp_f8_3;
-                            f32 temp_f9_3;
+                            float sp90;
+                            float sp8C;
+                            float sp88;
+                            float temp_f7_4;
+                            float temp_f8_3;
+                            float temp_f9_3;
                             vec2.x = sp34;
                             vec2.y = sp38;
                             vec2.z = sp3C;
@@ -507,30 +519,30 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                             sp90 = sp30;
                             arg4_scl = 0.0f;
                             {
-                                f32 var_f2 =
+                                float var_f2 =
                                     -((temp_f9_3 * (vec2.z - sp90)) +
                                       ((temp_f7_4 * (vec2.x - sp88)) +
                                        (temp_f8_3 * (vec2.y - sp8C)))) /
                                     ((temp_f9_3 * temp_f9_3) +
                                      ((temp_f7_4 * temp_f7_4) +
                                       (temp_f8_3 * temp_f8_3)));
-                                if (var_f2 > (f32) 1.0) {
+                                if (var_f2 > (float) 1.0) {
                                     var_f2 = 1.0f;
-                                } else if (var_f2 < (f32) 0.0) {
+                                } else if (var_f2 < (float) 0.0) {
                                     var_f2 = 0.0f;
                                 }
                                 arg5_scl = var_f2;
                             }
                         } else {
-                            f32 sp58;
-                            f32 sp60;
-                            f32 sp48;
-                            f32 sp5C;
-                            f32 sp44;
-                            f32 sp40;
-                            f32 temp_f10_3;
-                            f32 temp_f11_3;
-                            f32 temp_f9_4;
+                            float sp58;
+                            float sp60;
+                            float sp48;
+                            float sp5C;
+                            float sp44;
+                            float sp40;
+                            float temp_f10_3;
+                            float temp_f11_3;
+                            float temp_f9_4;
                             sp40 = sp34;
                             sp44 = sp38;
                             sp48 = sp3C;
@@ -542,7 +554,7 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                             sp5C = arg1->y;
                             sp60 = arg1->z;
                             {
-                                f32 var_f2_2 =
+                                float var_f2_2 =
                                     -temp_f11_3 * (sp48 - sp60) +
                                     temp_f9_4 * sp40 - sp58 +
                                     temp_f10_3 * sp44 -
@@ -550,9 +562,9 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                                     temp_f9_4 * temp_f9_4 +
                                     temp_f10_3 * temp_f10_3;
 
-                                if (var_f2_2 > (f32) 1.0) {
+                                if (var_f2_2 > (float) 1.0) {
                                     var_f2_2 = 1.0f;
-                                } else if (var_f2_2 < (f32) 0.0) {
+                                } else if (var_f2_2 < (float) 0.0) {
                                     var_f2_2 = 0.0f;
                                 }
 
@@ -560,21 +572,22 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                             }
                         }
                     } else {
-                        f32 temp_f1_3 =
+                        float temp_f1_3 =
                             temp_f8 * temp_f12 - temp_f7 * temp_f11 / temp_f10;
                         arg5_scl =
                             ((temp_f3_5 * temp_f12) - (temp_f8 * temp_f11)) /
                             temp_f10;
                         arg4_scl = temp_f1_3;
-                        if (temp_f1_3 > (f32) 1.0 || arg4_scl < (f32) 0.0 ||
-                            arg5_scl > (f32) 1.0 || arg5_scl < (f32) 0.0)
+                        if (temp_f1_3 > (float) 1.0 ||
+                            arg4_scl < (float) 0.0 || arg5_scl > (float) 1.0 ||
+                            arg5_scl < (float) 0.0)
                         {
-                            f32 var_f18;
-                            f32 var_f19;
-                            f32 var_f1;
-                            f32 spA4;
+                            float var_f18;
+                            float var_f19;
+                            float var_f1;
+                            float spA4;
 
-                            if (arg4_scl < (f32) 0.0) {
+                            if (arg4_scl < (float) 0.0) {
                                 var_f19 = 0.0f;
                                 var_f18 =
                                     lbColl_80005EBC(arg2, arg3, arg0, &spA4);
@@ -585,8 +598,8 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                             }
 
                             {
-                                f32 spA0;
-                                if (arg5_scl < (f32) 0.0) {
+                                float spA0;
+                                if (arg5_scl < (float) 0.0) {
                                     arg5_scl = 0.0f;
                                     var_f1 = lbColl_80005EBC(arg0, arg1, arg2,
                                                              &spA0);
@@ -623,11 +636,11 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
 }
 
 bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
-                     f32 p, f32 q, f32 r)
+                     float p, float q, float r)
 {
-    f32 sum_pq = p + q;
+    float sum_pq = p + q;
 
-    f32 a_z;
+    float a_z;
     Vec3 a0;
     Vec3 a1;
 
@@ -639,7 +652,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
     a1.z = a_z;
     {
         Vec3 c0;
-        f32 temp_r0_2;
+        float temp_r0_2;
 
         c0.x = c->x;
         c0.y = c->y;
@@ -652,17 +665,17 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
             c1.y = c0.y;
             c1.z = temp_r0_2;
             {
-                f32 b_x = b->x;
+                float b_x = b->x;
                 if (a1.x > b_x) {
                     {
-                        f32 x = a1.x + sum_pq;
+                        float x = a1.x + sum_pq;
                         if (x < c1.x && x < d->x) {
                             return false;
                         }
                     }
 
                     {
-                        f32 x = b_x - sum_pq;
+                        float x = b_x - sum_pq;
                         if ((x > c1.x) && (x > d->x)) {
                             return false;
                         }
@@ -670,14 +683,14 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
 
                 } else {
                     {
-                        f32 x = a1.x - sum_pq;
+                        float x = a1.x - sum_pq;
                         if (x > c1.x && x > d->x) {
                             return false;
                         }
                     }
 
                     {
-                        f32 temp_f2_4 = b_x + sum_pq;
+                        float temp_f2_4 = b_x + sum_pq;
                         if (temp_f2_4 < c1.x && temp_f2_4 < d->x) {
                             return false;
                         }
@@ -685,17 +698,17 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                 }
 
                 {
-                    f32 b_y = b->y;
+                    float b_y = b->y;
                     if (a1.y > b_y) {
                         {
-                            f32 y;
+                            float y;
                             y = a1.y + sum_pq;
                             if (y < c1.y && y < d->y) {
                                 return false;
                             }
                         }
                         {
-                            f32 y = b_y - sum_pq;
+                            float y = b_y - sum_pq;
                             if (y > c1.y && y > d->y) {
                                 return false;
                             }
@@ -703,13 +716,13 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
 
                     } else {
                         {
-                            f32 y = a1.y - sum_pq;
+                            float y = a1.y - sum_pq;
                             if (y > c1.y && y > d->y) {
                                 return false;
                             }
                         }
                         {
-                            f32 y = b_y + sum_pq;
+                            float y = b_y + sum_pq;
                             if (y < c1.y && y < d->y) {
                                 return false;
                             }
@@ -717,65 +730,65 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                     }
 
                     {
-                        f32 diff_ba_y = b_y - a1.y;
-                        f32 d_y = d->y;
-                        f32 diff_ac_y = a1.y - c1.y;
-                        f32 diff_dc_y = d_y - c1.y;
-                        f32 diff_ba_x = b_x - a1.x;
-                        f32 d_x = d->x;
-                        f32 diff_dc_x = d_x - c1.x;
+                        float diff_ba_y = b_y - a1.y;
+                        float d_y = d->y;
+                        float diff_ac_y = a1.y - c1.y;
+                        float diff_dc_y = d_y - c1.y;
+                        float diff_ba_x = b_x - a1.x;
+                        float d_x = d->x;
+                        float diff_dc_x = d_x - c1.x;
 
-                        f32 dot2_diff_ba_dc =
+                        float dot2_diff_ba_dc =
                             diff_ba_x * diff_dc_x + diff_ba_y * diff_dc_y;
 
-                        f32 sqdist2_dc =
+                        float sqdist2_dc =
                             diff_dc_x * diff_dc_x + diff_dc_y * diff_dc_y;
-                        f32 sqdist2_ba =
+                        float sqdist2_ba =
                             diff_ba_x * diff_ba_x + diff_ba_y * diff_ba_y;
-                        f32 diff_ac_x = a1.x - c1.x;
+                        float diff_ac_x = a1.x - c1.x;
 
-                        f32 dot2_diff_dc_ac =
+                        float dot2_diff_dc_ac =
                             diff_dc_x * diff_ac_x + diff_dc_y * diff_ac_y;
 
-                        f32 dot2_diff_ba_ac =
+                        float dot2_diff_ba_ac =
                             diff_ba_x * diff_ac_x + diff_ba_y * diff_ac_y;
 
-                        f32 determinant = sqdist2_ba * sqdist2_dc -
-                                          dot2_diff_ba_dc * dot2_diff_ba_dc;
+                        float determinant = sqdist2_ba * sqdist2_dc -
+                                            dot2_diff_ba_dc * dot2_diff_ba_dc;
 
                         {
-                            f32 scl_e;
-                            f32 scl_f;
+                            float scl_e;
+                            float scl_f;
                             if (approximatelyZero(sqdist2_dc)) {
                                 if (approximatelyZero(sqdist2_ba)) {
                                     scl_e = 0.0f;
                                     scl_f = 0.0f;
                                 } else {
-                                    f32 temp_f1_2;
+                                    float temp_f1_2;
                                     scl_f = 0.0f;
                                     temp_f1_2 = -dot2_diff_ba_ac / sqdist2_ba;
                                     scl_e = temp_f1_2;
-                                    if (temp_f1_2 > (f32) 1.0) {
+                                    if (temp_f1_2 > (float) 1.0) {
                                         scl_e = 1.0f;
-                                    } else if (scl_e < (f32) 0.0) {
+                                    } else if (scl_e < (float) 0.0) {
                                         scl_e = 0.0f;
                                     }
                                 }
                             } else if (approximatelyZero(determinant)) {
-                                f32 temp_f7_2 = 0.5 * diff_dc_y + c1.y;
-                                f32 temp_f5_2 = 0.5 * diff_dc_x + c1.x;
-                                f32 temp_f6_2 = a1.y - temp_f7_2;
-                                f32 temp_f7_3 = b_y - temp_f7_2;
+                                float temp_f7_2 = 0.5 * diff_dc_y + c1.y;
+                                float temp_f5_2 = 0.5 * diff_dc_x + c1.x;
+                                float temp_f6_2 = a1.y - temp_f7_2;
+                                float temp_f7_3 = b_y - temp_f7_2;
                                 {
-                                    f32 temp_scl_f;
-                                    f32 f4 = a1.x - temp_f5_2;
-                                    f32 temp_f5_3 = b_x - temp_f5_2;
+                                    float temp_scl_f;
+                                    float f4 = a1.x - temp_f5_2;
+                                    float temp_f5_3 = b_x - temp_f5_2;
                                     if ((f4 * f4 + temp_f6_2 * temp_f6_2) <
                                         (temp_f5_3 * temp_f5_3 +
                                          temp_f7_3 * temp_f7_3))
                                     {
-                                        f32 diff_dc_x;
-                                        f32 temp_f8_2;
+                                        float diff_dc_x;
+                                        float temp_f8_2;
                                         Vec3 c3;
                                         c3.x = c0.x;
                                         c3.y = c0.y;
@@ -785,7 +798,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                         {
                                             {
                                                 Vec3 a2;
-                                                f32 diff_dc_z;
+                                                float diff_dc_z;
                                                 a2.x = a0.x;
                                                 diff_dc_z = d->z - c->z;
                                                 a2.y = a0.y;
@@ -806,9 +819,9 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                                            temp_f8_2)));
                                             }
                                         }
-                                        if (temp_scl_f > (f32) 1.0) {
+                                        if (temp_scl_f > (float) 1.0) {
                                             temp_scl_f = 1.0f;
-                                        } else if (temp_scl_f < (f32) 0.0) {
+                                        } else if (temp_scl_f < (float) 0.0) {
                                             temp_scl_f = 0.0f;
                                         }
                                         scl_f = temp_scl_f;
@@ -819,12 +832,12 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                         c2.y = c0.y;
                                         c2.z = c0.z;
                                         {
-                                            f32 diff_dc_x1;
+                                            float diff_dc_x1;
                                             scl_e = 1.0f;
                                             diff_dc_x1 = d_x - c->x;
                                             {
-                                                f32 diff_dc_y1;
-                                                f32 diff_dc_z1;
+                                                float diff_dc_y1;
+                                                float diff_dc_z1;
                                                 diff_dc_y1 = d_y - c->y;
                                                 diff_dc_z1 = d->z - c->z;
                                                 {
@@ -834,7 +847,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                                     b0.y = b->y;
                                                     b0.z = b->z;
                                                     {
-                                                        f32 var_f2_2 =
+                                                        float var_f2_2 =
                                                             -(diff_dc_z1 *
                                                                   (c2.z -
                                                                    b0.z) +
@@ -851,11 +864,11 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                                               (diff_dc_y1 *
                                                                diff_dc_y1)));
                                                         if (var_f2_2 >
-                                                            (f32) 1.0)
+                                                            (float) 1.0)
                                                         {
                                                             var_f2_2 = 1.0f;
                                                         } else if (var_f2_2 <
-                                                                   (f32) 0.0)
+                                                                   (float) 0.0)
                                                         {
                                                             var_f2_2 = 0.0f;
                                                         }
@@ -867,7 +880,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                     }
                                 }
                             } else {
-                                f32 temp_f1_3 =
+                                float temp_f1_3 =
                                     ((dot2_diff_ba_dc * dot2_diff_dc_ac) -
                                      (sqdist2_dc * dot2_diff_ba_ac)) /
                                     determinant;
@@ -875,15 +888,16 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                          (dot2_diff_ba_dc * dot2_diff_ba_ac)) /
                                         determinant;
                                 scl_e = temp_f1_3;
-                                if ((temp_f1_3 > (f32) 1.0) ||
-                                    (scl_e < (f32) 0.0) ||
-                                    (scl_f > (f32) 1.0) || (scl_f < (f32) 0.0))
+                                if ((temp_f1_3 > (float) 1.0) ||
+                                    (scl_e < (float) 0.0) ||
+                                    (scl_f > (float) 1.0) ||
+                                    (scl_f < (float) 0.0))
                                 {
-                                    f32 out0;
-                                    f32 temp_scl_e;
-                                    f32 result0;
+                                    float out0;
+                                    float temp_scl_e;
+                                    float result0;
                                     {
-                                        if (scl_e < (f32) 0.0) {
+                                        if (scl_e < (float) 0.0) {
                                             temp_scl_e = 0.0f;
                                             result0 = lbColl_80005FC0(c, d, a,
                                                                       &out0);
@@ -894,9 +908,9 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                         }
                                     }
                                     {
-                                        f32 result1;
-                                        f32 out1;
-                                        if (scl_f < (f32) 0.0) {
+                                        float result1;
+                                        float out1;
+                                        if (scl_f < (float) 0.0) {
                                             scl_f = 0.0f;
                                             result1 = lbColl_80005FC0(a, b, c,
                                                                       &out1);
@@ -930,8 +944,8 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
         }
     }
     {
-        f32 diff_ef_y;
-        f32 diff_ef_x;
+        float diff_ef_y;
+        float diff_ef_x;
         diff_ef_y = e->y - f->y;
         diff_ef_x = e->x - f->x;
         if (sum_pq * sum_pq < diff_ef_x * diff_ef_x + (diff_ef_y * diff_ef_y))
@@ -943,105 +957,107 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
 }
 
 bool lbColl_80006E58(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
-                     Vec3* arg4, Vec3* arg5, Mtx arg6, Vec3* arg7, f32 arg8,
-                     f32 scl, f32 argA)
+                     Vec3* arg4, Vec3* arg5, MtxPtr arg6, Vec3* arg7,
+                     float* arg8, float scl, float arg10, float arg11)
 {
-    f32 sp124;
-    f32 sp120;
-    f32 sp11C;
-    f32 sp118;
-    f32 sp114;
-    f32 sp110;
-    f32 sp10C;
-    f32 sp108;
-    f32 sp104;
-    f32 spD0;
-    f32 spCC;
-    f32 sp8C;
-    f32 sp88;
-    f32 sp84;
-    f32 sp74;
-    f32 sp70;
-    f32 sp6C;
-    f32 sp5C;
-    f32 sp58;
-    f32 sp54;
-    f32 sp44;
-    f32 sp40;
-    Vec3 vec2;
-    f32 temp_f0;
-    f32 temp_f10;
-    f32 temp_f10_2;
-    f32 temp_f10_3;
-    f32 temp_f10_4;
-    f32 temp_f11;
-    f32 temp_f11_2;
-    f32 temp_f11_3;
-    f32 temp_f11_4;
-    f32 temp_f11_5;
-    f32 temp_f12;
-    f32 temp_f1;
-    f32 temp_f1_10;
-    f32 temp_f1_14;
-    f32 temp_f1_15;
-    f32 temp_f1_16;
-    f32 temp_f1_17;
-    f32 temp_f1_2;
-    f32 temp_f1_3;
-    f32 temp_f1_4;
-    f32 temp_f1_5;
-    f32 temp_f1_9;
-    f32 temp_f20;
-    f32 temp_f21;
-    f32 temp_f21_2;
-    f32 temp_f25;
-    f32 temp_f26;
-    f32 temp_f27;
-    f32 temp_f2;
-    f32 temp_f2_2;
-    f32 temp_f2_3;
-    f32 temp_f2_4;
-    f32 temp_f2_5;
-    f32 temp_f2_6;
-    f32 temp_f2_7;
-    f32 temp_f2_8;
-    f32 temp_f3;
-    f32 temp_f3_2;
-    f32 temp_f3_3;
-    f32 temp_f4;
-    f32 temp_f4_10;
-    f32 temp_f4_2;
-    f32 temp_f4_3;
-    f32 temp_f4_4;
-    f32 temp_f4_5;
-    f32 temp_f4_6;
-    f32 temp_f4_7;
-    f32 temp_f4_8;
-    f32 temp_f4_9;
-    f32 temp_f5;
-    f32 temp_f5_2;
-    f32 temp_f5_3;
-    f32 temp_f6;
-    f32 temp_f6_2;
-    f32 temp_f6_3;
-    f32 temp_f6_4;
-    f32 temp_f7;
-    f32 temp_f7_2;
-    f32 temp_f8;
-    f32 temp_f9;
-    f32 temp_f9_2;
-    f32 temp_f9_3;
-    f32 temp_f9_4;
-    f32 var_f0;
-    f32 var_f1;
-    f32 var_f1_2;
-    f32 var_f20;
-    f32 var_f21;
-    f32 var_f22;
-    f32 var_f24;
-    f32 var_f2;
-    f32 var_f2_2;
-    f32 var_f30;
+    float sp124;
+    float sp120;
+    float sp11C;
+    float sp118;
+    float sp114;
+    float sp110;
+    float sp10C;
+    float sp108;
+    float sp104;
+    float spD0;
+    float spCC;
+    float sp8C;
+    float sp88;
+    float sp84;
+    float sp74;
+    float sp70;
+    float sp6C;
+    float sp5C;
+    float sp58;
+    float sp54;
+    float sp44;
+    float sp40;
+    float sp3C;
+    float sp38;
+    float sp34;
+    float temp_f0;
+    float temp_f10;
+    float temp_f10_2;
+    float temp_f10_3;
+    float temp_f10_4;
+    float temp_f11;
+    float temp_f11_2;
+    float temp_f11_3;
+    float temp_f11_4;
+    float temp_f11_5;
+    float temp_f12;
+    float temp_f1;
+    float temp_f1_10;
+    float temp_f1_14;
+    float temp_f1_15;
+    float temp_f1_16;
+    float temp_f1_17;
+    float temp_f1_2;
+    float temp_f1_3;
+    float temp_f1_4;
+    float temp_f1_5;
+    float temp_f1_9;
+    float temp_f20;
+    float temp_f21;
+    float temp_f21_2;
+    float temp_f25;
+    float temp_f26;
+    float temp_f27;
+    float temp_f2;
+    float temp_f2_2;
+    float temp_f2_3;
+    float temp_f2_4;
+    float temp_f2_5;
+    float temp_f2_6;
+    float temp_f2_7;
+    float temp_f2_8;
+    float temp_f3;
+    float temp_f3_2;
+    float temp_f3_3;
+    float temp_f4;
+    float temp_f4_10;
+    float temp_f4_2;
+    float temp_f4_3;
+    float temp_f4_4;
+    float temp_f4_5;
+    float temp_f4_6;
+    float temp_f4_7;
+    float temp_f4_8;
+    float temp_f4_9;
+    float temp_f5;
+    float temp_f5_2;
+    float temp_f5_3;
+    float temp_f6;
+    float temp_f6_2;
+    float temp_f6_3;
+    float temp_f6_4;
+    float temp_f7;
+    float temp_f7_2;
+    float temp_f8;
+    float temp_f9;
+    float temp_f9_2;
+    float temp_f9_3;
+    float temp_f9_4;
+    float var_f0;
+    float var_f1;
+    float var_f1_2;
+    float var_f20;
+    float var_f21;
+    float var_f22;
+    float var_f24;
+    float var_f2;
+    float var_f2_2;
+    float var_f30;
     f64 temp_f1_11;
     f64 temp_f1_12;
     f64 temp_f1_13;
@@ -1052,9 +1068,8 @@ bool lbColl_80006E58(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
     s32 var_r0_2;
     s32 var_r0_3;
     s32 var_r0_4;
-    Mtx sp9C;
 
-    temp_f3 = (scl * argA) + arg8;
+    temp_f3 = (arg10 * arg11) + scl;
     sp11C = arg0->x;
     sp120 = arg0->y;
     sp124 = arg0->z;
@@ -1147,41 +1162,44 @@ block_39:
     temp_f11 = (temp_f25 * temp_f21_2) +
                ((temp_f27 * temp_f20) + (temp_f26 * temp_f21));
     temp_f12 = (temp_f5_2 * temp_f9) - (temp_f10 * temp_f10);
-    if ((temp_f9 < 0.00001f) && (temp_f9 > -0.00001f)) {
+    if ((temp_f9 < lbColl_804D79F0) && (temp_f9 > lbColl_804D79F4)) {
         var_r0 = 1;
     } else {
         var_r0 = 0;
     }
     if (var_r0 != 0) {
-        if ((temp_f5_2 < 0.00001f) && (temp_f5_2 > -0.00001f)) {
+        if ((temp_f5_2 < lbColl_804D79F0) && (temp_f5_2 > lbColl_804D79F4)) {
             var_r0_2 = 1;
         } else {
             var_r0_2 = 0;
         }
         if (var_r0_2 != 0) {
-            var_f0 = 0.0f;
-            var_f24 = 0.0f;
+            var_f0 = lbColl_804D79F8;
+            var_f24 = var_f0;
         } else {
-            var_f24 = 0.0f;
+            var_f24 = lbColl_804D79F8;
             temp_f1 = -temp_f4_7 / temp_f5_2;
             var_f0 = temp_f1;
-            if (temp_f1 > (f32) 1.0) {
-                var_f0 = 1.0f;
-            } else if (var_f0 < (f32) 0.0) {
-                var_f0 = 0.0f;
+            if (temp_f1 > (float) lbColl_804D7A00) {
+                var_f0 = lbColl_804D7A08;
+            } else if (var_f0 < (float) lbColl_804D7A10) {
+                var_f0 = var_f24;
             }
         }
     } else {
-        if ((temp_f12 < 0.00001f) && (temp_f12 > -0.00001f)) {
+        if ((temp_f12 < lbColl_804D79F0) && (temp_f12 > lbColl_804D79F4)) {
             var_r0_3 = 1;
         } else {
             var_r0_3 = 0;
         }
         if (var_r0_3 != 0) {
-            temp_f11_2 = (f32) ((0.5 * (f64) temp_f26) + (f64) sp114);
-            temp_f10_2 = (f32) ((0.5 * (f64) temp_f27) + (f64) sp110);
+            temp_f11_2 =
+                (float) ((lbColl_804D7A18 * (f64) temp_f26) + (f64) sp114);
+            temp_f10_2 =
+                (float) ((lbColl_804D7A18 * (f64) temp_f27) + (f64) sp110);
             temp_f1_2 = sp120 - temp_f11_2;
-            temp_f9_2 = (f32) ((0.5 * (f64) temp_f25) + (f64) sp118);
+            temp_f9_2 =
+                (float) ((lbColl_804D7A18 * (f64) temp_f25) + (f64) sp118);
             temp_f11_3 = arg1->y - temp_f11_2;
             temp_f4_8 = sp11C - temp_f10_2;
             temp_f5_3 = arg1->x - temp_f10_2;
@@ -1193,7 +1211,7 @@ block_39:
                  ((temp_f5_3 * temp_f5_3) + (temp_f11_3 * temp_f11_3))))
             {
                 sp6C = arg2->x;
-                var_f0 = 0.0f;
+                var_f0 = lbColl_804D79F8;
                 sp70 = arg2->y;
                 sp74 = arg2->z;
                 temp_f9_3 = temp_f6_4 - arg2->x;
@@ -1208,15 +1226,15 @@ block_39:
                        (temp_f10_3 * (sp70 - sp88)))) /
                     ((temp_f11_4 * temp_f11_4) +
                      ((temp_f9_3 * temp_f9_3) + (temp_f10_3 * temp_f10_3)));
-                if (var_f2 > (f32) 1.0) {
-                    var_f2 = 1.0f;
-                } else if (var_f2 < (f32) 0.0) {
-                    var_f2 = 0.0f;
+                if (var_f2 > (float) lbColl_804D7A00) {
+                    var_f2 = lbColl_804D7A08;
+                } else if (var_f2 < (float) lbColl_804D7A10) {
+                    var_f2 = var_f0;
                 }
                 var_f24 = var_f2;
             } else {
-                vec2.z = arg2->x;
-                var_f0 = 1.0f;
+                sp3C = arg2->x;
+                var_f0 = lbColl_804D7A08;
                 sp40 = arg2->y;
                 sp44 = arg2->z;
                 temp_f9_4 = temp_f6_4 - arg2->x;
@@ -1227,14 +1245,14 @@ block_39:
                 sp5C = arg1->z;
                 var_f2_2 =
                     -((temp_f11_5 * (sp44 - sp5C)) +
-                      ((temp_f9_4 * (vec2.z - sp54)) +
+                      ((temp_f9_4 * (sp3C - sp54)) +
                        (temp_f10_4 * (sp40 - sp58)))) /
                     ((temp_f11_5 * temp_f11_5) +
                      ((temp_f9_4 * temp_f9_4) + (temp_f10_4 * temp_f10_4)));
-                if (var_f2_2 > (f32) 1.0) {
-                    var_f2_2 = 1.0f;
-                } else if (var_f2_2 < (f32) 0.0) {
-                    var_f2_2 = 0.0f;
+                if (var_f2_2 > (float) lbColl_804D7A00) {
+                    var_f2_2 = var_f0;
+                } else if (var_f2_2 < (float) lbColl_804D7A10) {
+                    var_f2_2 = lbColl_804D79F8;
                 }
                 var_f24 = var_f2_2;
             }
@@ -1244,21 +1262,23 @@ block_39:
             var_f24 =
                 ((temp_f5_2 * temp_f11) - (temp_f10 * temp_f4_7)) / temp_f12;
             var_f0 = temp_f1_3;
-            if ((temp_f1_3 > (f32) 1.0) || (var_f0 < (f32) 0.0) ||
-                (var_f24 > (f32) 1.0) || (var_f24 < (f32) 0.0))
+            if ((temp_f1_3 > (float) lbColl_804D7A00) ||
+                (var_f0 < (float) lbColl_804D7A10) ||
+                (var_f24 > (float) lbColl_804D7A00) ||
+                (var_f24 < (float) lbColl_804D7A10))
             {
-                if (var_f0 < (f32) 0.0) {
-                    var_f21 = 0.0f;
+                if (var_f0 < (float) lbColl_804D7A10) {
+                    var_f21 = lbColl_804D79F8;
                     var_f20 = lbColl_80005EBC(arg2, arg3, arg0, &spD0);
                 } else {
-                    var_f21 = 1.0f;
+                    var_f21 = lbColl_804D7A08;
                     var_f20 = lbColl_80005EBC(arg2, arg3, arg1, &spD0);
                 }
-                if (var_f24 < (f32) 0.0) {
-                    var_f22 = 0.0f;
+                if (var_f24 < (float) lbColl_804D7A10) {
+                    var_f22 = lbColl_804D79F8;
                     var_f1 = lbColl_80005EBC(arg0, arg1, arg2, &spCC);
                 } else {
-                    var_f22 = 1.0f;
+                    var_f22 = lbColl_804D7A08;
                     var_f1 = lbColl_80005EBC(arg0, arg1, arg3, &spCC);
                 }
                 if (var_f20 < var_f1) {
@@ -1282,57 +1302,61 @@ block_39:
     temp_f2_6 = arg4->z - arg5->z;
     temp_f1_5 = (temp_f2_6 * temp_f2_6) +
                 ((temp_f4_9 * temp_f4_9) + (temp_f1_4 * temp_f1_4));
-    if (temp_f1_5 > 0.0f) {
+    if (temp_f1_5 > lbColl_804D79F8) {
         temp_f1_6 = __frsqrte(temp_f1_5);
-        temp_f1_7 = 0.5 * temp_f1_6 *
-                    -(((f64) temp_f1_5 * (temp_f1_6 * temp_f1_6)) - 3.0);
-        temp_f1_8 = 0.5 * temp_f1_7 *
-                    -(((f64) temp_f1_5 * (temp_f1_7 * temp_f1_7)) - 3.0);
-        vec2.y =
-            (f32) ((f64) temp_f1_5 *
-                   (0.5 * temp_f1_8 *
-                    -(((f64) temp_f1_5 * (temp_f1_8 * temp_f1_8)) - 3.0)));
-        var_f30 = vec2.y;
+        temp_f1_7 =
+            lbColl_804D7A18 * temp_f1_6 *
+            -(((f64) temp_f1_5 * (temp_f1_6 * temp_f1_6)) - lbColl_804D7A20);
+        temp_f1_8 =
+            lbColl_804D7A18 * temp_f1_7 *
+            -(((f64) temp_f1_5 * (temp_f1_7 * temp_f1_7)) - lbColl_804D7A20);
+        sp38 = (float) ((f64) temp_f1_5 *
+                        (lbColl_804D7A18 * temp_f1_8 *
+                         -(((f64) temp_f1_5 * (temp_f1_8 * temp_f1_8)) -
+                           lbColl_804D7A20)));
+        var_f30 = sp38;
     } else {
         var_f30 = temp_f1_5;
     }
-    if ((var_f30 < 0.00001f) && (var_f30 > -0.00001f)) {
+    if ((var_f30 < lbColl_804D79F0) && (var_f30 > lbColl_804D79F4)) {
         var_r0_4 = 1;
     } else {
         var_r0_4 = 0;
     }
     if (var_r0_4 != 0) {
-        arg2->x = (arg8 + scl) - var_f30;
+        arg2->x = (scl + arg10) - var_f30;
         arg7->x = arg4->x;
         arg7->y = arg4->y;
         arg7->z = arg4->z;
         return 1;
     }
-    HSD_MtxInverse(arg6, sp9C);
-    PSMTXMUltiVec((f32(*)[4]) & sp9C[0], arg4, (Vec3*) &sp11C);
-    PSMTXMUltiVec((f32(*)[4]) & sp9C[0], arg5, (Vec3*) &sp104);
+    // HSD_MtxInverse(arg6, (float(*)[4]) & sp9C[0]);
+    // PSMTXMUltiVec((float(*)[4]) & sp9C[0], arg4, (Vec3*) &sp11C);
+    // PSMTXMUltiVec((float(*)[4]) & sp9C[0], arg5, (Vec3*) &sp104);
     temp_f1_9 = sp120 - sp108;
     temp_f4_10 = sp11C - sp104;
     temp_f2_7 = sp124 - sp10C;
     temp_f1_10 = (temp_f2_7 * temp_f2_7) +
                  ((temp_f4_10 * temp_f4_10) + (temp_f1_9 * temp_f1_9));
-    if (temp_f1_10 > 0.0f) {
+    if (temp_f1_10 > lbColl_804D79F8) {
         temp_f1_11 = __frsqrte(temp_f1_10);
-        temp_f1_12 = 0.5 * temp_f1_11 *
-                     -(((f64) temp_f1_10 * (temp_f1_11 * temp_f1_11)) - 3.0);
-        temp_f1_13 = 0.5 * temp_f1_12 *
-                     -(((f64) temp_f1_10 * (temp_f1_12 * temp_f1_12)) - 3.0);
-        vec2.x =
-            (f32) ((f64) temp_f1_10 *
-                   (0.5 * temp_f1_13 *
-                    -(((f64) temp_f1_10 * (temp_f1_13 * temp_f1_13)) - 3.0)));
-        var_f1_2 = vec2.x;
+        temp_f1_12 = lbColl_804D7A18 * temp_f1_11 *
+                     -(((f64) temp_f1_10 * (temp_f1_11 * temp_f1_11)) -
+                       lbColl_804D7A20);
+        temp_f1_13 = lbColl_804D7A18 * temp_f1_12 *
+                     -(((f64) temp_f1_10 * (temp_f1_12 * temp_f1_12)) -
+                       lbColl_804D7A20);
+        sp34 = (float) ((f64) temp_f1_10 *
+                        (lbColl_804D7A18 * temp_f1_13 *
+                         -(((f64) temp_f1_10 * (temp_f1_13 * temp_f1_13)) -
+                           lbColl_804D7A20)));
+        var_f1_2 = sp34;
     } else {
         var_f1_2 = temp_f1_10;
     }
-    temp_f0 = (scl * var_f30) / var_f1_2;
+    temp_f0 = (arg10 * var_f30) / var_f1_2;
     temp_f2_8 = temp_f0 / var_f30;
-    temp_f1_14 = arg8 + temp_f0;
+    temp_f1_14 = scl + temp_f0;
     arg2->x = temp_f1_14 - var_f30;
     temp_f1_15 = arg5->x;
     arg7->x = (temp_f2_8 * (arg4->x - temp_f1_15)) + temp_f1_15;
@@ -1346,21 +1370,21 @@ block_39:
     return 1;
 }
 
-inline f32 sqrDistance(Vec3* a, Vec3* b)
+inline float sqrDistance(Vec3* a, Vec3* b)
 {
     {
-        f32 y = a->y - b->y;
-        f32 x = a->x - b->x;
-        f32 z = a->z - b->z;
+        float y = a->y - b->y;
+        float x = a->x - b->x;
+        float z = a->z - b->z;
         return z * z + x * x + y * y;
     }
 }
 
 void lbColl_800077A0(Vec3* a, Mtx arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
-                     f32* angle, f32 x, f32 dist_offset)
+                     float* angle, float x, float dist_offset)
 {
     Vec3 diff_cb;
-    f32 diff_cb_x;
+    float diff_cb_x;
 
     diff_cb.x = diff_cb_x = c->x - b->x;
     diff_cb.y = c->y - b->y;
@@ -1381,41 +1405,41 @@ void lbColl_800077A0(Vec3* a, Mtx arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
         PSMTXMUltiVec(arg1, &multi_mtx, &multi_mtx);
 
         {
-            f32 dist = sqrDistance(&normal_x, &multi_mtx);
+            float dist = sqrDistance(&normal_x, &multi_mtx);
             dist = sqrtf(dist);
 
             {
-                f32 offset_dist = dist + dist_offset;
-                f32 dot_diff_cb = diff_cb.z * diff_cb.z +
-                                  diff_cb.x * diff_cb.x +
-                                  diff_cb.y * diff_cb.y;
+                float offset_dist = dist + dist_offset;
+                float dot_diff_cb = diff_cb.z * diff_cb.z +
+                                    diff_cb.x * diff_cb.x +
+                                    diff_cb.y * diff_cb.y;
 
-                f32 diff_ba_x = b->x - a->x;
-                f32 diff_ba_y = b->y - a->y;
-                f32 diff_ba_z = b->z - a->z;
+                float diff_ba_x = b->x - a->x;
+                float diff_ba_y = b->y - a->y;
+                float diff_ba_z = b->z - a->z;
 
                 {
-                    f32 scl;
+                    float scl;
 
                     if (approximatelyZero(dot_diff_cb)) {
                         scl = 0.0f;
                     } else {
-                        f32 n0 = 2.0f * diff_cb.z * diff_ba_z +
-                                 2.0f * diff_cb.x * diff_ba_x +
-                                 2.0f * diff_cb.y * diff_ba_y;
+                        float n0 = 2.0f * diff_cb.z * diff_ba_z +
+                                   2.0f * diff_cb.x * diff_ba_x +
+                                   2.0f * diff_cb.y * diff_ba_y;
 
-                        f32 n1 = n0 * n0 - (4.0f * dot_diff_cb *
-                                            -(offset_dist * offset_dist -
-                                              diff_ba_z * diff_ba_z +
-                                              diff_ba_x * diff_ba_x +
-                                              diff_ba_y * diff_ba_y));
+                        float n1 = n0 * n0 - (4.0f * dot_diff_cb *
+                                              -(offset_dist * offset_dist -
+                                                diff_ba_z * diff_ba_z +
+                                                diff_ba_x * diff_ba_x +
+                                                diff_ba_y * diff_ba_y));
 
                         if (n1 < 0.0f) {
                             n1 = 0.0f;
                         }
 
                         {
-                            f32 n2;
+                            float n2;
                             if (n1 > 0.0f) {
                                 n2 = sqrtf(n1);
                             } else {
@@ -1449,9 +1473,9 @@ void lbColl_800077A0(Vec3* a, Mtx arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
     }
 }
 
-bool lbColl_80007AFC(HitCapsule* a, HitCapsule* b, f32 x, f32 y)
+bool lbColl_80007AFC(HitCapsule* a, HitCapsule* b, float x, float y)
 {
-    f32 a_val, b_val;
+    float a_val, b_val;
 
     if (a->x43_b1) {
         a_val = a->scl;
@@ -1469,7 +1493,7 @@ bool lbColl_80007AFC(HitCapsule* a, HitCapsule* b, f32 x, f32 y)
                            &a->x64, b_val, a_val);
 }
 
-void lbColl_80007B78(Mtx a, Mtx b, f32 x, f32 y)
+void lbColl_80007B78(Mtx a, Mtx b, float x, float y)
 {
     /// @todo Eliminate casts.
     lbColl_800067F8((Vec3*) &b[1][1], (Vec3*) &b[0][2], (Vec3*) &a[1][1],
@@ -1477,63 +1501,66 @@ void lbColl_80007B78(Mtx a, Mtx b, f32 x, f32 y)
                     b[0][0] * y, a[0][0] * x, x);
 }
 
+static inline void HSD_JObjGetMtx_fake(HSD_JObj* jobj)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 1144, "jobj"));
+    lbColl_JObjSetupMatrix(jobj);
+}
+
+static inline MtxPtr HSD_JObjGetMtxPtr_fake(HSD_JObj* jobj)
+{
+    HSD_JObjGetMtx_fake(jobj);
+    return jobj->mtx;
+}
+
 bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
-                     s32 arg3, f32 arg4, f32 arg5, f32 arg6)
+                     s32 arg3, float arg4, float arg5, float arg6)
 {
     Vec3 sp74;
     Vec3 sp68;
-    HSD_JObj* temp_r29;
-    HSD_JObj* temp_r29_2;
-    Vec3* temp_r5;
-    f32* var_r9;
-    f32 var_f1;
+    MtxPtr var_r9;
+    float var_f1;
     Mtx sp38;
 
-    if (!(((u8) M2C_FIELD(shield_hit, u8*, 4) >> 7U) & 1)) {
+    if (!shield_hit->skip_update_pos) {
         lb_8000B1CC(shield_hit->bone, &shield_hit->offset, &shield_hit->pos);
         if (arg2 != NULL) {
             shield_hit->pos.z = arg6;
         }
-        M2C_FIELD(shield_hit, u8*, 4) =
-            (u8) (M2C_FIELD(shield_hit, u8*, 4) | 0x80);
+        shield_hit->skip_update_pos = 1;
     }
     if (arg3 != 0) {
-        arg0->x64.x = shield_hit->pos.x;
-        arg0->x64.y = shield_hit->pos.y;
-        arg0->x64.z = shield_hit->pos.z;
-        arg0->x70 = 0.0f;
+        arg0->x64 = shield_hit->pos;
+        arg0->x70 = lbColl_804D79F8;
         return 1;
     }
     if (arg2 != NULL) {
-        temp_r29 = shield_hit->bone;
-        if (temp_r29 == NULL) {
-            __assert(lbColl_804D3700, 0x478U, lbColl_804D3708);
-        }
-        lbColl_JObjSetupMatrix(temp_r29);
-        PSMTXConcat((f32(*)[4]) arg2, (f32(*)[4]) temp_r29->mtx[0], sp38);
+        PSMTXConcat(arg2, HSD_JObjGetMtxPtr_fake(shield_hit->bone), sp38);
     }
     if (arg2 != NULL) {
-        var_r9 = sp38[0];
+        var_r9 = sp38;
     } else {
-        temp_r29_2 = shield_hit->bone;
-        if (temp_r29_2 == NULL) {
-            __assert(lbColl_804D3700, 0x478U, lbColl_804D3708);
-        }
-        lbColl_JObjSetupMatrix(temp_r29_2);
-        var_r9 = temp_r29_2->mtx[0];
+        var_r9 = HSD_JObjGetMtxPtr_fake(shield_hit->bone);
     }
-    if (((u8) arg0->x43 >> 6U) & 1) {
+    if (arg0->x43_b1) {
         var_f1 = arg0->scl;
     } else {
         var_f1 = arg0->scl * arg4;
     }
-    {
-        int* sp8 = &arg0->x70;
-    }
-    temp_r5 = &shield_hit->pos;
-    return lbColl_80006E58(&arg0->x58, &arg0->x4C, temp_r5, temp_r5, &sp74,
-                           &sp68, (f32(*)[4]) var_r9, &arg0->x64, var_f1,
-                           shield_hit->size, 20.0f * arg5);
+
+    return lbColl_80006E58(&arg0->x58,            // arg0
+                           &arg0->x4C,            // arg1
+                           &shield_hit->pos,      // arg2
+                           &shield_hit->pos,      // arg3
+                           &sp74,                 // arg4
+                           &sp68,                 // arg5
+                           var_r9,                // arg6
+                           &arg0->x64,            // arg7
+                           &arg0->x70,            // arg8
+                           var_f1,                // arg9
+                           shield_hit->size,      // arg10
+                           lbColl_804D7A34 * arg5 // arg11
+    );
 }
 
 static inline bool lbColl_JObjMtxIsDirty(HSD_JObj* jobj)
@@ -1558,13 +1585,13 @@ void lbColl_JObjSetupMatrix(HSD_JObj* jobj)
 }
 
 void lbColl_80007DD8(HitCapsule* arg0, HitResult* arg1, Mtx arg2, unk_t arg3,
-                     unk_t arg4, f32 arg5)
+                     unk_t arg4, float arg5)
 {
     unk_t sp5C = NULL;
     HSD_JObj* temp_r31;
     HSD_JObj* temp_r31_2;
     Mtx* var_r4;
-    f32 var_f31;
+    float var_f31;
     Mtx sp2C;
 
     if (arg2 != NULL) {
@@ -1573,7 +1600,8 @@ void lbColl_80007DD8(HitCapsule* arg0, HitResult* arg1, Mtx arg2, unk_t arg3,
             __assert(lbColl_804D3700, 0x478U, lbColl_804D3708);
         }
         lbColl_JObjSetupMatrix(temp_r31);
-        PSMTXConcat(arg2, (f32(*)[4]) temp_r31->mtx[0], (f32(*)[4]) & sp2C[0]);
+        PSMTXConcat(arg2, (float(*)[4]) temp_r31->mtx[0],
+                    (float(*)[4]) & sp2C[0]);
     }
     if (((u8) arg0->x43 >> 6U) & 1) {
         var_f31 = arg0->scl;
@@ -1595,124 +1623,95 @@ void lbColl_80007DD8(HitCapsule* arg0, HitResult* arg1, Mtx arg2, unk_t arg3,
 }
 
 bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
-                     f32 hit_scl_y, f32 hurt_scl_y, f32 hurt_pos_z)
+                     float hit_scl_y, float hurt_scl_y, float hurt_pos_z)
 {
     Vec3 sp70;
     Vec3 sp64;
-    HSD_JObj* temp_r31;
-    HSD_JObj* temp_r31_2;
-    Mtx* var_r9;
-    f32 var_f1;
     Mtx sp34;
+    float var_f1;
+    MtxPtr var_r9;
 
-    if ((enum Tangibility) arg1->tangibility == Vulnerable) {
-        if (!(((u8) M2C_FIELD(arg1, u8*, 0x24) >> 7U) & 1)) {
+    if (arg1->tangibility == Vulnerable) {
+        if (!arg1->skip_update_pos) {
             lb_8000B1CC(arg1->bone, &arg1->a_offset, &arg1->a_pos);
             lb_8000B1CC(arg1->bone, &arg1->b_offset, &arg1->b_pos);
             if (arg2 != NULL) {
                 arg1->b_pos.z = hurt_pos_z;
                 arg1->a_pos.z = hurt_pos_z;
             }
-            M2C_FIELD(arg1, u8*, 0x24) =
-                (u8) (M2C_FIELD(arg1, u8*, 0x24) | 0x80);
+            arg1->skip_update_pos = 1;
         }
         if (arg2 != NULL) {
-            temp_r31 = arg1->bone;
-            if (temp_r31 == NULL) {
-                __assert(lbColl_804D3700, 0x478U, lbColl_804D3708);
-            }
-            lbColl_JObjSetupMatrix(temp_r31);
-            PSMTXConcat(arg2, (f32(*)[4]) temp_r31->mtx[0], sp34);
+            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(arg1->bone), sp34);
         }
         if (arg2 != NULL) {
-            var_r9 = &sp34;
+            var_r9 = sp34;
         } else {
-            temp_r31_2 = arg1->bone;
-            if (temp_r31_2 == NULL) {
-                __assert(lbColl_804D3700, 0x478U, lbColl_804D3708);
-            }
-            lbColl_JObjSetupMatrix(temp_r31_2);
-            var_r9 = &temp_r31_2->mtx;
+            var_r9 = HSD_JObjGetMtxPtr(arg1->bone);
         }
-        if (((u8) arg0->x43 >> 6U) & 1) {
+        if (arg0->x43_b1) {
             var_f1 = arg0->scl;
         } else {
             var_f1 = arg0->scl * hit_scl_y;
         }
-        {
-            int* sp8 = &arg0->x70;
-        }
         return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos,
-                               &arg1->b_pos, &sp70, &sp64, *var_r9, &arg0->x64,
-                               var_f1, arg1->scl, 3.0f * hurt_scl_y);
+                               &arg1->b_pos, &sp70, &sp64, var_r9, &arg0->x64,
+                               &arg0->x70, var_f1, arg1->scl,
+                               lbColl_804D7A38 * hurt_scl_y);
     }
     return 0;
 }
 
-bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, UNK_T arg2, s32 arg3,
-                     f32 arg4, f32 arg5, f32 arg6)
+bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, s32 arg3,
+                     float arg4, float arg5, float arg6)
 {
     Vec3 sp74;
     Vec3 sp68;
-    f32* sp38 = NULL;
-    HSD_JObj* temp_r29;
-    HSD_JObj* temp_r29_2;
-    f32* var_r9;
-    f32 var_f1;
+    Mtx sp38;
+    MtxPtr var_r9;
+    float var_f1;
 
-    if ((enum Tangibility) arg1->tangibility != Intangible) {
-        if (!(((u8) M2C_FIELD(arg1, u8*, 0x24) >> 7U) & 1)) {
+    if (arg1->tangibility != Intangible) {
+        if (!arg1->skip_update_pos) {
             lb_8000B1CC(arg1->bone, &arg1->a_offset, &arg1->a_pos);
             lb_8000B1CC(arg1->bone, &arg1->b_offset, &arg1->b_pos);
             if (arg2 != NULL) {
                 arg1->b_pos.z = arg6;
                 arg1->a_pos.z = arg6;
             }
-            M2C_FIELD(arg1, u8*, 0x24) =
-                (u8) (M2C_FIELD(arg1, u8*, 0x24) | 0x80);
+            arg1->skip_update_pos = 1;
         }
         if (arg3 != 0) {
-            arg0->x64.x = 0.5f * (arg1->a_pos.x + arg1->b_pos.x);
-            arg0->x64.y = 0.5f * (arg1->a_pos.y + arg1->b_pos.y);
-            arg0->x64.z = 0.5f * (arg1->a_pos.z + arg1->b_pos.z);
+            float f2 = lbColl_804D7A3C;
+            arg0->x64.x = f2 * (arg1->a_pos.x + arg1->b_pos.x);
+            arg0->x64.y = f2 * (arg1->a_pos.y + arg1->b_pos.y);
+            arg0->x64.z = f2 * (arg1->a_pos.z + arg1->b_pos.z);
             arg0->x70 = 5.0f;
             return 1;
         }
         if (arg2 != NULL) {
-            temp_r29 = arg1->bone;
-            if (temp_r29 == NULL) {
-                __assert(lbColl_804D3700, 0x478U, lbColl_804D3708);
-            }
-            lbColl_JObjSetupMatrix(temp_r29);
-            PSMTXConcat((f32(*)[4]) arg2, (f32(*)[4]) temp_r29->mtx[0],
-                        (f32(*)[4]) & sp38[0]);
+            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(arg1->bone), sp38);
         }
         if (arg2 != NULL) {
-            var_r9 = &sp38[0];
+            var_r9 = sp38;
         } else {
-            temp_r29_2 = arg1->bone;
-            if (temp_r29_2 == NULL) {
-                __assert(lbColl_804D3700, 0x478U, lbColl_804D3708);
-            }
-            lbColl_JObjSetupMatrix(temp_r29_2);
-            var_r9 = temp_r29_2->mtx[0];
+            var_r9 = HSD_JObjGetMtxPtr(arg1->bone);
         }
         if (((u8) arg0->x43 >> 6U) & 1) {
             var_f1 = arg0->scl;
         } else {
             var_f1 = arg0->scl * arg4;
         }
-        {
-            int* sp8 = &arg0->x70;
-        }
+
         return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos,
-                               &arg1->b_pos, &sp74, &sp68, (f32(*)[4]) var_r9,
-                               &arg0->x64, var_f1, arg1->scl, 3.0f * arg5);
+                               &arg1->b_pos, &sp74, &sp68, var_r9, &arg0->x64,
+                               &arg0->x70, var_f1, arg1->scl,
+                               lbColl_804D7A38 * arg5);
     }
     return 0;
 }
 
-inline void checkPos(HurtCapsule* hurt, Mtx mtx, f32 arg5)
+inline void checkPos(HurtCapsule* hurt, Mtx mtx, float arg5)
 {
     if (!hurt->skip_update_pos) {
         lb_8000B1CC(hurt->bone, &hurt->a_offset, &hurt->a_pos);
@@ -1747,9 +1746,9 @@ inline MtxPtr pickMtx(HurtCapsule* hurt, Mtx mtx)
     return var_r9;
 }
 
-inline f32 getHit1C(HitCapsule* hit, f32 arg3)
+inline float getHit1C(HitCapsule* hit, float arg3)
 {
-    f32 var_f1;
+    float var_f1;
     if (hit->x43_b1) {
         var_f1 = hit->scl;
     } else {
@@ -1758,18 +1757,20 @@ inline f32 getHit1C(HitCapsule* hit, f32 arg3)
     return var_f1;
 }
 
-bool lbColl_80008248(HitCapsule* hit, HurtCapsule* hurt, Mtx mtx, f32 arg3,
-                     f32 arg4, f32 arg5)
+bool lbColl_80008248(HitCapsule* hit, HurtCapsule* hurt, Mtx mtx, float arg3,
+                     float arg4, float arg5)
 {
-    Vec3* sp70 = NULL;
-    Vec3* sp64 = NULL;
+    NOT_IMPLEMENTED;
+    // Vec3* sp70 = NULL;
+    // Vec3* sp64 = NULL;
 
-    checkPos(hurt, mtx, arg5);
-    mtxConcat(hurt, mtx);
+    // checkPos(hurt, mtx, arg5);
+    // mtxConcat(hurt, mtx);
 
-    return lbColl_80006E58(&hit->x58, &hit->x4C, &hurt->a_pos, &hurt->b_pos,
-                           sp70, sp64, pickMtx(hurt, mtx), &hit->x64,
-                           getHit1C(hit, arg3), hurt->scl, 3.0f * arg4);
+    // return lbColl_80006E58(&hit->x58, &hit->x4C, &hurt->a_pos, &hurt->b_pos,
+    //                        sp70, sp64, pickMtx(hurt, mtx), &hit->x64,
+    //                        getHit1C(hit, arg3), hurt->scl, 3.0f * arg4,
+    //                        /* TODO */ 0);
 }
 
 void lbColl_800083C4(HurtCapsule* arg0)
@@ -1793,120 +1794,25 @@ void lbColl_80008434(HitCapsule* arg0)
     arg0->state = HitCapsule_Enabled;
 }
 
-void lbColl_80008440(HitCapsule* arg0)
+void lbColl_80008440(HitCapsule* hit)
 {
-    s32 var_ctr;
-    s32 var_ctr_2;
-    void* var_r5;
-    void* var_r5_2;
-
-    arg0->victims_1[0].victim = NULL;
-    arg0->victims_1[1].victim = NULL;
-    arg0->victims_1[2].victim = NULL;
-    arg0->victims_1[3].victim = NULL;
-    arg0->victims_1[4].victim = NULL;
-    arg0->victims_1[5].victim = NULL;
-    arg0->victims_1[6].victim = NULL;
-    arg0->victims_1[7].victim = NULL;
-    var_r5 = arg0 + 0x40;
-    var_ctr = 0xC - 8U;
-    if (8U < 0xCU) {
-#if 0
-        do {
-            M2C_FIELD(var_r5, Fighter**, 0x74) = NULL;
-            var_r5 += 2;
-            var_ctr -= 1;
-        } while (var_ctr != 0);
-#endif
+    size_t i;
+    for (i = 0; i < ARRAY_SIZE(hit->victims_1); i++) {
+        hit->victims_1[i].victim = NULL;
     }
-    arg0->x44 = 0;
-    arg0->victims_2[0].victim = (Fighter*) 0U;
-    arg0->victims_2[1].victim = (Fighter*) 0U;
-    arg0->victims_2[2].victim = (Fighter*) 0U;
-    arg0->victims_2[3].victim = (Fighter*) 0U;
-    arg0->victims_2[4].victim = (Fighter*) 0U;
-    arg0->victims_2[5].victim = (Fighter*) 0U;
-    arg0->victims_2[6].victim = (Fighter*) 0U;
-    arg0->victims_2[7].victim = (Fighter*) 0U;
-    var_r5_2 = arg0 + 0x40;
-    var_ctr_2 = 0xC - 8U;
-    if (8U < 0xCU) {
-#if 0
-        do {
-            M2C_FIELD(var_r5_2, s32*, 0xD4) = (s32) 0U;
-            var_r5_2 += 8;
-            var_ctr_2 -= 1;
-        } while (var_ctr_2 != 0);
-#endif
+    hit->x44 = 0;
+    for (i = 0; i < ARRAY_SIZE(hit->victims_2); i++) {
+        hit->victims_2[i].victim = NULL;
     }
-    arg0->x45 = 0;
+    hit->x45 = 0;
 }
 
 void lbColl_CopyHitCapsule(HitCapsule* src, HitCapsule* dst)
 {
-    Fighter* temp_r5;
-    Fighter* temp_r5_2;
-    HitVictim* var_r6;
-    HitVictim* var_r7;
-    HitVictim* var_r8;
-    HitVictim* var_r9;
-    UNK_T temp_r0;
-    UNK_T temp_r0_2;
-    s32 var_ctr;
-
-    dst->victims_1[0].victim = src->victims_1[0].victim;
-    dst->victims_1[0].x4 = src->victims_1[0].x4;
-    dst->victims_2[0].victim = src->victims_2[0].victim;
-    dst->victims_2[0].x4 = src->victims_2[0].x4;
-    dst->victims_1[1].victim = src->victims_1[1].victim;
-    dst->victims_1[1].x4 = src->victims_1[1].x4;
-    dst->victims_2[1].victim = src->victims_2[1].victim;
-    dst->victims_2[1].x4 = src->victims_2[1].x4;
-    dst->victims_1[2].victim = src->victims_1[2].victim;
-    dst->victims_1[2].x4 = src->victims_1[2].x4;
-    dst->victims_2[2].victim = src->victims_2[2].victim;
-    dst->victims_2[2].x4 = src->victims_2[2].x4;
-    dst->victims_1[3].victim = src->victims_1[3].victim;
-    dst->victims_1[3].x4 = src->victims_1[3].x4;
-    dst->victims_2[3].victim = src->victims_2[3].victim;
-    dst->victims_2[3].x4 = src->victims_2[3].x4;
-    dst->victims_1[4].victim = src->victims_1[4].victim;
-    dst->victims_1[4].x4 = src->victims_1[4].x4;
-    dst->victims_2[4].victim = src->victims_2[4].victim;
-    dst->victims_2[4].x4 = src->victims_2[4].x4;
-    dst->victims_1[5].victim = src->victims_1[5].victim;
-    dst->victims_1[5].x4 = src->victims_1[5].x4;
-    dst->victims_2[5].victim = src->victims_2[5].victim;
-    dst->victims_2[5].x4 = src->victims_2[5].x4;
-    dst->victims_1[6].victim = src->victims_1[6].victim;
-    dst->victims_1[6].x4 = src->victims_1[6].x4;
-    dst->victims_2[6].victim = src->victims_2[6].victim;
-    dst->victims_2[6].x4 = src->victims_2[6].x4;
-    dst->victims_1[7].victim = src->victims_1[7].victim;
-    dst->victims_1[7].x4 = src->victims_1[7].x4;
-    dst->victims_2[7].victim = src->victims_2[7].victim;
-    dst->victims_2[7].x4 = src->victims_2[7].x4;
-    var_r9 = src->victims_1 + 0x40;
-    var_r6 = dst->victims_1 + 0x40;
-    var_r7 = src->victims_2 + 0x40;
-    var_r8 = dst->victims_2 + 0x40;
-    var_ctr = 0xC - 8U;
-    if (8U < 0xCU) {
-        do {
-            temp_r5 = var_r9->victim;
-            temp_r0 = var_r9->x4;
-            var_r9 += 8;
-            var_r6->victim = temp_r5;
-            var_r6->x4 = temp_r0;
-            var_r6 += 8;
-            temp_r5_2 = var_r7->victim;
-            temp_r0_2 = var_r7->x4;
-            var_r7 += 8;
-            var_r8->victim = temp_r5_2;
-            var_r8->x4 = temp_r0_2;
-            var_r8 += 8;
-            var_ctr -= 1;
-        } while (var_ctr != 0);
+    size_t i;
+    for (i = 0; i < ARRAY_SIZE(dst->victims_1); i++) {
+        dst->victims_1[i] = src->victims_1[i];
+        dst->victims_2[i] = src->victims_2[i];
     }
     dst->x44 = src->x44;
     dst->x45 = src->x45;
@@ -1916,10 +1822,10 @@ bool lbColl_80008688(HitCapsule* arg0, int arg1, Fighter* arg2)
 {
     HitCapsule* var_r6;
     HitCapsule* var_r6_2;
-    f32* temp_r6;
-    f32* temp_r6_2;
-    f32* temp_r6_3;
-    f32* temp_r6_4;
+    float* temp_r6;
+    float* temp_r6_2;
+    float* temp_r6_3;
+    float* temp_r6_4;
     int var_ctr;
     int var_ctr_2;
     int var_r7;
@@ -1942,7 +1848,7 @@ loop_1:
             } else if (arg1 < 9) {
             block_9:
                 arg0->victims_1[var_r7].x4 =
-                    (UNK_T) (M2C_FIELD(arg0, u16*, 0x40) >> 4U);
+                    (M2C_FIELD(arg0, u16*, 0x40) >> 4U);
             }
         }
         return 0;
@@ -1956,7 +1862,7 @@ loop_1:
         var_r8 = 0;
     loop_13:
         if ((Fighter*) var_r6_2->victims_1[0].victim != NULL) {
-            temp_r6 = (f32*) &var_r6_2->x8;
+            temp_r6 = (float*) &var_r6_2->x8;
             var_r8 += 1;
             if ((Fighter*) var_r6_2->victims_1[1].victim != NULL) {
                 temp_r6_2 = temp_r6 + 8;
@@ -2001,7 +1907,7 @@ loop_1:
             if (arg1 < 9) {
             block_30:
                 arg0->victims_1[var_r0].x4 =
-                    (UNK_T) (M2C_FIELD(arg0, u16*, 0x40) >> 4U);
+                    (M2C_FIELD(arg0, u16*, 0x40) >> 4U);
             } else {
                 goto block_31;
             }
@@ -2024,91 +1930,299 @@ f64 const lbColl_804D7A48 = 4503599627370496;
 
 GXColor const lbColl_804D7A50 = { 0 };
 
-f32 const lbColl_804D7A54 = -1;
+float const lbColl_804D7A54 = -1;
 
-extern int lbColl_804D36CC;
-extern int lbColl_804D36D0;
+extern u8 lbColl_804D36CC[4];
+extern u8 lbColl_804D36D0[4];
 
-bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
+void lbColl_800089B8(HitCapsule* hit, UNK_T arg1)
 {
-    /// @todo Combine these into #Vec3 instances.
-    f32 sp9C;
-    f32 sp98;
-    f32 sp94;
-    f32 sp90;
-    f32 sp8C;
-    f32 sp88;
-    f32 sp84;
-    f32 sp80;
-    f32 sp7C;
-    s32 sp78;
-    f32 sp74;
-    f32 sp70;
-    s32 sp6C;
-    f32 sp3C;
+    size_t i;
+    for (i = 0; i < ARRAY_SIZE(hit->victims_1); i++) {
+        if (hit->victims_1[i].victim == arg1) {
+            hit->victims_1[i].victim = 0;
+        }
+    }
+}
 
-    Vec3 sp30;
-    Vec3 sp24;
-    HSD_JObj* temp_r31;
-    HSD_JObj* temp_r31_2;
-    f32* var_r31;
-    f32 temp_f31;
+void lbColl_80008A5C(HitCapsule* hit)
+{
+    if (hit->state != HitCapsule_Disabled) {
+        size_t i;
+        for (i = 0; i < ARRAY_SIZE(hit->victims_1); i++) {
+            if (hit->victims_1[i].victim != NULL) {
+                uint temp_r4 = hit->victims_1[i].x4;
+                if (temp_r4 != 0) {
+                    hit->victims_1[i].x4 = temp_r4 - 1;
+                    if (hit->victims_1[i].x4 == 0) {
+                        hit->victims_1[i].victim = NULL;
+                    }
+                }
+            }
+        }
+        for (i = 0; i < ARRAY_SIZE(hit->victims_2); i++) {
+            if (hit->victims_2[i].victim != 0) {
+                uint temp_r4 = hit->victims_2[i].x4;
+                if (temp_r4 != 0) {
+                    hit->victims_2[i].x4 = temp_r4 - 1;
+                    if (hit->victims_2[i].x4 == 0) {
+                        hit->victims_2[i].victim = NULL;
+                    }
+                }
+            }
+        }
+    }
+}
+
+extern u8 lbColl_804D36A0[4];
+extern u8 lbColl_804D36A4[4];
+extern u8 lbColl_804D36A8[4];
+extern u8 lbColl_804D36DC[4];
+
+bool lbColl_80009F54(HitCapsule* hit, u32 arg1, float arg8)
+{
+    u8* var_r5;
+    float var_f1;
     u32 var_r0;
 
-    if ((u8) M2C_FIELD(&lbColl_804D36CC, u8*, 3) == 0xFF) {
+    if (hit->state != HitCapsule_Disabled && !hit->x43_b2) {
+        switch (hit->element) {
+        case HitElement_Catch:
+            var_r5 = lbColl_804D36A4;
+            break;
+        case HitElement_Inert:
+            var_r5 = lbColl_804D36DC;
+            break;
+        default:
+            var_r5 = lbColl_804D36A0;
+            break;
+        }
+
+        if (var_r5[3] == 0xFF) {
+            var_r0 = 0;
+        } else {
+            var_r0 = 2;
+        }
+        if (var_r0 == arg1) {
+            if (hit->x43_b1) {
+                var_f1 = hit->scl;
+            } else {
+                var_f1 = hit->scl * arg8;
+            }
+            lbColl_80008FC8(hit->x58, hit->x4C, var_r5, lbColl_804D36A8,
+                            var_f1);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+extern u8 lbColl_804D36E8[4];
+extern u8 lbColl_804D36EC[4];
+
+bool lbColl_8000A044(HitCapsule* hit, u32 arg1, float arg8)
+{
+    float var_f1;
+    u32 var_r0;
+
+    if (hit->state != HitCapsule_Disabled && !hit->x43_b2) {
+        if (lbColl_804D36E8[3] == 0xFF) {
+            var_r0 = 0;
+        } else {
+            var_r0 = 2;
+        }
+        if (var_r0 == arg1) {
+            if (hit->x43_b1) {
+                var_f1 = hit->scl;
+            } else {
+                var_f1 = hit->scl * arg8;
+            }
+            lbColl_80008FC8(hit->x58, hit->x4C, lbColl_804D36E8,
+                            lbColl_804D36EC, var_f1);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2, Mtx arg3, f32 arg8)
+{
+    u32 unused[1];
+    Mtx spA0;
+    Vec3 sp94;
+    Vec3 sp88;
+    Mtx sp40;
+    Vec3 sp34;
+    Vec3 sp28;
+    f32 temp_f31;
+    void* temp_r31_2;
+    MtxPtr var_r28;
+    u32 var_r0;
+    u32 var_r4;
+    u8* temp_r3;
+
+    var_r4 = arg1;
+    if (hurt->tangibility == Intangible) {
+        var_r4 = 2;
+    }
+    temp_r3 = lbColl_803B9928[var_r4].pad;
+    if (temp_r3[3] == 0xFF) {
+        var_r0 = 0;
+    } else {
+        var_r0 = 2;
+    }
+    if (var_r0 == arg2) {
+        if (!hurt->skip_update_pos) {
+            lb_8000B1CC(hurt->bone, &hurt->a_offset, &hurt->a_pos);
+            lb_8000B1CC(hurt->bone, &hurt->b_offset, &hurt->b_pos);
+            if (arg3 != NULL) {
+                hurt->b_pos.z = arg8;
+                hurt->a_pos.z = arg8;
+            }
+            hurt->skip_update_pos = 1;
+        }
+        if (arg3 != NULL) {
+            PSMTXConcat(arg3, HSD_JObjGetMtxPtr(hurt->bone), spA0);
+        }
+        temp_f31 = hurt->scl;
+        temp_r31_2 = lbColl_803B9928[var_r4].pad_x;
+        sp88 = hurt->b_pos;
+        sp94 = hurt->a_pos;
+        if (arg3 != NULL) {
+            var_r28 = spA0;
+        } else {
+            var_r28 = HSD_JObjGetMtxPtr(hurt->bone);
+        }
+        HSD_MtxInverse(var_r28, sp40);
+        PSMTXMUltiVec(sp40, &sp94, &sp28);
+        PSMTXMUltiVec(sp40, &sp88, &sp34);
+        lbColl_800096B4(var_r28, sp28, sp34, temp_r3, temp_r31_2, temp_f31);
+        return 1;
+    }
+    return 0;
+}
+u8 lbColl_804D36E0[4] = { 0 };
+u32 lbColl_804D36E4 = 0;
+extern char lbColl_804D3700[8];
+extern char lbColl_804D3708[8];
+
+bool lbColl_8000A460(Foo* hurt, u32 arg1)
+{
+    u32 var_r0;
+
+    u8* r31 = lbColl_804D36E0;
+    void* r30 = &lbColl_804D36E4;
+
+    if (r31[3] == 0xFF) {
         var_r0 = 0U;
     } else {
         var_r0 = 2U;
     }
-    if (var_r0 == (u32) arg1) {
-        if (!(((u8) M2C_FIELD(arg0, u8*, 4) >> 7U) & 1)) {
-            lb_8000B1CC(arg0->bone, &arg0->offset, &arg0->pos);
-            if (arg2 != NULL) {
-                arg0->pos.z = pos_z;
-            }
-            M2C_FIELD(arg0, u8*, 4) = (u8) (M2C_FIELD(arg0, u8*, 4) | 0x80);
-        }
-        if (arg2 != NULL) {
-            temp_r31 = arg0->bone;
-            if (temp_r31 == NULL) {
-                __assert(lbColl_804D3700, 0x478U, lbColl_804D3708);
-            }
-            lbColl_JObjSetupMatrix(temp_r31);
-            PSMTXConcat((f32(*)[4]) arg2, (f32(*)[4]) temp_r31->mtx[0],
-                        (f32(*)[4]) & sp9C);
-        }
-        temp_f31 = arg0->size;
-        sp84 = arg0->pos.x;
-        sp88 = arg0->pos.y;
-        sp8C = arg0->pos.z;
-        sp90 = arg0->pos.x;
-        sp94 = arg0->pos.y;
-        sp98 = arg0->pos.z;
-        if (arg2 != NULL) {
-            var_r31 = &sp9C;
-        } else {
-            temp_r31_2 = arg0->bone;
-            if (temp_r31_2 == NULL) {
-                __assert(lbColl_804D3700, 0x478U, lbColl_804D3708);
-            }
-            lbColl_JObjSetupMatrix(temp_r31_2);
-            var_r31 = temp_r31_2->mtx[0];
-        }
-        HSD_MtxInverse((f32(*)[4]) var_r31, (f32(*)[4]) & sp3C);
-        PSMTXMUltiVec((f32(*)[4]) & sp3C, (Vec3*) &sp90, &sp24);
-        PSMTXMUltiVec((f32(*)[4]) & sp3C, (Vec3*) &sp84, &sp30);
-        sp78 = (s32) sp30.x;
-        sp6C = (s32) sp24.x;
-        sp7C = sp30.y;
-        sp70 = sp24.y;
-        sp80 = sp30.z;
-        sp74 = sp24.z;
-        lbColl_800096B4((f32(*)[4]) var_r31, &sp6C, &sp78, &lbColl_804D36CC,
-                        &lbColl_804D36D0, temp_f31);
-        return true;
+    if (var_r0 == arg1) {
+        HSD_JObjSetupMatrix(hurt->jobj);
+        lbColl_800096B4(HSD_JObjGetMtxPtr(hurt->jobj), hurt->v1, hurt->v1, r31,
+                        r30, hurt->v2);
+        return 1;
     }
+    return 0;
+}
 
-    return false;
+bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2, float arg3)
+{
+    Mtx sp9C;
+    Vec3 sp90;
+    Vec3 sp84;
+    Vec3 sp78;
+    Vec3 sp6C;
+    Mtx sp3C;
+    float temp_f31;
+    MtxPtr var_r28;
+    UNK_T temp_r31_2;
+    u32 var_r0;
+    u8* temp_r3;
+
+    temp_r3 = lbColl_803B9928[hurt->tangibility].pad;
+    if (temp_r3[3] == 0xFF) {
+        var_r0 = 0;
+    } else {
+        var_r0 = 2;
+    }
+    if (var_r0 == arg1) {
+        if (!hurt->skip_update_pos) {
+            lb_8000B1CC(hurt->bone, &hurt->a_offset, &hurt->a_pos);
+            lb_8000B1CC(hurt->bone, &hurt->b_offset, &hurt->b_pos);
+            if (arg2 != NULL) {
+                hurt->b_pos.z = arg3;
+                hurt->a_pos.z = arg3;
+            }
+            hurt->skip_update_pos = 1;
+        }
+        if (arg2 != NULL) {
+            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(hurt->bone), sp9C);
+        }
+        temp_f31 = hurt->scl;
+        temp_r31_2 = lbColl_803B9928[hurt->tangibility].pad_x;
+        sp84 = hurt->b_pos;
+        sp90 = hurt->a_pos;
+        if (arg2 != NULL) {
+            var_r28 = sp9C;
+        } else {
+            var_r28 = HSD_JObjGetMtxPtr(hurt->bone);
+        }
+        HSD_MtxInverse(var_r28, sp3C);
+        PSMTXMUltiVec(sp3C, &sp90, &sp6C);
+        PSMTXMUltiVec(sp3C, &sp84, &sp78);
+        lbColl_800096B4(var_r28, sp6C, sp78, temp_r3, (u8*) temp_r31_2,
+                        temp_f31);
+        return 1;
+    }
+    return 0;
+}
+
+bool lbColl_8000A95C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
+{
+    Mtx sp9C;
+    Vec3 sp90;
+    Vec3 sp84;
+    Mtx sp3C;
+    Vec3 sp30;
+    Vec3 sp24;
+    f32 temp_f31;
+    MtxPtr var_r31;
+    u32 var_r0;
+
+    if (lbColl_804D36CC[3] == 0xFF) {
+        var_r0 = 0;
+    } else {
+        var_r0 = 2;
+    }
+    if (var_r0 == arg1) {
+        if (!hit->skip_update_pos) {
+            lb_8000B1CC(hit->bone, &hit->offset, &hit->pos);
+            if (arg2 != NULL) {
+                hit->pos.z = pos_z;
+            }
+            hit->skip_update_pos = 1;
+        }
+        if (arg2 != NULL) {
+            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(hit->bone), sp9C);
+        }
+        temp_f31 = hit->size;
+        sp84 = hit->pos;
+        sp90 = hit->pos;
+        if (arg2 != NULL) {
+            var_r31 = sp9C;
+        } else {
+            var_r31 = HSD_JObjGetMtxPtr(hit->bone);
+        }
+        HSD_MtxInverse(var_r31, sp3C);
+        PSMTXMUltiVec(sp3C, &sp90, &sp24);
+        PSMTXMUltiVec(sp3C, &sp84, &sp30);
+        lbColl_800096B4(var_r31, sp24, sp30, lbColl_804D36CC, lbColl_804D36D0,
+                        temp_f31);
+        return 1;
+    }
+    return 0;
 }
 
 bool lbColl_8000ACFC(UNK_T victim, HitCapsule* hitbox)
