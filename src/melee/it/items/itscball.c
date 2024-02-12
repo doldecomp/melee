@@ -25,7 +25,7 @@
 /* 294D14 */ static void it_80294D14(HSD_GObj* gobj);
 /* 294D18 */ static bool it_80294D18(Item_GObj* gobj);
 
-ItemStateTable it_803F6370[] = {
+ItemStateTable it_803F6220[] = {
     { -1, it_80294B20, it_80294B28, it_80294B2C },
     { -1, it_80294B80, it_80294B88, it_80294BB8 },
     { -1, it_80294C0C, NULL, NULL },
