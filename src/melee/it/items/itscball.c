@@ -74,6 +74,7 @@ void it_80294B88(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     ItemAttr* attr = item->xCC_item_attr;
+
     it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
 }
 
