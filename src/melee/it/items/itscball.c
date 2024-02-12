@@ -2,6 +2,7 @@
 
 #include "itscball.h"
 
+#include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
@@ -10,23 +11,19 @@
 
 void it_80294B58(HSD_GObj* gobj); /* static */
 void it_80294AD0(HSD_GObj* gobj); /* static */
-extern f32 it_804DCB50;
 
 void it_80294AB0(Item_GObj* arg0)
 {
     it_80294B58(arg0);
 }
 
-void it_80294AD0(Item_GObj* arg0)
+void it_80294AD0(Item_GObj* gobj)
 {
-    Item* temp_r4;
+    Item* item = GET_ITEM(gobj);
 
-    temp_r4 = arg0->user_data;
-    temp_r4->x40_vel.z = it_804DCB50;
-    temp_r4->x40_vel.y = it_804DCB50;
-    temp_r4->x40_vel.x = it_804DCB50;
-    it_8026B390(arg0);
-    Item_80268E5C((HSD_GObj*) arg0, 0, ITEM_ANIM_UPDATE);
+    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0F;
+    it_8026B390(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
 int it_80294B20(HSD_GObj* arg0)
