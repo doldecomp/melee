@@ -177,4 +177,15 @@ struct ShieldDesc {
     u8 flags : 8;
 };
 
+struct lbRefract_CallbackData {
+    s32 unk0;        // x00
+    s32 unk1;        // x04
+    s32 unk2;        // x08
+    s32 unk3;        // x08
+    s32 unk4;        // x10
+    s32 unk5;        // x14
+    void* callback0; // x1C
+    void* callback1; // x20
+};
+
 #endif
