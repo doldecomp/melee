@@ -331,7 +331,7 @@ config.libs = [
             Object(NonMatching, "melee/lb/lbarchive.c"),
             Object(NonMatching, "melee/lb/lbdvd.c"),
             Object(NonMatching, "melee/lb/lb_0192.c"),
-            Object(NonMatching, "melee/lb/lb_0198.c"),
+            Object(NonMatching, "melee/lb/lbcardgame.c"),
             Object(NonMatching, "melee/lb/lbsnap.c"),
             Object(Matching, "melee/lb/lbgx.c"),
             Object(NonMatching, "melee/lb/lbanim.c"),

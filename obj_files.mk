@@ -29,7 +29,7 @@ TEXT_O_FILES :=\
     $(BUILD_DIR)/asm/melee/lb/lbarchive.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbdvd.s.o\
     $(BUILD_DIR)/asm/melee/lb/lb_0192.s.o\
-    $(BUILD_DIR)/asm/melee/lb/lb_0198.s.o\
+    $(BUILD_DIR)/asm/melee/lb/lbcardgame.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbsnap.s.o\
     $(BUILD_DIR)/src/melee/lb/lbgx.c.o\
     $(BUILD_DIR)/asm/melee/lb/lbanim.s.o\
