@@ -87,13 +87,12 @@ int it_80294C64(HSD_GObj* arg0)
     return 0;
 }
 
-void it_80294C6C(Item_GObj* arg0)
+void it_80294C6C(Item_GObj* gobj)
 {
-    ItemAttr* temp_r4;
+    ItemAttr* attr = GET_ITEM(gobj)->xCC_item_attr;
 
-    // temp_r4 = arg0->user_data->xCC_item_attr;
-    // it_80272860(arg0, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
-    // it_80274658((HSD_GObj*) arg0, it_804D6D28->x68_float);
+    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
+    it_80274658((HSD_GObj*) gobj, it_804D6D28->x68_float);
 }
 
 int it_80294CB8(Item_GObj* arg0)
