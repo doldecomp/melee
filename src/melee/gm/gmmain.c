@@ -7,7 +7,7 @@
 #include "db/db_2253.h"
 #include "gm/gm_1601.h"
 #include "gm/gmmain_lib.h"
-#include "lb/lb_0198.h"
+#include "lb/lbcardgame.h"
 #include "lb/lbarq.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"

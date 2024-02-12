@@ -2280,12 +2280,22 @@
 .endobj gap_09_804D37E2_sdata
 
 .obj lbDvd_804D37E4, global
-	.string "ItCo.\000\000"
+	.string "ItCo."
 .endobj lbDvd_804D37E4
 
+.obj gap_09_804D37EA_sdata, global
+.hidden gap_09_804D37EA_sdata
+	.2byte 0x0000
+.endobj gap_09_804D37EA_sdata
+
 .obj lbDvd_804D37EC, global
-	.string "IfAll\000\000"
+	.string "IfAll"
 .endobj lbDvd_804D37EC
+
+.obj gap_09_804D37F2_sdata, global
+.hidden gap_09_804D37F2_sdata
+	.2byte 0x0000
+.endobj gap_09_804D37F2_sdata
 
 .obj lbDvd_804D37F4, global
 	.4byte 0x00000004
