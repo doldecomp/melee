@@ -35,8 +35,7 @@ bool lbFile_800161A0(void)
 }
 #pragma pop
 
-void lbFile_800161C4(int file, u32 src, u32 dest, u32 size, int type,
-                     int pri)
+void lbFile_800161C4(int file, u32 src, u32 dest, u32 size, int type, int pri)
 {
     cancel = false;
     HSD_DevComRequest(file, src, dest, size, type, pri, lbFile_8001615C, 0);
@@ -156,7 +155,7 @@ void lbFile_80016580(const char* basename, u32 src, u32* dest,
 void lbFile_8001668C(const char* basename, u32* src, u32* dest)
 {
     cancel = false;
-    lbFile_80016580(basename, (u32)src, dest, lbFile_8001615C, 0);
+    lbFile_80016580(basename, (u32) src, dest, lbFile_8001615C, 0);
     do {
     } while (!lbFile_800161A0());
 }
@@ -164,7 +163,7 @@ void lbFile_8001668C(const char* basename, u32* src, u32* dest)
 inline void qwer(s32 a, const char* basename, u32* src, u32* dest)
 {
     *dest = lbFile_800163D8(basename);
-    *src = (u32)lbHeap_80015BD0(a, (*dest + 0x1F) & 0xFFFFFFE0);
+    *src = (u32) lbHeap_80015BD0(a, (*dest + 0x1F) & 0xFFFFFFE0);
     lbFile_80016580(basename, *src, dest, lbFile_8001615C, 0);
 
     do {
@@ -185,7 +184,7 @@ inline u32 func_800163D8_inline(const char* basename)
 
 bool lbFile_800168A0(s32 arg0, const char* basename, u32* src, u32* dest)
 {
-    if ((*src = (u32)lbDvd_8001819C(basename))) {
+    if ((*src = (u32) lbDvd_8001819C(basename))) {
         *dest = func_800163D8_inline(basename);
         return true;
     } else {

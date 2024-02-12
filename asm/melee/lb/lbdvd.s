@@ -22,8 +22,8 @@ lbDvd_800174E8:
 /* 800174EC 000140CC  1C 83 00 1C */	mulli r4, r3, 0x1c
 /* 800174F0 000140D0  90 01 00 04 */	stw r0, 4(r1)
 /* 800174F4 000140D4  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800174F8 000140D8  3C 60 80 43 */	lis r3, lbDvd_80432078@ha
-/* 800174FC 000140DC  38 03 20 78 */	addi r0, r3, lbDvd_80432078@l
+/* 800174F8 000140D8  3C 60 80 43 */	lis r3, preloadCache@ha
+/* 800174FC 000140DC  38 03 20 78 */	addi r0, r3, preloadCache@l
 /* 80017500 000140E0  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 80017504 000140E4  7C 60 22 14 */	add r3, r0, r4
 /* 80017508 000140E8  3B E3 00 AC */	addi r31, r3, 0xac
@@ -74,8 +74,8 @@ lbDvd_80017598:
 /* 800175A8 00014188  3B 63 00 00 */	addi r27, r3, 0
 /* 800175AC 0001418C  3B 80 00 00 */	li r28, 0
 /* 800175B0 00014190  48 32 FD B5 */	bl OSDisableInterrupts
-/* 800175B4 00014194  3C 80 80 43 */	lis r4, lbDvd_80432078@ha
-/* 800175B8 00014198  3B E4 20 78 */	addi r31, r4, lbDvd_80432078@l
+/* 800175B4 00014194  3C 80 80 43 */	lis r4, preloadCache@ha
+/* 800175B8 00014198  3B E4 20 78 */	addi r31, r4, preloadCache@l
 /* 800175BC 0001419C  80 1F 09 6C */	lwz r0, 0x96c(r31)
 /* 800175C0 000141A0  3B C3 00 00 */	addi r30, r3, 0
 /* 800175C4 000141A4  7C 00 D8 00 */	cmpw r0, r27
@@ -125,8 +125,8 @@ lbDvd_80017644:
 /* 80017654 00014234  3B C3 00 00 */	addi r30, r3, 0
 /* 80017658 00014238  3B E0 00 00 */	li r31, 0
 /* 8001765C 0001423C  48 32 FD 09 */	bl OSDisableInterrupts
-/* 80017660 00014240  3C 80 80 43 */	lis r4, lbDvd_80432078@ha
-/* 80017664 00014244  3B A4 20 78 */	addi r29, r4, lbDvd_80432078@l
+/* 80017660 00014240  3C 80 80 43 */	lis r4, preloadCache@ha
+/* 80017664 00014244  3B A4 20 78 */	addi r29, r4, preloadCache@l
 /* 80017668 00014248  80 1D 09 6C */	lwz r0, 0x96c(r29)
 /* 8001766C 0001424C  3B 83 00 00 */	addi r28, r3, 0
 /* 80017670 00014250  7C 00 F0 00 */	cmpw r0, r30
@@ -195,11 +195,11 @@ lbDvd_80017700:
 .global lbDvd_80017740
 lbDvd_80017740:
 /* 80017740 00014320  7C 08 02 A6 */	mflr r0
-/* 80017744 00014324  3D 60 80 43 */	lis r11, lbDvd_80432078@ha
+/* 80017744 00014324  3D 60 80 43 */	lis r11, preloadCache@ha
 /* 80017748 00014328  90 01 00 04 */	stw r0, 4(r1)
 /* 8001774C 0001432C  38 00 00 50 */	li r0, 0x50
 /* 80017750 00014330  7C 09 03 A6 */	mtctr r0
-/* 80017754 00014334  39 6B 20 78 */	addi r11, r11, lbDvd_80432078@l
+/* 80017754 00014334  39 6B 20 78 */	addi r11, r11, preloadCache@l
 /* 80017758 00014338  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 8001775C 0001433C  BE C1 00 28 */	stmw r22, 0x28(r1)
 /* 80017760 00014340  3B 04 00 00 */	addi r24, r4, 0
@@ -265,8 +265,8 @@ lbDvd_80017740:
 /* 8001783C 0001441C  48 37 09 E5 */	bl __assert
 .L_80017840:
 /* 80017840 00014420  1C 96 00 1C */	mulli r4, r22, 0x1c
-/* 80017844 00014424  3C 60 80 43 */	lis r3, lbDvd_80432078@ha
-/* 80017848 00014428  38 03 20 78 */	addi r0, r3, lbDvd_80432078@l
+/* 80017844 00014424  3C 60 80 43 */	lis r3, preloadCache@ha
+/* 80017848 00014428  38 03 20 78 */	addi r0, r3, preloadCache@l
 /* 8001784C 0001442C  7C 60 22 14 */	add r3, r0, r4
 /* 80017850 00014430  3B E3 00 AC */	addi r31, r3, 0xac
 /* 80017854 00014434  38 00 00 01 */	li r0, 1
@@ -345,9 +345,9 @@ lbDvd_800178E8:
 .global lbDvd_80017960
 lbDvd_80017960:
 /* 80017960 00014540  7C 08 02 A6 */	mflr r0
-/* 80017964 00014544  3C 60 80 43 */	lis r3, lbDvd_80432078@ha
+/* 80017964 00014544  3C 60 80 43 */	lis r3, preloadCache@ha
 /* 80017968 00014548  90 01 00 04 */	stw r0, 4(r1)
-/* 8001796C 0001454C  38 63 20 78 */	addi r3, r3, lbDvd_80432078@l
+/* 8001796C 0001454C  38 63 20 78 */	addi r3, r3, preloadCache@l
 /* 80017970 00014550  94 21 FF D8 */	stwu r1, -0x28(r1)
 /* 80017974 00014554  BF 41 00 10 */	stmw r26, 0x10(r1)
 /* 80017978 00014558  8C 03 00 60 */	lbzu r0, 0x60(r3)
@@ -430,9 +430,9 @@ lbDvd_80017960:
 /* 80017A7C 0001465C  4E 80 00 20 */	blr
 .L_80017A80:
 /* 80017A80 00014660  7C 08 02 A6 */	mflr r0
-/* 80017A84 00014664  3C 60 80 43 */	lis r3, lbDvd_80432078@ha
+/* 80017A84 00014664  3C 60 80 43 */	lis r3, preloadCache@ha
 /* 80017A88 00014668  90 01 00 04 */	stw r0, 4(r1)
-/* 80017A8C 0001466C  38 63 20 78 */	addi r3, r3, lbDvd_80432078@l
+/* 80017A8C 0001466C  38 63 20 78 */	addi r3, r3, preloadCache@l
 /* 80017A90 00014670  38 00 00 06 */	li r0, 6
 /* 80017A94 00014674  94 21 FF F8 */	stwu r1, -8(r1)
 /* 80017A98 00014678  90 03 09 6C */	stw r0, 0x96c(r3)
@@ -442,16 +442,16 @@ lbDvd_80017960:
 /* 80017AA8 00014688  7C 08 03 A6 */	mtlr r0
 /* 80017AAC 0001468C  4E 80 00 20 */	blr
 
-.global lbDvd_80017AB0
-lbDvd_80017AB0:
+.global lbDvd_CachePreloadedFile
+lbDvd_CachePreloadedFile:
 /* 80017AB0 00014690  7C 08 02 A6 */	mflr r0
-/* 80017AB4 00014694  3C 80 80 43 */	lis r4, lbDvd_80432078@ha
+/* 80017AB4 00014694  3C 80 80 43 */	lis r4, preloadCache@ha
 /* 80017AB8 00014698  90 01 00 04 */	stw r0, 4(r1)
 /* 80017ABC 0001469C  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80017AC0 000146A0  BF 01 00 10 */	stmw r24, 0x10(r1)
 /* 80017AC4 000146A4  3B 23 00 00 */	addi r25, r3, 0
 /* 80017AC8 000146A8  1C 79 00 1C */	mulli r3, r25, 0x1c
-/* 80017ACC 000146AC  3B E4 20 78 */	addi r31, r4, lbDvd_80432078@l
+/* 80017ACC 000146AC  3B E4 20 78 */	addi r31, r4, preloadCache@l
 /* 80017AD0 000146B0  3B 43 00 AC */	addi r26, r3, 0xac
 /* 80017AD4 000146B4  7F 5F D2 14 */	add r26, r31, r26
 /* 80017AD8 000146B8  3C 60 80 3C */	lis r3, lbDvd_803BA68C@ha
@@ -592,9 +592,9 @@ lbDvd_80017AB0:
 .global lbDvd_80017CC4
 lbDvd_80017CC4:
 /* 80017CC4 000148A4  7C 08 02 A6 */	mflr r0
-/* 80017CC8 000148A8  3C 60 80 43 */	lis r3, lbDvd_80432078@ha
+/* 80017CC8 000148A8  3C 60 80 43 */	lis r3, preloadCache@ha
 /* 80017CCC 000148AC  90 01 00 04 */	stw r0, 4(r1)
-/* 80017CD0 000148B0  38 83 20 78 */	addi r4, r3, lbDvd_80432078@l
+/* 80017CD0 000148B0  38 83 20 78 */	addi r4, r3, preloadCache@l
 /* 80017CD4 000148B4  38 C0 FF FF */	li r6, -1
 /* 80017CD8 000148B8  94 21 FF F8 */	stwu r1, -8(r1)
 /* 80017CDC 000148BC  38 E0 00 00 */	li r7, 0
@@ -703,7 +703,7 @@ lbDvd_80017CC4:
 /* 80017E44 00014A24  40 82 00 10 */	bne .L_80017E54
 /* 80017E48 00014A28  2C 03 FF FF */	cmpwi r3, -1
 /* 80017E4C 00014A2C  41 82 00 08 */	beq .L_80017E54
-/* 80017E50 00014A30  4B FF FC 61 */	bl lbDvd_80017AB0
+/* 80017E50 00014A30  4B FF FC 61 */	bl lbDvd_CachePreloadedFile
 .L_80017E54:
 /* 80017E54 00014A34  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80017E58 00014A38  38 21 00 08 */	addi r1, r1, 8
@@ -715,9 +715,9 @@ lbDvd_80017E64:
 /* 80017E64 00014A44  7C 08 02 A6 */	mflr r0
 /* 80017E68 00014A48  1C 84 00 1C */	mulli r4, r4, 0x1c
 /* 80017E6C 00014A4C  90 01 00 04 */	stw r0, 4(r1)
-/* 80017E70 00014A50  3C 60 80 43 */	lis r3, lbDvd_80432078@ha
+/* 80017E70 00014A50  3C 60 80 43 */	lis r3, preloadCache@ha
 /* 80017E74 00014A54  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80017E78 00014A58  38 03 20 78 */	addi r0, r3, lbDvd_80432078@l
+/* 80017E78 00014A58  38 03 20 78 */	addi r0, r3, preloadCache@l
 /* 80017E7C 00014A5C  7C 60 22 14 */	add r3, r0, r4
 /* 80017E80 00014A60  2C 06 00 00 */	cmpwi r6, 0
 /* 80017E84 00014A64  38 63 00 AC */	addi r3, r3, 0xac
@@ -737,8 +737,8 @@ lbDvd_80017E64:
 /* 80017EB4 00014A94  7C 08 03 A6 */	mtlr r0
 /* 80017EB8 00014A98  4E 80 00 20 */	blr
 
-.global lbDvd_80017EBC
-lbDvd_80017EBC:
+.global lbDvd_GetPreloadedArchive
+lbDvd_GetPreloadedArchive:
 /* 80017EBC 00014A9C  7C 08 02 A6 */	mflr r0
 /* 80017EC0 00014AA0  90 01 00 04 */	stw r0, 4(r1)
 /* 80017EC4 00014AA4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -748,9 +748,9 @@ lbDvd_80017EBC:
 /* 80017ED4 00014AB4  7C 7D 1B 78 */	mr r29, r3
 /* 80017ED8 00014AB8  48 32 F4 8D */	bl OSDisableInterrupts
 /* 80017EDC 00014ABC  38 00 00 0A */	li r0, 0xa
-/* 80017EE0 00014AC0  3C 80 80 43 */	lis r4, lbDvd_80432078@ha
+/* 80017EE0 00014AC0  3C 80 80 43 */	lis r4, preloadCache@ha
 /* 80017EE4 00014AC4  7C 09 03 A6 */	mtctr r0
-/* 80017EE8 00014AC8  38 84 20 78 */	addi r4, r4, lbDvd_80432078@l
+/* 80017EE8 00014AC8  38 84 20 78 */	addi r4, r4, preloadCache@l
 /* 80017EEC 00014ACC  3B C0 00 00 */	li r30, 0
 .L_80017EF0:
 /* 80017EF0 00014AD0  88 04 00 AC */	lbz r0, 0xac(r4)
@@ -878,8 +878,8 @@ lbDvd_80017EBC:
 /* 800180AC 00014C8C  2C 00 00 01 */	cmpwi r0, 1
 /* 800180B0 00014C90  40 82 00 B4 */	bne .L_80018164
 /* 800180B4 00014C94  1C 9E 00 1C */	mulli r4, r30, 0x1c
-/* 800180B8 00014C98  3C 60 80 43 */	lis r3, lbDvd_80432078@ha
-/* 800180BC 00014C9C  38 03 20 78 */	addi r0, r3, lbDvd_80432078@l
+/* 800180B8 00014C98  3C 60 80 43 */	lis r3, preloadCache@ha
+/* 800180BC 00014C9C  38 03 20 78 */	addi r0, r3, preloadCache@l
 /* 800180C0 00014CA0  7C 60 22 14 */	add r3, r0, r4
 /* 800180C4 00014CA4  3B C3 00 AC */	addi r30, r3, 0xac
 /* 800180C8 00014CA8  88 03 00 AD */	lbz r0, 0xad(r3)
@@ -955,13 +955,13 @@ lbDvd_8001819C:
 /* 800181B0 00014D90  4B FF E0 55 */	bl lbFile_80016204
 /* 800181B4 00014D94  7C 7E 1B 78 */	mr r30, r3
 /* 800181B8 00014D98  48 31 F7 B5 */	bl DVDConvertPathToEntrynum
-/* 800181BC 00014D9C  4B FF FD 01 */	bl lbDvd_80017EBC
+/* 800181BC 00014D9C  4B FF FD 01 */	bl lbDvd_GetPreloadedArchive
 /* 800181C0 00014DA0  80 0D 93 68 */	lwz r0, g_debugLevel@sda21(r13)
 /* 800181C4 00014DA4  3B E3 00 00 */	addi r31, r3, 0
 /* 800181C8 00014DA8  2C 00 00 00 */	cmpwi r0, 0
 /* 800181CC 00014DAC  41 82 00 44 */	beq .L_80018210
-/* 800181D0 00014DB0  3C 60 80 43 */	lis r3, lbDvd_80432078@ha
-/* 800181D4 00014DB4  38 63 20 78 */	addi r3, r3, lbDvd_80432078@l
+/* 800181D0 00014DB0  3C 60 80 43 */	lis r3, preloadCache@ha
+/* 800181D4 00014DB4  38 63 20 78 */	addi r3, r3, preloadCache@l
 /* 800181D8 00014DB8  80 03 09 70 */	lwz r0, 0x970(r3)
 /* 800181DC 00014DBC  2C 00 00 00 */	cmpwi r0, 0
 /* 800181E0 00014DC0  41 82 00 30 */	beq .L_80018210
@@ -987,15 +987,15 @@ lbDvd_8001819C:
 
 .global lbDvd_8001822C
 lbDvd_8001822C:
-/* 8001822C 00014E0C  3C 60 80 43 */	lis r3, lbDvd_80432078@ha
-/* 80018230 00014E10  38 63 20 78 */	addi r3, r3, lbDvd_80432078@l
+/* 8001822C 00014E0C  3C 60 80 43 */	lis r3, preloadCache@ha
+/* 80018230 00014E10  38 63 20 78 */	addi r3, r3, preloadCache@l
 /* 80018234 00014E14  38 63 00 04 */	addi r3, r3, 4
 /* 80018238 00014E18  4E 80 00 20 */	blr
 
 .global lbDvd_8001823C
 lbDvd_8001823C:
-/* 8001823C 00014E1C  3C 60 80 43 */	lis r3, lbDvd_80432078@ha
-/* 80018240 00014E20  38 83 20 78 */	addi r4, r3, lbDvd_80432078@l
+/* 8001823C 00014E1C  3C 60 80 43 */	lis r3, preloadCache@ha
+/* 80018240 00014E20  38 83 20 78 */	addi r4, r3, preloadCache@l
 /* 80018244 00014E24  80 64 00 A8 */	lwz r3, 0xa8(r4)
 /* 80018248 00014E28  38 03 00 01 */	addi r0, r3, 1
 /* 8001824C 00014E2C  90 04 00 54 */	stw r0, 0x54(r4)
@@ -1004,12 +1004,12 @@ lbDvd_8001823C:
 .global lbDvd_80018254
 lbDvd_80018254:
 /* 80018254 00014E34  7C 08 02 A6 */	mflr r0
-/* 80018258 00014E38  3C 60 80 43 */	lis r3, lbDvd_80432078@ha
+/* 80018258 00014E38  3C 60 80 43 */	lis r3, preloadCache@ha
 /* 8001825C 00014E3C  90 01 00 04 */	stw r0, 4(r1)
 /* 80018260 00014E40  3C A0 80 3B */	lis r5, lbDvd_803B72C0@ha
 /* 80018264 00014E44  94 21 FF 38 */	stwu r1, -0xc8(r1)
 /* 80018268 00014E48  BF 41 00 B0 */	stmw r26, 0xb0(r1)
-/* 8001826C 00014E4C  3B E3 20 78 */	addi r31, r3, lbDvd_80432078@l
+/* 8001826C 00014E4C  3B E3 20 78 */	addi r31, r3, preloadCache@l
 /* 80018270 00014E50  3B 9F 00 58 */	addi r28, r31, 0x58
 /* 80018274 00014E54  3B 5F 00 04 */	addi r26, r31, 4
 /* 80018278 00014E58  3B A5 72 C0 */	addi r29, r5, lbDvd_803B72C0@l
@@ -1400,8 +1400,8 @@ lbDvd_800187F4:
 /* 80018808 000153E8  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 8001880C 000153EC  3B C3 00 00 */	addi r30, r3, 0
 /* 80018810 000153F0  48 32 EB 55 */	bl OSDisableInterrupts
-/* 80018814 000153F4  3C 80 80 43 */	lis r4, lbDvd_80432078@ha
-/* 80018818 000153F8  39 04 20 78 */	addi r8, r4, lbDvd_80432078@l
+/* 80018814 000153F4  3C 80 80 43 */	lis r4, preloadCache@ha
+/* 80018818 000153F8  39 04 20 78 */	addi r8, r4, preloadCache@l
 /* 8001881C 000153FC  38 00 00 50 */	li r0, 0x50
 /* 80018820 00015400  80 E8 09 6C */	lwz r7, 0x96c(r8)
 /* 80018824 00015404  7C 09 03 A6 */	mtctr r0
@@ -1566,8 +1566,8 @@ lbDvd_80018A2C:
 /* 80018A40 00015620  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 80018A44 00015624  3B C3 00 00 */	addi r30, r3, 0
 /* 80018A48 00015628  48 32 E9 1D */	bl OSDisableInterrupts
-/* 80018A4C 0001562C  3C 80 80 43 */	lis r4, lbDvd_80432078@ha
-/* 80018A50 00015630  38 A4 20 78 */	addi r5, r4, lbDvd_80432078@l
+/* 80018A4C 0001562C  3C 80 80 43 */	lis r4, preloadCache@ha
+/* 80018A50 00015630  38 A4 20 78 */	addi r5, r4, preloadCache@l
 /* 80018A54 00015634  38 85 00 00 */	addi r4, r5, 0
 /* 80018A58 00015638  57 C0 06 3E */	clrlwi r0, r30, 0x18
 /* 80018A5C 0001563C  38 E0 00 00 */	li r7, 0
@@ -1726,8 +1726,8 @@ lbDvd_80018C2C:
 
 .global lbDvd_80018C6C
 lbDvd_80018C6C:
-/* 80018C6C 0001584C  3C 60 80 43 */	lis r3, lbDvd_80432078@ha
-/* 80018C70 00015850  38 C3 20 78 */	addi r6, r3, lbDvd_80432078@l
+/* 80018C6C 0001584C  3C 60 80 43 */	lis r3, preloadCache@ha
+/* 80018C70 00015850  38 C3 20 78 */	addi r6, r3, preloadCache@l
 /* 80018C74 00015854  80 06 00 00 */	lwz r0, 0(r6)
 /* 80018C78 00015858  2C 00 00 02 */	cmpwi r0, 2
 /* 80018C7C 0001585C  41 82 00 30 */	beq .L_80018CAC
@@ -1769,12 +1769,12 @@ lbDvd_80018C6C:
 .global lbDvd_80018CF4
 lbDvd_80018CF4:
 /* 80018CF4 000158D4  7C 08 02 A6 */	mflr r0
-/* 80018CF8 000158D8  3C 80 80 43 */	lis r4, lbDvd_80432078@ha
+/* 80018CF8 000158D8  3C 80 80 43 */	lis r4, preloadCache@ha
 /* 80018CFC 000158DC  90 01 00 04 */	stw r0, 4(r1)
 /* 80018D00 000158E0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80018D04 000158E4  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 80018D08 000158E8  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 80018D0C 000158EC  3B C4 20 78 */	addi r30, r4, lbDvd_80432078@l
+/* 80018D0C 000158EC  3B C4 20 78 */	addi r30, r4, preloadCache@l
 /* 80018D10 000158F0  3C 80 80 3C */	lis r4, lbDvd_803BA638@ha
 /* 80018D14 000158F4  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 80018D18 000158F8  3B E4 A6 38 */	addi r31, r4, lbDvd_803BA638@l
@@ -1946,8 +1946,8 @@ lbDvd_80018CF4:
 
 .global lbDvd_80018F58
 lbDvd_80018F58:
-/* 80018F58 00015B38  3C 80 80 43 */	lis r4, lbDvd_80432078@ha
-/* 80018F5C 00015B3C  38 84 20 78 */	addi r4, r4, lbDvd_80432078@l
+/* 80018F58 00015B38  3C 80 80 43 */	lis r4, preloadCache@ha
+/* 80018F5C 00015B3C  38 84 20 78 */	addi r4, r4, preloadCache@l
 /* 80018F60 00015B40  90 64 09 70 */	stw r3, 0x970(r4)
 /* 80018F64 00015B44  4E 80 00 20 */	blr
 
@@ -1959,8 +1959,8 @@ lbDvd_80018F68:
 /* 80018F74 00015B54  7C 09 03 A6 */	mtctr r0
 /* 80018F78 00015B58  38 84 A6 38 */	addi r4, r4, lbDvd_803BA638@l
 /* 80018F7C 00015B5C  38 00 00 00 */	li r0, 0
-/* 80018F80 00015B60  3C 60 80 43 */	lis r3, lbDvd_80432078@ha
-/* 80018F84 00015B64  94 03 20 78 */	stwu r0, lbDvd_80432078@l(r3)
+/* 80018F80 00015B60  3C 60 80 43 */	lis r3, preloadCache@ha
+/* 80018F84 00015B64  94 03 20 78 */	stwu r0, preloadCache@l(r3)
 /* 80018F88 00015B68  38 C1 00 00 */	addi r6, r1, 0
 /* 80018F8C 00015B6C  38 A4 FF F8 */	addi r5, r4, -8
 .L_80018F90:
@@ -2225,8 +2225,8 @@ lbDvd_803BA6E8:
 
 .section .bss, "wa"
     .balign 8
-.global lbDvd_80432078
-lbDvd_80432078:
+.global preloadCache
+preloadCache:
     .skip 0x978
 
 
