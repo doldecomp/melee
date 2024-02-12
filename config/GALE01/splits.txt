@@ -102,7 +102,7 @@ melee/lb/lb_0192.c:
 melee/lb/lbcardgame.c:
 	.text       start:0x80019880 end:0x8001D2BC
 	.data       start:0x803BAAE0 end:0x803BACC8
-	.bss        start:0x804329F0 end:0x804333E0
+	.bss        start:0x804329F0 end:0x80433380
 	.sdata      start:0x804D3800 end:0x804D3828
 	.sbss       start:0x804D63D0 end:0x804D63D8
 	.sdata2     start:0x804D7C80 end:0x804D7CB8
@@ -110,6 +110,7 @@ melee/lb/lbcardgame.c:
 melee/lb/lbsnap.c:
 	.text       start:0x8001D2BC end:0x8001E2F8
 	.data       start:0x803BACC8 end:0x803BADB0
+	.bss        start:0x80433380 end:0x804333E0
 	.sdata      start:0x804D3828 end:0x804D3830
 
 melee/lb/lbgx.c:
