@@ -26,17 +26,17 @@ void it_80294AD0(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-int it_80294B20(HSD_GObj* gobj)
+bool it_80294B20(HSD_GObj* gobj)
 {
-    return 0;
+    return false;
 }
 
 void it_80294B28(HSD_GObj* gobj) {}
 
-int it_80294B2C(Item_GObj* gobj)
+bool it_80294B2C(Item_GObj* gobj)
 {
     it_8026D62C(gobj, it_80294B58);
-    return 0;
+    return false;
 }
 
 void it_80294B58(HSD_GObj* gobj)
@@ -44,9 +44,9 @@ void it_80294B58(HSD_GObj* gobj)
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
 }
 
-int it_80294B80(HSD_GObj* gobj)
+bool it_80294B80(HSD_GObj* gobj)
 {
-    return 0;
+    return false;
 }
 
 void it_80294B88(Item_GObj* gobj)
@@ -56,10 +56,10 @@ void it_80294B88(Item_GObj* gobj)
     it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
 }
 
-int it_80294BB8(Item_GObj* gobj)
+bool it_80294BB8(Item_GObj* gobj)
 {
     it_8026E15C(gobj, it_80294AD0);
-    return 0;
+    return false;
 }
 
 void it_80294BE4(Item_GObj* gobj)
@@ -67,9 +67,9 @@ void it_80294BE4(Item_GObj* gobj)
     Item_80268E5C((HSD_GObj*) gobj, 2, ITEM_ANIM_UPDATE);
 }
 
-int it_80294C0C(HSD_GObj* gobj)
+bool it_80294C0C(HSD_GObj* gobj)
 {
-    return 0;
+    return false;
 }
 
 void it_80294C14(Item_GObj* gobj)
@@ -82,9 +82,9 @@ void it_80294C3C(Item_GObj* gobj)
     Item_80268E5C((HSD_GObj*) gobj, 3, 6);
 }
 
-int it_80294C64(HSD_GObj* gobj)
+bool it_80294C64(HSD_GObj* gobj)
 {
-    return 0;
+    return false;
 }
 
 void it_80294C6C(Item_GObj* gobj)
@@ -95,10 +95,10 @@ void it_80294C6C(Item_GObj* gobj)
     it_80274658((HSD_GObj*) gobj, it_804D6D28->x68_float);
 }
 
-int it_80294CB8(Item_GObj* gobj)
+bool it_80294CB8(Item_GObj* gobj)
 {
     it_8026E15C(gobj, it_80294AD0);
-    return 0;
+    return false;
 }
 
 void it_80294CE4(Item_GObj* gobj)
@@ -106,17 +106,17 @@ void it_80294CE4(Item_GObj* gobj)
     Item_80268E5C((HSD_GObj*) gobj, 4, ITEM_ANIM_UPDATE);
 }
 
-int it_80294D0C(HSD_GObj* gobj)
+bool it_80294D0C(HSD_GObj* gobj)
 {
-    return 0;
+    return false;
 }
 
 void it_80294D14(HSD_GObj* gobj) {}
 
-int it_80294D18(Item_GObj* gobj)
+bool it_80294D18(Item_GObj* gobj)
 {
     it_8026E8C4(gobj, it_80294AD0, it_80294B58);
-    return 0;
+    return false;
 }
 
 bool it_80294D4C(Item_GObj* gobj)
