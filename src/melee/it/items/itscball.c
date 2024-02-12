@@ -9,8 +9,38 @@
 
 #include <baselib/gobj.h>
 
-void it_80294B58(HSD_GObj* gobj); /* static */
-void it_80294AD0(HSD_GObj* gobj); /* static */
+/* 294AB0 */ void it_80294AB0(Item_GObj* gobj);
+/* 294AD0 */ static void it_80294AD0(Item_GObj* gobj);
+/* 294B20 */ static bool it_80294B20(HSD_GObj* gobj);
+/* 294B28 */ static void it_80294B28(HSD_GObj* gobj);
+/* 294B2C */ static bool it_80294B2C(Item_GObj* gobj);
+/* 294B58 */ static void it_80294B58(HSD_GObj* gobj);
+/* 294B80 */ static bool it_80294B80(HSD_GObj* gobj);
+/* 294B88 */ static void it_80294B88(Item_GObj* gobj);
+/* 294BB8 */ static bool it_80294BB8(Item_GObj* gobj);
+/* 294BE4 */ void it_80294BE4(Item_GObj* gobj);
+/* 294C0C */ static bool it_80294C0C(HSD_GObj* gobj);
+/* 294C14 */ void it_80294C14(Item_GObj* gobj);
+/* 294C3C */ void it_80294C3C(Item_GObj* gobj);
+/* 294C64 */ static bool it_80294C64(HSD_GObj* gobj);
+/* 294C6C */ static void it_80294C6C(Item_GObj* gobj);
+/* 294CB8 */ static bool it_80294CB8(Item_GObj* gobj);
+/* 294CE4 */ void it_80294CE4(Item_GObj* gobj);
+/* 294D0C */ static bool it_80294D0C(HSD_GObj* gobj);
+/* 294D14 */ static void it_80294D14(HSD_GObj* gobj);
+/* 294D18 */ static bool it_80294D18(Item_GObj* gobj);
+/* 294D4C */ bool it_80294D4C(Item_GObj* gobj);
+/* 294D54 */ bool it_80294D54(Item_GObj* gobj);
+/* 294D5C */ bool it_80294D5C(Item_GObj* gobj);
+/* 294D7C */ bool it_80294D7C(Item_GObj* gobj);
+
+ItemStateTable it_803F5740[] = {
+    { -1, it_80294B20, it_80294B28, it_80294B2C },
+    { -1, it_80294B80, it_80294B88, it_80294BB8 },
+    { -1, it_80294C0C, NULL, NULL },
+    { 0, it_80294C64, it_80294C6C, it_80294CB8 },
+    { -1, it_80294D0C, it_80294D14, it_80294D18 },
+};
 
 void it_80294AB0(Item_GObj* gobj)
 {
@@ -139,11 +169,3 @@ bool it_80294D7C(Item_GObj* gobj)
     itColl_BounceOffVictim(gobj);
     return false;
 }
-
-ItemStateTable it_803F5740[] = {
-    { -1, it_80294B20, it_80294B28, it_80294B2C },
-    { -1, it_80294B80, it_80294B88, it_80294BB8 },
-    { -1, it_80294C0C, NULL, NULL },
-    { 0, it_80294C64, it_80294C6C, it_80294CB8 },
-    { -1, it_80294D0C, it_80294D14, it_80294D18 },
-};
