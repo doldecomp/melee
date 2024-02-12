@@ -1,13 +1,12 @@
-#ifndef MELEE_LB_LBHEAP_H
-#define MELEE_LB_LBHEAP_H
+#ifndef GALE01_0158D0
+#define GALE01_0158D0
 
 #include <platform.h>
 #include <baselib/forward.h>
 
-#include <baselib/archive.h>
-
-void lbHeap_80015CA8(s32, u8*);
-void* lbHeap_80015BD0(s32, s32);
-void lbHeap_80015F3C(void);
+/* 0158D0 */ void lbHeap_800158D0(int, int);
+/* 015BD0 */ void* lbHeap_80015BD0(int, int);
+/* 015CA8 */ void lbHeap_80015CA8(int, u8*);
+/* 015F3C */ void lbHeap_80015F3C(void);
 
 #endif
