@@ -1,9 +1,9 @@
-#ifndef MELEE_LB_LBMEMORY_H
-#define MELEE_LB_LBMEMORY_H
+#ifndef GALE01_014E24
+#define GALE01_014E24
 
 #include <platform.h>
 
-void lbMemory_8001564C(void);
-void lbMemory_800154BC(void*, void*);
+/* 0154BC */ void lbMemory_800154BC(uintptr_t*, uintptr_t*);
+/* 01564C */ void lbMemory_8001564C(void);
 
 #endif

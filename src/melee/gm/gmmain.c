@@ -19,6 +19,7 @@
 #include "lb/lbtime.h"
 
 #include <placeholder.h>
+#include <stddef.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/gx/GXInit.h>
@@ -32,10 +33,10 @@
 #include <dolphin/os/OSTime.h>
 #include <dolphin/pad/pad.h>
 #include <dolphin/vi/vi.h>
-#include <baselib/particle.h>
 #include <baselib/controller.h>
 #include <baselib/debug.h>
 #include <baselib/initialize.h>
+#include <baselib/particle.h>
 #include <baselib/rumble.h>
 #include <baselib/sislib.h>
 #include <baselib/video.h>
@@ -210,8 +211,8 @@ int main(void)
     OSReport("# DbLevel %d\n", g_debugLevel);
     OSReport("# Arena Size %d MB\n", arena_size / (1024 * 1024));
     {
-        u32 free_aram_start;
-        u32 free_aram_end;
+        uintptr_t free_aram_start;
+        uintptr_t free_aram_end;
         lbMemory_800154BC(&free_aram_start, &free_aram_end);
         OSReport("# ARAM Free Size %d MB\n",
                  (free_aram_end - free_aram_start) / (1024 * 1024));

@@ -30,6 +30,8 @@ enum Commands {
     List {
         start: Address,
         end: Option<Address>,
+        #[arg(short, long)]
+        no_ok: bool,
     },
     Ok {
         start: Address,
@@ -45,7 +47,7 @@ enum Commands {
 fn try_main(args: ProgramArgs) -> Result<()> {
     use Commands::*;
     match args.command {
-        List { start, end } => list(start, end)?,
+        List { start, end, no_ok } => list(start, end, no_ok)?,
         Ok { start, end } => ok(start, end)?,
         Refresh => refresh()?,
         Seed { from } => seed(from)?,
@@ -90,7 +92,7 @@ fn ok(start: Address, end: Option<Address>) -> Result<()> {
     Ok(())
 }
 
-fn list(start: Address, end: Option<Address>) -> Result<()> {
+fn list(start: Address, end: Option<Address>, no_ok: bool) -> Result<()> {
     const URL: &str = "https://decomp.me/scratch/";
     const EMPTY_CELL: &str = "-";
 
@@ -98,10 +100,18 @@ fn list(start: Address, end: Option<Address>) -> Result<()> {
         bail!("start must come before end");
     }
 
-    let mut scratches: Vec<_> = scratch_config::load()?
-        .into_iter()
-        .filter(|s| addr_in_range(&s.addr, &start, &end))
-        .collect();
+    let mut scratches: Vec<_> = {
+        let mut vec: Vec<_> = scratch_config::load()?
+            .into_iter()
+            .filter(|s| addr_in_range(&s.addr, &start, &end))
+            .collect();
+
+        if no_ok {
+            vec.retain(|s| s.completion != Completion::Ok);
+        }
+
+        vec
+    };
     scratches.par_sort_unstable_by(Scratch::txt_order);
 
     let mut builder = Builder::default();
