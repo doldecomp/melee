@@ -269,3 +269,10 @@
 /* 00000390 000003D0  7C 08 03 A6 */	mtlr r0
 /* 00000394 000003D4  4E 80 00 20 */	blr
 .endfn lbAnim_8001E7E8
+
+.section .sdata2
+    .balign 8
+.global lb_804D7CC0
+lb_804D7CC0:
+    .4byte 0x00000000
+    .4byte 0x00000000

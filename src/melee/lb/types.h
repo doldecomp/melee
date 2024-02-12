@@ -26,7 +26,7 @@ struct HitResult {
 
 struct HitVictim {
     UNK_T victim;
-    UNK_T x4;
+    uint x4;
 };
 
 struct HitCapsule {
@@ -98,7 +98,7 @@ struct HitCapsule {
     Vec3 x4C;
     Vec3 x58;
     Vec3 x64;
-    int x70;
+    f32 x70;
     /// @at{74} @sz{60}
     HitVictim victims_1[12];
     /// @at{D4} @sz{60}

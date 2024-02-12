@@ -31,7 +31,7 @@ TEXT_O_FILES :=\
     $(BUILD_DIR)/asm/melee/lb/lb_0192.s.o\
     $(BUILD_DIR)/asm/melee/lb/lb_0198.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbsnap.s.o\
-    $(BUILD_DIR)/asm/melee/lb/lbgx.s.o\
+    $(BUILD_DIR)/src/melee/lb/lbgx.c.o\
     $(BUILD_DIR)/asm/melee/lb/lbanim.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbmthp.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbbgflash.s.o\
@@ -81,7 +81,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/ftdata.s.o\
     $(BUILD_DIR)/src/melee/ft/ftlib.c.o\
     $(BUILD_DIR)/src/melee/ft/ftwaitanim.c.o\
-    $(BUILD_DIR)/asm/melee/ft/ft_0877.s.o\
+    $(BUILD_DIR)/src/melee/ft/ft_0877.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0881.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0892.s.o\
 
@@ -207,7 +207,7 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyWait0.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyWalk.c.o\
-    $(BUILD_DIR)/asm/melee/ft/ftwalkcommon.s.o\
+    $(BUILD_DIR)/src/melee/ft/ftwalkcommon.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_MS_345_0.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyTurn.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDk_HeavyFall.c.o\

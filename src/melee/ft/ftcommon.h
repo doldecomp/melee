@@ -94,7 +94,7 @@
 /* 07F6A4 */ void ftCommon_8007F6A4(ftCo_Fighter*, HSD_JObj*);
 /* 07F76C */ void ftCommon_8007F76C(ftCo_GObj*);
 /* 07F7B4 */ void ftCommon_8007F7B4(ftCo_GObj*);
-/* 07F804 */ Mtx* ftCommon_8007F804(ftCo_Fighter*);
+/* 07F804 */ MtxPtr ftCommon_8007F804(ftCo_Fighter*);
 /* 07F824 */ void ftCommon_8007F824(ftCo_GObj*);
 /* 07F86C */ void ftCommon_8007F86C(ftCo_GObj*);
 /* 07F8B4 */ void ftCommon_8007F8B4(ftCo_Fighter*, Vec3* v);

@@ -4510,7 +4510,7 @@ lb_804D63D0:
 
 
 .section .sdata2
-
+    .balign 8
 .global lb_804D7C80
 lb_804D7C80:
     .4byte 0x3F2B851F
@@ -4543,13 +4543,5 @@ lb_804D7CA8:
     .4byte 0x00000000
 .global lb_804D7CB0
 lb_804D7CB0:
-    .4byte 0x00000000
-    .4byte 0x00000000
-.global lb_804D7CB8
-lb_804D7CB8:
-    .4byte 0x00000000
-    .4byte 0x00000000
-.global lb_804D7CC0
-lb_804D7CC0:
     .4byte 0x00000000
     .4byte 0x00000000

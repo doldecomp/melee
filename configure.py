@@ -333,7 +333,7 @@ config.libs = [
             Object(NonMatching, "melee/lb/lb_0192.c"),
             Object(NonMatching, "melee/lb/lb_0198.c"),
             Object(NonMatching, "melee/lb/lbsnap.c"),
-            Object(NonMatching, "melee/lb/lbgx.c"),
+            Object(Matching, "melee/lb/lbgx.c"),
             Object(NonMatching, "melee/lb/lbanim.c"),
             Object(NonMatching, "melee/lb/lbmthp.c"),
             Object(NonMatching, "melee/lb/lbbgflash.c"),
@@ -400,7 +400,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Init.c"),
             Object(Matching, "melee/ft/ftlib.c"),
             Object(Matching, "melee/ft/ftwaitanim.c"),
-            Object(NonMatching, "melee/ft/ft_0877.c"),
+            Object(Matching, "melee/ft/ft_0877.c"),
             Object(NonMatching, "melee/ft/ft_0881.c"),
             Object(NonMatching, "melee/ft/ft_0892.c"),
             # Common
@@ -523,7 +523,7 @@ config.libs = [
             # Donkey Kong (common states)
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_HeavyWait0.c"),
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_HeavyWalk.c"),
-            Object(NonMatching, "melee/ft/ftwalkcommon.c"),
+            Object(Matching, "melee/ft/ftwalkcommon.c"),
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_MS_345_0.c"),
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_HeavyTurn.c"),
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_HeavyFall.c"),
@@ -1080,7 +1080,7 @@ config.libs = [
     RuntimeLib(
         "Gekko runtime",
         [
-            Object(NonMatching, "Runtime/__mem.c"),
+            Object(Matching, "Runtime/__mem.c"),
             Object(Matching, "Runtime/__va_arg.c"),
             Object(Matching, "Runtime/global_destructor_chain.c"),
             Object(Matching, "Runtime/Gecko_ExceptionPPC.c"),

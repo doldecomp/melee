@@ -39,5 +39,6 @@
 /* 16C75C */ /* static */ UNK_RET gm_8016C75C(UNK_PARAMS);
 /* 17E068 */ bool gm_8017E068(void);
 /* 18841C */ bool gm_8018841C(void);
+/* 473A18 */ extern UNK_T gm_80473A18;
 
 #endif
