@@ -4467,7 +4467,7 @@
 	.byte 0x00
 .endobj gap_07_803BACC7_data
 
-# 0x804329F0 - 0x804333E0
+# 0x804329F0 - 0x80433380
 .section .bss, "wa", @nobits
 .balign 8
 
@@ -4482,10 +4482,6 @@
 .obj lb_80433318, global
 	.skip 0x68
 .endobj lb_80433318
-
-.obj lb_80433380, global
-	.skip 0x60
-.endobj lb_80433380
 
 # 0x804D3800 - 0x804D3828
 .section .sdata, "wa"
