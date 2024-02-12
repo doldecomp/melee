@@ -49,12 +49,11 @@ int it_80294B80(HSD_GObj* arg0)
     return 0;
 }
 
-void it_80294B88(Item_GObj* arg0)
+void it_80294B88(Item_GObj* gobj)
 {
-    ItemAttr* temp_r4;
-
-    // temp_r4 = arg0->user_data->xCC_item_attr;
-    // it_80272860(arg0, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
+    Item* item = GET_ITEM(gobj);
+    ItemAttr* attr = item->xCC_item_attr;
+    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
 }
 
 int it_80294BB8(Item_GObj* arg0)
