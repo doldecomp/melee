@@ -1,6 +1,8 @@
 #ifndef MELEE_LB_FORWARD_H
 #define MELEE_LB_FORWARD_H
 
+#include <platform.h>
+
 typedef struct AbsorbDesc AbsorbDesc;
 typedef struct HitCapsule HitCapsule;
 typedef struct HitResult HitResult;
@@ -9,6 +11,7 @@ typedef struct HurtCapsule HurtCapsule;
 typedef struct lb_UnkAnimStruct lb_UnkAnimStruct;
 typedef struct ReflectDesc ReflectDesc;
 typedef struct ShieldDesc ShieldDesc;
+typedef struct lbRefract_CallbackData lbRefract_CallbackData;
 
 typedef enum Tangibility {
     Vulnerable,
@@ -52,5 +55,12 @@ typedef enum HitCapsuleState {
     HitCapsule_Enabled,
     HitCapsule_Unk2,
 } HitCapsuleState;
+
+typedef void (*RefractCallbackTypeA)(struct lbRefract_CallbackData*, s32, u32,
+                                     s8, s8);
+typedef void (*RefractCallbackTypeB)(struct lbRefract_CallbackData*, s32, u32,
+                                     s8, s8, s8, s8);
+typedef void (*RefractCallbackTypeC)(struct lbRefract_CallbackData*, s32, u32,
+                                     s32*, s32*, s32*, s32*);
 
 #endif

@@ -1,11 +1,25 @@
-#include <platform.h>
+#include "lbrefract.h"
 
-#include "lb/lbrefract.h"
+#include "lb/types.h"
 
 #include <math.h>
+#include <dolphin/gx/GXTexture.h>
+#include <baselib/debug.h>
 #include <MetroTRK/intrinsics.h>
 
-static float lbRefract_80022DF8(float);
+/* 021F34 */ static UNK_RET fn_80021F34(UNK_PARAMS);
+/* 021F70 */ static UNK_RET fn_80021F70(UNK_PARAMS);
+/* 021FB4 */ static UNK_RET fn_80021FB4(UNK_PARAMS);
+/* 021FF8 */ static UNK_RET fn_80021FF8(UNK_PARAMS);
+/* 02206C */ static UNK_RET fn_8002206C(UNK_PARAMS);
+/* 022120 */ static void fn_80022120(lbRefract_CallbackData* arg0, s32 arg1,
+                                     u32 arg2, u32* arg3, u32* arg4, u8* arg5,
+                                     u8* arg6);
+/* 022DF8 */ static inline float lbRefract_80022DF8(float x);
+/* 02219C */ s32 lbRefract_8002219C(lbRefract_CallbackData*, s32, s32, u16,
+                                    u16);
+
+static int lbl_804336D0[0x10];
 
 extern float MSL_TrigF_80400770[], MSL_TrigF_80400774[];
 
@@ -18,21 +32,90 @@ extern float MSL_TrigF_80400770[], MSL_TrigF_80400774[];
 #define NAN MSL_TrigF_80400770[0]
 #define INF MSL_TrigF_80400774[0]
 
+void fn_80022120(lbRefract_CallbackData* arg0, s32 arg1, u32 arg2, u32* arg3,
+                 u32* arg4, u8* arg5, u8* arg6)
+{
+    s32 temp_r10;
+    s32 temp_r4;
+
+    temp_r10 = arg0->unk0 +
+               (((arg2 >> 2U) * arg0->unk4) + ((arg1 * 0x10) & 0xFFFFFFC0));
+    temp_r4 = ((arg1 & 3) + ((arg2 * 4) & 0xC)) * 2;
+    if (arg6 != NULL) {
+        *arg6 = temp_r10 + temp_r4;
+    }
+    if (arg3 != NULL) {
+        *arg3 = temp_r10 + temp_r4 + 0x01;
+    }
+    if (arg4 != NULL) {
+        *arg4 = temp_r10 + temp_r4 + 0x20;
+    }
+    if (arg5 != NULL) {
+        *arg5 = (s32) (temp_r10 + temp_r4 + 0x21);
+    }
+}
+
+s32 lbRefract_8002219C(lbRefract_CallbackData* arg0, s32 arg1, s32 arg2,
+                       u16 arg3, u16 arg4)
+{
+    arg0->unk0 = arg1;
+    arg0->unk1 = arg2;
+    arg0->unk2 = (s32) arg3;
+    arg0->unk3 = (s32) arg4;
+    arg0->unk5 = GXGetTexBufferSize(arg3, arg4, arg2, 0U, 0U);
+    switch (arg2) { /* irregular */
+    case 3:
+        arg0->callback0 = fn_80021F34;
+        arg0->callback1 = fn_80021FF8;
+        arg0->unk4 = (arg3 * 8) & 0xFFFFFFE0;
+    block_11:
+        return 0;
+    case 4:
+        arg0->callback0 = fn_80021F70;
+        arg0->callback1 = fn_8002206C;
+        arg0->unk4 = (arg3 * 8) & 0xFFFFFFE0;
+        goto block_11;
+    case 6:
+        arg0->callback0 = fn_80021FB4;
+        arg0->callback1 = fn_80022120;
+        arg0->unk4 = (arg3 * 0x10) & 0xFFFFFFC0;
+        goto block_11;
+    case 5:
+        /* fallthrough */
+    default:
+        return -1;
+    }
+}
+
+void lbRefract_80022BB8(void)
+{
+    lbl_804336D0[0] += 1;
+}
+
+void lbRefract_80022BD0(void)
+{
+    lbl_804336D0[0] -= 1;
+    if (lbl_804336D0[0] < 0) {
+        OSReport("lbRefSetUnuse error!\n");
+        __assert("refract.c", 0x31c, "0");
+    }
+}
+
 float atan2f(float y, float x)
 {
     if (GET_SIGN_BIT(x) == GET_SIGN_BIT(y)) {
         if (GET_SIGN_BIT(x) != 0) {
-            return -0.0f == x ? (-M_PI_2) : atanf(y / x) - M_PI;
+            return x == -0.0f ? (float) -M_PI_2 : atanf(y / x) - (float) M_PI;
         }
 
-        return x != 0.0f ? atanf(y / x) : M_PI_2;
+        return x ? atanf(y / x) : (float) M_PI_2;
     }
 
     if (x < 0.0f) {
-        return M_PI + atanf(y / x);
+        return (float) M_PI + atanf(y / x);
     }
 
-    if (x != 0.0f) {
+    if (x) {
         return atanf(y / x);
     }
 
@@ -66,7 +149,7 @@ static inline float lbRefract_80022DF8(float x)
         return guess;
     }
 
-    if (x != 0.0f) {
+    if (x) {
         return NAN;
     }
 
@@ -222,7 +305,7 @@ float atanf(float x)
     }
 
     if (x_ge_ratio) {
-        result -= M_PI_2;
+        result -= (float) M_PI_2;
         return sign_bit_x ? result : -result;
     }
 
