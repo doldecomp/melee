@@ -1721,13 +1721,13 @@ void Player_SetStructFunc(s32 slot, void* arg_func)
     player->struct_func = arg_func;
 }
 
-s32* Player_GetTotalAttackCountPtr(s32 slot)
+int* Player_GetTotalAttackCountPtr(int slot)
 {
     StaticPlayer* player;
-    s32* attack_count;
+    int* attack_count;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    attack_count = &player->total_attack_count;
+    attack_count = &player->stale_moves.total_attack_count;
     return attack_count;
 }
 
@@ -1741,13 +1741,13 @@ StaleMoveTable* Player_GetStaleMoveTableIndexPtr(s32 slot)
     return stale_move_table;
 }
 
-s32* Player_GetUnk6A8Ptr(s32 slot)
+int* Player_GetUnk6A8Ptr(int slot)
 {
     StaticPlayer* player;
-    s32* unk6A8;
+    int* unk6A8;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    unk6A8 = &player->unk6A8;
+    unk6A8 = &player->stale_moves.x5EC;
     return unk6A8;
 }
 
