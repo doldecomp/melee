@@ -21,15 +21,15 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-LITERAL float const it_804DC8D0 = 0;
-LITERAL float const it_804DC8D4 = -1;
-LITERAL float const it_804DC8D8 = 0.3;
-LITERAL float const it_804DC8DC = 1.5;
-LITERAL float const it_804DC8E0 = 1;
-LITERAL double const it_804DC8E8 = S32_TO_F32;
-LITERAL float const it_804DC8F0 = 10.03;
-LITERAL float const it_804DC8F4 = 2;
-LITERAL float const it_804DC8F8 = 0.25;
+static float const it_804DC8D0 = 0;
+static float const it_804DC8D4 = -1;
+static float const it_804DC8D8 = 0.3;
+static float const it_804DC8DC = 1.5;
+static float const it_804DC8E0 = 1;
+static double const it_804DC8E8 = S32_TO_F32;
+static float const it_804DC8F0 = 10.03;
+static float const it_804DC8F4 = 2;
+static float const it_804DC8F8 = 0.25;
 
 /* literal */ extern char* const it_804D5220;
 /* literal */ extern char* const it_804D5228;

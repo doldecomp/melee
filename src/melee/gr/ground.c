@@ -1048,11 +1048,11 @@ bool Ground_801C28AC(s32 arg0, u32 arg1, s32* arg2)
     return Ground_801C24F8(arg0, arg1, arg2);
 }
 
-LITERAL char msg0[] =
+static char msg0[] =
     "%s:%d: not found stage param in DAT(grkind=%d stkind=%d,num=%d)\n";
-LITERAL char msg1[] =
+static char msg1[] =
     "             check StageParam.csv or StageItem.csv, stdata.c\n";
-LITERAL char msg2[] = " stageid=%d\n";
+static char msg2[] = " stageid=%d\n";
 
 void Ground_801C28CC(UNK_T arg0, s32 arg1)
 {

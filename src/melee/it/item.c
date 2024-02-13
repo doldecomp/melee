@@ -901,7 +901,6 @@ static void Item_80268560(HSD_GObj* gobj)
     }
 }
 
-extern CameraBox* Camera_80029044(s32);
 extern void ftLib_8008702C(s32);
 extern struct sdata_ItemGXLink it_803F1418[];
 extern struct sdata_ItemGXLink it_803F2310[];

@@ -64,6 +64,4 @@ OSPanic(__FILE__, __LINE__, "Function is not implemented!")
 #define ASM
 #endif
 
-#define LITERAL static
-
 #endif
