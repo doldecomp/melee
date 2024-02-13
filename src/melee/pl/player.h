@@ -142,12 +142,7 @@ typedef struct _StaticPlayer {
 
     /*0xBC*/ StaleMoveTable stale_moves;
 
-    /*0xE8*/ s32 total_attack_count;
-    /*0xEC*/ s32 unkEC;
-
-    /*0xF0*/ u8 buffer[0x5B8];
-    /*0x6A8*/ s32 unk6A8;
-    /*0x6AC*/ u8 more_buffer[0x7E4];
+    /*0xDB0*/ u8 xDB0[0xE90 - 0xDB0];
 
 } StaticPlayer;
 
@@ -290,9 +285,9 @@ void Player_SetUnk4C(s32 slot, u8 unk4C);
 void Player_80036058(s32 slot);
 void Player_800360D8(s32 slot);
 void Player_SetStructFunc(s32 slot, void* arg_func);
-s32* Player_GetTotalAttackCountPtr(s32 slot);
+int* Player_GetTotalAttackCountPtr(int slot);
 StaleMoveTable* Player_GetStaleMoveTableIndexPtr(s32 slot);
-s32* Player_GetUnk6A8Ptr(s32 slot);
+int* Player_GetUnk6A8Ptr(int slot);
 StaleMoveTable* Player_GetStaleMoveTableIndexPtr2(s32 slot);
 s32 Player_80036394(s32 slot);
 s32 Player_80036428(s32 slot);
