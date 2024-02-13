@@ -8,6 +8,7 @@
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
+#include "cm/types.h"
 #include "ftCaptain/types.h"
 #include "ftCommon/types.h"
 #include "ftDonkey/types.h"
@@ -702,20 +703,6 @@ struct FighterBone {
     /* +5:7 */ u8 flags_b7 : 1;
     /* +6 */ u8 filler_x6[7];
 };
-
-typedef struct _CameraBox {
-    u32 data_filler[2];
-    bool x8;
-    /* +C:0 */ u8 xC_b0 : 1;
-    u8 xD_fill[0x10 - 0xD];
-    Vec3 x10; // might be Vec2?
-    Vec3 x1C;
-    float x28;
-    Vec2 x2C;
-    Vec3 x34;
-    Vec2 x40;
-    Vec3 x48;
-} CameraBox;
 
 typedef struct _ftECB {
     Vec2 top;

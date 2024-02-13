@@ -1,3 +1,4 @@
+#include "ft/forward.h"
 #include "pl/forward.h"
 
 #include "player.h"
@@ -406,7 +407,7 @@ s32 Player_GetPlayerState(s32 slot)
     return state;
 }
 
-enum_t Player_GetPlayerCharacter(int slot)
+CharacterKind Player_GetPlayerCharacter(int slot)
 {
     u8 _[4];
 

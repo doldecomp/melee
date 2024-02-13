@@ -17,10 +17,10 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-LITERAL float const ftCo_804D8BB8 = 0;
-LITERAL float const ftCo_804D8BBC = 1;
-LITERAL double const ftCo_804D8BC0 = U32_TO_F32;
-LITERAL double const ftCo_804D8BC8 = S32_TO_F32;
+static float const ftCo_804D8BB8 = 0;
+static float const ftCo_804D8BBC = 1;
+static double const ftCo_804D8BC0 = U32_TO_F32;
+static double const ftCo_804D8BC8 = S32_TO_F32;
 
 void ftCo_800BD620(Fighter_GObj* gobj)
 {

@@ -2,6 +2,7 @@
 #define _player_h_
 
 #include <platform.h>
+#include "ft/forward.h"
 #include <baselib/forward.h>
 
 #include "pl/types.h"
@@ -17,7 +18,7 @@ typedef struct _StaticPlayer {
 
     /// @at{4} @sz{4}
     /// @todo External ID.
-    enum_t player_character;
+    CharacterKind player_character;
 
     /// @at{8} @sz{4}
     /// @todo 0 is HMN, 1 is CPU, 2 is Demo, 3 n/a
@@ -166,7 +167,7 @@ void Player_80032070(int slot, bool bool_arg);
 void Player_8003219C(int slot);
 bool Player_8003221C(int slot);
 s32 Player_GetPlayerState(s32 slot);
-enum_t Player_GetPlayerCharacter(int slot);
+CharacterKind Player_GetPlayerCharacter(int slot);
 void Player_SetPlayerCharacter(s32 slot, s32 value);
 enum_t Player_GetPlayerSlotType(s32 slot);
 enum_t Player_8003248C(s32 slot, bool arg1);
