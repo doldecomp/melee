@@ -107,8 +107,8 @@ parser.add_argument(
 parser.add_argument(
     "--max-errors",
     type=int,
-    default=1,
-    help="the maximum number of errors allowed by the compiler (default 1)",
+    default=0,
+    help="the maximum number of errors allowed by the compiler (default 0)",
 )
 parser.add_argument(
     "--warn",
