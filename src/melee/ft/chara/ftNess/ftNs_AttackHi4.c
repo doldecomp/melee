@@ -1,3 +1,4 @@
+#include "ftCommon/forward.h"
 #include "it/forward.h"
 #include "lb/forward.h"
 
@@ -96,23 +97,18 @@ static inline void push_ecb(CollData* a, Vec3* b)
 s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
                                     Vec3* ECBUnk2, float float_unk)
 {
-    CollData sp34;
-    float sp1C[6]; // This is probably some kind of struct, but I don't know
-                   // which one. ECBVar_UnkFloat doesn't make sense.
+    CollData coll;
+    ftCollisionBox ecb;
     Fighter* fp = gobj->user_data;
     float y_scale;
-    s32 retval;
 
     y_scale = float_unk * fp->x34_scale.y;
 
-    sp1C[4] = y_scale;
-    sp1C[0] = y_scale;
-    sp1C[2] = -y_scale;
-    sp1C[1] = -y_scale;
-    sp1C[3] = 0.0f;
-    sp1C[5] = 0.0f;
+    ecb.top = ecb.right.x = y_scale;
+    ecb.bottom = ecb.left.x = -y_scale;
+    ecb.right.y = ecb.left.y = 0.0f;
 
-    mpColl_80041EE4(&sp34);
+    mpColl_80041EE4(&coll);
 
     // why do it like this?
     // original code:
@@ -125,32 +121,35 @@ s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
     // sp34.x4_vec = ECBUnk2->x0_vec;
     // guess: there is a "push ECB" function that handles moving current to
     // old, that got called twice and inlined.
-    push_ecb(&sp34, ECBUnk);
-    push_ecb(&sp34, ECBUnk2);
+    push_ecb(&coll, ECBUnk);
+    push_ecb(&coll, ECBUnk2);
 
-    sp34.x34_flags.bits.b1234 = 5;
+    coll.x34_flags.bits.b1234 = 5;
 
-    mpColl_8004730C(&sp34, &sp1C); // EnvironmentCollisionCheck_NessYoYo
+    mpColl_8004730C(&coll, &ecb); // EnvironmentCollisionCheck_NessYoYo
 
-    /// @todo Define flags.
-    retval = 0;
-    if ((sp34.env_flags & 98304) != 0) {
-        retval |= 32768;
+    {
+        s32 retval;
+        /// @todo Define flags.
+        retval = 0;
+        if ((coll.env_flags & 98304) != 0) {
+            retval |= 32768;
+        }
+
+        if ((coll.env_flags & 63) != 0) {
+            retval |= 1;
+        }
+
+        if ((coll.env_flags & 4032) != 0) {
+            retval |= 64;
+        }
+
+        if ((coll.env_flags & 24576) != 0) {
+            retval |= 8192;
+        }
+
+        return retval;
     }
-
-    if ((sp34.env_flags & 63) != 0) {
-        retval |= 1;
-    }
-
-    if ((sp34.env_flags & 4032) != 0) {
-        retval |= 64;
-    }
-
-    if ((sp34.env_flags & 24576) != 0) {
-        retval |= 8192;
-    }
-
-    return retval;
 }
 
 /// @todo Remove @c dont_inline.

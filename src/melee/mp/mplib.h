@@ -16,19 +16,21 @@
 /* 04DB78 */ s32 mpLib_8004DB78(s32 gr_idx);
 /* 04DC04 */ s32 mpLib_8004DC04(s32 gr_idx);
 /* 04DD90 */ bool mpLib_8004DD90(int idx, float*, float*, UNK_T, Vec3* normal);
-/* 04E090 */ enum_t mpLib_8004E090(int idx, Vec3*, f32*, u32*, Vec3* normal);
+/* 04E090 */ enum_t mpLib_8004E090(int idx, Vec3*, float*, u32*, Vec3* normal);
 /* 04E398 */ bool mpLib_8004E398(int, float*, int, int, int, float);
 /* 04F008 */ bool mpLib_8004F008(Vec3*, int, int, int, int, int, int, int,
                                  float, float, float, float, float);
 /* 04F8A4 */ UNK_RET mpLib_8004F8A4(UNK_PARAMS);
-/* 0501CC */ bool mpLib_800501CC(f32 surface_normal_y, f32 surface_normal_x,
-                                 f32 right_x, f32 right_y, Vec3* coll_vec,
-                                 UNK_T, UNK_T, UNK_T, u32, u32);
-/* 0509B8 */ bool mpLib_800509B8(f32 surface_normal_y, f32 surface_normal_x,
-                                 f32 left_x, f32 left_y, Vec3* coll_vec, UNK_T,
-                                 UNK_T, UNK_T, u32, u32);
-/* 051EC8 */ s32 mpLib_80051EC8(Vec3*, s32, s32, s32, s32, s32, s32, f32, f32,
-                                f32, f32);
+/* 0501CC */ bool mpLib_800501CC(float surface_normal_y,
+                                 float surface_normal_x, float right_x,
+                                 float right_y, Vec3* coll_vec, UNK_T, UNK_T,
+                                 UNK_T, u32, u32);
+/* 0509B8 */ bool mpLib_800509B8(float surface_normal_y,
+                                 float surface_normal_x, float left_x,
+                                 float left_y, Vec3* coll_vec, UNK_T, UNK_T,
+                                 UNK_T, u32, u32);
+/* 051EC8 */ s32 mpLib_80051EC8(Vec3*, s32, s32, s32, s32, s32, s32, float,
+                                float, float, float);
 /* 0524DC */ bool mpLib_800524DC(int, int, int, int, int, int, float x,
                                  float y, float z, float);
 /* 052508 */ UNK_RET mpLib_80052508(UNK_PARAMS);
@@ -56,7 +58,7 @@
 /* 056B34 */ UNK_T mpLib_80056B34(void);
 /* 056B6C */ enum_t mpLib_80056B6C(enum_t);
 /* 056C54 */ bool mpLib_80056C54(s32 idx, Vec3* pos, bool, Vec3*, bool, bool,
-                                 f32, f32, f32, f32);
+                                 float, float, float, float);
 /* 057424 */ void mpLib_80057424(s16);
 /* 057638 */ void mpLib_80057638(s16);
 /* 057BC0 */ void mpLib_80057BC0(s16);
@@ -64,7 +66,8 @@
 /* 05811C */ void mpLib_8005811C(CollData*, s32 ledge_id);
 /* 0581BC */ void mpLib_800581BC(int, mpLib_Callback*, UNK_T);
 /* 058820 */ void mpLib_80058820(void);
-/* 0588D0 */ void mpLib_800588D0(f32 left, f32 bottom, f32 right, f32 top);
+/* 0588D0 */ void mpLib_800588D0(float left, float bottom, float right,
+                                 float top);
 /* 058AA0 */ void mpLib_80058AA0(void);
 
 #endif
