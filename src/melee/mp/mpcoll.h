@@ -2,6 +2,8 @@
 #define GALE01_041C78
 
 #include <platform.h>
+#include "ftCommon/forward.h"
+#include "mp/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
@@ -20,7 +22,7 @@
 /* 042384 */ void mpColl_80042384(CollData* cd);
 /* 0424DC */ void mpColl_800424DC(CollData* cd, u32 flags);
 /* 04293C */ void mpColl_8004293C(CollData* cd);
-/* 042C58 */ void mpColl_80042C58(CollData*, ftECB*);
+/* 042C58 */ void mpColl_80042C58(CollData*, ftCollisionBox*);
 /* 042D24 */ void mpColl_80042D24(CollData* cd);
 /* 042DB0 */ void mpColl_80042DB0(CollData* ecb, float time);
 /* 043268 */ void mpColl_80043268(CollData*, s32, s32, float);
@@ -30,16 +32,27 @@
 /* 043680 */ void mpColl_80043680(CollData*, Vec3*);
 /* 0436D8 */ void mpColl_800436D8(CollData*, int facing_dir);
 /* 0436E4 */ void mpColl_800436E4(CollData*, float);
-/* 043754 */ s32 mpColl_80043754(s32 (*)(void*, u32), CollData*, u32);
+/* 043754 */ bool mpColl_80043754(mpColl_Callback, CollData*, u32);
 /* 0439FC */ void mpColl_800439FC(CollData*);
 /* 043ADC */ void mpColl_80043ADC(CollData*);
 /* 043BBC */ bool mpColl_80043BBC(CollData*, s32*);
 /* 043C6C */ void mpColl_80043C6C(CollData*, s32, s32);
+/* 043E90 */ s32 mpColl_80043E90(CollData*, s32*);
+/* 043F40 */ void mpColl_80043F40(CollData*, s32, s32);
 /* 044164 */ bool mpColl_80044164(CollData* cd, int* p_ledge_id);
 /* 0443C4 */ bool mpColl_800443C4(CollData* cd, int* p_ledge_id);
-/* 046904 */ s32 mpColl_80046904(void*, u32);
+/* 044628 */ s32 mpColl_80044628(CollData*, Event, void*, s32);
+/* 044838 */ s32 mpColl_80044838(CollData*, s32);
+/* 044948 */ s32 mpColl_80044948(CollData*);
+/* 044AD8 */ s32 mpColl_80044AD8(CollData*, s32);
+/* 044C74 */ s32 mpColl_80044C74(CollData*);
+/* 044E10 */ s32 mpColl_80044E10(CollData*);
+/* 0454A4 */ s32 mpColl_800454A4(CollData*);
+/* 045B74 */ s32 mpColl_80045B74(CollData*);
+/* 046224 */ s32 mpColl_80046224(CollData*);
+/* 046904 */ bool mpColl_80046904(CollData* cd, u32 flags);
 /* 0471F8 */ void mpColl_800471F8(CollData*);
-/* 04730C */ void mpColl_8004730C(CollData*, float (*x)[6]);
+/* 04730C */ bool mpColl_8004730C(CollData* cdata, ftCollisionBox* arg1);
 /* 0473CC */ void mpColl_800473CC(CollData*);
 /* 0474E0 */ void mpColl_800474E0(CollData*);
 /* 0475F4 */ void mpColl_800475F4(CollData*);
@@ -65,14 +78,15 @@
 /* 04B2DC */ void mpColl_8004B2DC(CollData*);
 /* 04B3F0 */ void mpColl_8004B3F0(CollData*);
 /* 04B5C4 */ void mpColl_8004B5C4(CollData*);
+/* 04C864 */ void mpColl_8004C864(CollData*, s32, float, float);
+/* 04C91C */ void mpColl_8004C91C(CollData*, s32, float, float);
 /* 04CA6C */ void mpColl_8004CA6C(CollData*);
 /* 04CBC0 */ bool mpColl_8004CBC0(CollData*);
 /* 04CBE8 */ void mpColl_8004CBE8(CollData*);
 /* 04CBF4 */ void mpColl_8004CBF4(CollData*);
 /* 04CC00 */ void mpColl_8004CC00(CollData*);
-/* 4D64A0 */ extern s32 mpColl_804D64A0;
-/* 4D64A4 */ extern s32 mpColl_804D64A4;
-/* 4D64A8 */ extern s32 mpColl_804D64A8;
+/* 0528CC */ s32 mpColl_800528CC(s32);
+/* 052A98 */ s32 mpColl_80052A98(s32);
 /* 4D64AC */ extern u32 mpColl_804D64AC;
 
 #endif

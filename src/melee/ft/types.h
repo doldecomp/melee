@@ -777,7 +777,7 @@ struct CollData {
     /* fp+81C */ float x12C;
     /* fp+820 */ u32 x130_flags;
     /* fp+824 */ s32 env_flags;
-    /* fp+828 */ s32 x138;
+    /* fp+828 */ s32 prev_env_flags;
     /* fp+82C */ s32 x13C;
     /* fp+830 */ Vec3 x140;
     /* fp+83C */ SurfaceData floor;
