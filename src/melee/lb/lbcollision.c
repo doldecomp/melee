@@ -1583,8 +1583,8 @@ void lbColl_JObjSetupMatrix(HSD_JObj* jobj)
     HSD_JObjSetupMatrixSub(jobj);
 }
 
-void lbColl_80007DD8(HitCapsule* capsule, HitResult* hit, Mtx hit_transform, Vec3* /*out*/ arg3,
-                     float* angle, float scale)
+void lbColl_80007DD8(HitCapsule* capsule, HitResult* hit, Mtx hit_transform,
+                     Vec3* /*out*/ arg3, float* angle, float scale)
 {
     Mtx transformed_hit;
     Vec3 unused_result;
@@ -1601,7 +1601,7 @@ void lbColl_80007DD8(HitCapsule* capsule, HitResult* hit, Mtx hit_transform, Vec
         }
         HSD_JObjSetupMatrixSub(hit_bone);
         PSMTXConcat(hit_transform, (float(*)[4]) hit_bone->mtx[0],
-                    (float(*)[4]) &transformed_hit[0]);
+                    (float(*)[4]) & transformed_hit[0]);
     }
     if (capsule->x43_b1) {
         dist_offset = capsule->scl;
@@ -1619,8 +1619,8 @@ void lbColl_80007DD8(HitCapsule* capsule, HitResult* hit, Mtx hit_transform, Vec
         HSD_JObjSetupMatrixSub(hit_bone_2);
         transform = &hit_bone_2->mtx;
     }
-    lbColl_800077A0(&hit->pos, *transform, &capsule->x58, &capsule->x4C, &unused_result, arg3,
-                    angle, hit->size, dist_offset);
+    lbColl_800077A0(&hit->pos, *transform, &capsule->x58, &capsule->x4C,
+                    &unused_result, arg3, angle, hit->size, dist_offset);
 }
 
 bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
