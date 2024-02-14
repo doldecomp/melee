@@ -1380,7 +1380,7 @@ inline float sqrDistance(Vec3* a, Vec3* b)
     }
 }
 
-void lbColl_800077A0(Vec3* a, Mtx arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
+void lbColl_800077A0(Vec3* a, MtxPtr arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
                      float* angle, float x, float dist_offset)
 {
     Vec3 diff_cb;
@@ -1586,41 +1586,24 @@ void lbColl_JObjSetupMatrix(HSD_JObj* jobj)
 void lbColl_80007DD8(HitCapsule* capsule, HitResult* hit, Mtx hit_transform,
                      Vec3* /*out*/ arg3, float* angle, float scale)
 {
-    Mtx transformed_hit;
-    Vec3 unused_result;
-    Mtx* transform;
-    float pad[2];
     float dist_offset;
+    Vec3 unused_result;
+    Mtx transformed_hit;
 
     if (hit_transform != NULL) {
-        HSD_JObj* hit_bone;
-        hit_bone = hit->bone;
-        // replace with some SetupMatrix call, it gets (partially?) inlined
-        if (hit_bone == NULL) {
-            __assert("jobj.h", 0x478U, "jobj");
-        }
-        HSD_JObjSetupMatrixSub(hit_bone);
-        PSMTXConcat(hit_transform, (float(*)[4]) hit_bone->mtx[0],
-                    (float(*)[4]) & transformed_hit[0]);
+        PSMTXConcat(hit_transform, HSD_JObjGetMtxPtr(hit->bone),
+                    transformed_hit);
     }
     if (capsule->x43_b1) {
         dist_offset = capsule->scl;
     } else {
         dist_offset = capsule->scl * scale;
     }
-    if (hit_transform != NULL) {
-        transform = &transformed_hit;
-    } else {
-        HSD_JObj* hit_bone_2;
-        hit_bone_2 = hit->bone;
-        if (hit_bone_2 == NULL) {
-            __assert("jobj.h", 0x478U, "jobj");
-        }
-        HSD_JObjSetupMatrixSub(hit_bone_2);
-        transform = &hit_bone_2->mtx;
-    }
-    lbColl_800077A0(&hit->pos, *transform, &capsule->x58, &capsule->x4C,
-                    &unused_result, arg3, angle, hit->size, dist_offset);
+    lbColl_800077A0(&hit->pos,
+                    hit_transform != NULL ? transformed_hit
+                                          : HSD_JObjGetMtxPtr(hit->bone),
+                    &capsule->x58, &capsule->x4C, &unused_result, arg3, angle,
+                    hit->size, dist_offset);
 }
 
 bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
