@@ -1380,25 +1380,16 @@ inline float sqrDistance(Vec3* a, Vec3* b)
     }
 }
 
-inline static bool isZero(Vec3 v)
-{
-    // return v->x != 0.0f || v->y != 0.0f || v->z != 0.0f;
-    return v.x == 0.0f && v.y == 0.0f && v.z == 0.0f;
-}
-
 void lbColl_800077A0(Vec3* a, Mtx arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
                      float* angle, float x, float dist_offset)
 {
     Vec3 diff_cb;
-    // float diff_cb_x;
-
-    // Vec3 unk1;
 
     diff_cb.x = c->x - b->x;
     diff_cb.y = c->y - b->y;
     diff_cb.z = c->z - b->z;
 
-    if (!(diff_cb.x == 0.0f && diff_cb.y == 0.0f && diff_cb.z == 0.0f)) {
+    if (diff_cb.x != 0.0f || diff_cb.y != 0.0f || diff_cb.z != 0.0f) {
         Vec3 normal_x;
         Vec3 multi_mtx;
 
@@ -1411,7 +1402,6 @@ void lbColl_800077A0(Vec3* a, Mtx arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
         multi_mtx.y = 0.0f;
         multi_mtx.z = 0.0f;
         PSMTXMUltiVec(arg1, &multi_mtx, &multi_mtx);
-
 
         {
             float dist = sqrDistance(&normal_x, &multi_mtx);
@@ -1468,7 +1458,6 @@ void lbColl_800077A0(Vec3* a, Mtx arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
                     }
                 }
             }
-
 
             *angle = lbVector_AngleXY(e, &diff_cb);
             d->x = dist * e->x + a->x;

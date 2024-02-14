@@ -1467,7 +1467,7 @@ void HSD_JObjSetupMatrixSub(HSD_JObj* jobj)
     HSD_JOBJ_METHOD(jobj)->make_mtx(jobj);
     jobj->flags &= ~JOBJ_MTX_DIRTY;
     if (!(jobj->flags & JOBJ_USER_DEF_MTX)) {
-        switch (jobj->flags & 0x600000) {
+        switch (jobj->flags & JOBJ_JOINT) {
         case JOBJ_JOINT1:
             resolveIKJoint1(jobj);
             break;
