@@ -1465,16 +1465,16 @@ void HSD_JObjSetupMatrixSub(HSD_JObj* jobj)
     f32 x_scale;
 
     HSD_JOBJ_METHOD(jobj)->make_mtx(jobj);
-    jobj->flags &= 0xFFFFFFBF;
-    if (!(jobj->flags & 0x800000)) {
-        switch (jobj->flags & 0x600000) {
-        case 0x200000:
+    jobj->flags &= ~JOBJ_MTX_DIRTY;
+    if (!(jobj->flags & JOBJ_USER_DEF_MTX)) {
+        switch (jobj->flags & JOBJ_JOINT) {
+        case JOBJ_JOINT1:
             resolveIKJoint1(jobj);
             break;
-        case 0x400000:
+        case JOBJ_JOINT2:
             resolveIKJoint2(jobj);
             break;
-        case 0x600000:
+        case JOBJ_EFFECTOR:
             parent = jobj->parent;
             x_scale = 1.0F;
             if (parent != NULL) {
@@ -1506,12 +1506,12 @@ void HSD_JObjSetupMatrixSub(HSD_JObj* jobj)
                 HSD_RObjUpdateAll(jobj->robj, jobj, JObjUpdateFunc);
                 if (HSD_JObjMtxIsDirty(jobj)) {
                     HSD_JOBJ_METHOD(jobj)->make_mtx(jobj);
-                    jobj->flags &= 0xFFFFFFBF;
+                    jobj->flags &= ~JOBJ_MTX_DIRTY;
                 }
             }
             break;
         }
-        jobj->flags &= 0xFFFFFFBF;
+        jobj->flags &= ~JOBJ_MTX_DIRTY;
     }
 }
 

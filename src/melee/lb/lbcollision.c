@@ -1380,17 +1380,16 @@ inline float sqrDistance(Vec3* a, Vec3* b)
     }
 }
 
-void lbColl_800077A0(Vec3* a, Mtx arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
+void lbColl_800077A0(Vec3* a, MtxPtr arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
                      float* angle, float x, float dist_offset)
 {
     Vec3 diff_cb;
-    float diff_cb_x;
 
-    diff_cb.x = diff_cb_x = c->x - b->x;
+    diff_cb.x = c->x - b->x;
     diff_cb.y = c->y - b->y;
     diff_cb.z = c->z - b->z;
 
-    if (diff_cb_x != 0.0f || diff_cb.y != 0.0f || diff_cb.z != 0.0f) {
+    if (diff_cb.x != 0.0f || diff_cb.y != 0.0f || diff_cb.z != 0.0f) {
         Vec3 normal_x;
         Vec3 multi_mtx;
 
@@ -1584,42 +1583,27 @@ void lbColl_JObjSetupMatrix(HSD_JObj* jobj)
     HSD_JObjSetupMatrixSub(jobj);
 }
 
-void lbColl_80007DD8(HitCapsule* arg0, HitResult* arg1, Mtx arg2, unk_t arg3,
-                     unk_t arg4, float arg5)
+void lbColl_80007DD8(HitCapsule* capsule, HitResult* hit, Mtx hit_transform,
+                     Vec3* /*out*/ arg3, float* angle, float scale)
 {
-    unk_t sp5C = NULL;
-    HSD_JObj* temp_r31;
-    HSD_JObj* temp_r31_2;
-    Mtx* var_r4;
-    float var_f31;
-    Mtx sp2C;
+    float dist_offset;
+    Vec3 unused_result;
+    Mtx transformed_hit;
 
-    if (arg2 != NULL) {
-        temp_r31 = arg1->bone;
-        if (temp_r31 == NULL) {
-            __assert(lbColl_804D3700, 0x478U, lbColl_804D3708);
-        }
-        lbColl_JObjSetupMatrix(temp_r31);
-        PSMTXConcat(arg2, (float(*)[4]) temp_r31->mtx[0],
-                    (float(*)[4]) & sp2C[0]);
+    if (hit_transform != NULL) {
+        PSMTXConcat(hit_transform, HSD_JObjGetMtxPtr(hit->bone),
+                    transformed_hit);
     }
-    if (((u8) arg0->x43 >> 6U) & 1) {
-        var_f31 = arg0->scl;
+    if (capsule->x43_b1) {
+        dist_offset = capsule->scl;
     } else {
-        var_f31 = arg0->scl * arg5;
+        dist_offset = capsule->scl * scale;
     }
-    if (arg2 != NULL) {
-        var_r4 = &sp2C;
-    } else {
-        temp_r31_2 = arg1->bone;
-        if (temp_r31_2 == NULL) {
-            __assert(lbColl_804D3700, 0x478U, lbColl_804D3708);
-        }
-        lbColl_JObjSetupMatrix(temp_r31_2);
-        var_r4 = &temp_r31_2->mtx;
-    }
-    lbColl_800077A0(&arg1->pos, *var_r4, &arg0->x58, &arg0->x4C, sp5C, arg3,
-                    arg4, arg1->size, var_f31);
+    lbColl_800077A0(&hit->pos,
+                    hit_transform != NULL ? transformed_hit
+                                          : HSD_JObjGetMtxPtr(hit->bone),
+                    &capsule->x58, &capsule->x4C, &unused_result, arg3, angle,
+                    hit->size, dist_offset);
 }
 
 bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,

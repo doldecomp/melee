@@ -31,7 +31,7 @@ typedef struct {
 /* 007BCC */ bool lbColl_80007BCC(HitCapsule*, HitResult* shield_hit, unk_t,
                                   s32, float, float, float);
 /* 007D68 */ void lbColl_JObjSetupMatrix(HSD_JObj*);
-/* 007DD8 */ void lbColl_80007DD8(HitCapsule*, HitResult*, Mtx, unk_t, unk_t,
+/* 007DD8 */ void lbColl_80007DD8(HitCapsule*, HitResult*, Mtx, Vec3*, float*,
                                   float);
 /* 007ECC */ bool lbColl_80007ECC(HitCapsule*, HurtCapsule*, Mtx,
                                   float hit_scl_y, float hurt_scl_y,

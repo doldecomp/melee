@@ -83,6 +83,7 @@ struct HSD_JObj;
 #define JOBJ_NULL_OBJ (0 << 21)
 #define JOBJ_JOINT1 (1 << 21)
 #define JOBJ_JOINT2 (2 << 21)
+#define JOBJ_JOINT (3 << 21)
 #define JOBJ_EFFECTOR (3 << 21)
 #define JOBJ_USER_DEF_MTX (1 << 23)
 #define JOBJ_MTX_INDEP_PARENT (1 << 24)
