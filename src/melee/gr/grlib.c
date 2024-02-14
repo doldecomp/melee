@@ -18,8 +18,8 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/particle.h>
 #include <baselib/jobj.h>
+#include <baselib/particle.h>
 #include <baselib/psappsrt.h>
 
 /* 1C9BC8 */ static void grLib_801C9BC8(HSD_GObj*);

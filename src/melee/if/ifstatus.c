@@ -36,7 +36,8 @@ typedef struct UnkX {
     HSD_JObj* x54_jobj[4];
 } UnkX; // HudIndex
 
-/* 2F491C */ static void ifStatus_PercentOnDeathAnimationThink(UnkX* value, s32, s32);
+/* 2F491C */ static void ifStatus_PercentOnDeathAnimationThink(UnkX* value,
+                                                               s32, s32);
 /* 3F9628 */ static Thing_803F9628 ifStatus_803F9628;
 /* 4D6D60 */ static s8 ifStatus_804D6D60;
 /* 4D6D61 */ static s8 ifStatus_804D6D61;
