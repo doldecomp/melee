@@ -5,6 +5,7 @@
 #include "sc/forward.h"
 #include <baselib/forward.h>
 
+#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/jobj.h>
 #include <baselib/texp.h>
