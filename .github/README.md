@@ -123,6 +123,110 @@ We're also happy to answer any questions in the `#melee` channel on Discord.
 [![Gamecube/Wii Decompilation Discord](https://discordapp.com/api/guilds/727908905392275526/widget.png?style=banner2)](https://discord.gg/hKx3FJJgrV)
 
 # FAQ
+## How is the codebase structured?
+
+The code in `src` is divided into several modules, the main one being `melee`, which is the game code.
+
+### `melee`
+The main game code is divided into several two-letter folders, which were left behind by HAL in assert messages and game data on the original disc.
+
+Short|Full|Notes
+-|-|-
+`cm`|Camera|
+`db`|Debug|
+`ef`|Effects|Visual effects
+`ft`|Fighters|The player characters.
+`gm`|Game|The main game loop.
+`gr`|Ground|Stages and other levels.
+`if`|Interface|User interface.
+`it`|Items|
+`lb`|Library|Utility functions that are often thin wrappers around `dolphin` or `baselib` code.
+`mn`|Menus|
+`mp`|Map|Related to stages and contains things like `mpcoll` (map collisions).
+`pl`|Players|As in users
+`sc`|Scene|Menu, versus mode, single-player, etc. The game mode.
+`ty`|Toy|Trophies
+`un`|Unknown|This isn't an actual folder in the original code.
+`vi`|Visual|Cutscenes, etc.
+
+#### `melee/ft/chara`
+
+HAL also used two-letter abbreviations for each fighter.
+
+Short|Full|Canonical English
+-|-|-
+`Bo`|Zako<sup>1</sup> Boy|[Male wire frame](https://www.ssbwiki.com/Fighting_Wire_Frames#Male_Wire_Frame.2FCaptain_Falcon).
+`Ca`|Captain|Captain Falcon
+`Ch`|Crazy Hand|
+`Cl`|Child Link|Young Link
+`Co`|Common|Code shared between fighters
+`Dk`|Donkey Kong|
+`Dr`|Dr. Mario|
+`Fc`|Falco|
+`Fe`|Fire Emblem|Roy
+`Fx`|Fox|
+`Gk`|Giga Koopa|Giga Bowser
+`Gl`|Zako Girl|[Female wire frame](https://www.ssbwiki.com/Fighting_Wire_Frames#Female_Wire_Frame.2FZelda).
+`Gn`|Ganondorf|
+`Gw`|Mr. Game & Watch|
+`Kb`|Kirby|
+`Kp`|Koopa|Bowser
+`Lg`|Luigi|
+`Lk`|Link|
+`Mh`|Master Hand|
+`Mr`|Mario|
+`Ms`|Mars|Marth
+`Mt`|Mewtwo|
+`Nn`|Nana|
+`Ns`|Ness|
+`Pc`|Pichu|
+`Pe`|Peach|
+`Pk`|Pikachu|
+`Pp`|Popo|
+`Pr`|Purin|Jigglypuff
+`Sb`|Sandbag|
+`Sk`|Seak|Sheik
+`Ss`|Samus|
+`Ys`|Yoshi|
+`Zd`|Zelda|
+
+<sup>1</sup> Zako (雑魚) is Japanese for "trash mob" in video games, literally "small fish."
+
+### `sysdolphin/baselib`
+
+HAL's core internal library.
+Class|Full
+-|-
+`AObj`|Animation
+`CObj`|Camera
+`DObj`|Draw/Display
+`FObj`|Frame
+`GObj`|Global/Game
+`JObj`|Joint
+`LObj`|Light
+`MObj`|Material
+`PObj`|Polygon
+`TObj`|Texture
+`RObj`|Reference
+`SObj`|Scene
+`WObj`|World
+
+### `dolphin`
+
+The [Dolphin SDK](https://wiki.raregamingdump.ca/index.php/Dolphin_SDK).
+
+### `MetroTRK`
+
+The Metrowerks Target Resident Kernel.
+
+### `MSL`
+
+The Metrowerks Standard Library.
+
+### `Runtime`
+
+The Gekko hardware runtime.
+
 ## What can be done after decompiling Melee?
 
 Note that this project's purpose is to only match the ASM with C code. This is entirely for research and archival purposes. After this is created, you essentially have a C project that can be compiled into Melee, but it won't be portable (aka you can't compile it to run on a normal computer).
