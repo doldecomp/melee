@@ -11,15 +11,15 @@
 #include <common_structs.h>
 #include <placeholder.h>
 
-/* 04D17C */ void mpLib_8004D17C(void);
+/* 04D17C */ int mpLib_8004D17C(void);
 /* 04D288 */ void mpLib_8004D288(UNK_T);
 /* 04DB78 */ s32 mpLib_8004DB78(s32 gr_idx);
 /* 04DC04 */ s32 mpLib_8004DC04(s32 gr_idx);
 /* 04DD90 */ bool mpLib_8004DD90(int idx, float*, float*, UNK_T, Vec3* normal);
 /* 04E090 */ enum_t mpLib_8004E090(int idx, Vec3*, float*, u32*, Vec3* normal);
 /* 04E398 */ bool mpLib_8004E398(int, float*, int, int, int, float);
-/* 04F008 */ bool mpLib_8004F008(Vec3*, int, int, int, int, int, int, int,
-                                 float, float, float, float, float);
+/* 04F008 */ bool mpLib_8004F008(Vec3*, int*, int, int, int, int, int, int,
+                                 float, float, float, float, int, float);
 /* 04F8A4 */ UNK_RET mpLib_8004F8A4(UNK_PARAMS);
 /* 0501CC */ bool mpLib_800501CC(float surface_normal_y,
                                  float surface_normal_x, float right_x,
@@ -69,5 +69,8 @@
 /* 0588D0 */ void mpLib_800588D0(float left, float bottom, float right,
                                  float top);
 /* 058AA0 */ void mpLib_80058AA0(void);
+/* 04D164 */ int mpLib_8004D164(void);
+/* 04D16C */ int mpLib_8004D16C(void);
+/* 04D174 */ mp_UnkStruct2* mpLib_8004D174(void);
 
 #endif

@@ -28,6 +28,9 @@ typedef unsigned long u32;
 /// An unsigned 64-bit integer
 typedef unsigned long long u64;
 
+/// An unsigned short integer of platform-dependent size
+typedef unsigned short ushort;
+
 /// An unsigned integer of platform-dependent size
 typedef unsigned int uint;
 
