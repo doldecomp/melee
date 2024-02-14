@@ -43,7 +43,7 @@
 /* 054C6C */ enum_t mpLib_80054C6C(int);
 /* 054CEC */ u32 mpLib_80054CEC(enum_t);
 /* 054DFC */ void mpLib_80054DFC(enum_t, Vec3*);
-/* 054ED8 */ bool mpLib_80054ED8(s32);
+/* 054ED8 */ bool mpLib_80054ED8(int);
 /* 054F68 */ bool mpLib_80054F68(s32, s32);
 /* 0552B0 */ void mpLib_800552B0(s16 x, HSD_JObj*, s16 z);
 /* 055E9C */ void mpLib_80055E9C(s16 x);
