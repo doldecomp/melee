@@ -1380,17 +1380,25 @@ inline float sqrDistance(Vec3* a, Vec3* b)
     }
 }
 
+inline static bool isZero(Vec3 v)
+{
+    // return v->x != 0.0f || v->y != 0.0f || v->z != 0.0f;
+    return v.x == 0.0f && v.y == 0.0f && v.z == 0.0f;
+}
+
 void lbColl_800077A0(Vec3* a, Mtx arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
                      float* angle, float x, float dist_offset)
 {
     Vec3 diff_cb;
-    float diff_cb_x;
+    // float diff_cb_x;
 
-    diff_cb.x = diff_cb_x = c->x - b->x;
+    // Vec3 unk1;
+
+    diff_cb.x = c->x - b->x;
     diff_cb.y = c->y - b->y;
     diff_cb.z = c->z - b->z;
 
-    if (diff_cb_x != 0.0f || diff_cb.y != 0.0f || diff_cb.z != 0.0f) {
+    if (!(diff_cb.x == 0.0f && diff_cb.y == 0.0f && diff_cb.z == 0.0f)) {
         Vec3 normal_x;
         Vec3 multi_mtx;
 
@@ -1403,6 +1411,7 @@ void lbColl_800077A0(Vec3* a, Mtx arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
         multi_mtx.y = 0.0f;
         multi_mtx.z = 0.0f;
         PSMTXMUltiVec(arg1, &multi_mtx, &multi_mtx);
+
 
         {
             float dist = sqrDistance(&normal_x, &multi_mtx);
@@ -1459,6 +1468,7 @@ void lbColl_800077A0(Vec3* a, Mtx arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
                     }
                 }
             }
+
 
             *angle = lbVector_AngleXY(e, &diff_cb);
             d->x = dist * e->x + a->x;
@@ -1584,42 +1594,44 @@ void lbColl_JObjSetupMatrix(HSD_JObj* jobj)
     HSD_JObjSetupMatrixSub(jobj);
 }
 
-void lbColl_80007DD8(HitCapsule* arg0, HitResult* arg1, Mtx arg2, unk_t arg3,
-                     unk_t arg4, float arg5)
+void lbColl_80007DD8(HitCapsule* capsule, HitResult* hit, Mtx hit_transform, Vec3* /*out*/ arg3,
+                     float* angle, float scale)
 {
-    unk_t sp5C = NULL;
-    HSD_JObj* temp_r31;
-    HSD_JObj* temp_r31_2;
-    Mtx* var_r4;
-    float var_f31;
-    Mtx sp2C;
+    Mtx transformed_hit;
+    Vec3 unused_result;
+    Mtx* transform;
+    float pad[2];
+    float dist_offset;
 
-    if (arg2 != NULL) {
-        temp_r31 = arg1->bone;
-        if (temp_r31 == NULL) {
-            __assert(lbColl_804D3700, 0x478U, lbColl_804D3708);
+    if (hit_transform != NULL) {
+        HSD_JObj* hit_bone;
+        hit_bone = hit->bone;
+        // replace with some SetupMatrix call, it gets (partially?) inlined
+        if (hit_bone == NULL) {
+            __assert("jobj.h", 0x478U, "jobj");
         }
-        lbColl_JObjSetupMatrix(temp_r31);
-        PSMTXConcat(arg2, (float(*)[4]) temp_r31->mtx[0],
-                    (float(*)[4]) & sp2C[0]);
+        HSD_JObjSetupMatrixSub(hit_bone);
+        PSMTXConcat(hit_transform, (float(*)[4]) hit_bone->mtx[0],
+                    (float(*)[4]) &transformed_hit[0]);
     }
-    if (((u8) arg0->x43 >> 6U) & 1) {
-        var_f31 = arg0->scl;
+    if (capsule->x43_b1) {
+        dist_offset = capsule->scl;
     } else {
-        var_f31 = arg0->scl * arg5;
+        dist_offset = capsule->scl * scale;
     }
-    if (arg2 != NULL) {
-        var_r4 = &sp2C;
+    if (hit_transform != NULL) {
+        transform = &transformed_hit;
     } else {
-        temp_r31_2 = arg1->bone;
-        if (temp_r31_2 == NULL) {
-            __assert(lbColl_804D3700, 0x478U, lbColl_804D3708);
+        HSD_JObj* hit_bone_2;
+        hit_bone_2 = hit->bone;
+        if (hit_bone_2 == NULL) {
+            __assert("jobj.h", 0x478U, "jobj");
         }
-        lbColl_JObjSetupMatrix(temp_r31_2);
-        var_r4 = &temp_r31_2->mtx;
+        HSD_JObjSetupMatrixSub(hit_bone_2);
+        transform = &hit_bone_2->mtx;
     }
-    lbColl_800077A0(&arg1->pos, *var_r4, &arg0->x58, &arg0->x4C, sp5C, arg3,
-                    arg4, arg1->size, var_f31);
+    lbColl_800077A0(&hit->pos, *transform, &capsule->x58, &capsule->x4C, &unused_result, arg3,
+                    angle, hit->size, dist_offset);
 }
 
 bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
