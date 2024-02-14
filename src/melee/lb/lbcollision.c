@@ -1809,10 +1809,14 @@ void lbColl_80008440(HitCapsule* hit)
 
 void lbColl_CopyHitCapsule(HitCapsule* src, HitCapsule* dst)
 {
+    HitVictim* sv1 = src->victims_1;
+    HitVictim* dv1 = dst->victims_1;
+    HitVictim* sv2 = src->victims_2;
+    HitVictim* dv2 = dst->victims_2;
     size_t i;
-    for (i = 0; i < ARRAY_SIZE(dst->victims_1); i++) {
-        dst->victims_1[i] = src->victims_1[i];
-        dst->victims_2[i] = src->victims_2[i];
+    for (i = 0; i < ARRAY_SIZE(src->victims_1); i++) {
+        dv1[i] = sv1[i];
+        dv2[i] = sv2[i];
     }
     dst->x44 = src->x44;
     dst->x45 = src->x45;
