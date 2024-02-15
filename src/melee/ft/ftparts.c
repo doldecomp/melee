@@ -314,12 +314,20 @@ void ftParts_80074E58(Fighter* fp)
 
 Fighter_Part ftParts_8007500C(Fighter* fp, Fighter_Part part)
 {
-    NOT_IMPLEMENTED;
+    return ftPartsTable[fp->kind]->part_to_joint[part];
 }
 
-void ftParts_80075028(void)
+u8 ftParts_80075028(size_t to_table_idx, size_t from_table_idx,
+                    size_t joint_idx)
 {
-    NOT_IMPLEMENTED;
+    FighterPartsTable* from_table = ftPartsTable[from_table_idx];
+    if (joint_idx < from_table->parts_num) {
+        size_t part_idx = from_table->joint_to_part[joint_idx];
+        if (part_idx != FTPART_INVALID) {
+            return ftPartsTable[to_table_idx]->part_to_joint[part_idx];
+        }
+    }
+    return FTPART_INVALID;
 }
 
 u32 ftParts_8007506C(s32 ftkind, u32 part)
