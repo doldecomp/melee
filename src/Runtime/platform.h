@@ -150,10 +150,19 @@ typedef void (*Event)(void);
 
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 
+#ifdef __cplusplus
+#ifndef _Static_assert
+#define _Static_assert static_assert
+#endif
+#endif
+#ifdef _Static_assert
 #define STATIC_ASSERT(cond)                                                   \
     struct {                                                                  \
         int x[1 - 2 * !(cond)];                                               \
     };
+#else
+#define STATIC_ASSERT(cond) _Static_assert((cond), "(" #cond ") failed")
+#endif
 
 #define RETURN_IF(cond)                                                       \
     if ((cond)) {                                                             \
