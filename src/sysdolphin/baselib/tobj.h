@@ -145,11 +145,11 @@ struct HSD_TObj {
     u32 flags;
     f32 blending;
     GXTexFilter magFilt;
-    struct _HSD_ImageDesc* imagedesc;
+    struct HSD_ImageDesc* imagedesc;
     struct _HSD_Tlut* tlut;
     struct _HSD_TexLODDesc* lod;
     HSD_AObj* aobj;
-    struct _HSD_ImageDesc** imagetbl;
+    struct HSD_ImageDesc** imagetbl;
     struct _HSD_Tlut** tluttbl;
     u8 tlut_no;
     Mtx mtx;
@@ -172,7 +172,7 @@ typedef struct _HSD_TObjDesc {
     u32 blend_flags;
     f32 blending;
     GXTexFilter magFilt;
-    struct _HSD_ImageDesc* imagedesc;
+    struct HSD_ImageDesc* imagedesc;
     struct _HSD_TlutDesc* tlutdesc;
     struct _HSD_TexLODDesc* lod;
     struct _HSD_TObjTevDesc* tev;
@@ -200,7 +200,7 @@ typedef struct _HSD_TexLODDesc {
     GXAnisotropy max_anisotropy;
 } HSD_TexLODDesc;
 
-struct _HSD_ImageDesc {
+struct HSD_ImageDesc {
     void* image_ptr;
     u16 width;
     u16 height;
@@ -252,7 +252,7 @@ typedef struct _HSD_TexAnim {
     struct _HSD_TexAnim* next;
     GXTexMapID id;
     HSD_AObjDesc* aobjdesc;
-    struct _HSD_ImageDesc** imagetbl;
+    struct HSD_ImageDesc** imagetbl;
     struct _HSD_TlutDesc** tluttbl;
     u16 n_imagetbl;
     u16 n_tluttbl;
