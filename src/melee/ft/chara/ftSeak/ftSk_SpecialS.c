@@ -85,7 +85,7 @@ void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, float arg2)
 
     u8 _[4];
 
-    int* item;
+    HSD_Joint** item;
 
     if (arg1 == 305) {
         item = items[4];
