@@ -147,6 +147,8 @@ typedef void (*Event)(void);
 
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 
+#define STATIC_ASSERT(cond) struct { int x[1-2*!(cond)]; };
+
 #define RETURN_IF(cond)                                                       \
     if ((cond)) {                                                             \
         return;                                                               \
