@@ -40,6 +40,8 @@
 #include <placeholder.h>
 #include <dolphin/gx/types.h>
 
+#define FTPART_INVALID 0xFF
+
 // Table in PlCo.dat
 typedef struct _FighterPartsTable {
     u8* joint_to_part;

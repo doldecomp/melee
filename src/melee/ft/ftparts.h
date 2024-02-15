@@ -1,5 +1,5 @@
-#ifndef MELEE_FT_FTPARTS_H
-#define MELEE_FT_FTPARTS_H
+#ifndef GALE01_0735BC
+#define GALE01_0735BC
 
 #include <platform.h>
 #include "ft/forward.h"
@@ -42,7 +42,8 @@
 /* 074D7C */ void ftParts_80074D7C(u32*, s32, u32*);
 /* 074E58 */ void ftParts_80074E58(Fighter*);
 /* 07500C */ Fighter_Part ftParts_8007500C(Fighter*, Fighter_Part);
-/* 075028 */ void ftParts_80075028(void);
+/* 075028 */ u8 ftParts_80075028(size_t to_table_idx, size_t from_table_idx,
+                                 size_t joint_idx);
 /* 07506C */ u32 ftParts_8007506C(s32 ftkind, u32 part);
 /* 0750C8 */ void ftParts_800750C8(void);
 /* 075240 */ void ftParts_80075240(void);
