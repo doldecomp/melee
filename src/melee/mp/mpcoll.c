@@ -1084,6 +1084,8 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
 #define CollisionFlagAir_PlatformPassCallback 0x2
 #define CollisionFlagAir_CanGrabLedge 0x4
 
+#pragma push
+#pragma dont_inline on
 bool mpColl_80046904(CollData* coll, u32 flags)
 { // Physics_CollisionAirCallback
     s32 sp24;
@@ -1376,6 +1378,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
     }
     return touched_floor;
 }
+#pragma pop
 
 bool mpColl_8004730C(CollData* cdata, ftCollisionBox* arg1)
 {
