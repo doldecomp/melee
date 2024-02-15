@@ -79,25 +79,23 @@ void it_80288D98(Item_GObj* gobj)
     it_80288EFC((HSD_GObj*) item);
 }
 
-s32 it_80288DC4(Item_GObj* gobj)
+bool it_80288DC4(Item_GObj* gobj)
 {
-    f32 sp18;
-    f32 sp14;
-    f32 sp10;
+    Vec3 arg_vec;
+
     Item* item = GET_ITEM(gobj);
     void* attrs = item->xC4_article_data->x4_specialAttributes;
     if (HSD_Randi(M2C_FIELD(attrs, s32*, 4)) == 0) {
-        return 1;
+        return true;
     }
-    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0F;
-    // sp18 = 0.0F;
-    // sp14 = 0.0F;
-    // sp10 = 0.0F;
-    if (it_8026F8B4(gobj, &item->pos, NULL, 0) != 0) {
-        return 0;
+
+    arg_vec.x = arg_vec.y = arg_vec.z = 0.0F;
+    if (it_8026F8B4(gobj, &item->pos, &arg_vec, 0) != 0) {
+        return false;
     }
+
     it_8026F3D4(gobj, 0, *(bool*) attrs, 0);
-    return 0;
+    return false;
 }
 
 void it_80288E6C(Item_GObj* gobj)
