@@ -4,10 +4,17 @@
 #include <platform.h>
 #include "baselib/forward.h"
 
+#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
-typedef struct _UnkGeneratorMember { // MexTK: GeneratorAppSRT
-    u32 x0_fill[2];
+#define PSAPPSRT_UNK_B09 (1 << 9)
+#define PSAPPSRT_UNK_B10 (1 << 10)
+#define PSAPPSRT_UNK_B11 (1 << 11)
+
+/// MexTK: GeneratorAppSRT
+struct UnkGeneratorMember {
+    UNK_T x0;
+    UnkGeneratorStruct* x4;
     S32Vec3 x8;
     u8 x14_fill[0x10];
     f32 x24;
@@ -15,11 +22,11 @@ typedef struct _UnkGeneratorMember { // MexTK: GeneratorAppSRT
     f32 x2C;
     u8 x30_fill[0x72];
     s8 xA2;
-} UnkGeneratorMember;
+};
 
 /// @remarks MexTK: Particle
 struct UnkGeneratorStruct {
-    struct UnkGeneratorStruct* next;
+    UnkGeneratorStruct* next;
     u8 x4_fill[0xC];
     HSD_JObj* x10_jobj;
     u16 x14_fill;
