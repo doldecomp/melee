@@ -1,5 +1,7 @@
 #include <platform.h>
 
+#include <baselib/debug.h>
+
 typedef struct _Handle {
     struct _Handle* x0_next;
     void* x4_lo;
@@ -25,6 +27,8 @@ struct Allocator {
     u8 x6EC[0x6F0 - 0x6EC];
 };
 
+/* 015320 */ static void lbMemory_80015320(int, Handle*, int, int);
+
 // lbMemory_804318B0
 static struct Allocator g_alloc;
 STATIC_ASSERT(sizeof(g_alloc) == 0x6F0);
@@ -46,7 +50,7 @@ static inline Handle* new_handle(void* arenaLo, void* arenaHi)
 {
     Handle* h;
     if (g_alloc.x698_free_heap == NULL) {
-        __assert("lbmemory.c", 0x7BU, "_p(free_heap)");
+        __assert(__FILE__, 0x7BU, "_p(free_heap)");
     }
     // assert_arena_in_bounds(arenaLo, arenaHi);
 
@@ -58,7 +62,7 @@ static inline Handle* new_handle(void* arenaLo, void* arenaHi)
             ok = 1;
         }
         if (ok == 0) {
-            __assert("lbmemory.c", 0x80U,
+            __assert(__FILE__, 0x80U,
                      "(u32)arenaLo >= (u32)_p(a_arenaLo) && (u32)arenaHi <= "
                      "(u32)_p(a_arenaHi)");
         }
@@ -85,7 +89,7 @@ void lbMemory_80014EEC(Handle* handle)
     Handle* iter;
     Handle* tmp_next;
     if (handle == NULL) {
-        __assert("lbmemory.c", 0x95U, "handle");
+        __assert(__FILE__, 0x95U, "handle");
     }
     for (iter = handle->xC_prev; iter != NULL;) {
         tmp_next = iter->x0_next;
@@ -129,7 +133,7 @@ Handle* lbMemory_80014FC8(Handle* arg0, u32 size)
 
     least_leftover = 0x40000000U;
     if (g_alloc.x62C_free_mem == NULL) {
-        __assert("lbmemory.c", 0xCCU, "_p(free_mem)");
+        __assert(__FILE__, 0xCCU, "_p(free_mem)");
     }
     start = arg0->x4_lo;
     // 32 byte alignment
@@ -160,7 +164,7 @@ Handle* lbMemory_80014FC8(Handle* arg0, u32 size)
     }
     if (memp_candidate == NULL) {
         // oom
-        __assert("lbmemory.c", 0xE9U, "memp_kouho");
+        __assert(__FILE__, 0xE9U, "memp_kouho");
     }
     {
         Handle* result;
@@ -179,12 +183,13 @@ Handle* lbMemory_80014FC8(Handle* arg0, u32 size)
     }
 }
 
-extern const char* filename;
+/// @todo Should be `__FILE__`
+extern char* filename;
 
 // 100% except for literal relocations
 void lbMemory_800150F0(Handle* h, u32 arg1)
 {
-    Handle* r5 = h->xC_prev;
+    Handle* handle = h->xC_prev;
     Handle* r6 = (Handle*) &h->xC_prev;
 
     // couldn't figure out how to extract the control flow
@@ -192,24 +197,24 @@ void lbMemory_800150F0(Handle* h, u32 arg1)
 
     goto check;
 ifeq:
-    if (r5->x4_lo != h) {
+    if (handle->x4_lo != h) {
         goto precheck;
     } else {
-        r6->x0_next = r5->x0_next;
-        PUSH_HANDLE(&g_alloc.x62C_free_mem, r5);
+        r6->x0_next = handle->x0_next;
+        PUSH_HANDLE(&g_alloc.x62C_free_mem, handle);
         g_alloc.x630_num_allocs -= 1;
         return;
     }
 precheck:
-    r6 = r5;
-    r5 = r5->x0_next;
+    r6 = handle;
+    handle = handle->x0_next;
 check:
-    if (r5 == NULL) {
+    if (handle == NULL) {
         // target relocates each of these as high and low.
         // maybe one of them is an inline?
         // it also clears eq flag before OSReport
         OSReport(filename);
-        __assert(filename, 0x11BU, "handle");
+        __assert(filename, 283, "handle");
         return;
     }
     goto ifeq;
@@ -254,21 +259,19 @@ Handle* lbMemory_800154D4(void* arenaLo, void* arenaHi)
 
 void lbMemory_800155A4(void)
 {
-    Handle* r30 = g_alloc.x69C;
+    Handle* handle = g_alloc.x69C;
     Handle* iter;
 
     Handle** r5;
 
-    if (r30 == NULL) {
-        __assert("lbmemory.c", 0x95U, "handle");
-    }
+    HSD_ASSERT(149, handle);
     r5 = &g_alloc.x62C_free_mem;
-    for (iter = r30->xC_prev; iter != NULL;) {
+    for (iter = handle->xC_prev; iter != NULL;) {
         Handle* tmp_next = iter->x0_next;
         PUSH_HANDLE(r5, iter);
         iter = tmp_next;
         g_alloc.x630_num_allocs -= 1;
     }
-    PUSH_HANDLE(&g_alloc.x698_free_heap, r30);
+    PUSH_HANDLE(&g_alloc.x698_free_heap, handle);
     g_alloc.x69C = NULL;
 }
