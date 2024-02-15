@@ -570,7 +570,7 @@ typedef struct _ftData {
     /* +1C */ UNK_T x1C;
     /* +20 */ struct {
         UNK_T x0;
-        int x8;
+        HSD_Joint* x8;
     }* x20;
     /* +24 */ int x24;
     /* +28 */ u8 x28[0x3C - 0x28];
