@@ -155,7 +155,7 @@ typedef void (*Event)(void);
 #define _Static_assert static_assert
 #endif
 #endif
-#ifdef _Static_assert
+#ifndef _Static_assert
 #define STATIC_ASSERT(cond)                                                   \
     struct {                                                                  \
         int x[1 - 2 * !(cond)];                                               \
