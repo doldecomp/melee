@@ -171,7 +171,7 @@ jobs:
           tools
           config
     - name: Prepare
-      run: cp -R /orig .
+      run: ln -s /orig .
     - name: Build
       run: |
         python configure.py --map --version ${{matrix.version}} --compilers /compilers
