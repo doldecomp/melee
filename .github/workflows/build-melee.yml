@@ -177,7 +177,6 @@ jobs:
         python configure.py --map --version ${{matrix.version}} --compilers /compilers
         echo "${{matrix.options}}" | xargs ninja
     - name: Upload progress
-      # TODO
       if: matrix.options == '' && github.ref_name == github.event.repository.default_branch
       continue-on-error: true
       env:
