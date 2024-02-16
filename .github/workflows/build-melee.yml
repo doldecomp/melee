@@ -187,10 +187,10 @@ jobs:
         PROGRESS_API_KEY: ${{secrets.PROGRESS_API_KEY}}
       run: |
         python tools/upload_progress.py \
-          -b https://progress.decomp.club/ \
+          -b 'https://progress.decomp.club/' \
           -p melee \
           -v ${{matrix.version}} \
-          build/${{matrix.version}}/progress.json
+          'build/${{matrix.version}}/progress.json'
     - name: Upload map
       if: matrix.options == ''
       uses: actions/upload-artifact@v3
