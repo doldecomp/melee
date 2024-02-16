@@ -173,6 +173,7 @@ jobs:
     - name: Prepare
       run: ln -s /orig .
     - name: Build
+      shell: bash
       run: |
         args=(
           --version '${{matrix.version}}'
