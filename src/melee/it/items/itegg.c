@@ -224,17 +224,17 @@ void it_80289158(HSD_GObj* gobj)
     Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
 }
 
-bool it_802891E0(HSD_GObj* arg0)
+bool it_802891E0(HSD_GObj* gobj)
 {
-    void* temp_r4;
+    Item* item = GET_ITEM(gobj);
 
-    temp_r4 = M2C_FIELD(arg0, void**, 0x2C);
-    M2C_FIELD(temp_r4, s32*, 0xDD8) =
-        (s32) M2C_ERROR(/* unknown instruction: subi $r0, $r3, 0x1 */);
-    if ((s32) M2C_FIELD(temp_r4, s32*, 0xDD8) > 0) {
+    item->xDD4_itemVar.Egg.filler[4] -= 1;
+
+    if (item->xDD4_itemVar.Egg.filler[4] > 0) {
         return false;
+    } else {
+        return true;
     }
-    return true;
 }
 
 void it_8028920C(HSD_GObj* gobj) {}
