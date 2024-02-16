@@ -581,7 +581,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftNess/ftNs_SpecialLw.c"),
             # Peach
             Object(Matching, "melee/ft/chara/ftPeach/ftPe_Init.c"),
-            Object(NonMatching, "melee/ft/chara/ftPeach/ftPe_Float.c"),
+            Object(Matching, "melee/ft/chara/ftPeach/ftPe_Float.c"),
             Object(Matching, "melee/ft/chara/ftPeach/ftPe_FloatFall.c"),
             Object(Matching, "melee/ft/chara/ftPeach/ftPe_FloatAttack.c"),
             Object(Matching, "melee/ft/chara/ftPeach/ftPe_AttackS4.c"),
