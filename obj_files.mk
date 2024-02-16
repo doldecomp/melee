@@ -275,7 +275,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_Init.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftPeach/ftPe_Float.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_Float.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_FloatFall.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_FloatAttack.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_AttackS4.c.o\
