@@ -151,3 +151,49 @@ jobs:
           --user "$(id -u):$(id -g)" \
           --volume "$PWD:/input:ro" \
             "$REGISTRY/$IMAGE"
+  build-ninja:
+    name: Ninja
+    runs-on: ubuntu-latest
+    if: github.repository == 'doldecomp/melee'
+    container: ghcr.io/doldecomp/build-melee:main
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [GALE01]
+        options: ["", "all_source"]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+        sparse-checkout: |
+          src
+          tools
+          config
+    - name: Prepare
+      run: ln -s /orig .
+    - name: Build
+      run: |
+        args='--version ${{matrix.version}} --compilers /compilers'
+        if [ -z '${{matrix.options}}' ]; then
+          args="--map $args"
+        fi
+        echo "$args" | xargs python configure.py
+        echo "${{matrix.options}}" | xargs ninja
+    - name: Upload progress
+      if: matrix.options == '' && github.ref_name == github.event.repository.default_branch
+      continue-on-error: true
+      env:
+        PROGRESS_API_KEY: ${{secrets.PROGRESS_API_KEY}}
+      run: |
+        python tools/upload_progress.py \
+          -b 'https://progress.decomp.club/' \
+          -p melee \
+          -v ${{matrix.version}} \
+          'build/${{matrix.version}}/progress.json'
+    - name: Upload map
+      if: matrix.options == ''
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{matrix.version}}_maps
+        path: build/${{matrix.version}}/**/*.MAP
