@@ -20,6 +20,7 @@ concurrency:
 
 jobs:
   build-linux:
+    if: false
     name: Publish package
     env:
       REGISTRY: ghcr.io
