@@ -80,36 +80,45 @@ void ftPe_SpecialLw_8011CFA0(HSD_GObj* gobj)
     }
 }
 
+static ItemKind getVeg(HSD_GObj* gobj)
+{
+    ftPe_DatAttrs* da = GET_FIGHTER(gobj)->dat_attrs;
+    int da_x14 = da->x14;
+
+    ItemKind kind = It_Kind_Peach_Turnip;
+    if (HSD_Randi(da_x14) == 0) {
+        kind = pickVeg(gobj);
+    }
+    return kind;
+}
+
+static void setupVeg(ItemKind kind, HSD_GObj* gobj, Fighter* fp, Vec3* pos)
+{
+    HSD_GObj* veg_gobj =
+        it_802BD4AC(gobj, pos, fp->ft_data->x8->unk10, kind, fp->facing_dir);
+    fp->item_gobj = veg_gobj;
+    fp->fv.pe.veg_gobj = veg_gobj;
+    if (veg_gobj != NULL) {
+        ftCo_80094818(gobj, false);
+        efSync_Spawn(1234, gobj, &fp->cur_pos);
+        fp->death2_cb = ftPe_Init_OnDeath2;
+        fp->take_dmg_cb = ftPe_Init_OnDeath2;
+    }
+}
+
 static void spawnVeg(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
+    Vec3 pos;
+    Vec3 p1;
+    Vec3 p2;
+
     if (ftCheckThrowB0(fp)) {
-        Vec3 pos;
+        ItemKind kind;
+
         lb_8000B1CC(fp->parts[FtPart_109].joint, NULL, &pos);
-        {
-            Fighter* fp = GET_FIGHTER(gobj);
-
-            ftPe_DatAttrs* da = GET_FIGHTER(gobj)->dat_attrs;
-            int da_x14 = da->x14;
-
-            ItemKind kind = It_Kind_Peach_Turnip;
-            if (HSD_Randi(da_x14) == 0) {
-                kind = pickVeg(gobj);
-            }
-
-            {
-                HSD_GObj* veg_gobj = it_802BD4AC(
-                    gobj, &pos, fp->ft_data->x8->unk10, kind, fp->facing_dir);
-                fp->item_gobj = veg_gobj;
-                fp->fv.pe.veg_gobj = veg_gobj;
-                if (veg_gobj != NULL) {
-                    ftCo_80094818(gobj, false);
-                    efSync_Spawn(1234, gobj, &fp->cur_pos);
-                    fp->death2_cb = ftPe_Init_OnDeath2;
-                    fp->take_dmg_cb = ftPe_Init_OnDeath2;
-                }
-            }
-        }
+        kind = getVeg(gobj);
+        setupVeg(kind, gobj, fp, &pos);
     }
 }
 

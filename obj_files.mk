@@ -280,7 +280,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_FloatAttack.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_AttackS4.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_SpecialS.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftPeach/ftPe_SpecialLw.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_SpecialLw.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_SpecialHi.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_SpecialN.c.o\
 

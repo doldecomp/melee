@@ -586,7 +586,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftPeach/ftPe_FloatAttack.c"),
             Object(Matching, "melee/ft/chara/ftPeach/ftPe_AttackS4.c"),
             Object(Matching, "melee/ft/chara/ftPeach/ftPe_SpecialS.c"),
-            Object(NonMatching, "melee/ft/chara/ftPeach/ftPe_SpecialLw.c"),
+            Object(Matching, "melee/ft/chara/ftPeach/ftPe_SpecialLw.c"),
             Object(Matching, "melee/ft/chara/ftPeach/ftPe_SpecialHi.c"),
             Object(Matching, "melee/ft/chara/ftPeach/ftPe_SpecialN.c"),
             # Popo
