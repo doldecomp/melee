@@ -186,6 +186,7 @@ jobs:
         python tools/upload_progress.py -b https://progress.decomp.club/ -p prime -v ${{matrix.version}} \
           build/${{matrix.version}}/progress.json
     - name: Upload map
+      if: matrix.options == ''
       uses: actions/upload-artifact@v3
       with:
         name: ${{matrix.version}}_maps
