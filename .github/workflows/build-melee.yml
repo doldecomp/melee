@@ -174,15 +174,26 @@ jobs:
       run: ln -s /orig .
     - name: Build
       run: |
-        python configure.py --map --version ${{matrix.version}} --compilers /compilers
-        echo "${{matrix.options}}" | xargs ninja
+        map=''
+        if [[ -z '${{ matrix.options }}' ]]; then
+          map='--map'
+        fi
+        command $OPTION
+        python configure.py "$map" \
+          --version ${{matrix.version}} \
+          --compilers /compilers
+        echo "${{matrix.options}}" |
+          xargs ninja
     - name: Upload progress
       if: matrix.options == '' && github.ref_name == github.event.repository.default_branch
       continue-on-error: true
       env:
         PROGRESS_API_KEY: ${{secrets.PROGRESS_API_KEY}}
       run: |
-        python tools/upload_progress.py -b https://progress.decomp.club/ -p melee -v ${{matrix.version}} \
+        python tools/upload_progress.py \
+          -b https://progress.decomp.club/ \
+          -p melee \
+          -v ${{matrix.version}} \
           build/${{matrix.version}}/progress.json
     - name: Upload map
       if: matrix.options == ''
