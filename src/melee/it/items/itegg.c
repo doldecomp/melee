@@ -200,8 +200,7 @@ void it_80289094(Item_GObj* gobj)
 
 bool it_8028912C(Item_GObj* gobj)
 {
-    it_802751D8(gobj);
-    return false;
+    return it_802751D8(gobj);
 }
 
 void it_8028914C(HSD_GObj* gobj) {}
