@@ -100,6 +100,7 @@ bool it_80288DC4(Item_GObj* gobj)
 
 void it_80288E6C(Item_GObj* gobj)
 {
+    u8 padding[8];
     Item* item = GET_ITEM(gobj);
 
     it_8026B390(gobj);
