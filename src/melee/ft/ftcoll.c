@@ -272,7 +272,8 @@ void ftColl_80078538(void)
     NOT_IMPLEMENTED;
 }
 
-void ftColl_8007861C(void)
+void ftColl_8007861C(bool arg0, Fighter_GObj* gobj, int arg2, int arg3,
+                     int arg4, u32 arg5, int arg6, UNK_T arg7, int arg8)
 {
     NOT_IMPLEMENTED;
 }
@@ -294,7 +295,7 @@ void ftColl_800787B4(void)
 
 void ftColl_800788D4(Fighter_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    ftColl_8007861C(0, gobj, 0, -10, 0, 0, 0, 0, 0);
 }
 
 void ftColl_8007891C(void)

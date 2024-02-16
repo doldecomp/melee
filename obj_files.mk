@@ -71,7 +71,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/ftcoll.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_07C1.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_07C6.s.o\
-    $(BUILD_DIR)/asm/melee/ft/ftcommon.s.o\
+    $(BUILD_DIR)/src/melee/ft/ftcommon.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftdrawcommon.s.o\
     $(BUILD_DIR)/src/melee/ft/ftcliffcommon.c.o\
     $(BUILD_DIR)/src/melee/ft/ftwalljump.c.o\
@@ -571,7 +571,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/ittaru.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itegg.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itkusudama.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itparasol.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itparasol.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itgshell.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itrshell.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itlgun.s.o\
