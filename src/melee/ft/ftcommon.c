@@ -46,7 +46,7 @@
 #include <baselib/rumble.h>
 #include <melee/it/items/itpeachparasol.h>
 
-/// @todo Fix math.h so include doesn't cause sqrt values to be part of sdata2
+/// @todo Fix these to be in a single file, not math.h
 #define M_PI 3.14159265358979323846
 #define ABS(x) ((x) < 0 ? -(x) : (x))
 static inline f32 fabs_inline(f32 x)

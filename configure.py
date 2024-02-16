@@ -873,7 +873,7 @@ config.libs = [
             Object(NonMatching, "melee/it/items/ittaru.c"),
             Object(NonMatching, "melee/it/items/itegg.c"),
             Object(NonMatching, "melee/it/items/itkusudama.c"),
-            Object(NonMatching, "melee/it/items/itparasol.c"),
+            Object(Matching, "melee/it/items/itparasol.c"),
             Object(NonMatching, "melee/it/items/itgshell.c"),
             Object(NonMatching, "melee/it/items/itrshell.c"),
             Object(NonMatching, "melee/it/items/itlgun.c"),
