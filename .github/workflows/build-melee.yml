@@ -168,8 +168,7 @@ jobs:
         fetch-depth: 1
         sparse-checkout: |
           src
-          configure.py
-          tools/*.py
+          tools
     - name: Prepare
       run: cp -R /orig .
     - name: Build
