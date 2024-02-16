@@ -173,18 +173,13 @@ jobs:
     - name: Prepare
       run: ln -s /orig .
     - name: Build
-      shell: bash
       run: |
-        args=(
-          --version '${{matrix.version}}'
-          --compilers /compilers
-        )
-        if [[ -z '${{ matrix.options }}' ]]; then
-          args+=(--map)
+        args='--version ${{matrix.version}} --compilers /compilers'
+        if [ -z '${{matrix.options}}' ]; then
+          args="--map $args"
         fi
-        python configure.py "${args[@]}"
-        echo "${{matrix.options}}" |
-          xargs ninja
+        echo "$args" | xargs python configure.py
+        echo "${{matrix.options}}" | xargs ninja
     - name: Upload progress
       if: matrix.options == '' && github.ref_name == github.event.repository.default_branch
       continue-on-error: true
