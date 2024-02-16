@@ -174,14 +174,14 @@ jobs:
       run: ln -s /orig .
     - name: Build
       run: |
-        map=''
-        if [[ -z '${{ matrix.options }}' ]]; then
-          map='--map'
-        fi
-        command $OPTION
-        python configure.py "$map" \
-          --version ${{matrix.version}} \
+        args=(
+          --version '${{matrix.version}}'
           --compilers /compilers
+        )
+        if [[ -z '${{ matrix.options }}' ]]; then
+          args+=(--map)
+        fi
+        python configure.py "${args[@]}"
         echo "${{matrix.options}}" |
           xargs ninja
     - name: Upload progress
