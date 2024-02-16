@@ -154,6 +154,7 @@ jobs:
   build-ninja:
     name: Ninja
     runs-on: ubuntu-latest
+    if: github.repository == 'doldecomp/melee'
     container: ghcr.io/doldecomp/build-melee:main
     strategy:
       fail-fast: false
@@ -166,7 +167,9 @@ jobs:
       with:
         fetch-depth: 1
         sparse-checkout: |
-          !asm/*
+          src
+          configure.py
+          tools/*.py
     - name: Prepare
       run: cp -R /orig .
     - name: Build
