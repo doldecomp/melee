@@ -40,7 +40,9 @@
 /* 078488 */ UNK_RET ftColl_80078488(UNK_PARAMS);
 /* 0784B4 */ void ftColl_800784B4(void);
 /* 078538 */ UNK_RET ftColl_80078538(UNK_PARAMS);
-/* 07861C */ UNK_RET ftColl_8007861C(UNK_PARAMS);
+/* 07861C */ UNK_RET ftColl_8007861C(bool arg0, Fighter_GObj* gobj, int arg2,
+                                     int arg3, int arg4, u32 arg5, int arg6,
+                                     UNK_T arg7, int arg8);
 /* 078710 */ void ftColl_80078710(Fighter_GObj* gobj);
 /* 078754 */ void ftColl_80078754(Fighter_GObj*, Fighter_GObj*, bool);
 /* 0787B4 */ UNK_RET ftColl_800787B4(UNK_PARAMS);
