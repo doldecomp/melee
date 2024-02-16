@@ -389,7 +389,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/ftcoll.c"),
             Object(NonMatching, "melee/ft/ft_07C1.c"),
             Object(NonMatching, "melee/ft/ft_07C6.c"),
-            Object(NonMatching, "melee/ft/ftcommon.c"),
+            Object(Matching, "melee/ft/ftcommon.c"),
             Object(NonMatching, "melee/ft/ftdrawcommon.c"),
             Object(Matching, "melee/ft/ftcliffcommon.c"),
             Object(Matching, "melee/ft/ftwalljump.c"),

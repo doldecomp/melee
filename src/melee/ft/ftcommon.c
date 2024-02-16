@@ -10,7 +10,6 @@
 #include "ftcoll.h"
 #include "ftlib.h"
 #include "ftparts.h"
-#include "math.h"
 
 #include "ef/eflib.h"
 #include "ft/ft_0881.h"
@@ -46,6 +45,18 @@
 #include <baselib/jobj.h>
 #include <baselib/rumble.h>
 #include <melee/it/items/itpeachparasol.h>
+
+/// @todo Fix math.h so include doesn't cause sqrt values to be part of sdata2
+#define M_PI 3.14159265358979323846
+#define ABS(x) ((x) < 0 ? -(x) : (x))
+static inline f32 fabs_inline(f32 x)
+{
+    if (x < 0) {
+        return -x;
+    } else {
+        return x;
+    }
+}
 
 const Vec3 ftCo_803B74A0 = { 0 };
 
