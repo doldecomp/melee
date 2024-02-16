@@ -10,7 +10,7 @@ env:
   IMAGE_REPO: doldecomp/melee
 
 jobs:
-  build-linux:
+  build-make:
     name: Make
     runs-on: ubuntu-latest
     env:
@@ -148,4 +148,3 @@ jobs:
           --user "$(id -u):$(id -g)" \
           --volume "$PWD:/input:ro" \
             "$REGISTRY/$IMAGE"
-
