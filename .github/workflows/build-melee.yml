@@ -170,6 +170,8 @@ jobs:
           src
           tools
           config
+    - name: Git config
+      run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
     - name: Prepare
       run: ln -s /orig .
     - name: Build
