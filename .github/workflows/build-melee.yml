@@ -11,7 +11,7 @@ env:
 
 jobs:
   build-linux:
-    name: Linux
+    name: Make
     runs-on: ubuntu-latest
     env:
       REGISTRY: ghcr.io
@@ -67,90 +67,6 @@ jobs:
         printf "\`\`\`\n%s\n\`\`\`" "$(cat "$OUTPUT/PROGRESS.md")" \
           >> $GITHUB_STEP_SUMMARY
 
-  build-windows:
-    if: false
-    name: Windows
-    runs-on: windows-latest
-    env:
-      REGISTRY: ghcr.io
-      MAKE_FLAGS: ${{ matrix.make_flags }}
-    strategy:
-      matrix:
-        make_flags: ["GENERATE_MAP=1", "NON_MATCHING=1"]
-      fail-fast: false
-
-    steps:
-    - name: Get image name
-      env:
-        IMAGE_SUFFIX: build-windows:latest
-      shell: bash
-      run: |
-        echo "IMAGE=$IMAGE_REPO/$IMAGE_SUFFIX" >> $GITHUB_ENV
-
-    - name: Checkout Melee repository
-      uses: actions/checkout@v3
-
-    - name: Log into container registry
-      uses: docker/login-action@v2.1.0
-      with:
-        registry: ${{ env.REGISTRY }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Pull build image
-      shell: bash
-      run: docker pull "$REGISTRY/$IMAGE"
-
-    - name: Build Melee
-      env:
-        MAKE_FLAGS: ${{ matrix.make_flags }}
-      run: |
-        $output = New-Item `
-          -Path "$env:TEMP/Output" `
-          -ItemType Directory `
-          -Force
-
-        # the container's user needs to be able to write to the runner's dir
-        icacls $output /T /grant 'Everyone:(OI)(CI)(F)'
-
-        docker run --rm `
-        --volume "${PWD}:C:/Input:ro" `
-        --volume "${output}:C:/Output" `
-        --env MAKE_FLAGS="$env:MAKE_FLAGS" `
-        "$env:REGISTRY/$env:IMAGE"
-
-  check-issues:
-    name: Issues
-    runs-on: ubuntu-latest
-    env:
-      REGISTRY: ghcr.io
-
-    steps:
-    - name: Get image name
-      env:
-        IMAGE_SUFFIX: check-issues:latest
-      run: |
-        echo "IMAGE=$IMAGE_REPO/$IMAGE_SUFFIX" >> $GITHUB_ENV
-
-    - name: Checkout Melee repository
-      uses: actions/checkout@v3
-
-    - name: Log into container registry
-      uses: docker/login-action@v2.1.0
-      with:
-        registry: ${{ env.REGISTRY }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Pull build image
-      run: docker pull "$REGISTRY/$IMAGE"
-
-    - name: Check for code issues
-      run: |
-        docker run --rm \
-          --user "$(id -u):$(id -g)" \
-          --volume "$PWD:/input:ro" \
-            "$REGISTRY/$IMAGE"
   build-ninja:
     name: Ninja
     runs-on: ubuntu-latest
@@ -199,3 +115,37 @@ jobs:
       with:
         name: ${{matrix.version}}_maps
         path: build/${{matrix.version}}/**/*.MAP
+
+  check-issues:
+    name: Issues
+    runs-on: ubuntu-latest
+    env:
+      REGISTRY: ghcr.io
+
+    steps:
+    - name: Get image name
+      env:
+        IMAGE_SUFFIX: check-issues:latest
+      run: |
+        echo "IMAGE=$IMAGE_REPO/$IMAGE_SUFFIX" >> $GITHUB_ENV
+
+    - name: Checkout Melee repository
+      uses: actions/checkout@v3
+
+    - name: Log into container registry
+      uses: docker/login-action@v2.1.0
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Pull build image
+      run: docker pull "$REGISTRY/$IMAGE"
+
+    - name: Check for code issues
+      run: |
+        docker run --rm \
+          --user "$(id -u):$(id -g)" \
+          --volume "$PWD:/input:ro" \
+            "$REGISTRY/$IMAGE"
+
