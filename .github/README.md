@@ -134,18 +134,18 @@ Short|Full|Notes
 -|-|-
 `cm`|Camera|
 `db`|Debug|
-`ef`|Effects|Visual effects
-`ft`|Fighters|The player characters.
+`ef`|Effect|Visual effects.
+`ft`|Fighter|The player characters.
 `gm`|Game|The main game loop.
 `gr`|Ground|Stages and other levels.
 `if`|Interface|User interface.
 `it`|Items|
 `lb`|Library|Utility functions that are often thin wrappers around `dolphin` or `baselib` code.
-`mn`|Menus|
+`mn`|Menu|
 `mp`|Map|Related to stages and contains things like `mpcoll` (map collisions).
-`pl`|Players|As in users
+`pl`|Player|As in users.
 `sc`|Scene|Menu, versus mode, single-player, etc. The game mode.
-`ty`|Toy|Trophies
+`ty`|Toy|Trophies.
 `un`|Unknown|This isn't an actual folder in the original code.
 `vi`|Visual|Cutscenes, etc.
 
@@ -155,18 +155,18 @@ HAL also used two-letter abbreviations for each fighter.
 
 Short|Full|Canonical English
 -|-|-
-`Bo`|Zako<sup>1</sup> Boy|[Male wire frame](https://www.ssbwiki.com/Fighting_Wire_Frames#Male_Wire_Frame.2FCaptain_Falcon).
+`Bo`|Zako<sup>1</sup> Boy|[Male wire frame](https://www.ssbwiki.com/Fighting_Wire_Frames#Male_Wire_Frame.2FCaptain_Falcon)
 `Ca`|Captain|Captain Falcon
 `Ch`|Crazy Hand|
 `Cl`|Child Link|Young Link
-`Co`|Common|Code shared between fighters
+`Co`|Common|Shared code
 `Dk`|Donkey Kong|
 `Dr`|Dr. Mario|
 `Fc`|Falco|
 `Fe`|Fire Emblem|Roy
 `Fx`|Fox|
 `Gk`|Giga Koopa|Giga Bowser
-`Gl`|Zako Girl|[Female wire frame](https://www.ssbwiki.com/Fighting_Wire_Frames#Female_Wire_Frame.2FZelda).
+`Gl`|Zako Girl|[Female wire frame](https://www.ssbwiki.com/Fighting_Wire_Frames#Female_Wire_Frame.2FZelda)
 `Gn`|Ganondorf|
 `Gw`|Mr. Game & Watch|
 `Kb`|Kirby|
