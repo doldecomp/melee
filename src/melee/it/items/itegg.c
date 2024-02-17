@@ -14,52 +14,31 @@
 
 void it_80288EFC(HSD_GObj*); /* static */
 
-Item_GObj* it_80288C88(void* arg0, void* arg1, void* arg2, f32 arg8)
+Item_GObj* it_80288C88(HSD_GObj* arg_gobj, void* arg1, Vec3* arg2, f32 arg8)
 {
     SpawnItem spawn;
-    u8 sp64;
-    s32 sp60;
-    s16 sp5C;
-    f32 sp58;
-    s32 sp54;
-    s32 sp50;
-    s32 sp4C;
-    f32 sp48;
-    s32 sp44;
-    s32 sp40;
-    f32 sp3C;
-    s32 sp38;
-    s32 sp34;
-    s32 sp28;
-    void* sp24;
-    s32 sp20;
+    Item* item;
     Item* temp_r29;
-    Item_GObj* var_r30;
-    s32 temp_r0;
+    HSD_GObj* owner;
 
-    var_r30 = NULL;
-    if (arg0 != NULL) {
-        sp28 = 3;
-        temp_r0 = M2C_FIELD(arg1, s32*, 4);
-        sp40 = M2C_FIELD(arg1, s32*, 0);
-        sp44 = temp_r0;
-        sp48 = M2C_FIELD(arg1, f32*, 8);
-        sp48 = 0.0F;
-        sp34 = sp40;
-        sp38 = temp_r0;
-        sp3C = sp48;
-        sp58 = arg8;
-        sp5C = 0;
-        sp4C = M2C_FIELD(arg2, s32*, 0);
-        sp50 = M2C_FIELD(arg2, s32*, 4);
-        sp54 = M2C_FIELD(arg2, s32*, 8);
-        sp20 = M2C_FIELD(M2C_FIELD(arg0, void**, 0x2C), s32*, 0x518);
-        sp24 = arg0;
-        // sp64 |= 0x80;
-        sp60 = 0;
-        var_r30 = Item_80268B18((SpawnItem*) &sp20);
+    Item_GObj* var_r30 = NULL;
+    item = GET_ITEM(var_r30);
+    if (arg_gobj != NULL) {
+        spawn.vel.x = arg2->x;
+        spawn.vel.y = arg2->y;
+        spawn.vel.z = arg2->z;
+        spawn.prev_pos = *arg2;
+        spawn.x44_flag.bits.b0 = true;
+        // spawn.facing_dir = arg8;
+        spawn.prev_pos = *arg2;
+
+        spawn.pos.x = arg2->x;
+        spawn.pos.y = arg2->y;
+        spawn.pos.z = arg2->z;
+        owner = GET_ITEM(arg_gobj)->owner;
+        var_r30 = Item_80268B18((SpawnItem*) &owner);
         if (var_r30 != NULL) {
-            temp_r29 = var_r30->user_data;
+            temp_r29 = GET_ITEM(var_r30);
             temp_r29->xDD0_flag.u8 &= ~2;
             temp_r29->xD40 = 0.0F;
             it_80279BBC(temp_r29);
