@@ -17,28 +17,26 @@ void it_80288EFC(HSD_GObj*); /* static */
 Item_GObj* it_80288C88(HSD_GObj* arg_gobj, void* arg1, Vec3* arg2, f32 arg8)
 {
     SpawnItem spawn;
-    Item* item;
     Item* temp_r29;
-    HSD_GObj* owner;
+    Item_GObj* var_r30;
+    u8 _[10] = { 0 };
 
-    Item_GObj* var_r30 = NULL;
-    item = GET_ITEM(var_r30);
+    var_r30 = NULL;
     if (arg_gobj != NULL) {
-        spawn.vel.x = arg2->x;
-        spawn.vel.y = arg2->y;
-        spawn.vel.z = arg2->z;
+        spawn.kind = It_Kind_Egg;
         spawn.prev_pos = *arg2;
-        spawn.x44_flag.bits.b0 = true;
-        // spawn.facing_dir = arg8;
-        spawn.prev_pos = *arg2;
-
-        spawn.pos.x = arg2->x;
-        spawn.pos.y = arg2->y;
-        spawn.pos.z = arg2->z;
-        owner = GET_ITEM(arg_gobj)->owner;
-        var_r30 = Item_80268B18((SpawnItem*) &owner);
+        spawn.prev_pos.z = 0;
+        spawn.pos = spawn.prev_pos;
+        spawn.facing_dir = arg8;
+        spawn.x3C_damage = 0;
+        spawn.vel.x = spawn.vel.y = spawn.vel.z = 0;
+        spawn.x0_parent_gobj = GET_ITEM(arg_gobj)->owner;
+        spawn.x4_parent_gobj2 = arg_gobj;
+        spawn.x44_flag.bits.b0 = 1;
+        spawn.x40 = 0;
+        var_r30 = Item_80268B18((SpawnItem*) &spawn);
         if (var_r30 != NULL) {
-            temp_r29 = GET_ITEM(var_r30);
+            temp_r29 = var_r30->user_data;
             temp_r29->xDD0_flag.u8 &= ~2;
             temp_r29->xD40 = 0.0F;
             it_80279BBC(temp_r29);
