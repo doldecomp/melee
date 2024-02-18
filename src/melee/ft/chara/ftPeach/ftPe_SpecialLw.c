@@ -95,7 +95,7 @@ static ItemKind getVeg(HSD_GObj* gobj)
 static void setupVeg(ItemKind kind, HSD_GObj* gobj, Fighter* fp, Vec3* pos)
 {
     HSD_GObj* veg_gobj =
-        it_802BD4AC(gobj, pos, fp->ft_data->x8->unk10, kind, fp->facing_dir);
+        it_802BD4AC(gobj, pos, fp->ft_data->x8->x10, kind, fp->facing_dir);
     fp->item_gobj = veg_gobj;
     fp->fv.pe.veg_gobj = veg_gobj;
     if (veg_gobj != NULL) {

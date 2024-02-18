@@ -77,7 +77,7 @@ struct HitCapsule {
     /* +44 */ u8 x44;
     /* +45 */ u8 x45;
     /* +46 */ u8 x46[0x48 - 0x46];
-    /* +48 */ int x48;
+    /* +48 */ HSD_JObj* jobj;
     /* +4C */ Vec3 x4C;
     /* +58 */ Vec3 x58;
     /* +64 */ Vec3 hurt_coll_pos;

@@ -55,25 +55,25 @@ typedef struct _HSD_GObjLibInitDataType {
 
 /// @todo Belongs in `melee/` somewhere
 typedef struct _HSD_GObjList {
-    /* 0x00 */ HSD_GObj* x0;
-    /* 0x04 */ HSD_GObj* x4;
-    /* 0x08 */ HSD_GObj* x8;
-    /* 0x0C */ HSD_GObj* xC;
-    /* 0x10 */ HSD_GObj* x10;
-    /* 0x14 */ HSD_GObj* x14;
-    /* 0x18 */ HSD_GObj* x18;
-    /* 0x1C */ HSD_GObj* x1C;
-    /* 0x20 */ HSD_GObj* fighters;
-    /* 0x24 */ HSD_GObj* items;
-    /* 0x28 */ HSD_GObj* x28;
-    /* 0x2C */ HSD_GObj* x2C;
-    /* 0x30 */ HSD_GObj* x30;
-    /* 0x34 */ HSD_GObj* x34;
-    /* 0x38 */ HSD_GObj* x38;
-    /* 0x3C */ HSD_GObj* x3C;
-    /* 0x40 */ HSD_GObj* x40;
-    /* 0x44 */ HSD_GObj* x44;
-    /* 0x48 */ HSD_GObj* x48;
+    /*  +0 */ HSD_GObj* x0;
+    /*  +4 */ HSD_GObj* x4;
+    /*  +8 */ HSD_GObj* x8;
+    /*  +C */ HSD_GObj* xC;
+    /* +10 */ HSD_GObj* x10;
+    /* +14 */ HSD_GObj* x14;
+    /* +18 */ HSD_GObj* x18;
+    /* +1C */ HSD_GObj* x1C;
+    /* +20 */ HSD_GObj* fighters;
+    /* +24 */ HSD_GObj* items;
+    /* +28 */ HSD_GObj* x28;
+    /* +2C */ HSD_GObj* x2C;
+    /* +30 */ HSD_GObj* x30;
+    /* +34 */ HSD_GObj* x34;
+    /* +38 */ HSD_GObj* x38;
+    /* +3C */ HSD_GObj* x3C;
+    /* +40 */ HSD_GObj* x40;
+    /* +44 */ HSD_GObj* x44;
+    /* +48 */ HSD_GObj* x48;
 } HSD_GObjList;
 
 extern struct _unk_gobj_struct {

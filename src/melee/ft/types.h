@@ -516,7 +516,7 @@ struct ftCommonData {
     /* +7C8 */ int x7C8;
     /* +7CC */ int x7CC;
     /* +7D0 */ int x7D0;
-    /* +7D4 */ int x7D4;
+    /* +7D4 */ float hit_weight_mul;
     /* +7D8 */ int x7D8;
     /* +7DC */ int x7DC;
     /* +7E0 */ int x7E0;
@@ -551,19 +551,28 @@ typedef struct _DObjList {
     HSD_DObj** data;
 } DObjList;
 
-typedef struct _ftData {
+typedef struct {
+    u32 unk0;
+    f32 unk4;
+} ftData_x34;
+
+struct ftData {
     /*  +0 */ struct {
-        u8 x0_fill[0x8C];
-        float x8C;
-        u8 x90_fill[0xFC - 0x90];
-        float xFC;
-        u8 x100_fill[0x16C - 0x100];
-        s32 x16C_idx;
+        /*   +0 */ u8 x0[0x8C];
+        /*  +8C */ float x8C;
+        /*  +90 */ u8 x90[0xFC - 0x90];
+        /*  +FC */ float xFC;
+        /* +100 */ u8 x100[0x16C - 0x100];
+        /* +16C */ int x16C_idx;
     }* x0;
     /*  +4 */ void* ext_attr;
-    /*  +8 */ struct {
-        u8 x0_fill[0x10];
-        u8 unk10, unk11, unk12, unk13, unk14;
+    /*  +8 */ struct ftData_x8 {
+        /*  +0 */ u8 x0[0x10];
+        /* +10 */ u8 x10;
+        /* +11 */ u8 x11;
+        /* +12 */ u8 x12;
+        /* +13 */ u8 x13;
+        /* +14 */ u8 x14;
     }* x8;
     /*  +C */ struct S_TEMP4* xC;
     /* +10 */ u8* x10;
@@ -571,18 +580,23 @@ typedef struct _ftData {
     /* +18 */ u8* x18;
     /* +1C */ UNK_T x1C;
     /* +20 */ struct {
-        UNK_T x0;
-        HSD_Joint* x8;
+        /* +0 */ UNK_T x0;
+        /* +4 */ HSD_Joint* x8;
     }* x20;
     /* +24 */ int x24;
-    /* +28 */ u8 x28[0x3C - 0x28];
-    struct UnkFloat6_Camera* x3C;
-    s32 filler_x40[2];
-    /* 0x48 */ UNK_T* x48_items;
-    FtCollisionData* x4C_collisionData;
-    s32 filler_x50[2];
-    void* x58;
-} ftData;
+    /* +28 */ u8 x28[0x34 - 0x28];
+    /* +34 */ struct ftData_x34 {
+        /* +0 */ Fighter_Part x0;
+        /* +4 */ float scale;
+    }* x34;
+    /* +38 */ UNK_T x38;
+    /* +3C */ struct UnkFloat6_Camera* x3C;
+    /* +40 */ s32 filler_x40[2];
+    /* +48 */ UNK_T* x48_items;
+    /* +4C */ FtCollisionData* x4C_collisionData;
+    /* +50 */ u8 x50[0x58 - 0x50];
+    /* +58 */ void* x58;
+};
 
 typedef struct _ThrowFlags {
     union {

@@ -1455,7 +1455,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     }
     dst->x221E_b4 = src->x221E_b4;
     if (src->x197C != NULL) {
-        it_8026B9A8(src->x197C, dst_gobj, dst->ft_data->x8->unk12);
+        it_8026B9A8(src->x197C, dst_gobj, dst->ft_data->x8->x12);
         it_802950D4(src->x197C, 0);
         ftCommon_8007F948(dst_gobj, src->x197C, src->x2014);
         ftCommon_8007FA00(gobj);
@@ -1463,7 +1463,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
         dst->x197C = NULL;
     }
     if (src->x1980 != NULL) {
-        it_8026B9A8(src->x1980, dst_gobj, dst->ft_data->x8->unk12);
+        it_8026B9A8(src->x1980, dst_gobj, dst->ft_data->x8->x12);
         ftCommon_8007FE84(dst_gobj, src->x1980, src->x2018, src->x2024);
         ftCommon_8007FDA0(gobj);
     } else {
@@ -1477,7 +1477,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
         dst->item_gobj = src->item_gobj;
         dst->x221E_b3 = src->x221E_b3;
         ftCo_80094818(dst_gobj, 1);
-        it_8026B9A8(src->item_gobj, dst_gobj, dst->ft_data->x8->unk10);
+        it_8026B9A8(src->item_gobj, dst_gobj, dst->ft_data->x8->x10);
     }
     un_80322314();
     ftMaterial_800BFD04(gobj);
@@ -1653,7 +1653,7 @@ void ftCommon_8007FA58(HSD_GObj* gobj, HSD_GObj* arg1)
     vec = ftCo_803B74A0;
     it_8026BD0C(arg1);
     Item_8026ABD8(arg1, &vec, 0);
-    Item_8026AB54(arg1, gobj, fp->ft_data->x8->unk12);
+    Item_8026AB54(arg1, gobj, fp->ft_data->x8->x12);
     ftCommon_8007F948(gobj, arg1, it_8026B54C(arg1));
     ftCo_800D105C(gobj);
     ft_80081C88(gobj, fp->x34_scale.y);
@@ -1682,7 +1682,7 @@ void ftCommon_8007FC7C(HSD_GObj* gobj, float arg8)
         fp->x2024 = sp20 + arg8;
         ftCommon_8007FDA0(gobj);
     } else {
-        item_gobj = it_8029A748(gobj, &fp->cur_pos, fp->ft_data->x8->unk12,
+        item_gobj = it_8029A748(gobj, &fp->cur_pos, fp->ft_data->x8->x12,
                                 fp->facing_dir);
         if (item_gobj != NULL) {
             ftCommon_8007FE84(gobj, item_gobj, sp20, arg8);

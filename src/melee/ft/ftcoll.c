@@ -1361,7 +1361,7 @@ s32 ftColl_8007B868(Fighter_GObj* gobj)
 
 void ftColl_8007B8A8(HitCapsule* hit, Vec3* vec)
 {
-    hit->x48 = 0;
+    hit->jobj = NULL;
     hit->b_offset = *vec;
 }
 

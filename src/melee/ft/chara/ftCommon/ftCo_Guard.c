@@ -228,7 +228,7 @@ void ftCo_80091D58(Fighter* fp)
 {
     Vec3 scl;
     scl.x = scl.y = scl.z = inlineB0(fp);
-    HSD_JObjSetScale(fp->parts[fp->ft_data->x8->unk11].joint, &scl);
+    HSD_JObjSetScale(fp->parts[fp->ft_data->x8->x11].joint, &scl);
 }
 
 static inline void inlineD0(ftCo_GObj* gobj)
@@ -292,7 +292,7 @@ void ftCo_80092158(ftCo_GObj* gobj, int arg1, HSD_JObj* arg2)
 void ftCo_800921DC(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    ftCo_80092158(gobj, 1047, fp->parts[fp->ft_data->x8->unk11].joint);
+    ftCo_80092158(gobj, 1047, fp->parts[fp->ft_data->x8->x11].joint);
     fp->x2219_b0 = true;
     fp->mv.co.guard.xC = false;
     fp->mv.co.guard.x0 = 0;
@@ -311,7 +311,7 @@ void ftCo_800921DC(HSD_GObj* gobj)
     {
         Vec3 trans;
         trans.x = trans.y = trans.z = 0;
-        HSD_JObjSetTranslate(fp->parts[fp->ft_data->x8->unk11].joint, &trans);
+        HSD_JObjSetTranslate(fp->parts[fp->ft_data->x8->x11].joint, &trans);
     }
     ftCo_80091E78(gobj, 0);
     ft_80088148(fp, 110, 127, 64);
@@ -340,7 +340,7 @@ void ftCo_80092450(ftCo_GObj* gobj)
     AbsorbDesc absorb;
     u8 _[4] = { 0 };
     ftCo_Fighter* fp = gobj->user_data;
-    absorb.x0_bone_id = fp->ft_data->x8->unk11;
+    absorb.x0_bone_id = fp->ft_data->x8->x11;
     absorb.x10_size = 1;
     absorb.x4_offset.x = absorb.x4_offset.y = absorb.x4_offset.z = 0.0f;
     ftColl_8007B1B8(gobj, (ShieldDesc*) &absorb, ftCo_80092E50);
@@ -494,7 +494,7 @@ void ftCo_80092908(ftCo_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCo_MS_Guard, Ft_MF_SkipAnim, 0, 1, 0,
                               NULL);
     {
-        HSD_JObj* jobj = fp->parts[fp->ft_data->x8->unk11].joint;
+        HSD_JObj* jobj = fp->parts[fp->ft_data->x8->x11].joint;
         ftCo_80092158(gobj, 1048, jobj);
         fp->x2219_b0 = true;
         ftCo_80092450(gobj);
@@ -642,7 +642,7 @@ void ftCo_80092F2C(HSD_GObj* gobj, bool arg1)
     fp->x670_timer_lstick_tilt_x = -2;
     fp->post_hitlag_cb = ftCo_800932DC;
     if (!fp->x221C_b2) {
-        ftCo_80092158(gobj, 1049, fp->parts[fp->ft_data->x8->unk11].joint);
+        ftCo_80092158(gobj, 1049, fp->parts[fp->ft_data->x8->x11].joint);
         fp->x2219_b0 = true;
     }
     {
@@ -761,7 +761,7 @@ void ftCo_8009370C(ftCo_GObj* gobj, HSD_GObjEvent on_reflect)
     u8 _[8] = { 0 };
     ReflectDesc reflect;
     ftCo_Fighter* fp = gobj->user_data;
-    reflect.x0_bone_id = fp->ft_data->x8->unk11;
+    reflect.x0_bone_id = fp->ft_data->x8->x11;
     reflect.x4_max_damage = fp->shield_health;
     reflect.x8_offset.x = reflect.x8_offset.y = reflect.x8_offset.z = 0;
     reflect.x14_size = p_ftCommonData->x2A8;
@@ -776,7 +776,7 @@ void ftCo_80093790(ftCo_GObj* gobj)
     ftCo_Fighter* fp = gobj->user_data;
     ftCommon_8007DB24(gobj);
     {
-        HSD_JObj* jobj = fp->parts[fp->ft_data->x8->unk11].joint;
+        HSD_JObj* jobj = fp->parts[fp->ft_data->x8->x11].joint;
         ftCo_80092158(gobj, 1050, jobj);
         fp->x2219_b0 = true;
         ft_80088148(fp, 128, 127, 64);
