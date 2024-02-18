@@ -4,6 +4,7 @@
 [![GC/Wii Decompilation](https://discordapp.com/api/guilds/727908905392275526/widget.png?style=shield)](https://discord.gg/hKx3FJJgrV)
 [![build-melee](https://github.com/doldecomp/melee/actions/workflows/build-melee.yml/badge.svg)](https://github.com/doldecomp/melee/actions/workflows/build-melee.yml)
 [![publish-pages](https://github.com/doldecomp/melee/actions/workflows/publish-pages.yml/badge.svg)](https://github.com/doldecomp/melee/actions/workflows/publish-pages.yml)
+[![publish-packages](https://github.com/doldecomp/melee/actions/workflows/publish-packages.yml/badge.svg)](https://github.com/doldecomp/melee/actions/workflows/publish-packages.yml)
 
 This repo contains a WIP decompilation of Super Smash Bros Melee (US).
 
