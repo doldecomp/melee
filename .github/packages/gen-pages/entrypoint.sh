@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euo pipefail
 
 git clone /input /tmp/input
@@ -9,10 +9,14 @@ cp -R /opt/venv .venv
 . .venv/bin/activate
 pip install --no-cache-dir -r requirements.txt
 
-mkdir -p build/doxygen
+touch /output/.nojekyll
+
+mkdir build
+
+mkdir build/doxygen
 doxygen Doxyfile
-touch build/doxygen/html/.nojekyll
+cp -R build/doxygen/html/* /output
+
 python tools/m2ctx/m2ctx.py -pqr
-melee-mwcc build/ctx.c -v -o build/ctx.c.o
-cp build/ctx.html build/doxygen/html/
-cp -r build/doxygen/html/* /output
+melee-mwcc build/ctx.c -v -o build/ctx.o
+cp build/ctx.html /output/

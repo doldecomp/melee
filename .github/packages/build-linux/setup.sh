@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euox pipefail
 
 apt update
@@ -28,8 +28,17 @@ curl -L "$MELEE_COMPILERS_URL" |
 mv /tmp/GC /tmp/mwcc_compiler
 mv /tmp/mwcc_compiler /opt
 
+# Install binutils
+dst="$DEVKITPPC/bin"
+mkdir -p "$dst"
+curl -L "$BINUTILS_URL" |
+    bsdtar -xvf- -C /tmp
+src='/tmp/powerpc-eabi-as'
+chmod +x "$src"
+mv "$src" "$dst"
+
+# Clean up
 apt remove -y \
-    megatools \
     libarchive-tools
 apt autoremove -y
 apt clean
