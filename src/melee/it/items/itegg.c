@@ -12,6 +12,12 @@
 #include <baselib/gobj.h>
 #include <baselib/random.h>
 
+/// @todo Might be #EggVars
+struct ItEggAttrs {
+    /* +0 */ bool x0;
+    /* +4 */ int rand_max;
+};
+
 void it_80288EFC(HSD_GObj*); /* static */
 
 Item_GObj* it_80288C88(HSD_GObj* arg_gobj, void* arg1, Vec3* arg2, f32 arg8)
@@ -58,20 +64,21 @@ void it_80288D98(Item_GObj* gobj)
 
 bool it_80288DC4(Item_GObj* gobj)
 {
-    Vec3 arg_vec;
-
-    Item* item = GET_ITEM(gobj);
-    void* attrs = item->xC4_article_data->x4_specialAttributes;
-    if (HSD_Randi(M2C_FIELD(attrs, s32*, 4)) == 0) {
+    Item* ip = GET_ITEM(gobj);
+    struct ItEggAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    if (HSD_Randi(attrs->rand_max) == 0) {
         return true;
     }
 
-    arg_vec.x = arg_vec.y = arg_vec.z = 0.0F;
-    if (it_8026F8B4(gobj, &item->pos, &arg_vec, 0) != 0) {
-        return false;
+    {
+        Vec3 pos;
+        pos.x = pos.y = pos.z = 0.0F;
+        if (it_8026F8B4(gobj, &ip->pos, &pos, 0)) {
+            return false;
+        }
     }
 
-    it_8026F3D4(gobj, 0, *(bool*) attrs, 0);
+    it_8026F3D4(gobj, 0, attrs->x0, 0);
     return false;
 }
 
@@ -221,64 +228,52 @@ bool it_80289210(HSD_GObj* gobj)
     return false;
 }
 
-int it_80289218(Item_GObj* arg0)
+static inline void inlineA1(Item_GObj* gobj)
 {
-    f32 sp28;
-    f32 sp24;
-    f32 sp20;
-    Item* temp_r31;
-    Item* temp_r31_2;
-    Item* temp_r31_3;
-    s32 var_r0;
-    void* temp_r30;
+    Item* ip = GET_ITEM(gobj);
+    it_8026BB44(gobj);
+    it_80272C08(gobj);
+    it_802756D0(gobj);
+    it_8026B3A8(gobj);
+    it_8026BD24(gobj);
+    it_8027518C(gobj);
+    ip->x40_vel.x = 0.0F;
+    ip->x40_vel.y = 0.0F;
+    ip->xDCF_flag.bits.b2 = true;
+    ip->xDD4_itemVar.capsule.x0 = 1;
+    ip->xDD4_itemVar.capsule.x4 = 20;
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+}
 
-    temp_r31 = arg0->user_data;
-    if ((s32) temp_r31->xDD4_itemVar.capsule.x0 != 0) {
-        return 0;
+static inline void inlineA2(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    u8 _[8] = { 0 };
+    HSD_JObjSetFlagsAll(gobj->hsd_obj, JOBJ_HIDDEN);
+    it_802756D0(gobj);
+    ip->x40_vel.x = 0.0F;
+    ip->x40_vel.y = 0.0F;
+    ip->xDCF_flag.bits.b2 = true;
+    ip->xDD4_itemVar.capsule.x0 = true;
+    ip->xDD4_itemVar.capsule.x4 = 40;
+    it_8026B3A8(gobj);
+    Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+}
+
+bool it_80289218(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.capsule.x0) {
+        return false;
     }
-    temp_r30 = temp_r31->xC4_article_data->x4_specialAttributes;
-    if (HSD_Randi(M2C_FIELD(temp_r30, s32*, 4)) == 0) {
-        var_r0 = 1;
-    } else {
-        sp28 = 0.0F;
-        sp24 = 0.0F;
-        sp20 = 0.0F;
-        if (it_8026F8B4(arg0, &temp_r31->pos, (Vec3*) &sp20, 0) != 0) {
-            var_r0 = 0;
-        } else {
-            it_8026F3D4(arg0, 0, M2C_FIELD(temp_r30, s32*, 0), 0);
-            var_r0 = 0;
-        }
+    if (it_80288DC4(gobj)) {
+        inlineA1(gobj);
+        return false;
     }
-    if (var_r0 != 0) {
-        temp_r31_2 = arg0->user_data;
-        it_8026BB44(arg0);
-        it_80272C08(arg0);
-        it_802756D0((HSD_GObj*) arg0);
-        it_8026B3A8(arg0);
-        it_8026BD24(arg0);
-        it_8027518C(arg0);
-        temp_r31_2->x40_vel.x = 0.0F;
-        temp_r31_2->x40_vel.y = 0.0F;
-        temp_r31_2->xDCF_flag.u8 |= 0x20;
-        temp_r31_2->xDD4_itemVar.capsule.x0 = 1;
-        temp_r31_2->xDD4_itemVar.capsule.x4 = 0x14;
-        Item_80268E5C((HSD_GObj*) arg0, 5, ITEM_ANIM_UPDATE);
-        return 0;
-    }
-    efSync_Spawn(0x4D0, arg0, &temp_r31->pos);
-    Item_8026AE84(temp_r31, 0xF4, 0x7F, 0x40);
-    temp_r31_3 = arg0->user_data;
-    HSD_JObjSetFlagsAll(arg0->hsd_obj, 0x10U);
-    it_802756D0((HSD_GObj*) arg0);
-    temp_r31_3->x40_vel.x = 0.0F;
-    temp_r31_3->x40_vel.y = 0.0F;
-    temp_r31_3->xDCF_flag.u8 |= 0x20;
-    temp_r31_3->xDD4_itemVar.capsule.x0 = 1;
-    temp_r31_3->xDD4_itemVar.capsule.x4 = 0x28;
-    it_8026B3A8(arg0);
-    Item_80268E5C((HSD_GObj*) arg0, 6, ITEM_ANIM_UPDATE);
-    return 0;
+    efSync_Spawn(1232, gobj, &ip->pos);
+    Item_8026AE84(ip, 244, 0x7F, 0x40);
+    inlineA2(gobj);
+    return false;
 }
 
 int it_802893D4(Item_GObj* arg0)
