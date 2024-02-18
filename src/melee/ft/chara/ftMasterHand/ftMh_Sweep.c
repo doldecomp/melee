@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include "ftMh_Sweep.h"
 
 #include "ft/fighter.h"
@@ -10,7 +12,6 @@
 #include "pl/player.h"
 
 #include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
 
 void ftMh_Damage_IASA(HSD_GObj* gobj)
 {

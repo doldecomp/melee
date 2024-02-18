@@ -74,7 +74,7 @@ void ftMh_TagGrab_Phys(HSD_GObj* gobj)
 void ftMh_TagGrab_Coll(HSD_GObj* gobj) {}
 
 /// @todo Fix weird forward declaration
-extern const f32 neg1;
+extern const float neg1;
 
 void ftMh_TagSqueeze_Anim(HSD_GObj* gobj)
 {
@@ -91,7 +91,7 @@ void ftMh_TagSqueeze_Anim(HSD_GObj* gobj)
             Fighter* victim_fp = GET_FIGHTER(victim);
             ftCommon_8007E2F4(fp, 0);
             ftCo_800DE2A8(gobj, victim);
-            victim_fp->dmg.x1844_direction *= neg1;
+            victim_fp->dmg.facing_dir_1 *= neg1;
             ftCo_800DE7C0(victim, 0, 0);
         }
     }
@@ -184,4 +184,4 @@ void ftMh_TagCancel_Coll(HSD_GObj* gobj)
     }
 }
 
-const f32 neg1 = -1;
+const float neg1 = -1;

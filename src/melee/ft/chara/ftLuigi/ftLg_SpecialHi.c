@@ -84,14 +84,14 @@ void ftLg_SpecialHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftLuigiAttributes* luigiAttrs;
-    f32 temp_range;
-    f32 superJump_StickRange;
-    f32 stick_x;
-    f32 control;
-    f32 control_2;
-    f32 stick_range;
-    f32 stick_range_2;
-    f32 stick_angle;
+    float temp_range;
+    float superJump_StickRange;
+    float stick_x;
+    float control;
+    float control_2;
+    float stick_range;
+    float stick_range_2;
+    float stick_angle;
 
     fp = GET_FIGHTER(gobj);
     stick_x = fp->input.lstick.x;
@@ -102,9 +102,9 @@ void ftLg_SpecialHi_IASA(HSD_GObj* gobj)
             luigiAttrs->x5C_LUIGI_SUPERJUMP_MOMENTUM_STICK_RANGE;
         if (stick_range > superJump_StickRange) {
             temp_range =
-                (f32) ((f64) luigiAttrs->x60_LUIGI_SUPERJUMP_ANGLE_DIFF *
-                       ((f64) (stick_range - superJump_StickRange) /
-                        (1.0 - (f64) superJump_StickRange)));
+                (float) ((f64) luigiAttrs->x60_LUIGI_SUPERJUMP_ANGLE_DIFF *
+                         ((f64) (stick_range - superJump_StickRange) /
+                          (1.0 - (f64) superJump_StickRange)));
             if (stick_x > 0.0f) {
                 control = -(0.01745329238474369f * temp_range);
             } else {
@@ -141,15 +141,15 @@ void ftLg_SpecialHi_IASA(HSD_GObj* gobj)
 void ftLg_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    f32 stick_x = fp->input.lstick.x;
+    float stick_x = fp->input.lstick.x;
     ftLuigiAttributes* luigiAttrs = fp->dat_attrs;
-    f32 stick_range = stickGetDir(fp->input.lstick.x, 0.0f);
-    f32 temp_range;
-    f32 superJump_StickRange;
-    f32 control;
-    f32 control_2;
-    f32 stick_range_2;
-    f32 stick_angle;
+    float stick_range = stickGetDir(fp->input.lstick.x, 0.0f);
+    float temp_range;
+    float superJump_StickRange;
+    float control;
+    float control_2;
+    float stick_range_2;
+    float stick_angle;
 
     u8 _[12];
 
@@ -158,9 +158,9 @@ void ftLg_SpecialAirHi_IASA(HSD_GObj* gobj)
             luigiAttrs->x5C_LUIGI_SUPERJUMP_MOMENTUM_STICK_RANGE;
         if (stick_range > superJump_StickRange) {
             temp_range =
-                (f32) ((f64) luigiAttrs->x60_LUIGI_SUPERJUMP_ANGLE_DIFF *
-                       ((f64) (stick_range - superJump_StickRange) /
-                        (1.0 - (f64) superJump_StickRange)));
+                (float) ((f64) luigiAttrs->x60_LUIGI_SUPERJUMP_ANGLE_DIFF *
+                         ((f64) (stick_range - superJump_StickRange) /
+                          (1.0 - (f64) superJump_StickRange)));
             if (stick_x > 0.0f) {
                 control = -(0.01745329238474369f * temp_range);
             } else {

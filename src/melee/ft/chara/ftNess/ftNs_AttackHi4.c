@@ -1,3 +1,4 @@
+#include "ftCommon/forward.h"
 #include "it/forward.h"
 #include "lb/forward.h"
 
@@ -26,7 +27,6 @@
 
 #include <common_structs.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/gobj.h>
 
 void ftNs_AttackHi4_YoyoUpdateHitPos(HSD_GObj* gobj)
 {
@@ -57,26 +57,23 @@ void ftNs_AttackHi4_YoyoCheckTimedRehit(HSD_GObj* gobj)
     }
 };
 
-#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
-#endif
-
 // Apply modified damage to D-Smash Yo-Yo hitbox after charge
-static void ftNs_AttackHi4_YoyoApplyDamage(f32 unk_float, HSD_GObj* gobj)
+static void ftNs_AttackHi4_YoyoApplyDamage(float unk_float, HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftNessAttributes* ness_attr = fp->dat_attrs;
-    f32 charge_duration;
-    f32 charge_duration2;
-    f32 damage_mul;
-    f32 final_damage;
+    float charge_duration;
+    float charge_duration2;
+    float damage_mul;
+    float final_damage;
 
     if (unk_float != 0.0f) {
         if (fp->x914->state == HitCapsule_Enabled) {
             // Likely 1/256 but won't match.
-            // ((f32) 1 / 256.0) does not match either.
-            f32 const mul = 0.0039059999398887157f;
+            // ((float) 1 / 256.0) does not match either.
+            float const mul = 0.0039059999398887157f;
 
             charge_duration = ness_attr->xAC_YOYO_CHARGE_DURATION;
             charge_duration2 = unk_float / charge_duration;
@@ -89,10 +86,7 @@ static void ftNs_AttackHi4_YoyoApplyDamage(f32 unk_float, HSD_GObj* gobj)
         }
     }
 };
-
-#ifdef MUST_MATCH
 #pragma pop
-#endif
 
 static inline void push_ecb(CollData* a, Vec3* b)
 {
@@ -101,25 +95,20 @@ static inline void push_ecb(CollData* a, Vec3* b)
 }
 
 s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
-                                    Vec3* ECBUnk2, f32 float_unk)
+                                    Vec3* ECBUnk2, float float_unk)
 {
-    CollData sp34;
-    f32 sp1C[6]; // This is probably some kind of struct, but I don't know
-                 // which one. ECBVar_UnkFloat doesn't make sense.
+    CollData coll;
+    ftCollisionBox ecb;
     Fighter* fp = gobj->user_data;
-    f32 y_scale;
-    s32 retval;
+    float y_scale;
 
     y_scale = float_unk * fp->x34_scale.y;
 
-    sp1C[4] = y_scale;
-    sp1C[0] = y_scale;
-    sp1C[2] = -y_scale;
-    sp1C[1] = -y_scale;
-    sp1C[3] = 0.0f;
-    sp1C[5] = 0.0f;
+    ecb.top = ecb.right.x = y_scale;
+    ecb.bottom = ecb.left.x = -y_scale;
+    ecb.right.y = ecb.left.y = 0.0f;
 
-    mpColl_80041EE4(&sp34);
+    mpColl_80041EE4(&coll);
 
     // why do it like this?
     // original code:
@@ -132,40 +121,41 @@ s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
     // sp34.x4_vec = ECBUnk2->x0_vec;
     // guess: there is a "push ECB" function that handles moving current to
     // old, that got called twice and inlined.
-    push_ecb(&sp34, ECBUnk);
-    push_ecb(&sp34, ECBUnk2);
+    push_ecb(&coll, ECBUnk);
+    push_ecb(&coll, ECBUnk2);
 
-    sp34.x34_flags.bits.b1234 = 5;
+    coll.x34_flags.bits.b1234 = 5;
 
-    mpColl_8004730C(&sp34, &sp1C); // EnvironmentCollisionCheck_NessYoYo
+    mpColl_8004730C(&coll, &ecb); // EnvironmentCollisionCheck_NessYoYo
 
-    /// @todo Define flags.
-    retval = 0;
-    if ((sp34.env_flags & 98304) != 0) {
-        retval |= 32768;
+    {
+        s32 retval;
+        /// @todo Define flags.
+        retval = 0;
+        if ((coll.env_flags & 98304) != 0) {
+            retval |= 32768;
+        }
+
+        if ((coll.env_flags & 63) != 0) {
+            retval |= 1;
+        }
+
+        if ((coll.env_flags & 4032) != 0) {
+            retval |= 64;
+        }
+
+        if ((coll.env_flags & 24576) != 0) {
+            retval |= 8192;
+        }
+
+        return retval;
     }
-
-    if ((sp34.env_flags & 63) != 0) {
-        retval |= 1;
-    }
-
-    if ((sp34.env_flags & 4032) != 0) {
-        retval |= 64;
-    }
-
-    if ((sp34.env_flags & 24576) != 0) {
-        retval |= 8192;
-    }
-
-    return retval;
 }
 
 /// @todo Remove @c dont_inline.
 ///       This is probably a result of incorrectly splitting out the function.
-#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
-#endif
 void ftNs_AttackHi4_YoyoSetUnkPos(HSD_GObj* gobj, Vec3* pos)
 {
     Vec3 sp20;
@@ -191,9 +181,7 @@ void ftNs_AttackHi4_YoyoSetUnkPos(HSD_GObj* gobj, Vec3* pos)
         pos, 4, -atan2f(collData->floor.normal.x, collData->floor.normal.y));
     lbVector_Add(pos, &sp14);
 }
-#ifdef MUST_MATCH
 #pragma pop
-#endif
 
 void ftNs_AttackHi4_YoyoSetHitPos(HSD_GObj* gobj)
 {
@@ -225,13 +213,13 @@ void ftNs_AttackHi4_YoyoSetHitPos(HSD_GObj* gobj)
     fp->fv.ns.yoyo_hitbox_pos = sp2C;
 }
 
-void ftNs_AttackHi4_YoyoSetHitPosUnk(HSD_GObj* gobj, f32 pos_unk)
+void ftNs_AttackHi4_YoyoSetHitPosUnk(HSD_GObj* gobj, float pos_unk)
 {
     Vec3 sp3C;
     Vec3 sp30;
     Vec3 sp24;
     Vec3 sp18;
-    f32 pos_update;
+    float pos_update;
 
     /// @todo Can't move below @c fp.
     CollData* collData;
@@ -258,19 +246,19 @@ void ftNs_AttackHi4_YoyoSetHitPosUnk(HSD_GObj* gobj, f32 pos_unk)
     sp30 = fp->fv.ns.yoyo_hitbox_pos;
     pos_update = 1.0f - pos_unk;
     fp->fv.ns.yoyo_hitbox_pos.x =
-        (f32) ((sp3C.x * pos_unk) + (sp30.x * pos_update));
+        (float) ((sp3C.x * pos_unk) + (sp30.x * pos_update));
     fp->fv.ns.yoyo_hitbox_pos.y =
-        (f32) ((sp3C.y * pos_unk) + (sp30.y * pos_update));
+        (float) ((sp3C.y * pos_unk) + (sp30.y * pos_update));
     fp->fv.ns.yoyo_hitbox_pos.z =
-        (f32) ((sp3C.z * pos_unk) + (sp30.z * pos_update));
+        (float) ((sp3C.z * pos_unk) + (sp30.z * pos_update));
 }
 
 bool ftNs_AttackHi4_YoyoCheckNoObstruct(HSD_GObj* gobj)
 {
     Vec3 sp20;
     Vec3 sp14;
-    f32 ECB_MUL_Y;
-    f32 ECB_X;
+    float ECB_MUL_Y;
+    float ECB_X;
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
@@ -334,7 +322,7 @@ void ftNs_AttackHi4_YoyoApplySmash(HSD_GObj* gobj)
 
     HSD_GObj* temp_yoyo;
     u32 colAnimID;
-    f32 posX;
+    float posX;
     Item* item_data;
     Article* article;
     itYoyoAttributes* yoyo_attr;
@@ -386,7 +374,7 @@ void ftNs_AttackHi4_YoyoSetChargeDamage(HSD_GObj* gobj)
     Fighter* fp;
     Fighter* fighter_data2;
     Vec3 sp30;
-    f32 smashChargeFrames;
+    float smashChargeFrames;
     HSD_GObj* yoyo_GObj;
     itYoyoAttributes* yoyo_attr;
     ftNessAttributes* ness_attr;
@@ -521,14 +509,14 @@ bool ftNs_AttackHi4_YoyoThink_IsRemove(HSD_GObj* gobj)
 
 void ftNs_AttackHi4_YoyoSetUnkRate(HSD_GObj* gobj)
 {
-    f32 texanim_unk;
+    float texanim_unk;
     Item* item_data;
     Article* item_article;
     itYoyoAttributes* yoyo_attr;
     HSD_GObj* yoyo_GObj;
     Fighter* fp;
     ftNessAttributes* ness_attr;
-    f32 yoyo_float;
+    float yoyo_float;
 
     u8 _[8];
 
@@ -542,8 +530,9 @@ void ftNs_AttackHi4_YoyoSetUnkRate(HSD_GObj* gobj)
 
         texanim_unk = yoyo_attr->x20_UNK_TEXANIM_MOD;
         yoyo_float = ((texanim_unk - yoyo_attr->x1C_UNK_TEXANIM_SPEED));
-        yoyo_float = yoyo_float * ((f32) fp->mv.ns.attackhi4.yoyoCurrentFrame /
-                                   ness_attr->xAC_YOYO_CHARGE_DURATION);
+        yoyo_float =
+            yoyo_float * ((float) fp->mv.ns.attackhi4.yoyoCurrentFrame /
+                          ness_attr->xAC_YOYO_CHARGE_DURATION);
 
         fp->fv.ns.x223C = texanim_unk - yoyo_float;
     }
@@ -797,7 +786,7 @@ static inline HSD_GObj* GetYoyoGObj(Fighter* fp)
 void ftNs_AttackHi4Charge_Anim(
     HSD_GObj* gobj) // Ness's Up Smash Charge Animation callback
 {
-    f32 unk_float;
+    float unk_float;
     Item* item_data;
     itYoyoAttributes* yoyo_attr;
     HSD_GObj* yoyo_GObj;
@@ -817,7 +806,7 @@ void ftNs_AttackHi4Charge_Anim(
         unk_float = (yoyo_attr->x20_UNK_TEXANIM_MOD -
                      yoyo_attr->x1C_UNK_TEXANIM_SPEED);
         unk_float =
-            unk_float * ((f32) temp_fp->mv.ns.attackhi4.yoyoCurrentFrame /
+            unk_float * ((float) temp_fp->mv.ns.attackhi4.yoyoCurrentFrame /
                          temp_ness_attr->xAC_YOYO_CHARGE_DURATION);
         temp_fp->fv.ns.x223C = yoyo_attr->x20_UNK_TEXANIM_MOD - unk_float;
     }
@@ -832,7 +821,7 @@ void ftNs_AttackHi4Charge_Anim(
             }
         }
     }
-    if ((f32) fp->mv.ns.attackhi4.yoyoCurrentFrame >=
+    if ((float) fp->mv.ns.attackhi4.yoyoCurrentFrame >=
         ness_attr->xAC_YOYO_CHARGE_DURATION)
     {
         ftNs_AttackHi4Release_Enter(gobj);
@@ -948,18 +937,18 @@ void ftNs_AttackHi4Release_Phys(
     Vec3 sp30;
     Vec3 sp24;
     Vec3 sp18;
-    f32 temp_f2;
+    float temp_f2;
     s32 yoyoSmashFrameCurr;
     Fighter* fp;
     Fighter* fighter_data2;
     Fighter* fighter_data3;
-    f32 phi_f31;
+    float phi_f31;
 
     fp = GET_FIGHTER(gobj);
     ft_80084F3C(gobj);
     yoyoSmashFrameCurr = fp->mv.ns.attackhi4.yoyoCurrentFrame;
     if (yoyoSmashFrameCurr < 24) {
-        phi_f31 = 0.10000000149011612f * ((f32) yoyoSmashFrameCurr - 14.0f);
+        phi_f31 = 0.10000000149011612f * ((float) yoyoSmashFrameCurr - 14.0f);
         if (phi_f31 >= 1.0f) {
             phi_f31 = 1.0f;
         } else {
@@ -972,11 +961,11 @@ void ftNs_AttackHi4Release_Phys(
         sp30 = fighter_data2->fv.ns.yoyo_hitbox_pos;
         temp_f2 = 1.0f - phi_f31;
         fighter_data2->fv.ns.yoyo_hitbox_pos.x =
-            (f32) ((sp24.x * phi_f31) + (sp30.x * temp_f2));
+            (float) ((sp24.x * phi_f31) + (sp30.x * temp_f2));
         fighter_data2->fv.ns.yoyo_hitbox_pos.y =
-            (f32) ((sp24.y * phi_f31) + (sp30.y * temp_f2));
+            (float) ((sp24.y * phi_f31) + (sp30.y * temp_f2));
         fighter_data2->fv.ns.yoyo_hitbox_pos.z =
-            (f32) ((sp24.z * phi_f31) + (sp30.z * temp_f2));
+            (float) ((sp24.z * phi_f31) + (sp30.z * temp_f2));
         return;
     }
     fighter_data3 = GET_FIGHTER(gobj);

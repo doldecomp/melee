@@ -12,8 +12,8 @@
 #define M_PI_2 (M_PI / 2)
 #define M_PI_3 (M_PI / 3)
 
-static float const deg_to_rad ATTRIBUTE_USED = M_PI / 180;
-static float const rad_to_deg ATTRIBUTE_USED = 180 / M_PI;
+static float const deg_to_rad = M_PI / 180;
+static float const rad_to_deg = 180 / M_PI;
 
 #ifdef __MWERKS__
 #pragma push
@@ -101,6 +101,24 @@ static inline f32 fabs_inline(f32 x)
     } else {
         return x;
     }
+}
+
+inline float sqrtf_accurate(float x)
+{
+    volatile float y;
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x); // returns an approximation to
+        guess =
+            0.5 * guess * (3.0 - guess * guess * x); // now have 12 sig bits
+        guess =
+            0.5 * guess * (3.0 - guess * guess * x); // now have 24 sig bits
+        guess =
+            0.5 * guess * (3.0 - guess * guess * x); // now have 32 sig bits
+        guess = 0.5 * guess * (3.0 - guess * guess * x); // extra iteration
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
 }
 
 double frexp(double x, int* exponent);

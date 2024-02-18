@@ -2344,22 +2344,22 @@
 .balign 8
 
 .obj HSD_RObj_803B9580, global
-  .4byte 0x00000000
-  .4byte 0x00000000
-  .4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
 .endobj HSD_RObj_803B9580
 
 .obj HSD_RObj_803B958C, global
-  .4byte 0x3F800000
-  .4byte 0x3F800000
-  .4byte 0x3F800000
+	.4byte 0x3F800000
+	.4byte 0x3F800000
+	.4byte 0x3F800000
 .endobj HSD_RObj_803B958C
 
 .obj HSD_RObj_803B9598, global
-  .4byte 0x00000000
-  .4byte 0x3F800000
-  .4byte 0x00000000
-  .4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x3F800000
+	.4byte 0x00000000
+	.4byte 0x00000000
 .endobj HSD_RObj_803B9598
 
 # 0x00000000 - 0x00000168
@@ -2367,112 +2367,112 @@
 .balign 8
 
 .obj HSD_RObj_80406E68, global
-  .4byte 0x72702D3E
-  .4byte 0x752E6A6F
-  .4byte 0x626A0000
+	.4byte 0x72702D3E
+	.4byte 0x752E6A6F
+	.4byte 0x626A0000
 .endobj HSD_RObj_80406E68
 
 .obj HSD_RObj_80406E74, global
-  .4byte 0x00000032
-  .4byte 0x00000033
-  .4byte 0x00000034
+	.4byte 0x00000032
+	.4byte 0x00000033
+	.4byte 0x00000034
 .endobj HSD_RObj_80406E74
 
 .obj jumptable_80406E80, local
-  .rel resolveLimits, .L_00001144
-  .rel resolveLimits, .L_00001024
-  .rel resolveLimits, .L_0000103C
-  .rel resolveLimits, .L_00001054
-  .rel resolveLimits, .L_0000106C
-  .rel resolveLimits, .L_00001084
-  .rel resolveLimits, .L_0000109C
-  .rel resolveLimits, .L_000010B4
-  .rel resolveLimits, .L_000010CC
-  .rel resolveLimits, .L_000010E4
-  .rel resolveLimits, .L_000010FC
-  .rel resolveLimits, .L_00001114
-  .rel resolveLimits, .L_0000112C
+	.rel resolveLimits, .L_00001144
+	.rel resolveLimits, .L_00001024
+	.rel resolveLimits, .L_0000103C
+	.rel resolveLimits, .L_00001054
+	.rel resolveLimits, .L_0000106C
+	.rel resolveLimits, .L_00001084
+	.rel resolveLimits, .L_0000109C
+	.rel resolveLimits, .L_000010B4
+	.rel resolveLimits, .L_000010CC
+	.rel resolveLimits, .L_000010E4
+	.rel resolveLimits, .L_000010FC
+	.rel resolveLimits, .L_00001114
+	.rel resolveLimits, .L_0000112C
 .endobj jumptable_80406E80
 
 .obj gap_07_80406EB4_data, global
 .hidden gap_07_80406EB4_data
-  .4byte 0x726F626A
-  .4byte 0x2D3E752E
-  .4byte 0x6A6F626A
-  .4byte 0x00000000
-  .4byte 0x6F626A65
-  .4byte 0x63742E68
-  .4byte 0x00000000
-  .4byte 0x4853445F
-  .4byte 0x4F424A28
-  .4byte 0x6F292D3E
-  .4byte 0x7265665F
-  .4byte 0x636F756E
-  .4byte 0x745F696E
-  .4byte 0x64697669
-  .4byte 0x6475616C
-  .4byte 0x20213D20
-  .4byte 0x30000000
+	.4byte 0x726F626A
+	.4byte 0x2D3E752E
+	.4byte 0x6A6F626A
+	.4byte 0x00000000
+	.4byte 0x6F626A65
+	.4byte 0x63742E68
+	.4byte 0x00000000
+	.4byte 0x4853445F
+	.4byte 0x4F424A28
+	.4byte 0x6F292D3E
+	.4byte 0x7265665F
+	.4byte 0x636F756E
+	.4byte 0x745F696E
+	.4byte 0x64697669
+	.4byte 0x6475616C
+	.4byte 0x20213D20
+	.4byte 0x30000000
 .endobj gap_07_80406EB4_data
 
 .obj HSD_RObj_80406EF8, global
-  .4byte 0x756E6578
-  .4byte 0x70656374
-  .4byte 0x65642074
-  .4byte 0x79706520
-  .4byte 0x6F662072
-  .4byte 0x6F626A2E
-  .4byte 0x0A000000
-  .4byte 0x28707472
-  .4byte 0x20262620
-  .4byte 0x6E697465
-  .4byte 0x6D732920
-  .4byte 0x7C7C2021
-  .4byte 0x70747200
+	.4byte 0x756E6578
+	.4byte 0x70656374
+	.4byte 0x65642074
+	.4byte 0x79706520
+	.4byte 0x6F662072
+	.4byte 0x6F626A2E
+	.4byte 0x0A000000
+	.4byte 0x28707472
+	.4byte 0x20262620
+	.4byte 0x6E697465
+	.4byte 0x6D732920
+	.4byte 0x7C7C2021
+	.4byte 0x70747200
 .endobj HSD_RObj_80406EF8
 
 .obj HSD_RObj_80406F2C, global
-  .4byte 0x4E756D62
-  .4byte 0x6572206F
-  .4byte 0x66206172
-  .4byte 0x676D656E
-  .4byte 0x74206F66
-  .4byte 0x20657870
-  .4byte 0x72657373
-  .4byte 0x696F6E20
-  .4byte 0x65786365
-  .4byte 0x65647320
-  .4byte 0x74686520
-  .4byte 0x61726775
-  .4byte 0x6D656E74
-  .4byte 0x20627566
-  .4byte 0x6665720A
-  .4byte 0x73697A65
-  .4byte 0x2E202872
-  .4byte 0x65717565
-  .4byte 0x73746564
-  .4byte 0x206E756D
-  .4byte 0x206F6620
-  .4byte 0x61726720
-  .4byte 0x25642C20
-  .4byte 0x616C6C6F
-  .4byte 0x63617465
-  .4byte 0x64202564
-  .4byte 0x290A0000
-  .4byte 0x7276616C
-  .4byte 0x75652D3E
-  .4byte 0x6A6F626A
-  .4byte 0x00000000
-  .4byte 0x636F6E73
-  .4byte 0x74726169
-  .4byte 0x6E74206F
-  .4byte 0x6E6C7920
-  .4byte 0x73757070
-  .4byte 0x6F727420
-  .4byte 0x6A6F626A
-  .4byte 0x20746172
-  .4byte 0x6765742E
-  .4byte 0x0A000000
+	.4byte 0x4E756D62
+	.4byte 0x6572206F
+	.4byte 0x66206172
+	.4byte 0x676D656E
+	.4byte 0x74206F66
+	.4byte 0x20657870
+	.4byte 0x72657373
+	.4byte 0x696F6E20
+	.4byte 0x65786365
+	.4byte 0x65647320
+	.4byte 0x74686520
+	.4byte 0x61726775
+	.4byte 0x6D656E74
+	.4byte 0x20627566
+	.4byte 0x6665720A
+	.4byte 0x73697A65
+	.4byte 0x2E202872
+	.4byte 0x65717565
+	.4byte 0x73746564
+	.4byte 0x206E756D
+	.4byte 0x206F6620
+	.4byte 0x61726720
+	.4byte 0x25642C20
+	.4byte 0x616C6C6F
+	.4byte 0x63617465
+	.4byte 0x64202564
+	.4byte 0x290A0000
+	.4byte 0x7276616C
+	.4byte 0x75652D3E
+	.4byte 0x6A6F626A
+	.4byte 0x00000000
+	.4byte 0x636F6E73
+	.4byte 0x74726169
+	.4byte 0x6E74206F
+	.4byte 0x6E6C7920
+	.4byte 0x73757070
+	.4byte 0x6F727420
+	.4byte 0x6A6F626A
+	.4byte 0x20746172
+	.4byte 0x6765742E
+	.4byte 0x0A000000
 .endobj HSD_RObj_80406F2C
 
 # 0x00000000 - 0x00000058
@@ -2480,11 +2480,11 @@
 .balign 8
 
 .obj robj_alloc_data, global
-  .skip 0x2C
+	.skip 0x2C
 .endobj robj_alloc_data
 
 .obj rvalue_alloc_data, global
-  .skip 0x2C
+	.skip 0x2C
 .endobj rvalue_alloc_data
 
 # 0x00000000 - 0x00000030
@@ -2492,39 +2492,39 @@
 .balign 8
 
 .obj HSD_RObj_804D5EB8, global
-  .4byte 0x726F626A
-  .4byte 0x2E630000
+	.4byte 0x726F626A
+	.4byte 0x2E630000
 .endobj HSD_RObj_804D5EB8
 
 .obj HSD_RObj_804D5EC0, global
-  .4byte 0x6A6F626A
-  .4byte 0x2E680000
+	.4byte 0x6A6F626A
+	.4byte 0x2E680000
 .endobj HSD_RObj_804D5EC0
 
 .obj HSD_RObj_804D5EC8, global
-  .4byte 0x6A6F626A
-  .4byte 0x00000000
+	.4byte 0x6A6F626A
+	.4byte 0x00000000
 .endobj HSD_RObj_804D5EC8
 
 .obj HSD_RObj_804D5ED0, global
-  .4byte 0x6F626A00
+	.4byte 0x6F626A00
 .endobj HSD_RObj_804D5ED0
 
 .obj HSD_RObj_804D5ED4, global
-  .4byte 0x6E657700
+	.4byte 0x6E657700
 .endobj HSD_RObj_804D5ED4
 
 .obj HSD_RObj_804D5ED8, global
-  .4byte 0x00000000
+	.4byte 0x00000000
 .endobj HSD_RObj_804D5ED8
 
 .obj HSD_RObj_804D5EDC, global
-  .4byte 0x7276616C
-  .4byte 0x75650000
+	.4byte 0x7276616C
+	.4byte 0x75650000
 .endobj HSD_RObj_804D5EDC
 
 .obj HSD_RObj_804D5EE4, global
-  .4byte 0x30000000
+	.4byte 0x30000000
 .endobj HSD_RObj_804D5EE4
 
 # 0x00000000 - 0x00000008
@@ -2532,11 +2532,11 @@
 .balign 8
 
 .obj arg_buf, global
-  .skip 0x4
+	.skip 0x4
 .endobj arg_buf
 
 .obj arg_buf_size, global
-  .skip 0x4
+	.skip 0x4
 .endobj arg_buf_size
 
 # 0x00000000 - 0x00000030
@@ -2544,41 +2544,41 @@
 .balign 8
 
 .obj HSD_RObj_804DE6A0, local
-  .4byte 0x3FE00000
-  .4byte 0x00000000
+	.4byte 0x3FE00000
+	.4byte 0x00000000
 .endobj HSD_RObj_804DE6A0
 
 .obj HSD_RObj_804DE6A8, local
-  .4byte 0x3F800000
+	.4byte 0x3F800000
 .endobj HSD_RObj_804DE6A8
 
 .obj gap_11_804DE6AC_sdata2, global
 .hidden gap_11_804DE6AC_sdata2
-  .4byte 0x00000000
+	.4byte 0x00000000
 .endobj gap_11_804DE6AC_sdata2
 
 .obj HSD_RObj_804DE6B0, local
-  .4byte 0x43300000
-  .4byte 0x80000000
+	.4byte 0x43300000
+	.4byte 0x80000000
 .endobj HSD_RObj_804DE6B0
 
 .obj HSD_RObj_804DE6B8, local
-  .4byte 0x2EDBE6FF
+	.4byte 0x2EDBE6FF
 .endobj HSD_RObj_804DE6B8
 
 .obj HSD_RObj_804DE6BC, local
-  .4byte 0x00000000
+	.4byte 0x00000000
 .endobj HSD_RObj_804DE6BC
 
 .obj HSD_RObj_804DE6C0, local
-  .4byte 0x40080000
-  .4byte 0x00000000
+	.4byte 0x40080000
+	.4byte 0x00000000
 .endobj HSD_RObj_804DE6C0
 
 .obj HSD_RObj_804DE6C8, local
-  .4byte 0x3C8EFA35
+	.4byte 0x3C8EFA35
 .endobj HSD_RObj_804DE6C8
 
 .obj HSD_RObj_804DE6CC, local
-  .4byte 0x42652EE1
+	.4byte 0x42652EE1
 .endobj HSD_RObj_804DE6CC

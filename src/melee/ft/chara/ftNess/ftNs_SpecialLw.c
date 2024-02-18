@@ -20,7 +20,6 @@
 #include "pl/player.h"
 
 #include <common_structs.h>
-#include <baselib/gobj.h>
 
 // SpecialLw (PSI Magnet)
 #define FTNESS_SPECIALLW_COLL_FLAG                                            \
@@ -456,9 +455,9 @@ void ftNs_SpecialAirLwHold_Enter(
     ftColl_CreateAbsorbHit(gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
-static inline f32 returnStateVar(s32 stateVar)
+static inline float returnStateVar(s32 stateVar)
 {
-    return (f32) stateVar;
+    return (float) stateVar;
 }
 
 static inline void getAttrStuff(HSD_GObj* arg0)
@@ -923,13 +922,13 @@ void ftNs_AbsorbThink_DecideAction(
     ftNessAttributes* sa = fp->dat_attrs;
 
     {
-        f32 heal_amount = (int) (fp->AbsorbAttr.x1A44_damageTaken *
-                                 ftNs_Init_GetAbsorbHeal(fp));
+        float heal_amount = (int) (fp->AbsorbAttr.x1A44_damageTaken *
+                                   ftNs_Init_GetAbsorbHeal(fp));
 
         fp->dmg.x1830_percent -= heal_amount;
 
         {
-            f32 cur_percent = fp->dmg.x1830_percent;
+            float cur_percent = fp->dmg.x1830_percent;
 
             if (fp->dmg.x1830_percent < 0) {
                 heal_amount = cur_percent + heal_amount;
@@ -942,7 +941,7 @@ void ftNs_AbsorbThink_DecideAction(
         pl_80040B8C(fp->player_id, fp->x221F_b4, heal_amount);
     }
 
-    fp->facing_dir = (f32) fp->AbsorbAttr.x1A40_absorbHitDirection;
+    fp->facing_dir = (float) fp->AbsorbAttr.x1A40_absorbHitDirection;
     msid = fp->motion_id;
 
     if ((msid != ftNs_MS_SpecialLwHit && msid != ftNs_MS_SpecialAirLwHit) ||

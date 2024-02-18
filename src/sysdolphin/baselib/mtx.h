@@ -5,7 +5,8 @@
 #include <dolphin/mtx/forward.h>
 
 #include "baselib/objalloc.h"
-#include "lb/lbrefract.h"
+
+#include <MSL/math.h>
 
 void HSD_MtxInverse(Mtx src, Mtx dest);
 void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest);
@@ -32,6 +33,27 @@ static inline f32 fabsf_bitwise(f32 v)
 {
     *(u32*) &v &= ~0x80000000;
     return v;
+}
+
+static inline void HSD_MtxColVec(MtxPtr mtx, int col, Vec3* vec)
+{
+    vec->x = mtx[0][col];
+    vec->y = mtx[1][col];
+    vec->z = mtx[2][col];
+}
+
+static inline void HSD_MtxSetColVec(MtxPtr mtx, int col, Vec3* vec)
+{
+    mtx[0][col] = vec->x;
+    mtx[1][col] = vec->y;
+    mtx[2][col] = vec->z;
+}
+
+static inline f32 HSD_MtxColMag(MtxPtr mtx, int col)
+{
+    return sqrtf__Ff((mtx[0][col] * mtx[0][col]) +
+                     (mtx[1][col] * mtx[1][col]) +
+                     (mtx[2][col] * mtx[2][col]));
 }
 
 #endif

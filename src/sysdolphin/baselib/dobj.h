@@ -9,6 +9,8 @@
 #include "baselib/fobj.h"
 #include "baselib/mobj.h"
 
+#define DOBJ_HIDDEN 0x1
+
 struct HSD_DObj {
     HSD_Class parent;
     HSD_DObj* next; // 0x04

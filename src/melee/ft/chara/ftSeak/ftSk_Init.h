@@ -1,12 +1,11 @@
 #ifndef GALE01_110094
 #define GALE01_110094
 
+#include <platform.h>
 #include "ftSeak/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
-
-#include <stdbool.h>
 
 /* 110094 */ void ftSk_Init_OnDeath(HSD_GObj* gobj);
 /* 1100EC */ void ftSk_Init_OnLoad(HSD_GObj* gobj);

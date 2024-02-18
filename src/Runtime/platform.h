@@ -28,6 +28,9 @@ typedef unsigned long u32;
 /// An unsigned 64-bit integer
 typedef unsigned long long u64;
 
+/// An unsigned short integer of platform-dependent size
+typedef unsigned short ushort;
+
 /// An unsigned integer of platform-dependent size
 typedef unsigned int uint;
 
@@ -114,14 +117,6 @@ typedef void (*Event)(void);
 #endif
 #endif
 
-#ifndef ATTRIBUTE_USED
-#if defined(__clang__)
-#define ATTRIBUTE_USED __attribute__((used))
-#else
-#define ATTRIBUTE_USED
-#endif
-#endif
-
 #ifdef PERMUTER
 #define AT_ADDRESS(x) = FIXEDADDR(x)
 #elif defined(__MWERKS__) && !defined(M2CTX)
@@ -154,6 +149,20 @@ typedef void (*Event)(void);
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
+
+#ifdef __cplusplus
+#ifndef _Static_assert
+#define _Static_assert static_assert
+#endif
+#endif
+#ifdef __MWERKS__
+#define STATIC_ASSERT(cond)                                                   \
+    struct {                                                                  \
+        int x[1 - 2 * !(cond)];                                               \
+    };
+#else
+#define STATIC_ASSERT(cond) _Static_assert((cond), "(" #cond ") failed")
+#endif
 
 #define RETURN_IF(cond)                                                       \
     if ((cond)) {                                                             \

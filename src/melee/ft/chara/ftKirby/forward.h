@@ -11,291 +11,290 @@ typedef struct ftKb_DatAttrs ftKb_DatAttrs;
 
 /// @todo Clean up factorization
 
-static MotionFlags const ftKb_MF_MultiJump ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_MultiJump =
     Ft_MF_KeepGfx | Ft_MF_SkipHit | Ft_MF_SkipAnimVel | Ft_MF_Unk06;
 
-static MotionFlags const ftKb_MF_AttackDash ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_AttackDash =
     Ft_MF_KeepFastFall | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipItemVis |
     Ft_MF_FreezeState;
 
-static MotionFlags const ftKb_MF_AttackDashAir ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_AttackDashAir =
     ftKb_MF_AttackDash | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_18_20_21 ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_18_20_21 =
     Ft_MF_SkipItemVis | Ft_MF_UnkUpdatePhys | Ft_MF_FreezeState;
 
-static MotionFlags const ftKb_MF_4_18_20_21 ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_4_18_20_21 =
     ftKb_MF_18_20_21 | Ft_MF_SkipModel;
 
-static MotionFlags const ftKb_MF_2_4_18_20_21 ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_2_4_18_20_21 =
     ftKb_MF_4_18_20_21 | Ft_MF_KeepColAnimHitStatus;
 
-static MotionFlags const ftKb_MF_5_18_20_21 ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_5_18_20_21 =
     ftKb_MF_18_20_21 | Ft_MF_SkipAnimVel;
 
-static MotionFlags const ftKb_MF_SpecialN ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialN =
     ftKb_MF_4_18_20_21 | Ft_MF_KeepFastFall;
 
-static MotionFlags const ftKb_MF_SpecialS ATTRIBUTE_USED =
-    ftKb_MF_4_18_20_21 | Ft_MF_KeepGfx;
+static MotionFlags const ftKb_MF_SpecialS = ftKb_MF_4_18_20_21 | Ft_MF_KeepGfx;
 
-static MotionFlags const ftKb_MF_SpecialHi ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialHi =
     ftKb_MF_4_18_20_21 | Ft_MF_KeepFastFall | Ft_MF_KeepGfx;
 
-static MotionFlags const ftKb_MF_SpecialNMr ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNMr =
     ftKb_MF_4_18_20_21 | Ft_MF_KeepFastFall | Ft_MF_KeepColAnimHitStatus;
 
-static MotionFlags const ftKb_MF_SpecialNKp ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNKp =
     ftKb_MF_4_18_20_21 | Ft_MF_KeepFastFall | Ft_MF_SkipHit;
 
-static MotionFlags const ftKb_MF_SpecialNPe ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNPe =
     ftKb_MF_2_4_18_20_21 | Ft_MF_KeepFastFall | Ft_MF_SkipHit;
 
-static MotionFlags const ftKb_MF_SpecialNYs ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNYs =
     ftKb_MF_5_18_20_21 | Ft_MF_KeepFastFall;
 
-static MotionFlags const ftKb_MF_SpecialNLg ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNLg =
     ftKb_MF_5_18_20_21 | Ft_MF_KeepColAnimHitStatus;
 
-static MotionFlags const ftKb_MF_SpecialNZd ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNZd =
     ftKb_MF_5_18_20_21 | Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus;
 
-static MotionFlags const ftKb_MF_SpecialNDr ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNDr =
     ftKb_MF_5_18_20_21 | Ft_MF_SkipHit;
 
-static MotionFlags const ftKb_MF_SpecialNGk ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNGk =
     ftKb_MF_SpecialNZd | Ft_MF_SkipHit;
 
-static MotionFlags const ftKb_MF_SpecialNFx ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNFx =
     ftKb_MF_2_4_18_20_21 | Ft_MF_KeepGfx | Ft_MF_SkipThrowException;
 
-static MotionFlags const ftKb_MF_SpecialNLk ATTRIBUTE_USED =
-    ftKb_MF_4_18_20_21 | Ft_MF_KeepGfx | Ft_MF_SkipHit |
-    Ft_MF_SkipThrowException;
+static MotionFlags const ftKb_MF_SpecialNLk = ftKb_MF_4_18_20_21 |
+                                              Ft_MF_KeepGfx | Ft_MF_SkipHit |
+                                              Ft_MF_SkipThrowException;
 
-static MotionFlags const ftKb_MF_SpecialNSk ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNSk =
     ftKb_MF_SpecialNLk | Ft_MF_KeepFastFall;
 
-static MotionFlags const ftKb_MF_SpecialNNs ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNNs =
     ftKb_MF_2_4_18_20_21 | Ft_MF_SkipHit | Ft_MF_SkipThrowException;
 
-static MotionFlags const ftKb_MF_SpecialNPp ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNPp =
     ftKb_MF_SpecialNNs | Ft_MF_KeepGfx;
 
-static MotionFlags const ftKb_MF_SpecialNPk ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNPk =
     ftKb_MF_SpecialNPp | Ft_MF_KeepFastFall;
 
-static MotionFlags const ftKb_MF_SpecialNSs ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNSs =
     ftKb_MF_5_18_20_21 | Ft_MF_SkipThrowException;
 
-static MotionFlags const ftKb_MF_SpecialNSs_1 ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNSs_1 =
     ftKb_MF_SpecialNSs | Ft_MF_KeepGfx;
 
-static MotionFlags const ftKb_MF_SpecialNMt ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNMt =
     ftKb_MF_SpecialNSs_1 | Ft_MF_KeepFastFall;
 
-static MotionFlags const ftKb_MF_SpecialNCl ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNCl =
     ftKb_MF_SpecialNMt | Ft_MF_KeepColAnimHitStatus;
 
-static MotionFlags const ftKb_MF_SpecialNFc ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNFc =
     ftKb_MF_SpecialNDr | Ft_MF_KeepFastFall | Ft_MF_SkipThrowException;
 
-static MotionFlags const ftKb_MF_SpecialNPc ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNPc =
     ftKb_MF_SpecialNSs_1 | Ft_MF_SkipHit;
 
-static MotionFlags const ftKb_MF_SpecialNGw ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNGw =
     ftKb_MF_SpecialNPc | Ft_MF_KeepFastFall;
 
-static MotionFlags const ftKb_MF_SpecialLw ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialLw =
     ftKb_MF_2_4_18_20_21 | Ft_MF_KeepSfx;
 
-static MotionFlags const ftKb_MF_SpecialNCa ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNCa =
     ftKb_MF_SpecialLw | Ft_MF_KeepFastFall | Ft_MF_KeepGfx;
 
-static MotionFlags const ftKb_MF_SpecialNDk ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNDk =
     ftKb_MF_4_18_20_21 | Ft_MF_SkipHit | Ft_MF_KeepSfx;
 
-static MotionFlags const ftKb_MF_5_9_18_20_21 ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_5_9_18_20_21 =
     ftKb_MF_5_18_20_21 | Ft_MF_KeepSfx;
 
-static MotionFlags const ftKb_MF_2_5_9_18_20_21 ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_2_5_9_18_20_21 =
     ftKb_MF_5_9_18_20_21 | Ft_MF_KeepColAnimHitStatus;
 
-static MotionFlags const ftKb_MF_SpecialNPr ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNPr =
     ftKb_MF_5_9_18_20_21 | Ft_MF_KeepGfx;
 
-static MotionFlags const ftKb_MF_SpecialNMs ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNMs =
     ftKb_MF_2_5_9_18_20_21 | Ft_MF_KeepFastFall;
 
-static MotionFlags const ftKb_MF_SpecialNGn ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNGn =
     ftKb_MF_2_5_9_18_20_21 | Ft_MF_SkipHit;
 
-static MotionFlags const ftKb_MF_SpecialNFeStart ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNFeStart =
     ftKb_MF_SpecialNMs | Ft_MF_SkipHit;
 
-static MotionFlags const ftKb_MF_SpecialAirN ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirN =
     ftKb_MF_SpecialN | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirS ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirS =
     ftKb_MF_SpecialS | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirHi ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirHi =
     ftKb_MF_SpecialHi | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNMr ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNMr =
     ftKb_MF_SpecialNMr | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNKp ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNKp =
     ftKb_MF_SpecialNKp | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNPe ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNPe =
     ftKb_MF_SpecialNPe | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNYs ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNYs =
     ftKb_MF_SpecialNYs | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNLg ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNLg =
     ftKb_MF_SpecialNLg | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNZd ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNZd =
     ftKb_MF_SpecialNZd | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNDr ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNDr =
     ftKb_MF_SpecialNDr | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNGk ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNGk =
     ftKb_MF_SpecialNGk | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNFx ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNFx =
     ftKb_MF_SpecialNFx | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNLk ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNLk =
     ftKb_MF_SpecialNLk | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNSk ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNSk =
     ftKb_MF_SpecialNSk | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNNs ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNNs =
     ftKb_MF_SpecialNNs | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNPp ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNPp =
     ftKb_MF_SpecialNPp | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNPk ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNPk =
     ftKb_MF_SpecialNPk | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNSs ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNSs =
     ftKb_MF_SpecialNSs | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNMt ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNMt =
     ftKb_MF_SpecialNMt | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNCl ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNCl =
     ftKb_MF_SpecialNCl | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNFc ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNFc =
     ftKb_MF_SpecialNFc | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNPc ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNPc =
     ftKb_MF_SpecialNPc | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNGw ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNGw =
     ftKb_MF_SpecialNGw | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirLw ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirLw =
     ftKb_MF_SpecialLw | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNCa ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNCa =
     ftKb_MF_SpecialNCa | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNDk ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNDk =
     ftKb_MF_SpecialNDk | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNPr ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNPr =
     ftKb_MF_SpecialNPr | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNMs ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNMs =
     ftKb_MF_SpecialNMs | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNGn ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNGn =
     ftKb_MF_SpecialNGn | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialNFe ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNFe =
     ftKb_MF_SpecialNFeStart | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_0_4_18_20_21 ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_0_4_18_20_21 =
     ftKb_MF_4_18_20_21 | Ft_MF_KeepFastFall;
 
-static MotionFlags const ftKb_MF_SpecialNCaptureTurn ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNCaptureTurn =
     ftKb_MF_0_4_18_20_21 | Ft_MF_KeepAccessory;
 
-static MotionFlags const ftKb_MF_SpecialAirNCaptureTurn ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNCaptureTurn =
     ftKb_MF_SpecialNCaptureTurn | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialNCaptureWalk ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNCaptureWalk =
     ftKb_MF_0_4_18_20_21 | Ft_MF_UpdateCmd;
 
-static MotionFlags const ftKb_MF_SpecialNCaptureJumpSquat ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNCaptureJumpSquat =
     ftKb_MF_0_4_18_20_21 | Ft_MF_SkipNametagVis;
 
-static MotionFlags const ftKb_MF_SpecialNLoop ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNLoop =
     ftKb_MF_0_4_18_20_21 | Ft_MF_Unk19;
 
-static MotionFlags const ftKb_MF_SpecialNKpLoop ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNKpLoop =
     ftKb_MF_SpecialNKp | Ft_MF_Unk19;
 
-static MotionFlags const ftKb_MF_SpecialNGkLoop ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNGkLoop =
     ftKb_MF_SpecialNGk | Ft_MF_Unk19;
 
-static MotionFlags const ftKb_MF_SpecialNFxLoop ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNFxLoop =
     ftKb_MF_SpecialNFx | Ft_MF_Unk19;
 
-static MotionFlags const ftKb_MF_SpecialNLkCharged ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNLkCharged =
     ftKb_MF_SpecialNLk | Ft_MF_Unk19;
 
-static MotionFlags const ftKb_MF_SpecialNSkLoop ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNSkLoop =
     ftKb_MF_SpecialNSk | Ft_MF_Unk19;
 
-static MotionFlags const ftKb_MF_SpecialNMtLoop ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNMtLoop =
     ftKb_MF_SpecialNMt | Ft_MF_Unk19;
 
-static MotionFlags const ftKb_MF_SpecialNClCharged ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNClCharged =
     ftKb_MF_SpecialNCl | Ft_MF_Unk19;
 
-static MotionFlags const ftKb_MF_SpecialNFcLoop ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNFcLoop =
     ftKb_MF_SpecialNFc | Ft_MF_Unk19;
 
-static MotionFlags const ftKb_MF_SpecialNPrLoop ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialNPrLoop =
     ftKb_MF_SpecialNPr | Ft_MF_Unk19;
 
-static MotionFlags const ftKb_MF_SpecialAirNLoop ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNLoop =
     ftKb_MF_SpecialNLoop | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNKpLoop ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNKpLoop =
     ftKb_MF_SpecialNKpLoop | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNGkLoop ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNGkLoop =
     ftKb_MF_SpecialNGkLoop | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNFxLoop ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNFxLoop =
     ftKb_MF_SpecialNFxLoop | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNLkCharged ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNLkCharged =
     ftKb_MF_SpecialNLkCharged | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNSkLoop ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNSkLoop =
     ftKb_MF_SpecialNSkLoop | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNMtLoop ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNMtLoop =
     ftKb_MF_SpecialNMtLoop | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNClCharged ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNClCharged =
     ftKb_MF_SpecialNClCharged | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNFcLoop ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNFcLoop =
     ftKb_MF_SpecialNFcLoop | Ft_MF_SkipParasol;
 
-static MotionFlags const ftKb_MF_SpecialAirNPrLoop ATTRIBUTE_USED =
+static MotionFlags const ftKb_MF_SpecialAirNPrLoop =
     ftKb_MF_SpecialNPrLoop | Ft_MF_SkipParasol;
 
 typedef enum ftKirby_MotionState {

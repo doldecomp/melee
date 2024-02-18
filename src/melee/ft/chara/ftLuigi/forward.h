@@ -4,32 +4,32 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
-static MotionFlags const ftLg_MF_Special ATTRIBUTE_USED =
+static MotionFlags const ftLg_MF_Special =
     Ft_MF_SkipModel | Ft_MF_SkipItemVis | Ft_MF_UnkUpdatePhys |
     Ft_MF_FreezeState;
 
-static MotionFlags const ftLg_MF_SpecialN ATTRIBUTE_USED =
+static MotionFlags const ftLg_MF_SpecialN =
     ftLg_MF_Special | Ft_MF_KeepFastFall | Ft_MF_SkipThrowException;
 
-static MotionFlags const ftLg_MF_SpecialS ATTRIBUTE_USED =
+static MotionFlags const ftLg_MF_SpecialS =
     ftLg_MF_Special | Ft_MF_KeepGfx | Ft_MF_KeepSfx;
 
-static MotionFlags const ftLg_MF_SpecialHi ATTRIBUTE_USED =
+static MotionFlags const ftLg_MF_SpecialHi =
     ftLg_MF_Special | Ft_MF_KeepFastFall | Ft_MF_KeepGfx | Ft_MF_KeepSfx;
 
-static MotionFlags const ftLg_MF_SpecialLw ATTRIBUTE_USED =
+static MotionFlags const ftLg_MF_SpecialLw =
     ftLg_MF_Special | Ft_MF_KeepColAnimHitStatus | Ft_MF_KeepSfx;
 
-static MotionFlags const ftLg_MF_SpecialAirN ATTRIBUTE_USED =
+static MotionFlags const ftLg_MF_SpecialAirN =
     ftLg_MF_SpecialN | Ft_MF_SkipParasol;
 
-static MotionFlags const ftLg_MF_SpecialAirS ATTRIBUTE_USED =
+static MotionFlags const ftLg_MF_SpecialAirS =
     ftLg_MF_SpecialS | Ft_MF_SkipParasol;
 
-static MotionFlags const ftLg_MF_SpecialAirHi ATTRIBUTE_USED =
+static MotionFlags const ftLg_MF_SpecialAirHi =
     ftLg_MF_SpecialHi | Ft_MF_SkipParasol;
 
-static MotionFlags const ftLg_MF_SpecialAirLw ATTRIBUTE_USED =
+static MotionFlags const ftLg_MF_SpecialAirLw =
     ftLg_MF_SpecialLw | Ft_MF_SkipParasol;
 
 typedef enum ftLuigi_MotionState {

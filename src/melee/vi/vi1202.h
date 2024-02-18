@@ -1,13 +1,10 @@
-#ifndef _vi1202_h_
-#define _vi1202_h_
+#ifndef GALE01_32110C
+#define GALE01_32110C
 
-#include <platform.h>
 #include <baselib/forward.h>
 
-#include <sysdolphin/baselib/gobj.h>
-
-void un_8032110C(HSD_GObj*);
-void un_80321130(HSD_GObj*);
-void un_80321154(HSD_GObj*);
+/* 32110C */ void un_8032110C(HSD_GObj*);
+/* 321130 */ void un_80321130(HSD_GObj*);
+/* 321154 */ void un_80321154(HSD_GObj*);
 
 #endif

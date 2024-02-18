@@ -15,7 +15,7 @@ extern GXRenderModeObj GXNtsc480IntDf;
 
 void GXClearBoundingBox(void);
 void GXCopyDisp(void*, GXBool);
-void GXCopyTex(u32, GXBool);
+void GXCopyTex(void*, GXBool);
 void GXSetCopyFilter(GXBool, u8[12][2], GXBool, u8[7]);
 void GXSetDispCopyDst(u16, u16);
 void GXSetDispCopyFrame2Field(s32 arg0);
@@ -23,8 +23,8 @@ void GXSetDispCopyFrame2Field(s32 arg0);
 void GXSetDispCopyGamma(s32 arg0);
 void GXSetDispCopySrc(u16, u16, u16, u16);
 u32 GXSetDispCopyYScale(f32);
-void GXSetTexCopyDst(s32, s32, s32, s32);
-void GXSetTexCopySrc(u16 arg0, u32 arg1, u16 arg2, u16 arg3);
+void GXSetTexCopyDst(u16, u16, GXTexFmt, GXBool);
+void GXSetTexCopySrc(u16, u16, u16, u16);
 void GXSetCopyClamp(s32);
 void GXSetCopyClear(GXColor, u32);
 

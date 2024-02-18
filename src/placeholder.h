@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <m2c_macros.h>
+#include <m2c_macros.h> // IWYU pragma: export
 
 /// A label in a jump table
 typedef void (*jmp_t)(void);
@@ -58,12 +58,23 @@ OSPanic(__FILE__, __LINE__, "Function is not implemented!")
 #define U32_TO_F32 4503599627370496.0
 #define S32_TO_F32 4503601774854144.0
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 #define ASM asm
 #else
 #define ASM
 #endif
 
-#define LITERAL static ATTRIBUTE_USED
+#ifndef UNUSED
+#if defined(__clang__) || defined(__GNUC__)
+#define UNUSED __attribute__((unused))
+#else
+#define UNUSED
+#endif
+#endif
+
+#define PAD_STACK(bytes)                                                      \
+    do {                                                                      \
+        UNUSED unsigned char _[(bytes)] = { 0 };                              \
+    } while (0)
 
 #endif

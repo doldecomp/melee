@@ -21,7 +21,6 @@
 #include "lb/lbrefract.h"
 
 #include <common_structs.h>
-#include <baselib/gobj.h>
 
 static void updateRot(HSD_GObj* gobj)
 {
@@ -62,7 +61,7 @@ static void doStartMotion(HSD_GObj* gobj)
     sa = (ftMario_DatAttrs*) fp->dat_attrs;
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
-    fp->mv.mr.SpecialLw.groundVelX = (f32) 0;
+    fp->mv.mr.SpecialLw.groundVelX = (float) 0;
     fp->mv.mr.SpecialLw.unk = (s32) (sa->speciallw.unk0 + 1);
     fp->mv.mr.SpecialLw.isUnkColl = 0;
     setCallbacks(gobj);
@@ -94,7 +93,7 @@ void ftMr_SpecialLw_Enter(HSD_GObj* gobj)
 
 void ftMr_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
-    f32 sub_val;
+    float sub_val;
     Fighter* fp = gobj->user_data;
     ftMario_DatAttrs* sa = fp->dat_attrs;
 
@@ -108,7 +107,7 @@ void ftMr_SpecialAirLw_Enter(HSD_GObj* gobj)
     } else {
         sub_val = sa->speciallw.tap_y_vel_max;
     }
-    fp->self_vel.y = (f32) (sa->speciallw.vel_y - sub_val);
+    fp->self_vel.y = (float) (sa->speciallw.vel_y - sub_val);
     ftCommon_8007D440(fp, sa->speciallw.air_momentum_x);
     doStartMotion(gobj);
     fp->pre_hitlag_cb = &efLib_PauseAll;
@@ -148,7 +147,7 @@ void ftMr_SpecialAirLw_Anim(HSD_GObj* gobj)
             ftCo_800CC730(gobj);
             return;
         }
-        ftCo_80096900(gobj, 1, 0, true, 1, (f32) sa->speciallw.landing_lag);
+        ftCo_80096900(gobj, 1, 0, true, 1, (float) sa->speciallw.landing_lag);
     }
 }
 
@@ -181,7 +180,7 @@ void ftMr_SpecialLw_Phys(HSD_GObj* gobj)
 
     Fighter* fp0 = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = GetMarioAttr(fp0);
-    f32 vel_y = sa->speciallw.momentum_x;
+    float vel_y = sa->speciallw.momentum_x;
 
     if (fp0->cmd_vars[0] != 0) {
         fp0->mv.mr.SpecialLw.groundVelX =
@@ -206,7 +205,7 @@ void ftMr_SpecialLw_Phys(HSD_GObj* gobj)
 
 void ftMr_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
-    f32 flt_var;
+    float flt_var;
     ftMario_DatAttrs* sa;
     ftMario_DatAttrs* sa_2;
     Fighter* fp;
@@ -227,8 +226,8 @@ void ftMr_SpecialAirLw_Phys(HSD_GObj* gobj)
     sa_2 = fp->dat_attrs;
     if ((u32) fp->cmd_vars[0] != 0U) {
         fp->mv.mr.SpecialLw.groundVelX =
-            (f32) (fp->mv.mr.SpecialLw.groundVelX -
-                   sa_2->speciallw.friction_end);
+            (float) (fp->mv.mr.SpecialLw.groundVelX -
+                     sa_2->speciallw.friction_end);
         flt_var += fp->mv.mr.SpecialLw.groundVelX;
         if (flt_var < 0) {
             flt_var = 0;

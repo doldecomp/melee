@@ -193,7 +193,7 @@ void ftPk_SpecialN_80124DC8(HSD_GObj* gobj)
     u8 fighter_x673_byte;
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
-    f32 pika_attr_1C;
+    float pika_attr_1C;
 
     fp->cmd_vars[0] = 0;
     fighter_x673_byte = fp->x673;

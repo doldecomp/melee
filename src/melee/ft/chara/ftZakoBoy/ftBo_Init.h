@@ -1,11 +1,10 @@
 #ifndef GALE01_14F1F0
 #define GALE01_14F1F0
 
+#include <platform.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
-
-#include <stdbool.h>
 
 /* 14F1F0 */ void ftBo_Init_OnDeath(HSD_GObj* gobj);
 /* 14F218 */ void ftBo_Init_OnItemPickup(HSD_GObj* gobj, bool flag);

@@ -4,14 +4,15 @@
 
 #include "db/db_2253.h"
 #include "ef/efasync.h"
+#include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
-#include "lb/lbvector.h"
 
 #include <common_structs.h>
+#include <math.h>
 #include <dolphin/mtx/vec.h>
 #include <baselib/gobj.h>
 

@@ -2,6 +2,7 @@
 #define _player_h_
 
 #include <platform.h>
+#include "ft/forward.h"
 #include <baselib/forward.h>
 
 #include "pl/types.h"
@@ -17,7 +18,7 @@ typedef struct _StaticPlayer {
 
     /// @at{4} @sz{4}
     /// @todo External ID.
-    enum_t player_character;
+    CharacterKind player_character;
 
     /// @at{8} @sz{4}
     /// @todo 0 is HMN, 1 is CPU, 2 is Demo, 3 n/a
@@ -139,30 +140,9 @@ typedef struct _StaticPlayer {
 
     /*0xB8*/ void (*struct_func)(s32 slot);
 
-    /*0xBC*/ s32
-        stale_move_table_current_write_index; // Zero-Indexed. Rolls over
-                                              // after 9. Increments after each
-                                              // write.
+    /*0xBC*/ StaleMoveTable stale_moves;
 
-    /*0xC0*/ s32 stale_move_index_0; // 1st Short is the move ID,  2nd Short is
-                                     // the # of action states that character
-                                     // has gone through this game
-    /*0xC4*/ s32 stale_move_index_1;
-    /*0xC8*/ s32 stale_move_index_2;
-    /*0xCC*/ s32 stale_move_index_3;
-    /*0xD0*/ s32 stale_move_index_4;
-    /*0xD4*/ s32 stale_move_index_5;
-    /*0xD8*/ s32 stale_move_index_6;
-    /*0xDC*/ s32 stale_move_index_7;
-    /*0xE0*/ s32 stale_move_index_8;
-    /*0xE4*/ s32 stale_move_index_9;
-
-    /*0xE8*/ s32 total_attack_count;
-    /*0xEC*/ s32 unkEC;
-
-    /*0xF0*/ u8 buffer[0x5B8];
-    /*0x6A8*/ s32 unk6A8;
-    /*0x6AC*/ u8 more_buffer[0x7E4];
+    /*0xDB0*/ u8 xDB0[0xE90 - 0xDB0];
 
 } StaticPlayer;
 
@@ -182,7 +162,7 @@ void Player_80032070(int slot, bool bool_arg);
 void Player_8003219C(int slot);
 bool Player_8003221C(int slot);
 s32 Player_GetPlayerState(s32 slot);
-enum_t Player_GetPlayerCharacter(int slot);
+CharacterKind Player_GetPlayerCharacter(int slot);
 void Player_SetPlayerCharacter(s32 slot, s32 value);
 enum_t Player_GetPlayerSlotType(s32 slot);
 enum_t Player_8003248C(s32 slot, bool arg1);
@@ -280,7 +260,7 @@ void Player_SetFlagsBit1(s32 slot);
 void Player_UnsetFlagsBit1(int slot);
 s32 Player_GetFlagsBit3(s32 slot);
 void Player_SetFlagsBit3(s32 slot, u8 bit3);
-u8 Player_GetFlagsBit4(s32 slot);
+int Player_GetFlagsBit4(int slot);
 u8 Player_GetFlagsBit5(s32 slot);
 void Player_SetFlagsBit5(s32 slot, u8 bit5);
 u8 Player_GetFlagsBit6(s32 slot);
@@ -294,19 +274,21 @@ s32 Player_GetUnk4D(s32 slot);
 void Player_SetUnk4D(s32 slot, s8 unk4D);
 u8 Player_GetFlagsAEBit1(s32 slot);
 
-/// @todo Output is actually @c void, but needs #u8 to match.
-///       Most likely a typo by HAL.
+#ifdef BUGFIX
+void Player_SetFlagsAEBit1(int slot, u8 bit1);
+#else
 u8 Player_SetFlagsAEBit1(int slot, u8 bit1);
+#endif
 
 u8 Player_GetUnk4C(s32 slot);
 void Player_SetUnk4C(s32 slot, u8 unk4C);
 void Player_80036058(s32 slot);
 void Player_800360D8(s32 slot);
 void Player_SetStructFunc(s32 slot, void* arg_func);
-s32* Player_GetTotalAttackCountPtr(s32 slot);
-s32* Player_GetStaleMoveTableIndexPtr(s32 slot);
-s32* Player_GetUnk6A8Ptr(s32 slot);
-s32* Player_GetStaleMoveTableIndexPtr2(s32 slot);
+int* Player_GetTotalAttackCountPtr(int slot);
+StaleMoveTable* Player_GetStaleMoveTableIndexPtr(s32 slot);
+int* Player_GetUnk6A8Ptr(int slot);
+StaleMoveTable* Player_GetStaleMoveTableIndexPtr2(s32 slot);
 s32 Player_80036394(s32 slot);
 s32 Player_80036428(s32 slot);
 void Player_SetUnk45(s32 slot, s8 unk45);

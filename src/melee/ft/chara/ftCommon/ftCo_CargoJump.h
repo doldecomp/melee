@@ -1,7 +1,6 @@
 #ifndef GALE01_09BB1C
 #define GALE01_09BB1C
 
-#include <platform.h>
 #include "ftCommon/forward.h"
 
 /* 09BB1C */ bool ftCo_8009BB1C(ftCo_GObj* gobj);

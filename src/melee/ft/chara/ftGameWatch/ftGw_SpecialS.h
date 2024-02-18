@@ -3,9 +3,8 @@
 #ifndef GALE01_14C46C
 #define GALE01_14C46C
 
+#include <platform.h>
 #include <baselib/forward.h>
-
-#include <stdbool.h>
 
 /* 14C46C */ void ftGw_SpecialS_ItemJudgementSetup(HSD_GObj* gobj);
 /* 14C590 */ void ftGw_SpecialS_ItemJudgementSetFlag(HSD_GObj* gobj);

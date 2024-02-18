@@ -345,7 +345,7 @@ Fighter_CostumeStrings ftNn_Init_CostumeStrings[] = {
     { ftNn_Init_803CDC5C, ftNn_Init_803CDC68, ftNn_Init_803CDC80 },
 };
 
-extern f32 ftNn_Init_804D9898;
+extern float ftNn_Init_804D9898;
 
 void ftNn_Init_OnLoad(HSD_GObj* gobj)
 {

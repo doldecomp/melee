@@ -21,111 +21,82 @@ struct HitResult {
 
     Vec3 pos;
     Vec3 offset;
-    f32 size;
+    float size;
 };
 
 struct HitVictim {
     UNK_T victim;
-    UNK_T x4;
+    uint x4;
 };
 
 struct HitCapsule {
-    /// @at{0} @sz{4}
-    HitCapsuleState state;
-
-    int x4;
-    int x8;
-    float damage;
-
-    /// @at{10} @sz{C}
-    /// The offset of point @e b of the capsule.
-    Vec3 b_offset;
-
-    /// @at{1C} @sz{4}
-    /// The scale of the capsule.
-    f32 scl;
-
-    int kb_angle;
-
-    int x24;
-    int x28;
-    int x2C;
-
-    /// @at{30} @sz{4}
-    HitElement element;
-
-    char unk_34[0x38 - 0x34];
-
-    /// @at{38} @sz{4}
-    int sfx_severity;
-
-    /// @at{3C} @sz{4}
-    enum_t sfx_kind;
-
-    u8 x40_b0 : 1;
-    u8 x40_b1 : 1;
-    u8 x40_b2 : 1;
-    u8 x40_b3 : 1;
-    u8 x40_b4 : 1;
-    u8 x40_b5 : 1;
-    u8 x40_b6 : 1;
-    u8 x40_b7 : 1;
-    char unk_41[0x42 - 0x41];
-    u8 x42_b0 : 1;
-    u8 x42_b1 : 1;
-    u8 x42_b2 : 1;
-    u8 x42_b3 : 1;
-    u8 x42_b4 : 1;
-    u8 x42_b5 : 1;
-    u8 x42_b6 : 1;
-    u8 x42_b7 : 1;
-    union {
-        u8 x43;
+    /*  +0 */ HitCapsuleState state;
+    /*  +4 */ uint x4;
+    /*  +8 */ int unk_count;
+    /*  +C */ float damage;
+    /* +10 */ Vec3 b_offset;
+    /* +1C */ float scale;
+    /* +20 */ int kb_angle;
+    /* +24 */ int x24;
+    /* +28 */ int x28;
+    /* +2C */ int x2C;
+    /* +30 */ uint element;
+    /* +34 */ int x34;
+    /* +38 */ int sfx_severity;
+    /* +3C */ enum_t sfx_kind;
+    /* +40 */ u8 x40_b0 : 1;
+    /* +40 */ u8 x40_b1 : 1;
+    /* +40 */ u8 x40_b2 : 1;
+    /* +40 */ u8 x40_b3 : 1;
+    /* +40 */ u8 x40_b4 : 1;
+    /* +40 */ u8 x40_b5 : 1;
+    /* +40 */ u8 x40_b6 : 1;
+    /* +40 */ u8 x40_b7 : 1;
+    /* +41 */ char x41[0x42 - 0x41];
+    /* +42:0 */ u8 x42_b0 : 1;
+    /* +42:1 */ u8 x42_b1 : 1;
+    /* +42:2 */ u8 x42_b2 : 1;
+    /* +42:3 */ u8 x42_b3 : 1;
+    /* +42:4 */ u8 x42_b4 : 1;
+    /* +42:5 */ u8 x42_b5 : 1;
+    /* +42:6 */ u8 x42_b6 : 1;
+    /* +42:7 */ u8 x42_b7 : 1;
+    /* +43 */ union {
+        /* +43 */ u8 x43;
         struct {
-            u8 x43_b0 : 1;
-            u8 x43_b1 : 1;
-            u8 x43_b2 : 1;
-            u8 x43_b3 : 1;
-            u8 x43_b4 : 1;
-            u8 x43_b5 : 1;
-            u8 x43_b6 : 1;
-            u8 x43_b7 : 1;
+            /* +43:0 */ u8 x43_b0 : 1;
+            /* +43:1 */ u8 x43_b1 : 1;
+            /* +43:2 */ u8 x43_b2 : 1;
+            /* +43:3 */ u8 x43_b3 : 1;
+            /* +43:4 */ u8 x43_b4 : 1;
+            /* +43:5 */ u8 x43_b5 : 1;
+            /* +43:6 */ u8 x43_b6 : 1;
+            /* +43:7 */ u8 x43_b7 : 1;
         };
     };
-    u8 x44;
-    u8 x45;
-    char unk_46[0x4C - 0x46];
-    Vec3 x4C;
-    Vec3 x58;
-    Vec3 x64;
-    int x70;
-    /// @at{74} @sz{60}
-    HitVictim victims_1[12];
-    /// @at{D4} @sz{60}
-    HitVictim victims_2[12];
-    // @at{134}
-    union {
+    /* +44 */ u8 x44;
+    /* +45 */ u8 x45;
+    /* +46 */ u8 x46[0x48 - 0x46];
+    /* +48 */ HSD_JObj* jobj;
+    /* +4C */ Vec3 x4C;
+    /* +58 */ Vec3 x58;
+    /* +64 */ Vec3 hurt_coll_pos;
+    /* +70 */ float coll_distance;
+    /* +74 */ HitVictim victims_1[12];
+    /* +D4 */ HitVictim victims_2[12];
+    /* +134 */ union {
         HSD_GObj* owner;
         u8 hit_grabbed_victim_only : 1;
     };
 };
 
+STATIC_ASSERT(sizeof(HitCapsule) == 0x138);
+
 struct HurtCapsule {
-    /// @at{0} @sz{4}
-    Tangibility tangibility;
-
-    /// @at{4} @sz{C}
-    /// The offset of point @e a of the capsule.
+    HurtCapsuleState state;
     Vec3 a_offset;
-
-    /// @at{10} @sz{C}
-    /// The offset of point @e b of the capsule.
     Vec3 b_offset;
-
-    /// @at{1C} @sz{4}
-    /// The scale of the capsule.
-    f32 scl;
-
+    float scale;
     HSD_JObj* bone; // 0x20
     u8 skip_update_pos : 1;
     u8 x24_b1 : 1; // 0x24 0x40
@@ -135,18 +106,52 @@ struct HurtCapsule {
     u8 x24_b5 : 1; // 0x24 0x04
     u8 x24_b6 : 1; // 0x24 0x02
     u8 x24_b7 : 1; // 0x24 0x01
-
-    /// @at{28} @sz{C}
-    /// The position of point @e a of the capsule.
     Vec3 a_pos;
-
-    /// @at{28} @sz{C}
-    /// The position of point @e b of the capsule.
     Vec3 b_pos;
-
     int bone_idx;      // 0x40
     enum_t kind;       // 0x44. 0 = low, 1 = mid, 2 = high
     bool is_grabbable; // 0x48
+};
+
+STATIC_ASSERT(sizeof(HurtCapsule) == 0x4C);
+
+struct ReflectDesc {
+    u32 x0_bone_id;
+    s32 x4_max_damage;
+    Vec3 x8_offset;
+    float x14_size;
+    float x18_damage_mul;
+    float x1C_speed_mul;
+
+    /// @remarks Setting this to 1 causes the reflector to skip ownership
+    /// change
+    u8 x20_behavior;
+};
+
+struct AbsorbDesc {
+    /*  +0 */ int x0_bone_id;
+    /*  +4 */ Vec3 x4_offset;
+    /* +10 */ float x10_size;
+};
+
+struct ShieldDesc {
+    int bone;
+    Vec3 pos;
+    float radius;
+    float dmg_mul;
+    float vel_mul;
+    u8 flags : 8;
+};
+
+struct lbRefract_CallbackData {
+    s32 unk0;        // x00
+    s32 unk1;        // x04
+    s32 unk2;        // x08
+    s32 unk3;        // x08
+    s32 unk4;        // x10
+    s32 unk5;        // x14
+    void* callback0; // x1C
+    void* callback1; // x20
 };
 
 #endif

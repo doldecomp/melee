@@ -3,9 +3,8 @@
 #ifndef GALE01_116EBC
 #define GALE01_116EBC
 
+#include <platform.h>
 #include <baselib/forward.h>
-
-#include <stdbool.h>
 
 /* 116EBC */ bool ftNs_SpecialN_CheckSpecialNHold(HSD_GObj* gobj);
 /* 116F00 */ void ftNs_SpecialN_SetNULL(HSD_GObj* gobj);

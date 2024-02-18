@@ -17,7 +17,7 @@
 
 #include <dolphin/gx/GXTexture.h>
 #include <dolphin/mtx.h>
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/aobj.h>
 #include <baselib/archive.h>
 #include <baselib/cobj.h>
@@ -33,11 +33,11 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
-#include <baselib/mobj.h>
 #include <baselib/object.h>
 #include <baselib/random.h>
 #include <baselib/state.h>
-#include <baselib/wobj.h>
+#include <baselib/tobj.h>
+#include <baselib/wobj.h> // IWYU pragma: keep
 
 // context stuff
 typedef struct FountainParams {
@@ -712,7 +712,7 @@ ret:
 
 HSD_WObjDesc EyeDesc = { NULL, { 0.0f, 0.0f, 1.0f }, NULL };
 HSD_WObjDesc InterestDesc = { NULL, { 0.0f, 0.0f, 0.0f }, NULL };
-HSD_CObjDesc ReflectCObjDesc = {
+HSD_CameraDescPerspective ReflectCObjDesc = {
     NULL,
     0,
     1,
@@ -734,10 +734,8 @@ HSD_CObjDesc ReflectCObjDesc = {
     NULL,
     0.1f,
     32768.0f,
-    {
-        30.0f,
-        1.2173333168029785f,
-    },
+    30.0f,
+    1.2173333168029785f,
 };
 
 HSD_GObj* grIzumi_801CCD98(void)

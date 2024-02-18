@@ -1,7 +1,6 @@
 #ifndef GALE01_08D5FC
 #define GALE01_08D5FC
 
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
 
 /* 08D5FC */ void ftCo_LandingAir_EnterWithLag(ftCo_GObj* gobj);

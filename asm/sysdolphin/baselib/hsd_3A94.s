@@ -1376,3 +1376,101 @@ hsd_803A949C:
     .4byte .L_803AA748
     .4byte .L_803A972C
     .4byte .L_803AA350
+
+.section .bss, "wa"
+    .balign 8
+
+.global hsd_804D1138
+hsd_804D1138:
+    .skip 0x10
+
+.global hsd_804D1148
+hsd_804D1148:
+    .skip 0x1200
+
+.global hsd_804D2348
+hsd_804D2348:
+    .skip 0x300
+
+.global hsd_804D2648
+hsd_804D2648:
+    .skip 0x828
+
+.global hsd_804D2E70
+hsd_804D2E70:
+    .skip 0x824
+
+.section .sbss
+    .balign 8
+
+.global hsd_804D7980
+hsd_804D7980:
+    .skip 0x4
+
+.global hsd_804D7984
+hsd_804D7984:
+    .skip 0x4
+
+.global hsd_804D7988
+hsd_804D7988:
+    .skip 0x4
+
+.global hsd_804D798C
+hsd_804D798C:
+    .skip 0x4
+
+.global hsd_804D7990
+hsd_804D7990:
+    .skip 0x4
+
+.global hsd_804D7994
+hsd_804D7994:
+    .skip 0x4
+
+.global hsd_804D7998
+hsd_804D7998:
+    .skip 0x4
+
+.global hsd_804D799C
+hsd_804D799C:
+    .skip 0x4
+
+.global hsd_804D79A0
+hsd_804D79A0:
+    .skip 0x4
+
+.global hsd_804D79A4
+hsd_804D79A4:
+    .skip 0x4
+
+.global hsd_804D79A8
+hsd_804D79A8:
+    .skip 0x4
+
+.global hsd_804D79AC
+hsd_804D79AC:
+    .skip 0x4
+
+.global hsd_804D79B0
+hsd_804D79B0:
+    .skip 0x8
+
+.global hsd_804D79B8
+hsd_804D79B8:
+    .skip 0x4
+
+.global hsd_804D79BC
+hsd_804D79BC:
+    .skip 0x4
+
+.global hsd_804D79C0
+hsd_804D79C0:
+    .skip 0x4
+
+.global hsd_804D79C4
+hsd_804D79C4:
+    .skip 0x4
+
+.global hsd_804D79C8
+hsd_804D79C8:
+    .skip 0x1

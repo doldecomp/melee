@@ -10,11 +10,10 @@ from typing import Optional, cast
 from elftools.elf.elffile import ELFFile
 from elftools.elf.sections import SymbolTableSection
 
-root = Path(__file__).parent.parent
+root = Path(__file__).parents[1]
 dtk_root = root / "build/GALE01"
 obj_root = dtk_root / "obj"
 asm_root = dtk_root / "asm"
-m2c_script = root / "tools/m2c/m2c.py"
 ctx_file = root / "build/ctx.c"
 m2ctx_script = root / "tools/m2ctx/m2ctx.py"
 
@@ -60,7 +59,7 @@ def run_cmd(cmd: list[str]) -> str:
         return result.stdout.decode()
 
 
-def gen_ctx():
+def gen_ctx() -> None:
     run_cmd(
         [
             "python",
@@ -71,7 +70,7 @@ def gen_ctx():
     )
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Decomp a function using m2c")
     parser.add_argument(
         "function",
@@ -93,19 +92,19 @@ def main():
         "--no-copy",
         action="store_false",
         dest="copy",
-        help=f"do not copy the output to the clipboard",
+        help="do not copy the output to the clipboard",
     )
     parser.add_argument(
         "--no-print",
         action="store_false",
         dest="print",
-        help=f"do not print the output",
+        help="do not print the output",
     )
     parser.add_argument(
         "--colorize",
         action="store_true",
         dest="color",
-        help=f"colorize the output (requires pygments)",
+        help="colorize the output (requires pygments)",
     )
 
     args = parser.parse_args()
@@ -115,7 +114,8 @@ def main():
 
         m2c_cmd: list[str] = [
             "python",
-            resolve_path(m2c_script),
+            "-m",
+            "m2c.main",
             *args.m2c_args,
             "--target",
             "ppc-mwcc-c",
@@ -131,16 +131,29 @@ def main():
 
         output = run_cmd(m2c_cmd)
         if args.copy:
-            import pyperclip
+            try:
+                import pyperclip
 
-            pyperclip.copy(output)
+                pyperclip.copy(output)
+            except ModuleNotFoundError:
+                print("Failed to import pyperclip; could not copy", file=stderr)
+
         if args.print:
             if args.color:
-                from pygments import highlight
-                from pygments.formatters import TerminalFormatter
-                from pygments.lexers import CLexer
+                try:
+                    import colorama
 
-                output = highlight(output, CLexer(), TerminalFormatter())
+                    colorama.just_fix_windows_console()
+                except ModuleNotFoundError:
+                    pass
+                try:
+                    from pygments import highlight
+                    from pygments.formatters import TerminalFormatter
+                    from pygments.lexers import CLexer
+
+                    output = highlight(output, CLexer(), TerminalFormatter())
+                except ModuleNotFoundError:
+                    print("Failed to import pygments; could not colorize", file=stderr)
             print(output, file=sys.stdout)
     else:
         print(f"Could not find {args.function}", file=stderr)

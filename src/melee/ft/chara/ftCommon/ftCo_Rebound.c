@@ -22,7 +22,7 @@ void ftCo_80099D9C(ftCo_GObj* gobj)
         float fp_x191C = fp->dmg.x191C;
         fp->mv.co.rebound.anim_start = (fp->co_attrs.x9C + 0.1f) / fp_x191C;
         fp->mv.co.rebound.x0 =
-            -fp->dmg.x1920 *
+            -fp->dmg.facing_dir *
             (fp_x191C * p_ftCommonData->x3D8 + p_ftCommonData->x3DC);
     }
     ftCommon_800804A0(fp, fp->mv.co.rebound.x0);

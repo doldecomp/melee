@@ -1,6 +1,4 @@
-
 GENERATE_MAP ?= 0
-NON_MATCHING ?= 0
 SKIP_CHECK ?= 0
 REQUIRE_PROTOS ?= 1
 MSG_STYLE ?= gcc
@@ -109,11 +107,6 @@ CFLAGS = -msgstyle $(MSG_STYLE) \
 		-maxerrors $(MAX_ERRORS) \
 		$(INCLUDES)
 
-ifneq ($(NON_MATCHING),1)
-	ASFLAGS += --defsym MUST_MATCH=1
-	CFLAGS += -DMUST_MATCH
-endif
-
 ifeq ($(REQUIRE_PROTOS),1)
 	CFLAGS += -requireprotos
 endif
@@ -144,9 +137,7 @@ HOSTCFLAGS := -Wall -O3 -s
 ### Default target ###
 
 default: $(DOL)
-ifeq ($(NON_MATCHING),1)
-	@echo "Skipping checksum for non-matching build."
-else ifeq ($(SKIP_CHECK),1)
+ifeq ($(SKIP_CHECK),1)
 	@echo "Skipping checksum for this build."
 else
 	$(QUIET) $(SHA1SUM) -c $(TARGET).sha1
@@ -173,7 +164,7 @@ ifeq ($(GENERATE_MAP),1)
 endif
 
 # ELF creation makefile instructions
-$(ELF): $(O_FILES) $(LDSCRIPT)
+$(ELF): $(O_FILES) $(LDSCRIPT) obj_files.mk
 	@echo Linking ELF $@
 	$(file >build/o_files, $(O_FILES))
 	$(QUIET) $(LD) $(LDFLAGS) -o $@ -lcf $(LDSCRIPT) @build/o_files

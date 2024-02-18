@@ -1,8 +1,4 @@
-#ifndef MELEE_GR_GRTCAPTAIN_H
-#define MELEE_GR_GRTCAPTAIN_H
-
-#include "gr/stage.h"
-
-#include <baselib/gobj.h>
+#ifndef GALE01_21FC60
+#define GALE01_21FC60
 
 #endif

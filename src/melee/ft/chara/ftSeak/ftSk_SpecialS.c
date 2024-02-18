@@ -24,20 +24,19 @@
 #include <common_structs.h>
 #include <math.h>
 #include <placeholder.h>
-#include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
 /// @todo Fix common data struct
-#define COMMON_DATA_F32 ((f32*) p_ftCommonData)
+#define COMMON_DATA_F32 ((float*) p_ftCommonData)
 
 void ftSk_SpecialS_80110490(Fighter* fp)
 {
-    f32 v2, v3, v5, v6, v8;
+    float v2, v3, v5, v6, v8;
 
     v2 = atan2f(fp->input.lstick.y, (fp->input.lstick.x * fp->facing_dir));
 
     if (v2 < 0) {
-        v2 += (f32) M_PI * 2;
+        v2 += (float) M_PI * 2;
     }
 
     v3 = v2 * rad_to_deg;
@@ -79,14 +78,14 @@ void ftSk_SpecialS_80110490(Fighter* fp)
         COMMON_DATA_F32[275] * (v8 - fp->mv.sk.specials.x14);
 }
 
-void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, f32 arg2)
+void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, float arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     UNK_T* items = fp->ft_data->x48_items;
 
     u8 _[4];
 
-    int* item;
+    HSD_Joint** item;
 
     if (arg1 == 305) {
         item = items[4];
@@ -97,7 +96,7 @@ void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, f32 arg2)
     ftSk_SpecialS_80110490(fp);
 
     {
-        f32 f = 0.0556F * fp->mv.sk.specials.x18 + 4;
+        float f = 0.0556F * fp->mv.sk.specials.x18 + 4;
 
         if (fp->mv.sk.specials.x14) {
             HSD_JObj* bone = fp->x8AC_animSkeleton;
@@ -184,7 +183,7 @@ void ftSk_SpecialS_80110788(HSD_GObj* gobj)
         }
 
         {
-            f32 left_stick_x = fp->input.lstick.x;
+            float left_stick_x = fp->input.lstick.x;
             Item* item_data = item_gobj->user_data;
             Article* article = item_data->xC4_article_data;
             itChainSegment* chainSegment = article->x4_specialAttributes;
@@ -194,14 +193,14 @@ void ftSk_SpecialS_80110788(HSD_GObj* gobj)
             }
 
             if (left_stick_x < chainSegment->x48) {
-                f32 left_stick_y = fp->input.lstick.y;
+                float left_stick_y = fp->input.lstick.y;
 
                 if (fp->input.lstick.y < 0) {
                     left_stick_y = -left_stick_y;
                 }
 
                 if (left_stick_y < chainSegment->x48) {
-                    f32 mul = 0.5F;
+                    float mul = 0.5F;
                     fp->fv.sk.lstick_delta.x *= mul;
                     fp->fv.sk.lstick_delta.y *= mul;
                 }
@@ -314,9 +313,9 @@ inline void ftSeakSpecialS_LoopChainHitActivate(HSD_GObj* gobj)
     fp->x2219_b3 = true;
 }
 
-inline f32 sumOfSquares(f32 a, f32 b)
+inline float sumOfSquares(float a, float b)
 {
-    f32 c;
+    float c;
 
     a = a * a;
     c = b * b;
@@ -340,11 +339,11 @@ void ftSk_SpecialS_80110BCC(HSD_GObj* gobj)
             item_data->xC4_article_data->x4_specialAttributes;
 
         {
-            f32 sums_of_squares[4];
+            float sums_of_squares[4];
             int i;
             for (i = 0; i < (ssize_t) ARRAY_SIZE(sums_of_squares); i++) {
-                f32 x = fp->fv.sk.x2238[i].x - fp->fv.sk.x2268[i].x;
-                f32 y = fp->fv.sk.x2238[i].y - fp->fv.sk.x2268[i].y;
+                float x = fp->fv.sk.x2238[i].x - fp->fv.sk.x2268[i].x;
+                float y = fp->fv.sk.x2238[i].y - fp->fv.sk.x2268[i].y;
 
                 sums_of_squares[i] = sumOfSquares(x, y);
 
@@ -361,8 +360,8 @@ void ftSk_SpecialS_80110BCC(HSD_GObj* gobj)
             }
 
             {
-                f32 chain_val = chain->x4C;
-                f32 chain_val_sq = chain_val * chain_val;
+                float chain_val = chain->x4C;
+                float chain_val_sq = chain_val * chain_val;
 
                 if (sums_of_squares[0] > chain_val_sq ||
                     sums_of_squares[1] > chain_val_sq ||
@@ -438,13 +437,13 @@ void ftSk_SpecialS_ChainSomething(HSD_GObj* gobj)
     }
 }
 
-f32 ftSk_SpecialS_80110F58(HSD_GObj* gobj)
+float ftSk_SpecialS_80110F58(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->input.lstick.x;
 }
 
-f32 ftSk_SpecialS_80110F64(HSD_GObj* gobj)
+float ftSk_SpecialS_80110F64(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->input.lstick.y;
@@ -461,7 +460,7 @@ void ftSk_SpecialS_80110F70(HSD_GObj* gobj)
     fp->mv.sk.specials.xC = 0;
 
     {
-        f32 var = 0.0;
+        float var = 0.0;
 
         fp->mv.sk.specials.x10 = var;
         fp->mv.sk.specials.x18 = 4.0;
@@ -566,7 +565,7 @@ bool ftSk_SpecialS_CheckInitChain(HSD_GObj* gobj)
             vec0.x = chainSegment->x50;
 
             {
-                f32 x;
+                float x;
                 x = vec0.x;
                 vec0.x *= item_data->facing_dir;
                 it_802BCFC4(item_gobj, &vec0.x, chainSegment, item_data, x);
@@ -824,8 +823,8 @@ void ftSk_SpecialS_80111830(HSD_GObj* gobj)
     fp2->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
 
     {
-        f32 ecb_top;
-        f32 ecb_bot;
+        float ecb_top;
+        float ecb_bot;
         vec0.x = 0.0;
         ecb_top = fp->coll_data.xA4_ecbCurrCorrect.top.y;
         ecb_bot = fp->coll_data.xA4_ecbCurrCorrect.bottom.y;
@@ -881,7 +880,7 @@ void ftSk_SpecialSEnd_Anim(HSD_GObj* gobj)
 
     {
         s32 temp_r3 = fp->mv.sk.specials.x0;
-        f32 temp_f1 = specialAttributes->x28;
+        float temp_f1 = specialAttributes->x28;
 
         HSD_GObj* item_gobj;
 
@@ -920,7 +919,7 @@ void ftSk_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 
     {
         s32 stateVar1 = fp->mv.sk.specials.x0;
-        f32 temp_f1 = specialAttributes->x28;
+        float temp_f1 = specialAttributes->x28;
 
         HSD_GObj* item_gobj;
 

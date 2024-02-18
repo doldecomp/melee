@@ -74,34 +74,6 @@ typedef union _UnkFlagStruct {
     } bits;
 } UnkFlagStruct;
 
-typedef struct _ReflectDesc {
-    u32 x0_bone_id;
-    s32 x4_max_damage;
-    Vec3 x8_offset;
-    f32 x14_size;
-    f32 x18_damage_mul;
-    f32 x1C_speed_mul;
-
-    /// @remarks Setting this to 1 causes the reflector to skip ownership
-    /// change
-    u8 x20_behavior;
-} ReflectDesc;
-
-typedef struct _AbsorbDesc {
-    /*  +0 */ int x0_bone_id;
-    /*  +4 */ Vec3 x4_offset;
-    /* +10 */ float x10_size;
-} AbsorbDesc;
-
-typedef struct _ShieldDesc {
-    int bone;
-    Vec3 pos;
-    f32 radius;
-    f32 dmg_mul;
-    f32 vel_mul;
-    u8 flags : 8;
-} ShieldDesc;
-
 typedef struct ColorOverlay {
     s32 x0_timer;        // 0x0
     s32 x4_pri;          // 0x4  this colanims priority, lower = will persist

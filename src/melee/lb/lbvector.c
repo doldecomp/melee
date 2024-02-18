@@ -7,6 +7,7 @@
 #include <math.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
+#include <dolphin/mtx/vec.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
 
@@ -417,12 +418,12 @@ Vec3* lbVector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
         return NULL;
     }
 
-    viewport[0] = cobj->viewport.left;                        // x origin
-    viewport[1] = cobj->viewport.top;                         // y origin
-    viewport[2] = cobj->viewport.right - cobj->viewport.left; // width
-    viewport[3] = cobj->viewport.bottom - cobj->viewport.top; // height
-    viewport[4] = 0.0f;                                       // near z
-    viewport[5] = 1.0f;                                       // far z
+    viewport[0] = cobj->viewport.xmin;                       // x origin
+    viewport[1] = cobj->viewport.ymin;                       // y origin
+    viewport[2] = cobj->viewport.xmax - cobj->viewport.xmin; // width
+    viewport[3] = cobj->viewport.ymax - cobj->viewport.ymin; // height
+    viewport[4] = 0.0f;                                      // near z
+    viewport[5] = 1.0f;                                      // far z
 
     if (d != 0) {
         HSD_CObjGetEyePosition(cobj, &camPos);

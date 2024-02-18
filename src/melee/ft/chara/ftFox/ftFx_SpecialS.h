@@ -10,8 +10,8 @@
 /* 0E9EA0 */ s32 ftFx_SpecialS_GetCmdVar2(HSD_GObj* gobj);
 /* 0E9EAC */ void ftFx_SpecialS_CopyGhostPosIndexed(HSD_GObj* gobj, s32 index,
                                                     Vec3* ghostPos);
-/* 0E9ED4 */ f32 ftFx_SpecialS_ReturnFloatVarIndexed(HSD_GObj* gobj,
-                                                     s32 index);
+/* 0E9ED4 */ float ftFx_SpecialS_ReturnFloatVarIndexed(HSD_GObj* gobj,
+                                                       s32 index);
 /* 0E9EE8 */ void ftFx_SpecialSStart_Enter(HSD_GObj* gobj);
 /* 0E9F6C */ void ftFx_SpecialAirSStart_Enter(HSD_GObj* gobj);
 /* 0EA004 */ void ftFx_SpecialSStart_Anim(HSD_GObj* gobj);

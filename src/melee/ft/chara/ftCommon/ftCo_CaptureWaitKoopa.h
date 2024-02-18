@@ -1,7 +1,6 @@
 #ifndef GALE01_0BCC20
 #define GALE01_0BCC20
 
-#include <platform.h>
 #include "ftCommon/forward.h"
 
 /* 099150 */ void ftCo_CaptureWaitKoopa_Anim(ftCo_GObj* gobj);

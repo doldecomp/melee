@@ -1,13 +1,11 @@
 #ifndef GALE01_2C01AC
 #define GALE01_2C01AC
 
-#include "it/forward.h"
+#include <platform.h>
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "it/types.h"
-
-#include <stdbool.h>
 
 /* 2C01AC */ void it_802C01AC(Item_GObj* gobj, Vec3* pos, ItemKind kind,
                               float facing_dir);

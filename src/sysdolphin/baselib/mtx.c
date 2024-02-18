@@ -3,8 +3,6 @@
 #include "debug.h"
 #include "math.h"
 
-#include "lb/lbrefract.h"
-
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/vec.h>
 #include <MSL/trigf.h>

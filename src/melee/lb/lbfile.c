@@ -9,7 +9,7 @@
 
 #include <string.h>
 #include <dolphin/dvd/dvd.h>
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <baselib/debug.h>
 #include <baselib/devcom.h>
@@ -26,24 +26,19 @@ void lbFile_8001615C(int r3, int r4, int r5, bool cancelflag)
     cancel = true;
 }
 
-#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
-#endif
 bool lbFile_800161A0(void)
 {
     lb_800195D0();
     return cancel;
 }
-#ifdef MUST_MATCH
 #pragma pop
-#endif
 
-void lbFile_800161C4(int arg0, int arg1, HSD_Archive* arg2, int arg3, int arg4,
-                     int arg5)
+void lbFile_800161C4(int file, u32 src, u32 dest, u32 size, int type, int pri)
 {
     cancel = false;
-    HSD_DevComRequest(arg0, arg1, arg2, arg3, arg4, arg5, lbFile_8001615C, 0);
+    HSD_DevComRequest(file, src, dest, size, type, pri, lbFile_8001615C, 0);
 
     do {
         continue;
@@ -131,18 +126,18 @@ s32 lbFile_800163D8(const char* basename)
     return lbFile_8001634C(entry_num);
 }
 
-void lbFile_800164A4(s32 arg0, HSD_Archive* arg1, s32* arg2, s32 arg3,
-                     HSD_DevComCallback arg4, s32 arg5)
+void lbFile_800164A4(s32 file, u32 src, u32* dest, s32 size,
+                     HSD_DevComCallback callback, void* args)
 {
     s32 var_r0;
-    *arg2 = lbFile_8001634C(arg0);
-    var_r0 = ((u32) arg1 >= 0x80000000) ? 0x21 : 0x23;
-    HSD_DevComRequest(arg0, 0, arg1, (*arg2 + 0x1F) & 0xFFFFFFE0, var_r0, arg3,
-                      arg4, arg5);
+    *dest = lbFile_8001634C(file);
+    var_r0 = (src >= 0x80000000) ? 0x21 : 0x23;
+    HSD_DevComRequest(file, 0, src, (*dest + 0x1F) & 0xFFFFFFE0, var_r0, size,
+                      callback, args);
 }
 
-void lbFile_80016580(const char* basename, HSD_Archive* arg1, s32* arg2,
-                     HSD_DevComCallback arg3, s32 arg4)
+void lbFile_80016580(const char* basename, u32 src, u32* dest,
+                     HSD_DevComCallback callback, void* args)
 {
     u8 _[4];
 
@@ -154,47 +149,47 @@ void lbFile_80016580(const char* basename, HSD_Archive* arg1, s32* arg2,
         __assert(lbFile_803BA508, 0x11A, "entry_num != -1");
     }
 
-    lbFile_800164A4(entry_num, arg1, arg2, 1, arg3, arg4);
+    lbFile_800164A4(entry_num, src, dest, 1, callback, args);
 }
 
-void lbFile_8001668C(const char* arg0, HSD_Archive* arg1, s32* arg2)
+void lbFile_8001668C(const char* basename, u32* src, u32* dest)
 {
     cancel = false;
-    lbFile_80016580(arg0, arg1, arg2, lbFile_8001615C, 0);
+    lbFile_80016580(basename, (u32) src, dest, lbFile_8001615C, 0);
     do {
     } while (!lbFile_800161A0());
 }
 
-inline void qwer(s32 a, const char* arg0, HSD_Archive** arg1, s32* arg2)
+inline void qwer(s32 a, const char* basename, u32* src, u32* dest)
 {
-    *arg2 = lbFile_800163D8(arg0);
-    *arg1 = lbHeap_80015BD0(a, (*arg2 + 0x1F) & 0xFFFFFFE0);
-    lbFile_80016580(arg0, *arg1, arg2, lbFile_8001615C, 0);
+    *dest = lbFile_800163D8(basename);
+    *src = (u32) lbHeap_80015BD0(a, (*dest + 0x1F) & 0xFFFFFFE0);
+    lbFile_80016580(basename, *src, dest, lbFile_8001615C, 0);
 
     do {
         continue;
     } while (!lbFile_800161A0());
 }
 
-void lbFile_80016760(const char* arg0, HSD_Archive** arg1, s32* arg2)
+void lbFile_80016760(const char* basename, u32* src, u32* dest)
 {
     cancel = false;
-    qwer(0, arg0, arg1, arg2);
+    qwer(0, basename, src, dest);
 }
 
-inline s32 func_800163D8_inline(const char* arg1)
+inline u32 func_800163D8_inline(const char* basename)
 {
-    return lbFile_800163D8(arg1);
+    return lbFile_800163D8(basename);
 }
 
-bool lbFile_800168A0(s32 arg0, const char* arg1, HSD_Archive** arg2, s32* arg3)
+bool lbFile_800168A0(s32 arg0, const char* basename, u32* src, u32* dest)
 {
-    if ((*arg2 = lbDvd_8001819C(arg1))) {
-        *arg3 = func_800163D8_inline(arg1);
+    if ((*src = (u32) lbDvd_8001819C(basename))) {
+        *dest = func_800163D8_inline(basename);
         return true;
     } else {
         cancel = false;
-        qwer(arg0, arg1, arg2, arg3);
+        qwer(arg0, basename, src, dest);
         return false;
     }
 }

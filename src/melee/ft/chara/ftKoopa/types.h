@@ -6,8 +6,8 @@
 #include <placeholder.h>
 
 struct ftKoopa_FighterVars {
-    /* 0x222C */ f32 x222C;
-    /* 0x2230 */ f32 x2230;
+    /* 0x222C */ float x222C;
+    /* 0x2230 */ float x2230;
 };
 
 union ftKoopa_MotionVars {
@@ -21,51 +21,51 @@ union ftKoopa_MotionVars {
 };
 
 typedef struct _ftKoopaAttributes {
-    f32 x0;
+    float x0;
     u32 x4;
-    f32 x8;
-    f32 xC;
-    f32 x10;
-    f32 x14;
-    f32 x18;
-    f32 x1C;
+    float x8;
+    float xC;
+    float x10;
+    float x14;
+    float x18;
+    float x1C;
     u32 x20;
-    f32 x24;
-    f32 x28;
+    float x24;
+    float x28;
     u32 x2C;
-    f32 x30;
-    f32 x34;
-    f32 x38;
-    f32 x3C;
-    f32 x40;
-    f32 x44;
-    f32 x48;
-    f32 x4C;
+    float x30;
+    float x34;
+    float x38;
+    float x3C;
+    float x40;
+    float x44;
+    float x48;
+    float x4C;
     u32 unk50;
-    f32 x54;
-    f32 x58;
-    f32 x5C;
-    f32 x60;
-    f32 x64;
-    f32 x68;
-    f32 x6C;
-    f32 x70;
-    f32 x74;
-    f32 x78;
-    f32 x7C;
-    f32 x80;
-    f32 x84;
-    f32 x88;
-    f32 x8C;
-    f32 x90;
-    f32 x94;
-    f32 x98;
-    f32 x9C;
+    float x54;
+    float x58;
+    float x5C;
+    float x60;
+    float x64;
+    float x68;
+    float x6C;
+    float x70;
+    float x74;
+    float x78;
+    float x7C;
+    float x80;
+    float x84;
+    float x88;
+    float x8C;
+    float x90;
+    float x94;
+    float x98;
+    float x9C;
 } ftKoopaAttributes;
 
 typedef struct _ftKoopaVars {
-    f32 x0;
-    f32 x4;
+    float x0;
+    float x4;
 } ftKoopaVars;
 
 #endif

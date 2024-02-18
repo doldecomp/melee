@@ -5,9 +5,11 @@
 
 #include "types.h"
 
+#include "ft/ft_0877.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcamera.h"
+#include "ft/ftcolanim.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -15,10 +17,6 @@
 #include "pl/player.h"
 
 #include <baselib/random.h>
-
-#ifdef MUST_MATCH
-#include "melee/ft/ft_0877.h"
-#endif
 
 MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount] = {
     {
@@ -2397,7 +2395,20 @@ HSD_GObjEvent ftKb_Init_803C9E54[] = {
     NULL,
 };
 
-typedef unk_t ftKirby_UnkArrayThing[12];
+typedef struct ftKirby_UnkArrayThing {
+    /*  +0 */ int x0;
+    /*  +4 */ int x4;
+    /*  +8 */ int x8;
+    /*  +C */ int xC;
+    /* +10 */ int x10;
+    /* +14 */ int x14;
+    /* +18 */ int x18;
+    /* +1C */ int x1C;
+    /* +20 */ int x20;
+    /* +24 */ int x24;
+    /* +28 */ int x28;
+    /* +2C */ int x2C;
+} ftKirby_UnkArrayThing;
 
 ftKirby_UnkArrayThing ftKb_Init_803C9ED8 = { 0 };
 ftKirby_UnkArrayThing ftKb_Init_803C9F08 = { 0 };
@@ -2900,7 +2911,7 @@ Vec3 ftKb_Init_803CB758[] = {
     { +4, +4, +4 },
 };
 
-f32 ftKb_Init_803CB770[] = {
+float ftKb_Init_803CB770[] = {
     -1, -0.75, -0.5, -0.25, 0, +0.25, +0.5, +0.75, +1,
 };
 
@@ -2946,59 +2957,9 @@ jtbl_t ftKb_Init_803CB7DC = {
 
 uint ftKb_Init_803CB828[] = { 0x00030DB9, 0x00030DBC, 0x00030DBF, 0x00030DC2 };
 
-f32 const ftKb_Init_803B7548[10] = { 0 };
+float const ftKb_Init_803B7548[10] = { 0 };
 Vec3 const ftKb_Init_803B7570 = { 0, 4, 0 };
 Vec3 const ftKb_Init_803B757C = { 0, 4, 0 };
-
-#ifdef MUST_MATCH
-#pragma push
-asm void ftKb_Init_800EE528(void)
-{ // clang-format off
-    nofralloc
-/* 800EE528 00000000  38 00 00 21 */	li r0, 33
-/* 800EE52C 00000004  3C 80 80 46 */	lis r4, ft_80459B88@ha
-/* 800EE530 00000008  7C 09 03 A6 */	mtctr r0
-/* 800EE534 0000000C  3C 60 80 3D */	lis r3, ftKb_Init_803C9FC8@ha
-/* 800EE538 00000010  38 84 9B 88 */	addi r4, r4, ft_80459B88@l
-/* 800EE53C 00000014  38 A3 9F C8 */	addi r5, r3, ftKb_Init_803C9FC8@l
-lbl_800EE540:
-/* 800EE540 00000018  38 00 00 00 */	li r0, 0
-/* 800EE544 0000001C  90 04 00 00 */	stw r0, 0(r4)
-/* 800EE548 00000020  80 65 00 00 */	lwz r3, 0(r5)
-/* 800EE54C 00000024  28 03 00 00 */	cmplwi r3, 0
-/* 800EE550 00000028  41 82 00 60 */	beq lbl_800EE5B0
-/* 800EE554 0000002C  90 03 00 00 */	stw r0, 0(r3)
-/* 800EE558 00000030  80 65 00 00 */	lwz r3, 0(r5)
-/* 800EE55C 00000034  90 03 00 04 */	stw r0, 4(r3)
-/* 800EE560 00000038  80 65 00 00 */	lwz r3, 0(r5)
-/* 800EE564 0000003C  90 03 00 08 */	stw r0, 8(r3)
-/* 800EE568 00000040  80 65 00 00 */	lwz r3, 0(r5)
-/* 800EE56C 00000044  90 03 00 0C */	stw r0, 12(r3)
-/* 800EE570 00000048  80 65 00 00 */	lwz r3, 0(r5)
-/* 800EE574 0000004C  90 03 00 10 */	stw r0, 16(r3)
-/* 800EE578 00000050  80 65 00 00 */	lwz r3, 0(r5)
-/* 800EE57C 00000054  90 03 00 14 */	stw r0, 20(r3)
-/* 800EE580 00000058  80 65 00 00 */	lwz r3, 0(r5)
-/* 800EE584 0000005C  90 03 00 18 */	stw r0, 24(r3)
-/* 800EE588 00000060  80 65 00 00 */	lwz r3, 0(r5)
-/* 800EE58C 00000064  90 03 00 1C */	stw r0, 28(r3)
-/* 800EE590 00000068  80 65 00 00 */	lwz r3, 0(r5)
-/* 800EE594 0000006C  90 03 00 20 */	stw r0, 32(r3)
-/* 800EE598 00000070  80 65 00 00 */	lwz r3, 0(r5)
-/* 800EE59C 00000074  90 03 00 24 */	stw r0, 36(r3)
-/* 800EE5A0 00000078  80 65 00 00 */	lwz r3, 0(r5)
-/* 800EE5A4 0000007C  90 03 00 28 */	stw r0, 40(r3)
-/* 800EE5A8 00000080  80 65 00 00 */	lwz r3, 0(r5)
-/* 800EE5AC 00000084  90 03 00 2C */	stw r0, 44(r3)
-lbl_800EE5B0:
-/* 800EE5B0 00000088  38 84 00 04 */	addi r4, r4, 4
-/* 800EE5B4 0000008C  38 A5 00 04 */	addi r5, r5, 4
-/* 800EE5B8 00000090  42 00 FF 88 */	bdnz lbl_800EE540
-/* 800EE5BC 00000094  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-
-#elif false
 
 // https://decomp.me/scratch/6dL9q
 void ftKb_Init_800EE528(void)
@@ -3008,7 +2969,7 @@ void ftKb_Init_800EE528(void)
 
     s32 i;
     for (i = 0; i < FTKIND_MAX; i++) {
-        struct S_KIRBY1* unk_struct;
+        ftKirby_UnkArrayThing* unk_struct;
         number_list[i] = 0;
         unk_struct = struct_list[i];
         if (unk_struct) {
@@ -3038,8 +2999,6 @@ void ftKb_Init_800EE528(void)
         }
     }
 }
-
-#endif
 
 void ftKb_Init_OnDeath(HSD_GObj* gobj)
 {
@@ -3102,32 +3061,30 @@ void ftKb_Init_800EE7B8(HSD_GObj* gobj)
 /// @file
 /// @todo Matching, but needs more data moved over for DOL match
 
-#if false
-
 void ftKb_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     s32 _[2];
     Fighter* fp = GET_FIGHTER(gobj);
-    ftKirbyAttributes* da = fp->dat_attrs;
-    switch (fp->fv.kb.x2238) {
+    ftKb_DatAttrs* da = fp->dat_attrs;
+    switch (fp->fv.kb.victim_kind) {
     case 3:
-        if (fp->fv.kb.x22E8 == da->x190) {
+        if (fp->fv.kb.xBC == da->x190) {
             ftCo_800BFFD0(fp, 58, 0);
         }
         break;
     case 13:
-        if (fp->fv.kb.x22D4 == da->x168) {
+        if (fp->fv.kb.xA8 == da->x168) {
             ftCo_800BFFD0(fp, 54, 0);
         }
         break;
     case 16:
-        if (fp->fv.kb.x22C8 == da->x384) {
+        if (fp->fv.kb.x9C == da->x384) {
             ftCo_800BFFD0(fp, 93, 0);
             return;
         }
         break;
     case 7:
-        if (fp->fv.kb.x22E0 == 6) {
+        if (fp->fv.kb.xB4 == 6) {
             ftCo_800BFFD0(fp, 87, 0);
         }
         break;
@@ -3151,7 +3108,7 @@ void ftKb_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 
 void ftKb_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(gobj, ftKirbyAttributes);
+    COPY_ATTRS(gobj, ftKb_DatAttrs);
 }
 
 void ftKb_Init_OnKnockbackEnter(HSD_GObj* gobj)
@@ -3163,5 +3120,3 @@ void ftKb_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, 1);
 }
-
-#endif

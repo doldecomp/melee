@@ -6,6 +6,8 @@
 #include <dolphin/gx/forward.h>
 #include <baselib/forward.h>
 
+#include "lb/types.h"
+
 #include <common_structs.h>
 #include <dolphin/gx/types.h>
 
@@ -41,7 +43,7 @@ typedef struct _ftGameWatchAttributes {
     /// MISC. ATTRIBUTES
 
     /// Mr. Game & Watch's Z-Axis stretch; 0.01 by default
-    f32 x0_GAMEWATCH_WIDTH;
+    float x0_GAMEWATCH_WIDTH;
 
     /// Array of four GXColor values, one for each Mr. Game & Watch costume
     /// color
@@ -53,21 +55,21 @@ typedef struct _ftGameWatchAttributes {
     /// NEUTRAL SPECIAL - CHEF
 
     /// Allow rapid-firing sausages from this frame onward
-    f32 x18_GAMEWATCH_CHEF_LOOPFRAME;
+    float x18_GAMEWATCH_CHEF_LOOPFRAME;
 
     /// Maximum amount of sausages created per Chef use
-    f32 x1C_GAMEWATCH_CHEF_MAX;
+    float x1C_GAMEWATCH_CHEF_MAX;
 
     /// SIDE SPECIAL - JUDGEMENT
 
     /// Horizontal momentum preservation value
-    f32 x20_GAMEWATCH_JUDGE_MOMENTUM_PRESERVE;
+    float x20_GAMEWATCH_JUDGE_MOMENTUM_PRESERVE;
 
     /// Multiplies momentum preservation value
-    f32 x24_GAMEWATCH_JUDGE_MOMENTUM_MUL;
-    f32 x28_GAMEWATCH_JUDGE_VEL_Y;
-    f32 x2C_GAMEWATCH_JUDGE_FRICTION1;
-    f32 x30_GAMEWATCH_JUDGE_FRICTION2;
+    float x24_GAMEWATCH_JUDGE_MOMENTUM_MUL;
+    float x28_GAMEWATCH_JUDGE_VEL_Y;
+    float x2C_GAMEWATCH_JUDGE_FRICTION1;
+    float x30_GAMEWATCH_JUDGE_FRICTION2;
 
     /// Array of BOOLs that toggle respective Judgement numbers ON/OFF. If a
     /// number is OFF, it is excluded from RNG rolls. Game panics if less than
@@ -78,34 +80,34 @@ typedef struct _ftGameWatchAttributes {
 
     /// Minimum control stick range required for directional influence? Also
     /// affects how far Mr. Game & Watch flings horizontally (?)
-    f32 x58_GAMEWATCH_RESCUE_STICK_RANGE;
+    float x58_GAMEWATCH_RESCUE_STICK_RANGE;
 
     /// Radians -- controls how far Mr. Game & Watch can angle Fire Rescue?
-    f32 x5C_GAMEWATCH_RESCUE_ANGLE_UNK;
+    float x5C_GAMEWATCH_RESCUE_ANGLE_UNK;
 
     /// Landing lag / Freefall toggle
-    f32 x60_GAMEWATCH_RESCUE_LANDING;
+    float x60_GAMEWATCH_RESCUE_LANDING;
 
     /// DOWN SPECIAL - OIL PANIC
 
     /// Horizontal momentum preservation value
-    f32 x64_GAMEWATCH_PANIC_MOMENTUM_PRESERVE;
+    float x64_GAMEWATCH_PANIC_MOMENTUM_PRESERVE;
 
     /// Multiplies momentum preservation value
-    f32 x68_GAMEWATCH_PANIC_MOMENTUM_MUL;
+    float x68_GAMEWATCH_PANIC_MOMENTUM_MUL;
 
     /// Falling acceleration
-    f32 x6C_GAMEWATCH_PANIC_FALL_ACCEL;
+    float x6C_GAMEWATCH_PANIC_FALL_ACCEL;
 
     /// Terminal Y velocity?
-    f32 x70_GAMEWATCH_PANIC_VEL_Y_MAX;
+    float x70_GAMEWATCH_PANIC_VEL_Y_MAX;
 
     /// Extra damage added to Oil Panic after formula
-    f32 x74_GAMEWATCH_PANIC_DAMAGE_ADD;
+    float x74_GAMEWATCH_PANIC_DAMAGE_ADD;
 
     /// Damage multiplier
-    f32 x78_GAMEWATCH_PANIC_DAMAGE_MUL;
-    f32 x7C_GAMEWATCH_PANIC_TURN_FRAMES;
+    float x78_GAMEWATCH_PANIC_DAMAGE_MUL;
+    float x7C_GAMEWATCH_PANIC_TURN_FRAMES;
 
     /// Oil Panic absorption attributes
     AbsorbDesc x80_GAMEWATCH_PANIC_ABSORPTION;

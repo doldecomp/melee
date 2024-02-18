@@ -11,6 +11,6 @@ anyhow = "1.0.70"
 clap = { version = "4.2.1", features = ["derive"] }
 env_logger = "0.10.0"
 log = "0.4.17"
-melee-utils = { version = "0.1.0", path = "../rust-utils" }
+melee-utils = { path = "../rust-utils" }
 memmap2 = "0.5.10"
 rayon = "1.7.0"

@@ -10,8 +10,6 @@
 #include "ftMasterHand/types.h"
 #include "pl/player.h"
 
-#include <baselib/gobj.h>
-
 void ftMh_Drill_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_354_80152370(HSD_GObj* gobj)

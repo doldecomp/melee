@@ -260,14 +260,14 @@ void ftGw_SpecialLw_IASA(HSD_GObj* gobj)
         if (turn_frames > 0) {
             fp->mv.gw.SpecialLw.turnFrames = turn_frames - 1;
         } else {
-            f32 stick_range = fp->input.lstick.x;
+            float stick_range = fp->input.lstick.x;
 
             if (stick_range < 0) {
                 stick_range = -stick_range;
             }
 
             if (stick_range > p_ftCommonData->x0) {
-                f32 facing_dir = fp->facing_dir;
+                float facing_dir = fp->facing_dir;
 
                 ftCommon_8007D9FC(fp);
 
@@ -297,14 +297,14 @@ void ftGw_SpecialAirLw_IASA(HSD_GObj* gobj)
         if (turnFrames > 0) {
             fp->mv.gw.SpecialLw.turnFrames = turnFrames - 1;
         } else {
-            f32 stick_range = fp->input.lstick.x;
+            float stick_range = fp->input.lstick.x;
 
             if (stick_range < 0) {
                 stick_range = -stick_range;
             }
 
             if (stick_range > p_ftCommonData->x0) {
-                f32 facingDir = fp->facing_dir;
+                float facingDir = fp->facing_dir;
                 ftCommon_8007D9FC(fp);
 
                 if (facingDir != fp->facing_dir) {
@@ -430,7 +430,7 @@ static u32 const transition_flags1 =
     Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
     Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
-void ftGw_SpecialLw_UpdateAction(HSD_GObj* gobj, f32 anim_frame)
+void ftGw_SpecialLw_UpdateAction(HSD_GObj* gobj, float anim_frame)
 {
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw, transition_flags1,
                               anim_frame - 1, 1, 0, NULL);
@@ -439,7 +439,7 @@ void ftGw_SpecialLw_UpdateAction(HSD_GObj* gobj, f32 anim_frame)
     ftGameWatch_SpecialLw_UpdateVarsAction(gobj);
 }
 
-void ftGw_SpecialAirLw_UpdateAction(HSD_GObj* gobj, f32 anim_frame)
+void ftGw_SpecialAirLw_UpdateAction(HSD_GObj* gobj, float anim_frame)
 {
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw, transition_flags1,
                               anim_frame - 1, 1, 0, NULL);
@@ -692,7 +692,7 @@ void ftGw_SpecialLwShoot_ReleaseOil(HSD_GObj* gobj)
                               sa->x78_GAMEWATCH_PANIC_DAMAGE_MUL;
 
             {
-                f32 panicDamage =
+                float panicDamage =
                     fp->cmd_vars[1] + sa->x74_GAMEWATCH_PANIC_DAMAGE_ADD;
 
                 fp->cmd_vars[1] = panicDamage;
@@ -726,7 +726,7 @@ void ftGw_SpecialAirLwShoot_ReleaseOil(HSD_GObj* gobj)
                               sa->x78_GAMEWATCH_PANIC_DAMAGE_MUL;
 
             {
-                f32 panicDamage =
+                float panicDamage =
                     fp->cmd_vars[1] + sa->x74_GAMEWATCH_PANIC_DAMAGE_ADD;
                 fp->cmd_vars[1] = panicDamage;
             }

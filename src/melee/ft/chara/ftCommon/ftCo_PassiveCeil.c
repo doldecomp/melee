@@ -20,7 +20,6 @@
 #include "ftKirby/ftKb_Init.h"
 
 #include <common_structs.h>
-#include <stddef.h>
 
 bool ftCo_800C23A0(ftCo_GObj* gobj)
 {

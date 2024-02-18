@@ -24,6 +24,20 @@
 
 #include <common_structs.h>
 
+/* 0992A8 */ static void ftCo_800992A8(ftCo_GObj* gobj, FtMotionId msid, bool);
+/* 099314 */ static void ftCo_80099314(ftCo_GObj* gobj, FtMotionId msid,
+                                       bool arg2);
+/* 099390 */ static void ftCo_80099390(ftCo_GObj* gobj, FtMotionId msid,
+                                       bool arg2);
+/* 099438 */ static void ftCo_80099438(ftCo_GObj* gobj, FtMotionId msid,
+                                       bool arg2);
+/* 099564 */ static void ftCo_80099564(ftCo_GObj* gobj);
+/* 099644 */ static void ftCo_80099644(ftCo_GObj* gobj);
+/* 099754 */ static void ftCo_80099754(ftCo_GObj* gobj);
+/* 099894 */ static void ftCo_80099894(ftCo_GObj* gobj);
+/* 0998EC */ static void ftCo_800998EC(ftCo_GObj* gobj);
+/* 099954 */ static void ftCo_80099954(ftCo_GObj* gobj);
+
 static inline bool inlineA0(ftCo_Fighter* fp)
 {
     if (ABS(fp->input.lstick.x) >= p_ftCommonData->x31C &&

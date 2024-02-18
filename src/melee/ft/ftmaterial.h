@@ -7,8 +7,6 @@
 #include <dolphin/gx/forward.h>
 #include <baselib/forward.h>
 
-#include <baselib/mobj.h>
-
 /* 0BF260 */ void ftMaterial_800BF260(void);
 /* 0BF2B8 */ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode);
 /* 0BF534 */ HSD_TExp* ftMaterial_800BF534(Fighter* fp, HSD_MObj* mobj,

@@ -1,7 +1,6 @@
 #include <platform.h>
 #include "ftCommon/forward.h"
 #include <dolphin/gx/forward.h>
-#include <baselib/forward.h>
 
 #include "ft/fighter.h"
 
@@ -65,7 +64,6 @@
 #include "lb/lb_00CE.h"
 #include "lb/lbarchive.h"
 #include "lb/lbmthp.h"
-#include "lb/lbrefract.h"
 #include "lb/lbshadow.h"
 #include "lb/types.h"
 #include "mp/mpcoll.h"
@@ -79,7 +77,7 @@
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/vec.h>
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/controller.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
@@ -98,8 +96,6 @@ extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
 extern ftData* gFtDataList[FTKIND_MAX];
 extern MotionState ftData_MotionStateList[ftCo_MS_Count];
 extern MotionState* ftData_CharacterStateTables[FTKIND_MAX];
-
-extern s8 ftData_UnkBytePerCharacter[FTKIND_MAX];
 
 extern HSD_PadStatus HSD_PadRumbleData[4];
 
@@ -126,7 +122,7 @@ u32 Fighter_804D64F8 = 0;
 // the following seems to be an array, initialized in reverse in
 UNK_T Fighter_804D64FC = NULL;
 UNK_T Fighter_804D6500 = NULL;
-UNK_T Fighter_804D6504 = NULL;
+HSD_Joint* Fighter_804D6504 = NULL;
 UNK_T Fighter_804D6508 = NULL;
 int* Fighter_804D650C = NULL;
 UNK_T Fighter_804D6510 = NULL;
@@ -185,7 +181,7 @@ void Fighter_FirstInitialize_80067A84(void)
 void Fighter_LoadCommonData(void)
 {
     void** pData;
-    lbArchive_80016C64("PlCo.dat", &pData, "ftLoadCommonData", 0);
+    lbArchive_80016C64("PlCo.dat", (void**) &pData, "ftLoadCommonData", 0);
 
     // copy 23 4-byte chunks from pData to p_ftCommonData in reverse order,
     // equivalent to this: for(i=0; i<23; i++)
@@ -221,7 +217,7 @@ void Fighter_UpdateModelScale(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Vec3 scale;
-    f32 modelScale = ftCommon_GetModelScale(fp);
+    float modelScale = ftCommon_GetModelScale(fp);
 
     if (fp->x34_scale.z != 1.0f) {
         scale.x = fp->x34_scale.z;
@@ -238,7 +234,7 @@ void Fighter_UpdateModelScale(Fighter_GObj* gobj)
 void Fighter_UnkInitReset_80067C98(Fighter* fp)
 {
     Vec3 player_coords;
-    f32 x, y, z;
+    float x, y, z;
 
     fp->x8_spawnNum = Fighter_NewSpawn_80068E40();
     Player_LoadPlayerCoords(fp->player_id, &player_coords);
@@ -356,7 +352,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x2220_flag.bits.b4 = 0;
 
     fp->dmg.x1914 = 0;
-    fp->dmg.x1918 = 0;
+    fp->dmg.int_value = 0;
     fp->dmg.x191C = 0;
     fp->dmg.x1924 = 0;
     fp->dmg.x1928 = 0;
@@ -488,11 +484,11 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x2224_b2 = fp->x2224_b3 = false;
 
     fp->x2224_b4 = false;
-    fp->x2108 = 0;
+    fp->capture_timer = 0;
     fp->x2224_b5 = false;
     fp->x1A53 = 0;
     fp->x1A52 = 0;
-    fp->x210C_walljumpInputTimer = 254;
+    fp->wall_jump_input_timer = 254;
     fp->dmg.x1910 = 0;
     fp->x2225_b0 = false;
     fp->x2225_b2 = true;
@@ -987,8 +983,8 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
 
     if ((flags & Ft_MF_SkipParasol) == 0) {
         fp->x2221_b4 = 0;
-        if ((ftCo_GetParasolStatus(gobj) != -1) &&
-            (ftCo_GetParasolStatus(gobj) != 6))
+        if ((ftGetParasolStatus(gobj) != -1) &&
+            (ftGetParasolStatus(gobj) != 6))
         {
             ftCommon_8007E83C(gobj, 6, 0.0f);
         }
@@ -1321,7 +1317,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                     } else if (((flags & Ft_MF_SkipAnimVel) == 0) &&
                                (fp->ground_or_air == GA_Ground))
                     {
-                        f32 temp_vel =
+                        float temp_vel =
                             fp->x6A4_transNOffset.z * fp->facing_dir;
                         fp->self_vel.x = temp_vel;
                         fp->gr_vel = temp_vel;
@@ -1337,7 +1333,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                     } else if (((flags & Ft_MF_SkipAnimVel) == 0) &&
                                (fp->ground_or_air == GA_Ground))
                     {
-                        f32 temp_vel = fp->x6D8.z * fp->facing_dir;
+                        float temp_vel = fp->x6D8.z * fp->facing_dir;
                         fp->self_vel.x = temp_vel;
                         fp->gr_vel = temp_vel;
                     }
@@ -1752,8 +1748,8 @@ void Fighter_UnkIncrementCounters_8006ABEC(Fighter_GObj* gobj)
 // 2, or a struct of 2 floats.. if it still matches.
 #define SET_STICKS(stickXPtr, stickYPtr, x, y)                                \
     do {                                                                      \
-        f32* stickX = (f32*) &stickXPtr;                                      \
-        f32* stickY = (f32*) &stickYPtr;                                      \
+        float* stickX = (float*) &stickXPtr;                                  \
+        float* stickY = (float*) &stickYPtr;                                  \
         *stickX = x;                                                          \
         *stickY = y;                                                          \
     } while (0)
@@ -1779,8 +1775,8 @@ static void Fighter_Spaghetti_8006AD10_Inner1(Fighter* fp)
 void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    f32 tempf1;
-    f32 tempf0;
+    float tempf1;
+    float tempf0;
 
     if (!fp->x221F_b3) {
         if (!fp->x2224_b2) {
@@ -2122,7 +2118,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
 #define VEC_CLEAR(vec)                                                        \
     do {                                                                      \
         Vec3* vecLocal = (void*) &vec;                                        \
-        f32 c = 0;                                                            \
+        float c = 0;                                                          \
         vecLocal->x = vecLocal->y = vecLocal->z = c;                          \
     } while (0)
 
@@ -2145,8 +2141,8 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
             fp->x2064_ledgeCooldown -= 1;
         }
 
-        if (fp->x2108) {
-            fp->x2108 -= 1;
+        if (fp->capture_timer != 0) {
+            --fp->capture_timer;
         }
 
         ftCo_800C0A98(gobj);
@@ -2485,8 +2481,8 @@ void Fighter_8006C27C(Fighter_GObj* gobj)
                 fpclassify(fp->cur_pos.y) == FP_NAN ||
                 fpclassify(fp->cur_pos.z) == FP_NAN)
             {
-                f32 x = Fighter_GetPosX(fp);
-                f32 y = Fighter_GetPosY(fp);
+                float x = Fighter_GetPosX(fp);
+                float y = Fighter_GetPosY(fp);
                 OSReport("fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n", x,
                          y);
                 __assert("fighter.c", 2590, "0");
@@ -2605,7 +2601,7 @@ void Fighter_UnkProcessGrab_8006CA5C(Fighter_GObj* gobj)
 void Fighter_8006CB94(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    f32 func_8007BBCC_float_output;
+    float func_8007BBCC_float_output;
 
     if (!fp->x221F_b3 && !fp->x2219_b1) {
         ftColl_800765E0();
@@ -2623,13 +2619,13 @@ void Fighter_8006CB94(Fighter_GObj* gobj)
     }
 }
 
-void Fighter_UnkTakeDamage_8006CC30(Fighter* fp, f32 arg0)
+void Fighter_UnkTakeDamage_8006CC30(Fighter* fp, float arg0)
 {
     Fighter_TakeDamage_8006CC7C(fp, arg0);
     ftCommon_8007EA90(fp, arg0);
 }
 
-void Fighter_TakeDamage_8006CC7C(Fighter* fp, f32 damage_amount)
+void Fighter_TakeDamage_8006CC7C(Fighter* fp, float damage_amount)
 {
     if (!fp->x2226_b4 || fp->x2226_b3) {
         fp->dmg.x1830_percent += damage_amount;
@@ -2800,7 +2796,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(Fighter_GObj* gobj)
     bool bool2 = 0;
     bool bool3 = 0;
     bool bool4 = 0;
-    f32 forceAppliedOnHit;
+    float forceAppliedOnHit;
 
     if (!fp->x221F_b3) {
         if (!fp->x221A_b7) {
@@ -2906,12 +2902,12 @@ void Fighter_UnkProcessShieldHit_8006D1EC(Fighter_GObj* gobj)
                 }
             }
             bool1 = fp->x19A4;
-        } else if (fp->dmg.x1918) {
+        } else if (fp->dmg.int_value) {
             if ((fp->dmg.x191C) && (!fp->victim_gobj) && (!fp->x1A60)) {
                 ftCommon_8007DB58(gobj);
                 ftCo_80099D9C(gobj);
             }
-            bool1 = fp->dmg.x1918;
+            bool1 = fp->dmg.int_value;
         } else if (fp->dmg.x1914) {
             if (fp->deal_dmg_cb) {
                 fp->deal_dmg_cb(gobj);
@@ -3008,7 +3004,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(Fighter_GObj* gobj)
         fp->dmg.x18a0 = 0.0f;
         fp->dmg.x1840 = 0;
         fp->dmg.x1914 = 0;
-        fp->dmg.x1918 = 0;
+        fp->dmg.int_value = 0;
         fp->dmg.x191C = 0.0f;
         fp->unk_gobj = NULL;
         fp->x221C_b5 = 0;

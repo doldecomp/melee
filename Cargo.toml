@@ -4,5 +4,6 @@ members = [
     "tools/issues",
     "tools/replace-symbols",
     "tools/rust-utils",
+    "tools/scratch-tracker",
 ]
 resolver = "2"

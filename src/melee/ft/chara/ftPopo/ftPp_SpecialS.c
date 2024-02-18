@@ -6,7 +6,7 @@
 
 #include <melee/ft/chara/ftPopo/ftPp_SpecialS.h>
 
-extern f32 const ftPp_Init_804D9848; // 0.0f
+extern float const ftPp_Init_804D9848; // 0.0f
 
 static void setRefGObjFlagAndClear(Fighter* fp)
 {

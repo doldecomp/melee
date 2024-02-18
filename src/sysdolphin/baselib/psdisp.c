@@ -1,5 +1,8 @@
 #include "psdisp.h"
 
+#include <math.h>
+#include <dolphin/gx/GXAttr.h>
+
 typedef struct {
     u8 filename[9];
     u8 message[39];
@@ -13,30 +16,32 @@ typedef struct {
     u8 filename[9];
 } psdisp_UnknownType002;
 
-/* 004D4528 */ extern s32 HSD_PSDisp_804D7948;
-/* 004D4524 */ extern unk_t HSD_PSDisp_804D7944;
-/* 004D4520 */ extern unk_t HSD_PSDisp_804D7940;
-/* 004D451C */ extern unk_t HSD_PSDisp_804D793C;
-/* 004D4518 */ extern unk_t HSD_PSDisp_804D7938;
-/* 004D4514 */ extern unk_t HSD_PSDisp_804D7934;
-/* 004D4510 */ extern s32 HSD_PSDisp_804D7930;
-/* 004D450C */ extern s32 HSD_PSDisp_804D792C;
-/* 004D4508 */ extern f32 HSD_PSDisp_804D7928;
-/* 004D4504 */ extern f32 HSD_PSDisp_804D7924;
-/* 004D4500 */ extern f32 HSD_PSDisp_804D7920;
-/* 004D44FC */ extern f32 HSD_PSDisp_804D791C;
-/* 004D44F8 */ extern f32 HSD_PSDisp_804D7918;
-/* 004D44F4 */ extern f32 HSD_PSDisp_804D7914;
-/* 004D44F0 */ extern s32 HSD_PSDisp_804D7910;
-/* 004D44EC */ extern s32 HSD_PSDisp_804D790C;
-/* 004D44E8 */ extern s32 HSD_PSDisp_804D7908;
-/* 004D2F64 */ extern u8 HSD_PSDisp_804D6384[2];
-/* 004D2F60 */ extern u8 HSD_PSDisp_804D6380[2];
-/* 00408F40 */ extern psdisp_UnknownType002 HSD_PSDisp_8040C360;
-/* 00408EE0 */ extern psdisp_UnknownType001 HSD_PSDisp_8040C300;
-/* 003B6208 */ extern f32 HSD_PSDisp_803B9628[12];
+/* 39F89C */ static void calcTornadoLastPos(HSD_Particle*, f32*, f32*, f32*);
+/* 39FA28 */ static void getColorPrimEnv(HSD_Particle*, GXColor*, GXColor*);
+/* 39FB74 */ static void getColorMatAmb(HSD_Particle*, GXColor*, GXColor*);
+/* 3B9628 */ extern f32 HSD_PSDisp_803B9628[12];
+/* 40C300 */ extern psdisp_UnknownType001 HSD_PSDisp_8040C300;
+/* 40C360 */ extern psdisp_UnknownType002 HSD_PSDisp_8040C360;
+/* 4D6380 */ extern u8 HSD_PSDisp_804D6380[2];
+/* 4D6384 */ extern u8 HSD_PSDisp_804D6384[2];
+/* 4D7908 */ extern s32 HSD_PSDisp_804D7908;
+/* 4D790C */ extern s32 HSD_PSDisp_804D790C;
+/* 4D7910 */ extern s32 HSD_PSDisp_804D7910;
+/* 4D7914 */ extern f32 HSD_PSDisp_804D7914;
+/* 4D7918 */ extern f32 HSD_PSDisp_804D7918;
+/* 4D791C */ extern f32 HSD_PSDisp_804D791C;
+/* 4D7920 */ extern f32 HSD_PSDisp_804D7920;
+/* 4D7924 */ extern f32 HSD_PSDisp_804D7924;
+/* 4D7928 */ extern f32 HSD_PSDisp_804D7928;
+/* 4D792C */ extern s32 HSD_PSDisp_804D792C;
+/* 4D7930 */ extern s32 HSD_PSDisp_804D7930;
+/* 4D7934 */ extern unk_t HSD_PSDisp_804D7934;
+/* 4D7938 */ extern unk_t HSD_PSDisp_804D7938;
+/* 4D793C */ extern unk_t HSD_PSDisp_804D793C;
+/* 4D7940 */ extern unk_t HSD_PSDisp_804D7940;
+/* 4D7944 */ extern unk_t HSD_PSDisp_804D7944;
+/* 4D7948 */ extern s32 HSD_PSDisp_804D7948;
 
-#if 0
 void setVtxDesc(s32 fmt)
 {
     GXClearVtxDesc();
@@ -174,4 +179,3 @@ static void getColorMatAmb(HSD_Particle* pp, GXColor* matCol, GXColor* ambCol)
         ambCol->a = pp->ambA;
     }
 }
-#endif

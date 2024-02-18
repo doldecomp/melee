@@ -7,9 +7,9 @@
 #include "db/db_2253.h"
 #include "gm/gm_1601.h"
 #include "gm/gmmain_lib.h"
-#include "lb/lb_0198.h"
 #include "lb/lbarq.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lbcardgame.h"
 #include "lb/lbdvd.h"
 #include "lb/lbheap.h"
 #include "lb/lblanguage.h"
@@ -19,6 +19,7 @@
 #include "lb/lbtime.h"
 
 #include <placeholder.h>
+#include <stddef.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/gx/GXInit.h>
@@ -32,10 +33,10 @@
 #include <dolphin/os/OSTime.h>
 #include <dolphin/pad/pad.h>
 #include <dolphin/vi/vi.h>
-#include <baselib/baselib_unknown_002.h>
 #include <baselib/controller.h>
 #include <baselib/debug.h>
 #include <baselib/initialize.h>
+#include <baselib/particle.h>
 #include <baselib/rumble.h>
 #include <baselib/sislib.h>
 #include <baselib/video.h>
@@ -125,10 +126,11 @@ static void gmMain_8015FDA4(void)
     }
 }
 
-#ifdef MUST_MATCH
-
-static inline void init_spr_unk(void)
+/// @remarks Might not do anything relevant to a port, but should still
+///          understand its purpose before ignoring it.
+static void init_spr_unk(void)
 {
+#ifdef MWERKS_GEKKO
 #define MTSPR(spr, val)                                                       \
     asm { li r3, val }                                                        \
     asm                                                                       \
@@ -141,24 +143,15 @@ static inline void init_spr_unk(void)
     MTSPR(0x393, 5);
     MTSPR(0x394, 6);
     MTSPR(0x395, 7);
-}
 #else
-
-/// @remarks Might not do anything relevant to a port, but should still
-///          understand its purpose before ignoring it.
-static inline void init_spr_unk(void)
-{
     NOT_IMPLEMENTED;
-}
-
 #endif
+}
 
 int main(void)
 {
-#ifdef MUST_MATCH
     char* unused_format_string = "Data %lx\n";
     u32 _[2];
-#endif
 
     OSInit();
     VIInit();
@@ -218,8 +211,8 @@ int main(void)
     OSReport("# DbLevel %d\n", g_debugLevel);
     OSReport("# Arena Size %d MB\n", arena_size / (1024 * 1024));
     {
-        u32 free_aram_start;
-        u32 free_aram_end;
+        uintptr_t free_aram_start;
+        uintptr_t free_aram_end;
         lbMemory_800154BC(&free_aram_start, &free_aram_end);
         OSReport("# ARAM Free Size %d MB\n",
                  (free_aram_end - free_aram_start) / (1024 * 1024));

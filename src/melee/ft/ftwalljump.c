@@ -29,15 +29,15 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
             s32 env_flags = coll_data->env_flags & MPCOLL_FLAGS_B11;
 
             // side of the collision?
-            f32 wall_dir = env_flags ? -1.f : +1.f;
+            float wall_dir = env_flags ? -1.f : +1.f;
 
-            // x210C_walljumpInputTimer = some walljump animation/input timer?
+            // wall_jump_input_timer = some walljump animation/input timer?
             // is initialized in the else-block when the user does the right
             // inputs. gets incremented here every frame.
-            if ((fp0->x210C_walljumpInputTimer < max_input_frames) &&
+            if ((fp0->wall_jump_input_timer < max_input_frames) &&
                 (wall_dir == fp0->x2110_walljumpWallSide))
             {
-                fp0->x210C_walljumpInputTimer++;
+                fp0->wall_jump_input_timer++;
             } else {
                 Vec3 wall_pos, ecb;
 
@@ -77,7 +77,7 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                     // not sure what this computes, I guess it checks if we are
                     // close to the wall and move towards it with sufficent
                     // speed
-                    f32 x_diff = fp0->pos_delta.x - wall_pos.x;
+                    float x_diff = fp0->pos_delta.x - wall_pos.x;
                     x_diff = x_diff < 0 ? -x_diff : x_diff;
 
                     if (x_diff > fp0->co_attrs.x130) {
@@ -85,14 +85,14 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                         // walljump input timer and check for the control stick
                         // movement away from the wall in the next phase
                         fp0->x2110_walljumpWallSide = wall_dir;
-                        fp0->x210C_walljumpInputTimer = 0U;
+                        fp0->wall_jump_input_timer = 0U;
                     }
                 }
             }
 
             if (
                 // walljump timer within limits?
-                fp0->x210C_walljumpInputTimer < p_ftCommonData->x768 &&
+                fp0->wall_jump_input_timer < p_ftCommonData->x768 &&
                 ((
                      // left wall & control stick right?
                      fp0->x2110_walljumpWallSide == -1 &&
@@ -109,14 +109,14 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                               p_ftCommonData->x774, fp0->x1969_walljumpUsed,
                               fp0->x2110_walljumpWallSide);
 
-                fp0->x210C_walljumpInputTimer = max_input_frames;
+                fp0->wall_jump_input_timer = max_input_frames;
                 if (fp0->x1969_walljumpUsed < 255) {
                     fp0->x1969_walljumpUsed++;
                 }
                 return true;
             }
         } else {
-            fp0->x210C_walljumpInputTimer = max_input_frames;
+            fp0->wall_jump_input_timer = max_input_frames;
         }
     }
 

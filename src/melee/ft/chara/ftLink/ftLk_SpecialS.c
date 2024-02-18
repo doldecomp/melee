@@ -22,7 +22,6 @@
 #include "ftLink/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbrefract.h"
 
 #include <common_structs.h>
 #include <math.h>

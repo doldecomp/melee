@@ -4,48 +4,46 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
+struct S_UNK_YOSHI1;
 typedef struct HSD_GObj ftYs_GObj;
 
 /// @todo Fix names
-static MotionFlags const ftYs_MF_Special ATTRIBUTE_USED =
+static MotionFlags const ftYs_MF_Special =
     Ft_MF_SkipModel | Ft_MF_SkipItemVis | Ft_MF_UnkUpdatePhys |
     Ft_MF_FreezeState;
 
-static MotionFlags const ftYs_MF_MS_341 ATTRIBUTE_USED = Ft_MF_UnkUpdatePhys;
+static MotionFlags const ftYs_MF_MS_341 = Ft_MF_UnkUpdatePhys;
 
-static MotionFlags const ftYs_MF_ShieldStart ATTRIBUTE_USED =
+static MotionFlags const ftYs_MF_ShieldStart =
     Ft_MF_KeepFastFall | Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipAnimVel |
     Ft_MF_Unk06 | Ft_MF_SkipColAnim | Ft_MF_UnkUpdatePhys;
 
-static MotionFlags const ftYs_MF_ShieldHold ATTRIBUTE_USED =
+static MotionFlags const ftYs_MF_ShieldHold =
     Ft_MF_Unk19 | Ft_MF_UnkUpdatePhys;
 
-static MotionFlags const ftYs_MF_SpecialN ATTRIBUTE_USED =
+static MotionFlags const ftYs_MF_SpecialN =
     ftYs_MF_Special | Ft_MF_KeepFastFall;
 
-static MotionFlags const ftYs_MF_SpecialAirHi ATTRIBUTE_USED =
+static MotionFlags const ftYs_MF_SpecialAirHi =
     ftYs_MF_SpecialN | Ft_MF_KeepGfx | Ft_MF_SkipThrowException;
 
-static MotionFlags const ftYs_MF_UnkBase ATTRIBUTE_USED =
-    ftYs_MF_Special | Ft_MF_KeepSfx;
+static MotionFlags const ftYs_MF_UnkBase = ftYs_MF_Special | Ft_MF_KeepSfx;
 
-static MotionFlags const ftYs_MF_SpecialAirS ATTRIBUTE_USED =
-    ftYs_MF_UnkBase | Ft_MF_KeepGfx;
+static MotionFlags const ftYs_MF_SpecialAirS = ftYs_MF_UnkBase | Ft_MF_KeepGfx;
 
-static MotionFlags const ftYs_MF_MS_366 ATTRIBUTE_USED =
+static MotionFlags const ftYs_MF_MS_366 =
     ftYs_MF_UnkBase | Ft_MF_KeepColAnimHitStatus;
 
-static MotionFlags const ftYs_MF_SpecialS ATTRIBUTE_USED =
+static MotionFlags const ftYs_MF_SpecialS =
     ftYs_MF_SpecialN | Ft_MF_SkipParasol;
 
-static MotionFlags const ftYs_MF_MS_365 ATTRIBUTE_USED =
+static MotionFlags const ftYs_MF_MS_365 =
     ftYs_MF_SpecialAirHi | Ft_MF_SkipParasol;
 
-static MotionFlags const ftYs_MF_SpecialHi ATTRIBUTE_USED =
+static MotionFlags const ftYs_MF_SpecialHi =
     ftYs_MF_SpecialAirS | Ft_MF_SkipParasol;
 
-static MotionFlags const ftYs_MF_MS_368 ATTRIBUTE_USED =
-    ftYs_MF_MS_366 | Ft_MF_SkipParasol;
+static MotionFlags const ftYs_MF_MS_368 = ftYs_MF_MS_366 | Ft_MF_SkipParasol;
 
 typedef enum ftYoshi_MotionState {
     ftYs_MS_GuardOn_0 = ftCo_MS_Count,

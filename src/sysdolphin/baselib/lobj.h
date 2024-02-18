@@ -118,7 +118,7 @@ extern HSD_LObjInfo hsdLobj;
 u32 HSD_LObjGetFlags(HSD_LObj* lobj);
 void HSD_LObjSetFlags(HSD_LObj* lobj, u32 flags);
 void HSD_LObjClearFlags(HSD_LObj* lobj, u32 flags);
-s32 HSD_LObjGetLightMaskDiffuse(void);
+GXLightID HSD_LObjGetLightMaskDiffuse(void);
 s32 HSD_LObjGetLightMaskAttnFunc(void);
 s32 HSD_LObjGetLightMaskAlpha(void);
 s32 HSD_LObjGetLightMaskSpecular(void);
@@ -147,7 +147,7 @@ HSD_WObj* HSD_LObjGetInterestWObj(HSD_LObj* lobj);
 void HSD_LObjSetPositionWObj(HSD_LObj* lobj, HSD_WObj* wobj);
 void HSD_LObjSetInterestWObj(HSD_LObj* lobj, HSD_WObj* wobj);
 
-s32 HSD_LightID2Index(GXLightID);
+u32 HSD_LightID2Index(GXLightID);
 void HSD_LObjDeleteCurrent(HSD_LObj* lobj);
 s32 HSD_Index2LightID(u32);
 void HSD_LObjRemoveAll(HSD_LObj* lobj);

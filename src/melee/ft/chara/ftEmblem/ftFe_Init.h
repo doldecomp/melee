@@ -6,8 +6,6 @@
 
 #include "ft/types.h"
 
-#include <stdbool.h>
-
 /* 14EEF8 */ void ftFe_Init_OnDeath(HSD_GObj*);
 /* 14EF60 */ void ftFe_Init_OnItemPickup(HSD_GObj*, bool);
 /* 14F040 */ void ftFe_Init_OnItemInvisible(HSD_GObj*);

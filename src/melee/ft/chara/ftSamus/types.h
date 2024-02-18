@@ -93,7 +93,7 @@ union ftSamus_MotionVars {
     struct ftSamus_State3Vars {
         s32 x0;
         s32 x4;
-        f32 x8;
+        float x8;
     } unk3;
 
     /// @todo Proper state name.

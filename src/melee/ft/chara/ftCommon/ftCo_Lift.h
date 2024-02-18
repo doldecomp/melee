@@ -1,23 +1,7 @@
 #ifndef GALE01_0968E0
 #define GALE01_0968E0
 
-#include <platform.h>
 #include "ftCommon/forward.h"
-
-#include <placeholder.h>
-
-#ifdef M2CTX
-struct _m2c_stack_ftCo_800974C4 {
-    /* 0x00 */ char pad_0[0x10];
-    /* 0x10 */ Vec3 vec; /* inferred */
-    /* 0x1C */ char pad_1C[4];
-}; /* size = 0x20 */
-struct _m2c_stack_ft_8009750C {
-    /* 0x00 */ char pad_0[0x10];
-    /* 0x10 */ Vec3 vec;
-    /* 0x1C */ char pad_1C[0xC];
-}; /* size = 0x28 */
-#endif
 
 /* 0968E0 */ void ftCo_LiftWait_Anim(ftCo_GObj* gobj);
 /* 0968E4 */ void ftCo_LiftWait_IASA(ftCo_GObj* gobj);

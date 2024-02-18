@@ -3,8 +3,6 @@
 
 #include <baselib/forward.h>
 
-#include <stdbool.h>
-
 /* 0E0134 */ bool ftDk_MS_345_800E0134(HSD_GObj* gobj);
 
 #endif

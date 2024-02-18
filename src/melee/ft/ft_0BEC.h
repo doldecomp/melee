@@ -3,8 +3,6 @@
 
 #include "ft/forward.h"
 
-#include <placeholder.h>
-
 /* 0BECB0 */ void ftCo_800BECB0(Fighter_GObj* gobj);
 /* 0BED84 */ void ftCo_800BED84(Fighter_GObj* gobj);
 /* 0BED88 */ void ftCo_800BED88(Fighter_GObj* gobj);

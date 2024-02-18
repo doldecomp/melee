@@ -7,7 +7,6 @@
 #include "class.h"
 #include "debug.h"
 #include "displayfunc.h"
-#include "fobj.h"
 #include "id.h"
 #include "jobj.h"
 #include "memory.h"
@@ -18,7 +17,7 @@
 #include "util.h"
 
 #include <__mem.h>
-#include <math.h>
+#include <math.h> // IWYU pragma: keep
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXDisplayList.h>
 #include <dolphin/gx/GXEnum.h>
@@ -27,6 +26,10 @@
 #include <dolphin/gx/GXVert.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
+
+/// @todo Several differently-signed comparisons appear in asserts, likely
+///       indicating the sign of one of the variables is declared incorrectly
+#pragma clang diagnostic ignored "-Wsign-compare"
 
 static void PObjInfoInit(void);
 
@@ -476,9 +479,8 @@ static void setupVtxDesc(HSD_PObj* pobj)
             case GX_VA_TEX7MTXIDX:
                 break;
             default:
-                /// @todo Fix cast
                 GXSetVtxAttrFmt(GX_VTXFMT0, desc->attr, desc->comp_cnt,
-                                (GXAttrType) desc->comp_type, desc->frac);
+                                desc->comp_type, desc->frac);
             }
         }
         prev_vtxdesc = pobj->verts;
@@ -515,9 +517,7 @@ static void setupShapeAnimVtxDesc(HSD_PObj* pobj)
         case GX_VA_POS:
         case GX_VA_NBT:
             GXSetVtxDesc(desc->attr, GX_DIRECT);
-            /// @todo Fix cast
-            GXSetVtxAttrFmt(GX_VTXFMT0, desc->attr, desc->comp_cnt,
-                            (GXAttrType) GX_F32, 0);
+            GXSetVtxAttrFmt(GX_VTXFMT0, desc->attr, desc->comp_cnt, GX_F32, 0);
             break;
 
         case GX_VA_PNMTXIDX:
@@ -534,9 +534,8 @@ static void setupShapeAnimVtxDesc(HSD_PObj* pobj)
 
         default:
             GXSetVtxDesc(desc->attr, desc->attr_type);
-            /// @todo Fix cast
             GXSetVtxAttrFmt(GX_VTXFMT0, desc->attr, desc->comp_cnt,
-                            (GXAttrType) desc->comp_type, desc->frac);
+                            desc->comp_type, desc->frac);
         }
     }
     prev_vtxdesc = NULL;
@@ -843,13 +842,7 @@ static void drawShapeAnim(HSD_PObj* pobj)
         vertex_buffer_size = HSD_DEFAULT_MAX_SHAPE_VERTICES;
         vertex_buffer = HSD_MemAlloc(vertex_buffer_size * sizeof(f32[3]));
     }
-    /// @todo Fix -Wsign-compare while keeping assert message
-#ifdef MUST_MATCH
     HSD_ASSERT(1407, vertex_buffer_size >= shape_set->nb_vertex_index);
-#else
-    HSD_ASSERT(1407,  vertex_buffer_size >= (unsigned) shape_set->nb_vertex_index);
-#endif
-
     if (shape_set->normal_desc && normal_buffer_size == 0) {
         normal_buffer_size = HSD_DEFAULT_MAX_SHAPE_NORMALS;
         normal_buffer = HSD_MemAlloc(normal_buffer_size * sizeof(f32[3]));
@@ -857,20 +850,10 @@ static void drawShapeAnim(HSD_PObj* pobj)
 
     if (shape_set->normal_desc) {
         if (shape_set->normal_desc->attr == GX_VA_NRM) {
-            /// @todo Fix -Wsign-compare while keeping assert message
-#ifdef MUST_MATCH
             HSD_ASSERT(1416, normal_buffer_size >= shape_set->nb_normal_index);
-#else
-            HSD_ASSERT(1416, normal_buffer_size >= (unsigned) shape_set->nb_normal_index);
-#endif
             blend_nbt = 0;
         } else {
-            /// @todo Fix -Wsign-compare while keeping assert message
-#ifdef MUST_MATCH
             HSD_ASSERT(1419, normal_buffer_size >= shape_set->nb_normal_index * 3);
-#else
-            HSD_ASSERT(1419, normal_buffer_size >= (unsigned) shape_set->nb_normal_index * 3);
-#endif
             blend_nbt = 1;
         }
     }

@@ -157,7 +157,7 @@ static void ftMh_MS_343_801511FC(HSD_GObj* gobj)
         }
         return;
     }
-#ifndef MUST_MATCH
+#ifdef BUGFIX
     case ftMh_UnkEnum0_Unk10: {
         return;
     }

@@ -75,7 +75,7 @@ void ftFx_SpecialS_CopyGhostPosIndexed(HSD_GObj* gobj, s32 index,
 // 0x800E9ED4
 // https://decomp.me/scratch/bkSg9 // Return float from array @ 0x2374 for Fox
 // & Falco's Illusion/Phantasm
-f32 ftFx_SpecialS_ReturnFloatVarIndexed(HSD_GObj* gobj, s32 index)
+float ftFx_SpecialS_ReturnFloatVarIndexed(HSD_GObj* gobj, s32 index)
 {
     return getFighter(gobj)->mv.fx.SpecialS.blendFrames[index];
 }
@@ -435,7 +435,7 @@ void ftFx_SpecialAirS_AirToGround(HSD_GObj* gobj)
 
 inline void ftFox_SpecialS_SetVars(HSD_GObj* gobj)
 {
-    f32 var;
+    float var;
     Fighter* fp = GET_FIGHTER(gobj);
 
     fp->mv.fx.SpecialS.ghostEffectPos[3] = fp->cur_pos;

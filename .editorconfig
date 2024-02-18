@@ -12,6 +12,9 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 charset = utf-8
 
+[*.s]
+indent_style = unset
+
 [{*.yml,.clang-format}]
 indent_size = 2
 

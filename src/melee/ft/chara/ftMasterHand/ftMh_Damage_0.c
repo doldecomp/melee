@@ -16,8 +16,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
 
-#include <baselib/gobj.h>
-
 bool ftMh_MS_343_80151428(Vec3* vec)
 {
     HSD_GObj* gobj = ftBossLib_8015C3E8(27);

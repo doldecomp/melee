@@ -1,116 +1,118 @@
 # Super Smash Bros Melee
-[![GC/Wii Decompilation](https://discordapp.com/api/guilds/727908905392275526/widget.png?style=shield)](https://discord.gg/hKx3FJJgrV)
 [![build-melee](https://github.com/doldecomp/melee/actions/workflows/build-melee.yml/badge.svg)](https://github.com/doldecomp/melee/actions/workflows/build-melee.yml)
-[![publish-packages](https://github.com/doldecomp/melee/actions/workflows/publish-packages.yml/badge.svg)](https://github.com/doldecomp/melee/actions/workflows/publish-packages.yml)
-[![publish-pages](https://github.com/doldecomp/melee/actions/workflows/publish-pages.yml/badge.svg)](https://github.com/doldecomp/melee/actions/workflows/publish-pages.yml)
+[![Code Progress](https://img.shields.io/endpoint?label=Code&url=https%3A%2F%2Fprogress.decomp.club%2Fdata%2Fmelee%2FGALE01%2Fdol%2F%3Fmode%3Dshield%26measure%3Dcode)](https://progress.decomp.club/data/melee/)
+[![Data Progress](https://img.shields.io/endpoint?label=Data&url=https%3A%2F%2Fprogress.decomp.club%2Fdata%2Fmelee%2FGALE01%2Fdol%2F%3Fmode%3Dshield%26measure%3Ddata)](https://progress.decomp.club/data/melee/)
+[![GC/Wii Decompilation](https://discordapp.com/api/guilds/727908905392275526/widget.png?style=shield)](https://discord.gg/hKx3FJJgrV)
 
 This repo contains a WIP decompilation of Super Smash Bros Melee (US).
 
-> **Note**
->
+> [!TIP]
 > The DOL this repository builds can be shifted! Meaning you are able to now add and remove code as you see fit, for modding or research purposes.
 
-It builds the following DOL:
+It builds `main.dol`:
 
-v1.02 - main.dol: `sha1: 08e0bf20134dfcb260699671004527b2d6bb1a45`
+|Version|Game ID|SHA-1
+-|-|-
+1.02|`GALE01`|`08e0bf20134dfcb260699671004527b2d6bb1a45`
+
+# Dependencies
+
+## Windows:
+On Windows, it's **highly recommended** to use native tooling. WSL or msys2 are **not** required.
+When running under WSL, [objdiff](#diffing) is unable to get filesystem notifications for automatic rebuilds.
+
+- Install [Python](https://www.python.org/downloads/) and add it to `%PATH%`.
+  - Also available from the [Windows Store](https://apps.microsoft.com/store/detail/python-311/9NRWMJP3717K).
+- Download [ninja](https://github.com/ninja-build/ninja/releases) and add it to `%PATH%`.
+  - Quick install via pip: `pip install ninja`
+
+## macOS:
+- Install [ninja](https://github.com/ninja-build/ninja/wiki/Pre-built-Ninja-packages):
+  ```
+  brew install ninja
+  ```
+- Install [wine-crossover](https://github.com/Gcenx/homebrew-wine):
+  ```
+  brew install --cask --no-quarantine gcenx/wine/wine-crossover
+  ```
+
+After OS upgrades, if macOS complains about `Wine Crossover.app` being unverified, you can unquarantine it using:
+```sh
+sudo xattr -rd com.apple.quarantine '/Applications/Wine Crossover.app'
+```
+
+## Linux:
+- Install [ninja](https://github.com/ninja-build/ninja/wiki/Pre-built-Ninja-packages).
+- For non-x86(_64) platforms: Install wine from your package manager.
+  - For x86(_64), [WiBo](https://github.com/decompals/WiBo), a minimal 32-bit Windows binary wrapper, will be automatically downloaded and used.
 
 # Building
+- Clone the repository:
+  ```
+  git clone https://github.com/doldecomp/melee.git --depth=1
+  ```
+- Using [Dolphin Emulator](https://dolphin-emu.org/), find your ISO and click `Properties`. Go to the `Filesystem` tab, right-click `Disc - GALE01` and select `Extract System Data`. Choose `orig/GALE01` of this repository.
+  - To save space, only `main.dol` (and `.gitkeep`) are necessary. Other files can be deleted.
+  ![](assets/dolphin-extract.png)
+- Configure:
+  ```
+  python configure.py
+  ```
+- Build:
+  ```
+  ninja
+  ```
 
-## Windows
+# Tooling
 
-The easiest way to get set up is with [scoop](https://scoop.sh/). You will also need our compilers (linked below).
+We use Python for our command line tooling. It is recommended that you use a [virtual environment](https://docs.python.org/3/library/venv.html).
 
-1. Open a PowerShell window (`Win+X`). You do not need admin privileges.
-1. Install `scoop`, `git`, `python`, `mingw`, and `cmake`. You can skip these if you already have `git`, `python` (3.9+), `bash`, `gcc`, `make`, and `cmake` in your `PATH`.
-    ```ps1
-    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
-    irm get.scoop.sh | iex
-    scoop install git python mingw cmake
-    ```
-1. Clone the repository and change directory into it.
-    ```ps1
-    cd ~/Documents # Or wherever you want to put Melee
-    git clone 'https://github.com/doldecomp/melee.git'
-    cd melee
-    ```
-1. Download our [compilers zip archive](https://mega.nz/file/BU43wKxT#rVC11Rl7DPxfSn7V9Iu--8E7m7gc1gsJWtfVBbfmKwQ) and rename the `GC` subfolder to `mwcc_compiler`, and place it in `/tools`. You can do this manually, or use the following PowerShell snippet (from inside your melee directory):
-    ```ps1
-    & scoop install megatools
-    $url = 'https://mega.nz/file/BU43wKxT#rVC11Rl7DPxfSn7V9Iu--8E7m7gc1gsJWtfVBbfmKwQ'
-    $zip = [System.IO.Path]::GetTempFileName() -replace '\.[^.]+$','.zip'
-    & megatools dl --no-progress --path "$zip" "$url"
-
-    $dir = New-Item -ItemType Directory `
-        -Path (Join-Path $env:Temp 'MELEE_COMPILERS')
-
-    Expand-Archive -Path $zip -DestinationPath $dir
-
-    $path = Get-ChildItem -Path $dir.FullName | `
-            Select-Object -ExpandProperty FullName
-    Copy-Item -Path $path -Destination "tools/mwcc_compiler" -Recurse
-
-    Remove-Item -Force $zip
-    Remove-Item -Recurse -Force $dir
-
-    # Optional: Uninstall megatools
-    & scoop uninstall megatools
-    ```
-1. Run `make` using `bash` to build the project:
-    ```ps1
-    bash -c 'make -j"$NUMBER_OF_PROCESSORS" GENERATE_MAP=1'
-    ```
-1. Optional: Install a Python [virtual environment](https://docs.python.org/3/library/venv.html).
-    If you want to use the Python tooling we have in `/tools`, you can create a `venv`. This tooling is not required to build the project, but you'll need it if you want to use `asm-differ`, `m2ctx`, etc.
-    ```ps1
-    python -m venv --upgrade-deps 'venv'
-    ```
-    * You'll need to activate it whenever you open a new shell.
-        ```ps1
-        venv/Scripts/Activate.ps1
-        ```
-    * After that, you can install or update our packages with:
-        ```ps1
-        pip install -r 'requirements.txt' --use-pep517
-        ```
-    * Now you can run `m2ctx` to get a context to use with [decomp.me](https://doldecomp.github.io/melee/getting_started.html#autotoc_md2). The following command will add it to your clipboard automatically; you can run with `--help` to see all the options:
-        ```ps1
-        python tools/m2ctx/m2ctx.py -px
-        ```
-1. Check out our [Getting Started guide](https://doldecomp.github.io/melee/getting_started.html)!
-
-## Linux
-
-### Requirements
-* [devkitPro](https://devkitpro.org/wiki/Getting_Started)
-* `python3` (`pacman -S python3`)
-* `gcc` (`pacman -S gcc`)
-
-### Instructions
-
-1. Download [`MELEE_COMPILERS.zip`](https://cdn.discordapp.com/attachments/727909624342380615/1129879865433264158/MELEE_COMPILERS_N.zip) and extract the GC compilers to `tools/mwcc_compiler/`.
-2. Run the `make` command:
+1. Create a virtual environment.
     ```sh
-    make -j$(nproc) GENERATE_MAP=1
+    python -m venv --upgrade-deps '.venv'
+    ```
+1. You'll need to activate it whenever you open a new shell.
+    * Windows:
+        ```ps1
+        .venv/Scripts/Activate.ps1
+        ```
+    * Linux/macOS:
+        ```ps1
+        . .venv/bin/activate
+        ```
+1. After that, you can install or update our packages with:
+    ```sh
+    pip install -r requirements.txt
+    ```
+1. Now you can run `decomp.py` to decomp a function using [m2c](https://github.com/matt-kempster/m2c). Pass it `-h` to see all the options.
+    ```sh
+    python tools/decomp.py my_function_name
     ```
 
-You can refer to our [`Dockerfile`](/.github/packages/build-linux/Dockerfile) to see how our CI builds on Ubuntu.
+# Modding
+Coming soon.
 
-## Containers
+# Containers
+Coming soon.
 
-We offer containerized [Linux](https://github.com/doldecomp/melee/pkgs/container/melee%2Fbuild-linux) and [Windows](https://github.com/doldecomp/melee/pkgs/container/melee%2Fbuild-windows) build environments, which you can run through [`podman`](https://podman.io/getting-started/) or [`docker`](https://www.docker.com/get-started/) on any supported platform, including macOS.
+# Building with Make (legacy)
 
-```sh
-melee_path="$PWD"
-make_flags='GENERATE_MAP=1'
-build_target="$melee_path/build"
+See [Building with Make](LEGACY_BUILD.md).
 
-docker run --rm \
-  --user "$(id -u):$(id -g)" \
-  --volume "$melee_path:/input:ro" \
-  --volume "$build_target:/output" \
-  --env MAKE_FLAGS="$make_flags" \
-  ghcr.io/doldecomp/melee/build-linux:latest
-```
+# Diffing
+
+Once the initial build succeeds, an `objdiff.json` should exist in the project root.
+
+Download the latest release from [encounter/objdiff](https://github.com/encounter/objdiff). Under project settings, set `Project directory`. The configuration should be loaded automatically.
+
+Select an object from the left sidebar to begin diffing. Changes to the project will rebuild automatically: changes to source files, headers, `configure.py`, `splits.txt` or `symbols.txt`.
+
+![](assets/objdiff.png)
+
+> [!TIP]
+> It's recommended that you enable the `Relax relocation diffs` option under `Diff Options`.
+
+![](assets/relax.png)
 
 # Contributing
 
@@ -121,6 +123,110 @@ We're also happy to answer any questions in the `#melee` channel on Discord.
 [![Gamecube/Wii Decompilation Discord](https://discordapp.com/api/guilds/727908905392275526/widget.png?style=banner2)](https://discord.gg/hKx3FJJgrV)
 
 # FAQ
+## How is the codebase structured?
+
+The code in `src` is divided into several modules, the main one being `melee`, which is the game code.
+
+### `melee`
+The main game code is divided into several two-letter folders, which were left behind by HAL in assert messages and game data on the original disc.
+
+Short|Full|Notes
+-|-|-
+`cm`|Camera|
+`db`|Debug|
+`ef`|Effect|Visual effects.
+`ft`|Fighter|The player characters.
+`gm`|Game|The main game loop.
+`gr`|Ground|Stages and other levels.
+`if`|Interface|User interface.
+`it`|Items|
+`lb`|Library|Utility functions that are often thin wrappers around `dolphin` or `baselib` code.
+`mn`|Menu|
+`mp`|Map|Related to stages and contains things like `mpcoll` (map collisions).
+`pl`|Player|As in users.
+`sc`|Scene|Menu, versus mode, single-player, etc. The game mode.
+`ty`|Toy|Trophies.
+`un`|Unknown|This isn't an actual folder in the original code.
+`vi`|Visual|Cutscenes, etc.
+
+#### `melee/ft/chara`
+
+HAL also used two-letter abbreviations for each fighter.
+
+Short|Full|Canonical English
+-|-|-
+`Bo`|Zako<sup>1</sup> Boy|[Male wire frame](https://www.ssbwiki.com/Fighting_Wire_Frames#Male_Wire_Frame.2FCaptain_Falcon)
+`Ca`|Captain|Captain Falcon
+`Ch`|Crazy Hand|
+`Cl`|Child Link|Young Link
+`Co`|Common|Shared code
+`Dk`|Donkey Kong|
+`Dr`|Dr. Mario|
+`Fc`|Falco|
+`Fe`|Fire Emblem|Roy
+`Fx`|Fox|
+`Gk`|Giga Koopa|Giga Bowser
+`Gl`|Zako Girl|[Female wire frame](https://www.ssbwiki.com/Fighting_Wire_Frames#Female_Wire_Frame.2FZelda)
+`Gn`|Ganondorf|
+`Gw`|Mr. Game & Watch|
+`Kb`|Kirby|
+`Kp`|Koopa|Bowser
+`Lg`|Luigi|
+`Lk`|Link|
+`Mh`|Master Hand|
+`Mr`|Mario|
+`Ms`|Mars|Marth
+`Mt`|Mewtwo|
+`Nn`|Nana|
+`Ns`|Ness|
+`Pc`|Pichu|
+`Pe`|Peach|
+`Pk`|Pikachu|
+`Pp`|Popo|
+`Pr`|Purin|Jigglypuff
+`Sb`|Sandbag|
+`Sk`|Seak|Sheik
+`Ss`|Samus|
+`Ys`|Yoshi|
+`Zd`|Zelda|
+
+<sup>1</sup> Zako (雑魚) is Japanese for "trash mob" in video games, literally "small fish."
+
+### `sysdolphin/baselib`
+
+HAL's core internal library.
+Class|Full
+-|-
+`AObj`|Animation
+`CObj`|Camera
+`DObj`|Draw/Display
+`FObj`|Frame
+`GObj`|Global/Game
+`JObj`|Joint
+`LObj`|Light
+`MObj`|Material
+`PObj`|Polygon
+`TObj`|Texture
+`RObj`|Reference
+`SObj`|Scene
+`WObj`|World
+
+### `dolphin`
+
+The [Dolphin SDK](https://wiki.raregamingdump.ca/index.php/Dolphin_SDK).
+
+### `MetroTRK`
+
+The Metrowerks Target Resident Kernel.
+
+### `MSL`
+
+The Metrowerks Standard Library.
+
+### `Runtime`
+
+The Gekko hardware runtime.
+
 ## What can be done after decompiling Melee?
 
 Note that this project's purpose is to only match the ASM with C code. This is entirely for research and archival purposes. After this is created, you essentially have a C project that can be compiled into Melee, but it won't be portable (aka you can't compile it to run on a normal computer).

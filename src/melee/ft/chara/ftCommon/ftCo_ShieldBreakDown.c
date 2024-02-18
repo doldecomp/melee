@@ -4,6 +4,7 @@
 
 #include "ftCo_ShieldBreakDown.h"
 
+#include "ftCo_DownAttack.h"
 #include "ftCo_DownBound.h"
 #include "ftCo_ShieldBreakStand.h"
 

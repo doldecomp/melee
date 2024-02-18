@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 
 function melee_sed {
-    find src asm docs obj_files.mk ldscript.lcf Makefile -type f -exec sed -i "${@}" {} +
+    find \
+        src \
+        asm \
+        docs \
+        obj_files.mk \
+        ldscript.lcf \
+        Makefile \
+        config/GALE01/splits.txt \
+        config/GALE01/symbols.txt \
+        configure.py \
+        -type f -exec sed -i "${@}" {} +
 }
 
 function replace_symbol {
@@ -66,7 +76,7 @@ function gen_header {
 }
 
 function rename_tu {
-    for ext in c s h; do
+    for ext in c s h dox; do
         find asm src docs -name "$1.$ext" | while read -r file; do
             new_file="$(dirname "$file")/$2.$ext"
             mv "$file" "$new_file"

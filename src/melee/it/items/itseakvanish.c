@@ -1,5 +1,7 @@
 #include "itseakvanish.h"
 
+#include "it/inlines.h"
+
 #include <common_structs.h>
 #include <melee/db/db_2253.h>
 #include <melee/it/it_266F.h>

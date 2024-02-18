@@ -2,8 +2,6 @@
 #define GALE01_1122D8
 
 #include "ftSamus/forward.h"
-#include "it/forward.h"
-#include <baselib/forward.h>
 
 /* 1291F0 */ void ftSs_SpecialN_801291F0(ftSs_GObj* gobj);
 /* 129258 */ void ftSs_SpecialN_80129258(ftSs_GObj* gobj);

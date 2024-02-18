@@ -8,11 +8,6 @@
 
 #include <placeholder.h>
 
-/* 03715C */ void pl_8003715C(void);
-/* 037208 */ short pl_80037208(void);
-/* 03722C */ void pl_8003722C(void);
-/* 0373CC */ void pl_800373CC(void);
-/* 037590 */ void pl_80037590(void);
 /* 037C60 */ void pl_80037C60(HSD_GObj*, s32);
 /* 037ECC */ void pl_80037ECC(void);
 /* 038144 */ void pl_80038144(void);
@@ -23,7 +18,7 @@
 /* 03E058 */ void pl_8003E058(s32, s32, s32, s32);
 /* 03E0E8 */ void pl_8003E0E8(u8, int);
 /* 03E114 */ void pl_8003E114(u8, int, float);
-/* 03E150 */ void pl_8003E150(void);
+/* 03E150 */ void pl_8003E150(int slot, bool);
 /* 03E17C */ void pl_8003E17C(u8, int, HSD_GObj*);
 /* 03E4A4 */ void pl_8003E4A4(u8 slot, bool, s32, s32);
 /* 03E854 */ void pl_8003E854(u8, int, HSD_GObj*);
@@ -41,7 +36,6 @@
 /* 040120 */ void pl_80040120(u8, s32);
 /* 0401F0 */ void pl_800401F0(u8, int, float, float);
 /* 040270 */ void pl_80040270(u8, u8, float);
-/* 0402D0 */ void pl_800402D0(u8 slot, bool, s32);
 /* 040330 */ void pl_80040330(u8 slot, bool, f32);
 /* 040460 */ void pl_80040460(u8 slot, bool);
 /* 040B8C */ void pl_80040B8C(u8 slot, bool, s32);

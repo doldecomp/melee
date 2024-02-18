@@ -1,7 +1,6 @@
 #include <platform.h>
 #include "lb/forward.h"
 #include <dolphin/mtx/forward.h>
-#include <baselib/forward.h>
 
 #include "grtmewtwo.h"
 
@@ -14,7 +13,7 @@
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
-#include <dolphin/os.h>
+#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>

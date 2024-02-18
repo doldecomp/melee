@@ -1,6 +1,4 @@
-#ifndef _grtkirby_h_
-#define _grtkirby_h_
-
-#include <sysdolphin/baselib/gobj.h>
+#ifndef GALE01_221364
+#define GALE01_221364
 
 #endif

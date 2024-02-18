@@ -11,8 +11,6 @@
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftDonkey/types.h"
 
-#include <baselib/gobj.h>
-
 void ftDk_HeavyWait1_IASA(HSD_GObj* gobj)
 {
     if (!ftCo_80094EA4(gobj)) {

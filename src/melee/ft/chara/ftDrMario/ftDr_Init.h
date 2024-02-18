@@ -1,8 +1,6 @@
 #ifndef GALE01_14949C
 #define GALE01_14949C
 
-#include <platform.h>
-#include "ftMario/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"

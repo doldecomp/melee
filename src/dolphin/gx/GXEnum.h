@@ -156,6 +156,12 @@ typedef enum {
 } GXTexFmt;
 
 typedef enum {
+    GX_TF_C4 = 0x8,
+    GX_TF_C8 = 0x9,
+    GX_TF_C14X2 = 0xA,
+} GXCITexFmt;
+
+typedef enum {
     GX_CLAMP,
     GX_REPEAT,
     GX_MIRROR,
@@ -177,6 +183,36 @@ typedef enum {
     GX_ANISO_4,
     GX_MAX_ANISOTROPY,
 } GXAnisotropy;
+
+typedef enum {
+    GX_TLUT0 = 0,
+    GX_TLUT1,
+    GX_TLUT2,
+    GX_TLUT3,
+    GX_TLUT4,
+    GX_TLUT5,
+    GX_TLUT6,
+    GX_TLUT7,
+    GX_TLUT8,
+    GX_TLUT9,
+    GX_TLUT10,
+    GX_TLUT11,
+    GX_TLUT12,
+    GX_TLUT13,
+    GX_TLUT14,
+    GX_TLUT15,
+    GX_BIGTLUT0,
+    GX_BIGTLUT1,
+    GX_BIGTLUT2,
+    GX_BIGTLUT3
+} GXTlut;
+
+typedef enum {
+    GX_TL_IA8 = 0x0,
+    GX_TL_RGB565 = 0x1,
+    GX_TL_RGB5A3 = 0x2,
+    GX_MAX_TLUTFMT
+} GXTlutFmt;
 
 typedef enum {
     GX_TEXMAP0,

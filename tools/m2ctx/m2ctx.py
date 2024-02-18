@@ -69,8 +69,6 @@ PCPP_FLAGS = [
     "__MWERKS__",
     "-D",
     "M2CTX",
-    "-D",
-    "MUST_MATCH",
     "-U",
     "FIGHTERVARS_SIZE",
 ]
@@ -194,6 +192,11 @@ def main():
 
     if not args.quiet:
         if args.colorize:
+            try:
+                import colorama
+                colorama.just_fix_windows_console()
+            except ModuleNotFoundError:
+                pass
             from pygments import highlight
             from pygments.formatters import TerminalFormatter
             from pygments.lexers import CLexer
