@@ -5,6 +5,8 @@
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
+#include <placeholder.h>
+
 #define FIGHTERVARS_SIZE 0xF8
 
 typedef enum_t FtMotionId;
@@ -62,6 +64,7 @@ typedef void (*Fighter_UnkMtxEvent)(HSD_GObj* gobj, int arg1, Mtx vmtx);
 typedef void (*Fighter_UnkPtrEvent)(int arg0, int* arg1, int* arg2);
 typedef void (*FighterEvent)(Fighter* fp);
 typedef void (*FtCmd)(Fighter_GObj* gobj, FtCmdState* cmd);
+typedef bool (*ftDevice_Callback0)(UNK_T, HSD_GObj*, Vec3*);
 
 typedef enum FighterKind {
     FTKIND_MARIO,

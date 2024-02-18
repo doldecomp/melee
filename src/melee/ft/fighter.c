@@ -352,7 +352,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x2220_flag.bits.b4 = 0;
 
     fp->dmg.x1914 = 0;
-    fp->dmg.x1918 = 0;
+    fp->dmg.int_value = 0;
     fp->dmg.x191C = 0;
     fp->dmg.x1924 = 0;
     fp->dmg.x1928 = 0;
@@ -2902,12 +2902,12 @@ void Fighter_UnkProcessShieldHit_8006D1EC(Fighter_GObj* gobj)
                 }
             }
             bool1 = fp->x19A4;
-        } else if (fp->dmg.x1918) {
+        } else if (fp->dmg.int_value) {
             if ((fp->dmg.x191C) && (!fp->victim_gobj) && (!fp->x1A60)) {
                 ftCommon_8007DB58(gobj);
                 ftCo_80099D9C(gobj);
             }
-            bool1 = fp->dmg.x1918;
+            bool1 = fp->dmg.int_value;
         } else if (fp->dmg.x1914) {
             if (fp->deal_dmg_cb) {
                 fp->deal_dmg_cb(gobj);
@@ -3004,7 +3004,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(Fighter_GObj* gobj)
         fp->dmg.x18a0 = 0.0f;
         fp->dmg.x1840 = 0;
         fp->dmg.x1914 = 0;
-        fp->dmg.x1918 = 0;
+        fp->dmg.int_value = 0;
         fp->dmg.x191C = 0.0f;
         fp->unk_gobj = NULL;
         fp->x221C_b5 = 0;

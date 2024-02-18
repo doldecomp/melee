@@ -91,7 +91,7 @@ void ftMh_TagSqueeze_Anim(HSD_GObj* gobj)
             Fighter* victim_fp = GET_FIGHTER(victim);
             ftCommon_8007E2F4(fp, 0);
             ftCo_800DE2A8(gobj, victim);
-            victim_fp->dmg.x1844_direction *= neg1;
+            victim_fp->dmg.facing_dir_1 *= neg1;
             ftCo_800DE7C0(victim, 0, 0);
         }
     }
