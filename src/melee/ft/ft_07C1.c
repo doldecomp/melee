@@ -152,19 +152,6 @@ void ft_8007C2E0(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
     }
 }
 
-static inline Fighter_GObj* inlineB0(Fighter* ft)
-{
-    Fighter_GObj* grab_attacker;
-    if (ft->victim_gobj != NULL) {
-        grab_attacker = ft->victim_gobj;
-    } else if (ft->x221C_b6) {
-        grab_attacker = ft->dmg.x1868_source;
-    } else {
-        grab_attacker = NULL;
-    }
-    return grab_attacker;
-}
-
 void ft_8007C4BC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -181,42 +168,55 @@ void ft_8007C4BC(Fighter_GObj* gobj)
 
     {
         bool seen = false;
-        HSD_GObj* grab_attacker = inlineB0(fp);
-        HitCapsule* throw_hitbox = &fp->x1064_thrownHitbox;
         Fighter_GObj* cur;
+        HSD_GObj* grab_attacker;
+        PAD_STACK(4 * 2);
+        if (fp->victim_gobj != NULL) {
+            grab_attacker = (Fighter_GObj*) fp->victim_gobj;
+        } else if (fp->x221C_b6) {
+            grab_attacker = (Fighter_GObj*) fp->dmg.x1868_source;
+        } else {
+            grab_attacker = NULL;
+        }
+        {
+            Fighter* fp1;
+            HitCapsule* throw_hitbox = &fp->x1064_thrownHitbox;
 
-        for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
-            if (gobj == cur) {
-                seen = true;
-                continue;
-            }
-
-            if (cur != grab_attacker) {
-                Fighter* fp1 = GET_FIGHTER(cur);
-
-                if (fp1->x2219_b1 || !fp1->x2227_b2 ||
-                    ftColl_8007B868(cur) == 2 || fp1->x221F_b4 ||
-                    (fp1->x221C_b6 && fp1->dmg.x1868_source == gobj))
-                {
+            for (cur = HSD_GObj_Entities->fighters; cur != NULL;
+                 cur = cur->next)
+            {
+                if (gobj == cur) {
+                    seen = true;
                     continue;
                 }
 
-                {
-                    HitCapsule* hit = &fp1->x1064_thrownHitbox;
-                    if (fp1->x1064_thrownHitbox.state == HitCapsule_Disabled ||
-                        !seen)
+                if (cur != grab_attacker) {
+                    fp1 = GET_FIGHTER(cur);
+
+                    if (fp1->x2219_b1 || !fp1->x2227_b2 ||
+                        ftColl_8007B868(cur) == 2 || fp1->x221F_b4 ||
+                        (fp1->x221C_b6 && fp1->dmg.x1868_source == gobj))
                     {
                         continue;
                     }
 
-                    if (lbColl_80007AFC(hit, throw_hitbox, fp1->x34_scale.y,
-                                        fp->x34_scale.y))
                     {
-                        Fighter* fp3 = fp1;
-                        ft_8007C2E0(fp1, hit, fp, throw_hitbox);
-                    } else {
-                        lbColl_800089B8(throw_hitbox, fp1);
-                        lbColl_800089B8(hit, fp);
+                        HitCapsule* hit = &fp1->x1064_thrownHitbox;
+                        if (fp1->x1064_thrownHitbox.state ==
+                                HitCapsule_Disabled ||
+                            !seen)
+                        {
+                            continue;
+                        }
+
+                        if (lbColl_80007AFC(hit, throw_hitbox,
+                                            fp1->x34_scale.y, fp->x34_scale.y))
+                        {
+                            ft_8007C2E0(fp1, hit, fp, throw_hitbox);
+                        } else {
+                            lbColl_800089B8(throw_hitbox, fp1);
+                            lbColl_800089B8(hit, fp);
+                        }
                     }
                 }
             }
