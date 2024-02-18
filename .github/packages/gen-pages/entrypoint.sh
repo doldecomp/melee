@@ -5,7 +5,8 @@ git clone /input /tmp/input
 cd /tmp/input
 ln -s /opt/mwcc_compiler tools/
 
-. /opt/venv/bin/activate
+cp -R /opt/venv .venv
+. .venv/bin/activate
 pip install --no-cache-dir -r requirements.txt
 
 mkdir -p build/doxygen

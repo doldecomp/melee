@@ -12,7 +12,7 @@ COPY --from=devkitpro/devkitppc:latest  \
 COPY .github/packages/build-linux/setup.sh /usr/local/bin
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C
-ENV MELEE_COMPILERS_URL="https://mega.nz/file/BU43wKxT#rVC11Rl7DPxfSn7V9Iu--8E7m7gc1gsJWtfVBbfmKwQ"
+ENV MELEE_COMPILERS_URL="https://files.decomp.dev/compilers_latest.zip"
 RUN chmod +x /usr/local/bin/setup.sh && setup.sh
 ENV WINE=${WIBO_PATH}
 ENV DEVKITPRO=${DEVKITPRO}
