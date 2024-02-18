@@ -24,6 +24,7 @@ jobs:
     env:
       REGISTRY: ghcr.io
       CONTAINERFILE: .github/packages/build-linux/Dockerfile
+      OUTPUT: ${{github.workspace}}/output
     strategy:
       matrix:
         target: [ "build-linux", "gen-pages", "check-issues" ]
@@ -64,7 +65,7 @@ jobs:
       - name: Try building Melee (GENERATE_MAP=1)
         if: startsWith(matrix.target, 'build-')
         run: |
-          output="${{ github.workspace }}/output/generate_map"
+          output="$OUTPUT/generate_map"
           mkdir -p "$output"
           docker run --rm \
             --user "$(id -u):$(id -g)" \
@@ -84,13 +85,19 @@ jobs:
       - name: Try generating pages
         if: matrix.target == 'gen-pages'
         run: |
-          output="${{ github.workspace }}/output"
+          output="$OUTPUT/gen_pages"
           mkdir -p "$output"
           docker run --rm \
             --user "$(id -u):$(id -g)" \
             --volume "$PWD:/input:ro" \
             --volume "$output:/output" \
             "$IMAGE:test"
+
+      - name: Upload GitHub Pages artifact
+        if: matrix.target == 'gen-pages'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{env.OUTPUT}}/gen_pages
 
       - name: Extract tags and labels
         id: meta

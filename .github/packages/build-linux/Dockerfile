@@ -6,21 +6,18 @@ COPY --from=ghcr.io/decompals/wibo:latest \
 COPY requirements.txt /tmp/
 ARG DEVKITPRO=/opt/devkitpro
 ARG DEVKITPPC=${DEVKITPRO}/devkitPPC
-COPY --from=devkitpro/devkitppc:latest  \
-    ${DEVKITPPC}/bin/powerpc-eabi-as \
-    ${DEVKITPPC}/bin/powerpc-eabi-as
 COPY .github/packages/build-linux/setup.sh /usr/local/bin
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C
-ENV MELEE_COMPILERS_URL="https://files.decomp.dev/compilers_latest.zip"
-RUN chmod +x /usr/local/bin/setup.sh && setup.sh
+ENV MELEE_COMPILERS_URL='https://files.decomp.dev/compilers_latest.zip'
+ENV BINUTILS_URL='https://github.com/encounter/gc-wii-binutils/releases/download/2.42-0/linux-x86_64.zip'
+RUN setup.sh
 ENV WINE=${WIBO_PATH}
 ENV DEVKITPRO=${DEVKITPRO}
 ENV DEVKITPPC=${DEVKITPPC}
 ENV PATH="$DEVKITPRO/tools/bin:$PATH"
 ENV PATH="$DEVKITPPC/bin:$PATH"
 COPY .github/packages/build-linux/melee-mwcc /usr/local/bin
-RUN chmod +x /usr/local/bin/melee-mwcc
 
 FROM linux-base AS linux-rw
 VOLUME [ "/input", "/output" ]
@@ -28,23 +25,10 @@ VOLUME [ "/input", "/output" ]
 FROM linux-rw AS build-linux
 ENV MAKE_FLAGS="GENERATE_MAP=1"
 COPY .github/packages/build-linux/entrypoint.sh /usr/local/bin
-RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT entrypoint.sh
 
 FROM linux-rw AS gen-pages
 COPY .github/packages/gen-pages/entrypoint.sh /usr/local/bin
-RUN chmod +x /usr/local/bin/entrypoint.sh
-ENTRYPOINT entrypoint.sh
-
-FROM linux-rw AS dump-asm
-ARG SHORT_SHA
-ARG TREE_URL
-COPY .github/packages/dump-asm/readme.py /usr/local/bin
-RUN chmod +x /usr/local/bin/readme.py
-COPY .github/packages/dump-asm/entrypoint.sh /usr/local/bin
-RUN chmod +x /usr/local/bin/entrypoint.sh
-ENV SHORT_SHA="${SHORT_SHA}"
-ENV TREE_URL="${TREE_URL}"
 ENTRYPOINT entrypoint.sh
 
 # TODO
@@ -53,9 +37,8 @@ COPY .github/packages/check-issues/setup.sh /usr/local/bin
 COPY . /input
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C
-RUN chmod +x /usr/local/bin/setup.sh && setup.sh
+RUN setup.sh
 RUN rm -rf /input
 VOLUME [ "/input" ]
 COPY .github/packages/check-issues/entrypoint.sh /usr/local/bin
-RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT entrypoint.sh
