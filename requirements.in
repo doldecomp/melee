@@ -1,4 +1,4 @@
--e file:tools/asm-differ#egg=asm-differ
+# TODO -e file:tools/asm-differ#egg=asm-differ
 argcomplete
 beautifulsoup4
 black

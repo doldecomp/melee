@@ -14,8 +14,8 @@ apt install -y --no-install-recommends \
     libc6-dev \
     python3-full \
     python-is-python3 \
-    megatools \
-    libarchive-tools \
+    curl \
+    libarchive-tools
 
 # Create and update Python venv
 python -m venv --upgrade-deps /opt/venv
@@ -23,7 +23,7 @@ python -m venv --upgrade-deps /opt/venv
 pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Install melee compiler
-megadl --no-progress "$MELEE_COMPILERS_URL" --path - |
+curl -L "$MELEE_COMPILERS_URL" |
     bsdtar -xvf- -C /tmp
 mv /tmp/GC /tmp/mwcc_compiler
 mv /tmp/mwcc_compiler /opt
