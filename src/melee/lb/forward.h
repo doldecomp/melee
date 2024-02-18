@@ -13,11 +13,11 @@ typedef struct ReflectDesc ReflectDesc;
 typedef struct ShieldDesc ShieldDesc;
 typedef struct lbRefract_CallbackData lbRefract_CallbackData;
 
-typedef enum Tangibility {
-    Vulnerable,
-    Invincible,
+typedef enum HurtCapsuleState {
+    HurtCapsule_Enabled,
+    HurtCapsule_Disabled,
     Intangible
-} Tangibility;
+} HurtCapsuleState;
 
 typedef enum HitElement {
     HitElement_Normal,

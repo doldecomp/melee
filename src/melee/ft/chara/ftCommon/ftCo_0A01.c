@@ -280,12 +280,12 @@ void ftCo_800A0DA4(Fighter* fp)
     var_f29 = 0.0f;
     var_f31 = 0.0f;
     var_f30 = 0.0f;
-    while (var_r30 < (int) fp->x119E_hurtboxNum) {
-        hurt = var_r31->x11A0_fighterHurtbox;
+    while (var_r30 < (int) fp->hurt_capsules_len) {
+        hurt = var_r31->hurt_capsules;
         lbColl_800083C4(hurt);
         temp_f5 = fp->cur_pos.x;
         temp_f4 = hurt->a_pos.x - temp_f5;
-        temp_f3 = hurt->scl * fp->x34_scale.y;
+        temp_f3 = hurt->scale * fp->x34_scale.y;
         temp_f6 = fp->cur_pos.y;
         temp_f0 = temp_f4 - temp_f3;
         if (var_f31 > temp_f0) {

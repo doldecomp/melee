@@ -49,10 +49,10 @@ void ftCo_800C3598(ftCo_GObj* gobj)
         float x = mag * cosf(angle);
         float y = mag * sinf(angle);
         if (fp->ground_or_air == GA_Air) {
-            ftCo_Damage_CalcVel(fp, x * fp->dmg.x1844_direction, y);
+            ftCo_Damage_CalcVel(fp, x * fp->dmg.facing_dir_1, y);
             fp->xF0_ground_kb_vel = 0;
         } else {
-            fp->xF0_ground_kb_vel = x * fp->dmg.x1844_direction;
+            fp->xF0_ground_kb_vel = x * fp->dmg.facing_dir_1;
             fp->xF0_ground_kb_vel = fp->xF0_ground_kb_vel;
             ftCo_Damage_CalcVel(
                 fp, fp->coll_data.floor.normal.y * fp->xF0_ground_kb_vel,

@@ -1250,7 +1250,7 @@ void ftCommon_8007EA90(Fighter* fp, s32 arg1)
     if (fp->dmg.kb_applied) {
         phi_f30 = fp->dmg.kb_applied;
         phi_f31 = ftCo_Damage_CalcAngle(fp, phi_f30);
-        if (fp->dmg.x1844_direction > 0) {
+        if (fp->dmg.facing_dir_1 > 0) {
             if (phi_f31 > M_PI) {
                 phi_f31 = M_PI * 3 - phi_f31;
             } else {

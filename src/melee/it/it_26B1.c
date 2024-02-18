@@ -39,7 +39,7 @@ static inline float _sqrtfItem(float x)
     return x;
 }
 
-/// Apply Item Damage -  may not be HitCapsule* ???
+/// Apply Item Damage
 f32 it_8026B1D4(HSD_GObj* gobj, HitCapsule* itemHitboxUnk)
 {
     f32 ret = itemHitboxUnk->damage;

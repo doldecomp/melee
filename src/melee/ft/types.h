@@ -289,9 +289,9 @@ struct ftCommonData {
     /* +3C0 */ int x3C0;
     /* +3C4 */ UNK_T x3C4;
     /* +3C8 */ UNK_T x3C8;
-    /* +3CC */ UNK_T x3CC;
-    /* +3D0 */ UNK_T x3D0;
-    /* +3D4 */ UNK_T x3D4;
+    /* +3CC */ int x3CC;
+    /* +3D0 */ float x3D0;
+    /* +3D4 */ float x3D4;
     /* +3D8 */ float x3D8;
     /* +3DC */ float x3DC;
     /* +3E0 */ float x3E0;
@@ -505,7 +505,7 @@ struct ftCommonData {
     /* +79C */ float x79C;
     /* +7A0 */ float x7A0;
     /* +7A4 */ float x7A4;
-    /* +7A8 */ int x7A8;
+    /* +7A8 */ float x7A8;
     /* +7AC */ int x7AC;
     /* +7B0 */ int x7B0;
     /* +7B4 */ int x7B4_unkDamage;
@@ -521,8 +521,8 @@ struct ftCommonData {
     /* +7DC */ int x7DC;
     /* +7E0 */ int x7E0;
     /* +7E4 */ float x7E4_scaleZ;
-    /* +7E8 */ UNK_T x7E8;
-    /* +7EC */ UNK_T x7EC;
+    /* +7E8 */ uint unk_kb_angle_min;
+    /* +7EC */ uint unk_kb_angle_max;
     /* +7F0 */ int x7F0;
     /* +7F4 */ u8 x7F4[0x814 - 0x7F4];
     /* +814 */ int x814;
@@ -943,6 +943,25 @@ struct ftDeviceUnk2 {
     /* +28 */ enum_t x28;
 };
 
+struct ftDeviceUnk3 {
+    UNK_T x0;
+    u32 x4;
+    ftDevice_Callback0 active_cb;
+};
+
+struct ftDeviceUnk4 {
+    int x0;
+    UNK_T x4;
+};
+STATIC_ASSERT(sizeof(struct ftDeviceUnk4) == 0x8);
+
+struct ftDeviceUnk5 {
+    UNK_T x0;
+    ftCommon_BuryType x4;
+    bool (*cb)(UNK_T, Fighter_GObj*);
+};
+STATIC_ASSERT(sizeof(struct ftDeviceUnk5) == 0xC);
+
 struct Fighter {
     /*    fp+0 */ HSD_GObj* gobj;
     /*    fp+4 */ FighterKind kind;
@@ -1202,9 +1221,9 @@ struct Fighter {
     /* fp+1064 */ HitCapsule x1064_thrownHitbox;
     /* fp+119C */ u8 x119C_teamUnk;
     /* fp+119D */ u8 grabber_unk1;
-    /* fp+119E */ u8 x119E_hurtboxNum;
+    /* fp+119E */ u8 hurt_capsules_len;
     /* fp+119F */ u8 x119F;
-    /* fp+11A0 */ HurtCapsule x11A0_fighterHurtbox[15];
+    /* fp+11A0 */ HurtCapsule hurt_capsules[15];
     /* fp+1614 */ UNK_T x1614;
     /* fp+1618 */ u8 filler_x1618[0x166C - 0x1618];
     /* fp+166C */ u32 x166C;
@@ -1218,7 +1237,7 @@ struct Fighter {
         /* fp+1838 */ float x1838_percentTemp;
         /* fp+183C */ int x183C_applied;
         /* fp+1840 */ int x1840;
-        /* fp+1844 */ float x1844_direction;
+        /* fp+1844 */ float facing_dir_1;
         /* fp+1848 */ int x1848_kb_angle;
         /* fp+184C */ int x184c_damaged_hurtbox;
         /* fp+1850 */ float kb_applied;
@@ -1276,9 +1295,9 @@ struct Fighter {
         /* fp+190C */ UNK_T x190C;
         /* fp+1910 */ int x1910;
         /* fp+1914 */ int x1914;
-        /* fp+1918 */ int x1918;
+        /* fp+1918 */ int int_value;
         /* fp+191C */ float x191C;
-        /* fp+1920 */ float x1920;
+        /* fp+1920 */ float facing_dir;
         /* fp+1924 */ int x1924;
         /* fp+1928 */ float x1928;
         /* fp+192C */ float x192c;
@@ -1306,15 +1325,15 @@ struct Fighter {
     /* fp+197C */ HSD_GObj* x197C;
     /* fp+1980 */ HSD_GObj* x1980;
     /* fp+1984 */ Item_GObj* x1984_heldItemSpec;
-    /* fp+1988 */ s32 x1988;
+    /* fp+1988 */ enum_t x1988;
     /* fp+198C */ s32 x198C;
     /* fp+1990 */ s32 x1990;
-    /* fp+1994 */ s32 x1994;
+    /* fp+1994 */ bool x1994;
     /* fp+1998 */ float shield_health;
     /* fp+199C */ float lightshield_amount;
     /* fp+19A0 */ s32 x19A0_shieldDamageTaken;
     /* fp+19A4 */ int x19A4;
-    /* fp+19A8 */ void* x19A8;
+    /* fp+19A8 */ HSD_GObj* x19A8;
     /* fp+19AC */ float specialn_facing_dir;
     /* fp+19B0 */ enum_t x19B0;
     /* fp+19B4 */ float shield_unk0;
@@ -1382,7 +1401,7 @@ struct Fighter {
     /* fp+1AD8 */ UNK_T x1AD8;
     /* fp+1ADC */ float x1ADC;
     /* fp+1A9C */ u8 x1AE0[0x2004 - 0x1AE0];
-    /* fp+2008 */ s32 x2004;
+    /* fp+2008 */ int x2004;
     /* fp+2008 */ s32 x2008;
     /* fp+200C */ s32 x200C;
     /* fp+2010 */ s32 x2010;
@@ -1756,6 +1775,8 @@ struct Fighter {
         /* fp+2340 */ union ftZelda_MotionVars zd;
     } mv;
 };
+
+STATIC_ASSERT(sizeof(Fighter) == 0x23EC);
 
 struct gmScriptEventDefault {
     u32 opcode : 6;

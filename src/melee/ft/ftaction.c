@@ -366,7 +366,7 @@ void ftAction_8007121C(Fighter_GObj* gobj, FtCmdState* cmd)
             hit->state = HitCapsule_Enabled;
             M2C_FIELD(fp, u8*, 0x2219) =
                 (u8) (M2C_FIELD(fp, u8*, 0x2219) | 0x10);
-            ftColl_800768A0();
+            ftColl_800768A0(fp, hit);
         }
         temp_r3 = cmd->x8;
         part = (s8) ((u32) M2C_FIELD(temp_r3, u32*, 0) >> 0xBU);
@@ -378,7 +378,7 @@ void ftAction_8007121C(Fighter_GObj* gobj, FtCmdState* cmd)
         }
         ftColl_8007ABD0(hit, (u16) M2C_FIELD(cmd->x8, u8*, 2) & 0x3FF, gobj);
         cmd->x8 += 4;
-        hit->scl = 0.003906f * (float) (u16) M2C_FIELD(cmd->x8, u32*, 0);
+        hit->scale = 0.003906f * (float) (u16) M2C_FIELD(cmd->x8, u32*, 0);
         hit->b_offset.x = 0.003906f * (float) (s16) M2C_FIELD(cmd->x8, u8*, 2);
         cmd->x8 += 4;
         hit->b_offset.y =
@@ -636,7 +636,7 @@ void ftAction_80071A58(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80071A9C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     char* cmd_x8 = cmd->x8;
-    ftColl_8007B128((s8) ((u16) *cmd_x8 >> 2U), (int) *cmd_x8 & 0x3FFFF);
+    ftColl_8007B128(gobj, (s8) ((u16) *cmd_x8 >> 2U), (int) *cmd_x8 & 0x3FFFF);
     cmd->x8 += 4;
 }
 

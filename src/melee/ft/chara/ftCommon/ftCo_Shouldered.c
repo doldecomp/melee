@@ -64,13 +64,13 @@ void ftCo_8009C744(ftCo_GObj* gobj)
     ftCo_800DC920(vic_gobj, gobj);
     lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint, NULL,
                 &pos);
-    fp->dmg.kb_applied = ftColl_80079C70(fp, vic_fp, hit, hit->x8);
+    fp->dmg.kb_applied = ftColl_80079C70(fp, vic_fp, hit, hit->unk_count);
     fp->dmg.x1848_kb_angle = hit->kb_angle;
-    fp->dmg.x1844_direction = -vic_fp->facing_dir;
+    fp->dmg.facing_dir_1 = -vic_fp->facing_dir;
     fp->dmg.x184c_damaged_hurtbox = 1;
     fp->dmg.x1854_collpos = pos;
     fp->dmg.x1860 = hit->element;
-    ftColl_80078710(gobj);
+    // ftColl_80078710(gobj);
     Fighter_UnkTakeDamage_8006CC30(fp, hit->damage);
     ftCo_Damage_CalcKnockback(fp);
     ftCo_8008E908(gobj, 0);
@@ -101,13 +101,14 @@ void ftCo_Shouldered_Anim(ftCo_GObj* gobj)
             lb_8000B1CC(
                 fp1->parts[(ftParts_8007500C(fp1, FtPart_TransN2))].joint,
                 NULL, &pos);
-            fp1->dmg.kb_applied = ftColl_80079C70(fp1, fp2, hit, hit->x8);
+            fp1->dmg.kb_applied =
+                ftColl_80079C70(fp1, fp2, hit, hit->unk_count);
             fp1->dmg.x1848_kb_angle = hit->kb_angle;
-            fp1->dmg.x1844_direction = fp1->facing_dir;
+            fp1->dmg.facing_dir_1 = fp1->facing_dir;
             fp1->dmg.x184c_damaged_hurtbox = 1;
             fp2->dmg.x1854_collpos = pos;
             fp1->dmg.x1860 = hit->element;
-            ftColl_80078710(gobj);
+            // ftColl_80078710(gobj);
             Fighter_UnkTakeDamage_8006CC30(fp1, hit->damage);
             ftCo_Damage_CalcKnockback(fp1);
             ftCo_8008E908(gobj1, 0);
