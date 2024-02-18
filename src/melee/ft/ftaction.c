@@ -298,7 +298,7 @@ void ftAction_80071028(Fighter_GObj* gobj, FtCmdState* cmd)
     // if !invisible
     if (!fp->x221E_b0) {
         if (gmScriptEventCast(cmd->x8, struct test1)->useUnkBone) {
-            bone = fp->ft_data->x8->unk12;
+            bone = fp->ft_data->x8->x12;
         } else {
             bone = gmScriptEventCast(cmd->x8, struct test1)->boneId;
         }
@@ -1326,9 +1326,9 @@ void ftAction_80072CD8(Fighter_GObj* gobj, FtCmdState* cmd)
             vec1.x = 0.0f;
             vec0.x = 0.0f;
             if (!(((u8) M2C_FIELD(cmd->x8, u8*, 1) >> 1U) & 1)) {
-                var_r5 = fp->ft_data->x8->unk13;
+                var_r5 = fp->ft_data->x8->x13;
             } else {
-                var_r5 = fp->ft_data->x8->unk14;
+                var_r5 = fp->ft_data->x8->x14;
             }
             ftCo_8009F834(gobj, (int) ivec1.x, var_r5, 0, 0, &vec1, &vec0,
                           0.0f);

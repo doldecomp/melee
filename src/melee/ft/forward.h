@@ -20,6 +20,7 @@ typedef struct FtCmdState FtCmdState;
 typedef struct ftCo_DatAttrs_xBC_t ftCo_DatAttrs_xBC_t;
 typedef struct FtCollisionData FtCollisionData;
 typedef struct ftCommonData ftCommonData;
+typedef struct ftData ftData;
 typedef struct ftData_UnkCountStruct ftData_UnkCountStruct;
 typedef struct ftDeviceUnk1 ftDeviceUnk1;
 typedef struct ftDeviceUnk2 ftDeviceUnk2;
