@@ -52,7 +52,7 @@ void it_802E03E8(Item_GObj* gobj)
 
 void it_802E0408(Item_GObj* gobj)
 {
-    it_802E0408(gobj);
+    it_802DFCB0(gobj);
 }
 
 void it_802E0428(Item_GObj* gobj)
