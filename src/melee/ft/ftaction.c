@@ -791,20 +791,22 @@ void ftAction_80071DCC(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80071E04(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     HitCapsule* hit;
-    char* cmd_x8 = cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
-    hit = &fp->xDF4[(((u16) *cmd_x8 >> 7U) & 7)];
-    ftColl_8007ABD0(hit, (int) *cmd_x8 & 0x7FFFFF, gobj);
+    u16* cmd_x8_short = (u16*) cmd->x8;
+    int* cmd_x8 = (int*) cmd->x8;
+
+    hit = &((Fighter*) gobj->user_data)->xDF4[((*cmd_x8_short >> 7U) & 7)];
+    ftColl_8007ABD0(hit, *cmd_x8 & 0x7FFFFF, gobj);
     cmd->x8 += 4;
     ftColl_8007AC9C(hit, ((u16) M2C_FIELD(cmd->x8, u16*, 0) >> 7U) & 0x1FF,
                     gobj);
-    hit->x24 = ((u32) M2C_FIELD(cmd->x8, u16*, 0) >> 0xEU) & 0x1FF;
+
+    hit->x24 = ((u32) M2C_FIELD(cmd->x8, u32*, 0) >> 0xEU) & 0x1FF;
     hit->x28 = (int) (((u16) M2C_FIELD(cmd->x8, u16*, 2) >> 5U) & 0x1FF);
     cmd->x8 += 4;
     hit->x2C = (int) (((u16) M2C_FIELD(cmd->x8, u16*, 0) >> 7U) & 0x1FF);
     hit->element = ((u8) M2C_FIELD(cmd->x8, u8*, 1) >> 3U) & 0xF;
     hit->sfx_severity = M2C_FIELD(cmd->x8, u8*, 1) & 7;
-    hit->sfx_kind = ((u8) M2C_FIELD(cmd->x8, u16*, 2) >> 4U) & 0xF;
+    hit->sfx_kind = ((u8) M2C_FIELD(cmd->x8, u8*, 2) >> 4U) & 0xF;
     cmd->x8 += 4;
 }
 
