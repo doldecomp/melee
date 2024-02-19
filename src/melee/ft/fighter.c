@@ -2574,8 +2574,7 @@ void Fighter_UnkProcessGrab_8006CA5C(Fighter_GObj* gobj)
             ftColl_80078A2C(gobj);
             if (fp->victim_gobj) {
                 if (!fp->x2225_b1) {
-                    ft_80088148(fp, fp->ft_data->x4C_collisionData->x30, 0x7F,
-                                0x40);
+                    ft_80088148(fp, fp->ft_data->x4C_sfx->x30, 0x7F, 0x40);
                 }
                 ftColl_80078754(gobj, fp->victim_gobj, 0);
                 fp->grab_cb(gobj);
@@ -2586,8 +2585,7 @@ void Fighter_UnkProcessGrab_8006CA5C(Fighter_GObj* gobj)
 
             if (fp->x1A60) {
                 if (!fp->x2225_b1) {
-                    ft_80088148(fp, fp->ft_data->x4C_collisionData->x30, 0x7F,
-                                0x40);
+                    ft_80088148(fp, fp->ft_data->x4C_sfx->x30, 0x7F, 0x40);
                 }
                 it_8027B4A4(gobj, fp->x1A60);
                 if (fp->x2194) {

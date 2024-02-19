@@ -949,7 +949,7 @@ s32 ftLib_8008746C(HSD_GObj* gobj)
         return 0x1FBD1;
     }
 
-    return fp->ft_data->x4C_collisionData->x34;
+    return fp->ft_data->x4C_sfx->x34;
 }
 
 s32 ftLib_800874BC(HSD_GObj* gobj)

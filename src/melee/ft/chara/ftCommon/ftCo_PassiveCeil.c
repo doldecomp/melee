@@ -57,7 +57,7 @@ void ftCo_800C23FC(ftCo_GObj* gobj)
         fp->cur_pos.y = pos_y_offset + fp->x68C_transNPos.y;
     }
     ftCo_80090574(gobj);
-    ft_800881D8(fp, fp->ft_data->x4C_collisionData->x24, 0x7F, 0x40);
+    ft_800881D8(fp, fp->ft_data->x4C_sfx->x24, 0x7F, 0x40);
     ft_80088148(fp, 3, 0x7F, 0x40);
     ftCommon_8007EBAC(fp, 12, 0);
     ftCo_800BFFD0(fp, 120, 0);

@@ -118,7 +118,7 @@ void ftCo_8009A6B8(ftCo_GObj* gobj)
                               NULL);
     ft_80088770(fp);
     ft_800887CC(fp);
-    ft_80088328(fp, fp->ft_data->x4C_collisionData->x18, 127, 64);
+    ft_80088328(fp, fp->ft_data->x4C_sfx->x18, 127, 64);
 }
 
 void ftCo_OttottoWait_Anim(HSD_GObj* gobj) {}
