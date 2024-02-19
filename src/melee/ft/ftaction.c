@@ -1232,7 +1232,10 @@ void ftAction_80072AAC(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80072ABC(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_800C0200(gobj->user_data, (s8) ((u16) *cmd->x8 >> 2U));
+    u16 ftcmd = *(u16*) cmd->x8;
+    ftcmd = (ftcmd >> 2) & 0xFF;
+
+    ftCo_800C0200(gobj->user_data, ftcmd);
     cmd->x8 += 4;
 }
 
