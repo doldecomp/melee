@@ -10,6 +10,7 @@
 #include "ft/types.h"
 #include "it/itCharItems.h"
 #include "it/itCommonItems.h"
+#include "it/items/itkirbyhammer.h"
 #include "it/itPKFlash.h"
 #include "it/itPKThunder.h"
 
@@ -616,6 +617,7 @@ struct Item {
         PKThunderVars PKThunderVars;
         FoxLaserVars foxlaser;
         FoxIllusionVars foxillusion;
+        itKirbyHammerVars kirbyhammer;
         u8 padding[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
