@@ -9,12 +9,7 @@
 #include "it/item.h"
 
 ItemStateTable it_803F6C98[] = {
-    {
-        0,
-        NULL,
-        NULL,
-        NULL,
-    },
+    { 0, NULL, NULL, NULL },
 };
 
 void it_802ADC04(Item_GObj* gobj)
