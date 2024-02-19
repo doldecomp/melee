@@ -529,21 +529,26 @@ struct ftCommonData {
     // lots of more data following, exact size to be determined
 };
 
-struct FtCollisionData {
-    int x0;
-    int* x4;
-    UNK_T x8;
-    UNK_T xC;
-    UNK_T x10;
-    UNK_T x14;
+typedef struct _FtSFXArr {
+    int num;
+    int* sfx_ids;
+} FtSFXArr;
+
+struct FtSFX {
+    FtSFXArr* smash;
+    int* death;
+    int x8;
+    int xC;
+    int x10;
+    int x14;
     int x18;
-    UNK_T x1C;
-    UNK_T x20;
-    u32 x24;
-    u32 x28;
-    u32 x2C;
-    s32 x30;
-    s32 x34;
+    int x1C;
+    int x20;
+    int x24;
+    int x28;
+    int x2C;
+    int x30;
+    int x34;
 };
 
 typedef struct _DObjList {
@@ -593,7 +598,7 @@ struct ftData {
     /* +3C */ struct UnkFloat6_Camera* x3C;
     /* +40 */ s32 filler_x40[2];
     /* +48 */ UNK_T* x48_items;
-    /* +4C */ FtCollisionData* x4C_collisionData;
+    /* +4C */ FtSFX* x4C_sfx;
     /* +50 */ u8 x50[0x58 - 0x50];
     /* +58 */ void* x58;
 };

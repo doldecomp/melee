@@ -748,13 +748,13 @@ void ftAction_80071CA4(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071CCC(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    u8 _[8] = { 0 };
     ftCo_Fighter* fp = gobj->user_data;
-    FtCollisionData* cd = fp->ft_data->x4C_collisionData;
-    if (cd == NULL) {
+    FtSFX* sfx = fp->ft_data->x4C_sfx;
+    FtSFXArr* sfx_smash = sfx->smash;
+    if (sfx_smash == NULL) {
         cmd->x8 += 4;
     } else {
-        ft_800889F4(fp, cd);
+        ft_800889F4(fp, sfx_smash);
         cmd->x8 += 4;
     }
 }

@@ -20,7 +20,7 @@
 /* 0888E0 */ void ft_800888E0(Fighter* fp);
 /* 08893C */ void ft_8008893C(Fighter* fp);
 /* 088998 */ UNK_RET ft_80088998(UNK_PARAMS);
-/* 0889F4 */ void ft_800889F4(Fighter* fp, FtCollisionData* coll);
+/* 0889F4 */ void ft_800889F4(Fighter* fp, FtSFXArr* sfx);
 /* 088A50 */ void ft_80088A50(Fighter* fp);
 /* 088C5C */ void ft_80088C5C(Fighter_GObj* gobj);
 /* 0890BC */ void ft_800890BC(Fighter* fp);
