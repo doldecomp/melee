@@ -819,8 +819,11 @@ void ftAction_80071F0C(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071F34(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    u8 _[8] = { 0 };
-    ftCommon_8007F5CC(gobj, *cmd->x8 & 0x03FFFFFF);
+    int ftcmd = *(int*) cmd->x8;
+    PAD_STACK(8);
+
+    ftcmd &= 0x03FFFFFF;
+    ftCommon_8007F5CC(gobj, ftcmd);
     cmd->x8 += 4;
 }
 
