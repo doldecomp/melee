@@ -10,7 +10,6 @@
 #include "ft/types.h"
 #include "it/itCharItems.h"
 #include "it/itCommonItems.h"
-#include "it/items/itkirbyhammer.h"
 #include "it/itPKFlash.h"
 #include "it/itPKThunder.h"
 
