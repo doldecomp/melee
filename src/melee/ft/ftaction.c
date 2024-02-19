@@ -540,22 +540,22 @@ void ftAction_80071810(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071820(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    char* cmd_x8 = cmd->x8;
+    int* cmd_x8 = (int*) cmd->x8;
     ftCo_Fighter* fp = gobj->user_data;
-    int temp_r0 = (u8) *cmd_x8 & 3;
-    /// @todo Suggests #Fighter::cmd_vars isn't an array.
+    u8 temp_r0 = *(u8*) cmd_x8 & 3;
+
     switch (temp_r0) {
     case 0:
-        fp->cmd_vars[0] = (int) ((int) *cmd_x8 & 0xFFFFFF);
+        fp->cmd_vars[0] = (*cmd_x8 & 0xFFFFFF);
         break;
     case 1:
-        fp->cmd_vars[1] = (int) ((int) *cmd_x8 & 0xFFFFFF);
+        fp->cmd_vars[1] = (*cmd_x8 & 0xFFFFFF);
         break;
     case 2:
-        fp->cmd_vars[2] = (int) ((int) *cmd_x8 & 0xFFFFFF);
+        fp->cmd_vars[2] = (*cmd_x8 & 0xFFFFFF);
         break;
     case 3:
-        fp->cmd_vars[3] = (int) ((int) *cmd_x8 & 0xFFFFFF);
+        fp->cmd_vars[3] = (*cmd_x8 & 0xFFFFFF);
         break;
     }
     cmd->x8 += 4;
