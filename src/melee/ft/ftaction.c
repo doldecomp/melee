@@ -606,8 +606,8 @@ void ftAction_80071974(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80071998(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    int temp_r0 = *cmd->x8 & 0x03FFFFFF;
-    switch (temp_r0) { /* irregular */
+    int temp_r0 = *(int*) cmd->x8 & 0x03FFFFFF;
+    switch (temp_r0) {
     case 0:
         ftCommon_8007D7FC(fp);
         break;
