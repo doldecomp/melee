@@ -4,14 +4,15 @@
 #include <platform.h>
 
 typedef struct AbsorbDesc AbsorbDesc;
+typedef struct CollData CollData;
 typedef struct HitCapsule HitCapsule;
 typedef struct HitResult HitResult;
 typedef struct HitVictim HitVictim;
 typedef struct HurtCapsule HurtCapsule;
 typedef struct lb_UnkAnimStruct lb_UnkAnimStruct;
+typedef struct lbRefract_CallbackData lbRefract_CallbackData;
 typedef struct ReflectDesc ReflectDesc;
 typedef struct ShieldDesc ShieldDesc;
-typedef struct lbRefract_CallbackData lbRefract_CallbackData;
 
 typedef enum HurtCapsuleState {
     HurtCapsule_Enabled,
