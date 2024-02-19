@@ -317,7 +317,7 @@ void ftCo_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj)
         pl_8003E854(fp->player_id, fp->x221F_b4, item_gobj);
         Item_8026AB54(item_gobj, gobj, ret_part);
         if (it_8026B2B4(item_gobj) == 1) {
-            ft_800881D8(fp, fp->ft_data->x4C_collisionData->x2C, 127, 64);
+            ft_800881D8(fp, fp->ft_data->x4C_sfx->x2C, 127, 64);
         }
     }
 }

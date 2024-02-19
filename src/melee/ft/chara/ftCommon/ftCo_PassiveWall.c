@@ -107,7 +107,7 @@ void ftCo_800C1E64(ftCo_GObj* gobj, int msid, int timer, int vel_y_exponent,
             -(fp->x68C_transNPos.z * -fp->facing_dir - pos_x_offset);
     }
     ft_80081F2C(gobj);
-    ft_800881D8(fp, fp->ft_data->x4C_collisionData->x24, 0x7F, 0x40);
+    ft_800881D8(fp, fp->ft_data->x4C_sfx->x24, 0x7F, 0x40);
     ftCommon_8007EBAC(fp, 12, 0);
     if (timer == 0) {
         ft_80088148(fp, 3, 0x7F, 0x40);
