@@ -2,9 +2,10 @@
 #define GALE01_2D5ABC
 
 #include <platform.h>
+#include "it/forward.h"
 #include <baselib/forward.h>
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 2D5ABC */ void it_802D5ABC(Item_GObj*);
 /* 2D5B14 */ void it_802D5B14(Item_GObj*);

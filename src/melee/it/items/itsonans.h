@@ -2,8 +2,9 @@
 #define GALE01_2CD44C
 
 #include <platform.h>
+#include "it/forward.h"
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 2CD44C */ void it_802CD44C(Item_GObj*);
 /* 2CD4DC */ void it_802CD4DC(Item_GObj*, Item_GObj*);

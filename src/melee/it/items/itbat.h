@@ -2,8 +2,9 @@
 #define GALE01_284854
 
 #include <platform.h>
+#include "it/forward.h"
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 284910 */ void it_80284910(Item_GObj*);
 /* 284AAC */ void it_80284AAC(Item_GObj*);

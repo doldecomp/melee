@@ -1,7 +1,9 @@
 #ifndef GALE01_2896CC
 #define GALE01_2896CC
 
-#include "it/types.h"
+#include "it/forward.h"
+
+#include "it/items/types.h"
 
 /* 289784 */ void it_80289784(Item_GObj*);
 /* 28A93C */ void it_8028A93C(Item_GObj*);

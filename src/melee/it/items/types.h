@@ -2,9 +2,72 @@
 #define MELEE_IT_ITEMS_TYPES_H
 
 #include <platform.h>
-#include "it/items/forward.h"
+#include "it/items/forward.h" // IWYU pragma: export
+#include <baselib/forward.h>
 
 #include <placeholder.h>
+
+/// @todo Size unknown.
+struct ItemStateTable {
+    /// @at{0} @sz{4}
+    enum_t anim_id;
+
+    /// @at{4} @sz{4}
+    HSD_GObjPredicate animated;
+
+    /// @at{8} @sz{4}
+    HSD_GObjEvent physics_updated;
+
+    /// @at{C} @sz{4}
+    HSD_GObjPredicate collided;
+};
+
+struct ItemLogicTable {
+    /// @at{0} @sz{4}
+    ItemStateTable* states;
+
+    /// @at{4} @sz{4}
+    HSD_GObjEvent spawned;
+
+    /// @at{8} @sz{4}
+    HSD_GObjEvent destroyed;
+
+    /// @at{C} @sz{4}
+    HSD_GObjEvent picked_up;
+
+    /// @at{10} @sz{4}
+    HSD_GObjEvent dropped;
+
+    /// @at{14} @sz{4}
+    HSD_GObjEvent thrown;
+
+    /// @at{18} @sz{4}
+    HSD_GObjPredicate dmg_dealt;
+
+    /// @at{1C} @sz{4}
+    HSD_GObjPredicate dmg_received;
+
+    /// @at{20} @sz{4}
+    HSD_GObjEvent entered_air;
+
+    /// @at{24} @sz{4}
+    HSD_GObjPredicate reflected;
+
+    /// @at{28} @sz{4}
+    HSD_GObjPredicate clanked;
+
+    /// @at{2C} @sz{4}
+    HSD_GObjPredicate absorbed;
+
+    /// @at{30} @sz{4}
+    HSD_GObjPredicate shield_bounced;
+
+    /// @at{34} @sz{4}
+    HSD_GObjPredicate hit_shield;
+
+    /// @at{38} @sz{4}
+    HSD_GObjInteraction evt_unk;
+};
 
 struct itSword_UnkBytes {
     /*   +0 */ u8 x0;

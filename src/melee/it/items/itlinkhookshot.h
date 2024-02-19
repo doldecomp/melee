@@ -2,10 +2,11 @@
 #define GALE01_2A2418
 
 #include "ft/forward.h"
+#include "it/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 2A2418 */ void it_802A2418(Item_GObj*);
 /* 2A2B10 */ void it_802A2B10(Item_GObj* gobj);

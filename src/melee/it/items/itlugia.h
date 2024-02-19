@@ -1,7 +1,9 @@
 #ifndef GALE01_2D1438
 #define GALE01_2D1438
 
-#include "it/types.h"
+#include "it/forward.h"
+
+#include "it/items/types.h"
 
 /* 2D1438 */ void it_802D1438(Item_GObj*);
 /* 2D14D4 */ void it_802D14D4(Item_GObj*, Item_GObj*);

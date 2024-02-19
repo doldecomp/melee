@@ -2,8 +2,9 @@
 #define _itzgshell_h_
 
 #include <platform.h>
+#include "it/forward.h"
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 void it_802DE040(Item_GObj* gobj);
 void it_802DE434(Item_GObj* gobj);

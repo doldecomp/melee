@@ -2,10 +2,11 @@
 #define GALE01_29C4D4
 
 #include <platform.h>
+#include "it/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 29C4D4 */ bool it_8029C4D4(Item_GObj*);
 /* 29C504 */ void it_8029C504(HSD_GObj* parent, Vec3* pos, enum_t msid,

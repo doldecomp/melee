@@ -2,8 +2,9 @@
 #define GALE01_2ADDD0
 
 #include "ft/forward.h"
+#include "it/forward.h"
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 2AE994 */ Item_GObj* it_802AE994(Fighter_GObj*, Fighter_Part, int);
 /* 2AEB00 */ void it_802AEB00(Item_GObj*);

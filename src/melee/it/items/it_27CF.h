@@ -3,11 +3,12 @@
 
 #include <platform.h>
 #include "ft/forward.h"
+#include "it/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ftSeak/types.h"
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 27D670 */ void it_8027D670(Vec3* const);
 /* 27D730 */ void it_8027D730(Item_GObj*);

@@ -2,10 +2,11 @@
 #define GALE01_2B7150
 
 #include "ft/forward.h"
+#include "it/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 2A77DC */ void it_802A77DC(Item_GObj* gobj);
 /* 2B7150 */ void it_802B7150(Item_GObj*);

@@ -2,8 +2,9 @@
 #define GALE01_2BD158
 
 #include <platform.h>
+#include "it/forward.h"
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 2BD240 */ bool it_802BD240(Item_GObj*);
 /* 2BD30C */ void it_802BD30C(Item_GObj*, Item_GObj*);

@@ -2,9 +2,11 @@
 #define _itkirbyhammer_h_
 
 #include <platform.h>
+#include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 void it_802ADC04(Item_GObj* gobj);
 void it_802ADC34(Item_GObj* gobj);
