@@ -74,7 +74,7 @@ OSPanic(__FILE__, __LINE__, "Function is not implemented!")
 
 #define PAD_STACK(bytes)                                                      \
     do {                                                                      \
-        UNUSED unsigned char _[(bytes)] = { 0 };                              \
+        UNUSED unsigned char _[(bytes)];                                      \
     } while (0)
 
 #endif

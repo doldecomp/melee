@@ -620,7 +620,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itkoopaflame.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itnessbat.s.o\
     $(BUILD_DIR)/src/melee/it/items/it_2ADA.c.o\
-    $(BUILD_DIR)/asm/melee/it/items/itkirbyhammer.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itkirbyhammer.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itfoxblaster.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itlinkbow.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itnesspkflushexplode.s.o\
