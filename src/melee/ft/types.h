@@ -536,7 +536,7 @@ typedef struct _FtSFXArr {
 
 struct FtSFX {
     FtSFXArr* smash;
-    int* death;
+    int x4;
     int x8;
     int xC;
     int x10;

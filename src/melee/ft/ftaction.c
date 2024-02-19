@@ -1173,8 +1173,11 @@ void ftAction_8007296C(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_8007297C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    u8 _[8] = { 0 };
-    ftCommon_8007ECD4(gobj->user_data, *cmd->x8 & 0x03FFFFFF);
+    int masked = *(int*) cmd->x8;
+    PAD_STACK(8);
+
+    masked &= 0x03FFFFFF;
+    ftCommon_8007ECD4(gobj->user_data, masked);
     cmd->x8 += 4;
 }
 
