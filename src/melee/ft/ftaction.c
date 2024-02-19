@@ -1293,7 +1293,10 @@ void ftAction_80072C5C(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80072C6C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ft_8008A1B8(gobj, *cmd->x8 & 0x03FFFFFF);
+    int ftcmd = *(int*) cmd->x8;
+    ftcmd &= 0x03FFFFFF;
+
+    ft_8008A1B8(gobj, ftcmd);
     cmd->x8 += 4;
 }
 
