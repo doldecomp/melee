@@ -651,7 +651,8 @@ void ftAction_80071A9C(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80071AE8(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (!(*cmd->x8 & 0x03FFFFFF) || fp->x197C != NULL) {
+
+    if (!(*(int*) cmd->x8 & 0x03FFFFFF) || fp->x197C != NULL) {
         fp->x2218_b1 = true;
     }
     cmd->x8 += 4;
