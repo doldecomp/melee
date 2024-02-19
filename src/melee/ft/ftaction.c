@@ -564,7 +564,7 @@ void ftAction_80071820(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_800718A4(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    int cmd_x8 = *cmd->x8 & 0x03FFFFFF;
+    int cmd_x8 = *(int*) cmd->x8 & 0x03FFFFFF;
     switch (cmd_x8) {
     case 0:
         fp->throw_flags_b3 = true;
