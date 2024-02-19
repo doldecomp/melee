@@ -660,11 +660,9 @@ void ftAction_80071AE8(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071B28(Fighter_GObj* gobj, FtCmdState* cmd)
 {
+    int ftcmd = *(int*) cmd->x8;
     ftCo_Fighter* fp = gobj->user_data;
-    fp->x2218_b2 = (*cmd->x8);
-    // M2C_FIELD(fp, u8*, 0x2218) =
-    //     (u8) ((M2C_FIELD(fp, u8*, 0x2218) & ~0x20) | ((*cmd->x8 << 5) &
-    //     0x20));
+    fp->x2218_b2 = ftcmd;
     cmd->x8 += 4;
 }
 
