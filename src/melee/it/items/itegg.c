@@ -223,35 +223,32 @@ bool it_80289210(HSD_GObj* gobj)
 
 int it_80289218(Item_GObj* arg0)
 {
-    f32 sp28;
-    f32 sp24;
-    f32 sp20;
     Item* temp_r31;
     Item* temp_r31_2;
     Item* temp_r31_3;
     s32 var_r0;
-    void* temp_r30;
+    void* attrs;
+    Vec3 new_vec;
+    u8 _[8] = { 0 };
 
-    temp_r31 = arg0->user_data;
-    if ((s32) temp_r31->xDD4_itemVar.capsule.x0 != 0) {
+    temp_r31 = GET_ITEM(arg0);
+    if (temp_r31->xDD4_itemVar.capsule.x0 != 0) {
         return 0;
     }
-    temp_r30 = temp_r31->xC4_article_data->x4_specialAttributes;
-    if (HSD_Randi(M2C_FIELD(temp_r30, s32*, 4)) == 0) {
+    attrs = temp_r31->xC4_article_data->x4_specialAttributes;
+    if (HSD_Randi(M2C_FIELD(attrs, s32*, 4)) == 0) {
         var_r0 = 1;
     } else {
-        sp28 = 0.0F;
-        sp24 = 0.0F;
-        sp20 = 0.0F;
-        if (it_8026F8B4(arg0, &temp_r31->pos, (Vec3*) &sp20, 0) != 0) {
+        new_vec.x = new_vec.y = new_vec.z = 0.0F;
+        if (it_8026F8B4(arg0, &temp_r31->pos, &new_vec, 0) != 0) {
             var_r0 = 0;
         } else {
-            it_8026F3D4(arg0, 0, M2C_FIELD(temp_r30, s32*, 0), 0);
+            it_8026F3D4(arg0, 0, M2C_FIELD(attrs, s32*, 0), 0);
             var_r0 = 0;
         }
     }
     if (var_r0 != 0) {
-        temp_r31_2 = arg0->user_data;
+        temp_r31_2 = GET_ITEM(arg0);
         it_8026BB44(arg0);
         it_80272C08(arg0);
         it_802756D0((HSD_GObj*) arg0);
@@ -260,7 +257,7 @@ int it_80289218(Item_GObj* arg0)
         it_8027518C(arg0);
         temp_r31_2->x40_vel.x = 0.0F;
         temp_r31_2->x40_vel.y = 0.0F;
-        temp_r31_2->xDCF_flag.u8 |= 0x20;
+        temp_r31_2->xDCF_flag.bits.b2 = 1;
         temp_r31_2->xDD4_itemVar.capsule.x0 = 1;
         temp_r31_2->xDD4_itemVar.capsule.x4 = 0x14;
         Item_80268E5C((HSD_GObj*) arg0, 5, ITEM_ANIM_UPDATE);
@@ -268,12 +265,12 @@ int it_80289218(Item_GObj* arg0)
     }
     efSync_Spawn(0x4D0, arg0, &temp_r31->pos);
     Item_8026AE84(temp_r31, 0xF4, 0x7F, 0x40);
-    temp_r31_3 = arg0->user_data;
+    temp_r31_3 = GET_ITEM(arg0);
     HSD_JObjSetFlagsAll(arg0->hsd_obj, 0x10U);
     it_802756D0((HSD_GObj*) arg0);
     temp_r31_3->x40_vel.x = 0.0F;
     temp_r31_3->x40_vel.y = 0.0F;
-    temp_r31_3->xDCF_flag.u8 |= 0x20;
+    temp_r31_3->xDCF_flag.bits.b2 = 1;
     temp_r31_3->xDD4_itemVar.capsule.x0 = 1;
     temp_r31_3->xDD4_itemVar.capsule.x4 = 0x28;
     it_8026B3A8(arg0);
