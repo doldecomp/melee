@@ -1,5 +1,6 @@
 #include "itkirbyhammer.h"
 
+#include "db/db_2253.h"
 #include "ef/efasync.h"
 #include "ft/chara/ftKirby/ftKb_Init.h"
 #include "it/inlines.h"
@@ -7,12 +8,14 @@
 #include "it/it_26B1.h"
 #include "it/item.h"
 
-ItemStateTable it_803F6C98[] = { {
-    0,
-    NULL,
-    NULL,
-    NULL,
-} };
+ItemStateTable it_803F6C98[] = {
+    {
+        0,
+        NULL,
+        NULL,
+        NULL,
+    },
+};
 
 void it_802ADC04(Item_GObj* gobj)
 {
