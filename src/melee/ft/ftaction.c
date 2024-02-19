@@ -516,7 +516,9 @@ void ftAction_80071774(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071784(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftColl_8007AFC8(gobj, *cmd->x8 & 0x03FFFFFF);
+    int hit_idx = *(int*) cmd->x8;
+    hit_idx &= 0x03FFFFFF;
+    ftColl_8007AFC8(gobj, hit_idx);
     cmd->x8 += 4;
 }
 
