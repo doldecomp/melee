@@ -2,10 +2,11 @@
 #define GALE01_2B2FC8
 
 #include <platform.h>
+#include "it/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 2B2FC8 */ Item_GObj* it_802B2FC8(HSD_GObj* parent, Vec3* pos, f32 dir);
 /* 2B309C */ bool it_802B309C(Item_GObj*);

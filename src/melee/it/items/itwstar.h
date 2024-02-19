@@ -2,10 +2,11 @@
 #define GALE01_294364
 
 #include "ftCommon/forward.h"
+#include "it/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 294364 */ HSD_AnimJoint* it_80294364(Item_GObj*);
 /* 294430 */ void it_80294430(Item_GObj*, float, float);

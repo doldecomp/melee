@@ -69,9 +69,9 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/ftparts.s.o\
     $(BUILD_DIR)/src/melee/ft/ftcamera.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftcoll.s.o\
-    $(BUILD_DIR)/asm/melee/ft/ft_07C1.s.o\
+    $(BUILD_DIR)/src/melee/ft/ft_07C1.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_07C6.s.o\
-    $(BUILD_DIR)/asm/melee/ft/ftcommon.s.o\
+    $(BUILD_DIR)/src/melee/ft/ftcommon.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftdrawcommon.s.o\
     $(BUILD_DIR)/src/melee/ft/ftcliffcommon.c.o\
     $(BUILD_DIR)/src/melee/ft/ftwalljump.c.o\
@@ -275,12 +275,12 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_Init.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftPeach/ftPe_Float.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_Float.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_FloatFall.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_FloatAttack.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_AttackS4.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_SpecialS.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftPeach/ftPe_SpecialLw.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_SpecialLw.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_SpecialHi.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPe_SpecialN.c.o\
 
@@ -571,7 +571,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/ittaru.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itegg.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itkusudama.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itparasol.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itparasol.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itgshell.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itrshell.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itlgun.s.o\
@@ -620,7 +620,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itkoopaflame.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itnessbat.s.o\
     $(BUILD_DIR)/src/melee/it/items/it_2ADA.c.o\
-    $(BUILD_DIR)/asm/melee/it/items/itkirbyhammer.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itkirbyhammer.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itfoxblaster.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itlinkbow.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itnesspkflushexplode.s.o\

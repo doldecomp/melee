@@ -2,8 +2,9 @@
 #define GALE01_2D3008
 
 #include <platform.h>
+#include "it/forward.h"
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 2D3008 */ void it_802D3008(Item_GObj*);
 /* 2D306C */ void it_802D306C(Item_GObj*);

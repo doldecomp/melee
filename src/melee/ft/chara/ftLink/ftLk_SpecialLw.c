@@ -69,7 +69,7 @@ static void spawnBomb(HSD_GObj* gobj)
         {
             Fighter_Part part = da->x48;
             float facing_dir = fp->facing_dir;
-            HSD_GObj* igobj = it_8029DD58(gobj, &pos, fp->ft_data->x8->unk10,
+            HSD_GObj* igobj = it_8029DD58(gobj, &pos, fp->ft_data->x8->x10,
                                           part, facing_dir);
             fp->item_gobj = igobj;
             ftParts_80074A4C(gobj, 2, 1);

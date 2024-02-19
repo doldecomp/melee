@@ -46,8 +46,8 @@ typedef struct {
 /* 008434 */ void lbColl_80008434(HitCapsule*);
 /* 008440 */ void lbColl_80008440(HitCapsule*);
 /* 0084FC */ void lbColl_CopyHitCapsule(HitCapsule* src, HitCapsule* dst);
-/* 008688 */ bool lbColl_80008688(HitCapsule*, enum_t, Fighter*);
-/* 008820 */ UNK_RET lbColl_80008820(UNK_PARAMS);
+/* 008688 */ bool lbColl_80008688(HitCapsule*, int, Fighter*);
+/* 008820 */ bool lbColl_80008820(HitCapsule*, int, Fighter*);
 /* 0089B8 */ void lbColl_800089B8(HitCapsule* hit, UNK_T arg1);
 /* 008A5C */ void lbColl_80008A5C(HitCapsule* hit);
 /* 008D30 */ void lbColl_80008D30(HitCapsule*, UNK_T);

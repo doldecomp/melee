@@ -120,9 +120,6 @@ Short for "radians."
 @section glossary_rot rot
 Short for "rotation."
 
-@section glossary_scl scl
-Short for "scale."
-
 @section glossary_sfx sfx
 Short for "sound effect(s)."
 

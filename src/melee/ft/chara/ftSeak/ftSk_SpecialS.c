@@ -1,4 +1,3 @@
-#include "it/forward.h"
 #include "lb/forward.h"
 
 #include "ftSeak/ftSk_SpecialS.h"
@@ -17,6 +16,7 @@
 #include "ftSeak/ftSk_Init.h"
 #include "ftSeak/types.h"
 #include "it/items/it_27CF.h"
+#include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 #include "lb/lbrefract.h"

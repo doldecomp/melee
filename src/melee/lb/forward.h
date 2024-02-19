@@ -4,20 +4,21 @@
 #include <platform.h>
 
 typedef struct AbsorbDesc AbsorbDesc;
+typedef struct CollData CollData;
 typedef struct HitCapsule HitCapsule;
 typedef struct HitResult HitResult;
 typedef struct HitVictim HitVictim;
 typedef struct HurtCapsule HurtCapsule;
 typedef struct lb_UnkAnimStruct lb_UnkAnimStruct;
+typedef struct lbRefract_CallbackData lbRefract_CallbackData;
 typedef struct ReflectDesc ReflectDesc;
 typedef struct ShieldDesc ShieldDesc;
-typedef struct lbRefract_CallbackData lbRefract_CallbackData;
 
-typedef enum Tangibility {
-    Vulnerable,
-    Invincible,
+typedef enum HurtCapsuleState {
+    HurtCapsule_Enabled,
+    HurtCapsule_Disabled,
     Intangible
-} Tangibility;
+} HurtCapsuleState;
 
 typedef enum HitElement {
     HitElement_Normal,
@@ -54,7 +55,10 @@ typedef enum HitCapsuleState {
     HitCapsule_Disabled,
     HitCapsule_Enabled,
     HitCapsule_Unk2,
+    HitCapsule_Unk3,
+    HitCapsule_Max = HitCapsule_Unk3,
 } HitCapsuleState;
+STATIC_ASSERT(HitCapsule_Max == 3);
 
 typedef void (*RefractCallbackTypeA)(struct lbRefract_CallbackData*, s32, u32,
                                      s8, s8);

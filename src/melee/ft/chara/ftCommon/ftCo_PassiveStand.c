@@ -43,7 +43,7 @@ void ftCo_800989D4(Fighter_GObj* gobj, FtMotionId msid)
         ftCommon_8007D7FC(fp);
     }
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
-    ft_800881D8(fp, fp->ft_data->x4C_collisionData->x24, 127, 64);
+    ft_800881D8(fp, fp->ft_data->x4C_sfx->x24, 127, 64);
     ft_80088148(fp, 3, 127, 64);
     ftCo_SpawnEf(gobj, fp->parts[FtPart_TopN].joint, 1, 1053);
 }

@@ -1,7 +1,10 @@
 #ifndef GALE01_2B18B0
 #define GALE01_2B18B0
 
-#include "it/types.h"
+#include "ft/forward.h"
+#include "it/forward.h"
+
+#include "it/items/types.h"
 
 /* 2AFD8C */ Fighter_GObj* it_802AFD8C(Fighter_GObj*, Vec3*, u32, float);
 /* 2AFEA8 */ Fighter_GObj* it_802AFEA8(Fighter_GObj*, Fighter_GObj*, u32);

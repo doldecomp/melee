@@ -1,5 +1,4 @@
 #include "ftCommon/forward.h"
-#include "it/forward.h"
 #include "lb/forward.h"
 
 #include "ftNs_AttackHi4.h"
@@ -19,6 +18,7 @@
 #include "ftNess/types.h"
 #include "it/items/it_27CF.h"
 #include "it/itYoyo.h"
+#include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 #include "lb/lbrefract.h"

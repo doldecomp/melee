@@ -316,7 +316,7 @@ void ftCo_8008DCE0(ftCo_GObj* gobj, int arg1, float facing_dir)
     block_17:
         x = var_f31 * cosf(kb_angle);
         y = var_f31 * sinf(kb_angle);
-        fp->facing_dir = fp->dmg.x1844_direction;
+        fp->facing_dir = fp->dmg.facing_dir_1;
         if (fp->ground_or_air != GA_Air) {
             goto block_21;
         }

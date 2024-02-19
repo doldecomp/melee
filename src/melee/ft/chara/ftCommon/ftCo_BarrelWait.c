@@ -87,9 +87,9 @@ void ftCo_8009EC70(ftCo_GObj* gobj, Vec3* pos, UNK_T arg2, float kb_angle)
         kb_angle += 360;
     }
     kb_angle = fp->facing_dir < 0 ? kb_angle : 180 - kb_angle;
-    fp->dmg.kb_applied = ftColl_80079EA8(fp, &hit, hit.x8);
+    fp->dmg.kb_applied = ftColl_80079EA8(fp, &hit, hit.unk_count);
     fp->dmg.x1848_kb_angle = kb_angle;
-    fp->dmg.x1844_direction = fp->facing_dir;
+    fp->dmg.facing_dir_1 = fp->facing_dir;
     fp->dmg.x184c_damaged_hurtbox = 0;
     fp->dmg.x1854_collpos = fp->cur_pos;
     fp->dmg.x1860 = hit.element;

@@ -2,8 +2,6 @@
 
 #include "itparasol.h"
 
-#include "math.h"
-
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -12,6 +10,10 @@
 #include <common_structs.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+
+/// @todo Fix these to be in a single file, not math.h
+#define M_PI 3.14159265358979323846
+static float const deg_to_rad = M_PI / 180;
 
 ItemStateTable it_803F5AB0[] = {
     { -1, it_8028B144, it_8028B14C, it_8028B150 },
@@ -86,22 +88,19 @@ static inline HSD_JObj* jobj_child(HSD_JObj* jobj)
     }
 }
 
-static char it_804D5260[8] = "jobj.h";
-static char it_804D5268[8] = "jobj";
-static char it_803F5B80[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
-
 bool it_8028B1A4(Item_GObj* item_gobj)
 {
+    f32 ry, fm;
     Item* item = item = GET_ITEM(item_gobj);
     f32* attrs = item->xC4_article_data->x4_specialAttributes;
     HSD_JObj* jobj = GET_JOBJ(item_gobj);
+
     if (jobj != NULL) {
-        f32 ry;
-        f32 var_f2;
         jobj = jobj_child(jobj);
         ry = HSD_JObjGetRotationY(jobj);
-        var_f2 = fabsf(item->x40_vel.y * attrs[3]);
-        ry += deg_to_rad * ((attrs[2] + var_f2) * item->facing_dir);
+        fm = attrs[2] + fabsf(item->x40_vel.y * attrs[3]);
+        fm *= item->facing_dir;
+        ry = deg_to_rad * fm + ry;
         HSD_JObjSetRotationY(jobj, ry);
     }
     return false;

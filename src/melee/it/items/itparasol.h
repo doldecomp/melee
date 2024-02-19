@@ -2,9 +2,10 @@
 #define GALE01_28B08C
 
 #include <platform.h>
+#include "it/forward.h"
 #include <baselib/forward.h>
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 28B08C */ int it_8028B08C(Item_GObj* item_gobj, int statenum);
 /* 28B0B8 */ void it_8028B0B8(Item_GObj* item_gobj);

@@ -1,6 +1,4 @@
-
 GENERATE_MAP ?= 0
-NON_MATCHING ?= 0
 SKIP_CHECK ?= 0
 REQUIRE_PROTOS ?= 1
 MSG_STYLE ?= gcc
@@ -41,7 +39,7 @@ DEP_FILES := $(O_FILES:.o=.dep)
 
 MWCC_VERSION := 1.2.5
 MWCC_EPI_VERSION := 1.2.5n
-MWCC_LD_VERSION := 1.1
+MWCC_LD_VERSION := 1.3.2
 
 # Programs
 ifeq ($(OS),Windows_NT)
@@ -139,9 +137,7 @@ HOSTCFLAGS := -Wall -O3 -s
 ### Default target ###
 
 default: $(DOL)
-ifeq ($(NON_MATCHING),1)
-	@echo "Skipping checksum for non-matching build."
-else ifeq ($(SKIP_CHECK),1)
+ifeq ($(SKIP_CHECK),1)
 	@echo "Skipping checksum for this build."
 else
 	$(QUIET) $(SHA1SUM) -c $(TARGET).sha1

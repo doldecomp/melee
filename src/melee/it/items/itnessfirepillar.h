@@ -2,8 +2,9 @@
 #define GALE01_2AA494
 
 #include <platform.h>
+#include "it/forward.h"
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 2AA75C */ bool it_802AA75C(Item_GObj*);
 /* 2AA7C4 */ void it_802AA7C4(Item_GObj*, Item_GObj*);
