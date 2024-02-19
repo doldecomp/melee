@@ -625,13 +625,19 @@ void ftAction_80071998(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071A14(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftColl_8007B62C(gobj, *cmd->x8 & 0x03FFFFFF);
+    int ftcmd = *(int*) cmd->x8;
+    ftcmd &= 0x03FFFFFF;
+
+    ftColl_8007B62C(gobj, ftcmd);
     cmd->x8 += 4;
 }
 
 void ftAction_80071A58(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftColl_8007B0C0(gobj, *cmd->x8 & 0x03FFFFFF);
+    int ftcmd = *(int*) cmd->x8;
+    ftcmd &= 0x03FFFFFF;
+
+    ftColl_8007B0C0(gobj, ftcmd);
     cmd->x8 += 4;
 }
 
