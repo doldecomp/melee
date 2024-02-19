@@ -1,7 +1,9 @@
 #ifndef GALE01_27D670
 #define GALE01_27D670
 
-#include "it/types.h"
+#include "it/forward.h"
+
+#include "it/items/types.h"
 
 /* 27D76C */ void it_8027D76C(Item_GObj*);
 /* 27E0B4 */ void it_8027E0B4(Item_GObj*);

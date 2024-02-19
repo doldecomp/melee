@@ -2,8 +2,9 @@
 #define GALE01_28FE90
 
 #include <platform.h>
+#include "it/forward.h"
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 28FED4 */ void it_8028FED4(Item_GObj*);
 /* 2900CC */ void it_802900CC(Item_GObj*);

@@ -3,7 +3,9 @@
 #ifndef GALE01_2CE710
 #define GALE01_2CE710
 
-#include "it/types.h"
+#include "it/forward.h"
+
+#include "it/items/types.h"
 
 /* 2CE710 */ void it_802CE710(Item_GObj*);
 /* 2CE7D0 */ void it_802CE7D0(Item_GObj*, Item_GObj*);

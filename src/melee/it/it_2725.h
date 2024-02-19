@@ -6,6 +6,8 @@
 #include "it/forward.h"
 #include <baselib/forward.h>
 
+#include "it/items/types.h"
+
 #include <placeholder.h>
 
 /* 272CC0 */ HSD_JObj* it_80272CC0(Item_GObj*, enum_t);
@@ -27,5 +29,9 @@
 /* 27B378 */ void it_8027B378(Fighter_GObj*, Item_GObj*, float);
 /* 27C8B0 */ void it_8027C8B0(Item_GObj*);
 /* 27CE44 */ void it_8027CE44(Item_GObj*);
+/* 3F14C4 */ extern struct ItemLogicTable it_803F14C4[43];
+/* 3F23CC */ extern struct ItemLogicTable it_803F23CC[];
+/* 3F3100 */ extern struct ItemLogicTable it_803F3100[118];
+/* 3F4D20 */ extern struct ItemLogicTable it_803F4D20[];
 
 #endif

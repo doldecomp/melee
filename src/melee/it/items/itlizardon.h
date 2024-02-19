@@ -2,8 +2,9 @@
 #define GALE01_2CB8AC
 
 #include <platform.h>
+#include "it/forward.h"
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 2CB8AC */ void it_802CB8AC(Item_GObj*);
 /* 2CB940 */ void it_802CB940(Item_GObj*, Item_GObj*);

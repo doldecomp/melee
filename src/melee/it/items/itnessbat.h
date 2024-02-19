@@ -2,8 +2,9 @@
 #define GALE01_2AD478
 
 #include "ft/forward.h"
+#include "it/forward.h"
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 2AD590 */ Item_GObj* it_802AD590(Fighter_GObj*, Fighter_Part);
 /* 2AD6F0 */ void it_802AD6F0(Item_GObj*);

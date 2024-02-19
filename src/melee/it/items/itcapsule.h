@@ -2,9 +2,10 @@
 #define GALE01_27CF00
 
 #include <platform.h>
+#include "it/forward.h"
 #include <baselib/forward.h>
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 27CF00 */ void it_8027CF00(Item_GObj*);
 /* 27CF30 */ void it_8027CF30(Item_GObj*);
