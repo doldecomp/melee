@@ -1,5 +1,5 @@
-#ifndef GALE01_2ADC04
-#define GALE01_2ADC04
+#ifndef _itkirbyhammer_h_
+#define _itkirbyhammer_h_
 
 #include <platform.h>
 #include <baselib/forward.h>
