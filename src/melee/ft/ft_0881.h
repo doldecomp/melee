@@ -4,6 +4,8 @@
 #include <platform.h>
 #include "ft/forward.h"
 
+#include "ft/types.h"
+
 #include <placeholder.h>
 
 /* 0881D8 */ void ft_800881D8(Fighter* fp, int, int, int);
