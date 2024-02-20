@@ -604,7 +604,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itevyoshiegg.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/it/items/itmariofireball.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itmariofireball.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itkirbycutterbeam.s.o\
     $(BUILD_DIR)/src/melee/it/items/itfoxlaser.c.o\
     $(BUILD_DIR)/src/melee/it/items/itfoxillusion.c.o\
@@ -794,6 +794,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/MSL/math_1.c.o\
     $(BUILD_DIR)/asm/MSL/trigf.s.o\
     $(BUILD_DIR)/asm/MSL/math.s.o\
+    $(BUILD_DIR)/src/MSL/math_ppc.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/MetroTRK/mainloop.s.o\

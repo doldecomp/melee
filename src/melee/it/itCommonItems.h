@@ -91,6 +91,7 @@ typedef struct itUnkAttributes {
     float x4_float;
     float x8;
     float xC;
+    float x10;
 } itUnkAttributes;
 
 typedef struct {

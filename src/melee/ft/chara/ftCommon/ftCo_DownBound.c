@@ -27,6 +27,7 @@
 
 #include <common_structs.h>
 #include <math.h>
+#include <math_ppc.h>
 #include <placeholder.h>
 #include <baselib/jobj.h>
 

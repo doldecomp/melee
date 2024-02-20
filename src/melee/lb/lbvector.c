@@ -5,6 +5,7 @@
 #include "lb/lbrefract.h"
 
 #include <math.h>
+#include <math_ppc.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/vec.h>
