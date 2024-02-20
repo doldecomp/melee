@@ -4,23 +4,15 @@ set -euox pipefail
 apt update
 
 apt install -y --no-install-recommends \
-    git \
-    doxygen \
-    python3-full \
-    python-is-python3 \
-    git \
-    make \
-    gcc \
-    libc6-dev \
-    python3-full \
-    python-is-python3 \
+    ca-certificates \
     curl \
-    libarchive-tools
-
-# Create and update Python venv
-python -m venv --upgrade-deps /opt/venv
-. /opt/venv/bin/activate
-pip install --no-cache-dir -r /tmp/requirements.txt
+    gcc \
+    git \
+    libarchive-tools \
+    libc6-dev \
+    make \
+    python-is-python3 \
+    python3-minimal
 
 # Install melee compiler
 curl -L "$MELEE_COMPILERS_URL" |
@@ -43,3 +35,4 @@ apt remove -y \
 apt autoremove -y
 apt clean
 rm -rf /var/lib/apt/lists/*
+rm -rf /tmp/*
