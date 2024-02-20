@@ -35,9 +35,6 @@ jobs:
       - name: Checkout Melee repository
         uses: actions/checkout@v3
 
-      - name: Set up GitHub Pages
-        uses: actions/configure-pages@v4
-
       - name: Log into container registry
         uses: docker/login-action@v2
         with:
@@ -56,6 +53,9 @@ jobs:
             --volume "$PWD:/input:ro" \
             --volume "${{ env.OUTPUT }}:/output" \
             ${{ env.REGISTRY }}/${{ env.IMAGE }}
+
+      - name: Set up GitHub Pages
+        uses: actions/configure-pages@v4
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
