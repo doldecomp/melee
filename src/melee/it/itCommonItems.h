@@ -97,14 +97,14 @@ typedef struct {
     HSD_JObj* x0;
 } ItMatoVars;
 
-typedef struct itPokeDogsAttributes {
+typedef struct itPokemonAttributes {
     f32 x0;
     s32 timer;
-} itPokeDogsAttributes;
+} itPokemonAttributes;
 
 typedef struct {
     u8 padding[0xE34 - 0xDD4];
     s32 timer;
-} ItEnteiVars;
+} ItPokemonVars;
 
 #endif
