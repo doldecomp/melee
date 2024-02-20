@@ -13,7 +13,7 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Wait.h"
 #include "ftMario/types.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itmariofireball.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx/types.h>
