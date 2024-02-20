@@ -1,7 +1,12 @@
 name: build-melee
 run-name: Build Melee
 
-on: workflow_call
+on:
+  workflow_call:
+    secrets:
+      github_token:
+        required: true
+
 
 env:
   IMAGE_REPO: doldecomp/melee
