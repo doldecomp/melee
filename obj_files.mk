@@ -689,7 +689,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/ithouou.s.o\
     $(BUILD_DIR)/src/melee/it/items/itmetamon.c.o\
     $(BUILD_DIR)/src/melee/it/items/itpippi.c.o\
-    $(BUILD_DIR)/asm/melee/it/items/ittogepy.s.o\
+    $(BUILD_DIR)/src/melee/it/items/ittogepy.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itmew.s.o\
     $(BUILD_DIR)/src/melee/it/items/itcerebi.c.o\
     $(BUILD_DIR)/asm/melee/it/items/ithitodeman.s.o\

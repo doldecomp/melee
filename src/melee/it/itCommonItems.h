@@ -109,6 +109,7 @@ typedef struct itPokemonAttributes {
     s32 xC;
     s32 x10;
     s32 x14;
+    s32 x18;
 } itPokemonAttributes;
 
 typedef struct {
