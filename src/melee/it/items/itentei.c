@@ -41,6 +41,17 @@ void it_802CF640(Item_GObj* gobj)
     }
 }
 
+bool it_802CF67C(Item_GObj* gobj)
+{
+    Item* it = GET_ITEM((HSD_GObj*) gobj);
+    if (it->ground_or_air == GA_Air) {
+        it_8026E248(gobj, it_802CF44C);
+    } else {
+        it_8026D62C(gobj, it_802CF44C);
+    }
+    return false;
+}
+
 bool it_802CF7A8(Item_GObj* gobj)
 {
     it_80279FF8(gobj);
