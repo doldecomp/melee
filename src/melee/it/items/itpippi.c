@@ -1,13 +1,12 @@
 #include "itpippi.h"
 
-#include "ef/eflib.h"
-#include "ef/efsync.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/types.h"
 
+#include <baselib/gobj.h>
 #include <baselib/random.h>
 
 ItemStateTable it_803F7FF8[] = {
