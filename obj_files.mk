@@ -604,7 +604,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itevyoshiegg.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/it/items/itmariofireball.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itmariofireball.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itkirbycutterbeam.s.o\
     $(BUILD_DIR)/src/melee/it/items/itfoxlaser.c.o\
     $(BUILD_DIR)/src/melee/it/items/itfoxillusion.c.o\

@@ -15,6 +15,10 @@
 #include <dolphin/mtx/vec.h>
 #include <baselib/gobj.h>
 
+ItemStateTable it_803F6788[] = {
+    { 0, it_8029B868, it_8029B8A0, it_8029B8EC },
+};
+
 void it_8029B6F8(Item_GObj* gobj, Vec3* pos, ItemKind kind, f32 facing_dir)
 {
     Item_GObj* spawned_gobj;
@@ -33,7 +37,7 @@ void it_8029B6F8(Item_GObj* gobj, Vec3* pos, ItemKind kind, f32 facing_dir)
     spawn_item.x40 = 0;
 
     spawned_gobj = Item_80268B18(&spawn_item);
-    it_802C027C(spawned_gobj);
+    it_8029B7C0(spawned_gobj);
     db_80225DD8(spawned_gobj, gobj);
     it_802750F8(spawned_gobj);
 }
