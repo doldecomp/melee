@@ -1,6 +1,9 @@
 run-name: Build Melee & publish GitHub Pages
 
-on: workflow_call
+on:
+  push:
+    paths: [ "**" ]
+  pull_request:
 
 env:
   IMAGE_REPO: doldecomp/melee
