@@ -17,8 +17,8 @@ bool it_802CF67C(Item_GObj*);
 void it_802CF6C8(Item_GObj*);
 void it_802CF744(Item_GObj*);
 bool it_802CF7A8(Item_GObj*);
-bool it_802CF7CC(Item_GObj*);
-void it_802CF7EC(Item_GObj*);
+void it_802CF7CC(Item_GObj*);
+bool it_802CF7EC(Item_GObj*);
 extern ItemStateTable it_803F7DC8[];
 
 #endif

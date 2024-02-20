@@ -680,7 +680,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itsonans.s.o\
     $(BUILD_DIR)/asm/melee/it/items/ithassam.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itunknown.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itentei.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itentei.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itraikou.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itsuikun.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itkireihana.s.o\
