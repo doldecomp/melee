@@ -39,6 +39,7 @@ for file in "$src"/*; do
 done
 
 # progress
+# BUG race condition between `build-melee` and `gen-pages`.
 progress_url='https://progress.decomp.club/data/melee/GALE01?format=json&mode=all'
 curl -s -L "$progress_url" -o "$lib/progress.json"
 

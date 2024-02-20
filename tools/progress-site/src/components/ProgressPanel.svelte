@@ -15,7 +15,7 @@
     const TROPHY_COUNT = 290;
 
     function formatPercent(value: number): string {
-        return `${Math.round(value * 100) / 100}%`;
+        return `${Math.floor(value * 100) / 100}%`;
     }
 
     let completion = 0;
