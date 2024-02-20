@@ -18,8 +18,9 @@ jobs:
   build-melee:
     name: Build Melee
     uses: ./.github/workflows/build-melee.yml
-    secrets:
+    with:
       ghcr_username: ${{github.actor}}
+    secrets:
       ghcr_password: ${{secrets.github_token}}
 
   gen-pages:
