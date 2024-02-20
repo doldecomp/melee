@@ -229,38 +229,6 @@ bool it_80289210(HSD_GObj* gobj)
     return false;
 }
 
-static inline void inlineA1(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    it_8026BB44(gobj);
-    it_80272C08(gobj);
-    it_802756D0(gobj);
-    it_8026B3A8(gobj);
-    it_8026BD24(gobj);
-    it_8027518C(gobj);
-    ip->x40_vel.x = 0.0F;
-    ip->x40_vel.y = 0.0F;
-    ip->xDCF_flag.bits.b2 = true;
-    ip->xDD4_itemVar.capsule.x0 = 1;
-    ip->xDD4_itemVar.capsule.x4 = 20;
-    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
-}
-
-static inline void inlineA2(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    u8 _[8] = { 0 };
-    HSD_JObjSetFlagsAll(gobj->hsd_obj, JOBJ_HIDDEN);
-    it_802756D0(gobj);
-    ip->x40_vel.x = 0.0F;
-    ip->x40_vel.y = 0.0F;
-    ip->xDCF_flag.bits.b2 = true;
-    ip->xDD4_itemVar.capsule.x0 = true;
-    ip->xDD4_itemVar.capsule.x4 = 40;
-    it_8026B3A8(gobj);
-    Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
-}
-
 bool it_80289218(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -268,93 +236,33 @@ bool it_80289218(Item_GObj* gobj)
         return false;
     }
     if (it_80288DC4(gobj)) {
-        inlineA1(gobj);
+        it_80289094(gobj);
         return false;
     }
     efSync_Spawn(1232, gobj, &ip->pos);
     Item_8026AE84(ip, 244, 0x7F, 0x40);
-    inlineA2(gobj);
+    it_80289158(gobj);
     return false;
 }
 
-int it_802893D4(Item_GObj* arg0)
+bool it_802893D4(Item_GObj* gobj)
 {
-    Item* temp_r31;
-    s32 temp_ret;
-
-    temp_r31 = arg0->user_data;
-    if ((s32) temp_r31->xDD4_itemVar.capsule.x0 != 0) {
-        return 0;
-    }
-    temp_ret = it_80288DC4(arg0);
-    if (temp_ret != 0) {
-        it_80289094(arg0);
-        return 0;
-    }
-    efSync_Spawn(0x4D0, arg0, &temp_r31->pos, M2C_BITWISE(f32, temp_ret));
-    Item_8026AE84(temp_r31, 0xF4, 0x7F, 0x40);
-    it_80289158(arg0);
-    return 0;
+    return it_80289218(gobj);
 }
 
-int it_80289470(Item_GObj* arg0)
+bool it_80289470(Item_GObj* gobj)
 {
-    Item* temp_r31;
-    s32 temp_ret;
-
-    temp_r31 = arg0->user_data;
-    if ((s32) temp_r31->xDD4_itemVar.capsule.x0 != 0) {
-        return 0;
-    }
-    temp_ret = it_80288DC4(arg0);
-    if (temp_ret != 0) {
-        it_80289094(arg0);
-        return 0;
-    }
-    efSync_Spawn(0x4D0, arg0, &temp_r31->pos, M2C_BITWISE(f32, temp_ret));
-    Item_8026AE84(temp_r31, 0xF4, 0x7F, 0x40);
-    it_80289158(arg0);
-    return 0;
+    return it_80289218(gobj);
 }
 
-int it_8028950C(Item_GObj* arg0)
+bool it_8028950C(Item_GObj* gobj)
 {
-    Item* temp_r31;
-    s32 temp_ret;
-
-    temp_r31 = arg0->user_data;
-    if ((s32) temp_r31->xDD4_itemVar.capsule.x0 != 0) {
-        return 0;
-    }
-    temp_ret = it_80288DC4(arg0);
-    if (temp_ret != 0) {
-        it_80289094(arg0);
-        return 0;
-    }
-    efSync_Spawn(0x4D0, arg0, &temp_r31->pos, M2C_BITWISE(f32, temp_ret));
-    Item_8026AE84(temp_r31, 0xF4, 0x7F, 0x40);
-    it_80289158(arg0);
-    return 0;
+    return it_80289218(gobj);
 }
 
-int it_802895A8(Item_GObj* arg0)
+bool it_802895A8(Item_GObj* gobj)
 {
-    Item* temp_r31;
-    s32 temp_ret;
-
-    temp_r31 = arg0->user_data;
-    if ((s32) temp_r31->xDD4_itemVar.capsule.x0 != 0) {
-        return 0;
-    }
-    temp_ret = it_80288DC4(arg0);
-    if (temp_ret != 0) {
-        it_80289094(arg0);
-        return 0;
-    }
-    efSync_Spawn(0x4D0, arg0, &temp_r31->pos, M2C_BITWISE(f32, temp_ret));
-    Item_8026AE84(temp_r31, 0xF4, 0x7F, 0x40);
-    it_80289158(arg0);
-    return 0;
+    return it_80289218(gobj);
 }
 
 void it_80289644(Item_GObj* gobj)
