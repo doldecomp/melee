@@ -9,7 +9,7 @@
 #include "it/items/types.h"
 
 void it_802953C8(Item_GObj*);
-void it_802953FC(Item_GObj*, Vec3*);
+void it_802953FC(Item_GObj*, f32);
 void it_80295498(Item_GObj*, Item*);
 void it_80295524(Item_GObj*);
 void it_80295554(Item_GObj*);
