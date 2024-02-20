@@ -1,10 +1,14 @@
 <script lang="ts">
     import Highcharts from 'highcharts';
     import Data from 'highcharts/modules/data';
+    import Accessibility from 'highcharts/modules/accessibility';
     import { afterUpdate } from 'svelte';
     import type Progress from '../Progress';
     import progressJson from '$lib/extern/progress.json';
-    type Points = Array<Partial<Highcharts.Point>>;
+    Accessibility(Highcharts);
+
+    type Point = Partial<Highcharts.Point>;
+    type Points = Array<Point>;
 
     const progress = progressJson as Progress;
     const EVENT_COUNT = 51;
@@ -63,6 +67,13 @@
                     }
                 }
             }
+
+            function comparePoint(a: Point, b: Point) {
+                return (a?.x ?? 0) - (b?.x ?? 0);
+            }
+
+            codePct.sort(comparePoint);
+            dataPct.sort(comparePoint);
 
             Highcharts.chart(
                 'container',

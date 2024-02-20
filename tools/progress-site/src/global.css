@@ -1,8 +1,3 @@
-@font-face {
-    font-family: 'A-OTF Folk Pro';
-    src: url('./A-OTF-Folk Pro.otf');
-}
-
 html,
 body {
     position: relative;
@@ -16,8 +11,8 @@ body {
 @font-face {
     font-family: 'A-OTF Folk Pro';
     font-style: normal;
-    font-weight: 400;
-    src: url('$lib/extern/A-OTF Folk Pro M.otf') format('otf');
+    font-weight: 700;
+    src: url('$lib/extern/A-OTF Folk Pro H.otf') format('opentype');
 }
 
 body {
