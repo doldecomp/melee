@@ -97,4 +97,14 @@ typedef struct {
     HSD_JObj* x0;
 } ItMatoVars;
 
+typedef struct itEnteiAttributes {
+    int x0;
+    int x4;
+} itEnteiAttributes;
+
+typedef struct {
+    u8 padding[0xE34 - 0xDD4];
+    int attribs;
+} ItEnteiVars;
+
 #endif

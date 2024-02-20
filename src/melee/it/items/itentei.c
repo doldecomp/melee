@@ -1,6 +1,7 @@
 #include "itentei.h"
 
 #include "cm/camera.h"
+#include "ef/eflib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -28,7 +29,18 @@ void it_802CF470(Item_GObj* gobj)
     it_802CF4D4(gobj);
 }
 
-void it_802CF4D4(Item_GObj* gobj) {}
+void it_802CF4D4(Item_GObj* gobj)
+{
+    Item* it = gobj->user_data;
+    Article* ap = it->xC4_article_data;
+    itEnteiAttributes* sa = ap->x4_specialAttributes;
+
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    it->entered_hitlag = efLib_PauseAll;
+    it->exited_hitlag = efLib_ResumeAll;
+    it->on_accessory = it_802CF6C8;
+    it->xDD4_itemVar.entei.attribs = sa->x4;
+}
 
 void it_802CF544(Item_GObj* gobj) {}
 
@@ -51,6 +63,8 @@ bool it_802CF67C(Item_GObj* gobj)
     }
     return false;
 }
+
+void it_802CF6C8(Item_GObj* gobj) {}
 
 bool it_802CF7A8(Item_GObj* gobj)
 {
