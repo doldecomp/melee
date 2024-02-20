@@ -15,10 +15,6 @@ permissions:
   packages: read
   pages: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
   build-make:
     name: Make
@@ -204,6 +200,9 @@ jobs:
           path: ${{ env.OUTPUT }}
 
   deploy-pages:
+    concurrency:
+      group: deploy
+      cancel-in-progress: false
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     needs: gen-pages
