@@ -1,5 +1,5 @@
-name: build-melee
-run-name: Build Melee
+name: build
+run-name: Build Melee & publish GitHub Pages
 
 on:
   push:
@@ -8,6 +8,15 @@ on:
 
 env:
   IMAGE_REPO: doldecomp/melee
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build-make:
@@ -148,3 +157,60 @@ jobs:
           --user "$(id -u):$(id -g)" \
           --volume "$PWD:/input:ro" \
             "$REGISTRY/$IMAGE"
+
+  gen-pages:
+    name: Generate pages
+    runs-on: ubuntu-latest
+    env:
+      REGISTRY: ghcr.io
+      OUTPUT: ${{github.workspace}}/output
+    steps:
+      - name: Get image name
+        env:
+          IMAGE_SUFFIX: gen-pages:latest
+        run: |
+          echo "IMAGE=$IMAGE_REPO/$IMAGE_SUFFIX" >> $GITHUB_ENV
+
+      - name: Checkout Melee repository
+        uses: actions/checkout@v3
+
+      - name: Log into container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull generator image
+        run: docker pull ${{ env.REGISTRY }}/${{ env.IMAGE }}
+
+      - name: Generate pages
+        run: |
+          mkdir -p "${{ env.OUTPUT }}"
+          docker run --rm \
+            --user "$(id -u):$(id -g)" \
+            --volume "$PWD:/input:ro" \
+            --volume "${{ env.OUTPUT }}:/output" \
+            ${{ env.REGISTRY }}/${{ env.IMAGE }}
+
+      - name: Set up GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ env.OUTPUT }}
+
+  deploy-pages:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: gen-pages
+    if: github.ref_name == github.event.repository.default_branch
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
