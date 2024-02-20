@@ -84,3 +84,18 @@ void it_80295554(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
 }
+
+void it_8029557C(Item_GObj* gobj)
+{
+    Item* it = gobj->user_data;
+    it_80272860(gobj, it->xCC_item_attr->x10_fall_speed,
+                it->xCC_item_attr->x14_fall_speed_max);
+}
+
+bool it_802955AC(Item_GObj* gobj)
+{
+    if (it_8026DA08(gobj)) {
+        return true;
+    }
+    return false;
+}
