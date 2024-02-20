@@ -38,11 +38,33 @@ void it_8029B6F8(Item_GObj* gobj, Vec3* pos, ItemKind kind, f32 facing_dir)
     it_802750F8(spawned_gobj);
 }
 
+void it_8029B7C0(Item_GObj* gobj)
+{
+    Item* it = GET_ITEM(gobj);
+    itUnkAttributes* ap = it->xC4_article_data->x4_specialAttributes;
+    f32 x0 = ap->x0_float;
+    f32 x4 = ap->x4_float;
+
+    it->x40_vel.x = it->facing_dir * (x0 * cosf(x4));
+    it->x40_vel.y = x0 * sinf(x4);
+    it->x40_vel.z = 0.0f;
+
+    it_80275158(gobj, ap->x8);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
+
 bool it_8029B868(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     --item->xD44_lifeTimer;
     return item->xD44_lifeTimer <= 0 ? true : false;
+}
+
+void it_8029B8A0(Item_GObj* gobj)
+{
+    ItemAttr* attrs = GET_ITEM(gobj)->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+    it_80274658(gobj, it_804D6D28->x68_float);
 }
 
 static double calc_dist_2d_accurate(Vec3* v)

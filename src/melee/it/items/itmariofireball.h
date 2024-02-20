@@ -10,6 +10,8 @@
 
 void it_8029B6F8(Item_GObj*, Vec3*, ItemKind, f32);
 bool it_8029B868(Item_GObj*);
+void it_8029B8A0(Item_GObj*);
+bool it_8029B8EC(Item_GObj*);
 bool it_8029BA38(Item_GObj*);
 bool it_8029BA40(Item_GObj*);
 bool it_8029BA60(Item_GObj*);
