@@ -34,7 +34,7 @@ popd
 fonts_url='https://media.fontsgeek.com/download/zip/a/-/a-otf-folk-pro_WeXVg.zip'
 curl -L "$fonts_url" |
     bsdtar -xvf- -C /tmp
-mv '/tmp/A-OTF Folk Pro/A-OTF Folk Pro M/A-OTF Folk Pro M.otf' \
+mv '/tmp/A-OTF Folk Pro/A-OTF Folk Pro H/A-OTF Folk Pro H.otf' \
     '/opt/assets/progress'
 
 # Install progress site node modules
