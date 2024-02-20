@@ -100,6 +100,11 @@ bool it_802955AC(Item_GObj* gobj)
     return false;
 }
 
+bool it_802956AC(Item_GObj* gobj)
+{
+    return false;
+}
+
 void it_802956B4(Item_GObj* gobj)
 {
     return;
