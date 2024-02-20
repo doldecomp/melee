@@ -60,6 +60,30 @@ void it_802D3370(Item_GObj* gobj)
     }
 }
 
+bool it_802D33AC(Item_GObj* gobj)
+{
+    Item* it = gobj->user_data;
+    if (it->ground_or_air == GA_Air) {
+        it_8026E15C(gobj, it_802D32D8);
+    } else {
+        it_8026E15C(gobj, it_802D32D8);
+    }
+    return false;
+}
+
+void it_802D3590(Item_GObj* gobj)
+{
+    Item* it = gobj->user_data;
+    Article* ap = it->xC4_article_data;
+    itPokemonAttributes* sa = ap->x4_specialAttributes;
+
+    it_802762BC(it);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    it->entered_hitlag = NULL;
+    it->exited_hitlag = NULL;
+    it->xDD4_itemVar.pokemon.timer = sa->timer;
+}
+
 bool it_802D3600(Item_GObj* gobj)
 {
     it_80279FF8(gobj);
