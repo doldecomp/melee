@@ -447,9 +447,7 @@ void HSD_RObjResolveRefs(HSD_RObj* robj, HSD_RObjDesc* desc)
             HSD_JObjUnrefThis(robj->u.jobj);
             robj->u.jobj = HSD_IDGetData((u32) desc->u.joint, NULL);
             HSD_ASSERT(883, robj->u.jobj);
-            if (robj->u.jobj != NULL) {
-                iref_INC(robj->u.jobj);
-            }
+            iref_INC(robj->u.jobj);
             break;
         case 0x0:
             HSD_RvalueResolveRefsAll(robj->u.exp.rvalue, desc->u.exp->rvalue);
@@ -663,12 +661,12 @@ void HSD_RvalueResolveRefsAll(HSD_Rvalue* rvalue, HSD_RvalueList* list)
     }
 }
 
-static inline void ref_JObj(HSD_RObj* robj, HSD_JObj* o)
+static inline void ref_JObj(HSD_RObj* robj, void* o)
 {
-    // HSD_JObj* jobj;
     bool isDesc;
 
-    if (isDesc = hsdObjIsDescendantOf(&o->object, &hsdJObj.parent.parent),
+    if (isDesc = hsdObjIsDescendantOf(&((HSD_JObj*) o)->object,
+                                      &hsdJObj.parent.parent),
         isDesc != 0)
     {
         robj->u.jobj = o;
@@ -681,7 +679,7 @@ static inline void ref_JObj(HSD_RObj* robj, HSD_JObj* o)
 
 void HSD_RObjSetConstraintObj(HSD_RObj* robj, void* obj)
 {
-    // HSD_JObj* jobj;
+    bool isDesc;
 
     if (robj != NULL) {
         if (robj->u.jobj != NULL) {
