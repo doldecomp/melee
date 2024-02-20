@@ -1,7 +1,9 @@
 #ifndef GALE01_2D251C
 #define GALE01_2D251C
 
-#include "it/types.h"
+#include "it/forward.h"
+
+#include "it/items/types.h"
 
 /* 2D251C */ void it_802D251C(Item_GObj*);
 /* 2D25BC */ void it_802D25BC(Item_GObj*, Item_GObj*);

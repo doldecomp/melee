@@ -2,10 +2,11 @@
 #define GALE01_29CD18
 
 #include <platform.h>
+#include "it/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 29CD18 */ void it_8029CD18(Item_GObj*, int arg1);
 /* 29CD78 */ HSD_JObj* it_8029CD78(Item_GObj*);

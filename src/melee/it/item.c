@@ -11,11 +11,11 @@
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ft/ftlib.h"
-#include "ft/types.h"
 #include "gm/gm_1601.h"
 #include "gr/grlib.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
+#include "it/it_2725.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -522,11 +522,6 @@ static /// @remarks #Item_8026862C loads two integers into this,
 
     return result;
 }
-
-extern struct ItemLogicTable it_803F14C4[43];
-extern struct ItemLogicTable it_803F3100[118];
-extern struct ItemLogicTable it_803F23CC[];
-extern struct ItemLogicTable it_803F4D20[];
 
 void Item_80267978(HSD_GObj* gobj)
 {

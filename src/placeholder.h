@@ -64,4 +64,17 @@ OSPanic(__FILE__, __LINE__, "Function is not implemented!")
 #define ASM
 #endif
 
+#ifndef UNUSED
+#if defined(__clang__) || defined(__GNUC__)
+#define UNUSED __attribute__((unused))
+#else
+#define UNUSED
+#endif
+#endif
+
+#define PAD_STACK(bytes)                                                      \
+    do {                                                                      \
+        UNUSED unsigned char _[(bytes)];                                      \
+    } while (0)
+
 #endif

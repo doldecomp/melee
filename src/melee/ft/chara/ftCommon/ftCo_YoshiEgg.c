@@ -116,8 +116,8 @@ void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
         unk_struct.parts[2] = FtPart_TopN;
         unk_struct.vec1 = temp_r27->x4;
         unk_struct.vec2 = temp_r27->x10;
-        unk_struct.single_float = temp_r27->x1C;
-        ftColl_8007B5AC(fp, fp->x11A0_fighterHurtbox, &unk_struct);
+        unk_struct.scale = temp_r27->x1C;
+        ftColl_8007B5AC(fp, fp->hurt_capsules, &unk_struct);
     }
     ftYs_Shield_8012CC94(arg1, &fp->self_vel);
     fp->facing_dir = ftYs_Shield_8012CCC4(arg1);

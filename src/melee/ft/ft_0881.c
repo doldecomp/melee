@@ -110,10 +110,10 @@ UNK_RET ft_80088998(UNK_PARAMS)
     NOT_IMPLEMENTED;
 }
 
-void ft_800889F4(Fighter* fp, FtCollisionData* coll)
+void ft_800889F4(Fighter* fp, FtSFXArr* sfx)
 {
-    if (coll != NULL) {
-        ft_800881D8(fp, coll->x4[HSD_Randi(coll->x0)], 0x7F, 0x40);
+    if (sfx != NULL) {
+        ft_800881D8(fp, sfx->sfx_ids[HSD_Randi(sfx->num)], 0x7F, 0x40);
     }
 }
 

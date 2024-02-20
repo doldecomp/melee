@@ -40,7 +40,7 @@
 /* 093BC0 */ void ftCo_80093BC0(ftCo_GObj* gobj);
 /* 093C3C */ UNK_RET ftCo_80094098(UNK_PARAMS);
 /* 093CD0 */ void ftCo_GuardReflect_Anim(ftCo_GObj* gobj);
-/* 093CDC */ UNK_RET ftCo_80094138(UNK_PARAMS);
+/* 093CDC */ void ftCo_80094138(ftCo_Fighter* fp);
 /* 093EC0 */ void ftCo_GuardReflect_IASA(ftCo_GObj* gobj);
 /* 09403C */ void ftCo_GuardReflect_Phys(ftCo_GObj* gobj);
 /* 094078 */ void ftCo_GuardReflect_Coll(ftCo_GObj* gobj);

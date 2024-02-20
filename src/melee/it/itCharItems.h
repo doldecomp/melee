@@ -19,4 +19,8 @@ typedef struct {
     HSD_JObj* xDDC;
 } FoxIllusionVars;
 
+typedef struct {
+    u32 x0;
+} itKirbyHammerVars;
+
 #endif

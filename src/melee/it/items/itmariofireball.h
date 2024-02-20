@@ -2,8 +2,9 @@
 #define GALE01_29B6F8
 
 #include <platform.h>
+#include "it/forward.h"
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 29BA38 */ bool it_8029BA38(Item_GObj*);
 /* 29BA40 */ bool it_8029BA40(Item_GObj*);

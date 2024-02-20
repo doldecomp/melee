@@ -37,12 +37,12 @@ int ftCo_800C06B4(Fighter* fp)
 void ftCo_800C06C0(void)
 {
     ft_804D6570 = 0;
-    ft_804D6574 = 0;
-    ft_804D6578 = 0;
+    ftDevice_BuryThingCount = 0;
+    ft_804D6578.x0 = 0;
     {
         int i;
         for (i = 0; i < 4; i++) {
-            ft_80459A68[i].x = 0;
+            ft_80459A68[i].x0 = 0;
         }
     }
 }
@@ -57,16 +57,16 @@ UNK_RET ftCo_800C0764(UNK_PARAMS)
     NOT_IMPLEMENTED;
 }
 
-void ftCo_800C07F8(int arg0, int arg1, int arg2)
+void ftCo_800C07F8(UNK_T arg0, int arg1, int arg2)
 {
-    IntVec3* temp_r6;
+    struct ftDeviceUnk3* temp_r6;
 
     if ((u32) M2C_FIELD(ft_80459A68, u32*, 0x24) == 0U) {
         temp_r6 = &ft_80459A68[0];
-        temp_r6->x = arg0;
-        temp_r6->y = arg1;
-        temp_r6->z = arg2;
-        ft_804D6570 += 1;
+        temp_r6->x0 = arg0;
+        temp_r6->x4 = arg1;
+        temp_r6->active_cb = (UNK_T) arg2;
+        ++ft_804D6570;
     } else {
         OSReport("fighter chk device coll func num over!\n", ft_80459A68, 0);
         __assert("ftdevice.c", 149, "0");

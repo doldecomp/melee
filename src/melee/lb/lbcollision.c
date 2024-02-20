@@ -1,5 +1,6 @@
 #include <platform.h>
 #include "ft/forward.h"
+#include "lb/forward.h"
 #include <dolphin/gx/forward.h>
 
 #include "lbcollision.h"
@@ -1477,19 +1478,19 @@ bool lbColl_80007AFC(HitCapsule* a, HitCapsule* b, float x, float y)
     float a_val, b_val;
 
     if (a->x43_b1) {
-        a_val = a->scl;
+        a_val = a->scale;
     } else {
-        a_val = a->scl * x;
+        a_val = a->scale * x;
     }
 
     if (b->x43_b1) {
-        b_val = b->scl;
+        b_val = b->scale;
     } else {
-        b_val = b->scl * y;
+        b_val = b->scale * y;
     }
 
-    return lbColl_80006094(&b->x58, &b->x4C, &a->x58, &a->x4C, &b->x64,
-                           &a->x64, b_val, a_val);
+    return lbColl_80006094(&b->x58, &b->x4C, &a->x58, &a->x4C,
+                           &b->hurt_coll_pos, &a->hurt_coll_pos, b_val, a_val);
 }
 
 void lbColl_80007B78(Mtx a, Mtx b, float x, float y)
@@ -1529,8 +1530,8 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
         shield_hit->skip_update_pos = 1;
     }
     if (arg3 != 0) {
-        arg0->x64 = shield_hit->pos;
-        arg0->x70 = lbColl_804D79F8;
+        arg0->hurt_coll_pos = shield_hit->pos;
+        arg0->coll_distance = lbColl_804D79F8;
         return 1;
     }
     if (arg2 != NULL) {
@@ -1542,9 +1543,9 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
         var_r9 = HSD_JObjGetMtxPtr_fake(shield_hit->bone);
     }
     if (arg0->x43_b1) {
-        var_f1 = arg0->scl;
+        var_f1 = arg0->scale;
     } else {
-        var_f1 = arg0->scl * arg4;
+        var_f1 = arg0->scale * arg4;
     }
 
     return lbColl_80006E58(&arg0->x58,            // arg0
@@ -1554,8 +1555,8 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
                            &sp74,                 // arg4
                            &sp68,                 // arg5
                            var_r9,                // arg6
-                           &arg0->x64,            // arg7
-                           &arg0->x70,            // arg8
+                           &arg0->hurt_coll_pos,  // arg7
+                           &arg0->coll_distance,  // arg8
                            var_f1,                // arg9
                            shield_hit->size,      // arg10
                            lbColl_804D7A34 * arg5 // arg11
@@ -1595,9 +1596,9 @@ void lbColl_80007DD8(HitCapsule* capsule, HitResult* hit, Mtx hit_transform,
                     transformed_hit);
     }
     if (capsule->x43_b1) {
-        dist_offset = capsule->scl;
+        dist_offset = capsule->scale;
     } else {
-        dist_offset = capsule->scl * scale;
+        dist_offset = capsule->scale * scale;
     }
     lbColl_800077A0(&hit->pos,
                     hit_transform != NULL ? transformed_hit
@@ -1615,7 +1616,7 @@ bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
     float var_f1;
     MtxPtr var_r9;
 
-    if (arg1->tangibility == Vulnerable) {
+    if (arg1->state == HurtCapsule_Enabled) {
         if (!arg1->skip_update_pos) {
             lb_8000B1CC(arg1->bone, &arg1->a_offset, &arg1->a_pos);
             lb_8000B1CC(arg1->bone, &arg1->b_offset, &arg1->b_pos);
@@ -1634,14 +1635,14 @@ bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
             var_r9 = HSD_JObjGetMtxPtr(arg1->bone);
         }
         if (arg0->x43_b1) {
-            var_f1 = arg0->scl;
+            var_f1 = arg0->scale;
         } else {
-            var_f1 = arg0->scl * hit_scl_y;
+            var_f1 = arg0->scale * hit_scl_y;
         }
-        return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos,
-                               &arg1->b_pos, &sp70, &sp64, var_r9, &arg0->x64,
-                               &arg0->x70, var_f1, arg1->scl,
-                               lbColl_804D7A38 * hurt_scl_y);
+        return lbColl_80006E58(
+            &arg0->x58, &arg0->x4C, &arg1->a_pos, &arg1->b_pos, &sp70, &sp64,
+            var_r9, &arg0->hurt_coll_pos, &arg0->coll_distance, var_f1,
+            arg1->scale, lbColl_804D7A38 * hurt_scl_y);
     }
     return 0;
 }
@@ -1655,7 +1656,7 @@ bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, s32 arg3,
     MtxPtr var_r9;
     float var_f1;
 
-    if (arg1->tangibility != Intangible) {
+    if (arg1->state != Intangible) {
         if (!arg1->skip_update_pos) {
             lb_8000B1CC(arg1->bone, &arg1->a_offset, &arg1->a_pos);
             lb_8000B1CC(arg1->bone, &arg1->b_offset, &arg1->b_pos);
@@ -1667,10 +1668,10 @@ bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, s32 arg3,
         }
         if (arg3 != 0) {
             float f2 = lbColl_804D7A3C;
-            arg0->x64.x = f2 * (arg1->a_pos.x + arg1->b_pos.x);
-            arg0->x64.y = f2 * (arg1->a_pos.y + arg1->b_pos.y);
-            arg0->x64.z = f2 * (arg1->a_pos.z + arg1->b_pos.z);
-            arg0->x70 = 5.0f;
+            arg0->hurt_coll_pos.x = f2 * (arg1->a_pos.x + arg1->b_pos.x);
+            arg0->hurt_coll_pos.y = f2 * (arg1->a_pos.y + arg1->b_pos.y);
+            arg0->hurt_coll_pos.z = f2 * (arg1->a_pos.z + arg1->b_pos.z);
+            arg0->coll_distance = 5.0f;
             return 1;
         }
         if (arg2 != NULL) {
@@ -1682,15 +1683,15 @@ bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, s32 arg3,
             var_r9 = HSD_JObjGetMtxPtr(arg1->bone);
         }
         if (((u8) arg0->x43 >> 6U) & 1) {
-            var_f1 = arg0->scl;
+            var_f1 = arg0->scale;
         } else {
-            var_f1 = arg0->scl * arg4;
+            var_f1 = arg0->scale * arg4;
         }
 
         return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos,
-                               &arg1->b_pos, &sp74, &sp68, var_r9, &arg0->x64,
-                               &arg0->x70, var_f1, arg1->scl,
-                               lbColl_804D7A38 * arg5);
+                               &arg1->b_pos, &sp74, &sp68, var_r9,
+                               &arg0->hurt_coll_pos, &arg0->coll_distance,
+                               var_f1, arg1->scale, lbColl_804D7A38 * arg5);
     }
     return 0;
 }
@@ -1734,9 +1735,9 @@ inline float getHit1C(HitCapsule* hit, float arg3)
 {
     float var_f1;
     if (hit->x43_b1) {
-        var_f1 = hit->scl;
+        var_f1 = hit->scale;
     } else {
-        var_f1 = hit->scl * arg3;
+        var_f1 = hit->scale * arg3;
     }
     return var_f1;
 }
@@ -1850,7 +1851,7 @@ loop_1:
         var_r8 = 0;
     loop_13:
         if ((Fighter*) var_r6_2->victims_1[0].victim != NULL) {
-            temp_r6 = (float*) &var_r6_2->x8;
+            temp_r6 = (float*) &var_r6_2->unk_count;
             var_r8 += 1;
             if ((Fighter*) var_r6_2->victims_1[1].victim != NULL) {
                 temp_r6_2 = temp_r6 + 8;
@@ -1993,9 +1994,9 @@ bool lbColl_80009F54(HitCapsule* hit, u32 arg1, float arg8)
         }
         if (var_r0 == arg1) {
             if (hit->x43_b1) {
-                var_f1 = hit->scl;
+                var_f1 = hit->scale;
             } else {
-                var_f1 = hit->scl * arg8;
+                var_f1 = hit->scale * arg8;
             }
             lbColl_80008FC8(hit->x58, hit->x4C, var_r5, lbColl_804D36A8,
                             var_f1);
@@ -2021,9 +2022,9 @@ bool lbColl_8000A044(HitCapsule* hit, u32 arg1, float arg8)
         }
         if (var_r0 == arg1) {
             if (hit->x43_b1) {
-                var_f1 = hit->scl;
+                var_f1 = hit->scale;
             } else {
-                var_f1 = hit->scl * arg8;
+                var_f1 = hit->scale * arg8;
             }
             lbColl_80008FC8(hit->x58, hit->x4C, lbColl_804D36E8,
                             lbColl_804D36EC, var_f1);
@@ -2035,60 +2036,64 @@ bool lbColl_8000A044(HitCapsule* hit, u32 arg1, float arg8)
 
 bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2, Mtx arg3, f32 arg8)
 {
-    u32 unused[1];
-    Mtx spA0;
-    Vec3 sp94;
-    Vec3 sp88;
-    Mtx sp40;
-    Vec3 sp34;
-    Vec3 sp28;
-    f32 temp_f31;
-    void* temp_r31_2;
-    MtxPtr var_r28;
-    u32 var_r0;
-    u32 var_r4;
-    u8* temp_r3;
+    PAD_STACK(4);
+    {
+        Mtx spA0;
+        Vec3 sp94;
+        Vec3 sp88;
+        Mtx sp40;
+        Vec3 sp34;
+        Vec3 sp28;
+        f32 temp_f31;
+        void* temp_r31_2;
+        MtxPtr var_r28;
+        u32 var_r0;
+        u32 var_r4;
+        u8* temp_r3;
 
-    var_r4 = arg1;
-    if (hurt->tangibility == Intangible) {
-        var_r4 = 2;
-    }
-    temp_r3 = lbColl_803B9928[var_r4].pad;
-    if (temp_r3[3] == 0xFF) {
-        var_r0 = 0;
-    } else {
-        var_r0 = 2;
-    }
-    if (var_r0 == arg2) {
-        if (!hurt->skip_update_pos) {
-            lb_8000B1CC(hurt->bone, &hurt->a_offset, &hurt->a_pos);
-            lb_8000B1CC(hurt->bone, &hurt->b_offset, &hurt->b_pos);
-            if (arg3 != NULL) {
-                hurt->b_pos.z = arg8;
-                hurt->a_pos.z = arg8;
-            }
-            hurt->skip_update_pos = 1;
+        var_r4 = arg1;
+        if (hurt->state == Intangible) {
+            var_r4 = 2;
         }
-        if (arg3 != NULL) {
-            PSMTXConcat(arg3, HSD_JObjGetMtxPtr(hurt->bone), spA0);
-        }
-        temp_f31 = hurt->scl;
-        temp_r31_2 = lbColl_803B9928[var_r4].pad_x;
-        sp88 = hurt->b_pos;
-        sp94 = hurt->a_pos;
-        if (arg3 != NULL) {
-            var_r28 = spA0;
+        temp_r3 = lbColl_803B9928[var_r4].pad;
+        if (temp_r3[3] == 0xFF) {
+            var_r0 = 0;
         } else {
-            var_r28 = HSD_JObjGetMtxPtr(hurt->bone);
+            var_r0 = 2;
         }
-        HSD_MtxInverse(var_r28, sp40);
-        PSMTXMUltiVec(sp40, &sp94, &sp28);
-        PSMTXMUltiVec(sp40, &sp88, &sp34);
-        lbColl_800096B4(var_r28, sp28, sp34, temp_r3, temp_r31_2, temp_f31);
-        return 1;
+        if (var_r0 == arg2) {
+            if (!hurt->skip_update_pos) {
+                lb_8000B1CC(hurt->bone, &hurt->a_offset, &hurt->a_pos);
+                lb_8000B1CC(hurt->bone, &hurt->b_offset, &hurt->b_pos);
+                if (arg3 != NULL) {
+                    hurt->b_pos.z = arg8;
+                    hurt->a_pos.z = arg8;
+                }
+                hurt->skip_update_pos = 1;
+            }
+            if (arg3 != NULL) {
+                PSMTXConcat(arg3, HSD_JObjGetMtxPtr(hurt->bone), spA0);
+            }
+            temp_f31 = hurt->scale;
+            temp_r31_2 = lbColl_803B9928[var_r4].pad_x;
+            sp88 = hurt->b_pos;
+            sp94 = hurt->a_pos;
+            if (arg3 != NULL) {
+                var_r28 = spA0;
+            } else {
+                var_r28 = HSD_JObjGetMtxPtr(hurt->bone);
+            }
+            HSD_MtxInverse(var_r28, sp40);
+            PSMTXMUltiVec(sp40, &sp94, &sp28);
+            PSMTXMUltiVec(sp40, &sp88, &sp34);
+            lbColl_800096B4(var_r28, sp28, sp34, temp_r3, temp_r31_2,
+                            temp_f31);
+            return 1;
+        }
+        return 0;
     }
-    return 0;
 }
+
 u8 lbColl_804D36E0[4] = { 0 };
 u32 lbColl_804D36E4 = 0;
 extern char lbColl_804D3700[8];
@@ -2129,7 +2134,7 @@ bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2, float arg3)
     u32 var_r0;
     u8* temp_r3;
 
-    temp_r3 = lbColl_803B9928[hurt->tangibility].pad;
+    temp_r3 = lbColl_803B9928[hurt->state].pad;
     if (temp_r3[3] == 0xFF) {
         var_r0 = 0;
     } else {
@@ -2148,8 +2153,8 @@ bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2, float arg3)
         if (arg2 != NULL) {
             PSMTXConcat(arg2, HSD_JObjGetMtxPtr(hurt->bone), sp9C);
         }
-        temp_f31 = hurt->scl;
-        temp_r31_2 = lbColl_803B9928[hurt->tangibility].pad_x;
+        temp_f31 = hurt->scale;
+        temp_r31_2 = lbColl_803B9928[hurt->state].pad_x;
         sp84 = hurt->b_pos;
         sp90 = hurt->a_pos;
         if (arg2 != NULL) {

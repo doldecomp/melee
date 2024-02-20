@@ -12,12 +12,12 @@
 #include "gr/inlines.h"
 #include "gr/types.h"
 #include "lb/lb_00F9.h"
-#include "sysdolphin/baselib/psappsrt.h"
 
 #include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/psappsrt.h>
 
 /* 21F840 */ static void grTMario_8021F840(int);
 /* 21F844 */ static void grTMario_8021F844(void);
@@ -158,7 +158,7 @@ void grTMario_8021FA04(HSD_GObj* gobj) {}
 
 void lbl_8021FA08(HSD_GObj* gobj)
 {
-    ftCo_800C07F8((int) gobj, 6, (int) lbl_8021FB50);
+    ftCo_800C07F8(gobj, 6, (int) lbl_8021FB50);
 }
 
 void grTMario_8021FA34(HSD_GObj* gobj)

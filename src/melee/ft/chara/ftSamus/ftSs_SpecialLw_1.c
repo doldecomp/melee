@@ -1,5 +1,4 @@
 #include <platform.h>
-#include "lb/forward.h"
 
 #include "ftSs_SpecialLw_1.h"
 
@@ -57,8 +56,8 @@ void ftSs_SpecialLw_8012AEBC(HSD_GObj* gobj)
     unk_struct.parts[2] = 0;
     unk_struct.vec1.x = unk_struct.vec1.y = unk_struct.vec1.z = 0;
     unk_struct.vec2.x = unk_struct.vec2.y = unk_struct.vec2.z = 0;
-    unk_struct.single_float = 3;
-    ftColl_8007B5AC(fp, &fp->x11A0_fighterHurtbox[0], &unk_struct);
+    unk_struct.scale = 3;
+    ftColl_8007B5AC(fp, &fp->hurt_capsules[0], &unk_struct);
 }
 
 void ftSs_SpecialLw_8012AF38(HSD_GObj* gobj)

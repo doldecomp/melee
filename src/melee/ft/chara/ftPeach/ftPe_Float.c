@@ -57,11 +57,19 @@ bool ftPe_8011BAD8(HSD_GObj* gobj)
     return false;
 }
 
+static void spawnParticle(HSD_GObj* gobj, HSD_JObj* joint)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    efAsync_Spawn(gobj, &fp->x60C, 0, 1236, joint);
+}
+
 void ftPe_8011BB6C(HSD_GObj* gobj, bool arg1)
 {
     u8 _[8];
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
+    HSD_JObj* joint;
+
     Fighter_ChangeMotionState(gobj, ftPe_MS_Float, 0, 0, 1, 0, NULL);
     fp->fv.pe.has_float = false;
     if (arg1) {
@@ -69,8 +77,8 @@ void ftPe_8011BB6C(HSD_GObj* gobj, bool arg1)
     }
     fp->self_vel.y = 0;
     fp->x2219_b0 = true;
-    efAsync_Spawn(gobj, &fp->x60C, 0, 1236,
-                  fp->parts[ftParts_8007500C(fp, FtPart_TransN)].joint);
+    joint = fp->parts[ftParts_8007500C(fp, FtPart_TransN)].joint;
+    spawnParticle(gobj, joint);
 }
 
 void ftPe_Float_Anim(HSD_GObj* gobj)

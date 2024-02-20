@@ -1,7 +1,9 @@
 #ifndef GALE01_2CCF9C
 #define GALE01_2CCF9C
 
-#include "it/types.h"
+#include "it/forward.h"
+
+#include "it/items/types.h"
 
 /* 2CCF9C */ void it_802CCF9C(Item_GObj*);
 /* 2CD000 */ void it_802CD000(Item_GObj*, Item_GObj*);

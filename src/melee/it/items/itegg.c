@@ -176,7 +176,7 @@ void it_80289094(Item_GObj* gobj)
     it_8027518C(gobj);
     item->x40_vel.x = 0;
     item->x40_vel.y = 0;
-    item->xDCF_flag.u8 |= 0x20;
+    item->xDCF_flag.bits.b2 = 1;
     item->xDD4_itemVar.capsule.x0 = 1;
     item->xDD4_itemVar.capsule.x4 = 0x14;
     Item_80268E5C((HSD_GObj*) gobj, 5, ITEM_ANIM_UPDATE);

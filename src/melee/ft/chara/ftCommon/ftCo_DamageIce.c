@@ -163,8 +163,8 @@ void ftCo_80091030(Fighter_GObj* gobj)
                 sp2C.vec1.x = sp2C.vec2.x;
                 sp2C.vec1.y = sp2C.vec2.y;
                 sp2C.vec1.z = temp_r0;
-                sp2C.single_float = fp->co_attrs.bubble_ratio;
-                ftColl_8007B5AC(fp, fp->x11A0_fighterHurtbox, &sp2C);
+                sp2C.scale = fp->co_attrs.bubble_ratio;
+                ftColl_8007B5AC(fp, fp->hurt_capsules, &sp2C);
                 ftCommon_8007EBAC(fp, 1, 0);
                 fp->x21F0 = ftCo_80091274;
                 fp->take_dmg_cb = ftCo_80090B48;

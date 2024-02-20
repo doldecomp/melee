@@ -298,7 +298,7 @@ void ftAction_80071028(Fighter_GObj* gobj, FtCmdState* cmd)
     // if !invisible
     if (!fp->x221E_b0) {
         if (gmScriptEventCast(cmd->x8, struct test1)->useUnkBone) {
-            bone = fp->ft_data->x8->unk12;
+            bone = fp->ft_data->x8->x12;
         } else {
             bone = gmScriptEventCast(cmd->x8, struct test1)->boneId;
         }
@@ -366,7 +366,7 @@ void ftAction_8007121C(Fighter_GObj* gobj, FtCmdState* cmd)
             hit->state = HitCapsule_Enabled;
             M2C_FIELD(fp, u8*, 0x2219) =
                 (u8) (M2C_FIELD(fp, u8*, 0x2219) | 0x10);
-            ftColl_800768A0();
+            ftColl_800768A0(fp, hit);
         }
         temp_r3 = cmd->x8;
         part = (s8) ((u32) M2C_FIELD(temp_r3, u32*, 0) >> 0xBU);
@@ -378,7 +378,7 @@ void ftAction_8007121C(Fighter_GObj* gobj, FtCmdState* cmd)
         }
         ftColl_8007ABD0(hit, (u16) M2C_FIELD(cmd->x8, u8*, 2) & 0x3FF, gobj);
         cmd->x8 += 4;
-        hit->scl = 0.003906f * (float) (u16) M2C_FIELD(cmd->x8, u32*, 0);
+        hit->scale = 0.003906f * (float) (u16) M2C_FIELD(cmd->x8, u32*, 0);
         hit->b_offset.x = 0.003906f * (float) (s16) M2C_FIELD(cmd->x8, u8*, 2);
         cmd->x8 += 4;
         hit->b_offset.y =
@@ -516,7 +516,9 @@ void ftAction_80071774(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071784(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftColl_8007AFC8(gobj, *cmd->x8 & 0x03FFFFFF);
+    int hit_idx = *(int*) cmd->x8;
+    hit_idx &= 0x03FFFFFF;
+    ftColl_8007AFC8(gobj, hit_idx);
     cmd->x8 += 4;
 }
 
@@ -538,22 +540,22 @@ void ftAction_80071810(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071820(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    char* cmd_x8 = cmd->x8;
+    int* cmd_x8 = (int*) cmd->x8;
     ftCo_Fighter* fp = gobj->user_data;
-    int temp_r0 = (u8) *cmd_x8 & 3;
-    /// @todo Suggests #Fighter::cmd_vars isn't an array.
+    u8 temp_r0 = *(u8*) cmd_x8 & 3;
+
     switch (temp_r0) {
     case 0:
-        fp->cmd_vars[0] = (int) ((int) *cmd_x8 & 0xFFFFFF);
+        fp->cmd_vars[0] = (*cmd_x8 & 0xFFFFFF);
         break;
     case 1:
-        fp->cmd_vars[1] = (int) ((int) *cmd_x8 & 0xFFFFFF);
+        fp->cmd_vars[1] = (*cmd_x8 & 0xFFFFFF);
         break;
     case 2:
-        fp->cmd_vars[2] = (int) ((int) *cmd_x8 & 0xFFFFFF);
+        fp->cmd_vars[2] = (*cmd_x8 & 0xFFFFFF);
         break;
     case 3:
-        fp->cmd_vars[3] = (int) ((int) *cmd_x8 & 0xFFFFFF);
+        fp->cmd_vars[3] = (*cmd_x8 & 0xFFFFFF);
         break;
     }
     cmd->x8 += 4;
@@ -562,7 +564,7 @@ void ftAction_80071820(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_800718A4(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    int cmd_x8 = *cmd->x8 & 0x03FFFFFF;
+    int cmd_x8 = *(int*) cmd->x8 & 0x03FFFFFF;
     switch (cmd_x8) {
     case 0:
         fp->throw_flags_b3 = true;
@@ -606,8 +608,8 @@ void ftAction_80071974(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80071998(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    int temp_r0 = *cmd->x8 & 0x03FFFFFF;
-    switch (temp_r0) { /* irregular */
+    int temp_r0 = *(int*) cmd->x8 & 0x03FFFFFF;
+    switch (temp_r0) {
     case 0:
         ftCommon_8007D7FC(fp);
         break;
@@ -623,27 +625,34 @@ void ftAction_80071998(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071A14(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftColl_8007B62C(gobj, *cmd->x8 & 0x03FFFFFF);
+    int ftcmd = *(int*) cmd->x8;
+    ftcmd &= 0x03FFFFFF;
+
+    ftColl_8007B62C(gobj, ftcmd);
     cmd->x8 += 4;
 }
 
 void ftAction_80071A58(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftColl_8007B0C0(gobj, *cmd->x8 & 0x03FFFFFF);
+    int ftcmd = *(int*) cmd->x8;
+    ftcmd &= 0x03FFFFFF;
+
+    ftColl_8007B0C0(gobj, ftcmd);
     cmd->x8 += 4;
 }
 
 void ftAction_80071A9C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     char* cmd_x8 = cmd->x8;
-    ftColl_8007B128((s8) ((u16) *cmd_x8 >> 2U), (int) *cmd_x8 & 0x3FFFF);
+    ftColl_8007B128(gobj, (s8) ((u16) *cmd_x8 >> 2U), (int) *cmd_x8 & 0x3FFFF);
     cmd->x8 += 4;
 }
 
 void ftAction_80071AE8(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if (!(*cmd->x8 & 0x03FFFFFF) || fp->x197C != NULL) {
+
+    if (!(*(int*) cmd->x8 & 0x03FFFFFF) || fp->x197C != NULL) {
         fp->x2218_b1 = true;
     }
     cmd->x8 += 4;
@@ -651,11 +660,9 @@ void ftAction_80071AE8(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071B28(Fighter_GObj* gobj, FtCmdState* cmd)
 {
+    int ftcmd = *(int*) cmd->x8;
     ftCo_Fighter* fp = gobj->user_data;
-    fp->x2218_b2 = (*cmd->x8);
-    // M2C_FIELD(fp, u8*, 0x2218) =
-    //     (u8) ((M2C_FIELD(fp, u8*, 0x2218) & ~0x20) | ((*cmd->x8 << 5) &
-    //     0x20));
+    fp->x2218_b2 = ftcmd;
     cmd->x8 += 4;
 }
 
@@ -748,13 +755,13 @@ void ftAction_80071CA4(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071CCC(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    u8 _[8] = { 0 };
     ftCo_Fighter* fp = gobj->user_data;
-    FtCollisionData* cd = fp->ft_data->x4C_collisionData;
-    if (cd == NULL) {
+    FtSFX* sfx = fp->ft_data->x4C_sfx;
+    FtSFXArr* sfx_smash = sfx->smash;
+    if (sfx_smash == NULL) {
         cmd->x8 += 4;
     } else {
-        ft_800889F4(fp, cd);
+        ft_800889F4(fp, sfx_smash);
         cmd->x8 += 4;
     }
 }
@@ -789,20 +796,22 @@ void ftAction_80071DCC(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80071E04(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     HitCapsule* hit;
-    char* cmd_x8 = cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
-    hit = &fp->xDF4[(((u16) *cmd_x8 >> 7U) & 7)];
-    ftColl_8007ABD0(hit, (int) *cmd_x8 & 0x7FFFFF, gobj);
+    u16* cmd_x8_short = (u16*) cmd->x8;
+    int* cmd_x8 = (int*) cmd->x8;
+
+    hit = &((Fighter*) gobj->user_data)->xDF4[((*cmd_x8_short >> 7U) & 7)];
+    ftColl_8007ABD0(hit, *cmd_x8 & 0x7FFFFF, gobj);
     cmd->x8 += 4;
     ftColl_8007AC9C(hit, ((u16) M2C_FIELD(cmd->x8, u16*, 0) >> 7U) & 0x1FF,
                     gobj);
-    hit->x24 = ((u32) M2C_FIELD(cmd->x8, u16*, 0) >> 0xEU) & 0x1FF;
+
+    hit->x24 = ((u32) M2C_FIELD(cmd->x8, u32*, 0) >> 0xEU) & 0x1FF;
     hit->x28 = (int) (((u16) M2C_FIELD(cmd->x8, u16*, 2) >> 5U) & 0x1FF);
     cmd->x8 += 4;
     hit->x2C = (int) (((u16) M2C_FIELD(cmd->x8, u16*, 0) >> 7U) & 0x1FF);
     hit->element = ((u8) M2C_FIELD(cmd->x8, u8*, 1) >> 3U) & 0xF;
     hit->sfx_severity = M2C_FIELD(cmd->x8, u8*, 1) & 7;
-    hit->sfx_kind = ((u8) M2C_FIELD(cmd->x8, u16*, 2) >> 4U) & 0xF;
+    hit->sfx_kind = ((u8) M2C_FIELD(cmd->x8, u8*, 2) >> 4U) & 0xF;
     cmd->x8 += 4;
 }
 
@@ -815,26 +824,27 @@ void ftAction_80071F0C(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071F34(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    u8 _[8] = { 0 };
-    ftCommon_8007F5CC(gobj, *cmd->x8 & 0x03FFFFFF);
+    int ftcmd = *(int*) cmd->x8;
+    PAD_STACK(8);
+
+    ftcmd &= 0x03FFFFFF;
+    ftCommon_8007F5CC(gobj, ftcmd);
     cmd->x8 += 4;
 }
 
 void ftAction_80071F78(Fighter_GObj* gobj, FtCmdState* cmd)
 {
+    int ftcmd = *(int*) cmd->x8;
     ftCo_Fighter* fp = gobj->user_data;
-    fp->x221E_b4 = false;
-    // M2C_FIELD(fp, u8*, 0x221E) =
-    //     (u8) ((M2C_FIELD(fp, u8*, 0x221E) & ~8) | ((*cmd->x8 << 3) & 8));
+    fp->x221E_b4 = ftcmd;
     cmd->x8 += 4;
 }
 
 void ftAction_80071FA0(Fighter_GObj* gobj, FtCmdState* cmd)
 {
+    int ftcmd = *(int*) cmd->x8;
     ftCo_Fighter* fp = gobj->user_data;
-    fp->x221E_b5 = false;
-    // M2C_FIELD(fp, u8*, 0x221E) =
-    //     (u8) ((M2C_FIELD(fp, u8*, 0x221E) & ~4) | ((*cmd->x8 << 2) & 4));
+    fp->x221E_b5 = ftcmd;
     cmd->x8 += 4;
 }
 
@@ -1171,8 +1181,11 @@ void ftAction_8007296C(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_8007297C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    u8 _[8] = { 0 };
-    ftCommon_8007ECD4(gobj->user_data, *cmd->x8 & 0x03FFFFFF);
+    int masked = *(int*) cmd->x8;
+    PAD_STACK(8);
+
+    masked &= 0x03FFFFFF;
+    ftCommon_8007ECD4(gobj->user_data, masked);
     cmd->x8 += 4;
 }
 
@@ -1219,7 +1232,10 @@ void ftAction_80072AAC(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80072ABC(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_800C0200(gobj->user_data, (s8) ((u16) *cmd->x8 >> 2U));
+    u16 ftcmd = *(u16*) cmd->x8;
+    ftcmd = (ftcmd >> 2) & 0xFF;
+
+    ftCo_800C0200(gobj->user_data, ftcmd);
     cmd->x8 += 4;
 }
 
@@ -1230,11 +1246,9 @@ void ftAction_80072B04(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80072B14(Fighter_GObj* gobj, FtCmdState* cmd)
 {
+    int ftcmd = *(int*) cmd->x8;
     ftCo_Fighter* fp = gobj->user_data;
-    fp->x221E_b1 = false;
-    // M2C_FIELD(fp, u8*, 0x221E) =
-    //     (u8) ((M2C_FIELD(fp, u8*, 0x221E) & ~0x40) |
-    //           ((*cmd->x8 << 6) & 0x40));
+    fp->x221E_b1 = ftcmd;
     cmd->x8 += 4;
 }
 
@@ -1285,17 +1299,18 @@ void ftAction_80072C5C(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80072C6C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ft_8008A1B8(gobj, *cmd->x8 & 0x03FFFFFF);
+    int ftcmd = *(int*) cmd->x8;
+    ftcmd &= 0x03FFFFFF;
+
+    ft_8008A1B8(gobj, ftcmd);
     cmd->x8 += 4;
 }
 
 void ftAction_80072CB0(Fighter_GObj* gobj, FtCmdState* cmd)
 {
+    int ftcmd = *(int*) cmd->x8;
     ftCo_Fighter* fp = gobj->user_data;
-    fp->x2225_b2 = false;
-    // M2C_FIELD(fp, u8*, 0x2225) =
-    //     (u8) ((M2C_FIELD(fp, u8*, 0x2225) & ~0x20) | ((*cmd->x8 << 5) &
-    //     0x20));
+    fp->x2225_b2 = ftcmd;
     cmd->x8 += 4;
 }
 
@@ -1326,9 +1341,9 @@ void ftAction_80072CD8(Fighter_GObj* gobj, FtCmdState* cmd)
             vec1.x = 0.0f;
             vec0.x = 0.0f;
             if (!(((u8) M2C_FIELD(cmd->x8, u8*, 1) >> 1U) & 1)) {
-                var_r5 = fp->ft_data->x8->unk13;
+                var_r5 = fp->ft_data->x8->x13;
             } else {
-                var_r5 = fp->ft_data->x8->unk14;
+                var_r5 = fp->ft_data->x8->x14;
             }
             ftCo_8009F834(gobj, (int) ivec1.x, var_r5, 0, 0, &vec1, &vec0,
                           0.0f);

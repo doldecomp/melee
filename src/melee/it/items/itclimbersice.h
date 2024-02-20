@@ -2,8 +2,9 @@
 #define GALE01_2C1590
 
 #include <platform.h>
+#include "it/forward.h"
 
-#include "it/types.h"
+#include "it/items/types.h"
 
 /* 2C17FC */ void it_802C17FC(Item_GObj*);
 /* 2C1FC8 */ bool it_802C1FC8(Item_GObj*);
