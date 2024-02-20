@@ -11,6 +11,21 @@
 
 #include <baselib/random.h>
 
+void it_802CF3E0(Item_GObj* gobj)
+{
+    Item* it = gobj->user_data;
+    Article* ap = it->xC4_article_data;
+    itEnteiAttributes* sa = ap->x4_specialAttributes;
+    PAD_STACK(16);
+
+    it_80279C48(gobj, ap);
+    it->xDAC_itcmd_var0 = 0;
+    it->xDB0_itcmd_var1 = 0;
+    it->xDB4_itcmd_var2 = 0;
+    it_80279CDC(gobj, sa->x0);
+    it_802CF744(gobj);
+}
+
 void it_802CF44C(Item_GObj* gobj)
 {
     return;

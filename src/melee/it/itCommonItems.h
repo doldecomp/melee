@@ -98,13 +98,13 @@ typedef struct {
 } ItMatoVars;
 
 typedef struct itEnteiAttributes {
-    int x0;
-    int timer;
+    f32 x0;
+    s32 timer;
 } itEnteiAttributes;
 
 typedef struct {
     u8 padding[0xE34 - 0xDD4];
-    int timer;
+    s32 timer;
 } ItEnteiVars;
 
 #endif
