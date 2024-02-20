@@ -3,3 +3,4 @@ hash: 08e0bf20134dfcb260699671004527b2d6bb1a45
 symbols: config/GALE01/symbols.txt
 splits: config/GALE01/splits.txt
 mw_comment_version: 8
+quick_analysis: true
