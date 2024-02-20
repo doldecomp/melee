@@ -1,10 +1,7 @@
 name: build-melee
 run-name: Build Melee
 
-on:
-  push:
-    paths: [ "**" ]
-  pull_request:
+on: workflow_call
 
 env:
   IMAGE_REPO: doldecomp/melee

@@ -1,4 +1,4 @@
-run-name: Publish GitHub pages
+run-name: Build Melee & publish GitHub Pages
 name: publish-pages
 
 on:
@@ -14,13 +14,14 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
+  build-melee:
+    name: Build Melee
+    uses: ./.github/workflows/build-melee.yml
+
   gen-pages:
     name: Generate pages
+    needs: build-melee
     runs-on: ubuntu-latest
     env:
       REGISTRY: ghcr.io
@@ -63,6 +64,9 @@ jobs:
           path: ${{ env.OUTPUT }}
 
   deploy-pages:
+    concurrency:
+      group: deploy
+      cancel-in-progress: false
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     needs: gen-pages
