@@ -1,14 +1,16 @@
 #include "itmetalb.h"
 
 #include "it/inlines.h"
+#include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 #include "it/item.h"
 
 void it_802953C8(Item_GObj* gobj)
 {
     Item* it = GET_ITEM((HSD_GObj*) gobj);
     it->xDCE_flag.bits.b7 = 0;
-    it_80295498(gobj, it);
+    it_80295498(gobj);
 }
 
 void it_802953FC(Item_GObj* gobj, f32 val)
@@ -18,4 +20,39 @@ void it_802953FC(Item_GObj* gobj, f32 val)
 
     it_8026B390(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
+
+bool it_8029544C(Item_GObj* gobj)
+{
+    return false;
+}
+
+void it_80295454(Item_GObj* gobj)
+{
+    return;
+}
+
+bool it_80295458(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_80295498);
+    it_80276CB8(gobj);
+
+    return false;
+}
+
+void it_80295498(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}
+
+bool it_802954C0(Item_GObj* gobj)
+{
+    return false;
+}
+
+void it_802954C8(Item_GObj* gobj)
+{
+    Item* it = gobj->user_data;
+    it_80272860(gobj, it->xCC_item_attr->x10_fall_speed,
+                it->xCC_item_attr->x14_fall_speed_max);
 }

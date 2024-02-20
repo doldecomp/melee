@@ -10,7 +10,12 @@
 
 void it_802953C8(Item_GObj*);
 void it_802953FC(Item_GObj*, f32);
-void it_80295498(Item_GObj*, Item*);
+bool it_8029544C(Item_GObj*);
+void it_80295454(Item_GObj*);
+bool it_80295458(Item_GObj*);
+void it_80295498(Item_GObj*);
+bool it_802954C0(Item_GObj*);
+void it_802954C8(Item_GObj*);
 void it_80295524(Item_GObj*);
 void it_80295554(Item_GObj*);
 bool it_802955E0(Item_GObj*);
