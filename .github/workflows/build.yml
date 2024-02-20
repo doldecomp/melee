@@ -15,6 +15,15 @@ permissions:
   id-token: write
 
 jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print some garbage
+      run: |
+        echo 'actor=${{github.actor}}'
+        echo 'repo=${{github.repository}}'
+
   build-make:
     name: Make
     runs-on: ubuntu-latest
