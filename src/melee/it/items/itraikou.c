@@ -20,7 +20,7 @@ void it_802CF814(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     Article* ap = it->xC4_article_data;
-    itPokeDogsAttributes* sa = ap->x4_specialAttributes;
+    itPokemonAttributes* sa = ap->x4_specialAttributes;
     PAD_STACK(16);
 
     it_80279C48(gobj, ap);
@@ -56,19 +56,19 @@ void it_802CF908(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     Article* ap = it->xC4_article_data;
-    itPokeDogsAttributes* sa = ap->x4_specialAttributes;
+    itPokemonAttributes* sa = ap->x4_specialAttributes;
 
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     it->entered_hitlag = efLib_PauseAll;
     it->exited_hitlag = efLib_ResumeAll;
     it->on_accessory = it_802CFAFC;
-    it->xDD4_itemVar.entei.timer = sa->timer;
+    it->xDD4_itemVar.pokemon.timer = sa->timer;
 }
 
 bool it_802CF978(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
-    itPokeDogsAttributes* sa;
+    itPokemonAttributes* sa;
     int timer;
     int sfx;
 
@@ -81,7 +81,7 @@ bool it_802CF978(Item_GObj* gobj)
         return true;
     }
     if (it->xDB4_itcmd_var2) {
-        timer = --it->xDD4_itemVar.entei.timer;
+        timer = --it->xDD4_itemVar.pokemon.timer;
         if (timer == 0) {
             sa = it->xC4_article_data->x4_specialAttributes;
             switch (HSD_Randi(3)) {
@@ -96,7 +96,7 @@ bool it_802CF978(Item_GObj* gobj)
                 break;
             }
             Item_8026AE84(it, sfx, 0x7F, 0x40);
-            it->xDD4_itemVar.entei.timer = sa->timer;
+            it->xDD4_itemVar.pokemon.timer = sa->timer;
         }
     }
     return false;
