@@ -197,14 +197,15 @@ bool it_80289150(HSD_GObj* gobj)
 void it_80289158(HSD_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    HSD_JObjSetFlagsAll(gobj->hsd_obj, 0x10U);
+    u8 _[8] = { 0 };
+    HSD_JObjSetFlagsAll(gobj->hsd_obj, JOBJ_HIDDEN);
     it_802756D0(gobj);
-    M2C_FIELD(item, f32*, 0x40) = (f32) 0.0F;
-    M2C_FIELD(item, f32*, 0x44) = (f32) 0.0F;
-    M2C_FIELD(item, u8*, 0xDCF) = (u8) (M2C_FIELD(item, u8*, 0xDCF) | 0x20);
-    M2C_FIELD(item, s32*, 0xDD4) = 1;
-    M2C_FIELD(item, s32*, 0xDD8) = 0x28;
-    it_8026B3A8((Item_GObj*) gobj);
+    item->x40_vel.x = 0.0F;
+    item->x40_vel.y = 0.0F;
+    item->xDCF_flag.bits.b2 = 1;
+    item->xDD4_itemVar.capsule.x0 = 1;
+    item->xDD4_itemVar.capsule.x4 = 0x28;
+    it_8026B3A8(gobj);
     Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
 }
 
