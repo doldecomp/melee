@@ -17,6 +17,7 @@ permissions:
 jobs:
   build-melee:
     name: Build Melee
+    secrets: inherit
     uses: ./.github/workflows/build-melee.yml
 
   gen-pages:
