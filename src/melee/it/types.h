@@ -557,6 +557,7 @@ struct Item {
         FoxLaserVars foxlaser;
         FoxIllusionVars foxillusion;
         itKirbyHammerVars kirbyhammer;
+        itShellVars shell;
         u8 padding[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };

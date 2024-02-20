@@ -1802,7 +1802,7 @@ s32 Ground_801C4210(void)
     enum_t i;
     for (i = 199; i < 220; i++) {
         if (stage_info.x280[i] != NULL &&
-            it_8027B5B0(It_Kind_Mato, 0, stage_info.x280[i], 0, 0) != NULL)
+            it_8027B5B0(It_Kind_Mato, 0, stage_info.x280[i], NULL, 0) != NULL)
         {
             count++;
         }
