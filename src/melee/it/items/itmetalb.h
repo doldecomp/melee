@@ -26,6 +26,7 @@ bool it_802955E0(Item_GObj*);
 void it_80295684(Item_GObj*);
 bool it_802956AC(Item_GObj*);
 void it_802956B4(Item_GObj*);
+bool it_802956B8(Item_GObj*);
 void it_802956EC(Item_GObj*, Item_GObj*);
 extern ItemStateTable it_803F62C0[];
 

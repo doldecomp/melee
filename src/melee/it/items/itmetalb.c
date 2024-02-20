@@ -1,10 +1,13 @@
 #include "itmetalb.h"
 
+#include "ft/ftlib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itcoll.h"
 #include "it/item.h"
+#include "pl/pl_0371.h"
 
 ItemStateTable it_803F62C0[] = {
     { -1, NULL, NULL, NULL }, { -1, NULL, NULL, NULL },
@@ -100,6 +103,26 @@ bool it_802955AC(Item_GObj* gobj)
     return false;
 }
 
+bool it_802955E0(Item_GObj* gobj)
+{
+    Item* it = GET_ITEM((HSD_GObj*) gobj);
+    HSD_GObj* go = it_8027236C(gobj);
+    PAD_STACK(8);
+
+    if (go != NULL) {
+        if (go->classifier == HSD_GOBJ_CLASS_FIGHTER && it->xDCF_flag.bits.b6)
+        {
+            ftLib_800871A8(go, (HSD_GObj*) gobj);
+            pl_8003E17C(ftLib_80086BE0(go) & 0xFF, ftLib_800874BC(go), gobj);
+            return true;
+        } else {
+            it->xCEC_fighterGObj = NULL;
+        }
+    }
+
+    return true;
+}
+
 void it_80295684(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
@@ -113,6 +136,13 @@ bool it_802956AC(Item_GObj* gobj)
 void it_802956B4(Item_GObj* gobj)
 {
     return;
+}
+
+bool it_802956B8(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, it_802953FC, it_80295498);
+
+    return false;
 }
 
 void it_802956EC(Item_GObj* gobj, HSD_GObj* ref_gobj)
