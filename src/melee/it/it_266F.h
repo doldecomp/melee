@@ -21,6 +21,7 @@
 /* 26DFB0 */ bool it_8026DFB0(void);
 /* 26E0F4 */ void it_8026E0F4(Item_GObj*);
 /* 26E15C */ void it_8026E15C(Item_GObj*, HSD_GObjEvent);
+/* 26E248 */ void it_8026E248(Item_GObj*, HSD_GObjEvent);
 /* 26E414 */ void it_8026E414(Item_GObj*, HSD_GObjEvent);
 /* 26E8C4 */ void it_8026E8C4(Item_GObj*, HSD_GObjEvent, HSD_GObjEvent);
 /* 26E9A4 */ bool it_8026E9A4(Item_GObj*, Vec3*, Vec3*, int);
