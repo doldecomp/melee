@@ -3,8 +3,12 @@ run-name: Build Melee
 
 on:
   workflow_call:
+    inputs:
+      ghcr_username:
+        type: string
+        required: true
     secrets:
-      github_token:
+      ghcr_password:
         required: true
 
 
