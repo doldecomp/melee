@@ -10,9 +10,11 @@
 #include "pl/pl_0371.h"
 
 ItemStateTable it_803F62C0[] = {
-    { -1, NULL, NULL, NULL }, { -1, NULL, NULL, NULL },
-    { -1, NULL, NULL, NULL }, { -1, NULL, NULL, NULL },
-    { -1, NULL, NULL, NULL },
+    { -1, it_8029544C, it_80295454, it_80295458 },
+    { -1, it_802954C0, it_802954C8, it_802954F8 },
+    { -1, it_8029554C, NULL, NULL },
+    { -1, it_802954C0, it_8029557C, it_802955AC },
+    { -1, it_802956AC, it_802956B4, it_802956B8 },
 };
 
 void it_802953C8(Item_GObj* gobj)
