@@ -112,7 +112,7 @@ void ftMr_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_L1stNb)].joint, NULL,
                     &coords);
         if (fp->kind == FTKIND_MARIO) {
-            it_8029B6F8(fp->facing_dir, gobj, &coords, FtPart_RThumbNa);
+            it_8029B6F8(gobj, &coords, FtPart_RThumbNa, fp->facing_dir);
             efSync_Spawn(1146, gobj,
                          fp->parts[ftParts_8007500C(fp, FtPart_L1stNb)].joint,
                          &fp->facing_dir);
