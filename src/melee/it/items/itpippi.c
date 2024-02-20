@@ -71,6 +71,65 @@ bool it_802D33AC(Item_GObj* gobj)
     return false;
 }
 
+void it_802D33F8(Item_GObj* gobj)
+{
+    Item* it = gobj->user_data;
+    Article* ap = it->xC4_article_data;
+    itPokemonAttributes* sa = ap->x4_specialAttributes;
+    int rand = HSD_Randi(sa->max);
+    int val = sa->xC;
+    int state;
+    PAD_STACK(8);
+
+    if (rand < val) {
+        state = 2;
+    } else {
+        val += sa->x10;
+        if (rand < val) {
+            state = 3;
+        } else if (rand < sa->x14 + val) {
+            state = 4;
+        } else {
+            state = 5;
+        }
+    }
+    Item_80268E5C(gobj, state, ITEM_ANIM_UPDATE);
+    it->entered_hitlag = NULL;
+    it->exited_hitlag = NULL;
+}
+
+bool it_802D34A4(Item_GObj* gobj)
+{
+    Item* it = gobj->user_data;
+    if (it_80272C6C(gobj) == false) {
+        Item_80268D34(gobj, it->xD0_itemStateDesc);
+    }
+    if (it->xDAC_itcmd_var0) {
+        return true;
+    }
+    return false;
+}
+
+void it_802D3508(Item_GObj* gobj)
+{
+    Item* it = GET_ITEM((HSD_GObj*) gobj);
+    if (it->ground_or_air == GA_Air) {
+        it_80272860(gobj, it->xCC_item_attr->x10_fall_speed,
+                    it->xCC_item_attr->x14_fall_speed_max);
+    }
+}
+
+bool it_802D3544(Item_GObj* gobj)
+{
+    Item* it = GET_ITEM((HSD_GObj*) gobj);
+    if (it->ground_or_air == GA_Air) {
+        it_8026E15C(gobj, it_802D32D8);
+    } else {
+        it_8026E15C(gobj, it_802D32D8);
+    }
+    return false;
+}
+
 void it_802D3590(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;

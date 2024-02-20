@@ -13,6 +13,8 @@ bool it_802D32FC(Item_GObj*);
 void it_802D3370(Item_GObj*);
 bool it_802D33AC(Item_GObj*);
 void it_802D33F8(Item_GObj*);
+void it_802D3508(Item_GObj*);
+bool it_802D3544(Item_GObj*);
 void it_802D3590(Item_GObj*);
 bool it_802D3600(Item_GObj*);
 void it_802D3624(Item_GObj*);

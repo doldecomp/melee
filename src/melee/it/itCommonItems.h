@@ -100,6 +100,10 @@ typedef struct {
 typedef struct itPokemonAttributes {
     f32 x0;
     s32 timer;
+    s32 max;
+    s32 xC;
+    s32 x10;
+    s32 x14;
 } itPokemonAttributes;
 
 typedef struct {
