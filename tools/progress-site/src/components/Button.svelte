@@ -1,14 +1,14 @@
 <script>
-	import { selectedOption } from '../store';
+    import { selectedOption } from '../store';
 
-	export let optionId;
+    export let optionId;
 </script>
 
 <div
-	class={'button' + ($selectedOption === optionId ? ' selected' : '')}
-	on:mouseover={() => selectedOption.set(optionId)}
+    class={'button' + ($selectedOption === optionId ? ' selected' : '')}
+    on:mouseover={() => selectedOption.set(optionId)}
 >
-	<slot />
+    <slot />
 </div>
 
 <!-- <svg width="450" viewBox="55.089 96.472 253.537 65.653" xmlns="http://www.w3.org/2000/svg">
@@ -16,7 +16,7 @@
 </svg> -->
 
 <style>
-	/*
+    /*
     .edge1 {
         position: absolute;
         transform-origin: 0 0;
@@ -34,34 +34,34 @@
         background-color: yellow;
     }
     */
-	.button {
-		width: 450px;
-		height: 80px;
-		margin: 30px;
+    .button {
+        width: 450px;
+        height: 80px;
+        margin: 30px;
 
-		background: transparent;
-		border: 4px solid yellow;
-		border-radius: 15px;
-		color: yellow;
-		font-weight: 800;
-		font-size: 40px;
-		line-height: 80px;
-		text-align: center;
-	}
+        background: transparent;
+        border: 4px solid yellow;
+        border-radius: 15px;
+        color: yellow;
+        font-weight: 800;
+        font-size: 40px;
+        line-height: 80px;
+        text-align: center;
+    }
 
-	.button.selected {
-		background-color: yellow;
-		color: black;
-	}
+    .button.selected {
+        background-color: yellow;
+        color: black;
+    }
 
-	@media (max-width: 1300px) {
-		.button {
-			margin-left: 10px;
-			margin-right: 10px;
-			font-size: 20px;
-			width: 225px;
-			height: 40px;
-			line-height: 40px;
-		}
-	}
+    @media (max-width: 1300px) {
+        .button {
+            margin-left: 10px;
+            margin-right: 10px;
+            font-size: 20px;
+            width: 225px;
+            height: 40px;
+            line-height: 40px;
+        }
+    }
 </style>
