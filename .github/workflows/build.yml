@@ -1,3 +1,4 @@
+name: build
 run-name: Build Melee & publish GitHub Pages
 
 on:
