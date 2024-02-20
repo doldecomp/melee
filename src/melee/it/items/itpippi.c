@@ -10,6 +10,15 @@
 
 #include <baselib/random.h>
 
+ItemStateTable it_803F7FF8[] = {
+    { 0, it_802D3600, it_802D3624, it_802D3688 },
+    { 1, it_802D32FC, it_802D3370, it_802D33AC },
+    { 2, it_802D34A4, it_802D3508, it_802D3544 },
+    { 3, it_802D34A4, it_802D3508, it_802D3544 },
+    { 4, it_802D34A4, it_802D3508, it_802D3544 },
+    { 5, it_802D34A4, it_802D3508, it_802D3544 },
+};
+
 void it_802D3260(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
