@@ -99,3 +99,8 @@ bool it_802955AC(Item_GObj* gobj)
     }
     return false;
 }
+
+void it_802956EC(Item_GObj* gobj, HSD_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
