@@ -75,7 +75,7 @@ bool it_802D33AC(Item_GObj* gobj)
     if (it->ground_or_air == GA_Air) {
         it_8026E15C(gobj, it_802D32D8);
     } else {
-        it_8026E15C(gobj, it_802D32D8);
+        it_8026D62C(gobj, it_802D32D8);
     }
     return false;
 }
@@ -134,7 +134,7 @@ bool it_802D3544(Item_GObj* gobj)
     if (it->ground_or_air == GA_Air) {
         it_8026E15C(gobj, it_802D32D8);
     } else {
-        it_8026E15C(gobj, it_802D32D8);
+        it_8026D62C(gobj, it_802D32D8);
     }
     return false;
 }
