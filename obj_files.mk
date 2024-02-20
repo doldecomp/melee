@@ -706,7 +706,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itlikelike.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itnokonoko.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itzgshell.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itzrshell.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itzrshell.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itpatapata.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itklap.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itoldottosea.s.o\

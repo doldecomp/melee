@@ -25,7 +25,7 @@
 /* 4A0F60 */ extern Article* it_804A0F60[]; // stage items
 
 /* 27B4A4 */ void it_8027B4A4(Fighter_GObj*, Item_GObj*);
-/* 27B5B0 */ void* it_8027B5B0(s32, s32, HSD_JObj*, s32, s32);
+/* 27B5B0 */ Item_GObj* it_8027B5B0(s32, s32, HSD_JObj*, Vec3*, s32);
 /* 274EE8 */ void it_80274EE8(u32);
 
 /// Load ItCo.dat/usd

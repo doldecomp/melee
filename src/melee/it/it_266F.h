@@ -119,7 +119,7 @@
 /* 27A344 */ void it_8027A344(Item_GObj*);
 /* 27B0C4 */ void it_8027B0C4(HSD_GObj*, SpawnItem*);
 /* 27B4A4 */ void it_8027B4A4(Fighter_GObj*, Item_GObj*);
-/* 27B5B0 */ void* it_8027B5B0(s32, s32, HSD_JObj*, s32, s32);
+/* 27B5B0 */ Item_GObj* it_8027B5B0(s32, s32, HSD_JObj*, Vec3*, s32);
 /* 4A0E30 */ extern HSD_ObjAllocUnk4 it_804A0E30;
 /* 4A0E50 */ extern HSD_ObjAllocUnk5 it_804A0E50;
 /* 4A0E60 */ extern HSD_ObjAllocUnk6 it_804A0E60;

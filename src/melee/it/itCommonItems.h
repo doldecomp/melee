@@ -97,6 +97,11 @@ typedef struct {
     HSD_JObj* x0;
 } ItMatoVars;
 
+typedef struct {
+    u8 padding[0xE10 - 0xDD4];
+    int xE10;
+} itShellVars;
+
 typedef struct itPokemonAttributes {
     f32 x0;
     s32 timer;
