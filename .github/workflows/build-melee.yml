@@ -1,10 +1,7 @@
 name: build-melee
 run-name: Build Melee
 
-on:
-  push:
-    paths: [ "**" ]
-  pull_request:
+on: workflow_call
 
 env:
   IMAGE_REPO: doldecomp/melee
@@ -70,7 +67,7 @@ jobs:
   build-ninja:
     name: Ninja
     runs-on: ubuntu-latest
-    if: github.repository == 'doldecomp/melee'
+    if: github.actor == 'doldecomp'
     container: ghcr.io/doldecomp/build-melee:main
     strategy:
       fail-fast: false
