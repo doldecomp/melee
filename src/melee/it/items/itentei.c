@@ -2,6 +2,7 @@
 
 #include "cm/camera.h"
 #include "ef/eflib.h"
+#include "ef/efsync.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -64,7 +65,21 @@ bool it_802CF67C(Item_GObj* gobj)
     return false;
 }
 
-void it_802CF6C8(Item_GObj* gobj) {}
+void it_802CF6C8(Item_GObj* gobj)
+{
+    Item* it = gobj->user_data;
+
+    if (it->xDAC_itcmd_var0) {
+        HSD_JObj* jp = gobj->hsd_obj;
+        f32 v = 1.0f;
+        PAD_STACK(8);
+
+        it->xDAC_itcmd_var0 = 0;
+        it->xDB4_itcmd_var2 = 1;
+        efSync_Spawn(0x468, gobj, jp, &v);
+        Item_8026AE84(it, 0x2741, 0x7f, 0x40);
+    }
+}
 
 void it_802CF744(Item_GObj* gobj)
 {
