@@ -73,7 +73,6 @@
 #include "un/un_2FC9.h"
 
 #include <common_structs.h>
-#include <math.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/vec.h>
@@ -89,6 +88,8 @@
 #include <baselib/lobj.h>
 #include <baselib/mtx.h>
 #include <baselib/random.h>
+#include <MSL/math.h>
+#include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
 extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];

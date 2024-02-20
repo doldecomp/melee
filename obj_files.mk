@@ -794,6 +794,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/MSL/math_1.c.o\
     $(BUILD_DIR)/asm/MSL/trigf.s.o\
     $(BUILD_DIR)/asm/MSL/math.s.o\
+    $(BUILD_DIR)/src/MSL/math_ppc.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/MetroTRK/mainloop.s.o\

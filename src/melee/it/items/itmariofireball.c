@@ -10,6 +10,7 @@
 #include "it/item.h"
 
 #include <common_structs.h>
+#include <math.h>
 #include <dolphin/mtx/vec.h>
 #include <baselib/gobj.h>
 

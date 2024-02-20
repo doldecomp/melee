@@ -13,6 +13,7 @@
 
 #include <common_structs.h>
 #include <math.h>
+#include <math_ppc.h>
 #include <dolphin/mtx/vec.h>
 #include <baselib/gobj.h>
 
