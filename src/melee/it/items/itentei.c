@@ -66,6 +66,15 @@ bool it_802CF67C(Item_GObj* gobj)
 
 void it_802CF6C8(Item_GObj* gobj) {}
 
+void it_802CF744(Item_GObj* gobj)
+{
+    Item* it = gobj->user_data;
+    it_802762BC(it);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    it->entered_hitlag = efLib_PauseAll;
+    it->exited_hitlag = efLib_ResumeAll;
+}
+
 bool it_802CF7A8(Item_GObj* gobj)
 {
     it_80279FF8(gobj);
