@@ -99,12 +99,12 @@ typedef struct {
 
 typedef struct itEnteiAttributes {
     int x0;
-    int x4;
+    int timer;
 } itEnteiAttributes;
 
 typedef struct {
     u8 padding[0xE34 - 0xDD4];
-    int attribs;
+    int timer;
 } ItEnteiVars;
 
 #endif

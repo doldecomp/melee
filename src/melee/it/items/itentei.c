@@ -9,6 +9,8 @@
 #include "it/it_2725.h"
 #include "it/types.h"
 
+#include <baselib/random.h>
+
 void it_802CF44C(Item_GObj* gobj)
 {
     return;
@@ -40,10 +42,45 @@ void it_802CF4D4(Item_GObj* gobj)
     it->entered_hitlag = efLib_PauseAll;
     it->exited_hitlag = efLib_ResumeAll;
     it->on_accessory = it_802CF6C8;
-    it->xDD4_itemVar.entei.attribs = sa->x4;
+    it->xDD4_itemVar.entei.timer = sa->timer;
 }
 
-void it_802CF544(Item_GObj* gobj) {}
+bool it_802CF544(Item_GObj* gobj)
+{
+    Item* it = gobj->user_data;
+    itEnteiAttributes* sa;
+    int timer;
+    int sfx;
+
+    if (it->xDB0_itcmd_var1) {
+        it->xDB0_itcmd_var1 = 0;
+        it->xDB4_itcmd_var2 = 0;
+        efLib_DestroyAll((HSD_GObj*) gobj);
+    }
+    if (it_80272C6C((HSD_GObj*) gobj) == false) {
+        return true;
+    }
+    if (it->xDB4_itcmd_var2) {
+        timer = --it->xDD4_itemVar.entei.timer;
+        if (timer == 0) {
+            sa = it->xC4_article_data->x4_specialAttributes;
+            switch (HSD_Randi(3)) {
+            case 0:
+                sfx = 0x2742;
+                break;
+            case 1:
+                sfx = 0x2743;
+                break;
+            case 2:
+                sfx = 0x2744;
+                break;
+            }
+            Item_8026AE84(it, sfx, 0x7F, 0x40);
+            it->xDD4_itemVar.entei.timer = sa->timer;
+        }
+    }
+    return false;
+}
 
 void it_802CF640(Item_GObj* gobj)
 {
