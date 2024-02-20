@@ -6,6 +6,12 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+ItemStateTable it_803F62C0[] = {
+    { -1, NULL, NULL, NULL }, { -1, NULL, NULL, NULL },
+    { -1, NULL, NULL, NULL }, { -1, NULL, NULL, NULL },
+    { -1, NULL, NULL, NULL },
+};
+
 void it_802953C8(Item_GObj* gobj)
 {
     Item* it = GET_ITEM((HSD_GObj*) gobj);
