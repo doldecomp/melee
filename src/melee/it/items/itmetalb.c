@@ -100,6 +100,11 @@ bool it_802955AC(Item_GObj* gobj)
     return false;
 }
 
+void it_80295684(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+}
+
 bool it_802956AC(Item_GObj* gobj)
 {
     return false;
