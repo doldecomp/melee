@@ -13,6 +13,7 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Wait.h"
 #include "ftMario/types.h"
+#include "it/items/it_27CF.h"
 #include "it/items/itmariofireball.h"
 #include "lb/lb_00B0.h"
 
@@ -112,7 +113,7 @@ void ftMr_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_L1stNb)].joint, NULL,
                     &coords);
         if (fp->kind == FTKIND_MARIO) {
-            it_8029B6F8(gobj, &coords, FtPart_RThumbNa, fp->facing_dir);
+            it_8029B6F8(gobj, &coords, It_Kind_Mario_Fire, fp->facing_dir);
             efSync_Spawn(1146, gobj,
                          fp->parts[ftParts_8007500C(fp, FtPart_L1stNb)].joint,
                          &fp->facing_dir);

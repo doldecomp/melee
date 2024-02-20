@@ -8,6 +8,9 @@
 #pragma cplusplus on
 #endif
 
+double log2(double x);
+double exp2(double x);
+
 extern inline float sqrtf(float x)
 {
     static const double _half = .5;
