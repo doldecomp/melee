@@ -20,7 +20,7 @@ void it_802CF3E0(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     Article* ap = it->xC4_article_data;
-    itEnteiAttributes* sa = ap->x4_specialAttributes;
+    itPokeDogsAttributes* sa = ap->x4_specialAttributes;
     PAD_STACK(16);
 
     it_80279C48(gobj, ap);
@@ -56,7 +56,7 @@ void it_802CF4D4(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     Article* ap = it->xC4_article_data;
-    itEnteiAttributes* sa = ap->x4_specialAttributes;
+    itPokeDogsAttributes* sa = ap->x4_specialAttributes;
 
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     it->entered_hitlag = efLib_PauseAll;
@@ -68,7 +68,7 @@ void it_802CF4D4(Item_GObj* gobj)
 bool it_802CF544(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
-    itEnteiAttributes* sa;
+    itPokeDogsAttributes* sa;
     int timer;
     int sfx;
 
