@@ -163,9 +163,9 @@ config.ldflags = [
 
 # Progress
 config.progress_use_fancy = True
-config.progress_code_fancy_frac = 51
+config.progress_code_fancy_frac = 293
 config.progress_code_fancy_item = "Trophies"
-config.progress_data_fancy_frac = 293
+config.progress_data_fancy_frac = 51
 config.progress_data_fancy_item = "Event Matches"
 
 # Base flags, common to most GC/Wii games.
