@@ -5,9 +5,12 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
+#include "lb/lb_00F9.h"
 #include "lb/types.h"
 
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 
 StageCallbacks grTCLink_803E86D0[] = {
     { grTCLink_802200D0, grTCLink_802200FC, grTCLink_80220104,
