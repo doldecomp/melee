@@ -558,6 +558,7 @@ struct Item {
         FoxIllusionVars foxillusion;
         itKirbyHammerVars kirbyhammer;
         itShellVars shell;
+        itTargetVars target;
         u8 padding[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };

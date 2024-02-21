@@ -1,5 +1,7 @@
 #include "gr/grticeclimber.h"
 
+#include "cm/camera.h"
+#include "ef/efsync.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/grmaterial.h"
@@ -7,6 +9,10 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
+#include "it/inlines.h"
+#include "it/item.h"
+#include "it/types.h"
+#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
 #include <placeholder.h>
@@ -14,6 +20,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 
 /* static */ StageCallbacks grTIc_803E8A98[4] = {
     {
@@ -166,9 +173,18 @@ void grTIceClimber_802211E4(HSD_GObj* gobj)
 
 void grTIceClimber_80221204(HSD_GObj* arg0) {}
 
-void grTIceClimber_80221208(void)
+void grTIceClimber_80221208(HSD_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    Vec3 pos;
+    Item* it = GET_ITEM(gobj);
+    PAD_STACK(16);
+
+    HSD_JObjSetFlagsAll(it->xDD4_itemVar.target.jobj, 0x10);
+    lb_8000B1CC(it->xDD4_itemVar.target.jobj, NULL, &pos);
+    efSync_Spawn(0x445, gobj, &pos);
+    Camera_80030E44(2, 0);
+    Ground_801C53EC(310);
+    grMaterial_801C8CDC(gobj);
 }
 
 s16 grTIc_803E8B5C[] = {
