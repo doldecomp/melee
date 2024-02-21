@@ -112,23 +112,28 @@ void ftSs_SpecialAirLw_Enter(HSD_GObj* gobj)
     ftSamus_SpecialLw_StartAction_inner(gobj);
 }
 
-inline void checkStateVar1(HSD_GObj* gobj)
+inline static setSamusBits(Fighter* fp, int val)
 {
-    Fighter* fp = gobj->user_data;
+    fp->mv.ss.unk6.x0 = val;
+}
+
+inline static void checkStateVar1(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if ((fp->cmd_vars[0]) && (!fp->mv.ss.unk6.x0)) {
         ftSs_SpecialLw_8012AEBC(gobj);
-        fp->mv.ss.unk6.x0 = 1;
+        setSamusBits(fp, 1);
     }
     if ((!fp->cmd_vars[0]) && (fp->mv.ss.unk6.x0)) {
-        ftColl_8007B0C0(gobj, 0);
-        fp->mv.ss.unk6.x0 = 0;
+        ftColl_8007B0C0((Fighter_GObj*) gobj, 0);
+        setSamusBits(fp, 0);
     }
 }
 
 void ftSs_SpecialLwBomb_Anim(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->cmd_vars[1] == 1) {
         fp->cmd_vars[1] = 2;
@@ -138,13 +143,14 @@ void ftSs_SpecialLwBomb_Anim(HSD_GObj* gobj)
 
     checkStateVar1(gobj);
 
-    if (!ftAnim_IsFramesRemaining(gobj)) {
-        ft_8008A2BC(gobj);
+    if (!ftAnim_IsFramesRemaining((Fighter_GObj*) gobj)) {
+        ft_8008A2BC((Fighter_GObj*) gobj);
     }
 }
 
 void ftSs_SpecialAirLwBomb_Anim(HSD_GObj* gobj)
 {
+    Fighter* fp = GET_FIGHTER(gobj);
     checkStateVar1(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_800CC730(gobj);
@@ -198,10 +204,7 @@ void ftSs_SpecialLwBomb_Coll(HSD_GObj* gobj)
     u8 _[8];
 
     if (fp->cmd_vars[0]) {
-        /// @todo Remove cast
-        if (!ft_80082888(gobj,
-                         (ftCollisionBox*) &samus_attr->height_attributes))
-        {
+        if (!ft_80082888(gobj, &samus_attr->height_attributes)) {
             ftSs_SpecialLw_8012B570(gobj);
         }
     } else if (!ft_800827A0(gobj)) {
@@ -217,10 +220,7 @@ void ftSs_SpecialAirLwBomb_Coll(HSD_GObj* gobj)
     u8 _[8];
 
     if (fp->cmd_vars[0]) {
-        /// @todo Remove cast
-        if (ft_800824A0(gobj,
-                        (ftCollisionBox*) &samus_attr->height_attributes))
-        {
+        if (ft_800824A0(gobj, &samus_attr->height_attributes)) {
             ftSs_SpecialLw_8012B668(gobj);
         }
     } else if (ft_80081D0C(gobj)) {
