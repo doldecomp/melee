@@ -520,7 +520,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gr/grtzelda.c.o\
     $(BUILD_DIR)/src/melee/gr/grtgamewatch.c.o\
     $(BUILD_DIR)/src/melee/gr/grtemblem.c.o\
-    $(BUILD_DIR)/asm/melee/gr/grtganon.s.o\
+    $(BUILD_DIR)/src/melee/gr/grtganon.c.o\
     $(BUILD_DIR)/src/melee/gr/stage.c.o\
 
 TEXT_O_FILES +=\
