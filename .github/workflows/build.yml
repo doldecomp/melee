@@ -102,8 +102,8 @@ jobs:
         if [ -z '${{matrix.options}}' ]; then
           args="--map $args"
         fi
-        echo -e "$args" | xargs -d '\n' python configure.py
-        echo -e "${{matrix.options}}" | xargs -d '\n' ninja
+        echo "$args" | xargs python configure.py
+        echo "${{matrix.options}}" | xargs ninja
     - name: Upload progress
       if: matrix.options == '' && github.ref_name == github.event.repository.default_branch
       continue-on-error: true
