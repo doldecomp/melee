@@ -819,7 +819,7 @@ config.libs = [
             Object(Matching, "melee/gr/grtzelda.c"),
             Object(Matching, "melee/gr/grtgamewatch.c"),
             Object(Matching, "melee/gr/grtemblem.c"),
-            Object(NonMatching, "melee/gr/grtganon.c"),
+            Object(Matching, "melee/gr/grtganon.c"),
             # Main
             Object(Matching, "melee/gr/stage.c"),
         ],

@@ -24,7 +24,7 @@ void grTGameWatch_80224368(HSD_GObj*);
 bool grTGameWatch_802243B8(HSD_GObj*);
 void grTGameWatch_802243C0(HSD_GObj*);
 void grTGameWatch_802243E0(HSD_GObj*);
-lb_UnkAnimStruct* grTGameWatch_802243E4(int unused);
+lb_UnkAnimStruct* grTGameWatch_802243E4(int);
 bool grTGameWatch_802243EC(Vec3*, int, HSD_JObj*);
 
 #endif
