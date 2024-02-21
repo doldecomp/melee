@@ -215,9 +215,9 @@ bool it_802891E0(HSD_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
 
-    item->xDD4_itemVar.Egg.filler[4] -= 1;
+    *((s32*) &item->xDD4_itemVar.Egg.filler[4]) -= 1;
 
-    if (item->xDD4_itemVar.Egg.filler[4] > 0) {
+    if (*((s32*) &item->xDD4_itemVar.Egg.filler[4]) > 0) {
         return false;
     } else {
         return true;
