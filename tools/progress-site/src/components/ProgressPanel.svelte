@@ -12,7 +12,7 @@
 
     const progress = progressJson as Progress;
     const EVENT_COUNT = 51;
-    const TROPHY_COUNT = 290;
+    const TROPHY_COUNT = 293;
 
     function formatPercent(value: number): string {
         return `${Math.round(value * 100) / 100}%`;
