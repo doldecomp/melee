@@ -98,12 +98,7 @@ jobs:
       run: ln -s /orig .
     - name: Build
       run: |
-        args='\
-        --compilers /compilers\
-        --max-errors 1\
-        --require-protos\
-        --verbose\
-        --version ${{matrix.version}}'
+        args='--compilers /compilers --max-errors 1 --require-protos --verbose --version ${{matrix.version}}'
         if [ -z '${{matrix.options}}' ]; then
           args="--map $args"
         fi
