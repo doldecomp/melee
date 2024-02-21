@@ -513,7 +513,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gr/grtpeach.c.o\
     $(BUILD_DIR)/src/melee/gr/grtpichu.c.o\
     $(BUILD_DIR)/src/melee/gr/grtpikachu.c.o\
-    $(BUILD_DIR)/asm/melee/gr/grtpurin.s.o\
+    $(BUILD_DIR)/src/melee/gr/grtpurin.c.o\
     $(BUILD_DIR)/src/melee/gr/grtsamus.c.o\
     $(BUILD_DIR)/src/melee/gr/grtseak.c.o\
     $(BUILD_DIR)/src/melee/gr/grtyoshi.c.o\

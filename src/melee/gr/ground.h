@@ -74,7 +74,7 @@
 /* 1C2D24 */ bool Ground_801C2D24(enum_t, Vec3*);
 /* 1C2ED0 */ bool Ground_801C2ED0(HSD_JObj*, s32);
 /* 1C2FE0 */ void Ground_801C2FE0(HSD_GObj*);
-/* 1C3128 */ bool Ground_801C3128(s32, void (*)(s16));
+/* 1C3128 */ bool Ground_801C3128(s32, void (*)(s32));
 /* 1C3214 */ bool Ground_801C3214(int);
 /* 1C3260 */ bool Ground_801C3260(s32);
 /* 1C32AC */ void Ground_801C32AC(s32);
