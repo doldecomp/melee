@@ -7061,7 +7061,7 @@
 	.4byte grPushOn_803E7B10
 	.4byte grTMr_803E85A4
 	.4byte grTCa_803E8664
-	.4byte grTCl_803E872C
+	.4byte grTCLink_803E872C
 	.4byte grTDk_803E87EC
 	.4byte grTDr_803E88AC
 	.4byte grTFc_803E8974
