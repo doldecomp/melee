@@ -78,7 +78,7 @@
 /* 1C3214 */ bool Ground_801C3214(int);
 /* 1C3260 */ bool Ground_801C3260(s32);
 /* 1C32AC */ void Ground_801C32AC(s32);
-/* 1C32D4 */ s32 Ground_801C32D4(s16, s16);
+/* 1C32D4 */ s32 Ground_801C32D4(s32, s32);
 /* 1C33C0 */ s32 Ground_801C33C0(s32, s32);
 /* 1C36F4 */ void Ground_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk);
 /* 1C3880 */ void Ground_801C3880(f32);

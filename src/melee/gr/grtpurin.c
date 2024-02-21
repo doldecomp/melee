@@ -153,7 +153,7 @@ void grTPurin_80223388(HSD_GObj* gobj)
     Vec3 vec;
     s16 values[8] = { 0x0037, 0x0039, 0x003B, 0x003D,
                       0x003F, 0x0041, 0x0043, 0xFFFF };
-    s16 value;
+    s32 value;
 
     for (pos = &values[0]; (value = *pos) != -1; ++pos) {
         res = Ground_801C32D4(2, value);

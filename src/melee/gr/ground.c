@@ -1277,7 +1277,7 @@ void Ground_801C32AC(s32 arg0)
     Ground_801C3128(arg0, mpLib_80057424);
 }
 
-s32 Ground_801C32D4(s16 arg0, s16 arg1)
+s32 Ground_801C32D4(s32 arg0, s32 arg1)
 {
     /// @todo Shared @c inline with #Ground_801C33C0.
     u8 _[4];
