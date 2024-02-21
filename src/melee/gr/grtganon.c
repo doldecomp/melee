@@ -7,6 +7,7 @@
 #include "gr/types.h"
 #include "lb/lb_00F9.h"
 #include "lb/types.h"
+#include "mp/mplib.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
