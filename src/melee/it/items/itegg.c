@@ -20,39 +20,40 @@ struct ItEggAttrs {
 
 void it_80288EFC(HSD_GObj*); /* static */
 
-Item_GObj* it_80288C88(HSD_GObj* arg_gobj, Vec3* arg1, Vec3* arg2, f32 dir)
+Item_GObj* it_80288C88(HSD_GObj* arg_gobj, Vec3* pos, Vec3* vel, f32 dir)
 {
     SpawnItem spawn;
-    Item* temp_r29;
-    Item_GObj* var_r30;
+    Item* item;
     u8 _[4] = { 0 };
 
-    var_r30 = NULL;
+    Item_GObj* ret_gobj = NULL;
     if (arg_gobj != NULL) {
+        item = GET_ITEM(arg_gobj);
         spawn.kind = It_Kind_Egg;
-        spawn.prev_pos = *arg1;
+        spawn.prev_pos = *pos;
         spawn.prev_pos.z = 0.0F;
         spawn.pos = spawn.prev_pos;
         spawn.facing_dir = dir;
         spawn.x3C_damage = 0;
-        spawn.vel = *arg2;
-        spawn.x0_parent_gobj = GET_ITEM(arg_gobj)->owner;
+        spawn.vel = *vel;
+        spawn.x0_parent_gobj = item->owner;
         spawn.x4_parent_gobj2 = arg_gobj;
         spawn.x44_flag.bits.b0 = 1;
         spawn.x40 = 0;
 
-        var_r30 = Item_80268B18(&spawn);
-        if (var_r30 != NULL) {
-            temp_r29 = var_r30->user_data;
-            temp_r29->xDD0_flag.bits.b6 = 1;
-            temp_r29->xD40 = 0.0F;
-            it_80279BBC(temp_r29);
-            if (!(temp_r29->xDD0_flag.bits.b7 & 1)) {
-                it_802756E0((HSD_GObj*) var_r30);
+        ret_gobj = Item_80268B18(&spawn);
+        if (ret_gobj != NULL) {
+            Item* item;
+            item = ret_gobj->user_data;
+            item->xDD0_flag.bits.b6 = 1;
+            item->xD40 = 0.0F;
+            it_80279BBC(item);
+            if (!(item->xDD0_flag.bits.b7 & 1)) {
+                it_802756E0((HSD_GObj*) ret_gobj);
             }
         }
     }
-    return var_r30;
+    return ret_gobj;
 }
 
 void it_80288D98(Item_GObj* gobj)
