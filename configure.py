@@ -812,7 +812,7 @@ config.libs = [
             Object(Matching, "melee/gr/grtpeach.c"),
             Object(Matching, "melee/gr/grtpichu.c"),
             Object(Matching, "melee/gr/grtpikachu.c"),
-            Object(NonMatching, "melee/gr/grtpurin.c"),
+            Object(Matching, "melee/gr/grtpurin.c"),
             Object(Matching, "melee/gr/grtsamus.c"),
             Object(Matching, "melee/gr/grtseak.c"),
             Object(Matching, "melee/gr/grtyoshi.c"),

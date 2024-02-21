@@ -117,7 +117,7 @@ static StageData* Ground_803DFEDC[] = {
     &grZe_Route_803E5E0C, &grBb_Route_803E617C, &grTe_803E5764,
     &grNBa_803E7E38,      &grNLa_803E7F90,      &grFigureGet_803E7D34,
     &grPushOn_803E7B10,   &grTMr_803E85A4,      &grTCa_803E8664,
-    &grTCLink_803E872C,      &grTDk_803E87EC,      &grTDr_803E88AC,
+    &grTCLink_803E872C,   &grTDk_803E87EC,      &grTDr_803E88AC,
     &grTFc_803E8974,      &grTFx_803E8A34,      &grTIc_803E8AF4,
     &grTKb_803E8C0C,      &grTKp_803E8CCC,      &grTLk_803E8D8C,
     &grTLg_803E8E4C,      &grTMs_803E8F0C,      &grTMewtwo_803E8FCC,
@@ -1216,7 +1216,7 @@ void Ground_801C2FE0(HSD_GObj* arg0)
     NOT_IMPLEMENTED;
 }
 
-bool Ground_801C3128(s32 arg0, void (*arg1)(s16))
+bool Ground_801C3128(s32 arg0, void (*arg1)(s32))
 {
     /// @todo Unused variable; is this an argument?
     StageData* stage_data;
@@ -1277,7 +1277,7 @@ void Ground_801C32AC(s32 arg0)
     Ground_801C3128(arg0, mpLib_80057424);
 }
 
-s32 Ground_801C32D4(s32 arg0, s32 arg1)
+s32 Ground_801C32D4(s16 arg0, s16 arg1)
 {
     /// @todo Shared @c inline with #Ground_801C33C0.
     u8 _[4];
