@@ -98,9 +98,9 @@ jobs:
       run: ln -s /orig .
     - name: Build
       run: |
-        args='--compilers /compilers --max-errors 1 --require-protos --verbose --version ${{matrix.version}}'
+        args='--compilers /compilers --max-errors 0 --verbose --version ${{matrix.version}}'
         if [ -z '${{matrix.options}}' ]; then
-          args="--map $args"
+          args="--map --require-protos $args"
         fi
         echo "$args" | xargs python configure.py
         echo "${{matrix.options}}" | xargs ninja
