@@ -1012,7 +1012,7 @@ def calculate_progress(config: ProjectConfig) -> None:
         print(f"    Data: {unit.data_progress} / {unit.data_total} bytes")
         if config.progress_use_fancy:
             print(
-                "\nYou have {} out of {} {} and collected {} out of {} {}.".format(
+                "\nYou have {} of {} {} and completed {} out of {} {}.".format(
                     math.floor(code_frac * unit.code_fancy_frac),
                     unit.code_fancy_frac,
                     unit.code_fancy_item,
