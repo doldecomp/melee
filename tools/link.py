@@ -30,7 +30,6 @@ def link(path: Path):
 
     def edit_mk(s: str) -> Optional[str]:
         if src_str in s:
-            print(s)
             return None
         return s.replace(asm_str, src_str)
 
