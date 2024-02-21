@@ -118,4 +118,9 @@ typedef struct {
     s32 timer;
 } ItPokemonVars;
 
+typedef struct {
+    int x0;
+    HSD_JObj* jobj;
+} itTargetVars;
+
 #endif
