@@ -196,11 +196,10 @@ bool it_80289150(HSD_GObj* gobj)
 
 void it_80289158(HSD_GObj* gobj)
 {
-    u8 _[4] = { 0 };
-    HSD_JObj* hsd_obj = gobj->hsd_obj;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     Item* item = GET_ITEM(gobj);
 
-    HSD_JObjSetFlagsAll(hsd_obj, JOBJ_HIDDEN);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     it_802756D0(gobj);
     item->x40_vel.x = 0.0F;
     item->x40_vel.y = 0.0F;
