@@ -489,7 +489,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_ThrownKirby.c"),
             Object(NonMatching, "melee/ft/ft_3C61.c"),
             # Main again
-            Object(NonMatching, "melee/ft/ftdemo.c"),
+            Object(Matching, "melee/ft/ftdemo.c"),
             Object(Matching, "melee/ft/ft_0BEC.c"),
             Object(Matching, "melee/ft/ft_0BEF.c"),
             Object(Matching, "melee/ft/ft_0BF0.c"),

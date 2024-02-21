@@ -165,7 +165,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/ft_3C61.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/ft/ftdemo.s.o\
+    $(BUILD_DIR)/src/melee/ft/ftdemo.c.o\
     $(BUILD_DIR)/src/melee/ft/ft_0BEC.c.o\
     $(BUILD_DIR)/src/melee/ft/ft_0BEF.c.o\
     $(BUILD_DIR)/src/melee/ft/ft_0BF0.c.o\

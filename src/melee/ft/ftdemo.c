@@ -41,6 +41,15 @@ static HSD_GObjEvent on_create_fighter[16] = {
     ftCo_800C7294, ftCo_800C7308, ftCo_800C739C, ftCo_800C7434
 };
 
+static void initFighter(HSD_GObj* gobj, plAllocInfo2* alloc_info)
+{
+    struct S_TEMP1 temp1;
+    temp1.fighterKind = alloc_info->internal_id;
+    temp1.playerID = alloc_info->slot;
+    temp1.flags_b0 = alloc_info->bits.has_transformation;
+    Fighter_UnkInitLoad_80068914(gobj, &temp1);
+}
+
 Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
 {
     Fighter_GObj* gobj = GObj_Create(4, 8, 0);
@@ -50,13 +59,7 @@ Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
         fp->x2D8_specialAttributes2 = HSD_ObjAlloc(&Fighter_80458FFC);
         GObj_InitUserData(gobj, 4, Fighter_Unload_8006DABC, fp);
         ftData_8008572C(alloc_info->internal_id);
-        {
-            struct S_TEMP1 temp1;
-            temp1.fighterKind = alloc_info->internal_id;
-            temp1.playerID = alloc_info->slot;
-            temp1.flags_b0 = alloc_info->bits.b0;
-            Fighter_UnkInitLoad_80068914(gobj, &temp1);
-        }
+        initFighter(gobj, alloc_info);
         fp->x18 = 14;
         fp->x1C_actionStateList = ftData_803C52A0;
         fp->x20_actionStateList = ftData_UnkMotionStates0[fp->kind];
@@ -70,17 +73,16 @@ Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
         }
         Fighter_UnkUpdateCostumeJoint_800686E4(gobj);
         {
-            enum_t alloc_unk8 = alloc_info->unk8;
             enum_t a, b;
-            if (alloc_unk8 >= 9) {
-                ftData_UnkDemoCallbacks0[fp->kind](alloc_unk8, &a, &b);
-            } else if (alloc_unk8 >= 8) {
+            if (alloc_info->unk8 >= 9) {
+                ftData_UnkDemoCallbacks0[fp->kind](alloc_info->unk8, &a, &b);
+            } else if (alloc_info->unk8 >= 8) {
                 b = 13;
                 a = 13;
-            } else if (alloc_unk8 >= 7) {
+            } else if (alloc_info->unk8 >= 7) {
                 b = 12;
                 a = 12;
-            } else if (alloc_unk8 >= 5) {
+            } else if (alloc_info->unk8 >= 5) {
                 a = 10;
                 b = 11;
             } else {
