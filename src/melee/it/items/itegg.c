@@ -24,7 +24,6 @@ Item_GObj* it_80288C88(HSD_GObj* arg_gobj, Vec3* pos, Vec3* vel, f32 dir)
 {
     SpawnItem spawn;
     Item* item;
-    u8 _[4] = { 0 };
 
     Item_GObj* ret_gobj = NULL;
     if (arg_gobj != NULL) {
@@ -44,7 +43,7 @@ Item_GObj* it_80288C88(HSD_GObj* arg_gobj, Vec3* pos, Vec3* vel, f32 dir)
         ret_gobj = Item_80268B18(&spawn);
         if (ret_gobj != NULL) {
             Item* item;
-            item = ret_gobj->user_data;
+            item = GET_ITEM(ret_gobj);
             item->xDD0_flag.bits.b6 = 1;
             item->xD40 = 0.0F;
             it_80279BBC(item);
