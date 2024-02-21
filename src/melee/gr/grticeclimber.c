@@ -60,7 +60,7 @@ StageData grTIc_803E8AF4 = {
     (1 << 0),
 };
 
-void grTIceClimber_80220F10(bool arg0) {}
+void grTIceClimber_80220F10(bool unused) {}
 
 void grTIceClimber_80220F14(void)
 {
@@ -90,9 +90,7 @@ bool grTIceClimber_80220FAC(void)
 
 HSD_GObj* grTIceClimber_80220FB4(int id)
 {
-    /// @todo Cannot be moved below @c cb due to an inline
     HSD_GObj* gobj;
-
     StageCallbacks* cb = &grTIc_803E8A98[id];
     gobj = Ground_801C14D0(id);
 
@@ -127,14 +125,14 @@ void grTIceClimber_8022109C(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grTIceClimber_802210C8(HSD_GObj* arg0)
+bool grTIceClimber_802210C8(HSD_GObj* gobj)
 {
     return false;
 }
 
-void grTIceClimber_802210D0(HSD_GObj* arg0) {}
+void grTIceClimber_802210D0(HSD_GObj* gobj) {}
 
-void grTIceClimber_802210D4(HSD_GObj* arg0) {}
+void grTIceClimber_802210D4(HSD_GObj* gobj) {}
 
 void grTIceClimber_802210D8(HSD_GObj* gobj)
 {
@@ -143,25 +141,25 @@ void grTIceClimber_802210D8(HSD_GObj* gobj)
     grTIceClimber_80221288(gobj);
 }
 
-bool grTIceClimber_8022114C(HSD_GObj* arg0)
+bool grTIceClimber_8022114C(HSD_GObj* gobj)
 {
     return false;
 }
 
-void grTIceClimber_80221154(HSD_GObj* arg0)
+void grTIceClimber_80221154(HSD_GObj* gobj)
 {
     lb_800115F4();
-    Ground_801C2FE0(arg0);
+    Ground_801C2FE0(gobj);
 }
 
-void grTIceClimber_80221188(HSD_GObj* arg0) {}
+void grTIceClimber_80221188(HSD_GObj* gobj) {}
 
 void grTIceClimber_8022118C(HSD_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool grTIceClimber_802211DC(HSD_GObj* arg0)
+bool grTIceClimber_802211DC(HSD_GObj* gobj)
 {
     return false;
 }
@@ -171,7 +169,7 @@ void grTIceClimber_802211E4(HSD_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-void grTIceClimber_80221204(HSD_GObj* arg0) {}
+void grTIceClimber_80221204(HSD_GObj* gobj) {}
 
 void grTIceClimber_80221208(HSD_GObj* gobj)
 {
@@ -214,12 +212,12 @@ void grTIceClimber_80221288(HSD_GObj* ground_gobj)
     }
 }
 
-lb_UnkAnimStruct* grTIceClimber_80221354(enum_t arg0)
+lb_UnkAnimStruct* grTIceClimber_80221354(enum_t gobj)
 {
     return NULL;
 }
 
-bool grTIceClimber_8022135C(Vec3* arg0, int arg1, HSD_JObj* arg2)
+bool grTIceClimber_8022135C(Vec3* vec, int arg1, HSD_JObj* jobj)
 {
     return true;
 }

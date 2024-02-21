@@ -9,7 +9,7 @@
 #include <placeholder.h>
 
 /* 1C8DE0 */ void grMaterial_801C8DE0(s32, f32, f32, f32, f32, f32, f32, f32);
-/* 220F10 */ void grTIceClimber_80220F10(int);
+/* 220F10 */ void grTIceClimber_80220F10(bool);
 /* 220F14 */ void grTIceClimber_80220F14(void);
 /* 220F84 */ void grTIceClimber_80220F84(void);
 /* 220F88 */ void grTIceClimber_80220F88(void);

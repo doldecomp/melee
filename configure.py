@@ -796,7 +796,7 @@ config.libs = [
             # Break the Targets stages
             Object(Matching, "melee/gr/grtmario.c"),
             Object(Matching, "melee/gr/grtcaptain.c"),
-            Object(NonMatching, "melee/gr/grtclink.c"),
+            Object(Matching, "melee/gr/grtclink.c"),
             Object(Matching, "melee/gr/grtdonkey.c"),
             Object(Matching, "melee/gr/grtdrmario.c"),
             Object(Matching, "melee/gr/grtfalco.c"),
