@@ -83,7 +83,7 @@ We use Python for our command line tooling. It is recommended that you use a [vi
         ```
 1. After that, you can install or update our packages with:
     ```sh
-    pip install -r requirements.txt
+    pip install -r reqs/decomp.txt
     ```
 1. Now you can run `decomp.py` to decomp a function using [m2c](https://github.com/matt-kempster/m2c). Pass it `-h` to see all the options.
     ```sh

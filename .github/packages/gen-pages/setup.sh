@@ -46,7 +46,7 @@ popd
 # Create and update Python venv
 python -m venv --upgrade-deps /opt/venv
 . /opt/venv/bin/activate
-pip install --no-cache-dir -r /tmp/requirements.txt
+pip install --no-cache-dir -r /tmp/reqs/gen-pages.txt
 
 # Install melee compiler (for checking ctx.c)
 curl -L "$MELEE_COMPILERS_URL" |

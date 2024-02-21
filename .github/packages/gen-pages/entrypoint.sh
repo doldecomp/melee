@@ -7,7 +7,7 @@ ln -s /opt/mwcc_compiler tools/
 
 cp -R /opt/venv .venv
 . .venv/bin/activate
-pip install --no-cache-dir -r requirements.txt
+pip install --no-cache-dir -r reqs/gen-pages.txt
 
 touch /output/.nojekyll
 

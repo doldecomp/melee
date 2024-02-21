@@ -3,7 +3,6 @@ ARG WIBO_PATH="/usr/local/sbin/wibo"
 COPY --from=ghcr.io/decompals/wibo:latest \
     ${WIBO_PATH} \
     ${WIBO_PATH}
-COPY requirements.txt /tmp/
 ARG DEVKITPRO=/opt/devkitpro
 ARG DEVKITPPC=${DEVKITPRO}/devkitPPC
 ENV DEBIAN_FRONTEND=noninteractive
@@ -30,6 +29,7 @@ ENTRYPOINT entrypoint.sh
 FROM linux-rw AS gen-pages
 COPY .github/packages/gen-pages/setup.sh /usr/local/bin
 COPY tools/progress-site/package*.json /tmp
+COPY /reqs/gen-pages.txt /tmp/reqs/
 RUN setup.sh
 COPY .github/packages/gen-pages/entrypoint.sh /usr/local/bin
 ENTRYPOINT entrypoint.sh
