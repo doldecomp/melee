@@ -306,7 +306,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_SpecialN.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_SpecialS.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_SpecialHi.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftSamus/ftSs_SpecialLw_1.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_SpecialLw_1.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftYoshi/ftYs_Init.s.o\
