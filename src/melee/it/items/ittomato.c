@@ -5,6 +5,7 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 
 /* 2841B4 */ static Item_GObj* it_802841B4(Item_GObj* gobj, Vec3* arg1,
@@ -58,7 +59,7 @@ Item_GObj* it_802841B4(Item_GObj* gobj, Vec3* pos, s32 arg2)
     }
     if (item_gobj != NULL) {
         Item* it = GET_ITEM(item_gobj);
-        it->xDD4_itemVar.MaximTomato.x4.b0 = true;
+        it->xDD4_itemVar.MaximTomato.x4.bits.b0 = true;
         it->xDD4_itemVar.MaximTomato.x8 = arg2;
     }
     return item_gobj;
@@ -71,28 +72,26 @@ void it_8028428C(Item_GObj* gobj)
         M2C_FIELD(ip->xC4_article_data->x4_specialAttributes, s32*, 4);
 }
 
-void it_802842A4(Item_GObj* arg0)
+void it_802842A4(Item_GObj* gobj)
 {
-    Item* item = GET_ITEM(arg0);
-    void* temp_r30 = item->xC4_article_data->x4_specialAttributes;
+    Item* item = GET_ITEM(gobj);
+    MaximTomatoSpecialAttr* sa = item->xC4_article_data->x4_specialAttributes;
 
-    it_8026B390(arg0);
-    item->x40_vel.x = 0;
-    item->x40_vel.y = 0;
-    item->x40_vel.z = 0;
+    it_8026B390(gobj);
+    item->x40_vel.x = 0.0F;
+    item->x40_vel.y = sa->x14;
+    item->x40_vel.z = 0.0F;
 
-    item->xDD4_itemVar.capsule.x0 = M2C_FIELD(temp_r30, s32*, 0);
-    // item->xDD4_itemVar.Egg.filler[4] &= ~0x80;
-    item->xDD4_itemVar.star.x8 = 0.0F;
+    item->xDD4_itemVar.MaximTomato.heal_amount = sa->x0;
+    item->xDD4_itemVar.MaximTomato.x4.bits.b0 = false;
+    item->xDD4_itemVar.MaximTomato.x8 = 0;
 
-    it_80284358(arg0);
+    it_80284358(gobj);
 }
 
-void it_80284324(Item_GObj* arg0)
+void it_80284324(Item_GObj* gobj)
 {
-    Item* temp_r4;
-
-    temp_r4 = arg0->user_data;
+    Item* item = GET_ITEM(gobj);
     // if ((((temp_r4->xDD4_itemVar.Egg.filler[4] << 0x18) & 0xC0000000) >>
     //      0x1F) != 0)
     // {

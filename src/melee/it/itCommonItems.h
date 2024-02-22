@@ -63,19 +63,31 @@ typedef struct HeartContainerVars {
 } HeartContainerVars;
 
 typedef struct MaximTomatoVars {
-    s32 x0;
-    struct {
-        u8 b0 : 1;
-        u8 b1 : 1;
-        u8 b2 : 1;
-        u8 b3 : 1;
-        u8 b4 : 1;
-        u8 b5 : 1;
-        u8 b6 : 1;
-        u8 b7 : 1;
+    s32 heal_amount;
+    union {
+        struct {
+            u8 b0 : 1;
+            u8 b1 : 1;
+            u8 b2 : 1;
+            u8 b3 : 1;
+            u8 b4 : 1;
+            u8 b5 : 1;
+            u8 b6 : 1;
+            u8 b7 : 1;
+        } bits;
+        u32 flags;
     } x4;
     s32 x8;
 } MaximTomatoVars;
+
+typedef struct {
+    int x0;
+    int x4;
+    int x8;
+    int xC;
+    int x10;
+    f32 x14;
+} MaximTomatoSpecialAttr;
 
 typedef struct FoodVars {
     s32 xDD4_unk;
