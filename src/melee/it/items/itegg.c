@@ -95,7 +95,7 @@ inline s32 attrRand(EggVars* attrs)
 
 bool it_80288DC4(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM((HSD_GObj*) gobj);
+    Item* ip = GET_ITEM(gobj);
     EggVars* attrs = ip->xC4_article_data->x4_specialAttributes;
     if (attrRand(attrs) == 0) {
         return true;
