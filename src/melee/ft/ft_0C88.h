@@ -11,7 +11,7 @@
 /* 0C88D4 */ void ftCo_800C88D4(ftCo_GObj* gobj, int, bool);
 /* 0C89A0 */ void ftCo_800C89A0(ftCo_GObj* gobj);
 /* 0C8A64 */ void ftCo_800C8A64(ftCo_GObj* gobj);
-/* 0C8AF0 */ UNK_RET ftCo_800C8AF0(UNK_PARAMS);
+/* 0C8AF0 */ void ftCo_800C8AF0(Fighter*);
 /* 0C8B2C */ bool ftCo_800C8B2C(Fighter*, bool, bool);
 /* 0C8B60 */ void ftCo_800C8B60(ftCo_Fighter* fp, int, s8);
 /* 0C8B74 */ void ftCo_800C8B74(ftCo_GObj* gobj);
@@ -20,7 +20,7 @@
 /* 0C8C44 */ void ftCo_DownSpot_Phys(ftCo_GObj* gobj);
 /* 0C8C64 */ void ftCo_DownSpot_Coll(ftCo_GObj* gobj);
 /* 0C8C84 */ void ftCo_800C8C84(ftCo_GObj* gobj);
-/* 0C8D00 */ UNK_RET ftCo_800C8D00(ftCo_GObj* gobj);
+/* 0C8D00 */ void ftCo_800C8D00(ftCo_GObj* gobj);
 /* 0C8F6C */ void ftCo_800C8F6C(void);
 /* 0C8FC4 */ void ftCo_800C8FC4(ftCo_GObj* gobj);
 /* 0C9034 */ void ftCo_800C9034(ftCo_GObj* gobj);

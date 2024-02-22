@@ -1,5 +1,8 @@
+#include <dolphin/mtx/forward.h>
+
 #include "lbgx.h"
 
+#include <placeholder.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXLight.h>
@@ -10,20 +13,9 @@
 #include <dolphin/gx/GXVert.h>
 #include <baselib/cobj.h>
 
-bool lbGx_8001E2F8(f32* arg0, f32* arg1, u8* arg2, u32 arg3, f32 argf1)
+bool lbGx_8001E2F8(Vec4* arg0, Vec3* arg1, U8Vec4* arg2, uint arg3,
+                   float argf1)
 {
-    HSD_CObj* cobj;
-    f32 temp_f1;
-    f32 temp_f1_2;
-    f32 temp_f2;
-    f32 temp_f2_2;
-    f32 temp_f3;
-    f32 temp_f4;
-    f32 temp_f4_2;
-    f32 temp_f5;
-    u8 r0, r5, r6, r7;
-    u8 _[16];
-
     if (arg3 == 2) {
         GXSetColorUpdate(1);
         GXSetAlphaUpdate(0);
@@ -34,50 +26,68 @@ bool lbGx_8001E2F8(f32* arg0, f32* arg1, u8* arg2, u32 arg3, f32 argf1)
         GXSetNumTexGens(0);
         GXSetTevClampMode(0, 0);
         GXSetNumTevStages(1);
-        GXSetTevOrder(0, 0xff, 0xff, 4);
+        GXSetTevOrder(0, 255, 255, 4);
         GXSetTevOp(0, 4);
         GXSetNumChans(1);
         GXSetChanCtrl(4, 0, 0, 1, 0, 0, 2);
         GXSetCullMode(0);
         GXClearVtxDesc();
         GXSetVtxAttrFmt(0, 9, 1, 4, 0);
-        GXSetVtxAttrFmt(0, 0xb, 1, 5, 0);
+        GXSetVtxAttrFmt(0, 11, 1, 5, 0);
         GXSetVtxDesc(9, 1);
-        GXSetVtxDesc(0xb, 1);
-        cobj = HSD_CObjGetCurrent();
-        GXLoadPosMtxImm(HSD_CObjGetViewingMtxPtrDirect(cobj), 0);
-        GXSetCurrentMtx(0);
-        GXBegin(0x98, 0, 5);
-        temp_f4 = arg0[0] * argf1 + arg1[0];
-        temp_f2 = arg0[2];
-        temp_f1 = arg1[1] + arg0[1];
-        temp_f3 = arg0[3];
-        temp_f5 = temp_f4 + temp_f2;
-        temp_f2_2 = temp_f4 - temp_f2;
-        temp_f4_2 = temp_f3 + temp_f1;
-        temp_f1_2 = temp_f1 - temp_f3;
-        GXPosition3f32(temp_f5, temp_f4_2, 0.0f);
-        r7 = arg2[3];
-        r6 = arg2[2];
-        r5 = arg2[1];
-        r0 = arg2[0];
-        GXPosition2u8(r0, r5);
-        GXPosition2u8(r6, r7);
-        GXPosition3f32(temp_f2_2, temp_f4_2, 0.0f);
-        GXPosition2u8(r0, r5);
-        GXPosition2u8(r6, r7);
-        GXPosition3f32(temp_f5, temp_f1_2, 0.0f);
-        GXPosition2u8(r0, r5);
-        GXPosition2u8(r6, r7);
-        GXPosition3f32(temp_f2_2, temp_f4_2, 0.0f);
-        GXPosition2u8(r0, r5);
-        GXPosition2u8(r6, r7);
-        GXPosition3f32(temp_f2_2, temp_f1_2, 0.0f);
-        GXPosition2u8(r0, r5);
-        GXPosition2u8(r6, r7);
-        GXEnd();
-        return 1;
+        GXSetVtxDesc(11, 1);
+        {
+            HSD_CObj* cobj = HSD_CObjGetCurrent();
+            GXLoadPosMtxImm(HSD_CObjGetViewingMtxPtrDirect(cobj), 0);
+            GXSetCurrentMtx(0);
+            GXBegin(152, 0, 5);
+            {
+                float temp_f1;
+                float temp_f1_2;
+                float temp_f2;
+                float temp_f2_2;
+                float temp_f3;
+                float temp_f4;
+                float temp_f4_2;
+                float temp_f5;
+                PAD_STACK(16);
+
+                temp_f4 = arg0->x * argf1 + arg1->x;
+                temp_f2 = arg0->z;
+                temp_f1 = arg1->y + arg0->y;
+                temp_f3 = arg0->w;
+                temp_f5 = temp_f4 + temp_f2;
+                temp_f2_2 = temp_f4 - temp_f2;
+                temp_f4_2 = temp_f3 + temp_f1;
+                temp_f1_2 = temp_f1 - temp_f3;
+                GXPosition3f32(temp_f5, temp_f4_2, 0.0f);
+                {
+                    // Not a #U8Vec4 (or other struct)? Bitfields?
+                    u8 v_x, v_y, v_z, v_w;
+                    v_w = arg2->w;
+                    v_z = arg2->z;
+                    v_y = arg2->y;
+                    v_x = arg2->x;
+                    GXPosition2u8(v_x, v_y);
+                    GXPosition2u8(v_z, v_w);
+                    GXPosition3f32(temp_f2_2, temp_f4_2, 0.0f);
+                    GXPosition2u8(v_x, v_y);
+                    GXPosition2u8(v_z, v_w);
+                    GXPosition3f32(temp_f5, temp_f1_2, 0.0f);
+                    GXPosition2u8(v_x, v_y);
+                    GXPosition2u8(v_z, v_w);
+                    GXPosition3f32(temp_f2_2, temp_f4_2, 0.0f);
+                    GXPosition2u8(v_x, v_y);
+                    GXPosition2u8(v_z, v_w);
+                    GXPosition3f32(temp_f2_2, temp_f1_2, 0.0f);
+                    GXPosition2u8(v_x, v_y);
+                    GXPosition2u8(v_z, v_w);
+                    GXEnd();
+                    return true;
+                }
+            }
+        }
     }
 
-    return 0;
+    return false;
 }

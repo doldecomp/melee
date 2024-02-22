@@ -9,9 +9,16 @@ use crate::{address::Address, scratch::Scratch};
 use anyhow::{bail, Result};
 use clap::{Parser, Subcommand};
 use decompme_api::Completion;
+use dtk_config::addr_to_symbol;
 use env_logger;
 use rayon::prelude::*;
-use std::process;
+use scratch::try_parse_addr;
+use std::{
+    fs::{self, File},
+    io::{BufWriter, Write},
+    path::PathBuf,
+    process,
+};
 use tabled::{
     builder::Builder,
     settings::{object::Columns, Alignment, Style},
@@ -42,6 +49,10 @@ enum Commands {
         from: Option<Url>,
     },
     Update,
+    Replace {
+        #[arg(required = true)]
+        paths: Vec<PathBuf>,
+    },
 }
 
 fn try_main(args: ProgramArgs) -> Result<()> {
@@ -52,6 +63,7 @@ fn try_main(args: ProgramArgs) -> Result<()> {
         Refresh => refresh()?,
         Seed { from } => seed(from)?,
         Update => update()?,
+        Replace { paths } => replace(paths)?,
     }
     Result::Ok(())
 }
@@ -147,6 +159,51 @@ fn seed(from: Option<Url>) -> Result<()> {
 
 fn update() -> Result<()> {
     decompme_api::seed_loop(None, true)
+}
+
+fn replace(paths: Vec<PathBuf>) -> Result<()> {
+    for path in paths {
+        let s = fs::read_to_string(&path)?;
+        let f = File::create(&path)?;
+        let mut w = BufWriter::new(f);
+        replace_in_str(&mut w, &s)?;
+    }
+    Ok(())
+}
+
+fn replace_word<F: Fn(u32) -> Option<String>>(
+    word: &str,
+    lookup: F,
+) -> String {
+    try_parse_addr(word)
+        .and_then(lookup)
+        .unwrap_or_else(|| word.to_owned())
+}
+
+fn replace_in_str<W: Write>(w: &mut W, s: &str) -> Result<()> {
+    let mut word = String::new();
+    let lookup = addr_to_symbol()?;
+
+    for c in s.chars() {
+        match c {
+            'a'..='z' | 'A'..='Z' | '0'..='9' | '_' => {
+                word.push(c);
+            }
+            _ => {
+                if !word.is_empty() {
+                    w.write_all(&replace_word(&word, &lookup).as_bytes())?;
+                    word.clear();
+                }
+                w.write_all(&[c as u8])?;
+            }
+        }
+    }
+
+    if !word.is_empty() {
+        w.write_all(&replace_word(&word, &lookup).as_bytes())?;
+    }
+
+    Ok(())
 }
 
 fn main() {

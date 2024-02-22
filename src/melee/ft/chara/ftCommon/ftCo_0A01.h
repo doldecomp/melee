@@ -43,8 +43,8 @@
 /* 0A28BC */ bool ftCo_800A59C0(UNK_T);
 /* 0A28E0 */ bool ftCo_800A59E4(ftCo_Fighter* fp);
 /* 0A2924 */ UNK_RET ftCo_800A5A28(UNK_PARAMS);
-/* 0A41F4 */ UNK_RET ftCo_800B395C(UNK_PARAMS);
-/* 0A5A5C */ UNK_RET ftCo_800A5A5C(UNK_PARAMS);
+/* 0A41F4 */ bool ftCo_800B395C(ftCo_GObj* gobj, int);
+/* 0A5A5C */ void ftCo_800A5A5C(ftCo_Fighter*);
 /* 0A5A90 */ UNK_RET ftCo_800A5A90(UNK_PARAMS);
 /* 0B07FC */ void ftCo_800B3900(Fighter_GObj* gobj);
 /* 0B0858 */ UNK_RET ftCo_800B3958(UNK_PARAMS);

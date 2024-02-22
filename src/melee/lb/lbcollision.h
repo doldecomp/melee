@@ -12,7 +12,7 @@
 
 typedef struct {
     Vec3 v1;
-    f32 v2;
+    float v2;
     HSD_JObj* jobj;
 } Foo;
 
@@ -58,16 +58,18 @@ typedef struct {
 /* 009F54 */ bool lbColl_80009F54(HitCapsule* hit, u32 arg1, float arg8);
 /* 00A044 */ bool lbColl_8000A044(HitCapsule* hit, u32 arg1, float arg8);
 /* 00A10C */ UNK_RET lbColl_8000A10C(UNK_PARAMS);
-/* 00A1A8 */ UNK_RET lbColl_8000A1A8(UNK_PARAMS);
+/* 00A1A8 */ bool lbColl_8000A1A8(UNK_T, int, float scale_y);
 /* 00A244 */ bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2,
                                   float arg3);
 /* 00A460 */ bool lbColl_8000A460(Foo* hurt, u32 arg1);
 /* 00A584 */ bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2,
-                                  Mtx arg3, f32 arg8);
-/* 00A78C */ UNK_RET lbColl_8000A78C(UNK_PARAMS);
+                                  MtxPtr arg3, float arg8);
+/* 00A78C */ bool lbColl_8000A78C(HitResult* hit, u32 arg1, Mtx arg2,
+                                  float pos_z);
 /* 00A95C */ bool lbColl_8000A95C(HitResult* hit, u32 arg1, Mtx arg2,
-                                  f32 pos_z);
-/* 00AB2C */ UNK_RET lbColl_8000AB2C(UNK_PARAMS);
+                                  float pos_z);
+/* 00AB2C */ bool lbColl_8000AB2C(HitResult* hit, u32 arg1, Mtx arg2,
+                                  float pos_z);
 /* 00ACFC */ bool lbColl_8000ACFC(UNK_T, HitCapsule*);
 
 static inline bool approximatelyZero(float x)

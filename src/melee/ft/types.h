@@ -750,9 +750,9 @@ struct FighterBone {
 } SmashAttr;
 
 typedef struct itPickup {
-    /*  +0 */ Vec2 gr_light_offset[2];
-    /* +10 */ Vec2 gr_heavy_offset[2];
-    /* +20 */ Vec2 air_light_offset[2];
+    /*  +0 */ Vec4 gr_light_offset;
+    /* +10 */ Vec4 gr_heavy_offset;
+    /* +20 */ Vec4 air_light_offset;
 } itPickup;
 
 typedef struct {
@@ -1060,7 +1060,7 @@ struct Fighter {
     /*  fp+5A0 */ UNK_T x5A0;
     /*  fp+5A4 */ u8 filler_x5A4[0x5B8 - 0x5A4];
     /*  fp+5B8 */ s32 x5B8;
-    /*  fp+5BC */ s32 x5BC;
+    /*  fp+5BC */ UNK_T x5BC;
     /*  fp+598 */ u8 filler_x598[0x5C8 - 0x5C0];
     /*  fp+5A0 */ void* x5C8;
     /*  fp+5CC */ u8 filler_x5CC[0x5E8 - 0x5CC];

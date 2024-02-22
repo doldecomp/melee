@@ -54,7 +54,7 @@ bool ftCo_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
 {
     u8 _[8] = { 0 };
     itPickup* pickup;
-    Vec2* offset0;
+    Vec4* offset0;
     ftCo_Fighter* fp = gobj->user_data;
     if (Item_IsGrabbable(item_gobj) &&
         (!fp->x2222_b4 || !it_8026B47C(item_gobj)) &&
@@ -62,9 +62,9 @@ bool ftCo_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
     {
         pickup = &fp->x294_itPickup;
         if (fp->ground_or_air == GA_Ground) {
-            offset0 = &pickup->gr_light_offset[0];
+            offset0 = &pickup->gr_light_offset;
         } else {
-            offset0 = &pickup->air_light_offset[0];
+            offset0 = &pickup->air_light_offset;
         }
         {
             bool b = it_8026B2B4(item_gobj);
@@ -73,7 +73,7 @@ bool ftCo_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
             {
                 float x_range = it_8026B378(item_gobj);
                 float y_range = it_8026B384(item_gobj);
-                Vec2* offset1 = !b ? offset0 : &pickup->gr_heavy_offset[0];
+                Vec4* offset1 = !b ? offset0 : &pickup->gr_heavy_offset;
                 float x1 = offset1[1].x;
                 float x0 = (fp->facing_dir * offset1[0].x) + fp->cur_pos.x;
                 float y0 = fp->cur_pos.y + offset1[0].y;
@@ -98,11 +98,11 @@ HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
     u8 _[16] = { 0 };
     ftCo_Fighter* fp = gobj->user_data;
     itPickup* pickup = &fp->x294_itPickup;
-    Vec2* offset0;
+    Vec4* offset0;
     if (fp->ground_or_air == GA_Ground) {
-        offset0 = &pickup->gr_light_offset[0];
+        offset0 = &pickup->gr_light_offset;
     } else {
-        offset0 = &pickup->air_light_offset[0];
+        offset0 = &pickup->air_light_offset;
     }
     if (ftCo_800A2040(fp) && (signed) fp->x1A94 == 28) {
         return NULL;
@@ -120,7 +120,7 @@ HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
                     if ((unk_enum == 0 && flags & (1 << 0)) ||
                         (unk_enum == 1 && flags & (1 << 1)))
                     {
-                        Vec2* vec;
+                        Vec4* vec;
                         Vec3 it_pos;
                         it_8026B344(cur, &it_pos);
                         {
@@ -129,7 +129,7 @@ HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
                             if (unk_enum == 0) {
                                 vec = offset0;
                             } else {
-                                vec = &pickup->gr_heavy_offset[0];
+                                vec = &pickup->gr_heavy_offset;
                             }
                             {
                                 float x1 = vec[1].x;

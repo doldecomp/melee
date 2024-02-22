@@ -36,18 +36,18 @@ typedef struct _HSD_RectF32 {
 } HSD_RectF32;
 
 struct HSD_CObj {
-    HSD_Obj parent;
-    u32 flags; // 0x08
-    HSD_RectF32 viewport;
-    Scissor scissor;
-    HSD_WObj* eyepos;   // 0x24
-    HSD_WObj* interest; // 0x28
+    /*  +0 */ HSD_Obj parent;
+    /*  +8 */ u32 flags;
+    /*  +C */ HSD_RectF32 viewport;
+    /* +1C */ Scissor scissor;
+    /* +24 */ HSD_WObj* eyepos;
+    /* +28 */ HSD_WObj* interest;
     union {
-        f32 roll; // 0x2C
-        Vec3 up;  // 0x2C - 0x34
+        /* +2C */ f32 roll;
+        /* +2C */ Vec3 up;
     } u;
-    f32 near; // 0x38
-    f32 far;  // 0x3C
+    /* +38 */ f32 near;
+    /* +3C */ f32 far;
     union {
         struct {
             f32 fov;
@@ -68,10 +68,10 @@ struct HSD_CObj {
             f32 right;
         } ortho;
     } projection_param;
-    u8 projection_type; // 0x50
-    Mtx view_mtx;       // 0x54
-    HSD_AObj* aobj;     // 0x84
-    Mtx* proj_mtx;      // 0x88
+    /* +50 */ u8 projection_type;
+    /* +54 */ Mtx view_mtx;
+    /* +84 */ HSD_AObj* aobj;
+    /* +88 */ Mtx* proj_mtx;
 };
 
 struct HSD_CameraDescCommon {
