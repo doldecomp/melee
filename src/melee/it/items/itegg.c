@@ -7,7 +7,6 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
-#include "it/types.h"
 
 #include <baselib/gobj.h>
 #include <baselib/random.h>
@@ -18,8 +17,6 @@ struct ItEggAttrs {
     /* +4 */ int rand_max;
 };
 
-/* 288C88 */ Item_GObj* it_80288C88(HSD_GObj* arg_gobj, Vec3* pos, Vec3* vel,
-                                    f32 dir);
 /* 288DC4 */ static bool it_80288DC4(Item_GObj* gobj);
 /* 288E6C */ static void it_80288E6C(Item_GObj* gobj);
 /* 288EC4 */ static bool it_80288EC4(HSD_GObj* gobj);

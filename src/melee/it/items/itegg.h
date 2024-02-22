@@ -4,7 +4,10 @@
 #include "it/forward.h"
 
 #include "it/items/types.h"
+#include "it/types.h"
 
+/* 288C88 */ Item_GObj* it_80288C88(HSD_GObj* arg_gobj, Vec3* pos, Vec3* vel,
+                                    f32 dir);
 /* 288D98 */ void it_80288D98(Item_GObj*);
 /* 288F88 */ void it_80288F88(Item_GObj*);
 /* 288FBC */ void it_80288FBC(Item_GObj*);
