@@ -7,7 +7,8 @@
 #include "it/it_26B1.h"
 #include "it/item.h"
 
-/* 2841B4 */ static HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2);
+/* 2841B4 */ static Item_GObj* it_802841B4(Item_GObj* gobj, Vec3* arg1,
+                                           s32 arg2);
 /* 28428C */ static void it_8028428C(Item_GObj* gobj);
 /* 284358 */ static void it_80284358(Item_GObj* gobj);
 /* 284380 */ static bool it_80284380(HSD_GObj* gobj);
@@ -36,56 +37,31 @@ ItemStateTable it_803F5740[] = {
     { -1, it_802845E4, it_802845EC, it_802845F0 },
 };
 
-HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2)
+Item_GObj* it_802841B4(Item_GObj* gobj, Vec3* pos, s32 arg2)
 {
-    u8 sp5C;
-    s32 sp58;
-    s16 sp54;
-    f32 sp50;
-    f32 sp4C;
-    f32 sp48;
-    f32 sp44;
-    f32 sp40;
-    f32 sp3C;
-    f32 sp38;
-    f32 sp34;
-    f32 sp30;
-    f32 sp2C;
-    s32 sp20;
-    s32 sp1C;
-    s32 sp18;
-    Item* temp_r5;
-    Item_GObj* var_r3;
-    f32 temp_r0;
+    SpawnItem spawn;
+    Item_GObj* item_gobj = NULL;
 
-    var_r3 = NULL;
-    if (arg0 != 0) {
-        sp20 = 9;
-        temp_r0 = arg1->y;
-        sp38 = arg1->x;
-        sp3C = temp_r0;
-        sp40 = arg1->z;
-        sp40 = 0.0F;
-        sp2C = sp38;
-        sp30 = temp_r0;
-        sp34 = sp40;
-        sp50 = 0xBF800000;
-        sp54 = 0;
-        sp4C = 0.0F;
-        sp48 = 0.0F;
-        sp44 = 0.0F;
-        sp18 = 0;
-        sp1C = sp18;
-        sp5C = 0x80;
-        sp58 = 0;
-        var_r3 = Item_80268B18(NULL);
+    if (gobj != NULL) {
+        spawn.kind = It_Kind_Tomato;
+        spawn.prev_pos = *pos;
+        spawn.prev_pos.z = 0.0F;
+        spawn.pos = spawn.prev_pos;
+        spawn.facing_dir = -1.0F;
+        spawn.x3C_damage = 0;
+        spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
+        spawn.x0_parent_gobj = NULL;
+        spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+        spawn.x44_flag.bits.b0 = true;
+        spawn.x40 = 0;
+        item_gobj = Item_80268B18(&spawn);
     }
-    if (var_r3 != NULL) {
-        temp_r5 = var_r3->user_data;
-        // temp_r5->xDD4_itemVar.Egg.filler[4] |= 0x80;
-        temp_r5->xDD4_itemVar.star.x8 = M2C_BITWISE(f32, arg2);
+    if (item_gobj != NULL) {
+        Item* it = GET_ITEM(item_gobj);
+        it->xDD4_itemVar.MaximTomato.x4.b0 = true;
+        it->xDD4_itemVar.MaximTomato.x8 = arg2;
     }
-    return var_r3;
+    return item_gobj;
 }
 
 void it_8028428C(Item_GObj* gobj)
