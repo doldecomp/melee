@@ -707,7 +707,7 @@ typedef struct ftCo_DatAttrs {
     /* +150 fp+278 */ int x150;
     /* +154 fp+27C */ int camera_zoom_target_bone;
     /* +158 fp+280 */ Vec3 x158;
-    /* +15C fp+28C */ int x15C;
+    /* +15C fp+28C */ float x15C;
     /* +160 fp+290 */ int weight_dependent_throw_speed_flags;
 } ftCo_DatAttrs;
 
@@ -1237,12 +1237,8 @@ struct Fighter {
         /* fp+1924 */ int x1924;
         /* fp+1928 */ float x1928;
         /* fp+192C */ float x192c;
-        /* fp+1930 */ int x1930;
-        /* fp+1934 */ int x1934;
-        /* fp+1938 */ int x1938;
-        /* fp+193C */ int x193c;
-        /* fp+1940 */ int x1940;
-        /* fp+1944 */ int x1944;
+        /* fp+1930 */ Vec3 x1930;
+        /* fp+193C */ Vec3 x193c;
         /* fp+1948 */ int x1948;
         /* fp+194C */ int x194C;
         /* fp+1950 */ int x1950;
