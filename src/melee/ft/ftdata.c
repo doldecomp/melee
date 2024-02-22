@@ -7,6 +7,9 @@
 
 #include "ft_0877.h"
 
+#include "ef/efasync.h"
+#include "ft/fighter.h"
+#include "ft/ft_0852.h"
 #include "ft/ft_0BEC.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
@@ -20,6 +23,7 @@
 #include "ft/ftlipstickswing.h"
 #include "ft/ftstarrodswing.h"
 #include "ft/ftswing.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCaptain/ftCa_Init.h"
 #include "ftCaptain/ftCa_SpecialLw.h"
@@ -193,6 +197,13 @@
 #include "ftZelda/ftZd_SpecialLw.h"
 #include "ftZelda/ftZd_SpecialN.h"
 #include "ftZelda/ftZd_SpecialS.h"
+#include "lb/lbdvd.h"
+#include "pl/player.h"
+
+#include <baselib/debug.h>
+#include <baselib/objalloc.h>
+
+int ft_8045996C[FTKIND_MAX];
 
 ftData_UnkCountStruct ftData_Table_Unk0[FTKIND_MAX] = {
     { 0, 303 }, { 0, 327 }, { 0, 318 }, { 0, 337 }, { 0, 479 }, { 0, 316 },
@@ -1120,29 +1131,45 @@ HSD_GObjEvent ftData_LoadSpecialAttrs[FTKIND_MAX] = {
 };
 
 /// Standard Character .dat File Names
-char* ftData_803C1F40[FTKIND_MAX * 2] = {
-    ftMr_Init_DatFilename, ftMr_Init_DataName,    ftFx_Init_DatFilename,
-    ftFx_Init_DataName,    ftCa_Init_DatFilename, ftCa_Init_DataName,
-    ftDk_Init_DatFilename, ftDk_Init_DataName,    ftKb_Init_DatFilename,
-    ftKb_Init_DataName,    ftKp_Init_DatFilename, ftKp_Init_DataName,
-    ftLk_Init_DatFilename, ftLk_Init_DataName,    ftSk_Init_DatFilename,
-    ftSk_Init_DataName,    ftNs_Init_DatFilename, ftNs_Init_DataName,
-    ftPe_Init_DatFilename, ftPe_Init_DataName,    ftPp_Init_DatFilename,
-    ftPp_Init_DataName,    ftNn_Init_DatFilename, ftNn_Init_DataName,
-    ftPk_Init_DatFilename, ftPk_Init_DataName,    ftSs_Init_DatFilename,
-    ftSs_Init_DataName,    ftYs_Init_DatFilename, ftYs_Init_DataName,
-    ftPr_Init_DatFilename, ftPr_Init_DataName,    ftMt_Init_DatFilename,
-    ftMt_Init_DataName,    ftLg_Init_DatFilename, ftLg_Init_DataName,
-    ftMs_Init_DatFilename, ftMs_Init_DataName,    ftZd_Init_DatFilename,
-    ftZd_Init_DataName,    ftCl_Init_DatFilename, ftCl_Init_DataName,
-    ftDr_Init_DatFilename, ftDr_Init_DataName,    ftFc_Init_DatFilename,
-    ftFc_Init_DataName,    ftPc_Init_DatFilename, ftPc_Init_DataName,
-    ftGw_Init_DatFilename, ftGw_Init_DataName,    ftGn_Init_DatFilename,
-    ftGn_Init_DataName,    ftFe_Init_DatFilename, ftFe_Init_DataName,
-    ftMh_Init_DatFilename, ftMh_Init_DataName,    ftCh_Init_DatFilename,
-    ftCh_Init_DataName,    ftBo_Init_DatFilename, ftBo_Init_DataName,
-    ftGl_Init_DatFilename, ftGl_Init_DataName,    ftGk_Init_DatFilename,
-    ftGk_Init_DataName,    ftSb_Init_DatFilename, ftSb_Init_DataName,
+struct StringPair {
+    char* a;
+    char* b;
+};
+
+struct StringPair ftData_803C1F40[FTKIND_MAX] = {
+    { ftMr_Init_DatFilename, ftMr_Init_DataName },
+    { ftFx_Init_DatFilename, ftFx_Init_DataName },
+    { ftCa_Init_DatFilename, ftCa_Init_DataName },
+    { ftDk_Init_DatFilename, ftDk_Init_DataName },
+    { ftKb_Init_DatFilename, ftKb_Init_DataName },
+    { ftKp_Init_DatFilename, ftKp_Init_DataName },
+    { ftLk_Init_DatFilename, ftLk_Init_DataName },
+    { ftSk_Init_DatFilename, ftSk_Init_DataName },
+    { ftNs_Init_DatFilename, ftNs_Init_DataName },
+    { ftPe_Init_DatFilename, ftPe_Init_DataName },
+    { ftPp_Init_DatFilename, ftPp_Init_DataName },
+    { ftNn_Init_DatFilename, ftNn_Init_DataName },
+    { ftPk_Init_DatFilename, ftPk_Init_DataName },
+    { ftSs_Init_DatFilename, ftSs_Init_DataName },
+    { ftYs_Init_DatFilename, ftYs_Init_DataName },
+    { ftPr_Init_DatFilename, ftPr_Init_DataName },
+    { ftMt_Init_DatFilename, ftMt_Init_DataName },
+    { ftLg_Init_DatFilename, ftLg_Init_DataName },
+    { ftMs_Init_DatFilename, ftMs_Init_DataName },
+    { ftZd_Init_DatFilename, ftZd_Init_DataName },
+    { ftCl_Init_DatFilename, ftCl_Init_DataName },
+    { ftDr_Init_DatFilename, ftDr_Init_DataName },
+    { ftFc_Init_DatFilename, ftFc_Init_DataName },
+    { ftPc_Init_DatFilename, ftPc_Init_DataName },
+    { ftGw_Init_DatFilename, ftGw_Init_DataName },
+    { ftGn_Init_DatFilename, ftGn_Init_DataName },
+    { ftFe_Init_DatFilename, ftFe_Init_DataName },
+    { ftMh_Init_DatFilename, ftMh_Init_DataName },
+    { ftCh_Init_DatFilename, ftCh_Init_DataName },
+    { ftBo_Init_DatFilename, ftBo_Init_DataName },
+    { ftGl_Init_DatFilename, ftGl_Init_DataName },
+    { ftGk_Init_DatFilename, ftGk_Init_DataName },
+    { ftSb_Init_DatFilename, ftSb_Init_DataName },
 };
 
 HSD_GObjEvent ftData_UnkMotionStates5[FTKIND_MAX] = {
@@ -1309,50 +1336,46 @@ HSD_GObjEvent ftData_UnkCallbackPairs0[][FTKIND_MAX] = {
     }
 };
 
-struct {
-    /// Costume and Joint Strings
-    Fighter_CostumeStrings* costume_strings[FTKIND_MAX];
-    /// Animation .dat Filenames
-    char* anim_dat_filenames[FTKIND_MAX];
-} ftData_803C2360 = {
-    {
-        ftMr_Init_CostumeStrings, ftFx_Init_CostumeStrings,
-        ftCa_Init_CostumeStrings, ftDk_Init_CostumeStrings,
-        ftKb_Init_CostumeStrings, ftKp_Init_CostumeStrings,
-        ftLk_Init_CostumeStrings, ftSk_Init_CostumeStrings,
-        ftNs_Init_CostumeStrings, ftPe_Init_CostumeStrings,
-        ftPp_Init_CostumeStrings, ftNn_Init_CostumeStrings,
-        ftPk_Init_CostumeStrings, ftSs_Init_CostumeStrings,
-        ftYs_Init_CostumeStrings, ftPr_Init_CostumeStrings,
-        ftMt_Init_CostumeStrings, ftLg_Init_CostumeStrings,
-        ftMs_Init_CostumeStrings, ftZd_Init_CostumeStrings,
-        ftCl_Init_CostumeStrings, ftDr_Init_CostumeStrings,
-        ftFc_Init_CostumeStrings, ftPc_Init_CostumeStrings,
-        ftGw_Init_CostumeStrings, ftGn_Init_CostumeStrings,
-        ftFe_Init_CostumeStrings, ftMh_Init_CostumeStrings,
-        ftCh_Init_CostumeStrings, ftBo_Init_CostumeStrings,
-        ftGl_Init_CostumeStrings, ftGk_Init_CostumeStrings,
-        ftSb_Init_CostumeStrings,
-    },
-    {
-        ftMr_Init_AnimDatFilename, ftFx_Init_AnimDatFilename,
-        ftCa_Init_AnimDatFilename, ftDk_Init_AnimDatFilename,
-        ftKb_Init_AnimDatFilename, ftKp_Init_AnimDatFilename,
-        ftLk_Init_AnimDatFilename, ftSk_Init_AnimDatFilename,
-        ftNs_Init_AnimDatFilename, ftPe_Init_AnimDatFilename,
-        ftPp_Init_AnimDatFilename, ftNn_Init_AnimDatFilename,
-        ftPk_Init_AnimDatFilename, ftSs_Init_AnimDatFilename,
-        ftYs_Init_AnimDatFilename, ftPr_Init_AnimDatFilename,
-        ftMt_Init_AnimDatFilename, ftLg_Init_AnimDatFilename,
-        ftMs_Init_AnimDatFilename, ftZd_Init_AnimDatFilename,
-        ftCl_Init_AnimDatFilename, ftDr_Init_AnimDatFilename,
-        ftFc_Init_AnimDatFilename, ftPc_Init_AnimDatFilename,
-        ftGw_Init_AnimDatFilename, ftGn_Init_AnimDatFilename,
-        ftFe_Init_AnimDatFilename, ftMh_Init_AnimDatFilename,
-        ftCh_Init_AnimDatFilename, ftBo_Init_AnimDatFilename,
-        ftGl_Init_AnimDatFilename, ftGk_Init_AnimDatFilename,
-        ftSb_Init_AnimDatFilename,
-    },
+/// Costume and Joint Strings
+Fighter_CostumeStrings* ftData_803C2360[FTKIND_MAX] = {
+    ftMr_Init_CostumeStrings, ftFx_Init_CostumeStrings,
+    ftCa_Init_CostumeStrings, ftDk_Init_CostumeStrings,
+    ftKb_Init_CostumeStrings, ftKp_Init_CostumeStrings,
+    ftLk_Init_CostumeStrings, ftSk_Init_CostumeStrings,
+    ftNs_Init_CostumeStrings, ftPe_Init_CostumeStrings,
+    ftPp_Init_CostumeStrings, ftNn_Init_CostumeStrings,
+    ftPk_Init_CostumeStrings, ftSs_Init_CostumeStrings,
+    ftYs_Init_CostumeStrings, ftPr_Init_CostumeStrings,
+    ftMt_Init_CostumeStrings, ftLg_Init_CostumeStrings,
+    ftMs_Init_CostumeStrings, ftZd_Init_CostumeStrings,
+    ftCl_Init_CostumeStrings, ftDr_Init_CostumeStrings,
+    ftFc_Init_CostumeStrings, ftPc_Init_CostumeStrings,
+    ftGw_Init_CostumeStrings, ftGn_Init_CostumeStrings,
+    ftFe_Init_CostumeStrings, ftMh_Init_CostumeStrings,
+    ftCh_Init_CostumeStrings, ftBo_Init_CostumeStrings,
+    ftGl_Init_CostumeStrings, ftGk_Init_CostumeStrings,
+    ftSb_Init_CostumeStrings,
+
+};
+
+char* ftData_803C23E4[FTKIND_MAX] = {
+    ftMr_Init_AnimDatFilename, ftFx_Init_AnimDatFilename,
+    ftCa_Init_AnimDatFilename, ftDk_Init_AnimDatFilename,
+    ftKb_Init_AnimDatFilename, ftKp_Init_AnimDatFilename,
+    ftLk_Init_AnimDatFilename, ftSk_Init_AnimDatFilename,
+    ftNs_Init_AnimDatFilename, ftPe_Init_AnimDatFilename,
+    ftPp_Init_AnimDatFilename, ftNn_Init_AnimDatFilename,
+    ftPk_Init_AnimDatFilename, ftSs_Init_AnimDatFilename,
+    ftYs_Init_AnimDatFilename, ftPr_Init_AnimDatFilename,
+    ftMt_Init_AnimDatFilename, ftLg_Init_AnimDatFilename,
+    ftMs_Init_AnimDatFilename, ftZd_Init_AnimDatFilename,
+    ftCl_Init_AnimDatFilename, ftDr_Init_AnimDatFilename,
+    ftFc_Init_AnimDatFilename, ftPc_Init_AnimDatFilename,
+    ftGw_Init_AnimDatFilename, ftGn_Init_AnimDatFilename,
+    ftFe_Init_AnimDatFilename, ftMh_Init_AnimDatFilename,
+    ftCh_Init_AnimDatFilename, ftBo_Init_AnimDatFilename,
+    ftGl_Init_AnimDatFilename, ftGk_Init_AnimDatFilename,
+    ftSb_Init_AnimDatFilename,
 };
 
 /// Demo Lookup Strings
@@ -5384,3 +5407,70 @@ MotionState ftData_803C52A0[14] = {
         NULL,
     },
 };
+
+void ftData_80085560(int idx, int increment)
+{
+    ft_8045996C[idx] += increment;
+    if (ft_8045996C[idx] < 0) {
+        OSReport("fighter reference counter error!\n");
+        HSD_ASSERT(1944, 0);
+    }
+}
+
+void ftData_800855C8(enum_t id, int slot)
+{
+    u8 var_r0;
+    u8 var_r24;
+    u8 var_r25;
+
+    var_r24 = slot;
+    if (slot != 0xFF && slot >= CostumeListsForeachCharacter[id].numCostumes) {
+        var_r24 = 0;
+    }
+    if (ftData_803C1F40[id].b != 0U) {
+        lbDvd_800178E8(2, ftData_803C1F40[id].b, 4, 4, 0, 1, 4, 2, 0);
+    }
+    if (var_r24 == 0xFF) {
+        var_r24 = CostumeListsForeachCharacter[id].numCostumes;
+        var_r0 = 0;
+    } else {
+        var_r0 = var_r24;
+        var_r24 = var_r24 + 1;
+    }
+    var_r25 = var_r0;
+    while ((s32) var_r25 < var_r24) {
+        if (ftData_803C2360[id][var_r0].dat_filename != NULL) {
+            lbDvd_800178E8(2, ftData_803C2360[id][var_r0].dat_filename, 4, 4,
+                           0, 1, 3, 1, 0);
+        }
+        var_r25 += 1;
+    }
+    if (ftData_UnkBytePerCharacter[id] != -1) {
+        efAsync_8006729C();
+    }
+    if (ftData_803C23E4[id] != 0U) {
+        lbDvd_800178E8(1, ftData_803C23E4[id], 5, 5, 0, 0, 1, 8, 0);
+    }
+}
+
+void ftData_80085B10(Fighter* fp)
+{
+    FighterKind kind = fp->kind;
+    fp->x59C = HSD_ObjAlloc(&Fighter_804590AC);
+    fp->x5A0 = HSD_ObjAlloc(&Fighter_804590AC);
+    fp->x5A4 = NULL;
+    fp->x5A8 = NULL;
+    fp->x58C = ftData_Table_Unk0[kind].count;
+    ftData_80085A14(kind);
+}
+
+Fighter* ftData_80086060(struct ftData_80086060_arg0* arg0)
+{
+    if (arg0->unk4 == 11 && Player_GetPlayerSlotType(arg0->unkC) != 2) {
+        Fighter_GObj* gobj = Player_GetEntityAtIndex(arg0->unkC, 0);
+        if (gobj != NULL) {
+            return GET_FIGHTER(gobj);
+        }
+    }
+    return NULL;
+}

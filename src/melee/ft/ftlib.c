@@ -7,6 +7,7 @@
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ft_0852.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
@@ -31,11 +32,6 @@
 #include <baselib/gobj.h>
 #include <baselib/random.h>
 #include <baselib/rumble.h>
-
-extern struct {
-    void* unk0;
-    u8 unk4;
-} CostumeListsForeachCharacter[];
 
 extern s8 ftData_UnkBytePerCharacter[];
 
@@ -979,7 +975,7 @@ void ftLib_80087574(s8 arg)
     ftData_8008572C(arg);
     efAsync_8006737C(ftData_UnkBytePerCharacter[arg]);
 
-    for (i = 0; i < CostumeListsForeachCharacter[arg].unk4; i++) {
+    for (i = 0; i < CostumeListsForeachCharacter[arg].numCostumes; i++) {
         ftData_80085820(arg, i);
     }
 

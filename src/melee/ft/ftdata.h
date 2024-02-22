@@ -9,7 +9,16 @@
 
 #include <placeholder.h>
 
-/* 085560 */ void ftData_80085560(s32, bool);
+struct ftData_80086060_arg0 {
+    u32 unk0;
+    s32 unk4;
+    s32 unk8;
+    u8 unkC;
+    u8 pad[0x20];
+    s32 unk2C;
+};
+
+/* 085560 */ void ftData_80085560(int idx, int increment);
 /* 0855C8 */ void ftData_800855C8(enum_t id, int slot);
 /* 08572C */ void ftData_8008572C(s32);
 /* 08578C */ void ftData_8008578C(enum_t id, int slot);
@@ -24,7 +33,7 @@
 /* 085E50 */ u32 ftData_80085E50(Fighter*, u32);
 /* 085FD4 */ struct ftData_80085FD4_ret* ftData_80085FD4(Fighter* fp,
                                                          FtMotionId msid);
-/* 086060 */ UNK_RET ftData_80086060(UNK_PARAMS);
+/* 086060 */ Fighter* ftData_80086060(struct ftData_80086060_arg0* arg0);
 /* 3C10D0 */ extern Event ftData_Table_Unk1[FTKIND_MAX];
 /* 3C1154 */ extern HSD_GObjEvent ftData_OnLoad[FTKIND_MAX];
 /* 3C11D8 */ extern HSD_GObjEvent ftData_OnDeath[FTKIND_MAX];
