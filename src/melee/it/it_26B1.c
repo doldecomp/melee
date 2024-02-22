@@ -207,7 +207,7 @@ s32 it_8026B47C(HSD_GObj* gobj) // Get heal value of healing items
     case It_Kind_Foods:
         return temp_item->xDD4_itemVar.Food.xDD8_heal;
     case Pokemon_Lucky_Egg:
-        return temp_item->xDD4_itemVar.Egg.xE34_heal;
+        return temp_item->xDD4_itemVar.egg.heal_amount;
     case It_Kind_WhispyHealApple:
         return temp_item->xDD4_itemVar.WhispyApple.xDD4_heal;
     default:

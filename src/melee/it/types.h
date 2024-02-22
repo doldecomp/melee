@@ -549,7 +549,7 @@ struct Item {
         HeartContainerVars HeartContainer;
         MaximTomatoVars MaximTomato;
         FoodVars Food;
-        EggVars Egg;
+        EggVars egg;
         WhispyAppleVars WhispyApple;
         PKFlashVars PKFlash;
         PKFlashExplVars PKFlashExpl;

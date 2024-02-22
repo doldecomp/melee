@@ -82,7 +82,7 @@ HSD_GObj* it_802841B4(s32 arg0, Vec3* arg1, s32 arg2)
     }
     if (var_r3 != NULL) {
         temp_r5 = var_r3->user_data;
-        temp_r5->xDD4_itemVar.Egg.filler[4] |= 0x80;
+        // temp_r5->xDD4_itemVar.Egg.filler[4] |= 0x80;
         temp_r5->xDD4_itemVar.star.x8 = M2C_BITWISE(f32, arg2);
     }
     return var_r3;
@@ -106,7 +106,7 @@ void it_802842A4(Item_GObj* arg0)
     item->x40_vel.z = 0;
 
     item->xDD4_itemVar.capsule.x0 = M2C_FIELD(temp_r30, s32*, 0);
-    item->xDD4_itemVar.Egg.filler[4] &= ~0x80;
+    // item->xDD4_itemVar.Egg.filler[4] &= ~0x80;
     item->xDD4_itemVar.star.x8 = 0.0F;
 
     it_80284358(arg0);
@@ -117,13 +117,13 @@ void it_80284324(Item_GObj* arg0)
     Item* temp_r4;
 
     temp_r4 = arg0->user_data;
-    if ((((temp_r4->xDD4_itemVar.Egg.filler[4] << 0x18) & 0xC0000000) >>
-         0x1F) != 0)
-    {
-        M2C_FIELD(
-            (&gm_80473A18 + M2C_BITWISE(s32, temp_r4->xDD4_itemVar.star.x8)),
-            s8*, 0x90) = 0;
-    }
+    // if ((((temp_r4->xDD4_itemVar.Egg.filler[4] << 0x18) & 0xC0000000) >>
+    //      0x1F) != 0)
+    // {
+    //     M2C_FIELD(
+    //         (&gm_80473A18 + M2C_BITWISE(s32,
+    //         temp_r4->xDD4_itemVar.star.x8)), s8*, 0x90) = 0;
+    // }
 }
 
 void it_80284358(Item_GObj* gobj)
