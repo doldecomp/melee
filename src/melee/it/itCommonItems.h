@@ -77,7 +77,9 @@ typedef struct {
 
 typedef struct EggVars // Eggs spawned on Yoshi stages / by Chansey
 {
-    u8 filler[0x60];
+    bool x0;
+    int rand_max;
+    u8 filler[0x58];
     s32 xE34_heal;
 } EggVars;
 

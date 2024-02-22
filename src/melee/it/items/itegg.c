@@ -11,12 +11,6 @@
 #include <baselib/gobj.h>
 #include <baselib/random.h>
 
-/// @todo Might be #EggVars
-struct ItEggAttrs {
-    /* +0 */ bool x0;
-    /* +4 */ int rand_max;
-};
-
 /* 288DC4 */ static bool it_80288DC4(Item_GObj* gobj);
 /* 288E6C */ static void it_80288E6C(Item_GObj* gobj);
 /* 288EC4 */ static bool it_80288EC4(HSD_GObj* gobj);
@@ -98,8 +92,8 @@ void it_80288D98(Item_GObj* gobj)
 bool it_80288DC4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    struct ItEggAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
-    if (HSD_Randi(attrs->rand_max) == 0) {
+    struct EggVars* vars = ip->xC4_article_data->x4_specialAttributes;
+    if (HSD_Randi(vars->rand_max) == 0) {
         return true;
     }
 
@@ -111,7 +105,7 @@ bool it_80288DC4(Item_GObj* gobj)
         }
     }
 
-    it_8026F3D4(gobj, 0, attrs->x0, 0);
+    it_8026F3D4(gobj, 0, vars->x0, 0);
     return false;
 }
 
@@ -247,9 +241,9 @@ bool it_802891E0(HSD_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
 
-    *((s32*) &item->xDD4_itemVar.Egg.filler[4]) -= 1;
+    item->xDD4_itemVar.Egg.rand_max -= 1;
 
-    if (*((s32*) &item->xDD4_itemVar.Egg.filler[4]) > 0) {
+    if (item->xDD4_itemVar.Egg.rand_max > 0) {
         return false;
     } else {
         return true;
