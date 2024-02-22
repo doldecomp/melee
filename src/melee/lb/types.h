@@ -182,9 +182,9 @@ typedef struct _ftECB {
 
 struct CollData {
     /* fp+6F0 */ HSD_GObj* x0_gobj;
-    /* fp+6F4 */ Vec3 x4_vec;
-    /* fp+700 */ Vec3 x10_vec;
-    /* fp+70C */ Vec3 x1C_vec;
+    /* fp+6F4 */ Vec3 cur_topn;
+    /* fp+700 */ Vec3 cur_topn_correct;
+    /* fp+70C */ Vec3 prev_topn;
     /* fp+718 */ Vec3 x28_vec;
     /* fp+724 */ ECBFlagStruct x34_flags;
     /* fp+725 */ ECBFlagStruct x35_flags;
@@ -234,7 +234,7 @@ struct CollData {
     /* fp+850 */ SurfaceData right_wall;
     /* fp+864 */ SurfaceData left_wall;
     /* fp+878 */ SurfaceData ceiling;
-    /* fp+88C */ s32 x19C;
+    /* fp+88C */ int ecb_lock;
 };
 
 #endif

@@ -16,7 +16,7 @@ bool it_8026D9A0(Item_GObj* gobj)
     {
         u8 _[4];
         bool temp = mpColl_800477E0(coll_data);
-        item->pos = coll_data->x4_vec;
+        item->pos = coll_data->cur_topn;
         if (temp) {
             item->xC30 = coll_data->floor.index;
         }
