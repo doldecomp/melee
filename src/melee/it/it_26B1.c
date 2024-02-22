@@ -743,9 +743,9 @@ void it_8026BBCC(HSD_GObj* gobj, Vec3* pos)
 
     f32 offset_y = 0.5f * (ecb->top.y + ecb->bottom.y);
 
-    pos->x = coll_data->x1C_vec.x + offset_xz;
-    pos->y = coll_data->x1C_vec.y + offset_y;
-    pos->z = coll_data->x1C_vec.z + offset_xz;
+    pos->x = coll_data->prev_topn.x + offset_xz;
+    pos->y = coll_data->prev_topn.y + offset_y;
+    pos->z = coll_data->prev_topn.z + offset_xz;
 }
 
 extern bool ftLib_80086960(HSD_GObj*);

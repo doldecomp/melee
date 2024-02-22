@@ -583,7 +583,7 @@ bool ftCommon_8007D528(Fighter* fp)
 
 void ftCommon_8007D5BC(Fighter* fp)
 {
-    fp->coll_data.x19C = 0;
+    fp->coll_data.ecb_lock = 0;
     fp->coll_data.x130_flags &= 0xFFFFFFEF;
 }
 
@@ -595,7 +595,7 @@ void ftCommon_8007D5D4(Fighter* fp)
     fp->cur_pos.z = 0;
     fp->x74_anim_vel.y = 0;
     fp->x1968_jumpsUsed = 1;
-    fp->coll_data.x19C = 10;
+    fp->coll_data.ecb_lock = 10;
     fp->coll_data.x130_flags |= (1 << 4);
 }
 
@@ -609,7 +609,7 @@ void ftCommon_8007D60C(Fighter* fp)
     fp->gr_vel = 0;
     fp->x74_anim_vel.y = 0;
     fp->x1968_jumpsUsed = ca->max_jumps;
-    fp->coll_data.x19C = 5;
+    fp->coll_data.ecb_lock = 5;
     fp->coll_data.x130_flags |= 0x10;
 }
 
@@ -635,7 +635,7 @@ void ftCommon_8007D6A4(Fighter* fp)
     fp->x1968_jumpsUsed = 0;
     fp->x1969_walljumpUsed = 0;
     fp->x2227_b0 = 0;
-    fp->coll_data.x19C = 0;
+    fp->coll_data.ecb_lock = 0;
     fp->coll_data.x130_flags &= 0xFFFFFFEF;
     if (!ft_80084A18(fp->gobj)) {
         OSReport("fighter ground no under Id! %d %d\n", fp->player_id,
@@ -687,7 +687,7 @@ void ftCommon_8007D7FC(Fighter* fp)
     fp->x1968_jumpsUsed = 0;
     fp->x1969_walljumpUsed = 0;
     fp->x2227_b0 = 0;
-    fp->coll_data.x19C = 0;
+    fp->coll_data.ecb_lock = 0;
     fp->coll_data.x130_flags &= 0xFFFFFFEF;
     if (!ft_80084A18(fp->gobj)) {
         OSReport("fighter ground no under Id! %d %d\n", fp->player_id,

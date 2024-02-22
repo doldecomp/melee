@@ -561,6 +561,21 @@ typedef struct {
     f32 unk4;
 } ftData_x34;
 
+typedef struct ftData_x44_t {
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6;
+    s16 unk8;
+    s16 unkA;
+    s16 unkC;
+    s16 unk10;
+    s16 unk12;
+    s16 unk14;
+    s16 unk16;
+    s16 unk18;
+} ftData_x44_t;
+
 struct ftData {
     /*  +0 */ struct {
         /*   +0 */ u8 x0[0x8C];
@@ -596,7 +611,8 @@ struct ftData {
     }* x34;
     /* +38 */ UNK_T x38;
     /* +3C */ struct UnkFloat6_Camera* x3C;
-    /* +40 */ s32 filler_x40[2];
+    /* +40 */ UNK_T _40;
+    /* +44 */ ftData_x44_t* x44;
     /* +48 */ UNK_T* x48_items;
     /* +4C */ FtSFX* x4C_sfx;
     /* +50 */ u8 x50[0x58 - 0x50];

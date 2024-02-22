@@ -90,8 +90,8 @@ static void ftNs_AttackHi4_YoyoApplyDamage(float unk_float, HSD_GObj* gobj)
 
 static inline void push_ecb(CollData* a, Vec3* b)
 {
-    a->x1C_vec = a->x4_vec; // old = curr
-    a->x4_vec = *b;         // curr = new
+    a->prev_topn = a->cur_topn; // old = curr
+    a->cur_topn = *b;         // curr = new
 }
 
 s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
@@ -112,13 +112,13 @@ s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
 
     // why do it like this?
     // original code:
-    // sp34.x1C_vec = sp34.x4_vec;
-    // sp34.x4_vec = ECBUnk->x0_vec;
-    // sp34.x1C_vec = sp34.x4_vec;
-    // sp34.x4_vec = ECBUnk2->x0_vec;
+    // sp34.prev_topn = sp34.cur_topn;
+    // sp34.cur_topn = ECBUnk->x0_vec;
+    // sp34.prev_topn = sp34.cur_topn;
+    // sp34.cur_topn = ECBUnk2->x0_vec;
     // better code:
-    // sp34.x1C_vec = ECBUnk->x0_vec;
-    // sp34.x4_vec = ECBUnk2->x0_vec;
+    // sp34.prev_topn = ECBUnk->x0_vec;
+    // sp34.cur_topn = ECBUnk2->x0_vec;
     // guess: there is a "push ECB" function that handles moving current to
     // old, that got called twice and inlined.
     push_ecb(&coll, ECBUnk);

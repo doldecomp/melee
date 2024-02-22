@@ -7,8 +7,6 @@
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
-#include "ft/types.h"
-
 /* 041C78 */ void mpColl_80041C78(void);
 /* 041C8C */ void mpColl_80041C8C(CollData* cd);
 /* 041DD0 */ void mpColl_80041DD0(CollData* cd, u32 flags);
@@ -73,7 +71,7 @@
 /* 048578 */ void mpColl_80048578(CollData*);
 /* 048654 */ void mpColl_80048654(CollData*);
 /* 048768 */ void mpColl_80048768(CollData*);
-/* 04B108 */ void mpColl_8004B108(CollData*);
+/* 04B108 */ bool mpColl_8004B108(CollData*);
 /* 04B21C */ void mpColl_8004B21C(CollData*);
 /* 04B2DC */ void mpColl_8004B2DC(CollData*);
 /* 04B3F0 */ void mpColl_8004B3F0(CollData*);

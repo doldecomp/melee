@@ -13,7 +13,7 @@ void ft_80081938(HSD_GObj* gobj)
     Vec3 sp44;
     u8 unused2[56];
     Fighter* fp = gobj->user_data;
-    sp44 = fp->coll_data.x4_vec;
+    sp44 = fp->coll_data.cur_topn;
     new_var = &fp->coll_data.xA4_ecbCurrCorrect;
     lx = new_var->left.x;
     rx = new_var->right.x;

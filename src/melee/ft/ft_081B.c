@@ -3,297 +3,175 @@
 
 #include "ft/ft_081B.h"
 
+#include "inlines.h"
+
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "mp/mpcoll.h"
 
+#include <common_structs.h>
 #include <placeholder.h>
 #include <baselib/gobj.h>
 
-bool ft_8008239C(HSD_GObj* gobj, s32 facing_direction,
-                 float* height_attributes)
+void ft_80081B38(HSD_GObj* arg0)
 {
-    NOT_IMPLEMENTED;
+    u8* sp8;
+    CollData* temp_r30;
+    Fighter* temp_r31;
+    FighterBone* temp_r11;
+    ftData_x44_t* temp_r29;
+    f32 temp_f0;
+    f32 temp_f3;
+
+    temp_r31 = arg0->user_data;
+    temp_r31->coll_data.ecb_lock = 0;
+    temp_r30 = &temp_r31->coll_data;
+    temp_r31->coll_data.cur_topn = temp_r31->cur_pos;
+    temp_r31->coll_data.prev_topn = temp_r31->coll_data.cur_topn;
+    mpColl_80041EE4(temp_r30);
+    temp_r30->x34_flags.bits.b1234 = 1;
+    temp_r11 = temp_r31->parts;
+    temp_r29 = temp_r31->ft_data->x44;
+    mpColl_80042078(
+        temp_r30, arg0, temp_r11->joint, temp_r11[temp_r29->unk0].joint,
+        temp_r11[temp_r29->unk2].joint, temp_r11[temp_r29->unk4].joint,
+        temp_r11[temp_r29->unk6].joint, temp_r11[temp_r29->unk8].joint,
+        temp_r11[temp_r29->unkA].joint,
+        temp_r29->unkC * temp_r31->x34_scale.y);
+    temp_f3 = temp_r31->x34_scale.y;
+    mpColl_80042374(temp_r30, temp_r29->unk10 * temp_f3,
+                    temp_r29->unk14 * temp_f3, temp_r29->unk18 * temp_f3);
+    temp_r30->x50 = temp_r31->co_attrs.weight;
+    temp_f0 = 10.0f * temp_r31->x34_scale.y;
+    if ((s32) temp_r30->x104 == 1) {
+        temp_r30->x128 = temp_f0;
+        temp_r30->x12C = temp_f0;
+    }
 }
 
-bool ft_800824A0(HSD_GObj* gobj, ftCollisionBox* arg1)
+/// #ft_8008239C
+
+/// #ft_800824A0
+
+/// #ft_80082578
+
+/// #ft_80082638
+
+/// EnvironmentCollision_AllowGroundToAir(SpecialAttackGround)
+GroundOrAir ft_80082708(Fighter_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    Fighter* fp = gobj->user_data;
+    CollData* cd = &fp->coll_data;
+    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
+    fp->coll_data.cur_topn = fp->cur_pos;
+    {
+        bool fall_off_ledge = mpColl_8004B108(cd);
+        fp->cur_pos = cd->cur_topn;
+        return fall_off_ledge ? GA_Air : GA_Ground;
+    }
 }
 
-void ft_80082578(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800827A0
 
-void ft_80082638(ftCo_GObj* gobj, ftCollisionBox* arg1)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80082838
 
-GroundOrAir ft_80082708(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80082888
 
-bool ft_800827A0(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80082978
 
-void ft_80082838(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80082A68
 
-bool ft_80082888(HSD_GObj* gobj, ftCollisionBox* arg1)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80082B1C
 
-void ft_80082978(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_AirCatchHit_Coll
 
-bool ft_80082A68(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80082C74
 
-void ft_80082B1C(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80082D40
 
-void ftCo_AirCatchHit_Coll(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80082E3C
 
-void ft_80082C74(HSD_GObj* gobj, HSD_GObjEvent cb)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80082F28
 
-void ft_80082D40(Fighter_GObj* gobj, float arg1)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80083090
 
-HSD_GObj* ft_80082E3C(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800831CC
 
-void ft_80082F28(ftCo_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80083318
 
-void ft_80083090(ftCo_GObj* gobj, bool (*arg1)(HSD_GObj*, enum_t),
-                 HSD_GObjEvent arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80083464
 
-void ft_800831CC(HSD_GObj* gobj, bool (*arg1)(HSD_GObj*, enum_t),
-                 HSD_GObjEvent arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800835B0
 
-void ft_80083318(Fighter_GObj* gobj, bool (*arg1)(Fighter_GObj* gobj, enum_t),
-                 HSD_GObjEvent arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_8008370C
 
-void ft_80083464(Fighter_GObj* gobj, bool (*arg1)(Fighter_GObj* gobj, enum_t),
-                 HSD_GObjEvent arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80083844
 
-void ft_800835B0(Fighter_GObj* gobj, bool (*arg1)(Fighter_GObj*, enum_t),
-                 HSD_GObjEvent arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80083910
 
-void ft_8008370C(ftCo_GObj* gobj, HSD_GObjEvent cb)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80083A48
 
-void ft_80083844(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80083B68
 
-void ft_80083910(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80083C00
 
-void ft_80083A48(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80083CE4
 
-void ft_80083B68(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80083DCC
 
-void ft_80083C00(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80083E64
 
-void ft_80083CE4(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80083F88
 
-void ft_80083DCC(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_8008403C
 
-void ft_80083E64(Fighter_GObj* gobj, ftCollisionBox* ecb, HSD_GObjEvent cb)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80084104
 
-void ft_80083F88(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800841B8
 
-void ft_8008403C(HSD_GObj* gobj, HSD_GObjEvent arg1)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80084280
 
-void ft_80084104(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800843FC
 
-void ft_800841B8(ftCo_GObj* gobj, HSD_GObjEvent cb)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800844EC
 
-void ft_80084280(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800845B4
 
-void ft_800843FC(ftCo_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800846B0
 
-void ft_800844EC(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800847D0
 
-void ft_800845B4(ftCo_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800848DC
 
-void ft_800846B0(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800849EC
 
-void ft_800847D0(ftCo_GObj* gobj, ftCollisionBox* arg1)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80084A18
 
-void ft_800848DC(ftCo_GObj* goibj, HSD_GObjEvent cb)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_GetGroundFrictionMultiplier
 
-void ft_800849EC(Fighter* arg0, Fighter* arg1)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80084A80
 
-bool ft_80084A18(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80084BFC
 
-float ft_GetGroundFrictionMultiplier(Fighter* fp)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80084C38
 
-void ft_80084A80(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80084C74
 
-bool ft_80084BFC(ftCo_GObj* gobj, int* arg1, int* arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80084CB0
 
-bool ft_80084C38(HSD_GObj* gobj, int* arg1, int* arg2, int* arg3, char* arg4)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80084CE4
 
-bool ft_80084C74(Fighter_GObj* gobj, int* arg1, int* arg2, int* arg3)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80084DB0
 
-void ft_80084CB0(Fighter* fp, ftCollisionBox* arg1)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80084E1C
 
-bool ft_80084CE4(Fighter* attacker, Fighter* victim)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80084EEC
 
-void ft_80084DB0(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80084F3C
 
-void ft_80084E1C(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80084FA8
 
-void ft_80084EEC(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
-void ft_80084F3C(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
-void ft_80084FA8(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
-void ft_80085004(ftCo_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80085004
 
 void ft_80085030(HSD_GObj* gobj, float gr_friction, float facing_dir)
 {
@@ -307,44 +185,25 @@ void ft_80085030(HSD_GObj* gobj, float gr_friction, float facing_dir)
     ftCommon_8007CB74(gobj);
 }
 
-void ft_800850E0(void);
+/// #ft_800850E0;
 
-void ft_80085088(HSD_GObj* gobj)
+/// #ft_80085088
+
+/// #ft_800850B4
+
+/// #ft_800850E0
+
+void ft_80085134(Fighter_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->self_vel.x = fp->x6A4_transNOffset.z * fp->facing_dir;
+    fp->self_vel.y = fp->x6A4_transNOffset.y;
 }
 
-void ft_800850B4(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80085154
 
-void ft_800850E0(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800851C0
 
-void ft_80085134(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800851D0
 
-void ft_80085154(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
-void ft_800851C0(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
-void ft_800851D0(void)
-{
-    NOT_IMPLEMENTED;
-}
-
-void ft_80085204(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80085204

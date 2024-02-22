@@ -44,18 +44,18 @@ void mpColl_80041C8C(CollData* cd)
     mpColl_804D64A0 = 0;
     mpColl_804D64A4 = 0;
     if (g_debugLevel >= 3) {
-        if (!(cd->x4_vec.x < 45000.0f) || !(cd->x4_vec.x > -45000.0f) ||
-            !(cd->x4_vec.y < 45000.0f) || !(cd->x4_vec.y > -45000.0f))
+        if (!(cd->cur_topn.x < 45000.0f) || !(cd->cur_topn.x > -45000.0f) ||
+            !(cd->cur_topn.y < 45000.0f) || !(cd->cur_topn.y > -45000.0f))
         {
             if (ftLib_80086960(cd->x0_gobj) != 0) {
                 OSReport(
                     "%s:%d: Error: mpCollPrev() pos(%f,%f) player=%d ms=%d\n",
                     "mpcoll.c", 203, ftLib_80086BE0(cd->x0_gobj),
-                    ftLib_800874BC(cd->x0_gobj), cd->x4_vec.x, cd->x4_vec.y);
+                    ftLib_800874BC(cd->x0_gobj), cd->cur_topn.x, cd->cur_topn.y);
             } else {
                 OSReport("%s:%d: Error: mpCollPrev() pos(%f,%f) gobj_id=%d\n",
                          "mpcoll.c", 212, cd->x0_gobj->classifier,
-                         cd->x4_vec.x, cd->x4_vec.y);
+                         cd->cur_topn.x, cd->cur_topn.y);
                 if (cd->x0_gobj->p_link == 9) {
                     OSReport("itkind=%d\n", itGetKind(cd->x0_gobj));
                 }
@@ -63,7 +63,7 @@ void mpColl_80041C8C(CollData* cd)
             __assert("mpcoll.c", 228, mpColl_804D3948);
         }
     }
-    cd->x28_vec = cd->x4_vec;
+    cd->x28_vec = cd->cur_topn;
 }
 
 // 80041DD0 https://decomp.me/scratch/1KPLe
@@ -85,17 +85,17 @@ void mpColl_80041DD0(CollData* cd, u32 flags)
 {
     float left, bottom, right, top;
 
-    left = cd->xA4_ecbCurrCorrect.left.x + cd->x4_vec.x;
-    clamp_below(&left, cd->xC4_ecb.left.x + cd->x10_vec.x);
+    left = cd->xA4_ecbCurrCorrect.left.x + cd->cur_topn.x;
+    clamp_below(&left, cd->xC4_ecb.left.x + cd->cur_topn_correct.x);
 
-    right = cd->xA4_ecbCurrCorrect.right.x + cd->x4_vec.x;
-    clamp_above(&right, cd->xC4_ecb.right.x + cd->x10_vec.x);
+    right = cd->xA4_ecbCurrCorrect.right.x + cd->cur_topn.x;
+    clamp_above(&right, cd->xC4_ecb.right.x + cd->cur_topn_correct.x);
 
-    bottom = cd->xA4_ecbCurrCorrect.bottom.y + cd->x4_vec.y;
-    clamp_below(&bottom, cd->xC4_ecb.bottom.y + cd->x10_vec.y);
+    bottom = cd->xA4_ecbCurrCorrect.bottom.y + cd->cur_topn.y;
+    clamp_below(&bottom, cd->xC4_ecb.bottom.y + cd->cur_topn_correct.y);
 
-    top = cd->xA4_ecbCurrCorrect.top.y + cd->x4_vec.y;
-    clamp_above(&top, cd->xC4_ecb.top.y + cd->x10_vec.y);
+    top = cd->xA4_ecbCurrCorrect.top.y + cd->cur_topn.y;
+    clamp_above(&top, cd->xC4_ecb.top.y + cd->cur_topn_correct.y);
 
     if (flags & 0b100) {
         float x54 = cd->x54;
@@ -105,12 +105,12 @@ void mpColl_80041DD0(CollData* cd, u32 flags)
         right += x54;
         left -= x54;
 
-        clamp_below(&bottom, cd->x58 - tmp + cd->x4_vec.y);
-        clamp_below(&bottom, cd->x58 - tmp + cd->x10_vec.y);
+        clamp_below(&bottom, cd->x58 - tmp + cd->cur_topn.y);
+        clamp_below(&bottom, cd->x58 - tmp + cd->cur_topn_correct.y);
 
         offset = cd->x58 + tmp;
-        clamp_above(&top, cd->x4_vec.y + offset);
-        clamp_above(&top, cd->x10_vec.y + offset);
+        clamp_above(&top, cd->cur_topn.y + offset);
+        clamp_above(&top, cd->cur_topn_correct.y + offset);
     }
 
     mpLib_800588D0(left, bottom, right, top);
@@ -132,9 +132,9 @@ void mpColl_80041EE4(CollData* cd)
     cd->x34_flags.bits.b1234 = 0;
     cd->env_flags = 0;
     cd->x130_flags = 0;
-    cd->x10_vec = cd->x4_vec;
-    cd->x1C_vec = cd->x4_vec;
-    cd->x28_vec = cd->x4_vec;
+    cd->cur_topn_correct = cd->cur_topn;
+    cd->prev_topn = cd->cur_topn;
+    cd->x28_vec = cd->cur_topn;
     cd->x3C = -1;
     cd->ledge_id_unk0 = -1;
     cd->ledge_id_unk1 = -1;
@@ -325,8 +325,8 @@ void mpColl_800424DC(CollData* cd, u32 flags)
     // Loop through all collision data joints,
     // expanding the ECB to contain them all
     {
-        float temp_x = cd->x4_vec.x;
-        float temp_y = cd->x4_vec.y;
+        float temp_x = cd->cur_topn.x;
+        float temp_y = cd->cur_topn.y;
         lb_8000B1CC(cd->x10C_joint[0], NULL, &vec);
         left_x = right_x = vec.x - temp_x;
         bottom_y = top_y = vec.y - temp_y;
@@ -688,7 +688,7 @@ void mpColl_80043324(CollData* arg0, s32 arg1, s32 arg2)
     u8 temp_r3_2[4];
 
     if (arg0->floor.index != -1) {
-        temp_r3 = grDynamicAttr_801CA284(&arg0->x4_vec, arg0->floor.index);
+        temp_r3 = grDynamicAttr_801CA284(&arg0->cur_topn, arg0->floor.index);
         if (temp_r3 != 0) {
             arg0->floor.unk =
                 (arg0->floor.unk & 0xFFFFFF00) | (temp_r3 & 0xFF);
@@ -698,29 +698,29 @@ void mpColl_80043324(CollData* arg0, s32 arg1, s32 arg2)
         (arg0->env_flags & 0x100000) || (arg0->env_flags & 0x200000))
     {
         func_80043324_inline(arg0, arg0->floor.index, arg2,
-                             arg0->x4_vec.y - arg0->x1C_vec.y);
+                             arg0->cur_topn.y - arg0->prev_topn.y);
     }
     if (arg0->env_flags & 0x6000) {
         func_80043324_inline2(arg0, arg0->ceiling.index, arg2,
-                              arg0->x4_vec.y - arg0->x1C_vec.y);
+                              arg0->cur_topn.y - arg0->prev_topn.y);
     }
     if (g_debugLevel >= 3) {
-        if (!(arg0->x4_vec.x < 45000.0f) || !(arg0->x4_vec.x > -45000.0f) ||
-            !(arg0->x4_vec.y < 45000.0f) || !(arg0->x4_vec.y > -45000.0f))
+        if (!(arg0->cur_topn.x < 45000.0f) || !(arg0->cur_topn.x > -45000.0f) ||
+            !(arg0->cur_topn.y < 45000.0f) || !(arg0->cur_topn.y > -45000.0f))
         {
             if (ftLib_80086960(arg0->x0_gobj)) {
                 OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) "
                          "ply=%d ms=%d\n",
-                         "mpcoll.c", 1350, arg0->x1C_vec.x, arg0->x1C_vec.y,
-                         arg0->x4_vec.x, arg0->x4_vec.y,
+                         "mpcoll.c", 1350, arg0->prev_topn.x, arg0->prev_topn.y,
+                         arg0->cur_topn.x, arg0->cur_topn.y,
                          ftLib_80086BE0(arg0->x0_gobj),
                          ftLib_800874BC(arg0->x0_gobj));
             } else {
                 s32 gobjid = arg0->x0_gobj->classifier;
                 OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) "
                          "gobjid=%d\n",
-                         "mpcoll.c", 1358, arg0->x1C_vec.x, arg0->x1C_vec.y,
-                         arg0->x4_vec.x, arg0->x4_vec.y, gobjid);
+                         "mpcoll.c", 1358, arg0->prev_topn.x, arg0->prev_topn.y,
+                         arg0->cur_topn.x, arg0->cur_topn.y, gobjid);
                 if (arg0->x0_gobj->p_link == 9) {
                     OSReport("itkind=%d\n", itGetKind(arg0->x0_gobj));
                 }
@@ -782,9 +782,9 @@ void mpColl_80043670(CollData* arg0)
 
 void mpColl_80043680(CollData* arg0, Vec3* arg1)
 {
-    arg0->x4_vec = *arg1;
-    arg0->x10_vec = arg0->x4_vec;
-    arg0->x1C_vec = arg0->x10_vec;
+    arg0->cur_topn = *arg1;
+    arg0->cur_topn_correct = arg0->cur_topn;
+    arg0->prev_topn = arg0->cur_topn_correct;
     arg0->x130_flags |= 0x20;
 }
 
@@ -843,7 +843,7 @@ bool mpColl_80043754(mpColl_Callback arg0, CollData* arg1, u32 arg2)
     s32 var_r30;
     s32 ret;
 
-    lbVector_Diff(&arg1->x4_vec, &arg1->x1C_vec, &vel);
+    lbVector_Diff(&arg1->cur_topn, &arg1->prev_topn, &vel);
     x = fabs_inline(vel.x);
     y = fabs_inline(vel.y);
 
@@ -887,12 +887,12 @@ bool mpColl_80043754(mpColl_Callback arg0, CollData* arg1, u32 arg2)
         var_r30 = 1;
     }
     var_r31 = 0;
-    arg1->x4_vec = arg1->x1C_vec;
+    arg1->cur_topn = arg1->prev_topn;
     arg1->x34_flags.bits.b5 = 0;
     while ((var_r31 < var_r30) && !arg1->x34_flags.bits.b5) {
         mpColl_80042DB0(arg1, 1.0f / (var_r30 - var_r31));
-        arg1->x10_vec = arg1->x4_vec;
-        lbVector_Add(&arg1->x4_vec, &vel);
+        arg1->cur_topn_correct = arg1->cur_topn;
+        lbVector_Add(&arg1->cur_topn, &vel);
         mpColl_80041DD0(arg1, arg2);
         ret = (*arg0)(arg1, arg2);
         mpLib_80058AA0();
@@ -912,8 +912,8 @@ void mpColl_800439FC(CollData* arg0)
     float var_f31;
 
     var_f31 = arg0->xA4_ecbCurrCorrect.right.x;
-    temp_f3 = arg0->x4_vec.x + var_f31;
-    temp_f4 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.right.y;
+    temp_f3 = arg0->cur_topn.x + var_f31;
+    temp_f4 = arg0->cur_topn.y + arg0->xA4_ecbCurrCorrect.right.y;
     if (var_f31 < 0.0f) {
         var_f31 = -var_f31;
     }
@@ -923,13 +923,13 @@ void mpColl_800439FC(CollData* arg0)
                        arg0->x48, arg0->x4C) != 0)
     {
         sp10.x = arg0->x140.x - var_f31;
-        sp10.y = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.top.y;
+        sp10.y = arg0->cur_topn.y + arg0->xA4_ecbCurrCorrect.top.y;
         if (mpLib_8004E090(arg0->ceiling.index, (Vec3*) &sp10, &spC,
                            (u32*) &arg0->ceiling.unk,
                            &arg0->ceiling.normal) != -1)
         {
-            arg0->x4_vec.y += spC;
-            arg0->x4_vec.x = sp10.x;
+            arg0->cur_topn.y += spC;
+            arg0->cur_topn.x = sp10.x;
         }
     }
 }
@@ -943,8 +943,8 @@ void mpColl_80043ADC(CollData* arg0)
     float var_f31;
 
     var_f31 = arg0->xA4_ecbCurrCorrect.left.x;
-    temp_f3 = arg0->x4_vec.x + var_f31;
-    temp_f4 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.left.y;
+    temp_f3 = arg0->cur_topn.x + var_f31;
+    temp_f4 = arg0->cur_topn.y + arg0->xA4_ecbCurrCorrect.left.y;
     if (var_f31 < 0.0f) {
         var_f31 = -var_f31;
     }
@@ -954,12 +954,12 @@ void mpColl_80043ADC(CollData* arg0)
                        arg0->x4C) != 0)
     {
         sp10.x = arg0->x140.x + var_f31;
-        sp10.y = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.top.y;
+        sp10.y = arg0->cur_topn.y + arg0->xA4_ecbCurrCorrect.top.y;
         if (mpLib_8004E090(arg0->ceiling.index, &sp10, &spC,
                            &arg0->ceiling.unk, &arg0->ceiling.normal) != -1)
         {
-            arg0->x4_vec.y += spC;
-            arg0->x4_vec.x = sp10.x;
+            arg0->cur_topn.y += spC;
+            arg0->cur_topn.x = sp10.x;
         }
     }
 }
@@ -971,11 +971,11 @@ bool mpColl_80043BBC(CollData* arg0, s32* arg1)
     float new_var;
 
     temp_r31 = mpLib_80052700(arg0->floor.index);
-    new_var = arg0->x4_vec.x + arg0->xA4_ecbCurrCorrect.bottom.x;
+    new_var = arg0->cur_topn.x + arg0->xA4_ecbCurrCorrect.bottom.x;
     if ((mpLib_800501CC(new_var,
-                        arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y,
-                        arg0->x4_vec.x + arg0->xA4_ecbCurrCorrect.right.x,
-                        arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.right.y,
+                        arg0->cur_topn.y + arg0->xA4_ecbCurrCorrect.bottom.y,
+                        arg0->cur_topn.x + arg0->xA4_ecbCurrCorrect.right.x,
+                        arg0->cur_topn.y + arg0->xA4_ecbCurrCorrect.right.y,
                         NULL, &sp10, NULL, NULL, arg0->x48, arg0->x4C) != 0) &&
         (sp10 != temp_r31))
     {
@@ -1005,8 +1005,8 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
     } else {
         var_f31 = temp_f1;
     }
-    sp20 = arg0->x4_vec.x + temp_f1;
-    temp_f1_2 = arg0->x4_vec.y;
+    sp20 = arg0->cur_topn.x + temp_f1;
+    temp_f1_2 = arg0->cur_topn.y;
     sp24 = temp_f1_2 + arg0->xA4_ecbCurrCorrect.right.y;
     if (mpLib_8004E398(arg1, &sp20, 0, 0, 0, temp_f1_2) != -1) {
         /// @todo Fix signature of #mpLib_800501CC.
@@ -1020,15 +1020,15 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
 #endif
             sp20 = arg0->x140.x - var_f31;
             if (arg2 != 0) {
-                sp24 = arg0->x4_vec.y;
+                sp24 = arg0->cur_topn.y;
             } else {
-                sp24 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y;
+                sp24 = arg0->cur_topn.y + arg0->xA4_ecbCurrCorrect.bottom.y;
             }
             if (mpLib_8004DD90(arg0->floor.index, &sp20, &sp30,
                                &arg0->floor.unk, &arg0->floor.normal) != -1)
             {
-                arg0->x4_vec.y += sp30;
-                arg0->x4_vec.x = sp20;
+                arg0->cur_topn.y += sp30;
+                arg0->cur_topn.x = sp20;
             }
         }
     } else {
@@ -1047,15 +1047,15 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
         {
             sp20 = arg0->x140.x;
             if (arg2 != 0) {
-                sp24 = arg0->x4_vec.y;
+                sp24 = arg0->cur_topn.y;
             } else {
-                sp24 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y;
+                sp24 = arg0->cur_topn.y + arg0->xA4_ecbCurrCorrect.bottom.y;
             }
             if (mpLib_8004DD90(arg0->floor.index, &sp20, &sp30,
                                &arg0->floor.unk, &arg0->floor.normal) != -1)
             {
-                arg0->x4_vec.y += sp30;
-                arg0->x4_vec.x = sp20;
+                arg0->cur_topn.y += sp30;
+                arg0->cur_topn.x = sp20;
             }
         }
     }
@@ -1141,28 +1141,28 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                 horizontal_squeeze_flags_2 |= 1;
                 horizontal_squeeze_flags |= 8;
             }
-            x_after_collide_left = coll->x4_vec.x;
+            x_after_collide_left = coll->cur_topn.x;
         }
         if (mpColl_80044E10(coll)) {     // Physics_RightWallCheckAir
             if (mpColl_800454A4(coll)) { // Physics_RightWallCollideAir
                 horizontal_squeeze_flags_2 |= 2;
                 horizontal_squeeze_flags |= 4;
             }
-            x_after_collide_right = coll->x4_vec.x;
+            x_after_collide_right = coll->cur_topn.x;
         }
         if (mpColl_80045B74(coll)) {     // Physics_LeftWallCheckAir
             if (mpColl_80046224(coll)) { // Physics_LeftWallCollideAir
                 horizontal_squeeze_flags_2 |= 1;
                 horizontal_squeeze_flags |= 8;
             }
-            x_after_collide_left = coll->x4_vec.x;
+            x_after_collide_left = coll->cur_topn.x;
         }
         if (mpColl_80044E10(coll)) {     // Physics_RightWallCheckAir
             if (mpColl_800454A4(coll)) { // Physics_RightWallCollideAir
                 horizontal_squeeze_flags_2 |= 2;
                 horizontal_squeeze_flags |= 4;
             }
-            x_after_collide_right = coll->x4_vec.x;
+            x_after_collide_right = coll->cur_topn.x;
         }
         if ((horizontal_squeeze_flags & 0xC) == 0xC) {
             mpColl_8004C864(coll, 1, x_after_collide_right,
@@ -1175,10 +1175,10 @@ bool mpColl_80046904(CollData* coll, u32 flags)
         { // Physics_CeilingCheck, Physics_CeilingCollideAir
             temp_r21 = mpColl_80052A98(
                 coll->ceiling.index); // Collision_GetNextNonCeilingLine
-            xy_arg_1 = coll->x4_vec.x + coll->xA4_ecbCurrCorrect.top.x;
-            xy_arg_2 = coll->x4_vec.y + coll->xA4_ecbCurrCorrect.top.y;
-            xy_arg_3 = coll->x4_vec.x + coll->xA4_ecbCurrCorrect.right.x;
-            xy_arg_4 = coll->x4_vec.y + coll->xA4_ecbCurrCorrect.right.y;
+            xy_arg_1 = coll->cur_topn.x + coll->xA4_ecbCurrCorrect.top.x;
+            xy_arg_2 = coll->cur_topn.y + coll->xA4_ecbCurrCorrect.top.y;
+            xy_arg_3 = coll->cur_topn.x + coll->xA4_ecbCurrCorrect.right.x;
+            xy_arg_4 = coll->cur_topn.y + coll->xA4_ecbCurrCorrect.right.y;
             if (mpLib_800501CC(xy_arg_1, xy_arg_2, xy_arg_3, xy_arg_4, NULL,
                                &sp1C, NULL, NULL, coll->x48, coll->x4C) &&
                 sp1C != temp_r21)
@@ -1193,10 +1193,10 @@ bool mpColl_80046904(CollData* coll, u32 flags)
             }
             temp_r21_2 = mpColl_800528CC(
                 coll->ceiling.index); // Collision_GetPrevNonCeilingLine
-            xy_arg_1 = coll->x4_vec.x + coll->xA4_ecbCurrCorrect.top.x;
-            xy_arg_2 = coll->x4_vec.y + coll->xA4_ecbCurrCorrect.top.y;
-            xy_arg_3 = coll->x4_vec.x + coll->xA4_ecbCurrCorrect.left.x;
-            xy_arg_4 = coll->x4_vec.y + coll->xA4_ecbCurrCorrect.left.y;
+            xy_arg_1 = coll->cur_topn.x + coll->xA4_ecbCurrCorrect.top.x;
+            xy_arg_2 = coll->cur_topn.y + coll->xA4_ecbCurrCorrect.top.y;
+            xy_arg_3 = coll->cur_topn.x + coll->xA4_ecbCurrCorrect.left.x;
+            xy_arg_4 = coll->cur_topn.y + coll->xA4_ecbCurrCorrect.left.y;
             if (mpLib_800509B8(xy_arg_1, xy_arg_2, xy_arg_3, xy_arg_4, NULL,
                                &sp18, NULL, NULL, coll->x48, coll->x4C) &&
                 sp18 != temp_r21_2)
@@ -1210,7 +1210,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                 mpColl_80043ADC(coll); // Physics_RightWallCeilingMultiCollide
             }
             horizontal_squeeze_flags |= 1;
-            y_after_collide_ceiling = coll->x4_vec.y;
+            y_after_collide_ceiling = coll->cur_topn.y;
         }
         if (flags & CollisionFlagAir_PlatformPassCallback) {
             var_r3 = mpColl_80044628(
@@ -1275,17 +1275,17 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                     touched_floor = 1;
                 }
             }
-            y_after_collide_floor = coll->x4_vec.y;
+            y_after_collide_floor = coll->cur_topn.y;
             horizontal_squeeze_flags |= 2;
             if (mpColl_80044AD8(coll, horizontal_squeeze_flags_2) &&
                 mpColl_80044C74(coll))
             { // Physics_CeilingCheck, Physics_CeilingCollideAir
                 temp_r21_3 = mpColl_80052A98(
                     coll->ceiling.index); // Collision_GetNextNonCeilingLine
-                xy_arg_1 = coll->x4_vec.x + coll->xA4_ecbCurrCorrect.top.x;
-                xy_arg_2 = coll->x4_vec.y + coll->xA4_ecbCurrCorrect.top.y;
-                xy_arg_3 = coll->x4_vec.x + coll->xA4_ecbCurrCorrect.right.x;
-                xy_arg_4 = coll->x4_vec.y + coll->xA4_ecbCurrCorrect.right.y;
+                xy_arg_1 = coll->cur_topn.x + coll->xA4_ecbCurrCorrect.top.x;
+                xy_arg_2 = coll->cur_topn.y + coll->xA4_ecbCurrCorrect.top.y;
+                xy_arg_3 = coll->cur_topn.x + coll->xA4_ecbCurrCorrect.right.x;
+                xy_arg_4 = coll->cur_topn.y + coll->xA4_ecbCurrCorrect.right.y;
                 if (mpLib_800501CC(xy_arg_1, xy_arg_2, xy_arg_3, xy_arg_4,
                                    NULL, &sp14, NULL, NULL, coll->x48,
                                    coll->x4C) &&
@@ -1302,10 +1302,10 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                 }
                 temp_r21_4 = mpColl_800528CC(
                     coll->ceiling.index); // Collision_GetPrevNonCeilingLine
-                xy_arg_1 = coll->x4_vec.x + coll->xA4_ecbCurrCorrect.top.x;
-                xy_arg_2 = coll->x4_vec.y + coll->xA4_ecbCurrCorrect.top.y;
-                xy_arg_3 = coll->x4_vec.x + coll->xA4_ecbCurrCorrect.left.x;
-                xy_arg_4 = coll->x4_vec.y + coll->xA4_ecbCurrCorrect.left.y;
+                xy_arg_1 = coll->cur_topn.x + coll->xA4_ecbCurrCorrect.top.x;
+                xy_arg_2 = coll->cur_topn.y + coll->xA4_ecbCurrCorrect.top.y;
+                xy_arg_3 = coll->cur_topn.x + coll->xA4_ecbCurrCorrect.left.x;
+                xy_arg_4 = coll->cur_topn.y + coll->xA4_ecbCurrCorrect.left.y;
                 if (mpLib_800509B8(xy_arg_1, xy_arg_2, xy_arg_3, xy_arg_4,
                                    NULL, &sp10, NULL, NULL, coll->x48,
                                    coll->x4C) &&
@@ -1321,7 +1321,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                         coll); // Physics_RightWallCeilingMultiCollide
                 }
                 horizontal_squeeze_flags |= 1;
-                y_after_collide_ceiling = coll->x4_vec.y;
+                y_after_collide_ceiling = coll->cur_topn.y;
             }
         }
         if ((horizontal_squeeze_flags & 3) == 3) {
@@ -1343,7 +1343,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
         {
             var_r3_2 = 0;
         }
-        if (!var_r3_2 && coll->x4_vec.y < coll->x10_vec.y) {
+        if (!var_r3_2 && coll->cur_topn.y < coll->cur_topn_correct.y) {
             if (coll->x36 == 1 || coll->x36 == 0) {
                 if (mpColl_80044164(coll, (int*) &coll->ledge_id_unk1))
                 { // Physics_CheckForLeftLedge
