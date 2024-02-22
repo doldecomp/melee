@@ -48,11 +48,13 @@ ItemStateTable it_803F5988[] = {
 
 Item_GObj* it_80288C88(Item_GObj* gobj, Vec3* pos, Vec3* vel, float dir)
 {
-    Item_GObj* ret = NULL;
+    SpawnItem spawn;
+    Item* ip;
+    Item_GObj* item_gobj = NULL;
 
     if (gobj != NULL) {
-        Item* ip = GET_ITEM(gobj);
-        SpawnItem spawn;
+        ip = GET_ITEM(gobj);
+
         spawn.kind = It_Kind_Egg;
         spawn.prev_pos = *pos;
         spawn.prev_pos.z = 0.0F;
@@ -65,19 +67,19 @@ Item_GObj* it_80288C88(Item_GObj* gobj, Vec3* pos, Vec3* vel, float dir)
         spawn.x44_flag.bits.b0 = true;
         spawn.x40 = 0;
 
-        ret = Item_80268B18(&spawn);
-        if (ret != NULL) {
-            Item* ip = GET_ITEM(ret);
-            ip->xDD0_flag.bits.b6 = true;
+        item_gobj = Item_80268B18(&spawn);
+        if (item_gobj != NULL) {
+            Item* ip = GET_ITEM(item_gobj);
+            ip->xDD0_flag.bits.b6 = false;
             ip->xD40 = 0.0F;
             it_80279BBC(ip);
             if (!ip->xDD0_flag.bits.b7) {
-                it_802756E0(ret);
+                it_802756E0(item_gobj);
             }
         }
     }
 
-    return ret;
+    return item_gobj;
 }
 
 void it_80288D98(Item_GObj* gobj)
@@ -86,11 +88,16 @@ void it_80288D98(Item_GObj* gobj)
     it_80288EFC(gobj);
 }
 
+inline s32 attrRand(EggVars* attrs)
+{
+    return HSD_Randi(attrs->rand_max);
+}
+
 bool it_80288DC4(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = GET_ITEM((HSD_GObj*) gobj);
     EggVars* attrs = ip->xC4_article_data->x4_specialAttributes;
-    if (HSD_Randi(attrs->rand_max) == 0) {
+    if (attrRand(attrs) == 0) {
         return true;
     }
 
@@ -250,7 +257,8 @@ bool it_80289210(Item_GObj* gobj)
 
 bool it_80289218(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = gobj->user_data;
+
     if (ip->xDD4_itemVar.capsule.x0) {
         return false;
     }
@@ -266,25 +274,25 @@ bool it_80289218(Item_GObj* gobj)
 
 bool it_802893D4(Item_GObj* gobj)
 {
-    PAD_STACK(4);
+    PAD_STACK(8);
     return it_80289218(gobj);
 }
 
 bool it_80289470(Item_GObj* gobj)
 {
-    PAD_STACK(4);
+    PAD_STACK(8);
     return it_80289218(gobj);
 }
 
 bool it_8028950C(Item_GObj* gobj)
 {
-    PAD_STACK(4);
+    PAD_STACK(8);
     return it_80289218(gobj);
 }
 
 bool it_802895A8(Item_GObj* gobj)
 {
-    PAD_STACK(4);
+    PAD_STACK(8);
     return it_80289218(gobj);
 }
 
