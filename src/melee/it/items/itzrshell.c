@@ -52,7 +52,7 @@ void it_802E0368(Item_GObj* gobj)
 
 void it_802E0388(Item_GObj* gobj)
 {
-    grZakoGenerator_801CACB8((Ground_GObj*) gobj);
+    grZakoGenerator_801CACB8(gobj);
 }
 
 void it_802E03A8(Item_GObj* gobj)

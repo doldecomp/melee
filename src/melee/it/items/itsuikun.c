@@ -75,9 +75,9 @@ bool it_802CFDAC(Item_GObj* gobj)
     if (it->xDB0_itcmd_var1) {
         it->xDB0_itcmd_var1 = 0;
         it->xDB4_itcmd_var2 = 0;
-        efLib_DestroyAll((HSD_GObj*) gobj);
+        efLib_DestroyAll(gobj);
     }
-    if (it_80272C6C((HSD_GObj*) gobj) == false) {
+    if (it_80272C6C(gobj) == false) {
         return true;
     }
     if (it->xDB4_itcmd_var2) {
@@ -104,7 +104,7 @@ bool it_802CFDAC(Item_GObj* gobj)
 
 void it_802CFEA8(Item_GObj* gobj)
 {
-    Item* it = GET_ITEM((HSD_GObj*) gobj);
+    Item* it = GET_ITEM(gobj);
     if (it->ground_or_air == GA_Air) {
         it_80272860(gobj, it->xCC_item_attr->x10_fall_speed,
                     it->xCC_item_attr->x14_fall_speed_max);
@@ -113,7 +113,7 @@ void it_802CFEA8(Item_GObj* gobj)
 
 bool it_802CFEE4(Item_GObj* gobj)
 {
-    Item* it = GET_ITEM((HSD_GObj*) gobj);
+    Item* it = GET_ITEM(gobj);
     if (it->ground_or_air == GA_Air) {
         it_8026E248(gobj, it_802CFCB4);
     } else {

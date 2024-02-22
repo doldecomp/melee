@@ -120,7 +120,7 @@ bool it_802D34A4(Item_GObj* gobj)
 
 void it_802D3508(Item_GObj* gobj)
 {
-    Item* it = GET_ITEM((HSD_GObj*) gobj);
+    Item* it = GET_ITEM(gobj);
     if (it->ground_or_air == GA_Air) {
         it_80272860(gobj, it->xCC_item_attr->x10_fall_speed,
                     it->xCC_item_attr->x14_fall_speed_max);
@@ -129,7 +129,7 @@ void it_802D3508(Item_GObj* gobj)
 
 bool it_802D3544(Item_GObj* gobj)
 {
-    Item* it = GET_ITEM((HSD_GObj*) gobj);
+    Item* it = GET_ITEM(gobj);
     if (it->ground_or_air == GA_Air) {
         it_8026E15C(gobj, it_802D32D8);
     } else {
