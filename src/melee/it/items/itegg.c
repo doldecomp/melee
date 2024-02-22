@@ -45,6 +45,16 @@ struct ItEggAttrs {
 /* 289674 */ static void it_80289674(HSD_GObj* gobj);
 /* 289678 */ static bool it_80289678(Item_GObj* gobj);
 
+ItemStateTable it_803F5988[] = {
+    { -1, it_80288EC4, it_80288ECC, it_80288ED0 },
+    { -1, it_80288F24, it_80288F2C, it_80288F5C },
+    { -1, it_80288FB0, it_80288FB8, NULL },
+    { 0, it_80288F24, it_80289004, it_80289050 },
+    { -1, it_8028966C, it_80289674, it_80289678 },
+    { 1, it_8028912C, it_8028914C, it_80289150 },
+    { -1, it_802891E0, it_8028920C, it_80289210 },
+};
+
 Item_GObj* it_80288C88(HSD_GObj* arg_gobj, Vec3* pos, Vec3* vel, f32 dir)
 {
     SpawnItem spawn;
@@ -314,13 +324,3 @@ void it_802896AC(Item_GObj* gobj, Item_GObj* ref)
 {
     it_8026B894(gobj, (HSD_GObj*) ref);
 }
-
-ItemStateTable it_803F5988[] = {
-    { -1, it_80288EC4, it_80288ECC, it_80288ED0 },
-    { -1, it_80288F24, it_80288F2C, it_80288F5C },
-    { -1, it_80288FB0, it_80288FB8, NULL },
-    { 0, it_80288F24, it_80289004, it_80289050 },
-    { -1, it_8028966C, it_80289674, it_80289678 },
-    { 1, it_8028912C, it_8028914C, it_80289150 },
-    { -1, it_802891E0, it_8028920C, it_80289210 },
-};
