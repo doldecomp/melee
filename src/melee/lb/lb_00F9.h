@@ -30,6 +30,6 @@
 /* 014574 */ void lb_80014574(u8, int, int, int);
 /* 0145C0 */ void lb_800145C0(u8);
 /* 014638 */ UNK_T lb_80014638(void);
-/* 014770 */ bool lb_80014770(int, int);
+/* 014770 */ bool lb_80014770(Vec3*, int);
 
 #endif
