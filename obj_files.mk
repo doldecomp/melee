@@ -569,7 +569,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itsword.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itbox.s.o\
     $(BUILD_DIR)/asm/melee/it/items/ittaru.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itegg.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itegg.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itkusudama.s.o\
     $(BUILD_DIR)/src/melee/it/items/itparasol.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itgshell.s.o\
