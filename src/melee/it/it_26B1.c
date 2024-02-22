@@ -203,7 +203,7 @@ s32 it_8026B47C(HSD_GObj* gobj) // Get heal value of healing items
     case It_Kind_Heart:
         return temp_item->xDD4_itemVar.HeartContainer.xDD4_heal;
     case It_Kind_Tomato:
-        return temp_item->xDD4_itemVar.MaximTomato.xDD4_heal;
+        return temp_item->xDD4_itemVar.MaximTomato.heal_amount;
     case It_Kind_Foods:
         return temp_item->xDD4_itemVar.Food.xDD8_heal;
     case Pokemon_Lucky_Egg:
