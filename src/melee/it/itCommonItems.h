@@ -75,10 +75,12 @@ typedef struct {
     u32 x0;
 } ItLGunVars;
 
-typedef struct EggVars // Eggs spawned on Yoshi stages / by Chansey
-{
-    u8 filler[0x60];
-    s32 xE34_heal;
+/// Eggs spawned on Yoshi stages / by Chansey
+typedef struct EggVars {
+    /* +0 */ bool x0;
+    /* +4 */ int rand_max;
+    /* +8 */ u8 _8[0x60 - 0x8];
+    /* +60 */ int heal_amount;
 } EggVars;
 
 typedef struct WhispyAppleVars {
