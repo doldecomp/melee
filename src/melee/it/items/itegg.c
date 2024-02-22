@@ -18,7 +18,32 @@ struct ItEggAttrs {
     /* +4 */ int rand_max;
 };
 
-void it_80288EFC(HSD_GObj*); /* static */
+/* 288C88 */ Item_GObj* it_80288C88(HSD_GObj* arg_gobj, Vec3* pos, Vec3* vel,
+                                    f32 dir);
+/* 288DC4 */ static bool it_80288DC4(Item_GObj* gobj);
+/* 288E6C */ static void it_80288E6C(Item_GObj* gobj);
+/* 288EC4 */ static bool it_80288EC4(HSD_GObj* gobj);
+/* 288ECC */ static void it_80288ECC(HSD_GObj* gobj);
+/* 288ED0 */ static bool it_80288ED0(Item_GObj* gobj);
+/* 288EFC */ static void it_80288EFC(HSD_GObj* gobj);
+/* 288F24 */ static bool it_80288F24(HSD_GObj* gobj);
+/* 288F2C */ static void it_80288F2C(Item_GObj* gobj);
+/* 288F5C */ static bool it_80288F5C(Item_GObj* gobj);
+/* 288FB0 */ static bool it_80288FB0(HSD_GObj* gobj);
+/* 288FB8 */ static void it_80288FB8(HSD_GObj* gobj);
+/* 289004 */ static void it_80289004(Item_GObj* gobj);
+/* 289050 */ static bool it_80289050(Item_GObj* gobj);
+/* 289094 */ static void it_80289094(Item_GObj* gobj);
+/* 28912C */ static bool it_8028912C(Item_GObj* gobj);
+/* 28914C */ static void it_8028914C(HSD_GObj* gobj);
+/* 289150 */ static bool it_80289150(HSD_GObj* gobj);
+/* 289158 */ static void it_80289158(HSD_GObj* gobj);
+/* 2891E0 */ static bool it_802891E0(HSD_GObj* gobj);
+/* 28920C */ static void it_8028920C(HSD_GObj* gobj);
+/* 289210 */ static bool it_80289210(HSD_GObj* gobj);
+/* 28966C */ static bool it_8028966C(HSD_GObj* gobj);
+/* 289674 */ static void it_80289674(HSD_GObj* gobj);
+/* 289678 */ static bool it_80289678(Item_GObj* gobj);
 
 Item_GObj* it_80288C88(HSD_GObj* arg_gobj, Vec3* pos, Vec3* vel, f32 dir)
 {
