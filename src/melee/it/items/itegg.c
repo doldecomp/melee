@@ -48,11 +48,13 @@ ItemStateTable it_803F5988[] = {
 
 Item_GObj* it_80288C88(Item_GObj* gobj, Vec3* pos, Vec3* vel, float dir)
 {
-    Item_GObj* ret = NULL;
+    SpawnItem spawn;
+    Item* ip;
+    Item_GObj* item_gobj = NULL;
 
     if (gobj != NULL) {
-        Item* ip = GET_ITEM(gobj);
-        SpawnItem spawn;
+        ip = GET_ITEM(gobj);
+
         spawn.kind = It_Kind_Egg;
         spawn.prev_pos = *pos;
         spawn.prev_pos.z = 0.0F;
@@ -65,19 +67,19 @@ Item_GObj* it_80288C88(Item_GObj* gobj, Vec3* pos, Vec3* vel, float dir)
         spawn.x44_flag.bits.b0 = true;
         spawn.x40 = 0;
 
-        ret = Item_80268B18(&spawn);
-        if (ret != NULL) {
-            Item* ip = GET_ITEM(ret);
-            ip->xDD0_flag.bits.b6 = true;
+        item_gobj = Item_80268B18(&spawn);
+        if (item_gobj != NULL) {
+            Item* ip = GET_ITEM(item_gobj);
+            ip->xDD0_flag.bits.b6 = false;
             ip->xD40 = 0.0F;
             it_80279BBC(ip);
             if (!ip->xDD0_flag.bits.b7) {
-                it_802756E0(ret);
+                it_802756E0(item_gobj);
             }
         }
     }
 
-    return ret;
+    return item_gobj;
 }
 
 void it_80288D98(Item_GObj* gobj)
