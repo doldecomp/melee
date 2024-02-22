@@ -284,21 +284,25 @@ bool it_80289218(Item_GObj* gobj)
 
 bool it_802893D4(Item_GObj* gobj)
 {
+    u8 _[4] = { 0 };
     return it_80289218(gobj);
 }
 
 bool it_80289470(Item_GObj* gobj)
 {
+    u8 _[4] = { 0 };
     return it_80289218(gobj);
 }
 
 bool it_8028950C(Item_GObj* gobj)
 {
+    u8 _[4] = { 0 };
     return it_80289218(gobj);
 }
 
 bool it_802895A8(Item_GObj* gobj)
 {
+    u8 _[4] = { 0 };
     return it_80289218(gobj);
 }
 
