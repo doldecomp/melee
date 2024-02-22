@@ -3,8 +3,6 @@
 
 #include "ftPk_SpecialHi.h"
 
-#include "math.h"
-
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
@@ -23,6 +21,8 @@
 #include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
+#include <math.h>
+#include <math_ppc.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>

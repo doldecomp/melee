@@ -16,11 +16,8 @@ import math
 import os
 import platform
 import sys
-import math
-
-from typing import Optional, Union, Tuple, Dict, List, Set, Any
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Set, Tuple, Union
 
 from . import ninja_syntax
 
@@ -79,9 +76,9 @@ class ProjectConfig:
         self.warn_missing_config: bool = False  # Warn on missing unit configuration
         self.warn_missing_source: bool = False  # Warn on missing source file
         self.rel_strip_partial: bool = True  # Generate PLFs with -strip_partial
-        self.rel_empty_file: Optional[
-            Path
-        ] = None  # Path to empty.c for generating empty RELs
+        self.rel_empty_file: Optional[Path] = (
+            None  # Path to empty.c for generating empty RELs
+        )
 
         # Progress output and progress.json config
         self.progress_all: bool = True  # Include combined "all" category
@@ -560,9 +557,9 @@ def generate_build_ninja(
                         "basedir": os.path.dirname(src_base_path),
                         "basefile": src_base_path,
                     },
-                    implicit=mwcc_sjis_implicit
-                    if options["shiftjis"]
-                    else mwcc_implicit,
+                    implicit=(
+                        mwcc_sjis_implicit if options["shiftjis"] else mwcc_implicit
+                    ),
                 )
 
                 if lib["host"]:
@@ -1011,9 +1008,10 @@ def calculate_progress(config: ProjectConfig) -> None:
         print(f"    Code: {unit.code_progress} / {unit.code_total} bytes")
         print(f"    Data: {unit.data_progress} / {unit.data_total} bytes")
         if config.progress_use_fancy:
+            code_items = math.floor(code_frac * unit.code_fancy_frac)
             print(
-                "\nYou have {} out of {} {} and collected {} out of {} {}.".format(
-                    math.floor(code_frac * unit.code_fancy_frac),
+                "\nYou have {} of {} {} and completed {} of {} {}.".format(
+                    code_items,
                     unit.code_fancy_frac,
                     unit.code_fancy_item,
                     math.floor(data_frac * unit.data_fancy_frac),
@@ -1021,6 +1019,12 @@ def calculate_progress(config: ProjectConfig) -> None:
                     unit.data_fancy_item,
                 )
             )
+
+            bytes_per_frac = unit.code_total / unit.code_fancy_frac
+            bytes_next = math.ceil((code_items + 1) * bytes_per_frac)
+            bytes_to_go = bytes_next - unit.code_progress
+
+            print(f"Code bytes to go for next trophy: {bytes_to_go}")
 
     if all_progress:
         print_category(all_progress)

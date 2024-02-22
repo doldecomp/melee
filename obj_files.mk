@@ -165,7 +165,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/ft_3C61.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/ft/ftdemo.s.o\
+    $(BUILD_DIR)/src/melee/ft/ftdemo.c.o\
     $(BUILD_DIR)/src/melee/ft/ft_0BEC.c.o\
     $(BUILD_DIR)/src/melee/ft/ft_0BEF.c.o\
     $(BUILD_DIR)/src/melee/ft/ft_0BF0.c.o\
@@ -306,7 +306,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_SpecialN.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_SpecialS.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_SpecialHi.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftSamus/ftSs_SpecialLw_1.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSs_SpecialLw_1.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftYoshi/ftYs_Init.s.o\
@@ -497,12 +497,12 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/gr/grheal.s.o\
     $(BUILD_DIR)/src/melee/gr/grtmario.c.o\
     $(BUILD_DIR)/src/melee/gr/grtcaptain.c.o\
-    $(BUILD_DIR)/asm/melee/gr/grtclink.s.o\
+    $(BUILD_DIR)/src/melee/gr/grtclink.c.o\
     $(BUILD_DIR)/src/melee/gr/grtdonkey.c.o\
     $(BUILD_DIR)/src/melee/gr/grtdrmario.c.o\
     $(BUILD_DIR)/src/melee/gr/grtfalco.c.o\
     $(BUILD_DIR)/src/melee/gr/grtfox.c.o\
-    $(BUILD_DIR)/asm/melee/gr/grticeclimber.s.o\
+    $(BUILD_DIR)/src/melee/gr/grticeclimber.c.o\
     $(BUILD_DIR)/src/melee/gr/grtkirby.c.o\
     $(BUILD_DIR)/src/melee/gr/grtkoopa.c.o\
     $(BUILD_DIR)/src/melee/gr/grtlink.c.o\
@@ -512,15 +512,15 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gr/grtness.c.o\
     $(BUILD_DIR)/src/melee/gr/grtpeach.c.o\
     $(BUILD_DIR)/src/melee/gr/grtpichu.c.o\
-    $(BUILD_DIR)/asm/melee/gr/grtpikachu.s.o\
-    $(BUILD_DIR)/asm/melee/gr/grtpurin.s.o\
+    $(BUILD_DIR)/src/melee/gr/grtpikachu.c.o\
+    $(BUILD_DIR)/src/melee/gr/grtpurin.c.o\
     $(BUILD_DIR)/src/melee/gr/grtsamus.c.o\
     $(BUILD_DIR)/src/melee/gr/grtseak.c.o\
     $(BUILD_DIR)/src/melee/gr/grtyoshi.c.o\
     $(BUILD_DIR)/src/melee/gr/grtzelda.c.o\
-    $(BUILD_DIR)/asm/melee/gr/grtgamewatch.s.o\
+    $(BUILD_DIR)/src/melee/gr/grtgamewatch.c.o\
     $(BUILD_DIR)/src/melee/gr/grtemblem.c.o\
-    $(BUILD_DIR)/asm/melee/gr/grtganon.s.o\
+    $(BUILD_DIR)/src/melee/gr/grtganon.c.o\
     $(BUILD_DIR)/src/melee/gr/stage.c.o\
 
 TEXT_O_FILES +=\
@@ -589,7 +589,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itwstar.s.o\
     $(BUILD_DIR)/src/melee/it/items/itscball.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itrabbitc.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itmetalb.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itmetalb.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itlipstick.s.o\
     $(BUILD_DIR)/src/melee/it/items/itspycloak.c.o\
     $(BUILD_DIR)/asm/melee/it/items/ittarucann.s.o\
@@ -604,7 +604,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itevyoshiegg.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/it/items/itmariofireball.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itmariofireball.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itkirbycutterbeam.s.o\
     $(BUILD_DIR)/src/melee/it/items/itfoxlaser.c.o\
     $(BUILD_DIR)/src/melee/it/items/itfoxillusion.c.o\
@@ -680,16 +680,16 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itsonans.s.o\
     $(BUILD_DIR)/asm/melee/it/items/ithassam.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itunknown.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itentei.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itraikou.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itsuikun.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itentei.c.o\
+    $(BUILD_DIR)/src/melee/it/items/itraikou.c.o\
+    $(BUILD_DIR)/src/melee/it/items/itsuikun.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itkireihana.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itmarumine.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itlugia.s.o\
     $(BUILD_DIR)/asm/melee/it/items/ithouou.s.o\
     $(BUILD_DIR)/src/melee/it/items/itmetamon.c.o\
-    $(BUILD_DIR)/asm/melee/it/items/itpippi.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/ittogepy.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itpippi.c.o\
+    $(BUILD_DIR)/src/melee/it/items/ittogepy.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itmew.s.o\
     $(BUILD_DIR)/src/melee/it/items/itcerebi.c.o\
     $(BUILD_DIR)/asm/melee/it/items/ithitodeman.s.o\
@@ -706,7 +706,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itlikelike.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itnokonoko.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itzgshell.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itzrshell.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itzrshell.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itpatapata.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itklap.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itoldottosea.s.o\
@@ -794,6 +794,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/MSL/math_1.c.o\
     $(BUILD_DIR)/asm/MSL/trigf.s.o\
     $(BUILD_DIR)/asm/MSL/math.s.o\
+    $(BUILD_DIR)/src/MSL/math_ppc.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/MetroTRK/mainloop.s.o\

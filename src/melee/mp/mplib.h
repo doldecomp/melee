@@ -59,9 +59,9 @@
 /* 056B6C */ enum_t mpLib_80056B6C(enum_t);
 /* 056C54 */ bool mpLib_80056C54(s32 idx, Vec3* pos, bool, Vec3*, bool, bool,
                                  float, float, float, float);
-/* 057424 */ void mpLib_80057424(s16);
-/* 057638 */ void mpLib_80057638(s16);
-/* 057BC0 */ void mpLib_80057BC0(s16);
+/* 057424 */ void mpLib_80057424(s32);
+/* 057638 */ void mpLib_80057638(s32);
+/* 057BC0 */ void mpLib_80057BC0(s32);
 /* 0580FC */ void mpLib_800580FC(int, mpLib_Callback*, UNK_T);
 /* 05811C */ void mpLib_8005811C(CollData*, s32 ledge_id);
 /* 0581BC */ void mpLib_800581BC(int, mpLib_Callback*, UNK_T);

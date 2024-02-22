@@ -541,6 +541,7 @@ struct Item {
     UnkFlagStruct xDD3_flag;
     union {
         ItCapsuleAttrs capsule;
+        ItPokemonVars pokemon;
         ItStarVars star;
         itSword_ItemVars sword;
         ItMatoVars mato;
@@ -556,6 +557,8 @@ struct Item {
         FoxLaserVars foxlaser;
         FoxIllusionVars foxillusion;
         itKirbyHammerVars kirbyhammer;
+        itShellVars shell;
+        itTargetVars target;
         u8 padding[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };

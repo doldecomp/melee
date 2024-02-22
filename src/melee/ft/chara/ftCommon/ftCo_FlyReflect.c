@@ -22,6 +22,7 @@
 
 #include <common_structs.h>
 #include <math.h>
+#include <math_ppc.h>
 
 #pragma force_active on
 

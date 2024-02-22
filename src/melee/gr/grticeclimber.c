@@ -1,5 +1,7 @@
 #include "gr/grticeclimber.h"
 
+#include "cm/camera.h"
+#include "ef/efsync.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/grmaterial.h"
@@ -7,6 +9,10 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
+#include "it/inlines.h"
+#include "it/item.h"
+#include "it/types.h"
+#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
 #include <placeholder.h>
@@ -14,6 +20,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 
 /* static */ StageCallbacks grTIc_803E8A98[4] = {
     {
@@ -53,7 +60,7 @@ StageData grTIc_803E8AF4 = {
     (1 << 0),
 };
 
-void grTIceClimber_80220F10(bool arg0) {}
+void grTIceClimber_80220F10(bool unused) {}
 
 void grTIceClimber_80220F14(void)
 {
@@ -83,9 +90,7 @@ bool grTIceClimber_80220FAC(void)
 
 HSD_GObj* grTIceClimber_80220FB4(int id)
 {
-    /// @todo Cannot be moved below @c cb due to an inline
     HSD_GObj* gobj;
-
     StageCallbacks* cb = &grTIc_803E8A98[id];
     gobj = Ground_801C14D0(id);
 
@@ -120,14 +125,14 @@ void grTIceClimber_8022109C(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grTIceClimber_802210C8(HSD_GObj* arg0)
+bool grTIceClimber_802210C8(HSD_GObj* gobj)
 {
     return false;
 }
 
-void grTIceClimber_802210D0(HSD_GObj* arg0) {}
+void grTIceClimber_802210D0(HSD_GObj* gobj) {}
 
-void grTIceClimber_802210D4(HSD_GObj* arg0) {}
+void grTIceClimber_802210D4(HSD_GObj* gobj) {}
 
 void grTIceClimber_802210D8(HSD_GObj* gobj)
 {
@@ -136,25 +141,25 @@ void grTIceClimber_802210D8(HSD_GObj* gobj)
     grTIceClimber_80221288(gobj);
 }
 
-bool grTIceClimber_8022114C(HSD_GObj* arg0)
+bool grTIceClimber_8022114C(HSD_GObj* gobj)
 {
     return false;
 }
 
-void grTIceClimber_80221154(HSD_GObj* arg0)
+void grTIceClimber_80221154(HSD_GObj* gobj)
 {
     lb_800115F4();
-    Ground_801C2FE0(arg0);
+    Ground_801C2FE0(gobj);
 }
 
-void grTIceClimber_80221188(HSD_GObj* arg0) {}
+void grTIceClimber_80221188(HSD_GObj* gobj) {}
 
 void grTIceClimber_8022118C(HSD_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool grTIceClimber_802211DC(HSD_GObj* arg0)
+bool grTIceClimber_802211DC(HSD_GObj* gobj)
 {
     return false;
 }
@@ -164,11 +169,20 @@ void grTIceClimber_802211E4(HSD_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-void grTIceClimber_80221204(HSD_GObj* arg0) {}
+void grTIceClimber_80221204(HSD_GObj* gobj) {}
 
-void grTIceClimber_80221208(void)
+void grTIceClimber_80221208(HSD_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    Vec3 pos;
+    Item* it = GET_ITEM(gobj);
+    PAD_STACK(16);
+
+    HSD_JObjSetFlagsAll(it->xDD4_itemVar.target.jobj, 0x10);
+    lb_8000B1CC(it->xDD4_itemVar.target.jobj, NULL, &pos);
+    efSync_Spawn(0x445, gobj, &pos);
+    Camera_80030E44(2, 0);
+    Ground_801C53EC(310);
+    grMaterial_801C8CDC(gobj);
 }
 
 s16 grTIc_803E8B5C[] = {
@@ -198,12 +212,12 @@ void grTIceClimber_80221288(HSD_GObj* ground_gobj)
     }
 }
 
-lb_UnkAnimStruct* grTIceClimber_80221354(enum_t arg0)
+lb_UnkAnimStruct* grTIceClimber_80221354(enum_t gobj)
 {
     return NULL;
 }
 
-bool grTIceClimber_8022135C(Vec3* arg0, int arg1, HSD_JObj* arg2)
+bool grTIceClimber_8022135C(Vec3* vec, int arg1, HSD_JObj* jobj)
 {
     return true;
 }

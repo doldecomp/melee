@@ -161,6 +161,13 @@ config.ldflags = [
     # "-listclosure", # Uncomment for Wii linkers
 ]
 
+# Progress
+config.progress_use_fancy = True
+config.progress_code_fancy_frac = 293
+config.progress_code_fancy_item = "Trophies"
+config.progress_data_fancy_frac = 51
+config.progress_data_fancy_item = "Event Matches"
+
 # Base flags, common to most GC/Wii games.
 # Generally leave untouched, with overrides added below.
 cflags_base = [
@@ -482,7 +489,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_ThrownKirby.c"),
             Object(NonMatching, "melee/ft/ft_3C61.c"),
             # Main again
-            Object(NonMatching, "melee/ft/ftdemo.c"),
+            Object(Matching, "melee/ft/ftdemo.c"),
             Object(Matching, "melee/ft/ft_0BEC.c"),
             Object(Matching, "melee/ft/ft_0BEF.c"),
             Object(Matching, "melee/ft/ft_0BF0.c"),
@@ -609,7 +616,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftSamus/ftSs_SpecialN.c"),
             Object(Matching, "melee/ft/chara/ftSamus/ftSs_SpecialS.c"),
             Object(Matching, "melee/ft/chara/ftSamus/ftSs_SpecialHi.c"),
-            Object(NonMatching, "melee/ft/chara/ftSamus/ftSs_SpecialLw_1.c"),
+            Object(Matching, "melee/ft/chara/ftSamus/ftSs_SpecialLw_1.c"),
             # Yoshi
             Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_Init.c"),
             Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_Guard.c"),
@@ -789,12 +796,12 @@ config.libs = [
             # Break the Targets stages
             Object(Matching, "melee/gr/grtmario.c"),
             Object(Matching, "melee/gr/grtcaptain.c"),
-            Object(NonMatching, "melee/gr/grtclink.c"),
+            Object(Matching, "melee/gr/grtclink.c"),
             Object(Matching, "melee/gr/grtdonkey.c"),
             Object(Matching, "melee/gr/grtdrmario.c"),
             Object(Matching, "melee/gr/grtfalco.c"),
             Object(Matching, "melee/gr/grtfox.c"),
-            Object(NonMatching, "melee/gr/grticeclimber.c"),
+            Object(Matching, "melee/gr/grticeclimber.c"),
             Object(Matching, "melee/gr/grtkirby.c"),
             Object(Matching, "melee/gr/grtkoopa.c"),
             Object(Matching, "melee/gr/grtlink.c"),
@@ -804,15 +811,15 @@ config.libs = [
             Object(Matching, "melee/gr/grtness.c"),
             Object(Matching, "melee/gr/grtpeach.c"),
             Object(Matching, "melee/gr/grtpichu.c"),
-            Object(NonMatching, "melee/gr/grtpikachu.c"),
-            Object(NonMatching, "melee/gr/grtpurin.c"),
+            Object(Matching, "melee/gr/grtpikachu.c"),
+            Object(Matching, "melee/gr/grtpurin.c"),
             Object(Matching, "melee/gr/grtsamus.c"),
             Object(Matching, "melee/gr/grtseak.c"),
             Object(Matching, "melee/gr/grtyoshi.c"),
             Object(Matching, "melee/gr/grtzelda.c"),
-            Object(NonMatching, "melee/gr/grtgamewatch.c"),
+            Object(Matching, "melee/gr/grtgamewatch.c"),
             Object(Matching, "melee/gr/grtemblem.c"),
-            Object(NonMatching, "melee/gr/grtganon.c"),
+            Object(Matching, "melee/gr/grtganon.c"),
             # Main
             Object(Matching, "melee/gr/stage.c"),
         ],
@@ -891,7 +898,7 @@ config.libs = [
             Object(NonMatching, "melee/it/items/itwstar.c"),
             Object(Matching, "melee/it/items/itscball.c"),
             Object(NonMatching, "melee/it/items/itrabbitc.c"),
-            Object(NonMatching, "melee/it/items/itmetalb.c"),
+            Object(Matching, "melee/it/items/itmetalb.c"),
             Object(NonMatching, "melee/it/items/itlipstick.c"),
             Object(Matching, "melee/it/items/itspycloak.c"),
             Object(NonMatching, "melee/it/items/ittarucann.c"),
@@ -905,7 +912,7 @@ config.libs = [
             Object(NonMatching, "melee/it/items/itfflowerflame.c"),
             Object(NonMatching, "melee/it/items/itevyoshiegg.c"),
             # Fighter-related items
-            Object(NonMatching, "melee/it/items/itmariofireball.c"),
+            Object(Matching, "melee/it/items/itmariofireball.c"),
             Object(NonMatching, "melee/it/items/itkirbycutterbeam.c"),
             Object(Matching, "melee/it/items/itfoxlaser.c"),
             Object(Matching, "melee/it/items/itfoxillusion.c"),
@@ -980,16 +987,16 @@ config.libs = [
             Object(NonMatching, "melee/it/items/itsonans.c"),
             Object(NonMatching, "melee/it/items/ithassam.c"),
             Object(NonMatching, "melee/it/items/itunknown.c"),
-            Object(NonMatching, "melee/it/items/itentei.c"),
-            Object(NonMatching, "melee/it/items/itraikou.c"),
-            Object(NonMatching, "melee/it/items/itsuikun.c"),
+            Object(Matching, "melee/it/items/itentei.c"),
+            Object(Matching, "melee/it/items/itraikou.c"),
+            Object(Matching, "melee/it/items/itsuikun.c"),
             Object(NonMatching, "melee/it/items/itkireihana.c"),
             Object(NonMatching, "melee/it/items/itmarumine.c"),
             Object(NonMatching, "melee/it/items/itlugia.c"),
             Object(NonMatching, "melee/it/items/ithouou.c"),
             Object(Matching, "melee/it/items/itmetamon.c"),
-            Object(NonMatching, "melee/it/items/itpippi.c"),
-            Object(NonMatching, "melee/it/items/ittogepy.c"),
+            Object(Matching, "melee/it/items/itpippi.c"),
+            Object(Matching, "melee/it/items/ittogepy.c"),
             Object(NonMatching, "melee/it/items/itmew.c"),
             Object(Matching, "melee/it/items/itcerebi.c"),
             Object(NonMatching, "melee/it/items/ithitodeman.c"),
@@ -1005,7 +1012,7 @@ config.libs = [
             Object(NonMatching, "melee/it/items/itlikelike.c"),
             Object(NonMatching, "melee/it/items/itnokonoko.c"),
             Object(NonMatching, "melee/it/items/itzgshell.c"),
-            Object(NonMatching, "melee/it/items/itzrshell.c"),
+            Object(Matching, "melee/it/items/itzrshell.c"),
             Object(NonMatching, "melee/it/items/itpatapata.c"),
             Object(NonMatching, "melee/it/items/itklap.c"),
             Object(NonMatching, "melee/it/items/itoldottosea.c"),

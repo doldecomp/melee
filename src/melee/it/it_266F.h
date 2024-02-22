@@ -21,6 +21,7 @@
 /* 26DFB0 */ bool it_8026DFB0(void);
 /* 26E0F4 */ void it_8026E0F4(Item_GObj*);
 /* 26E15C */ void it_8026E15C(Item_GObj*, HSD_GObjEvent);
+/* 26E248 */ void it_8026E248(Item_GObj*, HSD_GObjEvent);
 /* 26E414 */ void it_8026E414(Item_GObj*, HSD_GObjEvent);
 /* 26E8C4 */ void it_8026E8C4(Item_GObj*, HSD_GObjEvent, HSD_GObjEvent);
 /* 26E9A4 */ bool it_8026E9A4(Item_GObj*, Vec3*, Vec3*, int);
@@ -118,7 +119,7 @@
 /* 27A344 */ void it_8027A344(Item_GObj*);
 /* 27B0C4 */ void it_8027B0C4(HSD_GObj*, SpawnItem*);
 /* 27B4A4 */ void it_8027B4A4(Fighter_GObj*, Item_GObj*);
-/* 27B5B0 */ void* it_8027B5B0(s32, s32, HSD_JObj*, s32, s32);
+/* 27B5B0 */ Item_GObj* it_8027B5B0(s32, s32, HSD_JObj*, Vec3*, s32);
 /* 4A0E30 */ extern HSD_ObjAllocUnk4 it_804A0E30;
 /* 4A0E50 */ extern HSD_ObjAllocUnk5 it_804A0E50;
 /* 4A0E60 */ extern HSD_ObjAllocUnk6 it_804A0E60;

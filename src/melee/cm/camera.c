@@ -8,6 +8,7 @@
 #include "pl/player.h"
 
 #include <math.h>
+#include <math_ppc.h>
 #include <trigf.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/cobj.h>

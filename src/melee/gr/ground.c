@@ -93,7 +93,7 @@ extern StageData Ground_803DFEA8, grTe_803E5764, grCs_803E11A4, grRc_803E4ECC,
     grNKr_803E584C, grSh_Route_803E5988, grZe_Route_803E5E0C,
     grBb_Route_803E617C, grTe_803E5764, grNBa_803E7E38, grNLa_803E7F90,
     grFigureGet_803E7D34, grPushOn_803E7B10, grTMr_803E85A4, grTCa_803E8664,
-    grTCl_803E872C, grTDk_803E87EC, grTDr_803E88AC, grTFc_803E8974,
+    grTCLink_803E872C, grTDk_803E87EC, grTDr_803E88AC, grTFc_803E8974,
     grTFx_803E8A34, grTIc_803E8AF4, grTKb_803E8C0C, grTKp_803E8CCC,
     grTLk_803E8D8C, grTLg_803E8E4C, grTMs_803E8F0C, grTMewtwo_803E8FCC,
     grTNs_803E908C, grTPe_803E914C, grTPc_803E920C, grTPk_803E92CC,
@@ -117,7 +117,7 @@ static StageData* Ground_803DFEDC[] = {
     &grZe_Route_803E5E0C, &grBb_Route_803E617C, &grTe_803E5764,
     &grNBa_803E7E38,      &grNLa_803E7F90,      &grFigureGet_803E7D34,
     &grPushOn_803E7B10,   &grTMr_803E85A4,      &grTCa_803E8664,
-    &grTCl_803E872C,      &grTDk_803E87EC,      &grTDr_803E88AC,
+    &grTCLink_803E872C,   &grTDk_803E87EC,      &grTDr_803E88AC,
     &grTFc_803E8974,      &grTFx_803E8A34,      &grTIc_803E8AF4,
     &grTKb_803E8C0C,      &grTKp_803E8CCC,      &grTLk_803E8D8C,
     &grTLg_803E8E4C,      &grTMs_803E8F0C,      &grTMewtwo_803E8FCC,
@@ -1216,7 +1216,7 @@ void Ground_801C2FE0(HSD_GObj* arg0)
     NOT_IMPLEMENTED;
 }
 
-bool Ground_801C3128(s32 arg0, void (*arg1)(s16))
+bool Ground_801C3128(s32 arg0, void (*arg1)(s32))
 {
     /// @todo Unused variable; is this an argument?
     StageData* stage_data;
@@ -1802,7 +1802,7 @@ s32 Ground_801C4210(void)
     enum_t i;
     for (i = 199; i < 220; i++) {
         if (stage_info.x280[i] != NULL &&
-            it_8027B5B0(It_Kind_Mato, 0, stage_info.x280[i], 0, 0) != NULL)
+            it_8027B5B0(It_Kind_Mato, 0, stage_info.x280[i], NULL, 0) != NULL)
         {
             count++;
         }

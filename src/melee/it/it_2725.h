@@ -21,12 +21,15 @@
 /* 2750F8 */ void it_802750F8(Item_GObj*);
 /* 276214 */ bool it_80276214(Item_GObj*);
 /* 276CB8 */ void it_80276CB8(Item_GObj* gobj);
+/* 277040 */ bool it_80277040(Item_GObj*);
 /* 27781C */ bool it_8027781C(Item_GObj*);
+/* 279C48 */ void it_80279C48(Item_GObj*, Article*);
 /* 279FF8 */ void it_80279FF8(Item_GObj*);
 /* 27A09C */ bool it_8027A09C(Item_GObj*);
 /* 27A118 */ bool it_8027A118(Item_GObj*, void (*)(Item_GObj*));
 /* 27B070 */ void it_8027B070(Item_GObj* gobj, Fighter_GObj* owner_gobj);
 /* 27B378 */ void it_8027B378(Fighter_GObj*, Item_GObj*, float);
+/* 27C56C */ void it_8027C56C(Item_GObj*, f32);
 /* 27C8B0 */ void it_8027C8B0(Item_GObj*);
 /* 27CE44 */ void it_8027CE44(Item_GObj*);
 /* 3F14C4 */ extern struct ItemLogicTable it_803F14C4[43];

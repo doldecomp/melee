@@ -7,6 +7,7 @@
 #include "baselib/objalloc.h"
 
 #include <MSL/math.h>
+#include <MSL/math_ppc.h>
 
 void HSD_MtxInverse(Mtx src, Mtx dest);
 void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest);

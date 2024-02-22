@@ -4,7 +4,6 @@
 #include "ftNs_SpecialHi.h"
 
 #include "ftNs_Init.h"
-#include "math.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -25,6 +24,8 @@
 #include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
+#include <math.h>
+#include <math_ppc.h>
 #include <MetroTRK/intrinsics.h>
 
 // SpecialHi/SpecialAirHi (PK Thunder)

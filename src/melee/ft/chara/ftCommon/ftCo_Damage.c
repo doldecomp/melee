@@ -47,6 +47,7 @@
 
 #include <common_structs.h>
 #include <math.h>
+#include <math_ppc.h>
 #include <placeholder.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/vec.h>

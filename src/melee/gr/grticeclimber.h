@@ -9,7 +9,7 @@
 #include <placeholder.h>
 
 /* 1C8DE0 */ void grMaterial_801C8DE0(s32, f32, f32, f32, f32, f32, f32, f32);
-/* 220F10 */ void grTIceClimber_80220F10(int);
+/* 220F10 */ void grTIceClimber_80220F10(bool);
 /* 220F14 */ void grTIceClimber_80220F14(void);
 /* 220F84 */ void grTIceClimber_80220F84(void);
 /* 220F88 */ void grTIceClimber_80220F88(void);
@@ -27,7 +27,7 @@
 /* 2211DC */ bool grTIceClimber_802211DC(HSD_GObj*);
 /* 2211E4 */ void grTIceClimber_802211E4(HSD_GObj*);
 /* 221204 */ void grTIceClimber_80221204(HSD_GObj*);
-/* 221208 */ void grTIceClimber_80221208(void);
+/* 221208 */ void grTIceClimber_80221208(HSD_GObj*);
 /* 221288 */ void grTIceClimber_80221288(HSD_GObj*);
 /* 221354 */ lb_UnkAnimStruct* grTIceClimber_80221354(enum_t);
 /* 22135C */ bool grTIceClimber_8022135C(Vec3*, int, HSD_JObj*);

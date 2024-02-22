@@ -91,10 +91,36 @@ typedef struct itUnkAttributes {
     float x4_float;
     float x8;
     float xC;
+    float x10;
 } itUnkAttributes;
 
 typedef struct {
     HSD_JObj* x0;
 } ItMatoVars;
+
+typedef struct {
+    u8 padding[0xE10 - 0xDD4];
+    int xE10;
+} itShellVars;
+
+typedef struct itPokemonAttributes {
+    f32 x0;
+    s32 timer;
+    s32 max;
+    s32 xC;
+    s32 x10;
+    s32 x14;
+    s32 x18;
+} itPokemonAttributes;
+
+typedef struct {
+    u8 padding[0xE34 - 0xDD4];
+    s32 timer;
+} ItPokemonVars;
+
+typedef struct {
+    int x0;
+    HSD_JObj* jobj;
+} itTargetVars;
 
 #endif

@@ -1,0 +1,217 @@
+name: build
+run-name: Build Melee & publish GitHub Pages
+
+on:
+  push:
+    paths: [ "**" ]
+  pull_request:
+
+env:
+  IMAGE_REPO: doldecomp/melee
+
+permissions:
+  contents: read
+  id-token: write
+  packages: read
+  pages: write
+
+jobs:
+  build-make:
+    name: Make
+    runs-on: ubuntu-latest
+    env:
+      REGISTRY: ghcr.io
+      OUTPUT: ${{ github.workspace }}/output
+    strategy:
+      matrix:
+        make_flags: ["GENERATE_MAP=1"]
+      fail-fast: false
+
+    steps:
+    - name: Get image name
+      env:
+        IMAGE_SUFFIX: build-linux:latest
+      run: |
+        echo "IMAGE=$IMAGE_REPO/$IMAGE_SUFFIX" >> $GITHUB_ENV
+
+    - name: Checkout Melee repository
+      uses: actions/checkout@v3
+
+    - name: Log into container registry
+      uses: docker/login-action@v2.1.0
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Pull build image
+      run: docker pull "$REGISTRY/$IMAGE"
+
+    - name: Build Melee
+      env:
+        MAKE_FLAGS: ${{ matrix.make_flags }}
+      run: |
+        mkdir -p "$OUTPUT"
+        docker run --rm \
+          --user "$(id -u):$(id -g)" \
+          --volume "$PWD":/input:ro \
+          --volume "$OUTPUT:/output" \
+          --env MAKE_FLAGS="$MAKE_FLAGS" \
+          "$REGISTRY/$IMAGE"
+
+    - name: Upload map
+      if: matrix.make_flags == 'GENERATE_MAP=1'
+      uses: actions/upload-artifact@v3
+      with:
+        name: GALE01.map
+        path: ${{ env.OUTPUT }}/ssbm.us.1.2/GALE01.map
+        if-no-files-found: error
+
+    - name: Set step summary
+      if: matrix.make_flags == 'GENERATE_MAP=1'
+      run: |
+        printf "\`\`\`\n%s\n\`\`\`" "$(cat "$OUTPUT/PROGRESS.md")" \
+          >> $GITHUB_STEP_SUMMARY
+
+  build-ninja:
+    name: Ninja
+    runs-on: ubuntu-latest
+    if: github.repository == 'doldecomp/melee'
+    container: ghcr.io/doldecomp/build-melee:main
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [GALE01]
+        options: ["", "all_source"]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+        sparse-checkout: |
+          src
+          tools
+          config
+    - name: Git config
+      run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+    - name: Prepare
+      run: ln -s /orig .
+    - name: Build
+      run: |
+        args='--compilers /compilers --max-errors 0 --verbose --version ${{matrix.version}}'
+        if [ -z '${{matrix.options}}' ]; then
+          args="--map --require-protos $args"
+        fi
+        echo "$args" | xargs python configure.py
+        echo "${{matrix.options}}" | xargs ninja
+    - name: Upload progress
+      if: matrix.options == '' && github.ref_name == github.event.repository.default_branch
+      continue-on-error: true
+      env:
+        PROGRESS_API_KEY: ${{secrets.PROGRESS_API_KEY}}
+      run: |
+        python tools/upload_progress.py \
+          -b 'https://progress.decomp.club/' \
+          -p melee \
+          -v ${{matrix.version}} \
+          'build/${{matrix.version}}/progress.json'
+    - name: Upload map
+      if: matrix.options == ''
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{matrix.version}}_maps
+        path: build/${{matrix.version}}/**/*.MAP
+
+  check-issues:
+    name: Issues
+    runs-on: ubuntu-latest
+    env:
+      REGISTRY: ghcr.io
+
+    steps:
+    - name: Get image name
+      env:
+        IMAGE_SUFFIX: check-issues:latest
+      run: |
+        echo "IMAGE=$IMAGE_REPO/$IMAGE_SUFFIX" >> $GITHUB_ENV
+
+    - name: Checkout Melee repository
+      uses: actions/checkout@v3
+
+    - name: Log into container registry
+      uses: docker/login-action@v2.1.0
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Pull build image
+      run: docker pull "$REGISTRY/$IMAGE"
+
+    - name: Check for code issues
+      run: |
+        docker run --rm \
+          --user "$(id -u):$(id -g)" \
+          --volume "$PWD:/input:ro" \
+            "$REGISTRY/$IMAGE"
+
+  gen-pages:
+    name: Generate pages
+    runs-on: ubuntu-latest
+    needs: build-ninja
+    env:
+      REGISTRY: ghcr.io
+      OUTPUT: ${{github.workspace}}/output
+    steps:
+      - name: Get image name
+        env:
+          IMAGE_SUFFIX: gen-pages:latest
+        run: |
+          echo "IMAGE=$IMAGE_REPO/$IMAGE_SUFFIX" >> $GITHUB_ENV
+
+      - name: Checkout Melee repository
+        uses: actions/checkout@v3
+
+      - name: Log into container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull generator image
+        run: docker pull ${{ env.REGISTRY }}/${{ env.IMAGE }}
+
+      - name: Generate pages
+        run: |
+          mkdir -p "${{ env.OUTPUT }}"
+          docker run --rm \
+            --user "$(id -u):$(id -g)" \
+            --volume "$PWD:/input:ro" \
+            --volume "${{ env.OUTPUT }}:/output" \
+            ${{ env.REGISTRY }}/${{ env.IMAGE }}
+
+      - name: Set up GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ env.OUTPUT }}
+
+  deploy-pages:
+    concurrency:
+      group: deploy
+      cancel-in-progress: false
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: gen-pages
+    if: github.ref_name == github.event.repository.default_branch
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

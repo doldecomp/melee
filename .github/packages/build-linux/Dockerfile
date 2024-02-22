@@ -3,15 +3,12 @@ ARG WIBO_PATH="/usr/local/sbin/wibo"
 COPY --from=ghcr.io/decompals/wibo:latest \
     ${WIBO_PATH} \
     ${WIBO_PATH}
-COPY requirements.txt /tmp/
 ARG DEVKITPRO=/opt/devkitpro
 ARG DEVKITPPC=${DEVKITPRO}/devkitPPC
-COPY .github/packages/build-linux/setup.sh /usr/local/bin
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C
 ENV MELEE_COMPILERS_URL='https://files.decomp.dev/compilers_latest.zip'
-ENV BINUTILS_URL='https://github.com/encounter/gc-wii-binutils/releases/download/2.42-0/linux-x86_64.zip'
-RUN setup.sh
+ENV BINUTILS_URL='https://github.com/encounter/gc-wii-binutils/releases/download/2.42-1/linux-x86_64.zip'
 ENV WINE=${WIBO_PATH}
 ENV DEVKITPRO=${DEVKITPRO}
 ENV DEVKITPPC=${DEVKITPPC}
@@ -23,11 +20,17 @@ FROM linux-base AS linux-rw
 VOLUME [ "/input", "/output" ]
 
 FROM linux-rw AS build-linux
+COPY .github/packages/build-linux/setup.sh /usr/local/bin
+RUN setup.sh
 ENV MAKE_FLAGS="GENERATE_MAP=1"
 COPY .github/packages/build-linux/entrypoint.sh /usr/local/bin
 ENTRYPOINT entrypoint.sh
 
 FROM linux-rw AS gen-pages
+COPY .github/packages/gen-pages/setup.sh /usr/local/bin
+COPY tools/progress-site/package*.json /tmp
+COPY /reqs/gen-pages.txt /tmp/reqs/
+RUN setup.sh
 COPY .github/packages/gen-pages/entrypoint.sh /usr/local/bin
 ENTRYPOINT entrypoint.sh
 

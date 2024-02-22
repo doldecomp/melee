@@ -3,8 +3,6 @@
 
 #include "ftMt_SpecialHi.h"
 
-#include "math.h"
-
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
@@ -26,6 +24,8 @@
 
 #include <common_structs.h>
 #include <dolphin/mtx/types.h>
+#include <MSL/math.h>
+#include <MSL/math_ppc.h>
 
 /// Create Teleport Start GFX
 void ftMt_SpecialHi_CreateGFX(HSD_GObj* gobj)
