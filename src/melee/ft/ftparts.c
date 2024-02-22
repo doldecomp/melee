@@ -124,15 +124,9 @@ void ftParts_JObjInfoInit(void)
     HSD_JOBJ_INFO(&ftJObj)->make_pmtx = ftParts_JObjMakePositionMtx;
 }
 
-void ftParts_80073758(HSD_JObj* arg0)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80073758
 
-s32 ftParts_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_IntpJObjLoad
 
 void ftParts_IntpJObjInfoInit(void)
 {
@@ -142,20 +136,11 @@ void ftParts_IntpJObjInfoInit(void)
     HSD_JOBJ_INFO(&ftIntpJObj)->load = ftParts_IntpJObjLoad;
 }
 
-void ftParts_80073830(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80073830
 
-void ftParts_800739B8(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_800739B8
 
-void ftParts_80073CA8(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80073CA8
 
 void ftParts_PObjInfoInit(void)
 {
@@ -166,15 +151,9 @@ void ftParts_PObjInfoInit(void)
     HSD_POBJ_INFO(&ftPObj)->setup_mtx = ftParts_PObjSetupMtx;
 }
 
-void ftParts_80074148(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80074148
 
-void ftParts_80074170(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80074170
 
 void ftParts_SetupParts(HSD_GObj* fighter_obj)
 {
@@ -246,15 +225,9 @@ void ftParts_SetupParts(HSD_GObj* fighter_obj)
     }
 }
 
-void ftParts_8007462C(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_8007462C
 
-void ftParts_8007482C(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_8007482C
 
 void ftParts_8007487C(unk_t item, u32* arg1, u8 costume_id, u32* arg3,
                       u32* arg4)
@@ -262,55 +235,25 @@ void ftParts_8007487C(unk_t item, u32* arg1, u8 costume_id, u32* arg3,
     NOT_IMPLEMENTED;
 }
 
-void ftParts_800749CC(HSD_GObj* arg0)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_800749CC
 
-void ftParts_80074A4C(HSD_GObj* arg0, enum_t arg1, enum_t arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80074A4C
 
-s32 ftParts_80074A74(HSD_GObj* arg0, s32 arg1)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80074A74
 
-void ftParts_80074A8C(HSD_GObj* arg0)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80074A8C
 
-void ftParts_80074ACC(ftCo_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80074ACC
 
-void ftParts_80074B0C(HSD_GObj* gobj, int arg1, int arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80074B0C
 
-void ftParts_80074B6C(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80074B6C
 
-void ftParts_80074CA0(u32* arg0, s32 arg1, u32* arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80074CA0
 
-void ftParts_80074D7C(u32* arg0, s32 arg1, u32* arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80074D7C
 
-void ftParts_80074E58(Fighter* fp)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80074E58
 
 Fighter_Part ftParts_8007500C(Fighter* fp, Fighter_Part part)
 {
@@ -330,67 +273,28 @@ u8 ftParts_80075028(size_t to_table_idx, size_t from_table_idx,
     return FTPART_INVALID;
 }
 
-u32 ftParts_8007506C(s32 ftkind, u32 part)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_8007506C
 
-void ftParts_800750C8(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_800750C8
 
-void ftParts_80075240(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80075240
 
-void ftParts_80075304(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80075304
 
-void ftParts_800753D4(Fighter* arg0, s32 arg1, unk_t arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_800753D4
 
-void ftParts_800755E8(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_800755E8
 
-void ftParts_80075650(HSD_GObj* gobj, HSD_JObj* arg1, u32* arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80075650
 
-void ftParts_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_JObjSetRotation
 
-void ftParts_8007592C(Fighter* arg0, s32 arg1, float arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_8007592C
 
-void ftParts_80075AF0(Fighter* arg0, s32 arg1, float arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80075AF0
 
-void ftParts_80075CB4(Fighter* arg0, s32 arg1, float arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80075CB4
 
-float ftParts_80075E78(Fighter* arg0, bool arg1)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80075E78
 
-float ftParts_80075F48(Fighter* arg0, s32 arg1)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_80075F48

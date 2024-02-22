@@ -17,6 +17,10 @@ struct Vec4 {
     f32 x, y, z, w;
 };
 
+struct U8Vec4 {
+    u8 x, y, z, w;
+};
+
 struct S8Vec3 {
     s8 x, y, z;
 };

@@ -1,6 +1,6 @@
 use crate::parse::hex;
+use ahash::AHashMap;
 use anyhow::Result;
-use dashmap::DashMap;
 use nom::{
     bytes::complete::{tag, take_till, take_till1},
     error::{FromExternalError, ParseError},
@@ -31,15 +31,28 @@ where
     Ok((input, (name, addr)))
 }
 
-pub(crate) fn read_symbols() -> Result<impl Fn(&str) -> Option<u32>> {
-    let map = DashMap::<String, u32>::new();
+fn map_symbols() -> Result<Vec<(String, u32)>> {
     let path = &melee_utils::ROOT.join("config/GALE01/symbols.txt");
-    let input = fs::read_to_string(path)?;
-    input.par_lines().into_par_iter().try_for_each(|line| {
-        let (_, (name, addr)) = symbol::<()>(line)
-            .map_err(|err| anyhow::anyhow!(format!("{:#?}", err)))?;
-        map.insert(name.to_owned(), addr);
-        anyhow::Ok(())
-    })?;
-    Ok(move |k: &str| map.get(k).map(|r| *r.value()))
+    fs::read_to_string(path)?
+        .par_lines()
+        .into_par_iter()
+        .map(|line| {
+            let (_, (name, addr)) = symbol::<()>(line)
+                .map_err(|err| anyhow::anyhow!(format!("{:#?}", err)))?;
+            anyhow::Ok((name.to_owned(), addr))
+        })
+        .collect()
+}
+
+pub(crate) fn addr_to_symbol() -> Result<impl Fn(u32) -> Option<String>> {
+    let map = map_symbols()?
+        .into_iter()
+        .map(|(k, v)| (v, k))
+        .collect::<AHashMap<_, _>>();
+    Ok(move |k: u32| map.get(&k).cloned())
+}
+
+pub(crate) fn symbol_to_addr() -> Result<impl Fn(&str) -> Option<u32>> {
+    let map = map_symbols()?.into_iter().collect::<AHashMap<_, _>>();
+    Ok(move |k: &str| map.get(k).copied())
 }

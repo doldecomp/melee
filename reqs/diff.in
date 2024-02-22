@@ -1,3 +1,7 @@
 # TODO -e file:tools/asm-differ#egg=asm-differ
-humanfriendly
 argcomplete
+colorama
+cxxfilt
+humanfriendly
+levenshtein
+watchdog

@@ -1,7 +1,7 @@
 use crate::{
     address::Address,
     decompme_api, dtk_config,
-    scratch::Scratch,
+    scratch::{try_parse_addr, Scratch},
     scratch_config::{self},
 };
 use ahash::AHashMap;
@@ -11,9 +11,7 @@ use lazy_static::lazy_static;
 use log::{error, info};
 use reqwest::blocking::Client;
 use serde::{Deserialize, Serialize};
-use std::{
-    fmt::Display, io::Read as _, ops::RangeInclusive, time::Duration, usize,
-};
+use std::{fmt::Display, io::Read as _, time::Duration, usize};
 use time::{format_description::well_known::Rfc3339, OffsetDateTime};
 use url::Url;
 
@@ -55,29 +53,6 @@ pub(crate) struct ScratchesResponse {
     results: Vec<ScratchResponse>,
 }
 
-fn try_parse_addr(input: &str) -> Option<u32> {
-    const ADDR_SPACE: RangeInclusive<u32> = 0x80003100..=0x804DEC00;
-    let mut hex: u32 = 0;
-    let mut count: u32 = 0;
-    for c in input.chars().rev() {
-        if c.is_ascii_hexdigit() {
-            hex |= c.to_digit(16).unwrap().wrapping_shl(4 * count);
-            count += 1;
-            continue;
-        }
-        if count == 8 {
-            break;
-        }
-        count = 0;
-        hex = 0;
-    }
-    if count == 8 && ADDR_SPACE.contains(&hex) {
-        Some(hex)
-    } else {
-        None
-    }
-}
-
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 pub(crate) enum Completion {
     Percent(f32),
@@ -107,13 +82,10 @@ pub(crate) struct Scratches {
     pub(crate) skipped: Vec<ScratchResponse>,
 }
 
-pub(crate) fn scratches<'a, F>(
+pub(crate) fn scratches<'a, F: Fn(&str) -> Option<u32>>(
     json: &str,
     resolve_addr: &F,
-) -> Result<Scratches>
-where
-    F: Fn(&str) -> Option<u32>,
-{
+) -> Result<Scratches> {
     let response: ScratchesResponse =
         serde_json::from_str(json).context("failed to parse the response")?;
     let mut ret = Scratches::default();
@@ -203,7 +175,7 @@ pub(crate) fn seed_loop(from: Option<Url>, update: bool) -> Result<()> {
     });
 
     let mut latest = OffsetDateTime::UNIX_EPOCH;
-    let symbols = dtk_config::read_symbols()?;
+    let symbols = dtk_config::symbol_to_addr()?;
     let hash_builder = ahash::RandomState::default();
     let mut scratches = {
         let vec = scratch_config::load()?;

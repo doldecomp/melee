@@ -1,6 +1,5 @@
 #include <platform.h>
-
-#include "ftCo_09F4.h"
+#include "ftCommon/forward.h"
 
 #include <math.h>
 #include <placeholder.h>
@@ -8,8 +7,6 @@
 #include <baselib/lobj.h>
 
 /* 09F480 */ static void ftCo_8009F480(ftCo_GObj* gobj);
-/* 09F54C */ static UNK_RET ftCo_8009F54C(UNK_PARAMS);
-/* 09F5AC */ static UNK_RET ftCo_8009F5AC(UNK_PARAMS);
 
 #pragma force_active on
 
@@ -43,32 +40,14 @@ void ftCo_8009F480(ftCo_GObj* gobj)
     HSD_LObjAnimAll(gobj->hsd_obj);
 }
 
-UNK_RET ftCo_8009F4A4(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_8009F4A4
 
-UNK_RET ftCo_8009F54C(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_8009F54C
 
-void ftCo_8009F578(ftCo_Fighter* fp)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_8009F578
 
-UNK_RET ftCo_8009F5AC(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_8009F5AC
 
-UNK_T ftCo_8009F75C(Fighter* fp, bool arg1)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_8009F75C
 
-UNK_RET ftCo_8009F7F8(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_8009F7F8

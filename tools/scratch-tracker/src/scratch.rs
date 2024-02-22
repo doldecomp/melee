@@ -1,7 +1,11 @@
 use crate::{address::Address, decompme_api::Completion};
 use anyhow::{bail, Result};
 use log::{info, warn};
-use std::{cmp::Ordering, fmt::Write as _, ops::Deref as _};
+use std::{
+    cmp::Ordering,
+    fmt::Write as _,
+    ops::{Deref as _, RangeInclusive},
+};
 use time::{
     format_description::well_known::Rfc3339, OffsetDateTime, UtcOffset,
 };
@@ -157,5 +161,28 @@ impl Scratch {
         }
 
         Ok(())
+    }
+}
+
+pub(crate) fn try_parse_addr(input: &str) -> Option<u32> {
+    const ADDR_SPACE: RangeInclusive<u32> = 0x80003100..=0x804DEC00;
+    let mut hex: u32 = 0;
+    let mut count: u32 = 0;
+    for c in input.chars().rev() {
+        if c.is_ascii_hexdigit() {
+            hex |= c.to_digit(16).unwrap().wrapping_shl(4 * count);
+            count += 1;
+            continue;
+        }
+        if count == 8 {
+            break;
+        }
+        count = 0;
+        hex = 0;
+    }
+    if count == 8 && ADDR_SPACE.contains(&hex) {
+        Some(hex)
+    } else {
+        None
     }
 }
