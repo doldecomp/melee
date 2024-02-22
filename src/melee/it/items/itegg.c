@@ -89,8 +89,8 @@ void it_80288D98(Item_GObj* gobj)
 bool it_80288DC4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    struct EggVars* vars = ip->xC4_article_data->x4_specialAttributes;
-    if (HSD_Randi(vars->rand_max) == 0) {
+    EggVars* attrs = ip->xC4_article_data->x4_specialAttributes;
+    if (HSD_Randi(attrs->rand_max) == 0) {
         return true;
     }
 
@@ -102,7 +102,7 @@ bool it_80288DC4(Item_GObj* gobj)
         }
     }
 
-    it_8026F3D4(gobj, 0, vars->x0, 0);
+    it_8026F3D4(gobj, 0, attrs->x0, 0);
     return false;
 }
 
@@ -236,15 +236,9 @@ void it_80289158(Item_GObj* gobj)
 
 bool it_802891E0(Item_GObj* gobj)
 {
-    Item* item = GET_ITEM(gobj);
-
-    item->xDD4_itemVar.Egg.rand_max -= 1;
-
-    if (item->xDD4_itemVar.Egg.rand_max > 0) {
-        return false;
-    } else {
-        return true;
-    }
+    Item* ip = GET_ITEM(gobj);
+    --ip->xDD4_itemVar.egg.rand_max;
+    return ip->xDD4_itemVar.egg.rand_max > 0 ? false : true;
 }
 
 void it_8028920C(Item_GObj* gobj) {}
