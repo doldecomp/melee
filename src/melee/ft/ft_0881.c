@@ -3,7 +3,6 @@
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
 #include "lb/lbaudio_ax.h"
-#include "pl/pl_0371.h"
 #include "pl/plstale.h"
 
 #include <baselib/random.h>
@@ -45,70 +44,86 @@ void ft_800881D8(Fighter* fp, int arg1, int arg2, int arg3)
     }
 }
 
-void ft_80088328(Fighter* fp, int arg1, int arg2, int arg3)
+void ft_80088328(Fighter* fp, int sfx_id, int sfx_vol, int sfx_pan)
 {
-    NOT_IMPLEMENTED;
+    s32 temp_r30;
+    u32 temp_ID;
+
+    if (!(fp->x2225_b6)) {
+        temp_ID = sfx_id - 0x80000;
+        if (temp_ID != 0x3D60U) {
+            if (temp_ID != 0x3D61U) {
+                temp_r30 = ft_80087D0C(fp, sfx_id);
+                !sfx_id;
+                ft_80088770(fp);
+                ft_800887CC(fp);
+                fp->x2148 = lbAudioAx_80023870(
+                    temp_r30, (u8) sfx_vol, (u8) sfx_pan,
+                    (fp->player_id * 2) + 42 + fp->x221F_b4);
+                return;
+            }
+            ft_800887CC(fp);
+        }
+    } else {
+        switch (fp->kind) {
+        case FTKIND_GAMEWATCH:
+        case FTKIND_SAMUS:
+            temp_ID = sfx_id - 0x80000;
+            if (temp_ID != 0x3D60U) {
+                if (temp_ID != 0x3D61U) {
+                    temp_r30 = ft_80087D0C(fp, sfx_id);
+                    ft_80088770(fp);
+                    ft_800887CC(fp);
+                    fp->x2148 = lbAudioAx_80023870(
+                        temp_r30, (u8) sfx_vol, (u8) sfx_pan,
+                        (fp->player_id * 2) + 42 + fp->x221F_b4);
+                    return;
+                }
+                ft_800887CC(fp);
+            }
+
+        default:
+            return;
+        }
+    }
 }
 
-void ft_80088478(Fighter* fp, int arg0, int arg1, int arg2)
+void ft_80088478(Fighter* fp, int sfx_id, int sfx_vol, int sfx_pan)
 {
-    NOT_IMPLEMENTED;
+    if ((sfx_id - 0x80000) != 0x3D60U) {
+        if ((sfx_id - 0x80000) != 0x3D61U) {
+            sfx_id = ft_80087D0C(fp, sfx_id);
+            fp->x214C = lbAudioAx_80023870(
+                sfx_id, sfx_vol, sfx_pan,
+                (0x36 + (fp->player_id * 2) + (fp->x221F_b4)));
+            return;
+        } else {
+            ft_80088828(fp);
+        }
+    }
 }
 
-void ft_80088510(Fighter* fp, int arg1, int arg2, int arg3)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80088510
 
-void ft_800885A8(Fighter* fp, int arg1, int arg2, int arg3)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800885A8
 
-void ft_80088640(Fighter* arg0, int arg1, int arg2, int arg3)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80088640
 
-void ftCo_800886D8(Fighter* fp, int arg0, int arg1, int arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800886D8
 
-void ft_80088770(Fighter* fp)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80088770
 
-void ft_800887CC(Fighter* fp)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800887CC
 
-void ft_80088828(Fighter* fp)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80088828
 
-void ft_80088884(Fighter* fp)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80088884
 
-void ft_800888E0(Fighter* fp)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800888E0
 
-void ft_8008893C(Fighter* fp)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_8008893C
 
-UNK_RET ft_80088998(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80088998
 
 void ft_800889F4(Fighter* fp, FtSFXArr* sfx)
 {
@@ -117,15 +132,9 @@ void ft_800889F4(Fighter* fp, FtSFXArr* sfx)
     }
 }
 
-void ft_80088A50(Fighter* fp)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80088A50
 
-void ft_80088C5C(Fighter_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80088C5C
 
 void ft_800890BC(Fighter* fp)
 {
@@ -146,15 +155,9 @@ void ft_800890D0(Fighter* fp, uint move_id)
     }
 }
 
-UNK_RET ft_80089118(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80089118
 
-UNK_RET ft_80089228(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_80089228
 
 static void inlineC0(Fighter* fp, uint move_id)
 {
