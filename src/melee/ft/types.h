@@ -1074,7 +1074,9 @@ struct Fighter {
     /*  fp+598 */ s32 x598;
     /*  fp+59C */ UNK_T x59C;
     /*  fp+5A0 */ UNK_T x5A0;
-    /*  fp+5A4 */ u8 filler_x5A4[0x5B8 - 0x5A4];
+    /*  fp+5A4 */ UNK_T x5A4;
+    /*  fp+5A8 */ UNK_T x5A8;
+    /*  fp+5AC */ u8 _5AC[0x5B8 - 0x5AC];
     /*  fp+5B8 */ s32 x5B8;
     /*  fp+5BC */ UNK_T x5BC;
     /*  fp+598 */ u8 filler_x598[0x5C8 - 0x5C0];
