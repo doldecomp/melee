@@ -11,6 +11,7 @@
 
 typedef enum_t FtMotionId;
 typedef struct Fighter Fighter;
+typedef struct Fighter_804D653C_t Fighter_804D653C_t;
 typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;
 typedef struct Fighter_DemoStrings Fighter_DemoStrings;
 typedef struct FighterBone FighterBone;

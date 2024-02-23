@@ -892,7 +892,7 @@ struct ftDeviceUnk2 {
     /* +1C */ UNK_T x1C;
     /* +20 */ UNK_T x20;
     /* +24 */ UNK_T x24;
-    /* +28 */ enum_t x28;
+    /* +28 */ ftDeviceUnk1* x28;
 };
 
 struct ftDeviceUnk3 {
@@ -1032,17 +1032,7 @@ struct Fighter {
     /*  fp+4FC */ UNK_T x4FC;
     /*  fp+500 */ UNK_T x500;
     /*  fp+504 */ UNK_T x504;
-    /*  fp+508 */ UNK_T x508;
-    /*  fp+50C */ UNK_T x50C;
-    /*  fp+510 */ UNK_T x510;
-    /*  fp+514 */ UNK_T x514;
-    /*  fp+518 */ UNK_T x518;
-    /*  fp+51C */ UNK_T x51C;
-    /*  fp+520 */ UNK_T x520;
-    /*  fp+524 */ UNK_T x524;
-    /*  fp+528 */ UNK_T x528;
-    /*  fp+52C */ UNK_T x52C;
-    /*  fp+530 */ ftDeviceUnk1* x530;
+    /*  fp+508 */ ftDeviceUnk2 x508;
     /*  fp+534 */ UNK_T x534;
     /*  fp+538 */ UNK_T x538;
     /*  fp+53C */ UNK_T x53C;
@@ -1800,5 +1790,11 @@ typedef struct KirbyHat_r13 {
     u8 filler[0x18];
     KirbyHatStruct* x18_kirbyHatStruct;
 } KirbyHat_r13;
+
+struct Fighter_804D653C_t {
+    u32 unk;
+    u8 unk4;
+    u8 unk5;
+};
 
 #endif

@@ -16,7 +16,7 @@
 
 ftDeviceUnk2* ftCo_800C0658(Fighter* fp)
 {
-    return fp->x408.x28 != 0 ? &fp->x408 : &fp->x488;
+    return (int) fp->x408.x28 != 0 ? &fp->x408 : &fp->x488;
 }
 
 ftDeviceUnk2* ftCo_800C0674(Fighter_GObj* gobj)
@@ -24,14 +24,15 @@ ftDeviceUnk2* ftCo_800C0674(Fighter_GObj* gobj)
     return ftCo_800C0658(GET_FIGHTER(gobj));
 }
 
+/// @todo Wrong return type. Union?
 enum_t ftCo_800C0694(Fighter* fp)
 {
-    return ftCo_800C0658(fp)->x28;
+    return (int) ftCo_800C0658(fp)->x28;
 }
 
 int ftCo_800C06B4(Fighter* fp)
 {
-    return (int) &fp->x530->x7B;
+    return (int) &fp->x508.x28->x7B;
 }
 
 void ftCo_800C06C0(void)

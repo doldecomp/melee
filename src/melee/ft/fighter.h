@@ -77,8 +77,8 @@
 /* 4D6528 */ extern UNK_T Fighter_804D6528;
 /* 4D6530 */ extern Vec2** Fighter_804D6530;
 /* 4D6534 */ extern UNK_T Fighter_804D6534;
-/* 4D6538 */ extern UNK_T Fighter_804D6538;
-/* 4D653C */ extern UNK_T Fighter_804D653C;
+/* 4D6538 */ extern struct Fighter_804D653C_t* Fighter_804D6538;
+/* 4D653C */ extern struct Fighter_804D653C_t* Fighter_804D653C;
 /* 4D6540 */ extern int** Fighter_804D6540;
 /* 4D6544 */ extern FighterPartsTable** ftPartsTable;
 /* 4D6548 */ extern UNK_T Fighter_804D6548;
