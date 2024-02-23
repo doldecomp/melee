@@ -205,6 +205,7 @@
 /* 15BB70 */ void ftCh_TagCancel_Anim(HSD_GObj* gobj);
 /* 15BBD8 */ void ftCh_TagCancel_Phys(HSD_GObj* gobj);
 /* 15BC38 */ void ftCh_TagCancel_Coll(HSD_GObj* gobj);
+/* 15BC88 */ void ftCh_GrabUnk1_8015BC88(HSD_GObj* gobj);
 /* 3D41F8 */ extern MotionState ftCh_Init_MotionStateTable[ftCh_MS_SelfCount];
 /* 3D4818 */ extern char ftCh_Init_DatFilename[];
 /* 3D4824 */ extern char ftCh_Init_DataName[];
