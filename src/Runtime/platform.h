@@ -165,9 +165,11 @@ typedef void (*Event)(void);
 #endif
 
 #define RETURN_IF(cond)                                                       \
-    if ((cond)) {                                                             \
-        return;                                                               \
-    }
+    do {                                                                      \
+        if ((cond)) {                                                         \
+            return;                                                           \
+        }                                                                     \
+    } while (0)
 
 #if defined(__MWERKS__) && !defined(M2CTX)
 #define SDATA __declspec(section ".sdata")

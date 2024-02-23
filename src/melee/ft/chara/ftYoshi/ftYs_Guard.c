@@ -198,7 +198,7 @@ void ftYs_GuardOff_Anim(HSD_GObj* gobj)
 
 void ftYs_GuardOff_IASA(HSD_GObj* gobj)
 {
-    RETURN_IF(ftCo_80099794(gobj))
+    RETURN_IF(ftCo_80099794(gobj));
 }
 
 void ftYs_GuardOff_Phys(HSD_GObj* arg0)
