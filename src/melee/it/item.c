@@ -733,12 +733,12 @@ void Item_802680CC(HSD_GObj* gobj)
 
     if (item_data->xC8_joint != NULL) {
         HSD_JObj* jobj = HSD_JObjLoadJoint(item_data->xC8_joint);
-        HSD_GObjObjet_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     } else {
         HSD_JObj* jobj = HSD_JObjAlloc();
         PSMTXIdentity(jobj->mtx);
         jobj->scl = NULL;
-        HSD_GObjObjet_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     }
 }
 

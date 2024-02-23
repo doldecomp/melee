@@ -577,7 +577,7 @@ void Fighter_UnkUpdateCostumeJoint_800686E4(Fighter_GObj* gobj)
     ftParts_80074170();
     ftParts_80073758(jobj);
 
-    HSD_GObjObjet_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
 }
 
 void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp)

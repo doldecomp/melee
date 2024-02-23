@@ -1,12 +1,20 @@
 #include <platform.h>
 #include "ftCommon/forward.h"
 
+#include "gr/ground.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
+
 #include <math.h>
 #include <placeholder.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjproc.h>
 #include <baselib/lobj.h>
 
 /* 09F480 */ static void ftCo_8009F480(ftCo_GObj* gobj);
+/* 09F54C */ static void ftCo_8009F54C(HSD_GObj* gobj, int code);
 
 #pragma force_active on
 
@@ -40,7 +48,18 @@ void ftCo_8009F480(ftCo_GObj* gobj)
     HSD_LObjAnimAll(gobj->hsd_obj);
 }
 
-/// #ftCo_8009F4A4
+void ftCo_8009F4A4(void)
+{
+    HSD_GObj* gobj = GObj_Create(12, 3, 0);
+    HSD_LObj* lobj = lb_80011AC4(Ground_801C49B4());
+    ftCo_804D6568 = lobj;
+    ftCo_804D656C = lb_8000CDC0(lobj);
+    Ground_801C2374(lobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+    GObj_SetupGXLink(gobj, ftCo_8009F54C, 4U, 0U);
+    HSD_LObjReqAnimAll(lobj, ftCo_804D87B0);
+    HSD_GObjProc_8038FD54(gobj, ftCo_8009F480, 1);
+}
 
 /// #ftCo_8009F54C
 

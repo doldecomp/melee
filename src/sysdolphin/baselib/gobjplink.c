@@ -110,7 +110,7 @@ void HSD_GObjPLink_80390228(HSD_GObj* gobj)
         return;
     }
     GObj_RemoveUserData(gobj);
-    HSD_GObjObjet_80390B0C(gobj);
+    HSD_GObjObject_80390B0C(gobj);
     HSD_GObjProc_8038FED4(gobj);
     if (gobj->gx_link != HSD_GOBJ_GXLINK_NONE) {
         HSD_GObjGXLink_8039084C(gobj);

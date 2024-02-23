@@ -262,7 +262,7 @@ HSD_GObj* grLib_801C9CEC(s32 idx1)
     gobj = GObj_Create(3, 18, tmp);
     jobj = HSD_JObjLoadJoint(stage_info.quake_model_set->joint);
 
-    HSD_GObjObjet_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     if (idx1 == 1) {
         HSD_GObjProc_8038FD54(gobj, grLib_801C9BC8, 1);
     } else {
