@@ -1,5 +1,6 @@
 #include "ftcolanim.h"
 
+#include "ft/fighter.h"
 #include "ft/ftaction.h"
 #include "ft/types.h"
 #include "lb/lb_00F9.h"
@@ -66,10 +67,7 @@ static void ftCo_800BFF14(Fighter_GObj* gobj, FtCmdState* cmd)
     ftAction_80073108(gobj, cmd);
 }
 
-UNK_RET ft_800BFF34(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800BFF34
 
 void ft_800BFF70(Fighter_GObj* gobj, FtCmdState* cmd, int arg0)
 {
@@ -81,9 +79,21 @@ void ftCo_800BFFAC(Fighter* fp)
     lb_80014498(&fp->x488);
 }
 
-bool ftCo_800BFFD0(Fighter* fp, enum_t arg1, bool arg2)
+bool ftCo_800BFFD0(Fighter* fp, int arg1, int arg2)
 {
-    NOT_IMPLEMENTED;
+    if (arg1 >= 0x7B) {
+        s32 temp_r7 = arg1 - 0x7B;
+        if (lb_800144C8(&fp->x508, Fighter_804D6538, temp_r7, arg2)) {
+            return true;
+        }
+    } else if (Fighter_804D653C[arg1].unk5 != 0) {
+        if (lb_800144C8(&fp->x488, Fighter_804D653C, arg1, arg2)) {
+            return true;
+        }
+    } else if (lb_800144C8(&fp->x408, Fighter_804D653C, arg1, arg2)) {
+        return true;
+    }
+    return false;
 }
 
 void ftCo_800C0074(Fighter* fp)
@@ -91,27 +101,12 @@ void ftCo_800C0074(Fighter* fp)
     lb_80014498(&fp->x408);
 }
 
-UNK_RET ft_800C0098(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ft_800C0098
 
-void ftCo_800C0134(Fighter* fp)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800C0134
 
-void ftCo_800C0200(Fighter* fp, int arg1)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800C0200
 
-void ftCo_800C0358(Fighter* fp, Fighter* arg1, s32 arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800C0358
 
-void ftCo_800C0408(Fighter_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800C0408
