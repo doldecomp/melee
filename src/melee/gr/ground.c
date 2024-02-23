@@ -714,7 +714,7 @@ HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
         OSReport(get_jobj, __FILE__, 0x5E8);
         return NULL;
     }
-    HSD_GObjObjet_80390A70(temp_r30, HSD_GObj_804D7849, temp_r3_4);
+    HSD_GObjObject_80390A70(temp_r30, HSD_GObj_804D7849, temp_r3_4);
     HSD_GObjProc_8038FD54(temp_r30, Ground_801C1CD0, 1);
     HSD_GObjProc_8038FD54(temp_r30, Ground_801C1D38, 4);
     return temp_r30;
