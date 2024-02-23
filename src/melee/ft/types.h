@@ -914,6 +914,21 @@ struct ftDeviceUnk5 {
 };
 STATIC_ASSERT(sizeof(struct ftDeviceUnk5) == 0xC);
 
+typedef struct FtDynamicBoneStruct {
+    void* x0_ptr;    // is stored @ 8000fdd4, comes from a nonstandard heap @
+                     // -0x52fc(r13)
+    s32 x4_jobj_num; // number of bones in this boneset
+    f32 x8;          // stored @ 80011718, 0x8 of dynamicdesc
+    f32 xc;          // stored @ 80011720, 0xC of dynamicdesc
+    f32 x10;         // stored @ 80011728, 0x10 of dynamicdesc
+} FtDynamicBoneStruct;
+
+typedef struct FtDynamicBones {
+    s32 x0_apply_phys_num; // If this is 256, dyanmics are not processed
+    FtDynamicBoneStruct x4_dynamicBones; // This will be a dynamic bone struct
+                                         // once they're defined //
+} FtDynamicBones;
+
 struct Fighter {
     /*    fp+0 */ HSD_GObj* gobj;
     /*    fp+4 */ FighterKind kind;
@@ -966,10 +981,8 @@ struct Fighter {
     /*  fp+2E4 */ float x2E4;
     /*  fp+2E8 */ float x2E8;
     /*  fp+2EC */ float x2EC;
-    /*  fp+2F0 */ float x2F0;
-    /*  fp+2F4 */ UNK_T x2F4;
-    /*  fp+2F8 */ u8 filler_x2F0[0x3E0 - 0x2F8];
-    /*  fp+3E0 */ u32 x3E0;
+    /*  fp+2F0 */ FtDynamicBones dynamic_bone_sets[10];
+    /*  fp+3E0 */ int dynamics_num;
     /*  fp+3E4 */ ftCmdScript x3E4_fighterCmdScript;
     /*  fp+3F8 */ UNK_T x3F8;
     /*  fp+3FC */ UNK_T x3FC;
@@ -1761,5 +1774,31 @@ struct ftData_80085FD4_ret {
     /* +4 */ UNK_T x4;
     /* +8 */ UNK_T x8;
 };
+
+typedef struct ArticleDynamicBones {
+    FtDynamicBones array[10];
+} ArticleDynamicBones;
+
+typedef struct ftDynamics {
+    int dynamicsNum;
+    ArticleDynamicBones* ftDynamicBones;
+    int x4;
+    void* x8;
+    void** x10;
+} ftDynamics;
+
+typedef struct KirbyHatStruct {
+    HSD_Joint* x0_kirbyHatJointPtr;
+    s32 x4_jointNum;
+    void* x8_hatVisTable;
+    void* xc_hatArticle1;
+    void* x10_hatArticle2;
+    ftDynamics* x14_hatDynamics;
+} KirbyHatStruct;
+
+typedef struct KirbyHat_r13 {
+    u8 filler[0x18];
+    KirbyHatStruct* x18_kirbyHatStruct;
+} KirbyHat_r13;
 
 #endif

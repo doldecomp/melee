@@ -20,7 +20,6 @@
 #include "lb/lbvector.h"
 
 #include <common_structs.h>
-#include <math.h>
 #include <math_ppc.h>
 #include <placeholder.h>
 #include <baselib/gobj.h>
@@ -47,12 +46,12 @@ FighterKind ftCo_800BD9E0(ftKb_GObj* gobj, Fighter_GObj* victim_gobj)
     FighterKind victim_kind = victim_fp->kind;
     if (victim_kind == FTKIND_KIRBY) {
         ftCo_800BDA50(victim_gobj);
-        return victim_fp->fv.kb.victim_kind;
+        return victim_fp->fv.kb.hat.victim_kind;
     }
     if ((unsigned) (victim_kind - FTKIND_BOY) <= 1 ||
         victim_kind == FTKIND_SANDBAG)
     {
-        return fp->fv.kb.victim_kind;
+        return fp->fv.kb.hat.victim_kind;
     }
     if (victim_kind == FTKIND_NANA) {
         victim_kind = FTKIND_POPO;
@@ -63,7 +62,7 @@ FighterKind ftCo_800BD9E0(ftKb_GObj* gobj, Fighter_GObj* victim_gobj)
 void ftCo_800BDA50(ftKb_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.kb.victim_kind != FTKIND_KIRBY) {
+    if (fp->fv.kb.hat.victim_kind != FTKIND_KIRBY) {
         /// @todo Which @c mv is this?
         fp->mv.co.thrownkirby.x18_b1 = true;
     }
@@ -279,11 +278,11 @@ void ftCo_800BE494(ftCo_GObj* gobj)
             fp->self_vel.x = self_vel.x * (fp->self_vel.x < 0 ? -1 : +1);
         }
     } else if (fp->kind == FTKIND_KIRBY && fp->mv.co.thrownkirby.x18_b1 &&
-               !fp->fv.kb.x8_b0)
+               !fp->fv.kb.hat.x8_b0)
     {
-        ftKb_SpecialN_800F190C(gobj, fp->fv.kb.victim_kind);
-        ftKb_SpecialN_800EEEC4(gobj, fp->fv.kb.victim_kind);
-        fp->fv.kb.victim_kind = FTKIND_KIRBY;
+        ftKb_SpecialN_800F190C(gobj, fp->fv.kb.hat.victim_kind);
+        ftKb_SpecialN_800EEEC4(gobj, fp->fv.kb.hat.victim_kind);
+        fp->fv.kb.hat.victim_kind = FTKIND_KIRBY;
     }
     fp->mv.co.thrownkirby.x10 = ftKb_SpecialN_800F5A98();
     ftCommon_8007DBCC(fp, 0, fp->mv.co.thrownkirby.x10);

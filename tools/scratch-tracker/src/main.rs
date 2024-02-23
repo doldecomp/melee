@@ -11,6 +11,7 @@ use clap::{Parser, Subcommand};
 use decompme_api::Completion;
 use dtk_config::addr_to_symbol;
 use env_logger;
+use nom::AsChar;
 use rayon::prelude::*;
 use scratch::try_parse_addr;
 use std::{
@@ -37,8 +38,12 @@ enum Commands {
     List {
         start: Address,
         end: Option<Address>,
+
         #[arg(short, long)]
         no_ok: bool,
+
+        #[arg(short, long)]
+        resolve: bool,
     },
     Ok {
         start: Address,
@@ -49,7 +54,7 @@ enum Commands {
         from: Option<Url>,
     },
     Update,
-    Replace {
+    Resolve {
         #[arg(required = true)]
         paths: Vec<PathBuf>,
     },
@@ -58,12 +63,17 @@ enum Commands {
 fn try_main(args: ProgramArgs) -> Result<()> {
     use Commands::*;
     match args.command {
-        List { start, end, no_ok } => list(start, end, no_ok)?,
+        List {
+            start,
+            end,
+            no_ok,
+            resolve,
+        } => list(start, end, no_ok, resolve)?,
         Ok { start, end } => ok(start, end)?,
         Refresh => refresh()?,
         Seed { from } => seed(from)?,
         Update => update()?,
-        Replace { paths } => replace(paths)?,
+        Resolve { paths } => resolve(paths)?,
     }
     Result::Ok(())
 }
@@ -104,7 +114,12 @@ fn ok(start: Address, end: Option<Address>) -> Result<()> {
     Ok(())
 }
 
-fn list(start: Address, end: Option<Address>, no_ok: bool) -> Result<()> {
+fn list(
+    start: Address,
+    end: Option<Address>,
+    no_ok: bool,
+    replace: bool,
+) -> Result<()> {
     const URL: &str = "https://decomp.me/scratch/";
     const EMPTY_CELL: &str = "-";
 
@@ -130,13 +145,37 @@ fn list(start: Address, end: Option<Address>, no_ok: bool) -> Result<()> {
     let show_addr = end.is_some_and(|end| start != end);
     let completion_col = 2 + if show_addr { 1 } else { 0 };
 
+    // HACK: Rust closure silliness.
+    //       The goal is to skip reading symbols.txt if `!replace`.
+    let resolve_name = {
+        if replace {
+            let addr_to_symbol = dtk_config::addr_to_symbol()?;
+            Some(move |scratch: &Scratch| {
+                if let Address::Value(addr) = scratch.addr {
+                    addr_to_symbol(addr)
+                } else {
+                    None
+                }
+            })
+        } else {
+            None
+        }
+    };
+
     for scratch in scratches {
         let mut record = Vec::new();
         if show_addr {
             record.push(scratch.addr.to_string());
         }
+
+        let name = resolve_name
+            .as_ref()
+            .map(|f| f(&scratch))
+            .flatten()
+            .unwrap_or_else(|| scratch.name.to_owned());
+
         record.extend(vec![
-            scratch.name,
+            name,
             scratch.author.unwrap_or(EMPTY_CELL.to_owned()),
             scratch.completion.to_string(),
             format!("{}{}", URL, scratch.id),
@@ -161,26 +200,30 @@ fn update() -> Result<()> {
     decompme_api::seed_loop(None, true)
 }
 
-fn replace(paths: Vec<PathBuf>) -> Result<()> {
+fn resolve(paths: Vec<PathBuf>) -> Result<()> {
     for path in paths {
         let s = fs::read_to_string(&path)?;
         let f = File::create(&path)?;
         let mut w = BufWriter::new(f);
-        replace_in_str(&mut w, &s)?;
+        resolve_in_str(&mut w, &s)?;
     }
     Ok(())
 }
 
-fn replace_word<F: Fn(u32) -> Option<String>>(
+fn resolve_word<F: Fn(u32) -> Option<String>>(
     word: &str,
     lookup: F,
 ) -> String {
-    try_parse_addr(word)
-        .and_then(lookup)
-        .unwrap_or_else(|| word.to_owned())
+    let try_parse = if !word.chars().nth(0).unwrap().is_dec_digit() {
+        try_parse_addr(word).and_then(lookup)
+    } else {
+        None
+    };
+
+    try_parse.unwrap_or_else(|| word.to_owned())
 }
 
-fn replace_in_str<W: Write>(w: &mut W, s: &str) -> Result<()> {
+fn resolve_in_str<W: Write>(w: &mut W, s: &str) -> Result<()> {
     let mut word = String::new();
     let lookup = addr_to_symbol()?;
 
@@ -191,7 +234,7 @@ fn replace_in_str<W: Write>(w: &mut W, s: &str) -> Result<()> {
             }
             _ => {
                 if !word.is_empty() {
-                    w.write_all(&replace_word(&word, &lookup).as_bytes())?;
+                    w.write_all(&resolve_word(&word, &lookup).as_bytes())?;
                     word.clear();
                 }
                 w.write_all(&[c as u8])?;
@@ -200,7 +243,7 @@ fn replace_in_str<W: Write>(w: &mut W, s: &str) -> Result<()> {
     }
 
     if !word.is_empty() {
-        w.write_all(&replace_word(&word, &lookup).as_bytes())?;
+        w.write_all(&resolve_word(&word, &lookup).as_bytes())?;
     }
 
     Ok(())

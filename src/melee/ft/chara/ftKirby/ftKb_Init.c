@@ -3005,11 +3005,11 @@ void ftKb_Init_OnDeath(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
-    fp->fv.kb.x0 = 0;
-    fp->fv.kb.x4 = HSD_Randi(5) + 1;
-    fp->fv.kb.x10 = 0;
-    fp->fv.kb.victim_kind = 4;
-    fp->fv.kb.x18 = 0;
+    fp->fv.kb.hat.x0 = 0;
+    fp->fv.kb.hat.x4 = HSD_Randi(5) + 1;
+    fp->fv.kb.hat.jobj = NULL;
+    fp->fv.kb.hat.victim_kind = 4;
+    fp->fv.kb.hat.x18 = 0;
     fp->fv.kb.x60 = 0;
     fp->fv.kb.x64 = 0;
     if (Player_GetFlagsBit1(fp->player_id) &&
@@ -3028,7 +3028,7 @@ void ftKb_Init_OnLoad(HSD_GObj* gobj)
 
     fp->x2222_b1 = true;
     fp->x2D0 = fp->dat_attrs;
-    fp->fv.kb.x8_b0 = Player_GetFlagsAEBit1(fp->player_id);
+    fp->fv.kb.hat.x8_b0 = Player_GetFlagsAEBit1(fp->player_id);
     it_8026B3F8(item_list[0], 50);
     it_8026B3F8(item_list[1], 51);
     it_8026B3F8(item_list[2], 52);
@@ -3058,15 +3058,12 @@ void ftKb_Init_800EE7B8(HSD_GObj* gobj)
     fp->death1_cb = NULL;
 }
 
-/// @file
-/// @todo Matching, but needs more data moved over for DOL match
-
 void ftKb_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     s32 _[2];
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
-    switch (fp->fv.kb.victim_kind) {
+    switch (fp->fv.kb.hat.victim_kind) {
     case 3:
         if (fp->fv.kb.xBC == da->x190) {
             ftCo_800BFFD0(fp, 58, 0);

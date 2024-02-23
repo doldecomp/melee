@@ -100,7 +100,6 @@ void ftCo_FallSpecial_IASA(ftCo_GObj* gobj)
     RETURN_IF(ftCo_800CEE70(gobj));
     RETURN_IF(ftCo_800D705C(gobj));
     RETURN_IF(ftCo_800CB870(gobj));
-    ;
 }
 
 void ftCo_FallSpecial_Phys(ftCo_GObj* gobj)

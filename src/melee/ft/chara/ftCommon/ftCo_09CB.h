@@ -5,6 +5,7 @@
 #include "ftCommon/forward.h"
 
 /* 09CF84 */ void ftCo_8009CF84(ftCo_Fighter* fp);
+/* 09D074 */ void ftCo_8009D074(Fighter* fp);
 /* 09DC54 */ void ftCo_8009DC54(ftCo_Fighter* fp);
 /* 09E0A8 */ void ftCo_8009E0A8(ftCo_GObj* gobj);
 /* 09E0D4 */ void ftCo_8009E0D4(ftCo_Fighter* fp);
