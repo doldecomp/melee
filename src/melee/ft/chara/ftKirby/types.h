@@ -3,23 +3,29 @@
 
 #include <platform.h>
 #include "ft/forward.h"
+#include <baselib/forward.h>
 
+#include <common_structs.h>
 #include <placeholder.h>
 
 struct ftKb_FighterVars {
-    /* fp+222C */ UNK_T x0;
-    /* fp+2230 */ uint x4;
-    /* fp+2234:0 */ u8 x8_b0 : 1;
-    /* fp+2235 */ u8 x9[3];
-    /* fp+2238 */ FighterKind victim_kind;
-    /* fp+223C */ UNK_T x10;
-    /* fp+2240 */ UNK_T x14;
-    /* fp+2244 */ UNK_T x18;
-    /* fp+2248 */ UNK_T x1C;
-    /* fp+224C */ u8 x20[0x60 - 0x20];
+    /* fp+222C */ struct ftKb_Hat {
+        /* fp+222C */ UNK_T x0;
+        /* fp+2230 */ uint x4;
+        /* fp+2234:0 */ u8 x8_b0 : 1;
+        /* fp+2235 */ u8 x9[3];
+        /* fp+2238 */ FighterKind victim_kind;
+        /* fp+223C */ HSD_JObj* jobj;
+        /* fp+2240 */ UNK_T x14;
+        /* fp+2244 */ UNK_T x18;
+        /* fp+2248 */ UNK_T x1C;
+        /* fp+224C */ UNK_T x20;
+        /* fp+2250 */ UNK_T x24;
+    } hat;
+    /* fp+224C */ u8 _28[0x60 - 0x28];
     /* fp+228C */ UNK_T x60;
     /* fp+2290 */ UNK_T x64;
-    /* fp+2294 */ u8 x68[0x9C - 0x68];
+    /* fp+2294 */ u8 _68[0x9C - 0x68];
     /* fp+22C8 */ int x9C;
     /* fp+22CC */ UNK_T xA0;
     /* fp+22D0 */ UNK_T xA4;
@@ -30,6 +36,7 @@ struct ftKb_FighterVars {
     /* fp+22E4 */ UNK_T xB8;
     /* fp+22E8 */ int xBC;
 };
+STATIC_ASSERT(sizeof(struct ftKb_FighterVars) == 0xC0);
 
 struct ftKb_DatAttrs {
     float x0;
