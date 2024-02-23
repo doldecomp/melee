@@ -1,4 +1,5 @@
 #include <platform.h>
+#include "ftCaptain/forward.h"
 #include <dolphin/mtx/forward.h>
 
 #include "ftCaptain/ftCa_SpecialLw.h"
@@ -296,20 +297,30 @@ void ftCa_SpecialLwEndAir_Coll(Fighter_GObj* gobj)
     ftCa_SpecialLwEnd_Coll(gobj);
 }
 
-void ftCa_SpecialAirLw_Coll(HSD_GObj* gobj)
+static void resetCmdAndThrow(Fighter_GObj* gobj)
 {
-    u8 _[24];
-    if (ft_80081D0C(gobj)) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = 0;
+    fp->throw_flags = 0;
+}
+
+static void doColl(Fighter_GObj* gobj, ftCaptain_MotionState msid)
+{
+    if (ft_80081D0C(gobj) != GA_Ground) {
         Fighter* fp = GET_FIGHTER(gobj);
         ftCaptain_DatAttrs* da = fp->dat_attrs;
-        fp->cmd_vars[2] = 0;
-        fp->cmd_vars[1] = 0;
-        fp->cmd_vars[0] = 0;
-        fp->throw_flags = 0;
+        PAD_STACK(4 * 4);
+        resetCmdAndThrow(gobj);
         ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLwEnd, Ft_MF_None, 0,
+        Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0,
                                   da->speciallw_landing_lag_mul, 0, NULL);
     }
+}
+
+void ftCa_SpecialAirLw_Coll(Fighter_GObj* gobj)
+{
+    PAD_STACK(4 * 4);
+    doColl(gobj, ftCa_MS_SpecialAirLwEnd);
 }
 
 void ftCa_SpecialAirLwEnd_Coll(HSD_GObj* gobj)
@@ -317,17 +328,8 @@ void ftCa_SpecialAirLwEnd_Coll(HSD_GObj* gobj)
     ft_80084104(gobj);
 }
 
-void ftCa_SpecialAirLwEndAir_Coll(HSD_GObj* gobj)
+void ftCa_SpecialAirLwEndAir_Coll(Fighter_GObj* gobj)
 {
-    if (ft_80081D0C(gobj)) {
-        Fighter* fp = GET_FIGHTER(gobj);
-        ftCaptain_DatAttrs* da = fp->dat_attrs;
-        fp->cmd_vars[2] = 0;
-        fp->cmd_vars[1] = 0;
-        fp->cmd_vars[0] = 0;
-        fp->throw_flags = 0;
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLwEnd, Ft_MF_None, 0,
-                                  da->speciallw_landing_lag_mul, 0, NULL);
-    }
+    PAD_STACK(4 * 4);
+    doColl(gobj, ftCa_MS_SpecialAirLwEnd);
 }
