@@ -346,7 +346,23 @@ HSD_Pad ftCo_800A198C(ftCo_Fighter* fp)
     return fp->x1A88;
 }
 
-/// #ftCo_800A1994
+float ftCo_800A1994(Fighter* fp)
+{
+    s8 x1A8E = fp->x1A8E;
+    float ret;
+    if (x1A8E > 0) {
+        ret = x1A8E / 127.0f;
+    } else {
+        ret = x1A8E / 128.0f;
+    }
+    if (ret > +1.0) {
+        return +1.0f;
+    }
+    if (ret < -1.0) {
+        return -1.0f;
+    }
+    return ret;
+}
 
 /// #ftCo_800A1A24
 
