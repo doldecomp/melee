@@ -244,8 +244,8 @@ void ftSk_SpecialAirNEnd_Anim(Fighter_GObj* gobj)
 
 void ftSk_SpecialNStart_IASA(Fighter_GObj* gobj) {}
 
-void doIasa(Fighter_GObj* gobj, ftSeak_MotionState end_msid,
-            ftSeak_MotionState cancel_msid)
+static void doIasa(Fighter_GObj* gobj, ftSeak_MotionState end_msid,
+                   ftSeak_MotionState cancel_msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!(fp->input.held_inputs & HSD_PAD_B)) {
