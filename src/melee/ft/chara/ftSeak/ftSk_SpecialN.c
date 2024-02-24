@@ -159,7 +159,6 @@ void ftSk_SpecialNEnd_Anim(Fighter_GObj* gobj)
     case 17:
         fp->mv.sk.specialn.x4 = true;
         fp->fv.sk.x4 = NULL;
-        break;
     }
     ++fp->mv.sk.specialn.x0;
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -230,7 +229,6 @@ void ftSk_SpecialAirNEnd_Anim(Fighter_GObj* gobj)
     case 17:
         fp->mv.sk.specialn.x4 = true;
         fp->fv.sk.x4 = NULL;
-        break;
     }
 
     ++fp->mv.sk.specialn.x0;
