@@ -18,7 +18,7 @@
 /* 11F0A4 */ void ftPp_Init_LoadSpecialAttrs(HSD_GObj* gobj);
 /* 11F0E4 */ void ftPp_Init_OnKnockbackEnter(HSD_GObj* gobj);
 /* 11F128 */ void ftPp_Init_OnKnockbackExit(HSD_GObj* gobj);
-/* 11F16C */ void ftPp_Init_8011F16C(HSD_GObj* gobj, uint arg1);
+/* 11F16C */ void ftPp_Init_8011F16C(HSD_GObj* gobj, Item_GObj* item_gobj);
 /* 3CD2D0 */ extern MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount];
 /* 3CD610 */ extern char ftPp_Init_DatFilename[];
 /* 3CD61C */ extern char ftPp_Init_DataName[];

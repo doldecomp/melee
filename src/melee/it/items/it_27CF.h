@@ -117,9 +117,10 @@
 /* 2C0850 */ u32 it_802C0850(Item_GObj*, Vec3*, u32, s32,
                              float facing_direction);
 /* 2C0DBC */ void it_802C0DBC(u32 arg0);
-/* 2C1590 */ void it_802C1590(Item_GObj*);
+/* 2C1590 */ Item_GObj* it_802C1590(Item_GObj*, Vec3*, enum_t,
+                                    float facing_dir);
 /* 2C16F8 */ void it_802C16F8(Item_GObj*);
-/* 2C17DC */ void it_802C17DC(uint);
+/* 2C17DC */ void it_802C17DC(Item_GObj*);
 /* 2C3AF0 */ HSD_GObj* it_802C3AF0(Item_GObj*);
 /* 2C3BAC */ HSD_GObj* it_802C3BAC(Item_GObj*, Vec3*, float facing_dir, float);
 /* 2C3D44 */ void it_802C3D44(Item_GObj*);
