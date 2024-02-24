@@ -1,10 +1,15 @@
 #include <platform.h>
+#include "it/forward.h"
 #include <dolphin/mtx/forward.h>
 
 #include "ftPp_SpecialN.h"
 
+#include "ftPp_Init.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
+#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
@@ -12,12 +17,13 @@
 #include "ft/types.h"
 #include "ftPopo/types.h"
 #include "it/items/it_27CF.h"
+#include "lb/lb_00B0.h"
 
 #include <common_structs.h>
 #include <placeholder.h>
 #include <baselib/gobj.h>
 
-/* 11F500 */ static void ftPp_SpecialN_8011F500(HSD_GObj* gobj);
+/* 11F500 */ static void ftPp_SpecialN_8011F500(Fighter_GObj* gobj);
 
 void ftPp_SpecialN_Enter(HSD_GObj* gobj)
 {
@@ -129,7 +135,51 @@ void ftPp_SpecialAirN_Coll(Fighter_GObj* gobj)
     }
 }
 
-static void ftPp_SpecialN_8011F500(HSD_GObj* gobj)
+static inline void inlineA0(Fighter_GObj* gobj, Fighter* other_fp)
 {
-    NOT_IMPLEMENTED;
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (other_fp->fv.pp.x222C == fp->fv.pp.x222C) {
+        fp->fv.pp.x222C = NULL;
+        fp->death2_cb = NULL;
+        fp->take_dmg_cb = NULL;
+    }
+}
+
+static inline void inlineA1(Item_GObj* item_gobj, Fighter* fp) {}
+
+void ftPp_SpecialN_8011F500(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    uint cmd_var0 = fp->cmd_vars[0];
+
+    if (cmd_var0 == 0) {
+        return;
+    }
+    if (cmd_var0 == 1) {
+        ftIceClimberAttributes* da = fp->dat_attrs;
+        Vec3 pos;
+        PAD_STACK(4 * 2);
+        lb_8000B1CC(fp->parts[0].joint, NULL, &pos);
+        pos.x = da->xC * fp->facing_dir + pos.x;
+        pos.y += da->x10 + fp->fv.pp.x2250;
+        fp->fv.pp.x222C = it_802C1590(gobj, &pos, 106, fp->facing_dir);
+        ft_80088148(fp, 130021, 127, 64);
+        if (fp->fv.pp.x222C != NULL) {
+            fp->death2_cb = ftPp_Init_8011F060;
+            fp->take_dmg_cb = ftPp_Init_8011F060;
+        }
+        fp->cmd_vars[0] = 0;
+    } else if (cmd_var0 == 2) {
+        if (fp->fv.pp.x222C != NULL) {
+            it_802C16F8(fp->fv.pp.x222C);
+            fp->cmd_vars[0] = 0;
+            if (fp->kind == FTKIND_POPO) {
+                ft_800881D8(fp, 130141, 127, 64);
+            } else {
+                ft_800881D8(fp, 130090, 127, 64);
+            }
+            ft_80088148(fp, 130024, 127, 64);
+            inlineA0(gobj, fp);
+        }
+    }
 }

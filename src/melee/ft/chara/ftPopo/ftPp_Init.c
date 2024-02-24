@@ -418,11 +418,11 @@ void ftPp_Init_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, true);
 }
 
-void ftPp_Init_8011F16C(HSD_GObj* gobj, uint i)
+void ftPp_Init_8011F16C(HSD_GObj* gobj, Item_GObj* item_gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
 
-    if (i != fp->fv.nn.x222C) {
+    if (item_gobj != fp->fv.nn.x222C) {
         return;
     }
 
