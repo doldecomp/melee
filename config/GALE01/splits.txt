@@ -1054,8 +1054,8 @@ melee/ft/chara/ftSeak/ftSk_SpecialS.c:
 
 melee/ft/chara/ftSeak/ftSk_SpecialN.c:
 	.text       start:0x80111FBC end:0x80112ED8
-	.data       start:0x803CC598 end:0x803CC650
-	.sdata2     start:0x804D9650 end:0x804D9660
+	.data       start:0x803CC598 end:0x803CC64C
+	.sdata2     start:0x804D9650 end:0x804D965C
 
 melee/ft/chara/ftSeak/ftSk_SpecialHi.c:
 	.text       start:0x80112ED8 end:0x80114034
@@ -2005,7 +2005,7 @@ melee/gr/grtcaptain.c:
 
 melee/gr/grtclink.c:
 	.text       start:0x8021FF44 end:0x80220228
-	.data       start:0x803E86D0 end:0x803E8790
+	.data       start:0x803E86D0 end:0x803E878F
 
 melee/gr/grtdonkey.c:
 	.text       start:0x80220228 end:0x8022050C
@@ -2069,7 +2069,7 @@ melee/gr/grtpichu.c:
 
 melee/gr/grtpikachu.c:
 	.text       start:0x80222E7C end:0x80223160
-	.data       start:0x803E9270 end:0x803E9338
+	.data       start:0x803E9270 end:0x803E9331
 
 melee/gr/grtpurin.c:
 	.text       start:0x80223160 end:0x80223580

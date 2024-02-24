@@ -12,14 +12,35 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-StageCallbacks grTCLink_803E86D0[] = {
-    { grTCLink_802200D0, grTCLink_802200FC, grTCLink_80220104,
-      grTCLink_80220108, 0 },
-    { grTCLink_8022019C, grTCLink_802201EC, grTCLink_802201F4,
-      grTCLink_80220214, 0 },
-    { grTCLink_8022010C, grTCLink_8022015C, grTCLink_80220164,
-      grTCLink_80220198, 0xC0000000 },
-    { NULL, NULL, NULL, NULL, 0 }
+static StageCallbacks grTCLink_803E86D0[] = {
+    {
+        grTCLink_802200D0,
+        grTCLink_802200FC,
+        grTCLink_80220104,
+        grTCLink_80220108,
+        0,
+    },
+    {
+        grTCLink_8022019C,
+        grTCLink_802201EC,
+        grTCLink_802201F4,
+        grTCLink_80220214,
+        0,
+    },
+    {
+        grTCLink_8022010C,
+        grTCLink_8022015C,
+        grTCLink_80220164,
+        grTCLink_80220198,
+        (1 << 30) | (1 << 31),
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
 };
 
 StageData grTCLink_803E872C = {

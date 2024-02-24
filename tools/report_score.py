@@ -102,7 +102,7 @@ def main(args) -> None:
         msg = (
             f"Match {file_percent:.2f}% of `{friendly_obj_name}` ({friendly_file_size})"
             if file_percent < 100
-            else f"Match `{friendly_obj_name}` ({friendly_file_size})"
+            else f"Link `{friendly_obj_name}` ({friendly_file_size})"
         )
         print(msg)
     else:
