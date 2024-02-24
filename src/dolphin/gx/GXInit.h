@@ -9,6 +9,6 @@
 GXFifoObj* GXInit(GXFifoObj* fifo, u32 size);
 
 void __GXDefaultTexRegionCallback(void);
-unk_t __GXDefaultTlutRegionCallback(u32 arg0);
+UNK_T __GXDefaultTlutRegionCallback(u32 arg0);
 
 #endif

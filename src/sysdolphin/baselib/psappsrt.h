@@ -39,10 +39,10 @@ struct UnkGeneratorStruct {
 
 /* 003A0D18 */ bool psInitAppSRT(int, int);
 /* 003A0D58 */ s32 psAddGeneratorAppSRT(s32, u16);
-/* 003A0E3C */ void HSD_PSAppSrt_803A425C(unk_t, s32);
-u16 psRemoveGeneratorSRT(unk_t);
-u16 psRemoveParticleAppSRT(unk_t);
+/* 003A0E3C */ void HSD_PSAppSrt_803A425C(UNK_T, s32);
+u16 psRemoveGeneratorSRT(UNK_T);
+u16 psRemoveParticleAppSRT(UNK_T);
 UnkGeneratorMember* psAddGeneratorAppSRT_begin(UnkGeneratorStruct*, s32);
-u16 psAttachParticleAppSRT(unk_t, unk_t);
+u16 psAttachParticleAppSRT(UNK_T, UNK_T);
 
 #endif

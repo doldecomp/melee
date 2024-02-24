@@ -291,7 +291,7 @@ static void grBattle_8021A20C(HSD_GObj* gobj)
     Ground* gp = gobj->user_data;
 
     /// @todo Missing cast
-    unk_t hsd_obj = gobj->hsd_obj;
+    UNK_T hsd_obj = gobj->hsd_obj;
 
     grAnime_801C8138(gobj, gp->map_id, 0);
     grMaterial_801C94D8(hsd_obj);

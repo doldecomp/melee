@@ -6,12 +6,12 @@
 typedef struct {
     u8 filename[9];
     u8 message[39];
-    unk_t pointers[3];
+    UNK_T pointers[3];
     u32 bitfields[8];
 } psdisp_UnknownType001;
 
 typedef struct {
-    unk_t pointers[4];
+    UNK_T pointers[4];
     u8 message[36];
     u8 filename[9];
 } psdisp_UnknownType002;
@@ -35,11 +35,11 @@ typedef struct {
 /* 4D7928 */ extern f32 HSD_PSDisp_804D7928;
 /* 4D792C */ extern s32 HSD_PSDisp_804D792C;
 /* 4D7930 */ extern s32 HSD_PSDisp_804D7930;
-/* 4D7934 */ extern unk_t HSD_PSDisp_804D7934;
-/* 4D7938 */ extern unk_t HSD_PSDisp_804D7938;
-/* 4D793C */ extern unk_t HSD_PSDisp_804D793C;
-/* 4D7940 */ extern unk_t HSD_PSDisp_804D7940;
-/* 4D7944 */ extern unk_t HSD_PSDisp_804D7944;
+/* 4D7934 */ extern UNK_T HSD_PSDisp_804D7934;
+/* 4D7938 */ extern UNK_T HSD_PSDisp_804D7938;
+/* 4D793C */ extern UNK_T HSD_PSDisp_804D793C;
+/* 4D7940 */ extern UNK_T HSD_PSDisp_804D7940;
+/* 4D7944 */ extern UNK_T HSD_PSDisp_804D7944;
 /* 4D7948 */ extern s32 HSD_PSDisp_804D7948;
 
 void setVtxDesc(s32 fmt)

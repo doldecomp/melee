@@ -3,7 +3,9 @@
 
 #include <platform.h>
 
-void longjmp(unk_t env, int val);
-int __setjmp(unk_t env, unk_t, unk_t);
+#include <placeholder.h>
+
+int __setjmp(void* env, UNK_T, UNK_T);
+void longjmp(void* env, int val);
 
 #endif

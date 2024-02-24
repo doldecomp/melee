@@ -553,7 +553,7 @@ void Item_80267978(HSD_GObj* gobj)
     item_data->xBC_itemStateContainer = item_data->xB8_itemLogicTable->states;
 }
 
-extern unk_t db_80225B20(void);
+extern UNK_T db_80225B20(void);
 
 static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
 {
@@ -1128,7 +1128,7 @@ void Item_80268D34(HSD_GObj* gobj, struct ItemStateDesc* itemStateDesc)
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     HSD_JObjRemoveAnimAll(item_jobj);
     if (item_data->xC8_joint != NULL) {
-        unk_t bonestruct_arg;
+        UNK_T bonestruct_arg;
         if (item_jobj == NULL) {
             bonestruct_arg = NULL;
         } else {
@@ -1176,9 +1176,9 @@ void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
 
     HSD_JObj* item_jobj1_2;
 
-    unk_t new_var;
-    unk_t new_var2;
-    unk_t new_var3;
+    UNK_T new_var;
+    UNK_T new_var2;
+    UNK_T new_var3;
     Item* item_data3;
     HSD_JObj* item_jobj;
     Item* item_data;

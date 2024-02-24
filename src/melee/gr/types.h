@@ -9,6 +9,7 @@
 #include <dolphin/gx/forward.h>
 #include <baselib/forward.h>
 
+#include <placeholder.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
 
@@ -99,7 +100,7 @@ typedef struct StageInfo {
     }** itemdata;
     /* +6AC */ void* coll_data;
     /* +6B0 */ UnkStage6B0* param;
-    /* +6B4 */ unk_t** ald_yaku_all;
+    /* +6B4 */ UNK_T** ald_yaku_all;
     /* +6B8 */ void* map_ptcl;
     /* +6BC */ void* map_texg;
     /* +6C0 */ void* yakumono_param;

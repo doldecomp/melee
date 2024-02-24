@@ -29,7 +29,7 @@ void __GXDefaultTexRegionCallback(void)
 
 #pragma push
 #pragma peephole off
-unk_t __GXDefaultTlutRegionCallback(u32 arg0)
+UNK_T __GXDefaultTlutRegionCallback(u32 arg0)
 {
     if (arg0 >= 0x14) {
         return NULL;

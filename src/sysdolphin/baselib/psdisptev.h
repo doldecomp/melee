@@ -5,6 +5,6 @@
 
 /* 3A3920 */ void psSetupTevCommon(void);
 /* 3A3A50 */ void psSetupTevInvalidState(void);
-/* 3A3A5C */ void psSetupTev(unk_t);
+/* 3A3A5C */ void psSetupTev(UNK_T);
 
 #endif

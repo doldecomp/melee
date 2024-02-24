@@ -73,9 +73,6 @@ typedef volatile f64 vf64;
 /// The underlying type of an @c enum, used as a placeholder
 typedef int enum_t;
 
-/// A pointer to an unknown type
-typedef void* unk_t;
-
 /// A @c void callback with no arguments.
 typedef void (*Event)(void);
 

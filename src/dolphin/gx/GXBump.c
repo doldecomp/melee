@@ -15,7 +15,7 @@ void GXSetTevIndirect(s32 arg0, s32 arg1, u8 arg2, s32 arg3, s32 arg4,
     NOT_IMPLEMENTED;
 }
 
-void GXSetIndTexMtx(s32 arg0, unk_t arg1, s32 arg2)
+void GXSetIndTexMtx(s32 arg0, UNK_T arg1, s32 arg2)
 {
     NOT_IMPLEMENTED;
 }

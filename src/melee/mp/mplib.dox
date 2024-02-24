@@ -14,20 +14,20 @@
 typedef void (*mpLib_Callback)(s32, s32, CollData*, s32, s32, f32);
 
 bool mpLib_80054ED8(s32);
-unk_t mpLib_80056B34(void);
-unk_t mpLib_80056AC4(void);
-unk_t mpLib_80056A54(void);
-unk_t mpLib_80056AFC(void);
+UNK_T mpLib_80056B34(void);
+UNK_T mpLib_80056AC4(void);
+UNK_T mpLib_80056A54(void);
+UNK_T mpLib_80056AFC(void);
 
 bool mpLib_800501CC(f32 surface_normal_y, f32 surface_normal_x, f32 right_x,
-                    f32 right_y, Vec3* coll_vec, unk_t, unk_t, unk_t, u32,
+                    f32 right_y, Vec3* coll_vec, UNK_T, UNK_T, UNK_T, u32,
                     u32);
 
-unk_t mpLib_80056A8C(void);
-unk_t mpLib_80056A1C(void);
+UNK_T mpLib_80056A8C(void);
+UNK_T mpLib_80056A1C(void);
 
 bool mpLib_800509B8(f32 surface_normal_y, f32 surface_normal_x, f32 left_x,
-                    f32 left_y, Vec3* coll_vec, unk_t, unk_t, unk_t, u32, u32);
+                    f32 left_y, Vec3* coll_vec, UNK_T, UNK_T, UNK_T, u32, u32);
 
 u32 mpLib_80054CEC(enum_t);
 
@@ -51,7 +51,7 @@ s32 mpLib_8004DB78(s32 gr_idx);
 /// @returns A ground index.
 s32 mpLib_8004DC04(s32 gr_idx);
 
-void mpLib_8004D288(unk_t);
+void mpLib_8004D288(UNK_T);
 void mpLib_80058820(void);
 void mpLib_800552B0(s16 x, HSD_JObj*, s16 z);
 void mpLib_80055E9C(s16 x);
@@ -68,8 +68,8 @@ bool mpLib_8004DD90(int idx, float*, float*, UNK_T, Vec3* normal);
 bool mpLib_8004E398(void);
 void mpLib_800588D0(f32 left, f32 bottom, f32 right, f32 top);
 enum_t mpLib_80056B6C(enum_t);
-void mpLib_800580FC(int, mpLib_Callback*, unk_t);
-void mpLib_800581BC(int, mpLib_Callback*, unk_t);
+void mpLib_800580FC(int, mpLib_Callback*, UNK_T);
+void mpLib_800581BC(int, mpLib_Callback*, UNK_T);
 enum_t mpLib_80054C6C(int);
 void mpLib_80058AA0(void);
 enum_t mpLib_8004E090(int idx, Vec3*, f32*, u32*, Vec3* normal);

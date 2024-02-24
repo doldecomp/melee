@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-u64 __shl2i(unk_t, bool, s8);
+u64 __shl2i(void*, bool, s8);
 void __cvt_sll_flt(void);
 void __cvt_dbl_usll(void);
 void __cvt_fp2unsigned(void);

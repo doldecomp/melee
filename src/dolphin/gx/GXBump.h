@@ -3,9 +3,11 @@
 
 #include <platform.h>
 
+#include <placeholder.h>
+
 void __GXUpdateBPMask(void);
 void GXSetIndTexCoordScale(s32, s32, s32);
-void GXSetIndTexMtx(s32, unk_t, s32);
+void GXSetIndTexMtx(s32, UNK_T, s32);
 void XSetIndTexCoordScale(void);
 void GXSetIndTexOrder(s32, s32, s32);
 void GXSetNumIndStages(s32 arg0);

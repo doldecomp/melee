@@ -7,7 +7,7 @@
 #include "baselib/psstructs.h"
 
 void psDispParticles(s32, u32);
-unk_t particleSort(s32, u8, unk_t*, unk_t*);
+UNK_T particleSort(s32, u8, UNK_T*, UNK_T*);
 void setVtxDesc(s32);
 
 #endif

@@ -2,6 +2,6 @@
 
 extern s32 prevTev[2];
 
-void psSetupTev(unk_t);
+void psSetupTev(UNK_T);
 void psSetupTevInvalidState(void);
 void psSetupTevCommon(void);

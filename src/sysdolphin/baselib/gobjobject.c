@@ -25,7 +25,7 @@ void HSD_GObjObject_80390A70(HSD_GObj* gobj, u8 kind, void* obj)
     gobj->hsd_obj = obj;
 }
 
-unk_t HSD_GObjObject_80390ADC(HSD_GObj* gobj)
+UNK_T HSD_GObjObject_80390ADC(HSD_GObj* gobj)
 {
     void* obj;
     if (gobj->obj_kind != HSD_GOBJ_OBJ_NONE) {

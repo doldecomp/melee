@@ -64,7 +64,7 @@ static const u32 NOP = 0x60000000;
 
 static OSBootInfo* BootInfo;
 static u32* BI2DebugFlag;
-static unk_t BI2DebugFlagHolder;
+static UNK_T BI2DebugFlagHolder;
 static bool AreWeInitialized;
 static __OSExceptionHandler* OSExceptionTable;
 OSTime __OSStartTime;
