@@ -32,6 +32,7 @@ extern s8 ftData_UnkBytePerCharacter[FTKIND_MAX];
 /* 085B10 */ void ftData_80085B10(Fighter*);
 /* 085B98 */ void ftData_80085B98(Fighter*, int, int);
 /* 085CD8 */ void ftData_80085CD8(Fighter*, Fighter*, enum_t msid);
+/// Animation_GetAddress
 /* 085E50 */ u32 ftData_80085E50(Fighter*, u32);
 
 /* 085FD4 */ struct {

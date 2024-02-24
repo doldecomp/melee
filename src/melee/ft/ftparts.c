@@ -229,11 +229,7 @@ void ftParts_SetupParts(HSD_GObj* fighter_obj)
 
 /// #ftParts_8007482C
 
-void ftParts_8007487C(UNK_T item, u32* arg1, u8 costume_id, u32* arg3,
-                      u32* arg4)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftParts_8007487C
 
 /// #ftParts_800749CC
 
