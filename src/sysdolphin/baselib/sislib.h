@@ -6,6 +6,8 @@
 
 #include "baselib/archive.h"
 
+#include <placeholder.h>
+
 typedef struct {
     UNK_T x0;
     UNK_T x4;

@@ -4,6 +4,7 @@
 #include <platform.h>
 #include <dolphin/gx/forward.h>
 
+#include <placeholder.h>
 #include <dolphin/gx/GXEnum.h>
 
 void __GXSetSUTexSize(void);
