@@ -574,7 +574,7 @@ config.libs = [
             # Sheik
             Object(Matching, "melee/ft/chara/ftSeak/ftSk_Init.c"),
             Object(Matching, "melee/ft/chara/ftSeak/ftSk_SpecialS.c"),
-            Object(NonMatching, "melee/ft/chara/ftSeak/ftSk_SpecialN.c"),
+            Object(Matching, "melee/ft/chara/ftSeak/ftSk_SpecialN.c"),
             Object(NonMatching, "melee/ft/chara/ftSeak/ftSk_SpecialHi.c"),
             Object(NonMatching, "melee/ft/chara/ftSeak/ftSk_SpecialLw.c"),
             # Ness

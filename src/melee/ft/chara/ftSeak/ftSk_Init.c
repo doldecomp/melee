@@ -319,9 +319,9 @@ Fighter_CostumeStrings ftSk_Init_CostumeStrings[] = {
 void ftSk_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->fv.sk.x222C = 0;
-    fp->fv.sk.x2230 = 0;
-    fp->fv.sk.x2234 = 0;
+    fp->fv.sk.x0 = 0;
+    fp->fv.sk.x4 = 0;
+    fp->fv.sk.x8 = 0;
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, -1);
 }
@@ -350,7 +350,7 @@ void ftSk_Init_80110198(HSD_GObj* gobj)
 void ftSk_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.sk.x222C == 6) {
+    if (fp->fv.sk.x0 == 6) {
         ftCo_800BFFD0(fp, 86, 0);
     }
 }
