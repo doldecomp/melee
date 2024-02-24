@@ -62,7 +62,7 @@ StageData grEF1_803E62C0 = {
     0,
 };
 
-unk_t grEF1_804D6A70;
+UNK_T grEF1_804D6A70;
 
 extern StageInfo stage_info;
 

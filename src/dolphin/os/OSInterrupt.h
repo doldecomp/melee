@@ -5,6 +5,7 @@
 
 #include <platform.h>
 
+#include <placeholder.h>
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSException.h>
 
@@ -115,7 +116,7 @@ extern volatile s16 __OSLastInterrupt;
 extern volatile s64 __OSLastInterruptTime;
 
 /// @sz{4}
-extern unk_t lbl_804D738C;
+extern UNK_T lbl_804D738C;
 
 void __RAS_OSDisableInterrupts_begin(void);
 void __RAS_OSDisableInterrupts_end(void);

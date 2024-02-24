@@ -53,7 +53,7 @@ StageData grFigureGet_803E7D34 = {
     0,
 };
 
-extern unk_t grFigureGet_804D6AC0;
+extern UNK_T grFigureGet_804D6AC0;
 
 extern StageInfo stage_info;
 

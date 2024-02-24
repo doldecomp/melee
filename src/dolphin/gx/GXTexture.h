@@ -4,10 +4,11 @@
 #include <platform.h>
 #include <dolphin/gx/forward.h>
 
+#include <placeholder.h>
 #include <dolphin/gx/GXEnum.h>
 
 void __GXSetSUTexSize(void);
-void GXLoadTexObjPreLoaded(const GXTexObj*, unk_t, GXTexMapID);
+void GXLoadTexObjPreLoaded(const GXTexObj*, UNK_T, GXTexMapID);
 
 void GXInvalidateTexAll(void);
 GXTexRegionCallback GXSetTlutRegionCallback(GXTexRegionCallback arg0);
@@ -28,6 +29,6 @@ void GXInitTlutObj(GXTlutObj*, void*, GXTlutFmt, u16);
 void GXLoadTlut(GXTlutObj*, s32);
 void __GXSetTmemConfig(s32);
 GXTexRegionCallback GXSetTexRegionCallback(GXTexRegionCallback arg0);
-void GXInitTexCacheRegion(unk_t, s8, u32, s32, u32, s32, s32);
+void GXInitTexCacheRegion(UNK_T, s8, u32, s32, u32, s32, s32);
 void __GetImageTileCount(u32, s16, s16, s32*, s32*, s32*);
 #endif

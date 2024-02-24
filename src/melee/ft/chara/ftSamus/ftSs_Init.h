@@ -21,7 +21,7 @@
                                                    s32 motion_state,
                                                    float anim_speed);
 /* 128944 */ void ftSs_Init_80128944(HSD_GObj* gobj, float farg1, float farg2);
-/* 128A1C */ bool ftSs_Init_80128A1C(HSD_GObj* gobj, unk_t arg1, float farg1);
+/* 128A1C */ bool ftSs_Init_80128A1C(HSD_GObj* gobj, UNK_T arg1, float farg1);
 /* 128AC8 */ float ftSs_Init_80128AC8(HSD_GObj* gobj, float farg1,
                                       float farg2);
 /* 128B1C */ void ftSs_Init_80128B1C(HSD_GObj* gobj, float, float, float);

@@ -22,8 +22,8 @@ typedef struct {
 /* 4D2348 */ extern __baselib_UnkType003 hsd_804D2348;
 /* 4D2648 */ extern __baselib_UnkType001 hsd_804D2648;
 /* 4D2E70 */ extern u8 hsd_804D2E70[2084];
-/* 4D79A0 */ extern unk_t hsd_804D79A0;
-/* 4D79A4 */ extern unk_t hsd_804D79A4;
-/* 4D79A8 */ extern unk_t hsd_804D79A8;
+/* 4D79A0 */ extern UNK_T hsd_804D79A0;
+/* 4D79A4 */ extern UNK_T hsd_804D79A4;
+/* 4D79A8 */ extern UNK_T hsd_804D79A8;
 
 #endif

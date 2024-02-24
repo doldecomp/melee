@@ -29,7 +29,7 @@
 /* 0743E0 */ void func_800743E0(void);
 /* 07462C */ void ftParts_8007462C(void);
 /* 07482C */ void ftParts_8007482C(void);
-/* 07487C */ void ftParts_8007487C(unk_t item, u32*, u8 costume_id, u32*,
+/* 07487C */ void ftParts_8007487C(UNK_T item, u32*, u8 costume_id, u32*,
                                    u32*);
 /* 0749CC */ void ftParts_800749CC(HSD_GObj*);
 /* 074A4C */ void ftParts_80074A4C(HSD_GObj*, enum_t, enum_t);
@@ -48,7 +48,7 @@
 /* 0750C8 */ void ftParts_800750C8(Fighter*, enum_t, bool);
 /* 075240 */ void ftParts_80075240(void);
 /* 075304 */ void ftParts_80075304(void);
-/* 0753D4 */ void ftParts_800753D4(Fighter*, s32, unk_t);
+/* 0753D4 */ void ftParts_800753D4(Fighter*, s32, UNK_T);
 /* 0755E8 */ void ftParts_800755E8(void);
 /* 075650 */ void ftParts_80075650(HSD_GObj* gobj, HSD_JObj*, u32*);
 /* 07584C */ void ftParts_JObjSetRotation(HSD_JObj*, Quaternion*);

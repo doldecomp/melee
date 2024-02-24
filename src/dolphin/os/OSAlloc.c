@@ -45,7 +45,7 @@ static HeapCell* DLExtract(HeapCell* list, HeapCell* cell)
 /// @param list
 /// @param cell
 /// @param _ Needed to match #OSFreeToHeap.
-static HeapCell* DLInsert(HeapCell* list, HeapCell* cell, unk_t _)
+static HeapCell* DLInsert(HeapCell* list, HeapCell* cell, UNK_T _)
 {
     HeapCell* before = NULL;
     HeapCell* after = list;

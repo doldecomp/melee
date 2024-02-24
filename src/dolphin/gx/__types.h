@@ -113,7 +113,7 @@ extern volatile union WGPIPE_T {
     u16 u16;
     u32 u32;
     s32 s32;
-    unk_t ptr;
+    void* ptr;
     f32 f32;
 } WGPIPE AT_ADDRESS(0xCC008000);
 

@@ -55,7 +55,7 @@ void ftSs_Init_80128944(HSD_GObj* gobj, float farg1, float farg2)
     }
 }
 
-bool ftSs_Init_80128A1C(HSD_GObj* gobj, unk_t arg1, float farg1)
+bool ftSs_Init_80128A1C(HSD_GObj* gobj, UNK_T arg1, float farg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     int i;

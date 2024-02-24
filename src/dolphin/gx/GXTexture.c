@@ -76,7 +76,7 @@ GXTexFmt GXGetTexObjFmt(GXTexObj* tex_obj)
     return tex_obj->tex_fmt;
 }
 
-void GXLoadTexObjPreLoaded(const GXTexObj* arg0, unk_t arg1, GXTexMapID arg2)
+void GXLoadTexObjPreLoaded(const GXTexObj* arg0, UNK_T arg1, GXTexMapID arg2)
 {
     NOT_IMPLEMENTED;
 }
@@ -97,7 +97,7 @@ void GXLoadTlut(GXTlutObj* arg0, s32 arg1)
     NOT_IMPLEMENTED;
 }
 
-void GXInitTexCacheRegion(unk_t arg0, s8 arg1, u32 arg2, s32 arg3, u32 arg4,
+void GXInitTexCacheRegion(UNK_T arg0, s8 arg1, u32 arg2, s32 arg3, u32 arg4,
                           s32 arg5, s32 arg6)
 {
     NOT_IMPLEMENTED;

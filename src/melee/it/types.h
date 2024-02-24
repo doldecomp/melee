@@ -75,7 +75,7 @@ struct DynamicBoneTable {
 struct Item_DynamicBones {
     int flags;
     HSD_JObj* skeleton;
-    unk_t unk_ptr;
+    UNK_T unk_ptr;
     int count;
     Vec3 unk_vec;
 };
@@ -143,7 +143,7 @@ struct ItemAttr {
 
 struct ItemDynamicsDesc {
     int x0_boneID;   // bone index;
-    unk_t x4_params; // dynamics params;
+    UNK_T x4_params; // dynamics params;
 
     /// @at{8} @sz{4}
     /// @brief Number of children bones to make dynamic.
@@ -172,10 +172,10 @@ struct ItemStateDesc {
     HSD_MatAnimJoint* x4_matanim_joint;
 
     /// @at{0} @sz{4}
-    unk_t x8_parameters;
+    UNK_T x8_parameters;
 
     /// @at{0} @sz{4}
-    unk_t xC_script;
+    UNK_T xC_script;
 };
 
 struct ItemStateArray {
