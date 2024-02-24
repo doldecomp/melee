@@ -825,6 +825,7 @@
 /* 10BB50 */ void ftKb_SpecialNMs_8010BB50(ftKb_GObj* gobj);
 /* 10BBC8 */ void ftKb_SpecialNMs_8010BBC8(ftKb_GObj* gobj);
 /* 10BC40 */ void ftKb_SpecialNMs_8010BC40(ftKb_GObj* gobj);
+/// Unknown, assumed Enter Hold of some kind
 /* 10BC90 */ void ftKb_SpecialNMs_8010BC90(ftKb_GObj* gobj);
 /* 10BCE0 */ void ftKb_MsSpecialNEnd_Anim(ftKb_GObj* gobj);
 /* 10BDD8 */ void ftKb_MsSpecialAirNEnd_Anim(ftKb_GObj* gobj);
@@ -841,7 +842,7 @@
 /* 10C3C0 */ void ftKb_SpecialNPe_8010C3C0(ftKb_GObj* gobj);
 /* 10C3F4 */ void ftKb_SpecialNPe_8010C3F4(ftKb_GObj* gobj);
 /* 10C47C */ void ftKb_SpecialNPe_8010C47C(ftKb_GObj* gobj);
-/* 10C4AC */ bool ftKb_SpecialNPe_8010C4AC(ftKb_GObj* gobj);
+/* 10C4AC */ void ftKb_SpecialNPe_8010C4AC(ftKb_GObj* gobj);
 /* 10C4D4 */ void ftKb_SpecialNPe_8010C4D4(ftKb_GObj* gobj);
 /* 10C560 */ void ftKb_SpecialNPe_8010C560(ftKb_GObj* gobj);
 /* 10C5FC */ void ftKb_PeSpecialLw_Anim(ftKb_GObj* gobj);

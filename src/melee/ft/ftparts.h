@@ -29,8 +29,8 @@
 /* 0743E0 */ void func_800743E0(void);
 /* 07462C */ void ftParts_8007462C(void);
 /* 07482C */ void ftParts_8007482C(void);
-/* 07487C */ void ftParts_8007487C(UNK_T item, u32*, u8 costume_id, u32*,
-                                   u32*);
+/* 07487C */ void ftParts_8007487C(UNK_T item, UNK_T, u8 costume_id, UNK_T,
+                                   UNK_T);
 /* 0749CC */ void ftParts_800749CC(HSD_GObj*);
 /* 074A4C */ void ftParts_80074A4C(HSD_GObj*, enum_t, enum_t);
 /* 074A74 */ s32 ftParts_80074A74(HSD_GObj*, s32);

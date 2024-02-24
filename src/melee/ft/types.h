@@ -1319,7 +1319,7 @@ struct Fighter {
     /* fp+1A58 */ Fighter_GObj* victim_gobj;
     /* fp+1A5C */ Fighter_GObj* x1A5C;
     /* fp+1A60 */ Item_GObj* x1A60;
-    /* fp+1A64 */ s32 x1A64;
+    /* fp+1A64 */ UNK_T x1A64;
     /* fp+1A68 */ u16 x1A68;
     /* fp+1A6A */ u16 x1A6A;
     /* fp+1A6C */ float x1A6C;
@@ -1673,7 +1673,6 @@ struct Fighter {
     /* fp+222A */ UnkFlagStruct x222A_flag;
     /* fp+222B */ u8 filler_x222B;
     /* fp+222C */ union Fighter_FighterVars {
-        /* fp+222C */ u8 _[FIGHTERVARS_SIZE];
         /* fp+222C */ struct ftCaptain_FighterVars ca, gn;
         /* fp+222C */ struct ftDonkey_FighterVars dk;
         /* fp+222C */ struct ftFox_FighterVars fx, fc;
@@ -1711,6 +1710,7 @@ struct Fighter {
         /* fp+2340 */ union ftDonkey_MotionVars dk;
         /* fp+2340 */ union ftFox_MotionVars fx, fc;
         /* fp+2340 */ union ftGameWatch_MotionVars gw;
+        /* fp+2340 */ union ftKb_MotionVars kb;
         /* fp+2340 */ union ftKoopa_MotionVars kp;
         /* fp+2340 */ union ftLuigi_MotionVars lg;
         /* fp+2340 */ union ftLk_MotionVars lk;

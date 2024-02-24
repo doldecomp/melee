@@ -1207,6 +1207,7 @@ void ftColl_8007B128(Fighter_GObj* fighter_gobj, int bone_id,
     HSD_ASSERT(2184, 0);
 }
 
+/// @todo @p shield is #AbsorbDesc, and #AbsorbDesc is part of #ShieldDesc
 void ftColl_8007B1B8(Fighter_GObj* gobj, ShieldDesc* shield, HSD_GObjEvent cb)
 {
     Fighter* fp = GET_FIGHTER(gobj);

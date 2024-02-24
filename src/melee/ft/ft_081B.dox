@@ -27,7 +27,10 @@ void ft_80085134(Fighter_GObj* gobj);
 void ft_80084104(Fighter_GObj* gobj);
 
 GroundOrAir ft_80082708(Fighter_GObj* gobj);
+
+/// Fighter_PhysGround_ApplyFriction
 void ft_80084F3C(Fighter_GObj* gobj);
+
 void ft_80084280(Fighter_GObj*);
 void ft_8008403C(Fighter_GObj*, HSD_GObjEvent);
 void ft_80084DB0(Fighter_GObj*);
