@@ -1,8 +1,11 @@
+#include "ft/forward.h"
+#include "ftCommon/forward.h"
 #include <baselib/forward.h>
 
 #include "ftYs_Guard.h"
 
 #include "ftYs_Init.h"
+#include "ftYs_SpecialN.h"
 
 #include "ef/efasync.h"
 #include "ft/fighter.h"
@@ -115,9 +118,35 @@ void ftYs_GuardOn_0_Coll(HSD_GObj* arg0)
     ftCo_GuardOn_Coll(arg0);
 }
 
-void ftYs_Shield_8012C1D4(HSD_GObj* gobj)
+static inline void inlineA0(Fighter_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    FORCE_PAD_STACK(4 * 4);
+    {
+        Fighter* fp = GET_FIGHTER(gobj);
+        struct UNK_SAMUS_S2 foo;
+        ftColl_8007B0C0(gobj, Intangible);
+        foo.parts[0] = fp->ft_data->x8->x11;
+        foo.parts[1] = FtPart_TransN;
+        foo.parts[2] = FtPart_TransN;
+        foo.vec1 = foo.vec2 = ftYs_Unk1_803B75C0;
+        foo.scale = 1;
+        ftColl_8007B5AC(fp, fp->hurt_capsules, &foo);
+    }
+}
+
+void ftYs_Shield_8012C1D4(ftYs_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(4 * 2);
+    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardHold, Ft_MF_None, 0, 1, 0,
+                              NULL);
+    ftAnim_8006FA58(fp, 1, fp->x108_costume_joint->child);
+    ftParts_80074B0C(gobj, 0, 1);
+    inlineA0(gobj);
+    ftCo_80092450(gobj);
+    fp->x221E_b4 = false;
+    ftYs_Init_8012B8A4(gobj);
+    ftCo_80091D58(fp);
 }
 
 void ftYs_GuardHold_Anim(HSD_GObj* gobj)
@@ -211,10 +240,7 @@ void ftYs_GuardOff_Coll(HSD_GObj* arg0)
     ftCo_GuardOff_Coll(arg0);
 }
 
-void ftYs_Shield_8012C600(HSD_GObj* gobj, bool arg1)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftYs_Shield_8012C600
 
 void ftYs_GuardDamage_Anim(HSD_GObj* gobj)
 {
@@ -232,24 +258,15 @@ void ftYs_GuardDamage_Anim(HSD_GObj* gobj)
 
 void ftYs_GuardDamage_IASA(HSD_GObj* arg0) {}
 
-void ftYs_GuardDamage_Phys(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftYs_GuardDamage_Phys
 
-void ftYs_GuardDamage_Coll(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftYs_GuardDamage_Coll
 
 void ftYs_Shield_8012C850(HSD_GObj* gobj)
 {
-    ftCommonData* temp_r5;
-    Fighter* fp;
-
-    fp = getFighter(gobj);
-    Fighter_ChangeMotionState(gobj, 345, 16, fp->cur_anim_frame,
-                              ftYs_Init_804D9A28, 0, NULL);
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_1, 16, fp->cur_anim_frame,
+                              1, 0, NULL);
     fp->x672_input_timer_counter = 254;
     fp->x221A_b7 = false;
     fp->x221B_b0 = false;
@@ -258,37 +275,21 @@ void ftYs_Shield_8012C850(HSD_GObj* gobj)
     fp->x221C_b2 = true;
 
     fp->mv.ys.unk2.x14 = p_ftCommonData->x2A4;
-    temp_r5 = p_ftCommonData;
-    fp->mv.ys.unk2.x18 = temp_r5->x2B4;
+    fp->mv.ys.unk2.x18 = p_ftCommonData->x2B4;
     ftCo_8009370C(gobj, ftYs_Shield_8012CACC);
 }
 
-void ftYs_Shield_8012C914(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftYs_Shield_8012C914
 
 void ftYs_Shield_8012CACC(HSD_GObj* arg0) {}
 
-void ftYs_GuardOn_1_Anim(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftYs_GuardOn_1_Anim
 
-void ftYs_GuardOn_1_IASA(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftYs_GuardOn_1_IASA
 
-void ftYs_GuardOn_1_Phys(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftYs_GuardOn_1_Phys
 
-void ftYs_GuardOn_1_Coll(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftYs_GuardOn_1_Coll
 
 bool ftYs_Shield_8012CC1C(HSD_GObj* gobj)
 {

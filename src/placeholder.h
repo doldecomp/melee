@@ -77,4 +77,10 @@ OSPanic(__FILE__, __LINE__, "Function is not implemented!")
         UNUSED unsigned char _[(bytes)];                                      \
     } while (0)
 
+/// @warning Creates fake @c .rodata entries!
+#define FORCE_PAD_STACK(bytes)                                                \
+    do {                                                                      \
+        UNUSED unsigned char _[(bytes)] = { 0 };                              \
+    } while (0)
+
 #endif
