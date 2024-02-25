@@ -540,5 +540,5 @@ void ftMs_SpecialN_80136730(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->cmd_vars[0] = 0;
-    fp->mv.ms.specialn.x0 = 0;
+    fp->mv.ms.specialn.cur_frame = 0;
 }

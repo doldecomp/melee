@@ -1,5 +1,8 @@
 #include <platform.h>
+#include "ft/forward.h"
+#include "ftMars/forward.h"
 #include "lb/forward.h"
+#include <baselib/forward.h>
 
 #include "ftMs_SpecialN.h"
 
@@ -21,107 +24,84 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
+#include <common_structs.h>
+#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
 void ftMs_SpecialN_Enter(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    MarsAttributes* attrs = fp->dat_attrs;
-
-    u8 _[8];
-
-    fp->x21EC = &ftMs_SpecialN_80136730;
-
-    fp->gr_vel /= attrs->xC;
-    Fighter_ChangeMotionState(gobj, 0x155, 0, 0.0f, 1.0f, 0.0f, 0);
+    Fighter* fp = GET_FIGHTER(gobj);
+    MarsAttributes* da = fp->dat_attrs;
+    PAD_STACK(4 * 2);
+    fp->x21EC = ftMs_SpecialN_80136730;
+    fp->gr_vel /= da->specialn_friction;
+    Fighter_ChangeMotionState(gobj, ftMs_MS_SpecialNStart, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 }
 
 void ftMs_SpecialAirN_Enter(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    MarsAttributes* attrs = fp->dat_attrs;
-
-    u8 _[8];
-
-    fp->x21EC = &ftMs_SpecialN_80136730;
-
-    fp->self_vel.x /= attrs->xC;
-
-    if (fp->self_vel.y <= 0.0f) {
-        fp->self_vel.y = 0.0f;
+    Fighter* fp = GET_FIGHTER(gobj);
+    MarsAttributes* da = fp->dat_attrs;
+    PAD_STACK(4 * 2);
+    fp->x21EC = ftMs_SpecialN_80136730;
+    fp->self_vel.x /= da->specialn_friction;
+    if (fp->self_vel.y <= 0) {
+        fp->self_vel.y = 0;
     }
-
-    Fighter_ChangeMotionState(gobj, 0x159, 0, 0.0f, 1.0f, 0.0f, 0);
+    Fighter_ChangeMotionState(gobj, ftMs_MS_SpecialAirNStart, Ft_MF_None, 0, 1,
+                              0, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
-// 80136844 00133424
-// https://decomp.me/scratch/Go6FC
+static inline void doStartAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        cb(gobj);
+        {
+            Fighter* fp = GET_FIGHTER(gobj);
+            if (fp->kind == FTKIND_MARS) {
+                ftCo_800BFFD0(fp, 99, 0);
+            } else {
+                ftCo_800BFFD0(fp, 100, 0);
+            }
+        }
+    }
+}
+
 void ftMs_SpecialNStart_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftMs_SpecialN_80136E74(gobj);
-
-        if (((Fighter*) gobj->user_data)->kind == FTKIND_MARS) {
-            ftCo_800BFFD0(gobj->user_data, 0x63, 0);
-        } else {
-            ftCo_800BFFD0(gobj->user_data, 0x64, 0);
-        }
-    }
+    doStartAnim(gobj, ftMs_SpecialN_80136E74);
 }
 
-// 801368AC 0013348C
-// https://decomp.me/scratch/XBFKN
 void ftMs_SpecialAirNStart_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftMs_SpecialN_80136EAC(gobj);
-
-        if (((Fighter*) gobj->user_data)->kind == FTKIND_MARS) {
-            ftCo_800BFFD0(gobj->user_data, 0x63, 0);
-        } else {
-            ftCo_800BFFD0(gobj->user_data, 0x64, 0);
-        }
-    }
+    doStartAnim(gobj, ftMs_SpecialN_80136EAC);
 }
 
-// 80136914 001334F4
-void ftMs_SpecialNStart_IASA(HSD_GObj* gobj)
-{
-    return;
-}
+void ftMs_SpecialNStart_IASA(HSD_GObj* gobj) {}
 
-// 80136918 001334F8
-void ftMs_SpecialAirNStart_IASA(HSD_GObj* gobj)
-{
-    return;
-}
+void ftMs_SpecialAirNStart_IASA(HSD_GObj* gobj) {}
 
 void ftMs_SpecialNStart_Phys(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* da = fp->dat_attrs;
-
-    u8 _[8];
-
+    PAD_STACK(4 * 2);
     ftCommon_8007C930(fp, da->x10);
     ftCommon_8007CB74(gobj);
 }
 
 void ftMs_SpecialAirNStart_Phys(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* da = fp->dat_attrs;
-
-    u8 _[8];
-
+    PAD_STACK(4 * 2);
     ftCommon_8007D4B8(fp);
     ftCommon_8007CE94(fp, da->x10);
 }
 
-// 801369A4 00133584
-// https://decomp.me/scratch/bR5HF
 void ftMs_SpecialNStart_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
@@ -129,8 +109,6 @@ void ftMs_SpecialNStart_Coll(HSD_GObj* gobj)
     }
 }
 
-// 801369E0 001335C0
-// https://decomp.me/scratch/cCPAH
 void ftMs_SpecialAirNStart_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
@@ -138,381 +116,283 @@ void ftMs_SpecialAirNStart_Coll(HSD_GObj* gobj)
     }
 }
 
-// 80136A1C 001335FC
-// https://decomp.me/scratch/9GhD1
 void ftMs_SpecialN_80136A1C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    /// @todo Named flags.
+    static u32 const mf = (1 << 2) | (1 << 7) | (1 << 12) | (1 << 14) |
+                          (1 << 18) | (1 << 19) | (1 << 22) | (1 << 26) |
+                          (1 << 27);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-
-    Fighter_ChangeMotionState(gobj, 0x159, 0x0C4C5084, fp->cur_anim_frame,
-                              1.0f, 0.0f, 0);
+    Fighter_ChangeMotionState(gobj, ftMs_MS_SpecialAirNStart, mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
 }
 
-// 80136A7C 0013365C
-// https://decomp.me/scratch/GU6fn
 void ftMs_SpecialN_80136A7C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    /// @todo Named flags.
+    static u32 const mf = (1 << 2) | (1 << 7) | (1 << 12) | (1 << 14) |
+                          (1 << 18) | (1 << 19) | (1 << 22) | (1 << 26) |
+                          (1 << 27);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
+    Fighter_ChangeMotionState(gobj, ftMs_MS_SpecialNStart, mf,
+                              fp->cur_anim_frame, 1, 0, 0);
+}
 
-    Fighter_ChangeMotionState(gobj, 0x155, 0x0C4C5084, fp->cur_anim_frame,
-                              1.0f, 0.0f, 0);
+static inline void doLoopAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
+{
+    {
+        u64 _ = 0;
+    }
+    {
+        Fighter* fp = GET_FIGHTER(gobj);
+        MarsAttributes* da = fp->dat_attrs;
+        {
+            u64 _0 = 0, _1 = 0;
+        }
+        {
+            Vec3 pos;
+            if (fp->mv.ms.specialn.cur_frame % 30 == 0) {
+                lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint,
+                            NULL, &pos);
+                lb_800119DC(&pos, 10, 0.5, 0.05, 60 * deg_to_rad);
+            }
+            ++fp->mv.ms.specialn.cur_frame;
+            if (fp->mv.ms.specialn.cur_frame > da->x0 * 30) {
+                fp->cmd_vars[0] = true;
+                cb(gobj);
+            }
+        }
+    }
 }
 
 void ftMs_SpecialNLoop_Anim(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32* specialAttrs = fp->dat_attrs;
-    Vec3 sp28;
-
-    u8 _[28];
-
-    if (fp->mv.ms.specialn.x0 % 30 == 0) {
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint, 0,
-                    &sp28);
-        lb_800119DC(&sp28, 10, 0.5, 0.05, 60 * deg_to_rad);
-    }
-
-    fp->mv.ms.specialn.x0++;
-
-    if ((s32) fp->mv.ms.specialn.x0 > *specialAttrs * 30) {
-        fp->cmd_vars[0] = 1;
-        ftMs_SpecialN_80137354(gobj);
-    }
+    doLoopAnim(gobj, ftMs_SpecialN_80137354);
 }
 
 void ftMs_SpecialAirNLoop_Anim(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    MarsAttributes* attrs = fp->dat_attrs;
-    Vec3 sp28;
+    doLoopAnim(gobj, ftMs_SpecialN_801373B8);
+}
 
-    u8 _[28];
-
-    if ((s32) fp->mv.ms.specialn.x0 % 30 == 0) {
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint, 0,
-                    &sp28);
-        lb_800119DC(&sp28, 10, 0.5, 0.05, 60 * deg_to_rad);
-    }
-    fp->mv.ms.specialn.x0++;
-    if ((s32) fp->mv.ms.specialn.x0 > attrs->x0 * 30) {
-        fp->cmd_vars[0] = 1;
-        ftMs_SpecialN_801373B8(gobj);
+static inline void doLoopIasa(HSD_GObj* gobj, HSD_GObjEvent cb)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+        fp->cmd_vars[0] = 0;
+        cb(gobj);
     }
 }
 
-// 80136C8C 0013386C
-// Interrupt_MarthNeutralBCharge
-// https://decomp.me/scratch/zR8Hv
+/// Interrupt_MarthNeutralBCharge
 void ftMs_SpecialNLoop_IASA(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    if ((fp->input.held_inputs & 0x200) == 0) {
-        fp->cmd_vars[0] = 0;
-        ftMs_SpecialN_80137354(gobj);
-    }
+    doLoopIasa(gobj, ftMs_SpecialN_80137354);
 }
 
-// 80136CC4 001338A4
-// https://decomp.me/scratch/ykJFN
 void ftMs_SpecialAirNLoop_IASA(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    if ((fp->input.held_inputs & 0x200) == 0) {
-        fp->cmd_vars[0] = 0;
-        ftMs_SpecialN_801373B8(gobj);
-    }
+    doLoopIasa(gobj, ftMs_SpecialN_801373B8);
 }
 
-// 80136CFC 001338DC
-// https://decomp.me/scratch/Q3NsK
 void ftMs_SpecialNLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-// 80136D1C 001338FC
-// https://decomp.me/scratch/LVDnG
 void ftMs_SpecialAirNLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
-// 80136D3C 0013391C
-// https://decomp.me/scratch/XmmUv
 void ftMs_SpecialNLoop_Coll(HSD_GObj* gobj)
 {
-    if (ft_80082708(gobj) == 0) {
+    if (ft_80082708(gobj) == GA_Ground) {
         ftMs_SpecialN_80136DB4(gobj);
     }
 }
 
-// 80136D78 00133958
-// https://decomp.me/scratch/tjkA9
 void ftMs_SpecialAirNLoop_Coll(HSD_GObj* gobj)
 {
-    if (ft_80081D0C(gobj) != 0) {
+    if (ft_80081D0C(gobj) != GA_Ground) {
         ftMs_SpecialN_80136E14(gobj);
     }
 }
 
-// 80136DB4 00133994
-// https://decomp.me/scratch/eJxjC
 void ftMs_SpecialN_80136DB4(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-
-    ftCommon_8007D5D4(gobj->user_data);
-    Fighter_ChangeMotionState(gobj, 0x15A, 0x0C4C5A86, fp->cur_anim_frame,
-                              1.0f, 0.0f, 0);
+    /// @todo Named flags.
+    static u32 const mf = (1 << 1) | (1 << 2) | (1 << 7) | (1 << 9) |
+                          (1 << 11) | (1 << 12) | (1 << 14) | (1 << 18) |
+                          (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(gobj, ftMs_MS_SpecialAirNLoop, mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
 }
 
-// 80136E14 001339F4
-// https://decomp.me/scratch/mzQdp
 void ftMs_SpecialN_80136E14(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-
+    /// @todo Named flags.
+    static u32 const mf = (1 << 1) | (1 << 2) | (1 << 7) | (1 << 9) |
+                          (1 << 11) | (1 << 12) | (1 << 14) | (1 << 18) |
+                          (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x156, 0x0C4C5A86, fp->cur_anim_frame,
-                              1.0f, 0.0f, 0);
+    Fighter_ChangeMotionState(gobj, ftMs_MS_SpecialNLoop, mf,
+                              fp->cur_anim_frame, 1, 0, NULL);
 }
 
-// 80136E74 00133A54
-// https://decomp.me/scratch/M7HBN
 void ftMs_SpecialN_80136E74(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 0x156, 0x1200, 0.0f, 1.0f, 0.0f, 0);
+    Fighter_ChangeMotionState(gobj, ftMs_MS_SpecialNLoop,
+                              Ft_MF_KeepSfx | Ft_MF_SkipColAnim, 0, 1, 0,
+                              NULL);
 }
 
-// 80136EAC 00133A8C
-// https://decomp.me/scratch/RkI7l
 void ftMs_SpecialN_80136EAC(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 0x15A, 0x1200, 0.0f, 1.0f, 0.0f, 0);
+    Fighter_ChangeMotionState(gobj, ftMs_MS_SpecialAirNLoop,
+                              Ft_MF_KeepSfx | Ft_MF_SkipColAnim, 0, 1, 0,
+                              NULL);
 }
 
-// 80136EE4 00133AC4
-// https://decomp.me/scratch/e4mhD
-void ftMs_SpecialNEnd_Anim(HSD_GObj* gobj)
+static inline void inlineA0(Fighter_GObj* gobj, HSD_GObjEvent cb)
 {
-    s32 ndx;
-    MarsAttributes* da;
-    Fighter* fp;
-
-    fp = gobj->user_data;
-    da = fp->dat_attrs;
+    Fighter* fp = GET_FIGHTER(gobj);
+    MarsAttributes* da = fp->dat_attrs;
+    int i;
     if (fp->cmd_vars[0] == 0) {
-        s32 hb = (s32) fp;
-        ndx = 0;
-        while (ndx < 4) {
-            if (*(s32*) (hb + 0x914) == 1) {
+        {
+            u64 _0 = 0, _1 = 0;
+        }
+        i = 0;
+        while (i < (signed) ARRAY_SIZE(fp->x914)) {
+            if (fp->x914[i].state == HitCapsule_Enabled) {
                 ftColl_8007ABD0(
-                    (HitCapsule*) (hb + 0x914),
-                    (float) (da->x4 + fp->mv.ms.specialn.x0 / 30.0f * da->x8),
+                    &fp->x914[i],
+                    (float) (da->x4 +
+                             fp->mv.ms.specialn.cur_frame / 30 * da->x8),
                     gobj);
             }
-            ndx++;
-            hb += 0x138;
+            i++;
         }
     }
-    if (fp->cur_anim_frame == 9.0f) {
+    if (fp->cur_anim_frame == 9) {
         Vec3 position;
-
-        u8 _[20];
-
-        // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
-        //         Fighter_BonePersonalToCommon
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint, 0,
                     &position);
-        // AestheticWindEffect(r3=sourcelocation,r4=duration,f1=radiusSize,f2=effectdegradation,f3=unk)
-        lb_800119DC(&position, 120, 0.9, 0.02, 60 * deg_to_rad);
+        lb_800119DC(&position, 120, 0.9f, 0.02f, 1.0471975803375244140625f);
     }
-    // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        // MS_014_Wait_PlayerCheck
-        ft_8008A2BC(gobj);
+        cb(gobj);
     }
-    return;
 }
 
-// 80137010 00133BF0
-// https://decomp.me/scratch/pIor0
-void ftMs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
+void ftMs_SpecialNEnd_Anim(Fighter_GObj* gobj)
 {
-    s32 ndx;
-    MarsAttributes* da;
-    Fighter* fp;
-
-    fp = gobj->user_data;
-    da = fp->dat_attrs;
-    if (fp->cmd_vars[0] == 0) {
-        // register swap:
-        // s32 ndx;
-        // for (ndx = 0; ndx < 4; ndx++) {
-        //     if (fp->x914[ndx].x0 == 1) {
-        //         // Hitbox_ApplyDamageStalingAndMore
-        //         ftColl_8007ABD0(&fp->x914[ndx], (float) (ftCo_DatAttrs->x4 +
-        //         (s32)fp->mv.ms.specialn.x0 / 30 * ftCo_DatAttrs->x8), gobj);
-        //     }
-        // }
-
-        // matches but gross:
-        s32 hb = (s32) fp;
-        ndx = 0;
-        while (ndx < 4) {
-            if (*(s32*) (hb + 0x914) == 1) {
-                ftColl_8007ABD0(
-                    (HitCapsule*) (hb + 0x914),
-                    (float) (da->x4 + fp->mv.ms.specialn.x0 / 30.0f * da->x8),
-                    gobj);
-            }
-            ndx++;
-            hb += 0x138;
-        }
-    }
-    if (fp->cur_anim_frame == 9.0f) {
-        Vec3 pos;
-
-        u8 _[20];
-
-        // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
-        //         Fighter_BonePersonalToCommon
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint, 0,
-                    &pos);
-        // AestheticWindEffect(r3=sourcelocation,r4=duration,f1=radiusSize,f2=effectdegradation,f3=unk)
-        lb_800119DC(&pos, 120, 0.9, 0.02, 60 * deg_to_rad);
-    }
-    // FrameTimerCheck
-    if (!ftAnim_IsFramesRemaining(gobj)) {
-        // MS_029_Fall
-        ftCo_800CC730(gobj);
-    }
-    return;
+    inlineA0(gobj, ft_8008A2BC);
 }
 
-// 8013713C 00133D1C
+void ftMs_SpecialAirNEnd_Anim(Fighter_GObj* gobj)
+{
+    inlineA0(gobj, ftCo_800CC730);
+}
+
 void ftMs_SpecialNEnd_IASA(HSD_GObj* gobj) {}
 
-// 80137140 00133D20
 void ftMs_SpecialAirNEnd_IASA(HSD_GObj* gobj) {}
 
-// 80137144 00133D24
-// https://decomp.me/scratch/ZIl0O
 void ftMs_SpecialNEnd_Phys(HSD_GObj* gobj)
 {
-    // Physics_Friction
     ft_80084F3C(gobj);
 }
 
-// 80137164 00133D44
-// https://decomp.me/scratch/8OwY9
 void ftMs_SpecialAirNEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
-// 80137184 00133D64
-// https://decomp.me/scratch/cIi5D
 void ftMs_SpecialNEnd_Coll(HSD_GObj* gobj)
 {
-    if (ft_80082708(gobj) == 0) {
+    if (ft_80082708(gobj) == GA_Ground) {
         ftMs_SpecialN_801371FC(gobj);
     }
 }
 
-// 801371C0 00133DA0
-// https://decomp.me/scratch/rpVpQ
-void ftMs_SpecialAirNEnd_Coll(HSD_GObj* arg0)
+void ftMs_SpecialAirNEnd_Coll(HSD_GObj* gobj)
 {
-    if (ft_80081D0C(arg0) != 0) {
-        ftMs_SpecialN_801372A8(arg0);
+    if (ft_80081D0C(gobj) != GA_Ground) {
+        ftMs_SpecialN_801372A8(gobj);
     }
 }
 
-// 801371FC 00133DDC
-// https://decomp.me/scratch/5lf3a
 void ftMs_SpecialN_801371FC(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 thing;
-
-    if (fp->cmd_vars[0] == 0) {
-        thing = 0x15B;
+    /// @todo Named flags.
+    static u32 const mf = (1 << 1) | (1 << 2) | (1 << 3) | (1 << 7) |
+                          (1 << 12) | (1 << 14) | (1 << 18) | (1 << 19) |
+                          (1 << 22) | (1 << 26) | (1 << 27);
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftMars_MotionState msid;
+    if (!fp->cmd_vars[0]) {
+        msid = ftMs_MS_SpecialAirNEnd0;
     } else {
-        thing = 0x15C;
+        msid = ftMs_MS_SpecialAirNEnd1;
     }
-
-    // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     ftCommon_8007D5D4(fp);
-    // MotionStateChange
-    Fighter_ChangeMotionState(gobj, thing, 0x0C4C508E, fp->cur_anim_frame,
-                              1.0f, 0.0f, 0);
-
-    if (fp->x2219_b0 == 1) {
-        fp->pre_hitlag_cb = &efLib_PauseAll;
-        fp->post_hitlag_cb = &efLib_ResumeAll;
+    Fighter_ChangeMotionState(gobj, msid, mf, fp->cur_anim_frame, 1, 0, NULL);
+    if (fp->x2219_b0 == true) {
+        fp->pre_hitlag_cb = efLib_PauseAll;
+        fp->post_hitlag_cb = efLib_ResumeAll;
     }
 }
 
-// 801372A8 00133E88
-// MS_MarthNeutralBHitAir->Ground
-// https://decomp.me/scratch/IV8RT
 void ftMs_SpecialN_801372A8(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 thing;
-
-    if (fp->cmd_vars[0] == 0) {
-        thing = 0x157;
+    /// @todo Named flags.
+    static u32 const mf = (1 << 1) | (1 << 2) | (1 << 3) | (1 << 7) |
+                          (1 << 12) | (1 << 14) | (1 << 18) | (1 << 19) |
+                          (1 << 22) | (1 << 26) | (1 << 27);
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftMars_MotionState msid;
+    if (!fp->cmd_vars[0]) {
+        msid = ftMs_MS_SpecialNEnd0;
     } else {
-        thing = 0x158;
+        msid = ftMs_MS_SpecialNEnd1;
     }
-
-    // Air_SetAsGrounded2
     ftCommon_8007D7FC(fp);
-    // MotionStateChange
-    Fighter_ChangeMotionState(gobj, thing, 0x0C4C508E, fp->cur_anim_frame,
-                              1.0f, 0.0f, 0);
-
-    if (fp->x2219_b0 == 1) {
-        fp->pre_hitlag_cb = &efLib_PauseAll;
-        fp->post_hitlag_cb = &efLib_ResumeAll;
+    Fighter_ChangeMotionState(gobj, msid, mf, fp->cur_anim_frame, 1, 0, NULL);
+    if (fp->x2219_b0 == true) {
+        fp->pre_hitlag_cb = efLib_PauseAll;
+        fp->post_hitlag_cb = efLib_ResumeAll;
     }
 }
 
-// 80137354 00133F34
-// MS_RoyNeutralBSwing
-// https://decomp.me/scratch/4CbiS
 void ftMs_SpecialN_80137354(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 thing;
-
-    if (fp->cmd_vars[0] == 0) {
-        thing = 0x157;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftMars_MotionState msid;
+    if (!fp->cmd_vars[0]) {
+        msid = ftMs_MS_SpecialNEnd0;
     } else {
-        thing = 0x158;
+        msid = ftMs_MS_SpecialNEnd1;
     }
-
-    Fighter_ChangeMotionState(gobj, thing, 0, 1.0f, 1.0f, 0.0f, 0);
-    fp->accessory4_cb = &ftMs_SpecialN_801365A8;
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 1, 1, 0, NULL);
+    fp->accessory4_cb = ftMs_SpecialN_801365A8;
 }
 
-// 801373B8 00133F98
-// https://decomp.me/scratch/mXbi4
 void ftMs_SpecialN_801373B8(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 thing;
-
-    if (fp->cmd_vars[0] == 0) {
-        thing = 0x15B;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftMars_MotionState msid;
+    if (!fp->cmd_vars[0]) {
+        msid = ftMs_MS_SpecialAirNEnd0;
     } else {
-        thing = 0x15C;
+        msid = ftMs_MS_SpecialAirNEnd1;
     }
-
-    Fighter_ChangeMotionState(gobj, thing, 0, 1.0f, 1.0f, 0.0f, 0);
-    fp->accessory4_cb = &ftMs_SpecialN_8013666C;
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 1, 1, 0, NULL);
+    fp->accessory4_cb = ftMs_SpecialN_8013666C;
 }
