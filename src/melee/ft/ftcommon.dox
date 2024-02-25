@@ -66,7 +66,10 @@ void ftCommon_8007DFD0(ftCo_GObj* gobj, Vec3* arg1);
 void ftCommon_8007E0E4(ftCo_GObj*);
 ftCo_GObj* ftCommon_8007E2A4(ftCo_GObj*);
 void ftCommon_8007E2F4(ftCo_Fighter*, s16 val);
+
+/// Fighter_KillAllVelocity
 void ftCommon_8007E2FC(ftCo_GObj*);
+
 void ftCommon_8007E358(ftCo_GObj*);
 void ftCommon_8007E3EC(ftCo_GObj*);
 void ftCommon_8007E5AC(ftCo_Fighter*);
