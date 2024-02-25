@@ -2,7 +2,10 @@
 #define MELEE_FT_CHARA_FTPOPO_TYPES_H
 
 #include <platform.h>
+#include "ft/forward.h"
 #include "it/forward.h"
+
+#include <placeholder.h>
 
 struct ftPopo_FighterVars {
     /* 0x222C */ Item_GObj* x222C;
@@ -18,7 +21,7 @@ struct ftPopo_FighterVars {
     /* 0x2250 */ float x2250;
 };
 
-typedef struct _ftIceClimberAttributes {
+typedef struct ftIceClimberAttributes {
     float x0;
     float x4;
     float x8;
@@ -26,15 +29,31 @@ typedef struct _ftIceClimberAttributes {
     float x10;
     float x14;
     float x18;
-    s32 x1C;
-    s32 x20;
-    s32 x24;
-    s32 x28;
-    s32 x2C;
-    u8 data_filler_1[0xC4 - 0x30];
+    int x1C;
+    float x20;
+    float x24;
+    float x28;
+    float x2C;
+    u8 _30[0x68 - 0x30];
+    int x68;
+    u8 _6C[0xC4 - 0x6C];
     float xC4;
     float xC8;
-    u8 data_filler_2[0x90];
+    u8 _CC[0x90];
 } ftIceClimberAttributes;
+STATIC_ASSERT(sizeof(ftIceClimberAttributes) == 0x15C);
+
+union ftPp_MotionVars {
+    struct ftPp_SpecialSVars {
+        /* fp+2340 */ float x0;
+        /* fp+2344 */ int x4;
+        /* fp+2348 */ int x8;
+        /* fp+234C */ int xC;
+        /* fp+2350 */ int x10;
+        /* fp+2354 */ int x14;
+        /* fp+2358 */ UNK_T x18;
+        /* fp+235C */ float x1C;
+    } specials;
+};
 
 #endif

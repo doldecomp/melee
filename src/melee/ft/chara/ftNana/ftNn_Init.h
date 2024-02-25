@@ -6,6 +6,7 @@
 
 #include "ft/types.h"
 
+/* 123954 */ bool ftNn_Init_80123954(Fighter_GObj* gobj, GroundOrAir pp_ga);
 /* 122EDC */ void ftNn_Init_OnLoad(HSD_GObj* gobj);
 /* 122F28 */ void ftNn_Init_OnDeath(HSD_GObj* gobj);
 /* 122FAC */ void ftNn_Init_80122FAC(HSD_GObj* gobj);

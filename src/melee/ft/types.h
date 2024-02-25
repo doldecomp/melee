@@ -1712,8 +1712,8 @@ struct Fighter {
         /* fp+2340 */ union ftGameWatch_MotionVars gw;
         /* fp+2340 */ union ftKb_MotionVars kb;
         /* fp+2340 */ union ftKoopa_MotionVars kp;
-        /* fp+2340 */ union ftLuigi_MotionVars lg;
         /* fp+2340 */ union ftLk_MotionVars lk;
+        /* fp+2340 */ union ftLuigi_MotionVars lg;
         /* fp+2340 */ union ftMario_MotionVars mr, dr;
         /* fp+2340 */ union ftMars_MotionVars ms, fe;
         /* fp+2340 */ union ftMasterHand_MotionVars mh, ch;
@@ -1721,6 +1721,7 @@ struct Fighter {
         /* fp+2340 */ union ftNess_MotionVars ns;
         /* fp+2340 */ union ftPe_MotionVars pe;
         /* fp+2340 */ union ftPikachu_MotionVars pk, pc;
+        /* fp+2340 */ union ftPp_MotionVars pp;
         /* fp+2340 */ union ftPurin_MotionVars pr;
         /* fp+2340 */ union ftSamus_MotionVars ss;
         /* fp+2340 */ union ftSeak_MotionVars sk;
