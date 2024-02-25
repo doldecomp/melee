@@ -18,6 +18,13 @@ union ftKoopa_MotionVars {
         UNK_T x8;
         bool xC;
     } unk1;
+    /// @todo Possibly #ftKoopa_State1Vars.
+    struct ftKoopa_SpecialSVars {
+        /* fp+2340 */ bool b_held;
+        /* fp+2344 */ bool x4;
+        /* fp+2348 */ int facing_dir;
+        /* fp+2348 */ bool xC;
+    } specials;
 };
 
 typedef struct _ftKoopaAttributes {
