@@ -26,4 +26,4 @@ Vec3 ftYs_Unk3_803CEDA4[] = {
     { 6, 6, 6 },
 };
 
-Vec4 const ftYs_Unk1_803B75C0 = { 0 };
+Vec3 const ftYs_Unk1_803B75C0 = { 0 };

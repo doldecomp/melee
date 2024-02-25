@@ -5,6 +5,7 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "it/forward.h"
+#include <baselib/forward.h>
 
 #include "ftYs_Init.h"
 
@@ -12,9 +13,11 @@
 #include "ftYs_SpecialN.h"
 #include "types.h"
 
+#include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ftanim.h"
 #include "ft/ftcamera.h"
+#include "ft/ftcoll.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "it/it_26B1.h"
@@ -532,7 +535,35 @@ void ftYs_Init_OnKnockbackExit(HSD_GObj* gobj)
     ftAnim_ApplyPartAnim(gobj, 4, 2, 0.0f);
 }
 
-void ftYs_Init_8012BDA0(ftCo_GObj* gobj)
+void ftYs_Init_8012BDA0(Fighter_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(4 * 2);
+    {
+        struct UNK_SAMUS_S2 foo;
+        PAD_STACK(4 * 4);
+        ftColl_8007B0C0(gobj, Intangible);
+        foo.parts[0] = fp->ft_data->x8->x11;
+        foo.parts[1] = FtPart_TransN;
+        foo.parts[2] = FtPart_TransN;
+        foo.vec1 = foo.vec2 = ftYs_Unk1_803B75C0;
+        foo.scale = 1;
+        ftColl_8007B5AC(fp, fp->hurt_capsules, &foo);
+    }
+}
+
+void ftYs_Init_8012BE3C(HSD_GObj* gobj)
+{
+    /// @todo Some kind of inline here.
+    ftCo_DatAttrs_xBC_t* xBC;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftParts_80074B0C(gobj, 0, 0);
+    ftColl_8007B0C0(gobj, 0);
+    xBC = &fp->co_attrs.xBC;
+    {
+        Fighter_Part part = ftParts_8007500C(fp, 4);
+        HSD_JObj* jobj = fp->parts[part].joint;
+        Fighter* fp1 = GET_FIGHTER(gobj);
+        efAsync_Spawn(gobj, &fp1->x60C, 4, 1231, jobj, xBC);
+    }
 }

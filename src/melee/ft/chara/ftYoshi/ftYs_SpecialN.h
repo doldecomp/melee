@@ -7,6 +7,7 @@
 #include <baselib/forward.h>
 
 #include <placeholder.h>
+#include <dolphin/mtx/types.h>
 
 /* 12CD10 */ float ftYs_SpecialN_8012CD10(ftYs_GObj* gobj);
 /* 12CD28 */ float ftYs_SpecialN_8012CD28(void);
@@ -101,5 +102,6 @@
 /* 131F80 */ void ftYs_SpecialAirSLoop_2_Coll(ftYs_GObj* gobj);
 /* 13245C */ void ftYs_SpecialAirSLoop_3_Coll(ftYs_GObj* gobj);
 /* 1328F0 */ void ftYs_SpecialAirSLanding_Coll(ftYs_GObj* gobj);
+/* 3B75C0 */ extern Vec3 const ftYs_Unk1_803B75C0;
 
 #endif

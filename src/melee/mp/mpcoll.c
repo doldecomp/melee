@@ -51,7 +51,8 @@ void mpColl_80041C8C(CollData* cd)
                 OSReport(
                     "%s:%d: Error: mpCollPrev() pos(%f,%f) player=%d ms=%d\n",
                     "mpcoll.c", 203, ftLib_80086BE0(cd->x0_gobj),
-                    ftLib_800874BC(cd->x0_gobj), cd->cur_topn.x, cd->cur_topn.y);
+                    ftLib_800874BC(cd->x0_gobj), cd->cur_topn.x,
+                    cd->cur_topn.y);
             } else {
                 OSReport("%s:%d: Error: mpCollPrev() pos(%f,%f) gobj_id=%d\n",
                          "mpcoll.c", 212, cd->x0_gobj->classifier,
@@ -705,22 +706,24 @@ void mpColl_80043324(CollData* arg0, s32 arg1, s32 arg2)
                               arg0->cur_topn.y - arg0->prev_topn.y);
     }
     if (g_debugLevel >= 3) {
-        if (!(arg0->cur_topn.x < 45000.0f) || !(arg0->cur_topn.x > -45000.0f) ||
+        if (!(arg0->cur_topn.x < 45000.0f) ||
+            !(arg0->cur_topn.x > -45000.0f) ||
             !(arg0->cur_topn.y < 45000.0f) || !(arg0->cur_topn.y > -45000.0f))
         {
             if (ftLib_80086960(arg0->x0_gobj)) {
                 OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) "
                          "ply=%d ms=%d\n",
-                         "mpcoll.c", 1350, arg0->prev_topn.x, arg0->prev_topn.y,
-                         arg0->cur_topn.x, arg0->cur_topn.y,
+                         "mpcoll.c", 1350, arg0->prev_topn.x,
+                         arg0->prev_topn.y, arg0->cur_topn.x, arg0->cur_topn.y,
                          ftLib_80086BE0(arg0->x0_gobj),
                          ftLib_800874BC(arg0->x0_gobj));
             } else {
                 s32 gobjid = arg0->x0_gobj->classifier;
                 OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) "
                          "gobjid=%d\n",
-                         "mpcoll.c", 1358, arg0->prev_topn.x, arg0->prev_topn.y,
-                         arg0->cur_topn.x, arg0->cur_topn.y, gobjid);
+                         "mpcoll.c", 1358, arg0->prev_topn.x,
+                         arg0->prev_topn.y, arg0->cur_topn.x, arg0->cur_topn.y,
+                         gobjid);
                 if (arg0->x0_gobj->p_link == 9) {
                     OSReport("itkind=%d\n", itGetKind(arg0->x0_gobj));
                 }
