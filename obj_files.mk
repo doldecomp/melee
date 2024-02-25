@@ -320,7 +320,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMs_Init.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftMars/ftMs_SpecialN.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMs_SpecialN.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMs_SpecialS.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMs_SpecialHi.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftMars/ftMs_SpecialLw.s.o\

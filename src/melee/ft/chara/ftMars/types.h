@@ -17,7 +17,7 @@ typedef struct _MarsAttributes {
     int x0;
     int x4;
     int x8;
-    float xC;
+    float specialn_friction;
     float x10;
     float x14;
     float x18;
@@ -49,7 +49,7 @@ union ftMars_MotionVars {
     } unk0;
 
     struct ftMars_SpecialNVars {
-        int x0;
+        int cur_frame;
     } specialn;
 
     struct ftMars_SpecialSVars {

@@ -627,7 +627,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/chara/ftKoopa/ftKp_SpecialS.c"),
             # Marth
             Object(Matching, "melee/ft/chara/ftMars/ftMs_Init.c"),
-            Object(NonMatching, "melee/ft/chara/ftMars/ftMs_SpecialN.c"),
+            Object(Matching, "melee/ft/chara/ftMars/ftMs_SpecialN.c"),
             Object(Matching, "melee/ft/chara/ftMars/ftMs_SpecialS.c"),
             Object(Matching, "melee/ft/chara/ftMars/ftMs_SpecialHi.c"),
             Object(Matching, "melee/ft/chara/ftMars/ftMs_SpecialLw.c"),

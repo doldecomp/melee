@@ -44,7 +44,10 @@ void ftCommon_ClampFallSpeed(ftCo_Fighter*, float);
 void ftCommon_8007D508(ftCo_Fighter*, float, float);
 bool ftCommon_8007D528(ftCo_Fighter*);
 void ftCommon_8007D5BC(ftCo_Fighter*);
+
+/// Air_StoreBool_LoseGroundJump_NoECBfor10Frames
 void ftCommon_8007D5D4(ftCo_Fighter*);
+
 void ftCommon_8007D60C(ftCo_Fighter*);
 void ftCommon_8007D698(ftCo_Fighter*);
 void ftCommon_8007D6A4(ftCo_Fighter*);

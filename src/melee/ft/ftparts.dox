@@ -23,7 +23,10 @@ void ftParts_800749CC(HSD_GObj*);
 void ftParts_80074A4C(HSD_GObj*, enum_t, enum_t);
 void ftParts_80074A8C(HSD_GObj*);
 void ftParts_80074E58(Fighter*);
+
+/// Fighter_BonePersonalToCommon
 Fighter_Part ftParts_8007500C(Fighter*, Fighter_Part);
+
 void ftParts_JObjSetRotation(HSD_JObj*, Quaternion*);
 void ftParts_8007592C(Fighter*, s32, f32);
 void ftParts_80075AF0(Fighter*, s32, f32);
