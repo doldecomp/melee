@@ -53,7 +53,7 @@ bool it_802F2CD8(Item_GObj* gobj)
     return false;
 }
 
-void it_802F2CE0(Item_GObj* gobj, bool has_destroy_type)
+void it_802F2CE0(Item_GObj* gobj, bool clear_destroy_type)
 {
     Item* item = GET_ITEM(gobj);
     it_80275070(gobj,
@@ -63,7 +63,7 @@ void it_802F2CE0(Item_GObj* gobj, bool has_destroy_type)
                 NULL, &item->pos);
     it_8027B4A4(item->grab_victim, gobj);
     it_8027B378(item->grab_victim, gobj, 0);
-    if (has_destroy_type) {
+    if (clear_destroy_type) {
         item->destroy_type = 0;
     }
     item->atk_victim = NULL;
