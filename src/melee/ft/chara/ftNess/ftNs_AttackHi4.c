@@ -91,7 +91,7 @@ static void ftNs_AttackHi4_YoyoApplyDamage(float unk_float, HSD_GObj* gobj)
 static inline void push_ecb(CollData* a, Vec3* b)
 {
     a->prev_topn = a->cur_topn; // old = curr
-    a->cur_topn = *b;         // curr = new
+    a->cur_topn = *b;           // curr = new
 }
 
 s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
