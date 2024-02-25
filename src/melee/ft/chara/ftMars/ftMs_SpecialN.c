@@ -273,7 +273,8 @@ static inline void inlineA0(Fighter_GObj* gobj, HSD_GObjEvent cb)
             if (fp->x914[i].state == HitCapsule_Enabled) {
                 ftColl_8007ABD0(
                     &fp->x914[i],
-                    (float) (da->x4 + fp->mv.ms.specials.x0 / 30 * da->x8),
+                    (float) (da->x4 +
+                             fp->mv.ms.specialn.cur_frame / 30 * da->x8),
                     gobj);
             }
             i++;
