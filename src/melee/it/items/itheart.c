@@ -111,10 +111,10 @@ void it_80283C7C(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
 
     it_8026B390(gobj);
-    ip->x40_vel.x = it_804DC8A8;
-    ip->x40_vel.y = it_804DC8A8;
-    ip->x40_vel.z = it_804DC8A8;
-    Item_80268E5C((HSD_GObj*) gobj, 0, ITEM_ANIM_UPDATE);
+    ip->x40_vel.x = 0.0F;
+    ip->x40_vel.y = 0.0F;
+    ip->x40_vel.z = 0.0F;
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
 bool it_80283CD4(Item_GObj* arg0)
