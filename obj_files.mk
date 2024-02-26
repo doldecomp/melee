@@ -333,7 +333,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftZd_SpecialS.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftPurin/ftPr_Init.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftPr_Init.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftPurin/ftPr_SpecialHi.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLg_Init.c.o\

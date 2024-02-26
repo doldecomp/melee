@@ -1279,10 +1279,15 @@ melee/ft/chara/ftZelda/ftZd_SpecialS.c:
 	.sdata2     start:0x804D9C00 end:0x804D9C08
 
 melee/ft/chara/ftPurin/ftPr_Init.c:
-	.text       start:0x8013C2F8 end:0x801422E8
+	.text       start:0x8013C2F8 end:0x8013C9C8
 	.data       start:0x803CFEF0 end:0x803D0628
-	.sdata      start:0x804D3E80 end:0x804D3EB0
-	.sdata2     start:0x804D9C08 end:0x804D9C98
+	.sdata      start:0x804D3E80 end:0x804D3E94
+	.sdata2     start:0x804D9C08 end:0x804D9C10
+
+melee/ft/chara/ftPurin/ftPr_SpecialHi.c:
+	.text       start:0x8013C9C8 end:0x801422E8
+	.sdata      start:0x804D3E98 end:0x804D3EB0
+	.sdata2     start:0x804D9C10 end:0x804D9C98
 
 melee/ft/chara/ftLuigi/ftLg_Init.c:
 	.text       start:0x801422E8 end:0x8014267C

@@ -284,7 +284,7 @@ static inline void inlineA0(Fighter_GObj* gobj, HSD_GObjEvent cb)
         Vec3 position;
         lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint, 0,
                     &position);
-        lb_800119DC(&position, 120, 0.9f, 0.02f, 1.0471975803375244140625f);
+        lb_800119DC(&position, 120, 0.9f, 0.02f, 60 * deg_to_rad);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         cb(gobj);
