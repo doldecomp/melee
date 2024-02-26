@@ -25,7 +25,7 @@ struct TextKerning {
     /*0x01*/ u8 right;
 };
 
-typedef struct _SIS {
+typedef struct SIS {
     /*0x00*/ TextKerning* kerning;
     /*0x04*/ TextGlyphTexture* textures;
 } SIS;
