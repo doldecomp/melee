@@ -1,5 +1,6 @@
 #include "itheart.h"
 
+#include "gm/gm_1601.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -14,7 +15,6 @@ extern s8 it_803F5718;
 void it_80283DD4(HSD_GObj* gobj); /* static */
 // M2C_UNK it_80283DD4(M2C_UNK, void*, Item*, f32); /* static */
 void it_80283C7C(HSD_GObj* gobj); /* static */
-extern M2C_UNK gm_80473A18;
 
 HSD_GObj* it_80283AE4(s32 arg0, Vec3* arg1, s32 arg2)
 {
@@ -72,25 +72,23 @@ HSD_GObj* it_80283AE4(s32 arg0, Vec3* arg1, s32 arg2)
 void it_80283BD4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
+    HeartContainerVars* vars = ip->xC4_article_data->x4_specialAttributes;
 
-    ip->xDD4_itemVar.capsule.x0 =
-        M2C_FIELD(ip->xC4_article_data->x4_specialAttributes, s32*, 4);
+    ip->xDD4_itemVar.capsule.x0 = vars->xDD8.flags;
 }
 
 void it_80283BEC(Item_GObj* gobj)
 {
-    Item* ip;
-    void* temp_r5;
+    Item* ip = GET_ITEM(gobj);
+    HeartContainerVars* vars = ip->xC4_article_data->x4_specialAttributes;
 
-    ip = GET_ITEM(gobj);
-    temp_r5 = ip->xC4_article_data->x4_specialAttributes;
-    ip->x40_vel.x = it_804DC8A8;
-    ip->x40_vel.y = M2C_FIELD(temp_r5, f32*, 0x14);
-    ip->x40_vel.z = it_804DC8A8;
-    ip->xDD4_itemVar.capsule.x0 = M2C_FIELD(temp_r5, s32*, 0);
-    ip->xDD4_itemVar.pokemon.padding[4] &= ~0x80;
-    ip->xDD4_itemVar.star.x8 = 0.0f;
-    // it_80283DD4(0, temp_r5, ip, it_804DC8A8);
+    ip->x40_vel.x = 0;
+    ip->x40_vel.y = vars->xDE8_float;
+    ip->x40_vel.z = 0;
+    ip->xDD4_itemVar.HeartContainer.xDD4_heal = vars->xDD4_heal;
+    ip->xDD4_itemVar.HeartContainer.xDD8.bits.b0 = 0;
+    ip->xDD4_itemVar.HeartContainer.xDDC = 0;
+    it_80283DD4(gobj);
 }
 
 void it_80283C48(Item_GObj* gobj)
