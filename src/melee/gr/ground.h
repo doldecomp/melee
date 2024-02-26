@@ -12,7 +12,7 @@
 #include <placeholder.h>
 
 /* 1BFFB0 */ void Ground_801BFFB0(void);
-/* 1C0378 */ void Ground_801C0378(void);
+/* 1C0378 */ void Ground_801C0378(int);
 /* 1C0478 */ void Ground_801C0478(void* ptr);
 /* 1C0498 */ f32 Ground_801C0498(void);
 /* 1C04BC */ void Ground_801C04BC(f32);

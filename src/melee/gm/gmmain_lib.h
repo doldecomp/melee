@@ -1,5 +1,5 @@
-#ifndef _gmmain_lib_h_
-#define _gmmain_lib_h_
+#ifndef GALE01_15CC34
+#define GALE01_15CC34
 
 #include <platform.h>
 
@@ -114,6 +114,7 @@
 /* 15DB2C */ void gmMainLib_8015DB2C(u8, s32);
 /* 15DB6C */ u8 gmMainLib_8015DB6C(u8);
 /* 15DB80 */ void gmMainLib_8015DB80(void);
+/* 15ED8C */ u16* gmMainLib_8015ED8C(struct gmMainLib_8015ED8C_arg0_t*);
 /* 15ED98 */ struct gmm_retval_ED98* gmMainLib_8015ED98(void);
 /* 15EDB0 */ struct gmm_retval_EDB0* gmMainLib_8015EDB0(void);
 /* 15EDBC */ struct gmm_retval_EDBC* gmMainLib_8015EDBC(void);

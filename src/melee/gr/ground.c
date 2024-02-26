@@ -226,7 +226,7 @@ static void zeroBuffer(void)
     }
 }
 
-void Ground_801C0378(void)
+void Ground_801C0378(int arg0)
 {
     ftCo_800C06C0();
     Ground_804D6950 = HSD_MemAlloc(_BUFFER_SZ);
@@ -969,7 +969,7 @@ static bool Ground_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     }
                     break;
                 case 6:
-                    if (gm_80164ABC() &&
+                    if (gm_80164ABC(/* TODO*/ 0) &&
                         (phi_r30->x16 > HSD_Randi(RANDI_MAX) || temp_r25))
                     {
                         arg1 |= 2;

@@ -212,4 +212,13 @@ struct datetime {
     u8 month, day, hour, minute, second;
 };
 
+struct gmMainLib_8015ED8C_arg0_t {
+    u8 pad[0x2ac];
+    u8 id[0x24];
+    struct {
+        u8 unk0, unk1;
+        u8 unkpad[4];
+    } thing[11];
+};
+
 #endif

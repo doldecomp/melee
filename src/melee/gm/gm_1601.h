@@ -10,10 +10,10 @@
 /* 160968 */ bool gm_80160968(void);
 /* 164600 */ bool gm_80164600(void);
 /* 164840 */ bool gm_80164840(u8);
-/* 164ABC */ bool gm_80164ABC(void);
+/* 164ABC */ bool gm_80164ABC(struct gmMainLib_8015ED8C_arg0_t*);
 /* 167320 */ void gm_80167320(int slot, bool);
 /* 168B34 */ void gm_80168B34(void);
-/* 1692E8 */ void gm_801692E8(int, datetime* datetime);
+/* 1692E8 */ void gm_801692E8(uint ticks, struct datetime* datetime);
 /* 16AE38 */ Placeholder_8016AE38_ret_val* gm_8016AE38(void);
 /* 16AE44 */ bool gm_8016AE44(void);
 /* 16AE50 */ Placeholder_8016AE50_ret_val* gm_8016AE50(void);

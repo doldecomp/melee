@@ -7,6 +7,7 @@
 
 #include <placeholder.h>
 
+/* 05B4B8 */ void efLib_8005B4B8(void);
 /* 05B880 */ void efLib_DestroyAll(HSD_GObj* gobj);
 /* 05BA40 */ void efLib_PauseAll(HSD_GObj* gobj);
 /* 05BAC4 */ void efLib_ResumeAll(HSD_GObj* gobj);
