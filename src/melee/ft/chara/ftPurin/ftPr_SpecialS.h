@@ -1,5 +1,5 @@
-#ifndef MELEE_FT_CHARA_FTPURIN_FTPR_SPECIALS_H
-#define MELEE_FT_CHARA_FTPURIN_FTPR_SPECIALS_H
+#ifndef GALE01_13D234
+#define GALE01_13D234
 
 #include <baselib/forward.h>
 

@@ -28,13 +28,13 @@ static float forceFloatOrder0(void)
 }
 
 /// @todo Float order hack.
-static float forceFloatOrder2(void)
+static float forceFloatOrder1(void)
 {
     return deg_to_rad;
 }
 
 /// @todo Float order hack.
-static float forceFloatOrder1(void)
+static float forceFloatOrder2(void)
 {
     return 1;
 }
