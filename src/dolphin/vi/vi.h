@@ -26,6 +26,7 @@ void VISetNextFrameBuffer(void*);
 void VIWaitForRetrace(void);
 void VIInit(void);
 u32 VIGetNextField(void);
+UNK_T VIGetDTVStatus(void);
 
 VIRetraceCallback VISetPreRetraceCallback(VIRetraceCallback callback);
 VIRetraceCallback VISetPostRetraceCallback(VIRetraceCallback callback);
