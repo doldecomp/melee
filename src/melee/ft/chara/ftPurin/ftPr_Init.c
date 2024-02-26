@@ -4,6 +4,7 @@
 
 #include "ftPr_SpecialHi.h"
 #include "ftPr_SpecialLw.h"
+#include "ftPr_SpecialN.h"
 #include "ftPr_SpecialS.h"
 #include "types.h"
 

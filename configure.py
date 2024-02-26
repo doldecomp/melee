@@ -641,7 +641,8 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftPurin/ftPr_Init.c"),
             Object(Matching, "melee/ft/chara/ftPurin/ftPr_SpecialHi.c"),
             Object(Matching, "melee/ft/chara/ftPurin/ftPr_SpecialLw.c"),
-            Object(NonMatching, "melee/ft/chara/ftPurin/ftPr_SpecialS.c"),
+            Object(Matching, "melee/ft/chara/ftPurin/ftPr_SpecialS.c"),
+            Object(NonMatching, "melee/ft/chara/ftPurin/ftPr_SpecialN.c"),
             # Luigi
             Object(Matching, "melee/ft/chara/ftLuigi/ftLg_Init.c"),
             Object(Matching, "melee/ft/chara/ftLuigi/ftLg_SpecialN.c"),

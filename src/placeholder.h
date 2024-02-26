@@ -83,4 +83,18 @@ OSPanic(__FILE__, __LINE__, "Function is not implemented!")
         UNUSED unsigned char _[(bytes)] = { 0 };                              \
     } while (0)
 
+#define FORCE_PAD_STACK_8                                                     \
+    do {                                                                      \
+        UNUSED u64 _0 = 0;                                                    \
+    } while (0)
+
+#define FORCE_PAD_STACK_16                                                    \
+    do {                                                                      \
+        UNUSED u64 _0 = 0, _1 = 0;                                            \
+    } while (0)
+
+#define FORCE_PAD_STACK_32                                                    \
+    do {                                                                      \
+        UNUSED u64 _0 = 0, _1 = 0, _2 = 0, _3 = 0;                            \
+    } while (0)
 #endif
