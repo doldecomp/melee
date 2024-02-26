@@ -25,7 +25,8 @@ typedef union ftPurin_MotionVars {
         /* fp+2344 */ UNK_T x4;
         /* fp+2348 */ UNK_T x8;
         /* fp+234C */ UNK_T xC;
-        /* fp+2350 */ u8 _10[0x20 - 0x10];
+        /* fp+2350 */ u8 _10[0x1C - 0x10];
+        /* fp+235C */ float x1C;
         /* fp+2360 */ float facing_dir;
         /* fp+2364 */ u8 _24[0x34 - 0x24];
         /* fp+2374 */ Vec3 x34;
@@ -50,7 +51,8 @@ typedef struct _ftPurinAttributes {
     s32 x38;
     float x3C;
     float x40;
-    u8 _44[0x88 - 0x44];
+    float x44;
+    u8 _48[0x88 - 0x48];
     Vec2 specialn_vel;
     u8 _90[0xDC - 0x90];
     float xDC;
