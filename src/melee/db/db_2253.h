@@ -14,5 +14,6 @@
 /* 228A64 */ void db_80228A64(void);
 /* 228C4C */ void db_80228C4C(void);
 /* 4D4A08 */ extern enum_t g_debugLevel;
+/* 4D6B30 */ extern u16 db_804D6B30;
 
 #endif

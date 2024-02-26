@@ -22,6 +22,7 @@ typedef void (*lbDvd_Callback)(int, int index, int, int);
 /* 01819C */ HSD_Archive* lbDvd_8001819C(const char* basename);
 /* 018254 */ void lbDvd_80018254(void);
 /* 018C6C */ void lbDvd_80018C6C(void);
+/* 018F58 */ void lbDvd_80018F58(u8);
 /* 018F68 */ void lbDvd_80018F68(void);
 
 #endif
