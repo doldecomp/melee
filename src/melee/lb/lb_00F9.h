@@ -9,6 +9,7 @@
 #include <placeholder.h>
 
 /* 00F9F8 */ void lb_8000F9F8(HSD_JObj* jobj);
+/* 00FCDC */ void lb_8000FCDC(void);
 /* 00FD18 */ void lb_8000FD18(UNK_T);
 /* 00FD48 */ void lb_8000FD48(HSD_JObj*, UNK_T, size_t);
 /* 01044C */ void lb_8001044C(void*, void*, int, float, int, int, int, int);
