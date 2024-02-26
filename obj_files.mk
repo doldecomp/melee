@@ -334,7 +334,8 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftPr_Init.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftPurin/ftPr_SpecialHi.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftPr_SpecialHi.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftPurin/ftPr_SpecialLw.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLg_Init.c.o\

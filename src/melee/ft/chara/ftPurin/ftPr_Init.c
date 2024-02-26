@@ -3,6 +3,7 @@
 #include "ftPr_Init.h"
 
 #include "ftPr_SpecialHi.h"
+#include "ftPr_SpecialLw.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
