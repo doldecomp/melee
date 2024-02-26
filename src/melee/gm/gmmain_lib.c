@@ -2,6 +2,13 @@
 
 #include "lb/lbtime.h"
 
+#include <dolphin/os/OSReset.h>
+
+struct gmMainLib_8046B0F0_t {
+    bool x0;
+    int x4, x8, xC, x10, x14;
+} gmMainLib_8046B0F0;
+
 /* 15D888 */ static void gmMainLib_8015D888(u32);
 
 GameRules* gmMainLib_8015CC34(void)
@@ -648,7 +655,7 @@ void gmMainLib_8015DA68(u32 arg0)
     base[arg0 / 32] &= ~(1 << (arg0 % 32));
 }
 
-u32 gmMainLib_8015DA90(u32 arg0)
+int gmMainLib_8015DA90(u32 arg0)
 {
     u32* base = &gmMainLib_804D3EE0->thing.x1B58[0];
     u32* qwe = &base[arg0 / 32];
@@ -699,4 +706,19 @@ void gmMainLib_8015DB80(void)
     for (i = 0; i < 11; i++) {
         gmMainLib_804D3EE0->x39[(u8) i] = 0;
     }
+}
+
+void gmMainLib_8015FCC0(void)
+{
+    bool val;
+    if (OSGetResetCode() == 0x80000000) {
+        val = true;
+    } else {
+        val = false;
+    }
+    gmMainLib_8046B0F0.x0 = val;
+    gmMainLib_8046B0F0.x4 = 0;
+    gmMainLib_8046B0F0.x8 = 0;
+    gmMainLib_8046B0F0.xC = 0;
+    gmMainLib_8046B0F0.x10 = lbTime_8000AFBC();
 }
