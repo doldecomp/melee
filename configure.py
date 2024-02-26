@@ -638,7 +638,8 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftZelda/ftZd_SpecialLw.c"),
             Object(Matching, "melee/ft/chara/ftZelda/ftZd_SpecialS.c"),
             # Jigglypuff
-            Object(NonMatching, "melee/ft/chara/ftPurin/ftPr_Init.c"),
+            Object(Matching, "melee/ft/chara/ftPurin/ftPr_Init.c"),
+            Object(NonMatching, "melee/ft/chara/ftPurin/ftPr_SpecialHi.c"),
             # Luigi
             Object(Matching, "melee/ft/chara/ftLuigi/ftLg_Init.c"),
             Object(Matching, "melee/ft/chara/ftLuigi/ftLg_SpecialN.c"),
