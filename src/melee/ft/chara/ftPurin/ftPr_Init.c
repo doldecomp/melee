@@ -4,6 +4,8 @@
 
 #include "ftPr_SpecialHi.h"
 #include "ftPr_SpecialLw.h"
+#include "ftPr_SpecialS.h"
+#include "types.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -16,7 +18,6 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_09CB.h"
-#include "ftPurin/types.h"
 #include "it/it_26B1.h"
 
 #include <common_structs.h>
