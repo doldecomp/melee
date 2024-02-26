@@ -178,6 +178,7 @@
 #include "ftPurin/ftPr_Init.h"
 #include "ftPurin/ftPr_SpecialHi.h"
 #include "ftPurin/ftPr_SpecialLw.h"
+#include "ftPurin/ftPr_SpecialS.h"
 #include "ftSamus/ftSs_Init.h"
 #include "ftSamus/ftSs_SpecialHi.h"
 #include "ftSamus/ftSs_SpecialLw_1.h"

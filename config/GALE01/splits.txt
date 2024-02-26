@@ -1289,9 +1289,13 @@ melee/ft/chara/ftPurin/ftPr_SpecialHi.c:
 	.sdata2     start:0x804D9C10 end:0x804D9C1C
 
 melee/ft/chara/ftPurin/ftPr_SpecialLw.c:
-	.text       start:0x8013CE8C end:0x801422E8
+	.text       start:0x8013CE8C end:0x8013D234
+	.sdata2     start:0x804D9C20 end:0x804D9C2C
+
+melee/ft/chara/ftPurin/ftPr_SpecialS.c:
+	.text       start:0x8013D234 end:0x801422E8
 	.sdata      start:0x804D3E98 end:0x804D3EB0
-	.sdata2     start:0x804D9C20 end:0x804D9C98
+	.sdata2     start:0x804D9C30 end:0x804D9C98
 
 melee/ft/chara/ftLuigi/ftLg_Init.c:
 	.text       start:0x801422E8 end:0x8014267C
