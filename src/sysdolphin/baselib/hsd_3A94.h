@@ -1,6 +1,7 @@
 #ifndef GALE01_3A949C
 #define GALE01_3A949C
 
+#include <Gecko_setjmp.h>
 #include <placeholder.h>
 
 typedef struct {
