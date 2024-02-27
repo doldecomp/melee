@@ -7,6 +7,7 @@
 #include "list.h"
 #include "memory.h"
 #include "mobj.h"
+#include "mtx.h"
 #include "object.h"
 #include "perf.h"
 #include "pobj.h"
@@ -26,6 +27,7 @@
 #include <dolphin/gx/GXVert.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/vec.h>
+#include <MSL/trigf.h>
 
 extern HSD_ObjAllocData shadow_alloc_data;
 
@@ -391,6 +393,55 @@ static void makeMatrix(HSD_Shadow* shadow)
               shadow->texture->mtx);
 }
 
+#define HSD_ASSERT2(line, text, cond)                                         \
+    ((cond) ? ((void) 0) : __assert(__FILE__, line, text))
+
+void HSD_ShadowSetViewingRect(HSD_Shadow* shadow, float top, float bottom,
+                              float left, float right)
+{
+    HSD_CObj* cobj;
+    float distance;
+
+    HSD_ASSERT(721, shadow);
+
+    cobj = shadow->camera;
+    distance = HSD_CObjGetEyeDistance(cobj);
+    HSD_ASSERT2(725, distAssert, distance > 0.0F);
+
+    switch (HSD_CObjGetProjectionType(cobj)) {
+    case PROJ_PERSPECTIVE: {
+        float width, height;
+
+        if (fabsf_bitwise(top) > fabsf_bitwise(bottom)) {
+            width = fabsf_bitwise(top);
+        } else {
+            width = fabsf_bitwise(bottom);
+        }
+        if (fabsf_bitwise(left) > fabsf_bitwise(right)) {
+            height = fabsf_bitwise(left);
+        } else {
+            height = fabsf_bitwise(right);
+        }
+        HSD_CObjSetAspect(cobj, height / width);
+        HSD_CObjSetFov(cobj, atan2f(height, distance));
+    } break;
+
+    case PROJ_ORTHO:
+        HSD_CObjSetOrtho(cobj, top, bottom, left, right);
+        break;
+
+    case PROJ_FRUSTUM: {
+        float scale = HSD_CObjGetNear(cobj) / distance;
+        HSD_ASSERT(754, scale > 0.0F);
+        HSD_CObjSetFrustum(cobj, scale * top, scale * bottom, scale * left,
+                           scale * right);
+    } break;
+
+    default:
+        HSD_ASSERT(762, 0);
+    }
+}
+
 #define FLT_MAX 3.4028235E38F
 
 void HSD_ViewingRectInit(HSD_ViewingRect* rect, Vec3* position, Vec3* interest,
@@ -417,8 +468,6 @@ int HSD_ViewingRectCheck(HSD_ViewingRect* rect)
     HSD_ASSERT(818, rect);
     return rect->top > rect->bottom && rect->right > rect->left;
 }
-
-static char scaleAssert[13] = "scale > 0.0F";
 
 void HSD_ViewingRectAddRect(HSD_ViewingRect* rect, Vec3* position, float top,
                             float bottom, float left, float right)
