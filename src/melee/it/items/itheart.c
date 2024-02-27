@@ -120,7 +120,6 @@ bool it_80283CD4(Item_GObj* gobj)
     HSD_JObj* child;
     f32 rotation_increment;
     bool var_r3;
-    u32 child_flags;
     HSD_JObj* jobj = gobj->hsd_obj;
     PAD_STACK(8);
 
@@ -140,10 +139,9 @@ bool it_80283CD4(Item_GObj* gobj)
             if (child == NULL) {
                 __assert("jobj.h", 0x234U, "jobj");
             }
-            child_flags = child->flags;
             var_r3 = false;
-            if (!(child_flags & JOBJ_USER_DEF_MTX) &&
-                (child_flags & JOBJ_MTX_DIRTY))
+            if (!(child->flags & JOBJ_USER_DEF_MTX) &&
+                (child->flags & JOBJ_MTX_DIRTY))
             {
                 var_r3 = true;
             }
