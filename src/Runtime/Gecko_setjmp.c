@@ -36,7 +36,6 @@ asm int __setjmp(register __jmp_buf* env)
     blr
 } // clang-format on
 
-/// #longjmp
 asm void longjmp(register __jmp_buf* env, register int val)
 { // clang-format off
     nofralloc
