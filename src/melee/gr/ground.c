@@ -1,14 +1,16 @@
+#include "gr/forward.h"
+
 #include "ground.h"
 
 #include "grcorneria.h"
 #include "grdatfiles.h"
+#include "grdisplay.h"
 #include "grizumi.h"
 #include "grkongo.h"
 #include "grmaterial.h"
 #include "groldkongo.h"
 #include "grstadium.h"
 #include "grzebes.h"
-#include "math.h"
 #include "stage.h"
 
 #include "cm/camera.h"
@@ -19,6 +21,7 @@
 #include "it/items/it_27CF.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
 #include "lb/lbshadow.h"
@@ -29,14 +32,18 @@
 #include "un/un_2FC9.h"
 
 #include <common_structs.h>
+#include <math.h>
+#include <math_ppc.h>
 #include <placeholder.h>
 #include <trigf.h>
 #include <dolphin/gx/types.h>
+#include <dolphin/mtx/vec.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
@@ -49,14 +56,73 @@
 #include <baselib/spline.h>
 #include <baselib/wobj.h>
 
+typedef struct _mapData {
+    int x0;         // 0x0
+    HSD_GObj* gobj; // 0x4
+    int x8;         // 0x8
+    int xC;         // 0xC
+    struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } x10_flags;
+    struct {
+        u8 b012 : 3;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } x11_flags;
+
+    unsigned char gx_unk2 : 3;  //  0x80
+    unsigned char flag2x10 : 1; //  0x10
+    unsigned char flag2x08 : 1; //  0x08
+    unsigned char flag2x04 : 1; //  0x04, checked @ 801c5e9c
+    unsigned char flag2x02 : 1; //  0x02
+    unsigned char flag2x01 : 1; //  0x01
+
+    int map_id;     // 0x14
+    HSD_GObj* x18;  // 0x18
+    int x1C;        // 0x1c
+    int x20;        // 0x20
+    int x24;        // 0x24
+    int x28;        // 0x28
+    int x2C;        // 0x2c
+    int x30;        // 0x30
+    int x34;        // 0x34
+    int x38;        // 0x38
+    int x3C;        // 0x3c
+    float selfVelX; // 0x40
+    float selfVelY; // 0x44
+    float selfVelZ; // 0x48
+    float posX;     // 0x4c
+    float posY;     // 0x50
+    float posZ;     // 0x54
+    int x58;        // 0x58
+    int x5c;        // 0x5c
+    int x60;        // 0x60
+    int x64;        // 0x64
+    int x68;        // 0x68
+    int x6c;        // 0x6c
+    int x70;        // 0x70
+    u8 pad[0x218 - 0x74];
+} mapData;
+
 /* 1BFFA8 */ static void Ground_801BFFA8(void);
 /* 1BFFAC */ static void Ground_801BFFAC(bool);
 /* 1C0A70 */ static bool Ground_801C0A70(Vec3* pos);
 /* 1C0C2C */ static void Ground_801C0C2C(HSD_GObj*);
 /* 1C1CD0 */ static void Ground_801C1CD0(HSD_GObj*);
 /* 1C1D38 */ static void Ground_801C1D38(HSD_GObj*);
-/* 1C1E2C */ static void Ground_801C1E2C(HSD_GObj*);
+/* 1C1E2C */ static void Ground_801C1E2C(HSD_GObj* gobj, int code);
 /* 1C1E94 */ static void Ground_801C1E94(void);
+/* 1C20E0 */ static UNK_T Ground_801C20E0(UnkArchiveStruct*, UNK_T);
 /* 1C24F8 */ static bool Ground_801C24F8(s32, u32, s32*);
 /* 1C28CC */ static void Ground_801C28CC(void*, s32);
 /* 1C2BBC */ static void Ground_801C2BBC(HSD_GObj*, s32);
@@ -145,6 +211,16 @@ static StageData* Ground_803DFEDC[] = {
 #define _BUFFER_SZ (64)
 
 static u8* Ground_804D6950;
+
+/// @todo Move elsewhere.
+static inline f32 fabsf(f32 x)
+{
+    if (x < 0) {
+        return -x;
+    } else {
+        return x;
+    }
+}
 
 static void Ground_801BFFA8(void) {}
 
@@ -526,10 +602,7 @@ HSD_Joint const Ground_803B7E0C = {
     { 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 }, NULL, NULL,
 };
 
-void Ground_801C0C2C(HSD_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #void Ground_801C0C2C
 
 void Ground_801C0F78(StructPairWithStageID* pair)
 {
@@ -645,9 +718,167 @@ HSD_JObj* Ground_801C13D0(s32 arg0, s32 depth)
 
 static char Ground_804D44F8[8] = "archive";
 
-HSD_GObj* Ground_801C14D0(int gobj_id)
+#define assert_line(line, cond)                                               \
+    ((cond) ? (void) 0 : __assert("ground.c", line, #cond))
+
+inline void* alloc_user_data_ground(void)
 {
-    NOT_IMPLEMENTED;
+    mapData* temp_r3 = HSD_MemAlloc(0x204);
+    if (temp_r3 == NULL) {
+        OSReport("%s:%d: couldn t get user data(Ground)\n", "ground.c", 0x1DA);
+    }
+    return temp_r3;
+}
+
+HSD_GObj* Ground_801C14D0(int map_id)
+{
+    HSD_JObj* new_var;
+    u8 unused[0x10];
+    HSD_Joint sp58;
+    u8 unused2[0x4];
+    HSD_Joint sp14;
+    HSD_JObj* temp_r23;
+    HSD_GObj* new_var2;
+    HSD_CObj* temp_r27;
+    HSD_JObj* temp_r3_11;
+    HSD_JObj* temp_r3_6;
+    HSD_Joint* temp_r24;
+    HSD_GObj* gobj;
+    UnkArchiveStruct* archive;
+    HSD_JObj* temp_r3_8;
+    mapData* temp_r3;
+    mapData* temp_r6;
+    float phi_f0;
+    s16* phi_r23;
+    int phi_r24;
+    StageInfo* stageinfo = &stage_info;
+    int i;
+
+    gobj = GObj_Create(3, 5, 0);
+    if (gobj == NULL) {
+        OSReport("%s:%d: couldn t get gobj!\n", "ground.c", 0x522);
+        return NULL;
+    }
+    temp_r3 = (0, HSD_MemAlloc(0x204));
+    if (temp_r3 == NULL) {
+        OSReport("%s:%d: couldn t get user data(Ground)\n", "ground.c", 0x1DA);
+    }
+    temp_r6 = temp_r3;
+    if (temp_r6 == NULL) {
+        HSD_GObjPLink_80390228(gobj);
+        return NULL;
+    }
+    GObj_InitUserData(gobj, 3, Ground_801C0478, temp_r6);
+    temp_r3->map_id = map_id;
+    temp_r3->gobj = gobj;
+    temp_r3->x10_flags.b0 = 0;
+    temp_r3->x10_flags.b1 = 0;
+    temp_r3->x10_flags.b2 = 1;
+    temp_r3->x8 = 0;
+    temp_r3->xC = 0;
+    temp_r3->x1C = 0;
+    temp_r3->x10_flags.b5 = 0;
+    temp_r3->x10_flags.b6 = 0;
+    temp_r3->x11_flags.b012 = 0;
+    temp_r3->x10_flags.b7 = 0;
+    temp_r3->x18 = 0;
+    temp_r3->x10_flags.b3 = 0;
+    temp_r3->x20 = -1;
+    temp_r3->x24 = -1;
+    temp_r3->x28 = -1;
+    temp_r3->x2C = -1;
+    temp_r3->x30 = -1;
+    temp_r3->x34 = -1;
+    temp_r3->x38 = -1;
+    temp_r3->x3C = -1;
+
+    grMaterial_801C95C4(gobj);
+    archive = grDatFiles_801C6324();
+    assert_line(0x54E, archive);
+
+    if (map_id < archive->unk4->unkC) {
+        archive = grDatFiles_801C6330(map_id);
+        temp_r24 = archive->unk4->unk8[map_id].unk0;
+        temp_r23 = HSD_JObjLoadJoint(temp_r24);
+        Ground_801C34AC(map_id, temp_r23, temp_r24);
+        if (stageinfo->param != NULL) {
+            phi_f0 = stageinfo->param->x0;
+        } else {
+            phi_f0 = 1.0f;
+        }
+        sp58 = Ground_803B7E0C;
+        sp58.scale.z = phi_f0;
+        sp58.scale.y = phi_f0;
+        sp58.scale.x = phi_f0;
+        temp_r3_6 = HSD_JObjLoadJoint(&sp58);
+        if (temp_r3_6 == NULL) {
+            OSReport("%s:%d: couldn t get jobj\n", "ground.c", 0x4C4);
+            while (1) {
+            }
+        }
+        new_var = temp_r3_6;
+        HSD_JObjAddNext(temp_r23, new_var);
+        if (new_var == NULL) {
+            HSD_GObjPLink_80390228(gobj);
+            OSReport("%s:%d: couldn t get jobj\n", "ground.c", 0x55D);
+            return NULL;
+        }
+        if (Ground_803DFEDC[stageinfo->internal_stage_id]
+                    ->callbacks[map_id]
+                    .flags_b2 == 1 &&
+            archive->unk4->unk8[map_id].x10 != NULL)
+        {
+            HSD_GObj* temp_r23_2 = GObj_Create(17, 19, 0);
+            temp_r27 = lb_80013B14(archive->unk4->unk8[map_id].x10);
+            new_var2 = temp_r23_2;
+            HSD_GObjObject_80390A70(temp_r23_2, HSD_GObj_804D784B[0],
+                                    temp_r27);
+            GObj_SetupGXLinkMax(new_var2, &grDisplay_801C5F60, 5);
+            temp_r23_2->gxlink_prios = 8;
+            temp_r3->x18 = temp_r23_2;
+            Ground_801C2BD4(temp_r27);
+        }
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, new_var);
+        phi_r24 = archive->unk4->unk8[map_id].x30;
+        phi_r23 = archive->unk4->unk8[map_id].x2C;
+        for (; phi_r24 != 0; phi_r24--, phi_r23++) {
+            if ((temp_r3_8 = Ground_801C3FA4(gobj, *phi_r23)) != NULL) {
+                lb_8000F9F8(temp_r3_8);
+            }
+        }
+    } else {
+        temp_r3_6 = HSD_JObjAlloc();
+        if (temp_r3_6 != NULL) {
+            PSMTXIdentity(temp_r3_6->mtx);
+            temp_r3_6->scl = NULL;
+        }
+        if (stageinfo->param != NULL) {
+            phi_f0 = stageinfo->param->x0;
+        } else {
+            phi_f0 = 1.0f;
+        }
+        sp14 = Ground_803B7E0C;
+        sp14.scale.z = phi_f0;
+        sp14.scale.y = phi_f0;
+        sp14.scale.x = phi_f0;
+        temp_r3_11 = HSD_JObjLoadJoint(&sp14);
+        if (temp_r3_11 == NULL) {
+            OSReport("%s:%d: couldn t get jobj\n", "ground.c", 0x4C4);
+            while (1) {
+            }
+        }
+        HSD_JObjAddNext(temp_r3_6, temp_r3_11);
+        if (temp_r3_11 == NULL) {
+            HSD_GObjPLink_80390228(gobj);
+            OSReport("%s:%d: couldn t get jobj\n", "ground.c", 0x598);
+            return NULL;
+        }
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, temp_r3_11);
+    }
+    HSD_GObjProc_8038FD54(gobj, &Ground_801C1CD0, 1);
+    HSD_GObjProc_8038FD54(gobj, &Ground_801C1D38, 4);
+    Ground_801C2BBC(gobj, map_id);
+    return gobj;
 }
 
 static char get_jobj[] = "%s:%d: couldn t get jobj\n";
@@ -787,7 +1018,7 @@ s32 Ground_801C1E18(void)
     return stage_info.unk8C.b2;
 }
 
-static void Ground_801C1E2C(HSD_GObj* gobj)
+void Ground_801C1E2C(HSD_GObj* gobj, int code)
 {
     bool stage_is_something;
     HSD_JObj* jobj;
@@ -809,17 +1040,69 @@ void* Ground_801C1E84(void)
     return stage_info.x12C;
 }
 
+// void Camera_80030740(u8, u8, u8);     /* extern */
+// UnkStruct3* grDatFiles_801C6330(int); /* extern */
+// void Ground_801C1E2C(HSD_GObj*, int); /* extern */
+// extern s8 HSD_GObj_804D7848;
+// extern float @330;
+
+inline HSD_FogDesc* foo(void)
+{
+    StageCallbacks* phi_r29;
+    StageCallbacks* temp_r29;
+    int temp_r30;
+    int i;
+
+    grDatFiles_801C6324();
+    temp_r30 = grDatFiles_801C6324()->unk4->unkC;
+    temp_r29 = Ground_803DFEDC[stage_info.internal_stage_id]->callbacks;
+    grDatFiles_801C6324();
+    for (i = 0; i < temp_r30; i++) {
+        phi_r29 = &temp_r29[i];
+        if (phi_r29->flags_b1 == 1) {
+            return grDatFiles_801C6330(i)->unk4->unk8[i].x1C;
+        }
+    }
+    return NULL;
+}
+
 void Ground_801C1E94(void)
 {
-    NOT_IMPLEMENTED;
+    HSD_Fog* temp_r29_2;
+    HSD_GObj* temp_r30_2;
+
+    UnkStage6B0* temp_r3;
+    HSD_FogDesc* phi_r0;
+    float phi_f1;
+    StageInfo* stageinfo = &stage_info;
+
+    phi_r0 = foo();
+    if (phi_r0 != NULL) {
+        temp_r30_2 = GObj_Create(0xA, 0xB, 0);
+        temp_r29_2 = HSD_FogLoadDesc(phi_r0);
+        HSD_GObjObject_80390A70(temp_r30_2, HSD_GObj_804D7848, temp_r29_2);
+        GObj_SetupGXLink(temp_r30_2, Ground_801C1E2C, 0, 0);
+        temp_r3 = stageinfo->param;
+        if (temp_r3 != NULL) {
+            phi_f1 = temp_r3->x0;
+        } else {
+            phi_f1 = 1;
+        }
+        temp_r29_2->start *= phi_f1;
+        temp_r29_2->end *= phi_f1;
+        Camera_80030740(temp_r29_2->color.r, temp_r29_2->color.g,
+                        temp_r29_2->color.b);
+        stageinfo->x12C = temp_r30_2;
+    } else {
+        Camera_80030740(0, 0, 0);
+    }
 }
 
 void Ground_801C1FFC(void)
 {
-    if (stage_info.x12C != NULL && stage_info.x12C->ptr != NULL) {
-        Camera_80030740(stage_info.x12C->ptr->color.r,
-                        stage_info.x12C->ptr->color.g,
-                        stage_info.x12C->ptr->color.b);
+    HSD_Fog* fog = GET_FOG(stage_info.x12C);
+    if (stage_info.x12C != NULL && fog != NULL) {
+        Camera_80030740(fog->color.r, fog->color.g, fog->color.b);
     } else {
         Camera_80030740(0, 0, 0);
     }
@@ -827,20 +1110,22 @@ void Ground_801C1FFC(void)
 
 void Ground_801C205C(GXColor* color)
 {
-    if (stage_info.x12C != NULL && color != NULL &&
-        stage_info.x12C->ptr != NULL)
-    {
-        stage_info.x12C->ptr->color = *color;
+    if (stage_info.x12C != NULL && color != NULL) {
+        HSD_Fog* fog = GET_FOG(stage_info.x12C);
+        if (fog != NULL) {
+            fog->color = *color;
+        }
     }
 }
 
 bool Ground_801C2090(GXColor* color)
 {
-    if (stage_info.x12C != NULL && color != NULL &&
-        stage_info.x12C->ptr != NULL)
-    {
-        *color = stage_info.x12C->ptr->color;
-        return true;
+    if (stage_info.x12C != NULL && color != NULL) {
+        HSD_Fog* fog = GET_FOG(stage_info.x12C);
+        if (fog != NULL) {
+            fog->color = *color;
+            return true;
+        }
     }
     return false;
 }
@@ -854,10 +1139,7 @@ f32 Ground_801C20D0(void)
 char lightset[9] = "lightset";
 char plightset[10] = "*lightset";
 
-static UNK_T Ground_801C20E0(UnkArchiveStruct* arg0, UNK_T arg1)
-{
-    NOT_IMPLEMENTED;
-}
+/// #Ground_801C20E0
 
 void Ground_801C2374(HSD_LObj* lobj)
 {
@@ -1054,10 +1336,7 @@ static char msg1[] =
     "             check StageParam.csv or StageItem.csv, stdata.c\n";
 static char msg2[] = " stageid=%d\n";
 
-void Ground_801C28CC(UNK_T arg0, s32 arg1)
-{
-    NOT_IMPLEMENTED;
-}
+/// #Ground_801C28CC
 
 u8* Ground_801C2AD8(void)
 {
@@ -1211,10 +1490,7 @@ bool Ground_801C2ED0(HSD_JObj* jobj, s32 arg1)
 
 static s16 Ground_804D6954;
 
-void Ground_801C2FE0(HSD_GObj* arg0)
-{
-    NOT_IMPLEMENTED;
-}
+/// #Ground_801C2FE0
 
 bool Ground_801C3128(s32 arg0, void (*arg1)(s32))
 {
@@ -1381,16 +1657,56 @@ u32 unknown[] = {
     0xFFFFFFFF, 0,          0,          0,
 };
 
-char unkmsg[] = "%s:%d:Error (root=%08x joint=%08x)\n";
+/// #void Ground_801C34AC
 
-static void Ground_801C34AC(s32 arg0, HSD_JObj* arg1, HSD_Joint* arg2)
+void Ground_801C36F4(int map_id, HSD_JObj* root, UNK_T joint)
 {
-    NOT_IMPLEMENTED;
-}
+    HSD_JObj* phi_r6;
+    UnkStageDat* temp_r3_2;
+    UnkArchiveStruct* archive;
+    int temp_r4_2;
+    struct {
+        void* x0;
+        u8 x4_pad[0x8];
+    }* phi_r3;
+    int i;
+    u32 unused[4];
 
-void Ground_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk)
-{
-    NOT_IMPLEMENTED;
+    archive = grDatFiles_801C6330(map_id);
+    if (archive == NULL) {
+        __assert(__FILE__, 2936, "archive");
+    }
+    if (root == NULL || joint == NULL) {
+        OSReport("%s:%d:Error (root=%08x joint=%08x)\n", __FILE__, __FILE__,
+                 root, joint);
+        return;
+    }
+    temp_r3_2 = archive->unk4;
+    temp_r4_2 = temp_r3_2->unk4;
+    if (temp_r4_2 == 0) {
+        return;
+    }
+    phi_r3 = temp_r3_2->unk0;
+    for (i = 0; true; i++) {
+        if (i >= temp_r4_2) {
+            return;
+        }
+        if (phi_r3[i].x0 == joint) {
+            break;
+        }
+    }
+
+    for (i = 0; i < 0x57 * 3; i++) {
+        phi_r6 = stage_info.x280[i];
+        if (phi_r6 != NULL) {
+            while (phi_r6->parent != NULL) {
+                phi_r6 = phi_r6->parent;
+            }
+            if (phi_r6 == root) {
+                stage_info.x280[i] = NULL;
+            }
+        }
+    }
 }
 
 void Ground_801C3880(f32 val)
@@ -1739,55 +2055,58 @@ f32 Ground_801C3F20(HSD_JObj* arg0)
     return 0.0F;
 }
 
-HSD_JObj* Ground_801C3FA4(HSD_GObj* gobj, s32 depth)
+HSD_JObj* Ground_801C3FA4(HSD_GObj* gobj, int depth)
 {
-    NOT_IMPLEMENTED;
-}
-
-/// @todo Move to @c jobj.h.
-static inline HSD_JObj* jobjGetParent(HSD_JObj* jobj)
-{
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    if (gobj->hsd_obj == NULL) {
+        return NULL;
+    }
+    jobj = HSD_JObjGetChild(jobj);
     if (jobj == NULL) {
         return NULL;
     }
-    return jobj->parent;
-}
-
-/// @todo Move to @c jobj.h.
-static inline HSD_JObj* jobjGetChild(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
+    while (jobj != NULL && depth != 0) {
+        --depth;
+        if (!(jobj->flags & 0x1000) && HSD_JObjGetChild(jobj) != NULL) {
+            jobj = HSD_JObjGetChild(jobj);
+            continue;
+        }
+        if (HSD_JObjGetNext(jobj) != NULL) {
+            jobj = HSD_JObjGetNext(jobj);
+            continue;
+        }
+        while (true) {
+            if (HSD_JObjGetParent(jobj) == NULL) {
+                jobj = NULL;
+                break;
+            }
+            if (HSD_JObjGetNext(HSD_JObjGetParent(jobj)) != NULL) {
+                jobj = HSD_JObjGetNext(HSD_JObjGetParent(jobj));
+                break;
+            }
+            jobj = HSD_JObjGetParent(jobj);
+        }
     }
-    return jobj->child;
-}
-
-/// @todo Move to @c jobj.h.
-static inline HSD_JObj* jobjGetNext(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
-    }
-    return jobj->next;
+    return jobj;
 }
 
 /// @todo Why isn't this emitted to @c jobj.c?
 HSD_JObj* Ground_801C4100(HSD_JObj* jobj)
 {
-    if (!(jobj->flags & JOBJ_INSTANCE) && jobjGetChild(jobj) != NULL) {
-        return jobjGetChild(jobj);
+    if (!(jobj->flags & JOBJ_INSTANCE) && HSD_JObjGetChild(jobj) != NULL) {
+        return HSD_JObjGetChild(jobj);
     }
-    if (jobjGetNext(jobj) != NULL) {
-        return jobjGetNext(jobj);
+    if (HSD_JObjGetNext(jobj) != NULL) {
+        return HSD_JObjGetNext(jobj);
     }
     while (true) {
-        if (jobjGetParent(jobj) == NULL) {
+        if (HSD_JObjGetParent(jobj) == NULL) {
             return NULL;
         }
-        if (jobjGetNext(jobjGetParent(jobj)) != NULL) {
-            return jobjGetNext(jobjGetParent(jobj));
+        if (HSD_JObjGetNext(HSD_JObjGetParent(jobj)) != NULL) {
+            return HSD_JObjGetNext(HSD_JObjGetParent(jobj));
         }
-        jobj = jobjGetParent(jobj);
+        jobj = HSD_JObjGetParent(jobj);
     }
 }
 
@@ -1940,10 +2259,7 @@ static void Ground_801C4640(HSD_GObj* gobj)
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
 }
 
-void Ground_801C466C(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #Ground_801C466C
 
 HSD_GObj* Ground_801C498C(void)
 {
@@ -2169,9 +2485,103 @@ SDATA UNK_T Ground_804D451C[] = { &Ground_803E06AC, &Ground_804D4514 };
 SDATA char Ground_804D4524[] = "fog.h";
 SDATA char Ground_804D452C[] = "fog";
 
-void Ground_801C4FAC(void)
+void Ground_801C4FAC(HSD_CObj* cobj)
 {
-    NOT_IMPLEMENTED;
+    Vec3 sp74;
+    Vec3 sp68;
+    Vec3 sp5C;
+    Vec3 sp50;
+    Vec3 sp44;
+    Vec3 sp38;
+    Vec3 sp2C;
+    Vec3 sp20;
+    float dx;
+    float dy;
+    float dz;
+    float dx2, dy2, dz2;
+    float temp_f5;
+    HSD_Fog* fog;
+
+    float phi_f1;
+    float phi_f2;
+    float temp_f3_2;
+    float phi_f0;
+    float phi_f31;
+    float phi_f30;
+    float phi_f30_2;
+
+    if (stage_info.unk8C.b3) {
+        HSD_CObjGetEyeVector(cobj, &sp74);
+        sp68 = stage_info.x130;
+        sp5C = stage_info.x13C;
+        if (sp74.x < 0) {
+            sp50 = stage_info.x148;
+            sp44 = stage_info.x154;
+        } else {
+            sp50 = stage_info.x160;
+            sp44 = stage_info.x16C;
+        }
+        if (sp74.z < 0) {
+            temp_f3_2 = 1.0f / sqrtf((sp74.x * sp74.x) + (sp74.z * sp74.z));
+            phi_f1 = temp_f3_2 * fabsf(sp74.x);
+            phi_f2 = temp_f3_2 * fabsf(sp74.z);
+            sp50.x *= phi_f1;
+            sp44.x *= phi_f1;
+            sp68.x *= phi_f2;
+            sp5C.x *= phi_f2;
+            sp50.y *= phi_f1;
+            sp44.y *= phi_f1;
+            sp68.y *= phi_f2;
+            sp5C.y *= phi_f2;
+            sp50.z *= phi_f1;
+            sp44.z *= phi_f1;
+            sp68.z *= phi_f2;
+            sp5C.z *= phi_f2;
+            PSVECAdd(&sp68, &sp50, &sp38);
+            PSVECAdd(&sp5C, &sp44, &sp2C);
+        } else {
+            sp38 = sp50;
+            sp2C = sp44;
+        }
+        HSD_CObjGetEyePosition(cobj, &sp20);
+        if (stage_info.x12C != NULL) {
+            fog = GET_FOG(stage_info.x12C);
+            if (fog != NULL) {
+                dx = sp38.x - sp20.x;
+                dy = sp38.y - sp20.y;
+                dz = sp38.z - sp20.z;
+                dx2 = dx * dx;
+                dy2 = dy * dy;
+                dz2 = dz * dz;
+                phi_f31 = sqrtf(dx2 + dy2 + dz2);
+                dx = sp2C.x - sp20.x;
+                dy = sp2C.y - sp20.y;
+                dz = sp2C.z - sp20.z;
+                dx2 = dx * dx;
+                dy2 = dy * dy;
+                dz2 = dz * dz;
+                phi_f30 = sqrtf(dx2 + dy2 + dz2);
+                if (phi_f30 < 10) {
+                    phi_f30 = 10;
+                }
+                phi_f30_2 = phi_f30;
+                if (phi_f31 < 5) {
+                    phi_f31 = 5;
+                }
+                if (phi_f31 > phi_f30) {
+                    phi_f30_2 = 1.0f + phi_f31;
+                }
+                if (fog == NULL) {
+                    __assert("fog.h", 0xB4, "fog");
+                }
+                fog->start = phi_f31;
+                if (fog == NULL) {
+                    __assert("fog.h", 0xBF, "fog");
+                }
+                fog->end = phi_f30_2;
+            }
+        }
+    }
 }
 
 void Ground_801C53EC(u32 arg0)
@@ -2334,7 +2744,15 @@ s32 Ground_801C5840(void)
 
 void Ground_801C5878(void)
 {
-    NOT_IMPLEMENTED;
+    PAD_STACK(8);
+    un_8031C2CC();
+    if (gm_8016B498() != 0) {
+        int temp_r30 = un_8031C2EC(&stage_info);
+        un_8031C454();
+        stage_info.x6E4[0] = temp_r30;
+    } else {
+        stage_info.x6E4[0] = -1;
+    }
 }
 
 s32 Ground_801C58E0(s32 arg0, s32 arg1)
@@ -2427,16 +2845,6 @@ bool Ground_801C5ABC(void)
 u32 Ground_801C5AD0(s32 i)
 {
     return Ground_803DFEDC[i]->flags2;
-}
-
-/// @todo Move elsewhere.
-static inline f32 fabsf(f32 x)
-{
-    if (x < 0) {
-        return -x;
-    } else {
-        return x;
-    }
 }
 
 void Ground_801C5AEC(Vec3* v, Vec3* arg1, Vec3* arg2, Vec3* arg3)

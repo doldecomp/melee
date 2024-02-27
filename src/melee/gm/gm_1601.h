@@ -32,7 +32,7 @@
 /* 16B3A0 */ bool gm_8016B3A0(void);
 /* 16B3D8 */ bool gm_8016B3D8(void);
 /* 16B41C */ bool gm_8016B41C(void);
-/* 16B498 */ void gm_8016B498(void);
+/* 16B498 */ bool gm_8016B498(void);
 /* 16B8D4 */ void gm_8016B8D4(s32, s32);
 /* 16C5C0 */ bool gm_8016C5C0(int pl_slot);
 /* 16C6C0 */ /* static */ UNK_RET gm_8016C6C0(UNK_PARAMS);

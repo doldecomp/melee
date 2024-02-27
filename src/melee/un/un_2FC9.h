@@ -2,6 +2,7 @@
 #define GALE01_2FC9B4
 
 #include <platform.h>
+#include "gr/forward.h"
 
 #include <placeholder.h>
 
@@ -10,10 +11,10 @@
 /* 304A58 */ void un_80304A58(s32);
 /* 305918 */ void un_80305918(s32, s32, s32);
 /* 31234C */ void un_8031234C(s32);
-/* 3124BC */ void un_803124BC(void);
-/* 31C2CC */ void un_8031C2CC(void);
-/* 31C2EC */ void un_8031C2EC(void);
-/* 31C454 */ void un_8031C454(void);
+/* 3124BC */ UNK_RET un_803124BC(UNK_PARAMS);
+/* 31C2CC */ UNK_RET un_8031C2CC(UNK_PARAMS);
+/* 31C2EC */ int un_8031C2EC(StageInfo*);
+/* 31C454 */ UNK_RET un_8031C454(UNK_PARAMS);
 /* 322258 */ bool un_80322258(f32 x);
 /* 3222EC */ float un_803222EC(float mag, float angle);
 /* 322314 */ void un_80322314(void);
