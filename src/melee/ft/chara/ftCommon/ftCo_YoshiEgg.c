@@ -82,7 +82,6 @@ void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
     Vec3 scale;
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    PAD_STACK(16);
 
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4(fp);
@@ -103,6 +102,8 @@ void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
         ftCo_DatAttrs_xBC_t* temp_r27;
         Fighter* fp = GET_FIGHTER(gobj);
         struct UNK_SAMUS_S2 unk_struct;
+        PAD_STACK(16);
+
         ftColl_8007B0C0(gobj, Intangible);
         temp_r27 = &fp->co_attrs.xBC;
         unk_struct.parts[0] = ftParts_8007500C(fp, FtPart_TransN);
