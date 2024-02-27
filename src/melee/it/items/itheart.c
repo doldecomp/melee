@@ -115,46 +115,44 @@ void it_80283C7C(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_80283CD4(Item_GObj* arg0)
+bool it_80283CD4(Item_GObj* gobj)
 {
-    HSD_JObj* var_r31;
-    f32 temp_f31;
-    s32 temp_cr0_eq;
-    s32 var_r3;
-    u32 temp_r4_2;
-    void* temp_r4;
+    HSD_JObj* child;
+    f32 rotation_increment;
+    bool var_r3;
+    u32 child_flags;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    PAD_STACK(8);
 
-    temp_r4 = M2C_FIELD(arg0, void**, 0x28);
-    if (temp_r4 == NULL) {
-        var_r31 = NULL;
+    if (jobj == NULL) {
+        child = NULL;
     } else {
-        var_r31 = M2C_FIELD(temp_r4, HSD_JObj**, 0x10);
+        child = jobj->child;
     }
-    temp_f31 = M2C_FIELD(
-        M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void**, 0x2C), void**, 0xC4),
-                  void**, 4),
-        f32*, 0x18);
-    if (var_r31 == NULL) {
-        __assert(M2C_ERROR(/* unknown instruction: subi $r3, $r13, %sda21(it_804D5210) */), 0x411U, M2C_ERROR(/* unknown instruction: subi $r5, $r13, %sda21(it_804D5218) */));
+    rotation_increment =
+        ((f32*) GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes)[6];
+    if (child == NULL) {
+        __assert("jobj.h", 0x411U, "jobj");
     }
-    var_r31->rotate.y += temp_f31;
-    if (!(var_r31->flags & 0x02000000)) {
-        temp_cr0_eq = var_r31 == NULL;
-        if (temp_cr0_eq == 0) {
-            if (temp_cr0_eq != 0) {
-                __assert(M2C_ERROR(/* unknown instruction: subi $r3, $r13, %sda21(it_804D5210) */), 0x234U, M2C_ERROR(/* unknown instruction: subi $r5, $r13, %sda21(it_804D5218) */));
+    child->rotate.y += rotation_increment;
+    if (!(child->flags & JOBJ_MTX_INDEP_SRT)) {
+        if (child != NULL) {
+            if (child == NULL) {
+                __assert("jobj.h", 0x234U, "jobj");
             }
-            temp_r4_2 = var_r31->flags;
-            var_r3 = 0;
-            if (!(temp_r4_2 & 0x800000) && (temp_r4_2 & 0x40)) {
-                var_r3 = 1;
+            child_flags = child->flags;
+            var_r3 = false;
+            if (!(child_flags & JOBJ_USER_DEF_MTX) &&
+                (child_flags & JOBJ_MTX_DIRTY))
+            {
+                var_r3 = true;
             }
-            if (var_r3 == 0) {
-                HSD_JObjSetMtxDirtySub(var_r31);
+            if (var_r3 == false) {
+                HSD_JObjSetMtxDirtySub(child);
             }
         }
     }
-    return 0;
+    return false;
 }
 
 void it_80283DA4(Item_GObj* gobj) {}
