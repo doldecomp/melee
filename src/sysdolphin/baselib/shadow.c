@@ -7,6 +7,7 @@
 #include "list.h"
 #include "memory.h"
 #include "mobj.h"
+#include "mtx.h"
 #include "object.h"
 #include "perf.h"
 #include "pobj.h"
@@ -25,8 +26,10 @@
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/GXVert.h>
 #include <dolphin/mtx.h>
+#include <dolphin/mtx/vec.h>
+#include <MSL/trigf.h>
 
-extern HSD_ObjAllocData shadow_alloc_data;
+HSD_ObjAllocData shadow_alloc_data;
 
 static void makeMatrix(HSD_Shadow* shadow);
 
@@ -103,16 +106,11 @@ void HSD_ShadowRemove(HSD_Shadow* shadow)
     HSD_ObjFree(&shadow_alloc_data, shadow);
 }
 
-extern char HSD_Shadow_80407310[9];
-extern char HSD_Shadow_804D5F78[7];
-
 void HSD_ShadowInit(HSD_Shadow* shadow)
 {
     HSD_ImageDesc* imagedesc;
 
-    if (shadow == NULL) {
-        __assert(HSD_Shadow_80407310, 0xF5, HSD_Shadow_804D5F78);
-    }
+    HSD_ASSERT(245, shadow);
     imagedesc = shadow->texture->imagedesc;
     GXSetTexCopySrc(0, 0, imagedesc->width, imagedesc->height);
     GXSetTexCopyDst(imagedesc->width, imagedesc->height, 0x20, 0);
@@ -390,8 +388,128 @@ static void makeMatrix(HSD_Shadow* shadow)
               shadow->texture->mtx);
 }
 
+#define HSD_ASSERT2(line, text, cond)                                         \
+    ((cond) ? ((void) 0) : __assert(__FILE__, line, text))
+
+void HSD_ShadowSetViewingRect(HSD_Shadow* shadow, float top, float bottom,
+                              float left, float right)
+{
+    HSD_CObj* cobj;
+    float distance;
+
+    HSD_ASSERT(721, shadow);
+
+    cobj = shadow->camera;
+    distance = HSD_CObjGetEyeDistance(cobj);
+    HSD_ASSERT2(725, distAssert, distance > 0.0F);
+
+    switch (HSD_CObjGetProjectionType(cobj)) {
+    case PROJ_PERSPECTIVE: {
+        float width, height;
+
+        if (fabsf_bitwise(top) > fabsf_bitwise(bottom)) {
+            width = fabsf_bitwise(top);
+        } else {
+            width = fabsf_bitwise(bottom);
+        }
+        if (fabsf_bitwise(left) > fabsf_bitwise(right)) {
+            height = fabsf_bitwise(left);
+        } else {
+            height = fabsf_bitwise(right);
+        }
+        HSD_CObjSetAspect(cobj, height / width);
+        HSD_CObjSetFov(cobj, atan2f(height, distance));
+    } break;
+
+    case PROJ_ORTHO:
+        HSD_CObjSetOrtho(cobj, top, bottom, left, right);
+        break;
+
+    case PROJ_FRUSTUM: {
+        float scale = HSD_CObjGetNear(cobj) / distance;
+        HSD_ASSERT(754, scale > 0.0F);
+        HSD_CObjSetFrustum(cobj, scale * top, scale * bottom, scale * left,
+                           scale * right);
+    } break;
+
+    default:
+        HSD_ASSERT(762, 0);
+    }
+}
+
+#define FLT_MAX 3.4028235E38F
+
+void HSD_ViewingRectInit(HSD_ViewingRect* rect, Vec3* position, Vec3* interest,
+                         Vec3* upvector, int perspective)
+{
+    Vec3 v;
+    HSD_ASSERT(795, rect);
+
+    rect->origin = *position;
+    VECSubtract(interest, position, &rect->eye_v);
+    VECNormalize(&rect->eye_v, &rect->eye_vn);
+    VECNormalize(upvector, &v);
+    VECCrossProduct(&rect->eye_vn, &v, &rect->right_v);
+    VECCrossProduct(&rect->right_v, &rect->eye_vn, &rect->up_v);
+    rect->distance = VECMag(&rect->eye_v);
+
+    rect->top = rect->right = -FLT_MAX;
+    rect->bottom = rect->left = FLT_MAX;
+    rect->perspective = perspective;
+}
+
 int HSD_ViewingRectCheck(HSD_ViewingRect* rect)
 {
     HSD_ASSERT(818, rect);
     return rect->top > rect->bottom && rect->right > rect->left;
 }
+
+void HSD_ViewingRectAddRect(HSD_ViewingRect* rect, Vec3* position, float top,
+                            float bottom, float left, float right)
+{
+    float x, y, dot, scale;
+    Vec3 o2p, e2p;
+
+    HSD_ASSERT(855, rect);
+    HSD_ASSERT(856, position);
+
+    VECSubtract(position, &rect->origin, &o2p);
+    dot = VECDotProduct(&o2p, &rect->eye_vn);
+    if (rect->perspective) {
+        if (dot <= 0.0F) {
+            return;
+        }
+        scale = rect->distance / dot;
+        VECScale(&o2p, &o2p, scale);
+        VECSubtract(&o2p, &rect->eye_v, &e2p);
+        x = VECDotProduct(&rect->right_v, &e2p);
+        y = VECDotProduct(&rect->up_v, &e2p);
+
+        top *= scale;
+        bottom *= scale;
+        left *= scale;
+        right *= scale;
+    } else {
+        Vec3 tmp;
+        VECScale(&rect->eye_vn, &tmp, dot);
+        VECSubtract(&o2p, &tmp, &e2p);
+        x = VECDotProduct(&rect->right_v, &e2p);
+        y = VECDotProduct(&rect->up_v, &e2p);
+    }
+
+    if (x + right > rect->right) {
+        rect->right = x + right;
+    }
+    if (x + left < rect->left) {
+        rect->left = x + left;
+    }
+    if (y + top > rect->top) {
+        rect->top = y + top;
+    }
+    if (y + bottom < rect->bottom) {
+        rect->bottom = y + bottom;
+    }
+}
+
+static char radiusAssert[14] = "radius > 0.0F";
+static char aAssert[9] = "a > 0.0F";
