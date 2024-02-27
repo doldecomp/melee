@@ -79,9 +79,11 @@ void ftCo_800BBCC0(ftCo_GObj* gobj)
 
 void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
 {
-    u8 _[8] = { 0 };
+    Vec3 scale;
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
+    PAD_STACK(16);
+
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4(fp);
     }
@@ -90,18 +92,10 @@ void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
     fp->take_dmg_cb = ftCo_800BC438;
     ftCommon_8007E2F4(fp, 0x1FF);
     fp->x221E_b0 = true;
-    {
-        Vec3 scale;
-        u8 _[4] = { 0 };
-        float size = fp->co_attrs.xBC.size;
-        scale.x = scale.y = scale.z = size;
-        ftCommon_SetAccessory(fp, ftYs_SpecialN_8012CDD4(arg1));
-        {
-            HSD_JObj* jobj = fp->x20A0_accessory;
-            HSD_JObjSetScale(jobj, &scale);
-        }
-        fp->mv.co.yoshiegg.scale = scale;
-    }
+    scale.x = scale.y = scale.z = fp->co_attrs.xBC.size;
+    ftCommon_SetAccessory(fp, ftYs_SpecialN_8012CDD4(arg1));
+    HSD_JObjSetScale(fp->x20A0_accessory, &scale);
+    fp->mv.co.yoshiegg.scale = scale;
     lb_8000C2F8(fp->x20A0_accessory == NULL ? NULL
                                             : fp->x20A0_accessory->child,
                 fp->parts[ftParts_8007500C(fp, FtPart_TransN)].joint);
@@ -130,13 +124,7 @@ void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
     fp->mv.co.yoshiegg.x14 = fp->mv.co.walk.fast_anim_frame;
     fp->mv.co.yoshiegg.xC = ftYs_Shield_8012CCE0(arg1);
     ftCommon_8007DBCC(fp, 0, ftYs_Shield_8012CD00(arg1));
-    {
-        /// @todo Line numbers what.
-        if (jobj == NULL) {
-            __assert("jobj.h", 823, "jobj");
-        }
-        HSD_JObjGetScale(jobj, &fp->mv.co.yoshiegg.x18);
-    }
+    HSD_JObjGetScale(jobj, &fp->mv.co.yoshiegg.x18);
     fp->accessory4_cb = ftCo_800BBCC0;
 }
 
