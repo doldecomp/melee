@@ -17,11 +17,7 @@
 /* 0C3390 */ static void ftCo_800C3390(ftCo_GObj* gobj);
 /* 0C3480 */ static void ftCo_800C3480(ftCo_GObj* gobj);
 
-/* literal */ double const ftCo_804D8CC0 = S32_TO_F32;
-/* literal */ float const ftCo_804D8CC8 = 0;
-/* literal */ float const ftCo_804D8CCC = 1;
-
-static inline float inlineA0(ftCo_Fighter* fp, bool arg1)
+static float inlineA0(ftCo_Fighter* fp, bool arg1)
 {
     float result =
         (fp->dmg.x1830_percent * p_ftCommonData->x638) +
