@@ -198,7 +198,7 @@ s8 Player_GetCpuLevel(int slot);
 void Player_SetPlayerAndEntityCpuLevel(int slot, s8 cpu_level);
 s8 Player_GetCpuType(int slot);
 void Player_SetPlayerAndEntityCpuType(int slot, s8 cpu_type);
-s8 Player_GetHandicap(int slot);
+int Player_GetHandicap(int slot);
 void Player_SetHandicap(int slot, s8 handicap);
 f32 Player_GetUnk50(int slot);
 f32 Player_GetAttackRatio(int slot);
