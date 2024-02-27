@@ -181,6 +181,7 @@ void HSD_JObjSetCurrent(HSD_JObj* jobj);
 HSD_JObj* HSD_JObjGetCurrent(void);
 void HSD_JObjResolveRefsAll(HSD_JObj*, HSD_Joint*);
 void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode);
+void HSD_JObjDisp(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode);
 void HSD_JObjRemoveAnim(HSD_JObj* jobj);
 void HSD_JObjAddNext(HSD_JObj* jobj, HSD_JObj* next);
 void HSD_JObjRemoveAnimAll(HSD_JObj* jobj);

@@ -80,7 +80,7 @@ struct StageInfo {
     HSD_GObj* x12C;
     Vec3 x130, x13C, x148, x154, x160, x16C;
     lb_UnkAnimStruct* (*x178)(int);
-    void* x17C;
+    bool (*x17C)(Vec3*, int, HSD_JObj*);
     HSD_GObj* x180[4];
     u8 x190_pad[0x280 - 0x190];
     HSD_JObj* x280[261];
