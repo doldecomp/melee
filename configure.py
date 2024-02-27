@@ -84,7 +84,7 @@ parser.add_argument(
     "--build-dtk",
     dest="build_dtk",
     type=Path,
-    help="path to decomp-toolkit source (optional)",
+    help="path to decomp-toolkit source or binary (optional)",
 )
 parser.add_argument(
     "--sjiswrap",
