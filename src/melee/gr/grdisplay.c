@@ -4,6 +4,7 @@
 #include "lb/lbshadow.h"
 
 #include <baselib/cobj.h>
+#include <baselib/displayfunc.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/mtx.h>
