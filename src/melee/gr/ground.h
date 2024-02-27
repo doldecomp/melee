@@ -80,7 +80,7 @@
 /* 1C32AC */ void Ground_801C32AC(s32);
 /* 1C32D4 */ s32 Ground_801C32D4(s32, s32);
 /* 1C33C0 */ s32 Ground_801C33C0(s32, s32);
-/* 1C36F4 */ void Ground_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk);
+/* 1C36F4 */ void Ground_801C36F4(int map_id, HSD_JObj* jobj, UNK_T joint);
 /* 1C3880 */ void Ground_801C3880(f32);
 /* 1C3890 */ void Ground_801C3890(f32);
 /* 1C38A0 */ void Ground_801C38A0(f32);
@@ -104,7 +104,7 @@
 /* 1C3D44 */ s32 Ground_801C3D44(s32, f32, f32);
 /* 1C3DB4 */ s32 Ground_801C3DB4(s32, f32, f32);
 /* 1C3F20 */ f32 Ground_801C3F20(HSD_JObj*);
-/* 1C3FA4 */ HSD_JObj* Ground_801C3FA4(HSD_GObj*, s32);
+/* 1C3FA4 */ HSD_JObj* Ground_801C3FA4(HSD_GObj* gobj, int depth);
 /* 1C4100 */ HSD_JObj* Ground_801C4100(HSD_JObj* jobj);
 /* 1C4210 */ s32 Ground_801C4210(void);
 /* 1C42AC */ void Ground_801C42AC(void);
@@ -125,7 +125,7 @@
 /* 1C4E20 */ bool Ground_801C4E20(void);
 /* 1C4E70 */ void Ground_801C4E70(HSD_JObj*, HSD_JObj*, HSD_JObj*, HSD_JObj*,
                                   HSD_JObj*, HSD_JObj*);
-/* 1C4FAC */ void Ground_801C4FAC(void);
+/* 1C4FAC */ void Ground_801C4FAC(HSD_CObj* cobj);
 /* 1C53EC */ void Ground_801C53EC(u32);
 /* 1C5414 */ void Ground_801C5414(int, int);
 /* 1C5440 */ void Ground_801C5440(Ground* gp, s32 i, u32);
