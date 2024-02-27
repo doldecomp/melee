@@ -5,7 +5,6 @@
 #include "baselib/forward.h" // IWYU pragma: export
 #include <dolphin/gx/forward.h>
 
-#include "baselib/fobj.h"
 #include "baselib/object.h"
 
 #include <dolphin/gx/types.h>
