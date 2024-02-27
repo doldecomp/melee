@@ -180,7 +180,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_DamageSong.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_0C35.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_AirCatch.s.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_DamageBind.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DamageBind.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_WarpStar.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_HammerWait.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_HammerWalk.c.o\

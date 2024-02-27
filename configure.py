@@ -504,7 +504,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_DamageSong.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_0C35.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_AirCatch.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_DamageBind.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageBind.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_WarpStar.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_HammerWait.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_HammerWalk.c"),

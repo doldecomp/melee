@@ -16,8 +16,6 @@
 #include <common_structs.h>
 #include <placeholder.h>
 
-#pragma force_active on
-
 bool ftCo_800C44CC(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -36,6 +34,18 @@ bool ftCo_800C44CC(ftCo_GObj* gobj)
     return false;
 }
 
+static void commonCall(Fighter* fp)
+{
+    ftCommon_8007DBCC(
+        fp, 0,
+        (fp->dmg.x1830_percent * p_ftCommonData->x66C) +
+            (p_ftCommonData->x65C *
+                 (p_ftCommonData->x660 - Player_GetHandicap(fp->player_id)) +
+             p_ftCommonData->x658 +
+             p_ftCommonData->x664 * (p_ftCommonData->x668 -
+                                     (Player_80033BB8(fp->player_id) + 1))));
+}
+
 void ftCo_800C4550(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -48,15 +58,7 @@ void ftCo_800C4550(ftCo_GObj* gobj)
     } else {
         Fighter_ChangeMotionState(gobj, ftCo_MS_DamageBind, Ft_MF_None, 0.0f,
                                   1.0f, 0.0f, NULL);
-        ftCommon_8007DBCC(
-            fp, 0,
-            (fp->dmg.x1830_percent * p_ftCommonData->x66C) +
-                (p_ftCommonData->x65C * (p_ftCommonData->x660 -
-                                         Player_GetHandicap(fp->player_id)) +
-                 p_ftCommonData->x658 +
-                 p_ftCommonData->x664 *
-                     (p_ftCommonData->x668 -
-                      (Player_80033BB8(fp->player_id) + 1))));
+        commonCall(fp);
     }
 }
 
