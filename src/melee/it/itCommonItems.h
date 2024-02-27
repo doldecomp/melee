@@ -76,6 +76,7 @@ typedef struct HeartContainerVars {
     s32 xDDC;
     u8 xDE0_filler[8];
     f32 xDE8_float;
+    f32 xDEC;
 } HeartContainerVars;
 
 typedef struct MaximTomatoVars {
