@@ -47,6 +47,7 @@ void HSD_ShadowDeleteObject(HSD_Shadow* shadow, HSD_JObj* jobj);
 HSD_TObj* makeShadowTObj(void);
 void HSD_ShadowRemove(HSD_Shadow* shadow);
 void HSD_ShadowInit(HSD_Shadow* shadow);
+void HSD_ShadowSetSize(HSD_Shadow* shadow, u16 width, u16 height);
 
 void HSD_ShadowSetViewingRect(HSD_Shadow* shadow, float top, float bottom,
                               float left, float right);
