@@ -3,8 +3,6 @@
 
 #include <platform.h>
 
-#include <placeholder.h>
-
 typedef struct __jmp_buf {
     unsigned long pc;       /*	0: saved PC			*/
     unsigned long cr;       /*	4: saved CR			*/
