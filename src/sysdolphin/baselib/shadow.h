@@ -24,7 +24,7 @@ struct HSD_Shadow {
     void* user_data;    // 0x24
 };
 
-struct HSD_ViewingRect {
+typedef struct HSD_ViewingRect {
     Vec3 origin;
     Vec3 up_v;
     Vec3 right_v;
@@ -35,7 +35,7 @@ struct HSD_ViewingRect {
     f32 bottom;
     f32 left;
     f32 right;
-    f32 perspective;
+    int perspective;
 };
 
 HSD_ObjAllocData* HSD_ShadowGetAllocData(void);

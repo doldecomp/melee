@@ -25,6 +25,7 @@
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/GXVert.h>
 #include <dolphin/mtx.h>
+#include <dolphin/mtx/vec.h>
 
 extern HSD_ObjAllocData shadow_alloc_data;
 
@@ -388,6 +389,27 @@ static void makeMatrix(HSD_Shadow* shadow)
 
     MTXConcat(Mprj, HSD_CObjGetViewingMtxPtrDirect(shadow->camera),
               shadow->texture->mtx);
+}
+
+#define FLT_MAX 3.4028235E38F
+
+void HSD_ViewingRectInit(HSD_ViewingRect* rect, Vec3* position, Vec3* interest,
+                         Vec3* upvector, int perspective)
+{
+    Vec3 v;
+    HSD_ASSERT(795, rect);
+
+    rect->origin = *position;
+    VECSubtract(interest, position, &rect->eye_v);
+    VECNormalize(&rect->eye_v, &rect->eye_vn);
+    VECNormalize(upvector, &v);
+    VECCrossProduct(&rect->eye_vn, &v, &rect->right_v);
+    VECCrossProduct(&rect->right_v, &rect->eye_vn, &rect->up_v);
+    rect->distance = VECMag(&rect->eye_v);
+
+    rect->top = rect->right = -FLT_MAX;
+    rect->bottom = rect->left = FLT_MAX;
+    rect->perspective = perspective;
 }
 
 int HSD_ViewingRectCheck(HSD_ViewingRect* rect)
