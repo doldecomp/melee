@@ -417,3 +417,55 @@ int HSD_ViewingRectCheck(HSD_ViewingRect* rect)
     HSD_ASSERT(818, rect);
     return rect->top > rect->bottom && rect->right > rect->left;
 }
+
+static char scaleAssert[13] = "scale > 0.0F";
+
+void HSD_ViewingRectAddRect(HSD_ViewingRect* rect, Vec3* position, float top,
+                            float bottom, float left, float right)
+{
+    float x, y, dot, scale;
+    Vec3 o2p, e2p;
+
+    HSD_ASSERT(855, rect);
+    HSD_ASSERT(856, position);
+
+    VECSubtract(position, &rect->origin, &o2p);
+    dot = VECDotProduct(&o2p, &rect->eye_vn);
+    if (rect->perspective) {
+        if (dot <= 0.0F) {
+            return;
+        }
+        scale = rect->distance / dot;
+        VECScale(&o2p, &o2p, scale);
+        VECSubtract(&o2p, &rect->eye_v, &e2p);
+        x = VECDotProduct(&rect->right_v, &e2p);
+        y = VECDotProduct(&rect->up_v, &e2p);
+
+        top *= scale;
+        bottom *= scale;
+        left *= scale;
+        right *= scale;
+    } else {
+        Vec3 tmp;
+        VECScale(&rect->eye_vn, &tmp, dot);
+        VECSubtract(&o2p, &tmp, &e2p);
+        x = VECDotProduct(&rect->right_v, &e2p);
+        y = VECDotProduct(&rect->up_v, &e2p);
+    }
+
+    if (x + right > rect->right) {
+        rect->right = x + right;
+    }
+    if (x + left < rect->left) {
+        rect->left = x + left;
+    }
+    if (y + top > rect->top) {
+        rect->top = y + top;
+    }
+    if (y + bottom < rect->bottom) {
+        rect->bottom = y + bottom;
+    }
+}
+
+static char radiusAssert[14] = "radius > 0.0F";
+static char aAssert[9] = "a > 0.0F";
