@@ -501,7 +501,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_PassiveWall.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_PassiveCeil.c"),
             Object(NonMatching, "melee/ft/ftafterimage.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_DamageSong.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageSong.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_0C35.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_AirCatch.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageBind.c"),
