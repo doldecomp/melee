@@ -95,12 +95,12 @@ void it_80283C48(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
-    if ((s8) ((s32) ((ip->xDD4_itemVar.pokemon.padding[4] << 0x18) &
+    if ((s8) ((s32) ((ip->xDD4_itemVar.HeartContainer.xDD8.flags << 0x18) &
                      0xC0000000) >>
               0x1F) != 0)
     {
-        M2C_FIELD((&gm_80473A18 + M2C_BITWISE(s32, ip->xDD4_itemVar.star.x8)),
-                  s8*, 0x90) = 0;
+        M2C_FIELD((&gm_80473A18 + ip->xDD4_itemVar.HeartContainer.xDDC), s8*,
+                  0x90) = 0;
     }
 }
 
