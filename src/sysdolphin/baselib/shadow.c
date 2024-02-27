@@ -29,7 +29,7 @@
 #include <dolphin/mtx/vec.h>
 #include <MSL/trigf.h>
 
-extern HSD_ObjAllocData shadow_alloc_data;
+HSD_ObjAllocData shadow_alloc_data;
 
 static void makeMatrix(HSD_Shadow* shadow);
 
@@ -106,16 +106,11 @@ void HSD_ShadowRemove(HSD_Shadow* shadow)
     HSD_ObjFree(&shadow_alloc_data, shadow);
 }
 
-extern char HSD_Shadow_80407310[9];
-extern char HSD_Shadow_804D5F78[7];
-
 void HSD_ShadowInit(HSD_Shadow* shadow)
 {
     HSD_ImageDesc* imagedesc;
 
-    if (shadow == NULL) {
-        __assert(HSD_Shadow_80407310, 0xF5, HSD_Shadow_804D5F78);
-    }
+    HSD_ASSERT(245, shadow);
     imagedesc = shadow->texture->imagedesc;
     GXSetTexCopySrc(0, 0, imagedesc->width, imagedesc->height);
     GXSetTexCopyDst(imagedesc->width, imagedesc->height, 0x20, 0);

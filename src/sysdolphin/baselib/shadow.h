@@ -41,12 +41,19 @@ typedef struct HSD_ViewingRect {
 HSD_ObjAllocData* HSD_ShadowGetAllocData(void);
 void HSD_ShadowInitAllocData(void);
 HSD_Shadow* HSD_ShadowAlloc(void);
+void HSD_ShadowAddObject(HSD_Shadow* shadow, HSD_JObj* jobj);
 void HSD_ShadowDeleteObject(HSD_Shadow* shadow, HSD_JObj* jobj);
 
 HSD_TObj* makeShadowTObj(void);
 void HSD_ShadowRemove(HSD_Shadow* shadow);
 void HSD_ShadowInit(HSD_Shadow* shadow);
 
+void HSD_ShadowSetViewingRect(HSD_Shadow* shadow, float top, float bottom,
+                              float left, float right);
+void HSD_ViewingRectInit(HSD_ViewingRect* rect, Vec3* position, Vec3* interest,
+                         Vec3* upvector, int perspective);
 int HSD_ViewingRectCheck(HSD_ViewingRect* rect);
+void HSD_ViewingRectAddRect(HSD_ViewingRect* rect, Vec3* position, float top,
+                            float bottom, float left, float right);
 
 #endif
