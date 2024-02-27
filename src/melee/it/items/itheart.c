@@ -4,10 +4,12 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/types.h"
 
 #include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 extern f32 it_804DC8A8;
 extern f32 it_804DC8AC;
@@ -117,39 +119,10 @@ void it_80283C7C(Item_GObj* gobj)
 
 bool it_80283CD4(Item_GObj* gobj)
 {
-    HSD_JObj* child;
-    f32 rotation_increment;
-    bool var_r3;
-    HSD_JObj* jobj = gobj->hsd_obj;
-    PAD_STACK(8);
-
-    if (jobj == NULL) {
-        child = NULL;
-    } else {
-        child = jobj->child;
-    }
-    rotation_increment =
-        ((f32*) GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes)[6];
-    if (child == NULL) {
-        __assert("jobj.h", 0x411U, "jobj");
-    }
-    child->rotate.y += rotation_increment;
-    if (!(child->flags & JOBJ_MTX_INDEP_SRT)) {
-        if (child != NULL) {
-            if (child == NULL) {
-                __assert("jobj.h", 0x234U, "jobj");
-            }
-            var_r3 = false;
-            if (!(child->flags & JOBJ_USER_DEF_MTX) &&
-                (child->flags & JOBJ_MTX_DIRTY))
-            {
-                var_r3 = true;
-            }
-            if (var_r3 == false) {
-                HSD_JObjSetMtxDirtySub(child);
-            }
-        }
-    }
+    HSD_JObj* child = HSD_JObjGetChild(GET_JOBJ(gobj));
+    HeartContainerVars* attrs =
+        GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
+    HSD_JObjAddRotationY(child, attrs->xDEC);
     return false;
 }
 
