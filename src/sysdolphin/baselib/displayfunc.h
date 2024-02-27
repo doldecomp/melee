@@ -6,7 +6,6 @@
 #include <dolphin/mtx/forward.h>
 
 #include "baselib/jobj.h"
-#include "baselib/objalloc.h"
 
 #define DOBJ_TRSP_SHIFT 1
 #define JOBJ_TRSP_SHIFT 18
