@@ -774,7 +774,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/Runtime/__va_arg.c.o\
     $(BUILD_DIR)/src/Runtime/global_destructor_chain.c.o\
     $(BUILD_DIR)/src/Runtime/Gecko_ExceptionPPC.c.o\
-    $(BUILD_DIR)/asm/Runtime/Gecko_setjmp.s.o\
+    $(BUILD_DIR)/src/Runtime/Gecko_setjmp.c.o\
     $(BUILD_DIR)/asm/Runtime/runtime.s.o\
     $(BUILD_DIR)/src/Runtime/__init_cpp_exceptions.c.o\
 
