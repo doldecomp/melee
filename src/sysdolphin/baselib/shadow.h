@@ -44,6 +44,10 @@ HSD_Shadow* HSD_ShadowAlloc(void);
 void HSD_ShadowAddObject(HSD_Shadow* shadow, HSD_JObj* jobj);
 void HSD_ShadowDeleteObject(HSD_Shadow* shadow, HSD_JObj* jobj);
 
+void HSD_ShadowStartRender(HSD_Shadow* shadow);
+void HSD_ShadowEndRender(HSD_Shadow* shadow);
+void HSD_ShadowSetActive(HSD_Shadow* shadow, int active);
+
 HSD_TObj* makeShadowTObj(void);
 void HSD_ShadowRemove(HSD_Shadow* shadow);
 void HSD_ShadowInit(HSD_Shadow* shadow);
