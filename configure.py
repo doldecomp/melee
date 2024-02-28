@@ -388,7 +388,7 @@ config.libs = [
         "ft (Fighters)",
         [
             # Main
-            Object(Matching, "melee/ft/fighter.c"),
+            Object(NonMatching, "melee/ft/fighter.c"),
             Object(NonMatching, "melee/ft/ftanim.c"),
             Object(NonMatching, "melee/ft/ftaction.c"),
             Object(NonMatching, "melee/ft/ftparts.c"),
