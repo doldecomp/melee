@@ -124,6 +124,7 @@ jobs:
             if [ "$test" != 'true' ]; then
               echo "Progress went down!"
               exit 1
+            fi
           ;;
           'diff')
             ninja all_source
