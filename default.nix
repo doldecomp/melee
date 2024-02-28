@@ -1,1 +1,1 @@
-import ./nix
+import ./.nix
