@@ -74,7 +74,9 @@ jobs:
     name: Ninja
     runs-on: ubuntu-latest
     if: github.repository == 'doldecomp/melee'
-    container: ghcr.io/doldecomp/build-melee:main
+    env:
+      REGISTRY: ghcr.io
+      IMAGE: doldecomp/build-melee:main
     strategy:
       fail-fast: false
       matrix:
@@ -91,8 +93,18 @@ jobs:
           config
     - name: Git config
       run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-    - name: Prepare
-      run: ln -s /orig .
+    - name: Log into container registry
+      uses: docker/login-action@v2
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Grab Melee DOL
+      run: |
+        image="$REGISTRY/$IMAGE"
+        docker pull "$image"
+        container_id=$(docker create "$image")
+        docker cp "$container_id":/orig .
     - name: Build
       run: |
         set +eoux pipefail
@@ -114,17 +126,16 @@ jobs:
 
             git checkout origin '${{github.event.repository.default_branch}}'
             ninja
+
+            jq -n '[inputs | .dol.code] | .[1] >= .[0]' \
+              'build/GALE01/actual-progress.json'
+              'build/GALE01/progress.json'
           ;;
           'diff')
             ninja all_source
             ninja diff
           ;;
         esac
-    - name: Check progress difference
-      run: |
-        jq -n '[inputs | .dol.code] | .[1] >= .[0]' \
-          'build/GALE01/actual-progress.json'
-          'build/GALE01/progress.json'
     - name: Upload progress
       if: matrix.mode == 'link' && github.ref_name == github.event.repository.default_branch
       continue-on-error: true
