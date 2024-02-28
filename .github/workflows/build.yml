@@ -117,7 +117,7 @@ jobs:
             ninja diff
 
             git fetch origin HEAD
-            git switch FETCH_HEAD
+            git checkout FETCH_HEAD
             ninja
             cp "$src" "$expected"
 
