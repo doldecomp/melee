@@ -1,10 +1,15 @@
-name: "Nix build"
+name: build-nix
+run-name: Nix
+
 on:
   pull_request:
   push:
+
 jobs:
   tests:
+    name: Build Melee
     runs-on: ubuntu-latest
+    if: github.repository == 'doldecomp/melee'
     env:
       REGISTRY: ghcr.io
       IMAGE: doldecomp/build-melee:main
