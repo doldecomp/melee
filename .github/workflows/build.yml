@@ -108,11 +108,11 @@ jobs:
 
         case "$mode" in
           'link')
-            expected='build/${{matrix.version}}/progress.json'
+            expected='build/${{matrix.version}}/expected-progress.json'
             actual='build/${{matrix.version}}/progress.json'
 
             ninja
-            mv "$actual" "$expected"
+            cp "$actual" "$expected"
 
             git fetch origin '${{github.event.repository.default_branch}}'
             git switch '${{github.event.repository.default_branch}}'
