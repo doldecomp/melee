@@ -157,8 +157,9 @@ static inline HSD_GObj* HSD_GObjGetNext(HSD_GObj* gobj)
     return gobj->next;
 }
 
-#define GET_JOBJ(gobj) ((HSD_JObj*) HSD_GObjGetHSDObj(gobj))
 #define GET_COBJ(gobj) ((HSD_CObj*) HSD_GObjGetHSDObj(gobj))
+#define GET_FOG(gobj) ((HSD_Fog*) HSD_GObjGetHSDObj(gobj))
+#define GET_JOBJ(gobj) ((HSD_JObj*) HSD_GObjGetHSDObj(gobj))
 #define GET_LOBJ(gobj) ((HSD_LObj*) HSD_GObjGetHSDObj(gobj))
 
 #endif

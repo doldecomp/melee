@@ -214,7 +214,9 @@ def generate_build_ninja(
         description="TOOL $out",
     )
 
-    if config.build_dtk_path:
+    if config.build_dtk_path and config.build_dtk_path.is_file():
+        dtk = config.build_dtk_path
+    elif config.build_dtk_path:
         dtk = build_tools_path / "release" / f"dtk{EXE}"
         n.rule(
             name="cargo",

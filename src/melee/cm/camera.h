@@ -8,6 +8,7 @@
 
 #include <placeholder.h>
 
+/* 028B9C */ void Camera_80028B9C(int);
 /* 029020 */ CameraBox* Camera_80029020(void);
 /* 029044 */ CameraBox* Camera_80029044(int);
 /* 0290D4 */ void Camera_800290D4(CameraBox*);
@@ -32,6 +33,7 @@
 /* 030740 */ void Camera_80030740(u8 r, u8 g, u8 b);
 /* 030A50 */ void* Camera_80030A50(void);
 /* 030A78 */ bool Camera_80030A78(void);
+/* 030B24 */ bool Camera_80030B24(void);
 /* 030CD8 */ bool Camera_80030CD8(CameraBox*, S32Vec2*);
 /* 030CFC */ bool Camera_80030CFC(CameraBox*, float);
 /* 030E44 */ void Camera_80030E44(enum_t, Vec3*);

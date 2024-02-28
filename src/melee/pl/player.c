@@ -843,9 +843,9 @@ void Player_SetPlayerAndEntityCpuType(int slot, s8 cpu_type)
     }
 }
 
-s8 Player_GetHandicap(int slot)
+int Player_GetHandicap(int slot)
 {
-    s8 handicap;
+    u8 handicap;
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];

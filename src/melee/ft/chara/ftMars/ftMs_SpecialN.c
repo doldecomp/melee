@@ -142,15 +142,11 @@ void ftMs_SpecialN_80136A7C(HSD_GObj* gobj)
 
 static inline void doLoopAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
 {
-    {
-        u64 _ = 0;
-    }
+    FORCE_PAD_STACK_8;
     {
         Fighter* fp = GET_FIGHTER(gobj);
         MarsAttributes* da = fp->dat_attrs;
-        {
-            u64 _0 = 0, _1 = 0;
-        }
+        FORCE_PAD_STACK_16;
         {
             Vec3 pos;
             if (fp->mv.ms.specialn.cur_frame % 30 == 0) {
@@ -265,9 +261,7 @@ static inline void inlineA0(Fighter_GObj* gobj, HSD_GObjEvent cb)
     MarsAttributes* da = fp->dat_attrs;
     int i;
     if (fp->cmd_vars[0] == 0) {
-        {
-            u64 _0 = 0, _1 = 0;
-        }
+        FORCE_PAD_STACK_16;
         i = 0;
         while (i < (signed) ARRAY_SIZE(fp->x914)) {
             if (fp->x914[i].state == HitCapsule_Enabled) {

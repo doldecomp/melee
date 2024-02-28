@@ -1,10 +1,7 @@
 name: build
 run-name: Build Melee & publish GitHub Pages
 
-on:
-  push:
-    paths: [ "**" ]
-  pull_request:
+on: [push, pull_request]
 
 env:
   IMAGE_REPO: doldecomp/melee
@@ -82,7 +79,7 @@ jobs:
       fail-fast: false
       matrix:
         version: [GALE01]
-        options: ["", "all_source", "diff"]
+        mode: ["link", "diff"]
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -98,14 +95,52 @@ jobs:
       run: ln -s /orig .
     - name: Build
       run: |
-        args='--compilers /compilers --max-errors 0 --verbose --version ${{matrix.version}}'
-        if [ -z '${{matrix.options}}' ]; then
-          args="--map --require-protos $args"
-        fi
-        echo "$args" | xargs python configure.py
-        echo "${{matrix.options}}" | xargs ninja
+        set -eou pipefail
+
+        mode='${{matrix.mode}}'
+        config_args='--compilers /compilers --max-errors 0 --verbose --version ${{matrix.version}}'
+        case "$mode" in
+          'link')
+            config_args="--map --require-protos $config_args"
+          ;;
+        esac
+        echo "$config_args" | xargs python configure.py
+
+        case "$mode" in
+          'link')
+            src='build/${{matrix.version}}/progress.json'
+            expected='build/${{matrix.version}}/expected-progress.json'
+            actual='build/${{matrix.version}}/actual-progress.json'
+
+            ninja
+            cp "$src" "$actual"
+
+            git fetch origin '${{github.event.repository.default_branch}}'
+            git switch '${{github.event.repository.default_branch}}'
+            ninja
+            cp "$src" "$expected"
+
+            test=$(jq -n \
+              '[inputs | { code: .dol.code, data: .dol.data }] | { code: (.[0].code >= .[1].code), data: (.[0].data >= .[1].data) }' \
+              "$actual" "$expected")
+            status=0
+            if [ "$(echo "$test" | jq -r '.code')" != 'true' ]; then
+              echo "::error::Code progress went down!"
+              status=1
+            fi
+            if [ "$(echo "$test" | jq -r '.data')" != 'true' ]; then
+              echo "::error::Data progress went down!"
+              status=1
+            fi
+            exit "$status"
+          ;;
+          'diff')
+            ninja all_source
+            ninja diff
+          ;;
+        esac
     - name: Upload progress
-      if: matrix.options == '' && github.ref_name == github.event.repository.default_branch
+      if: matrix.mode == 'link' && github.ref_name == github.event.repository.default_branch
       continue-on-error: true
       env:
         PROGRESS_API_KEY: ${{secrets.PROGRESS_API_KEY}}
@@ -116,7 +151,7 @@ jobs:
           -v ${{matrix.version}} \
           'build/${{matrix.version}}/progress.json'
     - name: Upload map
-      if: matrix.options == ''
+      if: matrix.mode == 'link'
       uses: actions/upload-artifact@v3
       with:
         name: ${{matrix.version}}_maps
@@ -215,3 +250,38 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  build-nix:
+    name: Nix
+    runs-on: ubuntu-latest
+    if: github.repository == 'doldecomp/melee'
+    env:
+      REGISTRY: ghcr.io
+      IMAGE: doldecomp/build-melee:main
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
+        sparse-checkout: |
+          src
+          tools
+          config
+          .nix
+    - name: Log into container registry
+      uses: docker/login-action@v2
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Grab Melee DOL
+      run: |
+        image="$REGISTRY/$IMAGE"
+        docker pull "$image"
+        container_id=$(docker create "$image")
+        docker cp "$container_id":/orig .
+    - uses: cachix/install-nix-action@v25
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - uses: DeterminateSystems/magic-nix-cache-action@v2
+    - run: nix-build
+    - run: nix-shell --run "echo OK"

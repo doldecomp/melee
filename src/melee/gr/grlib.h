@@ -6,6 +6,8 @@
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
+#include <placeholder.h>
+
 /* 1C96E8 */ bool grLib_801C96E8(HSD_GObj* arg0);
 /* 1C96F8 */ UnkGeneratorStruct* grLib_801C96F8(s32, s8, S32Vec3*);
 /* 1C97DC */ void grLib_801C97DC(s32, s32, HSD_JObj*);
@@ -26,6 +28,6 @@
 /* 1C9E40 */ s16 grLib_801C9E40(void);
 /* 1C9E50 */ void grLib_801C9E50(s16);
 /* 1C9E60 */ bool grLib_801C9E60(Vec3*);
-/* 1C9EE8 */ bool grLib_801C9EE8(void);
+/* 1C9EE8 */ int grLib_801C9EE8(Vec3* arg0, float arg1);
 
 #endif

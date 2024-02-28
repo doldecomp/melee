@@ -177,10 +177,10 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_PassiveWall.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_PassiveCeil.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftafterimage.s.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_DamageSong.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DamageSong.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_0C35.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_AirCatch.s.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_DamageBind.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DamageBind.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_WarpStar.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_HammerWait.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_HammerWalk.c.o\
@@ -336,7 +336,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftPr_Init.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftPr_SpecialHi.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftPr_SpecialLw.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftPurin/ftPr_SpecialS.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftPr_SpecialS.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftPurin/ftPr_SpecialN.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLg_Init.c.o\
@@ -773,7 +774,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/Runtime/__va_arg.c.o\
     $(BUILD_DIR)/src/Runtime/global_destructor_chain.c.o\
     $(BUILD_DIR)/src/Runtime/Gecko_ExceptionPPC.c.o\
-    $(BUILD_DIR)/asm/Runtime/Gecko_setjmp.s.o\
+    $(BUILD_DIR)/src/Runtime/Gecko_setjmp.c.o\
     $(BUILD_DIR)/asm/Runtime/runtime.s.o\
     $(BUILD_DIR)/src/Runtime/__init_cpp_exceptions.c.o\
 
@@ -982,7 +983,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/object.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/quatlib.s.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/memory.c.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/shadow.s.o\
+    $(BUILD_DIR)/src/sysdolphin/baselib/shadow.c.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/archive.c.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/random.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/bytecode.s.o\

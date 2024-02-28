@@ -16,12 +16,6 @@
 #include <common_structs.h>
 #include <placeholder.h>
 
-#pragma force_active on
-
-/* literal */ double const ftCo_804D8D38 = S32_TO_F32;
-/* literal */ float const ftCo_804D8D40 = 0;
-/* literal */ float const ftCo_804D8D44 = 1;
-
 bool ftCo_800C44CC(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -40,26 +34,31 @@ bool ftCo_800C44CC(ftCo_GObj* gobj)
     return false;
 }
 
+static void commonCall(Fighter* fp)
+{
+    ftCommon_8007DBCC(
+        fp, 0,
+        (fp->dmg.x1830_percent * p_ftCommonData->x66C) +
+            (p_ftCommonData->x65C *
+                 (p_ftCommonData->x660 - Player_GetHandicap(fp->player_id)) +
+             p_ftCommonData->x658 +
+             p_ftCommonData->x664 * (p_ftCommonData->x668 -
+                                     (Player_80033BB8(fp->player_id) + 1))));
+}
+
 void ftCo_800C4550(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
+
     ftCommon_8007DB58(gobj);
     ftCo_8009750C(gobj);
     ftCo_800DD168(gobj);
     if (fp->ground_or_air == GA_Air) {
         ftCo_80090780(gobj);
     } else {
-        Fighter_ChangeMotionState(gobj, ftCo_MS_DamageBind, Ft_MF_None, 0, 1,
-                                  0, NULL);
-        ftCommon_8007DBCC(
-            fp, 0,
-            fp->dmg.x1830_percent * p_ftCommonData->x66C +
-                (p_ftCommonData->x65C * (p_ftCommonData->x660 -
-                                         Player_GetHandicap(fp->player_id)) +
-                 p_ftCommonData->x658 +
-                 p_ftCommonData->x664 *
-                     (p_ftCommonData->x668 -
-                      (Player_80033BB8(fp->player_id) + 1))));
+        Fighter_ChangeMotionState(gobj, ftCo_MS_DamageBind, Ft_MF_None, 0.0f,
+                                  1.0f, 0.0f, NULL);
+        commonCall(fp);
     }
 }
 
@@ -68,7 +67,7 @@ void ftCo_DamageBind_Anim(ftCo_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x1A4C -= p_ftCommonData->x670;
     ftCommon_8007DC08(fp, p_ftCommonData->x674);
-    if (fp->x1A4C <= 0) {
+    if (fp->x1A4C <= 0.0f) {
         ft_8008A2BC(gobj);
     }
 }

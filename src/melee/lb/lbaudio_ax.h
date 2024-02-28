@@ -33,6 +33,7 @@
 /* 0264E4 */ bool lbAudioAx_800264E4(void);
 /* 026510 */ void lbAudioAx_80026510(HSD_GObj*);
 /* 0265C4 */ enum_t lbAudioAx_800265C4(HSD_GObj*, enum_t sfx);
+/* 027DBC */ void lbAudioAx_80027DBC(void);
 /* 02838C */ void lbAudioAx_8002838C(void);
 
 #endif

@@ -5,11 +5,12 @@
 
 typedef struct grDynamicAttr_UnkStruct grDynamicAttr_UnkStruct;
 typedef struct Ground Ground;
+typedef struct StageInfo StageInfo;
 typedef struct UnkArchiveStruct UnkArchiveStruct;
 typedef struct UnkBgmStruct UnkBgmStruct;
 typedef struct UnkStage6B0 UnkStage6B0;
-typedef struct UnkStageDat UnkStageDat;
 typedef struct UnkStageDatInternal UnkStageDatInternal;
+typedef struct UnkStageDat UnkStageDat;
 
 #ifdef M2CTX
 typedef struct Ground_GObj Ground_GObj;
