@@ -121,7 +121,7 @@ jobs:
             cp "$src" "$expected"
 
             test=$(jq -n \
-              '[inputs | { code: .dol.code, data: .dol.data }] | { code: .[0].code >= .[1].code, data: .[0].data >= .[1].data }' \
+              '[inputs | { code: .dol.code, data: .dol.data }] | { code: (.[0].code >= .[1].code), data: (.[0].data >= .[1].data) }' \
               "$actual" "$expected")
             if [ "$(echo "$test" | jq -r '.code')" != 'true' ]; then
               echo "::error::Code progress went down!"
