@@ -53,7 +53,7 @@ typedef struct StageBlastZone {
     f32 bottom; // 0x80
 } StageBlastZone;
 
-typedef struct StageInfo {
+struct StageInfo {
     StageCameraInfo cam_info;  // 0x00 - 0x70
     StageBlastZone blast_zone; // 0x74 - 0x80
 
@@ -77,18 +77,10 @@ typedef struct StageInfo {
     s32 x9C;
     u8 xA0[4];
     u8 xA4_pad[0x12C - 0xA4];
-    // TODO: determine actual type of x12C
-    // Maybe a GObj with hsd_obj = TObj?
-    struct {
-        u8 x0_pad[0x28];
-        struct {
-            u8 x0_pad[0x18];
-            GXColor color;
-        }* ptr;
-    }* x12C;
+    HSD_GObj* x12C;
     Vec3 x130, x13C, x148, x154, x160, x16C;
     lb_UnkAnimStruct* (*x178)(int);
-    void* x17C;
+    bool (*x17C)(Vec3*, int, HSD_JObj*);
     HSD_GObj* x180[4];
     u8 x190_pad[0x280 - 0x190];
     HSD_JObj* x280[261];
@@ -115,7 +107,7 @@ typedef struct StageInfo {
     s16 x6DC;
     s16 x6DE;
     f32 x6E0;
-    s32 x6E4[2];
+    int x6E4[2];
     u8 x6EC_pad[0x708 - 0x6EC];
     s16 x708;
     f32 x70C;
@@ -131,14 +123,26 @@ typedef struct StageInfo {
     f32 x73C;
     s32 x740;
     u8 x744_pad[0x748 - 0x744];
-} StageInfo;
+};
 
 typedef struct StageCallbacks {
     /*  +0 */ void (*callback0)(HSD_GObj*);
     /*  +4 */ bool (*callback1)(HSD_GObj*);
     /*  +8 */ void (*callback2)(HSD_GObj*);
     /*  +C */ void (*callback3)(HSD_GObj*);
-    /* +10 */ u32 flags;
+    /* +10 */ union {
+        /* +10 */ u32 flags;
+        struct {
+            /* +10:0 */ u8 flags_b0 : 1;
+            /* +10:1 */ u8 flags_b1 : 1;
+            /* +10:2 */ u8 flags_b2 : 1;
+            /* +10:3 */ u8 flags_b3 : 1;
+            /* +10:4 */ u8 flags_b4 : 1;
+            /* +10:5 */ u8 flags_b5 : 1;
+            /* +10:6 */ u8 flags_b6 : 1;
+            /* +10:7 */ u8 flags_b7 : 1;
+        };
+    };
 } StageCallbacks;
 
 typedef struct StageData {
@@ -299,17 +303,25 @@ struct UnkStageDatInternal {
     u32 unk4; // flags
 };
 
+struct UnkStageDat_x8_t {
+    /*  +0 */ struct HSD_Joint* unk0;
+    /*  +4 */ u8 _4[0x10 - 0x4];
+    /* +10 */ HSD_CameraDescPerspective* x10;
+    /* +14 */ UNK_T x14;
+    /* +18 */ UNK_T x18;
+    /* +1C */ HSD_FogDesc* x1C;
+    /* +20 */ S16Vec3* unk20;
+    /* +24 */ s32 unk24; // size of unk20 array
+    /* +28 */ UNK_T x28;
+    /* +2C */ s16* x2C;
+    /* +30 */ int x30;
+};
+
 struct UnkStageDat {
     void* unk0;
     s32 unk4;
 
-    struct {
-        struct HSD_Joint* unk0;
-        u8 x4_fill[0x20 - 0x4];
-        S16Vec3* unk20;
-        s32 unk24; // size of unk20 array
-        u8 x28_fill[0x34 - 0x28];
-    }* unk8;
+    struct UnkStageDat_x8_t* unk8;
     s32 unkC;
 
     s32* unk10;
@@ -323,6 +335,7 @@ struct UnkStageDat {
     UnkStageDatInternal** unk28;
     s32 unk2C; // size
 };
+STATIC_ASSERT(sizeof(struct UnkStageDat_x8_t) == 0x34);
 
 struct UnkArchiveStruct {
     HSD_Archive* unk0;

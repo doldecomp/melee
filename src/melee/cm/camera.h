@@ -33,6 +33,7 @@
 /* 030740 */ void Camera_80030740(u8 r, u8 g, u8 b);
 /* 030A50 */ void* Camera_80030A50(void);
 /* 030A78 */ bool Camera_80030A78(void);
+/* 030B24 */ bool Camera_80030B24(void);
 /* 030CD8 */ bool Camera_80030CD8(CameraBox*, S32Vec2*);
 /* 030CFC */ bool Camera_80030CFC(CameraBox*, float);
 /* 030E44 */ void Camera_80030E44(enum_t, Vec3*);

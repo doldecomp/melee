@@ -6,11 +6,16 @@
 #include "grrcruise.h"
 
 #include "cm/camera.h"
+#include "ft/inlines.h"
+#include "ft/types.h"
 #include "gr/types.h"
+#include "it/inlines.h"
+#include "it/it_26B1.h"
 #include "lb/lb_00F9.h"
 #include "lb/types.h" // IWYU pragma: keep
 #include "sc/types.h"
 
+#include <math.h>
 #include <placeholder.h>
 #include <baselib/aobj.h>
 #include <baselib/debug.h>
@@ -314,7 +319,55 @@ bool grLib_801C9E60(Vec3* v)
     return false;
 }
 
-bool grLib_801C9EE8(void)
+static inline bool inlineA0(Vec3* point, CollData* cd, float offset)
 {
-    NOT_IMPLEMENTED;
+    float top = cd->xA4_ecbCurrCorrect.top.y;
+    float bottom = cd->xA4_ecbCurrCorrect.bottom.y;
+    float y = (top + bottom) * 0.5f + cd->cur_topn.y - point->y;
+    if (ABS(y) > (top - bottom) * 0.5f + offset) {
+        return false;
+    }
+    {
+        float right = cd->xA4_ecbCurrCorrect.right.x;
+        float left = cd->xA4_ecbCurrCorrect.left.x;
+        float x = (left + right) * 0.5f + cd->cur_topn.x - point->x;
+        if (ABS(x) > (right - left) * 0.5f + offset) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool grLib_801C9EE8(Vec3* point, float offset)
+{
+    Fighter_GObj* cur_fighter;
+    PAD_STACK(0x20);
+    for (cur_fighter = HSD_GObj_Entities->fighters; cur_fighter != NULL;
+         cur_fighter = cur_fighter->next)
+    {
+        if (cur_fighter != NULL) {
+            Fighter* fp = GET_FIGHTER(cur_fighter);
+            if (inlineA0(point, &fp->coll_data, offset)) {
+                return true;
+            }
+        } else {
+            Item_GObj* cur_item;
+            for (cur_item = HSD_GObj_Entities->items;;
+                 cur_item = cur_item->next)
+            {
+                if (cur_item == NULL) {
+                    return false;
+                }
+                if (itGetKind(cur_item) != Pokemon_Random) {
+                    Item* ip = GET_ITEM(cur_item);
+                    if (inlineA0(point, &ip->x378_itemColl, offset)) {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    return false;
 }
