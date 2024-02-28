@@ -87,12 +87,11 @@ void it_80283C48(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
-    if ((s8) ((s32) ((ip->xDD4_itemVar.HeartContainer.xDD8.flags << 0x18) &
-                     0xC0000000) >>
-              0x1F) != 0)
+    if ((s8) ((((*(s8*) &ip->xDD4_itemVar.HeartContainer.xDD8.flags) & 0xC0)
+               << 24) >>
+              31))
     {
-        M2C_FIELD((&gm_80473A18 + ip->xDD4_itemVar.HeartContainer.xDDC), s8*,
-                  0x90) = 0;
+        ((s8*) &gm_80473A18 + ip->xDD4_itemVar.HeartContainer.xDDC)[0x90] = 0;
     }
 }
 
