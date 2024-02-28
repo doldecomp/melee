@@ -124,7 +124,7 @@ bool it_80283DA8(Item_GObj* gobj)
     return false;
 }
 
-void it_80283DD4(HSD_GObj* gobj)
+void it_80283DD4(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
 }
