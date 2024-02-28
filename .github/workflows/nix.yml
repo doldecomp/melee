@@ -18,6 +18,7 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Grab Melee DOL
       run: |
+        set -eoux pipefail
         image="$REGISTRY/$IMAGE"
         docker pull "$image"
         container_id=$(docker create "$image")
