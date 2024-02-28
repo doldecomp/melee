@@ -103,6 +103,8 @@ jobs:
           'link')
             config_args="--map --require-protos $config_args"
           ;;
+          'diff') ;;
+          *) exit 1 ;;
         esac
         echo "$config_args" | xargs python configure.py
 
@@ -116,8 +118,16 @@ jobs:
             cp "$src" "$actual"
             ninja diff
 
-            git fetch origin HEAD
-            git checkout FETCH_HEAD
+            case '${{github.event_name}}' in
+              'pull_request')
+                git fetch origin HEAD
+                git checkout FETCH_HEAD
+              ;;
+              'push')
+                git checkout 'HEAD^'
+              ;;
+              *) exit 1 ;;
+            esac
             ninja
             cp "$src" "$expected"
 
@@ -138,6 +148,7 @@ jobs:
           'diff')
             ninja all_source
           ;;
+          *) exit 1 ;;
         esac
     - name: Upload progress
       if: matrix.mode == 'link' && github.ref_name == github.event.repository.default_branch
