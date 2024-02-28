@@ -108,6 +108,7 @@ jobs:
         case "$mode" in
           'link')
             ninja
+          ;;
           'diff')
             ninja all_source
             ninja diff
