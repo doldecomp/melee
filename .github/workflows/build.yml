@@ -112,18 +112,19 @@ jobs:
             mv 'build/${{matrix.version}}/progress.json' \
                'build/${{matrix.version}}/actual-progress.json'
 
-            git checkout '${{github.event.repository.default_branch}}'
+            git checkout origin '${{github.event.repository.default_branch}}'
             ninja
-
-            jq -n '[inputs | .dol.code] | .[1] >= .[0]' \
-              'build/GALE01/actual-progress.json'
-              'build/GALE01/progress.json'
           ;;
           'diff')
             ninja all_source
             ninja diff
           ;;
         esac
+    - name: Check progress difference
+      run: |
+        jq -n '[inputs | .dol.code] | .[1] >= .[0]' \
+          'build/GALE01/actual-progress.json'
+          'build/GALE01/progress.json'
     - name: Upload progress
       if: matrix.mode == 'link' && github.ref_name == github.event.repository.default_branch
       continue-on-error: true
