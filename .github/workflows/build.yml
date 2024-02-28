@@ -109,8 +109,10 @@ jobs:
 
         docker start "$container"
 
-        docker exec "$container" sh <<EOF
+        docker exec -i "$container" sh <<EOF
           echo 'Hello, world'
+          which ninja
+          which python
         EOF
         # docker exec "$container" echo 'Hello, world'
         # docker exec "$container" which ninja
