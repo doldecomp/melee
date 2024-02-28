@@ -950,8 +950,8 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
         break;
 
     case 8:
-        bobOmbGObj =
-            it_80283AE4(bobOmbRain->x0, &bobOmbRain->x8_vec, bobOmbRain->x18);
+        bobOmbGObj = it_80283AE4((Item_GObj*) bobOmbRain->x0,
+                                 &bobOmbRain->x8_vec, bobOmbRain->x18);
         if (bobOmbGObj != NULL) {
             u8 _[8];
 
