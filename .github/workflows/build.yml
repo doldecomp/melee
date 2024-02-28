@@ -108,19 +108,21 @@ jobs:
 
         case "$mode" in
           'link')
+            src='build/${{matrix.version}}/progress.json'
             expected='build/${{matrix.version}}/expected-progress.json'
-            actual='build/${{matrix.version}}/progress.json'
+            actual='build/${{matrix.version}}/actual-progress.json'
 
             ninja
-            cp "$actual" "$expected"
+            cp "$src" "$actual"
 
             git fetch origin '${{github.event.repository.default_branch}}'
             git switch '${{github.event.repository.default_branch}}'
+            cp "$src" "$expected"
             ninja
 
             test="$(jq -n \
-              '[inputs | { code: .dol.code, data: .dol.data }] | .[1].code >= .[0].code and .[1].data >= .[0].data' \
-              "$expected" "$actual")"
+              '[inputs | { code: .dol.code, data: .dol.data }] | .[0].code >= .[1].code and .[0].data >= .[1].data' \
+              "$actual" "$expected")"
             if [ "$test" != 'true' ]; then
               echo "Progress went down!"
               exit 1
