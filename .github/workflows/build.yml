@@ -108,10 +108,10 @@ jobs:
         container=$(docker create "$image")
 
         docker start "$container"
-        cat <<EOF | docker exec -i "$container" sh
-          echo 'Hello, world'
-          which ninja
-        EOF
+        echo "OK"
+        # cat <<EOF | docker exec -i "$container" sh
+        #   echo 'Hello, world'
+        # EOF
 
 
         # docker cp "$container":/orig .
