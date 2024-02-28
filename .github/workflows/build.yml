@@ -101,7 +101,7 @@ jobs:
         config_args='--compilers /compilers --max-errors 0 --verbose --version ${{matrix.version}}'
         case "$mode" in
           'link')
-            config_args="--map --require-protos $args"
+            config_args="--map --require-protos $config_args"
           ;;
         esac
         echo "$config_args" | xargs python configure.py
