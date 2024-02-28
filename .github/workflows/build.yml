@@ -117,14 +117,17 @@ jobs:
 
             git fetch origin '${{github.event.repository.default_branch}}'
             git switch '${{github.event.repository.default_branch}}'
-            cp "$src" "$expected"
             ninja
+            cp "$src" "$expected"
 
-            test="$(jq -n \
-              '[inputs | { code: .dol.code, data: .dol.data }] | .[0].code >= .[1].code and .[0].data >= .[1].data' \
-              "$actual" "$expected")"
-            if [ "$test" != 'true' ]; then
-              echo "Progress went down!"
+            test=$(jq -n \
+              '[inputs | { code: .dol.code, data: .dol.data }] | { code: .[0].code >= .[1].code, data: .[0].data >= .[1].data }' \
+              "$actual" "$expected")
+            if [ "$(echo "$test" | jq -r '.code')" != 'true' ]; then
+              echo "::error::Code progress went down!"
+              exit 1
+            elif [ "$(echo "$test" | jq -r '.data')" != 'true' ]; then
+              echo "::error::Data progress went down!"
               exit 1
             fi
           ;;
