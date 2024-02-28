@@ -11,64 +11,36 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-extern f32 it_804DC8A8;
-extern f32 it_804DC8AC;
-extern s8 it_803F5718;
-void it_80283DD4(HSD_GObj* gobj); /* static */
-// M2C_UNK it_80283DD4(M2C_UNK, void*, Item*, f32); /* static */
-void it_80283C7C(HSD_GObj* gobj); /* static */
+void it_80283DD4(HSD_GObj* gobj);
+void it_80283C7C(HSD_GObj* gobj);
 
-HSD_GObj* it_80283AE4(s32 arg0, Vec3* arg1, s32 arg2)
+Item_GObj* it_80283AE4(Item_GObj* gobj, Vec3* pos, s32 arg2)
 {
-    u8 sp5C;
-    s32 sp58;
-    s16 sp54;
-    f32 sp50;
-    f32 sp4C;
-    f32 sp48;
-    f32 sp44;
-    f32 sp40;
-    f32 sp3C;
-    f32 sp38;
-    f32 sp34;
-    f32 sp30;
-    f32 sp2C;
-    s32 sp20;
-    s32 sp1C;
-    s32 sp18;
-    Item* temp_r5;
-    Item_GObj* var_r31;
-    f32 temp_r0;
+    SpawnItem spawn;
+    Item_GObj* item_gobj;
 
-    var_r31 = NULL;
-    if ((u32) arg0 != 0U) {
-        sp20 = 8;
-        temp_r0 = arg1->y;
-        sp38 = arg1->x;
-        sp3C = temp_r0;
-        sp40 = arg1->z;
-        sp40 = it_804DC8A8;
-        sp2C = sp38;
-        sp30 = temp_r0;
-        sp34 = sp40;
-        sp50 = it_804DC8AC;
-        sp54 = 0;
-        sp4C = it_804DC8A8;
-        sp48 = it_804DC8A8;
-        sp44 = it_804DC8A8;
-        sp18 = 0;
-        sp1C = sp18;
-        // sp5C |= 0x80;
-        sp58 = 0;
-        var_r31 = Item_80268B18((SpawnItem*) &sp18);
+    item_gobj = NULL;
+    if (gobj != NULL) {
+        spawn.kind = It_Kind_Heart;
+        spawn.prev_pos = *pos;
+        spawn.prev_pos.z = 0.0F;
+        spawn.pos = spawn.prev_pos;
+        spawn.facing_dir = -1;
+        spawn.x3C_damage = 0;
+        spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
+        spawn.x0_parent_gobj = NULL;
+        spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+        spawn.x44_flag.bits.b0 = true;
+        spawn.x40 = 0;
+        item_gobj = Item_80268B18(&spawn);
     }
-    if (var_r31 != NULL) {
-        temp_r5 = var_r31->user_data;
-        temp_r5->xDD4_itemVar.pokemon.padding[4] |= 0x80;
-        temp_r5->xDD4_itemVar.star.x8 = M2C_BITWISE(f32, arg2);
-        Item_80267454((HSD_GObj*) var_r31);
+    if (item_gobj != NULL) {
+        Item* ip = GET_ITEM(item_gobj);
+        ip->xDD4_itemVar.HeartContainer.xDD8.bits.b0 = true;
+        ip->xDD4_itemVar.HeartContainer.xDDC = arg2;
+        Item_80267454(item_gobj);
     }
-    return (HSD_GObj*) var_r31;
+    return item_gobj;
 }
 
 void it_80283BD4(Item_GObj* gobj)
