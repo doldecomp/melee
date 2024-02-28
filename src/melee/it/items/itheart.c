@@ -6,13 +6,31 @@
 #include "it/it_26B1.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
-#include "it/types.h"
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-void it_80283DD4(HSD_GObj* gobj);
-void it_80283C7C(HSD_GObj* gobj);
+/* 283C7C */ static void it_80283C7C(Item_GObj* gobj);
+/* 283CD4 */ static bool it_80283CD4(Item_GObj* gobj);
+/* 283DA4 */ static void it_80283DA4(Item_GObj* gobj);
+/* 283DA8 */ static bool it_80283DA8(Item_GObj* gobj);
+/* 283DD4 */ static void it_80283DD4(Item_GObj* gobj);
+/* 283DFC */ static bool it_80283DFC(Item_GObj* gobj);
+/* 283ECC */ static void it_80283ECC(Item_GObj* gobj);
+/* 283EFC */ static bool it_80283EFC(Item_GObj* gobj);
+/* 284020 */ static bool it_80284020(Item_GObj* gobj);
+/* 284028 */ static void it_80284028(Item_GObj* gobj);
+/* 284154 */ static bool it_80284154(Item_GObj* gobj);
+/* 28415C */ static void it_8028415C(Item_GObj* gobj);
+/* 284160 */ static bool it_80284160(Item_GObj* gobj);
+
+ItemStateTable it_803F56C8[] = {
+    { 0xFFFFFFFF, it_80283CD4, it_80283DA4, it_80283DA8 },
+    { 0xFFFFFFFF, it_80283DFC, it_80283ECC, it_80283EFC },
+    { 0xFFFFFFFF, it_80284020, it_80284028, NULL },
+    { 0xFFFFFFFF, it_80283DFC, it_80283ECC, it_80283EFC },
+    { 0xFFFFFFFF, it_80284154, it_8028415C, it_80284160 },
+};
 
 Item_GObj* it_80283AE4(Item_GObj* gobj, Vec3* pos, s32 arg2)
 {
@@ -182,11 +200,3 @@ void it_80284194(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }
-
-ItemStateTable it_803F56C8[] = {
-    { 0xFFFFFFFF, it_80283CD4, it_80283DA4, it_80283DA8 },
-    { 0xFFFFFFFF, it_80283DFC, it_80283ECC, it_80283EFC },
-    { 0xFFFFFFFF, it_80284020, it_80284028, NULL },
-    { 0xFFFFFFFF, it_80283DFC, it_80283ECC, it_80283EFC },
-    { 0xFFFFFFFF, it_80284154, it_8028415C, it_80284160 },
-};
