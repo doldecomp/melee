@@ -127,6 +127,7 @@ jobs:
             if [ "$(echo "$test" | jq -r '.code')" != 'true' ]; then
               echo "::error::Code progress went down!"
               status=1
+            fi
             if [ "$(echo "$test" | jq -r '.data')" != 'true' ]; then
               echo "::error::Data progress went down!"
               status=1
