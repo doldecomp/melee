@@ -215,3 +215,31 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  build-nix:
+    name: Nix
+    runs-on: ubuntu-latest
+    if: github.repository == 'doldecomp/melee'
+    env:
+      REGISTRY: ghcr.io
+      IMAGE: doldecomp/build-melee:main
+    steps:
+    - uses: actions/checkout@v4
+    - name: Log into container registry
+      uses: docker/login-action@v2
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Grab Melee DOL
+      run: |
+        image="$REGISTRY/$IMAGE"
+        docker pull "$image"
+        container_id=$(docker create "$image")
+        docker cp "$container_id":/orig .
+    - uses: cachix/install-nix-action@v25
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - uses: DeterminateSystems/magic-nix-cache-action@v2
+    - run: nix-build
+    - run: nix-shell --run "echo OK"
