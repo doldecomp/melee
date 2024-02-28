@@ -7,6 +7,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Log into container registry
+      uses: docker/login-action@v2
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Grab Melee DOL
+      run: |
+        docker pull ghcr.io/doldecomp/build-melee:main
+        container_id=$(docker create ghcr.io/doldecomp/build-melee:main)
+        docker cp $container_id:/orig .
+        docker rm $container_id
     - uses: cachix/install-nix-action@v25
       with:
         nix_path: nixpkgs=channel:nixos-unstable
