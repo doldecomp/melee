@@ -74,11 +74,11 @@ void it_80283BEC(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     HeartContainerVars* vars = ip->xC4_article_data->x4_specialAttributes;
 
-    ip->x40_vel.x = 0;
+    ip->x40_vel.x = 0.0F;
     ip->x40_vel.y = vars->xDE8_float;
-    ip->x40_vel.z = 0;
+    ip->x40_vel.z = 0.0F;
     ip->xDD4_itemVar.HeartContainer.xDD4_heal = vars->xDD4_heal;
-    ip->xDD4_itemVar.HeartContainer.xDD8.bits.b0 = 0;
+    ip->xDD4_itemVar.HeartContainer.xDD8.bits.b0 = false;
     ip->xDD4_itemVar.HeartContainer.xDDC = 0;
     it_80283DD4(gobj);
 }

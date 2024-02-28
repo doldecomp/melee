@@ -7,7 +7,7 @@
 #include "it/types.h"
 
 /* 283AE4 */ Item_GObj* it_80283AE4(Item_GObj* gobj, Vec3* pos, s32 arg2);
-/* 283BD4 */ void it_80283BD4(Item_GObj* gobj);
+/* 283BD4 */ void it_80283BD4(Item_GObj*);
 /* 283BEC */ void it_80283BEC(Item_GObj*);
 /* 283C48 */ void it_80283C48(Item_GObj*);
 /* 283F28 */ void it_80283F28(Item_GObj*);
