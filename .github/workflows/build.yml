@@ -107,8 +107,10 @@ jobs:
         docker pull "$image"
         container=$(docker run -d "$image")
 
-        docker exec "$container" echo 'Hello, world'
-        docker exec "$container" which ninja
+        cat <<EOF | docker exec -i "$container" sh
+          echo 'Hello, world'
+          which ninja
+        EOF
 
 
         # docker cp "$container":/orig .
