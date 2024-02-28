@@ -60,6 +60,23 @@ typedef struct BobOmbVars {
 
 typedef struct HeartContainerVars {
     s32 xDD4_heal;
+    union {
+        struct {
+            u8 b0 : 1;
+            u8 b1 : 1;
+            u8 b2 : 1;
+            u8 b3 : 1;
+            u8 b4 : 1;
+            u8 b5 : 1;
+            u8 b6 : 1;
+            u8 b7 : 1;
+        } bits;
+        u32 flags;
+    } xDD8;
+    s32 xDDC;
+    u8 xDE0_filler[8];
+    f32 xDE8_float;
+    f32 xDEC;
 } HeartContainerVars;
 
 typedef struct MaximTomatoVars {

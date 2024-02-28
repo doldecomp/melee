@@ -594,7 +594,7 @@ struct r13_ItemTable {
 };
 
 struct BobOmbRain {
-    enum_t x0;
+    HSD_GObj* x0;
     HSD_JObj* x4;
     Vec3 x8_vec;
     enum_t x14;
