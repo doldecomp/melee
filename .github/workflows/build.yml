@@ -95,7 +95,7 @@ jobs:
       run: ln -s /orig .
     - name: Build
       run: |
-        set -eoux pipefail
+        set -eou pipefail
 
         mode='${{matrix.mode}}'
         config_args='--compilers /compilers --max-errors 0 --verbose --version ${{matrix.version}}'
@@ -123,13 +123,15 @@ jobs:
             test=$(jq -n \
               '[inputs | { code: .dol.code, data: .dol.data }] | { code: (.[0].code >= .[1].code), data: (.[0].data >= .[1].data) }' \
               "$actual" "$expected")
+            status=0
             if [ "$(echo "$test" | jq -r '.code')" != 'true' ]; then
               echo "::error::Code progress went down!"
-              exit 1
-            elif [ "$(echo "$test" | jq -r '.data')" != 'true' ]; then
+              status=1
+            if [ "$(echo "$test" | jq -r '.data')" != 'true' ]; then
               echo "::error::Data progress went down!"
-              exit 1
+              status=1
             fi
+            exit "$status"
           ;;
           'diff')
             ninja all_source
