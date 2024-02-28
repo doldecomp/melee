@@ -109,6 +109,11 @@ jobs:
         case "$mode" in
           'link')
             ninja
+
+            git remote -v
+            git branch -v
+
+            stat 'build/${{matrix.version}}/progress.json'
           ;;
           'diff')
             ninja all_source
