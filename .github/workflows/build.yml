@@ -74,9 +74,7 @@ jobs:
     name: Ninja
     runs-on: ubuntu-latest
     if: github.repository == 'doldecomp/melee'
-    env:
-      REGISTRY: ghcr.io
-      IMAGE: doldecomp/build-melee:main
+    container: ghcr.io/doldecomp/build-melee:main
     strategy:
       fail-fast: false
       matrix:
@@ -93,73 +91,40 @@ jobs:
           config
     - name: Git config
       run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-    - name: Log into container registry
-      uses: docker/login-action@v2
-      with:
-        registry: ${{ env.REGISTRY }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Prepare
+      run: ln -s /orig .
     - name: Build
       run: |
         set +eoux pipefail
 
-        image="$REGISTRY/$IMAGE"
-        docker pull "$image"
-        container=$(docker create "$image")
+        mode='${{matrix.mode}}'
+        config_args='--compilers /compilers --max-errors 0 --verbose --version ${{matrix.version}}'
+        case "$mode" in
+          'link')
+            config_args="--map --require-protos $args"
+          ;;
+        esac
+        echo "$config_args" | xargs python configure.py
 
-        docker start "$container"
+        case "$mode" in
+          'link')
+            ninja
+            mv 'build/${{matrix.version}}/progress.json' \
+               'build/${{matrix.version}}/actual-progress.json'
 
-        # docker exec -i "$container" sh -c <<EOF
-        #   echo 'Hello, world'
-        #   which ninja
-        #   which python
-        # EOF
-        cat <<EOF | docker exec -i "$container" sh
-        echo 'Hello, world'
-        which ninja
-        EOF
-        # docker exec "$container" echo 'Hello, world'
-        # docker exec "$container" which ninja
-        # docker exec "$container" which python
-
-        docker stop "$container"
-
-
-        # docker cp "$container":/orig .
-        # docker run --rm \
-        #   --user "$(id -u):$(id -g)" \
-        #   --volume "$PWD":/input:ro \
-        #   --volume "$OUTPUT:/output" \
-        #   --env MAKE_FLAGS="$MAKE_FLAGS" \
-        #   "$REGISTRY/$IMAGE"
-
-        # mode='${{matrix.mode}}'
-        # config_args='--compilers /compilers --max-errors 0 --verbose --version ${{matrix.version}}'
-        # case "$mode" in
-        #   'link')
-        #     config_args="--map --require-protos $args"
-        #   ;;
-        # esac
-        # echo "$config_args" | xargs python configure.py
-
-        # case "$mode" in
-        #   'link')
-        #     ninja
-        #     mv 'build/${{matrix.version}}/progress.json' \
-        #        'build/${{matrix.version}}/actual-progress.json'
-
-        #     git checkout origin '${{github.event.repository.default_branch}}'
-        #     ninja
-
-        #     jq -n '[inputs | .dol.code] | .[1] >= .[0]' \
-        #       'build/GALE01/actual-progress.json'
-        #       'build/GALE01/progress.json'
-        #   ;;
-        #   'diff')
-        #     ninja all_source
-        #     ninja diff
-        #   ;;
-        # esac
+            git checkout origin '${{github.event.repository.default_branch}}'
+            ninja
+          ;;
+          'diff')
+            ninja all_source
+            ninja diff
+          ;;
+        esac
+    - name: Check progress difference
+      run: |
+        jq -n '[inputs | .dol.code] | .[1] >= .[0]' \
+          'build/GALE01/actual-progress.json'
+          'build/GALE01/progress.json'
     - name: Upload progress
       if: matrix.mode == 'link' && github.ref_name == github.event.repository.default_branch
       continue-on-error: true
@@ -298,8 +263,8 @@ jobs:
       run: |
         image="$REGISTRY/$IMAGE"
         docker pull "$image"
-        container=$(docker create "$image")
-        docker cp "$container":/orig .
+        container_id=$(docker create "$image")
+        docker cp "$container_id":/orig .
     - uses: cachix/install-nix-action@v25
       with:
         nix_path: nixpkgs=channel:nixos-unstable
