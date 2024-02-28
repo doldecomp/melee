@@ -108,19 +108,20 @@ jobs:
 
         case "$mode" in
           'link')
+            expected='build/${{matrix.version}}/progress.json'
+            actual='build/${{matrix.version}}/progress.json'
+
             ninja
-            mv 'build/${{matrix.version}}/progress.json' \
-               'build/${{matrix.version}}/actual-progress.json'
+            mv "$actual" "$expected"
 
             git remote -v
             git branch -v
 
-            git checkout origin '${{github.event.repository.default_branch}}'
+            git checkout 'origin/${{github.event.repository.default_branch}}'
             ninja
 
             jq -n '[inputs | .dol.code] | .[1] >= .[0]' \
-              'build/GALE01/actual-progress.json'
-              'build/GALE01/progress.json'
+              "$expected" "$actual"
           ;;
           'diff')
             ninja all_source
