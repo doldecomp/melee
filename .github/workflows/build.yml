@@ -114,10 +114,8 @@ jobs:
             ninja
             mv "$actual" "$expected"
 
-            git remote -v
-            git branch -v
-
-            git checkout 'origin/${{github.event.repository.default_branch}}'
+            git fetch origin '${{github.event.repository.default_branch}}'
+            git switch '${{github.event.repository.default_branch}}'
             ninja
 
             jq -n '[inputs | .dol.code] | .[1] >= .[0]' \
