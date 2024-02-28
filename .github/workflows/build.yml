@@ -105,8 +105,7 @@ jobs:
 
         image="$REGISTRY/$IMAGE"
         docker pull "$image"
-        container=$(docker create "$image")
-        docker start "$container"
+        container=$(docker run -d "$image")
 
         docker exec "$container" echo 'Hello, world'
         docker exec "$container" which ninja
