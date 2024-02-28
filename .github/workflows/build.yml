@@ -95,7 +95,7 @@ jobs:
       run: ln -s /orig .
     - name: Build
       run: |
-        set +eoux pipefail
+        set -eoux pipefail
 
         mode='${{matrix.mode}}'
         config_args='--compilers /compilers --max-errors 0 --verbose --version ${{matrix.version}}'
