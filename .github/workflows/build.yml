@@ -109,11 +109,15 @@ jobs:
         case "$mode" in
           'link')
             ninja
+            mv 'build/${{matrix.version}}/progress.json' \
+               'build/${{matrix.version}}/actual-progress.json'
 
-            git remote -v
-            git branch -v
+            git checkout '${{github.event.repository.default_branch}}'
+            ninja
 
-            stat 'build/${{matrix.version}}/progress.json'
+            jq -n '[inputs | .dol.code] | .[1] >= .[0]' \
+              'build/GALE01/actual-progress.json'
+              'build/GALE01/progress.json'
           ;;
           'diff')
             ninja all_source
