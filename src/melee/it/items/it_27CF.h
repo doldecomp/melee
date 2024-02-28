@@ -12,7 +12,7 @@
 
 /* 27D670 */ void it_8027D670(Vec3* const);
 /* 27D730 */ void it_8027D730(Item_GObj*);
-/* 283AE4 */ HSD_GObj* it_80283AE4(s32, Vec3*, s32);
+/* 283AE4 */ Item_GObj* it_80283AE4(Item_GObj*, Vec3*, s32);
 /* 283BD4 */ void it_80283BD4(Item_GObj*);
 /* 2841B4 */ HSD_GObj* it_802841B4(s32, Vec3*, s32);
 /* 28428C */ void it_8028428C(Item_GObj*);
