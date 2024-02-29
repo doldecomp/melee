@@ -23,4 +23,8 @@ melee.overrideAttrs (oa: {
     })
     pkgs.clang.cc.python
   ];
+
+  DEVKITPPC = pkgs.devkitppc;
+
+  WINE = "${pkgs.wibo}/bin/wibo";
 })
