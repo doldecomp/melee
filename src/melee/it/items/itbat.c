@@ -107,6 +107,16 @@ bool it_80284A80(Item_GObj* gobj)
     return false;
 }
 
+void it_80284AAC(Item_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    HSD_JObj* child = HSD_JObjGetChild(GET_JOBJ(gobj));
+
+    HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    item->xD50_landNum = 0;
+}
+
 bool it_80284B1C(Item_GObj* gobj)
 {
     return false;
@@ -120,6 +130,26 @@ void it_80284B24(Item_GObj* gobj)
 bool it_80284B28(Item_GObj* gobj)
 {
     return false;
+}
+
+void it_80284B30(Item_GObj* gobj)
+{
+    Item* item = gobj->user_data;
+    HSD_JObj* child = HSD_JObjGetChild(gobj->hsd_obj);
+
+    it_8026B390(gobj);
+    HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
+}
+
+void it_80284BA0(Item_GObj* gobj)
+{
+    Item* item = gobj->user_data;
+    HSD_JObj* child = HSD_JObjGetChild(gobj->hsd_obj);
+
+    it_8026B390(gobj);
+    HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
 }
 
 void it_80284C10(Item_GObj* gobj)
