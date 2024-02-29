@@ -288,15 +288,14 @@ void JObjSortAnim(HSD_AObj* aobj)
     if (aobj == NULL || aobj->fobj == NULL) {
         return;
     }
-    fobj_ptr = &aobj->fobj;
-    while ((fobj = *fobj_ptr) != NULL) {
+    for (fobj_ptr = &aobj->fobj; *fobj_ptr != NULL; fobj_ptr = &fobj->next) {
+        fobj = *fobj_ptr;
         if (fobj->obj_type == TYPE_JOBJ) {
             *fobj_ptr = fobj->next;
             fobj->next = aobj->fobj;
             aobj->fobj = fobj;
             break;
         }
-        fobj_ptr = &fobj->next;
     }
 }
 
