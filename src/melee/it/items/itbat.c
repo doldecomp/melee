@@ -33,7 +33,7 @@ Item_GObj* it_80284854(Vec3* pos)
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
     spawn.x44_flag.bits.b0 = true;
     spawn.x40 = 0;
-    item_gobj = Item_80268B18(&spawn);
+    item_gobj = Item_80268B5C(&spawn);
 
     if (item_gobj != NULL) {
         it_80284974(item_gobj);
