@@ -33,6 +33,8 @@ typedef struct HSD_FogDesc HSD_FogDesc;
 typedef struct HSD_FogInfo HSD_FogInfo;
 typedef struct HSD_GObj HSD_GObj;
 typedef struct HSD_GObjProc HSD_GObjProc;
+typedef struct HSD_Hash HSD_Hash;
+typedef struct HSD_HashEntry HSD_HashEntry;
 typedef struct HSD_IKHint HSD_IKHint;
 typedef struct HSD_IKHintDesc HSD_IKHintDesc;
 typedef struct HSD_ImageDesc HSD_ImageDesc;
