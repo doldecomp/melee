@@ -9,6 +9,14 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
+ItemStateTable it_803F57B0[] = {
+    { -1, it_802849B8, it_802849C0, it_802849C4 },
+    { -1, it_80284A2C, it_80284A34, it_80284A80 },
+    { -1, it_80284B1C, it_80284B24, it_80284B28 },
+    { 0, it_80284A2C, it_80284A34, it_80284A80 },
+    { -1, it_80284C38, it_80284C40, it_80284C44 },
+};
+
 Item_GObj* it_80284854(Vec3* pos)
 {
     SpawnItem spawn;
@@ -83,4 +91,12 @@ void it_802849F0(Item_GObj* gobj)
 bool it_80284A2C(Item_GObj* gobj)
 {
     return false;
+}
+
+void it_80284A34(Item_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    ItemAttr* attr = item->xCC_item_attr;
+    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
+    it_80274658(gobj, it_804D6D28->x68_float);
 }
