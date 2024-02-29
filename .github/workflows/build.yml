@@ -148,8 +148,26 @@ jobs:
             exit "$status"
           ;;
           'diff')
+            expected='build/${{matrix.version}}/expected-report.json'
+            actual='build/${{matrix.version}}/actual-report.json'
+
             ninja all_source
-            objdiff-cli report
+            objdiff-cli report generate -o "$actual"
+
+            case '${{github.event_name}}' in
+              'pull_request')
+                git fetch origin HEAD
+                git checkout FETCH_HEAD
+              ;;
+              'push')
+                git checkout 'HEAD^'
+              ;;
+              *) exit 1 ;;
+            esac
+            ninja all_source
+            objdiff-cli report generate -o "$expected"
+
+            objdiff-cli report changes "$expected" "$actual"
           ;;
           *) exit 1 ;;
         esac
