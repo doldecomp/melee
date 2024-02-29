@@ -174,7 +174,10 @@ jobs:
               "$changes")"
             status="$(echo "$results" | jq -r 'if any(.from == 100 and .to < .from) then 1 else 0 end')"
 
-            echo "$results"
+            if [ "$status" -ne 0 ]; then
+              echo "::error::One or more functions were broken!"
+              echo "$results"
+            fi
             exit "$status"
 
           ;;
