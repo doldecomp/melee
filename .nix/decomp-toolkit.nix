@@ -13,7 +13,7 @@ rustPlatform.buildRustPackage rec {
     owner = "encounter";
     repo = "decomp-toolkit";
     rev = "v${version}";
-    hash = "sha256-cpHaoxRr/Lyx6tpyUx7Sm+9h0BicrO+jVJA09BBgKJ4=";
+    hash = "sha256-cpHaoxRr000000000x7Sm+9h0BicrO+jVJA09BBgKJ4=";
   };
 
   nativeBuildInputs = [
