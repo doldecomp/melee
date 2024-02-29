@@ -97,7 +97,7 @@ jobs:
       run: ln -s /orig .
     - name: Build
       run: |
-        set -eou pipefail
+        set -eoux pipefail
         export RUST_LOG=error
 
         mode='${{matrix.mode}}'
