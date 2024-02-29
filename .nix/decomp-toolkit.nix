@@ -7,7 +7,7 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "decomp-toolkit";
-  version = "0.7.3";
+  version = "0.7.4";
 
   src = fetchFromGitHub {
     owner = "encounter";
