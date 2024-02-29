@@ -14,6 +14,7 @@ bool it_802849B8(Item_GObj*);
 void it_802849C0(Item_GObj*);
 bool it_802849C4(Item_GObj*);
 void it_802849F0(Item_GObj*);
+bool it_80284A2C(Item_GObj*);
 void it_80284AAC(Item_GObj*);
 void it_80284B30(Item_GObj*);
 void it_80284BA0(Item_GObj*);

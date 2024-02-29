@@ -59,7 +59,7 @@ void it_80284974(Item_GObj* gobj)
 
 bool it_802849B8(Item_GObj* gobj)
 {
-    return 0;
+    return false;
 }
 
 void it_802849C0(Item_GObj* gobj)
@@ -70,7 +70,7 @@ void it_802849C0(Item_GObj* gobj)
 bool it_802849C4(Item_GObj* gobj)
 {
     it_8026D62C(gobj, it_802849F0);
-    return 0;
+    return false;
 }
 
 void it_802849F0(Item_GObj* gobj)
@@ -78,4 +78,9 @@ void it_802849F0(Item_GObj* gobj)
     Item* item = GET_ITEM(gobj);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     item->xD50_landNum = 0;
+}
+
+bool it_80284A2C(Item_GObj* gobj)
+{
+    return false;
 }
