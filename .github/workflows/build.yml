@@ -98,6 +98,7 @@ jobs:
     - name: Build
       run: |
         set -eou pipefail
+        export RUST_LOG=error
 
         mode='${{matrix.mode}}'
         config_args='--compilers /compilers --max-errors 0 --verbose --version ${{matrix.version}}'
@@ -112,8 +113,7 @@ jobs:
 
         case "$mode" in
           'link')
-            ninja
-            ninja diff
+            ninja || ninja diff
           ;;
           'diff')
             root='build/${{matrix.version}}'
@@ -138,9 +138,15 @@ jobs:
             objdiff-cli report generate -o "$expected"
 
             objdiff-cli report changes -o "$changes" "$expected" "$actual"
-            results="$(jq '[ .units[].functions[] | {name, from: (.from.fuzzy_match_percent), to: (.to.fuzzy_match_percent)}]' \
+            results="$(jq '
+              .units[]
+              | select(.functions[]
+                | { from: .from.fuzzy_match_percent,
+                    to: .to.fuzzy_match_percent }
+                | .from == 100 and .to < .from)
+              | { (.name): ([.functions[] | .name]) }' \
               "$changes")"
-            status="$(echo "$results" | jq -r 'if any(.from == 100 and .to < .from) then 1 else 0 end')"
+            status="$(echo "$results" | jq -s 'if . == [] then 0 else 1 end')"
 
             if [ "$status" -ne 0 ]; then
               echo "::error::One or more functions were broken!"
