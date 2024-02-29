@@ -16,7 +16,6 @@
 /* 283BD4 */ void it_80283BD4(Item_GObj*);
 /* 2841B4 */ HSD_GObj* it_802841B4(HSD_GObj*, Vec3*, s32);
 /* 28428C */ void it_8028428C(Item_GObj*);
-/* 284854 */ HSD_GObj* it_80284854(Vec3*);
 /* 286088 */ HSD_GObj* it_80286088(HSD_GObj*);
 /* 2896CC */ HSD_GObj* it_802896CC(Vec3*);
 /* 28FAF4 */ void it_8028FAF4(Item_GObj*, Vec3*);

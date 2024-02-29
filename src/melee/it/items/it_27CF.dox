@@ -16,7 +16,6 @@
 void it_8027D730(Item_GObj*);
 HSD_GObj* it_80283AE4(s32, Vec3*, s32);
 HSD_GObj* it_802841B4(s32, Vec3*, s32);
-HSD_GObj* it_80284854(Vec3*);
 HSD_GObj* it_802896CC(Vec3*);
 void it_8028FE90(Item_GObj*);
 
