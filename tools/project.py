@@ -12,13 +12,13 @@
 
 import io
 import json
+import math
 import os
 import platform
 import sys
-import math
-
-from typing import Optional, Union, Tuple, Dict, List, Set, Any
 from pathlib import Path
+from typing import Any, Dict, List, Optional, Set, Tuple, Union
+
 from . import ninja_syntax
 
 if sys.platform == "cygwin":
@@ -204,6 +204,7 @@ def generate_build_ninja(
     n.comment("Tooling")
 
     build_path = config.out_path()
+    progress_path = build_path / "progress.json"
     build_tools_path = config.build_dir / "tools"
     download_tool = config.tools_dir / "download_tool.py"
     n.rule(
@@ -417,8 +418,8 @@ def generate_build_ninja(
             self.entry = config["entry"]
             self.inputs: List[str] = []
 
-        def add(self, obj: str) -> None:
-            self.inputs.append(obj)
+        def add(self, obj: os.PathLike) -> None:
+            self.inputs.append(str(obj))
 
         def output(self) -> Path:
             if self.module_id == 0:
@@ -460,7 +461,7 @@ def generate_build_ninja(
             else:
                 preplf_path = build_path / self.name / f"{self.name}.preplf"
                 plf_path = build_path / self.name / f"{self.name}.plf"
-                preplf_ldflags = f"$ldflags -sdata 0 -sdata2 0 -r"
+                preplf_ldflags = "$ldflags -sdata 0 -sdata2 0 -r"
                 plf_ldflags = f"$ldflags -sdata 0 -sdata2 0 -r1 -lcf {self.ldscript}"
                 if self.entry:
                     plf_ldflags += f" -m {self.entry}"
@@ -646,7 +647,7 @@ def generate_build_ninja(
             rels_to_generate = list(
                 filter(
                     lambda step: step.module_id != 0
-                    and not step.name in generated_rels,
+                    and step.name not in generated_rels,
                     link_steps_local,
                 )
             )
@@ -714,7 +715,6 @@ def generate_build_ninja(
         # Calculate progress
         ###
         n.comment("Calculate progress")
-        progress_path = build_path / "progress.json"
         n.rule(
             name="progress",
             command=f"$python {configure_script} $configure_args progress",
