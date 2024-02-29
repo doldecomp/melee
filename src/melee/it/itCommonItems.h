@@ -48,6 +48,13 @@ struct itSword_ItemVars {
     /* ip+E2C */ float x58;
 };
 
+typedef struct itBatAttributes {
+    int x0;
+    int x4;
+    int x8;
+    f32 xC_vel;
+} itBatAttributes;
+
 typedef struct BobOmbVars {
     s32 xDD4;
     s32 xDD8;
