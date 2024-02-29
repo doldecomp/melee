@@ -10,8 +10,9 @@
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/it_27CF.h"
+#include "it/items/itbat.h"
+#include "it/items/itsword.h"
 #include "it/types.h"
-#include "items/itsword.h"
 
 #include <common_structs.h>
 #include <placeholder.h>
