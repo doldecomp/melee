@@ -56,3 +56,13 @@ void it_80284974(Item_GObj* gobj)
 
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
+
+bool it_802849B8(Item_GObj* gobj)
+{
+    return 0;
+}
+
+void it_802849C0(Item_GObj* gobj)
+{
+    return;
+}
