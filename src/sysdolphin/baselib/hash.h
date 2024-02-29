@@ -2,10 +2,39 @@
 #define _hash_h_
 
 #include <platform.h>
+#include "baselib/forward.h"
 
 #include "baselib/class.h"
 
 #define hash(s) (s % 0x65)
-HSD_ClassInfo* HSD_HashSearch(u32, const char* class_name, int);
+
+struct HSD_HashEntry {
+    HSD_HashEntry* next;
+    void* key;
+    void* value;
+};
+
+typedef struct _HSD_HashClass {
+    struct _HSD_HashClassInfo* class_info;
+} HSD_HashClass;
+
+typedef struct _HSD_HashClassInfo {
+    struct _HSD_ClassInfoHead head;
+    HSD_Class* (*alloc)(struct _HSD_ClassInfo* c);
+    int (*init)(struct _HSD_Class* c);
+    void (*release)(struct _HSD_Class* c);
+    void (*destroy)(struct _HSD_Class* c);
+    void (*amnesia)(struct _HSD_ClassInfo* c);
+    int (*getidx)(HSD_Hash* hash);
+} HSD_HashClassInfo;
+
+struct HSD_Hash {
+    HSD_HashClass parent;
+    HSD_HashEntry** table;
+    u32 table_size;
+};
+
+HSD_HashEntry* HashSearchEntry(HSD_Hash*, int, void*, HSD_HashEntry**);
+HSD_ClassInfo* HSD_HashSearch(HSD_Hash*, void*, int*);
 
 #endif
