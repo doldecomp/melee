@@ -72,3 +72,10 @@ bool it_802849C4(Item_GObj* gobj)
     it_8026D62C(gobj, it_802849F0);
     return 0;
 }
+
+void it_802849F0(Item_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    item->xD50_landNum = 0;
+}
