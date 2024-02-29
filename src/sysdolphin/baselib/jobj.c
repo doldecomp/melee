@@ -861,19 +861,19 @@ void HSD_JObjAddChild(HSD_JObj* jobj, HSD_JObj* child)
     }
     if (child->parent != NULL) {
         OSReport("child should be a orphan.\n");
-        __assert(__FILE__, 0x546, "child->parent == NULL");
+        __assert(__FILE__, 1350, "child->parent == NULL");
     }
     if (child->next != NULL) {
         OSReport("child should not have siblings");
-        __assert(__FILE__, 0x547, "child->next == NULL");
+        __assert(__FILE__, 1351, "child->next == NULL");
     }
     if (jobj->child == NULL) {
         jobj->child = child;
     } else {
-        HSD_ASSERT(0x54D, !(jobj->flags & JOBJ_INSTANCE));
+        HSD_ASSERT(1357, !(jobj->flags & JOBJ_INSTANCE));
         last = jobj->child;
         while (last->next != NULL) {
-            HSD_ASSERT(0x550, last != child);
+            HSD_ASSERT(1360, last != child);
             last = last->next;
         }
         last->next = child;
@@ -954,7 +954,7 @@ HSD_JObj* HSD_JObjGetPrev(HSD_JObj* jobj)
         }
         cur = cur->next;
     }
-    HSD_Panic(__FILE__, 0x5EC,
+    HSD_Panic(__FILE__, 1516,
               "can not find specified jobj. maybe jobj tree is broken.\n");
     return NULL;
 }
@@ -1120,7 +1120,7 @@ inline HSD_JObj* jobj_get_effector(HSD_JObj* jobj)
 HSD_JObj* jobj_get_effector_checked(HSD_JObj* eff)
 {
     eff = jobj_get_effector(eff);
-    HSD_ASSERT(0x824, eff);
+    HSD_ASSERT(2084, eff);
     if (HSD_RObjGetByType(eff->robj, REFTYPE_JOBJ, 1) != NULL) {
         return eff;
     } else {
