@@ -100,3 +100,9 @@ void it_80284A34(Item_GObj* gobj)
     it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
     it_80274658(gobj, it_804D6D28->x68_float);
 }
+
+bool it_80284A80(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_80284974);
+    return false;
+}
