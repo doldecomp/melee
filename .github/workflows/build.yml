@@ -98,6 +98,7 @@ jobs:
     - name: Build
       run: |
         set -eou pipefail
+        export RUST_LOG=error
 
         mode='${{matrix.mode}}'
         config_args='--compilers /compilers --max-errors 0 --verbose --version ${{matrix.version}}'
@@ -112,13 +113,16 @@ jobs:
 
         case "$mode" in
           'link')
-            src='build/${{matrix.version}}/progress.json'
-            expected='build/${{matrix.version}}/expected-progress.json'
-            actual='build/${{matrix.version}}/actual-progress.json'
+            ninja || ninja diff
+          ;;
+          'diff')
+            root='build/${{matrix.version}}'
+            expected="$root/expected-report.json"
+            actual="$root/actual-report.json"
+            changes="$root/changes-report.json"
 
-            ninja
-            cp "$src" "$actual"
-            ninja diff
+            ninja all_source
+            objdiff-cli report generate -o "$actual"
 
             case '${{github.event_name}}' in
               'pull_request')
@@ -130,25 +134,25 @@ jobs:
               ;;
               *) exit 1 ;;
             esac
-            ninja
-            cp "$src" "$expected"
+            ninja all_source
+            objdiff-cli report generate -o "$expected"
 
-            test=$(jq -n \
-              '[inputs | { code: .dol.code, data: .dol.data }] | { code: (.[0].code >= .[1].code), data: (.[0].data >= .[1].data) }' \
-              "$actual" "$expected")
-            status=0
-            if [ "$(echo "$test" | jq -r '.code')" != 'true' ]; then
-              echo "::error::Code progress went down!"
-              status=1
-            fi
-            if [ "$(echo "$test" | jq -r '.data')" != 'true' ]; then
-              echo "::error::Data progress went down!"
-              status=1
+            objdiff-cli report changes -o "$changes" "$expected" "$actual"
+            results="$(jq '
+              .units[]
+              | select(.functions[]
+                | { from: .from.fuzzy_match_percent,
+                    to: .to.fuzzy_match_percent }
+                | .from == 100 and .to < .from)
+              | { (.name): ([.functions[] | .name]) }' \
+              "$changes")"
+            status="$(echo "$results" | jq -s 'if . == [] then 0 else 1 end')"
+
+            if [ "$status" -ne 0 ]; then
+              echo "::error::One or more functions were broken!"
+              echo "$results"
             fi
             exit "$status"
-          ;;
-          'diff')
-            ninja all_source
           ;;
           *) exit 1 ;;
         esac
