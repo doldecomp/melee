@@ -464,7 +464,7 @@ void hsdForgetClassLibrary(const char* library_name)
 HSD_ClassInfo* hsdSearchClassInfo(const char* class_name)
 {
     if (current_hash != NULL) {
-        return HSD_HashSearch(current_hash, class_name, 0);
+        return HSD_HashSearch(current_hash, (void*) class_name, 0);
     }
     return NULL;
 }
