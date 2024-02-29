@@ -106,3 +106,8 @@ bool it_80284A80(Item_GObj* gobj)
     it_8026E15C(gobj, it_80284974);
     return false;
 }
+
+void it_80284D34(Item_GObj* gobj, HSD_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
