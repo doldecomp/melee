@@ -2,14 +2,14 @@
 
 #include "debug.h"
 
-HSD_ClassInfo* HSD_HashSearch(HSD_Hash* hash, void* key, int* success)
+HSD_ClassInfo* HSD_HashSearch(HSD_Hash* hashp, void* key, int* success)
 {
     HSD_HashEntry* entry;
-    int idx;
+    u32 idx;
 
-    idx = hash->parent.class_info->getidx(hash);
-    HSD_ASSERT(113, idx < hash->table_size);
-    entry = HashSearchEntry(hash, idx, key, NULL);
+    idx = hashp->parent.class_info->getidx(hashp);
+    HSD_ASSERT(113, idx < hashp->table_size);
+    entry = HashSearchEntry(hashp, idx, key, NULL);
     if (success != NULL) {
         *success = !!entry;
     }
