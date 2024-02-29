@@ -66,3 +66,9 @@ void it_802849C0(Item_GObj* gobj)
 {
     return;
 }
+
+bool it_802849C4(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_802849F0);
+    return 0;
+}
