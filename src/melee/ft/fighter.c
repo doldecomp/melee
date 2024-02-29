@@ -2825,7 +2825,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(Fighter_GObj* gobj)
             }
         }
 
-        if (fp->dmg.x189C_unk_num_frames > 2.0f) {
+        if (fp->dmg.x189C_unk_num_frames > 0.0f) {
             fp->dmg.x189C_unk_num_frames--;
             if (fp->dmg.x189C_unk_num_frames <= 0.0f && !fp->dmg.kb_applied) {
                 fp->dmg.x189C_unk_num_frames = 0.0f;
