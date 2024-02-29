@@ -70,9 +70,21 @@ extern HSD_ClassInfo hsdObj;
 
 void ObjInfoInit(void);
 
-static inline int iref_CNT(void* o)
+static inline bool ref_DEC(void* o)
 {
-    return HSD_OBJ(o)->ref_count_individual;
+    bool ret = (u64) (HSD_OBJ(o)->ref_count == HSD_OBJ_NOREF);
+    if (ret) {
+        return ret;
+    }
+    return HSD_OBJ(o)->ref_count-- == 0;
+}
+
+static inline void ref_INC(void* o)
+{
+    if (o != NULL) {
+        HSD_OBJ(o)->ref_count++;
+        HSD_ASSERT(93, HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF);
+    }
 }
 
 static inline int ref_CNT(void* o)
@@ -84,13 +96,9 @@ static inline int ref_CNT(void* o)
     }
 }
 
-static inline bool ref_DEC(void* o)
+static inline int iref_CNT(void* o)
 {
-    bool ret = (u64) (HSD_OBJ(o)->ref_count == HSD_OBJ_NOREF);
-    if (ret) {
-        return ret;
-    }
-    return HSD_OBJ(o)->ref_count-- == 0;
+    return HSD_OBJ(o)->ref_count_individual;
 }
 
 static inline bool iref_DEC(void* o)
@@ -101,14 +109,6 @@ static inline bool iref_DEC(void* o)
     }
     HSD_OBJ(o)->ref_count_individual -= 1;
     return HSD_OBJ(o)->ref_count_individual == 0;
-}
-
-static inline void ref_INC(void* o)
-{
-    if (o != NULL) {
-        HSD_OBJ(o)->ref_count++;
-        HSD_ASSERT(93, HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF);
-    }
 }
 
 static inline void iref_INC(void* o)
