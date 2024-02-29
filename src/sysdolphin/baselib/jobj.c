@@ -333,28 +333,27 @@ void HSD_JObjAddAnim(HSD_JObj* jobj, HSD_AnimJoint* an_joint,
     }
 }
 
-/// @todo This should match once #HSD_JObjAddAnim matches.
-void HSD_JObjAddAnimAll(HSD_JObj* jobj, HSD_AnimJoint* arg1,
-                        HSD_MatAnimJoint* arg2, HSD_ShapeAnimJoint* arg3)
+void HSD_JObjAddAnimAll(HSD_JObj* jobj, HSD_AnimJoint* ajoint,
+                        HSD_MatAnimJoint* mjoint, HSD_ShapeAnimJoint* sjoint)
 {
-    HSD_JObj* var_r31;
-    HSD_AnimJoint* var_r26;
-    HSD_MatAnimJoint* var_r25;
-    HSD_ShapeAnimJoint* var_r24;
+    HSD_JObj* jp;
+    HSD_AnimJoint* aj;
+    HSD_MatAnimJoint* mj;
+    HSD_ShapeAnimJoint* sj;
 
     if (jobj != NULL) {
-        HSD_JObjAddAnim(jobj, arg1, arg2, arg3);
+        HSD_JObjAddAnim(jobj, ajoint, mjoint, sjoint);
         if (!(jobj->flags & JOBJ_INSTANCE)) {
-            var_r31 = jobj->child;
-            var_r26 = arg1 != NULL ? arg1->child : NULL;
-            var_r25 = arg2 != NULL ? arg2->child : NULL;
-            var_r24 = arg3 != NULL ? arg3->child : NULL;
-            while (var_r31 != NULL) {
-                HSD_JObjAddAnimAll(var_r31, var_r26, var_r25, var_r24);
-                var_r31 = var_r31->next;
-                var_r26 = var_r26 != NULL ? var_r26->next : NULL;
-                var_r25 = var_r25 != NULL ? var_r25->next : NULL;
-                var_r24 = var_r24 != NULL ? var_r24->next : NULL;
+            jp = jobj->child;
+            aj = ajoint != NULL ? ajoint->child : NULL;
+            mj = mjoint != NULL ? mjoint->child : NULL;
+            sj = sjoint != NULL ? sjoint->child : NULL;
+            while (jp != NULL) {
+                HSD_JObjAddAnimAll(jp, aj, mj, sj);
+                jp = jp->next;
+                aj = aj != NULL ? aj->next : NULL;
+                mj = mj != NULL ? mj->next : NULL;
+                sj = sj != NULL ? sj->next : NULL;
             }
         }
     }
