@@ -447,7 +447,7 @@ void HSD_RObjResolveRefs(HSD_RObj* robj, HSD_RObjDesc* desc)
             HSD_JObjUnrefThis(robj->u.jobj);
             robj->u.jobj = HSD_IDGetData((u32) desc->u.joint, NULL);
             HSD_ASSERT(883, robj->u.jobj);
-            iref_INC(robj->u.jobj);
+            HSD_JObjRefThis(robj->u.jobj);
             break;
         case 0x0:
             HSD_RvalueResolveRefsAll(robj->u.exp.rvalue, desc->u.exp->rvalue);
@@ -645,7 +645,7 @@ void HSD_RvalueResolveRefs(HSD_Rvalue* rvalue, HSD_RvalueList* list)
         HSD_JObjUnrefThis(rvalue->jobj);
         rvalue->jobj = HSD_IDGetData((u32) list->joint, NULL);
         HSD_ASSERT(1333, rvalue->jobj);
-        iref_INC(rvalue->jobj);
+        HSD_JObjRefThis(rvalue->jobj);
     }
 }
 
@@ -661,25 +661,10 @@ void HSD_RvalueResolveRefsAll(HSD_Rvalue* rvalue, HSD_RvalueList* list)
     }
 }
 
-static inline void ref_JObj(HSD_RObj* robj, void* o)
+void HSD_RObjSetConstraintObj(HSD_RObj* robj, void* o)
 {
     bool isDesc;
-
-    if (isDesc = hsdObjIsDescendantOf(&((HSD_JObj*) o)->object,
-                                      &hsdJObj.parent.parent),
-        isDesc != 0)
-    {
-        robj->u.jobj = o;
-        iref_INC(o);
-    } else {
-        OSReport("constraint only support jobj target.\n");
-        HSD_ASSERT(1376, 0);
-    }
-}
-
-void HSD_RObjSetConstraintObj(HSD_RObj* robj, void* obj)
-{
-    bool isDesc;
+    HSD_JObj* jobj = o;
 
     if (robj != NULL) {
         if (robj->u.jobj != NULL) {
@@ -687,7 +672,16 @@ void HSD_RObjSetConstraintObj(HSD_RObj* robj, void* obj)
             robj->u.jobj = NULL;
         }
 
-        ref_JObj(robj, obj);
+        if (isDesc = hsdObjIsDescendantOf(&((HSD_JObj*) o)->object,
+                                          &hsdJObj.parent.parent),
+            isDesc != 0)
+        {
+            robj->u.jobj = o;
+            HSD_JObjRefThis(o);
+        } else {
+            OSReport("constraint only support jobj target.\n");
+            HSD_ASSERT(1376, 0);
+        }
     }
 }
 

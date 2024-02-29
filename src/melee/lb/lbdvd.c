@@ -295,10 +295,10 @@ void lbDvd_80017CC4(void)
     }
 }
 
-void lbDvd_80017E64(int arg1, int index, int arg3, int arg4)
+void lbDvd_80017E64(void* key, int index, void* value, bool cancelflag)
 {
     PreloadEntry* preloadEntry = &preloadCache.entries[index];
-    if (arg4 != 0) {
+    if (cancelflag != 0) {
         __assert(__FILE__, 827, "0");
     } else {
         preloadEntry->state = 3;

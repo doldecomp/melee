@@ -18,7 +18,7 @@ typedef void (*lbDvd_Callback)(int, int index, int, int);
 /* 0178E8 */ void lbDvd_800178E8(s32, char*, s32, s32, s32, s32, s32, s32,
                                  s32);
 /* 017A80 */ UNK_RET lbDvd_80017A80(UNK_PARAMS);
-/* 017E64 */ void lbDvd_80017E64(int, int index, int, int);
+/* 017E64 */ void lbDvd_80017E64(void*, int, void*, bool);
 /* 01819C */ HSD_Archive* lbDvd_8001819C(const char* basename);
 /* 018254 */ void lbDvd_80018254(void);
 /* 018C6C */ void lbDvd_80018C6C(void);
