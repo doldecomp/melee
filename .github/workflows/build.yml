@@ -148,8 +148,10 @@ jobs:
             exit "$status"
           ;;
           'diff')
-            expected='build/${{matrix.version}}/expected-report.json'
-            actual='build/${{matrix.version}}/actual-report.json'
+            root='build/${{matrix.version}}'
+            expected="$root/expected-report.json"
+            actual="$root/actual-report.json"
+            changes="$root/changes-report.json"
 
             ninja all_source
             objdiff-cli report generate -o "$actual"
@@ -167,7 +169,14 @@ jobs:
             ninja all_source
             objdiff-cli report generate -o "$expected"
 
-            objdiff-cli report changes "$expected" "$actual"
+            objdiff-cli report changes -o "$changes" "$expected" "$actual"
+            results="$(jq '[ .units[].functions[] | {name, from: (.from.fuzzy_match_percent), to: (.to.fuzzy_match_percent)}]' \
+              "$changes")"
+            status="$(echo "$results" | jq -r 'if any(.from == 100 and .to < .from) then 1 else 0 end')"
+
+            echo "$results"
+            exit "$status"
+
           ;;
           *) exit 1 ;;
         esac
