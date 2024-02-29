@@ -73,7 +73,7 @@ void ObjInfoInit(void);
 static inline bool ref_DEC(void* o)
 {
     bool ret;
-    if (ret = (HSD_OBJ(o)->ref_count == HSD_OBJ_NOREF)) {
+    if ((ret = (HSD_OBJ(o)->ref_count == HSD_OBJ_NOREF))) {
         return ret;
     }
     return HSD_OBJ(o)->ref_count-- == 0;
@@ -104,7 +104,7 @@ static inline int iref_CNT(void* o)
 static inline bool iref_DEC(void* o)
 {
     bool ret;
-    if (ret = (HSD_OBJ(o)->ref_count_individual == 0)) {
+    if ((ret = (HSD_OBJ(o)->ref_count_individual == 0))) {
         return ret;
     }
     HSD_OBJ(o)->ref_count_individual -= 1;
