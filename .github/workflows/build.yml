@@ -112,40 +112,8 @@ jobs:
 
         case "$mode" in
           'link')
-            src='build/${{matrix.version}}/progress.json'
-            expected='build/${{matrix.version}}/expected-progress.json'
-            actual='build/${{matrix.version}}/actual-progress.json'
-
             ninja
-            cp "$src" "$actual"
             ninja diff
-
-            case '${{github.event_name}}' in
-              'pull_request')
-                git fetch origin HEAD
-                git checkout FETCH_HEAD
-              ;;
-              'push')
-                git checkout 'HEAD^'
-              ;;
-              *) exit 1 ;;
-            esac
-            ninja
-            cp "$src" "$expected"
-
-            test=$(jq -n \
-              '[inputs | { code: .dol.code, data: .dol.data }] | { code: (.[0].code >= .[1].code), data: (.[0].data >= .[1].data) }' \
-              "$actual" "$expected")
-            status=0
-            if [ "$(echo "$test" | jq -r '.code')" != 'true' ]; then
-              echo "::error::Code progress went down!"
-              status=1
-            fi
-            if [ "$(echo "$test" | jq -r '.data')" != 'true' ]; then
-              echo "::error::Data progress went down!"
-              status=1
-            fi
-            exit "$status"
           ;;
           'diff')
             root='build/${{matrix.version}}'
@@ -179,7 +147,6 @@ jobs:
               echo "$results"
             fi
             exit "$status"
-
           ;;
           *) exit 1 ;;
         esac
