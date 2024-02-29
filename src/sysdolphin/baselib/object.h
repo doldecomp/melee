@@ -107,18 +107,14 @@ static inline void ref_INC(void* o)
 {
     if (o != NULL) {
         HSD_OBJ(o)->ref_count++;
-        if (!(HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF)) {
-            __assert("object.h", 93, "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF");
-        }
+        HSD_ASSERT(93, HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF);
     }
 }
 
 static inline void iref_INC(void* o)
 {
-    if (o != NULL) {
-        HSD_OBJ(o)->ref_count_individual++;
-        HSD_ASSERT(158, HSD_OBJ(o)->ref_count_individual != 0);
-    }
+    HSD_OBJ(o)->ref_count_individual++;
+    HSD_ASSERT(158, HSD_OBJ(o)->ref_count_individual != 0);
 }
 
 #endif

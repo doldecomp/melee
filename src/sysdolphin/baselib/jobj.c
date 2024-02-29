@@ -302,10 +302,6 @@ void JObjSortAnim(HSD_AObj* aobj)
 void HSD_JObjAddAnim(HSD_JObj* jobj, HSD_AnimJoint* an_joint,
                      HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint)
 {
-    u8 _[4];
-
-    bool has_dobj;
-
     if (jobj != NULL) {
         if (an_joint != NULL) {
             if (jobj->aobj != NULL) {
@@ -320,12 +316,7 @@ void HSD_JObjAddAnim(HSD_JObj* jobj, HSD_AnimJoint* an_joint,
                 HSD_JObjClearFlags(jobj, JOBJ_CLASSICAL_SCALE);
             }
         }
-        if (jobj->flags & (JOBJ_PTCL | JOBJ_SPLINE)) {
-            has_dobj = false;
-        } else {
-            has_dobj = true;
-        }
-        if (has_dobj) {
+        if (union_type_dobj(jobj)) {
             HSD_DObjAddAnimAll(
                 jobj->u.dobj, mat_joint != NULL ? mat_joint->matanim : NULL,
                 sh_joint != NULL ? sh_joint->shapeanimdobj : NULL);
@@ -638,7 +629,7 @@ inline HSD_JObj* JObjLoadJointSub(HSD_Joint* joint, HSD_JObj* parent)
         jobj = HSD_JObjAlloc();
     } else {
         jobj = hsdNew(info);
-        HSD_ASSERT(0x3CC, jobj);
+        HSD_ASSERT(972, jobj);
     }
     HSD_JOBJ_METHOD(jobj)->load(jobj, joint, parent);
     return jobj;
@@ -697,24 +688,6 @@ static char unused2[] = "jobj_root == NULL";
 #pragma pop
 #endif
 
-static char jobj_child[] = "jobj->child";
-
-/// @todo Remove once no more inline asm needs this "object.h" literal
-char HSD_JObj_804068E4[] = "object.h";
-
-#define ref_INC ref_INC_alt
-
-static inline void ref_INC_alt(void* o)
-{
-    if (o != NULL) {
-        HSD_OBJ(o)->ref_count++;
-        if (!(HSD_OBJ(o)->ref_count != (u16) -1)) {
-            __assert(HSD_JObj_804068E4, 0x5D,
-                     "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF");
-        }
-    }
-}
-
 void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
 {
     u8 _[4];
@@ -727,10 +700,8 @@ void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
     if (!!(jobj->flags & JOBJ_INSTANCE)) {
         HSD_JObjUnref(jobj->child);
         jobj->child = HSD_IDGetDataFromTable(NULL, (u32) joint->child, NULL);
-        if (jobj->child == NULL) {
-            __assert(__FILE__, 0x454, jobj_child);
-        }
-        ref_INC(jobj->child);
+        HSD_ASSERT(1108, jobj->child);
+        HSD_JObjRef(jobj->child);
     }
     if (union_type_dobj(jobj)) {
         HSD_DObjResolveRefsAll(jobj->u.dobj, joint->u.dobjdesc);
@@ -749,16 +720,6 @@ void HSD_JObjResolveRefsAll(HSD_JObj* jobj, HSD_Joint* joint)
         jobj = jobj->next;
         joint = joint->next;
     }
-}
-
-char HSD_JObj_80406918[] = "HSD_OBJ(o)->ref_count_individual != 0";
-
-static inline void jobj_iref_INC(void* o)
-{
-    HSD_OBJ(o)->ref_count_individual += 1;
-    HSD_OBJ(o)->ref_count_individual != 0
-        ? (void) 0
-        : __assert(HSD_JObj_804068E4, 0x9E, HSD_JObj_80406918);
 }
 
 static inline bool iref_none(void* o)
@@ -785,7 +746,7 @@ void HSD_JObjUnref(HSD_JObj* jobj)
         if (iref_CNT(jobj) - 1 < 0) {
             hsdDelete(jobj);
         } else {
-            jobj_iref_INC(jobj);
+            iref_INC(jobj);
             HSD_JOBJ_METHOD(jobj)->release_child(jobj);
             if (iref_DEC(jobj)) {
                 hsdDelete(jobj);
@@ -814,7 +775,7 @@ HSD_JObj* HSD_JObjRemove(HSD_JObj* jobj)
     }
     child = jobj->child;
     if (child != NULL) {
-        HSD_ASSERT(0x4C0, child->next == NULL);
+        HSD_ASSERT(1216, child->next == NULL);
     }
 
     next = child != NULL ? child : jobj->next;
@@ -839,12 +800,14 @@ HSD_JObj* HSD_JObjRemove(HSD_JObj* jobj)
 /// @todo Regswaps
 void HSD_JObjRemoveAll(HSD_JObj* jobj)
 {
+    HSD_JObj* prev;
     HSD_JObj* next;
+
     if (jobj == NULL) {
         return;
     }
     if (jobj->parent != NULL) {
-        HSD_JObj* prev = HSD_JObjGetPrev(jobj);
+        prev = HSD_JObjGetPrev(jobj);
         if (prev != NULL) {
             prev->next = NULL;
         } else {
@@ -1114,13 +1077,13 @@ HSD_JObj* HSD_JObjAlloc(void)
 {
     HSD_JObj* jobj =
         hsdNew(default_class != NULL ? default_class : &hsdJObj.parent.parent);
-    HSD_ASSERT(0x7D3, jobj);
+    HSD_ASSERT(2003, jobj);
     return jobj;
 }
 
 void HSD_JObjSetCurrent(HSD_JObj* jobj)
 {
-    ref_INC(jobj);
+    HSD_JObjRef(jobj);
     HSD_JObjUnref(current_jobj);
     current_jobj = jobj;
 }
