@@ -97,7 +97,7 @@ jobs:
       run: ln -s /orig .
     - name: Build
       run: |
-        set -eoux pipefail
+        set -eou pipefail
         export RUST_LOG=error
 
         mode='${{matrix.mode}}'
@@ -146,8 +146,7 @@ jobs:
                 | .from == 100 and .to < .from)
               | { (.name): ([.functions[] | .name]) }' \
               "$changes")"
-            status="$(echo "$results" |
-              jq -r 'if length > 0 then 1 else 0 end')"
+            status="$(echo "$results" | jq -r 'if . == {} then 0 else 1 end')"
 
             if [ "$status" -ne 0 ]; then
               echo "::error::One or more functions were broken!"
