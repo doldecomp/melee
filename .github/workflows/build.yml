@@ -149,6 +149,7 @@ jobs:
           ;;
           'diff')
             ninja all_source
+            objdiff-cli report
           ;;
           *) exit 1 ;;
         esac
