@@ -30,6 +30,10 @@ stdenv.mkDerivation {
     src = lib.cleanSource ../.;
   };
 
+  postPatch = ''
+    ln -sfT ${mwcc}/GC tools/mwcc_compiler
+  '';
+
   shellHook = ''
     runHook postPatch
   '';
