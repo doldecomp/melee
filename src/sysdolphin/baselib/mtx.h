@@ -57,4 +57,10 @@ static inline f32 HSD_MtxColMag(MtxPtr mtx, int col)
                      (mtx[2][col] * mtx[2][col]));
 }
 
+static inline f32 HSD_MtxColMagFloat(MtxPtr mtx, int col)
+{
+    return sqrtf((mtx[0][col] * mtx[0][col]) + (mtx[1][col] * mtx[1][col]) +
+                 (mtx[2][col] * mtx[2][col]));
+}
+
 #endif
