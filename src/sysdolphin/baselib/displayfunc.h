@@ -23,6 +23,12 @@ void HSD_EraseRect(f32 top_res, f32 bottom_res, f32 left_res, f32 right_res,
 
 MtxPtr _HSD_mkEnvelopeModelNodeMtx(HSD_JObj* m, MtxPtr mtx);
 void HSD_JObjDisp(HSD_JObj* jobj, MtxPtr, HSD_TrspMask flags, u32 rendermode);
+void HSD_JObjDispSub(HSD_JObj* jobj, MtxPtr vmtx, MtxPtr pmtx,
+                     HSD_TrspMask trsp_mask, u32 rendermode);
+void HSD_JObjDispDObj(HSD_JObj* jobj, MtxPtr vmtx, HSD_TrspMask trsp_mask,
+                      u32 rendermode);
+
+HSD_JObj* HSD_JObjFindSkeleton(HSD_JObj* jobj);
 
 void HSD_StateInitDirect(int vtxfmt, u32 rendermode);
 
