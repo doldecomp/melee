@@ -965,7 +965,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/fobj.c.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/pobj.c.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/jobj.c.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/displayfunc.s.o\
+    $(BUILD_DIR)/src/sysdolphin/baselib/displayfunc.c.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/initialize.c.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/video.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/controller.s.o\
