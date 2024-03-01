@@ -15,12 +15,13 @@ struct HSD_HashEntry {
 };
 
 typedef struct _HSD_HashClass {
-    struct _HSD_HashInfo* class_info;
+    struct _HSD_HashClassInfo* class_info;
 } HSD_HashClass;
 
-typedef struct _HSD_HashInfo {
+typedef struct _HSD_HashClassInfo {
     HSD_ClassInfo parent;
     int (*getidx)(HSD_Hash* hash);
+    bool (*keycheck)(HSD_Hash* hash, void* table_key, void* key);
 } HSD_HashClassInfo;
 
 struct HSD_Hash {
@@ -30,6 +31,6 @@ struct HSD_Hash {
 };
 
 HSD_HashEntry* HashSearchEntry(HSD_Hash*, int, void*, HSD_HashEntry**);
-HSD_ClassInfo* HSD_HashSearch(HSD_Hash*, void*, int*);
+HSD_HashClassInfo* HSD_HashSearch(HSD_Hash*, void*, int*);
 
 #endif
