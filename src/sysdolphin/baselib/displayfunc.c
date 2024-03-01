@@ -91,12 +91,9 @@ void HSD_StateInitDirect(int vtxfmt, u32 rendermode)
     GXSetCurrentMtx(GX_PNMTX0);
 }
 
-static void mkBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
-{
-    NOT_IMPLEMENTED;
-}
-
 Vec3 zOne = { 0, 0, 1 };
+Vec3 yOne = { 0, 1, 0 };
+Vec3 zOne2 = { 0, 0, 1 };
 
 static void mkVBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
 {
@@ -149,7 +146,7 @@ static void mkHBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
         uy.z = -pos.y / uy.y * pos.z;
         VECCrossProduct(&ax, &uy, &az);
     } else {
-        VECCrossProduct(&ax, &zOne, &az);
+        VECCrossProduct(&ax, &yOne, &az);
     }
     VECCrossProduct(&az, &ax, &ay);
     sy /= VECMag(&ay);
@@ -164,6 +161,47 @@ static void mkHBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
     dst[0][2] = sz * az.x;
     dst[1][2] = sz * az.y;
     dst[2][2] = sz * az.z;
+
+    HSD_MtxSetColVec(dst, 3, &pos);
+}
+
+static void mkBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
+{
+    Vec3 ax, ay, *az, pos;
+    float sx, sy, sz;
+
+    sx = HSD_MtxColMagFloat(src, 0);
+    sz = HSD_MtxColMagFloat(src, 2);
+
+    HSD_MtxColVec(src, 1, &ay);
+    sy = VECMag(&ay);
+    HSD_MtxColVec(src, 3, &pos);
+
+    if (jobj->flags & JOBJ_PBILLBOARD) {
+        VECCrossProduct(&pos, &ay, &ax);
+        VECCrossProduct(&ax, &pos, &ay);
+        az = &pos;
+        sz /= -VECMag(az);
+    } else {
+        VECCrossProduct(&ay, &zOne2, &ax);
+        VECCrossProduct(&zOne2, &ax, &ay);
+        az = &zOne2;
+        sz /= VECMag(&zOne2);
+    }
+    sx /= VECMag(&ax);
+    sy /= VECMag(&ay);
+
+    dst[0][0] = sx * ax.x;
+    dst[1][0] = sx * ax.y;
+    dst[2][0] = sx * ax.z;
+
+    dst[0][1] = sy * ay.x;
+    dst[1][1] = sy * ay.y;
+    dst[2][1] = sy * ay.z;
+
+    dst[0][2] = sz * az->x;
+    dst[1][2] = sz * az->y;
+    dst[2][2] = sz * az->z;
 
     HSD_MtxSetColVec(dst, 3, &pos);
 }
