@@ -1373,7 +1373,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/random.c"),
             Object(NonMatching, "sysdolphin/baselib/bytecode.c"),
             Object(Matching, "sysdolphin/baselib/class.c"),
-            Object(NonMatching, "sysdolphin/baselib/hash.c"),
+            Object(Matching, "sysdolphin/baselib/hash.c"),
             Object(NonMatching, "sysdolphin/baselib/texp.c"),
             Object(NonMatching, "sysdolphin/baselib/texpdag.c"),
             Object(NonMatching, "sysdolphin/baselib/leak.c"),

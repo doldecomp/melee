@@ -988,7 +988,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/random.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/bytecode.s.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/class.c.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/hash.s.o\
+    $(BUILD_DIR)/src/sysdolphin/baselib/hash.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/texp.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/texpdag.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/leak.s.o\
