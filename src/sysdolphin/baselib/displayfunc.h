@@ -21,6 +21,7 @@ void HSD_EraseRect(f32 top_res, f32 bottom_res, f32 left_res, f32 right_res,
                    f32 neg_z_val, int enable_color, int enable_alpha,
                    int enable_depth);
 
+void HSD_JObjMakePositionMtx(HSD_JObj* jobj, Mtx vmtx, Mtx pmtx);
 MtxPtr _HSD_mkEnvelopeModelNodeMtx(HSD_JObj* m, MtxPtr mtx);
 void HSD_JObjDisp(HSD_JObj* jobj, MtxPtr, HSD_TrspMask flags, u32 rendermode);
 void HSD_JObjDispSub(HSD_JObj* jobj, MtxPtr vmtx, MtxPtr pmtx,
