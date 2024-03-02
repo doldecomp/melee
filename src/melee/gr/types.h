@@ -212,6 +212,18 @@ struct GroundVars_izumi3 {
     u8 xE0_pad[0x218 - 0xE0];
 };
 
+struct grKongo_GroundVars {
+    /* gp+C4 */ short xC4;
+    /* gp+C6 */ short xC6;
+    /* gp+C8 */ UNK_T xC8;
+    /* gp+CC */ UNK_T xCC;
+    /* gp+D0 */ union {
+        struct {
+            UNK_T keep;
+        } taru;
+    } u;
+};
+
 struct Ground {
     int x0;         // 0x0
     HSD_GObj* gobj; // 0x4
@@ -247,6 +259,7 @@ struct Ground {
         struct GroundVars_izumi izumi;
         struct GroundVars_izumi2 izumi2;
         struct GroundVars_izumi3 izumi3;
+        struct grKongo_GroundVars kongo;
     } gv;
 };
 
