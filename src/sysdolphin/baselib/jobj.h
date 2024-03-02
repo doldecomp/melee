@@ -89,6 +89,7 @@ struct HSD_JObj;
 #define JOBJ_MTX_INDEP_PARENT (1 << 24)
 #define JOBJ_MTX_INDEP_SRT (1 << 25)
 #define JOBJ_UNK_B26 (1 << 26)
+#define JOBJ_UNK_B27 (1 << 27)
 #define JOBJ_ROOT_OPA (1 << 28)
 #define JOBJ_ROOT_XLU (1 << 29)
 #define JOBJ_ROOT_TEXEDGE (1 << 30)

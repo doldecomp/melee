@@ -224,6 +224,11 @@ struct grKongo_GroundVars {
     } u;
 };
 
+struct grCorneria_GroundVars {
+    /*  gp+C4 */ u8 _0[0x68];
+    /* gp+12C */ HSD_JObj* x68;
+};
+
 struct Ground {
     int x0;         // 0x0
     HSD_GObj* gobj; // 0x4
@@ -260,6 +265,7 @@ struct Ground {
         struct GroundVars_izumi2 izumi2;
         struct GroundVars_izumi3 izumi3;
         struct grKongo_GroundVars kongo;
+        struct grCorneria_GroundVars corneria;
     } gv;
 };
 
