@@ -9,6 +9,7 @@
 #include <baselib/gobj.h>
 
 /* 1C8858 */ void grMaterial_801C8858(HSD_JObj*, u32 flags);
+/* 1C8A04 */ void grMaterial_801C8A04(HSD_JObj*, u32 flags);
 /* 1C8CDC */ UNK_RET grMaterial_801C8CDC(HSD_GObj*);
 /* 1C8CFC */ int grMaterial_801C8CFC(int, int, Ground*, HSD_JObj*, int,
                                      HSD_GObjEvent, int);
