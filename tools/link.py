@@ -44,9 +44,14 @@ def link(path: Path):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="replaces an asm file with a C file in the build")
+    parser = argparse.ArgumentParser(
+        description="replaces an asm file with a C file in the build"
+    )
     parser.add_argument(
-        "path", metavar="C_FILE", type=Path, help="the source file to link (src/.../foo.c)"
+        "path",
+        metavar="C_FILE",
+        type=Path,
+        help="the source file to link (src/.../foo.c)",
     )
 
     args = parser.parse_args()

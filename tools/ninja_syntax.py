@@ -21,10 +21,9 @@ use Python.
 
 import re
 import textwrap
-from typing import Optional, Union, Tuple, Match, Dict, List
 from io import StringIO
 from pathlib import Path
-
+from typing import Dict, List, Match, Optional, Tuple, Union
 
 NinjaPath = Union[str, Path]
 NinjaPaths = Union[
@@ -125,17 +124,17 @@ class Writer(object):
         if implicit:
             implicit = [escape_path(x) for x in serialize_paths(implicit)]
             all_inputs.append("|")
-            all_inputs.extend(implicit)
+            all_inputs.extend(map(str, implicit))
         if order_only:
             order_only = [escape_path(x) for x in serialize_paths(order_only)]
             all_inputs.append("||")
-            all_inputs.extend(order_only)
+            all_inputs.extend(map(str, order_only))
         if implicit_outputs:
             implicit_outputs = [
                 escape_path(x) for x in serialize_paths(implicit_outputs)
             ]
             out_outputs.append("|")
-            out_outputs.extend(implicit_outputs)
+            out_outputs.extend(map(str, implicit_outputs))
 
         self._line(
             "build %s: %s" % (" ".join(out_outputs), " ".join([rule] + all_inputs))
