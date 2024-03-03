@@ -46,7 +46,6 @@ Version = "1.3"
 
 
 class ProgramError(RuntimeError):
-
     """This provides a way to distinguish known/understood program errors from
     any other kind of unknown/unexpected errors. Also included will be an
     extra argument to be used as an exit code for the program to return."""
