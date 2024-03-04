@@ -1,6 +1,8 @@
-# Dependencies
+Dependencies
+============
 
-## Windows:
+Windows:
+--------
 
 On Windows, it's **highly recommended** to use native tooling. WSL or msys2 are **not** required.  
 When running under WSL, [objdiff](#diffing) is unable to get filesystem notifications for automatic rebuilds.
@@ -10,8 +12,8 @@ When running under WSL, [objdiff](#diffing) is unable to get filesystem notifica
 - Download [ninja](https://github.com/ninja-build/ninja/releases) and add it to `%PATH%`.
   - Quick install via pip: `pip install ninja`
 
-## macOS:
-
+macOS:
+------
 - Install [ninja](https://github.com/ninja-build/ninja/wiki/Pre-built-Ninja-packages):
   ```
   brew install ninja
@@ -26,8 +28,8 @@ After OS upgrades, if macOS complains about `Wine Crossover.app` being unverifie
 sudo xattr -rd com.apple.quarantine '/Applications/Wine Crossover.app'
 ```
 
-## Linux:
-
+Linux:
+------
 - Install [ninja](https://github.com/ninja-build/ninja/wiki/Pre-built-Ninja-packages).
 - For non-x86(_64) platforms: Install wine from your package manager.
-  - For x86(_64), [WiBo](https://github.com/decompals/WiBo), a minimal 32-bit Windows binary wrapper, will be automatically downloaded and used.
+  - For x86(_64), [wibo](https://github.com/decompals/wibo), a minimal 32-bit Windows binary wrapper, will be automatically downloaded and used.

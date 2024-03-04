@@ -63,6 +63,11 @@ symbols_known: false
 # this can be set to false.
 fill_gaps: true
 
+# (optional) By default, emitted objects will "export" all symbols (force active).
+# This is useful to prevent the linker from removing any symbols.
+# Individual symbols can be excluded using `noexport` in the symbols file.
+export_all: true
+
 # (optional) Custom template for `ldscript.lcf`. Avoid unless necessary.
 # See https://github.com/encounter/decomp-toolkit/blob/main/assets/ldscript.lcf
 ldscript_template: config/GAMEID/module/ldscript.tpl
@@ -99,7 +104,14 @@ modules:
   # See https://github.com/encounter/decomp-toolkit/blob/main/assets/ldscript_partial.lcf
   ldscript_template: config/GAMEID/module/ldscript.tpl
 
+  # (optional) By default, every REL is linked with every other REL.
+  # Some games link RELs individually, so the module IDs are not unique.
+  # To support this, `links` overrides which other modules are included in this module's analysis.
+  # The DOL is always included, and does not need to be specified.
+  links: [module2] # This module will be linked with the DOL and "module2".
+
 # (optional) Configuration for asset extraction.
+# For modules, this goes in the module's configuration above.
 extract:
 
 - # The symbol name to extract.

@@ -57,6 +57,12 @@ parser.add_argument(
     help="base build directory (default: build)",
 )
 parser.add_argument(
+    "--binutils",
+    dest="binutils",
+    type=Path,
+    help="path to binutils (optional)",
+)
+parser.add_argument(
     "--compilers",
     dest="compilers",
     type=Path,
@@ -110,6 +116,7 @@ version_num = VERSIONS.index(config.version)
 # Apply arguments
 config.build_dir = args.build_dir
 config.build_dtk_path = args.build_dtk
+config.binutils_path = args.binutils
 config.compilers_path = args.compilers
 config.debug = args.debug
 config.generate_map = args.map
@@ -118,14 +125,22 @@ if not is_windows():
     config.wrapper = args.wrapper
 
 # Tool versions
+config.binutils_tag = "2.42-1"
 config.compilers_tag = "20231018"
-config.dtk_tag = "v0.6.2"
+config.dtk_tag = "v0.7.4"
 config.sjiswrap_tag = "v1.1.1"
-config.wibo_tag = "0.6.9"
+config.wibo_tag = "0.6.11"
 
 # Project
 config.config_path = Path("config") / config.version / "config.yml"
 config.check_sha_path = Path("config") / config.version / "build.sha1"
+config.asflags = [
+    "-mgekko",
+    "--strip-local-absolute",
+    "-I include",
+    f"-I build/{config.version}/include",
+    f"--defsym version={version_num}",
+]
 config.ldflags = [
     "-fp hardware",
     "-nodefaults",
