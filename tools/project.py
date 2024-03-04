@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple, Union
 
 from . import ninja_syntax
+from .ninja_syntax import serialize_path
 
 if sys.platform == "cygwin":
     sys.exit(
@@ -47,35 +48,30 @@ class Object:
         self.options.update(options)
 
 
-PathLike = Union[str, os.PathLike]
-
-
 class ProjectConfig:
     def __init__(self) -> None:
         # Paths
-        self.build_dir: PathLike = Path("build")  # Output build files
-        self.src_dir: PathLike = Path("src")  # C/C++/asm source files
-        self.tools_dir: PathLike = Path("tools")  # Python scripts
-        self.asm_dir: PathLike = Path(
-            "asm"
-        )  # Override incomplete objects (for modding)
+        self.build_dir: Path = Path("build")  # Output build files
+        self.src_dir: Path = Path("src")  # C/C++/asm source files
+        self.tools_dir: Path = Path("tools")  # Python scripts
+        self.asm_dir: Path = Path("asm")  # Override incomplete objects (for modding)
 
         # Tooling
         self.binutils_tag: Optional[str] = None  # Git tag
-        self.binutils_path: Optional[PathLike] = None  # If None, download
+        self.binutils_path: Optional[Path] = None  # If None, download
         self.dtk_tag: Optional[str] = None  # Git tag
-        self.build_dtk_path: Optional[PathLike] = None  # If None, download
+        self.build_dtk_path: Optional[Path] = None  # If None, download
         self.compilers_tag: Optional[str] = None  # 1
-        self.compilers_path: Optional[PathLike] = None  # If None, download
+        self.compilers_path: Optional[Path] = None  # If None, download
         self.wibo_tag: Optional[str] = None  # Git tag
-        self.wrapper: Optional[PathLike] = None  # If None, download wibo on Linux
+        self.wrapper: Optional[Path] = None  # If None, download wibo on Linux
         self.sjiswrap_tag: Optional[str] = None  # Git tag
-        self.sjiswrap_path: Optional[PathLike] = None  # If None, download
+        self.sjiswrap_path: Optional[Path] = None  # If None, download
 
         # Project config
         self.build_rels: bool = True  # Build REL files
-        self.check_sha_path: Optional[PathLike] = None  # Path to version.sha1
-        self.config_path: Optional[PathLike] = None  # Path to config.yml
+        self.check_sha_path: Optional[Path] = None  # Path to version.sha1
+        self.config_path: Optional[Path] = None  # Path to config.yml
         self.debug: bool = False  # Build with debug info
         self.generate_map: bool = False  # Generate map file(s)
         self.asflags: Optional[List[str]] = None  # Assembler flags
@@ -86,8 +82,8 @@ class ProjectConfig:
         self.warn_missing_config: bool = False  # Warn on missing unit configuration
         self.warn_missing_source: bool = False  # Warn on missing source file
         self.rel_strip_partial: bool = True  # Generate PLFs with -strip_partial
-        self.rel_empty_file: Optional[PathLike] = (
-            None  # Path to empty.c for generating empty RELs
+        self.rel_empty_file: Optional[str] = (
+            None  # Object name for generating empty RELs
         )
         self.shift_jis = (
             True  # Convert source files from UTF-8 to Shift JIS automatically
@@ -217,7 +213,9 @@ def generate_build_ninja(
     if config.debug:
         ldflags += " -g"
     n.variable("ldflags", ldflags)
-    n.variable("mw_version", config.linker_version)
+    if not config.linker_version:
+        sys.exit("ProjectConfig.linker_version missing")
+    n.variable("mw_version", Path(config.linker_version))
     n.newline()
 
     ###
@@ -471,12 +469,12 @@ def generate_build_ninja(
         def __init__(self, config: Dict[str, Any]) -> None:
             self.name: str = config["name"]
             self.module_id: int = config["module_id"]
-            self.ldscript: Optional[Path] = config["ldscript"]
+            self.ldscript: Optional[Path] = Path(config["ldscript"])
             self.entry = config["entry"]
             self.inputs: List[str] = []
 
-        def add(self, obj: os.PathLike) -> None:
-            self.inputs.append(str(obj))
+        def add(self, obj: Path) -> None:
+            self.inputs.append(serialize_path(obj))
 
         def output(self) -> Path:
             if self.module_id == 0:
@@ -495,10 +493,10 @@ def generate_build_ninja(
             if self.module_id == 0:
                 elf_path = build_path / f"{self.name}.elf"
                 dol_path = build_path / f"{self.name}.dol"
-                elf_ldflags = f"$ldflags -lcf {self.ldscript}"
+                elf_ldflags = f"$ldflags -lcf {serialize_path(self.ldscript)}"
                 if config.generate_map:
                     elf_map = map_path(elf_path)
-                    elf_ldflags += f" -map {elf_map}"
+                    elf_ldflags += f" -map {serialize_path(elf_map)}"
                 else:
                     elf_map = None
                 n.build(
@@ -519,7 +517,7 @@ def generate_build_ninja(
                 preplf_path = build_path / self.name / f"{self.name}.preplf"
                 plf_path = build_path / self.name / f"{self.name}.plf"
                 preplf_ldflags = "$ldflags -sdata 0 -sdata2 0 -r"
-                plf_ldflags = f"$ldflags -sdata 0 -sdata2 0 -r1 -lcf {self.ldscript}"
+                plf_ldflags = f"$ldflags -sdata 0 -sdata2 0 -r1 -lcf {serialize_path(self.ldscript)}"
                 if self.entry:
                     plf_ldflags += f" -m {self.entry}"
                     # -strip_partial is only valid with -m
@@ -527,9 +525,9 @@ def generate_build_ninja(
                         plf_ldflags += " -strip_partial"
                 if config.generate_map:
                     preplf_map = map_path(preplf_path)
-                    preplf_ldflags += f" -map {preplf_map}"
+                    preplf_ldflags += f" -map {serialize_path(preplf_map)}"
                     plf_map = map_path(plf_path)
-                    plf_ldflags += f" -map {plf_map}"
+                    plf_ldflags += f" -map {serialize_path(plf_map)}"
                 else:
                     preplf_map = None
                     plf_map = None
@@ -1122,9 +1120,11 @@ def generate_objdiff_config(
 
     # Write objdiff.json
     with open("objdiff.json", "w", encoding="utf-8") as w:
-        from .ninja_syntax import serialize_path
 
-        json.dump(objdiff_config, w, indent=4, default=serialize_path)
+        def unix_path(input: Any) -> str:
+            return str(input).replace(os.sep, "/") if input else ""
+
+        json.dump(objdiff_config, w, indent=4, default=unix_path)
 
 
 # Calculate, print and write progress to progress.json

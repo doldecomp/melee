@@ -21,6 +21,7 @@ use Python.
 
 import re
 import textwrap
+import os
 from io import StringIO
 from pathlib import Path
 from typing import Dict, List, Match, Optional, Tuple, Union
@@ -215,7 +216,12 @@ class Writer(object):
 
 
 def serialize_path(input: Optional[NinjaPath]) -> str:
-    return str(input).replace("\\", "/") if input else ""
+    if not input:
+        return ""
+    if isinstance(input, Path):
+        return str(input).replace("/", os.sep)
+    else:
+        return str(input)
 
 
 def serialize_paths(input: Optional[NinjaPathOrPaths]) -> List[str]:
