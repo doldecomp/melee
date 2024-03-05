@@ -12,8 +12,8 @@
 #include <baselib/gobj.h>
 #include <baselib/random.h>
 
-void it_802D3D94(HSD_GObj*, Item*); /* static */
-void it_802D3C9C(HSD_GObj*);        /* static */
+void it_802D3D94(HSD_GObj*); /* static */
+void it_802D3C9C(HSD_GObj*); /* static */
 void (*it_802D3BE0(HSD_GObj*))(HSD_GObj*);
 M2C_UNK it_8027ADEC(M2C_UNK, Item_GObj*, HSD_JObj*, f32); /* extern */
 extern f32 it_804DD4BC;
@@ -118,18 +118,14 @@ bool it_802D3D8C(Item_GObj* gobj)
     return false;
 }
 
-void it_802D3D94(HSD_GObj* arg0, Item* arg1)
+void it_802D3D94(Item_GObj* gobj)
 {
-    Item* temp_r31;
-
-    temp_r31 = arg0->user_data;
-    it_802762BC(temp_r31);
-    Item_80268E5C(arg0, 0, ITEM_ANIM_UPDATE);
-    temp_r31->entered_hitlag = M2C_ERROR(
-        /* unknown instruction: subi $r0, $r3, %l(efLib_PauseAll) */);
-    temp_r31->exited_hitlag = M2C_ERROR(
-        /* unknown instruction: subi $r0, $r3, %l(efLib_ResumeAll) */);
-    it_80273670(arg0, 0, it_804DD4B8);
+    Item* ip = GET_ITEM(gobj);
+    it_802762BC(ip);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    it_80273670(gobj, 0, it_804DD4B8);
 }
 
 bool it_802D3E08(Item_GObj* gobj)
