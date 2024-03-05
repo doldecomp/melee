@@ -106,15 +106,11 @@ bool it_802D3D28(Item_GObj* gobj)
     return false;
 }
 
-void it_802D3D6C(Item_GObj* arg0)
+void it_802D3D6C(Item_GObj* gobj)
 {
-    void* temp_r4;
-
-    temp_r4 = M2C_FIELD(arg0, void**, 0x2C);
-    M2C_FIELD(temp_r4, f32*, 0x44) =
-        M2C_FIELD(temp_r4, f32*, 0x44) +
-        M2C_FIELD(M2C_FIELD(M2C_FIELD(temp_r4, void**, 0xC4), void**, 4), f32*,
-                  0xC);
+    Item* ip = GET_ITEM(gobj);
+    void* attr = ip->xC4_article_data->x4_specialAttributes;
+    ip->x40_vel.y += M2C_FIELD(attr, f32*, 0xC);
 }
 
 bool it_802D3D8C(Item_GObj* gobj)
