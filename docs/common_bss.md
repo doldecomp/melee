@@ -15,7 +15,7 @@ With `-common off`, `foo` would be defined as a **global** symbol, and the linke
 
 In `splits.txt`, common BSS can be defined with the `common` attribute:
 
-```
+```yaml
 foo.cpp:
 	.text       start:0x80047E5C end:0x8004875C
 	.ctors      start:0x803A54C4 end:0x803A54C8

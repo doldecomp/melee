@@ -4,7 +4,7 @@ This file contains file splits for a module.
 
 Example:
 
-```
+```yaml
 path/to/file.cpp:
 	.text       start:0x80047E5C end:0x8004875C
 	.ctors      start:0x803A54C4 end:0x803A54C8
@@ -15,7 +15,7 @@ path/to/file.cpp:
 
 ## Format
 
-```
+```yaml
 path/to/file.cpp: [file attributes]
     section     [section attributes]
     ...

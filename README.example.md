@@ -42,7 +42,7 @@ Supported versions:
 Dependencies
 ============
 
-Windows:
+Windows
 --------
 
 On Windows, it's **highly recommended** to use native tooling. WSL or msys2 are **not** required.  
@@ -53,24 +53,30 @@ When running under WSL, [objdiff](#diffing) is unable to get filesystem notifica
 - Download [ninja](https://github.com/ninja-build/ninja/releases) and add it to `%PATH%`.
   - Quick install via pip: `pip install ninja`
 
-macOS:
+macOS
 ------
+
 - Install [ninja](https://github.com/ninja-build/ninja/wiki/Pre-built-Ninja-packages):
-  ```
+
+  ```sh
   brew install ninja
   ```
+
 - Install [wine-crossover](https://github.com/Gcenx/homebrew-wine):
-  ```
+
+  ```sh
   brew install --cask --no-quarantine gcenx/wine/wine-crossover
   ```
 
 After OS upgrades, if macOS complains about `Wine Crossover.app` being unverified, you can unquarantine it using:
+
 ```sh
 sudo xattr -rd com.apple.quarantine '/Applications/Wine Crossover.app'
 ```
 
-Linux:
+Linux
 ------
+
 - Install [ninja](https://github.com/ninja-build/ninja/wiki/Pre-built-Ninja-packages).
 - For non-x86(_64) platforms: Install wine from your package manager.
   - For x86(_64), [wibo](https://github.com/decompals/wibo), a minimal 32-bit Windows binary wrapper, will be automatically downloaded and used.
@@ -79,21 +85,26 @@ Building
 ========
 
 - Clone the repository:
-  ```
+
+  ```sh
   git clone https://github.com/my/repo.git
   ```
+
 - Using [Dolphin Emulator](https://dolphin-emu.org/), extract your game to `orig/GAMEID`.
 ![](assets/dolphin-extract.png)
   - To save space, the only necessary files are the following. Any others can be deleted.
     - `sys/main.dol`
     - `files/rels/*.rel`
 - Configure:
-  ```
+
+  ```sh
   python configure.py
   ```
+
   To use a version other than `GAMEID` (USA), specify it with `--version`.
 - Build:
-  ```
+
+  ```sh
   ninja
   ```
 
@@ -105,9 +116,9 @@ If desired, use the recommended Visual Studio Code settings by renaming the `.vs
 Diffing
 =======
 
-Once the initial build succeeds, an `objdiff.json` should exist in the project root. 
+Once the initial build succeeds, an `objdiff.json` should exist in the project root.
 
-Download the latest release from [encounter/objdiff](https://github.com/encounter/objdiff). Under project settings, set `Project directory`. The configuration should be loaded automatically. 
+Download the latest release from [encounter/objdiff](https://github.com/encounter/objdiff). Under project settings, set `Project directory`. The configuration should be loaded automatically.
 
 Select an object from the left sidebar to begin diffing. Changes to the project will rebuild automatically: changes to source files, headers, `configure.py`, `splits.txt` or `symbols.txt`.
 

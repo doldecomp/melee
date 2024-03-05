@@ -3,6 +3,7 @@
 This file contains all symbols for a module, one per line.
 
 Example line:
+
 ```
 __dt__13mDoExt_bckAnmFv = .text:0x800DD2EC; // type:function size:0x5C scope:global align:4
 ```

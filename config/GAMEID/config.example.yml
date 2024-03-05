@@ -26,6 +26,11 @@ common_start: 0x80001234
 # (optional) Version used to generate `.comment` sections in the split objects.
 # If not specified, no `.comment` sections will be generated.
 # See docs/comment_section.md for more information.
+# Known versions:
+# 8 - CodeWarrior for GameCube 1.0+
+# 10 - CodeWarrior for GameCube 1.3.2+
+# 11 - CodeWarrior for GameCube 2.7+
+# 14 - CodeWarrior for GameCube 3.0a3+
 mw_comment_version: 8
 
 # (optional) Path to `selfile.sel` for Wii games with RSO files.

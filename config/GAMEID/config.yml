@@ -3,7 +3,9 @@ object: orig/GAMEID/sys/main.dol
 hash: 0123456789abcdef0123456789abcdef01234567
 symbols: config/GAMEID/symbols.txt
 splits: config/GAMEID/splits.txt
-mw_comment_version: 8
+# Change this to match the linker verison.
+# See config.example.yml for a list.
+mw_comment_version: 11
 
 modules:
 - object: orig/GAMEID/files/module.rel

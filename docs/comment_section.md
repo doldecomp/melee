@@ -20,6 +20,7 @@ If missing, `mwld` will **not** adjust the alignment of symbols or remove any un
 This behavior is quite useful in some cases. When we split our program into objects, we're working from the final post-aligned, post-stripped result, and don't want the linker to make any changes. Most decompilation projects rely on this behavior unintentionally, since their generated objects don't contain a `.comment` section. (For example, objects built with `powerpc-eabi-as`.)
 
 However, we need the `.comment` section for some purposes:
+
 - Reproducing the [common BSS inflation bug](common_bss.md#inflation-bug) requires the `.comment` section present, due to the above. The linker inflates the size of the first common BSS symbol in a TU, but won't actually move any data around unless the `.comment` section is present.
 - In newer versions of the linker, using common BSS at all _without_ a valid `.comment` section will cause an internal linker error.
 
@@ -40,10 +41,11 @@ The contents of this section follow a very simple format:
 It's not known whether this field actually affects `mwld` in any way, but it's configurable for completeness sake. (See `mw_comment_version` in [`config.example.yml`](/config/GAMEID/config.example.yml).)
 
 Known values:
-- `08` - CodeWarrior for GameCube 1.0+
-- `0A` - CodeWarrior for GameCube 1.3.2+
-- `0B`, `0C` - CodeWarrior for GameCube 2.7+ (difference unknown)
-- `0E`, `0F` - CodeWarrior for GameCube 3.0a3+ (difference unknown)
+
+- `08` (8) - CodeWarrior for GameCube 1.0+
+- `0A` (10) - CodeWarrior for GameCube 1.3.2+
+- `0B` (11), `0C` (12) - CodeWarrior for GameCube 2.7+ (difference unknown)
+- `0E` (14), `0F` (15) - CodeWarrior for GameCube 3.0a3+ (difference unknown)
 
 `[0xC size: 0x4]` Compiler version: `XX XX XX XX`
 
@@ -71,6 +73,7 @@ Often the `.exe`'s properties (which `--help` reads from) and the internal versi
 `[0x15 size: 1]` "Quirk" flags: `XX`
 
 Bitfield of miscellaneous flags. Known flags:
+
 - `01` - "Incompatible return small structs"
 - `02` - "Incompatible SFPE double params"
 - `04` - "Unsafe global reg vars"
@@ -88,6 +91,7 @@ This includes the "null" ELF symbol, so the first entry will be all 0's.
 `[0x4 size: 1]` Visibility flags(?): `XX`
 
 Known values:
+
 - `00` - Default
 - `0D` - Weak
 - `0E` - Unknown, also weak?
@@ -95,6 +99,7 @@ Known values:
 `[0x5 size: 1]` Active flags(?): `XX`
 
 Known values:
+
 - `00` - Default
 - `08` - Force active / export. Prevents the symbol from being deadstripped.  
   When applied on a section symbol, the entire section is kept as-is. This is used

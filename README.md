@@ -14,6 +14,7 @@ Documentation
 - [`splits.txt`](docs/splits.md)
 
 General:
+
 - [Common BSS](docs/common_bss.md)
 - [`.comment` section](docs/comment_section.md)
 
@@ -28,11 +29,13 @@ References
 - [sjiswrap](https://github.com/encounter/sjiswrap) (UTF-8 to Shift JIS wrapper)
 
 Projects using this structure:
+
 - [zeldaret/tww](https://github.com/zeldaret/tww)
 - [PrimeDecomp/prime](https://github.com/PrimeDecomp/prime)
 - [PrimeDecomp/echoes](https://github.com/PrimeDecomp/echoes)
 - [DarkRTA/rb3](https://github.com/DarkRTA/rb3)
-- [InputEvelution/sadx-dtk](https://github.com/InputEvelution/sadx-dtk)
+- [doldecomp/melee](https://github.com/doldecomp/melee)
+- [doldecomp/sadx](https://github.com/doldecomp/sadx)
 - [InputEvelution/wp](https://github.com/InputEvelution/wp)
 - [lepelog/ss-dtk](https://github.com/lepelog/ss-dtk)
 - [NWPlayer123/AnimalCrossing-dtk](https://github.com/NWPlayer123/AnimalCrossing-dtk)
@@ -42,6 +45,7 @@ Projects using this structure:
 
 Features
 --------
+
 - Few external dependencies: Just `python` for the generator and `ninja` for the build system. See [Dependencies](docs/dependencies.md).
 - Simple configuration: Everything lives in `config.yml`, `symbols.txt`, and `splits.txt`.
 - Multi-version support: Separate configurations for each game version, and a `configure.py --version` flag to switch between them.
@@ -66,6 +70,7 @@ Project structure
 - `tools/` - Scripts shared between projects.
 
 Temporary, delete when done:
+
 - `config/GAMEID/config.example.yml` - Example configuration file and documentation.
 - `docs/` - Documentation for decomp-toolkit configuration.
 - `README.md` - This file, replace with your own. For a template, see [`README.example.md`](README.example.md).
