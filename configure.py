@@ -70,9 +70,9 @@ parser.add_argument(
     help="generate map file(s)",
 )
 parser.add_argument(
-    "--no-asm",
-    action="store_true",
-    default=True,
+    "--use-asm",
+    dest="no_asm",
+    action="store_false",
     help="don't incorporate .s files from asm directory",
 )
 parser.add_argument(
@@ -107,8 +107,8 @@ parser.add_argument(
 parser.add_argument(
     "--msg-style",
     choices=["mpw", "std", "gcc", "ide", "parseable"],
-    default="gcc",
-    help="message style of the compiler (default 'gcc')",
+    default="std",
+    help="message style of the compiler (default 'std')",
 )
 parser.add_argument(
     "--max-errors",
@@ -173,7 +173,6 @@ config.asflags = [
 config.ldflags = [
     "-fp hardware",
     "-nodefaults",
-    "-msgstyle gcc",
     "-warn off",
 ]
 
@@ -217,6 +216,7 @@ if args.max_errors is not None:
 
 if args.msg_style is not None:
     cflags_base.append(f"-msgstyle {args.msg_style}")
+    config.ldflags.append(f"-msgstyle {args.msg_style}")
 
 if args.warn is not None:
     cflags_base.append(f"-warn {args.warn}")
