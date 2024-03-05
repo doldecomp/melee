@@ -16,8 +16,6 @@ void it_802D3D94(HSD_GObj*); /* static */
 void it_802D3C9C(HSD_GObj*); /* static */
 void (*it_802D3BE0(HSD_GObj*))(HSD_GObj*);
 M2C_UNK it_8027ADEC(M2C_UNK, Item_GObj*, HSD_JObj*, f32); /* extern */
-extern f32 it_804DD4BC;
-extern f32 it_804DD4B8;
 
 void it_802D3B18(Item_GObj* arg0)
 {
@@ -28,7 +26,7 @@ void it_802D3B18(Item_GObj* arg0)
     temp_r5 = arg0->user_data;
     temp_r4 = temp_r5->xC4_article_data;
     temp_r31 = temp_r4->x4_specialAttributes;
-    temp_r5->facing_dir = it_804DD4B8;
+    temp_r5->facing_dir = 0.0F;
     // it_802D3D94(temp_r4, temp_r5);
     //  it_80279CDC(arg0, *temp_r31);
 }
@@ -52,7 +50,7 @@ void (*it_802D3BE0(HSD_GObj* arg0))(HSD_GObj*)
     void* temp_r31;
 
     temp_r31 = arg0->user_data;
-    it_8027ADEC(0x46B, arg0, arg0->hsd_obj, it_804DD4BC);
+    it_8027ADEC(0x46B, arg0, arg0->hsd_obj, 2.8F);
     Item_80268E5C(arg0, 1, ITEM_ANIM_UPDATE);
     M2C_FIELD(temp_r31, s32*, 0xD28) = M2C_ERROR(
         /* unknown instruction: subi $r0, $r3, %l(efLib_PauseAll) */);
@@ -125,7 +123,7 @@ void it_802D3D94(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     ip->entered_hitlag = efLib_PauseAll;
     ip->exited_hitlag = efLib_ResumeAll;
-    it_80273670(gobj, 0, it_804DD4B8);
+    it_80273670(gobj, 0, 0.0F);
 }
 
 bool it_802D3E08(Item_GObj* gobj)
@@ -134,21 +132,19 @@ bool it_802D3E08(Item_GObj* gobj)
     return false;
 }
 
-void it_802D3E2C(Item_GObj* arg0)
+void it_802D3E2C(Item_GObj* gobj)
 {
-    Item* temp_r30;
     Item* temp_r31;
+    Item* temp_r30;
 
-    if (it_8027A09C(arg0) != 0) {
-        temp_r31 = arg0->user_data;
-        it_80273454(arg0);
-        temp_r30 = arg0->user_data;
-        it_8027ADEC(0x46B, arg0, arg0->hsd_obj, it_804DD4BC);
-        Item_80268E5C(arg0, 1, ITEM_ANIM_UPDATE);
-        temp_r30->entered_hitlag = M2C_ERROR(
-            /* unknown instruction: subi $r0, $r3, %l(efLib_PauseAll) */);
-        temp_r30->exited_hitlag = M2C_ERROR(
-            /* unknown instruction: subi $r0, $r3, %l(efLib_ResumeAll) */);
+    if (it_8027A09C(gobj) != false) {
+        temp_r31 = GET_ITEM(gobj);
+        it_80273454(gobj);
+        temp_r30 = GET_ITEM(gobj);
+        it_8027ADEC(0x46B, gobj, gobj->hsd_obj, 2.8F);
+        Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+        temp_r30->entered_hitlag = efLib_PauseAll;
+        temp_r30->exited_hitlag = efLib_ResumeAll;
         Item_8026AE84(temp_r31, 0x2729, 0x7F, 0x40);
     }
 }
