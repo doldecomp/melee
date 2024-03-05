@@ -244,7 +244,9 @@ def generate_build_ninja(
         deps="gcc",
     )
 
-    if config.dtk_path:
+    if config.dtk_path is not None and config.dtk_path.is_file():
+        dtk = config.dtk_path
+    elif config.dtk_path is not None:
         dtk = build_tools_path / "release" / f"dtk{EXE}"
         n.rule(
             name="cargo",
