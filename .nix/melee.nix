@@ -49,7 +49,7 @@ stdenv.mkDerivation {
   configurePhase = ''
     runHook preConfigure
     python3 ./configure.py --wrapper ${wibo}/bin/wibo \
-      --build-dtk ${decomp-toolkit}/bin/dtk \
+      --dtk ${decomp-toolkit}/bin/dtk \
       --sjiswrap ${sjiswrap} \
       --compilers ${mwcc}
     runHook postConfigure
