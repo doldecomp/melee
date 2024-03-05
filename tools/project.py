@@ -54,7 +54,9 @@ class ProjectConfig:
         self.build_dir: Path = Path("build")  # Output build files
         self.src_dir: Path = Path("src")  # C/C++/asm source files
         self.tools_dir: Path = Path("tools")  # Python scripts
-        self.asm_dir: Path = Path("asm")  # Override incomplete objects (for modding)
+        self.asm_dir: Optional[Path] = Path(
+            "asm"
+        )  # Override incomplete objects (for modding)
 
         # Tooling
         self.binutils_tag: Optional[str] = None  # Git tag
@@ -676,6 +678,8 @@ def generate_build_ninja(
                     options[key] = value
 
             unit_src_path = Path(lib.get("src_dir", config.src_dir)) / options["source"]
+
+            unit_asm_path: Optional[Path] = None
             if config.asm_dir is not None:
                 unit_asm_path = (
                     Path(lib.get("asm_dir", config.asm_dir)) / options["source"]
@@ -697,6 +701,7 @@ def generate_build_ninja(
                 link_built_obj = False
 
             # Assembly overrides
+            built_obj_path: Optional[Path] = None
             if unit_asm_path is not None and unit_asm_path.exists():
                 link_built_obj = True
                 built_obj_path = asm_build(obj, options, lib_name, unit_asm_path)

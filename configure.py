@@ -44,7 +44,7 @@ parser.add_argument(
     choices=VERSIONS,
     type=str.upper,
     default=VERSIONS[DEFAULT_VERSION],
-    help=f"version to build",
+    help="version to build",
 )
 parser.add_argument(
     "--build-dir",
@@ -69,6 +69,11 @@ parser.add_argument(
     "--map",
     action="store_true",
     help="generate map file(s)",
+)
+parser.add_argument(
+    "--no-asm",
+    action="store_true",
+    help="don't incorporate .s files from asm directory",
 )
 parser.add_argument(
     "--debug",
@@ -115,6 +120,8 @@ config.generate_map = args.map
 config.sjiswrap_path = args.sjiswrap
 if not is_windows():
     config.wrapper = args.wrapper
+if args.no_asm:
+    config.asm_dir = None
 
 # Tool versions
 config.binutils_tag = "2.42-1"
