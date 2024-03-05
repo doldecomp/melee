@@ -3340,6 +3340,7 @@ melee/un/un_2FC9.c:
 	.data       start:0x803F98B8 end:0x803FDD18
 	.bss        start:0x804A1ED0 end:0x804A2F38
 	.sdata      start:0x804D5800 end:0x804D5A40
+	.sbss       start:0x804D6D68 end:0x804D7054
 	.sdata2     start:0x804DDB68 end:0x804DDCC8
 
 melee/ty/toy.c:
