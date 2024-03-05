@@ -178,4 +178,11 @@ typedef struct {
     HSD_JObj* jobj;
 } itTargetVars;
 
+typedef struct MewVars {
+    u8 x0_filler[4];
+    f32 x4;
+    f32 x8;
+    f32 xC;
+} MewVars;
+
 #endif

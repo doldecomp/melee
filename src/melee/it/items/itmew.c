@@ -74,24 +74,20 @@ bool it_802D3C94(Item_GObj* gobj)
     return false;
 }
 
-void it_802D3C9C(HSD_GObj* arg0)
+void it_802D3C9C(Item_GObj* gobj)
 {
-    void* temp_r30;
-    void* temp_r31;
+    Item* ip = GET_ITEM(gobj);
+    MewVars* attr = ip->xC4_article_data->x4_specialAttributes;
 
-    temp_r31 = arg0->user_data;
-    temp_r30 = M2C_FIELD(M2C_FIELD(temp_r31, void**, 0xC4), void**, 4);
-    Item_80268E5C(arg0, 2, ITEM_ANIM_UPDATE);
-    M2C_FIELD(temp_r31, s32*, 0xD28) = M2C_ERROR(
-        /* unknown instruction: subi $r0, $r3, %l(efLib_PauseAll) */);
-    M2C_FIELD(temp_r31, s32*, 0xD2C) = M2C_ERROR(
-        /* unknown instruction: subi $r0, $r3, %l(efLib_ResumeAll) */);
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
     if (HSD_Randi(2) != 0) {
-        M2C_FIELD(temp_r31, f32*, 0x40) = M2C_FIELD(temp_r30, f32*, 4);
+        ip->x40_vel.x = attr->x4;
     } else {
-        M2C_FIELD(temp_r31, f32*, 0x40) = -M2C_FIELD(temp_r30, f32*, 4);
+        ip->x40_vel.x = -attr->x4;
     }
-    M2C_FIELD(temp_r31, f32*, 0x44) = M2C_FIELD(temp_r30, f32*, 8);
+    ip->x40_vel.y = attr->x8;
 }
 
 bool it_802D3D28(Item_GObj* gobj)
@@ -107,8 +103,8 @@ bool it_802D3D28(Item_GObj* gobj)
 void it_802D3D6C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    void* attr = ip->xC4_article_data->x4_specialAttributes;
-    ip->x40_vel.y += M2C_FIELD(attr, f32*, 0xC);
+    MewVars* attr = ip->xC4_article_data->x4_specialAttributes;
+    ip->x40_vel.y += attr->xC;
 }
 
 bool it_802D3D8C(Item_GObj* gobj)
