@@ -60,7 +60,7 @@ class ProjectConfig:
         self.binutils_tag: Optional[str] = None  # Git tag
         self.binutils_path: Optional[Path] = None  # If None, download
         self.dtk_tag: Optional[str] = None  # Git tag
-        self.build_dtk_path: Optional[Path] = None  # If None, download
+        self.dtk_path: Optional[Path] = None  # If None, download
         self.compilers_tag: Optional[str] = None  # 1
         self.compilers_path: Optional[Path] = None  # If None, download
         self.wibo_tag: Optional[str] = None  # Git tag
@@ -82,9 +82,9 @@ class ProjectConfig:
         self.warn_missing_config: bool = False  # Warn on missing unit configuration
         self.warn_missing_source: bool = False  # Warn on missing source file
         self.rel_strip_partial: bool = True  # Generate PLFs with -strip_partial
-        self.rel_empty_file: Optional[str] = (
-            None  # Object name for generating empty RELs
-        )
+        self.rel_empty_file: Optional[
+            str
+        ] = None  # Object name for generating empty RELs
         self.shift_jis = (
             True  # Convert source files from UTF-8 to Shift JIS automatically
         )
@@ -242,7 +242,7 @@ def generate_build_ninja(
         deps="gcc",
     )
 
-    if config.build_dtk_path:
+    if config.dtk_path:
         dtk = build_tools_path / "release" / f"dtk{EXE}"
         n.rule(
             name="cargo",
@@ -254,8 +254,8 @@ def generate_build_ninja(
         n.build(
             outputs=dtk,
             rule="cargo",
-            inputs=config.build_dtk_path / "Cargo.toml",
-            implicit=config.build_dtk_path / "Cargo.lock",
+            inputs=config.dtk_path / "Cargo.toml",
+            implicit=config.dtk_path / "Cargo.lock",
             variables={
                 "bin": "dtk",
                 "target": build_tools_path,
@@ -559,7 +559,6 @@ def generate_build_ninja(
         def c_build(
             obj: Object, options: Dict[str, Any], lib_name: str, src_path: Path
         ) -> Optional[Path]:
-
             cflags_str = make_flags_str(options["cflags"])
             if options["extra_cflags"] is not None:
                 extra_cflags_str = make_flags_str(options["extra_cflags"])

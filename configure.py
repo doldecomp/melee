@@ -12,11 +12,11 @@
 # Append --help to see available options.
 ###
 
-import sys
 import argparse
-
+import sys
 from pathlib import Path
-from typing import Dict, List, Any
+from typing import Any, Dict, List
+
 from tools.project import (
     Object,
     ProjectConfig,
@@ -31,91 +31,83 @@ VERSIONS = [
     "GAMEID",  # 0
 ]
 
-if len(VERSIONS) > 1:
-    versions_str = ", ".join(VERSIONS[:-1]) + f" or {VERSIONS[-1]}"
-else:
-    versions_str = VERSIONS[0]
-
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "mode",
+    choices=["configure", "progress"],
     default="configure",
-    help="configure or progress (default: configure)",
+    help="script mode (default: configure)",
     nargs="?",
 )
 parser.add_argument(
     "--version",
-    dest="version",
+    choices=VERSIONS,
+    type=str.upper,
     default=VERSIONS[DEFAULT_VERSION],
-    help=f"version to build ({versions_str})",
+    help=f"version to build",
 )
 parser.add_argument(
     "--build-dir",
-    dest="build_dir",
+    metavar="DIR",
     type=Path,
     default=Path("build"),
     help="base build directory (default: build)",
 )
 parser.add_argument(
     "--binutils",
-    dest="binutils",
+    metavar="BINARY",
     type=Path,
     help="path to binutils (optional)",
 )
 parser.add_argument(
     "--compilers",
-    dest="compilers",
+    metavar="DIR",
     type=Path,
     help="path to compilers (optional)",
 )
 parser.add_argument(
     "--map",
-    dest="map",
     action="store_true",
     help="generate map file(s)",
 )
 parser.add_argument(
     "--debug",
-    dest="debug",
     action="store_true",
     help="build with debug info (non-matching)",
 )
 if not is_windows():
     parser.add_argument(
         "--wrapper",
-        dest="wrapper",
+        metavar="BINARY",
         type=Path,
         help="path to wibo or wine (optional)",
     )
 parser.add_argument(
-    "--build-dtk",
-    dest="build_dtk",
+    "--dtk",
+    metavar="BINARY | DIR",
     type=Path,
-    help="path to decomp-toolkit source (optional)",
+    help="path to decomp-toolkit binary or source (optional)",
 )
 parser.add_argument(
     "--sjiswrap",
-    dest="sjiswrap",
+    metavar="EXE",
     type=Path,
     help="path to sjiswrap.exe (optional)",
 )
 parser.add_argument(
     "--verbose",
-    dest="verbose",
     action="store_true",
     help="print verbose output",
 )
 args = parser.parse_args()
 
 config = ProjectConfig()
-config.version = args.version.upper()
-if config.version not in VERSIONS:
-    sys.exit(f"Invalid version '{config.version}', expected {versions_str}")
+config.version = args.version
 version_num = VERSIONS.index(config.version)
 
 # Apply arguments
 config.build_dir = args.build_dir
-config.build_dtk_path = args.build_dtk
+config.dtk_path = args.dtk
 config.binutils_path = args.binutils
 config.compilers_path = args.compilers
 config.debug = args.debug
