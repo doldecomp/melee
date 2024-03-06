@@ -12,6 +12,7 @@ Documentation
 - [Getting Started](docs/getting_started.md)
 - [`symbols.txt`](docs/symbols.md)
 - [`splits.txt`](docs/splits.md)
+- [GitHub Actions](docs/github_actions.md) (new!)
 
 General:
 
@@ -54,7 +55,7 @@ Features
 - No manual assembly: decomp-toolkit handles splitting the DOL into relocatable objects based on the configuration. No game assets are committed to the repository.
 - Progress calculation and upload script for [frogress](https://github.com/decompals/frogress).
 - Integration with [objdiff](https://github.com/encounter/objdiff) for a diffing workflow.
-- (TODO) CI workflow template for GitHub Actions.
+- CI workflow template for GitHub Actions.
 
 Project structure
 -----------------

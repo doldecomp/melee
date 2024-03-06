@@ -1,0 +1,63 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    # This is a *private* build container.
+    # See docs/github_actions.md for more information.
+    container: ghcr.io/my/game-build:main
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Add game versions here
+        version: [GAMEID]
+
+    steps:
+    # Checkout the repository (shallow clone)
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        submodules: recursive
+
+    # Set Git config
+    - name: Git config
+      run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+    # Copy the original files to the workspace
+    - name: Prepare
+      run: cp -R /orig .
+
+    # Build the project
+    - name: Build
+      run: |
+        python configure.py --map --version ${{ matrix.version }} \
+            --binutils /binutils --compilers /compilers
+        ninja all_source build/${{ matrix.version }}/progress.json
+
+    # Upload progress if we're on the main branch
+    - name: Upload progress
+      # If you're using a different branch, change this to match
+      if: github.ref == 'refs/heads/main'
+      continue-on-error: true
+      env:
+        # Replace with your project slug
+        PROGRESS_SLUG: prime
+        # Set the API key in your repository secrets
+        PROGRESS_API_KEY: ${{ secrets.PROGRESS_API_KEY }}
+      run: |
+        python tools/upload_progress.py -b https://progress.decomp.club/ \
+          -p $PROGRESS_SLUG -v ${{ matrix.version }} \
+          build/${{ matrix.version }}/progress.json
+
+    # Upload map files
+    - name: Upload map
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.version }}_maps
+        path: build/${{ matrix.version }}/**/*.MAP

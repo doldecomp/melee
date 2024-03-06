@@ -5,7 +5,7 @@ Windows
 --------
 
 On Windows, it's **highly recommended** to use native tooling. WSL or msys2 are **not** required.  
-When running under WSL, [objdiff](#diffing) is unable to get filesystem notifications for automatic rebuilds.
+When running under WSL, [objdiff](https://github.com/encounter/objdiff) is unable to get filesystem notifications for automatic rebuilds.
 
 - Install [Python](https://www.python.org/downloads/) and add it to `%PATH%`.
   - Also available from the [Windows Store](https://apps.microsoft.com/store/detail/python-311/9NRWMJP3717K).
