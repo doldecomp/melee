@@ -12,10 +12,27 @@
 #include <baselib/gobj.h>
 #include <baselib/random.h>
 
-void it_802D3D94(Item_GObj*); /* static */
-void it_802D3C9C(Item_GObj*); /* static */
-void it_802D3BE0(Item_GObj*);
 M2C_UNK it_8027ADEC(M2C_UNK, Item_GObj*, HSD_JObj*, f32); /* extern */
+
+/* 2D3B8C */ static void it_802D3B8C(Item_GObj* gobj);
+/* 2D3BE0 */ static void it_802D3BE0(Item_GObj* gobj);
+/* 2D3C50 */ static bool it_802D3C50(Item_GObj* gobj);
+/* 2D3C90 */ static void it_802D3C90(Item_GObj* gobj);
+/* 2D3C94 */ static bool it_802D3C94(Item_GObj* gobj);
+/* 2D3C9C */ static void it_802D3C9C(Item_GObj* gobj);
+/* 2D3D28 */ static bool it_802D3D28(Item_GObj* gobj);
+/* 2D3D6C */ static void it_802D3D6C(Item_GObj* gobj);
+/* 2D3D8C */ static bool it_802D3D8C(Item_GObj* gobj);
+/* 2D3D94 */ static void it_802D3D94(Item_GObj* gobj);
+/* 2D3E08 */ static bool it_802D3E08(Item_GObj* gobj);
+/* 2D3E2C */ static void it_802D3E2C(Item_GObj* gobj);
+/* 2D3ED0 */ static bool it_802D3ED0(Item_GObj* gobj);
+
+ItemStateTable it_803F80C8[] = {
+    { 0, it_802D3E08, it_802D3E2C, it_802D3ED0 },
+    { 1, it_802D3C50, it_802D3C90, it_802D3C94 },
+    { 2, it_802D3D28, it_802D3D6C, it_802D3D8C },
+};
 
 void it_802D3B18(Item_GObj* gobj)
 {
@@ -143,9 +160,3 @@ bool it_802D3ED0(Item_GObj* gobj)
 {
     return it_8027A118(gobj, it_802D3B8C);
 }
-
-ItemStateTable it_803F80C8[] = {
-    { 0, it_802D3E08, it_802D3E2C, it_802D3ED0 },
-    { 1, it_802D3C50, it_802D3C90, it_802D3C94 },
-    { 2, it_802D3D28, it_802D3D6C, it_802D3D8C },
-};
