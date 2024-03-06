@@ -64,7 +64,6 @@ void it_802D3BE0(Item_GObj* gobj)
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     ip->entered_hitlag = efLib_PauseAll;
     ip->exited_hitlag = efLib_ResumeAll;
-    return;
 }
 
 bool it_802D3C50(Item_GObj* gobj)
