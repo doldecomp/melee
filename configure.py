@@ -73,7 +73,7 @@ parser.add_argument(
     "--use-asm",
     dest="no_asm",
     action="store_false",
-    help="don't incorporate .s files from asm directory",
+    help="incorporate .s files from asm directory",
 )
 parser.add_argument(
     "--debug",
@@ -108,12 +108,12 @@ parser.add_argument(
     "--msg-style",
     choices=["mpw", "std", "gcc", "ide", "parseable"],
     default="std",
-    help="message style of the compiler (default 'std')",
+    help="message style of the compiler and linker (default 'std')",
 )
 parser.add_argument(
     "--max-errors",
     type=int,
-    default=0,
+    default=1,
     help="the maximum number of errors allowed by the compiler (default 0, meaning unlimited)",
 )
 parser.add_argument(
@@ -209,17 +209,13 @@ if config.debug:
 else:
     cflags_base.append("-DNDEBUG=1")
 
-if args.max_errors is not None:
-    cflags_base.append(f"-maxerrors {args.max_errors}")
-    if args.max_errors == 0:
-        cflags_base.append("-nofail")
+cflags_base.append(f"-maxerrors {args.max_errors}")
+if args.max_errors == 0:
+    cflags_base.append("-nofail")
 
-if args.msg_style is not None:
-    cflags_base.append(f"-msgstyle {args.msg_style}")
-    config.ldflags.append(f"-msgstyle {args.msg_style}")
-
-if args.warn is not None:
-    cflags_base.append(f"-warn {args.warn}")
+cflags_base.append(f"-msgstyle {args.msg_style}")
+config.ldflags.append(f"-msgstyle {args.msg_style}")
+cflags_base.append(f"-warn {args.warn}")
 
 if args.warn_error:
     cflags_base.append("-warn iserror")
