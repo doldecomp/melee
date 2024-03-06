@@ -7,12 +7,9 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-#include "it/types.h"
 
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-
-M2C_UNK it_8027ADEC(M2C_UNK, Item_GObj*, HSD_JObj*, f32); /* extern */
 
 /* 2D3B8C */ static void it_802D3B8C(Item_GObj* gobj);
 /* 2D3BE0 */ static void it_802D3BE0(Item_GObj* gobj);

@@ -27,6 +27,7 @@
 /* 279FF8 */ void it_80279FF8(Item_GObj*);
 /* 27A09C */ bool it_8027A09C(Item_GObj*);
 /* 27A118 */ bool it_8027A118(Item_GObj*, void (*)(Item_GObj*));
+/* 27ADEC */ M2C_UNK it_8027ADEC(M2C_UNK, Item_GObj*, HSD_JObj*, f32);
 /* 27B070 */ void it_8027B070(Item_GObj* gobj, Fighter_GObj* owner_gobj);
 /* 27B378 */ void it_8027B378(Fighter_GObj*, Item_GObj*, float);
 /* 27C56C */ void it_8027C56C(Item_GObj*, f32);
