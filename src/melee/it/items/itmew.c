@@ -17,18 +17,14 @@ void it_802D3C9C(Item_GObj*); /* static */
 void it_802D3BE0(Item_GObj*);
 M2C_UNK it_8027ADEC(M2C_UNK, Item_GObj*, HSD_JObj*, f32); /* extern */
 
-void it_802D3B18(Item_GObj* arg0)
+void it_802D3B18(Item_GObj* gobj)
 {
-    Article* temp_r4;
-    Item* temp_r5;
-    void* temp_r31;
+    Item* ip = GET_ITEM(gobj);
+    MewVars* attr = ip->xC4_article_data->x4_specialAttributes;
 
-    temp_r5 = arg0->user_data;
-    temp_r4 = temp_r5->xC4_article_data;
-    temp_r31 = temp_r4->x4_specialAttributes;
-    temp_r5->facing_dir = 0.0F;
-    // it_802D3D94(temp_r4, temp_r5);
-    //  it_80279CDC(arg0, *temp_r31);
+    ip->facing_dir = 0.0F;
+    it_802D3D94(gobj);
+    it_80279CDC(gobj, attr->x0);
 }
 
 void it_802D3B6C(Item_GObj* gobj, Item_GObj* ref_gobj)
