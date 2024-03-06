@@ -141,18 +141,18 @@ bool it_802D3E08(Item_GObj* gobj)
 
 void it_802D3E2C(Item_GObj* gobj)
 {
-    Item* temp_r31;
-    Item* temp_r30;
+    Item* ip_arg;
+    Item* ip;
 
     if (it_8027A09C(gobj) != false) {
-        temp_r31 = GET_ITEM(gobj);
+        ip_arg = GET_ITEM(gobj);
         it_80273454(gobj);
-        temp_r30 = GET_ITEM(gobj);
-        it_8027ADEC(0x46B, gobj, gobj->hsd_obj, 2.8F);
+        ip = GET_ITEM(gobj);
+        it_8027ADEC(0x46B, gobj, HSD_GObjGetHSDObj(gobj), 2.8F);
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-        temp_r30->entered_hitlag = efLib_PauseAll;
-        temp_r30->exited_hitlag = efLib_ResumeAll;
-        Item_8026AE84(temp_r31, 0x2729, 0x7F, 0x40);
+        ip->entered_hitlag = efLib_PauseAll;
+        ip->exited_hitlag = efLib_ResumeAll;
+        Item_8026AE84(ip_arg, 0x2729, 0x7F, 0x40);
     }
 }
 
