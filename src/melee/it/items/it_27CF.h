@@ -150,11 +150,6 @@
 /* 2C6DB8 */ void it_802C6DB8(Item_GObj*);
 /* 2C6DD8 */ void it_802C6DD8(Item_GObj*);
 /* 2C6E50 */ void it_802C6E50(Item_GObj*);
-/* 2C6F40 */ HSD_GObj* it_802C6F40(Item_GObj*, Vec3*, s32, float);
-/* 2C7074 */ void it_802C7074(Item_GObj*);
-/* 2C70C0 */ void it_802C70C0(Item_GObj*);
-/* 2C70E0 */ void it_802C70E0(Item_GObj*);
-/* 2C7158 */ void it_802C7158(Item_GObj*);
 /* 2C720C */ HSD_GObj* it_802C720C(Item_GObj*, Vec3*, s32, float);
 /* 2C7340 */ void it_802C7340(Item_GObj*);
 /* 2C738C */ void it_802C738C(Item_GObj*);
