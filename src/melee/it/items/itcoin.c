@@ -330,96 +330,16 @@ bool it_802F1CB4(Item_GObj* gobj)
     return false;
 }
 
-void it_802F1CE0(Item_GObj* arg0)
+void it_802F1CE0(Item_GObj* gobj)
 {
-    HSD_JObj* temp_r30;
-    s32 temp_cr0_eq;
-    s32 temp_cr0_eq_2;
-    s32 temp_cr0_eq_3;
-    s32 temp_r31;
-    s32 var_r3;
-    s32 var_r3_2;
-    s32 var_r3_3;
-    u32 temp_r4;
-    u32 temp_r4_2;
-    u32 temp_r4_3;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    PAD_STACK(24);
 
-    temp_r30 = arg0->hsd_obj;
-    temp_r31 =
-        M2C_ERROR(/* unknown instruction: subi $r31, $r3, %l(it_803F93C8) */);
-    if (temp_r30 == NULL) {
-        __assert(M2C_ERROR(/* unknown instruction: subi $r3, $r13, %sda21(it_804D5758) */), 0x27F, M2C_ERROR(/* unknown instruction: subi $r5, $r13, %sda21(it_804D5760) */));
-    }
-    if (temp_r30->flags & 0x20000) {
-        //__assert(M2C_ERROR(/* unknown instruction: subi $r3, $r13,
-        //%sda21(it_804D5758) */), 0x280, temp_r31 + 0x60);
-    }
-    temp_r30->rotate.x = it_804DD9B8;
-    if (!(temp_r30->flags & 0x02000000)) {
-        temp_cr0_eq = temp_r30 == NULL;
-        if (temp_cr0_eq == 0) {
-            if (temp_cr0_eq != 0) {
-                __assert(M2C_ERROR(/* unknown instruction: subi $r3, $r13, %sda21(it_804D5758) */), 0x234, M2C_ERROR(/* unknown instruction: subi $r5, $r13, %sda21(it_804D5760) */));
-            }
-            temp_r4 = temp_r30->flags;
-            var_r3 = 0;
-            if (!(temp_r4 & 0x800000) && (temp_r4 & 0x40)) {
-                var_r3 = 1;
-            }
-            if (var_r3 == 0) {
-                HSD_JObjSetMtxDirtySub(temp_r30);
-            }
-        }
-    }
-    if (temp_r30 == NULL) {
-        __assert(M2C_ERROR(/* unknown instruction: subi $r3, $r13, %sda21(it_804D5758) */), 0x294, M2C_ERROR(/* unknown instruction: subi $r5, $r13, %sda21(it_804D5760) */));
-    }
-    if (temp_r30->flags & 0x20000) {
-        //__assert(M2C_ERROR(/* unknown instruction: subi $r3, $r13,
-        //%sda21(it_804D5758) */), 0x295, temp_r31 + 0x60);
-    }
-    temp_r30->rotate.y = it_804DD9B8;
-    if (!(temp_r30->flags & 0x02000000)) {
-        temp_cr0_eq_2 = temp_r30 == NULL;
-        if (temp_cr0_eq_2 == 0) {
-            if (temp_cr0_eq_2 != 0) {
-                __assert(M2C_ERROR(/* unknown instruction: subi $r3, $r13, %sda21(it_804D5758) */), 0x234, M2C_ERROR(/* unknown instruction: subi $r5, $r13, %sda21(it_804D5760) */));
-            }
-            temp_r4_2 = temp_r30->flags;
-            var_r3_2 = 0;
-            if (!(temp_r4_2 & 0x800000) && (temp_r4_2 & 0x40)) {
-                var_r3_2 = 1;
-            }
-            if (var_r3_2 == 0) {
-                HSD_JObjSetMtxDirtySub(temp_r30);
-            }
-        }
-    }
-    if (temp_r30 == NULL) {
-        __assert(M2C_ERROR(/* unknown instruction: subi $r3, $r13, %sda21(it_804D5758) */), 0x2A9, M2C_ERROR(/* unknown instruction: subi $r5, $r13, %sda21(it_804D5760) */));
-    }
-    if (temp_r30->flags & 0x20000) {
-        //__assert(M2C_ERROR(/* unknown instruction: subi $r3, $r13,
-        //%sda21(it_804D5758) */), 0x2AA, temp_r31 + 0x60);
-    }
-    temp_r30->rotate.z = it_804DD9B8;
-    if (!(temp_r30->flags & 0x02000000)) {
-        temp_cr0_eq_3 = temp_r30 == NULL;
-        if (temp_cr0_eq_3 == 0) {
-            if (temp_cr0_eq_3 != 0) {
-                __assert(M2C_ERROR(/* unknown instruction: subi $r3, $r13, %sda21(it_804D5758) */), 0x234, M2C_ERROR(/* unknown instruction: subi $r5, $r13, %sda21(it_804D5760) */));
-            }
-            temp_r4_3 = temp_r30->flags;
-            var_r3_3 = 0;
-            if (!(temp_r4_3 & 0x800000) && (temp_r4_3 & 0x40)) {
-                var_r3_3 = 1;
-            }
-            if (var_r3_3 == 0) {
-                HSD_JObjSetMtxDirtySub(temp_r30);
-            }
-        }
-    }
-    Item_80268E5C(arg0, 4, ITEM_UNK_0x1);
+    HSD_JObjSetRotationX(jobj, 0.0F);
+    HSD_JObjSetRotationY(jobj, 0.0F);
+    HSD_JObjSetRotationZ(jobj, 0.0F);
+
+    Item_80268E5C(gobj, 4, ITEM_UNK_0x1);
 }
 
 bool it_802F1EE4(Item_GObj* gobj)
