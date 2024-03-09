@@ -253,20 +253,16 @@ void it_802F18F0(Item_GObj* gobj, Item_GObj* ref)
 bool it_802F1910(Item_GObj* gobj)
 {
     Item* ip;
-    f32 temp_f0;
-    f32 temp_f1;
-    f32 temp_f1_2;
-    s32 temp_r0;
     itCoinAttributes* attr;
 
-    PAD_STACK(16);
+    PAD_STACK(20);
 
     ip = GET_ITEM(gobj);
     attr = ip->xC4_article_data->x4_specialAttributes;
     it_802762BC(ip);
     ip->xC9C = ip->xC9C + it_8027CBFC(gobj);
     it_8027B798(gobj, &ip->x40_vel);
-    if ((ip->x40_vel.x == 0.0F) && (ip->x40_vel.y == 0.0F)) {
+    if ((ip->x40_vel.x == 0.0F) && (ip->x40_vel.y == ip->x40_vel.x)) {
         ip->x40_vel.x = 0.1F * -ip->xCCC_incDamageDirection;
         ip->x40_vel.y = 0.1F;
     }
@@ -278,15 +274,13 @@ bool it_802F1910(Item_GObj* gobj)
         ip->x40_vel.x *= -1;
     }
     if (ip->pos.x > 0.0F) {
-        if (-1 == ip->xCCC_incDamageDirection) {
-            ip->x40_vel.x *= attr->x30 * attr->x24 + ip->xC9C;
+        if (ip->xCCC_incDamageDirection == -1) {
+            ip->x40_vel.x *= attr->x30 * (attr->x24 + ip->xC9C);
         } else {
-            ip->x40_vel.x *= attr->x2C * attr->x24 + ip->xC9C;
+            ip->x40_vel.x *= attr->x2C * (attr->x24 + ip->xC9C);
         }
-        temp_f0 = -attr->x3C;
-        M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
-        if (ip->x40_vel.x == temp_f0) {
-            ip->x40_vel.x = temp_f0;
+        if (ip->x40_vel.x <= -attr->x3C) {
+            ip->x40_vel.x = -attr->x3C;
         }
     } else {
         if (-1 == ip->xCCC_incDamageDirection) {
@@ -294,22 +288,17 @@ bool it_802F1910(Item_GObj* gobj)
         } else {
             ip->x40_vel.x *= attr->x30 * (attr->x24 + ip->xC9C);
         }
-        temp_f1 = attr->x3C;
-        M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
-        if (ip->x40_vel.x == temp_f1) {
-            ip->x40_vel.x = temp_f1;
+        if (ip->x40_vel.x >= attr->x3C) {
+            ip->x40_vel.x = attr->x3C;
         }
     }
     ip->x40_vel.y *= attr->x38 * (attr->x28 + ip->xC9C);
-    temp_f1_2 = attr->x40;
-    M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
-    if (ip->x40_vel.y == temp_f1_2) {
-        ip->x40_vel.y = temp_f1_2;
+    if (ip->x40_vel.y >= attr->x40) {
+        ip->x40_vel.y = attr->x40;
     }
     ip->x40_vel.z = 0.0F;
     ip->xC9C = 0;
-    temp_r0 = ip->xDD4_itemVar.coin.x4;
-    switch (temp_r0) { /* irregular */
+    switch (ip->xDD4_itemVar.coin.x4) {
     case 2:
         ip->xDD4_itemVar.coin.x8 += attr->x14;
         break;
