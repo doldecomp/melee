@@ -202,6 +202,8 @@ typedef struct itCoinAttributes {
     f32 x38;
     f32 x3C;
     f32 x40;
+    u8 x44_filler[0x4];
+    f32 x48;
 } itCoinAttributes;
 
 typedef struct CoinVars {

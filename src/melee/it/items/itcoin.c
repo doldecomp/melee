@@ -30,40 +30,37 @@ M2C_UNK it_8027B798(Item_GObj*, Vec3*);              /* extern */
 f32 it_8027CBFC(Item_GObj*);                         /* extern */
 s32 un_8031C5E4(s32);                                /* static */
 
-void it_802F1630(HSD_GObj* gobj); /* static */
-void it_802F1588(HSD_GObj* gobj); /* static */
+void it_802F1630(HSD_GObj* gobj);  /* static */
+void it_802F1588(Item_GObj* gobj); /* static */
 
-void it_802F13B4(HSD_GObj* arg0, s32 arg1)
+void it_802F13B4(Item_GObj* gobj, s32 arg1)
 {
-    HSD_JObj* temp_r29;
-    void* temp_r30;
-    void* temp_r31;
+    Item* ip = GET_ITEM(gobj);
+    itCoinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    HSD_JObj* jobj = M2C_FIELD(gobj->hsd_obj, HSD_JObj**, 0x10);
 
-    temp_r31 = arg0->user_data;
-    temp_r29 = M2C_FIELD(arg0->hsd_obj, HSD_JObj**, 0x10);
-    temp_r30 = M2C_FIELD(M2C_FIELD(temp_r31, void**, 0xC4), void**, 4);
-    if (M2C_FIELD(temp_r31, s32*, 0xDD8) != 0) {
-        if (((gm_801A45E8(1) != 0) &&
-             (grFigureGet_80219C50(M2C_FIELD(temp_r31, s32*, 0xDE8)) == 0)) ||
-            ((Camera_80031144() < M2C_FIELD(temp_r30, f32*, 0x48)) &&
-             (grFigureGet_80219C50(M2C_FIELD(temp_r31, s32*, 0xDE8)) == 0)))
+    if (M2C_FIELD(ip, s32*, 0xDD8) != 0) {
+        if (((gm_801A45E8(1) != false) &&
+             (grFigureGet_80219C50(ip->xDD4_itemVar.coin.x14) == 0)) ||
+            ((Camera_80031144() < attr->x48) &&
+             (grFigureGet_80219C50(ip->xDD4_itemVar.coin.x14) == 0)))
         {
-            HSD_JObjSetFlagsAll(temp_r29, 0x10);
-            HSD_JObjClearFlagsAll(temp_r29->next, 0x10);
+            HSD_JObjSetFlagsAll(jobj, 0x10);
+            HSD_JObjClearFlagsAll(jobj->next, 0x10);
         } else {
-            HSD_JObjSetFlagsAll(temp_r29->next, 0x10);
-            HSD_JObjClearFlagsAll(temp_r29, 0x10);
+            HSD_JObjSetFlagsAll(jobj->next, 0x10);
+            HSD_JObjClearFlagsAll(jobj, 0x10);
         }
     } else if (((gm_801A45E8(1) != 0) && (Ground_801C1D84() == 0)) ||
-               (Camera_80031144() < M2C_FIELD(temp_r30, f32*, 0x48)))
+               (Camera_80031144() < attr->x48))
     {
-        HSD_JObjSetFlagsAll(temp_r29, 0x10);
-        HSD_JObjClearFlagsAll(temp_r29->next, 0x10);
+        HSD_JObjSetFlagsAll(jobj, 0x10);
+        HSD_JObjClearFlagsAll(jobj->next, 0x10);
     } else {
-        HSD_JObjSetFlagsAll(temp_r29->next, 0x10);
-        HSD_JObjClearFlagsAll(temp_r29, 0x10);
+        HSD_JObjSetFlagsAll(jobj->next, 0x10);
+        HSD_JObjClearFlagsAll(jobj, 0x10);
     }
-    it_8026EECC(arg0, arg1);
+    it_8026EECC(gobj, arg1);
 }
 
 void it_802F14E4(Item_GObj* gobj)
