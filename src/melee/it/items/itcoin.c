@@ -515,9 +515,11 @@ void it_802F2014(Item_GObj* gobj, s32 arg1)
     GET_ITEM(gobj)->x378_itemColl.x4C = arg1;
 }
 
-void* it_802F2020(Item_GObj* gobj)
+s32 it_802F2020(Item_GObj* gobj)
 {
-    return &GET_ITEM(gobj)->xDD4_itemVar;
+    Item* ip = GET_ITEM(gobj);
+
+    return ip->xDD4_itemVar.coin.x0;
 }
 
 void it_802F202C(HSD_GObj* arg0)
