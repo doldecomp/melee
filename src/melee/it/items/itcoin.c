@@ -7,6 +7,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbvector.h"
@@ -341,15 +342,13 @@ bool it_802F1C68(Item_GObj* gobj)
     return false;
 }
 
-void it_802F1C70(Item_GObj* arg0)
+void it_802F1C70(Item_GObj* gobj)
 {
-    Item* temp_r5;
+    Item* ip = GET_ITEM(gobj);
+    itCoinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
 
-    temp_r5 = arg0->user_data;
-    temp_r5->x40_vel.x *=
-        M2C_FIELD(temp_r5->xC4_article_data->x4_specialAttributes, f32*, 0x34);
-    // it_80272860(arg0, temp_r5->xDD4_itemVar.star.x8,
-    //             temp_r5->xDD4_itemVar.star.xC);
+    ip->x40_vel.x *= attr->x50;
+    it_80272860(gobj, ip->xDD4_itemVar.coin.x8, ip->xDD4_itemVar.coin.xC);
 }
 
 bool it_802F1CB4(Item_GObj* gobj)
@@ -357,8 +356,6 @@ bool it_802F1CB4(Item_GObj* gobj)
     it_8026E15C(gobj, it_802F1630);
     return false;
 }
-
-extern f32 it_804DD9B8;
 
 void it_802F1CE0(Item_GObj* arg0)
 {
