@@ -250,91 +250,82 @@ void it_802F18F0(Item_GObj* gobj, Item_GObj* ref)
     it_8026B894(gobj, ref);
 }
 
-bool it_802F1910(Item_GObj* arg0)
+bool it_802F1910(Item_GObj* gobj)
 {
-    Item* temp_r31;
+    Item* ip;
     f32 temp_f0;
     f32 temp_f1;
     f32 temp_f1_2;
     s32 temp_r0;
-    void* temp_r30;
+    itCoinAttributes* attr;
 
-    temp_r31 = arg0->user_data;
-    temp_r30 = temp_r31->xC4_article_data->x4_specialAttributes;
-    it_802762BC(temp_r31);
-    temp_r31->xC9C = temp_r31->xC9C + it_8027CBFC(arg0);
-    it_8027B798(arg0, &temp_r31->x40_vel);
-    if ((temp_r31->x40_vel.x == it_804DD9B8) &&
-        (temp_r31->x40_vel.y == it_804DD9B8))
-    {
-        temp_r31->x40_vel.x = it_804DD9BC * -temp_r31->xCCC_incDamageDirection;
-        temp_r31->x40_vel.y = it_804DD9BC;
+    PAD_STACK(16);
+
+    ip = GET_ITEM(gobj);
+    attr = ip->xC4_article_data->x4_specialAttributes;
+    it_802762BC(ip);
+    ip->xC9C = ip->xC9C + it_8027CBFC(gobj);
+    it_8027B798(gobj, &ip->x40_vel);
+    if ((ip->x40_vel.x == it_804DD9B8) && (ip->x40_vel.y == it_804DD9B8)) {
+        ip->x40_vel.x = it_804DD9BC * -ip->xCCC_incDamageDirection;
+        ip->x40_vel.y = it_804DD9BC;
     }
-    lbVector_Normalize(&temp_r31->x40_vel);
-    if ((temp_r31->pos.x > it_804DD9B8) &&
-        (it_804DD9C0 == temp_r31->xCCC_incDamageDirection))
+    lbVector_Normalize(&ip->x40_vel);
+    if ((ip->pos.x > it_804DD9B8) &&
+        (it_804DD9C0 == ip->xCCC_incDamageDirection))
     {
-        temp_r31->x40_vel.x *= it_804DD9C0;
+        ip->x40_vel.x *= it_804DD9C0;
     }
-    if ((temp_r31->pos.x < it_804DD9B8) &&
-        (it_804DD9C4 == temp_r31->xCCC_incDamageDirection))
+    if ((ip->pos.x < it_804DD9B8) &&
+        (it_804DD9C4 == ip->xCCC_incDamageDirection))
     {
-        temp_r31->x40_vel.x *= it_804DD9C0;
+        ip->x40_vel.x *= it_804DD9C0;
     }
-    if (temp_r31->pos.x > it_804DD9B8) {
-        if (it_804DD9C0 == temp_r31->xCCC_incDamageDirection) {
-            temp_r31->x40_vel.x *=
-                M2C_FIELD(temp_r30, f32*, 0x30) *
-                (M2C_FIELD(temp_r30, f32*, 0x24) + temp_r31->xC9C);
+    if (ip->pos.x > it_804DD9B8) {
+        if (it_804DD9C0 == ip->xCCC_incDamageDirection) {
+            ip->x40_vel.x *= attr->x30 * attr->x24 + ip->xC9C;
         } else {
-            temp_r31->x40_vel.x *=
-                M2C_FIELD(temp_r30, f32*, 0x2C) *
-                (M2C_FIELD(temp_r30, f32*, 0x24) + temp_r31->xC9C);
+            ip->x40_vel.x *= attr->x2C * attr->x24 + ip->xC9C;
         }
-        temp_f0 = -M2C_FIELD(temp_r30, f32*, 0x3C);
+        temp_f0 = -attr->x3C;
         M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
-        if (temp_r31->x40_vel.x == temp_f0) {
-            temp_r31->x40_vel.x = temp_f0;
+        if (ip->x40_vel.x == temp_f0) {
+            ip->x40_vel.x = temp_f0;
         }
     } else {
-        if (it_804DD9C0 == temp_r31->xCCC_incDamageDirection) {
-            temp_r31->x40_vel.x *=
-                M2C_FIELD(temp_r30, f32*, 0x2C) *
-                (M2C_FIELD(temp_r30, f32*, 0x24) + temp_r31->xC9C);
+        if (it_804DD9C0 == ip->xCCC_incDamageDirection) {
+            ip->x40_vel.x *= attr->x2C * (attr->x24 + ip->xC9C);
         } else {
-            temp_r31->x40_vel.x *=
-                M2C_FIELD(temp_r30, f32*, 0x30) *
-                (M2C_FIELD(temp_r30, f32*, 0x24) + temp_r31->xC9C);
+            ip->x40_vel.x *= attr->x30 * (attr->x24 + ip->xC9C);
         }
-        temp_f1 = M2C_FIELD(temp_r30, f32*, 0x3C);
+        temp_f1 = attr->x3C;
         M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
-        if (temp_r31->x40_vel.x == temp_f1) {
-            temp_r31->x40_vel.x = temp_f1;
+        if (ip->x40_vel.x == temp_f1) {
+            ip->x40_vel.x = temp_f1;
         }
     }
-    temp_r31->x40_vel.y *= M2C_FIELD(temp_r30, f32*, 0x38) *
-                           (M2C_FIELD(temp_r30, f32*, 0x28) + temp_r31->xC9C);
-    temp_f1_2 = M2C_FIELD(temp_r30, f32*, 0x40);
+    ip->x40_vel.y *= attr->x38 * (attr->x28 + ip->xC9C);
+    temp_f1_2 = attr->x40;
     M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
-    if (temp_r31->x40_vel.y == temp_f1_2) {
-        temp_r31->x40_vel.y = temp_f1_2;
+    if (ip->x40_vel.y == temp_f1_2) {
+        ip->x40_vel.y = temp_f1_2;
     }
-    temp_r31->x40_vel.z = it_804DD9B8;
-    temp_r31->xC9C = 0;
-    temp_r0 = temp_r31->xDD4_itemVar.capsule.x4;
+    ip->x40_vel.z = it_804DD9B8;
+    ip->xC9C = 0;
+    temp_r0 = ip->xDD4_itemVar.coin.x4;
     switch (temp_r0) { /* irregular */
     case 2:
-        temp_r31->xDD4_itemVar.star.x8 += M2C_FIELD(temp_r30, f32*, 0x14);
+        ip->xDD4_itemVar.coin.x8 += attr->x14;
         break;
     case 3:
-        temp_r31->xDD4_itemVar.star.x8 += M2C_FIELD(temp_r30, f32*, 0x20);
+        ip->xDD4_itemVar.coin.x8 += attr->x20;
         break;
     default:
-        temp_r31->xDD4_itemVar.star.x8 += M2C_FIELD(temp_r30, f32*, 8);
+        ip->xDD4_itemVar.coin.x8 += attr->x8;
         break;
     }
-    Item_80268E5C(arg0, 3, ITEM_UNK_0x1);
-    return 0;
+    Item_80268E5C(gobj, 3, ITEM_UNK_0x1);
+    return false;
 }
 
 bool it_802F1C68(Item_GObj* gobj)
@@ -347,7 +338,7 @@ void it_802F1C70(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itCoinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
 
-    ip->x40_vel.x *= attr->x50;
+    ip->x40_vel.x *= attr->x34;
     it_80272860(gobj, ip->xDD4_itemVar.coin.x8, ip->xDD4_itemVar.coin.xC);
 }
 
