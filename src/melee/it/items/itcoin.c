@@ -345,7 +345,7 @@ void it_802F202C(HSD_GObj* gobj)
     it_802756D0(gobj);
 }
 
-void* it_802F2094(s32 arg0, Vec3* arg1, s32 arg2, s32 arg3)
+Item_GObj* it_802F2094(s32 arg0, Vec3* arg1, s32 arg2, s32 arg3)
 {
     u8 sp60;
     s32 sp5C;
@@ -362,15 +362,11 @@ void* it_802F2094(s32 arg0, Vec3* arg1, s32 arg2, s32 arg3)
     f32 sp30;
     s32 sp24;
     s32 sp20;
-    s32 sp1C;
-    HSD_JObj* temp_r29;
-    HSD_JObj* temp_r29_2;
-    HSD_JObj* temp_r29_3;
-    Item* temp_r30;
-    Item_GObj* temp_r3;
-    f32 temp_f31;
-    f32 temp_f31_2;
-    f32 temp_f31_3;
+    SpawnItem spawn;
+    HSD_JObj* jobj;
+    Item* ip;
+    Item_GObj* gobj;
+    f32 scale;
     f32 temp_r0;
     f32 temp_r0_2;
     s32 temp_cr0_eq;
@@ -383,7 +379,7 @@ void* it_802F2094(s32 arg0, Vec3* arg1, s32 arg2, s32 arg3)
     u32 temp_r4;
     u32 temp_r4_2;
     u32 temp_r4_3;
-    void* temp_r28;
+    itCoinAttributes* attr;
 
     sp24 = 0x9F;
     temp_r0 = arg1->y;
@@ -399,120 +395,60 @@ void* it_802F2094(s32 arg0, Vec3* arg1, s32 arg2, s32 arg3)
     sp4C = it_804DD9B8;
     sp48 = it_804DD9B8;
     sp58 = 0;
-    sp1C = 0;
     sp20 = 0;
     // sp60 |= 0x80;
     sp5C = 0;
-    // temp_r3 = Item_80268B18(&sp1C);
-    temp_r3 = NULL;
-    if (temp_r3 != NULL) {
-        temp_r30 = temp_r3->user_data;
-        temp_r28 = temp_r30->xC4_article_data->x4_specialAttributes;
-        temp_r30->xDD4_itemVar.capsule.x0 = arg2;
-        temp_r30->xDD4_itemVar.capsule.x4 = arg3;
-        temp_r30->xDD4_itemVar.star.yvel = M2C_BITWISE(f32, arg0);
-        if (temp_r30->xDD4_itemVar.capsule.x4 != 0) {
-            it_802756E0(temp_r3);
-            it_8026B3A8(temp_r3);
-            switch (arg3) { /* irregular */
+    gobj = Item_80268B18(&spawn);
+    if (gobj != NULL) {
+        ip = GET_ITEM(gobj);
+        attr = ip->xC4_article_data->x4_specialAttributes;
+        ip->xDD4_itemVar.coin.x0 = arg2;
+        ip->xDD4_itemVar.coin.x4 = arg3;
+        ip->xDD4_itemVar.coin.x14 = arg0;
+        if (ip->xDD4_itemVar.coin.x4 != 0) {
+            it_802756E0(gobj);
+            it_8026B3A8(gobj);
+            switch (arg3) {
             case 2:
-                temp_r30->xDD4_itemVar.star.x8 =
-                    M2C_FIELD(temp_r28, f32*, 0xC);
-                temp_r30->xDD4_itemVar.star.xC =
-                    M2C_FIELD(temp_r28, f32*, 0x10);
+                ip->xDD4_itemVar.coin.x8 = attr->xC;
+                ip->xDD4_itemVar.coin.xC = attr->x10;
                 break;
             case 3:
-                temp_r30->xDD4_itemVar.star.x8 =
-                    M2C_FIELD(temp_r28, f32*, 0x18);
-                temp_r30->xDD4_itemVar.star.xC =
-                    M2C_FIELD(temp_r28, f32*, 0x1C);
+                ip->xDD4_itemVar.coin.x8 = attr->x18;
+                ip->xDD4_itemVar.coin.xC = attr->x1C;
                 break;
             default:
-                temp_r30->xDD4_itemVar.star.x8 = M2C_FIELD(temp_r28, f32*, 0);
-                temp_r30->xDD4_itemVar.star.xC = M2C_FIELD(temp_r28, f32*, 4);
+                ip->xDD4_itemVar.coin.x8 = attr->x0;
+                ip->xDD4_itemVar.coin.xC = attr->x4;
                 break;
             }
             var_r29 = un_8031C5E4(arg2);
         } else {
-            Item_80267454(temp_r3);
-            it_802756D0(temp_r3);
-            it_8026B390(temp_r3);
-            temp_r30->xD5C = 0;
+            Item_80267454(gobj);
+            it_802756D0(gobj);
+            it_8026B390(gobj);
+            ip->xD5C = 0;
             var_r29 = un_8031C5E4(arg2);
         }
-        HSD_GObjObjet_80390B0C(temp_r3);
-        HSD_GObjObjet_80390A70(temp_r3, HSD_GObj_804D7849, var_r29);
-        it_8027163C(temp_r3);
-        temp_r30->scl = Ground_801C0498();
-        temp_r30->scl *= M2C_FIELD(temp_r28, f32*, 0x44);
-        temp_r29 = temp_r3->hsd_obj;
-        temp_f31 = temp_r30->scl;
-        if (temp_r29 == NULL) {
-            __assert(M2C_ERROR(/* unknown instruction: subi $r3, $r13, %sda21(it_804D5758) */), 0x308, M2C_ERROR(/* unknown instruction: subi $r5, $r13, %sda21(it_804D5760) */));
-        }
-        temp_r29->scale.x = temp_f31;
-        if (!(temp_r29->flags & 0x02000000)) {
-            temp_cr0_eq = temp_r29 == NULL;
-            if (temp_cr0_eq == 0) {
-                if (temp_cr0_eq != 0) {
-                    __assert(M2C_ERROR(/* unknown instruction: subi $r3, $r13, %sda21(it_804D5758) */), 0x234, M2C_ERROR(/* unknown instruction: subi $r5, $r13, %sda21(it_804D5760) */));
-                }
-                temp_r4 = temp_r29->flags;
-                var_r3 = 0;
-                if (!(temp_r4 & 0x800000) && (temp_r4 & 0x40)) {
-                    var_r3 = 1;
-                }
-                if (var_r3 == 0) {
-                    HSD_JObjSetMtxDirtySub(temp_r29);
-                }
-            }
-        }
-        temp_r29_2 = temp_r3->hsd_obj;
-        temp_f31_2 = temp_r30->scl;
-        if (temp_r29_2 == NULL) {
-            __assert(M2C_ERROR(/* unknown instruction: subi $r3, $r13, %sda21(it_804D5758) */), 0x317, M2C_ERROR(/* unknown instruction: subi $r5, $r13, %sda21(it_804D5760) */));
-        }
-        temp_r29_2->scale.y = temp_f31_2;
-        if (!(temp_r29_2->flags & 0x02000000)) {
-            temp_cr0_eq_2 = temp_r29_2 == NULL;
-            if (temp_cr0_eq_2 == 0) {
-                if (temp_cr0_eq_2 != 0) {
-                    __assert(M2C_ERROR(/* unknown instruction: subi $r3, $r13, %sda21(it_804D5758) */), 0x234, M2C_ERROR(/* unknown instruction: subi $r5, $r13, %sda21(it_804D5760) */));
-                }
-                temp_r4_2 = temp_r29_2->flags;
-                var_r3_2 = 0;
-                if (!(temp_r4_2 & 0x800000) && (temp_r4_2 & 0x40)) {
-                    var_r3_2 = 1;
-                }
-                if (var_r3_2 == 0) {
-                    HSD_JObjSetMtxDirtySub(temp_r29_2);
-                }
-            }
-        }
-        temp_r29_3 = temp_r3->hsd_obj;
-        temp_f31_3 = temp_r30->scl;
-        if (temp_r29_3 == NULL) {
-            __assert(M2C_ERROR(/* unknown instruction: subi $r3, $r13, %sda21(it_804D5758) */), 0x326, M2C_ERROR(/* unknown instruction: subi $r5, $r13, %sda21(it_804D5760) */));
-        }
-        temp_r29_3->scale.z = temp_f31_3;
-        if (!(temp_r29_3->flags & 0x02000000)) {
-            temp_cr0_eq_3 = temp_r29_3 == NULL;
-            if (temp_cr0_eq_3 == 0) {
-                if (temp_cr0_eq_3 != 0) {
-                    __assert(M2C_ERROR(/* unknown instruction: subi $r3, $r13, %sda21(it_804D5758) */), 0x234, M2C_ERROR(/* unknown instruction: subi $r5, $r13, %sda21(it_804D5760) */));
-                }
-                temp_r4_3 = temp_r29_3->flags;
-                var_r3_3 = 0;
-                if (!(temp_r4_3 & 0x800000) && (temp_r4_3 & 0x40)) {
-                    var_r3_3 = 1;
-                }
-                if (var_r3_3 == 0) {
-                    HSD_JObjSetMtxDirtySub(temp_r29_3);
-                }
-            }
-        }
+        HSD_GObjObjet_80390B0C(gobj);
+        HSD_GObjObjet_80390A70(gobj, HSD_GObj_804D7849, var_r29);
+        it_8027163C(gobj);
+        ip->scl = Ground_801C0498();
+        ip->scl *= attr->x44;
+
+        jobj = gobj->hsd_obj;
+        scale = ip->scl;
+        HSD_JObjSetScaleX(jobj, scale);
+
+        jobj = gobj->hsd_obj;
+        scale = ip->scl;
+        HSD_JObjSetScaleY(jobj, scale);
+
+        jobj = gobj->hsd_obj;
+        scale = ip->scl;
+        HSD_JObjSetScaleZ(jobj, scale);
     }
-    return temp_r3;
+    return gobj;
 }
 
 ItemStateTable it_803F93C8[] = {

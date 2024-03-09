@@ -186,10 +186,11 @@ typedef struct MewVars {
 } MewVars;
 
 typedef struct itCoinAttributes {
-    u8 x0_filler[0x4];
+    f32 x0;
     f32 x4;
     f32 x8;
-    u8 xC_filler[0x8];
+    f32 xC;
+    f32 x10;
     f32 x14;
     f32 x18;
     f32 x1C;
@@ -202,7 +203,7 @@ typedef struct itCoinAttributes {
     f32 x38;
     f32 x3C;
     f32 x40;
-    u8 x44_filler[0x4];
+    f32 x44;
     f32 x48;
 } itCoinAttributes;
 
