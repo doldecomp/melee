@@ -70,10 +70,10 @@ void it_802F14E4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
-    ip->xDD4_itemVar.capsule.x4 = 0;
-    ip->xDD4_itemVar.capsule.x0 = 0;
-    ip->xDD4_itemVar.star.xvel = 0.0f;
-    // it_802F1588(ip);
+    ip->xDD4_itemVar.coin.x4 = 0;
+    ip->xDD4_itemVar.coin.x0 = 0;
+    ip->xDD4_itemVar.coin.x10 = 0;
+    it_802F1588(gobj);
 }
 
 void it_802F1518(Item_GObj* gobj)
