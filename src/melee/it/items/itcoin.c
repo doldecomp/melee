@@ -266,23 +266,19 @@ bool it_802F1910(Item_GObj* gobj)
     it_802762BC(ip);
     ip->xC9C = ip->xC9C + it_8027CBFC(gobj);
     it_8027B798(gobj, &ip->x40_vel);
-    if ((ip->x40_vel.x == it_804DD9B8) && (ip->x40_vel.y == it_804DD9B8)) {
-        ip->x40_vel.x = it_804DD9BC * -ip->xCCC_incDamageDirection;
-        ip->x40_vel.y = it_804DD9BC;
+    if ((ip->x40_vel.x == 0.0F) && (ip->x40_vel.y == 0.0F)) {
+        ip->x40_vel.x = 0.1F * -ip->xCCC_incDamageDirection;
+        ip->x40_vel.y = 0.1F;
     }
     lbVector_Normalize(&ip->x40_vel);
-    if ((ip->pos.x > it_804DD9B8) &&
-        (it_804DD9C0 == ip->xCCC_incDamageDirection))
-    {
-        ip->x40_vel.x *= it_804DD9C0;
+    if ((ip->pos.x > 0.0F) && (-1 == ip->xCCC_incDamageDirection)) {
+        ip->x40_vel.x *= -1;
     }
-    if ((ip->pos.x < it_804DD9B8) &&
-        (it_804DD9C4 == ip->xCCC_incDamageDirection))
-    {
-        ip->x40_vel.x *= it_804DD9C0;
+    if ((ip->pos.x < 0.0F) && (1 == ip->xCCC_incDamageDirection)) {
+        ip->x40_vel.x *= -1;
     }
-    if (ip->pos.x > it_804DD9B8) {
-        if (it_804DD9C0 == ip->xCCC_incDamageDirection) {
+    if (ip->pos.x > 0.0F) {
+        if (-1 == ip->xCCC_incDamageDirection) {
             ip->x40_vel.x *= attr->x30 * attr->x24 + ip->xC9C;
         } else {
             ip->x40_vel.x *= attr->x2C * attr->x24 + ip->xC9C;
@@ -293,7 +289,7 @@ bool it_802F1910(Item_GObj* gobj)
             ip->x40_vel.x = temp_f0;
         }
     } else {
-        if (it_804DD9C0 == ip->xCCC_incDamageDirection) {
+        if (-1 == ip->xCCC_incDamageDirection) {
             ip->x40_vel.x *= attr->x2C * (attr->x24 + ip->xC9C);
         } else {
             ip->x40_vel.x *= attr->x30 * (attr->x24 + ip->xC9C);
@@ -310,7 +306,7 @@ bool it_802F1910(Item_GObj* gobj)
     if (ip->x40_vel.y == temp_f1_2) {
         ip->x40_vel.y = temp_f1_2;
     }
-    ip->x40_vel.z = it_804DD9B8;
+    ip->x40_vel.z = 0.0F;
     ip->xC9C = 0;
     temp_r0 = ip->xDD4_itemVar.coin.x4;
     switch (temp_r0) { /* irregular */
