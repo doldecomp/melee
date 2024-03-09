@@ -22,8 +22,8 @@ extern f32 it_804DD9C4;
 extern f32 it_804DD9D0;
 
 s32 grFigureGet_80219C50(s32);                       /* extern */
-M2C_UNK gm_8017E280(s16, M2C_UNK);                   /* extern */
-M2C_UNK grFigureGet_80219C34(f32);                   /* extern */
+M2C_UNK gm_8017E280(u16, M2C_UNK);                   /* extern */
+M2C_UNK grFigureGet_80219C34(s32);                   /* extern */
 M2C_UNK HSD_GObjObjet_80390A70(Item_GObj*, u8, s32); /* extern */
 M2C_UNK HSD_GObjObjet_80390B0C(Item_GObj*);          /* extern */
 M2C_UNK it_8027B798(Item_GObj*, Vec3*);              /* extern */
@@ -80,10 +80,10 @@ void it_802F1518(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
-    if (ip->xDD4_itemVar.capsule.x4 != 0) {
-        grFigureGet_80219C34(ip->xDD4_itemVar.star.yvel);
-    } else if ((M2C_FIELD(ip, u8*, 0xDCA) >> 4) & 1) {
-        gm_8017E280(ip->xDD4_itemVar.capsule.x0, 1);
+    if (ip->xDD4_itemVar.coin.x4 != 0) {
+        grFigureGet_80219C34(ip->xDD4_itemVar.coin.x14);
+    } else if (ip->xDC8_word.flags.x13 != false) {
+        gm_8017E280(ip->xDD4_itemVar.coin.x0, 1);
         it_8027CE44(gobj);
     }
     it_8027C8B0(gobj);
