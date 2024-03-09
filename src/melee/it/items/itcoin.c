@@ -470,30 +470,28 @@ bool it_802F1F1C(Item_GObj* gobj)
     return false;
 }
 
-void it_802F1F48(Item_GObj* arg0)
+void it_802F1F48(Item_GObj* gobj)
 {
-    Item* temp_r31;
-    f32 var_f0;
-    s32 var_r4;
+    Item* ip;
+    f32 item_dir;
+    s32 coll_dir;
 
-    temp_r31 = arg0->user_data;
-    Item_80268E5C(arg0, 5, ITEM_ANIM_UPDATE);
-    M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
-    if ((M2C_FIELD(temp_r31, f32*, 0x88) +
-         (temp_r31->x40_vel.x + M2C_FIELD(temp_r31, f32*, 0x7C))) ==
-        it_804DD9B8)
-    {
-        var_f0 = it_804DD9C4;
+    ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+
+    if (ip->x40_vel.x + ip->x7C + ip->x88 >= 0.0F) {
+        item_dir = -1;
     } else {
-        var_f0 = it_804DD9C0;
+        item_dir = 1;
     }
-    temp_r31->facing_dir = var_f0;
-    if (it_804DD9C0 == temp_r31->facing_dir) {
-        var_r4 = -1;
+
+    ip->facing_dir = item_dir;
+    if (it_804DD9C0 == ip->facing_dir) {
+        coll_dir = -1;
     } else {
-        var_r4 = 1;
+        coll_dir = 1;
     }
-    mpColl_800436D8(&temp_r31->x378_itemColl, var_r4);
+    mpColl_800436D8(&ip->x378_itemColl, coll_dir);
 }
 
 bool it_802F1FD4(Item_GObj* gobj)
