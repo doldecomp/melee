@@ -1,3 +1,5 @@
+#include "it/forward.h"
+
 #include "itcoin.h"
 
 #include "cm/camera.h"
@@ -340,59 +342,29 @@ void it_802F202C(HSD_GObj* gobj)
     it_802756D0(gobj);
 }
 
-Item_GObj* it_802F2094(s32 arg0, Vec3* arg1, s32 arg2, s32 arg3)
+Item_GObj* it_802F2094(s32 arg0, Vec3* pos, s32 arg2, s32 arg3)
 {
-    u8 sp60;
-    s32 sp5C;
-    s16 sp58;
-    f32 sp54;
-    f32 sp50;
-    f32 sp4C;
-    f32 sp48;
-    f32 sp44;
-    f32 sp40;
-    f32 sp3C;
-    f32 sp38;
-    f32 sp34;
-    f32 sp30;
-    s32 sp24;
-    s32 sp20;
     SpawnItem spawn;
-    HSD_JObj* jobj;
-    Item* ip;
     Item_GObj* gobj;
-    f32 scale;
-    f32 temp_r0;
-    f32 temp_r0_2;
-    s32 temp_cr0_eq;
-    s32 temp_cr0_eq_2;
-    s32 temp_cr0_eq_3;
-    s32 var_r29;
-    s32 var_r3;
-    s32 var_r3_2;
-    s32 var_r3_3;
-    u32 temp_r4;
-    u32 temp_r4_2;
-    u32 temp_r4_3;
+    HSD_JObj* jobj;
     itCoinAttributes* attr;
+    Item* ip;
+    f32 scale;
+    s32 var_r29;
 
-    sp24 = 0x9F;
-    temp_r0 = arg1->y;
-    sp3C = arg1->x;
-    sp40 = temp_r0;
-    temp_r0_2 = arg1->z;
-    sp44 = temp_r0_2;
-    sp30 = sp3C;
-    sp34 = temp_r0;
-    sp38 = temp_r0_2;
-    sp54 = it_804DD9B8;
-    sp50 = it_804DD9B8;
-    sp4C = it_804DD9B8;
-    sp48 = it_804DD9B8;
-    sp58 = 0;
-    sp20 = 0;
-    // sp60 |= 0x80;
-    sp5C = 0;
+    spawn.kind = It_Kind_Coin;
+    spawn.prev_pos = *pos;
+    spawn.pos = spawn.prev_pos;
+    spawn.facing_dir = 0.0F;
+    spawn.vel.z = 0.0F;
+    spawn.vel.y = 0.0F;
+    spawn.vel.x = 0.0F;
+    spawn.x3C_damage = 0;
+    spawn.x0_parent_gobj = NULL;
+    spawn.x4_parent_gobj2 = NULL;
+    spawn.x44_flag.bits.b0 = true;
+    spawn.x40 = 0.0F;
+
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         ip = GET_ITEM(gobj);
