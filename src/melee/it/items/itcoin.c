@@ -228,7 +228,7 @@ bool it_802F185C(Item_GObj* gobj)
 
 void it_802F1888(Item_GObj* gobj)
 {
-    HSD_JObj* jobj = gobj->hsd_obj;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* child = HSD_JObjGetChild(jobj);
 
     HSD_JObjClearFlagsAll(child, 0x10);
