@@ -19,7 +19,6 @@ extern f32 it_804DD9B8;
 extern f32 it_804DD9BC;
 extern f32 it_804DD9C0;
 extern f32 it_804DD9C4;
-extern f32 it_804DD9D0;
 
 s32 grFigureGet_80219C50(s32);                       /* extern */
 M2C_UNK gm_8017E280(u16, M2C_UNK);                   /* extern */
@@ -522,17 +521,17 @@ s32 it_802F2020(Item_GObj* gobj)
     return ip->xDD4_itemVar.coin.x0;
 }
 
-void it_802F202C(HSD_GObj* arg0)
+void it_802F202C(HSD_GObj* gobj)
 {
-    void* temp_r31;
+    Item* ip = GET_ITEM(gobj);
+    f32 vel = -1.5;
 
-    temp_r31 = arg0->user_data;
     lbAudioAx_800237A8(0xAA, 0x7F, 0x40);
-    M2C_FIELD(temp_r31, f32*, 0x40) = it_804DD9B8;
-    if (M2C_FIELD(temp_r31, f32*, 0x44) < it_804DD9D0) {
-        M2C_FIELD(temp_r31, f32*, 0x44) = it_804DD9D0;
+    ip->x40_vel.x = 0.0F;
+    if (ip->x40_vel.y < vel) {
+        ip->x40_vel.y = vel;
     }
-    it_802756D0(arg0);
+    it_802756D0(gobj);
 }
 
 void* it_802F2094(s32 arg0, Vec3* arg1, s32 arg2, s32 arg3)
