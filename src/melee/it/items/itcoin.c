@@ -16,11 +16,6 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-extern f32 it_804DD9B8;
-extern f32 it_804DD9BC;
-extern f32 it_804DD9C0;
-extern f32 it_804DD9C4;
-
 s32 grFigureGet_80219C50(s32);                       /* extern */
 M2C_UNK gm_8017E280(u16, M2C_UNK);                   /* extern */
 M2C_UNK grFigureGet_80219C34(s32);                   /* extern */
@@ -299,7 +294,7 @@ void it_802F1F48(Item_GObj* gobj)
     }
 
     ip->facing_dir = item_dir;
-    if (it_804DD9C0 == ip->facing_dir) {
+    if (ip->facing_dir == -1) {
         coll_dir = -1;
     } else {
         coll_dir = 1;
