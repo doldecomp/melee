@@ -27,8 +27,34 @@ M2C_UNK it_8027B798(Item_GObj*, Vec3*);              /* extern */
 f32 it_8027CBFC(Item_GObj*);                         /* extern */
 s32 un_8031C5E4(s32);                                /* static */
 
-void it_802F1630(HSD_GObj* gobj);  /* static */
-void it_802F1588(Item_GObj* gobj); /* static */
+/* 2F1588 */ static void it_802F1588(Item_GObj* gobj);
+/* 2F15B0 */ static bool it_802F15B0(Item_GObj* gobj);
+/* 2F15B8 */ static void it_802F15B8(Item_GObj* gobj);
+/* 2F1604 */ static bool it_802F1604(Item_GObj* gobj);
+/* 2F1630 */ static void it_802F1630(Item_GObj* gobj);
+/* 2F1850 */ static bool it_802F1850(Item_GObj* gobj);
+/* 2F1858 */ static void it_802F1858(Item_GObj* gobj);
+/* 2F185C */ static bool it_802F185C(Item_GObj* gobj);
+/* 2F18E4 */ static bool it_802F18E4(Item_GObj* gobj);
+/* 2F18EC */ static void it_802F18EC(Item_GObj* gobj);
+/* 2F1C68 */ static bool it_802F1C68(Item_GObj* gobj);
+/* 2F1C70 */ static void it_802F1C70(Item_GObj* gobj);
+/* 2F1CB4 */ static bool it_802F1CB4(Item_GObj* gobj);
+/* 2F1EE4 */ static bool it_802F1EE4(Item_GObj* gobj);
+/* 2F1EEC */ static void it_802F1EEC(Item_GObj* gobj);
+/* 2F1F1C */ static bool it_802F1F1C(Item_GObj* gobj);
+/* 2F1FD4 */ static bool it_802F1FD4(Item_GObj* gobj);
+/* 2F1FDC */ static void it_802F1FDC(Item_GObj* gobj);
+/* 2F1FE0 */ static bool it_802F1FE0(Item_GObj* gobj);
+
+ItemStateTable it_803F93C8[] = {
+    { -1, it_802F15B0, it_802F15B8, it_802F1604 },
+    { -1, it_802F1850, it_802F1858, it_802F185C },
+    { -1, it_802F18E4, it_802F18EC, NULL },
+    { -1, it_802F1C68, it_802F1C70, it_802F1CB4 },
+    { -1, it_802F1EE4, it_802F1EEC, it_802F1F1C },
+    { -1, it_802F1FD4, it_802F1FDC, it_802F1FE0 },
+};
 
 void it_802F13B4(Item_GObj* gobj, s32 arg1)
 {
@@ -112,7 +138,7 @@ bool it_802F1604(Item_GObj* gobj)
     return false;
 }
 
-void it_802F1630(HSD_GObj* gobj)
+void it_802F1630(Item_GObj* gobj)
 {
     Item* ip;
     HSD_JObj* jobj;
@@ -329,7 +355,7 @@ s32 it_802F2020(Item_GObj* gobj)
     return ip->xDD4_itemVar.coin.x0;
 }
 
-void it_802F202C(HSD_GObj* gobj)
+void it_802F202C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     f32 vel = -1.5;
@@ -417,12 +443,3 @@ Item_GObj* it_802F2094(s32 arg0, Vec3* pos, s32 arg2, s32 arg3)
     }
     return gobj;
 }
-
-ItemStateTable it_803F93C8[] = {
-    { -1, it_802F15B0, it_802F15B8, it_802F1604 },
-    { -1, it_802F1850, it_802F1858, it_802F185C },
-    { -1, it_802F18E4, it_802F18EC, NULL },
-    { -1, it_802F1C68, it_802F1C70, it_802F1CB4 },
-    { -1, it_802F1EE4, it_802F1EEC, it_802F1F1C },
-    { -1, it_802F1FD4, it_802F1FDC, it_802F1FE0 },
-};
