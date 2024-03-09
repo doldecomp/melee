@@ -559,6 +559,7 @@ struct Item {
         itKirbyHammerVars kirbyhammer;
         itShellVars shell;
         itTargetVars target;
+        CoinVars coin;
         u8 padding[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
