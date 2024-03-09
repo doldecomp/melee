@@ -62,7 +62,7 @@ void it_802F13B4(Item_GObj* gobj, s32 arg1)
     itCoinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* jobj = M2C_FIELD(gobj->hsd_obj, HSD_JObj**, 0x10);
 
-    if (M2C_FIELD(ip, s32*, 0xDD8) != 0) {
+    if (ip->xDD4_itemVar.coin.x4 != 0) {
         if (((gm_801A45E8(1) != false) &&
              (grFigureGet_80219C50(ip->xDD4_itemVar.coin.x14) == 0)) ||
             ((Camera_80031144() < attr->x48) &&
