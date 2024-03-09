@@ -229,19 +229,13 @@ bool it_802F185C(Item_GObj* gobj)
     return false;
 }
 
-void it_802F1888(Item_GObj* arg0)
+void it_802F1888(Item_GObj* gobj)
 {
-    HSD_JObj* temp_r3;
-    HSD_JObj* var_r0;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    HSD_JObj* child = HSD_JObjGetChild(jobj);
 
-    temp_r3 = arg0->hsd_obj;
-    if (temp_r3 == NULL) {
-        var_r0 = NULL;
-    } else {
-        var_r0 = temp_r3->child;
-    }
-    HSD_JObjClearFlagsAll(var_r0, 0x10);
-    Item_80268E5C(arg0, 2, ITEM_UNK_0x1);
+    HSD_JObjClearFlagsAll(child, 0x10);
+    Item_80268E5C(gobj, 2, ITEM_UNK_0x1);
 }
 
 bool it_802F18E4(Item_GObj* gobj)
