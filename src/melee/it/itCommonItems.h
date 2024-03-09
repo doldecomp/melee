@@ -188,7 +188,8 @@ typedef struct MewVars {
 typedef struct CoinVars {
     s32 x0;
     s32 x4;
-    u8 x8_filler[8];
+    f32 x8;
+    f32 xC;
     s32 x10;
     s32 x14;
 } CoinVars;

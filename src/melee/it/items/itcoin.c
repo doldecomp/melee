@@ -101,18 +101,15 @@ bool it_802F15B0(Item_GObj* gobj)
 
 void it_802F15B8(Item_GObj* gobj)
 {
-    Item* temp_r4;
-    ItemAttr* temp_r4_2;
+    ItemAttr* attr;
+    Item* ip = GET_ITEM(gobj);
 
-    temp_r4 = GET_ITEM(gobj);
-    if (temp_r4->xDD4_itemVar.capsule.x4 == 0) {
-        temp_r4_2 = temp_r4->xCC_item_attr;
-        it_80272860(gobj, temp_r4_2->x10_fall_speed,
-                    temp_r4_2->x14_fall_speed_max);
+    if (ip->xDD4_itemVar.coin.x4 == 0) {
+        attr = ip->xCC_item_attr;
+        it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
         return;
     }
-    // it_80272860(gobj, temp_r4->xDD4_itemVar.star.x8,
-    //             temp_r4->xDD4_itemVar.star.xC);
+    it_80272860(gobj, ip->xDD4_itemVar.coin.x8, ip->xDD4_itemVar.coin.xC);
 }
 
 bool it_802F1604(Item_GObj* gobj)
