@@ -316,9 +316,9 @@ void it_802F1F48(Item_GObj* gobj)
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
 
     if (ip->x40_vel.x + ip->x7C + ip->x88 >= 0.0F) {
-        item_dir = -1;
-    } else {
         item_dir = 1;
+    } else {
+        item_dir = -1;
     }
 
     ip->facing_dir = item_dir;
