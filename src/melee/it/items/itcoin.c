@@ -358,12 +358,11 @@ s32 it_802F2020(Item_GObj* gobj)
 void it_802F202C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    f32 vel = -1.5;
 
     lbAudioAx_800237A8(0xAA, 0x7F, 0x40);
     ip->x40_vel.x = 0.0F;
-    if (ip->x40_vel.y < vel) {
-        ip->x40_vel.y = vel;
+    if (ip->x40_vel.y < -1.5) {
+        ip->x40_vel.y = -1.5;
     }
     it_802756D0(gobj);
 }
