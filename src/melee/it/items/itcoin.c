@@ -371,10 +371,8 @@ Item_GObj* it_802F2094(s32 arg0, Vec3* pos, s32 arg2, s32 arg3)
 {
     SpawnItem spawn;
     Item_GObj* gobj;
-    HSD_JObj* jobj;
     itCoinAttributes* attr;
     Item* ip;
-    f32 scale;
     s32 var_r29;
 
     spawn.kind = It_Kind_Coin;
@@ -428,17 +426,9 @@ Item_GObj* it_802F2094(s32 arg0, Vec3* pos, s32 arg2, s32 arg3)
         ip->scl = Ground_801C0498();
         ip->scl *= attr->x44;
 
-        jobj = gobj->hsd_obj;
-        scale = ip->scl;
-        HSD_JObjSetScaleX(jobj, scale);
-
-        jobj = gobj->hsd_obj;
-        scale = ip->scl;
-        HSD_JObjSetScaleY(jobj, scale);
-
-        jobj = gobj->hsd_obj;
-        scale = ip->scl;
-        HSD_JObjSetScaleZ(jobj, scale);
+        HSD_JObjSetScaleX(gobj->hsd_obj, ip->scl);
+        HSD_JObjSetScaleY(gobj->hsd_obj, ip->scl);
+        HSD_JObjSetScaleZ(gobj->hsd_obj, ip->scl);
     }
     return gobj;
 }
