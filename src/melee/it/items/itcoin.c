@@ -60,7 +60,7 @@ void it_802F13B4(Item_GObj* gobj, s32 arg1)
 {
     Item* ip = GET_ITEM(gobj);
     itCoinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    HSD_JObj* jobj = M2C_FIELD(gobj->hsd_obj, HSD_JObj**, 0x10);
+    HSD_JObj* jobj = GET_JOBJ(gobj)->child;
 
     if (ip->xDD4_itemVar.coin.x4 != 0) {
         if (((gm_801A45E8(1) != false) &&
