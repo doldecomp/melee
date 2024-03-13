@@ -361,8 +361,8 @@ void it_802F202C(Item_GObj* gobj)
 
     lbAudioAx_800237A8(0xAA, 0x7F, 0x40);
     ip->x40_vel.x = 0.0F;
-    if (ip->x40_vel.y < -1.5) {
-        ip->x40_vel.y = -1.5;
+    if (ip->x40_vel.y < -1.5F) {
+        ip->x40_vel.y = -1.5F;
     }
     it_802756D0(gobj);
 }
