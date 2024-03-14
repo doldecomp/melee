@@ -688,6 +688,7 @@ def generate_build_ninja(
                 ).with_suffix(".s")
 
             link_built_obj = obj.completed
+            built_obj_path: Optional[Path] = None
             if unit_src_path.exists():
                 if unit_src_path.suffix in (".c", ".cp", ".cpp"):
                     # Add MWCC & host build rules
@@ -703,7 +704,6 @@ def generate_build_ninja(
                 link_built_obj = False
 
             # Assembly overrides
-            built_obj_path: Optional[Path] = None
             if unit_asm_path is not None and unit_asm_path.exists():
                 link_built_obj = True
                 built_obj_path = asm_build(obj, options, lib_name, unit_asm_path)
