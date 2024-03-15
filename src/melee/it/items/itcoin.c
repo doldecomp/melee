@@ -19,10 +19,8 @@
 #include "ty/tydisplay.h"
 
 #include <baselib/gobj.h>
+#include <baselib/gobjobject.h>
 #include <baselib/jobj.h>
-
-M2C_UNK HSD_GObjObjet_80390A70(Item_GObj*, u8, s32); /* extern */
-M2C_UNK HSD_GObjObjet_80390B0C(Item_GObj*);          /* extern */
 
 /* 2F1588 */ static void it_802F1588(Item_GObj* gobj);
 /* 2F15B0 */ static bool it_802F15B0(Item_GObj* gobj);
@@ -370,7 +368,7 @@ Item_GObj* it_802F2094(s32 arg0, Vec3* pos, s32 arg2, s32 arg3)
     Item_GObj* gobj;
     itCoinAttributes* attr;
     Item* ip;
-    s32 var_r29;
+    void* var_r29;
 
     spawn.kind = It_Kind_Coin;
     spawn.prev_pos = *pos;
@@ -417,8 +415,8 @@ Item_GObj* it_802F2094(s32 arg0, Vec3* pos, s32 arg2, s32 arg3)
             ip->xD5C = 0;
             var_r29 = un_8031C5E4(arg2);
         }
-        HSD_GObjObjet_80390B0C(gobj);
-        HSD_GObjObjet_80390A70(gobj, HSD_GObj_804D7849, var_r29);
+        HSD_GObjObject_80390B0C(gobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, var_r29);
         it_8027163C(gobj);
         ip->scl = Ground_801C0498();
         ip->scl *= attr->x44;
