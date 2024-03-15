@@ -51,7 +51,7 @@ ItemStateTable it_803F93C8[] = {
     { -1, it_802F1FD4, it_802F1FDC, it_802F1FE0 },
 };
 
-void it_802F13B4(Item_GObj* gobj, s32 arg1)
+void it_802F13B4(Item_GObj* gobj, int arg1)
 {
     Item* ip = GET_ITEM(gobj);
     itCoinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
@@ -305,7 +305,7 @@ void it_802F1F48(Item_GObj* gobj)
 {
     Item* ip;
     f32 item_dir;
-    s32 coll_dir;
+    int coll_dir;
 
     ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
@@ -338,12 +338,12 @@ bool it_802F1FE0(Item_GObj* gobj)
     return false;
 }
 
-void it_802F2014(Item_GObj* gobj, s32 arg1)
+void it_802F2014(Item_GObj* gobj, int arg1)
 {
     GET_ITEM(gobj)->x378_itemColl.x4C = arg1;
 }
 
-s32 it_802F2020(Item_GObj* gobj)
+int it_802F2020(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
@@ -362,7 +362,7 @@ void it_802F202C(Item_GObj* gobj)
     it_802756D0(gobj);
 }
 
-Item_GObj* it_802F2094(s32 arg0, Vec3* pos, s32 arg2, s32 arg3)
+Item_GObj* it_802F2094(int arg0, Vec3* pos, int arg2, int arg3)
 {
     SpawnItem spawn;
     Item_GObj* gobj;

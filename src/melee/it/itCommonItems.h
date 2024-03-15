@@ -208,12 +208,12 @@ typedef struct itCoinAttributes {
 } itCoinAttributes;
 
 typedef struct CoinVars {
-    s32 x0;
-    s32 x4;
+    int x0;
+    int x4;
     f32 x8;
     f32 xC;
-    s32 x10;
-    s32 x14;
+    int x10;
+    int x14;
 } CoinVars;
 
 #endif

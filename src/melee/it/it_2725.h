@@ -30,7 +30,7 @@
 /* 27ADEC */ M2C_UNK it_8027ADEC(M2C_UNK, Item_GObj*, HSD_JObj*, f32);
 /* 27B070 */ void it_8027B070(Item_GObj* gobj, Fighter_GObj* owner_gobj);
 /* 27B378 */ void it_8027B378(Fighter_GObj*, Item_GObj*, float);
-/* 27B798 */ M2C_UNK it_8027B798(Item_GObj*, Vec3*);
+/* 27B798 */ UNK_T it_8027B798(Item_GObj*, Vec3*);
 /* 27C56C */ void it_8027C56C(Item_GObj*, f32);
 /* 27C8B0 */ void it_8027C8B0(Item_GObj*);
 /* 27CBFC */ f32 it_8027CBFC(Item_GObj*);
