@@ -269,7 +269,10 @@ struct Item {
     /// @at{70} @sz{C}
     Vec3 x70_nudge;
 
-    u8 padding_x7C[0xB8 - 0x7C];
+    f32 x7C;
+    u8 padding_x80[8];
+    f32 x88;
+    u8 padding_x8C[0xB8 - 0x8C];
 
     ItemLogicTable* xB8_itemLogicTable; // Global item callbacks
 
@@ -559,6 +562,7 @@ struct Item {
         itKirbyHammerVars kirbyhammer;
         itShellVars shell;
         itTargetVars target;
+        CoinVars coin;
         u8 padding[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };

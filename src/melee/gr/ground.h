@@ -145,7 +145,7 @@
 /* 1C57F0 */ f32 Ground_801C57F0(void);
 /* 1C5800 */ void Ground_801C5800(void);
 /* 1C5840 */ s32 Ground_801C5840(void);
-/* 1C58E0 */ s32 Ground_801C58E0(s32, s32);
+/* 1C58E0 */ Item_GObj* Ground_801C58E0(s32, s32);
 /* 1C5940 */ int Ground_801C5940(void);
 /* 1C5A28 */ void Ground_801C5A28(void);
 /* 1C5A60 */ void Ground_801C5A60(void);

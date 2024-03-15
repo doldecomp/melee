@@ -185,4 +185,35 @@ typedef struct MewVars {
     f32 xC;
 } MewVars;
 
+typedef struct itCoinAttributes {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    f32 x1C;
+    f32 x20;
+    f32 x24;
+    f32 x28;
+    f32 x2C;
+    f32 x30;
+    f32 x34;
+    f32 x38;
+    f32 x3C;
+    f32 x40;
+    f32 x44;
+    f32 x48;
+} itCoinAttributes;
+
+typedef struct CoinVars {
+    int x0;
+    int x4;
+    f32 x8;
+    f32 xC;
+    int x10;
+    int x14;
+} CoinVars;
+
 #endif

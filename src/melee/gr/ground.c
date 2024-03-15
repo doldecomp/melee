@@ -2755,10 +2755,10 @@ void Ground_801C5878(void)
     }
 }
 
-s32 Ground_801C58E0(s32 arg0, s32 arg1)
+Item_GObj* Ground_801C58E0(s32 arg0, s32 arg1)
 {
     s32 tmp = arg0;
-    s32 result;
+    Item_GObj* result;
     Vec3 sp10;
     Ground_801C2D24(arg1, &sp10);
     result = it_802F2094(0, &sp10, tmp, 0);
