@@ -16,13 +16,13 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
+#include "ty/tydisplay.h"
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
 M2C_UNK HSD_GObjObjet_80390A70(Item_GObj*, u8, s32); /* extern */
 M2C_UNK HSD_GObjObjet_80390B0C(Item_GObj*);          /* extern */
-s32 un_8031C5E4(s32);                                /* extern */
 
 /* 2F1588 */ static void it_802F1588(Item_GObj* gobj);
 /* 2F15B0 */ static bool it_802F15B0(Item_GObj* gobj);
