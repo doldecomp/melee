@@ -3,6 +3,7 @@
 #include "itcoin.h"
 
 #include "cm/camera.h"
+#include "gm/gm_1601.h"
 #include "gm/gm_1A36.h"
 #include "gr/grfigureget.h"
 #include "gr/ground.h"
@@ -19,7 +20,6 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-M2C_UNK gm_8017E280(u16, M2C_UNK);                   /* extern */
 M2C_UNK grFigureGet_80219C34(s32);                   /* extern */
 M2C_UNK HSD_GObjObjet_80390A70(Item_GObj*, u8, s32); /* extern */
 M2C_UNK HSD_GObjObjet_80390B0C(Item_GObj*);          /* extern */
