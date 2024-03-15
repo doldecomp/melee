@@ -5,7 +5,7 @@
 
 #include <placeholder.h>
 
-s32 grFigureGet_80219C50(s32);
-M2C_UNK grFigureGet_80219C34(s32);
+int grFigureGet_80219C50(s32);
+UNK_T grFigureGet_80219C34(s32);
 
 #endif
