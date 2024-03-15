@@ -22,8 +22,6 @@
 
 M2C_UNK HSD_GObjObjet_80390A70(Item_GObj*, u8, s32); /* extern */
 M2C_UNK HSD_GObjObjet_80390B0C(Item_GObj*);          /* extern */
-M2C_UNK it_8027B798(Item_GObj*, Vec3*);              /* extern */
-f32 it_8027CBFC(Item_GObj*);                         /* extern */
 s32 un_8031C5E4(s32);                                /* extern */
 
 /* 2F1588 */ static void it_802F1588(Item_GObj* gobj);
