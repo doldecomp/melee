@@ -20,7 +20,6 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-M2C_UNK grFigureGet_80219C34(s32);                   /* extern */
 M2C_UNK HSD_GObjObjet_80390A70(Item_GObj*, u8, s32); /* extern */
 M2C_UNK HSD_GObjObjet_80390B0C(Item_GObj*);          /* extern */
 M2C_UNK it_8027B798(Item_GObj*, Vec3*);              /* extern */
