@@ -205,7 +205,7 @@ bool it_802F1910(Item_GObj* gobj)
     it_802762BC(ip);
     ip->xC9C = ip->xC9C + it_8027CBFC(gobj);
     it_8027B798(gobj, &ip->x40_vel);
-    if ((ip->x40_vel.x == 0.0F) && (ip->x40_vel.y == ip->x40_vel.x)) {
+    if ((ip->x40_vel.x == 0.0F) && (ip->x40_vel.y == 0.0F)) {
         ip->x40_vel.x = 0.1F * -ip->xCCC_incDamageDirection;
         ip->x40_vel.y = 0.1F;
     }
