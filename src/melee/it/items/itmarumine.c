@@ -26,7 +26,7 @@ f32 it_804DD440 = 0.0F;
 f32 it_804DD444 = 1.0F;
 extern f64 it_804DD448;
 
-extern M2C_UNK it_803B86C8; // rodata
+extern void* it_803B86C8; // rodata
 
 void it_802D09D0(Item_GObj* gobj)
 {
@@ -313,40 +313,37 @@ void it_802D1140(Item_GObj* gobj)
     }
 }
 
-void (*it_802D1204(Item_GObj* arg0))(Item_GObj*)
+void (*it_802D1204(Item_GObj* gobj))(Item_GObj*)
 {
     s32 sp1C;
     s32 sp18;
     s32 sp14;
-    HSD_JObj* temp_r30;
-    Item* temp_r31;
+    HSD_JObj* jobj;
+    Item* ip;
     s32 temp_r5;
-    void* temp_r6;
+    s32* temp_r6;
 
-    temp_r31 = arg0->user_data;
-    temp_r30 = arg0->hsd_obj;
-    Item_8026AE84(temp_r31, 0x2720, 0x7F, 0x40);
-    if ((M2C_FIELD(temp_r31, u8*, 0xDCA) >> 4) & 1) {
-        temp_r6 = M2C_ERROR(
-            /* unknown instruction: subi $r6, $r3, %l(it_803B86C8) */);
-        temp_r5 = M2C_FIELD(temp_r6, s32*, 0);
+    ip = GET_ITEM(gobj);
+    jobj = GET_JOBJ(gobj);
+    Item_8026AE84(ip, 0x2720, 0x7F, 0x40);
+    if ((M2C_FIELD(ip, u8*, 0xDCA) >> 4) & 1) {
+        temp_r6 = it_803B86C8;
+        temp_r5 = temp_r6[0];
         sp14 = temp_r5;
-        sp18 = M2C_FIELD(temp_r6, s32*, 4);
-        sp1C = M2C_FIELD(temp_r6, s32*, 8);
-        it_80274250(arg0, &sp14, temp_r5, temp_r6);
+        sp18 = temp_r6[4];
+        sp1C = temp_r6[8];
+        it_80274250(gobj, &sp14, temp_r5, temp_r6);
     }
-    it_8026B3A8(arg0);
-    HSD_JObjSetFlagsAll(temp_r30, 0x10);
-    it_8026BD24(arg0);
-    it_8027518C(arg0);
-    it_80273454(arg0);
-    it_802756D0(arg0);
-    it_80275444(arg0);
-    Item_80268E5C(arg0, 6, ITEM_ANIM_UPDATE);
-    temp_r31->entered_hitlag = M2C_ERROR(
-        /* unknown instruction: subi $r0, $r3, %l(efLib_PauseAll) */);
-    temp_r31->exited_hitlag = M2C_ERROR(
-        /* unknown instruction: subi $r0, $r3, %l(efLib_ResumeAll) */);
+    it_8026B3A8(gobj);
+    HSD_JObjSetFlagsAll(jobj, 0x10);
+    it_8026BD24(gobj);
+    it_8027518C(gobj);
+    it_80273454(gobj);
+    it_802756D0(gobj);
+    it_80275444(gobj);
+    Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
     return efLib_ResumeAll;
 }
 
@@ -382,17 +379,12 @@ bool it_802D1384(Item_GObj* gobj)
 void it_802D13A8(Item_GObj* gobj)
 {
     Item* ip;
-    void* var_r3;
 
-    var_r3 = it_8027A09C;
-    if (var_r3 != 0) {
+    if (it_8027A09C(gobj) != false) {
         ip = GET_ITEM(gobj);
         Item_80268E5C(gobj, 1, ITEM_UNK_0x1);
-        var_r3 = efLib_ResumeAll;
-        ip->entered_hitlag = M2C_ERROR(
-            /* unknown instruction: subi $r0, $r3, %l(efLib_PauseAll) */);
-        ip->exited_hitlag = M2C_ERROR(
-            /* unknown instruction: subi $r0, $r3, %l(efLib_ResumeAll) */);
+        ip->entered_hitlag = efLib_PauseAll;
+        ip->exited_hitlag = efLib_ResumeAll;
     }
 }
 
