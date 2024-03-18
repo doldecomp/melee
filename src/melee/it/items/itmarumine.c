@@ -98,14 +98,11 @@ void it_802D0BB4(Item_GObj* gobj) {}
 
 bool it_802D0BB8(Item_GObj* gobj)
 {
-    Item* temp_r31;
-    void* temp_r30;
+    Item* ip = GET_ITEM(gobj);
+    itMarumineAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
 
-    temp_r31 = GET_ITEM(gobj);
-    temp_r30 = temp_r31->xC4_article_data->x4_specialAttributes;
-    if (it_8026DA08(gobj) == 0) {
-        M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
-        if (temp_r31->x5CC_currentAnimFrame == M2C_FIELD(temp_r30, s32*, 4)) {
+    if (it_8026DA08(gobj) == false) {
+        if (ip->x5CC_currentAnimFrame >= attr->x4) {
             it_802D0C44(gobj);
         }
     }

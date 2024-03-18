@@ -218,7 +218,7 @@ typedef struct CoinVars {
 
 typedef struct itMarumineAttributes {
     f32 x0;
-    u8 padding[4];
+    s32 x4;
     int x8;
     s32 xC;
 } itMarumineAttributes;
