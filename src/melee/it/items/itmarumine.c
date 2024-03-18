@@ -368,10 +368,8 @@ void (*it_802D1320(Item_GObj* gobj))(Item_GObj*)
 
     it_802762BC(ip);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = M2C_ERROR(
-        /* unknown instruction: subi $r0, $r3, %l(efLib_PauseAll) */);
-    ip->exited_hitlag = M2C_ERROR(
-        /* unknown instruction: subi $r0, $r3, %l(efLib_ResumeAll) */);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
     return efLib_ResumeAll;
 }
 
