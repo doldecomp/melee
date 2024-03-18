@@ -40,18 +40,18 @@ void it_802D09D0(Item_GObj* gobj)
 void it_802D0A0C(Item_GObj* gobj)
 {
     Item* ip;
-    void* temp_r29;
+    itMarumineAttributes* attr;
 
     ip = GET_ITEM(gobj);
-    temp_r29 = ip->xC4_article_data->x4_specialAttributes;
+    attr = ip->xC4_article_data->x4_specialAttributes;
     ip->facing_dir = it_804DD440;
-    M2C_FIELD(ip, u8*, 0xDC8) = M2C_FIELD(ip, u8*, 0xDC8) | 0x80;
-    ip->xDD4_itemVar.pokemon.timer = 0xB4 - M2C_FIELD(temp_r29, s32*, 8);
-    it_80279CDC(gobj, M2C_FIELD(temp_r29, f32*, 0));
+    ip->xDC8_word.flags.x0 = true;
+    ip->xDD4_itemVar.marumine.x60 = 0xB4 - attr->x8;
+    it_80279CDC(gobj, attr->x0);
     it_80273454(gobj);
     it_802D1320(gobj);
-    M2C_FIELD(ip, u8*, 0xDC8) = M2C_FIELD(ip, u8*, 0xDC8) | 0x80;
-    ip->xDD4_itemVar.PKThunderVars.xE38.y = M2C_FIELD(temp_r29, f32*, 0xC);
+    ip->xDC8_word.flags.x0 = true;
+    ip->xDD4_itemVar.marumine.x64 = attr->xC;
     ip->xDAC_itcmd_var0 = 1;
 }
 
