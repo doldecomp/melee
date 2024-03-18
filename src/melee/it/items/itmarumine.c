@@ -115,14 +115,14 @@ bool it_802D0BB8(Item_GObj* gobj)
 void (*it_802D0C44(Item_GObj* gobj))(Item_GObj*)
 {
     Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    M2C_FIELD(ip, f32*, 0x5D0) = it_804DD440;
-    lb_8000BA0C(gobj->hsd_obj, M2C_FIELD(ip, f32*, 0x5D0));
+    ip->x5D0_animFrameSpeed = it_804DD444;
+    lb_8000BA0C(jobj, ip->x5D0_animFrameSpeed);
     Item_80268E5C(gobj, 2, ITEM_UNK_0x1);
-    M2C_FIELD(ip, s32*, 0xD28) = M2C_ERROR(
-        /* unknown instruction: subi $r0, $r3, %l(efLib_PauseAll) */);
-    M2C_FIELD(ip, s32*, 0xD2C) = M2C_ERROR(
-        /* unknown instruction: subi $r0, $r3, %l(efLib_ResumeAll) */);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+
     return efLib_ResumeAll;
 }
 
