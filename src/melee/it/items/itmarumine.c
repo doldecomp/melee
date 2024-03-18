@@ -227,18 +227,15 @@ bool it_802D0F6C(Item_GObj* gobj)
     return false;
 }
 
-void (*it_802D100C(Item_GObj* arg0))(Item_GObj*)
+void (*it_802D100C(Item_GObj* gobj))(Item_GObj*)
 {
-    Item* temp_r31;
+    Item* ip = GET_ITEM(gobj);
 
-    temp_r31 = arg0->user_data;
-    it_8026B3A8(arg0);
-    Item_80268E5C(arg0, 5, ITEM_ANIM_UPDATE);
-    temp_r31->on_accessory = it_802D1140;
-    temp_r31->entered_hitlag = M2C_ERROR(
-        /* unknown instruction: subi $r0, $r3, %l(efLib_PauseAll) */);
-    temp_r31->exited_hitlag = M2C_ERROR(
-        /* unknown instruction: subi $r0, $r3, %l(efLib_ResumeAll) */);
+    it_8026B3A8(gobj);
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+    ip->on_accessory = it_802D1140;
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
     return efLib_ResumeAll;
 }
 
