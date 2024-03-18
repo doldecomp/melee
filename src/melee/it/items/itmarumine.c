@@ -152,10 +152,8 @@ void it_802D0D18(Item_GObj* gobj)
     ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 3, ITEM_UNK_0x1);
     ip->on_accessory = it_802D0DBC;
-    ip->entered_hitlag = M2C_ERROR(
-        /* unknown instruction: subi $r0, $r3, %l(efLib_PauseAll) */);
-    ip->exited_hitlag = M2C_ERROR(
-        /* unknown instruction: subi $r0, $r3, %l(efLib_ResumeAll) */);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
 }
 
 bool it_802D0D70(Item_GObj* gobj)
