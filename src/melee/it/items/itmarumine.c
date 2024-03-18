@@ -15,18 +15,22 @@
 void (*it_802D1204(Item_GObj* arg0))(Item_GObj*);
 void (*it_802D1320(Item_GObj* arg0))(Item_GObj*);
 void (*it_802D100C(Item_GObj* arg0))(Item_GObj*);
-void it_802D1140(Item_GObj* gobj);                 /* static */
-void fn_802D0F98(Item_GObj* gobj);                 /* static */
-void it_802D0DBC(Item_GObj* gobj);                 /* static */
-M2C_UNK it_80274250(Item_GObj*, s32*, s32, void*); /* extern */
-void it_8026E71C(Item_GObj* (*) (Item_GObj*) );    /* extern */
+void it_802D1140(Item_GObj* gobj);                       /* static */
+void fn_802D0F98(Item_GObj* gobj);                       /* static */
+void it_802D0DBC(Item_GObj* gobj);                       /* static */
+M2C_UNK it_80274250(Item_GObj*, s32*, s32, const void*); /* extern */
+void it_8026E71C(Item_GObj* (*) (Item_GObj*) );          /* extern */
 void (*it_802D0C44(Item_GObj*))(Item_GObj*);
 
 f32 it_804DD440 = 0.0F;
 f32 it_804DD444 = 1.0F;
 extern f64 it_804DD448;
 
-extern void* it_803B86C8; // rodata
+typedef struct IntVec4 {
+    s32 x, y, z, w;
+} IntVec4;
+
+static IntVec4 const it_803B86C8 = { 0 };
 
 void it_802D09D0(Item_GObj* gobj)
 {
@@ -303,24 +307,24 @@ void it_802D1140(Item_GObj* gobj)
 
 void (*it_802D1204(Item_GObj* gobj))(Item_GObj*)
 {
-    s32 sp1C;
-    s32 sp18;
-    s32 sp14;
-    HSD_JObj* jobj;
-    Item* ip;
-    s32 temp_r5;
-    s32* temp_r6;
+    const IntVec4* vec;
 
-    ip = GET_ITEM(gobj);
-    jobj = GET_JOBJ(gobj);
+    s32 argx;
+    s32 argy;
+    s32 argz;
+    s32 other;
+
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+
     Item_8026AE84(ip, 0x2720, 0x7F, 0x40);
-    if ((M2C_FIELD(ip, u8*, 0xDCA) >> 4) & 1) {
-        temp_r6 = it_803B86C8;
-        temp_r5 = temp_r6[0];
-        sp14 = temp_r5;
-        sp18 = temp_r6[4];
-        sp1C = temp_r6[8];
-        it_80274250(gobj, &sp14, temp_r5, temp_r6);
+    if (M2C_FIELD(&ip->xDC8_word, u8*, 0x2) >> 4 & 1) {
+        vec = &it_803B86C8;
+        argx = vec->x;
+        other = argx;
+        argy = vec->y;
+        argz = vec->z;
+        it_80274250(gobj, &other, argx, &vec);
     }
     it_8026B3A8(gobj);
     HSD_JObjSetFlagsAll(jobj, 0x10);
