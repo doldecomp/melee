@@ -22,9 +22,9 @@ M2C_UNK it_80274250(Item_GObj*, s32*, s32, const void*); /* extern */
 void it_8026E71C(void (*)(Item_GObj*));                  /* extern */
 void (*it_802D0C44(Item_GObj*))(Item_GObj*);
 
-f32 it_804DD440 = 0.0F;
-f32 it_804DD444 = 1.0F;
-extern f64 it_804DD448;
+const f32 it_804DD440 = 0.0F;
+const f32 it_804DD444 = 1.0F;
+const extern f64 it_804DD448;
 
 typedef struct IntVec4 {
     s32 x, y, z, w;
