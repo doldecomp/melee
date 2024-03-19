@@ -229,6 +229,20 @@ bool it_802D0F6C(Item_GObj* gobj)
     return false;
 }
 
+void fn_802D0F98(Item_GObj* gobj)
+{
+    f32 sp10;
+    Item* ip = GET_ITEM(gobj);
+
+    if (--ip->xDD4_itemVar.marumine.x64 == 0) {
+        itMarumineAttributes* attr =
+            ip->xC4_article_data->x4_specialAttributes;
+        sp10 = it_804DD444;
+        efSync_Spawn(0x471, gobj, ip->xBBC_dynamicBoneTable->bones[3], &sp10);
+        ip->xDD4_itemVar.marumine.x64 = attr->xC;
+    }
+}
+
 void (*it_802D100C(Item_GObj* gobj))(Item_GObj*)
 {
     Item* ip = GET_ITEM(gobj);
