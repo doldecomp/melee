@@ -14,8 +14,6 @@
 
 #include <baselib/gobj.h>
 
-void it_8026E71C(Item_GObj*, void (*)(Item_GObj*)); /* extern */
-
 const f32 it_804DD440 = 0.0F;
 const f32 it_804DD444 = 1.0F;
 const extern f64 it_804DD448;
