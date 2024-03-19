@@ -307,8 +307,6 @@ void it_802D1140(Item_GObj* gobj)
 
 void (*it_802D1204(Item_GObj* gobj))(Item_GObj*)
 {
-    const IntVec4* vec;
-
     s32 argx;
     s32 argy;
     s32 argz;
@@ -317,14 +315,15 @@ void (*it_802D1204(Item_GObj* gobj))(Item_GObj*)
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
+    PAD_STACK(8);
+
     Item_8026AE84(ip, 0x2720, 0x7F, 0x40);
-    if (M2C_FIELD(&ip->xDC8_word, u8*, 0x2) >> 4 & 1) {
-        vec = &it_803B86C8;
-        argx = vec->x;
+    if (ip->xDC8_word.flags.x13 != false) {
+        argx = it_803B86C8.x;
         other = argx;
-        argy = vec->y;
-        argz = vec->z;
-        it_80274250(gobj, &other, argx, &vec);
+        argy = it_803B86C8.y;
+        argz = it_803B86C8.z;
+        it_80274250(gobj, &other, argx, &it_803B86C8);
     }
     it_8026B3A8(gobj);
     HSD_JObjSetFlagsAll(jobj, 0x10);
