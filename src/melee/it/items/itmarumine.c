@@ -14,10 +14,6 @@
 
 #include <baselib/gobj.h>
 
-const f32 it_804DD440 = 0.0F;
-const f32 it_804DD444 = 1.0F;
-const extern f64 it_804DD448;
-
 static Vec3 const it_803B86C8 = { 0 };
 
 /* 2D0AAC */ static void it_802D0AAC(Item_GObj* gobj);
@@ -77,7 +73,7 @@ void it_802D0A0C(Item_GObj* gobj)
 
     ip = GET_ITEM(gobj);
     attr = ip->xC4_article_data->x4_specialAttributes;
-    ip->facing_dir = it_804DD440;
+    ip->facing_dir = 0.0F;
     ip->xDC8_word.flags.x0 = true;
     ip->xDD4_itemVar.marumine.x60 = 0xB4 - attr->x8;
     it_80279CDC(gobj, attr->x0);
@@ -110,7 +106,7 @@ void it_802D0B04(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    ip->x5D0_animFrameSpeed = it_804DD444;
+    ip->x5D0_animFrameSpeed = 1.0F;
     lb_8000BA0C(jobj, ip->x5D0_animFrameSpeed);
     Item_80268E5C(gobj, 1, ITEM_UNK_0x1);
     ip->entered_hitlag = efLib_PauseAll;
@@ -145,7 +141,7 @@ void it_802D0C44(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    ip->x5D0_animFrameSpeed = it_804DD444;
+    ip->x5D0_animFrameSpeed = 1.0F;
     lb_8000BA0C(jobj, ip->x5D0_animFrameSpeed);
     Item_80268E5C(gobj, 2, ITEM_UNK_0x1);
     ip->entered_hitlag = efLib_PauseAll;
@@ -200,13 +196,12 @@ bool it_802D0DB4(Item_GObj* gobj)
 void it_802D0DBC(Item_GObj* gobj)
 {
     f32 sp10;
-
     itMarumineAttributes* attr;
     Item* ip = GET_ITEM(gobj);
 
     if (--ip->xDD4_itemVar.marumine.x64 == 0) {
         attr = ip->xC4_article_data->x4_specialAttributes;
-        sp10 = it_804DD444;
+        sp10 = 1.0F;
         efSync_Spawn(0x471, gobj, (ip->xBBC_dynamicBoneTable->bones[3]),
                      &sp10);
         ip->xDD4_itemVar.marumine.x64 = attr->xC;
@@ -264,7 +259,7 @@ void fn_802D0F98(Item_GObj* gobj)
     if (--ip->xDD4_itemVar.marumine.x64 == 0) {
         itMarumineAttributes* attr =
             ip->xC4_article_data->x4_specialAttributes;
-        sp10 = it_804DD444;
+        sp10 = 1.0F;
         efSync_Spawn(0x471, gobj, ip->xBBC_dynamicBoneTable->bones[3], &sp10);
         ip->xDD4_itemVar.marumine.x64 = attr->xC;
     }
@@ -322,7 +317,7 @@ void it_802D1140(Item_GObj* gobj)
     if (--ip->xDD4_itemVar.marumine.x60 < 0) {
         if (--ip->xDD4_itemVar.marumine.x64 == 0) {
             attr = ip->xC4_article_data->x4_specialAttributes;
-            sp10 = it_804DD444;
+            sp10 = 1.0F;
             efSync_Spawn(0x471, gobj, ip->xBBC_dynamicBoneTable->bones[3],
                          &sp10);
             ip->xDD4_itemVar.marumine.x64 = attr->xC;
