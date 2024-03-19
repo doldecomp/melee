@@ -76,7 +76,7 @@ bool it_802D0AD0(Item_GObj* gobj)
     return false;
 }
 
-void (*it_802D0B04(Item_GObj* gobj))(Item_GObj*)
+void it_802D0B04(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -86,8 +86,6 @@ void (*it_802D0B04(Item_GObj* gobj))(Item_GObj*)
     Item_80268E5C(gobj, 1, ITEM_UNK_0x1);
     ip->entered_hitlag = efLib_PauseAll;
     ip->exited_hitlag = efLib_ResumeAll;
-
-    return efLib_ResumeAll;
 }
 
 bool it_802D0B74(Item_GObj* gobj)
@@ -142,7 +140,7 @@ void it_802D0CBC(Item_GObj* gobj)
 
 bool it_802D0CEC(Item_GObj* gobj)
 {
-    // it_8026E15C(gobj, it_802D0B04);
+    it_8026E15C(gobj, it_802D0B04);
     return false;
 }
 
