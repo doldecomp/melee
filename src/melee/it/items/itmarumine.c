@@ -271,34 +271,26 @@ bool it_802D10F4(Item_GObj* gobj)
     return false;
 }
 
-// Undeclared write to $cr0_eq in subic. $r0, $r3, 0x1
-// Undeclared write to $cr0_eq in subic. $r0, $r3, 0x1
-// Undeclared write to $cr0_eq in subic. $r0, $r3, 0x1
-// Undeclared write to $cr0_eq in subic. $r0, $r3, 0x1
-
 void it_802D1140(Item_GObj* gobj)
 {
     f32 sp10;
-    Item* temp_r4;
-    void* temp_r30;
+    Item* ip;
+    itMarumineAttributes* attr;
 
-    // Error: Undeclared write to $cr0_eq in subic. $r0, $r3, 0x1
-    // At instruction: subic. $r0, $r3, 0x1
-    if (M2C_ERROR()) {
-        // Error: Undeclared write to $cr0_eq in subic. $r0, $r3, 0x1
-        // At instruction: subic. $r0, $r3, 0x1
-        if (M2C_ERROR()) {
-            temp_r30 = temp_r4->xC4_article_data->x4_specialAttributes;
+    ip = GET_ITEM(gobj);
+
+    if (--ip->xDD4_itemVar.marumine.x60 < 0) {
+        if (--ip->xDD4_itemVar.marumine.x64 == 0) {
+            attr = ip->xC4_article_data->x4_specialAttributes;
             sp10 = it_804DD444;
-            efSync_Spawn(0x471, gobj, temp_r4->xBBC_dynamicBoneTable->bones[3],
+            efSync_Spawn(0x471, gobj, ip->xBBC_dynamicBoneTable->bones[3],
                          &sp10);
-            temp_r4->xDD4_itemVar.PKThunderVars.xE38.y =
-                M2C_FIELD(temp_r30, f32*, 0xC);
+            ip->xDD4_itemVar.marumine.x64 = attr->xC;
         }
         it_8026B390(gobj);
-        if (temp_r4->xDAC_itcmd_var0 != 0) {
-            temp_r4->xDAC_itcmd_var0 = 0;
-            Item_8026AE84(temp_r4, 0x271F, 0x7F, 0x40);
+        if (ip->xDAC_itcmd_var0 != 0) {
+            ip->xDAC_itcmd_var0 = 0;
+            Item_8026AE84(ip, 0x271F, 0x7F, 0x40);
         }
     }
 }
