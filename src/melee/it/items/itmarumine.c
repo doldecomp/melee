@@ -13,14 +13,14 @@
 #include <baselib/gobj.h>
 
 void it_802D1204(Item_GObj* gobj);
-void (*it_802D1320(Item_GObj* arg0))(Item_GObj*);
-void (*it_802D100C(Item_GObj* arg0))(Item_GObj*);
+void it_802D1320(Item_GObj* gobj);
+void it_802D100C(Item_GObj* gobj);
 void it_802D1140(Item_GObj* gobj);                       /* static */
 void fn_802D0F98(Item_GObj* gobj);                       /* static */
 void it_802D0DBC(Item_GObj* gobj);                       /* static */
 M2C_UNK it_80274250(Item_GObj*, s32*, s32, const void*); /* extern */
 void it_8026E71C(void (*)(Item_GObj*));                  /* extern */
-void (*it_802D0C44(Item_GObj*))(Item_GObj*);
+void it_802D0C44(Item_GObj* gobj);
 
 const f32 it_804DD440 = 0.0F;
 const f32 it_804DD444 = 1.0F;
@@ -111,7 +111,7 @@ bool it_802D0BB8(Item_GObj* gobj)
     return false;
 }
 
-void (*it_802D0C44(Item_GObj* gobj))(Item_GObj*)
+void it_802D0C44(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -121,8 +121,6 @@ void (*it_802D0C44(Item_GObj* gobj))(Item_GObj*)
     Item_80268E5C(gobj, 2, ITEM_UNK_0x1);
     ip->entered_hitlag = efLib_PauseAll;
     ip->exited_hitlag = efLib_ResumeAll;
-
-    return efLib_ResumeAll;
 }
 
 bool it_802D0CB4(Item_GObj* gobj)
@@ -243,7 +241,7 @@ void fn_802D0F98(Item_GObj* gobj)
     }
 }
 
-void (*it_802D100C(Item_GObj* gobj))(Item_GObj*)
+void it_802D100C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
@@ -252,7 +250,6 @@ void (*it_802D100C(Item_GObj* gobj))(Item_GObj*)
     ip->on_accessory = it_802D1140;
     ip->entered_hitlag = efLib_PauseAll;
     ip->exited_hitlag = efLib_ResumeAll;
-    return efLib_ResumeAll;
 }
 
 bool it_802D1078(Item_GObj* gobj)
@@ -353,7 +350,7 @@ bool it_802D1318(Item_GObj* gobj)
     return false;
 }
 
-void (*it_802D1320(Item_GObj* gobj))(Item_GObj*)
+void it_802D1320(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
@@ -361,7 +358,6 @@ void (*it_802D1320(Item_GObj* gobj))(Item_GObj*)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     ip->entered_hitlag = efLib_PauseAll;
     ip->exited_hitlag = efLib_ResumeAll;
-    return efLib_ResumeAll;
 }
 
 bool it_802D1384(Item_GObj* gobj)
