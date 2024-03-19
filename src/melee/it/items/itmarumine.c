@@ -1,3 +1,5 @@
+#include <dolphin/mtx/forward.h>
+
 #include "itmarumine.h"
 
 #include "ef/eflib.h"
@@ -15,22 +17,17 @@
 void it_802D1204(Item_GObj* gobj);
 void it_802D1320(Item_GObj* gobj);
 void it_802D100C(Item_GObj* gobj);
-void it_802D1140(Item_GObj* gobj);                       /* static */
-void fn_802D0F98(Item_GObj* gobj);                       /* static */
-void it_802D0DBC(Item_GObj* gobj);                       /* static */
-M2C_UNK it_80274250(Item_GObj*, s32*, s32, const void*); /* extern */
-void it_8026E71C(Item_GObj*, void (*)(Item_GObj*));      /* extern */
+void it_802D1140(Item_GObj* gobj);                  /* static */
+void fn_802D0F98(Item_GObj* gobj);                  /* static */
+void it_802D0DBC(Item_GObj* gobj);                  /* static */
+void it_8026E71C(Item_GObj*, void (*)(Item_GObj*)); /* extern */
 void it_802D0C44(Item_GObj* gobj);
 
 const f32 it_804DD440 = 0.0F;
 const f32 it_804DD444 = 1.0F;
 const extern f64 it_804DD448;
 
-typedef struct IntVec4 {
-    s32 x, y, z, w;
-} IntVec4;
-
-static IntVec4 const it_803B86C8 = { 0 };
+static Vec3 const it_803B86C8 = { 0 };
 
 void it_802D09D0(Item_GObj* gobj)
 {
@@ -308,11 +305,6 @@ void it_802D1140(Item_GObj* gobj)
 
 void it_802D1204(Item_GObj* gobj)
 {
-    s32 argx;
-    s32 argy;
-    s32 argz;
-    s32 other;
-
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
@@ -320,11 +312,8 @@ void it_802D1204(Item_GObj* gobj)
 
     Item_8026AE84(ip, 0x2720, 0x7F, 0x40);
     if (ip->xDC8_word.flags.x13 != false) {
-        argx = it_803B86C8.x;
-        other = argx;
-        argy = it_803B86C8.y;
-        argz = it_803B86C8.z;
-        it_80274250(gobj, &other, argx, &it_803B86C8);
+        Vec3 vec = it_803B86C8;
+        it_80274250(gobj, &vec);
     }
     it_8026B3A8(gobj);
     HSD_JObjSetFlagsAll(jobj, 0x10);
