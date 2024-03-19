@@ -61,7 +61,7 @@ void it_802D09D0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
-    if (!((M2C_FIELD(ip, u8*, 0xDCA) >> 4) & 1) && (ip->msid != 6)) {
+    if ((ip->xDC8_word.flags.x13 == false) && (ip->msid != 6)) {
         it_802D1204(gobj);
     }
 }
