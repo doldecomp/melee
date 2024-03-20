@@ -32,7 +32,7 @@ static Vec3 const it_803B86C8 = { 0 };
 /* 2D0EFC */ static bool it_802D0EFC(Item_GObj* gobj);
 /* 2D0F3C */ static void it_802D0F3C(Item_GObj* gobj);
 /* 2D0F6C */ static bool it_802D0F6C(Item_GObj* gobj);
-/* 2D0F98 */ void fn_802D0F98(Item_GObj* gobj);
+/* 2D0F98 */ static void fn_802D0F98(Item_GObj* gobj);
 /* 2D100C */ static void it_802D100C(Item_GObj* gobj);
 /* 2D1078 */ static bool it_802D1078(Item_GObj* gobj);
 /* 2D10B8 */ static void it_802D10B8(Item_GObj* gobj);
