@@ -563,6 +563,7 @@ struct Item {
         itShellVars shell;
         itTargetVars target;
         CoinVars coin;
+        itMarumineVars marumine;
         u8 padding[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
