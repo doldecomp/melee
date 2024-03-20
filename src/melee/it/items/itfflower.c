@@ -68,16 +68,17 @@ HSD_GObj* it_80292D48(Vec3* arg0)
     return temp_r3;
 }
 
-void it_80292E04(Item_GObj* arg0)
+void it_80292E04(Item_GObj* gobj)
 {
-    Item* temp_r31;
+    Item* ip = GET_ITEM(gobj);
 
-    temp_r31 = arg0->user_data;
-    // temp_r31->xD4C = temp_r31->xC4_article_data->x4_specialAttributes;
-    temp_r31->xAC4_ignoreItemID = Item_8026AE60();
-    temp_r31->xDD4_itemVar.capsule.x0 = 0;
-    temp_r31->xDD4_itemVar.capsule.x4 = 0;
-    it_8029313C(arg0);
+    PAD_STACK(4);
+
+    ip->xD4C = *(s32*) ip->xC4_article_data->x4_specialAttributes;
+    ip->xAC4_ignoreItemID = Item_8026AE60();
+    ip->xDD4_itemVar.capsule.x0 = 0;
+    ip->xDD4_itemVar.capsule.x4 = 0;
+    it_8029313C(gobj);
 }
 
 void it_80292E64(Item_GObj* gobj)
