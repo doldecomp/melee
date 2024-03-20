@@ -80,21 +80,15 @@ void it_80292E04(Item_GObj* arg0)
     it_8029313C(arg0);
 }
 
-void it_80292E64(HSD_GObj* arg0)
+void it_80292E64(Item_GObj* gobj)
 {
-    s32 temp_r0;
+    Item* ip = GET_ITEM(gobj);
+    enum_t msid = ip->msid;
 
-    temp_r0 = M2C_FIELD(arg0->user_data, s32*, 0x24);
-    if (temp_r0 != 5) {
-        if (temp_r0 < 5) {
-            if (temp_r0 != 2) {
-                return;
-            }
-            goto block_4;
-        }
+    if (msid != 5 && (msid >= 5 || msid != 2)) {
+        return;
     } else {
-    block_4:
-        Item_80268E5C(arg0, 3, ITEM_ANIM_UPDATE);
+        Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
     }
 }
 
