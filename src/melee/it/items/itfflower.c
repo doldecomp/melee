@@ -105,11 +105,11 @@ void it_80292EAC(HSD_GObj* gobj)
     }
 }
 
-void it_80292EF8(void* arg1)
+void it_80292EF8(Vec3* vec)
 {
-    M2C_FIELD(arg1, f32*, 0) = it_804DCB00;
-    M2C_FIELD(arg1, f32*, 4) = it_804DCB08;
-    M2C_FIELD(arg1, f32*, 8) = it_804DCB0C;
+    vec->x = it_804DCB00;
+    vec->y = it_804DCB08;
+    vec->z = it_804DCB0C;
 }
 
 void it_80292F14(void* arg0, s32 arg1, f32 arg8)
