@@ -171,7 +171,7 @@ typedef struct itPokemonAttributes {
 typedef struct {
     u8 padding[0xE34 - 0xDD4];
     s32 timer;
-    s32 x64;
+    int x64;
 } ItPokemonVars;
 
 typedef struct {
