@@ -20,7 +20,7 @@ void it_8029313C(Item_GObj*); /* static */
 
 M2C_UNK it_802996D0(s32, s32, u32, f32); /* extern */
 
-HSD_GObj* it_80292D48(Vec3* arg0)
+Item_GObj* it_80292D48(Vec3* arg0)
 {
     u8 sp50;
     s32 sp4C;
@@ -93,7 +93,7 @@ void it_80292E64(Item_GObj* gobj)
     }
 }
 
-void it_80292EAC(HSD_GObj* gobj)
+void it_80292EAC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     enum_t msid = ip->msid;
@@ -156,7 +156,7 @@ void it_80292FF0(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_80293040(HSD_GObj* arg0)
+bool it_80293040(Item_GObj* arg0)
 {
     s32 temp_r0;
     s32 temp_r31_2;
@@ -198,12 +198,12 @@ bool it_80293110(Item_GObj* gobj)
     return false;
 }
 
-void it_8029313C(HSD_GObj* gobj)
+void it_8029313C(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
 }
 
-bool it_80293164(HSD_GObj* arg0)
+bool it_80293164(Item_GObj* arg0)
 {
     s32 temp_r0;
     void* temp_r31;
@@ -255,7 +255,7 @@ void it_80293284(Item_GObj* gobj)
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
 }
 
-bool it_802932AC(HSD_GObj* arg0)
+bool it_802932AC(Item_GObj* arg0)
 {
     s32 temp_r0;
     s32 temp_r0_2;
@@ -363,7 +363,7 @@ void it_80293534(Item_GObj* gobj)
     Item_80268E5C(gobj, 7, ITEM_ANIM_UPDATE);
 }
 
-bool it_8029355C(HSD_GObj* arg0)
+bool it_8029355C(Item_GObj* arg0)
 {
     s32 temp_r0;
     void* temp_r31;
