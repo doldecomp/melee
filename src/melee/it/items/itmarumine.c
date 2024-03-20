@@ -69,18 +69,18 @@ void it_802D09D0(Item_GObj* gobj)
 void it_802D0A0C(Item_GObj* gobj)
 {
     Item* ip;
-    itMarumineAttributes* attr;
+    itPokemonAttributes* attr;
 
     ip = GET_ITEM(gobj);
     attr = ip->xC4_article_data->x4_specialAttributes;
     ip->facing_dir = 0.0F;
     ip->xDC8_word.flags.x0 = true;
-    ip->xDD4_itemVar.marumine.x60 = 0xB4 - attr->x8;
+    ip->xDD4_itemVar.pokemon.timer = 0xB4 - attr->max;
     it_80279CDC(gobj, attr->x0);
     it_80273454(gobj);
     it_802D1320(gobj);
     ip->xDC8_word.flags.x0 = true;
-    ip->xDD4_itemVar.marumine.x64 = attr->xC;
+    ip->xDD4_itemVar.pokemon.x64 = attr->xC;
     ip->xDAC_itcmd_var0 = 1;
 }
 
@@ -126,10 +126,10 @@ void it_802D0BB4(Item_GObj* gobj) {}
 bool it_802D0BB8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itMarumineAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itPokemonAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
 
     if (it_8026DA08(gobj) == false) {
-        if (ip->x5CC_currentAnimFrame >= attr->x4) {
+        if (ip->x5CC_currentAnimFrame >= attr->timer) {
             it_802D0C44(gobj);
         }
     }
@@ -196,15 +196,15 @@ bool it_802D0DB4(Item_GObj* gobj)
 void it_802D0DBC(Item_GObj* gobj)
 {
     f32 sp10;
-    itMarumineAttributes* attr;
+    itPokemonAttributes* attr;
     Item* ip = GET_ITEM(gobj);
 
-    if (--ip->xDD4_itemVar.marumine.x64 == 0) {
+    if (--ip->xDD4_itemVar.pokemon.x64 == 0) {
         attr = ip->xC4_article_data->x4_specialAttributes;
         sp10 = 1.0F;
         efSync_Spawn(0x471, gobj, (ip->xBBC_dynamicBoneTable->bones[3]),
                      &sp10);
-        ip->xDD4_itemVar.marumine.x64 = attr->xC;
+        ip->xDD4_itemVar.pokemon.x64 = attr->xC;
     }
 }
 
@@ -256,12 +256,12 @@ void fn_802D0F98(Item_GObj* gobj)
     f32 sp10;
     Item* ip = GET_ITEM(gobj);
 
-    if (--ip->xDD4_itemVar.marumine.x64 == 0) {
-        itMarumineAttributes* attr =
+    if (--ip->xDD4_itemVar.pokemon.x64 == 0) {
+        itPokemonAttributes* attr =
             ip->xC4_article_data->x4_specialAttributes;
         sp10 = 1.0F;
         efSync_Spawn(0x471, gobj, ip->xBBC_dynamicBoneTable->bones[3], &sp10);
-        ip->xDD4_itemVar.marumine.x64 = attr->xC;
+        ip->xDD4_itemVar.pokemon.x64 = attr->xC;
     }
 }
 
@@ -310,17 +310,17 @@ void it_802D1140(Item_GObj* gobj)
 {
     f32 sp10;
     Item* ip;
-    itMarumineAttributes* attr;
+    itPokemonAttributes* attr;
 
     ip = GET_ITEM(gobj);
 
-    if (--ip->xDD4_itemVar.marumine.x60 < 0) {
-        if (--ip->xDD4_itemVar.marumine.x64 == 0) {
+    if (--ip->xDD4_itemVar.pokemon.timer < 0) {
+        if (--ip->xDD4_itemVar.pokemon.x64 == 0) {
             attr = ip->xC4_article_data->x4_specialAttributes;
             sp10 = 1.0F;
             efSync_Spawn(0x471, gobj, ip->xBBC_dynamicBoneTable->bones[3],
                          &sp10);
-            ip->xDD4_itemVar.marumine.x64 = attr->xC;
+            ip->xDD4_itemVar.pokemon.x64 = attr->xC;
         }
         it_8026B390(gobj);
         if (ip->xDAC_itcmd_var0 != 0) {

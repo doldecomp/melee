@@ -171,6 +171,7 @@ typedef struct itPokemonAttributes {
 typedef struct {
     u8 padding[0xE34 - 0xDD4];
     s32 timer;
+    s32 x64;
 } ItPokemonVars;
 
 typedef struct {
@@ -215,19 +216,5 @@ typedef struct CoinVars {
     int x10;
     int x14;
 } CoinVars;
-
-typedef struct itMarumineAttributes {
-    f32 x0;
-    s32 x4;
-    int x8;
-    s32 xC;
-} itMarumineAttributes;
-
-typedef struct itMarumineVars {
-    u8 x0_padding[0xE34 - 0xDD4];
-    s32 x60;
-    s32 x64;
-
-} itMarumineVars;
 
 #endif
