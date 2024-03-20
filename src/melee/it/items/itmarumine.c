@@ -141,7 +141,7 @@ void it_802D0C44(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    ip->x5D0_animFrameSpeed = 1.0F;
+    ip->x5D0_animFrameSpeed = 0.0F;
     lb_8000BA0C(jobj, ip->x5D0_animFrameSpeed);
     Item_80268E5C(gobj, 2, ITEM_UNK_0x1);
     ip->entered_hitlag = efLib_PauseAll;
@@ -257,8 +257,7 @@ void fn_802D0F98(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
 
     if (--ip->xDD4_itemVar.pokemon.x64 == 0) {
-        itPokemonAttributes* attr =
-            ip->xC4_article_data->x4_specialAttributes;
+        itPokemonAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
         sp10 = 1.0F;
         efSync_Spawn(0x471, gobj, ip->xBBC_dynamicBoneTable->bones[3], &sp10);
         ip->xDD4_itemVar.pokemon.x64 = attr->xC;
