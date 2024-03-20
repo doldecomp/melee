@@ -145,16 +145,15 @@ void it_80292F14(void* arg0, s32 arg1, f32 arg8)
     }
 }
 
-void it_80292FF0(Item_GObj* arg0)
+void it_80292FF0(Item_GObj* gobj)
 {
-    Item* temp_r4;
+    Item* ip = GET_ITEM(gobj);
 
-    temp_r4 = arg0->user_data;
-    temp_r4->x40_vel.z = it_804DCB00;
-    temp_r4->x40_vel.y = it_804DCB00;
-    temp_r4->x40_vel.x = it_804DCB00;
-    it_8026B390(arg0);
-    Item_80268E5C(arg0, 0, ITEM_ANIM_UPDATE);
+    ip->x40_vel.z = it_804DCB00;
+    ip->x40_vel.y = it_804DCB00;
+    ip->x40_vel.x = it_804DCB00;
+    it_8026B390(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
 bool it_80293040(HSD_GObj* arg0)
