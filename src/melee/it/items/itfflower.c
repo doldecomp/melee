@@ -112,35 +112,30 @@ void it_80292EF8(Vec3* vec)
     vec->z = it_804DCB0C;
 }
 
-void it_80292F14(void* arg0, s32 arg1, f32 arg8)
+void it_80292F14(Item_GObj* gobj, s32 arg1, f32 arg8)
 {
     s32 temp_r4;
     u32 temp_r3;
-    void* temp_r31;
+    Item* ip = GET_ITEM(gobj);
 
-    temp_r31 = M2C_FIELD(arg0, void**, 0x2C);
-    if (M2C_FIELD(temp_r31, s32*, 0xD4C) > 0) {
-        if (M2C_FIELD(temp_r31, u32*, 0xDD8) == 0) {
-            efSync_Spawn(
-                0x473, arg0,
-                M2C_FIELD(M2C_FIELD(temp_r31, void**, 0xBBC), s32*, 0x10));
-            M2C_FIELD(temp_r31, u32*, 0xDD8) = 1;
+    if (ip->xD4C > 0) {
+        if (ip->xDD4_itemVar.fflower.x4 == 0) {
+            efSync_Spawn(0x473, gobj, ip->xBBC_dynamicBoneTable->bones[4]);
+            ip->xDD4_itemVar.fflower.x4 = 1;
         }
-        M2C_FIELD(temp_r31, s32*, 0xD4C) =
-            M2C_ERROR(/* unknown instruction: subi $r0, $r3, 0x1 */);
-        it_802996D0(M2C_FIELD(temp_r31, s32*, 0x518), arg1,
-                    M2C_FIELD(temp_r31, u32*, 0xAC4), arg8);
-        M2C_FIELD(temp_r31, s32*, 0xDD4) =
-            M2C_FIELD(temp_r31, s32*, 0xDD4) + 1;
-        temp_r4 = M2C_FIELD(temp_r31, s32*, 0xDD4);
-        temp_r3 = temp_r4;
-        // temp_r3 = MULT_HI(
-        //     M2C_ERROR(/* unknown instruction: subi $r0, $r3, 0x5555 */),
-        //     temp_r4);
-        M2C_FIELD(temp_r31, s32*, 0xDD4) =
+        ip->xD4C -= 1;
+
+        it_802996D0(*(s32*) &ip->owner, arg1, ip->xAC4_ignoreItemID, arg8);
+
+        temp_r3 = ip->xDD4_itemVar.fflower.x0;
+        ip->xDD4_itemVar.fflower.x0 = (0x2aab0000 - 0x5555);
+        temp_r4 = temp_r3 + 1;
+        temp_r3 = ip->xDD4_itemVar.fflower.x0;
+
+        ip->xDD4_itemVar.fflower.x0 =
             temp_r4 - ((temp_r3 + (temp_r3 >> 0x1F)) * 6);
-        if (M2C_FIELD(temp_r31, s32*, 0xDD4) == 0) {
-            M2C_FIELD(temp_r31, u32*, 0xAC4) = Item_8026AE60();
+        if (ip->xDD4_itemVar.fflower.x0 == 0) {
+            ip->xAC4_ignoreItemID = Item_8026AE60();
         }
     }
 }
