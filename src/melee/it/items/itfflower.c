@@ -151,38 +151,38 @@ void it_80292FF0(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_80293040(Item_GObj* arg0)
+bool it_80293040(Item_GObj* gobj)
 {
-    s32 temp_r0;
     s32 temp_r31_2;
-    void* temp_r31;
+    Item* ip = GET_ITEM(gobj);
+    s32 msid = ip->msid;
 
-    temp_r31 = arg0->user_data;
-    temp_r0 = M2C_FIELD(temp_r31, s32*, 0x24);
-    if (temp_r0 != 4) {
-        if (temp_r0 < 4) {
-            if (temp_r0 < 0) {
-            } else {
+    PAD_STACK(4);
+
+    if (msid != 4) {
+        if (msid < 4) {
+            if (msid >= 0) {
                 goto block_5;
             }
-        } else if (temp_r0 < 8) {
+        } else if (msid < 8) {
         block_5:
-            efLib_DestroyAll(arg0);
-            M2C_FIELD(temp_r31, s32*, 0xDD8) = 0;
+            efLib_DestroyAll(gobj);
+            ip->xDD4_itemVar.fflower.x4 = 0;
         }
-    } else if (M2C_FIELD(temp_r31, s32*, 0xD4C) <= 0) {
-        efLib_DestroyAll(arg0);
-        M2C_FIELD(temp_r31, s32*, 0xDD8) = 0;
+    } else if (ip->xD4C <= 0) {
+        efLib_DestroyAll(gobj);
+        ip->xDD4_itemVar.fflower.x4 = 0;
     }
-    temp_r31_2 = (M2C_FIELD(temp_r31, u8*, 0xDC8) >> 5) & 1;
-    if (it_80272C6C(arg0) == 0) {
-        Item_80268E5C(arg0, 0, ITEM_ANIM_UPDATE);
+
+    temp_r31_2 = ip->xDC8_word.flags.x2;
+    if (it_80272C6C(gobj) == false) {
+        Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
         if (temp_r31_2 != 0) {
-            it_80274F10(arg0);
-            it_8026BE28(arg0);
+            it_80274F10(gobj);
+            it_8026BE28(gobj);
         }
     }
-    return 0;
+    return false;
 }
 
 void it_8029310C(Item_GObj* gobj) {}
