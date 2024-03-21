@@ -20,6 +20,24 @@ void it_8029313C(Item_GObj*); /* static */
 
 M2C_UNK it_802996D0(s32, s32, u32, f32); /* extern */
 
+static inline void msid_check(enum_t msid, Item_GObj* gobj, Item* ip)
+{
+    if (msid != 4) {
+        if (msid < 4) {
+            if (msid >= 0) {
+                goto block_5;
+            }
+        } else if (msid < 8) {
+        block_5:
+            efLib_DestroyAll(gobj);
+            ip->xDD4_itemVar.fflower.x4 = 0;
+        }
+    } else if (ip->xD4C <= 0) {
+        efLib_DestroyAll(gobj);
+        ip->xDD4_itemVar.fflower.x4 = 0;
+    }
+}
+
 Item_GObj* it_80292D48(Vec3* arg0)
 {
     u8 sp50;
@@ -159,20 +177,7 @@ bool it_80293040(Item_GObj* gobj)
 
     PAD_STACK(4);
 
-    if (msid != 4) {
-        if (msid < 4) {
-            if (msid >= 0) {
-                goto block_5;
-            }
-        } else if (msid < 8) {
-        block_5:
-            efLib_DestroyAll(gobj);
-            ip->xDD4_itemVar.fflower.x4 = 0;
-        }
-    } else if (ip->xD4C <= 0) {
-        efLib_DestroyAll(gobj);
-        ip->xDD4_itemVar.fflower.x4 = 0;
-    }
+    msid_check(msid, gobj, ip);
 
     temp_r31_2 = ip->xDC8_word.flags.x2;
     if (it_80272C6C(gobj) == false) {
@@ -203,20 +208,7 @@ bool it_80293164(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     enum_t msid = ip->msid;
 
-    if (msid != 4) {
-        if (msid < 4) {
-            if (msid >= 0) {
-                goto block_5;
-            }
-        } else if (msid < 8) {
-        block_5:
-            efLib_DestroyAll(gobj);
-            ip->xDD4_itemVar.fflower.x4 = 0;
-        }
-    } else if (ip->xD4C <= 0) {
-        efLib_DestroyAll(gobj);
-        ip->xDD4_itemVar.fflower.x4 = 0;
-    }
+    msid_check(msid, gobj, ip);
 
     if (it_80272C6C(gobj) == false) {
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
@@ -254,20 +246,7 @@ bool it_802932AC(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     enum_t msid = ip->msid;
 
-    if (msid != 4) {
-        if (msid < 4) {
-            if (msid >= 0) {
-                goto block_5;
-            }
-        } else if (msid < 8) {
-        block_5:
-            efLib_DestroyAll(gobj);
-            ip->xDD4_itemVar.fflower.x4 = 0;
-        }
-    } else if (ip->xD4C <= 0) {
-        efLib_DestroyAll(gobj);
-        ip->xDD4_itemVar.fflower.x4 = 0;
-    }
+    msid_check(msid, gobj, ip);
 
     msid2 = ip->msid;
 
