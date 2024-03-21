@@ -335,32 +335,20 @@ void it_80293534(Item_GObj* gobj)
     Item_80268E5C(gobj, 7, ITEM_ANIM_UPDATE);
 }
 
-bool it_8029355C(Item_GObj* arg0)
+bool it_8029355C(Item_GObj* gobj)
 {
-    s32 temp_r0;
-    void* temp_r31;
+    enum_t msid;
+    Item* ip;
 
-    temp_r31 = arg0->user_data;
-    temp_r0 = M2C_FIELD(temp_r31, s32*, 0x24);
-    if (temp_r0 != 4) {
-        if (temp_r0 < 4) {
-            if (temp_r0 < 0) {
-            } else {
-                goto block_5;
-            }
-        } else if (temp_r0 < 8) {
-        block_5:
-            efLib_DestroyAll(arg0);
-            M2C_FIELD(temp_r31, s32*, 0xDD8) = 0;
-        }
-    } else if (M2C_FIELD(temp_r31, s32*, 0xD4C) <= 0) {
-        efLib_DestroyAll(arg0);
-        M2C_FIELD(temp_r31, s32*, 0xDD8) = 0;
+    ip = GET_ITEM(gobj);
+    msid = ip->msid;
+
+    msid_check(msid, gobj, ip);
+
+    if (it_80272C6C(gobj) == false) {
+        Item_80268E5C(gobj, 7, ITEM_ANIM_UPDATE);
     }
-    if (it_80272C6C(arg0) == 0) {
-        Item_80268E5C(arg0, 7, ITEM_ANIM_UPDATE);
-    }
-    return 0;
+    return false;
 }
 
 void it_80293608(Item_GObj* gobj) {}
