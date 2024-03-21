@@ -253,48 +253,48 @@ void it_80293284(Item_GObj* gobj)
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
 }
 
-bool it_802932AC(Item_GObj* arg0)
+bool it_802932AC(Item_GObj* gobj)
 {
-    s32 temp_r0;
-    s32 temp_r0_2;
-    void* temp_r31;
+    enum_t msid2;
+    Item* ip = GET_ITEM(gobj);
+    enum_t msid = ip->msid;
 
-    temp_r31 = arg0->user_data;
-    temp_r0 = M2C_FIELD(temp_r31, s32*, 0x24);
-    if (temp_r0 != 4) {
-        if (temp_r0 < 4) {
-            if (temp_r0 < 0) {
-            } else {
+    if (msid != 4) {
+        if (msid < 4) {
+            if (msid >= 0) {
                 goto block_5;
             }
-        } else if (temp_r0 < 8) {
+        } else if (msid < 8) {
         block_5:
-            efLib_DestroyAll(arg0);
-            M2C_FIELD(temp_r31, s32*, 0xDD8) = 0;
+            efLib_DestroyAll(gobj);
+            ip->xDD4_itemVar.fflower.x4 = 0;
         }
-    } else if (M2C_FIELD(temp_r31, s32*, 0xD4C) <= 0) {
-        efLib_DestroyAll(arg0);
-        M2C_FIELD(temp_r31, s32*, 0xDD8) = 0;
+    } else if (ip->xD4C <= 0) {
+        efLib_DestroyAll(gobj);
+        ip->xDD4_itemVar.fflower.x4 = 0;
     }
-    temp_r0_2 = M2C_FIELD(temp_r31, s32*, 0x24);
-    switch (temp_r0_2) { /* irregular */
+
+    msid2 = ip->msid;
+
+    switch (msid2) {
     case 2:
-        if (it_80272C6C(arg0) == 0) {
-            Item_80268E5C(arg0, 2, ITEM_ANIM_UPDATE);
-        }
-        break;
-    default:
-        if (it_80272C6C(arg0) == 0) {
-            Item_80268E5C(arg0, 4, ITEM_ANIM_UPDATE);
+        if (it_80272C6C(gobj) == false) {
+            Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
         }
         break;
     case 5:
-        if (it_80272C6C(arg0) == 0) {
-            Item_80268E5C(arg0, 2, ITEM_ANIM_UPDATE);
+        if (it_80272C6C(gobj) == false) {
+            Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+        }
+        break;
+    default:
+        if (it_80272C6C(gobj) == false) {
+            Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
         }
         break;
     }
-    return 0;
+
+    return false;
 }
 
 void it_802933C0(Item_GObj* gobj) {}
