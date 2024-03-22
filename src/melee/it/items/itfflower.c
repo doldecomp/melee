@@ -10,11 +10,6 @@
 
 #include <baselib/gobj.h>
 
-const f32 it_804DCB00 = 0.0F;
-const f32 it_804DCB04 = -1.0F;
-const f32 it_804DCB08 = 5.5F;
-const f32 it_804DCB0C = 2.5F;
-
 void it_80292FF0(Item_GObj*); /* static */
 void it_8029313C(Item_GObj*); /* static */
 
@@ -45,17 +40,17 @@ Item_GObj* it_80292D48(Vec3* vec)
 
     spawn.kind = It_Kind_F_Flower;
     spawn.prev_pos = *vec;
-    spawn.prev_pos.z = it_804DCB04;
+    spawn.prev_pos.z = -1.0F;
     spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = it_804DCB00;
+    spawn.facing_dir = 0.0F;
     spawn.x3C_damage = 0;
-    spawn.vel.z = it_804DCB04;
-    spawn.vel.y = it_804DCB04;
-    spawn.vel.x = it_804DCB04;
+    spawn.vel.z = -1.0F;
+    spawn.vel.y = -1.0F;
+    spawn.vel.x = -1.0F;
     spawn.x0_parent_gobj = NULL;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
     spawn.x44_flag.bits.b0 = true;
-    spawn.x40 = it_804DCB00;
+    spawn.x40 = 0.0F;
 
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
@@ -103,9 +98,9 @@ void it_80292EAC(Item_GObj* gobj)
 
 void it_80292EF8(Vec3* vec)
 {
-    vec->x = it_804DCB00;
-    vec->y = it_804DCB08;
-    vec->z = it_804DCB0C;
+    vec->x = 0.0F;
+    vec->y = 5.5F;
+    vec->z = 2.5F;
 }
 
 void it_80292F14(Item_GObj* gobj, s32 arg1, f32 arg8)
@@ -140,9 +135,9 @@ void it_80292FF0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
-    ip->x40_vel.z = it_804DCB00;
-    ip->x40_vel.y = it_804DCB00;
-    ip->x40_vel.x = it_804DCB00;
+    ip->x40_vel.z = 0.0F;
+    ip->x40_vel.y = 0.0F;
+    ip->x40_vel.x = 0.0F;
     it_8026B390(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
