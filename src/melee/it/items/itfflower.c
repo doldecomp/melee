@@ -98,7 +98,7 @@ void it_80292EAC(Item_GObj* gobj)
 
 void it_80292EF8(Vec3* vec)
 {
-    vec->x = -1.0F;
+    vec->x = 0.0F;
     vec->y = 5.5F;
     vec->z = 2.5F;
 }
