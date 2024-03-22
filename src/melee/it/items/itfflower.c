@@ -38,52 +38,30 @@ static inline void msid_check(enum_t msid, Item_GObj* gobj, Item* ip)
     }
 }
 
-Item_GObj* it_80292D48(Vec3* arg0)
+Item_GObj* it_80292D48(Vec3* vec)
 {
-    u8 sp50;
-    s32 sp4C;
-    s16 sp48;
-    f32 sp44;
-    f32 sp40;
-    f32 sp3C;
-    f32 sp38;
-    f32 sp34;
-    f32 sp30;
-    f32 sp2C;
-    f32 sp28;
-    f32 sp24;
-    f32 sp20;
-    s32 sp14;
-    Item_GObj* sp10;
-    SpawnItem* spC;
-    Item_GObj* temp_r3;
-    f32 temp_r0;
-    f32 temp_r6;
+    Item_GObj* gobj;
+    SpawnItem spawn;
 
-    sp14 = 0x19;
-    temp_r6 = arg0->x;
-    temp_r0 = arg0->y;
-    sp2C = temp_r6;
-    sp30 = temp_r0;
-    sp34 = arg0->z;
-    sp34 = it_804DCB00;
-    sp20 = temp_r6;
-    sp24 = temp_r0;
-    sp28 = sp34;
-    sp44 = it_804DCB04;
-    sp48 = 0;
-    sp40 = it_804DCB00;
-    sp3C = it_804DCB00;
-    sp38 = it_804DCB00;
-    spC = 0;
-    // sp10 = spC;
-    // sp50 |= 0x80;
-    sp4C = 0;
-    temp_r3 = Item_80268B18(spC);
-    if (temp_r3 != NULL) {
-        it_80292FF0(temp_r3);
+    spawn.kind = It_Kind_F_Flower;
+    spawn.prev_pos = *vec;
+    spawn.prev_pos.z = it_804DCB04;
+    spawn.pos = spawn.prev_pos;
+    spawn.facing_dir = it_804DCB00;
+    spawn.x3C_damage = 0;
+    spawn.vel.z = it_804DCB04;
+    spawn.vel.y = it_804DCB04;
+    spawn.vel.x = it_804DCB04;
+    spawn.x0_parent_gobj = NULL;
+    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+    spawn.x44_flag.bits.b0 = true;
+    spawn.x40 = it_804DCB00;
+
+    gobj = Item_80268B18(&spawn);
+    if (gobj != NULL) {
+        it_80292FF0(gobj);
     }
-    return temp_r3;
+    return gobj;
 }
 
 void it_80292E04(Item_GObj* gobj)
