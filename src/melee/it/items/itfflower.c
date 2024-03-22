@@ -40,13 +40,13 @@ Item_GObj* it_80292D48(Vec3* vec)
 
     spawn.kind = It_Kind_F_Flower;
     spawn.prev_pos = *vec;
-    spawn.prev_pos.z = -1.0F;
+    spawn.prev_pos.z = 0.0F;
     spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = 0.0F;
+    spawn.facing_dir = -1.0F;
     spawn.x3C_damage = 0;
-    spawn.vel.z = -1.0F;
-    spawn.vel.y = -1.0F;
-    spawn.vel.x = -1.0F;
+    spawn.vel.z = 0.0F;
+    spawn.vel.y = 0.0F;
+    spawn.vel.x = 0.0F;
     spawn.x0_parent_gobj = NULL;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
     spawn.x44_flag.bits.b0 = true;
