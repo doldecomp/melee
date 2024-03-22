@@ -229,12 +229,13 @@ bool it_802932AC(Item_GObj* gobj)
             Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
         }
         break;
-    case 5:
+    case 3:
+    case 4:
         if (it_80272C6C(gobj) == false) {
             Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
         }
         break;
-    default:
+    case 5:
         if (it_80272C6C(gobj) == false) {
             Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
         }
