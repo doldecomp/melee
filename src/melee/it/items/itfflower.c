@@ -1,5 +1,7 @@
 #include "itfflower.h"
 
+#include "itlgunbeam.h"
+
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "it/inlines.h"
@@ -12,8 +14,6 @@
 
 void it_80292FF0(Item_GObj*); /* static */
 void it_8029313C(Item_GObj*); /* static */
-
-M2C_UNK it_802996D0(s32, s32, u32, f32); /* extern */
 
 static inline void msid_check(enum_t msid, Item_GObj* gobj, Item* ip)
 {
@@ -116,7 +116,7 @@ void it_80292F14(Item_GObj* gobj, s32 arg1, f32 arg8)
         }
         ip->xD4C -= 1;
 
-        it_802996D0(*(s32*) &ip->owner, arg1, ip->xAC4_ignoreItemID, arg8);
+        it_802996D0(ip->owner, arg1, ip->xAC4_ignoreItemID, arg8);
 
         temp_r3 = ip->xDD4_itemVar.fflower.x0;
         ip->xDD4_itemVar.fflower.x0 = (0x2aab0000 - 0x5555);
