@@ -5,8 +5,10 @@
 #include "it/forward.h"
 
 #include "it/items/types.h"
+#include "it/types.h"
 
 /* 292E04 */ void it_80292E04(Item_GObj*);
+/* 292EF8 */ void it_80292EF8(Item_GObj*, Vec3*);
 /* 293284 */ void it_80293284(Item_GObj*);
 /* 2933C4 */ void it_802933C4(Item_GObj*);
 /* 2933EC */ void it_802933EC(Item_GObj*);

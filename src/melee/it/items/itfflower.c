@@ -8,7 +8,6 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
-#include "it/types.h"
 
 #include <baselib/gobj.h>
 
@@ -96,7 +95,7 @@ void it_80292EAC(Item_GObj* gobj)
     }
 }
 
-void it_80292EF8(Vec3* vec)
+void it_80292EF8(Item_GObj* unused, Vec3* vec)
 {
     vec->x = 0.0F;
     vec->y = 5.5F;
