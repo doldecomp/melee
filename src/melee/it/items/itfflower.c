@@ -164,17 +164,17 @@ void it_80292FF0(Item_GObj* gobj)
 
 bool it_80293040(Item_GObj* gobj)
 {
-    s32 temp_r31_2;
+    s32 flag;
     Item* ip = GET_ITEM(gobj);
 
     PAD_STACK(4);
 
     msid_check(gobj, ip);
 
-    temp_r31_2 = ip->xDC8_word.flags.x2;
+    flag = ip->xDC8_word.flags.x2;
     if (it_80272C6C(gobj) == false) {
         Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-        if (temp_r31_2 != 0) {
+        if (flag != 0) {
             it_80274F10(gobj);
             it_8026BE28(gobj);
         }
