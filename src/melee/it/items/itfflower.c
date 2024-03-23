@@ -57,6 +57,8 @@ static inline void msid_check(Item_GObj* gobj, Item* ip)
             ip->xDD4_itemVar.fflower.x4 = 0;
         }
         break;
+    default:
+        break;
     }
 }
 
