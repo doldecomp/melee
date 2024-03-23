@@ -126,7 +126,8 @@ void it_80292EAC(Item_GObj* gobj)
         break;
     case 2:
     case 5:
-        return;
+    default:
+        break;
     }
 }
 
