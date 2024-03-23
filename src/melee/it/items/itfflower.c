@@ -11,8 +11,32 @@
 
 #include <baselib/gobj.h>
 
-void it_80292FF0(Item_GObj*); /* static */
-void it_8029313C(Item_GObj*); /* static */
+/* 292FF0 */ static void it_80292FF0(Item_GObj* gobj);
+/* 293040 */ static bool it_80293040(Item_GObj* gobj);
+/* 29310C */ static void it_8029310C(Item_GObj* gobj);
+/* 293110 */ static bool it_80293110(Item_GObj* gobj);
+/* 29313C */ static void it_8029313C(Item_GObj* gobj);
+/* 293164 */ static bool it_80293164(Item_GObj* gobj);
+/* 293210 */ static void it_80293210(Item_GObj* gobj);
+/* 293240 */ static bool it_80293240(Item_GObj* gobj);
+/* 2932AC */ static bool it_802932AC(Item_GObj* gobj);
+/* 2933C0 */ static void it_802933C0(Item_GObj* gobj);
+/* 293414 */ static void it_80293414(Item_GObj* gobj);
+/* 293444 */ static bool it_80293444(Item_GObj* gobj);
+/* 29355C */ static bool it_8029355C(Item_GObj* gobj);
+/* 293608 */ static void it_80293608(Item_GObj* gobj);
+/* 29360C */ static bool it_8029360C(Item_GObj* gobj);
+
+ItemStateTable it_803F6090[] = {
+    { 0, it_80293040, it_8029310C, it_80293110 },
+    { 0, it_80293164, it_80293210, it_80293240 },
+    { 0, it_802932AC, it_802933C0, NULL },
+    { 1, it_802932AC, it_802933C0, NULL },
+    { 2, it_802932AC, it_802933C0, NULL },
+    { 3, it_802932AC, it_802933C0, NULL },
+    { 4, it_80293164, it_80293414, it_80293444 },
+    { 0, it_8029355C, it_80293608, it_8029360C },
+};
 
 static inline void msid_check(enum_t msid, Item_GObj* gobj, Item* ip)
 {
@@ -336,14 +360,3 @@ void it_80293640(Item_GObj* gobj, Item_GObj* ref)
 {
     it_8026B894(gobj, ref);
 }
-
-ItemStateTable it_803F6090[] = {
-    { 0, it_80293040, it_8029310C, it_80293110 },
-    { 0, it_80293164, it_80293210, it_80293240 },
-    { 0, it_802932AC, it_802933C0, NULL },
-    { 1, it_802932AC, it_802933C0, NULL },
-    { 2, it_802932AC, it_802933C0, NULL },
-    { 3, it_802932AC, it_802933C0, NULL },
-    { 4, it_80293164, it_80293414, it_80293444 },
-    { 0, it_8029355C, it_80293608, it_8029360C },
-};

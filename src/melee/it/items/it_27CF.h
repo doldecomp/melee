@@ -22,7 +22,7 @@
 /* 28FE90 */ void it_8028FE90(Item_GObj*);
 /* 290938 */ HSD_GObj* it_80290938(HSD_JObj*);
 /* 291BE0 */ HSD_GObj* it_80291BE0(Vec3*);
-/* 292D48 */ HSD_GObj* it_80292D48(Vec3*);
+/* 292D48 */ Item_GObj* it_80292D48(Vec3*);
 /* 294DC0 */ HSD_GObj* it_80294DC0(Vec3*);
 /* 294E78 */ void it_80294E78(Item_GObj*, float);
 /* 294EB0 */ void it_80294EB0(Item_GObj*, Vec3*, Vec3*);
