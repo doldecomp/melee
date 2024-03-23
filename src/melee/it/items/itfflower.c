@@ -38,21 +38,25 @@ ItemStateTable it_803F6090[] = {
     { 0, it_8029355C, it_80293608, it_8029360C },
 };
 
-static inline void msid_check(enum_t msid, Item_GObj* gobj, Item* ip)
+static inline void msid_check(Item_GObj* gobj, Item* ip)
 {
-    if (msid != 4) {
-        if (msid < 4) {
-            if (msid >= 0) {
-                goto block_5;
-            }
-        } else if (msid < 8) {
-        block_5:
+    switch (ip->msid) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 5:
+    case 6:
+    case 7:
+        efLib_DestroyAll(gobj);
+        ip->xDD4_itemVar.fflower.x4 = 0;
+        break;
+    case 4:
+        if (ip->xD4C <= 0) {
             efLib_DestroyAll(gobj);
             ip->xDD4_itemVar.fflower.x4 = 0;
         }
-    } else if (ip->xD4C <= 0) {
-        efLib_DestroyAll(gobj);
-        ip->xDD4_itemVar.fflower.x4 = 0;
+        break;
     }
 }
 
@@ -162,11 +166,10 @@ bool it_80293040(Item_GObj* gobj)
 {
     s32 temp_r31_2;
     Item* ip = GET_ITEM(gobj);
-    s32 msid = ip->msid;
 
     PAD_STACK(4);
 
-    msid_check(msid, gobj, ip);
+    msid_check(gobj, ip);
 
     temp_r31_2 = ip->xDC8_word.flags.x2;
     if (it_80272C6C(gobj) == false) {
@@ -195,9 +198,8 @@ void it_8029313C(Item_GObj* gobj)
 bool it_80293164(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    enum_t msid = ip->msid;
 
-    msid_check(msid, gobj, ip);
+    msid_check(gobj, ip);
 
     if (it_80272C6C(gobj) == false) {
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
@@ -231,15 +233,13 @@ void it_80293284(Item_GObj* gobj)
 
 bool it_802932AC(Item_GObj* gobj)
 {
-    enum_t msid2;
     Item* ip = GET_ITEM(gobj);
-    enum_t msid = ip->msid;
 
-    msid_check(msid, gobj, ip);
+    PAD_STACK(4);
 
-    msid2 = ip->msid;
+    msid_check(gobj, ip);
 
-    switch (msid2) {
+    switch (ip->msid) {
     case 2:
         if (it_80272C6C(gobj) == false) {
             Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
@@ -327,13 +327,11 @@ void it_80293534(Item_GObj* gobj)
 
 bool it_8029355C(Item_GObj* gobj)
 {
-    enum_t msid;
     Item* ip;
 
     ip = GET_ITEM(gobj);
-    msid = ip->msid;
 
-    msid_check(msid, gobj, ip);
+    msid_check(gobj, ip);
 
     if (it_80272C6C(gobj) == false) {
         Item_80268E5C(gobj, 7, ITEM_ANIM_UPDATE);
