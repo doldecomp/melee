@@ -57,8 +57,6 @@ static inline void msid_check(Item_GObj* gobj, Item* ip)
             ip->xDD4_itemVar.fflower.x4 = 0;
         }
         break;
-    default:
-        break;
     }
 }
 
@@ -111,8 +109,6 @@ void it_80292E64(Item_GObj* gobj)
     case 5:
         Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
         break;
-    default:
-        break;
     }
 }
 
@@ -128,7 +124,6 @@ void it_80292EAC(Item_GObj* gobj)
         break;
     case 2:
     case 5:
-    default:
         break;
     }
 }
