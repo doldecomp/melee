@@ -104,10 +104,13 @@ void it_80292E64(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     enum_t msid = ip->msid;
 
-    if (msid != 5 && (msid >= 5 || msid != 2)) {
-        return;
-    } else {
+    switch (msid) {
+    case 2:
+    case 5:
         Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+        break;
+    default:
+        break;
     }
 }
 
