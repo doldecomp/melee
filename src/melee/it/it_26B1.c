@@ -11,6 +11,7 @@
 #include "it/item.h"
 #include "it/items/it_27CF.h"
 #include "it/items/itbat.h"
+#include "it/items/itfflower.h"
 #include "it/items/itsword.h"
 #include "it/types.h"
 
