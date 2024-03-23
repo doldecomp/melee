@@ -13,6 +13,7 @@
 /* 272CC0 */ HSD_JObj* it_80272CC0(Item_GObj*, enum_t);
 /* 273408 */ void it_80273408(Item_GObj* gobj);
 /* 273670 */ void it_80273670(HSD_GObj*, int, float);
+/* 274250 */ void it_80274250(Item_GObj*, Vec3*);
 /* 274C88 */ void it_80274C88(Item_GObj* gobj);
 /* 274ECC */ void it_80274ECC(Item_GObj* gobj, bool);
 /* 274F48 */ void it_80274F48(Item_GObj* gobj, int bone_attach_id, HSD_GObj*,
