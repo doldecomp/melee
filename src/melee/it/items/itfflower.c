@@ -128,8 +128,6 @@ void it_80292EF8(Item_GObj* unused, Vec3* vec)
 
 void it_80292F14(Item_GObj* gobj, s32 arg1, f32 arg8)
 {
-    s32 temp_r4;
-    u32 temp_r3;
     Item* ip = GET_ITEM(gobj);
 
     if (ip->xD4C > 0) {
@@ -141,13 +139,8 @@ void it_80292F14(Item_GObj* gobj, s32 arg1, f32 arg8)
 
         it_802996D0(ip->owner, arg1, ip->xAC4_ignoreItemID, arg8);
 
-        temp_r3 = ip->xDD4_itemVar.fflower.x0;
-        ip->xDD4_itemVar.fflower.x0 = (0x2aab0000 - 0x5555);
-        temp_r4 = temp_r3 + 1;
-        temp_r3 = ip->xDD4_itemVar.fflower.x0;
-
-        ip->xDD4_itemVar.fflower.x0 =
-            temp_r4 - ((temp_r3 + (temp_r3 >> 0x1F)) * 6);
+        ip->xDD4_itemVar.fflower.x0++;
+        ip->xDD4_itemVar.fflower.x0 %= 6;
         if (ip->xDD4_itemVar.fflower.x0 == 0) {
             ip->xAC4_ignoreItemID = Item_8026AE60();
         }
