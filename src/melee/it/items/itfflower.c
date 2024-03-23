@@ -292,7 +292,7 @@ bool it_80293444(Item_GObj* gobj)
 
     if (ip->xD4C != 0) {
         it_8026E15C(gobj, it_80292FF0);
-        return 0;
+        return false;
     }
     return it_8026DF34();
 }
