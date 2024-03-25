@@ -217,4 +217,9 @@ typedef struct CoinVars {
     int x14;
 } CoinVars;
 
+typedef struct FFlowerVars {
+    int x0;
+    uint x4;
+} FFlowerVars;
+
 #endif

@@ -157,12 +157,12 @@ void it_80294088(HSD_GObj* gobj)
     it_80272860(gobj, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
 }
 
-int it_802940B8(HSD_GObj* gobj)
+bool it_802940B8(HSD_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
     if (it->xD4C != 0) {
         it_8026E15C(gobj, it_80293F84);
-        return 0;
+        return false;
     }
     return it_8026DF34();
 }

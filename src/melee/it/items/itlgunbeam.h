@@ -6,6 +6,7 @@
 
 #include "it/items/types.h"
 
+/* 2996D0 */ void it_802996D0(HSD_GObj*, s32, u32, f32);
 /* 299B6C */ bool it_80299B6C(Item_GObj*);
 /* 299B74 */ bool it_80299B74(Item_GObj*);
 /* 299C08 */ bool it_80299C08(Item_GObj*);
