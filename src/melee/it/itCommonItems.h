@@ -217,4 +217,8 @@ typedef struct CoinVars {
     int x14;
 } CoinVars;
 
+typedef struct HassamVars {
+    f32 x0;
+} HassamVars;
+
 #endif

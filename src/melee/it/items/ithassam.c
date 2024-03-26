@@ -1,3 +1,5 @@
+#include "it/forward.h"
+
 #include "ithassam.h"
 
 #include "ef/eflib.h"
@@ -12,6 +14,7 @@
 #include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
+#include <placeholder.h>
 #include <baselib/gobj.h>
 
 extern s8 it_803F7D38;
@@ -34,21 +37,20 @@ M2C_UNK it_8027A13C(Item_GObj*); /* extern */
 M2C_UNK it_80272980(void*, f32); /* extern */
 M2C_UNK Camera_80030788(Vec3*);  /* extern */
 
-void it_802CDBE0(Item_GObj* arg0)
+void it_802CDBE0(Item_GObj* gobj)
 {
-    Article* temp_r4;
-    Item* temp_r31;
-    void* temp_r30;
+    Item* ip = GET_ITEM(gobj);
+    Article* ap = ip->xC4_article_data;
+    HassamVars* attr = ap->x4_specialAttributes;
 
-    temp_r31 = arg0->user_data;
-    temp_r4 = temp_r31->xC4_article_data;
-    temp_r30 = temp_r4->x4_specialAttributes;
-    it_80279C48(arg0, temp_r4);
-    temp_r31->xDAC_itcmd_var0 = 0;
-    temp_r31->xDB0_itcmd_var1 = 0;
-    // it_80279CDC(arg0, *temp_r30);
-    it_802CE640(arg0);
-    Item_8026AE84(temp_r31, 0x2721, 0x7F, 0x40);
+    PAD_STACK(12);
+
+    it_80279C48(gobj, ap);
+    ip->xDAC_itcmd_var0 = 0;
+    ip->xDB0_itcmd_var1 = 0;
+    it_80279CDC(gobj, attr->x0);
+    it_802CE640(gobj);
+    Item_8026AE84(ip, 0x2721, 0x7F, 0x40);
 }
 
 void it_802CDC5C(Item_GObj* gobj) {}
