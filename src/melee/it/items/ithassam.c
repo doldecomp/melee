@@ -212,8 +212,8 @@ void it_802CE008(Item_GObj* gobj)
     it_8027A160(ip->xBBC_dynamicBoneTable->bones[2], ip);
     ip->xD44_lifeTimer = M2C_FIELD(attr, s32*, 0x18);
     ip->x40_vel.x = attr->x4 * ip->facing_dir;
-    ip->xDD4_itemVar.hassam.x64 = attr->x4 * ip->facing_dir;
-    ip->xDD4_itemVar.hassam.x6C = ip->xDD4_itemVar.hassam.x68 = it_804DD3E4;
+    ip->xDD4_itemVar.hassam.x5C = attr->x4 * ip->facing_dir;
+    ip->xDD4_itemVar.hassam.x64 = ip->xDD4_itemVar.hassam.x60 = it_804DD3E4;
 }
 
 bool it_802CE0C4(Item_GObj* arg0)
@@ -333,9 +333,9 @@ void it_802CE5DC(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
 
     it_8027A344(gobj);
-    ip->pos.x += ip->xDD4_itemVar.hassam.x64;
-    ip->pos.y += ip->xDD4_itemVar.hassam.x68;
-    ip->pos.z += ip->xDD4_itemVar.hassam.x6C;
+    ip->pos.x += ip->xDD4_itemVar.hassam.x5C;
+    ip->pos.y += ip->xDD4_itemVar.hassam.x60;
+    ip->pos.z += ip->xDD4_itemVar.hassam.x64;
 }
 
 bool it_802CE638(Item_GObj* gobj)
