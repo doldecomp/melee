@@ -60,10 +60,12 @@ void it_802CDC60(Item_GObj* gobj, Item_GObj* ref)
     it_8026B894(gobj, ref);
 }
 
-void it_802CDC80(Item_GObj* arg0)
+void it_802CDC80(Item_GObj* gobj)
 {
-    it_80273454(arg0);
-    it_802CDCB4(arg0);
+    PAD_STACK(12);
+
+    it_80273454(gobj);
+    it_802CDCB4(gobj);
 }
 
 void it_802CDCB4(Item_GObj* gobj)
