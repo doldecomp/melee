@@ -201,23 +201,19 @@ void it_802CDF28(void* arg0)
     it_80272980(arg0, temp_f1);
 }
 
-void it_802CE008(Item_GObj* arg0)
+void it_802CE008(Item_GObj* gobj)
 {
-    Item* temp_r31;
-    void* temp_r30;
+    Item* ip = GET_ITEM(gobj);
+    HassamVars* attr = ip->xC4_article_data->x4_specialAttributes;
 
-    temp_r31 = arg0->user_data;
-    temp_r30 = temp_r31->xC4_article_data->x4_specialAttributes;
-    Item_80268E5C(arg0, 1, ITEM_ANIM_UPDATE);
-    temp_r31->entered_hitlag = efLib_PauseAll;
-    temp_r31->exited_hitlag = efLib_ResumeAll;
-    it_8027A160(temp_r31->xBBC_dynamicBoneTable->bones[2], temp_r31);
-    temp_r31->xD44_lifeTimer = M2C_FIELD(temp_r30, s32*, 0x18);
-    temp_r31->x40_vel.x = M2C_FIELD(temp_r30, f32*, 4) * temp_r31->facing_dir;
-    temp_r31->xDD4_itemVar.pokemon.timer =
-        M2C_FIELD(temp_r30, f32*, 4) * temp_r31->facing_dir;
-    temp_r31->xDD4_itemVar.pokemon.x64 = it_804DD3E4;
-    temp_r31->xDD4_itemVar.PKThunderVars.xE38.z = it_804DD3E4;
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    it_8027A160(ip->xBBC_dynamicBoneTable->bones[2], ip);
+    ip->xD44_lifeTimer = M2C_FIELD(attr, s32*, 0x18);
+    ip->x40_vel.x = attr->x4 * ip->facing_dir;
+    ip->xDD4_itemVar.hassam.x64 = attr->x4 * ip->facing_dir;
+    ip->xDD4_itemVar.hassam.x6C = ip->xDD4_itemVar.hassam.x68 = it_804DD3E4;
 }
 
 bool it_802CE0C4(Item_GObj* arg0)
