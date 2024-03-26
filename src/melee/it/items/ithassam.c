@@ -332,15 +332,14 @@ bool it_802CE588(Item_GObj* gobj)
     return false;
 }
 
-void it_802CE5DC(Item_GObj* arg0)
+void it_802CE5DC(Item_GObj* gobj)
 {
-    Item* temp_r31;
+    Item* ip = GET_ITEM(gobj);
 
-    temp_r31 = arg0->user_data;
-    it_8027A344(arg0);
-    temp_r31->pos.x += temp_r31->xDD4_itemVar.pokemon.timer;
-    temp_r31->pos.y += temp_r31->xDD4_itemVar.pokemon.x64;
-    temp_r31->pos.z += temp_r31->xDD4_itemVar.PKThunderVars.xE38.z;
+    it_8027A344(gobj);
+    ip->pos.x += ip->xDD4_itemVar.hassam.x64;
+    ip->pos.y += ip->xDD4_itemVar.hassam.x68;
+    ip->pos.z += ip->xDD4_itemVar.hassam.x6C;
 }
 
 bool it_802CE638(Item_GObj* gobj)
