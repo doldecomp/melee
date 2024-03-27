@@ -21,14 +21,7 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-extern s8 it_803F7D38;
-extern f32 it_804DD3E0;
 extern f32 it_804DD3E4;
-extern f64 it_804DD3E8;
-extern s8 it_804D5600;
-extern s8 it_804D5608;
-extern f32 it_804DD3F0;
-extern f32 it_804DD3F4;
 
 bool it_802CE0C4(Item_GObj*); /* static */
 void it_802CE400(Item_GObj*); /* static */
@@ -212,10 +205,50 @@ void it_802CE008(Item_GObj* gobj)
     ip->xDD4_itemVar.hassam.x64 = ip->xDD4_itemVar.hassam.x60 = 0.0F;
 }
 
-bool it_802CE0C4(Item_GObj* arg0)
+bool it_802CE0C4(HSD_GObj* gobj)
 {
-    // too big atm lol
-    return 0;
+    Item* ip;
+    f32 temp_f1;
+    HSD_JObj* jobj;
+    HassamVars* attr;
+
+    ip = GET_ITEM(gobj);
+    attr = ip->xC4_article_data->x4_specialAttributes;
+    if (it_80272C6C(gobj) == 0) {
+        Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+        ip->entered_hitlag = efLib_PauseAll;
+        ip->exited_hitlag = efLib_ResumeAll;
+    }
+    it_8027A160(ip->xBBC_dynamicBoneTable->bones[2], ip);
+    if (ip->xDB0_itcmd_var1 != 0) {
+        jobj = GET_JOBJ(gobj);
+
+        ip->xDD4_itemVar.hassam.x68 = HSD_JObjGetRotationY(jobj);
+        ip->xDD4_itemVar.hassam.x68 += 0.017453292F * (0xB4 / attr->x20);
+        HSD_JObjSetRotationY(jobj, ip->xDD4_itemVar.hassam.x68);
+
+        ip->xDB0_itcmd_var1 += 1;
+        if (ip->xDB0_itcmd_var1 > (u32) attr->x20) {
+            ip->xDB0_itcmd_var1 = 0;
+        }
+    }
+
+    ip->xD44_lifeTimer -= 1.0F;
+    if (ip->xD44_lifeTimer < 0.0F) {
+        if (ip->xDAC_itcmd_var0 != 0) {
+            it_802CE400(gobj);
+        } else {
+            temp_f1 = ip->facing_dir;
+            it_802CDF28(gobj);
+            if (temp_f1 != ip->facing_dir) {
+                ip->xDB0_itcmd_var1 = 1;
+            }
+            ip->xDAC_itcmd_var0 = 1;
+            ip->xD44_lifeTimer = attr->x1C;
+            it_802762BC(ip);
+        }
+    }
+    return false;
 }
 
 void it_802CE308(Item_GObj* gobj)
