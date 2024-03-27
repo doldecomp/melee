@@ -166,40 +166,35 @@ loop_13:
     return var_r28;
 }
 
-void it_802CDF28(void* arg0)
+void it_802CDF28(Item_GObj* gobj)
 {
     Vec3 sp1C;
     Vec3 sp10;
     Item_GObj* var_r3;
     f32 temp_f1;
-    void* temp_r30;
-    void* temp_r31;
-    void* temp_r5;
 
-    temp_r31 = M2C_FIELD(arg0, void**, 0x2C);
-    temp_r5 = M2C_FIELD(temp_r31, void**, 0xC4);
-    temp_r30 = M2C_FIELD(temp_r5, void**, 4);
-    // var_r3 =
-    //     it_802CDE1C(temp_r31 + 0x4C, M2C_FIELD(temp_r31, Item_GObj**,
-    //     0x518));
-    var_r3 = NULL;
+    Item* ip = GET_ITEM(gobj);
+    Article* ap = ip->xC4_article_data;
+    HassamVars* attr = ap->x4_specialAttributes;
+
+    var_r3 = it_802CDE1C(&ip->pos, ip->owner);
     if (var_r3 == NULL) {
-        var_r3 = M2C_FIELD(temp_r31, Item_GObj**, 0x518);
+        var_r3 = ip->owner;
     }
     ftLib_800866DC(var_r3, &sp1C);
-    sp1C.y += M2C_FIELD(temp_r30, f32*, 8);
-    // lbVector_Diff(&sp1C, temp_r31 + 0x4C, &sp10);
-    M2C_FIELD(temp_r31, f32*, 0xE34) = M2C_FIELD(temp_r30, f32*, 4);
-    M2C_FIELD(temp_r31, f32*, 0xE38) = it_804DD3E4;
-    M2C_FIELD(temp_r31, f32*, 0xE3C) = it_804DD3E4;
-    // lbVector_Rotate(temp_r31 + 0xE34, 4, atan2f(sp10.y, (sp10.x)));
-    temp_f1 = M2C_FIELD(temp_r31, f32*, 0xE38);
-    M2C_FIELD(temp_r31, f32*, 0xE38) =
-        temp_f1 + M2C_FIELD(temp_r30, f32*, 0xC);
-    M2C_FIELD(temp_r31, f32*, 0x40) = M2C_FIELD(temp_r31, f32*, 0xE34);
-    M2C_FIELD(temp_r31, f32*, 0x44) = M2C_FIELD(temp_r31, f32*, 0xE38);
-    M2C_FIELD(temp_r31, f32*, 0x48) = M2C_FIELD(temp_r31, f32*, 0xE3C);
-    it_80272980(arg0, temp_f1);
+    sp1C.y += attr->x8;
+    lbVector_Diff(&sp1C, &ip->pos, &sp10);
+    ip->xDD4_itemVar.hassam.x5C = attr->x4;
+    ip->xDD4_itemVar.hassam.x60 = 0.0F;
+    ip->xDD4_itemVar.hassam.x64 = 0.0F;
+    lbVector_Rotate((Vec3*) &ip->xDD4_itemVar.hassam.x5C, 4,
+                    atan2f(sp10.y, sp10.x));
+    temp_f1 = ip->xDD4_itemVar.hassam.x60;
+    ip->xDD4_itemVar.hassam.x60 = temp_f1 + attr->xC;
+    ip->x40_vel.x = ip->xDD4_itemVar.hassam.x5C;
+    ip->x40_vel.y = ip->xDD4_itemVar.hassam.x60;
+    ip->x40_vel.z = ip->xDD4_itemVar.hassam.x64;
+    it_80272980(gobj, temp_f1);
 }
 
 void it_802CE008(Item_GObj* gobj)

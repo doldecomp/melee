@@ -220,7 +220,9 @@ typedef struct CoinVars {
 typedef struct HassamVars {
     f32 x0;
     f32 x4;
-    u8 padding[0x5C - 0x4];
+    f32 x8;
+    f32 xC;
+    u8 padding[0x5C - 0xC];
     f32 x5C;
     f32 x60;
     f32 x64;
