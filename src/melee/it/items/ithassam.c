@@ -218,25 +218,24 @@ bool it_802CE0C4(Item_GObj* arg0)
     return 0;
 }
 
-void it_802CE308(Item_GObj* arg0)
+void it_802CE308(Item_GObj* gobj)
 {
-    Item* temp_r31;
     f32 temp_f0;
-    void* temp_r30;
 
-    temp_r31 = arg0->user_data;
-    temp_r30 = temp_r31->xC4_article_data->x4_specialAttributes;
-    it_8027A344(arg0);
-    if (temp_r31->ground_or_air == GA_Air) {
-        temp_r31->xDD4_itemVar.pokemon.x64 -= M2C_FIELD(temp_r30, f32*, 0x14);
-        temp_f0 = -M2C_FIELD(temp_r30, f32*, 0x10);
-        if (temp_r31->xDD4_itemVar.pokemon.x64 < temp_f0) {
-            temp_r31->xDD4_itemVar.pokemon.x64 = temp_f0;
+    Item* ip = GET_ITEM(gobj);
+    HassamVars* attr = ip->xC4_article_data->x4_specialAttributes;
+
+    it_8027A344(gobj);
+    if (ip->ground_or_air == GA_Air) {
+        ip->xDD4_itemVar.pokemon.x64 -= attr->x14;
+        temp_f0 = -attr->x10;
+        if (ip->xDD4_itemVar.hassam.x64 < temp_f0) {
+            ip->xDD4_itemVar.hassam.x64 = temp_f0;
         }
     }
-    temp_r31->x40_vel.x += temp_r31->xDD4_itemVar.pokemon.timer;
-    temp_r31->x40_vel.y += temp_r31->xDD4_itemVar.pokemon.x64;
-    temp_r31->x40_vel.z += temp_r31->xDD4_itemVar.PKThunderVars.xE38.z;
+    ip->x40_vel.x += ip->xDD4_itemVar.hassam.x60;
+    ip->x40_vel.y += ip->xDD4_itemVar.hassam.x64;
+    ip->x40_vel.z += ip->xDD4_itemVar.hassam.x68;
 }
 
 bool it_802CE3A8(Item_GObj* gobj)

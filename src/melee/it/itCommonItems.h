@@ -222,10 +222,13 @@ typedef struct HassamVars {
     f32 x4;
     f32 x8;
     f32 xC;
-    u8 padding[0x5C - 0xC];
+    f32 x10;
+    f32 x14;
+    u8 padding[0x5C - 0x14];
     f32 x5C;
     f32 x60;
     f32 x64;
+    f32 x68;
 } HassamVars;
 
 #endif
