@@ -4,6 +4,7 @@
 
 #include "ithassam.h"
 
+#include "cm/camera.h"
 #include "ef/eflib.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
@@ -27,10 +28,6 @@ void it_802CE640(Item_GObj*); /* static */
 void it_802CDCB4(Item_GObj*); /* static */
 bool it_802CDD24(Item_GObj*); /* static */
 void it_802CE008(Item_GObj*); /* static */
-
-M2C_UNK it_8027A13C(Item_GObj*); /* extern */
-M2C_UNK it_80272980(void*, f32); /* extern */
-M2C_UNK Camera_80030788(Vec3*);  /* extern */
 
 void it_802CDBE0(Item_GObj* gobj)
 {

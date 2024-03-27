@@ -31,6 +31,7 @@
 /* 02F474 */ void Camera_8002F474(void);
 /* 02F8F4 */ void Camera_8002F8F4(void);
 /* 030740 */ void Camera_80030740(u8 r, u8 g, u8 b);
+/* 030788 */ M2C_UNK Camera_80030788(Vec3*);
 /* 030A50 */ void* Camera_80030A50(void);
 /* 030A78 */ bool Camera_80030A78(void);
 /* 030B24 */ bool Camera_80030B24(void);
