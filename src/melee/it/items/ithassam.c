@@ -209,7 +209,7 @@ void it_802CE008(Item_GObj* gobj)
     ip->xD44_lifeTimer = M2C_FIELD(attr, s32*, 0x18);
     ip->x40_vel.x = attr->x4 * ip->facing_dir;
     ip->xDD4_itemVar.hassam.x5C = attr->x4 * ip->facing_dir;
-    ip->xDD4_itemVar.hassam.x64 = ip->xDD4_itemVar.hassam.x60 = it_804DD3E4;
+    ip->xDD4_itemVar.hassam.x64 = ip->xDD4_itemVar.hassam.x60 = 0.0F;
 }
 
 bool it_802CE0C4(Item_GObj* arg0)
