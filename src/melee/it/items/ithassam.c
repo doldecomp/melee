@@ -136,9 +136,9 @@ Item_GObj* it_802CDE1C(Vec3* arg0, Item_GObj* arg1)
         var_r30 = NULL;
     }
     var_r28 = NULL;
-    var_r29 = HSD_GObj_Entities->fighters;
-loop_13:
-    if (var_r29 != NULL) {
+    for (var_r29 = HSD_GObj_Entities->fighters; var_r29 != NULL;
+         var_r29 = var_r29->next)
+    {
         if (ftLib_80086FD4(arg1, var_r29) == 0) {
             temp_r31 = var_r29->user_data;
             if (!((M2C_FIELD(temp_r31, u8*, 0x221F) >> 4) & 1) &&
@@ -157,8 +157,6 @@ loop_13:
                 }
             }
         }
-        var_r29 = var_r29->next;
-        goto loop_13;
     }
     if (var_r28 == NULL) {
         var_r28 = ftLib_8008627C(arg0, arg1);
