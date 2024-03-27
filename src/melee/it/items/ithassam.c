@@ -162,8 +162,7 @@ void it_802CDF28(Item_GObj* gobj)
     f32 temp_f1;
 
     Item* ip = GET_ITEM(gobj);
-    Article* ap = ip->xC4_article_data;
-    HassamVars* attr = ap->x4_specialAttributes;
+    HassamVars* attr = ip->xC4_article_data->x4_specialAttributes;
 
     var_r3 = it_802CDE1C(&ip->pos, ip->owner);
     if (var_r3 == NULL) {
