@@ -21,8 +21,6 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-extern f32 it_804DD3E4;
-
 bool it_802CE0C4(Item_GObj*); /* static */
 void it_802CE400(Item_GObj*); /* static */
 void it_802CE640(Item_GObj*); /* static */
@@ -308,8 +306,7 @@ void it_802CE400(Item_GObj* gobj)
     ip->xDD4_itemVar.hassam.x5C = sp10.x;
     ip->xDD4_itemVar.hassam.x60 = sp10.y;
     ip->xDD4_itemVar.hassam.x64 = sp10.z;
-    ip->facing_dir = ip->x40_vel.z = ip->x40_vel.y = ip->x40_vel.x =
-        it_804DD3E4;
+    ip->facing_dir = ip->x40_vel.z = ip->x40_vel.y = ip->x40_vel.x = 0.0F;
 
     HSD_JObjSetRotationY(jobj, 0.0F);
 }
