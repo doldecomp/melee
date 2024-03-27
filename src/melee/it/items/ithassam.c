@@ -220,14 +220,12 @@ bool it_802CE0C4(HSD_GObj* gobj)
         ip->xDD4_itemVar.hassam.x68 += 0.017453292F * (0xB4 / attr->x20);
         HSD_JObjSetRotationY(jobj, ip->xDD4_itemVar.hassam.x68);
 
-        ip->xDB0_itcmd_var1 += 1;
-        if (ip->xDB0_itcmd_var1 > (u32) attr->x20) {
+        if (++ip->xDB0_itcmd_var1 > (u32) attr->x20) {
             ip->xDB0_itcmd_var1 = 0;
         }
     }
 
-    ip->xD44_lifeTimer -= 1.0F;
-    if (ip->xD44_lifeTimer < 0.0F) {
+    if (--ip->xD44_lifeTimer < 0.0F) {
         if (ip->xDAC_itcmd_var0 != 0) {
             it_802CE400(gobj);
         } else {
