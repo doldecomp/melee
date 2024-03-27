@@ -218,6 +218,11 @@ typedef struct CoinVars {
     int x14;
 } CoinVars;
 
+typedef struct FFlowerVars {
+    int x0;
+    uint x4;
+} FFlowerVars;
+
 typedef struct HassamVars {
     f32 x0;
     f32 x4;
