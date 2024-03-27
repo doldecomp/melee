@@ -1,9 +1,12 @@
+#include <platform.h>
+#include "ft/forward.h"
 #include "it/forward.h"
 
 #include "ithassam.h"
 
 #include "ef/eflib.h"
 #include "ft/ftlib.h"
+#include "ft/inlines.h"
 #include "gm/gm_1601.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -116,50 +119,49 @@ bool it_802CDDD0(Item_GObj* gobj)
     return false;
 }
 
-Item_GObj* it_802CDE1C(Vec3* arg0, Item_GObj* arg1)
+Item_GObj* it_802CDE1C(Vec3* vec, Item_GObj* gobj)
 {
     Vec3 sp20;
     Item_GObj* var_r28;
-    Item_GObj* var_r29;
+    Fighter_GObj* cur;
     f32 temp_f0;
     f32 temp_f1;
     f32 temp_f2;
     f32 temp_f4;
     f32 var_f31;
-    void* temp_r31;
-    void* var_r30;
+    Fighter* fp;
+    Item* ip;
 
-    var_f31 = it_804DD3E0;
-    if (arg1 != NULL) {
-        var_r30 = arg1->user_data;
+    PAD_STACK(8);
+
+    var_f31 = F32_MAX;
+    if (gobj != NULL) {
+        ip = GET_ITEM(gobj);
     } else {
-        var_r30 = NULL;
+        ip = NULL;
     }
     var_r28 = NULL;
-    for (var_r29 = HSD_GObj_Entities->fighters; var_r29 != NULL;
-         var_r29 = var_r29->next)
-    {
-        if (ftLib_80086FD4(arg1, var_r29) == 0) {
-            temp_r31 = var_r29->user_data;
-            if (!((M2C_FIELD(temp_r31, u8*, 0x221F) >> 4) & 1) &&
-                ((gm_8016B168() == 0) || (var_r30 == NULL) ||
-                 (M2C_FIELD(temp_r31, u8*, 0x61B) !=
-                  M2C_FIELD(var_r30, u8*, 0x61B))))
+    for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
+        if (ftLib_80086FD4(gobj, cur) == 0) {
+            fp = GET_FIGHTER(cur);
+            if ((fp->x221F_b3 == false) &&
+                ((gm_8016B168() == 0) || (ip == NULL) ||
+                 (fp->x61B_team != ip->x5D4_hitboxes[0].hit.x46[1])))
             {
-                ftLib_800866DC(var_r29, &sp20);
-                temp_f2 = arg0->y;
+                ftLib_800866DC(cur, &sp20);
+                temp_f2 = vec->y;
                 temp_f4 = temp_f2 - sp20.y;
-                temp_f1 = arg0->x - sp20.x;
+                temp_f1 = vec->x - sp20.x;
                 temp_f0 = (temp_f1 * temp_f1) + (temp_f4 * temp_f4);
                 if ((temp_f0 < var_f31) && (sp20.y > temp_f2)) {
                     var_f31 = temp_f0;
-                    var_r28 = var_r29;
+                    var_r28 = cur;
                 }
             }
         }
     }
     if (var_r28 == NULL) {
-        var_r28 = ftLib_8008627C(arg0, arg1);
+        var_r28 = ftLib_8008627C(vec, gobj);
     }
     return var_r28;
 }
