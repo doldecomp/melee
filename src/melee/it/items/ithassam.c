@@ -16,6 +16,7 @@
 
 #include <placeholder.h>
 #include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 extern s8 it_803F7D38;
 extern f32 it_804DD3E0;
@@ -257,64 +258,33 @@ bool it_802CE3A8(Item_GObj* gobj)
     return false;
 }
 
-void it_802CE400(Item_GObj* arg0)
+void it_802CE400(Item_GObj* gobj)
 {
     Vec3 sp1C;
     Vec3 sp10;
-    HSD_JObj* temp_r31;
-    Item* temp_r30;
-    f32 temp_f0;
-    f32 temp_f0_2;
-    s32 temp_cr0_eq;
-    s32 var_r3;
-    u32 temp_r4;
-    void* temp_r29;
 
-    temp_r30 = arg0->user_data;
-    temp_r31 = arg0->hsd_obj;
-    temp_r29 = temp_r30->xC4_article_data->x4_specialAttributes;
-    Item_80268E5C(arg0, 2, ITEM_ANIM_UPDATE);
-    temp_r30->entered_hitlag = efLib_PauseAll;
-    temp_r30->exited_hitlag = efLib_ResumeAll;
-    it_8027A160(temp_r30->xBBC_dynamicBoneTable->bones[2], temp_r30);
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HassamVars* attr = ip->xC4_article_data->x4_specialAttributes;
+
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    it_8027A160(ip->xBBC_dynamicBoneTable->bones[2], ip);
     Camera_80030788(&sp1C);
-    lbVector_Diff(&sp1C, &temp_r30->pos, &sp10);
+    lbVector_Diff(&sp1C, &ip->pos, &sp10);
     lbVector_Normalize(&sp10);
-    sp10.x = sp10.x * M2C_FIELD(temp_r29, f32*, 4);
-    temp_f0 = sp10.y * M2C_FIELD(temp_r29, f32*, 4);
-    sp10.y = temp_f0;
-    temp_f0_2 = sp10.z * M2C_FIELD(temp_r29, f32*, 4);
-    sp10.z = temp_f0_2;
-    temp_r30->xDD4_itemVar.pokemon.timer = sp10.x;
-    temp_r30->xDD4_itemVar.pokemon.x64 = temp_f0;
-    temp_r30->xDD4_itemVar.PKThunderVars.xE38.z = temp_f0_2;
-    temp_r30->x40_vel.x = it_804DD3E4;
-    temp_r30->x40_vel.y = it_804DD3E4;
-    temp_r30->x40_vel.z = it_804DD3E4;
-    temp_r30->facing_dir = it_804DD3E4;
-    if (temp_r31 == NULL) {
-        //__assert(&it_804D5600, 0x294, &it_804D5608);
-    }
-    if (temp_r31->flags & 0x20000) {
-        //__assert(&it_804D5600, 0x295, &it_803F7D38);
-    }
-    temp_r31->rotate.y = it_804DD3E4;
-    if (!(temp_r31->flags & 0x02000000)) {
-        temp_cr0_eq = temp_r31 == NULL;
-        if (temp_cr0_eq == 0) {
-            if (temp_cr0_eq != 0) {
-                //__assert(&it_804D5600, 0x234, &it_804D5608);
-            }
-            temp_r4 = temp_r31->flags;
-            var_r3 = 0;
-            if (!(temp_r4 & 0x800000) && (temp_r4 & 0x40)) {
-                var_r3 = 1;
-            }
-            if (var_r3 == 0) {
-                HSD_JObjSetMtxDirtySub(temp_r31);
-            }
-        }
-    }
+    sp10.x = sp10.x * attr->x4;
+    sp10.y = sp10.y * attr->x4;
+    sp10.z = sp10.z * attr->x4;
+
+    ip->xDD4_itemVar.hassam.x5C = sp10.x;
+    ip->xDD4_itemVar.hassam.x60 = sp10.y;
+    ip->xDD4_itemVar.hassam.x64 = sp10.z;
+    ip->facing_dir = ip->x40_vel.z = ip->x40_vel.y = ip->x40_vel.x =
+        it_804DD3E4;
+
+    HSD_JObjSetRotationY(jobj, 0.0F);
 }
 
 bool it_802CE588(Item_GObj* gobj)
