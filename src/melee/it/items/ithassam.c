@@ -196,7 +196,7 @@ void it_802CE008(Item_GObj* gobj)
     ip->entered_hitlag = efLib_PauseAll;
     ip->exited_hitlag = efLib_ResumeAll;
     it_8027A160(ip->xBBC_dynamicBoneTable->bones[2], ip);
-    ip->xD44_lifeTimer = M2C_FIELD(attr, s32*, 0x18);
+    ip->xD44_lifeTimer = attr->x18;
     ip->x40_vel.x = attr->x4 * ip->facing_dir;
     ip->xDD4_itemVar.hassam.x5C.x = attr->x4 * ip->facing_dir;
     ip->xDD4_itemVar.hassam.x5C.z = ip->xDD4_itemVar.hassam.x5C.y = 0.0F;

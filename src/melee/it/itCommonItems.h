@@ -225,7 +225,7 @@ typedef struct HassamVars {
     f32 xC;
     f32 x10;
     f32 x14;
-    f32 x18_padding;
+    s32 x18;
     s32 x1C;
     s32 x20;
     u8 padding[0x5C - 0x20];
