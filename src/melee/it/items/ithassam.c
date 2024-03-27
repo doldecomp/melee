@@ -247,22 +247,19 @@ bool it_802CE0C4(HSD_GObj* gobj)
 
 void it_802CE308(Item_GObj* gobj)
 {
-    f32 temp_f0;
-
     Item* ip = GET_ITEM(gobj);
     HassamVars* attr = ip->xC4_article_data->x4_specialAttributes;
 
     it_8027A344(gobj);
     if (ip->ground_or_air == GA_Air) {
-        ip->xDD4_itemVar.pokemon.x64 -= attr->x14;
-        temp_f0 = -attr->x10;
-        if (ip->xDD4_itemVar.hassam.x5C.z < temp_f0) {
-            ip->xDD4_itemVar.hassam.x5C.z = temp_f0;
+        ip->xDD4_itemVar.hassam.x5C.y -= attr->x14;
+        if (ip->xDD4_itemVar.hassam.x5C.y < -attr->x10) {
+            ip->xDD4_itemVar.hassam.x5C.y = attr->x10;
         }
     }
-    ip->x40_vel.x += ip->xDD4_itemVar.hassam.x5C.y;
-    ip->x40_vel.y += ip->xDD4_itemVar.hassam.x5C.z;
-    ip->x40_vel.z += ip->xDD4_itemVar.hassam.x68;
+    ip->x40_vel.x += ip->xDD4_itemVar.hassam.x5C.x;
+    ip->x40_vel.y += ip->xDD4_itemVar.hassam.x5C.y;
+    ip->x40_vel.z += ip->xDD4_itemVar.hassam.x5C.z;
 }
 
 bool it_802CE3A8(Item_GObj* gobj)
