@@ -175,16 +175,15 @@ void it_802CDF28(Item_GObj* gobj)
     ftLib_800866DC(var_r3, &sp1C);
     sp1C.y += attr->x8;
     lbVector_Diff(&sp1C, &ip->pos, &sp10);
-    ip->xDD4_itemVar.hassam.x5C = attr->x4;
-    ip->xDD4_itemVar.hassam.x60 = 0.0F;
-    ip->xDD4_itemVar.hassam.x64 = 0.0F;
-    lbVector_Rotate((Vec3*) &ip->xDD4_itemVar.hassam.x5C, 4,
-                    atan2f(sp10.y, sp10.x));
-    temp_f1 = ip->xDD4_itemVar.hassam.x60;
-    ip->xDD4_itemVar.hassam.x60 = temp_f1 + attr->xC;
-    ip->x40_vel.x = ip->xDD4_itemVar.hassam.x5C;
-    ip->x40_vel.y = ip->xDD4_itemVar.hassam.x60;
-    ip->x40_vel.z = ip->xDD4_itemVar.hassam.x64;
+    ip->xDD4_itemVar.hassam.x5C.x = attr->x4;
+    ip->xDD4_itemVar.hassam.x5C.y = 0.0F;
+    ip->xDD4_itemVar.hassam.x5C.z = 0.0F;
+    lbVector_Rotate(&ip->xDD4_itemVar.hassam.x5C, 4, atan2f(sp10.y, sp10.x));
+    temp_f1 = ip->xDD4_itemVar.hassam.x5C.y;
+    ip->xDD4_itemVar.hassam.x5C.y = temp_f1 + attr->xC;
+    ip->x40_vel.x = ip->xDD4_itemVar.hassam.x5C.x;
+    ip->x40_vel.y = ip->xDD4_itemVar.hassam.x5C.y;
+    ip->x40_vel.z = ip->xDD4_itemVar.hassam.x5C.z;
     it_80272980(gobj, temp_f1);
 }
 
@@ -199,8 +198,8 @@ void it_802CE008(Item_GObj* gobj)
     it_8027A160(ip->xBBC_dynamicBoneTable->bones[2], ip);
     ip->xD44_lifeTimer = M2C_FIELD(attr, s32*, 0x18);
     ip->x40_vel.x = attr->x4 * ip->facing_dir;
-    ip->xDD4_itemVar.hassam.x5C = attr->x4 * ip->facing_dir;
-    ip->xDD4_itemVar.hassam.x64 = ip->xDD4_itemVar.hassam.x60 = 0.0F;
+    ip->xDD4_itemVar.hassam.x5C.x = attr->x4 * ip->facing_dir;
+    ip->xDD4_itemVar.hassam.x5C.z = ip->xDD4_itemVar.hassam.x5C.y = 0.0F;
 }
 
 bool it_802CE0C4(HSD_GObj* gobj)
@@ -260,12 +259,12 @@ void it_802CE308(Item_GObj* gobj)
     if (ip->ground_or_air == GA_Air) {
         ip->xDD4_itemVar.pokemon.x64 -= attr->x14;
         temp_f0 = -attr->x10;
-        if (ip->xDD4_itemVar.hassam.x64 < temp_f0) {
-            ip->xDD4_itemVar.hassam.x64 = temp_f0;
+        if (ip->xDD4_itemVar.hassam.x5C.z < temp_f0) {
+            ip->xDD4_itemVar.hassam.x5C.z = temp_f0;
         }
     }
-    ip->x40_vel.x += ip->xDD4_itemVar.hassam.x60;
-    ip->x40_vel.y += ip->xDD4_itemVar.hassam.x64;
+    ip->x40_vel.x += ip->xDD4_itemVar.hassam.x5C.y;
+    ip->x40_vel.y += ip->xDD4_itemVar.hassam.x5C.z;
     ip->x40_vel.z += ip->xDD4_itemVar.hassam.x68;
 }
 
@@ -303,9 +302,9 @@ void it_802CE400(Item_GObj* gobj)
     sp10.y = sp10.y * attr->x4;
     sp10.z = sp10.z * attr->x4;
 
-    ip->xDD4_itemVar.hassam.x5C = sp10.x;
-    ip->xDD4_itemVar.hassam.x60 = sp10.y;
-    ip->xDD4_itemVar.hassam.x64 = sp10.z;
+    ip->xDD4_itemVar.hassam.x5C.x = sp10.x;
+    ip->xDD4_itemVar.hassam.x5C.y = sp10.y;
+    ip->xDD4_itemVar.hassam.x5C.z = sp10.z;
     ip->facing_dir = ip->x40_vel.z = ip->x40_vel.y = ip->x40_vel.x = 0.0F;
 
     HSD_JObjSetRotationY(jobj, 0.0F);
@@ -327,9 +326,9 @@ void it_802CE5DC(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
 
     it_8027A344(gobj);
-    ip->pos.x += ip->xDD4_itemVar.hassam.x5C;
-    ip->pos.y += ip->xDD4_itemVar.hassam.x60;
-    ip->pos.z += ip->xDD4_itemVar.hassam.x64;
+    ip->pos.x += ip->xDD4_itemVar.hassam.x5C.x;
+    ip->pos.y += ip->xDD4_itemVar.hassam.x5C.y;
+    ip->pos.z += ip->xDD4_itemVar.hassam.x5C.z;
 }
 
 bool it_802CE638(Item_GObj* gobj)

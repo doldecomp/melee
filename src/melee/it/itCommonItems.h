@@ -7,6 +7,7 @@
 #include <baselib/forward.h>
 
 #include <placeholder.h>
+#include <dolphin/mtx/types.h>
 
 typedef struct {
     bool x0;
@@ -228,9 +229,7 @@ typedef struct HassamVars {
     s32 x1C;
     s32 x20;
     u8 padding[0x5C - 0x20];
-    f32 x5C;
-    f32 x60;
-    f32 x64;
+    Vec3 x5C;
     f32 x68;
 } HassamVars;
 
