@@ -24,12 +24,33 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-bool it_802CE0C4(Item_GObj*); /* static */
-void it_802CE400(Item_GObj*); /* static */
-void it_802CE640(Item_GObj*); /* static */
-void it_802CDCB4(Item_GObj*); /* static */
-bool it_802CDD24(Item_GObj*); /* static */
-void it_802CE008(Item_GObj*); /* static */
+/* 2CDC5C */ static void it_802CDC5C(Item_GObj* gobj);
+/* 2CDC80 */ static void it_802CDC80(Item_GObj* gobj);
+/* 2CDCB4 */ static void it_802CDCB4(Item_GObj* gobj);
+/* 2CDD24 */ static bool it_802CDD24(Item_GObj* gobj);
+/* 2CDD78 */ static void it_802CDD78(Item_GObj* gobj);
+/* 2CDDD0 */ static bool it_802CDDD0(Item_GObj* gobj);
+/* 2CDE1C */ static Item_GObj* it_802CDE1C(Vec3* vec, Item_GObj* gobj);
+/* 2CDF28 */ static void it_802CDF28(Item_GObj* gobj);
+/* 2CE008 */ static void it_802CE008(Item_GObj* gobj);
+/* 2CE0C4 */ static bool it_802CE0C4(HSD_GObj* gobj);
+/* 2CE308 */ static void it_802CE308(Item_GObj* gobj);
+/* 2CE3A8 */ static bool it_802CE3A8(Item_GObj* gobj);
+/* 2CE400 */ static void it_802CE400(Item_GObj* gobj);
+/* 2CE588 */ static bool it_802CE588(Item_GObj* gobj);
+/* 2CE5DC */ static void it_802CE5DC(Item_GObj* gobj);
+/* 2CE638 */ static bool it_802CE638(Item_GObj* gobj);
+/* 2CE640 */ static void it_802CE640(Item_GObj* gobj);
+/* 2CE6A4 */ static bool it_802CE6A4(Item_GObj* gobj);
+/* 2CE6C8 */ static void it_802CE6C8(Item_GObj* gobj);
+/* 2CE6E8 */ static bool it_802CE6E8(Item_GObj* gobj);
+
+ItemStateTable it_803F7CF8[] = {
+    { 0, it_802CDD24, it_802CDD78, it_802CDDD0 },
+    { 1, it_802CE0C4, it_802CE308, it_802CE3A8 },
+    { 2, it_802CE588, it_802CE5DC, it_802CE638 },
+    { -1, it_802CE6A4, it_802CE6C8, it_802CE6E8 },
+};
 
 void it_802CDBE0(Item_GObj* gobj)
 {
@@ -354,10 +375,3 @@ bool it_802CE6E8(Item_GObj* gobj)
 {
     return it_8027A118(gobj, it_802CDC80);
 }
-
-ItemStateTable it_803F7CF8[] = {
-    { 0, it_802CDD24, it_802CDD78, it_802CDDD0 },
-    { 1, it_802CE0C4, it_802CE308, it_802CE3A8 },
-    { 2, it_802CE588, it_802CE5DC, it_802CE638 },
-    { -1, it_802CE6A4, it_802CE6C8, it_802CE6E8 },
-};
