@@ -302,7 +302,7 @@ void it_802CE400(Item_GObj* gobj)
     Vec3 sp10;
 
     Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObj* jobj = (HSD_JObj*) gobj->hsd_obj;
     HassamVars* attr = ip->xC4_article_data->x4_specialAttributes;
 
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
@@ -319,7 +319,10 @@ void it_802CE400(Item_GObj* gobj)
     ip->xDD4_itemVar.hassam.x5C.x = sp10.x;
     ip->xDD4_itemVar.hassam.x5C.y = sp10.y;
     ip->xDD4_itemVar.hassam.x5C.z = sp10.z;
-    ip->facing_dir = ip->x40_vel.z = ip->x40_vel.y = ip->x40_vel.x = 0.0F;
+    ip->x40_vel.x = 0.0F;
+    ip->x40_vel.y = 0.0F;
+    ip->x40_vel.z = 0.0F;
+    ip->facing_dir = 0.0F;
 
     HSD_JObjSetRotationY(jobj, 0.0F);
 }
