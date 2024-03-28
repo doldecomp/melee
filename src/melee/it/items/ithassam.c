@@ -4,6 +4,8 @@
 
 #include "ithassam.h"
 
+#include "math.h"
+
 #include "cm/camera.h"
 #include "ef/eflib.h"
 #include "ft/ftlib.h"
@@ -200,12 +202,12 @@ void it_802CE008(Item_GObj* gobj)
 
 bool it_802CE0C4(HSD_GObj* gobj)
 {
+    f32 prev_dir;
     Item* ip;
-    f32 temp_f1;
-    HSD_JObj* jobj;
     HassamVars* attr;
+    HSD_JObj* jobj;
 
-    ip = GET_ITEM(gobj);
+    ip = (Item*) (gobj->user_data);
     attr = ip->xC4_article_data->x4_specialAttributes;
     if (it_80272C6C(gobj) == 0) {
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
@@ -214,10 +216,10 @@ bool it_802CE0C4(HSD_GObj* gobj)
     }
     it_8027A160(ip->xBBC_dynamicBoneTable->bones[2], ip);
     if (ip->xDB0_itcmd_var1 != 0) {
-        jobj = GET_JOBJ(gobj);
+        jobj = (gobj->hsd_obj);
 
-        ip->xDD4_itemVar.hassam.x68 = HSD_JObjGetRotationY(jobj);
-        ip->xDD4_itemVar.hassam.x68 += 0.017453292F * (0xB4 / attr->x20);
+        ip->xDD4_itemVar.hassam.x68 = HSD_JObjGetRotationY(gobj->hsd_obj);
+        ip->xDD4_itemVar.hassam.x68 += deg_to_rad * (180 / attr->x20);
         HSD_JObjSetRotationY(jobj, ip->xDD4_itemVar.hassam.x68);
 
         if (++ip->xDB0_itcmd_var1 > (u32) attr->x20) {
@@ -229,9 +231,9 @@ bool it_802CE0C4(HSD_GObj* gobj)
         if (ip->xDAC_itcmd_var0 != 0) {
             it_802CE400(gobj);
         } else {
-            temp_f1 = ip->facing_dir;
+            prev_dir = ip->facing_dir;
             it_802CDF28(gobj);
-            if (temp_f1 != ip->facing_dir) {
+            if (prev_dir != ip->facing_dir) {
                 ip->xDB0_itcmd_var1 = 1;
             }
             ip->xDAC_itcmd_var0 = 1;
