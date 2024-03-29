@@ -137,9 +137,9 @@ Item_GObj* it_802CDE1C(Vec3* vec, Item_GObj* gobj)
     Fighter_GObj* cur;
     Fighter* fp;
     Item* ip;
-    f32 temp_f0, x_dist, y_dist, max_dist;
+    f32 temp_f0, x_dist, y_dist, min_dist;
 
-    max_dist = F32_MAX;
+    min_dist = F32_MAX;
 
     PAD_STACK(8);
 
@@ -161,8 +161,8 @@ Item_GObj* it_802CDE1C(Vec3* vec, Item_GObj* gobj)
                 y_dist = vec->y - sp20.y;
                 x_dist = vec->x - sp20.x;
                 temp_f0 = (x_dist * x_dist) + (y_dist * y_dist);
-                if ((temp_f0 < max_dist) && (sp20.y > vec->y)) {
-                    max_dist = temp_f0;
+                if ((temp_f0 < min_dist) && (sp20.y > vec->y)) {
+                    min_dist = temp_f0;
                     best_fgobj = cur;
                 }
             }
