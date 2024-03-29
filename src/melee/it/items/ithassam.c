@@ -133,48 +133,45 @@ bool it_802CDDD0(Item_GObj* gobj)
 Item_GObj* it_802CDE1C(Vec3* vec, Item_GObj* gobj)
 {
     Vec3 sp20;
-    Item_GObj* var_r28;
+    Fighter_GObj* best_fgobj;
     Fighter_GObj* cur;
-    f32 temp_f0;
-    f32 temp_f1;
-    f32 temp_f2;
-    f32 temp_f4;
-    f32 var_f31;
     Fighter* fp;
     Item* ip;
+    f32 temp_f0, x_dist, y_dist, max_dist;
+
+    max_dist = F32_MAX;
 
     PAD_STACK(8);
 
-    var_f31 = F32_MAX;
     if (gobj != NULL) {
         ip = GET_ITEM(gobj);
     } else {
         ip = NULL;
     }
-    var_r28 = NULL;
+
+    best_fgobj = NULL;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
         if (ftLib_80086FD4(gobj, cur) == 0) {
             fp = GET_FIGHTER(cur);
             if ((fp->x221F_b3 == false) &&
-                ((gm_8016B168() == 0) || (ip == NULL) ||
+                ((gm_8016B168() == false) || (ip == NULL) ||
                  (fp->x61B_team != ip->x5D4_hitboxes[0].hit.x46[1])))
             {
                 ftLib_800866DC(cur, &sp20);
-                temp_f2 = vec->y;
-                temp_f4 = temp_f2 - sp20.y;
-                temp_f1 = vec->x - sp20.x;
-                temp_f0 = (temp_f1 * temp_f1) + (temp_f4 * temp_f4);
-                if ((temp_f0 < var_f31) && (sp20.y > temp_f2)) {
-                    var_f31 = temp_f0;
-                    var_r28 = cur;
+                y_dist = vec->y - sp20.y;
+                x_dist = vec->x - sp20.x;
+                temp_f0 = (x_dist * x_dist) + (y_dist * y_dist);
+                if ((temp_f0 < max_dist) && (sp20.y > vec->y)) {
+                    max_dist = temp_f0;
+                    best_fgobj = cur;
                 }
             }
         }
     }
-    if (var_r28 == NULL) {
-        var_r28 = ftLib_8008627C(vec, gobj);
+    if (best_fgobj == NULL) {
+        best_fgobj = ftLib_8008627C(vec, gobj);
     }
-    return var_r28;
+    return best_fgobj;
 }
 
 void it_802CDF28(Item_GObj* gobj)
