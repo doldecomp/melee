@@ -133,52 +133,53 @@ bool it_802CDDD0(Item_GObj* gobj)
 Item_GObj* it_802CDE1C(Vec3* vec, Item_GObj* gobj)
 {
     Vec3 sp20;
-    Fighter_GObj* best_fgobj;
-    Fighter_GObj* cur;
+    Fighter* cur_fp;
     Fighter* fp;
-    Item* ip;
     f32 temp_f0, x_dist, y_dist, min_dist;
-
+    Fighter_GObj* cur_fgobj;
+    Fighter_GObj* closest_fgobj;
     min_dist = F32_MAX;
 
     PAD_STACK(8);
 
     if (gobj != NULL) {
-        ip = GET_ITEM(gobj);
+        fp = GET_FIGHTER(gobj);
     } else {
-        ip = NULL;
+        fp = NULL;
     }
 
-    best_fgobj = NULL;
-    for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
-        if (ftLib_80086FD4(gobj, cur) == 0) {
-            fp = GET_FIGHTER(cur);
-            if ((fp->x221F_b3 == false) &&
-                ((gm_8016B168() == false) || (ip == NULL) ||
-                 (fp->x61B_team != ip->x5D4_hitboxes[0].hit.x46[1])))
+    closest_fgobj = NULL;
+    for (cur_fgobj = HSD_GObj_Entities->fighters; cur_fgobj != NULL;
+         cur_fgobj = cur_fgobj->next)
+    {
+        if (ftLib_80086FD4(gobj, cur_fgobj) == 0) {
+            cur_fp = GET_FIGHTER(cur_fgobj);
+            if ((cur_fp->x221F_b3 == false) &&
+                ((gm_8016B168() == false) || (fp == NULL) ||
+                 (cur_fp->x61B_team != fp->x61B_team)))
             {
-                ftLib_800866DC(cur, &sp20);
+                ftLib_800866DC(cur_fgobj, &sp20);
                 y_dist = vec->y - sp20.y;
                 x_dist = vec->x - sp20.x;
                 temp_f0 = (x_dist * x_dist) + (y_dist * y_dist);
                 if ((temp_f0 < min_dist) && (sp20.y > vec->y)) {
                     min_dist = temp_f0;
-                    best_fgobj = cur;
+                    closest_fgobj = cur_fgobj;
                 }
             }
         }
     }
-    if (best_fgobj == NULL) {
-        best_fgobj = ftLib_8008627C(vec, gobj);
+    if (closest_fgobj == NULL) {
+        closest_fgobj = ftLib_8008627C(vec, gobj);
     }
-    return best_fgobj;
+    return closest_fgobj;
 }
 
 void it_802CDF28(Item_GObj* gobj)
 {
     Vec3 sp1C;
     Vec3 sp10;
-    Item_GObj* var_r3;
+    Fighter_GObj* var_r3;
     f32 temp_f1;
 
     Item* ip = GET_ITEM(gobj);
