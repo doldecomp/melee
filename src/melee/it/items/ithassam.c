@@ -271,7 +271,7 @@ void it_802CE308(Item_GObj* gobj)
     if (ip->ground_or_air == GA_Air) {
         ip->xDD4_itemVar.hassam.x5C.y -= attr->x14;
         if (ip->xDD4_itemVar.hassam.x5C.y < -attr->x10) {
-            ip->xDD4_itemVar.hassam.x5C.y = attr->x10;
+            ip->xDD4_itemVar.hassam.x5C.y = -attr->x10;
         }
     }
     ip->x40_vel.x += ip->xDD4_itemVar.hassam.x5C.x;
