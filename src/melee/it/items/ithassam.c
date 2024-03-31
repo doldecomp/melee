@@ -226,7 +226,7 @@ bool it_802CE0C4(HSD_GObj* gobj)
     HassamVars* attr;
     HSD_JObj* jobj;
 
-    ip = (Item*) (gobj->user_data);
+    ip = (Item*) gobj->user_data;
     attr = ip->xC4_article_data->x4_specialAttributes;
     if (it_80272C6C(gobj) == 0) {
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
@@ -235,7 +235,7 @@ bool it_802CE0C4(HSD_GObj* gobj)
     }
     it_8027A160(ip->xBBC_dynamicBoneTable->bones[2], ip);
     if (ip->xDB0_itcmd_var1 != 0) {
-        jobj = (gobj->hsd_obj);
+        jobj = (HSD_JObj*) gobj->hsd_obj;
 
         ip->xDD4_itemVar.hassam.x68 = HSD_JObjGetRotationY(gobj->hsd_obj);
         ip->xDD4_itemVar.hassam.x68 += deg_to_rad * (180 / attr->x20);
