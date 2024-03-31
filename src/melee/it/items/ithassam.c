@@ -152,7 +152,7 @@ Item_GObj* it_802CDE1C(Vec3* vec, Item_GObj* gobj)
     for (cur_fgobj = HSD_GObj_Entities->fighters; cur_fgobj != NULL;
          cur_fgobj = cur_fgobj->next)
     {
-        if (ftLib_80086FD4(gobj, cur_fgobj) == 0) {
+        if (ftLib_80086FD4(gobj, cur_fgobj) == false) {
             cur_fp = GET_FIGHTER(cur_fgobj);
             if ((cur_fp->x221F_b3 == false) &&
                 ((gm_8016B168() == false) || (fp == NULL) ||
@@ -228,7 +228,7 @@ bool it_802CE0C4(Item_GObj* gobj)
 
     ip = (Item*) gobj->user_data;
     attr = ip->xC4_article_data->x4_specialAttributes;
-    if (it_80272C6C(gobj) == 0) {
+    if (it_80272C6C(gobj) == false) {
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
         ip->entered_hitlag = efLib_PauseAll;
         ip->exited_hitlag = efLib_ResumeAll;
