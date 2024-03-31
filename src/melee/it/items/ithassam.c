@@ -33,7 +33,7 @@
 /* 2CDE1C */ static Item_GObj* it_802CDE1C(Vec3* vec, Item_GObj* gobj);
 /* 2CDF28 */ static void it_802CDF28(Item_GObj* gobj);
 /* 2CE008 */ static void it_802CE008(Item_GObj* gobj);
-/* 2CE0C4 */ static bool it_802CE0C4(HSD_GObj* gobj);
+/* 2CE0C4 */ static bool it_802CE0C4(Item_GObj* gobj);
 /* 2CE308 */ static void it_802CE308(Item_GObj* gobj);
 /* 2CE3A8 */ static bool it_802CE3A8(Item_GObj* gobj);
 /* 2CE400 */ static void it_802CE400(Item_GObj* gobj);
@@ -219,7 +219,7 @@ void it_802CE008(Item_GObj* gobj)
     ip->xDD4_itemVar.hassam.x5C.z = ip->xDD4_itemVar.hassam.x5C.y = 0.0F;
 }
 
-bool it_802CE0C4(HSD_GObj* gobj)
+bool it_802CE0C4(Item_GObj* gobj)
 {
     f32 prev_dir;
     Item* ip;
