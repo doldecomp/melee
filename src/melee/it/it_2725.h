@@ -10,7 +10,7 @@
 
 #include <placeholder.h>
 
-/* 272980 */ void it_80272980(void*, f32);
+/* 272980 */ void it_80272980(Item_GObj*, f32);
 /* 272CC0 */ HSD_JObj* it_80272CC0(Item_GObj*, enum_t);
 /* 273408 */ void it_80273408(Item_GObj* gobj);
 /* 273670 */ void it_80273670(HSD_GObj*, int, float);
