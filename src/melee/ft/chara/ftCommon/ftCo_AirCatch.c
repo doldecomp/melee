@@ -180,12 +180,14 @@ void ftCo_AirCatch_Anim(ftCo_GObj* gobj)
 
                     HSD_JObjSetupMatrix(jobj);
                     {
-                        float var_f3 =
-                            fp->kind == FTKIND_LINK
-                                ? 8.0 * fp->facing_dir * fp->x34_scale.y +
-                                      jobj->mtx[0][3]
-                                : 8.0 * fp->facing_dir * fp->x34_scale.y +
+                        float var_f3;
+                        if (fp->kind == FTKIND_LINK) {
+                            var_f3 = 8.0 * fp->facing_dir * fp->x34_scale.y +
                                       jobj->mtx[0][3];
+                        } else {
+                            var_f3 = 8.0 * fp->facing_dir * fp->x34_scale.y +
+                                      jobj->mtx[0][3];
+                        }
                         if (mpLib_800524DC(
                                 0, 0, 0, 0, -1, -1, fp->coll_data.cur_topn.x,
                                 jobj->mtx[1][3], var_f3, jobj->mtx[1][3]) != 0)
