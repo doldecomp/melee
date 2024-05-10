@@ -1558,36 +1558,33 @@ void ftAction_80073354(Fighter_GObj* gobj)
 void ftAction_8007349C(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
     CommandInfo* cmd = (CommandInfo*) &fp->x3E4_fighterCmdScript;
     fp->x3E4_fighterCmdScript.x3E8_scriptFrameTimer =
         fp->cur_anim_frame + fp->x898_unk;
-    if (fp->x3E4_fighterCmdScript.x3EC_scriptCurrent != NULL) {
-        float timer = cmd->timer;
-        if (timer != F32_MAX) {
-            cmd->timer = timer - fp->frame_spd_mul;
-        }
-    loop_4:
-        if ((u32*) cmd->u.data_position != NULL) {
-            float timer = cmd->timer;
-            if (timer == F32_MAX) {
-                float frame_count = cmd->frame_count;
-                if (!(frame_count >= fp->frame_spd_mul)) {
-                    cmd->timer = -frame_count;
-                    goto block_9;
-                }
-            } else if (!(timer > 0.0f)) {
-            block_9: {
-                u32 temp_r28 = ((u8) *cmd->u.data_position >> 2U) & 0x3F;
-                if (Command_Execute(cmd, temp_r28) == 0) {
-                    cmd->u.data_position = &cmd->u.data_position[M2C_FIELD(
-                        &ftAction_803C0870[temp_r28], u8*, -0xA)];
-                }
-                if (cmd->timer != F32_MAX) {
-                    goto loop_4;
-                }
-            }
-            }
-        }
+    if (fp->x3E4_fighterCmdScript.x3EC_scriptCurrent == NULL) {
+        return;
     }
+    if (cmd->timer != F32_MAX) {
+        cmd->timer -= fp->frame_spd_mul;
+    }
+    do {
+        if (cmd->u.data_position == NULL) {
+            break;
+        }
+        if (cmd->timer == F32_MAX) {
+            if (cmd->frame_count >= fp->frame_spd_mul) {
+                break;
+            }
+            cmd->timer = -cmd->frame_count;
+        } else if (cmd->timer > 0.0f) {
+            break;
+        }
+        {
+            u32 id = cmd->u.Command_09->id;
+            if (!Command_Execute(cmd, id)) {
+                cmd->u.data_position += ftAction_803C0870[id - 10];
+            }
+        }
+    } while (cmd->timer != F32_MAX);
 }
