@@ -1166,24 +1166,17 @@ void ftColl_8007B064(Fighter_GObj* gobj, enum_t arg1)
 
 void ftColl_8007B0C0(Fighter_GObj* gobj, HurtCapsuleState arg1)
 {
-    Fighter* fp;
-    HurtCapsule* fp1;
-    u32 var_r7;
-
-    fp = gobj->user_data;
-    var_r7 = 0U;
-    fp1 = &fp->hurt_capsules[0];
-    while (var_r7 < (u8) fp->hurt_capsules_len) {
-        fp1->state = arg1;
-        var_r7 += 1;
-        fp1->x24_b7 = false;
-        ++fp1;
+    Fighter* fp = gobj->user_data;
+    u32 i;
+    for (i = 0; i < fp->hurt_capsules_len; i++) {
+        fp->hurt_capsules[i].state = arg1;
+        fp->hurt_capsules[i].skip_update_pos = false;
     }
     if (arg1 == HurtCapsule_Enabled) {
-        M2C_FIELD(fp, u8*, 0x221A) = (u8) (M2C_FIELD(fp, u8*, 0x221A) & ~4);
-        return;
+        fp->x221A_b5 = false;
+    } else {
+        fp->x221A_b5 = true;
     }
-    M2C_FIELD(fp, u8*, 0x221A) = (u8) (M2C_FIELD(fp, u8*, 0x221A) | 4);
 }
 
 void ftColl_8007B128(Fighter_GObj* fighter_gobj, int bone_id,
