@@ -345,91 +345,74 @@ void ftAction_800711DC(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_8007121C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    u8 _[8] = { 0 };
-    HitCapsule* hit;
+    u8 _[16] = { 0 };
     char* temp_r3;
     char part;
     u32 temp_r4_2;
     char* cmd_x8 = cmd->x8;
     ftCo_Fighter* fp = gobj->user_data;
+    HitCapsule* hit;
     if ((((u8) M2C_FIELD(cmd_x8, u8*, 0xF) >> 3U) & 1) &&
-        ((u32) M2C_FIELD(fp, u32*, 0x1198) == 0U))
+        fp->x1064_thrownHitbox.owner == NULL)
     {
         ftAction_800715EC(gobj, cmd);
     } else {
         hit = &fp->x914[(((u16) M2C_FIELD(cmd_x8, u16*, 0) >> 7U) & 7)];
         temp_r4_2 = ((u8) M2C_FIELD(cmd_x8, u8*, 1) >> 4U) & 7;
-        if (((int) hit->state == HitCapsule_Disabled) ||
-            ((u32) hit->x4 != temp_r4_2))
-        {
+        if (hit->state == HitCapsule_Disabled || hit->x4 != temp_r4_2) {
             hit->x4 = temp_r4_2;
             hit->state = HitCapsule_Enabled;
-            M2C_FIELD(fp, u8*, 0x2219) =
-                (u8) (M2C_FIELD(fp, u8*, 0x2219) | 0x10);
+            fp->x2219_b3 = 1;
             ftColl_800768A0(fp, hit);
         }
         temp_r3 = cmd->x8;
-        part = (s8) ((u32) M2C_FIELD(temp_r3, u32*, 0) >> 0xBU);
+        part = (s8) ((u32) M2C_FIELD(temp_r3, u32*, 0) >> 0xB);
         if (((u8) M2C_FIELD(temp_r3, u8*, 2) >> 2U) & 1) {
-            M2C_FIELD(hit, HSD_JObj**, 0x48) =
-                fp->parts[ftParts_8007500C(fp, part)].joint;
+            hit->jobj = fp->parts[ftParts_8007500C(fp, part)].joint;
         } else {
-            M2C_FIELD(hit, HSD_JObj**, 0x48) = fp->parts[(int) part].joint;
+            hit->jobj = fp->parts[(int) part].joint;
         }
-        ftColl_8007ABD0(hit, (u16) M2C_FIELD(cmd->x8, u8*, 2) & 0x3FF, gobj);
+        ftColl_8007ABD0(hit, M2C_FIELD(cmd->x8, u16*, 2) & 0x3FF, gobj);
         cmd->x8 += 4;
-        hit->scale = 0.003906f * (float) (u16) M2C_FIELD(cmd->x8, u32*, 0);
-        hit->b_offset.x = 0.003906f * (float) (s16) M2C_FIELD(cmd->x8, u8*, 2);
+        hit->scale = 0.003906f * M2C_FIELD(cmd->x8, u16*, 0);
+        hit->b_offset.x = 0.003906f * M2C_FIELD(cmd->x8, s16*, 2);
         cmd->x8 += 4;
-        hit->b_offset.y =
-            0.003906f * (float) (s16) M2C_FIELD(cmd->x8, u32*, 0);
-        hit->b_offset.z = 0.003906f * (float) (s16) M2C_FIELD(cmd->x8, u8*, 2);
+        hit->b_offset.y = 0.003906f * cmd->x8_bits->x0;
+        hit->b_offset.z = 0.003906f * cmd->x8_bits->x2;
         cmd->x8 += 4;
-        ftColl_8007AC9C(hit, ((u16) M2C_FIELD(cmd->x8, u32*, 0) >> 7U) & 0x1FF,
+        ftColl_8007AC9C(hit, (M2C_FIELD(cmd->x8, u16*, 0) >> 7U) & 0x1FF,
                         gobj);
         hit->x24 = ((u32) M2C_FIELD(cmd->x8, u32*, 0) >> 0xEU) & 0x1FF;
-        hit->x28 = ((u16) M2C_FIELD(cmd->x8, u8*, 2) >> 5U) & 0x1FF;
-        hit->x43 =
-            (hit->x43 & ~0x80) | ((M2C_FIELD(cmd->x8, u8*, 3) << 3) & 0x80);
-        hit->x43 =
-            (hit->x43 & ~0x40) | ((M2C_FIELD(cmd->x8, u8*, 3) << 4) & 0x40);
-        M2C_FIELD(hit, u8*, 0x40) =
-            (u8) ((M2C_FIELD(hit, u8*, 0x40) & ~0x80) |
-                  ((M2C_FIELD(cmd->x8, u8*, 3) << 6) & 0x80));
-        M2C_FIELD(hit, u8*, 0x40) =
-            (u8) ((M2C_FIELD(hit, u8*, 0x40) & ~0x40) |
-                  ((M2C_FIELD(cmd->x8, u8*, 3) << 6) & 0x40));
+        hit->x28 = (M2C_FIELD(cmd->x8, u16*, 2) >> 5U) & 0x1FF;
+        hit->x43_b0 = cmd->x8_bits->x3_b3;
+        hit->x43_b1 = cmd->x8_bits->x3_b5;
+        hit->x40_b0 = cmd->x8_bits->x3_b6;
+        hit->x40_b1 = cmd->x8_bits->x3_b7;
         cmd->x8 += 4;
-        hit->x2C = ((u16) M2C_FIELD(cmd->x8, u32*, 0) >> 7U) & 0x1FF;
+        hit->x2C = ((u16) M2C_FIELD(cmd->x8, u16*, 0) >> 7U) & 0x1FF;
         hit->element = ((u8) M2C_FIELD(cmd->x8, u8*, 1) >> 2U) & 0x1F;
         M2C_FIELD(hit, int*, 0x34) =
             (int) ((int) ((M2C_FIELD(cmd->x8, u32*, 0) << 0xE) & 0xFF800000) >>
                    0x18);
-        hit->sfx_severity = ((u16) M2C_FIELD(cmd->x8, u8*, 2) >> 7U) & 7;
+        hit->sfx_severity = ((u16) M2C_FIELD(cmd->x8, u16*, 2) >> 7U) & 7;
         hit->sfx_kind = ((u8) M2C_FIELD(cmd->x8, u8*, 3) >> 2U) & 0x1F;
-        M2C_FIELD(hit, u8*, 0x40) =
-            (u8) ((M2C_FIELD(hit, u8*, 0x40) & ~0x20) |
-                  ((M2C_FIELD(cmd->x8, u8*, 3) << 5) & 0x20));
-        M2C_FIELD(hit, u8*, 0x40) =
-            (u8) ((M2C_FIELD(hit, u8*, 0x40) & ~0x10) |
-                  ((M2C_FIELD(cmd->x8, u8*, 3) << 3) & 0x10));
+        hit->x40_b2 = cmd->x8_bits->x3_b7;
+        hit->x40_b3 = cmd->x8_bits->x3_b6;
         cmd->x8 += 4;
-        M2C_FIELD(hit, u8*, 0x42) = (u8) (M2C_FIELD(hit, u8*, 0x42) | 4);
-        M2C_FIELD(hit, u8*, 0x42) = (u8) (M2C_FIELD(hit, u8*, 0x42) | 1);
-        M2C_FIELD(hit, u8*, 0x41) = (u8) (M2C_FIELD(hit, u8*, 0x41) & ~8);
-        M2C_FIELD(hit, u8*, 0x41) = (u8) (M2C_FIELD(hit, u8*, 0x41) & ~2);
-        M2C_FIELD(hit, u8*, 0x41) = (u8) (M2C_FIELD(hit, u8*, 0x41) & ~4);
-        M2C_FIELD(hit, u8*, 0x42) = (u8) (M2C_FIELD(hit, u8*, 0x42) & ~0x80);
-        M2C_FIELD(hit, u8*, 0x42) = (u8) (M2C_FIELD(hit, u8*, 0x42) & ~8);
-        M2C_FIELD(hit, u8*, 0x41) = (u8) (M2C_FIELD(hit, u8*, 0x41) & ~1);
-        M2C_FIELD(hit, u8*, 0x134) =
-            (u8) ((M2C_FIELD(hit, u8*, 0x134) & ~0x80) |
-                  ((M2C_FIELD(cmd->x8, u8*, 1) << 4) & 0x80));
-        M2C_FIELD(hit, u8*, 0x42) = (u8) (M2C_FIELD(hit, u8*, 0x42) | 0x40);
-        M2C_FIELD(hit, u8*, 0x42) = (u8) (M2C_FIELD(hit, u8*, 0x42) & ~0x20);
-        hit->x43 &= ~0x20;
-        if (((HSD_GObjProc*) HSD_GObj_804D7838 != NULL) &&
-            ((u8) HSD_GObj_804D7838->s_link > 9U))
+        hit->x42_b5 = 1;
+        hit->x42_b7 = 1;
+        hit->x41_b4 = 0;
+        hit->x41_b6 = 0;
+        hit->x41_b5 = 0;
+        hit->x42_b0 = 0;
+        hit->x42_b4 = 0;
+        hit->x41_b7 = 0;
+        hit->hit_grabbed_victim_only = cmd->x8_bits->x1_b4;
+        hit->x42_b1 = 1;
+        hit->x42_b2 = 0;
+        hit->x43_b2 = 0;
+        if ((HSD_GObj_804D7838 != NULL) &&
+            (HSD_GObj_804D7838->s_link > 9U))
         {
             ftColl_8007AD18(fp, hit);
         }
