@@ -339,8 +339,7 @@ void ftCo_800923B4(ftCo_GObj* gobj)
 void ftCo_80092450(ftCo_GObj* gobj)
 {
     AbsorbDesc absorb;
-    u8 _[4] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
     absorb.x0_bone_id = fp->ft_data->x8->x11;
     absorb.x10_size = 1;
     absorb.x4_offset.x = absorb.x4_offset.y = absorb.x4_offset.z = 0.0f;
@@ -350,38 +349,17 @@ void ftCo_80092450(ftCo_GObj* gobj)
 
 void ftCo_800924C0(ftCo_GObj* gobj)
 {
-    float sp24;
-    float sp20;
-    Vec3 sp14;
-    void* fp;
-
-    fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_GuardOn, Ft_MF_SkipAnim, 0, 1, 0,
                               NULL);
     ftAnim_8006EBA4(gobj);
-    M2C_FIELD(fp, u8*, 0x221C) = (u8) (M2C_FIELD(fp, u8*, 0x221C) & ~0x10);
-    M2C_FIELD(fp, u8*, 0x221C) = (u8) (M2C_FIELD(fp, u8*, 0x221C) & ~0x40);
-    M2C_FIELD(fp, u8*, 0x221C) = (u8) (M2C_FIELD(fp, u8*, 0x221C) & ~0x20);
-    M2C_FIELD(fp, int*, 0x235C) = 0;
-    M2C_FIELD(fp, float*, 0x2354) = 0.0f;
-    M2C_FIELD(fp, float*, 0x2358) = 0.0f;
-    {
-        ftCo_Fighter* fp = gobj->user_data;
-        // sp14.x = M2C_BITWISE(
-        //     float, M2C_FIELD(M2C_FIELD(M2C_FIELD(fp, void**, 0x10C), void**,
-        //     8),
-        //                    u8*, 0x11));
-        sp14.x = M2C_BITWISE(
-            float,
-            M2C_FIELD(M2C_FIELD(M2C_FIELD(fp, void**, 0x10C), void**, 8), u8*,
-                      0x11));
-        sp24 = 1.0f;
-        sp20 = 0.0f;
-        sp14.y = 0.0f;
-        sp14.z = 0.0f;
-        // ftColl_8007B1B8(gobj, &sp14, ftCo_80092E50);
-        fp->x221A_b0 = true;
-    }
+    fp->x221C_b3 = 0;
+    fp->x221C_b1 = 0;
+    fp->x221C_b2 = 0;
+    fp->mv.co.guard.x1C = 0;
+    fp->mv.co.guard.x14 = 0;
+    fp->mv.co.guard.x18 = 0;
+    ftCo_80092450(gobj);
     ftCo_800921DC(gobj);
 }
 

@@ -41,12 +41,12 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode)
     Fighter* fp = GET_FIGHTER(HSD_GObj_804D7814);
 
     if (fp->x2226_b5) {
-        lbRefract_80022998(mobj, rendermode);
+        lbRefract_80022998(mobj, rendermode, fp->smash_attrs.x2134_vibrateFrame);
         return;
     }
 
-    if (!fp->x2223_b7 && (!fp->x2228_b0 || !fp->x2224_b0)) {
-        if (M2C_FIELD(fp, u8*, 0x2223) & 1) {
+    if (!fp->x2223_b2 && (!fp->x2228_b0 || !fp->x2224_b0)) {
+        if (fp->x2223_b7) {
             mobj = ft_804D6580;
         } else if (fp->x2227_b3) {
             mobj = ft_804D6588;
@@ -81,19 +81,13 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode)
                 }
                 HSD_TObjSetup(tobj);
                 HSD_TObjSetupTextureCoordGen(tobj);
-                {
-                    M2C_FIELD(
-                        mobj->parent.class_info,
-                        M2C_UNK(**)(HSD_MObj*, HSD_TObj*, u32, HSD_ClassInfo*),
-                        0x48)
-                    (mobj, tobj, mobj_rendermode, mobj->parent.class_info);
-                }
+                HSD_MOBJ_METHOD(mobj)->setup_tev(mobj, tobj, mobj_rendermode);
             }
             if (fp->x61D != 0xFF) {
                 mobj_rendermode |= RENDER_NO_ZUPDATE | RENDER_XLU;
             }
             {
-                HSD_TExp* texp1 = ftMaterial_800BF534(fp, mobj, &texp);
+                HSD_TExp* texp1 = ftMaterial_800BF534(fp, mobj, &texp, rendermode);
                 ftMaterial_800BF6BC(fp, mobj, texp1);
                 if (fp->x2223_b2 && !fp->x2223_b3) {
                     mobj_rendermode |= RENDER_NO_ZUPDATE;
@@ -130,7 +124,7 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode)
     }
 }
 
-HSD_TExp* ftMaterial_800BF534(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
+HSD_TExp* ftMaterial_800BF534(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp, u32 rendermode)
 {
     NOT_IMPLEMENTED;
 }

@@ -1750,7 +1750,53 @@ struct UnkFloat6_Camera {
 struct FtCmdState {
     float x0;      // timer
     float x4;      // frame
-    char* x8;      // script
+    union {
+        char* x8;      // script
+        struct {
+            union {
+                s16 x0;
+                struct {
+                    u8 x0_b0 : 1;
+                    u8 x0_b1 : 1;
+                    u8 x0_b2 : 1;
+                    u8 x0_b3 : 1;
+                    u8 x0_b4 : 1;
+                    u8 x0_b5 : 1;
+                    u8 x0_b6 : 1;
+                    u8 x0_b7 : 1;
+                    u8 x1_b0 : 1;
+                    u8 x1_b1 : 1;
+                    u8 x1_b2 : 1;
+                    u8 x1_b3 : 1;
+                    u8 x1_b4 : 1;
+                    u8 x1_b5 : 1;
+                    u8 x1_b6 : 1;
+                    u8 x1_b7 : 1;
+                };
+            };
+            union {
+                s16 x2;
+                struct {
+                    u8 x2_b0 : 1;
+                    u8 x2_b1 : 1;
+                    u8 x2_b2 : 1;
+                    u8 x2_b3 : 1;
+                    u8 x2_b4 : 1;
+                    u8 x2_b5 : 1;
+                    u8 x2_b6 : 1;
+                    u8 x2_b7 : 1;
+                    u8 x3_b0 : 1;
+                    u8 x3_b1 : 1;
+                    u8 x3_b2 : 1;
+                    u8 x3_b3 : 1;
+                    u8 x3_b4 : 1;
+                    u8 x3_b5 : 1;
+                    u8 x3_b6 : 1;
+                    u8 x3_b7 : 1;
+                };
+            };
+        }* x8_bits;
+    };
     int xC;        // stack_depth
     void*(x10[5]); // stack
 };

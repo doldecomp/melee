@@ -68,8 +68,6 @@ Item_GObj* itSword_Spawn(Vec3* pos)
     spawn.prev_pos = *pos;
     spawn.prev_pos.z = 0;
     spawn.pos = spawn.prev_pos;
-    spawn.pos.y = pos->y;
-    spawn.pos.z = spawn.prev_pos.z;
     spawn.facing_dir = -1;
     spawn.x3C_damage = 0;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0;
@@ -162,10 +160,10 @@ void it_80285084(Item_GObj* gobj)
             ip->xDD4_itemVar.sword.x10 = ip->xDD4_itemVar.sword.x14;
             ip->xDD4_itemVar.sword.x18 = 0;
         }
-    } else if (ip->xDD4_itemVar.sword.x48 < 0) {
-        if (ip->xDD4_itemVar.sword.x40 < ip->xDD4_itemVar.sword.x44) {
-            ip->xDD4_itemVar.sword.x40 = ip->xDD4_itemVar.sword.x44;
-            ip->xDD4_itemVar.sword.x48 = 0;
+    } else if (ip->xDD4_itemVar.sword.x18 < 0) {
+        if (ip->xDD4_itemVar.sword.x10 < ip->xDD4_itemVar.sword.x14) {
+            ip->xDD4_itemVar.sword.x10 = ip->xDD4_itemVar.sword.x14;
+            ip->xDD4_itemVar.sword.x18 = 0;
         }
     }
 }
@@ -192,10 +190,10 @@ void it_80285140(Item_GObj* gobj)
             ip->xDD4_itemVar.sword.x28 = ip->xDD4_itemVar.sword.x2C;
             ip->xDD4_itemVar.sword.x30 = 0;
         }
-    } else if (ip->xDD4_itemVar.sword.x48 < 0) {
-        if (ip->xDD4_itemVar.sword.x40 < ip->xDD4_itemVar.sword.x44) {
-            ip->xDD4_itemVar.sword.x40 = ip->xDD4_itemVar.sword.x44;
-            ip->xDD4_itemVar.sword.x48 = 0;
+    } else if (ip->xDD4_itemVar.sword.x30 < 0) {
+        if (ip->xDD4_itemVar.sword.x28 < ip->xDD4_itemVar.sword.x2C) {
+            ip->xDD4_itemVar.sword.x28 = ip->xDD4_itemVar.sword.x2C;
+            ip->xDD4_itemVar.sword.x30 = 0;
         }
     }
 }
@@ -232,15 +230,15 @@ void it_802851FC(Item_GObj* gobj)
 void it_802852B8(Item_GObj* gobj, float* arg1, float* arg2)
 {
     Item* ip = GET_ITEM(gobj);
+
+    float f1 = ip->xDD4_itemVar.sword.x4C * ip->xDD4_itemVar.star.xvel
+        * ip->xDD4_itemVar.sword.x28 * it_804DC8D8;
+
     if (arg1 != NULL) {
         *arg1 = it_804DC8D0;
     }
     if (arg2 != NULL) {
-        float temp1 =
-            (ip->xDD4_itemVar.sword.x28 *
-             (ip->xDD4_itemVar.sword.x4C * ip->xDD4_itemVar.sword.x10));
-        float temp2 = it_804DC8D8 * temp1;
-        *arg2 = it_804DC8F0 * temp2;
+        *arg2 = it_804DC8F0 * f1;
     }
 }
 

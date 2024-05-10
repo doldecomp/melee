@@ -10,7 +10,7 @@
 /* 0BF260 */ void ftMaterial_800BF260(void);
 /* 0BF2B8 */ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode);
 /* 0BF534 */ HSD_TExp* ftMaterial_800BF534(Fighter* fp, HSD_MObj* mobj,
-                                           HSD_TExp* texp);
+                                           HSD_TExp* texp, u32 rendermode);
 /* 0BF6BC */ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj,
                                       HSD_TExp* texp);
 /* 0BFB4C */ void ftMaterial_800BFB4C(ftCo_GObj* gobj, GXColor* diffuse);
