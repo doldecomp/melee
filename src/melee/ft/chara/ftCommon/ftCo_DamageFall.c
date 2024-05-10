@@ -87,7 +87,7 @@ void ftCo_80090718(Fighter* fp)
 void ftCo_80090780(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    if ((s32) M2C_FIELD(fp, s32*, 0xE0) == 0) {
+    if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4((Fighter*) fp);
     }
     if (ftGetParasolStatus(gobj) != -1) {
