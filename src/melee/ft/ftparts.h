@@ -49,7 +49,7 @@
 /* 075240 */ void ftParts_80075240(void);
 /* 075304 */ void ftParts_80075304(void);
 /* 0753D4 */ void ftParts_800753D4(Fighter*, s32, UNK_T);
-/* 0755E8 */ void ftParts_800755E8(void);
+/* 0755E8 */ void ftParts_800755E8(Fighter*, u8*);
 /* 075650 */ void ftParts_80075650(HSD_GObj* gobj, HSD_JObj*, u32*);
 /* 07584C */ void ftParts_JObjSetRotation(HSD_JObj*, Quaternion*);
 /* 07592C */ void ftParts_8007592C(Fighter*, s32, float);

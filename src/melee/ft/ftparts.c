@@ -124,9 +124,20 @@ void ftParts_JObjInfoInit(void)
     HSD_JOBJ_INFO(&ftJObj)->make_pmtx = ftParts_JObjMakePositionMtx;
 }
 
-/// #ftParts_80073758
+void ftParts_80073758(HSD_JObj* jobj)
+{
+    hsdChangeClass(jobj, &ftJObj);
+}
 
-/// #ftParts_IntpJObjLoad
+s32 ftParts_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent)
+{
+    HSD_DObjDesc* dobjdesc = joint->u.dobjdesc;
+    s32 ret;
+    joint->u.dobjdesc = NULL;
+    ret = hsdJObj.load(jobj, joint, parent);
+    joint->u.dobjdesc = dobjdesc;
+    return ret;
+}
 
 void ftParts_IntpJObjInfoInit(void)
 {
@@ -141,6 +152,29 @@ void ftParts_IntpJObjInfoInit(void)
 /// #ftParts_800739B8
 
 /// #ftParts_80073CA8
+
+void ftParts_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
+{
+    if (!ft_jobj_scale.has_z_scale) {
+        hsdPObj.setup_mtx(pobj, vmtx, pmtx, rendermode);
+        return;
+    }
+    switch (pobj->flags & 0x3000) {
+    case 0x0:
+        if (pobj->u.jobj == NULL) {
+            ftParts_80073830();
+        } else {
+            ftParts_800739B8();
+        }
+        break;
+    case 0x1000:
+        ftParts_80073830();
+        break;
+    case 0x2000:
+        ftParts_80073CA8();
+        break;
+    }
+}
 
 void ftParts_PObjInfoInit(void)
 {
@@ -279,11 +313,24 @@ u8 ftParts_80075028(size_t to_table_idx, size_t from_table_idx,
 
 /// #ftParts_800753D4
 
-/// #ftParts_800755E8
+void ftParts_800755E8(Fighter* fp, u8* arg1)
+{
+    FighterBone* bone = &fp->parts[*arg1];
+    HSD_JObjRemove(bone->joint);
+    HSD_JObjRemove(bone->x4_jobj2);
+    bone->joint = NULL;
+    bone->x4_jobj2 = NULL;
+    bone->flags_b1 = false;
+    bone->flags_b2 = false;
+}
 
 /// #ftParts_80075650
 
-/// #ftParts_JObjSetRotation
+void ftParts_JObjSetRotation(HSD_JObj* jobj, Vec4* quat)
+{
+    HSD_JObjSetRotation(jobj, quat);
+    HSD_JObjClearFlags(jobj, JOBJ_USE_QUATERNION);
+}
 
 /// #ftParts_8007592C
 
@@ -291,6 +338,33 @@ u8 ftParts_80075028(size_t to_table_idx, size_t from_table_idx,
 
 /// #ftParts_80075CB4
 
-/// #ftParts_80075E78
+extern char ftParts_803C0A08[];
+extern char ftParts_803C0BD0[];
 
-/// #ftParts_80075F48
+f32 ftParts_80075E78(Fighter* fp, int arg1)
+{
+    HSD_JObj* jobj = fp->parts[arg1].joint;
+    if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
+        HSD_JObj* jobj = fp->parts[arg1].x4_jobj2;
+        if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
+            OSReport(ftParts_803C0BB4);
+            __assert(ftParts_803C0A08, 0x499, ftParts_804D3A58);
+        }
+        return HSD_JObjGetRotationX(jobj);
+    }
+    return HSD_JObjGetRotationX(jobj);
+}
+
+f32 ftParts_80075F48(Fighter* fp, s32 arg1)
+{
+    HSD_JObj* jobj = fp->parts[arg1].joint;
+    if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
+        HSD_JObj* jobj = fp->parts[arg1].x4_jobj2;
+        if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
+            OSReport(ftParts_803C0BD0);
+            __assert(ftParts_803C0A08, 0x4AC, ftParts_804D3A58);
+        }
+        return HSD_JObjGetRotationY(jobj);
+    }
+    return HSD_JObjGetRotationY(jobj);
+}
