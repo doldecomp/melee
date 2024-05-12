@@ -250,10 +250,11 @@ inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
         }                                                                     \
     }
 
-static inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
+static inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* rotate)
 {
     HSD_ASSERT(618, jobj);
-    jobj->rotate = *quat;
+    HSD_ASSERT(619, rotate);
+    jobj->rotate = *rotate;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
@@ -293,6 +294,12 @@ static inline void HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion* quat)
 {
     HSD_ASSERT(699, jobj);
     *quat = jobj->rotate;
+}
+
+static inline f32 HSD_JObjGetRotationX(HSD_JObj* jobj)
+{
+    HSD_ASSERT(715, jobj);
+    return jobj->rotate.x;
 }
 
 static inline f32 HSD_JObjGetRotationY(HSD_JObj* jobj)
