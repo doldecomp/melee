@@ -40,6 +40,7 @@ parser.add_argument(
     nargs="?",
 )
 parser.add_argument(
+    "-v",
     "--version",
     choices=VERSIONS,
     type=str.upper,
