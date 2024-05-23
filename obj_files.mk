@@ -942,7 +942,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/dolphin/ax/AXOut.s.o\
     $(BUILD_DIR)/asm/dolphin/ax/AXSPB.s.o\
     $(BUILD_DIR)/asm/dolphin/ax/AXVPB.s.o\
-    $(BUILD_DIR)/asm/dolphin/ax/AXProf.s.o\
+    $(BUILD_DIR)/src/dolphin/ax/AXProf.c.o\
     $(BUILD_DIR)/asm/dolphin/ax/DSPCode.s.o\
 
 TEXT_O_FILES +=\

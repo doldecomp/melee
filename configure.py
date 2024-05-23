@@ -1334,7 +1334,7 @@ config.libs = [
             Object(NonMatching, "dolphin/ax/AXOut.c"),
             Object(NonMatching, "dolphin/ax/AXSPB.c"),
             Object(NonMatching, "dolphin/ax/AXVPB.c"),
-            Object(NonMatching, "dolphin/ax/AXProf.c"),
+            Object(Matching, "dolphin/ax/AXProf.c"),
             Object(NonMatching, "dolphin/ax/DSPCode.c"),
         ],
     ),
