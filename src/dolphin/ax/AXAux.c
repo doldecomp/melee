@@ -1,6 +1,8 @@
 
 #include "AXAux.h"
 
+#include <dolphin/os/OSCache.h>
+
 extern u32 __AXClMode;
 
 static long __AXBufferAuxA[3][480] ATTRIBUTE_ALIGN(32);
