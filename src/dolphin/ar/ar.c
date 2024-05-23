@@ -1,5 +1,13 @@
 #include <platform.h>
 
+#include <__mem.h>
+#include <dolphin/ar/ar.h>
+#include <dolphin/dsp/dsp.h>
+#include <dolphin/os.h>
+#include <dolphin/os/OSContext.h>
+#include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSTime.h>
+
 Event __AR_Callback;
 u32 __AR_Size;
 u32 __AR_StackPointer;

@@ -3,14 +3,6 @@
 
 #include <platform.h>
 
-#include <__mem.h>
-#include <dolphin/ar/ar.h>
-#include <dolphin/dsp/dsp.h>
-#include <dolphin/os.h>
-#include <dolphin/os/OSContext.h>
-#include <dolphin/os/OSInterrupt.h>
-#include <dolphin/os/OSTime.h>
-
 // offsets for __DSPRegs[i]
 #define DSP_MAILBOX_IN_HI (0)
 #define DSP_MAILBOX_IN_LO (1)
