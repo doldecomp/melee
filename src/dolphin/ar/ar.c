@@ -1,5 +1,6 @@
 #include <platform.h>
 
+#include <__mem.h>
 #include <dolphin/ar/ar.h>
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/os.h>
