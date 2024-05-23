@@ -60,7 +60,8 @@
         "type_traits": "c",
         "xmemory": "c",
         "xutility": "c",
-        "exception": "c"
+        "exception": "c",
+        "xstring": "c"
     },
     "[gas]": {
         "editor.insertSpaces": true,

@@ -280,66 +280,30 @@ static char str_pix_fmt_neq_gx_pf_rgb565_z16[] = "pix_fmt != GX_PF_RGB565_Z16";
 
 void HSD_ObjDumpStat(void)
 {
-    HSD_ObjAllocInfo objs[] = {
-        {
-            HSD_AObjGetAllocData,
-            "aobj",
-        },
-        {
-            HSD_FObjGetAllocData,
-            "fobj",
-        },
-        {
-            HSD_IDGetAllocData,
-            "id",
-        },
-        {
-            HSD_SListGetAllocData,
-            "slist",
-        },
-        {
-            HSD_DListGetAllocData,
-            "dlist",
-        },
-        {
-            HSD_VecGetAllocData,
-            "vec",
-        },
-        {
-            HSD_MtxGetAllocData,
-            "mtx",
-        },
-        {
-            HSD_RObjGetAllocData,
-            "robj",
-        },
-        {
-            HSD_RvalueObjGetAllocData,
-            "rval",
-        },
-        {
-            HSD_ShadowGetAllocData,
-            "shadow",
-        },
-        {
-            HSD_RenderGetAllocData,
-            "render",
-        },
-        {
-            HSD_ChanGetAllocData,
-            "chan",
-        },
-        {
-            HSD_TevRegGetAllocData,
-            "tevreg",
-        },
-        { NULL },
-    };
-    HSD_ObjAllocInfo* i;
-    for (i = objs; i->name != NULL; i++) {
-        OSReport("objalloc: %s\tusing %d\tfreed %d\tpeak %d\n", i->name,
-                 HSD_ObjAllocUsed(i), HSD_ObjAllocFree(i),
-                 HSD_ObjAllocPeak(i));
+    struct {
+        HSD_ObjAllocData* (*func)(void);
+        char* label;
+    } types[] = { { HSD_AObjGetAllocData, "aobj" },
+                  { HSD_FObjGetAllocData, "fobj" },
+                  { HSD_IDGetAllocData, "id" },
+                  { HSD_SListGetAllocData, "slist" },
+                  { HSD_DListGetAllocData, "dlist" },
+                  { HSD_VecGetAllocData, "vec" },
+                  { HSD_MtxGetAllocData, "mtx" },
+                  { HSD_RObjGetAllocData, "robj" },
+                  { HSD_RvalueObjGetAllocData, "rval" },
+                  { HSD_ShadowGetAllocData, "shadow" },
+                  { HSD_RenderGetAllocData, "render" },
+                  { HSD_ChanGetAllocData, "chan" },
+                  { HSD_TevRegGetAllocData, "tevreg" },
+                  { NULL, NULL } };
+    int i;
+
+    for (i = 0; types[i].label; i++) {
+        OSReport("objalloc: %s\tusing %d\tfreed %d\tpeak %d\n", types[i].label,
+                 HSD_ObjAllocGetUsing(types[i].func()),
+                 HSD_ObjAllocGetFreed(types[i].func()),
+                 HSD_ObjAllocGetPeak(types[i].func()));
     }
 }
 
