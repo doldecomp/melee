@@ -1329,7 +1329,7 @@ config.libs = [
         [
             Object(Matching, "dolphin/ax/AX.c"),
             Object(Matching, "dolphin/ax/AXAlloc.c"),
-            Object(NonMatching, "dolphin/ax/AXAux.c"),
+            Object(Matching, "dolphin/ax/AXAux.c"),
             Object(NonMatching, "dolphin/ax/AXCL.c"),
             Object(NonMatching, "dolphin/ax/AXOut.c"),
             Object(NonMatching, "dolphin/ax/AXSPB.c"),
