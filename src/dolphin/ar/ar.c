@@ -222,7 +222,7 @@ static void __ARReadDMA(u32 mmem_addr, u32 aram_addr, u32 length)
     __ARWaitForDMA();
 }
 
-static void __ARChecksize(void)
+void __ARChecksize(void)
 {
     u8 test_data_pad[63];
     u8 dummy_data_pad[63];

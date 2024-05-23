@@ -260,8 +260,6 @@ extern AXPROFILE __AXLocalProfile;
 extern DSPTaskInfo task;
 extern u16 ax_dram_image[8192];
 
-void AXRegisterCallback(void (*callback)());
-
 // AXProf.c
 void AXInitProfile(AXPROFILE* profile, u32 maxProfiles);
 u32 AXGetProfile(void);
