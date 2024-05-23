@@ -5,4 +5,8 @@
 
 #include <dolphin/ax.h>
 
+AXPROFILE* __AXGetCurrentProfile(void);
+void AXInitProfile(AXPROFILE* profile, u32 maxProfiles);
+u32 AXGetProfile(void);
+
 #endif
