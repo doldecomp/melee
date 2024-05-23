@@ -15,6 +15,8 @@ u32 __AR_FreeBlocks;
 u32* __AR_BlockLength;
 volatile bool __AR_init_flag;
 
+void __ARHandler(__OSInterrupt interrupt, OSContext* context);
+
 Event ARRegisterDMACallback(Event callback)
 {
     Event oldCb = __AR_Callback;

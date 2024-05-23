@@ -27,8 +27,6 @@
 
 #define DSP_DMA_START_FLAG (0x8000) // set to start DSP
 
-void __ARHandler(__OSInterrupt interrupt, OSContext* context);
-
 void ARStartDMA(u32 type, u32 source, u32 dest, u32 length);
 Event ARRegisterDMACallback(Event callback);
 void __ARChecksize(void);
