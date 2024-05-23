@@ -8,12 +8,12 @@
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSTime.h>
 
-Event __AR_Callback;
-u32 __AR_Size;
-u32 __AR_StackPointer;
-u32 __AR_FreeBlocks;
-u32* __AR_BlockLength;
 volatile bool __AR_init_flag;
+u32* __AR_BlockLength;
+u32 __AR_FreeBlocks;
+u32 __AR_StackPointer;
+u32 __AR_Size;
+Event __AR_Callback;
 
 void __ARHandler(__OSInterrupt interrupt, OSContext* context);
 
