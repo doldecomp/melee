@@ -914,7 +914,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/dolphin/ai/ai.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/dolphin/ar/ar.s.o\
+    $(BUILD_DIR)/src/dolphin/ar/ar.c.o\
     $(BUILD_DIR)/src/dolphin/ar/arq.c.o\
 
 TEXT_O_FILES +=\
@@ -936,13 +936,13 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/dolphin/ax/AX.c.o\
-    $(BUILD_DIR)/asm/dolphin/ax/AXAlloc.s.o\
-    $(BUILD_DIR)/asm/dolphin/ax/AXAux.s.o\
+    $(BUILD_DIR)/src/dolphin/ax/AXAlloc.c.o\
+    $(BUILD_DIR)/src/dolphin/ax/AXAux.c.o\
     $(BUILD_DIR)/asm/dolphin/ax/AXCL.s.o\
     $(BUILD_DIR)/asm/dolphin/ax/AXOut.s.o\
     $(BUILD_DIR)/asm/dolphin/ax/AXSPB.s.o\
     $(BUILD_DIR)/asm/dolphin/ax/AXVPB.s.o\
-    $(BUILD_DIR)/asm/dolphin/ax/AXProf.s.o\
+    $(BUILD_DIR)/src/dolphin/ax/AXProf.c.o\
     $(BUILD_DIR)/asm/dolphin/ax/DSPCode.s.o\
 
 TEXT_O_FILES +=\

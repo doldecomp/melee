@@ -1299,7 +1299,7 @@ config.libs = [
     DolphinLib(
         "ar",
         [
-            Object(NonMatching, "dolphin/ar/ar.c"),
+            Object(Matching, "dolphin/ar/ar.c"),
             Object(Matching, "dolphin/ar/arq.c"),
         ],
     ),
@@ -1328,13 +1328,13 @@ config.libs = [
         "ax",
         [
             Object(Matching, "dolphin/ax/AX.c"),
-            Object(NonMatching, "dolphin/ax/AXAlloc.c"),
-            Object(NonMatching, "dolphin/ax/AXAux.c"),
+            Object(Matching, "dolphin/ax/AXAlloc.c"),
+            Object(Matching, "dolphin/ax/AXAux.c"),
             Object(NonMatching, "dolphin/ax/AXCL.c"),
             Object(NonMatching, "dolphin/ax/AXOut.c"),
             Object(NonMatching, "dolphin/ax/AXSPB.c"),
             Object(NonMatching, "dolphin/ax/AXVPB.c"),
-            Object(NonMatching, "dolphin/ax/AXProf.c"),
+            Object(Matching, "dolphin/ax/AXProf.c"),
             Object(NonMatching, "dolphin/ax/DSPCode.c"),
         ],
     ),
