@@ -12,6 +12,7 @@
 #define OS_CACHED_REGION_PREFIX 0x8000
 #define OS_BASE_CACHED (OS_CACHED_REGION_PREFIX << 16)
 #define OSPhysicalToCached(paddr) ((void*) ((u32) (paddr) + OS_BASE_CACHED))
+#define OSPhysicalToUncached(paddr) ((void*) ((u32) (paddr) -0x40000000))
 
 #include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSAlloc.h>
