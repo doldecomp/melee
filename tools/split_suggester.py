@@ -38,7 +38,7 @@ import os
 import struct
 import sys
 import time
-import parse_map
+# import parse_map
 from pathlib import Path
 from collections import OrderedDict
 
@@ -304,8 +304,11 @@ def parseAssemblyFile(args, mapNames):
                 continue
 
             # Track what file section we're in
-            elif line.startswith(".section"):
-                sectionName = line.split()[1].replace(",", "")
+            elif line.startswith(".section") or line.startswith(".text"):
+                if line.startswith(".section"):
+                    sectionName = line.split()[1].replace(",", "")
+                else:
+                    sectionName = ".text"
                 fileSections[sectionName] = 0  # Initialize section data length
                 currentSection = sectionName
 
@@ -317,8 +320,8 @@ def parseAssemblyFile(args, mapNames):
 
             # Start parsing for specific sections
             elif currentSection == ".sdata2":
-                if line.endswith(":"):
-                    lastLabel = line[:-1]  # Strips colon
+                if line.startswith(".obj"):
+                    lastLabel = line.split()[1][:-1]  # Strips colon
                     firstValueProcessed = False
 
                 elif line.startswith(".4byte") or line.startswith(".float"):
@@ -452,8 +455,8 @@ def parseAssemblyFile(args, mapNames):
                     fileSections[".text"] += 4
 
                 # Check if this is the start of a new function
-                elif line.endswith(":"):
-                    label = line[:-1]  # Removes colon
+                elif line.startswith(".fn"):
+                    label = line.split()[1][:-1]  # Removes colon
 
                     # Check if the last line was THE end, or just AN end to the function
                     if currentFunction and functionEndLikely and not functionEndCertain:
@@ -904,7 +907,7 @@ def main(args):
             alreadyWritten = []
             for function in functionList:
                 for label in function.uniqueLabels:
-                    if label not in alreadyWritten:
+                    if label not in alreadyWritten and label in floatsData:
                         name, floatType, value = floatsData.get(label)
                         cFile.write(
                             "\n// {} const {} = {};".format(floatType, name, value)
@@ -926,8 +929,9 @@ def main(args):
 
                 # Write the float literals this function references
                 for label in function.uniqueLabels:
-                    name, floatType, value = floatsData.get(label)
-                    cFile.write("\n// {} ({}: {})".format(name, floatType, value))
+                    if label in floatsData:
+                        name, floatType, value = floatsData.get(label)
+                        cFile.write("\n// {} ({}: {})".format(name, floatType, value))
 
     print("\nFile templates created.")
 
@@ -937,11 +941,16 @@ if __name__ == "__main__":
 
     try:
         main(args)
+        print(0)
         sys.exit(0)
     except ProgramError as err:
         message, code = err.args
         print(message, file=sys.stderr)
+        print(code)
         sys.exit(code)
     except Exception as err:
+        import traceback
+        print(traceback.format_exc())
         print(err, file=sys.stderr)
+        print(4)
         sys.exit(4)
