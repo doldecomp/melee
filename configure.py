@@ -134,9 +134,9 @@ if args.no_asm:
 # Tool versions
 config.binutils_tag = "2.42-1"
 config.compilers_tag = "20231018"
-config.dtk_tag = "v0.7.5"
+config.dtk_tag = "v0.9.0"
 config.sjiswrap_tag = "v1.1.1"
-config.wibo_tag = "0.6.11"
+config.wibo_tag = "0.6.14"
 
 # Project
 config.config_path = Path("config") / config.version / "config.yml"
@@ -151,6 +151,7 @@ config.asflags = [
 config.ldflags = [
     "-fp hardware",
     "-nodefaults",
+    "-warn off",
     # "-listclosure", # Uncomment for Wii linkers
 ]
 # Use for any additional files that should cause a re-configure when modified
