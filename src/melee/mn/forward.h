@@ -6,6 +6,14 @@ typedef struct PlayerInitData PlayerInitData;
 typedef struct StartMeleeData StartMeleeData;
 typedef struct StartMeleeRules StartMeleeRules;
 typedef struct VsModeData VsModeData;
+typedef struct CSSModeInfo CSSModeInfo;
+typedef struct CSSIcon CSSIcon;
+typedef struct CSSIconsData CSSIconsData;
+typedef struct CSSDoor CSSDoor;
+typedef struct CSSTagData CSSTagData;
+typedef struct CSSTag CSSTag;
+typedef struct CSSKOStar CSSKOStar;
+typedef struct CSSDoorsData CSSDoorsData;
 
 typedef enum _Mode {
     Mode_Time,
