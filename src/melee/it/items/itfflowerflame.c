@@ -4,6 +4,14 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+ItemStateTable it_803F66C8[] = {
+    { 0, NULL, NULL, NULL },
+    { 0, NULL, NULL, NULL },
+    { 0, NULL, NULL, NULL },
+    { 0, NULL, NULL, NULL },
+    { 0, NULL, NULL, NULL },
+};
+
 HSD_GObj* it_8029A748(Item_GObj* arg0, Vec3* arg1, u8 arg2, f32 arg3)
 {
     SpawnItem spawn;
