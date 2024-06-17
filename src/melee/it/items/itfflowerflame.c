@@ -7,11 +7,11 @@
 #include "it/item.h"
 
 ItemStateTable it_803F66C8[] = {
-    { 0, NULL, NULL, NULL },
-    { 0, NULL, NULL, NULL },
-    { 0, NULL, NULL, NULL },
-    { 0, NULL, NULL, NULL },
-    { 0, NULL, NULL, NULL },
+    { 0, it_8029AA6C, it_8029AB60, it_8029AB64 },
+    { 0, it_8029ABCC, it_8029ACCC, it_8029ACFC },
+    { 0, it_8029AD58, NULL, NULL },
+    { 0, it_8029ADD0, it_8029AED0, it_8029AF00 },
+    { 0, it_8029AF70, it_8029B070, it_8029B074 },
 };
 
 HSD_GObj* it_8029A748(Item_GObj* arg0, Vec3* arg1, u8 arg2, f32 arg3)
@@ -98,7 +98,7 @@ void it_8029AA1C(HSD_GObj* arg0)
     it_8026B3A8((Item_GObj*) arg0);
 }
 
-u32 it_8029AA6C(Item_GObj* arg0)
+int it_8029AA6C(Item_GObj* arg0)
 {
     HSD_JObj* jobj;
     Item* item = GET_ITEM((HSD_GObj*) arg0);
@@ -108,12 +108,12 @@ u32 it_8029AA6C(Item_GObj* arg0)
     return 0;
 }
 
-void it_8029AB60(void)
+void it_8029AB60(HSD_GObj*)
 {
     return;
 }
 
-s32 it_8029AB64(Item_GObj* arg0)
+int it_8029AB64(Item_GObj* arg0)
 {
     it_8026D62C(arg0, it_8029AB90);
     return 0;
@@ -125,7 +125,7 @@ void it_8029AB90(HSD_GObj* gobj)
     it_8026B3A8((Item_GObj*) gobj);
 }
 
-void it_8029ABCC(Item_GObj* arg0)
+int it_8029ABCC(Item_GObj* arg0)
 {
     HSD_JObj* jobj;
     Item* item = GET_ITEM((HSD_GObj*) arg0);
@@ -144,7 +144,7 @@ void it_8029ACCC(Item_GObj* arg0)
     it_80272860(arg0, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
 }
 
-void it_8029ACFC(void)
+int it_8029ACFC(HSD_GObj* arg0)
 {
     it_8026DF34();
 }
@@ -155,7 +155,7 @@ void it_8029AD1C(Item_GObj* arg0)
     it_8026B3A8(arg0);
 }
 
-s32 it_8029AD58(Item_GObj* arg0)
+int it_8029AD58(Item_GObj* arg0)
 {
     Item* item = GET_ITEM((HSD_GObj*) arg0);
     it_80272F7C(it_80272CC0(arg0, 1), item->xDD4_itemVar.fflowerflame.unk);
@@ -168,7 +168,7 @@ void it_8029AD94(Item_GObj* arg0)
     it_8026B3A8(arg0);
 }
 
-void it_8029ADD0(Item_GObj* arg0)
+int it_8029ADD0(Item_GObj* arg0)
 {
     HSD_JObj* jobj;
     Item* item = GET_ITEM((HSD_GObj*) arg0);
@@ -187,7 +187,7 @@ void it_8029AED0(Item_GObj* arg0)
     it_80272860(arg0, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
 }
 
-s32 it_8029AF00(Item_GObj* arg0)
+int it_8029AF00(Item_GObj* arg0)
 {
     if (it_8026DA08(arg0) != 0) {
         return 1;
@@ -201,7 +201,7 @@ void it_8029AF34(Item_GObj* arg0)
     it_8026B3A8(arg0);
 }
 
-void it_8029AF70(Item_GObj* arg0)
+int it_8029AF70(Item_GObj* arg0)
 {
     HSD_JObj* jobj;
     Item* item = GET_ITEM((HSD_GObj*) arg0);
@@ -211,12 +211,12 @@ void it_8029AF70(Item_GObj* arg0)
     it_80273130(arg0);
 }
 
-void it_8029B070(void)
+void it_8029B070(HSD_GObj* arg0)
 {
     return;
 }
 
-s32 it_8029B074(Item_GObj* arg0)
+int it_8029B074(Item_GObj* arg0)
 {
     it_8026E8C4(arg0, it_8029AA1C, it_8029AB90);
     return 0;
