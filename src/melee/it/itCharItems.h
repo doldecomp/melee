@@ -23,4 +23,25 @@ typedef struct {
     u32 x0;
 } itKirbyHammerVars;
 
+<<<<<<< HEAD
+=======
+typedef struct {
+    UnkFlagStruct x0;
+    u8 x1;
+    u8 x2;
+    u8 x3;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    Item_GObj *x10;
+} itLinkBombVars;
+
+typedef struct itLinkBombAttributes {
+    /* x0 */ u32 lifetime;
+    /* x4 */ f32 x4;
+    /* x8 */ f32 x8;
+    /* xC */ u32 xC;
+} itLinkBombAttributes;
+
+>>>>>>> 8fee7ab (Initial disasm)
 #endif

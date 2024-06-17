@@ -1,1 +1,1359 @@
+#include "it/it_266F.h"
+#include "it/it_26B1.h"
 
+#include "itlinkbomb.h"
+
+#include "it/itCharItems.h"
+#include "it/inlines.h"
+#include "it/item.h"
+// #include "it/it_26B1.h"
+
+// void it_80272A60(Item_GObj *);                         /* extern */
+// void it_80275414(HSD_GObj *);                          /* extern */
+// void it_802754A4(Item_GObj *);                         /* extern */
+// void it_80275D5C(HSD_GObj *, ECB *);                   /* extern */
+
+static s8 it_803F68F8[0x28] = {
+    0x21,
+    0x28,
+    0x6A,
+    0x6F,
+    0x62,
+    0x6A,
+    0x2D,
+    0x3E,
+    0x66,
+    0x6C,
+    0x61,
+    0x67,
+    0x73,
+    0x20,
+    0x26,
+    0x20,
+    0x4A,
+    0x4F,
+    0x42,
+    0x4A,
+    0x5F,
+    0x55,
+    0x53,
+    0x45,
+    0x5F,
+    0x51,
+    0x55,
+    0x41,
+    0x54,
+    0x45,
+    0x52,
+    0x4E,
+    0x49,
+    0x4F,
+    0x4E,
+    0x29,
+    0,
+    0,
+    0,
+    0,
+};
+static s8 it_804D5380[8] = { 0x6A, 0x6F, 0x62, 0x6A, 0x2E, 0x68, 0, 0 };
+static s8 it_804D5388[8] = { 0x6A, 0x6F, 0x62, 0x6A, 0, 0, 0, 0 };
+static Vec3 it_803B8640;
+
+void it_8029D968(Item_GObj *arg0) {
+    Item *temp_r4;
+
+    temp_r4 = arg0->user_data;
+    if (!(((u8) temp_r4->xDC8_word.flags.x13 >> 4U) & 1) && ((s32) temp_r4->msid != 5)) {
+        // could be empty?
+        it_8029F69C((HSD_GObj *) arg0);
+    }
+}
+
+void it_8029D9A4(HSD_GObj *arg0, s32 arg1, s32 arg2) {
+    HSD_JObj *jobj;
+    Item *item;
+    f32 temp_f30;
+    f32 temp_f31;
+
+    item = GET_ITEM(arg0);
+    jobj = item->xBBC_dynamicBoneTable->bones[3];
+    temp_f31 = HSD_JObjGetTranslationY(jobj);
+    temp_f30 = HSD_JObjGetRotationX(jobj);
+    if (item->xDD4_itemVar.linkbomb.x0.bits.b0 & 1) {
+        Item_80268E5C(arg0, arg1, arg2 | 0x100);
+    } else {
+        Item_80268E5C(arg0, arg1, arg2 | 2);
+    }
+    HSD_JObjSetTranslateY(jobj, temp_f31);
+    HSD_JObjSetRotationX(jobj, temp_f30);
+}
+
+void it_8029DB5C(HSD_GObj *arg0) {
+    HSD_JObj *temp_r31_2;
+    ItemStateDesc *item_state_desc;
+    f32 temp_f31;
+    f32 temp_f31_2;
+    Item *item;
+    Item *item_2;
+    HSD_GObj *temp_r31;
+    Article *article;
+    itLinkBombAttributes* sa;
+    f32 pad[4];
+
+    // item: r30
+    // article: r4
+    item = GET_ITEM(arg0);
+    article = item->xC4_article_data;
+
+    sa = article->x4_specialAttributes;
+    if (item->xD44_lifeTimer <= 0.0f) {
+        it_8029F69C(arg0);
+        return;
+    }
+    if ((item->xD44_lifeTimer <= sa->xC) && item->xDD4_itemVar.linkbomb.x0.bits.b0 == 0) {
+        temp_r31 = arg0->hsd_obj;
+        item->xD0_itemStateDesc = &article->xC_itemStates->x0_itemStateDesc[3];
+        item_state_desc = item->xD0_itemStateDesc;
+        if (item_state_desc != NULL) {
+            Item_80268D34(arg0, item_state_desc);
+        }
+        HSD_JObjAnimAll((HSD_JObj *) temp_r31);
+        item->xDD4_itemVar.linkbomb.x0.bits.b0 = true;
+    }
+    item->xD44_lifeTimer = item->xD44_lifeTimer - 1.0f;
+    item_2 = arg0->user_data;
+    if (item->xDD4_itemVar.linkbomb.x0.bits.b0 == 0) {
+        temp_f31 = item_2->xDD4_itemVar.linkbomb.x4;
+        temp_r31_2 = item_2->xBBC_dynamicBoneTable->bones[3];
+        HSD_JObjAddTranslationY(temp_r31_2, temp_f31);
+        temp_f31_2 = item_2->xDD4_itemVar.linkbomb.xC;
+        HSD_JObjAddRotationX(temp_r31_2, temp_f31_2);
+    }
+}
+
+HSD_GObj *it_8029DD58(Item_GObj *fighter_gobj, Vec3 *arg1, u8 arg2, s32 arg3, f32 arg4) {
+    Item *item; // r26
+    Item_GObj *temp_r3;
+    f32 temp_f2;
+    itLinkBombAttributes *attr;
+    SpawnItem spawn;
+
+    spawn.kind = arg3;
+    spawn.prev_pos = *arg1;
+    it_8026BB68(fighter_gobj, &spawn.pos);
+    spawn.facing_dir = arg4;
+    spawn.x3C_damage = 0;
+    spawn.vel.z = 0.0f;
+    spawn.vel.y = 0.0f;
+    spawn.vel.x = 0.0f;
+    spawn.x0_parent_gobj = fighter_gobj;
+    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+    spawn.x44_flag.bits.b0 = true;
+    spawn.x40 = 0;
+    temp_r3 = Item_80268B18(&spawn);
+    if (temp_r3 != NULL) {
+        item = GET_ITEM(temp_r3->user_data);
+        attr = item->xC4_article_data->x4_specialAttributes;
+        it_80275158((HSD_GObj *) temp_r3, attr->lifetime);
+        item->xDD4_itemVar.linkbomb.x0.bits.b0 = false;
+        item->xDD4_itemVar.linkbomb.x10 = fighter_gobj;
+        item->xDD4_itemVar.linkbomb.x0.bits.b2 = false;
+        temp_f2 = attr->lifetime - attr->xC;
+        item->xDD4_itemVar.linkbomb.x8 = (-2.8000002f / temp_f2) * item->scl;
+        item->xDD4_itemVar.linkbomb.xC = (-0.15707964f / temp_f2) * item->scl;
+        it_8026BD0C(temp_r3);
+        Item_8026AB54((HSD_GObj *) temp_r3, (HSD_GObj *) fighter_gobj, arg2);
+    }
+    return (HSD_GObj *) temp_r3;
+}
+
+void it_8029DEB0(Item_GObj *arg0) {
+    HSD_JObj *jobj;
+    Item *item;
+    f32 temp_f30;
+    f32 temp_f31;
+    f32 pad[8];
+
+    item = GET_ITEM(arg0);
+    jobj = item->xBBC_dynamicBoneTable->bones[3];
+
+    temp_f31 = HSD_JObjGetTranslationY(jobj);
+    temp_f30 = HSD_JObjGetRotationX(jobj);
+    if (item->xDD4_itemVar.linkbomb.x0.bits.b0) {
+        Item_80268E5C((HSD_GObj *) arg0, 0, ITEM_CMD_UPDATE);
+    } else {
+        Item_80268E5C((HSD_GObj *) arg0, 0, ITEM_ANIM_UPDATE);
+    }
+    HSD_JObjSetTranslateY(jobj, temp_f31);
+    HSD_JObjSetRotationX(jobj, temp_f30);
+    it_8026BCF4(arg0);
+}
+
+s32 it_8029E074(HSD_GObj *arg0) {
+    HSD_JObj *temp_r31_2;
+    ItemStateDesc *item_state_desc;
+    f32 temp_f2;
+    f32 temp_f31;
+    f32 temp_f31_2;
+    Item *item;
+    Item *item_2;
+    Article *article;
+    itLinkBombAttributes* sa;
+    HSD_GObj *temp_r31;
+
+    if (it_80272C6C(arg0) == 0) {
+        it_8029D9A4(arg0, 0, 0);
+        it_8026BCF4((Item_GObj *) arg0);
+    }
+    item = arg0->user_data;
+    temp_f2 = item->xD44_lifeTimer;
+    article = item->xC4_article_data;
+    sa = article->x4_specialAttributes;
+    if (temp_f2 == 0.0f) {
+        it_8029F69C(arg0);
+    } else {
+        if ((item->xD44_lifeTimer <= sa->xC) && item->xDD4_itemVar.linkbomb.x0.bits.b0 == 0) {
+            temp_r31 = arg0->hsd_obj;
+            item->xD0_itemStateDesc = &article->xC_itemStates->x0_itemStateDesc[3];
+            item_state_desc = item->xD0_itemStateDesc;
+            if (item_state_desc != NULL) {
+                Item_80268D34(arg0, item_state_desc);
+            }
+            HSD_JObjAnimAll((HSD_JObj *) temp_r31);
+            item->xDD4_itemVar.linkbomb.x0.bits.b0 = true;
+        }
+        item->xD44_lifeTimer = item->xD44_lifeTimer - 1.0f;
+        item_2 = arg0->user_data;
+        if (item->xDD4_itemVar.linkbomb.x0.bits.b0 == 0) {
+            temp_f31 = item_2->xDD4_itemVar.linkbomb.x4;
+            temp_r31_2 = item_2->xBBC_dynamicBoneTable->bones[3];
+            HSD_JObjAddTranslationY(temp_r31_2, temp_f31);
+            temp_f31_2 = item_2->xDD4_itemVar.linkbomb.xC;
+            HSD_JObjAddRotationX(temp_r31_2, temp_f31_2);
+        }
+    }
+    return 0;
+}
+
+#if 0
+void it_8029E218(void) {
+
+}
+
+void fn_8029E21C(HSD_GObj *arg0) {
+    HSD_JObj *temp_r31;
+    f32 temp_f30;
+    f32 temp_f31;
+    s32 temp_cr0_eq;
+    s32 temp_cr0_eq_2;
+    s32 var_r3;
+    s32 var_r3_2;
+    u32 temp_r4;
+    u32 temp_r4_2;
+    Item *temp_r30;
+
+    temp_r30 = arg0->user_data;
+    temp_r31 = temp_r30->unkBBC->unkC;
+    if (temp_r31 == NULL) {
+        __assert(it_804D5380, 0x3EEU, it_804D5388);
+    }
+    temp_f31 = temp_r31->translate.y;
+    if (temp_r31 == NULL) {
+        __assert(it_804D5380, 0x2CBU, it_804D5388);
+    }
+    temp_f30 = temp_r31->rotate.x;
+    if (((u8) temp_r30->xDD4_itemVar.linkbomb.x0 >> 7U) & 1) {
+        Item_80268E5C(arg0, 1, ITEM_CMD_UPDATE);
+    } else {
+        Item_80268E5C(arg0, 1, ITEM_ANIM_UPDATE);
+    }
+    if (temp_r31 == NULL) {
+        __assert(it_804D5380, 0x3B3U, it_804D5388);
+    }
+    temp_r31->translate.y = temp_f31;
+    if (!(temp_r31->flags & 0x02000000)) {
+        temp_cr0_eq = temp_r31 == NULL;
+        if (temp_cr0_eq == 0) {
+            if (temp_cr0_eq != 0) {
+                __assert(it_804D5380, 0x234U, it_804D5388);
+            }
+            temp_r4 = temp_r31->flags;
+            var_r3 = 0;
+            if (!(temp_r4 & 0x800000) && (temp_r4 & 0x40)) {
+                var_r3 = 1;
+            }
+            if (var_r3 == 0) {
+                HSD_JObjSetMtxDirtySub(temp_r31);
+            }
+        }
+    }
+    if (temp_r31 == NULL) {
+        __assert(it_804D5380, 0x27FU, it_804D5388);
+    }
+    if (temp_r31->flags & 0x20000) {
+        __assert(it_804D5380, 0x280U, it_803F68F8);
+    }
+    temp_r31->rotate.x = temp_f30;
+    if (!(temp_r31->flags & 0x02000000)) {
+        temp_cr0_eq_2 = temp_r31 == NULL;
+        if (temp_cr0_eq_2 == 0) {
+            if (temp_cr0_eq_2 != 0) {
+                __assert(it_804D5380, 0x234U, it_804D5388);
+            }
+            temp_r4_2 = temp_r31->flags;
+            var_r3_2 = 0;
+            if (!(temp_r4_2 & 0x800000) && (temp_r4_2 & 0x40)) {
+                var_r3_2 = 1;
+            }
+            if (var_r3_2 == 0) {
+                HSD_JObjSetMtxDirtySub(temp_r31);
+            }
+        }
+    }
+}
+
+s32 it_8029E3D8(HSD_GObj *arg0) {
+    HSD_JObj *temp_r31_2;
+    ItemStateDesc *temp_r4_2;
+    f32 temp_f2;
+    f32 temp_f31;
+    f32 temp_f31_2;
+    Item *temp_r30;
+    Item *temp_r30_2;
+    void *temp_r31;
+    void *temp_r4;
+
+    if (it_80272C6C(arg0) == 0) {
+        it_8029D9A4(arg0, 1, 0);
+    }
+    temp_r30 = arg0->user_data;
+    temp_f2 = temp_r30->xD44_lifeTimer;
+    temp_r4 = temp_r30->xC4_article_data;
+    M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
+    if (temp_f2 == 0.0f) {
+        it_8029F69C(arg0);
+    } else {
+        M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
+        if ((temp_f2 == (f32) temp_r4->unk4->unkC) && !(((u8) temp_r30->xDD4_itemVar.linkbomb.x0 >> 7U) & 1)) {
+            temp_r31 = arg0->hsd_obj;
+            temp_r30->unkD0 = (ItemStateDesc *) (temp_r4->unkC + 0x30);
+            temp_r4_2 = temp_r30->unkD0;
+            if (temp_r4_2 != NULL) {
+                Item_80268D34(arg0, temp_r4_2);
+            }
+            HSD_JObjAnimAll((HSD_JObj *) temp_r31);
+            temp_r30->xDD4_itemVar.linkbomb.x0 = (u8) (temp_r30->xDD4_itemVar.linkbomb.x0 | 0x80);
+        }
+        temp_r30->xD44_lifeTimer = (f32) (temp_r30->xD44_lifeTimer - 1.0f);
+        temp_r30_2 = arg0->user_data;
+        if (!(((u8) temp_r30_2->xDD4_itemVar.linkbomb.x0 >> 7U) & 1)) {
+            temp_f31 = temp_r30_2->unkDDC;
+            temp_r31_2 = temp_r30_2->unkBBC->unkC;
+            if (temp_r31_2 == NULL) {
+                __assert(it_804D5380, 0x45AU, it_804D5388);
+            }
+            temp_r31_2->translate.y += temp_f31;
+            if (!(temp_r31_2->flags & 0x02000000)) {
+                ftCo_800C6AFC(temp_r31_2);
+            }
+            temp_f31_2 = temp_r30_2->unkDE0;
+            if (temp_r31_2 == NULL) {
+                __assert(it_804D5380, 0x405U, it_804D5388);
+            }
+            temp_r31_2->rotate.x += temp_f31_2;
+            if (!(temp_r31_2->flags & 0x02000000)) {
+                ftCo_800C6AFC(temp_r31_2);
+            }
+        }
+    }
+    return 0;
+}
+
+void it_8029E574(Item_GObj *arg0) {
+    ItemAttr *temp_r4;
+
+    temp_r4 = arg0->user_data->xCC_item_attr;
+    it_80272860(arg0, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
+}
+
+s32 it_8029E5A4(Item_GObj *arg0) {
+    it_8026E15C(arg0, it_8029F18C);
+    return 0;
+}
+
+void it_8029E5D0(Item_GObj *arg0) {
+    HSD_JObj *temp_r31;
+    HSD_JObj *temp_r31_2;
+    Item *temp_r30;
+    Item *temp_r30_2;
+    Item *temp_r30_3;
+    f32 temp_f30;
+    f32 temp_f30_2;
+    f32 temp_f31;
+    f32 temp_f31_2;
+    s32 temp_cr0_eq;
+    s32 temp_cr0_eq_2;
+    s32 temp_cr0_eq_3;
+    s32 temp_cr0_eq_4;
+    s32 var_r3;
+    s32 var_r3_2;
+    s32 var_r3_3;
+    s32 var_r3_4;
+    u32 temp_r4;
+    u32 temp_r4_2;
+    u32 temp_r4_3;
+    u32 temp_r4_4;
+
+    temp_r30 = arg0->user_data;
+    it_80275414();
+    it_802754A4(arg0);
+    if ((s32) temp_r30->msid != 2) {
+        temp_r30_2 = arg0->user_data;
+        temp_r31 = temp_r30_2->xBBC_dynamicBoneTable->bones[3];
+        if (temp_r31 == NULL) {
+            __assert(it_804D5380, 0x3EEU, it_804D5388);
+        }
+        temp_f31 = temp_r31->translate.y;
+        if (temp_r31 == NULL) {
+            __assert(it_804D5380, 0x2CBU, it_804D5388);
+        }
+        temp_f30 = temp_r31->rotate.x;
+        if (((u8) temp_r30_2->xDD4_itemVar.pokemon.padding[0] >> 7U) & 1) {
+            Item_80268E5C((HSD_GObj *) arg0, 2, 0x104);
+        } else {
+            Item_80268E5C((HSD_GObj *) arg0, 2, 6);
+        }
+        if (temp_r31 == NULL) {
+            __assert(it_804D5380, 0x3B3U, it_804D5388);
+        }
+        temp_r31->translate.y = temp_f31;
+        if (!(temp_r31->flags & 0x02000000)) {
+            temp_cr0_eq = temp_r31 == NULL;
+            if (temp_cr0_eq == 0) {
+                if (temp_cr0_eq != 0) {
+                    __assert(it_804D5380, 0x234U, it_804D5388);
+                }
+                temp_r4 = temp_r31->flags;
+                var_r3 = 0;
+                if (!(temp_r4 & 0x800000) && (temp_r4 & 0x40)) {
+                    var_r3 = 1;
+                }
+                if (var_r3 == 0) {
+                    HSD_JObjSetMtxDirtySub(temp_r31);
+                }
+            }
+        }
+        if (temp_r31 == NULL) {
+            __assert(it_804D5380, 0x27FU, it_804D5388);
+        }
+        if (temp_r31->flags & 0x20000) {
+            __assert(it_804D5380, 0x280U, it_803F68F8);
+        }
+        temp_r31->rotate.x = temp_f30;
+        if (!(temp_r31->flags & 0x02000000) && (temp_cr0_eq_2 = temp_r31 == NULL, (temp_cr0_eq_2 == 0))) {
+            if (temp_cr0_eq_2 != 0) {
+                __assert(it_804D5380, 0x234U, it_804D5388);
+            }
+            temp_r4_2 = temp_r31->flags;
+            var_r3_2 = 0;
+            if (!(temp_r4_2 & 0x800000) && (temp_r4_2 & 0x40)) {
+                var_r3_2 = 1;
+            }
+            if (var_r3_2 == 0) {
+                HSD_JObjSetMtxDirtySub(temp_r31);
+            }
+        }
+    } else {
+        temp_r30_3 = arg0->user_data;
+        temp_r31_2 = temp_r30_3->xBBC_dynamicBoneTable->bones[3];
+        if (temp_r31_2 == NULL) {
+            __assert(it_804D5380, 0x3EEU, it_804D5388);
+        }
+        temp_f30_2 = temp_r31_2->translate.y;
+        if (temp_r31_2 == NULL) {
+            __assert(it_804D5380, 0x2CBU, it_804D5388);
+        }
+        temp_f31_2 = temp_r31_2->rotate.x;
+        if (((u8) temp_r30_3->xDD4_itemVar.pokemon.padding[0] >> 7U) & 1) {
+            Item_80268E5C((HSD_GObj *) arg0, 2, 0x114);
+        } else {
+            Item_80268E5C((HSD_GObj *) arg0, 2, 0x16);
+        }
+        if (temp_r31_2 == NULL) {
+            __assert(it_804D5380, 0x3B3U, it_804D5388);
+        }
+        temp_r31_2->translate.y = temp_f30_2;
+        if (!(temp_r31_2->flags & 0x02000000)) {
+            temp_cr0_eq_3 = temp_r31_2 == NULL;
+            if (temp_cr0_eq_3 == 0) {
+                if (temp_cr0_eq_3 != 0) {
+                    __assert(it_804D5380, 0x234U, it_804D5388);
+                }
+                temp_r4_3 = temp_r31_2->flags;
+                var_r3_3 = 0;
+                if (!(temp_r4_3 & 0x800000) && (temp_r4_3 & 0x40)) {
+                    var_r3_3 = 1;
+                }
+                if (var_r3_3 == 0) {
+                    HSD_JObjSetMtxDirtySub(temp_r31_2);
+                }
+            }
+        }
+        if (temp_r31_2 == NULL) {
+            __assert(it_804D5380, 0x27FU, it_804D5388);
+        }
+        if (temp_r31_2->flags & 0x20000) {
+            __assert(it_804D5380, 0x280U, it_803F68F8);
+        }
+        temp_r31_2->rotate.x = temp_f31_2;
+        if (!(temp_r31_2->flags & 0x02000000)) {
+            temp_cr0_eq_4 = temp_r31_2 == NULL;
+            if (temp_cr0_eq_4 == 0) {
+                if (temp_cr0_eq_4 != 0) {
+                    __assert(it_804D5380, 0x234U, it_804D5388);
+                }
+                temp_r4_4 = temp_r31_2->flags;
+                var_r3_4 = 0;
+                if (!(temp_r4_4 & 0x800000) && (temp_r4_4 & 0x40)) {
+                    var_r3_4 = 1;
+                }
+                if (var_r3_4 == 0) {
+                    HSD_JObjSetMtxDirtySub(temp_r31_2);
+                }
+            }
+        }
+    }
+}
+
+s32 it_8029E920(HSD_GObj *arg0) {
+    HSD_JObj *temp_r31_3;
+    ItemStateDesc *temp_r4_2;
+    f32 temp_f2;
+    f32 temp_f31;
+    f32 temp_f31_2;
+    Item *temp_r30;
+    Item *temp_r30_2;
+    void *temp_r31;
+    void *temp_r31_2;
+    void *temp_r4;
+
+    if (it_80272C6C(arg0) == 0) {
+        temp_r31 = arg0->user_data;
+        it_80275414(arg0);
+        it_802754A4((Item_GObj *) arg0);
+        if ((s32) temp_r31->unk24 != 2) {
+            it_8029D9A4(arg0, 2, 4);
+        } else {
+            it_8029D9A4(arg0, 2, 0x14);
+        }
+    }
+    temp_r30 = arg0->user_data;
+    temp_f2 = temp_r30->xD44_lifeTimer;
+    temp_r4 = temp_r30->xC4_article_data;
+    M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
+    if (temp_f2 == 0.0f) {
+        it_8029F69C(arg0);
+    } else {
+        M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
+        if ((temp_f2 == (f32) temp_r4->unk4->unkC) && !(((u8) temp_r30->xDD4_itemVar.linkbomb.x0 >> 7U) & 1)) {
+            temp_r31_2 = arg0->hsd_obj;
+            temp_r30->unkD0 = (ItemStateDesc *) (temp_r4->unkC + 0x30);
+            temp_r4_2 = temp_r30->unkD0;
+            if (temp_r4_2 != NULL) {
+                Item_80268D34(arg0, temp_r4_2);
+            }
+            HSD_JObjAnimAll((HSD_JObj *) temp_r31_2);
+            temp_r30->xDD4_itemVar.linkbomb.x0 = (u8) (temp_r30->xDD4_itemVar.linkbomb.x0 | 0x80);
+        }
+        temp_r30->xD44_lifeTimer = (f32) (temp_r30->xD44_lifeTimer - 1.0f);
+        temp_r30_2 = arg0->user_data;
+        if (!(((u8) temp_r30_2->xDD4_itemVar.linkbomb.x0 >> 7U) & 1)) {
+            temp_f31 = temp_r30_2->unkDDC;
+            temp_r31_3 = temp_r30_2->unkBBC->unkC;
+            if (temp_r31_3 == NULL) {
+                __assert(it_804D5380, 0x45AU, it_804D5388);
+            }
+            temp_r31_3->translate.y += temp_f31;
+            if (!(temp_r31_3->flags & 0x02000000)) {
+                ftCo_800C6AFC(temp_r31_3);
+            }
+            temp_f31_2 = temp_r30_2->unkDE0;
+            if (temp_r31_3 == NULL) {
+                __assert(it_804D5380, 0x405U, it_804D5388);
+            }
+            temp_r31_3->rotate.x += temp_f31_2;
+            if (!(temp_r31_3->flags & 0x02000000)) {
+                ftCo_800C6AFC(temp_r31_3);
+            }
+        }
+    }
+    return 0;
+}
+
+void it_8029EAF0(Item_GObj *arg0) {
+    ItemAttr *temp_r4;
+
+    temp_r4 = arg0->user_data->xCC_item_attr;
+    it_80272860(arg0, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
+    it_80274658((HSD_GObj *) arg0, it_804D6D28->x68_float);
+}
+
+s32 it_8029EB3C(HSD_GObj *arg0) {
+    f32 sp20;
+    f32 sp1C;
+    f32 sp18;
+    Item *temp_r5;
+    f32 temp_r4;
+    f32 var_f1;
+    f32 var_f1_2;
+    s32 temp_r3;
+    s32 var_r0;
+    void *temp_r3_2;
+
+    temp_r5 = arg0->user_data;
+    temp_r4 = temp_r5->x40_vel.x;
+    sp18 = temp_r4;
+    sp1C = temp_r5->x40_vel.y;
+    sp20 = temp_r5->x40_vel.z;
+    temp_r3 = it_8026DAA8(temp_r4, temp_r5);
+    if (temp_r3 & 0xF) {
+        var_f1 = sp18;
+        temp_r3_2 = arg0->user_data->xC4_article_data->x4_specialAttributes;
+        if (var_f1 < 0.0f) {
+            var_f1 = -var_f1;
+        }
+        if (!(var_f1 > temp_r3_2->unk24)) {
+            var_f1_2 = sp1C;
+            if (var_f1_2 < 0.0f) {
+                var_f1_2 = -var_f1_2;
+            }
+            if (var_f1_2 > temp_r3_2->unk28) {
+                goto block_7;
+            }
+            var_r0 = 0;
+        } else {
+block_7:
+            it_8029F69C(arg0);
+            var_r0 = 1;
+        }
+        if ((var_r0 == 0) && (temp_r3 & 1)) {
+            it_802762B0(temp_r5);
+            it_80275D5C(arg0, &temp_r5->xC0C);
+            it_8029F18C(arg0);
+        }
+    }
+    return 0;
+}
+
+void it_8029EC34(Item_GObj *arg0) {
+    HSD_JObj *temp_r31;
+    HSD_JObj *temp_r31_2;
+    Item *temp_r30;
+    Item *temp_r30_2;
+    Item *temp_r30_3;
+    f32 temp_f30;
+    f32 temp_f30_2;
+    f32 temp_f31;
+    f32 temp_f31_2;
+    s32 temp_cr0_eq;
+    s32 temp_cr0_eq_2;
+    s32 temp_cr0_eq_3;
+    s32 temp_cr0_eq_4;
+    s32 var_r3;
+    s32 var_r3_2;
+    s32 var_r3_3;
+    s32 var_r3_4;
+    u32 temp_r4;
+    u32 temp_r4_2;
+    u32 temp_r4_3;
+    u32 temp_r4_4;
+
+    temp_r30 = arg0->user_data;
+    it_80275414();
+    it_802754A4(arg0);
+    if ((s32) temp_r30->msid != 3) {
+        temp_r30_2 = arg0->user_data;
+        temp_r31 = temp_r30_2->xBBC_dynamicBoneTable->bones[3];
+        if (temp_r31 == NULL) {
+            __assert(it_804D5380, 0x3EEU, it_804D5388);
+        }
+        temp_f31 = temp_r31->translate.y;
+        if (temp_r31 == NULL) {
+            __assert(it_804D5380, 0x2CBU, it_804D5388);
+        }
+        temp_f30 = temp_r31->rotate.x;
+        if (((u8) temp_r30_2->xDD4_itemVar.pokemon.padding[0] >> 7U) & 1) {
+            Item_80268E5C((HSD_GObj *) arg0, 3, 0x104);
+        } else {
+            Item_80268E5C((HSD_GObj *) arg0, 3, 6);
+        }
+        if (temp_r31 == NULL) {
+            __assert(it_804D5380, 0x3B3U, it_804D5388);
+        }
+        temp_r31->translate.y = temp_f31;
+        if (!(temp_r31->flags & 0x02000000)) {
+            temp_cr0_eq = temp_r31 == NULL;
+            if (temp_cr0_eq == 0) {
+                if (temp_cr0_eq != 0) {
+                    __assert(it_804D5380, 0x234U, it_804D5388);
+                }
+                temp_r4 = temp_r31->flags;
+                var_r3 = 0;
+                if (!(temp_r4 & 0x800000) && (temp_r4 & 0x40)) {
+                    var_r3 = 1;
+                }
+                if (var_r3 == 0) {
+                    HSD_JObjSetMtxDirtySub(temp_r31);
+                }
+            }
+        }
+        if (temp_r31 == NULL) {
+            __assert(it_804D5380, 0x27FU, it_804D5388);
+        }
+        if (temp_r31->flags & 0x20000) {
+            __assert(it_804D5380, 0x280U, it_803F68F8);
+        }
+        temp_r31->rotate.x = temp_f30;
+        if (!(temp_r31->flags & 0x02000000) && (temp_cr0_eq_2 = temp_r31 == NULL, (temp_cr0_eq_2 == 0))) {
+            if (temp_cr0_eq_2 != 0) {
+                __assert(it_804D5380, 0x234U, it_804D5388);
+            }
+            temp_r4_2 = temp_r31->flags;
+            var_r3_2 = 0;
+            if (!(temp_r4_2 & 0x800000) && (temp_r4_2 & 0x40)) {
+                var_r3_2 = 1;
+            }
+            if (var_r3_2 == 0) {
+                HSD_JObjSetMtxDirtySub(temp_r31);
+            }
+        }
+    } else {
+        temp_r30_3 = arg0->user_data;
+        temp_r31_2 = temp_r30_3->xBBC_dynamicBoneTable->bones[3];
+        if (temp_r31_2 == NULL) {
+            __assert(it_804D5380, 0x3EEU, it_804D5388);
+        }
+        temp_f30_2 = temp_r31_2->translate.y;
+        if (temp_r31_2 == NULL) {
+            __assert(it_804D5380, 0x2CBU, it_804D5388);
+        }
+        temp_f31_2 = temp_r31_2->rotate.x;
+        if (((u8) temp_r30_3->xDD4_itemVar.pokemon.padding[0] >> 7U) & 1) {
+            Item_80268E5C((HSD_GObj *) arg0, 3, 0x114);
+        } else {
+            Item_80268E5C((HSD_GObj *) arg0, 3, 0x16);
+        }
+        if (temp_r31_2 == NULL) {
+            __assert(it_804D5380, 0x3B3U, it_804D5388);
+        }
+        temp_r31_2->translate.y = temp_f30_2;
+        if (!(temp_r31_2->flags & 0x02000000)) {
+            temp_cr0_eq_3 = temp_r31_2 == NULL;
+            if (temp_cr0_eq_3 == 0) {
+                if (temp_cr0_eq_3 != 0) {
+                    __assert(it_804D5380, 0x234U, it_804D5388);
+                }
+                temp_r4_3 = temp_r31_2->flags;
+                var_r3_3 = 0;
+                if (!(temp_r4_3 & 0x800000) && (temp_r4_3 & 0x40)) {
+                    var_r3_3 = 1;
+                }
+                if (var_r3_3 == 0) {
+                    HSD_JObjSetMtxDirtySub(temp_r31_2);
+                }
+            }
+        }
+        if (temp_r31_2 == NULL) {
+            __assert(it_804D5380, 0x27FU, it_804D5388);
+        }
+        if (temp_r31_2->flags & 0x20000) {
+            __assert(it_804D5380, 0x280U, it_803F68F8);
+        }
+        temp_r31_2->rotate.x = temp_f31_2;
+        if (!(temp_r31_2->flags & 0x02000000)) {
+            temp_cr0_eq_4 = temp_r31_2 == NULL;
+            if (temp_cr0_eq_4 == 0) {
+                if (temp_cr0_eq_4 != 0) {
+                    __assert(it_804D5380, 0x234U, it_804D5388);
+                }
+                temp_r4_4 = temp_r31_2->flags;
+                var_r3_4 = 0;
+                if (!(temp_r4_4 & 0x800000) && (temp_r4_4 & 0x40)) {
+                    var_r3_4 = 1;
+                }
+                if (var_r3_4 == 0) {
+                    HSD_JObjSetMtxDirtySub(temp_r31_2);
+                }
+            }
+        }
+    }
+}
+
+s32 it_8029EF84(HSD_GObj *arg0) {
+    Item *temp_r30;
+
+    if (it_80272C6C(arg0) == 0) {
+        temp_r30 = arg0->user_data;
+        it_80275414(arg0);
+        it_802754A4((Item_GObj *) arg0);
+        if ((s32) temp_r30->unk24 != 3) {
+            it_8029D9A4(arg0, 3, 4);
+        } else {
+            it_8029D9A4(arg0, 3, 0x14);
+        }
+    }
+    if (it_80272C6C(arg0) == 0) {
+        it_8029D9A4(arg0, 1, 0);
+    }
+    it_8029DB5C(arg0);
+    return 0;
+}
+
+void it_8029F04C(Item_GObj *arg0) {
+    ItemAttr *temp_r4;
+
+    temp_r4 = arg0->user_data->xCC_item_attr;
+    it_80272860(arg0, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
+    it_80274658((HSD_GObj *) arg0, it_804D6D28->x68_float);
+}
+
+s32 it_8029F098(HSD_GObj *arg0) {
+    f32 sp24;
+    f32 sp20;
+    f32 sp1C;
+    Item *temp_r30;
+    f32 temp_r4;
+    f32 var_f1;
+    f32 var_f1_2;
+    s32 temp_r3;
+    s32 var_r0;
+    void *temp_r3_2;
+
+    temp_r30 = arg0->user_data;
+    temp_r4 = temp_r30->x40_vel.x;
+    sp1C = temp_r4;
+    sp20 = temp_r30->x40_vel.y;
+    sp24 = temp_r30->x40_vel.z;
+    temp_r3 = it_8026DAA8(temp_r4);
+    if (temp_r3 & 0xF) {
+        var_f1 = sp1C;
+        temp_r3_2 = arg0->user_data->xC4_article_data->x4_specialAttributes;
+        if (var_f1 < 0.0f) {
+            var_f1 = -var_f1;
+        }
+        if (!(var_f1 > temp_r3_2->unk24)) {
+            var_f1_2 = sp20;
+            if (var_f1_2 < 0.0f) {
+                var_f1_2 = -var_f1_2;
+            }
+            if (var_f1_2 > temp_r3_2->unk28) {
+                goto block_7;
+            }
+            var_r0 = 0;
+        } else {
+block_7:
+            it_8029F69C(arg0);
+            var_r0 = 1;
+        }
+        if ((var_r0 == 0) && (temp_r3 & 1)) {
+            it_802762B0(temp_r30);
+            it_80275D5C(arg0, &temp_r30->xC0C);
+            it_8029F18C(arg0);
+        }
+    }
+    return 0;
+}
+
+void it_8029F18C(HSD_GObj *gobj) {
+    HSD_JObj *temp_r31_2;
+    f32 temp_f30;
+    f32 temp_f31;
+    f32 var_f0;
+    s32 temp_cr0_eq;
+    s32 temp_cr0_eq_2;
+    s32 temp_r0;
+    s32 var_r3;
+    s32 var_r3_2;
+    s32 var_r4;
+    u32 temp_r4;
+    u32 temp_r4_2;
+    Item *temp_r30;
+    void *temp_r31;
+
+    temp_r31 = gobj->user_data;
+    temp_r0 = temp_r31->unk24;
+    if ((temp_r0 != 6) || (temp_r0 != 4)) {
+        M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
+        if (temp_r31->unk40 == 0.0f) {
+            var_f0 = 1.0f;
+        } else {
+            var_f0 = -1.0f;
+        }
+        temp_r31->unkDD8 = var_f0;
+        if (temp_r31->unkDD8 == -1.0f) {
+            var_r4 = -1;
+        } else {
+            var_r4 = 1;
+        }
+        mpColl_800436D8(temp_r31 + 0x378, var_r4);
+        temp_r31->xDD4_itemVar.linkbomb.x0 = (u8) (temp_r31->xDD4_itemVar.linkbomb.x0 | 0x40);
+    } else {
+        temp_r31->xDD4_itemVar.linkbomb.x0 = (u8) (temp_r31->xDD4_itemVar.linkbomb.x0 & ~0x40);
+        temp_r31->unk48 = 0.0f;
+        temp_r31->unk44 = 0.0f;
+        temp_r31->unk40 = 0.0f;
+    }
+    temp_r30 = gobj->user_data;
+    temp_r31_2 = temp_r30->unkBBC->unkC;
+    if (temp_r31_2 == NULL) {
+        __assert(it_804D5380, 0x3EEU, it_804D5388);
+    }
+    temp_f31 = temp_r31_2->translate.y;
+    if (temp_r31_2 == NULL) {
+        __assert(it_804D5380, 0x2CBU, it_804D5388);
+    }
+    temp_f30 = temp_r31_2->rotate.x;
+    if (((u8) temp_r30->xDD4_itemVar.linkbomb.x0 >> 7U) & 1) {
+        Item_80268E5C(gobj, 4, ITEM_CMD_UPDATE);
+    } else {
+        Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+    }
+    if (temp_r31_2 == NULL) {
+        __assert(it_804D5380, 0x3B3U, it_804D5388);
+    }
+    temp_r31_2->translate.y = temp_f31;
+    if (!(temp_r31_2->flags & 0x02000000)) {
+        temp_cr0_eq = temp_r31_2 == NULL;
+        if (temp_cr0_eq == 0) {
+            if (temp_cr0_eq != 0) {
+                __assert(it_804D5380, 0x234U, it_804D5388);
+            }
+            temp_r4 = temp_r31_2->flags;
+            var_r3 = 0;
+            if (!(temp_r4 & 0x800000) && (temp_r4 & 0x40)) {
+                var_r3 = 1;
+            }
+            if (var_r3 == 0) {
+                HSD_JObjSetMtxDirtySub(temp_r31_2);
+            }
+        }
+    }
+    if (temp_r31_2 == NULL) {
+        __assert(it_804D5380, 0x27FU, it_804D5388);
+    }
+    if (temp_r31_2->flags & 0x20000) {
+        __assert(it_804D5380, 0x280U, it_803F68F8);
+    }
+    temp_r31_2->rotate.x = temp_f30;
+    if (!(temp_r31_2->flags & 0x02000000)) {
+        temp_cr0_eq_2 = temp_r31_2 == NULL;
+        if (temp_cr0_eq_2 == 0) {
+            if (temp_cr0_eq_2 != 0) {
+                __assert(it_804D5380, 0x234U, it_804D5388);
+            }
+            temp_r4_2 = temp_r31_2->flags;
+            var_r3_2 = 0;
+            if (!(temp_r4_2 & 0x800000) && (temp_r4_2 & 0x40)) {
+                var_r3_2 = 1;
+            }
+            if (var_r3_2 == 0) {
+                HSD_JObjSetMtxDirtySub(temp_r31_2);
+            }
+        }
+    }
+}
+
+s32 it_8029F3DC(HSD_GObj *arg0) {
+    HSD_JObj *temp_r30_3;
+    ItemStateDesc *temp_r4_2;
+    f32 temp_f2;
+    f32 temp_f31;
+    f32 temp_f31_2;
+    f32 var_f0;
+    s32 temp_r0;
+    s32 var_r4;
+    void *temp_r29;
+    void *temp_r29_2;
+    Item *temp_r30;
+    Item *temp_r30_2;
+    void *temp_r4;
+
+    if (it_80272C6C(arg0) == 0) {
+        temp_r30 = arg0->user_data;
+        temp_r0 = temp_r30->unk24;
+        if ((temp_r0 != 6) || (temp_r0 != 4)) {
+            M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
+            if (temp_r30->unk40 == 0.0f) {
+                var_f0 = 1.0f;
+            } else {
+                var_f0 = -1.0f;
+            }
+            temp_r30->unkDD8 = var_f0;
+            if (temp_r30->unkDD8 == -1.0f) {
+                var_r4 = -1;
+            } else {
+                var_r4 = 1;
+            }
+            mpColl_800436D8(temp_r30 + 0x378, var_r4);
+            temp_r30->xDD4_itemVar.linkbomb.x0 = (u8) (temp_r30->xDD4_itemVar.linkbomb.x0 | 0x40);
+        } else {
+            temp_r30->xDD4_itemVar.linkbomb.x0 = (u8) (temp_r30->xDD4_itemVar.linkbomb.x0 & ~0x40);
+            temp_r30->unk48 = 0.0f;
+            temp_r30->unk44 = 0.0f;
+            temp_r30->unk40 = 0.0f;
+        }
+        it_8029D9A4(arg0, 4, 0);
+    }
+    temp_r29 = arg0->user_data;
+    temp_f2 = temp_r29->xD44_lifeTimer;
+    temp_r4 = temp_r29->xC4_article_data;
+    M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
+    if (temp_f2 == 0.0f) {
+        it_8029F69C(arg0);
+    } else {
+        M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
+        if ((temp_f2 == (f32) temp_r4->unk4->unkC) && !(((u8) temp_r29->xDD4_itemVar.linkbomb.x0 >> 7U) & 1)) {
+            temp_r30_2 = arg0->hsd_obj;
+            temp_r29->unkD0 = (ItemStateDesc *) (temp_r4->unkC + 0x30);
+            temp_r4_2 = temp_r29->unkD0;
+            if (temp_r4_2 != NULL) {
+                Item_80268D34(arg0, temp_r4_2);
+            }
+            HSD_JObjAnimAll((HSD_JObj *) temp_r30_2);
+            temp_r29->xDD4_itemVar.linkbomb.x0 = (u8) (temp_r29->xDD4_itemVar.linkbomb.x0 | 0x80);
+        }
+        temp_r29->xD44_lifeTimer = (f32) (temp_r29->xD44_lifeTimer - 1.0f);
+        temp_r29_2 = arg0->user_data;
+        if (!(((u8) temp_r29_2->xDD4_itemVar.linkbomb.x0 >> 7U) & 1)) {
+            temp_f31 = temp_r29_2->unkDDC;
+            temp_r30_3 = temp_r29_2->unkBBC->unkC;
+            if (temp_r30_3 == NULL) {
+                __assert(it_804D5380, 0x45AU, it_804D5388);
+            }
+            temp_r30_3->translate.y += temp_f31;
+            if (!(temp_r30_3->flags & 0x02000000)) {
+                ftCo_800C6AFC(temp_r30_3);
+            }
+            temp_f31_2 = temp_r29_2->unkDE0;
+            if (temp_r30_3 == NULL) {
+                __assert(it_804D5380, 0x405U, it_804D5388);
+            }
+            temp_r30_3->rotate.x += temp_f31_2;
+            if (!(temp_r30_3->flags & 0x02000000)) {
+                ftCo_800C6AFC(temp_r30_3);
+            }
+        }
+    }
+    return 0;
+}
+
+void it_8029F60C(void *arg0) {
+    f32 temp_f2;
+    f32 var_f1;
+    void *temp_r3;
+    void *temp_r4;
+
+    temp_r4 = arg0->unk2C;
+    temp_r3 = temp_r4->xC4_article_data->unk4;
+    if (((u8) temp_r4->xDD4_itemVar.linkbomb.x0 >> 6U) & 1) {
+        temp_f2 = temp_r4->unk40;
+        if (temp_f2 != 0.0f) {
+            temp_r4->unk40 = (f32) ((temp_r3->unk2C * temp_r4->unkDD8) + temp_f2);
+        }
+        var_f1 = temp_r4->unk40;
+        if (var_f1 < 0.0f) {
+            var_f1 = -var_f1;
+        }
+        if (var_f1 < temp_r3->unk30) {
+            temp_r4->unk40 = 0.0f;
+        }
+    }
+}
+
+s32 it_8029F670(Item_GObj *arg0) {
+    it_8026D62C(arg0, fn_8029E21C);
+    return 0;
+}
+
+void it_8029F69C(Item_GObj *arg0) {
+    f32 sp4C;
+    f32 sp48;
+    f32 sp44;
+    s32 sp40;
+    s32 sp3C;
+    s32 sp38;
+    HSD_GObj *temp_r0;
+    HSD_GObj *temp_r3;
+    HSD_JObj *temp_r28;
+    HSD_JObj *temp_r31;
+    Item *temp_r28_2;
+    Item *temp_r30;
+    f32 temp_f30;
+    f32 temp_f31;
+    s32 temp_cr0_eq;
+    s32 temp_cr0_eq_2;
+    s32 var_r3;
+    s32 var_r3_2;
+    u32 temp_r4;
+    u32 temp_r4_2;
+
+    temp_r30 = arg0->user_data;
+    temp_r28 = arg0->hsd_obj;
+    it_80275444(arg0);
+    if (((u8) temp_r30->unkDCA >> 4U) & 1) {
+        sp38 = it_803B8640.unk0;
+        sp3C = it_803B8640.unk4;
+        sp40 = it_803B8640.unk8;
+        it_8027429C((HSD_GObj *) arg0, (Vec3 *) &sp38);
+        it_802756D0((HSD_GObj *) arg0);
+        temp_r0 = temp_r30->owner;
+        if (temp_r0 != NULL) {
+            temp_r3 = temp_r30->xDD4_itemVar.star.xvel;
+            if (temp_r0 == temp_r3) {
+                ftLk_AttackAir_SetupParts(temp_r3);
+            }
+        }
+    }
+    it_8026B3A8(arg0);
+    it_80273454(arg0);
+    HSD_JObjSetFlagsAll(temp_r28, 0x10U);
+    it_8026BD24(arg0);
+    it_8027518C(arg0);
+    it_802756D0((HSD_GObj *) arg0);
+    it_80272A60(arg0);
+    temp_r28_2 = arg0->user_data;
+    temp_r31 = temp_r28_2->xBBC_dynamicBoneTable->bones[3];
+    if (temp_r31 == NULL) {
+        __assert(it_804D5380, 0x3EEU, it_804D5388);
+    }
+    temp_f31 = temp_r31->translate.y;
+    if (temp_r31 == NULL) {
+        __assert(it_804D5380, 0x2CBU, it_804D5388);
+    }
+    temp_f30 = temp_r31->rotate.x;
+    if (((u8) temp_r28_2->xDD4_itemVar.pokemon.padding[0] >> 7U) & 1) {
+        Item_80268E5C((HSD_GObj *) arg0, 5, ITEM_CMD_UPDATE);
+    } else {
+        Item_80268E5C((HSD_GObj *) arg0, 5, ITEM_ANIM_UPDATE);
+    }
+    if (temp_r31 == NULL) {
+        __assert(it_804D5380, 0x3B3U, it_804D5388);
+    }
+    temp_r31->translate.y = temp_f31;
+    if (!(temp_r31->flags & 0x02000000)) {
+        temp_cr0_eq = temp_r31 == NULL;
+        if (temp_cr0_eq == 0) {
+            if (temp_cr0_eq != 0) {
+                __assert(it_804D5380, 0x234U, it_804D5388);
+            }
+            temp_r4 = temp_r31->flags;
+            var_r3 = 0;
+            if (!(temp_r4 & 0x800000) && (temp_r4 & 0x40)) {
+                var_r3 = 1;
+            }
+            if (var_r3 == 0) {
+                HSD_JObjSetMtxDirtySub(temp_r31);
+            }
+        }
+    }
+    if (temp_r31 == NULL) {
+        __assert(it_804D5380, 0x27FU, it_804D5388);
+    }
+    if (temp_r31->flags & 0x20000) {
+        __assert(it_804D5380, 0x280U, it_803F68F8);
+    }
+    temp_r31->rotate.x = temp_f30;
+    if (!(temp_r31->flags & 0x02000000)) {
+        temp_cr0_eq_2 = temp_r31 == NULL;
+        if (temp_cr0_eq_2 == 0) {
+            if (temp_cr0_eq_2 != 0) {
+                __assert(it_804D5380, 0x234U, it_804D5388);
+            }
+            temp_r4_2 = temp_r31->flags;
+            var_r3_2 = 0;
+            if (!(temp_r4_2 & 0x800000) && (temp_r4_2 & 0x40)) {
+                var_r3_2 = 1;
+            }
+            if (var_r3_2 == 0) {
+                HSD_JObjSetMtxDirtySub(temp_r31);
+            }
+        }
+    }
+    sp44 = temp_r30->pos.x;
+    sp48 = temp_r30->pos.y;
+    sp4C = temp_r30->pos.z;
+    lb_800119DC((Vec3 *) &sp44, 0x78, 1.0f, 0.02f, 1.0471976f);
+}
+
+void it_8029F934(Item_GObj *arg0) {
+    it_802751D8(arg0);
+}
+
+void it_8029F954(void) {
+
+}
+
+s32 it_8029F958(void) {
+    return 0;
+}
+
+s32 it_8029F960(Item_GObj *arg0) {
+    Item *temp_r4;
+    Item *temp_r4_2;
+    f32 var_f1;
+    f32 var_f1_2;
+    s32 var_r0;
+    void *temp_r3;
+    void *temp_r3_2;
+
+    temp_r4 = arg0->user_data;
+    if ((s32) temp_r4->msid != 5) {
+        var_f1 = temp_r4->x40_vel.x;
+        temp_r3 = temp_r4->xC4_article_data->x4_specialAttributes;
+        if (var_f1 < 0.0f) {
+            var_f1 = -var_f1;
+        }
+        if (!(var_f1 > temp_r3->unk24)) {
+            var_f1_2 = temp_r4->x40_vel.y;
+            if (var_f1_2 < 0.0f) {
+                var_f1_2 = -var_f1_2;
+            }
+            if (var_f1_2 > temp_r3->unk28) {
+                goto block_7;
+            }
+            var_r0 = 0;
+        } else {
+block_7:
+            it_8029F69C((HSD_GObj *) arg0);
+            var_r0 = 1;
+        }
+        if (var_r0 == 0) {
+            temp_r4_2 = arg0->user_data;
+            temp_r3_2 = temp_r4_2->xC4_article_data->x4_specialAttributes;
+            temp_r4_2->facing_dir = -temp_r4_2->facing_dir;
+            temp_r4_2->x40_vel.x = temp_r3_2->unk1C * temp_r4_2->facing_dir;
+            temp_r4_2->x40_vel.y = temp_r3_2->unk20;
+        }
+    }
+    return 0;
+}
+
+s32 it_8029FA30(Item_GObj *arg0) {
+    Item *temp_r31;
+    f32 temp_f1;
+    Item *temp_r30;
+
+    temp_r31 = arg0->user_data;
+    temp_r30 = temp_r31->xC4_article_data->x4_specialAttributes;
+    if ((s32) temp_r31->msid != 5) {
+        if ((s32) temp_r31->xCA0 >= (s32) temp_r30->unk10) {
+            it_8029F69C((HSD_GObj *) arg0);
+        } else if (!(((u8) temp_r31->xDD4_itemVar.pokemon.padding[0] >> 5U) & 1)) {
+            if (temp_r31->x40_vel.x > temp_r30->unk30) {
+                temp_r31->facing_dir = -temp_r31->xCCC_incDamageDirection;
+                temp_r31->x40_vel.x = temp_r30->unk14 * temp_r31->facing_dir;
+            } else {
+                temp_f1 = 2.0f * (HSD_Randf() - 0.5f);
+                temp_r31->x40_vel.x = temp_r30->unk14 * temp_f1;
+                it_80272980(arg0, temp_f1);
+            }
+            temp_r31->x40_vel.y = temp_r30->unk18 * temp_r31->facing_dir;
+            temp_r31->xDD4_itemVar.pokemon.padding[0] |= 0x20;
+        }
+    }
+    return 0;
+}
+
+void it_8029FB24(Item_GObj *arg0) {
+    Item_80268E5C((HSD_GObj *) arg0, 6, ITEM_ANIM_UPDATE);
+}
+
+s32 it_8029FB4C(HSD_GObj *arg0) {
+    HSD_JObj *temp_r31_2;
+    ItemStateDesc *temp_r4_2;
+    f32 temp_f2;
+    f32 temp_f31;
+    f32 temp_f31_2;
+    Item *temp_r30;
+    Item *temp_r30_2;
+    void *temp_r31;
+    void *temp_r4;
+
+    if (it_80272C6C(arg0) == 0) {
+        Item_80268E5C(arg0, 6, ITEM_ANIM_UPDATE);
+    }
+    temp_r30 = arg0->user_data;
+    temp_f2 = temp_r30->xD44_lifeTimer;
+    temp_r4 = temp_r30->xC4_article_data;
+    M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
+    if (temp_f2 == 0.0f) {
+        it_8029F69C(arg0);
+    } else {
+        M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
+        if ((temp_f2 == (f32) temp_r4->unk4->unkC) && !(((u8) temp_r30->xDD4_itemVar.linkbomb.x0 >> 7U) & 1)) {
+            temp_r31 = arg0->hsd_obj;
+            temp_r30->unkD0 = (ItemStateDesc *) (temp_r4->unkC + 0x30);
+            temp_r4_2 = temp_r30->unkD0;
+            if (temp_r4_2 != NULL) {
+                Item_80268D34(arg0, temp_r4_2);
+            }
+            HSD_JObjAnimAll((HSD_JObj *) temp_r31);
+            temp_r30->xDD4_itemVar.linkbomb.x0 = (u8) (temp_r30->xDD4_itemVar.linkbomb.x0 | 0x80);
+        }
+        temp_r30->xD44_lifeTimer = (f32) (temp_r30->xD44_lifeTimer - 1.0f);
+        temp_r30_2 = arg0->user_data;
+        if (!(((u8) temp_r30_2->xDD4_itemVar.linkbomb.x0 >> 7U) & 1)) {
+            temp_f31 = temp_r30_2->unkDDC;
+            temp_r31_2 = temp_r30_2->unkBBC->unkC;
+            if (temp_r31_2 == NULL) {
+                __assert(it_804D5380, 0x45AU, it_804D5388);
+            }
+            temp_r31_2->translate.y += temp_f31;
+            if (!(temp_r31_2->flags & 0x02000000)) {
+                ftCo_800C6AFC(temp_r31_2);
+            }
+            temp_f31_2 = temp_r30_2->unkDE0;
+            if (temp_r31_2 == NULL) {
+                __assert(it_804D5380, 0x405U, it_804D5388);
+            }
+            temp_r31_2->rotate.x += temp_f31_2;
+            if (!(temp_r31_2->flags & 0x02000000)) {
+                ftCo_800C6AFC(temp_r31_2);
+            }
+        }
+    }
+    return 0;
+}
+
+void it_8029FCE8(void) {
+
+}
+
+s32 it_8029FCEC(Item_GObj *arg0) {
+    it_8026E8C4(arg0, it_8029F18C, fn_8029E21C);
+    return 0;
+}
+
+s32 it_8029FD20(Item_GObj *arg0) {
+    return it_80273030(arg0);
+}
+
+s32 it_8029FD40(Item_GObj *arg0) {
+    itColl_BounceOffVictim(arg0);
+    return 0;
+}
+
+s32 it_8029FD64(Item_GObj *arg0) {
+    return itColl_BounceOffShield(arg0);
+}
+
+void it_8029FD84(Item_GObj *arg0, Item_GObj *arg1) {
+    Item *temp_r5;
+
+    temp_r5 = arg0->user_data;
+    if ((bitwise u32) temp_r5->xDD4_itemVar.star.xvel == arg1) {
+        temp_r5->xDD4_itemVar.star.xvel = 0.0f;
+    }
+    it_8026B894(arg0, (HSD_GObj *) arg1);
+}
+#endif
