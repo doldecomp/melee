@@ -1,3 +1,5 @@
+#include "ft/ft_0C31.h"
+
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 
@@ -59,6 +61,49 @@ static s8 it_804D5380[8] = { 0x6A, 0x6F, 0x62, 0x6A, 0x2E, 0x68, 0, 0 };
 static s8 it_804D5388[8] = { 0x6A, 0x6F, 0x62, 0x6A, 0, 0, 0, 0 };
 static Vec3 it_803B8640;
 
+
+ItemStateTable it_803F6888[] = {
+    { 0, it_8029E074, it_8029E218, NULL },
+    { 0, it_8029E3D8, it_8029E574, it_8029E5A4 },
+    { 1, it_8029E920, it_8029EAF0, it_8029EB3C },
+    { 1, it_8029EF84, it_8029F04C, it_8029F098 },
+    { 0, it_8029F3DC, it_8029F60C, it_8029F670 },
+    { 2, it_8029F934, it_8029F954, it_8029F958 },
+    { 0, it_8029FB4C, it_8029FCE8, it_8029FCEC },
+};
+
+static inline it_LinkBomb_Inline(HSD_GObj *arg0, Item *item, Article *article, itLinkBombAttributes *sa)
+{
+    Item *item_2;
+    ItemStateDesc *item_state_desc;
+    HSD_GObj *temp_r31;
+
+    f32 temp_f31;
+    f32 temp_f31_2;
+    HSD_JObj *temp_r31_2;
+
+    if ((item->xD44_lifeTimer <= sa->xC) && item->xDD4_itemVar.linkbomb.x0.bits.b0 == 0) {
+        temp_r31 = arg0->hsd_obj;
+        item->xD0_itemStateDesc = &article->xC_itemStates->x0_itemStateDesc[3];
+        item_state_desc = item->xD0_itemStateDesc;
+        if (item_state_desc != NULL) {
+            Item_80268D34(arg0, item_state_desc);
+        }
+        HSD_JObjAnimAll((HSD_JObj *) temp_r31);
+        item->xDD4_itemVar.linkbomb.x0.bits.b0 = true;
+    }
+    item->xD44_lifeTimer = item->xD44_lifeTimer - 1.0f;
+    item_2 = GET_ITEM(arg0);
+    if (item_2->xDD4_itemVar.linkbomb.x0.bits.b0 == 0) {
+        temp_f31 = item_2->xDD4_itemVar.linkbomb.x8;
+        temp_r31_2 = item_2->xBBC_dynamicBoneTable->bones[3];
+        fake_HSD_JObjAddTranslationY(temp_r31_2, temp_f31);
+        temp_f31_2 = item_2->xDD4_itemVar.linkbomb.xC;
+        fake_HSD_JObjAddRotationX(temp_r31_2, temp_f31_2);
+    }
+}
+
+
 void it_8029D968(Item_GObj *arg0) {
     Item *temp_r4;
 
@@ -69,6 +114,7 @@ void it_8029D968(Item_GObj *arg0) {
     }
 }
 
+#if 0
 void it_8029D9A4(HSD_GObj *arg0, s32 arg1, s32 arg2) {
     HSD_JObj *jobj;
     Item *item;
@@ -87,6 +133,7 @@ void it_8029D9A4(HSD_GObj *arg0, s32 arg1, s32 arg2) {
     HSD_JObjSetTranslateY(jobj, temp_f31);
     HSD_JObjSetRotationX(jobj, temp_f30);
 }
+#endif
 
 void it_8029DB5C(HSD_GObj *arg0) {
     HSD_JObj *temp_r31_2;
@@ -127,7 +174,7 @@ void it_8029DB5C(HSD_GObj *arg0) {
         temp_r31_2 = item_2->xBBC_dynamicBoneTable->bones[3];
         HSD_JObjAddTranslationY(temp_r31_2, temp_f31);
         temp_f31_2 = item_2->xDD4_itemVar.linkbomb.xC;
-        HSD_JObjAddRotationX(temp_r31_2, temp_f31_2);
+        fake_HSD_JObjAddRotationX(temp_r31_2, temp_f31_2);
     }
 }
 
@@ -189,186 +236,74 @@ void it_8029DEB0(Item_GObj *arg0) {
     it_8026BCF4(arg0);
 }
 
-s32 it_8029E074(HSD_GObj *arg0) {
-    HSD_JObj *temp_r31_2;
-    ItemStateDesc *item_state_desc;
-    f32 temp_f2;
-    f32 temp_f31;
-    f32 temp_f31_2;
+int it_8029E074(HSD_GObj *arg0) {
     Item *item;
-    Item *item_2;
     Article *article;
     itLinkBombAttributes* sa;
-    HSD_GObj *temp_r31;
+    int pad[5];
 
     if (it_80272C6C(arg0) == 0) {
         it_8029D9A4(arg0, 0, 0);
         it_8026BCF4((Item_GObj *) arg0);
     }
     item = arg0->user_data;
-    temp_f2 = item->xD44_lifeTimer;
     article = item->xC4_article_data;
     sa = article->x4_specialAttributes;
-    if (temp_f2 == 0.0f) {
+    if (item->xD44_lifeTimer <= 0.0f) {
         it_8029F69C(arg0);
     } else {
-        if ((item->xD44_lifeTimer <= sa->xC) && item->xDD4_itemVar.linkbomb.x0.bits.b0 == 0) {
-            temp_r31 = arg0->hsd_obj;
-            item->xD0_itemStateDesc = &article->xC_itemStates->x0_itemStateDesc[3];
-            item_state_desc = item->xD0_itemStateDesc;
-            if (item_state_desc != NULL) {
-                Item_80268D34(arg0, item_state_desc);
-            }
-            HSD_JObjAnimAll((HSD_JObj *) temp_r31);
-            item->xDD4_itemVar.linkbomb.x0.bits.b0 = true;
-        }
-        item->xD44_lifeTimer = item->xD44_lifeTimer - 1.0f;
-        item_2 = arg0->user_data;
-        if (item->xDD4_itemVar.linkbomb.x0.bits.b0 == 0) {
-            temp_f31 = item_2->xDD4_itemVar.linkbomb.x4;
-            temp_r31_2 = item_2->xBBC_dynamicBoneTable->bones[3];
-            HSD_JObjAddTranslationY(temp_r31_2, temp_f31);
-            temp_f31_2 = item_2->xDD4_itemVar.linkbomb.xC;
-            HSD_JObjAddRotationX(temp_r31_2, temp_f31_2);
-        }
+        it_LinkBomb_Inline(arg0, item, article, sa);
+    }
+    return 0;
+}
+
+void it_8029E218(HSD_GObj *arg0) {
+    return;
+}
+
+void fn_8029E21C(HSD_GObj *arg0) {
+    HSD_JObj *jobj;
+    Item *item;
+    f32 x;
+    f32 y;
+    f32 pad[7];
+
+    item = arg0->user_data;
+    jobj = item->xBBC_dynamicBoneTable->bones[3];
+    y = HSD_JObjGetTranslationY(jobj);
+    x = HSD_JObjGetRotationX(jobj);
+    if (item->xDD4_itemVar.linkbomb.x0.bits.b0) {
+        Item_80268E5C(arg0, 1, ITEM_CMD_UPDATE);
+    } else {
+        Item_80268E5C(arg0, 1, ITEM_ANIM_UPDATE);
+    }
+    HSD_JObjSetTranslateY(jobj, y);
+    HSD_JObjSetRotationX(jobj, x);
+}
+
+int it_8029E3D8(HSD_GObj *arg0) {
+    Item *item;
+    Article *article;
+    itLinkBombAttributes* sa;
+    f32 pad[2];
+
+    if (it_80272C6C(arg0) == 0) {
+        it_8029D9A4(arg0, 1, 0);
+    }
+
+    item = GET_ITEM(arg0);
+    article = item->xC4_article_data;
+    sa = article->x4_specialAttributes;
+
+    if (item->xD44_lifeTimer <= 0.0f) {
+        it_8029F69C(arg0);
+    } else {
+        it_LinkBomb_Inline(arg0, item, article, sa);
     }
     return 0;
 }
 
 #if 0
-void it_8029E218(void) {
-
-}
-
-void fn_8029E21C(HSD_GObj *arg0) {
-    HSD_JObj *temp_r31;
-    f32 temp_f30;
-    f32 temp_f31;
-    s32 temp_cr0_eq;
-    s32 temp_cr0_eq_2;
-    s32 var_r3;
-    s32 var_r3_2;
-    u32 temp_r4;
-    u32 temp_r4_2;
-    Item *temp_r30;
-
-    temp_r30 = arg0->user_data;
-    temp_r31 = temp_r30->unkBBC->unkC;
-    if (temp_r31 == NULL) {
-        __assert(it_804D5380, 0x3EEU, it_804D5388);
-    }
-    temp_f31 = temp_r31->translate.y;
-    if (temp_r31 == NULL) {
-        __assert(it_804D5380, 0x2CBU, it_804D5388);
-    }
-    temp_f30 = temp_r31->rotate.x;
-    if (((u8) temp_r30->xDD4_itemVar.linkbomb.x0 >> 7U) & 1) {
-        Item_80268E5C(arg0, 1, ITEM_CMD_UPDATE);
-    } else {
-        Item_80268E5C(arg0, 1, ITEM_ANIM_UPDATE);
-    }
-    if (temp_r31 == NULL) {
-        __assert(it_804D5380, 0x3B3U, it_804D5388);
-    }
-    temp_r31->translate.y = temp_f31;
-    if (!(temp_r31->flags & 0x02000000)) {
-        temp_cr0_eq = temp_r31 == NULL;
-        if (temp_cr0_eq == 0) {
-            if (temp_cr0_eq != 0) {
-                __assert(it_804D5380, 0x234U, it_804D5388);
-            }
-            temp_r4 = temp_r31->flags;
-            var_r3 = 0;
-            if (!(temp_r4 & 0x800000) && (temp_r4 & 0x40)) {
-                var_r3 = 1;
-            }
-            if (var_r3 == 0) {
-                HSD_JObjSetMtxDirtySub(temp_r31);
-            }
-        }
-    }
-    if (temp_r31 == NULL) {
-        __assert(it_804D5380, 0x27FU, it_804D5388);
-    }
-    if (temp_r31->flags & 0x20000) {
-        __assert(it_804D5380, 0x280U, it_803F68F8);
-    }
-    temp_r31->rotate.x = temp_f30;
-    if (!(temp_r31->flags & 0x02000000)) {
-        temp_cr0_eq_2 = temp_r31 == NULL;
-        if (temp_cr0_eq_2 == 0) {
-            if (temp_cr0_eq_2 != 0) {
-                __assert(it_804D5380, 0x234U, it_804D5388);
-            }
-            temp_r4_2 = temp_r31->flags;
-            var_r3_2 = 0;
-            if (!(temp_r4_2 & 0x800000) && (temp_r4_2 & 0x40)) {
-                var_r3_2 = 1;
-            }
-            if (var_r3_2 == 0) {
-                HSD_JObjSetMtxDirtySub(temp_r31);
-            }
-        }
-    }
-}
-
-s32 it_8029E3D8(HSD_GObj *arg0) {
-    HSD_JObj *temp_r31_2;
-    ItemStateDesc *temp_r4_2;
-    f32 temp_f2;
-    f32 temp_f31;
-    f32 temp_f31_2;
-    Item *temp_r30;
-    Item *temp_r30_2;
-    void *temp_r31;
-    void *temp_r4;
-
-    if (it_80272C6C(arg0) == 0) {
-        it_8029D9A4(arg0, 1, 0);
-    }
-    temp_r30 = arg0->user_data;
-    temp_f2 = temp_r30->xD44_lifeTimer;
-    temp_r4 = temp_r30->xC4_article_data;
-    M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
-    if (temp_f2 == 0.0f) {
-        it_8029F69C(arg0);
-    } else {
-        M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
-        if ((temp_f2 == (f32) temp_r4->unk4->unkC) && !(((u8) temp_r30->xDD4_itemVar.linkbomb.x0 >> 7U) & 1)) {
-            temp_r31 = arg0->hsd_obj;
-            temp_r30->unkD0 = (ItemStateDesc *) (temp_r4->unkC + 0x30);
-            temp_r4_2 = temp_r30->unkD0;
-            if (temp_r4_2 != NULL) {
-                Item_80268D34(arg0, temp_r4_2);
-            }
-            HSD_JObjAnimAll((HSD_JObj *) temp_r31);
-            temp_r30->xDD4_itemVar.linkbomb.x0 = (u8) (temp_r30->xDD4_itemVar.linkbomb.x0 | 0x80);
-        }
-        temp_r30->xD44_lifeTimer = (f32) (temp_r30->xD44_lifeTimer - 1.0f);
-        temp_r30_2 = arg0->user_data;
-        if (!(((u8) temp_r30_2->xDD4_itemVar.linkbomb.x0 >> 7U) & 1)) {
-            temp_f31 = temp_r30_2->unkDDC;
-            temp_r31_2 = temp_r30_2->unkBBC->unkC;
-            if (temp_r31_2 == NULL) {
-                __assert(it_804D5380, 0x45AU, it_804D5388);
-            }
-            temp_r31_2->translate.y += temp_f31;
-            if (!(temp_r31_2->flags & 0x02000000)) {
-                ftCo_800C6AFC(temp_r31_2);
-            }
-            temp_f31_2 = temp_r30_2->unkDE0;
-            if (temp_r31_2 == NULL) {
-                __assert(it_804D5380, 0x405U, it_804D5388);
-            }
-            temp_r31_2->rotate.x += temp_f31_2;
-            if (!(temp_r31_2->flags & 0x02000000)) {
-                ftCo_800C6AFC(temp_r31_2);
-            }
-        }
-    }
-    return 0;
-}
-
 void it_8029E574(Item_GObj *arg0) {
     ItemAttr *temp_r4;
 
