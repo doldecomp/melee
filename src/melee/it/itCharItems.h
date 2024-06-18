@@ -39,7 +39,16 @@ typedef struct itLinkBombAttributes {
     /* x4 */ f32 x4;
     /* x8 */ f32 x8;
     /* xC */ u32 xC;
-    /* x10 */ f32 vel[3];
+    /* x10 */ s32 x10;
+    /* x14 */ f32 x14;
+    /* x18 */ f32 x18;
+    /* x1C */ f32 x1C;
+    /* x20 */ f32 x20;
+    /* x24 */ f32 x24;
+    /* x28 */ f32 x28;
+    /* x2C */ f32 x2C;
+    /* x30 */ f32 x30;
+    /* x28 */ f32 vel[3];
 } itLinkBombAttributes;
 
 #endif
