@@ -81,6 +81,7 @@ ItemStateTable it_803F6888[] = {
     { 0, it_8029FB4C, it_8029FCE8, it_8029FCEC },
 };
 
+// TODO: Verify whether sa is required to pass as an argument. article seems like it is.
 static inline it_LinkBomb_Inline(HSD_GObj *arg0, Item *item, Article *article, itLinkBombAttributes *sa)
 {
     Item *item_2;
@@ -901,87 +902,48 @@ int it_8029FA30(Item_GObj *arg0) {
     return 0;
 }
 
-#if 0
 void it_8029FB24(Item_GObj *arg0) {
     Item_80268E5C((HSD_GObj *) arg0, 6, ITEM_ANIM_UPDATE);
 }
 
-s32 it_8029FB4C(HSD_GObj *arg0) {
-    HSD_JObj *temp_r31_2;
-    ItemStateDesc *temp_r4_2;
-    f32 temp_f2;
-    f32 temp_f31;
-    f32 temp_f31_2;
-    Item *temp_r30;
-    Item *temp_r30_2;
-    void *temp_r31;
-    void *temp_r4;
+int it_8029FB4C(HSD_GObj *arg0) {
+    Item *item;
+    Article *article;
+    itLinkBombAttributes* sa;
 
     if (it_80272C6C(arg0) == 0) {
         Item_80268E5C(arg0, 6, ITEM_ANIM_UPDATE);
     }
-    temp_r30 = arg0->user_data;
-    temp_f2 = temp_r30->xD44_lifeTimer;
-    temp_r4 = temp_r30->xC4_article_data;
-    M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
-    if (temp_f2 == 0.0f) {
+    item = GET_ITEM(arg0);
+    article = item->xC4_article_data;
+    sa = article->x4_specialAttributes;
+    if (item->xD44_lifeTimer <= 0.0f) {
         it_8029F69C(arg0);
     } else {
-        M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
-        if ((temp_f2 == (f32) temp_r4->unk4->unkC) && !(((u8) temp_r30->xDD4_itemVar.linkbomb.x0 >> 7U) & 1)) {
-            temp_r31 = arg0->hsd_obj;
-            temp_r30->unkD0 = (ItemStateDesc *) (temp_r4->unkC + 0x30);
-            temp_r4_2 = temp_r30->unkD0;
-            if (temp_r4_2 != NULL) {
-                Item_80268D34(arg0, temp_r4_2);
-            }
-            HSD_JObjAnimAll((HSD_JObj *) temp_r31);
-            temp_r30->xDD4_itemVar.linkbomb.x0 = (u8) (temp_r30->xDD4_itemVar.linkbomb.x0 | 0x80);
-        }
-        temp_r30->xD44_lifeTimer = (f32) (temp_r30->xD44_lifeTimer - 1.0f);
-        temp_r30_2 = arg0->user_data;
-        if (!(((u8) temp_r30_2->xDD4_itemVar.linkbomb.x0 >> 7U) & 1)) {
-            temp_f31 = temp_r30_2->unkDDC;
-            temp_r31_2 = temp_r30_2->unkBBC->unkC;
-            if (temp_r31_2 == NULL) {
-                __assert(it_804D5380, 0x45AU, it_804D5388);
-            }
-            temp_r31_2->translate.y += temp_f31;
-            if (!(temp_r31_2->flags & 0x02000000)) {
-                ftCo_800C6AFC(temp_r31_2);
-            }
-            temp_f31_2 = temp_r30_2->unkDE0;
-            if (temp_r31_2 == NULL) {
-                __assert(it_804D5380, 0x405U, it_804D5388);
-            }
-            temp_r31_2->rotate.x += temp_f31_2;
-            if (!(temp_r31_2->flags & 0x02000000)) {
-                ftCo_800C6AFC(temp_r31_2);
-            }
-        }
+        it_LinkBomb_Inline(arg0, item, article, sa);
     }
     return 0;
 }
 
-void it_8029FCE8(void) {
-
+void it_8029FCE8(HSD_GObj *gobj) {
+    return;
 }
 
-s32 it_8029FCEC(Item_GObj *arg0) {
+int it_8029FCEC(Item_GObj *arg0) {
     it_8026E8C4(arg0, it_8029F18C, fn_8029E21C);
     return 0;
 }
 
-s32 it_8029FD20(Item_GObj *arg0) {
+int it_8029FD20(Item_GObj *arg0) {
     return it_80273030(arg0);
 }
 
-s32 it_8029FD40(Item_GObj *arg0) {
+int it_8029FD40(Item_GObj *arg0) {
     itColl_BounceOffVictim(arg0);
     return 0;
 }
 
-s32 it_8029FD64(Item_GObj *arg0) {
+int it_8029FD64(Item_GObj *arg0) {
     return itColl_BounceOffShield(arg0);
 }
 
@@ -989,9 +951,8 @@ void it_8029FD84(Item_GObj *arg0, Item_GObj *arg1) {
     Item *temp_r5;
 
     temp_r5 = arg0->user_data;
-    if ((bitwise u32) temp_r5->xDD4_itemVar.star.xvel == arg1) {
-        temp_r5->xDD4_itemVar.star.xvel = 0.0f;
+    if (temp_r5->xDD4_itemVar.linkbomb.x10 == arg1) {
+        temp_r5->xDD4_itemVar.linkbomb.x10 = NULL;
     }
     it_8026B894(arg0, (HSD_GObj *) arg1);
 }
-#endif
