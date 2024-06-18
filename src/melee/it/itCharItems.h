@@ -23,8 +23,6 @@ typedef struct {
     u32 x0;
 } itKirbyHammerVars;
 
-<<<<<<< HEAD
-=======
 typedef struct {
     UnkFlagStruct x0;
     u8 x1;
@@ -43,5 +41,4 @@ typedef struct itLinkBombAttributes {
     /* xC */ u32 xC;
 } itLinkBombAttributes;
 
->>>>>>> 8fee7ab (Initial disasm)
 #endif
