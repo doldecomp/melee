@@ -11,6 +11,7 @@
 #include <placeholder.h>
 
 /* 272980 */ void it_80272980(Item_GObj*, f32);
+/* 272A60 */ void it_80272A60(Item_GObj*);
 /* 272CC0 */ HSD_JObj* it_80272CC0(Item_GObj*, enum_t);
 /* 273408 */ void it_80273408(Item_GObj* gobj);
 /* 273670 */ void it_80273670(HSD_GObj*, int, float);
@@ -21,8 +22,9 @@
                               Fighter_Part);
 /* 275070 */ void it_80275070(Item_GObj* gobj, int bone_attach_id);
 /* 2750F8 */ void it_802750F8(Item_GObj*);
-/* 275414 */ void it_80275414(void);
+/* 275414 */ void it_80275414(HSD_GObj*);
 /* 2754A4 */ void it_802754A4(Item_GObj*);
+/* 275D5C */ void it_80275D5C(HSD_GObj*, ECB*);
 /* 276214 */ bool it_80276214(Item_GObj*);
 /* 276CB8 */ void it_80276CB8(Item_GObj* gobj);
 /* 277040 */ bool it_80277040(Item_GObj*);

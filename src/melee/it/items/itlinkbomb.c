@@ -1,3 +1,7 @@
+#include "lb/lb_00F9.h"
+
+#include "ft/chara/ftLink/ftLk_AttackAir.h"
+
 #include "ft/ft_0C31.h"
 
 #include "it/it_266F.h"
@@ -104,7 +108,6 @@ static inline it_LinkBomb_Inline(HSD_GObj *arg0, Item *item, Article *article, i
     }
 }
 
-
 void it_8029D968(Item_GObj *arg0) {
     Item *temp_r4;
 
@@ -115,7 +118,7 @@ void it_8029D968(Item_GObj *arg0) {
     }
 }
 
-static inline it_LinkBomb_Inline_2(HSD_GObj *arg0, enum_t msid, Item_StateChangeFlags arg2)
+static inline void it_LinkBomb_Inline_2(HSD_GObj *arg0, enum_t msid, Item_StateChangeFlags arg2)
 {
     Item *item;
     HSD_JObj *jobj;
@@ -134,26 +137,29 @@ static inline it_LinkBomb_Inline_2(HSD_GObj *arg0, enum_t msid, Item_StateChange
     HSD_JObjSetRotationX(jobj, x);
 }
 
-#if 0
-void it_8029D9A4(HSD_GObj *arg0, s32 arg1, s32 arg2) {
-    HSD_JObj *jobj;
+// TODO: figure out what this is
+static void it_8029D9A4(HSD_GObj *arg0, enum_t msid, Item_StateChangeFlags arg2)
+{
+#if 1
+    it_LinkBomb_Inline_2(arg0, msid, arg2);
+#else
     Item *item;
-    f32 temp_f30;
-    f32 temp_f31;
-
-    item = GET_ITEM(arg0);
+    HSD_JObj *jobj;
+    f32 x;
+    f32 y;
+    item = arg0->user_data;
     jobj = item->xBBC_dynamicBoneTable->bones[3];
-    temp_f31 = HSD_JObjGetTranslationY(jobj);
-    temp_f30 = HSD_JObjGetRotationX(jobj);
-    if (item->xDD4_itemVar.linkbomb.x0.bits.b0 & 1) {
-        Item_80268E5C(arg0, arg1, arg2 | 0x100);
+    y = HSD_JObjGetTranslationY(jobj);
+    x = HSD_JObjGetRotationX(jobj);
+    if (item->xDD4_itemVar.linkbomb.x0.bits.b0) {
+        Item_80268E5C(arg0, msid, arg2 | ITEM_CMD_UPDATE);
     } else {
-        Item_80268E5C(arg0, arg1, arg2 | 2);
+        Item_80268E5C(arg0, msid, arg2 | ITEM_ANIM_UPDATE);
     }
-    HSD_JObjSetTranslateY(jobj, temp_f31);
-    HSD_JObjSetRotationX(jobj, temp_f30);
-}
+    HSD_JObjSetTranslateY(jobj, y);
+    HSD_JObjSetRotationX(jobj, x);
 #endif
+}
 
 void it_8029DB5C(HSD_GObj *arg0) {
     HSD_JObj *temp_r31_2;
@@ -326,7 +332,7 @@ void it_8029E5D0(Item_GObj *arg0) {
     f32 pad[2];
 
     item = GET_ITEM(arg0);
-    it_80275414();
+    it_80275414((HSD_GObj*) arg0);
     it_802754A4(arg0);
     if ((s32) item->msid != 2) {
         it_LinkBomb_Inline_2(arg0, 2, ITEM_DROP_UPDATE);
@@ -335,80 +341,104 @@ void it_8029E5D0(Item_GObj *arg0) {
     }
 }
 
-#if 0
-s32 it_8029E920(HSD_GObj *arg0) {
-    HSD_JObj *temp_r31_3;
-    ItemStateDesc *temp_r4_2;
-    f32 temp_f2;
-    f32 temp_f31;
-    f32 temp_f31_2;
-    Item *temp_r30;
-    Item *temp_r30_2;
-    void *temp_r31;
-    void *temp_r31_2;
-    void *temp_r4;
+int it_8029E920(HSD_GObj *arg0) {
+    Item *item;
+    Article *article;
+    itLinkBombAttributes* sa;
+    f32 pad[2];
+
 
     if (it_80272C6C(arg0) == 0) {
-        temp_r31 = arg0->user_data;
+        item = GET_ITEM(arg0);
         it_80275414(arg0);
         it_802754A4((Item_GObj *) arg0);
-        if ((s32) temp_r31->unk24 != 2) {
+        if ((s32) item->msid != 2) {
             it_8029D9A4(arg0, 2, 4);
         } else {
             it_8029D9A4(arg0, 2, 0x14);
         }
     }
-    temp_r30 = arg0->user_data;
-    temp_f2 = temp_r30->xD44_lifeTimer;
-    temp_r4 = temp_r30->xC4_article_data;
-    M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
-    if (temp_f2 == 0.0f) {
+
+    item = GET_ITEM(arg0);
+    article = item->xC4_article_data;
+    sa = article->x4_specialAttributes;
+
+    if (item->xD44_lifeTimer <= 0.0f) {
         it_8029F69C(arg0);
     } else {
-        M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
-        if ((temp_f2 == (f32) temp_r4->unk4->unkC) && !(((u8) temp_r30->xDD4_itemVar.linkbomb.x0 >> 7U) & 1)) {
-            temp_r31_2 = arg0->hsd_obj;
-            temp_r30->unkD0 = (ItemStateDesc *) (temp_r4->unkC + 0x30);
-            temp_r4_2 = temp_r30->unkD0;
-            if (temp_r4_2 != NULL) {
-                Item_80268D34(arg0, temp_r4_2);
-            }
-            HSD_JObjAnimAll((HSD_JObj *) temp_r31_2);
-            temp_r30->xDD4_itemVar.linkbomb.x0 = (u8) (temp_r30->xDD4_itemVar.linkbomb.x0 | 0x80);
-        }
-        temp_r30->xD44_lifeTimer = (f32) (temp_r30->xD44_lifeTimer - 1.0f);
-        temp_r30_2 = arg0->user_data;
-        if (!(((u8) temp_r30_2->xDD4_itemVar.linkbomb.x0 >> 7U) & 1)) {
-            temp_f31 = temp_r30_2->unkDDC;
-            temp_r31_3 = temp_r30_2->unkBBC->unkC;
-            if (temp_r31_3 == NULL) {
-                __assert(it_804D5380, 0x45AU, it_804D5388);
-            }
-            temp_r31_3->translate.y += temp_f31;
-            if (!(temp_r31_3->flags & 0x02000000)) {
-                ftCo_800C6AFC(temp_r31_3);
-            }
-            temp_f31_2 = temp_r30_2->unkDE0;
-            if (temp_r31_3 == NULL) {
-                __assert(it_804D5380, 0x405U, it_804D5388);
-            }
-            temp_r31_3->rotate.x += temp_f31_2;
-            if (!(temp_r31_3->flags & 0x02000000)) {
-                ftCo_800C6AFC(temp_r31_3);
-            }
-        }
+        it_LinkBomb_Inline(arg0, item, article, sa);
     }
+
     return 0;
 }
 
 void it_8029EAF0(Item_GObj *arg0) {
     ItemAttr *temp_r4;
 
-    temp_r4 = arg0->user_data->xCC_item_attr;
+    temp_r4 = GET_ITEM(arg0)->xCC_item_attr;
     it_80272860(arg0, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
     it_80274658((HSD_GObj *) arg0, it_804D6D28->x68_float);
 }
 
+int it_8029EB3C(HSD_GObj *arg0) {
+    Vec3 vel;
+    Item *item;
+    f32 temp_r4;
+    f32 var_f1;
+    f32 var_f1_2;
+    s32 temp_r3;
+    s32 var_r0;
+    itLinkBombAttributes *sa;
+    int i;
+
+    item = GET_ITEM(arg0);
+    vel = item->x40_vel;
+    temp_r3 = it_8026DAA8(vel.x, arg0);
+    if (temp_r3 & 0xF) {
+        sa = item->xC4_article_data->x4_specialAttributes;
+        var_r0 = 0;
+#if 1
+        for (i = 0; i < 2; i++) {
+            var_f1 = ((f32 *)&vel)[i];
+            if (var_f1 < 0.0f) {
+                var_f1 = -var_f1;
+            }
+            if (var_f1 > sa->vel[i]) {
+                it_8029F69C(arg0);
+                var_r0 = 1;
+                break;
+            } else {
+                var_r0 = 0;
+            }
+        }
+#else
+        var_f1 = vel.x;
+        var_f1_2 = vel.y;
+        if (var_f1 < 0.0f) {
+            var_f1 = -var_f1;
+        }
+        if (var_f1_2 < 0.0f) {
+            var_f1_2 = -var_f1_2;
+        }
+        if (var_f1 > sa->vel[0]) {
+            it_8029F69C(arg0);
+            var_r0 = 1;
+        }
+        else if (var_f1_2 > sa->vel[1]) {
+            it_8029F69C(arg0);
+            var_r0 = 1;
+        }
+#endif
+        if ((var_r0 == 0) && (temp_r3 & 1)) {
+            it_802762B0(item);
+            it_80275D5C(arg0, &item->xC0C);
+            it_8029F18C(arg0);
+        }
+    }
+    return 0;
+}
+
+#if 0
 s32 it_8029EB3C(HSD_GObj *arg0) {
     f32 sp20;
     f32 sp1C;
@@ -455,150 +485,23 @@ block_7:
     }
     return 0;
 }
+#endif
 
 void it_8029EC34(Item_GObj *arg0) {
-    HSD_JObj *temp_r31;
-    HSD_JObj *temp_r31_2;
-    Item *temp_r30;
-    Item *temp_r30_2;
-    Item *temp_r30_3;
-    f32 temp_f30;
-    f32 temp_f30_2;
-    f32 temp_f31;
-    f32 temp_f31_2;
-    s32 temp_cr0_eq;
-    s32 temp_cr0_eq_2;
-    s32 temp_cr0_eq_3;
-    s32 temp_cr0_eq_4;
-    s32 var_r3;
-    s32 var_r3_2;
-    s32 var_r3_3;
-    s32 var_r3_4;
-    u32 temp_r4;
-    u32 temp_r4_2;
-    u32 temp_r4_3;
-    u32 temp_r4_4;
+    Item *item;
+    f32 pad[2];
 
-    temp_r30 = arg0->user_data;
-    it_80275414();
+    item = arg0->user_data;
+    it_80275414((HSD_GObj*) arg0);
     it_802754A4(arg0);
-    if ((s32) temp_r30->msid != 3) {
-        temp_r30_2 = arg0->user_data;
-        temp_r31 = temp_r30_2->xBBC_dynamicBoneTable->bones[3];
-        if (temp_r31 == NULL) {
-            __assert(it_804D5380, 0x3EEU, it_804D5388);
-        }
-        temp_f31 = temp_r31->translate.y;
-        if (temp_r31 == NULL) {
-            __assert(it_804D5380, 0x2CBU, it_804D5388);
-        }
-        temp_f30 = temp_r31->rotate.x;
-        if (((u8) temp_r30_2->xDD4_itemVar.pokemon.padding[0] >> 7U) & 1) {
-            Item_80268E5C((HSD_GObj *) arg0, 3, 0x104);
-        } else {
-            Item_80268E5C((HSD_GObj *) arg0, 3, 6);
-        }
-        if (temp_r31 == NULL) {
-            __assert(it_804D5380, 0x3B3U, it_804D5388);
-        }
-        temp_r31->translate.y = temp_f31;
-        if (!(temp_r31->flags & 0x02000000)) {
-            temp_cr0_eq = temp_r31 == NULL;
-            if (temp_cr0_eq == 0) {
-                if (temp_cr0_eq != 0) {
-                    __assert(it_804D5380, 0x234U, it_804D5388);
-                }
-                temp_r4 = temp_r31->flags;
-                var_r3 = 0;
-                if (!(temp_r4 & 0x800000) && (temp_r4 & 0x40)) {
-                    var_r3 = 1;
-                }
-                if (var_r3 == 0) {
-                    HSD_JObjSetMtxDirtySub(temp_r31);
-                }
-            }
-        }
-        if (temp_r31 == NULL) {
-            __assert(it_804D5380, 0x27FU, it_804D5388);
-        }
-        if (temp_r31->flags & 0x20000) {
-            __assert(it_804D5380, 0x280U, it_803F68F8);
-        }
-        temp_r31->rotate.x = temp_f30;
-        if (!(temp_r31->flags & 0x02000000) && (temp_cr0_eq_2 = temp_r31 == NULL, (temp_cr0_eq_2 == 0))) {
-            if (temp_cr0_eq_2 != 0) {
-                __assert(it_804D5380, 0x234U, it_804D5388);
-            }
-            temp_r4_2 = temp_r31->flags;
-            var_r3_2 = 0;
-            if (!(temp_r4_2 & 0x800000) && (temp_r4_2 & 0x40)) {
-                var_r3_2 = 1;
-            }
-            if (var_r3_2 == 0) {
-                HSD_JObjSetMtxDirtySub(temp_r31);
-            }
-        }
+    if (item->msid != 3) {
+        it_LinkBomb_Inline_2(arg0, 3, ITEM_DROP_UPDATE);
     } else {
-        temp_r30_3 = arg0->user_data;
-        temp_r31_2 = temp_r30_3->xBBC_dynamicBoneTable->bones[3];
-        if (temp_r31_2 == NULL) {
-            __assert(it_804D5380, 0x3EEU, it_804D5388);
-        }
-        temp_f30_2 = temp_r31_2->translate.y;
-        if (temp_r31_2 == NULL) {
-            __assert(it_804D5380, 0x2CBU, it_804D5388);
-        }
-        temp_f31_2 = temp_r31_2->rotate.x;
-        if (((u8) temp_r30_3->xDD4_itemVar.pokemon.padding[0] >> 7U) & 1) {
-            Item_80268E5C((HSD_GObj *) arg0, 3, 0x114);
-        } else {
-            Item_80268E5C((HSD_GObj *) arg0, 3, 0x16);
-        }
-        if (temp_r31_2 == NULL) {
-            __assert(it_804D5380, 0x3B3U, it_804D5388);
-        }
-        temp_r31_2->translate.y = temp_f30_2;
-        if (!(temp_r31_2->flags & 0x02000000)) {
-            temp_cr0_eq_3 = temp_r31_2 == NULL;
-            if (temp_cr0_eq_3 == 0) {
-                if (temp_cr0_eq_3 != 0) {
-                    __assert(it_804D5380, 0x234U, it_804D5388);
-                }
-                temp_r4_3 = temp_r31_2->flags;
-                var_r3_3 = 0;
-                if (!(temp_r4_3 & 0x800000) && (temp_r4_3 & 0x40)) {
-                    var_r3_3 = 1;
-                }
-                if (var_r3_3 == 0) {
-                    HSD_JObjSetMtxDirtySub(temp_r31_2);
-                }
-            }
-        }
-        if (temp_r31_2 == NULL) {
-            __assert(it_804D5380, 0x27FU, it_804D5388);
-        }
-        if (temp_r31_2->flags & 0x20000) {
-            __assert(it_804D5380, 0x280U, it_803F68F8);
-        }
-        temp_r31_2->rotate.x = temp_f31_2;
-        if (!(temp_r31_2->flags & 0x02000000)) {
-            temp_cr0_eq_4 = temp_r31_2 == NULL;
-            if (temp_cr0_eq_4 == 0) {
-                if (temp_cr0_eq_4 != 0) {
-                    __assert(it_804D5380, 0x234U, it_804D5388);
-                }
-                temp_r4_4 = temp_r31_2->flags;
-                var_r3_4 = 0;
-                if (!(temp_r4_4 & 0x800000) && (temp_r4_4 & 0x40)) {
-                    var_r3_4 = 1;
-                }
-                if (var_r3_4 == 0) {
-                    HSD_JObjSetMtxDirtySub(temp_r31_2);
-                }
-            }
-        }
+        it_LinkBomb_Inline_2(arg0, 3, ITEM_HIT_PRESERVE | ITEM_DROP_UPDATE);
     }
 }
+
+#if 0
 
 s32 it_8029EF84(HSD_GObj *arg0) {
     Item *temp_r30;
@@ -886,40 +789,28 @@ s32 it_8029F670(Item_GObj *arg0) {
     return 0;
 }
 
+#endif
 void it_8029F69C(Item_GObj *arg0) {
-    f32 sp4C;
-    f32 sp48;
-    f32 sp44;
-    s32 sp40;
-    s32 sp3C;
-    s32 sp38;
     HSD_GObj *temp_r0;
     HSD_GObj *temp_r3;
-    HSD_JObj *temp_r28;
-    HSD_JObj *temp_r31;
-    Item *temp_r28_2;
-    Item *temp_r30;
-    f32 temp_f30;
-    f32 temp_f31;
-    s32 temp_cr0_eq;
-    s32 temp_cr0_eq_2;
-    s32 var_r3;
-    s32 var_r3_2;
-    u32 temp_r4;
-    u32 temp_r4_2;
+    HSD_JObj *jobj;
+    Item *jobj_2;
+    Item *item;
+    Vec3 const_vec;
+    Vec3 item_pos;
+    f32 pad[2];
 
-    temp_r30 = arg0->user_data;
-    temp_r28 = arg0->hsd_obj;
+    item = GET_ITEM(arg0);
+    jobj = arg0->hsd_obj;
     it_80275444(arg0);
-    if (((u8) temp_r30->unkDCA >> 4U) & 1) {
-        sp38 = it_803B8640.unk0;
-        sp3C = it_803B8640.unk4;
-        sp40 = it_803B8640.unk8;
-        it_8027429C((HSD_GObj *) arg0, (Vec3 *) &sp38);
+    if (item->xDC8_word.flags.x13) {
+        // investigate this
+        const_vec = it_803B8640;
+        it_8027429C((HSD_GObj *) arg0, &const_vec);
         it_802756D0((HSD_GObj *) arg0);
-        temp_r0 = temp_r30->owner;
+        temp_r0 = item->owner;
         if (temp_r0 != NULL) {
-            temp_r3 = temp_r30->xDD4_itemVar.star.xvel;
+            temp_r3 = item->xDD4_itemVar.linkbomb.x10;
             if (temp_r0 == temp_r3) {
                 ftLk_AttackAir_SetupParts(temp_r3);
             }
@@ -927,75 +818,16 @@ void it_8029F69C(Item_GObj *arg0) {
     }
     it_8026B3A8(arg0);
     it_80273454(arg0);
-    HSD_JObjSetFlagsAll(temp_r28, 0x10U);
+    HSD_JObjSetFlagsAll(jobj, 0x10U);
     it_8026BD24(arg0);
     it_8027518C(arg0);
     it_802756D0((HSD_GObj *) arg0);
     it_80272A60(arg0);
-    temp_r28_2 = arg0->user_data;
-    temp_r31 = temp_r28_2->xBBC_dynamicBoneTable->bones[3];
-    if (temp_r31 == NULL) {
-        __assert(it_804D5380, 0x3EEU, it_804D5388);
-    }
-    temp_f31 = temp_r31->translate.y;
-    if (temp_r31 == NULL) {
-        __assert(it_804D5380, 0x2CBU, it_804D5388);
-    }
-    temp_f30 = temp_r31->rotate.x;
-    if (((u8) temp_r28_2->xDD4_itemVar.pokemon.padding[0] >> 7U) & 1) {
-        Item_80268E5C((HSD_GObj *) arg0, 5, ITEM_CMD_UPDATE);
-    } else {
-        Item_80268E5C((HSD_GObj *) arg0, 5, ITEM_ANIM_UPDATE);
-    }
-    if (temp_r31 == NULL) {
-        __assert(it_804D5380, 0x3B3U, it_804D5388);
-    }
-    temp_r31->translate.y = temp_f31;
-    if (!(temp_r31->flags & 0x02000000)) {
-        temp_cr0_eq = temp_r31 == NULL;
-        if (temp_cr0_eq == 0) {
-            if (temp_cr0_eq != 0) {
-                __assert(it_804D5380, 0x234U, it_804D5388);
-            }
-            temp_r4 = temp_r31->flags;
-            var_r3 = 0;
-            if (!(temp_r4 & 0x800000) && (temp_r4 & 0x40)) {
-                var_r3 = 1;
-            }
-            if (var_r3 == 0) {
-                HSD_JObjSetMtxDirtySub(temp_r31);
-            }
-        }
-    }
-    if (temp_r31 == NULL) {
-        __assert(it_804D5380, 0x27FU, it_804D5388);
-    }
-    if (temp_r31->flags & 0x20000) {
-        __assert(it_804D5380, 0x280U, it_803F68F8);
-    }
-    temp_r31->rotate.x = temp_f30;
-    if (!(temp_r31->flags & 0x02000000)) {
-        temp_cr0_eq_2 = temp_r31 == NULL;
-        if (temp_cr0_eq_2 == 0) {
-            if (temp_cr0_eq_2 != 0) {
-                __assert(it_804D5380, 0x234U, it_804D5388);
-            }
-            temp_r4_2 = temp_r31->flags;
-            var_r3_2 = 0;
-            if (!(temp_r4_2 & 0x800000) && (temp_r4_2 & 0x40)) {
-                var_r3_2 = 1;
-            }
-            if (var_r3_2 == 0) {
-                HSD_JObjSetMtxDirtySub(temp_r31);
-            }
-        }
-    }
-    sp44 = temp_r30->pos.x;
-    sp48 = temp_r30->pos.y;
-    sp4C = temp_r30->pos.z;
-    lb_800119DC((Vec3 *) &sp44, 0x78, 1.0f, 0.02f, 1.0471976f);
+    it_LinkBomb_Inline_2((HSD_GObj *)arg0, 5, 0x0);
+    item_pos = item->pos;
+    lb_800119DC(&item_pos, 0x78, 1.0f, 0.02f, 1.0471976f);
 }
-
+#if 0
 void it_8029F934(Item_GObj *arg0) {
     it_802751D8(arg0);
 }

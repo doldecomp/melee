@@ -432,6 +432,15 @@ static inline float HSD_JObjGetTranslationZ(HSD_JObj* jobj)
     return jobj->translate.z;
 }
 
+static inline void HSD_JObjAddRotationX(HSD_JObj* jobj, float x)
+{
+    HSD_ASSERT(1029, jobj);
+    jobj->rotate.x += x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
 static inline void HSD_JObjAddRotationY(HSD_JObj* jobj, float y)
 {
     HSD_ASSERT(1041, jobj);

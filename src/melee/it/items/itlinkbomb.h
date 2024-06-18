@@ -9,7 +9,7 @@
 #include "it/items/types.h"
 
 /* 29D968 */ void it_8029D968(Item_GObj *);
-/* 29D9A4 */ void it_8029D9A4(HSD_GObj *, s32, s32);
+/* 29D9A4 */ void it_8029D9A4(HSD_GObj *arg0, enum_t msid, Item_StateChangeFlags arg2);
 /* 29DB5C */ void it_8029DB5C(HSD_GObj *);
 /* 29DD58 */ HSD_GObj *it_8029DD58(Item_GObj *fighter_gobj, Vec3 *, u8, s32, f32);
 /* 29DEB0 */ void it_8029DEB0(Item_GObj *);
