@@ -24,6 +24,18 @@
 // void it_802754A4(Item_GObj *);                         /* extern */
 // void it_80275D5C(HSD_GObj *, ECB *);                   /* extern */
 
+/// @todo Fix these to be in a single file, not math.h
+#define M_PI 3.14159265358979323846
+#define ABS(x) ((x) < 0 ? -(x) : (x))
+static inline f32 fabs_inline(f32 x)
+{
+    if (x < 0) {
+        return -x;
+    } else {
+        return x;
+    }
+}
+
 static s8 it_803F68F8[0x28] = {
     0x21,
     0x28,
@@ -385,113 +397,42 @@ void it_8029EAF0(Item_GObj *arg0) {
     it_80274658((HSD_GObj *) arg0, it_804D6D28->x68_float);
 }
 
+static inline int it_LinkBomb_Inline_3(HSD_GObj *arg0, Vec3 *vel)
+{
+    Item *item;
+    itLinkBombAttributes *sa;
+    item = GET_ITEM(arg0);
+    sa = item->xC4_article_data->x4_specialAttributes;
+    if (!(fabs_inline(vel->x) > sa->x24) && (fabs_inline(vel->y) > sa->x28)) {
+        it_8029F69C(arg0);
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+static inline void it_LinkBomb_Inline_4(HSD_GObj *arg0, Item *item, Vec3 *vel, s32 temp_r3)
+{
+    if (!it_LinkBomb_Inline_3(arg0, vel) && (temp_r3 & 1)) {
+        it_802762B0(item);
+        it_80275D5C(arg0, &item->xC0C);
+        it_8029F18C(arg0);
+    }
+}
+
 int it_8029EB3C(HSD_GObj *arg0) {
     Vec3 vel;
     Item *item;
-    f32 temp_r4;
-    f32 var_f1;
-    f32 var_f1_2;
     s32 temp_r3;
-    s32 var_r0;
-    itLinkBombAttributes *sa;
-    int i;
 
     item = GET_ITEM(arg0);
     vel = item->x40_vel;
-    temp_r3 = it_8026DAA8(vel.x, arg0);
+    temp_r3 = it_8026DAA8(arg0);
     if (temp_r3 & 0xF) {
-        sa = item->xC4_article_data->x4_specialAttributes;
-        var_r0 = 0;
-#if 1
-        for (i = 0; i < 2; i++) {
-            var_f1 = ((f32 *)&vel)[i];
-            if (var_f1 < 0.0f) {
-                var_f1 = -var_f1;
-            }
-            // TODO: vel is in wrong address!
-            if (var_f1 > sa->vel[i]) {
-                it_8029F69C(arg0);
-                var_r0 = 1;
-                break;
-            } else {
-                var_r0 = 0;
-            }
-        }
-#else
-        var_f1 = vel.x;
-        var_f1_2 = vel.y;
-        if (var_f1 < 0.0f) {
-            var_f1 = -var_f1;
-        }
-        if (var_f1_2 < 0.0f) {
-            var_f1_2 = -var_f1_2;
-        }
-        if (var_f1 > sa->vel[0]) {
-            it_8029F69C(arg0);
-            var_r0 = 1;
-        }
-        else if (var_f1_2 > sa->vel[1]) {
-            it_8029F69C(arg0);
-            var_r0 = 1;
-        }
-#endif
-        if ((var_r0 == 0) && (temp_r3 & 1)) {
-            it_802762B0(item);
-            it_80275D5C(arg0, &item->xC0C);
-            it_8029F18C(arg0);
-        }
+        it_LinkBomb_Inline_4(arg0, item, &vel, temp_r3);
     }
     return 0;
 }
-
-#if 0
-s32 it_8029EB3C(HSD_GObj *arg0) {
-    f32 sp20;
-    f32 sp1C;
-    f32 sp18;
-    Item *temp_r5;
-    f32 temp_r4;
-    f32 var_f1;
-    f32 var_f1_2;
-    s32 temp_r3;
-    s32 var_r0;
-    void *temp_r3_2;
-
-    temp_r5 = arg0->user_data;
-    temp_r4 = temp_r5->x40_vel.x;
-    sp18 = temp_r4;
-    sp1C = temp_r5->x40_vel.y;
-    sp20 = temp_r5->x40_vel.z;
-    temp_r3 = it_8026DAA8(temp_r4, temp_r5);
-    if (temp_r3 & 0xF) {
-        var_f1 = sp18;
-        temp_r3_2 = arg0->user_data->xC4_article_data->x4_specialAttributes;
-        if (var_f1 < 0.0f) {
-            var_f1 = -var_f1;
-        }
-        if (!(var_f1 > temp_r3_2->unk24)) {
-            var_f1_2 = sp1C;
-            if (var_f1_2 < 0.0f) {
-                var_f1_2 = -var_f1_2;
-            }
-            if (var_f1_2 > temp_r3_2->unk28) {
-                goto block_7;
-            }
-            var_r0 = 0;
-        } else {
-block_7:
-            it_8029F69C(arg0);
-            var_r0 = 1;
-        }
-        if ((var_r0 == 0) && (temp_r3 & 1)) {
-            it_802762B0(temp_r5);
-            it_80275D5C(arg0, &temp_r5->xC0C);
-            it_8029F18C(arg0);
-        }
-    }
-    return 0;
-}
-#endif
 
 void it_8029EC34(Item_GObj *arg0) {
     Item *item;
@@ -537,56 +478,20 @@ void it_8029F04C(Item_GObj *arg0) {
     it_80274658((HSD_GObj *) arg0, it_804D6D28->x68_float);
 }
 
-#if 0
 
-s32 it_8029F098(HSD_GObj *arg0) {
-    f32 sp24;
-    f32 sp20;
-    f32 sp1C;
-    Item *temp_r30;
-    f32 temp_r4;
-    f32 var_f1;
-    f32 var_f1_2;
+int it_8029F098(HSD_GObj *arg0) {
+    Vec3 vel;
+    Item *item;
     s32 temp_r3;
-    s32 var_r0;
-    void *temp_r3_2;
 
-    temp_r30 = arg0->user_data;
-    temp_r4 = temp_r30->x40_vel.x;
-    sp1C = temp_r4;
-    sp20 = temp_r30->x40_vel.y;
-    sp24 = temp_r30->x40_vel.z;
-    temp_r3 = it_8026DAA8(temp_r4);
+    item = GET_ITEM(arg0);
+    vel = item->x40_vel;
+    temp_r3 = it_8026DAA8(arg0);
     if (temp_r3 & 0xF) {
-        var_f1 = sp1C;
-        temp_r3_2 = arg0->user_data->xC4_article_data->x4_specialAttributes;
-        if (var_f1 < 0.0f) {
-            var_f1 = -var_f1;
-        }
-        if (!(var_f1 > temp_r3_2->unk24)) {
-            var_f1_2 = sp20;
-            if (var_f1_2 < 0.0f) {
-                var_f1_2 = -var_f1_2;
-            }
-            if (var_f1_2 > temp_r3_2->unk28) {
-                goto block_7;
-            }
-            var_r0 = 0;
-        } else {
-block_7:
-            it_8029F69C(arg0);
-            var_r0 = 1;
-        }
-        if ((var_r0 == 0) && (temp_r3 & 1)) {
-            it_802762B0(temp_r30);
-            it_80275D5C(arg0, &temp_r30->xC0C);
-            it_8029F18C(arg0);
-        }
+        it_LinkBomb_Inline_4(arg0, item, &vel, temp_r3);
     }
     return 0;
 }
-
-#endif
 
 void it_8029F18C(HSD_GObj *gobj) {
     f32 var_f0;
@@ -829,6 +734,26 @@ void it_8029F954(HSD_GObj *gobj) {
 }
 
 int it_8029F958(HSD_GObj *gobj) {
+    return 0;
+}
+
+int it_8029F960(Item_GObj *arg0) {
+    Item *item;
+    Item *item_2;
+    s32 temp_r3;
+    itLinkBombAttributes *sa;
+
+    item = GET_ITEM(arg0);
+    if (item->msid != 5) {
+        // TODO(fox): This isn't the same inline.
+        if (!it_LinkBomb_Inline_3(arg0, &item->x40_vel)) {
+            item_2 = GET_ITEM(arg0);
+            sa = item_2->xC4_article_data->x4_specialAttributes;
+            item_2->facing_dir = -item_2->facing_dir;
+            item_2->x40_vel.x = sa->x1C * item_2->facing_dir;
+            item_2->x40_vel.y = sa->x20;
+        }
+    }
     return 0;
 }
 

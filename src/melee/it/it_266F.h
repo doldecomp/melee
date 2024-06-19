@@ -17,7 +17,7 @@
 /* 26D62C */ void it_8026D62C(Item_GObj*, HSD_GObjEvent);
 /* 26D9A0 */ bool it_8026D9A0(Item_GObj*);
 /* 26DA08 */ bool it_8026DA08(Item_GObj*);
-/* 26DAA8 */ s32 it_8026DAA8(f32, Item_GObj*);
+/* 26DAA8 */ s32 it_8026DAA8(Item_GObj*);
 /* 26DF34 */ bool it_8026DF34(void);
 /* 26DFB0 */ bool it_8026DFB0(void);
 /* 26E0F4 */ void it_8026E0F4(Item_GObj*);
