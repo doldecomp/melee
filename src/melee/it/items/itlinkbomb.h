@@ -9,10 +9,10 @@
 #include "it/items/types.h"
 
 /* 29D968 */ void it_8029D968(Item_GObj *);
-/* 29D9A4 */ void it_8029D9A4(HSD_GObj *arg0, enum_t msid, Item_StateChangeFlags arg2);
+/* 29D9A4 */ void it_8029D9A4(HSD_GObj *, enum_t, Item_StateChangeFlags);
 /* 29DB5C */ void it_8029DB5C(HSD_GObj *);
 /* 29DD58 */ HSD_GObj *it_8029DD58(Item_GObj *fighter_gobj, Vec3 *, u8, s32, f32);
-/* 29DEB0 */ void it_8029DEB0(Item_GObj *);
+/* 29DEB0 */ void it_8029DEB0(HSD_GObj *);
 /* 29E074 */ int it_8029E074(HSD_GObj *);
 /* 29E218 */ void it_8029E218(HSD_GObj *);
 /* 29E21C */ void fn_8029E21C(HSD_GObj *);
@@ -35,7 +35,7 @@
 /* 29F934 */ int it_8029F934(Item_GObj *);
 /* 29F954 */ void it_8029F954(HSD_GObj *);
 /* 29F958 */ int it_8029F958(HSD_GObj *);
-/* 29F960 */ int it_8029F960(Item_GObj *);
+/* 29F960 */ int it_8029F960(HSD_GObj *);
 /* 29FA30 */ int it_8029FA30(Item_GObj *);
 /* 29FB24 */ void it_8029FB24(Item_GObj *);
 /* 29FB4C */ int it_8029FB4C(HSD_GObj *);

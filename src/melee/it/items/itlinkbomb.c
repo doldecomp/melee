@@ -94,7 +94,7 @@ ItemStateTable it_803F6888[] = {
 };
 
 // TODO: Verify whether sa is required to pass as an argument. article seems like it is.
-static inline fake_it_LinkBomb_Inline(HSD_GObj *arg0, Item *item, Article *article, itLinkBombAttributes *sa)
+static inline void fake_it_LinkBomb_Inline(HSD_GObj *arg0, Item *item, Article *article, itLinkBombAttributes *sa)
 {
     Item *item_2;
     ItemStateDesc *item_state_desc;
@@ -125,7 +125,7 @@ static inline fake_it_LinkBomb_Inline(HSD_GObj *arg0, Item *item, Article *artic
     }
 }
 
-static inline real_it_LinkBomb_Inline(HSD_GObj *arg0, Item *item, Article *article, itLinkBombAttributes *sa)
+static inline void real_it_LinkBomb_Inline(HSD_GObj *arg0, Item *item, Article *article, itLinkBombAttributes *sa)
 {
     Item *item_2;
     ItemStateDesc *item_state_desc;
@@ -256,13 +256,13 @@ HSD_GObj *it_8029DD58(Item_GObj *fighter_gobj, Vec3 *arg1, u8 arg2, s32 arg3, f3
     return (HSD_GObj *) temp_r3;
 }
 
-void it_8029DEB0(Item_GObj *arg0) {
+void it_8029DEB0(HSD_GObj *arg0) {
     HSD_JObj *jobj;
     Item *item;
     f32 temp_f30;
     f32 temp_f31;
 
-    it_8029D9A4_inline(arg0, 0, 0x0);
+    it_8029D9A4_inline(arg0, 0, 0);
     it_8026BCF4(arg0);
 }
 
@@ -722,7 +722,7 @@ int it_8029F958(HSD_GObj *gobj) {
     return 0;
 }
 
-int it_8029F960(Item_GObj *arg0) {
+int it_8029F960(HSD_GObj *arg0) {
     Item *item;
     Item *item_2;
     s32 temp_r3;
