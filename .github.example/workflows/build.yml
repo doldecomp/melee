@@ -20,7 +20,7 @@ jobs:
     steps:
     # Checkout the repository (shallow clone)
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
         submodules: recursive
@@ -57,7 +57,7 @@ jobs:
 
     # Upload map files
     - name: Upload map
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.version }}_maps
         path: build/${{ matrix.version }}/**/*.MAP
