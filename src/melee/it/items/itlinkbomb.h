@@ -11,13 +11,13 @@
 /* 29D968 */ void it_8029D968(Item_GObj *);
 /* 29D9A4 */ void it_8029D9A4(HSD_GObj *, enum_t, Item_StateChangeFlags);
 /* 29DB5C */ void it_8029DB5C(HSD_GObj *);
-/* 29DD58 */ HSD_GObj *it_8029DD58(Item_GObj *fighter_gobj, Vec3 *, u8, s32, f32);
+/* 29DD58 */ HSD_GObj *it_8029DD58(Item_GObj *fighter_gobj, Vec3 *, u8, int, f32);
 /* 29DEB0 */ void it_8029DEB0(HSD_GObj *);
 /* 29E074 */ int it_8029E074(HSD_GObj *);
 /* 29E218 */ void it_8029E218(HSD_GObj *);
 /* 29E21C */ void fn_8029E21C(HSD_GObj *);
 /* 29E3D8 */ int it_8029E3D8(HSD_GObj *);
-/* 29E574 */ void it_8029E574(Item_GObj *);
+/* 29E574 */ void it_8029E574(HSD_GObj *);
 /* 29E5A4 */ int it_8029E5A4(Item_GObj *);
 /* 29E5D0 */ void it_8029E5D0(Item_GObj *);
 /* 29E920 */ int it_8029E920(HSD_GObj *);
