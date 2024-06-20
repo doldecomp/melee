@@ -185,7 +185,7 @@ static inline void it_8029D9A4_inline(HSD_GObj *arg0, enum_t msid, Item_StateCha
 
 static void it_8029D9A4(HSD_GObj *arg0, enum_t msid, Item_StateChangeFlags arg2)
 {
-#if 1
+#if 0
     it_8029D9A4_inline(arg0, msid, arg2);
 #else
     Item *item;
@@ -234,14 +234,16 @@ HSD_GObj *it_8029DD58(Item_GObj *fighter_gobj, Vec3 *arg1, u8 arg2, s32 arg3, f3
     it_8026BB68(fighter_gobj, &spawn.pos);
     spawn.facing_dir = arg4;
     spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
+    spawn.vel.z = 0.0F;
+    spawn.vel.y = 0.0F;
+    spawn.vel.x = 0.0F;
     spawn.x0_parent_gobj = fighter_gobj;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
     spawn.x44_flag.bits.b0 = true;
     spawn.x40 = 0;
     temp_r3 = Item_80268B18(&spawn);
     if (temp_r3 != NULL) {
-        item = GET_ITEM(temp_r3->user_data);
+        item = GET_ITEM(temp_r3);
         attr = item->xC4_article_data->x4_specialAttributes;
         it_80275158((HSD_GObj *) temp_r3, attr->lifetime);
         item->xDD4_itemVar.linkbomb.x0.bits.b0 = false;
@@ -262,7 +264,7 @@ void it_8029DEB0(HSD_GObj *arg0) {
     f32 temp_f30;
     f32 temp_f31;
 
-    it_8029D9A4_inline(arg0, 0, 0);
+    it_8029D9A4(arg0, 0, 0);
     it_8026BCF4(arg0);
 }
 
@@ -273,8 +275,7 @@ int it_8029E074(HSD_GObj *arg0) {
     int pad[5];
 
     if (it_80272C6C(arg0) == 0) {
-        it_8029D9A4(arg0, 0, 0);
-        it_8026BCF4((Item_GObj *) arg0);
+        it_8029DEB0(arg0);
     }
     item = arg0->user_data;
     article = item->xC4_article_data;
@@ -294,7 +295,7 @@ void it_8029E218(HSD_GObj *arg0) {
 void fn_8029E21C(HSD_GObj *arg0) {
     f32 pad[3];
 
-    it_8029D9A4_inline(arg0, 1, 0x0);
+    it_8029D9A4(arg0, 1, 0x0);
 }
 
 int it_8029E3D8(HSD_GObj *arg0) {
@@ -304,7 +305,7 @@ int it_8029E3D8(HSD_GObj *arg0) {
     f32 pad[2];
 
     if (it_80272C6C(arg0) == 0) {
-        it_8029D9A4(arg0, 1, 0);
+        fn_8029E21C(arg0);
     }
 
     item = GET_ITEM(arg0);
@@ -339,9 +340,9 @@ void it_8029E5D0(Item_GObj *arg0) {
     it_80275414((HSD_GObj*) arg0);
     it_802754A4(arg0);
     if ((s32) item->msid != 2) {
-        it_8029D9A4_inline(arg0, 2, ITEM_DROP_UPDATE);
+        it_8029D9A4(arg0, 2, ITEM_DROP_UPDATE);
     } else {
-        it_8029D9A4_inline(arg0, 2, ITEM_HIT_PRESERVE | ITEM_DROP_UPDATE);
+        it_8029D9A4(arg0, 2, ITEM_HIT_PRESERVE | ITEM_DROP_UPDATE);
     }
 }
 
@@ -349,18 +350,11 @@ int it_8029E920(HSD_GObj *arg0) {
     Item *item;
     Article *article;
     itLinkBombAttributes* sa;
-    f32 pad[2];
 
 
     if (it_80272C6C(arg0) == 0) {
         item = GET_ITEM(arg0);
-        it_80275414(arg0);
-        it_802754A4((Item_GObj *) arg0);
-        if ((s32) item->msid != 2) {
-            it_8029D9A4(arg0, 2, 4);
-        } else {
-            it_8029D9A4(arg0, 2, 0x14);
-        }
+        it_8029E5D0(arg0);
     }
 
     item = GET_ITEM(arg0);
@@ -429,9 +423,9 @@ void it_8029EC34(Item_GObj *arg0) {
     it_80275414((HSD_GObj*) arg0);
     it_802754A4(arg0);
     if (item->msid != 3) {
-        it_8029D9A4_inline(arg0, 3, ITEM_DROP_UPDATE);
+        it_8029D9A4(arg0, 3, ITEM_DROP_UPDATE);
     } else {
-        it_8029D9A4_inline(arg0, 3, ITEM_HIT_PRESERVE | ITEM_DROP_UPDATE);
+        it_8029D9A4(arg0, 3, ITEM_HIT_PRESERVE | ITEM_DROP_UPDATE);
     }
 }
 
@@ -441,17 +435,10 @@ int it_8029EF84(HSD_GObj *arg0) {
     f32 pad[5];
 
     if (it_80272C6C(arg0) == 0) {
-        item = GET_ITEM(arg0);
-        it_80275414(arg0);
-        it_802754A4((Item_GObj *) arg0);
-        if (item->msid != 3) {
-            it_8029D9A4(arg0, 3, ITEM_DROP_UPDATE);
-        } else {
-            it_8029D9A4(arg0, 3, ITEM_HIT_PRESERVE | ITEM_DROP_UPDATE);
-        }
+        it_8029EC34(arg0);
     }
     if (it_80272C6C(arg0) == 0) {
-        it_8029D9A4(arg0, 1, 0);
+        fn_8029E21C(arg0);
     }
     it_8029DB5C(arg0);
     return 0;
@@ -498,9 +485,13 @@ static inline s32 float_sign_int_inline(f32 x)
     }
 }
 
-static inline void it_LinkBomb_Inline_5(Item *item)
-{
+void it_8029F18C(HSD_GObj *gobj) {
+    s32 var_r4;
+    Item *item;
     s32 temp_r0;
+
+    item = gobj->user_data;
+
     temp_r0 = item->msid;
     if ((temp_r0 != 6) || (temp_r0 != 4)) {
         item->xDD4_itemVar.linkbomb.x4 = fsign_inline(item->x40_vel.x);
@@ -512,17 +503,8 @@ static inline void it_LinkBomb_Inline_5(Item *item)
         item->x40_vel.y = 0.0f;
         item->x40_vel.x = 0.0f;
     }
-}
 
-
-
-void it_8029F18C(HSD_GObj *gobj) {
-    s32 var_r4;
-    Item *item;
-
-    item = gobj->user_data;
-    it_LinkBomb_Inline_5(item);
-    it_8029D9A4_inline(gobj, 4, 0);
+    it_8029D9A4(gobj, 4, 0);
 }
 
 int it_8029F3DC(HSD_GObj *gobj) {
@@ -533,30 +515,15 @@ int it_8029F3DC(HSD_GObj *gobj) {
     itLinkBombAttributes* sa;
 
     if (it_80272C6C(gobj) == 0) {
-        item = gobj->user_data;
-#if 0
-        it_LinkBomb_Inline_5(item);
-#else
-        temp_r0 = item->msid;
-        if ((temp_r0 != 6) || (temp_r0 != 4)) {
-            item->xDD4_itemVar.linkbomb.x4 = fsign_inline(item->x40_vel.x);
-            mpColl_800436D8(&item->x378_itemColl, float_sign_int_inline(item->xDD4_itemVar.linkbomb.x4));
-            item->xDD4_itemVar.linkbomb.x0.bits.b1 = true;
-        } else {
-            item->xDD4_itemVar.linkbomb.x0.bits.b1 = false;
-            item->x40_vel.z = 0.0f;
-            item->x40_vel.y = 0.0f;
-            item->x40_vel.x = 0.0f;
-        }
-#endif
-        it_8029D9A4(gobj, 4, 0);
-        article = item->xC4_article_data;
-        sa = article->x4_specialAttributes;
-        if (item->xD44_lifeTimer <= 0.0f) {
-            it_8029F69C(gobj);
-        } else {
-            fake_it_LinkBomb_Inline(gobj, item, article, sa);
-        }
+        it_8029F18C(gobj);
+    }
+    item = gobj->user_data;
+    article = item->xC4_article_data;
+    sa = article->x4_specialAttributes;
+    if (item->xD44_lifeTimer <= 0.0f) {
+        it_8029F69C(gobj);
+    } else {
+        fake_it_LinkBomb_Inline(gobj, item, article, sa);
     }
     return 0;
 }
