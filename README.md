@@ -32,17 +32,20 @@ References
 Projects using this structure:
 
 - [zeldaret/tww](https://github.com/zeldaret/tww)
+- [zeldaret/oot-gc](https://github.com/zeldaret/oot-gc)
+- [zeldaret/ss](https://github.com/zeldaret/ss)
 - [PrimeDecomp/prime](https://github.com/PrimeDecomp/prime)
 - [PrimeDecomp/echoes](https://github.com/PrimeDecomp/echoes)
 - [DarkRTA/rb3](https://github.com/DarkRTA/rb3)
 - [doldecomp/melee](https://github.com/doldecomp/melee)
 - [doldecomp/sadx](https://github.com/doldecomp/sadx)
 - [InputEvelution/wp](https://github.com/InputEvelution/wp)
-- [lepelog/ss-dtk](https://github.com/lepelog/ss-dtk)
 - [NWPlayer123/AnimalCrossing-dtk](https://github.com/NWPlayer123/AnimalCrossing-dtk)
-- [Rainchus/mp4-dtk](https://github.com/Rainchus/mp4-dtk)
+- [Rainchus/marioparty4](https://github.com/Rainchus/marioparty4)
 - [Rainchus/ttyd_dtk](https://github.com/Rainchus/ttyd_dtk)
 - [Sage-of-Mirrors/zmansion](https://github.com/Sage-of-Mirrors/zmansion)
+- [bfbbdecomp/bfbb](https://github.com/bfbbdecomp/bfbb)
+- [EstexNT/rhf-dtk](https://github.com/EstexNT/rhf-dtk)
 
 Features
 --------
