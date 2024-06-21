@@ -223,6 +223,11 @@ typedef struct FFlowerVars {
     uint x4;
 } FFlowerVars;
 
+typedef struct FFlowerFlameVars {
+    /* +0 */ Vec3 pos;
+    /* +C */ f32 unk;
+} FFlowerFlameVars;
+
 typedef struct HassamVars {
     f32 x0;
     f32 x4;
