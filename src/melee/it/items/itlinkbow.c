@@ -8,6 +8,14 @@
 
 #include <baselib/gobj.h>
 
+/* 2AF32C */ static void it_802AF32C(HSD_GObj*);
+/* 2AF64C */ static int it_802AF64C(HSD_GObj*);
+/* 2AF844 */ static void it_802AF844(HSD_GObj*);
+/* 2AF848 */ static int it_802AF848(HSD_GObj*);
+/* 2AF90C */ static int it_802AF90C(HSD_GObj*);
+/* 2AF914 */ static void it_802AF914(HSD_GObj*);
+/* 2AF918 */ static int it_802AF918(HSD_GObj*);
+
 ItemStateTable it_803F6E98[] = { { 0, it_802AF64C, it_802AF844, it_802AF848 },
                                  { 1, it_802AF64C, it_802AF844, it_802AF848 },
                                  { 2, it_802AF64C, it_802AF844, it_802AF848 },
