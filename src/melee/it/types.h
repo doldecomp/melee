@@ -560,6 +560,7 @@ struct Item {
         FoxLaserVars foxlaser;
         FoxIllusionVars foxillusion;
         itKirbyHammerVars kirbyhammer;
+        itLinkBowVars linkbow;
         itShellVars shell;
         itTargetVars target;
         CoinVars coin;
