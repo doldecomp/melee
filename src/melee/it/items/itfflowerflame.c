@@ -6,6 +6,22 @@
 #include "it/it_266F.h"
 #include "it/item.h"
 
+/* 29AA1C */ static void it_8029AA1C(HSD_GObj*);
+/* 29AA6C */ static int it_8029AA6C(Item_GObj*);
+/* 29AB60 */ static void it_8029AB60(HSD_GObj*);
+/* 29AB64 */ static int it_8029AB64(Item_GObj*);
+/* 29AB90 */ static void it_8029AB90(HSD_GObj*);
+/* 29ABCC */ static int it_8029ABCC(Item_GObj*);
+/* 29ACCC */ static void it_8029ACCC(Item_GObj*);
+/* 29ACFC */ static int it_8029ACFC(HSD_GObj*);
+/* 29AD58 */ static int it_8029AD58(Item_GObj*);
+/* 29ADD0 */ static int it_8029ADD0(Item_GObj*);
+/* 29AED0 */ static void it_8029AED0(Item_GObj*);
+/* 29AF00 */ static int it_8029AF00(Item_GObj*);
+/* 29AF70 */ static int it_8029AF70(Item_GObj*);
+/* 29B070 */ static void it_8029B070(HSD_GObj*);
+/* 29B074 */ static int it_8029B074(Item_GObj*);
+
 ItemStateTable it_803F66C8[] = {
     { 0, it_8029AA6C, it_8029AB60, it_8029AB64 },
     { 0, it_8029ABCC, it_8029ACCC, it_8029ACFC },
