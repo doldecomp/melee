@@ -23,4 +23,9 @@ typedef struct {
     u32 x0;
 } itKirbyHammerVars;
 
+typedef struct {
+    f32 x0;
+    HSD_GObj *x4;
+} itLinkBowVars;
+
 #endif
