@@ -404,7 +404,7 @@
 /* 0FB394 */ void ftKb_SpecialNLk800FB394(ftKb_GObj* gobj);
 /* 0FB418 */ void ftKb_SpecialNLk800FB418(ftKb_GObj* gobj);
 /* 0FB444 */ void ftKb_SpecialNLk800FB444(ftKb_GObj* gobj);
-/* 0FB470 */ void ftKb_SpecialNLk800FB470(ftKb_GObj* gobj);
+/* 0FB470 */ bool ftKb_SpecialNLk800FB470(ftKb_GObj* gobj);
 /* 0FB500 */ void ftKb_SpecialNLk800FB500(ftKb_GObj* gobj);
 /* 0FB5F4 */ void ftKb_SpecialNLk800FB5F4(ftKb_GObj* gobj);
 /* 0FB6DC */ void ftKb_SpecialNLk800FB6DC(ftKb_GObj* gobj);

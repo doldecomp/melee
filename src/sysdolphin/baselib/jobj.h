@@ -260,6 +260,16 @@ static inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* rotate)
     }
 }
 
+static inline void fake_HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* rotate)
+{
+    HSD_ASSERT(618, jobj);
+    HSD_ASSERT(619, rotate);
+    jobj->rotate = *rotate;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        ftCo_800C6AFC(jobj);
+    }
+}
+
 static inline void HSD_JObjSetRotationX(HSD_JObj* jobj, f32 x)
 {
     HSD_ASSERT(639, jobj);
@@ -315,6 +325,16 @@ static inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec3* scale)
     jobj->scale = *scale;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void fake_HSD_JObjSetScale(HSD_JObj* jobj, Vec3* scale)
+{
+    HSD_ASSERT(760, jobj);
+    HSD_ASSERT(761, scale);
+    jobj->scale = *scale;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        ftCo_800C6AFC(jobj);
     }
 }
 
@@ -377,6 +397,16 @@ static inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
     jobj->translate = *translate;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void fake_HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
+{
+    HSD_ASSERT(916, jobj);
+    HSD_ASSERT(917, translate);
+    jobj->translate = *translate;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        ftCo_800C6AFC(jobj);
     }
 }
 
