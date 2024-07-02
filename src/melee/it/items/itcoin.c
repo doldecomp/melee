@@ -133,10 +133,18 @@ bool it_802F1604(Item_GObj* gobj)
     return false;
 }
 
+void inline itCoin_ResetRotation(Item_GObj* gobj)
+{
+    HSD_JObj* jobj;
+    jobj = GET_JOBJ(gobj);
+    HSD_JObjSetRotationX(jobj, 0.0F);
+    HSD_JObjSetRotationY(jobj, 0.0F);
+    HSD_JObjSetRotationZ(jobj, 0.0F);
+}
+
 void it_802F1630(Item_GObj* gobj)
 {
     Item* ip;
-    HSD_JObj* jobj;
 
     PAD_STACK(16);
 
@@ -144,11 +152,8 @@ void it_802F1630(Item_GObj* gobj)
     ip->x40_vel.z = 0.0F;
     ip->x40_vel.y = 0.0F;
     ip->x40_vel.x = 0.0F;
-    jobj = GET_JOBJ(gobj);
 
-    HSD_JObjSetRotationX(jobj, 0.0F);
-    HSD_JObjSetRotationY(jobj, 0.0F);
-    HSD_JObjSetRotationZ(jobj, 0.0F);
+    itCoin_ResetRotation(gobj);
 
     Item_80268E5C(gobj, 1, ITEM_UNK_0x1);
     it_802756D0(gobj);
@@ -192,6 +197,7 @@ bool it_802F1910(Item_GObj* gobj)
 {
     Item* ip;
     itCoinAttributes* attr;
+    f32 zero = 0.0F;
 
     PAD_STACK(20);
 
@@ -200,18 +206,18 @@ bool it_802F1910(Item_GObj* gobj)
     it_802762BC(ip);
     ip->xC9C = ip->xC9C + it_8027CBFC(gobj);
     it_8027B798(gobj, &ip->x40_vel);
-    if ((ip->x40_vel.x == 0.0F) && (ip->x40_vel.y == 0.0F)) {
+    if ((ip->x40_vel.x == zero) && (ip->x40_vel.y == zero)) {
         ip->x40_vel.x = 0.1F * -ip->xCCC_incDamageDirection;
         ip->x40_vel.y = 0.1F;
     }
     lbVector_Normalize(&ip->x40_vel);
-    if ((ip->pos.x > 0.0F) && (-1 == ip->xCCC_incDamageDirection)) {
+    if ((ip->pos.x > zero) && (-1 == ip->xCCC_incDamageDirection)) {
         ip->x40_vel.x *= -1;
     }
-    if ((ip->pos.x < 0.0F) && (1 == ip->xCCC_incDamageDirection)) {
+    if ((ip->pos.x < zero) && (1 == ip->xCCC_incDamageDirection)) {
         ip->x40_vel.x *= -1;
     }
-    if (ip->pos.x > 0.0F) {
+    if (ip->pos.x > zero) {
         if (ip->xCCC_incDamageDirection == -1) {
             ip->x40_vel.x *= attr->x30 * (attr->x24 + ip->xC9C);
         } else {
@@ -234,7 +240,7 @@ bool it_802F1910(Item_GObj* gobj)
     if (ip->x40_vel.y >= attr->x40) {
         ip->x40_vel.y = attr->x40;
     }
-    ip->x40_vel.z = 0.0F;
+    ip->x40_vel.z = zero;
     ip->xC9C = 0;
     switch (ip->xDD4_itemVar.coin.x4) {
     case 2:
@@ -274,11 +280,9 @@ bool it_802F1CB4(Item_GObj* gobj)
 void it_802F1CE0(Item_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    PAD_STACK(24);
+    PAD_STACK(16);
 
-    HSD_JObjSetRotationX(jobj, 0.0F);
-    HSD_JObjSetRotationY(jobj, 0.0F);
-    HSD_JObjSetRotationZ(jobj, 0.0F);
+    itCoin_ResetRotation(gobj);
 
     Item_80268E5C(gobj, 4, ITEM_UNK_0x1);
 }
