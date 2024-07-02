@@ -648,21 +648,23 @@ void it_8029F18C(HSD_GObj *arg0) {
 
 // This regswap may or may not be related to the fake inline for it_8029DB5C,
 // but every other function matches with it.
-int it_8029F3DC(HSD_GObj *arg0) {
-    Item *item;
+int it_8029F3DC(HSD_GObj* arg0)
+{
     Article *article;
+    Item* item;
     itLinkBombAttributes* sa;
 
     if (it_80272C6C(arg0) == 0) {
         it_8029F18C(arg0);
     }
+
 #if TEST_REAL
     it_8029DB5C(arg0);
 #else
     item = GET_ITEM(arg0);
     article = item->xC4_article_data;
     sa = article->x4_specialAttributes;
-    if (item->xD44_lifeTimer <= 0.0f) {
+    if (item->xD44_lifeTimer <= 0.0F) {
         it_8029F69C(arg0);
     } else {
         it_8029DB5C_Inline_Matching(arg0, item, article, sa);
@@ -672,21 +674,21 @@ int it_8029F3DC(HSD_GObj *arg0) {
     return 0;
 }
 
-// Regswap unrelated to it_8029DB5C
 void it_8029F60C(HSD_GObj *gobj) {
     f32 temp_f2;
     Item *item;
     itLinkBombAttributes *sa;
+    f32 zero = 0.0F;
 
     item = GET_ITEM(gobj);
     sa = item->xC4_article_data->x4_specialAttributes;
     if (item->xDD4_itemVar.linkbomb.x0.bits.b1) {
         temp_f2 = item->x40_vel.x;
-        if (temp_f2 != 0.0F) {
+        if (temp_f2 != zero) {
             item->x40_vel.x = (sa->x2C * item->xDD4_itemVar.linkbomb.x4) + temp_f2;
         }
         if (fabs_inline(item->x40_vel.x) < sa->x30) {
-            item->x40_vel.x = 0.0F;
+            item->x40_vel.x = zero;
         }
     }
 }
