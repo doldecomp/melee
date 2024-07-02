@@ -19,11 +19,11 @@
 /* 29E3D8 */ int it_8029E3D8(HSD_GObj *);
 /* 29E574 */ void it_8029E574(HSD_GObj *);
 /* 29E5A4 */ int it_8029E5A4(Item_GObj *);
-/* 29E5D0 */ void it_8029E5D0(Item_GObj *);
+/* 29E5D0 */ void it_8029E5D0(HSD_GObj*);
 /* 29E920 */ int it_8029E920(HSD_GObj *);
 /* 29EAF0 */ void it_8029EAF0(Item_GObj *);
 /* 29EB3C */ int it_8029EB3C(HSD_GObj *);
-/* 29EC34 */ void it_8029EC34(Item_GObj *);
+/* 29EC34 */ void it_8029EC34(HSD_GObj*);
 /* 29EF84 */ int it_8029EF84(HSD_GObj *);
 /* 29F04C */ void it_8029F04C(Item_GObj *);
 /* 29F098 */ int it_8029F098(HSD_GObj *);
@@ -31,7 +31,7 @@
 /* 29F3DC */ int it_8029F3DC(HSD_GObj *);
 /* 29F60C */ void it_8029F60C(HSD_GObj *);
 /* 29F670 */ int it_8029F670(Item_GObj *);
-/* 29F69C */ void it_8029F69C(Item_GObj *);
+/* 29F69C */ void it_8029F69C(HSD_GObj*);
 /* 29F934 */ int it_8029F934(Item_GObj *);
 /* 29F954 */ void it_8029F954(HSD_GObj *);
 /* 29F958 */ int it_8029F958(HSD_GObj *);
