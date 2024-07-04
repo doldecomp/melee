@@ -230,7 +230,7 @@ int it_802AF64C(HSD_GObj* arg0)
     return 0;
 }
 
-void it_802AF844(HSD_GObj*)
+void it_802AF844(HSD_GObj* arg0)
 {
     return;
 }
