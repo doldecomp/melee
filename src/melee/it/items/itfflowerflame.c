@@ -124,7 +124,7 @@ int it_8029AA6C(Item_GObj* arg0)
     return 0;
 }
 
-void it_8029AB60(HSD_GObj*)
+void it_8029AB60(HSD_GObj* arg0)
 {
     return;
 }
@@ -148,7 +148,7 @@ int it_8029ABCC(Item_GObj* arg0)
     it_80272F7C(it_80272CC0(arg0, 1), item->xDD4_itemVar.fflowerflame.unk);
     jobj = it_80272CC0(arg0, 2);
     HSD_JObjSetTranslate(jobj, &item->xDD4_itemVar.fflowerflame.pos);
-    it_80273130(arg0);
+    return it_80273130(arg0);
 }
 
 void it_8029ACCC(Item_GObj* arg0)
@@ -162,7 +162,7 @@ void it_8029ACCC(Item_GObj* arg0)
 
 int it_8029ACFC(HSD_GObj* arg0)
 {
-    it_8026DF34();
+    return it_8026DF34();
 }
 
 void it_8029AD1C(Item_GObj* arg0)
@@ -191,7 +191,7 @@ int it_8029ADD0(Item_GObj* arg0)
     it_80272F7C(it_80272CC0(arg0, 1), item->xDD4_itemVar.fflowerflame.unk);
     jobj = it_80272CC0(arg0, 2);
     HSD_JObjSetTranslate(jobj, &item->xDD4_itemVar.fflowerflame.pos);
-    it_80273130(arg0);
+    return it_80273130(arg0);
 }
 
 void it_8029AED0(Item_GObj* arg0)
@@ -224,7 +224,7 @@ int it_8029AF70(Item_GObj* arg0)
     it_80272F7C(it_80272CC0(arg0, 1), item->xDD4_itemVar.fflowerflame.unk);
     jobj = it_80272CC0(arg0, 2);
     HSD_JObjSetTranslate(jobj, &item->xDD4_itemVar.fflowerflame.pos);
-    it_80273130(arg0);
+    return it_80273130(arg0);
 }
 
 void it_8029B070(HSD_GObj* arg0)
