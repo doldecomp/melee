@@ -3,6 +3,7 @@
 
 #include <platform.h>
 #include "it/forward.h"
+#include "ft/types.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
@@ -10,7 +11,7 @@
 
 /* 2ADC04 */ void it_802ADC04(Item_GObj* gobj);
 /* 2ADC34 */ void it_802ADC34(Item_GObj* gobj);
-/* 2ADC54 */ Item_GObj* it_802ADC54(HSD_GObj* parent, Vec3* pos, u8 sfx,
+/* 2ADC54 */ Item_GObj* it_802ADC54(HSD_GObj* parent, Vec3* pos, Fighter_Part sfx,
                                     u32 vars, float dir);
 /* 2ADD88 */ void it_802ADD88(Item_GObj* gobj);
 /* 2ADDB0 */ void it_802ADDB0(Item_GObj* gobj, HSD_GObj* ref_gobj);

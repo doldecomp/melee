@@ -31,7 +31,7 @@ static s8 it_804D5438[8] = { 0x6A, 0x6F, 0x62, 0x6A, 0x2E, 0x68, 0, 0 };
 static s8 it_804D5440[8] = { 0x6A, 0x6F, 0x62, 0x6A, 0, 0, 0, 0 };
 
 HSD_GObj* it_802AF1A4(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* vec,
-                      u8 arg3, int arg4)
+                      Fighter_Part arg3, int arg4)
 {
     Item_GObj* gobj;
     Item* item;

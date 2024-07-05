@@ -28,7 +28,7 @@ void it_802ADC34(Item_GObj* gobj)
 }
 
 static void setupHammerParticles(HSD_GObj* parent, Item_GObj* item_gobj,
-                                 u8 sfx, u32 vars)
+                                 Fighter_Part sfx, u32 vars)
 {
     HSD_JObj* jobj;
     u32 particle_id;
@@ -47,7 +47,7 @@ static void setupHammerParticles(HSD_GObj* parent, Item_GObj* item_gobj,
                   0, particle_id, jobj);
 }
 
-Item_GObj* it_802ADC54(HSD_GObj* parent, Vec3* pos, u8 sfx, u32 vars, f32 dir)
+Item_GObj* it_802ADC54(HSD_GObj* parent, Vec3* pos, Fighter_Part sfx, u32 vars, f32 dir)
 {
     Item_GObj* item_gobj;
     SpawnItem spawn;
