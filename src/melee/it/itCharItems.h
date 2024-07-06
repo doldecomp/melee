@@ -29,7 +29,7 @@ typedef struct {
     ItemLink* x0;
     ItemLink* x4;
     HSD_GObj* x8;
-    f32 xC;
+    HSD_JObj* xC;
     void (*x10)(Item_GObj*);
     u8 x14;
     f32 x18;
