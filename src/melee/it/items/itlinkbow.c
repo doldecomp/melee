@@ -27,8 +27,6 @@ ItemStateTable it_803F6E98[] = { { 0, it_802AF64C, it_802AF844, it_802AF848 },
 
 static s32 it_803F6F08[7] = { 0, 1, 2, 3, 4, 5, 6 };
 static s32 it_803F6F24[7] = { 3, 4, 5, 0, 1, 2, 6 };
-static s8 it_804D5438[8] = { 0x6A, 0x6F, 0x62, 0x6A, 0x2E, 0x68, 0, 0 };
-static s8 it_804D5440[8] = { 0x6A, 0x6F, 0x62, 0x6A, 0, 0, 0, 0 };
 
 HSD_GObj* it_802AF1A4(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* vec,
                       Fighter_Part arg3, int arg4)
