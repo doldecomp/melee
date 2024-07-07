@@ -626,7 +626,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/it/items/it_2ADA.c.o\
     $(BUILD_DIR)/src/melee/it/items/itkirbyhammer.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itfoxblaster.s.o\
-    $(BUILD_DIR)/src/melee/it/items/itlinkbow.c.o\
+    $(BUILD_DIR)/asm/melee/it/items/itlinkbow.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itnesspkflushexplode.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itseakneedlethrown.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itseakneedleheld.s.o\
