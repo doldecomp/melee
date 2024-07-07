@@ -74,11 +74,11 @@ void it_802AF298(Item_GObj* arg0)
             switch (item->kind) {
             case It_Kind_Link_Bow:
             case It_Kind_CLink_Bow:
-                ftKb_SpecialNLk800FB444(item->owner);
+                ftLk_SpecialN_UnsetFv14(item->owner);
                 break;
             case It_Kind_Kirby_CLinkBow:
             case It_Kind_Kirby_LinkBow:
-                ftLk_SpecialN_UnsetFv14(item->owner);
+                ftKb_SpecialNLk800FB444(item->owner);
                 break;
             }
         }
