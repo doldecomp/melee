@@ -37,7 +37,7 @@ typedef struct {
     f32 x20;
     f32 x24;
     f32 x28;
-    u32 x2C;
+    f32 x2C;
     f32 x30;
     f32 x34;
     f32 x38;
