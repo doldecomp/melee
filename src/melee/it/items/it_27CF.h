@@ -152,10 +152,6 @@
 /* 2C7A84 */ void it_802C7A84(Item_GObj*);
 /* 2C7AD0 */ void it_802C7AD0(Item_GObj*);
 /* 2C7AF0 */ void it_802C7AF0(Item_GObj*);
-/* 2C7D60 */ HSD_GObj* it_802C7D60(Item_GObj*, Vec3*, s32, float);
-/* 2C7E94 */ void it_802C7E94(Item_GObj*);
-/* 2C7EE0 */ void it_802C7EE0(Item_GObj*);
-/* 2C7F00 */ void it_802C7F00(Item_GObj*);
 /* 2C8038 */ HSD_GObj* it_802C8038(Item_GObj*, Vec3*, s32, s32, float, float);
 /* 2C8158 */ void it_802C8158(Item_GObj*);
 /* 2C81C8 */ void it_802C81C8(Item_GObj*);
