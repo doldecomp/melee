@@ -3,6 +3,7 @@
 
 #include <platform.h>
 #include "it/forward.h"
+#include "ft/types.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
@@ -35,7 +36,7 @@ struct ItemStateDesc;
 /* 269CA0 */ void Item_80269CA0(Item* item_data, s32 damage);
 /* 26A848 */ void Item_8026A848(HSD_GObj* gobj, HSD_GObj* fgobj);
 /* 26A8EC */ void Item_8026A8EC(Item_GObj* gobj);
-/* 26AB54 */ void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* owner_gobj, u8 part);
+/* 26AB54 */ void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* owner_gobj, Fighter_Part part);
 /* 26ABD8 */ void Item_8026ABD8(HSD_GObj* gobj, Vec3* pos, float);
 /* 26AC74 */ void Item_8026AC74(HSD_GObj* gobj, Vec3*, Vec3*, float);
 /* 26AD20 */ void Item_8026AD20(HSD_GObj* gobj, Vec3*, Vec3*, float);

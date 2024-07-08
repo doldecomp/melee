@@ -24,7 +24,6 @@ typedef struct {
 } itKirbyHammerVars;
 
 typedef struct ItemLink ItemLink;
-
 typedef struct {
     ItemLink* x0;
     ItemLink* x4;
@@ -79,5 +78,10 @@ typedef struct {
     HSD_Joint* x58;
     HSD_Joint* x5C;
 } itLinkHookshotAttributes;
+
+typedef struct {
+    f32 x0;
+    HSD_GObj *x4;
+} itLinkBowVars;
 
 #endif

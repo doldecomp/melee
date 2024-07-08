@@ -304,7 +304,7 @@ void ftCo_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj)
     }
     inlineB0(gobj);
     {
-        u8 ret_part;
+        Fighter_Part ret_part;
         if (it_8026B2B4(item_gobj) == 0) {
             if (itGetKind(item_gobj) == It_Kind_WStar) {
                 ret_part = 0;

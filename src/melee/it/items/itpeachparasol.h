@@ -3,13 +3,14 @@
 
 #include <platform.h>
 #include "it/forward.h"
+#include "ft/types.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "it/items/types.h"
 
 /* 2BDA40 */ int it_802BDA40(Item_GObj*, int);
-/* 2BDA64 */ Item_GObj* it_802BDA64(HSD_GObj* parent, Vec3* pos, u8 arg2,
+/* 2BDA64 */ Item_GObj* it_802BDA64(HSD_GObj* parent, Vec3* pos, Fighter_Part arg2,
                                     f32 dir);
 /* 2BDB4C */ void it_802BDB4C(Item_GObj*);
 /* 2BDB94 */ void it_802BDB94(Item_GObj*);
