@@ -2031,7 +2031,7 @@ void Item_8026A8EC(Item_GObj* gobj)
     HSD_GObjPLink_80390228(gobj);
 }
 
-void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* pickup_gfx, u8 pickup_sfx)
+void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* pickup_gfx, Fighter_Part pickup_sfx)
 {
     u8 _[16];
 
