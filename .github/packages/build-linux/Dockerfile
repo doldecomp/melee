@@ -1,6 +1,6 @@
 FROM ubuntu:latest AS linux-base
 ARG WIBO_PATH="/usr/local/sbin/wibo"
-COPY --from=ghcr.io/decompals/wibo:latest \
+COPY --from=ghcr.io/decompals/wibo:0.6.11 \
     ${WIBO_PATH} \
     ${WIBO_PATH}
 ARG DEVKITPRO=/opt/devkitpro
