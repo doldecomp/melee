@@ -35,7 +35,7 @@ int it_802BDA40(Item_GObj* item_gobj, int i)
     return it_804D5518[it_803F74F8[i].anim_id];
 }
 
-Item_GObj* it_802BDA64(HSD_GObj* parent, Vec3* pos, u8 arg2, f32 dir)
+Item_GObj* it_802BDA64(HSD_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
 {
     SpawnItem spawn;
     Item_GObj* item_gobj;
