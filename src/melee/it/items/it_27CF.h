@@ -26,7 +26,6 @@
 /* 294E78 */ void it_80294E78(Item_GObj*, float);
 /* 294EB0 */ void it_80294EB0(Item_GObj*, Vec3*, Vec3*);
 /* 2950D4 */ void it_802950D4(Item_GObj*, bool);
-/* 29A748 */ HSD_GObj* it_8029A748(Item_GObj*, Vec3*, u8, float);
 /* 29D968 */ void it_8029D968(Item_GObj*);
 /* 29DD58 */ HSD_GObj* it_8029DD58(Item_GObj* fighter_gobj, Vec3*, u8, int,
                                    float);
