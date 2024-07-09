@@ -26,9 +26,6 @@
 /* 294E78 */ void it_80294E78(Item_GObj*, float);
 /* 294EB0 */ void it_80294EB0(Item_GObj*, Vec3*, Vec3*);
 /* 2950D4 */ void it_802950D4(Item_GObj*, bool);
-/* 29A748 */ HSD_GObj* it_8029A748(Item_GObj*, Vec3*, u8, float);
-/* 29A89C */ void it_8029A89C(Item_GObj*, float);
-/* 29A8F4 */ void it_8029A8F4(Item_GObj*, Vec3*, float);
 /* 29D968 */ void it_8029D968(Item_GObj*);
 /* 29DD58 */ HSD_GObj* it_8029DD58(Item_GObj* fighter_gobj, Vec3*, u8, int,
                                    float);
@@ -60,9 +57,6 @@
 /* 2AE608 */ void it_802AE608(Item_GObj*);
 /* 2AE8A8 */ HSD_GObj* it_802AE8A8(float, HSD_GObj*, Vec3*, s32, s32);
 /* 2AEAB4 */ void it_802AEAB4(Item_GObj*);
-/* 2AF1A4 */ HSD_GObj* it_802AF1A4(float facing_dir, Fighter_GObj* owner_gobj,
-                                   Vec3*, Fighter_Part, int);
-/* 2AF304 */ void it_802AF304(Item_GObj* gobj);
 /* 2B1DEC */ s32 it_802B1DEC(u32);
 /* 2B1DF8 */ u32 it_802B1DF8(Item_GObj*, Vec3*, Vec3*, s32, s32, s32);
 /* 2B1FC8 */ s32 it_802B1FC8(u32);
@@ -158,10 +152,6 @@
 /* 2C7A84 */ void it_802C7A84(Item_GObj*);
 /* 2C7AD0 */ void it_802C7AD0(Item_GObj*);
 /* 2C7AF0 */ void it_802C7AF0(Item_GObj*);
-/* 2C7D60 */ HSD_GObj* it_802C7D60(Item_GObj*, Vec3*, s32, float);
-/* 2C7E94 */ void it_802C7E94(Item_GObj*);
-/* 2C7EE0 */ void it_802C7EE0(Item_GObj*);
-/* 2C7F00 */ void it_802C7F00(Item_GObj*);
 /* 2C8038 */ HSD_GObj* it_802C8038(Item_GObj*, Vec3*, s32, s32, float, float);
 /* 2C8158 */ void it_802C8158(Item_GObj*);
 /* 2C81C8 */ void it_802C81C8(Item_GObj*);

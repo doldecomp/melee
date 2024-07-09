@@ -561,10 +561,12 @@ struct Item {
         FoxIllusionVars foxillusion;
         itLinkArrowVars linkarrow;
         itKirbyHammerVars kirbyhammer;
+        itLinkBowVars linkbow;
         itShellVars shell;
         itTargetVars target;
         CoinVars coin;
         FFlowerVars fflower;
+        FFlowerFlameVars fflowerflame;
         HassamVars hassam;
         u8 padding[0xFCC - 0xDD4];
     } xDD4_itemVar;

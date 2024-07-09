@@ -38,6 +38,7 @@
 /* 27C8B0 */ void it_8027C8B0(Item_GObj*);
 /* 27CBFC */ f32 it_8027CBFC(Item_GObj*);
 /* 27CE44 */ void it_8027CE44(Item_GObj*);
+/* 27CE64 */ void it_8027CE64(Item_GObj*, Item_GObj*, s32);
 /* 3F14C4 */ extern struct ItemLogicTable it_803F14C4[43];
 /* 3F23CC */ extern struct ItemLogicTable it_803F23CC[];
 /* 3F3100 */ extern struct ItemLogicTable it_803F3100[118];

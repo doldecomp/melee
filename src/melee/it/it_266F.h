@@ -80,7 +80,7 @@
 /* 274198 */ void it_80274198(HSD_GObj*, s32);
 /* 2741F4 */ void it_802741F4(HSD_GObj*, s32);
 /* 27429C */ void it_8027429C(HSD_GObj*, Vec3*);
-/* 2742F4 */ void it_802742F4(HSD_GObj*, HSD_GObj*, u8);
+/* 2742F4 */ void it_802742F4(HSD_GObj*, HSD_GObj*, Fighter_Part);
 /* 274594 */ void it_80274594(Item_GObj*);
 /* 274658 */ void it_80274658(HSD_GObj*, f32);
 /* 274740 */ void it_80274740(HSD_GObj* gobj);

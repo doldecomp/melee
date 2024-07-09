@@ -629,7 +629,7 @@ static inline void What(HSD_GObj* gobj, struct ItemStateDesc* itemStateDesc,
 }
 
 /// Transfer item on character transformation (Zelda <-> Sheik)
-void it_8026B9A8(HSD_GObj* gobj, HSD_GObj* arg1, u8 arg2)
+void it_8026B9A8(HSD_GObj* gobj, HSD_GObj* arg1, Fighter_Part arg2)
 {
     Vec3 vec;
     Item* ip = GET_ITEM(gobj);

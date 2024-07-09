@@ -29,6 +29,7 @@
 #include "it/it_26B1.h"
 #include "it/item.h"
 #include "it/items/it_27CF.h"
+#include "it/items/itfflowerflame.h"
 #include "it/items/itsword.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbrefract.h"
@@ -1720,7 +1721,7 @@ void ftCommon_8007FDA0(HSD_GObj* gobj)
     sp20.x *= temp_f1;
     sp20.y *= temp_f1;
     sp20.z *= temp_f1;
-    it_8029A8F4(fp->x1980, &sp20, temp_f1);
+    it_8029A8F4(fp->x1980, &sp20);
     it_8029A89C(fp->x1980, phi_f31 * temp_r30[1].x * fp->x34_scale.y);
 }
 
