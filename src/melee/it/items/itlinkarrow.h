@@ -14,7 +14,7 @@
 /* 2A81C4 */ void fn_802A81C4(HSD_GObj*);
 /* 2A8330 */ void it_802A8330(HSD_GObj*);
 /* 2A8398 */ void it_802A8398(Item_GObj*, Vec3*, Vec3*);
-/* 2A83E0 */ HSD_GObj* it_802A83E0(f32, Fighter_GObj*, Vec3*, u8, s32);
+/* 2A83E0 */ HSD_GObj* it_802A83E0(f32, Fighter_GObj*, Vec3*, Fighter_Part, s32);
 /* 2A850C */ void it_802A850C(Item_GObj*, Vec3*, Vec3*, f32, f32, f32);
 /* 2A8984 */ void it_802A8984(Item_GObj*);
 /* 2A8A7C */ void it_802A8A7C(Item_GObj*);

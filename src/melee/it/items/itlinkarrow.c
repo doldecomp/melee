@@ -1,3 +1,4 @@
+#include "ft/ft_0C31.h"
 #include "itlinkarrow.h"
 
 #include "db/db_2253.h"
@@ -5,7 +6,6 @@
 #include "ft/chara/ftCommon/ftCo_Guard.h"
 #include "ft/chara/ftKirby/ftKb_Init.h"
 #include "ft/chara/ftLink/ftLk_SpecialN.h"
-#include "ft/ft_0C31.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -48,8 +48,10 @@ ItemStateTable it_803F6A28[5] = {
     { -1, it_802A9444, it_802A944C, it_802A9450 },
     { -1, it_802A96E4, it_802A98E4, it_802A98E8 },
 };
+// char data[] = "translate";
 f32 numbers[] = { 2, 4, 6, 8, 10, 12, 14, 16 };
 f32 numbers_l[] = { 2, 3, 4, 5, 6, 7, 8, 9 };
+
 
 // jtbl_803F6AEC:
 //     .4byte .L_802A8214
@@ -278,12 +280,12 @@ void it_802A7E40(Item_GObj* arg0)
 #endif
     }
 }
-HSD_GObj* it_802A83E0(f32 facing_dir, HSD_GObj* arg1, Vec3* arg2, u8 arg3,
+HSD_GObj* it_802A83E0(f32 facing_dir, HSD_GObj* arg1, Vec3* arg2, Fighter_Part arg3,
                       s32 arg4)
 {
     SpawnItem spawn;
-    Item* item;
     Item_GObj* gobj;
+    Item* item;
     itLinkArrowAttributes* attr;
 
     arg2->z = 0.0f;
@@ -323,37 +325,52 @@ HSD_GObj* it_802A83E0(f32 facing_dir, HSD_GObj* arg1, Vec3* arg2, u8 arg3,
     return (HSD_GObj*) gobj;
 }
 
+#define INLINE 1
+
+static f32 fn_802A81C4_inline(Item *item)
+{
+    int i = item->xDD4_itemVar.linkarrow.x9C;
+    f32 var_f31 = (numbers_l[i] * HSD_Randf()) + numbers[i];
+    return 0.017453292f * var_f31; // angle to radian conversion
+}
+
 void fn_802A81C4(HSD_GObj* arg0)
 {
     f32 rand;
-    f32 var_f31;
     f32 var_f32;
+    f32 var_f31;
     float* temp_r3;
     u32 temp_r0;
-    Item* item;
-    HSD_JObj* jobj;
 
-    item = GET_ITEM(arg0);
-    jobj = HSD_GObjGetHSDObj(arg0);
+    Item *item = GET_ITEM(arg0);
+    HSD_JObj* jobj = HSD_GObjGetHSDObj(arg0);
     switch (item->xDD4_itemVar.linkarrow.x9C) {
     case 0:
     case 2:
     case 4:
     case 6:
+#if INLINE
+        var_f31 = item->xDD4_itemVar.linkarrow.x94 + fn_802A81C4_inline(item);
+#else
         rand = HSD_Randf();
         temp_r3 = (float*) &it_803F6A28 + item->xDD4_itemVar.linkarrow.x9C;
         var_f31 = (temp_r3[31] * rand) + temp_r3[23];
         var_f32 = 0.017453292f * var_f31;
         var_f31 = item->xDD4_itemVar.linkarrow.x94 + var_f32;
+#endif
         break;
     case 1:
     case 3:
     case 5:
+#if INLINE
+        var_f31 = item->xDD4_itemVar.linkarrow.x94 - fn_802A81C4_inline(item);
+#else
         rand = HSD_Randf();
         temp_r3 = (float*) &it_803F6A28 + item->xDD4_itemVar.linkarrow.x9C;
         var_f31 = (temp_r3[31] * rand) + temp_r3[23];
         var_f32 = 0.017453292f * var_f31;
         var_f31 = item->xDD4_itemVar.linkarrow.x94 - var_f32;
+#endif
         break;
     default:
         var_f31 = item->xDD4_itemVar.linkarrow.x94;
@@ -450,11 +467,11 @@ void it_802A850C(Item_GObj* arg0, Vec3* arg1, Vec3* arg2, f32 arg3, f32 arg4,
                  f32 arg5)
 {
     Item* item;
-    itLinkArrowAttributes* attr;
     HSD_JObj* gobj;
+    itLinkArrowAttributes* attr;
     Mtx* matrix;
     u8* data;
-    f32 pad_5[1];
+    f32 pad[1];
     Vec3 rot;
     f32 pad_3[1];
     Vec3 pos;
@@ -473,7 +490,7 @@ void it_802A850C(Item_GObj* arg0, Vec3* arg1, Vec3* arg2, f32 arg3, f32 arg4,
     it_80275158((HSD_GObj*) arg0, attr->x0 + attr->x18);
     item->xDD4_itemVar.linkarrow.xAC = arg4;
     if ((item->xDD4_itemVar.linkarrow.xE0 != NULL) &&
-        ((HSD_GObj*) item->owner == item->xDD4_itemVar.linkarrow.xE0))
+        (item->owner == item->xDD4_itemVar.linkarrow.xE0))
     {
         it_802A8C7C((HSD_GObj*) arg0);
         data = ftLib_80086630((Fighter_GObj*) item->xDD4_itemVar.linkarrow.xE0,
@@ -670,11 +687,11 @@ static int inline it_802A8330_inline(Item_GObj* arg0)
 
 static void inline it_802A8CC8_inline(HSD_GObj* gobj, int i)
 {
-    HSD_JObj* jobj;
     Item* item;
+    HSD_JObj* jobj;
     Vec3 scale;
     item = GET_ITEM(gobj);
-    jobj = gobj->hsd_obj;
+    jobj = HSD_GObjGetHSDObj(gobj);
     if (item->xDD4_itemVar.linkarrow.xB4[i] != NULL) {
         it_80272A18(item->xDD4_itemVar.linkarrow.xB4[i]);
         fake_HSD_JObjSetTranslate(item->xDD4_itemVar.linkarrow.xB4[i],
@@ -689,7 +706,7 @@ static void inline it_802A8CC8_inline(HSD_GObj* gobj, int i)
 static void inline it_802A8CC8_inline_2(HSD_GObj* gobj)
 {
     Item* item;
-    item = GET_ITEM(gobj);
+    item = gobj->user_data;
     if (item->xDD4_itemVar.linkarrow.xB0 > 0) {
         item->xDAC_itcmd_var0 = 1;
     }
@@ -698,25 +715,116 @@ static void inline it_802A8CC8_inline_2(HSD_GObj* gobj)
     }
 }
 
-int it_802A8CC8(HSD_GObj* gobj)
+static void inline it_802A8CC8_inline_3(HSD_GObj* gobj)
 {
-    HSD_JObj* jobj;
-    Vec3 scale;
     Item* item;
-    f32 pad[3];
+    item = GET_ITEM(gobj);
+    if (item->xDB4_itcmd_var2 == 0) {
+        it_80272460(&item->x5D4_hitboxes[0].hit,
+                    item->xDD4_itemVar.linkarrow.xA4, gobj);
+        item->xDB4_itcmd_var2 = 1;
+    }
+}
+
+int it_802A8CC8_2(HSD_GObj* gobj)
+{
+    Item* item;
+    HSD_JObj* jobj;
 
     item = GET_ITEM(gobj);
-    jobj = gobj->hsd_obj;
-    scale.x = item->xDD4_itemVar.linkarrow.xC0;
-    scale.y = item->xDD4_itemVar.linkarrow.xC0;
-    scale.z = item->xDD4_itemVar.linkarrow.xC0;
-    HSD_JObjSetScale(jobj, &scale);
+    jobj = HSD_GObjGetHSDObj(gobj);
+    // it_802A8CC8_inline_s(item, jobj);
 
     if (item->xDB4_itcmd_var2 == 0) {
         it_80272460(&item->x5D4_hitboxes[0].hit,
                     item->xDD4_itemVar.linkarrow.xA4, gobj);
         item->xDB4_itcmd_var2 = 1;
     }
+    if (item->xDD4_itemVar.linkarrow.xB0 > 0) {
+        item->xDAC_itcmd_var0 = 1;
+    }
+    if (item->xDD4_itemVar.linkarrow.xB0 > 1) {
+        item->xDB0_itcmd_var1 = 1;
+    }
+    if (item->xDAC_itcmd_var0 == 1) {
+        it_802A8CC8_inline(gobj, 0);
+    }
+    if (item->xDB0_itcmd_var1 == 1) {
+        it_802A8CC8_inline(gobj, 1);
+    }
+
+    item->xDD4_itemVar.linkarrow.xB0 += 1;
+    return it_802A8330_inline(gobj);
+}
+
+static void inline it_802A8CC8_inline_s(Item *item, HSD_JObj *jobj)
+{
+    Vec3 scale;
+    scale.x = item->xDD4_itemVar.linkarrow.xC0;
+    scale.y = item->xDD4_itemVar.linkarrow.xC0;
+    scale.z = item->xDD4_itemVar.linkarrow.xC0;
+    HSD_JObjSetScale(jobj, &scale);
+}
+
+
+int it_802A8CC8(HSD_GObj* gobj)
+{
+    Item *item = GET_ITEM(gobj);
+    HSD_JObj *jobj = HSD_GObjGetHSDObj(gobj);
+    Vec3 scale;
+    f32 pad[1];
+
+    // it_802A8CC8_inline_s(item, jobj);
+
+    scale.x = scale.y = scale.z = item->xDD4_itemVar.linkarrow.xC0;
+    HSD_JObjSetScale(jobj, &scale);
+
+
+    // item = GET_ITEM(gobj);
+    // if (item->xDD4_itemVar.linkarrow.xB0 > 0) {
+    //     item->xDAC_itcmd_var0 = 1;
+    // }
+    // if (item->xDD4_itemVar.linkarrow.xB0 > 1) {
+    //     item->xDB0_itcmd_var1 = 1;
+    // }
+
+    if (item->xDB4_itcmd_var2 == 0) {
+        it_80272460(&item->x5D4_hitboxes[0].hit,
+                    item->xDD4_itemVar.linkarrow.xA4, gobj);
+        item->xDB4_itcmd_var2 = 1;
+    }
+
+    it_802A8CC8_inline_2(gobj);
+
+    if (item->xDAC_itcmd_var0 == 1) {
+        it_802A8CC8_inline(gobj, 0);
+    }
+    if (item->xDB0_itcmd_var1 == 1) {
+        it_802A8CC8_inline(gobj, 1);
+    }
+    item->xDD4_itemVar.linkarrow.xB0 += 1;
+    return it_802A8330_inline(gobj);
+}
+
+int it_802A8CC8_3(HSD_GObj* gobj)
+{
+    f32 test;
+    Vec3 scale;
+    Item *item = GET_ITEM(gobj);
+    HSD_JObj* jobj = gobj->hsd_obj;
+
+    scale.x = item->xDD4_itemVar.linkarrow.xC0;
+    scale.y = item->xDD4_itemVar.linkarrow.xC0;
+    scale.z = item->xDD4_itemVar.linkarrow.xC0;
+    HSD_JObjSetScale(jobj, &scale);
+
+
+    if (item->xDB4_itcmd_var2 == 0) {
+        it_80272460(&item->x5D4_hitboxes[0].hit,
+                    item->xDD4_itemVar.linkarrow.xA4, gobj);
+        item->xDB4_itcmd_var2 = 1;
+    }
+
     item = GET_ITEM(gobj);
     if (item->xDD4_itemVar.linkarrow.xB0 > 0) {
         item->xDAC_itcmd_var0 = 1;
@@ -724,93 +832,14 @@ int it_802A8CC8(HSD_GObj* gobj)
     if (item->xDD4_itemVar.linkarrow.xB0 > 1) {
         item->xDB0_itcmd_var1 = 1;
     }
-#if 0
-    if (item->xDAC_itcmd_var0 == 1) {
-        jobj = gobj->hsd_obj;
-        item = GET_ITEM(gobj);
-        if (item->xDD4_itemVar.linkarrow.xB4[0] != NULL) {
-            it_80272A18(item->xDD4_itemVar.linkarrow.xB4[0]);
-            fake_HSD_JObjSetTranslate(item->xDD4_itemVar.linkarrow.xB4[0], &item->xDD4_itemVar.linkarrow.x30);
-            fake_HSD_JObjSetRotation(item->xDD4_itemVar.linkarrow.xB4[0], &item->xDD4_itemVar.linkarrow.x64);
-            HSD_JObjGetScale(jobj, &scale);
-            fake_HSD_JObjSetScale(item->xDD4_itemVar.linkarrow.xB4[0], &scale);
-        }
-    }
-    if (item->xDB0_itcmd_var1 == 1) {
-        jobj = gobj->hsd_obj;
-        item = GET_ITEM(gobj);
-        if (item->xDD4_itemVar.linkarrow.xB4[1] != NULL) {
-            it_80272A18(item->xDD4_itemVar.linkarrow.xB4[1]);
-            fake_HSD_JObjSetTranslate(item->xDD4_itemVar.linkarrow.xB4[1], &item->xDD4_itemVar.linkarrow.x3C);
-            fake_HSD_JObjSetRotation(item->xDD4_itemVar.linkarrow.xB4[1], &item->xDD4_itemVar.linkarrow.x74);
-            HSD_JObjGetScale(jobj, &scale);
-            fake_HSD_JObjSetScale(item->xDD4_itemVar.linkarrow.xB4[1], &scale);
-        }
-    }
 
-    // if (item->xDAC_itcmd_var0 == 1) {
-    //     jobj_2 = item->xDD4_itemVar.linkarrow.xB4[0];
-    //     if (jobj_2 != NULL) {
-    //         it_80272A18(jobj_2);
-    //         fake_HSD_JObjSetTranslate(jobj_2, &item->xDD4_itemVar.linkarrow.x30);
-    //         fake_HSD_JObjSetRotation(jobj_2, &item->xDD4_itemVar.linkarrow.x64);
-    //         HSD_JObjGetScale(jobj, &scale);
-    //         fake_HSD_JObjSetScale(jobj_2, &scale);
-    //     }
-    // }
-    // if (item->xDB0_itcmd_var1 == 1) {
-    //     jobj_2 = item->xDD4_itemVar.linkarrow.xB4[1];
-    //     if (jobj_2 != NULL) {
-    //         it_80272A18(jobj_2);
-    //         fake_HSD_JObjSetTranslate(jobj_2, &item->xDD4_itemVar.linkarrow.x3C);
-    //         fake_HSD_JObjSetRotation(jobj_2, &item->xDD4_itemVar.linkarrow.x74);
-    //         HSD_JObjGetScale(jobj, &scale);
-    //         fake_HSD_JObjSetScale(jobj_2, &scale);
-    //     }
-    // }
-
-    // if (item->xDAC_itcmd_var0 == 1) {
-    //     jobj_2 = item->xDD4_itemVar.linkarrow.xB4[0];
-    //     if (jobj_2 != NULL) {
-    //         it_80272A18(jobj_2);
-    //         fake_HSD_JObjSetTranslate(jobj_2, &item->xDD4_itemVar.linkarrow.x30);
-    //         fake_HSD_JObjSetRotation(jobj_2, &item->xDD4_itemVar.linkarrow.x64);
-    //         HSD_JObjGetScale(jobj, &scale);
-    //         fake_HSD_JObjSetScale(jobj_2, &scale);
-    //     }
-    // }
-    // if (item->xDB0_itcmd_var1 == 1) {
-    //     jobj_2 = item->xDD4_itemVar.linkarrow.xB4[1];
-    //     if (jobj_2 != NULL) {
-    //         it_80272A18(jobj_2);
-    //         fake_HSD_JObjSetTranslate(jobj_2, &item->xDD4_itemVar.linkarrow.x3C);
-    //         fake_HSD_JObjSetRotation(jobj_2, &item->xDD4_itemVar.linkarrow.x74);
-    //         HSD_JObjGetScale(jobj, &scale);
-    //         fake_HSD_JObjSetScale(jobj_2, &scale);
-    //     }
-    // }
-#else
     if (item->xDAC_itcmd_var0 == 1) {
         it_802A8CC8_inline(gobj, 0);
     }
     if (item->xDB0_itcmd_var1 == 1) {
         it_802A8CC8_inline(gobj, 1);
     }
-    // for (i = 0; i < 2; i++) {
-    //     if (*(&item->xDAC_itcmd_var0 + i) == 1) {
-    //         if (item->xDD4_itemVar.linkarrow.xB4[i] != NULL) {
-    //             it_80272A18(item->xDD4_itemVar.linkarrow.xB4[i]);
-    //             fake_HSD_JObjSetTranslate(item->xDD4_itemVar.linkarrow.xB4[i],
-    //             &item->xDD4_itemVar.linkarrow.x30 + i);
-    //             fake_HSD_JObjSetRotation(item->xDD4_itemVar.linkarrow.xB4[i],
-    //             &item->xDD4_itemVar.linkarrow.x64 + i);
-    //             HSD_JObjGetScale(jobj, &scale);
-    //             fake_HSD_JObjSetScale(item->xDD4_itemVar.linkarrow.xB4[i],
-    //             &scale);
-    //         }
-    //     }
-    // }
-#endif
+
     item->xDD4_itemVar.linkarrow.xB0 += 1;
     return it_802A8330_inline(gobj);
 }
