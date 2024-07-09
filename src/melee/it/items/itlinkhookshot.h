@@ -27,7 +27,7 @@
 /* 802A2474 */ void it_802A2474(void* arg0);
 /* 802A24A0 */ void it_802A24A0(HSD_GObj* gobj, int arg1);
 /* 802A24D0 */ void it_802A24D0(ItemLink* arg0, f32 arg8);
-/* 802A2568 */ void* it_802A2568(Item* arg0, HSD_GObj* arg1, s32 arg2,
+/* 802A2568 */ void* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2,
                                  f32 arg8);
 /* 802A2B10 */ void it_802A2B10(Item_GObj* gobj);
 /* 802A2BA4 */ Item_GObj* it_802A2BA4(Fighter_GObj* arg0, Vec3* arg1, f32 arg2,

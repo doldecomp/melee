@@ -589,7 +589,7 @@ typedef struct ItemLink // user_data struct of GObj class 7
     u8 flag7 : 1;
     CollData x30_collData;
     HSD_GObj* x1D0_GObj;
-    HSD_GObj* x1D4_GObjLinkNext;
+    HSD_JObj* x1D4_JObj;
 
 } ItemLink;
 
