@@ -131,6 +131,67 @@ typedef struct EggVars {
     /* +60 */ int heal_amount;
 } EggVars;
 
+typedef struct itHeiHoVars {
+    f32 x0;
+    f32 x4;
+    UnkFlagStruct x8;
+    f32 xC;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    f32 x1C;
+    s8 x20;
+    s8 x21;
+    s8 x22;
+    s8 x23;
+    s32 x24;
+    f32 x28;
+    s32 x2C;
+    f32 x30;
+    f32 x34;
+    f32 x38;
+    Vec3 x3C;
+    f32 x48;
+    f32 x4C;
+    f32 x50;
+    HSD_GObj* x54;
+    f32 x58;
+    f32 x5C;
+    f32 x6C;
+    f32 x60;
+    f32 x64;
+    f32 x68;
+    f32 x7C;
+    f32 x70;
+    f32 x74;
+    f32 x78;
+} itHeiHoVars;
+
+typedef struct itFoodsVars {
+    s32 x0;
+    s32 x4;
+} itFoodsVars;
+
+typedef struct itFoodsVars2 {
+    s32 x0;
+    s32 x4;
+    s32 x8;
+    s32 xC;
+} itFoodsVars2;
+
+typedef struct itUnkFoodsStruct {
+    f32 x0;
+    s32 x4;
+    s32 x8;
+    f32 xC;
+    f32 x10;
+} itUnkFoodsStruct;
+
+typedef struct itFoodsAttributes {
+    f32 x0;
+    // itUnkFoodsStruct *x0[8];
+} itFoodsAttributes;
+
 typedef struct WhispyAppleVars {
     s32 xDD4_heal;
 } WhispyAppleVars;
