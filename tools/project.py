@@ -1116,10 +1116,14 @@ def generate_objdiff_config(
         if compiler_version is None:
             print(f"Missing scratch compiler mapping for {options['mw_version']}")
         else:
+            cflags_str = make_flags_str(cflags)
+            if options["extra_cflags"] is not None:
+                extra_cflags_str = make_flags_str(options["extra_cflags"])
+                cflags_str += " " + extra_cflags_str
             unit_config["scratch"] = {
                 "platform": "gc_wii",
                 "compiler": compiler_version,
-                "c_flags": make_flags_str(cflags),
+                "c_flags": cflags_str,
                 "ctx_path": src_ctx_path,
                 "build_ctx": True,
             }
