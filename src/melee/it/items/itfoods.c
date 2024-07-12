@@ -1,15 +1,26 @@
-
-// #include "it/it_2725.h"
-
 #include "it/items/itfoods.h"
 
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/types.h"
 #include "sysdolphin/baselib/random.h"
 
 #include <baselib/gobj.h>
+
+/* 28FC84 */ int it_8028FC84(Item_GObj* arg0);
+/* 28FC8C */ void it_8028FC8C(Item_GObj* arg0);
+/* 28FCBC */ int it_8028FCBC(Item_GObj* arg0);
+/* 28FCE8 */ void it_8028FCE8(HSD_GObj* gobj);
+/* 28FD44 */ int it_8028FD44(Item_GObj* arg0);
+/* 28FD4C */ void it_8028FD4C(Item_GObj* arg0);
+/* 28FD50 */ int it_8028FD50(Item_GObj* arg0);
+/* 28FDD8 */ int it_8028FDD8(Item_GObj* arg0);
+/* 28FDE0 */ void it_8028FDE0(Item_GObj* arg0);
+/* 28FE0C */ int it_8028FE0C(Item_GObj* arg0);
+/* 28FE14 */ void it_8028FE14(Item_GObj* arg0);
+/* 28FE44 */ int it_8028FE44(Item_GObj* arg0);
 
 ItemStateTable it_803F83F0[] = { { -1, it_8028FC84, it_8028FC8C, it_8028FCBC },
                                  { -1, it_8028FD44, it_8028FD4C, it_8028FD50 },
@@ -17,44 +28,17 @@ ItemStateTable it_803F83F0[] = { { -1, it_8028FC84, it_8028FC8C, it_8028FCBC },
                                  { -1, it_8028FE0C, it_8028FE14,
                                    it_8028FE44 } };
 
-void it_80274ED8();
-
-typedef struct test_it_f {
-    f32 x0;
-    f32 x4;
-    f32 x8;
-    f32 xC;
-} test_it_f;
-
-typedef struct test_it_s {
-    s32 x0;
-    HSD_Joint* x4;
-    s32 x8;
-    s32 xC;
-} test_it_s;
-
 void it_8028F9D8(Item_GObj* arg0, Vec3* arg1, f32 arg8)
 {
-#if 0
-    Item *temp_r30 = GET_ITEM(arg0);
-    f32 *temp_r6 = temp_r30->xC4_article_data->x4_specialAttributes;
-    PAD_STACK(8);
-
-    temp_r30->pos.x = arg1->x + (arg8 * temp_r6[(temp_r30->xDD4_itemVar.foods.x0 * 4) + 3]);
-    temp_r30->pos.y = arg1->y + temp_r6[(temp_r30->xDD4_itemVar.foods.x0 * 4) + 4];
-    temp_r30->pos.z = arg1->z;
-    HSD_JObjSetTranslate(arg0->hsd_obj, &temp_r30->pos);
-#else
     Item* temp_r30 = GET_ITEM(arg0);
-    test_it_f* temp_r6 = temp_r30->xC4_article_data->x4_specialAttributes;
+    Vec4* temp_r6 = temp_r30->xC4_article_data->x4_specialAttributes;
     f32 var_2;
     temp_r30->pos.x =
-        arg1->x + (arg8 * temp_r6[temp_r30->xDD4_itemVar.foods.x0].xC);
-    var_2 = temp_r6[temp_r30->xDD4_itemVar.foods.x0 + 1].x0;
+        arg1->x + (arg8 * temp_r6[temp_r30->xDD4_itemVar.foods.x0].w);
+    var_2 = temp_r6[temp_r30->xDD4_itemVar.foods.x0 + 1].x;
     temp_r30->pos.y = var_2 + arg1->y;
     temp_r30->pos.z = arg1->z;
     HSD_JObjSetTranslate(arg0->hsd_obj, &temp_r30->pos);
-#endif
 }
 
 HSD_GObj* it_8028FAF4(Item_GObj* arg0, Vec3* arg1)
@@ -85,30 +69,16 @@ HSD_GObj* it_8028FAF4(Item_GObj* arg0, Vec3* arg1)
     return gobj;
 }
 
-// s32 it_80273318(Item_GObj *, s32, s32);
-
 void it_8028FBE4(Item_GObj* arg0)
 {
-#if 0
-    Item *ip = GET_ITEM(arg0);
-    s32 *attr = ip->xC4_article_data->x4_specialAttributes;
-    s32 rand = HSD_Randi(*(s32 *)ip->xC4_article_data->x4_specialAttributes );
-    s32 *attr2 = &attr[rand * 4];
-    PAD_STACK(12);
-    ip->xDD4_itemVar.foods.x4 = attr2[2];
-    ip->xDD4_itemVar.foods.x0 = rand;
-    it_80273318(arg0, attr2[1], rand);
-    it_8028FC5C((HSD_GObj *) arg0);
-#else
     Item* ip = GET_ITEM(arg0);
-    test_it_s* attr = ip->xC4_article_data->x4_specialAttributes;
+    itFoodsAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
     s32 rand = HSD_Randi(*(s32*) ip->xC4_article_data->x4_specialAttributes);
     PAD_STACK(12);
     ip->xDD4_itemVar.foods.x4 = attr[rand].x8;
     ip->xDD4_itemVar.foods.x0 = rand;
     it_80273318(arg0, attr[rand].x4, rand);
     it_8028FC5C((HSD_GObj*) arg0);
-#endif
 }
 
 void it_8028FC5C(HSD_GObj* arg0)
@@ -145,40 +115,40 @@ void it_8028FCE8(HSD_GObj* gobj)
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
 }
 
-int it_8028FD44(Item_GObj* arg0)
+int it_8028FD44(Item_GObj* gobj)
 {
     return 0;
 }
 
-void it_8028FD4C(Item_GObj* arg0) {}
+void it_8028FD4C(Item_GObj* gobj) {}
 
-int it_8028FD50(Item_GObj* arg0)
+int it_8028FD50(Item_GObj* gobj)
 {
-    it_8026D62C(arg0, it_8028FC5C);
+    it_8026D62C(gobj, it_8028FC5C);
     return 0;
 }
 
-void it_8028FD7C(Item_GObj* arg0)
+void it_8028FD7C(Item_GObj* gobj)
 {
-    HSD_JObj* jobj = HSD_GObjGetHSDObj(arg0);
+    HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
     HSD_JObj* child = HSD_JObjGetChild(jobj);
     HSD_JObjClearFlagsAll(child, 0x10U);
-    Item_80268E5C(arg0, 2, ITEM_ANIM_UPDATE);
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
 }
 
-int it_8028FDD8(Item_GObj* arg0)
+int it_8028FDD8(Item_GObj* gobj)
 {
     return 0;
 }
 
-void it_8028FDE0(Item_GObj* arg0) {}
+void it_8028FDE0(Item_GObj* gobj) {}
 
-void it_8028FDE4(Item_GObj* arg0)
+void it_8028FDE4(Item_GObj* gobj)
 {
-    Item_80268E5C((HSD_GObj*) arg0, 3, 6);
+    Item_80268E5C((HSD_GObj*) gobj, 3, 6);
 }
 
-int it_8028FE0C(Item_GObj* arg0)
+int it_8028FE0C(Item_GObj* gobj)
 {
     return 0;
 }
@@ -190,13 +160,13 @@ void it_8028FE14(Item_GObj* gobj)
     it_80272860(gobj, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
 }
 
-int it_8028FE44(Item_GObj* arg0)
+int it_8028FE44(Item_GObj* gobj)
 {
-    it_8026E414(arg0, it_8028FCE8);
+    it_8026E414(gobj, it_8028FCE8);
     return 0;
 }
 
-void it_8028FE70(Item_GObj* arg0, Item_GObj* arg1)
+void it_8028FE70(Item_GObj* gobj, Item_GObj* arg1)
 {
-    it_8026B894(arg0, (HSD_GObj*) arg1);
+    it_8026B894(gobj, (HSD_GObj*) arg1);
 }

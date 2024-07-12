@@ -12,7 +12,7 @@
 
 /* 272980 */ void it_80272980(Item_GObj*, f32);
 /* 272CC0 */ HSD_JObj* it_80272CC0(Item_GObj*, enum_t);
-/* 273318 */ void it_80273318(Item_GObj*, s32, s32);
+/* 273318 */ void it_80273318(Item_GObj*, HSD_Joint*, s32);
 /* 273408 */ void it_80273408(Item_GObj* gobj);
 /* 273670 */ void it_80273670(HSD_GObj*, int, float);
 /* 274250 */ void it_80274250(Item_GObj*, Vec3*);
@@ -34,6 +34,7 @@
 /* 27A13C */ void it_8027A13C(Item_GObj*);
 /* 27ADEC */ M2C_UNK it_8027ADEC(M2C_UNK, Item_GObj*, HSD_JObj*, f32);
 /* 27B070 */ void it_8027B070(Item_GObj* gobj, Fighter_GObj* owner_gobj);
+/* 27B730 */ void it_8027B730(void);
 /* 27B378 */ void it_8027B378(Fighter_GObj*, Item_GObj*, float);
 /* 27B798 */ s32 it_8027B798(Item_GObj*, Vec3*);
 /* 27C56C */ void it_8027C56C(Item_GObj*, f32);

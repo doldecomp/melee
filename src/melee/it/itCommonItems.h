@@ -172,24 +172,11 @@ typedef struct itFoodsVars {
     s32 x4;
 } itFoodsVars;
 
-typedef struct itFoodsVars2 {
+typedef struct itFoodsAttributes {
     s32 x0;
-    s32 x4;
+    HSD_Joint* x4;
     s32 x8;
     s32 xC;
-} itFoodsVars2;
-
-typedef struct itUnkFoodsStruct {
-    f32 x0;
-    s32 x4;
-    s32 x8;
-    f32 xC;
-    f32 x10;
-} itUnkFoodsStruct;
-
-typedef struct itFoodsAttributes {
-    f32 x0;
-    // itUnkFoodsStruct *x0[8];
 } itFoodsAttributes;
 
 typedef struct WhispyAppleVars {

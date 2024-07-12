@@ -1,4 +1,3 @@
-
 #include "it/items/itheiho.h"
 
 #include "gr/stage.h"
@@ -6,14 +5,37 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/items/it_27CF.h"
 #include "it/items/itfoods.h"
+#include "it/items/itfreeze.h"
 #include "it/items/types.h"
 #include "MSL/math.h"
 
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
+
+/* 2D8894 */ void it_802D8894(Item_GObj*);
+/* 2D88CC */ int it_802D88CC(Item_GObj*);
+/* 2D88D4 */ void it_802D88D4(Item_GObj*);
+/* 2D8910 */ int it_802D8910(Item_GObj*);
+/* 2D8918 */ void it_802D8918(Item_GObj*);
+/* 2D8984 */ int it_802D8984(Item_GObj*);
+/* 2D8A54 */ void it_802D8A54(Item_GObj*);
+/* 2D8CC8 */ int it_802D8CC8(Item_GObj*);
+/* 2D8DB4 */ int it_802D8DB4(Item_GObj*);
+/* 2D8DBC */ void it_802D8DBC(Item_GObj*);
+/* 2D8E44 */ int it_802D8E44(Item_GObj*);
+/* 2D8E4C */ int it_802D8E4C(Item_GObj*);
+/* 2D8E54 */ void it_802D8E54(Item_GObj*);
+/* 2D8EA4 */ int it_802D8EA4(Item_GObj*);
+/* 2D9168 */ void it_802D9168(Item_GObj*);
+/* 2D9274 */ int it_802D9274(Item_GObj*);
+/* 2D9384 */ void it_802D9384(Item_GObj*);
+/* 2D95F4 */ int it_802D95F4(Item_GObj*);
+/* 2D96B0 */ void it_802D96B0(HSD_GObj* gobj);
+/* 2D9714 */ void it_802D9714(Item_GObj*);
+/* 2D98AC */ void it_802D98AC(Item_GObj*);
+/* 2D98C4 */ void it_802D98C4(HSD_JObj*, Item*);
 
 ItemStateTable it_803F83F0[] = { { -1, it_802D88CC, it_802D88D4, it_802D8910 },
                                  { 0, it_802D8984, it_802D8A54, it_802D8CC8 },
@@ -22,18 +44,9 @@ ItemStateTable it_803F83F0[] = { { -1, it_802D88CC, it_802D88D4, it_802D8910 },
                                  { 2, it_802D9274, it_802D9384,
                                    it_802D95F4 } };
 
-s32 it_8026DA70(HSD_GObj*); /* extern */
-void it_8027B730();         /* extern */
-// void it_8028F8E4();                                    /* extern */
-void it_8028F968(HSD_GObj*); /* extern */
-void it_8028F9B8();          /* extern */
-
-// TODO put in proper spot
-extern void it_8027B730(void);
-
-void it_802D8618(s32 arg0, s32 arg1, s32 arg2, s32 arg3)
+void it_802D8618(s32 arg0, Vec3* arg1, s32 arg2, s32 arg3)
 {
-    Item_GObj* gobj = it_8027B5B0(0xD2, arg1, NULL, NULL, 1);
+    Item_GObj* gobj = it_8027B5B0(0xD2, (s32) arg1, NULL, NULL, 1);
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.heiho.x20 = (s8) arg0;
     ip->xDD4_itemVar.heiho.x21 = (s8) arg2;
@@ -41,7 +54,6 @@ void it_802D8618(s32 arg0, s32 arg1, s32 arg2, s32 arg3)
     it_802D8894(gobj);
 }
 
-// move floats
 void it_802D8688(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -199,7 +211,7 @@ void it_802D8DBC(Item_GObj* gobj)
     it_80272860(gobj, it_attr->x10_fall_speed, it_attr->x14_fall_speed_max);
     rand = HSD_Randi(3);
     ip->xD3C_spinSpeed = 0.017453292F * ((8.0F * rand) + 1.0F);
-    it_80274A64_t(gobj);
+    it_80274A64(gobj);
 }
 
 int it_802D8E44(Item_GObj* gobj)
@@ -229,7 +241,6 @@ int it_802D8EA4(Item_GObj* gobj)
     return 0;
 }
 
-// float int conversion, loads it_804DD5E8
 int it_802D8EC8(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
@@ -268,17 +279,13 @@ void it_802D9168(Item_GObj* gobj)
     Stage_UnkSetVec3TCam_Offset(&sp14);
 
     if (ip->pos.x < sp14.x) {
-        if (jobj == NULL) {
-            __assert("jobj.h", 0x2DAU, "jobj");
-        }
+        HSD_JObjGetRotationY(jobj);
         if (jobj->rotate.y == zero) {
             ip->xDD4_itemVar.heiho.x24 = 0x14;
         }
         ip->facing_dir = -1.0F;
     } else if (ip->pos.x > sp14.x) {
-        if (jobj == NULL) {
-            __assert("jobj.h", 0x2DAU, "jobj");
-        }
+        HSD_JObjGetRotationY(jobj);
         if (jobj->rotate.y != zero) {
             ip->xDD4_itemVar.heiho.x24 = 0x14;
         }
@@ -290,11 +297,6 @@ void it_802D9168(Item_GObj* gobj)
     it_802D98C4(ip->xBBC_dynamicBoneTable->bones[1], ip);
     ip->on_accessory = it_802D96B0;
 }
-
-typedef struct unk_aobj_struct {
-    f32 pad[15];
-    HSD_AObj* aobj;
-} unk_aobj_struct;
 
 int it_802D9274(Item_GObj* gobj)
 {
@@ -318,7 +320,6 @@ int it_802D9274(Item_GObj* gobj)
     return 0;
 }
 
-// same as it_802D8A54
 void it_802D9384(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
