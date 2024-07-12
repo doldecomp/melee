@@ -188,7 +188,7 @@ int it_802D8DB4(Item_GObj* gobj)
     return 0;
 }
 
-static it_802D8EC8_inline(Item_GObj* gobj)
+static void it_802D8EC8_inline(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     f32* attr = ip->xC4_article_data->x4_specialAttributes;

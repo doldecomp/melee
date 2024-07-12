@@ -7,6 +7,7 @@
 #include "it/items/types.h"
 
 /* 28FED4 */ void it_8028FED4(Item_GObj*);
+/* 28FE90 */ void it_8028FE90(Item_GObj*);
 /* 2900CC */ void it_802900CC(Item_GObj*);
 /* 2900F4 */ void it_802900F4(Item_GObj*);
 /* 290114 */ void it_80290114(Item_GObj*);

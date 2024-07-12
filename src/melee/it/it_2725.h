@@ -18,10 +18,9 @@
 /* 274250 */ void it_80274250(Item_GObj*, Vec3*);
 /* 274C88 */ void it_80274C88(Item_GObj* gobj);
 /* 274ECC */ void it_80274ECC(Item_GObj* gobj, bool);
-/* 274ED8 */ void it_80274ED8();
-/* 274F48 */ void it_80274F48(Item_GObj* gobj, int bone_attach_id, HSD_GObj*,
-                              Fighter_Part);
-/* 275070 */ void it_80275070(Item_GObj* gobj, int bone_attach_id);
+/* 274ED8 */ void it_80274ED8(void);
+/* 274F48 */ void it_80274F48(Item_GObj*, s32, HSD_GObj*, Fighter_Part);
+/* 275070 */ void it_80275070(Item_GObj*, s32);
 /* 2750F8 */ void it_802750F8(Item_GObj*);
 /* 276214 */ bool it_80276214(Item_GObj*);
 /* 276CB8 */ void it_80276CB8(Item_GObj* gobj);
