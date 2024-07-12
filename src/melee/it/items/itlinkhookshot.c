@@ -113,35 +113,76 @@ static bool inline link_fighter_compare(Fighter* fp)
     }
 }
 
-void* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
+static inline void it_802A2568_inline(ItemLink *temp_r3_3, HSD_JObj *arg1, HSD_GObj* temp_r3_2, Vec3 *pos)
 {
-    Vec3 pos;
-    CollData* temp_r17;
-    CollData* temp_r18;
+    temp_r3_3->x1D4_JObj = arg1;
+    temp_r3_3->x1D0_GObj = temp_r3_2;
+    temp_r3_3->x8_vel = *pos;
+    temp_r3_3->pos = *pos;
+    temp_r3_3->flag5 = 1;
+    temp_r3_3->flag6 = 1;
+    temp_r3_3->flag7 = 1;
+    // it_802A43B8(temp_r3_3);
+    temp_r3_3->x30_collData.cur_topn = temp_r3_3->pos;
+    temp_r3_3->x30_collData.prev_topn = temp_r3_3->x30_collData.cur_topn;
+}
+
+static inline HSD_JObj *it_link_get_joint(Item *arg0, s32 var_r31)
+{
+    itLinkHookshotAttributes* temp_r3_4;
+    temp_r3_4 = arg0->xC4_article_data->x4_specialAttributes;
+    if ((var_r31 % 2) != 0) {
+        return HSD_JObjLoadJoint(temp_r3_4->x54);
+    } else {
+        return HSD_JObjLoadJoint(temp_r3_4->x58);
+    }
+}
+
+static inline HSD_JObj *it_link_get_joint_c(Item *arg0)
+{
+    itLinkHookshotAttributes* temp_r3_4;
+    temp_r3_4 = arg0->xC4_article_data->x4_specialAttributes;
+    HSD_JObjLoadJoint(temp_r3_4->x5C);
+}
+
+static inline f32 it_link_lerp(f32 a, f32 b, f32 t)
+{
+    return t * a + (1.0F - t) * b;
+}
+
+static inline void it_link_part1(Item *arg0, HSD_JObj *arg1, ItemLink* var_r18, ItemLink* temp_r3_3, HSD_GObj* temp_r3_2, Vec3 *pos, f32 arg8, s8 flag)
+{
     CollData* temp_r21;
-    HSD_GObj* temp_r3_2;
-    HSD_JObj* var_r5;
-    HSD_JObj* var_r5_2;
-    ItemLink* temp_r3_3;
-    ItemLink* var_r18;
-    ItemLink* var_r19;
-    ItemLink* var_r20;
-    f32 temp_f7;
+    temp_r21 = &temp_r3_3->x30_collData;
+
+    // it_802A2568_inline(temp_r3_3, arg1, temp_r3_2, &pos);
+    temp_r3_3->x1D4_JObj = arg1;
+    temp_r3_3->x1D0_GObj = temp_r3_2;
+    temp_r3_3->x8_vel = *pos;
+    temp_r3_3->pos = *pos;
+    temp_r3_3->flag0 = flag;
+    temp_r3_3->flag1 = flag;
+    temp_r3_3->flag2 = flag;
+    // it_802A43B8(temp_r3_3);
+    temp_r3_3->x30_collData.cur_topn = temp_r3_3->pos;
+    temp_r3_3->x30_collData.prev_topn = temp_r3_3->x30_collData.cur_topn;
+
+    mpColl_80041EE4(temp_r21);
+    temp_r21->x34_flags.bits.b1234 = 5;
+    mpColl_8004220C(temp_r21, NULL, arg8, arg8, arg8, arg8);
+}
+
+static inline void it_link_coll(CollData *temp_r18, f32 arg8)
+{
+        mpColl_80041EE4(temp_r18);
+        temp_r18->x34_flags.raw = (temp_r18->x34_flags.raw & ~0x78) | 0x28;
+        mpColl_8004220C(temp_r18, NULL, arg8, arg8, arg8, arg8);
+}
+
+static inline void it_link_attr_math(itLinkHookshotAttributes* attr, s32 arg2, f32 arg8)
+{
     f32 var_f0;
     f32 var_f1;
-    s32 temp_r3;
-    s32 var_r31;
-    itLinkHookshotAttributes* attr;
-    itLinkHookshotAttributes* temp_r3_4;
-    itLinkHookshotAttributes* temp_r3_5;
-    void* var_r21;
-
-    // var_r19 = saved_reg_r19;
-    // var_r20 = saved_reg_r20;
-    // var_r21 = saved_reg_r21;
-
-    attr = arg0->xC4_article_data->x4_specialAttributes;
-    pos = it_803B8650;
     if (arg2 != 0) {
         var_f0 = attr->x50;
     } else {
@@ -154,19 +195,67 @@ void* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
     attr->x40 = var_f0 * (attr->x20 * arg8);
     attr->x44 = var_f0 * (attr->x24 * arg8);
     attr->x48 = attr->x28 * arg8;
-    if (arg8 > 1.0F) {
-        temp_r3 = attr->xC;
-        temp_f7 = attr->x8;
-        var_f1 = (temp_f7 * ((f32) temp_r3 * attr->x30)) +
-                 ((1.0F - temp_f7) * ((f32) temp_r3 * attr->x10));
+    if (arg8 > (f64)1.875F) {
+        var_f1 = it_link_lerp(attr->xC * attr->x30, attr->xC * attr->x10, attr->x8);
+        // temp_r3 = attr->xC;
+        // temp_f7 = attr->x8;
+        // var_f1 = (temp_f7 * ((f32) temp_r3 * attr->x30)) +
+        //          ((1.0F - temp_f7) * ((f32) temp_r3 * attr->x10));
     } else {
         var_f1 = (f32) attr->xC * attr->x30;
     }
+    attr->x2C = (var_f1 * var_f0) / attr->x30;
+}
+
+// #define THE_INLINE 0
+
+HSD_JObj * it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
+{
+#ifdef THE_INLINE
+    CollData* temp_r17;
+    CollData* temp_r18;
+    CollData* temp_r21;
+    HSD_GObj* temp_r3_2;
+    ItemLink* temp_r3_3;
+    ItemLink* var_r18;
+    itLinkHookshotAttributes* temp_r3_4;
+    ItemLink* var_r19;
+    ItemLink* var_r20;
+    f32 temp_f7;
+    f32 var_f0;
+    f32 var_f1;
+    s32 temp_r3;
+    s32 var_r31;
+    itLinkHookshotAttributes* attr;
+    itLinkHookshotAttributes* temp_r3_5;
+    HSD_JObj * var_r21;
+#else
+    itLinkHookshotAttributes* attr;
+    Vec3 pos;
+
+    ItemLink* var_r18;
+    s32 var_r31;
+    HSD_GObj* temp_r3_2;
+    ItemLink* temp_r3_3;
+
+    ItemLink* var_r19;
+    ItemLink* var_r20;
+    HSD_JObj * var_r21;
+#endif
+
+    // var_r19 = saved_reg_r19;
+    // var_r20 = saved_reg_r20;
+    // var_r21 = saved_reg_r21;
+
+    attr = arg0->xC4_article_data->x4_specialAttributes;
+    pos = it_803B8650;
+
+    it_link_attr_math(attr, arg2, arg8);
+
     var_r18 = NULL;
     var_r31 = 0;
-    attr->x2C = (var_f1 * var_f0) / attr->x30;
 
-    while (var_r31 >= attr->x2C) {
+    while (!(var_r31 >= attr->x2C)) {
         temp_r3_2 = GObj_Create(7U, 0xAU, 0U);
         if (temp_r3_2 == NULL) {
             while (var_r18 != NULL) {
@@ -178,58 +267,79 @@ void* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
         temp_r3_3 = HSD_ObjAlloc(&Item_804A0C38);
         GObj_InitUserData(temp_r3_2, 6U, it_802A2474, temp_r3_3);
         if (var_r31 == 0) {
+#if 0
             temp_r3_3->next = NULL;
             temp_r18 = &temp_r3_3->x30_collData;
             var_r19 = temp_r3_3;
+
+            // it_802A2568_inline(temp_r3_3, arg1, temp_r3_2, &pos);
             temp_r3_3->x1D4_JObj = arg1;
             temp_r3_3->x1D0_GObj = temp_r3_2;
             temp_r3_3->x8_vel = pos;
             temp_r3_3->pos = pos;
-            temp_r3_3->flag5 = 1;
-            temp_r3_3->flag6 = 1;
-            temp_r3_3->flag7 = 1;
+            temp_r3_3->flag5 = 0;
+            temp_r3_3->flag6 = 0;
+            temp_r3_3->flag7 = 0;
+            // it_802A43B8(temp_r3_3);
             temp_r3_3->x30_collData.cur_topn = temp_r3_3->pos;
-            temp_r3_3->x30_collData.prev_topn =
-                temp_r3_3->x30_collData.cur_topn;
+            temp_r3_3->x30_collData.prev_topn = temp_r3_3->x30_collData.cur_topn;
+
+            // it_link_coll(temp_r18, arg8);
             mpColl_80041EE4(temp_r18);
-            temp_r18->x34_flags.raw = (temp_r18->x34_flags.raw & ~0x78) | 0x28;
+            temp_r18->x34_flags.bits.b1234 = 5;
             mpColl_8004220C(temp_r18, NULL, arg8, arg8, arg8, arg8);
-            temp_r3_4 = arg0->xC4_article_data->x4_specialAttributes;
-            if ((var_r31 % 2) != 0) {
-                var_r5 = HSD_JObjLoadJoint(temp_r3_4->x54);
-            } else {
-                var_r5 = HSD_JObjLoadJoint(temp_r3_4->x58);
-            }
-            HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849, var_r5);
+            HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849, it_link_get_joint(arg0, var_r31));
             GObj_SetupGXLink(temp_r3_2, it_802A24A0, 6U, 0U);
+#else
+            temp_r3_3->next = NULL;
+            var_r19 = temp_r3_3;
+            it_link_part1(arg0, arg1,  var_r18,  temp_r3_3,  temp_r3_2, &pos, arg8, 0);
+            HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849, it_link_get_joint(arg0, var_r31));
+            GObj_SetupGXLink(temp_r3_2, it_802A24A0, 6U, 0U);
+#endif
         } else if (var_r31 == (s32) (attr->x2C - 1)) {
+#if 0
             var_r18->prev = temp_r3_3;
             temp_r21 = &temp_r3_3->x30_collData;
             temp_r3_3->prev = NULL;
             var_r20 = temp_r3_3;
             temp_r3_3->next = var_r18;
+
+            // it_802A2568_inline(temp_r3_3, arg1, temp_r3_2, &pos);
             temp_r3_3->x1D4_JObj = arg1;
             temp_r3_3->x1D0_GObj = temp_r3_2;
             temp_r3_3->x8_vel = pos;
             temp_r3_3->pos = pos;
-            temp_r3_3->flag5 = 1;
-            temp_r3_3->flag6 = 1;
-            temp_r3_3->flag7 = 1;
+            temp_r3_3->flag5 = 0;
+            temp_r3_3->flag6 = 0;
+            temp_r3_3->flag7 = 0;
+            // it_802A43B8(temp_r3_3);
             temp_r3_3->x30_collData.cur_topn = temp_r3_3->pos;
-            temp_r3_3->x30_collData.prev_topn =
-                temp_r3_3->x30_collData.cur_topn;
+            temp_r3_3->x30_collData.prev_topn = temp_r3_3->x30_collData.cur_topn;
+
             mpColl_80041EE4(temp_r21);
-            temp_r21->x34_flags.raw = (temp_r21->x34_flags.raw & ~0x78) | 0x28;
+            temp_r18->x34_flags.bits.b1234 = 5;
             mpColl_8004220C(temp_r21, NULL, arg8, arg8, arg8, arg8);
-            temp_r3_4 = arg0->xC4_article_data->x4_specialAttributes;
-            HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849,
-                                    HSD_JObjLoadJoint(attr->x5C));
+            HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849, it_link_get_joint_c(arg0));
             GObj_SetupGXLink(temp_r3_2, HSD_GObj_80391070, 6U, 0U);
             var_r21 = temp_r3_2->hsd_obj;
+#else
+            var_r20 = temp_r3_3;
+            var_r18->prev = temp_r3_3;
+            temp_r3_3->prev = NULL;
+            temp_r3_3->next = var_r18;
+            it_link_part1(arg0, arg1,  var_r18,  temp_r3_3,  temp_r3_2, &pos, arg8, 0);
+            HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849, it_link_get_joint_c(arg0));
+            GObj_SetupGXLink(temp_r3_2, HSD_GObj_80391070, 6U, 0U);
+            var_r21 = temp_r3_2->hsd_obj;
+#endif
         } else {
+#if 0
             var_r18->prev = temp_r3_3;
             temp_r17 = &temp_r3_3->x30_collData;
             temp_r3_3->next = var_r18;
+
+            // it_802A2568_inline(temp_r3_3, arg1, temp_r3_2, &pos);
             temp_r3_3->x1D4_JObj = arg1;
             temp_r3_3->x1D0_GObj = temp_r3_2;
             temp_r3_3->x8_vel = pos;
@@ -237,21 +347,22 @@ void* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
             temp_r3_3->flag5 = 1;
             temp_r3_3->flag6 = 1;
             temp_r3_3->flag7 = 1;
+            // it_802A43B8(temp_r3_3);
             temp_r3_3->x30_collData.cur_topn = temp_r3_3->pos;
-            temp_r3_3->x30_collData.prev_topn =
-                temp_r3_3->x30_collData.cur_topn;
+            temp_r3_3->x30_collData.prev_topn = temp_r3_3->x30_collData.cur_topn;
+
             mpColl_80041EE4(temp_r17);
-            temp_r17->x34_flags.raw = (temp_r17->x34_flags.raw & ~0x78) | 0x28;
+            temp_r18->x34_flags.bits.b1234 = 5;
             mpColl_8004220C(temp_r17, NULL, arg8, arg8, arg8, arg8);
-            temp_r3_5 = arg0->xC4_article_data->x4_specialAttributes;
-            if ((var_r31 % 2) != 0) {
-                var_r5_2 = HSD_JObjLoadJoint(temp_r3_5->x54);
-            } else {
-                var_r5_2 = HSD_JObjLoadJoint(temp_r3_5->x58);
-            }
-            HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849,
-                                    var_r5_2);
+            HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849, it_link_get_joint(arg0, var_r31));
             GObj_SetupGXLink(temp_r3_2, it_802A24A0, 6U, 0U);
+#else
+            var_r18->prev = temp_r3_3;
+            temp_r3_3->next = var_r18;
+            it_link_part1(arg0, arg1,  var_r18,  temp_r3_3,  temp_r3_2, &pos, arg8, 1);
+            HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849, it_link_get_joint(arg0, var_r31));
+            GObj_SetupGXLink(temp_r3_2, it_802A24A0, 6U, 0U);
+#endif
         }
         temp_r3_3->x30_collData.ecb_lock = -1;
         var_r18 = temp_r3_3;
@@ -326,16 +437,16 @@ Item_GObj *it_802A2BA4(Fighter_GObj *arg0, Vec3 *arg1, f32 arg2, s32 arg3) {
         } else {
             var_r27 = 0;
         }
-        // if (it_802A2568(item, (HSD_GObj *) fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
-        //             var_r27, fp->x34_scale.y) == NULL) {
-        //     Item_8026A8EC(gobj);
-        //     return NULL;
-        // }
+        if (it_802A2568(item, fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
+                    var_r27, fp->x34_scale.y) == NULL) {
+            Item_8026A8EC(gobj);
+            return NULL;
+        }
         item->xDD4_itemVar.linkhookshot.x8 = (HSD_GObj *) arg0;
         item->xDD4_itemVar.linkhookshot.xC = item->xDD4_itemVar.linkhookshot.x0->x1D0_GObj->hsd_obj;
         fp->parts[139].joint = item->xDD4_itemVar.linkhookshot.xC;
         Item_8026AB54((HSD_GObj *) gobj, (HSD_GObj *) arg0, ftParts_8007500C(fp, FtPart_RThumbNb));
-        it_802A2428(arg0);
+        it_802A2428(gobj);
     }
     if ((enum FighterKind) fp->kind == FTKIND_CLINK) {
         it_804D6D48 = 6.0f;
@@ -872,6 +983,7 @@ inline static float lk_len(Vec3* vec)
     return vec->x * vec->x + vec->y * vec->y + vec->z * vec->z;
 }
 
+#if 0
 inline static double lk_inv(Vec3* vec)
 {
     f64 len;
@@ -886,6 +998,7 @@ inline static double lk_inv(Vec3* vec)
     vec->y *= inv;
     vec->z *= inv;
 }
+#endif
 
 static inline my_sqrtf(float x)
 {
@@ -924,7 +1037,7 @@ static inline Vec3* lbVector_Diff_a(Vec3* a, Vec3* b, Vec3* result)
 
 static inline float lbVector_Len_a(Vec3* vec)
 {
-    return sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
+    return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
 
@@ -1357,12 +1470,20 @@ static inline it_802A4BFC_inline(ItemLink *link_0)
     link_0->pos = pos;
     link_0->x30_collData.cur_topn = link_0->pos;
     link_0->x30_collData.prev_topn = link_0->x30_collData.cur_topn;
-    link_0->flag1 = 1;
+    link_0->flag0 = 1;
 }
 #define ITEST 1
 s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1,
                 itLinkHookshotAttributes* attr, Fighter* fp)
 {
+#if ITEST
+    s32 flag;
+    f64 len;
+    Vec3 vec;
+    ItemLink* link_1;
+    ftLk_DatAttrs* lk_attr = fp->ft_data->ext_attr;
+    PAD_STACK(17*4);
+#else
     s32 flag;
     ItemLink* link_1;
     Vec3 vec;
@@ -1377,6 +1498,7 @@ s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1,
     Mtx m3;
     ftLk_DatAttrs* lk_attr = fp->ft_data->ext_attr;
     PAD_STACK(18*4);
+#endif
     if (fp->motion_id == 0xD4) {
         if (fp->mv.ca.specials.grav == lk_attr->x88) {
 #if ITEST
@@ -1469,6 +1591,7 @@ s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1,
     return 2;
 }
 
+
 s32 it_802A5320(ItemLink *link_0, Vec3 *arg1, itLinkHookshotAttributes *attr, Fighter *fp) {
     ItemLink* link_1;
     f32 len;
@@ -1542,18 +1665,25 @@ s32 it_802A5320(ItemLink *link_0, Vec3 *arg1, itLinkHookshotAttributes *attr, Fi
     return 2;
 }
 
+void it_802A5770_inline(ItemLink *link_1, itLinkHookshotAttributes *arg2, Fighter *arg3, s32 var_r29)
+{
+    if (var_r29 == arg2->x2C / 2) {
+        it_802A3E50(link_1, arg3->kind, arg2->x30);
+    } else {
+        it_802A40D0(link_1, arg2->x30);
+    }
+}
+
 // definitely attributes
 void it_802A5770(ItemLink *link_0, Vec3 *arg1, itLinkHookshotAttributes *arg2, Fighter *arg3) {
     ItemLink* link_1;
-    f32 inv;
-    f64 len;
-    f32 test[2];
+    f32 len;
     s32 var_r29;
     Vec3 vec;
     link_1 = link_0->prev;
 
     while (link_1 != NULL && link_0->flag0) {
-        link_0 = link_1->prev;
+        link_0 = link_1;
         link_1 = link_0->prev;
     }
 
@@ -1578,11 +1708,7 @@ void it_802A5770(ItemLink *link_0, Vec3 *arg1, itLinkHookshotAttributes *arg2, F
         link_1->pos.y += link_1->x8_vel.y;
         link_1->pos.z += link_1->x8_vel.z;
 
-        if (var_r29 == arg2->x2C / 2) {
-            it_802A3E50(link_1, arg3->kind, arg2->x30);
-        } else {
-            it_802A40D0(link_1, arg2->x30);
-        }
+        it_802A5770_inline(link_1, arg2, arg3, var_r29);
 
         len = it_802A3C98(&link_1->pos, &link_0->pos, &vec);
         if (len > arg2->x30) {
@@ -1613,6 +1739,7 @@ s32 it_802A5AE0(ItemLink *link_0, Vec3 *arg1, itLinkHookshotAttributes *arg2) {
     Vec3 vec;
 
     it_802A4454(link_0);
+
     link_1 = link_0->next;
     while (link_1 != NULL) {
         if (link_1->flag0) {
