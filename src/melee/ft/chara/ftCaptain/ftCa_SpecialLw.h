@@ -3,6 +3,7 @@
 
 #include <baselib/forward.h>
 
+/* 0E3EAC */ void ftCa_SpecialHi_800E3EAC(HSD_GObj* gobj);
 /* 0E4040 */ void ftCa_SpecialLw_Enter(HSD_GObj* gobj);
 /* 0E40D8 */ void ftCa_SpecialAirLw_Enter(HSD_GObj* gobj);
 /* 0E415C */ void ftCa_SpecialLw_Anim(HSD_GObj* gobj);
