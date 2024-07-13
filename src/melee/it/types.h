@@ -548,11 +548,13 @@ struct Item {
         ItStarVars star;
         itSword_ItemVars sword;
         ItMatoVars mato;
+        itFoodsVars foods;
         BobOmbVars BobOmb;
         HeartContainerVars HeartContainer;
         MaximTomatoVars MaximTomato;
         FoodVars Food;
         EggVars egg;
+        itHeiHoVars heiho;
         WhispyAppleVars WhispyApple;
         PKFlashVars PKFlash;
         PKFlashExplVars PKFlashExpl;
