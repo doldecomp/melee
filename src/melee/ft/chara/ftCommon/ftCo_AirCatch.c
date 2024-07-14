@@ -47,23 +47,12 @@
 
 bool ftCo_800C3A14(ftCo_GObj* gobj)
 {
-    CollData coll = { 0 };
-    IntVec3 sp14;
-    int i = 51;
-    IntVec3* var_r5 = &sp14;
     Fighter* fp = GET_FIGHTER(gobj);
-    IntVec3* var_r4 = (IntVec3*) &fp->x6E4.y;
-    do {
-        var_r4 += 8;
-        var_r5 += 8;
-        var_r5->z = var_r4->z;
-        var_r5->y = var_r4->y;
-        --i;
-    } while (i != 0);
-    var_r5->z = var_r4->z;
+    CollData coll = *getFtColl(fp);
+    PAD_STACK(8);
     coll.x58 += 5.0;
     coll.x5C += 5.0;
-    if (fp->facing_dir > 0.0f) {
+    if (fp->facing_dir > (f64) 0.0F) {
         if (mpColl_80044164(&coll, &fp->coll_data.ledge_id_unk1)) {
             fp->coll_data.env_flags |= MPCOLL_FLAGS_B24;
             fp->self_vel.x = 0;
@@ -130,6 +119,7 @@ void ftCo_800C3BE8(ftCo_GObj* gobj)
 void ftCo_800C3CC0(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
+    f32 drift;
     if (fp->kind == FTKIND_LINK || fp->kind == FTKIND_CLINK) {
         Fighter_ChangeMotionState(gobj, ftLk_MS_AirCatchHit,
                                   Ft_MF_KeepFastFall, 0, 1, 0, NULL);
@@ -137,7 +127,8 @@ void ftCo_800C3CC0(ftCo_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftSs_MS_AirCatchHit,
                                   Ft_MF_KeepFastFall, 0, 1, 0, NULL);
     }
-    ftCommon_8007D440(fp, fp->co_attrs.air_drift_max);
+    drift = fp->co_attrs.air_drift_max;
+    ftCommon_8007D440(fp, drift);
     fp->mv.co.aircatchhit.x0 = 20;
     fp->mv.co.aircatchhit.x4 = 0;
     if (fp->ground_or_air == GA_Ground) {
@@ -166,7 +157,6 @@ void ftCo_AirCatch_Anim(ftCo_GObj* gobj)
                 fp->death1_cb = it_802A7AAC;
                 fp->accessory3_cb = it_802A7B34;
             }
-            goto exit;
         } else if (fp->mv.co.aircatch.x0 > da->xA4) {
             if (fp->mv.co.aircatch.x0 <= da->xB0) {
                 Item_GObj* tether_gobj = fp->fv.lk.xC;
@@ -209,9 +199,8 @@ void ftCo_AirCatch_Anim(ftCo_GObj* gobj)
                     } else {
                         ft_80088148(fp, 0x27149, 0x7F, 0x40);
                     }
-                    goto exit;
-                }
-                if (fp->mv.co.aircatch.x0 == (float) M2C_FIELD(da, int*, 0xAC))
+                } else if (fp->mv.co.aircatch.x0 ==
+                           (float) M2C_FIELD(da, int*, 0xAC))
                 {
                     it_802A77DC(tether_gobj);
                     if (fp->kind == FTKIND_CLINK) {
@@ -222,7 +211,6 @@ void ftCo_AirCatch_Anim(ftCo_GObj* gobj)
                 } else if (fp->mv.co.aircatch.x0 == da->xB0) {
                     it_802A2B10(fp->fv.lk.xC);
                 }
-                goto exit;
             }
         }
     } else if (fp->kind == FTKIND_SAMUS) {
@@ -268,7 +256,6 @@ void ftCo_AirCatch_Anim(ftCo_GObj* gobj)
                         pos.x = x + fp->pos_delta.x;
                         it_802BAAE4(temp_r29_2, &pos, x);
                     }
-                    goto exit;
                 } else {
                     if (fp->mv.co.aircatch.x0 == da->xC4) {
                         it_802BAA58(temp_r29_2);
@@ -279,13 +266,10 @@ void ftCo_AirCatch_Anim(ftCo_GObj* gobj)
             }
         }
     }
-    {
-    exit:
-        if (!ftAnim_IsFramesRemaining(gobj)) {
-            ftCo_800968C8(gobj);
-        }
-        return;
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_800968C8(gobj);
     }
+    return;
 }
 
 void ftCo_AirCatchHit_Anim(ftCo_GObj* gobj) {}

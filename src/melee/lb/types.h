@@ -241,7 +241,6 @@ struct CollData {
     /* fp+850 */ SurfaceData right_wall;
     /* fp+864 */ SurfaceData left_wall;
     /* fp+878 */ SurfaceData ceiling;
-    /* fp+88C */ int ecb_lock;
 };
 
 #endif

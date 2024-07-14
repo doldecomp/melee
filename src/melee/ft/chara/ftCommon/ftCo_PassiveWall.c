@@ -85,8 +85,8 @@ void ftCo_800C1E64(ftCo_GObj* gobj, int msid, int timer, int vel_y_exponent,
         }
     }
     ftKb_SpecialN_800F1F1C(gobj, &ef_offset);
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, timer != 0 ? 0 : 1, 0,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F,
+                              timer != 0 ? 0.0F : 1.0F, 0.0F, NULL);
     fp->x670_timer_lstick_tilt_x = 0xFE;
     fp->x671_timer_lstick_tilt_y = 0xFE;
     fp->mv.co.passivewall.timer = timer;
