@@ -617,16 +617,29 @@ void it_802A8AF8(Item_GObj* arg0)
     Item_80268E5C((HSD_GObj*) arg0, 0, ITEM_ANIM_UPDATE);
 }
 
+static void inline it_802A8CC8_inline_s(Item *item, HSD_JObj *jobj)
+{
+    Vec3 scale;
+    scale.x = item->xDD4_itemVar.linkarrow.xC0;
+    scale.y = item->xDD4_itemVar.linkarrow.xC0;
+    scale.z = item->xDD4_itemVar.linkarrow.xC0;
+    HSD_JObjSetScale(jobj, &scale);
+}
+
+// Item could be passed to influence stack
+static void inline it_802A8CC8_inline_s_2(HSD_GObj *gobj, Item *item)
+{
+    HSD_JObj* jobj = gobj->hsd_obj;
+    Vec3 scale;
+    scale.x = scale.y = scale.z = item->xDD4_itemVar.linkarrow.xC0;
+    HSD_JObjSetScale(jobj, &scale);
+}
+
 int it_802A8B20(HSD_GObj* gobj)
 {
     Item* item;
-    HSD_JObj* jobj;
-    Vec3 scale;
-
     item = GET_ITEM(gobj);
-    jobj = gobj->hsd_obj;
-    scale.x = scale.y = scale.z = item->xDD4_itemVar.linkarrow.xC0;
-    HSD_JObjSetScale(jobj, &scale);
+    it_802A8CC8_inline_s_2(gobj, item);
     if (item->xDD4_itemVar.linkarrow.xE0 != NULL) {
         if (item->owner == item->xDD4_itemVar.linkarrow.xE0) {
             switch (item->kind) {
@@ -726,26 +739,43 @@ static void inline it_802A8CC8_inline_3(HSD_GObj* gobj)
     }
 }
 
-int it_802A8CC8_2(HSD_GObj* gobj)
+// Item could be passed to influence stack
+static void inline it_802A8CC8_inline_s_4(HSD_GObj *gobj)
 {
-    Item* item;
-    HSD_JObj* jobj;
+    Item *item = GET_ITEM(gobj);
+    HSD_JObj* jobj = gobj->hsd_obj;
+    Vec3 scale;
+    scale.x = scale.y = scale.z = item->xDD4_itemVar.linkarrow.xC0;
+    HSD_JObjSetScale(jobj, &scale);
+}
+
+int it_802A8CC8(HSD_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    {
+        // use the macros!!
+        HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
+        Vec3 scale;
+        scale.x = scale.y = scale.z = item->xDD4_itemVar.linkarrow.xC0;
+        HSD_JObjSetScale(jobj, &scale);
+    }
+
+    {
+        if (item->xDB4_itcmd_var2 == 0) {
+            it_80272460(&item->x5D4_hitboxes[0].hit,
+                        item->xDD4_itemVar.linkarrow.xA4, gobj);
+            item->xDB4_itcmd_var2 = 1;
+        }
+    }
 
     item = GET_ITEM(gobj);
-    jobj = HSD_GObjGetHSDObj(gobj);
-    // it_802A8CC8_inline_s(item, jobj);
-
-    if (item->xDB4_itcmd_var2 == 0) {
-        it_80272460(&item->x5D4_hitboxes[0].hit,
-                    item->xDD4_itemVar.linkarrow.xA4, gobj);
-        item->xDB4_itcmd_var2 = 1;
-    }
     if (item->xDD4_itemVar.linkarrow.xB0 > 0) {
         item->xDAC_itcmd_var0 = 1;
     }
     if (item->xDD4_itemVar.linkarrow.xB0 > 1) {
         item->xDB0_itcmd_var1 = 1;
     }
+
     if (item->xDAC_itcmd_var0 == 1) {
         it_802A8CC8_inline(gobj, 0);
     }
@@ -757,27 +787,29 @@ int it_802A8CC8_2(HSD_GObj* gobj)
     return it_802A8330_inline(gobj);
 }
 
-static void inline it_802A8CC8_inline_s(Item *item, HSD_JObj *jobj)
+static void inline it_802A8CC8_inline_s_3(HSD_GObj *gobj)
 {
+    Item *item = GET_ITEM(gobj);
+    HSD_JObj* jobj = gobj->hsd_obj;
     Vec3 scale;
-    scale.x = item->xDD4_itemVar.linkarrow.xC0;
-    scale.y = item->xDD4_itemVar.linkarrow.xC0;
-    scale.z = item->xDD4_itemVar.linkarrow.xC0;
+    scale.x = scale.y = scale.z = item->xDD4_itemVar.linkarrow.xC0;
     HSD_JObjSetScale(jobj, &scale);
 }
 
-
-int it_802A8CC8(HSD_GObj* gobj)
+int it_802A8CC8_2(HSD_GObj* gobj)
 {
     Item *item = GET_ITEM(gobj);
-    HSD_JObj *jobj = HSD_GObjGetHSDObj(gobj);
-    Vec3 scale;
-    f32 pad[1];
 
     // it_802A8CC8_inline_s(item, jobj);
 
+#if 0
+    it_802A8CC8_inline_s_3(gobj);
+#else
+    HSD_JObj* jobj = gobj->hsd_obj;
+    Vec3 scale;
     scale.x = scale.y = scale.z = item->xDD4_itemVar.linkarrow.xC0;
     HSD_JObjSetScale(jobj, &scale);
+#endif
 
 
     // item = GET_ITEM(gobj);
@@ -794,7 +826,17 @@ int it_802A8CC8(HSD_GObj* gobj)
         item->xDB4_itcmd_var2 = 1;
     }
 
+#if 0
     it_802A8CC8_inline_2(gobj);
+#else
+    item = gobj->user_data;
+    if (item->xDD4_itemVar.linkarrow.xB0 > 0) {
+        item->xDAC_itcmd_var0 = 1;
+    }
+    if (item->xDD4_itemVar.linkarrow.xB0 > 1) {
+        item->xDB0_itcmd_var1 = 1;
+    }
+#endif
 
     if (item->xDAC_itcmd_var0 == 1) {
         it_802A8CC8_inline(gobj, 0);
