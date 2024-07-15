@@ -24,7 +24,7 @@ void ft_80081B38(HSD_GObj* arg0)
     f32 temp_f3;
 
     temp_r31 = arg0->user_data;
-    temp_r31->coll_data.ecb_lock = 0;
+    temp_r31->ecb_lock = 0;
     temp_r30 = &temp_r31->coll_data;
     temp_r31->coll_data.cur_topn = temp_r31->cur_pos;
     temp_r31->coll_data.prev_topn = temp_r31->coll_data.cur_topn;

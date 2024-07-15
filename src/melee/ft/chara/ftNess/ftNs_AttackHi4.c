@@ -97,6 +97,7 @@ static inline void push_ecb(CollData* a, Vec3* b)
 s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
                                     Vec3* ECBUnk2, float float_unk)
 {
+    u8 pad[4];
     CollData coll;
     ftCollisionBox ecb;
     Fighter* fp = gobj->user_data;
@@ -121,6 +122,7 @@ s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
     // sp34.cur_topn = ECBUnk2->x0_vec;
     // guess: there is a "push ECB" function that handles moving current to
     // old, that got called twice and inlined.
+
     push_ecb(&coll, ECBUnk);
     push_ecb(&coll, ECBUnk2);
 

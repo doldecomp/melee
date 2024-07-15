@@ -16,17 +16,7 @@
 #include <baselib/jobj.h>
 #include <MSL/trigf.h>
 
-#pragma force_active on
-
-/* literal */ double const ftCo_804D8CD0 = S32_TO_F32;
-/* literal */ float const ftCo_804D8CD8 = 0;
-/* literal */ double const ftCo_804D8CE0 = M_PI;
-/* literal */ double const ftCo_804D8CE8 = M_PI_2;
-/* literal */ SDATA char ftCo_804D3C38[] = "jobj.h";
-/* literal */ SDATA char ftCo_804D3C40[] = "jobj";
-/* literal */ char lbl_803C6CA8[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
-
-static inline void inlineA0(ftCo_GObj* gobj)
+static void inlineA0(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->dmg.x18F4 = p_ftCommonData->x648;
@@ -79,11 +69,11 @@ void ftCo_800C37A0(ftCo_GObj* gobj)
     if (fp->dmg.x18F4 != 0) {
         Fighter_Part part = ftParts_8007500C(fp, FtPart_TransN);
         HSD_JObj* jobj = fp->parts[part].x4_jobj2;
-        --fp->dmg.x18F4;
         {
             float rot_y = M_PI *
                           (float) (p_ftCommonData->x648 - fp->dmg.x18F4) /
                           (float) p_ftCommonData->x648;
+            fp->dmg.x18F4 -= 1;
             ftParts_80075AF0(fp, part, rot_y);
             HSD_JObjSetRotationY(jobj, rot_y);
             if (fp->dmg.x18F4 == 0) {
