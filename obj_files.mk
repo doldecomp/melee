@@ -227,7 +227,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialN.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialS.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftCa_SpecialLw.s.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftCa_SpecialHi.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialHi.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFx_Init.c.o\
@@ -604,7 +604,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itlgunbeam.s.o\
     $(BUILD_DIR)/asm/melee/it/items/ithammerhead.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itlipstickspore.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itfflowerflame.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itfflowerflame.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itevyoshiegg.s.o\
 
 TEXT_O_FILES +=\
@@ -626,7 +626,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/it/items/it_2ADA.c.o\
     $(BUILD_DIR)/src/melee/it/items/itkirbyhammer.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itfoxblaster.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itlinkbow.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itlinkbow.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itnesspkflushexplode.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itseakneedlethrown.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itseakneedleheld.s.o\
@@ -665,7 +665,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itgamewatchbreath.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itkirbygamewatchchefpan.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itgamewatchjudge.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itgamewatchpanic.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itgamewatchpanic.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itgamewatchrescue.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itgamewatchchef.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itclinkmilk.s.o\
@@ -706,7 +706,7 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itoldkuri.s.o\
     $(BUILD_DIR)/src/melee/it/items/itmato.c.o\
-    $(BUILD_DIR)/asm/melee/it/items/itheiho.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itheiho.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itlikelike.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itnokonoko.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itzgshell.s.o\

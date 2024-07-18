@@ -548,11 +548,13 @@ struct Item {
         ItStarVars star;
         itSword_ItemVars sword;
         ItMatoVars mato;
+        itFoodsVars foods;
         BobOmbVars BobOmb;
         HeartContainerVars HeartContainer;
         MaximTomatoVars MaximTomato;
         FoodVars Food;
         EggVars egg;
+        itHeiHoVars heiho;
         WhispyAppleVars WhispyApple;
         PKFlashVars PKFlash;
         PKFlashExplVars PKFlashExpl;
@@ -560,11 +562,13 @@ struct Item {
         FoxLaserVars foxlaser;
         FoxIllusionVars foxillusion;
         itKirbyHammerVars kirbyhammer;
+        itLinkBowVars linkbow;
         itShellVars shell;
         itLinkBombVars linkbomb;
         itTargetVars target;
         CoinVars coin;
         FFlowerVars fflower;
+        FFlowerFlameVars fflowerflame;
         HassamVars hassam;
         u8 padding[0xFCC - 0xDD4];
     } xDD4_itemVar;

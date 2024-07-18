@@ -30,13 +30,6 @@ git checkout
 mv melee /opt/assets
 popd
 
-# Acquire fonts
-fonts_url='https://media.fontsgeek.com/download/zip/a/-/a-otf-folk-pro_WeXVg.zip'
-curl -L "$fonts_url" |
-    bsdtar -xvf- -C /tmp
-mv '/tmp/A-OTF Folk Pro/A-OTF Folk Pro H/A-OTF Folk Pro H.otf' \
-    '/opt/assets/progress'
-
 # Install progress site node modules
 pushd /tmp
 npm install --no-audit --no-progress

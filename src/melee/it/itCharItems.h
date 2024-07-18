@@ -52,4 +52,9 @@ typedef struct itLinkBombAttributes {
     /* x28 */ f32 vel[3];
 } itLinkBombAttributes;
 
+typedef struct {
+    f32 x0;
+    HSD_GObj *x4;
+} itLinkBowVars;
+
 #endif

@@ -114,7 +114,7 @@ parser.add_argument(
     "--max-errors",
     type=int,
     default=1,
-    help="the maximum number of errors allowed by the compiler (default 0, meaning unlimited)",
+    help="the maximum number of errors allowed by the compiler (0 meaning unlimited, default 1)",
 )
 parser.add_argument(
     "--warn",
@@ -560,7 +560,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCaptain/ftCa_SpecialN.c"),
             Object(Matching, "melee/ft/chara/ftCaptain/ftCa_SpecialS.c"),
             Object(NonMatching, "melee/ft/chara/ftCaptain/ftCa_SpecialLw.c"),
-            Object(NonMatching, "melee/ft/chara/ftCaptain/ftCa_SpecialHi.c"),
+            Object(Matching, "melee/ft/chara/ftCaptain/ftCa_SpecialHi.c"),
             # Fox
             Object(Matching, "melee/ft/chara/ftFox/ftFx_Init.c"),
             Object(Matching, "melee/ft/chara/ftFox/ftFx_AppealS.c"),
@@ -925,7 +925,7 @@ config.libs = [
             Object(NonMatching, "melee/it/items/itlgunbeam.c"),
             Object(NonMatching, "melee/it/items/ithammerhead.c"),
             Object(NonMatching, "melee/it/items/itlipstickspore.c"),
-            Object(NonMatching, "melee/it/items/itfflowerflame.c"),
+            Object(Matching, "melee/it/items/itfflowerflame.c"),
             Object(NonMatching, "melee/it/items/itevyoshiegg.c"),
             # Fighter-related items
             Object(Matching, "melee/it/items/itmariofireball.c"),
@@ -946,7 +946,7 @@ config.libs = [
             Object(Matching, "melee/it/items/it_2ADA.c"),
             Object(Matching, "melee/it/items/itkirbyhammer.c"),
             Object(NonMatching, "melee/it/items/itfoxblaster.c"),
-            Object(NonMatching, "melee/it/items/itlinkbow.c"),
+            Object(Matching, "melee/it/items/itlinkbow.c"),
             Object(NonMatching, "melee/it/items/itnesspkflushexplode.c"),
             Object(NonMatching, "melee/it/items/itseakneedlethrown.c"),
             Object(NonMatching, "melee/it/items/itseakneedleheld.c"),
@@ -985,7 +985,7 @@ config.libs = [
             Object(NonMatching, "melee/it/items/itgamewatchbreath.c"),
             Object(NonMatching, "melee/it/items/itkirbygamewatchchefpan.c"),
             Object(NonMatching, "melee/it/items/itgamewatchjudge.c"),
-            Object(NonMatching, "melee/it/items/itgamewatchpanic.c"),
+            Object(Matching, "melee/it/items/itgamewatchpanic.c"),
             Object(NonMatching, "melee/it/items/itgamewatchrescue.c"),
             Object(NonMatching, "melee/it/items/itgamewatchchef.c"),
             Object(NonMatching, "melee/it/items/itclinkmilk.c"),
@@ -1024,7 +1024,7 @@ config.libs = [
             # Indivudal items
             Object(NonMatching, "melee/it/items/itoldkuri.c"),
             Object(Matching, "melee/it/items/itmato.c"),
-            Object(NonMatching, "melee/it/items/itheiho.c"),
+            Object(Matching, "melee/it/items/itheiho.c"),
             Object(NonMatching, "melee/it/items/itlikelike.c"),
             Object(NonMatching, "melee/it/items/itnokonoko.c"),
             Object(NonMatching, "melee/it/items/itzgshell.c"),
