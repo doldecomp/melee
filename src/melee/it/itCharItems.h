@@ -3,6 +3,7 @@
 #ifndef MELEE_IT_ITCHARITEMS_H
 #define MELEE_IT_ITCHARITEMS_H
 
+#include "it/forward.h"
 #include <dolphin/mtx/types.h>
 #include <baselib/jobj.h>
 

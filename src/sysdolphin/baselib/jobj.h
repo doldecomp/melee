@@ -468,26 +468,6 @@ static inline void HSD_JObjAddTranslationZ(HSD_JObj* jobj, float z)
     }
 }
 
-
-static inline void fake_HSD_JObjAddTranslationY(HSD_JObj* jobj, float y)
-{
-    HSD_ASSERT(1114, jobj);
-    jobj->translate.y += y;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(jobj);
-    }
-}
-
-static inline void fake_HSD_JObjAddRotationX(HSD_JObj* jobj, float x)
-{
-    HSD_ASSERT(1029, jobj);
-    jobj->rotate.x += x;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(jobj);
-    }
-}
-
-
 /// @todo This is inlined into lbcoll, and linker deduplication
 /// only kept that definition.
 /// Rename it back to HSD_JObjSetupMatrix once lbcoll is matched.
