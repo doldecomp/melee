@@ -3,8 +3,11 @@
 #ifndef MELEE_IT_ITCHARITEMS_H
 #define MELEE_IT_ITCHARITEMS_H
 
+#include "lb/types.h"
+#include "it/forward.h"
 #include <dolphin/mtx/types.h>
 #include <baselib/jobj.h>
+
 
 typedef struct {
     float xDD4;
@@ -23,7 +26,27 @@ typedef struct {
     u32 x0;
 } itKirbyHammerVars;
 
-typedef struct ItemLink ItemLink;
+typedef struct ItemLink // user_data struct of GObj class 7
+{
+    struct ItemLink* prev;
+    struct ItemLink* next;
+    Vec3 x8_vel;
+    Vec3 pos;
+    Vec3 x20_vec; // Previous position?
+    u8 flag0 : 1;
+    u8 flag1 : 1;
+    u8 flag2 : 1;
+    u8 flag3 : 1;
+    u8 flag4 : 1;
+    u8 flag5 : 1;
+    u8 flag6 : 1;
+    u8 flag7 : 1;
+    CollData x30_collData;
+    HSD_GObj* x1D0_GObj;
+    HSD_JObj* x1D4_JObj;
+
+} ItemLink;
+
 typedef struct {
     ItemLink* x0;
     ItemLink* x4;

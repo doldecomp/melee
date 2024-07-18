@@ -8,8 +8,8 @@
 struct mp_UnkStruct0 {
     /*  +0 */ mp_UnkStruct0* next;
     /*  +4 */ int x4;
-    /*  +8 */ float x8;
-    /*  +C */ float xC;
+    /*  +8 */ int x8;
+    /*  +C */ int xC;
     /* +10 */ int x10;
     /* +14 */ float x14;
     /* +18 */ float x18;
