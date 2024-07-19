@@ -29,7 +29,9 @@
 /* 276214 */ bool it_80276214(Item_GObj*);
 /* 276CB8 */ void it_80276CB8(Item_GObj* gobj);
 /* 277040 */ bool it_80277040(Item_GObj*);
+/* 277040 */ bool it_80277040(Item_GObj*);
 /* 27781C */ bool it_8027781C(Item_GObj*);
+/* 2787B4 */ void it_802787B4(Item_GObj*, s32);
 /* 279C48 */ void it_80279C48(Item_GObj*, Article*);
 /* 279FF8 */ void it_80279FF8(Item_GObj*);
 /* 27A09C */ bool it_8027A09C(Item_GObj*);
