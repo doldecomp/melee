@@ -1164,6 +1164,7 @@ struct Fighter {
     /*  fp+6D8 */ Vec3 x6D8;
     /*  fp+6E4 */ Vec3 x6E4;
     /*  fp+6F0 */ CollData coll_data;
+    /*  fp+88C */ s32 ecb_lock;
     /*  fp+890 */ CameraBox* x890_cameraBox;
     /*  fp+894 */ float cur_anim_frame;
     /*  fp+898 */ float x898_unk;

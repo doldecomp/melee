@@ -571,7 +571,7 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     item_data->xCC_item_attr = item_data->xC4_article_data->x0_common_attr;
     item_data->owner = NULL;
     item_data->xDC8_word.flags.x0 = 0;
-    item_data->x378_itemColl.ecb_lock = -1;
+    item_data->ecb_lock = -1;
     item_data->xDC4 = 0;
     item_data->xDC8_word.flags.xF = 0;
     item_data->xCC4 = 0;
@@ -931,8 +931,8 @@ static void foobar2(HSD_GObj* gobj)
         ftLib_80086960(it->owner))
     {
         it->xDC8_word.flags.xE = 1;
-        it->x378_itemColl.ecb_lock = ftLib_800872A4(it->owner);
-        ftLib_8008702C(it->x378_itemColl.ecb_lock);
+        it->ecb_lock = ftLib_800872A4(it->owner);
+        ftLib_8008702C(it->ecb_lock);
     }
 }
 
@@ -1965,9 +1965,9 @@ static void func_8026A8EC_inline1(HSD_GObj* gobj)
     Item* ip = (Item*) HSD_GObjGetUserData(gobj);
 
     if (ip->xDC8_word.flags.xE) {
-        ftLib_80087050(ip->x378_itemColl.ecb_lock);
+        ftLib_80087050(ip->ecb_lock);
         ip->xDC8_word.flags.xE = false;
-        ip->x378_itemColl.ecb_lock = -1;
+        ip->ecb_lock = -1;
     }
 }
 

@@ -13,6 +13,7 @@
 #include "it/items/itbat.h"
 #include "it/items/itfflower.h"
 #include "it/items/itmarumine.h"
+#include "it/items/itmsbomb.h"
 #include "it/items/itsword.h"
 #include "it/types.h"
 
