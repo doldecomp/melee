@@ -79,6 +79,7 @@ typedef struct {
 } itLinkArrowAttributes;
 
 typedef struct {
+    f32 x0;
     HSD_GObj *x4;
 } itLinkBowVars;
 

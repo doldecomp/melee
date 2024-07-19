@@ -34,9 +34,6 @@
                                    Vec3* pos, Fighter_Part, int);
 /* 2A0534 */ void it_802A0534(Item_GObj* gobj, Vec3*);
 /* 2A07B4 */ void it_802A07B4(Item_GObj* gobj);
-/* 2A8398 */ void it_802A8398(Item_GObj*, Vec3*);
-/* 2A83E0 */ HSD_GObj* it_802A83E0(float facing_dir, Fighter_GObj*, Vec3*,
-                                   Fighter_Part, int);
 /* 2A850C */ void it_802A850C(Item_GObj*, Vec3*, Vec3*, float, float, float);
 /* 2A8A7C */ void it_802A8A7C(Item_GObj* gobj);
 /* 2AA054 */ void it_802AA054(Item_GObj*, Vec3*, Vec3*, float, float);
