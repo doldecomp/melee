@@ -21,6 +21,7 @@
 #include "ftLink/types.h"
 #include "it/items/it_27CF.h"
 #include "it/items/itlinkbow.h"
+#include "it/items/itlinkarrow.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbrefract.h"
 
@@ -254,7 +255,7 @@ static inline void bar(ftLk_GObj* gobj)
     fp->mv.lk.specialn.x8.z = 0;
     fp->mv.lk.specialn.x8.x = atan2f(vecs.b.y - vecs.a.y, vecs.b.x - vecs.a.x);
     if (fp->fv.lk.arrow_gobj != NULL) {
-        it_802A8398(fp->fv.lk.arrow_gobj, &vecs.b);
+        it_802A8398(fp->fv.lk.arrow_gobj, &vecs.b, &vecs.a);
     }
     if (ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialNLoop, mf, 0, 1, 0,
@@ -301,7 +302,7 @@ void ftLk_SpecialNLoop_Anim(ftLk_GObj* gobj)
     fp->mv.lk.specialn.x8.z = 0;
     fp->mv.lk.specialn.x8.x = atan2f(vecs.b.y - vecs.a.y, vecs.b.x - vecs.a.x);
     if (fp->fv.lk.arrow_gobj != NULL) {
-        it_802A8398(fp->fv.lk.arrow_gobj, &vecs.b);
+        it_802A8398(fp->fv.lk.arrow_gobj, &vecs.b, &vecs.a);
     }
 }
 
@@ -357,7 +358,7 @@ void ftLk_SpecialAirNStart_Anim(ftLk_GObj* gobj)
         fp->mv.lk.specialn.x8.x =
             atan2f(vecs.b.y - vecs.a.y, vecs.b.x - vecs.a.x);
         if (fp->fv.lk.arrow_gobj != NULL) {
-            it_802A8398(fp->fv.lk.arrow_gobj, &vecs.b);
+            it_802A8398(fp->fv.lk.arrow_gobj, &vecs.b, &vecs.a);
         }
         if (!ftAnim_IsFramesRemaining(gobj)) {
             Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirNLoop, mf, 0, 1,
@@ -389,7 +390,7 @@ void ftLk_SpecialAirNLoop_Anim(ftLk_GObj* gobj)
     fp->mv.lk.specialn.x8.y = vecs.b.y - vecs.c.y;
     fp->mv.lk.specialn.x8.x = atan2f(vecs.b.y - vecs.a.y, vecs.b.x - vecs.a.x);
     if (fp->fv.lk.arrow_gobj != NULL) {
-        it_802A8398(fp->fv.lk.arrow_gobj, &vecs.b);
+        it_802A8398(fp->fv.lk.arrow_gobj, &vecs.b, &vecs.a);
     }
 }
 

@@ -562,6 +562,7 @@ struct Item {
         PKThunderVars PKThunderVars;
         FoxLaserVars foxlaser;
         FoxIllusionVars foxillusion;
+        itLinkArrowVars linkarrow;
         itKirbyHammerVars kirbyhammer;
         itLinkHookshotVars linkhookshot;
         itLinkBowVars linkbow;
