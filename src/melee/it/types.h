@@ -285,6 +285,7 @@ struct Item {
     Item_DynamicBones xD4_dynamicBones[24];
     s32 x374_dynamicBonesNum;
     CollData x378_itemColl;
+    s32 ecb_lock;
 
     /// @at{518} @sz{4}
     /// @brief Item's current owner
@@ -590,6 +591,7 @@ typedef struct ItemLink // user_data struct of GObj class 7
     u8 flag6 : 1;
     u8 flag7 : 1;
     CollData x30_collData;
+    UNK_T unk;
     HSD_GObj* x1D0_GObj;
     HSD_GObj* x1D4_GObjLinkNext;
 

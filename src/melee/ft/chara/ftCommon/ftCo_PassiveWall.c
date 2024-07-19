@@ -32,8 +32,6 @@
 
 #include <common_structs.h>
 
-#pragma force_active on
-
 bool ftCo_800C1D38(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -77,16 +75,16 @@ void ftCo_800C1E64(ftCo_GObj* gobj, int msid, int timer, int vel_y_exponent,
         if (fp->coll_data.env_flags & MPCOLL_FLAGS_B11) {
             ef_offset.x = coll->xA4_ecbCurrCorrect.left.x;
             ef_offset.y = coll->xA4_ecbCurrCorrect.left.y;
-            ef_offset.z = 0;
+            ef_offset.z = 0.0F;
         } else {
             ef_offset.x = coll->xA4_ecbCurrCorrect.right.x;
             ef_offset.y = coll->xA4_ecbCurrCorrect.right.y;
-            ef_offset.z = 0;
+            ef_offset.z = 0.0F;
         }
     }
     ftKb_SpecialN_800F1F1C(gobj, &ef_offset);
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, timer != 0 ? 0 : 1, 0,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F,
+                              timer != 0 ? 0.0F : 1.0F, 0.0F, NULL);
     fp->x670_timer_lstick_tilt_x = 0xFE;
     fp->x671_timer_lstick_tilt_y = 0xFE;
     fp->mv.co.passivewall.timer = timer;
@@ -96,7 +94,7 @@ void ftCo_800C1E64(ftCo_GObj* gobj, int msid, int timer, int vel_y_exponent,
     {
         Vec3 ef_pos;
         float pos_x_offset = fp->cur_pos.x + ef_offset.x;
-        u8 _[4] = { 0 };
+        PAD_STACK(4);
         ef_pos.x = pos_x_offset;
         ef_pos.y = fp->cur_pos.y + ef_offset.y;
         ef_pos.z = fp->cur_pos.z;
@@ -127,12 +125,12 @@ static inline void inlineA0(ftCo_GObj* gobj)
 
 void ftCo_PassiveWall_Anim(ftCo_GObj* gobj)
 {
-    u8 _[16] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(16);
     if (fp->mv.co.passivewall.timer != 0) {
         --fp->mv.co.passivewall.timer;
         if (fp->mv.co.passivewall.timer == 0) {
-            ft_80088148(fp, 8, 0x7F, 0x40);
+            ft_80088148(fp, 8, 127, 64);
             if (fp->mv.co.passivewall.x8) {
                 inlineA0(gobj);
             } else {
@@ -180,8 +178,8 @@ void ftCo_PassiveWall_IASA(ftCo_GObj* gobj)
 
 void ftCo_PassiveWall_Phys(ftCo_GObj* gobj)
 {
-    u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(8);
     if (!fp->mv.co.passivewall.timer) {
         ftCo_DatAttrs* co = &fp->co_attrs;
         ftCommon_8007D528(fp);
@@ -190,7 +188,7 @@ void ftCo_PassiveWall_Phys(ftCo_GObj* gobj)
         } else {
             ftCommon_8007D494(fp, co->grav, co->terminal_vel);
         }
-        ftCommon_8007D140(fp, 0, 0, fp->co_attrs.aerial_friction);
+        ftCommon_8007D140(fp, 0.0F, 0.0F, fp->co_attrs.aerial_friction);
     }
 }
 
