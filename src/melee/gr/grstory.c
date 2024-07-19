@@ -12,7 +12,7 @@
 #include "gr/grzakogenerator.h"
 #include "gr/types.h"
 #include "it/it_26B1.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itheiho.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
@@ -278,6 +278,7 @@ void grStory_801E3418(HSD_GObj* gobj)
         }
         for (i = 0; i < gp->xC4; i++) {
             it_802D8618(i, &pos, temp_r29, 25.0f * i);
+            // it_802D8618(i, temp_r29, 0, 0);
             // Jitter the vertical position of the each subsequent shy guy
             pos.y = 3.0f * frand_amp1() + grSt_804D69B8->vars[spawn_pattern];
         }

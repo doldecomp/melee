@@ -2457,9 +2457,9 @@ void Fighter_8006C27C(Fighter_GObj* gobj)
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
 
     if (!fp->x221F_b3) {
-        if (fp->coll_data.ecb_lock) {
-            fp->coll_data.ecb_lock--;
-            if (!fp->coll_data.ecb_lock) {
+        if (fp->ecb_lock) {
+            fp->ecb_lock--;
+            if (!fp->ecb_lock) {
                 ftCommon_8007D5BC(fp);
             }
         }

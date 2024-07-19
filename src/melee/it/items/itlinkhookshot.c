@@ -278,7 +278,7 @@ HSD_JObj * it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
             HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849, it_link_get_joint(arg0, var_r31));
             GObj_SetupGXLink(temp_r3_2, it_802A24A0, 6U, 0U);
         }
-        temp_r3_3->x30_collData.ecb_lock = -1;
+        temp_r3_3->unk = -1;
         var_r18 = temp_r3_3;
         var_r31 += 1;
     }
@@ -1053,8 +1053,8 @@ void it_802A4454(ItemLink* item_link)
     Vec3 sp10;
     f32 pad[1];
 
-    if (mpLib_80054ED8(item_link->x30_collData.ecb_lock) != 0) {
-        mpLib_800567C0(item_link->x30_collData.ecb_lock, &item_link->pos,
+    if (mpLib_80054ED8(item_link->unk) != 0) {
+        mpLib_800567C0(item_link->unk, &item_link->pos,
                        &sp10);
         item_link->pos.x += sp10.x;
         item_link->pos.y += sp10.y;
@@ -1213,9 +1213,9 @@ s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1,
     link_0->pos.z += link_0->x8_vel.z;
     flag = it_802A40D0(link_0, attr->x30);
     if (flag & 0x3F) {
-        link_0->x30_collData.ecb_lock = link_0->x30_collData.right_wall.index;
+        link_0->unk = link_0->x30_collData.right_wall.index;
     } else if (flag & 0xFC0) {
-        link_0->x30_collData.ecb_lock = link_0->x30_collData.left_wall.index;
+        link_0->unk = link_0->x30_collData.left_wall.index;
     }
 
     while (link_1 != NULL) {

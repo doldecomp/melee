@@ -285,6 +285,7 @@ struct Item {
     Item_DynamicBones xD4_dynamicBones[24];
     s32 x374_dynamicBonesNum;
     CollData x378_itemColl;
+    s32 ecb_lock;
 
     /// @at{518} @sz{4}
     /// @brief Item's current owner
@@ -548,11 +549,13 @@ struct Item {
         ItStarVars star;
         itSword_ItemVars sword;
         ItMatoVars mato;
+        itFoodsVars foods;
         BobOmbVars BobOmb;
         HeartContainerVars HeartContainer;
         MaximTomatoVars MaximTomato;
         FoodVars Food;
         EggVars egg;
+        itHeiHoVars heiho;
         WhispyAppleVars WhispyApple;
         PKFlashVars PKFlash;
         PKFlashExplVars PKFlashExpl;
