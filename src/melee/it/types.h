@@ -566,6 +566,7 @@ struct Item {
         itKirbyHammerVars kirbyhammer;
         itLinkBowVars linkbow;
         itShellVars shell;
+        itLinkBombVars linkbomb;
         itTargetVars target;
         CoinVars coin;
         FFlowerVars fflower;
