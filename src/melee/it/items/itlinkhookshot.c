@@ -875,8 +875,9 @@ s32 it_802A3E50(ItemLink* item_link, enum FighterKind arg1, f32 arg8)
     ItemLink* item_link_next_2;
     f32 temp_f2;
 
-    // @todo: change x8 and x10 to be floats
     CollData* coll;
+    // @todo: This is seemingly the wrong struct; there should
+    // be floats at 0x8, 0xC, 0x14, 0x18
     mp_UnkStruct0* mp_island;
     bool flag;
     s32 var_r29;

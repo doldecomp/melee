@@ -11,8 +11,8 @@ struct mp_UnkStruct0 {
     /*  +8 */ int x8;
     /*  +C */ int xC;
     /* +10 */ int x10;
-    /* +14 */ float x14;
-    /* +18 */ float x18;
+    /* +14 */ int x14;
+    /* +18 */ int x18;
     /* +1C */ int x1C;
     /* +20 */ int x20;
     /* +24 */ short x24;
