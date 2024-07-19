@@ -567,6 +567,7 @@ struct Item {
         itLinkHookshotVars linkhookshot;
         itLinkBowVars linkbow;
         itShellVars shell;
+        itLinkBombVars linkbomb;
         itTargetVars target;
         CoinVars coin;
         FFlowerVars fflower;
