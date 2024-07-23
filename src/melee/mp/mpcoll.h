@@ -73,7 +73,7 @@
 /* 048768 */ void mpColl_80048768(CollData*);
 /* 04B108 */ bool mpColl_8004B108(CollData*);
 /* 04B21C */ void mpColl_8004B21C(CollData*);
-/* 04B2DC */ void mpColl_8004B2DC(CollData*);
+/* 04B2DC */ bool mpColl_8004B2DC(CollData*);
 /* 04B3F0 */ void mpColl_8004B3F0(CollData*);
 /* 04B5C4 */ void mpColl_8004B5C4(CollData*);
 /* 04C864 */ void mpColl_8004C864(CollData*, s32, float, float);

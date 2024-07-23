@@ -151,10 +151,10 @@ void Item_80266FCC(void)
 
     it_804A0E60.x8 = 0;
     it_804A0E50.x8 = 0;
-    it_804A0E30.xC = 0;
+    it_804A0E30.x4.x8 = 0;
     it_804A0E60.x0 = 0;
     it_804A0E50.x0 = 0;
-    it_804A0E30.x4 = 0;
+    it_804A0E30.x4.x0 = 0;
 }
 
 static void ItUnkHoldKind(HSD_GObj* gobj)

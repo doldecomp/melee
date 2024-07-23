@@ -19,8 +19,8 @@
 /* 26DA08 */ bool it_8026DA08(Item_GObj*);
 /* 26DA70 */ s32 it_8026DA70(HSD_GObj*);
 /* 26DAA8 */ s32 it_8026DAA8(Item_GObj*);
-/* 26DF34 */ bool it_8026DF34(void);
-/* 26DFB0 */ bool it_8026DFB0(void);
+/* 26DF34 */ bool it_8026DF34(Item_GObj*);
+/* 26DFB0 */ bool it_8026DFB0(Item_GObj*);
 /* 26EA20 */ bool it_8026EA20(Item_GObj*, Vec3*, Vec3*, Vec3*, s32*, UNK_T);
 /* 26E0F4 */ void it_8026E0F4(Item_GObj*);
 /* 26E15C */ void it_8026E15C(Item_GObj*, HSD_GObjEvent);
@@ -120,12 +120,13 @@
 /* 279BE0 */ void it_80279BE0(HSD_GObj* gobj);
 /* 279CDC */ void it_80279CDC(HSD_GObj*, f32);
 /* 27A160 */ void it_8027A160(HSD_JObj* bone, Item*);
+u32 it_8026ECE0(Item_GObj *, u32);
 /* 27A344 */ void it_8027A344(Item_GObj*);
 /* 27B0C4 */ void it_8027B0C4(HSD_GObj*, SpawnItem*);
 /* 27B4A4 */ void it_8027B4A4(Fighter_GObj*, Item_GObj*);
 /* 27B5B0 */ Item_GObj* it_8027B5B0(s32, s32, HSD_JObj*, Vec3*, s32);
 /* 4A0E30 */ extern HSD_ObjAllocUnk4 it_804A0E30;
-/* 4A0E50 */ extern HSD_ObjAllocUnk5 it_804A0E50;
+/* 4A0E50 */ extern HSD_ObjAllocUnk6 it_804A0E50;
 /* 4A0E60 */ extern HSD_ObjAllocUnk6 it_804A0E60;
 /* 4A0F60 */ extern Article* it_804A0F60[];
 /* 4D6D00 */ extern s8 it_804D6D00;
