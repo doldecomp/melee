@@ -29,7 +29,7 @@
                                  float surface_normal_x, float left_x,
                                  float left_y, Vec3* coll_vec, UNK_T, UNK_T,
                                  UNK_T, u32, u32);
-/* 051EC8 */ s32 mpLib_80051EC8(Vec3*, s32, s32, s32, s32, s32, s32, float,
+/* 051EC8 */ s32 mpLib_80051EC8(Vec3*, s32*, s32*, Vec3*, s32, s32, s32, float,
                                 float, float, float);
 /* 0524DC */ bool mpLib_800524DC(int, int, int, int, int, int, float x,
                                  float y, float z, float);

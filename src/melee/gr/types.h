@@ -212,6 +212,37 @@ struct GroundVars_izumi3 {
     u8 xE0_pad[0x218 - 0xE0];
 };
 
+struct GroundVars_flatzone {
+    u8 xC4;
+    u8 xC5;
+    u8 xC6;
+    u8 xC7;
+    s16 xC8;
+    s16 xCA;
+    s16 xCC;
+    s16 xCE;
+    s32 xD0;
+    s32 xD4;
+};
+
+struct grDynamicAttr_UnkStruct {
+    grDynamicAttr_UnkStruct* next;
+    s32 unk4;
+    Vec3 unk8;
+    s32 unk14;
+    f32 unk18;
+    s32 unk1C;
+    u8 x0_fill[0x24 - 0x20];
+};
+
+struct GroundVars_flatzone2 {
+    s32 xC4;
+    f32 xC8;
+    grDynamicAttr_UnkStruct *xCC;
+    s32 xD0;
+    s32 xD4;
+};
+
 struct grKongo_GroundVars {
     /* gp+C4 */ short xC4;
     /* gp+C6 */ short xC6;
@@ -261,6 +292,8 @@ struct Ground {
     union GroundVars { // how big should this be?
         u8 _[0x218 - 0xC4];
         struct GroundVars_unk unk;
+        struct GroundVars_flatzone flatzone;
+        struct GroundVars_flatzone2 flatzone2;
         struct GroundVars_izumi izumi;
         struct GroundVars_izumi2 izumi2;
         struct GroundVars_izumi3 izumi3;
@@ -360,16 +393,6 @@ struct UnkArchiveStruct {
     HSD_Archive* unk0;
     UnkStageDat* unk4;
     s32 unk8;
-};
-
-struct grDynamicAttr_UnkStruct {
-    grDynamicAttr_UnkStruct* next;
-    s32 unk4;
-    Vec3 unk8;
-    s32 unk14;
-    f32 unk18;
-    s32 unk1C;
-    u8 x0_fill[0x24 - 0x20];
 };
 
 #endif
