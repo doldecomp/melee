@@ -1,4 +1,4 @@
-#include "it/inlines.h"
+#include "gr/grflatzone.h"
 
 #include "it/inlines.h"
 
@@ -8,7 +8,6 @@
 
 #include "gr/grmaterial.h"
 
-#include "gr/grflatzone.h"
 #include <baselib/random.h>
 #include <baselib/jobj.h>
 #include <baselib/gobjgxlink.h>
@@ -48,13 +47,12 @@ StageData grFz_803E7A00 = {
     0,
 };
 
-void fn_8021706C(HSD_GObj *);
-void fn_80217440(HSD_GObj *);
-
-void Camera_800311CC(f32);                             /* extern */
-void Camera_800311DC(f32);                             /* extern */
-void *it_802EEFA8(Vec3 *, s32, f32);                 /* extern */
-void mpLib_80058560();                                 /* extern */
+extern void fn_8021706C(HSD_GObj *);
+extern void fn_80217440(HSD_GObj *);
+extern void Camera_800311CC(f32);                             /* extern */
+extern void Camera_800311DC(f32);                             /* extern */
+extern void *it_802EEFA8(Vec3 *, s32, f32);                 /* extern */
+extern void mpLib_80058560(void);                                 /* extern */
 
 static struct {
     s32 unk0;
@@ -78,7 +76,7 @@ static struct {
 // static s8 grFz_804D4928[8] = { 0x6A, 0x6F, 0x62, 0x6A, 0, 0, 0, 0 };
 static Vec3 grFz_803B8430;
 
-void grFlatzone_80216E74(void) {
+void grFlatzone_80216E74(int arg0) {
     return;
 }
 
@@ -144,15 +142,15 @@ void grFlatzone_80217030(Ground_GObj *gobj) {
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-int grFlatzone_8021705C(void) {
+int grFlatzone_8021705C(HSD_GObj *gobj) {
     return 0;
 }
 
-void grFlatzone_80217064(void) {
+void grFlatzone_80217064(HSD_GObj *gobj) {
     return;
 }
 
-void grFlatzone_80217068(void) {
+void grFlatzone_80217068(HSD_GObj *gobj) {
     return;
 }
 
@@ -161,11 +159,11 @@ void fn_8021706C(HSD_GObj *gobj) {
     gp->gv.flatzone.xC4 = 0;
 }
 
-static inline rand_int_inner(s32 a) {
+static inline int rand_int_inner(s32 a) {
     return (a != 0) ? HSD_Randi(a) : 0;
 }
 
-static inline rand_int(s32 a, s32 b) {
+static inline int rand_int(s32 a, s32 b) {
     if (a > b) {
         s32 c = a - b;
         a = b + ((c != 0) ? HSD_Randi(c) : 0);
@@ -189,11 +187,11 @@ void grFlatzone_8021707C(Ground_GObj *gobj) {
     Ground_801C10B8(gobj, fn_8021706C);
 }
 
-int grFlatzone_802171CC() {
+int grFlatzone_802171CC(HSD_GObj *gobj) {
     return 0;
 }
 
-static inline grFlatzone_802171D4_inline(Ground_GObj *gobj) {
+static inline void grFlatzone_802171D4_inline(Ground_GObj *gobj) {
     if (gobj != NULL) {
         Ground *gp = GET_GROUND(gobj);
         if (gp != NULL) {
@@ -245,7 +243,7 @@ void grFlatzone_802171D4(Ground_GObj *gobj) {
     lb_800115F4();
 }
 
-void grFlatzone_802173D0(void) {
+void grFlatzone_802173D0(HSD_GObj *gobj) {
 
 }
 
@@ -257,15 +255,15 @@ void grFlatzone_802173D4(Ground_GObj *gobj) {
     gp->x11_flags.b012 = 2;
 }
 
-int grFlatzone_80217430(void) {
+int grFlatzone_80217430(HSD_GObj *gobj) {
     return 0;
 }
 
-void grFlatzone_80217438(void) {
+void grFlatzone_80217438(HSD_GObj *gobj) {
     return;
 }
 
-void grFlatzone_8021743C(void) {
+void grFlatzone_8021743C(HSD_GObj *gobj) {
     return;
 }
 
@@ -289,7 +287,7 @@ void grFlatzone_80217450(Ground_GObj *gobj) {
     Ground_801C10B8((HSD_GObj *) gobj, fn_80217440);
 }
 
-int grFlatzone_802174E4(void) {
+int grFlatzone_802174E4(HSD_GObj *gobj) {
     return 0;
 }
 
@@ -430,7 +428,7 @@ void grFlatzone_802176BC(Ground_GObj *gobj) {
     Ground_801C2FE0(gobj);
 }
 
-void grFlatzone_80217644(void) {
+void grFlatzone_80217644(HSD_GObj *gobj) {
     return;
 }
 
@@ -447,11 +445,11 @@ void grFlatzone_80217648(Ground_GObj *gobj) {
     gp->gv.flatzone2.xD4 = 0;
 }
 
-int grFlatzone_802176B4(void) {
+int grFlatzone_802176B4(HSD_GObj *gobj) {
     return 0;
 }
 
-void grFlatzone_80217CD0(void) {
+void grFlatzone_80217CD0(HSD_GObj *gobj) {
 
 }
 
@@ -464,7 +462,7 @@ void grFlatzone_80217CD4(Ground_GObj *gobj) {
     gp->gv.flatzone.xC4 = 0;
 }
 
-int grFlatzone_80217D28(void) {
+int grFlatzone_80217D28(HSD_GObj *gobj) {
     return 0;
 }
 
@@ -485,7 +483,7 @@ void grFlatzone_80217D30(Ground_GObj *gobj) {
     Ground_801C2FE0((HSD_GObj *) gobj);
 }
 
-void grFlatzone_80217DA4(void) {
+void grFlatzone_80217DA4(HSD_GObj *gobj) {
     return;
 }
 
@@ -493,7 +491,7 @@ void grFlatzone_80217DA8(Ground_GObj *gobj) {
     grFlatzone_80217CD4(gobj);
 }
 
-int grFlatzone_80217DFC(void) {
+int grFlatzone_80217DFC(HSD_GObj *gobj) {
     return 0;
 }
 
@@ -559,23 +557,23 @@ void grFlatzone_80217E04(Ground_GObj *gobj) {
 }
 
 
-void grFlatzone_80217E78(void) {
+void grFlatzone_80217E78(HSD_GObj *gobj) {
 	return;
 }
 
-void grFlatzone_80217E7C(void) {
+void grFlatzone_80217E7C(HSD_GObj *gobj) {
 	return;
 }
 
-int grFlatzone_80217E80(void) {
+int grFlatzone_80217E80(HSD_GObj *gobj) {
     return 0;
 }
 
-void grFlatzone_80217E88(void) {
+void grFlatzone_80217E88(HSD_GObj *gobj) {
 	return;
 }
 
-void grFlatzone_80217E8C(void) {
+void grFlatzone_80217E8C(HSD_GObj *gobj) {
 	return;
 }
 
@@ -588,7 +586,7 @@ void grFlatzone_80217E90(Ground_GObj *gobj) {
     *(s32 *)&gp->gv.flatzone.xC8 = 0;
 }
 
-int grFlatzone_80217EE8(void) {
+int grFlatzone_80217EE8(HSD_GObj *gobj) {
     return 0;
 }
 
@@ -637,7 +635,7 @@ void grFlatzone_80217EF0(Ground_GObj *gobj) {
 
 
 
-void grFlatzone_8021805C(void) {
+void grFlatzone_8021805C(HSD_GObj *gobj) {
     return;
 }
 
@@ -739,6 +737,6 @@ lb_UnkAnimStruct * grFlatzone_802182B4(int arg0) {
     return NULL;
 }
 
-int grFlatzone_802182BC(void) {
+int grFlatzone_802182BC(Vec3 *arg0, int arg1, HSD_JObj *arg2) {
     return 1;
 }
