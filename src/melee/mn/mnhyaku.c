@@ -32,15 +32,15 @@ void HSD_SisLib_803A5CC4(void*);
 s32 mn_80229624(s32);
 s32 mn_80229894(s32, s32, s32);
 float mn_8022EC18(HSD_JObj*, float*, int);
-void mn_802295AC();
-void gm_801677E8();
+void mn_802295AC(void);
+void gm_801677E8(void);
 void mn_80229860(s32);
 f32 mn_8022F298(HSD_JObj *);
 void mn_8022F3D8(HSD_JObj *, s32, s32);
 
 void lbAudioAx_8002702C(s32, s32, s32);
-void lbAudioAx_80027168();
-f32 lbAudioAx_80027648();
+void lbAudioAx_80027168(void);
+f32 lbAudioAx_80027648(void);
 
 static f32 mnHyaku_803EF668[3] = { 0.0f, 19.0f, -0.1f };
 static f32 mnHyaku_803EF674[3] = { 20.0f, 29.0f, -0.1f };
