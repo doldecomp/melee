@@ -63,7 +63,7 @@
 /* 1C2090 */ bool Ground_801C2090(GXColor* color);
 /* 1C20D0 */ f32 Ground_801C20D0(void);
 /* 1C2374 */ void Ground_801C2374(HSD_LObj* lobj);
-/* 1C247C */ s32 Ground_801C247C(s32, s32);
+/* 1C247C */ HSD_Spline *Ground_801C247C(s32, s32);
 /* 1C28AC */ bool Ground_801C28AC(s32, u32, s32*);
 /* 1C2AD8 */ u8* Ground_801C2AD8(void);
 /* 1C2AE8 */ f32 Ground_801C2AE8(s32);

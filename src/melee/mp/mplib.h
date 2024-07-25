@@ -47,6 +47,7 @@
 /* 054F68 */ bool mpLib_80054F68(s32, s32);
 /* 0552B0 */ void mpLib_800552B0(s16 x, HSD_JObj*, s16 z);
 /* 055E9C */ void mpLib_80055E9C(s16 x);
+/* 5667C */ void mpLib_8005667C(s16);
 /* 0567C0 */ bool mpLib_800567C0(s32 wall_id, Vec3* ecb_side_vtx,
                                  Vec3* result);
 /* 0569EC */ void mpLib_800569EC(void);

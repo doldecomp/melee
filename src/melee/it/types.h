@@ -376,7 +376,7 @@ struct Item {
     Vec2 xC78;                   // 0xc74
     Vec2 xC80;                   // 0xc7c
     s32 xC88;                    // 0xc88
-    s16 xC8C;                    // 0xc8c
+    u16 xC8C;                    // 0xc8c
     HSD_GObj* xC90_absorbGObj;   // 0xc90
     s32 xC94;                    // 0xc94
     s32 xC98;                    // 0xc98

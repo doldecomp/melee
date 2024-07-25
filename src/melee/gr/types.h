@@ -213,15 +213,55 @@ struct GroundVars_izumi3 {
 };
 
 struct grKongo_GroundVars {
-    /* gp+C4 */ short xC4;
-    /* gp+C6 */ short xC6;
-    /* gp+C8 */ UNK_T xC8;
-    /* gp+CC */ UNK_T xCC;
+    /* gp+C4 */ f32 xC4;
+    /* gp+C8 */ f32 xC8;
+    /* gp+CC */ f32 xCC;
     /* gp+D0 */ union {
         struct {
-            UNK_T keep;
+            void *keep;
         } taru;
     } u;
+    /* gp+D4 */ f32 xD4;
+    /* gp+D8 */ f32 xD8;
+    /* gp+DC */ HSD_JObj *xDC;
+    /* gp+E0 */ HSD_JObj *xE0;
+    /* gp+E4 */ s16 xE4;
+    /* gp+E6 */ s16 xE6;
+    /* gp+E8 */ f32 xE8;
+    u8 xEC_pad[0x218 - 0xEC];
+};
+
+struct grKongo_GroundVars2 {
+    HSD_Spline *xC4;
+    f32 xC8;
+    s16 xCC;
+    s16 xCE;
+    f32 xD0;
+    f32 xD4;
+    f32 xD8;
+    f32 xDC;
+    f32 xE0;
+    f32 xE4;
+    f32 xE8;
+    u8 xE0_pad[0x218 - 0xE0];
+};
+
+// @todo: Investigate if these extra structs could be
+// shared among stages/other things as more are decompiled.
+struct grKongo_GroundVars3 {
+    /* gp+C4 */ s16 xC4;
+    /* gp+C6 */ s16 xC6;
+    /* gp+C8 */ s16 xC8;
+    /* gp+CA */ s16 xCA;
+    HSD_JObj *xCC;
+    HSD_JObj *xD0;
+    f32 xD4;
+    f32 xD8;
+    f32 xDC;
+    f32 xE0;
+    f32 xE4;
+    f32 xE8;
+    u8 xE0_pad[0x218 - 0xE0];
 };
 
 struct grCorneria_GroundVars {
@@ -265,6 +305,8 @@ struct Ground {
         struct GroundVars_izumi2 izumi2;
         struct GroundVars_izumi3 izumi3;
         struct grKongo_GroundVars kongo;
+        struct grKongo_GroundVars2 kongo2;
+        struct grKongo_GroundVars3 kongo3;
         struct grCorneria_GroundVars corneria;
     } gv;
 };
