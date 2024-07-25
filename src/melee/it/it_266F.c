@@ -1,3 +1,4 @@
+#include "it/it_266F.h"
 #include "lb/lbcollision.h"
 
 #include "gm/gm_1601.h"
@@ -26,8 +27,8 @@ s32 it_8026CB3C(Vec3 *arg0);
 f32 gm_8016AE94();
 u64 gm_8016AEA4();
 bool gm_8016AE80();
+s32 it_80272828(s32);
 
-bool it_8026D324(s32);
 s32 it_8026DDFC(Item_GObj *arg0);
 s32 it_8026DBC8(HSD_GObj *gobj);
 
@@ -47,6 +48,8 @@ typedef struct test_struct {
     s32 unk18;
     s32 unk1C;
 } test_struct;
+
+void it_8026C47C(test_struct *);
 
 void it_8026C47C(test_struct *arg0) {
     s32 *var_r28;
@@ -461,8 +464,6 @@ s32 it_8026D604(HSD_GObj *gobj) {
     return mpLib_80054ED8(ip->xC30);
 }
 
-typedef void (*ItCallback)(HSD_GObj *);
-
 void it_8026D62C(Item_GObj *gobj, ItCallback arg1) {
     CollData *coll;
     Item *ip;
@@ -816,8 +817,8 @@ s32 it_8026DFB0(Item_GObj *gobj) {
     if (cond) {
         ip->xC30 = (u32) coll->floor.index;
     }
-    cond |= it_80276308(ip);
-    if ((cond | it_802763E0(ip)) & 0xF) {
+    cond |= it_80276308(gobj);
+    if ((cond | it_802763E0(gobj)) & 0xF) {
         return 1;
     }
     return 0;
@@ -836,7 +837,7 @@ s32 it_8026E058(Item_GObj *gobj) {
     if (cond) {
         ip->xC30 = (u32) coll->floor.index;
     }
-    cond |= it_80276308(ip);
+    cond |= it_80276308(gobj);
     if (cond & 0xD) {
         return 1;
     }
@@ -1077,6 +1078,7 @@ void it_8026EECC(HSD_GObj *gobj, s32 arg1) {
                         pos.x = pos.y = pos.z = 0.0F;
                     }
                 }
+                // @todo This could just be one big function call.
                 {
                     Item *ip = gobj->user_data;
                     switch (Camera_80031060()) {
