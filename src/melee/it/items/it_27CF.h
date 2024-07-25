@@ -18,8 +18,6 @@
 /* 28428C */ void it_8028428C(Item_GObj*);
 /* 286088 */ HSD_GObj* it_80286088(HSD_GObj*);
 /* 2896CC */ HSD_GObj* it_802896CC(Vec3*);
-/* 28FAF4 */ void it_8028FAF4(Item_GObj*, Vec3*);
-/* 28FE90 */ void it_8028FE90(Item_GObj*);
 /* 290938 */ HSD_GObj* it_80290938(HSD_JObj*);
 /* 291BE0 */ HSD_GObj* it_80291BE0(Vec3*);
 /* 294DC0 */ HSD_GObj* it_80294DC0(Vec3*);
@@ -34,9 +32,6 @@
                                    Vec3* pos, Fighter_Part, int);
 /* 2A0534 */ void it_802A0534(Item_GObj* gobj, Vec3*);
 /* 2A07B4 */ void it_802A07B4(Item_GObj* gobj);
-/* 2A8398 */ void it_802A8398(Item_GObj*, Vec3*);
-/* 2A83E0 */ HSD_GObj* it_802A83E0(float facing_dir, Fighter_GObj*, Vec3*,
-                                   Fighter_Part, int);
 /* 2A850C */ void it_802A850C(Item_GObj*, Vec3*, Vec3*, float, float, float);
 /* 2A8A7C */ void it_802A8A7C(Item_GObj* gobj);
 /* 2AA054 */ void it_802AA054(Item_GObj*, Vec3*, Vec3*, float, float);
@@ -159,7 +154,6 @@
 /* 2C837C */ HSD_GObj* it_802C837C(Item_GObj*, Vec3*, enum_t, u32, float);
 /* 2C8B28 */ HSD_GObj* it_802C8B28(Item_GObj*, Vec3*, u32, float);
 /* 2C8C34 */ void it_802C8C34(Item_GObj*);
-/* 2D8618 */ void it_802D8618(s32, Vec3*, s32, s32);
 /* 2E5F8C */ s32 it_802E5F8C(Item_GObj*, Vec3*, s32, bool, float, float);
 /* 2F0340 */ u32 it_802F0340(Item_GObj*, Vec3*, Vec3*, u32, u32, float);
 /* 2F046C */ void it_802F046C(s32);

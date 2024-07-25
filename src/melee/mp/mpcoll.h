@@ -49,7 +49,7 @@
 /* 045B74 */ s32 mpColl_80045B74(CollData*);
 /* 046224 */ s32 mpColl_80046224(CollData*);
 /* 046904 */ bool mpColl_80046904(CollData* cd, u32 flags);
-/* 0471F8 */ void mpColl_800471F8(CollData*);
+/* 0471F8 */ bool mpColl_800471F8(CollData*);
 /* 04730C */ bool mpColl_8004730C(CollData* cdata, ftCollisionBox* arg1);
 /* 0473CC */ void mpColl_800473CC(CollData*);
 /* 0474E0 */ void mpColl_800474E0(CollData*);

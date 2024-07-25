@@ -285,6 +285,7 @@ struct Item {
     Item_DynamicBones xD4_dynamicBones[24];
     s32 x374_dynamicBonesNum;
     CollData x378_itemColl;
+    s32 ecb_lock;
 
     /// @at{518} @sz{4}
     /// @brief Item's current owner
@@ -548,20 +549,25 @@ struct Item {
         ItStarVars star;
         itSword_ItemVars sword;
         ItMatoVars mato;
+        itFoodsVars foods;
         BobOmbVars BobOmb;
         HeartContainerVars HeartContainer;
         MaximTomatoVars MaximTomato;
         FoodVars Food;
         EggVars egg;
+        itHeiHoVars heiho;
         WhispyAppleVars WhispyApple;
         PKFlashVars PKFlash;
         PKFlashExplVars PKFlashExpl;
         PKThunderVars PKThunderVars;
         FoxLaserVars foxlaser;
         FoxIllusionVars foxillusion;
+        itLinkArrowVars linkarrow;
         itKirbyHammerVars kirbyhammer;
+        itLinkHookshotVars linkhookshot;
         itLinkBowVars linkbow;
         itShellVars shell;
+        itLinkBombVars linkbomb;
         itTargetVars target;
         CoinVars coin;
         FFlowerVars fflower;
@@ -570,27 +576,6 @@ struct Item {
         u8 padding[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
-
-typedef struct ItemLink // user_data struct of GObj class 7
-{
-    struct ItemLink* prev;
-    struct ItemLink* next;
-    Vec3 x8_vel;
-    Vec3 pos;
-    Vec3 x20_vec; // Previous position?
-    u8 flag0 : 1;
-    u8 flag1 : 1;
-    u8 flag2 : 1;
-    u8 flag3 : 1;
-    u8 flag4 : 1;
-    u8 flag5 : 1;
-    u8 flag6 : 1;
-    u8 flag7 : 1;
-    CollData x30_collData;
-    HSD_GObj* x1D0_GObj;
-    HSD_GObj* x1D4_GObjLinkNext;
-
-} ItemLink;
 
 struct sdata_ItemGXLink {
     GObj_RenderFunc x0_renderFunc;

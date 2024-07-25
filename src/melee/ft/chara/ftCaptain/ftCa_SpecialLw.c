@@ -1,16 +1,20 @@
+
 #include <platform.h>
 #include "ftCaptain/forward.h"
 #include <dolphin/mtx/forward.h>
 
 #include "ftCaptain/ftCa_SpecialLw.h"
 
+#include "ef/efasync.h"
 #include "ef/eflib.h"
+#include "ft/chara/ftCommon/inlines.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/ftlib.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCaptain/types.h"
@@ -18,14 +22,62 @@
 #include <common_structs.h>
 #include <placeholder.h>
 
-/* literal */ float const ftCa_SpecialHi_804D9220 = 0;
-/* literal */ float const ftCa_SpecialHi_804D9224 = 0.01745329238474369f;
-/* literal */ float const ftCa_SpecialHi_804D9228 = 1;
-/* literal */ float const ftCa_SpecialHi_804D922C = -1;
+// /* literal */ float const ftCa_SpecialHi_804D9220 = 0.0F;
+// /* literal */ float const ftCa_SpecialHi_804D9224 = 0.01745329238474369f;
+// /* literal */ float const ftCa_SpecialHi_804D9228 = 1;
+// /* literal */ float const ftCa_SpecialHi_804D922C = -1;
 
-static void ftCa_SpecialHi_800E3EAC(HSD_GObj* gobj)
+static inline bool ftCa_Special_Inline_Check_Flag(Fighter* fp)
 {
-    NOT_IMPLEMENTED;
+    if (fp->throw_flags_b1) {
+        fp->throw_flags_b1 = 0;
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+static inline void ftCa_Special_Inline_SetFlags(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+}
+
+void ftCa_SpecialHi_800E3EAC(HSD_GObj* gobj)
+{
+    f32 sp1C;
+    enum Fighter_Part var_r29;
+
+    // var_r29 = saved_reg_r29;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCaptain_DatAttrs* da = fp->dat_attrs;
+    PAD_STACK(12);
+    if (ftCa_Special_Inline_Check_Flag(fp) != 0) {
+        if (!fp->x2219_b0) {
+            if (fp->motion_id == 0x165) {
+                sp1C = 0.0F;
+                var_r29 = ftParts_8007500C(fp, FtPart_RFootJA);
+            } else if (fp->motion_id == 0x167) {
+                sp1C = 0.017453292f * da->speciallw_flame_particle_angle;
+                var_r29 = ftParts_8007500C(fp, FtPart_LFootJA);
+            }
+            switch (ftLib_800872A4(gobj)) {
+            case FTKIND_CAPTAIN:
+                efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3U, 0x490U,
+                              fp->parts[var_r29].joint, &sp1C);
+                break;
+            case FTKIND_GANON:
+                efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3U, 0x50CU,
+                              fp->parts[var_r29].joint, &sp1C);
+                break;
+            }
+            fp->x2219_b0 = 1;
+            return;
+        }
+        ftCommon_8007DB24((Fighter_GObj*) gobj);
+    }
 }
 
 static void ftCa_SpecialHi_800E400C(HSD_GObj* gobj)
@@ -46,10 +98,10 @@ void ftCa_SpecialLw_Enter(HSD_GObj* gobj)
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
-    fp->mv.ca.speciallw.x0 = 0;
-    fp->mv.ca.speciallw.friction = 1;
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLw, Ft_MF_None, 0, 1, 0,
-                              NULL);
+    fp->mv.ca.speciallw.x0 = 0.0F;
+    fp->mv.ca.speciallw.friction = 1.0F;
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLw, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
     ftAnim_8006EBA4(gobj);
     fp->deal_dmg_cb = ftCa_SpecialHi_800E400C;
     fp->pre_hitlag_cb = efLib_PauseAll;
@@ -71,35 +123,36 @@ void ftCa_SpecialAirLw_Enter(HSD_GObj* gobj)
     fp->post_hitlag_cb = efLib_ResumeAll;
 }
 
+static inline void ftCa_SpecialLw_Anim_inline(HSD_GObj* gobj, s32 condition)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCaptain_DatAttrs* da = fp->dat_attrs;
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+    fp->throw_flags = 0;
+    if (condition == 0) {
+        ftCommon_8007D7FC(fp);
+        Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLwEnd, Ft_MF_None, 0,
+                                  da->speciallw_ground_lag_mul, 0, NULL);
+    } else {
+        ftCommon_8007D5D4(fp);
+        Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLwEndAir, Ft_MF_None, 0,
+                                  1, 0, NULL);
+    }
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+}
+
 void ftCa_SpecialLw_Anim(HSD_GObj* gobj)
 {
-    u8 _[32];
     Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(24);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->ground_or_air == GA_Ground) {
-            Fighter* fp = GET_FIGHTER(gobj);
-            ftCaptain_DatAttrs* da = fp->dat_attrs;
-            fp->cmd_vars[2] = 0;
-            fp->cmd_vars[1] = 0;
-            fp->cmd_vars[0] = 0;
-            fp->throw_flags = 0;
-            ftCommon_8007D7FC(fp);
-            Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLwEnd, Ft_MF_None,
-                                      0, da->speciallw_ground_lag_mul, 0,
-                                      NULL);
-            fp->pre_hitlag_cb = efLib_PauseAll;
-            fp->post_hitlag_cb = efLib_ResumeAll;
+            ftCa_SpecialLw_Anim_inline(gobj, 0);
         } else {
-            Fighter* fp = GET_FIGHTER(gobj);
-            fp->cmd_vars[2] = 0;
-            fp->cmd_vars[1] = 0;
-            fp->cmd_vars[0] = 0;
-            fp->throw_flags = 0;
-            ftCommon_8007D5D4(fp);
-            Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLwEndAir,
-                                      Ft_MF_None, 0, 1, 0, NULL);
-            fp->pre_hitlag_cb = efLib_PauseAll;
-            fp->post_hitlag_cb = efLib_ResumeAll;
+            ftCa_SpecialLw_Anim_inline(gobj, 1);
         }
     }
 }
@@ -118,15 +171,20 @@ void ftCa_SpecialLwEndAir_Anim(HSD_GObj* gobj)
     }
 }
 
+static inline void ftCa_SpecialAirLw_Anim_inline(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+    fp->throw_flags = 0;
+}
+
 void ftCa_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
-    u8 _[8];
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        fp->cmd_vars[2] = 0;
-        fp->cmd_vars[1] = 0;
-        fp->cmd_vars[0] = 0;
-        fp->throw_flags = 0;
+        ftCa_SpecialAirLw_Anim_inline(gobj);
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLwEndAir, Ft_MF_None,
                                   0, 1, 0, NULL);
@@ -154,6 +212,13 @@ void ftCa_SpecialHiThrow1_Anim(HSD_GObj* gobj)
     }
 }
 
+static inline void ftCa_Special_Inline_Friction(Fighter* fp)
+{
+    float friction = fp->mv.ca.speciallw.friction;
+    fp->self_vel.x *= friction;
+    fp->self_vel.y *= friction;
+}
+
 void ftCa_SpecialLw_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -164,11 +229,7 @@ void ftCa_SpecialLw_Phys(HSD_GObj* gobj)
         ftParts_80075CB4((Fighter*) fp, 0, 0);
         ft_80085134(gobj);
     }
-    {
-        float friction = fp->mv.ca.speciallw.friction;
-        fp->self_vel.x *= friction;
-        fp->self_vel.y *= friction;
-    }
+    ftCa_Special_Inline_Friction(fp);
     ftCa_SpecialHi_800E3EAC(gobj);
 }
 
@@ -187,14 +248,10 @@ void ftCa_SpecialLwEnd_Phys(HSD_GObj* gobj)
             ft_80084F3C(gobj);
         }
     } else {
-        ftParts_80075CB4(fp, 0, 0);
+        ftParts_80075CB4(fp, 0, 0.0F);
         ft_80084EEC(gobj);
     }
-    {
-        float friction = fp->mv.ca.speciallw.friction;
-        fp->self_vel.x *= friction;
-        fp->self_vel.y *= friction;
-    }
+    ftCa_Special_Inline_Friction(fp);
 }
 
 void ftCa_SpecialLwEndAir_Phys(HSD_GObj* gobj)
@@ -256,18 +313,15 @@ void ftCa_SpecialLw_Coll(HSD_GObj* gobj)
         ftCommon_8007D7FC((Fighter*) fp);
     }
     {
-        float facing_dir;
         if ((fp->cmd_vars[0] != 0) &&
             /// @todo Pull out these check functions
-            (((facing_dir = fp->facing_dir, ((facing_dir == -1) != 0)) &&
+            (((((fp->facing_dir == -1) != 0)) &&
               (fp->coll_data.env_flags & MPCOLL_FLAGS_B11)) ||
-             (facing_dir == +1 &&
+             (fp->facing_dir == +1 &&
               (fp->coll_data.env_flags & MPCOLL_FLAGS_B05))))
         {
-            Fighter* fp = GET_FIGHTER(gobj);
-            fp->cmd_vars[2] = 0;
-            fp->cmd_vars[1] = 0;
-            fp->cmd_vars[0] = 0;
+            fp = GET_FIGHTER(gobj);
+            ftCa_Special_Inline_SetFlags(gobj);
             fp->throw_flags = 0;
             ftCommon_8007D5D4(fp);
             Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialHiThrow1,

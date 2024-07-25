@@ -174,11 +174,11 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/ftdevice.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_Bury.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_FlyReflect.s.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_PassiveWall.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_PassiveWall.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_PassiveCeil.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftafterimage.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DamageSong.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_0C35.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_0C35.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_AirCatch.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_DamageBind.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_WarpStar.s.o\
@@ -227,7 +227,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialN.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialS.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftCa_SpecialLw.s.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftCa_SpecialHi.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCa_SpecialHi.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFx_Init.c.o\
@@ -706,7 +706,7 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itoldkuri.s.o\
     $(BUILD_DIR)/src/melee/it/items/itmato.c.o\
-    $(BUILD_DIR)/asm/melee/it/items/itheiho.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itheiho.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itlikelike.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itnokonoko.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itzgshell.s.o\
