@@ -4,6 +4,7 @@
 #include <platform.h>
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include "it/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
@@ -33,6 +34,7 @@
 /* 076ED8 */ bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
                                   HitCapsule* hit1);
 /* 077464 */ UNK_RET ftColl_80077464(UNK_PARAMS);
+/* 077688 */ void ftColl_80077688(Item*, HitCapsule*, Fighter*, Vec3*, f32);
 /* 077970 */ UNK_RET ftColl_80077970(UNK_PARAMS);
 /* 077C60 */ UNK_RET ftColl_80077C60(UNK_PARAMS);
 /* 078384 */ void ftColl_80078384(Fighter*, HurtCapsule*, HitCapsule*);

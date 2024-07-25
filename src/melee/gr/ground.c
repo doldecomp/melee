@@ -1167,7 +1167,7 @@ void Ground_801C2374(HSD_LObj* lobj)
     }
 }
 
-s32 Ground_801C247C(s32 arg0, s32 arg1)
+HSD_Spline* Ground_801C247C(s32 arg0, s32 arg1)
 {
     UnkArchiveStruct* archive = grDatFiles_801C6330(arg0);
     if (archive == NULL) {
@@ -1176,7 +1176,7 @@ s32 Ground_801C247C(s32 arg0, s32 arg1)
     if (archive->unk4 != NULL && arg1 < archive->unk4->unk14) {
         return archive->unk4->unk10[arg1];
     } else {
-        return 0;
+        return NULL;
     }
 }
 

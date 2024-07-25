@@ -11,7 +11,6 @@
 
 #include <placeholder.h>
 
-/* 077688 */ void ftColl_80077688(Item *, HitCapsule *, Fighter *, Vec3 *, f32);
 /* 26D324 */ bool it_8026D324(bool);
 /* 26D604 */ s32 it_8026D604(HSD_GObj* gobj);
 /* 26D62C */ void it_8026D62C(Item_GObj*, HSD_GObjEvent);

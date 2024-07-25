@@ -725,7 +725,8 @@ void ftColl_80077464(void)
     NOT_IMPLEMENTED;
 }
 
-void ftColl_80077688(void)
+void ftColl_80077688(Item* item, HitCapsule* hurt, Fighter* fp, Vec3* pos,
+                     f32 val)
 {
     NOT_IMPLEMENTED;
 }

@@ -1,100 +1,38 @@
+#include "gr/grkongo.h"
 
-#include "lb/lb_00B0.h"
-
-#include "mp/mplib.h"
-
-#include "lb/lb_00F9.h"
-
-#include <baselib/random.h>
-#include "gr/inlines.h"
-#include "gr/granime.h"
-
-#include "gr/grzakogenerator.h"
-
-#include "ft/ftdevice.h"
-
-#include "gm/gm_1601.h"
-
-#include "gr/stage.h"
-
-#include "mp/mplib.h"
-
-#include "gr/ground.h"
-
-#include "MSL/math.h"
-#include "MSL/math_ppc.h"
 #include "grmaterial.h"
 #include "types.h"
+
+#include "ft/ftdevice.h"
+#include "gm/gm_1601.h"
+#include "gr/granime.h"
 #include "gr/grdisplay.h"
-#include <baselib/spline.h>
-#include <baselib/gobjproc.h>
-#include <baselib/gobjgxlink.h>
+#include "gr/ground.h"
+#include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
+#include "gr/stage.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
+#include "mp/mplib.h"
+#include "MSL/math.h"
+#include "MSL/math_ppc.h"
+
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
+#include <baselib/random.h>
+#include <baselib/spline.h>
 
 void grAnime_801C78FC(HSD_GObj *, s32, s32);
-s32 grAnime_801C84A4(HSD_GObj *, s32, s32);
-void grAnime_801C7A04(HSD_GObj *, s32, s32, f32); /* extern */
-void it_802E20D8(Item_GObj *);                         /* extern */
-
+bool grAnime_801C84A4(HSD_GObj*, s32, s32);
+void grAnime_801C7A04(HSD_GObj*, s32, s32, f32);
+void it_802E20D8(Item_GObj*);
 void mpLib_800580AC(s32);                                /* extern */
 void mpLib_800580E0(s32);                                /* extern */
 
-void grKongo_801D5238();                            /* static */
-void grKongo_801D523C();                            /* static */
-void grKongo_801D52F8();                            /* static */
-void grKongo_801D52FC();                            /* static */
-
-void grKongo_801D5238();                            /* static */
-HSD_GObj *grKongo_801D5340(s32);      /* static */
-void grKongo_801D828C(HSD_GObj* gobj);
-int fn_801D8134(HSD_GObj *arg0, HSD_GObj *arg1);    /* static */
-s32 grKongo_801D5338();                             /* static */
-
+int fn_801D8134(HSD_GObj* arg0, HSD_GObj* arg1);    /* static */
 void fn_801D7700(void *arg2, s32 arg4);             /* static */
-void fn_801D7E60(void *arg2, s32 arg4);             /* static */
-// HSD_GObj *grKongo_801D5340(s32 arg0, ?, u8 *);      /* static */
-void grKongo_801D5490(HSD_GObj *arg0);              /* static */
-s32 grKongo_801D5574();                             /* static */
-void grKongo_801D557C(HSD_GObj *arg0);              /* static */
-void grKongo_801D55D4();                            /* static */
-void grKongo_801D55D8(HSD_GObj *arg0);              /* static */
-s32 grKongo_801D5774();                             /* static */
-void grKongo_801D577C(HSD_GObj *arg0);              /* static */
-void grKongo_801D5FA4();                            /* static */
-void grKongo_801D5FA8(HSD_GObj *arg0);              /* static */
-s32 grKongo_801D5FD4();                             /* static */
-void grKongo_801D5FDC();                            /* static */
-void grKongo_801D5FE0();                            /* static */
-void grKongo_801D5FE4(HSD_GObj *arg0);              /* static */
-s32 grKongo_801D6028();                             /* static */
-void grKongo_801D6030();                            /* static */
-void grKongo_801D6034();                            /* static */
-void grKongo_801D6038(HSD_GObj *arg0);              /* static */
-s32 grKongo_801D6064();                             /* static */
-void grKongo_801D606C();                            /* static */
-void grKongo_801D6070();                            /* static */
-void grKongo_801D6074(HSD_GObj *arg0);              /* static */
-s32 grKongo_801D6190();                             /* static */
-void grKongo_801D6198(HSD_GObj *arg0);              /* static */
-void grKongo_801D6378();                            /* static */
-void grKongo_801D637C(HSD_GObj *arg0);              /* static */
-s32 grKongo_801D64B4();                             /* static */
-void grKongo_801D64BC(HSD_GObj *arg0);              /* static */
-void grKongo_801D6518();                            /* static */
-void grKongo_801D651C(HSD_GObj *arg0);                  /* static */
-s32 grKongo_801D6660();                             /* static */
-void grKongo_801D6668(HSD_GObj *arg0);                  /* static */
-void grKongo_801D69AC();                            /* static */
-void grKongo_801D69B0(HSD_GObj *arg0);              /* static */
-void grKongo_801D7134(HSD_GObj *arg0, s32 arg1);           /* static */
-void grKongo_801D77E0(HSD_GObj *arg0, s32 arg1);    /* static */
-void grKongo_801D7BBC(HSD_GObj *arg0);              /* static */
-s32 grKongo_801D7F78(HSD_GObj *arg0);          /* static */
-Item_GObj *grKongo_801D8078(HSD_GObj *);            /* static */
-f32 grKongo_801D8314();                             /* static */
-s32 grKongo_801D8444();                             /* static */
-s32 grKongo_801D844C(void *arg0, HSD_JObj *arg2);   /* static */
-void grKongo_801D6AFC(void);
+void fn_801D7E60(void* arg2, s32 arg4);             /* static */
 
 static StageCallbacks *grKg_803E16E0;
 
@@ -291,7 +229,6 @@ void grKongo_801D5490(HSD_GObj *arg0) {
 s32 grKongo_801D5574(void) {
     return 0;
 }
-
 void grKongo_801D557C(HSD_GObj *arg0) {
     grKongo_801D7134(arg0, 0);
     grKongo_801D77E0(arg0, 0);
@@ -354,6 +291,7 @@ static inline s32 random_adder(s32 temp_f0, s32 temp_f2)
         }
         return var_r29 + var_r3_2;
     }
+    return temp_r28_2;
 #endif
 }
 
@@ -385,6 +323,7 @@ static inline s32 random_adder_f(f32 temp_f0, f32 temp_f2)
         }
         return var_r29 + var_r3_2;
     }
+    return temp_r28_2;
 #else
     s32 temp_s0 = temp_f0;
     s32 temp_s2 = temp_f2;
@@ -483,6 +422,7 @@ static inline f32 tau_range(f32 a)
     } else if (a < (f32)-M_TAU) {
         return (f64)a + M_TAU;
     }
+    return 0.0F;
 }
 
 void grKongo_801D577C(HSD_GObj *arg0) {
@@ -582,7 +522,7 @@ void grKongo_801D577C(HSD_GObj *arg0) {
         }
         break;
     case 2:
-        temp_r31->gv.kongo2.xCE =- 1;
+        temp_r31->gv.kongo2.xCE -= 1;
         if (temp_r31->gv.kongo2.xCE < 0) {
             temp_r31->gv.kongo2.xC8 = 3;
         }
@@ -748,7 +688,8 @@ void grKongo_801D6074(HSD_GObj *arg0) {
     HSD_JObjSetTranslateX(temp_r30, temp_r31->gv.kongo.xCC);
 }
 
-s32 grKongo_801D6190() {
+s32 grKongo_801D6190(void)
+{
     return 0;
 }
 
@@ -804,9 +745,11 @@ void grKongo_801D6198(HSD_GObj *arg0) {
 }
 
 void grKongo_801D6378(void) {
-
+    return;
 }
 
+// @todo: change callsites from s32 * to HSD_GObj *
+#if 0
 void grKongo_801D828C(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
@@ -820,6 +763,7 @@ void grKongo_801D828C(HSD_GObj* gobj)
         grMaterial_801C95C4(gobj);
     }
 }
+#endif
 
 void grKongo_801D637C(HSD_GObj *arg0) {
     Ground *temp_r31;
@@ -1040,7 +984,7 @@ void grKongo_801D69B0(HSD_GObj *gobj) {
     mpLib_800580AC(4);
 }
 
-static inline rad_compare(f32 a, f32 b, f32 *ret)
+static inline void rad_compare(f32 a, f32 b, f32* ret)
 {
     f32 c = deg_to_rad * b;
     if (a > c) {
@@ -1053,7 +997,7 @@ static inline rad_compare(f32 a, f32 b, f32 *ret)
     }
 }
 
-static inline rad_compare_b(f32 a, f32 b, f32 *ret)
+static inline void rad_compare_b(f32 a, f32 b, f32* ret)
 {
     f32 c = deg_to_rad * b;
     if (a > c) {
@@ -1065,7 +1009,7 @@ static inline rad_compare_b(f32 a, f32 b, f32 *ret)
     *ret = (f32) (0.99 * (f64) (c + *ret));
 }
 
-static inline rad_compare_c(f32 a, f32 b, f32 d, f32 *ret)
+static inline void rad_compare_c(f32 a, f32 b, f32 d, f32* ret)
 {
     f32 c = deg_to_rad * b;
     if (a > c) {
