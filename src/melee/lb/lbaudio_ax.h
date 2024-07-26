@@ -19,6 +19,7 @@
 /* 0237A8 */ u32 lbAudioAx_800237A8(enum_t sfx_id, u8 sfx_vol, u8 sfx_pan);
 /* 023870 */ int lbAudioAx_80023870(int, int, int, int);
 /* 023F28 */ void lbAudioAx_80023F28(s32);
+/* 024030 */ void lbAudioAx_80024030(s32);
 /* 024184 */ int lbAudioAx_80024184(int, int, int, int);
 /* 02438C */ void lbAudioAx_8002438C(s32);
 /* 024B1C */ void lbAudioAx_80024B1C(s32, s32);
@@ -35,5 +36,8 @@
 /* 0265C4 */ enum_t lbAudioAx_800265C4(HSD_GObj*, enum_t sfx);
 /* 027DBC */ void lbAudioAx_80027DBC(void);
 /* 02838C */ void lbAudioAx_8002838C(void);
+/* 026F2C */ void lbAudioAx_80026F2C(s32);
 
 #endif
+
+
