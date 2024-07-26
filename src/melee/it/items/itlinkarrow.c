@@ -302,7 +302,7 @@ void it_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3, f32 arg4,
     Vec3 pos;
     Vec3 sp68;
     f32 pad_8[1];
-    UNK_T sp60;
+    Vec3* sp60;
     f32 pad_10[1];
     Quaternion quat;
     f32 pad_9[3];
@@ -355,7 +355,7 @@ void it_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3, f32 arg4,
 
         item->xDD4_itemVar.linkarrow.xB0 = 0;
         it_8026EA20(gobj, &item->xDD4_itemVar.linkarrow.x18, &item->pos, &sp68,
-                    &item->xDD4_itemVar.linkarrow.xE4, &sp60);
+                    &item->xDD4_itemVar.linkarrow.xE4, &sp68);
     }
 }
 
@@ -548,14 +548,13 @@ void it_802A90F0(HSD_GObj* gobj)
 static inline bool it_802A9138_inline(Item_GObj* gobj)
 {
     Vec3 sp1C;
-    UNK_T sp18;
     Item* item_2;
     CollData* pp;
     item_2 = GET_ITEM(gobj);
     pp = &item_2->x378_itemColl;
     if ((it_8026EA20(gobj, &item_2->xDD4_itemVar.linkarrow.x18, &item_2->pos,
                      &sp1C, &item_2->xDD4_itemVar.linkarrow.xE4,
-                     &sp18) != 0) &&
+                     &sp1C) != 0) &&
         (mpLib_80054ED8(item_2->xDD4_itemVar.linkarrow.xE4) != 0))
     {
         mpColl_80043558(pp, item_2->xDD4_itemVar.linkarrow.xE4);

@@ -18,6 +18,9 @@
 /* 16AE44 */ bool gm_8016AE44(void);
 /* 16AE50 */ Placeholder_8016AE50_ret_val* gm_8016AE50(void);
 /* 16AE80 */ bool gm_8016AE80(void);
+/* 16AE94 */ f32 gm_8016AE94(void);
+/* 16AEA4 */ u64 gm_8016AEA4(void);
+/* 16AE80 */ bool gm_8016AE80(void);
 /* 16AEDC */ bool gm_8016AEDC(void);
 /* 16B014 */ bool gm_8016B014(void);
 /* 16B0B4 */ bool gm_8016B0B4(void);

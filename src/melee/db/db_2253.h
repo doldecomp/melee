@@ -11,6 +11,8 @@
 /* 225D64 */ void db_80225D64(Item_GObj* item, Fighter_GObj* owner);
 /* 225DD8 */ void db_80225DD8(Item_GObj* item, Fighter_GObj* owner);
 /* 22886C */ void db_8022886C(void);
+/* 225D54 */ UNK_T db_80225D54(HSD_ObjAllocUnk4*);
+/* 4A0E30 */ extern HSD_ObjAllocUnk4 it_804A0E30;
 /* 228A64 */ void db_80228A64(void);
 /* 228C4C */ void db_80228C4C(void);
 /* 4D4A08 */ extern enum_t g_debugLevel;

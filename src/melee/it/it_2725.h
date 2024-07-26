@@ -10,11 +10,13 @@
 
 #include <placeholder.h>
 
+/* 272828 */ s32 it_80272828(s32);
 /* 272980 */ void it_80272980(Item_GObj*, f32);
 /* 272A60 */ void it_80272A60(Item_GObj*);
 /* 272CC0 */ HSD_JObj* it_80272CC0(Item_GObj*, enum_t);
 /* 273318 */ void it_80273318(Item_GObj*, HSD_Joint*, s32);
 /* 273408 */ void it_80273408(Item_GObj* gobj);
+/* 2734B4 */ void it_802734B4(HSD_GObj*);
 /* 273670 */ void it_80273670(HSD_GObj*, int, float);
 /* 274250 */ void it_80274250(Item_GObj*, Vec3*);
 /* 274C88 */ void it_80274C88(Item_GObj* gobj);
@@ -26,10 +28,15 @@
 /* 275414 */ void it_80275414(HSD_GObj*);
 /* 2754A4 */ void it_802754A4(Item_GObj*);
 /* 275D5C */ void it_80275D5C(HSD_GObj*, ECB*);
+/* 275DFC */ void it_80275DFC(HSD_GObj*);
 /* 276214 */ bool it_80276214(Item_GObj*);
+/* 2762D8 */ bool it_802762D8(HSD_GObj*);
 /* 276CB8 */ void it_80276CB8(Item_GObj* gobj);
+/* 276CEC */ void it_80276CEC(HSD_GObj*);
+/* 276FC4 */ void it_80276FC4(HSD_GObj*);
 /* 277040 */ bool it_80277040(Item_GObj*);
 /* 277040 */ bool it_80277040(Item_GObj*);
+/* 277544 */ bool it_80277544(HSD_GObj*);
 /* 27781C */ bool it_8027781C(Item_GObj*);
 /* 2787B4 */ void it_802787B4(Item_GObj*, s32);
 /* 279C48 */ void it_80279C48(Item_GObj*, Article*);

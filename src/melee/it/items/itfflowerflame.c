@@ -148,18 +148,18 @@ bool it_8029ABCC(Item_GObj* gobj)
     return it_80273130(gobj);
 }
 
-void it_8029ACCC(Item_GObj* arg0)
+void it_8029ACCC(Item_GObj* gobj)
 {
     ItemAttr* temp_r4;
 
-    Item* item = GET_ITEM((HSD_GObj*) arg0);
+    Item* item = GET_ITEM(gobj);
     temp_r4 = item->xCC_item_attr;
-    it_80272860(arg0, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
+    it_80272860(gobj, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
 }
 
-bool it_8029ACFC(HSD_GObj* arg0)
+bool it_8029ACFC(HSD_GObj* gobj)
 {
-    return it_8026DF34();
+    return it_8026DF34(gobj);
 }
 
 void it_8029AD1C(Item_GObj* gobj)
