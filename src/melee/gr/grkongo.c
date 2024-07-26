@@ -1347,20 +1347,6 @@ void grKongo_801D7134(HSD_GObj *gobj, s32 arg1) {
 #endif
 }
 
-void grKongo_801D828C(HSD_GObj* gobj)
-{
-    Ground* gp = gobj->user_data;
-    if (gp->gv.kongo3.xC6 != 1) {
-        return;
-    }
-    HSD_ASSERT(1719, gp->gv.kongo.u.taru.keep);
-    if (((u8*) gp->gv.kongo.u.taru.keep)[2] == 8) {
-        gp->gv.kongo3.xC6 = 0;
-        gp->gv.kongo.u.taru.keep = NULL;
-        grMaterial_801C95C4(gobj);
-    }
-}
-
 f32 grKongo_801D8314(void) {
     s32 var_r3;
     f32 var_f31;
