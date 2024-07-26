@@ -1217,59 +1217,6 @@ static ? grKg_803B7FB0;                             /* unable to generate initia
 #endif
 
 
-f32 grKongo_801D8314(void) {
-    s32 var_r3;
-    f32 var_f31;
-    s32 temp_r3 = grKg_804D6980->unk44 + grKg_804D6980->unk46 + grKg_804D6980->unk48 + grKg_804D6980->unk4A +
-                grKg_804D6980->unk4C + grKg_804D6980->unk4E + grKg_804D6980->unk50 + grKg_804D6980->unk52;
-    if (temp_r3 != 0) {
-        var_r3 = HSD_Randi(temp_r3);
-    } else {
-        var_r3 = 0;
-    }
-    {
-        s32 temp_r3_2 = var_r3 - grKg_804D6980->unk44;
-        if (temp_r3_2 < 0) {
-            var_f31 = 2.3561945f;
-        } else {
-            s32 temp_r3_3 = temp_r3_2 - grKg_804D6980->unk46;
-            if (temp_r3_3 < 0) {
-                var_f31 = 1.5707964f;
-            } else {
-                s32 temp_r3_4 = temp_r3_3 - grKg_804D6980->unk48;
-                if (temp_r3_4 < 0) {
-                    var_f31 = 0.7853982f;
-                } else {
-                    s32 temp_r3_5 = temp_r3_4 - grKg_804D6980->unk4A;
-                    if (temp_r3_5 < 0) {
-                        var_f31 = 0.0f;
-                    } else {
-                        s32 temp_r3_6 = temp_r3_5 - grKg_804D6980->unk4C;
-                        if (temp_r3_6 < 0) {
-                            var_f31 = -0.7853982f;
-                        } else {
-                            s32 temp_r3_7 = temp_r3_6 - grKg_804D6980->unk4E;
-                            if (temp_r3_7 < 0) {
-                                var_f31 = -1.5707964f;
-                            } else {
-                                s32 temp_r3_8 = temp_r3_7 - grKg_804D6980->unk50;
-                                if (temp_r3_8 < 0) {
-                                    var_f31 = -2.3561945f;
-                                } else if ((temp_r3_8 - grKg_804D6980->unk52) < 0) {
-                                    var_f31 = -3.1415927f;
-                                } else {
-                                    __assert("grkongo.c", 1753, "0");
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return var_f31;
-}
-
 static f64 pi_over_4 = M_PI / 4.0F;
 
 void grKongo_801D7134(HSD_GObj *gobj, s32 arg1) {
@@ -1399,3 +1346,71 @@ void grKongo_801D7134(HSD_GObj *gobj, s32 arg1) {
     } while ((u32) var_r28 < 0xFU);
 #endif
 }
+
+void grKongo_801D828C(HSD_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    if (gp->gv.kongo3.xC6 != 1) {
+        return;
+    }
+    HSD_ASSERT(1719, gp->gv.kongo.u.taru.keep);
+    if (((u8*) gp->gv.kongo.u.taru.keep)[2] == 8) {
+        gp->gv.kongo3.xC6 = 0;
+        gp->gv.kongo.u.taru.keep = NULL;
+        grMaterial_801C95C4(gobj);
+    }
+}
+
+f32 grKongo_801D8314(void) {
+    s32 var_r3;
+    f32 var_f31;
+    s32 temp_r3 = grKg_804D6980->unk44 + grKg_804D6980->unk46 + grKg_804D6980->unk48 + grKg_804D6980->unk4A +
+                grKg_804D6980->unk4C + grKg_804D6980->unk4E + grKg_804D6980->unk50 + grKg_804D6980->unk52;
+    if (temp_r3 != 0) {
+        var_r3 = HSD_Randi(temp_r3);
+    } else {
+        var_r3 = 0;
+    }
+    {
+        s32 temp_r3_2 = var_r3 - grKg_804D6980->unk44;
+        if (temp_r3_2 < 0) {
+            var_f31 = 2.3561945f;
+        } else {
+            s32 temp_r3_3 = temp_r3_2 - grKg_804D6980->unk46;
+            if (temp_r3_3 < 0) {
+                var_f31 = 1.5707964f;
+            } else {
+                s32 temp_r3_4 = temp_r3_3 - grKg_804D6980->unk48;
+                if (temp_r3_4 < 0) {
+                    var_f31 = 0.7853982f;
+                } else {
+                    s32 temp_r3_5 = temp_r3_4 - grKg_804D6980->unk4A;
+                    if (temp_r3_5 < 0) {
+                        var_f31 = 0.0f;
+                    } else {
+                        s32 temp_r3_6 = temp_r3_5 - grKg_804D6980->unk4C;
+                        if (temp_r3_6 < 0) {
+                            var_f31 = -0.7853982f;
+                        } else {
+                            s32 temp_r3_7 = temp_r3_6 - grKg_804D6980->unk4E;
+                            if (temp_r3_7 < 0) {
+                                var_f31 = -1.5707964f;
+                            } else {
+                                s32 temp_r3_8 = temp_r3_7 - grKg_804D6980->unk50;
+                                if (temp_r3_8 < 0) {
+                                    var_f31 = -2.3561945f;
+                                } else if ((temp_r3_8 - grKg_804D6980->unk52) < 0) {
+                                    var_f31 = -3.1415927f;
+                                } else {
+                                    __assert("grkongo.c", 1753, "0");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return var_f31;
+}
+
