@@ -57,7 +57,7 @@ typedef struct {
 /* 009DD4 */ UNK_RET lbColl_80009DD4(UNK_PARAMS);
 /* 009F54 */ bool lbColl_80009F54(HitCapsule* hit, u32 arg1, float arg8);
 /* 00A044 */ bool lbColl_8000A044(HitCapsule* hit, u32 arg1, float arg8);
-/* 00A10C */ UNK_RET lbColl_8000A10C(UNK_PARAMS);
+/* 00A10C */ bool lbColl_8000A10C(Vec3 (*)[2], u32, f32);
 /* 00A1A8 */ bool lbColl_8000A1A8(UNK_T, int, float scale_y);
 /* 00A244 */ bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2,
                                   float arg3);
