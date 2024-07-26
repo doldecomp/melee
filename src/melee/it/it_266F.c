@@ -1,43 +1,41 @@
-#include "it/it_266F.h"
-#include "lb/lbcollision.h"
 
-#include "gm/gm_1601.h"
-#include "gr/ground.h"
-#include "it/it_26B1.h"
-
-#include "it/item.h"
 
 #include <platform.h>
 
+#include "it/it_266F.h"
+
 #include "inlines.h"
-#include "it_2725.h"
 #include "types.h"
 
+#include "cm/camera.h"
+#include "db/db_2253.h"
+#include "ef/efsync.h"
+#include "ft/ftlib.h"
+#include "gm/gm_1601.h"
+#include "gr/ground.h"
+#include "gr/stage.h"
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/item.h"
+#include "lb/lbcollision.h"
+#include "lb/lbgx.h"
 #include "mp/mpcoll.h"
+#include "mp/mplib.h"
 
-#include <baselib/jobj.h>
+#include <math.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
-#include <math.h>
-
-// @todo move these
-/* 26DC24 */ s32 it_8026DC24(HSD_GObj *arg0);
-s32 it_8026DD5C(Item_GObj *gobj);
-s32 it_8026CB3C(Vec3 *arg0);
-f32 gm_8016AE94();
-u64 gm_8016AEA4();
-bool gm_8016AE80();
-s32 it_80272828(s32);
-
-s32 it_8026DDFC(Item_GObj *arg0);
-s32 it_8026DBC8(HSD_GObj *gobj);
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
+#include <baselib/memory.h>
+#include <baselib/random.h>
+#include <baselib/state.h>
+#include <baselib/tev.h>
 
 extern ItemCommonData *it_804D6D28;
 extern HSD_ObjAllocUnk Item_804A0C64;
 
-/* 4A0E30 */ extern HSD_ObjAllocUnk4 it_804A0E30;
-/* 4A0E50 */ extern HSD_ObjAllocUnk6 it_804A0E50;
-
+// @todo: what is this?
 typedef struct test_struct {
     s32 unk0;
     s32 unk4;
@@ -81,7 +79,7 @@ void it_8026C47C(test_struct *arg0) {
     }
 }
 
-// definitely size 0x10
+// argument is definitely size 0x10
 u8 it_8026C65C(HSD_ObjAllocUnk6 *arg0) {
     s32 temp_r3;
     s32 temp_r4;
@@ -171,7 +169,7 @@ void fn_8026C88C(HSD_GObj *gobj) {
         it_804A0E30.x0 -= 1;
         if ((s32) it_804A0E30.x0 == 0) {
             spawn.kind = it_8026C75C(&it_804A0E30.x4);
-            if (spawn.kind != -1) {
+            if ((s32) spawn.kind != -1) {
                 if (it_8026CB3C(&spawn.prev_pos) != 0) {
                     spawn.pos = spawn.prev_pos;
                     spawn.facing_dir = it_8026B684(&spawn.prev_pos);
@@ -180,6 +178,7 @@ void fn_8026C88C(HSD_GObj *gobj) {
                     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj = NULL;
                     spawn.x44_flag.bits.b0 = 1;
                     spawn.x40 = 0;
+                    var_r4 = 1;
                 } else {
                     var_r4 = 0;
                 }
@@ -593,7 +592,8 @@ void it_8026D938(Item_GObj *gobj, ItCallback arg1) {
     }
 }
 
-void it_8026DA08(Item_GObj *gobj) {
+bool it_8026DA08(Item_GObj* gobj)
+{
     Item *ip;
     CollData *coll;
     bool test;
@@ -610,6 +610,7 @@ void it_8026DA08(Item_GObj *gobj) {
     if (test != 0) {
         ip->xC30 = coll->floor.index;
     }
+    return test;
 }
 
 bool it_8026D9A0(Item_GObj* gobj)
@@ -720,10 +721,6 @@ s32 it_8026DD5C(Item_GObj *gobj) {
     }
     it_802734B4(gobj);
     return 1;
-}
-
-static inline MtxPtr vec3_mtx_copy()
-{
 }
 
 void it_8026EB18(HSD_GObj *arg0, s32 arg1, Vec3 *arg2) {
@@ -896,25 +893,34 @@ void it_8026E248(Item_GObj *gobj, ItCallback arg1) {
     }
 }
 
-s32 it_8026E9A4(Item_GObj *arg0, Vec3 *arg1, Vec3 *arg2, s32 arg3) {
+s32 it_8026E9A4(Item_GObj* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3)
+{
     Vec3 p;
-    if (mpLib_800524DC(&p, 0, 0, arg3, -1, -1, arg1->x, arg1->y, arg2->x, arg2->y) == 1) {
+    if (mpLib_800524DC(&p, 0, NULL, arg3, -1, -1, arg1->x, arg1->y, arg2->x,
+                       arg2->y) == 1)
+    {
         *arg2 = p;
         return 1;
     }
     return 0;
 }
 
-s32 it_8026EA20(Item_GObj *arg0, Vec3 *arg1, Vec3 *arg2, Vec3 *arg3, s32 *arg4, s32 arg5) {
+s32 it_8026EA20(Item_GObj* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, s32* arg4,
+                Vec3* arg5)
+{
     Vec3 p;
-    if (mpLib_800524DC(&p, arg4, arg5, arg3, -1, -1, arg1->x, arg1->y, arg2->x, arg2->y) == 1) {
+    if (mpLib_800524DC(&p, *arg4, arg5, arg3, -1, -1, arg1->x, arg1->y,
+                       arg2->x, arg2->y) == 1)
+    {
         *arg2 = p;
         return 1;
     }
     return 0;
 }
 
-s32 it_8026EA9C(Item_GObj *arg0, Vec3 *arg1, Vec3 *arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+s32 it_8026EA9C(Item_GObj* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, s32 arg4,
+                Vec3* arg5, s32 arg6)
+{
     Vec3 p;
     if (mpLib_800524DC(&p, arg4, arg5, arg3, -1, arg6, arg1->x, arg1->y, arg2->x, arg2->y) == 1) {
         *arg2 = p;
@@ -954,8 +960,11 @@ u32 it_8026ECE0(Item_GObj *gobj, u32 arg1) {
     var_r30 = 0;
     ip = GET_ITEM(gobj);
     if ((enum ItemKind) ip->kind == It_Kind_Unk4) {
-        if ((ip->xDAA_flag.bits.b7) && (ip->xDD4_itemVar.unk.x18.bits.b7 == 0) ||
-            (ip->xDD4_itemVar.unk.x18.bits.b6 && (lbColl_8000A10C(&ip->xDD4_itemVar.unk.x1C, arg1, ip->scl) != 0))) {
+        if (((ip->xDAA_flag.bits.b7) &&
+             (ip->xDD4_itemVar.unk.x18.bits.b7 == 0)) ||
+            (ip->xDD4_itemVar.unk.x18.bits.b6 &&
+             (lbColl_8000A10C(&ip->xDD4_itemVar.unk.x1C, arg1, ip->scl) != 0)))
+        {
             var_r30 = 1;
         }
     } else {
@@ -1059,7 +1068,8 @@ static inline void it_8026EECC_inline_3(HSD_GObj *gobj, s32 arg1, Vec3 *pos)
     it_8026EC54_inline(gobj, ip);
 }
 
-void it_8026EECC(HSD_GObj *gobj, s32 arg1) {
+void it_8026EECC(HSD_GObj* gobj, int arg1)
+{
     Item *ip = gobj->user_data;
     Vec3 pos;
     if (ip->xDAA_flag.bits.b0) {
@@ -1128,3 +1138,59 @@ void it_8026EECC(HSD_GObj *gobj, s32 arg1) {
 void it_8026F3AC(void) {
     it_8026C75C(&it_804A0E50);
 }
+
+#if 0
+s32 it_8026C530(s32 arg0, void *arg1, s32 arg2, s32 arg3) {
+    s32 temp_r10;
+    s32 temp_r5;
+    s32 temp_r6;
+    s32 temp_r7;
+    s32 temp_r7_2;
+    s32 temp_r7_3;
+    s32 temp_r8;
+    s32 temp_r9;
+    s32 temp_r9_2;
+    s32 var_r5;
+
+    var_r5 = arg2;
+    temp_r8 = arg3 - 1;
+    if (var_r5 == temp_r8) {
+        return var_r5;
+    }
+    temp_r10 = arg1->unkC;
+    temp_r9 = (s32) (var_r5 + arg3) / 2;
+    temp_r7_2 = temp_r9 * 2;
+    if ((s32) *(temp_r10 + temp_r7_2) > arg0) {
+        if (var_r5 == (s32) (temp_r9 - 1)) {
+
+        } else {
+            temp_r6 = (s32) (var_r5 + temp_r9) / 2;
+            temp_r7_3 = temp_r6 * 2;
+            if ((s32) *(temp_r10 + temp_r7_3) > arg0) {
+                var_r5 = it_8026C530();
+            } else if ((s32) (temp_r10 + temp_r7_3)->unk2 > arg0) {
+                var_r5 = temp_r6;
+            } else {
+                var_r5 = it_8026C530(temp_r6, temp_r9);
+            }
+        }
+        return var_r5;
+    }
+    temp_r9_2 = temp_r10 + 2;
+    if ((s32) *(temp_r9_2 + temp_r7_2) > arg0) {
+        return temp_r9;
+    }
+    if (temp_r9 == temp_r8) {
+        return temp_r9;
+    }
+    temp_r7 = (s32) (temp_r9 + arg3) / 2;
+    temp_r5 = temp_r7 * 2;
+    if ((s32) *(temp_r10 + temp_r5) > arg0) {
+        return it_8026C530(temp_r9, temp_r7);
+    }
+    if ((s32) *(temp_r9_2 + temp_r5) > arg0) {
+        return temp_r7;
+    }
+    return it_8026C530(temp_r7);
+}
+#endif

@@ -325,7 +325,7 @@ struct Item {
         s32 x138;
     } x5D4_hitboxes[4];
     s32 xAC4_ignoreItemID; // Cannot hit items with this index?
-    s32 xAC8_hurtboxNum;   // Number of hurtboxes this item has
+    u32 xAC8_hurtboxNum;   // Number of hurtboxes this item has
     HurtCapsule xACC_itemHurtbox[2];
     u32 xB64;
     u8 xB68;

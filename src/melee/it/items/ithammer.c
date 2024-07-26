@@ -164,7 +164,7 @@ bool it_802940B8(HSD_GObj* gobj)
         it_8026E15C(gobj, it_80293F84);
         return false;
     }
-    return it_8026DF34();
+    return it_8026DF34(gobj);
 }
 
 void it_802940FC(HSD_GObj* gobj)
