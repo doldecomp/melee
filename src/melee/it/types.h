@@ -113,8 +113,8 @@ struct ItemAttr {
     ECB x40;
     s32 x50;       // 0x50
     s32 x54;       // 0x54
-    s32 x58;       // 0x58
-    s32 x5c;       // 0x5c
+    f32 x58;       // 0x58
+    f32 x5c;       // 0x5c
     f32 x60_scale; // 0x60, does not affect hitboxes
 
     /// @at{64} @sz{4}
@@ -205,6 +205,17 @@ struct Article {
     ItemModelDesc* x10_modelDesc;
     ItemDynamics* x14_dynamics;
 };
+
+typedef struct itUnkVars {
+    u16 x0;
+    u8 *x4;
+    u16 x8;
+    u8 *xC;
+    s32 x10;
+    s32 x14;
+    UnkFlagStruct x18;
+    Vec3 x1C[2];
+} itUnkVars;
 
 struct Item {
     void* x0;
@@ -314,7 +325,7 @@ struct Item {
         s32 x138;
     } x5D4_hitboxes[4];
     s32 xAC4_ignoreItemID; // Cannot hit items with this index?
-    s32 xAC8_hurtboxNum;   // Number of hurtboxes this item has
+    u32 xAC8_hurtboxNum;   // Number of hurtboxes this item has
     HurtCapsule xACC_itemHurtbox[2];
     u32 xB64;
     u8 xB68;
@@ -478,7 +489,7 @@ struct Item {
     f32 xD48_halfLifeTimer; // Not radioactive, just the item's original
                             // lifetime halved
     int xD4C;
-    s32 xD50_landNum;  // Number of times this item has landed
+    u32 xD50_landNum;  // Number of times this item has landed
     s32 xD54_throwNum; // Number of times this item has been thrown
     s32 xD58;
     s32 xD5C;
@@ -573,6 +584,7 @@ struct Item {
         FFlowerVars fflower;
         FFlowerFlameVars fflowerflame;
         HassamVars hassam;
+        itUnkVars unk;
         u8 padding[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
@@ -665,7 +677,12 @@ struct ItemCommonData {
     uint xD8;
     s32 xDC;
     f32 unk_degrees; ///< @at{E0}
-    u8 filler[0x148 - 0xE4];
+    u8 filler[0x128 - 0xE4];
+    s32 x128;
+    s32 x12C;
+    s32 x130;
+    s32 x134;
+    u8 filler_2[0x148 - 0x138];
     s32 x148;
     f32 x14C;
     f32 x150;
@@ -734,18 +751,19 @@ struct HSD_ObjAllocUnk {
     u32 x64;
 };
 
-struct HSD_ObjAllocUnk4 {
+struct HSD_ObjAllocUnk6 {
     u8 x0;
-    u8 x1;
-    u8 x2;
-    u8 x3;
-    u8 x4;
-    u16 x6;
+    u8 *x4;
     u16 x8;
     u16 xA;
-    u16 xC;
-    u32 x10;
-    u8 pad[0x20 - 0x10];
+    u16 *xC;
+};
+
+struct HSD_ObjAllocUnk4 {
+    u32 x0;
+    HSD_ObjAllocUnk6 x4;
+    s32 x14;
+    u64 x18;
 };
 
 struct HSD_ObjAllocUnk5 {
@@ -756,11 +774,4 @@ struct HSD_ObjAllocUnk5 {
     u16 xC;
 };
 
-struct HSD_ObjAllocUnk6 {
-    u8 x0;
-    u32 x4;
-    u16 x8;
-    u16 xA;
-    u16 xC;
-};
 #endif

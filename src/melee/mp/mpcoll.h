@@ -73,7 +73,7 @@
 /* 048768 */ void mpColl_80048768(CollData*);
 /* 04B108 */ bool mpColl_8004B108(CollData*);
 /* 04B21C */ void mpColl_8004B21C(CollData*);
-/* 04B2DC */ void mpColl_8004B2DC(CollData*);
+/* 04B2DC */ bool mpColl_8004B2DC(CollData*);
 /* 04B3F0 */ void mpColl_8004B3F0(CollData*);
 /* 04B5C4 */ void mpColl_8004B5C4(CollData*);
 /* 04C864 */ void mpColl_8004C864(CollData*, s32, float, float);
@@ -83,6 +83,7 @@
 /* 04CBE8 */ void mpColl_8004CBE8(CollData*);
 /* 04CBF4 */ void mpColl_8004CBF4(CollData*);
 /* 04CC00 */ void mpColl_8004CC00(CollData*);
+/* 04D024 */ UNK_T mpColl_8004D024(Vec3*);
 /* 0528CC */ s32 mpColl_800528CC(s32);
 /* 052A98 */ s32 mpColl_80052A98(s32);
 /* 4D64AC */ extern u32 mpColl_804D64AC;

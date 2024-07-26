@@ -228,7 +228,7 @@ bool it_80293240(Item_GObj* gobj)
         it_8026E15C(gobj, it_80292FF0);
         return false;
     }
-    return it_8026DF34();
+    return it_8026DF34(gobj);
 }
 
 void it_80293284(Item_GObj* gobj)
@@ -294,7 +294,7 @@ bool it_80293444(Item_GObj* gobj)
         it_8026E15C(gobj, it_80292FF0);
         return false;
     }
-    return it_8026DF34();
+    return it_8026DF34(gobj);
 }
 
 bool it_80293488(Item_GObj* gobj)
