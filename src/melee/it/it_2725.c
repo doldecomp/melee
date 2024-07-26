@@ -111,6 +111,11 @@
 #include "items/itzeldadinfire.h"
 #include "items/itzeldadinfireexplode.h"
 
+HSD_ObjAllocUnk4 it_804A0E30;
+HSD_ObjAllocUnk6 it_804A0E50;
+HSD_ObjAllocUnk6 it_804A0E60;
+// u8 it_804A0E70[0xF0];
+
 struct sdata_ItemGXLink it_803F2310[] = {
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,

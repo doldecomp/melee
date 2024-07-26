@@ -29,9 +29,9 @@
                                  float surface_normal_x, float left_x,
                                  float left_y, Vec3* coll_vec, UNK_T, UNK_T,
                                  UNK_T, u32, u32);
-/* 051EC8 */ s32 mpLib_80051EC8(Vec3*, s32, s32, s32, s32, s32, s32, float,
+/* 051EC8 */ s32 mpLib_80051EC8(Vec3*, s32*, s32*, Vec3*, s32, s32, s32, float,
                                 float, float, float);
-/* 0524DC */ bool mpLib_800524DC(int, int, int, int, int, int, float x,
+/* 0524DC */ bool mpLib_800524DC(Vec3*, int, Vec3*, Vec3*, int, int, float x,
                                  float y, float z, float);
 /* 052508 */ UNK_RET mpLib_80052508(UNK_PARAMS);
 /* 052700 */ s32 mpLib_80052700(int idx);

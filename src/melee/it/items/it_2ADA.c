@@ -77,7 +77,7 @@ void it_802ADB80(Item_GObj* gobj)
 
 bool it_802ADBB0(Item_GObj* gobj)
 {
-    return it_8026DFB0() ? true : false;
+    return it_8026DFB0(gobj) ? true : false;
 }
 
 void it_802ADBE4(Item_GObj* arg0, Item_GObj* arg1)
