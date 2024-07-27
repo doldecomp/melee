@@ -25,7 +25,7 @@ typedef void (*ItCallback)(HSD_GObj *);
 /* 26CF04 */ void it_8026CF04(void);
 /* 26D018 */ void it_8026D018(void);
 /* 26D258 */ s32 it_8026D258(void*, s32);
-/* 26D324 */ bool it_8026D324(bool);
+/* 26D324 */ bool it_8026D324(s32);
 /* 26D3CC */ s32 it_8026D3CC(void);
 /* 26D564 */ void it_8026D564(Item_GObj*);
 /* 26D5CC */ void it_8026D5CC(Item_GObj*);
