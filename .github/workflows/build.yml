@@ -120,8 +120,7 @@ jobs:
             expected="$root/expected-report.json"
             actual="$root/actual-report.json"
             changes="$root/changes-report.json"
-
-            git add tools/diff_changes.py
+            head=$(git rev-parse HEAD)
 
             ninja all_source
             objdiff-cli report generate -o "$actual"
@@ -140,8 +139,8 @@ jobs:
             ninja all_source
             objdiff-cli report generate -o "$expected"
 
+            git checkout "$head"
             objdiff-cli report changes -o "$changes" "$expected" "$actual"
-
             python tools/diff_changes.py "$changes"
             status="$?"
             exit "$status"
