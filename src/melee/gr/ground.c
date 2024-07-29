@@ -1167,7 +1167,7 @@ void Ground_801C2374(HSD_LObj* lobj)
     }
 }
 
-s32 Ground_801C247C(s32 arg0, s32 arg1)
+HSD_Spline* Ground_801C247C(s32 arg0, s32 arg1)
 {
     UnkArchiveStruct* archive = grDatFiles_801C6330(arg0);
     if (archive == NULL) {
@@ -1176,7 +1176,7 @@ s32 Ground_801C247C(s32 arg0, s32 arg1)
     if (archive->unk4 != NULL && arg1 < archive->unk4->unk14) {
         return archive->unk4->unk10[arg1];
     } else {
-        return 0;
+        return NULL;
     }
 }
 
@@ -2393,7 +2393,7 @@ void Ground_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
     result->z = result_z;
 }
 
-bool Ground_801C4D70(s32 arg0, Vec3* arg1, f32 arg8)
+bool Ground_801C4D70(HSD_GObj *arg0, Vec3* arg1, f32 arg8)
 {
     stage_info.x72C = arg0;
     stage_info.x730 = *arg1;

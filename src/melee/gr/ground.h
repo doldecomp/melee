@@ -63,7 +63,7 @@
 /* 1C2090 */ bool Ground_801C2090(GXColor* color);
 /* 1C20D0 */ f32 Ground_801C20D0(void);
 /* 1C2374 */ void Ground_801C2374(HSD_LObj* lobj);
-/* 1C247C */ s32 Ground_801C247C(s32, s32);
+/* 1C247C */ HSD_Spline *Ground_801C247C(s32, s32);
 /* 1C28AC */ bool Ground_801C28AC(s32, u32, s32*);
 /* 1C2AD8 */ u8* Ground_801C2AD8(void);
 /* 1C2AE8 */ f32 Ground_801C2AE8(s32);
@@ -119,7 +119,7 @@
 /* 1C49F8 */ void* Ground_801C49F8(void);
 /* 1C4A08 */ void Ground_801C4A08(HSD_GObj* gobj);
 /* 1C4B50 */ void Ground_801C4B50(s32, s32, Vec3* result, f32);
-/* 1C4D70 */ bool Ground_801C4D70(s32, Vec3*, f32);
+/* 1C4D70 */ bool Ground_801C4D70(HSD_GObj*, Vec3*, f32);
 /* 1C4DA0 */ bool Ground_801C4DA0(Vec3*, f32*);
 /* 1C4DD0 */ bool Ground_801C4DD0(void);
 /* 1C4E20 */ bool Ground_801C4E20(void);
