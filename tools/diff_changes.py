@@ -28,7 +28,7 @@ def process_input(input_file: Optional[str]) -> None:
             content = json.load(f)
 
     result = process_json(content)
-    if result != {}:
+    if not result:
         print("No functions broken.")
         sys.exit(0)
     else:
