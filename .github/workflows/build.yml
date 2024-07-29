@@ -138,7 +138,10 @@ jobs:
             objdiff-cli report generate -o "$expected"
 
             objdiff-cli report changes -o "$changes" "$expected" "$actual"
-            exit python tools/diff_changes.py "$changes"
+
+            python tools/diff_changes.py "$changes"
+            status=$?
+            exit $status
           ;;
           *) exit 1 ;;
         esac
