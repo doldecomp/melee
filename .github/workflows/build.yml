@@ -138,14 +138,7 @@ jobs:
             objdiff-cli report generate -o "$expected"
 
             objdiff-cli report changes -o "$changes" "$expected" "$actual"
-            results="$(jq '
-              .units[]
-              | select(.functions[]
-                | { from: .from.fuzzy_match_percent,
-                    to: .to.fuzzy_match_percent }
-                | .from == 100 and .to < .from)
-              | { (.name): ([.functions[] | .name]) }' \
-              "$changes")"
+            results="$(python tools/diff_changes.py $changes)"
             status="$(echo "$results" | jq -s 'if . == [] then 0 else 1 end')"
 
             if [ "$status" -ne 0 ]; then
