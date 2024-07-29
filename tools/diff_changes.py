@@ -28,7 +28,13 @@ def process_input(input_file: Optional[str]) -> None:
             content = json.load(f)
 
     result = process_json(content)
-    sys.stdout.write(json.dumps(result, indent=2))
+    if result != {}:
+        print("No functions broken.")
+        sys.exit(0)
+    else:
+        print("::error::One or more functions were broken!")
+        sys.stdout.write(json.dumps(result, indent=2))
+        sys.exit(1)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(

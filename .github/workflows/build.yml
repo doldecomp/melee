@@ -138,14 +138,7 @@ jobs:
             objdiff-cli report generate -o "$expected"
 
             objdiff-cli report changes -o "$changes" "$expected" "$actual"
-            results="$(python tools/diff_changes.py $changes)"
-            status="$(echo "$results" | jq -s 'if . == [] then 0 else 1 end')"
-
-            if [ "$status" -ne 0 ]; then
-              echo "::error::One or more functions were broken!"
-              echo "$results"
-            fi
-            exit "$status"
+            exit python tools/diff_changes.py "$changes"
           ;;
           *) exit 1 ;;
         esac
