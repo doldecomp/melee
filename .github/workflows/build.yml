@@ -120,6 +120,7 @@ jobs:
             expected="$root/expected-report.json"
             actual="$root/actual-report.json"
             changes="$root/changes-report.json"
+            head=$(git rev-parse HEAD)
 
             ninja all_source
             objdiff-cli report generate -o "$actual"
@@ -134,24 +135,14 @@ jobs:
               ;;
               *) exit 1 ;;
             esac
+
             ninja all_source
             objdiff-cli report generate -o "$expected"
 
+            git checkout "$head"
             objdiff-cli report changes -o "$changes" "$expected" "$actual"
-            results="$(jq '
-              .units[]
-              | select(.functions[]
-                | { from: .from.fuzzy_match_percent,
-                    to: .to.fuzzy_match_percent }
-                | .from == 100 and .to < .from)
-              | { (.name): ([.functions[] | .name]) }' \
-              "$changes")"
-            status="$(echo "$results" | jq -s 'if . == [] then 0 else 1 end')"
-
-            if [ "$status" -ne 0 ]; then
-              echo "::error::One or more functions were broken!"
-              echo "$results"
-            fi
+            python tools/diff_changes.py "$changes"
+            status="$?"
             exit "$status"
           ;;
           *) exit 1 ;;
