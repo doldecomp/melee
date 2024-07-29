@@ -139,6 +139,7 @@ jobs:
 
             objdiff-cli report changes -o "$changes" "$expected" "$actual"
 
+        tree
             python tools/diff_changes.py "$changes"
             status=$?
             exit $status
