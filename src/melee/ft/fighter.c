@@ -147,6 +147,7 @@ ftCommonData* p_ftCommonData;
 
 void Fighter_800679B0(void)
 {
+#if 0
     s32 i;
 
     /// @warning don't hardcode the allocation sizes
@@ -171,6 +172,7 @@ void Fighter_800679B0(void)
             ftData_Table_Unk1[i]();
         }
     }
+#endif
 }
 
 void Fighter_FirstInitialize_80067A84(void)
