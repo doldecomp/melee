@@ -108,7 +108,6 @@ u8 it_8026C65C(HSD_ObjAllocUnk6 *arg0) {
 }
 
 s32 it_8026C704(void) {
-#if 0
     s32 var_r31;
 
     var_r31 = 0;
@@ -116,7 +115,6 @@ s32 it_8026C704(void) {
         var_r31 = 1;
     }
     return var_r31;
-#endif
 }
 
 s8 it_8026C75C(HSD_ObjAllocUnk6 *arg0) {
@@ -441,7 +439,6 @@ s32 it_8026D258(void *arg0, s32 arg1) {
 #endif
 
 void it_8026D564(Item_GObj *gobj) {
-#if 0
     bool test;
     Item *ip = GET_ITEM(gobj);
     CollData *coll = &ip->x378_itemColl;
@@ -452,7 +449,6 @@ void it_8026D564(Item_GObj *gobj) {
     if (test != 0) {
         ip->xC30 = coll->floor.index;
     }
-#endif
 }
 
 void it_8026D5CC(Item_GObj *gobj) {
