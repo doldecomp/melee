@@ -137,8 +137,6 @@ jobs:
               *) exit 1 ;;
             esac
 
-            git reset
-
             ninja all_source
             objdiff-cli report generate -o "$expected"
 
