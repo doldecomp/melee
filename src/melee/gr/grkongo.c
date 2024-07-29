@@ -359,7 +359,7 @@ void grKongo_801D55D8(HSD_GObj *arg0) {
     temp_r31->gv.kongo2.xCC = random_adder_f(grKg_804D6980->unk2C, grKg_804D6980->unk30);
     temp_r31->gv.kongo2.xCE = random_adder(grKg_804D6980->unk68, grKg_804D6980->unk64);
     lb_8000B1CC(Ground_801C3FA4(arg0, 1), NULL, &sp14);
-    Ground_801C4D70((s32) arg0, &sp14, temp_r31->gv.kongo.xD8);
+    Ground_801C4D70(arg0, &sp14, temp_r31->gv.kongo.xD8);
 #if 0
     temp_r31->unkCC = var_r29;
     var_r29_2 = grKg_804D6980->unk68;
@@ -505,7 +505,7 @@ void grKongo_801D577C(HSD_GObj *arg0) {
     temp_r31->gv.kongo3.xD8 = tau_range(temp_r31->gv.kongo3.xD8);
     HSD_JObjSetRotationZ(temp_r30, temp_r31->gv.kongo.xD8);
     lb_8000B1CC(temp_r30, NULL, &vec);
-    Ground_801C4D70((s32) arg0, &vec, temp_r31->gv.kongo3.xD8);
+    Ground_801C4D70(arg0, &vec, temp_r31->gv.kongo3.xD8);
     switch (temp_r31->gv.kongo3.xC8) {
     case 0:
         temp_r31->gv.kongo2.xCE -= 1;
@@ -748,8 +748,6 @@ void grKongo_801D6378(void) {
     return;
 }
 
-// @todo: change callsites from s32 * to HSD_GObj *
-#if 0
 void grKongo_801D828C(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
@@ -763,7 +761,6 @@ void grKongo_801D828C(HSD_GObj* gobj)
         grMaterial_801C95C4(gobj);
     }
 }
-#endif
 
 void grKongo_801D637C(HSD_GObj *arg0) {
     Ground *temp_r31;

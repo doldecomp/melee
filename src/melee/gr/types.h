@@ -118,7 +118,7 @@ struct StageInfo {
     s32 x720;
     f32 x724;
     f32 x728;
-    s32 x72C;
+    HSD_GObj *x72C;
     Vec3 x730;
     f32 x73C;
     s32 x740;

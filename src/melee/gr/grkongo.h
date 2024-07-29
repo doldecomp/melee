@@ -36,8 +36,8 @@
 /* 1D6190 */ s32 grKongo_801D6190(void);
 /* 1D6198 */ void grKongo_801D6198(HSD_GObj*);
 /* 1D6378 */ void grKongo_801D6378(void);
-/* 1D8270 */ void grKongo_801D8270(s32);
-/* 1D828C */ void grKongo_801D828C(s32);
+/* 1D8270 */ void grKongo_801D8270(HSD_GObj*);
+/* 1D828C */ void grKongo_801D828C(HSD_GObj*);
 /* 1D637C */ void grKongo_801D637C(HSD_GObj*);
 /* 1D64B4 */ s32 grKongo_801D64B4(void);
 /* 1D64BC */ void grKongo_801D64BC(HSD_GObj*);

@@ -119,7 +119,7 @@
 /* 1C49F8 */ void* Ground_801C49F8(void);
 /* 1C4A08 */ void Ground_801C4A08(HSD_GObj* gobj);
 /* 1C4B50 */ void Ground_801C4B50(s32, s32, Vec3* result, f32);
-/* 1C4D70 */ bool Ground_801C4D70(s32, Vec3*, f32);
+/* 1C4D70 */ bool Ground_801C4D70(HSD_GObj*, Vec3*, f32);
 /* 1C4DA0 */ bool Ground_801C4DA0(Vec3*, f32*);
 /* 1C4DD0 */ bool Ground_801C4DD0(void);
 /* 1C4E20 */ bool Ground_801C4E20(void);
