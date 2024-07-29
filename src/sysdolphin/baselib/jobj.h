@@ -308,6 +308,12 @@ static inline f32 HSD_JObjGetRotationY(HSD_JObj* jobj)
     return jobj->rotate.y;
 }
 
+static inline f32 HSD_JObjGetRotationZ(HSD_JObj* jobj)
+{
+    HSD_ASSERT(745, jobj);
+    return jobj->rotate.z;
+}
+
 static inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec3* scale)
 {
     HSD_ASSERT(760, jobj);
