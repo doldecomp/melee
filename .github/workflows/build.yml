@@ -121,6 +121,8 @@ jobs:
             actual="$root/actual-report.json"
             changes="$root/changes-report.json"
 
+            git add tools/diff_changes.py
+
             ninja all_source
             objdiff-cli report generate -o "$actual"
 
@@ -134,15 +136,17 @@ jobs:
               ;;
               *) exit 1 ;;
             esac
+
+            git reset
+
             ninja all_source
             objdiff-cli report generate -o "$expected"
 
             objdiff-cli report changes -o "$changes" "$expected" "$actual"
 
-        tree
             python tools/diff_changes.py "$changes"
-            status=$?
-            exit $status
+            status="$?"
+            exit "$status"
           ;;
           *) exit 1 ;;
         esac
