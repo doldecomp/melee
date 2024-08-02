@@ -79,17 +79,17 @@ def write_header(path: Path):
     path.write_text("\n".join(files), encoding="utf-8")
 
 
-def try_import(c_command: List[str], args_quiet):
+def try_import(c_command: List[str], quiet: bool):
     try:
         out_text = subprocess.check_output(c_command, cwd=root, encoding="utf8")
     except subprocess.CalledProcessError as err:
-        err_output = "" if args_quiet else err.output
         print(
             "Failed to preprocess input file, when running command:\n"
-            + " ".join(c_command)
-            + f"\n\n{err_output}",
+            + " ".join(c_command),
             file=sys.stderr,
         )
+        if not quiet:
+            print(err.output, file=sys.stderr)
         sys.exit(1)
 
     if not out_text:
@@ -99,19 +99,19 @@ def try_import(c_command: List[str], args_quiet):
     return out_text
 
 
-def pcpp_import(in_file: Path, args_quiet) -> str:
+def pcpp_import(in_file: Path, quiet: bool) -> str:
     c_command = ["pcpp", *PCPP_FLAGS, str(in_file)]
-    return try_import(c_command, args_quiet)
+    return try_import(c_command, quiet)
 
 
-def mwcc_import(in_file: Path, args_quiet) -> str:
+def mwcc_import(in_file: Path, quiet: bool) -> str:
     c_command = [str(mwcc_command), *MWCC_FLAGS, "-E", str(in_file)]
 
     if sys.platform != "win32":
         wine = os.environ.get("WINE", "wine")
         c_command = [wine] + c_command
 
-    return try_import(c_command, args_quiet)
+    return try_import(c_command, quiet)
 
 
 def main():
