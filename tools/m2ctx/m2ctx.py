@@ -79,14 +79,15 @@ def write_header(path: Path):
     path.write_text("\n".join(files), encoding="utf-8")
 
 
-def try_import(c_command: List[str]):
+def try_import(c_command: List[str], args_quiet):
     try:
         out_text = subprocess.check_output(c_command, cwd=root, encoding="utf8")
     except subprocess.CalledProcessError as err:
+        err_output = "" if args_quiet else err.output
         print(
             "Failed to preprocess input file, when running command:\n"
             + " ".join(c_command)
-            + f"\n\n{err.output}",
+            + f"\n\n{err_output}",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -98,19 +99,19 @@ def try_import(c_command: List[str]):
     return out_text
 
 
-def pcpp_import(in_file: Path) -> str:
+def pcpp_import(in_file: Path, args_quiet) -> str:
     c_command = ["pcpp", *PCPP_FLAGS, str(in_file)]
-    return try_import(c_command)
+    return try_import(c_command, args_quiet)
 
 
-def mwcc_import(in_file: Path) -> str:
+def mwcc_import(in_file: Path, args_quiet) -> str:
     c_command = [str(mwcc_command), *MWCC_FLAGS, "-E", str(in_file)]
 
     if sys.platform != "win32":
         wine = os.environ.get("WINE", "wine")
         c_command = [wine] + c_command
 
-    return try_import(c_command)
+    return try_import(c_command, args_quiet)
 
 
 def main():
@@ -163,9 +164,9 @@ def main():
     if args.preprocessor:
         import pcpp
 
-        output = pcpp_import(header_path)
+        output = pcpp_import(header_path, args.quiet)
     else:
-        output = mwcc_import(header_path)
+        output = mwcc_import(header_path, args.quiet)
 
     if args.format:
         try:
