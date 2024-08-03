@@ -3,11 +3,12 @@
 #ifndef MELEE_IT_ITCHARITEMS_H
 #define MELEE_IT_ITCHARITEMS_H
 
-#include "lb/types.h"
 #include "it/forward.h"
+
+#include "lb/types.h"
+
 #include <dolphin/mtx/types.h>
 #include <baselib/jobj.h>
-
 
 typedef struct {
     float xDD4;
@@ -111,7 +112,7 @@ typedef struct {
     f32 x4;
     f32 x8;
     f32 xC;
-    Item_GObj *x10;
+    Item_GObj* x10;
 } itLinkBombVars;
 
 typedef struct itLinkBombAttributes {
@@ -188,7 +189,7 @@ typedef struct {
 
 typedef struct {
     f32 x0;
-    HSD_GObj *x4;
+    HSD_GObj* x4;
 } itLinkBowVars;
 
 #endif

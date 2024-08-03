@@ -1,24 +1,17 @@
+#include "itlinkbomb.h"
+
 #include "baselib/random.h"
-#include "MSL/math.h"
-
-#include "mp/mpcoll.h"
-
-#include "lb/lb_00F9.h"
-
 #include "ft/chara/ftLink/ftLk_AttackAir.h"
-
 #include "ft/ft_0C31.h"
-
+#include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-
-
 #include "it/itCharItems.h"
-#include "it/inlines.h"
 #include "it/item.h"
-
-#include "itlinkbomb.h"
+#include "lb/lb_00F9.h"
+#include "mp/mpcoll.h"
+#include "MSL/math.h"
 
 static Vec3 it_803B8640;
 
@@ -56,18 +49,19 @@ static inline void fake_HSD_JObjAddRotationX(HSD_JObj* jobj, float x)
 
 #define TEST_REAL 0
 
-void it_8029D968(Item_GObj *gobj) {
-    Item *item;
+void it_8029D968(Item_GObj* gobj)
+{
+    Item* item;
     item = GET_ITEM((HSD_GObj*) gobj);
     if ((item->xDC8_word.flags.x13 == false) && ((s32) item->msid != 5)) {
         it_8029F69C((HSD_GObj*) gobj);
     }
 }
 
-void it_8029D9A4(HSD_GObj *gobj, enum_t msid, Item_StateChangeFlags arg2)
+void it_8029D9A4(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags arg2)
 {
-    Item *item;
-    HSD_JObj *jobj;
+    Item* item;
+    HSD_JObj* jobj;
     f32 x;
     f32 y;
     item = HSD_GObjGetUserData(gobj);
@@ -83,24 +77,28 @@ void it_8029D9A4(HSD_GObj *gobj, enum_t msid, Item_StateChangeFlags arg2)
     HSD_JObjSetRotationX(jobj, x);
 }
 
-static inline void it_8029DB5C_Inline_Matching(HSD_GObj *gobj, Item *item, Article *article, itLinkBombAttributes *sa)
+static inline void it_8029DB5C_Inline_Matching(HSD_GObj* gobj, Item* item,
+                                               Article* article,
+                                               itLinkBombAttributes* sa)
 {
-    Item *item_2;
-    ItemStateDesc *item_state_desc;
-    HSD_GObj *temp_r31;
+    Item* item_2;
+    ItemStateDesc* item_state_desc;
+    HSD_GObj* temp_r31;
 
     f32 temp_f31;
     f32 temp_f31_2;
-    HSD_JObj *temp_r31_2;
+    HSD_JObj* temp_r31_2;
 
-    if ((item->xD44_lifeTimer <= sa->xC) && item->xDD4_itemVar.linkbomb.x0.bits.b0 == 0) {
+    if ((item->xD44_lifeTimer <= sa->xC) &&
+        item->xDD4_itemVar.linkbomb.x0.bits.b0 == 0)
+    {
         temp_r31 = gobj->hsd_obj;
         item->xD0_itemStateDesc = &article->xC_itemStates->x0_itemStateDesc[3];
         item_state_desc = item->xD0_itemStateDesc;
         if (item_state_desc != NULL) {
             Item_80268D34(gobj, item_state_desc);
         }
-        HSD_JObjAnimAll((HSD_JObj *) temp_r31);
+        HSD_JObjAnimAll((HSD_JObj*) temp_r31);
         item->xDD4_itemVar.linkbomb.x0.bits.b0 = true;
     }
     item->xD44_lifeTimer = item->xD44_lifeTimer - 1.0f;
@@ -120,13 +118,13 @@ static inline void it_8029DB5C_Inline_Matching(HSD_GObj *gobj, Item *item, Artic
     }
 }
 
-static inline void it_8029DB5C_Inline_AnimAdd_Part(HSD_GObj *gobj)
+static inline void it_8029DB5C_Inline_AnimAdd_Part(HSD_GObj* gobj)
 {
-    Item *item_2;
+    Item* item_2;
 
     f32 temp_f31;
     f32 temp_f31_2;
-    HSD_JObj *temp_r31_2;
+    HSD_JObj* temp_r31_2;
 
     item_2 = GET_ITEM(gobj);
     if (item_2->xDD4_itemVar.linkbomb.x0.bits.b0 == 0) {
@@ -144,27 +142,33 @@ static inline void it_8029DB5C_Inline_AnimAdd_Part(HSD_GObj *gobj)
     }
 }
 
-static inline void it_8029DB5C_Inline_TimerCheck_Part(HSD_GObj *gobj, Item *item, Article *article, itLinkBombAttributes *sa)
+static inline void it_8029DB5C_Inline_TimerCheck_Part(HSD_GObj* gobj,
+                                                      Item* item,
+                                                      Article* article,
+                                                      itLinkBombAttributes* sa)
 {
-    HSD_GObj *temp_r31;
-    ItemStateDesc *item_state_desc;
+    HSD_GObj* temp_r31;
+    ItemStateDesc* item_state_desc;
 
-    if ((item->xD44_lifeTimer <= sa->xC) && item->xDD4_itemVar.linkbomb.x0.bits.b0 == 0) {
+    if ((item->xD44_lifeTimer <= sa->xC) &&
+        item->xDD4_itemVar.linkbomb.x0.bits.b0 == 0)
+    {
         temp_r31 = gobj->hsd_obj;
         item->xD0_itemStateDesc = &article->xC_itemStates->x0_itemStateDesc[3];
         item_state_desc = item->xD0_itemStateDesc;
         if (item_state_desc != NULL) {
             Item_80268D34(gobj, item_state_desc);
         }
-        HSD_JObjAnimAll((HSD_JObj *) temp_r31);
+        HSD_JObjAnimAll((HSD_JObj*) temp_r31);
         item->xDD4_itemVar.linkbomb.x0.bits.b0 = true;
     }
     item->xD44_lifeTimer -= 1.0F;
 }
 
-void it_8029DB5C(HSD_GObj *gobj) {
-    Item *item;
-    Article *article;
+void it_8029DB5C(HSD_GObj* gobj)
+{
+    Item* item;
+    Article* article;
     itLinkBombAttributes* sa;
 
     item = GET_ITEM(gobj);
@@ -178,7 +182,9 @@ void it_8029DB5C(HSD_GObj *gobj) {
     }
 }
 
-static inline void it_8029DD58_inline(Item *item, itLinkBombAttributes *attr, Item_GObj *fighter_gobj, Item_GObj *temp_r3, u8 arg2)
+static inline void it_8029DD58_inline(Item* item, itLinkBombAttributes* attr,
+                                      Item_GObj* fighter_gobj,
+                                      Item_GObj* temp_r3, u8 arg2)
 {
     f32 temp_f2;
     it_80275158(temp_r3, attr->lifetime);
@@ -192,11 +198,13 @@ static inline void it_8029DD58_inline(Item *item, itLinkBombAttributes *attr, It
     Item_8026AB54(temp_r3, fighter_gobj, arg2);
 }
 
-HSD_GObj *it_8029DD58(Item_GObj *fighter_gobj, Vec3 *arg1, u8 arg2, int arg3, f32 arg4) {
-    Item_GObj *temp_r3;
+HSD_GObj* it_8029DD58(Item_GObj* fighter_gobj, Vec3* arg1, u8 arg2, int arg3,
+                      f32 arg4)
+{
+    Item_GObj* temp_r3;
     SpawnItem spawn;
-    Item *item; // r26
-    itLinkBombAttributes *attr;
+    Item* item; // r26
+    itLinkBombAttributes* attr;
 
     spawn.kind = arg3;
     spawn.prev_pos = *arg1;
@@ -206,7 +214,7 @@ HSD_GObj *it_8029DD58(Item_GObj *fighter_gobj, Vec3 *arg1, u8 arg2, int arg3, f3
     spawn.vel.z = 0.0F;
     spawn.vel.y = 0.0F;
     spawn.vel.x = 0.0F;
-    spawn.x0_parent_gobj = (HSD_GObj *)fighter_gobj;
+    spawn.x0_parent_gobj = (HSD_GObj*) fighter_gobj;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
     spawn.x44_flag.bits.b0 = true;
     spawn.x40 = 0;
@@ -219,19 +227,21 @@ HSD_GObj *it_8029DD58(Item_GObj *fighter_gobj, Vec3 *arg1, u8 arg2, int arg3, f3
     return temp_r3;
 }
 
-void it_8029DEB0(HSD_GObj *gobj) {
-    HSD_JObj *jobj;
-    Item *item;
+void it_8029DEB0(HSD_GObj* gobj)
+{
+    HSD_JObj* jobj;
+    Item* item;
     f32 temp_f30;
     f32 temp_f31;
 
     it_8029D9A4(gobj, 0, 0);
-    it_8026BCF4((Item_GObj *) gobj);
+    it_8026BCF4((Item_GObj*) gobj);
 }
 
-int it_8029E074(HSD_GObj *gobj) {
-    Item *item;
-    Article *article;
+int it_8029E074(HSD_GObj* gobj)
+{
+    Item* item;
+    Article* article;
     itLinkBombAttributes* sa;
     int pad[5];
 
@@ -253,18 +263,21 @@ int it_8029E074(HSD_GObj *gobj) {
     return 0;
 }
 
-void it_8029E218(HSD_GObj *gobj) {
+void it_8029E218(HSD_GObj* gobj)
+{
     return;
 }
 
-void fn_8029E21C(HSD_GObj *gobj) {
+void fn_8029E21C(HSD_GObj* gobj)
+{
     int pad[2];
     it_8029D9A4(gobj, 1, 0x0);
 }
 
-int it_8029E3D8(HSD_GObj *gobj) {
-    Item *item;
-    Article *article;
+int it_8029E3D8(HSD_GObj* gobj)
+{
+    Item* item;
+    Article* article;
     itLinkBombAttributes* sa;
     f32 pad[2];
 
@@ -288,21 +301,24 @@ int it_8029E3D8(HSD_GObj *gobj) {
     return 0;
 }
 
-void it_8029E574(HSD_GObj *gobj) {
-    ItemAttr *temp_r4;
+void it_8029E574(HSD_GObj* gobj)
+{
+    ItemAttr* temp_r4;
 
     temp_r4 = GET_ITEM((HSD_GObj*) gobj)->xCC_item_attr;
-    it_80272860((Item_GObj *) gobj, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
+    it_80272860((Item_GObj*) gobj, temp_r4->x10_fall_speed,
+                temp_r4->x14_fall_speed_max);
 }
 
-int it_8029E5A4(Item_GObj *gobj) {
+int it_8029E5A4(Item_GObj* gobj)
+{
     it_8026E15C(gobj, it_8029F18C);
     return 0;
 }
 
 void it_8029E5D0(HSD_GObj* gobj)
 {
-    Item *item;
+    Item* item;
     item = GET_ITEM(gobj);
     it_80275414(gobj);
     it_802754A4((Item_GObj*) gobj);
@@ -313,11 +329,11 @@ void it_8029E5D0(HSD_GObj* gobj)
     }
 }
 
-int it_8029E920(HSD_GObj *gobj) {
-    Item *item;
-    Article *article;
+int it_8029E920(HSD_GObj* gobj)
+{
+    Item* item;
+    Article* article;
     itLinkBombAttributes* sa;
-
 
     if (it_80272C6C(gobj) == 0) {
         item = GET_ITEM(gobj);
@@ -340,18 +356,19 @@ int it_8029E920(HSD_GObj *gobj) {
     return 0;
 }
 
-void it_8029EAF0(Item_GObj *gobj) {
-    ItemAttr *temp_r4;
+void it_8029EAF0(Item_GObj* gobj)
+{
+    ItemAttr* temp_r4;
 
-    temp_r4 = GET_ITEM((HSD_GObj *)gobj)->xCC_item_attr;
+    temp_r4 = GET_ITEM((HSD_GObj*) gobj)->xCC_item_attr;
     it_80272860(gobj, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
     it_80274658(gobj, it_804D6D28->x68_float);
 }
 
-static inline int it_LinkBomb_Inline_VelocityCompare(HSD_GObj *gobj, Vec3 *vel)
+static inline int it_LinkBomb_Inline_VelocityCompare(HSD_GObj* gobj, Vec3* vel)
 {
-    Item *item;
-    itLinkBombAttributes *sa;
+    Item* item;
+    itLinkBombAttributes* sa;
     item = gobj->user_data;
     sa = item->xC4_article_data->x4_specialAttributes;
     if ((fabs_inline(vel->x) > sa->x24) || (fabs_inline(vel->y) > sa->x28)) {
@@ -362,14 +379,15 @@ static inline int it_LinkBomb_Inline_VelocityCompare(HSD_GObj *gobj, Vec3 *vel)
     }
 }
 
-int it_8029EB3C(HSD_GObj *gobj) {
-    Item *item;
+int it_8029EB3C(HSD_GObj* gobj)
+{
+    Item* item;
     s32 temp_r3;
     Vec3 vel;
 
     item = GET_ITEM(gobj);
     vel = item->x40_vel;
-    temp_r3 = it_8026DAA8((Item_GObj *) gobj);
+    temp_r3 = it_8026DAA8((Item_GObj*) gobj);
     if (temp_r3 & 0xF) {
         if (!it_LinkBomb_Inline_VelocityCompare(gobj, &vel) && (temp_r3 & 1)) {
             it_802762B0(item);
@@ -382,7 +400,7 @@ int it_8029EB3C(HSD_GObj *gobj) {
 
 void it_8029EC34(HSD_GObj* gobj)
 {
-    Item *item;
+    Item* item;
 
     item = GET_ITEM(gobj);
     it_80275414(gobj);
@@ -428,14 +446,16 @@ int it_8029EF84(HSD_GObj* gobj)
     return 0;
 }
 
-void it_8029F04C(Item_GObj *gobj) {
-    ItemAttr *temp_r4;
+void it_8029F04C(Item_GObj* gobj)
+{
+    ItemAttr* temp_r4;
     temp_r4 = GET_ITEM(gobj)->xCC_item_attr;
     it_80272860(gobj, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
     it_80274658(gobj, it_804D6D28->x68_float);
 }
 
-int it_8029F098(HSD_GObj *gobj) {
+int it_8029F098(HSD_GObj* gobj)
+{
     GET_ITEM(gobj);
     it_8029EB3C(gobj);
     return 0;
@@ -459,8 +479,9 @@ static inline s32 float_sign_int_inline(f32 x)
     }
 }
 
-void it_8029F18C(HSD_GObj *gobj) {
-    Item *item;
+void it_8029F18C(HSD_GObj* gobj)
+{
+    Item* item;
     s32 temp_r0;
 
     item = gobj->user_data;
@@ -468,7 +489,8 @@ void it_8029F18C(HSD_GObj *gobj) {
     temp_r0 = item->msid;
     if ((temp_r0 != 6) || (temp_r0 != 4)) {
         item->xDD4_itemVar.linkbomb.x4 = fsign_inline(item->x40_vel.x);
-        mpColl_800436D8(&item->x378_itemColl, float_sign_int_inline(item->xDD4_itemVar.linkbomb.x4));
+        mpColl_800436D8(&item->x378_itemColl,
+                        float_sign_int_inline(item->xDD4_itemVar.linkbomb.x4));
         item->xDD4_itemVar.linkbomb.x0.bits.b1 = true;
     } else {
         item->xDD4_itemVar.linkbomb.x0.bits.b1 = false;
@@ -484,7 +506,7 @@ void it_8029F18C(HSD_GObj *gobj) {
 // but every other function matches with it.
 int it_8029F3DC(HSD_GObj* gobj)
 {
-    Article *article;
+    Article* article;
     Item* item;
     itLinkBombAttributes* sa;
 
@@ -508,10 +530,11 @@ int it_8029F3DC(HSD_GObj* gobj)
     return 0;
 }
 
-void it_8029F60C(HSD_GObj *gobj) {
+void it_8029F60C(HSD_GObj* gobj)
+{
     f32 temp_f2;
-    Item *item;
-    itLinkBombAttributes *sa;
+    Item* item;
+    itLinkBombAttributes* sa;
     f32 zero = 0.0F;
 
     item = GET_ITEM(gobj);
@@ -519,7 +542,8 @@ void it_8029F60C(HSD_GObj *gobj) {
     if (item->xDD4_itemVar.linkbomb.x0.bits.b1) {
         temp_f2 = item->x40_vel.x;
         if (temp_f2 != zero) {
-            item->x40_vel.x = (sa->x2C * item->xDD4_itemVar.linkbomb.x4) + temp_f2;
+            item->x40_vel.x =
+                (sa->x2C * item->xDD4_itemVar.linkbomb.x4) + temp_f2;
         }
         if (fabs_inline(item->x40_vel.x) < sa->x30) {
             item->x40_vel.x = zero;
@@ -527,17 +551,18 @@ void it_8029F60C(HSD_GObj *gobj) {
     }
 }
 
-int it_8029F670(Item_GObj *gobj) {
+int it_8029F670(Item_GObj* gobj)
+{
     it_8026D62C(gobj, fn_8029E21C);
     return 0;
 }
 
 void it_8029F69C(HSD_GObj* gobj)
 {
-    HSD_GObj *temp_r0;
-    HSD_GObj *temp_r3;
-    HSD_JObj *jobj;
-    Item *item;
+    HSD_GObj* temp_r0;
+    HSD_GObj* temp_r3;
+    HSD_JObj* jobj;
+    Item* item;
     int pad[2];
     Vec3 item_pos;
     Vec3 const_vec;
@@ -551,7 +576,7 @@ void it_8029F69C(HSD_GObj* gobj)
         it_802756D0(gobj);
         temp_r0 = item->owner;
         if (temp_r0 != NULL) {
-            temp_r3 = (HSD_GObj *)item->xDD4_itemVar.linkbomb.x10;
+            temp_r3 = (HSD_GObj*) item->xDD4_itemVar.linkbomb.x10;
             if (temp_r0 == temp_r3) {
                 ftLk_AttackAir_SetupParts(temp_r3);
             }
@@ -569,23 +594,27 @@ void it_8029F69C(HSD_GObj* gobj)
     lb_800119DC(&item_pos, 0x78, 1.0f, 0.02f, 1.0471976f);
 }
 
-int it_8029F934(Item_GObj *gobj) {
+int it_8029F934(Item_GObj* gobj)
+{
     return it_802751D8(gobj);
 }
 
-void it_8029F954(HSD_GObj *gobj) {
+void it_8029F954(HSD_GObj* gobj)
+{
     return;
 }
 
-int it_8029F958(HSD_GObj *gobj) {
+int it_8029F958(HSD_GObj* gobj)
+{
     return 0;
 }
 
-int it_8029F960(HSD_GObj *gobj) {
-    Item *item;
-    Item *item_2;
+int it_8029F960(HSD_GObj* gobj)
+{
+    Item* item;
+    Item* item_2;
     s32 temp_r3;
-    itLinkBombAttributes *sa;
+    itLinkBombAttributes* sa;
 
     item = GET_ITEM(gobj);
     if (item->msid != 5) {
@@ -600,10 +629,11 @@ int it_8029F960(HSD_GObj *gobj) {
     return 0;
 }
 
-int it_8029FA30(Item_GObj *gobj) {
-    Item *item;
+int it_8029FA30(Item_GObj* gobj)
+{
+    Item* item;
     f32 temp_f1;
-    itLinkBombAttributes *sa;
+    itLinkBombAttributes* sa;
     f32 pad[2];
 
     item = GET_ITEM((HSD_GObj*) gobj);
@@ -627,13 +657,15 @@ int it_8029FA30(Item_GObj *gobj) {
     return 0;
 }
 
-void it_8029FB24(Item_GObj *gobj) {
+void it_8029FB24(Item_GObj* gobj)
+{
     Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
 }
 
-int it_8029FB4C(HSD_GObj *gobj) {
-    Item *item;
-    Article *article;
+int it_8029FB4C(HSD_GObj* gobj)
+{
+    Item* item;
+    Article* article;
     itLinkBombAttributes* sa;
 
     if (it_80272C6C(gobj) == 0) {
@@ -656,29 +688,35 @@ int it_8029FB4C(HSD_GObj *gobj) {
     return 0;
 }
 
-void it_8029FCE8(HSD_GObj *gobj) {
+void it_8029FCE8(HSD_GObj* gobj)
+{
     return;
 }
 
-int it_8029FCEC(Item_GObj *gobj) {
+int it_8029FCEC(Item_GObj* gobj)
+{
     it_8026E8C4(gobj, it_8029F18C, fn_8029E21C);
     return 0;
 }
 
-int it_8029FD20(Item_GObj *gobj) {
+int it_8029FD20(Item_GObj* gobj)
+{
     return it_80273030(gobj);
 }
 
-int it_8029FD40(Item_GObj *gobj) {
+int it_8029FD40(Item_GObj* gobj)
+{
     itColl_BounceOffVictim(gobj);
     return 0;
 }
 
-int it_8029FD64(Item_GObj *gobj) {
+int it_8029FD64(Item_GObj* gobj)
+{
     return itColl_BounceOffShield(gobj);
 }
 
-void it_8029FD84(Item_GObj *gobj, Item_GObj *arg1) {
+void it_8029FD84(Item_GObj* gobj, Item_GObj* arg1)
+{
     Item* item;
     item = GET_ITEM((HSD_GObj*) gobj);
     if (item->xDD4_itemVar.linkbomb.x10 == arg1) {

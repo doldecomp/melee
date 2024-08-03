@@ -32,7 +32,7 @@
 #include <baselib/state.h>
 #include <baselib/tev.h>
 
-extern ItemCommonData *it_804D6D28;
+extern ItemCommonData* it_804D6D28;
 extern HSD_ObjAllocUnk Item_804A0C64;
 
 // @todo: what is this?
@@ -47,17 +47,18 @@ typedef struct test_struct {
     s32 unk1C;
 } test_struct;
 
-void it_8026C47C(test_struct *);
+void it_8026C47C(test_struct*);
 
-void it_8026C47C(test_struct *arg0) {
-    s32 *var_r28;
+void it_8026C47C(test_struct* arg0)
+{
+    s32* var_r28;
     s32 var_r29;
     u32 var_r30;
     f32 pad[2];
 
     var_r30 = 0;
     var_r29 = 0;
-    var_r28 = (s32 *)arg0;
+    var_r28 = (s32*) arg0;
     arg0->unk0 = 0;
     arg0->unk4 = 0;
     arg0->unk8 = 0;
@@ -80,10 +81,11 @@ void it_8026C47C(test_struct *arg0) {
 }
 
 // argument is definitely size 0x10
-u8 it_8026C65C(HSD_ObjAllocUnk6 *arg0) {
+u8 it_8026C65C(HSD_ObjAllocUnk6* arg0)
+{
     s32 temp_r3;
     s32 temp_r4;
-    s32 *temp_r5;
+    s32* temp_r5;
     s32 temp_r6;
     s32 var_r3;
     u8 temp_r31;
@@ -107,7 +109,8 @@ u8 it_8026C65C(HSD_ObjAllocUnk6 *arg0) {
     return arg0->x4[var_r3];
 }
 
-s32 it_8026C704(void) {
+s32 it_8026C704(void)
+{
     s32 var_r31;
 
     var_r31 = 0;
@@ -117,7 +120,8 @@ s32 it_8026C704(void) {
     return var_r31;
 }
 
-s8 it_8026C75C(HSD_ObjAllocUnk6 *arg0) {
+s8 it_8026C75C(HSD_ObjAllocUnk6* arg0)
+{
     s32 temp_r0;
     s32 var_r29;
     s32 var_r31;
@@ -145,23 +149,25 @@ s8 it_8026C75C(HSD_ObjAllocUnk6 *arg0) {
             arg0->x0 -= 1;
         }
     }
-    var_r3 = arg0->x4[it_8026C530(HSD_Randi((s32) arg0->x8), arg0, 0, (s32) arg0->x0)];
+    var_r3 = arg0->x4[it_8026C530(HSD_Randi((s32) arg0->x8), arg0, 0,
+                                  (s32) arg0->x0)];
     if ((var_r31 != 0) && (var_r29 != 0)) {
         arg0->x8 = var_r30;
         arg0->x0 += 1;
-        if ((s32)var_r3 == 34) {
+        if ((s32) var_r3 == 34) {
             var_r3 = -1;
         }
     }
     return var_r3;
 }
 
-void fn_8026C88C(HSD_GObj *gobj) {
-    Item_GObj *temp_r3;
-    Item_GObj *temp_ret;
+void fn_8026C88C(HSD_GObj* gobj)
+{
+    Item_GObj* temp_r3;
+    Item_GObj* temp_ret;
     s32 var_r4;
 
-    Item_GObj *spawn_gobj;
+    Item_GObj* spawn_gobj;
     SpawnItem spawn;
     s32 temp_r4;
 
@@ -192,17 +198,22 @@ void fn_8026C88C(HSD_GObj *gobj) {
             }
             {
                 // @todo: Make a FLT_RAND(min, max) define or inline
-                f32 *temp_r29 = ((f32 *)it_804D6D28) + (gm_8016AE80() * 8) + 0xFC;
-                it_804A0E30.x0 = (s32) (((temp_r29[4] - temp_r29[0]) * HSD_Randf()) + (f32) temp_r29[0]);
-                it_804A0E30.x0 = (s32) ((f32) it_804A0E30.x0 * Ground_801C2AE8(Stage_80225194()));
+                f32* temp_r29 =
+                    ((f32*) it_804D6D28) + (gm_8016AE80() * 8) + 0xFC;
+                it_804A0E30.x0 =
+                    (s32) (((temp_r29[4] - temp_r29[0]) * HSD_Randf()) +
+                           (f32) temp_r29[0]);
+                it_804A0E30.x0 = (s32) ((f32) it_804A0E30.x0 *
+                                        Ground_801C2AE8(Stage_80225194()));
             }
         }
     }
 }
 
-void it_8026CA4C(u16 *arg0, s32 *arg1, u64 arg2, s32 arg4, f32 arg8) {
+void it_8026CA4C(u16* arg0, s32* arg1, u64 arg2, s32 arg4, f32 arg8)
+{
     u64 var_r5;
-    s32 *var_r28;
+    s32* var_r28;
     s32 var_r31;
     s32 var_r27;
 
@@ -221,7 +232,8 @@ void it_8026CA4C(u16 *arg0, s32 *arg1, u64 arg2, s32 arg4, f32 arg8) {
     arg0[4] = var_r27;
 }
 
-s32 it_8026CB3C(Vec3 *arg0) {
+s32 it_8026CB3C(Vec3* arg0)
+{
     if (Stage_80224FDC(arg0) == 0) {
         return 0;
     }
@@ -232,11 +244,12 @@ s32 it_8026CB3C(Vec3 *arg0) {
     return 1;
 }
 
-void it_8026CB9C(s32 *arg0, u64 arg2, u32 arg3, f32 arg8) {
+void it_8026CB9C(s32* arg0, u64 arg2, u32 arg3, f32 arg8)
+{
     s32 temp_r26;
     {
         u64 var_r5;
-        s32 *var_r28;
+        s32* var_r28;
         s32 var_r31;
         s32 var_r27;
 
@@ -254,12 +267,12 @@ void it_8026CB9C(s32 *arg0, u64 arg2, u32 arg3, f32 arg8) {
         }
         temp_r26 = var_r27 * 4;
         it_804A0E30.x4.x0 = var_r27;
-        it_804A0E30.x4.x4 = (u8 *)HSD_MemAlloc(temp_r26);
-        it_804A0E30.x4.xC = (u16 *)HSD_MemAlloc(temp_r26);
+        it_804A0E30.x4.x4 = (u8*) HSD_MemAlloc(temp_r26);
+        it_804A0E30.x4.xC = (u16*) HSD_MemAlloc(temp_r26);
     }
     {
         u64 var_r5;
-        s32 *var_r28;
+        s32* var_r28;
         s32 var_r31;
         s32 var_r27;
         s32 var_r26_2;
@@ -280,7 +293,8 @@ void it_8026CB9C(s32 *arg0, u64 arg2, u32 arg3, f32 arg8) {
                 var_r26_2 += 1;
                 it_804A0E30.x4.xC[var_r29] = var_r25;
                 var_r29 += 2;
-                var_r25 = (s16) ((f32) var_r25 + ((arg8 * (f32) *var_r28) + 0.99f));
+                var_r25 =
+                    (s16) ((f32) var_r25 + ((arg8 * (f32) *var_r28) + 0.99f));
             }
             var_r28 += 1;
             var_r27 += 1;
@@ -289,21 +303,23 @@ void it_8026CB9C(s32 *arg0, u64 arg2, u32 arg3, f32 arg8) {
     }
 }
 
-void it_8026CF04(void) {
+void it_8026CF04(void)
+{
     s16 temp_r4;
     s16 temp_r8_2;
     s32 temp_r8;
-    u8 *temp_r30;
+    u8* temp_r30;
 
     // @todo: probably a double somewhere
-    temp_r4 = it_804D6D28->x128 + it_804D6D28->x12C + it_804D6D28->x130 + it_804D6D28->x134;
+    temp_r4 = it_804D6D28->x128 + it_804D6D28->x12C + it_804D6D28->x130 +
+              it_804D6D28->x134;
     // @todo: Investigate why it_804A0E30 is used instead of it_804A0E50.
     if (temp_r4 != 0) {
         it_804A0E50.x8 = temp_r4;
         it_804A0E50.x0 = 4U;
         temp_r30 = it_804A0E50.x4;
-        it_804A0E50.x4 = (u8 *)HSD_MemAlloc(it_804A0E50.x0 * 4);
-        it_804A0E50.xC = (u16 *)HSD_MemAlloc(it_804A0E50.x0 * 4);
+        it_804A0E50.x4 = (u8*) HSD_MemAlloc(it_804A0E50.x0 * 4);
+        it_804A0E50.xC = (u16*) HSD_MemAlloc(it_804A0E50.x0 * 4);
         temp_r30[0] = 0x2B;
         it_804A0E50.xC[0] = 0;
         temp_r8 = it_804D6D28->x128;
@@ -317,22 +333,25 @@ void it_8026CF04(void) {
     }
 }
 
-void it_8026D018(void) {
+void it_8026D018(void)
+{
     s32 var_r29;
     if ((gm_8016B238() == 0) && (gm_8016AE80() != -1)) {
         it_804A0E30.x18 = gm_8016AEA4();
         var_r29 = 0;
         {
             u64 temp_r28 = it_804A0E30.x18;
-            s32 *temp_r26 = (s32 *)Ground_801C2AD8();
+            s32* temp_r26 = (s32*) Ground_801C2AD8();
             s32 temp_r30 = gm_8016AE80();
             f32 temp_f31 = gm_8016AE94();
-            if (((temp_r28 ^ 0) == 0) || (temp_r26 == NULL) || (temp_r30 == -1)) {
+            if (((temp_r28 ^ 0) == 0) || (temp_r26 == NULL) ||
+                (temp_r30 == -1))
+            {
                 var_r29 = 0;
             } else {
-                it_8026CA4C((u16 *)&it_804A0E30.x4.x0, temp_r26, temp_r28, 0, temp_f31);
+                it_8026CA4C((u16*) &it_804A0E30.x4.x0, temp_r26, temp_r28, 0,
+                            temp_f31);
                 if ((u16) it_804A0E30.x4.x8 == 0) {
-
                 } else {
                     it_8026CB9C(temp_r26, temp_r28, 0, temp_f31);
                     var_r29 = 1;
@@ -342,12 +361,13 @@ void it_8026D018(void) {
         if (var_r29 != 0) {
             {
                 u64 temp_r26_2 = it_804A0E30.x18;
-                s32 *temp_r28_2 = (s32 *)Ground_801C2AD8();
+                s32* temp_r28_2 = (s32*) Ground_801C2AD8();
                 f32 temp_f31_2 = gm_8016AE94();
                 if (((temp_r26_2 ^ 0) != 0) && (temp_r28_2 != NULL)) {
                     u64 temp_r3 = temp_r26_2 >> 6;
-                    it_8026CA4C((u16 *)&it_804A0E30.x4.x0, temp_r28_2, temp_r26_2, 6, temp_f31_2);
-                    if (*(u16 *)((u8 *)&it_804A0E30 + 0x28) != 0) {
+                    it_8026CA4C((u16*) &it_804A0E30.x4.x0, temp_r28_2,
+                                temp_r26_2, 6, temp_f31_2);
+                    if (*(u16*) ((u8*) &it_804A0E30 + 0x28) != 0) {
                         it_8026CD50(temp_r28_2, temp_r3, temp_f31_2);
                     }
                 }
@@ -356,20 +376,25 @@ void it_8026D018(void) {
             HSD_GObjProc_8038FD54(GObj_Create(5U, 7U, 0U), fn_8026C88C, 0U);
             {
                 // @todo: Make a FLT_RAND(min, max) define or inline
-                f32 *temp_r29 = ((f32 *)it_804D6D28) + (gm_8016AE80() * 8) + 0xFC;
-                it_804A0E30.x0 = (s32) (((temp_r29[4] - temp_r29[0]) * HSD_Randf()) + (f32) temp_r29[0]);
-                it_804A0E30.x0 = (s32) ((f32) it_804A0E30.x0 * Ground_801C2AE8(Stage_80225194()));
+                f32* temp_r29 =
+                    ((f32*) it_804D6D28) + (gm_8016AE80() * 8) + 0xFC;
+                it_804A0E30.x0 =
+                    (s32) (((temp_r29[4] - temp_r29[0]) * HSD_Randf()) +
+                           (f32) temp_r29[0]);
+                it_804A0E30.x0 = (s32) ((f32) it_804A0E30.x0 *
+                                        Ground_801C2AE8(Stage_80225194()));
             }
         }
     }
 }
 
-bool it_8026D324(s32 arg0) {
+bool it_8026D324(s32 arg0)
+{
     u64 temp_r29;
     s32 temp_r3;
     u32 temp_r28;
     u64 temp_ret;
-    u8 *temp_r30;
+    u8* temp_r30;
 
     temp_r29 = it_804A0E30.x18;
     temp_r30 = Ground_801C2AD8();
@@ -384,7 +409,8 @@ bool it_8026D324(s32 arg0) {
     return 1;
 }
 
-s32 it_8026D3CC(void) {
+s32 it_8026D3CC(void)
+{
     return it_8026D324(9) | it_8026D324(18) | it_8026D324(8);
 }
 
@@ -438,10 +464,11 @@ s32 it_8026D258(void *arg0, s32 arg1) {
 }
 #endif
 
-void it_8026D564(Item_GObj *gobj) {
+void it_8026D564(Item_GObj* gobj)
+{
     bool test;
-    Item *ip = GET_ITEM(gobj);
-    CollData *coll = &ip->x378_itemColl;
+    Item* ip = GET_ITEM(gobj);
+    CollData* coll = &ip->x378_itemColl;
     it_80276214(gobj);
     PAD_STACK(4);
     test = mpColl_8004B108(coll);
@@ -451,23 +478,26 @@ void it_8026D564(Item_GObj *gobj) {
     }
 }
 
-void it_8026D5CC(Item_GObj *gobj) {
-    Item *ip = GET_ITEM(gobj);
-    CollData *coll = &ip->x378_itemColl;
+void it_8026D5CC(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    CollData* coll = &ip->x378_itemColl;
     it_80276214(gobj);
     mpColl_8004B108(coll);
 }
 
-s32 it_8026D604(HSD_GObj *gobj) {
-    Item *ip = GET_ITEM(gobj);
+s32 it_8026D604(HSD_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
     return mpLib_80054ED8(ip->xC30);
 }
 
-void it_8026D62C(Item_GObj *gobj, ItCallback arg1) {
-    CollData *coll;
-    Item *ip;
+void it_8026D62C(Item_GObj* gobj, ItCallback arg1)
+{
+    CollData* coll;
+    Item* ip;
     bool test;
-    PAD_STACK(5*4);
+    PAD_STACK(5 * 4);
 
     ip = gobj->user_data;
     coll = &ip->x378_itemColl;
@@ -490,12 +520,12 @@ void it_8026D62C(Item_GObj *gobj, ItCallback arg1) {
     }
 }
 
-
-void it_8026D6F4(Item_GObj *gobj, ItCallback arg1) {
-    CollData *coll;
-    Item *ip;
+void it_8026D6F4(Item_GObj* gobj, ItCallback arg1)
+{
+    CollData* coll;
+    Item* ip;
     bool test;
-    PAD_STACK(5*4);
+    PAD_STACK(5 * 4);
 
     ip = gobj->user_data;
     coll = &ip->x378_itemColl;
@@ -513,12 +543,12 @@ void it_8026D6F4(Item_GObj *gobj, ItCallback arg1) {
     }
 }
 
-
-void it_8026D78C(Item_GObj *gobj, ItCallback arg1) {
-    CollData *coll;
-    Item *ip;
+void it_8026D78C(Item_GObj* gobj, ItCallback arg1)
+{
+    CollData* coll;
+    Item* ip;
     bool test;
-    PAD_STACK(5*4);
+    PAD_STACK(5 * 4);
 
     ip = gobj->user_data;
     coll = &ip->x378_itemColl;
@@ -537,11 +567,12 @@ void it_8026D78C(Item_GObj *gobj, ItCallback arg1) {
     }
 }
 
-void it_8026D82C(Item_GObj *gobj) {
-    CollData *coll;
-    Item *ip;
+void it_8026D82C(Item_GObj* gobj)
+{
+    CollData* coll;
+    Item* ip;
     bool test;
-    PAD_STACK(5*4);
+    PAD_STACK(5 * 4);
 
     ip = gobj->user_data;
     coll = &ip->x378_itemColl;
@@ -559,11 +590,12 @@ void it_8026D82C(Item_GObj *gobj) {
     }
 }
 
-s32 it_8026D8A4(Item_GObj *gobj, ItCallback arg1) {
-    Item *ip;
-    CollData *coll;
+s32 it_8026D8A4(Item_GObj* gobj, ItCallback arg1)
+{
+    Item* ip;
+    CollData* coll;
     bool test;
-    PAD_STACK(9*4);
+    PAD_STACK(9 * 4);
 
     it_80276214(gobj);
 
@@ -584,8 +616,9 @@ s32 it_8026D8A4(Item_GObj *gobj, ItCallback arg1) {
     return test;
 }
 
-void it_8026D938(Item_GObj *gobj, ItCallback arg1) {
-    Item *ip = gobj->user_data;
+void it_8026D938(Item_GObj* gobj, ItCallback arg1)
+{
+    Item* ip = gobj->user_data;
     if (mpLib_80054ED8(ip->xC30) == 0) {
         ip->xC30 = -1;
         arg1(gobj);
@@ -594,10 +627,10 @@ void it_8026D938(Item_GObj *gobj, ItCallback arg1) {
 
 bool it_8026DA08(Item_GObj* gobj)
 {
-    Item *ip;
-    CollData *coll;
+    Item* ip;
+    CollData* coll;
     bool test;
-    PAD_STACK(3*4);
+    PAD_STACK(3 * 4);
 
     ip = gobj->user_data;
     coll = &ip->x378_itemColl;
@@ -629,16 +662,18 @@ bool it_8026D9A0(Item_GObj* gobj)
     }
 }
 
-bool it_8026DA70(Item_GObj *gobj) {
+bool it_8026DA70(Item_GObj* gobj)
+{
     Item* item = GET_ITEM(gobj);
     CollData* coll = &item->x378_itemColl;
     it_80276214(gobj);
     return mpColl_800471F8(coll);
 }
 
-s32 it_8026DAA8(Item_GObj *gobj) {
-    CollData *coll;
-    Item *ip;
+s32 it_8026DAA8(Item_GObj* gobj)
+{
+    CollData* coll;
+    Item* ip;
     bool test;
     ip = GET_ITEM(gobj);
     coll = &ip->x378_itemColl;
@@ -654,9 +689,10 @@ s32 it_8026DAA8(Item_GObj *gobj) {
     return test | it_802763E0(gobj);
 }
 
-s32 it_8026DB40(Item_GObj *gobj) {
-    CollData *coll;
-    Item *ip;
+s32 it_8026DB40(Item_GObj* gobj)
+{
+    CollData* coll;
+    Item* ip;
     bool test;
     ip = GET_ITEM(gobj);
     coll = &ip->x378_itemColl;
@@ -671,7 +707,8 @@ s32 it_8026DB40(Item_GObj *gobj) {
     return test |= it_80276308(gobj);
 }
 
-s32 it_8026DBC8(HSD_GObj *gobj) {
+s32 it_8026DBC8(HSD_GObj* gobj)
+{
     if ((it_8026DDFC(gobj) != 0) && (it_8026DC24(gobj) != 0)) {
         it_802725D4(gobj);
         return it_8026DD5C(gobj);
@@ -679,9 +716,10 @@ s32 it_8026DBC8(HSD_GObj *gobj) {
     return 0;
 }
 
-s32 it_8026DC24(HSD_GObj *gobj) {
-    Item *ip = GET_ITEM(gobj);
-    ItemAttr *attr = ip->xCC_item_attr;
+s32 it_8026DC24(HSD_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attr = ip->xCC_item_attr;
 
     if (ip->xD50_landNum <= 1) {
         it_80274658(gobj, it_804D6D28->x74_float);
@@ -705,9 +743,9 @@ s32 it_8026DC24(HSD_GObj *gobj) {
     return 0;
 }
 
-s32 it_8026DD5C(Item_GObj *gobj) {
-
-    Item *ip = GET_ITEM(gobj);
+s32 it_8026DD5C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
     ip->xD50_landNum = 0;
     it_802762B0(ip);
     if ((it_80277040(gobj) == 0) || ip->xDCD_flag.bits.b3) {
@@ -723,23 +761,24 @@ s32 it_8026DD5C(Item_GObj *gobj) {
     return 1;
 }
 
-void it_8026EB18(HSD_GObj *arg0, s32 arg1, Vec3 *arg2) {
+void it_8026EB18(HSD_GObj* arg0, s32 arg1, Vec3* arg2)
+{
     Mtx m2;
     MtxPtr var_r30;
     if (arg2 != NULL) {
-        HSD_CObj *cobj = HSD_CObjGetCurrent();
-        MtxPtr temp_r30 = (MtxPtr)&cobj->view_mtx;
+        HSD_CObj* cobj = HSD_CObjGetCurrent();
+        MtxPtr temp_r30 = (MtxPtr) &cobj->view_mtx;
         {
             // @todo: This appears in several places in the codebase,
             // it's probably an inline
             Mtx m;
-            PAD_STACK(1*4);
-            PSMTXIdentity((MtxPtr)&m);
+            PAD_STACK(1 * 4);
+            PSMTXIdentity((MtxPtr) &m);
             m[0][3] = arg2->x;
             m[1][3] = arg2->y;
             m[2][3] = arg2->z;
-            PSMTXConcat(temp_r30, (MtxPtr)&m, (MtxPtr)&m2);
-            var_r30 = (MtxPtr)&m2;
+            PSMTXConcat(temp_r30, (MtxPtr) &m, (MtxPtr) &m2);
+            var_r30 = (MtxPtr) &m2;
         }
     } else {
         var_r30 = NULL;
@@ -747,13 +786,14 @@ void it_8026EB18(HSD_GObj *arg0, s32 arg1, Vec3 *arg2) {
     HSD_JObjDispAll(GET_JOBJ(arg0), var_r30, HSD_GObj_80390EB8(arg1), 0U);
 }
 
-void it_8026EBC8(HSD_GObj *gobj, u16 arg1, u8 *arg2) {
-    Item *ip = GET_ITEM(gobj);
+void it_8026EBC8(HSD_GObj* gobj, u16 arg1, u8* arg2)
+{
+    Item* ip = GET_ITEM(gobj);
     u16 var_r29 = 0;
-    u8 *var_r27 = arg2;
+    u8* var_r27 = arg2;
     while (var_r29 < arg1) {
-        HSD_JObj *jobj = ip->xBBC_dynamicBoneTable->bones[*var_r27];
-        HSD_JObj *jobj_parent = HSD_JObjGetParent(jobj);
+        HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[*var_r27];
+        HSD_JObj* jobj_parent = HSD_JObjGetParent(jobj);
         if (!(HSD_JObjGetFlags(jobj_parent) & 0x10)) {
             it_80272A18(jobj);
         }
@@ -762,13 +802,16 @@ void it_8026EBC8(HSD_GObj *gobj, u16 arg1, u8 *arg2) {
     }
 }
 
-s32 it_8026DDFC(Item_GObj *gobj) {
-    Item *ip = GET_ITEM(gobj);
+s32 it_8026DDFC(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
     ip->xD50_landNum += 1;
     if ((u32) ip->xD50_landNum == 1U) {
         if (ip->xD54_throwNum != 0U) {
-            if ((((ip->xD54_throwNum == ((u32)(it_804D6D28->x48_float >> 4U) & 0xF)) != 0)) ||
-                    (HSD_Randi(it_804D6D28->x48_float & 0xF) == 0)) {
+            if ((((ip->xD54_throwNum ==
+                   ((u32) (it_804D6D28->x48_float >> 4U) & 0xF)) != 0)) ||
+                (HSD_Randi(it_804D6D28->x48_float & 0xF) == 0))
+            {
                 ip->destroy_type = 1;
                 Item_8026A8EC(gobj);
             }
@@ -778,14 +821,16 @@ s32 it_8026DDFC(Item_GObj *gobj) {
     return 1;
 }
 
-s32 it_8026DE98(Item_GObj *arg0) {
+s32 it_8026DE98(Item_GObj* arg0)
+{
     return it_8026DDFC(arg0);
 }
 
-s32 it_8026DF34(Item_GObj *gobj) {
+s32 it_8026DF34(Item_GObj* gobj)
+{
     bool cond;
-    CollData *coll;
-    Item *ip;
+    CollData* coll;
+    Item* ip;
     ip = GET_ITEM(gobj);
     coll = &ip->x378_itemColl;
     PAD_STACK(12);
@@ -801,10 +846,11 @@ s32 it_8026DF34(Item_GObj *gobj) {
     return 0;
 }
 
-s32 it_8026DFB0(Item_GObj *gobj) {
+s32 it_8026DFB0(Item_GObj* gobj)
+{
     bool cond;
-    CollData *coll;
-    Item *ip;
+    CollData* coll;
+    Item* ip;
     ip = GET_ITEM(gobj);
     coll = &ip->x378_itemColl;
     PAD_STACK(26);
@@ -821,10 +867,11 @@ s32 it_8026DFB0(Item_GObj *gobj) {
     return 0;
 }
 
-s32 it_8026E058(Item_GObj *gobj) {
+s32 it_8026E058(Item_GObj* gobj)
+{
     bool cond;
-    CollData *coll;
-    Item *ip;
+    CollData* coll;
+    Item* ip;
     ip = GET_ITEM(gobj);
     coll = &ip->x378_itemColl;
     PAD_STACK(26);
@@ -841,10 +888,11 @@ s32 it_8026E058(Item_GObj *gobj) {
     return 0;
 }
 
-void it_8026E0F4(Item_GObj *gobj) {
+void it_8026E0F4(Item_GObj* gobj)
+{
     bool cond;
-    CollData *coll;
-    Item *ip;
+    CollData* coll;
+    Item* ip;
     ip = GET_ITEM(gobj);
     coll = &ip->x378_itemColl;
     PAD_STACK(16);
@@ -856,7 +904,8 @@ void it_8026E0F4(Item_GObj *gobj) {
     }
 }
 
-void it_8026E15C(Item_GObj *gobj, ItCallback arg1) {
+void it_8026E15C(Item_GObj* gobj, ItCallback arg1)
+{
     s32 var_r3;
     bool res = it_8026DFB0(gobj);
     if (res) {
@@ -875,7 +924,8 @@ void it_8026E15C(Item_GObj *gobj, ItCallback arg1) {
     }
 }
 
-void it_8026E248(Item_GObj *gobj, ItCallback arg1) {
+void it_8026E248(Item_GObj* gobj, ItCallback arg1)
+{
     s32 var_r3;
     bool res = it_8026DFB0(gobj);
     if (res) {
@@ -922,20 +972,23 @@ s32 it_8026EA9C(Item_GObj* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, s32 arg4,
                 Vec3* arg5, s32 arg6)
 {
     Vec3 p;
-    if (mpLib_800524DC(&p, arg4, arg5, arg3, -1, arg6, arg1->x, arg1->y, arg2->x, arg2->y) == 1) {
+    if (mpLib_800524DC(&p, arg4, arg5, arg3, -1, arg6, arg1->x, arg1->y,
+                       arg2->x, arg2->y) == 1)
+    {
         *arg2 = p;
         return 1;
     }
     return 0;
 }
 
-void it_8026EC54(HSD_GObj *gobj, u16 arg1, u8 *arg2) {
-    Item *ip = GET_ITEM(gobj);
+void it_8026EC54(HSD_GObj* gobj, u16 arg1, u8* arg2)
+{
+    Item* ip = GET_ITEM(gobj);
     u16 var_r29 = 0;
-    u8 *var_r27 = arg2;
+    u8* var_r27 = arg2;
     while (var_r29 < arg1) {
-        HSD_JObj *jobj = ip->xBBC_dynamicBoneTable->bones[*var_r27];
-        HSD_JObj *jobj_parent = HSD_JObjGetParent(jobj);
+        HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[*var_r27];
+        HSD_JObj* jobj_parent = HSD_JObjGetParent(jobj);
         if (!(HSD_JObjGetFlags(jobj_parent) & 0x10)) {
             it_80272A3C(jobj);
         }
@@ -944,18 +997,19 @@ void it_8026EC54(HSD_GObj *gobj, u16 arg1, u8 *arg2) {
     }
 }
 
-s32 lb_800149E0(f32 *, u32);                        /* extern */
+s32 lb_800149E0(f32*, u32); /* extern */
 static U8Vec4 it_804D5168 = { 0xFF, 0x40, 0x80, 0x80 };
 
-u32 it_8026ECE0(Item_GObj *gobj, u32 arg1) {
-    Item *ip;
+u32 it_8026ECE0(Item_GObj* gobj, u32 arg1)
+{
+    Item* ip;
     u32 var_r27_2;
     u32 var_r27_3;
     u32 var_r30;
     u8 temp_r3;
     u8 temp_r3_2;
-    Item *var_r28_2;
-    Item *var_r28_3;
+    Item* var_r28_2;
+    Item* var_r28_3;
 
     var_r30 = 0;
     ip = GET_ITEM(gobj);
@@ -973,17 +1027,21 @@ u32 it_8026ECE0(Item_GObj *gobj, u32 arg1) {
             if (ip->xDAA_flag.bits.b2) {
                 u32 idx = 0;
                 do {
-                    if (lbColl_80009F54(&ip->x5D4_hitboxes[idx].hit, arg1, ip->scl) != 0) {
+                    if (lbColl_80009F54(&ip->x5D4_hitboxes[idx].hit, arg1,
+                                        ip->scl) != 0)
+                    {
                         var_r30 = 1;
                     }
                     idx += 1;
                 } while (idx < 4U);
             }
-            if (!ip->xDCC_flag.b2  && ip->xDAA_flag.bits.b2) {
+            if (!ip->xDCC_flag.b2 && ip->xDAA_flag.bits.b2) {
                 if ((s32) ip->xD0C == 0) {
                     u32 idx = 0;
                     while (idx < ip->xAC8_hurtboxNum) {
-                        if (lbColl_8000A244(&ip->xACC_itemHurtbox[idx], arg1, NULL, 0.0f) != 0) {
+                        if (lbColl_8000A244(&ip->xACC_itemHurtbox[idx], arg1,
+                                            NULL, 0.0f) != 0)
+                        {
                             var_r30 = 1;
                         }
                         idx += 1;
@@ -991,7 +1049,10 @@ u32 it_8026ECE0(Item_GObj *gobj, u32 arg1) {
                 } else {
                     u32 idx = 0;
                     while (idx < ip->xAC8_hurtboxNum) {
-                        if (lbColl_8000A584(&ip->xACC_itemHurtbox[idx], (u32) ip->xD0C, arg1, NULL, 0.0f) != 0) {
+                        if (lbColl_8000A584(&ip->xACC_itemHurtbox[idx],
+                                            (u32) ip->xD0C, arg1, NULL,
+                                            0.0f) != 0)
+                        {
                             var_r30 = 1;
                         }
                         idx += 1;
@@ -1000,32 +1061,34 @@ u32 it_8026ECE0(Item_GObj *gobj, u32 arg1) {
             }
         }
         if (ip->xDAA_flag.bits.b7 && ip->xDC8_word.flags.x8 &&
-            (lbGx_8001E2F8((Vec4 *) &ip->xBCC_unk,
-            &ip->pos, &it_804D5168, arg1, ip->facing_dir) != 0)) {
+            (lbGx_8001E2F8((Vec4*) &ip->xBCC_unk, &ip->pos, &it_804D5168, arg1,
+                           ip->facing_dir) != 0))
+        {
             var_r30 = 1;
         }
         if (ip->xDAA_flag.bits.b4 && ip->xDD0_flag.bits.b1 &&
-            (lb_800149E0(&ip->xACC_itemHurtbox[1].b_pos.z, arg1) != 0)) {
+            (lb_800149E0(&ip->xACC_itemHurtbox[1].b_pos.z, arg1) != 0))
+        {
             var_r30 = 1;
         }
     }
     return var_r30;
 }
 
-static inline void it_8026EC54_inline(HSD_GObj *gobj, Item *ip)
+static inline void it_8026EC54_inline(HSD_GObj* gobj, Item* ip)
 {
     it_8026EC54(gobj, ip->xDD4_itemVar.unk.x0, ip->xDD4_itemVar.unk.x4);
 }
 
-static inline void it_8026EBC8_inline(HSD_GObj *gobj, Item *ip)
+static inline void it_8026EBC8_inline(HSD_GObj* gobj, Item* ip)
 {
     it_8026EBC8(gobj, ip->xDD4_itemVar.unk.x8, ip->xDD4_itemVar.unk.xC);
 }
 
-static inline void it_8026EECC_inline_1(HSD_GObj *gobj, s32 arg1, Vec3 *pos)
+static inline void it_8026EECC_inline_1(HSD_GObj* gobj, s32 arg1, Vec3* pos)
 {
-    Item *ip = gobj->user_data;
-    Vec3 *new_pos = NULL;
+    Item* ip = gobj->user_data;
+    Vec3* new_pos = NULL;
     ip->xDCF_flag.bits.b2 = 1;
     ip->xDCF_flag.bits.b3 = 0;
     it_8026EC54_inline(gobj, ip);
@@ -1038,10 +1101,10 @@ static inline void it_8026EECC_inline_1(HSD_GObj *gobj, s32 arg1, Vec3 *pos)
     it_8026EC54_inline(gobj, ip);
 }
 
-static inline void it_8026EECC_inline_2(HSD_GObj *gobj, s32 arg1, Vec3 *pos)
+static inline void it_8026EECC_inline_2(HSD_GObj* gobj, s32 arg1, Vec3* pos)
 {
-    Item *ip = gobj->user_data;
-    Vec3 *new_pos = NULL;
+    Item* ip = gobj->user_data;
+    Vec3* new_pos = NULL;
     ip->xDCF_flag.bits.b2 = 0;
     ip->xDCF_flag.bits.b3 = 0;
     if (ip->xDCF_flag.bits.b0) {
@@ -1050,10 +1113,10 @@ static inline void it_8026EECC_inline_2(HSD_GObj *gobj, s32 arg1, Vec3 *pos)
     it_8026EB18(gobj, arg1, new_pos);
 }
 
-static inline void it_8026EECC_inline_3(HSD_GObj *gobj, s32 arg1, Vec3 *pos)
+static inline void it_8026EECC_inline_3(HSD_GObj* gobj, s32 arg1, Vec3* pos)
 {
-    Item *ip = gobj->user_data;
-    Vec3 *new_pos = NULL;
+    Item* ip = gobj->user_data;
+    Vec3* new_pos = NULL;
     ip->xDCF_flag.bits.b2 = 1;
     ip->xDCF_flag.bits.b3 = 1;
     it_8026EC54_inline(gobj, ip);
@@ -1070,17 +1133,20 @@ static inline void it_8026EECC_inline_3(HSD_GObj *gobj, s32 arg1, Vec3 *pos)
 
 void it_8026EECC(HSD_GObj* gobj, int arg1)
 {
-    Item *ip = gobj->user_data;
+    Item* ip = gobj->user_data;
     Vec3 pos;
     if (ip->xDAA_flag.bits.b0) {
         pos.x = pos.y = pos.z = 0.0F;
         if (ip->xDCC_flag.b0) {
             if ((ip->owner == NULL) || (ftLib_80086960(ip->owner) == 0) ||
-                    (ftLib_800868D4(ip->owner, gobj) != 0)) {
+                (ftLib_800868D4(ip->owner, gobj) != 0))
+            {
                 {
-                    Item *ip = gobj->user_data;
+                    Item* ip = gobj->user_data;
                     ip->xDCF_flag.bits.b0 = 0;
-                    if ((ip->owner != NULL) && (ftLib_80086960(ip->owner) != 0)) {
+                    if ((ip->owner != NULL) &&
+                        (ftLib_80086960(ip->owner) != 0))
+                    {
                         if (ftLib_80087074(ip->owner, &pos) != 0) {
                             ip->xDCF_flag.bits.b0 = 1;
                         }
@@ -1090,7 +1156,7 @@ void it_8026EECC(HSD_GObj* gobj, int arg1)
                 }
                 // @todo This could just be one big function call.
                 {
-                    Item *ip = gobj->user_data;
+                    Item* ip = gobj->user_data;
                     switch (Camera_80031060()) {
                     case 1:
                         if (ip->xDCF_flag.bits.b2) {
@@ -1107,10 +1173,9 @@ void it_8026EECC(HSD_GObj* gobj, int arg1)
                     }
                 }
             }
-        }
-        else {
+        } else {
             {
-                Item *ip = gobj->user_data;
+                Item* ip = gobj->user_data;
                 switch (Camera_80031060()) {
                 case 1:
                     if (ip->xDCF_flag.bits.b2) {
@@ -1135,7 +1200,8 @@ void it_8026EECC(HSD_GObj* gobj, int arg1)
     }
 }
 
-void it_8026F3AC(void) {
+void it_8026F3AC(void)
+{
     it_8026C75C(&it_804A0E50);
 }
 

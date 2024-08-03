@@ -1,22 +1,19 @@
-#include "ft/ftparts.h"
-
-#include "ft/ftcoll.h"
-
-
 #include "ft/chara/ftLink/forward.h"
 
 #include "itlinkhookshot.h"
 
-#include "ef/efsync.h"
 #include "dolphin/mtx/vec.h"
+#include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_AirCatch.h"
 #include "ft/chara/ftCommon/ftCo_CliffJump.h"
 #include "ft/chara/ftCommon/ftCo_DamageFall.h"
 #include "ft/chara/ftCommon/inlines.h"
 #include "ft/ft_081B.h"
 #include "ft/ftcliffcommon.h"
+#include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
+#include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -33,18 +30,20 @@
 #include "sysdolphin/baselib/jobj.h"
 #include "sysdolphin/baselib/mtx.h"
 
-
-ItemStateTable it_803F6998[] = {
-    { -1, NULL, it_802A2ED0, NULL, },
-    { -1, it_802A2D88, it_802A30FC, NULL },
-    { -1, it_802A2D88, it_802A3240, NULL },
-    { -1, it_802A2D88, it_802A338C, NULL },
-    { -1, it_802A2D88, it_802A34EC, NULL },
-    { -1, it_802A2D88, it_802A361C, NULL },
-    { -1, it_802A2D88, it_802A3814, NULL },
-    { -1, it_802A2D88, it_802A39E8, NULL },
-    { -1, it_802A2D88, it_802A3C84, NULL }
-};
+ItemStateTable it_803F6998[] = { {
+                                     -1,
+                                     NULL,
+                                     it_802A2ED0,
+                                     NULL,
+                                 },
+                                 { -1, it_802A2D88, it_802A30FC, NULL },
+                                 { -1, it_802A2D88, it_802A3240, NULL },
+                                 { -1, it_802A2D88, it_802A338C, NULL },
+                                 { -1, it_802A2D88, it_802A34EC, NULL },
+                                 { -1, it_802A2D88, it_802A361C, NULL },
+                                 { -1, it_802A2D88, it_802A3814, NULL },
+                                 { -1, it_802A2D88, it_802A39E8, NULL },
+                                 { -1, it_802A2D88, it_802A3C84, NULL } };
 
 f32 it_804D6D48;
 
@@ -108,7 +107,8 @@ static bool inline link_fighter_compare(Fighter* fp)
     }
 }
 
-static inline void it_802A2568_inline(ItemLink *temp_r3_3, HSD_JObj *arg1, HSD_GObj* temp_r3_2, Vec3 *pos)
+static inline void it_802A2568_inline(ItemLink* temp_r3_3, HSD_JObj* arg1,
+                                      HSD_GObj* temp_r3_2, Vec3* pos)
 {
     temp_r3_3->x1D4_JObj = arg1;
     temp_r3_3->x1D0_GObj = temp_r3_2;
@@ -122,7 +122,7 @@ static inline void it_802A2568_inline(ItemLink *temp_r3_3, HSD_JObj *arg1, HSD_G
     temp_r3_3->x30_collData.prev_topn = temp_r3_3->x30_collData.cur_topn;
 }
 
-static inline HSD_JObj *it_link_get_joint(Item *arg0, s32 var_r31)
+static inline HSD_JObj* it_link_get_joint(Item* arg0, s32 var_r31)
 {
     itLinkHookshotAttributes* temp_r3_4;
     temp_r3_4 = arg0->xC4_article_data->x4_specialAttributes;
@@ -133,7 +133,7 @@ static inline HSD_JObj *it_link_get_joint(Item *arg0, s32 var_r31)
     }
 }
 
-static inline HSD_JObj *it_link_get_joint_c(Item *arg0)
+static inline HSD_JObj* it_link_get_joint_c(Item* arg0)
 {
     itLinkHookshotAttributes* temp_r3_4;
     temp_r3_4 = arg0->xC4_article_data->x4_specialAttributes;
@@ -145,7 +145,8 @@ static inline f32 it_link_lerp(f32 a, f32 b, f32 t)
     return t * a + (1.0F - t) * b;
 }
 
-static inline void it_link_attr_math(itLinkHookshotAttributes* attr, s32 arg2, f32 arg8)
+static inline void it_link_attr_math(itLinkHookshotAttributes* attr, s32 arg2,
+                                     f32 arg8)
 {
     f32 var_f0;
     f32 var_f1;
@@ -161,15 +162,16 @@ static inline void it_link_attr_math(itLinkHookshotAttributes* attr, s32 arg2, f
     attr->x40 = var_f0 * (attr->x20 * arg8);
     attr->x44 = var_f0 * (attr->x24 * arg8);
     attr->x48 = attr->x28 * arg8;
-    if (arg8 > (f64)1.875F) {
-        var_f1 = it_link_lerp(attr->xC * attr->x30, attr->xC * attr->x10, attr->x8);
+    if (arg8 > (f64) 1.875F) {
+        var_f1 =
+            it_link_lerp(attr->xC * attr->x30, attr->xC * attr->x10, attr->x8);
     } else {
         var_f1 = (f32) attr->xC * attr->x30;
     }
     attr->x2C = (var_f1 * var_f0) / attr->x30;
 }
 
-HSD_JObj * it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
+HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
 {
     CollData* temp_r17;
     CollData* temp_r18;
@@ -187,7 +189,7 @@ HSD_JObj * it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
     s32 var_r31;
     itLinkHookshotAttributes* attr;
     itLinkHookshotAttributes* temp_r3_5;
-    HSD_JObj * var_r21;
+    HSD_JObj* var_r21;
     Vec3 pos;
 
     attr = arg0->xC4_article_data->x4_specialAttributes;
@@ -224,12 +226,14 @@ HSD_JObj * it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
             temp_r3_3->flag7 = 0;
             // it_802A43B8(temp_r3_3);
             temp_r3_3->x30_collData.cur_topn = temp_r3_3->pos;
-            temp_r3_3->x30_collData.prev_topn = temp_r3_3->x30_collData.cur_topn;
+            temp_r3_3->x30_collData.prev_topn =
+                temp_r3_3->x30_collData.cur_topn;
 
             mpColl_80041EE4(temp_r18);
             temp_r18->x34_flags.bits.b1234 = 5;
             mpColl_8004220C(temp_r18, NULL, arg8, arg8, arg8, arg8);
-            HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849, it_link_get_joint(arg0, var_r31));
+            HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849,
+                                    it_link_get_joint(arg0, var_r31));
             GObj_SetupGXLink(temp_r3_2, it_802A24A0, 6U, 0U);
         } else if (var_r31 == (s32) (attr->x2C - 1)) {
             var_r18->prev = temp_r3_3;
@@ -247,12 +251,14 @@ HSD_JObj * it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
             temp_r3_3->flag7 = 0;
             // it_802A43B8(temp_r3_3);
             temp_r3_3->x30_collData.cur_topn = temp_r3_3->pos;
-            temp_r3_3->x30_collData.prev_topn = temp_r3_3->x30_collData.cur_topn;
+            temp_r3_3->x30_collData.prev_topn =
+                temp_r3_3->x30_collData.cur_topn;
 
             mpColl_80041EE4(temp_r21);
             temp_r18->x34_flags.bits.b1234 = 5;
             mpColl_8004220C(temp_r21, NULL, arg8, arg8, arg8, arg8);
-            HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849, it_link_get_joint_c(arg0));
+            HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849,
+                                    it_link_get_joint_c(arg0));
             GObj_SetupGXLink(temp_r3_2, HSD_GObj_80391070, 6U, 0U);
             var_r21 = temp_r3_2->hsd_obj;
         } else {
@@ -270,12 +276,14 @@ HSD_JObj * it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
             temp_r3_3->flag7 = 1;
             // it_802A43B8(temp_r3_3);
             temp_r3_3->x30_collData.cur_topn = temp_r3_3->pos;
-            temp_r3_3->x30_collData.prev_topn = temp_r3_3->x30_collData.cur_topn;
+            temp_r3_3->x30_collData.prev_topn =
+                temp_r3_3->x30_collData.cur_topn;
 
             mpColl_80041EE4(temp_r17);
             temp_r18->x34_flags.bits.b1234 = 5;
             mpColl_8004220C(temp_r17, NULL, arg8, arg8, arg8, arg8);
-            HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849, it_link_get_joint(arg0, var_r31));
+            HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849,
+                                    it_link_get_joint(arg0, var_r31));
             GObj_SetupGXLink(temp_r3_2, it_802A24A0, 6U, 0U);
         }
         temp_r3_3->unk = -1;
@@ -318,10 +326,11 @@ void it_802A2B10(Item_GObj* arg0)
     }
 }
 
-Item_GObj *it_802A2BA4(Fighter_GObj *arg0, Vec3 *arg1, f32 arg2, s32 arg3) {
-    Fighter *fp;
-    Item *item;
-    Item_GObj *gobj;
+Item_GObj* it_802A2BA4(Fighter_GObj* arg0, Vec3* arg1, f32 arg2, s32 arg3)
+{
+    Fighter* fp;
+    Item* item;
+    Item_GObj* gobj;
     SpawnItem spawn_item;
     s32 var_r27;
     f32 pad[8];
@@ -351,15 +360,19 @@ Item_GObj *it_802A2BA4(Fighter_GObj *arg0, Vec3 *arg1, f32 arg2, s32 arg3) {
         } else {
             var_r27 = 0;
         }
-        if (it_802A2568(item, fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
-                    var_r27, fp->x34_scale.y) == NULL) {
+        if (it_802A2568(item,
+                        fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
+                        var_r27, fp->x34_scale.y) == NULL)
+        {
             Item_8026A8EC(gobj);
             return NULL;
         }
-        item->xDD4_itemVar.linkhookshot.x8 = (HSD_GObj *) arg0;
-        item->xDD4_itemVar.linkhookshot.xC = item->xDD4_itemVar.linkhookshot.x0->x1D0_GObj->hsd_obj;
+        item->xDD4_itemVar.linkhookshot.x8 = (HSD_GObj*) arg0;
+        item->xDD4_itemVar.linkhookshot.xC =
+            item->xDD4_itemVar.linkhookshot.x0->x1D0_GObj->hsd_obj;
         fp->parts[139].joint = item->xDD4_itemVar.linkhookshot.xC;
-        Item_8026AB54((HSD_GObj *) gobj, (HSD_GObj *) arg0, ftParts_8007500C(fp, FtPart_RThumbNb));
+        Item_8026AB54((HSD_GObj*) gobj, (HSD_GObj*) arg0,
+                      ftParts_8007500C(fp, FtPart_RThumbNb));
         it_802A2428(gobj);
     }
     if ((enum FighterKind) fp->kind == FTKIND_CLINK) {
@@ -370,11 +383,12 @@ Item_GObj *it_802A2BA4(Fighter_GObj *arg0, Vec3 *arg1, f32 arg2, s32 arg3) {
     return gobj;
 }
 
-int it_802A2D88(Item_GObj *arg0) {
-    HSD_JObj *jobj;
-    Item *item;
+int it_802A2D88(Item_GObj* arg0)
+{
+    HSD_JObj* jobj;
+    Item* item;
     itLinkHookshotAttributes* attr;
-    ItemLink *link_0;
+    ItemLink* link_0;
     f32 temp_f0;
     f32 temp_f1;
     s32 var_r5;
@@ -391,16 +405,18 @@ int it_802A2D88(Item_GObj *arg0) {
     }
     temp_f1 = (f32) var_r5 / (f32) attr->x2C;
     jobj->child->child->rotate.z = 6.2831855f * temp_f1;
-    temp_f0 = (f32) ((0.6499999761581421 * (1.0 - (f64) temp_f1)) + 0.3499999940395355);
+    temp_f0 = (f32) ((0.6499999761581421 * (1.0 - (f64) temp_f1)) +
+                     0.3499999940395355);
     jobj->child->child->scale.x = temp_f0;
     jobj->child->child->scale.y = temp_f0;
     return 0;
 }
 
-void fn_802A2E4C(Item_GObj *arg0);
-void fn_802A2E4C(Item_GObj *arg0) {
-    Item *item;
-    Fighter *fp;
+void fn_802A2E4C(Item_GObj* arg0);
+void fn_802A2E4C(Item_GObj* arg0)
+{
+    Item* item;
+    Fighter* fp;
     f32 pad[1];
 
     item = GET_ITEM((HSD_GObj*) arg0);
@@ -435,12 +451,12 @@ static void inline it_802A2EE4_inline_alt(ItemLink* item_link, Vec3* pos)
 {
     f32 zero = 0.0F;
     Mtx m;
-    PSMTXIdentity((MtxPtr)&m);
+    PSMTXIdentity((MtxPtr) &m);
     m[0][3] = zero;
     m[1][3] = zero;
     m[2][3] = it_804D6D48;
     HSD_JObjSetupMatrix(item_link->x1D4_JObj);
-    PSMTXConcat(item_link->x1D4_JObj->mtx, (MtxPtr)&m, (MtxPtr)&m);
+    PSMTXConcat(item_link->x1D4_JObj->mtx, (MtxPtr) &m, (MtxPtr) &m);
     pos->x = m[0][3];
     pos->y = m[1][3];
     pos->z = m[2][3];
@@ -456,7 +472,8 @@ void it_802A2EE4(Item_GObj* arg0)
     ItemLink* temp_r6;
 
     Item* item = GET_ITEM(arg0);
-    itLinkHookshotAttributes* attr = item->xC4_article_data->x4_specialAttributes;
+    itLinkHookshotAttributes* attr =
+        item->xC4_article_data->x4_specialAttributes;
     ItemLink* item_link = item->xDD4_itemVar.linkhookshot.x0;
     Fighter* fp = item->owner->user_data;
 
@@ -497,7 +514,6 @@ void it_802A30FC(Item_GObj* arg0)
     item->xDD4_itemVar.linkhookshot.x10 = it_802A2EE4;
 }
 
-
 static inline void mtx_reset(Mtx m)
 {
     f32 zero = 0.0F;
@@ -523,14 +539,16 @@ static void inline fn_802A3110_inline(ItemLink* item_link, Vec3* pos)
     vec3_eq_mtx(pos, m);
 }
 
-void fn_802A3110(HSD_GObj *arg0);
-void fn_802A3110(HSD_GObj *arg0) {
+void fn_802A3110(HSD_GObj* arg0);
+void fn_802A3110(HSD_GObj* arg0)
+{
     Vec3 vec;
     f32 pad_3[1];
 
     Item* item = GET_ITEM(arg0);
-    Fighter *fp = item->owner->user_data;
-    itLinkHookshotAttributes* attr = item->xC4_article_data->x4_specialAttributes;
+    Fighter* fp = item->owner->user_data;
+    itLinkHookshotAttributes* attr =
+        item->xC4_article_data->x4_specialAttributes;
     ItemLink* item_link = item->xDD4_itemVar.linkhookshot.x0;
 
     fn_802A3110_inline(item_link, &vec);
@@ -560,7 +578,8 @@ void it_802A3254(Item_GObj* arg0)
 
     Item* item = GET_ITEM(arg0);
     Fighter* fp = item->owner->user_data;
-    itLinkHookshotAttributes* attr = item->xC4_article_data->x4_specialAttributes;
+    itLinkHookshotAttributes* attr =
+        item->xC4_article_data->x4_specialAttributes;
     ItemLink* item_link = item->xDD4_itemVar.linkhookshot.x4;
 
     it_802A2EE4_inline((MtxPtr) &m, item_link, &pos);
@@ -578,8 +597,9 @@ void it_802A338C(Item_GObj* arg0)
     item->xDD4_itemVar.linkhookshot.x10 = it_802A3254;
 }
 
-void fn_802A33A0(Item_GObj *arg0);
-void fn_802A33A0(Item_GObj *arg0) {
+void fn_802A33A0(Item_GObj* arg0);
+void fn_802A33A0(Item_GObj* arg0)
+{
     ItemLink* item_link;
     Item* item;
     Fighter* fp;
@@ -620,7 +640,8 @@ void it_802A3500(Item_GObj* arg0)
     f32 pad[3];
 
     Item* item = GET_ITEM(arg0);
-    itLinkHookshotAttributes* attr = item->xC4_article_data->x4_specialAttributes;
+    itLinkHookshotAttributes* attr =
+        item->xC4_article_data->x4_specialAttributes;
     Fighter* fp = item->owner->user_data;
 
     if (item->xDD4_itemVar.linkhookshot.x14 != 0) {
@@ -643,7 +664,7 @@ void it_802A361C(Item_GObj* arg0)
     item->xDD4_itemVar.linkhookshot.x10 = it_802A3500;
 }
 
-static inline bool it_802A3630_inline(Item *item, Vec3 *cur_pos, Vec3 *pos)
+static inline bool it_802A3630_inline(Item* item, Vec3* cur_pos, Vec3* pos)
 {
     ItemLink* item_link;
     Vec3* item_link_pos;
@@ -667,9 +688,10 @@ void it_802A3630(Item_GObj* arg0)
 {
     Vec3 pos;
     Item* item = GET_ITEM(arg0);
-    itLinkHookshotAttributes* attr = item->xC4_article_data->x4_specialAttributes;
+    itLinkHookshotAttributes* attr =
+        item->xC4_article_data->x4_specialAttributes;
     Fighter* fp = item->owner->user_data;
-    ItemLink *item_link = item->xDD4_itemVar.linkhookshot.x4;
+    ItemLink* item_link = item->xDD4_itemVar.linkhookshot.x4;
 
     it_802A2EE4_inline_alt(item->xDD4_itemVar.linkhookshot.x4, &pos);
 
@@ -690,7 +712,7 @@ void it_802A3630(Item_GObj* arg0)
         return;
     }
     if (fp->input.x668 & 0x100) {
-        it_802A79A0((HSD_GObj *) arg0);
+        it_802A79A0((HSD_GObj*) arg0);
     }
 }
 
@@ -842,10 +864,10 @@ float it_802A3C98(Vec3* arg0, Vec3* arg1, Vec3* arg2)
     arg2->z = arg0->z - arg1->z;
 
     len = sqrtf(arg2->x * arg2->x + arg2->y * arg2->y + arg2->z * arg2->z);
-    if (len == (f64)0.0F) {
-        inv = (f64)0.0F;
+    if (len == (f64) 0.0F) {
+        inv = (f64) 0.0F;
     } else {
-        inv = (f64)1.0F / len;
+        inv = (f64) 1.0F / len;
     }
     arg2->x *= inv;
     arg2->y *= inv;
@@ -1016,7 +1038,7 @@ s32 it_802A40D0(ItemLink* item_link, f32 arg8)
 s32 it_802A42F4(ItemLink* item_link, f32 arg8)
 {
     CollData* coll = &item_link->x30_collData;
-    PAD_STACK(1*4);
+    PAD_STACK(1 * 4);
     coll->prev_topn = coll->cur_topn;
     coll->prev_topn.y = arg8;
     coll->cur_topn = item_link->pos;
@@ -1055,16 +1077,15 @@ void it_802A4454(ItemLink* item_link)
     f32 pad[1];
 
     if (mpLib_80054ED8(item_link->unk) != 0) {
-        mpLib_800567C0(item_link->unk, &item_link->pos,
-                       &sp10);
+        mpLib_800567C0(item_link->unk, &item_link->pos, &sp10);
         item_link->pos.x += sp10.x;
         item_link->pos.y += sp10.y;
         item_link->pos.z += sp10.z;
     }
 }
 
-void it_802A44CC(ItemLink* link_0, Vec3* arg1,
-                 itLinkHookshotAttributes* arg2, f32 arg8)
+void it_802A44CC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
+                 f32 arg8)
 {
     ItemLink* link_1;
     f32 inv;
@@ -1098,14 +1119,15 @@ void it_802A44CC(ItemLink* link_0, Vec3* arg1,
     }
 }
 
-static inline void test_comp(Vec3 *vec0, Vec3* vec1, Vec3 *vec2, f32* arg2)
+static inline void test_comp(Vec3* vec0, Vec3* vec1, Vec3* vec2, f32* arg2)
 {
     vec0->x = (vec2->x * *arg2) + vec1->x;
     vec0->y = (vec2->y * *arg2) + vec1->y;
     vec0->z = (vec2->z * *arg2) + vec1->z;
 }
 
-void it_802A4758(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2, f32 arg8)
+void it_802A4758(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
+                 f32 arg8)
 {
     f32 inv;
     f32 len;
@@ -1139,8 +1161,8 @@ void it_802A4758(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2, f
     }
 }
 
-void it_802A49B0(ItemLink* link_0, Vec3* arg1,
-                 itLinkHookshotAttributes* arg2, f32 arg8)
+void it_802A49B0(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
+                 f32 arg8)
 {
     ItemLink* link_1;
     f32 inv;
@@ -1170,15 +1192,15 @@ void it_802A49B0(ItemLink* link_0, Vec3* arg1,
     }
 }
 
-s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1,
-                itLinkHookshotAttributes* attr, Fighter* fp)
+s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
+                Fighter* fp)
 {
     s32 flag;
     ItemLink* link_1;
     Vec3 vec;
     f64 len;
     ftLk_DatAttrs* lk_attr = fp->ft_data->ext_attr;
-    PAD_STACK(14*4);
+    PAD_STACK(14 * 4);
     if (fp->motion_id == 0xD4) {
         if (fp->mv.ca.specials.grav == lk_attr->x88) {
             Vec3 pos;
@@ -1262,8 +1284,9 @@ s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1,
     return 2;
 }
 
-
-s32 it_802A5320(ItemLink *link_0, Vec3 *arg1, itLinkHookshotAttributes *attr, Fighter *fp) {
+s32 it_802A5320(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
+                Fighter* fp)
+{
     ItemLink* link_1;
     f32 len;
     Vec3 vec;
@@ -1336,7 +1359,8 @@ s32 it_802A5320(ItemLink *link_0, Vec3 *arg1, itLinkHookshotAttributes *attr, Fi
     return 2;
 }
 
-void it_802A5770_inline(ItemLink *link_1, itLinkHookshotAttributes *arg2, Fighter *arg3, s32 var_r29)
+void it_802A5770_inline(ItemLink* link_1, itLinkHookshotAttributes* arg2,
+                        Fighter* arg3, s32 var_r29)
 {
     if (var_r29 == arg2->x2C / 2) {
         it_802A3E50(link_1, arg3->kind, arg2->x30);
@@ -1346,7 +1370,9 @@ void it_802A5770_inline(ItemLink *link_1, itLinkHookshotAttributes *arg2, Fighte
 }
 
 // definitely attributes
-void it_802A5770(ItemLink *link_0, Vec3 *arg1, itLinkHookshotAttributes *arg2, Fighter *arg3) {
+void it_802A5770(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
+                 Fighter* arg3)
+{
     ItemLink* link_1;
     f32 len;
     s32 var_r29;
@@ -1403,7 +1429,8 @@ void it_802A5770(ItemLink *link_0, Vec3 *arg1, itLinkHookshotAttributes *arg2, F
     link_0->x8_vel.x = 0.0f;
 }
 
-s32 it_802A5AE0(ItemLink *link_0, Vec3 *arg1, itLinkHookshotAttributes *arg2) {
+s32 it_802A5AE0(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2)
+{
     ItemLink* link_1;
     f32 len;
     f32 test[2];
@@ -1446,7 +1473,9 @@ s32 it_802A5AE0(ItemLink *link_0, Vec3 *arg1, itLinkHookshotAttributes *arg2) {
     return 1;
 }
 
-s32 it_802A5E28(ItemLink *link_0, Vec3 *arg1, itLinkHookshotAttributes *arg2, f32 arg8) {
+s32 it_802A5E28(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
+                f32 arg8)
+{
     ItemLink* link_1;
     f32 len;
     f32 var_f1;
@@ -1481,7 +1510,9 @@ s32 it_802A5E28(ItemLink *link_0, Vec3 *arg1, itLinkHookshotAttributes *arg2, f3
     return 1;
 }
 
-s32 it_802A5FE0(ItemLink *link_0, ItemLink *link_0_2, Vec3 *arg2, itLinkHookshotAttributes *arg3, f32 arg8) {
+s32 it_802A5FE0(ItemLink* link_0, ItemLink* link_0_2, Vec3* arg2,
+                itLinkHookshotAttributes* arg3, f32 arg8)
+{
     ItemLink* link_1;
     f32 len;
     f32 var_r31;
@@ -1545,11 +1576,15 @@ s32 it_802A5FE0(ItemLink *link_0, ItemLink *link_0_2, Vec3 *arg2, itLinkHookshot
     return 1;
 }
 
-void it_802A6474(ItemLink *link_0, ItemLink *link_0_2, Vec3 *arg2, itLinkHookshotAttributes *arg3) {
+void it_802A6474(ItemLink* link_0, ItemLink* link_0_2, Vec3* arg2,
+                 itLinkHookshotAttributes* arg3)
+{
     NOT_IMPLEMENTED;
 }
 
-s32 it_802A678C(ItemLink *link_0, Vec3 *arg1, itLinkHookshotAttributes *arg2, f32 arg8) {
+s32 it_802A678C(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
+                f32 arg8)
+{
     ItemLink* link_1;
     f32 inv;
     f32 len;
@@ -1584,13 +1619,14 @@ s32 it_802A678C(ItemLink *link_0, Vec3 *arg1, itLinkHookshotAttributes *arg2, f3
     return 1;
 }
 
-void it_802A6944(Item *item, f32 scl) {
+void it_802A6944(Item* item, f32 scl)
+{
     Mtx m;
     f32 zero = 0.0F;
     f32 pad[2];
 
-    ItemLink *item_link = item->xDD4_itemVar.linkhookshot.x0;
-    HSD_JObj *jobj = item_link->x1D0_GObj->hsd_obj;
+    ItemLink* item_link = item->xDD4_itemVar.linkhookshot.x0;
+    HSD_JObj* jobj = item_link->x1D0_GObj->hsd_obj;
 
     HSD_JObjSetupMatrix(item_link->x1D4_JObj);
     PSMTXIdentity(m);
@@ -1603,8 +1639,9 @@ void it_802A6944(Item *item, f32 scl) {
     HSD_JObjSetMtxDirty(jobj);
 }
 
-s32 it_802A6A78(ItemLink *link_0, Vec3 *arg1, itLinkHookshotAttributes *arg2, Fighter *arg3) {
-
+s32 it_802A6A78(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
+                Fighter* arg3)
+{
     ItemLink* link_1;
     ftLk_DatAttrs* lk_attr;
     Vec3 vec;
@@ -1687,7 +1724,8 @@ s32 it_802A6A78(ItemLink *link_0, Vec3 *arg1, itLinkHookshotAttributes *arg2, Fi
     return 0;
 }
 
-void it_802A6DC8(HSD_JObj *arg0, Vec3 *arg1, Vec3 *arg2) {
+void it_802A6DC8(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2)
+{
     Mtx m;
     Vec3 vec1;
     Vec3 vec0;
@@ -1710,7 +1748,7 @@ void it_802A6DC8(HSD_JObj *arg0, Vec3 *arg1, Vec3 *arg2) {
     PSVECCrossProduct(arg2, &vec0, &vec1);
     lbVector_Normalize(&vec0);
     lbVector_Normalize(&vec1);
-    PSMTXIdentity((MtxPtr)&m);
+    PSMTXIdentity((MtxPtr) &m);
 
     m[0][0] = vec0.x;
     m[1][0] = vec0.y;
@@ -1733,8 +1771,8 @@ void it_802A6DC8(HSD_JObj *arg0, Vec3 *arg1, Vec3 *arg2) {
     HSD_JObjSetMtxDirty(arg0);
 }
 
-
-void it_802A6F80(HSD_JObj *arg0, Vec3 *arg1, Vec3 *arg2, f32 arg3) {
+void it_802A6F80(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2, f32 arg3)
+{
     Mtx m1;
     Mtx m0;
     Vec3 vec1;
@@ -1758,8 +1796,8 @@ void it_802A6F80(HSD_JObj *arg0, Vec3 *arg1, Vec3 *arg2, f32 arg3) {
     PSVECCrossProduct(arg2, &vec0, &vec1);
     lbVector_Normalize(&vec0);
     lbVector_Normalize(&vec1);
-    PSMTXIdentity((MtxPtr)&m1);
-    PSMTXIdentity((MtxPtr)&m0);
+    PSMTXIdentity((MtxPtr) &m1);
+    PSMTXIdentity((MtxPtr) &m0);
 
     m0[0][0] = arg3;
     m0[1][1] = arg3;
@@ -1781,23 +1819,24 @@ void it_802A6F80(HSD_JObj *arg0, Vec3 *arg1, Vec3 *arg2, f32 arg3) {
     m1[1][3] = arg1->y;
     m1[2][3] = arg1->z;
 
-    PSMTXConcat((MtxPtr)&m0, (MtxPtr)&m1, (MtxPtr)&m0);
+    PSMTXConcat((MtxPtr) &m0, (MtxPtr) &m1, (MtxPtr) &m0);
     HSD_JObjCopyMtx(arg0, m0);
     arg0->flags |= 0x03800000;
     HSD_JObjSetMtxDirty(arg0);
 }
 
-void it_802A7168(Item *arg0, Vec3 *arg1, f32 arg8) {
-    HSD_JObj *jobj;
-    Fighter *fp;
-    ItemLink *item_link;
+void it_802A7168(Item* arg0, Vec3* arg1, f32 arg8)
+{
+    HSD_JObj* jobj;
+    Fighter* fp;
+    ItemLink* item_link;
     Vec3 vec;
     Vec3 vec_2;
     Vec3 vec_3;
     Vec3 vec_4;
     Vec3 vec_5;
-    ItemLink *item_link_prev;
-    ItemLink *item_link_prev_2;
+    ItemLink* item_link_prev;
+    ItemLink* item_link_prev_2;
     f32 pad[2];
 
     fp = arg0->owner->user_data;
@@ -1840,15 +1879,16 @@ void it_802A7168(Item *arg0, Vec3 *arg1, f32 arg8) {
     }
 }
 
-void it_802A7384(Item *arg0, Vec3 *arg1, f32 arg8) {
+void it_802A7384(Item* arg0, Vec3* arg1, f32 arg8)
+{
     NOT_IMPLEMENTED;
 }
 
-static inline void it_802A7688_inline(HSD_GObj *arg0)
+static inline void it_802A7688_inline(HSD_GObj* arg0)
 {
     Item* item;
-    Fighter *fp;
-    HSD_JObj *jobj;
+    Fighter* fp;
+    HSD_JObj* jobj;
     f32 temp_f1;
     item = GET_ITEM(arg0);
     jobj = arg0->hsd_obj;
@@ -1860,13 +1900,15 @@ static inline void it_802A7688_inline(HSD_GObj *arg0)
     }
 }
 
-void it_802A7688(Item_GObj *arg0) {
+void it_802A7688(Item_GObj* arg0)
+{
     f32 pad[7];
-    Item_80268E5C((HSD_GObj *) arg0, 0, ITEM_ANIM_UPDATE);
+    Item_80268E5C((HSD_GObj*) arg0, 0, ITEM_ANIM_UPDATE);
     it_802A7688_inline(arg0);
 }
 
-void it_802A76EC(HSD_GObj *arg0) {
+void it_802A76EC(HSD_GObj* arg0)
+{
     Item* item;
     f32 pad[4];
     item = GET_ITEM(arg0);
@@ -1875,7 +1917,8 @@ void it_802A76EC(HSD_GObj *arg0) {
     it_802A7688_inline(arg0);
 }
 
-void it_802A7764(HSD_GObj *arg0) {
+void it_802A7764(HSD_GObj* arg0)
+{
     Item* item;
     f32 pad[4];
     item = GET_ITEM(arg0);
@@ -1884,15 +1927,17 @@ void it_802A7764(HSD_GObj *arg0) {
     it_802A7688_inline(arg0);
 }
 
-void it_802A77DC(Item_GObj *arg0) {
+void it_802A77DC(Item_GObj* arg0)
+{
     Item* item;
     f32 pad[4];
-    item = GET_ITEM((HSD_GObj *)arg0);
-    Item_80268E5C((HSD_GObj *)arg0, 4, ITEM_ANIM_UPDATE);
-    it_802A7688_inline((HSD_GObj *)arg0);
+    item = GET_ITEM((HSD_GObj*) arg0);
+    Item_80268E5C((HSD_GObj*) arg0, 4, ITEM_ANIM_UPDATE);
+    it_802A7688_inline((HSD_GObj*) arg0);
 }
 
-void it_802A7840(HSD_GObj *arg0) {
+void it_802A7840(HSD_GObj* arg0)
+{
     Item* item;
     f32 pad[4];
     item = GET_ITEM(arg0);
@@ -1901,8 +1946,9 @@ void it_802A7840(HSD_GObj *arg0) {
     it_802A7688_inline(arg0);
 }
 
-void it_802A78B8(HSD_GObj *arg0, Vec3 *arg1, f32 arg2) {
-    ItemLink *item_link;
+void it_802A78B8(HSD_GObj* arg0, Vec3* arg1, f32 arg2)
+{
+    ItemLink* item_link;
     Item* item;
     f32 pad[2];
 
@@ -1913,21 +1959,24 @@ void it_802A78B8(HSD_GObj *arg0, Vec3 *arg1, f32 arg2) {
     it_802A7688_inline(arg0);
 }
 
-void it_802A793C(HSD_GObj *arg0) {
+void it_802A793C(HSD_GObj* arg0)
+{
     f32 pad[6];
     Item_80268E5C(arg0, 6, ITEM_ANIM_UPDATE);
     it_802A7688_inline(arg0);
 }
 
-void it_802A79A0(HSD_GObj *arg0) {
+void it_802A79A0(HSD_GObj* arg0)
+{
     f32 pad[6];
     Item_80268E5C(arg0, 7, ITEM_ANIM_UPDATE);
     it_802A7688_inline(arg0);
 }
 
-void it_802A7A04(HSD_GObj *arg0) {
+void it_802A7A04(HSD_GObj* arg0)
+{
     Item* item;
-    Fighter *fp;
+    Fighter* fp;
     ftLk_DatAttrs* lk_attr;
     f32 pad[6];
 
@@ -1941,8 +1990,9 @@ void it_802A7A04(HSD_GObj *arg0) {
     fp->mv.lk.specialn.x0.y = lk_attr->xB8;
 }
 
-void it_802A7AAC(HSD_GObj *arg0) {
-    Fighter *fp;
+void it_802A7AAC(HSD_GObj* arg0)
+{
+    Fighter* fp;
 
     fp = arg0->user_data;
     if (fp->fv.lk.xC != NULL) {
@@ -1954,9 +2004,10 @@ void it_802A7AAC(HSD_GObj *arg0) {
     fp->accessory3_cb = NULL;
 }
 
-void it_802A7AF0(HSD_GObj *arg0) {
-    Item *item;
-    Fighter *fp;
+void it_802A7AF0(HSD_GObj* arg0)
+{
+    Item* item;
+    Fighter* fp;
 
     fp = arg0->user_data;
     if (fp->fv.lk.xC != NULL) {
@@ -1967,29 +2018,32 @@ void it_802A7AF0(HSD_GObj *arg0) {
     }
 }
 
-void it_802A7B34(HSD_GObj *arg0) {
+void it_802A7B34(HSD_GObj* arg0)
+{
     Vec3 vec;
 
-    Fighter *fp = GET_FIGHTER(arg0);
+    Fighter* fp = GET_FIGHTER(arg0);
     if (fp->fv.lk.xC != NULL) {
-        Item *item = GET_ITEM(fp->fv.lk.xC);
-        itLinkHookshotAttributes* attr = item->xC4_article_data->x4_specialAttributes;
-        ItemLink *item_link = item->xDD4_itemVar.linkhookshot.x0;
+        Item* item = GET_ITEM(fp->fv.lk.xC);
+        itLinkHookshotAttributes* attr =
+            item->xC4_article_data->x4_specialAttributes;
+        ItemLink* item_link = item->xDD4_itemVar.linkhookshot.x0;
 
         it_802A2EE4_inline_alt(item_link, &vec);
 
         if (it_802A6A78(item_link, &vec, attr, fp) != 0) {
             it_802A6944(item, fp->x34_scale.y);
         } else {
-            it_802A7168(item,  &vec, fp->x34_scale.y);
+            it_802A7168(item, &vec, fp->x34_scale.y);
         }
     }
 }
 
-void it_802A7D40(Item_GObj *arg0, Item_GObj *arg1) {
+void it_802A7D40(Item_GObj* arg0, Item_GObj* arg1)
+{
     Item* item = GET_ITEM((HSD_GObj*) arg0);
-    it_8026B894(arg0, (HSD_GObj *) arg1);
-    if ((HSD_GObj *) item->xDD4_itemVar.linkhookshot.x8 == arg1) {
+    it_8026B894(arg0, (HSD_GObj*) arg1);
+    if ((HSD_GObj*) item->xDD4_itemVar.linkhookshot.x8 == arg1) {
         item->xDD4_itemVar.linkhookshot.x8 = NULL;
     }
 }

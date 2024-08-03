@@ -7,7 +7,7 @@
 #include "baselib/class.h"
 #include "baselib/debug.h"
 
-#define HSD_OBJ_NOREF ((u16) -1)
+#define HSD_OBJ_NOREF ((u16) - 1)
 
 #define HSD_OBJ(o) ((HSD_Obj*) o)
 #define HSD_OBJECT_INFO(o) (o.parent.parent)
@@ -34,7 +34,7 @@ typedef enum _HSD_Type {
     HSD_MAX_TYPE,
 } HSD_Type;
 
-#define MASK_OF(type) (1 << ((type) -1))
+#define MASK_OF(type) (1 << ((type) - 1))
 
 typedef enum _HSD_TypeMask {
     AOBJ_MASK = MASK_OF(AOBJ_TYPE),

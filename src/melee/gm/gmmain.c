@@ -132,7 +132,7 @@ static void init_spr_unk(void)
 {
 #ifdef MWERKS_GEKKO
 #define MTSPR(spr, val)                                                       \
-    asm { li r3, val }                                                        \
+    asm { li r3, val }                                                           \
     asm                                                                       \
     {                                                                         \
         oris r3, r3, val                                                      \

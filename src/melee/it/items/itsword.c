@@ -231,8 +231,8 @@ void it_802852B8(Item_GObj* gobj, float* arg1, float* arg2)
 {
     Item* ip = GET_ITEM(gobj);
 
-    float f1 = ip->xDD4_itemVar.sword.x4C * ip->xDD4_itemVar.star.xvel
-        * ip->xDD4_itemVar.sword.x28 * it_804DC8D8;
+    float f1 = ip->xDD4_itemVar.sword.x4C * ip->xDD4_itemVar.star.xvel *
+               ip->xDD4_itemVar.sword.x28 * it_804DC8D8;
 
     if (arg1 != NULL) {
         *arg1 = it_804DC8D0;

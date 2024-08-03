@@ -11,7 +11,7 @@ volatile OSHeapHandle __OSCurrHeap = -1;
 
 #define InRange(addr, start, end)                                             \
     ((u8*) (start) <= (u8*) (addr) && (u8*) (addr) < (u8*) (end))
-#define OFFSET(addr, align) (((uintptr_t) (addr) & ((align) -1)))
+#define OFFSET(addr, align) (((uintptr_t) (addr) & ((align) - 1)))
 
 #define ALIGNMENT 32
 #define MINOBJSIZE 64

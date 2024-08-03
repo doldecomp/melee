@@ -118,7 +118,7 @@ struct StageInfo {
     s32 x720;
     f32 x724;
     f32 x728;
-    HSD_GObj *x72C;
+    HSD_GObj* x72C;
     Vec3 x730;
     f32 x73C;
     s32 x740;
@@ -238,7 +238,7 @@ struct grDynamicAttr_UnkStruct {
 struct GroundVars_flatzone2 {
     s32 xC4;
     f32 xC8;
-    grDynamicAttr_UnkStruct *xCC;
+    grDynamicAttr_UnkStruct* xCC;
     s32 xD0;
     s32 xD4;
 };
@@ -249,13 +249,13 @@ struct grKongo_GroundVars {
     /* gp+CC */ f32 xCC;
     /* gp+D0 */ union {
         struct {
-            void *keep;
+            void* keep;
         } taru;
     } u;
     /* gp+D4 */ f32 xD4;
     /* gp+D8 */ f32 xD8;
-    /* gp+DC */ HSD_JObj *xDC;
-    /* gp+E0 */ HSD_JObj *xE0;
+    /* gp+DC */ HSD_JObj* xDC;
+    /* gp+E0 */ HSD_JObj* xE0;
     /* gp+E4 */ s16 xE4;
     /* gp+E6 */ s16 xE6;
     /* gp+E8 */ f32 xE8;
@@ -263,7 +263,7 @@ struct grKongo_GroundVars {
 };
 
 struct grKongo_GroundVars2 {
-    HSD_Spline *xC4;
+    HSD_Spline* xC4;
     f32 xC8;
     s16 xCC;
     s16 xCE;
@@ -284,8 +284,8 @@ struct grKongo_GroundVars3 {
     /* gp+C6 */ s16 xC6;
     /* gp+C8 */ s16 xC8;
     /* gp+CA */ s16 xCA;
-    HSD_JObj *xCC;
-    HSD_JObj *xD0;
+    HSD_JObj* xCC;
+    HSD_JObj* xD0;
     f32 xD4;
     f32 xD8;
     f32 xDC;

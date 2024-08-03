@@ -11,7 +11,7 @@
 
 #include <placeholder.h>
 
-typedef void (*ItCallback)(HSD_GObj *);
+typedef void (*ItCallback)(HSD_GObj*);
 
 /* 26C530 */ s32 it_8026C530(s32, void*, s32, s32);
 /* 26C65C */ u8 it_8026C65C(HSD_ObjAllocUnk6*);
@@ -72,7 +72,7 @@ typedef void (*ItCallback)(HSD_GObj *);
 /* 26F3D4 */ void it_8026F3D4(Item_GObj*, int, bool, int);
 /* 26F8B4 */ bool it_8026F8B4(Item_GObj*, Vec3*, Vec3*, int);
 /* 26F9A0 */ void it_8026F9A0(void);
-/* 26FAC4 */ void it_8026FAC4(Item *, HitCapsule *, s32, Fighter *, s32);
+/* 26FAC4 */ void it_8026FAC4(Item*, HitCapsule*, s32, Fighter*, s32);
 /* 26FC00 */ UNK_RET it_8026FC00(UNK_PARAMS);
 /* 2701BC */ void it_802701BC(HSD_GObj* gobj);
 /* 2703E8 */ void it_802703E8(HSD_GObj* gobj);

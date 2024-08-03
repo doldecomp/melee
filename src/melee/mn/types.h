@@ -138,38 +138,39 @@ struct CSSData {
 };
 
 struct CSSModeInfo {
-    u16 mode_ffa_frame;         // 0x00 - Anim frame used for top-left mode texture
-    u16 mode_teams_frame;       // 0x02 - Anim frame used for top-left mode texture
-    int enter_sfx;              // 0x04 - Announcer sfx when entering CSS
+    u16 mode_ffa_frame;   // 0x00 - Anim frame used for top-left mode texture
+    u16 mode_teams_frame; // 0x02 - Anim frame used for top-left mode texture
+    int enter_sfx;        // 0x04 - Announcer sfx when entering CSS
 };
 
-// Not same as CharacterKind bc not as many characters as icons (missing Sheik, Master Hand, etc)
+// Not same as CharacterKind bc not as many characters as icons (missing Sheik,
+// Master Hand, etc)
 typedef enum CSSIconHud {
-    ICONHUD_CAPTAIN =   0x00,
-    ICONHUD_DONKEY =    0x01,
-    ICONHUD_FOX =       0x02,
+    ICONHUD_CAPTAIN = 0x00,
+    ICONHUD_DONKEY = 0x01,
+    ICONHUD_FOX = 0x02,
     ICONHUD_GAMEWATCH = 0x03,
-    ICONHUD_KIRBY =     0x04,
-    ICONHUD_KOOPA =     0x05,
-    ICONHUD_LINK =      0x06,
-    ICONHUD_LUIGI =     0x07,
-    ICONHUD_MARIO =     0x08,
-    ICONHUD_MARS =      0x09,
-    ICONHUD_MEWTWO =    0x0A,
-    ICONHUD_NESS =      0x0B,
-    ICONHUD_PEACH =     0x0C,
-    ICONHUD_PIKACHU =   0x0D,
-    ICONHUD_POPONANA =  0x0E,
-    ICONHUD_PURIN =     0x0F,
-    ICONHUD_SAMUS =     0x10,
-    ICONHUD_YOSHI =     0x11,
-    ICONHUD_ZELDA =     0x12,
-    ICONHUD_FALCO =     0x13,
-    ICONHUD_CLINK =     0x14,
-    ICONHUD_DRMARIO =   0x15,
-    ICONHUD_EMBLEM =    0x16,
-    ICONHUD_PICHU =     0x17,
-    ICONHUD_GANON =     0x18
+    ICONHUD_KIRBY = 0x04,
+    ICONHUD_KOOPA = 0x05,
+    ICONHUD_LINK = 0x06,
+    ICONHUD_LUIGI = 0x07,
+    ICONHUD_MARIO = 0x08,
+    ICONHUD_MARS = 0x09,
+    ICONHUD_MEWTWO = 0x0A,
+    ICONHUD_NESS = 0x0B,
+    ICONHUD_PEACH = 0x0C,
+    ICONHUD_PIKACHU = 0x0D,
+    ICONHUD_POPONANA = 0x0E,
+    ICONHUD_PURIN = 0x0F,
+    ICONHUD_SAMUS = 0x10,
+    ICONHUD_YOSHI = 0x11,
+    ICONHUD_ZELDA = 0x12,
+    ICONHUD_FALCO = 0x13,
+    ICONHUD_CLINK = 0x14,
+    ICONHUD_DRMARIO = 0x15,
+    ICONHUD_EMBLEM = 0x16,
+    ICONHUD_PICHU = 0x17,
+    ICONHUD_GANON = 0x18
 } CSSIconHud;
 
 typedef enum CSSIconState {
@@ -179,121 +180,123 @@ typedef enum CSSIconState {
 } CSSIconState;
 
 typedef enum CSSIconJointId {
-    ICONJOINT_DRMARIO =     0x04,
-    ICONJOINT_FALCO =       0x08,
-    ICONJOINT_GANON =       0x06,
-    ICONJOINT_CLINK =       0x0A,
-    ICONJOINT_PICHU =       0x0C,
-    ICONJOINT_EMBLEM =      0x0E,
-    ICONJOINT_MARIO =       0x10,
-    ICONJOINT_LUIGI =       0x11,
-    ICONJOINT_KOOPA =       0x12,
-    ICONJOINT_PEACH =       0x13,
-    ICONJOINT_YOSHI =       0x14,
-    ICONJOINT_DONKEY =      0x15,
-    ICONJOINT_CAPTAIN =     0x16,
-    ICONJOINT_FOX =         0x17,
-    ICONJOINT_NESS =        0x18,
-    ICONJOINT_POPONANA =    0x19,
-    ICONJOINT_KIRBY =       0x1A,
-    ICONJOINT_SAMUS =       0x1B,
-    ICONJOINT_ZELDA =       0x1C,
-    ICONJOINT_LINK =        0x1D,
-    ICONJOINT_PIKACHU =     0x1E,
-    ICONJOINT_PURIN =       0x1F,
-    ICONJOINT_MEWTWO =      0x20,
-    ICONJOINT_GAMEWATCH =   0x21,
-    ICONJOINT_MARS =        0x22
+    ICONJOINT_DRMARIO = 0x04,
+    ICONJOINT_FALCO = 0x08,
+    ICONJOINT_GANON = 0x06,
+    ICONJOINT_CLINK = 0x0A,
+    ICONJOINT_PICHU = 0x0C,
+    ICONJOINT_EMBLEM = 0x0E,
+    ICONJOINT_MARIO = 0x10,
+    ICONJOINT_LUIGI = 0x11,
+    ICONJOINT_KOOPA = 0x12,
+    ICONJOINT_PEACH = 0x13,
+    ICONJOINT_YOSHI = 0x14,
+    ICONJOINT_DONKEY = 0x15,
+    ICONJOINT_CAPTAIN = 0x16,
+    ICONJOINT_FOX = 0x17,
+    ICONJOINT_NESS = 0x18,
+    ICONJOINT_POPONANA = 0x19,
+    ICONJOINT_KIRBY = 0x1A,
+    ICONJOINT_SAMUS = 0x1B,
+    ICONJOINT_ZELDA = 0x1C,
+    ICONJOINT_LINK = 0x1D,
+    ICONJOINT_PIKACHU = 0x1E,
+    ICONJOINT_PURIN = 0x1F,
+    ICONJOINT_MEWTWO = 0x20,
+    ICONJOINT_GAMEWATCH = 0x21,
+    ICONJOINT_MARS = 0x22
 } CSSIconJointId;
 
 struct CSSIcon {
-    u8 ft_hudindex;     // 0x00 - used for getting combo count @ 8025C0C4
-    u8 char_kind;       // 0x01 - icons external ID
-    u8 state;           // 0x02 - 0x0 Not Unlocked, 0x01 Unlocked, 0x02 Unlocked and disp
-    u8 anim_timer;      // 0x03 - 0xC when char is chosen
-    u8 joint_id_vs;     // 0x04 - Vs Icon Bg Jobj ID
-    u8 joint_id_1p;     // 0x05 - Vs Icon Bg Jobj ID
-    int sfx;            // 0x08
-    float bound_l;      // 0x0C
-    float bound_r;      // 0x10
-    float bound_u;      // 0x14
-    float bound_d;      // 0x18
+    u8 ft_hudindex; // 0x00 - used for getting combo count @ 8025C0C4
+    u8 char_kind;   // 0x01 - icons external ID
+    u8 state; // 0x02 - 0x0 Not Unlocked, 0x01 Unlocked, 0x02 Unlocked and disp
+    u8 anim_timer;  // 0x03 - 0xC when char is chosen
+    u8 joint_id_vs; // 0x04 - Vs Icon Bg Jobj ID
+    u8 joint_id_1p; // 0x05 - Vs Icon Bg Jobj ID
+    int sfx;        // 0x08
+    float bound_l;  // 0x0C
+    float bound_r;  // 0x10
+    float bound_u;  // 0x14
+    float bound_d;  // 0x18
 };
 
 struct CSSIconsData {
-    u8 gnw_name[0x1C];                  // 0x0
-    CSSModeInfo mode_info[24];          // 0x1c
-    CSSIcon icons[25 + 1];              // 0xDC
+    u8 gnw_name[0x1C];         // 0x0
+    CSSModeInfo mode_info[24]; // 0x1c
+    CSSIcon icons[25 + 1];     // 0xDC
 };
 
 struct CSSDoor {
-    u8 emblem_joint;            // 0x00
-    u8 costume_joint;           // 0x01
-    u8 team_joint;              // 0x02
-    u8 door_joint;              // 0x03
-    u8 bg_joint;                // 0x04
-    u8 player_indicator_joint;  // 0x05 - Nametag window joint id (to scroll and choose a name)
-    u8 slidername_joint;        // 0x06 - Slider name joint
-    u8 cpuslider_joint;         // 0x07 - Used when only CPU is showing
-    u8 cpuslider2_joint;        // 0x08 - Used when handicap is also showing
-    u8 selected_since_load;     // 0x09 - Determines when player selected since the CSS loaded
+    u8 emblem_joint;           // 0x00
+    u8 costume_joint;          // 0x01
+    u8 team_joint;             // 0x02
+    u8 door_joint;             // 0x03
+    u8 bg_joint;               // 0x04
+    u8 player_indicator_joint; // 0x05 - Nametag window joint id (to scroll and
+                               // choose a name)
+    u8 slidername_joint;       // 0x06 - Slider name joint
+    u8 cpuslider_joint;        // 0x07 - Used when only CPU is showing
+    u8 cpuslider2_joint;       // 0x08 - Used when handicap is also showing
+    u8 selected_since_load; // 0x09 - Determines when player selected since the
+                            // CSS loaded
 
-    u8 team;                    // 0x0A
-    u8 p_kind;                  // 0x0B - PlayerKind, 0x0 = HMN, 0x1 = CPU, 0x3 = Closed
-    u8 p_kind_prev;             // 0x0C
-    u8 costume;                 // 0x0D
-    u8 sel_icon;                // 0x0E - Icon this player has selected
-    u8 sel_icon_prev;           // 0x0F
-    u8 dooranim_timer;          // 0x10
+    u8 team;           // 0x0A
+    u8 p_kind;         // 0x0B - PlayerKind, 0x0 = HMN, 0x1 = CPU, 0x3 = Closed
+    u8 p_kind_prev;    // 0x0C
+    u8 costume;        // 0x0D
+    u8 sel_icon;       // 0x0E - Icon this player has selected
+    u8 sel_icon_prev;  // 0x0F
+    u8 dooranim_timer; // 0x10
     u8 slideranim_timer;        // 0x11
     u8 is_hold_cpu_slider;      // 0x12
     u8 is_hold_handicap_slider; // 0x13
 
-    float togglebtn_left;       // 0x14 - HMN button bound
-    float togglebtn_right;      // 0x18 - HMN button bound
-    float teambtn_left;         // 0x1C - Team button bound
-    float teambtn_right;        // 0x20 - Team button bound
+    float togglebtn_left;  // 0x14 - HMN button bound
+    float togglebtn_right; // 0x18 - HMN button bound
+    float teambtn_left;    // 0x1C - Team button bound
+    float teambtn_right;   // 0x20 - Team button bound
 };
 
 struct CSSTagData {
-    TextGlyphTexture *text;     // 0x00
-    TextGlyphTexture *name_ls;  // 0x04
-    float x8;                   // 0x08
-    float scroll_amt;           // 0x0C
-    float scroll_force;         // 0x10
-    int timer;                  // 0x14
-    u8 next_tag;                // 0x18
-    u8 port;                    // 0x19
-    u8 state;                   // 0x1A
-    u8 use_tag;                 // 0x1B
+    TextGlyphTexture* text;    // 0x00
+    TextGlyphTexture* name_ls; // 0x04
+    float x8;                  // 0x08
+    float scroll_amt;          // 0x0C
+    float scroll_force;        // 0x10
+    int timer;                 // 0x14
+    u8 next_tag;               // 0x18
+    u8 port;                   // 0x19
+    u8 state;                  // 0x1A
+    u8 use_tag;                // 0x1B
 };
 
 struct CSSTag {
-    CSSTagData *data;           // 0x00
-    u8 x4;                      // 0x04
-    u8 list_joint;              // 0x05
-    u8 name_jointl;             // 0x06
-    u8 x7;                      // 0x07
-    u8 kostar_text_joint;       // 0x08
-    u8 x9;                      // 0x09
-    u8 xa;                      // 0x0A
-    u8 xb;                      // 0x0B
+    CSSTagData* data;     // 0x00
+    u8 x4;                // 0x04
+    u8 list_joint;        // 0x05
+    u8 name_jointl;       // 0x06
+    u8 x7;                // 0x07
+    u8 kostar_text_joint; // 0x08
+    u8 x9;                // 0x09
+    u8 xa;                // 0x0A
+    u8 xb;                // 0x0B
 };
 
 struct CSSKOStar {
-    TextGlyphTexture *text;     // 0x00
-    float x4;                   // 0x04
-    u8 joint;                   // 0x08
-    int xc;                     // 0x0C
-    int x10;                    // 0x10
-    int x14;                    // 0x14
-    int x18;                    // 0x18
-    int x1c;                    // 0x1C
+    TextGlyphTexture* text; // 0x00
+    float x4;               // 0x04
+    u8 joint;               // 0x08
+    int xc;                 // 0x0C
+    int x10;                // 0x10
+    int x14;                // 0x14
+    int x18;                // 0x18
+    int x1c;                // 0x1C
 };
 
 struct CSSDoorsData {
-    CSSDoor doors[4];           // 0x00
-    CSSTag tags[4];             // 0x90
+    CSSDoor doors[4]; // 0x00
+    CSSTag tags[4];   // 0x90
     u8 xc0;
     u8 xc1;
     u8 xc2;
@@ -324,8 +327,8 @@ struct CSSDoorsData {
     float x104;
     float x108;
     float x10c;
-    CSSKOStar ko_stars[4];      // 0x110
-    u8 x190[64];                // 0x190
+    CSSKOStar ko_stars[4]; // 0x110
+    u8 x190[64];           // 0x190
 };
 
 #endif

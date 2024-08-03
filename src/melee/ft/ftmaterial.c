@@ -41,7 +41,8 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode)
     Fighter* fp = GET_FIGHTER(HSD_GObj_804D7814);
 
     if (fp->x2226_b5) {
-        lbRefract_80022998(mobj, rendermode, fp->smash_attrs.x2134_vibrateFrame);
+        lbRefract_80022998(mobj, rendermode,
+                           fp->smash_attrs.x2134_vibrateFrame);
         return;
     }
 
@@ -87,7 +88,8 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode)
                 mobj_rendermode |= RENDER_NO_ZUPDATE | RENDER_XLU;
             }
             {
-                HSD_TExp* texp1 = ftMaterial_800BF534(fp, mobj, &texp, rendermode);
+                HSD_TExp* texp1 =
+                    ftMaterial_800BF534(fp, mobj, &texp, rendermode);
                 ftMaterial_800BF6BC(fp, mobj, texp1);
                 if (fp->x2223_b2 && !fp->x2223_b3) {
                     mobj_rendermode |= RENDER_NO_ZUPDATE;
@@ -124,7 +126,8 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode)
     }
 }
 
-HSD_TExp* ftMaterial_800BF534(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp, u32 rendermode)
+HSD_TExp* ftMaterial_800BF534(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp,
+                              u32 rendermode)
 {
     NOT_IMPLEMENTED;
 }

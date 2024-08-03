@@ -411,9 +411,7 @@ void ftAction_8007121C(Fighter_GObj* gobj, FtCmdState* cmd)
         hit->x42_b1 = 1;
         hit->x42_b2 = 0;
         hit->x43_b2 = 0;
-        if ((HSD_GObj_804D7838 != NULL) &&
-            (HSD_GObj_804D7838->s_link > 9U))
-        {
+        if ((HSD_GObj_804D7838 != NULL) && (HSD_GObj_804D7838->s_link > 9U)) {
             ftColl_8007AD18(fp, hit);
         }
     }
