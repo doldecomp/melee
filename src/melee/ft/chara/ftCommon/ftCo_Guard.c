@@ -885,7 +885,7 @@ void ftCo_GuardReflect_Coll(ftCo_GObj* gobj)
     ft_800845B4(gobj);
 }
 
-f32 ftCo_80094098(HSD_GObj *gobj, f32 *arg1)
+f32 ftCo_80094098(HSD_GObj* gobj, f32* arg1)
 {
     NOT_IMPLEMENTED;
 }

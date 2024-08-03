@@ -125,8 +125,8 @@ void HSD_WObjSetDefaultClass(HSD_ClassInfo* info)
 {
     if (info) {
         HSD_ASSERT(221, hsdIsDescendantOf(info, &hsdWObj)); // The line number here is totally made
-                                        // up, this function is removed in
-                                        // practice but the string isn't
+                                       // up, this function is removed in
+                                       // practice but the string isn't
     }
     default_class = info;
 }

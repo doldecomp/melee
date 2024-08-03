@@ -1749,10 +1749,10 @@ struct UnkFloat6_Camera {
 };
 
 struct FtCmdState {
-    float x0;      // timer
-    float x4;      // frame
+    float x0; // timer
+    float x4; // frame
     union {
-        char* x8;      // script
+        char* x8; // script
         struct {
             union {
                 s16 x0;

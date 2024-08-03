@@ -3,10 +3,11 @@
 
 #include <platform.h>
 #include "it/forward.h"
-#include "ft/types.h"
 #include "lb/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include "ft/types.h"
 
 /* 26B1D4 */ float it_8026B1D4(Item_GObj* gobj, HitCapsule* itemHitboxUnk);
 /* 26B294 */ void it_8026B294(Item_GObj* gobj, Vec3* pos);
@@ -54,7 +55,8 @@
 /* 26B894 */ bool it_8026B894(Item_GObj* gobj, HSD_GObj* referenced_gobj);
 /* 26B924 */ s32 it_8026B924(Item_GObj* gobj);
 /* 26B960 */ float it_8026B960(Item_GObj* gobj);
-/* 26B9A8 */ void it_8026B9A8(Item_GObj* gobj, HSD_GObj* arg1, Fighter_Part arg2);
+/* 26B9A8 */ void it_8026B9A8(Item_GObj* gobj, HSD_GObj* arg1,
+                              Fighter_Part arg2);
 /* 26BAE8 */ void it_8026BAE8(Item_GObj* gobj, float scale_mul);
 /* 26BB20 */ void it_8026BB20(Item_GObj* gobj);
 /* 26BB44 */ void it_8026BB44(Item_GObj* gobj);

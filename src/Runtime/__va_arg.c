@@ -3,7 +3,7 @@
 
 #ifdef __MWERKS__
 
-#define ALIGN(addr, size) (((uintptr_t) (addr) + ((size) -1)) & ~((size) -1))
+#define ALIGN(addr, size) (((uintptr_t) (addr) + ((size) - 1)) & ~((size) - 1))
 
 void* __va_arg(va_list v_list, unsigned char type)
 {

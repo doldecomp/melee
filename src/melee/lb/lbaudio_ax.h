@@ -39,5 +39,3 @@
 /* 026F2C */ void lbAudioAx_80026F2C(s32);
 
 #endif
-
-

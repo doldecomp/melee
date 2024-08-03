@@ -9,7 +9,7 @@
 #include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSTime.h>
 
-#define OFFSET(n, a) (((u32) (n)) & ((a) -1))
+#define OFFSET(n, a) (((u32) (n)) & ((a) - 1))
 
 static void EraseCallback(EXIChannel chan, s32 result);
 

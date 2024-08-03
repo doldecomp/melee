@@ -208,9 +208,9 @@ struct Article {
 
 typedef struct itUnkVars {
     u16 x0;
-    u8 *x4;
+    u8* x4;
     u16 x8;
-    u8 *xC;
+    u8* xC;
     s32 x10;
     s32 x14;
     UnkFlagStruct x18;
@@ -753,10 +753,10 @@ struct HSD_ObjAllocUnk {
 
 struct HSD_ObjAllocUnk6 {
     u8 x0;
-    u8 *x4;
+    u8* x4;
     u16 x8;
     u16 xA;
-    u16 *xC;
+    u16* xC;
 };
 
 struct HSD_ObjAllocUnk4 {

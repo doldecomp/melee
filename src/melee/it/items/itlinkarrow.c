@@ -1,5 +1,4 @@
 #include "itlinkarrow.h"
-#include "ft/ft_0C31.h"
 
 #include "baselib/mtx.h"
 #include "db/db_2253.h"
@@ -7,11 +6,12 @@
 #include "ft/chara/ftCommon/ftCo_Guard.h"
 #include "ft/chara/ftKirby/ftKb_Init.h"
 #include "ft/chara/ftLink/ftLk_SpecialN.h"
+#include "ft/ft_0C31.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
-#include "it/it_2725.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 #include "it/itCharItems.h"
 #include "it/item.h"
 #include "lb/lbrefract.h"
@@ -127,8 +127,8 @@ void it_802A7E40(Item_GObj* gobj)
     }
 }
 
-HSD_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* arg1, Vec3* arg2, Fighter_Part arg3,
-                      s32 arg4)
+HSD_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* arg1, Vec3* arg2,
+                      Fighter_Part arg3, s32 arg4)
 {
     SpawnItem spawn;
     Item_GObj* gobj;
@@ -174,7 +174,7 @@ HSD_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* arg1, Vec3* arg2, Fighter_Pa
 
 #define INLINE 0
 
-static f32 fn_802A81C4_inline(Item *item)
+static f32 fn_802A81C4_inline(Item* item)
 {
     int i = item->xDD4_itemVar.linkarrow.x9C;
     f32 var_f31 = (numbers_l[i] * HSD_Randf()) + numbers[i];
@@ -189,7 +189,7 @@ void fn_802A81C4(HSD_GObj* gobj)
     float* temp_r3;
     u32 temp_r0;
 
-    Item *item = GET_ITEM(gobj);
+    Item* item = GET_ITEM(gobj);
     HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
     switch (item->xDD4_itemVar.linkarrow.x9C) {
     case 0:
@@ -359,7 +359,6 @@ void it_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3, f32 arg4,
     }
 }
 
-
 void it_802A8984(Item_GObj* gobj)
 {
     Item* item;
@@ -408,7 +407,7 @@ void it_802A8AF8(Item_GObj* gobj)
 }
 
 // Item could be passed to influence stack
-static void inline it_802A8CC8_inline_s_2(HSD_GObj *gobj, Item *item)
+static void inline it_802A8CC8_inline_s_2(HSD_GObj* gobj, Item* item)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
     Vec3 scale;

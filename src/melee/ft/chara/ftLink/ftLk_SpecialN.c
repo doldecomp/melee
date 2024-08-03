@@ -20,8 +20,8 @@
 #include "ftCommon/ftCo_ItemGet.h"
 #include "ftLink/types.h"
 #include "it/items/it_27CF.h"
-#include "it/items/itlinkbow.h"
 #include "it/items/itlinkarrow.h"
+#include "it/items/itlinkbow.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbrefract.h"
 

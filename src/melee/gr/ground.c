@@ -2393,7 +2393,7 @@ void Ground_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
     result->z = result_z;
 }
 
-bool Ground_801C4D70(HSD_GObj *arg0, Vec3* arg1, f32 arg8)
+bool Ground_801C4D70(HSD_GObj* arg0, Vec3* arg1, f32 arg8)
 {
     stage_info.x72C = arg0;
     stage_info.x730 = *arg1;
