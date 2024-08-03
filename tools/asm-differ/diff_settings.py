@@ -16,6 +16,16 @@ def env(name: str, default: Optional[str] = None) -> Optional[str]:
     return os.environ.get(name, default)
 
 
+# TODO gc-wii-binutils
+def find_objdump() -> str:
+    if (objdump := env("PPC_EABI_OBJDUMP")) is None:
+        devkitpro = env("DEVKITPRO", "/opt/devkitpro")
+        devkitppc = env("DEVKITPPC", f"{devkitpro}/devkitPPC")
+        objdump = f"{devkitppc}/bin/powerpc-eabi-objdump{get_exe_suffix()}"
+
+    return objdump
+
+
 def apply(config, _):
     config["baseimg"] = "orig/GALE01/sys/main.dol"
     config["myimg"] = "build/GALE01/main.dol"
@@ -27,8 +37,4 @@ def apply(config, _):
     config["expected_dir"] = "build/GALE01/obj"
     config["make_command"] = ["ninja"]
 
-    # TODO gc-wii-binutils
-    devkitpro = env("DEVKITPRO", "/opt/devkitpro")
-    devkitppc = env("DEVKITPPC", f"{devkitpro}/devkitPPC")
-    objdump = f"{devkitppc}/bin/powerpc-eabi-objdump{get_exe_suffix()}"
-    config["objdump_executable"] = objdump
+    config["objdump_executable"] = find_objdump()
