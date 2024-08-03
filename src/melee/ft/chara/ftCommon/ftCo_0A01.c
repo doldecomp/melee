@@ -527,7 +527,18 @@ bool ftCo_800A59C0(UNK_T arg0)
 
 /// #ftCo_800A5A28
 
-/// #ftCo_800A5A5C
+bool ftCo_800A5A5C(Fighter* fp)
+{
+    switch (fp->motion_id) {
+    case ftCo_MS_DeadLeft:
+    case ftCo_MS_DeadRight:
+    case ftCo_MS_DeadUpStar:
+    case ftCo_MS_DeadUpStarIce:
+        return true;
+    default:
+        return false;
+    }
+}
 
 /// #ftCo_800A5A90
 
