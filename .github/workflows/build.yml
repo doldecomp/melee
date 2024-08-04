@@ -87,6 +87,7 @@ jobs:
         fetch-depth: 2
         sparse-checkout: |
           src
+          extern
           tools
           config
     - name: Git config
@@ -272,6 +273,7 @@ jobs:
         fetch-depth: 1
         sparse-checkout: |
           src
+          extern
           tools
           config
           .nix
