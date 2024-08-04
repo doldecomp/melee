@@ -519,7 +519,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_StopCeil.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DownDamage.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_MissFoot.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_09F4.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_09F4.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_09F7.c"),
             Object(Matching, "melee/ft/chara/ftMario/ftMr_Strings.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_0A01.c"),
