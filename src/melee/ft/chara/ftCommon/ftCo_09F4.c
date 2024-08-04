@@ -1,47 +1,54 @@
 #include <platform.h>
 #include "ftCommon/forward.h"
 
+#include "ftCo_09F4.h"
+
+#include "ft/ftdevice.h"
 #include "gr/ground.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
 #include <math.h>
 #include <placeholder.h>
+#include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 #include <baselib/lobj.h>
 
 /* 09F480 */ static void ftCo_8009F480(ftCo_GObj* gobj);
 /* 09F54C */ static void ftCo_8009F54C(HSD_GObj* gobj, int code);
 
-#pragma force_active on
-
-static float const ftCo_804D87B0 = 0;
-static float const ftCo_804D87B4 = deg_to_rad;
-static double const ftCo_804D87B8 = M_PI_2;
-extern UNK_T ftCo_804D6568;
-extern UNK_T ftCo_804D656C;
-extern UNK_T ftCo_804D3B50;
-extern char* ftCo_804D3B58;
-extern char* ftCo_804D3B60;
+static HSD_LObj* lobj0;
+static HSD_LObj* lobj1;
 
 static char ftDynamics_assert_msg_0[] =
     "fp->dynamics_num < Ft_Dynamics_NumMax";
-static float ftDynamics_803C5780[] = { 0, 0.57, 0.57, 0.57, 0 };
+static float floats[] = { 0, 0.57, 0.57, 0.57, 0 };
 
-struct {
+static struct node0_t {
+    int zero0;
     int zero1;
-    int zero2;
     u32 flags;
-    int neg1;
+    GXColor white;
     float* floats;
+    int zero2;
     int zero3;
-    int zero4;
-} ftDynamics_803C5794 = {
-    0, 0, 0x00050000, -1, ftDynamics_803C5780, 0, 0,
+} node0 = {
+    0, 0, 0x00050000, { 0xFF, 0xFF, 0xFF, 0xFF }, floats, 0, 0,
 };
+
+static struct node1_t {
+    /* +0 */ struct node0_t* x0;
+    /* +4 */ UNK_T x4;
+} node1 = { &node0, NULL };
+
+static struct node2_t {
+    /* +0 */ struct node1_t* x0;
+    /* +4 */ UNK_T x4;
+} node2 = { &node1, NULL };
 
 void ftCo_8009F480(ftCo_GObj* gobj)
 {
@@ -52,21 +59,87 @@ void ftCo_8009F4A4(void)
 {
     HSD_GObj* gobj = GObj_Create(12, 3, 0);
     HSD_LObj* lobj = lb_80011AC4(Ground_801C49B4());
-    ftCo_804D6568 = lobj;
-    ftCo_804D656C = lb_8000CDC0(lobj);
+    lobj0 = lobj;
+    lobj1 = lb_8000CDC0(lobj);
     Ground_801C2374(lobj);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
     GObj_SetupGXLink(gobj, ftCo_8009F54C, 4U, 0U);
-    HSD_LObjReqAnimAll(lobj, ftCo_804D87B0);
+    HSD_LObjReqAnimAll(lobj, 0.0F);
     HSD_GObjProc_8038FD54(gobj, ftCo_8009F480, 1);
 }
 
-/// #ftCo_8009F54C
+void ftCo_8009F54C(HSD_GObj* gobj, int code)
+{
+    HSD_LObj_803668EC(gobj->hsd_obj);
+    HSD_LObjSetupInit(HSD_CObjGetCurrent());
+}
 
-/// #ftCo_8009F578
+void ftCo_8009F578(Fighter* fp)
+{
+    fp->x588 = lb_80011AC4(&node2.x0);
+}
 
-/// #ftCo_8009F5AC
+void ftCo_8009F5AC(Fighter* fp)
+{
+    ftDeviceUnk2* data = ftCo_800C0658(fp);
+    if (!data->x7C_b1) {
+        return;
+    }
+    if (fp->x2221_b3) {
+        {
+            Vec3 position;
+            float angle_yz = data->lobj_rot_yz * deg_to_rad;
+            float angle_x = data->lobj_rot_x * deg_to_rad *
+                            HSD_JObjGetRotationY(GET_JOBJ(fp->gobj)) / M_PI_2;
+            position.y = -sinf(-angle_yz);
+            position.z = cosf(-angle_yz);
+            position.x = position.z * sinf(angle_x);
+            position.z *= cosf(angle_x);
+            HSD_LObjSetPosition(fp->x588, &position);
+        }
+        if (data->x7C_b2) {
+            GXColor color = node0.white;
+            color.a = data->lobj_color.a;
+            HSD_LObjSetColor(fp->x588, color);
+            HSD_LObjSetFlags(fp->x588, LOBJ_ALPHA);
+        } else {
+            HSD_LObjSetColor(fp->x588, data->lobj_color);
+            HSD_LObjClearFlags(fp->x588, LOBJ_ALPHA);
+        }
+        fp->x2221_b3 = false;
+    }
+    if (data->x7C_b2) {
+        HSD_LObj_803668EC(lobj0);
+    } else {
+        HSD_LObjSetCurrentAll(lobj1);
+    }
+    HSD_LObjAddCurrent(fp->x588);
+    HSD_LObjSetupInit(HSD_CObjGetCurrent());
+}
 
-/// #ftCo_8009F75C
+void ftCo_8009F75C(Fighter* fp, bool set_alpha)
+{
+    ftDeviceUnk2* data = ftCo_800C0658(fp);
+    if (data->x7C_b1 && data->x7C_b2) {
+        if (set_alpha) {
+            HSD_LObjSetFlags(fp->x588, LOBJ_ALPHA);
+        } else {
+            HSD_LObjClearFlags(fp->x588, LOBJ_ALPHA);
+        }
+        if (set_alpha) {
+            HSD_LObj_803668EC(lobj0);
+        } else {
+            HSD_LObjSetCurrentAll(lobj1);
+        }
+        HSD_LObjAddCurrent(fp->x588);
+        HSD_LObjSetupInit(HSD_CObjGetCurrent());
+    }
+}
 
-/// #ftCo_8009F7F8
+void ftCo_8009F7F8(Fighter* fp)
+{
+    if (ftCo_800C0658(fp)->x7C_b1) {
+        HSD_LObj_803668EC(lobj0);
+        HSD_LObjSetupInit(HSD_CObjGetCurrent());
+    }
+}
