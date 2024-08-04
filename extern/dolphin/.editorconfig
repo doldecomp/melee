@@ -1,4 +1,0 @@
-root = true
-
-[Makefile]
-indent_style = tab
