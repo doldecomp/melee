@@ -15,16 +15,10 @@
 import argparse
 import sys
 from pathlib import Path
-from typing import Iterator, List
+from typing import Iterator, List, Optional
 
-from tools.project import (
-    LibDict,
-    Object,
-    ProjectConfig,
-    calculate_progress,
-    generate_build,
-    is_windows,
-)
+from tools.project import (LibDict, Object, ProjectConfig, calculate_progress,
+                           generate_build, is_windows)
 
 # Game versions
 DEFAULT_VERSION = 0
@@ -257,11 +251,12 @@ def Lib(
     fix_epilogue=True,
     includes: List[str] = includes_base,
     system_includes: List[str] = system_includes_base,
+    src_dir: Optional[str] = None,
 ) -> LibDict:
     def make_includes(includes: List[str]) -> Iterator[str]:
         return map(lambda s: f"-i {s}", includes)
 
-    return {
+    lib = {
         "lib": lib_name,
         "mw_version": f"GC/1.2.5{'n' if fix_epilogue else ''}",
         "cflags": [
@@ -274,12 +269,53 @@ def Lib(
         "objects": objects,
     }
 
+    if src_dir is not None:
+        lib["src_dir"] = src_dir
 
-def DolphinLib(lib_name: str, objects: Objects, fix_epilogue=False) -> LibDict:
+    return lib
+
+
+def DolphinLib(
+    lib_name: str, objects: Objects, fix_epilogue=False, extern=False
+) -> LibDict:
+    if extern:
+        cflags = [
+            "-c",
+            "-O4,p",
+            "-inline auto",
+            "-sym on",
+            # TODO charflags
+            "-nodefaults",
+            "-proc gekko",
+            "-fp hard",
+            "-Cpp_exceptions off",
+            "-enum int",
+            "-warn pragmas",
+            "-requireprotos",
+            "-pragma 'cats off'",
+            "-I-",
+            "-Iextern/dolphin/include",
+            "-Iextern/dolphin/include/libc",
+            "-ir extern/dolphin/src",
+            "-DRELEASE",
+        ]
+        src_dir = "extern/dolphin/src"
+        includes = []
+        system_includes = []
+    else:
+        cflags = cflags_base
+        src_dir = None
+        includes = includes_base
+        system_includes = system_includes_base
+
     return Lib(
         lib_name,
         objects,
         fix_epilogue=fix_epilogue,
+        src_dir=src_dir,
+        cflags=cflags,
+        includes=includes,
+        system_includes=system_includes,
     )
 
 
@@ -1289,6 +1325,7 @@ config.libs = [
         [
             Object(NonMatching, "dolphin/vi/vi.c"),
         ],
+        extern=True,
     ),
     DolphinLib(
         "ai",
