@@ -223,9 +223,9 @@ extern UNK_T ftCo_803C6594;
 
 /// #ftCo_800A0AF4
 
-void ftCo_800A0C8C(int arg0)
+void ftCo_800A0C8C(ftCo_Fighter* fp)
 {
-    ftCo_800B463C(arg0, 127);
+    ftCo_800B463C(fp, 127);
 }
 
 /// #ftCo_800A0CB0
