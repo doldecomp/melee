@@ -223,7 +223,7 @@ extern UNK_T ftCo_803C6594;
 
 /// #ftCo_800A0AF4
 
-void ftCo_800A0C8C(UNK_T arg0)
+void ftCo_800A0C8C(int arg0)
 {
     ftCo_800B463C(arg0, 127);
 }
