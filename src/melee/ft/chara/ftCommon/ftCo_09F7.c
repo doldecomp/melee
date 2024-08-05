@@ -1,5 +1,7 @@
 #include "ftCo_09F7.h"
 
+#include "ftCo_0B3E.h"
+
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ftparts.h"

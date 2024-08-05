@@ -11,7 +11,4 @@
                                 Vec3*, float);
 /* 0A0098 */ void ftCo_800A0098(int);
 
-extern void ftCo_800B46B8(int, int, int);
-extern void ftCo_800B463C(int, int);
-
 #endif

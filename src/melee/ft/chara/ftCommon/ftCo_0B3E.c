@@ -3,7 +3,6 @@
 #include <placeholder.h>
 
 /* 0B462C */ static UNK_RET ftCo_800B462C(UNK_PARAMS);
-/* 0B46B8 */ static UNK_RET ftCo_800B46B8(UNK_PARAMS);
 /* 0B4778 */ static UNK_RET ftCo_800B4778(UNK_PARAMS);
 /* 0B4880 */ static UNK_RET ftCo_800B4880(UNK_PARAMS);
 /* 0B49F4 */ static UNK_RET ftCo_800B49F4(UNK_PARAMS);
@@ -145,10 +144,7 @@ void ftCo_800B463C(UNK_T arg0, int arg1)
     NOT_IMPLEMENTED;
 }
 
-UNK_RET ftCo_800B46B8(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800B46B8
 
 UNK_RET ftCo_800B4778(UNK_PARAMS)
 {
