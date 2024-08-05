@@ -139,10 +139,7 @@ UNK_RET ftCo_800B462C(UNK_PARAMS)
     NOT_IMPLEMENTED;
 }
 
-void ftCo_800B463C(UNK_T arg0, int arg1)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800B463C
 
 /// #ftCo_800B46B8
 
