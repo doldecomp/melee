@@ -349,9 +349,6 @@ melee/ft/ftlib.c:
 	.sdata      start:0x804D3AC8 end:0x804D3AD0
 	.sdata2     start:0x804D83C0 end:0x804D83E0
 
-melee/ft/ftwaitanim.c:
-	.data       start:0x803C54A8 end:0x803C54D8
-
 melee/ft/ft_0877.c:
 	.text       start:0x800877F8 end:0x800881D8
 
@@ -367,8 +364,9 @@ melee/ft/ft_0892.c:
 melee/ft/chara/ftCommon/ftCo_Wait.c:
 	.text       start:0x8008A494 end:0x8008A698
 
-melee/ft/chara/ftCommon/ftCo_08A6.c:
+melee/ft/ftwaitanim.c:
 	.text       start:0x8008A698 end:0x8008A9F8
+	.data       start:0x803C54A8 end:0x803C54D8
 	.sdata      start:0x804D3AE0 end:0x804D3AE8
 	.sdata2     start:0x804D8448 end:0x804D8458
 

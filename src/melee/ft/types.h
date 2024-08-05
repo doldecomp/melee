@@ -603,7 +603,7 @@ struct ftData {
         /* +0 */ UNK_T x0;
         /* +4 */ HSD_Joint* x8;
     }* x20;
-    /* +24 */ int x24;
+    /* +24 */ UNK_T x24;
     /* +28 */ u8 x28[0x34 - 0x28];
     /* +34 */ struct ftData_x34 {
         /* +0 */ Fighter_Part x0;
@@ -1031,7 +1031,7 @@ struct Fighter {
     /*  fp+508 */ ftDeviceUnk2 x508;
     /*  fp+588 */ HSD_LObj* x588;
     /*  fp+58C */ s32 x58C;
-    /*  fp+590 */ s32 x590;
+    /*  fp+590 */ UNK_T x590;
     /*  fp+594 */ union {
         struct {
             /* fp+594:0 */ u8 x594_b0 : 1;
