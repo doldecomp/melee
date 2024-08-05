@@ -1,49 +1,12 @@
+#include "ftCommon/forward.h"
+
 #include "ftCo_0B3E.h"
 
-#include <placeholder.h>
+#include "ft/types.h"
+#include "ftCommon/ftCo_0A01.h"
 
-/* 0B462C */ static UNK_RET ftCo_800B462C(UNK_PARAMS);
-/* 0B4778 */ static UNK_RET ftCo_800B4778(UNK_PARAMS);
-/* 0B4880 */ static UNK_RET ftCo_800B4880(UNK_PARAMS);
-/* 0B49F4 */ static UNK_RET ftCo_800B49F4(UNK_PARAMS);
-/* 0B4A78 */ static UNK_RET ftCo_800B4A78(UNK_PARAMS);
-/* 0B4AB0 */ static UNK_RET ftCo_800B4AB0(UNK_PARAMS);
-/* 0B52AC */ static UNK_RET ftCo_800B52AC(UNK_PARAMS);
-/* 0B5AB0 */ static UNK_RET ftCo_800B5AB0(UNK_PARAMS);
-/* 0B6208 */ static UNK_RET ftCo_800B6208(UNK_PARAMS);
-/* 0B630C */ static UNK_RET ftCo_800B630C(UNK_PARAMS);
-/* 0B63D8 */ static UNK_RET ftCo_800B63D8(UNK_PARAMS);
-/* 0B658C */ static UNK_RET ftCo_800B658C(UNK_PARAMS);
-/* 0B683C */ static UNK_RET ftCo_800B683C(UNK_PARAMS);
-/* 0B7180 */ static UNK_RET ftCo_800B7180(UNK_PARAMS);
-/* 0B732C */ static UNK_RET ftCo_800B732C(UNK_PARAMS);
-/* 0B7638 */ static UNK_RET ftCo_800B7638(UNK_PARAMS);
-/* 0B77E8 */ static UNK_RET ftCo_800B77E8(UNK_PARAMS);
-/* 0B885C */ static UNK_RET ftCo_800B885C(UNK_PARAMS);
-/* 0B89CC */ static UNK_RET ftCo_800B89CC(UNK_PARAMS);
-/* 0B8A9C */ static UNK_RET ftCo_800B8A9C(UNK_PARAMS);
-/* 0B9020 */ static UNK_RET ftCo_800B9020(UNK_PARAMS);
-/* 0B920C */ static UNK_RET ftCo_800B920C(UNK_PARAMS);
-/* 0B92D4 */ static UNK_RET ftCo_800B92D4(UNK_PARAMS);
-/* 0B9340 */ static UNK_RET ftCo_800B9340(UNK_PARAMS);
-/* 0B9504 */ static UNK_RET ftCo_800B9504(UNK_PARAMS);
-/* 0B9704 */ static UNK_RET ftCo_800B9704(UNK_PARAMS);
-/* 0B9790 */ static UNK_RET ftCo_800B9790(UNK_PARAMS);
-/* 0B98C8 */ static UNK_RET ftCo_800B98C8(UNK_PARAMS);
-/* 0B9A04 */ static UNK_RET ftCo_800B9A04(UNK_PARAMS);
-/* 0B9CBC */ static UNK_RET ftCo_800B9CBC(UNK_PARAMS);
-/* 0B9F6C */ static UNK_RET ftCo_800B9F6C(UNK_PARAMS);
-/* 0B9F90 */ static UNK_RET ftCo_800B9F90(UNK_PARAMS);
-/* 0BA080 */ static UNK_RET ftCo_800BA080(UNK_PARAMS);
-/* 0BA160 */ static UNK_RET ftCo_800BA160(UNK_PARAMS);
-/* 0BA224 */ static UNK_RET ftCo_800BA224(UNK_PARAMS);
-/* 0BA2E8 */ static UNK_RET ftCo_800BA2E8(UNK_PARAMS);
-/* 0BA674 */ static UNK_RET ftCo_800BA674(UNK_PARAMS);
-/* 0BA9A0 */ static UNK_RET ftCo_800BA9A0(UNK_PARAMS);
-/* 0BB104 */ static UNK_RET ftCo_800BB104(UNK_PARAMS);
-/* 0BB220 */ static UNK_RET ftCo_800BB220(UNK_PARAMS);
-/* 0BB768 */ static UNK_RET ftCo_800BB768(UNK_PARAMS);
-/* 0BB9B4 */ static UNK_RET ftCo_800BB9B4(UNK_PARAMS);
+#include <placeholder.h>
+#include <baselib/debug.h>
 
 double const ftCo_804D89C8 = 0;
 double const ftCo_804D89D0 = S32_TO_F32;
@@ -129,221 +92,141 @@ extern char* ftCo_804D3B7C;
 
 #pragma force_active on
 
-void ftCo_800B3E04(ftCo_Fighter* fp)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800B3E04
 
-UNK_RET ftCo_800B462C(UNK_PARAMS)
+void ftCo_800B462C(ftCo_Fighter* fp)
 {
-    NOT_IMPLEMENTED;
+    u32* temp_r3 = &fp->x1A88;
+    M2C_FIELD(temp_r3, u32**, 0x554) = &temp_r3[0x115];
 }
 
 /// #ftCo_800B463C
 
+void ftCo_800B463C(ftCo_Fighter* fp, int arg1)
+{
+    struct Fighter_x1A88_t* temp_r31 = (struct Fighter_x1A88_t*) &fp->x1A88;
+    if (fp->x1FDC >= temp_r31->x554.x0_u32) {
+        OSReport("command script buffer over flow!\n");
+        __assert("ftcmdscript.c", 501, "0");
+    }
+
+    {
+        union Fighter_x1A88_x544_t* temp = &temp_r31->x554;
+        temp->x0_u32 = arg1;
+        ++temp->x0_u32;
+    }
+}
+
 /// #ftCo_800B46B8
 
-UNK_RET ftCo_800B4778(UNK_PARAMS)
+/// #ftCo_800B4778
+
+/// #ftCo_800B4880
+
+/// #ftCo_800B49F4
+
+void ftCo_800B4A78(Fighter* fp)
 {
-    NOT_IMPLEMENTED;
+    u32* x1A88 = &fp->x1A88;
+    M2C_FIELD(x1A88, u32*, 0) = 0;
+    M2C_FIELD(x1A88, s8*, 4) = 0;
+    M2C_FIELD(x1A88, s8*, 5) = 0;
+    M2C_FIELD(x1A88, s8*, 6) = 0;
+    M2C_FIELD(x1A88, s8*, 7) = 0;
+    M2C_FIELD(x1A88, s8*, 9) = 0;
+    M2C_FIELD(x1A88, s8*, 8) = 0;
+    M2C_FIELD(x1A88, s32*, 0x450) = 0;
+    M2C_FIELD(x1A88, s32*, 0x44C) = 0;
+    M2C_FIELD(x1A88, UNK_T*, 0x554) = &x1A88[0x115];
 }
 
-UNK_RET ftCo_800B4880(UNK_PARAMS)
+/// #ftCo_800B4AB0
+
+/// #ftCo_800B52AC
+
+/// #ftCo_800B5AB0
+
+/// #ftCo_800B6208
+
+/// #ftCo_800B630C
+
+/// #ftCo_800B63D8
+
+/// #ftCo_800B658C
+
+/// #ftCo_800B683C
+
+/// #ftCo_800B7180
+
+/// #ftCo_800B732C
+
+/// #ftCo_800B7638
+
+/// #ftCo_800B77E8
+
+/// #ftCo_800B885C
+
+/// #ftCo_800B89CC
+
+/// #ftCo_800B8A9C
+
+/// #ftCo_800B9020
+
+/// #ftCo_800B920C
+
+void ftCo_800B92D4(ftCo_Fighter* fp)
 {
-    NOT_IMPLEMENTED;
+    PAD_STACK(4 * 4);
+    if (fp->x1ACC == NULL) {
+        fp->x1ACC = NULL;
+        fp->x1AA0 = fp->x1AA4;
+        ftCo_800A0C8C(fp);
+    } else {
+        ftCo_800B46B8(fp, 0x94, 0x7F);
+        ftCo_800B463C(fp, 0x7F);
+    }
 }
 
-UNK_RET ftCo_800B49F4(UNK_PARAMS)
+/// #ftCo_800B9340
+
+/// #ftCo_800B9504
+
+/// #ftCo_800B9704
+
+/// #ftCo_800B9790
+
+/// #ftCo_800B98C8
+
+/// #ftCo_800B9A04
+
+/// #ftCo_800B9CBC
+
+bool ftCo_800B9F6C(Fighter* fp)
 {
-    NOT_IMPLEMENTED;
+    if (fp->motion_id == ftCo_MS_GuardOn || fp->motion_id == ftCo_MS_Guard) {
+        return true;
+    }
+    return false;
 }
 
-UNK_RET ftCo_800B4A78(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800B9F90
 
-UNK_RET ftCo_800B4AB0(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800BA080
 
-UNK_RET ftCo_800B52AC(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800BA160
 
-UNK_RET ftCo_800B5AB0(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800BA224
 
-UNK_RET ftCo_800B6208(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800BA2E8
 
-UNK_RET ftCo_800B630C(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800BA674
 
-UNK_RET ftCo_800B63D8(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800BA9A0
 
-UNK_RET ftCo_800B658C(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800BB104
 
-UNK_RET ftCo_800B683C(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800BB220
 
-UNK_RET ftCo_800B7180(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800BB768
 
-UNK_RET ftCo_800B732C(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800B7638(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800B77E8(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800B885C(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800B89CC(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800B8A9C(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800B9020(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800B920C(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800B92D4(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800B9340(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800B9504(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800B9704(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800B9790(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800B98C8(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800B9A04(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800B9CBC(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800B9F6C(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800B9F90(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800BA080(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800BA160(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800BA224(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800BA2E8(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800BA674(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800BA9A0(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800BB104(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800BB220(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800BB768(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
-
-UNK_RET ftCo_800BB9B4(UNK_PARAMS)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800BB9B4

@@ -10,7 +10,7 @@
 
 /* 09D4F0 */ UNK_RET ftCo_800A05F4(UNK_PARAMS);
 /* 09D694 */ UNK_RET ftCo_800A0798(UNK_PARAMS);
-/* 09DB88 */ void ftCo_800A0C8C(int);
+/* 09DB88 */ void ftCo_800A0C8C(ftCo_Fighter* fp);
 /* 09DCA0 */ void ftCo_800A0DA4(Fighter* fp);
 /* 09DEAC */ UNK_RET ftCo_800A0FB0(UNK_PARAMS);
 /* 09DF18 */ void ftCo_800A101C(Fighter*, s8, s8, s32);

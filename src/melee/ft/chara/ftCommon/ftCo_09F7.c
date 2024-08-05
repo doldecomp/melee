@@ -1,3 +1,5 @@
+#include "ftCommon/forward.h"
+
 #include "ftCo_09F7.h"
 
 #include "ftCo_0B3E.h"
@@ -520,7 +522,7 @@ block_134:
     return;
 }
 
-void ftCo_800A0098(int arg0)
+void ftCo_800A0098(ftCo_Fighter* arg0)
 {
     ftCo_800B46B8(arg0, 0x80, 0);
     ftCo_800B46B8(arg0, 0x81, 0);

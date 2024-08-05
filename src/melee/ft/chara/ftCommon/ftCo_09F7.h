@@ -9,6 +9,6 @@
 
 /* 09F834 */ void ftCo_8009F834(ftCo_GObj*, int, Fighter_Part, int, int, Vec3*,
                                 Vec3*, float);
-/* 0A0098 */ void ftCo_800A0098(int);
+/* 0A0098 */ void ftCo_800A0098(ftCo_Fighter* fp);
 
 #endif
