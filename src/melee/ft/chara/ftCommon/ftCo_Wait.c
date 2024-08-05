@@ -18,9 +18,9 @@
 #include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcoll.h"
+#include "ft/ftwaitanim.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_08A6.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "ftFox/ftFx_AppealS.h"
 
