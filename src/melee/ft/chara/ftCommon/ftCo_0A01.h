@@ -45,7 +45,7 @@
 /* 0A2924 */ bool ftCo_800A5A28(ftCo_Fighter* fp);
 /* 0A41F4 */ bool ftCo_800B395C(ftCo_GObj* gobj, int);
 /* 0A5A5C */ bool ftCo_800A5A5C(ftCo_Fighter*);
-/* 0A5A90 */ UNK_RET ftCo_800A5A90(UNK_PARAMS);
+/* 0A5A90 */ bool ftCo_800A5A90(ftCo_Fighter* fp);
 /* 0B07FC */ void ftCo_800B3900(Fighter_GObj* gobj);
 /* 0B0858 */ UNK_RET ftCo_800B3958(UNK_PARAMS);
 

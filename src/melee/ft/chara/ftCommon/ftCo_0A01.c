@@ -479,7 +479,20 @@ bool ftCo_800A5A5C(Fighter* fp)
     }
 }
 
-/// #ftCo_800A5A90
+bool ftCo_800A5A90(Fighter* fp)
+{
+    if (fp->motion_id >= ftCo_MS_SwordSwing1 &&
+        fp->motion_id <= ftCo_MS_StarRodSwingDash)
+    {
+        return true;
+    }
+    if (fp->motion_id >= ftCo_MS_LGunShoot &&
+        fp->motion_id <= ftCo_MS_ItemScopeAirEndEmpty)
+    {
+        return true;
+    }
+    return false;
+}
 
 /// #ftCo_800A5ACC
 
