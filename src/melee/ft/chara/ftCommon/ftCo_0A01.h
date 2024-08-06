@@ -38,7 +38,7 @@
 /* 0A1CA8 */ bool ftCo_800A1CA8(ftCo_Fighter* fp);
 /* 0A1D88 */ UNK_RET ftCo_800A4E8C(UNK_PARAMS);
 /* 0A2040 */ bool ftCo_800A2040(Fighter* fp);
-/* 0A2804 */ UNK_RET ftCo_800A5908(UNK_PARAMS);
+/* 0A2804 */ bool ftCo_800A5908(Fighter* fp);
 /* 0A287C */ UNK_RET ftCo_800A5980(UNK_PARAMS);
 /* 0A28BC */ bool ftCo_800A59C0(UNK_T);
 /* 0A28E0 */ bool ftCo_800A59E4(ftCo_Fighter* fp);

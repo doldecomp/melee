@@ -408,17 +408,29 @@ void ftCo_800A49B4(ftCo_Fighter* fp)
 
 /// #ftCo_800A589C
 
-/// #ftCo_800A5908
+bool ftCo_800A5908(ftCo_Fighter* fp)
+{
+    if (fp->motion_id == ftCo_MS_DeadUpFallHitCameraFlat) {
+        return true;
+    }
+    if (fp->motion_id == ftCo_MS_DeadUpFallIce) {
+        return true;
+    }
+    if (fp->motion_id == ftCo_MS_Turn) {
+        return true;
+    }
+    return false;
+}
 
 bool ftCo_800A5944(ftCo_Fighter* fp)
 {
-    if (fp->motion_id == 6) {
+    if (fp->motion_id == ftCo_MS_DeadUpFall) {
         return true;
     }
-    if (fp->motion_id == 14) {
+    if (fp->motion_id == ftCo_MS_Wait) {
         return true;
     }
-    if (fp->motion_id == 15) {
+    if (fp->motion_id == ftCo_MS_WalkSlow) {
         return true;
     }
     return false;
