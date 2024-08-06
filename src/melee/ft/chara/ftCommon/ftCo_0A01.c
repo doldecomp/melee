@@ -229,7 +229,14 @@ float ftCo_800A17E4(ftCo_Fighter* fp)
 
 /// #ftCo_800A1874
 
-/// #ftCo_800A1904
+float ftCo_800A1904(ftCo_Fighter* fp)
+{
+    float ret = fp->x1A90 / 255.0;
+    if (ret > 1.0) {
+        ret = 1.0;
+    }
+    return ret;
+}
 
 float ftCo_800A1948(ftCo_Fighter* fp)
 {
@@ -436,7 +443,20 @@ bool ftCo_800A5944(ftCo_Fighter* fp)
     return false;
 }
 
-/// #ftCo_800A5980
+bool ftCo_800A5980(ftCo_Fighter* fp)
+{
+    if (fp->motion_id >= ftCo_MS_LandingFallSpecial &&
+        fp->motion_id < ftCo_MS_Attack100Start)
+    {
+        return true;
+    }
+    if (fp->motion_id - (unsigned) ftCo_MS_Furafura <= 2 ||
+        fp->motion_id == ftCo_MS_CatchAttack)
+    {
+        return true;
+    }
+    return false;
+}
 
 bool ftCo_800A59C0(UNK_T arg0)
 {
@@ -446,7 +466,19 @@ bool ftCo_800A59C0(UNK_T arg0)
     return false;
 }
 
-/// #ftCo_800A59E4
+bool ftCo_800A59E4(Fighter* fp)
+{
+    if (fp == NULL) {
+        return false;
+    }
+    if (fp->motion_id == ftCo_MS_KneeBend ||
+        fp->motion_id - (unsigned) ftCo_MS_RunDirect <= 1 ||
+        fp->motion_id - (unsigned) ftCo_MS_Sleep <= 2)
+    {
+        return true;
+    }
+    return false;
+}
 
 bool ftCo_800A5A28(Fighter* fp)
 {
