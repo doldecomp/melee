@@ -479,7 +479,7 @@ bool ftCo_800A5A5C(Fighter* fp)
     }
 }
 
-bool ftCo_800A5A90(Fighter* fp)
+bool ftCo_800A5A90(ftCo_Fighter* fp)
 {
     if (fp->motion_id >= ftCo_MS_SwordSwing1 &&
         fp->motion_id <= ftCo_MS_StarRodSwingDash)
