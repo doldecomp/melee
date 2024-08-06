@@ -4,6 +4,7 @@
 #include <platform.h>
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include "gr/forward.h"
 
 #include <common_structs.h>
 #include <placeholder.h>
@@ -65,8 +66,9 @@
 /* 09E094 */ static UNK_RET ftCo_800AD7FC(UNK_PARAMS);
 /* 09E4C0 */ static UNK_RET ftCo_800ADC28(UNK_PARAMS);
 /* 09E6E0 */ static UNK_RET ftCo_800ADE48(UNK_PARAMS);
-/* 09EBC0 */ static UNK_RET ftCo_800A1CC4(UNK_PARAMS);
-/* 09EE38 */ static UNK_RET ftCo_800A1F3C(UNK_PARAMS);
+/* 09EBC0 */ static void ftCo_800A1CC4(UNK_T, UNK_T, UNK_T);
+/* 09EE38 */ static void ftCo_800A1F3C(ftCo_Fighter* fp, float arg1,
+                                       float arg2, float arg3);
 /* 09EE94 */ static UNK_RET ftCo_800A1F98(UNK_PARAMS);
 /* 09EF9C */ static UNK_RET ftCo_800A20A0(UNK_PARAMS);
 /* 09F044 */ static UNK_RET ftCo_800AE7AC(UNK_PARAMS);

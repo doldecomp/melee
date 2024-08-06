@@ -7,6 +7,7 @@
 #include "ftCo_0B3E.h"
 
 #include "ft/types.h"
+#include "gr/ground.h"
 #include "lb/lbcollision.h"
 #include "pl/player.h"
 
@@ -104,7 +105,7 @@ int ftCo_803C5A68[] = {
     5, 2, 2, 2, 3, 3, 3, 4, 0, 0, 8, 4, 1, 4, 4, 5, 5,
 };
 
-extern UNK_T ftCo_803C6594;
+extern UNK_T* ftCo_803C6594;
 
 #pragma force_active on
 
@@ -302,7 +303,17 @@ bool ftCo_800A1CA8(ftCo_Fighter* fp)
 
 /// #ftCo_800A1CC4
 
-/// #ftCo_800A1F3C
+void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2, float arg3)
+{
+    struct Fighter_x1A88_t* data = (void*) &fp->x1A88;
+    if (fp->x1AE8 == 0) {
+        data->x54 = arg1;
+        data->x58 = arg2;
+        data->x38 = arg3;
+        ftCo_800A1CC4(ftCo_803C6594[stage_info.internal_stage_id],
+                      &stage_info.cam_info, data);
+    }
+}
 
 /// #ftCo_800A1F98
 

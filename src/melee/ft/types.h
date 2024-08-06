@@ -958,7 +958,17 @@ typedef struct FtDynamicBones {
 } FtDynamicBones;
 
 struct Fighter_x1A88_t {
-    /* +0 */ u8 x0[0x554];
+    /*   +0 */ u8 x0[0x38];
+    /*  +38 */ float x38;
+    /*  +3C */ UNK_T x3C;
+    /*  +40 */ UNK_T x40;
+    /*  +44 */ UNK_T x44;
+    /*  +48 */ UNK_T x48;
+    /*  +4C */ UNK_T x4C;
+    /*  +50 */ UNK_T x50;
+    /*  +54 */ float x54;
+    /*  +58 */ float x58;
+    /*  +5C */ u8 x5C[0x554 - 0x5C];
     /* +554 */ union Fighter_x1A88_x544_t {
         struct {
             u8 x0_u8;
@@ -966,6 +976,7 @@ struct Fighter_x1A88_t {
         uint x0_u32;
     } x554;
 };
+STATIC_ASSERT(sizeof(struct Fighter_x1A88_t) == 0x558);
 
 struct Fighter {
     /*    fp+0 */ HSD_GObj* gobj;
@@ -1329,7 +1340,10 @@ struct Fighter {
     /* fp+1AD4 */ UNK_T x1AD4;
     /* fp+1AD8 */ UNK_T x1AD8;
     /* fp+1ADC */ float x1ADC;
-    /* fp+1A9C */ u8 x1AE0[0x1FDC - 0x1AE0];
+    /* fp+1AE0 */ UNK_T x1AE0;
+    /* fp+1AE4 */ UNK_T x1AE4;
+    /* fp+1AE8 */ int x1AE8;
+    /* fp+1AEC */ u8 x1AEC[0x1FDC - 0x1AEC];
     /* fp+1FDC */ uint x1FDC;
     /* fp+1FE0 */ u8 x1FE0[0x2004 - 0x1FE0];
     /* fp+2008 */ int x2004;
