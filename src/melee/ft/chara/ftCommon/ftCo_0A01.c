@@ -342,7 +342,19 @@ bool ftCo_800A2BD4(ftCo_Fighter* fp)
 
 /// #ftCo_800A2C80
 
-/// #ftCo_800A3134
+enum_t ftCo_800A3134(Fighter* fp)
+{
+    switch (fp->motion_id) {
+    case ftCo_MS_DownBoundD:
+    case ftCo_MS_DownBoundU:
+        return 1;
+    case ftCo_MS_DownWaitD:
+    case ftCo_MS_DownWaitU:
+        return 2;
+    default:
+        return 0;
+    }
+}
 
 /// #ftCo_800A3180
 

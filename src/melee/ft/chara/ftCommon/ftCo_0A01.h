@@ -27,7 +27,7 @@
 /* 09F96C */ UNK_RET ftCo_800A2A70(UNK_PARAMS);
 /* 09FAD0 */ bool ftCo_800A2BD4(ftCo_Fighter* fp);
 /* 09FB04 */ UNK_RET ftCo_800A2C08(UNK_PARAMS);
-/* 0A0030 */ UNK_RET ftCo_800A3134(UNK_PARAMS);
+/* 0A0030 */ bool ftCo_800A3134(ftCo_Fighter* fp);
 /* 0A007C */ UNK_RET ftCo_800A3180(UNK_PARAMS);
 /* 0A00FC */ bool ftCo_800A3200(ftCo_Fighter* fp);
 /* 0A0740 */ UNK_RET ftCo_800A3844(UNK_PARAMS);
@@ -41,7 +41,7 @@
 /* 0A2804 */ bool ftCo_800A5908(Fighter* fp);
 /* 0A287C */ bool ftCo_800A5980(Fighter* fp);
 /* 0A28BC */ bool ftCo_800A59C0(UNK_T);
-/* 0A28E0 */ bool ftCo_800A59E4(ftCo_Fighter* fp);
+/* 0A28E0 */ enum_t ftCo_800A59E4(ftCo_Fighter* fp);
 /* 0A2924 */ bool ftCo_800A5A28(ftCo_Fighter* fp);
 /* 0A41F4 */ bool ftCo_800B395C(ftCo_GObj* gobj, int);
 /* 0A5A5C */ bool ftCo_800A5A5C(ftCo_Fighter*);
