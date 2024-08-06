@@ -80,13 +80,14 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/ft_0852.s.o\
     $(BUILD_DIR)/asm/melee/ft/ftdata.s.o\
     $(BUILD_DIR)/src/melee/ft/ftlib.c.o\
+    $(BUILD_DIR)/src/melee/ft/ftwaitanim.c.o\
     $(BUILD_DIR)/src/melee/ft/ft_0877.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0881.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0892.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Wait.c.o\
-    $(BUILD_DIR)/asm/melee/ft/ftwaitanim.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_08A6.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_Attack1.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackDash.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_AttackS3.c.o\

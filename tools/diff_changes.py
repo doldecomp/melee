@@ -9,15 +9,8 @@ def process_json(data):
     for unit in data.get("units", []):
         matching_functions = []
         for function in unit.get("functions", []):
-            if function is None:
-                continue
-
-            def get_fuzzy(key) -> float:
-                obj = function.get(key) or {}
-                return obj.get("fuzzy_match_percent") or 0
-
-            from_fuzzy = get_fuzzy("from")
-            to_fuzzy = get_fuzzy("to")
+            from_fuzzy = function.get("from", {}).get("fuzzy_match_percent")
+            to_fuzzy = function.get("to", {}).get("fuzzy_match_percent")
             if from_fuzzy == 100 and to_fuzzy < from_fuzzy:
                 func_name = function.get("name")
                 matching_functions.append(f"{func_name} ({from_fuzzy}% -> {to_fuzzy})")

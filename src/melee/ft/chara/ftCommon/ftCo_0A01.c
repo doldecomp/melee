@@ -525,7 +525,23 @@ bool ftCo_800A59C0(UNK_T arg0)
 
 /// #ftCo_800A59E4
 
-/// #ftCo_800A5A28
+bool ftCo_800A5A28(Fighter* fp)
+{
+    switch (fp->motion_id) {
+    case ftCo_MS_DeadDown:
+    case ftCo_MS_DeadUpFall:
+    case ftCo_MS_DeadUpFallHitCamera:
+    case ftCo_MS_Wait:
+    case ftCo_MS_WalkSlow:
+    case ftCo_MS_WalkFast:
+    case ftCo_MS_TurnRun:
+    case ftCo_MS_Dash:
+    case ftCo_MS_FallAerialB:
+        return true;
+    default:
+        return false;
+    }
+}
 
 bool ftCo_800A5A5C(Fighter* fp)
 {
