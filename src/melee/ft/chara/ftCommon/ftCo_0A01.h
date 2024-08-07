@@ -25,7 +25,7 @@
 /* 09E888 */ HSD_Pad ftCo_800A198C(Fighter* fp);
 /* 09E890 */ float ftCo_800A1994(Fighter* fp);
 /* 09E920 */ float ftCo_800A1A24(Fighter* fp);
-/* 09F06C */ UNK_RET ftCo_800A2170(UNK_PARAMS);
+/* 09F06C */ bool ftCo_800A2170(ftCo_Fighter* fp0, ftCo_Fighter* fp1);
 /* 09F7CC */ UNK_RET ftCo_800A28D0(UNK_PARAMS);
 /* 09F894 */ UNK_RET ftCo_800A2998(UNK_PARAMS);
 /* 09F96C */ UNK_RET ftCo_800A2A70(UNK_PARAMS);

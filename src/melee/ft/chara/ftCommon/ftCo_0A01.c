@@ -17,6 +17,7 @@
 #include "gr/ground.h"
 #include "gr/grvenom.h"
 #include "lb/lbcollision.h"
+#include "mp/mpisland.h"
 #include "mp/mplib.h"
 #include "pl/player.h"
 
@@ -367,7 +368,25 @@ bool ftCo_800A2040(ftCo_Fighter* fp)
 
 /// #ftCo_800A20A0
 
-/// #ftCo_800A2170
+bool ftCo_800A2170(Fighter* fp0, Fighter* fp1)
+{
+    if (fp0->ground_or_air == GA_Air) {
+        return false;
+    }
+    if (fp1->ground_or_air == GA_Air) {
+        return false;
+    }
+    {
+        mp_UnkStruct0* data = mpIsland_8005AB54(fp0->coll_data.floor.index);
+        if (data == NULL) {
+            return false;
+        }
+        if (mpIsland_8005AB54(fp1->coll_data.floor.index) == data) {
+            return true;
+        }
+    }
+    return false;
+}
 
 /// #ftCo_800A21FC
 
