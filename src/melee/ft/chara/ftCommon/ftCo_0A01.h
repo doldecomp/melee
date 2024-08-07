@@ -32,7 +32,7 @@
 /* 09FAD0 */ bool ftCo_800A2BD4(ftCo_Fighter* fp);
 /* 09FB04 */ bool ftCo_800A2C08(ftCo_Fighter* fp);
 /* 0A0030 */ bool ftCo_800A3134(ftCo_Fighter* fp);
-/* 0A007C */ bool ftCo_800A3180(ftCo_Fighter* fp);
+/* 0A007C */ bool ftCo_IsGrabbing(ftCo_Fighter* fp);
 /* 0A00FC */ bool ftCo_800A3200(ftCo_Fighter* fp);
 /* 0A0740 */ UNK_RET ftCo_800A3844(UNK_PARAMS);
 /* 0A193C */ UNK_RET ftCo_800A4A40(UNK_PARAMS);

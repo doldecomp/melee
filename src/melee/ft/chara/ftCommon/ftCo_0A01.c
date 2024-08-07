@@ -416,7 +416,7 @@ enum_t ftCo_800A3134(Fighter* fp)
     }
 }
 
-bool ftCo_800A3180(ftCo_Fighter* fp)
+bool ftCo_IsGrabbing(ftCo_Fighter* fp)
 {
     if (fp->motion_id == ftCo_MS_CatchWait) {
         return true;
