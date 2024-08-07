@@ -297,7 +297,18 @@ float ftCo_800A1994(Fighter* fp)
     return ret;
 }
 
-/// #ftCo_800A1A24
+float ftCo_800A1A24(ftCo_Fighter* fp)
+{
+    float ret = (s8) fp->x1A8F > 0 ? (s8) fp->x1A8F / 127.0f
+                                   : (s8) fp->x1A8F * deg_to_rad;
+    if (ret > 1.0) {
+        return 1.0f;
+    }
+    if (ret < -1.0) {
+        return -1.0f;
+    }
+    return ret;
+}
 
 f32 ftCo_800A1AB4(Fighter* fp0, Fighter* fp1)
 {
