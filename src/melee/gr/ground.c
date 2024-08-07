@@ -2155,10 +2155,10 @@ void Ground_801C4338(void)
     }
 }
 
-void Ground_801C4368(f32* arg0, f32* arg1)
+void Ground_801C4368(f32* slope, f32* intercept)
 {
-    *arg0 = stage_info.x724;
-    *arg1 = stage_info.x724 - stage_info.x728;
+    *slope = stage_info.x724;
+    *intercept = stage_info.x724 - stage_info.x728;
 }
 
 void Ground_801C438C(f32 val)

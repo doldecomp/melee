@@ -369,7 +369,24 @@ void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2, float arg3)
     }
 }
 
-/// #ftCo_800A1F98
+bool ftCo_800A1F98(int x, float y)
+{
+    float slope;
+    float intercept;
+    PAD_STACK(1 * 4);
+
+    if (stage_info.internal_stage_id != ZEBES) {
+        return false;
+    }
+    Ground_801C4368(&slope, &intercept);
+    if (y < slope) {
+        return true;
+    }
+    if (y < intercept * x + slope) {
+        return true;
+    }
+    return false;
+}
 
 bool ftCo_800A2040(ftCo_Fighter* fp)
 {

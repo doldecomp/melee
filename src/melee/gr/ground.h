@@ -109,7 +109,7 @@
 /* 1C4210 */ s32 Ground_801C4210(void);
 /* 1C42AC */ void Ground_801C42AC(void);
 /* 1C4338 */ void Ground_801C4338(void);
-/* 1C4368 */ void Ground_801C4368(f32*, f32*);
+/* 1C4368 */ void Ground_801C4368(float* slope, float* intercept);
 /* 1C438C */ void Ground_801C438C(f32 val);
 /* 1C43A4 */ void Ground_801C43A4(UNK_T);
 /* 1C43C4 */ bool Ground_801C43C4(void*);
