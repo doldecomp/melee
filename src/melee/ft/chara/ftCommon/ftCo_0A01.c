@@ -254,24 +254,27 @@ float ftCo_800A17E4(ftCo_Fighter* fp)
     return result;
 }
 
-/// #ftCo_800A1874
+static inline float inlineA0(s8 val, float a, float b)
+{
+    float ret = val > 0 ? val / a : val * b;
+    return ret > +1.0 ? +1.0F : ret < -1.0 ? -1.0F : ret;
+}
+
+float ftCo_800A1874(ftCo_Fighter* fp)
+{
+    return inlineA0(fp->x1A8D, 127.0f, deg_to_rad);
+}
 
 float ftCo_800A1904(ftCo_Fighter* fp)
 {
     float ret = fp->x1A90 / 255.0;
-    if (ret > 1.0) {
-        ret = 1.0;
-    }
-    return ret;
+    return ret > 1.0 ? 1.0F : ret;
 }
 
 float ftCo_800A1948(ftCo_Fighter* fp)
 {
-    float result = fp->x1A91 / 255.0;
-    if (result > 1.0) {
-        result = 1.0;
-    }
-    return result;
+    float ret = fp->x1A91 / 255.0;
+    return ret > 1.0 ? 1.0F : ret;
 }
 
 HSD_Pad ftCo_800A198C(ftCo_Fighter* fp)
@@ -281,33 +284,12 @@ HSD_Pad ftCo_800A198C(ftCo_Fighter* fp)
 
 float ftCo_800A1994(Fighter* fp)
 {
-    s8 x1A8E = fp->x1A8E;
-    float ret;
-    if (x1A8E > 0) {
-        ret = x1A8E / 127.0f;
-    } else {
-        ret = x1A8E / 128.0f;
-    }
-    if (ret > +1.0) {
-        return +1.0f;
-    }
-    if (ret < -1.0) {
-        return -1.0f;
-    }
-    return ret;
+    return inlineA0(fp->x1A8E, 127.0f, 128.0f);
 }
 
 float ftCo_800A1A24(ftCo_Fighter* fp)
 {
-    float ret = (s8) fp->x1A8F > 0 ? (s8) fp->x1A8F / 127.0f
-                                   : (s8) fp->x1A8F * deg_to_rad;
-    if (ret > 1.0) {
-        return 1.0f;
-    }
-    if (ret < -1.0) {
-        return -1.0f;
-    }
-    return ret;
+    return inlineA0(fp->x1A8F, 127.0f, deg_to_rad);
 }
 
 f32 ftCo_800A1AB4(Fighter* fp0, Fighter* fp1)
