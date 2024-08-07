@@ -110,7 +110,7 @@
 /* 0A2350 */ static UNK_RET ftCo_800B1AB8(UNK_PARAMS);
 /* 0A2638 */ static UNK_RET ftCo_800B1DA0(UNK_PARAMS);
 /* 0A2788 */ static UNK_RET ftCo_800B1EF0(UNK_PARAMS);
-/* 0A2798 */ static UNK_RET ftCo_800A589C(UNK_PARAMS);
+/* 0A2798 */ static ftCo_Fighter* ftCo_800A589C(ftCo_Fighter* fp);
 /* 0A2840 */ static bool ftCo_800A5944(ftCo_Fighter* fp);
 /* 0A2A60 */ static UNK_RET ftCo_800B21C8(UNK_PARAMS);
 /* 0A2D50 */ static UNK_RET ftCo_800B24B8(UNK_PARAMS);

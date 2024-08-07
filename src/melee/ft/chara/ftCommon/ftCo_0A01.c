@@ -6,6 +6,7 @@
 
 #include "ftCo_0B3E.h"
 
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "gr/ground.h"
 #include "lb/lbcollision.h"
@@ -436,7 +437,27 @@ void ftCo_800A49B4(ftCo_Fighter* fp)
 
 /// #ftCo_800A53DC
 
-/// #ftCo_800A589C
+ftCo_Fighter* ftCo_800A589C(Fighter* fp)
+{
+    if (fp == NULL) {
+        return NULL;
+    }
+    {
+        ftCo_GObj* cur;
+        for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
+            if (fp->gobj != cur) {
+                ftCo_Fighter* cur_fp = GET_FIGHTER(cur);
+                if (fp->player_id == cur_fp->player_id) {
+                    if (cur_fp->x221F_b3) {
+                        return NULL;
+                    }
+                    return cur_fp;
+                }
+            }
+        }
+    }
+    return NULL;
+}
 
 bool ftCo_800A5908(ftCo_Fighter* fp)
 {
