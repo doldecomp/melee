@@ -85,14 +85,20 @@ class ProjectConfig:
         self.warn_missing_config: bool = False  # Warn on missing unit configuration
         self.warn_missing_source: bool = False  # Warn on missing source file
         self.rel_strip_partial: bool = True  # Generate PLFs with -strip_partial
-        self.rel_empty_file: Optional[
-            str
-        ] = None  # Object name for generating empty RELs
+        self.rel_empty_file: Optional[str] = (
+            None  # Object name for generating empty RELs
+        )
         self.shift_jis = (
             True  # Convert source files from UTF-8 to Shift JIS automatically
         )
         self.reconfig_deps: Optional[List[Path]] = (
             None  # Additional re-configuration dependency files
+        )
+        self.custom_build_rules: Optional[List[Dict[str, Any]]] = (
+            None  # Custom ninja build rules
+        )
+        self.custom_build_steps: Optional[Dict[str, List[Dict[str, Any]]]] = (
+            None  # Custom build steps, types are ["pre-compile", "post-compile", "post-link", "post-build"]
         )
 
         # Progress output and progress.json config
@@ -443,6 +449,48 @@ def generate_build_ninja(
     )
     n.newline()
 
+    n.comment("Custom project build rules (pre/post-processing)")
+    for rule in config.custom_build_rules or {}:
+        n.rule(
+            name=rule.get("name"),
+            command=rule.get("command"),
+            description=rule.get("description", None),
+            depfile=rule.get("depfile", None),
+            generator=rule.get("generator", False),
+            pool=rule.get("pool", None),
+            restat=rule.get("restat", False),
+            rspfile=rule.get("rspfile", None),
+            rspfile_content=rule.get("rspfile_content", None),
+            deps=rule.get("deps", None),
+        )
+        n.newline()
+        
+    def write_custom_step(step: str) -> List[str]:
+        implicit = []
+        if config.custom_build_steps and step in config.custom_build_steps:
+            n.comment(f"Custom build steps ({step})")
+            for custom_step in config.custom_build_steps[step]:
+                outputs = custom_step.get("outputs")
+
+                if isinstance(outputs, list):
+                    implicit.extend(outputs)
+                else:
+                    implicit.append(outputs)
+
+                n.build(
+                    outputs=outputs,
+                    rule=custom_step.get("rule"),
+                    inputs=custom_step.get("inputs", None),
+                    implicit=custom_step.get("implicit", None),
+                    order_only=custom_step.get("order_only", None),
+                    variables=custom_step.get("variables", None),
+                    implicit_outputs=custom_step.get("implicit_outputs", None),
+                    pool=custom_step.get("pool", None),
+                    dyndep=custom_step.get("dyndep", None),
+                )
+                n.newline()
+        return implicit
+
     n.comment("Host build")
     n.variable("host_cflags", "-I include -Wno-trigraphs")
     n.variable(
@@ -460,6 +508,9 @@ def generate_build_ninja(
         description="CXX $out",
     )
     n.newline()
+
+    # Add all build steps needed before we compile (e.g. processing assets)
+    precompile_implicit = write_custom_step("pre-compile")
 
     ###
     # Source files
@@ -511,15 +562,14 @@ def generate_build_ninja(
                     outputs=elf_path,
                     rule="link",
                     inputs=self.inputs,
-                    implicit=[self.ldscript, *mwld_implicit],
+                    implicit=[
+                        *precompile_implicit,
+                        self.ldscript,
+                        *mwld_implicit,
+                        *postcompile_implicit,
+                    ],
                     implicit_outputs=elf_map,
                     variables={"ldflags": elf_ldflags},
-                )
-                n.build(
-                    outputs=dol_path,
-                    rule="elf2dol",
-                    inputs=elf_path,
-                    implicit=dtk,
                 )
             else:
                 preplf_path = build_path / self.name / f"{self.name}.preplf"
@@ -760,6 +810,9 @@ def generate_build_ninja(
         if config.compilers_path and not os.path.exists(mw_path):
             sys.exit(f"Linker {mw_path} does not exist")
 
+        # Add all build steps needed before we link and after compiling objects
+        postcompile_implicit = write_custom_step("post-compile")
+
         ###
         # Link
         ###
@@ -767,6 +820,19 @@ def generate_build_ninja(
             step.write(n)
             link_outputs.append(step.output())
         n.newline()
+
+        # Add all build steps needed after linking and before GC/Wii native format generation
+        postlink_implicit = write_custom_step("post-link")
+
+        ###
+        # Generate DOL
+        ###
+        n.build(
+            outputs=link_steps[0].output(),
+            rule="elf2dol",
+            inputs=link_steps[0].partial_output(),
+            implicit=[*postlink_implicit, dtk],
+        )
 
         ###
         # Generate RELs
@@ -830,6 +896,9 @@ def generate_build_ninja(
             )
             n.newline()
 
+        # Add all build steps needed post-build (re-building archives and such)
+        postbuild_implicit = write_custom_step("post-build")
+
         ###
         # Helper rule for building all source files
         ###
@@ -867,7 +936,7 @@ def generate_build_ninja(
             outputs=ok_path,
             rule="check",
             inputs=config.check_sha_path,
-            implicit=[dtk, *link_outputs],
+            implicit=[dtk, *link_outputs, *postbuild_implicit],
         )
         n.newline()
 
@@ -967,7 +1036,7 @@ def generate_build_ninja(
             configure_script,
             python_lib,
             python_lib_dir / "ninja_syntax.py",
-            *(config.reconfig_deps or [])
+            *(config.reconfig_deps or []),
         ],
     )
     n.newline()
