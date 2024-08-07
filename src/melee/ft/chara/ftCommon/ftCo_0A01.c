@@ -1,4 +1,7 @@
 #include <platform.h>
+#include "ft/forward.h"
+#include "ftDonkey/forward.h"
+#include "ftKoopa/forward.h"
 #include "lb/forward.h"
 #include <dolphin/mtx/forward.h>
 
@@ -379,7 +382,23 @@ bool ftCo_800A2BD4(ftCo_Fighter* fp)
     return fp->facing_dir * (fp->x1ADC - fp->cur_pos.x) >= 0.0 ? true : false;
 }
 
-/// #ftCo_800A2C08
+bool ftCo_800A2C08(Fighter* fp)
+{
+    ftCo_Fighter* other_fp = fp->x1ACC;
+    if (other_fp == NULL) {
+        return true;
+    }
+    {
+        float pos_x_diff = other_fp->cur_pos.x - fp->cur_pos.x;
+        if (ABS(pos_x_diff) < 1.0f) {
+            return true;
+        }
+        if (pos_x_diff * fp->facing_dir >= 0.0) {
+            return true;
+        }
+        return false;
+    }
+}
 
 /// #ftCo_800A2C80
 
@@ -397,7 +416,32 @@ enum_t ftCo_800A3134(Fighter* fp)
     }
 }
 
-/// #ftCo_800A3180
+bool ftCo_800A3180(ftCo_Fighter* fp)
+{
+    if (fp->motion_id == ftCo_MS_CatchWait) {
+        return true;
+    }
+    if (fp->kind == FTKIND_DONKEY) {
+        if (fp->motion_id >= ftDk_MS_ThrowFWait0 &&
+            fp->motion_id <= ftDk_MS_ThrowFKneebend)
+        {
+            return true;
+        }
+    }
+    if (fp->kind == FTKIND_KOOPA || fp->kind == FTKIND_GKOOPS) {
+        if (fp->motion_id == ftKp_MS_SpecialSHit0_1) {
+            return true;
+        }
+    }
+    if (fp->kind == FTKIND_KIRBY) {
+        if (fp->motion_id >= ftKb_MS_SpecialNCapture0 &&
+            fp->motion_id <= ftKb_MS_EatTurnAir)
+        {
+            return true;
+        }
+    }
+    return false;
+}
 
 bool ftCo_800A3200(ftCo_Fighter* fp)
 {
@@ -637,7 +681,16 @@ bool ftCo_800A5A90(ftCo_Fighter* fp)
 
 /// #ftCo_800A949C
 
-/// #ftCo_800A963C
+void ftCo_800A963C(ftCo_Fighter* fp)
+{
+    PAD_STACK(4 * 14);
+    ftCo_800B46B8(fp, 0x81, 0x58);
+    ftCo_800B46B8(fp, 0x90, 0x58);
+    ftCo_800B46B8(fp, 0x88, 1);
+    ftCo_800B463C(fp, 4);
+    ftCo_800B46B8(fp, 0x90, 0x7F);
+    ftCo_800B463C(fp, 0x7F);
+}
 
 /// #ftCo_800A96B8
 

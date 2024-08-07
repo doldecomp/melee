@@ -1335,7 +1335,7 @@ struct Fighter {
     /* fp+1AC0 */ UNK_T x1AC0;
     /* fp+1AC4 */ UNK_T x1AC4;
     /* fp+1AC8 */ UNK_T x1AC8;
-    /* fp+1ACC */ UNK_T x1ACC;
+    /* fp+1ACC */ Fighter* x1ACC;
     /* fp+1AD0 */ UNK_T x1AD0;
     /* fp+1AD4 */ UNK_T x1AD4;
     /* fp+1AD8 */ UNK_T x1AD8;
