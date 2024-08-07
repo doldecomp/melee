@@ -3,6 +3,6 @@
 
 #include <placeholder.h>
 
-/* 206D10 */ UNK_RET grVenom_80206D10(UNK_PARAMS);
+/* 206D10 */ bool grVenom_80206D10(enum_t);
 
 #endif

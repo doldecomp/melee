@@ -8,8 +8,13 @@
 
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "gr/grbigblue.h"
+#include "gr/grcorneria.h"
+#include "gr/grinishie1.h"
 #include "gr/ground.h"
+#include "gr/grvenom.h"
 #include "lb/lbcollision.h"
+#include "mp/mplib.h"
 #include "pl/player.h"
 
 #include <math.h>
@@ -208,7 +213,23 @@ void ftCo_800A0DA4(Fighter* fp)
 
 /// #ftCo_800A0F00
 
-/// #ftCo_800A0FB0
+bool ftCo_800A0FB0(Vec3* arg0, int* arg1, int arg2, int arg3, int arg4,
+                   int arg5, int arg6, float arg7, float arg8, float arg9,
+                   float arg10, float arg11)
+{
+    volatile int sp8;
+
+    *arg1 = -1;
+    sp8 = 0;
+    {
+        int ret = mpLib_8004F008(arg0, arg1, arg2, arg3, arg4, arg5, arg6, 0,
+                                 arg7, arg8, arg9, arg10, arg11);
+        if (ret && ftCo_800A1B38(*arg1)) {
+            return false;
+        }
+        return ret;
+    }
+}
 
 /// #ftCo_800A101C
 
@@ -276,7 +297,15 @@ float ftCo_800A1994(Fighter* fp)
 
 /// #ftCo_800A1AB4
 
-/// #ftCo_800A1B38
+bool ftCo_800A1B38(enum_t arg0)
+{
+    if (grBigBlue_801EF844(arg0) || grInishie1_801FCAAC(arg0) ||
+        grCorneria_801E2D90(arg0) || grVenom_80206D10(arg0))
+    {
+        return true;
+    }
+    return false;
+}
 
 /// #ftCo_800A1BA8
 
