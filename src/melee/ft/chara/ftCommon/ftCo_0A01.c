@@ -9,6 +9,7 @@
 
 #include "ftCo_0B3E.h"
 
+#include "ft/ft_0877.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "gr/grbigblue.h"
@@ -215,7 +216,26 @@ void ftCo_800A0DA4(Fighter* fp)
     M2C_FIELD(temp_r28, float*, 0x568) = var_f29;
 }
 
-/// #ftCo_800A0F00
+bool ftCo_800A0F00(ftCo_GObj* gobj)
+{
+    struct Fighter_x1A88_t* data = (void*) &GET_FIGHTER(gobj)->x1A88;
+    PAD_STACK(4);
+    if (ft_80087A18(gobj)) {
+        /// @todo This matches if #ft_80087A80 returns an `int`.
+        int result = ft_80087A80(gobj);
+        if (result == 2) {
+            return 1;
+        }
+        if (result == 1) {
+            if (data->x7C % 240 > 120) {
+                return 1;
+            }
+            return 0;
+        }
+        return 0;
+    }
+    return 0;
+}
 
 bool ftCo_800A0FB0(Vec3* arg0, int* arg1, int arg2, int arg3, int arg4,
                    int arg5, int arg6, float arg7, float arg8, float arg9,

@@ -967,7 +967,9 @@ struct Fighter_x1A88_t {
     /*  +4C */ UNK_T x4C;
     /*  +50 */ UNK_T x50;
     /*  +54 */ Vec2 x54;
-    /*  +5C */ u8 x5C[0x554 - 0x5C];
+    /*  +5C */ u8 x5C[0x7C - 0x5C];
+    /*  +7C */ int x7C;
+    /*  +80 */ u8 x80[0x554 - 0x80];
     /* +554 */ union Fighter_x1A88_x544_t {
         struct {
             u8 x0_u8;

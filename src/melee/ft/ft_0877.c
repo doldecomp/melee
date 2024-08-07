@@ -133,7 +133,7 @@ s32 ft_80087A18(HSD_GObj* gobj)
     return false;
 }
 
-u8 ft_80087A80(HSD_GObj* gobj)
+s8 ft_80087A80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->smash_attrs.x2134_vibrateFrame;
