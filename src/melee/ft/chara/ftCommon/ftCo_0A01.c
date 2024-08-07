@@ -298,7 +298,11 @@ float ftCo_800A1994(Fighter* fp)
 
 /// #ftCo_800A1A24
 
-/// #ftCo_800A1AB4
+f32 ftCo_800A1AB4(Fighter* fp0, Fighter* fp1)
+{
+    return sqrtf(SQ(fp0->cur_pos.y - fp1->cur_pos.y) +
+                 SQ(fp0->cur_pos.x - fp1->cur_pos.x));
+}
 
 bool ftCo_800A1B38(enum_t arg0)
 {
