@@ -308,7 +308,30 @@ bool ftCo_800A1B38(enum_t arg0)
     return false;
 }
 
-/// #ftCo_800A1BA8
+bool ftCo_800A1BA8(ftCo_Fighter* fp)
+{
+    Fighter* other_fp = fp->x1ACC;
+    if (other_fp == NULL) {
+        return false;
+    }
+    {
+        Vec3 coll_vec;
+        PAD_STACK(2 * 4);
+        {
+            UNK_T sp14;
+            UNK_T sp10;
+            UNK_T spC;
+            if (fp->facing_dir > 0.0) {
+                return mpLib_800509B8(fp->cur_pos.x, fp->cur_pos.y,
+                                      other_fp->cur_pos.x, other_fp->cur_pos.y,
+                                      &coll_vec, &sp10, &spC, &sp14, -1, -1);
+            }
+            return mpLib_800501CC(fp->cur_pos.x, fp->cur_pos.y,
+                                  other_fp->cur_pos.x, other_fp->cur_pos.y,
+                                  &coll_vec, &sp10, &spC, &sp14, -1, -1);
+        }
+    }
+}
 
 bool ftCo_800A1C44(ftCo_Fighter* fp)
 {

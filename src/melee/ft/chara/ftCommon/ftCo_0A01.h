@@ -37,7 +37,7 @@
 /* 0A0740 */ UNK_RET ftCo_800A3844(UNK_PARAMS);
 /* 0A193C */ UNK_RET ftCo_800A4A40(UNK_PARAMS);
 /* 0A1AB4 */ float ftCo_800A1AB4(ftCo_Fighter* fp0, ftCo_Fighter* fp1);
-/* 0A1BA8 */ UNK_RET ftCo_800A1BA8(UNK_PARAMS);
+/* 0A1BA8 */ bool ftCo_800A1BA8(ftCo_Fighter* fp);
 /* 0A1C44 */ bool ftCo_800A1C44(ftCo_Fighter* fp);
 /* 0A1CA8 */ bool ftCo_800A1CA8(ftCo_Fighter* fp);
 /* 0A1D88 */ UNK_RET ftCo_800A4E8C(UNK_PARAMS);
