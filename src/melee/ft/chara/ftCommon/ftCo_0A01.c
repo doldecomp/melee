@@ -361,8 +361,8 @@ void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2, float arg3)
 {
     struct Fighter_x1A88_t* data = (void*) &fp->x1A88;
     if (fp->x1AE8 == 0) {
-        data->x54 = arg1;
-        data->x58 = arg2;
+        data->x54.x = arg1;
+        data->x54.y = arg2;
         data->x38 = arg3;
         ftCo_800A1CC4(ftCo_803C6594[stage_info.internal_stage_id],
                       &stage_info.cam_info, data);
@@ -404,7 +404,28 @@ bool ftCo_800A2170(Fighter* fp0, Fighter* fp1)
     return false;
 }
 
-/// #ftCo_800A21FC
+bool ftCo_800A21FC(ftCo_Fighter* fp)
+{
+    Vec3 vec;
+    mp_UnkStruct0* data0;
+    struct Fighter_x1A88_t* data1 = (void*) &fp->x1A88;
+    PAD_STACK(9 * 4);
+
+    if (fp->ground_or_air == GA_Air) {
+        return false;
+    }
+    data0 = mpIsland_8005AB54(fp->coll_data.floor.index);
+    if (data0 == NULL) {
+        return false;
+    }
+    vec.x = data1->x54.x;
+    vec.y = 5.0 + data1->x54.y;
+    vec.z = 0.0f;
+    if (mpIsland_8005AC14(&vec, -10.0f) == data0) {
+        return true;
+    }
+    return false;
+}
 
 /// #ftCo_800A229C
 

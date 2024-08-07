@@ -75,7 +75,7 @@
 /* 09EE94 */ static UNK_RET ftCo_800A1F98(UNK_PARAMS);
 /* 09EF9C */ static UNK_RET ftCo_800A20A0(UNK_PARAMS);
 /* 09F044 */ static UNK_RET ftCo_800AE7AC(UNK_PARAMS);
-/* 09F0F8 */ static UNK_RET ftCo_800A21FC(UNK_PARAMS);
+/* 09F0F8 */ static bool ftCo_800A21FC(ftCo_Fighter* fp);
 /* 09F198 */ static UNK_RET ftCo_800A229C(UNK_PARAMS);
 /* 09F324 */ static UNK_RET ftCo_800AEA8C(UNK_PARAMS);
 /* 09F588 */ static UNK_RET ftCo_800AECF0(UNK_PARAMS);
