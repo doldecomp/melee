@@ -156,7 +156,7 @@ Item_GObj* it_802CDE1C(Vec3* vec, Item_GObj* gobj)
             cur_fp = GET_FIGHTER(cur_fgobj);
             if ((cur_fp->x221F_b3 == false) &&
                 ((gm_8016B168() == false) || (fp == NULL) ||
-                 (cur_fp->x61B_team != fp->x61B_team)))
+                 (cur_fp->team != fp->team)))
             {
                 ftLib_800866DC(cur_fgobj, &sp20);
                 y_dist = vec->y - sp20.y;

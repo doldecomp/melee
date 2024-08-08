@@ -597,9 +597,7 @@ bool ftCo_800A3498(ftCo_Fighter* fp)
 
 /// #ftCo_800A3710
 
-/// #ftCo_800A3844
-
-bool ftCo_800A3844(Fighter* fp0, Fighter* fp1)
+bool ftCo_IsAlly(Fighter* fp0, Fighter* fp1)
 {
     if (fp0 == NULL) {
         return false;
@@ -611,7 +609,7 @@ bool ftCo_800A3844(Fighter* fp0, Fighter* fp1)
         return true;
     }
     if (gm_8016B168()) {
-        if (fp0->x61B_team == fp1->x61B_team) {
+        if (fp0->team == fp1->team) {
             return true;
         }
         return false;
@@ -619,7 +617,7 @@ bool ftCo_800A3844(Fighter* fp0, Fighter* fp1)
     if (gm_8016B14C()) {
         return false;
     }
-    if (fp0->x61B_team == fp1->x61B_team) {
+    if (fp0->team == fp1->team) {
         return true;
     }
     return false;

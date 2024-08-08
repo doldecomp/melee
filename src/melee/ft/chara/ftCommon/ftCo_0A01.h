@@ -34,7 +34,7 @@
 /* 0A0030 */ bool ftCo_800A3134(ftCo_Fighter* fp);
 /* 0A007C */ bool ftCo_IsGrabbing(ftCo_Fighter* fp);
 /* 0A00FC */ bool ftCo_800A3200(ftCo_Fighter* fp);
-/* 0A0740 */ bool ftCo_800A3844(ftCo_Fighter* fp0, ftCo_Fighter* fp1);
+/* 0A0740 */ bool ftCo_IsAlly(ftCo_Fighter* fp0, ftCo_Fighter* fp1);
 /* 0A193C */ UNK_RET ftCo_800A4A40(UNK_PARAMS);
 /* 0A1AB4 */ float ftCo_800A1AB4(ftCo_Fighter* fp0, ftCo_Fighter* fp1);
 /* 0A1BA8 */ bool ftCo_800A1BA8(ftCo_Fighter* fp);

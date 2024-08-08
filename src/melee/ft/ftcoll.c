@@ -839,7 +839,7 @@ void ftColl_80078A2C(Fighter_GObj* this_gobj)
             if (((!(victim_fp->x2219_b1)) &&
                  ((!victim_fp->x222A_flag.bits.b0) &&
                   ((gm_8016B168() == false) || (gm_8016B0D4() != false) ||
-                   ((u8) victim_fp->x61B_team != (u8) this_fp->x61B_team)) &&
+                   ((u8) victim_fp->team != (u8) this_fp->team)) &&
                   ((int) victim_fp->x1988 == 0) &&
                   ((int) victim_fp->x198C == 0) &&
                   (!(victim_fp->x221D_b6) &&
@@ -932,8 +932,8 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                 }
             if ((var_r4 != 0) || ((u8) this_fp->player_id != (u8) victim_fp->player_id)) {
                 if ((gm_8016B168() != false) && (gm_8016B0D4() == false) && !(((u8) victim_fp->x2225_b4))) {
-                    var_r0 = (victim_fp->x1064_thrownHitbox.owner != NULL) ? victim_fp->x119C_teamUnk : victim_fp->x61B_team;
-                    if ((u8) this_fp->x61B_team != var_r0) {
+                    var_r0 = (victim_fp->x1064_thrownHitbox.owner != NULL) ? victim_fp->x119C_teamUnk : victim_fp->team;
+                    if ((u8) this_fp->team != var_r0) {
                         goto block_16;
                     }
                 } else {
@@ -1364,7 +1364,7 @@ void ftColl_8007B8CC(Fighter* fp, Fighter_GObj* grabber_gobj)
 {
     Fighter* grabber_fp = GET_FIGHTER(grabber_gobj);
     fp->x1064_thrownHitbox.owner = grabber_gobj;
-    fp->x119C_teamUnk = grabber_fp->x61B_team;
+    fp->x119C_teamUnk = grabber_fp->team;
     fp->grabber_unk1 = grabber_fp->player_id;
 }
 

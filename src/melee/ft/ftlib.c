@@ -100,7 +100,7 @@ HSD_GObj* ftLib_80086198(HSD_GObj* gobj)
 
             // Skip if same team
             if (gm_8016B168() && fp != NULL &&
-                cur_fp->x61B_team == fp->x61B_team)
+                cur_fp->team == fp->team)
             {
                 continue;
             }
@@ -147,7 +147,7 @@ HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
         cur_fp = cur->user_data;
         // skip if same team
         if (cur_fp->x221F_b3 || (gm_8016B168() && fp != NULL &&
-                                 cur_fp->x61B_team == fp->x61B_team))
+                                 cur_fp->team == fp->team))
         {
             continue;
         }
@@ -193,7 +193,7 @@ HSD_GObj* ftLib_80086368(Vec3* v, HSD_GObj* gobj, float facing_dir)
 
         cur_fp = cur->user_data;
         if (cur_fp->x221F_b3 || (gm_8016B168() && fp != NULL &&
-                                 cur_fp->x61B_team == fp->x61B_team))
+                                 cur_fp->team == fp->team))
         {
             continue;
         }
@@ -250,7 +250,7 @@ float ftLib_800864A8(Vec3* v, HSD_GObj* gobj)
         {
             Fighter* cur_fp = cur->user_data;
             if (cur_fp->x221F_b3 || (gm_8016B168() && fp != NULL &&
-                                     cur_fp->x61B_team == fp->x61B_team))
+                                     cur_fp->team == fp->team))
             {
                 continue;
             }
@@ -645,7 +645,7 @@ void ftLib_80086E68(HSD_GObj* gobj)
 s32 ftLib_80086EB4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x61B_team;
+    return fp->team;
 }
 
 bool ftLib_80086EC0(HSD_GObj* gobj)

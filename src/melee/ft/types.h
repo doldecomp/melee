@@ -1093,7 +1093,7 @@ struct Fighter {
     /*  fp+618 */ u8 x618_player_id;
     /*  fp+619 */ u8 x619_costume_id;
     /*  fp+61A */ u8 x61A_controller_index;
-    /*  fp+61B */ u8 x61B_team;
+    /*  fp+61B */ u8 team;
     /*  fp+61C */ u8 x61C;
     /*  fp+61D */ u8 x61D;
     /*  fp+61E */ u8 filler_x61E[0x620 - 0x61E];
