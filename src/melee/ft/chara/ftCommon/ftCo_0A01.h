@@ -73,7 +73,7 @@
 /* 09EE38 */ static void ftCo_800A1F3C(ftCo_Fighter* fp, float arg1,
                                        float arg2, float arg3);
 /* 09EE94 */ static bool ftCo_800A1F98(int x, float y);
-/* 09EF9C */ static UNK_RET ftCo_800A20A0(UNK_PARAMS);
+/* 09EF9C */ static void ftCo_800A20A0(ftCo_Fighter* fp);
 /* 09F044 */ static UNK_RET ftCo_800AE7AC(UNK_PARAMS);
 /* 09F0F8 */ static bool ftCo_800A21FC(ftCo_Fighter* fp);
 /* 09F198 */ static UNK_RET ftCo_800A229C(UNK_PARAMS);

@@ -10,6 +10,7 @@
 
 #include "ftCo_0B3E.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -423,6 +424,28 @@ bool ftCo_800A2040(ftCo_Fighter* fp)
 }
 
 /// #ftCo_800A20A0
+
+void ftCo_800A20A0(ftCo_Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = (void*) &fp->x1A88;
+    PAD_STACK(2 * 4);
+
+    if (fp->x1ACC != NULL && fp->ground_or_air == GA_Ground) {
+        ftCo_Fighter* other_fp = data->x44;
+        float diff_y, diff_x;
+        diff_x = fp->cur_pos.x - other_fp->cur_pos.x;
+        diff_y = fp->cur_pos.y - other_fp->cur_pos.y;
+        if (sqrtf__Ff(SQ(diff_x) + SQ(diff_y)) <
+            2.0f * M2C_FIELD(Fighter_804D64FC, float**, 0x20)[fp->kind])
+        {
+            data->xF8_b6 = true;
+        } else {
+            data->xF8_b6 = false;
+        }
+    } else {
+        data->xF8_b6 = false;
+    }
+}
 
 bool ftCo_800A2170(Fighter* fp0, Fighter* fp1)
 {
