@@ -519,7 +519,33 @@ bool ftCo_800A28D0(Fighter* fp, f32 arg1)
     return false;
 }
 
-/// #ftCo_800A2998
+bool ftCo_800A2998(Fighter* fp, float arg1)
+{
+    if (fp->ground_or_air == GA_Air) {
+        return false;
+    }
+    {
+        mp_UnkStruct0* data = mpIsland_8005AB54(fp->coll_data.floor.index);
+        if (data == NULL) {
+            return false;
+        }
+        {
+            float diff_x8, diff_x14;
+            diff_x14 = ABS(data->x14 - fp->cur_pos.x);
+            diff_x8 = ABS(data->x8 - fp->cur_pos.x);
+            if (diff_x14 < diff_x8) {
+                if (diff_x14 < 5.0 * arg1) {
+                    return true;
+                }
+                return false;
+            }
+            if (diff_x8 < 5.0 * arg1) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 /// #ftCo_800A2A70
 
