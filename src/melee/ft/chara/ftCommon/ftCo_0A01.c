@@ -1,5 +1,6 @@
 #include <platform.h>
 #include "ft/forward.h"
+#include "ftCommon/forward.h"
 #include "ftDonkey/forward.h"
 #include "ftKoopa/forward.h"
 #include "lb/forward.h"
@@ -554,7 +555,42 @@ bool ftCo_800A3200(ftCo_Fighter* fp)
 
 /// #ftCo_800A3234
 
-/// #ftCo_800A3498
+static inline bool inlineB0(ftCo_Fighter* fp)
+{
+    if (fp->coll_data.env_flags & MPCOLL_WALL) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool ftCo_800A3498(ftCo_Fighter* fp)
+{
+    struct Fighter_x1A88_t* temp_r4 = (void*) &fp->x1A88;
+    if (fp->x1B82_b5) {
+        return false;
+    }
+    if (fp->ground_or_air != GA_Air) {
+        return false;
+    }
+    if (fp->pos_delta.y > 0.0) {
+        return false;
+    }
+    if (inlineB0(fp)) {
+        return true;
+    }
+    if (fp->kind == FTKIND_LUIGI) {
+        if (fp->pos_delta.y < 0.0) {
+            return true;
+        }
+    } else if (temp_r4->x54.y >
+               temp_r4->x568 + (fp->coll_data.cur_topn.y +
+                                fp->coll_data.xA4_ecbCurrCorrect.bottom.y))
+    {
+        return true;
+    }
+    return false;
+}
 
 /// #ftCo_800A3554
 
