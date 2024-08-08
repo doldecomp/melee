@@ -48,9 +48,9 @@ void mpIsland_8005A728(void)
     int v20;               // r26
     int v21;               // r27
     float v22;             // fp31
-    int* v22_2;
+    float* v22_2;
     int* v23; // r19
-    int* v24_2;
+    float* v24_2;
     mpisland* v24;           // r3
     mpisland* v25;           // r25
     int v26;                 // r4
@@ -229,9 +229,9 @@ void mpIsland_8005A728(void)
     v22_2 = v24_2;
 }
 
-mp_UnkStruct0* mpIsland_8005AB54(int arg0)
+mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
 {
-    if (mpLib_80054ED8(arg0)) {
+    if (mpLib_80054ED8(surface_idx)) {
         mp_UnkStruct2* v2 = mpLib_8004D174();
         bool done;
         mp_UnkStruct0* cur;
@@ -239,7 +239,7 @@ mp_UnkStruct0* mpIsland_8005AB54(int arg0)
         for (cur = mpIsland_80458E88.next; cur; cur = cur->next) {
             int j, j_next;
             for (j = cur->x24; j != -1; j = j_next) {
-                if (j == arg0) {
+                if (j == surface_idx) {
                     return cur;
                 }
 

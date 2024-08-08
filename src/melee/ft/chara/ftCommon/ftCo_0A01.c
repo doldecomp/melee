@@ -22,6 +22,7 @@
 #include "lb/lbcollision.h"
 #include "mp/mpisland.h"
 #include "mp/mplib.h"
+#include "mp/types.h"
 #include "pl/player.h"
 
 #include <math.h>
@@ -470,7 +471,30 @@ bool ftCo_800A21FC(ftCo_Fighter* fp)
 
 /// #ftCo_800A2718
 
-/// #ftCo_800A28D0
+bool ftCo_800A28D0(Fighter* fp, f32 arg1)
+{
+    if (fp->ground_or_air == GA_Air) {
+        return false;
+    }
+    {
+        mp_UnkStruct0* data = mpIsland_8005AB54(fp->coll_data.floor.index);
+        if (data == NULL) {
+            return false;
+        }
+        {
+            float x_offset;
+            if (fp->facing_dir > 0.0) {
+                x_offset = ABS(data->x14 - fp->cur_pos.x);
+            } else {
+                x_offset = ABS(data->x8 - fp->cur_pos.x);
+            }
+            if (x_offset < (5.0 * arg1)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 /// #ftCo_800A2998
 
