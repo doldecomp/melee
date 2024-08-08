@@ -26,7 +26,7 @@
 /* 16B0B4 */ bool gm_8016B0B4(void);
 /* 16B0D4 */ bool gm_8016B0D4(void);
 /* 16B0FC */ bool gm_8016B0FC(void);
-/* 16B14C */ /* static */ UNK_RET gm_8016B14C(UNK_PARAMS);
+/* 16B14C */ bool gm_8016B14C(void);
 /* 16B168 */ bool gm_8016B168(void);
 /* 16B1C4 */ bool gm_8016B1C4(void);
 /* 16B1D8 */ bool gm_8016B1D8(void);

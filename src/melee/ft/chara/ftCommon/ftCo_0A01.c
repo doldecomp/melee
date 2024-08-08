@@ -13,6 +13,7 @@
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "gm/gm_1601.h"
 #include "gr/grbigblue.h"
 #include "gr/grcorneria.h"
 #include "gr/grinishie1.h"
@@ -597,6 +598,32 @@ bool ftCo_800A3498(ftCo_Fighter* fp)
 /// #ftCo_800A3710
 
 /// #ftCo_800A3844
+
+bool ftCo_800A3844(Fighter* fp0, Fighter* fp1)
+{
+    if (fp0 == NULL) {
+        return false;
+    }
+    if (fp1 == NULL) {
+        return false;
+    }
+    if (fp0->player_id == fp1->player_id) {
+        return true;
+    }
+    if (gm_8016B168()) {
+        if (fp0->x61B_team == fp1->x61B_team) {
+            return true;
+        }
+        return false;
+    }
+    if (gm_8016B14C()) {
+        return false;
+    }
+    if (fp0->x61B_team == fp1->x61B_team) {
+        return true;
+    }
+    return false;
+}
 
 /// #ftCo_800A3908
 
