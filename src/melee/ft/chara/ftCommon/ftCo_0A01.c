@@ -855,7 +855,22 @@ bool ftCo_800A5A90(ftCo_Fighter* fp)
 
 /// #ftCo_800A8940
 
-/// #ftCo_800A8DE4
+void ftCo_800A8DE4(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = (void*) &fp->x1A88;
+    PAD_STACK(0x20);
+    if (!fp->x1B82_b2) {
+        data->xFA_b2 = true;
+        data->x5C = 10000.0f;
+        if (fp->facing_dir > 0.0) {
+            if (!ftCo_800A4038(fp, true) && !ftCo_800A3908(fp, true)) {
+                ftCo_800A4038(fp, false);
+            }
+        } else if (!ftCo_800A3908(fp, true) && !ftCo_800A4038(fp, true)) {
+            ftCo_800A3908(fp, false);
+        }
+    }
+}
 
 /// #ftCo_800A8EB0
 

@@ -90,10 +90,10 @@
 /* 0A04D8 */ static UNK_RET ftCo_800AFC40(UNK_PARAMS);
 /* 0A060C */ static UNK_RET ftCo_800A3710(UNK_PARAMS);
 /* 0A06D4 */ static UNK_RET ftCo_800AFE3C(UNK_PARAMS);
-/* 0A0804 */ static UNK_RET ftCo_800A3908(UNK_PARAMS);
+/* 0A0804 */ static bool ftCo_800A3908(ftCo_Fighter* fp, bool);
 /* 0A0990 */ static UNK_RET ftCo_800B00F8(UNK_PARAMS);
 /* 0A0D74 */ static UNK_RET ftCo_800B04DC(UNK_PARAMS);
-/* 0A0F34 */ static UNK_RET ftCo_800A4038(UNK_PARAMS);
+/* 0A0F34 */ static bool ftCo_800A4038(ftCo_Fighter* fp, bool);
 /* 0A0FF8 */ static UNK_RET ftCo_800B0760(UNK_PARAMS);
 /* 0A11B0 */ static UNK_RET ftCo_800B0918(UNK_PARAMS);
 /* 0A138C */ static void ftCo_800B0AF4(ftCo_Fighter* fp);
@@ -134,7 +134,7 @@
 /* 0A8210 */ static UNK_RET ftCo_800A8210(UNK_PARAMS);
 /* 0A866C */ static UNK_RET ftCo_800A866C(UNK_PARAMS);
 /* 0A8940 */ static UNK_RET ftCo_800A8940(UNK_PARAMS);
-/* 0A8DE4 */ static UNK_RET ftCo_800A8DE4(UNK_PARAMS);
+/* 0A8DE4 */ static void ftCo_800A8DE4(ftCo_Fighter* fp);
 /* 0A8EB0 */ static UNK_RET ftCo_800A8EB0(UNK_PARAMS);
 /* 0A92CC */ static UNK_RET ftCo_800A92CC(UNK_PARAMS);
 /* 0A949C */ static UNK_RET ftCo_800A949C(UNK_PARAMS);

@@ -967,9 +967,19 @@ struct Fighter_x1A88_t {
     /*  +4C */ UNK_T x4C;
     /*  +50 */ UNK_T x50;
     /*  +54 */ Vec2 x54;
-    /*  +5C */ u8 x5C[0x7C - 0x5C];
+    /*  +5C */ float x5C;
+    /*  +60 */ u8 x60[0x7C - 0x60];
     /*  +7C */ int x7C;
-    /*  +80 */ u8 x80[0x554 - 0x80];
+    /*  +80 */ u8 x80[0xFA - 0x80];
+    /*  +FA:0 */ u8 xFA_b0 : 1;
+    /*  +FA:1 */ u8 xFA_b1 : 1;
+    /*  +FA:2 */ u8 xFA_b2 : 1;
+    /*  +FA:3 */ u8 xFA_b3 : 1;
+    /*  +FA:4 */ u8 xFA_b4 : 1;
+    /*  +FA:5 */ u8 xFA_b5 : 1;
+    /*  +FA:6 */ u8 xFA_b6 : 1;
+    /*  +FA:7 */ u8 xFA_b7 : 1;
+    /*  +80 */ u8 xFB[0x554 - 0xFB];
     /* +554 */ union Fighter_x1A88_x544_t {
         struct {
             u8 x0_u8;
