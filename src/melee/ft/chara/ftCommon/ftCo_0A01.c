@@ -995,7 +995,33 @@ void ftCo_800A963C(ftCo_Fighter* fp)
 
 /// #ftCo_800AA844
 
-/// #ftCo_800AABC8
+static inline bool inlineD0(ftCo_Fighter* fp)
+{
+    if (fp->motion_id == 0xF5 || fp->motion_id == 0xF6) {
+        return true;
+    }
+    return false;
+}
+
+void ftCo_800AABC8(ftCo_Fighter* fp)
+{
+    PAD_STACK(2 * 4);
+    if (inlineD0(fp)) {
+        ftCo_800B46B8(fp, 0x81, 0);
+        ftCo_800B46B8(fp, 0x80, 0);
+        ftCo_800B46B8(fp, 0x8E, 1);
+        ftCo_800B46B8(fp, 0x91, 0x7F);
+        ftCo_800B46B8(fp, 0x8E, 1);
+        ftCo_800B46B8(fp, 0x80, 0);
+        ftCo_800B463C(fp, 0x7F);
+    } else {
+        int a, b;
+        ftCo_800AA320(fp, &a, &b);
+        ftCo_800B46B8(fp, 0x81, 0);
+        ftCo_800B4778(fp, 0xC2, a & 0xFF, b & 0xFF);
+        ftCo_800B463C(fp, 0x7F);
+    }
+}
 
 /// #ftCo_800AACD0
 

@@ -142,10 +142,10 @@
 /* 0A96B8 */ static UNK_RET ftCo_800A96B8(UNK_PARAMS);
 /* 0A9904 */ static UNK_RET ftCo_800A9904(UNK_PARAMS);
 /* 0A9CB4 */ static UNK_RET ftCo_800A9CB4(UNK_PARAMS);
-/* 0AA320 */ static UNK_RET ftCo_800AA320(UNK_PARAMS);
+/* 0AA320 */ static void ftCo_800AA320(ftCo_Fighter* fp, int*, int*);
 /* 0AA42C */ static UNK_RET ftCo_800AA42C(UNK_PARAMS);
 /* 0AA844 */ static UNK_RET ftCo_800AA844(UNK_PARAMS);
-/* 0AABC8 */ static UNK_RET ftCo_800AABC8(UNK_PARAMS);
+/* 0AABC8 */ static void ftCo_800AABC8(ftCo_Fighter* fp);
 /* 0AACD0 */ static UNK_RET ftCo_800AACD0(UNK_PARAMS);
 /* 0AAF48 */ static UNK_RET ftCo_800AAF48(UNK_PARAMS);
 /* 0AB224 */ static UNK_RET ftCo_800AB224(UNK_PARAMS);
