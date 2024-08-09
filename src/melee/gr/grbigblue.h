@@ -6,6 +6,6 @@
 #include <placeholder.h>
 
 /* 1EF7D8 */ void grBigBlue_801EF7D8(Vec3*);
-/* 1EF844 */ UNK_RET grBigBlue_801EF844(UNK_PARAMS);
+/* 1EF844 */ bool grBigBlue_801EF844(enum_t);
 
 #endif

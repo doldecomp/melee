@@ -2,7 +2,9 @@
 #define GALE01_093C3C
 
 #include "ftCommon/forward.h"
+#include "it/forward.h"
 
+/* 093CF4 */ bool ftCo_80094150(ftCo_GObj* arg0, Item_GObj* arg1);
 /* 094334 */ bool ftCo_80094790(HSD_GObj* gobj);
 /* 0943BC */ void ftCo_80094818(HSD_GObj* gobj, bool);
 /* 0945B8 */ void ftCo_ItemGet_Anim(ftCo_GObj* gobj);

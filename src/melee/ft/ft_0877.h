@@ -29,7 +29,7 @@ typedef struct Kirby_Unk {
 /* 0879D8 */ s32 ft_800879D8(Fighter_GObj* gobj);
 /* 0879F8 */ s32 ft_800879F8(Fighter_GObj* gobj);
 /* 087A18 */ s32 ft_80087A18(Fighter_GObj* gobj);
-/* 087A80 */ u8 ft_80087A80(Fighter_GObj* gobj);
+/* 087A80 */ s8 ft_80087A80(Fighter_GObj* gobj);
 /* 087A8C */ float ft_80087A8C(Fighter_GObj* gobj);
 /* 087A98 */ s32 ft_80087A98(Fighter_GObj* gobj);
 /* 087AA4 */ u8 ft_80087AA4(Fighter_GObj* gobj);
@@ -38,8 +38,8 @@ typedef struct Kirby_Unk {
 /* 087AEC */ s32 ft_80087AEC(Fighter_GObj* gobj);
 /* 087B34 */ s32 ft_80087B34(Fighter_GObj* gobj);
 /* 087BAC */ void ft_80087BAC(Fighter_GObj*, s32);
-/* 087BC0 */ void ft_80087BC0(Fighter_GObj*, s8);
-/* 087BEC */ void ft_80087BEC(Fighter_GObj*, u8);
+/* 087BC0 */ void ft_80087BC0(Fighter_GObj*, int);
+/* 087BEC */ void ft_80087BEC(Fighter_GObj*, int);
 /* 087C1C */ s32 ft_80087C1C(void);
 /* 087C58 */ s32 ft_80087C58(Fighter_GObj* gobj);
 /* 087C64 */ void ft_80087C64(Fighter_GObj*, s32);

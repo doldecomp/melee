@@ -133,7 +133,7 @@ s32 ft_80087A18(HSD_GObj* gobj)
     return false;
 }
 
-u8 ft_80087A80(HSD_GObj* gobj)
+s8 ft_80087A80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->smash_attrs.x2134_vibrateFrame;
@@ -231,18 +231,16 @@ void ft_80087BAC(HSD_GObj* gobj, s32 arg1)
     fp->x2228_b5 = arg1;
 }
 
-void ft_80087BC0(HSD_GObj* gobj, s8 arg1)
+void ft_80087BC0(HSD_GObj* gobj, int arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    u64 var0 = fp->x1A98;
-    ftCo_800A101C(fp, arg1, var0, fp->x1A9C);
+    ftCo_800A101C(fp, arg1, fp->x1A88.x10, fp->x1A88.x14);
 }
 
-void ft_80087BEC(HSD_GObj* gobj, u8 arg1)
+void ft_80087BEC(HSD_GObj* gobj, int arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    u64 var0 = fp->x1A94;
-    ftCo_800A101C(fp, var0, arg1, fp->x1A9C);
+    ftCo_800A101C(fp, fp->x1A88.xC, arg1, fp->x1A88.x14);
 }
 
 s32 ft_80087C1C(void)

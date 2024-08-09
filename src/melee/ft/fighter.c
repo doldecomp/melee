@@ -724,7 +724,7 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct S_TEMP1* argdata)
     }
 
     fp->x619_costume_id = costume_id;
-    fp->x61B_team = Player_GetTeam(fp->player_id);
+    fp->team = Player_GetTeam(fp->player_id);
     fp->gobj = gobj;
     fp->ft_data = gFtDataList[fp->kind];
     ftCo_800D0FA0(gobj);

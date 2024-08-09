@@ -96,8 +96,8 @@ extern char* ftCo_804D3B7C;
 
 void ftCo_800B462C(ftCo_Fighter* fp)
 {
-    u32* temp_r3 = &fp->x1A88;
-    M2C_FIELD(temp_r3, u32**, 0x554) = &temp_r3[0x115];
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    data->x554.x0_p = &data->x454;
 }
 
 /// #ftCo_800B463C
@@ -105,7 +105,7 @@ void ftCo_800B462C(ftCo_Fighter* fp)
 void ftCo_800B463C(ftCo_Fighter* fp, int arg1)
 {
     struct Fighter_x1A88_t* temp_r31 = (struct Fighter_x1A88_t*) &fp->x1A88;
-    if (fp->x1FDC >= temp_r31->x554.x0_u32) {
+    if (fp->x1A88.x554.x0_u32 >= temp_r31->x554.x0_u32) {
         OSReport("command script buffer over flow!\n");
         __assert("ftcmdscript.c", 501, "0");
     }
@@ -127,17 +127,17 @@ void ftCo_800B463C(ftCo_Fighter* fp, int arg1)
 
 void ftCo_800B4A78(Fighter* fp)
 {
-    u32* x1A88 = &fp->x1A88;
-    M2C_FIELD(x1A88, u32*, 0) = 0;
-    M2C_FIELD(x1A88, s8*, 4) = 0;
-    M2C_FIELD(x1A88, s8*, 5) = 0;
-    M2C_FIELD(x1A88, s8*, 6) = 0;
-    M2C_FIELD(x1A88, s8*, 7) = 0;
-    M2C_FIELD(x1A88, s8*, 9) = 0;
-    M2C_FIELD(x1A88, s8*, 8) = 0;
-    M2C_FIELD(x1A88, s32*, 0x450) = 0;
-    M2C_FIELD(x1A88, s32*, 0x44C) = 0;
-    M2C_FIELD(x1A88, UNK_T*, 0x554) = &x1A88[0x115];
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    data->x0 = 0;
+    data->x4 = 0;
+    data->x5 = 0;
+    data->x6 = 0;
+    data->x7 = 0;
+    data->x9 = 0;
+    data->x8 = 0;
+    data->x450 = 0;
+    data->x44C = 0;
+    data->x554.x0_p = &data->x454;
 }
 
 /// #ftCo_800B4AB0
@@ -177,9 +177,9 @@ void ftCo_800B4A78(Fighter* fp)
 void ftCo_800B92D4(ftCo_Fighter* fp)
 {
     PAD_STACK(4 * 4);
-    if (fp->x1ACC == NULL) {
-        fp->x1ACC = NULL;
-        fp->x1AA0 = fp->x1AA4;
+    if (fp->x1A88.x44 == NULL) {
+        fp->x1A88.x44 = NULL;
+        fp->x1A88.x18 = fp->x1A88.x1C;
         ftCo_800A0C8C(fp);
     } else {
         ftCo_800B46B8(fp, 0x94, 0x7F);

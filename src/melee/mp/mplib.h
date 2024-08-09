@@ -19,7 +19,7 @@
 /* 04E090 */ enum_t mpLib_8004E090(int idx, Vec3*, float*, u32*, Vec3* normal);
 /* 04E398 */ bool mpLib_8004E398(int, float*, int, int, int, float);
 /* 04F008 */ bool mpLib_8004F008(Vec3*, int*, int, int, int, int, int, int,
-                                 float, float, float, float, int, float);
+                                 float, float, float, float, float);
 /* 04F8A4 */ UNK_RET mpLib_8004F8A4(UNK_PARAMS);
 /* 0501CC */ bool mpLib_800501CC(float surface_normal_y,
                                  float surface_normal_x, float right_x,

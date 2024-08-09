@@ -33,7 +33,6 @@
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 
-/* 093CF4 */ static bool ftCo_80094150(HSD_GObj* arg0, HSD_GObj* arg1);
 /* 094020 */ static bool ftCo_8009447C(ftCo_GObj* gobj, HSD_GObj* item_gobj);
 /* 094238 */ static void ftCo_80094694(HSD_GObj* gobj, FtMotionId msid,
                                        bool loop);
@@ -104,7 +103,7 @@ HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
     } else {
         offset0 = &pickup->air_light_offset;
     }
-    if (ftCo_800A2040(fp) && (signed) fp->x1A94 == 28) {
+    if (ftCo_800A2040(fp) && (signed) fp->x1A88.xC == 28) {
         return NULL;
     }
     {
