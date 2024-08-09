@@ -943,6 +943,19 @@ bool ftCo_800A5A90(ftCo_Fighter* fp)
 
 /// #ftCo_800A80E4
 
+void ftCo_800A80E4(Fighter* fp)
+{
+    Fighter* other_fp = fp->x1ACC;
+    if (other_fp != NULL && (fp->ground_or_air != GA_Air)) {
+        Vec3 vec;
+        if (!(ftCo_800A1AB4(fp, other_fp) > 50.0) &&
+            ftCo_800A6700(fp, &other_fp->cur_pos, &vec))
+        {
+            ftCo_800A1F3C(fp, vec.x, vec.y, 5.0F);
+        }
+    }
+}
+
 /// #ftCo_800A8210
 
 /// #ftCo_800A866C

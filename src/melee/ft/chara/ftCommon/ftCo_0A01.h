@@ -9,6 +9,13 @@
 #include <common_structs.h>
 #include <placeholder.h>
 
+struct _m2c_stack_ftCo_800A80E4 {
+    /* 0x00 */ char pad_0[0xC];
+    /* 0x0C */ float f;
+    /* 0x0C */ Vec3 vec;
+    /* 0x18 */ char pad_18[0x14 - 0x8];
+}; /* size = 0x28 */
+
 /* 09D4F0 */ UNK_RET ftCo_800A05F4(UNK_PARAMS);
 /* 09D694 */ UNK_RET ftCo_800A0798(UNK_PARAMS);
 /* 09DB88 */ void ftCo_800A0C8C(ftCo_Fighter* fp);
@@ -124,13 +131,13 @@
 /* 0A5F4C */ static UNK_RET ftCo_800A5F4C(UNK_PARAMS);
 /* 0A61D8 */ static UNK_RET ftCo_800A61D8(UNK_PARAMS);
 /* 0A648C */ static UNK_RET ftCo_800A648C(UNK_PARAMS);
-/* 0A6700 */ static UNK_RET ftCo_800A6700(UNK_PARAMS);
+/* 0A6700 */ static bool ftCo_800A6700(ftCo_Fighter* fp, Vec3*, Vec3*);
 /* 0A6A98 */ static UNK_RET ftCo_800A6A98(UNK_PARAMS);
 /* 0A6D2C */ static UNK_RET ftCo_800A6D2C(UNK_PARAMS);
 /* 0A6FC4 */ static UNK_RET ftCo_800A6FC4(UNK_PARAMS);
 /* 0A75DC */ static UNK_RET ftCo_800A75DC(UNK_PARAMS);
 /* 0A7AAC */ static UNK_RET ftCo_800A7AAC(UNK_PARAMS);
-/* 0A80E4 */ static UNK_RET ftCo_800A80E4(UNK_PARAMS);
+/* 0A80E4 */ static void ftCo_800A80E4(ftCo_Fighter* fp);
 /* 0A8210 */ static UNK_RET ftCo_800A8210(UNK_PARAMS);
 /* 0A866C */ static UNK_RET ftCo_800A866C(UNK_PARAMS);
 /* 0A8940 */ static UNK_RET ftCo_800A8940(UNK_PARAMS);
