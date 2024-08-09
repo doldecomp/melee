@@ -958,7 +958,10 @@ typedef struct FtDynamicBones {
 } FtDynamicBones;
 
 struct Fighter_x1A88_t {
-    /*   +0 */ u8 x0[0x38];
+    /*   +0 */ u8 x0[0x18];
+    /*  +18 */ int x18;
+    /*  +1C */ int x1C;
+    /*  +20 */ u8 x20[0x38 - 0x20];
     /*  +38 */ float x38;
     /*  +3C */ UNK_T x3C;
     /*  +40 */ UNK_T x40;

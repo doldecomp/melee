@@ -1094,7 +1094,30 @@ void ftCo_800AABC8(ftCo_Fighter* fp)
 
 /// #ftCo_800ACD5C
 
-/// #ftCo_800AD42C
+void ftCo_800AD42C(ftCo_Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = (void*) fp->x1A88;
+    if (!ftCo_800A3554(fp, 1.0f)) {
+        data->x18 = data->x1C;
+        ftCo_800B463C(fp, 0x7F);
+        return;
+    }
+    if (fp->ground_or_air == GA_Air) {
+        ftCo_800B46B8(fp, 0x80, 0);
+        ftCo_800B46B8(fp, 0x81, 0);
+        ftCo_800B463C(fp, 0x7F);
+        return;
+    }
+    ftCo_800B46B8(fp, 0x80, 0);
+    ftCo_800B46B8(fp, 0x81, 0);
+    ftCo_800B463C(fp, 8);
+    ftCo_800B46B8(fp, 0x8E, 1);
+    ftCo_800B463C(fp, 7);
+    ftCo_800B46B8(fp, 0x8E, p_ftCommonData->x74 + 1);
+    ftCo_800B463C(fp, 8);
+    ftCo_800B46B8(fp, 0x8E, 5);
+    ftCo_800B463C(fp, 0x7F);
+}
 
 /// #ftCo_800AD54C
 

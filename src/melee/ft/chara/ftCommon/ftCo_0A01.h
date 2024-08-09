@@ -63,7 +63,7 @@
 /* 09D7EC */ static UNK_RET ftCo_800A08F0(UNK_PARAMS);
 /* 09D9F0 */ static UNK_RET ftCo_800A0AF4(UNK_PARAMS);
 /* 09DBAC */ static void ftCo_800A0CB0(ftCo_Fighter* fp);
-/* 09DCC4 */ static UNK_RET ftCo_800AD42C(UNK_PARAMS);
+/* 09DCC4 */ static void ftCo_800AD42C(ftCo_Fighter* fp);
 /* 09DDE4 */ static UNK_RET ftCo_800AD54C(UNK_PARAMS);
 /* 09DDFC */ static bool ftCo_800A0F00(ftCo_GObj* gobj);
 /* 09E094 */ static UNK_RET ftCo_800AD7FC(UNK_PARAMS);
@@ -86,7 +86,7 @@
 /* 0A0024 */ static UNK_RET ftCo_800AF78C(UNK_PARAMS);
 /* 0A0130 */ static UNK_RET ftCo_800A3234(UNK_PARAMS);
 /* 0A0394 */ static bool ftCo_800A3498(ftCo_Fighter* fp);
-/* 0A0450 */ static UNK_RET ftCo_800A3554(UNK_PARAMS);
+/* 0A0450 */ static bool ftCo_800A3554(ftCo_Fighter* fp, float);
 /* 0A04D8 */ static UNK_RET ftCo_800AFC40(UNK_PARAMS);
 /* 0A060C */ static UNK_RET ftCo_800A3710(UNK_PARAMS);
 /* 0A06D4 */ static UNK_RET ftCo_800AFE3C(UNK_PARAMS);
