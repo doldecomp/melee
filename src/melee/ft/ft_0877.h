@@ -38,8 +38,8 @@ typedef struct Kirby_Unk {
 /* 087AEC */ s32 ft_80087AEC(Fighter_GObj* gobj);
 /* 087B34 */ s32 ft_80087B34(Fighter_GObj* gobj);
 /* 087BAC */ void ft_80087BAC(Fighter_GObj*, s32);
-/* 087BC0 */ void ft_80087BC0(Fighter_GObj*, s8);
-/* 087BEC */ void ft_80087BEC(Fighter_GObj*, u8);
+/* 087BC0 */ void ft_80087BC0(Fighter_GObj*, int);
+/* 087BEC */ void ft_80087BEC(Fighter_GObj*, int);
 /* 087C1C */ s32 ft_80087C1C(void);
 /* 087C58 */ s32 ft_80087C58(Fighter_GObj* gobj);
 /* 087C64 */ void ft_80087C64(Fighter_GObj*, s32);

@@ -24,7 +24,7 @@ struct _m2c_stack_ftCo_800A80E4 {
                                 int arg4, int arg5, int arg6, float arg7,
                                 float arg8, float arg9, float arg10,
                                 float arg11);
-/* 09DF18 */ void ftCo_800A101C(Fighter*, s8, s8, s32);
+/* 09DF18 */ void ftCo_800A101C(Fighter*, int, int, int);
 /* 09E6E0 */ float ftCo_800A17E4(Fighter* fp);
 /* 09E770 */ float ftCo_800A1874(Fighter* fp);
 /* 09E800 */ float ftCo_800A1904(Fighter* fp);
