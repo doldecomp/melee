@@ -1352,7 +1352,7 @@ struct Fighter {
     /* fp+1A92 */ u8 x1A92;
     /* fp+1A93 */ u8 x1A93;
     /* fp+1A94 */ u32 x1A94;
-    /* fp+1A98 */ u32 x1A98;
+    /* fp+1A98 */ uint x1A98;
     /* fp+1A9C */ s32 x1A9C;
     /* fp+1AA0 */ int x1AA0;
     /* fp+1AA4 */ int x1AA4;

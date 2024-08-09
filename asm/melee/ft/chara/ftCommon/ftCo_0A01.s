@@ -11534,8 +11534,8 @@
 /* 800AA340 000A6F20  80 03 1A 98 */	lwz r0, 0x1a98(r3)
 /* 800AA344 000A6F24  28 00 00 09 */	cmplwi r0, 0x9
 /* 800AA348 000A6F28  4D 81 00 20 */	bgtlr
-/* 800AA34C 000A6F2C  3C 60 80 3C */	lis r3, ftCo_803C5C70@ha
-/* 800AA350 000A6F30  38 63 5C 70 */	addi r3, r3, ftCo_803C5C70@l
+/* 800AA34C 000A6F2C  3C 60 80 3C */	lis r3, jtbl_803C5C70@ha
+/* 800AA350 000A6F30  38 63 5C 70 */	addi r3, r3, jtbl_803C5C70@l
 /* 800AA354 000A6F34  54 00 10 3A */	slwi r0, r0, 2
 /* 800AA358 000A6F38  7C 03 00 2E */	lwzx r0, r3, r0
 /* 800AA35C 000A6F3C  7C 09 03 A6 */	mtctr r0
@@ -22742,7 +22742,7 @@
 	.rel ftCo_800A96B8, .L_800A9778
 .endobj ftCo_803C5C10
 
-.obj ftCo_803C5C70, global
+.obj jtbl_803C5C70, global
 	.rel ftCo_800AA320, .L_800AA364
 	.rel ftCo_800AA320, .L_800AA378
 	.rel ftCo_800AA320, .L_800AA38C
@@ -22753,7 +22753,7 @@
 	.rel ftCo_800AA320, .L_800AA3F0
 	.rel ftCo_800AA320, .L_800AA404
 	.rel ftCo_800AA320, .L_800AA418
-.endobj ftCo_803C5C70
+.endobj jtbl_803C5C70
 
 .obj ftCo_803C5C98, global
 	.rel ftCo_800B2790, .L_800B2AB0

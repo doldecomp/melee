@@ -989,7 +989,56 @@ void ftCo_800A963C(ftCo_Fighter* fp)
 
 /// #ftCo_800A9CB4
 
-/// #ftCo_800AA320
+void ftCo_800AA320(ftCo_Fighter* fp, int* arg1, int* arg2)
+{
+    if (fp->kind == FTKIND_NANA) {
+        *arg1 = 0x40;
+        *arg2 = 0x7F;
+        return;
+    }
+    switch (fp->x1A98) {
+    case 0:
+        *arg1 = 1;
+        *arg2 = 0x43;
+        return;
+    case 1:
+        *arg1 = 2;
+        *arg2 = 0x48;
+        return;
+    case 2:
+        *arg1 = 2;
+        *arg2 = 0x4D;
+        return;
+    case 3:
+        *arg1 = 2;
+        *arg2 = 0x52;
+        return;
+    case 4:
+        *arg1 = 2;
+        *arg2 = 0x57;
+        return;
+    case 5:
+        *arg1 = 2;
+        *arg2 = 0x5C;
+        return;
+    case 6:
+        *arg1 = 4;
+        *arg2 = 0x61;
+        return;
+    case 7:
+        *arg1 = 4;
+        *arg2 = 0x6B;
+        return;
+    case 8:
+        *arg1 = 8;
+        *arg2 = 0x75;
+        return;
+    case 9:
+        *arg1 = 8;
+        *arg2 = 0x7F;
+        return;
+    }
+}
 
 /// #ftCo_800AA42C
 
