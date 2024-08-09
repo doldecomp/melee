@@ -1010,12 +1010,17 @@ struct Fighter_x1A88_t {
     /*  +FA:5 */ u8 xFA_b5 : 1;
     /*  +FA:6 */ u8 xFA_b6 : 1;
     /*  +FA:7 */ u8 xFA_b7 : 1;
-    /*  +80 */ u8 xFB[0x554 - 0xFB];
+    /*  +80 */ u8 xFB[0x44C - 0xFB];
+    /* +454 */ UNK_T x44C;
+    /* +454 */ UNK_T x450;
+    /* +454 */ uint x454;
+    /* +458 */ u8 x458[0x554 - 0x458];
     /* +554 */ union Fighter_x1A88_x544_t {
         struct {
             u8 x0_u8;
         };
         uint x0_u32;
+        void* x0_p;
     } x554;
     /* +558 */ u8 x558[0x568 - 0x558];
     /* +568 */ float x568;

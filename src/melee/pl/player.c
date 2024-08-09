@@ -791,7 +791,7 @@ void Player_SetPlayerId(int slot, s8 player_id)
     player->player_id = player_id;
 }
 
-s8 Player_GetCpuLevel(int slot)
+int Player_GetCpuLevel(int slot)
 {
     s8 cpu_level;
     StaticPlayer* player;
@@ -817,7 +817,7 @@ void Player_SetPlayerAndEntityCpuLevel(int slot, int cpu_level)
     }
 }
 
-s8 Player_GetCpuType(int slot)
+int Player_GetCpuType(int slot)
 {
     s8 cpu_type;
     StaticPlayer* player;
