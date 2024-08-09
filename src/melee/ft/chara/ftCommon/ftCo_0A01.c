@@ -173,8 +173,8 @@ static inline float inlineA0(float x)
 
 void ftCo_800A0CB0(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = (void*) &fp->x1A88;
-    if (fp->x1B04 % 600 == 0) {
+    struct Fighter_x1A88_t* data = &fp->x1A88_t;
+    if (fp->x1A88_t.x7C % 600 == 0) {
         float rand = 1.0F - inlineA0(HSD_Randf());
         switch (fp->kind) {
         case FTKIND_DONKEY:
@@ -213,10 +213,10 @@ void ftCo_800A0DA4(Fighter* fp)
     float var_f30;
     float var_f31;
     int var_r30;
-    u32* temp_r28;
+    struct Fighter_x1A88_t* temp_r28;
 
     var_r31 = fp;
-    temp_r28 = &fp->x1A88;
+    temp_r28 = &fp->x1A88_t;
     var_r30 = 0;
     var_f29 = 0.0f;
     var_f31 = 0.0f;
@@ -271,7 +271,7 @@ void ftCo_800A0DA4(Fighter* fp)
 
 bool ftCo_800A0F00(ftCo_GObj* gobj)
 {
-    struct Fighter_x1A88_t* data = (void*) &GET_FIGHTER(gobj)->x1A88;
+    struct Fighter_x1A88_t* data = &GET_FIGHTER(gobj)->x1A88_t;
     PAD_STACK(4);
     if (ft_80087A18(gobj)) {
         /// @todo This matches if #ft_80087A80 returns an `int`.
@@ -313,10 +313,10 @@ bool ftCo_800A0FB0(Vec3* arg0, int* arg1, int arg2, int arg3, int arg4,
 float ftCo_800A17E4(ftCo_Fighter* fp)
 {
     float result;
-    if ((s8) fp->x1A8C > 0) {
-        result = (s8) fp->x1A8C / 127.0f;
+    if ((s8) fp->x1A88_t.x4 > 0) {
+        result = (s8) fp->x1A88_t.x4 / 127.0f;
     } else {
-        result = (s8) fp->x1A8C * 0.0078125f;
+        result = (s8) fp->x1A88_t.x4 * 0.0078125f;
     }
     if (result > 1.0) {
         return 1.0;
@@ -432,7 +432,7 @@ bool ftCo_800A1CA8(ftCo_Fighter* fp)
 
 void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2, float arg3)
 {
-    struct Fighter_x1A88_t* data = (void*) &fp->x1A88;
+    struct Fighter_x1A88_t* data = &fp->x1A88_t;
     if (fp->x1AE8 == 0) {
         data->x54.x = arg1;
         data->x54.y = arg2;
@@ -476,7 +476,7 @@ bool ftCo_800A2040(ftCo_Fighter* fp)
 
 void ftCo_800A20A0(ftCo_Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = (void*) &fp->x1A88;
+    struct Fighter_x1A88_t* data = &fp->x1A88_t;
     PAD_STACK(2 * 4);
 
     if (fp->x1ACC != NULL && fp->ground_or_air == GA_Ground) {
@@ -520,7 +520,7 @@ bool ftCo_800A21FC(ftCo_Fighter* fp)
 {
     Vec3 vec;
     mp_UnkStruct0* data0;
-    struct Fighter_x1A88_t* data1 = (void*) &fp->x1A88;
+    struct Fighter_x1A88_t* data1 = &fp->x1A88_t;
     PAD_STACK(9 * 4);
 
     if (fp->ground_or_air == GA_Air) {
@@ -689,7 +689,7 @@ static inline bool inlineC0(ftCo_Fighter* fp)
 
 bool ftCo_800A3498(ftCo_Fighter* fp)
 {
-    struct Fighter_x1A88_t* temp_r4 = (void*) &fp->x1A88;
+    struct Fighter_x1A88_t* temp_r4 = &fp->x1A88_t;
     if (fp->x1B82_b5) {
         return false;
     }
@@ -1047,7 +1047,7 @@ void ftCo_800A80E4(Fighter* fp)
 
 void ftCo_800A8DE4(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = (void*) &fp->x1A88;
+    struct Fighter_x1A88_t* data = &fp->x1A88_t;
     PAD_STACK(0x20);
     if (!fp->x1B82_b2) {
         data->xFA_b2 = true;
@@ -1196,7 +1196,7 @@ static inline bool inlineE0(ftCo_Fighter* fp)
 
 void ftCo_800AC30C(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = (void*) &fp->x1A88;
+    struct Fighter_x1A88_t* data = &fp->x1A88_t;
     PAD_STACK(4 * 4);
     if (!inlineE0(fp)) {
         data->x18 = data->x1C;

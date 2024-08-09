@@ -103,7 +103,7 @@ HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
     } else {
         offset0 = &pickup->air_light_offset;
     }
-    if (ftCo_800A2040(fp) && (signed) fp->x1A94 == 28) {
+    if (ftCo_800A2040(fp) && (signed) fp->x1A88_t.xC == 28) {
         return NULL;
     }
     {
