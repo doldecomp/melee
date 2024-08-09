@@ -95,7 +95,7 @@ struct _m2c_stack_ftCo_800A80E4 {
 /* 0A0394 */ static bool ftCo_800A3498(ftCo_Fighter* fp);
 /* 0A0450 */ static bool ftCo_800A3554(ftCo_Fighter* fp, float);
 /* 0A04D8 */ static UNK_RET ftCo_800AFC40(UNK_PARAMS);
-/* 0A060C */ static UNK_RET ftCo_800A3710(UNK_PARAMS);
+/* 0A060C */ static bool ftCo_800A3710(ftCo_Fighter* fp);
 /* 0A06D4 */ static UNK_RET ftCo_800AFE3C(UNK_PARAMS);
 /* 0A0804 */ static bool ftCo_800A3908(ftCo_Fighter* fp, bool);
 /* 0A0990 */ static UNK_RET ftCo_800B00F8(UNK_PARAMS);

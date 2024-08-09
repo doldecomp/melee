@@ -33,7 +33,6 @@
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 
-/* 093CF4 */ static bool ftCo_80094150(HSD_GObj* arg0, HSD_GObj* arg1);
 /* 094020 */ static bool ftCo_8009447C(ftCo_GObj* gobj, HSD_GObj* item_gobj);
 /* 094238 */ static void ftCo_80094694(HSD_GObj* gobj, FtMotionId msid,
                                        bool loop);

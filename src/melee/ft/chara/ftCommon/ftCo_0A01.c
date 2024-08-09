@@ -9,6 +9,7 @@
 #include "ftCo_0A01.h"
 
 #include "ftCo_0B3E.h"
+#include "ftCo_ItemGet.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
@@ -20,6 +21,7 @@
 #include "gr/grinishie1.h"
 #include "gr/ground.h"
 #include "gr/grvenom.h"
+#include "it/item.h"
 #include "lb/lbcollision.h"
 #include "mp/mpisland.h"
 #include "mp/mplib.h"
@@ -713,7 +715,36 @@ bool ftCo_800A3498(ftCo_Fighter* fp)
 
 /// #ftCo_800A3554
 
-/// #ftCo_800A3710
+bool ftCo_800A3710(ftCo_Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88_t;
+    Fighter* other_fp = fp->x1A88_t.x4C;
+    if (!fp->x1A88_t.xF9_b7) {
+        return false;
+    }
+    {
+        if (other_fp == NULL) {
+            return false;
+        }
+        if (Item_IsGrabbable(M2C_FIELD(data, HSD_GObj**, 4)) == 0) {
+            data->x4C = NULL;
+            return false;
+        }
+        if (fp->ground_or_air == GA_Air) {
+            return false;
+        }
+        if (fp->item_gobj != NULL) {
+            return false;
+        }
+        if (!ftCo_800A2170(fp, other_fp)) {
+            return false;
+        }
+        if (ftCo_80094150(fp->gobj, M2C_FIELD(other_fp, HSD_GObj**, 4))) {
+            return true;
+        }
+        return false;
+    }
+}
 
 bool ftCo_IsAlly(Fighter* fp0, Fighter* fp1)
 {
