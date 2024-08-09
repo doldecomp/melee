@@ -128,7 +128,26 @@ extern UNK_T* ftCo_803C6594;
 
 /// #ftCo_800A0384
 
-/// #ftCo_800A0508
+void ftCo_800A0508(ftCo_Fighter* fp)
+{
+    ftCo_800B46B8(fp, 0x80, 0);
+    ftCo_800B46B8(fp, 0x81, 0);
+    ftCo_800B463C(fp, 7);
+    ftCo_800B46B8(fp, 0x8E, 1);
+    ftCo_800B463C(fp, 8);
+
+    /// @todo Shared code with #ftCo_800A963C?
+    ftCo_800B46B8(fp, 0x8E, 0x1E);
+    ftCo_800B46B8(fp, 0x91, 0x50);
+    ftCo_800B46B8(fp, 0x81, 0x7F);
+    ftCo_800B463C(fp, 9);
+    ftCo_800B46B8(fp, 0x8E, 1);
+    ftCo_800B463C(fp, 0xA);
+
+    ftCo_800B46B8(fp, 0x81, 0);
+    ftCo_800B463C(fp, 0x7F);
+    ftCo_800B463C(fp, 0x7F);
+}
 
 /// #ftCo_800A05F4
 

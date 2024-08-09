@@ -58,7 +58,7 @@
 /* 09D06C */ static UNK_RET ftCo_800AC7D4(UNK_PARAMS);
 /* 09D280 */ static UNK_RET ftCo_800A0384(UNK_PARAMS);
 /* 09D3DC */ static UNK_RET ftCo_800ACB44(UNK_PARAMS);
-/* 09D404 */ static UNK_RET ftCo_800A0508(UNK_PARAMS);
+/* 09D404 */ static void ftCo_800A0508(ftCo_Fighter* fp);
 /* 09D5F4 */ static UNK_RET ftCo_800ACD5C(UNK_PARAMS);
 /* 09D7EC */ static UNK_RET ftCo_800A08F0(UNK_PARAMS);
 /* 09D9F0 */ static UNK_RET ftCo_800A0AF4(UNK_PARAMS);
