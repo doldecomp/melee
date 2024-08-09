@@ -958,15 +958,22 @@ typedef struct FtDynamicBones {
 } FtDynamicBones;
 
 struct Fighter_x1A88_t {
-    /*   +0 */ UNK_T x0;
-    /*   +4 */ int x4;
-    /*   +8 */ UNK_T x8;
+    /*   +0 */ HSD_Pad x0;
+    /*   +4 */ u8 x4;
+    /*   +5 */ u8 x5;
+    /*   +6 */ u8 x6;
+    /*   +7 */ u8 x7;
+    /*   +8 */ u8 x8;
+    /*   +9 */ u8 x9;
+    /*   +A */ u8 xA;
+    /*   +B */ u8 xB;
     /*   +C */ int xC;
     /*  +10 */ int x10;
     /*  +14 */ int x14;
     /*  +18 */ int x18;
     /*  +1C */ int x1C;
-    /*  +20 */ u8 x20[0x38 - 0x20];
+    /*  +20 */ u8 x20[0x34 - 0x20];
+    /*  +34 */ float x34;
     /*  +38 */ float x38;
     /*  +3C */ UNK_T x3C;
     /*  +40 */ UNK_T x40;
@@ -1353,10 +1360,7 @@ struct Fighter {
     /* fp+1A6C */ float x1A6C;
     /* fp+1A70 */ Vec3 x1A70;
     /* fp+1A7C */ Vec3 x1A7C;
-    /// @todo Remove anonymous struct
-    /* fp+1A88 */ union {
-        struct Fighter_x1A88_t x1A88_t;
-    };
+    /* fp+x1A88 */ struct Fighter_x1A88_t x1A88;
     /* fp+2004 */ int x2004;
     /* fp+2008 */ s32 x2008;
     /* fp+200C */ s32 x200C;

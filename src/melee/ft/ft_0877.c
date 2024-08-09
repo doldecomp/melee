@@ -234,15 +234,15 @@ void ft_80087BAC(HSD_GObj* gobj, s32 arg1)
 void ft_80087BC0(HSD_GObj* gobj, s8 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    u64 var0 = fp->x1A88_t.x10;
-    ftCo_800A101C(fp, arg1, var0, fp->x1A88_t.x14);
+    u64 var0 = fp->x1A88.x10;
+    ftCo_800A101C(fp, arg1, var0, fp->x1A88.x14);
 }
 
 void ft_80087BEC(HSD_GObj* gobj, u8 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    u64 var0 = fp->x1A88_t.xC;
-    ftCo_800A101C(fp, var0, arg1, fp->x1A88_t.x14);
+    u64 var0 = fp->x1A88.xC;
+    ftCo_800A101C(fp, var0, arg1, fp->x1A88.x14);
 }
 
 s32 ft_80087C1C(void)
