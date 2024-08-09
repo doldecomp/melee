@@ -1082,7 +1082,40 @@ void ftCo_800AABC8(ftCo_Fighter* fp)
 
 /// #ftCo_800ABBA8
 
-/// #ftCo_800AC30C
+static inline bool inlineE0(ftCo_Fighter* fp)
+{
+    enum_t temp_r0 = fp->motion_id;
+    bool ret;
+    if (temp_r0 == 224) {
+        ret = 1;
+    } else if (temp_r0 == 227) {
+        ret = 1;
+    } else if ((temp_r0 >= 266) && (temp_r0 <= 270)) {
+        ret = 1;
+    } else {
+        ret = 0;
+    }
+    return ret;
+}
+
+void ftCo_800AC30C(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = (void*) &fp->x1A88;
+    PAD_STACK(4 * 4);
+    if (!inlineE0(fp)) {
+        data->x18 = data->x1C;
+        ftCo_800B463C(fp, 0x7F);
+        return;
+    }
+    if (data->x7C % 3 == 0 && !(data->x10 * 0.1F < HSD_Randf())) {
+        if (fp->x1A8C < 0) {
+            ftCo_800B46B8(fp, 0x80, 0x7F);
+        } else {
+            ftCo_800B46B8(fp, 0x80, 0x81);
+        }
+        ftCo_800B463C(fp, 0x7F);
+    }
+}
 
 /// #ftCo_800AC434
 
