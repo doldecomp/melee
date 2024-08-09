@@ -13,6 +13,7 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
+#include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "gm/gm_1601.h"
@@ -21,6 +22,7 @@
 #include "gr/grinishie1.h"
 #include "gr/ground.h"
 #include "gr/grvenom.h"
+#include "gr/stage.h"
 #include "it/item.h"
 #include "lb/lbcollision.h"
 #include "mp/mpisland.h"
@@ -813,7 +815,57 @@ void ftCo_800A49B4(ftCo_Fighter* fp)
 
 /// #ftCo_800A50D4
 
-/// #ftCo_800A5294
+static inline bool inlineF0(ftCo_Fighter* fp, ftCo_Fighter* fp1)
+{
+    float y, x;
+    struct Fighter_x1A88_t* data = &fp->x1A88_t;
+
+    y = fp1->cur_pos.y;
+    x = fp1->cur_pos.x;
+    if (x < Stage_GetBlastZoneLeftOffset() + data->half_width ||
+        x > Stage_GetBlastZoneRightOffset() - data->half_width ||
+        y < Stage_GetBlastZoneBottomOffset() + data->half_height ||
+        y > Stage_GetBlastZoneTopOffset() - data->half_height)
+    {
+        return true;
+    }
+    return false;
+}
+
+static inline bool inlineF1(ftCo_Fighter* fp)
+{
+    Fighter_GObj* gobj = fp->gobj;
+    if (fp->x221F_b3 || fp->x2224_b2 || ftCo_800A0F00(gobj) ||
+        ftLib_8008732C(gobj))
+    {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+ftCo_Fighter* ftCo_800A5294(ftCo_Fighter* fp, int player_id)
+{
+    PAD_STACK(2 * 4);
+    if (fp == NULL) {
+        return NULL;
+    }
+    {
+        ftCo_Fighter* cur_fp;
+        HSD_GObj* cur;
+        for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
+            if (fp->gobj != cur) {
+                cur_fp = GET_FIGHTER(cur);
+                if (!inlineF0(fp, cur_fp)) {
+                    if (!inlineF1(cur_fp) && cur_fp->player_id == player_id) {
+                        return cur_fp;
+                    }
+                }
+            }
+        }
+    }
+    return NULL;
+}
 
 /// #ftCo_800A53DC
 

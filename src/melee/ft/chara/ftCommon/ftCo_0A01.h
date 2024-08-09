@@ -115,7 +115,8 @@ struct _m2c_stack_ftCo_800A80E4 {
 /* 0A1D10 */ static UNK_RET ftCo_800B1478(UNK_PARAMS);
 /* 0A1FD0 */ static UNK_RET ftCo_800A50D4(UNK_PARAMS);
 /* 0A2068 */ static UNK_RET ftCo_800B17D0(UNK_PARAMS);
-/* 0A2190 */ static UNK_RET ftCo_800A5294(UNK_PARAMS);
+/* 0A2190 */ static ftCo_Fighter* ftCo_800A5294(ftCo_Fighter* fp,
+                                                int player_id);
 /* 0A22D8 */ static UNK_RET ftCo_800A53DC(UNK_PARAMS);
 /* 0A2350 */ static UNK_RET ftCo_800B1AB8(UNK_PARAMS);
 /* 0A2638 */ static UNK_RET ftCo_800B1DA0(UNK_PARAMS);
