@@ -162,58 +162,31 @@ void ftCo_800A0C8C(ftCo_Fighter* fp)
     ftCo_800B463C(fp, 127);
 }
 
-static inline float inlineC1(float x)
+static inline float inlineA0(float x)
 {
     return x * SQ(x);
 }
 
-/// #ftCo_800A0CB0
 void ftCo_800A0CB0(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = (void*) &fp->x1A88;
     if (fp->x1B04 % 600 == 0) {
-        float rand = 1.0F - inlineC1(HSD_Randf());
+        float rand = 1.0F - inlineA0(HSD_Randf());
         switch (fp->kind) {
-        case 0xB:
-            goto block_13;
+        case FTKIND_DONKEY:
+        case FTKIND_KOOPA:
+            data->x56C = 9.0 * rand;
+            return;
+        case FTKIND_GKOOPS:
+            data->x56C = 18.0 * rand;
+            return;
+        case FTKIND_NANA:
+            data->x56C = 1.0 * rand;
+            return;
         default:
-            if (fp->kind >= 0xB) {
-                goto block_9;
-            }
-            if (fp->kind == 0x4) {
-                goto block_14;
-            }
-            if (fp->kind >= 0x4) {
-                goto block_7;
-            }
-            if (fp->kind >= 0x3) {
-                goto block_11;
-            }
-            goto block_14;
+            data->x56C = 4.0 * rand;
+            return;
         }
-    block_7:
-        if (fp->kind >= 0x6) {
-            goto block_14;
-        }
-        goto block_11;
-    block_9:
-        if (fp->kind == 0x1F) {
-            goto block_12;
-        }
-        goto block_14;
-    block_11:
-        data->x56C = 9.0 * rand;
-        return;
-    block_12:
-        data->x56C = 18.0 * rand;
-        return;
-    block_13:
-        data->x56C = 1.0 * rand;
-        return;
-    block_14:
-        data->x56C = 4.0 * rand;
-        // block_15:
-        return;
     }
 }
 
@@ -350,7 +323,7 @@ float ftCo_800A17E4(ftCo_Fighter* fp)
     return result;
 }
 
-static inline float inlineA0(s8 val, float a, float b)
+static inline float inlineB0(s8 val, float a, float b)
 {
     float ret = val > 0 ? val / a : val * b;
     return ret > +1.0 ? +1.0F : ret < -1.0 ? -1.0F : ret;
@@ -358,7 +331,7 @@ static inline float inlineA0(s8 val, float a, float b)
 
 float ftCo_800A1874(ftCo_Fighter* fp)
 {
-    return inlineA0(fp->x1A8D, 127.0f, deg_to_rad);
+    return inlineB0(fp->x1A8D, 127.0f, deg_to_rad);
 }
 
 float ftCo_800A1904(ftCo_Fighter* fp)
@@ -380,12 +353,12 @@ HSD_Pad ftCo_800A198C(ftCo_Fighter* fp)
 
 float ftCo_800A1994(Fighter* fp)
 {
-    return inlineA0(fp->x1A8E, 127.0f, 128.0f);
+    return inlineB0(fp->x1A8E, 127.0f, 128.0f);
 }
 
 float ftCo_800A1A24(ftCo_Fighter* fp)
 {
-    return inlineA0(fp->x1A8F, 127.0f, deg_to_rad);
+    return inlineB0(fp->x1A8F, 127.0f, deg_to_rad);
 }
 
 f32 ftCo_800A1AB4(Fighter* fp0, Fighter* fp1)
@@ -701,7 +674,7 @@ bool ftCo_800A3200(ftCo_Fighter* fp)
 
 /// #ftCo_800A3234
 
-static inline bool inlineB0(ftCo_Fighter* fp)
+static inline bool inlineC0(ftCo_Fighter* fp)
 {
     if (fp->coll_data.env_flags & MPCOLL_WALL) {
         return true;
@@ -722,7 +695,7 @@ bool ftCo_800A3498(ftCo_Fighter* fp)
     if (fp->pos_delta.y > 0.0) {
         return false;
     }
-    if (inlineB0(fp)) {
+    if (inlineC0(fp)) {
         return true;
     }
     if (fp->kind == FTKIND_LUIGI) {
