@@ -1004,8 +1004,9 @@ struct Fighter_x1A88_t {
     } x554;
     /* +558 */ u8 x558[0x568 - 0x558];
     /* +568 */ float x568;
+    /* +56C */ float x56C;
 };
-STATIC_ASSERT(sizeof(struct Fighter_x1A88_t) == 0x56C);
+STATIC_ASSERT(sizeof(struct Fighter_x1A88_t) == 0x570);
 
 struct Fighter {
     /*    fp+0 */ HSD_GObj* gobj;
@@ -1372,7 +1373,9 @@ struct Fighter {
     /* fp+1AE0 */ UNK_T x1AE0;
     /* fp+1AE4 */ UNK_T x1AE4;
     /* fp+1AE8 */ int x1AE8;
-    /* fp+1AEC */ u8 x1AEC[0x1B82 - 0x1AEC];
+    /* fp+1AEC */ u8 x1AEC[0x1B04 - 0x1AEC];
+    /* fp+1B04 */ int x1B04;
+    /* fp+1B08 */ u8 x1B08[0x1B82 - 0x1B08];
     /* fp+1B82:0 */ u8 x1B82_b0 : 1;
     /* fp+1B82:1 */ u8 x1B82_b1 : 1;
     /* fp+1B82:2 */ u8 x1B82_b2 : 1;

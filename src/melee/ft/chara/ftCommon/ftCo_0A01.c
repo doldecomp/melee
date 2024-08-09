@@ -162,7 +162,60 @@ void ftCo_800A0C8C(ftCo_Fighter* fp)
     ftCo_800B463C(fp, 127);
 }
 
+static inline float inlineC1(float x)
+{
+    return x * SQ(x);
+}
+
 /// #ftCo_800A0CB0
+void ftCo_800A0CB0(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = (void*) &fp->x1A88;
+    if (fp->x1B04 % 600 == 0) {
+        float rand = 1.0F - inlineC1(HSD_Randf());
+        switch (fp->kind) {
+        case 0xB:
+            goto block_13;
+        default:
+            if (fp->kind >= 0xB) {
+                goto block_9;
+            }
+            if (fp->kind == 0x4) {
+                goto block_14;
+            }
+            if (fp->kind >= 0x4) {
+                goto block_7;
+            }
+            if (fp->kind >= 0x3) {
+                goto block_11;
+            }
+            goto block_14;
+        }
+    block_7:
+        if (fp->kind >= 0x6) {
+            goto block_14;
+        }
+        goto block_11;
+    block_9:
+        if (fp->kind == 0x1F) {
+            goto block_12;
+        }
+        goto block_14;
+    block_11:
+        data->x56C = 9.0 * rand;
+        return;
+    block_12:
+        data->x56C = 18.0 * rand;
+        return;
+    block_13:
+        data->x56C = 1.0 * rand;
+        return;
+    block_14:
+        data->x56C = 4.0 * rand;
+        // block_15:
+        return;
+    }
+}
 
 void ftCo_800A0DA4(Fighter* fp)
 {
