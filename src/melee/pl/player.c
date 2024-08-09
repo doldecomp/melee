@@ -801,7 +801,7 @@ s8 Player_GetCpuLevel(int slot)
     return cpu_level;
 }
 
-void Player_SetPlayerAndEntityCpuLevel(int slot, s8 cpu_level)
+void Player_SetPlayerAndEntityCpuLevel(int slot, int cpu_level)
 {
     StaticPlayer* player;
     int i;
