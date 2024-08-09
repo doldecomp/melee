@@ -49,7 +49,7 @@ typedef struct _StaticPlayer {
     /*0x47*/ u8 team; /// 00 = red, 01 = blue, 02 = green
     /*0x48*/ s8 player_id;
     /*0x49*/ u8 cpu_level;
-    /*0x4A*/ s8 cpu_type;
+    /*0x4A*/ u8 cpu_type;
     /*0x4B*/ s8 handicap;
 
     /*0x4C*/ s8 unk4C;
@@ -197,7 +197,7 @@ void Player_SetPlayerId(int slot, s8 player_id);
 s8 Player_GetCpuLevel(int slot);
 void Player_SetPlayerAndEntityCpuLevel(int slot, int cpu_level);
 s8 Player_GetCpuType(int slot);
-void Player_SetPlayerAndEntityCpuType(int slot, s8 cpu_type);
+void Player_SetPlayerAndEntityCpuType(int slot, int cpu_type);
 int Player_GetHandicap(int slot);
 void Player_SetHandicap(int slot, s8 handicap);
 f32 Player_GetUnk50(int slot);

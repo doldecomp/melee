@@ -827,7 +827,7 @@ s8 Player_GetCpuType(int slot)
     return cpu_type;
 }
 
-void Player_SetPlayerAndEntityCpuType(int slot, s8 cpu_type)
+void Player_SetPlayerAndEntityCpuType(int slot, int cpu_type)
 {
     StaticPlayer* player;
     int i;
