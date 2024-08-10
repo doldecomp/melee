@@ -35,90 +35,6 @@
 #include <placeholder.h>
 #include <MetroTRK/intrinsics.h>
 
-float const ftCo_804D87D8 = 0;
-double const ftCo_804D87E0 = 30;
-float const ftCo_804D87E8 = 0.6;
-float const ftCo_804D87EC = 0.8;
-float const ftCo_804D87F0 = 0.9;
-double const ftCo_804D87F8 = 0.05;
-double const ftCo_804D8800 = S32_TO_F32;
-float const ftCo_804D8808 = 1;
-double const ftCo_804D8810 = 9;
-double const ftCo_804D8818 = 18;
-double const ftCo_804D8820 = 4;
-double const ftCo_804D8828 = 0;
-double const ftCo_804D8830 = 0.5;
-float const ftCo_804D8838 = 1000;
-double const ftCo_804D8840 = 5;
-float const ftCo_804D8848 = 5;
-float const ftCo_804D884C = 15;
-float const ftCo_804D8850 = 40;
-float const ftCo_804D8854 = 50;
-float const ftCo_804D8858 = 10;
-double const ftCo_804D8860 = 10;
-float const ftCo_804D8868 = 0.5;
-float const ftCo_804D886C = 2.0;
-float const ftCo_804D8870 = +1e-5;
-float const ftCo_804D8874 = -1e-5;
-double const ftCo_804D8878 = 2.0;
-float const ftCo_804D8880 = 8.5;
-float const ftCo_804D8884 = 17.0;
-float const ftCo_804D8888 = 3.5;
-float const ftCo_804D888C = 127.0;
-float const ftCo_804D8890 = 0.0078125;
-double const ftCo_804D8898 = +1;
-double const ftCo_804D88A0 = -1;
-float const ftCo_804D88A8 = -1;
-double const ftCo_804D88B0 = 255;
-double const ftCo_804D88B8 = U32_TO_F32;
-double const ftCo_804D88C0 = 3;
-float const ftCo_804D88C8 = 10000;
-double const ftCo_804D88D0 = 1000;
-float const ftCo_804D88D8 = -10;
-double const ftCo_804D88E0 = -5;
-float const ftCo_804D88E8 = 0.4;
-float const ftCo_804D88EC = 0.2;
-double const ftCo_804D88F0 = 0.4;
-double const ftCo_804D88F8 = 0.01;
-double const ftCo_804D8900 = -1.047197543084621429443359375;
-float const ftCo_804D8908 = -35;
-float const ftCo_804D890C = 0.1;
-float const ftCo_804D8910 = -1.3089969158172607;
-float const ftCo_804D8914 = 120;
-float const ftCo_804D8918 = 20;
-float const ftCo_804D891C = 0.7853981852531433;
-double const ftCo_804D8920 = 50;
-float const ftCo_804D8928 = 100;
-float const ftCo_804D892C = 80;
-float const ftCo_804D8930 = M_PI;
-float const ftCo_804D8934 = -M_PI_2;
-float const ftCo_804D8938 = M_PI_2;
-double const ftCo_804D8940 = 60;
-float const ftCo_804D8948 = 4.700000286102295;
-float const ftCo_804D894C = -150;
-float const ftCo_804D8950 = -90;
-double const ftCo_804D8958 = 40;
-double const ftCo_804D8960 = 37.5;
-float const ftCo_804D8968 = 0.05;
-double const ftCo_804D8970 = 0.61086523346602916717529296875;
-double const ftCo_804D8978 = 1.30899692885577678680419921875;
-double const ftCo_804D8980 = -0.78539815731346607208251953125;
-
-/// Roughly -#M_PI / 12 or -15 degrees.
-double const ftCo_804D8988 = -0.26179938577115535736083984375;
-
-double const ftCo_804D8990 = 15;
-double const ftCo_804D8998 = -1.30899692885577678680419921875;
-
-/// Roughly #M_PI / 12 or 15 degrees.
-double const ftCo_804D89A0 = 0.26179938577115535736083984375;
-
-float const ftCo_804D89A8 = 128;
-double const ftCo_804D89B0 = 0.95;
-double const ftCo_804D89B8 = 625;
-float const ftCo_804D89C0 = 0.3;
-float const ftCo_804D89C4 = 0.04;
-
 int ftCo_803C5A68[] = {
     1, 0, 0, 1, 0, 0, 0, 1, 7, 6, 5, 4, 4, 3, 1, 1, 2, 1,
     5, 2, 2, 2, 3, 3, 3, 4, 0, 0, 8, 4, 1, 4, 4, 5, 5,
@@ -155,7 +71,32 @@ void ftCo_800A0508(ftCo_Fighter* fp)
 
 /// #ftCo_800A05F4
 
-/// #ftCo_800A0798
+void ftCo_800A0798(ftCo_Fighter* fp)
+{
+    if (ftCo_800A1CA8(fp)) {
+        ftCo_800B46B8(fp, 0x80, 0);
+        ftCo_800B46B8(fp, 0x81, 0);
+        ftCo_800B46B8(fp, 0x8E, 0xA);
+        ftCo_800B463C(fp, 8);
+        ftCo_800B46B8(fp, 0x8E, 1);
+        ftCo_800B463C(fp, 7);
+        ftCo_800B46B8(fp, 0x8E, 1);
+        ftCo_800B463C(fp, 8);
+        ftCo_800B46B8(fp, 0x8E, 1);
+        ftCo_800B463C(fp, 0x7F);
+    } else {
+        ftCo_800B46B8(fp, 0x80, 0);
+        ftCo_800B46B8(fp, 0x81, 0);
+        ftCo_800B463C(fp, 8);
+        ftCo_800B46B8(fp, 0x8E, 1);
+        ftCo_800B46B8(fp, 0x95, 0x7F);
+        ftCo_800B463C(fp, 7);
+        ftCo_800B46B8(fp, 0x8E, 1);
+        ftCo_800B463C(fp, 8);
+        ftCo_800B46B8(fp, 0x8E, 5);
+        ftCo_800B463C(fp, 0x7F);
+    }
+}
 
 /// #ftCo_800A08F0
 
@@ -596,7 +537,31 @@ bool ftCo_800A2998(Fighter* fp, float arg1)
     return false;
 }
 
-/// #ftCo_800A2A70
+float ftCo_800A2A70(Fighter* fp, bool arg1)
+{
+    if (fp->ground_or_air == GA_Air) {
+        return -1.0f;
+    }
+    {
+        mp_UnkStruct0* data = mpIsland_8005AB54(fp->coll_data.floor.index);
+        if (data == NULL) {
+            return -1.0f;
+        }
+        {
+            float r;
+            if (arg1) {
+                float x = data->x8 - fp->cur_pos.x,
+                      y = data->xC - fp->cur_pos.y;
+                r = sqrtf(SQ(x) + SQ(y));
+            } else {
+                float x = data->x14 - fp->cur_pos.x,
+                      y = data->x18 - fp->cur_pos.y;
+                r = sqrtf(SQ(x) + SQ(y));
+            }
+            return r;
+        }
+    }
+}
 
 bool ftCo_800A2BD4(ftCo_Fighter* fp)
 {
@@ -1175,7 +1140,41 @@ void ftCo_800AABC8(ftCo_Fighter* fp)
 
 /// #ftCo_800AB224
 
-/// #ftCo_800ABA34
+void ftCo_800ABA34(ftCo_Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    if (fp->x1A88.xC == 11) {
+        if (fp->item_gobj == NULL) {
+            ftCo_800B4880(fp, 38);
+            return;
+        }
+    } else if (data->xC == 12) {
+        if (data->x7C % 30 == 0) {
+            ftCo_800B4880(fp, 38);
+            return;
+        }
+    } else if (data->xC == 16 && fp->ground_or_air == GA_Ground &&
+               data->x7C % 300 == 0)
+    {
+        ftCo_800A05F4(fp);
+        return;
+    }
+    if ((fp->kind == FTKIND_ZELDA || fp->kind == FTKIND_SEAK) && data->xF8_b5)
+    {
+        ftCo_800B4880(fp, 38);
+        data->xF8_b5 = false;
+        return;
+    }
+    if (ftCo_800A5CE0(fp) == NULL && fp->motion_id == ftCo_MS_RebirthWait) {
+        ftCo_800A08F0(fp);
+        return;
+    }
+    if (fp->ground_or_air == GA_Air) {
+        ftCo_800A9CB4(fp);
+        return;
+    }
+    ftCo_800AB224(fp);
+}
 
 /// #ftCo_800ABBA8
 
@@ -1214,7 +1213,58 @@ void ftCo_800AC30C(Fighter* fp)
     }
 }
 
-/// #ftCo_800AC434
+static inline enum_t inlineH0(ftCo_Fighter* fp)
+{
+    if (fp->motion_id == ftCo_MS_BarrelWait) {
+        return 1;
+    }
+    if (fp->motion_id == ftCo_MS_Barrel) {
+        return 2;
+    }
+    return 0;
+}
+
+static inline void inlineH1(ftCo_Fighter* fp, struct Fighter_x1A88_t* data)
+{
+    if (data->x7C % ((10 - data->x10) * 5) == 0 && HSD_Randf() < 0.5f) {
+        ftCo_800B463C(fp, 1);
+        ftCo_800B46B8(fp, 0x8E, 1);
+        ftCo_800B463C(fp, 2);
+        ftCo_800B463C(fp, 0x7F);
+    } else {
+        ftCo_800B463C(fp, 0x7F);
+    }
+}
+
+void ftCo_800AC434(ftCo_Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    Vec3 vec;
+    float f;
+    enum_t barrel_state = inlineH0(fp);
+    PAD_STACK(5 * 4);
+
+    if (barrel_state == 0) {
+        data->x18 = data->x1C;
+        ftCo_800B463C(fp, 0x7F);
+        return;
+    }
+    if (barrel_state == 1) {
+        PAD_STACK(1 * 4);
+        Ground_801C4DA0(&vec, &f);
+    } else {
+        inlineH1(fp, data);
+        return;
+    }
+    if (f >= -0.26179938577115536 && f <= 0.0) {
+        ftCo_800B463C(fp, 1);
+        ftCo_800B46B8(fp, 0x8E, 1);
+        ftCo_800B463C(fp, 2);
+        ftCo_800B463C(fp, 0x7F);
+    } else {
+        ftCo_800B463C(fp, 0x7F);
+    }
+}
 
 /// #ftCo_800AC5A0
 
@@ -1285,7 +1335,68 @@ void ftCo_800AD42C(ftCo_Fighter* fp)
 
 /// #ftCo_800B0CA8
 
-/// #ftCo_800B0E98
+static inline bool inlineG0(struct Fighter_x1A88_t* data)
+{
+    if (data->x18 != data->x20 && data->x18 != data->x1C) {
+        data->x60 = 0;
+    }
+    if (data->x18 == 4) {
+        return false;
+    } else {
+        data->xFA_b2 = false;
+        return true;
+    }
+}
+
+static inline bool inlineG1(ftCo_Fighter* fp0)
+{
+    if (fp0->motion_id >= 361 && fp0->motion_id <= 366) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+bool ftCo_800B0E98(Fighter* fp0, Fighter* fp1)
+{
+    s32 temp_r0;
+    s32 var_r0;
+    s32 var_r0_2;
+
+    if (ftCo_800B0CA8(fp0) != 0) {
+        struct Fighter_x1A88_t* data = &fp0->x1A88;
+        if (fp1->ground_or_air == GA_Air) {
+            return false;
+        }
+        if (fp0->ground_or_air == GA_Air) {
+            return false;
+        }
+        if (!data->xFB_b0) {
+            struct Fighter_x1A88_t* data = &fp0->x1A88;
+            if (inlineG1(fp0)) {
+                if (!inlineG0(data) && fp0->motion_id != ftCo_MS_Wait) {
+                    return false;
+                }
+                {
+                    float x = fp0->pos_delta.x - fp1->pos_delta.x,
+                          y = fp0->pos_delta.y - fp1->pos_delta.y,
+                          r = fp0->co_attrs.mid_walk_point;
+                    if (SQ(x) + SQ(y) > SQ(r)) {
+                        return false;
+                    }
+                }
+                {
+                    float x = fp0->cur_pos.x - fp1->cur_pos.x,
+                          y = fp1->cur_pos.y - fp0->cur_pos.y;
+                    if (SQ(x) + SQ(y) < SQ(25.0)) {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
 
 /// #ftCo_800B101C
 
@@ -1297,7 +1408,24 @@ void ftCo_800AD42C(ftCo_Fighter* fp)
 
 /// #ftCo_800B1AB8
 
-/// #ftCo_800B1DA0
+void ftCo_800B1DA0(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    PAD_STACK(6 * 4);
+    data->xF8_b0 = false;
+    data->xF9_b2 = true;
+    data->xF9_b4 = true;
+    data->xF9_b3 = false;
+    data->xF9_b5 = false;
+    data->xF9_b6 = false;
+    data->xF9_b7 = false;
+    data->xF9_b1 = false;
+    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    if (inlineG0(data) && data->x7C % 60 * 5 == 0 && HSD_Randf() < 0.5) {
+        ftCo_800A8940(fp);
+    }
+    ftCo_800ADE48(fp);
+}
 
 /// #ftCo_800B1EF0
 

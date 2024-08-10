@@ -48,9 +48,9 @@ void mpIsland_8005A728(void)
     int v20;               // r26
     int v21;               // r27
     float v22;             // fp31
-    int* v22_2;
+    float* v22_2;
     int* v23; // r19
-    int* v24_2;
+    float* v24_2;
     mpisland* v24;           // r3
     mpisland* v25;           // r25
     int v26;                 // r4

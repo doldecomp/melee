@@ -13,7 +13,7 @@
 /// @todo Static declarations belong in #ftCo_0B3E.c
 /* 0B462C */ static UNK_RET ftCo_800B462C(ftCo_Fighter* fp);
 /* 0B4778 */ static void ftCo_800B4778(ftCo_Fighter* fp, int, s8, s8);
-/* 0B4880 */ static UNK_RET ftCo_800B4880(UNK_PARAMS);
+/* 0B4880 */ static void ftCo_800B4880(ftCo_Fighter* fp, int);
 /* 0B49F4 */ static UNK_RET ftCo_800B49F4(UNK_PARAMS);
 /* 0B4A78 */ static void ftCo_800B4A78(ftCo_Fighter* fp);
 /* 0B4AB0 */ static UNK_RET ftCo_800B4AB0(UNK_PARAMS);
