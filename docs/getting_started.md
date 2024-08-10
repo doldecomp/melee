@@ -88,8 +88,6 @@ So you want to find some assembly that:
 - isn’t that long as you’re new
 - isn’t already decompiled
 
-In [this public Trello board](https://trello.com/b/pz2ACtnS/melee-decompilation), you can see which assembly files have been claimed or unclaimed. So don’t pick a function in a `.s` file that’s claimed. Note that this is a read-only link. If you want write access, join the [Discord](https://discord.gg/hKx3FJJgrV)!
-
 To make sure it’s not already decompiled, take the label (e.g. `ftColl_8007B8CC`) and search the repo for instances of it. If you don’t see any C code definitions with implementations, then it at least hasn’t been committed to the repo. You can also use `grep`:
 ```sh
 grep -rn 'ftColl_8007B8CC' src
