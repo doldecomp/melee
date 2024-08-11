@@ -295,7 +295,7 @@ struct Item {
     ItemStateDesc* xD0_itemStateDesc;
     Item_DynamicBones xD4_dynamicBones[24];
     s32 x374_dynamicBonesNum;
-    CollData x378_itemColl;
+    /*  ip+378 */ CollData x378_itemColl;
     s32 ecb_lock;
 
     /// @at{518} @sz{4}

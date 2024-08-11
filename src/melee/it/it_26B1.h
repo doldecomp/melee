@@ -82,7 +82,7 @@
 /* 26BE84 */ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain);
 /* 26C100 */ CollData* it_8026C100(Item_GObj* gobj);
 /* 26C16C */ void it_8026C16C(Item_GObj* gobj, bool isHeadless);
-/* 26C1B4 */ void it_8026C1B4(Item_GObj* gobj);
+/* 26C1B4 */ bool it_8026C1B4(Item_GObj* gobj);
 /* 26C1D4 */ u32 it_8026C1D4(void);
 /* 26C1E8 */ bool it_8026C1E8(Item_GObj* gobj);
 /* 26C220 */ void it_8026C220(Item_GObj* gobj, HSD_GObj* arg1);

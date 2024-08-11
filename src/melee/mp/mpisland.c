@@ -274,7 +274,7 @@ mp_UnkStruct0* mpIsland_8005AC14(Vec3* arg0, float arg1)
     return NULL;
 }
 
-bool mpIsland_8005AC8C(mp_UnkStruct4* arg0)
+bool mpIsland_8005AC8C(mp_UnkStruct0* arg0)
 {
     int temp_cr0_eq;
     temp_cr0_eq = mpLib_8004D17C() + 8 + 0x34 * arg0->x28;

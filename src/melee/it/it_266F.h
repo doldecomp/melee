@@ -144,7 +144,7 @@ typedef void (*ItCallback)(HSD_GObj*);
 /* 2756D0 */ void it_802756D0(HSD_GObj* gobj);
 /* 2756E0 */ void it_802756E0(HSD_GObj* gobj);
 /* 27574C */ void it_8027574C(HSD_GObj* gobj);
-/* 275870 */ void it_80275870(HSD_GObj* gobj);
+/* 275870 */ bool it_80275870(HSD_GObj* gobj);
 /* 275E98 */ void it_80275E98(HSD_GObj*, SpawnItem*);
 /* 2762B0 */ void it_802762B0(Item*);
 /* 2762BC */ void it_802762BC(Item*);

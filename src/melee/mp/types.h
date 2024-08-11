@@ -18,6 +18,8 @@ struct mp_UnkStruct0 {
     /* +24 */ short x24;
     /* +26 */ short x26;
     /* +28 */ short x28;
+    /* +2A */ short x2A;
+    /* +2C */ mp_UnkStruct3* ptr;
 };
 
 struct mp_UnkStruct1 {
@@ -40,13 +42,6 @@ struct mp_UnkStruct3 {
     int x0;
     int x4;
     int xC;
-};
-
-struct mp_UnkStruct4 {
-    /*  +0 */ u8 x0[0x28];
-    /* +28 */ short x28;
-    /* +2A */ short x2A;
-    /* +2C */ mp_UnkStruct3* ptr;
 };
 
 struct mp_UnkStruct5 {

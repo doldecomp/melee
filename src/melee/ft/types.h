@@ -980,8 +980,8 @@ struct Fighter_x1A88_t {
     /*  +40 */ UNK_T x40;
     /*  +44 */ Fighter* x44;
     /*  +48 */ UNK_T x48;
-    /*  +4C */ UNK_T x4C;
-    /*  +50 */ UNK_T x50;
+    /*  +4C */ void* x4C;
+    /*  +50 */ int x50;
     /*  +54 */ Vec2 x54;
     /*  +5C */ float x5C;
     /*  +60 */ int x60;
@@ -1020,9 +1020,23 @@ struct Fighter_x1A88_t {
     /*  +FB:5 */ u8 xFB_b5 : 1;
     /*  +FB:6 */ u8 xFB_b6 : 1;
     /*  +FB:7 */ u8 xFB_b7 : 1;
-    /*  +80 */ u8 xFC[0x44C - 0xFC];
-    /* +454 */ UNK_T x44C;
-    /* +454 */ UNK_T x450;
+    /*  +80 */ u8 xFC[0x448 - 0xFC];
+    /* +448 */ struct {
+        /*  +0 */ HSD_Pad x0;
+        /*  +4 */ u8 x4;
+        /*  +5 */ u8 x5;
+        /*  +6 */ u8 x6;
+        /*  +7 */ u8 x7;
+        /*  +8 */ u8 x8;
+        /*  +9 */ u8 x9;
+        /*  +A */ u8 xA;
+        /*  +B */ u8 xB;
+        /*  +C */ Vec2 offset;
+        /* +14 */ UNK_T x14;
+        /* +18 */ float facing_dir;
+    }* x448;
+    /* +44C */ UNK_T x44C;
+    /* +450 */ UNK_T x450;
     /* +454 */ uint x454;
     /* +458 */ u8 x458[0x554 - 0x458];
     /* +554 */ union Fighter_x1A88_x544_t {
@@ -1032,7 +1046,8 @@ struct Fighter_x1A88_t {
         uint x0_u32;
         void* x0_p;
     } x554;
-    /* +558 */ u8 x558[0x568 - 0x558];
+    /* +558 */ float x558;
+    /* +558 */ u8 x55C[0x568 - 0x55C];
     /* +568 */ float x568;
     /* +56C */ float x56C;
     /* +570 */ UNK_T x570;
