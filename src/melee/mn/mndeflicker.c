@@ -58,10 +58,6 @@ typedef struct {
     void* x4;
 } gobj_user_data;
 
-struct sislib_idk {
-    float idk[40];
-};
-
 extern struct {
     unsigned char x0;
     char x1;
@@ -94,7 +90,6 @@ void gmMainLib_8015F588(u8);
 void lbAudioAx_80024030(int);
 int lb_80011E24(HSD_JObj*, HSD_JObj**, ...);
 void lb_8001CE00(void);
-void HSD_SisLib_803A5CC4(void*);
 void lb_8001CE00(void);
 u8 gmMainLib_8015F4E8(void);
 
@@ -198,16 +193,16 @@ void mnDeflicker_8024A3E8(HSD_GObj* gobj)
 #define GET_GOBJ_USER_DATA(gobj) ((gobj_user_data*) HSD_GObjGetUserData(gobj))
 static inline void inline_test(void)
 {
-    struct sislib_idk* temp_r3_6;
+    sislib_UnkAllocReturn* temp_r3_6;
     gobj_user_data* user_data = GET_GOBJ_USER_DATA(mnDeflicker_804D6C38);
     if (user_data->x4) {
         HSD_SisLib_803A5CC4(user_data->x4);
     }
-    temp_r3_6 = (struct sislib_idk*) HSD_SisLib_803A5ACC(
-        0, 1, -9.5F, 9.1F, 17.0F, 364.68332F, 38.38772F);
+    temp_r3_6 =
+        HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.0F, 364.68332F, 38.38772F);
     user_data->x4 = temp_r3_6;
-    temp_r3_6->idk[9] = 0.0521F;
-    temp_r3_6->idk[10] = 0.0521F;
+    temp_r3_6->x24.x = 0.0521F;
+    temp_r3_6->x24.y = 0.0521F;
     HSD_SisLib_803A6368(temp_r3_6, 0xBD);
 }
 
@@ -220,7 +215,6 @@ void mnDeflicker_8024A4BC(HSD_GObj* arg0)
     HSD_GObjProc* proc;
     HSD_JObj* jobj;
     u8 temp_r29;
-    struct sislib_idk* temp_r3_6;
     gobj_user_data* user_data;
 
     gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 7U, 0x80);
