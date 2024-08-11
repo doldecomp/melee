@@ -466,7 +466,7 @@ def generate_build_ninja(
             deps=rule.get("deps", None),
         )
         n.newline()
-        
+
     def write_custom_step(step: str) -> List[str]:
         implicit = []
         if config.custom_build_steps and step in config.custom_build_steps:
