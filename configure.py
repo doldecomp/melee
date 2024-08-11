@@ -17,8 +17,14 @@ import sys
 from pathlib import Path
 from typing import Iterator, List, Optional
 
-from tools.project import (LibDict, Object, ProjectConfig, calculate_progress,
-                           generate_build, is_windows)
+from tools.project import (
+    LibDict,
+    Object,
+    ProjectConfig,
+    calculate_progress,
+    generate_build,
+    is_windows,
+)
 
 # Game versions
 DEFAULT_VERSION = 0
@@ -33,6 +39,7 @@ parser.add_argument(
     nargs="?",
 )
 parser.add_argument(
+    "-v",
     "--version",
     choices=VERSIONS,
     type=str.upper,
@@ -128,10 +135,16 @@ parser.add_argument(
     action="store_true",
     help="require function prototypes",
 )
+parser.add_argument(
+    "--non-matching",
+    dest="non_matching",
+    action="store_true",
+    help="builds equivalent (but non-matching) or modded objects",
+)
 args = parser.parse_args()
 
 config = ProjectConfig()
-config.version = args.version
+config.version = str(args.version)
 version_num = VERSIONS.index(config.version)
 
 # Apply arguments
@@ -141,6 +154,7 @@ config.binutils_path = args.binutils
 config.compilers_path = args.compilers
 config.debug = args.debug
 config.generate_map = args.map
+config.non_matching = args.non_matching
 config.sjiswrap_path = args.sjiswrap
 if not is_windows():
     config.wrapper = args.wrapper
@@ -150,7 +164,7 @@ if args.no_asm:
 # Tool versions
 config.binutils_tag = "2.42-1"
 config.compilers_tag = "20231018"
-config.dtk_tag = "v0.7.5"
+config.dtk_tag = "v0.9.0"
 config.sjiswrap_tag = "v1.1.1"
 config.wibo_tag = "0.6.11"
 
@@ -169,6 +183,8 @@ config.ldflags = [
     "-nodefaults",
     "-warn off",
 ]
+# Use for any additional files that should cause a re-configure when modified
+config.reconfig_deps = []
 
 # Progress
 config.progress_use_fancy = True
@@ -360,8 +376,11 @@ def RuntimeLib(lib_name: str, objects: Objects) -> LibDict:
     )
 
 
-Matching = True
-NonMatching = False
+Matching = True  # Object matches and should be linked
+NonMatching = False  # Object does not match and should not be linked
+Equivalent = (
+    config.non_matching
+)  # Object should be linked when configured with --non-matching
 
 config.warn_missing_config = True
 config.warn_missing_source = True
