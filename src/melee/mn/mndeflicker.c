@@ -216,6 +216,7 @@ void mnDeflicker_8024A4BC(HSD_GObj* arg0)
     HSD_JObj* jobj;
     u8 temp_r29;
     gobj_user_data* user_data;
+    PAD_STACK(4);
 
     gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 7U, 0x80);
     mnDeflicker_804D6C38 = gobj;
