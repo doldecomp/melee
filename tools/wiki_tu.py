@@ -25,12 +25,14 @@ File|Matched|Total|%|:grey_question:|Assignee<br>Discord|Assignee<br>GitHub
     for unit in data["units"] or []:
 
         def friendly_size(key: str) -> str:
-            return f"`{humanfriendly.format_number(unit[key] or 0)}`"
+            return (
+                f"`{humanfriendly.format_size(unit[key] or 0).replace('bytes', 'B')}`"
+            )
 
         # Strip "main/" by splitting on "/" and recombining
         file = "/".join((unit["name"] or "/").split("/")[1:])
         # Link to source file
-        file = f"[`{file}`](../../tree/master/src/{file}.c)"
+        file = f"[`{file}`](../blob/master/src/{file}.c)"
 
         matched = f"{friendly_size('matched_code')}"
         total = f"{friendly_size('total_code')}"

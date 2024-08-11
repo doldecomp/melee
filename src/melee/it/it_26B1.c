@@ -1098,9 +1098,9 @@ void it_8026C16C(HSD_GObj* gobj, bool is_headless)
 }
 
 /// Check if item has a hitbox
-void it_8026C1B4(HSD_GObj* gobj)
+bool it_8026C1B4(HSD_GObj* gobj)
 {
-    it_80275870(gobj);
+    return it_80275870(gobj);
 }
 
 u32 it_8026C1D4(void)
