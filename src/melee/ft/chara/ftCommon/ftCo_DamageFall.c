@@ -30,27 +30,29 @@ void ftCo_80090574(ftCo_GObj* gobj)
     ft_80081DD4(gobj);
 }
 
-void ftCo_80090594(ftCo_Fighter* fp, enum_t arg1, int dmg, FtMotionId msid,
-                   enum_t arg4, float hitlag_mul)
+void ftCo_80090594(ftCo_Fighter* fp, enum_t element, int dmg, FtMotionId msid,
+                   GroundOrAir ground_or_air, float hitlag_mul)
 {
-    if (arg1 != ftCo_MS_DeadUpFallHitCameraIce && arg1 != ftCo_MS_Rebirth &&
-        !((unsigned) (arg1 - 6) > 1) && fp->motion_id != ftCo_MS_DamageIce)
-    {
+    if (element == 10 || element == 12 || !((unsigned) (element - 6) > 1)) {
+        return;
+    }
+    if (fp->motion_id != ftCo_MS_DamageIce) {
         fp->dmg.x18fa_model_shift_frames =
             (u16) (p_ftCommonData->x168 *
                        ftCommon_CalcHitlag(dmg, msid, hitlag_mul) +
                    p_ftCommonData->x16C);
         fp->dmg.x18FC = 0;
-        if (arg1 == 2) {
+
+        if (element == 2) {
             fp->dmg.x18F8 = 2;
-        } else if (arg4 == 1) {
+        } else if (ground_or_air == GA_Air) {
             fp->dmg.x18F8 = 0;
         } else {
             fp->dmg.x18F8 = 1;
             fp->dmg.x1900 = fp->coll_data.floor.normal.x;
             fp->dmg.x1904 = fp->coll_data.floor.normal.y;
         }
-        // fp->dmg.x18FD = (u8) &Fighter_804D6530[fp->dmg.x18F8 * 2][1];
+        fp->dmg.x18FD = (u8) (Fighter_804D6530 + (fp->dmg.x18F8 * 2))[1];
     }
 }
 

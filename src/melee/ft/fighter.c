@@ -2664,7 +2664,7 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2)
     vec = vec3_803B7494;
 
     if (fp->motion_id != 0x145 && (unsigned) fp->motion_id - 0x122 > 1 &&
-        fp->dmg.x1860 != 0xAU && !fp->x2226_b2)
+        fp->dmg.x1860_element != 0xAU && !fp->x2226_b2)
     {
         u8 _[4] = { 0 };
         if ( ///// giant if condition
@@ -2868,7 +2868,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(Fighter_GObj* gobj)
 
                 damage_bool = fp->dmg.x183C_applied;
                 bool2 = 1;
-                ftCo_80090594(fp, fp->dmg.x1860, damage_bool,
+                ftCo_80090594(fp, fp->dmg.x1860_element, damage_bool,
                               motion_state_index, ground_or_air,
                               fp->x1960_vibrateMult);
                 ftCommon_8007ED50(fp, fp->dmg.x1838_percentTemp);
