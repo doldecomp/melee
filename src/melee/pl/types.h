@@ -24,8 +24,8 @@ struct plAllocInfo2 {
 typedef struct StaleMoveTable {
     /*   +0 */ int current_index;
     /*   +4 */ struct {
-        s16 move_id;
-        s16 num_action_states;
+        u16 move_id;
+        u16 attack_instance;
     } StaleMoves[10];
     /*  +2C */ int total_attack_count;
     /*  +30 */ u8 x30[0x5EC - 0x30];
