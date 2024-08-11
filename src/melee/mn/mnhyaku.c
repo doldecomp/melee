@@ -26,7 +26,6 @@ void mnHyaku_8024CD64(u8);
 
 extern HSD_GObj* mnHyaku_804D6C58;
 
-void HSD_SisLib_803A5CC4(void*);
 s32 mn_80229624(s32);
 s32 mn_80229894(s32, s32, s32);
 float mn_8022EC18(HSD_JObj*, float*, int);
@@ -73,10 +72,6 @@ extern struct {
     char x11;
 } mn_804A04F0;
 
-struct sislib_idk {
-    float idk[40];
-};
-
 static inline void mnHyaku_8024C68C_inline(HSD_JObj* jobj, s32 val)
 {
     f32 temp_f31 = mn_8022F298(jobj);
@@ -89,6 +84,7 @@ static inline void mnHyaku_8024C68C_inline(HSD_JObj* jobj, s32 val)
 
 static u8 vals[] = { 0xAB, 0xAC, 0xAD, 0xAE, 0xAF, 0xB0, 0x00, 0x00 };
 
+// @todo: this is a common inline in mn
 #define GET_GOBJ_USER_DATA(gobj) ((gobj_user_data*) HSD_GObjGetUserData(gobj))
 static inline void mnHyaku_8024C68C_inline_2(HSD_GObj* gobj)
 {
@@ -98,12 +94,11 @@ static inline void mnHyaku_8024C68C_inline_2(HSD_GObj* gobj)
     }
     {
         u8 val = vals[user_data->x0];
-        struct sislib_idk* temp_r3_6 =
-            (struct sislib_idk*) HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.0F,
-                                                     364.68332F, 38.38772F);
+        sislib_UnkAllocReturn* temp_r3_6 = HSD_SisLib_803A5ACC(
+            0, 1, -9.5F, 9.1F, 17.0F, 364.68332F, 38.38772F);
         user_data->x4 = temp_r3_6;
-        temp_r3_6->idk[9] = 0.0521F;
-        temp_r3_6->idk[10] = 0.0521F;
+        temp_r3_6->x24.x = 0.0521F;
+        temp_r3_6->x24.y = 0.0521F;
         HSD_SisLib_803A6368(temp_r3_6, val);
     }
 }

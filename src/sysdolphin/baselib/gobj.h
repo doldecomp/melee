@@ -102,7 +102,7 @@ extern HSD_GObjProc* HSD_GObj_804D7838;
 extern HSD_GObjProc** HSD_GObj_804D7840;
 extern s32 HSD_GObj_804D7834;
 extern s32 HSD_GObj_804D783C;
-extern HSD_GObj* HSD_SisLib_804D797C;
+// extern HSD_GObj* HSD_SisLib_804D797C; @todo: is this actually correct?
 extern HSD_GObj** HSD_GObj_804D7820;
 extern HSD_GObj** HSD_GObj_804D7824;
 extern HSD_GObjLibInitDataType HSD_GObjLibInitData;
