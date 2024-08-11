@@ -478,7 +478,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/ft_0892.c"),
             # Common
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Wait.c"),
-            Object(Matching, "melee/ft/ftwaitanim.c"),
+            Object(NonMatching, "melee/ft/ftwaitanim.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Attack1.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_AttackDash.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_AttackS3.c"),
