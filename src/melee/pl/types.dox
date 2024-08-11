@@ -26,8 +26,8 @@ typedef struct _StaleMoveTable {
                        // after 9. Increments after
                        // each write.
     struct {
-        s16 move_id;
-        s16 num_action_states;
+        u16 move_id;
+        u16 attack_instance;
     } StaleMoves[10];
     /*0xE8*/ s32 total_attack_count;
 } StaleMoveTable;

@@ -514,8 +514,8 @@ struct Item {
 
     s32 xD80;
     s32 xD84;
-    s32 xD88_attackID; // ???
-    s16 xD8C_attackInstance;
+    s32 xD88_attackID;
+    s16 xD8C_attack_instance;
     s16 xD8E;
     s32 xD90;
     Vec2 xD94;

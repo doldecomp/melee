@@ -2023,7 +2023,7 @@ void Player_80036D24(s32 slot)
 void Player_InitAllPlayers(void)
 {
     int i;
-    plStale_8003715C();
+    plStale_InitAttackInstance();
     plAttack_80037590();
 
     for (i = 0; i < PL_SLOT_MAX; i++) {

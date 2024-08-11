@@ -1397,7 +1397,7 @@ struct Fighter {
     /* fp+203C */ u8 filler_x203C[0x2064 - 0x2044];
     /* fp+2064 */ int x2064_ledgeCooldown;
     /* fp+2068 */ s32 x2068_attackID;
-    /* fp+206C */ u16 x206C_num_action_states;
+    /* fp+206C */ u16 x206C_attack_instance;
     /* fp+206E */ short x206E;
     /* fp+2070 */ union Struct2070 x2070;
     /* fp+2074 */ u8 filler_x2074[0x208C - 0x2074];

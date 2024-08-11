@@ -407,7 +407,7 @@ config.libs = [
         "pl (Player)",
         [
             Object(Matching, "melee/pl/player.c"),
-            Object(NonMatching, "melee/pl/plstale.c"),
+            Object(Matching, "melee/pl/plstale.c"),
             Object(NonMatching, "melee/pl/plattack.c"),
             Object(NonMatching, "melee/pl/pltrick.c"),
             Object(NonMatching, "melee/pl/plbonus.c"),

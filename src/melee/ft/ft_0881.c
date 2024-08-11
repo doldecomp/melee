@@ -139,13 +139,13 @@ void ft_800889F4(Fighter* fp, FtSFXArr* sfx)
 void ft_800890BC(Fighter* fp)
 {
     fp->x2068_attackID = 1;
-    fp->x206C_num_action_states = 0;
+    fp->x206C_attack_instance = 0;
 }
 
 static inline void inlineB0(Fighter* fp, uint move_id)
 {
     fp->x2068_attackID = move_id;
-    fp->x206C_num_action_states = plStale_80037208();
+    fp->x206C_attack_instance = plStale_IncrementAttackInstance();
 }
 
 void ft_800890D0(Fighter* fp, uint move_id)
