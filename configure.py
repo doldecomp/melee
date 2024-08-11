@@ -594,7 +594,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCaptain/ftCa_Init.c"),
             Object(Matching, "melee/ft/chara/ftCaptain/ftCa_SpecialN.c"),
             Object(Matching, "melee/ft/chara/ftCaptain/ftCa_SpecialS.c"),
-            Object(NonMatching, "melee/ft/chara/ftCaptain/ftCa_SpecialLw.c"),
+            Object(Matching, "melee/ft/chara/ftCaptain/ftCa_SpecialLw.c"),
             Object(Matching, "melee/ft/chara/ftCaptain/ftCa_SpecialHi.c"),
             # Fox
             Object(Matching, "melee/ft/chara/ftFox/ftFx_Init.c"),

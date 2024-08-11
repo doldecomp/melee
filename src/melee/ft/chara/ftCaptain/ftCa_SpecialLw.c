@@ -278,12 +278,15 @@ void ftCa_SpecialAirLw_Phys(HSD_GObj* gobj)
 
 void ftCa_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
 {
-    u8 _[8];
+    ftCo_DatAttrs* ca;
+    ftCaptain_DatAttrs* da;
+
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptain_DatAttrs* da = fp->dat_attrs;
+    da = fp->dat_attrs;
     if (fp->cmd_vars[2] != 0) {
+        ca = getFtAttrs(fp);
         ftCommon_8007C930(fp, da->speciallw_air_landing_traction *
-                                  fp->co_attrs.gr_friction);
+                                  ca->gr_friction);
         ftCommon_8007CB74(gobj);
         return;
     } else {
