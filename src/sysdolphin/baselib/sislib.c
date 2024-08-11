@@ -24,6 +24,12 @@
 #include <stdio.h>
 #include <dolphin/os.h>
 
+HSD_CObjDesc HSD_SisLib_8040C4B8;
+sislib_UnkAllocData* HSD_SisLib_804D7970;
+sislib_UnkAllocData* HSD_SisLib_804D7974;
+sislib_UnkAllocReturn* HSD_SisLib_804D7978;
+sislib_UnkAlloc3* HSD_SisLib_804D797C;
+
 // extern ? *HSD_SisLib_804D796C;
 // extern u8 *HSD_SisLib_804D7978;
 // sislib_UnknownType001 HSD_SisLib_8040C490 = { 0, 1.0f };

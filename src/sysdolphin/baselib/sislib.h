@@ -107,14 +107,14 @@ extern SIS* HSD_SisLib_804D1124[5];
 extern HSD_Archive* HSD_SisLib_804D1110[5];
 extern u32 lbl_8040C8C0[144];
 extern u32 HSD_SisLib_8040C680[144];
-HSD_CObjDesc HSD_SisLib_8040C4B8;
+extern HSD_CObjDesc HSD_SisLib_8040C4B8;
 
 extern u32 HSD_SisLib_804D7968;
 extern sislib_UnkAllocData* HSD_SisLib_804D796C;
-sislib_UnkAllocData* HSD_SisLib_804D7970;
-sislib_UnkAllocData* HSD_SisLib_804D7974;
-sislib_UnkAllocReturn* HSD_SisLib_804D7978;
-sislib_UnkAlloc3* HSD_SisLib_804D797C;
+extern sislib_UnkAllocData* HSD_SisLib_804D7970;
+extern sislib_UnkAllocData* HSD_SisLib_804D7974;
+extern sislib_UnkAllocReturn* HSD_SisLib_804D7978;
+extern sislib_UnkAlloc3* HSD_SisLib_804D797C;
 
 extern sislib_UnknownType001 HSD_SisLib_8040C4A4;
 extern sislib_UnknownType001 HSD_SisLib_8040C490;
