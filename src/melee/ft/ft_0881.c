@@ -148,7 +148,7 @@ static inline void inlineB0(Fighter* fp, s32 move_id)
     fp->x206C_attack_instance = plStale_IncrementAttackInstance();
 }
 
-void ft_800890D0(Fighter* fp, s32 move_id)
+void ft_800890D0(Fighter* fp, u32 move_id)
 {
     if (move_id == 1 || move_id != fp->x2068_attackID) {
         inlineB0(fp, move_id);
@@ -159,7 +159,7 @@ void ft_800890D0(Fighter* fp, s32 move_id)
 
 /// #ft_80089228
 
-static void inlineC0(Fighter* fp, s32 move_id)
+static void inlineC0(Fighter* fp, u32 move_id)
 {
     if (move_id == fp->x2068_attackID) {
         inlineB0(fp, move_id);
