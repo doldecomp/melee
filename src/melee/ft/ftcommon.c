@@ -24,7 +24,7 @@
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_HammerWait.h"
-#include "ftCommon/ftCo_ItemGet.h"
+#include "ftCommon/ftpickupitem.h"
 #include "gm/gm_1601.h"
 #include "it/it_26B1.h"
 #include "it/item.h"

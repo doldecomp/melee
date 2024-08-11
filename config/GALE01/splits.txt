@@ -431,7 +431,7 @@ melee/ft/chara/ftCommon/ftCo_Guard.c:
 	.sdata      start:0x804D3AF8 end:0x804D3B08
 	.sdata2     start:0x804D8538 end:0x804D8580
 
-melee/ft/chara/ftCommon/ftCo_ItemGet.c:
+melee/ft/chara/ftCommon/ftpickupitem.c:
 	.text       start:0x80094150 end:0x80094E54
 	.data       start:0x803C5580 end:0x803C55C0
 	.sdata2     start:0x804D8580 end:0x804D8590

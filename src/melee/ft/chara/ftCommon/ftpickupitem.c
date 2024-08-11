@@ -3,7 +3,7 @@
 #include "it/forward.h"
 #include <dolphin/mtx/forward.h>
 
-#include "ftCo_ItemGet.h"
+#include "ftpickupitem.h"
 
 #include "ftCo_HammerWait.h"
 #include "ftCo_Lift.h"
@@ -332,7 +332,7 @@ static inline enum_t inlineA0(ftCo_Fighter* fp)
     return unk_enum;
 }
 
-void ftCo_ItemGet_Anim(HSD_GObj* gobj)
+void ftpickupitem_Anim(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (ftCheckThrowB3(fp)) {
@@ -364,14 +364,14 @@ void ftCo_ItemGet_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftCo_ItemGet_IASA(HSD_GObj* gobj) {}
+void ftpickupitem_IASA(HSD_GObj* gobj) {}
 
-void ftCo_ItemGet_Phys(HSD_GObj* gobj)
+void ftpickupitem_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftCo_ItemGet_Coll(HSD_GObj* gobj)
+void ftpickupitem_Coll(HSD_GObj* gobj)
 {
     ft_800841B8(gobj, ftCo_80094D90);
 }

@@ -17,7 +17,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
-#include "ftCommon/ftCo_ItemGet.h"
+#include "ftCommon/ftpickupitem.h"
 #include "ftLink/types.h"
 #include "it/items/it_27CF.h"
 #include "it/items/itlinkarrow.h"

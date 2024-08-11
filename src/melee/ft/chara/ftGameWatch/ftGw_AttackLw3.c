@@ -18,7 +18,7 @@
 #include "ftCommon/ftCo_AttackLw4.h"
 #include "ftCommon/ftCo_AttackS3.h"
 #include "ftCommon/ftCo_AttackS4.h"
-#include "ftCommon/ftCo_ItemGet.h"
+#include "ftCommon/ftpickupitem.h"
 #include "ftGameWatch/types.h"
 #include "it/it_26B1.h"
 #include "it/items/it_27CF.h"

@@ -10,7 +10,7 @@
 #include "ftCo_0A01.h"
 
 #include "ftCo_0B3E.h"
-#include "ftCo_ItemGet.h"
+#include "ftpickupitem.h"
 
 #include "ft/chara/ftPopo/ftPp_1211.h"
 #include "ft/fighter.h"

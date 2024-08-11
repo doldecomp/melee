@@ -10,7 +10,7 @@
 #include "ft/ftanim.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack1.h"
-#include "ftCommon/ftCo_ItemGet.h"
+#include "ftCommon/ftpickupitem.h"
 #include "ftGameWatch/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"

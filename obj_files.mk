@@ -101,7 +101,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_DamageFall.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_DamageIce.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_Guard.s.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_ItemGet.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftpickupitem.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_ItemThrow.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_SpecialS.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_SpecialAir.c.o\

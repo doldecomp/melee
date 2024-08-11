@@ -17,7 +17,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
-#include "ftCommon/ftCo_ItemGet.h"
+#include "ftCommon/ftpickupitem.h"
 #include "ftPeach/types.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
