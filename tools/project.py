@@ -368,6 +368,17 @@ def generate_build_ninja(
     n.newline()
 
     ###
+    # Helper rule for downloading all tools
+    ###
+    n.comment("Download all tools")
+    n.build(
+        outputs="tools",
+        rule="phony",
+        inputs=[dtk, sjiswrap, wrapper, compilers, binutils],
+    )
+    n.newline()
+
+    ###
     # Build rules
     ###
     compiler_path = compilers / "$mw_version"
