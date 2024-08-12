@@ -11,6 +11,7 @@
 #include "it/itCharItems.h"
 #include "it/types.h"
 
+#include <stdbool.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <melee/ft/chara/ftFox/ftFx_SpecialN.h>
@@ -43,23 +44,25 @@ ItemStateTable it_803F6CA8[11] = {
     { -1, it_802AF064, it_802AF178, it_802AF17C }
 };
 f32 it_803F6D58[14] = {
-    0.0,    -0.51,  -1.02,  -1.53,  -1.39,  -1.251, -1.112,
-    -0.973, -0.834, -0.695, -0.556, -0.417, -0.278, -0.139
+    0.0F,    -0.51F,  -1.02F,  -1.53F,  -1.39F,  -1.251F, -1.112F,
+    -0.973F, -0.834F, -0.695F, -0.556F, -0.417F, -0.278F, -0.139F
 }; // used for jobj->translate.z calc for xDD4
 f32 it_803F6D90[14] = {
-    0.5, 0.5, 1.75, 3.0, 2.375, 1.75, 1.125, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5
+    0.5F, 0.5F, 1.75F, 3.0F, 2.375F, 1.75F, 1.125F,
+    0.5F, 0.5F, 0.5F,  0.5F, 0.5F,   0.5F,  0.5F
 }; // used in jobj->scale.y/z calcs for xDD4
 f32 it_803F6DC8[14] = {
-    0.0, -42.0, -20.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+    0.0F, -42.0F, -20.0F, 0.0F, 0.0F, 0.0F, 0.0F,
+    0.0F, 0.0F,   0.0F,   0.0F, 0.0F, 0.0F, 0.0F
 }; // used for jobj->rotate.x calc for xDD4
 static f32 it_803F6E28[5] = {
-    -0.425f, -0.595f, -0.765f, -0.935f, -0.85f
+    -0.425F, -0.595F, -0.765F, -0.935F, -0.85F
 }; // used in jobj->translate.y calc for xDD8
-static s32 it_803F6E3C[0xB] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0xA };
-static s32 it_803F6E68[0xC] = { 0, 9, 9, 3, 9, 9, 6, 7, 8, 9, 0xA, 0 };
-// static s8 it_804D5428[7] = "jobj.h";
-// static s8 it_804D5430[5] = "jobj";
-f32 it_804DCF38 = 0x00000000;
+static s32 it_803F6E3C[11] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+static s32 it_803F6E68[12] = { 0, 9, 9, 3, 9, 9, 6, 7, 8, 9, 10, 0 };
+static s8 it_804D5428[7] = "jobj.h";
+static s8 it_804D5430[5] = "jobj";
+f32 it_804DCF38 = 0.0F;
 
 static inline HSD_JObj* jobj_child(HSD_JObj* node)
 {
@@ -357,10 +360,10 @@ void it_802AE200(HSD_GObj* item_gobj)
             // I think this section is iterating the 'state' (not the item
             // state, but something else), then resetting after it's done
             if ((item->xDD4_itemVar.foxblaster.xDD4 > 0) &&
-                (item->xDD4_itemVar.foxblaster.xDD4 < 0xE))
+                (item->xDD4_itemVar.foxblaster.xDD4 < 14))
             {
                 item->xDD4_itemVar.foxblaster.xDD4 += 1;
-                if (item->xDD4_itemVar.foxblaster.xDD4 >= 0xE) {
+                if (item->xDD4_itemVar.foxblaster.xDD4 >= 14) {
                     item->xDD4_itemVar.foxblaster.xDD4 = 0;
                 }
             }
@@ -475,64 +478,64 @@ void it_802AE7B8(Item_GObj* item_gobj)
     item->xDCC_flag.b3 = 0;
     item->xDD4_itemVar.foxblaster.xDD4 = 0;
     item->xDD4_itemVar.foxblaster.xDD8 = 0;
-    item->xDD4_itemVar.foxblaster.xDDC = 0.0f;
-    item->xDD4_itemVar.foxblaster.xDE0 = 0.0f;
+    item->xDD4_itemVar.foxblaster.xDDC = 0.0F;
+    item->xDD4_itemVar.foxblaster.xDE0 = 0.0F;
     item->xDD4_itemVar.foxblaster.xE74 = 0;
     item->xDD4_itemVar.foxblaster.xE78 = 1;
 
     item = item_gobj->user_data;
 
-    item->xDD4_itemVar.foxblaster.xDE4 = 0.0f;
-    item->xDD4_itemVar.foxblaster.xDFC = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE14.z = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE14.y = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE14.x = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE5C = 0.0f;
+    item->xDD4_itemVar.foxblaster.xDE4 = 0.0F;
+    item->xDD4_itemVar.foxblaster.xDFC = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE14.z = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE14.y = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE14.x = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE5C = 0.0F;
 
     item = item_gobj->user_data;
 
     item->xDD4_itemVar.foxblaster.xDE8 = 0;
     item->xDD4_itemVar.foxblaster.xE00 = 0;
-    item->xDD4_itemVar.foxblaster.xE20.z = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE20.y = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE20.x = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE60 = 0.0f;
+    item->xDD4_itemVar.foxblaster.xE20.z = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE20.y = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE20.x = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE60 = 0.0F;
 
     item = item_gobj->user_data;
 
     item->xDD4_itemVar.foxblaster.xDEC = 0;
-    item->xDD4_itemVar.foxblaster.xE04 = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE2C.z = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE2C.y = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE2C.x = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE64 = 0.0f;
+    item->xDD4_itemVar.foxblaster.xE04 = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE2C.z = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE2C.y = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE2C.x = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE64 = 0.0F;
 
     item = item_gobj->user_data;
 
     item->xDD4_itemVar.foxblaster.xDF0 = 0;
     item->xDD4_itemVar.foxblaster.xE08 = 0;
-    item->xDD4_itemVar.foxblaster.xE38.z = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE38.y = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE38.x = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE68 = 0.0f;
+    item->xDD4_itemVar.foxblaster.xE38.z = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE38.y = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE38.x = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE68 = 0.0F;
 
     item = item_gobj->user_data;
 
     item->xDD4_itemVar.foxblaster.xDF4 = 0;
     item->xDD4_itemVar.foxblaster.xE0C = 0;
-    item->xDD4_itemVar.foxblaster.xE44.z = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE44.y = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE44.x = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE6C = 0.0f;
+    item->xDD4_itemVar.foxblaster.xE44.z = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE44.y = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE44.x = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE6C = 0.0F;
 
     item = item_gobj->user_data;
 
     item->xDD4_itemVar.foxblaster.xDF8 = 0;
     item->xDD4_itemVar.foxblaster.xE10 = 0;
-    item->xDD4_itemVar.foxblaster.xE50.z = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE50.y = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE50.x = 0.0f;
-    item->xDD4_itemVar.foxblaster.xE70 = 0.0f;
+    item->xDD4_itemVar.foxblaster.xE50.z = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE50.y = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE50.x = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE70 = 0.0F;
 }
 
 // HSD_GObj* it_802AE8A8(f32 arg0, HSD_GObj* arg1, Vec3* arg2, enum
@@ -602,9 +605,9 @@ Item_GObj* it_802AE994(Fighter_GObj* fighter_gobj, Fighter_Part ft_part,
     SpawnItem spawn;
     f32 val;
 
-    sp44.x = 0;
-    sp44.y = 0;
-    sp44.z = 0;
+    sp44.x = 0.0F;
+    sp44.y = 0.0F;
+    sp44.z = 0.0F;
 
     if (fighter_gobj != NULL) {
         spawn.kind = (ItemKind) it_kind;
@@ -629,10 +632,10 @@ Item_GObj* it_802AE994(Fighter_GObj* fighter_gobj, Fighter_Part ft_part,
             item = item_gobj->user_data;
             item->xDD4_itemVar.foxblaster.xE7C = (HSD_GObj*) fighter_gobj;
             it_802AE7B8(item_gobj); // Clears all item vars and item cmd vars
-            item->xDB8_itcmd_var3 = 1;
-            item->xDB4_itcmd_var2 = 1;
-            item->xDB0_itcmd_var1 = 1;
-            item->xDAC_itcmd_var0 = 1;
+            item->xDB8_itcmd_var3 = 1U;
+            item->xDB4_itcmd_var2 = 1U;
+            item->xDB0_itcmd_var1 = 1U;
+            item->xDAC_itcmd_var0 = 1U;
             Item_8026AB54((HSD_GObj*) item_gobj, (HSD_GObj*) fighter_gobj,
                           ft_part);
         }
@@ -824,7 +827,7 @@ block_5:
                 ftKb_SpecialNFx_800FDD14(item->xDD4_itemVar.foxblaster.xE7C);
             break;
         }
-        if ((blaster_action == 9) || (blaster_removed == 1)) {
+        if ((blaster_action == 9) || (blaster_removed == true)) {
             // clear_blaster2(item_gobj);
             clear_blaster(item_gobj);
         } else {
@@ -840,7 +843,7 @@ block_5:
                     item->xDD4_itemVar.foxblaster.xE7C);
                 break;
             default:
-                need_blaster = 1;
+                need_blaster = true;
                 break;
             }
             if (need_blaster) {
@@ -877,7 +880,6 @@ int it_802AEF08(HSD_GObj* arg0)
 // }
 int it_802AEF10(HSD_GObj* item_gobj)
 {
-    // void* temp_r31;
     Item* item;
 
     efLib_DestroyAll(item_gobj);
@@ -950,7 +952,7 @@ int it_802AF064(HSD_GObj* item_gobj)
             if ((((Item*) item_gobj->user_data)
                      ->xDD4_itemVar.foxblaster.xE7C != NULL) &&
                 (ftCo_800BF228((Fighter_GObj*) ((Item*) item_gobj->user_data)
-                                   ->xDD4_itemVar.foxblaster.xE7C) == 1))
+                                   ->xDD4_itemVar.foxblaster.xE7C) == true))
             {
                 // ft_scale.x = ft_scale.y = ft_scale.z =
                 // HSD_JObjGetScaleY(item->xDD4_itemVar.foxblaster.xE7C->hsd_obj);
