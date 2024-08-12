@@ -39,12 +39,6 @@
 /* 0942A0 */ static ftCo_GObj* ftCo_800942A0(ftCo_GObj* gobj, u32 flags);
 /* 09444C */ static void ftCo_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj);
 
-/* static */ float const ftCo_804D8580 = 30000;
-/* static */ float const ftCo_804D8584 = 1;
-/* static */ float const ftCo_804D8588 = 0;
-
-static char ftItemPickup_803C5580[] = "ftGetImmItem item_gobj is NULL!!\n";
-
 /* 094B6C */ static void ftCo_80094B6C(ftCo_GObj* gobj, Item_GObj* item_gobj);
 bool ftCo_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
 {
@@ -70,10 +64,10 @@ bool ftCo_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
                 float x_range = it_8026B378(item_gobj);
                 float y_range = it_8026B384(item_gobj);
                 Vec4* offset1 = !b ? offset0 : &pickup->gr_heavy_offset;
-                float x1 = offset1[1].x;
-                float x0 = (fp->facing_dir * offset1[0].x) + fp->cur_pos.x;
-                float y0 = fp->cur_pos.y + offset1[0].y;
-                float y1 = offset1[1].y;
+                float x1 = offset1->z;
+                float x0 = (fp->facing_dir * offset1->x) + fp->cur_pos.x;
+                float y0 = fp->cur_pos.y + offset1->y;
+                float y1 = offset1->w;
                 if (x0 - x1 - x_range < it_pos.x &&
                     x_range + (x0 + x1) > it_pos.x &&
                     y0 - y1 - y_range < it_pos.y &&
