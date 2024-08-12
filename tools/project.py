@@ -475,7 +475,7 @@ def generate_build_ninja(
             deps=rule.get("deps", None),
         )
         n.newline()
-        
+
     def write_custom_step(step: str) -> List[str]:
         implicit = []
         if config.custom_build_steps and step in config.custom_build_steps:
@@ -694,7 +694,11 @@ def generate_build_ninja(
             return src_obj_path
 
         def asm_build(
-            obj: Object, options: Dict[str, Any], lib_name: str, src_path: Path
+            obj: Object,
+            options: Dict[str, Any],
+            lib_name: str,
+            src_path: Path,
+            build_path: Path,
         ) -> Optional[Path]:
             asflags = options["asflags"] or config.asflags
             if asflags is None:
@@ -704,7 +708,7 @@ def generate_build_ninja(
                 extra_asflags_str = make_flags_str(options["extra_asflags"])
                 asflags_str += " " + extra_asflags_str
 
-            asm_obj_path = build_asm_path / f"{obj.base_name}.o"
+            asm_obj_path = build_path / f"{obj.base_name}.o"
 
             # Avoid creating duplicate build rules
             if asm_obj_path in source_added:
@@ -761,7 +765,7 @@ def generate_build_ninja(
                     built_obj_path = c_build(obj, options, lib_name, unit_src_path)
                 elif unit_src_path.suffix == ".s":
                     # Add assembler build rule
-                    built_obj_path = asm_build(obj, options, lib_name, unit_src_path)
+                    built_obj_path = asm_build(obj, options, lib_name, unit_src_path, build_src_path)
                 else:
                     sys.exit(f"Unknown source file type {unit_src_path}")
             else:
@@ -772,7 +776,7 @@ def generate_build_ninja(
             # Assembly overrides
             if unit_asm_path is not None and unit_asm_path.exists():
                 link_built_obj = True
-                built_obj_path = asm_build(obj, options, lib_name, unit_asm_path)
+                built_obj_path = asm_build(obj, options, lib_name, unit_asm_path, build_asm_path)
 
             if link_built_obj and built_obj_path is not None:
                 # Use the source-built object
