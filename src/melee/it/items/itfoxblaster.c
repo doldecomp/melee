@@ -59,7 +59,7 @@ static s32 it_803F6E3C[0xB] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0xA };
 static s32 it_803F6E68[0xC] = { 0, 9, 9, 3, 9, 9, 6, 7, 8, 9, 0xA, 0 };
 // static s8 it_804D5428[7] = "jobj.h";
 // static s8 it_804D5430[5] = "jobj";
-f32 it_804DCF38 =0x00000000;
+f32 it_804DCF38 = 0x00000000;
 
 static inline HSD_JObj* jobj_child(HSD_JObj* node)
 {
