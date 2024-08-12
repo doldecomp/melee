@@ -571,6 +571,7 @@ struct Item {
         PKFlashVars PKFlash;
         PKFlashExplVars PKFlashExpl;
         PKThunderVars PKThunderVars;
+        FoxBlasterVars foxblaster;
         FoxLaserVars foxlaser;
         FoxIllusionVars foxillusion;
         itLinkArrowVars linkarrow;

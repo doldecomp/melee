@@ -125,4 +125,19 @@ typedef enum ftFx_Submotion {
     ftFx_SM_SelfCount = ftFx_SM_Count - ftCo_SM_Count,
 } ftFx_Submotion;
 
+typedef enum ftFx_SpecialNIndex {
+    // msid = currASID - ftFx_MS_SpecialNStart;
+    ftFx_SpecialNIndex_Start,
+    ftFx_SpecialNIndex_Loop,
+    ftFx_SpecialNIndex_End,
+    ftFx_SpecialNIndex_AirStart,
+    ftFx_SpecialNIndex_AirLoop,
+    ftFx_SpecialNIndex_AirEnd,
+    // msid = currASID - ftCo_MS_CatchDash;
+    ftFx_SpecialNIndex_ThrowB,
+    ftFx_SpecialNIndex_ThrowHi,
+    ftFx_SpecialNIndex_ThrowLw,
+    // ftFx_SpecialNIndex_None,
+} ftFx_SpecialNIndex;
+
 #endif
