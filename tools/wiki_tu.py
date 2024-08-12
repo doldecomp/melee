@@ -96,9 +96,12 @@ File|Matched|Total|%|:grey_question:|Assignee<br>Discord|Assignee<br>GitHub
         # Link to source file
         file_link = f"[`{file}`](../blob/master/src/{file}.c)"
 
+        matched_code = float(unit["matched_code"])
+        total_code = float(unit["total_code"])
+        code_percent = (matched_code / total_code if total_code else 0) * 100
         matched = f"{friendly_size('matched_code')}"
         total = f"{friendly_size('total_code')}"
-        percent = f"`{humanfriendly.round_number(unit['fuzzy_match_percent'] or 0)}%`"
+        percent = f"`{humanfriendly.round_number(code_percent)}%`"
         linked = ":heavy_check_mark:" if unit["complete"] else ":x:"
 
         if assignee := assignees.get(file):
