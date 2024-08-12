@@ -342,10 +342,7 @@ void ftpickupitem_Anim(HSD_GObj* gobj)
         }
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Item_GObj* item_gobj = fp->x1978;
-        if (item_gobj == NULL) {
-            item_gobj = fp->item_gobj;
-        }
+        Item_GObj* item_gobj = fp->x1978 != NULL ? fp->x1978 : fp->item_gobj;
         if (item_gobj != NULL) {
             if (fp->motion_id == ftCo_MS_LightGet) {
                 if (ftCo_8009447C(gobj, item_gobj)) {
