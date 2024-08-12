@@ -85,12 +85,8 @@ HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     itPickup* pickup = &fp->x294_itPickup;
-    Vec4* offset0;
-    if (fp->ground_or_air == GA_Ground) {
-        offset0 = &pickup->gr_light_offset;
-    } else {
-        offset0 = &pickup->air_light_offset;
-    }
+    Vec4* offset0 = fp->ground_or_air == GA_Ground ? &pickup->gr_light_offset
+                                                   : &pickup->air_light_offset;
     if (ftCo_800A2040(fp) && (signed) fp->x1A88.xC == 28) {
         return NULL;
     }
@@ -113,17 +109,14 @@ HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
                         {
                             float x_range = it_8026B378(cur);
                             float y_range = it_8026B384(cur);
-                            if (unk_enum == 0) {
-                                vec = offset0;
-                            } else {
-                                vec = &pickup->gr_heavy_offset;
-                            }
+                            vec = unk_enum == 0 ? offset0
+                                                : &pickup->gr_heavy_offset;
                             {
-                                float x1 = vec[1].x;
+                                float x1 = vec->z;
                                 float x0 =
-                                    fp->facing_dir * vec[0].x + fp->cur_pos.x;
-                                float y0 = fp->cur_pos.y + vec[0].y;
-                                float y1 = vec[1].y;
+                                    fp->facing_dir * vec->x + fp->cur_pos.x;
+                                float y0 = fp->cur_pos.y + vec->y;
+                                float y1 = vec->w;
                                 if (x0 - x1 - x_range < it_pos.x &&
                                     x_range + (x0 + x1) > it_pos.x &&
                                     y0 - y1 - y_range < it_pos.y &&
