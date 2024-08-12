@@ -44,11 +44,8 @@
 /* static */ float const ftCo_804D8588 = 0;
 
 static char ftItemPickup_803C5580[] = "ftGetImmItem item_gobj is NULL!!\n";
-static char assert_msg1[] = "ftpickupitem.c";
-static char assert_msg2[] = "item_gobj";
 
 /* 094B6C */ static void ftCo_80094B6C(ftCo_GObj* gobj, Item_GObj* item_gobj);
-
 bool ftCo_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
 {
     u8 _[8] = { 0 };
@@ -86,16 +83,13 @@ bool ftCo_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
                 }
             }
         }
-        goto ret_false;
     }
-ret_false:
     return false;
 }
 
 HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
 {
-    u8 _[16] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
     itPickup* pickup = &fp->x294_itPickup;
     Vec4* offset0;
     if (fp->ground_or_air == GA_Ground) {
@@ -162,10 +156,10 @@ HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
 
 bool ftCo_8009447C(HSD_GObj* gobj, HSD_GObj* item_gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (item_gobj == NULL) {
         OSReport("ftGetImmItem item_gobj is NULL!!\n");
-        __assert("ftpickupitem.c", 399, "item_gobj");
+        __assert(__FILE__, 174, "item_gobj");
     }
     if (it_8026B30C(item_gobj) == 5) {
         switch (itGetKind(item_gobj)) {
@@ -380,7 +374,7 @@ void ftCo_80094B6C(HSD_GObj* gobj, HSD_GObj* item_gobj)
     ftCo_Fighter* fp = gobj->user_data;
     if (item_gobj == NULL) {
         OSReport("ftGetImmItem item_gobj is NULL!!\n");
-        __assert("ftpickupitem.c", 399, "item_gobj");
+        __assert(__FILE__, 399, "item_gobj");
     }
     if (it_8026B30C(item_gobj) == 5) {
         switch (itGetKind(item_gobj)) {
