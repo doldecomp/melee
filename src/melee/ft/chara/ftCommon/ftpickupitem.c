@@ -3,7 +3,7 @@
 #include "it/forward.h"
 #include <dolphin/mtx/forward.h>
 
-#include "ftCo_ItemGet.h"
+#include "ftpickupitem.h"
 
 #include "ftCo_HammerWait.h"
 #include "ftCo_Lift.h"
@@ -33,23 +33,7 @@
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 
-/* 094020 */ static bool ftCo_8009447C(ftCo_GObj* gobj, HSD_GObj* item_gobj);
-/* 094238 */ static void ftCo_80094694(HSD_GObj* gobj, FtMotionId msid,
-                                       bool loop);
-/* 0942A0 */ static ftCo_GObj* ftCo_800942A0(ftCo_GObj* gobj, u32 flags);
-/* 09444C */ static void ftCo_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj);
-
-/* static */ float const ftCo_804D8580 = 30000;
-/* static */ float const ftCo_804D8584 = 1;
-/* static */ float const ftCo_804D8588 = 0;
-
-static char ftItemPickup_803C5580[] = "ftGetImmItem item_gobj is NULL!!\n";
-static char assert_msg1[] = "ftpickupitem.c";
-static char assert_msg2[] = "item_gobj";
-
-/* 094B6C */ static void ftCo_80094B6C(ftCo_GObj* gobj, Item_GObj* item_gobj);
-
-bool ftCo_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
+bool ftpickupitem_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
 {
     u8 _[8] = { 0 };
     itPickup* pickup;
@@ -73,10 +57,10 @@ bool ftCo_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
                 float x_range = it_8026B378(item_gobj);
                 float y_range = it_8026B384(item_gobj);
                 Vec4* offset1 = !b ? offset0 : &pickup->gr_heavy_offset;
-                float x1 = offset1[1].x;
-                float x0 = (fp->facing_dir * offset1[0].x) + fp->cur_pos.x;
-                float y0 = fp->cur_pos.y + offset1[0].y;
-                float y1 = offset1[1].y;
+                float x1 = offset1->z;
+                float x0 = (fp->facing_dir * offset1->x) + fp->cur_pos.x;
+                float y0 = fp->cur_pos.y + offset1->y;
+                float y1 = offset1->w;
                 if (x0 - x1 - x_range < it_pos.x &&
                     x_range + (x0 + x1) > it_pos.x &&
                     y0 - y1 - y_range < it_pos.y &&
@@ -86,23 +70,16 @@ bool ftCo_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
                 }
             }
         }
-        goto ret_false;
     }
-ret_false:
     return false;
 }
 
-HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
+HSD_GObj* ftpickupitem_800942A0(HSD_GObj* gobj, u32 flags)
 {
-    u8 _[16] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
     itPickup* pickup = &fp->x294_itPickup;
-    Vec4* offset0;
-    if (fp->ground_or_air == GA_Ground) {
-        offset0 = &pickup->gr_light_offset;
-    } else {
-        offset0 = &pickup->air_light_offset;
-    }
+    Vec4* offset0 = fp->ground_or_air == GA_Ground ? &pickup->gr_light_offset
+                                                   : &pickup->air_light_offset;
     if (ftCo_800A2040(fp) && (signed) fp->x1A88.xC == 28) {
         return NULL;
     }
@@ -125,17 +102,14 @@ HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
                         {
                             float x_range = it_8026B378(cur);
                             float y_range = it_8026B384(cur);
-                            if (unk_enum == 0) {
-                                vec = offset0;
-                            } else {
-                                vec = &pickup->gr_heavy_offset;
-                            }
+                            vec = unk_enum == 0 ? offset0
+                                                : &pickup->gr_heavy_offset;
                             {
-                                float x1 = vec[1].x;
+                                float x1 = vec->z;
                                 float x0 =
-                                    fp->facing_dir * vec[0].x + fp->cur_pos.x;
-                                float y0 = fp->cur_pos.y + vec[0].y;
-                                float y1 = vec[1].y;
+                                    fp->facing_dir * vec->x + fp->cur_pos.x;
+                                float y0 = fp->cur_pos.y + vec->y;
+                                float y1 = vec->w;
                                 if (x0 - x1 - x_range < it_pos.x &&
                                     x_range + (x0 + x1) > it_pos.x &&
                                     y0 - y1 - y_range < it_pos.y &&
@@ -160,12 +134,12 @@ HSD_GObj* ftCo_800942A0(HSD_GObj* gobj, u32 flags)
     }
 }
 
-bool ftCo_8009447C(HSD_GObj* gobj, HSD_GObj* item_gobj)
+bool ftpickupitem_8009447C(HSD_GObj* gobj, HSD_GObj* item_gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (item_gobj == NULL) {
         OSReport("ftGetImmItem item_gobj is NULL!!\n");
-        __assert("ftpickupitem.c", 399, "item_gobj");
+        __assert(__FILE__, 174, "item_gobj");
     }
     if (it_8026B30C(item_gobj) == 5) {
         switch (itGetKind(item_gobj)) {
@@ -215,7 +189,7 @@ block_35:
     return false;
 }
 
-void ftCo_80094694(HSD_GObj* gobj, FtMotionId msid, bool loop)
+void ftpickupitem_80094694(HSD_GObj* gobj, FtMotionId msid, bool loop)
 {
     ftCo_Fighter* fp = gobj->user_data;
     {
@@ -243,20 +217,20 @@ void ftCo_80094694(HSD_GObj* gobj, FtMotionId msid, bool loop)
         fp->take_dmg_cb = ftCo_800974C4;
     } else {
         fp->mv.co.itemget.x0 = false;
-        fp->take_dmg_cb = ftCo_80094DF8;
+        fp->take_dmg_cb = ftpickupitem_80094DF8;
     }
 }
 
-bool ftCo_80094790(HSD_GObj* gobj)
+bool ftpickupitem_80094790(HSD_GObj* gobj)
 {
     u8 _[8] = { 0 };
     if (GET_FIGHTER(gobj)->x1978 == NULL) {
-        HSD_GObj* unk_gobj = ftCo_800942A0(gobj, 3);
+        HSD_GObj* unk_gobj = ftpickupitem_800942A0(gobj, 3);
         if (unk_gobj != NULL) {
             if (!it_8026B2B4(unk_gobj)) {
-                ftCo_80094694(gobj, 92, 0);
+                ftpickupitem_80094694(gobj, 92, 0);
             } else {
-                ftCo_80094694(gobj, 93, 0);
+                ftpickupitem_80094694(gobj, 93, 0);
             }
             return true;
         }
@@ -264,7 +238,7 @@ bool ftCo_80094790(HSD_GObj* gobj)
     return false;
 }
 
-void ftCo_80094818(HSD_GObj* gobj, int arg1)
+void ftpickupitem_80094818(HSD_GObj* gobj, int arg1)
 {
     u8 _[8] = { 0 };
     ftCo_Fighter* fp = gobj->user_data;
@@ -293,7 +267,7 @@ static inline void inlineB0(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj)
+void ftpickupitem_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->item_gobj != NULL) {
@@ -332,23 +306,20 @@ static inline enum_t inlineA0(ftCo_Fighter* fp)
     return unk_enum;
 }
 
-void ftCo_ItemGet_Anim(HSD_GObj* gobj)
+void ftpickupitem_Anim(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (ftCheckThrowB3(fp)) {
-        Item_GObj* item_gobj = ftCo_800942A0(gobj, inlineA0(fp));
+        Item_GObj* item_gobj = ftpickupitem_800942A0(gobj, inlineA0(fp));
         if (item_gobj != NULL) {
-            ftCo_800948A8(gobj, item_gobj);
+            ftpickupitem_800948A8(gobj, item_gobj);
         }
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Item_GObj* item_gobj = fp->x1978;
-        if (item_gobj == NULL) {
-            item_gobj = fp->item_gobj;
-        }
+        Item_GObj* item_gobj = fp->x1978 != NULL ? fp->x1978 : fp->item_gobj;
         if (item_gobj != NULL) {
             if (fp->motion_id == ftCo_MS_LightGet) {
-                if (ftCo_8009447C(gobj, item_gobj)) {
+                if (ftpickupitem_8009447C(gobj, item_gobj)) {
                     return;
                 }
             } else {
@@ -364,26 +335,26 @@ void ftCo_ItemGet_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftCo_ItemGet_IASA(HSD_GObj* gobj) {}
+void ftpickupitem_IASA(HSD_GObj* gobj) {}
 
-void ftCo_ItemGet_Phys(HSD_GObj* gobj)
+void ftpickupitem_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftCo_ItemGet_Coll(HSD_GObj* gobj)
+void ftpickupitem_Coll(HSD_GObj* gobj)
 {
-    ft_800841B8(gobj, ftCo_80094D90);
+    ft_800841B8(gobj, ftpickupitem_80094D90);
 }
 
-void ftCo_80094B6C(HSD_GObj* gobj, HSD_GObj* item_gobj)
+void ftpickupitem_80094B6C(HSD_GObj* gobj, HSD_GObj* item_gobj)
 {
     Vec3 vec;
     u8 _[4] = { 0 };
     ftCo_Fighter* fp = gobj->user_data;
     if (item_gobj == NULL) {
         OSReport("ftGetImmItem item_gobj is NULL!!\n");
-        __assert("ftpickupitem.c", 399, "item_gobj");
+        __assert(__FILE__, 399, "item_gobj");
     }
     if (it_8026B30C(item_gobj) == 5) {
         switch (itGetKind(item_gobj)) {
@@ -432,27 +403,27 @@ void ftCo_80094B6C(HSD_GObj* gobj, HSD_GObj* item_gobj)
     }
 }
 
-void ftCo_80094D90(HSD_GObj* gobj)
+void ftpickupitem_80094D90(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_8009750C(gobj);
-    /// @todo #ftCo_80094DF8
+    /// @todo #ftpickupitem_80094DF8
     if (fp->item_gobj != NULL) {
-        ftCo_80094B6C(gobj, fp->item_gobj);
+        ftpickupitem_80094B6C(gobj, fp->item_gobj);
     }
     if (fp->x1978 != NULL) {
-        ftCo_80094B6C(gobj, fp->x1978);
+        ftpickupitem_80094B6C(gobj, fp->x1978);
     }
     ftCo_800CC730(gobj);
 }
 
-void ftCo_80094DF8(HSD_GObj* gobj)
+void ftpickupitem_80094DF8(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->item_gobj != NULL) {
-        ftCo_80094B6C(gobj, fp->item_gobj);
+        ftpickupitem_80094B6C(gobj, fp->item_gobj);
     }
     if (fp->x1978 != NULL) {
-        ftCo_80094B6C(gobj, fp->x1978);
+        ftpickupitem_80094B6C(gobj, fp->x1978);
     }
 }

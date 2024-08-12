@@ -24,7 +24,7 @@
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_HammerWait.h"
-#include "ftCommon/ftCo_ItemGet.h"
+#include "ftCommon/ftpickupitem.h"
 #include "gm/gm_1601.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
@@ -1477,7 +1477,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     if (src->item_gobj != NULL) {
         dst->item_gobj = src->item_gobj;
         dst->x221E_b3 = src->x221E_b3;
-        ftCo_80094818(dst_gobj, 1);
+        ftpickupitem_80094818(dst_gobj, 1);
         it_8026B9A8(src->item_gobj, dst_gobj, dst->ft_data->x8->x10);
     }
     un_80322314();

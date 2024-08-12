@@ -10,7 +10,7 @@
 #include "ftCo_0A01.h"
 
 #include "ftCo_0B3E.h"
-#include "ftCo_ItemGet.h"
+#include "ftpickupitem.h"
 
 #include "ft/chara/ftPopo/ftPp_1211.h"
 #include "ft/fighter.h"
@@ -893,7 +893,9 @@ bool ftCo_800A3710(ftCo_Fighter* fp)
         if (!ftCo_800A2170(fp, other_fp)) {
             return false;
         }
-        if (ftCo_80094150(fp->gobj, M2C_FIELD(other_fp, HSD_GObj**, 4))) {
+        if (ftpickupitem_80094150(fp->gobj,
+                                  M2C_FIELD(other_fp, HSD_GObj**, 4)))
+        {
             return true;
         }
         return false;

@@ -4,9 +4,9 @@
 
 #include "ftCo_AttackS3.h"
 
-#include "ftCo_ItemGet.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Wait.h"
+#include "ftpickupitem.h"
 #include "math.h"
 
 #include "ft/fighter.h"
@@ -58,7 +58,7 @@ bool ftCo_AttackS3_CheckInput(ftCo_GObj* gobj)
 static void decideAngle(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (!ftCo_80094790(gobj)) {
+    if (!ftpickupitem_80094790(gobj)) {
         FtMotionId msid;
         float stick_angle = ftCo_GetLStickAngle(fp);
         if (stick_angle > p_ftCommonData->x9C &&

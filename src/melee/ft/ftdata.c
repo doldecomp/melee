@@ -76,7 +76,6 @@
 #include "ftCommon/ftCo_HammerTurn.h"
 #include "ftCommon/ftCo_HammerWait.h"
 #include "ftCommon/ftCo_HammerWalk.h"
-#include "ftCommon/ftCo_ItemGet.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_LandingAir.h"
 #include "ftCommon/ftCo_Lift.h"
@@ -101,6 +100,7 @@
 #include "ftCommon/ftCo_Wait.h"
 #include "ftCommon/ftCo_WarpStar.h"
 #include "ftCommon/ftCo_YoshiEgg.h"
+#include "ftCommon/ftpickupitem.h"
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftDonkey/ftDk_Init.h"
 #include "ftDonkey/ftDk_SpecialHi.h"
@@ -2533,10 +2533,10 @@ MotionState ftData_MotionStateList[ftCo_MS_Count] = {
         ftCo_SM_LightGet,
         Ft_MF_SkipModelPartVis,
         (FtMoveId_Default << 24) | (1 << 23),
-        ftCo_ItemGet_Anim,
-        ftCo_ItemGet_IASA,
-        ftCo_ItemGet_Phys,
-        ftCo_ItemGet_Coll,
+        ftpickupitem_Anim,
+        ftpickupitem_IASA,
+        ftpickupitem_Phys,
+        ftpickupitem_Coll,
         ftCamera_UpdateCameraBox,
     },
     {
@@ -2544,10 +2544,10 @@ MotionState ftData_MotionStateList[ftCo_MS_Count] = {
         ftCo_SM_HeavyGet,
         Ft_MF_SkipModelPartVis,
         FtMoveId_Default << 24,
-        ftCo_ItemGet_Anim,
-        ftCo_ItemGet_IASA,
-        ftCo_ItemGet_Phys,
-        ftCo_ItemGet_Coll,
+        ftpickupitem_Anim,
+        ftpickupitem_IASA,
+        ftpickupitem_Phys,
+        ftpickupitem_Coll,
         ftCamera_UpdateCameraBox,
     },
     {

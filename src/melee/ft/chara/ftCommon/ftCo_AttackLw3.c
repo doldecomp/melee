@@ -11,8 +11,8 @@
 #include "ftCo_AttackLw4.h"
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
-#include "ftCo_ItemGet.h"
 #include "ftCo_ItemThrow.h"
+#include "ftpickupitem.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -76,7 +76,7 @@ void decideFighter(HSD_GObj* gobj)
 static void doEnter(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (!ftCo_80094790(gobj)) {
+    if (!ftpickupitem_80094790(gobj)) {
         fp->cmd_vars[cmd_unk0_bool] = false;
         fp->allow_interrupt = false;
         fp->mv.co.attacklw3.x0 = 0;

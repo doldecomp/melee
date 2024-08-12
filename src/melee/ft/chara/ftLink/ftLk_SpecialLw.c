@@ -14,8 +14,8 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_ItemGet.h"
 #include "ftCommon/ftCo_ItemThrow.h"
+#include "ftCommon/ftpickupitem.h"
 #include "it/it_26B1.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
@@ -74,7 +74,7 @@ static void spawnBomb(HSD_GObj* gobj)
             fp->item_gobj = igobj;
             ftParts_80074A4C(gobj, 2, 1);
             if (igobj != NULL) {
-                ftCo_80094818(gobj, 1);
+                ftpickupitem_80094818(gobj, 1);
             }
         }
     }

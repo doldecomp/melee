@@ -10,7 +10,7 @@
 #include "ft/ftanim.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack1.h"
-#include "ftCommon/ftCo_ItemGet.h"
+#include "ftCommon/ftpickupitem.h"
 #include "ftGameWatch/types.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
@@ -154,7 +154,7 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
 
     u8 _[4];
 
-    if (ftCo_80094790(gobj) == false) {
+    if (ftpickupitem_80094790(gobj) == false) {
         fp->allow_interrupt = 0;
         fp->x2218_b1 = 0;
         Fighter_ChangeMotionState(gobj, ftGw_MS_Attack11, 0, 0.0f, 1.0f, 0.0f,

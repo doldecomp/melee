@@ -3313,18 +3313,18 @@
 	.4byte 0x0000004E
 	.4byte 0x00400000
 	.4byte 0x01800000
-	.4byte ftCo_ItemGet_Anim
-	.4byte ftCo_ItemGet_IASA
-	.4byte ftCo_ItemGet_Phys
-	.4byte ftCo_ItemGet_Coll
+	.4byte ftpickupitem_Anim
+	.4byte ftpickupitem_IASA
+	.4byte ftpickupitem_Phys
+	.4byte ftpickupitem_Coll
 	.4byte ftCamera_UpdateCameraBox
 	.4byte 0x00000059
 	.4byte 0x00400000
 	.4byte 0x01000000
-	.4byte ftCo_ItemGet_Anim
-	.4byte ftCo_ItemGet_IASA
-	.4byte ftCo_ItemGet_Phys
-	.4byte ftCo_ItemGet_Coll
+	.4byte ftpickupitem_Anim
+	.4byte ftpickupitem_IASA
+	.4byte ftpickupitem_Phys
+	.4byte ftpickupitem_Coll
 	.4byte ftCamera_UpdateCameraBox
 	.4byte 0x0000004F
 	.4byte 0x00440062
