@@ -99,7 +99,7 @@ static void setupVeg(ItemKind kind, HSD_GObj* gobj, Fighter* fp, Vec3* pos)
     fp->item_gobj = veg_gobj;
     fp->fv.pe.veg_gobj = veg_gobj;
     if (veg_gobj != NULL) {
-        ftCo_80094818(gobj, false);
+        ftpickupitem_80094818(gobj, false);
         efSync_Spawn(1234, gobj, &fp->cur_pos);
         fp->death2_cb = ftPe_Init_OnDeath2;
         fp->take_dmg_cb = ftPe_Init_OnDeath2;

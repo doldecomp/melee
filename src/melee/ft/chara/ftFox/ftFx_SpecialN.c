@@ -441,7 +441,7 @@ void ftFx_SpecialNEnd_Anim(HSD_GObj* gobj)
     it_802ADDD0(fp->fv.fx.x222C_blasterGObj, fp->cmd_vars[1]);
 
     if ((u32) fp->cmd_vars[1] == 2U) {
-        ftCo_80094818(gobj, 0);
+        ftpickupitem_80094818(gobj, 0);
     }
 
     if (((u32) fp->cmd_vars[3] == 2U) && (fp->fv.fx.x222C_blasterGObj != NULL))
@@ -579,7 +579,7 @@ void ftFx_SpecialAirNEnd_Anim(HSD_GObj* gobj)
 
     it_802ADDD0(fp->fv.fx.x222C_blasterGObj, fp->cmd_vars[1]);
     if ((u32) fp->cmd_vars[1] == 2U) {
-        ftCo_80094818(gobj, 0);
+        ftpickupitem_80094818(gobj, 0);
     }
     if (((u32) fp->cmd_vars[3] == 2U) &&
         ((u32) fp->fv.fx.x222C_blasterGObj != 0U))
@@ -857,7 +857,7 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
         case 0:
             fp->fv.fx.x222C_blasterGObj = NULL;
             ftFox_SpecialN_SetNULL(gobj);
-            ftCo_80094818(gobj, 0);
+            ftpickupitem_80094818(gobj, 0);
             break;
         }
     }

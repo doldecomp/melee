@@ -893,7 +893,9 @@ bool ftCo_800A3710(ftCo_Fighter* fp)
         if (!ftCo_800A2170(fp, other_fp)) {
             return false;
         }
-        if (ftCo_80094150(fp->gobj, M2C_FIELD(other_fp, HSD_GObj**, 4))) {
+        if (ftpickupitem_80094150(fp->gobj,
+                                  M2C_FIELD(other_fp, HSD_GObj**, 4)))
+        {
             return true;
         }
         return false;

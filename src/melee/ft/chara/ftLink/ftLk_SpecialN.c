@@ -553,7 +553,7 @@ static inline void doEndColl(ftLk_GObj* gobj)
             ftLk_SpecialN_UnsetArrow(gobj);
             fp->item_gobj = item_gobj;
         }
-        ftCo_80094818(gobj, false);
+        ftpickupitem_80094818(gobj, false);
     }
 }
 

@@ -112,7 +112,7 @@ static void checkAttack11(ftCo_GObj* gobj)
 {
     u8 _[8] = { 0 };
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (!ftCo_80094790(gobj)) {
+    if (!ftpickupitem_80094790(gobj)) {
         fp->allow_interrupt = false;
         fp->x2218_b1 = false;
         Fighter_ChangeMotionState(gobj, ftCo_MS_Attack11, getMotionFlags(fp),
@@ -182,7 +182,7 @@ static void doAttack12Rapid(ftCo_GObj* gobj)
 static void doAttack12Normal(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (!ftCo_80094790(gobj)) {
+    if (!ftpickupitem_80094790(gobj)) {
         fp->allow_interrupt = false;
         fp->x2218_b1 = false;
         Fighter_ChangeMotionState(gobj, ftCo_MS_Attack12, Ft_MF_None, 0, 1, 0,
@@ -261,7 +261,7 @@ static void doAttack13(ftCo_GObj* gobj)
         doAttack12Rapid(gobj);
         return;
     default:
-        if (!ftCo_80094790(gobj)) {
+        if (!ftpickupitem_80094790(gobj)) {
             fp->allow_interrupt = false;
             fp->x2218_b1 = false;
             Fighter_ChangeMotionState(gobj, ftCo_MS_Attack13, Ft_MF_None, 0, 1,

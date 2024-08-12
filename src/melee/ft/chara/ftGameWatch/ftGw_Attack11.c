@@ -154,7 +154,7 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
 
     u8 _[4];
 
-    if (ftCo_80094790(gobj) == false) {
+    if (ftpickupitem_80094790(gobj) == false) {
         fp->allow_interrupt = 0;
         fp->x2218_b1 = 0;
         Fighter_ChangeMotionState(gobj, ftGw_MS_Attack11, 0, 0.0f, 1.0f, 0.0f,

@@ -74,7 +74,7 @@ static void spawnBomb(HSD_GObj* gobj)
             fp->item_gobj = igobj;
             ftParts_80074A4C(gobj, 2, 1);
             if (igobj != NULL) {
-                ftCo_80094818(gobj, 1);
+                ftpickupitem_80094818(gobj, 1);
             }
         }
     }

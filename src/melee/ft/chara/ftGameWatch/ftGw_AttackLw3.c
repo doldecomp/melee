@@ -80,7 +80,7 @@ void ftGw_AttackLw3_ItemManholeRemove(HSD_GObj* gobj)
         fp->fv.gw.x2248_manholeGObj = NULL;
         it_8026BB20(fp->item_gobj);
         it_8026B73C(fp->item_gobj);
-        ftCo_80094818(gobj, 1);
+        ftpickupitem_80094818(gobj, 1);
     }
 }
 
@@ -136,7 +136,7 @@ void ftGw_AttackLw3_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (ftCo_80094790(gobj) == false) {
+    if (ftpickupitem_80094790(gobj) == false) {
         fp->allow_interrupt = 0;
         Fighter_ChangeMotionState(gobj, ftGw_MS_AttackLw3, 0, 0.0f, 1.0f, 0.0f,
                                   NULL);

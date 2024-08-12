@@ -76,7 +76,7 @@ bool ftPe_8011D518(HSD_GObj* gobj)
             fp->fv.pe.parasol_gobj = NULL;
             it_8026BB20(fp->item_gobj);
             it_8026B73C(fp->item_gobj);
-            ftCo_80094818(gobj, true);
+            ftpickupitem_80094818(gobj, true);
             return true;
         }
     }
