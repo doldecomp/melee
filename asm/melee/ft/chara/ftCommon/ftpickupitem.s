@@ -5,7 +5,7 @@
 .text
 .balign 4
 
-.fn ftCo_80094150, global
+.fn ftpickupitem_80094150, global
 /* 00000000 00000040  7C 08 02 A6 */	mflr r0
 /* 00000004 00000044  90 01 00 04 */	stw r0, 0x4(r1)
 /* 00000008 00000048  94 21 FF B8 */	stwu r1, -0x48(r1)
@@ -98,9 +98,9 @@
 /* 00000144 00000184  38 21 00 48 */	addi r1, r1, 0x48
 /* 00000148 00000188  7C 08 03 A6 */	mtlr r0
 /* 0000014C 0000018C  4E 80 00 20 */	blr
-.endfn ftCo_80094150
+.endfn ftpickupitem_80094150
 
-.fn ftCo_800942A0, global
+.fn ftpickupitem_800942A0, global
 /* 00000150 00000190  7C 08 02 A6 */	mflr r0
 /* 00000154 00000194  90 01 00 04 */	stw r0, 0x4(r1)
 /* 00000158 00000198  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -233,9 +233,9 @@
 /* 00000320 00000360  38 21 00 60 */	addi r1, r1, 0x60
 /* 00000324 00000364  7C 08 03 A6 */	mtlr r0
 /* 00000328 00000368  4E 80 00 20 */	blr
-.endfn ftCo_800942A0
+.endfn ftpickupitem_800942A0
 
-.fn ftCo_8009447C, global
+.fn ftpickupitem_8009447C, global
 /* 0000032C 0000036C  7C 08 02 A6 */	mflr r0
 /* 00000330 00000370  90 01 00 04 */	stw r0, 0x4(r1)
 /* 00000334 00000374  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -387,9 +387,9 @@
 /* 00000538 00000578  38 21 00 28 */	addi r1, r1, 0x28
 /* 0000053C 0000057C  7C 08 03 A6 */	mtlr r0
 /* 00000540 00000580  4E 80 00 20 */	blr
-.endfn ftCo_8009447C
+.endfn ftpickupitem_8009447C
 
-.fn ftCo_80094694, global
+.fn ftpickupitem_80094694, global
 /* 00000544 00000584  7C 08 02 A6 */	mflr r0
 /* 00000548 00000588  90 01 00 04 */	stw r0, 0x4(r1)
 /* 0000054C 0000058C  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -453,9 +453,9 @@
 /* 00000614 00000654  48 00 00 18 */	b .L_0000062C
 .L_00000618:
 /* 00000618 00000658  38 00 00 00 */	li r0, 0x0
-/* 0000061C 0000065C  3C 60 00 00 */	lis r3, ftCo_80094DF8@ha
+/* 0000061C 0000065C  3C 60 00 00 */	lis r3, ftpickupitem_80094DF8@ha
 /* 00000620 00000660  90 1E 23 40 */	stw r0, 0x2340(r30)
-/* 00000624 00000664  38 03 00 00 */	addi r0, r3, ftCo_80094DF8@l
+/* 00000624 00000664  38 03 00 00 */	addi r0, r3, ftpickupitem_80094DF8@l
 /* 00000628 00000668  90 1E 21 DC */	stw r0, 0x21dc(r30)
 .L_0000062C:
 /* 0000062C 0000066C  BB 61 00 1C */	lmw r27, 0x1c(r1)
@@ -463,9 +463,9 @@
 /* 00000634 00000674  38 21 00 30 */	addi r1, r1, 0x30
 /* 00000638 00000678  7C 08 03 A6 */	mtlr r0
 /* 0000063C 0000067C  4E 80 00 20 */	blr
-.endfn ftCo_80094694
+.endfn ftpickupitem_80094694
 
-.fn ftCo_80094790, global
+.fn ftpickupitem_80094790, global
 /* 00000640 00000680  7C 08 02 A6 */	mflr r0
 /* 00000644 00000684  90 01 00 04 */	stw r0, 0x4(r1)
 /* 00000648 00000688  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -477,7 +477,7 @@
 /* 00000660 000006A0  40 82 00 50 */	bne .L_000006B0
 /* 00000664 000006A4  38 7F 00 00 */	addi r3, r31, 0x0
 /* 00000668 000006A8  38 80 00 03 */	li r4, 0x3
-/* 0000066C 000006AC  48 00 00 01 */	bl ftCo_800942A0
+/* 0000066C 000006AC  48 00 00 01 */	bl ftpickupitem_800942A0
 /* 00000670 000006B0  28 03 00 00 */	cmplwi r3, 0x0
 /* 00000674 000006B4  41 82 00 3C */	beq .L_000006B0
 /* 00000678 000006B8  48 00 00 01 */	bl it_8026B2B4
@@ -486,13 +486,13 @@
 /* 00000684 000006C4  38 7F 00 00 */	addi r3, r31, 0x0
 /* 00000688 000006C8  38 80 00 5C */	li r4, 0x5c
 /* 0000068C 000006CC  38 A0 00 00 */	li r5, 0x0
-/* 00000690 000006D0  48 00 00 01 */	bl ftCo_80094694
+/* 00000690 000006D0  48 00 00 01 */	bl ftpickupitem_80094694
 /* 00000694 000006D4  48 00 00 14 */	b .L_000006A8
 .L_00000698:
 /* 00000698 000006D8  38 7F 00 00 */	addi r3, r31, 0x0
 /* 0000069C 000006DC  38 80 00 5D */	li r4, 0x5d
 /* 000006A0 000006E0  38 A0 00 00 */	li r5, 0x0
-/* 000006A4 000006E4  48 00 00 01 */	bl ftCo_80094694
+/* 000006A4 000006E4  48 00 00 01 */	bl ftpickupitem_80094694
 .L_000006A8:
 /* 000006A8 000006E8  38 60 00 01 */	li r3, 0x1
 /* 000006AC 000006EC  48 00 00 08 */	b .L_000006B4
@@ -504,9 +504,9 @@
 /* 000006BC 000006FC  38 21 00 20 */	addi r1, r1, 0x20
 /* 000006C0 00000700  7C 08 03 A6 */	mtlr r0
 /* 000006C4 00000704  4E 80 00 20 */	blr
-.endfn ftCo_80094790
+.endfn ftpickupitem_80094790
 
-.fn ftCo_80094818, global
+.fn ftpickupitem_80094818, global
 /* 000006C8 00000708  7C 08 02 A6 */	mflr r0
 /* 000006CC 0000070C  90 01 00 04 */	stw r0, 0x4(r1)
 /* 000006D0 00000710  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -546,9 +546,9 @@
 /* 0000074C 0000078C  38 21 00 20 */	addi r1, r1, 0x20
 /* 00000750 00000790  7C 08 03 A6 */	mtlr r0
 /* 00000754 00000794  4E 80 00 20 */	blr
-.endfn ftCo_80094818
+.endfn ftpickupitem_80094818
 
-.fn ftCo_800948A8, global
+.fn ftpickupitem_800948A8, global
 /* 00000758 00000798  7C 08 02 A6 */	mflr r0
 /* 0000075C 0000079C  90 01 00 04 */	stw r0, 0x4(r1)
 /* 00000760 000007A0  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -649,9 +649,9 @@
 /* 000008B8 000008F8  38 21 00 28 */	addi r1, r1, 0x28
 /* 000008BC 000008FC  7C 08 03 A6 */	mtlr r0
 /* 000008C0 00000900  4E 80 00 20 */	blr
-.endfn ftCo_800948A8
+.endfn ftpickupitem_800948A8
 
-.fn ftCo_ItemGet_Anim, global
+.fn ftpickupitem_Anim, global
 /* 000008C4 00000904  7C 08 02 A6 */	mflr r0
 /* 000008C8 00000908  90 01 00 04 */	stw r0, 0x4(r1)
 /* 000008CC 0000090C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -681,11 +681,11 @@
 /* 00000920 00000960  38 80 00 01 */	li r4, 0x1
 .L_00000924:
 /* 00000924 00000964  7F C3 F3 78 */	mr r3, r30
-/* 00000928 00000968  48 00 00 01 */	bl ftCo_800942A0
+/* 00000928 00000968  48 00 00 01 */	bl ftpickupitem_800942A0
 /* 0000092C 0000096C  7C 64 1B 79 */	mr. r4, r3
 /* 00000930 00000970  41 82 00 0C */	beq .L_0000093C
 /* 00000934 00000974  7F C3 F3 78 */	mr r3, r30
-/* 00000938 00000978  48 00 00 01 */	bl ftCo_800948A8
+/* 00000938 00000978  48 00 00 01 */	bl ftpickupitem_800948A8
 .L_0000093C:
 /* 0000093C 0000097C  7F C3 F3 78 */	mr r3, r30
 /* 00000940 00000980  48 00 00 01 */	bl ftAnim_IsFramesRemaining
@@ -705,7 +705,7 @@
 /* 00000970 000009B0  2C 00 00 5C */	cmpwi r0, 0x5c
 /* 00000974 000009B4  40 82 00 18 */	bne .L_0000098C
 /* 00000978 000009B8  7F C3 F3 78 */	mr r3, r30
-/* 0000097C 000009BC  48 00 00 01 */	bl ftCo_8009447C
+/* 0000097C 000009BC  48 00 00 01 */	bl ftpickupitem_8009447C
 /* 00000980 000009C0  2C 03 00 00 */	cmpwi r3, 0x0
 /* 00000984 000009C4  41 82 00 2C */	beq .L_000009B0
 /* 00000988 000009C8  48 00 00 30 */	b .L_000009B8
@@ -730,13 +730,13 @@
 /* 000009C4 00000A04  38 21 00 18 */	addi r1, r1, 0x18
 /* 000009C8 00000A08  7C 08 03 A6 */	mtlr r0
 /* 000009CC 00000A0C  4E 80 00 20 */	blr
-.endfn ftCo_ItemGet_Anim
+.endfn ftpickupitem_Anim
 
-.fn ftCo_ItemGet_IASA, global
+.fn ftpickupitem_IASA, global
 /* 000009D0 00000A10  4E 80 00 20 */	blr
-.endfn ftCo_ItemGet_IASA
+.endfn ftpickupitem_IASA
 
-.fn ftCo_ItemGet_Phys, global
+.fn ftpickupitem_Phys, global
 /* 000009D4 00000A14  7C 08 02 A6 */	mflr r0
 /* 000009D8 00000A18  90 01 00 04 */	stw r0, 0x4(r1)
 /* 000009DC 00000A1C  94 21 FF F8 */	stwu r1, -0x8(r1)
@@ -745,22 +745,22 @@
 /* 000009E8 00000A28  38 21 00 08 */	addi r1, r1, 0x8
 /* 000009EC 00000A2C  7C 08 03 A6 */	mtlr r0
 /* 000009F0 00000A30  4E 80 00 20 */	blr
-.endfn ftCo_ItemGet_Phys
+.endfn ftpickupitem_Phys
 
-.fn ftCo_ItemGet_Coll, global
+.fn ftpickupitem_Coll, global
 /* 000009F4 00000A34  7C 08 02 A6 */	mflr r0
-/* 000009F8 00000A38  3C 80 00 00 */	lis r4, ftCo_80094D90@ha
+/* 000009F8 00000A38  3C 80 00 00 */	lis r4, ftpickupitem_80094D90@ha
 /* 000009FC 00000A3C  90 01 00 04 */	stw r0, 0x4(r1)
-/* 00000A00 00000A40  38 84 00 00 */	addi r4, r4, ftCo_80094D90@l
+/* 00000A00 00000A40  38 84 00 00 */	addi r4, r4, ftpickupitem_80094D90@l
 /* 00000A04 00000A44  94 21 FF F8 */	stwu r1, -0x8(r1)
 /* 00000A08 00000A48  48 00 00 01 */	bl ft_800841B8
 /* 00000A0C 00000A4C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 00000A10 00000A50  38 21 00 08 */	addi r1, r1, 0x8
 /* 00000A14 00000A54  7C 08 03 A6 */	mtlr r0
 /* 00000A18 00000A58  4E 80 00 20 */	blr
-.endfn ftCo_ItemGet_Coll
+.endfn ftpickupitem_Coll
 
-.fn ftCo_80094B6C, local
+.fn ftpickupitem_80094B6C, local
 /* 00000A1C 00000A5C  7C 08 02 A6 */	mflr r0
 /* 00000A20 00000A60  90 01 00 04 */	stw r0, 0x4(r1)
 /* 00000A24 00000A64  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -914,9 +914,9 @@
 /* 00000C34 00000C74  38 21 00 30 */	addi r1, r1, 0x30
 /* 00000C38 00000C78  7C 08 03 A6 */	mtlr r0
 /* 00000C3C 00000C7C  4E 80 00 20 */	blr
-.endfn ftCo_80094B6C
+.endfn ftpickupitem_80094B6C
 
-.fn ftCo_80094D90, global
+.fn ftpickupitem_80094D90, global
 /* 00000C40 00000C80  7C 08 02 A6 */	mflr r0
 /* 00000C44 00000C84  90 01 00 04 */	stw r0, 0x4(r1)
 /* 00000C48 00000C88  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -929,13 +929,13 @@
 /* 00000C64 00000CA4  28 04 00 00 */	cmplwi r4, 0x0
 /* 00000C68 00000CA8  41 82 00 0C */	beq .L_00000C74
 /* 00000C6C 00000CAC  7F C3 F3 78 */	mr r3, r30
-/* 00000C70 00000CB0  48 00 00 01 */	bl ftCo_80094B6C
+/* 00000C70 00000CB0  48 00 00 01 */	bl ftpickupitem_80094B6C
 .L_00000C74:
 /* 00000C74 00000CB4  80 9F 19 78 */	lwz r4, 0x1978(r31)
 /* 00000C78 00000CB8  28 04 00 00 */	cmplwi r4, 0x0
 /* 00000C7C 00000CBC  41 82 00 0C */	beq .L_00000C88
 /* 00000C80 00000CC0  7F C3 F3 78 */	mr r3, r30
-/* 00000C84 00000CC4  48 00 00 01 */	bl ftCo_80094B6C
+/* 00000C84 00000CC4  48 00 00 01 */	bl ftpickupitem_80094B6C
 .L_00000C88:
 /* 00000C88 00000CC8  7F C3 F3 78 */	mr r3, r30
 /* 00000C8C 00000CCC  48 00 00 01 */	bl ftCo_800CC730
@@ -945,9 +945,9 @@
 /* 00000C9C 00000CDC  38 21 00 18 */	addi r1, r1, 0x18
 /* 00000CA0 00000CE0  7C 08 03 A6 */	mtlr r0
 /* 00000CA4 00000CE4  4E 80 00 20 */	blr
-.endfn ftCo_80094D90
+.endfn ftpickupitem_80094D90
 
-.fn ftCo_80094DF8, global
+.fn ftpickupitem_80094DF8, global
 /* 00000CA8 00000CE8  7C 08 02 A6 */	mflr r0
 /* 00000CAC 00000CEC  90 01 00 04 */	stw r0, 0x4(r1)
 /* 00000CB0 00000CF0  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -959,13 +959,13 @@
 /* 00000CC8 00000D08  28 04 00 00 */	cmplwi r4, 0x0
 /* 00000CCC 00000D0C  41 82 00 0C */	beq .L_00000CD8
 /* 00000CD0 00000D10  7F C3 F3 78 */	mr r3, r30
-/* 00000CD4 00000D14  48 00 00 01 */	bl ftCo_80094B6C
+/* 00000CD4 00000D14  48 00 00 01 */	bl ftpickupitem_80094B6C
 .L_00000CD8:
 /* 00000CD8 00000D18  80 9F 19 78 */	lwz r4, 0x1978(r31)
 /* 00000CDC 00000D1C  28 04 00 00 */	cmplwi r4, 0x0
 /* 00000CE0 00000D20  41 82 00 0C */	beq .L_00000CEC
 /* 00000CE4 00000D24  7F C3 F3 78 */	mr r3, r30
-/* 00000CE8 00000D28  48 00 00 01 */	bl ftCo_80094B6C
+/* 00000CE8 00000D28  48 00 00 01 */	bl ftpickupitem_80094B6C
 .L_00000CEC:
 /* 00000CEC 00000D2C  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 00000CF0 00000D30  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -973,7 +973,7 @@
 /* 00000CF8 00000D38  38 21 00 18 */	addi r1, r1, 0x18
 /* 00000CFC 00000D3C  7C 08 03 A6 */	mtlr r0
 /* 00000D00 00000D40  4E 80 00 20 */	blr
-.endfn ftCo_80094DF8
+.endfn ftpickupitem_80094DF8
 
 # 0x00000000 - 0x00000040
 .data
