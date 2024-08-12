@@ -468,11 +468,11 @@
 /* 0FDA68 */ void ftKb_SsSpecialN_Coll(ftKb_GObj* gobj);
 /* 0FDAF0 */ void ftKb_SsSpecialAirNStart_Coll(ftKb_GObj* gobj);
 /* 0FDB78 */ void ftKb_SsSpecialAirN_Coll(ftKb_GObj* gobj);
-/* 0FDC00 */ void ftKb_SpecialNFx_800FDC00(ftKb_GObj* gobj);
-/* 0FDC70 */ void ftKb_SpecialNFx_800FDC70(ftKb_GObj* gobj);
-/* 0FDD14 */ void ftKb_SpecialNFx_800FDD14(ftKb_GObj* gobj);
-/* 0FDD4C */ void ftKb_SpecialNFx_800FDD4C(ftKb_GObj* gobj);
-/* 0FDDF4 */ void ftKb_SpecialNFx_800FDDF4(ftKb_GObj* gobj);
+/* 0FDC00 */ void ftKb_SpecialNFx_800FDC00(ftKb_GObj* gobj, Vec3* vec);
+/* 0FDC70 */ void ftKb_SpecialNFx_800FDC70(ftKb_GObj* gobj, Vec3* vec);
+/* 0FDD14 */ bool ftKb_SpecialNFx_800FDD14(ftKb_GObj* gobj);
+/* 0FDD4C */ ftFx_SpecialNIndex ftKb_SpecialNFx_800FDD4C(ftKb_GObj* gobj);
+/* 0FDDF4 */ bool ftKb_SpecialNFx_800FDDF4(ftKb_GObj* gobj);
 /* 0FDEB4 */ void ftKb_SpecialNFx_800FDEB4(ftKb_GObj* gobj);
 /* 0FDEE0 */ void ftKb_SpecialNFx_800FDEE0(ftKb_GObj* gobj);
 /* 0FDF30 */ void ftKb_SpecialNFx_800FDF30(ftKb_GObj* gobj);

@@ -11,6 +11,40 @@
 #include <baselib/jobj.h>
 
 typedef struct {
+    /* x0 */ s32 xDD4;
+    /* x4 */ s32 xDD8;
+    /* x8 */ s32 xDDC;
+    /* xC */ s32 xDE0;
+    /* x10 */ s32 xDE4;
+    /* x14 */ s32 xDE8;
+    /* x18 */ s32 xDEC;
+    /* x1C */ s32 xDF0;
+    /* x20 */ s32 xDF4;
+    /* x24 */ s32 xDF8;
+    /* x28 */ s32 xDFC;
+    /* x2C */ s32 xE00;
+    /* x30 */ s32 xE04;
+    /* x34 */ s32 xE08;
+    /* x38 */ s32 xE0C;
+    /* x3C */ s32 xE10;
+    /* x40 */ Vec3 xE14;
+    /* x4C */ Vec3 xE20;
+    /* x58 */ Vec3 xE2C;
+    /* x64 */ Vec3 xE38;
+    /* x70 */ Vec3 xE44;
+    /* x7C */ Vec3 xE50;
+    /* x88 */ f32 xE5C;
+    /* x8C */ f32 xE60;
+    /* x90 */ f32 xE64;
+    /* x94 */ f32 xE68;
+    /* x98 */ f32 xE6C;
+    /* x9C */ f32 xE70;
+    /* x100 */ s32 xE74;
+    /* x104 */ s32 xE78;
+    /* x108 */ HSD_GObj* xE7C;
+} FoxBlasterVars;
+
+typedef struct {
     float xDD4;
     float xDD8;
     float xDDC;
