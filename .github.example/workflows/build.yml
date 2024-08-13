@@ -38,7 +38,7 @@ jobs:
       run: |
         python configure.py --map --version ${{ matrix.version }} \
             --binutils /binutils --compilers /compilers
-        ninja all_source build/${{ matrix.version }}/progress.json
+        ninja all_source build/${{ matrix.version }}/progress.json \
             build/${{ matrix.version }}/report.json
 
     # Upload progress if we're on the main branch
