@@ -69,6 +69,8 @@ class ProjectConfig:
         self.wrapper: Optional[Path] = None  # If None, download wibo on Linux
         self.sjiswrap_tag: Optional[str] = None  # Git tag
         self.sjiswrap_path: Optional[Path] = None  # If None, download
+        self.objdiff_tag: Optional[str] = None  # Git tag
+        self.objdiff_path: Optional[Path] = None  # If None, download
 
         # Project config
         self.non_matching: bool = False
@@ -237,6 +239,7 @@ def generate_build_ninja(
 
     build_path = config.out_path()
     progress_path = build_path / "progress.json"
+    report_path = build_path / "report.json"
     build_tools_path = config.build_dir / "tools"
     download_tool = config.tools_dir / "download_tool.py"
     n.rule(
@@ -254,17 +257,27 @@ def generate_build_ninja(
         deps="gcc",
     )
 
+    cargo_rule_written = False
+
+    def write_cargo_rule():
+        nonlocal cargo_rule_written
+        if not cargo_rule_written:
+            n.pool("cargo", 1)
+            n.rule(
+                name="cargo",
+                command="cargo build --release --manifest-path $in --bin $bin --target-dir $target",
+                description="CARGO $bin",
+                pool="cargo",
+                depfile=Path("$target") / "release" / "$bin.d",
+                deps="gcc",
+            )
+            cargo_rule_written = True
+
     if config.dtk_path is not None and config.dtk_path.is_file():
         dtk = config.dtk_path
     elif config.dtk_path is not None:
         dtk = build_tools_path / "release" / f"dtk{EXE}"
-        n.rule(
-            name="cargo",
-            command="cargo build --release --manifest-path $in --bin $bin --target-dir $target",
-            description="CARGO $bin",
-            depfile=Path("$target") / "release" / "$bin.d",
-            deps="gcc",
-        )
+        write_cargo_rule()
         n.build(
             outputs=dtk,
             rule="cargo",
@@ -288,6 +301,35 @@ def generate_build_ninja(
         )
     else:
         sys.exit("ProjectConfig.dtk_tag missing")
+
+    if config.objdiff_path is not None and config.objdiff_path.is_file():
+        objdiff = config.objdiff_path
+    elif config.objdiff_path is not None:
+        objdiff = build_tools_path / "release" / f"objdiff-cli{EXE}"
+        write_cargo_rule()
+        n.build(
+            outputs=objdiff,
+            rule="cargo",
+            inputs=config.objdiff_path / "Cargo.toml",
+            implicit=config.objdiff_path / "Cargo.lock",
+            variables={
+                "bin": "objdiff-cli",
+                "target": build_tools_path,
+            },
+        )
+    elif config.objdiff_tag:
+        objdiff = build_tools_path / f"objdiff-cli{EXE}"
+        n.build(
+            outputs=objdiff,
+            rule="download_tool",
+            implicit=download_tool,
+            variables={
+                "tool": "objdiff-cli",
+                "tag": config.objdiff_tag,
+            },
+        )
+    else:
+        sys.exit("ProjectConfig.objdiff_tag missing")
 
     if config.sjiswrap_path:
         sjiswrap = config.sjiswrap_path
@@ -374,7 +416,7 @@ def generate_build_ninja(
     n.build(
         outputs="tools",
         rule="phony",
-        inputs=[dtk, sjiswrap, wrapper, compilers, binutils],
+        inputs=[dtk, sjiswrap, wrapper, compilers, binutils, objdiff],
     )
     n.newline()
 
@@ -460,7 +502,8 @@ def generate_build_ninja(
     )
     n.newline()
 
-    n.comment("Custom project build rules (pre/post-processing)")
+    if len(config.custom_build_rules or {}) > 0:
+        n.comment("Custom project build rules (pre/post-processing)")
     for rule in config.custom_build_rules or {}:
         n.rule(
             name=rule.get("name"),
@@ -765,7 +808,9 @@ def generate_build_ninja(
                     built_obj_path = c_build(obj, options, lib_name, unit_src_path)
                 elif unit_src_path.suffix == ".s":
                     # Add assembler build rule
-                    built_obj_path = asm_build(obj, options, lib_name, unit_src_path, build_src_path)
+                    built_obj_path = asm_build(
+                        obj, options, lib_name, unit_src_path, build_src_path
+                    )
                 else:
                     sys.exit(f"Unknown source file type {unit_src_path}")
             else:
@@ -776,7 +821,9 @@ def generate_build_ninja(
             # Assembly overrides
             if unit_asm_path is not None and unit_asm_path.exists():
                 link_built_obj = True
-                built_obj_path = asm_build(obj, options, lib_name, unit_asm_path, build_asm_path)
+                built_obj_path = asm_build(
+                    obj, options, lib_name, unit_asm_path, build_asm_path
+                )
 
             if link_built_obj and built_obj_path is not None:
                 # Use the source-built object
@@ -968,6 +1015,21 @@ def generate_build_ninja(
             outputs=progress_path,
             rule="progress",
             implicit=[ok_path, configure_script, python_lib, config.config_path],
+        )
+
+        ###
+        # Generate progress report
+        ###
+        n.comment("Generate progress report")
+        n.rule(
+            name="report",
+            command=f"{objdiff} report generate -o $out",
+            description="REPORT",
+        )
+        n.build(
+            outputs=report_path,
+            rule="report",
+            implicit=[objdiff, "all_source"],
         )
 
         ###
