@@ -267,10 +267,10 @@ void Ground_801BFFB0(void)
     stage_info.x694[2] = NULL;
     stage_info.x694[3] = NULL;
     stage_info.x6A4 = NULL;
-    stage_info.cam_info.cam_bounds_left = -170;
-    stage_info.cam_info.cam_bounds_right = 170;
-    stage_info.cam_info.cam_bounds_top = 120;
-    stage_info.cam_info.cam_bounds_bottom = -60;
+    stage_info.cam_info.cam_bounds.left = -170;
+    stage_info.cam_info.cam_bounds.right = 170;
+    stage_info.cam_info.cam_bounds.top = 120;
+    stage_info.cam_info.cam_bounds.bottom = -60;
     stage_info.cam_info.cam_x_offset = 0;
     stage_info.cam_info.cam_y_offset = 0;
     stage_info.cam_info.cam_vertical_tilt = 30;
@@ -1711,22 +1711,22 @@ void Ground_801C36F4(int map_id, HSD_JObj* root, UNK_T joint)
 
 void Ground_801C3880(f32 val)
 {
-    stage_info.cam_info.cam_bounds_top = val;
+    stage_info.cam_info.cam_bounds.top = val;
 }
 
 void Ground_801C3890(f32 val)
 {
-    stage_info.cam_info.cam_bounds_bottom = val;
+    stage_info.cam_info.cam_bounds.bottom = val;
 }
 
 void Ground_801C38A0(f32 val)
 {
-    stage_info.cam_info.cam_bounds_left = val;
+    stage_info.cam_info.cam_bounds.left = val;
 }
 
 void Ground_801C38AC(f32 val)
 {
-    stage_info.cam_info.cam_bounds_right = val;
+    stage_info.cam_info.cam_bounds.right = val;
 }
 
 void Ground_801C38BC(f32 x, f32 y)
@@ -1906,10 +1906,10 @@ void Ground_801C39C0(void)
             break;
         }
     }
-    stage_info.cam_info.cam_bounds_top = phi_f0;
-    stage_info.cam_info.cam_bounds_bottom = phi_f5;
-    stage_info.cam_info.cam_bounds_left = phi_f3;
-    stage_info.cam_info.cam_bounds_right = phi_f4;
+    stage_info.cam_info.cam_bounds.top = phi_f0;
+    stage_info.cam_info.cam_bounds.bottom = phi_f5;
+    stage_info.cam_info.cam_bounds.left = phi_f3;
+    stage_info.cam_info.cam_bounds.right = phi_f4;
     stage_info.cam_info.cam_x_offset = phi_f1;
     stage_info.cam_info.cam_y_offset = phi_f2;
 }
