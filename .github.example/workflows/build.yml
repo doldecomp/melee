@@ -39,6 +39,7 @@ jobs:
         python configure.py --map --version ${{ matrix.version }} \
             --binutils /binutils --compilers /compilers
         ninja all_source build/${{ matrix.version }}/progress.json
+            build/${{ matrix.version }}/report.json
 
     # Upload progress if we're on the main branch
     - name: Upload progress
@@ -61,3 +62,10 @@ jobs:
       with:
         name: ${{ matrix.version }}_maps
         path: build/${{ matrix.version }}/**/*.MAP
+
+    # Upload progress report
+    - name: Upload report
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.version }}_report
+        path: build/${{ matrix.version }}/report.json
