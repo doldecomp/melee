@@ -25,6 +25,7 @@
 #include "gr/ground.h"
 #include "gr/grvenom.h"
 #include "gr/stage.h"
+#include "gr/types.h"
 #include "it/inlines.h"
 #include "it/item.h"
 #include "it/types.h"
@@ -44,7 +45,7 @@ int ftCo_803C5A68[] = {
     5, 2, 2, 2, 3, 3, 3, 4, 0, 0, 8, 4, 1, 4, 4, 5, 5,
 };
 
-extern UNK_T* ftCo_803C6594;
+/* static */ extern StageBlastZone** ftCo_803C6594;
 
 #pragma force_active on
 
@@ -477,8 +478,7 @@ void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2, float arg3)
         data->x54.x = arg1;
         data->x54.y = arg2;
         data->x38 = arg3;
-        ftCo_800A1CC4(ftCo_803C6594[stage_info.internal_stage_id],
-                      &stage_info.cam_info, data);
+        ftCo_800A1CC4(fp, ftCo_803C6594[stage_info.internal_stage_id]);
     }
 }
 
@@ -867,7 +867,27 @@ bool ftCo_800A3498(ftCo_Fighter* fp)
     return false;
 }
 
-/// #ftCo_800A3554
+bool ftCo_800A3554(ftCo_Fighter* fp, float arg1)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    if (!ftCo_800A21FC(fp)) {
+        return false;
+    }
+    {
+        float x = data->x54.x - fp->cur_pos.x, y = data->x54.y - fp->cur_pos.y;
+        if (sqrtf(SQ(x) + SQ(y)) < data->x38 + arg1) {
+            if (data->x60 != 0) {
+                data->x60 = 0;
+                data->x54.x = data->x64.x;
+                data->x54.y = data->x64.y;
+                ftCo_800A1CC4(fp, ftCo_803C6594[stage_info.internal_stage_id]);
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+}
 
 bool ftCo_800A3710(ftCo_Fighter* fp)
 {
@@ -990,6 +1010,8 @@ static inline bool inlineD1(ftCo_Fighter* fp)
     }
 }
 
+static inline void inlineD3(ftCo_Fighter* fp) {}
+
 ftCo_Fighter* ftCo_800A4A40(ftCo_Fighter* fp)
 {
     if (fp == NULL) {
@@ -1033,6 +1055,74 @@ ftCo_Fighter* ftCo_800A4A40(ftCo_Fighter* fp)
 /// #ftCo_800A4E8C
 
 /// #ftCo_800A50D4
+
+static inline void inlineD2(ftCo_Fighter* var_r28, ftCo_Fighter* fp,
+                            ftCo_Fighter* temp_r31, ftCo_Fighter* temp_r29)
+{
+    f32 var_f31 = 0;
+    f32 temp_f1;
+    f32 temp_f2;
+    f32 temp_f1_2;
+    f32 temp_f2_2;
+    f32 temp_f1_3;
+    HSD_GObj* var_r27 = NULL;
+    if (!(ftCo_IsAlly(fp, temp_r29) != 0)) {
+        return;
+    }
+    if (inlineD1(temp_r29) == 0) {
+        if (var_r28 == NULL) {
+            var_r28 = temp_r29;
+            temp_f1 = fp->cur_pos.y - M2C_FIELD(temp_r29, f32*, 0xB4);
+            temp_f2 = fp->cur_pos.x - M2C_FIELD(temp_r29, f32*, 0xB0);
+            var_f31 = sqrtf__Ff((temp_f2 * temp_f2) + (temp_f1 * temp_f1));
+        } else {
+            ftCo_Fighter* fp1;
+            fp1 = GET_FIGHTER(var_r27);
+            temp_f1_2 = fp->cur_pos.y - M2C_FIELD(fp1, f32*, 0xB4);
+            temp_f2_2 = fp->cur_pos.x - M2C_FIELD(fp1, f32*, 0xB0);
+            temp_f1_3 =
+                sqrtf__Ff((temp_f2_2 * temp_f2_2) + (temp_f1_2 * temp_f1_2));
+            if (var_f31 > temp_f1_3) {
+                var_f31 = temp_f1_3;
+                var_r28 = fp1;
+            }
+        }
+    }
+}
+
+Fighter* ftCo_800A50D4(ftCo_Fighter* fp)
+{
+    Fighter_GObj* temp_r30;
+    HSD_GObj* var_r27;
+    f32 temp_f29;
+    f32 temp_f30;
+    s32 var_r0;
+    s32 var_r0_2;
+    void* temp_r31;
+    void* var_r28;
+    void* temp_r29 = NULL;
+
+    // var_f31 = saved_reg_f31;
+    if (fp == NULL) {
+        return NULL;
+    }
+
+    /// @todo #ftCo_800A4A40 but with #ftCo_IsAlly. Same inline somehow.
+    temp_r31 = fp + 0x1A88;
+    var_r28 = NULL;
+    var_r27 = HSD_GObj_Entities->fighters;
+loop_24:
+    if (var_r27 != NULL) {
+        if (fp->gobj != var_r27) {
+            if (inlineD0(fp, temp_r31) == 0) {
+                inlineD2(var_r28, fp, temp_r31, temp_r29);
+            }
+        }
+        var_r27 = var_r27->next;
+        goto loop_24;
+    }
+    return var_r28;
+}
 
 ftCo_Fighter* ftCo_800A5294(ftCo_Fighter* fp, int player_id)
 {
@@ -1254,16 +1344,46 @@ void ftCo_800A8DE4(Fighter* fp)
 
 /// #ftCo_800A8EB0
 
-/// #ftCo_800A92CC
-
 static inline float inlineE0(ftCo_Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
-    if ((data->x54.x - fp->cur_pos.x) < 0.0f) {
+    if (data->x54.x - fp->cur_pos.x < 0.0f) {
         return -(data->x54.x - fp->cur_pos.x);
     } else {
         return data->x54.x - fp->cur_pos.x;
     }
+}
+
+void ftCo_800A92CC(ftCo_Fighter* fp)
+{
+    if (inlineE0(fp) > 60.0) {
+        ftCo_800B46B8(fp, 0x81, 0x7F);
+        ftCo_800B46B8(fp, 0x80, 0);
+        ftCo_800B46B8(fp, 0x88, 1);
+        ftCo_800B463C(fp, 4);
+        ftCo_800B46B8(fp, 0x81, 0x58);
+        ftCo_800B46B8(fp, 0x90, 0x58);
+        ftCo_800B46B8(fp, 0x8E, 0xF);
+        ftCo_800B46B8(fp, 0x90, 0x7F);
+        ftCo_800B46B8(fp, 0x81, 0);
+        ftCo_800B46B8(fp, 0x8E, 0xF);
+        ftCo_800B463C(fp, 0x7F);
+        return;
+    }
+    ftCo_800B46B8(fp, 0x81, 0x7F);
+    ftCo_800B46B8(fp, 0x80, 0);
+    ftCo_800B46B8(fp, 0x88, 1);
+    ftCo_800B463C(fp, 4);
+    ftCo_800B46B8(fp, 0x8E, 0xF);
+    if (HSD_Randf() > 0.5) {
+        ftCo_800B46B8(fp, 0x90, 0x58);
+        ftCo_800B46B8(fp, 0x81, 0x58);
+    } else {
+        ftCo_800B46B8(fp, 0x90, 0x7F);
+        ftCo_800B46B8(fp, 0x81, 0);
+    }
+    ftCo_800B46B8(fp, 0x8E, 0xF);
+    ftCo_800B463C(fp, 0x7F);
 }
 
 void ftCo_800A949C(ftCo_Fighter* fp)
@@ -1580,7 +1700,91 @@ void ftCo_800AD42C(ftCo_Fighter* fp)
 
 /// #ftCo_800AF78C
 
-/// #ftCo_800AFC40
+void ftCo_800AFC40(ftCo_Fighter* fp)
+{
+    Fighter* temp_r3_3;
+    Item_GObj* temp_r3;
+    enum ItemKind temp_r0;
+    s32 temp_r3_2;
+    s32 var_r0;
+    s32 var_r0_2;
+    s32 var_r27;
+    struct Fighter_x1A88_t* temp_r28;
+    struct Fighter_x1A88_t* temp_r4;
+    void* temp_r31;
+
+    temp_r31 = fp + 0x1A88;
+    if ((fp->x221D >> 1) & 1) {
+        var_r0 = 1;
+    } else if ((fp->x2168 != 0) && (fp->x2338.x == 0)) {
+        var_r0 = 1;
+    } else {
+        var_r0 = 0;
+    }
+    if (var_r0 != 0) {
+        ftCo_800AECF0(fp);
+        return;
+    }
+    var_r27 = 1;
+    M2C_FIELD(temp_r31, u8*, 0xF8) = M2C_FIELD(temp_r31, u8*, 0xF8) | 0x80;
+    M2C_FIELD(temp_r31, u8*, 0xF9) = M2C_FIELD(temp_r31, u8*, 0xF9) | 0x20;
+    M2C_FIELD(temp_r31, u8*, 0xF9) = M2C_FIELD(temp_r31, u8*, 0xF9) | 8;
+    M2C_FIELD(temp_r31, u8*, 0xF9) = M2C_FIELD(temp_r31, u8*, 0xF9) | 0x10;
+    M2C_FIELD(temp_r31, u8*, 0xF9) = M2C_FIELD(temp_r31, u8*, 0xF9) | 4;
+    M2C_FIELD(temp_r31, u8*, 0xF9) = M2C_FIELD(temp_r31, u8*, 0xF9) | 2;
+    M2C_FIELD(temp_r31, u8*, 0xF9) = M2C_FIELD(temp_r31, u8*, 0xF9) & ~1;
+    M2C_FIELD(temp_r31, u8*, 0xF9) = M2C_FIELD(temp_r31, u8*, 0xF9) & ~0x40;
+    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    temp_r28 = &fp->x1A88;
+    temp_r3 = fp->item_gobj;
+    if (temp_r3 != NULL) {
+        temp_r0 = GET_ITEM(temp_r3)->kind;
+        switch (temp_r0) { /* irregular */
+        case It_Kind_Heart:
+            break;
+        case It_Kind_Tomato:
+            break;
+        case It_Kind_Foods:
+            break;
+        default:
+            var_r27 = 0;
+            break;
+        }
+        if (var_r27 == 0) {
+            temp_r28->x4C = NULL;
+        } else {
+            goto block_18;
+        }
+    } else {
+    block_18:
+        if (fp->x2168 != 0) {
+            temp_r28->x4C = NULL;
+        } else {
+            temp_r28->x4C = ftCo_800A5F4C(fp, 0x23);
+        }
+    }
+    fp->x1A88.x50 = ftCo_800A648C(fp);
+    temp_r4 = &fp->x1A88;
+    temp_r3_2 = fp->x1A88.x18;
+    if ((temp_r3_2 != fp->x1A88.x20) && (temp_r3_2 != temp_r4->x1C)) {
+        temp_r4->x60 = 0;
+    }
+    if (temp_r4->x18 == 4) {
+        var_r0_2 = 0;
+    } else {
+        M2C_FIELD(temp_r4, u8*, 0xFA) = M2C_FIELD(temp_r4, u8*, 0xFA) & ~0x20;
+        var_r0_2 = 1;
+    }
+    if (var_r0_2 != 0) {
+        temp_r3_3 = ftCo_800A50D4(fp);
+        if (temp_r3_3 != NULL) {
+            ftCo_800A75DC(fp, temp_r3_3);
+        } else {
+            ftCo_800A75DC(fp, M2C_FIELD(temp_r31, Fighter**, 0x44));
+        }
+    }
+    ftCo_800ADE48(fp);
+}
 
 /// #ftCo_800AFE3C
 
@@ -1660,7 +1864,36 @@ void ftCo_800B0760(ftCo_Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
-/// #ftCo_800B0918
+/// @todo Maybe a macro?
+static inline float inlineM0(float x)
+{
+    return x >= 0 ? 127.0F * x : 128.0F * x;
+}
+
+void ftCo_800B0918(Fighter* fp0, Fighter* fp1)
+{
+    struct Fighter_x1A88_t* temp_r4 = &fp1->x1A88;
+    temp_r4->x444 = temp_r4->x444->x1C;
+    temp_r4->x448 = temp_r4->x448->x1C;
+    if (temp_r4->x444 == temp_r4->x444) {
+        temp_r4->x444 = &temp_r4->xFC;
+    }
+    if (temp_r4->x448 == temp_r4->x444) {
+        temp_r4->x448 = &temp_r4->xFC;
+    }
+    temp_r4->x444->x6 = inlineM0(fp0->input.lstick.x);
+    temp_r4->x444->x7 = inlineM0(fp0->input.lstick.y);
+    temp_r4->x444->x8 = inlineM0(fp0->input.cstick.x);
+    temp_r4->x444->x9 = inlineM0(fp0->input.cstick.y);
+    temp_r4->x444->x4 = fp0->input.x650;
+    temp_r4->x444->x5 = fp0->input.x650;
+    temp_r4->x444->x0 = fp0->input.held_inputs;
+    {
+        struct Fighter_x1A88_xFC_t* temp_r6 = temp_r4->x444;
+        temp_r6->cur_pos = fp0->cur_pos;
+        temp_r4->x444->facing_dir = fp0->facing_dir;
+    }
+}
 
 static inline bool inlineJ0(ftCo_Fighter* fp, ftCo_Fighter* nana_fp)
 {
@@ -1696,8 +1929,10 @@ void ftCo_800B0AF4(ftCo_Fighter* fp)
         data->x8 = data->x448->x4;
         data->x9 = data->x448->x5;
         if (fp->x2225_b3) {
-            fp->cur_pos.x = 0.95 * fp->cur_pos.x + 0.05 * data->x448->offset.x;
-            fp->cur_pos.y = 0.95 * fp->cur_pos.y + 0.05 * data->x448->offset.y;
+            fp->cur_pos.x =
+                0.95 * fp->cur_pos.x + 0.05 * data->x448->cur_pos.x;
+            fp->cur_pos.y =
+                0.95 * fp->cur_pos.y + 0.05 * data->x448->cur_pos.y;
             if (fp->motion_id != ftPp_MS_SpecialLw &&
                 fp->motion_id != ftPp_MS_SpecialAirLw)
             {
@@ -1707,7 +1942,129 @@ void ftCo_800B0AF4(ftCo_Fighter* fp)
     }
 }
 
-/// #ftCo_800B0CA8
+bool ftCo_800B0CA8(Fighter* fp0, Fighter* fp1)
+{
+    Item_GObj* temp_r5_2;
+    enum ItemKind temp_r0;
+    s32 temp_r0_2;
+    s32 temp_r5;
+    s32 var_r0;
+    s32 var_r0_2;
+    s32 var_r0_3;
+    s32 var_r0_4;
+
+    temp_r5 = fp1->motion_id;
+    switch (temp_r5) { /* irregular */
+    case 0xFC:
+        var_r0 = 1;
+        break;
+    case 0xFD:
+        var_r0 = 2;
+        break;
+    default:
+        var_r0 = 0;
+        break;
+    }
+    if (var_r0 == 0) {
+        if (temp_r5 == 0xE0) {
+            var_r0_2 = 1;
+        } else if (temp_r5 == 0xE3) {
+            var_r0_2 = 1;
+        } else if ((temp_r5 >= 0x10A) && (temp_r5 <= 0x10E)) {
+            var_r0_2 = 1;
+        } else {
+            var_r0_2 = 0;
+        }
+        if (var_r0_2 == 0) {
+            if ((temp_r5 - 0xF5) <= 1) {
+                var_r0_3 = 1;
+            } else {
+                var_r0_3 = 0;
+            }
+            if (var_r0_3 != 0) {
+                /* Duplicate return node #21. Try simplifying control flow for
+                 * better match */
+                return 0;
+            }
+            if ((temp_r5 >= 0x120) && (temp_r5 <= 0x121)) {
+                return 0;
+            }
+            if ((temp_r5 >= 0xC) && (temp_r5 <= 0xD)) {
+                return 0;
+            }
+            if ((temp_r5 >= 0x131) && (temp_r5 <= 0x132)) {
+                return 0;
+            }
+            if ((temp_r5 >= 0x91) && (temp_r5 <= 0x93)) {
+                return 0;
+            }
+            temp_r5_2 = fp0->item_gobj;
+            if (temp_r5_2 != NULL) {
+                temp_r0 = GET_ITEM(temp_r5_2)->kind;
+                if (temp_r0 != It_Kind_Egg) {
+                    if (temp_r0 < 3) {
+                        if (temp_r0 < 1) {
+                            goto block_41;
+                        }
+                        goto block_40;
+                    }
+                    if (temp_r0 < 6) {
+                    block_40:
+                        var_r0_4 = 1;
+                    } else {
+                        goto block_41;
+                    }
+                } else {
+                block_41:
+                    var_r0_4 = 0;
+                }
+                if (var_r0_4 != 0) {
+                    return 0;
+                }
+                goto block_44;
+            }
+        block_44:
+            if ((fp1->ground_or_air == GA_Ground) &&
+                (fp0->ground_or_air == GA_Air) &&
+                (fp1->cur_pos.y > fp0->cur_pos.y) && (fp0->pos_delta.y < 0.0f))
+            {
+                return 0;
+            }
+            if ((M2C_FIELD(fp0, u8*, 0x2225) >> 4) & 1) {
+                return 1;
+            }
+            temp_r0_2 = fp0->motion_id;
+            if (temp_r0_2 < 0x2C) {
+                if (temp_r0_2 != 0x29) {
+                    if ((temp_r0_2 < 0x29) && (temp_r0_2 < 0x27)) {
+                        /* Duplicate return node #60. Try simplifying control
+                         * flow for better match */
+                        return 0;
+                    }
+                    /* Duplicate return node #59. Try simplifying control flow
+                     * for better match */
+                    return 1;
+                }
+                /* Duplicate return node #60. Try simplifying control flow for
+                 * better match */
+                return 0;
+            }
+            if (temp_r0_2 < 0x4B) {
+                if (temp_r0_2 < 0x46) {
+                    /* Duplicate return node #60. Try simplifying control flow
+                     * for better match */
+                    return 0;
+                }
+                return 1;
+            }
+            return 0;
+        }
+        /* Duplicate return node #21. Try simplifying control flow for better
+         * match */
+        return 0;
+    }
+    return 0;
+}
 
 static inline bool inlineK0(ftCo_Fighter* fp0)
 {
@@ -1724,7 +2081,7 @@ bool ftCo_800B0E98(Fighter* fp0, Fighter* fp1)
     s32 var_r0;
     s32 var_r0_2;
 
-    if (ftCo_800B0CA8(fp0) != 0) {
+    if (ftCo_800B0CA8(fp0, fp1) != 0) {
         struct Fighter_x1A88_t* data = &fp0->x1A88;
         if (fp1->ground_or_air == GA_Air) {
             return false;

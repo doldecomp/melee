@@ -957,6 +957,23 @@ typedef struct FtDynamicBones {
                                          // once they're defined //
 } FtDynamicBones;
 
+struct Fighter_x1A88_xFC_t {
+    /*  +0 */ HSD_Pad x0;
+    /*  +4 */ u8 x4;
+    /*  +5 */ u8 x5;
+    /*  +6 */ u8 x6;
+    /*  +7 */ u8 x7;
+    /*  +8 */ u8 x8;
+    /*  +9 */ u8 x9;
+    /*  +A */ u8 xA;
+    /*  +B */ u8 xB;
+    /*  +C */ Vec3 cur_pos;
+    /* +18 */ float facing_dir;
+    /* +1C */ struct Fighter_x1A88_xFC_t* x1C;
+    /* +20 */ u8 x20[0x348 - 0x20];
+};
+STATIC_ASSERT(sizeof(struct Fighter_x1A88_xFC_t) == 0x348);
+
 struct Fighter_x1A88_t {
     /*   +0 */ HSD_Pad x0;
     /*   +4 */ u8 x4;
@@ -985,7 +1002,8 @@ struct Fighter_x1A88_t {
     /*  +54 */ Vec2 x54;
     /*  +5C */ float x5C;
     /*  +60 */ int x60;
-    /*  +64 */ u8 x64[0x7C - 0x64];
+    /*  +64 */ Vec2 x64;
+    /*  +64 */ u8 x6C[0x7C - 0x6C];
     /*  +7C */ int x7C;
     /*  +80 */ u8 x80[0xF8 - 0x80];
     /*  +F8:0 */ u8 xF8_b0 : 1;
@@ -1020,21 +1038,9 @@ struct Fighter_x1A88_t {
     /*  +FB:5 */ u8 xFB_b5 : 1;
     /*  +FB:6 */ u8 xFB_b6 : 1;
     /*  +FB:7 */ u8 xFB_b7 : 1;
-    /*  +80 */ u8 xFC[0x448 - 0xFC];
-    /* +448 */ struct {
-        /*  +0 */ HSD_Pad x0;
-        /*  +4 */ u8 x4;
-        /*  +5 */ u8 x5;
-        /*  +6 */ u8 x6;
-        /*  +7 */ u8 x7;
-        /*  +8 */ u8 x8;
-        /*  +9 */ u8 x9;
-        /*  +A */ u8 xA;
-        /*  +B */ u8 xB;
-        /*  +C */ Vec2 offset;
-        /* +14 */ UNK_T x14;
-        /* +18 */ float facing_dir;
-    }* x448;
+    /*  +FC */ struct Fighter_x1A88_xFC_t xFC;
+    /* +444 */ struct Fighter_x1A88_xFC_t* x444;
+    /* +448 */ struct Fighter_x1A88_xFC_t* x448;
     /* +44C */ UNK_T x44C;
     /* +450 */ UNK_T x450;
     /* +454 */ uint x454;
@@ -1766,7 +1772,6 @@ struct Fighter {
         /* fp+2340 */ union ftZelda_MotionVars zd;
     } mv;
 };
-
 STATIC_ASSERT(sizeof(Fighter) == 0x23EC);
 
 struct gmScriptEventDefault {
