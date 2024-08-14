@@ -18,3 +18,8 @@ void lb_8000F9F8(HSD_JObj* jobj)
         lb_80011B74(HSD_JObjGetDObj(jobj), JOBJ_UNK_B26);
     }
 }
+
+/*
+@note: The number of HSD_JObjs that get passed into arg1 is the number of
+variable arguments passed until -1 is passed. lb_80011E24
+*/
