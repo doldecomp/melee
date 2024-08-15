@@ -2,8 +2,12 @@
 #include "sc/forward.h"
 #include <baselib/forward.h>
 
+#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
+#include "mn/inlines.h"
+#include "mn/mn_2295.h"
+#include "mn/types.h"
 #include "sc/types.h"
 
 #include <dolphin/os.h>
@@ -18,22 +22,16 @@
 #include <baselib/sislib.h>
 
 void mnHyaku_8024C68C(HSD_GObj*);
-void fn_8024C9F0(HSD_GObj*);
-void fn_8024CA50(HSD_GObj*);
-void fn_8024CAC8(HSD_GObj*);
 void mnHyaku_8024CB94(u8);
 void mnHyaku_8024CD64(u8);
 
+void fn_8024C9F0(HSD_GObj*);
+void fn_8024CA50(HSD_GObj*);
+void fn_8024CAC8(HSD_GObj*);
+
 extern HSD_GObj* mnHyaku_804D6C58;
 
-s32 mn_80229624(s32);
-s32 mn_80229894(s32, s32, s32);
-float mn_8022EC18(HSD_JObj*, float*, int);
-void mn_802295AC(void);
 void gm_801677E8(void);
-void mn_80229860(s32);
-f32 mn_8022F298(HSD_JObj*);
-void mn_8022F3D8(HSD_JObj*, s32, s32);
 
 void lbAudioAx_8002702C(s32, s32, s32);
 void lbAudioAx_80027168(void);
@@ -48,30 +46,6 @@ static f32 mnHyaku_803EF680[6] = {
 
 StaticModelDesc mnHyaku_804A08E8;
 
-extern HSD_Archive* mn_804D6BB8;
-
-typedef struct {
-    unsigned char x0;
-    void* x4;
-} gobj_user_data;
-
-// @todo move and add proper types
-extern struct {
-    unsigned short x0;
-    short x2;
-    int x4;
-} mn_804D6BC8;
-
-extern struct {
-    unsigned char x0;
-    char x1;
-    short x2;
-    int x4;
-    unsigned long long x8;
-    char x10;
-    char x11;
-} mn_804A04F0;
-
 static inline void mnHyaku_8024C68C_inline(HSD_JObj* jobj, s32 val)
 {
     f32 temp_f31 = mn_8022F298(jobj);
@@ -82,31 +56,22 @@ static inline void mnHyaku_8024C68C_inline(HSD_JObj* jobj, s32 val)
     HSD_JObjAnimAll(jobj);
 }
 
+// these are most likely ids to text
 static u8 vals[] = { 0xAB, 0xAC, 0xAD, 0xAE, 0xAF, 0xB0, 0x00, 0x00 };
 
-// @todo: this is a common inline in mn
-#define GET_GOBJ_USER_DATA(gobj) ((gobj_user_data*) HSD_GObjGetUserData(gobj))
 static inline void mnHyaku_8024C68C_inline_2(HSD_GObj* gobj)
 {
-    gobj_user_data* user_data = GET_GOBJ_USER_DATA(gobj);
-    if (user_data->x4) {
-        HSD_SisLib_803A5CC4(user_data->x4);
+    Menu* menu = GET_MENU(gobj);
+    if (menu->text) {
+        HSD_SisLib_803A5CC4(menu->text);
     }
-    {
-        u8 val = vals[user_data->x0];
-        sislib_UnkAllocReturn* temp_r3_6 = HSD_SisLib_803A5ACC(
-            0, 1, -9.5F, 9.1F, 17.0F, 364.68332F, 38.38772F);
-        user_data->x4 = temp_r3_6;
-        temp_r3_6->x24.x = 0.0521F;
-        temp_r3_6->x24.y = 0.0521F;
-        HSD_SisLib_803A6368(temp_r3_6, val);
-    }
+    Menu_InitCenterText(menu, vals[menu->cursor]);
 }
 
 void mnHyaku_8024C68C(HSD_GObj* arg0)
 {
     u64 ret;
-    gobj_user_data* unk = mnHyaku_804D6C58->user_data;
+    Menu* menu = GET_MENU(mnHyaku_804D6C58);
     if (mn_804D6BC8.x0 != 0) {
         mn_804D6BC8.x0--;
         mn_804D6BC8.x2 = 0;
@@ -124,7 +89,7 @@ void mnHyaku_8024C68C(HSD_GObj* arg0)
         lbAudioAx_80024030(1);
         mn_802295AC();
         gm_801677E8();
-        switch (unk->x0) {
+        switch (menu->cursor) {
         case 0:
             mn_80229860(0x21);
             return;
@@ -147,15 +112,15 @@ void mnHyaku_8024C68C(HSD_GObj* arg0)
     } else {
         if (ret & 4) {
             lbAudioAx_80024030(2);
-            unk->x0 = (unk->x0 == 0) ? 5 : (unk->x0 - 1);
-            mnHyaku_8024C68C_inline(mnHyaku_804D6C58->hsd_obj, unk->x0);
+            menu->cursor = (menu->cursor == 0) ? 5 : (menu->cursor - 1);
+            mnHyaku_8024C68C_inline(mnHyaku_804D6C58->hsd_obj, menu->cursor);
             mnHyaku_8024C68C_inline_2(mnHyaku_804D6C58);
             return;
         }
         if (ret & 8) {
             lbAudioAx_80024030(2);
-            unk->x0 = (unk->x0 == 5) ? 0 : (unk->x0 + 1);
-            mnHyaku_8024C68C_inline(mnHyaku_804D6C58->hsd_obj, unk->x0);
+            menu->cursor = (menu->cursor == 5) ? 0 : (menu->cursor + 1);
+            mnHyaku_8024C68C_inline(mnHyaku_804D6C58->hsd_obj, menu->cursor);
             mnHyaku_8024C68C_inline_2(mnHyaku_804D6C58);
         }
     }
@@ -172,12 +137,12 @@ void fn_8024C9F0(HSD_GObj* gobj)
 void fn_8024CA50(HSD_GObj* gobj)
 {
     HSD_GObjProc* gobj_proc;
-    gobj_user_data* user_data = gobj->user_data;
+    Menu* menu = GET_MENU(gobj);
     if (mn_804A04F0.x0 != 0x21) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         gobj_proc = HSD_GObjProc_8038FD54(gobj, fn_8024C9F0, 0U);
         gobj_proc->flags_3 = HSD_GObj_804D783C;
-        HSD_SisLib_803A5CC4(user_data->x4);
+        HSD_SisLib_803A5CC4(menu->text);
     }
 }
 
@@ -185,12 +150,12 @@ void fn_8024CAC8(HSD_GObj* gobj)
 {
     {
         HSD_GObjProc* gobj_proc;
-        gobj_user_data* user_data = gobj->user_data;
+        Menu* menu = GET_MENU(gobj);
         if (mn_804A04F0.x0 != 0x21) {
             HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
             gobj_proc = HSD_GObjProc_8038FD54(gobj, fn_8024C9F0, 0U);
             gobj_proc->flags_3 = HSD_GObj_804D783C;
-            HSD_SisLib_803A5CC4(user_data->x4);
+            HSD_SisLib_803A5CC4(menu->text);
             return;
         }
     }
@@ -210,7 +175,7 @@ void mnHyaku_8024CB94(u8 arg0)
     HSD_GObjProc* proc;
     HSD_JObj* jobj;
     u8 temp_r29;
-    gobj_user_data* user_data;
+    Menu* menu;
     HSD_GObjProc* temp_r3_4;
 
     gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 7U, 0x80);
@@ -224,16 +189,16 @@ void mnHyaku_8024CB94(u8 arg0)
                        mnHyaku_804A08E8.shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
-    user_data = HSD_MemAlloc(8);
-    if (user_data == NULL) {
-        OSReport("Can't get user_data.\n");
-        __assert("mnhyaku.c", 344, "user_data");
+    menu = HSD_MemAlloc(8);
+    if (menu == NULL) {
+        OSReport("Can't get menu.\n");
+        __assert("mnhyaku.c", 344, "menu");
     }
-    user_data->x0 = arg0;
-    user_data->x4 = 0;
-    GObj_InitUserData(gobj, 0, HSD_Free, user_data);
+    menu->cursor = arg0;
+    menu->text = 0;
+    GObj_InitUserData(gobj, 0, HSD_Free, menu);
 
-    mnHyaku_8024C68C_inline(jobj, user_data->x0);
+    mnHyaku_8024C68C_inline(jobj, menu->cursor);
     temp_r3_4 = HSD_GObjProc_8038FD54(gobj, fn_8024CAC8, 0U);
     temp_r3_4->flags_3 = HSD_GObj_804D783C;
     mnHyaku_8024C68C_inline_2(gobj);

@@ -22,6 +22,7 @@
 /* 011ABC */ UNK_RET lb_80011ABC(UNK_PARAMS);
 /* 011AC4 */ HSD_LObj* lb_80011AC4(UNK_T);
 /* 011C18 */ void lb_80011C18(HSD_JObj* jobj, u32 flags);
+/* 011E24 */ int lb_80011E24(HSD_JObj*, HSD_JObj**, ...);
 /* 0122C8 */ void lb_800122C8(HSD_ImageDesc*, int, int, int);
 /* 0122FC */ void lb_800121FC(HSD_ImageDesc*, int, int, int, int);
 /* 013B14 */ HSD_CObj* lb_80013B14(HSD_CameraDescPerspective*);

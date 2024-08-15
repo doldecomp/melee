@@ -27,7 +27,7 @@
 HSD_CObjDesc HSD_SisLib_8040C4B8;
 sislib_UnkAllocData* HSD_SisLib_804D7970;
 sislib_UnkAllocData* HSD_SisLib_804D7974;
-sislib_UnkAllocReturn* HSD_SisLib_804D7978;
+HSD_Text* HSD_SisLib_804D7978;
 sislib_UnkAlloc3* HSD_SisLib_804D797C;
 
 // extern ? *HSD_SisLib_804D796C;
@@ -110,8 +110,7 @@ void* HSD_SisLib_803A5798(s32 size)
 
         HSD_SisLib_804D7970 = (sislib_UnkAllocData*) (temp_r26 + size);
         HSD_SisLib_804D7970->data_0 = temp_r25;
-        HSD_SisLib_804D7970->data_1 =
-            (sislib_UnkAllocReturn*) (HSD_SisLib_804D7970 + 1);
+        HSD_SisLib_804D7970->data_1 = (HSD_Text*) (HSD_SisLib_804D7970 + 1);
         HSD_SisLib_804D7970->size = temp_r27;
         var_r31->size = size;
     } else {
@@ -159,7 +158,7 @@ void HSD_SisLib_803A594C(void* arg0)
             arg0 = var_r7;
             HSD_SisLib_804D7970->data_0 = var_r4->data_0;
             HSD_SisLib_804D7970->data_1 =
-                (sislib_UnkAllocReturn*) (HSD_SisLib_804D7970 + 1);
+                (HSD_Text*) (HSD_SisLib_804D7970 + 1);
             HSD_SisLib_804D7970->size = new_size;
             return;
         }
@@ -179,14 +178,14 @@ void HSD_SisLib_803A594C(void* arg0)
     }
 }
 
-void HSD_SisLib_803A5A2C(sislib_UnkAllocReturn* arg0)
+void HSD_SisLib_803A5A2C(HSD_Text* arg0)
 {
     HSD_GObj* temp_r0;
     sislib_UnkAllocData* temp_r3;
-    sislib_UnkAllocReturn* temp_r3_2;
-    sislib_UnkAllocReturn* temp_r3_3;
-    sislib_UnkAllocReturn* var_r31;
-    sislib_UnkAllocReturn* var_r4;
+    HSD_Text* temp_r3_2;
+    HSD_Text* temp_r3_3;
+    HSD_Text* var_r31;
+    HSD_Text* var_r4;
 
     var_r4 = NULL;
     var_r31 = HSD_SisLib_804D7978;
@@ -196,7 +195,7 @@ void HSD_SisLib_803A5A2C(sislib_UnkAllocReturn* arg0)
             if (var_r4 != NULL) {
                 var_r4->x54 = temp_r0;
             } else {
-                HSD_SisLib_804D7978 = (sislib_UnkAllocReturn*) temp_r0;
+                HSD_SisLib_804D7978 = (HSD_Text*) temp_r0;
             }
             temp_r3 = var_r31->x64;
             if (temp_r3 != NULL) {
@@ -214,14 +213,14 @@ void HSD_SisLib_803A5A2C(sislib_UnkAllocReturn* arg0)
             return;
         }
         var_r4 = var_r31;
-        var_r31 = (sislib_UnkAllocReturn*) temp_r0;
+        var_r31 = (HSD_Text*) temp_r0;
     }
 }
 
-void HSD_SisLib_803A5CC4(sislib_UnkAllocReturn* arg0)
+void HSD_SisLib_803A5CC4(HSD_Text* arg0)
 {
     HSD_GObj* temp_r3;
-    sislib_UnkAllocReturn* var_r31;
+    HSD_Text* var_r31;
 
     var_r31 = HSD_SisLib_804D7978;
     while (var_r31 != NULL) {
@@ -235,15 +234,15 @@ void HSD_SisLib_803A5CC4(sislib_UnkAllocReturn* arg0)
             HSD_SisLib_803A5A2C(var_r31);
             return;
         }
-        var_r31 = (sislib_UnkAllocReturn*) var_r31->x54;
+        var_r31 = (HSD_Text*) var_r31->x54;
     }
 }
 
 void HSD_SisLib_803A5D30(void)
 {
     HSD_GObj* temp_r3;
-    sislib_UnkAllocReturn* temp_r29;
-    sislib_UnkAllocReturn* var_r30;
+    HSD_Text* temp_r29;
+    HSD_Text* var_r30;
 
     var_r30 = HSD_SisLib_804D7978;
     while (var_r30 != NULL) {
@@ -266,8 +265,8 @@ void HSD_SisLib_803A5DA0(s32 arg0)
     sislib_UnkAlloc3* temp_r30_2;
     sislib_UnkAlloc3* var_r28;
     sislib_UnkAlloc3* var_r29_2;
-    sislib_UnkAllocReturn* temp_r30;
-    sislib_UnkAllocReturn* var_r29;
+    HSD_Text* temp_r30;
+    HSD_Text* var_r29;
 
     var_r28 = NULL;
     var_r29 = HSD_SisLib_804D7978;
@@ -303,17 +302,16 @@ void HSD_SisLib_803A5DA0(s32 arg0)
     }
 }
 
-sislib_UnkAllocReturn* HSD_SisLib_803A5ACC(s8 arg0, s32 arg1, f32 arg2,
-                                           f32 arg3, f32 arg4, f32 arg5,
-                                           f32 arg6)
+HSD_Text* HSD_SisLib_803A5ACC(s8 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4,
+                              f32 arg5, f32 arg6)
 {
     HSD_GObj* temp_r3;
     HSD_GObj* var_r27;
     s32 var_r4;
-    sislib_UnkAllocReturn* temp_r30;
+    HSD_Text* temp_r30;
     sislib_UnkAlloc3* var_r28;
-    sislib_UnkAllocReturn* var_r29;
-    sislib_UnkAllocReturn* var_r30;
+    HSD_Text* var_r29;
+    HSD_Text* var_r30;
 
     var_r4 = arg1;
     var_r29 = NULL;
@@ -341,7 +339,7 @@ sislib_UnkAllocReturn* HSD_SisLib_803A5ACC(s8 arg0, s32 arg1, f32 arg2,
         var_r30 = var_r30->x50;
     }
     temp_r30 = HSD_SisLib_803A5798(0xA0);
-    if ((sislib_UnkAllocReturn*) HSD_SisLib_804D7978 == NULL) {
+    if ((HSD_Text*) HSD_SisLib_804D7978 == NULL) {
         HSD_SisLib_804D7978 = temp_r30;
     }
     if (var_r29 != NULL) {
@@ -402,8 +400,8 @@ void HSD_SisLib_803A5E70(void)
     s32 temp_r3_2;
     sislib_UnkAlloc3* temp_r30_2;
     sislib_UnkAlloc3* var_r29_2;
-    sislib_UnkAllocReturn* temp_r30;
-    sislib_UnkAllocReturn* var_r29;
+    HSD_Text* temp_r30;
+    HSD_Text* var_r29;
 
     var_r29 = HSD_SisLib_804D7978;
     while (var_r29 != NULL) {
@@ -431,8 +429,7 @@ void HSD_SisLib_803A5E70(void)
     HSD_SisLib_804D7970 = HSD_SisLib_804D796C;
     HSD_SisLib_804D7974 = NULL;
     HSD_SisLib_804D7970->data_0 = NULL;
-    HSD_SisLib_804D7970->data_1 =
-        (sislib_UnkAllocReturn*) (HSD_SisLib_804D7970 + 0xC);
+    HSD_SisLib_804D7970->data_1 = (HSD_Text*) (HSD_SisLib_804D7970 + 0xC);
     HSD_SisLib_804D7970->size = HSD_SisLib_804D7968 - 0xC;
 }
 
@@ -482,7 +479,7 @@ void HSD_SisLib_803A6048(u32 arg0)
     HSD_SisLib_804D796C = temp_r3;
     HSD_SisLib_804D7970->data_0 = NULL;
     HSD_SisLib_804D7970->data_1 =
-        (sislib_UnkAllocReturn*) ((u8*) HSD_SisLib_804D7970 + 0xC);
+        (HSD_Text*) ((u8*) HSD_SisLib_804D7970 + 0xC);
     HSD_SisLib_804D7970->size = HSD_SisLib_804D7968 - 0xC;
     HSD_SisLib_804D7978 = NULL;
     HSD_SisLib_804D797C = NULL;
@@ -595,7 +592,7 @@ void HSD_SisLib_803A62A0(s32 arg0, HSD_Archive* arg1, char* arg2)
     }
 }
 
-void HSD_SisLib_803A6368(sislib_UnkAllocReturn* arg0, s32 arg1)
+void HSD_SisLib_803A6368(HSD_Text* arg0, s32 arg1)
 {
     SIS** temp_r3;
     s32 var_r5;
@@ -745,11 +742,11 @@ block_11:
     HSD_SisLib_803A6478_inline(var_r3, var_r4);
 }
 
-sislib_UnkAllocReturn* HSD_SisLib_803A6754(s8 arg0, s32 arg1)
+HSD_Text* HSD_SisLib_803A6754(s8 arg0, s32 arg1)
 {
     sislib_UnkAllocData* temp_r3;
-    sislib_UnkAllocReturn* temp_r30;
-    sislib_UnkAllocReturn* temp_r3_2;
+    HSD_Text* temp_r30;
+    HSD_Text* temp_r3_2;
 
     temp_r30 =
         HSD_SisLib_803A5ACC(arg0, arg1, 0.0f, 0.0f, 0.0f, 640.0f, 480.0f);
@@ -965,10 +962,10 @@ loop_37:
     return var_r9;
 }
 
-void HSD_SisLib_803A6B98(sislib_UnkAllocReturn* arg0, void* arg1, ...)
+void HSD_SisLib_803A6B98(HSD_Text* arg0, void* arg1, ...)
 {
     s8 sp10C;
-    sislib_UnkAllocReturn** sp88;
+    HSD_Text** sp88;
     f64* sp84;
     s32 sp80;
     f64 sp60;
@@ -986,7 +983,7 @@ void HSD_SisLib_803A6B98(sislib_UnkAllocReturn* arg0, void* arg1, ...)
     s32 sp14;
     s32 sp10;
     void* spC;
-    sislib_UnkAllocReturn* sp8;
+    HSD_Text* sp8;
     s16 temp_r0_3;
     s16 temp_r7;
     s32 temp_r3_16;
@@ -1020,7 +1017,7 @@ void HSD_SisLib_803A6B98(sislib_UnkAllocReturn* arg0, void* arg1, ...)
     sislib_UnkAllocData* temp_r5_6;
     sislib_UnkAllocData* temp_r5_7;
     sislib_UnkAllocData* temp_r5_8;
-    sislib_UnkAllocReturn* temp_r31;
+    HSD_Text* temp_r31;
     u8* temp_r3;
     u8* var_r4;
     u8* var_r5;
@@ -1078,7 +1075,7 @@ void HSD_SisLib_803A6B98(sislib_UnkAllocReturn* arg0, void* arg1, ...)
                     var_r4 += 1;
                 }
             }
-            temp_r30->data_1 = (sislib_UnkAllocReturn*) temp_r3;
+            temp_r30->data_1 = (HSD_Text*) temp_r3;
             arg0->x5C = (SIS*) temp_r3;
             temp_r30->data_0 =
                 (sislib_UnkAllocData*) (temp_r3 +
@@ -1207,8 +1204,7 @@ end:
     return arg0;
 }
 
-void HSD_SisLib_803A746C(sislib_UnkAllocReturn* arg0, s32 arg1, f32 arg2,
-                         f32 arg3)
+void HSD_SisLib_803A746C(HSD_Text* arg0, s32 arg1, f32 arg2, f32 arg3)
 {
     s16 temp_r0;
     s16 temp_r0_2;
@@ -1227,7 +1223,7 @@ void HSD_SisLib_803A746C(sislib_UnkAllocReturn* arg0, s32 arg1, f32 arg2,
     }
 }
 
-void HSD_SisLib_803A74F0(sislib_UnkAllocReturn* arg0, s32 arg1, u8* arg2)
+void HSD_SisLib_803A74F0(HSD_Text* arg0, s32 arg1, u8* arg2)
 {
     u8* temp_r3;
     u8* temp_r3_2;
@@ -1242,8 +1238,7 @@ void HSD_SisLib_803A74F0(sislib_UnkAllocReturn* arg0, s32 arg1, u8* arg2)
     }
 }
 
-void HSD_SisLib_803A8134(void* arg0, sislib_UnkAllocReturn* arg1, f32* arg2,
-                         f32* arg3)
+void HSD_SisLib_803A8134(void* arg0, HSD_Text* arg1, f32* arg2, f32* arg3)
 {
     SIS* temp_r4;
     TextGlyphTexture* var_r29;
@@ -1381,9 +1376,9 @@ loop_36:
     }
 }
 
-void static inline HSD_SisLib_803A7F0C_inline(sislib_UnkAllocReturn* arg0,
-                                              s32 arg1, s32* var_r4,
-                                              u32* var_r5, s32* var_r0)
+void static inline HSD_SisLib_803A7F0C_inline(HSD_Text* arg0, s32 arg1,
+                                              s32* var_r4, u32* var_r5,
+                                              s32* var_r0)
 {
     s32* temp_r8;
     u8 temp_r7;
@@ -1463,7 +1458,7 @@ void static inline HSD_SisLib_803A7F0C_inline(sislib_UnkAllocReturn* arg0,
     }
 }
 
-s32 HSD_SisLib_803A7F0C(sislib_UnkAllocReturn* arg0, s32 arg1)
+s32 HSD_SisLib_803A7F0C(HSD_Text* arg0, s32 arg1)
 {
     s32 temp_r7_2;
     s32 var_r0;
@@ -1490,10 +1485,10 @@ s32 HSD_SisLib_803A7F0C(sislib_UnkAllocReturn* arg0, s32 arg1)
     return var_r0;
 }
 
-void HSD_SisLib_803A84BC(HSD_GObj* gobj, sislib_UnkAllocReturn* arg1)
+void HSD_SisLib_803A84BC(HSD_GObj* gobj, HSD_Text* arg1)
 {
     // clang-format off
-    sislib_UnkAllocReturn *var_r31;
+    HSD_Text *var_r31;
     Mtx m;
     TextGlyphTexture *textures = NULL;
     TextKerning *kerning = NULL;
