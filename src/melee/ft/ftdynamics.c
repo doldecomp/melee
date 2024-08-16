@@ -298,7 +298,7 @@ void ftCo_8009D81C(Fighter* fp)
     fp->dynamics_num = data->hat_dynamics[3]->dynamicsNum;
     if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
         OSReport("fighter dynamics num over!\n");
-        HSD_ASSERT(364, 0);
+        __assert(__FILE__, 364, "fp->dynamics_num < Ft_Dynamics_NumMax");
     }
     {
         ssize_t i;
