@@ -2993,7 +2993,7 @@ Vec3 const ftKb_Init_803B757C = { 0, 4, 0 };
 void ftKb_Init_800EE528(void)
 {
     /// @todo Bad cast.
-    s32* number_list = (s32*) ft_80459B88.x0;
+    s32* number_list = (s32*) &ft_80459B88.x0;
     ftKirby_UnkArrayThing** struct_list = ftKb_Init_803C9FC8;
 
     s32 i;
