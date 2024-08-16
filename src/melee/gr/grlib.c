@@ -203,10 +203,10 @@ void grLib_801C9A70(enum_t arg0, Vec3* v)
     *v = grLib_8049EF58[i];
 }
 
-void grLib_801C9B20(void* arg1, lb_UnkAnimStruct* arg2, UNK_T arg3)
+void grLib_801C9B20(HSD_JObj* arg0, DynamicsDesc* arg1, DynamicsDesc* arg2)
 {
-    lb_8000FD48(arg1, arg3, arg2->x4_size);
-    lb_80011710(arg2, arg3);
+    lb_8000FD48(arg0, arg2, arg1->count);
+    lb_80011710(arg1, arg2);
 }
 
 void grLib_801C9B6C(void* arg0)

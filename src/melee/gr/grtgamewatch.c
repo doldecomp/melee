@@ -174,7 +174,7 @@ void grTGameWatch_802243E0(HSD_GObj* gobj)
     return;
 }
 
-lb_UnkAnimStruct* grTGameWatch_802243E4(int unused)
+DynamicsDesc* grTGameWatch_802243E4(int unused)
 {
     return NULL;
 }

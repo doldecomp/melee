@@ -26,7 +26,7 @@
 /* 220AA0 */ bool grTFalco_80220AA0(HSD_GObj*);
 /* 220AA8 */ void grTFalco_80220AA8(HSD_GObj*);
 /* 220AC8 */ void grTFalco_80220AC8(HSD_GObj*);
-/* 220ACC */ lb_UnkAnimStruct* grTFalco_80220ACC(enum_t);
+/* 220ACC */ DynamicsDesc* grTFalco_80220ACC(enum_t);
 /* 220B78 */ bool grTFalco_80220B78(Vec3*, int, HSD_JObj*);
 
 #endif

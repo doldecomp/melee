@@ -139,7 +139,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_09C4.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_Shouldered.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureCaptain.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_09CB.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftdynamics.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_BarrelWait.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_StopWall.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_StopCeil.c.o\

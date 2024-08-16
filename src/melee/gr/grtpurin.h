@@ -25,7 +25,7 @@ void grTPurin_8022347C(HSD_GObj*);
 bool grTPurin_802234CC(HSD_GObj*);
 void grTPurin_802234D4(HSD_GObj*);
 void grTPurin_802234F4(HSD_GObj*);
-lb_UnkAnimStruct* grTPurin_802234F8(int);
+DynamicsDesc* grTPurin_802234F8(int);
 bool grTPurin_80223578(Vec3*, int, HSD_JObj*);
 
 #endif

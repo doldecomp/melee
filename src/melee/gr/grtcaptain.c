@@ -35,7 +35,7 @@ static void grTCaptain_8021FEB8(HSD_GObj* gobj);
 static bool grTCaptain_8021FF08(HSD_GObj*);
 static void grTCaptain_8021FF10(HSD_GObj*);
 static void grTCaptain_8021FF30(HSD_GObj*);
-static lb_UnkAnimStruct* grTCaptain_8021FF34(enum_t);
+static DynamicsDesc* grTCaptain_8021FF34(enum_t);
 static bool grTCaptain_8021FF3C(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTCa_803E8608[] = {
@@ -181,7 +181,7 @@ static void grTCaptain_8021FF10(HSD_GObj* arg0)
 
 static void grTCaptain_8021FF30(HSD_GObj* argo) {}
 
-static lb_UnkAnimStruct* grTCaptain_8021FF34(enum_t arg0)
+static DynamicsDesc* grTCaptain_8021FF34(enum_t arg0)
 {
     return NULL;
 }

@@ -33,7 +33,7 @@
 /* 223B0C */ static bool grTSeak_80223B0C(HSD_GObj*);
 /* 223B14 */ static void grTSeak_80223B14(HSD_GObj*);
 /* 223B34 */ static void grTSeak_80223B34(HSD_GObj*);
-/* 223B38 */ static lb_UnkAnimStruct* grTSeak_80223B38(enum_t);
+/* 223B38 */ static DynamicsDesc* grTSeak_80223B38(enum_t);
 /* 223B40 */ static bool grTSeak_80223B40(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTSk_803E94B8[] = {
@@ -181,7 +181,7 @@ void grTSeak_80223B14(HSD_GObj* gobj)
 
 void grTSeak_80223B34(HSD_GObj* gobj) {}
 
-lb_UnkAnimStruct* grTSeak_80223B38(enum_t arg0)
+DynamicsDesc* grTSeak_80223B38(enum_t arg0)
 {
     return NULL;
 }

@@ -211,8 +211,8 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         while (phi_r25 < (unsigned) fighter->dynamics_num) {
             spAC = 0.0f;
             spA8 = 0.0f;
-            if (lb_800117F4(&phi_r26->dynamic_bone_sets[0].x4_dynamicBones,
-                            &spAC, &spA8, phi_r26->dynamics_num, arg1) != 0)
+            if (lb_800117F4(&phi_r26->dynamic_bone_sets[0].dyn_desc, &spAC,
+                            &spA8, phi_r26->dynamics_num, arg1) != 0)
             {
                 phi_r30 = 1U;
             }

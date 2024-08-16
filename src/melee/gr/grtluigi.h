@@ -24,7 +24,7 @@
 /* 221EB8 */ bool grTLuigi_80221EB8(HSD_GObj*);
 /* 221EC0 */ void grTLuigi_80221EC0(HSD_GObj*);
 /* 221EE0 */ void grTLuigi_80221EE0(HSD_GObj*);
-/* 221EE4 */ lb_UnkAnimStruct* grTLuigi_80221EE4(enum_t);
+/* 221EE4 */ DynamicsDesc* grTLuigi_80221EE4(enum_t);
 /* 221EEC */ bool grTLuigi_80221EEC(Vec3*, int, HSD_JObj*);
 
 #endif

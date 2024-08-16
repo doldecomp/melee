@@ -869,30 +869,26 @@ void Item_8026849C(HSD_GObj* gobj)
     HSD_JObjSetScale(temp_jobj, &sp14);
 }
 
-extern void lb_80011710(void*, void*);
-
 static void Item_80268560(HSD_GObj* gobj)
 {
     int i;
-    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
-    Article* article_data = item_data->xC4_article_data;
+    Item* ip = GET_ITEM(gobj);
+    Article* article_data = ip->xC4_article_data;
     if (article_data->x14_dynamics == NULL) {
-        item_data->x374_dynamicBonesNum = 0;
-        item_data->xB68 = 0;
+        ip->x374_dynamicBonesNum = 0;
+        ip->xB68 = 0;
         return;
     }
-    item_data->x374_dynamicBonesNum = article_data->x14_dynamics->count;
+    ip->x374_dynamicBonesNum = article_data->x14_dynamics->count;
     for (i = 0; i < article_data->x14_dynamics->count; i++) {
-        ItemDynamicsDesc* desc;
-        HSD_JObj* jobj;
-        desc = &article_data->x14_dynamics->dyn_descs[i];
-        jobj = item_data->xBBC_dynamicBoneTable->bones[desc->x0_boneID];
-        lb_8000FD48(jobj, &item_data->xD4_dynamicBones[i].unk_ptr,
-                    desc->child_count);
-        item_data->xD4_dynamicBones[i].skeleton = jobj;
-        item_data->xD4_dynamicBones[i].flags = 0;
-        lb_80011710(&article_data->x14_dynamics->dyn_descs[i].x4_params,
-                    &item_data->xD4_dynamicBones[i].unk_ptr);
+        BoneDynamicsDesc* desc = &article_data->x14_dynamics->dyn_descs[i];
+        HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[desc->bone_id];
+        lb_8000FD48(jobj, &ip->xD4_dynamicBones[i].dyn_desc,
+                    desc->dyn_desc.count);
+        ip->xD4_dynamicBones[i].skeleton = jobj;
+        ip->xD4_dynamicBones[i].flags = 0;
+        lb_80011710(&article_data->x14_dynamics->dyn_descs[i].dyn_desc,
+                    &ip->xD4_dynamicBones[i].dyn_desc);
     }
 }
 
@@ -1883,7 +1879,7 @@ static void Item_8026A788(HSD_GObj* gobj)
 
     it_80272304(gobj);
     for (i = 0; i < dynamicBonesNum; i++, dynamicBones++) {
-        lb_8001044C(&dynamicBones->unk_ptr, &item_data->xB6C, item_data->xB68,
+        lb_8001044C(&dynamicBones->dyn_desc, &item_data->xB6C, item_data->xB68,
                     0.0f, 0, dynamicBones->flags, 0, 1);
     }
 }
@@ -2022,7 +2018,7 @@ void Item_8026A8EC(Item_GObj* gobj)
     {
         int i;
         for (i = 0; i < ip->x374_dynamicBonesNum; i++) {
-            lb_8000FD18(&ip->xD4_dynamicBones[i].unk_ptr);
+            lb_8000FD18(&ip->xD4_dynamicBones[i].dyn_desc);
         }
     }
 

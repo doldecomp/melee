@@ -76,7 +76,7 @@ struct StageInfo {
     u8 xA4_pad[0x12C - 0xA4];
     HSD_GObj* x12C;
     Vec3 x130, x13C, x148, x154, x160, x16C;
-    lb_UnkAnimStruct* (*x178)(int);
+    DynamicsDesc* (*x178)(int);
     bool (*x17C)(Vec3*, int, HSD_JObj*);
     HSD_GObj* x180[4];
     u8 x190_pad[0x280 - 0x190];
@@ -151,7 +151,7 @@ typedef struct StageData {
     void (*callback2)(void);
     void (*callback3)(void);
     bool (*callback4)(void);
-    lb_UnkAnimStruct* (*callback5)(enum_t);
+    DynamicsDesc* (*callback5)(enum_t);
     bool (*callback6)(Vec3*, int, HSD_JObj*);
     u32 flags2;
     S16Vec3* x2C;

@@ -24,9 +24,8 @@
 /* 0765F0 */ float ftColl_800765F0(Fighter* fp, Fighter_GObj* victim,
                                    float unk_floatvar);
 /* 076640 */ bool ftColl_80076640(Fighter*, float*);
-/* 076764 */ void ftColl_80076764(int, enum_t, Fighter_GObj*,
-                                  lb_UnkAnimStruct*, Fighter* fp,
-                                  HurtCapsule*);
+/* 076764 */ void ftColl_80076764(int, enum_t, Fighter_GObj*, DynamicsDesc*,
+                                  Fighter* fp, HurtCapsule*);
 /* 0768A0 */ void ftColl_800768A0(Fighter* fp, HitCapsule* dst);
 /* 07699C */ bool ftColl_8007699C(Fighter*, HitCapsule*, Fighter*,
                                   HitCapsule*);
@@ -67,7 +66,7 @@
 /* 07AEF8 */ void ftColl_8007AEF8(Fighter_GObj*);
 /* 07AF10 */ void ftColl_8007AF10(Fighter_GObj*);
 /* 07AF28 */ void ftColl_8007AF28(Fighter_GObj* gobj);
-/* 07AF60 */ UNK_RET ftColl_8007AF60(UNK_PARAMS);
+/* 07AF60 */ void ftColl_8007AF60(Fighter_GObj*);
 /* 07AFC8 */ void ftColl_8007AFC8(Fighter_GObj* gobj, int hit_idx);
 /* 07AFF8 */ void ftColl_8007AFF8(Fighter_GObj*);
 /* 07B064 */ void ftColl_8007B064(Fighter_GObj* gobj, enum_t);

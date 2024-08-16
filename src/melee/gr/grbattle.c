@@ -55,7 +55,7 @@ static void grBattle_8021A344(HSD_GObj*);
 static bool grBattle_8021A3B4(HSD_GObj*);
 static void grBattle_8021A3BC(HSD_GObj*);
 static void grBattle_8021A60C(HSD_GObj*);
-static lb_UnkAnimStruct* grBattle_8021A610(enum_t);
+static DynamicsDesc* grBattle_8021A610(enum_t);
 static bool grBattle_8021A618(Vec3*, int, HSD_JObj*);
 
 extern StageInfo stage_info;
@@ -430,7 +430,7 @@ static void grBattle_8021A3BC(HSD_GObj* gobj)
 
 static void grBattle_8021A60C(HSD_GObj* arg0) {}
 
-static lb_UnkAnimStruct* grBattle_8021A610(enum_t arg0)
+static DynamicsDesc* grBattle_8021A610(enum_t arg0)
 {
     return NULL;
 }

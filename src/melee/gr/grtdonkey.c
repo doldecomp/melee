@@ -35,7 +35,7 @@ static void grTDonkey_80220480(HSD_GObj* gobj);
 static bool grTDonkey_802204D0(HSD_GObj*);
 static void grTDonkey_802204D8(HSD_GObj*);
 static void grTDonkey_802204F8(HSD_GObj*);
-static lb_UnkAnimStruct* grTDonkey_802204FC(enum_t);
+static DynamicsDesc* grTDonkey_802204FC(enum_t);
 static bool grTDonkey_80220504(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTDk_803E8790[] = {
@@ -178,7 +178,7 @@ static void grTDonkey_802204D8(HSD_GObj* arg0)
 
 static void grTDonkey_802204F8(HSD_GObj* arg0) {}
 
-static lb_UnkAnimStruct* grTDonkey_802204FC(enum_t arg0)
+static DynamicsDesc* grTDonkey_802204FC(enum_t arg0)
 {
     return NULL;
 }

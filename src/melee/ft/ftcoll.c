@@ -47,7 +47,7 @@ typedef struct DmgLogEntry {
     /// @todo Might be a fake union
     /*  +C */ union {
         HitCapsule* hit0;
-        lb_UnkAnimStruct* unk_anim0;
+        DynamicsDesc* unk_anim0;
     };
     /// @todo Might be a fake union
     /* +10 */ union {
@@ -266,7 +266,7 @@ bool ftColl_80076640(Fighter* fp, float* dmg)
 }
 
 void ftColl_80076764(int arg0, enum_t arg1, Fighter_GObj* arg2,
-                     lb_UnkAnimStruct* arg3, Fighter* fp, HurtCapsule* hurt)
+                     DynamicsDesc* arg3, Fighter* fp, HurtCapsule* hurt)
 {
     if (dmg_log0_idx < ARRAY_SIZE(dmg_log0)) {
         DmgLogEntry* entry = &dmg_log0[dmg_log0_idx];
@@ -276,7 +276,7 @@ void ftColl_80076764(int arg0, enum_t arg1, Fighter_GObj* arg2,
         entry->unk_anim0 = arg3;
         entry->hurt1 = hurt;
         entry->pos = fp->cur_pos;
-        entry->size_of_xC = arg3->x4_size;
+        entry->size_of_xC = arg3->count;
         ++dmg_log0_idx;
     } else {
         OSReport("damage log over %d!!\n", ARRAY_SIZE(dmg_log0));
@@ -1145,10 +1145,7 @@ void ftColl_8007AF28(Fighter_GObj* gobj)
     }
 }
 
-void ftColl_8007AF60(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftColl_8007AF60
 
 void ftColl_8007AFC8(Fighter_GObj* gobj, int hit_idx)
 {

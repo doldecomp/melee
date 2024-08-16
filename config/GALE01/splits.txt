@@ -590,9 +590,9 @@ melee/ft/chara/ftCommon/ftCo_CaptureCaptain.c:
 	.text       start:0x8009CA0C end:0x8009CB40
 	.sdata2     start:0x804D8760 end:0x804D8768
 
-melee/ft/chara/ftCommon/ftCo_09CB.c:
+melee/ft/ftdynamics.c:
 	.text       start:0x8009CB40 end:0x8009EB18
-	.data       start:0x803C5720 end:0x803C5758
+	.data       start:0x803C5720 end:0x803C5780
 	.sdata      start:0x804D3B28 end:0x804D3B48
 	.sdata2     start:0x804D8768 end:0x804D8770
 
@@ -618,7 +618,7 @@ melee/ft/chara/ftCommon/ftCo_MissFoot.c:
 
 melee/ft/chara/ftCommon/ftCo_09F4.c:
 	.text       start:0x8009F480 end:0x8009F834
-	.data       start:0x803C5758 end:0x803C57B0
+	.data       start:0x803C5780 end:0x803C57B0
 	.sdata      start:0x804D3B48 end:0x804D3B68
 	.sbss       start:0x804D6568 end:0x804D6570
 	.sdata2     start:0x804D87B0 end:0x804D87C0

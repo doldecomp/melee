@@ -44,7 +44,7 @@
 /* 1CCEA0 */ void grIzumi_801CCEA0(HSD_GObj* gobj, int renderpass);
 /* 1CD090 */ HSD_TObj* grIzumi_801CD090(HSD_GObj* gobj, HSD_ImageDesc* image);
 /* 1CD220 */ void grIzumi_801CD220(HSD_GObj* gobj, int);
-/* 1CD278 */ lb_UnkAnimStruct* grIzumi_801CD278(enum_t);
+/* 1CD278 */ DynamicsDesc* grIzumi_801CD278(enum_t);
 /* 1CD280 */ bool grIzumi_801CD280(Vec3*, int, HSD_JObj*);
 /* 1CD2D4 */ void grIzumi_801CD2D4(void);
 

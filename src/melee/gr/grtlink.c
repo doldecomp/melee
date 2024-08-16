@@ -35,7 +35,7 @@ void grTLink_80221B84(HSD_GObj*);             /* static */
 bool grTLink_80221BD4(HSD_GObj*);             /* static */
 void grTLink_80221BDC(HSD_GObj*);             /* static */
 void grTLink_80221BFC(HSD_GObj*);             /* static */
-lb_UnkAnimStruct* grTLink_80221C00(enum_t);   /* static */
+DynamicsDesc* grTLink_80221C00(enum_t);       /* static */
 bool grTLink_80221C08(Vec3*, int, HSD_JObj*); /* static */
 
 static StageCallbacks grTLk_803E8D30[4] = {
@@ -168,7 +168,7 @@ void grTLink_80221BDC(HSD_GObj* gobj)
 
 void grTLink_80221BFC(HSD_GObj* gobj) {}
 
-lb_UnkAnimStruct* grTLink_80221C00(enum_t arg0)
+DynamicsDesc* grTLink_80221C00(enum_t arg0)
 {
     return NULL;
 }

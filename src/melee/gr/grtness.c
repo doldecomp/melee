@@ -32,7 +32,7 @@
 /* 222878 */ static bool grTNess_80222878(HSD_GObj*);
 /* 222880 */ static void grTNess_80222880(HSD_GObj* gobj);
 /* 2228A0 */ static void grTNess_802228A0(HSD_GObj*);
-/* 2228A4 */ static lb_UnkAnimStruct* grTNess_802228A4(enum_t);
+/* 2228A4 */ static DynamicsDesc* grTNess_802228A4(enum_t);
 /* 2228AC */ static bool grTNess_802228AC(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTNs_803E9030[] = {
@@ -193,7 +193,7 @@ static void grTNess_802228A0(HSD_GObj* arg0)
     return;
 }
 
-static lb_UnkAnimStruct* grTNess_802228A4(enum_t arg0)
+static DynamicsDesc* grTNess_802228A4(enum_t arg0)
 {
     return NULL;
 }

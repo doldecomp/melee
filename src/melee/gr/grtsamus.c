@@ -33,7 +33,7 @@
 /* 223828 */ static bool grTSamus_80223828(HSD_GObj*);
 /* 223830 */ static void grTSamus_80223830(HSD_GObj*);
 /* 223850 */ static void grTSamus_80223850(HSD_GObj*);
-/* 223854 */ static lb_UnkAnimStruct* grTSamus_80223854(enum_t);
+/* 223854 */ static DynamicsDesc* grTSamus_80223854(enum_t);
 /* 22385C */ static bool grTSamus_8022385C(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTSs_803E93F8[] = {
@@ -182,7 +182,7 @@ void grTSamus_80223830(HSD_GObj* gobj)
 
 void grTSamus_80223850(HSD_GObj* gobj) {}
 
-lb_UnkAnimStruct* grTSamus_80223854(enum_t arg0)
+DynamicsDesc* grTSamus_80223854(enum_t arg0)
 {
     return NULL;
 }
