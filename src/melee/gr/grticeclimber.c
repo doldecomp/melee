@@ -212,7 +212,7 @@ void grTIceClimber_80221288(HSD_GObj* ground_gobj)
     }
 }
 
-lb_UnkAnimStruct* grTIceClimber_80221354(enum_t gobj)
+DynamicsDesc* grTIceClimber_80221354(enum_t gobj)
 {
     return NULL;
 }

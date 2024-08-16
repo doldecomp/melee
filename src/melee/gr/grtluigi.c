@@ -157,7 +157,7 @@ void grTLuigi_80221EC0(HSD_GObj* gobj)
 
 void grTLuigi_80221EE0(HSD_GObj* arg0) {}
 
-lb_UnkAnimStruct* grTLuigi_80221EE4(enum_t arg0)
+DynamicsDesc* grTLuigi_80221EE4(enum_t arg0)
 {
     return NULL;
 }

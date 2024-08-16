@@ -171,7 +171,7 @@ void grTFalco_80220AA8(HSD_GObj* gobj)
 
 void grTFalco_80220AC8(HSD_GObj* arg0) {}
 
-lb_UnkAnimStruct* grTFalco_80220ACC(enum_t arg0)
+DynamicsDesc* grTFalco_80220ACC(enum_t arg0)
 {
     if (arg0 != -1) {
         enum_t i = mpLib_80056B6C(arg0);

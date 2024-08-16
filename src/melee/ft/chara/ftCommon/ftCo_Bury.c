@@ -33,13 +33,13 @@
 #include "gr/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
-#include "lb/lbrefract.h"
 #include "mp/mplib.h"
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
 #include <common_structs.h>
 #include <placeholder.h>
+#include <trigf.h>
 #include <dolphin/mtx/vec.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
@@ -52,14 +52,14 @@ void ftCo_800C0874(ftCo_GObj* gobj, UNK_T arg1, ftCommon_BuryType arg2)
     }
 }
 
-void ftCo_800C08A0(ftCo_GObj* gobj, ftCo_GObj* arg1, lb_UnkAnimStruct* arg2,
+void ftCo_800C08A0(ftCo_GObj* gobj, ftCo_GObj* arg1, DynamicsDesc* arg2,
                    ftCommon_BuryType arg3)
 {
     float f;
     HitCapsule hit;
     HurtCapsule* p_hurt;
     Fighter* fp = GET_FIGHTER(gobj);
-    f = ftColl_800765F0(fp, NULL, arg2->x4_size);
+    f = ftColl_800765F0(fp, NULL, arg2->count);
     switch (arg3) {
     case BuryType_Unk2:
         break;
@@ -147,7 +147,7 @@ void ftCo_800C0A98(ftCo_GObj* gobj)
 void ftCo_800C0B20(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    lb_UnkAnimStruct* unk_anim;
+    DynamicsDesc* unk_anim;
     if (fp->bury_timer_1 == 0) {
         CollData* coll = &fp->coll_data;
         unk_anim = NULL;
@@ -166,7 +166,7 @@ void ftCo_800C0B20(ftCo_GObj* gobj)
         if (unk_anim != NULL) {
             HitCapsule hit;
             Fighter* fp = GET_FIGHTER(gobj);
-            float f = ftColl_800765F0(fp, NULL, unk_anim->x4_size);
+            float f = ftColl_800765F0(fp, NULL, unk_anim->count);
             fp->bury_timer_1 = p_ftCommonData->bury_timer_unk1;
             if (ftColl_80076640(fp, &f)) {
                 HurtCapsule* hurt = &fp->hurt_capsules[0];

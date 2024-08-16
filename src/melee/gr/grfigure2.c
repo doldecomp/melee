@@ -34,7 +34,7 @@
 /* 20E4E4 */ static bool grFigure2_8020E4E4(HSD_GObj*);
 /* 20E4EC */ static void grFigure2_8020E4EC(HSD_GObj* gobj);
 /* 20E4F0 */ static void grFigure2_8020E4F0(HSD_GObj*);
-/* 20E4F4 */ static lb_UnkAnimStruct* grFigure2_8020E4F4(enum_t arg0);
+/* 20E4F4 */ static DynamicsDesc* grFigure2_8020E4F4(enum_t arg0);
 /* 20E4FC */ static bool grFigure2_8020E4FC(Vec3* vector, int number,
                                             HSD_JObj* jobj);
 
@@ -169,7 +169,7 @@ static void grFigure2_8020E4EC(HSD_GObj* gobj) {}
 
 static void grFigure2_8020E4F0(HSD_GObj* arg0) {}
 
-static lb_UnkAnimStruct* grFigure2_8020E4F4(enum_t arg0)
+static DynamicsDesc* grFigure2_8020E4F4(enum_t arg0)
 {
     return NULL;
 }

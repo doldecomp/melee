@@ -37,7 +37,7 @@ static void grShrine_80201E9C(HSD_GObj*);
 static bool grShrine_80201F14(HSD_GObj*);
 static void grShrine_80201F1C(HSD_GObj*);
 static void grShrine_80201F40(HSD_GObj*);
-static lb_UnkAnimStruct* grShrine_80201F44(enum_t);
+static DynamicsDesc* grShrine_80201F44(enum_t);
 static bool grShrine_80201F4C(Vec3*, int, HSD_JObj*);
 
 static void* grSh_804D6A18;
@@ -188,7 +188,7 @@ static void grShrine_80201F1C(HSD_GObj* arg0)
 
 static void grShrine_80201F40(HSD_GObj* arg0) {}
 
-static lb_UnkAnimStruct* grShrine_80201F44(enum_t arg0)
+static DynamicsDesc* grShrine_80201F44(enum_t arg0)
 {
     return NULL;
 }

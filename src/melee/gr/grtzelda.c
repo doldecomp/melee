@@ -35,7 +35,7 @@ void grTZelda_80224084(HSD_GObj*);             /* static */
 bool grTZelda_802240D4(HSD_GObj*);             /* static */
 void grTZelda_802240DC(HSD_GObj*);             /* static */
 void grTZelda_802240FC(HSD_GObj*);             /* static */
-lb_UnkAnimStruct* grTZelda_80224100(enum_t);   /* static */
+DynamicsDesc* grTZelda_80224100(enum_t);       /* static */
 bool grTZelda_80224108(Vec3*, int, HSD_JObj*); /* static */
 
 static StageCallbacks grTZd_803E9638[4] = {
@@ -169,7 +169,7 @@ void grTZelda_802240DC(HSD_GObj* gobj)
 
 void grTZelda_802240FC(HSD_GObj* gobj) {}
 
-lb_UnkAnimStruct* grTZelda_80224100(enum_t arg0)
+DynamicsDesc* grTZelda_80224100(enum_t arg0)
 {
     return NULL;
 }

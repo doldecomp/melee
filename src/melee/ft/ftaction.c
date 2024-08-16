@@ -17,7 +17,6 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_09CB.h"
 #include "ftCommon/ftCo_09F7.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcommand.h"
@@ -1254,8 +1253,9 @@ void ftAction_80072B94(Fighter_GObj* gobj, FtCmdState* cmd)
     u8 _[8] = { 0 };
     ftCo_Fighter* fp = gobj->user_data;
     u32 cmd_x8 = *cmd->x8;
-    ftCo_8009E318((int) ((cmd_x8 << 6) | ((cmd_x8 >> 0x1AU) & 0x20)) >> 6, fp,
-                  fp->cur_anim_frame);
+    // ftCo_8009E318((int) ((cmd_x8 << 6) | ((cmd_x8 >> 0x1AU) & 0x20)) >> 6,
+    // fp,
+    //               fp->cur_anim_frame);
     cmd->x8 += 4;
 }
 
@@ -1451,13 +1451,13 @@ void ftAction_80073118(Fighter_GObj* gobj, FtCmdState* cmd)
             {
                 char* cmd_x8 = cmd->x8;
                 cmd->x8 = cmd_x8 + 4;
-                ftCo_8009E714(temp_r10, M2C_FIELD(cmd_x8, s16*, 0), cmd_x8,
-                              temp_r10, 0.003906f * M2C_FIELD(cmd_x8, s16*, 0),
-                              0.003906f * M2C_FIELD(cmd_x8, s16*, 2),
-                              0.003906f * M2C_FIELD(cmd_x8, s16*, 0),
-                              0.003906f * M2C_FIELD(cmd_x8, s16*, 2),
-                              0.003906f * M2C_FIELD(cmd_x8, s16*, 2),
-                              0.003906f);
+                // ftCo_8009E714(temp_r10, M2C_FIELD(cmd_x8, s16*, 0), cmd_x8,
+                //               temp_r10, 0.003906f * M2C_FIELD(cmd_x8, s16*,
+                //               0), 0.003906f * M2C_FIELD(cmd_x8, s16*, 2),
+                //               0.003906f * M2C_FIELD(cmd_x8, s16*, 0),
+                //               0.003906f * M2C_FIELD(cmd_x8, s16*, 2),
+                //               0.003906f * M2C_FIELD(cmd_x8, s16*, 2),
+                //               0.003906f);
             }
         }
     }
@@ -1480,14 +1480,14 @@ void ftAction_80073240(Fighter_GObj* fighter_gobj)
         fp->cur_anim_frame + fp->x898_unk;
     if (fp->x3E4_fighterCmdScript.x3EC_scriptCurrent != NULL) {
         if (ftCommand->x3E4_scriptEventTimer != F32_MAX) {
-            ftCommand->x3E4_scriptEventTimer -= fp->frame_spd_mul;
+            ftCommand->x3E4_scriptEventTimer -= fp->frame_speed_mul;
         }
         do {
             if (ftCommand->x3EC_scriptCurrent == NULL) {
                 break;
             }
             if (F32_MAX == ftCommand->x3E4_scriptEventTimer) {
-                if (ftCommand->x3E8_scriptFrameTimer >= fp->frame_spd_mul) {
+                if (ftCommand->x3E8_scriptFrameTimer >= fp->frame_speed_mul) {
                     break;
                 }
                 ftCommand->x3E4_scriptEventTimer =
@@ -1518,14 +1518,14 @@ void ftAction_80073354(Fighter_GObj* gobj)
     if (fp->x3E4_fighterCmdScript.x3EC_scriptCurrent != NULL) {
         float timer = cmd->timer;
         if (timer != F32_MAX) {
-            cmd->timer = timer - fp->frame_spd_mul;
+            cmd->timer = timer - fp->frame_speed_mul;
         }
     loop_4:
         if ((u8*) cmd->u.data_position != NULL) {
             float timer = cmd->timer;
             if (timer == F32_MAX) {
                 float frame_count = cmd->frame_count;
-                if (!(frame_count >= fp->frame_spd_mul)) {
+                if (!(frame_count >= fp->frame_speed_mul)) {
                     cmd->timer = -frame_count;
                     goto block_9;
                 }
@@ -1564,14 +1564,14 @@ void ftAction_8007349C(Fighter_GObj* gobj)
         return;
     }
     if (cmd->timer != F32_MAX) {
-        cmd->timer -= fp->frame_spd_mul;
+        cmd->timer -= fp->frame_speed_mul;
     }
     do {
         if (cmd->u.data_position == NULL) {
             break;
         }
         if (cmd->timer == F32_MAX) {
-            if (cmd->frame_count >= fp->frame_spd_mul) {
+            if (cmd->frame_count >= fp->frame_speed_mul) {
                 break;
             }
             cmd->timer = -cmd->frame_count;

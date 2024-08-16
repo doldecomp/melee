@@ -66,7 +66,7 @@ static inline void inlineB0(ftCo_GObj* gobj)
     if (fp->x2338.x != 0) {
         ftColl_8007AFF8(gobj);
     } else if (fp->cur_anim_frame >= 0 &&
-               fp->cur_anim_frame < fp->frame_spd_mul)
+               fp->cur_anim_frame < fp->frame_speed_mul)
     {
         ft_800892A0(gobj);
         ft_80089824(gobj);

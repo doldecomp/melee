@@ -33,7 +33,7 @@ void grtDrMario_80220764(HSD_GObj*);             /* static */
 bool grtDrMario_802207B4(HSD_GObj*);             /* static */
 void grtDrMario_802207BC(HSD_GObj*);             /* static */
 void grtDrMario_802207DC(HSD_GObj*);             /* static */
-lb_UnkAnimStruct* grtDrMario_802207E0(enum_t);   /* static */
+DynamicsDesc* grtDrMario_802207E0(enum_t);       /* static */
 bool grtDrMario_802207E8(Vec3*, int, HSD_JObj*); /* static */
 
 static StageCallbacks grTDr_803E8850[4] = {
@@ -167,7 +167,7 @@ void grtDrMario_802207BC(HSD_GObj* gobj)
 
 void grtDrMario_802207DC(HSD_GObj* gobj) {}
 
-lb_UnkAnimStruct* grtDrMario_802207E0(enum_t arg0)
+DynamicsDesc* grtDrMario_802207E0(enum_t arg0)
 {
     return NULL;
 }

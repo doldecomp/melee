@@ -24,7 +24,7 @@
 /* 03E854 */ void pl_8003E854(u8, int, HSD_GObj*);
 /* 03E978 */ void pl_8003E978(u8 slot, bool fp_x221F_b4, Item_GObj* item_gobj,
                               float y0, float, float, float, float x1,
-                              float y1, float frame_spd_mul);
+                              float y1, float frame_speed_mul);
 /* 03EA08 */ void pl_8003EA08(u8 slot, bool);
 /* 03EB30 */ void pl_8003EB30(void);
 /* 03EC9C */ void pl_8003EC9C(s32, s32, f32, f32);

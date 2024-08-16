@@ -1,0 +1,6 @@
+struct DynamicsDesc {
+    /* +0 */ void* ptr; // is stored @ 8000fdd4, comes from a nonstandard
+                        // heap @ -0x52fc(r13)
+    /* +4 */ int count; // number of bones in this boneset
+    /* +8 */ Vec3 pos;  // stored @ 80011718, 0x8 of dynamicdesc
+};

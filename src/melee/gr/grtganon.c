@@ -38,9 +38,9 @@ StageData grTGn_803E98DC = {
 };
 
 typedef struct grTGnSpecialParams {
-    lb_UnkAnimStruct* x0;
-    lb_UnkAnimStruct* x4;
-    lb_UnkAnimStruct* x8;
+    DynamicsDesc* x0;
+    DynamicsDesc* x4;
+    DynamicsDesc* x8;
 } grTGnSpecialParams;
 
 grTGnSpecialParams* grTGn_804D6B18;
@@ -182,7 +182,7 @@ void grTGanon_802249B0(HSD_GObj* gobj)
     return;
 }
 
-lb_UnkAnimStruct* grTGanon_802249B4(enum_t arg0)
+DynamicsDesc* grTGanon_802249B4(enum_t arg0)
 {
     if (arg0 != -1) {
         enum_t i = mpLib_80056B6C(arg0);

@@ -34,7 +34,7 @@ static void grTKoopa_802218A0(HSD_GObj* gobj);
 static bool grTKoopa_802218F0(HSD_GObj*);
 static void grTKoopa_802218F8(HSD_GObj*);
 static void grTKoopa_80221918(HSD_GObj*);
-static lb_UnkAnimStruct* grTKoopa_8022191C(enum_t);
+static DynamicsDesc* grTKoopa_8022191C(enum_t);
 static bool grTKoopa_80221924(Vec3*, int, HSD_JObj*);
 
 extern StageInfo stage_info;
@@ -176,7 +176,7 @@ static void grTKoopa_802218F8(HSD_GObj* arg0)
 
 static void grTKoopa_80221918(HSD_GObj* arg0) {}
 
-static lb_UnkAnimStruct* grTKoopa_8022191C(enum_t arg0)
+static DynamicsDesc* grTKoopa_8022191C(enum_t arg0)
 {
     return NULL;
 }

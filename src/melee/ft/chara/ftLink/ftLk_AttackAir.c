@@ -76,7 +76,7 @@ static void lwOnAnim(HSD_GObj* gobj)
     float frame_start = fp->mv.lk.attackair.lw_frame_start;
     ftLk_DatAttrs* da = fp->dat_attrs;
     if (frame_start > 0) {
-        fp->mv.lk.attackair.lw_frame_start = frame_start - fp->frame_spd_mul;
+        fp->mv.lk.attackair.lw_frame_start = frame_start - fp->frame_speed_mul;
         if (fp->mv.lk.attackair.lw_frame_start <= 0 &&
             fp->cur_anim_frame < da->attackairlw_hit_anim_frame_end)
         {

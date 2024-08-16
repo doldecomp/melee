@@ -3,6 +3,7 @@
 
 #include <platform.h>
 #include "cm/forward.h"
+#include "ft/forward.h"
 #include "it/forward.h" // IWYU pragma: export
 #include "it/items/forward.h"
 #include <dolphin/gx/forward.h>
@@ -75,10 +76,9 @@ struct DynamicBoneTable {
 struct Item_DynamicBones {
     int flags;
     HSD_JObj* skeleton;
-    UNK_T unk_ptr;
-    int count;
-    Vec3 unk_vec;
+    DynamicsDesc dyn_desc;
 };
+STATIC_ASSERT(sizeof(struct Item_DynamicBones) == 0x1C);
 
 struct ECB {
     f32 top;
@@ -141,26 +141,13 @@ struct ItemAttr {
     s32 x9C; // 0x9c
 };
 
-struct ItemDynamicsDesc {
-    int x0_boneID;   // bone index;
-    UNK_T x4_params; // dynamics params;
-
-    /// @at{8} @sz{4}
-    /// @brief Number of children bones to make dynamic.
-    int child_count;
-
-    f32 xC;
-    f32 x10;
-    f32 x14;
-};
-
 /// @sz{8}
 struct ItemDynamics {
     /// @at{0} @sz{4}
     int count;
 
     /// @at{4} @sz{4}
-    ItemDynamicsDesc* dyn_descs;
+    BoneDynamicsDesc* dyn_descs;
 };
 
 /// @sz{10}

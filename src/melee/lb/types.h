@@ -8,9 +8,21 @@
 #include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
-struct lb_UnkAnimStruct {
-    UNK_T x0_data;
-    size_t x4_size;
+struct DynamicsData {
+    /* +0 */ HSD_JObj* jobj;
+    /* +4 */ u8 _4[0x90 - 0x4];
+    /* +90 */ struct DynamicsData* next;
+};
+
+struct DynamicsDesc {
+    /* +0 */ struct DynamicsData* data;
+    /* +4 */ int count;
+    /* +8 */ Vec3 pos;
+};
+
+struct BoneDynamicsDesc {
+    enum_t bone_id;
+    DynamicsDesc dyn_desc;
 };
 
 struct HitResult {

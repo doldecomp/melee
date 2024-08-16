@@ -22,7 +22,7 @@
 #include <baselib/random.h>
 
 /* 1E302C */ static void grStory_801E302C(bool);
-/* 1E36D0 */ static lb_UnkAnimStruct* grStory_801E36D0(enum_t);
+/* 1E36D0 */ static DynamicsDesc* grStory_801E36D0(enum_t);
 
 extern StageInfo stage_info;
 
@@ -299,7 +299,7 @@ void grStory_801E366C(HSD_GObj* gobj)
     }
 }
 
-static lb_UnkAnimStruct* grStory_801E36D0(enum_t arg0)
+static DynamicsDesc* grStory_801E36D0(enum_t arg0)
 {
     return NULL;
 }

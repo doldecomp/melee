@@ -29,7 +29,7 @@
 /* 221204 */ void grTIceClimber_80221204(HSD_GObj*);
 /* 221208 */ void grTIceClimber_80221208(HSD_GObj*);
 /* 221288 */ void grTIceClimber_80221288(HSD_GObj*);
-/* 221354 */ lb_UnkAnimStruct* grTIceClimber_80221354(enum_t);
+/* 221354 */ DynamicsDesc* grTIceClimber_80221354(enum_t);
 /* 22135C */ bool grTIceClimber_8022135C(Vec3*, int, HSD_JObj*);
 /* 3E8B5C */ extern s16 grTIc_803E8B5C[];
 

@@ -6,7 +6,6 @@
 
 #include "ftCo_DamageIce.h"
 
-#include "ftCo_09CB.h"
 #include "ftCo_DownAttack.h"
 #include "ftCo_DownBound.h"
 #include "ftCo_FallSpecial.h"
@@ -23,6 +22,7 @@
 #include "ft/ft_0D14.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/ftdynamics.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCaptain/types.h"

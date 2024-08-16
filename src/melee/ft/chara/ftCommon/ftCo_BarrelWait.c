@@ -3,7 +3,6 @@
 
 #include "ftCo_BarrelWait.h"
 
-#include "ftCo_09CB.h"
 #include "ftCo_Damage.h"
 #include "ftCo_Lift.h"
 
@@ -13,6 +12,7 @@
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/ftdynamics.h"
 #include "ft/types.h"
 #include "gr/ground.h"
 #include "lb/lbcollision.h"

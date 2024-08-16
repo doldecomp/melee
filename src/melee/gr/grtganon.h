@@ -26,7 +26,7 @@ void grTGanon_80224938(HSD_GObj*);
 bool grTGanon_80224988(HSD_GObj*);
 void grTGanon_80224990(HSD_GObj*);
 void grTGanon_802249B0(HSD_GObj*);
-lb_UnkAnimStruct* grTGanon_802249B4(int);
+DynamicsDesc* grTGanon_802249B4(int);
 bool grTGanon_80224A4C(Vec3*, int, HSD_JObj*);
 
 #endif

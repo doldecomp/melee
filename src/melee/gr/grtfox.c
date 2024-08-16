@@ -37,7 +37,7 @@ void grTFox_80220DE0(HSD_GObj*);             /* static */
 bool grTFox_80220E30(HSD_GObj*);             /* static */
 void grTFox_80220E38(HSD_GObj*);             /* static */
 void grTFox_80220E58(HSD_GObj*);             /* static */
-lb_UnkAnimStruct* grTFox_80220E5C(enum_t);   /* static */
+DynamicsDesc* grTFox_80220E5C(enum_t);       /* static */
 bool grTFox_80220F08(Vec3*, int, HSD_JObj*); /* static */
 
 typedef struct grTFox_UnkStruct {
@@ -178,7 +178,7 @@ void grTFox_80220E38(HSD_GObj* gobj)
 
 void grTFox_80220E58(HSD_GObj* gobj) {}
 
-lb_UnkAnimStruct* grTFox_80220E5C(enum_t arg0)
+DynamicsDesc* grTFox_80220E5C(enum_t arg0)
 {
     if (arg0 != -1) {
         enum_t i = mpLib_80056B6C(arg0);

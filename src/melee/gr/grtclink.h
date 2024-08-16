@@ -24,7 +24,7 @@ void grTCLink_8022019C(HSD_GObj*);
 bool grTCLink_802201EC(HSD_GObj*);
 void grTCLink_802201F4(HSD_GObj*);
 void grTCLink_80220214(HSD_GObj*);
-lb_UnkAnimStruct* grTCLink_80220218(int unused);
+DynamicsDesc* grTCLink_80220218(int unused);
 bool grTCLink_80220220(Vec3*, int, HSD_JObj*);
 
 #endif

@@ -19,10 +19,10 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
+#include "ft/ftdynamics.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_09CB.h"
 #include "ftCommon/ftCo_CaptureKirby.h"
 #include "it/it_26B1.h"
 #include "it/items/it_27CF.h"
@@ -2993,7 +2993,7 @@ Vec3 const ftKb_Init_803B757C = { 0, 4, 0 };
 void ftKb_Init_800EE528(void)
 {
     /// @todo Bad cast.
-    s32* number_list = (s32*) ft_80459B88;
+    s32* number_list = (s32*) ft_80459B88.x0;
     ftKirby_UnkArrayThing** struct_list = ftKb_Init_803C9FC8;
 
     s32 i;
@@ -3197,7 +3197,7 @@ void ftKb_SpecialN_800EFB4C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.kb.hat.jobj == NULL) {
-        Kirby_Unk* temp_unk = ft_80459B88[0];
+        Kirby_Unk* temp_unk = ft_80459B88.x0;
 
         // Outside the range of both Fox and Kirby's functions, unk4 is Fox
         HSD_Joint** temp_joint = temp_unk->x4;
@@ -3206,7 +3206,7 @@ void ftKb_SpecialN_800EFB4C(HSD_GObj* gobj)
         fp->fv.kb.hat.unk_hsd_obj = HSD_ObjAlloc(&Fighter_80459080);
 
         ftParts_80074148();
-        fp->fv.kb.hat.jobj = HSD_JObjLoadJoint(*temp_joint);
+        // fp->fv.kb.hat.jobj = HSD_JObjLoadJoint(*temp_joint);
         fp->x2225_b2 = true;
 
         // Fighter_InitPObj2
@@ -3227,7 +3227,7 @@ void ftKb_SpecialN_800EFE80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.kb.hat.jobj == NULL) {
-        HSD_Joint* joint = ft_80459B88[0]->x0;
+        HSD_Joint* joint = ft_80459B88.x0->x0;
         fp->fv.kb.hat.unk_hsd_obj = HSD_ObjAlloc(&Fighter_80459080);
         ftParts_80074148();
         fp->fv.kb.hat.jobj = HSD_JObjLoadJoint(joint);
@@ -3558,9 +3558,9 @@ void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
         Vec3 scale;
 
         if (fp->fv.kb.hat.kind == FTKIND_MARS) {
-            ftCommon_SetAccessory(fp, ft_80459B88[FTKIND_MARS]->xC);
+            ftCommon_SetAccessory(fp, ft_80459B88.x0->x0[FTKIND_MARS].next);
         } else {
-            ftCommon_SetAccessory(fp, ft_80459B88[FTKIND_EMBLEM]->xC);
+            ftCommon_SetAccessory(fp, ft_80459B88.x0->x0[FTKIND_EMBLEM].next);
         }
 
         scale.x = scale.y = scale.z = ftCommon_GetModelScale(fp);

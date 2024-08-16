@@ -34,7 +34,7 @@ void grTKirby_802215BC(HSD_GObj*);             /* static */
 bool grTKirby_8022160C(HSD_GObj*);             /* static */
 void grTKirby_80221614(HSD_GObj*);             /* static */
 void grTKirby_80221634(HSD_GObj*);             /* static */
-lb_UnkAnimStruct* grTKirby_80221638(enum_t);   /* static */
+DynamicsDesc* grTKirby_80221638(enum_t);       /* static */
 bool grTKirby_80221640(Vec3*, int, HSD_JObj*); /* static */
 
 static StageCallbacks grTKb_803E8BB0[4] = {
@@ -168,7 +168,7 @@ void grTKirby_80221614(HSD_GObj* gobj)
 
 void grTKirby_80221634(HSD_GObj* gobj) {}
 
-lb_UnkAnimStruct* grTKirby_80221638(enum_t arg0)
+DynamicsDesc* grTKirby_80221638(enum_t arg0)
 {
     return NULL;
 }

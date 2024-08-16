@@ -405,4 +405,10 @@ typedef enum ftCommon_BuryType {
     BuryType_Unk3,
 } ftCommon_BuryType;
 
+#if M2CTX
+#define Ft_Dynamics_NumMax 10
+#else
+static ssize_t const Ft_Dynamics_NumMax = 10;
+#endif
+
 #endif

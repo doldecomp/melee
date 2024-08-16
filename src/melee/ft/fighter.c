@@ -16,6 +16,7 @@
 #include "ftcoll.h"
 #include "ftcommon.h"
 #include "ftdrawcommon.h"
+#include "ftdynamics.h"
 #include "ftlib.h"
 #include "ftparts.h"
 
@@ -35,7 +36,6 @@
 #include "ft/ftmaterial.h"
 #include "ft/ftmetal.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_09CB.h"
 #include "ftCommon/ftCo_09F4.h"
 #include "ftCommon/ftCo_0A01.h"
 #include "ftCommon/ftCo_0C35.h"
@@ -286,7 +286,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->cur_anim_frame = 0;
     fp->x898_unk = 0;
 
-    fp->frame_spd_mul = 1;
+    fp->frame_speed_mul = 1;
     fp->x8A0_unk = 1;
     fp->dmg.kb_applied = 0;
     fp->dmg.x18A4_knockbackMagnitude = 0;
@@ -1216,10 +1216,10 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
         }
 
         fp->anim_id = new_motion_state->anim_id;
-        fp->frame_spd_mul = anim_speed;
+        fp->frame_speed_mul = anim_speed;
         fp->x8A0_unk = anim_speed;
 
-        fp->cur_anim_frame = (anim_start - fp->frame_spd_mul);
+        fp->cur_anim_frame = (anim_start - fp->frame_speed_mul);
         fp->x898_unk = 0.0f;
 
         if ((fp->x594_b0) || (fp->x594_b5)) {
@@ -1237,7 +1237,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
             if ((flags & Ft_MF_FreezeState) != 0) {
                 fp->x2223_b0 = 1;
                 fp->x104 = 0x14;
-                fp->frame_spd_mul = 0.0f;
+                fp->frame_speed_mul = 0.0f;
                 anim_speed = 0.0f;
             }
 
@@ -1665,11 +1665,11 @@ void Fighter_8006A360(Fighter_GObj* gobj)
                 if (fp->x104 == 0x14U) {
                     ftAnim_8006F0FC(gobj, 0.0f);
                 } else {
-                    fp->frame_spd_mul += fp->x8A0_unk;
+                    fp->frame_speed_mul += fp->x8A0_unk;
                 }
                 fp->x104--;
                 if (fp->x104 == 0) {
-                    ftAnim_8006F0FC(gobj, fp->frame_spd_mul);
+                    ftAnim_8006F0FC(gobj, fp->frame_speed_mul);
                     fp->x104 = 0x14U;
                 }
             }
@@ -3079,7 +3079,7 @@ void Fighter_Unload_8006DABC(void* user_data)
     efAsync_80067688(&fp->x60C);
     it_8026B7F8(fp->gobj);
     Camera_800290D4(fp->x890_cameraBox);
-    ftCo_8009E0D4(fp);
+    ftCo_UnloadDynamicBones(fp);
     ftColl_800765AC(fp->gobj);
     ft_80088C5C(fp->gobj);
     lbShadow_8000EE8C(&fp->x20A4);
