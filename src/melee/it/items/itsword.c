@@ -511,12 +511,11 @@ static inline void inlineD2(Item_GObj* gobj)
         (attrs->x10 - ip->xDD4_itemVar.sword.x40) / attrs->x18;
 }
 
-static inline void inlineD3(Item_GObj* gobj)
+bool it_80285920(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    HSD_GObj* owner = ip->owner;
     itSword_UnkArticle1* attrs = ip->xC4_article_data->x4_specialAttributes;
-    if (owner != NULL && ftLib_80086FA8(owner) != 1) {
+    if (ip->owner != NULL && ftLib_80086FA8(ip->owner) != 1) {
         inlineD0(gobj);
     }
     if (ip->xDD4_itemVar.sword.x3C == 0) {
@@ -528,11 +527,7 @@ static inline void inlineD3(Item_GObj* gobj)
             }
         }
     }
-}
 
-bool it_80285920(Item_GObj* gobj)
-{
-    inlineD3(gobj);
     inlineA4(gobj);
     return false;
 }
