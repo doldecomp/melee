@@ -21,19 +21,6 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-static float const it_804DC8D0 = 0;
-static float const it_804DC8D4 = -1;
-static float const it_804DC8D8 = 0.3;
-static float const it_804DC8DC = 1.5;
-static float const it_804DC8E0 = 1;
-static double const it_804DC8E8 = S32_TO_F32;
-static float const it_804DC8F0 = 10.03;
-static float const it_804DC8F4 = 2;
-static float const it_804DC8F8 = 0.25;
-
-/* literal */ extern char* const it_804D5220;
-/* literal */ extern char* const it_804D5228;
-
 /* 284E30 */ static void it_80284E30(Item_GObj* gobj);
 /* 285084 */ static void it_80285084(Item_GObj* gobj);
 /* 285140 */ static void it_80285140(Item_GObj* gobj);
@@ -68,7 +55,7 @@ Item_GObj* itSword_Spawn(Vec3* pos)
     spawn.prev_pos = *pos;
     spawn.prev_pos.z = 0;
     spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = -1;
+    spawn.facing_dir = -1.0f;
     spawn.x3C_damage = 0;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0;
     spawn.x0_parent_gobj = NULL;
@@ -93,22 +80,20 @@ void it_80284E30(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     float scale_y =
-        it_804DC8D8 *
-        (ip->xDD4_itemVar.sword.x28 *
-         (ip->xDD4_itemVar.sword.x4C * ip->xDD4_itemVar.sword.x10));
+        0.3f * (ip->xDD4_itemVar.sword.x28 *
+                (ip->xDD4_itemVar.sword.x4C * ip->xDD4_itemVar.sword.x10));
     HSD_JObjSetScaleY(ip->xBBC_dynamicBoneTable->bones[6], scale_y);
     {
         Vec3 scale;
         if (ip->msid == 2) {
-            float temp_scale =
-                it_804DC8DC * ip->xDD4_itemVar.sword.x40 + scale_y;
+            float temp_scale = 1.5f * ip->xDD4_itemVar.sword.x40 + scale_y;
             scale.x = temp_scale;
             scale.y = scale_y + ip->xDD4_itemVar.sword.x40;
             scale.z = temp_scale;
         } else {
-            scale.x = it_804DC8E0;
+            scale.x = 1.0f;
             scale.y = scale_y;
-            scale.z = it_804DC8E0;
+            scale.z = 1.0f;
         }
         HSD_JObjSetScale(ip->xBBC_dynamicBoneTable->bones[3], &scale);
     }
@@ -120,7 +105,7 @@ void it_80284FC4(Item_GObj* gobj, int arg1, float arg2)
     ip->xDD4_itemVar.sword.x4 = 0;
     ip->xDD4_itemVar.sword.x8 = arg1;
     ip->xDD4_itemVar.sword.xC = 1;
-    ip->xDD4_itemVar.sword.x10 = it_804DC8E0;
+    ip->xDD4_itemVar.sword.x10 = 1.0f;
     ip->xDD4_itemVar.sword.x14 = arg2;
     ip->xDD4_itemVar.sword.x18 =
         (ip->xDD4_itemVar.sword.x14 - ip->xDD4_itemVar.sword.x10) / arg1;
@@ -132,7 +117,7 @@ void it_80285024(Item_GObj* gobj, int arg1)
     ip->xDD4_itemVar.sword.x4 = arg1;
     ip->xDD4_itemVar.sword.x8 = 0;
     ip->xDD4_itemVar.sword.xC = -1;
-    ip->xDD4_itemVar.sword.x14 = it_804DC8E0;
+    ip->xDD4_itemVar.sword.x14 = 1.0f;
     ip->xDD4_itemVar.sword.x18 =
         (ip->xDD4_itemVar.sword.x14 - ip->xDD4_itemVar.sword.x10) /
         ip->xDD4_itemVar.sword.x4;
@@ -232,13 +217,13 @@ void it_802852B8(Item_GObj* gobj, float* arg1, float* arg2)
     Item* ip = GET_ITEM(gobj);
 
     float f1 = ip->xDD4_itemVar.sword.x4C * ip->xDD4_itemVar.star.xvel *
-               ip->xDD4_itemVar.sword.x28 * it_804DC8D8;
+               ip->xDD4_itemVar.sword.x28 * 0.3f;
 
     if (arg1 != NULL) {
-        *arg1 = it_804DC8D0;
+        *arg1 = 0.0f;
     }
     if (arg2 != NULL) {
-        *arg2 = it_804DC8F0 * f1;
+        *arg2 = 10.03f * f1;
     }
 }
 
@@ -260,29 +245,29 @@ void it_80285338(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itSword_UnkArticle1* attrs = ip->xC4_article_data->x4_specialAttributes;
     it_8026B390(gobj);
-    ip->x40_vel.x = it_804DC8D0;
+    ip->x40_vel.x = 0.0f;
     ip->x40_vel.y = attrs->xC;
-    ip->x40_vel.z = it_804DC8D0;
-    ip->xDD4_itemVar.capsule.x0 = 0;
-    ip->xDD4_itemVar.capsule.x4 = 0;
+    ip->x40_vel.z = 0.0f;
+    ip->xDD4_itemVar.sword.x0 = 0;
+    ip->xDD4_itemVar.sword.x4 = 0;
     ip->xDD4_itemVar.sword.x8 = 0;
     ip->xDD4_itemVar.sword.xC = 0;
-    ip->xDD4_itemVar.sword.x10 = it_804DC8E0;
-    ip->xDD4_itemVar.sword.x14 = it_804DC8E0;
-    ip->xDD4_itemVar.sword.x18 = it_804DC8D0;
+    ip->xDD4_itemVar.sword.x10 = 1.0f;
+    ip->xDD4_itemVar.sword.x14 = 1.0f;
+    ip->xDD4_itemVar.sword.x18 = 0.0f;
     ip->xDD4_itemVar.sword.x1C = 0;
     ip->xDD4_itemVar.sword.x20 = 0;
     ip->xDD4_itemVar.sword.x24 = 0;
-    ip->xDD4_itemVar.sword.x28 = it_804DC8E0;
-    ip->xDD4_itemVar.sword.x2C = it_804DC8E0;
-    ip->xDD4_itemVar.sword.x30 = it_804DC8D0;
+    ip->xDD4_itemVar.sword.x28 = 1.0f;
+    ip->xDD4_itemVar.sword.x2C = 1.0f;
+    ip->xDD4_itemVar.sword.x30 = 0.0f;
     ip->xDD4_itemVar.sword.x34 = 0;
     ip->xDD4_itemVar.sword.x38 = 0;
     ip->xDD4_itemVar.sword.x3C = 0;
-    ip->xDD4_itemVar.sword.x40 = it_804DC8E0;
-    ip->xDD4_itemVar.sword.x44 = it_804DC8E0;
-    ip->xDD4_itemVar.sword.x48 = it_804DC8D0;
-    ip->xDD4_itemVar.sword.x50 = it_804DC8D0;
+    ip->xDD4_itemVar.sword.x40 = 1.0f;
+    ip->xDD4_itemVar.sword.x44 = 1.0f;
+    ip->xDD4_itemVar.sword.x48 = 0.0f;
+    ip->xDD4_itemVar.sword.x50 = 0.0f;
     ip->xDD4_itemVar.sword.x4C =
         HSD_JObjGetScaleY(ip->xBBC_dynamicBoneTable->bones[6]);
     ip->xDD4_itemVar.sword.x54 = 0;
@@ -292,18 +277,25 @@ void it_80285338(Item_GObj* gobj)
 static inline void inlineA0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = it_804DC8D0;
+    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
     ip->xD50_landNum = 0;
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
+
+static inline void inlineB0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    ip->xD50_landNum = 0;
 }
 
 static inline void inlineA1(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.capsule.x4 = 4;
+    ip->xDD4_itemVar.sword.x4 = 4;
     ip->xDD4_itemVar.sword.x8 = 0;
     ip->xDD4_itemVar.sword.xC = -1;
-    ip->xDD4_itemVar.sword.x14 = it_804DC8E0;
+    ip->xDD4_itemVar.sword.x14 = 1.0f;
     ip->xDD4_itemVar.sword.x18 =
         (ip->xDD4_itemVar.sword.x14 - ip->xDD4_itemVar.sword.x10) /
         ip->xDD4_itemVar.sword.x4;
@@ -315,10 +307,22 @@ static inline void inlineA2(Item_GObj* gobj)
     ip->xDD4_itemVar.sword.x1C = 4;
     ip->xDD4_itemVar.sword.x20 = 0;
     ip->xDD4_itemVar.sword.x24 = -1;
-    ip->xDD4_itemVar.sword.x2C = it_804DC8E0;
+    ip->xDD4_itemVar.sword.x2C = 1.0f;
     ip->xDD4_itemVar.sword.x30 =
         (ip->xDD4_itemVar.sword.x2C - ip->xDD4_itemVar.sword.x28) /
         ip->xDD4_itemVar.sword.x1C;
+}
+
+static inline void inlineC1(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.sword.x1C = 0;
+    ip->xDD4_itemVar.sword.x20 = 4;
+    ip->xDD4_itemVar.sword.x24 = 1;
+    ip->xDD4_itemVar.sword.x28 = 1.0f;
+    ip->xDD4_itemVar.sword.x2C = 2.0f;
+    ip->xDD4_itemVar.sword.x30 =
+        (ip->xDD4_itemVar.sword.x2C - ip->xDD4_itemVar.sword.x28) / 4;
 }
 
 static inline void inlineA3(Item_GObj* gobj)
@@ -331,6 +335,18 @@ static inline void inlineA3(Item_GObj* gobj)
     ip->xDD4_itemVar.sword.x44 = attrs->x10;
     ip->xDD4_itemVar.sword.x48 =
         (attrs->x10 - ip->xDD4_itemVar.sword.x40) / attrs->x18;
+}
+
+static inline void inlineD1(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itSword_UnkArticle1* attrs = ip->xC4_article_data->x4_specialAttributes;
+    ip->xDD4_itemVar.sword.x34 = 0;
+    ip->xDD4_itemVar.sword.x38 = attrs->x18;
+    ip->xDD4_itemVar.sword.x3C = 1;
+    ip->xDD4_itemVar.sword.x40 = attrs->x10;
+    ip->xDD4_itemVar.sword.x44 = attrs->x14;
+    ip->xDD4_itemVar.sword.x48 = (attrs->x14 - attrs->x10) / attrs->x18;
 }
 
 static inline void inlineA4(Item_GObj* gobj)
@@ -364,57 +380,12 @@ bool it_802855CC(Item_GObj* gobj)
     return false;
 }
 
-static inline void inlineB0(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    ip->xD50_landNum = 0;
-}
-
-static inline void inlineB1(Item_GObj* gobj)
-{
-    {
-        Item* ip = GET_ITEM(gobj);
-        ip->xDD4_itemVar.capsule.x4 = 4;
-        ip->xDD4_itemVar.sword.x8 = 0;
-        ip->xDD4_itemVar.sword.xC = -1;
-        ip->xDD4_itemVar.star.yvel = it_804DC8E0;
-        ip->xDD4_itemVar.sword.x18 =
-            (ip->xDD4_itemVar.star.yvel - ip->xDD4_itemVar.star.xvel) /
-            (float) ip->xDD4_itemVar.capsule.x4;
-    }
-}
-
-static inline void inlineB2(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.sword.x1C = 4;
-    ip->xDD4_itemVar.sword.x20 = 0;
-    ip->xDD4_itemVar.sword.x24 = -1;
-    ip->xDD4_itemVar.sword.x2C = it_804DC8E0;
-    ip->xDD4_itemVar.sword.x30 =
-        (ip->xDD4_itemVar.sword.x2C - ip->xDD4_itemVar.sword.x28) /
-        (float) ip->xDD4_itemVar.sword.x1C;
-}
-
-static inline void inlineB3(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    itSword_UnkArticle1* attrs = ip->xC4_article_data->x4_specialAttributes;
-    ip->xDD4_itemVar.sword.x34 = attrs->x18;
-    ip->xDD4_itemVar.sword.x38 = 0;
-    ip->xDD4_itemVar.sword.x3C = -1;
-    ip->xDD4_itemVar.sword.x44 = attrs->x10;
-    ip->xDD4_itemVar.sword.x48 =
-        (attrs->x10 - ip->xDD4_itemVar.sword.x40) / attrs->x18;
-}
-
 void it_802855F8(Item_GObj* gobj)
 {
     inlineB0(gobj);
-    inlineB1(gobj);
-    inlineB2(gobj);
-    inlineB3(gobj);
+    inlineA1(gobj);
+    inlineA2(gobj);
+    inlineA3(gobj);
     inlineA4(gobj);
 }
 
@@ -437,31 +408,6 @@ bool it_802857D8(Item_GObj* gobj)
     return false;
 }
 
-static inline void inlineC0(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.capsule.x4 = 4;
-    ip->xDD4_itemVar.sword.x8 = 0;
-    ip->xDD4_itemVar.sword.xC = -1;
-    ip->xDD4_itemVar.sword.x14 = it_804DC8E0;
-    ip->xDD4_itemVar.sword.x18 =
-        (ip->xDD4_itemVar.star.yvel - ip->xDD4_itemVar.star.xvel) /
-        (float) ip->xDD4_itemVar.capsule.x4;
-}
-
-static inline void inlineC1(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.sword.x1C = 0;
-    ip->xDD4_itemVar.sword.x20 = 4;
-    ip->xDD4_itemVar.sword.x24 = 1;
-    ip->xDD4_itemVar.sword.x28 = it_804DC8E0;
-    ip->xDD4_itemVar.sword.x2C = it_804DC8F4;
-    ip->xDD4_itemVar.sword.x30 =
-        (ip->xDD4_itemVar.sword.x2C - ip->xDD4_itemVar.sword.x28) *
-        it_804DC8F8;
-}
-
 void it_80285804(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -470,69 +416,28 @@ void it_80285804(Item_GObj* gobj)
     HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
     ip->xD50_landNum = 0;
-    inlineC0(gobj);
+    inlineA1(gobj);
     inlineC1(gobj);
     inlineA4(gobj);
 }
 
-static inline void inlineD0(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.sword.x4 = 4;
-    ip->xDD4_itemVar.sword.x8 = 0;
-    ip->xDD4_itemVar.sword.xC = -1;
-    ip->xDD4_itemVar.sword.x14 = it_804DC8E0;
-    ip->xDD4_itemVar.sword.x18 =
-        (ip->xDD4_itemVar.sword.x14 - ip->xDD4_itemVar.sword.x10) /
-        ip->xDD4_itemVar.sword.x4;
-}
-
-static inline void inlineD1(Item_GObj* gobj)
+bool it_80285920(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itSword_UnkArticle1* attrs = ip->xC4_article_data->x4_specialAttributes;
-    ip->xDD4_itemVar.sword.x34 = 0;
-    ip->xDD4_itemVar.sword.x38 = attrs->x18;
-    ip->xDD4_itemVar.sword.x3C = 1;
-    ip->xDD4_itemVar.sword.x40 = attrs->x10;
-    ip->xDD4_itemVar.sword.x44 = attrs->x14;
-    ip->xDD4_itemVar.sword.x48 = (attrs->x14 - attrs->x10) / attrs->x18;
-}
-
-static inline void inlineD2(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    itSword_UnkArticle1* attrs = ip->xC4_article_data->x4_specialAttributes;
-    ip->xDD4_itemVar.sword.x34 = attrs->x18;
-    ip->xDD4_itemVar.sword.x38 = 0;
-    ip->xDD4_itemVar.sword.x3C = -1;
-    ip->xDD4_itemVar.sword.x44 = attrs->x10;
-    ip->xDD4_itemVar.sword.x48 =
-        (attrs->x10 - ip->xDD4_itemVar.sword.x40) / attrs->x18;
-}
-
-static inline void inlineD3(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    HSD_GObj* owner = ip->owner;
-    itSword_UnkArticle1* attrs = ip->xC4_article_data->x4_specialAttributes;
-    if (owner != NULL && ftLib_80086FA8(owner) != 1) {
-        inlineD0(gobj);
+    if (ip->owner != NULL && ftLib_80086FA8(ip->owner) != 1) {
+        inlineA1(gobj);
     }
     if (ip->xDD4_itemVar.sword.x3C == 0) {
         if (ip->xDD4_itemVar.sword.x34 == ip->xDD4_itemVar.sword.x38) {
             if (ip->xDD4_itemVar.sword.x38 == 0) {
                 inlineD1(gobj);
             } else if (ip->xDD4_itemVar.sword.x38 == attrs->x18) {
-                inlineD2(gobj);
+                inlineA3(gobj);
             }
         }
     }
-}
 
-bool it_80285920(Item_GObj* gobj)
-{
-    inlineD3(gobj);
     inlineA4(gobj);
     return false;
 }
@@ -544,154 +449,40 @@ bool it_80285AF8(Item_GObj* gobj)
     return false;
 }
 
-static inline void inlineE0(Item_GObj* gobj)
-{
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    HSD_JObj* child = HSD_JObjGetChild(jobj);
-    it_8026B390(gobj);
-    HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
-    Item_80268E5C(gobj, 3, 6);
-}
-
-static inline void inlineE1(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.capsule.x4 = 4;
-    ip->xDD4_itemVar.sword.x8 = 0;
-    ip->xDD4_itemVar.sword.xC = -1;
-    ip->xDD4_itemVar.sword.x14 = it_804DC8E0;
-    ip->xDD4_itemVar.sword.x18 =
-        (ip->xDD4_itemVar.sword.x14 - ip->xDD4_itemVar.sword.x10) /
-        ip->xDD4_itemVar.sword.x4;
-}
-
-static inline void inlineE2(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.sword.x1C = 4;
-    ip->xDD4_itemVar.sword.x20 = 0;
-    ip->xDD4_itemVar.sword.x24 = -1;
-    ip->xDD4_itemVar.sword.x2C = it_804DC8E0;
-    ip->xDD4_itemVar.sword.x30 =
-        (ip->xDD4_itemVar.sword.x2C - ip->xDD4_itemVar.sword.x28) /
-        (float) ip->xDD4_itemVar.sword.x1C;
-}
-
-static inline void inlineE3(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    itSword_UnkArticle1* attrs = ip->xC4_article_data->x4_specialAttributes;
-    ip->xDD4_itemVar.sword.x34 = attrs->x18;
-    ip->xDD4_itemVar.sword.x38 = 0;
-    ip->xDD4_itemVar.sword.x3C = -1;
-    ip->xDD4_itemVar.sword.x44 = attrs->x10;
-    ip->xDD4_itemVar.sword.x48 =
-        (attrs->x10 - ip->xDD4_itemVar.sword.x40) / (float) attrs->x18;
-}
-
 void it_80285B00(Item_GObj* gobj)
 {
-    inlineE0(gobj);
-    inlineE1(gobj);
-    inlineE2(gobj);
-    inlineE3(gobj);
+    HSD_JObj* child = HSD_JObjGetChild(GET_JOBJ(gobj));
+
+    it_8026B390(gobj);
+    HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
+
+    inlineA1(gobj);
+    inlineA2(gobj);
+    inlineA3(gobj);
     inlineA4(gobj);
-}
-
-static inline void inlineF0(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.capsule.x4 = 4;
-    ip->xDD4_itemVar.sword.x8 = 0;
-    ip->xDD4_itemVar.sword.xC = -1;
-    ip->xDD4_itemVar.sword.x14 = it_804DC8E0;
-    ip->xDD4_itemVar.sword.x18 =
-        (ip->xDD4_itemVar.sword.x14 - ip->xDD4_itemVar.sword.x10) /
-        ip->xDD4_itemVar.sword.x4;
-}
-
-static inline void inlineF1(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.sword.x1C = 4;
-    ip->xDD4_itemVar.sword.x20 = 0;
-    ip->xDD4_itemVar.sword.x24 = -1;
-    ip->xDD4_itemVar.sword.x2C = it_804DC8E0;
-    ip->xDD4_itemVar.sword.x30 =
-        (ip->xDD4_itemVar.sword.x2C - ip->xDD4_itemVar.sword.x28) /
-        (float) ip->xDD4_itemVar.sword.x1C;
-}
-
-static inline void inlineF2(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    itSword_UnkArticle1* attrs = ip->xC4_article_data->x4_specialAttributes;
-    ip->xDD4_itemVar.sword.x34 = attrs->x18;
-    ip->xDD4_itemVar.sword.x38 = 0;
-    ip->xDD4_itemVar.sword.x3C = -1;
-    ip->xDD4_itemVar.sword.x44 = attrs->x10;
-    ip->xDD4_itemVar.sword.x48 =
-        (attrs->x10 - ip->xDD4_itemVar.sword.x40) / attrs->x18;
 }
 
 void it_80285C78(Item_GObj* gobj)
 {
-    /// @todo #inlineE0
-    {
-        HSD_JObj* jobj = GET_JOBJ(gobj);
-        HSD_JObj* child = HSD_JObjGetChild(jobj);
-        it_8026B390(gobj);
-        HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
-        Item_80268E5C(gobj, 3, 6);
-    }
-    inlineF0(gobj);
-    inlineF1(gobj);
-    inlineF2(gobj);
+    HSD_JObj* child = HSD_JObjGetChild(GET_JOBJ(gobj));
+
+    it_8026B390(gobj);
+    HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
+
+    inlineA1(gobj);
+    inlineA2(gobj);
+    inlineA3(gobj);
     inlineA4(gobj);
-}
-
-static inline void inlineG0(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.capsule.x4 = 4;
-    ip->xDD4_itemVar.sword.x8 = 0;
-    ip->xDD4_itemVar.sword.xC = -1;
-    ip->xDD4_itemVar.sword.x14 = it_804DC8E0;
-    ip->xDD4_itemVar.sword.x18 =
-        (ip->xDD4_itemVar.sword.x14 - ip->xDD4_itemVar.sword.x10) /
-        ip->xDD4_itemVar.sword.x4;
-}
-
-static inline void inlineG1(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.sword.x1C = 4;
-    ip->xDD4_itemVar.sword.x20 = 0;
-    ip->xDD4_itemVar.sword.x24 = -1;
-    ip->xDD4_itemVar.sword.x2C = it_804DC8E0;
-    ip->xDD4_itemVar.sword.x30 =
-        (ip->xDD4_itemVar.sword.x2C - ip->xDD4_itemVar.sword.x28) /
-        ip->xDD4_itemVar.sword.x1C;
-}
-
-static inline void inlineG2(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    itSword_UnkArticle1* attrs = ip->xC4_article_data->x4_specialAttributes;
-    ip->xDD4_itemVar.sword.x34 = attrs->x18;
-    ip->xDD4_itemVar.sword.x38 = 0;
-    ip->xDD4_itemVar.sword.x3C = -1;
-    ip->xDD4_itemVar.sword.x44 = attrs->x10;
-    ip->xDD4_itemVar.sword.x48 =
-        (attrs->x10 - ip->xDD4_itemVar.sword.x40) / attrs->x18;
 }
 
 void it_80285DF0(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
-    inlineG0(gobj);
-    inlineG1(gobj);
-    inlineG2(gobj);
+    inlineA1(gobj);
+    inlineA2(gobj);
+    inlineA3(gobj);
     inlineA4(gobj);
 }
 
