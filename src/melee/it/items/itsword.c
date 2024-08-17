@@ -263,8 +263,8 @@ void it_80285338(Item_GObj* gobj)
     ip->x40_vel.x = it_804DC8D0;
     ip->x40_vel.y = attrs->xC;
     ip->x40_vel.z = it_804DC8D0;
-    ip->xDD4_itemVar.capsule.x0 = 0;
-    ip->xDD4_itemVar.capsule.x4 = 0;
+    ip->xDD4_itemVar.sword.x0 = 0;
+    ip->xDD4_itemVar.sword.x4 = 0;
     ip->xDD4_itemVar.sword.x8 = 0;
     ip->xDD4_itemVar.sword.xC = 0;
     ip->xDD4_itemVar.sword.x10 = it_804DC8E0;
@@ -300,7 +300,7 @@ static inline void inlineA0(Item_GObj* gobj)
 static inline void inlineA1(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.capsule.x4 = 4;
+    ip->xDD4_itemVar.sword.x4 = 4;
     ip->xDD4_itemVar.sword.x8 = 0;
     ip->xDD4_itemVar.sword.xC = -1;
     ip->xDD4_itemVar.sword.x14 = it_804DC8E0;
@@ -375,13 +375,13 @@ static inline void inlineB1(Item_GObj* gobj)
 {
     {
         Item* ip = GET_ITEM(gobj);
-        ip->xDD4_itemVar.capsule.x4 = 4;
+        ip->xDD4_itemVar.sword.x4 = 4;
         ip->xDD4_itemVar.sword.x8 = 0;
         ip->xDD4_itemVar.sword.xC = -1;
         ip->xDD4_itemVar.star.yvel = it_804DC8E0;
         ip->xDD4_itemVar.sword.x18 =
             (ip->xDD4_itemVar.star.yvel - ip->xDD4_itemVar.star.xvel) /
-            (float) ip->xDD4_itemVar.capsule.x4;
+            (float) ip->xDD4_itemVar.sword.x4;
     }
 }
 
@@ -440,13 +440,13 @@ bool it_802857D8(Item_GObj* gobj)
 static inline void inlineC0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.capsule.x4 = 4;
+    ip->xDD4_itemVar.sword.x4 = 4;
     ip->xDD4_itemVar.sword.x8 = 0;
     ip->xDD4_itemVar.sword.xC = -1;
     ip->xDD4_itemVar.sword.x14 = it_804DC8E0;
     ip->xDD4_itemVar.sword.x18 =
         (ip->xDD4_itemVar.star.yvel - ip->xDD4_itemVar.star.xvel) /
-        (float) ip->xDD4_itemVar.capsule.x4;
+        (float) ip->xDD4_itemVar.sword.x4;
 }
 
 static inline void inlineC1(Item_GObj* gobj)
@@ -542,7 +542,7 @@ bool it_80285AF8(Item_GObj* gobj)
 static inline void inlineE1(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.capsule.x4 = 4;
+    ip->xDD4_itemVar.sword.x4 = 4;
     ip->xDD4_itemVar.sword.x8 = 0;
     ip->xDD4_itemVar.sword.xC = -1;
     ip->xDD4_itemVar.sword.x14 = it_804DC8E0;
@@ -592,7 +592,7 @@ void it_80285B00(Item_GObj* gobj)
 static inline void inlineF0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.capsule.x4 = 4;
+    ip->xDD4_itemVar.sword.x4 = 4;
     ip->xDD4_itemVar.sword.x8 = 0;
     ip->xDD4_itemVar.sword.xC = -1;
     ip->xDD4_itemVar.sword.x14 = it_804DC8E0;
@@ -642,7 +642,7 @@ void it_80285C78(Item_GObj* gobj)
 static inline void inlineG0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.capsule.x4 = 4;
+    ip->xDD4_itemVar.sword.x4 = 4;
     ip->xDD4_itemVar.sword.x8 = 0;
     ip->xDD4_itemVar.sword.xC = -1;
     ip->xDD4_itemVar.sword.x14 = it_804DC8E0;
