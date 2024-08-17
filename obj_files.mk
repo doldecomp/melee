@@ -161,7 +161,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_CaptureKirby.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_CaptureWaitKirby.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_ThrownKirby.s.o\
-    $(BUILD_DIR)/asm/melee/ft/ft_3C61.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/ftdemo.c.o\
