@@ -31,9 +31,6 @@ static float const it_804DC8F0 = 10.03;
 static float const it_804DC8F4 = 2;
 static float const it_804DC8F8 = 0.25;
 
-/* literal */ extern char* const it_804D5220;
-/* literal */ extern char* const it_804D5228;
-
 /* 284E30 */ static void it_80284E30(Item_GObj* gobj);
 /* 285084 */ static void it_80285084(Item_GObj* gobj);
 /* 285140 */ static void it_80285140(Item_GObj* gobj);
