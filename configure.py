@@ -1222,10 +1222,10 @@ config.libs = [
             Object(NonMatching, "dolphin/OdemuExi2/DebuggerDriver.c"),
         ],
     ),
-    DolphinLib(
+    Lib(
         "hio",
         [
-            Object(NonMatching, "dolphin/hio/hio.c"),
+            Object(Matching, "dolphin/hio/hio.c"),
         ],
     ),
     DolphinLib(
