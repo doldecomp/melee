@@ -10,7 +10,7 @@
 #include "mn/types.h"
 #include "sc/types.h"
 
-extern HSD_GObj* mnHyaku_804D6C58;
+static HSD_GObj* mnHyaku_804D6C58;
 
 void gm_801677E8(void);
 
