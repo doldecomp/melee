@@ -25,7 +25,7 @@ typedef struct {
 } ItStarVars;
 
 struct itSword_ItemVars {
-    /* ip+DD4 */ UNK_T x0;
+    /* ip+DD4 */ int x0;
     /* ip+DD8 */ int x4;
     /* ip+DDC */ int x8;
     /* ip+DE0 */ int xC;

@@ -334,8 +334,7 @@ static inline void inlineC1(Item_GObj* gobj)
     ip->xDD4_itemVar.sword.x28 = it_804DC8E0;
     ip->xDD4_itemVar.sword.x2C = it_804DC8F4;
     ip->xDD4_itemVar.sword.x30 =
-        (ip->xDD4_itemVar.sword.x2C - ip->xDD4_itemVar.sword.x28) *
-        it_804DC8F8;
+        (ip->xDD4_itemVar.sword.x2C - ip->xDD4_itemVar.sword.x28) / 4;
 }
 
 static inline void inlineA3(Item_GObj* gobj)
