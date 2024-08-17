@@ -172,39 +172,50 @@ void mnHyaku_8024CAC8(HSD_GObj* gobj)
     }
 }
 
+inline static Menu* allocMenu(u8 arg0, HSD_GObj* gobj)
+{
+    Menu* user_data;
+
+    user_data = HSD_MemAlloc(8);
+    if (user_data == NULL) {
+        OSReport("Can't get user_data.\n");
+        __assert(__FILE__, 360, "user_data");
+    }
+    user_data->cursor = arg0;
+    user_data->text = 0;
+    GObj_InitUserData(gobj, 0, HSD_Free, user_data);
+    return user_data;
+}
+
 void mnHyaku_8024CB94(u8 arg0)
 {
     HSD_GObj* gobj;
     HSD_GObjProc* proc;
     HSD_JObj* jobj;
-    u8 temp_r29;
     Menu* menu;
-    HSD_GObjProc* temp_r3_4;
 
     gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 7U, 0x80);
     mnHyaku_804D6C58 = gobj;
     jobj = HSD_JObjLoadJoint(mnHyaku_804A08E8.joint);
-    temp_r29 = HSD_GObj_804D7849;
-    HSD_GObjObject_80390A70(gobj, temp_r29, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_80391070, 4, 0x80);
     HSD_JObjAddAnimAll(jobj, mnHyaku_804A08E8.animjoint,
                        mnHyaku_804A08E8.matanim_joint,
                        mnHyaku_804A08E8.shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
-    menu = HSD_MemAlloc(8);
-    if (menu == NULL) {
-        OSReport("Can't get menu.\n");
-        __assert("mnhyaku.c", 344, "menu");
-    }
-    menu->cursor = arg0;
-    menu->text = 0;
-    GObj_InitUserData(gobj, 0, HSD_Free, menu);
 
+    menu = allocMenu(arg0, gobj);
     mnHyaku_8024C68C_inline(jobj, menu->cursor);
-    temp_r3_4 = HSD_GObjProc_8038FD54(gobj, mnHyaku_8024CAC8, 0U);
-    temp_r3_4->flags_3 = HSD_GObj_804D783C;
-    mnHyaku_8024C68C_inline_2(gobj);
+
+    proc = HSD_GObjProc_8038FD54(gobj, mnHyaku_8024CAC8, 0U);
+    proc->flags_3 = HSD_GObj_804D783C;
+
+    menu = gobj->user_data;
+    if (menu->text) {
+        HSD_SisLib_803A5CC4(menu->text);
+    }
+    Menu_InitCenterText(menu, vals[menu->cursor]);
 }
 
 void mnHyaku_8024CD64(u8 arg0)
