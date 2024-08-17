@@ -184,6 +184,7 @@ $(BUILD_DIR)/%.c.o: %.c $(BUILD_DIR)/%.c.dep
 $(BUILD_DIR)/src/melee/%.c.o: CC := $(CC_EPI)
 $(BUILD_DIR)/src/sysdolphin/%.c.o: CC := $(CC_EPI)
 $(BUILD_DIR)/src/dolphin/card/%.c.o: CC := $(CC_EPI)
+$(BUILD_DIR)/src/dolphin/hio/%.c.o: CC := $(CC_EPI)
 $(BUILD_DIR)/src/dolphin/pad/%.c.o: CC := $(CC_EPI)
 
 -include $(DEP_FILES)

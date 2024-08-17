@@ -823,7 +823,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/dolphin/OdemuExi2/DebuggerDriver.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/dolphin/hio/hio.s.o\
+    $(BUILD_DIR)/src/dolphin/hio/hio.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/dolphin/mcc/mcc.s.o\
