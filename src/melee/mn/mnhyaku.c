@@ -128,7 +128,8 @@ void mnHyaku_8024C68C(HSD_GObj* arg0)
 
 void fn_8024C9F0(HSD_GObj* gobj)
 {
-    f32 ret = mn_8022EC18(gobj->hsd_obj, &mnHyaku_803EF674[0], 0x80);
+    HSD_JObj* jobj = (HSD_JObj*) gobj->hsd_obj;
+    f32 ret = mn_8022EC18(jobj, &mnHyaku_803EF674[0], 0x80);
     if (ret >= mnHyaku_803EF674[1]) {
         HSD_GObjPLink_80390228(gobj);
     }
