@@ -33,7 +33,7 @@ extern HSD_GObj* mnHyaku_804D6C58;
 
 void gm_801677E8(void);
 
-void lbAudioAx_8002702C(s32, s32, s32, s32);
+void lbAudioAx_8002702C(s32, u64);
 void lbAudioAx_80027168(void);
 f32 lbAudioAx_80027648(void);
 
@@ -230,9 +230,8 @@ void mnHyaku_8024CB94(u8 arg0)
 
 void mnHyaku_8024CD64(u8 arg0)
 {
-    HSD_GObjProc* temp_r3;
+    HSD_GObjProc* proc;
     HSD_Archive* archive;
-    Vec3 pos;
 
     mn_804D6BC8.x0 = 5;
     mn_804A04F0.x1 = mn_804A04F0.x0;
@@ -240,16 +239,9 @@ void mnHyaku_8024CD64(u8 arg0)
     mn_804A04F0.x2 = 0;
 
     lbAudioAx_80026F2C(0x12);
-    {
-        s32 unk_r3 = 2;
-        s32 unk_r6 = 8;
-        s32 unk_r5 = 0;
-        lbAudioAx_8002702C(unk_r3, 0, unk_r5, unk_r6);
-    }
+    lbAudioAx_8002702C(2, 8);
     lbAudioAx_80027168();
-    pos.x = lbAudioAx_80027648();
-    pos.y = mnHyaku_803EF668[0];
-    pos.z = 0;
+    lbAudioAx_80027648();
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
         archive, (void**) &mnHyaku_804A08E8, "MenMainConKm_Top_joint",
@@ -258,8 +250,8 @@ void mnHyaku_8024CD64(u8 arg0)
         &mnHyaku_804A08E8.shapeanim_joint, "MenMainConKm_Top_shapeanim_joint",
         0);
     mnHyaku_8024CB94(arg0);
-    temp_r3 = HSD_GObjProc_8038FD54(GObj_Create(0U, 1U, 0x80U),
-                                    mnHyaku_8024C68C, 0U);
-    temp_r3->flags_3 = HSD_GObj_804D783C;
+    proc = HSD_GObjProc_8038FD54(GObj_Create(0U, 1U, 0x80U), mnHyaku_8024C68C,
+                                 0U);
+    proc->flags_3 = HSD_GObj_804D783C;
     lbAudioAx_800237A8(0x7530, 0x7FU, 0x40U);
 }
