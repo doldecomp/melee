@@ -33,7 +33,7 @@ extern HSD_GObj* mnHyaku_804D6C58;
 
 void gm_801677E8(void);
 
-void lbAudioAx_8002702C(s32, s32, s32);
+void lbAudioAx_8002702C(s32, s32, s32, s32);
 void lbAudioAx_80027168(void);
 f32 lbAudioAx_80027648(void);
 
@@ -72,6 +72,8 @@ void mnHyaku_8024C68C(HSD_GObj* arg0)
 {
     u64 ret;
     Menu* menu = GET_MENU(mnHyaku_804D6C58);
+    PAD_STACK(16);
+
     if (mn_804D6BC8.x0 != 0) {
         mn_804D6BC8.x0--;
         mn_804D6BC8.x2 = 0;
@@ -85,7 +87,7 @@ void mnHyaku_8024C68C(HSD_GObj* arg0)
         mn_80229894(9, 2, 3);
         return;
     }
-    if (ret) {
+    if (ret & 0x10) {
         lbAudioAx_80024030(1);
         mn_802295AC();
         gm_801677E8();
@@ -112,14 +114,22 @@ void mnHyaku_8024C68C(HSD_GObj* arg0)
     } else {
         if (ret & 4) {
             lbAudioAx_80024030(2);
-            menu->cursor = (menu->cursor == 0) ? 5 : (menu->cursor - 1);
+            if (menu->cursor == 0) {
+                menu->cursor = 5;
+            } else {
+                menu->cursor--;
+            }
             mnHyaku_8024C68C_inline(mnHyaku_804D6C58->hsd_obj, menu->cursor);
             mnHyaku_8024C68C_inline_2(mnHyaku_804D6C58);
             return;
         }
         if (ret & 8) {
             lbAudioAx_80024030(2);
-            menu->cursor = (menu->cursor == 5) ? 0 : (menu->cursor + 1);
+            if (menu->cursor == 5) {
+                menu->cursor = 0;
+            } else {
+                menu->cursor++;
+            }
             mnHyaku_8024C68C_inline(mnHyaku_804D6C58->hsd_obj, menu->cursor);
             mnHyaku_8024C68C_inline_2(mnHyaku_804D6C58);
         }
@@ -226,11 +236,16 @@ void mnHyaku_8024CD64(u8 arg0)
 
     mn_804D6BC8.x0 = 5;
     mn_804A04F0.x1 = mn_804A04F0.x0;
-    mn_804A04F0.x0 = 0x15;
+    mn_804A04F0.x0 = 33;
     mn_804A04F0.x2 = 0;
 
     lbAudioAx_80026F2C(0x12);
-    lbAudioAx_8002702C(2, 0, 8);
+    {
+        s32 unk_r3 = 2;
+        s32 unk_r6 = 8;
+        s32 unk_r5 = 0;
+        lbAudioAx_8002702C(unk_r3, 0, unk_r5, unk_r6);
+    }
     lbAudioAx_80027168();
     pos.x = lbAudioAx_80027648();
     pos.y = mnHyaku_803EF668[0];
