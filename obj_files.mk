@@ -545,7 +545,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/mn/mndeflicker.c.o\
     $(BUILD_DIR)/asm/melee/mn/mnsoundtest.s.o\
     $(BUILD_DIR)/asm/melee/mn/mnlanguage.s.o\
-    $(BUILD_DIR)/asm/melee/mn/mnhyaku.s.o\
+    $(BUILD_DIR)/src/melee/mn/mnhyaku.c.o\
     $(BUILD_DIR)/asm/melee/mn/mnevent.s.o\
     $(BUILD_DIR)/asm/melee/mn/mndatadel.s.o\
     $(BUILD_DIR)/asm/melee/mn/mncount.s.o\
