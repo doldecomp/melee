@@ -544,15 +544,6 @@ bool it_80285AF8(Item_GObj* gobj)
     return false;
 }
 
-static inline void inlineE0(Item_GObj* gobj)
-{
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    HSD_JObj* child = HSD_JObjGetChild(jobj);
-    it_8026B390(gobj);
-    HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
-    Item_80268E5C(gobj, 3, 6);
-}
-
 static inline void inlineE1(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -591,7 +582,12 @@ static inline void inlineE3(Item_GObj* gobj)
 
 void it_80285B00(Item_GObj* gobj)
 {
-    inlineE0(gobj);
+    HSD_JObj* child = HSD_JObjGetChild(GET_JOBJ(gobj));
+
+    it_8026B390(gobj);
+    HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
+
     inlineE1(gobj);
     inlineE2(gobj);
     inlineE3(gobj);
@@ -636,14 +632,12 @@ static inline void inlineF2(Item_GObj* gobj)
 
 void it_80285C78(Item_GObj* gobj)
 {
-    /// @todo #inlineE0
-    {
-        HSD_JObj* jobj = GET_JOBJ(gobj);
-        HSD_JObj* child = HSD_JObjGetChild(jobj);
-        it_8026B390(gobj);
-        HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
-        Item_80268E5C(gobj, 3, 6);
-    }
+    HSD_JObj* child = HSD_JObjGetChild(GET_JOBJ(gobj));
+
+    it_8026B390(gobj);
+    HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
+
     inlineF0(gobj);
     inlineF1(gobj);
     inlineF2(gobj);
