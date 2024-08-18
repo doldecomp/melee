@@ -17,17 +17,15 @@ typedef struct {
     /* x4 */ s32 xDD8;
     /* x8 */ s32 xDDC;
     /* xC */ s32 xDE0;
-    /* x10 */ s32
-        xDE4; // group 1; gets set to 0 in func (it_802ADF10) that sets item
-              // joint locations from corresponding fighter joint locations
+    /* x10 */ s32 xDE4; // group 1; gets set to 0 in func (it_802ADF10) that sets item
+                        // joint locations from corresponding fighter joint locations
     /* x14 */ s32 xDE8; // group 1
     /* x18 */ s32 xDEC; // group 1
     /* x1C */ s32 xDF0; // group 1
     /* x20 */ s32 xDF4; // group 1
     /* x24 */ s32 xDF8; // group 1
-    /* x28 */ s32
-        xDFC; // group 2; gets set to 0 in func (it_802ADF10) that sets item
-              // joint locations from corresponding fighter joint locations
+    /* x28 */ s32 xDFC; // group 2; gets set to 0 in func (it_802ADF10) that sets item
+                        // joint locations from corresponding fighter joint locations
     /* x2C */ s32 xE00;    // group 2
     /* x30 */ s32 xE04;    // group 2
     /* x34 */ s32 xE08;    // group 2
@@ -52,10 +50,9 @@ typedef struct {
     /* x100 */ s32 shoot_flag; // xE74 Matches with action script's shoot flag
                                // (fp->cmd_vars[2]) - 0: no shot this frame, 1:
                                // shoot this frame
-    /* x104 */ s32
-        visibility_flag; // xE78 Matches with action script's invisibility flag
-                         // (fp->cmd_vars[1]) - 0: invisible, 1: visible, 2:
-                         // frame of putting away
+    /* x104 */ s32 visibility_flag; // xE78 Matches with action script's invisibility flag
+                                    // (fp->cmd_vars[1]) - 0: invisible, 1: visible, 2:
+                                    // frame of putting away
     /* x108 */ HSD_GObj* owner; // xE7C
 } FoxBlasterVars;
 
