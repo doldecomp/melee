@@ -24,8 +24,6 @@
 static HSD_LObj* lobj0;
 static HSD_LObj* lobj1;
 
-static char ftDynamics_assert_msg_0[] =
-    "fp->dynamics_num < Ft_Dynamics_NumMax";
 static float floats[] = { 0, 0.57, 0.57, 0.57, 0 };
 
 static struct node0_t {

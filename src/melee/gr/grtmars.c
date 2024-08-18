@@ -32,7 +32,7 @@
 /* 22219C */ static bool grTMars_8022219C(HSD_GObj*);
 /* 2221A4 */ static void grTMars_802221A4(HSD_GObj*);
 /* 2221C4 */ static void grTMars_802221C4(HSD_GObj*);
-/* 2221C8 */ static lb_UnkAnimStruct* grTMars_802221C8(enum_t);
+/* 2221C8 */ static DynamicsDesc* grTMars_802221C8(enum_t);
 /* 2221D0 */ static bool grTMars_802221D0(Vec3*, int, HSD_JObj*);
 
 extern StageInfo stage_info;
@@ -191,7 +191,7 @@ static void grTMars_802221A4(HSD_GObj* gobj)
 
 static void grTMars_802221C4(HSD_GObj* arg0) {}
 
-static lb_UnkAnimStruct* grTMars_802221C8(enum_t arg0)
+static DynamicsDesc* grTMars_802221C8(enum_t arg0)
 {
     return NULL;
 }

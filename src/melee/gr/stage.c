@@ -27,25 +27,25 @@ StructPairWithStageID unk_struct_804D49F0 = { 12, 2 };
 
 f32 Stage_GetCamBoundsLeftOffset(void)
 {
-    return stage_info.cam_info.cam_bounds_left +
+    return stage_info.cam_info.cam_bounds.left +
            stage_info.cam_info.cam_x_offset;
 }
 
 f32 Stage_GetCamBoundsRightOffset(void)
 {
-    return stage_info.cam_info.cam_bounds_right +
+    return stage_info.cam_info.cam_bounds.right +
            stage_info.cam_info.cam_x_offset;
 }
 
 f32 Stage_GetCamBoundsTopOffset(void)
 {
-    return stage_info.cam_info.cam_bounds_top +
+    return stage_info.cam_info.cam_bounds.top +
            stage_info.cam_info.cam_y_offset;
 }
 
 f32 Stage_GetCamBoundsBottomOffset(void)
 {
-    return stage_info.cam_info.cam_bounds_bottom +
+    return stage_info.cam_info.cam_bounds.bottom +
            stage_info.cam_info.cam_y_offset;
 }
 
@@ -113,18 +113,18 @@ f32 Stage_GetBlastZoneBottomOffset(void)
 f32 Stage_CalcUnkCamY(void)
 {
     f32 cam_y_offset = stage_info.cam_info.cam_y_offset;
-    f32 y_pos = stage_info.cam_info.cam_bounds_bottom + cam_y_offset +
+    f32 y_pos = stage_info.cam_info.cam_bounds.bottom + cam_y_offset +
                 (stage_info.blast_zone.bottom + cam_y_offset);
     return 0.5F * y_pos;
 }
 
 f32 Stage_CalcUnkCamYBounds(void)
 {
-    f32 cam_offset = (stage_info.cam_info.cam_bounds_bottom +
+    f32 cam_offset = (stage_info.cam_info.cam_bounds.bottom +
                       stage_info.cam_info.cam_y_offset);
     f32 y_pos_product =
         0.5F *
-        ((stage_info.cam_info.cam_bounds_bottom +
+        ((stage_info.cam_info.cam_bounds.bottom +
           stage_info.cam_info.cam_y_offset) +
          (stage_info.blast_zone.bottom + stage_info.cam_info.cam_y_offset));
 

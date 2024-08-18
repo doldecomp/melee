@@ -3,6 +3,8 @@
 
 #include "ftdemo.h"
 
+#include "ftdynamics.h"
+
 #include "cm/camera.h"
 #include "ef/efasync.h"
 #include "ft/fighter.h"
@@ -18,7 +20,6 @@
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_09CB.h"
 #include "ftCommon/ftCo_09F4.h"
 #include "ftCommon/ftCo_DemoCallback0.h"
 #include "lb/lbshadow.h"

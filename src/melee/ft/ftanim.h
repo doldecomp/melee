@@ -2,6 +2,7 @@
 #define GALE01_06DBF4
 
 #include "ft/forward.h"
+#include "it/forward.h"
 #include <baselib/forward.h>
 
 #include <placeholder.h>
@@ -12,7 +13,8 @@
 /* 06EBA4 */ void ftAnim_8006EBA4(Fighter_GObj*);
 /* 06EBE8 */ void ftAnim_8006EBE8(HSD_GObj* gobj, float, float anim_rate,
                                   float anim_blend_frames);
-/* 06EED4 */ UNK_RET ftAnim_8006EED4(UNK_PARAMS);
+/* 06EED4 */ void ftAnim_8006EED4(Fighter*, Fighter_Part, Fighter_Part, float,
+                                  float);
 /* 06F0FC */ void ftAnim_8006F0FC(Fighter_GObj* gobj, float);
 /* 06F190 */ void ftAnim_SetAnimRate(Fighter_GObj*, float);
 /* 06F238 */ bool ftAnim_IsFramesRemaining(Fighter_GObj*);

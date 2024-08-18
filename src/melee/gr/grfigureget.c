@@ -27,7 +27,7 @@
 /* 219890 */ /* static */ bool grFigureGet_80219890(HSD_GObj*);
 /* 219898 */ /* static */ void grFigureGet_80219898(HSD_GObj*);
 /* 219B0C */ /* static */ void grFigureGet_80219B0C(HSD_GObj*);
-/* 219C88 */ /* static */ lb_UnkAnimStruct* grFigureGet_80219C88(enum_t);
+/* 219C88 */ /* static */ DynamicsDesc* grFigureGet_80219C88(enum_t);
 /* 219C90 */ /* static */ int grFigureGet_80219C90(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grFigureGet_803E7D00[2] = {

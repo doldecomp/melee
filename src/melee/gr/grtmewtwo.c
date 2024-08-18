@@ -19,14 +19,14 @@
 #include <baselib/gobjproc.h>
 
 typedef struct grTMewtwo_UnkStruct {
-    lb_UnkAnimStruct* x0;
-    lb_UnkAnimStruct* x4;
-    lb_UnkAnimStruct* xC;
-    lb_UnkAnimStruct* x8;
-    lb_UnkAnimStruct* x10;
-    lb_UnkAnimStruct* x14;
-    lb_UnkAnimStruct* x1C;
-    lb_UnkAnimStruct* x18;
+    DynamicsDesc* x0;
+    DynamicsDesc* x4;
+    DynamicsDesc* xC;
+    DynamicsDesc* x8;
+    DynamicsDesc* x10;
+    DynamicsDesc* x14;
+    DynamicsDesc* x1C;
+    DynamicsDesc* x18;
 } grTMewtwo_UnkStruct;
 
 /* 2221D8 */ static void grTMewtwo_802221D8(int arg0);
@@ -47,7 +47,7 @@ typedef struct grTMewtwo_UnkStruct {
 /* 222488 */ static bool grTMewtwo_80222488(Ground_GObj* gobj);
 /* 222490 */ static void grTMewtwo_80222490(Ground_GObj* gobj);
 /* 2224B0 */ static void grTMewtwo_802224B0(Ground_GObj* gobj);
-/* 2224B4 */ static lb_UnkAnimStruct* grTMewtwo_802224B4(int arg0);
+/* 2224B4 */ static DynamicsDesc* grTMewtwo_802224B4(int arg0);
 /* 2225C8 */ static bool grTMewtwo_802225C8(Vec3* arg0, int arg1,
                                             HSD_JObj* arg2);
 /* 3E8FC0 */ static void grTMewtwo_803E8FC0(Ground_GObj* gobj);
@@ -212,7 +212,7 @@ void grTMewtwo_80222490(Ground_GObj* gobj)
 
 void grTMewtwo_802224B0(Ground_GObj* gobj) {}
 
-static inline lb_UnkAnimStruct* inlineA0(int arg0)
+static inline DynamicsDesc* inlineA0(int arg0)
 {
     int temp = mpLib_80054C6C(arg0);
     if (temp == (1 << 0)) {
@@ -228,7 +228,7 @@ static inline lb_UnkAnimStruct* inlineA0(int arg0)
     }
 }
 
-static inline lb_UnkAnimStruct* inlineA1(int arg0)
+static inline DynamicsDesc* inlineA1(int arg0)
 {
     int temp = mpLib_80054C6C(arg0);
     if (temp == (1 << 0)) {
@@ -244,7 +244,7 @@ static inline lb_UnkAnimStruct* inlineA1(int arg0)
     }
 }
 
-lb_UnkAnimStruct* grTMewtwo_802224B4(int arg0)
+DynamicsDesc* grTMewtwo_802224B4(int arg0)
 {
     if (arg0 != -1) {
         int temp = mpLib_80056B6C(arg0);

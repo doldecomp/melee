@@ -531,7 +531,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_09C4.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Shouldered.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureCaptain.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_09CB.c"),
+            Object(NonMatching, "melee/ft/ftdynamics.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_BarrelWait.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_StopWall.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_StopCeil.c"),
@@ -916,7 +916,7 @@ config.libs = [
             Object(Matching, "melee/mn/mndeflicker.c"),
             Object(NonMatching, "melee/mn/mnsoundtest.c"),
             Object(NonMatching, "melee/mn/mnlanguage.c"),
-            Object(NonMatching, "melee/mn/mnhyaku.c"),
+            Object(Matching, "melee/mn/mnhyaku.c"),
             Object(NonMatching, "melee/mn/mnevent.c"),
             Object(NonMatching, "melee/mn/mndatadel.c"),
             Object(NonMatching, "melee/mn/mncount.c"),
@@ -945,7 +945,7 @@ config.libs = [
             Object(NonMatching, "melee/it/items/ittomato.c"),
             Object(Matching, "melee/it/items/itstar.c"),
             Object(Matching, "melee/it/items/itbat.c"),
-            Object(NonMatching, "melee/it/items/itsword.c"),
+            Object(Matching, "melee/it/items/itsword.c"),
             Object(NonMatching, "melee/it/items/itbox.c"),
             Object(NonMatching, "melee/it/items/ittaru.c"),
             Object(Matching, "melee/it/items/itegg.c"),
@@ -1222,10 +1222,10 @@ config.libs = [
             Object(NonMatching, "dolphin/OdemuExi2/DebuggerDriver.c"),
         ],
     ),
-    DolphinLib(
+    Lib(
         "hio",
         [
-            Object(NonMatching, "dolphin/hio/hio.c"),
+            Object(Matching, "dolphin/hio/hio.c"),
         ],
     ),
     DolphinLib(

@@ -172,7 +172,7 @@ void grTPikachu_8022314C(HSD_GObj* gobj)
     return;
 }
 
-lb_UnkAnimStruct* grTPikachu_80223150(int unused)
+DynamicsDesc* grTPikachu_80223150(int unused)
 {
     return NULL;
 }

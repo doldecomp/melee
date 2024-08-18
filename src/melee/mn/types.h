@@ -6,6 +6,42 @@
 #include <placeholder.h>
 #include <baselib/sislib.h>
 
+typedef struct {
+    u8 cursor; // @todo are these arbitrary variables the menus can use in any
+               // way?
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    HSD_Text* text;
+} Menu;
+// size 0x8
+
+#ifdef M2CTX
+typedef struct Menu_GObj Menu_GObj;
+struct Menu_GObj {
+    /*  +0 */ u16 classifier;
+    /*  +2 */ u8 p_link;
+    /*  +3 */ u8 gx_link;
+    /*  +4 */ u8 p_priority;
+    /*  +5 */ u8 render_priority;
+    /*  +6 */ u8 obj_kind;
+    /*  +7 */ u8 user_data_kind;
+    /*  +8 */ Menu_GObj* next;
+    /*  +C */ Menu_GObj* prev;
+    /* +10 */ Menu_GObj* next_gx;
+    /* +14 */ Menu_GObj* prev_gx;
+    /* +18 */ HSD_GObjProc* proc;
+    /* +1C */ void (*rendered)(Menu_GObj* gobj, s32 code);
+    /* +20 */ u64 gxlink_prios;
+    /* +28 */ HSD_JObj* hsd_obj;
+    /* +2C */ Menu* user_data;
+    /* +30 */ void (*user_data_remove_func)(Fighter* data);
+    /* +34 */ void* x34_unk;
+};
+#else
+typedef struct HSD_GObj Menu_GObj;
+#endif
+
 struct PlayerInitData {
     /*0x00*/ u8 character_kind;
     /*0x01*/ u8 slot_type;

@@ -604,7 +604,9 @@ struct ftData {
         /* +4 */ HSD_Joint* x8;
     }* x20;
     /* +24 */ UNK_T x24;
-    /* +28 */ u8 x28[0x34 - 0x28];
+    /* +28 */ UNK_T x28;
+    /* +2C */ struct ftDynamics* x2C;
+    /* +30 */ UNK_T x30;
     /* +34 */ struct ftData_x34 {
         /* +0 */ Fighter_Part x0;
         /* +4 */ float scale;
@@ -730,16 +732,17 @@ typedef struct ftCo_DatAttrs {
 struct FighterBone {
     /* +0 */ HSD_JObj* joint;
     /* +4 */ HSD_JObj* x4_jobj2; // used for interpolation
-    /* +5:0 */ u8 flags_b0 : 1;
-    /* +5:1 */ u8 flags_b1 : 1;
-    /* +5:2 */ u8 flags_b2 : 1;
-    /* +5:3 */ u8 flags_b3 : 1;
-    /* +5:4 */ u8 flags_b4 : 1;
-    /* +5:5 */ u8 flags_b5 : 1;
-    /* +5:6 */ u8 flags_b6 : 1;
-    /* +5:7 */ u8 flags_b7 : 1;
-    /* +6 */ u8 filler_x6[7];
+    /* +8:0 */ u8 flags_b0 : 1;
+    /* +8:1 */ u8 flags_b1 : 1;
+    /* +8:2 */ u8 flags_b2 : 1;
+    /* +8:3 */ u8 flags_b3 : 1;
+    /* +8:4 */ u8 flags_b4 : 1;
+    /* +8:5 */ u8 flags_b5 : 1;
+    /* +8:6 */ u8 flags_b6 : 1;
+    /* +8:7 */ u8 flags_b7 : 1;
+    /* +C */ UNK_T xC;
 };
+STATIC_ASSERT(sizeof(struct FighterBone) == 0x10);
 
 /* fp+2114 */ typedef struct _SmashAttr {
     /* fp+2114 */ SmashState state;
@@ -942,20 +945,22 @@ struct ftDeviceUnk5 {
 };
 STATIC_ASSERT(sizeof(struct ftDeviceUnk5) == 0xC);
 
-typedef struct FtDynamicBoneStruct {
-    void* x0_ptr;    // is stored @ 8000fdd4, comes from a nonstandard heap @
-                     // -0x52fc(r13)
-    s32 x4_jobj_num; // number of bones in this boneset
-    f32 x8;          // stored @ 80011718, 0x8 of dynamicdesc
-    f32 xc;          // stored @ 80011720, 0xC of dynamicdesc
-    f32 x10;         // stored @ 80011728, 0x10 of dynamicdesc
-} FtDynamicBoneStruct;
-
-typedef struct FtDynamicBones {
-    s32 x0_apply_phys_num; // If this is 256, dyanmics are not processed
-    FtDynamicBoneStruct x4_dynamicBones; // This will be a dynamic bone struct
-                                         // once they're defined //
-} FtDynamicBones;
+struct Fighter_x1A88_xFC_t {
+    /*  +0 */ HSD_Pad x0;
+    /*  +4 */ u8 x4;
+    /*  +5 */ u8 x5;
+    /*  +6 */ u8 x6;
+    /*  +7 */ u8 x7;
+    /*  +8 */ u8 x8;
+    /*  +9 */ u8 x9;
+    /*  +A */ u8 xA;
+    /*  +B */ u8 xB;
+    /*  +C */ Vec3 cur_pos;
+    /* +18 */ float facing_dir;
+    /* +1C */ struct Fighter_x1A88_xFC_t* x1C;
+    /* +20 */ u8 x20[0x348 - 0x20];
+};
+STATIC_ASSERT(sizeof(struct Fighter_x1A88_xFC_t) == 0x348);
 
 struct Fighter_x1A88_t {
     /*   +0 */ HSD_Pad x0;
@@ -985,7 +990,8 @@ struct Fighter_x1A88_t {
     /*  +54 */ Vec2 x54;
     /*  +5C */ float x5C;
     /*  +60 */ int x60;
-    /*  +64 */ u8 x64[0x7C - 0x64];
+    /*  +64 */ Vec2 x64;
+    /*  +64 */ u8 x6C[0x7C - 0x6C];
     /*  +7C */ int x7C;
     /*  +80 */ u8 x80[0xF8 - 0x80];
     /*  +F8:0 */ u8 xF8_b0 : 1;
@@ -1020,21 +1026,9 @@ struct Fighter_x1A88_t {
     /*  +FB:5 */ u8 xFB_b5 : 1;
     /*  +FB:6 */ u8 xFB_b6 : 1;
     /*  +FB:7 */ u8 xFB_b7 : 1;
-    /*  +80 */ u8 xFC[0x448 - 0xFC];
-    /* +448 */ struct {
-        /*  +0 */ HSD_Pad x0;
-        /*  +4 */ u8 x4;
-        /*  +5 */ u8 x5;
-        /*  +6 */ u8 x6;
-        /*  +7 */ u8 x7;
-        /*  +8 */ u8 x8;
-        /*  +9 */ u8 x9;
-        /*  +A */ u8 xA;
-        /*  +B */ u8 xB;
-        /*  +C */ Vec2 offset;
-        /* +14 */ UNK_T x14;
-        /* +18 */ float facing_dir;
-    }* x448;
+    /*  +FC */ struct Fighter_x1A88_xFC_t xFC;
+    /* +444 */ struct Fighter_x1A88_xFC_t* x444;
+    /* +448 */ struct Fighter_x1A88_xFC_t* x448;
     /* +44C */ UNK_T x44C;
     /* +450 */ UNK_T x450;
     /* +454 */ uint x454;
@@ -1108,7 +1102,7 @@ struct Fighter {
     /*  fp+2E4 */ float x2E4;
     /*  fp+2E8 */ float x2E8;
     /*  fp+2EC */ float x2EC;
-    /*  fp+2F0 */ FtDynamicBones dynamic_bone_sets[10];
+    /*  fp+2F0 */ BoneDynamicsDesc dynamic_bone_sets[Ft_Dynamics_NumMax];
     /*  fp+3E0 */ int dynamics_num;
     /*  fp+3E4 */ ftCmdScript x3E4_fighterCmdScript;
     /*  fp+3F8 */ UNK_T x3F8;
@@ -1120,7 +1114,7 @@ struct Fighter {
     /*  fp+508 */ ftDeviceUnk2 x508;
     /*  fp+588 */ HSD_LObj* x588;
     /*  fp+58C */ s32 x58C;
-    /*  fp+590 */ UNK_T x590;
+    /*  fp+590 */ uint x590;
     /*  fp+594 */ union {
         struct {
             /* fp+594:0 */ u8 x594_b0 : 1;
@@ -1232,7 +1226,7 @@ struct Fighter {
     /*  fp+890 */ CameraBox* x890_cameraBox;
     /*  fp+894 */ float cur_anim_frame;
     /*  fp+898 */ float x898_unk;
-    /*  fp+89C */ float frame_spd_mul;
+    /*  fp+89C */ float frame_speed_mul;
     /*  fp+8A0 */ float x8A0_unk;
     /*  fp+8A4 */ float x8A4_animBlendFrames;
     /*  fp+8A8 */ float x8A8_unk;
@@ -1248,7 +1242,7 @@ struct Fighter {
     /* fp+11A0 */ HurtCapsule hurt_capsules[15];
     /* fp+1614 */ UNK_T x1614;
     /* fp+1618 */ u8 filler_x1618[0x166C - 0x1618];
-    /* fp+166C */ u32 x166C;
+    /* fp+166C */ u8 x166C;
     /* fp+1670 */ UNK_T x1670;
     /* fp+1674 */ u8 filler_x1674[0x1828 - 0x1674];
     /* fp+1828 */ enum_t x1828;
@@ -1766,7 +1760,6 @@ struct Fighter {
         /* fp+2340 */ union ftZelda_MotionVars zd;
     } mv;
 };
-
 STATIC_ASSERT(sizeof(Fighter) == 0x23EC);
 
 struct gmScriptEventDefault {
@@ -1850,30 +1843,43 @@ struct ftData_80085FD4_ret {
 };
 
 typedef struct ArticleDynamicBones {
-    FtDynamicBones array[10];
+    BoneDynamicsDesc array[Ft_Dynamics_NumMax];
 } ArticleDynamicBones;
 
 typedef struct ftDynamics {
-    int dynamicsNum;
-    ArticleDynamicBones* ftDynamicBones;
-    int x4;
-    void* x8;
-    void** x10;
+    /// @todo Very similar to #ItemDynamics.
+    struct {
+        /*  +0 */ int dynamicsNum;
+        /*  +4 */ ArticleDynamicBones* ftDynamicBones;
+    };
+    /*  +8 */ int x4;
+    /*  +C */ void* x8;
+    /* +10 */ Fighter_Part* x10;
 } ftDynamics;
 
 typedef struct KirbyHatStruct {
-    HSD_Joint* x0_kirbyHatJointPtr;
-    s32 x4_jointNum;
-    void* x8_hatVisTable;
-    void* xc_hatArticle1;
-    void* x10_hatArticle2;
-    ftDynamics* x14_hatDynamics;
+    /*  +0 */ HSD_Joint* hat_joint;
+    /*  +4 */ s32 joint_num;
+    /*  +8 */ void* hat_vis_table;
+    /*  +C */ ftDynamics* hat_dynamics[5];
 } KirbyHatStruct;
 
-typedef struct KirbyHat_r13 {
-    u8 filler[0x18];
-    KirbyHatStruct* x18_kirbyHatStruct;
-} KirbyHat_r13;
+typedef struct Kirby_Unk {
+    /*  +0 */ HSD_Joint* x0;
+    /*  +4 */ HSD_Joint** x4;
+    /*  +8 */ UNK_T x8;
+    /*  +C */ UNK_T xC;
+    /* +10 */ ftDynamics* x10;
+    /* +14 */ UNK_T x14;
+    /* +18 */ ftDynamics* x18;
+    /* +1C */ ftDynamics* x1C;
+} Kirby_Unk;
+
+struct ft_80459B88_t {
+    /* +0 */ Kirby_Unk* x0;
+    /* +4 */ KirbyHatStruct* hats[FTKIND_MAX];
+};
+STATIC_ASSERT(sizeof(struct ft_80459B88_t) == 0x88);
 
 struct Fighter_804D653C_t {
     u32 unk;

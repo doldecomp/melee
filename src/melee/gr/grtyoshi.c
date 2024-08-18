@@ -32,7 +32,7 @@
 /* 223DF0 */ static bool grTYoshi_80223DF0(HSD_GObj*);
 /* 223DF8 */ static void grTYoshi_80223DF8(HSD_GObj*);
 /* 223E18 */ static void grTYoshi_80223E18(HSD_GObj*);
-/* 223E1C */ static lb_UnkAnimStruct* grTYoshi_80223E1C(enum_t);
+/* 223E1C */ static DynamicsDesc* grTYoshi_80223E1C(enum_t);
 /* 223E24 */ static bool grTYoshi_80223E24(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTYs_803E9578[] = {
@@ -185,7 +185,7 @@ static void grTYoshi_80223DF8(HSD_GObj* arg0)
 
 static void grTYoshi_80223E18(HSD_GObj* arg0) {}
 
-static lb_UnkAnimStruct* grTYoshi_80223E1C(enum_t arg0)
+static DynamicsDesc* grTYoshi_80223E1C(enum_t arg0)
 {
     return NULL;
 }

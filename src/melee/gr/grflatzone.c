@@ -775,7 +775,7 @@ void grFlatzone_80218260(void)
         }
     }
 }
-lb_UnkAnimStruct* grFlatzone_802182B4(int arg0)
+DynamicsDesc* grFlatzone_802182B4(int arg0)
 {
     return NULL;
 }

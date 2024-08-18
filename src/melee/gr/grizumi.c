@@ -882,7 +882,7 @@ void grIzumi_801CD220(HSD_GObj* gobj, int renderpass)
     grDisplay_801C5DB0(gobj, renderpass);
 }
 
-lb_UnkAnimStruct* grIzumi_801CD278(enum_t x)
+DynamicsDesc* grIzumi_801CD278(enum_t x)
 {
     return NULL;
 }

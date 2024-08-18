@@ -8,14 +8,6 @@
 
 #include <placeholder.h>
 
-typedef struct Kirby_Unk {
-    HSD_Joint* x0;
-    HSD_Joint** x4;
-    UNK_T x8;
-    UNK_T xC;
-    UNK_T x10;
-} Kirby_Unk;
-
 /* 04B4B0 */ UNK_T mpColl_8004B4B0(void);
 /* 0877F8 */ s32 ft_800877F8(Fighter_GObj*, s32);
 /* 087818 */ s32 ft_80087818(Fighter_GObj*, s32);
@@ -55,7 +47,7 @@ typedef struct Kirby_Unk {
 /* 3C57DC */ extern char ftMr_Init_DataName[];
 /* 3C595C */ extern char ftMr_Init_AnimDatFilename[];
 /* 3C5A28 */ extern Fighter_CostumeStrings ftMr_Init_CostumeStrings[];
-/* 459B88 */ extern Kirby_Unk* ft_80459B88[FTKIND_MAX];
+/* 459B88 */ extern struct ft_80459B88_t ft_80459B88;
 /* 45A1E0 */ extern HSD_Joint* ft_8045A1E0[6];
 
 #endif

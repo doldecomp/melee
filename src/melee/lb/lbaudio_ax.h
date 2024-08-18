@@ -19,7 +19,7 @@
 /* 0237A8 */ u32 lbAudioAx_800237A8(enum_t sfx_id, u8 sfx_vol, u8 sfx_pan);
 /* 023870 */ int lbAudioAx_80023870(int, int, int, int);
 /* 023F28 */ void lbAudioAx_80023F28(s32);
-/* 024030 */ void lbAudioAx_80024030(s32);
+/* 024030 */ void lbAudioAx_80024030(s32); // plays menu SFX
 /* 024184 */ int lbAudioAx_80024184(int, int, int, int);
 /* 02438C */ void lbAudioAx_8002438C(s32);
 /* 024B1C */ void lbAudioAx_80024B1C(s32, s32);

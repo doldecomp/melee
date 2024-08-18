@@ -133,7 +133,7 @@
 /* 1C5544 */ void Ground_801C5544(Ground*, s32);
 /* 1C5630 */ void Ground_801C5630(Ground* gp, s32 i, f32 val);
 /* 1C5694 */ void Ground_801C5694(Ground* gp, s32 i, f32 val);
-/* 1C5700 */ lb_UnkAnimStruct* Ground_801C5700(int i);
+/* 1C5700 */ DynamicsDesc* Ground_801C5700(int i);
 /* 1C5740 */ void Ground_801C5740(s32);
 /* 1C5750 */ void Ground_801C5750(void);
 /* 1C5764 */ s32 Ground_801C5764(void);

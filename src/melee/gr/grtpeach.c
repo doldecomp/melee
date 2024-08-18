@@ -35,7 +35,7 @@
 /* 222B5C */ static bool grTPeach_80222B5C(Ground_GObj* gobj);
 /* 222B64 */ static void grTPeach_80222B64(Ground_GObj* gobj);
 /* 222B84 */ static void grTPeach_80222B84(Ground_GObj* gobj);
-/* 222B88 */ static lb_UnkAnimStruct* grTPeach_80222B88(int arg0);
+/* 222B88 */ static DynamicsDesc* grTPeach_80222B88(int arg0);
 /* 222B90 */ static bool grTPeach_80222B90(Vec3* arg0, int arg1,
                                            HSD_JObj* arg2);
 
@@ -198,7 +198,7 @@ void grTPeach_80222B64(Ground_GObj* gobj)
 
 void grTPeach_80222B84(Ground_GObj* gobj) {}
 
-lb_UnkAnimStruct* grTPeach_80222B88(int arg0)
+DynamicsDesc* grTPeach_80222B88(int arg0)
 {
     return NULL;
 }

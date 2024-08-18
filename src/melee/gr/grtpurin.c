@@ -40,7 +40,7 @@ StageData grTPr_803E9394 = {
 };
 
 typedef struct grTPrSpecialParams {
-    lb_UnkAnimStruct* x0;
+    DynamicsDesc* x0;
 } grTPrSpecialParams;
 
 grTPrSpecialParams* grTPr_804D6B10;
@@ -203,7 +203,7 @@ void grTPurin_802234F4(HSD_GObj* gobj)
     return;
 }
 
-lb_UnkAnimStruct* grTPurin_802234F8(enum_t arg0)
+DynamicsDesc* grTPurin_802234F8(enum_t arg0)
 {
     enum_t i;
 

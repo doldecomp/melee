@@ -193,7 +193,7 @@ void grTCLink_80220214(HSD_GObj* gobj)
     return;
 }
 
-lb_UnkAnimStruct* grTCLink_80220218(int unused)
+DynamicsDesc* grTCLink_80220218(int unused)
 {
     return NULL;
 }

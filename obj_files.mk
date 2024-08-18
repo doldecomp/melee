@@ -139,7 +139,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_09C4.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_Shouldered.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_CaptureCaptain.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_09CB.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftdynamics.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_BarrelWait.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_StopWall.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCommon/ftCo_StopCeil.c.o\
@@ -161,7 +161,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_CaptureKirby.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_CaptureWaitKirby.s.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCommon/ftCo_ThrownKirby.s.o\
-    $(BUILD_DIR)/asm/melee/ft/ft_3C61.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/ftdemo.c.o\
@@ -545,7 +544,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/mn/mndeflicker.c.o\
     $(BUILD_DIR)/asm/melee/mn/mnsoundtest.s.o\
     $(BUILD_DIR)/asm/melee/mn/mnlanguage.s.o\
-    $(BUILD_DIR)/asm/melee/mn/mnhyaku.s.o\
+    $(BUILD_DIR)/src/melee/mn/mnhyaku.c.o\
     $(BUILD_DIR)/asm/melee/mn/mnevent.s.o\
     $(BUILD_DIR)/asm/melee/mn/mndatadel.s.o\
     $(BUILD_DIR)/asm/melee/mn/mncount.s.o\
@@ -569,7 +568,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/ittomato.s.o\
     $(BUILD_DIR)/src/melee/it/items/itstar.c.o\
     $(BUILD_DIR)/src/melee/it/items/itbat.c.o\
-    $(BUILD_DIR)/asm/melee/it/items/itsword.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itsword.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itbox.s.o\
     $(BUILD_DIR)/asm/melee/it/items/ittaru.s.o\
     $(BUILD_DIR)/src/melee/it/items/itegg.c.o\
@@ -824,7 +823,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/dolphin/OdemuExi2/DebuggerDriver.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/dolphin/hio/hio.s.o\
+    $(BUILD_DIR)/src/dolphin/hio/hio.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/dolphin/mcc/mcc.s.o\

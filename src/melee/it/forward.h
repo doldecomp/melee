@@ -19,7 +19,7 @@ typedef struct Item_DynamicBones Item_DynamicBones;
 typedef struct ItemAttr ItemAttr;
 typedef struct ItemCommonData ItemCommonData;
 typedef struct ItemDynamics ItemDynamics;
-typedef struct ItemDynamicsDesc ItemDynamicsDesc;
+typedef struct BoneDynamicsDesc BoneDynamicsDesc;
 typedef struct ItemModelDesc ItemModelDesc;
 typedef struct ItemModStruct ItemModStruct;
 typedef struct ItemStateArray ItemStateArray;

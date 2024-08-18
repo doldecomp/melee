@@ -16,9 +16,9 @@
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcamera.h"
+#include "ft/ftdynamics.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_09CB.h"
 #include "it/it_26B1.h"
 
 #include <common_structs.h>

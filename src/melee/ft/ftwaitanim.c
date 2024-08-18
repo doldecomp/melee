@@ -2,10 +2,11 @@
 
 #include "ftwaitanim.h"
 
+#include "ftdynamics.h"
+
 #include "ft/ftanim.h"
 #include "ft/ftdata.h"
 #include "ft/inlines.h"
-#include "ftCommon/ftCo_09CB.h"
 #include "it/it_26B1.h"
 
 #include <dolphin/mtx/types.h>

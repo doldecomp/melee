@@ -255,7 +255,7 @@ void ftSs_SpecialLw_80129048(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 0x156, 0x10, fp->cur_anim_frame,
-                              fp->frame_spd_mul, 0.0f, 0);
+                              fp->frame_speed_mul, 0.0f, 0);
 }
 
 void ftSs_SpecialLw_801290A4(HSD_GObj* gobj)
@@ -263,7 +263,7 @@ void ftSs_SpecialLw_801290A4(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 0x155, 0x10, fp->cur_anim_frame,
-                              fp->frame_spd_mul, 0.0f, 0);
+                              fp->frame_speed_mul, 0.0f, 0);
 }
 
 int ftSs_SpecialLw_80129100(HSD_GObj* gobj, s32* arg1, s32* arg2)

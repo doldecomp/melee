@@ -3,6 +3,7 @@
 
 #include <platform.h>
 #include "ft/forward.h"
+#include "lb/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
@@ -11,17 +12,19 @@
 /* 00F9F8 */ void lb_8000F9F8(HSD_JObj* jobj);
 /* 00FCDC */ void lb_8000FCDC(void);
 /* 00FD18 */ void lb_8000FD18(UNK_T);
-/* 00FD48 */ void lb_8000FD48(HSD_JObj*, UNK_T, size_t);
-/* 01044C */ void lb_8001044C(void*, void*, int, float, int, int, int, int);
+/* 00FD48 */ void lb_8000FD48(HSD_JObj*, DynamicsDesc*, size_t);
+/* 01044C */ void lb_8001044C(DynamicsDesc*, UNK_T, int, float pos_y, bool,
+                              Fighter_Part part, int, bool);
 /* 0115F4 */ void lb_800115F4(void);
-/* 011710 */ void lb_80011710(UNK_T, UNK_T);
+/* 011710 */ void lb_80011710(DynamicsDesc*, DynamicsDesc*);
 /* 0117F4 */ bool lb_800117F4(UNK_T, float*, float*, u32, int);
 /* 0119DC */ void lb_800119DC(Vec3*, int, float, float, float);
 /* 011A50 */ void lb_80011A50(Vec3*, int, float, float, float, float, float,
                               float, float);
-/* 011ABC */ UNK_RET lb_80011ABC(UNK_PARAMS);
+/* 011ABC */ enum_t lb_80011ABC(void);
 /* 011AC4 */ HSD_LObj* lb_80011AC4(UNK_T);
 /* 011C18 */ void lb_80011C18(HSD_JObj* jobj, u32 flags);
+/* 011E24 */ int lb_80011E24(HSD_JObj*, HSD_JObj**, ...);
 /* 0122C8 */ void lb_800122C8(HSD_ImageDesc*, int, int, int);
 /* 0122FC */ void lb_800121FC(HSD_ImageDesc*, int, int, int, int);
 /* 013B14 */ HSD_CObj* lb_80013B14(HSD_CameraDescPerspective*);
