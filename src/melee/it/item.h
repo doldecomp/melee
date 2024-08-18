@@ -28,16 +28,16 @@ struct ItemStateDesc;
 /* 268DD4 */ void Item_80268DD4(HSD_GObj* gobj, float);
 /* 268E40 */ void Item_80268E40(Item* item_data,
                                 struct ItemStateDesc* itemStateDesc);
-/* 268E5C */ void Item_80268E5C(HSD_GObj* gobj, enum_t msid,
+/* 268E5C */ void Item_80268E5C(Item_GObj* gobj, enum_t msid,
                                 Item_StateChangeFlags flags);
 /* 2693E4 */ void Item_802693E4(HSD_GObj* gobj);
-/* 2694CC */ void Item_802694CC(HSD_GObj* gobj);
+/* 2694CC */ void Item_802694CC(Item_GObj* gobj);
 /* 2697D4 */ void Item_802697D4(HSD_GObj* gobj);
 /* 269978 */ void Item_80269978(HSD_GObj* gobj);
 /* 269CA0 */ void Item_80269CA0(Item* item_data, s32 damage);
 /* 26A848 */ void Item_8026A848(HSD_GObj* gobj, HSD_GObj* fgobj);
 /* 26A8EC */ void Item_8026A8EC(Item_GObj* gobj);
-/* 26AB54 */ void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* owner_gobj,
+/* 26AB54 */ void Item_8026AB54(Item_GObj* gobj, HSD_GObj* owner_gobj,
                                 Fighter_Part part);
 /* 26ABD8 */ void Item_8026ABD8(HSD_GObj* gobj, Vec3* pos, float);
 /* 26AC74 */ void Item_8026AC74(HSD_GObj* gobj, Vec3*, Vec3*, float);
