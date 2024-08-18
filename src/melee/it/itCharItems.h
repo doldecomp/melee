@@ -11,37 +11,52 @@
 #include <baselib/jobj.h>
 
 typedef struct {
-    /* x0 */ s32 xDD4;  // gets iterated from 0 to 14 in function (it_802AE200) that transforms the item model (possibly frame number of animation?)
+    /* x0 */ s32 xDD4; // gets iterated from 0 to 14 in function (it_802AE200)
+                       // that transforms the item model (possibly frame number
+                       // of animation?)
     /* x4 */ s32 xDD8;
     /* x8 */ s32 xDDC;
     /* xC */ s32 xDE0;
-    /* x10 */ s32 xDE4;  // group 1; gets set to 0 in func (it_802ADF10) that sets item joint locations from corresponding fighter joint locations
-    /* x14 */ s32 xDE8;  // group 1
-    /* x18 */ s32 xDEC;  // group 1
-    /* x1C */ s32 xDF0;  // group 1
-    /* x20 */ s32 xDF4;  // group 1
-    /* x24 */ s32 xDF8;  // group 1
-    /* x28 */ s32 xDFC;  // group 2; gets set to 0 in func (it_802ADF10) that sets item joint locations from corresponding fighter joint locations
-    /* x2C */ s32 xE00;  // group 2
-    /* x30 */ s32 xE04;  // group 2
-    /* x34 */ s32 xE08;  // group 2
-    /* x38 */ s32 xE0C;  // group 2
-    /* x3C */ s32 xE10;  // group 2
-    /* x40 */ Vec3 xE14;  // group 3; gets set as the vector from fighter's current position to the joint holding the blaster on the frame blaster its shot
-    /* x4C */ Vec3 xE20;  // group 3
-    /* x58 */ Vec3 xE2C;  // group 3
-    /* x64 */ Vec3 xE38;  // group 3
-    /* x70 */ Vec3 xE44;  // group 3
-    /* x7C */ Vec3 xE50;  // group 3
-    /* x88 */ f32 angle_1;  // xE5C group 4; gets set to an angle value in func (it_802ADF10) that sets item joint locations from corresponding fighter joint locations
-    /* x8C */ f32 xE60;  // group 4
-    /* x90 */ f32 xE64;  // group 4
-    /* x94 */ f32 xE68;  // group 4
-    /* x98 */ f32 xE6C;  // group 4
-    /* x9C */ f32 xE70;  // group 4
-    /* x100 */ s32 shoot_flag;  // xE74 Matches with action script's shoot flag (fp->cmd_vars[2]) - 0: no shot this frame, 1: shoot this frame
-    /* x104 */ s32 visibility_flag;  // xE78 Matches with action script's invisibility flag (fp->cmd_vars[1]) - 0: invisible, 1: visible, 2: frame of putting away
-    /* x108 */ HSD_GObj* owner;  // xE7C
+    /* x10 */ s32
+        xDE4; // group 1; gets set to 0 in func (it_802ADF10) that sets item
+              // joint locations from corresponding fighter joint locations
+    /* x14 */ s32 xDE8; // group 1
+    /* x18 */ s32 xDEC; // group 1
+    /* x1C */ s32 xDF0; // group 1
+    /* x20 */ s32 xDF4; // group 1
+    /* x24 */ s32 xDF8; // group 1
+    /* x28 */ s32
+        xDFC; // group 2; gets set to 0 in func (it_802ADF10) that sets item
+              // joint locations from corresponding fighter joint locations
+    /* x2C */ s32 xE00;    // group 2
+    /* x30 */ s32 xE04;    // group 2
+    /* x34 */ s32 xE08;    // group 2
+    /* x38 */ s32 xE0C;    // group 2
+    /* x3C */ s32 xE10;    // group 2
+    /* x40 */ Vec3 xE14;   // group 3; gets set as the vector from fighter's
+                           // current position to the joint holding the blaster
+                           // on the frame blaster its shot
+    /* x4C */ Vec3 xE20;   // group 3
+    /* x58 */ Vec3 xE2C;   // group 3
+    /* x64 */ Vec3 xE38;   // group 3
+    /* x70 */ Vec3 xE44;   // group 3
+    /* x7C */ Vec3 xE50;   // group 3
+    /* x88 */ f32 angle_1; // xE5C group 4; gets set to an angle value in func
+                           // (it_802ADF10) that sets item joint locations from
+                           // corresponding fighter joint locations
+    /* x8C */ f32 xE60;    // group 4
+    /* x90 */ f32 xE64;    // group 4
+    /* x94 */ f32 xE68;    // group 4
+    /* x98 */ f32 xE6C;    // group 4
+    /* x9C */ f32 xE70;    // group 4
+    /* x100 */ s32 shoot_flag; // xE74 Matches with action script's shoot flag
+                               // (fp->cmd_vars[2]) - 0: no shot this frame, 1:
+                               // shoot this frame
+    /* x104 */ s32
+        visibility_flag; // xE78 Matches with action script's invisibility flag
+                         // (fp->cmd_vars[1]) - 0: invisible, 1: visible, 2:
+                         // frame of putting away
+    /* x108 */ HSD_GObj* owner; // xE7C
 } FoxBlasterVars;
 
 typedef struct {

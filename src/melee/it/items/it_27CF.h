@@ -50,7 +50,8 @@
 /* 2AE1D0 */ void it_802AE1D0(Item_GObj*);
 /* 2AE538 */ void it_802AE538(Item_GObj*);
 /* 2AE608 */ void it_802AE608(Item_GObj*);
-/* 2AE8A8 */ Item_GObj* it_802AE8A8(float, Fighter_GObj*, Vec3*, Fighter_Part, ItemKind);
+/* 2AE8A8 */ Item_GObj* it_802AE8A8(float, Fighter_GObj*, Vec3*, Fighter_Part,
+                                    ItemKind);
 /* 2AEAB4 */ void it_802AEAB4(Item_GObj*);
 /* 2B1DEC */ s32 it_802B1DEC(u32);
 /* 2B1DF8 */ u32 it_802B1DF8(Item_GObj*, Vec3*, Vec3*, s32, s32, s32);
