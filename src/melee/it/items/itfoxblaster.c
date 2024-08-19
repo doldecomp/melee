@@ -44,32 +44,22 @@ ItemStateTable it_803F6CA8[11] = {
     { -1, it_802AF064, it_802AF178, it_802AF17C }
 };
 // Used for jobj->translate.z calc for xDD4
-f32 it_803F6D58[14] = {
-    0.0F,    -0.51F,  -1.02F,  -1.53F,  -1.39F,  -1.251F, -1.112F,
-    -0.973F, -0.834F, -0.695F, -0.556F, -0.417F, -0.278F, -0.139F
-};
+f32 it_803F6D58[14] = { 0.0F,    -0.51F,  -1.02F,  -1.53F,  -1.39F,
+                        -1.251F, -1.112F, -0.973F, -0.834F, -0.695F,
+                        -0.556F, -0.417F, -0.278F, -0.139F };
 // Used in jobj->scale.y/z calcs for xDD4
-f32 it_803F6D90[14] = {
-    0.5F, 0.5F, 1.75F, 3.0F, 2.375F, 1.75F, 1.125F,
-    0.5F, 0.5F, 0.5F,  0.5F, 0.5F,   0.5F,  0.5F
-};
+f32 it_803F6D90[14] = { 0.5F, 0.5F, 1.75F, 3.0F, 2.375F, 1.75F, 1.125F,
+                        0.5F, 0.5F, 0.5F,  0.5F, 0.5F,   0.5F,  0.5F };
 // Used for jobj->rotate.x calc for xDD4
-f32 it_803F6DC8[14] = {
-    0.0F, -42.0F, -20.0F, 0.0F, 0.0F, 0.0F, 0.0F,
-    0.0F, 0.0F,   0.0F,   0.0F, 0.0F, 0.0F, 0.0F
-};
+f32 it_803F6DC8[14] = { 0.0F, -42.0F, -20.0F, 0.0F, 0.0F, 0.0F, 0.0F,
+                        0.0F, 0.0F,   0.0F,   0.0F, 0.0F, 0.0F, 0.0F };
 // Used in jobj->translate.y calc for xDD8
-static f32 it_803F6E28[5] = {
-    -0.425F, -0.595F, -0.765F, -0.935F, -0.85F
-};
+static f32 it_803F6E28[5] = { -0.425F, -0.595F, -0.765F, -0.935F, -0.85F };
 // This is the length of the ItemStateTable
-static s32 it_803F6E3C[11] = {
-    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-};
-// Fighter's state/ftFx_SpecialNIndex gets indexed into this table for value to set item state to (not sure what extra 12th value is for)
-static s32 it_803F6E68[12] = {
-    0, 9, 9, 3, 9, 9, 6, 7, 8, 9, 10, 0
-};
+static s32 it_803F6E3C[11] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+// Fighter's state/ftFx_SpecialNIndex gets indexed into this table for value to
+// set item state to (not sure what extra 12th value is for)
+static s32 it_803F6E68[12] = { 0, 9, 9, 3, 9, 9, 6, 7, 8, 9, 10, 0 };
 static s8 it_804D5428[7] = "jobj.h";
 static s8 it_804D5430[5] = "jobj";
 f32 it_804DCF38 = 0.0F;
@@ -397,7 +387,8 @@ void it_802AE200(Item_GObj* item_gobj)
 }
 
 /// @brief If item exists and some blaster vars at specific values (possibly
-/// frame numbers?), then set sfx. Called from SpecialN funcs when cmd_var3 = 1 (when gun shooting sfx starts)
+/// frame numbers?), then set sfx. Called from SpecialN funcs when cmd_var3 = 1
+/// (when gun shooting sfx starts)
 /// @param item_gobj
 void it_802AE538(Item_GObj* item_gobj)
 {
@@ -426,7 +417,8 @@ void it_802AE538(Item_GObj* item_gobj)
 }
 
 /// @brief If item exists and a blaster var at a specific values (possibly
-/// frame numbers?), then set other blaster vars. Called from SpecialN funcs when cmd_var3 = 2 (when gun is getting put away, but not yet invisible)
+/// frame numbers?), then set other blaster vars. Called from SpecialN funcs
+/// when cmd_var3 = 2 (when gun is getting put away, but not yet invisible)
 /// @param item_gobj
 void it_802AE608(Item_GObj* item_gobj)
 {
