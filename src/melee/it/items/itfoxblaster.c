@@ -43,28 +43,33 @@ ItemStateTable it_803F6CA8[11] = {
     { -1, it_802AEF10, it_802AEFB8, it_802AEFBC },
     { -1, it_802AF064, it_802AF178, it_802AF17C }
 };
+// Used for jobj->translate.z calc for xDD4
 f32 it_803F6D58[14] = {
     0.0F,    -0.51F,  -1.02F,  -1.53F,  -1.39F,  -1.251F, -1.112F,
     -0.973F, -0.834F, -0.695F, -0.556F, -0.417F, -0.278F, -0.139F
-}; // used for jobj->translate.z calc for xDD4
+};
+// Used in jobj->scale.y/z calcs for xDD4
 f32 it_803F6D90[14] = {
     0.5F, 0.5F, 1.75F, 3.0F, 2.375F, 1.75F, 1.125F,
     0.5F, 0.5F, 0.5F,  0.5F, 0.5F,   0.5F,  0.5F
-}; // used in jobj->scale.y/z calcs for xDD4
+};
+// Used for jobj->rotate.x calc for xDD4
 f32 it_803F6DC8[14] = {
     0.0F, -42.0F, -20.0F, 0.0F, 0.0F, 0.0F, 0.0F,
     0.0F, 0.0F,   0.0F,   0.0F, 0.0F, 0.0F, 0.0F
-}; // used for jobj->rotate.x calc for xDD4
+};
+// Used in jobj->translate.y calc for xDD8
 static f32 it_803F6E28[5] = {
     -0.425F, -0.595F, -0.765F, -0.935F, -0.85F
-}; // used in jobj->translate.y calc for xDD8
+};
+// This is the length of the ItemStateTable
 static s32 it_803F6E3C[11] = {
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-}; // This is the length of the ItemStateTable
+};
+// Fighter's state/ftFx_SpecialNIndex gets indexed into this table for value to set item state to (not sure what extra 12th value is for)
 static s32 it_803F6E68[12] = {
     0, 9, 9, 3, 9, 9, 6, 7, 8, 9, 10, 0
-}; // Fighter's state/ftFx_SpecialNIndex gets indexed into this table for value
-   // to set item state to (not sure what extra 12th value is for)
+};
 static s8 it_804D5428[7] = "jobj.h";
 static s8 it_804D5430[5] = "jobj";
 f32 it_804DCF38 = 0.0F;
@@ -173,13 +178,13 @@ void it_802ADF10(HSD_GObj* item_gobj)
                                          &it_hold_joint_pos);
             angle = atan2f(ft_hold_joint_pos.y - it_hold_joint_pos.y,
                            ft_hold_joint_pos.x - it_hold_joint_pos.x);
-            item->xDD4_itemVar.foxblaster.angle_1 = angle;
+            item->xDD4_itemVar.foxblaster.angle = angle;
             item->xDD4_itemVar.foxblaster.xDFC = 0;
             // efSync_Spawn(0x48E, item_gobj, &ft_hold_joint_pos,
             // item->xDD4_itemVar.foxblaster.angle_1, angle);
             // efSync_Spawn(1166, item_gobj, &ft_hold_joint_pos);
             efSync_Spawn(1166, item_gobj, &it_hold_joint_pos,
-                         &item->xDD4_itemVar.foxblaster.xE14);
+                         &item->xDD4_itemVar.foxblaster.angle);
             item->xDD4_itemVar.foxblaster.xDE4 = 0;
             break;
         case It_Kind_Kirby_FoxBlaster:
@@ -196,13 +201,13 @@ void it_802ADF10(HSD_GObj* item_gobj)
                                      &it_hold_joint_pos);
             angle = atan2f(ft_hold_joint_pos.y - it_hold_joint_pos.y,
                            ft_hold_joint_pos.x - it_hold_joint_pos.x);
-            item->xDD4_itemVar.foxblaster.angle_1 = angle;
+            item->xDD4_itemVar.foxblaster.angle = angle;
             item->xDD4_itemVar.foxblaster.xDFC = 0;
             // efSync_Spawn(0x4AC, item_gobj, &ft_hold_joint_pos,
             // item->xDD4_itemVar.foxblaster.angle_1, angle);
             // efSync_Spawn(1196, item_gobj, &it_hold_joint_pos);
             efSync_Spawn(1196, item_gobj, &it_hold_joint_pos,
-                         &item->xDD4_itemVar.foxblaster.angle_1);
+                         &item->xDD4_itemVar.foxblaster.angle);
             item->xDD4_itemVar.foxblaster.xDE4 = 0;
             break;
         }
@@ -284,13 +289,13 @@ void it_802ADF10(HSD_GObj* item_gobj)
         item->xDD4_itemVar.foxblaster.xE20.z =
             item->xDD4_itemVar.foxblaster.xE14.z;
         item->xDD4_itemVar.foxblaster.xE60 =
-            item->xDD4_itemVar.foxblaster.angle_1;
+            item->xDD4_itemVar.foxblaster.angle;
 #endif
 
         item = item_gobj->user_data;
         item->xDD4_itemVar.foxblaster.xDE4 = 0;
         item->xDD4_itemVar.foxblaster.xDFC = 0;
-        item->xDD4_itemVar.foxblaster.angle_1 =
+        item->xDD4_itemVar.foxblaster.angle =
             item->xDD4_itemVar.foxblaster.xE14.x =
                 item->xDD4_itemVar.foxblaster.xE14.y =
                     item->xDD4_itemVar.foxblaster.xE14.z = it_804DCF38;
@@ -392,7 +397,7 @@ void it_802AE200(Item_GObj* item_gobj)
 }
 
 /// @brief If item exists and some blaster vars at specific values (possibly
-/// frame numbers?), then set sfx
+/// frame numbers?), then set sfx. Called from SpecialN funcs when cmd_var3 = 1 (when gun shooting sfx starts)
 /// @param item_gobj
 void it_802AE538(Item_GObj* item_gobj)
 {
@@ -421,7 +426,7 @@ void it_802AE538(Item_GObj* item_gobj)
 }
 
 /// @brief If item exists and a blaster var at a specific values (possibly
-/// frame numbers?), then set other blaster vars
+/// frame numbers?), then set other blaster vars. Called from SpecialN funcs when cmd_var3 = 2 (when gun is getting put away, but not yet invisible)
 /// @param item_gobj
 void it_802AE608(Item_GObj* item_gobj)
 {
@@ -508,8 +513,8 @@ void it_802AE7B8(Item_GObj* item_gobj)
     item->xDCC_flag.b3 = 0;
     item->xDD4_itemVar.foxblaster.xDD4 = 0;
     item->xDD4_itemVar.foxblaster.xDD8 = 0;
-    item->xDD4_itemVar.foxblaster.xDDC = 0.0F;
-    item->xDD4_itemVar.foxblaster.xDE0 = 0.0F;
+    item->xDD4_itemVar.foxblaster.xDDC = 0;
+    item->xDD4_itemVar.foxblaster.xDE0 = 0;
     item->xDD4_itemVar.foxblaster.shoot_flag = 0;
     item->xDD4_itemVar.foxblaster.visibility_flag = 1;
 
@@ -520,7 +525,7 @@ void it_802AE7B8(Item_GObj* item_gobj)
     item->xDD4_itemVar.foxblaster.xE14.z = 0.0F;
     item->xDD4_itemVar.foxblaster.xE14.y = 0.0F;
     item->xDD4_itemVar.foxblaster.xE14.x = 0.0F;
-    item->xDD4_itemVar.foxblaster.angle_1 = 0.0F;
+    item->xDD4_itemVar.foxblaster.angle = 0.0F;
 
     item = item_gobj->user_data;
 
