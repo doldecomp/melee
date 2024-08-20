@@ -96,8 +96,8 @@ void it_802ADDD0(Item_GObj* item_gobj, s32 visibility)
 
     item_jobj = GET_JOBJ((HSD_GObj*) item_gobj);
     child_jobj = jobj_child(item_jobj);
-    if (item->xDD4_itemVar.foxblaster.visibility_flag != visibility) {
-        item->xDD4_itemVar.foxblaster.visibility_flag = visibility;
+    if (item->xDD4_itemVar.foxblaster.set_sfx_var2 != visibility) {
+        item->xDD4_itemVar.foxblaster.set_sfx_var2 = visibility;
         if (visibility == 2) {
             switch (item->kind) {
             case It_Kind_Kirby_FoxBlaster:
@@ -107,11 +107,12 @@ void it_802ADDD0(Item_GObj* item_gobj, s32 visibility)
             case It_Kind_Kirby_FalcoBlaster:
             case It_Kind_Falco_Blaster:
                 Item_8026AE84(item, 0x18700, 0x7F, 0x40);
+                Item_8026AE84(item, 0x1AE05, 0x7F, 0x40);
                 break;
             }
         }
     }
-    switch (item->xDD4_itemVar.foxblaster.visibility_flag) {
+    switch (item->xDD4_itemVar.foxblaster.set_sfx_var2) {
     case 0:
     case 2:
         HSD_JObjSetFlagsAll(child_jobj, 0x10);
@@ -148,9 +149,9 @@ void it_802ADF10(HSD_GObj* item_gobj)
     // If blaster is shooting this frame, then spawn shooting effect at
     // item/fighter position
     if ((item->owner == item->xDD4_itemVar.foxblaster.owner) &&
-        (item->xDD4_itemVar.foxblaster.shoot_flag != 0))
+        (item->xDD4_itemVar.foxblaster.gfx_spawn_var != 0))
     {
-        item->xDD4_itemVar.foxblaster.shoot_flag = 0;
+        item->xDD4_itemVar.foxblaster.gfx_spawn_var = 0;
         ftLib_80086644(item->xDD4_itemVar.foxblaster.owner, &ft_cur_pos);
 
         switch (item->kind) {
@@ -304,7 +305,7 @@ void it_802AE1D0(Item_GObj* item_gobj)
     if ((item_gobj != NULL) && (item != NULL)) {
         item->xDD4_itemVar.foxblaster.xDD4 = 1;
         item->on_accessory = it_802ADEF0;
-        item->xDD4_itemVar.foxblaster.shoot_flag = 1;
+        item->xDD4_itemVar.foxblaster.gfx_spawn_var = 1;
     }
 }
 
@@ -388,7 +389,7 @@ void it_802AE200(Item_GObj* item_gobj)
 
 /// @brief If item exists and some blaster vars at specific values (possibly
 /// frame numbers?), then set sfx. Called from SpecialN funcs when cmd_var3 = 1
-/// (when gun shooting sfx starts)
+/// (when gun shooting starts)
 /// @param item_gobj
 void it_802AE538(Item_GObj* item_gobj)
 {
@@ -507,8 +508,8 @@ void it_802AE7B8(Item_GObj* item_gobj)
     item->xDD4_itemVar.foxblaster.xDD8 = 0;
     item->xDD4_itemVar.foxblaster.xDDC = 0;
     item->xDD4_itemVar.foxblaster.xDE0 = 0;
-    item->xDD4_itemVar.foxblaster.shoot_flag = 0;
-    item->xDD4_itemVar.foxblaster.visibility_flag = 1;
+    item->xDD4_itemVar.foxblaster.gfx_spawn_var = 0;
+    item->xDD4_itemVar.foxblaster.set_sfx_var2 = 1;
 
     item = item_gobj->user_data;
 

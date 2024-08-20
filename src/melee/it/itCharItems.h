@@ -16,15 +16,16 @@ typedef struct {
                        // of animation?)
     /* x4 */ s32 xDD8; // {0-4} Used to index into array (it_803F6E28) that has
                        // floats to translate item model by
-                       // 1->4 when shooting gun starting (at cmd_var3 = 1)
-                       // 3->0 when gun getting put away (at cmd_var3 = 2)
+                       // 1->4 when blaster shooting starting (at cmd_var3 = 1)
+                       // 3->0 when blaster getting put away (at cmd_var3 = 2)
     /* x8 */ s32 xDDC; // {-1, 0, 1} Value gets added to xDD8 to iterate it
                        // during blaster collision callback
                        // -1: when cmd_var3 = 2 (when gun is getting put away,
-                       // but not yet invisible)
+                       // ____but not yet invisible)
                        // 0: when xDD8 <= 0 or xDD8 >= 5
                        // 1: when cmd_var3 = 1 (when gun shooting sfx starts)
-    /* xC */ s32 xDE0; // 0 when never shot yet; 1 when has been shot
+    /* xC */ s32 xDE0; // 0 when never shot yet; 1 when has been shot (in this
+                       // spawn instance of the blaster - not put away)
     /* x10 */ s32 xDE4; // group 1; gets set to 0 in func (it_802ADF10) that
                         // sets item joint locations from corresponding fighter
                         // joint locations
@@ -57,15 +58,42 @@ typedef struct {
     /* x94 */ f32 xE68;  // group 4
     /* x98 */ f32 xE6C;  // group 4
     /* x9C */ f32 xE70;  // group 4
-    /* x100 */ s32 shoot_flag; // xE74 Matches with action script's shoot flag
-                               // (fp->cmd_vars[2]) - 0: no shot this frame, 1:
-                               // shoot this frame
-    /* x104 */ s32 visibility_flag; // xE78 Matches with action script's
-                                    // invisibility flag (fp->cmd_vars[1])
-                                    // 0: invisible
-                                    // 1: visible
-                                    // 2: frame of putting away
-    /* x108 */ HSD_GObj* owner;     // xE7C
+    /* x100 */ s32 gfx_spawn_var; // xE74 Signals to spawn shoot gfx from
+                                  // blaster when set to '1', which is done
+                                  // from subaction funcs on frame of shot
+    /* x104 */ s32 set_sfx_var2;  // xE78 Sets blaster destroy sfx func when
+                                  // Flag 1 = 2
+                                  // ---------------
+                                  // Blaster/Throw Subaction cmd Flags
+                                  // .
+                                  // Flag 0 is ??? (multipurpose?)
+                                  // 0: ?
+                                  // 1: ?
+                                  // .
+                                  // Flag 1 is for if blaster is present?
+                                  // 0: Default (invisible)
+                                  // ___Initial value for blaster actions and
+                                  // ___set on 1st frame of throw actions
+                                  // 1: Present (visible)
+                                  // ___Set 1st frame of SpecialAirNStart
+                                  // ___action and upon blaster spawn in
+                                  // ___throw actions
+                                  // 2: Put away (invisible again)
+                                  // ___Set frame of putting away blaster in
+                                  // ___all blaster and throw actions
+                                  // .
+                                  // Flag 2 is for spawning laser shots
+                                  // 0: Default (don't spawn)
+                                  // 1: Spawn
+                                  // ___Set on shoot frame, then immediately
+                                  // ___reset to 0 after triggering those
+                                  // ___functions
+                                  // .
+                                  // Flag 3 is for blaster action
+                                  // 0: Default
+                                  // 1: Starting to shoot
+                                  // 2: Being put away
+    /* x108 */ HSD_GObj* owner;   // xE7C
 } FoxBlasterVars;
 
 typedef struct {
