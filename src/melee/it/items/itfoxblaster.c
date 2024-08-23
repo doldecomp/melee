@@ -855,9 +855,8 @@ int it_802AEBCC(HSD_GObj* item_gobj)
     // If the item's current state does not match the fighter's action state,
     // then change it to match and run animations
     if (item->msid != it_803F6E3C[ft_special_state]) {
-        Item_80268E5C((Item_GObj*) item_gobj, ft_special_state,
-                      ITEM_ANIM_UPDATE);
-        Item_802694CC((Item_GObj*) item_gobj);
+        Item_80268E5C(item_gobj, ft_special_state, ITEM_ANIM_UPDATE);
+        Item_802694CC(item_gobj);
     }
 block_5:
 
