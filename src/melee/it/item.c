@@ -1161,7 +1161,7 @@ void Item_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc)
 
 extern struct r13_ColAnimStruct* it_804D6D04;
 
-void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
+void Item_80268E5C(Item_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
 {
     Vec3 sp4C;
     Vec3 scl;

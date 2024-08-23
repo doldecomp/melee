@@ -120,7 +120,14 @@ typedef struct FoodVars {
     s32 xDD8_heal;
 } FoodVars;
 
-typedef struct {
+typedef struct ItLGunAttr {
+    int x0;
+    float x4;
+    float x8;
+    float xC;
+} ItLGunAttr;  // Not sure if this struct size is correct or type of vars
+
+typedef struct ItLGunVars {
     u32 x0;
 } ItLGunVars;
 
