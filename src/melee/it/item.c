@@ -2027,6 +2027,8 @@ void Item_8026A8EC(Item_GObj* gobj)
     HSD_GObjPLink_80390228(gobj);
 }
 
+// These param names do no match up with those in function declaration
+// (Item_GObj* gobj, HSD_GObj* owner_gobj, Fighter_Part part)
 void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* pickup_gfx,
                    Fighter_Part pickup_sfx)
 {

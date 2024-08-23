@@ -11,37 +11,89 @@
 #include <baselib/jobj.h>
 
 typedef struct {
-    /* x0 */ s32 xDD4;
-    /* x4 */ s32 xDD8;
-    /* x8 */ s32 xDDC;
-    /* xC */ s32 xDE0;
-    /* x10 */ s32 xDE4;
-    /* x14 */ s32 xDE8;
-    /* x18 */ s32 xDEC;
-    /* x1C */ s32 xDF0;
-    /* x20 */ s32 xDF4;
-    /* x24 */ s32 xDF8;
-    /* x28 */ s32 xDFC;
-    /* x2C */ s32 xE00;
-    /* x30 */ s32 xE04;
-    /* x34 */ s32 xE08;
-    /* x38 */ s32 xE0C;
-    /* x3C */ s32 xE10;
-    /* x40 */ Vec3 xE14;
-    /* x4C */ Vec3 xE20;
-    /* x58 */ Vec3 xE2C;
-    /* x64 */ Vec3 xE38;
-    /* x70 */ Vec3 xE44;
-    /* x7C */ Vec3 xE50;
-    /* x88 */ f32 xE5C;
-    /* x8C */ f32 xE60;
-    /* x90 */ f32 xE64;
-    /* x94 */ f32 xE68;
-    /* x98 */ f32 xE6C;
-    /* x9C */ f32 xE70;
-    /* x100 */ s32 xE74;
-    /* x104 */ s32 xE78;
-    /* x108 */ HSD_GObj* xE7C;
+    /* x0 */ s32 xDD4; // gets iterated from 0 to 14 in function (it_802AE200)
+                       // that transforms the item model (possibly frame number
+                       // of animation?)
+    /* x4 */ s32 xDD8; // {0-4} Used to index into array (it_803F6E28) that has
+                       // floats to translate item model by
+                       // 1->4 when blaster shooting starting (at cmd_var3 = 1)
+                       // 3->0 when blaster getting put away (at cmd_var3 = 2)
+    /* x8 */ s32 xDDC; // {-1, 0, 1} Value gets added to xDD8 to iterate it
+                       // during blaster collision callback
+                       // -1: when cmd_var3 = 2 (when gun is getting put away,
+                       // ____but not yet invisible)
+                       // 0: when xDD8 <= 0 or xDD8 >= 5
+                       // 1: when cmd_var3 = 1 (when gun shooting sfx starts)
+    /* xC */ s32 xDE0; // 0 when never shot yet; 1 when has been shot (in this
+                       // spawn instance of the blaster - not put away)
+    /* x10 */ s32 xDE4; // group 1; gets set to 0 in func (it_802ADF10) that
+                        // sets item joint locations from corresponding fighter
+                        // joint locations
+    /* x14 */ s32 xDE8; // group 1
+    /* x18 */ s32 xDEC; // group 1
+    /* x1C */ s32 xDF0; // group 1
+    /* x20 */ s32 xDF4; // group 1
+    /* x24 */ s32 xDF8; // group 1
+    /* x28 */ s32 xDFC; // group 2; gets set to 0 in func (it_802ADF10) that
+                        // sets item joint locations from corresponding fighter
+                        // joint locations
+    /* x2C */ s32 xE00; // group 2
+    /* x30 */ s32 xE04; // group 2
+    /* x34 */ s32 xE08; // group 2
+    /* x38 */ s32 xE0C; // group 2
+    /* x3C */ s32 xE10; // group 2
+    /* x40 */ Vec3 xE14; // group 3; gets set as the vector from fighter's
+                         // current position to the joint holding the blaster
+                         // on the frame blaster its shot
+    /* x4C */ Vec3 xE20; // group 3
+    /* x58 */ Vec3 xE2C; // group 3
+    /* x64 */ Vec3 xE38; // group 3
+    /* x70 */ Vec3 xE44; // group 3
+    /* x7C */ Vec3 xE50; // group 3
+    /* x88 */ f32 angle; // xE5C group 4; gets set to an angle value in func
+                         // (it_802ADF10) that sets item joint locations from
+                         // corresponding fighter joint locations
+    /* x8C */ f32 xE60;  // group 4
+    /* x90 */ f32 xE64;  // group 4
+    /* x94 */ f32 xE68;  // group 4
+    /* x98 */ f32 xE6C;  // group 4
+    /* x9C */ f32 xE70;  // group 4
+    /* x100 */ s32 gfx_spawn_var; // xE74 Signals to spawn shoot gfx from
+                                  // blaster when set to '1', which is done
+                                  // from subaction funcs on frame of shot
+    /* x104 */ s32 set_sfx_var2;  // xE78 Sets blaster destroy sfx func when
+                                  // Flag 1 = 2
+                                  // ---------------
+                                  // Blaster/Throw Subaction cmd Flags
+                                  // .
+                                  // Flag 0 is ??? (multipurpose?)
+                                  // 0: ?
+                                  // 1: ?
+                                  // .
+                                  // Flag 1 is for if blaster is present?
+                                  // 0: Default (invisible)
+                                  // ___Initial value for blaster actions and
+                                  // ___set on 1st frame of throw actions
+                                  // 1: Present (visible)
+                                  // ___Set 1st frame of SpecialAirNStart
+                                  // ___action and upon blaster spawn in
+                                  // ___throw actions
+                                  // 2: Put away (invisible again)
+                                  // ___Set frame of putting away blaster in
+                                  // ___all blaster and throw actions
+                                  // .
+                                  // Flag 2 is for spawning laser shots
+                                  // 0: Default (don't spawn)
+                                  // 1: Spawn
+                                  // ___Set on shoot frame, then immediately
+                                  // ___reset to 0 after triggering those
+                                  // ___functions
+                                  // .
+                                  // Flag 3 is for blaster action
+                                  // 0: Default
+                                  // 1: Starting to shoot
+                                  // 2: Being put away
+    /* x108 */ HSD_GObj* owner;   // xE7C
 } FoxBlasterVars;
 
 typedef struct {
