@@ -125,7 +125,7 @@ typedef struct ItLGunAttr {
     float x4;
     float x8;
     float xC;
-} ItLGunAttr;  // Not sure if this struct size is correct or type of vars
+} ItLGunAttr; // Not sure if this struct size is correct or type of vars
 
 typedef struct ItLGunVars {
     u32 x0;
