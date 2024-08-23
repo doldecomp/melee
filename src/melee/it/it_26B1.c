@@ -505,7 +505,7 @@ void it_8026B7F8(HSD_GObj* fighter_gobj)
 
 /// Remove all GObj interaction references from item
 /// @returns Whether or not @p ref_gobj was the #Item::owner.
-bool it_8026B894(Item_GObj* gobj, HSD_GObj* ref_gobj)
+bool it_8026B894(HSD_GObj* gobj, HSD_GObj* ref_gobj)
 {
     Item* ip = GET_ITEM(gobj);
     bool result = false;
