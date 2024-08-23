@@ -1049,9 +1049,11 @@ int it_802AF17C(HSD_GObj* item_gobj)
 }
 
 /// @brief Calls function it_8026B894
-/// @param item_gobj_1
-/// @param item_gobj_2
-void it_802AF184(Item_GObj* item_gobj_1, Item_GObj* item_gobj_2)
+/// @param item_gobj
+/// @param ref_gobj
+void it_802AF184(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
 {
-    it_8026B894(item_gobj_1, (HSD_GObj*) item_gobj_2);
+    // Remove all GObj interaction references from item
+    // Returns whether or not the referenced_gobj was the #Item::owner.
+    it_8026B894(item_gobj, ref_gobj);
 }
