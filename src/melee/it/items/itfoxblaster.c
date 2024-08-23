@@ -712,7 +712,7 @@ void it_802AEB00(Item_GObj* item_gobj)
          (item->xDB4_itcmd_var2 |
           (item->xDAC_itcmd_var0 | item->xDB0_itcmd_var1))) != 0)
     {
-        Item_80268E5C(item_gobj, 0xA,
+        Item_80268E5C((HSD_GObj*) item_gobj, 0xA,
                       ITEM_ANIM_UPDATE); // Uses the last state in the Item
                                          // table (the second -1 id state)
     } else {
@@ -728,10 +728,10 @@ void it_802AEB00(Item_GObj* item_gobj)
                 ftKb_SpecialNFx_800FDD4C(item->xDD4_itemVar.foxblaster.owner);
             break;
         }
-        Item_80268E5C(item_gobj, it_803F6E68[ft_special_state],
+        Item_80268E5C((HSD_GObj*) item_gobj, it_803F6E68[ft_special_state],
                       ITEM_ANIM_UPDATE);
     }
-    Item_802694CC(item_gobj);
+    Item_802694CC((HSD_GObj*) item_gobj);
 }
 
 // /// @brief Clear the references from the blaster item and fighter to each
@@ -855,9 +855,9 @@ int it_802AEBCC(HSD_GObj* item_gobj)
     // If the item's current state does not match the fighter's action state,
     // then change it to match and run animations
     if (item->msid != it_803F6E3C[ft_special_state]) {
-        Item_80268E5C((Item_GObj*) item_gobj, ft_special_state,
+        Item_80268E5C(item_gobj, ft_special_state,
                       ITEM_ANIM_UPDATE);
-        Item_802694CC((Item_GObj*) item_gobj);
+        Item_802694CC(item_gobj);
     }
 block_5:
 
