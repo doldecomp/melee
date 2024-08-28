@@ -30,11 +30,16 @@ void ftCo_80090574(ftCo_GObj* gobj)
     ft_80081DD4(gobj);
 }
 
+static u16 calcShift(ftCommonData* fcp, f32 hitlag)
+{
+    return fcp->x168 * hitlag + fcp->x16C;
+}
+
 void ftCo_80090594(ftCo_Fighter* fp, enum_t element, int dmg, FtMotionId msid,
                    GroundOrAir ground_or_air, float hitlag_mul)
 {
-    f32 x168;
-    f32 x16C;
+    f32 hitlag;
+    ftCommonData* fcp;
 
     if (element == 10 || element == 12 || element == 6 || element == 7) {
         return;
@@ -42,10 +47,10 @@ void ftCo_80090594(ftCo_Fighter* fp, enum_t element, int dmg, FtMotionId msid,
     if (fp->motion_id == ftCo_MS_DamageIce) {
         return;
     }
-    x168 = p_ftCommonData->x168;
-    x16C = p_ftCommonData->x16C;
-    fp->dmg.x18fa_model_shift_frames =
-        (u16) (x168 * ftCommon_CalcHitlag(dmg, msid, hitlag_mul) + x16C);
+
+    fcp = p_ftCommonData;
+    hitlag = ftCommon_CalcHitlag(dmg, msid, hitlag_mul);
+    fp->dmg.x18fa_model_shift_frames = calcShift(fcp, hitlag);
     fp->dmg.x18FC = 0;
 
     if (element == 2) {
