@@ -57,13 +57,116 @@ HSD_ObjAllocData* HSD_ChanGetAllocData(void)
     return &chan_alloc_data;
 }
 
+static bool CompareRGB(GXColor* c0, GXColor* c1)
+{
+    u32* d0 = (u32*) c0;
+    u32* d1 = (u32*) c1;
+    return ((*d0 ^ *d1) & 0xFFFFFF00) != 0;
+}
+
+static bool CompareRGBA(GXColor* c0, GXColor* c1)
+{
+    u32* d0 = (u32*) c0;
+    u32* d1 = (u32*) c1;
+    return *d0 != *d1;
+}
+
+static void CopyRGB(GXColor* dst, GXColor* src)
+{
+    u32* d = (u32*) dst;
+    u32* s = (u32*) src;
+    *d = *d & 0xff | *s & 0xffffff00;
+}
+
 void HSD_SetupChannel(HSD_Chan* ch)
 {
     int idx;
     GXChannelID chan;
     int no;
 
-    NOT_IMPLEMENTED;
+    if (ch == NULL || ch->chan == GX_COLOR_NULL) {
+        return;
+    }
+
+    chan = ch->chan;
+    idx = chan & 3;
+    no = chan & 1;
+    if (ch->enable != GX_DISABLE && ch->amb_src == GX_SRC_REG) {
+        if (prev_amb_invalid[no] != 0) {
+            GXColor tmp_color;
+            prev_amb_invalid[no] = 0;
+            tmp_color = ch->amb_color;
+            GXSetChanAmbColor(no + 4, &tmp_color);
+            prev_ch[no].amb_color = ch->amb_color;
+        } else if (chan == GX_COLOR0A0 || chan == GX_COLOR1A1) {
+            if (CompareRGBA(&ch->amb_color, &prev_ch[no].amb_color)) {
+                prev_ch[no].amb_color = ch->amb_color;
+                goto set_amb;
+            }
+        } else if (chan == GX_COLOR0 || chan == GX_COLOR1) {
+            if (CompareRGB(&ch->amb_color, &prev_ch[no].amb_color)) {
+                CopyRGB(&prev_ch[no].amb_color, &ch->amb_color);
+                goto set_amb;
+            }
+        } else if (ch->amb_color.a != prev_ch[no].amb_color.a) {
+            GXColor tmp_color;
+            prev_ch[no].amb_color.a = ch->amb_color.a;
+        set_amb:
+            tmp_color = ch->amb_color;
+            GXSetChanAmbColor(chan, &tmp_color);
+        }
+    }
+
+    if (ch->mat_src == GX_SRC_REG) {
+        if (prev_mat_invalid[no] != 0) {
+            GXColor tmp_color;
+            prev_mat_invalid[no] = 0;
+            tmp_color = ch->mat_color;
+            GXSetChanMatColor(no + 4, &tmp_color);
+            prev_ch[no].mat_color = ch->mat_color;
+        } else if (chan == GX_COLOR0A0 || chan == GX_COLOR1A1) {
+            if (CompareRGBA(&ch->mat_color, &prev_ch[no].mat_color)) {
+                prev_ch[no].mat_color = ch->mat_color;
+                goto set_mat;
+            }
+        } else if (chan == GX_COLOR0 || chan == GX_COLOR1) {
+            if (CompareRGB(&ch->mat_color, &prev_ch[no].mat_color)) {
+                CopyRGB(&prev_ch[no].mat_color, &ch->mat_color);
+                goto set_mat;
+            }
+        } else if (ch->mat_color.a != prev_ch[no].mat_color.a) {
+            GXColor tmp_color;
+            prev_ch[no].mat_color.a = ch->mat_color.a;
+        set_mat:
+            tmp_color = ch->mat_color;
+            GXSetChanMatColor(chan, &tmp_color);
+        }
+    }
+
+    if ((ch->enable != prev_ch[idx].enable) ||
+        (ch->amb_src != prev_ch[idx].amb_src) ||
+        (ch->mat_src != prev_ch[idx].mat_src) ||
+        (ch->light_mask != prev_ch[idx].light_mask) ||
+        (ch->diff_fn != prev_ch[idx].diff_fn) ||
+        (ch->attn_fn != prev_ch[idx].attn_fn))
+    {
+        GXSetChanCtrl(chan, ch->enable, ch->amb_src, ch->mat_src,
+                      ch->light_mask, ch->diff_fn, ch->attn_fn);
+        prev_ch[idx].enable = ch->enable;
+        prev_ch[idx].amb_src = ch->amb_src;
+        prev_ch[idx].mat_src = ch->mat_src;
+        prev_ch[idx].light_mask = ch->light_mask;
+        prev_ch[idx].diff_fn = ch->diff_fn;
+        prev_ch[idx].attn_fn = ch->attn_fn;
+        if (chan == GX_COLOR0A0 || chan == GX_COLOR1A1) {
+            prev_ch[idx + 2].enable = ch->enable;
+            prev_ch[idx + 2].amb_src = ch->amb_src;
+            prev_ch[idx + 2].mat_src = ch->mat_src;
+            prev_ch[idx + 2].light_mask = ch->light_mask;
+            prev_ch[idx + 2].diff_fn = ch->diff_fn;
+            prev_ch[idx + 2].attn_fn = ch->attn_fn;
+        }
+    }
 }
 
 void HSD_StateSetNumChans(int num)
