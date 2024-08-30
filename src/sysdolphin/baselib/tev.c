@@ -75,7 +75,7 @@ static void CopyRGB(GXColor* dst, GXColor* src)
 {
     u32* d = (u32*) dst;
     u32* s = (u32*) src;
-    *d = *d & 0xff | *s & 0xffffff00;
+    *d = (*d & 0xff) | (*s & 0xffffff00);
 }
 
 static void setAmbColor(int channel, GXColor amb)
