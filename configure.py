@@ -1409,7 +1409,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/dobj.c"),
             Object(Matching, "sysdolphin/baselib/tobj.c"),
             Object(Matching, "sysdolphin/baselib/state.c"),
-            Object(NonMatching, "sysdolphin/baselib/tev.c"),
+            Object(Matching, "sysdolphin/baselib/tev.c"),
             Object(Matching, "sysdolphin/baselib/mobj.c"),
             Object(Matching, "sysdolphin/baselib/aobj.c"),
             Object(Matching, "sysdolphin/baselib/lobj.c"),
