@@ -155,16 +155,17 @@ void HSD_SetupTevStage(HSD_TevDesc* desc)
 #pragma dont_inline on
 void HSD_SetupTevStageAll(HSD_TevDesc* desc)
 {
-    int var_r31 = 0;
-    while (desc != NULL) {
-        int temp_r3 = HSD_TevStage2Num(desc->stage);
-        if (temp_r3 > var_r31) {
-            var_r31 = temp_r3;
+    int num = 0;
+    HSD_TevDesc* td;
+
+    for (td = desc; td != NULL; td = td->next) {
+        int tmp = HSD_TevStage2Num(td->stage);
+        if (tmp > num) {
+            num = tmp;
         }
-        HSD_SetupTevStage(desc);
-        desc = desc->next;
+        HSD_SetupTevStage(td);
     }
-    current_tev = var_r31;
+    current_tev = num;
     GXSetNumTevStages(current_tev);
     current_tev = 0;
 }
