@@ -57,13 +57,120 @@ HSD_ObjAllocData* HSD_ChanGetAllocData(void)
     return &chan_alloc_data;
 }
 
+static bool CompareRGB(GXColor* c0, GXColor* c1)
+{
+    u32* d0 = (u32*) c0;
+    u32* d1 = (u32*) c1;
+    return ((*d0 ^ *d1) & 0xFFFFFF00) != 0;
+}
+
+static bool CompareRGBA(GXColor* c0, GXColor* c1)
+{
+    u32* d0 = (u32*) c0;
+    u32* d1 = (u32*) c1;
+    return *d0 != *d1;
+}
+
+static void CopyRGB(GXColor* dst, GXColor* src)
+{
+    u32* d = (u32*) dst;
+    u32* s = (u32*) src;
+    *d = (*d & 0xff) | (*s & 0xffffff00);
+}
+
+static void setAmbColor(int channel, GXColor amb)
+{
+    GXColor* col = &amb;
+    GXSetChanAmbColor(channel, col);
+}
+
+static void setMatColor(int channel, GXColor mat)
+{
+    GXColor* col = &mat;
+    GXSetChanMatColor(channel, col);
+}
+
 void HSD_SetupChannel(HSD_Chan* ch)
 {
     int idx;
     GXChannelID chan;
     int no;
 
-    NOT_IMPLEMENTED;
+    if (ch == NULL || ch->chan == GX_COLOR_NULL) {
+        return;
+    }
+
+    chan = ch->chan;
+    idx = chan & 3;
+    no = chan & 1;
+    if (ch->enable != GX_DISABLE && ch->amb_src == GX_SRC_REG) {
+        if (prev_amb_invalid[no] != 0) {
+            prev_amb_invalid[no] = 0;
+            setAmbColor(no + 4, ch->amb_color);
+            prev_ch[no].amb_color = ch->amb_color;
+        } else if (chan == GX_COLOR0A0 || chan == GX_COLOR1A1) {
+            if (CompareRGBA(&ch->amb_color, &prev_ch[no].amb_color)) {
+                prev_ch[no].amb_color = ch->amb_color;
+                goto set_amb;
+            }
+        } else if (chan == GX_COLOR0 || chan == GX_COLOR1) {
+            if (CompareRGB(&ch->amb_color, &prev_ch[no].amb_color)) {
+                CopyRGB(&prev_ch[no].amb_color, &ch->amb_color);
+                goto set_amb;
+            }
+        } else if (ch->amb_color.a != prev_ch[no].amb_color.a) {
+            prev_ch[no].amb_color.a = ch->amb_color.a;
+        set_amb:
+            setAmbColor(chan, ch->amb_color);
+        }
+    }
+
+    if (ch->mat_src == GX_SRC_REG) {
+        if (prev_mat_invalid[no] != 0) {
+            prev_mat_invalid[no] = 0;
+            setMatColor(no + 4, ch->mat_color);
+            prev_ch[no].mat_color = ch->mat_color;
+        } else if (chan == GX_COLOR0A0 || chan == GX_COLOR1A1) {
+            if (CompareRGBA(&ch->mat_color, &prev_ch[no].mat_color)) {
+                prev_ch[no].mat_color = ch->mat_color;
+                goto set_mat;
+            }
+        } else if (chan == GX_COLOR0 || chan == GX_COLOR1) {
+            if (CompareRGB(&ch->mat_color, &prev_ch[no].mat_color)) {
+                CopyRGB(&prev_ch[no].mat_color, &ch->mat_color);
+                goto set_mat;
+            }
+        } else if (ch->mat_color.a != prev_ch[no].mat_color.a) {
+            prev_ch[no].mat_color.a = ch->mat_color.a;
+        set_mat:
+            setMatColor(chan, ch->mat_color);
+        }
+    }
+
+    if ((ch->enable != prev_ch[idx].enable) ||
+        (ch->amb_src != prev_ch[idx].amb_src) ||
+        (ch->mat_src != prev_ch[idx].mat_src) ||
+        (ch->light_mask != prev_ch[idx].light_mask) ||
+        (ch->diff_fn != prev_ch[idx].diff_fn) ||
+        (ch->attn_fn != prev_ch[idx].attn_fn))
+    {
+        GXSetChanCtrl(chan, ch->enable, ch->amb_src, ch->mat_src,
+                      ch->light_mask, ch->diff_fn, ch->attn_fn);
+        prev_ch[idx].enable = ch->enable;
+        prev_ch[idx].amb_src = ch->amb_src;
+        prev_ch[idx].mat_src = ch->mat_src;
+        prev_ch[idx].light_mask = ch->light_mask;
+        prev_ch[idx].diff_fn = ch->diff_fn;
+        prev_ch[idx].attn_fn = ch->attn_fn;
+        if (chan == GX_COLOR0A0 || chan == GX_COLOR1A1) {
+            prev_ch[idx + 2].enable = ch->enable;
+            prev_ch[idx + 2].amb_src = ch->amb_src;
+            prev_ch[idx + 2].mat_src = ch->mat_src;
+            prev_ch[idx + 2].light_mask = ch->light_mask;
+            prev_ch[idx + 2].diff_fn = ch->diff_fn;
+            prev_ch[idx + 2].attn_fn = ch->attn_fn;
+        }
+    }
 }
 
 void HSD_StateSetNumChans(int num)
@@ -155,16 +262,17 @@ void HSD_SetupTevStage(HSD_TevDesc* desc)
 #pragma dont_inline on
 void HSD_SetupTevStageAll(HSD_TevDesc* desc)
 {
-    int var_r31 = 0;
-    while (desc != NULL) {
-        int temp_r3 = HSD_TevStage2Num(desc->stage);
-        if (temp_r3 > var_r31) {
-            var_r31 = temp_r3;
+    int num = 0;
+    HSD_TevDesc* td;
+
+    for (td = desc; td != NULL; td = td->next) {
+        int tmp = HSD_TevStage2Num(td->stage);
+        if (tmp > num) {
+            num = tmp;
         }
-        HSD_SetupTevStage(desc);
-        desc = desc->next;
+        HSD_SetupTevStage(td);
     }
-    current_tev = var_r31;
+    current_tev = num;
     GXSetNumTevStages(current_tev);
     current_tev = 0;
 }
