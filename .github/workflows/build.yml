@@ -58,7 +58,7 @@ jobs:
 
     - name: Upload map
       if: matrix.make_flags == 'GENERATE_MAP=1'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: GALE01.map
         path: ${{ env.OUTPUT }}/ssbm.us.1.2/GALE01.map
@@ -119,7 +119,7 @@ jobs:
           'diff')
             root='build/${{matrix.version}}'
             expected="$root/expected-report.json"
-            actual="$root/actual-report.json"
+            actual="$root/report.json"
             changes="$root/changes-report.json"
             head=$(git rev-parse HEAD)
 
@@ -161,10 +161,16 @@ jobs:
           'build/${{matrix.version}}/progress.json'
     - name: Upload map
       if: matrix.mode == 'link'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{matrix.version}}_maps
         path: build/${{matrix.version}}/**/*.MAP
+    - name: Upload report
+      if: matrix.mode == 'diff'
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{matrix.version}}_report
+        path: build/${{matrix.version}}/report.json
 
   check-issues:
     name: Issues
@@ -236,7 +242,7 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE }}
 
       - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ${{ env.OUTPUT }}
 
