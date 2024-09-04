@@ -319,53 +319,63 @@ bool grLib_801C9E60(Vec3* v)
     return false;
 }
 
-static inline bool inlineA0(Vec3* point, CollData* cd, float offset)
+static inline bool PointInsideColl(CollData* cd, Vec3* point, float offset)
 {
-    float top = cd->xA4_ecbCurrCorrect.top.y;
-    float bottom = cd->xA4_ecbCurrCorrect.bottom.y;
-    float y = (top + bottom) * 0.5f + cd->cur_topn.y - point->y;
-    if (ABS(y) > (top - bottom) * 0.5f + offset) {
+    f32 top, bottom;
+    f32 left, right;
+    f32 width, height;
+    f32 topn;
+    f32 x, y;
+    f32 comp;
+
+    top = cd->xA4_ecbCurrCorrect.top.y;
+    bottom = cd->xA4_ecbCurrCorrect.bottom.y;
+    topn = cd->cur_topn.y;
+    height = top - bottom;
+    comp = 0.5f * height + offset;
+    y = 0.5f * (top + bottom) + topn - point->y;
+    if (ABS(y) > comp) {
         return false;
     }
-    {
-        float right = cd->xA4_ecbCurrCorrect.right.x;
-        float left = cd->xA4_ecbCurrCorrect.left.x;
-        float x = (left + right) * 0.5f + cd->cur_topn.x - point->x;
-        if (ABS(x) > (right - left) * 0.5f + offset) {
-            return false;
-        } else {
-            return true;
-        }
+
+    right = cd->xA4_ecbCurrCorrect.right.x;
+    left = cd->xA4_ecbCurrCorrect.left.x;
+    topn = cd->cur_topn.x;
+    width = right - left;
+    comp = 0.5f * width + offset;
+    x = 0.5f * (left + right) + topn - point->x;
+    if (ABS(x) > comp) {
+        return false;
     }
-    return false;
+
+    return true;
 }
 
 bool grLib_801C9EE8(Vec3* point, float offset)
 {
+    Fighter* fp;
+    Item* ip;
     Fighter_GObj* cur_fighter;
-    PAD_STACK(0x20);
-    for (cur_fighter = HSD_GObj_Entities->fighters; cur_fighter != NULL;
+    Fighter_GObj* fighters;
+    Item_GObj* cur_item;
+    Item_GObj* items;
+
+    fighters = HSD_GObj_Entities->fighters;
+    for (cur_fighter = fighters; cur_fighter != NULL;
          cur_fighter = cur_fighter->next)
     {
-        if (cur_fighter != NULL) {
-            Fighter* fp = GET_FIGHTER(cur_fighter);
-            if (inlineA0(point, &fp->coll_data, offset)) {
+        fp = GET_FIGHTER(cur_fighter);
+        if (PointInsideColl(&fp->coll_data, point, offset)) {
+            return true;
+        }
+    }
+
+    items = HSD_GObj_Entities->items;
+    for (cur_item = items; cur_item != NULL; cur_item = cur_item->next) {
+        if (itGetKind(cur_item) != Pokemon_Random) {
+            ip = GET_ITEM(cur_item);
+            if (PointInsideColl(&ip->x378_itemColl, point, offset)) {
                 return true;
-            }
-        } else {
-            Item_GObj* cur_item;
-            for (cur_item = HSD_GObj_Entities->items;;
-                 cur_item = cur_item->next)
-            {
-                if (cur_item == NULL) {
-                    return false;
-                }
-                if (itGetKind(cur_item) != Pokemon_Random) {
-                    Item* ip = GET_ITEM(cur_item);
-                    if (inlineA0(point, &ip->x378_itemColl, offset)) {
-                        return true;
-                    }
-                }
             }
         }
     }

@@ -30,28 +30,40 @@ void ftCo_80090574(ftCo_GObj* gobj)
     ft_80081DD4(gobj);
 }
 
-void ftCo_80090594(ftCo_Fighter* fp, enum_t arg1, int dmg, FtMotionId msid,
-                   enum_t arg4, float hitlag_mul)
+static u16 calcShift(ftCommonData* fcp, f32 hitlag)
 {
-    if (arg1 != ftCo_MS_DeadUpFallHitCameraIce && arg1 != ftCo_MS_Rebirth &&
-        !((unsigned) (arg1 - 6) > 1) && fp->motion_id != ftCo_MS_DamageIce)
-    {
-        fp->dmg.x18fa_model_shift_frames =
-            (u16) (p_ftCommonData->x168 *
-                       ftCommon_CalcHitlag(dmg, msid, hitlag_mul) +
-                   p_ftCommonData->x16C);
-        fp->dmg.x18FC = 0;
-        if (arg1 == 2) {
-            fp->dmg.x18F8 = 2;
-        } else if (arg4 == 1) {
-            fp->dmg.x18F8 = 0;
-        } else {
-            fp->dmg.x18F8 = 1;
-            fp->dmg.x1900 = fp->coll_data.floor.normal.x;
-            fp->dmg.x1904 = fp->coll_data.floor.normal.y;
-        }
-        // fp->dmg.x18FD = (u8) &Fighter_804D6530[fp->dmg.x18F8 * 2][1];
+    return fcp->x168 * hitlag + fcp->x16C;
+}
+
+void ftCo_80090594(ftCo_Fighter* fp, enum_t element, int dmg, FtMotionId msid,
+                   GroundOrAir ground_or_air, float hitlag_mul)
+{
+    ftCo_Fighter* fp2 = fp;
+    ftCommonData* fCom;
+    if (element == 10 || element == 12 || element == 6 || element == 7) {
+        return;
     }
+    if (fp2->motion_id == ftCo_MS_DamageIce) {
+        return;
+    }
+
+    fCom = p_ftCommonData;
+    fp2->dmg.x18fa_model_shift_frames =
+        (u16) (fCom->x168 * ftCommon_CalcHitlag(dmg, msid, hitlag_mul) +
+               p_ftCommonData->x16C);
+    fp2->dmg.x18FC = 0;
+
+    if (element == 2) {
+        fp2->dmg.x18F8 = 2;
+    } else if (ground_or_air == GA_Air) {
+        fp2->dmg.x18F8 = 0;
+    } else {
+        fp2->dmg.x18F8 = 1;
+        fp2->dmg.x1900 = fp2->coll_data.floor.normal.x;
+        fp2->dmg.x1904 = fp2->coll_data.floor.normal.y;
+    }
+    // fp2->dmg.x18FD = (u8) ((Vec2*) (Fighter_804D6530 + (fp2->dmg.x18F8 *
+    // 2))[1]);
 }
 
 Vec2* ftCo_80090690(Fighter* fp, Vec2* shift)

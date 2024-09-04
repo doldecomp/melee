@@ -817,7 +817,7 @@ config.libs = [
             Object(Matching, "melee/gr/grdatfiles.c"),
             Object(NonMatching, "melee/gr/granime.c"),
             Object(NonMatching, "melee/gr/grmaterial.c"),
-            Object(NonMatching, "melee/gr/grlib.c"),
+            Object(Matching, "melee/gr/grlib.c"),
             Object(Matching, "melee/gr/grdynamicattr.c"),
             Object(NonMatching, "melee/gr/grzakogenerator.c"),
             # Individual stages
