@@ -25,7 +25,7 @@ double frexp(double x, int* exponent)
     return x;
 }
 
-double fabsf__Ff(double param_1)
+float fabsf__Ff(float param_1)
 {
-    return __fabs(param_1);
+    return __fabsf(param_1);
 }
