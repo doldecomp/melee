@@ -16,14 +16,7 @@ import argparse
 import sys
 from pathlib import Path
 from typing import Any, Dict, List
-
-from tools.project import (
-    Object,
-    ProjectConfig,
-    calculate_progress,
-    generate_build,
-    is_windows,
-)
+from tools.project import *
 
 # Game versions
 DEFAULT_VERSION = 0
@@ -138,7 +131,7 @@ if not config.non_matching:
 config.binutils_tag = "2.42-1"
 config.compilers_tag = "20240706"
 config.dtk_tag = "v0.9.4"
-config.objdiff_tag = "v2.0.0-beta.3"
+config.objdiff_tag = "v2.0.0-beta.5"
 config.sjiswrap_tag = "v1.1.1"
 config.wibo_tag = "0.6.11"
 
@@ -218,7 +211,7 @@ def DolphinLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
         "lib": lib_name,
         "mw_version": "GC/1.2.5n",
         "cflags": cflags_base,
-        "host": False,
+        "progress_category": "sdk",
         "objects": objects,
     }
 
@@ -229,7 +222,7 @@ def Rel(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
         "lib": lib_name,
         "mw_version": "GC/1.3.2",
         "cflags": cflags_rel,
-        "host": True,
+        "progress_category": "game",
         "objects": objects,
     }
 
@@ -245,7 +238,7 @@ config.libs = [
         "lib": "Runtime.PPCEABI.H",
         "mw_version": config.linker_version,
         "cflags": cflags_runtime,
-        "host": False,
+        "progress_category": "sdk",  # str | List[str]
         "objects": [
             Object(NonMatching, "Runtime.PPCEABI.H/global_destructor_chain.c"),
             Object(NonMatching, "Runtime.PPCEABI.H/__init_cpp_exceptions.cpp"),
@@ -253,12 +246,19 @@ config.libs = [
     },
 ]
 
+# Optional extra categories for progress tracking
+# Adjust as desired for your project
+config.progress_categories = [
+    ProgressCategory("game", "Game Code"),
+    ProgressCategory("sdk", "SDK Code"),
+]
+config.progress_each_module = args.verbose
+
 if args.mode == "configure":
     # Write build.ninja and objdiff.json
     generate_build(config)
 elif args.mode == "progress":
     # Print progress and write progress.json
-    config.progress_each_module = args.verbose
     calculate_progress(config)
 else:
     sys.exit("Unknown mode: " + args.mode)
