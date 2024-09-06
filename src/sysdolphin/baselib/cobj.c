@@ -628,12 +628,14 @@ static float upvec2roll(HSD_CObj* cobj, Vec3* up)
     Vec3 eye;
     Mtx vmtx;
     f32 dot;
+    f32 data;
 
     if (HSD_CObjGetEyeVector(cobj, &eye) != 0) {
         dot = 0.0f;
     } else {
-        dot = VECDotProduct(up, &eye);
-        if (1.0f - __fabsf(dot) < 0.0001f) {
+        dot = __fabsf(VECDotProduct(up, &eye));
+        dot = 1.0f - dot;
+        if (dot < FLT_MIN) {
             dot = 0.0f;
         } else {
             C_MTXLookAt(vmtx, &orig, &uy, &eye);
