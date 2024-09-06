@@ -48,7 +48,6 @@ struct HSD_PadStatus {
     f32 nml_analogA;
     f32 nml_analogB;
     u8 cross_dir;
-    u8 support_rumble;
     s8 err;
 };
 
@@ -84,13 +83,14 @@ struct PadLibData {
 };
 
 extern HSD_PadStatus HSD_PadMasterStatus[4];
+extern HSD_PadStatus HSD_PadGameStatus[4];
 
 void HSD_PadFlushQueue(HSD_FlushType);
 u8 HSD_PadGetRawQueueCount(void);
 s32 HSD_PadGetResetSwitch(void);
 void HSD_PadRenewRawStatus(int);
 void HSD_PadRenewMasterStatus(void);
-void HSD_PadZeroQueue(void);
+void HSD_PadRenewGameStatus(void);
 void HSD_PadRenewStatus(void);
 void HSD_PadReset(void);
 void HSD_PadInit(s32, u8*, s32, HSD_PadRumbleListData*);
