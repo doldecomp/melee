@@ -383,12 +383,13 @@ static bool setupTopHalfCamera(HSD_CObj* cobj)
 static bool setupBottomHalfCamera(HSD_CObj* cobj)
 {
     int unused[4];
-
     GXProjectionType projection_type;
     Mtx p;
 
-    f32 top, abs_top, margin, bottom, left, right, width, height, h_scale, t,
-        b, w, h;
+    f32 top, bottom;
+    f32 left, right;
+    f32 width, height, hscale;
+    f32 t, b, w, h;
     u32 screen_top;
 
     GXRenderModeObj* rmode = HSD_VIGetRenderMode();
@@ -399,6 +400,7 @@ static bool setupBottomHalfCamera(HSD_CObj* cobj)
         return 0;
     }
 
+    top = cobj->scissor.top;
     left = cobj->scissor.left;
     right = cobj->scissor.right;
     top = (cobj->scissor.top > screen_top ? cobj->scissor.top : screen_top) -
@@ -408,24 +410,23 @@ static bool setupBottomHalfCamera(HSD_CObj* cobj)
     height = bottom - top;
     GXSetScissor((u32) left, (u32) top, (u32) width, (u32) height);
 
-    top = cobj->viewport.ymin;
-    left = cobj->viewport.xmin;
-    right = cobj->viewport.xmax;
+    top = cobj->viewport.ymin;                   // lfs f4,0x14(r30)
+    left = cobj->viewport.xmin;                  // lfs f1,0xc(r30)
+    right = cobj->viewport.xmax;                 // lfs f3,0x10(r30)
+    top = (top > screen_top ? top : screen_top); // fcmpo cr0, f4, f0
+    bottom = cobj->viewport.ymax;                // lfs f10, 0x18(r30)
+    width = right - left;                        // fsubs f3, f3, f1
+    height = bottom - cobj->viewport.ymin;       // fsubs f0, f10, f4
 
-    if (top > screen_top) {
-        abs_top = top;
-    } else {
-        abs_top = screen_top;
+    {
+        int unused;
+        t = top - screen_top;
+        h = (bottom - screen_top) - t;
+
+        hscale = h / height; // fdivs r29, f4, f0
+
+        GXSetViewport(left, t, width, h, 0.0f, 1.0f);
     }
-    bottom = cobj->viewport.ymax;
-    width = right - left;
-    height = bottom - top;
-
-    margin = abs_top - screen_top;
-    h = bottom - screen_top - abs_top;
-    h_scale = h / (height - margin);
-
-    GXSetViewport(left, abs_top, width, h, 0.0f, 1.0f);
 
     {
         switch (cobj->projection_type) {
@@ -434,25 +435,24 @@ static bool setupBottomHalfCamera(HSD_CObj* cobj)
             b = cobj->near *
                 tanf(DegToRad(0.5 * cobj->projection_param.perspective.fov));
             w = b * cobj->projection_param.perspective.aspect;
-            t = b * (2.0f * h_scale + 1.0f);
+            t = b * (2.0f * hscale + 1.0f);
             C_MTXFrustum(p, t, -b, -w, w, cobj->near, cobj->far);
             break;
         case PROJ_FRUSTUM:
             projection_type = GX_PERSPECTIVE;
-            C_MTXFrustum(
-                p,
-                (h_scale * (cobj->projection_param.perspective.fov -
-                            cobj->projection_param.perspective.aspect) +
-                 cobj->projection_param.perspective.aspect),
-                cobj->projection_param.perspective.aspect,
-                cobj->projection_param.frustum.left,
-                cobj->projection_param.frustum.right, cobj->near, cobj->far);
+            h = (hscale * (cobj->projection_param.perspective.fov -
+                           cobj->projection_param.perspective.aspect) +
+                 cobj->projection_param.perspective.aspect);
+            C_MTXFrustum(p, h, cobj->projection_param.perspective.aspect,
+                         cobj->projection_param.frustum.left,
+                         cobj->projection_param.frustum.right, cobj->near,
+                         cobj->far);
             break;
         case PROJ_ORTHO:
             projection_type = GX_ORTHOGRAPHIC;
             C_MTXOrtho(p,
-                       (h_scale * (cobj->projection_param.perspective.fov -
-                                   cobj->projection_param.perspective.aspect) +
+                       (hscale * (cobj->projection_param.perspective.fov -
+                                  cobj->projection_param.perspective.aspect) +
                         cobj->projection_param.perspective.aspect),
                        cobj->projection_param.perspective.aspect,
                        cobj->projection_param.frustum.left,
