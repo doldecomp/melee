@@ -48,7 +48,6 @@ struct HSD_PadStatus {
     f32 nml_analogA;
     f32 nml_analogB;
     u8 cross_dir;
-    u8 support_rumble;
     s8 err;
 };
 

@@ -140,7 +140,74 @@ void HSD_PadRenewMasterStatus(void)
 
 void HSD_PadRenewCopyStatus(void)
 {
-    NOT_IMPLEMENTED;
+    int iVar1;
+    HSD_PadStatus* mp;
+    HSD_PadStatus* cp;
+    PadLibData* p;
+
+    int i;
+
+    p = &HSD_PadLibData;
+    for (i = 0; i < 4; i++) {
+        mp = &HSD_PadMasterStatus[i];
+        cp = &HSD_PadCopyStatus[i];
+
+        cp->last_button = cp->button;
+        cp->err = mp->err;
+        if (cp->err == 0) {
+            cp->button = mp->button;
+            cp->stickX = mp->stickX;
+            cp->stickY = mp->stickY;
+            cp->subStickX = mp->subStickX;
+            cp->subStickY = mp->subStickY;
+            cp->analogL = mp->analogL;
+            cp->analogR = mp->analogR;
+            cp->analogA = mp->analogA;
+            cp->analogB = mp->analogB;
+            cp->nml_stickX = mp->nml_stickX;
+            cp->nml_stickY = mp->nml_stickY;
+            cp->nml_subStickX = mp->nml_subStickX;
+            cp->nml_subStickY = mp->nml_subStickY;
+            cp->nml_analogL = mp->nml_analogL;
+            cp->nml_analogR = mp->nml_analogR;
+            cp->nml_analogA = mp->nml_analogA;
+            cp->nml_analogB = mp->nml_analogB;
+        } else {
+            cp->button = 0;
+            cp->subStickY = '\0';
+            cp->subStickX = '\0';
+            cp->stickY = 0;
+            cp->stickX = 0;
+            cp->analogB = 0;
+            cp->analogA = 0;
+            cp->analogR = 0;
+            cp->analogL = 0;
+            cp->nml_subStickY = 0.0;
+            cp->nml_subStickX = 0.0;
+            cp->nml_stickY = 0.0;
+            cp->nml_stickX = 0.0;
+            cp->nml_analogB = 0.0;
+            cp->nml_analogA = 0.0;
+            cp->nml_analogR = 0.0;
+            cp->nml_analogL = 0.0;
+        }
+        cp->trigger = cp->button & (cp->last_button ^ cp->button);
+        cp->release = cp->last_button & (cp->last_button ^ cp->button);
+        if (cp->last_button ^ cp->button) {
+            cp->repeat = cp->trigger;
+            cp->repeat_count = p->repeat_start;
+        } else {
+            iVar1 = cp->repeat_count - 1;
+            cp->repeat_count = iVar1;
+            if (iVar1 != 0) {
+                cp->repeat = 0;
+            } else {
+                cp->repeat = cp->button;
+                cp->repeat_count = p->repeat_interval;
+            }
+        }
+    };
+    return;
 }
 
 void HSD_PadZeroQueue(void)
