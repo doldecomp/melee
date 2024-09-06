@@ -701,24 +701,23 @@ int HSD_CObjGetUpVector(HSD_CObj* cobj, Vec3* up)
 void HSD_CObjSetUpVector(HSD_CObj* cobj, Vec3* up)
 {
     Vec3 v;
-    Vec3* pv;
 
     if (!cobj || !up) {
         return;
     }
     if ((cobj->flags & 1) != 0) {
         if (vec_normalize_check(up, &v)) {
-            pv = &uy2;
+            up = &uy2;
         } else {
-            pv = &v;
+            up = &v;
         }
 
-        if (cobj->u.up.x != pv->x || cobj->u.up.y != pv->y ||
-            cobj->u.up.z != pv->z)
+        if (cobj->u.up.x != up->x || cobj->u.up.y != up->y ||
+            cobj->u.up.z != up->z)
         {
             HSD_CObjSetMtxDirty(cobj);
         }
-        cobj->u.up = *pv;
+        cobj->u.up = *up;
     } else {
         HSD_CObjSetRoll(cobj, upvec2roll(cobj, up));
     }
