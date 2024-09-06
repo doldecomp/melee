@@ -4,6 +4,8 @@
 #include <platform.h>
 #include <dolphin/gx/forward.h>
 
+#include "mtx.h"
+
 #include <dolphin/mtx/vec.h>
 
 // functions
@@ -16,19 +18,13 @@ extern float HSD_identityMtx[];
 
 #define FLT_MIN 1.17549435e-38f
 
-static inline float fabsf(float x)
-{
-    *(u32*) &x &= 0x7FFFFFFF;
-    return x;
-}
-
 static inline int vec_normalize_check(Vec3* src, Vec3* dst)
 {
     if (src == NULL || dst == NULL) {
         return -1;
     }
-    if (fabsf(src->x) <= FLT_MIN && fabsf(src->y) <= FLT_MIN &&
-        fabsf(src->z) <= FLT_MIN)
+    if (fabsf_bitwise(src->x) <= FLT_MIN && fabsf_bitwise(src->y) <= FLT_MIN &&
+        fabsf_bitwise(src->z) <= FLT_MIN)
     {
         return -1;
     } else {

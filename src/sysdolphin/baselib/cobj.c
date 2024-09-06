@@ -622,17 +622,37 @@ void HSD_CObjSetDefaultClass(HSD_ClassInfo* info)
     default_class = info;
 }
 
+static int CObjGetEyeVector(HSD_CObj* cobj, Vec3* eye)
+{
+    Vec3 eyepos;
+    Vec3 interest;
+
+    if (cobj != NULL && cobj->eyepos != NULL && cobj->interest != NULL) {
+        HSD_CObjGetEyePosition(cobj, &eyepos);
+        HSD_CObjGetInterest(cobj, &interest);
+        PSVECSubtract(&interest, &eyepos, eye);
+        if (vec_normalize_check(eye, eye) == 0) {
+            return 0;
+        }
+    }
+    eye->x = 0.0f;
+    eye->y = 0.0f;
+    eye->z = -1.0f;
+    return -1;
+}
+
 static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
 {
+    int res;
     Vec3 eye;
     Vec3 v0;
     Vec3 v1;
     Mtx m;
+    res = CObjGetEyeVector(cobj, &eye);
 
-    if (HSD_CObjGetEyeVector(cobj, &eye) != 0) {
-        return 0;
+    if (res != 0) {
+        return res;
     }
-
     if (1.0 - __fabs(eye.y) < 0.0001) {
         v0.x = sqrtf(eye.y * eye.y + eye.z * eye.z);
         v0.y = eye.y * (-eye.x / v0.x);
@@ -642,9 +662,9 @@ static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
         v0.x = eye.x * (-eye.y / v0.y);
         v0.z = eye.z * (-eye.y / v0.y);
     }
-    MTXRotAxisRad(m, &eye, -roll);
+    PSMTXRotAxisRad(m, &eye, -roll);
     PSMTXMultVecSR(m, &v0, &v1);
-    VECNormalize(&v1, up);
+    PSVECNormalize(&v1, up);
     return 0;
 }
 
@@ -726,35 +746,35 @@ int HSD_CObjGetLeftVector(HSD_CObj* cobj, Vec3* left)
     int res;
 
     if (cobj != NULL && left != NULL) {
-        HSD_CObjGetEyeVector(cobj, &eye);
-        if (cobj != NULL) {
-            if ((cobj->flags & 1) != 0) {
-                res = 0;
-                up = cobj->u.up;
-            } else {
-                if (roll2upvec(cobj, &up, cobj->u.roll) == 0) {
+        if (CObjGetEyeVector(cobj, &eye) == 0) {
+            if (cobj != NULL && &up != NULL) {
+                if ((cobj->flags & 1) != 0) {
                     res = 0;
+                    up = cobj->u.up;
+                } else if (roll2upvec(cobj, &up, cobj->u.roll) == 0) {
+                    res = 0;
+                } else {
+                    goto set_up;
                 }
+            } else {
+            set_up:
+                res = -1;
+                up.x = 0.0f;
+                up.y = 1.0f;
+                up.z = 0.0f;
             }
-        } else {
-            res = -1;
-            up.x = 0.0f;
-            up.y = 1.0f;
-            up.z = 0.0f;
-        }
-
-        if (res == 0) {
-            PSVECCrossProduct(&up, &eye, left);
-            if (vec_normalize_check(left, left)) {
-                return 0;
+            if (res == 0) {
+                PSVECCrossProduct(&up, &eye, left);
+                if (!vec_normalize_check(left, left)) {
+                    return 0;
+                }
             }
         }
     }
 
     if (left != NULL) {
-        left->x = 0.0f;
-        left->y = 1.0f;
-        left->z = 0.0f;
+        left->x = 1.0f;
+        left->z = left->y = 0.0f;
     }
     return -1;
 }
