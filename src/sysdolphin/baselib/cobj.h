@@ -150,8 +150,10 @@ typedef struct _cobj_Unk1 cobj_Unk1;
 void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
                          s32 enable_depth);
 void HSD_CObjRemoveAnim(HSD_CObj* cobj);
-HSD_WObj* HSD_CObjGetEyePositionWObj(HSD_CObj* cobj);
 HSD_WObj* HSD_CObjGetInterestWObj(HSD_CObj* cobj);
+void HSD_CObjSetInterestWObj(HSD_CObj* cobj, HSD_WObj* interest);
+HSD_WObj* HSD_CObjGetEyePositionWObj(HSD_CObj* cobj);
+void HSD_CObjSetEyePositionWObj(HSD_CObj* cobj, HSD_WObj* eyepos);
 void HSD_CObjSetInterest(HSD_CObj* cobj, Vec3*);
 void HSD_CObjSetEyePosition(HSD_CObj* cobj, Vec3*);
 bool HSD_CObjSetCurrent(HSD_CObj*);
@@ -159,7 +161,7 @@ void HSD_CObjEndCurrent(void);
 void HSD_CObjSetViewportfx4(HSD_CObj*, f32, f32, f32, f32);
 void HSD_CObjGetEyePosition(HSD_CObj* cobj, Vec3* cam_pos);
 int HSD_CObjGetEyeVector(HSD_CObj* cobj, Vec3* eye);
-void HSD_CObjGetUpVector(HSD_CObj* cobj, Vec3* up);
+int HSD_CObjGetUpVector(HSD_CObj* cobj, Vec3* up);
 void HSD_CObjGetInterest(HSD_CObj* cobj, Vec3* interest);
 HSD_CObj* HSD_CObjAlloc(void);
 
@@ -171,7 +173,7 @@ GXProjectionType makeProjectionMtx(HSD_CObj* cobj, Mtx mtx);
 void HSD_CObjSetupViewingMtx(HSD_CObj* cobj);
 f32 HSD_CObjGetEyeDistance(HSD_CObj* cobj);
 void HSD_CObjSetUpVector(HSD_CObj* cobj, Vec3* up);
-void HSD_CObjGetLeftVector(UNK_PARAMS);
+int HSD_CObjGetLeftVector(HSD_CObj* cobj, Vec3* left);
 void HSD_CObjSetMtxDirty(HSD_CObj* cobj);
 bool HSD_CObjMtxIsDirty(HSD_CObj*);
 void HSD_CObjGetViewingMtx(HSD_CObj* cobj, Mtx mtx);
@@ -214,6 +216,7 @@ void HSD_CObjClearFlags(HSD_CObj*, u32);
 HSD_CObj* HSD_CObjGetCurrent(void);
 void HSD_CObjInit(HSD_CObj* cobj, HSD_CObjDesc* desc);
 HSD_CObj* HSD_CObjLoadDesc(HSD_CObjDesc* desc);
+void HSD_CObjSetDefaultClass(HSD_ClassInfo* info);
 
 static inline MtxPtr HSD_CObjGetViewingMtxPtrDirect(HSD_CObj* cobj)
 {
