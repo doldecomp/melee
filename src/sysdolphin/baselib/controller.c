@@ -32,17 +32,49 @@ s32 HSD_PadGetResetSwitch(void)
     return (p->reset_switch != 0) ? true : false;
 }
 
-static void HSD_PadRawQueueShift(u32 qnum, u8* qpos)
+static void HSD_PadRawQueueShift(u8 qnum, u8* qptr)
 {
-    *qpos = (*qpos + 1) - ((*qpos + 1) / qnum) * qnum;
+    *qptr = (*qptr + 1) % qnum;
 }
 
 static void HSD_PadRawMerge(PADStatus* src1, PADStatus* src2, PADStatus* dst)
 {
-    dst[0].button = src1[0].button | src2[0].button;
-    dst[1].button = src1[1].button | src2[1].button;
-    dst[2].button = src1[2].button | src2[2].button;
-    dst[3].button = src1[3].button | src2[3].button;
+    int i;
+    for (i = 0; i < 4; i++) {
+        dst[i].button = src1[i].button | src2[i].button;
+    }
+}
+
+void HSD_PadFlushQueue(HSD_FlushType ftype)
+{
+    PadLibData* p;
+    PADStatus* qdst;
+    PADStatus* qread;
+    bool intr;
+
+    p = &HSD_PadLibData;
+    intr = OSDisableInterrupts();
+    switch (ftype) {
+    case HSD_PAD_FLUSH_QUEUE_MERGE:
+        for (; p->qcount > 1; p->qcount -= 1) {
+            qread = &p->queue->stat[p->qread * 4];
+            HSD_PadRawQueueShift(p->qnum, &p->qread);
+            qdst = &p->queue->stat[p->qread * 4];
+            HSD_PadRawMerge(qread, qdst, qdst);
+        }
+        break;
+    case HSD_PAD_FLUSH_QUEUE_THROWAWAY:
+        p->qread = p->qwrite;
+        p->qcount = 0;
+        break;
+    case HSD_PAD_FLUSH_QUEUE_LEAVE1:
+        if (p->qcount > 1) {
+            p->qread = p->qwrite != 0 ? p->qwrite - 1 : p->qnum - 1;
+            p->qcount = 1;
+        }
+        break;
+    }
+    OSRestoreInterrupts(intr);
 }
 
 void HSD_PadClampCheck1(u8* val, u8 shift, u8 min, u8 max)
