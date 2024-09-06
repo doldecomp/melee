@@ -27,10 +27,9 @@ static inline int vec_normalize_check(Vec3* src, Vec3* dst)
         fabsf_bitwise(src->z) <= FLT_MIN)
     {
         return -1;
-    } else {
-        PSVECNormalize(src, dst);
-        return 0;
     }
+    PSVECNormalize(src, dst);
+    return 0;
 }
 
 #endif // _UTIL_H_

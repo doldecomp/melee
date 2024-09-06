@@ -628,7 +628,6 @@ static float upvec2roll(HSD_CObj* cobj, Vec3* up)
     Vec3 eye;
     Mtx vmtx;
     f32 dot;
-    f32 data;
 
     if (HSD_CObjGetEyeVector(cobj, &eye) != 0) {
         dot = 0.0f;
@@ -650,21 +649,23 @@ static float upvec2roll(HSD_CObj* cobj, Vec3* up)
     return dot;
 }
 
+static inline f64 fabsf_p(f32* v)
+{
+    return __fabsf(*v);
+}
+
 static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
 {
     Vec3 eye;
     Vec3 v0;
     Vec3 v1;
     Mtx m;
-    f64 data;
 
     int res = HSD_CObjGetEyeVector(cobj, &eye);
     if (res != 0) {
         return res;
     }
-    data = __fabs(eye.y);
-    data = 1.0 - data;
-    if (data < 0.0001) {
+    if (1.0 - fabsf_p(&eye.y) < 0.0001) {
         v0.x = sqrtf(eye.y * eye.y + eye.z * eye.z);
         v0.y = eye.y * (-eye.x / v0.x);
         v0.z = eye.z * (-eye.x / v0.x);
@@ -673,9 +674,9 @@ static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
         v0.x = eye.x * (-eye.y / v0.y);
         v0.z = eye.z * (-eye.y / v0.y);
     }
-    PSMTXRotAxisRad(m, &eye, -roll);
+    MTXRotAxisRad(m, &eye, -roll);
     PSMTXMultVecSR(m, &v0, &v1);
-    PSVECNormalize(&v1, up);
+    VECNormalize(&v1, up);
     return 0;
 }
 
