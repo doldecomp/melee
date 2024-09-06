@@ -573,9 +573,7 @@ int HSD_CObjGetEyeVector(HSD_CObj* cobj, Vec3* eye)
     Vec3 eyepos;
     Vec3 interest;
 
-    if (cobj != NULL && cobj->eyepos != NULL && cobj->interest != NULL &&
-        eye != NULL)
-    {
+    if (cobj && cobj->eyepos && cobj->interest && eye) {
         HSD_CObjGetEyePosition(cobj, &eyepos);
         HSD_CObjGetInterest(cobj, &interest);
         PSVECSubtract(&interest, &eyepos, eye);
@@ -583,7 +581,7 @@ int HSD_CObjGetEyeVector(HSD_CObj* cobj, Vec3* eye)
             return 0;
         }
     }
-    if (eye != NULL) {
+    if (eye) {
         eye->x = 0.0f;
         eye->y = 0.0f;
         eye->z = -1.0f;
@@ -600,8 +598,8 @@ float HSD_CObjGetEyeDistance(HSD_CObj* cobj)
     if (cobj == NULL) {
         return 0.0f;
     }
-    HSD_ASSERT(0x327, cobj->eyepos);
-    HSD_ASSERT(0x328, cobj->interest);
+    HSD_ASSERT(807, cobj->eyepos);
+    HSD_ASSERT(808, cobj->interest);
     HSD_CObjGetEyePosition(cobj, &position);
     HSD_CObjGetInterest(cobj, &interest);
     PSVECSubtract(&interest, &position, &look_vector);
@@ -617,28 +615,9 @@ void HSD_CObjSetDefaultClass(HSD_ClassInfo* info)
     if (info) {
         // Line number is made up to satisfy the
         // fact we don't actually have this function
-        HSD_ASSERT(926, hsdIsDescendantOf(info, &hsdCObj));
+        HSD_ASSERT(848, hsdIsDescendantOf(info, &hsdCObj));
     }
     default_class = info;
-}
-
-static int CObjGetEyeVector(HSD_CObj* cobj, Vec3* eye)
-{
-    Vec3 eyepos;
-    Vec3 interest;
-
-    if (cobj != NULL && cobj->eyepos != NULL && cobj->interest != NULL) {
-        HSD_CObjGetEyePosition(cobj, &eyepos);
-        HSD_CObjGetInterest(cobj, &interest);
-        PSVECSubtract(&interest, &eyepos, eye);
-        if (vec_normalize_check(eye, eye) == 0) {
-            return 0;
-        }
-    }
-    eye->x = 0.0f;
-    eye->y = 0.0f;
-    eye->z = -1.0f;
-    return -1;
 }
 
 static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
@@ -648,8 +627,8 @@ static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
     Vec3 v0;
     Vec3 v1;
     Mtx m;
-    res = CObjGetEyeVector(cobj, &eye);
 
+    res = HSD_CObjGetEyeVector(cobj, &eye);
     if (res != 0) {
         return res;
     }
@@ -746,7 +725,7 @@ int HSD_CObjGetLeftVector(HSD_CObj* cobj, Vec3* left)
     int res;
 
     if (cobj != NULL && left != NULL) {
-        if (CObjGetEyeVector(cobj, &eye) == 0) {
+        if (HSD_CObjGetEyeVector(cobj, &eye) == 0) {
             if (cobj != NULL && &up != NULL) {
                 if ((cobj->flags & 1) != 0) {
                     res = 0;
