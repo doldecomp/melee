@@ -435,7 +435,7 @@ static bool setupBottomHalfCamera(HSD_CObj* cobj)
             b = cobj->near *
                 tanf(DegToRad(0.5 * cobj->projection_param.perspective.fov));
             w = b * cobj->projection_param.perspective.aspect;
-            t = b * (2.0f * hscale + 1.0f);
+            t = b * (2.0f * hscale + -1.0f);
             C_MTXFrustum(p, t, -b, -w, w, cobj->near, cobj->far);
             break;
         case PROJ_FRUSTUM:
@@ -538,10 +538,22 @@ HSD_WObj* HSD_CObjGetInterestWObj(HSD_CObj* cobj)
     return cobj->interest;
 }
 
+void HSD_CObjSetInterestWObj(HSD_CObj* cobj, HSD_WObj* interest)
+{
+    HSD_ASSERT(672, cobj);
+    cobj->interest = interest;
+}
+
 HSD_WObj* HSD_CObjGetEyePositionWObj(HSD_CObj* cobj)
 {
     HSD_ASSERT(685, cobj);
     return cobj->eyepos;
+}
+
+void HSD_CObjSetEyePositionWObj(HSD_CObj* cobj, HSD_WObj* eyepos)
+{
+    HSD_ASSERT(696, cobj);
+    cobj->eyepos = eyepos;
 }
 
 void HSD_CObjGetInterest(HSD_CObj* cobj, Vec3* interest)
@@ -620,6 +632,32 @@ void HSD_CObjSetDefaultClass(HSD_ClassInfo* info)
     default_class = info;
 }
 
+static float upvec2roll(HSD_CObj* cobj, Vec3* up)
+{
+    Vec3 v;
+    Vec3 eye;
+    Mtx vmtx;
+    f32 dot;
+
+    if (HSD_CObjGetEyeVector(cobj, &eye) != 0) {
+        dot = 0.0f;
+    } else {
+        dot = VECDotProduct(up, &eye);
+        if (1.0f - __fabsf(dot) < 0.0001f) {
+            dot = 0.0f;
+        } else {
+            C_MTXLookAt(vmtx, &orig, &uy, &eye);
+            PSMTXMultVecSR(vmtx, up, &v);
+            if (fabsf_bitwise(v.y) == 0.0f) {
+                dot = -v.x >= 0.0f ? 1.5707963267948966 : -1.5707963267948966;
+            } else {
+                dot = atan2f(-v.x, v.y);
+            }
+        }
+    }
+    return dot;
+}
+
 static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
 {
     int res;
@@ -649,7 +687,7 @@ static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
 
 int HSD_CObjGetUpVector(HSD_CObj* cobj, Vec3* up)
 {
-    if (cobj != NULL && up != NULL) {
+    if (cobj && up) {
         if ((cobj->flags & 1) != 0) {
             *up = cobj->u.up;
             return 0;
@@ -658,7 +696,7 @@ int HSD_CObjGetUpVector(HSD_CObj* cobj, Vec3* up)
             return 0;
         }
     }
-    if (up != NULL) {
+    if (up) {
         up->x = 0.0f;
         up->y = 1.0f;
         up->z = 0.0f;
@@ -666,38 +704,12 @@ int HSD_CObjGetUpVector(HSD_CObj* cobj, Vec3* up)
     return -1;
 }
 
-static float upvec2roll(HSD_CObj* cobj, Vec3* up)
-{
-    Vec3 v;
-    Vec3 eye;
-    Mtx vmtx;
-    f32 dot;
-
-    if (HSD_CObjGetEyeVector(cobj, &eye) == 0) {
-        dot = 0;
-    } else {
-        dot = VECDotProduct(up, &eye);
-        if (1.0f - __fabsf(dot) < 0.0001f) {
-            dot = 0;
-        } else {
-            C_MTXLookAt(vmtx, &v, &uy, &eye);
-            PSMTXMultVecSR(vmtx, up, &v);
-            if (fabsf(v.y) == 0.0f) {
-                dot = -v.x >= 0.0f ? 1.570796 : -1.570796;
-            } else {
-                dot = atan2f(-v.x, v.y);
-            }
-        }
-    }
-    return dot;
-}
-
 void HSD_CObjSetUpVector(HSD_CObj* cobj, Vec3* up)
 {
     Vec3 v;
     Vec3* pv;
 
-    if (cobj == NULL || up == NULL) {
+    if (!cobj || !up) {
         return;
     }
     if ((cobj->flags & 1) != 0) {
@@ -803,7 +815,7 @@ void HSD_CObjSetRoll(HSD_CObj* cobj, float roll)
 {
     Vec3 up;
 
-    if (cobj == NULL) {
+    if (!cobj) {
         return;
     }
 

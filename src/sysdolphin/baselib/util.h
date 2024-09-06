@@ -20,7 +20,7 @@ extern float HSD_identityMtx[];
 
 static inline int vec_normalize_check(Vec3* src, Vec3* dst)
 {
-    if (src == NULL || dst == NULL) {
+    if (!src || !dst) {
         return -1;
     }
     if (fabsf_bitwise(src->x) <= FLT_MIN && fabsf_bitwise(src->y) <= FLT_MIN &&
