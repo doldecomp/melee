@@ -588,7 +588,7 @@ int HSD_CObjGetEyeVector(HSD_CObj* cobj, Vec3* eye)
     if (cobj && cobj->eyepos && cobj->interest && eye) {
         HSD_CObjGetEyePosition(cobj, &eyepos);
         HSD_CObjGetInterest(cobj, &interest);
-        PSVECSubtract(&interest, &eyepos, eye);
+        VECSubtract(&interest, &eyepos, eye);
         if (vec_normalize_check(eye, eye) == 0) {
             return 0;
         }
@@ -614,23 +614,13 @@ float HSD_CObjGetEyeDistance(HSD_CObj* cobj)
     HSD_ASSERT(808, cobj->interest);
     HSD_CObjGetEyePosition(cobj, &position);
     HSD_CObjGetInterest(cobj, &interest);
-    PSVECSubtract(&interest, &position, &look_vector);
-    return PSVECMag(&look_vector);
+    VECSubtract(&interest, &position, &look_vector);
+    return VECMag(&look_vector);
 }
 
 static Vec3 orig = { 0.0F, 0.0F, 0.0F };
 static Vec3 uy = { 0.0F, 1.0F, 0.0F };
 static Vec3 uy2 = { 0.0F, 1.0F, 0.0F };
-
-void HSD_CObjSetDefaultClass(HSD_ClassInfo* info)
-{
-    if (info) {
-        // Line number is made up to satisfy the
-        // fact we don't actually have this function
-        HSD_ASSERT(848, hsdIsDescendantOf(info, &hsdCObj));
-    }
-    default_class = info;
-}
 
 static float upvec2roll(HSD_CObj* cobj, Vec3* up)
 {
@@ -660,17 +650,19 @@ static float upvec2roll(HSD_CObj* cobj, Vec3* up)
 
 static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
 {
-    int res;
     Vec3 eye;
     Vec3 v0;
     Vec3 v1;
     Mtx m;
+    f64 data;
 
-    res = HSD_CObjGetEyeVector(cobj, &eye);
+    int res = HSD_CObjGetEyeVector(cobj, &eye);
     if (res != 0) {
         return res;
     }
-    if (1.0 - __fabs(eye.y) < 0.0001) {
+    data = __fabs(eye.y);
+    data = 1.0 - data;
+    if (data < 0.0001) {
         v0.x = sqrtf(eye.y * eye.y + eye.z * eye.z);
         v0.y = eye.y * (-eye.x / v0.x);
         v0.z = eye.z * (-eye.x / v0.x);
@@ -1220,6 +1212,16 @@ void HSD_CObjClearFlags(HSD_CObj* cobj, u32 flags)
 HSD_CObj* HSD_CObjGetCurrent(void)
 {
     return current;
+}
+
+void HSD_CObjSetDefaultClass(HSD_ClassInfo* info)
+{
+    if (info) {
+        // Line number is made up to satisfy the
+        // fact we don't actually have this function
+        HSD_ASSERT(1946, hsdIsDescendantOf(info, &hsdCObj));
+    }
+    default_class = info;
 }
 
 HSD_CObj* HSD_CObjAlloc(void)
