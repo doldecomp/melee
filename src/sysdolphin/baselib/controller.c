@@ -10,6 +10,7 @@
 PadLibData HSD_PadLibData;
 HSD_PadStatus HSD_PadMasterStatus[4];
 HSD_PadStatus HSD_PadCopyStatus[4];
+HSD_PadStatus HSD_PadGameStatus[4];
 
 u8 HSD_PadGetRawQueueCount(void)
 {
@@ -174,8 +175,8 @@ void HSD_PadRenewCopyStatus(void)
             cp->nml_analogB = mp->nml_analogB;
         } else {
             cp->button = 0;
-            cp->subStickY = '\0';
-            cp->subStickX = '\0';
+            cp->subStickY = 0;
+            cp->subStickX = 0;
             cp->stickY = 0;
             cp->stickX = 0;
             cp->analogB = 0;
@@ -210,9 +211,76 @@ void HSD_PadRenewCopyStatus(void)
     return;
 }
 
-void HSD_PadZeroQueue(void)
+void HSD_PadRenewGameStatus(void)
 {
-    NOT_IMPLEMENTED;
+    int iVar1;
+    HSD_PadStatus* mp;
+    HSD_PadStatus* gs;
+    PadLibData* p;
+
+    int i;
+
+    p = &HSD_PadLibData;
+    for (i = 0; i < 4; i++) {
+        mp = &HSD_PadMasterStatus[i];
+        gs = &HSD_PadGameStatus[i];
+
+        gs->last_button = gs->button;
+        gs->err = mp->err;
+        if (gs->err == 0) {
+            gs->button = mp->button;
+            gs->stickX = mp->stickX;
+            gs->stickY = mp->stickY;
+            gs->subStickX = mp->subStickX;
+            gs->subStickY = mp->subStickY;
+            gs->analogL = mp->analogL;
+            gs->analogR = mp->analogR;
+            gs->analogA = mp->analogA;
+            gs->analogB = mp->analogB;
+            gs->nml_stickX = mp->nml_stickX;
+            gs->nml_stickY = mp->nml_stickY;
+            gs->nml_subStickX = mp->nml_subStickX;
+            gs->nml_subStickY = mp->nml_subStickY;
+            gs->nml_analogL = mp->nml_analogL;
+            gs->nml_analogR = mp->nml_analogR;
+            gs->nml_analogA = mp->nml_analogA;
+            gs->nml_analogB = mp->nml_analogB;
+        } else {
+            gs->button = 0;
+            gs->subStickY = 0;
+            gs->subStickX = 0;
+            gs->stickY = 0;
+            gs->stickX = 0;
+            gs->analogB = 0;
+            gs->analogA = 0;
+            gs->analogR = 0;
+            gs->analogL = 0;
+            gs->nml_subStickY = 0.0;
+            gs->nml_subStickX = 0.0;
+            gs->nml_stickY = 0.0;
+            gs->nml_stickX = 0.0;
+            gs->nml_analogB = 0.0;
+            gs->nml_analogA = 0.0;
+            gs->nml_analogR = 0.0;
+            gs->nml_analogL = 0.0;
+        }
+        gs->trigger = gs->button & (gs->last_button ^ gs->button);
+        gs->release = gs->last_button & (gs->last_button ^ gs->button);
+        if (gs->last_button ^ gs->button) {
+            gs->repeat = gs->trigger;
+            gs->repeat_count = p->repeat_start;
+        } else {
+            iVar1 = gs->repeat_count - 1;
+            gs->repeat_count = iVar1;
+            if (iVar1 != 0) {
+                gs->repeat = 0;
+            } else {
+                gs->repeat = gs->button;
+                gs->repeat_count = p->repeat_interval;
+            }
+        }
+    };
+    return;
 }
 
 void HSD_PadRenewStatus(void)
@@ -220,7 +288,7 @@ void HSD_PadRenewStatus(void)
     HSD_PadRenewRawStatus(0);
     HSD_PadRenewMasterStatus();
     HSD_PadRenewCopyStatus();
-    HSD_PadZeroQueue();
+    HSD_PadRenewGameStatus();
 }
 
 void HSD_PadReset(void)

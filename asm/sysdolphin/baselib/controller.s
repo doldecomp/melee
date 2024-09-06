@@ -1235,7 +1235,7 @@
 /* 000011B4 000011F4  4E 80 00 20 */	blr
 .endfn HSD_PadRenewCopyStatus
 
-.fn HSD_PadZeroQueue, global
+.fn HSD_PadRenewGameStatus, global
 /* 000011B8 000011F8  3C 60 00 00 */	lis r3, HSD_PadLibData@ha
 /* 000011BC 000011FC  C0 00 00 00 */	lfs f0, HSD_Controller_804DE5B0@sda21(r0)
 /* 000011C0 00001200  38 63 00 00 */	addi r3, r3, HSD_PadLibData@l
@@ -1343,7 +1343,7 @@
 /* 00001340 00001380  38 A5 00 44 */	addi r5, r5, 0x44
 /* 00001344 00001384  42 00 FE 90 */	bdnz .L_000011D4
 /* 00001348 00001388  4E 80 00 20 */	blr
-.endfn HSD_PadZeroQueue
+.endfn HSD_PadRenewGameStatus
 
 .fn HSD_PadRenewStatus, global
 /* 0000134C 0000138C  7C 08 02 A6 */	mflr r0
@@ -1353,7 +1353,7 @@
 /* 0000135C 0000139C  48 00 00 01 */	bl HSD_PadRenewRawStatus
 /* 00001360 000013A0  48 00 00 01 */	bl HSD_PadRenewMasterStatus
 /* 00001364 000013A4  48 00 00 01 */	bl HSD_PadRenewCopyStatus
-/* 00001368 000013A8  48 00 00 01 */	bl HSD_PadZeroQueue
+/* 00001368 000013A8  48 00 00 01 */	bl HSD_PadRenewGameStatus
 /* 0000136C 000013AC  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 00001370 000013B0  38 21 00 08 */	addi r1, r1, 0x8
 /* 00001374 000013B4  7C 08 03 A6 */	mtlr r0
@@ -1669,9 +1669,13 @@
 	.skip 0x110
 .endobj HSD_PadCopyStatus
 
-.obj HSD_PadRumbleData, global
-	.skip 0x114
-.endobj HSD_PadRumbleData
+.obj HSD_PadGameStatus, global
+	.skip 0x110
+.endobj HSD_PadGameStatus
+
+.obj pad, local
+    .skip 0x4
+.endobj pad
 
 # 0x00000000 - 0x00000070
 .section .sdata2, "a"
