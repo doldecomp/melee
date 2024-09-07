@@ -1406,9 +1406,13 @@ def calculate_progress(config: ProjectConfig) -> None:
                 self.objects_progress += 1
 
         def code_frac(self) -> float:
+            if self.code_total == 0:
+                return 1.0
             return self.code_progress / self.code_total
 
         def data_frac(self) -> float:
+            if self.data_total == 0:
+                return 1.0
             return self.data_progress / self.data_total
 
     progress_units: Dict[str, ProgressUnit] = {}
@@ -1461,9 +1465,9 @@ def calculate_progress(config: ProjectConfig) -> None:
     # Print human-readable progress
     print("Progress:")
 
-    def print_category(unit: Optional[ProgressUnit]) -> None:
-        if unit is None:
-            return
+    for unit in progress_units.values():
+        if unit.objects_total == 0:
+            continue
 
         code_frac = unit.code_frac()
         data_frac = unit.data_frac()
@@ -1484,21 +1488,17 @@ def calculate_progress(config: ProjectConfig) -> None:
                 )
             )
 
-    for progress in progress_units.values():
-        print_category(progress)
-
     # Generate and write progress.json
     progress_json: Dict[str, Any] = {}
-
-    def add_category(category: str, unit: ProgressUnit) -> None:
-        progress_json[category] = {
+    for id, unit in progress_units.items():
+        if unit.objects_total == 0:
+            continue
+        progress_json[id] = {
             "code": unit.code_progress,
             "code/total": unit.code_total,
             "data": unit.data_progress,
             "data/total": unit.data_total,
         }
 
-    for id, progress in progress_units.items():
-        add_category(id, progress)
     with open(out_path / "progress.json", "w", encoding="utf-8") as w:
         json.dump(progress_json, w, indent=4)
