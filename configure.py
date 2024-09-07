@@ -111,13 +111,14 @@ config = ProjectConfig()
 config.version = str(args.version)
 version_num = VERSIONS.index(config.version)
 
+debug = args.debug
+
 # Apply arguments
 config.build_dir = args.build_dir
 config.dtk_path = args.dtk
 config.objdiff_path = args.objdiff
 config.binutils_path = args.binutils
 config.compilers_path = args.compilers
-config.debug = args.debug
 config.generate_map = args.map
 config.non_matching = args.non_matching
 config.sjiswrap_path = args.sjiswrap
@@ -183,7 +184,7 @@ if config.generate_map:
     # List unused symbols when generating a map file
     config.ldflags.append("-mapunused")
 
-if config.debug:
+if debug:
     # Debug flags
     cflags_base.extend(["-sym on", "-DDEBUG=1"])
     config.ldflags.append("-g")
