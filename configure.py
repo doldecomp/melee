@@ -111,8 +111,6 @@ config = ProjectConfig()
 config.version = str(args.version)
 version_num = VERSIONS.index(config.version)
 
-debug = args.debug
-
 # Apply arguments
 config.build_dir = args.build_dir
 config.dtk_path = args.dtk
@@ -149,8 +147,13 @@ config.asflags = [
 config.ldflags = [
     "-fp hardware",
     "-nodefaults",
-    # "-listclosure", # Uncomment for Wii linkers
 ]
+if args.debug:
+    config.ldflags.append("-g")  # Or -gdwarf-2 for Wii linkers
+if args.map:
+    config.ldflags.append("-mapunused")
+    # config.ldflags.append("-listclosure") # For Wii linkers
+
 # Use for any additional files that should cause a re-configure when modified
 config.reconfig_deps = []
 
@@ -179,17 +182,11 @@ cflags_base = [
     f"-DVERSION={version_num}",
 ]
 
-# Conditionally-added flags
-if config.generate_map:
-    # List unused symbols when generating a map file
-    config.ldflags.append("-mapunused")
-
-if debug:
-    # Debug flags
+# Debug flags
+if args.debug:
+    # Or -sym dwarf-2 for Wii compilers
     cflags_base.extend(["-sym on", "-DDEBUG=1"])
-    config.ldflags.append("-g")
 else:
-    # No-debug flags
     cflags_base.append("-DNDEBUG=1")
 
 # Metrowerks library flags
