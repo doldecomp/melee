@@ -55,6 +55,7 @@ typedef u32 HSD_Pad;
 #define MPCOLL_FLAGS_B11 (1 << 11)
 #define MPCOLL_CEIL 0x6000 ///< Bits 13-14
 #define MPCOLL_FLAGS_B14 (1 << 14)
+#define MPCOLL_UNK 0x18000
 #define MPCOLL_GRPUSH (1 << 15)
 #define MPCOLL_FLAGS_B16 (1 << 16)
 #define MPCOLL_FLAGS_B23 (1 << 23)
