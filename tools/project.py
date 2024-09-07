@@ -131,7 +131,6 @@ class ProjectConfig:
         self.build_rels: bool = True  # Build REL files
         self.check_sha_path: Optional[Path] = None  # Path to version.sha1
         self.config_path: Optional[Path] = None  # Path to config.yml
-        self.debug: bool = False  # Build with debug info
         self.generate_map: bool = False  # Generate map file(s)
         self.asflags: Optional[List[str]] = None  # Assembler flags
         self.ldflags: Optional[List[str]] = None  # Linker flags
@@ -283,12 +282,7 @@ def generate_build_ninja(
     # Variables
     ###
     n.comment("Variables")
-    ldflags = " ".join(config.ldflags or [])
-    if config.generate_map:
-        ldflags += " -mapunused"
-    if config.debug:
-        ldflags += " -g"
-    n.variable("ldflags", ldflags)
+    n.variable("ldflags", " ".join(config.ldflags or []))
     if config.linker_version is None:
         sys.exit("ProjectConfig.linker_version missing")
     n.variable("mw_version", Path(config.linker_version))

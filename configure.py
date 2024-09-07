@@ -178,10 +178,17 @@ cflags_base = [
     f"-DVERSION={version_num}",
 ]
 
-# Debug flags
+# Conditionally-added flags
+if config.generate_map:
+    # List unused symbols when generating a map file
+    config.ldflags.append("-mapunused")
+
 if config.debug:
+    # Debug flags
     cflags_base.extend(["-sym on", "-DDEBUG=1"])
+    config.ldflags.append("-g")
 else:
+    # No-debug flags
     cflags_base.append("-DNDEBUG=1")
 
 # Metrowerks library flags
