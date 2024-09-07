@@ -59,6 +59,7 @@ typedef void (*ItCallback)(HSD_GObj*);
 /* 26E248 */ void it_8026E248(Item_GObj*, HSD_GObjEvent);
 /* 26E414 */ void it_8026E414(Item_GObj*, HSD_GObjEvent);
 /* 26E71C */ void it_8026E71C(Item_GObj*, HSD_GObjEvent);
+/* 26E7E0 */ void it_8026E7E0(Item_GObj*, ItCallback);
 /* 26E8C4 */ void it_8026E8C4(Item_GObj*, HSD_GObjEvent, HSD_GObjEvent);
 /* 26E9A4 */ s32 it_8026E9A4(Item_GObj*, Vec3*, Vec3*, Vec3*);
 /* 26EA20 */ s32 it_8026EA20(Item_GObj*, Vec3*, Vec3*, Vec3*, s32*, Vec3*);

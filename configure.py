@@ -962,7 +962,7 @@ config.libs = [
             Object(NonMatching, "melee/it/items/itstarrod.c"),
             Object(NonMatching, "melee/it/items/itharisen.c"),
             Object(Matching, "melee/it/items/itfflower.c"),
-            Object(NonMatching, "melee/it/items/itkinoko.c"),
+            Object(Matching, "melee/it/items/itkinoko.c"),
             Object(NonMatching, "melee/it/items/itdkinoko.c"),
             Object(Matching, "melee/it/items/ithammer.c"),
             Object(NonMatching, "melee/it/items/itwstar.c"),
