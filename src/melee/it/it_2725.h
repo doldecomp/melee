@@ -7,6 +7,7 @@
 #include <baselib/forward.h>
 
 #include "it/items/types.h"
+#include "lb/types.h"
 
 #include <placeholder.h>
 
