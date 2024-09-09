@@ -586,7 +586,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itharisen.s.o\
     $(BUILD_DIR)/src/melee/it/items/itfflower.c.o\
     $(BUILD_DIR)/src/melee/it/items/itkinoko.c.o\
-    $(BUILD_DIR)/asm/melee/it/items/itdkinoko.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itdkinoko.c.o\
     $(BUILD_DIR)/src/melee/it/items/ithammer.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itwstar.s.o\
     $(BUILD_DIR)/src/melee/it/items/itscball.c.o\
