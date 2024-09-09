@@ -65,7 +65,7 @@ bool it_80293B24(Item_GObj* gobj)
     CollData* cd = &it->x378_itemColl;
     PAD_STACK(16);
 
-    it_8026D78C(gobj, it_80293884);
+    it_8026D78C(gobj, it_80293C10);
     if (it->ground_or_air != GA_Air) {
         if ((cd->env_flags & MPCOLL_UNK)) {
             it_80276408(gobj, cd, &it->xDD4_itemVar.kinoko.x4);
@@ -130,7 +130,7 @@ bool it_80293CF0(Item_GObj* gobj)
     Item* it = GET_ITEM(gobj);
     CollData* cd = &it->x378_itemColl;
 
-    it_8026E7E0(gobj, it_802936E4);
+    it_8026E414(gobj, it_80293A70);
     if (it->ground_or_air != GA_Air && (cd->env_flags & MPCOLL_UNK)) {
         it_80276408(gobj, cd, &it->xDD4_itemVar.kinoko.x4);
     }
