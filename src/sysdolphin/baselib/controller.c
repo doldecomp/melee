@@ -205,11 +205,12 @@ void HSD_PadRenewMasterStatus(void)
     p = &HSD_PadLibData;
     intr = OSDisableInterrupts();
     if (p->qcount != 0) {
+        qread = &p->queue->stat[p->qnum];
         HSD_PadRawQueueShift(p->qnum, &p->qread);
         p->qcount -= 1;
-        for (i = 0; i < 4; i++) {
+
+        for (i = 0; i < 4; i++, qread += 1) {
             mp = &HSD_PadMasterStatus[i];
-            qread = &p->queue->stat[i];
 
             mp->last_button = qread->button;
             mp->err = qread->err;
