@@ -187,6 +187,11 @@ void grMaterial_801C8E08(HSD_GObj* gobj)
     it_802756E0(gobj);
 }
 
+void grMaterial_801C8E28(HSD_GObj* gobj)
+{
+    it_802756D0(gobj);
+}
+
 bool grMaterial_801C8E48(HSD_GObj* gobj)
 {
     Item* it = gobj->user_data;
