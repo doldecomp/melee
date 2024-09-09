@@ -60,7 +60,7 @@ struct PadLibData {
     /*0x08*/ HSD_PadData* queue;
     /*0x0C*/ s32 repeat_start;
     /*0x10*/ s32 repeat_interval;
-    /*0x14*/ u8 adc_type;
+    /*0x14*/ s8 adc_type;
     /*0x15*/ s8 adc_th;
     /*0x18*/ f32 adc_angle;
     /*0x1C*/ u8 clamp_stickType;
