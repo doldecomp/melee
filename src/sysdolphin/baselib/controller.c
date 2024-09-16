@@ -6,6 +6,7 @@
 
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/pad/pad.h>
+#include <MSL/math_ppc.h>
 
 PadLibData HSD_PadLibData;
 HSD_PadStatus HSD_PadMasterStatus[4];
@@ -96,6 +97,24 @@ static void HSD_PadClampCheck1(u8* val, u8 shift, u8 min, u8 max)
 static void HSD_PadClampCheck3(s8* x, s8* y, u8 shift, s8 min, s8 max)
 {
     f32 r;
+
+    r = sqrtf(((f32) *x * (f32) *x) + ((f32) *y * (f32) *y));
+
+    if (r < min) {
+        *y = 0;
+        *x = 0;
+        return;
+    }
+    if (r > max) {
+        *x = ((f32) *x * (f32) max) / r;
+        *y = ((f32) *y * (f32) max) / r;
+        r = sqrtf(((f32) *x * (f32) *x) + ((f32) *y * (f32) *y));
+    }
+
+    if (shift == 1 && r > 0.0F) {
+        *x = (f32) *x - (((f32) *x * (f32) min) / r);
+        *y = (f32) *y - (((f32) *y * (f32) min) / r);
+    }
 }
 
 static void HSD_PadClamp(HSD_PadStatus* mp)
