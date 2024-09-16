@@ -1310,6 +1310,7 @@ config.libs = [
         [
             Object(Matching, "dolphin/amcstubs/AmcExi2Stubs.c"),
         ],
+        extern=True,
     ),
     DolphinLib(
         "OdemuExi2",
