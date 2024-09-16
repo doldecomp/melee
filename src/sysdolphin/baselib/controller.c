@@ -123,11 +123,15 @@ static void HSD_PadClamp(HSD_PadStatus* mp)
 {
     PadLibData* p = &HSD_PadLibData;
 
-    if (p->clamp_stickType == 0) {
+    switch (p->clamp_stickType) {
+    case 0:
         HSD_PadClampCheck3(&mp->stickX, &mp->stickY, p->clamp_stickShift,
                            p->clamp_stickMin, p->clamp_stickMax);
         HSD_PadClampCheck3(&mp->subStickX, &mp->subStickY, p->clamp_stickShift,
                            p->clamp_stickMin, p->clamp_stickMax);
+        break;
+    default:
+        break;
     }
     HSD_PadClampCheck1(&mp->analogL, HSD_PadLibData.clamp_analogLRShift,
                        p->clamp_analogLRMin, p->clamp_analogLRMax);
@@ -172,11 +176,15 @@ static void HSD_PadADConvert(HSD_PadStatus* mp)
 {
     PadLibData* p = &HSD_PadLibData;
 
-    if (p->adc_type == 0) {
+    switch (p->adc_type) {
+    case 0:
         HSD_PadADConvertCheck1(mp, mp->stickX, mp->stickY, 0x10000, 0x20000,
                                0x40000, 0x80000);
         HSD_PadADConvertCheck1(mp, mp->subStickX, mp->subStickY, 0x100000,
                                0x200000, 0x400000, 0x800000);
+        break;
+    default:
+        return;
     }
 }
 
@@ -238,24 +246,23 @@ static void HSD_PadCrossDir(HSD_PadStatus* mp)
 void HSD_PadRenewMasterStatus(void)
 {
     int iVar1;
-    bool intr;
+    PadLibData* p;
     HSD_PadStatus* mp;
     PADStatus* qread;
-    PadLibData* p;
-
     int i;
 
+    bool intr;
+
     p = &HSD_PadLibData;
+    mp = &HSD_PadMasterStatus[0];
     intr = OSDisableInterrupts();
     if (p->qcount != 0) {
-        qread = &p->queue->stat[p->qnum];
+        qread = &p->queue->stat[p->qread * 4];
         HSD_PadRawQueueShift(p->qnum, &p->qread);
         p->qcount -= 1;
 
-        for (i = 0; i < 4; i++, qread += 1) {
-            mp = &HSD_PadMasterStatus[i];
-
-            mp->last_button = qread->button;
+        for (i = 0; i < 4; i++, mp += 1, qread += 1) {
+            mp->last_button = mp->button;
             mp->err = qread->err;
             if (mp->err == 0) {
                 mp->button = qread->button;
@@ -271,7 +278,7 @@ void HSD_PadRenewMasterStatus(void)
                 HSD_PadADConvert(mp);
                 HSD_PadScale(mp);
                 HSD_PadCrossDir(mp);
-            } else if (mp->err == 0xFD) {
+            } else if (mp->err == -3) {
                 mp->err = 0;
             } else {
                 mp->button = 0;
