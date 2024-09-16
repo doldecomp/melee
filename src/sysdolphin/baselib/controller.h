@@ -88,7 +88,7 @@ extern HSD_PadStatus HSD_PadGameStatus[4];
 void HSD_PadFlushQueue(HSD_FlushType);
 u8 HSD_PadGetRawQueueCount(void);
 s32 HSD_PadGetResetSwitch(void);
-void HSD_PadRenewRawStatus(int);
+void HSD_PadRenewRawStatus(bool);
 void HSD_PadRenewMasterStatus(void);
 void HSD_PadRenewGameStatus(void);
 void HSD_PadRenewStatus(void);

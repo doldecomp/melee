@@ -19,6 +19,8 @@ PadLibData HSD_PadLibData;
 HSD_PadStatus HSD_PadMasterStatus[4];
 HSD_PadStatus HSD_PadCopyStatus[4];
 HSD_PadStatus HSD_PadGameStatus[4];
+u32 pad_bit[4] = { PAD_CHAN0_BIT, PAD_CHAN1_BIT, PAD_CHAN2_BIT,
+                   PAD_CHAN3_BIT };
 
 u8 HSD_PadGetRawQueueCount(void)
 {
@@ -51,6 +53,85 @@ static void HSD_PadRawMerge(PADStatus* src1, PADStatus* src2, PADStatus* dst)
     int i;
     for (i = 0; i < 4; i++) {
         dst[i].button = src1[i].button | src2[i].button;
+    }
+}
+
+void HSD_PadRenewRawStatus(bool err_check)
+{
+    int i;
+    u32 mask;
+    PadLibData* p = &HSD_PadLibData;
+    PADStatus* qwrite;
+    PADStatus* qread;
+    PADStatus now[4];
+
+    HSD_PadRumbleInterpret();
+    PADRead(now);
+    if (err_check) {
+        int err = 0;
+        if (now[0].err) {
+            err = 1;
+            if (now[1].err) {
+                err = 2;
+                if (now[2].err) {
+                    err = 3;
+                    if (now[3].err) {
+                        err = 4;
+                    }
+                }
+            }
+        }
+        if (err == 4) {
+            return;
+        }
+    }
+
+    qwrite = p->queue[p->qwrite].stat;
+    if (p->qcount == p->qnum) {
+        switch (p->qtype) {
+        case 2:
+            break;
+        case 0:
+            HSD_PadRawQueueShift(p->qnum, &p->qread);
+            qread = p->queue[p->qread].stat;
+            if (p->qnum != 1) {
+                HSD_PadRawMerge(qwrite, qread, qread);
+            } else {
+                HSD_PadRawMerge(now, qread, now);
+            }
+            break;
+        case 1:
+            HSD_PadRawQueueShift(p->qnum, &p->qread);
+            break;
+        default:
+            goto skip;
+        }
+    } else {
+        p->qcount += 1;
+    }
+
+    for (i = 0; i < 4; i++, qwrite++) {
+        *qwrite = now[i];
+    }
+    HSD_PadRawQueueShift(p->qnum, &p->qwrite);
+
+skip:
+    mask = 0;
+    for (i = 0; i < 4; i++) {
+        if (now[i].err == -1) {
+            mask |= pad_bit[i];
+        }
+    }
+    if (mask != 0) {
+        PADReset(mask);
+    }
+    if (OSGetResetSwitchState()) {
+        p->reset_switch_status = 1;
+    } else {
+        if (p->reset_switch_status != 0) {
+            p->reset_switch = 1;
+            p->reset_switch_status = 0;
+        }
     }
 }
 
