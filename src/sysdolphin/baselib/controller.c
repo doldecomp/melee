@@ -496,3 +496,21 @@ void HSD_PadReset(void)
 
     OSRestoreInterrupts(intr);
 }
+
+void HSD_PadInit(u8 qnum, HSD_PadData* queue, u16 nb_list,
+                 HSD_PadRumbleListData* listdatap)
+{
+    int i;
+    PadLibData* p = &HSD_PadLibData;
+
+    *p = default_libinfo_data;
+    p->qnum = qnum;
+    p->queue = queue;
+    HSD_PadRumbleInit(nb_list, listdatap);
+    for (i = 0; i < 4; i++) {
+        HSD_PadMasterStatus[i] = default_status_data;
+        HSD_PadCopyStatus[i] = default_status_data;
+        HSD_PadGameStatus[i] = default_status_data;
+    }
+    PADInit();
+}

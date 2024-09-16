@@ -93,6 +93,6 @@ void HSD_PadRenewMasterStatus(void);
 void HSD_PadRenewGameStatus(void);
 void HSD_PadRenewStatus(void);
 void HSD_PadReset(void);
-void HSD_PadInit(s32, u8*, s32, HSD_PadRumbleListData*);
+void HSD_PadInit(u8, HSD_PadData*, u16, HSD_PadRumbleListData*);
 
 #endif
