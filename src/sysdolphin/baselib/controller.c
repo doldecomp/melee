@@ -68,20 +68,12 @@ void HSD_PadRenewRawStatus(bool err_check)
     HSD_PadRumbleInterpret();
     PADRead(now);
     if (err_check) {
-        int err = 0;
-        if (now[0].err) {
-            err = 1;
-            if (now[1].err) {
-                err = 2;
-                if (now[2].err) {
-                    err = 3;
-                    if (now[3].err) {
-                        err = 4;
-                    }
-                }
+        for (i = 0; i < 4; i++) {
+            if (!now[i].err) {
+                break;
             }
         }
-        if (err == 4) {
+        if (i == 4) {
             return;
         }
     }
@@ -89,8 +81,6 @@ void HSD_PadRenewRawStatus(bool err_check)
     qwrite = p->queue[p->qwrite].stat;
     if (p->qcount == p->qnum) {
         switch (p->qtype) {
-        case 2:
-            break;
         case 0:
             HSD_PadRawQueueShift(p->qnum, &p->qread);
             qread = p->queue[p->qread].stat;
@@ -103,7 +93,7 @@ void HSD_PadRenewRawStatus(bool err_check)
         case 1:
             HSD_PadRawQueueShift(p->qnum, &p->qread);
             break;
-        default:
+        case 2:
             goto skip;
         }
     } else {

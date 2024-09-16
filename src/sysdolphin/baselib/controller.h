@@ -21,7 +21,6 @@ typedef enum _HSD_FlushType {
 
 struct HSD_PadData {
     PADStatus stat[4];
-    u32 rumble_mask;
 };
 
 struct HSD_PadStatus {
