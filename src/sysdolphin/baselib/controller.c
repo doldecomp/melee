@@ -3,10 +3,12 @@
 #include "placeholder.h"
 
 #include "baselib/rumble.h"
+#include "baselib/util.h"
 
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/pad/pad.h>
 #include <MSL/math_ppc.h>
+#include <MSL/trigf.h>
 
 PadLibData HSD_PadLibData;
 HSD_PadStatus HSD_PadMasterStatus[4];
@@ -141,7 +143,29 @@ static void HSD_PadADConvertCheck1(HSD_PadStatus* mp, s8 x, s8 y, u32 up,
                                    u32 down, u32 left, u32 right)
 {
     PadLibData* p = &HSD_PadLibData;
-    f32 ha, r, a;
+    f32 r, a, ha;
+    PAD_STACK(8);
+
+    r = sqrtf(((f32) x * (f32) x) + ((f32) y * (f32) y));
+    a = atan2f_check(y, x);
+    ha = 0.5F * p->adc_angle;
+    if (!(r < p->adc_th)) {
+        if (a < -2.356194490192345 + ha) {
+            mp->button |= left;
+        }
+        if (a >= -2.356194490192345 - ha && a <= -0.7853981633974483 + ha) {
+            mp->button |= down;
+        }
+        if (a > -0.7853981633974483 - ha && a < 0.7853981633974483 + ha) {
+            mp->button |= right;
+        }
+        if (a >= 0.7853981633974483 - ha && a <= 2.356194490192345 + ha) {
+            mp->button |= up;
+        }
+        if (a > 2.356194490192345 - ha) {
+            mp->button |= left;
+        }
+    }
 }
 
 static void HSD_PadADConvert(HSD_PadStatus* mp)
