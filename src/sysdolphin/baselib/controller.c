@@ -10,6 +10,11 @@
 #include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
+HSD_PadStatus default_status_data = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 };
+PadLibData default_libinfo_data = { 0,    0,    0, 0,    0, 0,    0x2D, 8,
+                                    0,    0x1E, 0, 0,    0, 0x7F, 0,    0,
+                                    0xFF, 0,    0, 0xFF, 0, 0x7F, 0xFF, 0xFF };
 PadLibData HSD_PadLibData;
 HSD_PadStatus HSD_PadMasterStatus[4];
 HSD_PadStatus HSD_PadCopyStatus[4];
