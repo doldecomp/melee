@@ -1,6 +1,5 @@
-#include <platform.h>
-
 #include <dolphin/os/OSRtc.h>
+#include <dolphin/types.h>
 
 u32 ErrorTable[18] = { 0x00000000, 0x00023A00, 0x00062800, 0x00030200,
                        0x00031100, 0x00052000, 0x00052001, 0x00052100,
