@@ -1,6 +1,9 @@
 #ifndef _DOLPHIN_AX_H_
 #define _DOLPHIN_AX_H_
 
+#include <dolphin/dsp.h>
+#include <dolphin/types.h>
+
 typedef struct _AXPBMIX {
     /* 0x00 */ u16 vL;
     /* 0x02 */ u16 vDeltaL;

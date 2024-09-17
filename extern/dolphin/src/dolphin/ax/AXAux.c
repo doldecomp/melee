@@ -69,7 +69,11 @@ void __AXGetAuxAOutput(u32* p)
 
 void __AXGetAuxBInput(u32* p)
 {
-    *p = (u32) &__AXBufferAuxB[__AXAuxDspWritePosition][0];
+    if (__AXCallbackAuxA != NULL) {
+        *p = (u32) &__AXBufferAuxB[__AXAuxDspWritePosition][0];
+    } else {
+        *p = 0;
+    }
 }
 
 void __AXGetAuxBOutput(u32* p)
