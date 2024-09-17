@@ -1,4 +1,4 @@
-#ifdef MWERKS_GEKKO
+
 #include "mem_funcs.h"
 
 #pragma ANSI_strict off
@@ -12,6 +12,7 @@
 
 void __copy_longs_aligned(void* dst, const void* src, size_t n)
 {
+#if defined(__MWERKS__)
     unsigned long i;
 
     i = (-(unsigned long) dst) & 3;
@@ -63,12 +64,14 @@ void __copy_longs_aligned(void* dst, const void* src, size_t n)
             deref_auto_inc(cpd) = deref_auto_inc(cps);
         } while (--n);
     }
+#endif
 
     return;
 }
 
 void __copy_longs_rev_aligned(void* dst, const void* src, size_t n)
 {
+#if defined(__MWERKS__)
     unsigned long i;
 
     cps = ((unsigned char*) src) + n;
@@ -114,12 +117,14 @@ void __copy_longs_rev_aligned(void* dst, const void* src, size_t n)
             *--cpd = *--cps;
         } while (--n);
     }
+#endif
 
     return;
 }
 
 void __copy_longs_unaligned(void* dst, const void* src, size_t n)
 {
+#if defined(__MWERKS__)
     unsigned long i, v1, v2;
     unsigned int src_offset, left_shift, right_shift;
 
@@ -173,12 +178,14 @@ void __copy_longs_unaligned(void* dst, const void* src, size_t n)
             deref_auto_inc(cpd) = deref_auto_inc(cps);
         } while (--n);
     }
+#endif
 
     return;
 }
 
 void __copy_longs_rev_unaligned(void* dst, const void* src, size_t n)
 {
+#if defined(__MWERKS__)
     unsigned long i, v1, v2;
     unsigned int src_offset, left_shift, right_shift;
 
@@ -226,8 +233,6 @@ void __copy_longs_rev_unaligned(void* dst, const void* src, size_t n)
             *--cpd = *--cps;
         } while (--n);
     }
-
+#endif
     return;
 }
-
-#endif
