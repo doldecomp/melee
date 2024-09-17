@@ -428,6 +428,8 @@ void __GXFifoInit(void)
     __OSUnmaskInterrupts(0x4000);
     __GXCurrentThread = OSGetCurrentThread();
     GXOverflowSuspendInProgress = FALSE;
+    CPUFifo = NULL;
+    GPFifo = NULL;
 }
 
 static void __GXFifoReadEnable(void)
