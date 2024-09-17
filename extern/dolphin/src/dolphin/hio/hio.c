@@ -104,53 +104,68 @@ BOOL HIOInit(s32 chan, HIOCallback callback)
     u32 cmd;
     u32 id;
 
-    if (Chan == -1) {
-        Chan = chan;
-        ExiCallback = callback;
-        TxCallback = NULL;
-        RxCallback = NULL;
-        if (chan < 2) {
-            while (EXIProbeEx(Chan) == 0) {
-            }
-            if (EXIAttach(Chan, ExtHandler) == 0) {
-                Chan = -1;
-                return 0;
-            }
+    if (__OSGetDIConfig() == 0xFF) {
+        Chan = -1;
+        Dev = 0U;
+        return 0;
+    }
+    if (Chan != -1) {
+        return 1;
+    }
+
+    Chan = chan;
+    ExiCallback = callback;
+    TxCallback = NULL;
+    RxCallback = NULL;
+    if (chan < 2 && Dev == 0) {
+        while (EXIProbeEx(Chan) == 0) {
         }
-        if (EXILock(Chan, 0, 0) == 0) {
-            EXIDetach(Chan);
+        if (EXIAttach(Chan, ExtHandler) == 0) {
             Chan = -1;
+            Dev = 0;
             return 0;
         }
-        if (EXISelect(Chan, 0, 0) == 0) {
-            EXIUnlock(Chan);
-            EXIDetach(Chan);
-            Chan = -1;
-            return 0;
-        }
-        cmd = 0;
-        err = 0;
-        err |= !EXIImm(Chan, &cmd, 2, 1, 0);
-        err |= !EXISync(Chan);
-        err |= !EXIImm(Chan, &id, 4, 0, 0);
-        err |= !EXISync(Chan);
-        err |= !EXIDeselect(Chan);
+    }
+    if (EXILock(Chan, Dev, 0) == 0) {
+        EXIDetach(Chan);
+        Chan = -1;
+        Dev = 0;
+        return 0;
+    }
+    if (EXISelect(Chan, Dev, 0) == 0) {
         EXIUnlock(Chan);
-        if (err != 0 || id != 0x1010000) {
-            if (chan < 2) {
-                EXIDetach(Chan);
-            }
-            EXIUnlock(Chan);
-            Chan = -1;
-            return 0;
+        EXIDetach(Chan);
+        Chan = -1;
+        Dev = 0;
+        return 0;
+    }
+    cmd = 0;
+    err = 0;
+    err |= !EXIImm(Chan, &cmd, 2, 1, 0);
+    err |= !EXISync(Chan);
+    err |= !EXIImm(Chan, &id, 4, 0, 0);
+    err |= !EXISync(Chan);
+    err |= !EXIDeselect(Chan);
+    EXIUnlock(Chan);
+    if (err != 0 || id != 0x1010000) {
+        if (chan < 2 && Dev == 0) {
+            EXIDetach(Chan);
         }
-        if (ExiCallback) {
-            if (chan < 2) {
+        EXIUnlock(Chan);
+        Chan = -1;
+        Dev = 0;
+        return 0;
+    }
+    if (ExiCallback) {
+        if (chan < 2) {
+            if (Dev == 0) {
                 EXISetExiCallback(Chan, ExiHandler);
             } else {
-                __OSSetInterruptHandler(0x19, DbgHandler);
-                __OSUnmaskInterrupts(0x40);
+                EXISetExiCallback(2, ExiHandler);
             }
+        } else {
+            __OSSetInterruptHandler(0x19, DbgHandler);
+            __OSUnmaskInterrupts(0x40);
         }
     }
     return 1;
@@ -161,13 +176,13 @@ BOOL HIOReadMailbox(u32 *word)
     int err;
     u32 cmd;
 
-    if (Chan == -1) {
+    if (Chan == -1 || __OSGetDIConfig() == 0xFF) {
         return 0;
     }
-    if (EXILock(Chan, 0, 0) == 0) {
+    if (EXILock(Chan, Dev, 0) == 0) {
         return 0;
     }
-    if (EXISelect(Chan, 0, 4) == 0) {
+    if (EXISelect(Chan, Dev, 4) == 0) {
         EXIUnlock(Chan);
         return 0;
     }
@@ -187,13 +202,13 @@ BOOL HIOWriteMailbox(u32 word)
     int err;
     u32 cmd;
 
-    if (Chan == -1) {
+    if (Chan == -1 || __OSGetDIConfig() == 0xFF) {
         return 0;
     }
-    if (EXILock(Chan, 0, 0) == 0) {
+    if (EXILock(Chan, Dev, 0) == 0) {
         return 0;
     }
-    if (EXISelect(Chan, 0, 4) == 0) {
+    if (EXISelect(Chan, Dev, 4) == 0) {
         EXIUnlock(Chan);
         return 0;
     }
@@ -211,14 +226,14 @@ BOOL HIORead(u32 addr, void *buffer, s32 size)
     int err;
     u32 cmd;
 
-    if (Chan == -1) {
+    if (Chan == -1 || __OSGetDIConfig() == 0xFF) {
         return 0;
     }
     ASSERTLINE(0x145, (addr % 4) == 0);
-    if (EXILock(Chan, 0, 0) == 0) {
+    if (EXILock(Chan, Dev, 0) == 0) {
         return 0;
     }
-    if (EXISelect(Chan, 0, 4) == 0) {
+    if (EXISelect(Chan, Dev, 4) == 0) {
         EXIUnlock(Chan);
         return 0;
     }
@@ -238,14 +253,14 @@ BOOL HIOWrite(u32 addr, void *buffer, s32 size)
     int err;
     u32 cmd;
 
-    if (Chan == -1) {
+    if (Chan == -1 || __OSGetDIConfig() == 0xFF) {
         return 0;
     }
     ASSERTLINE(0x167, (addr % 4) == 0);
-    if (EXILock(Chan, 0, 0) == 0) {
+    if (EXILock(Chan, Dev, 0) == 0) {
         return 0;
     }
-    if (EXISelect(Chan, 0, 4) == 0) {
+    if (EXISelect(Chan, Dev, 4) == 0) {
         EXIUnlock(Chan);
         return 0;
     }
@@ -265,15 +280,15 @@ BOOL HIOReadAsync(u32 addr, void *buffer, s32 size, HIOCallback callback)
     int err;
     u32 cmd;
 
-    if (Chan == -1) {
+    if (Chan == -1 || __OSGetDIConfig() == 0xFF) {
         return 0;
     }
     ASSERTLINE(0x189, (addr % 4) == 0);
     RxCallback = callback;
-    if (EXILock(Chan, 0, 0) == 0) {
+    if (EXILock(Chan, Dev, 0) == 0) {
         return 0;
     }
-    if (EXISelect(Chan, 0, 4) == 0) {
+    if (EXISelect(Chan, Dev, 4) == 0) {
         EXIUnlock(Chan);
         return 0;
     }
@@ -290,15 +305,15 @@ BOOL HIOWriteAsync(u32 addr, void *buffer, s32 size, HIOCallback callback)
     int err;
     u32 cmd;
 
-    if (Chan == -1) {
+    if (Chan == -1 || __OSGetDIConfig() == 0xFF) {
         return 0;
     }
     ASSERTLINE(0x1AA, (addr % 4) == 0);
     TxCallback = callback;
-    if (EXILock(Chan, 0, 0) == 0) {
+    if (EXILock(Chan, Dev, 0) == 0) {
         return 0;
     }
-    if (EXISelect(Chan, 0, 4) == 0) {
+    if (EXISelect(Chan, Dev, 4) == 0) {
         EXIUnlock(Chan);
         return 0;
     }
@@ -315,13 +330,13 @@ BOOL HIOReadStatus(u32 *status)
     int err;
     u32 cmd;
 
-    if (Chan == -1) {
+    if (Chan == -1 || __OSGetDIConfig() == 0xFF) {
         return 0;
     }
-    if (EXILock(Chan, 0, 0) == 0) {
+    if (EXILock(Chan, Dev, 0) == 0) {
         return 0;
     }
-    if (EXISelect(Chan, 0, 4) == 0) {
+    if (EXISelect(Chan, Dev, 4) == 0) {
         EXIUnlock(Chan);
         return 0;
     }
