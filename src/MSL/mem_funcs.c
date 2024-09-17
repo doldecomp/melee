@@ -1,4 +1,4 @@
-
+#ifdef MWERKS_GEKKO
 #include "mem_funcs.h"
 
 #pragma ANSI_strict off
@@ -229,3 +229,5 @@ void __copy_longs_rev_unaligned(void* dst, const void* src, size_t n)
 
     return;
 }
+
+#endif
