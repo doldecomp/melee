@@ -1,9 +1,6 @@
 #include <dolphin/axfx.h>
 #include <dolphin/os/OSAlloc.h>
 
-void* AXFXAllocFunction(unsigned long long);
-void AXFXFreeFunction(void*);
-
 void* (*__AXFXAlloc)(unsigned long long) = AXFXAllocFunction;
 void (*__AXFXFree)(void*) = AXFXFreeFunction;
 
