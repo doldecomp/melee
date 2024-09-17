@@ -1,17 +1,18 @@
-#include <dolphin/exi.h>
-#include <dolphin/os.h>
-#include <macros.h>
-
 #include "__os.h"
 
-// End of each month in standard year
-static int YearDays[MONTH_MAX] = {0,   31,  59,  90,  120, 151,
-                                  181, 212, 243, 273, 304, 334};
-// End of each month in leap year
-static int LeapYearDays[MONTH_MAX] = {0,   31,  60,  91,  121, 152,
-                                      182, 213, 244, 274, 305, 335};
+#include <macros.h>
+#include <dolphin/exi.h>
+#include <dolphin/os.h>
 
-asm long long OSGetTime(void) {
+// End of each month in standard year
+static int YearDays[MONTH_MAX] = { 0,   31,  59,  90,  120, 151,
+                                   181, 212, 243, 273, 304, 334 };
+// End of each month in leap year
+static int LeapYearDays[MONTH_MAX] = { 0,   31,  60,  91,  121, 152,
+                                       182, 213, 244, 274, 305, 335 };
+
+asm long long OSGetTime(void)
+{
     // clang-format off
 jump:
     nofralloc
@@ -28,7 +29,8 @@ jump:
     // clang-format on
 }
 
-asm unsigned long OSGetTick(void){
+asm unsigned long OSGetTick(void)
+{
     // clang-format off
     nofralloc
 
@@ -37,7 +39,8 @@ asm unsigned long OSGetTick(void){
     // clang-format on
 }
 
-asm static void __SetTime(long long time) {
+asm static void __SetTime(long long time)
+{
     // clang-format off
     nofralloc
     li r5, 0
@@ -48,11 +51,12 @@ asm static void __SetTime(long long time) {
     // clang-format on
 }
 
-void __OSSetTime(long long time) {
+void __OSSetTime(long long time)
+{
     int enabled;
-    long long * timeAdjustAddr;
+    long long* timeAdjustAddr;
 
-    timeAdjustAddr = (long long *)0x800030D8;
+    timeAdjustAddr = (long long*) 0x800030D8;
     enabled = OSDisableInterrupts();
 
     *timeAdjustAddr += OSGetTime() - time;
@@ -61,12 +65,13 @@ void __OSSetTime(long long time) {
     OSRestoreInterrupts(enabled);
 }
 
-long long __OSGetSystemTime() {
+long long __OSGetSystemTime()
+{
     int enabled;
-    long long * timeAdjustAddr;
+    long long* timeAdjustAddr;
     long long result;
 
-    timeAdjustAddr = (long long *)0x800030D8;
+    timeAdjustAddr = (long long*) 0x800030D8;
     enabled = OSDisableInterrupts();
 
     result = OSGetTime() + *timeAdjustAddr;
@@ -74,7 +79,22 @@ long long __OSGetSystemTime() {
     return result;
 }
 
-asm void __OSSetTick(register unsigned long newTicks) {
+long long __OSTimeToSystemTime(s64 time)
+{
+    int enabled;
+    long long* timeAdjustAddr;
+    long long sysTime;
+    u8 _[4];
+
+    timeAdjustAddr = (long long*) 0x800030D8;
+    enabled = OSDisableInterrupts();
+    sysTime = *timeAdjustAddr + time;
+    OSRestoreInterrupts(enabled);
+    return sysTime;
+}
+
+asm void __OSSetTick(register unsigned long newTicks)
+{
     // clang-format off
     nofralloc
     mttbl newTicks
@@ -82,37 +102,42 @@ asm void __OSSetTick(register unsigned long newTicks) {
     // clang-format on
 }
 
-static int IsLeapYear(int year) {
+static int IsLeapYear(int year)
+{
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
 
-static int GetYearDays(int year, int mon) {
-    int * md = (IsLeapYear(year)) ? LeapYearDays : YearDays;
+static int GetYearDays(int year, int mon)
+{
+    int* md = (IsLeapYear(year)) ? LeapYearDays : YearDays;
 
     return md[mon];
 }
 
-static int GetLeapDays(int year) {
+static int GetLeapDays(int year)
+{
     ASSERTLINE(260, 0 <= year);
-    
+
     if (year < 1) {
         return 0;
     }
     return (year + 3) / 4 - (year - 1) / 100 + (year - 1) / 400;
 }
 
-static void GetDates(int days, OSCalendarTime* td) {
+static void GetDates(int days, OSCalendarTime* td)
+{
     int year;
     int n;
     int month;
-    int * md;
+    int* md;
 
     ASSERTLINE(285, 0 <= days);
 
     td->wday = (days + 6) % WEEK_DAY_MAX;
 
     for (year = days / YEAR_DAY_MAX;
-         days < (n = year * YEAR_DAY_MAX + GetLeapDays(year)); year--) {
+         days < (n = year * YEAR_DAY_MAX + GetLeapDays(year)); year--)
+    {
         ;
     }
 
@@ -128,12 +153,13 @@ static void GetDates(int days, OSCalendarTime* td) {
     td->mday = days - md[month] + 1;
 }
 
-void OSTicksToCalendarTime(long long ticks, OSCalendarTime* td) {
+void OSTicksToCalendarTime(long long ticks, OSCalendarTime* td)
+{
     int days;
     int secs;
     long long d;
 
-    d = ticks % OS_SEC_TO_TICKS(1);    
+    d = ticks % OS_SEC_TO_TICKS(1);
     if (d < 0) {
         d += OS_SEC_TO_TICKS(1);
         ASSERTLINE(330, 0 <= d);
@@ -148,9 +174,10 @@ void OSTicksToCalendarTime(long long ticks, OSCalendarTime* td) {
     ticks -= d;
 
     ASSERTLINE(338, ticks % OSSecondsToTicks(1) == 0);
-    ASSERTLINE(342, 0 <= OSTicksToSeconds(ticks) / 86400 + BIAS && OSTicksToSeconds(ticks) / 86400 + BIAS <= INT_MAX);
+    ASSERTLINE(342, 0 <= OSTicksToSeconds(ticks) / 86400 + BIAS &&
+                        OSTicksToSeconds(ticks) / 86400 + BIAS <= INT_MAX);
 
-    days = (OS_TICKS_TO_SEC(ticks) / SECS_IN_DAY) + BIAS;    
+    days = (OS_TICKS_TO_SEC(ticks) / SECS_IN_DAY) + BIAS;
     secs = OS_TICKS_TO_SEC(ticks) % SECS_IN_DAY;
     if (secs < 0) {
         days -= 1;
@@ -164,7 +191,8 @@ void OSTicksToCalendarTime(long long ticks, OSCalendarTime* td) {
     td->sec = secs % 60;
 }
 
-OSTime OSCalendarTimeToTicks(OSCalendarTime* td) {
+OSTime OSCalendarTimeToTicks(OSCalendarTime* td)
+{
     long long secs;
     int ov_mon;
     int mon;
@@ -178,8 +206,9 @@ OSTime OSCalendarTimeToTicks(OSCalendarTime* td) {
         ov_mon--;
     }
 
-    ASSERTLINE(0x182, (ov_mon <= 0 && 0 <= td->year + ov_mon) || (0 < ov_mon && td->year <= INT_MAX - ov_mon));
-    
+    ASSERTLINE(0x182, (ov_mon <= 0 && 0 <= td->year + ov_mon) ||
+                          (0 < ov_mon && td->year <= INT_MAX - ov_mon));
+
     year = td->year + ov_mon;
 
     // clang-format off
@@ -191,6 +220,6 @@ OSTime OSCalendarTimeToTicks(OSCalendarTime* td) {
               (s64)0xEB1E1BF80ULL;
     // clang-format on
 
-    return OS_SEC_TO_TICKS(secs) + OS_MSEC_TO_TICKS((s64)td->msec) +
-           OS_USEC_TO_TICKS((s64)td->usec);
+    return OS_SEC_TO_TICKS(secs) + OS_MSEC_TO_TICKS((s64) td->msec) +
+           OS_USEC_TO_TICKS((s64) td->usec);
 }
