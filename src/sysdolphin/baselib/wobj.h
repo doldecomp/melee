@@ -52,6 +52,11 @@ static inline void HSD_WObjUnref(HSD_WObj* wobj)
     }
 }
 
+static inline void HSD_WObjClearFlags(HSD_WObj* wobj, u32 flags)
+{
+    wobj->flags &= ~flags;
+}
+
 void HSD_WObjRemoveAnim(HSD_WObj* wobj);
 void HSD_WObjReqAnim(HSD_WObj* wobj, f32 frame);
 void HSD_WObjAddAnim(HSD_WObj* wobj, HSD_WObjAnim* anim);

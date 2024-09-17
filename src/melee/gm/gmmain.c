@@ -60,7 +60,7 @@ enum {
 static u32 arena_size;
 static bool gmMain_804D6594;
 
-static u8 gmMain_8046B108[0xF0];
+static HSD_PadData gmMain_8046B108[5];
 static HSD_PadRumbleListData gmMain_8046B1F8[12];
 
 static void gmMain_8015FD24(void)

@@ -6,9 +6,18 @@
 
 #include "it/items/types.h"
 
-/* 293A08 */ void it_80293A08(Item_GObj*);
-/* 293D6C */ bool it_80293D6C(Item_GObj*);
-/* 293D74 */ void it_80293D74(Item_GObj*, Item_GObj*);
-/* 3F6130 */ extern ItemStateTable it_803F6130[];
+void it_80293A08(Item_GObj*);
+void it_80293A70(Item_GObj*);
+bool it_80293AE0(Item_GObj*);
+void it_80293AE8(Item_GObj*);
+bool it_80293B24(Item_GObj*);
+void it_80293BE8(Item_GObj*);
+void it_80293C10(Item_GObj*);
+bool it_80293C38(Item_GObj*);
+void it_80293C40(Item_GObj*);
+bool it_80293CF0(Item_GObj*);
+bool it_80293D6C(Item_GObj*);
+void it_80293D74(Item_GObj*, Item_GObj*);
+extern ItemStateTable it_803F6130[];
 
 #endif
