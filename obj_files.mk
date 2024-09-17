@@ -785,7 +785,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/MSL/ctype.c.o\
     $(BUILD_DIR)/asm/MSL/direct_io.s.o\
     $(BUILD_DIR)/src/MSL/cstring.c.o\
-    $(BUILD_DIR)/asm/MSL/mem_funcs.s.o\
+    $(BUILD_DIR)/src/MSL/mem_funcs.c.o\
     $(BUILD_DIR)/asm/MSL/printf.s.o\
     $(BUILD_DIR)/src/MSL/rand.c.o\
     $(BUILD_DIR)/src/MSL/string.c.o\

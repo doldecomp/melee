@@ -1193,7 +1193,7 @@ config.libs = [
             Object(Matching, "MSL/ctype.c"),
             Object(NonMatching, "MSL/direct_io.c"),
             Object(Matching, "MSL/cstring.c"),
-            Object(NonMatching, "MSL/mem_funcs.c"),
+            Object(Matching, "MSL/mem_funcs.c"),
             Object(NonMatching, "MSL/printf.c"),
             Object(Matching, "MSL/rand.c"),
             Object(Matching, "MSL/string.c"),
