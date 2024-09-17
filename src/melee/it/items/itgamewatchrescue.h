@@ -2,9 +2,10 @@
 #define GALE01_2C8038
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2C8038 */ HSD_GObj* it_802C8038(Item_GObj*, Vec3*, s32, s32, float, float);
 /* 2C8158 */ void it_802C8158(Item_GObj*);

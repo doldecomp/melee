@@ -4,11 +4,11 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
 
+#include <dolphin/mtx.h>
 #include <baselib/objalloc.h>
 
 struct ItemStateDesc;
@@ -46,7 +46,7 @@ struct ItemStateDesc;
 /* 26ADC0 */ void Item_8026ADC0(HSD_GObj* gobj);
 /* 26AE10 */ void Item_OnUserDataRemove(void* user_data);
 /* 26AE10 */ void lbl_8026AE10(void* user_data);
-/* 26AE60 */ uint Item_8026AE60(void);
+/* 26AE60 */ u32 Item_8026AE60(void);
 /* 26AE84 */ void Item_8026AE84(Item* item_data, enum_t sfx, int pan,
                                 int volume);
 /* 26AF0C */ void Item_8026AF0C(Item* item_data, enum_t sfx, int pan,

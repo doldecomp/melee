@@ -4,9 +4,10 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2BD158 */ void it_802BD158(Item_GObj* gobj, Vec3*, int, float);
 /* 2BD240 */ bool it_802BD240(Item_GObj*);

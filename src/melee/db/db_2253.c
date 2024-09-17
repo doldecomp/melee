@@ -29,8 +29,8 @@
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/card/CARDMount.h>
 #include <dolphin/db/db.h>
+#include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
-#include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/vi/vi.h>
 #include <baselib/controller.h>
@@ -1316,15 +1316,15 @@ void fn_802279E8(HSD_GObj* camera, Vec3* camera_pos, Vec3* camera_interest,
         if ((pitch + new_pitch) < 1.0f) {
             new_pitch = 1.0f - pitch;
         }
-        PSVECCrossProduct(&up_vec, &forward_vec, &axis);
-        PSVECNormalize(&axis, &axis);
-        PSMTXRotAxisRad(mtx, &axis, 0.017453292f * new_pitch);
-        PSMTXMUltiVec(mtx, &forward_vec, &forward_vec);
+        VECCrossProduct(&up_vec, &forward_vec, &axis);
+        VECNormalize(&axis, &axis);
+        MTXRotAxisRad(mtx, &axis, 0.017453292f * new_pitch);
+        MTXMultVec(mtx, &forward_vec, &forward_vec);
         eye_dist = HSD_CObjGetEyeDistance(cobj);
-        PSMTXRotAxisRad(mtx, &up_vec, 0.017453292f * (2.0f * cstick_x));
-        PSMTXMUltiVec(mtx, &forward_vec, &forward_vec);
-        PSVECScale(&forward_vec, &forward_vec, eye_dist);
-        PSVECSubtract(camera_interest, &forward_vec, camera_pos);
+        MTXRotAxisRad(mtx, &up_vec, 0.017453292f * (2.0f * cstick_x));
+        MTXMultVec(mtx, &forward_vec, &forward_vec);
+        VECScale(&forward_vec, &forward_vec, eye_dist);
+        VECSubtract(camera_interest, &forward_vec, camera_pos);
     }
 }
 
@@ -1348,10 +1348,10 @@ static void fn_80227CAC(HSD_GObj* camera, f32 cstick_y)
     if ((0.0f != cstick_y) && (0.0f != cstick_y)) {
         cobj = GET_COBJ(camera);
         HSD_CObjGetEyeVector(cobj, &forward);
-        PSVECScale(&forward, &forward,
-                   HSD_CObjGetEyeDistance(cobj) * (1.0f - 0.05f * cstick_y));
-        PSVECSubtract(&cm_80453004.mode8_int_pos, &forward,
-                      &cm_80453004.mode8_eye_pos);
+        VECScale(&forward, &forward,
+                 HSD_CObjGetEyeDistance(cobj) * (1.0f - 0.05f * cstick_y));
+        VECSubtract(&cm_80453004.mode8_int_pos, &forward,
+                    &cm_80453004.mode8_eye_pos);
     }
 }
 
@@ -1382,19 +1382,19 @@ static void fn_80227FE0(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
                                              HSD_CObjGetFov(cobj) * 0.5f)));
         if (cstick_x != 0.0f) {
             HSD_CObjGetLeftVector(cobj, &left_vec);
-            PSVECScale(&left_vec, &left_vec, scale_factor * cstick_x);
+            VECScale(&left_vec, &left_vec, scale_factor * cstick_x);
             temp_r3 = &cm_80453004.mode8_int_pos;
-            PSVECAdd(temp_r3, &left_vec, temp_r3);
+            VECAdd(temp_r3, &left_vec, temp_r3);
             temp_r3_2 = &cm_80453004.mode8_eye_pos;
-            PSVECAdd(temp_r3_2, &left_vec, temp_r3_2);
+            VECAdd(temp_r3_2, &left_vec, temp_r3_2);
         }
         if (cstick_y != 0.0f) {
             HSD_CObjGetUpVector(cobj, &up_vec);
-            PSVECScale(&up_vec, &up_vec, -scale_factor * cstick_y);
+            VECScale(&up_vec, &up_vec, -scale_factor * cstick_y);
             temp_r3_3 = &cm_80453004.mode8_int_pos;
-            PSVECAdd(&cm_80453004.mode8_int_pos, &up_vec, temp_r3_3);
+            VECAdd(&cm_80453004.mode8_int_pos, &up_vec, temp_r3_3);
             temp_r3_4 = &cm_80453004.mode8_eye_pos;
-            PSVECAdd(temp_r3_4, &up_vec, temp_r3_4);
+            VECAdd(temp_r3_4, &up_vec, temp_r3_4);
         }
     }
 }
@@ -1823,8 +1823,8 @@ static void fn_UpdateObjAllocLimiter(int player)
             (db_ButtonsPressed(player) & HSD_PAD_DPADUP))
         {
             if (db_804D6BA0.b0 == 0) {
-                HSD_ObjAllocSetNumLimit(&Effect_AllocData,
-                                        HSD_ObjAllocGetPeak(&Effect_AllocData));
+                HSD_ObjAllocSetNumLimit(
+                    &Effect_AllocData, HSD_ObjAllocGetPeak(&Effect_AllocData));
                 HSD_ObjAllocEnableNumLimit(&Effect_AllocData);
 
                 db_804D6BA0.b0 = 1;

@@ -4,8 +4,7 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include <dolphin/gx/forward.h>
-
+#include <dolphin/gx.h>
 #include <dolphin/gx/types.h>
 
 GXFifoObj* GXInit(GXFifoObj* fifo, u32 size);

@@ -11,7 +11,7 @@
 #include "ft/types.h"
 #include "pl/player.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 static void doAnim(HSD_GObj* gobj);
 

@@ -3,13 +3,14 @@
 
 #include <placeholder.h>
 
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "gm_1601.h" // IWYU pragma: export
 #include "platform.h"
 
 #include "gm/types.h"
+
+#include <dolphin/mtx.h>
 
 struct lbl_8046B488_t {
     /* 0x000 */ char pad_0[0x10];

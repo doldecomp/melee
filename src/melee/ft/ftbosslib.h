@@ -5,8 +5,9 @@
 
 #include "ft/forward.h"
 #include "ftMasterHand/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 15BD20 */ void ftBossLib_8015BD20(HSD_GObj*);
 /* 15BD24 */ void ftBossLib_8015BD24(s32, float*, float, s32, s32, s32);

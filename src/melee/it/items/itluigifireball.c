@@ -13,7 +13,7 @@
 
 #include <common_structs.h>
 #include <math_ppc.h>
-#include <dolphin/mtx/vec.h>
+#include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 
 /* 2C027C */ static void it_802C027C(Item_GObj* gobj);

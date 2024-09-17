@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "ithammer.h"
 
 #include "ithammerhead.h"
@@ -15,6 +13,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
+#include <dolphin/mtx.h>
 #include <baselib/random.h>
 
 typedef struct itHammerData {

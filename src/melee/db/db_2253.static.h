@@ -94,8 +94,8 @@ static char db_string_803EAC10[0x78] =
     "CZakoShot=%d Zako=%d ZakoShot=%d Shot=%d Etc=%d\n";
 /* 3EAD40 */ static int db_SoundToggleOrder[4] = { 3, 2, 0, 1 };
 /* 3EAE08 */ static struct {
-    struct GXColor bg;
-    struct GXColor fg;
+    GXColor bg;
+    GXColor fg;
 } db_TextColors[2] = {
     { { 0x00, 0x00, 0x00, 0x00 }, { 0xFF, 0x00, 0x00, 0xFF } },
     { { 0x80, 0x40, 0xFF, 0x80 }, { 0x00, 0x00, 0x00, 0xFF } }

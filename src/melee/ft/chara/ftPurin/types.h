@@ -6,7 +6,7 @@
 
 #include <baselib/forward.h>
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct ftPurin_FighterVars {
     /* 0x222C */ u32 x222C;

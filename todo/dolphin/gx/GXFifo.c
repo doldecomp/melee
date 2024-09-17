@@ -1,7 +1,6 @@
 #include <platform.h>
 
-#include <dolphin/gx/forward.h>
-
+#include <dolphin/gx.h>
 #include <dolphin/gx/__GXFifo.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__types.h>

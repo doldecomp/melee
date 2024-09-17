@@ -7,7 +7,7 @@
 
 #include "it/items/types.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 /* 28E738 */ void it_8028E738(Item_GObj*);
 /* 28E904 */ void it_8028E904(Item_GObj*);

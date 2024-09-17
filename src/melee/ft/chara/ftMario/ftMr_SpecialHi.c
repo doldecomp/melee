@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "ftMr_SpecialHi.h"
 
 #include "inlines.h"
@@ -18,6 +16,7 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 void ftMr_SpecialHi_Enter(HSD_GObj* gobj)
 {

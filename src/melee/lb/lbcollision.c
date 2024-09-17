@@ -3,7 +3,6 @@
 
 #include "ft/forward.h"
 #include "lb/forward.h"
-#include <dolphin/gx/forward.h>
 
 #include "lbcollision.h"
 
@@ -14,11 +13,8 @@
 #include "lb/types.h"
 
 #include <math.h>
-#include <dolphin/gx/types.h>
+#include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/mtxvec.h>
-#include <dolphin/mtx/types.h>
-#include <dolphin/mtx/vec.h>
 #include <baselib/debug.h>
 #include <baselib/jobj.h>
 #include <baselib/mtx.h>
@@ -72,8 +68,8 @@ extern struct unk {
 
 int lbColl_80005BB0(HitCapsule* arg0, int arg1)
 {
-    uint temp_r0;
-    uint temp_r6;
+    u32 temp_r0;
+    u32 temp_r6;
 
     temp_r0 = arg0->sfx_kind;
     if (temp_r0 == 0xD) {
@@ -1398,12 +1394,12 @@ void lbColl_800077A0(Vec3* a, MtxPtr arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
         normal_x.x = x;
         normal_x.y = 0.0f;
         normal_x.z = 0.0f;
-        PSMTXMUltiVec(arg1, &normal_x, &normal_x);
+        PSMTXMultVec(arg1, &normal_x, &normal_x);
 
         multi_mtx.x = 0.0f;
         multi_mtx.y = 0.0f;
         multi_mtx.z = 0.0f;
-        PSMTXMUltiVec(arg1, &multi_mtx, &multi_mtx);
+        PSMTXMultVec(arg1, &multi_mtx, &multi_mtx);
 
         {
             float dist = sqrDistance(&normal_x, &multi_mtx);
@@ -1941,7 +1937,7 @@ void lbColl_80008A5C(HitCapsule* hit)
         size_t i;
         for (i = 0; i < ARRAY_SIZE(hit->victims_1); i++) {
             if (hit->victims_1[i].victim != NULL) {
-                uint temp_r4 = hit->victims_1[i].x4;
+                u32 temp_r4 = hit->victims_1[i].x4;
                 if (temp_r4 != 0) {
                     hit->victims_1[i].x4 = temp_r4 - 1;
                     if (hit->victims_1[i].x4 == 0) {
@@ -1952,7 +1948,7 @@ void lbColl_80008A5C(HitCapsule* hit)
         }
         for (i = 0; i < ARRAY_SIZE(hit->victims_2); i++) {
             if (hit->victims_2[i].victim != 0) {
-                uint temp_r4 = hit->victims_2[i].x4;
+                u32 temp_r4 = hit->victims_2[i].x4;
                 if (temp_r4 != 0) {
                     hit->victims_2[i].x4 = temp_r4 - 1;
                     if (hit->victims_2[i].x4 == 0) {
@@ -2085,8 +2081,8 @@ bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2, Mtx arg3, f32 arg8)
                 var_r28 = HSD_JObjGetMtxPtr(hurt->bone);
             }
             HSD_MtxInverse(var_r28, sp40);
-            PSMTXMUltiVec(sp40, &sp94, &sp28);
-            PSMTXMUltiVec(sp40, &sp88, &sp34);
+            PSMTXMultVec(sp40, &sp94, &sp28);
+            PSMTXMultVec(sp40, &sp88, &sp34);
             lbColl_800096B4(var_r28, sp28, sp34, temp_r3, temp_r31_2,
                             temp_f31);
             return 1;
@@ -2164,8 +2160,8 @@ bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2, float arg3)
             var_r28 = HSD_JObjGetMtxPtr(hurt->bone);
         }
         HSD_MtxInverse(var_r28, sp3C);
-        PSMTXMUltiVec(sp3C, &sp90, &sp6C);
-        PSMTXMUltiVec(sp3C, &sp84, &sp78);
+        PSMTXMultVec(sp3C, &sp90, &sp6C);
+        PSMTXMultVec(sp3C, &sp84, &sp78);
         lbColl_800096B4(var_r28, sp6C, sp78, temp_r3, (u8*) temp_r31_2,
                         temp_f31);
         return 1;
@@ -2210,8 +2206,8 @@ bool lbColl_8000A95C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
             var_r31 = HSD_JObjGetMtxPtr(hit->bone);
         }
         HSD_MtxInverse(var_r31, sp3C);
-        PSMTXMUltiVec(sp3C, &sp90, &sp24);
-        PSMTXMUltiVec(sp3C, &sp84, &sp30);
+        PSMTXMultVec(sp3C, &sp90, &sp24);
+        PSMTXMultVec(sp3C, &sp84, &sp30);
         lbColl_800096B4(var_r31, sp24, sp30, lbColl_804D36CC, lbColl_804D36D0,
                         temp_f31);
         return 1;

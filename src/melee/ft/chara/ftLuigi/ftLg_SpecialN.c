@@ -18,7 +18,7 @@
 #include "it/items/itluigifireball.h"
 #include "lb/lb_00B0.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 // SpecialN/SpecialAirN (Fireball)
 #define FTLUIGI_SPECIALN_COLL_FLAG Ft_MF_UpdateCmd | Ft_MF_SkipColAnim

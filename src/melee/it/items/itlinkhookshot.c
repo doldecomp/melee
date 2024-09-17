@@ -2,7 +2,7 @@
 
 #include "itlinkhookshot.h"
 
-#include "dolphin/mtx/vec.h"
+#include "dolphin/mtx.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_AirCatch.h"
 #include "ft/chara/ftCommon/ftCo_CliffJump.h"

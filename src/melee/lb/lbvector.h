@@ -1,9 +1,9 @@
 #ifndef GALE01_00D2EC
 #define GALE01_00D2EC
 
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
+#include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 
 static float lbVector_Len(Vec3* vec);

@@ -1,6 +1,5 @@
-#include <dolphin/gx/forward.h>
-
 #include <dolphin/base/PPCArch.h>
+#include <dolphin/gx.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__types.h>
 #include <dolphin/gx/GXGeometry.h>

@@ -3,12 +3,11 @@
 
 #include <platform.h>
 
-#include <dolphin/gx/forward.h>
-
+#include <dolphin/gx.h>
 #include <dolphin/gx/__types.h>
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/types.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 typedef struct _GXLightObj {
     char x0[0xC];  // at 0x00

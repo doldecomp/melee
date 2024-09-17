@@ -1,11 +1,10 @@
 #include <placeholder.h>
 
-#include <dolphin/gx/forward.h>
-
+#include <dolphin/gx.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__types.h>
 #include <dolphin/gx/GXFrameBuf.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 Vec2 const GXFrameBuf_804DE220 = { 256.0F, 0.0F };
 Vec2 const GXFrameBuf_804DE228 = { 176.0F, 0.0F };

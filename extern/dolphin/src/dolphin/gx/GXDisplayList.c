@@ -1,9 +1,9 @@
 #include "__gx.h"
 
 #include <macros.h>
+#include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/os.h>
-#include <libc/string.h>
 
 static struct __GXFifoObj DisplayListFifo;
 static volatile struct __GXFifoObj* OldCPUFifo;

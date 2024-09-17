@@ -5,12 +5,11 @@
 #include <placeholder.h>
 
 #include "cm/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "cm/types.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 
 /* 028B9C */ void Camera_80028B9C(int);
@@ -18,7 +17,7 @@
 /* 029020 */ CameraBox* Camera_80029020(void);
 /* 029044 */ CameraBox* Camera_80029044(int);
 /* 0290D4 */ void Camera_800290D4(CameraBox*);
-/* 029124 */ u32 Camera_80029124(Vec3*, s32);
+/* 029124 */ u32 Camera_80029124(Vec*, s32);
 /* 02928C */ s32 Camera_8002928C(CameraBox*);
 /* 0293E0 */ UNK_RET Camera_800293E0(UNK_PARAMS);
 /* 02958C */ UNK_RET Camera_8002958C(UNK_PARAMS);
@@ -55,9 +54,9 @@
 /* 02E234 */ UNK_RET Camera_8002E234(UNK_PARAMS);
 /* 02E490 */ void Camera_8002E490(void);
 /* 02E6FC */ void Camera_8002E6FC(u8);
-/* 02E818 */ void Camera_8002E818(Vec3*);
-/* 02E948 */ void Camera_8002E948(bool (*)(Vec3*));
-/* 02EA64 */ void Camera_8002EA64(Vec3*);
+/* 02E818 */ void Camera_8002E818(Vec*);
+/* 02E948 */ void Camera_8002E948(bool (*)(Vec*));
+/* 02EA64 */ void Camera_8002EA64(Vec*);
 /* 02EB5C */ void Camera_8002EB5C(float);
 /* 02EC7C */ void Camera_8002EC7C(float);
 /* 02ED9C */ void Camera_8002ED9C(float);
@@ -95,7 +94,7 @@
 /* 030730 */ void Camera_80030730(f32 arg8);
 /* 030740 */ void Camera_SetBackgroundColor(u8 r, u8 g, u8 b);
 /* 030758 */ UNK_RET Camera_80030758(UNK_PARAMS);
-/* 030788 */ void Camera_80030788(Vec3*);
+/* 030788 */ void Camera_80030788(Vec*);
 /* 0307AC */ UNK_RET Camera_800307AC(UNK_PARAMS);
 /* 0307D0 */ UNK_RET Camera_800307D0(UNK_PARAMS);
 /* 030A50 */ HSD_GObj* Camera_80030A50(void);
@@ -121,7 +120,7 @@
 /* 030DF8 */ UNK_RET Camera_80030DF8(UNK_PARAMS);
 /* 030E10 */ UNK_RET Camera_80030E10(UNK_PARAMS);
 /* 030E34 */ void Camera_80030E34(f32 arg8);
-/* 030E44 */ void Camera_80030E44(enum_t, Vec3*);
+/* 030E44 */ void Camera_80030E44(enum_t, Vec*);
 /* 031044 */ UNK_RET Camera_80031044(UNK_PARAMS);
 /* 031060 */ enum_t Camera_80031060(void);
 /* 031074 */ void Camera_80031074(u8);

@@ -24,7 +24,7 @@
 #include "lb/lbvector.h"
 
 #include <common_structs.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <MSL/math.h>
 #include <MSL/math_ppc.h>
 

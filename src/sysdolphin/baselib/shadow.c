@@ -18,15 +18,8 @@
 
 #include <__mem.h>
 #include <math.h>
-#include <dolphin/gx/GXAttr.h>
-#include <dolphin/gx/GXFrameBuf.h>
-#include <dolphin/gx/GXGeometry.h>
-#include <dolphin/gx/GXMisc.h>
-#include <dolphin/gx/GXTexture.h>
-#include <dolphin/gx/GXTransform.h>
-#include <dolphin/gx/GXVert.h>
+#include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/vec.h>
 #include <MSL/trigf.h>
 
 HSD_ObjAllocData shadow_alloc_data;

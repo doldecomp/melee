@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftDonkey/ftDk_SpecialS.h"
 
@@ -16,6 +15,8 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftDonkey/types.h"
+
+#include <dolphin/mtx.h>
 
 void ftDk_SpecialS_Enter(HSD_GObj* gobj)
 {

@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "ftCo_Down.h"
 
 #include "ftCo_DownAttack.h"
@@ -14,6 +12,8 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 097EAC */ static void ftCo_80098324(ftCo_GObj* gobj, FtMotionId msid);
 

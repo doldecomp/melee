@@ -11,14 +11,8 @@
 #include "baselib/tev.h"
 #include "baselib/util.h"
 
-#include <dolphin/gx/GXAttr.h>
-#include <dolphin/gx/GXGeometry.h>
-#include <dolphin/gx/GXPixel.h>
-#include <dolphin/gx/GXTev.h>
-#include <dolphin/gx/GXTexture.h>
-#include <dolphin/gx/GXTransform.h>
-#include <dolphin/gx/GXVert.h>
-#include <dolphin/mtx/vec.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 #include <Runtime/__mem.h>
 
 #define FLT_EPSILON 1.00000001335e-10F

@@ -20,7 +20,7 @@
 #include "lb/lb_00F9.h"
 
 #include <common_structs.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 #define FTFOX_SPECIALLW_COLL_FLAG                                             \
     Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_UpdateCmd | Ft_MF_SkipColAnim | \

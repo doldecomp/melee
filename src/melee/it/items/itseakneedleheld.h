@@ -2,9 +2,10 @@
 #define GALE01_2B18B0
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2B18B0 */ UNK_RET it_802B18B0(UNK_PARAMS);
 /* 2B19AC */ Item_GObj* it_802B19AC(Item_GObj*, Vec3* cur_pos, u32, u32,

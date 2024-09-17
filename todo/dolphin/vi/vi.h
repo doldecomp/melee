@@ -4,8 +4,7 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include <dolphin/gx/forward.h>
-
+#include <dolphin/gx.h>
 #include <dolphin/gx/types.h>
 
 #define VIPadFrameBufferWidth(width) ((u16) (((u16) (width) + 15) & ~15))

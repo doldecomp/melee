@@ -5,10 +5,11 @@
 
 #include "it/forward.h"
 #include "lb/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 26B1D4 */ float it_8026B1D4(Item_GObj* gobj, HitCapsule* itemHitboxUnk);
 /* 26B294 */ void it_8026B294(Item_GObj* gobj, Vec3* pos);

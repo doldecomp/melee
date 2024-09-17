@@ -4,7 +4,7 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 void GXProject(f32 x, // model coordinates
                f32 y, f32 z,

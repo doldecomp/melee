@@ -252,7 +252,7 @@
 
 #include <math.h>
 #include <math_ppc.h>
-#include <dolphin/mtx/vec.h>
+#include <dolphin/mtx.h>
 #include <baselib/dobj.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjproc.h>
@@ -4705,7 +4705,7 @@ struct r13_ColAnimStruct* it_804D6D04;
 // s32 it_804D6D08; // Not sure of type
 // s32 it_804D6D0C; // Not sure of type
 // u32 it_804D6D10; // Not sure of type
-// uint it_804D6D14; // Not sure of type
+// u32it_804D6D14; // Not sure of type
 // u32 it_804D6D18; // Not sure of type
 // u8 it_804D6D1C; // Not sure of type
 // Article* it_804D6D20[]; // Not sure of type

@@ -11,7 +11,7 @@
 #include "ft/ftcommon.h"
 #include "ftSamus/types.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 static void ftSamus_ClearThrowFlagsUnk(HSD_GObj* gobj)
 {

@@ -3,11 +3,10 @@
 
 #include <platform.h>
 
-#include <dolphin/gx/forward.h>
-
+#include <dolphin/gx.h>
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/types.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <dolphin/os/OSContext.h>
 
 #define GX_WRITE_U8(ub) WGPIPE.u8 = ((u8*) &ub);

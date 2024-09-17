@@ -2,7 +2,8 @@
 #define GALE01_0BD9E0
 
 #include "ftKirby/forward.h"
-#include <dolphin/mtx/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 0BD9E0 */ FighterKind ftCo_800BD9E0(ftKb_GObj* gobj,
                                        Fighter_GObj* victim_gobj);

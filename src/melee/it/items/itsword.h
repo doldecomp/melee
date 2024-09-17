@@ -5,10 +5,11 @@
 
 #include "it/forward.h"
 #include "it/items/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 284D54 */ Item_GObj* itSword_Spawn(Vec3* pos);
 /* 284E10 */ void it_80284E10(HSD_GObj*, int);

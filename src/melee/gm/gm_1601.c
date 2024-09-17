@@ -466,7 +466,7 @@ void fn_80168F7C(void)
 
 /// #gm_801692BC
 
-void gm_801692E8(uint ticks, struct datetime* datetime)
+void gm_801692E8(u32 ticks, datetime* datetime)
 {
     OSCalendarTime tm;
 

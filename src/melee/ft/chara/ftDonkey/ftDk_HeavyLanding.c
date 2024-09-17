@@ -14,7 +14,7 @@
 #include "it/item.h"
 
 #include <common_structs.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 void ftDk_HeavyLanding_Phys(HSD_GObj* gobj)
 {

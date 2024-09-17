@@ -4,14 +4,13 @@
 #include <platform.h>
 
 #include "baselib/forward.h"
-#include <dolphin/gx/forward.h>
 
 #include "baselib/archive.h"
 #include "baselib/jobj.h"
 
+#include <dolphin/gx.h>
 #include <dolphin/gx/GXEnum.h>
-#include <dolphin/gx/types.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct _psAppSRT;
 struct HSD_Fog;

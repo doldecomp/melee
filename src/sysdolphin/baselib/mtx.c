@@ -4,7 +4,6 @@
 #include "math.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/vec.h>
 #include <MSL/trigf.h>
 
 #define EPSILON 0.0000000001f
@@ -291,31 +290,31 @@ void HSD_MtxGetScale(Mtx arg0, Vec3* arg1)
     vec1.y = arg0[1][0];
     vec1.z = arg0[2][0];
 
-    arg1->x = PSVECMag(&vec1);
+    arg1->x = VECMag(&vec1);
     PSVECNormalize(&vec1, &vec1);
 
     vec2.x = arg0[0][1];
     vec2.y = arg0[1][1];
     vec2.z = arg0[2][1];
 
-    PSVECScale(&vec1, &vec4, PSVECDotProduct(&vec1, &vec2));
-    PSVECSubtract(&vec2, &vec4, &vec2);
-    arg1->y = PSVECMag(&vec2);
+    VECScale(&vec1, &vec4, VECDotProduct(&vec1, &vec2));
+    VECSubtract(&vec2, &vec4, &vec2);
+    arg1->y = VECMag(&vec2);
     PSVECNormalize(&vec2, &vec2);
 
     vec3.x = arg0[0][2];
     vec3.y = arg0[1][2];
     vec3.z = arg0[2][2];
 
-    PSVECScale(&vec2, &vec4, PSVECDotProduct(&vec2, &vec3));
-    PSVECSubtract(&vec3, &vec4, &vec3);
-    PSVECScale(&vec1, &vec4, PSVECDotProduct(&vec1, &vec3));
-    PSVECSubtract(&vec3, &vec4, &vec3);
-    arg1->z = PSVECMag(&vec3);
-    PSVECNormalize(&vec3, &vec3);
-    PSVECCrossProduct(&vec2, &vec3, &vec4);
+    VECScale(&vec2, &vec4, VECDotProduct(&vec2, &vec3));
+    VECSubtract(&vec3, &vec4, &vec3);
+    VECScale(&vec1, &vec4, VECDotProduct(&vec1, &vec3));
+    VECSubtract(&vec3, &vec4, &vec3);
+    arg1->z = VECMag(&vec3);
+    VECNormalize(&vec3, &vec3);
+    VECCrossProduct(&vec2, &vec3, &vec4);
 
-    if (PSVECDotProduct(&vec1, &vec4) < 0.0) {
+    if (VECDotProduct(&vec1, &vec4) < 0.0) {
         scale = -1.0;
         arg1->x *= scale;
         arg1->y *= scale;
@@ -359,7 +358,7 @@ void HSD_MkRotationMtx(Mtx arg0, Vec3* arg1)
 
 void HSD_Mtx_8037A230(Mtx arg0, Quaternion* arg1)
 {
-    PSMTXQuat(arg0, arg1);
+    MTXQuat(arg0, arg1);
 }
 
 void HSD_MtxSRT(Mtx m, Vec3* vec1, Vec3* vec2, Vec3* vec3, Vec3* vec4)
@@ -417,23 +416,23 @@ void HSD_MtxSRTQuat(Mtx arg0, Vec3* arg1, Quaternion* arg2, Vec3* arg3,
 {
     Mtx temp;
 
-    PSMTXScale(arg0, arg1->x, arg1->y, arg1->z);
+    MTXScale(arg0, arg1->x, arg1->y, arg1->z);
 
     if (arg4 != NULL) {
-        PSMTXScale(temp, arg4->x, arg4->y, arg4->z);
-        PSMTXConcat(temp, arg0, arg0);
+        MTXScale(temp, arg4->x, arg4->y, arg4->z);
+        MTXConcat(temp, arg0, arg0);
     }
 
-    PSMTXQuat(temp, arg2);
-    PSMTXConcat(temp, arg0, arg0);
+    MTXQuat(temp, arg2);
+    MTXConcat(temp, arg0, arg0);
 
     if (arg4 != NULL) {
-        PSMTXScale(temp, 1.0 / arg4->x, 1.0 / arg4->y, 1.0 / arg4->z);
-        PSMTXConcat(temp, arg0, arg0);
+        MTXScale(temp, 1.0 / arg4->x, 1.0 / arg4->y, 1.0 / arg4->z);
+        MTXConcat(temp, arg0, arg0);
     }
 
-    PSMTXTrans(temp, arg3->x, arg3->y, arg3->z);
-    PSMTXConcat(temp, arg0, arg0);
+    MTXTrans(temp, arg3->x, arg3->y, arg3->z);
+    MTXConcat(temp, arg0, arg0);
 }
 
 // might be a fakematch?

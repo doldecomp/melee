@@ -5,12 +5,12 @@
 
 #include "ftFox/forward.h" // IWYU pragma: export
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "lb/types.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 struct ftFox_FighterVars {
     /* 0x222C */ HSD_GObj* x222C_blasterGObj;

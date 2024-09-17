@@ -17,8 +17,6 @@
 #include "lb/lbgx.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/mtxvec.h>
-#include <dolphin/mtx/types.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/state.h>

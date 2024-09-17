@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "lb/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftCo_YoshiEgg.h"
 
@@ -25,6 +24,7 @@
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>

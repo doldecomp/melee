@@ -4,8 +4,9 @@
 #include <platform.h>
 
 #include "lb/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 void grTPikachu_80222E7C(bool);
 void grTPikachu_80222E80(void);

@@ -4,10 +4,11 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "it/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 26C47C */ void it_8026C47C(struct it_8026C47C_arg0_t*);
 /* 26C530 */ s32 it_8026C530(s32, HSD_ObjAllocUnk6*, s32, s32);

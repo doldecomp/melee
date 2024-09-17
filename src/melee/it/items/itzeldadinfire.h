@@ -5,9 +5,10 @@
 
 #include "ft/forward.h"
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2C3AF0 */ Fighter_GObj* it_802C3AF0(Item_GObj*);
 /* 2C3AFC */ UNK_RET it_802C3AFC(UNK_PARAMS);

@@ -2,7 +2,6 @@
 
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftCo_PassiveWall.h"
 
@@ -32,6 +31,7 @@
 #include "lb/lb_00CE.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 bool ftCo_800C1D38(ftCo_GObj* gobj)
 {

@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "ftLink/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ftLk_SpecialS.h"
@@ -27,6 +26,7 @@
 #include <common_structs.h>
 #include <math.h>
 #include <trigf.h>
+#include <dolphin/mtx.h>
 
 typedef enum cmd_var_idx {
     cmd_unk0_bool,

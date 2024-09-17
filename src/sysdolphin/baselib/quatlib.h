@@ -3,8 +3,6 @@
 
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include <dolphin/mtx.h>
 
 void EulerToQuat(Vec3*, Quaternion*);

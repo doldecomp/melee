@@ -3,8 +3,7 @@
 
 #include <platform.h>
 
-#include <dolphin/gx/forward.h>
-
+#include <dolphin/gx.h>
 #include <dolphin/gx/__types.h>
 
 void __GXFifoInit(void);

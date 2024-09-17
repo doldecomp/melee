@@ -4,10 +4,11 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 29CD18 */ void it_8029CD18(HSD_GObj*, int);
 /* 29CD78 */ HSD_JObj* it_8029CD78(Item_GObj*);

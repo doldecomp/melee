@@ -6,8 +6,9 @@
 
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 0D14E4 */ int Fighter_SuperMushroomApply(ftCo_GObj* gobj);
 /* 0D15D0 */ void ftCo_800D15D0(Fighter_GObj*);

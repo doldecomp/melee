@@ -4,11 +4,12 @@
 #include <platform.h>
 
 #include "baselib/forward.h" // IWYU pragma: export
-#include <dolphin/mtx/forward.h>
 
 #include "baselib/class.h"
 #include "baselib/fobj.h"
 #include "baselib/mobj.h"
+
+#include <dolphin/mtx.h>
 
 #define DOBJ_HIDDEN 0x1
 

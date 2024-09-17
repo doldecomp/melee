@@ -295,6 +295,8 @@ system_includes_base = [
     "src",
     "src/MSL",
     "src/Runtime",
+    "extern/dolphin/src/",
+    "extern/dolphin/include",
     f"build/{config.version}/include",
 ]
 
@@ -365,6 +367,7 @@ def DolphinLib(
             "-I-",
             "-Iextern/dolphin/include",
             "-Iextern/dolphin/include/libc",
+            "-Isrc/MSL",
             "-ir extern/dolphin/src",
             "-DRELEASE",
         ]
@@ -399,7 +402,6 @@ def SysdolphinLib(lib_name: str, objects: Objects) -> Library:
         ],
         system_includes=[
             *system_includes_base,
-            "src/dolphin",
         ],
         category="hsd",
     )
@@ -416,7 +418,6 @@ def MeleeLib(lib_name: str, objects: Objects) -> Library:
         ],
         system_includes=[
             *system_includes_base,
-            "src/dolphin",
             "src/sysdolphin",
         ],
         category="game",

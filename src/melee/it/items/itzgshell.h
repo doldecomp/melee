@@ -5,9 +5,10 @@
 #include <placeholder.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2DDB38 */ UNK_RET it_802DDB38(UNK_PARAMS);
 /* 2DDBE8 */ UNK_RET it_802DDBE8(UNK_PARAMS);

@@ -306,7 +306,7 @@ void GXSetTevSwapModeTable(GXTevSwapSel table, GXTevColorChan red,
     gx->bpSent = 0;
 }
 
-void GXSetTevClampMode(void)
+void GXSetTevClampMode(int arg1, int arg2)
 {
     ASSERTMSGLINE(0x290, 0,
                   "GXSetTevClampMode: not available on this hardware");

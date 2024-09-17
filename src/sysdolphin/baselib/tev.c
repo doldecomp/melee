@@ -1,17 +1,11 @@
 #include <placeholder.h>
 
-#include <dolphin/gx/forward.h>
-
 #include "tev.h"
 
 #include "debug.h"
 
 #include <__mem.h>
-#include <dolphin/gx/GXAttr.h>
-#include <dolphin/gx/GXEnum.h>
-#include <dolphin/gx/GXLight.h>
-#include <dolphin/gx/GXTev.h>
-#include <dolphin/gx/types.h>
+#include <dolphin/gx.h>
 
 static struct {
     GXColorS10 a;

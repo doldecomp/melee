@@ -1,9 +1,9 @@
 #ifndef _DOLPHIN_CARD_H_
 #define _DOLPHIN_CARD_H_
 
-#include <dolphin/os.h>
 #include <dolphin/dsp.h>
 #include <dolphin/dvd.h>
+#include <dolphin/os.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -16,8 +16,7 @@ extern "C" {
 typedef void (*CARDCallback)(s32 chan, s32 result);
 
 // todo: sort into headers
-typedef struct CARDFileInfo
-{
+typedef struct CARDFileInfo {
     /*0x00*/ s32 chan;
     /*0x04*/ s32 fileNo;
     /*0x08*/ s32 offset;
@@ -25,8 +24,7 @@ typedef struct CARDFileInfo
     /*0x10*/ u16 iBlock;
 } CARDFileInfo;
 
-typedef struct CARDDir
-{
+typedef struct CARDDir {
     /*0x00*/ u8 gameName[4];
     /*0x04*/ u8 company[2];
     /*0x06*/ u8 _padding0;
@@ -44,8 +42,7 @@ typedef struct CARDDir
     u32 commentAddr; // 0xffffffff if not used
 } CARDDir;
 
-typedef struct CARDControl
-{
+typedef struct CARDControl {
     /*0x00*/ BOOL attached;
     /*0x04*/ s32 result;
     /*0x08*/ u16 size;
@@ -59,9 +56,9 @@ typedef struct CARDControl
     /*0x28*/ u32 scramble;
     /*0x2C*/ int formatStep;
     DSPTaskInfo task;
-    void *workArea;
-    /*0x84*/ CARDDir *currentDir;
-    u16 *currentFat;
+    void* workArea;
+    /*0x84*/ CARDDir* currentDir;
+    u16* currentFat;
     OSThreadQueue threadQueue;
     u8 cmd[9];
     s32 cmdlen;
@@ -69,11 +66,11 @@ typedef struct CARDControl
     int retry;
     int repeat;
     u32 addr;
-    void *buffer;
+    void* buffer;
     s32 xferred;
     u16 freeNo;
     u16 startBlock;
-    /*0xC0*/ CARDFileInfo *fileInfo;
+    /*0xC0*/ CARDFileInfo* fileInfo;
     CARDCallback extCallback;
     CARDCallback txCallback;
     CARDCallback exiCallback;
@@ -85,10 +82,10 @@ typedef struct CARDControl
 } CARDControl;
 
 typedef struct CARDDecParam {
-    /* 0x00 */ u8 * inputAddr;
+    /* 0x00 */ u8* inputAddr;
     /* 0x04 */ u32 inputLength;
     /* 0x08 */ u32 aramAddr;
-    /* 0x0C */ u8 * outputAddr;
+    /* 0x0C */ u8* outputAddr;
 } CARDDecParam;
 
 typedef struct CARDID {
@@ -115,10 +112,10 @@ typedef struct CARDID {
 #include <dolphin/card/CARDStat.h>
 #include <dolphin/card/CARDWrite.h>
 
-#define CARD_ATTR_PUBLIC  0x04u
+#define CARD_ATTR_PUBLIC 0x04u
 #define CARD_ATTR_NO_COPY 0x08u
 #define CARD_ATTR_NO_MOVE 0x10u
-#define CARD_ATTR_GLOBAL  0x20u
+#define CARD_ATTR_GLOBAL 0x20u
 #define CARD_ATTR_COMPANY 0x40u
 
 #define CARD_FAT_AVAIL 0x0000u
@@ -145,25 +142,26 @@ typedef struct CARDID {
 #define CARD_STAT_SPEED_SLOW 3
 #define CARD_STAT_SPEED_MASK 3
 
-#define CARD_RESULT_UNLOCKED       1
-#define CARD_RESULT_READY          0
-#define CARD_RESULT_BUSY          -1
-#define CARD_RESULT_WRONGDEVICE   -2
-#define CARD_RESULT_NOCARD        -3
-#define CARD_RESULT_NOFILE        -4
-#define CARD_RESULT_IOERROR       -5
-#define CARD_RESULT_BROKEN        -6
-#define CARD_RESULT_EXIST         -7
-#define CARD_RESULT_NOENT         -8
-#define CARD_RESULT_INSSPACE      -9
-#define CARD_RESULT_NOPERM       -10
-#define CARD_RESULT_LIMIT        -11
-#define CARD_RESULT_NAMETOOLONG  -12
-#define CARD_RESULT_ENCODING     -13
-#define CARD_RESULT_CANCELED     -14
+#define CARD_RESULT_UNLOCKED 1
+#define CARD_RESULT_READY 0
+#define CARD_RESULT_BUSY -1
+#define CARD_RESULT_WRONGDEVICE -2
+#define CARD_RESULT_NOCARD -3
+#define CARD_RESULT_NOFILE -4
+#define CARD_RESULT_IOERROR -5
+#define CARD_RESULT_BROKEN -6
+#define CARD_RESULT_EXIST -7
+#define CARD_RESULT_NOENT -8
+#define CARD_RESULT_INSSPACE -9
+#define CARD_RESULT_NOPERM -10
+#define CARD_RESULT_LIMIT -11
+#define CARD_RESULT_NAMETOOLONG -12
+#define CARD_RESULT_ENCODING -13
+#define CARD_RESULT_CANCELED -14
 #define CARD_RESULT_FATAL_ERROR -128
 
-#define CARDIsValidBlockNo(card, blockNo) ((blockNo) >= CARD_NUM_SYSTEM_BLOCK && (blockNo) < (card)->cBlock)
+#define CARDIsValidBlockNo(card, blockNo)                                     \
+    ((blockNo) >= CARD_NUM_SYSTEM_BLOCK && (blockNo) < (card)->cBlock)
 
 #define CARD_READ_SIZE 512
 #define CARD_COMMENT_SIZE 64
@@ -184,15 +182,18 @@ typedef struct CARDID {
 #define CARD_STAT_BANNER_RGB5A3 2
 #define CARD_STAT_BANNER_MASK 3
 
-#define CARDGetBannerFormat(stat) (((stat)->bannerFormat) & CARD_STAT_BANNER_MASK)
-#define CARDGetIconFormat(stat, n) (((stat)->iconFormat >> (2 * (n))) & CARD_STAT_ICON_MASK)
-#define CARDGetDirCheck(dir) ((CARDDirCheck *)&(dir)[CARD_MAX_FILE])
+#define CARDGetBannerFormat(stat)                                             \
+    (((stat)->bannerFormat) & CARD_STAT_BANNER_MASK)
+#define CARDGetIconFormat(stat, n)                                            \
+    (((stat)->iconFormat >> (2 * (n))) & CARD_STAT_ICON_MASK)
+#define CARDGetDirCheck(dir) ((CARDDirCheck*) &(dir)[CARD_MAX_FILE])
 
 void CARDInit(void);
 s32 CARDGetResultCode(s32 chan);
 s32 CARDCheckAsync(s32 chan, CARDCallback callback);
-s32 CARDFreeBlocks(s32 chan, s32 *byteNotUsed, s32 *filesNotUsed);
-s32 CARDRenameAsync(s32 chan, const char *oldName, const char *newName, CARDCallback callback);
+s32 CARDFreeBlocks(s32 chan, s32* byteNotUsed, s32* filesNotUsed);
+s32 CARDRenameAsync(s32 chan, const char* oldName, const char* newName,
+                    CARDCallback callback);
 
 #ifdef __cplusplus
 }

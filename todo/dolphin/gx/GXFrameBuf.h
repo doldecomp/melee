@@ -3,8 +3,7 @@
 
 #include <platform.h>
 
-#include <dolphin/gx/forward.h>
-
+#include <dolphin/gx.h>
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/types.h>
 

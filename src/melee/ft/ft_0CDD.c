@@ -16,7 +16,7 @@
 #include "it/items/itlgun.h"
 #include "lb/lb_00B0.h"
 
-#include <dolphin/mtx/mtxvec.h>
+#include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 #include <melee/it/item.h>
 
@@ -139,7 +139,7 @@ void ftCo_800CDE94(Fighter* fighter, Vec3* arg1, Vec3* arg2)
     // lbColl_JObjSetupMatrix(fighterbone_jobj);
     // PSMTXMUltiVec((f32 (*)[4]) fighterbone_jobj->mtx[0], (Vec3* ) &sp18,
     // arg2);
-    PSMTXMUltiVec(fighterbone_jobj->mtx, &pos, arg2);
+    MTXMultVec(fighterbone_jobj->mtx, &pos, arg2);
     // PSMTXMUltiVec(fighterbone_jobj->mtx, pos, arg1);
 }
 

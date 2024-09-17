@@ -1,7 +1,5 @@
 #include <placeholder.h>
 
-#include <dolphin/gx/forward.h>
-
 #include "cobj.h"
 
 #include "aobj.h"
@@ -15,12 +13,10 @@
 #include "wobj.h"
 
 #include <math.h>
+#include <dolphin/gx.h>
 #include <dolphin/gx/GXTransform.h>
-#include <dolphin/gx/types.h>
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/mtxvec.h>
-#include <dolphin/mtx/vec.h>
-#include <dolphin/vi/vi.h>
+#include <dolphin/vi.h>
 #include <MetroTRK/intrinsics.h>
 #include <MSL/trigf.h>
 
@@ -223,11 +219,10 @@ GXProjectionType makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
         break;
     case PROJ_ORTHO:
         projection_type = GX_ORTHOGRAPHIC;
-        C_MTXOrtho(mtx, cobj->projection_param.perspective.fov,
-                   cobj->projection_param.perspective.aspect,
-                   cobj->projection_param.frustum.left,
-                   cobj->projection_param.frustum.right, cobj->near,
-                   cobj->far);
+        MTXOrtho(mtx, cobj->projection_param.perspective.fov,
+                 cobj->projection_param.perspective.aspect,
+                 cobj->projection_param.frustum.left,
+                 cobj->projection_param.frustum.right, cobj->near, cobj->far);
         break;
     }
     return projection_type;
@@ -365,13 +360,13 @@ static bool setupTopHalfCamera(HSD_CObj* cobj)
             break;
         case PROJ_ORTHO:
             projection_type = GX_ORTHOGRAPHIC;
-            C_MTXOrtho(
-                p, cobj->projection_param.perspective.fov,
-                -(h_scale * (cobj->projection_param.perspective.fov -
-                             cobj->projection_param.perspective.aspect) -
-                  cobj->projection_param.perspective.fov),
-                cobj->projection_param.frustum.left,
-                cobj->projection_param.frustum.right, cobj->near, cobj->far);
+            MTXOrtho(p, cobj->projection_param.perspective.fov,
+                     -(h_scale * (cobj->projection_param.perspective.fov -
+                                  cobj->projection_param.perspective.aspect) -
+                       cobj->projection_param.perspective.fov),
+                     cobj->projection_param.frustum.left,
+                     cobj->projection_param.frustum.right, cobj->near,
+                     cobj->far);
             break;
         }
     }
@@ -451,14 +446,14 @@ static bool setupBottomHalfCamera(HSD_CObj* cobj)
             break;
         case PROJ_ORTHO:
             projection_type = GX_ORTHOGRAPHIC;
-            C_MTXOrtho(p,
-                       (hscale * (cobj->projection_param.perspective.fov -
-                                  cobj->projection_param.perspective.aspect) +
-                        cobj->projection_param.perspective.aspect),
-                       cobj->projection_param.perspective.aspect,
-                       cobj->projection_param.frustum.left,
-                       cobj->projection_param.frustum.right, cobj->near,
-                       cobj->far);
+            MTXOrtho(p,
+                     (hscale * (cobj->projection_param.perspective.fov -
+                                cobj->projection_param.perspective.aspect) +
+                      cobj->projection_param.perspective.aspect),
+                     cobj->projection_param.perspective.aspect,
+                     cobj->projection_param.frustum.left,
+                     cobj->projection_param.frustum.right, cobj->near,
+                     cobj->far);
             break;
         }
     }
@@ -639,7 +634,7 @@ static float upvec2roll(HSD_CObj* cobj, Vec3* up)
             dot = 0.0f;
         } else {
             C_MTXLookAt(vmtx, &orig, &uy, &eye);
-            PSMTXMultVecSR(vmtx, up, &v);
+            MTXMultVecSR(vmtx, up, &v);
             if (fabsf_bitwise(v.y) == 0.0f) {
                 dot = -v.x >= 0.0f ? 1.5707963267948966 : -1.5707963267948966;
             } else {
@@ -676,7 +671,7 @@ static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
         v0.z = eye.z * (-eye.y / v0.y);
     }
     MTXRotAxisRad(m, &eye, -roll);
-    PSMTXMultVecSR(m, &v0, &v1);
+    MTXMultVecSR(m, &v0, &v1);
     VECNormalize(&v1, up);
     return 0;
 }

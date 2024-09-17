@@ -20,7 +20,7 @@ const GXColor HSD_Fog_804DE6F0 = { 0 };
 
 void HSD_FogSet(HSD_Fog* fog)
 {
-    GXFogAdjTbl tbl;
+    GXFogAdjTable tbl;
     f32 v[6];
     HSD_CObj* cobj;
     s32 range;
@@ -30,15 +30,15 @@ void HSD_FogSet(HSD_Fog* fog)
     } proj;
 
     if (fog == NULL) {
-        GXSetFog(0, HSD_Fog_804DE6F0, 0.0F, 0.0F, 0.0F, 0.0F);
+        GXSetFog(0, 0.0F, 0.0F, 0.0F, 0.0F, HSD_Fog_804DE6F0);
         return;
     }
     cobj = HSD_CObjGetCurrent();
     if (cobj == NULL) {
         HSD_Panic(__FILE__, 0x4D, "You must specify CObj first.\n");
     }
-    GXSetFog(fog->type, fog->color, fog->start, fog->end,
-             HSD_CObjGetNear(cobj), HSD_CObjGetFar(cobj));
+    GXSetFog(fog->type, fog->start, fog->end, HSD_CObjGetNear(cobj),
+             HSD_CObjGetFar(cobj), fog->color);
 
     if (fog->fog_adj != NULL) {
         GXGetViewportv(v);

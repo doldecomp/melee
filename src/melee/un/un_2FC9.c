@@ -12,7 +12,7 @@
 #include "un/un_2FC9.h"
 
 #include <stdarg.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>

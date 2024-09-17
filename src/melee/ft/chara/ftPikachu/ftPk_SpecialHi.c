@@ -24,7 +24,7 @@
 #include <math.h>
 #include <math_ppc.h>
 #include <trigf.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 

@@ -1,10 +1,11 @@
 #ifndef GALE01_0860C4
 #define GALE01_0860C4
 
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 0860C4 */ s32 ftLib_800860C4(void);
 /* 0860E8 */ bool ftLib_IsMasterHandPresent(void);

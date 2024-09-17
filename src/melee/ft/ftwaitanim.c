@@ -1,5 +1,3 @@
-#include <dolphin/mtx/forward.h>
-
 #include "ftwaitanim.h"
 
 #include "ftdynamics.h"
@@ -9,7 +7,7 @@
 #include "ft/inlines.h"
 #include "it/it_26B1.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 

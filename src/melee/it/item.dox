@@ -83,7 +83,7 @@ void Item_8026AD20(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, float arg3);
 void Item_8026ADC0(HSD_GObj* gobj);
 
 /// Increment something
-uint Item_8026AE60(void);
+u32Item_8026AE60(void);
 
 /// Play Item SFX
 void Item_8026AE84(Item* item_data, enum_t sfx, int pan, int volume);

@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "ftNs_SpecialLw.h"
 
 #include "ftNs_Init.h"
@@ -21,6 +19,7 @@
 #include "pl/player.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 // SpecialLw (PSI Magnet)
 #define FTNESS_SPECIALLW_COLL_FLAG                                            \

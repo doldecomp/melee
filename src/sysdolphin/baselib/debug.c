@@ -9,7 +9,7 @@ struct UnkStruct80400430 {
     int (*unk84)(s32, s32, s32*, s32);
 };
 
-extern struct UnkStruct80400430 __files;
+extern struct UnkStruct80400430 files;
 
 struct DebugContext {
     OSContext context;
@@ -34,10 +34,10 @@ int report_func(s32 arg0, s32 arg1, s32* arg2, s32 arg3)
 void HSD_LogInit(void)
 {
     if (logFunc == NULL) {
-        logFunc = __files.unk84;
+        logFunc = files.unk84;
     }
-    __files.unk84 = report_func;
-    __files.unk52 = 0;
+    files.unk84 = report_func;
+    files.unk52 = 0;
 }
 
 void __assert(char* str, u32 arg1, char* arg2)

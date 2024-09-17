@@ -9,7 +9,7 @@
 #include "ftKirby/forward.h"
 #include "it/forward.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct ftCollisionBox {
     /*  +0 */ float top;

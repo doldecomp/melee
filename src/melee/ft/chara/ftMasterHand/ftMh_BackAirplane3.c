@@ -10,7 +10,7 @@
 #include "ftMasterHand/types.h"
 #include "pl/player.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 void ftMh_BackAirplane3_Anim(HSD_GObj* gobj)
 {

@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <dolphin/gx/forward.h>
+#include <dolphin/gx.h>
 
 #define GX_FIFO_OBJSIZE 128
 

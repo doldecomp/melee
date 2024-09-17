@@ -8,10 +8,9 @@
 #include "baselib/debug.h"
 #include "baselib/object.h"
 
+#include <dolphin/gx.h>
 #include <dolphin/gx/GXEnum.h>
-#include <dolphin/gx/GXLight.h>
-#include <dolphin/gx/types.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct HSD_LightPoint {
     f32 cutoff;

@@ -17,8 +17,7 @@
 #include <__mem.h>
 #include <math.h>
 #include <trigf.h>
-#include <dolphin/mtx/mtxvec.h>
-#include <dolphin/mtx/vec.h>
+#include <dolphin/mtx.h>
 #include <dolphin/os.h>
 
 void JObjInfoInit(void);
@@ -192,7 +191,7 @@ void HSD_JObjMakeMatrix(HSD_JObj* jobj)
         Vec3 vec;
         HSD_JObj* aobj_jobj = (HSD_JObj*) jobj->aobj->hsd_obj;
         HSD_JObjSetupMatrix((HSD_JObj*) jobj->aobj->hsd_obj);
-        PSMTXMUltiVec(aobj_jobj->mtx, &jobj->translate, &vec);
+        MTXMultVec(aobj_jobj->mtx, &jobj->translate, &vec);
         jobj->mtx[0][3] = vec.x;
         jobj->mtx[1][3] = vec.y;
         jobj->mtx[2][3] = vec.z;
@@ -1196,30 +1195,30 @@ void resolveIKJoint1(HSD_JObj* jobj)
             HSD_MtxGetTranslate(robj_4->mtx, &spB0);
         }
         HSD_RObjGetGlobalPosition(var_r28->robj, 1, &var_r28->translate);
-        PSVECSubtract(&var_r28->translate, &spB0, &sp8C);
-        temp_f31 = PSVECDotProduct(&sp8C, &sp8C);
+        VECSubtract(&var_r28->translate, &spB0, &sp8C);
+        temp_f31 = VECDotProduct(&sp8C, &sp8C);
 
         if (temp_f31 > var_f5) {
             sp68 = sp8C;
             if (HSD_RObjGetGlobalPosition(jobj->robj, 3, &sp5C)) {
-                PSVECSubtract(&sp5C, &spB0, &sp5C);
+                VECSubtract(&sp5C, &spB0, &sp5C);
                 if (temp_f26 != 0.0F) {
-                    PSMTXRotAxisRad(sp20, &sp68, temp_f26);
-                    PSMTXMUltiVec(sp20, &sp5C, &sp5C);
+                    MTXRotAxisRad(sp20, &sp68, temp_f26);
+                    MTXMultVec(sp20, &sp5C, &sp5C);
                 }
-                PSVECCrossProduct(&sp68, &sp5C, &sp50);
-                PSVECCrossProduct(&sp50, &sp68, &sp5C);
+                VECCrossProduct(&sp68, &sp5C, &sp50);
+                VECCrossProduct(&sp50, &sp68, &sp5C);
             } else {
                 sp50.x = jobj->mtx[0][2];
                 sp50.y = jobj->mtx[1][2];
                 sp50.z = jobj->mtx[2][2];
-                PSVECCrossProduct(&sp50, &sp68, &sp5C);
-                PSVECCrossProduct(&sp68, &sp5C, &sp50);
+                VECCrossProduct(&sp50, &sp68, &sp5C);
+                VECCrossProduct(&sp68, &sp5C, &sp50);
             }
-            var_f4 = sqrtf(1.0F / (1e-10F + PSVECDotProduct(&sp50, &sp50)));
-            PSVECScale(&sp50, &sp80, var_f4);
-            var_f4_2 = sqrtf(1.0F / (1e-10F + PSVECDotProduct(&sp5C, &sp5C)));
-            PSVECScale(&sp5C, &sp74, var_f4_2);
+            var_f4 = sqrtf(1.0F / (1e-10F + VECDotProduct(&sp50, &sp50)));
+            VECScale(&sp50, &sp80, var_f4);
+            var_f4_2 = sqrtf(1.0F / (1e-10F + VECDotProduct(&sp5C, &sp5C)));
+            VECScale(&sp5C, &sp74, var_f4_2);
             temp_f5 = temp_f30 * temp_f30;
             var_f28 = var_f29 * var_f29;
             temp_f1_7 = temp_f5 - var_f28;
@@ -1242,18 +1241,18 @@ void resolveIKJoint1(HSD_JObj* jobj)
             var_f29_2 = -var_f29_2;
         }
         if ((var_f28 - var_f27) < temp_f31) {
-            PSVECScale(&sp8C, &sp98, var_f1);
+            VECScale(&sp8C, &sp98, var_f1);
         } else {
-            PSVECScale(&sp8C, &sp98, -var_f1);
+            VECScale(&sp8C, &sp98, -var_f1);
         }
-        PSVECScale(&sp74, &sp5C, var_f29_2);
-        PSVECAdd(&sp98, &sp5C, &sp98);
+        VECScale(&sp74, &sp5C, var_f29_2);
+        VECAdd(&sp98, &sp5C, &sp98);
         var_f4_4 = sqrtf(1.0F / (1e-10F + PSVECDotProduct(&sp98, &sp98)));
-        PSVECScale(&sp98, &sp98, var_f4_4);
+        VECScale(&sp98, &sp98, var_f4_4);
         jobj->mtx[0][0] = sp98.x * spBC.x;
         jobj->mtx[1][0] = sp98.y * spBC.x;
         jobj->mtx[2][0] = sp98.z * spBC.x;
-        PSVECCrossProduct(&sp80, &sp98, &sp5C);
+        VECCrossProduct(&sp80, &sp98, &sp5C);
         jobj->mtx[0][1] = sp5C.x * spBC.y;
         jobj->mtx[1][1] = sp5C.y * spBC.y;
         jobj->mtx[2][1] = sp5C.z * spBC.y;
@@ -1317,18 +1316,18 @@ void resolveIKJoint2(HSD_JObj* jobj)
         sp7C.y = mtx[1][0];
         sp7C.z = mtx[2][0];
     }
-    var_f4 = sqrtf(1.0F / (1e-10F + PSVECDotProduct(&sp7C, &sp7C)));
-    PSVECScale(&sp7C, &sp7C, var_f4);
+    var_f4 = sqrtf(1.0F / (1e-10F + VECDotProduct(&sp7C, &sp7C)));
+    VECScale(&sp7C, &sp7C, var_f4);
     if (jobj->parent->scl != NULL) {
         var_f31 = jobj->parent->scl->x;
     }
     robj = HSD_RObjGetByType(jobj->parent->robj, REFTYPE_IKHINT, 0);
     HSD_ASSERT(0x8FC, robj);
-    PSVECScale(&sp7C, &sp7C, robj->u.ik_hint.bone_length * var_f31);
-    PSVECAdd(&sp88, &sp7C, &sp94);
-    PSVECSubtract(&var_r29->translate, &sp94, &sp7C);
-    PSVECScale(&sp7C, &sp7C,
-               sqrtf(1.0F / (1e-10F + PSVECDotProduct(&sp7C, &sp7C))));
+    VECScale(&sp7C, &sp7C, robj->u.ik_hint.bone_length * var_f31);
+    VECAdd(&sp88, &sp7C, &sp94);
+    VECSubtract(&var_r29->translate, &sp94, &sp7C);
+    VECScale(&sp7C, &sp7C,
+             sqrtf(1.0F / (1e-10F + VECDotProduct(&sp7C, &sp7C))));
     temp_r28 = HSD_RObjGetByType(jobj->robj, 0x20000000, 5);
     temp_r29 = HSD_RObjGetByType(jobj->robj, 0x20000000, 6);
     if ((temp_r28 != NULL) || (temp_r29 != NULL)) {
@@ -1342,8 +1341,8 @@ void resolveIKJoint2(HSD_JObj* jobj)
             sp28.y = mtx[1][0];
             sp28.z = mtx[2][0];
         }
-        PSVECNormalize(&sp28, &sp28);
-        temp_f1_4 = PSVECDotProduct(&sp28, &sp7C);
+        VECNormalize(&sp28, &sp28);
+        temp_f1_4 = VECDotProduct(&sp28, &sp7C);
         if (temp_f1_4 >= 1.0F) {
             var_f1_2 = 0.0F;
         } else if (temp_f1_4 <= -1.0F) {
@@ -1370,8 +1369,8 @@ void resolveIKJoint2(HSD_JObj* jobj)
                 sp1C.y = mtx[1][2];
                 sp1C.z = mtx[2][2];
             }
-            PSMTXRotAxisRad(sp34, &sp1C, var_f1_2);
-            PSMTXMUltiVec(sp34, &sp28, &sp7C);
+            MTXRotAxisRad(sp34, &sp1C, var_f1_2);
+            MTXMultVec(sp34, &sp28, &sp7C);
         }
     }
     {
@@ -1380,10 +1379,10 @@ void resolveIKJoint2(HSD_JObj* jobj)
         sp64.y = mtx[1][2];
         sp64.z = mtx[2][2];
     }
-    PSVECCrossProduct(&sp64, &sp7C, &sp70);
-    var_f4_2 = sqrtf(1.0F / (1e-10F + PSVECDotProduct(&sp70, &sp70)));
-    PSVECScale(&sp70, &sp70, var_f4_2);
-    PSVECCrossProduct(&sp7C, &sp70, &sp64);
+    VECCrossProduct(&sp64, &sp7C, &sp70);
+    var_f4_2 = sqrtf(1.0F / (1e-10F + VECDotProduct(&sp70, &sp70)));
+    VECScale(&sp70, &sp70, var_f4_2);
+    VECCrossProduct(&sp7C, &sp70, &sp64);
     jobj->mtx[0][0] = sp7C.x * spA0.x;
     jobj->mtx[1][0] = sp7C.y * spA0.x;
     jobj->mtx[2][0] = sp7C.z * spA0.x;
@@ -1429,15 +1428,15 @@ void HSD_JObjSetupMatrixSub(HSD_JObj* jobj)
                     sp10.x = parent->mtx[0][0];
                     sp10.y = parent->mtx[1][0];
                     sp10.z = parent->mtx[2][0];
-                    PSVECScale(&sp10, &sp10,
-                               sqrtf(1.0F / (1e-10F +
-                                             PSVECDotProduct(&sp10, &sp10))));
+                    VECScale(
+                        &sp10, &sp10,
+                        sqrtf(1.0F / (1e-10F + VECDotProduct(&sp10, &sp10))));
                     if (parent->scl != NULL) {
                         x_scale = parent->scl->x;
                     }
-                    PSVECScale(&sp10, &sp10,
-                               robj->u.ik_hint.bone_length * x_scale);
-                    PSVECAdd(&sp1C, &sp10, &sp28);
+                    VECScale(&sp10, &sp10,
+                             robj->u.ik_hint.bone_length * x_scale);
+                    VECAdd(&sp1C, &sp10, &sp28);
                     jobj->mtx[0][3] = sp28.x;
                     jobj->mtx[1][3] = sp28.y;
                     jobj->mtx[2][3] = sp28.z;

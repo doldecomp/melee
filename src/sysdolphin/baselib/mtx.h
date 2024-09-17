@@ -3,12 +3,14 @@
 
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "baselib/objalloc.h"
 
+#include <dolphin/mtx.h>
 #include <MSL/math.h>
 #include <MSL/math_ppc.h>
+
+#define VEC2_SQ_LEN(v) ((SQ((v).x) + SQ((v).y)))
+#define VEC3_SQ_LEN(v) ((SQ((v).x) + SQ((v).y) + SQ((v).z)))
 
 typedef Vec3 VecMtx[4];
 typedef Vec3* VecMtxPtr;

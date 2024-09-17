@@ -2,7 +2,6 @@
 #include <placeholder.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftPp_SpecialN.h"
 
@@ -23,6 +22,7 @@
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 
 /* 11F500 */ static void ftPp_SpecialN_8011F500(Fighter_GObj* gobj);
@@ -116,7 +116,7 @@ void ftPp_SpecialAirN_Coll(Fighter_GObj* gobj)
 {
     Fighter *fp, *fp1, *fp2;
     ftIceClimberAttributes* da;
-    u8 _[16];
+    PAD_STACK(16);
 
     fp = gobj->user_data;
     da = fp->dat_attrs;
@@ -152,7 +152,7 @@ static inline void inlineA1(Item_GObj* item_gobj, Fighter* fp) {}
 void ftPp_SpecialN_8011F500(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    uint cmd_var0 = fp->cmd_vars[0];
+    u32 cmd_var0 = fp->cmd_vars[0];
 
     if (cmd_var0 == 0) {
         return;

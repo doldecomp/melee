@@ -19,7 +19,7 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "it/items/itpikachutjoltground.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 void ftPk_SpecialN_Enter(HSD_GObj* gobj)
 {

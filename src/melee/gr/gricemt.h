@@ -5,7 +5,7 @@
 
 #include "gr/forward.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 /* 1F6868 */ UNK_RET grIceMt_801F6868(UNK_PARAMS);
 /* 1F686C */ UNK_RET grIceMt_801F686C(UNK_PARAMS);

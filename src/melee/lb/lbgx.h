@@ -3,8 +3,8 @@
 
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
+#include <dolphin/mtx.h>
 
-bool lbGx_8001E2F8(Vec4*, Vec3*, U8Vec4*, uint, float);
+bool lbGx_8001E2F8(Vec4*, Vec3*, U8Vec4*, u32, float);
 
 #endif

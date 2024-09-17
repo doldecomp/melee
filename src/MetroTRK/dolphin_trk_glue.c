@@ -4,7 +4,7 @@
 #include "MetroTRK/targimpl.h"
 #include "MetroTRK/trk.h"
 
-#include <dolphin/amcstubs/AmcExi2Stubs.h>
+#include <dolphin/amc/AmcExi2Comm.h>
 #include <dolphin/OdemuExi2/DebuggerDriver.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSThread.h>

@@ -7,7 +7,7 @@
 #include "it/forward.h"
 #include <baselib/forward.h>
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct ftMasterhand_FighterVars {
     /* 0x222C */ HSD_GObj* x222C;

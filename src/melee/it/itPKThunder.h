@@ -5,7 +5,7 @@
 
 #include <baselib/forward.h>
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 typedef struct itPKThunderAttributes {
     float x0_PKTHUNDER_LIFETIME;

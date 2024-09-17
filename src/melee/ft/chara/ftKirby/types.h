@@ -19,7 +19,7 @@
 struct ftKb_FighterVars {
     /* fp+222C */ struct ftKb_Hat {
         /*  +0   fp+222C */ UNK_T x0;
-        /*  +4   fp+2230 */ uint x4;
+        /*  +4   fp+2230 */ u32 x4;
         /*  +8:0 fp+2234:0 */ u8 x8_b0 : 1;
         /*  +9   fp+2235 */ u8 x9[3];
         /*  +C   fp+2238 */ FighterKind kind;

@@ -1,5 +1,3 @@
-/// @file
-/// @todo Assumes @c __PPCGEKKO__.
 #ifndef __STDDEF_H__
 #define __STDDEF_H__
 
@@ -15,7 +13,10 @@ typedef unsigned int usize_t;
 typedef signed int intptr_t;
 typedef unsigned int uintptr_t;
 
-/// A null pointer
-#define NULL ((void*) 0)
+#define offsetof(type, member) ((size_t) &(((type*) 0)->member))
+
+#ifndef NULL
+#define NULL 0L
+#endif
 
 #endif

@@ -4,8 +4,9 @@
 #include <platform.h>
 
 #include "lb/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 1CBB84 */ void grIzumi_801CBB84(int);
 /* 1CBB88 */ void grIzumi_801CBB88(void);
